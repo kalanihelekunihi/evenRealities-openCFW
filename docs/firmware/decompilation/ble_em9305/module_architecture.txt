@@ -1,0 +1,445 @@
+# EM9305 BLE Radio -- Module Architecture
+# Chip: EM9305 (EM Microelectronic, now Renesas)
+# CPU Core: Synopsys DesignWare ARC EM (ARCv2 ISA)
+# Role: BLE radio coprocessor for the Apollo510b main SoC
+# Source: Host-side SDK (openCFW/sdks/em9305/), Cordio HCI driver,
+#         EM9305 datasheet characteristics, firmware binary analysis
+
+# =========================================================================
+# 1. HIGH-LEVEL ARCHITECTURE
+# =========================================================================
+#
+#   Phone (iOS/Android)
+#     |
+#     | BLE 2.4GHz RF
+#     v
+#   EM9305 (BLE Radio Coprocessor)
+#     |  ARC EM core
+#     |  ROM Cordio BLE stack (LL, PHY, radio)
+#     |  NVM patch overlays (4 segments)
+#     |
+#     | SPI/HCI (IOM6, 16MHz)
+#     v
+#   Apollo510b (Main Application SoC)
+#     |  Cordio BLE host stack (GATT, ATT, GAP, L2CAP, SMP)
+#     |  Even G2 application firmware
+#     |  FreeRTOS, LVGL, NemaGFX
+#
+# The EM9305 handles the "controller" side of the HCI split:
+#   - Physical radio transceiver (2.4 GHz ISM band)
+#   - Link Layer (advertising, scanning, connection, encryption)
+#   - PHY management (1M, 2M, Coded S=2/S=8)
+#   - Radio calibration, power management, sleep/wake
+#
+# The Apollo510b handles the "host" side:
+#   - L2CAP, ATT, GATT, GAP, SMP
+#   - BLE service definitions (EUS, EFS, ESS, NUS, OTA, ANCC, Ring)
+#   - Application-level protocol (G2 protobuf packets)
+#   - Connection management and service discovery
+
+# =========================================================================
+# 2. ARC EM PROCESSOR CORE
+# =========================================================================
+#
+# CPU Architecture:
+#   ISA:              ARCv2 (ARC EM family)
+#   Instruction size: Variable-length (16-bit and 32-bit mixed)
+#   Endianness:       Little-endian
+#   Pipeline:         3-stage (fetch, decode, execute)
+#
+# Core Extensions (typical for EM93xx family):
+#   - Hardware multiply (32x32 -> 32/64)
+#   - Barrel shifter
+#   - Code-density extensions (16-bit instructions for compact code)
+#   - Optional DSP extensions
+#   - Optional FPU (unlikely in BLE radio application)
+#   - Memory Protection Unit (MPU) -- optional
+#
+# Toolchain:
+#   - Synopsys MetaWare (proprietary, NDA-restricted)
+#   - Synopsys nSIM simulator for functional analysis
+#   - Ghidra: Requires "ghidra-arc" community plugin (not bundled)
+#   - Rizin/radare2: Limited ARC support, unreliable for ARCv2 EM
+#
+# Important: The EM9305 is NOT ARM. All previous attempts to disassemble
+# the NVM patch binary using ARM Thumb decoders produced invalid results.
+# The 45 "functions" detected by rizin in segment 3 are byte-pattern
+# false positives, not real code boundaries.
+
+# =========================================================================
+# 3. ROM-BASED CORDIO BLE STACK
+# =========================================================================
+#
+# The EM9305 contains a ROM-resident BLE stack based on the Packetcraft
+# (formerly ARM) Cordio architecture. This ROM provides the baseline
+# BLE controller functionality.
+#
+# ROM Stack Layers (bottom-up):
+#
+#   ┌─────────────────────────────────────────────────┐
+#   │                 HCI Transport                    │
+#   │   (SPI slave interface to Apollo510b host)       │
+#   ├─────────────────────────────────────────────────┤
+#   │               HCI Command/Event                  │
+#   │   Standard HCI + Vendor-Specific Commands (VSC)  │
+#   │   Opcodes: 0xFC43..0xFFF2 (see handler_map.txt) │
+#   ├─────────────────────────────────────────────────┤
+#   │                Link Layer (LL)                    │
+#   │   Connection management, advertising, scanning   │
+#   │   Channel selection (#2 supported)               │
+#   │   AES-CCM encryption engine                      │
+#   │   Link-layer control procedures (LLCP)           │
+#   ├─────────────────────────────────────────────────┤
+#   │              PHY Management                      │
+#   │   LE 1M PHY (mandatory)                          │
+#   │   LE 2M PHY                                      │
+#   │   LE Coded PHY (S=2, S=8)                        │
+#   │   Data Length Extension (DLE)                     │
+#   │   Stable Modulation Index (receiver)             │
+#   ├─────────────────────────────────────────────────┤
+#   │              Radio Hardware                      │
+#   │   2.4 GHz transceiver                            │
+#   │   TX power: -20 to +6 dBm (8 levels)            │
+#   │   Frequency range: 2402-2480 MHz (40 channels)   │
+#   │   Radio calibration and compensation             │
+#   └─────────────────────────────────────────────────┘
+#
+# The ROM code cannot be read or modified directly. The NVM patch system
+# (section 4) provides a mechanism to override specific ROM functions.
+
+# =========================================================================
+# 4. NVM PATCH OVERLAY SYSTEM
+# =========================================================================
+#
+# The EM9305's ROM-based BLE stack can be patched via NVM (Non-Volatile
+# Memory) overlays. The Apollo510b writes 4 patch segments into the
+# EM9305's flash memory, which override specific ROM functions at boot.
+#
+# Patch Container Format:
+#   ┌────────────────────────────────────────────────────┐
+#   │ Container Header (16 bytes)                        │
+#   │   Version: 0x04040200                              │
+#   │   Total payload: 211,824 bytes                     │
+#   │   Record count: 4                                  │
+#   │   Erase page count: 29                             │
+#   ├────────────────────────────────────────────────────┤
+#   │ Record Table (4 x 12 bytes = 48 bytes)             │
+#   ├────────────────────────────────────────────────────┤
+#   │ Erase Page Table (29 x 2 bytes = 58 bytes)         │
+#   ├────────────────────────────────────────────────────┤
+#   │ Payload Data (concatenated records)                │
+#   └────────────────────────────────────────────────────┘
+#
+# The 4 Patch Segments:
+#
+#   Segment 0 -- Patch Config (224 bytes -> 0x00300000)
+#     Purpose: Patch dispatch table / ROM override configuration
+#     Contains the jump table or function pointer redirections that
+#     route ROM function calls to patched implementations in segment 3.
+#     Includes marker "DRFH1" at offset 0x82 (patch format identifier).
+#
+#   Segment 1 -- BLE Parameters (656 bytes -> 0x00300400)
+#     Purpose: NVDS parameter overrides and radio configuration
+#     Contains BLE stack tuning parameters:
+#       - NVDS parameter entries (tagged format: param_id, 0x06, len, data)
+#       - Radio calibration data
+#       - Clock drift/jitter compensation values
+#       - Sleep timing parameters
+#       - Connection parameter defaults
+#
+#   Segment 2 -- FHDR (56 bytes -> 0x00302000)
+#     Purpose: File Header Descriptor for ROM bootloader
+#     Contains "FHDR" magic and metadata for locating patch code:
+#       +0x00: "FHDR" (4 bytes ASCII magic)
+#       +0x04: Code region size (206,848 bytes)
+#       +0x08: Entry point / code start (0x00302028)
+#       +0x0C: Total image size including metadata (211,872 bytes)
+#       +0x10: CRC32 of code region (0xCEB7F4F3)
+#     The ROM bootloader reads this header at power-on to locate
+#     and validate the NVM patch code before executing it.
+#
+#   Segment 3 -- Main Patch Code (210,888 bytes -> 0x00302400)
+#     Purpose: ARC EM machine code replacing/extending ROM functions
+#     This is the bulk of the patch -- ~206KB of compiled ARC EM code
+#     that overrides specific functions in the ROM-based Cordio stack.
+#     May include:
+#       - Bug fixes for ROM BLE stack issues
+#       - Feature additions (newer BLE spec support)
+#       - Radio calibration algorithms
+#       - Vendor-specific command handlers
+#       - Power management optimizations
+#
+# Patch Application Process:
+#   1. EM9305 powers on, ROM bootloader executes
+#   2. Bootloader reads FHDR at 0x00302000
+#   3. Validates CRC32 of code region
+#   4. Loads patch dispatch table from 0x00300000
+#   5. Redirects ROM function calls to NVM patch addresses
+#   6. Loads NVDS parameters from 0x00300400
+#   7. Jumps to patch entry point (or continues ROM execution)
+#
+# Cross-Version Stability:
+#   The NVM patch binary is byte-identical across all 5 analyzed G2
+#   firmware versions (2.0.1.14 through 2.0.7.16). This confirms it
+#   is a vendor-supplied binary from EM Microelectronic, not compiled
+#   by Even Realities. SHA-256: 91a38f7fc05555f86181ecb22b363e3239bfcaaa...
+
+# =========================================================================
+# 5. RADIO PHY / LINK LAYER / HCI LAYERS
+# =========================================================================
+#
+# 5.1 Physical Layer (PHY)
+#
+#   Supported PHY Modes:
+#     - LE 1M (mandatory, 1 Msym/s, GFSK)
+#     - LE 2M (2 Msym/s, GFSK)
+#     - LE Coded (S=2: 500 kbps, S=8: 125 kbps, GFSK with FEC)
+#
+#   Transmit Power Levels (txPowerLevel_t):
+#     0xEC = -20 dBm
+#     0xF1 = -15 dBm
+#     0xF6 = -10 dBm
+#     0xFB =  -5 dBm
+#     0x00 =   0 dBm  (default: TX_POWER_LEVEL_DEFAULT)
+#     0x03 =  +3 dBm
+#     0x04 =  +4 dBm
+#     0x06 =  +6 dBm  (maximum: TX_POWER_LEVEL_MAXIMUM)
+#     Range: -28 to +6 dBm (TX_POWER_LEVEL_MIN_DBM = -28)
+#
+#   Test Modes (for FCC compliance):
+#     0x00 = Packet Mode (BLE DTM)
+#     0x01 = Continuous Modulation - PRBS9
+#     0x02 = Continuous Modulation - PRBS15
+#     0x03 = Continuous Wave - all 0s (FCC CW test, offset from center)
+#     0x04 = Continuous Wave - all 1s
+#     0x05 = Continuous Modulation - 01010101
+#     0x06 = Continuous Modulation - 00110011
+#     0x07 = Continuous Modulation - 00001111 (TEST_MODE_CONTINUOUS_MODULATE)
+#     0x08 = Continuous Modulation - 00000000 11111111
+#
+#   Frequency Channels:
+#     Channel 0  = 2402 MHz (CHL_2402_INDEX, low frequency test)
+#     Channel 19 = 2440 MHz (CHL_2440_INDEX, medium frequency test)
+#     Channel 39 = 2480 MHz (CHL_2480_INDEX, high frequency test)
+#     40 channels total, 2 MHz spacing
+#
+# 5.2 Link Layer (LL)
+#
+#   Supported LE Features (from hci_drv_em9305.h LL_FEATURES_BYTEn):
+#
+#   Byte 0:
+#     - LE Encryption (AES-CCM)
+#     - Connection Parameters Request Procedure
+#     - Extended Reject Indication
+#     - Slave-Initiated Feature Exchange
+#     - LE Ping
+#     - Data Length Extension (DLE)
+#     - LL Privacy (resolvable private addresses)
+#     - Extended Scan Filter Policy
+#
+#   Byte 1:
+#     - LE 2M PHY
+#     - Stable Modulation Index (receiver)
+#     - LE Coded PHY
+#     - LE Extended Advertising
+#     - LE Periodic Advertising
+#     - Channel Selection Algorithm #2
+#
+#   Byte 2:
+#     - Minimum Number of Used Channels
+#
+#   Byte 3:
+#     - Periodic Advertising Sync Transfer (PAST) - Sender
+#     - Periodic Advertising Sync Transfer (PAST) - Recipient
+#     - Sleep Clock Accuracy (SCA) Update
+#     - Remote Public Key Validation
+#
+#   Byte 4:
+#     - Power Control Request
+#     - Power Change Indication
+#     - Path Loss Monitoring
+#     - Periodic Advertising with Responses - ADI
+#     - Connection Subrating
+#     - Channel Classification
+#
+#   Byte 5:
+#     - Advertising Coding Selection
+#     - Periodic Advertising with Response - Advertiser
+#     - Periodic Advertising with Response - Scanner
+#
+# 5.3 HCI (Host Controller Interface)
+#
+#   Transport: SPI (IOM6 on Apollo510b, 16 MHz)
+#   Standard HCI packets:
+#     - Command packets (host -> controller)
+#     - Event packets (controller -> host)
+#     - ACL data packets (bidirectional)
+#   Vendor-Specific Commands: 14 opcodes (see handler_map.txt)
+#   Max RX packet: 258 bytes (255 data + 3 header)
+#   Max TX packet: 259 bytes (255 data + 4 header)
+
+# =========================================================================
+# 6. POWER MANAGEMENT
+# =========================================================================
+#
+# The EM9305 supports multiple power states managed by the Apollo510b host.
+#
+# 6.1 Sleep/Wake Management
+#
+#   Sleep Enable/Disable:
+#     HCI VSC 0xFC49 (SET_SLEEP_OPTION):
+#       Parameter 1 (enable=true): EM9305 enters low-power mode when idle
+#       Parameter 0 (enable=false): EM9305 stays in active mode
+#     Host function: am_util_ble_sleep_set()
+#
+#   Enter Sleep:
+#     HCI VSC 0xFCF0 (ENTER_SLEEP):
+#       Triggers coordinated sleep of both Apollo510b and EM9305
+#     Host function: HciDrvBleSleepSet()
+#
+# 6.2 Clock Management
+#
+#   GPIO 136 (AP5_12M_CLKREQ):
+#     Apollo510b requests 12MHz clock from EM9305
+#     am_devices_em9305_hsclk_req(true/false)
+#     During shutdown: clock request is disabled
+#
+#   GPIO 138 (EM9305_32K_CLK):
+#     32kHz clock exported by EM9305 to Apollo510b
+#     Configured as input with LO2HI interrupt direction
+#     Used for low-power timing reference
+#
+#   GPIO 15 (EM9305_CM):
+#     Dual-purpose pin:
+#       Configuration Mode: Output, 30KHz square wave trigger
+#       Normal operation: Input, 12MHz clock from EM9305
+#
+# 6.3 SPI Bus Power Management
+#
+#   The IOM6 SPI bus is power-cycled per transaction to minimize idle power:
+#     am_devices_em9305_bus_enable():
+#       - am_hal_iom_power_ctrl(WAKE)
+#       - am_hal_iom_enable()
+#     am_devices_em9305_bus_disable():
+#       - am_hal_iom_disable()
+#       - am_hal_iom_power_ctrl(DEEPSLEEP)
+#
+#   Every block_write and block_read operation enables the IOM bus at the
+#   start and disables it when complete. This prevents the SPI peripheral
+#   from consuming power during BLE idle periods.
+#
+# 6.4 NVM Programming Voltage
+#
+#   For reliable NVM writes, the EM9305 can optionally increase its
+#   internal charge pump voltage:
+#     pump_to_1p9v():
+#       - Register 0xF0040C bits 12:8 = 0 -> regulation target 1.9V
+#       - Register 0xF0041C = 985858 -> DC-DC V-Mult mode, 2X VBAT2,
+#         maximum PWM duty cycle (bits 19:16 = 0xF)
+#   This is only used during firmware programming, not normal operation.
+
+# =========================================================================
+# 7. COMMUNICATION INTERFACES
+# =========================================================================
+#
+# 7.1 SPI to Apollo510b (Upstream)
+#
+#   ┌──────────────────┐         ┌──────────────────┐
+#   │   Apollo510b     │         │    EM9305         │
+#   │                  │         │                   │
+#   │  IOM6 MOSI ──────┼────────>│ SPI MOSI          │
+#   │  IOM6 MISO <─────┼────────│ SPI MISO          │
+#   │  IOM6 SCK  ──────┼────────>│ SPI SCK (16MHz)   │
+#   │  GPIO 149  ──────┼────────>│ CS (active low)   │
+#   │  GPIO 117  <─────┼────────│ INT/RDY (data rdy) │
+#   │  GPIO  93  ──────┼────────>│ EN (reset)        │
+#   │  GPIO  15  ──/───┼────────│ CM / 12MHz CLK    │
+#   │  GPIO 136  ──────┼────────>│ 12M CLK REQ      │
+#   │  GPIO 138  <─────┼────────│ 32K CLK OUT       │
+#   └──────────────────┘         └──────────────────┘
+#
+#   Signal descriptions:
+#     MOSI/MISO/SCK: Standard SPI data (Mode 0, 16MHz)
+#     CS (GPIO 149): Active-low chip select, managed per-transaction
+#     INT (GPIO 117): EM9305 asserts when data is ready for host
+#     EN (GPIO 93): Active-high enable; pulse low for reset
+#     CM (GPIO 15): Configuration Mode entry (output) or 12MHz clock (input)
+#     12M_CLKREQ (GPIO 136): Host requests 12MHz clock from EM9305
+#     32K_CLK (GPIO 138): 32kHz reference clock from EM9305
+#
+# 7.2 Radio to Phone (Downstream)
+#
+#   The EM9305's 2.4GHz radio communicates directly with the phone's BLE
+#   radio. The radio handles:
+#     - BLE advertising (connectable, scannable, extended)
+#     - Scanning and connection initiation
+#     - Connection event timing and management
+#     - Data channel hopping (37 data + 3 advertising channels)
+#     - PHY rate negotiation (1M/2M/Coded)
+#     - Link-layer encryption (AES-CCM-128)
+#
+# 7.3 BLE Services (via EM9305 Radio)
+#
+#   The following BLE services are advertised and managed through the
+#   EM9305 radio, with attribute database hosted on the EM9305 and
+#   protocol logic on the Apollo510b:
+#
+#   Service                         TX UUID    RX UUID    Purpose
+#   -------                         -------    -------    -------
+#   EUS (Even UART Service)         0x5401     0x5402     Protobuf transport
+#   EFS (Even File Service)         0x7401     0x7402     File transfer
+#   ESS (Even Sensor Service)       0x6401     0x6402     Display telemetry
+#   NUS (Nordic UART Service)       6E400002   6E400003   Gestures/audio
+#   OTA                             (varies)   (varies)   Firmware updates
+#   ANCC (Apple Notification Ctr)   (standard) (standard) iOS notifications
+#   Ring (R1 Ring)                   BAE80012   BAE80013   R1 accessory
+#   GATT/GAP                        (standard) (standard) BLE housekeeping
+
+# =========================================================================
+# 8. OPERATIONAL MODES
+# =========================================================================
+#
+# 8.1 Active State
+#   Normal operating mode. BLE stack running, connections possible.
+#   Entered on: power-on reset, or exit from Configuration Mode.
+#   Indicated by event: [0x04, 0xFF, 0x01, 0x01]
+#
+# 8.2 Configuration Mode
+#   NVM programming mode. Standard BLE operations suspended.
+#   Entered via: GPIO CM 30KHz square wave after reset.
+#   Indicated by event: [0x04, 0xFF, 0x01, 0x03]
+#   Used for: writing firmware patches, erasing NVM, CRC verification.
+#
+# 8.3 Sleep Mode
+#   Low-power mode when no BLE activity is pending.
+#   Entered via: HCI VSC 0xFCF0 or automatic (if sleep option enabled).
+#   Exited by: incoming BLE event, host SPI transaction, or GPIO wake.
+#
+# 8.4 DTM (Direct Test Mode)
+#   RF compliance testing mode for FCC/CE certification.
+#   Entered via: HCI VSC 0xFCC1 (START_TRANSMIT_TEST).
+#   Exited via: HCI VSC 0xFCC2 (END_TRANSMIT_TEST).
+#   Supports: packet mode, continuous wave, continuous modulation.
+
+# =========================================================================
+# 9. ANALYSIS LIMITATIONS
+# =========================================================================
+#
+# What we know (from host-side SDK and binary structure):
+#   - Complete NVM patch container format (4 records, headers, CRC)
+#   - All 14 HCI VSC opcodes and their parameter formats
+#   - Hardware interface (6 GPIOs, SPI at 16MHz)
+#   - Firmware update state machine (full implementation)
+#   - Supported BLE features (24+ LE features across 6 bytes)
+#   - TX power levels and test mode configurations
+#   - Power management interfaces (sleep, clock gating, bus power)
+#   - Cross-version stability (byte-identical across 5 FW versions)
+#
+# What remains unknown (requires ARC EM tooling or EM Micro NDA):
+#   - ROM function addresses and call graph
+#   - Patch dispatch table format (segment 0 internals)
+#   - NVDS parameter semantics beyond ID/tag format
+#   - Internal interrupt vector table
+#   - Radio calibration algorithm details
+#   - Memory map within the ARC EM address space
+#   - Real function boundaries in the 210KB patch code (segment 3)

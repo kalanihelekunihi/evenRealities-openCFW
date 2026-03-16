@@ -1,0 +1,387 @@
+================================================================================
+CY8C4046FNI TOUCH CONTROLLER — HANDLER MAP
+================================================================================
+Processor: ARM Cortex-M0 (PSoC4)
+Firmware: 2.0.6.0
+Binary: firmware_touch_stripped.bin (198 functions)
+Communication: I2C slave to Apollo510b main SoC
+================================================================================
+
+
+==============================================================================
+1. CORTEX-M0 VECTOR TABLE (inferred from code structure)
+==============================================================================
+
+The PSoC4 CY8C4046FNI uses a standard ARM Cortex-M0 vector table at 0x00000000.
+Exact vector table entries are not directly visible in the decompiled output
+(binary was loaded stripped), but the following handlers are identified:
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x000075a8   system_reset_handler        Reset vector entry point. Calls optional
+                                         user init callback at _DAT_20000f5c (if
+                                         non-NULL), then falls through to
+                                         infinite_loop_halt (0x7640). BSS is
+                                         zeroed via memset loop before main init.
+
+0x00001112   fault_handler_bkpt          HardFault / NMI handler. Executes BKPT
+                                         instruction to halt CPU for debugger.
+                                         Called on assertion failures (NULL pointer,
+                                         out-of-range parameters).
+
+0x00007640   default_isr_handler_1       Default ISR stub (empty return). Used as
+                                         catch-all for unconfigured interrupts.
+
+0x0000764c   default_isr_handler_2       Second default ISR stub (empty return).
+                                         Likely NMI or reserved vector slot.
+
+0x000071f0   systick_isr_dispatch        SysTick ISR. Iterates 5-entry function
+                                         pointer table at DAT_00007218. Checks
+                                         pending flag at DAT_00007214 bit 16.
+                                         Dispatches up to 5 registered callbacks.
+
+
+==============================================================================
+2. CAPSENSE CSD SCAN COMPLETION CALLBACK
+==============================================================================
+
+The CapSense CSD block generates an interrupt when a capacitive scan completes.
+PSoC4 CapSense uses a callback-based architecture (not direct ISR):
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x00002ab8   capsense_invoke_scan_callback  Indirect call via function pointer at
+                                         offset +0x10 in scan context struct.
+                                         Called when CSD hardware completes a scan.
+                                         Routes to capsense_process_all_widgets or
+                                         single-sensor handler depending on config.
+                                         Signature: (param_1, param_2) where param_2
+                                         is the scan context struct.
+                                         Implementation:
+                                           (**(code **)(*(int *)(param_2 + 8) + 0x10))(param_2)
+
+0x00003d88   capsense_full_init_and_calibrate  Top-level CapSense init. Called at
+                                         startup. Configures CSD block, runs
+                                         auto-calibration, registers scan callback.
+                                         Calls capsense_scan_and_process (0x160e).
+
+0x0000160e   capsense_scan_and_process   Combined init/scan entry. Calls
+                                         capsense_reset_all_widgets (0x245c),
+                                         capsense_full_init_and_calibrate (0x3d88),
+                                         and capsense_clear_touch_status (0x49dc).
+                                         Sets initialized flag at offset +7 in
+                                         config struct.
+
+
+==============================================================================
+3. GESTURE RECOGNITION STATE MACHINE
+==============================================================================
+
+Entry point for all gesture recognition. Called from touch_event_process_and_report
+(0x06d4) on every scan cycle that detects touch or proximity change.
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x00000bbc   gesture_state_machine       Main gesture FSM. 3 parameters:
+                                           param_1: input type (0=release, 1=touch)
+                                           param_2: touch position (byte)
+                                           param_3: timestamp (ms)
+                                         State context at DAT_00000f0c (0x68 bytes):
+                                           +0x00: click counter (multi-tap)
+                                           +0x04: elapsed time since press
+                                           +0x08: slide state (0=none, 1=sliding, 2=long-press)
+                                           +0x0c-0x10: previous timestamp/position copy
+                                           +0x14-0x18: saved timestamp/position
+                                           +0x1c-0x20: current input type/position/timestamp
+                                           +0x24: multi-tap flag (1=within window)
+                                           +0x28: last event timestamp
+                                           +0x2c: last slide timestamp
+                                           +0x30: last slide position
+
+                                         Output: 3-byte gesture_flags at DAT_00000f08
+                                           byte[0]: event bits
+                                             0x01 = tap count (click timeout)
+                                             0x02 = long press release
+                                             0x04 = short click
+                                             0x08 = double tap
+                                             0x10 = long press trigger
+                                             0x20 = slide left
+                                             0x40 = slide right
+                                           byte[1]: magnitude (slide distance or tap count)
+                                           byte[2]: IIR-filtered speed
+
+                                         Timing constants:
+                                           300ms = multi-tap window (clicks within 300ms)
+                                           999ms = long press threshold
+                                           100ms = minimum slide report interval
+                                           15 = minimum slide distance threshold
+
+                                         5-fast-clicks detection:
+                                           Counter at DAT_00000f2c. If click_count
+                                           reaches 5 within 300ms window, calls
+                                           host_reset_trigger (0x06ac).
+                                           Debug: "5-fast-clicks timeout: reset host"
+
+0x00000a6c   gesture_track_direction_speed  Direction/speed tracker. Maintains
+                                         circular buffer of 3 samples at
+                                         DAT_00000bac (8 bytes each: position +
+                                         timestamp). Computes:
+                                           +0x4c: ring buffer write index (mod 3)
+                                           +0x4d: sample count (0-3, capped)
+                                           +0x4e: instantaneous speed (0-255)
+                                           +0x4f: IIR-filtered speed
+                                                  formula: (4*new + 6*old) / 10
+                                           +0x50: direction (-1=left, 0=none, +1=right)
+                                         Direction change threshold: position
+                                         delta >= 4 electrodes.
+
+0x00000f68   proximity_detect_state      Proximity detection FSM. Queries sensor
+                                         status via capsense_get_sensor_status
+                                         (0x490e) for widget 2 (proximity sensor).
+                                         Returns:
+                                           0x01 = near (within threshold + 500)
+                                           0x02 = far (beyond threshold)
+                                           0x00 = no change from previous state
+                                         Uses proximity baseline from EEPROM
+                                         (via capsense_get_prox_threshold @ 0x64c).
+                                         State persisted at DAT_00000fc8.
+
+
+==============================================================================
+4. I2C SLAVE EVENT REPORTING (host SoC communication)
+==============================================================================
+
+The touch controller operates as an I2C slave. The host Apollo510b reads gesture
+events and touch data by polling the I2C report buffer.
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x000006d4   touch_event_process_and_report  Master report function. Called every
+                                         scan cycle. Pipeline:
+                                           1. capsense_is_widget_active(1, ...) — check slider
+                                           2. capsense_get_touch_coords(1, ...) — get position
+                                           3. proximity_detect_state() — check proximity
+                                           4. gesture_state_machine() — compute gesture
+                                           5. If proximity changed OR gesture active:
+                                              a. Populate 16-byte report buffer
+                                              b. ProxBsln EEPROM save (if delta >= 50)
+                                              c. i2c_set_report_buffer() — update slave buffer
+                                              d. Set SCB interrupt flag (offset +0x44 = 1)
+                                              e. Set scan interval to 0x280 (640 ticks)
+
+                                         Report buffer format (16 bytes):
+                                           [0]:     proximity_state | gesture_event
+                                           [1]:     gesture_byte[1] (magnitude/count)
+                                           [2]:     gesture_byte[2] (filtered speed)
+                                           [3]:     reserved
+                                           [4-5]:   proximity baseline (16-bit)
+                                           [6-7]:   raw count (16-bit)
+                                           [8-9]:   diff count (16-bit)
+                                           [10-11]: proximity threshold (16-bit)
+                                           [12-15]: reserved (zero)
+
+                                         ProxBsln EEPROM save logic:
+                                           - Compares current baseline vs saved (EEPROM)
+                                           - If |delta| < 50 (0x32): skip save
+                                           - If |delta| >= 50: save to EEPROM
+                                           - Debug: "ProxBsln saved to EEPROM: %u->%u"
+                                           - Debug: "ProxBsln change too small: ... skip save"
+
+0x000066e4   i2c_set_report_buffer       Configures I2C SCB slave TX buffer.
+                                         4 parameters:
+                                           param_1: I2C instance
+                                           param_2: buffer pointer
+                                           param_3: buffer size (0x10 = 16 bytes)
+                                           param_4: SCB register base
+                                         Writes buffer address and size to SCB
+                                         control registers at offsets +0x28 and +0x2c.
+                                         Clears status at +0x30 and +0x34.
+                                         Assertion: if size != 0 but buf == NULL → BKPT.
+
+0x000006ac   host_reset_trigger          Triggered by 5-fast-clicks gesture.
+                                         Writes to host SoC control registers:
+                                           *(base + 0x44) = 2  (assert reset request)
+                                           delay_milliseconds(200)
+                                           *(base + 0x40) = 2  (confirm reset)
+                                         Base address from DAT_000006c8 (SCB/GPIO block).
+                                         Debug: "trigger host reset by 5-fast-clicks"
+
+
+==============================================================================
+5. CALLBACK / ISR REGISTRATION SYSTEM
+==============================================================================
+
+Cypress PSoC4 callback linked-list system. Supports priority-ordered callback
+chains with per-channel dispatch.
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x00006fbc   callback_list_register      Register a callback node into a channel's
+                                         priority-sorted linked list. Node struct:
+                                           [0]: function pointer
+                                           [1]: channel ID (byte)
+                                           [2]: event mask (skip mask)
+                                           [3]: context data pointer
+                                           [4]: prev pointer
+                                           [5]: next pointer
+                                           [6]: priority (byte, lower = higher priority)
+                                         Head pointers at DAT_0000704c (per-channel array).
+                                         Returns 1 on success, 0 if already registered
+                                         or NULL params.
+
+0x00007050   callback_list_dispatch      Dispatch callbacks for a channel + event.
+                                         Parameters:
+                                           param_1: channel (0 or 1)
+                                           param_2: event type
+                                             1 = CHECK_READY (pre-sleep, can veto)
+                                             2 = AFTER_WAKEUP (post-wakeup cleanup)
+                                             4 = BEFORE_SLEEP (pre-sleep prepare)
+                                             8 = AFTER_SLEEP (post-sleep restore)
+                                         Dispatch table at DAT_00007114.
+                                         Sentinel value at DAT_00007118 (veto return).
+                                         Current node tracked at DAT_0000711c.
+                                         Resume table at DAT_00007120 (for nested calls).
+                                         Channel 0: sleep callbacks.
+                                         Channel 1: deep sleep callbacks.
+
+0x00000834   eeprom_init_register_callback  Registers EEPROM deep-sleep callback
+                                         via callback_list_register. Ensures
+                                         Em_EEPROM data is flushed before deep sleep.
+                                         Node data at DAT_00000840.
+
+0x00001198   wdt_register_callback       Registers WDT (Watchdog Timer) callback
+                                         via callback_list_register. Node data at
+                                         DAT_000011ac. Returns error code DAT_000011b0
+                                         on failure. Used for periodic CapSense
+                                         scan timing.
+
+
+==============================================================================
+6. EEPROM / NVM HANDLERS
+==============================================================================
+
+Cypress Em_EEPROM wear-leveled flash emulation. CRC-8 (poly 0x31, init 0xFF)
+per row. Row size: 128 bytes. Redundant copy support.
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x00000268   eeprom_write_validate       Write data to Em_EEPROM with validation.
+                                         Checks: buf non-NULL, offset+size <= 256.
+                                         Calls em_eeprom_write (0x5664).
+                                         Returns: 0=success, 1=uninitialized,
+                                         3=flash error, 4=params invalid.
+
+0x000002b0   eeprom_erase_all            Erase all Em_EEPROM data.
+                                         Calls em_eeprom_erase (0x5698).
+                                         Same return codes as write_validate.
+
+0x00000668   eeprom_save_prox_bsln       Save proximity baseline to Em_EEPROM.
+                                         Writes 8 bytes at offset 0 with current
+                                         proximity baseline value.
+                                         Debug: "ProxBsln saved to EEPROM: %u->%u"
+                                         Debug: "ProxBsln save failed: %lu"
+
+0x00005664   em_eeprom_write             Low-level Em_EEPROM write (Cypress API).
+                                         Manages row rotation, wear leveling,
+                                         CRC-8 per row, redundant copies.
+
+0x00005698   em_eeprom_erase             Low-level Em_EEPROM erase (Cypress API).
+
+
+==============================================================================
+7. POWER MANAGEMENT / SLEEP HANDLERS
+==============================================================================
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x00007124   power_sleep_with_callbacks  Enter CPU sleep (WFI) with callback chain.
+                                         Sequence:
+                                           1. If callbacks enabled (DAT_00007180):
+                                              dispatch CHECK_READY (event=1)
+                                              If vetoed: dispatch AFTER_WAKEUP (event=2),
+                                              return error DAT_00007184
+                                           2. Enter critical section
+                                           3. If callbacks enabled: dispatch
+                                              BEFORE_SLEEP (event=4)
+                                           4. enter_sleep_wfi (0x6f80) — WFI instruction
+                                           5. Exit critical section
+                                           6. If callbacks enabled: dispatch
+                                              AFTER_SLEEP (event=8)
+                                         Returns 0 on success.
+
+0x00007188   power_deep_sleep_with_callbacks  Enter deep sleep (WFI) with callbacks.
+                                         Same callback sequence as sleep, but
+                                         uses channel 1 (deep sleep) callbacks.
+                                         Calls enter_deep_sleep_wfi (0x6f94).
+                                         Checks WDT enable flag at DAT_000071ec+4
+                                         before proceeding.
+
+0x00006f80   enter_sleep_wfi             CPU sleep. Clears SCR.SLEEPDEEP bit
+                                         (offset +0x10, bit 2) then WFI.
+
+0x00006f94   enter_deep_sleep_wfi        CPU deep sleep. Saves WDT match register,
+                                         sets SCR.SLEEPDEEP bit (offset +0x10, bit 2),
+                                         then WFI.
+
+
+==============================================================================
+8. SYSTEM INITIALIZATION CHAIN
+==============================================================================
+
+Boot sequence called from system_reset_handler (0x75a8):
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x00001014   hardware_init_all           Top-level HW init. Calls:
+                                           1. hardware_init_phase1 (0x0ff0)
+                                           2. hardware_init_phase2 (0x1004)
+
+0x00000ff0   hardware_init_phase1        Phase 1 init:
+                                           1. clock_init_imo_ilo (0x1118) — start IMO/ILO
+                                           2. gpio_init_all_pins (0x1020) — configure GPIOs
+                                           3. clock_assign_i2c_divider (0x1092) — I2C clock
+                                           4. gpio_init_capsense_pins (0x10a4) — CSD electrodes
+
+0x00001004   hardware_init_phase2        Phase 2 init (stub calls):
+                                           1. stub_empty_init_1 (0x1090)
+                                           2. stub_empty_init_2 (0x10a0)
+                                           3. stub_empty_init_3 (0x1110)
+                                         All three are empty stubs (BX LR).
+
+0x00001118   clock_init_imo_ilo          Clock tree setup. Configures IMO frequency,
+                                         HFCLK source, flash wait states.
+                                         Programs SRSSLT registers.
+
+
+==============================================================================
+9. CRC / CHECKSUM
+==============================================================================
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x00004a38   crc8_calculate              CRC-8 calculation. Polynomial 0x31,
+                                         init value 0xFF. Used by Em_EEPROM for
+                                         row integrity verification.
+
+
+==============================================================================
+10. CRITICAL SECTION PRIMITIVES
+==============================================================================
+
+Address      Name                        Description
+------------ --------------------------- ------------------------------------------
+0x00000fe2   critical_section_enter      Saves PRIMASK, disables IRQs. Checks
+                                         privileged mode (isCurrentModePrivileged).
+                                         Returns previous IRQ state for restore.
+
+0x00000fea   critical_section_exit       Restores PRIMASK from saved state.
+                                         Only acts if in privileged mode.
+
+Note: These wrap __get_PRIMASK / __disable_irq / __set_PRIMASK from CMSIS.
+      Used throughout CapSense scan, clock config, and EEPROM operations
+      to ensure atomic register access.
+
+
+================================================================================
+END OF HANDLER MAP
+================================================================================

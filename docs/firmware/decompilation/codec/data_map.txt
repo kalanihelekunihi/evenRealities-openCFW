@@ -1,0 +1,592 @@
+================================================================================
+GX8002B AUDIO CODEC FIRMWARE — DATA MAP
+================================================================================
+
+Chip:         GX8002B (NationalChip Co., Ltd)
+Architecture: C-SKY CK803S DSP core
+Framework:    LVP (Low-Power Voice Preprocess)
+FW Version:   0.0.2.0, built 2025-11-25 19:36:54
+Binary Size:  319,372 bytes (FWPK container, 2 segments)
+Analysis:     String-based + hex dump (no decompilation — C-SKY unsupported)
+
+Source files (from manifest.json):
+  firmware_codec.bin          — raw binary, 319,372 bytes
+  header_hexdump.txt          — first 256 bytes hex dump
+  rizin_strings.txt           — 5,172 raw strings (391,496 bytes)
+  segment_0/strings.txt       — segment 0 strings (code + rodata)
+  segment_1/strings.txt       — segment 1 strings (BINH dual-bank image)
+
+
+================================================================================
+1. FWPK CONTAINER FORMAT
+================================================================================
+
+The GX8002B firmware uses NationalChip's FWPK (Firmware Package) container
+format. This is NOT the same as the EVENOTA container used by the Apollo510b.
+
+FWPK Header (from header_hexdump.txt at offset 0x00):
+
+  Offset  Size  Value              Field
+  ------  ----  -----------------  ----------------------------------
+  0x00    4     46 57 50 4B        Magic: "FWPK"
+  0x04    4     00 02 00 00        Version: 0x0200 (format version 2.0)
+  0x08    4     02 00 00 00        Segment count: 2
+  0x0C    4     00 00 00 00        Reserved / flags
+  0x10    4     01 00 00 00        Segment 0 index: 1
+  0x14    4     5C 95 00 00        Segment 0 size: 0x955C (38,236 bytes)
+  0x18    4     30 00 00 00        Segment 0 offset: 0x30 (48 bytes)
+  0x1C    4     10 8A 7E 30        Segment 0 CRC32: 0x307E8A10
+  0x20    4     02 00 00 00        Segment 1 index: 2
+  0x24    4     00 4A 04 00        Segment 1 size: 0x044A00 (281,088 bytes)
+  0x28    4     8C 95 00 00        Segment 1 offset: 0x958C
+  0x2C    4     6C D5 81 B2        Segment 1 CRC32: 0xB281D56C
+
+Header interpretation:
+  - header_skip = 48 bytes (0x30), matching manifest.json
+  - Segment 0 starts at offset 0x30, size 38,236 bytes
+  - Segment 1 starts at offset 0x958C, size 281,088 bytes
+  - Total: 48 + 38,236 + 281,088 = 319,372 bytes (matches binary size)
+  - Each segment has an independent CRC32 for integrity verification
+
+Post-header data (offsets 0x30-0x4F):
+
+  0x30    4     02 80 01 01        Segment 0 header: type/flags
+  0x34    4     00 00 00 00        Reserved
+  0x38    4     00 00 28 00        Load address or size indicator
+  0x3C    4     00 16 E3 60        Checksum or entry point
+  0x40    4     00 00 6D 3C        Code size or offset
+  0x44    4     00 24 D4 41        Data field (possibly entry vector)
+
+Interrupt vector table (offsets 0x50+):
+  0x50    4     00 01 00 10        Vector 0: 0x10000100
+  0x54    4     30 01 00 10        Vector 1: 0x10000130
+  ...repeating 0x10000130 pattern for vectors 2-31...
+  0xD0    4     34 01 00 10        Vectors 32+: 0x10000134
+  ...repeating 0x10000134 pattern for higher vectors...
+
+  The vector table shows two entry points:
+    0x10000100 — likely reset vector / initial entry
+    0x10000130 — default handler for most interrupts (vectors 1-31)
+    0x10000134 — handler for higher-numbered interrupts (vectors 32+)
+
+
+================================================================================
+2. SEGMENT LAYOUT
+================================================================================
+
+Segment 0: Code + Read-Only Data (Bootloader / Stage 1)
+--------------------------------------------------------
+  Offset:      0x30 (after FWPK header)
+  Size:        38,236 bytes (0x955C)
+  Contents:    Executable code + string literals + const data
+  Strings:     539 entries in segment_0/strings.txt (most are binary noise)
+  Key regions:
+    0x0000-0x0050    Segment header + interrupt vector table
+    0x0050-0x7EF0    Executable code (C-SKY CK803S instructions)
+    0x7EF4-0x7F04    UART peripheral names ("uart1", "uart0")
+    0x7F04-0x80B4    Flash driver strings (probe, JEDEC, SPI errors)
+    0x80B4-0x8140    SPI flash model names (6 supported chips)
+    0x8140-0x82BC    GPIO error strings, level timeout
+    0x82BC-0x8300    CPU exception handler strings (register dump)
+    0x8300-0x8670    Boot CLI strings ("boot> ", help, flash, etc.)
+    0x8670-0x9000    Memory allocator, runtime, printf format strings
+
+Segment 1: BINH Dual-Bank Boot Image (Main Application)
+---------------------------------------------------------
+  Offset:      0x958C (after segment 0)
+  Size:        281,088 bytes (0x44A00)
+  Contents:    Full firmware image for dual-bank boot
+  Header:      "BINH" magic at offset 0x0000 of segment 1
+  Marker:      "SURG" at offset 0x0930 of segment 1
+
+  The BINH image contains a complete runnable firmware with duplicated
+  string tables. The GX8002B supports dual-bank boot (A/B firmware)
+  for safe over-the-air updates.
+
+  Key string regions within segment 1 (relative to segment 1 base):
+    0x00000    BINH header
+    0x00930    SURG marker
+    0x0132E    Lifecycle strings (UartMessageAsyncSuspend/Resume, etc.)
+    0x013E4    Configuration: BUXX magic markers
+    0x014FF4   Chip ID: "8003A"
+    0x01725x   Wake words: "hey_even", "hi_even"
+    0x0432F0   Version string: "0.0.2.0"
+    0x04982x   Audio board ([AB]) strings
+    0x049B2x   gx_audio_out_* API function names (20 entries)
+    0x04A0Ax   Memory manager strings
+    0x04A23x   LVP boot banner format strings
+    0x04A4Ex   Dual-bank boot strings
+    0x04A53x   Lifecycle suspend/resume strings
+    0x04A5Cx   Denoise mode strings ([LVP_MODE_DENOISE])
+    0x04A9Bx   App lifecycle (SampleApp, LvpApp)
+    0x04AADx   UART communication strings
+    0x04B0xx   Beamforming (GSC) strings
+    0x04B1xx   IMCRA noise estimator strings
+
+
+================================================================================
+3. BINH BOOT HEADER FORMAT
+================================================================================
+
+The BINH header is used by the Apollo510b DFU driver (service_codec_dfu.c) to
+load firmware onto the GX8002B during boot or update.
+
+BINH Header Fields (from main firmware [codec.dfu] strings):
+
+  Offset  Size  Field                Description
+  ------  ----  -------------------  ----------------------------------------
+  0x00    4     "BINH"               Magic marker (0x484E4942 LE)
+  0x04    4     0x55AA55AA           Sync marker / validation word
+  0x08    4     stage1_size          Stage 1 bootloader size (typically 512 bytes)
+  0x0C    4     stage2_baud_rate     Baud rate for stage 2 download
+  0x10    4     stage2_size          Stage 2 firmware size (typically 12,288 bytes)
+  0x14    4     stage2_checksum      Checksum (0x20000000 base?)
+  0x18    4     entry_vector         Entry point address
+  0x1C    4     handler_word         Handler function pointer
+
+DFU Boot Sequence (Apollo510b -> GX8002B):
+
+  Phase     Action                                Log String
+  --------  ------------------------------------  ----------------------------------
+  1. INIT   Read boot header from FWPK            [codec.dfu]reading boot header ...
+                                                  [codec.dfu]stage1_size %d
+  2. STG1   Send stage 1 bootloader (512 bytes)   [codec.dfu]start boot stage1 ...
+            at stage 1 baud rate                   [codec.dfu]stage1 baud: %d
+            Wait for "wfb" acknowledgment          [codec.dfu]download boot stage1 ...
+            Success:                               [codec.dfu]boot stage1 ok !
+
+  3. STG2   Switch to stage 2 baud rate            [codec.dfu]stage2 baud: %d
+                                                   [codec.dfu]stage2_baud_rate %d
+            Send stage 2 firmware (12,288 bytes)   [codec.dfu]start boot stage2 ...
+            Wait for "OK" acknowledgment            [codec.dfu]download boot stage2 ...
+            Success:                               [codec.dfu]boot stage2 ok !
+
+  4. BOOT   Wait for "boot>" CLI prompt            [codec.dfu]waiting "boot>" ...
+            Prompt received:                       [codec.dfu]get "boot>" !
+
+  5. FW     Download full firmware via CLI          [codec.dfu]download size: %d
+            commands (write, flash)                 waiting 'F' / waiting 'O'
+
+  6. CRC    Verify firmware CRC32                   [codec.dfu]Boot firmware CRC32
+                                                      verification failed/passed
+                                                   [codec.dfu]FW firmware CRC32
+                                                      verification failed/passed
+
+  7. VER    Check version match                     [codec.dfu]Codec version is same
+                                                      as package version, no upgrade
+            Or force upgrade:                       [codec.dfu]Codec version is
+                                                      different from package version
+                                                   [codec.dfu]Force upgrade mode
+
+
+================================================================================
+4. FWPK PACKAGE METADATA (from Apollo510b side)
+================================================================================
+
+The Apollo510b loads the GX8002B firmware from a FWPK package file stored in
+its filesystem. The loading process is documented via [codec.dfu] strings:
+
+  Loading:
+    [codec.dfu]Start loading firmware package from file system: %s
+    [codec.dfu]Firmware package version: %s (0x%08X)
+    [codec.dfu]Firmware package info: version=0x%08X, firmware count=%d
+
+  Validation:
+    [codec.dfu]Invalid firmware package magic: 0x%08X, expected: 0x%08X
+    [codec.dfu]Failed to read firmware package header: %d / %zu
+
+  Firmware extraction:
+    [codec.dfu]Found Boot firmware: size=%d, offset=0x%08X, CRC32=0x%08X
+    [codec.dfu]Found FW firmware: size=%d, offset=0x%08X, CRC32=0x%08X
+    [codec.dfu]Missing required firmware in package: boot=%s, fw=%s
+    [codec.dfu]Get version number from firmware package: %s
+
+  Memory allocation:
+    [codec.dfu]Failed to allocate boot firmware memory: %d bytes
+    [codec.dfu]Failed to allocate fw firmware memory: %d bytes
+
+  Success:
+    [codec.dfu]Firmware loaded successfully: boot=%d bytes, fw=%d bytes
+    [codec.dfu]Codec firmware upgrade successful, new version: %s
+
+The FWPK package contains at minimum 2 firmware images:
+  - "Boot" firmware (stage 1 + stage 2 bootloader)
+  - "FW" firmware (main application firmware)
+
+
+================================================================================
+5. DUAL-BANK BOOT SYSTEM
+================================================================================
+
+The GX8002B supports dual-bank firmware for A/B update safety:
+
+  Bank Selection:
+    "boot from first firmware" (0x0004a4ec) — Bank A selected
+    "boot from second firmware" (0x0004a508) — Bank B selected
+
+  CRC Validation:
+    "Crc Error %d" (0x0004a524) — CRC mismatch on active bank
+
+  SURG Marker:
+    "SURG" found at segment 1 offset 0x0930
+    Also present at segment 0 offset 0x138F
+    Purpose: Likely "Staging/Upgrade" marker indicating which bank has
+    the newer firmware image. Written after successful boot to confirm
+    the new image is valid.
+
+  Boot flow:
+    1. Read bank selection flag from flash
+    2. Load firmware from selected bank
+    3. Verify CRC32
+    4. If CRC fails, fall back to other bank
+    5. Execute from validated bank
+    6. If update pending, SURG marker indicates staging bank
+
+
+================================================================================
+6. FLASH LAYOUT (External SPI NOR)
+================================================================================
+
+The external SPI NOR flash stores firmware and configuration data.
+Layout is inferred from string evidence:
+
+  Region               Purpose                        Evidence
+  -------------------  ----------------------------   --------------------------
+  Bank A firmware      Primary firmware image         boot from first firmware
+  Bank B firmware      Secondary firmware image       boot from second firmware
+  OTP region           Factory-programmed data        read flash otp error
+  Configuration        BUXX-prefixed config blocks    "BUXX" at 4 addresses
+  NPU model            Wake word neural network       hey_even, hi_even labels
+  Boot header          BINH + bootloader stages       BINH magic, SURG marker
+
+Flash models and capacities:
+  Vendor    Model      Capacity   String Address
+  --------  ---------  ---------  ---------------
+  PUYA      p25q21l    2Mbit      0x00008104
+  PUYA      p25q40l    4Mbit      0x0000810c
+  PUYA      p25q80l    8Mbit      0x00008114
+  ESMT      en25s20a   2Mbit      0x0000811c
+  ESMT      en25s40a   4Mbit      0x00008128
+  ZBIT      zb25wq80a  8Mbit      0x00049d68 / 0x00013a02
+
+The largest supported flash is 1MB (8Mbit). With a 319KB firmware binary,
+dual-bank storage (~638KB) fits in the 1MB parts, leaving ~386KB for NPU
+model, configuration, and OTP.
+
+Flash probe process:
+  1. SPI bus init
+  2. JEDEC ID read ("Flash JEDEC = %#x")
+  3. Model match against supported table
+  4. Flash vendor logged ([LVP]Flash vendor:[%s]) — PUYA, ESMT, or ZBIT
+  5. Flash type, ID, size logged
+  6. If no match: "spi flash bus: error %d reading JEDEC ID"
+  7. Probe timeout: "flash probe waitting timeout."
+
+
+================================================================================
+7. NVM / OTP REGIONS
+================================================================================
+
+OTP (One-Time Programmable):
+  Evidence: "read flash otp error" (0x0004998c)
+  Purpose: Factory calibration data, chip ID, or security keys
+  Access: Read via SPI flash OTP command set
+  Error handling: Logs error on read failure (no retry evident)
+
+NVM Configuration Blocks (BUXX):
+  The BUXX magic marker appears at 4 distinct addresses:
+    0x000133e4  (within segment 0 string region)
+    0x00017330  (within segment 0 near wake word labels)
+    0x000433f0  (within segment 1 near version string)
+    0x0004de98  (within segment 1 upper region)
+
+  BUXX likely serves as a configuration block magic marker, similar to how
+  the Apollo510b uses magic markers for NVM data validation. The multiple
+  occurrences across both segments suggest it is embedded in both firmware
+  banks for configuration persistence.
+
+
+================================================================================
+8. KEY STRING ADDRESSES
+================================================================================
+
+Category: Boot / Version Strings
+  0x0004a23c  [LVP]Low-Power Voice Preprocess
+  0x0004a260  [LVP]Copyright (C) 2001-2020 NationalChip Co., Ltd
+  0x0004a294  [LVP]ALL RIGHTS RESERVED!
+  0x0004a2b0  grus_gx8002b_dev_1v           (board model identifier)
+  0x000432f0  0.0.2.0                        (firmware version string)
+  0x0004a310  2025-11-25, 19:36:54           (build timestamp)
+
+Category: Chip / Hardware Identification
+  0x00014ff4  8003A                          (chip variant, also at 0x000499a4)
+  0x0004a340  PUYA                           (flash vendor)
+  0x0004a360  ESMT                           (flash vendor)
+  0x0004a368  ZBIT                           (flash vendor)
+
+Category: Wake Words (NPU Labels)
+  0x00017254  hey_even                       (primary wake word)
+  0x000172ac  hi_even                        (alternate wake word)
+
+Category: Boot Banner Format Strings
+  0x0004a2c4  [LVP]Board Model: [%s]
+  0x0004a2dc  [LVP]MCU Version: [%s]
+  0x0004a2f4  [LVP]Release Ver: [0x%x]
+  0x0004a328  [LVP]Build Date : [%s]
+  0x0004a348  [LVP]Flash vendor:[%s]
+  0x0004a370  [LVP]Flash type:  [%s]
+  0x0004a388  [LVP]Flash ID:    [%#x]
+  0x0004a3a4  [LVP]Flash size:  [%d Byte]
+  0x0004a3c4  [LVP]CPU   Freq:  [%d Hz][fix]
+  0x0004a3e4  [LVP]SRAM  Freq:  [%d Hz]
+  0x0004a400  [LVP]NPU   Freq:  [%d Hz]
+  0x0004a41c  [LVP]FLASH Freq:  [%d Hz]
+  0x0004a438  [LVP]enable bypass core Ldo
+  0x0004a458  [LVP]Ldo   Trim:  [%d mV]
+  0x0004a474  [LVP] The Stack Scope:[%#x - %#x], Stack Size:%x
+
+Category: Dual-Bank Boot
+  0x0004a4ec  boot from first firmware
+  0x0004a508  boot from second firmware
+  0x0004a524  Crc Error %d
+
+Category: Audio Pipeline
+  0x00049820  [AB]dmic          [%d Channel]
+  0x00049840  [AB]dmic Ain_gain:[%d dB]
+  0x0004ab78  set pga gain %d success
+  0x0004ab94  set pga gain %d fail
+  0x0004abc3  gain range 0~48
+  0x0004a1f0  [LVP_AUD]vad param 1 [%d]
+  0x0004a1d4  [LVP_AUD]vad param 2 [%d]
+  0x0004a1b8  [LVP_AUD]vad param 3 [%d]
+
+Category: Denoise Modes
+  0x0004a890  [LVP_MODE_DENOISE]Init denoise mode
+  0x0004a5c4  [LVP_MODE_DENOISE]Exit denoise mode
+  0x0004a8b8  [LVP_MODE_DENOISE][DOUBLE_MIC_DENOISE]Init gsc Beamforming
+  0x0004a74c  [LVP_MODE_DENOISE][DOUBLE_MIC_DENOISE]Change Init gsc Beamforming OK
+  0x0004a794  [LVP_MODE_DENOISE][SINGLE_MIC_DENOISE]Init Imcra
+  0x0004a7f4  [LVP_MODE_DENOISE][SINGLE_MIC_DENOISE]Change Init Imcra
+  0x0004a830  [LVP_MODE_DENOISE][ORIGIN_MIC]Change origin mic
+  0x0004a700  [LVP_MODE_DENOISE]Init DRC
+  0x0004a6d4  [LVP_MODE_DENOISE]FrameDrcStateInit Fail!
+  0x0004a71c  [LVP_MODE_DENOISE]_beamformingInit Failed !!!
+  0x0004a7c8  [LVP_MODE_DENOISE]_imarcInit Failed !!!
+  0x0004a864  [LVP_MODE_DENOISE]Need init Beamforming
+  0x0004a8f4  [LVP_MODE_DENOISE]No noise reduction
+  0x0004a91c  [LVP_MODE_DENOISE]LvpAudioInInit Failed !!!
+  0x0004a94c  [LVP_MODE_DENOISE]LvpAudioInInit OK!!!
+  0x0004a974  [LVP_MODE_DENOISE]Denoise Init OK!!!
+  0x0004a618  [LVP_MODE_DENOISE]BF malloc g_bf_mictmp failed
+  0x0004a658  [LVP_MODE_DENOISE]BF malloc g_bf_temp_buf failed
+  0x0004a68c  [LVP_MODE_DENOISE]ImcraStateInit Fail!
+
+Category: Audio Output API (20 named functions)
+  0x00049b20  gx_audio_out_alloc_playback
+  0x00049b3c  gx_audio_out_free
+  0x00049b50  gx_audio_out_config_buffer
+  0x00049b6c  gx_audio_out_config_pcm
+  0x00049b84  gx_audio_out_config_i2s
+  0x00049b9c  gx_audio_out_config_dac
+  0x00049bb4  gx_audio_out_config_cb
+  0x00049bcc  gx_audio_out_push_frame
+  0x00049be4  gx_audio_out_drain_frame
+  0x00049c00  gx_audio_out_set_db
+  0x00049c14  gx_audio_out_get_db
+  0x00049c28  gx_audio_out_set_mute
+  0x00049c40  gx_audio_out_get_mute
+  0x00049c58  gx_audio_out_set_channel
+  0x00049c74  gx_audio_out_exit
+  0x00049c88  gx_audio_out_suspend
+  0x00049ca0  gx_audio_out_resume
+  0x00049cb4  gx_audio_out_set_fixed_src
+  0x00049cd0  gx_audio_out_get_sdc_src
+
+Category: Lifecycle / Suspend-Resume
+  0x0004a534  UartMessageAsyncSuspend
+  0x0004a54c  UartMessageAsyncResume
+  0x0004a9b4  _LvpAppSuspend
+  0x0004a9c4  _LvpAppResume
+  0x0004a9d4  SampleAppResume
+  0x0004a9e4  SampleAppSuspend
+  0x0004a580  [IDLE]Exit IDLE mode
+  0x0004a598  [IDLE]Init IDLE mode
+
+Category: UART Communication
+  0x0004aad0  _uartRecvCallback
+  0x0004aae4  _uartMsgInit
+  0x0004abd4  [VC_MESSAGE]NOTIFY PIN %d
+  0x0004abf0  [VC_MESSAGE]MASSAGE UART %d
+  0x0004aafc  receive misc test cmd
+  0x0004ab14  receive gsensor test cmd
+  0x0004ab30  receive version req
+  0x0004ab4c  receive switch wakeup model cmd
+
+Category: I2S Output
+  0x0004a9f8  [I2S_OUT_APP] ---- %s ----
+  0x0004aa58  MCLK:%dHz
+  0x0004aa64  LRCLK:%dHz
+  0x0004aa74  bits:%d
+  0x0004aa80  I2S out Master
+  0x00049b10  0 route play
+
+Category: SPI Flash
+  0x000080e0  Flash JEDEC = %#x
+  0x000080f4  , model = %s.
+  0x00008104  p25q21l
+  0x0000810c  p25q40l
+  0x00008114  p25q80l
+  0x0000811c  en25s20a
+  0x00008128  en25s40a
+  0x00049d68  zb25wq80a
+  0x0004998c  read flash otp error
+  0x00007f04  flash probe waitting timeout.
+  0x000080b4  spi flash bus: error %d reading JEDEC ID
+
+Category: Boot CLI
+  0x00008584  boot>                          (CLI prompt)
+  0x00008348  help
+  0x00008350  print command description/usage
+  0x00008384  flash
+  0x0000838c  flash command
+  0x00008370  eraseall
+  0x0000837c  erase
+  0x0000846c  serialdown
+  0x00008478  burn flash from serial
+  0x000084ec  reboot
+  0x000084f4  reset mcu through watchdog
+  0x000084b0  init
+  0x000084b8  ping
+  0x000084c0  write
+  0x000084c8  read
+  0x00008514  wdt test command
+  0x00008528  usbslave send
+  0x00008538  No CLI available
+
+Category: Memory Management
+  0x0004a0ac  mem init, heap begin address 0x%x, size %d
+  0x0004a0d8  mem init, error begin address 0x%x, and end address 0x%x
+  0x0004a114  malloc size %d, but align to %d
+  0x0004a138  no memory
+  0x0004a144  illegal memory
+  0x0004a154  to free a bad data block:
+  0x0004a170  mem: 0x%08x, used flag: %d, magic code: 0x%04x
+  0x0004a1a0  realloc: out of memory
+  0x00008684  Too much pkg memory demanded: %d
+
+Category: Error / Exception
+  0x000082bc  CPU Exception : %u
+  0x000082d0  vr%d: %08x
+  0x000082dc  r%d: %08x
+  0x000082e8  epsr: %8x
+  0x000082f4  epc : %8x
+  0x0004a4a8  [LVP]Error, The Stack May Used Up, Top[%#x],[Addr:%#x, Value:%#x]
+  0x00008ff4  %s:%u: %s: Assertion `%s' failed.
+
+Category: FIFO/DMA Interrupts
+  0x00007fbc  Transmit FIFO empty interrupt.
+  0x00007fdc  Transmit FIFO overflow interrupt.
+  0x00008000  Receive FIFO underflow interrupt.
+  0x00008024  Receive FIFO overflow interrupt.
+  0x00008048  Receive FIFO full interrupt.
+  0x00008068  multi-master contention interrupt.
+  0x0000808c  xip receive fifo overflow interrupt.
+
+Category: Peripherals
+  0x00007ef4  uart1
+  0x00007efc  uart0
+  0x0000831c  pin %d set error!
+  0x00049de8  pin %d function conflict !
+  0x00049db4  RTC prescaler error!
+  0x00008490  watchdog level interrupt! %d
+  0x00049e4c  gsensor_workstate =%d
+  0x0002c50e  dma_                            (DMA function prefix)
+
+Category: Beamforming (GSC)
+  0x0004b154  lvp/vma/lavaliermic/gsc.c       (source file path)
+  0x0004a648  bf_size = %d
+  0x0004b100  frequency_bins: %d
+  0x0004b114  You must set the beamforming_angle_num equal as you set before
+  0x0004b065  [error], please set linear array or circular array...
+  0x0004b0c4  [error], malloc wtmp failed
+  0x0004b170  [error], malloc x or y_real or y_imag or cosine_x or mic_position failed
+
+Category: IMCRA Noise Estimation
+  0x0004b1c4  [ImcraStateInit Error] At least sizeof(ImcraState) is required
+  0x0004b210  [ImcraStateInit Error] bufsize[%d] < required size[%d]
+  0x0004b248  [ImcraStateInit Error] Not enough buffer space
+  0x0004b278  Imcra(Temp  )       Memory:%6.2fKB
+  0x0004b29c  Imcra(Static)       Memory:%6.2fKB
+  0x0004b2c0  Imcra(Total )       Memory:%6.2fKB
+
+Category: Configuration / Protocol
+  0x000133e4  BUXX                            (config block magic, 4 occurrences)
+
+
+================================================================================
+9. SEGMENT 1 KEY MARKERS
+================================================================================
+
+Segment 1 (BINH dual-bank image) key structural markers:
+
+  Offset    String    Purpose
+  --------  --------  ------------------------------------------
+  0x0000    BINH      Boot image header magic
+  0x0930    SURG      Staging/Upgrade marker for bank selection
+
+Segment 1 contains a complete duplicate of the firmware including all string
+tables, allowing the GX8002B to boot from either bank independently. The
+BINH header provides the boot protocol parameters (stage sizes, baud rates)
+that the Apollo510b DFU driver needs to load the codec firmware.
+
+
+================================================================================
+10. CROSS-REFERENCE: APOLLO510B CODEC DRIVER FILES
+================================================================================
+
+The Apollo510b main firmware contains four source files for codec management:
+
+File                              Address in Main FW   Log Tag
+--------------------------------  ------------------   -----------------------
+drv_gx8002b.c                    0x0029b1cc           [drv.audio.codec]
+service_codec_host.c              0x0028f034           [codec.host]
+service_codec_dfu.c               0x0028ee9c           [codec.dfu]
+service_codec_porting.c           0x002883d8           (platform porting)
+TinyFrame.c (shared library)      0x002905fc           [TinyFrame]
+
+The I2S interface is managed by the Apollo510b:
+  [drv.audio.codec]gx8002b i2s init.         (0x002b4a68 area)
+  [drv.audio.codec]gx8002b i2s deinit.
+  [drv.audio.codec]gx8002b i2s already init.
+  [drv.audio.codec]gx8002b i2s already deinit.
+
+Audio data flow over I2S:
+  GX8002B -> Apollo510b: Processed microphone audio (for LC3 encoding, BLE TX)
+  Apollo510b -> GX8002B: Audio playback data (from BLE RX, LC3 decoding, to DAC)
+
+I2S DMA timeout detection on Apollo510b:
+  [thread.audio]codec i2s dma int timeout, diff = %dms
+
+Inter-eye DMIC coordination (managed by Apollo510b, NOT the GX8002B):
+  master: received DMIC closed response, entering low power mode
+  slave: received request from master, closing DMIC
+  slave: received low power response, reopening DMIC
+
+
+================================================================================
+11. BINARY INTEGRITY
+================================================================================
+
+The GX8002B firmware is byte-identical across all analyzed G2 firmware
+versions (2.0.1.14 through 2.0.7.16), confirming it is a vendor-supplied
+binary from NationalChip that does not change with Even's application
+firmware updates.
+
+Total size: 319,372 bytes (FWPK container)
+Segment count: 2 (boot/stage + main application with BINH dual-bank)
+CRC verification: Per-segment CRC32 in FWPK header
+
+
+================================================================================
+END OF DATA MAP
+================================================================================

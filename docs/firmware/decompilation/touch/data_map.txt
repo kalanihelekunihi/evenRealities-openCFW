@@ -1,0 +1,150 @@
+# CY8C4046FNI Touch Controller — Global Data Map
+# Processor: ARM Cortex-M0, Image base: 0x00000000
+# Source: Ghidra decompilation cross-referenced with rizin strings
+# FW version: "2.0.6.0" at 0x7924
+#
+# Format: address  inferred_name  type  refs  description
+#
+# Key memory regions:
+#   0x00000000-0x00007640  Code (198 functions)
+#   0x00007640-0x00007C00  String literals (debug/log messages)
+#   0x00007C00-0x00008000  Config tables (capsense params, GPIO maps)
+#   0x20000000+            RAM (variables, state structs)
+
+# =========================================================================
+# GESTURE STATE (used by gesture_state_machine @ 0x00000bbc)
+# =========================================================================
+0x00000bac	gesture_track_state	struct	17	Gesture direction/speed tracking struct
+#   +0x00: base pointer for circular sample buffer
+#   +0x30 (6*8): sample ring buffer (3 entries, 8 bytes each: [position, timestamp])
+#   +0x4c: ring buffer write index (mod 3)
+#   +0x4d: sample count (0-3, capped)
+#   +0x4e: instantaneous speed magnitude (0-255)
+#   +0x4f: filtered speed (IIR: 4*new + 6*old / 10)
+#   +0x50: direction (-1=left, 0=none, +1=right)
+0x00000bb0	str_direction_names	string_ptr	2	Format arg: direction name strings
+0x00000bb4	str_direction_change	string_ptr	1	Debug format: "direction change" log
+0x00000bb8	str_speed_report	string_ptr	1	Debug format: speed calculation log
+
+0x00000f08	gesture_flags	byte[3]	17	Gesture state flags (cleared with memset(0,3))
+#   3-byte array zeroed at state machine entry
+0x00000f0c	gesture_state_ctx	struct	58	Main gesture state machine context
+#   +0x00: gesture state enum (0=idle, 1=active, etc.)
+#   +0x14: previous timestamp copy
+#   +0x18: previous position copy
+#   +0x1c: current input type (param_1)
+#   +0x1d: current input value (param_2)
+#   +0x20: current timestamp (param_3)
+#   +0x24: output event byte (bits: [7:6]=dir, [5:0]=magnitude)
+#   State machine generates: tap(0x04), double-tap(0x08), long-press(0x10),
+#   slide-left(0x20), slide-right(0x40), click-count(0x01), long-release(0x02)
+0x00000f10	gesture_click_timer	uint32	12	Click timeout counter (300ms window for multi-tap)
+0x00000f18	gesture_long_press_ms	uint32	3	Long press threshold in ms
+0x00000f2c	gesture_5click_counter	byte	3	5-fast-clicks host reset counter
+
+# =========================================================================
+# CAPSENSE CONFIGURATION (used by capsense_full_init_and_calibrate @ 0x3d88)
+# =========================================================================
+0x00001eb0	capsense_config_table	struct	20	CapSense HW configuration table
+#   Widget descriptors (up to 3 widgets, 0x90 bytes each)
+#   Contains: scan parameters, IDAC values, thresholds, filter coefficients
+0x00002054	capsense_scan_state	byte	4	Current scan busy/idle state
+0x00002050	capsense_scan_slot_idx	byte	3	Current scan slot index
+0x00001188	capsense_hw_config	struct_ptr	1	Pointer to CSD block register base
+#   Used by capsense_init_hw_registers (0x1eb4)
+
+# =========================================================================
+# I2C REPORT BUFFER (used by touch_event_process_and_report @ 0x06d4)
+# =========================================================================
+0x000007f4	i2c_report_gesture_byte	byte	3	Gesture event byte for I2C report
+0x000007fc	i2c_report_proximity	byte	4	Proximity raw/baseline for I2C report
+0x00000698	i2c_report_buffer_ptr	ptr	3	Pointer to 16-byte I2C slave report buffer
+#   Report format: [event_type, bsln_hi, bsln_lo, 0, raw_hi, raw_lo, diff_hi, diff_lo,
+#                   thresh_hi, thresh_lo, 0, 0, 0, 0, 0, 0]
+
+# =========================================================================
+# EEPROM / NVM CONFIG (used by eeprom_init_register_callback @ 0x0834)
+# =========================================================================
+0x000057a8	eeprom_config_struct	struct	7	Em_EEPROM configuration (wear-leveled flash)
+#   Contains proximity baseline (ProxBsln) calibration data
+#   Row size: 128 bytes, CRC-8 (poly 0x31, init 0xFF)
+0x000054c0	eeprom_row_buffer	byte[128]	7	Em_EEPROM row read/write buffer
+0x0000553c	eeprom_status_flags	byte	3	EEPROM init/save status flags
+
+# =========================================================================
+# FLASH/SROM (used by flash_write_row @ 0x1308)
+# =========================================================================
+0x00005cfc	flash_write_buffer	byte[128]	4	Flash row write buffer
+0x00005d00	flash_active_row_addr	uint32	3	Active row base address
+0x00005d04	flash_redundant_row_addr	uint32	3	Redundant (backup) row address
+0x00005d80	flash_sequence_num	uint32	3	Row sequence number for wear leveling
+0x000059c0	srom_cmd_buffer	byte[32]	5	SROM privileged command buffer
+
+# =========================================================================
+# CLOCK / TIMING (used by clock_init_imo_ilo @ 0x1118)
+# =========================================================================
+0x00006958	clock_imo_frequency	uint32	6	IMO (Internal Main Oscillator) frequency in Hz
+0x00006984	clock_hfclk_config	struct	4	HFCLK source/divider configuration
+0x00006ba0	clock_divider_table	struct	3	Clock divider assignment table
+0x00006cc0	clock_ext_frequency	uint32	5	External clock frequency (0 if none)
+
+# =========================================================================
+# CALLBACK / ISR SYSTEM (used by callback_list_register @ 0x6fbc)
+# =========================================================================
+0x0000704c	callback_list_heads	ptr[N]	4	Array of callback list head pointers (per-channel)
+0x00007114	callback_dispatch_table	ptr[N]	1	Dispatch lookup table for callback invocation
+0x00007118	callback_sentinel	uint32	2	Sentinel value for end-of-list detection
+0x0000711c	callback_current_node	ptr	4	Currently executing callback node
+0x00007120	callback_resume_table	ptr[N]	2	Resume points for nested callback dispatch
+
+# =========================================================================
+# POWER / SLEEP (used by power_sleep_with_callbacks @ 0x7124)
+# =========================================================================
+0x00007180	power_sleep_callbacks_en	uint32	3	Sleep callback enable flag
+0x00007184	power_sleep_mode	uint32	1	Current sleep mode (ACT=0, ALR=1, WOT=2)
+0x000071ec	power_wdt_config	struct	4	WDT (Watchdog Timer) configuration
+#   +0x00: WDT counter
+#   +0x04: WDT enable flag
+0x00007214	systick_pending_flags	uint32	1	SysTick interrupt pending flags
+0x00007218	systick_isr_table	ptr[N]	1	SysTick ISR dispatch table
+
+# =========================================================================
+# STRING LITERALS (debug/log messages in flash)
+# =========================================================================
+0x00007660	str_save_proxbsln_cmd	string	0	"Received save ProxBsln command"
+0x000076a8	str_eeprom_init_fail	string	0	"EEPROM init failed: %lu"
+0x000076d0	str_eeprom_first_use	string	0	"EEPROM first use, initializing default config..."
+0x00007710	str_eeprom_erase_fail	string	0	"EEPROM erase failed: %lu"
+0x00007738	str_write_config_fail	string	0	"Write default config failed: %lu"
+0x00007768	str_eeprom_init_ok	string	0	"EEPROM default config initialized"
+0x00007798	str_config_loaded	string	0	"EEPROM config loaded: prox_bsln=%u"
+0x000077c8	str_save_config_fail	string	0	"Save config failed: %lu"
+0x000077f0	str_config_saved	string	0	"Config saved: prox_bsln=%u"
+0x00007818	str_5click_reset	string	0	"trigger host reset by 5-fast-clicks"
+0x0000784c	str_proxbsln_saved	string	0	"ProxBsln saved to EEPROM: %u->%u (diff=%u)"
+0x00007884	str_proxbsln_fail	string	0	"ProxBsln save failed: %lu"
+0x000078ac	str_proxbsln_skip	string	0	"ProxBsln change too small: %u->%u (diff=%u < %u), skip save"
+0x00007924	str_fw_version	string	0	"2.0.6.0" (firmware version)
+0x0000792c	str_tp_version	string	0	"TP VER:%s"
+0x00007944	str_act_to_alr	string	0	"ACT->ALR"
+0x0000795c	str_alr_to_act	string	0	"ALR->ACT"
+0x00007974	str_alr_to_wot	string	0	"ALR->WOT"
+0x0000798c	str_wot_to_act	string	0	"WOT->ACT"
+0x000079a4	str_wot_to_alr	string	0	"WOT->ALR"
+0x00007a8c	str_press	string	0	"PRESS!"
+0x00007aa0	str_slide_start	string	0	"slide report (start): dx=%d dir=%s spd=%u"
+0x00007ad8	str_long_press	string	0	"long press triggered at %u ms"
+0x00007b04	str_slide_report	string	0	"slide report: dx=%d dir=%s spd=%u"
+0x00007b34	str_5click_timeout	string	0	"5-fast-clicks timeout: reset host"
+0x00007b64	str_click_timeout	string	0	"click (timeout): cnt=%u"
+0x00007b8c	str_release	string	0	"RELEASE!"
+0x00007bf4	str_slide_release	string	0	"slide release report: dx=%d dir=%s spd=%u"
+
+# =========================================================================
+# NOTES
+# =========================================================================
+# Total: 41 classified DAT_ addresses out of ~100 unique in decompiled.c
+# Remaining ~60 are: widget-specific capsense config offsets, filter
+# coefficients, scan timing constants, and low-level CSD block register
+# addresses — all part of the Cypress PSoC4 CapSense component with
+# limited naming value beyond the module classification already in function_map.txt

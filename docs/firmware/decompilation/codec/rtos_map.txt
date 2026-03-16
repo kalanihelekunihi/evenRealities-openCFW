@@ -1,0 +1,314 @@
+================================================================================
+GX8002B AUDIO CODEC FIRMWARE — RTOS MAP (BARE-METAL)
+================================================================================
+
+Chip:         GX8002B (NationalChip Co., Ltd)
+Architecture: C-SKY CK803S DSP core with NPU
+Framework:    LVP (Low-Power Voice Preprocess)
+FW Version:   0.0.2.0, built 2025-11-25 19:36:54
+Binary Size:  319,372 bytes (FWPK container)
+Analysis:     String-based only (C-SKY unsupported by Ghidra/rizin)
+
+
+================================================================================
+OPERATING MODEL: BARE-METAL (NO RTOS)
+================================================================================
+
+The GX8002B firmware does NOT use an RTOS. Evidence:
+
+  ABSENT (no strings found for):
+    - Task/thread creation (xTaskCreate, osThreadNew, etc.)
+    - Scheduler (vTaskStartScheduler, osKernelStart, etc.)
+    - Semaphores/mutexes (xSemaphoreCreate*, osMutex*, etc.)
+    - Message queues (xQueueCreate, osMessageQueue*, etc.)
+    - Software timers (xTimerCreate, osTimer*, etc.)
+    - Priority management (vTaskPrioritySet, etc.)
+    - Any RTOS kernel strings (FreeRTOS, Zephyr, ThreadX, etc.)
+
+  PRESENT (confirming bare-metal):
+    - Custom heap allocator with magic code validation (not pvPortMalloc)
+    - Simple "boot> " CLI loop (not a task)
+    - Module-level Suspend/Resume lifecycle (not RTOS task suspend)
+    - Direct interrupt handlers (no ISR-to-task notification)
+    - IDLE mode with explicit init/exit (not tickless idle)
+
+This contrasts sharply with the other G2 firmware components:
+  - Apollo510b main FW: FreeRTOS with 30+ tasks
+  - Box MCU (B200): FreeRTOS with 6 tasks, 4 timers, event groups
+  - EM9305 BLE radio: Cordio BLE stack (cooperative scheduler)
+
+The GX8002B uses a simpler model appropriate for a dedicated DSP:
+  - Single execution context (main loop + interrupts)
+  - Module callbacks for power state transitions
+  - Interrupt-driven I/O for UART and DMA
+
+
+================================================================================
+EXECUTION MODEL
+================================================================================
+
+Boot sequence:
+  1. C-SKY CK803S reset vector
+  2. Hardware initialization (clocks, GPIO, UART, SPI, DMA)
+  3. Boot CLI available ("boot> " prompt) — if entered by host DFU driver
+  4. LVP framework init:
+     a. Flash probe (JEDEC ID, model identification)
+     b. Boot banner (board model, version, clocks, flash info, LDO trim)
+     c. Stack scope registration ([LVP] The Stack Scope:[%#x - %#x])
+     d. Memory manager init (heap begin address, size)
+  5. Audio subsystem init:
+     a. DMIC configuration ([AB]dmic)
+     b. PGA gain setup
+     c. Denoise mode init (GSC / IMCRA / raw)
+     d. VAD parameter configuration
+     e. NPU wake word model load
+     f. I2S output setup (SampleApp)
+  6. UART message handler init (_uartMsgInit, VC_MESSAGE config)
+  7. Main event loop (polling + interrupt-driven)
+
+Main loop (inferred behavior):
+  while (1) {
+      // Process UART messages from Apollo510b (TinyFrame)
+      // Process audio frames through DSP pipeline
+      // Check VAD state, report events
+      // Check NPU inference results (wake word detection)
+      // Check G-sensor state
+      // Enter IDLE if no activity
+  }
+
+
+================================================================================
+POWER STATES
+================================================================================
+
+The GX8002B implements 4 power states managed by the LVP framework:
+
+State            Description                            Log Evidence
+---------------  ------------------------------------   -------------------------
+ACTIVE           Full audio pipeline running             (default, no log)
+                 All modules operational
+                 DMIC capturing, DSP processing
+                 NPU inferring, UART communicating
+
+IDLE             Low-power listening mode                 [IDLE]Init IDLE mode
+                 Reduced clock frequencies                [IDLE]Exit IDLE mode
+                 VAD still active (wakeup on voice)
+                 NPU may be active for wake word
+                 UART handler suspended
+
+SUSPEND          Per-module suspend state                 _LvpAppSuspend
+                 Each module saves state independently    SampleAppSuspend
+                 Audio output paused                      UartMessageAsyncSuspend
+                 DMA transfers halted
+
+RESUME           Per-module resume from suspend           _LvpAppResume
+                 Restores saved state                     SampleAppResume
+                 Restarts audio pipeline                  UartMessageAsyncResume
+
+
+Transition diagram:
+
+            BOOT
+              |
+              v
+          +--------+
+          | ACTIVE |<---------------------------------------+
+          +---+----+                                        |
+              |                                             |
+              | (no activity / host command)                | (wakeup event)
+              v                                             |
+          +--------+                                        |
+          |  IDLE  |----------------------------------------+
+          +---+----+
+              |
+              | (deeper sleep requested)
+              v
+        +-----------+
+        |  SUSPEND  |
+        |  (per-    |
+        |  module)  |
+        +-----+-----+
+              |
+              | (wakeup event)
+              v
+        +-----------+
+        |  RESUME   |-----> ACTIVE
+        |  (per-    |
+        |  module)  |
+        +-----------+
+
+
+Module suspend/resume order (inferred):
+  Suspend: UartMessageAsyncSuspend → SampleAppSuspend → _LvpAppSuspend
+  Resume:  _LvpAppResume → SampleAppResume → UartMessageAsyncResume
+
+
+================================================================================
+INTERRUPT SOURCES
+================================================================================
+
+The GX8002B is interrupt-driven for all I/O. Interrupt sources identified
+from strings:
+
+Source               Evidence String                          Purpose
+------------------   ------------------------------------     ------------------
+UART RX              _uartRecvCallback (0x0004aad0)           TinyFrame byte recv
+DMA TX FIFO empty    Transmit FIFO empty interrupt (0x7fbc)   Audio DMA refill
+DMA TX FIFO overflow Transmit FIFO overflow interrupt (0x7fdc) Error recovery
+DMA RX FIFO under    Receive FIFO underflow interrupt (0x8000) Error recovery
+DMA RX FIFO overflow Receive FIFO overflow interrupt (0x8024)  Error recovery
+DMA RX FIFO full     Receive FIFO full interrupt (0x8048)      Audio data ready
+SPI multi-master     multi-master contention interrupt (0x8068) Bus arbitration
+XIP FIFO overflow    xip receive fifo overflow interrupt (0x808c) Flash read err
+Watchdog             watchdog level interrupt! %d (0x8490)     WDT warning
+CPU Exception        CPU Exception : %u (0x000082bc)           Fault handler
+GPIO                 pin %d set error! (0x0000831c)            Pin config error
+
+C-SKY CK803S exception registers dumped on fault:
+  epsr — Exception Program Status Register
+  epc  — Exception Program Counter (faulting address)
+  r0-r15 — General purpose registers
+  vr0-vr15 — Vector registers (DSP operations)
+
+
+================================================================================
+TIMING AND SCHEDULING
+================================================================================
+
+Since there is no RTOS, timing is managed through:
+
+1. Hardware timers:
+   - RTC with prescaler (error: "RTC prescaler error!")
+   - Watchdog timer (hardware, level interrupts)
+   - No SysTick (that is an ARM concept; C-SKY uses different timer model)
+
+2. DMA-driven audio timing:
+   - Audio frame rate determined by DMA configuration
+   - FIFO interrupts drive audio processing cadence
+   - I2S MCLK/LRCLK provide audio clock domain
+
+3. Polling in main loop:
+   - VAD state checked periodically
+   - UART message polling (between interrupt-driven receives)
+   - G-sensor state polling (gsensor_workstate)
+
+4. Event-driven:
+   - Wake word detection triggers NPU inference complete event
+   - VAD onset/offset triggers voice event to host
+   - UART receive triggers TinyFrame message processing
+
+Clock domains (logged at boot):
+  CPU Freq:   [LVP]CPU   Freq:  [%d Hz][fix]   — Fixed CPU clock
+  SRAM Freq:  [LVP]SRAM  Freq:  [%d Hz]        — SRAM bus clock
+  NPU Freq:   [LVP]NPU   Freq:  [%d Hz]        — Neural processor clock
+  Flash Freq: [LVP]FLASH Freq:  [%d Hz]        — SPI flash clock
+
+Audio clock (I2S output):
+  MCLK:  Master clock frequency (MCLK:%dHz)
+  LRCLK: Left-right (sample rate) clock (LRCLK:%dHz)
+  bits:  Bit depth per sample (bits:%d)
+
+
+================================================================================
+MEMORY MODEL
+================================================================================
+
+Custom heap allocator (bare-metal, no RTOS heap):
+
+  Initialization:
+    mem init, heap begin address 0x%x, size %d (0x0004a0ac)
+    mem init, error begin address 0x%x, and end address 0x%x (0x0004a0d8)
+
+  Allocation:
+    malloc size %d, but align to %d (0x0004a114) — alignment enforcement
+    no memory (0x0004a138) — allocation failure
+    Too much pkg memory demanded: %d (0x00008684) — oversized request
+
+  Deallocation:
+    to free a bad data block: (0x0004a154) — corruption detection
+    mem: 0x%08x, used flag: %d, magic code: 0x%04x (0x0004a170)
+
+  Reallocation:
+    realloc: out of memory (0x0004a1a0) — realloc failure
+    illegal memory (0x0004a144) — invalid pointer
+
+The allocator uses:
+  - Magic code per block for integrity checking
+  - Used flag per block (allocated/free tracking)
+  - Alignment enforcement (configurable alignment)
+  - No coalescing evidence (simpler than FreeRTOS heap_4)
+
+DSP buffer allocation (per-algorithm):
+  GSC beamformer:
+    BF malloc g_bf_mictmp — microphone temporary buffer
+    BF malloc g_bf_temp_buf — processing temporary buffer
+    bf_size = %d — total beamforming buffer size
+    [error], malloc x or y_real or y_imag or cosine_x or mic_position failed
+
+  IMCRA noise estimator:
+    Imcra(Temp  ) Memory:%6.2fKB — temporary memory usage
+    Imcra(Static) Memory:%6.2fKB — static (persistent) memory
+    Imcra(Total ) Memory:%6.2fKB — total IMCRA footprint
+
+Stack monitoring:
+  [LVP] The Stack Scope:[%#x - %#x], Stack Size:%x (0x0004a474)
+  [LVP]Error, The Stack May Used Up, Top[%#x],[Addr:%#x, Value:%#x] (0x0004a4a8)
+
+The stack scope is registered at boot and checked periodically. Stack overflow
+triggers an error log but does NOT reset the system (no MPU on CK803S for
+hardware stack protection).
+
+
+================================================================================
+SYNCHRONIZATION MECHANISMS
+================================================================================
+
+Without an RTOS, synchronization is achieved through:
+
+1. Interrupt disable/enable (C-SKY PSR IE bit)
+   - Critical sections around shared state (UART buffers, audio buffers)
+   - Short disable periods to prevent race conditions
+
+2. Volatile shared state
+   - Module state variables shared between main loop and ISR context
+   - G-sensor workstate, mic status, VAD state
+
+3. VC_MESSAGE notify pin
+   - GPIO output to Apollo510b for inter-chip synchronization
+   - Asserted when GX8002B has a message ready
+   - [VC_MESSAGE]NOTIFY PIN %d — pin number
+
+4. No mutexes, semaphores, or queues
+   - All data flows are unidirectional per-interrupt or main-loop-to-ISR
+   - Audio pipeline is sequential (no parallel processing)
+
+
+================================================================================
+COMPARISON WITH OTHER G2 RTOS ENVIRONMENTS
+================================================================================
+
+Aspect               GX8002B (bare-metal)   Box MCU (FreeRTOS)    Main FW (FreeRTOS)
+------------------   --------------------   ------------------    ------------------
+Scheduler            None                   Preemptive            Preemptive
+Tasks/Threads        0                      6                     30+
+Software Timers      0                      4                     Many
+Event Groups         0                      1 (appEvent)          Multiple
+Message Queues       0                      1 (appEvent)          Multiple
+Mutexes              0                      0                     Multiple
+Heap                 Custom (magic code)    heap_4 (FreeRTOS)     heap_4 (FreeRTOS)
+Tickless Idle        N/A                    Yes                   Yes
+Context Switch       N/A                    PendSV                PendSV
+Timing Base          RTC + DMA + WDT        SysTick (1ms)         SysTick (1ms)
+Stack Protection     Software check         None evident          MPU-based
+
+The bare-metal approach is appropriate for the GX8002B because:
+  - Single-purpose DSP (audio processing only)
+  - Real-time audio pipeline is naturally sequential
+  - Low power budget (no scheduler overhead)
+  - Small code size (no RTOS kernel footprint)
+  - Deterministic timing (no scheduler jitter)
+
+
+================================================================================
+END OF RTOS MAP
+================================================================================

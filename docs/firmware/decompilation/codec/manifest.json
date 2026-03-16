@@ -1,0 +1,30 @@
+{
+  "filename": "firmware_codec.bin",
+  "description": "Audio Codec (GX8002B C-SKY CK803S DSP)",
+  "base_addr": "0x00000000",
+  "header_skip": 48,
+  "ghidra_lang": null,
+  "note": "GX8002B uses C-SKY CK803S core. Neither Ghidra nor Rizin has native support. Only raw hex dump and strings extraction are performed.",
+  "output_files": [
+    {
+      "name": "header_hexdump.txt",
+      "size": 1232
+    },
+    {
+      "name": "rizin_strings.txt",
+      "size": 391496
+    },
+    {
+      "name": "segment_0/",
+      "contents": [
+        "strings.txt"
+      ]
+    },
+    {
+      "name": "segment_1/",
+      "contents": [
+        "strings.txt"
+      ]
+    }
+  ]
+}

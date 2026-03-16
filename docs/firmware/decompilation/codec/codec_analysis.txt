@@ -1,0 +1,742 @@
+================================================================================
+GX8002B AUDIO CODEC FIRMWARE — COMPREHENSIVE STRING ANALYSIS
+================================================================================
+
+Chip:         GX8002B (NationalChip Co., Ltd)
+Architecture: C-SKY CK803S DSP core
+Framework:    LVP (Low-Power Voice Preprocess)
+Copyright:    2001-2020 NationalChip Co., Ltd
+Board ID:     grus_gx8002b_dev_1v ("Grus" constellation codename)
+FW Version:   0.0.2.0
+Build Date:   2025-11-25, 19:36:54
+Stability:    Byte-identical across all G2 firmware versions (2.0.1.14 – 2.0.7.16)
+Binary Size:  319,372 bytes (FWPK container, 2 segments)
+
+Analysis Method: String extraction only — C-SKY CK803S is unsupported by Ghidra
+                 and Rizin, preventing decompilation.
+
+Source Files:
+  - rizin_strings.txt:       5,172 raw strings (most are binary noise)
+  - segment_0/strings.txt:   Segment 0 strings (code + rodata)
+  - segment_1/strings.txt:   Segment 1 strings (BINH dual-bank boot images)
+  - function_map.txt:        Pre-curated analysis (96 meaningful strings)
+
+================================================================================
+1. CATEGORIZED STRING LISTING
+================================================================================
+
+------------------------------------------------------------------------------
+1.1  VERSION & BUILD STRINGS
+------------------------------------------------------------------------------
+Address     String
+----------  ------------------------------------------------------------------
+0x0004a23c  [LVP]Low-Power Voice Preprocess
+0x0004a260  [LVP]Copyright (C) 2001-2020 NationalChip Co., Ltd
+0x0004a294  [LVP]ALL RIGHTS RESERVED!
+0x0004a2b0  grus_gx8002b_dev_1v           (board model identifier)
+0x000432f0  0.0.2.0                        (firmware version string)
+0x0004a310  2025-11-25, 19:36:54           (build timestamp)
+0x0004a340  PUYA                           (flash vendor name)
+0x0004a360  ESMT                           (flash vendor name)
+0x0004a368  ZBIT                           (flash vendor name)
+
+Boot Banner Sequence (format strings):
+  [LVP]Board Model: [%s]
+  [LVP]MCU Version: [%s]
+  [LVP]Release Ver: [0x%x]
+  [LVP]Build Date : [%s]
+  [LVP]Flash vendor:[%s]
+  [LVP]Flash type:  [%s]
+  [LVP]Flash ID:    [%#x]
+  [LVP]Flash size:  [%d Byte]
+  [LVP]CPU   Freq:  [%d Hz][fix]
+  [LVP]SRAM  Freq:  [%d Hz]
+  [LVP]NPU   Freq:  [%d Hz]
+  [LVP]FLASH Freq:  [%d Hz]
+  [LVP]enable bypass core Ldo
+  [LVP]Ldo   Trim:  [%d mV]
+  [LVP] The Stack Scope:[%#x - %#x], Stack Size:%x
+
+------------------------------------------------------------------------------
+1.2  WAKE WORD / VOICE TRIGGER STRINGS
+------------------------------------------------------------------------------
+0x00017254  hey_even                       (primary wake word)
+0x000172ac  hi_even                        (alternate wake word)
+
+These are embedded as NPU inference labels, confirming the GX8002B runs
+on-device keyword spotting via its Neural Processing Unit.
+
+------------------------------------------------------------------------------
+1.3  AUDIO PROCESSING — MICROPHONE INPUT
+------------------------------------------------------------------------------
+0x00049820  [AB]dmic          [%d Channel]  (digital microphone, multi-channel)
+0x00049840  [AB]dmic Ain_gain:[%d dB]       (analog input gain)
+0x0004ab78  set pga gain %d success         (PGA set OK)
+0x0004ab94  set pga gain %d fail            (PGA set fail)
+0x0004abc3  gain range 0~48                 (PGA gain range: 0-48 dB)
+
+CLI Commands:
+  mic status          — query microphone state
+  start Dmic cmd      — start digital microphone
+  close Dmic cmd      — stop digital microphone
+  set pga gain        — set PGA gain (0-48)
+  pdm ch delay        — configure PDM channel delay
+  i2s set state       — set I2S state
+
+------------------------------------------------------------------------------
+1.4  AUDIO PROCESSING — BEAMFORMING (GSC)
+------------------------------------------------------------------------------
+0x0004b154  lvp/vma/lavaliermic/gsc.c      (source file path!)
+            VMA = Voice Module Architecture
+            GSC = Generalized Sidelobe Canceller
+
+0x0004a648  bf_size = %d                    (beamforming buffer size)
+0x0004b100  frequency_bins: %d              (FFT frequency bin count)
+0x0004b114  You must set the beamforming_angle_num equal as you set before
+0x0004b170  [error], malloc x or y_real or y_imag or cosine_x or mic_position failed
+0x0004b0c4  [error], malloc wtmp failed
+0x0004b065  [error], please set linear array or circular array. If one of them
+            is set, the another must unset
+
+The GSC beamformer supports:
+  - Linear and circular microphone arrays (mutually exclusive)
+  - Configurable beam steering angles (beamforming_angle_num)
+  - FFT-based frequency-domain processing (frequency_bins)
+  - Microphone position and cosine_x arrays for geometry
+
+------------------------------------------------------------------------------
+1.5  AUDIO PROCESSING — NOISE SUPPRESSION (IMCRA)
+------------------------------------------------------------------------------
+IMCRA = Improved Minima Controlled Recursive Averaging
+(Standard noise power estimation algorithm for speech enhancement)
+
+0x0004b1c4  [ImcraStateInit Error] At least sizeof(ImcraState) is required (%d < %d)
+0x0004b210  [ImcraStateInit Error] bufsize[%d] < required size[%d]
+0x0004b248  [ImcraStateInit Error] Not enough buffer space
+0x0004b278  Imcra(Temp  )       Memory:%6.2fKB
+0x0004b29c  Imcra(Static)       Memory:%6.2fKB
+0x0004b2c0  Imcra(Total )       Memory:%6.2fKB
+
+------------------------------------------------------------------------------
+1.6  AUDIO PROCESSING — DENOISE MODES
+------------------------------------------------------------------------------
+Three distinct noise reduction modes:
+
+MODE 1: DOUBLE_MIC_DENOISE (dual-mic beamforming)
+  0x0004a794  [LVP_MODE_DENOISE][DOUBLE_MIC_DENOISE]Init gsc Beamforming
+  0x0004a74c  [LVP_MODE_DENOISE][DOUBLE_MIC_DENOISE]Change Init gsc Beamforming OK
+
+MODE 2: SINGLE_MIC_DENOISE (IMCRA noise estimation)
+  0x0004a794  [LVP_MODE_DENOISE][SINGLE_MIC_DENOISE]Init Imcra
+  0x0004a7f4  [LVP_MODE_DENOISE][SINGLE_MIC_DENOISE]Change Init Imcra
+
+MODE 3: ORIGIN_MIC (raw microphone passthrough)
+  0x0004a830  [LVP_MODE_DENOISE][ORIGIN_MIC]Change origin mic
+
+Lifecycle:
+  0x0004a890  [LVP_MODE_DENOISE]Init denoise mode
+  0x0004a5c4  [LVP_MODE_DENOISE]Exit denoise mode
+  0x0004a8f4  [LVP_MODE_DENOISE]No noise reduction
+  0x0004a648  bf_size = %d
+  0x0004a618  [LVP_MODE_DENOISE]BF malloc g_bf_mictmp failed
+  0x0004a658  [LVP_MODE_DENOISE]BF malloc g_bf_temp_buf failed
+  0x0004a68c  [LVP_MODE_DENOISE]ImcraStateInit Fail!
+  0x0004a6d4  [LVP_MODE_DENOISE]FrameDrcStateInit Fail!
+  0x0004a700  [LVP_MODE_DENOISE]Init DRC
+  0x0004a74c  [LVP_MODE_DENOISE]_beamformingInit Failed !!!
+  0x0004a7c8  [LVP_MODE_DENOISE]_imarcInit Failed !!!
+  0x0004a94c  [LVP_MODE_DENOISE]LvpAudioInInit Failed !!!
+  0x0004a94c  [LVP_MODE_DENOISE]LvpAudioInInit OK!!!
+  0x0004a974  [LVP_MODE_DENOISE]Denoise Init OK!!!
+  0x0004a864  [LVP_MODE_DENOISE]Need init Beamforming
+
+DRC (Dynamic Range Compression):
+  0x0004a6d4  [LVP_MODE_DENOISE]FrameDrcStateInit Fail!
+  0x0004a700  [LVP_MODE_DENOISE]Init DRC
+  0x0004a6b4  samplerate %d frame size %d
+
+------------------------------------------------------------------------------
+1.7  AUDIO PROCESSING — VOICE ACTIVITY DETECTION (VAD)
+------------------------------------------------------------------------------
+0x0004a1b8  [LVP_AUD]vad param 3 [%d]
+0x0004a1d4  [LVP_AUD]vad param 2 [%d]
+0x0004a1f0  [LVP_AUD]vad param 1 [%d]
+
+CLI Commands:
+  open vad reporting   — enable VAD event reporting
+  close vad reporting  — disable VAD event reporting
+
+VAD has 3 tunable parameters, reported at startup via [LVP_AUD] log tag.
+
+------------------------------------------------------------------------------
+1.8  AUDIO OUTPUT API (gx_audio_out_*)
+------------------------------------------------------------------------------
+Complete audio output abstraction layer — 20 API functions:
+
+Function Name                     Purpose
+------------------------------    ------------------------------------------
+gx_audio_out_alloc_playback       Allocate playback instance
+gx_audio_out_free                 Free playback instance
+gx_audio_out_config_buffer        Configure audio buffer
+gx_audio_out_config_pcm           Configure PCM parameters
+gx_audio_out_config_i2s           Configure I2S interface
+gx_audio_out_config_dac           Configure DAC output
+gx_audio_out_config_cb            Set audio callback
+gx_audio_out_push_frame           Push audio frame to output
+gx_audio_out_drain_frame          Drain (flush) audio frames
+gx_audio_out_set_db               Set volume in dB
+gx_audio_out_get_db               Get current volume in dB
+gx_audio_out_set_mute             Set mute state
+gx_audio_out_get_mute             Get mute state
+gx_audio_out_set_channel          Set audio channel config
+gx_audio_out_exit                 Shutdown audio output
+gx_audio_out_suspend              Suspend audio output
+gx_audio_out_resume               Resume audio output
+gx_audio_out_set_fixed_src        Set fixed sample rate converter
+gx_audio_out_get_sdc_src          Get SDC sample rate converter
+(20th function not named in strings)
+
+Supported sample rates:
+  0x00049a98  "please use audio with sampling rates of 8k, 16k, and 48k!"
+
+I2S output:
+  0x0004aa80  I2S out Master                 (I2S master mode)
+  0x0004aa58  MCLK:%dHz                      (master clock frequency)
+  0x0004aa64  LRCLK:%dHz                     (left-right clock frequency)
+  0x0004aa74  bits:%d                        (bit depth)
+
+Audio route:
+  0x00049b10  0 route play                   (route 0 = playback)
+
+Error handling:
+  0x00049cec  [AOUT ERROR] %s %d
+
+------------------------------------------------------------------------------
+1.9  LIFECYCLE / POWER MANAGEMENT
+------------------------------------------------------------------------------
+0x0004a54c  UartMessageAsyncResume
+0x0004a534  UartMessageAsyncSuspend
+0x0004a9b4  _LvpAppSuspend
+0x0004a9c4  _LvpAppResume
+0x0004a9e4  SampleAppSuspend
+0x0004a9d4  SampleAppResume
+0x0004a580  [IDLE]Exit IDLE mode
+0x0004a598  [IDLE]Init IDLE mode
+
+Power states: Active → IDLE → Suspend → Resume
+Each module has independent suspend/resume lifecycle.
+
+------------------------------------------------------------------------------
+1.10  BOOT / FIRMWARE MANAGEMENT
+------------------------------------------------------------------------------
+0x0004a4ec  boot from first firmware
+0x0004a508  boot from second firmware
+0x0004a524  Crc Error %d
+
+Dual-bank boot: Two firmware images (A/B) for safe update.
+BINH header protocol with SURG (Staging/Upgrade?) markers.
+
+Boot CLI (interactive shell at "boot> " prompt):
+  help         — print command description/usage
+  flash        — flash command (erase, eraseall)
+  serialdown   — burn flash from serial
+  reboot       — reset mcu through watchdog
+  init         — initialization
+  ping         — connectivity test
+  write        — write data
+  read         — read data
+  wdt          — watchdog test command
+  usbslave     — usbslave send
+
+------------------------------------------------------------------------------
+1.11  COMMUNICATION — UART / VOICE COMMUNICATION
+------------------------------------------------------------------------------
+0x0004abf0  [VC_MESSAGE]MASSAGE UART %d    (VC = Voice Communication)
+0x0004abd4  [VC_MESSAGE]NOTIFY PIN %d      (VC notification pin)
+0x0004aad0  _uartRecvCallback              (UART receive callback)
+0x0004aae4  _uartMsgInit                   (UART message init)
+0x00007f24  uart1                          (UART peripheral 1)
+0x00007f2c  uart0                          (UART peripheral 0)
+
+Received commands (from main SoC via UART):
+  0x0004aafc  receive misc test cmd
+  0x0004ab14  receive gsensor test cmd
+  0x0004ab30  receive version req
+  0x0004ab4c  receive switch wakeup model cmd
+
+CLI commands exposed to main SoC:
+  mic status       — microphone state query
+  gsensor status   — accelerometer state query
+  version          — firmware version query
+  switch bf cmd    — beamforming mode switch
+  switch wakeup cmd — wakeup mode switch
+
+------------------------------------------------------------------------------
+1.12  PERIPHERAL SUBSYSTEMS
+------------------------------------------------------------------------------
+
+SPI Flash:
+  Models supported: p25q21l, p25q40l, p25q80l, en25s20a, en25s40a, zb25wq80a
+  Vendors: PUYA, ESMT, ZBIT
+  Flash JEDEC = %#x, model = %s
+  OTP region: "read flash otp error"
+
+G-Sensor (Accelerometer):
+  gsensor_workstate =%d
+  gsensor status (CLI command)
+
+GPIO:
+  pin %d set error!
+  pin %d function conflict !
+  !!!pin set error! Please check Board Options!!!
+
+RTC:
+  RTC prescaler error!
+
+Watchdog:
+  watchdog level interrupt! %d
+  wdt test command
+
+DMA/FIFO:
+  Transmit FIFO empty/overflow interrupt
+  Receive FIFO underflow/overflow/full interrupt
+  xip receive fifo overflow interrupt (XIP = eXecute In Place)
+  multi-master contention interrupt
+
+------------------------------------------------------------------------------
+1.13  MEMORY MANAGEMENT
+------------------------------------------------------------------------------
+0x0004a0ac  mem init, heap begin address 0x%x, size %d
+0x0004a0d8  mem init, error begin address 0x%x, and end address 0x%x
+0x0004a114  malloc size %d, but align to %d
+0x0004a138  no memory
+0x0004a144  illegal memory
+0x0004a154  to free a bad data block:
+0x0004a170  mem: 0x%08x, used flag: %d, magic code: 0x%04x
+0x0004a1a0  realloc: out of memory
+0x000086b4  Too much pkg memory demanded: %d
+
+Custom heap allocator with magic code validation and alignment enforcement.
+
+------------------------------------------------------------------------------
+1.14  ERROR / EXCEPTION HANDLING
+------------------------------------------------------------------------------
+0x000082bc  CPU Exception : %u              (C-SKY exception handler)
+0x000082d0  vr%d: %08x                      (vector register dump)
+0x000082dc  r%d: %08x                       (general register dump)
+0x000082e8  epsr: %8x                       (C-SKY status register)
+0x000082f4  epc : %8x                       (C-SKY program counter)
+0x0004a4a8  [LVP]Error, The Stack May Used Up, Top[%#x],[Addr:%#x, Value:%#x]
+0x00009024  %s:%u: %s: Assertion `%s' failed.
+
+------------------------------------------------------------------------------
+1.15  CHIP IDENTIFIER
+------------------------------------------------------------------------------
+0x00014ff4  8003A                           (appears twice)
+0x000499a4  8003A                           (likely GX8003A variant ID)
+
+Note: The chip is marketed as GX8002B, but the firmware contains "8003A"
+strings, possibly indicating a silicon die variant or internal stepping.
+
+------------------------------------------------------------------------------
+1.16  CONFIGURATION MAGIC
+------------------------------------------------------------------------------
+0x000133e4  BUXX                            (appears 4 times)
+
+Likely a configuration block magic or command prefix. Appears in both
+segment 0 and segment 1, suggesting it is part of the protocol between
+the main SoC and the codec chip.
+
+================================================================================
+2. INFERRED MODULE / COMPONENT MAP
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    GX8002B Firmware Modules                      │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
+│  │   LVP Core   │  │   LVP_AUD    │  │  LVP_MODE_DENOISE   │  │
+│  │  (boot/init) │  │ (audio cfg)  │  │ (noise reduction)   │  │
+│  └──────┬───────┘  └──────┬───────┘  └──────────┬───────────┘  │
+│         │                 │                      │              │
+│  ┌──────┴───────┐  ┌──────┴───────┐  ┌──────────┴───────────┐  │
+│  │ Flash Driver │  │  VAD Engine  │  │   GSC Beamformer     │  │
+│  │ (SPI, OTP)   │  │ (3 params)   │  │ (dual-mic, FFT)     │  │
+│  └──────────────┘  └──────────────┘  └──────────┬───────────┘  │
+│                                                  │              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────┴───────────┐  │
+│  │  Boot CLI    │  │  NPU Engine  │  │   IMCRA Noise Est.   │  │
+│  │ ("boot> ")   │  │ (hey_even,   │  │ (single-mic mode)    │  │
+│  │              │  │  hi_even)    │  └──────────────────────┘  │
+│  └──────────────┘  └──────────────┘                             │
+│                                                                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
+│  │ Audio Output │  │  VC_MESSAGE  │  │     DRC Engine       │  │
+│  │ (gx_audio_   │  │ (UART comm)  │  │ (Dynamic Range)      │  │
+│  │  out_*)      │  │              │  └──────────────────────┘  │
+│  └──────────────┘  └──────────────┘                             │
+│                                                                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
+│  │  G-Sensor    │  │  IDLE Mode   │  │  SampleApp           │  │
+│  │ (accel.)     │  │ (power mgmt) │  │ (I2S output app)     │  │
+│  └──────────────┘  └──────────────┘  └──────────────────────┘  │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+
+Source tree (inferred from path strings):
+  lvp/
+    vma/
+      lavaliermic/
+        gsc.c                  ← Beamforming (Generalized Sidelobe Canceller)
+
+Log tag hierarchy:
+  [LVP]              — Core system / boot
+  [LVP_AUD]          — Audio subsystem (VAD parameters)
+  [LVP_MODE_DENOISE] — Denoise mode manager
+  [IDLE]             — IDLE power state
+  [AOUT ERROR]       — Audio output errors
+  [AB]               — Audio Board (dmic configuration)
+  [VC_MESSAGE]       — Voice Communication message handler
+  [I2S_OUT_APP]      — I2S output application
+
+================================================================================
+3. AUDIO PROCESSING PIPELINE RECONSTRUCTION
+================================================================================
+
+                    ┌─────────────────────────────────┐
+                    │         DMIC (Digital Mic)       │
+                    │  Multi-channel, PDM interface    │
+                    └────────────┬────────────────────┘
+                                 │
+                    ┌────────────▼────────────────────┐
+                    │    PGA (Programmable Gain Amp)   │
+                    │    Range: 0–48 dB               │
+                    │    Ain_gain configurable         │
+                    └────────────┬────────────────────┘
+                                 │
+                    ┌────────────▼────────────────────┐
+                    │     PDM → PCM Conversion        │
+                    │   PDM channel delay config      │
+                    │   Rates: 8k, 16k, 48k Hz        │
+                    └────────────┬────────────────────┘
+                                 │
+                 ┌───────────────┼───────────────────┐
+                 │               │                   │
+    ┌────────────▼──────┐ ┌──────▼──────┐ ┌─────────▼──────────┐
+    │  DOUBLE_MIC_DENOISE│ │SINGLE_MIC  │ │   ORIGIN_MIC       │
+    │                    │ │  _DENOISE   │ │   (raw passthru)   │
+    │  GSC Beamformer    │ │             │ │                    │
+    │  - Linear/Circular │ │  IMCRA      │ │  No processing     │
+    │    mic array        │ │  Noise est. │ │                    │
+    │  - FFT freq bins   │ │  (recurse   │ │                    │
+    │  - Beam angles     │ │   average)  │ │                    │
+    │  - cosine_x +      │ │             │ │                    │
+    │    mic_position    │ │             │ │                    │
+    └────────┬───────────┘ └──────┬──────┘ └─────────┬──────────┘
+             │                    │                   │
+             └───────────┬────────┘                   │
+                         │                            │
+            ┌────────────▼────────────────────────────┘
+            │
+            ▼
+    ┌───────────────────────┐
+    │   DRC (Dynamic Range  │
+    │   Compression)        │
+    │   FrameDrcStateInit   │
+    └───────────┬───────────┘
+                │
+    ┌───────────▼───────────┐
+    │   VAD (Voice Activity │
+    │   Detection)          │
+    │   3 tunable params    │
+    │   Reporting on/off    │
+    └───────────┬───────────┘
+                │
+    ┌───────────▼───────────┐
+    │   NPU Inference       │
+    │   Keyword Spotting:   │
+    │   - "hey_even"        │
+    │   - "hi_even"         │
+    └───────────┬───────────┘
+                │
+    ┌───────────▼───────────┐      ┌──────────────────────┐
+    │   Audio Output        │      │   UART → Apollo510b  │
+    │   gx_audio_out_*      │      │   TinyFrame protocol │
+    │   - PCM               │      │   VC_MESSAGE handler │
+    │   - I2S (Master)      │      │   Voice events       │
+    │   - DAC               │      │   Wake word events   │
+    │   - SRC (rate conv.)  │      │                      │
+    └───────────────────────┘      └──────────────────────┘
+
+Audio Processing Algorithms Identified:
+  1. GSC (Generalized Sidelobe Canceller) — Adaptive beamforming
+  2. IMCRA (Improved Minima Controlled Recursive Averaging) — Noise estimation
+  3. DRC (Dynamic Range Compression) — Dynamic range management
+  4. VAD (Voice Activity Detection) — Speech/silence classification
+  5. SRC (Sample Rate Conversion) — Rate matching (8k/16k/48k)
+  6. PGA (Programmable Gain Amplifier) — Microphone preamp
+
+NOT found (absent from strings):
+  - AEC (Acoustic Echo Cancellation)
+  - AGC (Automatic Gain Control) — only manual PGA gain
+  - ANR (Active Noise Reduction)
+  - LC3 codec — encoded on the main Apollo510b SoC, not the GX8002B itself
+
+================================================================================
+4. COMMUNICATION PROTOCOL DETAILS
+================================================================================
+
+4.1  GX8002B ↔ Apollo510b Communication
+----------------------------------------
+
+Transport: UART serial (uart0 / uart1)
+Protocol:  TinyFrame with CRC32
+
+Message format (from main firmware strings):
+  Pack message: cmd=0x%04X(NR=0x%02X, TYPE=0x%02X),
+                seq=0x%02X, flags=0x%02X, length=%d, crc32=0x%08X
+
+  NR   = message number / command class
+  TYPE = sub-command type
+  seq  = sequence counter
+  flags= message flags
+  CRC  = CRC32 (standard zlib, NOT CRC16)
+
+4.2  Host Commands (Apollo510b → GX8002B)
+-----------------------------------------
+From main firmware [codec.host] log strings:
+
+Command                  Description
+-----------------------  ------------------------------------------------
+SwitchWakeupMode         Switch wake word detection mode
+SwitchBFMode             Switch beamforming mode (dual/single/raw)
+ReadVersion              Query codec firmware version
+QueryMicState            Query microphone status
+SetMicGain               Set microphone PGA gain (0-48)
+I2SOutputCtrl            Control I2S audio output
+CodecMicDelay1Bit        Set microphone delay calibration
+DMICClose                Close digital microphone
+GetVoiceEvent            Retrieve voice/wake events from codec
+
+4.3  GX8002B Command Handler (internal CLI)
+-------------------------------------------
+Commands registered in the codec firmware itself:
+
+Command            Description
+-----------------  ------------------------------------------------
+mic status         Query microphone state
+gsensor status     Query accelerometer state
+version            Report firmware version
+switch bf cmd      Switch beamforming mode
+open vad reporting Enable VAD event reporting
+close vad reporting Disable VAD event reporting
+set pga gain       Set PGA gain (0-48 dB range)
+start Dmic cmd     Start digital microphone
+close Dmic cmd     Stop digital microphone
+pdm ch delay       Configure PDM channel delay
+i2s set state      Set I2S interface state
+switch wakeup cmd  Switch wakeup/sleep mode
+
+4.4  Voice Events
+-----------------
+[codec.host]voice event: cmd_id=0x%04X, event_id=0x%04X
+
+The codec sends voice events to the main SoC when:
+  - A wake word is detected ("hey_even" / "hi_even")
+  - VAD state changes (speech start/stop)
+  - Beamforming mode transitions
+
+4.5  DFU (Device Firmware Update) Protocol
+------------------------------------------
+From main firmware [codec.dfu] strings:
+
+Boot sequence:
+  1. reading boot header ...
+  2. start boot stage1 ... → send 512 bytes
+  3. download boot stage1 ... → wait for "wfb" prompt
+  4. boot stage1 ok !
+  5. start boot stage2 ... → send 12,288 bytes
+  6. download boot stage2 ... → wait for "OK" prompt
+  7. boot stage2 ok !
+  8. waiting "boot>" ... → wait for boot prompt
+  9. get "boot>" ! → boot complete
+
+BINH header fields:
+  +0x00: "BINH" magic
+  +0x04: 0x55AA55AA sync marker
+  +0x08: stage1_size (512 bytes)
+  +0x0C: stage2_baud_rate
+  +0x10: stage2_size (12,288 bytes)
+  +0x14: stage2_checksum (0x20000000)
+  +0x18: entry vector word
+  +0x1C: handler word
+
+DFU validation:
+  [codec.dfu]Boot firmware CRC32 verification failed
+  [codec.dfu]FW firmware CRC32 verification failed
+  [codec.dfu]Codec version is different from package version, starting upgrade
+  [codec.dfu]Codec version is same as package version, no upgrade needed
+
+================================================================================
+5. HARDWARE INTERFACE SUMMARY
+================================================================================
+
+5.1  Chip Architecture
+----------------------
+  SoC:          GX8002B (NationalChip)
+  Core:         C-SKY CK803S (32-bit RISC, not ARM)
+  NPU:          Yes — neural processing unit for keyword spotting
+  SRAM:         On-chip, frequency logged at boot
+  Flash:        External SPI NOR flash (6 models supported)
+  LDO:          On-chip core LDO with voltage trim
+
+5.2  Audio Interfaces
+---------------------
+  DMIC:         Multi-channel digital microphone (PDM input)
+  I2S:          Master mode output (MCLK, LRCLK, configurable bits)
+  DAC:          Analog audio output
+  PGA:          Programmable Gain Amplifier (0–48 dB)
+  PCM:          Raw PCM audio path
+  SRC:          Fixed and SDC sample rate converters
+
+5.3  Communication Interfaces
+------------------------------
+  UART0/UART1:  Two UART peripherals
+                UART used for TinyFrame communication with Apollo510b
+                VC_MESSAGE handler on dedicated UART + notify GPIO pin
+  SPI:          Flash interface (SPI master)
+  USB:          USB slave mode ("usbslave send" CLI command)
+
+5.4  Sensors
+------------
+  G-Sensor:     Accelerometer (workstate query, motion detection)
+                Used for activity-aware audio processing / wakeup
+
+5.5  Other Peripherals
+----------------------
+  GPIO:         Pin multiplexing with conflict detection
+  RTC:          Real-time clock with prescaler
+  Watchdog:     Hardware watchdog with level interrupts
+  DMA:          DMA controller for data transfers
+  XIP:          Execute-In-Place from flash
+
+5.6  Flash Models Supported
+---------------------------
+  p25q21l     — PUYA 2Mbit
+  p25q40l     — PUYA 4Mbit
+  p25q80l     — PUYA 8Mbit
+  en25s20a    — ESMT 2Mbit
+  en25s40a    — ESMT 4Mbit
+  zb25wq80a   — ZBIT 8Mbit
+
+================================================================================
+6. OPERATING SYSTEM / RUNTIME ENVIRONMENT
+================================================================================
+
+NO RTOS DETECTED.
+
+The GX8002B firmware does NOT appear to use FreeRTOS, Zephyr, or any named
+RTOS. Evidence:
+  - No RTOS task/thread creation strings
+  - No scheduler/semaphore/mutex strings
+  - No "task", "thread", "queue", "timer" strings in RTOS context
+  - Simple suspend/resume lifecycle per module
+  - Single "boot> " CLI loop (bare-metal shell)
+  - Custom heap allocator (not malloc from an RTOS)
+
+The firmware appears to be BARE-METAL with:
+  - Custom memory allocator (magic code validation)
+  - Module lifecycle management (Suspend/Resume per component)
+  - IDLE mode for power management
+  - Interrupt-driven I/O (FIFO interrupts, watchdog interrupts)
+
+This contrasts with the main Apollo510b SoC which runs FreeRTOS.
+
+================================================================================
+7. ENCRYPTION / SECURITY FEATURES
+================================================================================
+
+NONE DETECTED.
+
+  - No encryption algorithm strings (AES, ChaCha, SHA, etc.)
+  - No key management strings
+  - No secure boot strings
+  - CRC32 is used for integrity (not security)
+  - Flash OTP region exists but no encryption context
+  - BINH header has no signature verification
+
+The codec firmware is loaded in cleartext by the Apollo510b host.
+
+================================================================================
+8. CROSS-REFERENCE WITH MAIN FIRMWARE
+================================================================================
+
+8.1  Driver Source Path
+-----------------------
+D:\01_workspace\s200_ap510b_iar\driver\codec\drv_gx8002b.c
+D:\01_workspace\s200_ap510b_iar\platform\audio\service_codec_dfu.c
+
+8.2  Main Firmware Log Tags for Codec
+--------------------------------------
+[codec.host]  — Runtime communication with GX8002B
+[codec.dfu]   — Firmware update / boot loading
+[drv.audio.codec] — I2S interface initialization
+
+8.3  I2S Interface from Apollo510b
+----------------------------------
+[drv.audio.codec]gx8002b i2s init.
+[drv.audio.codec]gx8002b i2s deinit.
+[drv.audio.codec]gx8002b i2s already init.
+[drv.audio.codec]gx8002b i2s already deinit.
+
+The Apollo510b manages the I2S clock/data lines to the GX8002B. Audio data
+flows bidirectionally:
+  - GX8002B → Apollo510b: Processed mic audio (for LC3 encoding + BLE TX)
+  - Apollo510b → GX8002B: Audio playback (for DAC output to speaker)
+
+8.4  TinyFrame Protocol Details
+-------------------------------
+The TinyFrame serial protocol is used for BOTH:
+  1. Inter-eye communication (left ↔ right glasses, uart_sync.c)
+  2. Codec communication (Apollo510b ↔ GX8002B, drv_gx8002b.c)
+
+These are separate UART links with independent TinyFrame instances.
+
+Codec TinyFrame messages use CRC32 (unlike the BLE protocol which uses CRC16).
+
+8.5  Audio Pipeline in G2 Architecture Context
+-----------------------------------------------
+
+  Physical Mic → GX8002B DMIC → PGA → PDM→PCM → Beamforming/IMCRA →
+  DRC → VAD → NPU (wake word) → I2S → Apollo510b → LC3 Encode → BLE TX
+
+  BLE RX → Apollo510b → LC3 Decode → I2S → GX8002B → DAC → Speaker
+
+The GX8002B does NOT perform LC3 encoding/decoding — that is handled by the
+Apollo510b's audio service layer. The codec chip provides:
+  - Raw audio capture with hardware preprocessing
+  - Wake word detection (always-on, low-power NPU)
+  - Noise reduction and beamforming
+  - Audio output to speaker via DAC
+
+================================================================================
+9. SUMMARY OF KEY FINDINGS
+================================================================================
+
+1. ARCHITECTURE: Bare-metal C-SKY CK803S DSP with NPU, no RTOS
+2. WAKE WORDS: "hey_even" and "hi_even" hardcoded for on-device detection
+3. AUDIO PIPELINE: DMIC → PGA → PDM/PCM → GSC/IMCRA/Raw → DRC → VAD → NPU
+4. THREE DENOISE MODES: Dual-mic beamforming, single-mic IMCRA, raw passthrough
+5. COMMUNICATION: TinyFrame serial over UART to Apollo510b (CRC32)
+6. HOST API: 9+ commands from Apollo510b (wake mode, BF mode, mic gain, etc.)
+7. DUAL-BANK BOOT: A/B firmware images with BINH boot protocol
+8. VERSION: 0.0.2.0, built 2025-11-25, unchanged across all G2 FW versions
+9. NO LC3: LC3 encoding is on the Apollo510b, NOT the GX8002B
+10. NO SECURITY: No encryption, no secure boot, cleartext firmware loading
+11. BOARD ID: "grus_gx8002b_dev_1v" (Grus = constellation naming convention)
+12. CHIP VARIANT: "8003A" identifier found, possible silicon die stepping
+
+================================================================================
+END OF ANALYSIS
+================================================================================

@@ -1,0 +1,664 @@
+================================================================================
+G2 MAIN FIRMWARE (S200) — COMPLETE RTOS MAP
+================================================================================
+SoC: Ambiq Apollo510b (ARM Cortex-M55)
+RTOS: FreeRTOS with CMSIS-RTOS2 wrappers
+Firmware: ota_s200_firmware_ota / v2.0.7.16
+Source root: D:\01_workspace\s200_ap510b_iar\
+================================================================================
+
+==============================================================================
+1. THREAD MAP (18 threads + 8 worker pool = 26 total + FreeRTOS kernel tasks)
+==============================================================================
+
+CMSIS-RTOS2 osThreadNew wrapper: FUN_0044784e @ 0x0044784e
+  - Delegates to xTaskCreateStatic (FUN_00452aac) or xTaskCreate (FUN_00452b46)
+  - Default stack: 0x400 words (4096 bytes), default priority: 0x18 (24 = osPriorityNormal)
+  - osThreadAttr_t layout: [0]=name, [1]=attr_bits, [2]=cb_mem, [3]=cb_size,
+    [4]=stack_mem, [5]=stack_size, [6]=priority
+
+--- Thread #1: mainThread (FreeRTOS scheduler startup) ---
+  Entry:        FUN_00452f78 (vTaskStartScheduler equivalent)
+  Name:         "mainThread" (string @ 0x00302400)
+  Source:       platform bootstrap / main()
+  Priority:     System (kernel-created idle/timer tasks)
+  Description:  System boot entry. Logs startup reason, initializes all
+                subsystems, starts FreeRTOS scheduler. After scheduler starts,
+                becomes the thread_manager context.
+  Key strings:  "[mainThread]>>> SYSTEM BOOT START <<<",
+                "[mainThread]Software Version:[%s],Build time:[%s-%s]"
+  Created by:   FreeRTOS vTaskStartScheduler (xTaskCreateStatic @ 0x00452aac)
+
+--- Thread #2: thread_manager (task.manager) ---
+  Entry:        FUN_0048719c (thread_manager_main) @ 0x0048719c
+  Create func:  FUN_004873f4 (thread_manager_create) @ 0x004873f4
+  Source:       platform\threads\thread_manager.c
+  Description:  Central task orchestrator. Dispatches mode changes to all
+                subsystem threads. Receives task notifications via
+                osEventFlagsWait (0x800000 flag). Controls thread lifecycle
+                (start/stop/sync). All other threads notify the manager via
+                task_manager_notify_handler (FUN_00487460, param=task_id).
+  Key funcs:    thread_task_exit (FUN_00487054), task_manager_enter_mode
+                (FUN_00487238), task_manager_notify_handler (FUN_00487460),
+                task_manager_mode_handler (FUN_004874bc)
+  Sync:         thread_manager_sysstart_sync_end, thread sync via event flags
+  Key strings:  "[task.manager]thread sync exit failed:0x%x != 0x%x"
+
+--- Thread #3: fw_evt_loop (Event Loop) ---
+  Entry:        FUN_00457d4e (fw_evt_loop_task) — LAB_00457900_1
+  Init func:    FUN_00457760 (fw_evt_loop_init) @ 0x00457760
+  Source:       framework evtloop
+  Description:  Central event dispatch loop. Processes deferred events with
+                timer-based delayed execution. All subsystems push events
+                into this loop for asynchronous processing.
+  Resources:
+    - Message Queue: osMessageQueueNew(0xf, 8) — 15 slots, 8-byte messages
+    - Timer: osTimerNew(callback=0x457a29, type=0=oneshot)
+    - Event Flags: osEventFlagsNew for mutex
+    - Thread: osThreadNew(fw_evt_loop_task, attr from PTR_DAT_00457eb0)
+  Key strings:  "[evtloop][fw_evt_loop_task]app treat event invalid status:%d",
+                "[evtloop][fw_evt_loop_push]fw_evt_loop_thread_id is NULL",
+                "[evtloop][fw_evt_loop_timer_callback]..."
+
+--- Thread #4: display_thread (Display/UI Framework) ---
+  Entry:        FUN_00441920 (display_thread_impl) @ 0x00441920
+  Init func:    FUN_00460a64 (DISP_ResourceInit_and_ThreadInit) @ 0x00460a64
+  Source:       framework\sync\display_thread.c
+  Description:  Main UI thread. Runs LVGL rendering loop, processes display
+                events (app start/stop/input/compass/IMU). Manages foreground
+                and background application pages. Uses FreeRTOS xQueue for
+                display event dispatch.
+  Resources:
+    - Message Queue: osMessageQueueNew(0x96, 4) — 150 slots, 4-byte messages
+    - Thread: osThreadNew(display_thread_impl, attr from DAT_004614f8)
+      Stack size from attr copied from DAT_004614f8 (0x24-byte attr struct)
+    - Semaphore: osSemaphoreNew(0xffff, 0) — display sync semaphore
+    - Timer: osTimerNew(callback=DAT_004615d8, periodic, period=100ms)
+    - Queue: dispThread_xQueue1 (FreeRTOS xQueueCreate)
+  Key strings:  "[display_thread]display thread switch display close",
+                "[display_thread]No callback found for applicationID: %d",
+                "[display_thread]jump to the corresponding page, index = %d"
+  Key funcs:    display_page_dispatch_command..display_queue_close_page (0x0044164a-0x00443358),
+                DISP_TimerInit (FUN_00460bc8)
+
+--- Thread #5: task.displaydrvmgr (Display Driver Manager) ---
+  Entry:        FUN_0046d9e4 (task_displaydrvmgr_main_loop) @ 0x0046d9e4
+  Init func:    FUN_0046d6f2 (device_mgr_thread_init) @ 0x0046d6f2
+  Source:       platform\device_mgr (display hardware layer)
+  Description:  Low-level display hardware driver. Manages JBD4010 display
+                power up/down, screen clear, brightness control, reflash
+                commands. Async command queue for non-blocking HW operations.
+  Resources:
+    - Thread: osThreadNew(0x46d9e5 entry, attr from DAT_0046e04c)
+    - Message Queue: osMessageQueueNew(0x60, 0x24) — 96 slots, 36-byte messages
+    - Timer: osTimerNew(callback=LAB_0046d8f4_1, periodic, period=2000ms)
+  Key strings:  "[task.displaydrvmgr]Error - Failed to send ASYNC_DISPLAY_DEVICE_*",
+                "[task.displaydrvmgr]unknow async command type = %d",
+                "[task.displaydrvmgr]hardware is already initialized"
+  Key funcs:    device_mgr_timer_init (FUN_0046d870)
+
+--- Thread #6: thread_ble_msgtx (BLE Message TX) ---
+  Entry:        FUN_0046ef80 (thread_ble_msgtx_entry) @ 0x0046ef80
+  Init func:    FUN_0046edba (thread_ble_msgtx_resource_init) @ 0x0046edba
+  Source:       platform\threads\thread_ble_msgtx.c
+  Description:  BLE transmit queue processor. Dequeues protobuf-encoded
+                messages and sends them over EUS/EFS/ESS BLE characteristics.
+                Handles pipe-based routing (BLE_PIPE_ESS).
+  Resources:
+    - Message Queue: osMessageQueueNew(0x96, 4) — 150 slots, 4-byte messages
+    - On fatal: enters infinite loop (critical path — no fallback)
+  Key strings:  "[ble.msgtx]ESS queue full, dropping new message",
+                "[ble.msgtx]Thread_BleMsgtxQueueClear: cleared %d messages",
+                "[ble.msgtx]ESS send skipped: semaphore not available"
+  Key funcs:    ble_msgtx_send_wrapper (FUN_0046f5c4),
+                Thread_MsgEfsTxByBle (FUN_0046f856),
+                Thread_MsgEfsNotifyByBle (FUN_0046f8cc)
+
+--- Thread #7: thread_ble_msgrx (BLE Message RX) ---
+  Entry:        (loop using osMessageQueueGet on its queue)
+  Init func:    FUN_0049b5be (thread_ble_msgrx_resource_init) @ 0x0049b5be
+  Source:       platform\threads\thread_ble_msgrx.c
+  Description:  BLE receive queue processor. Dequeues incoming BLE messages
+                and dispatches to protocol handlers via ble_comm_dispatch.
+  Resources:
+    - Message Queue: osMessageQueueNew(0x96, 4) — 150 slots, 4-byte messages
+    - On fatal: enters infinite loop
+  Key strings:  "[ble.msgrx]Thread_BleMsgrxQueueClear: cleared %d messages",
+                "[ble.msgrx]Thread_MsgRxFromBle alloc length = %d fail"
+  Key funcs:    thread_ble_msgrx_exit (FUN_0049b748),
+                ble_msgrx_process (FUN_0049b79e),
+                ble_msgrx_enqueue (FUN_0049b8b0)
+
+--- Thread #8: task.ble.wsf (BLE Wireless Stack Framework) ---
+  Entry:        PTR_LAB_004596d0_1 (via FUN_0045977a)
+  Init func:    FUN_004596f4 (task_ble_wsf_semaphore_init) @ 0x004596f4
+  Create func:  FUN_0045977a (thread_ble_wsf_create) @ 0x0045977a
+  Source:       platform\threads\thread_ble_wsf.c
+  Description:  Cordio BLE stack event handler. Processes HCI events,
+                manages BLE connections, handles WSF (Wireless Software
+                Foundation) message queue. Semaphore-gated TX completion.
+  Resources:
+    - Semaphore: osSemaphoreNew(max=1, initial=1) — TX completion gate
+    - Thread: osThreadNew(entry, attr from PTR_DAT_00459978)
+    - On fatal: enters infinite loop (both semaphore and thread creation)
+  Key strings:  "[task.ble.wsf]BLE WSF semaphore initialized: max_count=%d",
+                "[task.ble.wsf]tx_complete_notify: semaphore already at max count",
+                "[task.ble.wsf]wait_tx_ready success, time = %d ms"
+  Key funcs:    task_ble_wsf_handler_1 (FUN_004597e8),
+                task_ble_wsf_handler_2 (FUN_004598ba),
+                WsfBufAlloc (FUN_004599a8)
+
+--- Thread #9: task.ble_production (BLE Production/Test) ---
+  Entry:        FUN_004574ce (task_ble_production_handler) @ 0x004574ce
+  Init func:    FUN_00456e9a (thread_ble_production_resource_init) @ 0x00456e9a
+  Source:       platform\threads\thread_ble_production.c
+  Description:  Production test mode BLE handler. Processes AT commands for
+                factory testing. CRC and header validation on messages.
+  Resources:
+    - Message Queue: osMessageQueueNew(3, 4) — 3 slots, 4-byte messages
+    - Static Queue: osMessageQueueNew_static(3, 0x104) — 3 slots, 260-byte messages
+    - On fatal: enters infinite loop
+  Key strings:  "[task.ble_production]ble_production_task_msg_handler p_msg",
+                "[task.ble_production]ble production msg crc check failed",
+                "[task.ble_production]g_thread_ble_production queue or h_poolIDnull"
+  Key funcs:    ble_production_msg_handler (FUN_00456f3e),
+                ble_production_msg_head_check (FUN_004573f2),
+                ble_production_msg_crc_check (FUN_0045744c)
+
+--- Thread #10: task.evenai (Even AI Processing) ---
+  Entry:        (loop in task context, dispatches via task_evenai_notify_handler)
+  Init func:    FUN_004eda8a (task_evenai_resource_init) @ 0x004eda8a
+  Source:       platform\threads\thread_evenai.c
+  Description:  Even AI message processor. Handles local AI data, EvenHub
+                messages. Separate thread from BLE for AI-specific processing.
+  Resources:
+    - Message Queue: osMessageQueueNew(0x32, 4) — 50 slots, 4-byte messages
+    - Event Flags: osEventFlagsNew(0) — for synchronization
+    - On fatal: enters infinite loop (both queue and event flags)
+  Key strings:  "[task.evenai]Processing local EvenAI message, len=%d",
+                "Thread evenai alloc length = %d fail",
+                "Thread_SendEvtToEvenAITask = 0x%x"
+  Key funcs:    task_evenai_notify_handler (FUN_004edc50),
+                task_evenai_thread_exit (FUN_004edcac),
+                EvenAI_local_data_handler (FUN_004edf34)
+
+--- Thread #11: task.notif (Notification Processing) ---
+  Entry:        (loop in task context)
+  Init func:    FUN_0052c112 (task_notif_resource_init) @ 0x0052c112
+  Source:       platform\threads\thread_notification.c
+  Description:  Notification message handler. Processes whitelist updates,
+                ANCC (Apple Notification Center) events, notification display.
+  Resources:
+    - Message Queue: osMessageQueueNew(0x32, 4) — 50 slots, 4-byte messages
+    - On fatal: enters infinite loop
+  Key strings:  "[task.notif][WHITELIST] Received whitelist update event",
+                "Thread_SendEvtToNotifTask = 0x%x"
+  Key funcs:    task_notif_notify_handler (FUN_0052c1fc),
+                task_notif_thread_exit (FUN_0052c292),
+                task_notif_handler_ext (FUN_0052c326)
+
+--- Thread #12: task.ring (Ring BLE Handler) ---
+  Entry:        (loop in task context)
+  Init func:    FUN_004bd9e6 (task_ring_resource_init) @ 0x004bd9e6
+  Source:       platform\threads\thread_ring.c
+  Description:  R1 Ring BLE communication handler. Manages Ring connection,
+                touch events, gesture relay, phone connection state.
+  Resources:
+    - Message Queue: osMessageQueueNew(3, 4) — 3 slots, 4-byte messages
+    - On fatal: enters infinite loop
+  Key strings:  "[task.ring][Ring Connection] Touch enabled, phone already connected",
+                "[task.ring][Ring Connection] Touch enabled, restarting advertising"
+  Key funcs:    task_ring_msg_handler (FUN_004bda68),
+                task_ring_rx (FUN_004bdcd6),
+                task_ring_process (FUN_004bdfa2),
+                task_ring_event (FUN_004be03a)
+
+--- Thread #13: thread.audio (Audio/Codec) ---
+  Entry:        FUN_00524e6a (thread_audio_handler) @ 0x00524e6a
+  Init func:    (inline in thread_audio_handler — self-initializes)
+  Source:       platform\threads\thread_audio.c
+  Description:  Audio codec handler. Manages GX8002B codec I2S/DMA, microphone
+                input, voice events. Processes peer sync messages for
+                inter-eye audio coordination.
+  Resources:
+    - Message Queue: osMessageQueueNew(0x1e, 0xc) — 30 slots, 12-byte messages
+      (created in FUN_004fd80e, shared pattern with thread.input init)
+    - Event Flags: for wakeup dispatch
+  Key strings:  "[thread.audio]codec int gpio level is not low",
+                "[thread.audio]processing peer sync msg in audio thread",
+                "[thread.audio]codec is not power on, no need to recv voice event",
+                "[thread.audio]input event check failed"
+  Key funcs:    thread_audio_init (FUN_00524de0),
+                thread_audio_process (FUN_00524f22)
+
+--- Thread #14: thread.input (Input/Touch/IMU) ---
+  Entry:        FUN_004fd8f0 (thread_input_handler) @ 0x004fd8f0
+  Init func:    FUN_004fd80e (thread_input_init) @ 0x004fd80e
+  Source:       platform\threads\thread_input.c
+  Description:  Input event processor. Handles CY8C4046FNI touch controller,
+                ICM-45608 IMU accelerometer/gyro, proximity sensor, box
+                detect (in-case detection). Event-driven dispatch loop.
+  Resources:
+    - Message Queue: osMessageQueueNew(0x1e, 0xc) — 30 slots, 12-byte messages
+    - Event Flags: osEventFlagsWait (0xffffff mask, infinite timeout)
+    - Calls task_manager_notify_handler(5) and task_manager_mode_handler(5)
+  Key strings:  "[thread.input]Box detect in case, reset touch and save proximity baseline",
+                "sinput: inject input event to display thread"
+  Key funcs:    thread_input_dispatch (FUN_004fd966),
+                thread_input_event (FUN_004fdb2c)
+
+--- Thread #15: codec_i2s_thread (Codec I2S DMA) ---
+  Entry:        DAT_004d07e0 (function pointer)
+  Init func:    FUN_004d0770 (codec_i2s_thread_create) @ 0x004d0770
+  Source:       framework\sync\codec related
+  Description:  I2S audio DMA handler for GX8002B codec. Manages DMA
+                transfers for audio streaming. Creates I2S buffer (0x800).
+  Resources:
+    - Thread: osThreadNew(DAT_004d07e0, attr from DAT_004d07dc)
+    - I2S buffer: 0x800 bytes allocated via FUN_0051d360
+    - On fatal: enters infinite loop
+  Key strings:  "[thread.audio]codec i2s dma int timeout, diff = %dms"
+
+--- Thread #16: uart_sync_thread (Inter-Eye UART Sync) ---
+  Entry:        DAT_004d0b24 (function pointer)
+  Init func:    FUN_004d0a6c (codec_uart_sync_thread_create) @ 0x004d0a6c
+  Source:       framework\sync\uart_sync.c
+  Description:  TinyFrame inter-eye UART synchronization. Left=Master,
+                Right=Slave. Handles display sync, audio sync, input event
+                forwarding between left and right glasses.
+  Resources:
+    - Thread: osThreadNew(DAT_004d0b24, attr from DAT_004d0b20)
+  Key strings:  "uart_sync.c" (source path confirmed)
+
+--- Thread #17: elog_async_handler_thread (Log Writer) ---
+  Entry:        DAT_004437c0 (function pointer)
+  Init func:    FUN_004435c8 (elog_async_thread_init) @ 0x004435c8
+  Source:       EasyLogger async backend
+  Description:  Asynchronous log file writer. Buffers log messages and writes
+                them to LittleFS flash storage in background. Allocates
+                0xa000 (40KB) buffer.
+  Resources:
+    - Message Queue: osMessageQueueNew(0x60, 0xc) — 96 slots, 12-byte messages
+    - Event Flags: osEventFlagsNew(0) — for flush notification
+    - Thread: osThreadNew(DAT_004437c0, attr from DAT_004437bc 0x24-byte struct)
+    - Flash buffer: 0xa000 (40960) bytes
+  Key strings:  "elog_async_handler_thread" (name @ 0x002e5560),
+                "elog_async_handler_thread_handler start",
+                "Failed to create elog_async_handler_thread EventFlags"
+
+--- Thread #18: sync_schedule_mgr (Schedule Manager) ---
+  Entry:        (from sync.module.framework)
+  Init func:    Part of sync_module_framework initialization
+  Source:       framework\sync\ (sync.module.framework)
+  Description:  Schedule/display page manager coordinator. Routes page
+                manager startup/close/reflash commands. Coordinates display
+                content sync between schedule data and display thread.
+  Resources:
+    - Message Queue: (created during init)
+    - Thread: osThreadNew
+  Key strings:  "sync_schedule_mgr" (name @ 0x002fb4ac),
+                "[sync.module.framework]create schedule manager thread failed",
+                "[sync.module.framework]schedule manager processing data done",
+                "sync timeout detection task initialized successfully"
+
+--- Worker Thread Pool (8 threads) ---
+  Entry:        DAT_004a918c (worker function, common for all)
+  Init func:    FUN_004a8e5e (init_thread_pool) @ 0x004a8e5e
+  Source:       framework\sync\thread_pool.c
+  Count:        8 worker threads
+  Stack:        0x1000 (4096) bytes each
+  CB size:      0x70 (112) bytes each
+  Description:  General-purpose worker thread pool for async page rendering,
+                protobuf processing, and display content generation. Tasks
+                submitted via submit_work() with application ID routing.
+  Resources:
+    - Event Flags: osEventFlagsNew(0) — pool-level sync
+    - Message Queue: osMessageQueueNew(0x96, 0x14) — 150 slots, 20-byte messages
+    - 8x Thread: osThreadNew(worker, attr with name "worker_%d")
+    - Names generated via osThreadAttr_sprintf_name (FUN_00449be8)
+  Key strings:  "[thread_pool]Thread pool initialized successfully with %d threads",
+                "[thread_pool]submit_work: submitting task for AppID %d",
+                "[thread_pool]submit_work: task submitted successfully",
+                "worker_thread app ID: %d running."
+
+--- FreeRTOS Kernel Tasks (implicit) ---
+  IDLE task:    Created by FreeRTOS scheduler (xTaskCreateStatic)
+  Timer Svc:    FreeRTOS software timer service task (if configUSE_TIMERS=1)
+  Note:         These are created automatically by FreeRTOS kernel startup
+
+
+==============================================================================
+2. TIMER MAP (Software Timers via CMSIS-RTOS2 osTimerNew)
+==============================================================================
+
+osTimerNew wrapper: FUN_00447b02 @ 0x00447b02
+  - param_1: callback function, param_2: type (0=oneshot, 1=periodic)
+  - osTimerStart (FUN_00447bea), osTimerStop, osTimerDelete (FUN_00477b44)
+
+Timer #1: fw_evt_loop_timer
+  Callback:     0x457a29 (fw event loop delayed event processor)
+  Type:         Oneshot (param_2=0)
+  Init:         FUN_00457760 (fw_evt_loop_init), line 32521
+  Purpose:      Delayed event execution in event loop
+  Strings:      "[evtloop][fw_evt_loop_init]osTimerNew, failed",
+                "[evtloop][fw_evt_loop_timer_callback]..."
+
+Timer #2: display_device_timer (DISP_TimerInit)
+  Callback:     DAT_004615d8 (display sync callback)
+  Type:         Periodic (param_2=1)
+  Period:       100ms (started with osTimerStart(*timer, 100))
+  Init:         FUN_00460bc8 (DISP_TimerInit), line 38563
+  Purpose:      Display synchronization and watchdog for display thread
+  Strings:      "[task.displaydrvmgr]display_device_timer_id create failed"
+
+Timer #3: device_mgr_timer
+  Callback:     LAB_0046d8f4_1 (device manager periodic callback)
+  Type:         Periodic (param_2=1)
+  Period:       2000ms (started with osTimerStart(*timer, 2000))
+  Init:         FUN_0046d870 (device_mgr_timer_init), line 47421
+  Purpose:      Periodic device status polling (battery, sensors)
+  Strings:      "[DEV_ResourceInit]osTimerNew success" / "osTimerNew failed"
+
+Timer #4: npmx_timer
+  Callback:     DAT_004d8080 (nPM1300 PMIC timer callback)
+  Type:         Oneshot (param_2=0)
+  Init:         line 136577 (in npmx_driver_init context)
+  Purpose:      nPM1300 PMIC watchdog kick / power management timing
+  Strings:      "[npmx_driver]ERROR:kick npmx watchdog task_trigger=%d"
+  Handler:      npmx_timer_handler (FUN_004d8170)
+
+Timer #5: sensor_hub_timer
+  Callback:     (in sensor_hub init context)
+  Init:         Part of HUB_ResourceInit
+  Purpose:      Sensor polling (IMU, ALS) periodic timer
+  Strings:      "[sensor_hub][HUB_ResourceInit]osTimerNew success" / "failed"
+
+Timer #6: buzzer_pwm_timer
+  Callback:     buzzer_pwm_timer_handler (FUN_004d7d70)
+  Init:         drv_buzzer_pwm_gpio_init (FUN_004d7e54)
+  Purpose:      PWM waveform generation for buzzer tones
+  Strings:      "[drv.buzzer][buzzerPwmGpioInit]osTimerNew failed"
+
+LVGL Timer System:
+  lv_timer_handler (FUN_0046bd30) — LVGL's internal timer tick processor
+  lv_timer_create (FUN_0046be52) — creates LVGL software timers
+  Note: LVGL has its own timer system separate from FreeRTOS timers
+
+Application-Level Timers (via LVGL or FreeRTOS):
+  - conversate_timer_auto_extend (FUN_0059458e) — conversate session extension
+  - conversate_timer_ctrl (FUN_0058882c) — conversate flow control
+  - teleprompt_timer_auto_scroll (FUN_0056b018) — teleprompter auto-scroll
+  - teleprompt_timer_countdown (FUN_0056b0d8) — teleprompter countdown
+  - even_ai_timer_common (FUN_004ee070) — EvenAI heartbeat/timeout
+  - message_notify_timer functions — notification display timing
+  - onboarding_news_timer_callback (FUN_004f7c7c) — news scroll timing
+  - dashboard_timer_callback (FUN_004475f2) — dashboard auto-close
+  - wsf_timer_handler (FUN_00486ccc) — BLE Cordio WSF timer processing
+  - ble_timer_handler (FUN_005152a8) — BLE connection timers
+
+
+==============================================================================
+3. QUEUE / SEMAPHORE / MUTEX / EVENT FLAGS MAP
+==============================================================================
+
+--- Message Queues ---
+
+osMessageQueueNew wrapper: FUN_00448182 @ 0x00448182
+  - param_1: msg_count, param_2: msg_size, param_3: attr (or 0)
+osMessageQueueNew_static: FUN_00448364 @ 0x00448364
+
+Queue                        Count  Size  Owner
+─────────────────────────────────────────────────────────────────
+fw_evt_loop_queue            15     8     fw_evt_loop
+display_thread_queue         150    4     display_thread
+displaydrvmgr_queue          96     36    task.displaydrvmgr
+ble_msgtx_queue              150    4     thread_ble_msgtx
+ble_msgrx_queue              150    4     thread_ble_msgrx
+ble_production_queue         3      4     task.ble_production
+ble_production_static_queue  3      260   task.ble_production
+evenai_queue                 50     4     task.evenai
+notif_queue                  50     4     task.notif
+ring_queue                   3      4     task.ring
+audio_queue                  30     12    thread.audio
+input_queue                  30     12    thread.input
+elog_async_queue             96     12    elog_async_handler
+thread_pool_queue            150    20    thread_pool (shared)
+device_mgr_queue             (in DEV_ResourceInit context)
+sensor_hub_queue             (in HUB_ResourceInit context)
+
+--- Semaphores ---
+
+osSemaphoreNew wrapper: FUN_00447fea @ 0x00447fea
+  - param_1: max_count, param_2: initial_count
+
+Semaphore                   Max    Initial  Owner
+─────────────────────────────────────────────────────
+ble_wsf_tx_semaphore        1      1        task.ble.wsf
+display_sync_semaphore      65535  0        display_thread (DISP_TimerInit)
+(xSemaphoreCreateMutex)     (several, see "xSemaphoreCreateMutex failed!" string)
+
+--- Mutexes (osMutexNew / xSemaphoreCreateMutex) ---
+
+Mutex                          Owner               Purpose
+────────────────────────────────────────────────────────────────────
+fw_evt_loop_mutex_id           fw_evt_loop         Event loop lock
+thread_pool_mutex              thread_pool         Worker pool sync
+conversate_action_mutex        conversate          Priority inherit
+teleprompt_action_mutex        teleprompt          Priority inherit
+translate_action_mutex         translate           Priority inherit
+TLSF_mutex                     rtos_mem            Heap allocation lock
+display_buffer_lock            lv_ambiq_display    Display buffer sync
+
+--- Event Flags (osEventFlagsNew) ---
+
+osEventFlagsNew wrapper: FUN_00447e6c @ 0x00447e6c
+
+EventFlags                    Owner                Flags Used
+──────────────────────────────────────────────────────────────
+fw_evt_loop_mutex_flags       fw_evt_loop          Mutex emulation
+evenai_event_flags            task.evenai          Sync/notify
+elog_async_event_flags        elog_async           Flush trigger
+thread_pool_event_flags       thread_pool          Pool sync
+thread_input_event_flags      thread.input         0xffffff wait mask
+task.manager notification     task.manager         0x800000 flag
+
+
+==============================================================================
+4. INTERRUPT HANDLER TABLE
+==============================================================================
+
+NVIC_SetPriority: FUN_00479dc8 @ 0x00479dc8
+Total NVIC_SetPriority calls: 210 (many are paired enable/configure)
+
+Apollo510b IRQ# → Peripheral mapping (from NVIC_SetPriority calls):
+Note: Apollo510b has different IRQ numbering than standard Cortex-M.
+IRQ numbers below are from the first parameter of NVIC_SetPriority calls.
+
+IRQ#  Hex    Peripheral (Apollo510b)        Context
+────────────────────────────────────────────────────────────────────
+0x05  5      IOM0 (I2C/SPI Master 0)        BLE EM9305 HCI
+0x06  6      IOM1 (I2C/SPI Master 1)        Touch/Sensor I2C
+0x07  7      IOM2 (I2C/SPI Master 2)        PMIC I2C
+0x08  8      IOM3 (I2C/SPI Master 3)        IMU SPI
+0x09  9      IOM4 (I2C/SPI Master 4)        Codec I2C
+0x0A  10     IOM5 (I2C/SPI Master 5)        ALS/Prox
+0x0B  11     IOM0 DMA complete              BLE HCI DMA
+0x0D  13     IOM2 DMA complete              PMIC DMA
+0x0F  15     EM9305 BLE Radio IRQ           BLE interrupt config
+0x10  16     IOM3 DMA complete              IMU DMA
+0x11  17     IOM5 DMA complete              Codec DMA
+0x13  19     GPIO0                          Touch/wakeup
+0x16  22     UART0 (Debug/AT console)       Serial console
+0x17  23     UART1 (Inter-eye)              UART sync
+0x18  24     UART2                          Box UART
+0x19  25     MSPI0 CMD                      Flash access
+0x1A  26     MSPI0 FIFO                     Flash DMA
+0x1B  27     MSPI0 DMA complete             Flash done
+0x1C  28     MSPI1                          PSRAM/Display
+0x1F  31     MSPI2 CMD                      Display MSPI
+0x20  32     MSPI2 FIFO                     Display DMA
+0x21  33     MSPI2 DMA complete             Display done
+0x22  34     I2S0                           Audio I2S
+0x23  35     I2S0 DMA                       Audio DMA
+0x24  36     I2S1                           Codec I2S
+0x25  37     ADC                            Battery/sensor ADC
+0x26  38     PDM (Pulse Density Mod)        Microphone
+0x27  39     STIMER                         System timer
+0x28  40     TIMER0                         General timer
+0x29  41     TIMER1                         PWM/Buzzer
+0x2A  42     TIMER2                         Misc timer
+0x2B  43     TIMER3                         Misc timer
+0x2C  44     TIMER4                         Misc timer
+0x2D  45     TIMER5                         Misc timer
+0x2F  47     GPU/NemaGFX                    Graphics accelerator
+0x30  48     GPU DMA                        GPU memory
+0x31  49     GPU Complete                   GPU render done
+0x32  50     MSPI1 DMA                      PSRAM DMA
+0x33  51     IOM4 DMA                       Codec DMA alt
+0x3D  61     Software IRQ 0                 Inter-thread
+0x3E  62     Software IRQ 1                 Inter-thread
+0x3F  63     Software IRQ 2                 Inter-thread
+0x40  64     Software IRQ 3                 Inter-thread
+0x41-0x49    Additional GPIO/Timer IRQs     Various
+0x5D  93     DSP/AUDADC                     Audio ADC
+0x5F  95     DSP related                    DSP
+0x60-0x68    Extended peripherals            Various
+0x75  117    Crypto/Security                Secure operations
+0x80  128    Extended IRQ block             Extended
+0x86-0x95    System management IRQs         Power/Clock/WDT
+0x9C  156    Conversate FSM init            Special config
+
+Confirmed ISR Functions:
+  am_mspi0_isr (string @ 0x002fd160) — MSPI0 interrupt handler
+  mspi_dma_irq_handler_1-4 (FUN_004babd6-FUN_004bacf0) — MSPI DMA handlers
+  ble_interrupt_config (FUN_004bc330) — BLE EM9305 interrupt configuration
+  ble_interrupt_priority_set (FUN_004bbc60) — BLE priority management
+  HardFault handler — "[CRASH] hardfault.txt size exceeded 100KB"
+
+ARM Cortex-M55 System Interrupts:
+  PendSV — FreeRTOS context switch (xPortPendSVHandler)
+  SysTick — FreeRTOS tick (xPortSysTickHandler)
+  SVCall — FreeRTOS supervisor call
+  Note: These are implicitly configured by FreeRTOS port layer
+
+
+==============================================================================
+5. MEMORY LAYOUT
+==============================================================================
+
+--- Firmware Memory Map ---
+  Bootloader:       0x00410000 (BL entry)
+  Main firmware:    0x00438000 (VTOR, main entry)
+  String data:      0x001F0000 - 0x00310000 (from rizin_strings)
+  XIP region:       0x80000000 - 0x81FFFFFF (external flash)
+
+--- RTOS Memory ---
+  Heap:             TLSF allocator (not FreeRTOS heap4/heap5)
+                    Source: third_party\tlsf\tlsf_init.c, tlsf.c
+                    Init: tlsf_adapter_init, tlsf_create, tlsf_add_pool
+                    Protected by TLSF mutex
+                    rtos_mem_alloc (FUN_0046e7e2), rtos_mem_free (FUN_0046e826)
+                    CLI command: "free" — display TLSF memory usage
+
+  LVGL memory pool: Separate from RTOS heap (lv_mem_pool_init)
+
+--- Thread Stack Sizes (from osThreadNew calls) ---
+  Thread                    Stack (bytes)  Source
+  ──────────────────────────────────────────────────
+  Default (CMSIS-RTOS2)     4096           0x400 words default
+  worker_thread (x8)        4096           0x1000 bytes (explicit)
+  codec_i2s_thread          (from attr)    Likely 4096+
+  display_thread            (from attr)    Likely 8192+ (UI heavy)
+  ble_wsf                   (from attr)    Likely 4096+
+  elog_async_handler         (from attr)   Likely 2048-4096
+
+  Note: Most threads use the CMSIS-RTOS2 default of 0x400 words = 4096 bytes
+  unless an explicit osThreadAttr_t is passed. Attr structs are stored in
+  const data sections (DAT_* references) — exact sizes require data section
+  analysis.
+
+--- Key Buffer Allocations ---
+  elog_async flash buffer:  40960 bytes (0xa000)
+  codec_i2s buffer:         2048 bytes (0x800)
+  ble_production static q:  3 * 260 = 780 bytes
+  thread_pool worker stacks: 8 * 4096 = 32768 bytes
+  display queue:            150 * 4 = 600 bytes (message storage)
+  ble tx/rx queues:         150 * 4 = 600 bytes each
+
+--- Static vs Dynamic Allocation ---
+  Static: FreeRTOS IDLE task (xTaskCreateStatic), ble_production static queue
+  Dynamic: Most threads use dynamic allocation via xTaskCreate through osThreadNew
+  TLSF: Primary heap allocator (replaces FreeRTOS pvPortMalloc)
+
+
+==============================================================================
+6. THREAD INTERACTION DIAGRAM
+==============================================================================
+
+  ┌─────────────┐     notify      ┌───────────────┐
+  │ thread.input ├───────────────→│ task.manager   │
+  │ (touch/IMU) │                 │ (orchestrator) │
+  └──────┬──────┘     ┌──────────→│                │←──── all threads
+         │            │           └───────┬────────┘      report via
+         │ events     │                   │ mode change   notify_handler
+         ▼            │                   ▼
+  ┌──────────────┐    │           ┌───────────────┐
+  │display_thread│    │           │ fw_evt_loop   │
+  │ (LVGL UI)   │◄───┘           │ (event queue) │
+  └──────┬───────┘                └───────────────┘
+         │ async HW cmd
+         ▼
+  ┌──────────────────┐
+  │task.displaydrvmgr│   ┌─────────────────┐
+  │ (JBD4010 driver) │   │ thread.audio    │
+  └──────────────────┘   │ (GX8002B codec) │
+                         └────────┬────────┘
+  ┌──────────────┐                │ I2S/DMA
+  │task.ble.wsf  │                ▼
+  │(Cordio BLE)  │◄──── ┌──────────────────┐
+  └──────┬───────┘      │ codec_i2s_thread │
+         │              └──────────────────┘
+         │ HCI events
+         ▼              ┌──────────────────┐
+  ┌──────────────┐      │uart_sync_thread  │
+  │ble_msgtx     │      │(L↔R TinyFrame)  │
+  │ble_msgrx     │      └──────────────────┘
+  └──────┬───────┘
+         │ protobuf dispatch
+         ├──→ task.evenai (AI messages)
+         ├──→ task.notif  (notifications)
+         ├──→ task.ring   (R1 ring relay)
+         └──→ task.ble_production (factory)
+
+  ┌──────────────────┐  ┌──────────────────┐
+  │ worker_pool (x8) │  │elog_async_thread │
+  │ (page rendering) │  │ (log writer)     │
+  └──────────────────┘  └──────────────────┘
+
+  ┌──────────────────┐
+  │sync_schedule_mgr │
+  │(page coordinator)│
+  └──────────────────┘
+
+
+==============================================================================
+7. SOURCE FILE INDEX (Thread-Related)
+==============================================================================
+
+platform\threads\thread_audio.c          — thread.audio
+platform\threads\thread_ble_msgrx.c      — thread_ble_msgrx
+platform\threads\thread_ble_msgtx.c      — thread_ble_msgtx
+platform\threads\thread_ble_production.c — task.ble_production
+platform\threads\thread_ble_wsf.c        — task.ble.wsf
+platform\threads\thread_evenai.c         — task.evenai
+platform\threads\thread_input.c          — thread.input
+platform\threads\thread_manager.c        — task.manager
+platform\threads\thread_notification.c   — task.notif
+platform\threads\thread_ring.c           — task.ring
+framework\sync\display_thread.c          — display_thread
+framework\sync\thread_pool.c             — thread_pool (8 workers)
+framework\sync\uart_sync.c              — uart_sync_thread
+
+================================================================================
+END OF RTOS MAP
+================================================================================

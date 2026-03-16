@@ -1,0 +1,314 @@
+# S200 Bootloader RTOS Map
+# Firmware: ota_s200_bootloader.bin (Ambiq Apollo510b, ARM Cortex-M55)
+# RTOS: FreeRTOS v10.x with CMSIS-RTOS2 wrappers
+# Base address: 0x00410000   Size: 144.3K   Functions: 796
+# Source: Ghidra decompilation + function_map.txt analysis
+#
+# Legend:
+#   osThreadNew      = FUN_004160d6 (CMSIS-RTOS2 wrapper -> xTaskCreate)
+#   osTimerNew        = FUN_0041638a
+#   osMessageQueueNew = FUN_004167ee
+#   osMutexNew        = FUN_0041697c
+#   osSemaphoreNew    = FUN_0041673a
+#   osEventFlagsNew   = FUN_00416506 (-> xEventGroupCreate)
+#   osEventFlagsSet   = FUN_004165e8
+#   osEventFlagsWait  = FUN_00416568
+#   osKernelInit      = FUN_00416058
+#   osKernelStart     = FUN_00416088
+#   osDelay           = FUN_00416350
+#   osThreadFlagsWait = FUN_0041629c
+#   osThreadFlagsSet  = FUN_00416212
+#   osMessageQueuePut = FUN_0041687a
+#   osMessageQueueGet = FUN_004168f8
+#   osThreadTerminate = FUN_004161d8
+
+# ============================================================================
+# RTOS TASKS (osThreadNew / xTaskCreate calls)
+# ============================================================================
+
+# TASK 1: thread_manager_task
+#   Created by: thread_manager_create_and_start (FUN_0042e2e8)
+#   Entry:      FUN_0042e244 (thread_manager_task)
+#   Call site:  FUN_004160d6(PTR_FUN_0042e244_1, 0, PTR_DAT_0042e3d4)
+#   Role:       Boot orchestrator. Decides: OTA update or jump to app.
+#   Flow:
+#     1. init_locals, nop, create_dfu_thread, sysstart_sync_end
+#     2. is_need_updata_image (flag check at 0x0042e170)
+#     3. Flag == 0 -> log "DO NOT need updata firmware, GO TO APP" -> send msg(0)
+#        Flag != 0 -> log "need updata firmware" -> send msg(1)
+#     4. Enter infinite loop: osThreadFlagsWait(0xffffff, 0, 60000ms)
+#        Periodic watchdog-like tick (every 60s)
+#   Note: This is the ONLY application thread created directly by main.
+#         It creates the DFU thread internally.
+
+# TASK 2: thread_dfu_task
+#   Created by: thread_manager_create_dfu_thread (FUN_0042e1c4) -> NOT direct
+#               Actually created via fw_evt_loop_init (FUN_0042e488) which is
+#               called from the DFU/WDT initialization path
+#   Entry:      FUN_0042dc60 (thread_dfu_task)
+#   Call site:  FUN_004160d6(&LAB_0042e590_1, 0, DAT_0042e7b8)  [in FUN_0042e488]
+#   Role:       DFU firmware installation task.
+#   Flow:
+#     1. dfu_sync_start -> sync_wait(1) for manager signal
+#     2. dfu_create_message_queue -> osMessageQueueNew(0x32, 0x28, 0)
+#        (queue: 50 items, 40 bytes each)
+#     3. dfu_init_config, dfu_noop_callback, dfu_sync_end
+#     4. Infinite loop: osThreadFlagsWait(0xffffff, 0, INFINITE)
+#        On flag -> dfu_event_dispatch(FUN_0042e110):
+#          bit 22 set -> _thread_msg_handler (process OTA)
+#          bit 23 set -> dfu_error_halt (infinite osDelay)
+#     5. On error: log "Notify error" and retry
+#   Message handler (_thread_msg_handler @ 0x0042dda4):
+#     - Opens "ota/s200_firmware_ota.bin" on LittleFS
+#     - Reads 32-byte OTA header (magic, version, blob entries)
+#     - For each entry: CRC-32 verify -> erase flash -> program -> verify
+#     - On success: dfu_pre_jump_deinit -> boot_jump_to_app(0x438000)
+#     - On failure: bootloader_error_reset (system reset)
+
+# TASK 3: FreeRTOS Timer Service ("Tmr Svc")
+#   Created by: xTimerCreateTimerTask (FUN_004198d2) during vTaskStartScheduler
+#   Entry:      prvTimerTask (FUN_0041951e)
+#   Role:       Processes software timer commands from timer command queue
+#   Standard FreeRTOS infrastructure task
+
+# TASK 4: FreeRTOS IDLE Task ("IDLE")
+#   Created by: vTaskStartScheduler (FUN_00418120)
+#   Entry:      prvIdleTask (FUN_00419dfa)
+#   Role:       Runs when no other task is ready. Calls vApplicationIdleHook
+#   Uses static allocation: vApplicationGetIdleTaskMemory (FUN_00418b26)
+
+# ============================================================================
+# TIMERS (osTimerNew calls)
+# ============================================================================
+
+# TIMER 1: DFU/WDT watchdog timer
+#   Created by: FUN_0042e488 (watchdog/DFU init)
+#   Call site:  FUN_0041638a(0x42e641, 0, 0, DAT_0042e7a0)
+#   Callback:   0x0042e641 (within dfu_core/hal_wdt area)
+#   Type:       One-shot (param_2=0)
+#   Role:       Watchdog-related timer for DFU operations
+
+# ============================================================================
+# MESSAGE QUEUES (osMessageQueueNew calls)
+# ============================================================================
+
+# QUEUE 1: DFU message queue
+#   Created by: dfu_create_message_queue (FUN_0042dcbc)
+#   Call site:  FUN_004167ee(0x32, 0x28, 0)
+#   Parameters: 50 messages (0x32), 40 bytes each (0x28)
+#   Used by:    dfu_task_msg_send -> osMessageQueuePut to signal DFU task
+#               thread_dfu_task reads via osThreadFlagsWait + dispatch
+#   Messages:   type 0 = "no update, jump to app", type 1 = "update needed"
+
+# QUEUE 2: WDT/DFU event queue
+#   Created by: FUN_0042e488 (watchdog/DFU init)
+#   Call site:  FUN_004167ee(0xf, 8, DAT_0042e788)
+#   Parameters: 15 messages (0xF), 8 bytes each
+#   Used by:    Event dispatch for watchdog-related DFU control
+#   Put call:   FUN_0042e5d2 -> FUN_0041687a(*DAT_0042e784, ...)
+
+# ============================================================================
+# EVENT FLAGS (osEventFlagsNew / osEventFlagsSet / osEventFlagsWait)
+# ============================================================================
+
+# EVENT GROUP 1: DFU/boot event flags
+#   Created by: FUN_0042e488
+#   Call site:  FUN_004165e8(DAT_0042e7ac)  [osEventFlagsSet used to create?]
+#               Actually: FUN_00416506 at other call sites
+#   Used by:    thread_manager_sync_signal (FUN_0042e35e)
+#               -> FUN_00416506(DAT_0042e3b8+0x1c, 1 << param_1)
+#               thread_manager_cleanup (FUN_0042e390)
+#               -> FUN_00416506(DAT_0042e3b8+0x1c, 1 << (param_1 & 0xff))
+#   Bits:
+#     bit 22 (0x400000): DFU message ready
+#     bit 23 (0x800000): DFU error/halt signal
+#   Purpose:    Synchronize thread_manager and thread_dfu
+
+# EVENT GROUP 2: thread_manager synchronization
+#   Stored at:  DAT_0042e3b8 + 0x1c
+#   Used by:    thread_manager_sync_wait (FUN_0042e32c):
+#               osThreadFlagsWait(0x800000, 1, INFINITE)
+#               thread_manager_sync_signal (FUN_0042e35e):
+#               osEventFlagsSet(handle, 1 << param_1)
+
+# ============================================================================
+# MUTEXES (osMutexNew calls)
+# ============================================================================
+
+# MUTEX 1: MSPI flash mutex
+#   Created by: mspi_flash_mutex_init (FUN_00421332)
+#   Call site:  FUN_0041697c() [osMutexNew]
+#   Used by:    mspi_flash_mutex_lock (FUN_00421494) -> osMutexAcquire
+#               mspi_flash_mutex_unlock (FUN_004214d0) -> osMutexRelease
+#   Purpose:    Serialize all NOR flash (MX25U25643G) access via MSPI
+#               Prevents concurrent flash reads/writes/erases
+
+# MUTEX 2: Redirect (UART debug output) mutex
+#   Created by: redirect_mutex_init (FUN_00422574) via redirect_init (FUN_00422580)
+#   String:     "redirect init with mutex protection"
+#   Used by:    redirect_lock (FUN_0042264c)
+#   Purpose:    Serialize debug UART output from multiple tasks
+
+# MUTEX 3: TLSF allocator lock
+#   Created by: tlsf_lock (FUN_00417548) / tlsf_adapter_lock_init (FUN_00427c18)
+#   Used by:    tlsf_lock/tlsf_unlock bracket all malloc/free operations
+#   Purpose:    Thread-safe dynamic memory allocation
+
+# MUTEX 4: LittleFS thread-safety mutex
+#   Created by: LFS API wrappers (lfs_file_open, lfs_file_read, etc.)
+#   Used by:    All public LFS API functions acquire/release around raw ops
+#   Purpose:    Serialize filesystem operations
+
+# ============================================================================
+# SEMAPHORES (osSemaphoreNew calls)
+# ============================================================================
+
+# SEMAPHORE 1: I2C4 completion semaphore
+#   Created by: HAL_I2CInit (FUN_0041df20)
+#   String:     "Error - Failed to create semaphore for I2C4"
+#   Purpose:    Synchronize I2C transfer completion (ISR -> task notification)
+
+# ============================================================================
+# IRQ HANDLERS / ISR FUNCTIONS
+# ============================================================================
+
+# Cortex-M4 System Exceptions:
+#   SysTick:      xPortSysTickHandler (FUN_004183e0) -> xTaskIncrementTick
+#   PendSV:       xPortPendSVHandler (FUN_00418200) -> context switch
+#   SVC:          vPortSVCHandler (FUN_0041a0ec) -> first task start
+#
+# Peripheral ISRs:
+#   UART ISR:     am_hal_uart_interrupt_service (FUN_0041cac0, FUN_00422fda)
+#   GPIO ISR:     am_hal_gpio_interrupt_service (FUN_0041cde8)
+#   MSPI ISR:     am_hal_mspi_interrupt_service (FUN_0041f530)
+#   IOM ISR:      am_hal_iom_interrupt_service_impl (FUN_00423f8a)
+#   WDT ISR:      am_hal_wdt_interrupt_service (FUN_0042e7f0)
+#   STIMER ISR:   via am_hal_stimer_int_enable/clear (0x0041b580/0x0041b5c0)
+#
+# FreeRTOS hooks:
+#   Stack overflow:  vApplicationStackOverflowHook (FUN_004181b0)
+#                    String: "task %s stack overflow"
+#   Malloc failed:   vApplicationMallocFailedHook (FUN_0041a6c8)
+#                    String: "MallocFaile"
+#   Idle hook:       vApplicationIdleHook (FUN_00419e3a)
+#
+# NVIC configuration:
+#   hal_interrupt_config (FUN_004301cc): configures priority + enable per IRQ
+#   NVIC_EnableIRQ (FUN_0043018c): standard CMSIS enable
+#   NVIC_SetPriority (FUN_004301a8): standard CMSIS priority set
+#   main_init_interrupts (FUN_00429d4c): bulk IRQ setup during boot
+
+# ============================================================================
+# BOOT SEQUENCE (initialization order)
+# ============================================================================
+#
+# Phase 1: Pre-RTOS Hardware Init (runs on reset handler stack, no tasks)
+#   1.  Reset vector -> SP init -> branch to entry
+#   2.  FUN_004289e0 (main / bootloader_early_init):
+#       - SIMOBUCK voltage regulator config (MMIO register writes)
+#       - Clock source selection
+#       - Power domain enable
+#   3.  FUN_00428afc (main_init_subsystems):
+#       - GPIO default configuration
+#       - Power rail sequencing (LDO/SIMOBUCK switching)
+#   4.  FUN_00428bf0 (main_init_flash_and_fs):
+#       - MSPI controller init for MX25U25643G NOR flash
+#       - Flash timing scan (mspi_timing_auto_check)
+#   5.  FUN_00429138 (main_config_power_rails):
+#       - Burst mode init (am_hal_burst_mode_initialize)
+#       - High-performance mode enable
+#   6.  FUN_00429396 (main_config_gpio_defaults):
+#       - Pin multiplexing for UART, I2C, MSPI, GPIO
+#   7.  FUN_00429470 (main_config_clock_tree):
+#       - HFRC/LFRC oscillator configuration
+#       - CLKGEN peripheral clock enables
+#   8.  FUN_00429578 (main_config_memory_protection):
+#       - MPU region setup (if applicable)
+#   9.  FUN_00429664 (main_init_i2c):
+#       - HAL_I2CInit with I2C4 semaphore creation
+#   10. FUN_0042979a (main_init_adc):
+#       - ADC power-on, configure, measure HW version voltage
+#   11. FUN_0042997c (main_read_hw_version):
+#       - Read board revision via ADC voltage divider
+#   12. FUN_00429a98 (main_validate_hw_config):
+#       - Validate hardware configuration matches expected
+#   13. FUN_00429b92 (main_init_watchdog):
+#       - WDT init (am_hal_wdt_init, am_hal_wdt_config)
+#   14. FUN_00429cf0 (main_init_debug_uart):
+#       - UART init + GPIO pin config for debug console
+#   15. FUN_00429d4c (main_init_interrupts):
+#       - NVIC priority assignment for all used IRQs
+#       - IRQ enable for UART, GPIO, MSPI, IOM, WDT, STIMER
+#   16. FUN_00429eb4 (main_config_mspi_flash):
+#       - DRV_Mx25u25643g_init: reset, read ID, 4-byte mode, quad enable
+#   17. FUN_00429f96 (main_log_version_info):
+#       - Print ">>> Even Bootloader start <<<"
+#   18. FUN_00429fd8 (main_check_reset_reason):
+#       - am_hal_reset_status_get: log POR/WDT/debugger reset cause
+#
+# Phase 2: RTOS + Middleware Init (still pre-scheduler)
+#   19. FUN_00428cdc (main_init_elog_and_redirect):
+#       - EasyLogger init (elog_output, elog_set_filter_lvl)
+#       - redirect_init: UART redirect with mutex
+#   20. FUN_00428db6 (main_start_rtos):
+#       - tlsf_adapter_init: TLSF heap pool creation
+#       - mspi_flash_mutex_init: flash mutex
+#       - littlefs_init: mount LittleFS on NOR flash
+#         - check_and_create_directories: /firmware, /ota, /user, /log
+#         - littlefs_read_boot_count / increment_boot_count
+#       - osKernelInitialize (FUN_00416058)
+#
+# Phase 3: RTOS Thread Creation (pre-scheduler)
+#   21. thread_manager_create_and_start (FUN_0042e2e8):
+#       - osKernelInitialize
+#       - osThreadNew(thread_manager_task, ...)
+#       - osKernelStart -> vTaskStartScheduler
+#         - Creates IDLE task (prvIdleTask)
+#         - Creates Timer Service task (prvTimerTask)
+#         - SysTick configured (vPortSetupTimerInterrupt)
+#         - Context switch to highest-priority ready task
+#
+# Phase 4: Runtime (scheduler running)
+#   22. thread_manager_task runs:
+#       - Initializes DFU subsystem (creates DFU thread, queues, events)
+#       - is_need_updata_image: reads OTA flag from flash/RAM
+#       - Decision point:
+#         a) NO UPDATE: send msg(0) to DFU -> DFU task jumps to app
+#         b) UPDATE:    send msg(1) to DFU -> DFU task processes OTA
+#   23. thread_dfu_task runs (if signaled):
+#       - Reads OTA image from LittleFS
+#       - Parses EVENOTA container (6-entry header)
+#       - For each firmware component:
+#         - CRC-32 verify (app_dfu_image_crc_check)
+#         - Erase target flash region (dfu_flash_erase_range)
+#         - Program firmware (app_dfu_system_program)
+#         - Verify (_verifyFlashContent)
+#       - On success: dfu_pre_jump_deinit -> boot_jump_to_app
+#       - On failure: bootloader_error_reset (WDT or infinite loop)
+#
+# Phase 5: Jump to Application
+#   24. boot_jump_to_app (FUN_0042dbdc):
+#       - dfu_pre_jump_deinit: disable peripherals, flush caches
+#       - Write VTOR (0xE000ED08) = 0x00438000
+#       - Load SP from *(0x00438000 + 0)
+#       - Jump to reset vector at *(0x00438000 + 4)
+#       - Main firmware begins execution
+
+# ============================================================================
+# RTOS CONFIGURATION (inferred from code)
+# ============================================================================
+#
+# configMAX_PRIORITIES:      >= 5 (timer svc at high priority)
+# configTICK_RATE_HZ:        1000 (1ms tick, standard for Apollo5)
+# configUSE_COUNTING_SEMAPHORES: 1 (xQueueCreateCountingSemaphore present)
+# configUSE_MUTEXES:         1 (xQueueCreateMutex, priority inheritance)
+# configUSE_TIMERS:          1 (timer service task created)
+# configUSE_TRACE_FACILITY:  0 (no trace functions visible)
+# configSUPPORT_STATIC_ALLOCATION: 1 (xTaskCreateStatic, GetIdleTaskMemory)
+# configSUPPORT_DYNAMIC_ALLOCATION: 1 (xTaskCreate, pvPortMalloc)
+# configCHECK_FOR_STACK_OVERFLOW: >= 1 (hook present)
+# Heap implementation:       heap_4 or heap_5 (coalesce logic in vPortFree)
+# TLSF allocator:            Used alongside FreeRTOS heap (dual allocator)
+#
+# Cortex-M55 FPU:            Enabled (vPortEnableVFP present)
+# Lazy stacking:             Yes (standard for FreeRTOS + FPU)

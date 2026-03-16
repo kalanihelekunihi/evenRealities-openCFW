@@ -1,0 +1,966 @@
+===============================================================================
+G2 Firmware Protobuf Message Schemas
+Extracted from nanopb field descriptor tables in ota_s200_firmware_ota
+Firmware: v2.0.7.16, SoC: Ambiq Apollo510b (ARM Cortex-M55)
+Date: 2026-03-06
+===============================================================================
+
+METHODOLOGY
+-----------
+Each G2 BLE service uses nanopb (lightweight protobuf for embedded systems).
+The firmware has 20 compiled-in pb_field_t descriptor tables, one per message
+schema. Each table defines the ordered field list for a C struct that gets
+passed to pb_encode() or pb_decode().
+
+The C struct layout convention (universal across all 18 handlers):
+  offset 0:     type/cmd byte         -> protobuf field 1 (f1)
+  offset 1:     msgId / sequence      -> protobuf field 2 (f2)
+  offset 2-3:   field_count (u16)     -> INTERNAL: controls how many fields to encode
+  offset 4+:    payload fields        -> protobuf fields 3+ (f3, f4, ...)
+
+The field_count at offset 2-3 is NOT a protobuf field. It tells nanopb how many
+entries in the pb_field_t table to process. Different command types within the
+same service use different field_counts to encode varying numbers of fields.
+
+Field types are inferred from:
+  - Assignment patterns (byte = varint, u32 = varint/fixed32, memcpy = bytes/submessage)
+  - Observed BLE captures (from Swift SDK G2ResponseDecoder)
+  - Even.app Flutter RE (package:even_connect protobuf definitions)
+
+Confidence levels:
+  HIGH   = Confirmed by both firmware struct analysis AND BLE capture/SDK
+  MEDIUM = Confirmed by firmware struct analysis only
+  LOW    = Inferred from struct size/offset patterns, not directly observed
+
+
+===============================================================================
+1. AUTH (Service 0x80)
+   Field Descriptor Tables:
+     DAT_0049eaac  - Auth main (initial auth + auth echo)
+     DAT_0049f408  - Auth keepalive
+   Encoder functions:
+     FUN_0049e484  - pb_service_auth_handler (type=4/5, auth response)
+     FUN_0049e122  - PB_TxEncodeDevConfig_query (type=4, dynamic alloc)
+     FUN_0049ead4  - auth_keepalive_encode_complex (type=6, keepalive)
+   Decoder functions:
+     FUN_0049e64c  - PB_RxSecAuth (auth challenge RX)
+   Struct: param_4 (caller-provided), 0x1a8 bytes (dynamic alloc for keepalive)
+   Encode buffer: caller-provided (auth) / 0xd4 bytes (keepalive dynamic)
+===============================================================================
+
+// Auth main table (DAT_0049eaac)
+message AuthResponse {
+  uint32 type = 1;                // 4=auth_success, 5=auth_response  [HIGH]
+  uint32 msg_id = 2;              // connection handle / eye ID        [HIGH]
+  // field_count = 3-4
+  uint32 conn_handle = 3;         // u16 at offset 2 (via param_1)     [MEDIUM]
+  bool   status = 4;              // offset 0xdc: param_1 != 0         [MEDIUM]
+  uint32 padding = 5;             // offset 0xde: always 0             [LOW]
+}
+
+// Auth keepalive table (DAT_0049f408)
+message AuthKeepalive {
+  uint32 type = 1;                // 6 = keepalive                     [HIGH]
+  uint32 msg_id = 2;              // timer-derived sequence             [HIGH]
+  // field_count = 5
+  uint32 auth_flag = 3;           // offset 0xdc: auth mode byte       [MEDIUM]
+  TimeSyncData time_data = 4;     // offset 0xe0-0xe8: system_time_get [MEDIUM]
+  uint32 tz_param = 5;            // offset 0xf8: param_1 byte         [MEDIUM]
+  uint32 end_marker = 6;          // offset 0xf9: always 0             [LOW]
+}
+
+// Observed RX on 0x80-00 (from G2ResponseDecoder):
+//   Auth success: f1=4, f3={f1=1}
+//   Keepalive:    f1=6, time sync in nested f128={f1=Unix, f3=TZ}
+
+
+===============================================================================
+2. SETTINGS (Service 0x0D)
+   Field Descriptor Table: DAT_0046c3f0
+   Encoder functions:
+     FUN_0046c0dc  - pb_service_setting_handler (type=0, query/base)
+     FUN_0046c198  - settings_notify_outbound (type=1, notify)
+   Decoder functions:
+     FUN_0046c2f6  - settings_rx_router (pb_decode using DAT_0046c3f0)
+   Struct: DAT_0046c3e8 / dynamic alloc, 0x0C bytes
+   Encode buffer: DAT_0046c3ec, 0x80 bytes
+===============================================================================
+
+// ProtoBaseSettings (DAT_0046c3f0) — multiplexer for sub-services
+message ProtoBaseSettings {
+  uint32 type = 1;                // 0=query, 1=notify                 [HIGH]
+  uint32 sub_service = 2;         // sub-service ID / eye              [HIGH]
+  // field_count implicit (no explicit field_count for settings)
+  uint32 flag = 3;                // puVar1[2]=1 (always set)          [MEDIUM]
+  uint32 timestamp_lo = 4;        // offset 4: timestamp pair (lo)     [MEDIUM]
+  uint32 timestamp_hi = 5;        // offset 8: timestamp pair (hi)     [MEDIUM]
+}
+
+// Sub-services routed through 0x0D:
+//   Glasses case, Universal settings, Onboarding, Wear detection,
+//   Compass calibration, Gesture control list, Glasses settings,
+//   Device config, Firmware log, Screen-off interval
+//
+// Observed RX on 0x0D-00 (from captures):
+//   Config notification: brightness, auto-brightness, grid settings
+//   f1=type, f2=sub-service, nested ProtoBaseSettings fields
+// Observed TX on 0x0D-20:
+//   Device config: f1=setting_id (13=displayMode, 15=antiShake, etc.)
+
+
+===============================================================================
+3. EVEN AI (Service 0x07) — 4 separate descriptor tables
+   Field Descriptor Tables:
+     DAT_004eef64  - EvenAI basic (types 1-4: CTRL, VAD, ASK, ANALYSE)
+     DAT_004efadc  - EvenAI ASK large (type 3 large, type 5 SKILL)
+     DAT_004f0458  - EvenAI advanced (types 7-10: PROMPT, EVENT, HB, CONFIG)
+     PTR_DAT_004f0754 - EvenAI CONFIG/VAD (type 10)
+   Encoder functions:
+     FUN_004ee854  - pb_service_even_ai_handler (type=1, field_count=3)
+     FUN_004ee9e0  - pb_evenai_rx_type_3_ask (type=1, field_count=3)
+     FUN_004eec42  - pb_evenai_rx_type_5_reply (type=2, field_count=4)
+     FUN_004eeb72  - pb_evenai_rx_type_4_analyse (type=3, via task_queue)
+     FUN_004ef0fc  - pb_evenai_msg_send_2 (type=3, field_count=5, DAT_004efadc)
+     FUN_004ef50c  - pb_evenai_reply (type=5, via task_queue)
+     FUN_004ef5f8  - pb_evenai_tx_encode_ctrl (type=5, field_count=7, DAT_004efadc)
+     FUN_004efae0  - pb_evenai_tx_encode_ask (type=7, field_count=9, DAT_004f0458)
+     FUN_004efd78  - pb_evenai_tx_encode_reply (type=8, field_count=10, DAT_004f0458)
+     FUN_004eff10  - APP_PbNotifyEncodeEvenAIEvent (type=8, field_count=10, DAT_004f0458)
+     FUN_004f0184  - pb_evenai_msg_send_1 (type=9, field_count=0x0B/11, DAT_004f0458)
+     FUN_004f045c  - pb_evenai_rx_type_10_config (type=10, field_count=0x0D/13, PTR_DAT_004f0754)
+   Struct: DAT_004ef290 (main) / DAT_004efc80 (alt), 0x20C bytes
+   Encode buffer: DAT_004ef28c / DAT_004efc7c / DAT_004f06e8, 0x100 bytes
+===============================================================================
+
+// EvenAI basic table (DAT_004eef64) — types 1-4
+message EvenAIBasic {
+  uint32 type = 1;                // 1=CTRL, 2=VAD/ANALYSE, 3=ASK     [HIGH]
+  uint32 msg_id = 2;              // msgId or auto-increment counter   [HIGH]
+  // field_count = 3-4
+  uint32 command = 3;             // offset 4: *param_2 (command byte) [HIGH]
+  uint32 flags = 4;               // offset 5: 0 (padding/flags)      [MEDIUM]
+}
+
+// EvenAI ASK large table (DAT_004efadc) — types 3 (large), 5 (SKILL)
+message EvenAIExtended {
+  uint32 type = 1;                // 3=ASK_LARGE, 5=SKILL             [HIGH]
+  uint32 msg_id = 2;              // sequence                          [HIGH]
+  // field_count = 5 (ASK) or 7 (SKILL)
+  uint32 command = 3;             // offset 4: *param_2                [HIGH]
+  bytes  payload = 4;             // offset 5..0x209: large payload    [MEDIUM]
+  uint32 terminator = 5;          // offset 0x20a: always 0            [LOW]
+  // SKILL adds fields 6-7 (unknown content)
+}
+
+// EvenAI advanced table (DAT_004f0458) — types 7-10
+message EvenAIAdvanced {
+  uint32 type = 1;                // 7=PROMPT, 8=EVENT, 9=HB          [HIGH]
+  uint32 msg_id = 2;              // msgId or auto-increment (EVENT)   [HIGH]
+  // field_count = 9 (PROMPT), 10 (EVENT), 11 (HB)
+  uint32 command = 3;             // offset 4: *param_2                [HIGH]
+  uint32 flags = 4;               // offset 5: 0 or 8 (codec state)   [MEDIUM]
+  // fields 5-9: additional payload (type-dependent)
+  // HB: flags = 0 if codec ready, 8 if not
+}
+
+// EvenAI CONFIG table (PTR_DAT_004f0754) — type 10
+message EvenAIConfig {
+  uint32 type = 1;                // 10 = CONFIG                       [HIGH]
+  uint32 msg_id = 2;              //                                   [HIGH]
+  // field_count = 13
+  uint32 config_byte_0 = 3;       // offset 4: *param_2                [HIGH]
+  uint32 config_byte_1 = 4;       // offset 5: param_2[1]              [MEDIUM]
+  uint32 end = 5;                 // offset 6: always 0                [LOW]
+  // fields 6-13: additional config parameters
+}
+
+// Observed RX on 0x07-00 (from G2ResponseDecoder):
+//   VAD: f1=2, f3={f1=isActive}
+//   CTRL echo: f1=1, f2=msgId, f3={f1=command}
+//   COMM_RSP: f1=161, f12={f1=7(AI) or f1=8(EvenHub)}
+//   Mode status on 0x07-01: f1=1, f2=glasses_counter, f3={f1=2(enter)/3(exit)}
+// TX on 0x07-20 (from Swift SDK):
+//   CTRL: f1=1, f2=msgId
+//   ASK: f1=3, f5=query_text, f7=query_text
+//   SKILL: f1=6, f3={f1=skill_id}, f5=value
+
+
+===============================================================================
+4. EVEN HUB (Service 0xE0)
+   Field Descriptor Table: DAT_0059ca7c
+   Encoder functions:
+     FUN_0059c3de  - pb_service_even_hub_handler (type=0x0C, field_count=0x0F/15)
+     FUN_0059c466  - evenhub_parameterized_encode (variable field_count: 4,8,10,12,15)
+     FUN_0059c57a  - evenhub_comm_rsp_encode (type=0x0E, field_count=0x11/17)
+     FUN_0059c668  - evenhub_display_content_encode (type=2, field_count=0x0D/13)
+     FUN_0059c7ee  - evenhub_pb_encode_and_send (type=0x0B, field_count=0x10/16)
+     FUN_0059c904  - PB_TxEncodeEvenHubStatus (type=4, field_count=6)
+     FUN_0059c9ce  - PB_TxEncodeEvenHubConfig (type=0x10, field_count=0x13/19)
+   Struct: DAT_0059ca74, 0x2654 bytes
+   Encode buffer: DAT_0059ca78, 0x279E bytes
+===============================================================================
+
+// EvenHub table (DAT_0059ca7c) — largest schema, up to 19 fields
+message EvenHubMessage {
+  uint32 type = 1;                // 2/4/0x0B/0x0C/0x0E/0x10          [HIGH]
+  uint32 msg_id = 2;              // 0 for most, param_1 for others    [HIGH]
+  // field_count varies: 1-19 depending on type
+  uint32 sub_field_count = 3;     // offset 2 (u16, also field_count)  [MEDIUM]
+  uint32 payload_word = 4;        // offset 4 (u32)                    [MEDIUM]
+  uint32 sub_type = 5;            // offset 8                          [MEDIUM]
+  // Type 0x0C (primary): field_count=15, sub_type at offset 8
+  // Type 0x0E (COMM_RSP): field_count=17, param_1 at offset 4
+  // Type 2 (display_content): field_count=13, variant dispatch on param_1:
+  //   param_1=0: sub_field_count=3, single byte at offset 8
+  //   param_1=1: sub_field_count=1, u32 + 16-byte memcpy + u32 extra
+  //   param_1=2: sub_field_count=2, u32 + 16-byte memcpy + byte
+  // Type 0x0B (data_relay): field_count=16, u32+16B+int+u32 layout
+  // Type 4 (full): field_count=6, 9 params mapped to struct offsets 4-0x2c
+  // Type 0x10 (simple): field_count=19, single byte at offset 4
+  bytes  content_block = 6;       // offset 0x0C: 16-byte content      [MEDIUM]
+  uint32 extra_word_1 = 7;        // offset 0x18                       [LOW]
+  uint32 extra_word_2 = 8;        // offset 0x1c                       [LOW]
+  uint32 extra_word_3 = 9;        // offset 0x20                       [LOW]
+  uint32 extra_word_4 = 10;       // offset 0x24                       [LOW]
+  uint32 extra_word_5 = 11;       // offset 0x28                       [LOW]
+  uint32 flag_byte = 12;          // offset 0x2c                       [LOW]
+  // fields 13-19: extended payload (type-dependent)
+}
+
+// Observed RX on 0xE0-00 (COMM_RSP relay from AI):
+//   f1=161, f12={f1=8}
+// TX on 0xE0-20: mirrors EvenAI format
+
+
+===============================================================================
+5. CONVERSATE (Service 0x0B)
+   Field Descriptor Table: DAT_005932d8
+   Encoder functions:
+     FUN_00592fde  - pb_service_conversate_handler (type=0xA1, field_count=8)
+     FUN_0059314c  - pb_service_conversate_secondary (type=0xA2, field_count=9)
+   Decoder functions:
+     FUN_005934cc  - conversate_fsm_handler (RX dispatch)
+   Struct: DAT_0059330c, 0x1D6C bytes (7,532 bytes)
+   Encode buffer: DAT_00593318, 0x100 bytes
+   Auto-increment counter: DAT_005932e8
+===============================================================================
+
+message ConversateResponse {
+  uint32 type = 1;                // 0xA1=COMM_RSP, 0xA2=text_update   [HIGH]
+  uint32 msg_id = 2;              // auto-increment counter             [HIGH]
+  // field_count = 8 (COMM_RSP) or 9 (text update)
+  uint32 command = 3;             // offset 4: *param_1 (phone cmd)    [HIGH]
+  // Struct is 7.5KB — large payload area for text content
+  // fields 4-9: text content, status, lifecycle state
+}
+
+// Observed RX on 0x0B-00 (from G2ResponseDecoder):
+//   ACK: f1=162(0xA2), f2=msgId, f9={f1=1} (marker acknowledged)
+//   Auto-close: f1=161, f2=msgId, f8={f1=2} (timeout)
+//
+// TX on 0x0B-20 (from iOS SDK G2ConversateProtocol):
+//   Init (type=1): f1=1, f2=msgId, f3=LD{settings}, f8=LD{f1=magic_random}
+//     settings (f3): f1=1(selector), f2=LD{display config}, f3=0(extra)
+//       display config: f1=1(mode), f2=1(enable), f3=0, f4=1(layout), f5=0(height, streaming)
+//   Marker (type=255): f1=255, f2=msgId, f10=empty_LD, f8=LD{f1=magic_random}
+//   Transcript (type=5): f1=5, f2=updateId, f7=LD{f1=LD<30B text>, f2=isFinal}, f8=LD{f1=magic_random}
+//     text field: 30-byte fixed-length UTF-8, space-padded (0x20)
+//   Pause (type=2): f1=2, f2=msgId, f8=LD{f1=magic_random}
+//   Resume (type=3): f1=3, f2=msgId, f8=LD{f1=magic_random}
+//   Close (type=4): f1=4, f2=msgId, f8=LD{f1=magic_random}
+//     Type values from firmware enum at 0x002EE7CC:
+//     CONVERSATE_EVENT: NONE=0, START=1, PAUSE=2, RESUME=3, CLOSE=4, CONFIG=5
+//
+//   magic_random (f8): nested message {f1=counter}                    [HIGH — confirmed in iOS SDK]
+//     All TX payloads include f8={f1=counter} for firmware dedup.
+//     Firmware log: "[pb.conversate]Duplicate message detected: magic_random = %d"
+//     Counter range: 300+ (per G2ConversateSender.magicCounter)
+
+
+===============================================================================
+6. TRANSLATE (Service 0x05)
+   Field Descriptor Table: DAT_005b4e00
+   Encoder functions:
+     FUN_005b49c2  - pb_service_translate_handler (type=0xA1, field_count=5)
+     FUN_005b4b30  - pb_translate_decode (type=0xA2, field_count=7)
+     FUN_005b4ca2  - pb_translate_process (type=0xA3, field_count=6)
+   Struct: DAT_005b4e34, 0x854 bytes (2,132 bytes)
+   Encode buffer: DAT_005b4e40, 0x100 bytes
+   Auto-increment counter: DAT_005b4e10
+===============================================================================
+
+message TranslateResponse {
+  uint32 type = 1;                // 0xA1=ctrl, 0xA2=result, 0xA3=hb   [HIGH]
+  uint32 msg_id = 2;              // auto-increment counter             [HIGH]
+  // field_count = 5 (ctrl), 7 (result), 6 (heartbeat)
+  uint32 command = 3;             // offset 4: *param_1 / u32           [HIGH]
+  // fields 4-7: text result, language, mode data
+  // 2KB struct supports large translated text
+}
+
+// TYPE VALUE DISTINCTION — TX vs RX:
+//   The firmware uses 0xA1/0xA2/0xA3 in OUTBOUND (RX from phone's perspective) responses.
+//   The phone sends 20/21/22/23 as INBOUND (TX from phone's perspective) commands.
+//   These are NOT the same values — the firmware maps TX command IDs to internal types.
+//
+// Observed RX on 0x05-00 (from G2ResponseDecoder):
+//   Echo: f1=cmd_type (echoes the TX type value, e.g. f1=20 for ctrl)
+//   COMM_RSP: f1=161, f12={f1=type}
+//
+// TX on 0x05-20 (from iOS SDK G2TranslateProtocol):
+//   TRANSLATE_CTRL (type=20):
+//     f1=20, f2=msgId, f3=LD{f1=action}, f8=LD{f1=magic_random}
+//     action: 1=start, 2=stop, 3=pause, 4=resume (G2TranslateProtocol.CtrlAction)
+//   TRANSLATE_RESULT (type=21):
+//     f1=21, f2=msgId, f7=LD{f1=LD<30B text>, f2=isFinal}, f8=LD{f1=magic_random}
+//     text field: 30-byte fixed-length UTF-8, space-padded (same as conversate)
+//   TRANSLATE_HEARTBEAT (type=22):
+//     f1=22, f2=msgId (no magic_random — heartbeat is lightweight)
+//   TRANSLATE_MODE_SWITCH (type=23):
+//     f1=23, f2=msgId, f3=LD{f1=mode} (no magic_random in mode switch)
+//     mode: 1=one_way, 2=two_way
+//
+//   magic_random (f8): nested message {f1=counter}                    [HIGH — confirmed in iOS SDK]
+//     Present on ctrl and result payloads. Not on heartbeat or mode switch.
+//     Firmware log: "[pb.translate]Duplicate message detected: magic_random = %d" (inferred)
+//     Counter range: 200+ (per G2TranslateSender)
+
+
+===============================================================================
+7. TELEPROMPTER (Service 0x06)
+   Field Descriptor Table: DAT_0054d1f0
+   Encoder functions:
+     FUN_0054ccaa  - pb_service_teleprompt_handler (type=0xA6, field_count=0x0C/12)
+     FUN_0054cd8a  - pb_teleprompt_decode / scroll progress (type=0xA1, field_count=7)
+     FUN_0054ce70  - pb_teleprompt_process / text update (type=0xA2, field_count=8)
+     FUN_0054cf56  - pb_teleprompt_scroll_tx / scroll pos (type=0xA3, field_count=9)
+     FUN_0054d034  - pb_teleprompt_response / completion (type=0xA4, field_count=?)
+     FUN_0054d102  - pb_teleprompt_send / generic send
+   Struct: DAT_0054d218, 0xF58 bytes (3,928 bytes)
+   Encode buffer: DAT_0054d21c, 0x100 bytes
+   Auto-increment counter: DAT_0054d200
+===============================================================================
+
+message TeleprompterResponse {
+  uint32 type = 1;                // 0xA6=cmd_ack, 0xA1=scroll,
+                                  // 0xA2=text, 0xA3=scroll_pos,
+                                  // 0xA4=completion                    [HIGH]
+  uint32 msg_id = 2;              // phone msgId or auto-increment      [HIGH]
+  // field_count = 7-12 depending on type
+  uint32 command = 3;             // offset 4: *param_2 (command data)  [HIGH]
+  // type 0xA3: 0x42 bytes payload via memcpy (scroll position data)
+  // fields 4-12: scroll state, page info, timing
+}
+
+// Observed RX on 0x06-00 (from G2ResponseDecoder):
+//   Command ACK: f1=166(0xA6), f2=msgId, f12=empty or {f1=1}
+//   Scroll progress: f1=164(0xA4), f2=msgId, f10={f1=pages}
+//   Completion: f1=161(0xA1), f7={f1=4}
+//
+// TX on 0x06-20 (from iOS SDK G2TeleprompterProtocol):
+//   17 message types (G2TeleprompterConstants.MessageType):
+//     Init (type=1):    f1=1, f2=msgId, f3=LD{settings}, f8=LD{f1=magic}
+//       settings: f1=1, f2=LD{display: f1-f9 (mode,0,0,width,contentH,lineH,viewH,fontSize,scrollMode)}
+//     DisplayConfig (type=2): f1=2, f2=msgId, f4=LD{6 regions with IEEE 754 floats}
+//     ContentPage (type=3):   f1=3, f2=msgId, f5=LD{f1=pageNum, f2=linesPerPage, f3=LD<text>}, f8=LD{f1=magic}
+//     ContentComplete (type=4): f1=4, f2=msgId, f6=LD{f1=0, f2=totalPages, f3=totalLines}, f8=LD{f1=magic}
+//     Pause (type=5):    f1=5, f2=msgId, f8=LD{f1=magic}
+//     Resume (type=6):   f1=6, f2=msgId, f8=LD{f1=magic}
+//     Exit (type=7):     f1=7, f2=msgId, f8=LD{f1=magic}
+//     Speed (type=8):    f1=8, f2=msgId, f3=LD{f1=speed}, f8=LD{f1=magic}
+//     Heartbeat (type=9): f1=9, f2=msgId, f8=LD{f1=magic}
+//     AiSync (type=10):  f1=10 (reserved)
+//     Playing (type=11): f1=11 (reserved)
+//     Previous (type=12): f1=12, f2=msgId, f8=LD{f1=magic}
+//     Next (type=13):    f1=13, f2=msgId, f8=LD{f1=magic}
+//     FontSize (type=14): f1=14, f2=msgId, f3=LD{f1=size}, f8=LD{f1=magic}
+//     Mirror (type=15):  f1=15, f2=msgId, f8=LD{f1=magic}
+//     Reset (type=16):   f1=16, f2=msgId, f8=LD{f1=magic}
+//     Marker (type=255): f1=255, f2=msgId, f13=LD{f1=0, f2=6}, f8=LD{f1=magic}
+//
+//   magic_random (f8): nested message {f1=counter}                    [HIGH — confirmed in iOS SDK]
+//     All TX payloads (except sync/displayConfig) include f8={f1=counter} when magic > 0.
+//     Firmware log: "[pb.teleprompt]Duplicate message detected: magic_random = %d"
+//     Counter range: 400+ (per G2TeleprompterSender)
+
+
+===============================================================================
+8. DASHBOARD / GESTURE (Service 0x01)
+   Field Descriptor Table: DAT_0056048c
+   Encoder functions:
+     FUN_0055ff10  - dashboard_data_encode (type=1, field_count=3)
+     FUN_0056006e  - dashboard_gesture_tx_type6 (type=6, field_count=8)
+     FUN_00560142  - dashboard_state_encode (type=3, field_count=3-6)
+   Decoder functions:
+     FUN_0055f6c0+FUN_004a4490 - dashboard_data_process_callee + pb_decode_4490 (DAT_0056048c)
+   Struct: DAT_00560488, 0x100 bytes
+   Encode buffer: caller-provided
+===============================================================================
+
+// Dashboard table (DAT_0056048c) — complex nested structure
+message DashboardMessage {
+  uint32 type = 1;                // 1=base, 3=state, 6=gesture, 7=?   [HIGH]
+  // Note: offset 1 is NOT simple msgId for dashboard
+  uint32 state_word = 2;          // offset 4 (u32, state data)        [HIGH]
+  uint32 field_count = 3;         // offset 8 (u16, nested count)      [MEDIUM]
+  // Type 1 (base/encode):
+  //   offset 0x10: gesture/state data
+  //   offset 0x14: param_1 flag
+  // Type 3 (state): complex sub-dispatch on param_1+5:
+  //   sub=0: no extra fields
+  //   sub=1: field_count=3, float pair (possibly GPS coords)
+  //   sub=2: field_count=4, nested u32 pairs with sub-sub dispatch
+  //   sub=3: field_count=5, 0x40 byte memcpy block
+  // Type 6 (gesture): field_count=8, u32 gesture at offset 0x10
+  // Type 7 (from decode): status query
+  DashboardSubField nested = 4;   // nested submessage for state data  [MEDIUM]
+}
+
+// Observed RX on 0x01-01 (from G2ResponseDecoder):
+//   Gesture: tap/swipe protobuf pattern matching
+// Observed RX on 0x0D-01 (long press): disambiguation via f3 presence
+
+
+===============================================================================
+9. MENU (Service 0x03)
+   Field Descriptor Table: DAT_0045bcf0
+   Encoder functions:
+     FUN_0045b26e  - pb_service_menu_handler (type=1, field_count=4)
+     FUN_0045b3c6  - menu_item_list_encode (type=0, field_count=3)
+   Decoder functions:
+     FUN_0045b50c  - menu_rx_decoder
+   Struct: DAT_0045bce8, 0x37C bytes (892 bytes)
+   Encode buffer: 0x432 bytes
+===============================================================================
+
+message MenuResponse {
+  uint32 type = 1;                // 0=item_list, 1=menu_info          [HIGH]
+  uint32 msg_id = 2;              // menu ID                           [HIGH]
+  // field_count = 3-4
+  uint32 item_index = 3;          // offset 4: param_2 (menu item idx) [MEDIUM]
+  repeated MenuItemEntry items = 4; // 0x37C struct: array of menu items
+                                  // per-item at offset iVar4*0x2C+0x0C:
+                                  //   u32 index, string name, u32 extra [MEDIUM]
+}
+
+// TX on 0x03-20 (from iOS SDK G2MenuProtocol):
+//   sendMenuInfo (cmdId=1): f1=1, f2=msgId, f3=magicRandom, f5=repeated{items}
+//     NOTE: Menu uses f3 as a plain varint for magicRandom — NOT f8 nested like
+//     conversate/translate/teleprompter. Firmware field name: "magicRandom".
+//     Per-item in f5 (G2MenuItem):
+//       f1=appId (int), f2=appType (int), f3=iconNum (int), f4=text (string)
+//     Built-in appIds: 1=Conversate, 2=EvenAI, 3=Notifications, 4=Teleprompter,
+//       5=Navigate, 6=Translate, 7=Quicklist
+//   responseMenuInfo (cmdId=2): f1=2 (firmware → phone, selection response)
+//   RX parse (G2MenuProtocol.parseResponse): f1=type, f2=msgId, f5=LD{f1=appId, f4=text}
+//
+//   magic_random: f3 varint (NOT f8 nested)                           [HIGH — confirmed in iOS SDK]
+//     Counter range: 700+ (per G2MenuSender.magicCounter)
+// Inter-eye relay via FUN_00462a1a (TinyFrame)
+
+
+===============================================================================
+10. NOTIFICATION / DISPLAY WAKE (Service 0x04)
+    Field Descriptor Table: DAT_004ec5d0
+    Encoder functions:
+      FUN_004ebe76  - pb_service_message_notify_handler (type=1, field_count=3)
+      FUN_004ec00c  - pb_notif_whitelist (type=0xA1, field_count=5)
+      FUN_004ec190  - pb_notif_ctrl (dynamic alloc, complex)
+      FUN_004ec39a  - pb_notif_response
+      FUN_004ec450  - pb_notif_send
+    Decoder functions:
+      FUN_004ebb9c  - pb_notif_rx_handler (main RX entry)
+      FUN_004ebd84  - pb_notif_decode
+    Struct: DAT_004ec610, 0x4A bytes (74 bytes)
+    Encode buffer: DAT_004ec60c, 0x100 bytes
+===============================================================================
+
+message NotificationResponse {
+  uint32 type = 1;                // 1=display_wake_ack, 0xA1=whitelist [HIGH]
+  uint32 msg_id = 2;              // msgId from phone                   [HIGH]
+  // field_count = 3 (ack) or 5 (whitelist)
+  bytes  payload = 3;             // offset 4..8: 5 payload bytes       [MEDIUM]
+  // payload[3] (puVar1[7]) forced to 0
+  // Whitelist: 2 bytes from param_2
+}
+
+// Observed RX on 0x04-00 (from G2ResponseDecoder):
+//   Display wake ACK: f1=1, f3=empty. If TX includes f2, RX echoes it
+//   Brightness COMM_RSP: f1=161, f5={f1=level, f2=8}
+// TX on 0x04-20:
+//   Display wake: f1=1, f2=msgId
+
+
+===============================================================================
+11. NAVIGATION (Service 0x08)
+    Field Descriptor Table: DAT_00589c50
+    Encoder functions:
+      FUN_00589324  - pb_service_navigation_handler (type=0, field_count=3)
+      FUN_005893a0  - navigation_route_update (type=5, field_count=3)
+      FUN_0058941c  - navigation_direction_update (type=6, field_count=3)
+      FUN_00589498  - navigation_eta_distance (type=10, field_count=3)
+      FUN_00589514  - navigation_turn_info (type=0x0B/11, field_count=3)
+      FUN_00589590  - navigation_waypoint (type=0x0C/12, field_count=3)
+      FUN_00588e34  - PB_TxEncodeNav_start (type=1, field_count=3, dynamic alloc)
+      FUN_00588f70  - PB_TxEncodeNav_state (type=0x0D/13, field_count=3, dynamic alloc)
+      FUN_005890ac  - PB_TxEncodeNav_route_info (type=0x11/17, field_count=3, dynamic alloc)
+    Struct: DAT_00589c5c (static) or dynamic alloc, 0x2018 bytes (8,216 bytes)
+    Encode buffer: DAT_00589c60 (static) or dynamic alloc, 10,000 bytes
+===============================================================================
+
+message NavigationMessage {
+  uint32 state = 1;               // 7=activeNavigation, 2=dashboardWidget [HIGH — iOS SDK confirmed]
+  uint32 msg_id = 2;              // eye param or 0                    [HIGH]
+  // field_count = 3 (consistent across all sub-types)
+  NavigationPayload nav_data = 5; // nested message (sub-command + data) [HIGH — iOS SDK confirmed]
+  // 8KB struct + 10KB encode buffer for map bitmap data
+  // Navigation uses the LARGEST encode buffer in the firmware
+  //
+  // Firmware encoder types (0, 1, 5, 6, 10-13, 17) map to internal encoder variants.
+  // iOS SDK sub-commands (1-10) map to the nested f5.f1 field — NOT to f1.
+}
+
+// TX on 0x08-20 (from iOS SDK G2NavigationProtocol + G2NavigationSender):
+//   Outer structure: f1=state(varint), f2=msgId(varint), f5=LD{nested nav message}
+//   State values: 7=activeNavigation, 2=dashboardWidget (G2NavigationState)
+//
+//   Navigation update (turn-by-turn):
+//     f5=LD{ f1=4(innerType), f2=distance(str), f3=instruction(str), f4=timeRemaining(str),
+//            f5=totalDistance(str), f6=eta(str), f7=speed(str), f8=icon(varint 1-36) }
+//     36 icon types (G2NavigationIcon): turnLeft(1)..unknown(36)      [HIGH — iOS SDK confirmed]
+//
+//   10 sub-commands (G2NavigationConstants.SubCommand):                [HIGH — iOS SDK confirmed]
+//     start(1):         f5=LD{f1=1}
+//     basicInfo(2):     f5=LD{f1=2} (+ string fields for turn-by-turn)
+//     miniMap(3):       f5=LD{f1=3} (then BMP via 0xC4/0xC5 file transfer)
+//     overviewMap(4):   f5=LD{f1=4} (then BMP via 0xC4/0xC5 file transfer)
+//     heartbeat(5):     f5=LD{f1=5}
+//     recalculating(6): f5=LD{f1=6}
+//     arrive(7):        f5=LD{f1=7}
+//     stop(8):          f5=LD{f1=8}
+//     startError(9):    f5=LD{f1=9, f2=errorInfo(str)}
+//     favoriteList(10): f5=LD{f1=10, f9=repeated{LD: f1=index, f2=name(str), f3=address(str opt)}}
+//
+//   NOTE: Navigation does NOT use magic_random (no f8 dedup field)
+
+
+===============================================================================
+12. DEVICE INFO (Service 0x09)
+    No dedicated field descriptor table — uses custom encoder
+    Encoder functions:
+      FUN_004aa906  - pb_service_device_info_handler (calls device_info_encode)
+      FUN_004aa4e8  - device_info_encode (custom encoding, no pb_field_t table)
+      FUN_004aaaae  - device_info_query_handler (secondary)
+      FUN_004aac94  - device_status_notify_send
+      FUN_004aa5ee  - device_status_encode
+    Struct: dynamic, 0x100 bytes
+    Encode buffer: DAT_004ab0cc, 0x100 bytes
+===============================================================================
+
+// Device info uses a CUSTOM encoder (FUN_004aa4e8), not a standard
+// pb_field_t table. The struct is populated by querying hardware:
+//   Serial number, firmware version, hardware version, model, etc.
+
+message DeviceInfoResponse {
+  uint32 type = 1;                // response type                     [HIGH]
+  string serial_number = 2;       //                                   [HIGH]
+  string firmware_version = 3;    //                                   [HIGH]
+  string hardware_version = 4;    //                                   [HIGH]
+  string model = 5;               // "S200"                           [HIGH]
+  // Additional fields for battery, connection state, etc.
+}
+
+// Device status notification (FUN_004aac94):
+//   Allocates 0x68 struct via build_device_status_struct
+//   TX on service 0x09 (same as device info)
+//   Includes display mode, battery, wear status
+
+
+===============================================================================
+13. QUICKLIST + HEALTH (Service 0x0C)
+    Field Descriptor Table: DAT_00568d34
+    Encoder functions:
+      FUN_0056892a  - pb_service_quicklist_health_handler (type=1, field_count=3)
+      FUN_00568b8a  - quicklist_item_encoder (type=2, field_count=4)
+    Decoder functions:
+      FUN_00568ac0  - quicklist_rx_decoder
+    Struct: DAT_0056918c, 0x1238 bytes (4,664 bytes)
+    Encode buffer: DAT_00569188, 0x400 bytes
+===============================================================================
+
+message QuicklistResponse {
+  uint32 type = 1;                // 1=response, 2=item_update         [HIGH]
+  uint32 msg_id = 2;              //                                   [HIGH]
+  // field_count = 3 (response) or 4 (item update)
+  uint32 item_data_0 = 3;         // offset 8: *param_2 (u32)         [MEDIUM]
+  uint32 item_data_1 = 4;         // offset 0xC: param_2[1]           [MEDIUM]
+  uint32 item_data_2 = 5;         // offset 0x10: param_2[2]          [MEDIUM]
+  // offset 0xEC: terminator = 0
+  // Item update: offset 0x1230 terminator = 0
+  // 4.6KB struct accommodates multiple quicklist items
+}
+
+// TX on 0x0C-20 (from iOS SDK G2QuicklistProtocol + G2HealthDataProtocol):
+//
+// QUICKLIST COMMANDS (CommandIDs 1-6):
+//   fullUpdate (cmdId=1):   f1=1, f2=msgId, f5=repeated{LD item}     [HIGH — iOS SDK confirmed]
+//   batchAdd (cmdId=2):     f1=2, f2=msgId, f5=repeated{LD item}     [HIGH]
+//   singleItem (cmdId=3):   f1=3, f2=msgId, f5=LD{item}              [HIGH]
+//   deleteItem (cmdId=4):   f1=4, f2=msgId, f5=LD{f1=uid}            [HIGH]
+//   toggleComplete (cmdId=5): f1=5, f2=msgId, f5=LD{f1=uid, f3=isCompleted} [HIGH]
+//   pagingRequest (cmdId=6): f1=6, f2=msgId, f5=LD{f1=uid} (optional) [HIGH]
+//
+//   Per-item protobuf (G2QuicklistItem):                              [HIGH — iOS SDK confirmed]
+//     f1: uid (string, length-delimited)      — unique identifier
+//     f2: index (varint)                      — display order
+//     f3: isCompleted (varint, 0 or 1)        — completion state
+//     f4: title (string, length-delimited)    — display text (max 255 bytes)
+//     f5: timestamp (varint, optional)        — unix timestamp
+//     f6: ts_type (varint, optional)          — timestamp format type
+//   Firmware source: page_state_sync.c + quicklist.c
+//
+// HEALTH DATA COMMANDS (CommandIDs 10-12, disjoint from quicklist):
+//   batchSave (cmdId=10):   f1=10, f2=msgId, f5=repeated{LD record}  [HIGH — iOS SDK confirmed]
+//   highlightUpdate (cmdId=11): f1=11, f2=msgId, f5=LD{record}       [HIGH]
+//   query (cmdId=12):       f1=12, f2=msgId                           [HIGH]
+//
+//   Per-record protobuf (G2HealthRecord):
+//     f1: data_type (string LD)  — "HEART_RATE","BLOOD_OXYGEN","TEMPERATURE",
+//                                   "STEPS","CALORIES","SLEEP","PRODUCTIVITY","ACTIVITY_MISSING"
+//     f2: value (varint)
+//     f3: goal (varint, optional)
+//     f4: avg_value (varint, optional)
+//     f5: duration (varint, seconds, optional)
+//     f6: trend (varint, optional)
+//
+// RX on 0x0C-00:
+//   ACK: f1=1, f3=empty (0x08011a00)
+//   Item data: f5 repeated fields (decoded via G2QuicklistProtocol.parseResponse)
+
+
+===============================================================================
+14. DISPLAY CONFIG (Service 0x0E)
+    Field Descriptor Table: DAT_0056a73c
+    Encoder functions:
+      FUN_0056a28e  - pb_service_display_config_handler (type=1, field_count=3)
+      FUN_0056a5a0  - display_config_secondary_encode (type=2)
+    Decoder functions:
+      FUN_0056a42e  - display_config_rx_decoder
+      FUN_0056965e  - display_config_region_parse (6 regions)
+    Struct: DAT_0056a900, 0x31C bytes (796 bytes)
+    Encode buffer: DAT_0056a8fc, 0x100 bytes
+===============================================================================
+
+message DisplayConfigResponse {
+  uint32 type = 1;                // 1=config_ack, 2=secondary         [HIGH]
+  uint32 msg_id = 2;              //                                   [HIGH]
+  // field_count = 3
+  bytes  region_data = 3;         // offset 4-0x19: 22 bytes copied
+                                  // from param_2, offsets:
+                                  // 0, 4, 8, 0xC, 0x10, 0x15, 0x18   [MEDIUM]
+  // offset 0x18: forced to 0
+  // offset 0x19: param_2[0x15]
+  // 6-region display config with IEEE 754 floats
+}
+
+// TX on 0x0E-20 (from Swift SDK):
+//   6 regions with IEEE 754 floats (x, y, w, h per region)
+//   Write-only (no ACK expected — inferred from sensor frames)
+
+
+===============================================================================
+15. ONBOARDING (Service 0x10)
+    Field Descriptor Table: DAT_004b0168
+    Encoder functions:
+      FUN_004af9d8  - pb_service_onboarding_handler (type=1, field_count=3)
+      FUN_004afb62  - onboarding_echo_send (auto-increment msgId)
+    Decoder functions:
+      FUN_004afcee  - onboarding_event_rx
+    Struct: DAT_004b031c, 0x10 bytes (16 bytes — smallest struct)
+    Encode buffer: DAT_004b0318, 0x100 bytes
+    Auto-increment counter: DAT_004b0338
+===============================================================================
+
+message OnboardingResponse {
+  uint32 type = 1;                // 1 = onboarding state              [HIGH]
+  uint32 msg_id = 2;              // param_1 or auto-increment         [HIGH]
+  // field_count = 3
+  uint32 state = 3;               // offset 4: *param_2 (state byte)   [HIGH]
+  uint32 padding = 4;             // offset 5: 0                       [LOW]
+}
+
+// TX on 0x10-20 (from Swift SDK):
+//   sendStartUp, sendStart, sendEnd, queryHeadUpStatus
+//   7 states defined in G2OnboardingProtocol
+// RX on 0x10-00:
+//   Basic ACK: 0x08011a00 (f1=1, f3=empty)
+
+
+===============================================================================
+16. MODULE CONFIGURE (Service 0x20)
+    Field Descriptor Table: DAT_0046b934
+    Encoder functions:
+      FUN_0046b058  - pb_service_module_configure_handler (type=0, field_count=2)
+      FUN_0046b25e  - general_configure_process (type=2, field_count=4)
+    Struct: DAT_0046b92c, 8 bytes
+    Encode buffer: 0x0D bytes (13 bytes — smallest buffer)
+===============================================================================
+
+message ModuleConfigureResponse {
+  uint32 type = 1;                // 0=query, 2=set                    [HIGH]
+  uint32 eye_id = 2;              // param_1 (eye identifier)          [HIGH]
+  // field_count = 2 (query) or 4 (set)
+  uint32 calibration_value = 3;   // offset 4: *DAT_0046b91c (u32)    [MEDIUM]
+  // Per-eye brightness calibration
+  // Inter-eye sync: 10-byte packet via inter_eye_command_sync
+}
+
+// TX on 0x20-20 (from Swift SDK):
+//   4 cmd types defined in G2ModuleConfigureProtocol
+//   Per-eye brightness calibration values
+// RX on 0x20-00:
+//   Response echoes calibration state
+
+
+===============================================================================
+17. BOX DETECT / DISPLAY TRIGGER (Service 0x81)
+    Field Descriptor Table: DAT_004fcc98
+    Encoder functions:
+      FUN_004fc98c  - pb_service_box_detect_handler (type=1, field_count=3)
+      FUN_004fcb08  - box_detect_echo_send (auto-increment msgId)
+    Decoder functions:
+      FUN_004fd046  - display_trigger_callback
+    Struct: DAT_004fccd4, 10 bytes
+    Encode buffer: DAT_004fccd0, 0x100 bytes
+    Auto-increment counter: DAT_004fccf0
+===============================================================================
+
+message BoxDetectResponse {
+  uint32 type = 1;                // 1 = box detect info               [HIGH]
+  uint32 msg_id = 2;              // param_1 or auto-increment         [HIGH]
+  // field_count = 3
+  uint32 soc = 3;                 // offset 4: case_get_soc()          [HIGH]
+  uint32 charging = 4;            // offset 5: case_get_charging_state [HIGH]
+  uint32 lid_state = 5;           // offset 6: case_get_lid_state()    [HIGH]
+  uint32 in_case = 6;             // offset 7: case_get_in_case()      [HIGH]
+  uint32 padding = 7;             // offset 8: always 0                [LOW]
+}
+
+// Hardware sources:
+//   case_get_soc (FUN_004b43d8): battery SOC via I2C/GPIO
+//   case_get_charging_state (FUN_004b43ee): charging status
+//   case_get_lid_state (FUN_004b4404): lid sensor
+//   case_get_in_case (FUN_004b46f8): proximity/hall sensor
+// Observed via G2GlassesCaseReader: soc, charging, lidOpen, inCase
+
+
+===============================================================================
+18. RING RELAY (Service 0x91)
+    Field Descriptor Table: DAT_005b4770
+    Encoder functions:
+      FUN_005b4506  - pb_service_ring_handler (type=1, field_count=3)
+    Decoder functions:
+      FUN_005b46b0  - ring_rx_callback (gesture dispatch)
+    Struct: DAT_005b47bc, 0x40 bytes (64 bytes)
+    Encode buffer: DAT_005b47b8, 0x100 bytes
+===============================================================================
+
+message RingRelayResponse {
+  uint32 type = 1;                // 1 = ring relay                    [HIGH]
+  uint32 msg_id = 2;              // param_1                           [HIGH]
+  // field_count = 3
+  uint32 payload_len = 3;         // offset 4: *param_2 (u16)         [MEDIUM]
+  bytes  payload_data = 4;        // offset 6: param_2[1..6] (max 6B) [MEDIUM]
+  uint32 ring_command = 5;        // offset 0x0C: (char)param_2[4]    [MEDIUM]
+  uint32 ring_data = 6;           // offset 0x10: *(u32*)(param_2+6)  [MEDIUM]
+  uint32 terminator = 7;          // offset 0x14: always 0            [LOW]
+}
+
+// Ring data layout from param_2:
+//   [0]: payload length (max 6 bytes)
+//   [1..6]: payload data (gesture bytes)
+//   [4]: command byte (mapped to offset 0x0C)
+//   [6..7]: u32 extra data
+// RX callback: param_1=0 -> ring_gesture_process, else error
+// TX on 0x91-20 (from Swift SDK):
+//   G2RingRelaySender for outbound relay commands
+
+
+===============================================================================
+ADDITIONAL NAVIGATION ENCODER VARIANTS
+(All use the same DAT_00589c50 field descriptor table)
+===============================================================================
+
+// Dynamically-allocated navigation encoders (large payloads):
+// FUN_00588e34: type=1, dynamic alloc 0x2018+10000, field_count=3
+//   *puVar1=1, puVar1[1]=0, puVar1[4]=0
+// FUN_00588f70: type=0x0D, dynamic alloc, field_count=3
+//   *puVar1=0xd, puVar1[1]=0, puVar1[4]=0
+// FUN_005890ac: type=0x11, dynamic alloc, field_count=3
+//   *puVar1=0x11, puVar1[1]=0, puVar1[4]=0
+// All send via ble_msgtx_send (FUN_0046f6ca)(1, 8, ...) — continuation path
+
+// Full navigation type enumeration from decompiled encoders:
+//   Type  0 = init/base (FUN_00589324)
+//   Type  1 = PB_TxEncodeNav_start (FUN_00588e34, dynamic)
+//   Type  5 = route_update (FUN_005893a0)
+//   Type  6 = direction_update (FUN_0058941c)
+//   Type 10 = eta_distance (FUN_00589498)
+//   Type 11 = turn_info (FUN_00589514)
+//   Type 12 = waypoint (FUN_00589590)
+//   Type 13 = PB_TxEncodeNav_state (FUN_00588f70, dynamic)
+//   Type 17 = PB_TxEncodeNav_route_info (FUN_005890ac, dynamic)
+
+
+===============================================================================
+CROSS-REFERENCE: STRUCT FIELD MAPPING TO PROTOBUF FIELDS
+===============================================================================
+
+The nanopb encoding convention maps C struct offsets to protobuf field numbers:
+
+For ALL services, the common pattern is:
+  struct[0]   -> f1  (type/command)
+  struct[1]   -> f2  (msgId/sequence)
+  struct[2:3] -> NOT A FIELD (internal field_count controlling encoding depth)
+  struct[4+]  -> f3+ (payload)
+
+The field_count at struct[2:3] determines HOW MANY entries in the pb_field_t
+table are encoded. Larger field_counts encode more fields from the same table.
+This is why different command types within one service produce different numbers
+of protobuf fields despite sharing the same descriptor table.
+
+Per-service field_count values observed:
+  Auth main:        3-4 fields
+  Auth keepalive:   5 fields
+  Settings:         variable (timestamp wrapper)
+  EvenAI basic:     3-4 fields
+  EvenAI extended:  5-7 fields
+  EvenAI advanced:  9-13 fields (type-dependent)
+  EvenHub:          1-19 fields (type-dependent, largest range)
+  Conversate:       8-9 fields
+  Translate:        5-7 fields
+  Teleprompter:     7-12 fields
+  Dashboard:        3-8 fields
+  Menu:             3-4 fields
+  Notification:     3-5 fields
+  Navigation:       3 fields (consistent)
+  Quicklist:        3-4 fields
+  DisplayConfig:    3 fields
+  Onboarding:       3 fields
+  ModuleConfigure:  2-4 fields
+  BoxDetect:        3 fields
+  Ring:             3 fields
+
+
+===============================================================================
+COMMON PROTOBUF MESSAGE WRAPPER
+===============================================================================
+
+// Every G2 BLE protobuf message follows this outer structure.
+// The G2 packet envelope (AA 21/12 ...) wraps this protobuf payload.
+
+// Generic G2 protobuf message (common to all services):
+message G2ServiceMessage {
+  uint32 type = 1;        // Command type (service-specific enum)
+  uint32 msg_id = 2;      // Message ID / sequence number
+  // INTERNAL: field_count at struct offset 2-3 controls encoding depth
+  // ... service-specific fields from f3 onward ...
+}
+
+// The field_count is NOT transmitted on the wire. It only controls
+// the nanopb encoder's iteration over the pb_field_t table entries.
+// The receiving end uses pb_decode with the SAME field descriptor table,
+// which iterates over ALL entries and decodes whatever wire data is present.
+
+
+===============================================================================
+NANOPB INFRASTRUCTURE FUNCTIONS
+===============================================================================
+
+pb_encode_28b6:       FUN_004a28b6  (ctx, fields, struct) -> encoded_len
+pb_decode_4490:       FUN_004a4490  (ctx, fields, struct) -> success/fail
+pb_ostream_init:      FUN_004a2278  (stream, buf, size)
+pb_istream_from_buffer: FUN_004a380c  (ctx, buf, size)
+pb_decode_crc:        FUN_004a9de8  (heartbeat CRC decode)
+memset:               FUN_0043c0e4  (buf, size, 0)
+am_util_string_memcpy20: FUN_00439c04  (dst, src, 0x14)  — copy 20-byte stream context
+memcpy:               FUN_00439be4  (dst, src, len)
+ble_msgtx_send_wrapper: FUN_0046f5c4 (1, svcId, buf, len) — initial TX
+ble_msgtx_send:       FUN_0046f6ca  (1, svcId, buf, len) — continuation TX
+ble_msgtx_priority_send: FUN_0046f4e8  (1, svcId, buf, len) — priority (auth)
+ble_msgtx_keepalive_send: FUN_0046f556  (1, svcId, buf, len) — keepalive TX
+
+
+===============================================================================
+SUMMARY: 20 FIELD DESCRIPTOR TABLES
+===============================================================================
+
+#  Address        Service  Name                    Ref Count  Struct Size
+ 1 DAT_0049eaac   0x80     auth_main               4          param (var)
+ 2 DAT_0049f408   0x80     auth_keepalive           3          0x1a8
+ 3 DAT_0046c3f0   0x0D     settings                 3          0x0C
+ 4 DAT_004eef64   0x07     evenai_basic (1-4)        3          0x20C
+ 5 DAT_004efadc   0x07     evenai_ask_large (3,5)    2          0x20C
+ 6 DAT_004f0458   0x07     evenai_advanced (7-9)     4          0x20C
+ 7 PTR_DAT_004f0754 0x07   evenai_config (10)        1*         0x20C
+ 8 DAT_0059ca7c   0xE0     evenhub                  7          0x2654
+ 9 DAT_005932d8   0x0B     conversate               2          0x1D6C
+10 DAT_005b4e00   0x05     translate                3          0x854
+11 DAT_0054d1f0   0x06     teleprompter             6          0xF58
+12 DAT_0056048c   0x01     dashboard                4          0x100
+13 DAT_0045bcf0   0x03     menu                     3          0x37C
+14 DAT_004ec5d0   0x04     notification             5          0x4A
+15 DAT_00589c50   0x08     navigation               15         0x2018
+16 DAT_00568d34   0x0C     quicklist_health          3          0x1238
+17 DAT_0056a73c   0x0E     display_config           3          0x31C
+18 DAT_004b0168   0x10     onboarding               5          0x10
+19 DAT_0046b934   0x20     module_configure         2          0x08
+20 DAT_004fcc98   0x81     box_detect               3          0x0A
+21 DAT_005b4770   0x91     ring                     2          0x40
+
+* PTR_DAT_004f0754 is a pointer-to-table (indirect reference)
+
+Note: Service 0x09 (DeviceInfo) uses a custom encoder (FUN_004aa4e8),
+not a standard pb_field_t table, so it is not counted in the 20 tables
+but IS listed as a service handler. Total: 20 tables for 17 services
+(EvenAI uses 4 tables, Auth uses 2 tables).
+
+
+===============================================================================
+SERVICES WITHOUT DEDICATED TX ENCODER (RX-only or handled differently)
+===============================================================================
+
+0x02 (Notification content)   - Handled by file transfer + 0x04 display wake
+0x09 (DeviceInfo)             - Custom encoder, no pb_field_t table
+0x0A (SessionInit)            - Not in the 20 tables; handled differently
+0x0F (Logger)                 - Uses ProtoBaseSettings on 0x0D
+0x21 (SystemAlert)            - Receive-only (no TX path confirmed)
+0x22 (SystemClose)            - Handled via G2SystemCloseSender
+0xFF (SystemMonitor)          - Uses dedicated protocol parsing
+0xC4/0xC5 (FileTransfer)      - Non-protobuf: 2-byte LE status word
+
+
+===============================================================================
+MAGIC_RANDOM FIELD CROSS-REFERENCE (iOS SDK confirmed)
+===============================================================================
+
+The firmware uses magic_random as a dedup counter to reject duplicate BLE messages.
+Firmware log pattern: "[pb.<service>]Duplicate message detected: magic_random = %d"
+
+Service     Field    Encoding                Counter Range  Confidence
+---------   ------   ----------------------  ------------   ----------
+Conversate  f8       nested {f1=counter}     300+           HIGH (SDK)
+Translate   f8       nested {f1=counter}     200+           HIGH (SDK)
+Teleprompter f8      nested {f1=counter}     400+           HIGH (SDK)
+Menu        f3       plain varint            700+           HIGH (SDK)
+Settings    f8       nested {f1=counter}     (varies)       HIGH (SDK)
+EvenAI      f8       nested {f1=counter}     100+           HIGH (SDK)
+
+Notes:
+- Menu is the outlier: uses f3 (plain varint) instead of f8 (nested message).
+  Firmware field name is "magicRandom" not "magic_random" for menu.
+- Translate heartbeat (type=22) and mode switch (type=23) omit magic_random.
+- Teleprompter sync (0x80-00) and displayConfig (type=2) omit magic_random.
+- Navigation, Quicklist, Health, and other services do NOT use magic_random.
+- Counter ranges are per-sender singletons: each sender starts from a fixed base
+  and increments monotonically per session.

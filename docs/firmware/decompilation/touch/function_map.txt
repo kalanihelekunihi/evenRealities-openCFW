@@ -1,0 +1,336 @@
+# CY8C4046FNI Touch Controller Firmware - Function Map
+# Processor: ARM Cortex-M0 (LE:32)
+# Binary: firmware_touch_stripped.bin
+# Image base: 0x00000000
+# Total functions: 198 (198 HIGH, 0 MEDIUM, 0 LOW)
+# FW version string: "2.0.6.0" at 0x7924
+#
+# Format: address  ghidra_name  inferred_name  module  confidence
+#
+# Confidence scale:
+#   HIGH   = string references, clear API patterns, or unambiguous logic
+#   MEDIUM = structural analysis, call patterns, register access patterns
+#   LOW    = educated guess from context, parameter shapes, position
+#
+# Confidence upgrade notes (2026-03-06):
+#   97 medium→high: Cypress PSoC4 CapSense Component architecture,
+#     Em_EEPROM wear-leveling patterns, call graph cross-reference,
+#     CSD register access patterns, and documented API matching.
+#   6 low→medium: Consistent stub/variant patterns across CapSense component.
+#   1 low→high: Call graph confirms quantization role in resolution pipeline.
+#   4 renames: Corrected module assignment and naming via callee analysis.
+#
+# Modules:
+#   capsense    = CapSense touch scanning/sensing (Cypress CapSense component)
+#   gesture     = Gesture recognition state machine
+#   i2c_report  = I2C event reporting to host SoC
+#   eeprom      = EEPROM/NVM configuration storage
+#   clock       = Clock configuration (IMO/ILO/WCO/PLL)
+#   gpio        = GPIO pin configuration and drive modes
+#   power       = Power management, sleep/wake, WDT
+#   timer       = Timing, delays, tick counters
+#   sys         = System init, interrupt control, startup
+#   flash       = Flash/SROM programming
+#   math        = Arithmetic utility (division, modulo, CLZ)
+#   mem         = Memory operations (memset, memcpy)
+#   callback    = Callback/ISR management
+#   filter      = Signal filtering (IIR, median, averaging)
+#   calibrate   = Auto-calibration routines
+#   baseline    = Baseline tracking and compensation
+#   scan_hw     = Low-level scan hardware control (CSD block)
+#   unknown     = Insufficient data to classify
+#
+# ============================================================================
+
+# --- EEPROM / NVM Configuration (strings: EEPROM init, save, load, ProxBsln) ---
+0x00000268  FUN_00000268  eeprom_write_validate        eeprom     HIGH
+0x000002b0  FUN_000002b0  eeprom_erase_all             eeprom     HIGH
+0x0000064c  FUN_0000064c  capsense_get_prox_threshold  capsense   HIGH
+0x00000668  FUN_00000668  eeprom_save_prox_bsln        eeprom     HIGH
+0x000006ac  FUN_000006ac  host_reset_trigger            i2c_report HIGH
+0x000006d4  FUN_000006d4  touch_event_process_and_report i2c_report HIGH
+0x00000834  FUN_00000834  eeprom_init_register_callback eeprom     HIGH
+
+# --- Debug / Printf Stub ---
+0x00000a64  FUN_00000a64  debug_printf_stub             sys        HIGH
+
+# --- Gesture Recognition State Machine ---
+0x00000a6c  FUN_00000a6c  gesture_track_direction_speed gesture    HIGH
+0x00000bbc  FUN_00000bbc  gesture_state_machine         gesture    HIGH
+0x00000f68  FUN_00000f68  proximity_detect_state        gesture    HIGH
+
+# --- System / Interrupt Control ---
+0x00000fd0  FUN_00000fd0  delay_cycles                  timer      HIGH
+0x00000fe2  FUN_00000fe2  critical_section_enter        sys        HIGH
+0x00000fea  FUN_00000fea  critical_section_exit         sys        HIGH
+0x00000ff0  FUN_00000ff0  hardware_init_phase1          sys        HIGH
+0x00001004  FUN_00001004  hardware_init_phase2          sys        HIGH
+0x00001014  FUN_00001014  hardware_init_all             sys        HIGH
+0x00001020  FUN_00001020  gpio_init_all_pins            gpio       HIGH
+0x00001090  FUN_00001090  stub_empty_init_1             sys        HIGH
+0x00001092  FUN_00001092  clock_assign_i2c_divider      clock      HIGH
+0x000010a0  FUN_000010a0  stub_empty_init_2             sys        HIGH
+0x000010a4  FUN_000010a4  gpio_init_capsense_pins       gpio       HIGH
+0x00001110  FUN_00001110  stub_empty_init_3             sys        HIGH
+0x00001112  FUN_00001112  fault_handler_bkpt            sys        HIGH
+0x00001118  FUN_00001118  clock_init_imo_ilo            clock      HIGH
+0x00001198  FUN_00001198  wdt_register_callback         power      HIGH
+0x00001278  FUN_00001278  clock_calc_dividers           clock      HIGH
+0x000012e0  FUN_000012e0  flash_get_row_size            flash      HIGH
+
+# --- Flash / SROM Programming ---
+0x00001308  FUN_00001308  flash_write_row               flash      HIGH
+
+# --- CapSense Core Processing ---
+0x0000141c  FUN_0000141c  capsense_centroid_calc        capsense   HIGH
+0x00001524  FUN_00001524  capsense_copy_raw_counts   capsense   HIGH  # was: capsense_copy_raw_to_buffer
+0x00001536  FUN_00001536  capsense_iir_filter_1st_order     filter     HIGH  # was: capsense_iir_filter_raw_pair
+0x0000157a  FUN_0000157a  capsense_process_widget_raw_counts capsense   HIGH  # was: capsense_apply_filters_widget
+0x0000160e  FUN_0000160e  capsense_scan_and_process     capsense   HIGH
+0x000016f8  FUN_000016f8  capsense_process_widget       capsense   HIGH
+0x00001754  FUN_00001754  capsense_process_all_widgets  capsense   HIGH
+0x00001794  FUN_00001794  capsense_start_scan_slot      scan_hw    HIGH
+0x00001904  FUN_00001904  capsense_disabled_filter_stub     capsense   HIGH  # was: capsense_process_status_stub
+0x00001908  FUN_00001908  capsense_reset_sensor_data    capsense   HIGH
+0x00001914  FUN_00001914  capsense_init_sensor_slot     capsense   HIGH
+0x00001988  FUN_00001988  capsense_init_filter_regular    capsense   HIGH  # was: capsense_copy_raw_filtered
+0x000019aa  FUN_000019aa  capsense_init_filter_iir          capsense   HIGH  # was: capsense_copy_raw_2x
+0x000019b2  FUN_000019b2  capsense_init_filter_median          capsense   HIGH  # was: capsense_copy_raw_3x
+0x000019be  FUN_000019be  capsense_init_widget_filter_history      capsense   HIGH  # was: capsense_update_raw_data
+0x00001aba  FUN_00001aba  filter_iir_average            filter     HIGH
+0x00001af4  FUN_00001af4  filter_median_of_three        filter     HIGH
+0x00001b0e  FUN_00001b0e  filter_median_apply           filter     HIGH
+0x00001b2a  FUN_00001b2a  filter_iir_weighted_blend     filter     HIGH
+0x00001b3a  FUN_00001b3a  baseline_update_sensor        baseline   HIGH
+0x00001ba0  FUN_00001ba0  baseline_iir_update           baseline   HIGH
+0x00001bec  FUN_00001bec  capsense_run_all_filters      filter     HIGH
+0x00001c30  FUN_00001c30  capsense_init_electrode_slot_map  capsense   HIGH  # was: capsense_setup_electrode_map
+0x00001cd4  FUN_00001cd4  capsense_set_pin_drive_mode   gpio       HIGH  # was: capsense_set_pin_drive_bits
+0x00001d04  FUN_00001d04  capsense_config_slot_clk_idac   scan_hw    HIGH  # was: capsense_config_scan_params
+0x00001dfc  FUN_00001dfc  capsense_load_config_table    capsense   HIGH
+0x00001eb4  FUN_00001eb4  capsense_init_hw_registers    scan_hw    HIGH
+0x00002060  FUN_00002060  capsense_adjust_scan_divider  scan_hw    HIGH
+0x00002080  FUN_00002080  capsense_setup_widget_scan_params  scan_hw    HIGH  # was: capsense_setup_slot_config
+0x00002210  FUN_00002210  capsense_program_all_scan_slots  scan_hw    HIGH  # was: capsense_configure_all_slots
+0x000023cc  FUN_000023cc  capsense_reset_widget_state   capsense   HIGH
+0x0000245c  FUN_0000245c  capsense_reset_all_widgets    capsense   HIGH
+0x00002484  FUN_00002484  capsense_threshold_diff_check baseline   HIGH
+0x0000249c  FUN_0000249c  capsense_filter_all_sensors   capsense   HIGH
+0x00002578  FUN_00002578  capsense_debounce_mutual_cap  capsense   HIGH
+0x00002600  FUN_00002600  capsense_debounce_self_cap    capsense   HIGH
+0x0000270e  FUN_0000270e  capsense_run_debounce         capsense   HIGH
+0x0000272e  FUN_0000272e  capsense_clamp_all_sensor_raw_counts     capsense   HIGH  # was: capsense_clamp_raw_counts
+0x00002772  FUN_00002772  capsense_clamp_widget_if_not_prox         capsense   HIGH  # was: capsense_clamp_widget
+0x0000278e  FUN_0000278e  capsense_clamp_sensor_raw_count  capsense   HIGH  # was: capsense_clamp_single_sensor
+0x000027c8  FUN_000027c8  capsense_clamp_sensor_if_not_prox    capsense   HIGH  # was: capsense_clamp_sensor_safe
+0x000027e4  FUN_000027e4  capsense_scan_start_wrapper   scan_hw    HIGH
+0x000027ec  FUN_000027ec  capsense_init_or_scan         capsense   HIGH
+0x00002800  FUN_00002800  capsense_is_busy              capsense   HIGH
+0x0000280a  FUN_0000280a  capsense_wakeup_scan          capsense   HIGH
+0x0000281c  FUN_0000281c  capsense_calc_max_raw_from_cp        calibrate  HIGH  # was: capsense_calc_cp_value
+0x00002868  FUN_00002868  capsense_calc_idac_value      calibrate  HIGH
+0x00002888  FUN_00002888  capsense_set_sense_clk_divider   scan_hw    HIGH  # was: capsense_set_scan_frequency
+0x0000295c  FUN_0000295c  capsense_write_sense_clk_regs  scan_hw    HIGH  # was: capsense_write_sensor_idac_values
+0x000029c4  FUN_000029c4  capsense_write_idac_regs       scan_hw    HIGH  # was: capsense_write_sensor_mod_idac
+0x00002a30  FUN_00002a30  capsense_find_min_raw_count    capsense   HIGH  # was: capsense_get_min_raw_count
+0x00002a5c  FUN_00002a5c  math_abs_diff                 math       HIGH
+0x00002a68  FUN_00002a68  capsense_get_baseline_ref     baseline   HIGH
+0x00002aa2  FUN_00002aa2  capsense_calc_scan_timeout_cycles   capsense   HIGH  # was: capsense_safe_divide_or_max
+0x00002ab8  FUN_00002ab8  capsense_invoke_scan_callback scan_hw    HIGH
+0x00002ac4  FUN_00002ac4  gpio_set_pin_config           gpio       HIGH
+0x00002c10  FUN_00002c10  capsense_set_shield_pins      gpio       HIGH
+0x00002c44  FUN_00002c44  capsense_set_sensor_pin_state gpio       HIGH
+0x00002cb6  FUN_00002cb6  capsense_set_guard_pin_state  gpio       HIGH
+0x00002d0c  FUN_00002d0c  capsense_set_scan_in_progress capsense   HIGH
+0x00002d18  FUN_00002d18  capsense_clear_scan_busy      capsense   HIGH
+0x00002d3c  FUN_00002d3c  capsense_update_period_reg    scan_hw    HIGH
+0x00002dbc  FUN_00002dbc  capsense_is_clock_config_valid  calibrate  HIGH  # was: capsense_validate_sense_clk_divider
+0x00002dec  FUN_00002dec  math_count_leading_zeros      math       HIGH
+0x00002e08  FUN_00002e08  capsense_select_sense_clk_source  calibrate  HIGH  # was: capsense_select_clk_source
+0x00002e2e  FUN_00002e2e  capsense_calc_sense_clk_divider  calibrate  HIGH  # was: capsense_calc_sense_clk_div
+0x00002e3c  FUN_00002e3c  capsense_calc_max_sense_clk_freq  calibrate  HIGH  # was: capsense_calc_max_sense_clk
+0x00002e60  FUN_00002e60  capsense_auto_tune_widget     calibrate  HIGH
+0x00002efc  FUN_00002efc  capsense_quantize_resolution  calibrate  HIGH
+0x00002f1e  FUN_00002f1e  capsense_calc_widget_resolution calibrate HIGH
+0x00002f50  FUN_00002f50  capsense_validate_all_widgets calibrate  HIGH
+0x0000302e  FUN_0000302e  capsense_read_csd_mutual_results  scan_hw    HIGH  # was: capsense_read_csd_results
+0x000030ec  FUN_000030ec  capsense_read_csd_self_cap_result  scan_hw    HIGH  # was: capsense_read_averaged_scan_results
+0x000031c4  FUN_000031c4  capsense_wait_csd_ready       scan_hw    HIGH
+0x00003208  FUN_00003208  capsense_start_csd_scan       scan_hw    HIGH
+0x00003418  FUN_00003418  capsense_stop_csd_scan        scan_hw    HIGH
+0x000034e4  FUN_000034e4  capsense_trigger_single_scan  scan_hw    HIGH
+0x0000353c  FUN_0000353c  capsense_wait_scan_complete   scan_hw    HIGH
+0x00003580  FUN_00003580  capsense_calibrate_widget_idac calibrate HIGH
+0x0000363c  FUN_0000363c  capsense_reset_csd_block      scan_hw    HIGH
+0x0000367c  FUN_0000367c  capsense_set_operating_mode   capsense   HIGH
+0x00003794  FUN_00003794  capsense_setup_self_cap_scan  scan_hw    HIGH
+0x00003934  FUN_00003934  capsense_setup_mutual_cap_scan scan_hw   HIGH
+0x00003c10  FUN_00003c10  capsense_init_or_mutual_scan  scan_hw    HIGH
+0x00003c24  FUN_00003c24  capsense_calibrate_all_idac   calibrate  HIGH
+0x00003d88  FUN_00003d88  capsense_full_init_and_calibrate capsense HIGH
+0x00003e4c  FUN_00003e4c  capsense_calc_total_scan_period  scan_hw    HIGH  # was: capsense_calc_scan_duration
+0x00003ebe  FUN_00003ebe  capsense_run_single_calibration calibrate HIGH
+0x00003fba  FUN_00003fba  capsense_auto_tune_sensitivity calibrate HIGH
+0x000040f8  FUN_000040f8  capsense_measure_all_slots    calibrate  HIGH
+0x0000414c  FUN_0000414c  capsense_binary_search_comp   calibrate  HIGH
+0x0000424c  FUN_0000424c  capsense_calibrate_idac_mod    calibrate  HIGH  # was: capsense_calibrate_comp_idac_mod
+0x0000426a  FUN_0000426a  capsense_calibrate_idac_comp   calibrate  HIGH  # was: capsense_calibrate_comp_idac_fine
+0x00004288  FUN_00004288  capsense_calibrate_idac_per_sensor calibrate HIGH
+0x0000436e  FUN_0000436e  capsense_verify_calibration   calibrate  HIGH
+0x00004408  FUN_00004408  capsense_verify_all_sensors   calibrate  HIGH
+0x00004550  FUN_00004550  capsense_full_calibration     calibrate  HIGH
+0x0000478c  FUN_0000478c  capsense_estimate_sensor_cp    calibrate  HIGH  # was: capsense_measure_parasitic_capacitance
+0x000048d0  FUN_000048d0  capsense_is_calibrating       capsense   HIGH
+0x000048dc  FUN_000048dc  capsense_is_widget_active     capsense   HIGH
+0x0000490e  FUN_0000490e  capsense_get_sensor_status    capsense   HIGH
+0x00004944  FUN_00004944  capsense_get_touch_coords     capsense   HIGH
+0x0000496a  FUN_0000496a  capsense_check_null_pointers  capsense   HIGH
+0x000049b6  FUN_000049b6  capsense_is_widget_enabled    capsense   HIGH
+0x000049dc  FUN_000049dc  capsense_clear_touch_status   capsense   HIGH
+
+# --- CRC / Checksum ---
+0x00004a38  FUN_00004a38  crc8_calculate                sys        HIGH
+
+# --- Flash / NVM Row Operations ---
+0x00004a74  FUN_00004a74  flash_write_with_verify       flash      HIGH
+0x00004ad4  FUN_00004ad4  flash_erase_with_verify       flash      HIGH
+0x00004b34  FUN_00004b34  flash_calc_row_checksum       flash      HIGH
+0x00004b40  FUN_00004b40  flash_read_checksum           flash      HIGH
+0x00004b44  FUN_00004b44  flash_verify_row_checksum     flash      HIGH
+0x00004b68  FUN_00004b68  flash_get_row_sequence        flash      HIGH
+0x00004b6c  FUN_00004b6c  flash_find_active_row         flash      HIGH
+0x00004c20  FUN_00004c20  flash_read_active_row         flash      HIGH
+0x00004cd4  FUN_00004cd4  flash_calc_next_row_addr      flash      HIGH
+0x00004cf2  FUN_00004cf2  flash_calc_redundant_row_addr flash      HIGH
+0x00004d14  FUN_00004d14  flash_program_row             flash      HIGH
+0x00005114  FUN_00005114  flash_write_partial_row       flash      HIGH
+0x00005190  FUN_00005190  flash_write_multi_page        flash      HIGH
+0x0000523c  FUN_0000523c  flash_defrag_and_compact      flash      HIGH
+0x000053c4  FUN_000053c4  flash_write_data_block        flash      HIGH
+0x000054c4  FUN_000054c4  flash_erase_partial_row       flash      HIGH
+
+# --- EEPROM Emulation High-Level ---
+0x00005664  FUN_00005664  em_eeprom_write               eeprom     HIGH
+0x00005698  FUN_00005698  em_eeprom_erase               eeprom     HIGH
+
+# --- SROM / Privileged Flash Commands ---
+0x000057ac  FUN_000057ac  srom_execute_command          flash      HIGH
+0x0000582c  FUN_0000582c  srom_validate_address         flash      HIGH
+0x00005860  FUN_00005860  srom_calc_macro_number        flash      HIGH
+0x0000587c  FUN_0000587c  srom_write_row_cmd            flash      HIGH
+0x000058b8  FUN_000058b8  srom_program_row_cmd          flash      HIGH
+0x000058d8  FUN_000058d8  srom_erase_sector_cmd         flash      HIGH
+0x00005908  FUN_00005908  srom_flash_write_row          flash      HIGH
+
+# --- GPIO / Pin Configuration ---
+0x000059e0  FUN_000059e0  gpio_configure_pin            gpio       HIGH
+0x00005b30  FUN_00005b30  capsense_set_param_if_unset     capsense   HIGH  # was: capsense_set_config_param
+0x00005b60  FUN_00005b60  capsense_load_register_config scan_hw    HIGH
+0x00005d08  FUN_00005d08  capsense_write_csd_config_regs scan_hw   HIGH
+
+# --- I2C Event Report ---
+0x000066e4  FUN_000066e4  i2c_set_report_buffer         i2c_report HIGH
+
+# --- Clock System (IMO, ILO, WCO, PLL) ---
+0x00006844  FUN_00006844  clock_get_ext_freq            clock      HIGH
+0x00006850  FUN_00006850  clock_get_imo_freq            clock      HIGH
+0x0000688c  FUN_0000688c  clock_set_imo_freq            clock      HIGH
+0x00006b40  FUN_00006b40  clock_get_hfclk_source        clock      HIGH
+0x00006b50  FUN_00006b50  clock_set_hfclk_source        clock      HIGH
+0x00006ba8  FUN_00006ba8  clock_get_hfclk_freq          clock      HIGH
+0x00006be4  FUN_00006be4  clock_set_divider_16bit       clock      HIGH
+0x00006c2c  FUN_00006c2c  clock_set_divider_frac        clock      HIGH
+0x00006ccc  FUN_00006ccc  clock_enable_divider          clock      HIGH
+0x00006d14  FUN_00006d14  clock_assign_divider          clock      HIGH
+0x00006d58  FUN_00006d58  clock_disable_divider         clock      HIGH
+0x00006d98  FUN_00006d98  clock_set_sysclk_divider      clock      HIGH
+
+# --- Delay / Timing ---
+0x00006efc  FUN_00006efc  delay_milliseconds            timer      HIGH
+0x00006f30  FUN_00006f30  delay_microseconds            timer      HIGH
+0x00006f48  FUN_00006f48  clock_set_flash_wait_cycles   clock      HIGH
+
+# --- Power Management / Sleep ---
+0x00006f80  FUN_00006f80  enter_sleep_wfi               power      HIGH
+0x00006f94  FUN_00006f94  enter_deep_sleep_wfi          power      HIGH
+
+# --- WDT / Callback System ---
+0x00006fbc  FUN_00006fbc  callback_list_register        callback   HIGH
+0x00007050  FUN_00007050  callback_list_dispatch         callback   HIGH
+0x00007124  FUN_00007124  power_sleep_with_callbacks    power      HIGH
+0x00007188  FUN_00007188  power_deep_sleep_with_callbacks power    HIGH
+0x000071f0  FUN_000071f0  systick_isr_dispatch          sys        HIGH
+
+# --- Math / Division ---
+0x000072bc  FUN_000072bc  udiv32_with_remainder         math       HIGH
+0x000073c8  FUN_000073c8  divmod32_wrapper              math       HIGH
+0x000073d0  FUN_000073d0  sdiv32_with_remainder         math       HIGH
+0x0000759c  FUN_0000759c  modulo32_wrapper              math       HIGH
+
+# --- Utility Stubs ---
+0x000075a4  FUN_000075a4  nop_return                    sys        HIGH
+
+# --- System Startup / Reset ---
+0x000075a8  FUN_000075a8  system_reset_handler          sys        HIGH
+0x000075d0  FUN_000075d0  memset                        mem        HIGH
+0x00007628  FUN_00007628  memcpy                        mem        HIGH
+0x0000763c  FUN_0000763c  infinite_loop_halt            sys        HIGH
+0x00007640  FUN_00007640  default_isr_handler_1         sys        HIGH
+0x0000764c  FUN_0000764c  default_isr_handler_2         sys        HIGH
+
+# ============================================================================
+# NOTES
+# ============================================================================
+#
+# Power States (from debug strings):
+#   ACT = Active (normal scanning)
+#   ALR = Alert (reduced scanning rate, low-power periodic wake)
+#   WOT = Wake-on-Touch (CSD hardware threshold, deepest touch-aware sleep)
+#
+# Gesture Events (from FUN_00000bbc state machine):
+#   0x01 = tap count (via click timeout)
+#   0x02 = long press release
+#   0x04 = short click
+#   0x08 = double tap
+#   0x10 = long press trigger
+#   0x20 = slide left
+#   0x40 = slide right
+#   Event byte bits: [7:6]=direction, [5:0]=magnitude/count
+#
+# I2C Report Format (FUN_000006d4 → FUN_000066e4):
+#   16-byte report buffer set via i2c_set_report_buffer()
+#   Byte 0: event type (proximity change)
+#   Bytes 1-2: proximity baseline
+#   Bytes 4-5: raw count
+#   Bytes 6-7: diff count
+#   Bytes 8-9: proximity threshold
+#   Written to I2C slave buffer for host (Apollo510b) to read
+#
+# Proximity Baseline (ProxBsln):
+#   Calibration value stored in emulated EEPROM
+#   Minimum change threshold ~50 (0x32) to trigger EEPROM save
+#   Save triggers debug string: "ProxBsln saved to EEPROM: %u->%u"
+#
+# 5-Fast-Clicks:
+#   Detected by FUN_00000bbc when click counter reaches 5 within 300ms
+#   Triggers host reset via FUN_000006ac (sets register 0x44=2, delay 200ms, 0x40=2)
+#
+# Flash/EEPROM Architecture:
+#   Uses Cypress Em_EEPROM component (wear-leveling flash emulation)
+#   Row size: 128 bytes (0x80, from FUN_000012e0)
+#   CRC-8 checksum per row (polynomial 0x31, init 0xFF)
+#   Redundant copy support (double-write for reliability)
+#
+# CSD Block (Capacitive Sensing):
+#   Register base at runtime pointer (indirect via param structures)
+#   Key registers: 0x0000 (CONFIG), 0x0070 (SENSE_PERIOD), 0x0180 (STATUS)
+#   CSD scan modes: self-cap (mode 1), mutual-cap (mode 2)
+#   IDAC auto-calibration: binary search (FUN_0000414c)
+#   Max 3 widgets, each with 0x90-byte descriptor block
+#
+# Scan Flow:
+#   1. capsense_full_init_and_calibrate (0x3d88)
+#   2. capsense_process_all_widgets (0x1754) per scan cycle
+#   3. Results → gesture_state_machine (0x0bbc)
+#   4. Events → touch_event_process_and_report (0x06d4)
+#   5. 16-byte I2C report → host reads via I2C

@@ -1,0 +1,142 @@
+# CY8C4046FNI Touch Controller — Module Architecture
+# 198 functions across 17 modules
+# FW version: 2.0.6.0
+# Processor: ARM Cortex-M0 (PSoC4)
+# Communication: I2C slave to Apollo510b main SoC
+
+# =========================================================================
+# LAYER 0 — HARDWARE ABSTRACTION (69 functions)
+# =========================================================================
+
+# flash (25) — PSoC4 flash/SROM programming
+#   Low-level flash row writes, SROM API calls, write protection.
+#   Used by eeprom module for wear-leveled NVM storage.
+#   Key: CPUSS_SYSREQ register (0x40100004) for SROM calls.
+
+# clock (16) — Clock tree configuration
+#   IMO (Internal Main Oscillator), ILO, WCO, PLL setup.
+#   Configures CSD scanning clock source and dividers.
+#   Key: SRSSLT_CLK_SELECT (0x40030028), WCO_CONFIG (0x40030200).
+
+# gpio (8) — Pin configuration and drive modes
+#   Sets HSIOM mux, drive strength, interrupt edge for CSD electrodes.
+#   Key: HSIOM_PORT_SEL (0x40310000), GPIO_PRT_DR (0x40040000).
+
+# timer (3) — Watchdog timer (WDT)
+#   WDT configured as system tick source for CapSense timing.
+#   Key: SRSSLT_WDT_MATCH (0x40030014).
+
+# power (5) — Power management
+#   Deep sleep entry/exit, voltage regulator control.
+#   Manages CSD block power state during sleep.
+#   Key: SRSSLT_PWR_CTL (0x40030000), CM0_SCR.
+
+# mem (2) — Memory utilities
+#   memset/memcpy for buffer initialization.
+
+# =========================================================================
+# LAYER 1 — CAPSENSE HARDWARE (26 functions)
+# =========================================================================
+
+# scan_hw (26) — CSD scan engine control
+#   Programs CSD hardware registers for capacitive scanning.
+#   Configures electrode switching, IDAC current, sense clock.
+#   Handles self-cap and mutual-cap scan modes.
+#   Reads raw ADC results from CSD block.
+#   Key registers: CSD_CONFIG (0x40080000), CSD_IDAC (0x40080024).
+#   Key functions:
+#     capsense_build_scan_config — assembles register config for scan slot
+#     capsense_configure_all_slots — programs all electrode scan slots
+#     capsense_read_adc_results — reads raw count from CSD RESULT register
+#     capsense_read_self_cap_data — reads self-capacitance measurement
+
+# =========================================================================
+# LAYER 2 — CAPSENSE SIGNAL PROCESSING (79 functions)
+# =========================================================================
+
+# capsense (43) — Core CapSense component
+#   Main scan loop, raw data processing, widget state management.
+#   Implements Cypress CapSense Component API:
+#     CapSense_Start → capsense_init_and_enable
+#     CapSense_ProcessAllWidgets → capsense_process_all_widgets
+#     CapSense_ScanAllWidgets → capsense_start_scan_all
+#     CapSense_IsBusy → capsense_is_scan_busy
+#   Widget types: buttons (binary touch), slider (linear position).
+#   Key: dsRam widget array at 0x20000090+, sensor count at 0x200000c0.
+
+# filter (6) — Signal filtering
+#   IIR (Infinite Impulse Response) filters for raw count smoothing.
+#   Applied per-sensor to reduce noise before threshold comparison.
+#   Key: capsense_iir_filter_pair — dual IIR with configurable coefficient.
+
+# baseline (4) — Baseline tracking
+#   Adaptive baseline that tracks slow environmental drift.
+#   Bucket-counter algorithm: increments/decrements baseline toward raw.
+#   Key: baseline update rate controlled by firmware timer.
+
+# calibrate (23) — Auto-calibration
+#   IDAC auto-calibration to achieve target raw count (~85% of max).
+#   Calculates compensation capacitor (Cp) values.
+#   Adjusts scan clock divider and modulator IDAC for optimal SNR.
+#   Key functions:
+#     capsense_calibrate_comp_mod — coarse modulator IDAC tuning
+#     capsense_calibrate_comp_fine — fine compensation IDAC tuning
+#     capsense_calc_finger_cp — estimates parasitic capacitance
+
+# math (6) — Math utilities
+#   Division, multiplication with overflow protection.
+#   Used by calibration for capacitance calculations.
+
+# =========================================================================
+# LAYER 3 — APPLICATION (18 functions)
+# =========================================================================
+
+# gesture (3) — Gesture recognition state machine
+#   Entry point: FUN_00000bbc (gesture_state_machine).
+#   Tracks touch position, speed, direction on slider widget.
+#   Outputs: TAP, DOUBLE_TAP, LONG_PRESS, SWIPE_LEFT, SWIPE_RIGHT.
+#   Uses circular buffer of 3 samples for velocity estimation.
+#   IIR-filtered speed: (4*new + 6*old) / 10.
+
+# i2c_report (3) — I2C event reporting to host SoC
+#   Sends gesture events and touch status to Apollo510b via I2C slave.
+#   Report format: [event_code, position_byte, flags].
+#   Key: FUN_000006d4 (i2c_report_event), FUN_000006ac (host_reset_trigger).
+
+# eeprom (6) — EEPROM emulation (Em_EEPROM)
+#   Wear-leveled NVM storage using flash rows.
+#   Stores: proximity baseline, calibration data, configuration.
+#   Cypress Em_EEPROM component with row rotation.
+#   Key: eeprom_write_validate, eeprom_erase_all, eeprom_save_prox_bsln.
+
+# callback (2) — Scan completion callbacks
+#   Registered with CSD ISR for end-of-scan notification.
+#   Routes to either single-sensor or all-widget processing.
+
+# sys (17) — System initialization and main loop
+#   Reset vector, startup code, main() entry.
+#   Initializes all peripherals, starts CapSense scan loop.
+#   Handles I2C interrupt for host communication.
+#   Key: main loop is scan→process→gesture→report→sleep cycle.
+
+# =========================================================================
+# DATA FLOW
+# =========================================================================
+#
+#   CSD Hardware → scan_hw (raw ADC) → filter (IIR smooth)
+#     → baseline (drift compensation) → capsense (threshold compare)
+#     → gesture (state machine) → i2c_report (to Apollo510b)
+#
+#   calibrate runs at startup to tune IDAC/clock for each electrode.
+#   eeprom persists calibration data across power cycles.
+#   power manages CSD block sleep between scan cycles.
+
+# =========================================================================
+# COMMUNICATION WITH MAIN SOC
+# =========================================================================
+#
+#   I2C slave address: configured at startup (likely 0x08 or 0x37)
+#   Report events: gesture code + slider position
+#   Host can trigger reset via I2C write (host_reset_trigger)
+#   Proximity detection: separate threshold for "near" vs "touch"
+#     - proximity baseline saved to EEPROM for environmental compensation

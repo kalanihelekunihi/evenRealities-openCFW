@@ -1,0 +1,1623 @@
+# G2 Firmware Protobuf Service Handler Deep Map
+# Generated from decompiled.c analysis (7,278 functions, ARM Cortex-M55 Apollo510b)
+# 25 service handlers (18 protobuf + 7 special), sub-functions, command dispatch, and TX paths
+# All 207 FUN_ references updated to elog-sourced firmware names (session 39l)
+#
+# === COMMON INFRASTRUCTURE ===
+#
+# Every handler follows the same pattern:
+#   1. memset (FUN_0043c0e4)(buf, size, 0)       — memset: zero the encoding buffer
+#   2. Populate struct fields:           — *puVar1 = type; puVar1[1] = msgId; *(u16*)(puVar1+2) = fieldCount
+#   3. pb_ostream_init (FUN_004a2278)(stream, buf, size)   — pb_ostream_init: init protobuf output stream
+#   4. am_util_string_memcpy20 (FUN_00439c04)(ctx, stream, 0x14)   — memcpy 20 bytes: copy stream context
+#   5. pb_encode_28b6 (FUN_004a28b6)(ctx, fields, struct) — pb_encode: encode struct using field descriptor table
+#   6. Thread_MsgPbTxByBle (FUN_0046f5c4)(1, svcId, buf, len)  — Thread_MsgPbTxByBle: TX on EUS pipe 0 (initial send)
+#      Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, svcId, buf, len)  — Thread_MsgPbNotifyByBle: TX on EUS pipe 0 (notification/continuation)
+#      Thread_MsgPbTxDirectByBle (FUN_0046f4e8)(1, svcId, buf, len)  — Thread_MsgPbTxDirectByBle: TX direct/priority path
+#      SendDataToBoth (FUN_00462a1a)(svcId, buf, len, 0)  — SendDataToBoth: TX via TinyFrame to both eyes
+#      RequestDisplayReflash (FUN_00462912)(svcId, buf, len, 0)  — RequestDisplayReflash: inter-eye display reflash request
+#
+# rtos_mem_alloc (FUN_0046e7e2)(size)                     — rtos_mem_alloc: allocate dynamic buffer
+# rtos_mem_free (FUN_0046e826)(ptr)                      — rtos_mem_free: free dynamic buffer
+# elog_level_check (FUN_0043cd6c)()                         — elog_level_check: check log verbosity
+# elog_output (FUN_0043d1c8)(level, tag, file, ...)    — elog_output: structured log with source line (2nd variant)
+# elog_output (FUN_0043ccc8)(flags, fmt, ...)          — elog_output: formatted log output
+# APP_errorFaultHandler (FUN_004ea40c)(assertion_ctx)            — APP_errorFaultHandler: error/fault handler
+# debug_ringbuf_write (FUN_0043d720)(ringbuf, 0x10, buf, len)  — debug ring buffer write (packet trace)
+# SVC_DecodeLocalEvenAIInfo (FUN_004a5e4a)(type, data, maxlen)       — SVC_DecodeLocalEvenAIInfo: decode local EvenAI info (task dispatch)
+# ble_connection_state_check (FUN_0045e62c)() / ble_connection_state_check_2 (FUN_0045e634)()        — BLE connection state check (returns 1 if connected)
+#
+# Struct layout convention (decoded from all handlers):
+#   offset 0: type/cmd byte (f1 in protobuf)
+#   offset 1: msgId / sequence counter
+#   offset 2-3: field_count (u16) — number of protobuf fields to encode
+#   offset 4+: payload fields
+#
+# ===========================================================================
+
+
+# ===========================================================================
+# 1. PB_TxEncodePipeRoleChange (FUN_0049e484) — Pipe Role Change / Auth (0x80)
+#    Source: pb_service_dev_config/pb_service_pair_mgr.c
+#    Pipe role change encoder + ring connect info + heartbeat
+# ===========================================================================
+
+PB_TxEncodePipeRoleChange (FUN_0049e484) (PipeRoleChange/Auth 0x80)
+  Signature: (byte param_1, int param_2, u16 param_3, u1* param_4, int param_5)
+
+  Sub-functions called:
+    - pb_encode_28b6 (FUN_004a28b6): pb_encode — encode auth response
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x80, ...): TX auth response on service 0x80
+    - APP_errorFaultHandler (FUN_004ea40c): assertion check (3 separate NULL checks: param_2, param_4, param_5)
+    - memset (FUN_0043c0e4): memset output buffer
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init
+    - am_util_string_memcpy20 (FUN_00439c04): memcpy stream context
+
+  Struct encoding:
+    - *param_4 = 5            (type = 5: PB_TxEncodeSecAuth response)
+    - *(u16*)(param_4+2) = param_1  (connection handle / eye ID)
+    - *(u16*)(param_4+4) = 4  (field_count = 4)
+    - param_4[10] = 0         (padding/flags)
+
+  TX responses:
+    - service=0x80 via Thread_MsgPbTxByBle (FUN_0046f5c4) (initial auth response)
+
+  Related functions:
+    - PB_TxEncodeRingConnectInfo (FUN_0049e8e4): Ring connect info TX encoder (type=6, field_count=5)
+      - Sets *param_4 = 6, *(u16*)(param_4+4) = 5
+      - Populates time sync fields at param_4+0xd4..0xf9
+      - Calls APP_MasterScanEvent (FUN_004c0118): master scan event, auth_mode_set (FUN_004c00f0) (time zone)
+      - TX via Thread_MsgPbTxDirectByBle (FUN_0046f4e8)(1, 0x80, ...) — priority TX for keepalive
+    - PB_RxRingConnectInfo (FUN_0049e64c): RX ring connect info handler
+      - Throttle: 15000ms (0x3a97) timer check via timer_check_elapsed (FUN_00447838)
+      - Clears timers: fw_evt_loop_remove_delayed (FUN_00457d4e) (2 timers cleared)
+      - Calls APP_MasterResetRetryConnectCnt (FUN_004c027c): reset retry connect count
+      - Copies auth payload at param_2+4 (6 bytes logged individually)
+      - APP_MasterSetTargetAddrName (FUN_004bfff0): set target address/name for connection
+      - auth_mode_set (FUN_004c00f0): set auth mode (first byte: '\0' or '\x01')
+      - Starts 2 timers: fw_evt_loop_push_delayed (FUN_00457bfe)(buf, 0x102 or 1, 0) and fw_evt_loop_push_delayed (FUN_00457bfe)(0x49ed29, 0x5a, 20000)
+    - PB_TxEncodeNotifyRingConnectInfoImpl (FUN_0049ead4): Ring connect info notification encoder (allocates 0x1a8 dynamic buffer)
+      - Encodes complex keepalive with time fields, ADC readings
+      - TX via Thread_MsgPbNotifyDirectByBle (FUN_0046f556)(1, 0x80, ...) — special keepalive TX path
+    - appSlaveNextLegAdvState (FUN_004952a2): slave leg advertising state handler (periodic callback)
+      - Increments counter at offset 0x57; if < 3, proceeds
+      - auth_state_check (FUN_0049d40a)(0): check auth state
+      - appSlaveLegAdvStart (FUN_00495160): start slave leg advertising
+      - Sets 0x22 command byte, 200ms via task_manager_schedule_delayed_post (FUN_00486c1c)
+    - TPL_ReceivePacket (FUN_0049abd0): TinyFrame packet receiver / heartbeat RX
+      - Validates: *param_2 == 0xAA (heartbeat magic), param_3 >= 8
+      - If param_2[3]==0 && param_3==8: ACK-only heartbeat (no payload)
+      - If param_2[4]==1: data heartbeat, parses CRC via pb_decode_crc (FUN_004a9de8)
+
+  Command dispatch (inferred from type byte at offset 0):
+    - type=5 → PB_TxEncodeSecAuth (initial auth response)
+    - type=6 → PB_TxEncodeBaseConnHeartBeat (keepalive response)
+
+
+# ===========================================================================
+# 2. syncInfoService_response_inquiry_cmd (FUN_0046c0dc) — Settings Handler (0x0D)
+#    Source: pb_service_setting/pb_service_setting.c
+#    MULTIPLEXER: routes to sub-services via ProtoBaseSettings
+# ===========================================================================
+
+syncInfoService_response_inquiry_cmd (FUN_0046c0dc) (Settings 0x0D)
+  Signature: (u1 param_1, u4 param_2, u4 param_3, u4 param_4)
+
+  Sub-functions called:
+    - memset (FUN_0043c0e4): memset 0x0C-byte struct + 0x80-byte encode buffer
+    - getRunningAppID (FUN_004426b8): get running app ID (2 u32 values → offset 4 and 8)
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x80 byte buffer)
+    - am_util_string_memcpy20 (FUN_00439c04): memcpy stream context
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_0046c3f0, struct): pb_encode using settings field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x0D, buf, len): TX settings response
+
+  Struct encoding:
+    - *puVar1 = 0             (base type)
+    - puVar1[1] = param_1     (sub-service ID / eye)
+    - puVar1[2] = 1           (flag)
+    - *(u32*)(puVar1+4) = timestamp_lo
+    - *(u32*)(puVar1+8) = timestamp_hi
+
+  TX responses:
+    - service=0x0D via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Multiplex dispatch (SyncInfoService_common_data_handler (FUN_0046c2f6) — settings RX router):
+    - param_1 == 0: decode incoming settings
+      - pb_istream_from_buffer (FUN_004a380c): pb_decode_settings_init
+      - pb_decode_4490 (FUN_004a4490): pb_decode_settings (uses DAT_0046c3f0 field table)
+      - If decoded type == 0: re-enter syncInfoService_response_inquiry_cmd (FUN_0046c0dc) (recursive TX)
+      - If decoded type != 0: log warning (unsupported sub-type)
+
+  Related functions:
+    - syncInfoService_Notify (FUN_0046c198): settings_notify_outbound — allocates dynamic buffer (0x0C + 0x80)
+      - Encodes type=1 (notify), TX via Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0x0D, ...)
+    - RING_GlassesHeartbeatProcess (FUN_0046c438): ring/glasses heartbeat process — builds 4-byte fixed packet
+      - Bytes: [0x00, 0x1A, 0x94, 0x01]
+      - Calls debug_ringbuf_write (FUN_0043d720) (ring buffer) + APP_BleRingSendDataMsg (FUN_004bd87c): send data to ring via BLE
+    - settings_module_configure_trigger (FUN_0046c4c0): settings_module_configure_trigger
+      - Calls Thread_SendEvtToRingTask (FUN_004be03a)(0x20) — sends event to ring task
+    - settings_compact_notify (FUN_0046c4cc): settings_compact_notify
+      - Bytes: [0x00, 0x1A, 0x85, 0x01, ?, 0xAA, ...]
+      - 8-byte compact notify packet with 0xAA marker
+
+  Sub-service routing (via ProtoBaseSettings at DAT_0046c3f0):
+    - Glasses case info (case_get_soc (FUN_004b43d8)case_get_lid_state (FUN_004b4404))
+    - Universal settings
+    - Onboarding config
+    - Wear detection
+    - Compass calibration
+    - Gesture control list
+    - Glasses settings (silent mode, screen-off interval)
+    - Device config (display mode, anti-shake, wakeup angle)
+
+  Setting device status notify: setting_notify_device_status_to_app (FUN_004aaee4)
+    - Calls build_device_status_struct (FUN_00482358) (build status struct, 0x68 bytes)
+    - setting_build_full_status_package (FUN_004aa5ee): encode device status
+    - setting_notify_common (FUN_004aac94): send device status notification
+      - Encodes via pb_encode, TX via Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x09, ...) [on DeviceInfo service!]
+
+
+# ===========================================================================
+# 3. APP_PbTxEncodeEvenAICtrl (FUN_004ee854) — EvenAI Handler (0x07)
+#    Source: pb_service_even_ai/pb_service_even_ai.c
+#    Complex: 10+ command types, async task queue
+# ===========================================================================
+
+APP_PbTxEncodeEvenAICtrl (FUN_004ee854) (EvenAI 0x07)
+  Signature: (u1 param_1, u1* param_2)
+
+  Sub-functions called:
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 byte buffer at DAT_004ef28c)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_004eef64, struct): pb_encode using EvenAI field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x07, buf, len): TX EvenAI response
+
+  Struct encoding (at DAT_004ef290, 0x20C bytes):
+    - *puVar1 = 1             (type = CTRL echo)
+    - puVar1[1] = param_1     (msgId)
+    - *(u16*)(puVar1+2) = 3   (field_count = 3)
+    - puVar1[4] = *param_2    (command from phone)
+    - puVar1[5] = 0           (flags)
+
+  TX responses:
+    - service=0x07 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Command dispatch (type byte at struct offset 0):
+    - type=1  → APP_PbTxEncodeEvenAICtrl (FUN_004ee854): CTRL echo (this handler)
+    - type=1' → APP_PbNotifyEncodeEvenAICtrl (FUN_004ee9e0): CTRL with auto-increment msgId
+    - type=2  → APP_PbTxEncodeEvenAIVADInfo (FUN_004eec42): ANALYSE (field_count=4)
+    - type=3  → PB_RxEvenAIVADInfo (FUN_004eeb72): ASK (field_count=2, uses SVC_DecodeLocalEvenAIInfo (FUN_004a5e4a) task queue)
+    - type=3' → APP_PbTxEncodeEvenAIAskInfo (FUN_004ef0fc): ASK large (0x20C buffer, field_count=5, payload at puVar1+4)
+    - type=5  → PB_RxEvenAIReplyInfo (FUN_004ef50c): REPLY (field_count via task queue, SVC_DecodeLocalEvenAIInfo (FUN_004a5e4a)(5, data, 0x208))
+    - type=5' → APP_PbTxEncodeEvenAIReplyInfo (FUN_004ef5f8): SKILL (0x20C buffer, field_count=7, separate buffer DAT_004efc7c)
+    - type=7  → APP_PbTxEncodeEvenAIPromptInfo (FUN_004efae0): PROMPT (0x20C buffer, field_count=9, encode table DAT_004f0458)
+    - type=8  → APP_PbNotifyEncodeEvenAIEvent (FUN_004eff10): EVENT (APP_PbNotifyEncodeEvenAIEvent)
+                  - field_count=10, auto-increment msgId at DAT_004f05c8
+                  - TX via Thread_MsgPbNotifyByBle (FUN_0046f6ca) (continuation path)
+    - type=9  → APP_PbTxEncodeEvenAIHeartbeat (FUN_004f0184): HEARTBEAT (field_count=0x0B)
+                  - Checks codec_is_powered_on (FUN_00442628) + codec_is_ready_for_command (FUN_00442674)(7) for codec state
+                  - puVar1[5] = 0 if codec ready, else 8
+    - type=10 → APP_PbTxEncodeEvenAIConfig (FUN_004f045c): CONFIG/VAD (field_count=0x0D)
+                  - puVar1[4] = *param_2, puVar1[5] = param_2[1], puVar1[6] = 0
+
+  Notable patterns:
+    - All sub-handlers share DAT_004ef290 (0x20C struct) or DAT_004efc80 (alternate)
+    - Two distinct field descriptor tables: DAT_004eef64 (types 1-4) and DAT_004efadc/DAT_004f0458 (types 5-10)
+    - ASK (type=3) uses SVC_DecodeLocalEvenAIInfo (FUN_004a5e4a)(2, param_2, 2) — enqueue to task for async processing
+    - REPLY (type=5) uses SVC_DecodeLocalEvenAIInfo (FUN_004a5e4a)(5, param_2, 0x208) — enqueue with large buffer
+    - EVENT (type=8) auto-increments a persistent counter at DAT_004f05c8
+    - Log tag: "pb_evenai", file path references pb_service_even_ai.c
+
+  String references:
+    - PTR_s__pb_evenai_PORINT_NULL_004ef0ec — NULL pointer error
+    - PTR_s__pb_evenai_pReplyInfo_>cmd_cnt___004f00a0 — reply command count log
+    - PTR_s__pb_evenai_Encoding_failed___s_004f0174 — encode failure
+    - PTR_s_APP_PbNotifyEncodeEvenAIEvent_004f0704 — event encoder function name
+
+
+# ===========================================================================
+# 4. pb_service_even_hub_handler (FUN_0059c3de) — EvenHub Handler (0xE0)
+#    Source: (shares patterns with pb_service_even_ai)
+#    Cloud AI hub protocol, large buffers
+# ===========================================================================
+
+pb_service_even_hub_handler (FUN_0059c3de) (EvenHub 0xE0)
+  Signature: (u1 param_1, u1 param_2, u4 param_3)
+
+  Sub-functions called:
+    - evenhub_lock_data (FUN_0059c32a): lock EvenHub data mutex
+    - evenhub_unlock_data (FUN_0059c386): unlock EvenHub data mutex
+    - memset (FUN_0043c0e4): memset — struct 0x2654 bytes, buffer 0x279E bytes (very large!)
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x279E buffer)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_0059ca7c, struct): pb_encode using EvenHub field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0xE0, buf, len): TX EvenHub response
+
+  Struct encoding (at DAT_0059ca74, 0x2654 bytes):
+    - *puVar1 = 0x0C           (type = primary hub message)
+    - puVar1[1] = param_1      (msgId)
+    - *(u16*)(puVar1+2) = 0x0F (field_count = 15!)
+    - puVar1[8] = param_2      (sub-type)
+    - *(u32*)(puVar1+4) = param_3 (payload pointer)
+
+  TX responses:
+    - service=0xE0 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Command dispatch (evenhub_common_response_cmd (FUN_0059c466) — parameterized variant):
+    param_3 values (u16 field_count selector):
+    - param_3=4  → field type 4, payload at puVar1[4]
+    - param_3=8  → field type 8, payload at puVar1[4]
+    - param_3=10 → field type 10, payload at puVar1[4]
+    - param_3=12 → field type 12, payload at puVar1[4]
+    - param_3=15 → field type 15, payload at puVar1[8]
+    - else: error log, return -1
+
+  Related functions:
+    - evenhub_SendSystemEvent_cmd (FUN_0059c57a): send system event command
+      - type=0x0E, field_count=0x11
+      - Checks ble_connection_state_check_2 (FUN_0045e634) (connection) → RequestDisplayReflash (FUN_00462912)(0xE0, ...) inter-eye relay
+    - evenhub_SendDeviceEvent_cmd (FUN_0059c668): send device event command
+      - param_1=0 → field_count=3, single byte payload
+      - param_1=1 → field_count=1, full payload (u32 + 16-byte memcpy + u32 extra)
+      - param_1=2 → field_count=2, full payload (u32 + 16-byte memcpy + byte)
+      - TX via Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0xE0, ...)
+
+  Notable patterns:
+    - Largest buffers in firmware: 0x2654 struct + 0x279E encode buffer (~10KB each)
+    - Thread-safe: mutex acquire/release wrapping all operations
+    - Up to 15 protobuf fields encoded
+    - Supports inter-eye relay via RequestDisplayReflash (FUN_00462912)
+
+
+# ===========================================================================
+# 5. APP_PbConversateTxEncodeNotify (FUN_00592fde) — Conversate Handler (0x0B)
+#    Source: pb_service_conversate/pb_service_conversate.c
+#    Lifecycle: START, text updates, PAUSE/RESUME/CLOSE
+# ===========================================================================
+
+APP_PbConversateTxEncodeNotify (FUN_00592fde) (Conversate 0x0B)
+  Signature: (u2* param_1)
+
+  Sub-functions called:
+    - memset (FUN_0043c0e4)(DAT_0059330c, 0x1D6C, 0): memset — 7,532 byte struct!
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 buffer at DAT_00593318)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_005932d8, struct): pb_encode using conversate field table
+    - Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0x0B, buf, len): TX conversate response (continuation)
+    - debug_ringbuf_write (FUN_0043d720): debug ring buffer write
+
+  Struct encoding (at DAT_0059330c, 0x1D6C bytes):
+    - *puVar1 = 0xA1          (type = COMM_RSP / acknowledgment)
+    - puVar1[1] = counter+1   (auto-increment from DAT_005932e8)
+    - *(u16*)(puVar1+2) = 8   (field_count = 8)
+    - *(u16*)(puVar1+4) = *param_1 (command type from phone)
+
+  TX responses:
+    - service=0x0B via Thread_MsgPbNotifyByBle (FUN_0046f6ca)
+
+  Related functions:
+    - APP_PbConversateTxEncodeCommResp (FUN_0059314c): Conversate secondary handler
+      - type=0xA2 (text update ACK), field_count=9
+      - puVar1[4] = *param_1 (payload byte)
+      - Calls debug_ringbuf_write (FUN_0043d720) (ring buffer trace) before TX
+      - TX via Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x0B, ...) — initial send path
+
+  FSM (finite state machine) functions:
+    - conversate_action_app_open (FUN_005934cc): open conversate from app — main FSM entry
+      - conversate_get_ui_state (FUN_005905ae): get current UI state
+      - state '\0': ble_connection_state_check (FUN_0045e62c) (check BLE) → AsyncRequestDisplayStartUp (FUN_0045e9b0)(0x0B, 0, 0, 500) schedule task
+      - state '\x01': conversate_request_display (FUN_0058eaf0)(0x0D, 0) — enter conversate main with config
+      - Sets *DAT_00593e80 = 1 (active flag)
+      - Copies 5 bytes from param_1+1 to config
+      - If param_1[4] != 0: AUDM_appAcquire (FUN_0053e2ec)(4) — acquire audio/display resource
+      - conversate_tag_storage_init (FUN_0053fa5e): initialize tag storage
+    - conversate_action_app_config (FUN_00593740): apply conversate config from app
+      - Copies 5 bytes from param_1+1
+    - conversate_action_keypoint_data (FUN_00593b5c): handle keypoint data action
+
+  UI functions (conversate.ui module):
+    - conversate_request_display (FUN_0058eaf0): request display for conversate
+    - conversate_ui_get_button_img (FUN_0058f278): get button image for tag type
+    - conversate_ui_set_container_children_dim (FUN_0058f2da): set container children dimensions
+    - conversate_ui_get_current_button_dispaly_position (FUN_0058f43a): get current button display position
+    - conversate_ui_button_create (FUN_0058f50a): conversate_ui_button_create
+    - conversate_ui_title_container_create (FUN_0058f676): create title container
+    - conversate_calculate_auto_duration_by_label (FUN_0058fef4): calculate auto duration by label
+    - conversate_ui_get_scroll_y (FUN_00590124): get scroll Y position
+    - conversate_ui_action_title_update (FUN_0059179c): update title with animation
+    - conversate_ui_action_transcribe_update (FUN_00591a20): update transcription content
+    - conversate_ui_action_tag_show (FUN_00592018): show/expand tag content
+    - conversate_ui_action_keypoint_to_main_page (FUN_00592930): shrink keypoint and return to main page
+    - conversate_ui_action_keypoint_show (FUN_00590ba0): show keypoint content
+
+  Data/Tag subsystem:
+    - conversate_title_data_update (FUN_0053f3ec): update title data
+    - conversate_keypoint_data_deinit (FUN_0053f4e2): deinitialize keypoint data
+    - conversate_tag_storage_deinit (FUN_0053fb0e): conversate_tag_storage_deinit
+    - conversate_tag_add (FUN_0053fc20): conversate_tag_add
+    - conversate_tag_get_data_by_index (FUN_0053fda2): get tag data by index
+    - conversate_get_tag_storage_count (FUN_0054000e): get tag storage count
+    - conversate_tag_remove_oldest (FUN_00540066): remove oldest tag entry
+    - conversate_tag_auto_pop_check (FUN_005401fc): check and auto-pop old tags
+    - conversate_tag_get_data_by_auto_duration (FUN_00540328): get tag data by auto duration
+    - conversate_tag_log_handler_4 (FUN_00540398): conversate_tag_log_handler_4
+
+  Timer:
+    - conversate_timer_auto_extend_start (FUN_0059458e): start auto-extend timer
+    - navigation_page_event_handler (FUN_0058882c): navigation page event handler
+
+  Command types (decoded from struct offset 0):
+    - 0xA1: COMM_RSP (acknowledgment to phone, auto-increment msgId)
+    - 0xA2: text update ACK (secondary handler, explicit msgId)
+
+  Log tag: "pb_conversate"
+  String refs: PTR_s_pb_conversate_005932cc, PTR_s_conversate_fsm_00593de0
+
+
+# ===========================================================================
+# 6. APP_PbTranslateTxEncodeNotify (FUN_005b49c2) — Translate Handler (0x05)
+#    Source: pb_service_translate/pb_service_translate.c
+#    Multiple command types: ctrl, result, heartbeat, modeSwitch
+# ===========================================================================
+
+APP_PbTranslateTxEncodeNotify (FUN_005b49c2) (Translate 0x05)
+  Signature: (u2* param_1)
+
+  Sub-functions called:
+    - memset (FUN_0043c0e4)(DAT_005b4e34, 0x854, 0): memset — 2,132 byte struct
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 buffer at DAT_005b4e40)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_005b4e00, struct): pb_encode using translate field table
+    - Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0x05, buf, len): TX translate response
+
+  Struct encoding (at DAT_005b4e34, 0x854 bytes):
+    - *puVar1 = 0xA1           (type = COMM_RSP)
+    - puVar1[1] = counter+1    (auto-increment from DAT_005b4e10)
+    - *(u16*)(puVar1+2) = 5    (field_count = 5)
+    - *(u16*)(puVar1+4) = *param_1 (command type from phone)
+
+  TX responses:
+    - service=0x05 via Thread_MsgPbNotifyByBle (FUN_0046f6ca)
+
+  Related functions:
+    - APP_PbTranslateTxEncodeCommResp (FUN_005b4b30): translate COMM_RSP encoder
+      - type=0xA2 (result), field_count=7
+      - puVar1[4] = *param_1 (payload)
+      - Calls debug_ringbuf_write (FUN_0043d720) (ring buffer trace) before TX
+      - TX via Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x05, ...) — initial send
+    - APP_PbTranslateTxEncodeModeSwitch (FUN_005b4ca2): translate mode switch encoder
+      - type=0xA3 (heartbeat), field_count=6
+      - auto-increment msgId
+      - *(u32*)(puVar1+4) = *param_1 (u32 payload)
+      - TX via Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0x05, ...)
+
+  FSM/UI functions:
+    - Translate_ui_event_handler (FUN_005ca026): translate UI event handler
+    - translate_ui_deinit (FUN_005ca8e4): translate_ui_deinit
+    - translate_ui_action_gif_complete (FUN_005cadba): handle GIF animation completion
+    - translate_ui_text_refresh_check (FUN_005caed0): translate_ui_text_refresh_check
+
+  Command types (RX → TX echo mapping):
+    - 0xA1: COMM_RSP ctrl echo (field_count=5)
+    - 0xA2: result text (field_count=7)
+    - 0xA3: heartbeat/status (field_count=6)
+
+  Log tag: "pb_translate"
+  String refs: PTR_s_pb_translate_005b4df4
+
+
+# ===========================================================================
+# 7. APP_PbTelepromptTxEncodeCommResp (FUN_0054ccaa) — Teleprompter Handler (0x06)
+#    Source: pb_service_teleprompt/pb_service_teleprompt.c
+#    Text scrolling with progress tracking
+# ===========================================================================
+
+APP_PbTelepromptTxEncodeCommResp (FUN_0054ccaa) (Teleprompter 0x06)
+  Signature: (u1 param_1, u1* param_2)
+
+  Sub-functions called:
+    - memset (FUN_0043c0e4)(DAT_0054d218, 0xF58, 0): memset — 3,928 byte struct
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 buffer at DAT_0054d21c)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_0054d1f0, struct): pb_encode using teleprompter field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x06, buf, len): TX teleprompter response
+    - debug_ringbuf_write (FUN_0043d720): debug ring buffer write (packet trace)
+
+  Struct encoding (at DAT_0054d218, 0xF58 bytes):
+    - *puVar1 = 0xA6           (type = command ACK)
+    - puVar1[1] = param_1      (msgId from phone)
+    - *(u16*)(puVar1+2) = 0x0C (field_count = 12!)
+    - puVar1[4] = *param_2     (command data)
+
+  TX responses:
+    - service=0x06 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - APP_PbTxEncodeStatusNotify (FUN_0054cd8a): teleprompter status notification
+      - type=0xA1, field_count=7
+      - auto-increment msgId from DAT_0054d200
+      - TX via Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0x06, ...)
+    - APP_PbTxEncodeFileListRequest (FUN_0054ce70): teleprompter file list request
+      - type=0xA2, field_count=8
+      - auto-increment msgId
+      - TX via Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0x06, ...)
+    - APP_PbTxEncodeFileSelect (FUN_0054cf56): teleprompter file select
+      - type=0xA3, field_count=9
+      - auto-increment msgId
+      - Copies 0x42 bytes payload via memcpy (FUN_00439be4)
+      - TX via Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x06, ...)
+    - APP_PbTxEncodePageDataRequest (FUN_0054d034): teleprompter page data request
+      (continuation of pattern with additional types)
+    - APP_PbTxEncodeScrollSync (FUN_0054d102): teleprompter scroll sync
+
+  FSM functions:
+    - teleprompt_action_app_start (FUN_00567c60): start teleprompter from app
+    - teleprompt_fsm_scroll_start (FUN_00568272): teleprompt_fsm_scroll_start
+    - teleprompt_action_heartbeat (FUN_00568320): teleprompter heartbeat
+
+  UI functions:
+    - teleprompt_ui_button_create (FUN_00565f20): teleprompt_ui_button_create
+    - teleprompt_ui_action_main_page_create (FUN_00566220): create teleprompter main page
+    - teleprompt_ui_action_file_list_update (FUN_005666dc): update file list UI
+    - teleprompt_ui_action_file_select (FUN_005669cc): handle file selection
+    - teleprompt_ui_action_update_elapsed_time (FUN_005678ac): update elapsed time display
+
+  Timer functions:
+    - teleprompt_timer_start_by_config (FUN_0056b018): start timer from config
+    - teleprompt_timer_stop_by_config (FUN_0056b0d8): stop timer from config
+    - teleprompt_timer_start (FUN_0056b234): teleprompt_timer_start
+    - teleprompt_timer_mgr_deinit (FUN_0056b286): deinitialize timer manager
+
+  Command types:
+    - 0xA6: command ACK (field_count=12, initial response)
+    - 0xA1: scroll progress (field_count=7)
+    - 0xA2: text content update (field_count=8)
+    - 0xA3: scroll position (field_count=9, 0x42 byte payload)
+
+  Log tag: "pb_teleprompt"
+  String refs: PTR_s_pb_teleprompt_0054d1e4
+
+
+# ===========================================================================
+# 8. dashboard_respond_to_app_serialize (FUN_0055ff82) — Dashboard/Gesture Handler (0x01)
+#    Source: (dashboard module)
+#    Gesture events and dashboard state management
+# ===========================================================================
+
+dashboard_respond_to_app_serialize (FUN_0055ff82) (Dashboard 0x01)
+  Signature: (int param_1, u4 param_2, u4 param_3, u4 param_4)
+
+  Sub-functions called:
+    - memset (FUN_0043c0e4): memset 0x100-byte buffer
+    - dashboard_data_encode (FUN_0055ff10): encode dashboard/gesture data (param_1 != 0 flag, buffer, &size)
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x01, buf, len): TX dashboard response
+
+  Guard check: *DAT_0056049c == 0 → not initialized, return 1
+
+  TX responses:
+    - service=0x01 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - dashboard_respond_NewsInfo_to_app (FUN_0056006e): respond with news/gesture info
+      - Encodes type=6 (gesture event), field_count=8
+      - *(u32*)(puVar1+0x10) = param_1 (gesture data)
+      - TX via Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x01, ...)
+    - dashboard_send_to_app_serialize_internal (FUN_00560142): internal dashboard state serializer — complex multi-type
+      - type=3, field_count=6
+      - *(u32*)(puVar1+0x10) = *param_1 (state word)
+      - Byte at param_1+5 dispatches sub-encoding:
+        - bVar1=0: no sub-fields
+        - bVar1=1: field_count=3, float pair (GPS coords?)
+        - bVar1=2: field_count=4, sub-sub dispatch on param_1+4:
+          - '\x01': u32 pair
+          - '\x02': u32 + u32 pair + u32 pair
+          - '\x03': u32 pair direct
+          - else: 0x3F byte memcpy
+        - bVar1=3: field_count=5, 0x40 byte memcpy (full data block)
+
+  Dashboard subsystem:
+    - dashboard_send_initial_notification_status_to_app (FUN_00541038): send initial notification status
+    - dashboard_async_update_data (FUN_00541b1c): async update dashboard data
+    - dashboard_page_event_handler (FUN_00542e04): dashboard page event handler
+    - tileview_ext_event_handler (FUN_005618b0): tileview extended event handler
+
+
+# ===========================================================================
+# 9. menu_response_info_cmd (FUN_0045b26e) — Menu Handler (0x03)
+#    Source: (menu module)
+#    App launcher, menu items
+# ===========================================================================
+
+menu_response_info_cmd (FUN_0045b26e) (Menu 0x03)
+  Signature: (u1 param_1, byte param_2, u4 param_3, u4 param_4)
+
+  Sub-functions called:
+    - memset (FUN_0043c0e4): memset — 0x37C struct + 0x432 encode buffer
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x432 buffer)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_0045bcf0, struct): pb_encode using menu field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x03, buf, len): TX menu response
+
+  Struct encoding (at DAT_0045bce8, 0x37C bytes):
+    - *puVar1 = 1              (type = menu info)
+    - puVar1[1] = param_1      (msgId / menu ID)
+    - *(u16*)(puVar1+2) = 4    (field_count = 4)
+    - *(u32*)(puVar1+4) = param_2 (menu item index)
+
+  TX responses:
+    - service=0x03 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - menu_build_info_cmd (FUN_0045b3c6): menu item list encoder
+      - type=0, field_count=3
+      - Iterates param_2 items, encoding each at offset iVar4*0x2C+0x0C
+      - Per-item: index(u32), string(via am_util_string_strlen (FUN_00448b50) strlen + memcpy), u32 extra
+      - TX via SendDataToBoth (FUN_00462a1a)(3, buf, len, 0) — inter-eye relay!
+    - Menu_common_data_handler (FUN_0045b50c): menu RX decoder — dispatches on param_1
+      - param_1=4: menu configure response
+        - If param_3==2 && param_2[0]==0: extracts param_2[1] as menu config value
+      - Complex nested parsing with multiple byte comparisons
+
+  RX dispatch (param_1 in Menu_common_data_handler (FUN_0045b50c)):
+    - param_1=4 → menu configure
+
+  Log tag: appears in DAT_0045b500 / DAT_0045b4fc
+
+
+# ===========================================================================
+# 10. APP_PbTxEncodeNotifCtrl (FUN_004ebe76) — MessageNotify/DisplayWake Handler (0x04)
+#     Source: pb_service_notification/pb_service_notification.c
+#     Notification display, whitelist, file-transfer wakeup
+# ===========================================================================
+
+APP_PbTxEncodeNotifCtrl (FUN_004ebe76) (MessageNotify 0x04)
+  Signature: (u1 param_1, u1* param_2)
+
+  Sub-functions called:
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 buffer at DAT_004ec60c)
+    - memset (FUN_0043c0e4)(DAT_004ec610, 0x4A, 0): memset 74-byte struct
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_004ec5d0, struct): pb_encode using notification field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x04, buf, len): TX notification response
+
+  Struct encoding (at DAT_004ec610, 0x4A bytes):
+    - *puVar1 = 1              (type)
+    - puVar1[1] = param_1      (msgId)
+    - *(u16*)(puVar1+2) = 3    (field_count = 3)
+    - puVar1[4..8]: copies 5 payload bytes from param_2 (with puVar1[7]=0 padding)
+
+  TX responses:
+    - service=0x04 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - APP_PbTxEncodeNotifCommResp (FUN_004ec00c): notification COMM_RSP encoder
+      - type=0xA1, field_count=5
+      - Copies 2 bytes from param_2
+      - TX via Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x04, ...)
+    - APP_PbTxEncodeNotifAppIDNotInWhitelist (FUN_004ec190): notify app ID not in whitelist (dynamic allocation)
+      - Allocates 0x9C bytes via rtos_mem_alloc (FUN_0046e7e2)
+      - Complex encoding with multiple fields
+    - PB_RxNotifWhitelistCtrl (FUN_004ec39a): RX notification whitelist control
+    - APP_PbTxEncodeNotifWhitelistCtrl (FUN_004ec450): TX notification whitelist control
+    - APP_PbRxNotificationFrameDataProcess (FUN_004ebb9c): process notification frame data (main RX)
+    - PB_RxNotifCtrl (FUN_004ebd84): decode notification control message
+
+  ANCS integration:
+    - SVC_ANCC_NotificationMsgTreat (FUN_004a5038): SVC_ANCC_NotificationMsgTreat
+    - _parseJsonWhitelistToStruct (FUN_004ea65e): parse JSON whitelist to struct
+    - _printAppWhiteListInfo (FUN_004eac1c): print app whitelist info
+    - _parseWhiteListFromFS (FUN_004eb038): parse whitelist from filesystem
+    - SVC_IsOnWhitelistByIdentifier (FUN_004eb450): check if identifier is on whitelist
+    - SVC_WhitelistManagerInit (FUN_004eba2c): SVC_WhitelistManagerInit
+
+  Log tag: "pb_notif"
+  String refs: PTR_s_pb_notif_004ec5c0, PTR_s__pb_notif_command_id___d_004ec5e4
+
+
+# ===========================================================================
+# 11. pb_service_navigation_handler (FUN_00589324) — Navigation Handler (0x08)
+#     Source: (navigation module)
+#     Turn-by-turn directions, multiple sub-commands
+# ===========================================================================
+
+pb_service_navigation_handler (FUN_00589324) (Navigation 0x08)
+  Signature: (u1 param_1)
+
+  Sub-functions called:
+    - memset (FUN_0043c0e4): memset — 0x2018 struct + 10000 byte encode buffer
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (10000 byte buffer!)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_00589c50, struct): pb_encode using navigation field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x08, buf, len): TX navigation response
+
+  Struct encoding (at DAT_00589c5c, 0x2018 bytes):
+    - *puVar1 = 0              (type = init/base)
+    - puVar1[1] = param_1      (msgId / eye)
+    - *(u16*)(puVar1+2) = 3    (field_count = 3)
+    - puVar1[4] = 0            (flags)
+
+  TX responses:
+    - service=0x08 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Sub-command encoders (all share same struct/buffer pattern):
+    NOTE: These are firmware→phone TX response type codes, NOT the same as iOS SubCommand values
+    (iOS: start=1, basicInfo=2, miniMap=3, overviewMap=4, heartbeat=5, recalculating=6, arrive=7, stop=8, startError=9, favoriteList=10)
+    - navigation_route_update (FUN_005893a0): TX type=5, field_count=3 — route update
+    - navigation_direction_update (FUN_0058941c): TX type=6, field_count=3 — direction update
+    - navigation_eta_distance (FUN_00589498): TX type=10, field_count=3 — ETA/distance
+    - navigation_turn_info (FUN_00589514): TX type=0x0B (11), field_count=3 — turn info (firmware-internal, no iOS equivalent)
+    - navigation_waypoint (FUN_00589590): TX type=0x0C (12), field_count=3 — waypoint (firmware-internal, no iOS equivalent)
+
+  Notable: 10KB encode buffer — navigation payloads can contain map bitmap data
+
+
+# ===========================================================================
+# 12. setting_respond_to_app_serialize (FUN_004aa906) — DeviceInfo Handler (0x09)
+#     Source: pb_service_dev_config module
+#     Serial number, firmware version, hardware info
+# ===========================================================================
+
+setting_respond_to_app_serialize (FUN_004aa906) (DeviceInfo 0x09)
+  Signature: (void)
+
+  Sub-functions called:
+    - ble_connection_state_check (FUN_0045e62c): BLE connection check (must return 1)
+    - memset (FUN_0043c0e4)(DAT_004ab0cc, 0x100, 0): memset 256-byte buffer
+    - setting_respond_to_app (FUN_004aa4e8)(buf, &size): encode device info data
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x09, buf, len): TX device info response
+
+  Guard: *DAT_004aaecc == 0 → not initialized, return 1
+
+  TX responses:
+    - service=0x09 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - setting_respond_with_local_data_serialize (FUN_004aaaae): DeviceInfo secondary (same pattern, calls setting_respond_with_local_data (FUN_004aa7cc) instead)
+    - setting_notify_common (FUN_004aac94): DeviceInfo notify (for settings change notifications)
+      - Allocates 0x68 struct, encodes, TX via Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x09, ...)
+      - Increments counter at *DAT_004ab108
+
+
+# ===========================================================================
+# 13. APP_PbTxEncodeQuicklistItem (FUN_0056892a) — Quicklist+Health Handler (0x0C)
+#     Source: pb_service_quicklist/pb_service_quicklist.c + pb_service_health.c
+#     Shared/multiplexed: quicklist CRUD + health data
+# ===========================================================================
+
+APP_PbTxEncodeQuicklistItem (FUN_0056892a) (Quicklist+Health 0x0C)
+  Signature: (u1 param_1, u4* param_2)
+
+  Sub-functions called:
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x400 buffer at DAT_00569188)
+    - memset (FUN_0043c0e4)(DAT_0056918c, 0x1238, 0): memset — 4,664 byte struct!
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_00568d34, struct): pb_encode using quicklist field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x0C, buf, len): TX quicklist response
+
+  Struct encoding (at DAT_0056918c, 0x1238 bytes):
+    - *puVar1 = 1              (type = response)
+    - puVar1[1] = param_1      (msgId)
+    - *(u16*)(puVar1+2) = 3    (field_count = 3)
+    - *(u32*)(puVar1+8) = *param_2       (item data word 0)
+    - *(u32*)(puVar1+0xC) = param_2[1]   (item data word 1)
+    - *(u32*)(puVar1+0x10) = param_2[2]  (item data word 2)
+    - puVar1[0xEC] = 0         (terminator)
+
+  TX responses:
+    - service=0x0C via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - PB_RxQuicklistMultItems (FUN_00568ac0): quicklist RX decoder
+      - Parses incoming quicklist: *param_2, param_2[1], *(u16*)(param_2+2)
+      - Returns 0 (success) or 2 (null)
+    - APP_PbTxEncodeQuicklistMultItems (FUN_00568b8a): quicklist item encoder
+      - type=2, field_count=4
+      - Copies param_2[0], param_2[1]
+      - puVar1[0x1230] = 0 (large struct terminator)
+
+  Quicklist page subsystem:
+    - handle_modify (FUN_00557c78): handle quicklist item modification
+    - quicklist_ext_event_handler (FUN_0055af20): quicklist extended event handler
+    - quicklist_update_and_show_border_to_item (FUN_0055b960): update and show item border
+    - quicklist_update_focus_item_after_add_up (FUN_0055ba50): update focus after item add
+    - quicklist_lock_storage (FUN_00563570): lock quicklist storage
+
+  Health subsystem:
+    - health_switch_to_page (FUN_0055d084): health_switch_to_page
+    - scroll_container_anim_ready_cb (FUN_0055d152): scroll_container_anim_ready_cb
+    - health_ext_event_handler (FUN_0055e0f8): health_ext_event_handler
+    - health_page_mutex_check (FUN_005636da): health_page_mutex_check
+
+
+# ===========================================================================
+# 14. APP_PbTxEncodeHealthSingleData (FUN_0056a28e) — Health/DisplayConfig Handler (0x0E/0x0C)
+#     Source: pb_service_health module
+#     NOTE: elog name suggests health data encoding; colocated with display config
+# ===========================================================================
+
+APP_PbTxEncodeHealthSingleData (FUN_0056a28e) (Health/DisplayConfig 0x0E)
+  Signature: (u1 param_1, u1* param_2)
+
+  Sub-functions called:
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 buffer at DAT_0056a8fc)
+    - memset (FUN_0043c0e4)(DAT_0056a900, 0x31C, 0): memset — 796 byte struct
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_0056a73c, struct): pb_encode using display config field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x0E, buf, len): TX display config response
+
+  Struct encoding (at DAT_0056a900, 0x31C bytes):
+    - *puVar1 = 1              (type)
+    - puVar1[1] = param_1      (msgId)
+    - *(u16*)(puVar1+2) = 3    (field_count = 3)
+    - Copies 22 bytes from param_2: offsets 0, 4, 8, 0xC, 0x10, 0x15, 0x18
+    - puVar1[0x19] = param_2[0x15]
+    - puVar1[0x18] = 0
+
+  TX responses:
+    - service=0x0E via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - PB_RxHealthMultData (FUN_0056a42e): RX health multiple data
+      - Parses *param_2, *(u16*)(param_2+2)
+      - Calls health_data_save_mult (FUN_0056965e)(param_2): save multiple health data entries
+      - Returns 0 (success) or 1 (error)
+    - APP_PbTxEncodeHealthMultData (FUN_0056a5a0): TX health multiple data encoder
+      - type=2, field_count=? (continuation data)
+    - display_config_region_parser (FUN_0057bb2c): display_config_region_parser (6 regions)
+
+
+# ===========================================================================
+# 15. APP_PbTxEncodeOnboardingConfig (FUN_004af9d8) — Onboarding Handler (0x10)
+#     Source: pb_service_onboarding/pb_service_onboarding.c
+#     Setup wizard, head-up detection
+# ===========================================================================
+
+APP_PbTxEncodeOnboardingConfig (FUN_004af9d8) (Onboarding 0x10)
+  Signature: (u1 param_1, u1* param_2)
+
+  Sub-functions called:
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 buffer at DAT_004b0318)
+    - memset (FUN_0043c0e4)(DAT_004b031c, 0x10, 0): memset — 16 byte struct (small!)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_004b0168, struct): pb_encode using onboarding field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x10, buf, len): TX onboarding response
+
+  Struct encoding (at DAT_004b031c, 0x10 bytes):
+    - *puVar1 = 1              (type)
+    - puVar1[1] = param_1      (msgId)
+    - *(u16*)(puVar1+2) = 3    (field_count = 3)
+    - puVar1[4] = *param_2     (onboarding state)
+    - puVar1[5] = 0            (padding)
+
+  TX responses:
+    - service=0x10 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - APP_PbNotifyEncodeOnboardingConfig (FUN_004afb62): onboarding echo with auto-increment msgId
+      - TX via Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0x10, ...)
+    - PB_RxOnboardingHeartbeat (FUN_004afcee): onboarding event RX (simple null check, returns 0 or 2)
+    - APP_PbTxEncodeOnboardingHeartbeat (FUN_004afd60): onboarding heartbeat
+
+
+# ===========================================================================
+# 16. ModuleConfigureService_response_inquiry_cmd (FUN_0046b058) — ModuleConfigure Handler (0x20)
+#     Source: (module configure module)
+#     Per-eye brightness calibration, module config
+# ===========================================================================
+
+ModuleConfigureService_response_inquiry_cmd (FUN_0046b058) (ModuleConfigure 0x20)
+  Signature: (u1 param_1, u4 param_2, u4 param_3, u4 param_4)
+
+  Sub-functions called:
+    - memset (FUN_0043c0e4): memset — 8 byte struct + 0x0D byte encode buffer
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x0D buffer)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_0046b934, struct): pb_encode using module config field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x20, buf, len, 0): TX module config response (5 args!)
+
+  Struct encoding (at DAT_0046b92c, 8 bytes):
+    - *puVar1 = 0              (type = query/base)
+    - puVar1[1] = param_1      (eye ID)
+
+  TX responses:
+    - service=0x20 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - ModuleDashboardAutoCloseValueService_response_set_cmd (FUN_0046b25e): dashboard auto-close value set response
+      - type=2, field_count=4
+      - *(u32*)(puVar1+4) = *DAT_0046b91c (current calibration value)
+      - TX via Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x20, ...)
+    - module_config_inter_eye_sync (FUN_0046b35c): module config inter-eye sync
+      - Builds 10-byte packet: [2, 0, ...]
+      - Calls SendDataToPeerExt (FUN_00463178)(0x20, &packet, 2, 0) — inter-eye command relay
+    - SystemLanguageSaveToFlash (FUN_0046b388): save system language to flash
+      - If *DAT_0046b948 == 1 (pending): process response
+      - module_config_validate_value (FUN_004a2e8e)(*DAT_0046b8f8 & 0xFF): validate calibration value
+    - DashboardAutoCloseValueSaveToFlash (FUN_0046b43c): save dashboard auto-close value to flash
+      - If *DAT_0046b960 == 1: process
+      - module_config_apply_value (FUN_004a2f76)(*DAT_0046b91c): apply general config value
+
+
+# ===========================================================================
+# 17. pb_service_box_detect_handler (FUN_004fc98c) — BoxDetect/DisplayTrigger Handler (0x81)
+#     Source: (box detect module)
+#     Charging case detection, display wake trigger
+# ===========================================================================
+
+pb_service_box_detect_handler (FUN_004fc98c) (BoxDetect 0x81)
+  Signature: (u1 param_1, int param_2, u4 param_3, u4 param_4)
+
+  Sub-functions called:
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 buffer at DAT_004fccd0)
+    - memset (FUN_0043c0e4)(DAT_004fccd4, 10, 0): memset — 10 byte struct
+    - case_get_soc (FUN_004b43d8): get case SOC (state of charge)
+    - case_get_charging_state (FUN_004b43ee): get case charging state
+    - case_get_lid_state (FUN_004b4404): get case lid state
+    - case_get_in_case (FUN_004b46f8): get case in-case detection (returns 1 if in case)
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_004fcc98, struct): pb_encode using box detect field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x81, buf, len): TX box detect response
+
+  Struct encoding (at DAT_004fccd4, 10 bytes):
+    - *puVar1 = 1              (type)
+    - puVar1[1] = param_1      (msgId)
+    - *(u16*)(puVar1+2) = 3    (field_count = 3)
+    - puVar1[4] = SOC          (battery percentage)
+    - puVar1[5] = charging     (charging state)
+    - puVar1[6] = lid_state    (lid open/closed)
+    - puVar1[7] = in_case      (1 if in case, 0 otherwise)
+    - puVar1[8] = 0            (padding)
+
+  TX responses:
+    - service=0x81 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - DEV_ThreadInit (FUN_004fcb08): device thread init / box detect echo
+      - Copies 4 bytes from param_2 (battery/state snapshot)
+      - TX via Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 0x81, ...)
+    - DEV_SendMessage (FUN_004fd046): send device message / display trigger
+      - Calls display_page_router (FUN_0044820e): display page router
+      - Increments counter at DAT_004fd6bc (trigger count)
+
+  Hardware integration:
+    - case_get_soc (FUN_004b43d8): reads case battery SOC from I2C/GPIO
+    - case_get_charging_state (FUN_004b43ee): reads charging status
+    - case_get_lid_state (FUN_004b4404): reads lid sensor
+    - case_get_in_case (FUN_004b46f8): reads proximity/hall sensor for in-case detection
+
+
+# ===========================================================================
+# 18. APP_PbTxEncodeRingEvent (FUN_005b4506) — Ring Handler (0x91)
+#     Source: pb_service_ring/pb_service_ring.c
+#     R1 ring relay protocol
+# ===========================================================================
+
+APP_PbTxEncodeRingEvent (FUN_005b4506) (Ring 0x91)
+  Signature: (u1 param_1, u16* param_2)
+
+  Sub-functions called:
+    - pb_ostream_init (FUN_004a2278): pb_ostream_init (0x100 buffer at DAT_005b47b8)
+    - memset (FUN_0043c0e4)(DAT_005b47bc, 0x40, 0): memset — 64 byte struct
+    - pb_encode_28b6 (FUN_004a28b6)(ctx, DAT_005b4770, struct): pb_encode using ring field table
+    - Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 0x91, buf, len): TX ring response
+
+  Struct encoding (at DAT_005b47bc, 0x40 bytes):
+    - *puVar1 = 1              (type)
+    - puVar1[1] = param_1      (msgId)
+    - *(u16*)(puVar1+2) = 3    (field_count = 3)
+    - puVar1[0x0C] = (char)param_2[4]  (ring command byte)
+    - *(u32*)(puVar1+0x10) = *(u32*)(param_2+6) (ring data)
+    - *(u16*)(puVar1+4) = *param_2  (ring payload length)
+    - If *param_2 != 0 && *param_2 < 7: memcpy(puVar1+6, param_2+1, *param_2)
+    - puVar1[0x14] = 0        (terminator)
+
+  TX responses:
+    - service=0x91 via Thread_MsgPbTxByBle (FUN_0046f5c4)
+
+  Related functions:
+    - RingDataRelay_common_data_handler (FUN_005b46b0): ring RX callback
+      - param_1=0 → APP_PbRxRingFrameDataProcess (FUN_005b41fc)(param_2, param_3 & 0xFFFF): process ring frame data
+      - param_1!=0 → log error
+
+  Ring data layout:
+    - param_2[0]: payload length (max 6 bytes)
+    - param_2[1..6]: payload data (gesture bytes)
+    - param_2[4]: command byte (mapped to puVar1[0x0C])
+    - param_2[6..7]: u32 extra data
+
+
+# ===========================================================================
+# === CROSS-CUTTING ANALYSIS ===
+# ===========================================================================
+
+# === COMMON PROTOBUF ENCODING PATTERN ===
+#
+# The 19 protobuf handlers (services 1-19) use the SAME 6-step encoding pipeline:
+#   1. memset(struct, 0, struct_size)
+#   2. Populate: struct[0]=type, struct[1]=msgId, struct[2:3]=field_count, struct[4+]=payload
+#   3. pb_ostream_init(stream, encode_buf, encode_buf_size)
+#   4. memcpy(ctx, stream, 20)
+#   5. pb_encode(ctx, field_descriptor_table, struct) → returns encoded_len
+#   6. ble_msgtx_send(1, service_id, encode_buf, encoded_len)
+#
+# Each handler has its OWN field descriptor table (DAT_XXXXXXXX), confirming
+# that each service has a unique protobuf schema compiled into firmware.
+
+# === BUFFER SIZE TABLE ===
+#
+# Service  Handler        Struct Size  Encode Buffer  Notes
+# 0x01     Dashboard      0x100        0x100          Standard
+# 0x03     Menu           0x37C        0x432          Menu items array
+# 0x04     Notification   0x4A         0x100          Small struct
+# 0x05     Translate      0x854        0x100          2KB struct
+# 0x06     Teleprompter   0xF58        0x100          4KB struct
+# 0x07     EvenAI         0x20C        0x100          512B struct
+# 0x08     Navigation     0x2018       10000          Largest buffer! (maps)
+# 0x09     DeviceInfo     (dynamic)    0x100          Calls encoder function
+# 0x0B     Conversate     0x1D6C       0x100          7.5KB struct
+# 0x0C     Quicklist      0x1238       0x400          4.6KB struct, 1KB buf
+# 0x0D     Settings       0x0C         0x80           Smallest (wrapper)
+# 0x0E     DisplayConfig  0x31C        0x100          6-region config
+# 0x10     Onboarding     0x10         0x100          16B struct (smallest)
+# 0x20     ModuleConfigure 0x08        0x0D           8B struct, 13B buf
+# 0x80     Auth           (param)      (param)        Uses caller's buffer
+# 0x81     BoxDetect      0x0A         0x100          10B struct
+# 0x91     Ring           0x40         0x100          64B struct
+# 0xE0     EvenHub        0x2654       0x279E         ~10KB each! (largest)
+#
+# Non-protobuf services (no encode struct/buffer):
+# 0x02     Notification   (shares 0x04 DAT_004ec610/0x4A, DAT_004ec60c/0x100 — TX on svcId=4)
+# 0x0A     SessionInit    —            —              No protobuf (KV store writes)
+# 0x0F     Logger         —            —              Multiplexed through 0x0D settings
+# 0x21     SystemAlert    —            —              RX-only + inter-eye relay (no BLE TX)
+# 0x22     SystemClose    —            —              RX-only + inter-eye + NUS (no protobuf TX)
+# 0xFF     SystemMonitor  —            —              RX-only (raw 6-byte magic)
+# 0xC4/C5  FileTransfer   —            —              Non-protobuf: 2-byte LE status words on EFS pipe
+
+# === TX FUNCTION VARIANTS ===
+#
+# Thread_MsgPbTxByBle (FUN_0046f5c4)(1, svc, buf, len)    — Primary TX path (initial response to phone)
+# Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, svc, buf, len)    — Notification TX path (glasses-initiated, continuation)
+# Thread_MsgPbTxDirectByBle (FUN_0046f4e8)(1, svc, buf, len)    — Direct/priority TX path
+# Thread_MsgPbNotifyDirectByBle (FUN_0046f556)(1, svc, buf, len)    — Direct notification TX path
+# SendDataToBoth (FUN_00462a1a)(svc, buf, len, 0)    — Inter-eye: send to both eyes via TinyFrame
+# RequestDisplayReflash (FUN_00462912)(svc, buf, len, 0)    — Inter-eye: request display reflash
+# SendDataToPeerExt (FUN_00463178)(svc, buf, len, 0)    — Inter-eye: send data to peer (extended)
+# Thread_MsgEfsTxByBle (FUN_0046f856)(1, svc, buf, len)    — EFS TX path (file transfer on 0x7402 pipe)
+# Thread_MsgEfsNotifyByBle (FUN_0046f8cc)(1, svc, buf, len) — EFS notify (glasses-initiated file export data)
+#
+# Difference between f5c4 and f6ca:
+#   f5c4 = initial response (phone→glasses→phone reply)
+#   f6ca = continuation/notify (glasses-initiated, e.g. auto-increment msgId)
+
+# === FIELD DESCRIPTOR TABLES (per-service protobuf schemas) ===
+#
+# Service  Table Address     Encoder Group
+# 0x01     DAT_0056048c      dashboard
+# 0x03     DAT_0045bcf0      menu
+# 0x04     DAT_004ec5d0      notification
+# 0x05     DAT_005b4e00      translate
+# 0x06     DAT_0054d1f0      teleprompter
+# 0x07     DAT_004eef64      evenai (types 1-4)
+# 0x07     DAT_004efadc      evenai (type 3/ASK large)
+# 0x07     DAT_004f0458      evenai (types 7-9)
+# 0x07     PTR_DAT_004f0754  evenai (type 10/CONFIG)
+# 0x08     DAT_00589c50      navigation
+# 0x09     (via setting_respond_to_app (FUN_004aa4e8)) device info
+# 0x0B     DAT_005932d8      conversate
+# 0x0C     DAT_00568d34      quicklist+health
+# 0x0D     DAT_0046c3f0      settings
+# 0x0E     DAT_0056a73c      display config
+# 0x10     DAT_004b0168      onboarding
+# 0x20     DAT_0046b934      module configure
+# 0x80     DAT_0049eaac      auth
+# 0x80     DAT_0049f408      auth keepalive
+# 0x81     DAT_004fcc98      box detect
+# 0x91     DAT_005b4770      ring
+# 0xE0     DAT_0059ca7c      evenhub
+
+# === AUTO-INCREMENT MSG_ID COUNTERS ===
+#
+# Several handlers use persistent counters (phone doesn't set msgId):
+# - Conversate:  DAT_005932e8  (puVar1[1] = *counter + 1)
+# - Translate:   DAT_005b4e10  (puVar1[1] = *counter + 1)
+# - Teleprompter: DAT_0054d200 (puVar1[1] = *counter + 1)
+# - EvenAI CTRL: DAT_004ef37c  (puVar1[1] = *counter; *counter++)
+# - EvenAI EVT:  DAT_004f05c8  (puVar1[1] = *counter; *counter++)
+# - BoxDetect:   DAT_004fccf0  (puVar1[1] = *counter; *counter++)
+# - Onboarding:  DAT_004b0338  (puVar1[1] = *counter; *counter++)
+
+# === RESPONSE TYPE BYTE CONVENTIONS ===
+#
+# 0x00-0x0F: Base command types (RX from phone)
+# 0xA1: COMM_RSP / acknowledgment (most common TX type)
+# 0xA2: Secondary response (text update, result)
+# 0xA3: Tertiary response (heartbeat, scroll position)
+# 0xA6: Teleprompter command ACK
+# 0x01-0x0A: EvenAI type codes (CTRL=1, ASK=3, ANALYSE=4, REPLY=5, SKILL=6, PROMPT=7, EVENT=8, HB=9, CONFIG=10)
+
+# === TASK QUEUE INTEGRATION (async processing) ===
+#
+# SVC_DecodeLocalEvenAIInfo (FUN_004a5e4a)(type, data, max_len) enqueues work items:
+# - EvenAI ASK:   type=2, data=param_2, max_len=2
+# - EvenAI REPLY: type=5, data=param_2, max_len=0x208
+# These are picked up by the EvenAI task thread (_thread_exit (FUN_004edcac))
+
+# === INTER-EYE RELAY ===
+#
+# Menu (0x03):           SendDataToBoth (FUN_00462a1a)(3, buf, len, 0) — menu items to both eyes
+# ModuleConfigure (0x20): SendDataToPeerExt (FUN_00463178)(0x20, &pkt, 2, 0) — calibration sync
+# EvenHub (0xE0):        RequestDisplayReflash (FUN_00462912)(0xE0, buf, len, 0) — COMM_RSP relay
+# SystemAlert (0x21):    SendDataToBoth (FUN_00462a1a)(0x21, &payload, 1, 0) — alert to both eyes (10s throttle)
+# SystemClose (0x22):    RequestDisplayReflash (FUN_00462912)(0x22, &pkt, 6, 0) — close dialog events
+# SystemClose (0x22):    SendDataToBoth (FUN_00462a1a)(0x22, &local_20, 3, 0) — UI interaction relay
+
+# === CONNECTION STATE GUARDS ===
+#
+# Several handlers check BLE connection before encoding:
+# - DeviceInfo (0x09):    ble_connection_state_check (FUN_0045e62c)() == 1
+# - DeviceStatus notify:  ble_connection_state_check (FUN_0045e62c)() == 1
+# - EvenHub COMM_RSP:     ble_connection_state_check_2 (FUN_0045e634)() == 1
+# - Auth keepalive:       auth_state_check (FUN_0049d40a)(0) for auth state
+# - SystemMonitor (0xFF): ble_connection_state_check (FUN_0045e62c)() == 1 (before force close)
+# - SystemClose (0x22):   ble_connection_state_check (FUN_0045e62c)() for mode validation
+
+# === MUTEX/LOCK PROTECTION ===
+#
+# Only EvenHub (0xE0) uses explicit mutex:
+# - evenhub_lock_data (FUN_0059c32a): acquire lock
+# - evenhub_unlock_data (FUN_0059c386): release lock
+# Other handlers rely on RTOS task serialization
+
+
+
+# ===========================================================================
+# 19. APP_PbRxNotificationFrameDataProcess (FUN_004ebb9c) — Notification (0x02)
+#     Source: pb_service_message_notify/pb_notif.c
+#     RX handler for notification control — TX responses go to service 0x04!
+#     Notification CONTENT arrives via file transfer (0xC4/0xC5), not this handler
+# ===========================================================================
+
+APP_PbRxNotificationFrameDataProcess (FUN_004ebb9c) (Notification 0x02)
+  Signature: (int param_1, ushort param_2, u4 param_3, u4 param_4)
+
+  Overview:
+    RX-side protobuf decoder for notification control on service 0x02-20.
+    Decodes incoming protobuf frame, extracts command_id (byte at local_5c),
+    then dispatches to sub-handlers based on command type.
+    Notification CONTENT arrives via file transfer (0xC4/0xC5) + display wake
+    (0x04-20), not through this handler directly.
+
+  Sub-functions called:
+    - FUN_00482358: zero decode context (0x4c bytes)
+    - FUN_004a380c: pb_istream_from_buffer — create protobuf input stream
+    - FUN_00439c04: memcpy — copy stream context (0x10 bytes)
+    - FUN_004a4490: pb_decode — decode protobuf using DAT_004ec5d0 field table
+    - PB_RxNotifCtrl (FUN_004ebd84): decode notification control fields (cmd=1)
+    - APP_PbTxEncodeNotifCtrl (FUN_004ebe76): encode + TX notification ctrl response (cmd=1)
+    - PB_RxNotifWhitelistCtrl (FUN_004ec39a): decode whitelist control (cmd=3)
+    - APP_PbTxEncodeNotifWhitelistCtrl (FUN_004ec450): encode + TX whitelist response (cmd=3)
+    - APP_PbTxEncodeNotifCommResp (FUN_004ec00c): encode + TX COMM_RSP (type=0xA1)
+
+  Command dispatch (from command_id at local_5c):
+    cmd 1 → PB_RxNotifCtrl (FUN_004ebd84) → APP_PbTxEncodeNotifCtrl (FUN_004ebe76)
+            Notification control: sets per-app notification enable/disable state
+    cmd 3 → PB_RxNotifWhitelistCtrl (FUN_004ec39a) → APP_PbTxEncodeNotifWhitelistCtrl (FUN_004ec450)
+            Whitelist control: toggles notification filtering (on/off flag at *param_2)
+    else  → APP_PbTxEncodeNotifCommResp (FUN_004ec00c)
+            Generic COMM_RSP echo (type=0xA1, copies first 2 payload bytes)
+
+  CRITICAL: TX goes to service 0x04 (MessageNotify), NOT 0x02!
+  All encode functions call Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 4, buf, len)
+
+  TX Encoders:
+    APP_PbTxEncodeNotifCtrl (FUN_004ebe76):
+      Struct addr: DAT_004ec610 (static)
+      Struct size: 0x4A (74 bytes)
+      Encode buffer addr: DAT_004ec60c (static)
+      Encode buffer size: 0x100 (256 bytes)
+      Field descriptor table: DAT_004ec5d0
+      Type byte: 1 (NotifCtrl)
+      Field count: 3
+      TX: Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 4, buf, len) — service 0x04
+
+    APP_PbTxEncodeNotifCommResp (FUN_004ec00c):
+      Struct addr: DAT_004ec610 (shared with NotifCtrl)
+      Struct size: 0x4A (74 bytes)
+      Encode buffer addr: DAT_004ec60c (shared)
+      Encode buffer size: 0x100 (256 bytes)
+      Field descriptor table: DAT_004ec5d0 (shared)
+      Type byte: 0xA1 (161 = COMM_RSP)
+      Field count: 5
+      TX: Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 4, buf, len) — service 0x04
+
+    APP_PbTxEncodeNotifAppIDNotInWhitelist (FUN_004ec190):
+      Struct: dynamically allocated via rtos_mem_alloc (FUN_0046e7e2)(0x9C) — 156 bytes
+      Encode region: 0x4E (78 bytes) within the allocated block
+      Type byte: 2 (AppIDNotInWhitelist)
+      Field count: 4
+      Copies app_id + category strings with strlen
+      TX: Thread_MsgPbNotifyByBle (FUN_0046f6ca)(1, 4, buf, len) — service 0x04
+      Freed after TX: rtos_mem_free (FUN_0046e826)(ptr)
+
+    APP_PbTxEncodeNotifWhitelistCtrl (FUN_004ec450):
+      Struct addr: DAT_004ec610 (shared)
+      Struct size: 0x4A (74 bytes)
+      Encode buffer addr: DAT_004ec60c (shared)
+      Encode buffer size: 0x100 (256 bytes)
+      Type byte: 3 (WhitelistCtrl)
+      Field count: 6
+      TX: Thread_MsgPbTxByBle (FUN_0046f5c4)(1, 4, buf, len) — service 0x04
+
+  Auto-increment counter: NOT observed (msgId from decoded request or global)
+  No direct TX on service 0x02 — all responses route to 0x04
+
+  Related subsystems (display pipeline):
+    - MessageNotify_common_data_handler (FUN_004ed684): page data dispatcher
+    - MessageNotify_ReflashEventHandler (FUN_004ed7a8): LVGL display refresh
+    - MessageNotify_ui_event_handler (FUN_004ed8b8): gesture/NUS event routing
+    - pb_notif_file_event_handler (FUN_004ed726): file transfer completion callback
+    - message_notify_page_init (FUN_0052f5ac): LVGL page initialization
+    - msg_notif_timer_mgr_init (FUN_0052fc0c): auto-dismiss timer (6 timer functions)
+    - message_notify_list (15+ UI functions): virtual scroll, animations, item management
+
+  State management:
+    - pb_notif_get_handle (FUN_004a4950): get notification handle state
+    - pb_notif_set_state (FUN_004a4966): set notification enabled/disabled
+    - pb_notif_complex_logic (FUN_0052d7f2): complex state transition logic
+
+
+# ===========================================================================
+# 20. LOGGER SERVICE (0x0F) — Architecture Note
+#     Source: app/gui/logger/logger_setting.c + pt_protocol_procsr.c
+#     BLE Logger (0x0F-20) is multiplexed through ProtoBaseSettings on 0x0D
+#     The "svc_0F" production test handler is a DIFFERENT subsystem
+# ===========================================================================
+
+LOGGER SERVICE (0x0F-20) — Architecture Note:
+  The BLE Logger service (0x0F-20) does NOT have a dedicated protobuf
+  handler in the standard dispatch table. Instead, logger commands are
+  multiplexed through ProtoBaseSettings on service 0x0D (confirmed in
+  protobuf_schemas.txt: "Uses ProtoBaseSettings on 0x0D").
+
+loggerSetting_common_data_handler (Logger 0x0F)
+  Signature: (int param_1, byte *param_2) — standard common_data_handler
+
+  Handler address: NOT mapped in function_map.txt (confirmed by string-only analysis)
+  Registration: via common_data_handler callback pattern (service 0x0F)
+
+  Command dispatch (from firmware strings at 0x002948c0):
+    cmd=1 → Query file list ("loggerSetting file list, num: %d")
+    cmd=2 → Delete file ("loggerSetting delete file: %s")
+    cmd=3 → Delete all files ("loggerSetting delete all files")
+    cmd=4 → Toggle live streaming ("loggerSetting live streaming: %d")
+    cmd=5 → Live log level change
+    cmd=6 → Heartbeat
+    else  → Path validation, checks "/log/" prefix
+
+  TX response: NONE observed on service 0x0F
+    No calls to Thread_MsgPbTxByBle with service 0x0F found in decompiled.c
+    Logger responses flow through ProtoBaseSettings (0x0D-00/0x0D-20)
+
+  Production test disambiguation:
+    get_mac_info (FUN_00490034) (Production Test 0x0F — NOT BLE Logger)
+      - Writes 10-byte response: [5, 1, 3, 6, MAC[0..5]]
+      - The "svc_0F" in the original name referred to the production test
+        command ID 0x0F, not the BLE service ID
+      - Part of NUS production CLI, not EUS protobuf
+
+  Firmware-side BLE logger components:
+    EasyLogger (elog) subsystem:
+      - elog_async_thread_init (FUN_004435c8): async logging thread init
+      - elog_async_output (FUN_0044353c): async formatted output
+      - elog_async_write_buf (FUN_00447720): write to async buffer
+      - elog_async_flush (FUN_00468f88): flush async buffer to storage
+      - elog_async_get_line (FUN_0046d6ec): read line from async buffer
+      - elog_log_handler (FUN_0043c9ae): main log dispatch handler
+      - elog_ringbuf_write (FUN_0043c896): ring buffer write
+
+    Log streaming (elog.stream):
+      - elog_stream_remaining_space (FUN_00476184): check capacity (max 0x1195 bytes)
+      - elog_stream_validate (FUN_0047619e): validate stream state (magic, mode, hash)
+      - elog_stream_append_formatted (FUN_00476200): append formatted data
+      - elog_stream_reset (FUN_004761e0): clear stream buffer (0x11AC bytes to 0)
+
+
+# ===========================================================================
+# 21. kv_tz_handler (FUN_005225b0) — SessionInit (0x0A)
+#     Source: system_monitor/kv_tz.c
+#     NOT a standard protobuf service handler — handled differently
+#     Session initialization via timezone/time sync on the KV store path
+# ===========================================================================
+
+kv_tz_handler (FUN_005225b0) (SessionInit 0x0A)
+  Signature: (u4 param_1, u4 param_2, u4 param_3, u4 param_4)
+
+  Overview:
+    Service 0x0A (SessionInit) is NOT routed through the standard protobuf
+    service dispatch table (confirmed in protobuf_schemas.txt: "Not in the
+    20 tables; handled differently"). Instead, session initialization is
+    handled through the auth protocol (0x80) time sync mechanism and the
+    KV timezone persistence layer.
+
+  Sub-functions called:
+    - FUN_004a9de8: CRC-16 calculation over 10-byte record
+    - FUN_004ecfc2: KV database write (key="kvTime", value=12 bytes)
+
+  Record format (12 bytes at DAT_00522660):
+    offset 0:   type = 3 (fixed)
+    offset 4:   param_1 (unix timestamp, 4 bytes)
+    offset 8:   param_2 (timezone byte, cast to char)
+    offset 10:  CRC-16 (computed over first 10 bytes)
+
+  TX path:
+    No direct BLE TX. SessionInit responses flow through the auth handler
+    (service 0x80). The phone sends session init on 0x0A-20, but the
+    firmware response is embedded in auth keepalive messages on 0x80.
+
+  Production test disambiguation:
+    pt_proto_handle_svc_0A (FUN_0048f9bc) is a DIFFERENT subsystem —
+    it handles production test lux sensor power-on, not BLE SessionInit.
+      - Validates params (non-NULL, size >= 4)
+      - Sets response: [0x30, 1, 3, 1, status]
+      - status = 0 if auth paired, else 5
+      - Part of NUS production CLI, not EUS protobuf
+
+  Related functions:
+    - _kvdbUpdataTime (FUN_00522404): reads 8-byte timestamp from KV store
+    - _nvdbUpdataSysDt (FUN_004b5380): extended timezone save (8-field record)
+    - kv_tz_load_and_validate (FUN_004a9fb8): validate stored timezone on boot
+    - kv_tz_load_extended (FUN_004b52b0): load extended timezone record
+
+
+# ===========================================================================
+# 22. system_alert_common_data_handler (FUN_004cc860) — SystemAlert (0x21)
+#     Source: system_alert.c
+#     Receives alert events, relays to both eyes via inter-eye link
+#     Inter-eye relay + LVGL display — NO BLE TX responses
+# ===========================================================================
+
+system_alert_common_data_handler (FUN_004cc860) (SystemAlert 0x21)
+  Signature: (u1 param_1, u4 param_2, u1 param_3, u4 param_4)
+
+  Overview:
+    Handles incoming system alert data on 0x21-20. This handler does NOT
+    directly encode protobuf or TX via BLE. Instead, it queues alert events
+    into the FreeRTOS message system for processing by the UI layer, and
+    uses SendDataToBoth for inter-eye relay.
+
+  Sub-functions called:
+    - FUN_004599b6(0xc): allocate 12-byte message struct from message pool
+    - FUN_0048a9c4: copy 6-byte payload into message (at offset +5)
+    - FUN_004599d2: enqueue message to task queue (via DAT_004cc894 task handle)
+
+  Message struct layout (12 bytes):
+    offset +2: 0x35 (message type identifier)
+    offset +4: param_1 (alert type byte)
+    offset +5: param_2 (6 bytes via FUN_0048a9c4 — likely alert payload/ID)
+    offset +11: param_3 (alert flag/severity)
+
+  Inter-eye relay (FUN_004ccd14):
+    - 10,000ms throttle via timer_check_elapsed (prevents alert storms)
+    - Builds 1-byte payload with alert type
+    - SendDataToBoth (FUN_00462a1a)(0x21, &payload, 1, 0) — both eyes display simultaneously
+
+  Display handler — system_alert_ReflashEventHandler (FUN_004ccd62):
+    - Two alert types (from *DAT_004cd08c & 0xFF):
+      type 1 → Standard alert with text label (DAT_004cd0e4)
+      type 2 → Ring connect alert (PTR_s_ID_GENERAL_RING_CONNECT)
+    - Creates LVGL label widget with:
+      - Font size 0x18 (title) + 6pt (body)
+      - Background color via DAT_004cd0ec
+      - Foreground color 0xFFFFFF (white)
+      - Timeout auto-close via FUN_0043f30c(*container, 9/2, 0, 0)
+
+  TX response: NONE on service 0x21
+    No calls to Thread_MsgPbTxByBle with service 0x21
+    SystemAlert is receive-only — glasses display alerts but don't ACK them
+
+  Struct encoding: NOT applicable (no protobuf TX)
+  Field descriptor table: NOT applicable
+  Auto-increment counter: NOT applicable
+
+  Related functions:
+    - system_alert_ReflashEventHandler (FUN_004ccd62): LVGL display rendering
+    - FUN_004ccd14: inter-eye relay with 10s throttle
+    - RequestDisplayStop (FUN_00462996): cleanup on alert dismiss
+
+
+# ===========================================================================
+# 23. system_close_common_data_handler (FUN_0056c300) — SystemClose (0x22)
+#     Source: system_close.c (confirmed by EasyLogger strings)
+#     Receives close/dismiss requests, manages YES/NO/MINIMIZE dialog
+#     Inter-eye relay + LVGL dialog — NO BLE TX, uses NUS for responses
+# ===========================================================================
+
+system_close_common_data_handler (FUN_0056c300) (SystemClose 0x22)
+  Signature: (u4 param_1, u1 *param_2)
+
+  Overview:
+    Handles system close commands on 0x22-20. Stores the close type and
+    message ID, validates BLE connection and current display mode, then
+    schedules the close dialog via inter-eye relay. Only specific display
+    modes are eligible for system close — others are rejected.
+
+  Sub-functions called:
+    - FUN_0045e62c: ble_connection_state_check
+    - FUN_00442628: check display active state
+    - FUN_004426b8(&local_c, &local_8): get current display mode and sub-mode
+    - FUN_0045e9b0(0x22, 0, 0, 300): schedule close event with 300ms delay
+
+  Close type extraction:
+    - *DAT_0056cc98 = *param_2         (close type byte)
+    - *DAT_0056cc9c = *(u16*)(param_2+1)  (message ID, 2 bytes LE)
+
+  Mode validation (reject if NOT one of these display modes):
+    - local_c == 0x08 (Navigation)
+    - local_c == 0x0B (Conversate)
+    - local_c == 0x05 (Translate)
+    - local_c == 0x06 (Teleprompter)
+    - local_c == 0xE0 (EvenHub)
+    Also rejects if local_8 != 0 (sub-mode must be idle)
+
+  TX path (via inter-eye relay):
+    sysclose_send_nus_command (FUN_0056c3b8):
+      - Builds 6-byte inter-eye packets for each event type
+      - Packet format: [0, event_type, data[0..3]]
+      → RequestDisplayReflash (FUN_00462912)(0x22, &packet, 6, 0)
+
+  Event dispatch (system_close_page_event_handler, FUN_0056c4f4):
+    event 0x0A (10) → system_close_handle_click (FUN_0056ccb0) — user tap/confirm
+    event 0x48 (72) → sysclose_send_nus_command (FUN_0056c3b8) — scroll relay
+    event 0x44 (68) → sysclose_send_nus_command (FUN_0056c3b8) — selection change
+    event 0x45 (69) → sysclose_send_nus_command (FUN_0056c3b8) — selection change
+    event 0x4A (74) → sysclose_send_nus_command (FUN_0056c3b8) — timeout/dismiss
+    event 0x49 (73) → sysclose_send_nus_command (FUN_0056c3b8) — timeout/dismiss
+
+  UI event handler — FUN_0056d5ec:
+    - Builds 3-byte packet on user interaction
+    - SendDataToBoth (FUN_00462a1a)(0x22, &local_20, 3, 0) — relay to peer eye
+
+  Click handler — system_close_handle_click (FUN_0056ccb0):
+    - Selection dispatch by dialog style and button index:
+      style=2 (standard):  index 0→YES, index 1→NO
+      style=3 (extended):  index 0→YES, index 1→NO, index 2→MINIMIZE
+    - Calls RequestDisplayStop (FUN_00462996)(0x22, 0, 0, 0) on YES/MINIMIZE
+
+  Dialog UI subsystem (37 functions total):
+    - sysclose_main_handler (FUN_005b83e2): main rendering loop
+      - Reads dialog context: type (FUN_005b8a6c), timer (FUN_005b8a72),
+        result (FUN_005b8a86), is_active (FUN_005b8a9c), callback (FUN_005b8aa6),
+        context (FUN_005b8ab2)
+      - Drives YES/NO/MINIMIZE button layout via sysclose_check_can_close (FUN_005b824c)
+    - system_close_create_options (FUN_0056cf54): creates LVGL option buttons
+    - system_close_update_selection (FUN_0056c9ca): animates button highlight
+    - system_close_handle_scroll_up (FUN_0056cb44): moves selection up
+    - system_close_handle_scroll_down (FUN_0056cbf0): moves selection down
+    - system_close_ReflashEventHandler (FUN_0056d364): LVGL refresh callback
+    - system_close_ui_event_handler (FUN_0056d62a): gesture/event router
+
+  Dialog options (from firmware analysis):
+    - sysclose_get_option_yes (FUN_005b8af4): reads at +0xBC/0xC0 — YES = 0
+    - sysclose_get_option_no (FUN_005b8b08): reads at +0xBD/0xF8 — NO = 1
+    - sysclose_get_option_minimize (FUN_005b8b1c): reads at +0xBE/0x120 — MINIMIZE = 2
+    - sysclose_get_option_reserved (FUN_005b8b32): reads at +0xBF/0x158 — reserved slot
+
+  Timer system:
+    - system_close_timer_create_wrapper (FUN_0057542c): wraps sysclose_timer_create
+    - sysclose_timer_create (FUN_0050ebd8): fixed-point timer with 16.16 scaling
+    - sysclose_timer_callback (FUN_0050ea0c): periodic tick handler
+    - sysclose_timeout_complete (FUN_005b8640): timeout → auto-dismiss
+
+  Dialog styles:
+    - style=1 (standard): YES / NO buttons
+    - style=2 (extended): YES / NO / MINIMIZE buttons
+    - sysclose_get_dialog_layout_type (FUN_005b8b48): returns u32 at +0x20C
+
+  TX response: NONE on service 0x22 via BLE protobuf
+    Responses go via NUS (6E400002) as raw bytes, not protobuf on EUS pipe
+    The sysclose_main_handler orchestrates the full lifecycle
+
+  Struct encoding: NOT applicable (no protobuf TX)
+  Field descriptor table: NOT applicable
+  Auto-increment counter: NOT applicable
+
+
+# ===========================================================================
+# 24. system_monitor_common_data_handler (FUN_005221d4) — SystemMonitor (0xFF)
+#     Source: system_monitor.c
+#     RX-only handler — system restart/dashboard reset with magic validation
+# ===========================================================================
+
+system_monitor_common_data_handler (FUN_005221d4) (SystemMonitor 0xFF)
+  Signature: (int param_1, char *param_2, int param_3, int param_4)
+
+  Overview:
+    Handles system monitor commands on 0xFF-20. When the phone sends a
+    system monitor packet, this handler validates a 6-byte magic sequence
+    then performs a full system reset: waits for display idle, triggers
+    system reinit including dashboard, quicklist, and state cleanup.
+
+  Sub-functions called:
+    - elog_level_check (FUN_0043cd6c): log verbosity check (multiple)
+    - elog_output (FUN_0043d1c8): structured log output
+    - FUN_00442628: check display state (returns 1 if display active)
+    - FUN_0044263a: check sub-display state
+    - FUN_00443358(0,0,0): trigger display close/reset
+    - FUN_00442650: check additional display condition
+    - FUN_00452dd8(100): vTaskDelay(100ms) — wait for display to settle
+    - FUN_0045e62c: ble_connection_state_check (returns 1 if connected)
+    - FUN_00463804: force display pipeline close (only if BLE connected)
+    - system_monitor_init_dashboard (FUN_00540ef4): reinitialize all dashboard subsystems
+    - FUN_004a4aa8: quicklist state reinit
+    - system_monitor_clear_state (FUN_004653d8): clear monitor state machine
+
+  Command validation:
+    Requires EXACTLY param_1==5 (5 bytes) AND param_2 matches magic sequence:
+      param_2[0] == 'U'    (0x55)
+      param_2[1] == 0x04
+      param_2[2] == 0x12
+      param_2[3] == '4'    (0x34)
+      param_2[4] == 'V'    (0x56)
+    Additionally checks param_2[5] == 'x' (0x78) — 6th byte sentinel
+
+  Magic sequence: [0x55, 0x04, 0x12, 0x34, 0x56, 0x78]
+    Safety guard — only packets with this exact 6-byte payload trigger reset.
+    Prevents accidental resets from malformed data. NOT protobuf — raw bytes.
+
+  Reset sequence (when magic matches):
+    1. Check display active → if so, wait (up to 11 iterations, 100ms each)
+    2. If BLE connected → force close display pipeline via FUN_00463804
+    3. system_monitor_init_dashboard (FUN_00540ef4):
+       - Zeros dashboard state (0x38 bytes at DAT_00541844)
+       - Calls 5 subsystem inits in order:
+         a. sysmon_collect_metrics (FUN_0054db5a): zero metrics buffer (0x2568 bytes)
+         b. sysmon_format_report (FUN_0055138e): zero report buffer (0x1088 bytes)
+         c. sysmon_reset_state (FUN_00554076): calls sysmon_reset_state_inner (FUN_0055567e)
+         d. sysmon_battery_check (FUN_005570ee): zero battery buffers (0x2E50 + 0x288 bytes)
+         e. sysmon_refresh_display (FUN_0055cfe6): calls pb_display_config_clear_buffer (FUN_0056943a)
+    4. FUN_004a4aa8: reinit quicklist state
+    5. system_monitor_clear_state (FUN_004653d8): final state cleanup
+
+  TX response: NONE on service 0xFF
+    No calls to Thread_MsgPbTxByBle with service 0xFF
+    SystemMonitor is RX-only — processes the restart silently
+
+  Struct encoding: NOT applicable (no TX)
+  Field descriptor table: NOT applicable
+  Auto-increment counter: NOT applicable
+
+  Related functions:
+    - _kvdbUpdataTime (FUN_00522404): reads 8-byte timestamp from KV store
+    - kv_tz_handler (FUN_005225b0): timezone sync handler (see section 21)
+
+
+# ===========================================================================
+# 25. efs_service_dispatch_command (FUN_004ea188) — FileTransfer/EFS (0xC4/0xC5/0xC6/0xC7)
+#     Source: efs_service.c / efs_tran.c
+#     Even File Service — non-protobuf file transfer with CRC validation
+#     Raw binary protocol on EFS pipe (0x7401/0x7402) — NOT protobuf
+# ===========================================================================
+
+efs_service_dispatch_command (FUN_004ea188) (FileTransfer 0xC4/0xC5/0xC6/0xC7)
+  Signature: (char param_1, u1 *param_2, ushort param_3)
+
+  Overview:
+    Top-level EFS dispatcher. Routes incoming EFS packets by service ID
+    to the appropriate sub-handler. Uses signed byte comparison:
+    -0x3C = 0xC4, -0x3B = 0xC5, -0x3A = 0xC6, -0x39 = 0xC7.
+    File transfer uses NON-protobuf encoding: 2-byte LE status words
+    for ACKs, raw binary data for file content.
+
+  Service ID routing:
+    0xC4 (param_1 == -0x3C) → _efsFileCmdParse (FUN_004e85c4): file command
+    0xC5 (param_1 == -0x3B) → _efsFileRawDataParse (FUN_004e93a0): file data chunks
+    0xC6 (param_1 == -0x3A) → _efsExportFileParse (FUN_004e9a14): file export
+    0xC7 (param_1 == -0x39) → _efsExportFileParse (FUN_004e9a14): export (shared)
+
+  BLE Pipe: EFS (Even File Service)
+    Characteristic TX: 0x7402
+    Characteristic RX: 0x7401
+    BleG2PsType: 1 (EFS)
+
+  Sub-handler: _efsFileCmdParse (FUN_004e85c4) — File Command (0xC4 RX)
+    Command dispatch:
+      cmd 0 → File open/create
+        - Clears existing file handle if active
+        - Sub-cmd 0: copies default filename (0x1A bytes from DAT_004e933c)
+        - Sub-cmd 1: allocates file buffer (max 0x2136 = 8502 bytes)
+          - rtos_mem_alloc via FUN_004cb4ac for 0x2137 bytes
+          - Opens file for writing via LittleFS
+        - Sub-cmd 0xAA: export command (copies path from param_2)
+        → _evenEfsReplyToAPP (FUN_004e80f8)(0xC4, 0, 0) on success
+        → _evenEfsReplyToAPP (FUN_004e80f8)(0xC4, 0, 1) on early failure
+        → _evenEfsReplyToAPP (FUN_004e80f8)(0xC4, 0, 3) on file system error
+      cmd 1 → Timestamp/metadata update
+      cmd 2 → File verify/complete
+        - Calls _fileCaculateCRC (FUN_004e818c) for integrity check
+
+  Sub-handler: _efsFileRawDataParse (FUN_004e93a0) — File Data (0xC5 RX)
+    Two transfer modes:
+      - Mode 0 (piVar2[0x16] == 0): Direct write via file system
+        - Write chunk + CRC verification by read-back
+      - Mode 1 (piVar2[0x16] == 1): Memory buffer accumulation
+        - Copy to buffer + running CRC via FUN_00475734
+      - Mode 0xAA: Export metadata (logged but not processed)
+    Progress: puVar1[0x1d] = (accumulated * 100) / total
+    TX: _evenEfsReplyToAPP(0xC5, 1, 0) — chunk OK
+    TX: _evenEfsReplyToAPP(0xC5, 1, 3) — CRC mismatch
+
+  Sub-handler: _efsExportFileParse (FUN_004e9a14) — File Export (0xC6/0xC7 RX)
+    Export flow (glasses → phone):
+      cmd 0 → Open file for export
+        - Builds 10-byte header: [0, 0, fileSize(4B LE), fileCRC(4B LE)]
+        → Thread_MsgEfsTxByBle (FUN_0046f856)(1, 0xC6, &header, 10)
+      cmd 1 → Continue export (chunk request)
+      cmd 2 → Export abort/status
+    Export data sending (from timer):
+      - Reads up to 0x1000 bytes per chunk
+      → Thread_MsgEfsNotifyByBle (FUN_0046f8cc)(1, 199, buf, size)
+        NOTE: svcId=199 (0xC7) for export data chunks
+      - On completion: closes file, zeros state (0x78 bytes)
+      - 2-second post-transfer delay via FUN_00470ec6(2000)
+
+  Reply function — _evenEfsReplyToAPP (FUN_004e80f8):
+    Format: 2-byte little-endian status word
+    TX: Thread_MsgEfsTxByBle (FUN_0046f856)(1, svc_id, &status, 2) — EFS pipe
+    Thread_MsgEfsTxByBle internally calls FUN_0046f0fe(2, 0, ...) — pipe=2 for EFS
+
+  Status codes (2-byte LE):
+    0x0000 → fileCheckOK (file metadata accepted)
+    0x0001 → dataReceived (chunk written successfully) — NOT an error
+    0x0002 → transferComplete (all data received, file closed)
+    0x0003+ → real errors (isError = true for status >= 3)
+
+  Transport layer: EFS_ReceivePacket (FUN_004ca418)
+    Low-level EFS packet reassembly:
+    - Validates 0xAA magic byte (standard G2 packet header)
+    - Validates CRC16 (same CRC16/CCITT as protobuf packets)
+    - Handles multi-packet accumulation for 0xC5 (max 0x1020 bytes)
+    - Fragment tracking: param_1[5] (current) vs param_1[4] (total)
+    - Intermediate fragment timeout: 1500ms via FUN_00457bfe
+    - On CRC fail: free buffer, send NACK
+
+  BLE profile layer: profile.efs
+    - EfsHandlerInit (FUN_004a0e5c): register EFS GATT service
+    - efs_on_client_subscribe (FUN_004a0cdc): store conn handle on subscribe
+    - APP_BleEfsWriteCb (FUN_004a0d58): BLE write callback → EFS_ReceivePacket
+    - APP_BleEfsSendDataMsg (FUN_004a0eb8): EFS notification sender
+    - profile_efs_send_notification (FUN_004a1028): low-level GATT notify
+
+  No protobuf encoding — raw binary framing throughout
+  No field descriptor tables
+  No auto-increment counters (uses G2 packet sequence numbers)
+  No struct memset/populate/encode pattern
+
+
+# ===========================================================================
+# SUMMARY: ALL 25 SERVICE HANDLERS
+# ===========================================================================
+#
+#  #  | SvcID | Handler                              | TX Pipe | TX SvcID | Pattern
+# ----|-------|--------------------------------------|---------|----------|--------
+#  1  | 0x80  | PB_TxEncodePipeRoleChange            | EUS     | 0x80     | Protobuf
+#  2  | 0x0D  | PB_TxEncodeDevSetting                | EUS     | 0x0D     | Protobuf
+#  3  | 0x07  | APP_PbTxEncodeEvenAICommResp          | EUS     | 0x07     | Protobuf
+#  4  | 0xE0  | evenhub_PbTxEncodeCommResp            | EUS     | 0xE0     | Protobuf
+#  5  | 0x0B  | APP_PbTxEncodeConversateCommResp      | EUS     | 0x0B     | Protobuf
+#  6  | 0x05  | APP_PbTxEncodeTranslateCommResp       | EUS     | 0x05     | Protobuf
+#  7  | 0x06  | APP_PbTxEncodeTeleprompterResp        | EUS     | 0x06     | Protobuf
+#  8  | 0x01  | PB_TxEncodeDashGestureResp            | EUS     | 0x01     | Protobuf
+#  9  | 0x03  | APP_PbTxEncodeMenuResp                | EUS     | 0x03     | Protobuf
+# 10  | 0x04  | PB_TxEncodeDisplayWake                | EUS     | 0x04     | Protobuf
+# 11  | 0x08  | APP_PbTxEncodeNavigateResp            | EUS     | 0x08     | Protobuf
+# 12  | 0x09  | PB_TxEncodeDeviceInfoResp             | EUS     | 0x09     | Protobuf
+# 13  | 0x0C  | APP_PbTxEncodeQuicklistCommResp       | EUS     | 0x0C     | Protobuf
+# 14  | 0x0E  | PB_TxEncodeDisplayConfig              | EUS     | 0x0E     | Protobuf
+# 15  | 0x10  | APP_PbTxEncodeOnboardingResp          | EUS     | 0x10     | Protobuf
+# 16  | 0x20  | APP_PbTxEncodeModuleConfigResp        | EUS     | 0x20     | Protobuf
+# 17  | 0x81  | PB_TxEncodeBoxDetectResp              | EUS     | 0x81     | Protobuf
+# 18  | 0x91  | APP_PbTxEncodeRingRelayResp           | EUS     | 0x91     | Protobuf
+# 19  | 0x02  | APP_PbRxNotificationFrameDataProcess  | EUS     | 0x04 !  | Protobuf (TX→0x04)
+# 20  | 0x0F  | loggerSetting_common_data_handler     | —       | —        | RX-only (via 0x0D)
+# 21  | 0x0A  | kv_tz_handler                         | —       | —        | KV store (via auth 0x80)
+# 22  | 0x21  | system_alert_common_data_handler      | —       | —        | RX + inter-eye relay
+# 23  | 0x22  | system_close_common_data_handler      | —       | —        | RX + inter-eye + NUS
+# 24  | 0xFF  | system_monitor_common_data_handler    | —       | —        | RX-only (raw 6-byte magic)
+# 25  | C4-C7 | efs_service_dispatch_command           | EFS     | C4-C7   | Raw binary (EFS pipe)
+#
+# Key observations:
+# - 18 services use standard protobuf encode+TX pattern (services 1-18)
+# - Service 0x02 (Notification) is unique: RX on 0x02, TX responses on 0x04
+# - Service 0x0A handled via auth time sync KV store, not standard protobuf dispatch
+# - Services 0x0F, 0x21, 0xFF are RX-only (no BLE TX responses)
+# - Service 0x22 responds via NUS (raw bytes) and inter-eye relay, not protobuf
+# - File transfer (0xC4-0xC7) uses completely separate EFS pipe and raw binary
+# - 19 of 25 entries produce BLE TX; 6 are silent/RX-only/NUS-only

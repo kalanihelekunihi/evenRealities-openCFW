@@ -1,0 +1,602 @@
+================================================================================
+G2 MAIN FIRMWARE MODULE ARCHITECTURE MAP
+================================================================================
+
+Firmware: ota_s200_firmware_ota (S200 / Ambiq Apollo510b, ARM Cortex-M55)
+Base address: 0x00438000
+Total mapped functions: 7,233 (all 100% HIGH confidence) across 463 unique modules
+18 protobuf service handlers, 35 PB_Rx, 50+ PB_TxEncode, 70+ SVC_
+
+================================================================================
+LAYERED ARCHITECTURE DIAGRAM
+================================================================================
+
+    +=========================================================================+
+    | LAYER 7: FEATURE MODULES (777 functions, 52 sub-modules)                |
+    |                                                                         |
+    |  +--Conversate--+ +--Teleprompter--+ +--Navigation--+ +--EvenAI------+  |
+    |  | .ui (22)     | | .ui (25)       | | .ui (51)     | | .animation(10|  |
+    |  | .fsm (14)    | | .render (16)   | | .datahandler | | .ui (3)      |  |
+    |  | .tag (14)    | | .data (8)      | |   (9)        | | .timer (3)   |  |
+    |  | .data (4)    | | .fsm (3)       | | .main (1)    | | core (9)     |  |
+    |  | .timer (2)   | | .timer (4)     | | nav (5)      | +--------------+  |
+    |  | core (9)     | | core (21)      | | nav_ui (7)   |                   |
+    |  +--------------+ +----------------+ +--------------+ +--EvenHub-----+  |
+    |                                                       | .ui (21)     |  |
+    |  +--Dashboard----+ +--Onboarding---+ +--Quicklist---+ | .main (4)    |  |
+    |  | .news (39)    | | .news (38)    | | .page (67)   | | .data_parser |  |
+    |  | .stock (27)   | | .stock (18)   | | .data_mgr(2) | |   (2)        |  |
+    |  | .ui (23)      | | .ui (24)      | | core (8)     | | core (4)     |  |
+    |  | .calendar(10) | | .data_mgr (5) | +--------------+ +--------------+  |
+    |  | .data_proc(10)| | .animation(4) |                                    |
+    |  | core (21)     | | core (24)     | +--Translate---+ +--MsgNotify---+  |
+    |  | dashborad (4) | +---------------+ | .ui (13)     | | .ui (34)     |  |
+    |  +---------------+                   | .fsm (1)     | | .timer (6)   |  |
+    |  +--SystemClose(41)  SystemMon(10)   | .data (1)    | | .page (6)    |  |
+    |  +--SystemAlert(1)   SilentMode(6)   | core (9)     | | core (16)    |  |
+    |  +--Wear/Detect(11)  ExitPrompt(2)   +--------------+ +--------------+  |
+    |  +--Health.page(10)  Health.data_mgr(3)  HealthDataMgr(1)               |
+    |  +--TextStreamSvc(10)  EvenAI_anim(10)                                  |
+    +=========================================================================+
+    | LAYER 6: APPLICATION FRAMEWORK (440 functions, 24 sub-modules)          |
+    |                                                                         |
+    |  +--app (164)------+ +--APP (68)------+ +--app_slave (29)--------+      |
+    |  | Main app logic  | | Page handlers  | | Right-eye slave logic  |      |
+    |  | fdb_kvdb_init    | | evenai_page    | +------------------------+      |
+    |  | mspi_init        | | evenhub_page   |                                |
+    |  +-----------------+ | navigation     | +--task.manager (28)-----+      |
+    |                      | notification   | | task_manager_init       |      |
+    |  +--app.status (18)+ +---------------+ | task_manager_notify     |      |
+    |  +--app.display(12)+                   +-------------------------+      |
+    |  +--app.navigation(7)                                                   |
+    |  +--task.ble.wsf(14) task.ring(13) task.displaydrvmgr(13)               |
+    |  +--task.ble_production(11)  task.evenai(7)  task.notif(6)               |
+    |  +--menu.page(9) menu(2) page.mgr(2) input.manager(8) task(16)          |
+    +=========================================================================+
+    | LAYER 5: PROTOCOL HANDLERS (319 functions, 28 sub-modules)              |
+    |                                                                         |
+    |  +--pt_protocol_procsr (110)--+ Central protobuf dispatch router        |
+    |  |  Routes RX packets to 18   | (largest protocol module)               |
+    |  |  service handlers via      |                                         |
+    |  |  service ID byte           |                                         |
+    |  +----------------------------+                                         |
+    |                                                                         |
+    |  Service  Module                  Funcs  Struct    Encode Buf            |
+    |  ------   ------                  -----  ------    ----------            |
+    |  0x80     pb.auth                   22   param     param      Auth/Pair  |
+    |  0x01     pb.dashboard               7   0x100     0x100      Gesture    |
+    |  0x03     pb.menu                   15   0x37C     0x432      Menu       |
+    |  0x04     pb.notif                  11   0x4A      0x100      Notify     |
+    |  0x05     pb.translate               3   0x854     0x100      Translate  |
+    |  0x06     pb.teleprompt              6   0xF58     0x100      Teleprmpter|
+    |  0x07     pb.evenai                 14   0x20C     0x100      EvenAI     |
+    |  0x08     pb.navigation             10   0x2018    10000      Navigation |
+    |  0x09     pb.devinfo                11   dynamic   0x100      DeviceInfo |
+    |  0x0B     pb.conversate              2   0x1D6C    0x100      Conversate |
+    |  0x0C     pb.quicklist               9   0x1238    0x400      Quick+Hlth |
+    |  0x0D     pb.devc + pb_svc_setting  32   0x0C      0x80       Settings   |
+    |  0x0E     pb.display_config         12   0x31C     0x100      DispConfig |
+    |  0x10     pb.onboarding              9   0x10      0x100      Onboarding |
+    |  0x20     pb.module_configure        4   0x08      0x0D       ModuleCfg  |
+    |  0x81     pb.box_detect              3   0x0A      0x100      BoxDetect  |
+    |  0x91     pb.ring                    4   0x40      0x100      Ring       |
+    |  0xE0     pb.evenhub                 8   0x2654    0x279E     EvenHub    |
+    |                                                                         |
+    |  +--pb.glasses_case(2) pb.health(6) pb.ser(1) protocols(3)              |
+    |  +--prot.tran(5) pb(10) — shared encode/decode infrastructure           |
+    +=========================================================================+
+    | LAYER 4a: BLE STACK        | LAYER 4b: GRAPHICS     | LAYER 4c: AUDIO  |
+    | (1,012 functions)          | LVGL (1,736 functions)  | (137 functions)  |
+    |                            | GPU/Display (120 funcs) |                  |
+    |  ble core (385)            |                         | codec.host (40)  |
+    |  ble_cordio (173+1)        | lvgl core (787)         | codec core (33)  |
+    |  ble.comm (62)             | lvgl.lv_obj_style (67)  | svc.audio (18)   |
+    |  ble.smp (48)              | lv_freetype_outline(56) | codec.dfu (17)   |
+    |  ble.smpdb (45)            | lvgl.lv_obj_pos (46)    | thread.audio(11) |
+    |  ATT (45)                  | lv_chart (36)           | prod.pcm (5)     |
+    |  ble.Slave (30)            | lv_grid (32)            | codec.porting(4) |
+    |  SMP (28)                  | lvgl.lv_label (30)      | svc.audio.algo(2)|
+    |  ble.master (21)           | lv_refr (26)            | svc.audio.mgr(3) |
+    |  ble.ancc (17)             | lvgl.lv_textarea (18)   | codec.gx8002b(1) |
+    |  ble.msgtx (16)            | lvgl.lv_obj_tree (18)   | codec.uart_sync1 |
+    |  ble.dm_conn (14)          | lvgl.lv_obj_scroll(16)  +------------------+
+    |  DM (13)                   | lvgl.lv_init (16)       |                  |
+    |  ble.param (13)            | lvgl.lv_display (16)    | SENSORS (109)    |
+    |  ble.gatt (13)             | lv_flex (16)            | sensor_imu (83)  |
+    |  ble.att (10)              | lv_image (15)           | sensor_als (16)  |
+    |  ble.ring (6)              | lv_bin_decoder (15)     | sensor_hub (10)  |
+    |  ble.msgrx (6)             | lv_arc (15)             +------------------+
+    |  ble.dm_adv (6)            | lvgl.lv_tabview (14)    |                  |
+    |  ble.dm_conn_master_leg(5) | lv_ambiq_display (14)   | POWER (181)      |
+    |  profile.eus (7)           |                         | npmx_driver(117) |
+    |  profile.nus (6)           | --- GPU/Display ---     | charge (34)      |
+    |  profile.efs (6)           | display_thread (48)     | bp25180 (21)     |
+    |  ble.app_disc (4)          | gpu.nema (34)           | charger_common(8)|
+    |  + 17 more sub-modules     | display (16)            | ux.battery_sync1 |
+    |                            | gpu (14)                |                  |
+    | TX variants:               | nemagfx (7)             |                  |
+    |  ble_msgtx_send_wrapper    | displaydrv_manager (1)  |                  |
+    |  ble_msgtx_send            |                         |                  |
+    |  ble_msgtx_priority_send   | gui subsystem (18):     |                  |
+    |  ble_msgtx_keepalive_send  |  gui.dashboard (4)      |                  |
+    |  inter_eye_relay_tx        |  gui.onboarding (3)     |                  |
+    |  inter_eye_relay_send      |  gui.health (2)         |                  |
+    |  inter_eye_command_sync    |  gui.quicklist (2)      |                  |
+    |                            |  gui.notify (1)         |                  |
+    |                            |  gui.teleprompt (1)     |                  |
+    +----------------------------+-------------------------+------------------+
+    | LAYER 3: SERVICES & MIDDLEWARE (163+82+42+66 = 353 functions)           |
+    |                                                                         |
+    |  +--SERVICES (163)--------+ +--STORAGE (87)--------+ +--LOGGING (66)-+ |
+    |  | svc core (72)          | | nv.sysDt (13)        | | elog (52)      | |
+    |  | svc.audio (18)         | | file_system (9)      | | elog.async (8) | |
+    |  | svc_whitelist (15)     | | nv (8)               | | debug (5)      | |
+    |  | srv.em9305 (13)        | | db.api (7)           | | assert (1)     | |
+    |  | service.settings (12)  | | nvdb (6)             | +----------------+ |
+    |  | svc.ancc (9)           | | littlefs (6)         |                    |
+    |  | srv_universal_setting 9| | kv.onboarding_cfg(6) | +--OTA/FILE (42)-+ |
+    |  | srv.time (8)           | | prvCommand_fs (5)    | | ota.service(18) | |
+    |  | svc.android_notify (3) | | kvdb (5)             | | ota core (7)   | |
+    |  | service.evenAI (3)     | | kv.module_cfg (5)    | | efs.service(7) | |
+    |  | + 7 more               | | kv.tz (4)            | | ota.tran (4)   | |
+    |  +------------------------+ | + 8 more             | | efs.tran (4)   | |
+    |                             +----------------------+ | efs (2)        | |
+    |                                                      +----------------+ |
+    +=========================================================================+
+    | LAYER 2: LIBRARIES (1,192 functions, 45 sub-modules)                    |
+    |                                                                         |
+    |  +--lib core (661)-----+ +--lib.freetype (184)---+ +--lib.lfs (127)--+  |
+    |  | Generic library     | | FreeType font engine  | | LittleFS impl   |  |
+    |  | functions, largest  | | 119 TT opcodes        | |                 |  |
+    |  | single module       | | 39 CFF, 26 cmap       | |                 |  |
+    |  +---------------------+ | 23 SFNT, 20 TT driver | +----------------+  |
+    |                          | lib.freetype.tt (13)   |                     |
+    |  +--nanopb (71)--------+ | lib.freetype.cmap (2)  | +--lib.tlsf (48)-+  |
+    |  | Protobuf runtime    | | lib.freetype.cff (1)   | | Memory alloc   |  |
+    |  | pb_encode/decode    | +------------------------+ | (TLSF pool)    |  |
+    |  +---------------------+                           +----------------+  |
+    |                                                                         |
+    |  +--TinyFrame (16)-----+ +--lib.flashdb (16)-----+ +--libc (17+2)---+  |
+    |  | Inter-eye serial    | | Flash key-value DB     | | C runtime      |  |
+    |  | protocol            | |                        | | libc.math (2)  |  |
+    |  +---------------------+ +------------------------+ +----------------+  |
+    |                                                                         |
+    |  +--lib.compiler_rt(6) lib.ringbuffer(5) lib.wsf_trace(3)               |
+    |  +--lib.zlib(3) lib.am_ftsystem(3) lib.app_master(1) crypto.md5(1)      |
+    |  +--math(9) zlib(2)                                                     |
+    +=========================================================================+
+    | LAYER 1: RTOS (209 functions)                                           |
+    |                                                                         |
+    |  +--rtos core (123)----+ +--rtos.cmsis (61)------+ +--rtos.freertos-+   |
+    |  | Thread management,  | | CMSIS-RTOS2 wrappers  | | (19)           |   |
+    |  | memory alloc/free,  | | osMutex, osSemaphore, | | FreeRTOS       |   |
+    |  | scheduling          | | osThread, osTimer,    | | internals      |   |
+    |  | rtos_mem_alloc      | | osKernel, osDelay     | +----------------+   |
+    |  | rtos_mem_free       | +------------------------+                     |
+    |  +---------------------+ +--rtos.heap (4)  rtos.queue (2)               |
+    +=========================================================================+
+    | LAYER 0: HARDWARE ABSTRACTION (91+247 = 338 functions)                  |
+    |                                                                         |
+    |  +--HAL (91)---------------------------------------------------+        |
+    |  | hal core (72): am_hal_* Apollo510b hardware abstraction      |        |
+    |  | hal.i2c (16): I2C/IOM peripheral (am_hal_iom_*)              |        |
+    |  | hal.cache (1), hal.fpu (1), hal.nvic (1)                     |        |
+    |  +--------------------------------------------------------------+        |
+    |                                                                         |
+    |  +--DRIVERS (247)-------------------------------------------------+     |
+    |  | drv core (68)          | drv.norflash (38): NOR flash driver   |     |
+    |  | drv.mspi (19)          | drv.touchdfu (18): Touch IC DFU      |     |
+    |  | driver.jbd4010 (19)    | driver.a6n-g (13): display driver     |     |
+    |  | driver.uled (12)       | driver.uled_common (10)              |     |
+    |  | drv.buzzer (11)        | drv.touch (6): CY8C4046FNI touch     |     |
+    |  | drv.rtc (6)            | drv.nv (6): NV storage               |     |
+    |  | drv.em9305 (6)         | drv.audio.codec (3)                  |     |
+    |  | drv.sensor (2)         | drv_mx25u25643g (2): SPI flash       |     |
+    |  | drv.opt (1+1)          | drv.drv_bq27427 (1): fuel gauge      |     |
+    |  | driver (4)             | drv.drv_mspi_uled (1)                |     |
+    |  +---------------------------------------------------------------+     |
+    +=========================================================================+
+    | CROSS-CUTTING: SYSTEM INFRASTRUCTURE (330 functions)                    |
+    |                                                                         |
+    |  +--util (84)--------+ +--device_mgr (16)---+ +--sync.module (29+)-+   |
+    |  | Common utilities  | | Device lifecycle    | | Inter-eye sync     |   |
+    |  | string, memcpy    | | thread_init,        | | framework (15)     |   |
+    |  +-------------------+ | timer_init          | | module (14)        |   |
+    |                        +---------------------+ | api (1)            |   |
+    |  +--box.detect (16)--+ +--callback (14)------+ +--------------------+   |
+    |  | Case detection    | | Callback table mgr  |                         |
+    |  +-------------------+ +---------------------+                         |
+    |  +--common containers: list(14), text(13), image(5)                     |
+    |  +--at core(13) at.ring(7) at.core(7) at.ble(1) — AT command parser    |
+    |  +--freetype(12) font_manager(8) — font loading                        |
+    |  +--sync(12) fw.display_thread(3) fw.sync_framework(2) fw_evt_loop(1)  |
+    |  +--thread_pool(6) thread(6) evtloop(4) timer(2)                       |
+    |  +--kernel(7) kernel.cli(3) — FreeRTOS CLI                             |
+    |  +--generic.animation(4) generic(1) page_state_sync(7)                 |
+    |  +--ui_common_api(5) general_configure(4) system(10)                   |
+    |  +--wsf_timer(4) wsf.buf(2) redirect(1) sys.fault(1) box(1)            |
+    +=========================================================================+
+    | RING (10 functions): ring core (2), ring.proto (8)                      |
+    +=========================================================================+
+
+
+================================================================================
+LAYER DEPENDENCY MAP
+================================================================================
+
+Direction: top calls down. Arrows show primary dependency direction.
+
+    FEATURE MODULES (777)
+        |
+        +---> APP FRAMEWORK (440) ----+
+        |         |                   |
+        +---> PROTOCOL HANDLERS (319) |
+        |         |                   |
+        |    +----+----+              |
+        |    |         |              |
+        v    v         v              v
+    BLE STACK    GRAPHICS/LVGL    AUDIO
+    (1,012)      (1,856)          (137)
+        |            |               |
+        +-----+------+------+--------+
+              |      |      |
+              v      v      v
+         SERVICES  STORAGE  LOGGING
+         (163)     (87)     (66)
+              |      |      |
+              v      v      v
+           LIBRARIES (1,192)
+              |
+              v
+           RTOS (209)
+              |
+              v
+        HAL + DRIVERS (338)
+              |
+              v
+        [APOLLO510B HARDWARE]
+
+
+Key cross-layer dependencies:
+  - Protocol Handlers --> BLE Stack (ble_msgtx_send_wrapper for TX)
+  - Protocol Handlers --> nanopb (pb_encode/pb_decode)
+  - Protocol Handlers --> RTOS (rtos_mem_alloc/free for dynamic buffers)
+  - Feature Modules --> LVGL (UI rendering)
+  - Feature Modules --> Protocol Handlers (send/receive via pb.* modules)
+  - BLE Stack --> HAL (am_hal_ble_*)
+  - Graphics --> GPU/NemaGFX (hardware-accelerated rendering)
+  - Audio --> codec.gx8002b + TinyFrame (inter-eye audio relay)
+  - Power --> HAL (npmx I2C, bp25180 charger IC)
+  - Storage --> lib.lfs (LittleFS) + lib.flashdb (key-value)
+  - System Infra --> RTOS (threads, timers, sync primitives)
+
+
+================================================================================
+PROTOCOL HANDLER PIPELINE (COMMON PATTERN — ALL 18 SERVICES)
+================================================================================
+
+  Phone TX --> BLE RX --> pt_protocol_procsr --> pb_service_*_handler
+                                                      |
+                                            1. memset(struct, 0, size)
+                                            2. Populate: type, msgId, field_count, payload
+                                            3. pb_ostream_init(stream, buf, size)
+                                            4. memcpy(ctx, stream, 20)
+                                            5. pb_encode(ctx, field_table, struct)
+                                            6. ble_msgtx_send*(1, svc_id, buf, len)
+                                                      |
+                                              Phone <-- BLE TX
+
+  TX function variants:
+    ble_msgtx_send_wrapper (0x0046f5c4) — primary response (phone->glasses->phone)
+    ble_msgtx_send         (0x0046f6ca) — continuation/notify (glasses-initiated)
+    ble_msgtx_priority_send(0x0046f4e8) — priority queue (auth keepalive only)
+    ble_msgtx_keepalive_send(0x0046f556)— keepalive variant
+    inter_eye_relay_tx     (0x00462a1a) — TinyFrame to peer eye
+    inter_eye_relay_send   (0x00462912) — inter-eye relay variant
+    inter_eye_command_sync (0x00463178) — inter-eye command sync
+
+
+================================================================================
+RTOS THREAD MAP
+================================================================================
+
+  Thread/Task               Module                  Purpose
+  -------------------------------------------------------------------------
+  display_thread            display_thread (48)     LVGL rendering pipeline
+  thread_ble_msgtx          ble.msgtx (16)          BLE message transmit
+  thread_ble_msgrx          ble.msgrx (6)           BLE message receive
+  task_manager              task.manager (28)        Central task scheduler
+  task_ble_wsf              task.ble.wsf (14)       Cordio WSF event loop
+  task_ble_production       task.ble_production(11) BLE production/test
+  task_evenai               task.evenai (7)         EvenAI async processing
+  task_notif                task.notif (6)          Notification processing
+  task_ring                 task.ring (13)          R1 ring relay + events
+  task_displaydrvmgr        task.displaydrvmgr(13)  JBD4010 display driver mgr
+  thread_audio              thread.audio (11)       Audio codec I/O
+  thread_input              thread.input (11)       Touch/gesture input
+  thread_pool               thread_pool (6)         General worker threads
+  codec_i2s_thread          codec.host              GX8002B I2S audio
+  codec_uart_sync_thread    codec.uart_sync         Inter-eye audio sync
+  elog_async_thread          elog.async              Async log file writer
+  fw_evt_loop               evtloop (4)             Firmware event loop
+  device_mgr_thread         device_mgr (16)         Device lifecycle manager
+
+
+================================================================================
+FEATURE MODULE INTERNAL ARCHITECTURE
+================================================================================
+
+Each major feature follows a consistent internal pattern:
+
+  +---------------------+
+  | pb.{feature}        | <-- Protobuf service handler (BLE protocol layer)
+  | PB_Rx, PB_TxEncode  |     Parses RX, encodes TX, routes to FSM
+  +----------+----------+
+             |
+  +----------v----------+
+  | {feature}.fsm       | <-- Finite State Machine (lifecycle control)
+  | State transitions   |     START, PAUSE, RESUME, CLOSE
+  +----------+----------+
+             |
+  +----------v----------+
+  | {feature}.data      | <-- Data layer (content management)
+  | {feature}.tag       |     Title updates, keypoint updates, content storage
+  +----------+----------+
+             |
+  +----------v----------+
+  | {feature}.ui        | <-- LVGL UI rendering
+  | Button, container,  |     Widget creation, animation, event handling
+  | text, scroll        |
+  +----------+----------+
+             |
+  +----------v----------+
+  | {feature}.timer     | <-- Timer management
+  | Auto-scroll, auto-  |     Timeout, countdown, auto-extend
+  | close, countdown    |
+  +---------------------+
+
+Feature size comparison (total functions across all sub-modules):
+
+  Feature                 Total Funcs   Sub-modules   Largest Sub-module
+  -----------------------------------------------------------------------
+  Dashboard/Dashborad      114          8             dashborad.news (39)
+  Quicklist                 79          3             quicklist.page (67)
+  Onboarding                93          7             onboarding.news (38)
+  Navigation                82          6             navigation.ui (51)
+  Teleprompter              77          7             teleprompt.ui (25)
+  Message Notify             62          4             message_notify_list.ui (34)
+  System Close               41          1             system_close (41)
+  Conversate                 65          7             conversate.ui (22)
+  EvenAI                     35          5             even_ai.animation (10)
+  EvenHub                    31          5             evenhub.ui (21)
+  Translate                  23          4             translate.ui (13)
+  Health                     14          3             health.page (10)
+  System Monitor             10          1             system_monitor (10)
+  Text Stream Service        10          1             text_stream_service (10)
+  Wear Detection             11          2             wear.detect (10)
+  Silent Mode                 6          1             silent_mode (6)
+
+
+================================================================================
+BLE STACK INTERNAL STRUCTURE
+================================================================================
+
+  +--ble core (385)-----+ Generic BLE management, state machines, connection
+  |  ble.comm (62)      | BLE communication layer (packet framing, CRC)
+  |  ble.msgtx (16)     | Message transmit queue (5 TX variants)
+  |  ble.msgrx (6)      | Message receive pipeline
+  |  ble.param (13)     | Connection parameter negotiation
+  |  ble.ring (6)       | R1 ring BLE relay
+  |  ble.nus (2)        | Nordic UART Service
+  |  ble.ancc (17)      | Apple Notification Center Client
+  +---------------------+
+
+  +--ble_cordio (174)---+ Cordio BLE stack (Ambiq's BLE implementation)
+  |  ATT (45)           | Attribute Protocol
+  |  SMP (28)           | Security Manager Protocol
+  |  DM (13)            | Device Manager
+  |  L2C (1)            | L2CAP
+  +---------------------+
+
+  +--ble.smp (48)-------+ SMP implementation (pairing, bonding)
+  |  ble.smpdb (45)     | SMP database (bond storage)
+  |  ble.smp_main (2)   | SMP main entry
+  |  ble.smp_sc_main(1) | SMP Secure Connections
+  +---------------------+
+
+  +--ble.Slave (30)-----+ BLE peripheral (slave) role
+  |  ble.master (21)    | BLE central (master) role
+  |  ble.dm_conn (14)   | DM connection management
+  |  ble.dm_adv (6)     | DM advertising
+  +---------------------+
+
+  +--Profiles-----------+
+  |  profile.eus (7)    | Even UART Service (0x5401/0x5402) — main data
+  |  profile.nus (6)    | Nordic UART Service — gestures/mic
+  |  profile.efs (6)    | Even File Service (0x7401/0x7402) — file transfer
+  |  profile.ess (1)    | Even Sensor Service (0x6401/0x6402) — display
+  |  profile.ota (1)    | OTA update profile
+  +---------------------+
+
+
+================================================================================
+GRAPHICS PIPELINE
+================================================================================
+
+  LVGL v9.3 (1,736 functions — largest subsystem, 24% of firmware)
+
+  Core rendering:
+    lvgl core (787)              Main LVGL engine
+    lvgl.lv_obj_style (67)       Style system
+    lv_freetype_outline (56)     FreeType outline rendering
+    lvgl.lv_obj_pos (46)         Position/layout
+    lv_chart (36)                Chart widget
+    lv_grid (32)                 Grid layout
+    lvgl.lv_label (30)           Label widget
+    lv_refr (26)                 Screen refresh
+    lvgl.lv_textarea (18)        Text area widget
+    lv_flex (16)                 Flex layout
+
+  Hardware acceleration:
+    gpu.nema (34)                NemaGFX GPU (Ambiq's 2D GPU)
+    gpu core (14)                GPU management
+    nemagfx (7)                  NemaGFX helpers
+
+  Display pipeline:
+    display_thread (48)          Main render thread (46 display_thread_* functions)
+    display (16)                 Display abstraction
+    lv_ambiq_display (14)        Ambiq-specific display driver
+    displaydrv_manager (1)       Display driver manager
+
+  Resolution: 576x288 Gray4, monoscopic
+  Display IC: JBD4010 (driver.jbd4010, 19 functions)
+
+
+================================================================================
+POWER MANAGEMENT
+================================================================================
+
+  npmx_driver (117)      nPM1300 PMIC driver (largest power module)
+                         ADC, charger, buck converter, events, GPIO, timers
+  charge (34)            Charging state machine
+  bp25180 (21)           BQ25180 charger IC driver
+  charger_common (8)     Shared charging utilities
+  ux.battery_sync (1)    Battery sync to UI
+
+
+================================================================================
+AUDIO SUBSYSTEM
+================================================================================
+
+  codec.host (40)        GX8002B codec host interface (I2S)
+  codec core (33)        Codec abstraction
+  codec.dfu (17)         Codec firmware update
+  codec.porting (4)      Platform-specific codec integration
+  codec.gx8002b (1)      GX8002B-specific functions
+  codec.uart_sync (1)    Inter-eye audio sync (TinyFrame)
+  svc.audio (18)         Audio service layer
+  thread.audio (11)      Audio processing thread
+  prod.pcm (5)           PCM audio production/test
+  svc.audio.algo (2)     Audio algorithms (LC3?)
+
+
+================================================================================
+INTER-EYE COMMUNICATION
+================================================================================
+
+  Left eye = TinyFrame MASTER, Right eye = SLAVE
+  Physical link: UART (uart_sync_thread, TinyFrame serial protocol)
+
+  Functions:
+    inter_eye_relay_tx      (0x00462a1a)  Send to peer eye
+    inter_eye_relay_send    (0x00462912)  Relay variant
+    inter_eye_command_sync  (0x00463178)  Synchronized command
+
+  Services using inter-eye relay:
+    Menu (0x03)           — menu items sent to both eyes
+    ModuleConfigure (0x20) — per-eye brightness calibration sync
+    EvenHub (0xE0)        — COMM_RSP relay to peer
+
+  TinyFrame library: 16 functions (lib.TinyFrame + TinyFrame modules)
+  Sync framework: sync.module (14), sync.module.framework (15), sync.module.api (1)
+
+
+================================================================================
+MEMORY LAYOUT (ADDRESS RANGES FOR MAJOR MODULES)
+================================================================================
+
+  Address Range           Module              Functions
+  ------------------------------------------------------------------
+  0x00438000-0x0043C000   HAL, libc, util     Low-level primitives
+  0x0043C000-0x00448000   elog, rtos, drv      System infrastructure
+  0x00448000-0x00470000   BLE, display_thread  Communication + display
+  0x00470000-0x004A0000   BLE, app, ble.smp    BLE stack deep internals
+  0x004A0000-0x004C0000   nanopb, pb.auth      Protocol encoding
+  0x004C0000-0x004E0000   lib.tlsf, codec      Memory management, audio
+  0x004E0000-0x00500000   pb.notif, even_ai    Protocol handlers
+  0x00500000-0x00530000   lib.freetype, sensor  Font engine, sensors
+  0x00530000-0x00560000   dashboard, quicklist  Feature UI pages
+  0x00560000-0x005A0000   teleprompt, nav, conv Feature modules
+  0x005A0000-0x005D0000   evenhub, translate    Extended features
+  0x005D0000-0x005D7000   lib, rtos, ble tail   Remainder/overflow
+
+
+================================================================================
+KEY ENTRY POINTS
+================================================================================
+
+  System Boot:
+    0x00438000 (approx)    Reset vector / boot entry
+    lv_init                 LVGL initialization
+    lv_global_init          LVGL global state init
+    task_manager_init       Central task scheduler init
+    device_mgr_thread_init  Device lifecycle manager
+    sensor_hub_init         Sensor subsystem init
+    npmx_driver_init        PMIC driver init
+    svc_audio_codec_init    Audio codec init
+    ble_conn_param_init     BLE connection parameters
+    dashboard_init          Dashboard UI init
+    onboarding_init         Onboarding flow init
+    callback_table_init     Callback dispatch table
+    general_configure_init  Configuration subsystem init
+    heap_init               RTOS heap allocator init
+
+  BLE Message Pipeline:
+    thread_ble_msgrx_resource_init → (RX thread) → pt_protocol_procsr
+    thread_ble_msgtx_resource_init → thread_ble_msgtx_entry → ble_msgtx_handler
+
+  Protocol Dispatch (pt_protocol_procsr, 110 functions):
+    Receives decoded packets, routes by service ID to 18 pb_service_*_handler
+
+  Display Pipeline:
+    display_page_dispatch_command..display_queue_close_page → LVGL render → gpu.nema → JBD4010
+
+
+================================================================================
+STATISTICS SUMMARY
+================================================================================
+
+  Layer                      Functions    % of Total
+  ---------------------------------------------------
+  Graphics (LVGL + GPU/Disp)   1,856       25.5%
+  Libraries                    1,192       16.4%
+  BLE Stack                    1,012       13.9%
+  Feature Modules                777       10.7%
+  Application Framework          440        6.1%
+  System Infrastructure          330        4.5%
+  Protocol Handlers              319        4.4%
+  Drivers                        247        3.4%
+  RTOS                           209        2.9%
+  Power Management               181        2.5%
+  Services                       163        2.2%
+  Audio                          137        1.9%
+  Sensors                        109        1.5%
+  HAL                             91        1.3%
+  Storage                         87        1.2%
+  Logging                         66        0.9%
+  OTA/File Transfer                42        0.6%
+  Ring                             10        0.1%
+  ---------------------------------------------------
+  TOTAL                        7,268      100.0%
+
+  Unique modules: 450
+  Unique sub-module prefixes: ~90
+  Service handlers: 18
+  RTOS threads: 17+
+  Protobuf field descriptor tables: 22
+
+  Largest single modules by function count:
+    1. lvgl core            787  (10.8%)
+    2. lib core             661  (9.1%)
+    3. ble core             385  (5.3%)
+    4. lib.freetype         184  (2.5%)
+    5. ble_cordio           173  (2.4%)
+    6. app                  164  (2.3%)
+    7. lib.lfs              127  (1.7%)
+    8. rtos                 123  (1.7%)
+    9. npmx_driver          117  (1.6%)
+   10. pt_protocol_procsr   110  (1.5%)
+
+================================================================================
+END OF MODULE ARCHITECTURE MAP
+================================================================================

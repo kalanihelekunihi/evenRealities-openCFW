@@ -1,0 +1,503 @@
+================================================================================
+G2 BOOTLOADER MODULE ARCHITECTURE MAP
+================================================================================
+
+Firmware: ota_s200_bootloader (S200 / Ambiq Apollo510b, ARM Cortex-M55)
+Base address: 0x00410000
+Total size: 144.3K (0x2410F bytes)
+Total mapped functions: 796 across 43 unique modules
+Confidence: 465 HIGH, 330 MEDIUM, 1 LOW
+
+================================================================================
+LAYERED ARCHITECTURE DIAGRAM
+================================================================================
+
+    +=========================================================================+
+    | LAYER 4: APPLICATION (79 functions, 5 modules)                         |
+    |                                                                         |
+    |  +--main (6)----------+ +--main_startup (42)------+                     |
+    |  | bootloader_early_   | | main                    |                     |
+    |  |   init              | | main_init_subsystems    |                     |
+    |  | bootloader_hw_init  | | main_init_flash_and_fs  |                     |
+    |  | bootloader_periph_  | | main_start_rtos         |                     |
+    |  |   init              | | main_check_ota_flag     |                     |
+    |  | bootloader_mspi_    | | main_boot_to_app        |                     |
+    |  |   init              | | main_ota_state_machine  |                     |
+    |  | bootloader_flash_   | | main_ota_verify_and_    |                     |
+    |  |   init              | |   program               |                     |
+    |  | bootloader_clock_   | | main_set_vtor           |                     |
+    |  |   init              | | main_jump_vector_setup  |                     |
+    |  +---------------------+ +-------------------------+                     |
+    |                                                                         |
+    |  +--thread_manager (14)------+ +--dfu_core (18)-----+                   |
+    |  | thread_manager_task       | | thread_dfu_task     | +--boot (1)--+   |
+    |  | thread_manager_create_    | | _thread_msg_handler | | boot_jump_ |   |
+    |  |   and_start               | | dfu_task_msg_send   | |   to_app   |   |
+    |  | thread_manager_check_     | | dfu_pre_jump_deinit | +------------+   |
+    |  |   ota_flag                | | bootloader_error_   |                   |
+    |  | thread_manager_sysstart_  | |   reset             |                   |
+    |  |   sync / sync_end         | +---------------------+                   |
+    |  +---------------------------+                                           |
+    +=========================================================================+
+    | LAYER 3: DFU / FIRMWARE UPDATE (27 functions, 3 modules)               |
+    |                                                                         |
+    |  +--dfu_file (23)-----------+ +--dfu_crc (2)------+                     |
+    |  | dfu_file_read_ota_image  | | crc32_update       |                     |
+    |  | dfu_file_parse_metadata  | | is_need_updata_    |                     |
+    |  | dfu_file_validate_magic  | |   image             |                     |
+    |  | dfu_file_read_header     | +--------------------+                     |
+    |  | dfu_file_check_version   |                                            |
+    |  | dfu_file_get_blob_size   |  OTA file: "ota/s200_firmware_ota.bin"     |
+    |  | dfu_file_get_entry_info  |  Format: EVENOTA 6-entry container         |
+    |  | dfu_file_extract_        |  CRC: CRC-32 table-based                   |
+    |  |   component             |  Flash: 4KB sector erase + page program     |
+    |  | dfu_file_verify_entry_   |                                            |
+    |  |   crc                    |                                            |
+    |  | dfu_file_install_        |                                            |
+    |  |   firmware              |                                            |
+    |  | dfu_install_flash_write  |                                            |
+    |  | dfu_install_flash_       |                                            |
+    |  |   erase_region          |                                            |
+    |  +--------------------------+                                            |
+    +=========================================================================+
+    | LAYER 2: MIDDLEWARE (91 functions, 7 modules)                          |
+    |                                                                         |
+    |  +--fw_event_loop (35)------+  Framework event loop with                |
+    |  | fw_evt_loop_init         |  message queue, timers, priority,          |
+    |  | fw_evt_loop_task         |  publish/subscribe, sync send              |
+    |  | fw_evt_loop_push         |  Used for DFU task orchestration           |
+    |  | fw_evt_loop_timer_       |                                            |
+    |  |   callback              |                                            |
+    |  | fw_evt_loop_register_    |                                            |
+    |  |   handler               |                                            |
+    |  | fw_evt_loop_broadcast    |                                            |
+    |  +--------------------------+                                            |
+    |                                                                         |
+    |  +--littlefs_init (23)------+  +--boot_fs (3)---+ +--redirect (8)--+   |
+    |  | littlefs_init            |  | check_and_       | | redirect_init  |   |
+    |  | littlefs_format          |  |   create_dirs    | | redirect_uart_ |   |
+    |  | littlefs_mount_retry     |  | littlefs_format  | |   write        |   |
+    |  | littlefs_read_boot_count |  | littlefs_init    | | redirect_lock  |   |
+    |  | littlefs_file_copy       |  +------------------+ +----------------+   |
+    |  | littlefs_storage_info    |                                            |
+    |  | littlefs_cleanup_temp    |  +--hal_assert (2)+  +--elog (5)------+   |
+    |  +--------------------------+  | assert_handler  |  | elog_output    |   |
+    |                                | constraint_     |  | elog_set_      |   |
+    |  +--tlsf_init (9)---------+   |   handler       |  |   filter_lvl  |   |
+    |  | tlsf_adapter_init      |   +------------------+  +---------------+   |
+    |  | tlsf_adapter_malloc    |                                              |
+    |  | tlsf_adapter_free      |  Dirs: /firmware, /ota, /user, /log          |
+    |  +-------------------------+  Boot count: persisted in LittleFS          |
+    +=========================================================================+
+    | LAYER 1: OS / RUNTIME (234 functions, 9 modules)                       |
+    |                                                                         |
+    |  +--rtos (26)--------+ CMSIS-RTOS2 wrappers                             |
+    |  | osThreadNew        | osTimerNew, osMessageQueueNew                    |
+    |  | osMutexNew/Acquire | osSemaphoreNew, osEventFlagsNew                 |
+    |  | osDelay            | osKernelInitialize, osKernelStart               |
+    |  +--------------------+                                                  |
+    |                                                                         |
+    |  +--freertos_core (82)+  FreeRTOS kernel                                |
+    |  | xTaskCreate         |  Task mgmt, scheduler, queues,                 |
+    |  | vTaskStartScheduler |  events, timers, mutexes, semaphores           |
+    |  | xQueueGenericSend   |  Priority inheritance, tick handler            |
+    |  +---------------------+                                                |
+    |                                                                         |
+    |  +--freertos_port (21)+ +--heap (7)--------+                            |
+    |  | Cortex-M55 port     | | pvPortMalloc      |                           |
+    |  | PendSV, SVC, SysTick| | vPortFree          |                           |
+    |  | VFP, BASEPRI         | | Coalesce + stats  |                           |
+    |  +----------------------+ +-------------------+                           |
+    |                                                                         |
+    |  +--tlsf (47)----------+  TLSF (Two-Level Segregated Fit)               |
+    |  | tlsf_malloc          |  O(1) real-time allocator                      |
+    |  | tlsf_free            |  Block splitting, merging, free lists          |
+    |  | tlsf_create          |  Used alongside FreeRTOS heap                  |
+    |  | tlsf_add_pool        |                                                |
+    |  +----------------------+                                                |
+    |                                                                         |
+    |  +--libc (19)----+ +--printf (3)--+                                     |
+    |  | memset/memcpy  | | vsnprintf    |                                     |
+    |  | strlen/memmove | | printf_s     |                                     |
+    |  | atoi/strstr    | +--------------+                                     |
+    |  +----------------+                                                      |
+    +=========================================================================+
+    | LAYER 0: HARDWARE ABSTRACTION (365 functions, 19 modules)              |
+    |                                                                         |
+    |  FLASH SUBSYSTEM (64 functions)                                         |
+    |  +--drv_norflash (19)--+ +--flash_wrapper (11)+ +--hal_norflash (6)+   |
+    |  | DRV_Mx25u25643g_init| | mspi_flash_mutex_   | | am_devices_      |   |
+    |  | mx25u25643g_page_   | |   init/lock/unlock  | |  norflash_read   |   |
+    |  |   program           | | flash_read/write/   | |  norflash_write  |   |
+    |  | mx25u25643g_sector_ | |   erase_wrapper     | |  norflash_erase  |   |
+    |  |   erase             | +---------------------+ +------------------+   |
+    |  | mx25u25643g_quad_   |                                                 |
+    |  |   enable            |                                                 |
+    |  +---------------------+                                                 |
+    |                                                                         |
+    |  FILESYSTEM (147 functions)                                              |
+    |  +--lfs_core (114)-----+ +--lfs_api (14)------+ +--lfs_port (7)---+    |
+    |  | lfs_rawmount        | | lfs_file_open       | | lfs_fopen       |    |
+    |  | lfs_dir_commit       | | lfs_file_read/write | | lfs_fclose      |    |
+    |  | lfs_file_rawread     | | lfs_file_seek/sync  | | lfs_fread       |    |
+    |  | lfs_alloc            | | lfs_stat/rename     | | lfs_malloc/free |    |
+    |  +----------------------+ +---------------------+ +-----------------+    |
+    |  +--lfs_util (12)------+                                                 |
+    |  | lfs_crc, lfs_min     |                                                |
+    |  +----------------------+                                                |
+    |                                                                         |
+    |  MSPI / SPI CONTROLLER (64 functions)                                   |
+    |  +--hal_mspi (18)------+ +--hal_mspi_config (15)+ +--hal_mspi_inner |   |
+    |  | am_hal_mspi_power_  | | mspi_timing_check     |   (13)           |   |
+    |  |   control           | | mspi_timing_auto_     | | am_hal_mspi_    |   |
+    |  | am_hal_mspi_enable  | |   check               | |   init_impl    |   |
+    |  | am_hal_mspi_control | | mspi_timing_scan_*    | | am_hal_mspi_    |   |
+    |  +---------------------+ +-----------------------+ |   dma_*        |   |
+    |                                                     +----------------+   |
+    |                                                                         |
+    |  I/O PERIPHERALS (78 functions)                                         |
+    |  +--hal_uart (8)----+ +--hal_uart_inner (21)+                            |
+    |  | am_hal_uart_fifo_ | | am_hal_uart_init    |                           |
+    |  |   write/read      | | am_hal_uart_transfer|                           |
+    |  | am_hal_uart_      | | am_hal_uart_power_  |                           |
+    |  |   interrupt_*     | |   control            |                           |
+    |  +-------------------+ +---------------------+                           |
+    |  +--hal_gpio (18)---+ +--hal_i2c (13)-------+ +--hal_iom (36)------+   |
+    |  | am_hal_gpio_      | | HAL_I2CInit         | | am_hal_iom_init    |   |
+    |  |   pinconfig       | | HAL_I2CTransfer     | | am_hal_iom_transfer|   |
+    |  | am_hal_gpio_      | | am_hal_iom_*        | | am_hal_mspi_device_|   |
+    |  |   interrupt_*     | +---------------------+ |   configure        |   |
+    |  +-------------------+                          +--------------------+   |
+    |  +--hal_adc (7)-----+                                                    |
+    |  | am_hal_adc_init   |  Reads HW version voltage divider                |
+    |  | am_hal_adc_       |                                                   |
+    |  |   samples_read    |                                                   |
+    |  +-------------------+                                                   |
+    |                                                                         |
+    |  SYSTEM (46 functions)                                                   |
+    |  +--hal_misc (34)---+ +--hal_power (16)-----+ +--hal_interrupt (6)-+   |
+    |  | am_hal_delay_us   | | am_hal_pwrctrl_     | | am_hal_interrupt_  |   |
+    |  | am_hal_stimer_*   | |   periph_enable     | |   master_disable   |   |
+    |  | am_hal_burst_     | | am_hal_cachectrl_*  | | am_hal_interrupt_  |   |
+    |  |   mode_*          | | am_hal_sysctrl_     | |   save_and_disable |   |
+    |  | am_hal_clkgen_*   | |   high_perf_mode    | +--------------------+   |
+    |  | am_hal_itm_*      | +---------------------+                          |
+    |  +-------------------+ +--hal_wdt (6)-------+ +--nvic (5)-----------+   |
+    |  +--debug (1)-------+ | am_hal_wdt_init     | | NVIC_EnableIRQ      |   |
+    |  | __semihost_write  | | am_hal_wdt_config   | | NVIC_SetPriority    |   |
+    |  +-------------------+ | am_hal_reset_control| +---------------------+   |
+    |                        +---------------------+                           |
+    +=========================================================================+
+
+================================================================================
+MODULE FUNCTION COUNTS (sorted by size)
+================================================================================
+
+  Module                Functions  Layer  Key Responsibility
+  --------------------  ---------  -----  ------------------------------------------
+  lfs_core                   114  L0     LittleFS filesystem core (metadata, dirs, files)
+  freertos_core               82  L1     FreeRTOS kernel (tasks, queues, timers, events)
+  tlsf                        47  L1     TLSF real-time memory allocator
+  main_startup                42  L4     Bootloader main entry + startup sequence
+  hal_iom                     36  L0     Ambiq IOM (I/O Master) SPI/I2C controller
+  fw_event_loop               35  L2     Event loop framework (queues, timers, pub/sub)
+  hal_misc                    34  L0     MCU control, stimer, flash info, clkgen
+  rtos                        26  L1     CMSIS-RTOS2 wrapper API
+  littlefs_init               23  L2     LittleFS mount, dirs, boot count
+  dfu_file                    23  L3     OTA image parsing, installation, verification
+  hal_uart_inner              21  L0     UART driver (init, transfer, interrupts)
+  freertos_port               21  L1     Cortex-M55 FreeRTOS port (PendSV, SVC, FPU)
+  libc                        19  L1     C runtime (memset, memcpy, strlen, atoi)
+  drv_norflash                19  L0     MX25U25643G NOR flash driver
+  hal_mspi                    18  L0     MSPI controller HAL
+  hal_gpio                    18  L0     GPIO pin configuration + interrupts
+  dfu_core                    18  L4     DFU core (CRC, flash program, verify, task)
+  hal_power                   16  L0     Power management, cache, burst mode
+  hal_mspi_config             15  L0     MSPI timing scan + auto-check
+  thread_manager              14  L4     Boot orchestrator thread
+  lfs_api                     14  L0     LittleFS public API (thread-safe wrappers)
+  hal_mspi_inner              13  L0     MSPI lower-level DMA, power, commands
+  hal_i2c                     13  L0     I2C (IOM) driver + HAL_I2CInit
+  lfs_util                    12  L0     LittleFS utility (CRC, min/max, ctz, popc)
+  flash_wrapper               11  L0     Flash abstraction with mutex protection
+  tlsf_init                    9  L2     TLSF adapter init + pool management
+  redirect                     8  L2     UART debug output redirection with mutex
+  hal_uart                     8  L0     UART HAL (fifo, interrupts, power)
+  lfs_port                     7  L0     LittleFS porting (MX25U25643G specific)
+  heap                         7  L1     FreeRTOS heap_4/5 (malloc/free fallback)
+  hal_adc                      7  L0     ADC driver (HW version voltage measurement)
+  main                         6  L4     Bootloader HW init functions
+  hal_wdt                      6  L0     Watchdog timer + reset control
+  hal_norflash                 6  L0     NOR flash device abstraction
+  hal_interrupt                6  L0     NVIC / interrupt master disable/enable
+  nvic                         5  L0     CMSIS NVIC helpers
+  elog                         5  L2     EasyLogger (output, filter, color)
+  printf                       3  L1     Printf/sprintf (IAR safe_printf)
+  boot_fs                      3  L2     Boot filesystem directory setup
+  hal_assert                   2  L2     Assertion + constraint handler
+  dfu_crc                      2  L3     CRC-32 + OTA flag check
+  debug                        1  L0     Semihost write (debug probe)
+  boot                         1  L4     boot_jump_to_app (VTOR + vector jump)
+  --------------------  ---------  -----
+  TOTAL                      796
+
+================================================================================
+BOOT FLOW: MODULE INITIALIZATION ORDER
+================================================================================
+
+Phase 1: Hardware Init (pre-RTOS, no tasks running)
+  Module            Function                        Purpose
+  ----------------  ------------------------------  ---------------------------
+  main              bootloader_early_init           Voltage regulators, SIMOBUCK
+  main_startup      main_init_subsystems            GPIO defaults, power rails
+  main_startup      main_config_power_rails         Burst mode, high-perf
+  main_startup      main_config_gpio_defaults       Pin muxing (UART/I2C/MSPI)
+  main_startup      main_config_clock_tree          HFRC/LFRC, clock enables
+  main_startup      main_config_memory_protection   MPU setup
+  hal_i2c           HAL_I2CInit                     I2C4 with semaphore
+  hal_adc           am_hal_adc_init_and_measure     HW version via ADC
+  main_startup      main_read_hw_version            Board revision decode
+  main_startup      main_validate_hw_config         Sanity check HW config
+  hal_wdt           am_hal_wdt_init                 Watchdog timer setup
+  hal_uart_inner    am_hal_uart_init                Debug UART
+  hal_interrupt     am_hal_interrupt_enable_irq     NVIC bulk enable
+  drv_norflash      DRV_Mx25u25643g_init            NOR flash: reset, ID, quad
+  hal_mspi_config   mspi_timing_auto_check          MSPI timing calibration
+
+Phase 2: Middleware Init (pre-RTOS)
+  Module            Function                        Purpose
+  ----------------  ------------------------------  ---------------------------
+  elog              elog_output (init path)          EasyLogger framework
+  redirect          redirect_init                   UART redirect + mutex
+  tlsf_init         tlsf_adapter_init               TLSF heap pool creation
+  flash_wrapper     mspi_flash_mutex_init            Flash access serialization
+  littlefs_init     littlefs_init                   Mount LFS, create dirs
+  boot_fs           check_and_create_directories    /firmware /ota /user /log
+
+Phase 3: RTOS Start
+  Module            Function                        Purpose
+  ----------------  ------------------------------  ---------------------------
+  rtos              osKernelInitialize              FreeRTOS kernel init
+  thread_manager    thread_manager_create_and_start Create manager task
+  rtos              osKernelStart                   Start scheduler
+  freertos_core     vTaskStartScheduler             -> IDLE + Timer tasks
+  freertos_port     vPortSetupTimerInterrupt        SysTick for tick
+
+Phase 4: Runtime Decision
+  Module            Function                        Purpose
+  ----------------  ------------------------------  ---------------------------
+  thread_manager    thread_manager_task             Boot orchestrator runs
+  thread_manager    thread_manager_sysstart_sync    Sync with DFU thread
+  dfu_crc           is_need_updata_image            Check OTA flag (0x55555555)
+  dfu_core          thread_dfu_task                 DFU task enters wait loop
+
+================================================================================
+DFU (FIRMWARE UPDATE) FLOW THROUGH MODULES
+================================================================================
+
+1. OTA FLAG CHECK
+   Module: dfu_crc
+   Function: is_need_updata_image (FUN_0042e170)
+   - Checks magic value 0x55555555 in persistent storage
+   - Returns: 0 = no update, 1 = update pending
+   - Set by main firmware before reset when OTA file received
+
+2. OTA DECISION (thread_manager_task)
+   Module: thread_manager
+   Function: thread_manager_task (FUN_0042e244)
+   - If flag == 0: sends msg type 0 -> DFU task jumps to app immediately
+     Log: "DO NOT need updata firmware, GO TO APP"
+   - If flag != 0: sends msg type 1 -> DFU task processes OTA image
+     Log: "need updata firmware"
+
+3. DFU MESSAGE DISPATCH
+   Module: dfu_core
+   Function: dfu_task_msg_send (FUN_0042dbee)
+   - Pushes 40-byte message to DFU queue (osMessageQueuePut)
+   - Sets thread flag 0x400000 on DFU thread (osThreadFlagsSet)
+
+4. DFU TASK PROCESSING
+   Module: dfu_core
+   Function: thread_dfu_task (FUN_0042dc60) -> _thread_msg_handler (FUN_0042dda4)
+
+   4a. OPEN OTA FILE
+       Module: dfu_file
+       Function: dfu_file_open -> lfs_fopen("ota/s200_firmware_ota.bin", "r")
+       - Opens EVENOTA container file from LittleFS
+
+   4b. READ & PARSE HEADER
+       Module: dfu_file
+       Functions: dfu_file_read_header, dfu_file_parse_metadata
+       - Reads 32-byte OTA header: magic, version, blob count, entry table
+       - dfu_file_validate_magic: checks EVENOTA magic number
+       - dfu_file_check_version: validates firmware version
+       - dfu_file_get_blob_size: reads total image size
+       - dfu_file_log_metadata: prints header details via elog
+         Log: "magicNum", "filesize", "blobSize"
+
+   4c. PER-COMPONENT INSTALLATION LOOP
+       Module: dfu_file
+       Function: dfu_file_install_firmware (FUN_0042c644)
+       Log: "Installing ...", "Installing %d(%d)"
+
+       For each of the 6 EVENOTA entries:
+         i.   dfu_file_get_entry_info: read entry offset, size, target addr
+         ii.  dfu_file_extract_component: seek to entry data
+         iii. dfu_file_verify_entry_crc: CRC-32 check
+              Module: dfu_crc -> crc32_update (table-driven CRC-32)
+              Module: dfu_core -> app_dfu_image_crc_check
+         iv.  dfu_install_flash_erase_region:
+              Module: dfu_core -> dfu_flash_erase_range
+              Module: drv_norflash -> mx25u25643g_sector_erase (4KB sectors)
+         v.   dfu_install_flash_write:
+              Module: dfu_core -> app_dfu_system_program
+              Module: drv_norflash -> mx25u25643g_page_program (256B pages)
+         vi.  dfu_install_verify:
+              Module: dfu_core -> _verifyFlashContent (read-back compare)
+              Log: "flash write verify ok/failed"
+         vii. dfu_install_progress_report: log progress %
+
+       Log: "---Install end---"
+
+   4d. POST-INSTALL
+       Module: dfu_file
+       Functions: dfu_install_finalize, dfu_install_mark_complete
+       - Clear OTA flag
+       - Close OTA file
+
+5. JUMP TO APPLICATION
+   Module: dfu_core
+   Function: dfu_pre_jump_deinit (FUN_0042dd3e)
+   - Disable all peripheral interrupts
+   - Flush data caches (am_hal_cachectrl_invalidate)
+   - Disable MSPI, UART, I2C peripherals
+   - Deinit NOR flash driver
+
+   Module: boot
+   Function: boot_jump_to_app (FUN_0042dbdc)
+   - Write SCB->VTOR = 0x00438000 (main firmware base)
+   - Load SP from vector table[0]
+   - Branch to reset vector at vector table[1]
+   - Bootloader execution ends; main firmware starts
+
+6. ERROR RECOVERY
+   Module: dfu_core
+   Function: bootloader_error_reset (FUN_0042dd5a)
+   - Log: "Bootloader ota fail, system reset!!!"
+   - am_hal_reset_control -> system reset
+   - Bootloader restarts from Phase 1
+
+   Module: dfu_core
+   Function: dfu_error_halt (FUN_0042e126)
+   - Signals cleanup via event flags
+   - Enters infinite osDelay (watchdog will eventually reset)
+
+================================================================================
+MODULE DEPENDENCY GRAPH
+================================================================================
+
+  boot_jump_to_app
+       |
+  dfu_core  <---- thread_manager
+       |               |
+  dfu_file          dfu_crc (is_need_updata_image)
+       |
+  +----+----+
+  |         |
+  lfs_api   drv_norflash
+  |         |
+  lfs_core  flash_wrapper (mutex)
+  |         |
+  lfs_port  hal_mspi + hal_mspi_config
+  |         |
+  lfs_util  hal_mspi_inner
+  |
+  +--- libc (memset, memcpy, crc)
+
+  fw_event_loop (used by dfu_core for task orchestration)
+       |
+  rtos (CMSIS-RTOS2)
+       |
+  freertos_core + freertos_port + heap
+       |
+  tlsf (parallel allocator)
+
+  redirect -> hal_uart -> hal_uart_inner -> hal_gpio
+  elog -> redirect (output backend)
+  hal_i2c -> hal_iom -> hal_interrupt
+  hal_adc -> hal_misc -> hal_power
+
+================================================================================
+MEMORY LAYOUT
+================================================================================
+
+  Address Range         Size    Content
+  ------------------    ------  ----------------------------------------
+  0x00410000-0x00410003  4B     Vector table: Initial SP
+  0x00410004-0x00410007  4B     Vector table: Reset handler
+  0x00410400-0x00414E7C  17.8K  LittleFS core (lfs.c)
+  0x004150B0-0x00415558  1.2K   LittleFS API + port layer
+  0x0041560C-0x00415FFA  2.5K   libc / printf
+  0x00416028-0x0041697C  2.4K   CMSIS-RTOS2 wrappers
+  0x004169BA-0x004175E2  3.1K   TLSF memory allocator
+  0x004176A6-0x00417B54  1.2K   EasyLogger
+  0x00417C54-0x0041A69A  10.8K  FreeRTOS kernel + port
+  0x0041A6C8-0x0041AC8A  1.5K   FreeRTOS heap
+  0x0041B0CC-0x0041B82C  1.9K   HAL misc (MCU ctrl, stimer, clkgen)
+  0x0041B8B8-0x0041C2B0  2.5K   HAL power / cache control
+  0x0041C810-0x0041CB00  0.7K   HAL UART
+  0x0041CBDC-0x0041CE2A  0.6K   HAL GPIO
+  0x0041D198-0x0041D3BC  0.5K   HAL interrupt / NVIC
+  0x0041D64E-0x0041DFD8  2.4K   HAL I2C (IOM driver)
+  0x0041E072-0x0041E452  1.0K   HAL ADC
+  0x0041F134-0x0041FAB8  2.4K   HAL MSPI controller
+  0x0041FD9C-0x00420196  1.0K   MSPI timing scan
+  0x00420230-0x00420F18  3.3K   NOR flash driver (MX25U25643G)
+  0x00421048-0x004215FE  1.4K   Flash wrapper + LFS boot init
+  0x0042171E-0x00422362  3.1K   LittleFS init / directory management
+  0x004224DC-0x00422660  0.4K   UART redirect
+  0x00422750-0x00422FDA  2.1K   HAL UART inner driver
+  0x00423214-0x004249A6  5.9K   HAL IOM + MSPI device configure
+  0x00424A3C-0x00426754  7.3K   HAL MSPI inner (DMA, power, commands)
+  0x00426B5C-0x00427B5E  4.1K   Firmware event loop (fw_evt_loop)
+  0x00427BDC-0x00427D58  0.4K   TLSF adapter init
+  0x00427DD0-0x00427FB4  0.5K   HAL assert / constraint handler
+  0x0042818C-0x0042BEA0  15.7K  Bootloader main + startup + OTA state machine
+  0x0042BF80-0x0042D60C  5.6K   DFU file I/O (OTA parse/install)
+  0x0042D798-0x0042E126  2.4K   DFU core (CRC, flash, verify, task)
+  0x0042E138-0x0042E170  0.1K   DFU CRC-32
+  0x0042E1A0-0x0042E3EC  0.6K   Thread manager
+  0x0042E440-0x0042E7F0  0.9K   HAL watchdog
+  0x0042F114-0x0042F5BC  1.2K   HAL NOR flash abstraction
+  0x0043018C-0x0043032A  0.4K   NVIC helpers
+  ------------------    ------
+  TOTAL                 ~144K   (0x2410F bytes)
+
+================================================================================
+COMPARISON WITH MAIN FIRMWARE
+================================================================================
+
+  Aspect              Bootloader              Main Firmware
+  ------------------  ----------------------  ----------------------------------
+  Size                144.3K (796 functions)  ~1.8MB (7,268 functions)
+  Modules             43                      463
+  RTOS tasks          4 (mgr, DFU, idle, tmr) 30+ (BLE, UI, audio, sensors...)
+  BLE stack           None                    Cordio (1,012 functions)
+  Graphics            None                    LVGL v9.3 (1,736 functions)
+  Audio               None                    LC3 codec (137 functions)
+  Protocol handlers   None (no BLE)           18 protobuf service handlers
+  Filesystem          LittleFS (full)         LittleFS (full)
+  Flash driver        MX25U25643G (full)      MX25U25643G (full, + XIP)
+  DFU                 Full install engine     OTA receive + flag set
+  Event loop          fw_evt_loop (full)      fw_evt_loop (full)
+  Allocator           TLSF + FreeRTOS heap    TLSF + FreeRTOS heap
+  Logger              EasyLogger              EasyLogger
+
+  Key insight: The bootloader is a stripped-down version of the main firmware's
+  infrastructure layer. It retains the full HAL, filesystem, RTOS, and event
+  loop framework but contains ZERO application-level features (no BLE, no UI,
+  no audio, no protocol handlers). Its sole purpose is:
+  1. Initialize hardware
+  2. Check if OTA update is pending
+  3. If yes: parse EVENOTA container, verify CRC, flash components
+  4. Jump to main firmware at 0x00438000

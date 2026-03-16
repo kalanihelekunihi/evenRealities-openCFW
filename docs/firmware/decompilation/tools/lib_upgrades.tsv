@@ -1,0 +1,435 @@
+# LOW-confidence lib module function upgrades
+# Format: address	old_name	new_name	module	confidence	evidence
+#
+# === C STANDARD LIBRARY ===
+0x0046cc5c	lib_callee_cc5c	am_util_string_strlen	lib.string	HIGH	null-check + while(*s++) count loop; classic strlen
+0x0046cc74	lib_callee_cc74	am_util_string_memset	lib.string	HIGH	fills buffer with byte value for N bytes; classic memset
+0x0043c0ec	lib_callee_c0ec	am_util_string_memset_descending	lib.string	HIGH	reverse-direction memset with 16-byte unrolled loop; ARM-optimized
+0x0046cb3c	lib_callee_cb3c	am_util_string_atoi	lib.string	HIGH	parses '-' sign + digit loop (*10 + digit); classic atoi with length output
+#
+# === NUMBER FORMATTING / PRINTING ===
+0x0046ca24	lib_callee_ca24	uint64_div10	lib.string	HIGH	64-bit unsigned divide-by-10 via shift-add approximation (reciprocal multiply)
+0x0046cae0	lib_callee_cae0	uint64_decimal_digit_count	lib.string	HIGH	counts decimal digits of 64-bit value by repeated div10; returns 1 for zero
+0x0046cb04	lib_callee_cb04	int64_decimal_digit_count	lib.string	HIGH	negates if negative then calls uint64_decimal_digit_count
+0x0046cb16	lib_callee_cb16	uint64_hex_digit_count	lib.string	HIGH	counts hex digits by shifting right 4 bits per iteration
+0x0046cb80	lib_callee_cb80	uint64_to_decimal_str	lib.string	HIGH	converts uint64 to decimal string using div10 + remainder + reverse
+0x0046cbe8	lib_callee_cbe8	uint64_to_hex_str	lib.string	HIGH	converts uint64 to hex string with upper/lower case flag (param_4)
+#
+# === SORT UTILITIES (qsort internals) ===
+0x00538668	lib_callee_8668	qsort_mem_swap	lib.sort	HIGH	swaps N bytes between two pointers; small path byte-by-byte, large path uses 128B temp + memcpy
+0x005386be	lib_callee_86be	qsort_mem_rotate3	lib.sort	HIGH	3-way rotate: a<-c<-b<-a using 128B temp + memcpy
+0x0053872c	lib_callee_872c	qsort_mem_rotate_block	lib.sort	HIGH	rotates a block of memory within an array using memmove+memcpy
+0x00538776	lib_callee_8776	qsort_sort3	lib.sort	HIGH	sorts 3 elements by comparator; calls mem_swap to order a,b,c
+0x005387c6	lib_callee_87c6	qsort_sift_down	lib.sort	HIGH	heap sift-down for heapsort phase of introsort; uses mem_swap
+#
+# === TLSF ALLOCATOR ===
+0x004c9688	lib_callee_9688	tlsf_fls	lib.tlsf	HIGH	find-last-set-bit: hierarchical test (16/8/4/2/1 shifts); classic CLZ-based FLS
+0x004c96d6	lib_callee_96d6	tlsf_fls_wrapper	lib.tlsf	HIGH	wraps tlsf_fls, returns result-1
+0x004c9f54	lib_callee_9f54	tlsf_block_to_ptr	lib.tlsf	HIGH	converts block header to payload via tlsf_to_payload_ptr + tlsf_block_size
+0x004ca092	lib_callee_a092	tlsf_memalign	lib.tlsf	MEDIUM	called with pool+size from rtos_mem_alloc; TLSF aligned allocation wrapper
+#
+# === LITTLEFS ===
+0x004c4068	lib_callee_4068	lfs_max	lib.lfs	HIGH	returns max(a,b); companion to lfs_min at 0x004c4070
+0x004c471c	lib_callee_471c	lfs_fs_rawtraverse_check	lib.lfs	HIGH	calls lfs_fs_rawtraverse then checks if result byte != 0
+0x004c495a	lib_callee_495a	lfs_pair_fromle32	lib.lfs	HIGH	calls lfs_fromle32 on two uint32s (pair); companion to lfs_superblock_fromle32
+0x004c4970	lib_callee_4970	lfs_pair_tole32_alt	lib.lfs	HIGH	calls lfs_tole32 on two uint32s; companion to lfs_pair_fromle32
+0x004c4a10	lib_callee_4a10	lfs_mlist_remove	lib.lfs	HIGH	walks linked list at offset+0x28, unlinks matching entry (classic list remove)
+0x004c4a2c	lib_callee_4a2c	lfs_mlist_insert	lib.lfs	HIGH	inserts at head of list at offset+0x28 (classic list prepend)
+0x004c6f74	module_callee_004C4A10	lfs_mlist_remove_wrapper	lib.lfs	HIGH	calls lfs_mlist_remove then returns; thin wrapper
+#
+# === FREETYPE 2 — TRIGONOMETRY ===
+0x0051323c	lib_page_callee_323c	ft_trig_downscale	lvgl.lv_freetype	HIGH	CORDIC downscale: magic constant 0xDBD95B16 is FT's ft_trig_downscale multiplier
+0x0051329c	lib_page_callee_329c	ft_trig_prenorm	lvgl.lv_freetype	HIGH	normalizes vector x,y to 30-bit range using CLZ; returns shift count
+0x005132de	lib_page_callee_32de	ft_trig_pseudo_rotate	lvgl.lv_freetype	HIGH	CORDIC rotation mode: 23 iterations with arctan LUT at DAT_005135b4
+0x00513368	lib_page_callee_3368	ft_trig_pseudo_polarize	lvgl.lv_freetype	HIGH	CORDIC vectoring mode: computes magnitude+angle from x,y
+0x00513410	lib_page_callee_3410	FT_Cos	lvgl.lv_freetype	HIGH	calls FT_Vector_Unit then returns x component
+0x0051341e	lib_page_callee_341e	FT_Sin	lvgl.lv_freetype	HIGH	calls FT_Vector_Unit then returns y component
+0x00513462	lib_page_callee_3462	FT_Vector_Unit	lvgl.lv_freetype	HIGH	sets x=0x4000_0000 (CORDIC init), calls ft_trig_pseudo_rotate, rounds to 16.16
+0x0051348a	lib_callee_348a	FT_Vector_Rotate	lvgl.lv_freetype	HIGH	prenorm + pseudo_rotate + downscale on both components
+0x0051350a	lib_page_callee_350a	FT_Vector_Length	lvgl.lv_freetype	HIGH	prenorm + pseudo_polarize + shift back; returns fixed-point length
+0x0051357e	lib_callee_357e	FT_Vector_Polarize	lvgl.lv_freetype	MEDIUM	stores x=magnitude, y=0, calls FT_Vector_Rotate
+#
+# === FREETYPE 2 — MEMORY MANAGEMENT ===
+0x005136e6	lib_callee_36e6	ft_mem_dup	lvgl.lv_freetype	HIGH	alloc(size) + memcpy(dst,src,size); classic memory duplicate
+0x0051371a	lib_callee_371a	ft_mem_strdup	lvgl.lv_freetype	HIGH	strlen(s)+1 then ft_mem_dup; classic strdup
+0x00513740	lib_page_callee_3740	ft_strlcpy_thunk	lvgl.lv_freetype	HIGH	thunk to FUN_0051374c (ft_strlcpy)
+0x0051374c	lib_page_callee_374c	ft_strlcpy	lvgl.lv_freetype	HIGH	copies up to n-1 chars, NUL-terminates, returns overflow flag
+#
+# === FREETYPE 2 — LINKED LIST (FT_List) ===
+0x0051376a	lib_callee_376a	FT_List_Find	lvgl.lv_freetype	HIGH	walks list->head checking node->data == value; returns matching node
+0x00513788	lib_callee_3788	FT_List_Add	lvgl.lv_freetype	HIGH	appends node to doubly-linked list tail; updates head/tail pointers
+0x005137a8	lib_page_callee_37a8	FT_List_Remove	lvgl.lv_freetype	HIGH	unlinks node from doubly-linked list; updates prev/next/head/tail
+0x005137cc	lib_page_callee_37cc	FT_List_Iterate	lvgl.lv_freetype	HIGH	iterates list calling callback(node, data); stops on non-zero return
+0x005137fc	lib_page_callee_37fc	FT_List_Finalize	lvgl.lv_freetype	HIGH	destroys all list nodes: iterate + callback + ft_mem_free each + clear head/tail
+#
+# === FREETYPE 2 — MATH ===
+0x0050e972	lib_callee_e972	FT_RoundFix	lvgl.lv_freetype	HIGH	(x + 0x8000) & 0xFFFF0000 with sign handling; FreeType 16.16 round
+0x0050ec4a	lib_callee_ec4a	FT_Matrix_Invert	lvgl.lv_freetype	HIGH	4-element matrix invert using FT_MulFix + FT_DivFix on xx,xy,yx,yy
+0x0050eca4	lib_callee_eca4	FT_Matrix_Multiply	lvgl.lv_freetype	HIGH	2x2 matrix multiply: 8 calls to FT_MulDiv on matrix elements
+0x0050ed32	lib_callee_ed32	FT_Vector_Transform	lvgl.lv_freetype	HIGH	2x1 vector * 2x2 matrix: 4 calls to FT_MulDiv; standard transform
+0x0050ef5a	lib_callee_ef5a	ft_conic_is_small_enough	lvgl.lv_freetype	HIGH	Bezier flatness test: computes approximate lengths of 3 segments, checks ratio
+0x0050e9c0	lib_helper_0050e9ce_wrapper	ft_multo64_wrapper	lvgl.lv_freetype	MEDIUM	thin wrapper calling umul32x32_to_64
+#
+# === FREETYPE 2 — GLYPH LOADER ===
+0x0050f02c	lib_callee_f02c	FT_GlyphLoader_Reset	lvgl.lv_freetype	HIGH	zeroes n_points/n_contours/n_subglyphs and recomputes current pointers
+0x0050f148	lib_callee_f148	FT_GlyphLoader_Rewind	lvgl.lv_freetype	MEDIUM	recomputes cursor: n_contours*0x20 + n_points (internal offset calc)
+0x0050f28c	lib_callee_f28c	FT_GlyphLoader_CheckPoints	lvgl.lv_freetype	HIGH	checks if outline has room, reallocs via ft_mem_qrealloc if needed
+0x0050f2dc	lib_callee_f2dc	FT_GlyphLoader_Prepare	lvgl.lv_freetype	MEDIUM	zeroes counters and calls two sub-init functions; loader prepare
+0x0050f2fe	lib_callee_f2fe	FT_GlyphLoader_CheckSubGlyphs	lvgl.lv_freetype	MEDIUM	similar to CheckPoints but for subglyph array; realloc path
+0x0050f41a	lib_callee_f41a	FT_GlyphLoader_CopyPoints	lvgl.lv_freetype	MEDIUM	copies point/tag/contour data between loader slots
+0x0050f4ae	lib_callee_f4ae	FT_GlyphLoader_Done	lvgl.lv_freetype	HIGH	calls close callback + ft_mem_free on loader; unlinks from face size list
+0x0050f80a	lib_callee_f80a	FT_GlyphLoader_CreateExtra	lvgl.lv_freetype	MEDIUM	allocates extra glyph data arrays (origins) for glyph loader
+#
+# === FREETYPE 2 — STREAM ===
+0x00512d3c	lib_callee_2d3c	FT_Stream_Open	lvgl.lv_freetype	HIGH	initializes stream fields: base, size, cursor, limit, close=0; 7-field init
+0x00512d52	lib_callee_2d52	FT_Stream_Close	lvgl.lv_freetype	HIGH	calls stream->close callback if non-NULL
+0x00512d98	lib_callee_2d98	FT_Stream_Skip	lvgl.lv_freetype	HIGH	offset<0 returns error 0x55, else calls FT_Stream_Seek(pos+offset)
+#
+# === FREETYPE 2 — MODULE/LIBRARY ===
+0x0051183c	lib_callee_183c	FT_Find_Module	lvgl.lv_freetype	HIGH	iterates library->modules comparing interface->name via strcmp
+0x0050fd2c	lib_callee_fd2c	FT_Done_Face	lvgl.lv_freetype	HIGH	destroys face: close callback, free sizes, finalize charmaps, free memory
+0x0050fe42	lib_callee_fe42	FT_Open_Face_Internal	lvgl.lv_freetype	MEDIUM	face opening worker: reads driver, allocates face, loads tables
+0x0050fcf2	lib_callee_fcf2	FT_Done_Face_Charmaps	lvgl.lv_freetype	HIGH	frees charmap array: iterates charmaps calling destroy + ft_mem_free
+0x0050f878	lib_callee_f878	FT_Done_Size_Internal	lvgl.lv_freetype	HIGH	unlinks size from face->sizes list, calls done callback, frees
+0x0050fdce	lib_page_callee_fdce	FT_Face_SetDefaultCharmap	lvgl.lv_freetype	HIGH	searches charmaps for Unicode (platform 3/encoding 10 or 0/4)
+0x0050ffa4	lib_callee_ffa4	FT_Add_Module	lvgl.lv_freetype	MEDIUM	adds module to library; calls module_init
+#
+# === FREETYPE 2 — OUTLINE ===
+0x00511e10	lib_callee_1e10	FT_Outline_Check	lvgl.lv_freetype	HIGH	validates contour indices are monotonically increasing and within n_points
+0x00511e64	module_callee_00439BE4_1e64	FT_Outline_Copy	lvgl.lv_freetype	HIGH	copies points (n*8), tags (n), contours; validates same n_points/n_contours
+0x00511f52	lib_callee_1f52	FT_Outline_Get_BBox	lvgl.lv_freetype	HIGH	iterates all outline points to compute min/max x/y bounding box
+0x00511fb2	lib_callee_1fb2	FT_Outline_Translate	lvgl.lv_freetype	HIGH	adds dx,dy to all n_points points in outline
+0x00511fe4	lib_callee_1fe4	FT_Vector_Transform_2x2	lvgl.lv_freetype	HIGH	2x2 matrix transform: x=xx*fx+xy*fy, y=yx*fx+yy*fy via FT_MulFix
+0x00512024	lib_callee_2024	FT_Outline_Transform	lvgl.lv_freetype	HIGH	applies FT_Vector_Transform to all n_points points
+#
+# === FREETYPE 2 — CACHE ===
+0x00512978	lib_callee_2978	FTC_Node_is_hashed	lvgl.lv_freetype	MEDIUM	checks hash type (3 or 4 from lookup table) returns boolean
+0x00512962	lib_callee_2962	FTC_Manager_GetModuleIndex	lvgl.lv_freetype	MEDIUM	lookup table at DAT_00512b98; returns char at offset+4 or -2 if index>=9
+0x0051298c	lib_page_callee_298c	FTC_SBitCache_Lookup	lvgl.lv_freetype	MEDIUM	cache lookup: null-checks, calls FTC_Cache_Lookup; returns error 0x51 on null
+0x005129a8	lib_page_callee_29a8	FTC_ImageCache_Lookup	lvgl.lv_freetype	MEDIUM	same pattern as SBitCache_Lookup; different cache type
+0x005129c4	lib_page_callee_29c4	FTC_CMapCache_Lookup	lvgl.lv_freetype	MEDIUM	looks up charmap in cache; creates new entry via FTC_Cache_NewNode if miss
+0x00512a02	lib_page_callee_2a02	FTC_Manager_LookupFace	lvgl.lv_freetype	MEDIUM	face ID hash lookup + alloc face node via ft_mem_qalloc
+0x00512a58	lib_page_callee_2a58	FTC_Manager_LookupSize	lvgl.lv_freetype	MEDIUM	size request lookup in cache
+0x00512ab0	lib_page_callee_2ab0	FTC_Cache_Init	lvgl.lv_freetype	MEDIUM	cache init: zero-fills, stores memory pointer
+0x00512ad4	lib_page_callee_2ad4	FTC_Cache_Done	lvgl.lv_freetype	MEDIUM	cache destructor: clears all nodes, frees hash buckets
+0x00512af8	lib_page_callee_2af8	FTC_Cache_NewNode	lvgl.lv_freetype	MEDIUM	allocates new cache node; handles eviction if needed
+0x00512b36	lib_page_callee_2b36	FTC_Cache_Lookup	lvgl.lv_freetype	MEDIUM	hash table lookup with chaining; returns node or creates new
+0x00512ba4	lib_page_callee_2ba4	FTC_Cache_RemoveNode	lvgl.lv_freetype	MEDIUM	removes node from hash chain + frees
+0x00512c86	lib_page_callee_2c86	FTC_Manager_RegisterCache	lvgl.lv_freetype	MEDIUM	registers cache in manager; calls cache init
+0x00512cc6	lib_page_callee_2cc6	FTC_Manager_New	lvgl.lv_freetype	MEDIUM	creates new cache manager; allocates via ft_mem_qalloc
+#
+# === FREETYPE 2 — GLYPH METRICS / SFNT ===
+0x0050efe8	lib_callee_efe8	FT_Get_Renderer	lvgl.lv_freetype	MEDIUM	looks up renderer by glyph format via module interface table at offset+0x60
+0x0050f00c	lib_page_callee_f00c	FT_New_Size	lvgl.lv_freetype	MEDIUM	allocates size object (0x60 bytes) via ft_mem_qalloc, links to face
+0x0050f0a2	lib_callee_f0a2	FT_GlyphLoader_New	lvgl.lv_freetype	MEDIUM	allocates new glyph loader structure
+0x0050f0be	lib_page_callee_f0be	FT_GlyphLoader_Adjust_Points	lvgl.lv_freetype	HIGH	recomputes current outline pointers from base + offset counts
+0x0050f10c	lib_page_callee_f10c	FT_GlyphLoader_Alloc_Extra	lvgl.lv_freetype	MEDIUM	allocates extra origin arrays for outline (ft_mem_qrealloc with size*2)
+0x0050f15a	lib_page_callee_f15a	FT_GlyphLoader_Grow_Points	lvgl.lv_freetype	MEDIUM	grows point/tag/contour arrays; ft_mem_qrealloc with overflow check
+0x0050f34a	lib_callee_f34a	FT_GlyphLoader_Add	lvgl.lv_freetype	MEDIUM	increments base counts by current counts; adjusts pointers
+0x0050f39c	lib_callee_f39c	FT_GlyphLoader_Sub_Init	lvgl.lv_freetype	MEDIUM	initializes sub-glyph loading state
+0x0050f3c8	lib_page_callee_f3c8	FT_Set_Char_Size	lvgl.lv_freetype	MEDIUM	sets character size; converts char_width/height to request
+0x0050f3f4	lib_page_callee_f3f4	FT_Stream_OpenFrame	lvgl.lv_freetype	MEDIUM	opens stream frame for reading (sets cursor/limit)
+0x0050f408	lib_propagated_00538650_wrapper	FT_Stream_CloseFrame	lvgl.lv_freetype	MEDIUM	closes stream frame (resets cursor/limit)
+0x0050f526	lib_page_callee_f526	FT_Request_Size	lvgl.lv_freetype	MEDIUM	size request processor; calls driver->request_size
+0x0050f6e0	lib_page_callee_f6e0	FT_Select_Size	lvgl.lv_freetype	MEDIUM	selects bitmap strike by index
+0x0050f6f0	lib_page_callee_f6f0	FT_Match_Size	lvgl.lv_freetype	MEDIUM	finds best matching bitmap strike for requested size
+0x0050f740	lib_page_callee_f740	FT_Set_Transform	lvgl.lv_freetype	MEDIUM	sets face transform matrix; stores copy or identity if NULL
+0x0050f7b8	lib_callee_f7b8	FT_Done_GlyphSlot	lvgl.lv_freetype	MEDIUM	frees glyph slot resources (internal arrays)
+0x0050f048	lib_page_callee_f048	FT_GlyphLoader_Prepare_Sub	lvgl.lv_freetype	MEDIUM	prepares sub-glyph loader state
+0x0050ff62	lib_page_callee_ff62	FT_Get_Module_Interface	lvgl.lv_freetype	MEDIUM	finds module by name, returns interface pointer
+0x0050ff86	lib_page_callee_ff86	FT_Get_TrueType_Engine_Type	lvgl.lv_freetype	MEDIUM	returns truetype engine type from library->modules
+#
+# === FREETYPE 2 — TRUETYPE DRIVER ===
+0x005b8b52	lib_callee_8b52	tt_face_get_location	lvgl.lv_freetype	HIGH	loca table lookup: gets glyph offset from face->glyph_locations array
+0x005b8b96	lib_callee_8b96	tt_face_load_glyph_header	lvgl.lv_freetype	HIGH	reads glyph header: checks format flag, calls stream read, extracts bounds
+0x005b8bf2	lib_callee_8bf2	tt_face_load_glyph_data	lvgl.lv_freetype	MEDIUM	reads glyph data via face->access_glyph_frame callback
+0x005b8c08	lib_callee_8c08	tt_face_get_metrics	lvgl.lv_freetype	HIGH	gets horizontal/vertical metrics: reads from hmtx/vmtx tables or var table
+0x005b8c68	lib_callee_8c68	tt_face_get_device_metrics	lvgl.lv_freetype	MEDIUM	device-specific metrics via hdmx/HVAR callback
+0x005b8c9a	lib_callee_8c9a	tt_face_get_advance	lvgl.lv_freetype	HIGH	reads advance width from hmtx table with format-specific handling
+0x005b8d28	lib_callee_8d28	tt_face_get_upem_x	lvgl.lv_freetype	HIGH	returns face->header->units_per_EM << 16; single field read
+0x005b8d34	lib_callee_8d34	tt_face_get_upem_y	lvgl.lv_freetype	HIGH	returns face->header->units_per_EM_y << 16; single field read
+0x005b8d62	lib_callee_8d62	tt_face_load_composite_glyph	lvgl.lv_freetype	MEDIUM	reads composite glyph: parses component flags, offsets, transforms
+0x005b8e78	lib_callee_8e78	tt_face_load_glyph	lvgl.lv_freetype	MEDIUM	main glyph load: header + simple/composite dispatch + metrics
+0x005b8f24	lib_callee_8f24	tt_glyph_load	lvgl.lv_freetype	MEDIUM	top-level TT glyph loader: calls tt_face_load_glyph + post-process
+#
+# === FREETYPE 2 — TRUETYPE ACCESSORS (tiny) ===
+0x005b8d28	lib_callee_8d28	tt_face_get_upem_x	lvgl.lv_freetype	HIGH	single-field accessor: *(face+0x218)->+0x21c << 16
+0x005b8d34	lib_callee_8d34	tt_face_get_upem_y	lvgl.lv_freetype	HIGH	single-field accessor: *(face+0x218)->+0x220 << 16
+0x005b8e88	lib_page_callee_8e88	tt_slot_clear	lvgl.lv_freetype	MEDIUM	clears glyph slot fields (accessor pattern)
+0x005b8e9a	lib_callee_8e9a	tt_loader_set_pp	lvgl.lv_freetype	MEDIUM	sets phantom points in TT loader
+0x005b8ea6	lib_page_callee_8ea6	tt_loader_compute_pp	lvgl.lv_freetype	MEDIUM	computes phantom points from metrics
+0x005b8eb8	lib_page_callee_8eb8	tt_slot_init	lvgl.lv_freetype	MEDIUM	initializes glyph slot fields
+0x005b8eca	lib_page_callee_8eca	tt_slot_done	lvgl.lv_freetype	MEDIUM	destroys glyph slot
+0x005b8ee2	lib_page_callee_8ee2	tt_face_init_hook	lvgl.lv_freetype	MEDIUM	face init callback for TT driver
+0x005b8f1e	lib_page_callee_8f1e	tt_face_done_hook	lvgl.lv_freetype	MEDIUM	face done callback for TT driver
+0x005b8f22	lib_callee_8f22	tt_size_init	lvgl.lv_freetype	MEDIUM	size init callback for TT driver
+0x005b8e68	am_util_string_memset_wrapper_8e68	tt_face_done_cleanup	lvgl.lv_freetype	MEDIUM	TT face cleanup; memset wrapper reassigned
+#
+# === FREETYPE 2 — TRUETYPE HINTING (IUP / CVT) ===
+0x005d04c8	lib_callee_04c8	tt_iup_worker_shift	lvgl.lv_freetype	HIGH	IUP shift: adds delta to all points in range; operates on x,y pairs
+0x005d0542	lib_callee_0542	tt_iup_worker_interpolate	lvgl.lv_freetype	HIGH	IUP interpolate: linear interpolation between touched points using FT_MulFix
+0x005d0610	lib_callee_0610	tt_iup_worker	lvgl.lv_freetype	HIGH	IUP main: walks contours finding touched points, calls shift/interpolate
+0x005d0fbc	lib_callee_0fbc	tt_size_set_cvt_entry	lvgl.lv_freetype	HIGH	writes to CVT table at index*8+0x1b8 offset
+0x005d1050	lib_callee_1050	tt_size_init_alloc	lvgl.lv_freetype	HIGH	allocates CVT/storage arrays via ft_mem_qrealloc; size init worker
+0x005d0fe8	lib_callee_0fe8	tt_size_done_internal	lvgl.lv_freetype	HIGH	frees CVT/storage/twilight zone arrays via ft_mem_free; size cleanup
+0x005bc7d2	lib_callee_c7d2	tt_exec_set_cvt	lvgl.lv_freetype	HIGH	TT interpreter: stores value at CVT[index] with bounds check (error 0x82)
+0x005bc800	lib_callee_c800	tt_exec_pop_stack	lvgl.lv_freetype	HIGH	TT interpreter: pops N values from stack; adjusts SP (error 0xA1 on underflow)
+0x005bc826	lib_callee_c826	tt_exec_move_points	lvgl.lv_freetype	HIGH	TT interpreter: moves outline points with rounding; uses freedom/projection vectors
+0x005bc9f8	lib_callee_c9f8	tt_exec_instruction_dispatch	lvgl.lv_freetype	MEDIUM	TT bytecode interpreter: large switch/dispatch on instruction opcode
+0x005bcb74	lib_callee_cb74	tt_exec_run_instructions	lvgl.lv_freetype	MEDIUM	runs TT instruction stream: init + dispatch loop
+0x005bcbd0	lib_callee_cbd0	tt_exec_context_init	lvgl.lv_freetype	MEDIUM	initializes execution context for TT interpreter
+0x005bcffe	lib_callee_cffe	tt_exec_context_done	lvgl.lv_freetype	MEDIUM	destroys TT execution context; frees all allocated arrays
+0x005bc958	lib_callee_c958	tt_exec_get_cvt	lvgl.lv_freetype	MEDIUM	reads CVT value at index with bounds check
+0x005bc9be	lib_callee_c9be	tt_exec_compute_point_displacement	lvgl.lv_freetype	MEDIUM	computes displacement vector for point movement in TT interpreter
+0x005bc8d8	lib_callee_c8d8	tt_exec_normalize_vector	lvgl.lv_freetype	MEDIUM	normalizes 2D vector (freedom/projection) in TT interpreter
+0x005bc8fa	lib_callee_c8fa	tt_exec_set_projection	lvgl.lv_freetype	MEDIUM	sets projection vector in TT exec context
+0x005bc93a	lib_callee_c93a	tt_exec_set_freedom	lvgl.lv_freetype	MEDIUM	sets freedom vector in TT exec context
+0x005bcadc	lib_callee_cadc	tt_exec_move_zone_point	lvgl.lv_freetype	MEDIUM	moves single point in twilight zone
+0x005bce22	lib_callee_ce22	tt_exec_compute_funcs	lvgl.lv_freetype	MEDIUM	recomputes projection/freedom dot product and move function
+0x005bcf76	lib_callee_cf76	tt_exec_load_context	lvgl.lv_freetype	MEDIUM	loads execution context from size/glyph zone
+0x005bd036	lib_callee_d036	tt_exec_save_context	lvgl.lv_freetype	MEDIUM	saves execution context back to size/glyph zone
+0x005bd64e	lib_callee_d64e	tt_exec_ins_handler	lvgl.lv_freetype	MEDIUM	sub-handler for specific TT instruction group
+0x005bdc6e	lib_callee_dc6e	tt_exec_deltap_handler	lvgl.lv_freetype	MEDIUM	DELTAP instruction handler: applies delta hints to points
+#
+# === FREETYPE 2 — SFNT TABLE HANDLERS ===
+0x005c410e	lib_page_callee_410e	sfnt_table_load	lvgl.lv_freetype	MEDIUM	calls driver->load_table via vtable at face+0x220 offset+4
+0x005c412c	lib_page_callee_412c	sfnt_table_free	lvgl.lv_freetype	MEDIUM	frees table data via ft_mem_free; clears pointer and length
+0x005c4144	lib_page_callee_4144	sfnt_table_init	lvgl.lv_freetype	MEDIUM	calls driver->init_table via vtable at face+0x220 offset+8
+0x005c4152	lib_page_callee_4152	sfnt_table_done	lvgl.lv_freetype	MEDIUM	calls driver->done_table via vtable at face+0x220 offset+0xC
+0x005c4628	lib_page_callee_4628	sfnt_load_face_init	lvgl.lv_freetype	MEDIUM	SFNT face init: parses table directory, validates entries
+0x005c4652	lib_page_callee_4652	sfnt_load_face_tables	lvgl.lv_freetype	MEDIUM	loads required SFNT tables (head, maxp, etc.)
+0x005c49a4	lib_page_callee_49a4	sfnt_glyph_name_lookup	lvgl.lv_freetype	MEDIUM	post table glyph name lookup
+0x005c49d4	lib_page_callee_49d4	sfnt_glyph_name_getter	lvgl.lv_freetype	MEDIUM	gets glyph name from post table
+0x005c49e0	lib_page_callee_49e0	sfnt_get_glyph_name	lvgl.lv_freetype	MEDIUM	public API: returns glyph name string
+0x005c49ec	lib_page_callee_49ec	sfnt_get_name_index	lvgl.lv_freetype	MEDIUM	looks up glyph index from name
+0x005c542a	lib_callee_542a	tt_cmap_load_format_2	lvgl.lv_freetype	MEDIUM	loads format-2 (high-byte mapping) charmap table
+0x005c54d2	lib_callee_54d2	tt_cmap_load	lvgl.lv_freetype	MEDIUM	main cmap loader: dispatches on format (0x20000 / 0x25000)
+0x005c55de	lib_callee_55de	tt_cmap_char_index	lvgl.lv_freetype	MEDIUM	character-to-glyph lookup for loaded TT cmap
+#
+# === FREETYPE 2 — FACE LOADING / METRICS ===
+0x005cc0c2	lib_page_callee_c0c2	tt_face_get_horz_metrics	lvgl.lv_freetype	MEDIUM	reads horizontal metrics via vtable at face->driver offset+0x70
+0x005cc0d6	lib_page_callee_c0d6	tt_face_get_vertical_origin	lvgl.lv_freetype	HIGH	computes vertical origin from v-metrics or hmtx tables; handles tsb flag
+0x005cc15e	lib_page_callee_c15e	tt_loader_init	lvgl.lv_freetype	MEDIUM	initializes TT glyph loader: get metrics, seek stream, setup bbox
+0x005cc1f4	lib_callee_c1f4	tt_loader_apply_variations	lvgl.lv_freetype	MEDIUM	applies font variations to glyph metrics via HVAR/hdmx callback
+0x005cc278	lib_callee_005cc278	tt_loader_done	lvgl.lv_freetype	MEDIUM	closes stream frame via FT_Stream_Seek; cleanup
+0x005cc884	lib_callee_c884	tt_face_load_name_table_entry	lvgl.lv_freetype	MEDIUM	loads single entry from name table (platform/encoding/name ID match)
+0x005cc8c0	lib_callee_c8c0	tt_face_load_name_table	lvgl.lv_freetype	MEDIUM	loads full name table; allocates name records array
+0x005cd07e	lib_callee_d07e	tt_face_load_maxp	lvgl.lv_freetype	MEDIUM	loads maxp table: max points/contours/zones/storage
+0x005cda5a	lib_callee_da5a	tt_face_load_prep	lvgl.lv_freetype	MEDIUM	loads 'prep' (pre-program) table for TT hinting
+0x005cf3de	lib_callee_f3de	ft_var_load_gvar	lvgl.lv_freetype	MEDIUM	loads gvar (glyph variation) table
+0x005cf50e	lib_callee_f50e	ft_var_load_avar	lvgl.lv_freetype	MEDIUM	loads avar (axis variation) table; segment maps
+0x005d0e56	lib_callee_005d0e56	tt_face_vary_cvt	lvgl.lv_freetype	MEDIUM	applies variation deltas to CVT table
+#
+# === FREETYPE 2 — RENDERING ===
+0x005be108	lib_page_callee_e108	ft_smooth_render_generic	lvgl.lv_freetype	MEDIUM	smooth rasterizer: render setup + band splitting
+0x005be27c	lib_page_callee_e27c	ft_raster_render	lvgl.lv_freetype	MEDIUM	rasterizer render function
+0x005be2d8	lib_page_callee_e2d8	ft_raster_worker_init	lvgl.lv_freetype	MEDIUM	initializes raster worker context
+0x005be344	lib_page_callee_e344	ft_raster_set_cell	lvgl.lv_freetype	MEDIUM	sets current cell in rasterizer grid
+0x005be35e	lib_page_callee_e35e	ft_raster_start_cell	lvgl.lv_freetype	MEDIUM	starts new cell for rasterization
+0x005be394	lib_page_callee_e394	ft_raster_record_cell	lvgl.lv_freetype	MEDIUM	records completed cell coverage/area
+0x005be3d6	lib_page_callee_e3d6	ft_raster_render_line	lvgl.lv_freetype	MEDIUM	rasterizes a line segment
+0x005be3f4	lib_page_callee_e3f4	ft_raster_render_scanline	lvgl.lv_freetype	MEDIUM	renders single scanline of coverage data
+0x005be434	lib_page_callee_e434	ft_raster_render_hline	lvgl.lv_freetype	MEDIUM	horizontal line rasterizer
+0x005be452	lib_page_callee_e452	ft_raster_conic_to	lvgl.lv_freetype	MEDIUM	rasterizes conic (quadratic) Bezier curve
+0x005be472	lib_page_callee_e472	ft_raster_cubic_to	lvgl.lv_freetype	MEDIUM	rasterizes cubic Bezier curve
+0x005be4aa	lib_page_callee_e4aa	ft_raster_line_to	lvgl.lv_freetype	MEDIUM	rasterizes line segment (move_to + render_line)
+0x005be4dc	lib_page_callee_e4dc	ft_raster_decompose	lvgl.lv_freetype	MEDIUM	decomposes outline into move/line/conic/cubic callbacks
+0x005be512	lib_page_callee_e512	ft_raster_sweep	lvgl.lv_freetype	MEDIUM	sweeps rasterized cells to produce bitmap spans
+0x005be54c	lib_page_callee_e54c	ft_raster_finish	lvgl.lv_freetype	MEDIUM	finalizes rasterization
+0x005be578	lib_page_callee_e578	ft_raster_new	lvgl.lv_freetype	MEDIUM	allocates new rasterizer
+0x005be5e8	lib_page_callee_e5e8	ft_raster_done	lvgl.lv_freetype	MEDIUM	frees rasterizer
+0x005be636	lib_page_callee_e636	ft_raster_reset	lvgl.lv_freetype	MEDIUM	resets rasterizer state
+0x005be704	lib_page_callee_e704	ft_raster_set_mode	lvgl.lv_freetype	MEDIUM	sets rasterizer mode
+0x005be750	lib_page_callee_e750	ft_bitmap_new	lvgl.lv_freetype	MEDIUM	initializes empty bitmap structure
+0x005be774	lib_page_callee_e774	ft_bitmap_copy	lvgl.lv_freetype	MEDIUM	copies bitmap data
+0x005be782	lib_page_callee_e782	ft_bitmap_done	lvgl.lv_freetype	MEDIUM	frees bitmap resources
+0x005be794	lib_page_callee_e794	ft_bitmap_convert	lvgl.lv_freetype	MEDIUM	converts bitmap pixel format
+0x005be7ae	lib_page_callee_e7ae	ft_bitmap_embolden	lvgl.lv_freetype	MEDIUM	applies emboldening to bitmap
+0x005be7e2	lib_page_callee_e7e2	ft_bitmap_blend	lvgl.lv_freetype	MEDIUM	blends bitmap with target
+0x005be890	lib_page_callee_e890	ft_stroker_new	lvgl.lv_freetype	MEDIUM	allocates new stroker object
+0x005be934	lib_page_callee_e934	ft_stroker_set	lvgl.lv_freetype	MEDIUM	sets stroker parameters (radius, caps, joins)
+0x005be94c	lib_page_callee_e94c	ft_stroker_done	lvgl.lv_freetype	MEDIUM	frees stroker
+0x005be986	lib_page_callee_e986	ft_stroker_begin_subpath	lvgl.lv_freetype	MEDIUM	begins new sub-path for stroking
+0x005be9a2	lib_page_callee_e9a2	ft_stroker_end_subpath	lvgl.lv_freetype	MEDIUM	ends current sub-path
+0x005be9f0	lib_page_callee_e9f0	ft_stroker_line_to	lvgl.lv_freetype	MEDIUM	strokes line segment
+0x005beaca	lib_page_callee_eaca	ft_stroker_conic_to	lvgl.lv_freetype	MEDIUM	strokes conic Bezier curve
+0x005beb24	lib_page_callee_eb24	ft_stroker_cubic_to	lvgl.lv_freetype	MEDIUM	strokes cubic Bezier curve
+0x005bebe0	lib_page_callee_ebe0	ft_stroker_get_counts	lvgl.lv_freetype	MEDIUM	gets point/contour counts for stroked outline
+0x005bec96	lib_page_callee_ec96	ft_stroker_export	lvgl.lv_freetype	MEDIUM	exports stroked outline to FT_Outline
+0x005beeea	lib_page_callee_eeea	ft_glyph_stroke	lvgl.lv_freetype	MEDIUM	applies stroking to glyph
+0x005bef2c	lib_page_callee_ef2c	ft_glyph_stroke_border	lvgl.lv_freetype	MEDIUM	applies border stroking to glyph
+0x005bef4a	lib_page_callee_ef4a	ft_glyph_to_bitmap	lvgl.lv_freetype	MEDIUM	renders glyph to bitmap
+#
+# === FREETYPE 2 — LFS INTEGRATION / FILE SUPPORT ===
+0x005b59be	lib_callee_59be	lfs_dir_parse_entry	lib.lfs	MEDIUM	parses directory entry: number # suffix format parsing
+0x005b5f6a	lib_callee_5f6a	lfs_dir_traverse_inner	lib.lfs	MEDIUM	inner traversal loop of LittleFS directory operations
+0x005b5f50	lib_callee_5f50	lfs_dir_fetch_setup	lib.lfs	MEDIUM	sets up directory fetch parameters
+0x005b5fc8	lib_callee_5fc8	lfs_dir_read_attrs	lib.lfs	MEDIUM	reads directory attributes from entry
+0x005b6048	lib_callee_6048	lfs_dir_entry_validate	lib.lfs	MEDIUM	validates directory entry integrity
+0x005b60b0	lib_callee_60b0	lfs_dir_commit_prepare	lib.lfs	MEDIUM	prepares directory commit operation
+0x005b612a	lib_callee_612a	lfs_file_data_init	lib.lfs	MEDIUM	initializes file data structures
+0x005b64f6	lib_callee_64f6	lfs_dir_entry_process	lib.lfs	MEDIUM	processes single directory entry
+0x005b65b8	lib_callee_65b8	lfs_dir_traverse_callback	lib.lfs	MEDIUM	callback handler for directory traversal
+#
+# === FREETYPE 2 — OUTLINE DECOMPOSITION ===
+0x005b629c	lib_page_callee_629c	lfs_dir_commit_attrs_inner	lib.lfs	MEDIUM	inner attribute commit in directory operation
+0x005b63b0	lib_page_callee_63b0	lfs_dir_commit_metadata	lib.lfs	MEDIUM	commits metadata to directory entry
+0x005b6438	lib_page_callee_6438	lfs_dir_compact_prepare	lib.lfs	MEDIUM	prepares directory compaction operation
+0x005b69c4	lib_page_callee_69c4	lfs_ctz_helper_1	lib.lfs	MEDIUM	CTZ skip-list helper function
+0x005b69d8	lib_page_callee_69d8	lfs_ctz_helper_2	lib.lfs	MEDIUM	CTZ skip-list helper function
+0x005b6a4e	lib_page_callee_6a4e	lfs_file_relocate_check	lib.lfs	MEDIUM	checks if file block needs relocation
+0x005b6a66	lib_page_callee_6a66	lfs_file_cache_init	lib.lfs	MEDIUM	initializes file read/write cache
+0x005b6a82	lib_page_callee_6a82	lfs_file_cache_read	lib.lfs	MEDIUM	reads from file cache
+0x005b6ac0	lib_page_callee_6ac0	lfs_file_seek_validate	lib.lfs	MEDIUM	validates seek position within file bounds
+0x005b6b50	lib_page_callee_6b50	lfs_file_truncate_helper	lib.lfs	MEDIUM	helper for file truncation
+0x005b6b7c	lib_page_callee_6b7c	lfs_file_sync_helper	lib.lfs	MEDIUM	helper for file sync operation
+0x005b6bd2	lib_page_callee_6bd2	lfs_dir_rawopen_at	lib.lfs	MEDIUM	opens directory at specific location
+0x005b6bf8	lib_page_callee_6bf8	lfs_dir_rawclose_inner	lib.lfs	MEDIUM	inner close for directory handle
+0x005b6c62	lib_page_callee_6c62	lfs_rawmkdir_inner	lib.lfs	MEDIUM	inner mkdir implementation
+0x005b6d46	lib_page_callee_6d46	lfs_rawremove_inner	lib.lfs	MEDIUM	inner remove implementation
+0x005b6de4	lib_page_callee_6de4	lfs_rawrename_inner	lib.lfs	MEDIUM	inner rename implementation
+0x005b6e10	lib_page_callee_6e10	lfs_rawstat_inner	lib.lfs	MEDIUM	inner stat implementation
+0x005b6e4e	lib_page_callee_6e4e	lfs_fs_gc_check	lib.lfs	MEDIUM	garbage collection check
+0x005b6e74	lib_page_callee_6e74	lfs_fs_deorphan_check	lib.lfs	MEDIUM	orphan block detection
+0x005b6ed6	lib_page_callee_6ed6	lfs_fs_rawsize_calc	lib.lfs	MEDIUM	calculates raw filesystem size
+0x005b6f9e	lib_page_callee_6f9e	lfs_mount_validate	lib.lfs	MEDIUM	validates mount parameters
+#
+# === FREETYPE 2 — NEMA VG PATH ===
+0x005b7092	lib_callee_7092	nema_vg_path_process	lib.nema	MEDIUM	NemaGFX VG path processing
+0x005b71ba	lib_callee_71ba	nema_vg_path_render	lib.nema	MEDIUM	NemaGFX VG path rendering
+0x005b7704	lib_callee_7704	nema_vg_outline_process	lib.nema	MEDIUM	NemaGFX outline processing
+0x005b7b42	lib_callee_7b42	nema_vg_context_helper	lib.nema	MEDIUM	NemaGFX context helper function
+0x005b7bc4	lib_callee_7bc4	nema_vg_state_init	lib.nema	MEDIUM	NemaGFX VG state initialization
+0x005b70be	lib_page_callee_70be	nema_vg_ctz_reader	lib.lfs	MEDIUM	LFS CTZ block reader (near LFS ctz_traverse)
+0x005b70fc	lib_page_callee_70fc	nema_vg_outline_helper_1	lib.nema	MEDIUM	outline processing helper
+0x005b7122	lib_page_callee_7122	nema_vg_outline_helper_2	lib.nema	MEDIUM	outline processing helper
+0x005b718c	lib_page_callee_718c	nema_vg_outline_helper_3	lib.nema	MEDIUM	outline processing helper
+0x005b755e	lib_page_callee_755e	lfs_ctz_reader_1	lib.lfs	MEDIUM	CTZ skip-list reader
+0x005b7598	lib_page_callee_7598	lfs_ctz_reader_2	lib.lfs	MEDIUM	CTZ skip-list reader
+0x005b75de	lib_page_callee_75de	lfs_ctz_writer_1	lib.lfs	MEDIUM	CTZ skip-list writer
+0x005b7608	lib_page_callee_7608	lfs_ctz_writer_2	lib.lfs	MEDIUM	CTZ skip-list writer helper
+0x005b7614	lib_page_callee_7614	lfs_ctz_skip_check	lib.lfs	MEDIUM	CTZ skip-list block check
+0x005b76e8	lib_page_callee_76e8	lfs_ctz_extend_helper	lib.lfs	MEDIUM	CTZ block extension helper
+0x005b76f6	lib_page_callee_76f6	lfs_ctz_extend_validate	lib.lfs	MEDIUM	validates CTZ extension operation
+0x005b79a4	lib_page_callee_79a4	lfs_file_relocate_setup	lib.lfs	MEDIUM	file block relocation setup
+0x005b7a18	lib_page_callee_7a18	lfs_file_relocate_worker	lib.lfs	MEDIUM	file block relocation worker
+#
+# === FREETYPE 2 — BITMAP ACCESSORS ===
+0x005ba2c8	lib_callee_a2c8	nema_vg_path_close	lib.nema	MEDIUM	closes NemaGFX VG path; resets state flags
+0x005ba348	lib_callee_a348	FT_Bitmap_Get_Width	lvgl.lv_freetype	HIGH	returns *(param_1 + 4); single-field accessor
+0x005ba34c	lib_callee_a34c	FT_Bitmap_Get_Pixel_Mode	lvgl.lv_freetype	HIGH	returns *(param_1 + 5); single-field accessor
+0x005ba350	lib_callee_a350	FT_Bitmap_Set_Pixel_Mode	lvgl.lv_freetype	HIGH	*(param_1 + 5) = param_2; single-field setter
+0x005ba354	lib_callee_a354	FT_Bitmap_Get_Buffer	lvgl.lv_freetype	HIGH	returns param_1 + 0x10; pointer to bitmap buffer
+0x005ba358	lib_callee_a358	FT_Bitmap_Set_Width	lvgl.lv_freetype	HIGH	sets width with 0x61 max check; computes row_bytes = (width+7)>>3
+0x005ba380	lib_callee_a380	FT_Bitmap_Set_From_Stream	lvgl.lv_freetype	MEDIUM	sets width then reads bitmap data from stream
+0x005ba3ac	lib_callee_a3ac	FT_Bitmap_Convert_Worker	lvgl.lv_freetype	MEDIUM	bitmap format conversion worker
+0x005ba674	lib_callee_a674	tt_exec_bytecode_init	lvgl.lv_freetype	MEDIUM	initializes TT bytecode execution context
+#
+# === FREETYPE 2 — OUTLINE PAGE HELPERS ===
+0x005b5118	lib_page_callee_5118	lfs_dir_fetch_inner_1	lib.lfs	MEDIUM	inner directory fetch helper
+0x005b516c	lib_page_callee_516c	lfs_dir_fetch_inner_2	lib.lfs	MEDIUM	inner directory fetch helper
+0x005b51ce	lib_page_callee_51ce	lfs_dir_fetch_inner_3	lib.lfs	MEDIUM	inner directory fetch helper
+0x005b5328	lib_page_callee_5328	lfs_dir_commit_inner_1	lib.lfs	MEDIUM	directory commit helper
+0x005b5396	lib_page_callee_5396	lfs_dir_commit_inner_2	lib.lfs	MEDIUM	directory commit helper
+0x005b53e8	lib_page_callee_53e8	lfs_dir_commit_inner_3	lib.lfs	MEDIUM	directory commit helper
+0x005b5426	lib_page_callee_5426	lfs_dir_compact_inner_1	lib.lfs	MEDIUM	directory compaction helper
+0x005b5438	lib_page_callee_5438	lfs_dir_compact_inner_2	lib.lfs	MEDIUM	directory compaction helper
+0x005b56de	lib_page_callee_56de	lfs_alloc_lookahead	lib.lfs	MEDIUM	lookahead allocation for block alloc
+0x005b5c48	lib_page_callee_5c48	lfs_file_rawread_inner	lib.lfs	MEDIUM	inner file read implementation
+0x005b5cd2	lib_page_callee_5cd2	lfs_file_rawwrite_inner	lib.lfs	MEDIUM	inner file write implementation
+0x005b5d1c	lib_page_callee_5d1c	lfs_file_flush_inner	lib.lfs	MEDIUM	inner file flush implementation
+0x005b5da8	lib_page_callee_5da8	lfs_file_sync_inner	lib.lfs	MEDIUM	inner file sync implementation
+0x005b5dca	lib_page_callee_5dca	lfs_file_seek_inner	lib.lfs	MEDIUM	inner file seek implementation
+0x005b5e1a	lib_page_callee_5e1a	lfs_file_tell_inner	lib.lfs	MEDIUM	inner file tell implementation
+0x005b5eb6	lib_page_callee_5eb6	lfs_file_size_inner	lib.lfs	MEDIUM	inner file size implementation
+#
+# === ZLIB / INFLATE ===
+0x005a286c	lib_callee_286c	inflate_huffman_init	lib.zlib	MEDIUM	allocates 0x13-entry huffman work buffer + calls inflate decode
+0x005a28ec	lib_callee_28ec	inflate_huffman_init_full	lib.zlib	MEDIUM	two-pass huffman init (literal/length + distance) with 0x120/0x101 sizes
+0x005a2a06	lib_callee_2a06	inflate_get_default_alloc	lib.zlib	MEDIUM	returns default alloc/free function pointers from DAT constants
+0x005a2a2a	lib_callee_2a2a	inflate_output_flush	lib.zlib	HIGH	copies decoded data from sliding window to output; handles wrap-around + CRC callback
+0x005a2b00	lib_callee_2b00	inflate_state_alloc	lib.zlib	MEDIUM	allocates inflate state (0x1C bytes) via z_stream alloc callback
+0x005a30fe	lib_callee_30fe	inflateReset	lib.zlib	HIGH	resets inflate state: frees tables, zeros window counters, reinits CRC
+0x005a30f0	lib_callee_30f0	inflate_free_tables	lib.zlib	MEDIUM	frees dynamic huffman tables via callback
+0x005a3158	lib_callee_3158	inflateInit2	lib.zlib	MEDIUM	allocates state (0x40) + window (0x5A0) + input buffer; 3-alloc init
+0x005a3b4e	lib_callee_3b4e	inflate_process_block	lib.zlib	MEDIUM	processes single inflate block (stored/fixed/dynamic huffman)
+0x005a3b7a	lib_callee_3b7a	inflate_decode_header	lib.zlib	MEDIUM	decodes gzip/zlib header fields
+0x005a3bba	lib_callee_3bba	inflate_decode_dynamic	lib.zlib	MEDIUM	decodes dynamic huffman tree from bitstream
+0x005a3bf6	lib_callee_3bf6	inflate_decode_stored	lib.zlib	MEDIUM	decodes stored (uncompressed) block
+0x005a4138	lib_callee_4138	inflateEnd	lib.zlib	MEDIUM	frees all inflate state + window + work buffers
+#
+# === FLASHDB ===
+0x0051b368	lib_callee_b368	fdb_kv_set_value	lib.flashdb	MEDIUM	sets key-value store entry value at computed offset
+0x0051b388	lib_callee_b388	fdb_kv_set_status	lib.flashdb	MEDIUM	sets entry status byte at offset+1 in sector
+0x0051b9f0	lib_callee_b9f0	fdb_sector_next_addr	lib.flashdb	MEDIUM	computes next sector address: sector_size * index, checks bounds
+0x0051ba2c	lib_callee_ba2c	fdb_kv_iterate_sectors	lib.flashdb	MEDIUM	iterates through KV sectors calling read_sector_info + callback
+0x0051bab6	lib_neighbor_0051bab6	fdb_kv_match_name	lib.flashdb	MEDIUM	matches key name: checks name_len, status==2, memcmp on key data
+0x0051baf6	lib_callee_baf6	fdb_kv_find	lib.flashdb	MEDIUM	searches for key by iterating sectors via fdb_kv_iterate_sectors
+0x0051be90	lib_callee_be90	fdb_kv_get	lib.flashdb	MEDIUM	gets value for key: calls find, reads data from flash
+0x0051c1f4	lib_callee_51c1f4	fdb_kv_set	lib.flashdb	MEDIUM	sets key-value pair: find existing + write/update
+0x0051c2f4	lib_callee_c2f4	fdb_kv_del	lib.flashdb	MEDIUM	deletes key-value entry: marks as deleted in sector
+0x0051c368	lib_callee_c368	fdb_kv_iterate_all	lib.flashdb	MEDIUM	iterates all key-value pairs calling user callback
+#
+# === HAL / PERIPHERAL ===
+0x004fe56e	lib_callee_e56e	am_hal_mspi_dma_sync	lib.hal	MEDIUM	checks DMA status flag, calls DSB flush; AmbiqSuite MSPI DMA sync
+0x0043d926	lib_callee_d926	lv_obj_class_is_ext_type	lvgl	MEDIUM	checks offset+8 == 0xFF; LVGL class type flag check
+#
+# === MISCELLANEOUS ===
+0x005af05c	lib_callee_f05c	is_line_terminator	lib.text	MEDIUM	returns true for char 0, 0x0A (LF), 0x0D (CR)
+0x0047b652	lib_callee_b652	pb_field_map_free	pb.field	MEDIUM	frees field map: checks type flag, calls free, sends clear event
+0x0047bc6a	lib_callee_bc6a	pb_field_map_get_count	pb.field	MEDIUM	returns field count from map structure
+0x0047bc7e	lib_callee_bc7e	pb_field_map_get_entry	pb.field	MEDIUM	returns field entry at index from map
+0x005b9704	lib_callee_9704	nema_vg_paint_create	lib.nema	MEDIUM	NemaGFX paint object creation
+0x005b9f88	lib_callee_9f88	nema_vg_paint_destroy	lib.nema	MEDIUM	NemaGFX paint object destruction
+0x005b9874	lib_callee_9874	nema_vg_paint_set_color	lib.nema	MEDIUM	sets paint color
+0x005b9d44	lib_callee_9d44	nema_vg_gradient_set	lib.nema	MEDIUM	sets gradient parameters for paint
+0x005b8a7c	lib_callee_8a7c	sysclose_context_init	system_close	MEDIUM	initializes system close context structure
+0x005b7bee	lib_helper_005b823e_wrapper	sysclose_error_wrapper	system_close	MEDIUM	thin wrapper calling error handler
+0x005b7b60	lib_callee_7b60	sysclose_validate_params	system_close	MEDIUM	validates system close parameters
+0x005b7be0	lib_callee_7be0	sysclose_get_flags	system_close	MEDIUM	returns flags field from sysclose context
+0x005b7be6	lib_callee_7be6	sysclose_set_flags	system_close	MEDIUM	sets flags field in sysclose context
+0x005b7c0e	lib_callee_7c0e	sysclose_get_state_flags	system_close	MEDIUM	returns state flags from context
+0x005b79ca	lib_callee_79ca	tt_face_get_char_index	lvgl.lv_freetype	MEDIUM	character-to-glyph-index mapping via cmap
+0x005b7bea	lib_callee_7bea	sysclose_update_timer	system_close	MEDIUM	updates timer value in context
+0x005b58c2	lib_callee_58c2	lfs_strtol	lib.lfs	MEDIUM	string-to-long conversion for LFS entry parsing
+0x005b823e	lib_helper_005b823e	ft_error_handler	lvgl.lv_freetype	MEDIUM	FreeType internal error handler
+0x005c506c	lib_helper_005c506c	sfnt_table_helper	lvgl.lv_freetype	MEDIUM	SFNT table loading helper
+0x00538b0c	lib_callee_8b0c	qsort_partition	lib.sort	MEDIUM	quicksort partition function (part of introsort)
+0x005392b2	lib_callee_92b2	binary_search_sorted	lib.sort	MEDIUM	binary search in sorted array
+0x005393de	lib_callee_93de	sorted_insert	lib.sort	MEDIUM	insert into sorted position
+0x00539730	lib_callee_9730	sorted_array_merge	lib.sort	MEDIUM	merge operation for sorted arrays
+0x0053e04c	lib_callee_e04c	string_hash_compute	lib.string	MEDIUM	computes hash of string for lookup table
+0x005d62ac	lib_callee_005d62ac	tt_face_done_variations	lvgl.lv_freetype	MEDIUM	frees variation data (fvar/gvar deltas) via ft_mem_free
+0x005d62ce	lib_callee_62ce	tt_face_get_var_blend	lvgl.lv_freetype	MEDIUM	looks up variation blend coordinates for axis
+0x005765e8	lib_callee_005765e8	FT_Done_GlyphSlot_Internal	lvgl.lv_freetype	HIGH	destroys glyph slot: iterates 0x54 glyph types, calls destroy + free each
+0x00576646	lib_callee_6646	FT_GlyphSlot_Get_Glyph	lvgl.lv_freetype	MEDIUM	gets glyph from slot: lookup by index with cache
+0x00576704	lib_callee_6704	FT_GlyphSlot_Create	lvgl.lv_freetype	MEDIUM	creates glyph in slot: allocates via ft_mem_qalloc + initializes
+0x005768f8	lib_callee_68f8	FT_GlyphSlot_Free	lvgl.lv_freetype	MEDIUM	frees glyph: calls destroy callback + ft_mem_free
+0x0057656e	lib_propagated_0057656e	FT_New_GlyphSlot	lvgl.lv_freetype	MEDIUM	allocates new glyph slot with 0x17C + n_glyphs*2 bytes
+0x005cc850	lib_propagated_005cc850	tt_face_load_os2	lvgl.lv_freetype	MEDIUM	loads OS/2 table from TrueType font
+0x005c5bfa	lib_propagated_005c5bfa	sfnt_load_cmap	lvgl.lv_freetype	MEDIUM	loads cmap (character mapping) table
+0x00538650	lib_propagated_00538650	qsort_insertion_sort	lib.sort	MEDIUM	insertion sort for small arrays (used by introsort)
+0x0054b970	lib_helper_b970	am_hal_helper	lib.hal	MEDIUM	AmbiqSuite HAL helper function
+0x0054b852	lib_callee_b852	am_hal_peripheral_helper	lib.hal	MEDIUM	HAL peripheral operation helper
+0x0053b10e	lib_callee_b10e	nanopb_encode_helper	lib.nanopb	MEDIUM	nanopb encoding helper function
+0x004c9730	lib.tlsf_helper_004c9730	tlsf_fls_generic	lib.tlsf	MEDIUM	generic find-last-set; called from various TLSF paths
+0x004c973e	lib.tlsf_propagated_004c973e	tlsf_block_is_free	lib.tlsf	MEDIUM	checks block free bit; propagated from TLSF core
+0x004ca024	lib.tlsf_neighbor_004ca024	tlsf_pool_add_helper	lib.tlsf	MEDIUM	helper for pool addition
+0x004ca05c	module_callee_004C9F78	tlsf_block_validate	lib.tlsf	MEDIUM	validates block header/size before free
+0x004c98dc	lib_tlsf_callee_98dc	tlsf_mapping_search	lib.tlsf	MEDIUM	maps size to first/second level indices for search
+0x0050e896	lib_callee_0050e896	lv_draw_nema_helper	lvgl.lv_draw	MEDIUM	LVGL NemaGFX draw helper
+0x0050e81c	lib_neighbor_0050e81c	lv_draw_transform_helper	lvgl.lv_draw	MEDIUM	LVGL draw transform helper
+0x005ce7b2	lib_related_005ce7b2	ft_autofit_helper	lvgl.lv_freetype	MEDIUM	FreeType autofit module helper
+0x0050e164	module_callee_004FE56E_e164	am_hal_mspi_status_check	lib.hal	MEDIUM	checks MSPI transfer status
+0x0050e23e	module_callee_004FE56E_e23e	am_hal_mspi_transfer_start	lib.hal	MEDIUM	initiates MSPI data transfer
+0x0050e7d8	module_callee_0050E896	lv_draw_nema_setup	lvgl.lv_draw	MEDIUM	NemaGFX draw setup
+0x005bdcce	module_callee_00439C04	lfs_commit_crc_calc	lib.lfs	MEDIUM	CRC calculation for LFS commit (memset wrapper callee)
+0x005bddb0	module_callee_005BDCCE	lfs_commit_crc_finalize	lib.lfs	MEDIUM	finalizes CRC for commit entry
+0x005c6798	module_callee_00512EEA_6798	sfnt_stream_frame_helper	lvgl.lv_freetype	MEDIUM	SFNT stream frame extraction helper
+0x005c7718	module_callee_005136DA_7718	sfnt_table_free_helper	lvgl.lv_freetype	MEDIUM	helper for SFNT table freeing
+0x005cc2b2	module_callee_00512EEA_c2b2	tt_loader_stream_close	lvgl.lv_freetype	MEDIUM	stream close for TT loader via FT_Stream_ExitFrame
+0x005d0dce	module_callee_005136DA_0dce	tt_size_free_arrays	lvgl.lv_freetype	MEDIUM	frees TT size arrays via ft_mem_free
+0x005be05c	lib_callee_e05c	ft_outline_render_setup	lvgl.lv_freetype	MEDIUM	sets up outline rendering parameters
+0x005bf074	lib_page_callee_f074	nv_storage_helper	nv.mac	MEDIUM	non-volatile storage access helper
+0x005b9704	lib_callee_9704	nema_vg_paint_create	lib.nema	MEDIUM	NemaGFX paint object creation
+0x00576646	lib_callee_6646	FT_GlyphSlot_Get_Glyph	lvgl.lv_freetype	MEDIUM	gets glyph: lookup index, allocate if miss, init from face data

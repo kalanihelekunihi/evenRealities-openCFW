@@ -1,0 +1,213 @@
+address	old_name	new_name	module	confidence	evidence
+0x00446e88	ble_callee_6e88	appSmpDbInit	ble.smpdb	MEDIUM	# memset(DAT,0x60,0) + store callback + appSmpDbWriteCount(0xFFFFFFFF) — SMP DB init pattern
+0x00446eb8	module_callee_0046F83C	ota_service_notify_on_c1	ble.msgtx	MEDIUM	# checks -0x3f (0xC1 service byte), calls ota_callee_f83c(1,0xc1,buf,2) — service notification for 0xC1
+0x00446f54	ble_callee_6f54	appSmpDbInitAndNotifyOta	ble.smpdb	MEDIUM	# same memset+callback as 446e88 but calls ota_service_notify_state_change(0) — SMP DB init with OTA state
+0x0044830c	ble_callee_830c	appSmpDbGetCallback	ble.smpdb	MEDIUM	# returns *(param+0x3c) or 0 — getter for SMP DB callback pointer at offset 0x3C
+0x00448318	ble_callee_8318	nv_read_dispatch	nv	MEDIUM	# checks osKernelGetState, dispatches to task_nv_read_begin or task_nv_read_complete
+0x00449576	ble_callee_9576	WsfCsSetBit6	ble.wsf	MEDIUM	# WsfCsEnter + set bit6 in global + WsfCsExit pattern — critical section bit manipulator
+0x00453d56	ble_callee_3d56	dmConnGetAdvDataLen	ble.dm_conn	MEDIUM	# reads +0x18 from global ptr, sets 0x38 - *(+0x2c) — advertising data length calc
+0x004545b8	ble_callee_45b8	attsHandleValueNtf	ble.att	HIGH	# wraps AttsHandleValueCnf(param1, 0x12, param2, param3) — ATT notification (opcode 0x12 = Handle Value NTF)
+0x004563a4	ble_callee_63a4	dmConnSetCback	ble.dm	MEDIUM	# WsfCsEnter + sets callback at DM control block[param1*4+0x90] + WsfCsExit — DM connection callback setter
+0x004563cc	ble_callee_63cc	dmConnSendEvent	ble.dm	MEDIUM	# WsfMsgAlloc(0x24) + fills event struct (type=0x19) + WsfMsgSend — DM connection event sender
+0x00456500	ble_callee_6500	dmConnSetDataLen	ble.dm	MEDIUM	# WsfCsEnter + sets 2 shorts in DM CB at 0xBC/0xC0 via connId index + WsfCsExit — DM set data length
+0x0045654e	ble_callee_654e	dmConnCopy	ble.dm	MEDIUM	# wraps am_util_string_memcpy_n(1, param) — connection parameter copy
+0x00456680	ble_callee_6680	dmConnCcbGetField	ble.dm	MEDIUM	# returns byte at (param*0x30 + base - 0x1C) — CCB field getter indexed by conn handle
+0x00456692	ble_callee_6692	dmConnCcbGetAddr	ble.dm	MEDIUM	# returns address (param*0x30 + base - 0x2A) — CCB address field pointer
+0x00459214	ble_callee_9214	dmConnGetAdvState	ble.dm	MEDIUM	# returns *global — simple advertising state getter
+0x0046e964	module_callee_0056FAB4_e964	am_hal_sysctrl_sleep_enter	hal.sysctrl	MEDIUM	# checks CONTROL reg bits, DSB/ISB + sets SLEEPDEEP bit 0x20000 — Cortex-M sleep entry with barriers
+0x0046e9aa	module_callee_0056FAB4_e9aa	am_hal_sysctrl_sleep_exit	hal.sysctrl	MEDIUM	# clears SLEEPDEEP bit 0x20000 + DSB/ISB — Cortex-M sleep exit with barriers
+0x004731e4	ble_callee_31e4	SmpDbCountByType	ble.smpdb	MEDIUM	# iterates 10 records (stride=200), counts where +0x2F!=0 && +0xC3==param — SMP DB count by address type
+0x00473944	ble_callee_3944	appSmpDbFindByHandleAndAddr	ble.smpdb	MEDIUM	# iterates 10 records (stride=200), matches +0x4C==handle && memcmp(+0x44, addr, 8) — SMP DB lookup
+0x0047403e	ble_callee_403e	appSmpDbSetField31	ble.smpdb	MEDIUM	# sets byte at (param1+0x31) = param2 — SMP DB record field setter
+0x00477188	ble_callee_7188	am_hal_check_bits	hal	MEDIUM	# tests (param1 & param2) with mode: any-bit (0) or all-bits (1) — HAL bitmask check utility
+0x00477df4	ble_callee_7df4	am_hal_mram_init	hal.mram	MEDIUM	# checks magic -1, calls am_hal_mram_read_write(1, 0x244, 1, ptr) — MRAM initialization
+0x00478282	ble_callee_8282	am_hal_ble_wakeup_set	drv.em9305	MEDIUM	# checks BLE enabled flag, writes +0x80 to register, polls for bit7 with 10000 timeout — EM9305 wakeup
+0x004782d4	ble_callee_82d4	am_hal_ble_wakeup_clear	drv.em9305	MEDIUM	# clears bit5 in register, polls for !bit7 with 10000 timeout — EM9305 wakeup clear
+0x00478e80	ble_callee_8e80	am_hal_ble_tx_power_set	drv.em9305	MEDIUM	# checks register bits, packs param into (hi<<8)|(mid<<4)|lo format, writes register — BLE TX power
+0x00478fa0	ble_neighbor_004790b8_wrapper	am_hal_ble_sleep_get	drv.em9305	MEDIUM	# reads bit31 from register, XOR 1 — returns BLE sleep state (inverted)
+0x004790b8	ble_neighbor_004790b8	am_hal_bleif_init_regs	drv.em9305	HIGH	# writes BLEIF register sequence: clkctrl=0x110, enables=0x100, masks=0xFFFFFFFF, etc — BLEIF hardware init
+0x004790fc	ble_neighbor_004790fc	am_hal_bleif_start_transfer	drv.em9305	MEDIUM	# HciLeSetAdvEnable(4,0x31) + sets interval*6, enables interrupt 0x8000, starts BLEIF transfer
+0x00479146	ble_callee_9146	am_hal_bleif_stop_transfer	drv.em9305	MEDIUM	# disables BLEIF, sets interval*6, configures 0xC0000000, starts with 0x40000 — BLEIF stop/restart
+0x00479256	ble_callee_9256	am_hal_ble_vtable_dispatch_0x2c	drv.em9305	MEDIUM	# dispatches through vtable at handle+0x2C — HAL BLE callback dispatch
+0x00479268	ble_callee_9268	am_hal_ble_vtable_dispatch_0x20	drv.em9305	MEDIUM	# dispatches through vtable at handle+0x20 — HAL BLE callback dispatch
+0x0047927e	ble_callee_927e	am_hal_ble_vtable_dispatch_0x24	drv.em9305	MEDIUM	# dispatches through vtable at handle+0x24 (with 2 params) — HAL BLE callback dispatch
+0x00479298	ble_callee_9298	am_hal_ble_vtable_dispatch_0x28	drv.em9305	MEDIUM	# dispatches through vtable at handle+0x28 — HAL BLE callback dispatch
+0x004792ae	ble_callee_92ae	am_hal_ble_vtable_dispatch_0x30	drv.em9305	MEDIUM	# dispatches through vtable at handle+0x30 — HAL BLE callback dispatch
+0x004792c4	ble_callee_92c4	am_hal_ble_vtable_dispatch_0x34	drv.em9305	MEDIUM	# dispatches through vtable at handle+0x34 — HAL BLE callback dispatch
+0x004792da	ble_callee_92da	am_hal_ble_vtable_dispatch_0x38	drv.em9305	MEDIUM	# dispatches through vtable at handle+0x38 — HAL BLE callback dispatch
+0x00479726	ble_callee_9726	br_util_delay_cycles	hal.utils	MEDIUM	# calls func_0x00000048 (ITCM delay loop) — bare-metal cycle delay stub
+0x00479b12	ble_callee_9b12	am_hal_ble_get_clock_source	drv.em9305	MEDIUM	# reads register bits 8/0, returns 2/1/0 — BLE clock source identification (XTAL/RC/none)
+0x00479d94	ble_callee_9d94	NVIC_EncodeBitPosition	hal.nvic	MEDIUM	# computes register_index=param>>5, bit_mask=1<<(param&0x1F) — NVIC IRQ bit position encoder
+0x0047a430	ble_callee_a430	am_hal_gpio_pinread	hal.gpio	MEDIUM	# validates pin range 0x38-0x83, WsfCsEnter, reads/masks GPIO value with pin mask, WsfCsExit
+0x0047a4ae	ble_callee_a4ae	am_hal_gpio_set_output	hal.gpio	MEDIUM	# validates pin range 0x38-0x83, writes param2 to GPIO register at pin offset — GPIO output set
+0x0047a4e8	ble_neighbor_0047a4e8	am_hal_gpio_isr_register	hal.gpio	MEDIUM	# registers ISR callback at indexed position (3 modes: peripheral/combined/both) — GPIO ISR registration
+0x0047a582	ble_callee_a582	am_hal_gpio_isr_dispatch	hal.gpio	MEDIUM	# dispatches ISR callbacks for active GPIO pins using LZCOUNT bit scan — GPIO interrupt service routine
+0x00486570	ble_helper_6570	attcCheckConnReady	ble.att	MEDIUM	# checks 3 conditions (global!=0, (flags&0xF)!=0, flags>=0), returns connection-ready bit — ATT client ready check
+0x00486b34	ble_callee_6b34	WsfMsgFreeAdjust	ble.wsf	MEDIUM	# adjusts pointer by 0xB for 0x1B/0x1D types, calls WsfMsgFree — message free with PDU offset
+0x00486c9a	ble_callee_6c9a	WsfQueueDeqConditional	ble.wsf	MEDIUM	# WsfCsEnter + dequeues if head item has no pending (field+4==0) + clears field+0xD — conditional dequeue
+0x00487c00	ble_callee_7c00	attsCsfCalcAttrLen	ble.att	MEDIUM	# calculates ATT attribute PDU length from UUID types 0x2800-0x2803/0x2900/0x2901/0x2905 + auth flag
+0x00488396	ble_callee_8396	WsfTimerSetEvent	ble.wsf	MEDIUM	# WsfCsEnterHandler + sets event bits in timer control block + sets dirty flag bit2 + WsfCsExitHandler + fires handler
+0x00488416	ble_callee_8416	WsfTimerIsDirty	ble.wsf	MEDIUM	# returns timer control block dirty flag == 0 (is clean check)
+0x0048887c	ble_callee_887c	attsCccGetNumCcc	ble.att	MEDIUM	# returns byte at (global+0xC) — CCC table number of entries getter
+0x0048b572	ble_callee_b572	dmConnGetAddrType	ble.dm	MEDIUM	# returns byte at (global+0x16) — DM connection address type getter
+0x0048b5f4	ble_callee_b5f4	dmConnGetSecurityLevel	ble.dm	MEDIUM	# if param1==1: 0; if param1==2: param2!=1; else cascade — security level comparison
+0x0048b640	ble_callee_b640	dmConnGetSecurityLevel_dup	ble.dm	MEDIUM	# identical logic to 0x0048b5f4 — duplicate security level comparison (master vs slave variant)
+0x0048b67e	ble_callee_b67e	dmConnMasterLegGetConnIdx_dup	ble.dm	MEDIUM	# wraps dmConnGetSecurityLevel_dup(2, param) — master legacy connection index via security level
+0x0048b68c	ble_callee_b68c	HciCoreInitWrapper	ble.hci	MEDIUM	# wraps HciCoreInit() directly — HCI core initialization wrapper
+0x0048b7bc	ble_callee_b7bc	dmConnGetControlBlock	ble.dm	MEDIUM	# returns global pointer DAT_0048b7fc — DM connection control block getter
+0x0048bacc	ble_callee_bacc	dmConnSmSendEventViaVtable	ble.dm	MEDIUM	# dispatches through vtable at (global+0x34)+8 — DM connection state machine event via callback table
+0x00495784	ble_callee_5784	appSlaveAuthPairValidateAndSync	app.slave	MEDIUM	# calls auth_full_pairing_validate, then syncs slave UART with pairing data — slave auth+sync
+0x004957c4	ble_callee_57c4	appSlaveAuthValidateAndLog	app.slave	MEDIUM	# calls auth_full_pairing_validate, then slave_event_log(1, buf) — slave auth validate+log
+0x004958b0	ble_callee_58b0	dmSlaveAdvParamInit	ble.slave	MEDIUM	# sets default adv params: interval=0xFF, min=0x640, max=0x780, type=7, filter=0 — DM slave adv parameter init
+0x004958fc	ble_callee_58fc	dmSlaveAdvParamInitAll	ble.slave	MEDIUM	# loops 2 iterations calling dmSlaveAdvParamInit + copies config — init all advertising sets
+0x00495b64	ble_callee_5b64	dmSlaveAdvClearTimers	ble.slave	MEDIUM	# clears 2 timer slots per advertising set (bVar3/bVar2 double-index) — slave advertising timer cleanup
+0x00496bf4	ble_callee_6bf4	appSlaveSecKeyExchange	app.slave	MEDIUM	# sets bonding flag, allocates SMP flash record, builds NV write command — security key exchange during pairing
+0x00496c98	ble_callee_6c98	appSlaveSecStoreKey	app.slave	MEDIUM	# stores SMP key via appSmpDbStoreKey if bonding enabled — slave key storage callback
+0x00496cba	ble_callee_6cba	appSlaveSecComplete	app.slave	MEDIUM	# marks complete, calls appSmpDbRecordComplete + dmSlaveAdvTimerCbNullCheck + APP_evenai_page_handler — pairing complete
+0x00496d10	ble_callee_6d10	appSlaveSecNop	app.slave	MEDIUM	# empty function — no-op security handler placeholder
+0x00496d12	ble_callee_6d12	appSlaveConnUpdateComplete	app.slave	MEDIUM	# on disconnect: marks field5=1/field6=0; iterates CCC table via attsCccGetTbl + writes values — connection cleanup
+0x00496d7c	ble_callee_6d7c	appSlaveSecResolveAddr	app.slave	MEDIUM	# resolves address via appSmpDbFindByHandleAndAddr or memcmp, calls slave_set_display_mode — address resolution
+0x00496de0	ble_callee_6de0	appSlaveDisconnGetAddrType	app.slave	MEDIUM	# on disconnect: gets dmConnGetAddrType, stores via FUN_004def04 — disconnect address type save
+0x00496df4	ble_callee_6df4	appSlaveSecMarkBonded	app.slave	MEDIUM	# if not slave && bonded record: calls appSmpDbSetField31(record, 1) — mark record as bonded
+0x00496e12	ble_callee_6e12	appSlaveSecClearBonded	app.slave	MEDIUM	# if not slave && bonded: calls appSmpDbSetField31(record, 0) — clear bonded flag
+0x00497a3c	ble_callee_7a3c	appSlaveConfigureAndDispatch	app.slave	MEDIUM	# sets slave mode (0/1/2), inits UART, iterates eye connections, dispatches events — slave config+dispatch
+0x00497af0	ble_callee_7af0	appSlaveConnStateChange	app.slave	MEDIUM	# on conn state change: updates per-eye state, clears timers, dispatches to slave_get_config_sub — connection state handler
+0x00497ea6	ble_callee_7ea6	am_devices_em9305_isr_handler	drv.em9305	MEDIUM	# stores ISR handler, dispatches via display_mutex_acquire or direct callback — EM9305 interrupt handler
+0x004980de	ble_callee_80de	appSlaveSecInit	app.slave	MEDIUM	# calls task_486c2a, SMP handler init, SMP DB init, SMP event handlers — slave security initialization
+0x00498496	ble_neighbor_00498728_wrapper	drv_npmx_config_write_wrapper	drv.npmx	MEDIUM	# wraps drv_npmx_config_write(ptr1, ptr2, 0x104, 0x820) — nPM1300 PMIC configuration
+0x0049878c	module_callee_004E0E30	attcProcServerInd	ble.att	HIGH	# processes ATT server indications: dispatches via handler table indexed by PDU type, calls attcFreePkt — ATT client indication processor
+0x00498b40	ble_callee_8b40	AttcExchangeMtuReq	ble.att	HIGH	# AttsTimerStop(0xB) + fills PDU type=3, opcode=2 + ble_att_handler(conn, 0, 1) — ATT MTU Exchange Request
+0x00498ef4	ble_callee_8ef4	appSlaveResourceInit	app.slave	MEDIUM	# calls ATT CCC init + slave ring init + ATT CCC init + ATT discovery init — slave resource init chain
+0x0049d3e8	ble_callee_d3e8	dmAdvInit	ble.dm_adv	MEDIUM	# WsfCsEnter + stores default CB + calls dmSlaveAdvParamInitAll + clears state + WsfCsExit — DM advertising init
+0x0049d6ac	ble_callee_d6ac	appSmpDbSetBondMode	ble.smpdb	MEDIUM	# stores param to global + calls SmpDbCountActive — SMP DB bond mode setter
+0x0049d90e	ble_callee_d90e	dmConnSendDataLenEvent	ble.dm	MEDIUM	# wraps dmConnSendEvent(3, param, 0x13) — DM connection data length change event
+0x004a0544	ble_callee_0544	profile_ota_dm_event_handler	profile.ota	MEDIUM	# handles DM events: 0x12=CCC write, 0x14=OTA, 0x27=open, 0x28=close, 0xA0=reset, 0xA1=start, 0xA7=sec — OTA profile DM callback
+0x004a06a8	ble_callee_06a8	profile_ota_dm_callback_wrapper	profile.ota	MEDIUM	# if param2!=0: calls profile_ota_dm_event_handler — OTA profile DM callback wrapper with null check
+0x004a0b86	ble_callee_0b86	profile_eus_dm_event_handler	profile.eus	MEDIUM	# handles DM events: 0x12=CCC, 0x14=flow_control, 0x27=open, 0x28=close, 0xA9=sec — EUS profile DM callback
+0x004a1038	ble_callee_1038	anccReset	ble.ancc	MEDIUM	# clears global state + calls ancc_reset_state — ANCC full reset
+0x004a105a	ble_callee_105a	anccDequeueNotification	ble.ancc	MEDIUM	# scans 64 entries for flag==1, clears it, returns index via 0x3F-offset — ANCC notification dequeue
+0x004a1c7c	ble_callee_1c7c	anccInit	ble.ancc	MEDIUM	# stores connId, memset(+0x1C, 0x300, 0) + memset(data, 0x2FC, 0), saves pointers — ANCC client initialization
+0x004a1cc0	ble_callee_1cc0	anccProcMsg	ble.ancc	MEDIUM	# handles msg types: 5/9/10=data_source, 13/14=data_source, 0x27=open+discover, 0x28=close+reset, 0xA2=dequeue — ANCC message processor
+0x004a2170	ble_callee_2170	WsfQueueEnq	ble.wsf	HIGH	# WsfCsEnterHandler + enqueue at tail of linked list + WsfCsExitHandler — WSF queue enqueue
+0x004a2242	ble_callee_2242	WsfQueueCount	ble.wsf	HIGH	# WsfCsEnterHandler + counts linked list elements + WsfCsExitHandler — WSF queue count
+0x004b8840	ble_callee_8840	am_hal_ble_set_adv_flags	drv.em9305	MEDIUM	# state machine: phase1=set 0x40A0, phase2=set 0x4000, default=set 0x4080 — BLE advertising flag configuration
+0x004b8ab6	module_callee_00514BAE	am_hal_ble_phy_deregister	ble.phy	MEDIUM	# if PHY config exists: calls ble_phy_register_config(handle, 1) then clears — PHY deregistration
+0x004b8b9e	ble_callee_8b9e	am_hal_bleif_dma_start	drv.em9305	MEDIUM	# writes 0x800000 to BLEIF DMA, polls status with delay_us, calls delay_us_status_check — BLEIF DMA transfer start
+0x004b8c90	ble_callee_8c90	am_hal_bleif_transfer_queue	drv.em9305	MEDIUM	# WsfCsEnter + increments transfer count + if was 0: starts DMA + configures BLEIF — queued BLEIF transfer
+0x004b9474	ble_callee_9474	am_hal_ble_set_phy_rate	drv.em9305	MEDIUM	# maps PHY rate byte (6 ranges: <12, 12-13, 14-15, 16-17, 18-19, 20-21, 22-23, 24+) to register bits — BLE PHY rate config
+0x004b9600	ble_callee_9600	am_hal_ble_set_coding_scheme	drv.em9305	MEDIUM	# maps coding byte (ranges: 6-9=8, 10-13=4, 14-15/18-19=2, 20-23=1) to +0x8CC — BLE coding scheme (S2/S8)
+0x004bc580	ble_neighbor_004bc5aa_wrapper	popcount32	ble.util	HIGH	# Brian Kernighan-style popcount: subtract-mask-add-multiply shift pattern — population count (bit count)
+0x004bc5aa	ble_neighbor_004bc5aa	smpScCheckAdvSetActive	ble.smp	MEDIUM	# iterates 2 slots checking if any adv set is active (!=0) — SMP SC advertising set check
+0x004bc6ae	ble_callee_c6ae	am_hal_ble_poll_busy_wait	drv.em9305	MEDIUM	# loops: delay_us(10) + decrement counter while *char_ptr != 0 — busy-wait polling with timeout
+0x004bcba0	ble_callee_cba0	am_hal_ble_sleep_abort_1	drv.em9305	MEDIUM	# if busy: poll_busy_wait + WsfCsEnter + clear flag + clear state + WsfCsExit — BLE sleep abort variant 1
+0x004bcd24	ble_callee_cd24	am_hal_ble_sleep_abort_2	drv.em9305	MEDIUM	# if busy: poll_busy_wait + WsfCsEnter + set wake flag + clear + WsfCsExit — BLE sleep abort variant 2
+0x004bce88	ble_callee_ce88	am_hal_ble_sleep_abort_3	drv.em9305	MEDIUM	# if busy: poll_busy_wait + WsfCsEnter + clear flag + clear state + WsfCsExit — BLE sleep abort variant 3
+0x004bd42c	ble_callee_d42c	lctrAdvExtSetChannel	ble.ll	MEDIUM	# checks LL context, calculates channel from frequency map, calls smpScCountAndVerify — extended adv channel select
+0x004bd4e4	ble_callee_d4e4	lctrAdvExtStartDefault	ble.ll	MEDIUM	# wraps lctrAdvExtStart(0, 0) — default extended advertising start
+0x004bd64e	ble_callee_d64e	ring_discovery_init	ble.ring	MEDIUM	# debug_ringbuf_write + AppDiscFindService(connId, 0x10, uuid, 3) — R1 Ring service discovery
+0x004bfbca	ble_callee_fbca	ring_dm_event_dispatch	ble.ring	MEDIUM	# if param2!=0: ring_master_dm_dispatch(param2); ring_dm_event_handler(param1, param2) — Ring DM event dispatch
+0x004bfbf8	ble_callee_fbf8	ring_connection_init	ble.ring	MEDIUM	# stores connection handle, initializes pointers, calls NusHandlerInit — Ring BLE connection setup
+0x004cc710	module_callee_0048B3E2	HciLeSetAddrResolutionEnableWrapper	ble.hci	MEDIUM	# stores param to (global+9), calls HciLeSetAddrResolutionEnable(param) — HCI address resolution enable wrapper
+0x004cd45a	ble_callee_d45a	am_hal_clkgen_freq_calc	hal.clkgen	MEDIUM	# float division: VectorUnsignedToFloat / (param1 / (1<<param3)), stores result — clock frequency calculation
+0x004cd484	ble_callee_d484	am_hal_clkgen_div_calc	hal.clkgen	MEDIUM	# *param3 = param2/param1 — simple unsigned division utility for clock divider
+0x004cd48e	ble_callee_d48e	am_hal_clkgen_enable_set	hal.clkgen	MEDIUM	# sets/clears bit0 in register based on param!=0 — clock enable control
+0x004cd4a8	ble_callee_d4a8	am_hal_clkgen_source_select	hal.clkgen	MEDIUM	# writes (param | 1) to register — clock source selection with enable
+0x004cd4b4	ble_callee_d4b4	am_hal_clkgen_source_disable	hal.clkgen	MEDIUM	# clears bit0 in register — clock source disable
+0x004cd4c2	ble_callee_d4c2	am_hal_clkgen_osc_enable	hal.clkgen	MEDIUM	# if param: checks bit5, sets 0x20, calls delay_us_status_check(100) — oscillator enable with timeout
+0x004cd93c	ble_callee_d93c	am_hal_mram_nop	hal.mram	MEDIUM	# empty function — MRAM no-op stub
+0x004cd93e	ble_callee_d93e	am_hal_mram_addr_adjust	hal.mram	MEDIUM	# if param > 0x1FF: param += 0x280 — MRAM address gap adjustment
+0x004cdaac	ble_callee_daac	am_hal_mram_op_dispatch	hal.mram	MEDIUM	# accepts mode 1/3/5, dispatches to am_hal_mram_read_write — MRAM operation dispatcher
+0x004cdbae	ble_callee_dbae	am_hal_mram_busy_wait	hal.mram	MEDIUM	# WsfCsEnter + decrement counter + if 0: clear bit24 + wait for bit24 via delay_us_status_change — MRAM busy wait
+0x004cfc9c	ble_callee_fc9c	am_hal_iom_set_callbacks	hal.iom	MEDIUM	# stores 2 callbacks at global+0/+12 based on param1==4 — IOM callback registration
+0x004d0c6c	ble_callee_0c6c	attsFindInRange	ble.att	HIGH	# iterates ATT DB groups, finds attributes in handle range, calls ATT_handler_3 per match — ATT find in handle range
+0x004d0d1c	ble_callee_0d1c	attsFindNextServiceChanged	ble.att	HIGH	# walks ATT DB groups, finds next service-changed attribute via ATT_handler_3 probes — ATT service changed find
+0x004d1c88	ble_callee_1c88	L2cCocSetCallback_8	ble.l2c	MEDIUM	# sets callback at L2C control block + 8 — L2CAP COC callback setter (offset 8)
+0x004d1c8e	ble_callee_1c8e	L2cCocSetCallback_C	ble.l2c	MEDIUM	# sets callback at L2C control block + 0xC — L2CAP COC callback setter (offset 0xC)
+0x004d1c94	ble_callee_1c94	L2cCocSetCallbacks_10_14	ble.l2c	MEDIUM	# sets 2 callbacks at L2C control block + 0x10/0x14 — L2CAP COC callback setters (offsets 0x10/0x14)
+0x004d224a	ble_callee_224a	attcDiscInit	ble.att	MEDIUM	# clears discovery state: zero 3 entries (stride=0x1C), zero 6 handle entries, sets defaults (0x1B, 0xE, 0xD), calls HciCoreInitWrapper — ATT client discovery init
+0x004d231e	ble_callee_231e	L2cSetFeatureFlags	ble.l2c	MEDIUM	# sets or clears feature flag bits in global pair based on param3 — L2CAP feature flag control
+0x004da09c	ble_callee_a09c	am_hal_ble_smp_irq_init	drv.em9305	MEDIUM	# NVIC SetPriority for IRQ 0x5D (BLE) and 0x8A with configured priority — BLE SMP interrupt init
+0x004da232	ble_callee_a232	am_hal_ble_deinit	drv.em9305	MEDIUM	# validates module<9, disables IOM, powers down, deinitializes handle — BLE HAL deinit sequence
+0x004db1ee	ble_callee_b1ee	am_hal_ble_irq_0x88_config	drv.em9305	MEDIUM	# configures NVIC IRQ 0x88 as enabled (param!=0) or disabled (param==0) — BLE secondary IRQ configuration
+0x004dec0a	ble_callee_ec0a	attsCccSetValue	ble.att	MEDIUM	# gets CCC table via attsCccGetTbl, writes param3 at index*2 — CCC value setter by index
+0x004dec5c	ble_callee_ec5c	attsCccGetNumIdx	ble.att	MEDIUM	# returns byte at (global+0x14) — CCC number of indices getter
+0x004def04	ble_callee_ef04	dmConnSetPeerAddrType	ble.dm	MEDIUM	# stores param to global — DM connection peer address type setter
+0x004dfcc4	ble_callee_fcc4	ring_buffer_write	util.ringbuf	MEDIUM	# calculates total=item_size*count, WsfCsEnter, circular write with modular index, WsfCsExit — ring buffer write
+0x004dfd22	ble_callee_fd22	ring_buffer_read	util.ringbuf	MEDIUM	# calculates total=item_size*count, WsfCsEnter, circular read with modular index, WsfCsExit — ring buffer read
+0x004e353c	APP_neighbor_0049db7c_wrapper	appSlaveEvtHubDispatch	app	MEDIUM	# calls APP_neighbor_0049db7c(*param2), clears flag, clears +0x9C — EvenHub page dispatch on slave
+0x004e3556	ble_callee_3556	appSlaveConnOpenInit	app.slave	MEDIUM	# clears conn fields 5-8, calls APP_callee_316c with config byte — slave connection open initialization
+0x004e357c	ble_callee_357c	appSlaveSecRecordReset	app.slave	MEDIUM	# if *param2 != 0: calls SmpDbRecordResetIfIdle — SMP DB record reset on disconnect
+0x004e358c	ble_callee_358c	appSlaveSecReqCheck	app.slave	MEDIUM	# calls DM_fn7_wrapper: if 0 and config==0 and field8==0: enable; else: disable — slave security request check
+0x004e35d8	ble_callee_35d8	appSlaveDisconnGetAddrType_master	app.slave	MEDIUM	# same as 0x00496de0: gets addr type on disconnect — master-leg disconnect addr type save
+0x004e35ec	ble_callee_35ec	appSlaveSecMarkBonded_master	app.slave	MEDIUM	# same as 0x00496df4: marks SMP record as bonded — master-leg bonded flag set
+0x004e360a	ble_callee_360a	appSlaveSecClearBonded_master	app.slave	MEDIUM	# same as 0x00496e12: clears bonded flag — master-leg bonded flag clear
+0x004e3624	ble_callee_3624	appSlaveSecStoreKey_master	app.slave	MEDIUM	# same as 0x00496c98: stores key via appSmpDbStoreKey — master-leg key storage
+0x004e3646	ble_callee_3646	appSlaveSecComplete_master	app.slave	MEDIUM	# marks complete, calls appSmpDbRecordComplete + APP_evenai_page_handler, clears field — master-leg pairing complete
+0x004e3678	ble_callee_3678	appSlaveSecAddrResolved_master	app.slave	MEDIUM	# clears field8, calls dmConnSendDataLenEvent — master-leg address resolution complete
+0x004e3890	ble_callee_3890	appSlaveAdvConfigAddr	app.slave	MEDIUM	# configures advertising address: if mode 0: copies 4 shorts to buffer; if mode 1: uses type 0x11 — adv address config
+0x004e38e2	ble_callee_38e2	appSlaveConnInit	app.slave	MEDIUM	# clears state flag 0x9C/0x9D, stores default adv data pointer — slave connection state init
+0x004e3ea4	ble_callee_3ea4	appSlaveSecAddrExchange	app.slave	MEDIUM	# finds record, exchanges address via UART or BLE depending on mode — slave address exchange during pairing
+0x004e3fc4	module_callee_004DEEB6	appSlaveStartSync	app.slave	MEDIUM	# gets slave config, configures UART baudrate, starts slave_sync_thread — slave sync thread launcher
+0x004e42d4	ble_callee_42d4	appSlaveHandleMtuExchange	app.slave	MEDIUM	# if event.type==0x12: gets slave config, calls APP_callee_3fa8 — MTU exchange handler
+0x004e432e	ble_callee_432e	AttsSetCccValueCbackInit	ble.att	MEDIUM	# wraps AttsSetCccValueCback(global_table) — CCC value callback initialization
+0x004e43d6	ble_callee_43d6	AppDiscGetConnConfig	ble.disc	MEDIUM	# returns global DAT_004e4444 — discovery connection configuration getter
+0x004e43da	ble_callee_43da	DmSecSendCancelOrPairing	ble.dm	MEDIUM	# WsfMsgAlloc(0x16): if param2==0: SmpScGetCancelMsgWithReattempt; else type=0x16; DmSecMsgSendToSmp — sec cancel or pairing
+0x004e4412	ble_callee_4412	smpCalcConfirmValue	ble.smp	MEDIUM	# reads 4 bytes big-endian, computes modular remainder — SMP confirm value calculation
+0x004e4454	ble_callee_4454	AppDiscInit	ble.disc	HIGH	# stores connId + discovery UUIDs/tables + pointer chain to service handles — ATT client discovery initialization
+0x004e531a	ble_callee_531a	SmpScRandFill	ble.smp	HIGH	# copies random bytes from circular buffer (stride 0x3A offset), calls HciLeRandCmd per 8-byte block — SMP SC random data fill
+0x004e537a	ble_neighbor_004e537a	SmpScEncryptStart	ble.smp	HIGH	# WStrReverseCpy 2x16 bytes + WsfSetEvent + HciLeEncryptCmd — SMP SC encrypt command initiation
+0x004e53c8	ble_callee_53c8	smpScGetNextTransId	ble.smp	MEDIUM	# increments transaction counter, skips 0xFF — SMP SC transaction ID allocator
+0x004e53f2	ble_callee_53f2	SmpScEncryptReq	ble.smp	HIGH	# WsfMsgAlloc(0x38) + smpScGetNextTransId + WsfSetEvent + HciLeEncryptCmd — SMP SC encrypt request
+0x004e54d2	ble_callee_54d2	SmpScReadDefDataLenReq	ble.smp	HIGH	# WsfMsgAlloc(0x9C) + sets type=2, opcode=param3 + WsfSetEvent + HciLeReadDefDataLen — SMP SC read default data len
+0x004e5d7c	ble_callee_5d7c	dmSecInit	ble.dm	MEDIUM	# stores callback pointer at global+0x1C, zeros 3 security flags — DM security module init
+0x004e7104	ble_callee_7104	smpScSetActionHandlers	ble.smp	MEDIUM	# stores 3 handler pointers at global+0xE8/0xF0/0xF4 — SMP SC action handler registration
+0x004ea4e0	ble_callee_a4e0	am_hal_reset_control	hal.reset	HIGH	# param 0: writes 0xD4 to AIRCR register (system reset); param 1: writes 0x1B (POI reset); both infinite loop — system reset
+0x005149e2	ble_callee_49e2	am_hal_ipc_fifo_write_begin	hal.ipc	MEDIUM	# validates magic, checks read/write pointers, allocates FIFO slot — IPC FIFO write begin (EM9305 HCI transport)
+0x00514a96	ble_neighbor_00514a96	am_hal_ipc_fifo_write_abort	hal.ipc	MEDIUM	# validates magic, restores write pointer, decrements counter — IPC FIFO write abort
+0x00514ac8	ble_neighbor_00514ac8	am_hal_ipc_fifo_write_commit	hal.ipc	MEDIUM	# validates magic, commits write with DMB barrier, signals doorbell register — IPC FIFO write commit
+0x00514b2e	ble_neighbor_00514b2e	am_hal_ipc_fifo_status	hal.ipc	MEDIUM	# validates magic, returns FIFO status: capacity/head/tail/doorbell flags — IPC FIFO status query
+0x00514cea	ble_callee_4cea	am_hal_ipc_fifo_write_commit_ext	hal.ipc	MEDIUM	# extended commit: writes 4 words (command + pointer + flags), DMB, signals doorbell — IPC FIFO extended commit
+0x00514e5c	module_callee_005156D0_4e5c	lctrPhyGetChannelIdx	ble.phy	MEDIUM	# returns byte from lookup table indexed by param — PHY channel index getter
+0x00514e66	module_callee_005156D0_4e66	lctrPhyGetSymbolRate	ble.phy	MEDIUM	# returns byte from lookup table indexed by param — PHY symbol rate getter
+0x00514e70	module_callee_005156D0_4e70	lctrPhyGetPayloadBits	ble.phy	MEDIUM	# returns byte from table (validated <5) or 6 default — PHY payload bits getter
+0x00514e86	module_callee_005156D0_4e86	lctrPhyGetPreambleLen	ble.phy	MEDIUM	# returns byte from lookup table indexed by param — PHY preamble length getter
+0x00514efc	module_callee_0053A90C_4efc	lctrPhyCalcSubeventParams	ble.phy	MEDIUM	# float math: calculates subevent step/count from interval ratios, validates ranges — PHY subevent parameter calc
+0x005153f4	ble_callee_53f4	am_hal_ble_initialize	drv.em9305	MEDIUM	# validates module==0, sets magic | 0x1000000, stores base, calls am_hal_ble_power_down — BLE HAL module init
+0x00515458	ble_callee_5458	am_hal_ble_power_control	drv.em9305	MEDIUM	# validates handle magic, checks sleep state, calls am_hal_ble_power_up or power_down — BLE power state control
+0x005154a8	ble_callee_54a8	am_hal_ble_enable	drv.em9305	MEDIUM	# validates handle, checks 4 register bits, sets 0x20000000 enable bit — BLE module enable
+0x00515524	ble_neighbor_00515524	am_hal_ble_disable	drv.em9305	MEDIUM	# validates handle, clears 0x20000000 bit — BLE module disable
+0x0051566a	ble_callee_566a	am_hal_ble_blocking_xfer	drv.em9305	MEDIUM	# validates handle, checks BLEIF bit29, calculates timeout from register, calls delay_us_status_check — blocking BLE transfer
+0x00515a40	ble_callee_5a40	masterLegStartConnection	master.leg	MEDIUM	# checks conn ready, sets data length params, sends DM connection open event — master leg connection start
+0x00519ee8	ble_callee_9ee8	am_hal_ble_patch_reset	drv.em9305	MEDIUM	# calls vtable dispatch, writes 0xC3 to patch register, clears state — EM9305 firmware patch reset
+0x00527f22	ble_callee_7f22	am_hal_iom_deinitialize	hal.iom	MEDIUM	# validates handle magic, disables if enabled, clears magic — IOM peripheral deinit
+0x0052a09a	ble_callee_a09a	SmpDbGetRecordWrapper	ble.smpdb	MEDIUM	# wraps SmpDbGetRecord(param) — SMP DB record getter wrapper
+0x0052a0a4	ble_neighbor_0052a0a4	attcDiscSvcProcRspValidate	ble.att	MEDIUM	# validates service discovery ranges: checks start<=end, within bounds, sequential — ATT service discovery validation
+0x0052a148	ble_neighbor_0052a148	attcDiscCharProcRspUpdate	ble.att	MEDIUM	# updates characteristic discovery state: advances handle range or marks complete — ATT char discovery state update
+0x0052a172	ble_callee_a172	AttcWriteCmd	ble.att	HIGH	# AttsTimerStop(param5+0xF) + builds ATT Write Command PDU (opcode=6) + ble_att_handler — ATT Write Command
+0x0052a3bc	ble_callee_a3bc	smpScAllocBufs	ble.smp	MEDIUM	# allocates 5 WSF buffers (0x60, 0x40, 0x20, 0x40, 0x20) at SMP SC context+0x48 — SMP SC buffer allocation
+0x0052a570	ble_callee_a570	smpScCcbInit	ble.smp	MEDIUM	# initializes 3 SMP SC connection blocks (stride=0x4C), sets handler tables, marks ready — SMP SC CCB init
+0x0052b0e2	ble_callee_b0e2	DmConnMasterLegSendEvent	ble.dm	MEDIUM	# WsfMsgAlloc(0xE) + fills DM event type=0x10 with phy/conn params + WsfMsgSend — DM master leg event send
+0x0052b152	ble_callee_b152	DmConnMasterLegSendReset	ble.dm	MEDIUM	# WsfMsgAlloc(4) + type=0x11 + WsfMsgSend — DM master leg reset event
+0x0052b16e	ble_callee_b16e	dmConnMasterLegSetDataLen	ble.dm	MEDIUM	# WsfCsEnter + sets 2 shorts at DM CB[connIdx*2+0x10/0x14] + WsfCsExit — master leg data length set
+0x0052b19c	ble_callee_b19c	dmConnMasterLegSetDataLenAll	ble.dm	MEDIUM	# iterates phy bits, calls dmConnMasterLegSetDataLen per active connection — set data len for all master connections
+0x0053bb9a	ble_callee_bb9a	am_hal_uart_fifo_write	hal.uart	MEDIUM	# writes bytes to UART data register while TX FIFO not full (checking bit5 of status) — UART FIFO write
+0x0053bc1c	ble_callee_bc1c	am_hal_uart_blocking_write	hal.uart	MEDIUM	# WsfCsEnter + loops ring_buffer_read(1) then uart_fifo_write(1) until done + WsfCsExit — blocking UART write
+0x0054bade	module_callee_005156D0_bade	lctrPhySelectTxRxPhy	ble.phy	MEDIUM	# maps (param1, param2) to PHY index (8-13) via 2D table, calls ble_phy_register_config(idx, 0x11) — PHY TX/RX selection
+0x0056e94a	ble_propagated_0056e94a	am_hal_ble_trim_apply	drv.em9305	MEDIUM	# saves/restores BLE power state, selects trim source per-field, writes 6 register banks — BLE crystal trim apply
+0x0056ecf4	ble_neighbor_0056ecf4	lctrSlvPhyCheckScheduleConflict	ble.ll	MEDIUM	# checks 16 adv channels for scheduling conflicts based on type/frequency ranges — LL slave PHY schedule conflict check
+0x0056f3d4	ble_neighbor_0056f3d4	lctrSlvConnCheckState	ble.ll	MEDIUM	# checks connection state machine: 0x21/0x22/0x23 states with sub-state evaluation — LL slave connection state check
+0x0056f710	ble_callee_f710	lctrSlvPhyUpdateCheckConflict	ble.ll	MEDIUM	# checks PHY update conflicts: validates params + scans 16 channels for conflicts — LL slave PHY update conflict check
+0x0056f834	ble_callee_f834	lctrSlvConnStateTransition	ble.ll	MEDIUM	# on state=1/param=2: clears register flags — LL slave connection state transition handler
+0x0057097c	ble_callee_097c	lctrPhyRssiToLevel	ble.ll	MEDIUM	# maps RSSI float to 5 levels (0-4) via threshold ranges (-20, 0, threshold1, threshold2) — RSSI to signal level
+0x00572bfc	ble_callee_2bfc	lctrSlvConnUpdateCheckConflict	ble.ll	MEDIUM	# identical pattern to 0x0056f710: checks connection update conflicts via 16-channel scan — LL slave conn update conflict
+0x00572faa	ble_callee_2faa	lctrPhyPduSwap	ble.ll	MEDIUM	# iterates PDU range, calls ble_att_pdu_build per step, dispatches via handler table — LL PHY PDU reorder/swap
+0x0057302c	ble_callee_302c	lctrPhyPduMove	ble.ll	MEDIUM	# moves PDUs: if same group swaps; if different groups: adjusts alignment then swaps — LL PHY PDU move operation
+0x005746d8	ble_callee_46d8	attsWriteHandler	ble.att	HIGH	# resolves ATT handle via AttsGetAttr, checks permissions (write/auth/cback), copies data or dispatches callback — ATT write request handler
+0x005d6c40	module_callee_005D6BDC	ft_list_remove_if_up	lib.freetype	MEDIUM	# calls ft_list_up(param2), returns 0 if moved (was already up) — FreeType linked list conditional remove
+0x004e3214	ble_callee_3214	dmConnMasterLegWhiteListInit	ble.dm	MEDIUM	# zeros 10 entries (stride=0xF) at global base, sets +6=0xFF each, clears count +0x96 and +0x9C — DM white list init
+0x004e323c	ble_callee_323c	dmConnMasterLegWhiteListAdd	ble.dm	MEDIUM	# finds or adds entry in 10-slot white list by addr type + addr match (stride=0xF) — DM white list add
+0x004e32f0	ble_callee_32f0	dmConnMasterLegWhiteListFind	ble.dm	MEDIUM	# searches 10-slot white list by addr type + addr match, returns index — DM white list find
+0x004e3342	ble_callee_3342	dmConnMasterLegWhiteListReset	ble.dm	MEDIUM	# if not slave (param+3 == 0): calls dmConnMasterLegWhiteListInit — conditional white list reset
+0x004e3528	ble_callee_3528	dmConnMasterLegWhiteListAddWrapper	ble.dm	MEDIUM	# thin wrapper calling dmConnMasterLegWhiteListAdd — white list add entry point
+0x004e3530	ble_callee_3530	appSlaveEvtHubPageHandler	app	MEDIUM	# calls APP_evenhub_page_handler(*param1) — EvenHub page handler on slave event
+0x004e2428	ble_callee_2428	attcDiscConnInit	ble.att	MEDIUM	# zeros 3 discovery connection blocks (stride=0x10), clears state fields — ATT client discovery connection init

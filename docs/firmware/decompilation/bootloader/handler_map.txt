@@ -1,0 +1,130 @@
+# S200 Bootloader Handler Map
+# Firmware: ota_s200_bootloader.bin (Ambiq Apollo510b, ARM Cortex-M55)
+# Base: 0x00410000  Size: 144.3K  Functions: 796
+# Note: No BLE stack or protocol handlers — bootloader only handles DFU and HW IRQs.
+#
+# ============================================================================
+# VECTOR TABLE — Cortex-M55 Exception Handlers
+# ============================================================================
+
+# Standard System Exceptions:
+0x00410000  (vector_table)    Initial SP (stack pointer)                    sys
+0x00410004  (vector_table)    Reset Handler → main entry                   sys
+#   PendSV:   xPortPendSVHandler (FUN_00418200) — FreeRTOS context switch
+#   SVC:      vPortSVCHandler (FUN_0041a0ec) — FreeRTOS first task start
+#   SysTick:  xPortSysTickHandler (FUN_004183e0) → xTaskIncrementTick
+
+# ============================================================================
+# PERIPHERAL IRQ HANDLERS
+# ============================================================================
+
+# UART ISR
+#   Handler:    am_hal_uart_interrupt_service (FUN_0041cac0)
+#   Alt entry:  FUN_00422fda
+#   Trigger:    UART RX/TX complete, FIFO threshold
+#   Action:     Moves data between FIFO and software buffers
+#   Used by:    Debug UART console output (redirect module)
+
+# GPIO ISR
+#   Handler:    am_hal_gpio_interrupt_service (FUN_0041cde8)
+#   Trigger:    External GPIO pin change events
+#   Action:     Dispatches to registered pin callbacks
+#   Used by:    Not heavily used in bootloader (no BLE, no touch)
+
+# MSPI ISR
+#   Handler:    am_hal_mspi_interrupt_service (FUN_0041f530)
+#   Trigger:    MSPI (Multi-SPI) DMA transfer complete
+#   Action:     Signals flash read/write/erase completion
+#   Used by:    NOR flash (MX25U25643G) operations during DFU
+
+# IOM ISR
+#   Handler:    am_hal_iom_interrupt_service_impl (FUN_00423f8a)
+#   Trigger:    I2C/SPI master transfer complete
+#   Action:     Posts completion to I2C semaphore
+#   Used by:    HAL_I2CInit I2C4 bus (HW version ADC read)
+
+# WDT ISR
+#   Handler:    am_hal_wdt_interrupt_service (FUN_0042e7f0)
+#   Trigger:    Watchdog timer expiry
+#   Action:     System reset if not fed within timeout
+#   Used by:    DFU safety net — prevents infinite flash operations
+
+# ============================================================================
+# FREERTOS HOOKS (callback-style handlers)
+# ============================================================================
+
+# Stack Overflow Hook
+#   Handler:    vApplicationStackOverflowHook (FUN_004181b0)
+#   Trigger:    Task stack overflow detected by FreeRTOS
+#   Action:     Logs "task %s stack overflow", halts
+#   String ref: "task %s stack overflow"
+
+# Malloc Failed Hook
+#   Handler:    vApplicationMallocFailedHook (FUN_0041a6c8)
+#   Trigger:    pvPortMalloc returns NULL
+#   Action:     Logs "MallocFaile", halts
+#   String ref: "MallocFaile"
+
+# Idle Hook
+#   Handler:    vApplicationIdleHook (FUN_00419e3a)
+#   Trigger:    IDLE task runs when no ready tasks
+#   Action:     Low-power sleep (WFI)
+
+# ============================================================================
+# DFU MESSAGE HANDLER (application-level dispatch)
+# ============================================================================
+
+# _thread_msg_handler (FUN_0042dda4)
+#   Trigger:    osThreadFlagsSet bit 22 (0x400000) from thread_manager_task
+#   Source msg: dfu_task_msg_send (FUN_0042dbee) via osMessageQueuePut
+#   Dispatch:
+#     msg type 0 → "DO NOT need updata firmware, GO TO APP"
+#                   → dfu_pre_jump_deinit → boot_jump_to_app(0x438000)
+#     msg type 1 → "need updata firmware"
+#                   → Open "ota/s200_firmware_ota.bin"
+#                   → Parse EVENOTA 6-entry container
+#                   → Per-entry: CRC verify → erase → program → verify
+#                   → On success: boot_jump_to_app
+#                   → On failure: bootloader_error_reset (system reset)
+
+# dfu_error_halt (FUN_0042e126)
+#   Trigger:    osThreadFlagsSet bit 23 (0x800000) — error signal
+#   Action:     Signals cleanup via event flags, enters infinite osDelay
+#   Recovery:   WDT will eventually fire → system reset
+
+# ============================================================================
+# TIMER CALLBACKS
+# ============================================================================
+
+# DFU/WDT watchdog timer callback
+#   Address:    0x0042e641
+#   Created by: FUN_0042e488 via osTimerNew
+#   Type:       One-shot
+#   Purpose:    Safety timeout during DFU flash operations
+#   Action:     Triggers DFU abort if flash operation hangs
+
+# ============================================================================
+# NVIC CONFIGURATION (main_init_interrupts @ FUN_00429d4c)
+# ============================================================================
+#
+# IRQ setup during Phase 1 boot:
+#   hal_interrupt_config (FUN_004301cc): sets priority + enables per IRQ
+#   NVIC_EnableIRQ (FUN_0043018c): CMSIS enable wrapper
+#   NVIC_SetPriority (FUN_004301a8): CMSIS priority wrapper
+#
+# Enabled IRQs: UART, GPIO, MSPI, IOM, WDT, STIMER
+# All peripheral ISRs use Ambiq HAL am_hal_*_interrupt_service pattern
+
+# ============================================================================
+# KEY DIFFERENCE FROM MAIN FIRMWARE
+# ============================================================================
+#
+# The bootloader has ZERO protocol-level handlers:
+#   - No BLE service handlers (0x01..0xFF)
+#   - No protobuf encode/decode
+#   - No EUS/EFS/ESS characteristic callbacks
+#   - No NUS gesture/audio handlers
+#   - No inter-eye relay
+#
+# Only dispatch point: DFU message handler (_thread_msg_handler)
+# Only decision: is_need_updata_image → flash or jump

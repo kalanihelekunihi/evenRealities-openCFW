@@ -1,0 +1,2461 @@
+# S200 Bootloader (ota_s200_bootloader.bin) -- Global Data Map
+# Processor: ARM Cortex-M55 (Ambiq Apollo510b), Image base: 0x00410000
+# Board: B210 (S200), FW: bootloader, Source: Ghidra decompilation
+# Compiler: IAR EWARM, RTOS: FreeRTOS (CMSIS-RTOS2), FS: LittleFS, Alloc: TLSF
+#
+# Format: address	inferred_name	type	refs	description
+#
+# Key memory regions:
+#   0x00410000-0x00434110  Code + embedded data (796 functions, 144.3K)
+#   0x00410400-0x00414E7C  LittleFS core (lfs.c)
+#   0x004150B0-0x00415558  LittleFS API + port layer
+#   0x0041560C-0x00415FFA  libc / printf
+#   0x00416028-0x0041697C  CMSIS-RTOS2 wrappers
+#   0x004169BA-0x004175E2  TLSF memory allocator
+#   0x004176A6-0x00417B54  EasyLogger
+#   0x00417C54-0x0041A69A  FreeRTOS kernel + port
+#   0x0041A6C8-0x0041AC8A  FreeRTOS heap
+#   0x0041B0CC-0x0041B82C  HAL misc (MCU ctrl, stimer, flash info, clkgen)
+#   0x0041B8B8-0x0041C2B0  HAL power / cache control
+#   0x0041C810-0x0041CB00  HAL UART
+#   0x0041CBDC-0x0041CE2A  HAL GPIO
+#   0x0041D198-0x0041D3BC  HAL interrupt / NVIC
+#   0x0041D64E-0x0041DFD8  HAL I2C (IOM driver)
+#   0x0041E072-0x0041E452  HAL ADC
+#   0x0041F134-0x0041F2A0  printf (libc) — was misidentified as MSPI
+#   0x0041F318-0x0041FAB8  HAL MSPI controller
+#   0x0041FD9C-0x00420196  MSPI timing scan
+#   0x00420230-0x00420F18  NOR flash driver (MX25U25643G)
+#   0x00421048-0x004215FE  Flash wrapper + LFS boot init
+#   0x0042171E-0x00422362  LittleFS init / directory management
+#   0x004224DC-0x00422660  UART redirect
+#   0x00422750-0x004227AB  HAL UART inner driver
+#   0x004227AC-0x004227C8  __aeabi FP helpers (was misidentified as UART)
+#   0x00423214-0x004249A6  HAL IOM inner + MSPI device configure
+#   0x00424A3C-0x00426754  HAL MSPI inner (DMA, power, commands)
+#   0x00426B5C-0x00427B5E  Firmware event loop (fw_evt_loop)
+#   0x00427BDC-0x00427D58  TLSF adapter init
+#   0x00427DD0-0x00427FB4  HAL assert / constraint handler
+#   0x0042818C-0x0042BEA0  Bootloader main + startup + OTA state machine
+#   0x0042BF80-0x0042D60C  DFU file I/O (OTA image parse/install)
+#   0x0042D798-0x0042E126  DFU core (CRC, flash program, verify, jump, task)
+#   0x0042E138-0x0042E170  DFU CRC-32
+#   0x0042E1A0-0x0042E3EC  Thread manager (boot orchestration)
+#   0x0042E440-0x0042E7F0  HAL watchdog
+#   0x0042F114-0x0042F5BC  HAL NOR flash abstraction
+#   0x0043018C-0x0043032A  NVIC helpers
+#   0xE000ED08              ARM Cortex-M4 SCB VTOR register
+#
+# Data variable types:
+#   string_ptr  = pointer to string constant (elog tag/file/fmt, assert expr/file)
+#   struct_ptr  = pointer to struct (with offset field accesses)
+#   mmio_base   = base address for MMIO registers (often with 0x1000 stride)
+#   func_ptr    = function pointer / callback
+#   ptr         = generic pointer
+#   byte_ptr    = pointer used for byte-level access
+#   uint32      = 32-bit integer (constant, flag, counter, bitfield)
+#   uint32[]    = array / lookup table base
+#   string      = inline string data
+#   TCB_ptr     = FreeRTOS Task Control Block pointer
+#   List_t[]    = FreeRTOS list array
+#
+# Note: DAT_ addresses in the 0x0041xxxx-0x0043xxxx range are embedded data
+# constants within the code section (ARM literal pools). Most string_ptr entries
+# point to string literals also within this range. The bootloader has no
+# separate .data/.bss section visible in the decompilation — all globals are
+# in code-embedded literal pools.
+
+# =========================================================================
+# LITTLEFS CORE
+# =========================================================================
+0x00410AB0	lfs_data_00410ab0	uint32	2	Data reference in lfs_core
+0x00410ab0	lfs_core_var_00410ab0	state	2	State variable (address-of) in lfs_core
+0x004110CC	lfs_data_004110cc	uint32	1	Data reference in lfs_core
+0x004110cc	lfs_core_var_004110cc	state	1	State variable (address-of) in lfs_core
+0x0041129C	lfs_source_file_0041129c	string_ptr	11	__FILE__ string: lfs.c (lfs_core bd/alloc)
+0x0041129c	lfs_core_var_0041129c	string	11	String constant in lfs_core
+0x004112A0	lfs_assert_expr_004112a0	string_ptr	1	Assert expression string
+0x004112a0	lfs_core_var_004112a0	string	1	String constant in lfs_core
+0x004112A4	lfs_assert_expr_004112a4	string_ptr	4	Assert expression string
+0x004112a4	lfs_core_var_004112a4	string	4	String constant in lfs_core
+0x004112A8	lfs_assert_expr_004112a8	string_ptr	1	Assert expression string
+0x004112a8	lfs_core_var_004112a8	string	1	String constant in lfs_core
+0x004112AC	lfs_assert_expr_004112ac	string_ptr	1	Assert expression string
+0x004112ac	lfs_core_var_004112ac	string	1	String constant in lfs_core
+0x004112B0	lfs_assert_expr_004112b0	string_ptr	1	Assert expression string
+0x004112b0	lfs_core_var_004112b0	string	1	String constant in lfs_core
+0x00411664	lfs_assert_expr_00411664	string_ptr	1	Assert expression string
+0x00411668	lfs_assert_expr_00411668	string_ptr	1	Assert expression string
+0x0041166C	lfs_const	uint32	1	Constant/return value
+0x0041166c	lfs_core_var_0041166c	config	1	Read-only value in lfs_core
+0x00411BE0	lfs_data_00411be0	uint32	1	Data reference in lfs_core
+0x00411be0	lfs_core_var_00411be0	config	1	Read-only value in lfs_core
+0x00411C3C	lfs_printf_fmt_00411c3c	string_ptr	1	Printf/debug format string
+0x00411c3c	lfs_core_var_00411c3c	string	1	String constant in lfs_core
+0x00411C40	lfs_data_00411c40	uint32	3	Data reference in lfs_core
+0x00411c40	lfs_core_var_00411c40	config	3	Read-only value in lfs_core
+0x00411C44	lfs_data_00411c44	uint32	1	Data reference in lfs_core
+0x00411c44	lfs_core_var_00411c44	config	1	Read-only value in lfs_core
+0x00411C48	lfs_data_00411c48	uint32	1	Data reference in lfs_core
+0x00411c48	lfs_core_var_00411c48	string	1	String constant in lfs_core
+0x00411E34	lfs_data_00411e34	uint32	4	Data reference in lfs_core
+0x00411e34	lfs_core_var_00411e34	state	4	State variable (address-of) in lfs_core
+0x00411E38	lfs_data_00411e38	uint32	4	Data reference in lfs_core
+0x00411e38	lfs_core_var_00411e38	config	3	Read-only value in lfs_core
+0x00411E3C	lfs_data_00411e3c	uint32	2	Data reference in lfs_core
+0x00411e3c	lfs_core_var_00411e3c	config	2	Read-only value in lfs_core
+0x00411E40	lfs_data_00411e40	uint32	2	Data reference in lfs_core
+0x00411e40	lfs_core_var_00411e40	config	2	Read-only value in lfs_core
+0x00411E44	lfs_data_00411e44	uint32	3	Data reference in lfs_core
+0x00411e44	lfs_core_var_00411e44	config	2	Read-only value in lfs_core
+0x00411E48	lfs_source_file_00411e48	string_ptr	2	__FILE__ string: lfs.c (lfs_core dir/compact)
+0x00411e48	lfs_core_var_00411e48	string	2	String constant in lfs_core
+0x00411E4C	lfs_assert_expr_00411e4c	string_ptr	1	Assert expression string
+0x00411e4c	lfs_core_var_00411e4c	string	1	String constant in lfs_core
+0x00411E50	lfs_flag_00411e50	uint32	2	Boolean/flag variable
+0x00411e50	lfs_core_var_00411e50	state	2	State variable (address-of) in lfs_core
+0x00411E54	lfs_flag_00411e54	uint32	2	Boolean/flag variable
+0x00411e54	lfs_core_var_00411e54	state	2	State variable (address-of) in lfs_core
+0x00411E58	lfs_data_00411e58	uint32	2	Data reference in lfs_core
+0x00411e58	lfs_core_var_00411e58	config	2	Read-only value in lfs_core
+0x00411E5C	lfs_data_00411e5c	uint32	1	Data reference in lfs_core
+0x00411e5c	lfs_core_var_00411e5c	config	1	Read-only value in lfs_core
+0x00412204	lfs_data_00412204	uint32	2	Data reference in lfs_core
+0x004125A4	lfs_data_004125a4	uint32	2	Data reference in lfs_core
+0x004125a4	lfs_core_var_004125a4	state	2	State variable (address-of) in lfs_core
+0x0041276C	lfs_printf_fmt_0041276c	string_ptr	1	Printf/debug format string
+0x0041276c	lfs_core_var_0041276c	string	1	String constant in lfs_core
+0x00412770	lfs_data_00412770	uint32	1	Data reference in lfs_core
+0x00412774	lfs_data_00412774	uint32	1	Data reference in lfs_core
+0x00412778	lfs_data_00412778	uint32	1	Data reference in lfs_core
+0x0041277C	lfs_data_0041277c	uint32	3	Data reference in lfs_core
+0x0041277c	lfs_core_var_0041277c	string	3	String constant in lfs_core
+0x00412780	lfs_data_00412780	uint32	1	Data reference in lfs_core
+0x00412B74	lfs_ptr_00412b74	ptr	1	Pointer variable in lfs_core
+0x00412b74	lfs_core_var_00412b74	struct	1	Struct/array in lfs_core
+0x00412B78	lfs_data_00412b78	uint32	1	Data reference in lfs_core
+0x00412b78	lfs_core_var_00412b78	config	1	Read-only value in lfs_core
+0x00412B7C	lfs_byte_ref_00412b7c	byte_ptr	1	Byte pointer reference in lfs_core
+0x00412b7c	lfs_core_var_00412b7c	peripheral	1	MMIO register base in lfs_core
+0x00412F68	lfs_data_00412f68	uint32	3	Data reference in lfs_core
+0x00412f68	lfs_core_var_00412f68	state	3	State variable (address-of) in lfs_core
+0x00412F6C	lfs_data_00412f6c	uint32	2	Data reference in lfs_core
+0x00412f6c	lfs_core_var_00412f6c	struct	2	Struct/array in lfs_core
+0x00412F70	lfs_source_file_00412f70	string_ptr	11	__FILE__ string: lfs.c (lfs_core mount/format)
+0x00412f70	lfs_core_var_00412f70	string	11	String constant in lfs_core
+0x00412F74	lfs_printf_fmt_00412f74	string_ptr	1	Printf/debug format string
+0x00412f74	lfs_core_var_00412f74	string	1	String constant in lfs_core
+0x00412F78	lfs_data_00412f78	uint32	2	Data reference in lfs_core
+0x00412f78	lfs_core_var_00412f78	struct	2	Struct/array in lfs_core
+0x00412F7C	lfs_data_00412f7c	uint32	1	Data reference in lfs_core
+0x00412f7c	lfs_core_var_00412f7c	config	1	Read-only value in lfs_core
+0x00412F80	lfs_data_00412f80	uint32	2	Data reference in lfs_core
+0x00412f80	lfs_core_var_00412f80	config	2	Read-only value in lfs_core
+0x00412F84	lfs_data_00412f84	uint32	2	Data reference in lfs_core
+0x00412f84	lfs_core_var_00412f84	config	2	Read-only value in lfs_core
+0x00412F88	lfs_byte_ref_00412f88	byte_ptr	2	Byte pointer reference in lfs_core
+0x00412f88	lfs_core_var_00412f88	peripheral	2	MMIO register base in lfs_core
+0x00413154	lfs_data_00413154	uint32	2	Data reference in lfs_core
+0x00413158	lfs_assert_expr_00413158	string_ptr	2	Assert expression string
+0x00413204	lfs_printf_fmt_00413204	string_ptr	1	Printf/debug format string
+0x00413214	lfs_data_00413214	uint32	1	Data reference in lfs_core
+0x00413218	lfs_printf_fmt_00413218	string_ptr	1	Printf/debug format string
+0x0041321C	lfs_data_0041321c	uint32	2	Data reference in lfs_core
+0x0041321c	lfs_core_var_0041321c	struct	2	Struct/array in lfs_core
+0x00413220	lfs_printf_fmt_00413220	string_ptr	1	Printf/debug format string
+0x00413224	lfs_printf_fmt_00413224	string_ptr	1	Printf/debug format string
+0x00413228	lfs_assert_expr_00413228	string_ptr	1	Assert expression string
+0x0041322C	lfs_assert_expr_0041322c	string_ptr	1	Assert expression string
+0x0041322c	lfs_core_var_0041322c	string	1	String constant in lfs_core
+0x00413230	lfs_data_00413230	uint32	1	Data reference in lfs_core
+0x004134C0	lfs_data_004134c0	uint32	1	Data reference in lfs_core
+0x004134c0	lfs_core_var_004134c0	string	1	String constant in lfs_core
+0x00413828	lfs_printf_fmt_00413828	string_ptr	1	Printf/debug format string
+0x0041382C	lfs_printf_fmt_0041382c	string_ptr	2	Printf/debug format string
+0x0041382c	lfs_core_var_0041382c	string	2	String constant in lfs_core
+0x00413830	lfs_data_00413830	uint32	2	Data reference in lfs_core
+0x00413978	lfs_assert_expr_00413978	string_ptr	1	Assert expression string
+0x00413AB0	lfs_data_00413ab0	uint32	2	Data reference in lfs_core
+0x00413ab0	lfs_core_var_00413ab0	string	2	String constant in lfs_core
+0x00413AB4	lfs_data_00413ab4	uint32	1	Data reference in lfs_core
+0x00413ab4	lfs_core_var_00413ab4	callback	1	Function pointer in lfs_core
+0x00413AB8	lfs_data_00413ab8	uint32	1	Data reference in lfs_core
+0x00413ab8	lfs_core_var_00413ab8	callback	1	Function pointer in lfs_core
+0x00413ABC	lfs_data_00413abc	uint32	2	Data reference in lfs_core
+0x00413abc	lfs_core_var_00413abc	config	2	Read-only value in lfs_core
+0x00413AC0	lfs_data_00413ac0	uint32	3	Data reference in lfs_core
+0x00413ac0	lfs_core_var_00413ac0	config	3	Read-only value in lfs_core
+0x00413CA4	lfs_data_00413ca4	uint32	1	Data reference in lfs_core
+0x00413ca4	lfs_core_var_00413ca4	config	1	Read-only value in lfs_core
+0x00413CEC	lfs_data_00413cec	uint32	3	Data reference in lfs_core
+0x00413cec	lfs_core_var_00413cec	config	3	Read-only value in lfs_core
+0x00413F04	lfs_source_file_00413f04	string_ptr	5	__FILE__ string: lfs.c (lfs_core file ops)
+0x00413f04	lfs_core_var_00413f04	string	5	String constant in lfs_core
+0x00413F08	lfs_printf_fmt_00413f08	string_ptr	2	Printf/debug format string
+0x00413f08	lfs_core_var_00413f08	string	2	String constant in lfs_core
+0x00413FD8	lfs_data_00413fd8	uint32	5	Data reference in lfs_core
+0x00413fd8	lfs_core_var_00413fd8	config	5	Read-only value in lfs_core
+0x00413FDC	lfs_data_00413fdc	uint32	1	Data reference in lfs_core
+0x00413fdc	lfs_core_var_00413fdc	config	1	Read-only value in lfs_core
+0x00413FE4	lfs_printf_fmt_00413fe4	string_ptr	1	Printf/debug format string
+0x00413fe4	lfs_core_var_00413fe4	string	1	String constant in lfs_core
+0x00413FE8	lfs_ptr_00413fe8	ptr	2	Pointer variable in lfs_core
+0x00413fe8	lfs_core_var_00413fe8	config	2	Read-only value in lfs_core
+0x00413FEC	lfs_data_00413fec	uint32	1	Data reference in lfs_core
+0x00413fec	lfs_core_var_00413fec	config	1	Read-only value in lfs_core
+0x00413FF0	lfs_assert_expr_00413ff0	string_ptr	1	Assert expression string
+0x00413ff0	lfs_core_var_00413ff0	string	1	String constant in lfs_core
+0x00413FF4	lfs_assert_expr_00413ff4	string_ptr	1	Assert expression string
+0x00413ff4	lfs_core_var_00413ff4	string	1	String constant in lfs_core
+0x004144D8	lfs_source_file_004144d8	string_ptr	26	__FILE__ string: lfs.c (lfs_core api/ctz)
+0x004144d8	lfs_core_var_004144d8	string	26	String constant in lfs_core
+0x00414950	lfs_ptr_00414950	ptr	9	Pointer variable in lfs_core
+0x00414B44	lfs_data_00414b44	uint32	2	Data reference in lfs_core
+0x00414b44	lfs_core_var_00414b44	config	2	Read-only value in lfs_core
+0x00414B48	lfs_assert_expr_00414b48	string_ptr	1	Assert expression string
+0x00414b48	lfs_core_var_00414b48	string	1	String constant in lfs_core
+0x00414B4C	lfs_assert_expr_00414b4c	string_ptr	1	Assert expression string
+0x00414b4c	lfs_core_var_00414b4c	string	1	String constant in lfs_core
+0x00414B50	lfs_assert_expr_00414b50	string_ptr	1	Assert expression string
+0x00414b50	lfs_core_var_00414b50	string	1	String constant in lfs_core
+0x00414B54	lfs_assert_expr_00414b54	string_ptr	1	Assert expression string
+0x00414b54	lfs_core_var_00414b54	string	1	String constant in lfs_core
+0x00414B58	lfs_assert_expr_00414b58	string_ptr	1	Assert expression string
+0x00414b58	lfs_core_var_00414b58	string	1	String constant in lfs_core
+0x00414B5C	lfs_assert_expr_00414b5c	string_ptr	1	Assert expression string
+0x00414b5c	lfs_core_var_00414b5c	string	1	String constant in lfs_core
+0x00414B60	lfs_assert_expr_00414b60	string_ptr	1	Assert expression string
+0x00414b60	lfs_core_var_00414b60	string	1	String constant in lfs_core
+0x00414C24	lfs_assert_expr_00414c24	string_ptr	1	Assert expression string
+0x00414c24	lfs_core_var_00414c24	string	1	String constant in lfs_core
+0x00414C28	lfs_assert_expr_00414c28	string_ptr	1	Assert expression string
+0x00414c28	lfs_core_var_00414c28	string	1	String constant in lfs_core
+0x00414C2C	lfs_assert_expr_00414c2c	string_ptr	1	Assert expression string
+0x00414c2c	lfs_core_var_00414c2c	string	1	String constant in lfs_core
+0x00414C30	lfs_assert_expr_00414c30	string_ptr	1	Assert expression string
+0x00414c30	lfs_core_var_00414c30	string	1	String constant in lfs_core
+0x00414CB4	lfs_assert_expr_00414cb4	string_ptr	1	Assert expression string
+0x00414cb4	lfs_core_var_00414cb4	string	1	String constant in lfs_core
+0x00414CB8	lfs_assert_expr_00414cb8	string_ptr	1	Assert expression string
+0x00414cb8	lfs_core_var_00414cb8	string	1	String constant in lfs_core
+0x00414D0C	lfs_assert_expr_00414d0c	string_ptr	1	Assert expression string
+0x00414d0c	lfs_core_var_00414d0c	string	1	String constant in lfs_core
+0x00414D10	lfs_assert_expr_00414d10	string_ptr	1	Assert expression string
+0x00414d10	lfs_core_var_00414d10	string	1	String constant in lfs_core
+0x00414D14	lfs_assert_expr_00414d14	string_ptr	1	Assert expression string
+0x00414d14	lfs_core_var_00414d14	string	1	String constant in lfs_core
+0x00414DAC	lfs_assert_expr_00414dac	string_ptr	1	Assert expression string
+0x00414dac	lfs_core_var_00414dac	string	1	String constant in lfs_core
+0x00414DB0	lfs_assert_expr_00414db0	string_ptr	1	Assert expression string
+0x00414db0	lfs_core_var_00414db0	string	1	String constant in lfs_core
+0x00414DB4	lfs_assert_expr_00414db4	string_ptr	1	Assert expression string
+0x00414db4	lfs_core_var_00414db4	string	1	String constant in lfs_core
+0x00414E64	lfs_assert_expr_00414e64	string_ptr	1	Assert expression string
+0x00414e64	lfs_core_var_00414e64	string	1	String constant in lfs_core
+0x00414E68	lfs_assert_expr_00414e68	string_ptr	1	Assert expression string
+0x00414e68	lfs_core_var_00414e68	string	1	String constant in lfs_core
+0x00414E6C	lfs_assert_expr_00414e6c	string_ptr	1	Assert expression string
+0x00414e6c	lfs_core_var_00414e6c	string	1	String constant in lfs_core
+0x00414E70	lfs_assert_expr_00414e70	string_ptr	1	Assert expression string
+0x00414e70	lfs_core_var_00414e70	string	1	String constant in lfs_core
+0x00414E74	lfs_assert_expr_00414e74	string_ptr	1	Assert expression string
+0x00414e74	lfs_core_var_00414e74	string	1	String constant in lfs_core
+0x00414E78	lfs_assert_expr_00414e78	string_ptr	1	Assert expression string
+0x00414e78	lfs_core_var_00414e78	string	1	String constant in lfs_core
+0x00415014	lfs_ptr_00415014	ptr	6	Pointer variable in lfs_core
+0x004150A4	lfs_assert_expr_004150a4	string_ptr	1	Assert expression string
+0x004150a4	lfs_api_port_var_004150a4	string	1	String constant in lfs_api_port
+0x004150A8	lfs_assert_expr_004150a8	string_ptr	1	Assert expression string
+0x004150a8	lfs_api_port_var_004150a8	string	1	String constant in lfs_api_port
+0x004150AC	lfs_data_004150ac	uint32	1	Data reference in lfs_core
+0x004150ac	lfs_api_port_var_004150ac	config	1	Read-only value in lfs_api_port
+
+# =========================================================================
+# LITTLEFS API
+# =========================================================================
+0x004150FC	lfs_source_file_004150fc	string_ptr	18	__FILE__ string: lfs.c (lfs_api wrappers)
+0x004150fc	lfs_api_port_var_004150fc	string	18	String constant in lfs_api_port
+0x00415100	lfs_data_00415100	uint32	1	Data reference in lfs_api
+0x00415104	lfs_data_00415104	uint32	1	Data reference in lfs_api
+0x00415108	lfs_data_00415108	uint32	2	Data reference in lfs_api
+0x0041510C	lfs_printf_fmt_0041510c	string_ptr	1	Printf/debug format string
+0x0041510c	lfs_api_port_var_0041510c	string	1	String constant in lfs_api_port
+0x00415110	lfs_ptr_00415110	ptr	2	Pointer variable in lfs_api
+0x00415114	lfs_data_00415114	uint32	2	Data reference in lfs_api
+0x00415118	lfs_data_00415118	uint32	1	Data reference in lfs_api
+0x0041511C	lfs_data_0041511c	uint32	1	Data reference in lfs_api
+0x0041511c	lfs_api_port_var_0041511c	config	1	Read-only value in lfs_api_port
+0x00415120	lfs_data_00415120	uint32	1	Data reference in lfs_api
+0x00415124	lfs_printf_fmt_00415124	string_ptr	1	Printf/debug format string
+0x0041517C	lfs_printf_fmt_0041517c	string_ptr	1	Printf/debug format string
+0x0041517c	lfs_api_port_var_0041517c	string	1	String constant in lfs_api_port
+0x004151B0	lfs_printf_fmt_004151b0	string_ptr	1	Printf/debug format string
+0x004151b0	lfs_api_port_var_004151b0	string	1	String constant in lfs_api_port
+0x004151B4	lfs_printf_fmt_004151b4	string_ptr	1	Printf/debug format string
+0x004151b4	lfs_api_port_var_004151b4	string	1	String constant in lfs_api_port
+0x004151B8	lfs_printf_fmt_004151b8	string_ptr	1	Printf/debug format string
+0x004151b8	lfs_api_port_var_004151b8	string	1	String constant in lfs_api_port
+0x004151BC	lfs_printf_fmt_004151bc	string_ptr	1	Printf/debug format string
+0x004151bc	lfs_api_port_var_004151bc	string	1	String constant in lfs_api_port
+0x004151F8	lfs_printf_fmt_004151f8	string_ptr	1	Printf/debug format string
+0x004151f8	lfs_api_port_var_004151f8	string	1	String constant in lfs_api_port
+0x00415268	lfs_printf_fmt_00415268	string_ptr	1	Printf/debug format string
+0x0041526C	lfs_data_0041526c	uint32	1	Data reference in lfs_api
+0x0041526c	lfs_api_port_var_0041526c	config	1	Read-only value in lfs_api_port
+0x00415270	lfs_data_00415270	uint32	1	Data reference in lfs_api
+0x004152BC	lfs_data_004152bc	uint32	2	Data reference in lfs_api
+0x004152bc	lfs_api_port_var_004152bc	config	2	Read-only value in lfs_api_port
+0x004152C0	lfs_data_004152c0	uint32	1	Data reference in lfs_api
+0x004152c0	lfs_api_port_var_004152c0	config	1	Read-only value in lfs_api_port
+0x004152C4	lfs_data_004152c4	uint32	1	Data reference in lfs_api
+0x004152c4	lfs_api_port_var_004152c4	config	1	Read-only value in lfs_api_port
+0x004152C8	lfs_data_004152c8	uint32	1	Data reference in lfs_api
+0x004152c8	lfs_api_port_var_004152c8	config	1	Read-only value in lfs_api_port
+0x004152CC	lfs_data_004152cc	uint32	1	Data reference in lfs_api
+0x004152cc	lfs_api_port_var_004152cc	config	1	Read-only value in lfs_api_port
+0x004152D0	lfs_data_004152d0	uint32	1	Data reference in lfs_api
+0x004152d0	lfs_api_port_var_004152d0	config	1	Read-only value in lfs_api_port
+0x004152D4	lfs_assert_expr_004152d4	string_ptr	1	Assert expression string
+0x004152d4	lfs_api_port_var_004152d4	string	1	String constant in lfs_api_port
+0x004152D8	lfs_assert_expr_004152d8	string_ptr	1	Assert expression string
+0x004152d8	lfs_api_port_var_004152d8	string	1	String constant in lfs_api_port
+0x004152DC	lfs_data_004152dc	uint32	3	Data reference in lfs_api
+0x004152dc	lfs_api_port_var_004152dc	config	3	Read-only value in lfs_api_port
+0x004152E0	lfs_printf_fmt_004152e0	string_ptr	1	Printf/debug format string
+0x004152e0	lfs_api_port_var_004152e0	string	1	String constant in lfs_api_port
+0x004152E4	lfs_data_004152e4	uint32	1	Data reference in lfs_api
+0x004152e4	lfs_api_port_var_004152e4	callback	1	Function pointer in lfs_api_port
+0x004152E8	lfs_printf_fmt_004152e8	string_ptr	1	Printf/debug format string
+0x004152e8	lfs_api_port_var_004152e8	string	1	String constant in lfs_api_port
+0x004152EC	lfs_assert_expr_004152ec	string_ptr	1	Assert expression string
+0x004152ec	lfs_api_port_var_004152ec	string	1	String constant in lfs_api_port
+0x004152F0	lfs_data_004152f0	uint32	1	Data reference in lfs_api
+0x004152f0	lfs_api_port_var_004152f0	config	1	Read-only value in lfs_api_port
+0x004152F4	lfs_printf_fmt_004152f4	string_ptr	1	Printf/debug format string
+0x004152f4	lfs_api_port_var_004152f4	string	1	String constant in lfs_api_port
+0x004152F8	lfs_printf_fmt_004152f8	string_ptr	1	Printf/debug format string
+0x004152f8	lfs_api_port_var_004152f8	string	1	String constant in lfs_api_port
+0x004152FC	lfs_data_004152fc	uint32	1	Data reference in lfs_api
+0x004152fc	lfs_api_port_var_004152fc	config	1	Read-only value in lfs_api_port
+0x00415300	lfs_printf_fmt_00415300	string_ptr	1	Printf/debug format string
+0x00415304	lfs_data_00415304	uint32	1	Data reference in lfs_api
+0x00415308	lfs_data_00415308	uint32	1	Data reference in lfs_api
+0x0041530C	lfs_source_file_0041530c	string_ptr	6	__FILE__ string: littlefs_mx25u25643g_porting.c
+0x0041530c	lfs_api_port_var_0041530c	string	6	String constant in lfs_api_port
+0x00415310	lfs_assert_expr_00415310	string_ptr	1	Assert expression string
+0x00415314	lfs_assert_expr_00415314	string_ptr	4	Assert expression string
+0x00415318	lfs_assert_expr_00415318	string_ptr	1	Assert expression string
+
+# =========================================================================
+# LITTLEFS PORT
+# =========================================================================
+0x00415580	lfs_port_data_00415580	uint32	1	Data reference in lfs_port
+0x00415584	lfs_port_data_00415584	uint32	1	Data reference in lfs_port
+0x00415588	lfs_port_data_00415588	uint32	1	Data reference in lfs_port
+0x004155E8	lfs_port_data_004155e8	uint32	1	Data reference in lfs_port
+0x004155e8	lfs_api_port_var_004155e8	config	1	Read-only value in lfs_api_port
+0x004155EC	lfs_port_data_004155ec	uint32	8	Data reference in lfs_port
+0x004155ec	lfs_api_port_var_004155ec	callback	8	Function pointer in lfs_api_port
+0x004155F0	lfs_port_data_004155f0	uint32	4	Data reference in lfs_port
+0x004155f0	lfs_api_port_var_004155f0	callback	4	Function pointer in lfs_api_port
+0x004155F4	lfs_port_data_004155f4	uint32	2	Data reference in lfs_port
+0x004155f4	lfs_api_port_var_004155f4	callback	2	Function pointer in lfs_api_port
+
+# =========================================================================
+# PRINTF
+# =========================================================================
+0x00415FDC	printf_flag	uint32	2	Boolean/flag variable
+0x00415fdc	libc_printf_var_00415fdc	state	2	Writable state in libc_printf
+0x00415FE0	printf_data_00415fe0	uint32	1	Data reference in printf
+0x00415fe0	libc_printf_var_00415fe0	callback	1	Function pointer in libc_printf
+0x00415FE4	printf_data_00415fe4	uint32	2	Data reference in printf
+0x00415fe4	libc_printf_var_00415fe4	config	2	Read-only value in libc_printf
+0x00415FE8	printf_data_00415fe8	uint32	1	Data reference in printf
+0x00415fe8	libc_printf_var_00415fe8	config	1	Read-only value in libc_printf
+0x00415FEC	printf_data_00415fec	uint32	1	Data reference in printf
+0x00415fec	libc_printf_var_00415fec	config	1	Read-only value in libc_printf
+0x00415FF0	printf_data_00415ff0	uint32	2	Data reference in printf
+0x00415ff0	libc_printf_var_00415ff0	config	2	Read-only value in libc_printf
+
+# =========================================================================
+# CMSIS-RTOS2 WRAPPERS
+# =========================================================================
+0x00416564	cmsis_var_00416564	uint32	4	Writable variable in rtos
+0x00416974	cmsis_var_00416974	uint32	4	Writable variable in rtos
+0x00416978	cmsis_data	uint32	4	Data reference in rtos
+
+# =========================================================================
+# TLSF MEMORY ALLOCATOR
+# =========================================================================
+0x00417130	tlsf_ptr_00417130	ptr	5	Pointer variable in tlsf
+0x004171D8	tlsf_source_file_004171d8	string_ptr	22	__FILE__ string: tlsf.c
+0x004171d8	tlsf_var_004171d8	string	22	String constant in tlsf
+0x004171DC	tlsf_data_004171dc	uint32	3	Data reference in tlsf
+0x004171dc	tlsf_var_004171dc	callback	3	Function pointer in tlsf
+0x00417204	tlsf_ptr_00417204	ptr	5	Pointer variable in tlsf
+0x00417208	tlsf_const	uint32	2	Constant/return value
+0x0041720C	tlsf_assert_expr_0041720c	string_ptr	1	Assert expression string
+0x0041720c	tlsf_var_0041720c	string	1	String constant in tlsf
+0x00417210	tlsf_assert_expr_00417210	string_ptr	1	Assert expression string
+0x00417214	tlsf_flag	uint32	1	Boolean/flag variable
+0x00417264	tlsf_assert_expr_00417264	string_ptr	3	Assert expression string
+0x004172B4	tlsf_data_004172b4	uint32	3	Data reference in tlsf
+0x004172b4	tlsf_var_004172b4	callback	3	Function pointer in tlsf
+0x004172B8	tlsf_assert_expr_004172b8	string_ptr	1	Assert expression string
+0x004172b8	tlsf_var_004172b8	string	1	String constant in tlsf
+0x004172BC	tlsf_assert_expr_004172bc	string_ptr	1	Assert expression string
+0x004172bc	tlsf_var_004172bc	string	1	String constant in tlsf
+0x004172C0	tlsf_assert_expr_004172c0	string_ptr	1	Assert expression string
+0x004172c0	tlsf_var_004172c0	string	1	String constant in tlsf
+0x004172C4	tlsf_assert_expr_004172c4	string_ptr	1	Assert expression string
+0x004172c4	tlsf_var_004172c4	string	1	String constant in tlsf
+0x004172C8	tlsf_assert_expr_004172c8	string_ptr	1	Assert expression string
+0x004172c8	tlsf_var_004172c8	string	1	String constant in tlsf
+0x004172CC	tlsf_assert_expr_004172cc	string_ptr	1	Assert expression string
+0x004172cc	tlsf_var_004172cc	string	1	String constant in tlsf
+0x004172D0	tlsf_assert_expr_004172d0	string_ptr	1	Assert expression string
+0x004172d0	tlsf_var_004172d0	string	1	String constant in tlsf
+0x004172D4	tlsf_assert_expr_004172d4	string_ptr	1	Assert expression string
+0x004172d4	tlsf_var_004172d4	string	1	String constant in tlsf
+0x004172D8	tlsf_assert_expr_004172d8	string_ptr	1	Assert expression string
+0x004172d8	tlsf_var_004172d8	string	1	String constant in tlsf
+0x004172DC	tlsf_assert_expr_004172dc	string_ptr	1	Assert expression string
+0x004172dc	tlsf_var_004172dc	string	1	String constant in tlsf
+0x004172E0	tlsf_ptr_004172e0	ptr	1	Pointer variable in tlsf
+0x004172e0	tlsf_var_004172e0	struct	1	Struct/array in tlsf
+0x004172E4	tlsf_assert_expr_004172e4	string_ptr	1	Assert expression string
+0x004172e4	tlsf_var_004172e4	string	1	String constant in tlsf
+0x004172E8	tlsf_assert_expr_004172e8	string_ptr	1	Assert expression string
+0x004172e8	tlsf_var_004172e8	string	1	String constant in tlsf
+0x004172EC	tlsf_assert_expr_004172ec	string_ptr	1	Assert expression string
+0x004172ec	tlsf_var_004172ec	string	1	String constant in tlsf
+0x004172F0	tlsf_assert_expr_004172f0	string_ptr	1	Assert expression string
+0x004172f0	tlsf_var_004172f0	string	1	String constant in tlsf
+0x004172F4	tlsf_assert_expr_004172f4	string_ptr	1	Assert expression string
+0x004172f4	tlsf_var_004172f4	string	1	String constant in tlsf
+0x004172F8	tlsf_assert_expr_004172f8	string_ptr	1	Assert expression string
+0x004172f8	tlsf_var_004172f8	string	1	String constant in tlsf
+0x00417308	tlsf_source_file_00417308	string_ptr	1	__FILE__ string: tlsf.c (assertions)
+0x00417310	tlsf_assert_expr_00417310	string_ptr	1	Assert expression string
+
+# =========================================================================
+# EASYLOGGER
+# =========================================================================
+0x00417AA8	elog_data_00417aa8	uint32	1	Data reference in elog
+0x00417aa8	elog_var_00417aa8	state	1	State variable (address-of) in elog
+0x00417B18	elog_data_00417b18	uint32	5	Data reference in elog
+0x00417b18	elog_var_00417b18	state	5	State variable (address-of) in elog
+0x00417B1C	elog_data_00417b1c	uint32	1	Data reference in elog
+0x00417b1c	elog_var_00417b1c	state	1	State variable (address-of) in elog
+0x00417B90	elog_data_00417b90	uint32	1	Data reference in elog
+0x00417b90	elog_var_00417b90	state	1	State variable (address-of) in elog
+0x00417B94	elog_data_00417b94	uint32	1	Data reference in elog
+0x00417b94	elog_var_00417b94	state	1	State variable (address-of) in elog
+0x00417B98	elog_data_00417b98	uint32	1	Data reference in elog
+0x00417b98	elog_var_00417b98	state	1	State variable (address-of) in elog
+0x00417B9C	elog_data_00417b9c	uint32	1	Data reference in elog
+0x00417b9c	elog_var_00417b9c	state	1	State variable (address-of) in elog
+0x00417BA0	elog_data_00417ba0	uint32	1	Data reference in elog
+0x00417ba0	elog_var_00417ba0	state	1	State variable (address-of) in elog
+0x00417BA4	elog_table	uint32[]	19	Lookup table / array base
+0x00417ba4	elog_var_00417ba4	state	18	Writable state in elog
+0x00417BA8	elog_data_00417ba8	uint32	1	Data reference in elog
+0x00417ba8	elog_var_00417ba8	state	1	State variable (address-of) in elog
+0x00417BB8	elog_elog_source	string_ptr	6	EasyLogger source file path
+0x00417bb8	elog_var_00417bb8	string	6	String constant in elog
+0x00417BBC	elog_elog_tag	string_ptr	6	EasyLogger tag string (module name)
+0x00417bbc	elog_var_00417bbc	string	6	String constant in elog
+0x00417BC0	elog_callback	func_ptr	12	Function pointer / callback
+0x00417bc0	elog_var_00417bc0	state	12	Writable state in elog
+0x00417BC8	elog_elog_fmt_00417bc8	string_ptr	2	EasyLogger log format string
+0x00417bc8	elog_var_00417bc8	string	2	String constant in elog
+0x00417BCC	elog_elog_fmt_00417bcc	string_ptr	6	EasyLogger log format string
+0x00417bcc	elog_var_00417bcc	string	6	String constant in elog
+0x00417BD0	elog_elog_func_00417bd0	string_ptr	3	EasyLogger function name string
+0x00417bd0	elog_var_00417bd0	string	3	String constant in elog
+0x00417BD4	elog_elog_func_00417bd4	string_ptr	3	EasyLogger function name string
+0x00417bd4	elog_var_00417bd4	string	3	String constant in elog
+0x00417BD8	elog_elog_fmt_00417bd8	string_ptr	8	EasyLogger log format string
+0x00417bd8	elog_var_00417bd8	string	8	String constant in elog
+0x00417BDC	elog_elog_func_00417bdc	string_ptr	3	EasyLogger function name string
+0x00417bdc	elog_var_00417bdc	string	3	String constant in elog
+0x00417BE0	elog_elog_fmt_00417be0	string_ptr	2	EasyLogger log format string
+0x00417be0	elog_var_00417be0	string	2	String constant in elog
+0x00417BE4	elog_elog_func_00417be4	string_ptr	3	EasyLogger function name string
+0x00417be4	elog_var_00417be4	string	3	String constant in elog
+0x00417BE8	elog_data_00417be8	uint32	11	Data reference in elog
+0x00417be8	elog_var_00417be8	struct	11	Struct/array in elog
+0x00417BEC	elog_elog_func_00417bec	string_ptr	3	EasyLogger function name string
+0x00417bec	elog_var_00417bec	string	3	String constant in elog
+0x00417BF0	elog_ptr_00417bf0	ptr	1	Pointer variable in elog
+0x00417bf0	elog_var_00417bf0	struct	1	Struct/array in elog
+0x00417BF4	elog_ptr_00417bf4	ptr	1	Pointer variable in elog
+0x00417bf4	elog_var_00417bf4	struct	1	Struct/array in elog
+0x00417BF8	elog_data_00417bf8	uint32	1	Data reference in elog
+0x00417bf8	elog_var_00417bf8	config	1	Read-only value in elog
+0x00417BFC	elog_elog_func_00417bfc	string_ptr	3	EasyLogger function name string
+0x00417bfc	elog_var_00417bfc	string	3	String constant in elog
+
+# =========================================================================
+# FREERTOS KERNEL
+# =========================================================================
+0x00418534	rtos_var_00418534	uint32	7	Writable variable in freertos_core
+0x00418538	rtos_current_tcb	TCB_ptr	18	pxCurrentTCB - current running task TCB pointer
+0x0041853C	rtos_data_0041853c	uint32	5	Data reference in freertos_core
+0x0041853c	freertos_var_0041853c	state	3	Writable state in freertos
+0x00418540	rtos_ptr_00418540	ptr	9	Pointer variable in freertos_core
+0x00418544	rtos_ready_lists	List_t[]	10	pxReadyTasksLists - ready list per priority
+0x004186A8	rtos_ptr_004186a8	ptr	4	Pointer variable in freertos_core
+0x004186a8	freertos_var_004186a8	state	4	Writable state in freertos
+0x004186AC	rtos_flag_004186ac	uint32	2	Boolean/flag variable
+0x004186ac	freertos_var_004186ac	config	2	Read-only value in freertos
+0x004186B0	rtos_data_004186b0	uint32	2	Data reference in freertos_core
+0x004186b0	freertos_var_004186b0	state	1	Writable state in freertos
+0x004187FC	rtos_flag_004187fc	uint32	11	Boolean/flag variable
+0x004187fc	freertos_var_004187fc	state	10	Writable state in freertos
+0x00418800	rtos_var_00418800	uint32	7	Writable variable in freertos_core
+0x00418804	rtos_struct	struct_ptr	6	Struct pointer in freertos_core
+0x00418808	rtos_data_00418808	uint32	3	Data reference in freertos_core
+0x0041880C	rtos_data_0041880c	uint32	1	Data reference in freertos_core
+0x0041880c	freertos_var_0041880c	config	1	Read-only value in freertos
+0x004189D4	rtos_flag_004189d4	uint32	1	Boolean/flag variable
+0x004189d4	freertos_var_004189d4	state	1	Writable state in freertos
+0x00418AAC	rtos_data_00418aac	uint32	1	Data reference in freertos_core
+0x00418aac	freertos_var_00418aac	config	1	Read-only value in freertos
+0x00418AB0	rtos_data_00418ab0	uint32	1	Data reference in freertos_core
+0x00418ab0	freertos_var_00418ab0	config	1	Read-only value in freertos
+0x00418AB4	rtos_data_00418ab4	uint32	6	Data reference in freertos_core
+0x00418ab4	freertos_var_00418ab4	state	6	Writable state in freertos
+0x00418AB8	rtos_ptr_00418ab8	ptr	6	Pointer variable in freertos_core
+0x00418ab8	freertos_var_00418ab8	state	6	Writable state in freertos
+0x00418ABC	rtos_data_00418abc	uint32	5	Data reference in freertos_core
+0x00418abc	freertos_var_00418abc	callback	5	Function pointer in freertos
+0x00418B50	rtos_const	uint32	1	Constant/return value
+0x00418b50	freertos_var_00418b50	callback	1	Function pointer in freertos
+0x00418C9C	rtos_flag_00418c9c	uint32	7	Boolean/flag variable
+0x00418c9c	freertos_var_00418c9c	state	7	Writable state in freertos
+0x00418CA0	rtos_flag_00418ca0	uint32	7	Boolean/flag variable
+0x00418ca0	freertos_var_00418ca0	state	5	Writable state in freertos
+0x00418D80	rtos_data_00418d80	uint32	4	Data reference in freertos_core
+0x00418d80	freertos_var_00418d80	state	3	Writable state in freertos
+0x00418E34	rtos_ptr_00418e34	ptr	17	Pointer variable in freertos_core
+0x00418e34	freertos_var_00418e34	struct	16	Struct/array in freertos
+0x00418E38	rtos_ptr_00418e38	ptr	2	Pointer variable in freertos_core
+0x00418e38	freertos_var_00418e38	callback	2	Function pointer in freertos
+0x00418E3C	rtos_ptr_00418e3c	ptr	2	Pointer variable in freertos_core
+0x00418e3c	freertos_var_00418e3c	struct	2	Struct/array in freertos
+0x00418E40	rtos_ptr_00418e40	ptr	8	Pointer variable in freertos_core
+0x00418e40	freertos_var_00418e40	state	8	Writable state in freertos
+0x00418E44	rtos_data_00418e44	uint32	3	Data reference in freertos_core
+0x00418e44	freertos_var_00418e44	state	3	Writable state in freertos
+0x00418FBC	rtos_ptr_00418fbc	ptr	13	Pointer variable in freertos_core
+0x00418fbc	freertos_var_00418fbc	struct	13	Struct/array in freertos
+0x004191D4	rtos_flag_004191d4	uint32	3	Boolean/flag variable
+0x004191d4	freertos_var_004191d4	callback	3	Function pointer in freertos
+0x004191D8	rtos_data_004191d8	uint32	4	Data reference in freertos_core
+0x004191d8	freertos_var_004191d8	state	4	Writable state in freertos
+0x004191DC	rtos_data_004191dc	uint32	3	Data reference in freertos_core
+0x004191dc	freertos_var_004191dc	state	2	Writable state in freertos
+0x004191E0	rtos_data_004191e0	uint32	2	Data reference in freertos_core
+0x004191e0	freertos_var_004191e0	config	2	Read-only value in freertos
+0x004191E4	rtos_data_004191e4	uint32	2	Data reference in freertos_core
+0x004191e4	freertos_var_004191e4	config	2	Read-only value in freertos
+0x004191E8	rtos_ptr_004191e8	ptr	2	Pointer variable in freertos_core
+0x004191e8	freertos_var_004191e8	struct	2	Struct/array in freertos
+0x004191EC	rtos_ptr_004191ec	ptr	4	Pointer variable in freertos_core
+0x004191ec	freertos_var_004191ec	state	4	Writable state in freertos
+0x004191F0	rtos_data_004191f0	uint32	2	Data reference in freertos_core
+0x004191f0	freertos_var_004191f0	state	2	Writable state in freertos
+0x004191F4	rtos_flag_004191f4	uint32	2	Boolean/flag variable
+0x004191f4	freertos_var_004191f4	state	2	Writable state in freertos
+0x004191F8	rtos_flag_004191f8	uint32	16	Boolean/flag variable
+0x004191f8	freertos_var_004191f8	struct	13	Struct/array in freertos
+0x004191FC	rtos_data_004191fc	uint32	4	Data reference in freertos_core
+0x004191fc	freertos_var_004191fc	state	4	Writable state in freertos
+0x00419200	rtos_var_00419200	uint32	1	Writable variable in freertos_core
+0x00419204	rtos_var_00419204	uint32	2	Writable variable in freertos_core
+0x00419208	rtos_ptr_00419208	ptr	8	Pointer variable in freertos_core
+0x0041920C	rtos_ptr_0041920c	ptr	4	Pointer variable in freertos_core
+0x0041920c	freertos_var_0041920c	struct	4	Struct/array in freertos
+0x00419210	rtos_data_00419210	uint32	2	Data reference in freertos_core
+0x00419214	rtos_var_00419214	uint32	1	Writable variable in freertos_core
+0x004196E0	rtos_flag_004196e0	uint32	9	Boolean/flag variable
+0x004196e0	freertos_var_004196e0	state	9	Writable state in freertos
+0x004196E4	rtos_data_004196e4	uint32	1	Data reference in freertos_core
+0x004196e4	freertos_var_004196e4	config	1	Read-only value in freertos
+0x004196E8	rtos_data_004196e8	uint32	1	Data reference in freertos_core
+0x004196e8	freertos_var_004196e8	config	1	Read-only value in freertos
+0x004196EC	rtos_ptr_004196ec	ptr	9	Pointer variable in freertos_core
+0x004196ec	freertos_var_004196ec	state	9	Writable state in freertos
+0x004196F0	rtos_ptr_004196f0	ptr	5	Pointer variable in freertos_core
+0x004196f0	freertos_var_004196f0	state	5	Writable state in freertos
+0x004196F4	rtos_data_004196f4	uint32	2	Data reference in freertos_core
+0x004196f4	freertos_var_004196f4	callback	2	Function pointer in freertos
+0x004196F8	rtos_data_004196f8	uint32	2	Data reference in freertos_core
+0x004196f8	freertos_var_004196f8	config	2	Read-only value in freertos
+0x004196FC	rtos_data_004196fc	uint32	2	Data reference in freertos_core
+0x004196fc	freertos_var_004196fc	config	2	Read-only value in freertos
+0x00419700	rtos_data_00419700	uint32	1	Data reference in freertos_core
+0x00419704	rtos_data_00419704	uint32	1	Data reference in freertos_core
+0x00419930	rtos_var_00419930	uint32	6	Writable variable in freertos_core
+0x00419934	rtos_data_00419934	uint32	5	Data reference in freertos_core
+0x00419938	rtos_var_00419938	uint32	5	Writable variable in freertos_core
+0x0041993C	rtos_flag_0041993c	uint32	5	Boolean/flag variable
+0x0041993c	freertos_var_0041993c	state	5	Writable state in freertos
+0x00419940	rtos_var_00419940	uint32	3	Writable variable in freertos_core
+0x00419944	rtos_var_00419944	uint32	2	Writable variable in freertos_core
+0x00419948	rtos_var_00419948	uint32	2	Writable variable in freertos_core
+0x0041994C	rtos_flag_0041994c	uint32	4	Boolean/flag variable
+0x0041994c	freertos_var_0041994c	struct	4	Struct/array in freertos
+0x00419BBC	rtos_data_00419bbc	uint32	1	Data reference in freertos_core
+0x00419bbc	freertos_var_00419bbc	config	1	Read-only value in freertos
+
+# =========================================================================
+# FREERTOS PORT
+# =========================================================================
+0x0041A6B4	rtos_port_data_0041a6b4	uint32	1	Data reference in freertos_port
+0x0041a6b4	freertos_var_0041a6b4	state	1	State variable (address-of) in freertos
+0x0041A6B8	rtos_port_flag	uint32	6	Boolean/flag variable
+0x0041a6b8	freertos_var_0041a6b8	state	6	Writable state in freertos
+0x0041A6BC	rtos_port_data_0041a6bc	uint32	1	Data reference in freertos_port
+0x0041a6bc	freertos_var_0041a6bc	config	1	Read-only value in freertos
+0x0041A6C0	rtos_port_data_0041a6c0	uint32	2	Data reference in freertos_port
+0x0041a6c0	freertos_var_0041a6c0	config	2	Read-only value in freertos
+0x0041A6C4	rtos_port_data_0041a6c4	uint32	1	Data reference in freertos_port
+0x0041a6c4	freertos_var_0041a6c4	config	1	Read-only value in freertos
+
+# =========================================================================
+# FREERTOS HEAP
+# =========================================================================
+0x0041B024	heap_data_0041b024	uint32	2	Data reference in heap
+0x0041b024	heap_var_0041b024	state	1	Writable state in heap
+0x0041B028	heap_data_0041b028	uint32	1	Data reference in heap
+0x0041b028	heap_var_0041b028	config	1	Read-only value in heap
+0x0041B02C	heap_data_0041b02c	uint32	2	Data reference in heap
+0x0041b02c	heap_var_0041b02c	state	2	Writable state in heap
+0x0041B030	heap_data_0041b030	uint32	1	Data reference in heap
+0x0041b030	heap_var_0041b030	callback	1	Function pointer in heap
+0x0041B034	heap_flag_0041b034	uint32	2	Boolean/flag variable
+0x0041b034	heap_var_0041b034	callback	2	Function pointer in heap
+0x0041B038	heap_data_0041b038	uint32	2	Data reference in heap
+0x0041b038	heap_var_0041b038	callback	2	Function pointer in heap
+0x0041B03C	heap_data_0041b03c	uint32	5	Data reference in heap
+0x0041b03c	heap_var_0041b03c	callback	5	Function pointer in heap
+0x0041B040	heap_flag_0041b040	uint32	2	Boolean/flag variable
+0x0041b040	heap_var_0041b040	callback	2	Function pointer in heap
+0x0041B044	heap_flag_0041b044	uint32	2	Boolean/flag variable
+0x0041b044	heap_var_0041b044	callback	2	Function pointer in heap
+0x0041B048	heap_flag_0041b048	uint32	1	Boolean/flag variable
+0x0041b048	heap_var_0041b048	callback	1	Function pointer in heap
+0x0041B04C	heap_data_0041b04c	uint32	7	Data reference in heap
+0x0041b04c	heap_var_0041b04c	state	5	Writable state in heap
+0x0041B050	heap_data_0041b050	uint32	2	Data reference in heap
+0x0041b050	heap_var_0041b050	state	2	Writable state in heap
+0x0041B054	heap_data_0041b054	uint32	4	Data reference in heap
+0x0041b054	heap_var_0041b054	state	2	Writable state in heap
+0x0041B058	heap_data_0041b058	uint32	6	Data reference in heap
+0x0041b058	heap_var_0041b058	state	6	Writable state in heap
+0x0041B05C	heap_data_0041b05c	uint32	16	Data reference in heap
+0x0041b05c	heap_var_0041b05c	state	8	Writable state in heap
+0x0041B060	heap_data_0041b060	uint32	6	Data reference in heap
+0x0041b060	heap_var_0041b060	state	6	Writable state in heap
+0x0041B064	heap_data_0041b064	uint32	4	Data reference in heap
+0x0041b064	heap_var_0041b064	state	4	Writable state in heap
+0x0041B068	heap_data_0041b068	uint32	12	Data reference in heap
+0x0041b068	heap_var_0041b068	state	8	Writable state in heap
+0x0041B06C	heap_data_0041b06c	uint32	2	Data reference in heap
+0x0041b06c	heap_var_0041b06c	state	2	Writable state in heap
+0x0041B070	heap_data_0041b070	uint32	3	Data reference in heap
+0x0041b070	heap_var_0041b070	state	3	Writable state in heap
+0x0041B074	heap_data_0041b074	uint32	1	Data reference in heap
+0x0041b074	heap_var_0041b074	callback	1	Function pointer in heap
+0x0041B078	heap_data_0041b078	uint32	3	Data reference in heap
+0x0041b078	heap_var_0041b078	callback	3	Function pointer in heap
+0x0041B07C	heap_data_0041b07c	uint32	1	Data reference in heap
+0x0041b07c	heap_var_0041b07c	config	1	Read-only value in heap
+0x0041B080	heap_data_0041b080	uint32	10	Data reference in heap
+0x0041b080	heap_var_0041b080	state	6	Writable state in heap
+0x0041B08C	heap_flag_0041b08c	uint32	3	Boolean/flag variable
+0x0041b08c	heap_var_0041b08c	callback	3	Function pointer in heap
+0x0041B090	heap_data_0041b090	uint32	3	Data reference in heap
+0x0041b090	heap_var_0041b090	state	2	Writable state in heap
+0x0041B094	heap_data_0041b094	uint32	1	Data reference in heap
+0x0041b094	heap_var_0041b094	state	1	Writable state in heap
+0x0041B0A0	heap_flag_0041b0a0	uint32	14	Boolean/flag variable
+0x0041b0a0	heap_var_0041b0a0	state	11	Writable state in heap
+0x0041B0A4	heap_flag_0041b0a4	uint32	1	Boolean/flag variable
+0x0041b0a4	heap_var_0041b0a4	callback	1	Function pointer in heap
+0x0041B0A8	heap_data_0041b0a8	uint32	4	Data reference in heap
+0x0041b0a8	heap_var_0041b0a8	state	2	Writable state in heap
+0x0041B0AC	heap_data_0041b0ac	uint32	4	Data reference in heap
+0x0041b0ac	heap_var_0041b0ac	state	2	Writable state in heap
+0x0041B0B0	heap_data_0041b0b0	uint32	4	Data reference in heap
+0x0041b0b0	heap_var_0041b0b0	state	2	Writable state in heap
+0x0041B0B4	heap_data_0041b0b4	uint32	1	Data reference in heap
+0x0041b0b4	heap_var_0041b0b4	config	1	Read-only value in heap
+0x0041B0B8	heap_data_0041b0b8	uint32	3	Data reference in heap
+0x0041b0b8	heap_var_0041b0b8	state	2	Writable state in heap
+0x0041B0BC	heap_data_0041b0bc	uint32	3	Data reference in heap
+0x0041b0bc	heap_var_0041b0bc	state	2	Writable state in heap
+0x0041B0C0	heap_data_0041b0c0	uint32	3	Data reference in heap
+0x0041b0c0	heap_var_0041b0c0	state	2	Writable state in heap
+0x0041B0C4	heap_data_0041b0c4	uint32	3	Data reference in heap
+0x0041b0c4	heap_var_0041b0c4	state	2	Writable state in heap
+0x0041B0C8	heap_data_0041b0c8	uint32	2	Data reference in heap
+0x0041b0c8	heap_var_0041b0c8	state	1	Writable state in heap
+
+# =========================================================================
+# HAL MISC (MCU CONTROL, TIMER, FLASH INFO)
+# =========================================================================
+0x0041B1D4	hal_elog_fmt_0041b1d4	string_ptr	2	EasyLogger log format string
+0x0041b1d4	hal_misc_var_0041b1d4	string	2	String constant in hal_misc
+0x0041B1D8	hal_elog_fmt_0041b1d8	string_ptr	2	EasyLogger log format string
+0x0041b1d8	hal_misc_var_0041b1d8	string	2	String constant in hal_misc
+0x0041B1DC	hal_callback	func_ptr	4	Function pointer / callback
+0x0041b1dc	hal_misc_var_0041b1dc	state	4	Writable state in hal_misc
+0x0041B1E0	hal_elog_func	string_ptr	6	EasyLogger function name string
+0x0041b1e0	hal_misc_var_0041b1e0	string	6	String constant in hal_misc
+0x0041B1E4	hal_elog_fmt_0041b1e4	string_ptr	2	EasyLogger log format string
+0x0041b1e4	hal_misc_var_0041b1e4	string	2	String constant in hal_misc
+0x0041B1E8	hal_elog_source	string_ptr	2	EasyLogger source file path
+0x0041b1e8	hal_misc_var_0041b1e8	string	2	String constant in hal_misc
+0x0041B1EC	hal_elog_tag	string_ptr	2	EasyLogger tag string (module name)
+0x0041b1ec	hal_misc_var_0041b1ec	string	2	String constant in hal_misc
+0x0041B230	hal_data_0041b230	uint32	2	Data reference in hal_misc
+0x0041b230	hal_misc_var_0041b230	state	1	State variable (address-of) in hal_misc
+0x0041B26C	hal_data_0041b26c	uint32	2	Data reference in hal_misc
+0x0041b26c	hal_misc_var_0041b26c	state	1	State variable (address-of) in hal_misc
+0x0041B364	hal_ptr_0041b364	ptr	1	Pointer variable in hal_misc
+0x0041b364	hal_misc_var_0041b364	callback	1	Function pointer in hal_misc
+0x0041B4FC	hal_flag	uint32	8	Boolean/flag variable
+0x0041b4fc	hal_misc_var_0041b4fc	state	6	Writable state in hal_misc
+0x0041B500	hal_data_0041b500	uint32	2	Data reference in hal_misc
+0x0041b500	hal_misc_var_0041b500	state	1	Writable state in hal_misc
+0x0041B504	hal_data_0041b504	uint32	2	Data reference in hal_misc
+0x0041b504	hal_misc_var_0041b504	state	1	Writable state in hal_misc
+0x0041B508	hal_data_0041b508	uint32	1	Data reference in hal_misc
+0x0041b508	hal_misc_var_0041b508	state	1	Writable state in hal_misc
+0x0041B50C	hal_ptr_0041b50c	ptr	1	Pointer variable in hal_misc
+0x0041b50c	hal_misc_var_0041b50c	config	1	Read-only value in hal_misc
+0x0041B510	hal_data_0041b510	uint32	3	Data reference in hal_misc
+0x0041b510	hal_misc_var_0041b510	state	2	Writable state in hal_misc
+0x0041B5B8	hal_data_0041b5b8	uint32	1	Data reference in hal_misc
+0x0041b5b8	hal_misc_var_0041b5b8	config	1	Read-only value in hal_misc
+0x0041B5BC	hal_data_0041b5bc	uint32	1	Data reference in hal_misc
+0x0041b5bc	hal_misc_var_0041b5bc	config	1	Read-only value in hal_misc
+0x0041B5E4	hal_printf_fmt_0041b5e4	string_ptr	1	Printf/debug format string
+0x0041b5e4	hal_misc_var_0041b5e4	string	1	String constant in hal_misc
+0x0041B5E8	hal_printf_fmt_0041b5e8	string_ptr	1	Printf/debug format string
+0x0041b5e8	hal_misc_var_0041b5e8	string	1	String constant in hal_misc
+0x0041B7F0	hal_ptr_0041b7f0	ptr	1	Pointer variable in hal_misc
+0x0041b7f0	hal_misc_var_0041b7f0	struct	1	Struct/array in hal_misc
+0x0041B7F4	hal_ptr_0041b7f4	ptr	1	Pointer variable in hal_misc
+0x0041b7f4	hal_misc_var_0041b7f4	struct	1	Struct/array in hal_misc
+0x0041B7F8	hal_data_0041b7f8	string	1	Data reference in hal_misc
+0x0041b7f8	hal_misc_var_0041b7f8	struct	1	Struct/array in hal_misc
+0x0041B7FC	hal_data_0041b7fc	string	1	Data reference in hal_misc
+0x0041b7fc	hal_misc_var_0041b7fc	struct	1	Struct/array in hal_misc
+0x0041B800	hal_data_0041b800	uint32	9	Data reference in hal_misc
+0x0041b800	hal_misc_var_0041b800	state	9	Writable state in hal_misc
+0x0041B804	hal_data_0041b804	uint32	8	Data reference in hal_misc
+0x0041b804	hal_misc_var_0041b804	state	7	Writable state in hal_misc
+0x0041B808	hal_data_0041b808	uint32	1	Data reference in hal_misc
+0x0041b808	hal_misc_var_0041b808	state	1	Writable state in hal_misc
+0x0041B80C	hal_data_0041b80c	uint32	3	Data reference in hal_misc
+0x0041b80c	hal_misc_var_0041b80c	state	3	Writable state in hal_misc
+0x0041B810	hal_data_0041b810	uint32	1	Data reference in hal_misc
+0x0041b810	hal_misc_var_0041b810	config	1	Read-only value in hal_misc
+0x0041B824	hal_data_0041b824	uint32	1	Data reference in hal_misc
+0x0041b824	hal_misc_var_0041b824	config	1	Read-only value in hal_misc
+0x0041B828	hal_data_0041b828	uint32	1	Data reference in hal_misc
+0x0041b828	hal_misc_var_0041b828	config	1	Read-only value in hal_misc
+
+# =========================================================================
+# HAL POWER
+# =========================================================================
+0x0041C2E8	hal_pwr_data_0041c2e8	uint32	1	Data reference in hal_power
+0x0041c2e8	hal_power_var_0041c2e8	config	1	Read-only value in hal_power
+0x0041C2EC	hal_pwr_flag_0041c2ec	uint32	3	Boolean/flag variable
+0x0041c2ec	hal_power_var_0041c2ec	state	3	Writable state in hal_power
+0x0041C2F0	hal_pwr_data_0041c2f0	uint32	4	Data reference in hal_power
+0x0041c2f0	hal_power_var_0041c2f0	state	3	Writable state in hal_power
+0x0041C2F4	hal_pwr_data_0041c2f4	uint32	2	Data reference in hal_power
+0x0041c2f4	hal_power_var_0041c2f4	callback	2	Function pointer in hal_power
+0x0041C458	hal_pwr_data_0041c458	uint32	7	Data reference in hal_power
+0x0041c458	hal_uart_var_0041c458	state	5	Writable state in hal_uart
+0x0041C45C	hal_pwr_data_0041c45c	uint32	2	Data reference in hal_power
+0x0041c45c	hal_uart_var_0041c45c	state	2	Writable state in hal_uart
+0x0041C460	hal_pwr_data_0041c460	uint32	2	Data reference in hal_power
+0x0041c460	hal_uart_var_0041c460	callback	2	Function pointer in hal_uart
+0x0041C464	hal_pwr_data_0041c464	uint32	6	Data reference in hal_power
+0x0041c464	hal_uart_var_0041c464	state	6	Writable state in hal_uart
+0x0041C468	hal_pwr_data_0041c468	uint32	4	Data reference in hal_power
+0x0041c468	hal_uart_var_0041c468	state	4	Writable state in hal_uart
+0x0041C46C	hal_pwr_data_0041c46c	uint32	4	Data reference in hal_power
+0x0041c46c	hal_uart_var_0041c46c	state	2	Writable state in hal_uart
+0x0041C470	hal_pwr_data_0041c470	uint32	2	Data reference in hal_power
+0x0041c470	hal_uart_var_0041c470	state	1	Writable state in hal_uart
+0x0041C474	hal_pwr_data_0041c474	uint32	3	Data reference in hal_power
+0x0041c474	hal_uart_var_0041c474	state	3	Writable state in hal_uart
+0x0041C478	hal_pwr_data_0041c478	uint32	10	Data reference in hal_power
+0x0041c478	hal_uart_var_0041c478	callback	10	Function pointer in hal_uart
+0x0041C47C	hal_pwr_data_0041c47c	uint32	4	Data reference in hal_power
+0x0041c47c	hal_uart_var_0041c47c	state	2	Writable state in hal_uart
+0x0041C480	hal_pwr_data_0041c480	uint32	7	Data reference in hal_power
+0x0041c480	hal_uart_var_0041c480	state	4	Writable state in hal_uart
+0x0041C484	hal_pwr_flag_0041c484	uint32	3	Boolean/flag variable
+0x0041c484	hal_uart_var_0041c484	callback	3	Function pointer in hal_uart
+0x0041C488	hal_pwr_data_0041c488	uint32	1	Data reference in hal_power
+0x0041c488	hal_uart_var_0041c488	callback	1	Function pointer in hal_uart
+0x0041C80C	hal_pwr_data_0041c80c	uint32	4	Data reference in hal_power
+0x0041c80c	hal_uart_var_0041c80c	callback	4	Function pointer in hal_uart
+
+# =========================================================================
+# HAL UART
+# =========================================================================
+0x0041C838	hal_uart_data_0041c838	uint32	8	Data reference in hal_uart
+0x0041c838	hal_uart_var_0041c838	state	4	Writable state in hal_uart
+0x0041C83C	hal_uart_data_0041c83c	uint32	3	Data reference in hal_uart
+0x0041c83c	hal_uart_var_0041c83c	state	2	Writable state in hal_uart
+0x0041C840	hal_uart_data_0041c840	uint32	3	Data reference in hal_uart
+0x0041c840	hal_uart_var_0041c840	state	2	Writable state in hal_uart
+0x0041C960	hal_uart_data_0041c960	uint32	2	Data reference in hal_uart
+0x0041c960	hal_gpio_var_0041c960	config	2	Read-only value in hal_gpio
+0x0041C964	hal_uart_flag_0041c964	uint32	1	Boolean/flag variable
+0x0041c964	hal_gpio_var_0041c964	config	1	Read-only value in hal_gpio
+0x0041C9E0	hal_uart_data_0041c9e0	uint32	2	Data reference in hal_uart
+0x0041c9e0	hal_gpio_var_0041c9e0	state	2	Writable state in hal_gpio
+0x0041CABC	hal_uart_data_0041cabc	uint32	3	Data reference in hal_uart
+0x0041cabc	hal_gpio_var_0041cabc	state	2	Writable state in hal_gpio
+0x0041CAD0	hal_uart_data_0041cad0	uint32	2	Data reference in hal_uart
+0x0041cad0	hal_gpio_var_0041cad0	state	1	Writable state in hal_gpio
+0x0041CAD4	hal_uart_data_0041cad4	uint32	1	Data reference in hal_uart
+0x0041cad4	hal_gpio_var_0041cad4	config	1	Read-only value in hal_gpio
+0x0041CAD8	hal_uart_flag_0041cad8	uint32	2	Boolean/flag variable
+0x0041cad8	hal_gpio_var_0041cad8	config	2	Read-only value in hal_gpio
+0x0041CADC	hal_uart_data_0041cadc	uint32	3	Data reference in hal_uart
+0x0041cadc	hal_gpio_var_0041cadc	callback	3	Function pointer in hal_gpio
+0x0041CAE0	hal_uart_data_0041cae0	uint32	1	Data reference in hal_uart
+0x0041cae0	hal_gpio_var_0041cae0	config	1	Read-only value in hal_gpio
+0x0041CAE4	hal_uart_data_0041cae4	uint32	1	Data reference in hal_uart
+0x0041cae4	hal_gpio_var_0041cae4	config	1	Read-only value in hal_gpio
+0x0041CAE8	hal_uart_data_0041cae8	uint32	2	Data reference in hal_uart
+0x0041cae8	hal_gpio_var_0041cae8	state	1	Writable state in hal_gpio
+0x0041CAEC	hal_uart_data_0041caec	uint32	3	Data reference in hal_uart
+0x0041caec	hal_gpio_var_0041caec	state	2	Writable state in hal_gpio
+0x0041CB6C	hal_uart_data_0041cb6c	uint32	4	Data reference in hal_uart
+0x0041cb6c	hal_gpio_var_0041cb6c	state	2	Writable state in hal_gpio
+0x0041CBAC	hal_uart_data_0041cbac	uint32	3	Data reference in hal_uart
+0x0041cbac	hal_gpio_var_0041cbac	state	2	Writable state in hal_gpio
+0x0041CBCC	hal_uart_data_0041cbcc	uint32	1	Data reference in hal_uart
+0x0041cbcc	hal_gpio_var_0041cbcc	callback	1	Function pointer in hal_gpio
+0x0041CBD0	hal_uart_data_0041cbd0	uint32	2	Data reference in hal_uart
+0x0041cbd0	hal_gpio_var_0041cbd0	callback	1	Function pointer in hal_gpio
+0x0041CBD4	hal_uart_data_0041cbd4	uint32	2	Data reference in hal_uart
+0x0041cbd4	hal_gpio_var_0041cbd4	state	2	Writable state in hal_gpio
+0x0041CBD8	hal_uart_data_0041cbd8	uint32	7	Data reference in hal_uart
+0x0041cbd8	hal_gpio_var_0041cbd8	state	5	Writable state in hal_gpio
+
+# =========================================================================
+# HAL GPIO
+# =========================================================================
+0x0041D0C8	gpio_data_0041d0c8	uint32	11	Data reference in hal_gpio
+0x0041d0c8	hal_interrupt_var_0041d0c8	state	7	Writable state in hal_interrupt
+0x0041D0CC	gpio_data_0041d0cc	uint32	1	Data reference in hal_gpio
+0x0041d0cc	hal_interrupt_var_0041d0cc	state	1	Writable state in hal_interrupt
+0x0041D0D0	gpio_data_0041d0d0	uint32	3	Data reference in hal_gpio
+0x0041d0d0	hal_interrupt_var_0041d0d0	state	3	Writable state in hal_interrupt
+0x0041D0D4	gpio_data_0041d0d4	uint32	1	Data reference in hal_gpio
+0x0041d0d4	hal_interrupt_var_0041d0d4	state	1	Writable state in hal_interrupt
+0x0041D0D8	gpio_data_0041d0d8	uint32	3	Data reference in hal_gpio
+0x0041d0d8	hal_interrupt_var_0041d0d8	state	3	Writable state in hal_interrupt
+0x0041D0DC	gpio_data_0041d0dc	uint32	2	Data reference in hal_gpio
+0x0041d0dc	hal_interrupt_var_0041d0dc	state	1	Writable state in hal_interrupt
+0x0041D0E0	gpio_data_0041d0e0	uint32	4	Data reference in hal_gpio
+0x0041d0e0	hal_interrupt_var_0041d0e0	state	2	Writable state in hal_interrupt
+0x0041D0E4	gpio_data_0041d0e4	uint32	1	Data reference in hal_gpio
+0x0041d0e4	hal_interrupt_var_0041d0e4	state	1	Writable state in hal_interrupt
+0x0041D0E8	gpio_data_0041d0e8	uint32	2	Data reference in hal_gpio
+0x0041d0e8	hal_interrupt_var_0041d0e8	state	2	Writable state in hal_interrupt
+0x0041D0EC	gpio_data_0041d0ec	uint32	1	Data reference in hal_gpio
+0x0041d0ec	hal_interrupt_var_0041d0ec	state	1	Writable state in hal_interrupt
+0x0041D0F4	gpio_ptr	ptr	28	Pointer variable in hal_gpio
+0x0041d0f4	hal_interrupt_var_0041d0f4	struct	28	Struct/array in hal_interrupt
+0x0041D0F8	gpio_flag_0041d0f8	uint32	3	Boolean/flag variable
+0x0041d0f8	hal_interrupt_var_0041d0f8	callback	2	Function pointer in hal_interrupt
+0x0041D0FC	gpio_flag_0041d0fc	uint32	17	Boolean/flag variable
+0x0041d0fc	hal_interrupt_var_0041d0fc	state	17	Writable state in hal_interrupt
+0x0041D100	gpio_data_0041d100	uint32	3	Data reference in hal_gpio
+0x0041d100	hal_interrupt_var_0041d100	state	3	Writable state in hal_interrupt
+0x0041D104	gpio_data_0041d104	uint32	3	Data reference in hal_gpio
+0x0041d104	hal_interrupt_var_0041d104	state	3	Writable state in hal_interrupt
+0x0041D108	gpio_flag_0041d108	uint32	3	Boolean/flag variable
+0x0041d108	hal_interrupt_var_0041d108	state	3	Writable state in hal_interrupt
+0x0041D10C	gpio_data_0041d10c	uint32	2	Data reference in hal_gpio
+0x0041d10c	hal_interrupt_var_0041d10c	state	2	Writable state in hal_interrupt
+0x0041D110	gpio_flag_0041d110	uint32	3	Boolean/flag variable
+0x0041d110	hal_interrupt_var_0041d110	state	3	Writable state in hal_interrupt
+0x0041D114	gpio_byte_ref_0041d114	byte_ptr	1	Byte pointer reference in hal_gpio
+0x0041d114	hal_interrupt_var_0041d114	struct	1	Struct/array in hal_interrupt
+0x0041D118	gpio_byte_ref_0041d118	byte_ptr	3	Byte pointer reference in hal_gpio
+0x0041d118	hal_interrupt_var_0041d118	state	3	Writable state in hal_interrupt
+0x0041D11C	gpio_data_0041d11c	uint32	3	Data reference in hal_gpio
+0x0041d11c	hal_interrupt_var_0041d11c	state	2	Writable state in hal_interrupt
+0x0041D120	gpio_data_0041d120	uint32	3	Data reference in hal_gpio
+0x0041d120	hal_interrupt_var_0041d120	state	2	Writable state in hal_interrupt
+0x0041D124	gpio_data_0041d124	uint32	1	Data reference in hal_gpio
+0x0041d124	hal_interrupt_var_0041d124	config	1	Read-only value in hal_interrupt
+0x0041D128	gpio_data_0041d128	uint32	1	Data reference in hal_gpio
+0x0041d128	hal_interrupt_var_0041d128	config	1	Read-only value in hal_interrupt
+0x0041D12C	gpio_data_0041d12c	uint32	1	Data reference in hal_gpio
+0x0041d12c	hal_interrupt_var_0041d12c	config	1	Read-only value in hal_interrupt
+0x0041D130	gpio_data_0041d130	uint32	1	Data reference in hal_gpio
+0x0041d130	hal_interrupt_var_0041d130	config	1	Read-only value in hal_interrupt
+0x0041D134	gpio_data_0041d134	uint32	1	Data reference in hal_gpio
+0x0041d134	hal_interrupt_var_0041d134	config	1	Read-only value in hal_interrupt
+0x0041D138	gpio_data_0041d138	uint32	1	Data reference in hal_gpio
+0x0041d138	hal_interrupt_var_0041d138	config	1	Read-only value in hal_interrupt
+0x0041D13C	gpio_data_0041d13c	uint32	1	Data reference in hal_gpio
+0x0041d13c	hal_interrupt_var_0041d13c	config	1	Read-only value in hal_interrupt
+0x0041D140	gpio_data_0041d140	uint32	1	Data reference in hal_gpio
+0x0041d140	hal_interrupt_var_0041d140	config	1	Read-only value in hal_interrupt
+0x0041D144	gpio_data_0041d144	uint32	1	Data reference in hal_gpio
+0x0041d144	hal_interrupt_var_0041d144	config	1	Read-only value in hal_interrupt
+0x0041D148	gpio_data_0041d148	uint32	1	Data reference in hal_gpio
+0x0041d148	hal_interrupt_var_0041d148	config	1	Read-only value in hal_interrupt
+0x0041D14C	gpio_data_0041d14c	uint32	1	Data reference in hal_gpio
+0x0041d14c	hal_interrupt_var_0041d14c	config	1	Read-only value in hal_interrupt
+0x0041D150	gpio_data_0041d150	uint32	1	Data reference in hal_gpio
+0x0041d150	hal_interrupt_var_0041d150	config	1	Read-only value in hal_interrupt
+0x0041D154	gpio_data_0041d154	uint32	1	Data reference in hal_gpio
+0x0041d154	hal_interrupt_var_0041d154	config	1	Read-only value in hal_interrupt
+0x0041D158	gpio_data_0041d158	uint32	1	Data reference in hal_gpio
+0x0041d158	hal_interrupt_var_0041d158	config	1	Read-only value in hal_interrupt
+0x0041D15C	gpio_data_0041d15c	uint32	1	Data reference in hal_gpio
+0x0041d15c	hal_interrupt_var_0041d15c	config	1	Read-only value in hal_interrupt
+0x0041D160	gpio_data_0041d160	uint32	1	Data reference in hal_gpio
+0x0041d160	hal_interrupt_var_0041d160	config	1	Read-only value in hal_interrupt
+0x0041D164	gpio_data_0041d164	uint32	1	Data reference in hal_gpio
+0x0041d164	hal_interrupt_var_0041d164	config	1	Read-only value in hal_interrupt
+0x0041D168	gpio_data_0041d168	uint32	1	Data reference in hal_gpio
+0x0041d168	hal_interrupt_var_0041d168	config	1	Read-only value in hal_interrupt
+0x0041D16C	gpio_data_0041d16c	uint32	1	Data reference in hal_gpio
+0x0041d16c	hal_interrupt_var_0041d16c	config	1	Read-only value in hal_interrupt
+0x0041D170	gpio_data_0041d170	uint32	1	Data reference in hal_gpio
+0x0041d170	hal_interrupt_var_0041d170	config	1	Read-only value in hal_interrupt
+0x0041D174	gpio_data_0041d174	uint32	1	Data reference in hal_gpio
+0x0041d174	hal_interrupt_var_0041d174	config	1	Read-only value in hal_interrupt
+0x0041D178	gpio_data_0041d178	uint32	2	Data reference in hal_gpio
+0x0041d178	hal_interrupt_var_0041d178	config	2	Read-only value in hal_interrupt
+0x0041D17C	gpio_data_0041d17c	uint32	2	Data reference in hal_gpio
+0x0041d17c	hal_interrupt_var_0041d17c	config	2	Read-only value in hal_interrupt
+0x0041D180	gpio_data_0041d180	uint32	1	Data reference in hal_gpio
+0x0041d180	hal_interrupt_var_0041d180	config	1	Read-only value in hal_interrupt
+0x0041D184	gpio_data_0041d184	uint32	1	Data reference in hal_gpio
+0x0041d184	hal_interrupt_var_0041d184	config	1	Read-only value in hal_interrupt
+0x0041D188	gpio_data_0041d188	uint32	1	Data reference in hal_gpio
+0x0041d188	hal_interrupt_var_0041d188	config	1	Read-only value in hal_interrupt
+0x0041D18C	gpio_data_0041d18c	uint32	1	Data reference in hal_gpio
+0x0041d18c	hal_interrupt_var_0041d18c	config	1	Read-only value in hal_interrupt
+0x0041D190	gpio_data_0041d190	uint32	1	Data reference in hal_gpio
+0x0041d190	hal_interrupt_var_0041d190	config	1	Read-only value in hal_interrupt
+0x0041D194	gpio_data_0041d194	uint32	1	Data reference in hal_gpio
+0x0041d194	hal_interrupt_var_0041d194	config	1	Read-only value in hal_interrupt
+
+# =========================================================================
+# HAL INTERRUPT / NVIC
+# =========================================================================
+0x0041D1E8	hal_int_data_0041d1e8	uint32	1	Data reference in hal_interrupt
+0x0041d1e8	hal_interrupt_var_0041d1e8	config	1	Read-only value in hal_interrupt
+0x0041D1EC	hal_int_data_0041d1ec	uint32	1	Data reference in hal_interrupt
+0x0041d1ec	hal_interrupt_var_0041d1ec	config	1	Read-only value in hal_interrupt
+0x0041D1F0	hal_int_data_0041d1f0	uint32	1	Data reference in hal_interrupt
+0x0041d1f0	hal_interrupt_var_0041d1f0	callback	1	Function pointer in hal_interrupt
+0x0041d868	hal_i2c_var_0041d868	callback	1	Function pointer in hal_i2c
+0x0041d86c	hal_i2c_var_0041d86c	callback	1	Function pointer in hal_i2c
+0x0041d870	hal_i2c_var_0041d870	callback	1	Function pointer in hal_i2c
+0x0041d874	hal_i2c_var_0041d874	callback	3	Function pointer in hal_i2c
+0x0041d878	hal_i2c_var_0041d878	callback	1	Function pointer in hal_i2c
+0x0041d87c	hal_i2c_var_0041d87c	callback	4	Function pointer in hal_i2c
+0x0041d880	hal_i2c_var_0041d880	struct	1	Struct/array in hal_i2c
+0x0041d884	hal_i2c_var_0041d884	struct	2	Struct/array in hal_i2c
+0x0041d888	hal_i2c_var_0041d888	callback	1	Function pointer in hal_i2c
+0x0041d88c	hal_i2c_var_0041d88c	callback	2	Function pointer in hal_i2c
+0x0041d890	hal_i2c_var_0041d890	callback	2	Function pointer in hal_i2c
+0x0041d894	hal_i2c_var_0041d894	callback	1	Function pointer in hal_i2c
+0x0041d898	hal_i2c_var_0041d898	callback	1	Function pointer in hal_i2c
+0x0041d89c	hal_i2c_var_0041d89c	callback	1	Function pointer in hal_i2c
+0x0041d8a0	hal_i2c_var_0041d8a0	callback	1	Function pointer in hal_i2c
+0x0041d8a4	hal_i2c_var_0041d8a4	callback	1	Function pointer in hal_i2c
+0x0041d8a8	hal_i2c_var_0041d8a8	state	5	Writable state in hal_i2c
+0x0041d8ac	hal_i2c_var_0041d8ac	state	10	Writable state in hal_i2c
+0x0041d8b0	hal_i2c_var_0041d8b0	config	2	Read-only value in hal_i2c
+0x0041d8b4	hal_i2c_var_0041d8b4	callback	3	Function pointer in hal_i2c
+0x0041d8b8	hal_i2c_var_0041d8b8	callback	3	Function pointer in hal_i2c
+0x0041d8bc	hal_i2c_var_0041d8bc	config	2	Read-only value in hal_i2c
+0x0041d8c0	hal_i2c_var_0041d8c0	state	11	Writable state in hal_i2c
+0x0041d8c4	hal_i2c_var_0041d8c4	config	1	Read-only value in hal_i2c
+0x0041d8c8	hal_i2c_var_0041d8c8	config	1	Read-only value in hal_i2c
+0x0041d8cc	hal_i2c_var_0041d8cc	config	1	Read-only value in hal_i2c
+0x0041e0e8	hal_i2c_var_0041e0e8	struct	2	Struct/array in hal_i2c
+0x0041e0ec	hal_i2c_var_0041e0ec	struct	1	Struct/array in hal_i2c
+0x0041e0f0	hal_i2c_var_0041e0f0	struct	1	Struct/array in hal_i2c
+0x0041e0f4	hal_i2c_var_0041e0f4	state	2	Writable state in hal_i2c
+0x0041e0f8	hal_i2c_var_0041e0f8	struct	2	Struct/array in hal_i2c
+0x0041e0fc	hal_i2c_var_0041e0fc	struct	2	Struct/array in hal_i2c
+0x0041e100	hal_adc_var_0041e100	struct	1	Struct/array in hal_adc
+0x0041e104	hal_adc_var_0041e104	struct	1	Struct/array in hal_adc
+0x0041e108	hal_adc_var_0041e108	struct	1	Struct/array in hal_adc
+0x0041e10c	hal_adc_var_0041e10c	struct	1	Struct/array in hal_adc
+0x0041e110	hal_adc_var_0041e110	state	5	Writable state in hal_adc
+0x0041e114	hal_adc_var_0041e114	state	3	Writable state in hal_adc
+0x0041e118	hal_adc_var_0041e118	state	3	Writable state in hal_adc
+0x0041e11c	hal_adc_var_0041e11c	state	3	Writable state in hal_adc
+0x0041e120	hal_adc_var_0041e120	state	3	Writable state in hal_adc
+0x0041e124	hal_adc_var_0041e124	state	3	Writable state in hal_adc
+0x0041e128	hal_adc_var_0041e128	state	3	Writable state in hal_adc
+0x0041e12c	hal_adc_var_0041e12c	state	3	Writable state in hal_adc
+0x0041e130	hal_adc_var_0041e130	state	3	Writable state in hal_adc
+0x0041e134	hal_adc_var_0041e134	state	3	Writable state in hal_adc
+0x0041e138	hal_adc_var_0041e138	state	3	Writable state in hal_adc
+0x0041e13c	hal_adc_var_0041e13c	state	3	Writable state in hal_adc
+0x0041e140	hal_adc_var_0041e140	state	3	Writable state in hal_adc
+0x0041e144	hal_adc_var_0041e144	state	3	Writable state in hal_adc
+0x0041e148	hal_adc_var_0041e148	struct	2	Struct/array in hal_adc
+0x0041e14c	hal_adc_var_0041e14c	callback	1	Function pointer in hal_adc
+0x0041e150	hal_adc_var_0041e150	callback	1	Function pointer in hal_adc
+0x0041e154	hal_adc_var_0041e154	callback	1	Function pointer in hal_adc
+0x0041e158	hal_adc_var_0041e158	callback	1	Function pointer in hal_adc
+0x0041e15c	hal_adc_var_0041e15c	callback	1	Function pointer in hal_adc
+0x0041e160	hal_adc_var_0041e160	callback	1	Function pointer in hal_adc
+0x0041e164	hal_adc_var_0041e164	callback	1	Function pointer in hal_adc
+0x0041e168	hal_adc_var_0041e168	callback	1	Function pointer in hal_adc
+0x0041e16c	hal_adc_var_0041e16c	callback	1	Function pointer in hal_adc
+0x0041e170	hal_adc_var_0041e170	callback	1	Function pointer in hal_adc
+0x0041e174	hal_adc_var_0041e174	callback	1	Function pointer in hal_adc
+0x0041e178	hal_adc_var_0041e178	callback	1	Function pointer in hal_adc
+0x0041e17c	hal_adc_var_0041e17c	callback	1	Function pointer in hal_adc
+0x0041e180	hal_adc_var_0041e180	state	3	Writable state in hal_adc
+0x0041e184	hal_adc_var_0041e184	state	2	Writable state in hal_adc
+0x0041e188	hal_adc_var_0041e188	state	2	Writable state in hal_adc
+0x0041e18c	hal_adc_var_0041e18c	state	2	Writable state in hal_adc
+0x0041e190	hal_adc_var_0041e190	state	2	Writable state in hal_adc
+0x0041e194	hal_adc_var_0041e194	state	2	Writable state in hal_adc
+0x0041e198	hal_adc_var_0041e198	state	2	Writable state in hal_adc
+0x0041e19c	hal_adc_var_0041e19c	state	2	Writable state in hal_adc
+0x0041e1a0	hal_adc_var_0041e1a0	state	2	Writable state in hal_adc
+0x0041e1a4	hal_adc_var_0041e1a4	state	2	Writable state in hal_adc
+0x0041e1a8	hal_adc_var_0041e1a8	state	2	Writable state in hal_adc
+0x0041e1ac	hal_adc_var_0041e1ac	state	2	Writable state in hal_adc
+0x0041e1b0	hal_adc_var_0041e1b0	state	2	Writable state in hal_adc
+0x0041e1b4	hal_adc_var_0041e1b4	state	2	Writable state in hal_adc
+0x0041e1b8	hal_adc_var_0041e1b8	struct	5	Struct/array in hal_adc
+0x0041e1bc	hal_adc_var_0041e1bc	struct	5	Struct/array in hal_adc
+0x004303A0	nvic_ptr_004303a0	ptr	1	Pointer variable in nvic
+0x004303A4	nvic_data_004303a4	string	1	Data reference in nvic
+0x004303A8	nvic_data_004303a8	string	1	Data reference in nvic
+0x004303AC	nvic_ptr_004303ac	ptr	1	Pointer variable in nvic
+0x004303B0	nvic_byte_ref	byte_ptr	1	Byte pointer reference in nvic
+0x004303B4	nvic_ptr_004303b4	ptr	4	Pointer variable in nvic
+0x004303B8	nvic_ptr_004303b8	ptr	1	Pointer variable in nvic
+0xE000ED08	scb_vtor	uint32	1	ARM SCB VTOR (Vector Table Offset Register)
+
+# =========================================================================
+# HAL I2C (IOM)
+# =========================================================================
+0x0041D868	hal_i2c_data_0041d868	uint32	1	Data reference in hal_i2c
+0x0041D86C	hal_i2c_data_0041d86c	uint32	1	Data reference in hal_i2c
+0x0041D870	hal_i2c_data_0041d870	uint32	1	Data reference in hal_i2c
+0x0041D874	hal_i2c_data_0041d874	uint32	4	Data reference in hal_i2c
+0x0041D878	hal_i2c_data_0041d878	uint32	1	Data reference in hal_i2c
+0x0041D87C	hal_i2c_data_0041d87c	uint32	4	Data reference in hal_i2c
+0x0041D880	hal_i2c_data_0041d880	uint32	1	Data reference in hal_i2c
+0x0041D884	hal_i2c_data_0041d884	uint32	2	Data reference in hal_i2c
+0x0041D888	hal_i2c_data_0041d888	uint32	1	Data reference in hal_i2c
+0x0041D88C	hal_i2c_data_0041d88c	uint32	2	Data reference in hal_i2c
+0x0041D890	hal_i2c_data_0041d890	uint32	2	Data reference in hal_i2c
+0x0041D894	hal_i2c_data_0041d894	uint32	1	Data reference in hal_i2c
+0x0041D898	hal_i2c_data_0041d898	uint32	1	Data reference in hal_i2c
+0x0041D89C	hal_i2c_data_0041d89c	uint32	1	Data reference in hal_i2c
+0x0041D8A0	hal_i2c_data_0041d8a0	uint32	1	Data reference in hal_i2c
+0x0041D8A4	hal_i2c_data_0041d8a4	uint32	1	Data reference in hal_i2c
+0x0041D8A8	hal_i2c_data_0041d8a8	uint32	5	Data reference in hal_i2c
+0x0041D8AC	hal_i2c_data_0041d8ac	uint32	11	Data reference in hal_i2c
+0x0041D8B0	hal_i2c_data_0041d8b0	uint32	2	Data reference in hal_i2c
+0x0041D8B4	hal_i2c_data_0041d8b4	uint32	3	Data reference in hal_i2c
+0x0041D8B8	hal_i2c_data_0041d8b8	uint32	3	Data reference in hal_i2c
+0x0041D8BC	hal_i2c_data_0041d8bc	uint32	2	Data reference in hal_i2c
+0x0041D8C0	hal_i2c_data_0041d8c0	uint32	14	Data reference in hal_i2c
+0x0041D8C4	hal_i2c_data_0041d8c4	uint32	1	Data reference in hal_i2c
+0x0041D8C8	hal_i2c_data_0041d8c8	uint32	1	Data reference in hal_i2c
+0x0041D8CC	hal_i2c_data_0041d8cc	uint32	1	Data reference in hal_i2c
+
+# =========================================================================
+# HAL ADC
+# =========================================================================
+0x0041E0E8	hal_adc_ptr_0041e0e8	ptr	2	Pointer variable in hal_adc
+0x0041E0EC	hal_adc_ptr_0041e0ec	ptr	1	Pointer variable in hal_adc
+0x0041E0F0	hal_adc_ptr_0041e0f0	ptr	1	Pointer variable in hal_adc
+0x0041E0F4	hal_adc_data_0041e0f4	uint32	2	Data reference in hal_adc
+0x0041E0F8	hal_adc_ptr_0041e0f8	ptr	2	Pointer variable in hal_adc
+0x0041E0FC	hal_adc_ptr_0041e0fc	ptr	2	Pointer variable in hal_adc
+0x0041E100	hal_adc_ptr_0041e100	ptr	1	Pointer variable in hal_adc
+0x0041E104	hal_adc_ptr_0041e104	ptr	1	Pointer variable in hal_adc
+0x0041E108	hal_adc_ptr_0041e108	ptr	1	Pointer variable in hal_adc
+0x0041E10C	hal_adc_ptr_0041e10c	ptr	1	Pointer variable in hal_adc
+0x0041E110	hal_adc_data_0041e110	uint32	7	Data reference in hal_adc
+0x0041E114	hal_adc_data_0041e114	uint32	5	Data reference in hal_adc
+0x0041E118	hal_adc_data_0041e118	uint32	5	Data reference in hal_adc
+0x0041E11C	hal_adc_data_0041e11c	uint32	5	Data reference in hal_adc
+0x0041E120	hal_adc_data_0041e120	uint32	5	Data reference in hal_adc
+0x0041E124	hal_adc_data_0041e124	uint32	5	Data reference in hal_adc
+0x0041E128	hal_adc_data_0041e128	uint32	5	Data reference in hal_adc
+0x0041E12C	hal_adc_data_0041e12c	uint32	5	Data reference in hal_adc
+0x0041E130	hal_adc_data_0041e130	uint32	5	Data reference in hal_adc
+0x0041E134	hal_adc_data_0041e134	uint32	5	Data reference in hal_adc
+0x0041E138	hal_adc_data_0041e138	uint32	5	Data reference in hal_adc
+0x0041E13C	hal_adc_data_0041e13c	uint32	5	Data reference in hal_adc
+0x0041E140	hal_adc_data_0041e140	uint32	5	Data reference in hal_adc
+0x0041E144	hal_adc_data_0041e144	uint32	5	Data reference in hal_adc
+0x0041E148	hal_adc_data_0041e148	uint32	2	Data reference in hal_adc
+0x0041E14C	hal_adc_data_0041e14c	uint32	1	Data reference in hal_adc
+0x0041E150	hal_adc_data_0041e150	uint32	1	Data reference in hal_adc
+0x0041E154	hal_adc_data_0041e154	uint32	1	Data reference in hal_adc
+0x0041E158	hal_adc_data_0041e158	uint32	1	Data reference in hal_adc
+0x0041E15C	hal_adc_data_0041e15c	uint32	1	Data reference in hal_adc
+0x0041E160	hal_adc_data_0041e160	uint32	1	Data reference in hal_adc
+0x0041E164	hal_adc_data_0041e164	uint32	1	Data reference in hal_adc
+0x0041E168	hal_adc_data_0041e168	uint32	1	Data reference in hal_adc
+0x0041E16C	hal_adc_data_0041e16c	uint32	1	Data reference in hal_adc
+0x0041E170	hal_adc_data_0041e170	uint32	1	Data reference in hal_adc
+0x0041E174	hal_adc_data_0041e174	uint32	1	Data reference in hal_adc
+0x0041E178	hal_adc_data_0041e178	uint32	1	Data reference in hal_adc
+0x0041E17C	hal_adc_data_0041e17c	uint32	1	Data reference in hal_adc
+0x0041E180	hal_adc_ptr_0041e180	ptr	3	Pointer variable in hal_adc
+0x0041E184	hal_adc_data_0041e184	uint32	2	Data reference in hal_adc
+0x0041E188	hal_adc_data_0041e188	uint32	2	Data reference in hal_adc
+0x0041E18C	hal_adc_data_0041e18c	uint32	2	Data reference in hal_adc
+0x0041E190	hal_adc_data_0041e190	uint32	2	Data reference in hal_adc
+0x0041E194	hal_adc_data_0041e194	uint32	2	Data reference in hal_adc
+0x0041E198	hal_adc_data_0041e198	uint32	2	Data reference in hal_adc
+0x0041E19C	hal_adc_data_0041e19c	uint32	2	Data reference in hal_adc
+0x0041E1A0	hal_adc_data_0041e1a0	uint32	2	Data reference in hal_adc
+0x0041E1A4	hal_adc_data_0041e1a4	uint32	2	Data reference in hal_adc
+0x0041E1A8	hal_adc_data_0041e1a8	uint32	2	Data reference in hal_adc
+0x0041E1AC	hal_adc_data_0041e1ac	uint32	2	Data reference in hal_adc
+0x0041E1B0	hal_adc_data_0041e1b0	uint32	2	Data reference in hal_adc
+0x0041E1B4	hal_adc_data_0041e1b4	uint32	2	Data reference in hal_adc
+0x0041E1B8	hal_adc_ptr_0041e1b8	ptr	5	Pointer variable in hal_adc
+0x0041E1BC	hal_adc_ptr_0041e1bc	ptr	5	Pointer variable in hal_adc
+0x0041E41C	hal_adc_flag	uint32	3	Boolean/flag variable
+0x0041E420	hal_adc_data_0041e420	uint32	7	Data reference in hal_adc
+0x0041E424	hal_adc_data_0041e424	uint32	2	Data reference in hal_adc
+0x0041E428	hal_adc_data_0041e428	uint32	3	Data reference in hal_adc
+0x0041E42C	hal_adc_data_0041e42c	uint32	1	Data reference in hal_adc
+0x0041E430	hal_adc_data_0041e430	uint32	4	Data reference in hal_adc
+0x0041E434	hal_adc_data_0041e434	uint32	4	Data reference in hal_adc
+0x0041E438	hal_adc_data_0041e438	uint32	2	Data reference in hal_adc
+0x0041E43C	hal_adc_data_0041e43c	uint32	1	Data reference in hal_adc
+0x0041E440	hal_adc_data_0041e440	uint32	1	Data reference in hal_adc
+0x0041E444	hal_adc_data_0041e444	uint32	1	Data reference in hal_adc
+0x0041E448	hal_adc_data_0041e448	uint32	1	Data reference in hal_adc
+0x0041F10C	hal_adc_data_0041f10c	uint32	2	Data reference in hal_adc
+
+# =========================================================================
+# PRINTF CONST DATA (within printf_float_power/printf_output_chars body)
+# =========================================================================
+0x0041F290	printf_float_const_a	uint32	1	Const data in printf_float_power (was mspi_data)
+0x0041F294	printf_float_const_b	uint32	1	Const data in printf_float_power (was mspi_data)
+0x0041F298	printf_float_const_c	uint32	1	Const data in printf_float_power (was mspi_data)
+0x0041F29C	printf_float_const_d	uint32	1	Const data in printf_float_power (was mspi_data)
+0x0041F300	printf_output_const_a	uint32	1	Const data near printf_output_chars (was mspi_data)
+0x0041F304	printf_output_const_b	uint32	1	Const data near printf_output_chars (was mspi_data)
+0x0041F308	printf_output_const_c	uint32	1	Const data near printf_output_chars (was mspi_data)
+0x0041F30C	printf_output_const_d	uint32	1	Const data near printf_output_chars (was mspi_data)
+0x0041F310	printf_output_const_e	uint32	1	Const data near printf_output_chars (was mspi_data)
+0x0041F314	printf_output_const_f	uint32	1	Const data near printf_output_chars (was mspi_data)
+# =========================================================================
+# HAL MSPI CONTROLLER (starts at 0x0041F318 per function_map)
+# =========================================================================
+0x0041F4AC	mspi_flag_0041f4ac	uint32	5	Boolean/flag variable
+0x0041F4B0	mspi_flag_0041f4b0	uint32	2	Boolean/flag variable
+0x0041F4B4	mspi_ptr_0041f4b4	ptr	1	Pointer variable in hal_mspi
+0x0041F4B8	mspi_data_0041f4b8	uint32	3	Data reference in hal_mspi
+0x0041F4BC	mspi_const	uint32	2	Constant/return value
+0x0041F4C0	mspi_data_0041f4c0	uint32	1	Data reference in hal_mspi
+0x0041F4C4	mspi_data_0041f4c4	uint32	1	Data reference in hal_mspi
+0x0041F4C8	mspi_ptr_0041f4c8	ptr	3	Pointer variable in hal_mspi
+0x0041F9A4	mspi_ptr_0041f9a4	ptr	14	Pointer variable in hal_mspi
+0x0041F9AC	mspi_ptr_0041f9ac	ptr	1	Pointer variable in hal_mspi
+0x0041F9B0	mspi_data_0041f9b0	uint32	1	Data reference in hal_mspi
+0x0041FCD4	mspi_data_0041fcd4	uint32	1	Data reference in hal_mspi
+0x0041FCD8	mspi_data_0041fcd8	uint32	1	Data reference in hal_mspi
+0x0041FCDC	mspi_data_0041fcdc	uint32	1	Data reference in hal_mspi
+0x0041FCE0	mspi_data_0041fce0	uint32	1	Data reference in hal_mspi
+0x0041FCE4	mspi_data_0041fce4	uint32	1	Data reference in hal_mspi
+0x0041FCE8	mspi_data_0041fce8	uint32	1	Data reference in hal_mspi
+0x0041FCEC	mspi_data_0041fcec	uint32	1	Data reference in hal_mspi
+0x0041FCF0	mspi_data_0041fcf0	uint32	1	Data reference in hal_mspi
+0x0041FCF4	mspi_data_0041fcf4	uint32	1	Data reference in hal_mspi
+0x0041FCF8	mspi_data_0041fcf8	uint32	1	Data reference in hal_mspi
+0x0041FCFC	mspi_data_0041fcfc	uint32	1	Data reference in hal_mspi
+0x0041FD00	mspi_data_0041fd00	uint32	1	Data reference in hal_mspi
+0x0041FD04	mspi_data_0041fd04	uint32	1	Data reference in hal_mspi
+0x0041FD08	mspi_data_0041fd08	uint32	1	Data reference in hal_mspi
+0x0041FD0C	mspi_data_0041fd0c	uint32	1	Data reference in hal_mspi
+0x0041FD10	mspi_data_0041fd10	uint32	1	Data reference in hal_mspi
+0x0041FD14	mspi_data_0041fd14	uint32	1	Data reference in hal_mspi
+0x0041FD18	mspi_data_0041fd18	uint32	1	Data reference in hal_mspi
+0x0041FD1C	mspi_data_0041fd1c	uint32	1	Data reference in hal_mspi
+0x0041FD20	mspi_data_0041fd20	uint32	1	Data reference in hal_mspi
+0x0041FD24	mspi_data_0041fd24	uint32	1	Data reference in hal_mspi
+0x0041FD28	mspi_data_0041fd28	uint32	1	Data reference in hal_mspi
+0x0041FD2C	mspi_data_0041fd2c	uint32	1	Data reference in hal_mspi
+0x0041FD30	mspi_data_0041fd30	uint32	1	Data reference in hal_mspi
+0x0041FD34	mspi_data_0041fd34	uint32	1	Data reference in hal_mspi
+0x0041FD38	mspi_data_0041fd38	uint32	1	Data reference in hal_mspi
+0x0041FD3C	mspi_data_0041fd3c	uint32	1	Data reference in hal_mspi
+0x0041FD40	mspi_data_0041fd40	uint32	1	Data reference in hal_mspi
+0x0041FD44	mspi_data_0041fd44	uint32	1	Data reference in hal_mspi
+0x0041FD48	mspi_data_0041fd48	uint32	1	Data reference in hal_mspi
+
+# =========================================================================
+# NOR FLASH DRIVER (MX25U25643G)
+# =========================================================================
+0x004207FC	norflash_data_004207fc	string	1	Data reference in drv_norflash
+0x0042080C	norflash_data_0042080c	uint32	1	Data reference in drv_norflash
+0x004208FC	norflash_elog_func_004208fc	string_ptr	1	EasyLogger function name string
+0x0042098C	norflash_data_0042098c	uint32	11	Data reference in drv_norflash
+0x00420A94	norflash_elog_tag_00420a94	string_ptr	33	EasyLogger tag string (module name)
+0x00420A98	norflash_data_00420a98	uint32	2	Data reference in drv_norflash
+0x00420A9C	norflash_flag_00420a9c	uint32	1	Boolean/flag variable
+0x00420AA0	norflash_data_00420aa0	uint32	10	Data reference in drv_norflash
+0x00420AA4	norflash_elog_func_00420aa4	string_ptr	2	EasyLogger function name string
+0x00420AA8	norflash_elog_fmt_00420aa8	string_ptr	1	EasyLogger log format string
+0x00420AAC	norflash_elog_fmt_00420aac	string_ptr	1	EasyLogger log format string
+0x00420AB0	norflash_elog_fmt_00420ab0	string_ptr	1	EasyLogger log format string
+0x00420AB4	norflash_elog_func_00420ab4	string_ptr	2	EasyLogger function name string
+0x00420AB8	norflash_elog_fmt_00420ab8	string_ptr	1	EasyLogger log format string
+0x00420ABC	norflash_flag_00420abc	uint32	3	Boolean/flag variable
+0x00420AC0	norflash_elog_fmt_00420ac0	string_ptr	1	EasyLogger log format string
+0x00420BBC	norflash_elog_fmt_00420bbc	string_ptr	1	EasyLogger log format string
+0x00420BC0	norflash_elog_func_00420bc0	string_ptr	6	EasyLogger function name string
+0x00420BC4	norflash_data_00420bc4	uint32	1	Data reference in drv_norflash
+0x00420BC8	norflash_elog_fmt_00420bc8	string_ptr	1	EasyLogger log format string
+0x00420BCC	norflash_data_00420bcc	uint32	1	Data reference in drv_norflash
+0x00420BD0	norflash_elog_fmt_00420bd0	string_ptr	1	EasyLogger log format string
+0x00420BD4	norflash_elog_fmt_00420bd4	string_ptr	1	EasyLogger log format string
+0x00420BD8	norflash_elog_fmt_00420bd8	string_ptr	1	EasyLogger log format string
+0x00420BDC	norflash_byte_ref	byte_ptr	1	Byte pointer reference in drv_norflash
+0x00420BE0	norflash_elog_fmt_00420be0	string_ptr	1	EasyLogger log format string
+0x00420BE4	norflash_data_00420be4	uint32	1	Data reference in drv_norflash
+0x00420BE8	norflash_elog_fmt_00420be8	string_ptr	1	EasyLogger log format string
+0x00420BEC	norflash_elog_func_00420bec	string_ptr	3	EasyLogger function name string
+0x00420BF0	norflash_elog_fmt_00420bf0	string_ptr	1	EasyLogger log format string
+0x00420BF4	norflash_elog_fmt_00420bf4	string_ptr	1	EasyLogger log format string
+0x00420BF8	norflash_data_00420bf8	uint32	1	Data reference in drv_norflash
+0x00420BFC	norflash_elog_func_00420bfc	string_ptr	2	EasyLogger function name string
+0x00420D9C	norflash_elog_fmt_00420d9c	string_ptr	1	EasyLogger log format string
+0x00420DA0	norflash_elog_func_00420da0	string_ptr	1	EasyLogger function name string
+0x00420E28	norflash_elog_fmt_00420e28	string_ptr	3	EasyLogger log format string
+0x00420F08	norflash_data_00420f08	uint32	1	Data reference in drv_norflash
+0x00420F0C	norflash_data_00420f0c	uint32	2	Data reference in drv_norflash
+0x00420F10	norflash_elog_fmt_00420f10	string_ptr	1	EasyLogger log format string
+0x00420F14	norflash_elog_func_00420f14	string_ptr	1	EasyLogger function name string
+0x00420F9C	norflash_elog_tag_00420f9c	string_ptr	18	EasyLogger tag string (module name)
+0x00420FA0	norflash_elog_fmt_00420fa0	string_ptr	1	EasyLogger log format string
+0x00420FA4	norflash_elog_func_00420fa4	string_ptr	1	EasyLogger function name string
+0x00420FA8	norflash_elog_fmt_00420fa8	string_ptr	1	EasyLogger log format string
+0x00420FAC	norflash_elog_func_00420fac	string_ptr	2	EasyLogger function name string
+0x00420FB0	norflash_elog_fmt_00420fb0	string_ptr	1	EasyLogger log format string
+0x00420FB4	norflash_flag_00420fb4	uint32	10	Boolean/flag variable
+0x00420FB8	norflash_elog_fmt_00420fb8	string_ptr	3	EasyLogger log format string
+0x00420FBC	norflash_elog_func_00420fbc	string_ptr	5	EasyLogger function name string
+0x00420FC0	norflash_elog_fmt_00420fc0	string_ptr	1	EasyLogger log format string
+0x00420FC4	norflash_elog_fmt_00420fc4	string_ptr	1	EasyLogger log format string
+0x00420FC8	norflash_elog_fmt_00420fc8	string_ptr	1	EasyLogger log format string
+0x00420FCC	norflash_elog_fmt_00420fcc	string_ptr	3	EasyLogger log format string
+0x00420FD0	norflash_elog_func_00420fd0	string_ptr	1	EasyLogger function name string
+0x00420FD4	norflash_elog_func_00420fd4	string_ptr	1	EasyLogger function name string
+0x00420FEC	norflash_elog_func_00420fec	string_ptr	3	EasyLogger function name string
+0x00420FF0	norflash_data_00420ff0	uint32	1	Data reference in drv_norflash
+0x00420FF4	norflash_data_00420ff4	uint32	1	Data reference in drv_norflash
+0x00420FF8	norflash_elog_func_00420ff8	string_ptr	6	EasyLogger function name string
+0x00420FFC	norflash_data_00420ffc	uint32	1	Data reference in drv_norflash
+0x0042100C	norflash_data_0042100c	uint32	1	Data reference in drv_norflash
+0x0042101C	norflash_data_0042101c	uint32	2	Data reference in drv_norflash
+0x0042102C	norflash_elog_func_0042102c	string_ptr	2	EasyLogger function name string
+0x0042103C	norflash_elog_func_0042103c	string_ptr	2	EasyLogger function name string
+
+# =========================================================================
+# FLASH WRAPPER / MUTEX
+# =========================================================================
+0x004212DC	flash_data_004212dc	uint32	6	Data reference in flash_wrapper
+0x004212EC	flash_data_004212ec	uint32	4	Data reference in flash_wrapper
+0x0042130C	flash_data_0042130c	uint32	2	Data reference in flash_wrapper
+0x004214BC	flash_data_004214bc	uint32	2	Data reference in flash_wrapper
+0x004214C0	flash_data_004214c0	uint32	1	Data reference in flash_wrapper
+0x004214C4	flash_data_004214c4	uint32	2	Data reference in flash_wrapper
+0x004214C8	flash_data_004214c8	uint32	2	Data reference in flash_wrapper
+0x004214CC	flash_data_004214cc	uint32	2	Data reference in flash_wrapper
+
+# =========================================================================
+# LITTLEFS INIT / DIRECTORY MANAGEMENT
+# =========================================================================
+0x0042215C	lfs_init_ptr_0042215c	ptr	7	Pointer variable in littlefs_init
+0x004221DC	lfs_init_flag_004221dc	uint32	1	Boolean/flag variable
+0x004221E0	lfs_init_data_004221e0	uint32	1	Data reference in littlefs_init
+0x004221E4	lfs_init_data_004221e4	uint32	6	Data reference in littlefs_init
+0x004221E8	lfs_init_ptr_004221e8	ptr	5	Pointer variable in littlefs_init
+0x0042222C	lfs_init_data_0042222c	uint32	3	Data reference in littlefs_init
+0x0042237C	lfs_init_data_0042237c	uint32	5	Data reference in littlefs_init
+0x0042238C	lfs_init_data_0042238c	uint32	1	Data reference in littlefs_init
+0x0042239C	lfs_init_data_0042239c	uint32	7	Data reference in littlefs_init
+0x004223A0	lfs_init_ptr_004223a0	ptr	6	Pointer variable in littlefs_init
+0x004223A4	lfs_init_flag_004223a4	uint32	4	Boolean/flag variable
+0x004223A8	lfs_init_flag_004223a8	uint32	4	Boolean/flag variable
+0x004223AC	lfs_init_flag_004223ac	uint32	6	Boolean/flag variable
+0x004223B0	lfs_init_data_004223b0	uint32	1	Data reference in littlefs_init
+
+# =========================================================================
+# UART REDIRECT
+# =========================================================================
+0x004224F8	redirect_callback	func_ptr	2	Function pointer / callback
+
+# =========================================================================
+# HAL UART INNER
+# =========================================================================
+0x004227C4	aeabi_d2f_const_value	uint32	1	Const in __aeabi_d2f_const (was hal_uart_const)
+
+# =========================================================================
+# HAL IOM INNER
+# =========================================================================
+0x0042332C	iom_data_0042332c	uint32	2	Data reference in hal_iom
+0x0042338C	iom_ptr_0042338c	ptr	12	Pointer variable in hal_iom
+0x004236B0	iom_byte_ref	byte_ptr	13	Byte pointer reference in hal_iom
+0x004236B4	iom_data_004236b4	uint32	1	Data reference in hal_iom
+0x004236B8	iom_data_004236b8	uint32	1	Data reference in hal_iom
+0x004236BC	iom_data_004236bc	uint32	1	Data reference in hal_iom
+0x004236C0	iom_data_004236c0	uint32	1	Data reference in hal_iom
+0x004236C4	iom_data_004236c4	uint32	1	Data reference in hal_iom
+0x0042377C	iom_data_0042377c	uint32	5	Data reference in hal_iom
+0x0042378C	iom_data_0042378c	uint32	1	Data reference in hal_iom
+0x0042379C	iom_data_0042379c	uint32	1	Data reference in hal_iom
+0x004237A0	iom_data_004237a0	uint32	1	Data reference in hal_iom
+0x004237A4	iom_ptr_004237a4	ptr	1	Pointer variable in hal_iom
+0x004237A8	iom_data_004237a8	uint32	1	Data reference in hal_iom
+0x004237AC	iom_ptr_004237ac	ptr	1	Pointer variable in hal_iom
+0x004248E8	iom_ptr_004248e8	ptr	32	Pointer variable in hal_iom
+0x00424A38	iom_ptr_00424a38	ptr	4	Pointer variable in hal_iom
+
+# =========================================================================
+# HAL MSPI INNER
+# =========================================================================
+0x00424B20	mspi_data_00424b20	uint32	1	Data reference in hal_mspi_inner
+0x00424B24	mspi_ptr_00424b24	ptr	8	Pointer variable in hal_mspi_inner
+0x00424B28	mspi_data_00424b28	uint32	10	Data reference in hal_mspi_inner
+0x00424B2C	mspi_data_00424b2c	uint32	6	Data reference in hal_mspi_inner
+0x004250B4	mspi_ptr_004250b4	ptr	2	Pointer variable in hal_mspi_inner
+0x004250F0	mspi_data_004250f0	uint32	15	Data reference in hal_mspi_inner
+0x004250F4	mspi_data_004250f4	uint32	6	Data reference in hal_mspi_inner
+0x004250F8	mspi_ptr_004250f8	ptr	5	Pointer variable in hal_mspi_inner
+0x004250FC	mspi_data_004250fc	uint32	5	Data reference in hal_mspi_inner
+0x00425DE0	mspi_data_00425de0	uint32	1	Data reference in hal_mspi_inner
+0x00425DE4	mspi_ptr_00425de4	ptr	47	Pointer variable in hal_mspi_inner
+0x00425DE8	mspi_flag_00425de8	uint32	2	Boolean/flag variable
+0x0042674C	mspi_data_0042674c	uint32	1	Data reference in hal_mspi_inner
+0x00426B4C	mspi_data_00426b4c	uint32	1	Data reference in hal_mspi_inner
+0x00426B50	mspi_data_00426b50	uint32	7	Data reference in hal_mspi_inner
+0x00426B54	mspi_data_00426b54	uint32	1	Data reference in hal_mspi_inner
+0x00426B58	mspi_ptr_00426b58	ptr	5	Pointer variable in hal_mspi_inner
+
+# =========================================================================
+# FIRMWARE EVENT LOOP
+# =========================================================================
+0x00426C7C	fw_evt_data_00426c7c	uint32	7	Data reference in fw_event_loop
+0x00426C80	fw_evt_data_00426c80	uint32	1	Data reference in fw_event_loop
+0x00426C84	fw_evt_data_00426c84	uint32	1	Data reference in fw_event_loop
+0x00426C88	fw_evt_data_00426c88	uint32	2	Data reference in fw_event_loop
+0x00426C8C	fw_evt_data_00426c8c	uint32	5	Data reference in fw_event_loop
+0x00426C90	fw_evt_data_00426c90	uint32	3	Data reference in fw_event_loop
+0x00426F80	fw_evt_data_00426f80	uint32	3	Data reference in fw_event_loop
+0x00426F84	fw_evt_data_00426f84	uint32	1	Data reference in fw_event_loop
+0x00426F88	fw_evt_data_00426f88	uint32	2	Data reference in fw_event_loop
+0x0042709C	fw_evt_data_0042709c	uint32	1	Data reference in fw_event_loop
+0x004270A0	fw_evt_data_004270a0	uint32	1	Data reference in fw_event_loop
+0x004270A4	fw_evt_data_004270a4	uint32	1	Data reference in fw_event_loop
+0x004270A8	fw_evt_data_004270a8	uint32	1	Data reference in fw_event_loop
+0x004274D4	fw_evt_data_004274d4	uint32	2	Data reference in fw_event_loop
+0x004274D8	fw_evt_byte_ref	byte_ptr	2	Byte pointer reference in fw_event_loop
+0x004274DC	fw_evt_ptr_004274dc	ptr	5	Pointer variable in fw_event_loop
+0x004274E0	fw_evt_data_004274e0	uint32	1	Data reference in fw_event_loop
+0x004274E4	fw_evt_data_004274e4	uint32	1	Data reference in fw_event_loop
+0x004274E8	fw_evt_ptr_004274e8	ptr	2	Pointer variable in fw_event_loop
+0x004274EC	fw_evt_ptr_004274ec	ptr	2	Pointer variable in fw_event_loop
+0x004274F0	fw_evt_data_004274f0	uint32	4	Data reference in fw_event_loop
+0x004274F4	fw_evt_data_004274f4	uint32	1	Data reference in fw_event_loop
+0x004274F8	fw_evt_data_004274f8	uint32	5	Data reference in fw_event_loop
+0x004274FC	fw_evt_data_004274fc	uint32	4	Data reference in fw_event_loop
+0x0042750C	fw_evt_data_0042750c	uint32	1	Data reference in fw_event_loop
+0x00427BCC	fw_evt_ptr_00427bcc	ptr	2	Pointer variable in fw_event_loop
+0x00427BD0	fw_evt_data_00427bd0	uint32	1	Data reference in fw_event_loop
+0x00427BD4	fw_evt_data_00427bd4	uint32	10	Data reference in fw_event_loop
+0x00427BD8	fw_evt_data_00427bd8	uint32	3	Data reference in fw_event_loop
+
+# =========================================================================
+# HAL ASSERT
+# =========================================================================
+0x00427FA8	hal_assert_data_00427fa8	uint32	1	Data reference in hal_assert
+0x00427FAC	hal_assert_data_00427fac	uint32	2	Data reference in hal_assert
+0x00427FB0	hal_assert_data_00427fb0	uint32	1	Data reference in hal_assert
+
+# =========================================================================
+# BOOTLOADER MAIN / STARTUP
+# =========================================================================
+0x004289C4	boot_byte_ref_004289c4	byte_ptr	19	Byte pointer reference in main
+0x004289C8	boot_data_004289c8	uint32	9	Data reference in main
+0x004289CC	boot_data_004289cc	uint32	3	Data reference in main
+0x004289D0	boot_data_004289d0	uint32	7	Data reference in main
+0x004289D4	boot_data_004289d4	uint32	7	Data reference in main
+0x004289D8	boot_data_004289d8	uint32	7	Data reference in main
+0x004289DC	boot_data_004289dc	uint32	8	Data reference in main
+0x00428AF4	boot_data_00428af4	uint32	28	Data reference in main_startup
+0x00428AF8	boot_data_00428af8	uint32	2	Data reference in main_startup
+0x00428BD0	boot_data_00428bd0	uint32	24	Data reference in main_startup
+0x00428BD4	boot_data_00428bd4	uint32	5	Data reference in main_startup
+0x00428BDC	boot_ptr_00428bdc	ptr	10	Pointer variable in main_startup
+0x00428BE0	boot_ptr_00428be0	ptr	10	Pointer variable in main_startup
+0x00428BE4	boot_data_00428be4	uint32	10	Data reference in main_startup
+0x00428BE8	boot_data_00428be8	uint32	18	Data reference in main_startup
+0x00428BEC	boot_ptr_00428bec	ptr	18	Pointer variable in main_startup
+0x0042912C	boot_data_0042912c	uint32	10	Data reference in main_startup
+0x0042946C	boot_data_0042946c	uint32	8	Data reference in main_startup
+0x0042964C	boot_data_0042964c	uint32	9	Data reference in main_startup
+0x0042965C	boot_ptr_0042965c	ptr	9	Pointer variable in main_startup
+0x0042996C	boot_data_0042996c	uint32	14	Data reference in main_startup
+0x00429CEC	boot_data_00429cec	uint32	20	Data reference in main_startup
+0x00429D44	boot_data_00429d44	uint32	3	Data reference in main_startup
+0x00429D48	boot_data_00429d48	uint32	4	Data reference in main_startup
+0x00429FC4	boot_data_00429fc4	uint32	2	Data reference in main_startup
+0x00429FC8	boot_data_00429fc8	uint32	9	Data reference in main_startup
+0x00429FCC	boot_data_00429fcc	uint32	22	Data reference in main_startup
+0x00429FD0	boot_ptr_00429fd0	ptr	22	Pointer variable in main_startup
+0x00429FD4	boot_data_00429fd4	uint32	8	Data reference in main_startup
+0x0042A100	boot_data_0042a100	uint32	7	Data reference in main_startup
+0x0042A104	boot_data_0042a104	uint32	7	Data reference in main_startup
+0x0042A1F0	boot_data_0042a1f0	uint32	7	Data reference in main_startup
+0x0042A1F4	boot_ptr_0042a1f4	ptr	7	Pointer variable in main_startup
+0x0042A1F8	boot_ptr_0042a1f8	ptr	7	Pointer variable in main_startup
+0x0042A1FC	boot_data_0042a1fc	uint32	7	Data reference in main_startup
+0x0042A494	boot_ptr_0042a494	ptr	9	Pointer variable in main_startup
+0x0042A498	boot_data_0042a498	uint32	2	Data reference in main_startup
+0x0042A7AC	boot_data_0042a7ac	uint32	1	Data reference in main_startup
+0x0042A7B0	boot_data_0042a7b0	uint32	6	Data reference in main_startup
+0x0042A7B4	boot_ptr_0042a7b4	ptr	2	Pointer variable in main_startup
+0x0042A7B8	boot_ptr_0042a7b8	ptr	8	Pointer variable in main_startup
+0x0042A7BC	boot_data_0042a7bc	uint32	2	Data reference in main_startup
+0x0042A7C0	boot_flag_0042a7c0	uint32	1	Boolean/flag variable
+0x0042AABC	boot_flag_0042aabc	uint32	2	Boolean/flag variable
+0x0042AAC0	boot_ptr_0042aac0	ptr	6	Pointer variable in main_startup
+0x0042AAC4	boot_data_0042aac4	uint32	1	Data reference in main_startup
+0x0042AB00	boot_data_0042ab00	uint32	3	Data reference in main_startup
+0x0042AB04	boot_data_0042ab04	uint32	4	Data reference in main_startup
+0x0042AB9C	boot_byte_ref_0042ab9c	byte_ptr	19	Byte pointer reference in main_startup
+0x0042ABF0	boot_data_0042abf0	uint32	1	Data reference in main_startup
+0x0042ABF4	boot_data_0042abf4	uint32	3	Data reference in main_startup
+0x0042ABF8	boot_data_0042abf8	uint32	1	Data reference in main_startup
+0x0042ABFC	boot_data_0042abfc	uint32	2	Data reference in main_startup
+0x0042AC00	boot_data_0042ac00	uint32	1	Data reference in main_startup
+0x0042AC04	boot_data_0042ac04	uint32	1	Data reference in main_startup
+0x0042AC08	boot_data_0042ac08	uint32	3	Data reference in main_startup
+0x0042AC0C	boot_data_0042ac0c	uint32	1	Data reference in main_startup
+0x0042AC10	boot_data_0042ac10	uint32	1	Data reference in main_startup
+0x0042AC14	boot_data_0042ac14	uint32	1	Data reference in main_startup
+0x0042AC18	boot_data_0042ac18	uint32	2	Data reference in main_startup
+0x0042AC1C	boot_data_0042ac1c	uint32	9	Data reference in main_startup
+0x0042AC20	boot_data_0042ac20	uint32	1	Data reference in main_startup
+0x0042AC24	boot_data_0042ac24	uint32	1	Data reference in main_startup
+0x0042AC28	boot_data_0042ac28	uint32	1	Data reference in main_startup
+0x0042AC2C	boot_data_0042ac2c	uint32	1	Data reference in main_startup
+0x0042AC30	boot_data_0042ac30	uint32	2	Data reference in main_startup
+0x0042AC34	boot_data_0042ac34	uint32	7	Data reference in main_startup
+0x0042AC38	boot_flag_0042ac38	uint32	3	Boolean/flag variable
+0x0042AC3C	boot_flag_0042ac3c	uint32	2	Boolean/flag variable
+0x0042AC40	boot_data_0042ac40	uint32	1	Data reference in main_startup
+0x0042AC44	boot_data_0042ac44	uint32	1	Data reference in main_startup
+0x0042AC48	boot_data_0042ac48	uint32	2	Data reference in main_startup
+0x0042AC4C	boot_data_0042ac4c	uint32	1	Data reference in main_startup
+0x0042AC50	boot_data_0042ac50	uint32	2	Data reference in main_startup
+0x0042AC54	boot_data_0042ac54	uint32	1	Data reference in main_startup
+0x0042AC58	boot_data_0042ac58	uint32	1	Data reference in main_startup
+0x0042AC5C	boot_data_0042ac5c	uint32	1	Data reference in main_startup
+0x0042AC60	boot_data_0042ac60	uint32	1	Data reference in main_startup
+0x0042AC64	boot_data_0042ac64	uint32	1	Data reference in main_startup
+0x0042AC68	boot_data_0042ac68	uint32	1	Data reference in main_startup
+0x0042AC6C	boot_flag_0042ac6c	uint32	4	Boolean/flag variable
+0x0042AC70	boot_data_0042ac70	uint32	2	Data reference in main_startup
+0x0042AC74	boot_data_0042ac74	uint32	3	Data reference in main_startup
+0x0042AC84	boot_data_0042ac84	uint32	1	Data reference in main_startup
+0x0042AC88	boot_data_0042ac88	uint32	1	Data reference in main_startup
+0x0042AE38	boot_data_0042ae38	uint32	1	Data reference in main_startup
+0x0042AF5C	boot_data_0042af5c	uint32	2	Data reference in main_startup
+0x0042AFB4	boot_data_0042afb4	uint32	1	Data reference in main_startup
+0x0042B5E8	boot_ptr_0042b5e8	ptr	4	Pointer variable in main_startup
+0x0042B5EC	boot_ptr_0042b5ec	ptr	7	Pointer variable in main_startup
+0x0042B5F0	boot_byte_ref_0042b5f0	byte_ptr	24	Byte pointer reference in main_startup
+0x0042B5F4	boot_data_0042b5f4	uint32	21	Data reference in main_startup
+0x0042B5F8	boot_data_0042b5f8	uint32	4	Data reference in main_startup
+0x0042B5FC	boot_data_0042b5fc	uint32	8	Data reference in main_startup
+0x0042B600	boot_data_0042b600	uint32	4	Data reference in main_startup
+0x0042B908	boot_data_0042b908	uint32	10	Data reference in main_startup
+0x0042B90C	boot_byte_ref_0042b90c	byte_ptr	8	Byte pointer reference in main_startup
+0x0042B910	boot_byte_ref_0042b910	byte_ptr	4	Byte pointer reference in main_startup
+0x0042B914	boot_data_0042b914	uint32	5	Data reference in main_startup
+0x0042B918	boot_flag_0042b918	uint32	2	Boolean/flag variable
+0x0042B91C	boot_data_0042b91c	uint32	8	Data reference in main_startup
+0x0042B920	boot_flag_0042b920	uint32	1	Boolean/flag variable
+0x0042B924	boot_data_0042b924	uint32	4	Data reference in main_startup
+0x0042B928	boot_flag_0042b928	uint32	2	Boolean/flag variable
+0x0042B92C	boot_ptr_0042b92c	ptr	6	Pointer variable in main_startup
+0x0042B930	boot_data_0042b930	uint32	1	Data reference in main_startup
+0x0042B934	boot_data_0042b934	uint32	1	Data reference in main_startup
+0x0042B938	boot_data_0042b938	uint32	3	Data reference in main_startup
+0x0042B93C	boot_data_0042b93c	uint32	3	Data reference in main_startup
+0x0042B940	boot_data_0042b940	uint32	1	Data reference in main_startup
+0x0042B944	boot_data_0042b944	uint32	2	Data reference in main_startup
+0x0042B948	boot_ptr_0042b948	ptr	4	Pointer variable in main_startup
+0x0042BCE8	boot_ptr_0042bce8	ptr	5	Pointer variable in main_startup
+0x0042BD30	boot_data_0042bd30	uint32	4	Data reference in main_startup
+0x0042BD34	boot_ptr_0042bd34	ptr	6	Pointer variable in main_startup
+0x0042BD38	boot_data_0042bd38	uint32	4	Data reference in main_startup
+0x0042BE9C	boot_data_0042be9c	uint32	1	Data reference in main_startup
+0x0042BEF0	boot_data_0042bef0	uint32	1	Data reference in main_startup
+0x0042BEF4	boot_data_0042bef4	uint32	1	Data reference in main_startup
+0x0042BEF8	boot_data_0042bef8	uint32	1	Data reference in main_startup
+0x0042BEFC	boot_data_0042befc	uint32	1	Data reference in main_startup
+0x0042BF00	boot_data_0042bf00	uint32	2	Data reference in main_startup
+0x0042BF04	boot_data_0042bf04	uint32	10	Data reference in main_startup
+0x0042BF08	boot_data_0042bf08	uint32	1	Data reference in main_startup
+0x0042BF0C	boot_data_0042bf0c	uint32	1	Data reference in main_startup
+0x0042BF10	boot_data_0042bf10	uint32	1	Data reference in main_startup
+0x0042BF14	boot_data_0042bf14	uint32	1	Data reference in main_startup
+0x0042BF18	boot_data_0042bf18	uint32	3	Data reference in main_startup
+0x0042BF1C	boot_data_0042bf1c	uint32	2	Data reference in main_startup
+0x0042BF20	boot_data_0042bf20	uint32	7	Data reference in main_startup
+0x0042BF24	boot_flag_0042bf24	uint32	3	Boolean/flag variable
+0x0042BF28	boot_flag_0042bf28	uint32	2	Boolean/flag variable
+0x0042BF2C	boot_data_0042bf2c	uint32	1	Data reference in main_startup
+0x0042BF30	boot_data_0042bf30	uint32	1	Data reference in main_startup
+0x0042BF34	boot_data_0042bf34	uint32	2	Data reference in main_startup
+0x0042BF38	boot_data_0042bf38	uint32	1	Data reference in main_startup
+0x0042BF3C	boot_data_0042bf3c	uint32	2	Data reference in main_startup
+0x0042BF40	boot_data_0042bf40	uint32	1	Data reference in main_startup
+0x0042BF44	boot_data_0042bf44	uint32	1	Data reference in main_startup
+0x0042BF48	boot_data_0042bf48	uint32	1	Data reference in main_startup
+0x0042BF4C	boot_data_0042bf4c	uint32	1	Data reference in main_startup
+0x0042BF50	boot_data_0042bf50	uint32	1	Data reference in main_startup
+0x0042BF54	boot_data_0042bf54	uint32	1	Data reference in main_startup
+0x0042BF58	boot_flag_0042bf58	uint32	5	Boolean/flag variable
+0x0042BF5C	boot_data_0042bf5c	uint32	2	Data reference in main_startup
+0x0042BF60	boot_data_0042bf60	uint32	1	Data reference in main_startup
+0x0042BF64	boot_data_0042bf64	uint32	3	Data reference in main_startup
+0x0042BF68	boot_data_0042bf68	uint32	3	Data reference in main_startup
+0x0042BF78	boot_data_0042bf78	uint32	1	Data reference in main_startup
+0x0042BF7C	boot_data_0042bf7c	uint32	1	Data reference in main_startup
+
+# =========================================================================
+# DFU FILE I/O
+# =========================================================================
+0x0042C634	dfu_ptr_0042c634	ptr	19	Pointer variable in dfu_file
+0x0042C638	dfu_data_0042c638	uint32	1	Data reference in dfu_file
+0x0042C63C	dfu_data_0042c63c	uint32	1	Data reference in dfu_file
+0x0042C640	dfu_data_0042c640	uint32	1	Data reference in dfu_file
+0x0042C8CC	dfu_data_0042c8cc	uint32	9	Data reference in dfu_file
+0x0042C8D0	dfu_flag_0042c8d0	uint32	3	Boolean/flag variable
+0x0042CCFC	dfu_data_0042ccfc	uint32	4	Data reference in dfu_file
+0x0042CD00	dfu_ptr_0042cd00	ptr	3	Pointer variable in dfu_file
+0x0042CD04	dfu_data_0042cd04	uint32	1	Data reference in dfu_file
+0x0042CD08	dfu_ptr_0042cd08	ptr	1	Pointer variable in dfu_file
+0x0042CD0C	dfu_ptr_0042cd0c	ptr	6	Pointer variable in dfu_file
+0x0042CD10	dfu_ptr_0042cd10	ptr	1	Pointer variable in dfu_file
+0x0042D040	dfu_data_0042d040	uint32	3	Data reference in dfu_file
+0x0042D044	dfu_data_0042d044	uint32	2	Data reference in dfu_file
+0x0042D048	dfu_data_0042d048	uint32	3	Data reference in dfu_file
+0x0042D04C	dfu_data_0042d04c	uint32	2	Data reference in dfu_file
+0x0042D6EC	dfu_data_0042d6ec	uint32	1	Data reference in dfu_file
+0x0042D6F0	dfu_data_0042d6f0	uint32	3	Data reference in dfu_file
+0x0042D6F4	dfu_data_0042d6f4	uint32	1	Data reference in dfu_file
+0x0042D6F8	dfu_data_0042d6f8	uint32	6	Data reference in dfu_file
+0x0042D6FC	dfu_data_0042d6fc	uint32	4	Data reference in dfu_file
+0x0042D700	dfu_data_0042d700	uint32	12	Data reference in dfu_file
+0x0042D704	dfu_data_0042d704	uint32	2	Data reference in dfu_file
+0x0042D708	dfu_data_0042d708	uint32	1	Data reference in dfu_file
+0x0042D70C	dfu_data_0042d70c	uint32	1	Data reference in dfu_file
+0x0042D710	dfu_data_0042d710	uint32	4	Data reference in dfu_file
+0x0042D714	dfu_data_0042d714	uint32	7	Data reference in dfu_file
+0x0042D718	dfu_data_0042d718	uint32	1	Data reference in dfu_file
+0x0042D71C	dfu_data_0042d71c	uint32	1	Data reference in dfu_file
+0x0042D720	dfu_flag_0042d720	uint32	2	Boolean/flag variable
+0x0042D724	dfu_ptr_0042d724	ptr	6	Pointer variable in dfu_file
+0x0042D728	dfu_data_0042d728	uint32	1	Data reference in dfu_file
+0x0042D72C	dfu_data_0042d72c	uint32	17	Data reference in dfu_file
+0x0042D730	dfu_data_0042d730	uint32	2	Data reference in dfu_file
+0x0042D734	dfu_data_0042d734	uint32	10	Data reference in dfu_file
+0x0042D738	dfu_data_0042d738	uint32	2	Data reference in dfu_file
+0x0042D73C	dfu_data_0042d73c	uint32	2	Data reference in dfu_file
+0x0042D740	dfu_data_0042d740	uint32	6	Data reference in dfu_file
+0x0042D744	dfu_data_0042d744	uint32	8	Data reference in dfu_file
+0x0042D748	dfu_data_0042d748	uint32	4	Data reference in dfu_file
+0x0042D74C	dfu_data_0042d74c	uint32	8	Data reference in dfu_file
+0x0042D750	dfu_data_0042d750	uint32	9	Data reference in dfu_file
+0x0042D754	dfu_data_0042d754	uint32	10	Data reference in dfu_file
+0x0042D758	dfu_data_0042d758	uint32	10	Data reference in dfu_file
+0x0042D75C	dfu_data_0042d75c	uint32	4	Data reference in dfu_file
+0x0042D780	dfu_flag_0042d780	uint32	2	Boolean/flag variable
+0x0042D784	dfu_flag_0042d784	uint32	6	Boolean/flag variable
+0x0042D788	dfu_ptr_0042d788	ptr	5	Pointer variable in dfu_file
+0x0042D78C	dfu_ptr_0042d78c	ptr	1	Pointer variable in dfu_file
+0x0042D790	dfu_data_0042d790	uint32	2	Data reference in dfu_file
+
+# =========================================================================
+# DFU CORE
+# =========================================================================
+0x0042DA1C	dfu_data_0042da1c	uint32	1	Data reference in dfu_core
+0x0042DA20	dfu_data_0042da20	uint32	1	Data reference in dfu_core
+0x0042DA24	dfu_data_0042da24	uint32	1	Data reference in dfu_core
+0x0042DA28	dfu_data_0042da28	uint32	2	Data reference in dfu_core
+0x0042DA2C	dfu_data_0042da2c	uint32	2	Data reference in dfu_core
+0x0042DA30	dfu_data_0042da30	uint32	1	Data reference in dfu_core
+0x0042E050	dfu_const	uint32	1	Constant/return value
+0x0042E054	dfu_data_0042e054	uint32	6	Data reference in dfu_core
+0x0042E058	dfu_elog_fmt_0042e058	string_ptr	3	EasyLogger log format string
+0x0042E05C	dfu_elog_func_0042e05c	string_ptr	4	EasyLogger function name string
+0x0042E060	dfu_elog_source	string_ptr	16	EasyLogger source file path
+0x0042E064	dfu_elog_tag	string_ptr	16	EasyLogger tag string (module name)
+0x0042E068	dfu_ptr_0042e068	ptr	5	Pointer variable in dfu_core
+0x0042E06C	dfu_elog_fmt_0042e06c	string_ptr	1	EasyLogger log format string
+0x0042E070	dfu_ptr_0042e070	ptr	10	Pointer variable in dfu_core
+0x0042E074	dfu_elog_fmt_0042e074	string_ptr	2	EasyLogger log format string
+0x0042E078	dfu_elog_fmt_0042e078	string_ptr	9	EasyLogger log format string
+0x0042E07C	dfu_elog_fmt_0042e07c	string_ptr	1	EasyLogger log format string
+0x0042E080	dfu_elog_fmt_0042e080	string_ptr	1	EasyLogger log format string
+0x0042E084	dfu_elog_func_0042e084	string_ptr	2	EasyLogger function name string
+0x0042E088	dfu_elog_fmt_0042e088	string_ptr	2	EasyLogger log format string
+0x0042E08C	dfu_elog_func_0042e08c	string_ptr	2	EasyLogger function name string
+0x0042E090	dfu_elog_fmt_0042e090	string_ptr	1	EasyLogger log format string
+0x0042E094	dfu_elog_fmt_0042e094	string_ptr	1	EasyLogger log format string
+0x0042E098	dfu_elog_fmt_0042e098	string_ptr	1	EasyLogger log format string
+0x0042E09C	dfu_data_0042e09c	uint32	2	Data reference in dfu_core
+0x0042E0A0	dfu_elog_fmt_0042e0a0	string_ptr	1	EasyLogger log format string
+0x0042E0A4	dfu_ptr_0042e0a4	ptr	5	Pointer variable in dfu_core
+0x0042E0C4	dfu_data_0042e0c4	uint32	1	Data reference in dfu_core
+0x0042E0C8	dfu_elog_func_0042e0c8	string_ptr	1	EasyLogger function name string
+0x0042E0CC	dfu_data_0042e0cc	uint32	1	Data reference in dfu_core
+0x0042E0D0	dfu_data_0042e0d0	uint32	1	Data reference in dfu_core
+0x0042E0D4	dfu_data_0042e0d4	uint32	1	Data reference in dfu_core
+0x0042E0D8	dfu_elog_fmt_0042e0d8	string_ptr	1	EasyLogger log format string
+0x0042E0DC	dfu_elog_func_0042e0dc	string_ptr	4	EasyLogger function name string
+0x0042E0E0	dfu_elog_fmt_0042e0e0	string_ptr	1	EasyLogger log format string
+0x0042E0E4	dfu_data_0042e0e4	uint32	1	Data reference in dfu_core
+0x0042E0E8	dfu_elog_fmt_0042e0e8	string_ptr	1	EasyLogger log format string
+0x0042E0EC	dfu_elog_fmt_0042e0ec	string_ptr	1	EasyLogger log format string
+0x0042E0F0	dfu_elog_fmt_0042e0f0	string_ptr	1	EasyLogger log format string
+0x0042E0F4	dfu_elog_fmt_0042e0f4	string_ptr	1	EasyLogger log format string
+0x0042E0F8	dfu_elog_fmt_0042e0f8	string_ptr	1	EasyLogger log format string
+0x0042E0FC	dfu_elog_fmt_0042e0fc	string_ptr	1	EasyLogger log format string
+0x0042E100	dfu_elog_fmt_0042e100	string_ptr	1	EasyLogger log format string
+0x0042E104	dfu_elog_fmt_0042e104	string_ptr	1	EasyLogger log format string
+0x0042E108	dfu_elog_fmt_0042e108	string_ptr	1	EasyLogger log format string
+0x0042E10C	dfu_elog_fmt_0042e10c	string_ptr	1	EasyLogger log format string
+0x0042E16C	dfu_byte_ref	byte_ptr	1	Byte pointer reference in dfu_crc
+
+# =========================================================================
+# THREAD MANAGER
+# =========================================================================
+0x0042E3A4	thr_mgr_data_0042e3a4	uint32	1	Data reference in thread_manager
+0x0042E3A8	thr_mgr_elog_fmt_0042e3a8	string_ptr	1	EasyLogger log format string
+0x0042E3AC	thr_mgr_elog_func_0042e3ac	string_ptr	1	EasyLogger function name string
+0x0042E3B0	thr_mgr_elog_source	string_ptr	6	EasyLogger source file path
+0x0042E3B4	thr_mgr_elog_tag	string_ptr	6	EasyLogger tag string (module name)
+0x0042E3B8	thr_mgr_ptr	ptr	8	Pointer variable in thread_manager
+0x0042E3BC	thr_mgr_callback	func_ptr	2	Function pointer / callback
+0x0042E3D4	thr_mgr_data_0042e3d4	uint32	1	Data reference in thread_manager
+0x0042E3DC	thr_mgr_elog_fmt_0042e3dc	string_ptr	2	EasyLogger log format string
+0x0042E3E0	thr_mgr_elog_func_0042e3e0	string_ptr	1	EasyLogger function name string
+0x0042E3E4	thr_mgr_elog_fmt_0042e3e4	string_ptr	2	EasyLogger log format string
+0x0042E3E8	thr_mgr_elog_func_0042e3e8	string_ptr	1	EasyLogger function name string
+
+# =========================================================================
+# HAL WATCHDOG
+# =========================================================================
+0x0042E45C	wdt_data_0042e45c	uint32	2	Data reference in hal_wdt
+0x0042E480	wdt_data_0042e480	uint32	1	Data reference in hal_wdt
+0x0042E484	wdt_data_0042e484	uint32	1	Data reference in hal_wdt
+0x0042E784	wdt_flag_0042e784	uint32	4	Boolean/flag variable
+0x0042E788	wdt_data_0042e788	uint32	1	Data reference in hal_wdt
+0x0042E78C	wdt_data_0042e78c	uint32	1	Data reference in hal_wdt
+0x0042E790	wdt_elog_func_0042e790	string_ptr	4	EasyLogger function name string
+0x0042E794	wdt_elog_source	string_ptr	9	EasyLogger source file path
+0x0042E798	wdt_elog_tag	string_ptr	9	EasyLogger tag string (module name)
+0x0042E79C	wdt_flag_0042e79c	uint32	3	Boolean/flag variable
+0x0042E7A0	wdt_data_0042e7a0	uint32	1	Data reference in hal_wdt
+0x0042E7A4	wdt_data_0042e7a4	uint32	1	Data reference in hal_wdt
+0x0042E7A8	wdt_flag_0042e7a8	uint32	4	Boolean/flag variable
+0x0042E7AC	wdt_data_0042e7ac	uint32	1	Data reference in hal_wdt
+0x0042E7B0	wdt_data_0042e7b0	uint32	1	Data reference in hal_wdt
+0x0042E7B4	wdt_flag_0042e7b4	uint32	4	Boolean/flag variable
+0x0042E7B8	wdt_data_0042e7b8	uint32	1	Data reference in hal_wdt
+0x0042E7BC	wdt_data_0042e7bc	uint32	1	Data reference in hal_wdt
+0x0042E7C8	wdt_elog_fmt_0042e7c8	string_ptr	1	EasyLogger log format string
+0x0042E7CC	wdt_elog_func_0042e7cc	string_ptr	2	EasyLogger function name string
+0x0042E7D0	wdt_elog_fmt_0042e7d0	string_ptr	1	EasyLogger log format string
+0x0042E7D4	wdt_data_0042e7d4	uint32	2	Data reference in hal_wdt
+0x0042E7D8	wdt_elog_fmt_0042e7d8	string_ptr	2	EasyLogger log format string
+0x0042E7DC	wdt_elog_func_0042e7dc	string_ptr	3	EasyLogger function name string
+0x0042E7E0	wdt_ptr	ptr	9	Pointer variable in hal_wdt
+0x0042E7E4	wdt_data_0042e7e4	uint32	1	Data reference in hal_wdt
+0x0042E7E8	wdt_elog_fmt_0042e7e8	string_ptr	2	EasyLogger log format string
+0x0042E7EC	wdt_data_0042e7ec	uint32	1	Data reference in hal_wdt
+0x0042E810	wdt_data_0042e810	uint32	1	Data reference in hal_wdt
+0x0042E814	wdt_data_0042e814	uint32	2	Data reference in hal_wdt
+0x0042E818	wdt_data_0042e818	uint32	1	Data reference in hal_wdt
+
+# =========================================================================
+# HAL NOR FLASH ABSTRACTION
+# =========================================================================
+0x0042F53C	norflash_hal_data_0042f53c	uint32	6	Data reference in hal_norflash
+0x0042F540	norflash_hal_data_0042f540	uint32	2	Data reference in hal_norflash
+0x0042F544	norflash_hal_data_0042f544	uint32	8	Data reference in hal_norflash
+0x0042F548	norflash_hal_data_0042f548	uint32	2	Data reference in hal_norflash
+0x0042F54C	norflash_hal_data_0042f54c	uint32	4	Data reference in hal_norflash
+0x0042F550	norflash_hal_data_0042f550	uint32	2	Data reference in hal_norflash
+0x0042F554	norflash_hal_data_0042f554	uint32	2	Data reference in hal_norflash
+0x0042F558	norflash_hal_data_0042f558	uint32	3	Data reference in hal_norflash
+0x0042F55C	norflash_hal_data_0042f55c	uint32	4	Data reference in hal_norflash
+0x0042F560	norflash_hal_data_0042f560	uint32	4	Data reference in hal_norflash
+0x0042F564	norflash_hal_data_0042f564	uint32	3	Data reference in hal_norflash
+0x0042F568	norflash_hal_data_0042f568	uint32	4	Data reference in hal_norflash
+0x0042F56C	norflash_hal_data_0042f56c	uint32	4	Data reference in hal_norflash
+0x0042F570	norflash_hal_data_0042f570	uint32	1	Data reference in hal_norflash
+0x0042F574	norflash_hal_data_0042f574	uint32	1	Data reference in hal_norflash
+0x0042F578	norflash_hal_ptr_0042f578	ptr	1	Pointer variable in hal_norflash
+0x0042F57C	norflash_hal_ptr_0042f57c	ptr	1	Pointer variable in hal_norflash
+0x0042F58C	norflash_hal_data_0042f58c	uint32	3	Data reference in hal_norflash
+0x0042F590	norflash_hal_data_0042f590	uint32	2	Data reference in hal_norflash
+0x0042F594	norflash_hal_data_0042f594	uint32	2	Data reference in hal_norflash
+0x0042F598	norflash_hal_data_0042f598	uint32	2	Data reference in hal_norflash
+0x0042F59C	norflash_hal_data_0042f59c	uint32	2	Data reference in hal_norflash
+0x0042F5A0	norflash_hal_data_0042f5a0	uint32	2	Data reference in hal_norflash
+0x0042F5A4	norflash_hal_data_0042f5a4	uint32	2	Data reference in hal_norflash
+0x0042F5A8	norflash_hal_data_0042f5a8	uint32	3	Data reference in hal_norflash
+0x0042F5AC	norflash_hal_data_0042f5ac	uint32	2	Data reference in hal_norflash
+0x0042F5B0	norflash_hal_data_0042f5b0	uint32	2	Data reference in hal_norflash
+0x0042F5B4	norflash_hal_data_0042f5b4	string	2	Data reference in hal_norflash
+0x0042F5B8	norflash_hal_data_0042f5b8	uint32	2	Data reference in hal_norflash
+# ============================================================
+# HAL MSPI - MSPI controller driver (flash interface)
+# ============================================================
+0x0041e41c	hal_mspi_config_a	config	3	MSPI configuration A
+0x0041e420	hal_mspi_config_b	config	7	MSPI configuration B
+0x0041e424	hal_mspi_config_c	config	2	MSPI configuration C
+0x0041e428	hal_mspi_config_d	config	3	MSPI configuration D
+0x0041e42c	hal_mspi_config_e	config	1	MSPI configuration E
+0x0041e430	hal_mspi_config_f	config	4	MSPI configuration F
+0x0041e434	hal_mspi_config_g	config	4	MSPI configuration G
+0x0041e438	hal_mspi_config_h	config	2	MSPI configuration H
+0x0041e43c	hal_mspi_config_i	config	1	MSPI configuration I
+0x0041e440	hal_mspi_config_j	config	1	MSPI configuration J
+0x0041e444	hal_mspi_config_k	config	1	MSPI configuration K
+0x0041e448	hal_mspi_config_l	config	1	MSPI configuration L
+0x0041f10c	hal_mspi_init_config	config	2	MSPI init inner configuration
+0x0041f290	hal_mspi_configure_a	config	1	MSPI configure A
+0x0041f294	hal_mspi_configure_b	config	1	MSPI configure B
+0x0041f298	hal_mspi_configure_c	config	1	MSPI configure C
+0x0041f29c	hal_mspi_configure_d	config	1	MSPI configure D
+0x0041f300	hal_mspi_dev_config_a	config	1	MSPI device configure A
+0x0041f304	hal_mspi_dev_config_b	config	1	MSPI device configure B
+0x0041f308	hal_mspi_dev_config_c	config	1	MSPI device configure C
+0x0041f30c	hal_mspi_dev_config_d	config	1	MSPI device configure D
+0x0041f310	hal_mspi_dev_config_e	config	1	MSPI device configure E
+0x0041f314	hal_mspi_dev_config_f	config	1	MSPI device configure F
+0x0041f4ac	hal_mspi_int_enable_a	config	5	MSPI interrupt enable config A
+0x0041f4b0	hal_mspi_int_enable_b	config	2	MSPI interrupt enable config B
+0x0041f4b4	hal_mspi_int_disable_a	config	1	MSPI interrupt disable config A
+0x0041f4b8	hal_mspi_int_clear_a	config	3	MSPI interrupt clear config A
+0x0041f4bc	hal_mspi_int_status_a	config	2	MSPI interrupt status config A
+0x0041f4c0	hal_mspi_dma_status_a	config	1	MSPI DMA status config A
+0x0041f4c4	hal_mspi_hiprio_a	config	1	MSPI high priority config A
+0x0041f4c8	hal_mspi_hiprio_b	config	3	MSPI high priority config B
+0x0041f9a4	hal_mspi_instance_table	struct	14	MSPI instance descriptor table (stride 0x1c)
+0x0041f9ac	hal_mspi_timing_a	config	1	MSPI timing configure A
+0x0041f9b0	hal_mspi_timing_b	config	1	MSPI timing configure B
+# ============================================================
+# HAL MSPI CONFIG - MSPI timing scan configuration
+# ============================================================
+0x0041fcd4	mspi_timing_config_00	config	1	MSPI timing scan config entry 0
+0x0041fcd8	mspi_timing_config_01	config	1	MSPI timing scan config entry 1
+0x0041fcdc	mspi_timing_config_02	config	1	MSPI timing scan config entry 2
+0x0041fce0	mspi_timing_config_03	config	1	MSPI timing scan config entry 3
+0x0041fce4	mspi_timing_config_04	config	1	MSPI timing scan config entry 4
+0x0041fce8	mspi_timing_config_05	config	1	MSPI timing scan config entry 5
+0x0041fcec	mspi_timing_config_06	config	1	MSPI timing scan config entry 6
+0x0041fcf0	mspi_timing_config_07	config	1	MSPI timing scan config entry 7
+0x0041fcf4	mspi_timing_config_08	config	1	MSPI timing scan config entry 8
+0x0041fcf8	mspi_timing_config_09	config	1	MSPI timing scan config entry 9
+0x0041fcfc	mspi_timing_config_10	config	1	MSPI timing scan config entry 10
+0x0041fd00	mspi_timing_config_11	config	1	MSPI timing scan config entry 11
+0x0041fd04	mspi_timing_config_12	config	1	MSPI timing scan config entry 12
+0x0041fd08	mspi_timing_config_13	config	1	MSPI timing scan config entry 13
+0x0041fd0c	mspi_timing_config_14	config	1	MSPI timing scan config entry 14
+0x0041fd10	mspi_timing_config_15	config	1	MSPI timing scan config entry 15
+0x0041fd14	mspi_timing_config_16	config	1	MSPI timing scan config entry 16
+0x0041fd18	mspi_timing_config_17	config	1	MSPI timing scan config entry 17
+0x0041fd1c	mspi_timing_config_18	config	1	MSPI timing scan config entry 18
+0x0041fd20	mspi_timing_config_19	config	1	MSPI timing scan config entry 19
+0x0041fd24	mspi_timing_config_20	config	1	MSPI timing scan config entry 20
+0x0041fd28	mspi_timing_config_21	config	1	MSPI timing scan config entry 21
+0x0041fd2c	mspi_timing_config_22	config	1	MSPI timing scan config entry 22
+0x0041fd30	mspi_timing_config_23	config	1	MSPI timing scan config entry 23
+0x0041fd34	mspi_timing_config_24	config	1	MSPI timing scan config entry 24
+0x0041fd38	mspi_timing_config_25	config	1	MSPI timing scan config entry 25
+0x0041fd3c	mspi_timing_config_26	config	1	MSPI timing scan config entry 26
+0x0041fd40	mspi_timing_config_27	config	1	MSPI timing scan config entry 27
+0x0041fd44	mspi_timing_config_28	config	1	MSPI timing scan config entry 28
+0x0041fd48	mspi_timing_config_29	config	1	MSPI timing scan config entry 29
+# ============================================================
+# DRV NORFLASH - MX25U25643G NOR flash driver (MSPI)
+# Source: driver/flash/drv_mx25u25643g.c
+# ============================================================
+0x004207fc	norflash_config_a	config	1	NOR flash driver config A
+0x00420800	norflash_mspi_handle	state	12	MSPI device handle for NOR flash operations
+0x00420804	norflash_config_b	config	3	NOR flash driver config B
+0x00420808	norflash_config_c	config	6	NOR flash driver config C
+0x0042080c	norflash_config_d	config	1	NOR flash driver config D
+0x00420810	norflash_config_e	config	1	NOR flash driver config E
+0x004208fc	norflash_log_tag_a	string	1	Log tag for NOR flash soft reset
+0x00420900	norflash_log_tag_b	string	1	Log tag for NOR flash read_id
+0x00420904	norflash_log_tag_c	string	1	Log tag for NOR flash operations
+0x00420940	norflash_source_file	string	29	Source file "drv_mx25u25643g.c" for elog_output
+0x00420944	norflash_config_f	config	1	NOR flash config F
+0x00420948	norflash_log_tag_d	string	1	Log tag for NOR flash operations
+0x00420984	norflash_cmd_config_a	config	1	NOR flash command config A
+0x00420988	norflash_cmd_config_b	config	1	NOR flash command config B
+0x0042098c	norflash_cmd_buffer	buffer	11	NOR flash command buffer (MSPI command arg)
+0x00420a94	norflash_log_tag_main	string	33	Main log tag "drv.norflash" for elog_output
+0x00420a98	norflash_config_g	config	2	NOR flash config G
+0x00420a9c	norflash_config_h	config	1	NOR flash config H
+0x00420aa0	norflash_quad_enable_config	config	10	NOR flash quad enable configuration
+0x00420aa4	norflash_quad_mode_str	string	2	Quad mode log string
+0x00420aa8	norflash_quad_mode_fmt	string	1	Quad mode format string
+0x00420aac	norflash_config_i	config	1	NOR flash config I
+0x00420ab0	norflash_serial_mode_fmt	string	1	Serial mode format string
+0x00420ab4	norflash_serial_mode_str	string	2	Serial mode log string
+0x00420ab8	norflash_serial_mode_fmt_b	string	1	Serial mode format B
+0x00420abc	norflash_config_j	config	3	NOR flash config J
+0x00420ac0	norflash_log_str_a	string	1	NOR flash log string A
+0x00420bbc	norflash_page_prog_a	config	1	Page program config A
+0x00420bc0	norflash_page_prog_str	string	6	Page program log tag
+0x00420bc4	norflash_page_prog_b	config	1	Page program config B
+0x00420bc8	norflash_page_prog_fmt_a	string	1	Page program format A
+0x00420bcc	norflash_page_prog_fmt_b	string	1	Page program format B
+0x00420bd0	norflash_page_prog_fmt_c	string	1	Page program format C
+0x00420bd4	norflash_page_prog_fmt_d	string	1	Page program format D
+0x00420bd8	norflash_page_prog_fmt_e	string	1	Page program format E
+0x00420bdc	norflash_page_prog_f	config	1	Page program config F
+0x00420be0	norflash_page_prog_fmt_f	string	1	Page program format F
+0x00420be4	norflash_page_prog_g	config	1	Page program config G
+0x00420be8	norflash_sector_erase_str	string	1	Sector erase log string
+0x00420bec	norflash_sector_erase_tag	string	3	Sector erase log tag
+0x00420bf0	norflash_sector_erase_fmt_a	string	1	Sector erase format A
+0x00420bf4	norflash_sector_erase_fmt_b	string	1	Sector erase format B
+0x00420bf8	norflash_sector_erase_c	config	1	Sector erase config C
+0x00420bfc	norflash_write_str	string	2	Write function log string
+0x00420d9c	norflash_dma_fmt	string	1	DMA transfer format string
+0x00420da0	norflash_dma_str	string	1	DMA transfer log string
+0x00420e28	norflash_err_format	string	3	Error format string for NOR flash
+0x00420f08	norflash_qspi_init_a	config	1	QSPI init config A
+0x00420f0c	norflash_qspi_init_b	config	1	QSPI init config B
+0x00420f10	norflash_qspi_init_fmt	string	1	QSPI init format string
+0x00420f14	norflash_qspi_init_str	string	1	QSPI init log string
+0x00420f9c	norflash_log_tag_flash	string	18	Log tag for flash wrapper layer
+0x00420fa0	norflash_flash_init_fmt	string	1	Flash init format string
+0x00420fa4	norflash_flash_init_str	string	1	Flash init log string
+0x00420fa8	norflash_flash_config_fmt	string	1	Flash config format string
+0x00420fac	norflash_flash_config_str	string	2	Flash config log string
+0x00420fb0	norflash_flash_config_fmt_b	string	1	Flash config format B
+0x00420fb4	norflash_flash_ops_config	config	10	Flash operations configuration (read/write/erase ptrs)
+0x00420fb8	norflash_flash_config_c	config	3	Flash config C
+0x00420fbc	norflash_flash_mutex_str	string	2	Flash mutex log string
+0x00420fc0	norflash_flash_mutex_a	config	1	Flash mutex config A
+0x00420fc4	norflash_flash_mutex_fmt	string	1	Flash mutex format string
+0x00420fc8	norflash_flash_mutex_fmt_b	string	1	Flash mutex format B
+0x00420fcc	norflash_flash_mutex_fmt_c	string	3	Flash mutex format C
+0x00420fd0	norflash_flash_timing_str	string	1	Flash timing log string
+0x00420fd4	norflash_flash_timing_a	config	1	Flash timing config A
+0x00420fec	norflash_flash_reconfig_str	string	3	Flash reconfigure log string
+0x00420ff0	norflash_flash_reconfig_a	config	1	Flash reconfigure A
+0x00420ff4	norflash_flash_reconfig_b	config	1	Flash reconfigure B
+0x00420ff8	norflash_flash_reconfig_str_b	string	6	Flash reconfigure log string B
+0x00420ffc	norflash_flash_reconfig_c	config	1	Flash reconfigure C
+0x00421000	norflash_flash_reconfig_d	config	1	Flash reconfigure D
+0x00421004	norflash_flash_reconfig_e	config	1	Flash reconfigure E
+0x00421008	norflash_flash_reconfig_f	config	1	Flash reconfigure F
+0x0042100c	norflash_flash_reconfig_g	config	1	Flash reconfigure G
+0x00421010	norflash_flash_reconfig_h	config	1	Flash reconfigure H
+0x00421014	norflash_flash_reconfig_i	config	1	Flash reconfigure I
+0x00421018	norflash_flash_timing_str_b	string	3	Flash timing log string B
+0x0042101c	norflash_flash_timing_b	config	2	Flash timing B
+0x00421020	norflash_flash_timing_c	config	1	Flash timing C
+0x00421024	norflash_flash_timing_d	config	1	Flash timing D
+0x00421028	norflash_flash_timing_e	config	1	Flash timing E
+0x0042102c	norflash_flash_timing_f	config	2	Flash timing F
+0x00421030	norflash_flash_timing_g	config	1	Flash timing G
+0x00421034	norflash_flash_timing_h	config	1	Flash timing H
+0x00421038	norflash_flash_timing_i	config	1	Flash timing I
+0x0042103c	norflash_flash_timing_j	config	2	Flash timing J
+0x00421040	norflash_flash_timing_k	config	1	Flash timing K
+0x00421044	norflash_flash_timing_l	config	1	Flash timing L
+# ============================================================
+# FLASH WRAPPER - Flash mutex and abstraction
+# ============================================================
+0x004212dc	flash_mutex_handle	state	6	Flash mutex handle for thread-safe access
+0x004212ec	flash_mutex_attr	struct	4	Flash mutex attributes structure
+0x00421308	flash_mutex_config_a	config	1	Flash mutex configuration A
+0x0042130c	flash_mutex_config_b	config	2	Flash mutex configuration B
+0x004214bc	flash_wrapper_lock_a	config	2	Flash wrapper lock config A
+0x004214c0	flash_wrapper_lock_b	config	1	Flash wrapper lock config B
+0x004214c4	flash_wrapper_lock_c	config	2	Flash wrapper lock config C
+0x004214c8	flash_wrapper_lock_d	config	2	Flash wrapper lock config D
+0x004214cc	flash_wrapper_unlock_a	config	2	Flash wrapper unlock config A
+# ============================================================
+# LITTLEFS INIT - Filesystem initialization and directory management
+# Source: third_party/littlefs/port/littlefs_mx25u25643g_porting.c
+# ============================================================
+0x0042215c	littlefs_lfs_ctx	struct	7	Main LFS context struct (lfs_t instance)
+0x00422168	littlefs_cfg_ptr	struct	16	LFS configuration struct pointer (offsets +4, +0x10, +0xc)
+0x004221dc	littlefs_init_config_a	config	1	LFS init config A
+0x004221e0	littlefs_init_config_b	config	1	LFS init config B
+0x004221e4	littlefs_init_config_c	config	6	LFS init config C
+0x004221e8	littlefs_init_config_d	config	5	LFS init config D
+0x00422220	littlefs_dir_name_a	string	1	Directory name string A (e.g., "/firmware")
+0x00422224	littlefs_dir_name_b	string	3	Directory name string B (e.g., "/ota")
+0x00422228	littlefs_dir_name_c	string	9	Directory name string C (e.g., "/user")
+0x0042222c	littlefs_dir_name_d	string	3	Directory name string D (e.g., "/log")
+0x00422230	littlefs_boot_count_key	string	1	"boot_count" key string
+0x00422234	littlefs_boot_count_fmt	string	6	Boot count format string
+0x00422238	littlefs_init_log_a	string	3	LFS init log string A
+0x0042237c	littlefs_stat_str_a	string	5	LFS stat log string A
+0x00422380	littlefs_stat_str_b	string	3	LFS stat log string B
+0x00422384	littlefs_stat_str_c	string	3	LFS stat log string C
+0x00422388	littlefs_remove_str	string	1	LFS remove log string
+0x0042238c	littlefs_rename_str	string	1	LFS rename log string
+0x00422390	littlefs_dir_list_str	string	7	LFS dir list log string
+0x00422394	littlefs_file_copy_str	string	6	LFS file copy log string
+0x00422398	littlefs_file_copy_fmt	string	2	LFS file copy format string
+0x0042239c	littlefs_file_size_str	string	7	LFS file size check log string
+0x004223a0	littlefs_storage_str	string	6	LFS storage info log string
+0x004223a4	littlefs_verify_str	string	4	LFS verify integrity log string
+0x004223a8	littlefs_cleanup_str	string	4	LFS cleanup temp log string
+0x004223ac	littlefs_finalize_str	string	6	LFS finalize log string
+0x004223b0	littlefs_finalize_fmt	string	1	LFS finalize format string
+# ============================================================
+# REDIRECT - UART debug output redirect
+# Source: product/s200/bootloader/config/redirect.c
+# ============================================================
+0x004224f8	redirect_config	struct	2	Redirect configuration struct
+0x004227c4	aeabi_d2f_const_data	config	1	Const in __aeabi_d2f_const (was redirect_uart_databits)
+# ============================================================
+# HAL UART INNER - UART inner driver
+# ============================================================
+0x0042332c	hal_uart_inner_config_a	config	2	UART inner config A
+0x00423380	hal_uart_inner_fifo_a	config	3	UART inner FIFO config A
+0x00423384	hal_uart_inner_fifo_b	config	5	UART inner FIFO config B
+0x00423388	hal_uart_inner_fifo_c	config	12	UART inner FIFO config C
+0x0042338c	hal_uart_inner_fifo_d	config	12	UART inner FIFO config D
+# ============================================================
+# HAL IOM - I/O Master (SPI/I2C) inner driver
+# ============================================================
+0x00423648	hal_iom_inner_config_a	config	1	IOM inner config A
+0x004236b0	hal_iom_base_regs	struct	13	IOM base register table (stride 0x1000, peripheral MMIO)
+0x004236b4	hal_iom_inner_b	config	1	IOM inner config B
+0x004236b8	hal_iom_inner_c	config	1	IOM inner config C
+0x004236bc	hal_iom_inner_d	config	1	IOM inner config D
+0x004236c0	hal_iom_inner_e	config	1	IOM inner config E
+0x004236c4	hal_iom_inner_f	config	1	IOM inner config F
+0x00423778	hal_iom_transfer_a	config	1	IOM transfer config A
+0x0042377c	hal_iom_transfer_b	config	5	IOM transfer config B
+0x00423780	hal_iom_transfer_c	config	1	IOM transfer config C
+0x00423784	hal_iom_transfer_d	config	1	IOM transfer config D
+0x00423788	hal_iom_transfer_e	config	1	IOM transfer config E
+0x0042378c	hal_iom_transfer_f	config	1	IOM transfer config F
+0x00423790	hal_iom_transfer_g	config	1	IOM transfer config G
+0x00423794	hal_iom_transfer_h	config	1	IOM transfer config H
+0x00423798	hal_iom_transfer_i	config	1	IOM transfer config I
+0x0042379c	hal_iom_transfer_j	config	1	IOM transfer config J
+0x004237a0	hal_iom_transfer_k	config	1	IOM transfer config K
+0x004237a4	hal_iom_transfer_l	config	1	IOM transfer config L
+0x004237a8	hal_iom_transfer_m	config	1	IOM transfer config M
+0x004237ac	hal_iom_transfer_n	config	1	IOM transfer config N
+# ============================================================
+# HAL MSPI INNER - MSPI lower-level / device configure
+# ============================================================
+0x004248e8	hal_mspi_dev_base_regs	struct	32	MSPI device base register table (stride 0x1000, offsets +0x10/+0x1c/+0x84)
+0x00424a38	hal_mspi_init_impl_a	config	4	MSPI init impl config A
+0x00424b20	hal_mspi_dma_a	config	1	MSPI DMA config A
+0x00424b24	hal_mspi_dma_b	config	8	MSPI DMA config B
+0x00424b28	hal_mspi_dma_c	config	10	MSPI DMA config C
+0x00424b2c	hal_mspi_dma_d	config	6	MSPI DMA config D
+0x004250b4	hal_mspi_power_off_a	config	2	MSPI power off config A
+0x004250f0	hal_mspi_command_regs	struct	15	MSPI command register table (stride 0x1000, offsets +4/+0x8c/+0x90)
+0x004250f4	hal_mspi_cmd_config_a	config	6	MSPI command config A
+0x004250f8	hal_mspi_cmd_config_b	config	5	MSPI command config B
+0x004250fc	hal_mspi_cmd_config_c	config	5	MSPI command config C
+0x00425100	hal_mspi_cmd_config_d	config	1	MSPI command config D
+0x00425104	hal_mspi_cmd_config_e	config	1	MSPI command config E
+0x00425108	hal_mspi_cmd_dma_flag	config	1	MSPI command DMA flag value (0x20 for DMA mode)
+0x00425de0	hal_mspi_dma_complete_a	config	1	MSPI DMA complete check A
+0x00425de4	hal_mspi_int_regs	struct	47	MSPI interrupt register table (stride 0x1000, offsets +0x30/+0x84-0x9c/+0x2b4)
+0x00425de8	hal_mspi_int_config_a	config	2	MSPI interrupt config A
+0x00426398	hal_mspi_int_enable_inner_a	config	1	MSPI interrupt enable inner A
+0x0042674c	hal_mspi_xipm_a	config	1	MSPI XIP mode config A
+0x00426750	hal_mspi_xipm_regs	struct	30	MSPI XIP mode register table (stride 0x1000, offsets +0x84/+0x200/+0x204)
+# ============================================================
+# FW EVENT LOOP - Framework event loop
+# Source: framework/fw_event_loop/fw_event_loop.c
+# ============================================================
+0x00426b4c	fw_evt_init_a	config	1	Event loop init config A
+0x00426b50	fw_evt_init_b	config	7	Event loop init config B
+0x00426b54	fw_evt_init_c	config	1	Event loop init config C
+0x00426b58	fw_evt_init_d	config	5	Event loop init config D
+0x00426c7c	fw_evt_timer_start_a	config	7	Event loop timer start config A
+0x00426c80	fw_evt_timer_start_b	config	1	Event loop timer start config B
+0x00426c84	fw_evt_timer_start_c	config	1	Event loop timer start config C
+0x00426c88	fw_evt_queue_push_a	config	2	Event loop queue push config A
+0x00426c8c	fw_evt_queue_push_b	config	5	Event loop queue push config B
+0x00426c90	fw_evt_queue_push_c	config	3	Event loop queue push config C
+0x00426f80	fw_evt_loop_init_a	config	3	Event loop main init config A
+0x00426f84	fw_evt_loop_init_b	config	1	Event loop main init config B
+0x00426f88	fw_evt_loop_init_c	config	2	Event loop main init config C
+0x00427098	fw_evt_register_a	config	3	Event loop register handler A
+0x0042709c	fw_evt_register_b	config	1	Event loop register handler B
+0x004270a0	fw_evt_register_c	config	1	Event loop register handler C
+0x004270a4	fw_evt_register_d	config	1	Event loop register handler D
+0x004270a8	fw_evt_register_e	config	1	Event loop register handler E
+0x00427254	fw_evt_set_filter_a	config	1	Event loop set filter A
+0x00427258	fw_evt_set_filter_b	config	4	Event loop set filter B
+0x004274d4	fw_evt_delayed_a	config	2	Event loop delayed push A
+0x004274d8	fw_evt_delayed_b	config	2	Event loop delayed push B
+0x004274dc	fw_evt_delayed_c	config	5	Event loop delayed push C
+0x004274e0	fw_evt_delayed_d	config	1	Event loop delayed push D
+0x004274e4	fw_evt_delayed_e	config	1	Event loop delayed push E
+0x004274e8	fw_evt_delayed_f	config	2	Event loop delayed push F
+0x004274ec	fw_evt_delayed_g	config	2	Event loop delayed push G
+0x004274f0	fw_evt_delayed_h	config	4	Event loop delayed push H
+0x004274f4	fw_evt_delayed_i	config	1	Event loop delayed push I
+0x004274f8	fw_evt_urgent_a	config	4	Event loop urgent push A
+0x004274fc	fw_evt_urgent_b	config	4	Event loop urgent push B
+0x00427500	fw_evt_urgent_c	config	9	Event loop urgent push C
+0x00427504	fw_evt_create_worker_a	config	2	Event loop create worker A
+0x00427508	fw_evt_create_worker_b	config	4	Event loop create worker B
+0x0042750c	fw_evt_create_worker_c	config	1	Event loop create worker C
+0x00427530	fw_evt_destroy_a	config	2	Event loop destroy config A
+# ============================================================
+# TLSF INIT - TLSF adapter initialization
+# Source: third_party/tlsf/tlsf_init.c
+# ============================================================
+0x00427bcc	tlsf_adapter_pool_ptr	state	2	TLSF adapter pool pointer
+0x00427bd0	tlsf_adapter_instance	state	3	TLSF adapter instance pointer
+0x00427bd4	tlsf_adapter_config_a	config	10	TLSF adapter configuration A
+0x00427bd8	tlsf_adapter_config_b	config	3	TLSF adapter configuration B
+# ============================================================
+# HAL ASSERT - Assertion and constraint handler
+# ============================================================
+0x00427fa8	assert_handler_config_a	config	1	Assert handler config A
+0x00427fac	assert_handler_config_b	config	2	Assert handler config B
+0x00427fb0	assert_handler_config_c	config	1	Assert handler config C
+# ============================================================
+# MAIN - Bootloader main / initialization
+# Source: product/s200/bootloader/config/main.c
+# ============================================================
+0x004289c4	main_gpio_config_table	struct	19	GPIO pin configuration table (stride 4, 25 entries)
+0x004289c8	main_gpio_config_a	config	9	GPIO config constant A
+0x004289cc	main_gpio_config_b	config	3	GPIO config constant B
+0x004289d0	main_gpio_config_c	config	7	GPIO config constant C
+0x004289d4	main_gpio_config_d	config	7	GPIO config constant D
+0x004289d8	main_gpio_config_e	config	7	GPIO config constant E
+0x004289dc	main_gpio_default_val	config	1	GPIO default output value
+0x00428af4	main_uart_baudrate_reg	state	28	UART baudrate configuration register (bit manipulation)
+0x00428af8	main_uart_config_a	config	2	UART config A for debug init
+0x00428bd0	main_uart_parity_reg	state	24	UART parity register (bit manipulation)
+0x00428bd4	main_uart_config_b	config	5	UART config B
+0x00428bdc	main_uart_stop_reg	state	10	UART stop bits register
+0x00428be0	main_uart_data_config	state	10	UART data bits configuration
+0x00428be4	main_uart_flow_config	state	10	UART flow control configuration
+0x00428be8	main_uart_fifo_reg	state	18	UART FIFO control register (bit 16 = enable)
+0x00428bec	main_uart_clk_reg	state	18	UART clock divider register (bits 10-13)
+0x0042912c	main_power_rail_a	config	10	Power rail configuration A
+0x00429130	main_power_rail_b	config	12	Power rail configuration B
+0x00429134	main_power_rail_c	config	6	Power rail configuration C
+0x00429468	main_clock_config_a	config	1	Clock tree configuration A
+0x0042946c	main_clock_config_b	config	8	Clock tree configuration B
+0x00429570	main_mem_prot_table	struct	20	Memory protection configuration table (stride 4, 25 entries)
+0x00429574	main_mem_prot_config_a	config	8	Memory protection config A
+0x0042964c	main_i2c_config_a	config	9	I2C initialization config A
+0x00429650	main_i2c_config_b	config	9	I2C initialization config B
+0x00429654	main_i2c_config_c	config	9	I2C initialization config C
+0x00429658	main_i2c_config_d	config	8	I2C initialization config D
+0x0042965c	main_i2c_config_e	config	9	I2C initialization config E
+0x00429660	main_i2c_config_f	config	8	I2C initialization config F
+0x0042996c	main_adc_ctrl_reg	state	14	ADC control register for HW version read (bit manipulation)
+0x00429970	main_adc_config_a	config	6	ADC configuration A
+0x00429974	main_adc_clk_reg	state	18	ADC clock/slot register (bits 10-13)
+0x00429978	main_adc_enable_reg	state	16	ADC enable register (bit manipulation)
+0x00429cec	main_adc_result_reg	state	20	ADC result register (bits 0-6 for voltage reading)
+0x00429d44	main_debug_uart_a	config	3	Debug UART init config A
+0x00429d48	main_debug_uart_b	config	4	Debug UART init config B
+0x00429fc4	main_log_version_a	config	2	Log version info config A
+0x00429fc8	main_log_version_str	string	9	Version info log format string
+0x00429fcc	main_reset_ctrl_reg	state	22	Reset status control register (bit manipulation)
+0x00429fd0	main_reset_status_table	struct	22	Reset status configuration table (stride 4, 25 entries)
+0x00429fd4	main_reset_config_a	config	8	Reset config A
+0x0042a100	main_clear_reset_a	config	7	Clear reset status config A
+0x0042a104	main_clear_reset_b	config	7	Clear reset status config B
+0x0042a1f0	main_self_test_a	config	7	Hardware self-test config A
+0x0042a1f4	main_self_test_b	config	7	Hardware self-test config B
+0x0042a1f8	main_self_test_c	config	7	Hardware self-test config C
+0x0042a1fc	main_self_test_d	config	7	Hardware self-test config D
+0x0042a494	main_flash_timing_a	config	9	Flash timing configuration A
+0x0042a498	main_flash_timing_b	config	2	Flash timing configuration B
+0x0042a7ac	main_fs_init_a	config	1	Filesystem init config A
+0x0042a7b0	main_fs_init_str_a	string	6	Filesystem init log string A
+0x0042a7b4	main_fs_init_ptr	state	2	Filesystem init state pointer
+0x0042a7b8	main_fs_init_str_b	string	8	Filesystem init log string B
+0x0042a7bc	main_fs_init_c	config	2	Filesystem init config C
+0x0042a7c0	main_fs_init_d	config	1	Filesystem init config D
+0x0042aabc	main_ota_flag_a	config	2	OTA flag check config A
+0x0042aac0	main_ota_flag_str	string	6	OTA flag log string
+0x0042aac4	main_ota_flag_c	config	1	OTA flag config C
+0x0042ab00	main_ota_prepare_a	config	3	OTA prepare config A
+0x0042ab04	main_ota_prepare_b	config	3	OTA prepare config B
+0x0042ab9c	main_mspi_timing_ctx	struct	19	MSPI timing scan context (offsets +0x54-0x60 for timing results)
+0x0042abf0	main_ota_state_a	config	1	OTA state machine config A
+0x0042abf4	main_ota_state_b	config	3	OTA state machine config B
+0x0042abf8	main_ota_state_c	config	1	OTA state machine config C
+0x0042abfc	main_ota_state_d	config	2	OTA state machine config D
+0x0042ac00	main_ota_state_e	config	1	OTA state machine config E
+0x0042ac04	main_ota_state_f	config	1	OTA state machine config F
+0x0042ac08	main_ota_state_g	config	3	OTA state machine config G
+0x0042ac0c	main_ota_state_h	config	1	OTA state machine config H
+0x0042ac10	main_ota_state_i	config	1	OTA state machine config I
+0x0042ac14	main_ota_state_j	config	1	OTA state machine config J
+0x0042ac18	main_ota_state_k	config	9	OTA state machine config K
+0x0042ac1c	main_ota_state_l	config	9	OTA state machine config L (frequently used)
+0x0042ac20	main_ota_state_m	config	1	OTA state machine config M
+0x0042ac24	main_ota_state_n	config	1	OTA state machine config N
+0x0042ac28	main_ota_state_o	config	1	OTA state machine config O
+0x0042ac2c	main_ota_state_p	config	1	OTA state machine config P
+0x0042ac30	main_ota_magic_number	config	1	OTA magic number for validation (0x55555555)
+0x0042ac34	main_ota_state_q	config	7	OTA state machine config Q
+0x0042ac38	main_ota_state_r	config	3	OTA state machine config R
+0x0042ac3c	main_ota_state_s	config	2	OTA state machine config S
+0x0042ac40	main_ota_state_t	config	1	OTA state machine config T
+0x0042ac44	main_ota_state_u	config	1	OTA state machine config U
+0x0042ac48	main_ota_boot_a	config	2	Boot-to-app config A
+0x0042ac4c	main_ota_boot_b	config	1	Boot-to-app config B
+0x0042ac50	main_ota_boot_c	config	2	Boot-to-app config C
+0x0042ac54	main_deinit_a	config	1	Peripheral deinit config A
+0x0042ac58	main_deinit_b	config	1	Peripheral deinit config B
+0x0042ac5c	main_deinit_c	config	1	Peripheral deinit config C
+0x0042ac60	main_deinit_d	config	1	Peripheral deinit config D
+0x0042ac64	main_deinit_e	config	1	Peripheral deinit config E
+0x0042ac68	main_vtor_config_a	config	1	VTOR setup config A
+0x0042ac6c	main_vtor_config_b	config	4	VTOR setup config B
+0x0042ac70	main_flush_cache_a	config	2	Cache flush config A
+0x0042ac74	main_flush_cache_b	config	3	Cache flush config B
+0x0042ac84	main_disable_int_a	config	1	Disable interrupts for jump A
+0x0042ac88	main_disable_int_b	config	1	Disable interrupts for jump B
+0x0042ae38	main_adc_threshold_a	config	1	ADC voltage threshold A (float, ~-20.0)
+0x0042af5c	main_adc_threshold_b	config	2	ADC voltage threshold B (float comparison)
+0x0042afb4	main_adc_threshold_c	config	1	ADC voltage threshold C (float comparison)
+# ============================================================
+# MAIN - MSPI / flash init in boot sequence
+# ============================================================
+0x0042b5e8	main_mspi_dma_a	config	4	MSPI DMA config in boot A
+0x0042b5ec	main_mspi_fifo_ctrl	state	3	MSPI FIFO control register
+0x0042b5f0	main_mspi_base_regs	struct	24	MSPI base register table (stride 4, offsets +0x54-0x68)
+0x0042b5f4	main_mspi_status_reg	state	21	MSPI status register (bits 0-9 = FIFO count, 10-13)
+0x0042b5f8	main_mspi_config_a	config	4	MSPI config A
+0x0042b5fc	main_mspi_config_b	config	8	MSPI config B
+0x0042b600	main_mspi_config_c	config	4	MSPI config C
+0x0042b908	main_mspi_fifo_remain	state	10	MSPI FIFO remaining space counter
+0x0042b90c	main_mspi_config_d	config	8	MSPI config D
+0x0042b910	main_mspi_config_e	config	4	MSPI config E
+0x0042b914	main_mspi_config_f	config	5	MSPI config F
+0x0042b918	main_mspi_config_g	config	2	MSPI config G
+0x0042b91c	main_mspi_config_h	config	8	MSPI config H
+0x0042b920	main_mspi_config_i	config	1	MSPI config I
+0x0042b924	main_mspi_config_j	config	4	MSPI config J
+0x0042b928	main_mspi_config_k	config	2	MSPI config K
+0x0042b92c	main_mspi_config_l	config	6	MSPI config L
+0x0042b930	main_mspi_config_m	config	1	MSPI config M
+0x0042b934	main_mspi_config_n	config	1	MSPI config N
+0x0042b938	main_mspi_config_o	config	3	MSPI config O
+0x0042b93c	main_mspi_config_p	config	3	MSPI config P
+0x0042b940	main_mspi_config_q	config	1	MSPI config Q
+0x0042b944	main_mspi_config_r	config	2	MSPI config R
+0x0042b948	main_mspi_instance_idx	state	1	Current MSPI instance index
+# ============================================================
+# DFU FILE - OTA image file I/O
+# Source: product/s200/bootloader/threads/thread_dfu.c
+# Strings: "ota/s200_firmware_ota.bin", "filesize", "blobSize", "magicNum"
+# ============================================================
+0x0042bce8	dfu_file_config_a	config	5	DFU file config A
+0x0042bd30	dfu_file_config_b	config	4	DFU file config B
+0x0042bd34	dfu_file_config_c	config	6	DFU file config C
+0x0042bd38	dfu_file_config_d	config	4	DFU file config D
+0x0042be9c	dfu_file_config_e	config	1	DFU file config E
+0x0042bef0	dfu_entry_config_00	config	1	DFU entry config 0
+0x0042bef4	dfu_entry_config_01	config	1	DFU entry config 1
+0x0042bef8	dfu_entry_config_02	config	1	DFU entry config 2
+0x0042befc	dfu_entry_config_03	config	1	DFU entry config 3
+0x0042bf00	dfu_entry_config_04	config	2	DFU entry config 4
+0x0042bf04	dfu_flash_status_reg	state	10	Flash busy status register (bit 0 checked for busy)
+0x0042bf08	dfu_entry_config_06	config	1	DFU entry config 6
+0x0042bf0c	dfu_entry_config_07	config	1	DFU entry config 7
+0x0042bf10	dfu_entry_config_08	config	1	DFU entry config 8
+0x0042bf14	dfu_entry_config_09	config	1	DFU entry config 9
+0x0042bf18	dfu_entry_config_10	config	3	DFU entry config 10
+0x0042bf1c	dfu_entry_config_11	config	2	DFU entry config 11
+0x0042bf20	dfu_entry_config_12	config	7	DFU entry config 12
+0x0042bf24	dfu_entry_config_13	config	3	DFU entry config 13
+0x0042bf28	dfu_entry_config_14	config	2	DFU entry config 14
+0x0042bf2c	dfu_entry_config_15	config	1	DFU entry config 15
+0x0042bf30	dfu_entry_config_16	config	1	DFU entry config 16
+0x0042bf34	dfu_entry_config_17	config	2	DFU entry config 17
+0x0042bf38	dfu_entry_config_18	config	1	DFU entry config 18
+0x0042bf3c	dfu_entry_config_19	config	2	DFU entry config 19
+0x0042bf40	dfu_entry_config_20	config	1	DFU entry config 20
+0x0042bf44	dfu_entry_config_21	config	1	DFU entry config 21
+0x0042bf48	dfu_entry_config_22	config	1	DFU entry config 22
+0x0042bf4c	dfu_entry_config_23	config	1	DFU entry config 23
+0x0042bf50	dfu_entry_config_24	config	1	DFU entry config 24
+0x0042bf54	dfu_entry_config_25	config	1	DFU entry config 25
+0x0042bf58	dfu_entry_config_26	config	5	DFU entry config 26
+0x0042bf5c	dfu_entry_config_27	config	2	DFU entry config 27
+0x0042bf60	dfu_entry_config_28	config	1	DFU entry config 28
+0x0042bf64	dfu_entry_config_29	config	3	DFU entry config 29
+0x0042bf68	dfu_entry_config_30	config	3	DFU entry config 30
+0x0042bf78	dfu_entry_config_31	config	1	DFU entry config 31
+0x0042bf7c	dfu_entry_config_32	config	1	DFU entry config 32
+# ============================================================
+# DFU INSTALL - Firmware install (flash write/erase/verify)
+# ============================================================
+0x0042c634	dfu_install_irq_regs	struct	19	DFU install IRQ register table (stride 0x1000, offset +0x11c)
+0x0042c638	dfu_install_config_a	config	1	DFU install config A
+0x0042c63c	dfu_install_config_b	config	1	DFU install config B
+0x0042c640	dfu_install_config_c	config	1	DFU install config C
+0x0042c8cc	dfu_install_progress_a	config	9	DFU install progress config A
+0x0042c8d0	dfu_install_progress_b	config	3	DFU install progress config B
+0x0042ccfc	dfu_component_config_a	config	4	DFU component config A
+0x0042cd00	dfu_component_config_b	config	3	DFU component config B
+0x0042cd04	dfu_component_config_c	config	1	DFU component config C
+0x0042cd08	dfu_component_config_d	config	1	DFU component config D
+0x0042cd0c	dfu_component_regs	struct	6	DFU component register table (stride 0x1000, offsets +0x200/+0x218/+0x228)
+0x0042cd10	dfu_component_config_e	config	1	DFU component config E
+0x0042d040	dfu_rollback_config_a	config	3	DFU rollback check config A
+0x0042d044	dfu_rollback_config_b	config	2	DFU rollback check config B
+0x0042d048	dfu_rollback_config_c	config	3	DFU rollback check config C
+0x0042d04c	dfu_rollback_config_d	config	2	DFU rollback check config D
+# ============================================================
+# DFU CORE - CRC check, flash program, verify, boot jump
+# Source: product/s200/bootloader/threads/thread_dfu.c
+# ============================================================
+0x0042d6ec	dfu_core_config_a	config	1	DFU core config A
+0x0042d6f0	dfu_core_config_b	config	3	DFU core config B
+0x0042d6f4	dfu_core_config_c	config	1	DFU core config C
+0x0042d6f8	dfu_core_config_d	config	6	DFU core config D
+0x0042d6fc	dfu_core_config_e	config	4	DFU core config E
+0x0042d700	dfu_uart_tx_reg	state	12	DFU UART TX FIFO register (bits 0-6)
+0x0042d704	dfu_core_config_f	config	2	DFU core config F
+0x0042d708	dfu_core_config_g	config	1	DFU core config G
+0x0042d70c	dfu_core_config_h	config	1	DFU core config H
+0x0042d710	dfu_core_config_i	config	4	DFU core config I
+0x0042d714	dfu_core_config_j	config	7	DFU core config J
+0x0042d718	dfu_core_config_k	config	1	DFU core config K
+0x0042d71c	dfu_core_config_l	config	1	DFU core config L
+0x0042d720	dfu_core_config_m	config	2	DFU core config M
+0x0042d724	dfu_core_config_n	config	6	DFU core config N
+0x0042d728	dfu_core_config_o	config	1	DFU core config O
+0x0042d72c	dfu_uart_status_reg	state	17	DFU UART status register (bits 0-9 FIFO count, 10-13)
+0x0042d730	dfu_uart_saved_status	state	2	DFU UART saved status value
+0x0042d734	dfu_uart_ctrl_reg	state	10	DFU UART control register (bits 0-5)
+0x0042d738	dfu_uart_saved_ctrl	state	2	DFU UART saved control value
+0x0042d73c	dfu_uart_config_a	config	2	DFU UART config A
+0x0042d740	dfu_core_config_p	config	6	DFU core config P
+0x0042d744	dfu_core_config_q	config	8	DFU core config Q
+0x0042d748	dfu_core_config_r	config	8	DFU core config R
+0x0042d74c	dfu_core_config_s	config	9	DFU core config S
+0x0042d750	dfu_core_config_t	config	9	DFU core config T
+0x0042d754	dfu_uart_baud_slot_reg	state	10	UART baud rate/slot register (bits 8-12)
+0x0042d758	dfu_uart_clk_slot_reg	state	10	UART clock/slot register (bits 17-21)
+0x0042d75c	dfu_core_config_u	config	4	DFU core config U
+0x0042d780	dfu_core_verify_a	config	2	DFU flash verify config A
+0x0042d784	dfu_core_verify_b	config	6	DFU flash verify config B
+0x0042d788	dfu_core_verify_c	config	5	DFU flash verify config C
+0x0042d78c	dfu_core_verify_d	config	1	DFU flash verify config D
+0x0042d790	dfu_core_verify_e	config	2	DFU flash verify config E
+# ============================================================
+# DFU CORE - flash erase, program, CRC-32 table, OTA path
+# ============================================================
+0x0042da1c	dfu_erase_config_a	config	1	DFU flash erase config A
+0x0042da20	dfu_erase_config_b	config	1	DFU flash erase config B
+0x0042da24	dfu_erase_config_c	config	1	DFU flash erase config C
+0x0042da28	dfu_erase_config_d	config	2	DFU flash erase config D
+0x0042da2c	dfu_erase_config_e	config	2	DFU flash erase config E
+0x0042da30	dfu_erase_config_f	config	1	DFU flash erase config F
+# ============================================================
+# DFU CORE - Thread DFU task, message queue, event dispatch
+# ============================================================
+0x0042e050	dfu_task_config_a	config	1	DFU task config A
+0x0042e054	dfu_task_str_a	string	6	DFU task log string A
+0x0042e058	dfu_task_str_b	string	3	DFU task log string B
+0x0042e05c	dfu_task_str_c	config	4	DFU task log string C
+0x0042e060	dfu_source_file	string	16	DFU source file "thread_dfu.c" for elog_output
+0x0042e064	dfu_log_tag	string	16	DFU log tag "dfu" for elog_output
+0x0042e068	dfu_file_handle	state	5	DFU OTA file handle pointer
+0x0042e06c	dfu_read_err_fmt	string	1	DFU read error format string
+0x0042e070	dfu_config_struct	struct	10	DFU configuration struct pointer (offsets +4, +0x20)
+0x0042e074	dfu_read_remain_fmt	string	2	DFU read remaining format string
+0x0042e078	dfu_ota_header	struct	10	DFU OTA image header struct (offset +4=chunk size, [5]=jump addr)
+0x0042e07c	dfu_read_complete_fmt	string	1	DFU read complete format string
+0x0042e080	dfu_flash_erase_fmt	string	1	DFU flash erase format string
+0x0042e084	dfu_flash_erase_str	string	2	DFU flash erase log string
+0x0042e088	dfu_flash_erase_err_fmt	string	2	DFU flash erase error format
+0x0042e08c	dfu_flash_prog_str	string	2	DFU flash program log string
+0x0042e090	dfu_flash_prog_fmt	string	1	DFU flash program format string
+0x0042e094	dfu_config_e	config	1	DFU config E
+0x0042e098	dfu_config_f	config	1	DFU config F
+0x0042e09c	dfu_verify_str	config	2	DFU verify log string
+0x0042e0a0	dfu_verify_fmt	config	1	DFU verify format
+0x0042e0a4	dfu_verify_result_str	config	5	DFU verify result log string
+0x0042e0c4	dfu_msg_send_config_a	config	1	DFU message send config A
+0x0042e0c8	dfu_msg_send_str	string	1	DFU message send log string
+0x0042e0cc	dfu_msg_send_b	config	1	DFU msg send config B
+0x0042e0d0	dfu_msg_send_c	config	1	DFU msg send config C
+0x0042e0d4	dfu_msg_send_d	config	1	DFU msg send config D
+0x0042e0d8	dfu_msg_send_e	config	1	DFU msg send config E
+0x0042e0dc	dfu_boot_jump_str	string	4	Boot jump log string "DO NOT need updata firmware, GO TO APP"
+0x0042e0e0	dfu_boot_jump_fmt	string	1	Boot jump format string
+0x0042e0e4	dfu_boot_jump_c	config	1	Boot jump config C
+0x0042e0e8	dfu_boot_jump_d	config	1	Boot jump config D
+0x0042e0ec	dfu_boot_jump_e	config	1	Boot jump config E
+0x0042e0f0	dfu_boot_jump_f	config	1	Boot jump config F
+0x0042e0f4	dfu_boot_jump_g	config	1	Boot jump config G
+0x0042e0f8	dfu_boot_jump_h	config	1	Boot jump config H
+0x0042e0fc	dfu_boot_mismatch_fmt	string	1	Boot jump address mismatch format string
+0x0042e100	dfu_event_dispatch_a	config	1	DFU event dispatch config A
+0x0042e104	dfu_event_dispatch_b	config	1	DFU event dispatch config B
+0x0042e108	dfu_event_dispatch_fmt	string	1	DFU event dispatch format string
+0x0042e10c	dfu_event_dispatch_c	config	1	DFU event dispatch config C
+0x0042e16c	dfu_crc_table	vtable	1	CRC-32 lookup table (256 entries)
+# ============================================================
+# THREAD MANAGER - Boot manager thread
+# Source: product/s200/bootloader/threads/thread_manager.c
+# Strings: "thread_manager", "DO NOT need updata firmware, GO TO APP"
+# ============================================================
+0x0042e3a4	thread_mgr_dfu_thread_ptr	state	1	DFU thread handle pointer (read for status)
+0x0042e3a8	thread_mgr_init_fmt	string	1	Thread manager init format string
+0x0042e3ac	thread_mgr_init_str	string	1	Thread manager init log string
+0x0042e3b0	thread_mgr_source_file	string	6	Thread manager source file for elog
+0x0042e3b4	thread_mgr_log_tag	string	6	Thread manager log tag "thread_manager"
+0x0042e3b8	thread_mgr_ctx	struct	8	Thread manager context struct (offsets +8=thread, +0x1c=event)
+0x0042e3bc	thread_mgr_config_a	config	2	Thread manager config A
+0x0042e3d4	thread_mgr_config_b	config	1	Thread manager config B
+0x0042e3dc	thread_mgr_sync_fmt	string	2	Thread manager sync format string
+0x0042e3e0	thread_mgr_sync_str	string	1	Thread manager sync log string
+0x0042e3e4	thread_mgr_error_fmt	string	2	Thread manager error format string
+0x0042e3e8	thread_mgr_error_str	string	1	Thread manager error log string
+0x0042e45c	hal_wdt_feed_a	config	2	Watchdog feed config A
+0x0042e480	hal_reset_ctrl_a	config	2	Reset control config A
+0x0042e484	hal_reset_ctrl_b	config	1	Reset control config B
+# ============================================================
+# HAL WDT - Watchdog timer configuration
+# ============================================================
+0x0042e784	hal_wdt_config_00	config	1	Watchdog config 0
+0x0042e788	hal_wdt_config_01	config	1	Watchdog config 1
+0x0042e78c	hal_wdt_config_02	config	1	Watchdog config 2
+0x0042e790	hal_wdt_config_03	config	4	Watchdog config 3
+0x0042e794	hal_wdt_config_04	config	9	Watchdog config 4
+0x0042e798	hal_wdt_config_05	config	9	Watchdog config 5
+0x0042e79c	hal_wdt_config_06	config	3	Watchdog config 6
+0x0042e7a0	hal_wdt_config_07	config	1	Watchdog config 7
+0x0042e7a4	hal_wdt_config_08	config	1	Watchdog config 8
+0x0042e7a8	hal_wdt_config_09	config	4	Watchdog config 9
+0x0042e7ac	hal_wdt_config_10	config	1	Watchdog config 10
+0x0042e7b0	hal_wdt_config_11	config	1	Watchdog config 11
+0x0042e7b4	hal_wdt_config_12	config	4	Watchdog config 12
+0x0042e7b8	hal_wdt_config_13	config	1	Watchdog config 13
+0x0042e7bc	hal_wdt_config_14	config	1	Watchdog config 14
+0x0042e7c8	hal_wdt_init_a	config	1	Watchdog init A
+0x0042e7cc	hal_wdt_init_b	config	2	Watchdog init B
+0x0042e7d0	hal_wdt_init_c	config	1	Watchdog init C
+0x0042e7d4	hal_wdt_init_d	config	2	Watchdog init D
+0x0042e7d8	hal_wdt_init_e	config	2	Watchdog init E
+0x0042e7dc	hal_wdt_init_f	config	3	Watchdog init F
+0x0042e7e0	hal_wdt_init_g	config	9	Watchdog init G (frequently used)
+0x0042e7e4	hal_wdt_init_h	config	1	Watchdog init H
+0x0042e7e8	hal_wdt_init_i	config	2	Watchdog init I
+0x0042e7ec	hal_wdt_init_j	config	1	Watchdog init J
+0x0042e810	hal_wdt_int_service_a	config	2	Watchdog interrupt service A
+0x0042e814	hal_wdt_int_service_b	config	2	Watchdog interrupt service B
+0x0042e818	hal_wdt_int_service_c	config	1	Watchdog interrupt service C
+# ============================================================
+# HAL NORFLASH - NOR flash MSPI device abstraction (upper layer)
+# ============================================================
+0x0042f53c	norflash_upper_config_00	config	6	NOR flash upper layer config 0
+0x0042f540	norflash_upper_config_01	config	2	NOR flash upper layer config 1
+0x0042f544	norflash_upper_config_02	config	8	NOR flash upper layer config 2
+0x0042f548	norflash_upper_config_03	config	2	NOR flash upper layer config 3
+0x0042f54c	norflash_upper_config_04	config	4	NOR flash upper layer config 4
+0x0042f550	norflash_upper_config_05	config	2	NOR flash upper layer config 5
+0x0042f554	norflash_upper_config_06	config	2	NOR flash upper layer config 6
+0x0042f558	norflash_upper_config_07	config	3	NOR flash upper layer config 7
+0x0042f55c	norflash_upper_config_08	config	4	NOR flash upper layer config 8
+0x0042f560	norflash_upper_config_09	config	4	NOR flash upper layer config 9
+0x0042f564	norflash_upper_config_10	config	3	NOR flash upper layer config 10
+0x0042f568	norflash_upper_config_11	config	4	NOR flash upper layer config 11
+0x0042f56c	norflash_upper_config_12	config	4	NOR flash upper layer config 12
+0x0042f570	norflash_upper_config_13	config	1	NOR flash upper layer config 13
+0x0042f574	norflash_upper_config_14	config	1	NOR flash upper layer config 14
+0x0042f578	norflash_upper_config_15	config	1	NOR flash upper layer config 15
+0x0042f57c	norflash_upper_config_16	config	1	NOR flash upper layer config 16
+0x0042f58c	norflash_deinit_a	config	3	NOR flash deinit config A
+0x0042f590	norflash_deinit_b	config	2	NOR flash deinit config B
+0x0042f594	norflash_deinit_c	config	2	NOR flash deinit config C
+0x0042f598	norflash_deinit_d	config	2	NOR flash deinit config D
+0x0042f59c	norflash_deinit_e	config	2	NOR flash deinit config E
+0x0042f5a0	norflash_deinit_f	config	2	NOR flash deinit config F
+0x0042f5a4	norflash_deinit_g	config	2	NOR flash deinit config G
+0x0042f5a8	norflash_deinit_h	config	3	NOR flash deinit config H
+0x0042f5ac	norflash_deinit_i	config	2	NOR flash deinit config I
+0x0042f5b0	norflash_deinit_j	config	2	NOR flash deinit config J
+0x0042f5b4	norflash_deinit_k	config	2	NOR flash deinit config K
+0x0042f5b8	norflash_deinit_l	config	2	NOR flash deinit config L
+# ============================================================
+# NVIC - Cortex-M NVIC / interrupt controller
+# ============================================================
+0x004303a0	nvic_iser_base	peripheral	4	NVIC_ISER base address (0xE000E100 region, interrupt enable set)
+0x004303a4	nvic_config_a	config	1	NVIC config A
+0x004303a8	nvic_config_b	config	1	NVIC config B
+0x004303ac	nvic_config_c	config	1	NVIC config C
+0x004303b0	nvic_config_d	config	1	NVIC config D
+0x004303b4	nvic_ipr_table	struct	4	NVIC priority register table (short array, stride 2)
+0x004303b8	nvic_i2c_irq_config	config	1	NVIC I2C IRQ config (passed to am_hal_iom_init)
+# ============================================================
+# BOOT TARGET - Application entry point
+# ============================================================
+0x00438000	app_vector_table	callback	4	Application vector table at 0x438000 (boot jump target, VTOR value)
+# ============================================================
+# ARM CORTEX-M SYSTEM REGISTERS
+# ============================================================
+0xe000ed08	scb_vtor	peripheral	1	SCB->VTOR (Vector Table Offset Register, written for app jump)

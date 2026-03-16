@@ -1,0 +1,444 @@
+# EM9305 BLE Radio Firmware -- NVM Patch Analysis
+# Chip: EM9305 (Synopsys DesignWare ARC EM / ARCv2 ISA)
+# Format: 4 segmented NVM patch records targeting 0x00300000 region
+# ISA CORRECTION: The EM9305 uses an ARC EM processor (ARCv2), NOT ARM Cortex-M0.
+#   Ghidra and rizin were configured for ARM:LE:32:Cortex, which is WRONG.
+#   All "detected functions" below are heuristic byte-pattern boundaries from
+#   rizin attempting ARM Thumb disassembly on ARC EM machine code. They do NOT
+#   represent real function boundaries.
+#
+# Decompilation: Ghidra found 0 functions (wrong ISA + patch format)
+# Rizin: 45 "functions" detected in segment 3 (ARM heuristic, UNRELIABLE for ARC)
+# Status: No meaningful disassembly possible without ARC EM toolchain (MetaWare,
+#   Synopsys nSIM, or a Ghidra ARC processor module)
+
+# =========================================================================
+# ISA IDENTIFICATION -- CRITICAL CORRECTION
+# =========================================================================
+# Previous analysis incorrectly identified the EM9305 CPU as "ARM Cortex-M0".
+#
+# The EM9305 BLE radio from EM Microelectronic (now Renesas) contains a
+# Synopsys DesignWare ARC EM processor core, which uses the ARCv2 ISA:
+#   - Variable-length instructions: 16-bit and 32-bit mixed
+#   - Little-endian
+#   - Hardware multiply, barrel shifter, code-density extensions
+#   - Optional DSP, FPU, and MPU extensions
+#
+# Evidence:
+#   - EM Microelectronic datasheets confirm ARC EM core in EM93xx family
+#   - Rizin detected arch=N/A, cpu=N/A, machine=N/A (could not auto-detect)
+#   - Segment 3 "strings" are all gibberish (ARM Thumb misinterpretation of
+#     ARC EM opcodes), not real ASCII data
+#   - The Cordio BLE stack from Packetcraft/ARM runs on ARC EM in this context
+#     (ported by EM Micro), NOT natively as ARM code
+#
+# Implication for tooling:
+#   - Ghidra: Requires an ARC processor module (not included by default).
+#     Community options: "ghidra-arc" plugin or Synopsys-provided Sleigh specs.
+#   - Rizin/radare2: Has limited ARC support via "arc" arch plugin, but may
+#     not handle ARCv2 EM extensions correctly.
+#   - Recommended: Synopsys MetaWare debugger/disassembler, or the nSIM
+#     simulator with ELF loading for proper ARC EM analysis.
+#   - Without proper ARC tooling, the 45 "functions" listed below should be
+#     treated as BYTE OFFSET MARKERS only, not real code boundaries.
+
+# =========================================================================
+# FILE FORMAT -- NVM PATCH CONTAINER
+# =========================================================================
+# The binary is NOT a flat firmware image. It is a structured container of
+# NVM (Non-Volatile Memory) patch records that the Apollo510b host writes
+# into the EM9305's flash via HCI vendor-specific commands.
+#
+# File layout (from am_devices_em9305.h ImageRecord struct + binary header):
+#
+#   Offset  Size   Field
+#   ------  ----   -----
+#   0x0000    4    Version          = 0x04040200 (patch format version)
+#   0x0004    4    Total payload    = 0x00033B70 (211,824 bytes)
+#   0x0008    4    Record count     = 4
+#   0x000C    4    Erase page count = 29
+#   0x0010   48    Record table     (4 x 12 bytes: file_offset, size, target_addr)
+#   0x0040   58    Erase page table (29 x 2 bytes: NvmPage {page, area})
+#   0x007A    2    (padding)
+#   0x007C  ...    Payload data (concatenated record payloads)
+#
+# ImageRecord struct (from SDK am_devices_em9305.h):
+#   typedef struct {
+#       const uint8_t *data;     // pointer to payload data
+#       uint32_t       length;   // payload size in bytes
+#       uint32_t       address;  // target NVM address on EM9305
+#   } ImageRecord;
+#
+# On-disk record table entry (12 bytes each):
+#   +0x00: LE32  file_offset   (offset into this file where payload begins)
+#   +0x04: LE32  size          (payload length in bytes)
+#   +0x08: LE32  target_addr   (NVM address on EM9305)
+#
+# NvmPage struct (from SDK):
+#   typedef struct {
+#       uint8_t page;   // NVM page number
+#       uint8_t area;   // 0 = NVM Main, 1 = NVM Info
+#   } NvmPage;
+#
+# Erase page table: 29 entries, all area=0 (NVM Main), pages 0-26
+# (page 0 appears twice -- pages 0-1 are each listed twice, then 2-26 once)
+
+# =========================================================================
+# PATCH SEGMENT OVERVIEW
+# =========================================================================
+# The host (Apollo510b) programs these 4 records into the EM9305's NVM
+# flash at the specified target addresses. The records override portions
+# of the EM9305's ROM-based Cordio BLE stack.
+#
+# Rec  File Off   Size       Target        Purpose
+# ---  --------   --------   ----------    -----------------------------------
+#  0   0x00007C     224 B    0x00300000    Patch config / ROM override table
+#  1   0x00015C     656 B    0x00300400    BLE parameters / init configuration
+#  2   0x0003EC      56 B    0x00302000    FHDR (File Header Descriptor)
+#  3   0x000424   210888 B   0x00302400    Main patch code (ARC EM machine code)
+
+# =========================================================================
+# SEGMENT 0 -- 0x00300000 (224 bytes) -- Patch Config
+# =========================================================================
+# Contains the patch entry configuration. Rizin detected 1 "function" at
+# offset 0x04 (ARM heuristic -- unreliable).
+#
+# String "DRFH1" at offset 0x82 -- possibly a patch format marker
+# (reverse of "1HFRD", related to the FHDR magic in segment 2).
+#
+# First 32 bytes (LE32 words):
+#   0x00: 0xB7C81CD0  0x00200CA2  0x1C04C082  0x16003001
+#   0x10: 0x00807101  0x0C46FE22  0xC0820020  0x0CBEC082
+#
+# This segment likely contains the NVM patch dispatch table that redirects
+# ROM function calls to patched implementations in segment 3. On ARC EM,
+# this would be a table of branch/jump targets or overlay configuration
+# entries. Without ARC disassembly, the exact format cannot be determined.
+#
+# rizin "function": fcn.00000004 at offset 0x04 (UNRELIABLE -- ARM heuristic)
+
+# =========================================================================
+# SEGMENT 1 -- 0x00300400 (656 bytes) -- BLE Parameters
+# =========================================================================
+# Rizin detected 1 "function" at offset 0x00 (ARM heuristic -- unreliable).
+# No meaningful ASCII strings. The rizin string output shows only false
+# positives from ARC EM opcode bytes misinterpreted as text.
+#
+# This segment likely contains BLE stack configuration parameters:
+#   - NVDS (Non-Volatile Data Store) parameter overrides
+#   - Radio calibration data
+#   - Clock drift/jitter compensation values
+#   - Sleep timing configuration
+#
+# The SDK's NVDS parameter system (see PARAM_ID_* in am_devices_cooper.h)
+# uses a tagged format: {param_id, 0x06, length, data...}
+
+# =========================================================================
+# SEGMENT 2 -- 0x00302000 (56 bytes) -- FHDR (File Header Descriptor)
+# =========================================================================
+# Contains the "FHDR" magic at offset 0x00. This is the firmware image
+# header that the EM9305 ROM bootloader reads to locate the patch code.
+#
+# FHDR structure (56 bytes = 0x38):
+#   +0x00: "FHDR"       (4 bytes, ASCII magic)
+#   +0x04: 0x00032800   (206,848 -- code region size)
+#   +0x08: 0x00302028   (entry point or code start address)
+#   +0x0C: 0x00033BA0   (211,872 -- total image size including metadata)
+#   +0x10: 0xCEB7F4F3   (CRC32 or checksum of code region)
+#   +0x14: 0xFFFFFFFF   (blank / uninitialized)
+#   +0x18: 0x00000000   (reserved)
+#   +0x1C: 0x20280000   (unknown -- may be LE byte-swapped fields)
+#   +0x20: 0x3B940030   (unknown)
+#   +0x24: 0x00008730   (unknown)
+#   +0x28: 0x008044DB   (unknown)
+#   +0x2C: 0x0555F978   (unknown)
+#   +0x30: 0xFFFF0640   (unknown -- partially blank)
+#   +0x34: 0xFFFFFFFF   (blank / uninitialized)
+#
+# The entry point 0x00302028 falls between segments (seg2 ends at 0x302038,
+# seg3 starts at 0x302400). The EM9305 ROM may fill this gap or the address
+# may be interpreted differently by the ARC EM boot sequence.
+
+# =========================================================================
+# SEGMENT 3 -- 0x00302400 (210,888 bytes = ~206KB) -- Main Patch Code
+# =========================================================================
+# This is the main patch payload containing ARC EM (ARCv2) machine code
+# that replaces or extends ROM functions in the Cordio BLE stack.
+#
+# WARNING: All 45 "functions" below were detected by rizin using ARM Thumb
+# heuristics on ARC EM binary data. These are NOT real function boundaries.
+# They represent byte offsets where the ARM Thumb heuristic happened to find
+# what looked like a function prologue, but the actual instruction encoding
+# is completely different (ARC EM uses different opcode formats).
+#
+# The entries are preserved below for reference ONLY, marked as INVALID.
+# A proper analysis requires an ARC EM disassembler.
+#
+# addr_in_NVM    rizin_name       status
+# -----------    --------------   ------
+0x00302400  fcn.00000000  INVALID_ARM_HEURISTIC
+0x00308f90  fcn.00006f90  INVALID_ARM_HEURISTIC
+0x0030947c  fcn.0000707c  INVALID_ARM_HEURISTIC
+0x0030a6ec  fcn.000082ec  INVALID_ARM_HEURISTIC
+0x0030d97c  fcn.0000b57c  INVALID_ARM_HEURISTIC
+0x0030d984  fcn.0000b584  INVALID_ARM_HEURISTIC
+0x0030e1fc  fcn.0000bdfc  INVALID_ARM_HEURISTIC
+0x003106ac  fcn.0000e2ac  INVALID_ARM_HEURISTIC
+0x00311cb0  fcn.0000f8b0  INVALID_ARM_HEURISTIC
+0x00312394  fcn.0000ff94  INVALID_ARM_HEURISTIC
+0x00313a9c  fcn.0001169c  INVALID_ARM_HEURISTIC
+0x00313f60  fcn.00011b60  INVALID_ARM_HEURISTIC
+0x00314558  fcn.00012158  INVALID_ARM_HEURISTIC
+0x003157d4  fcn.000133d4  INVALID_ARM_HEURISTIC
+0x00316e34  fcn.00014a34  INVALID_ARM_HEURISTIC
+0x00318994  fcn.00016594  INVALID_ARM_HEURISTIC
+0x0031ac4c  fcn.0001884c  INVALID_ARM_HEURISTIC
+0x0031c9e8  fcn.0001a5e8  INVALID_ARM_HEURISTIC
+0x0031ca20  fcn.0001a620  INVALID_ARM_HEURISTIC
+0x0031cd44  fcn.0001a944  INVALID_ARM_HEURISTIC
+0x0031cdd4  fcn.0001a9d4  INVALID_ARM_HEURISTIC
+0x0031e818  fcn.0001c418  INVALID_ARM_HEURISTIC
+0x0031ecf8  fcn.0001c8f8  INVALID_ARM_HEURISTIC
+0x0031fc70  fcn.0001d870  INVALID_ARM_HEURISTIC
+0x003202b4  fcn.0001deb4  INVALID_ARM_HEURISTIC
+0x00320304  fcn.0001df04  INVALID_ARM_HEURISTIC
+0x00320984  fcn.0001e584  INVALID_ARM_HEURISTIC
+0x00321678  fcn.0001f278  INVALID_ARM_HEURISTIC
+0x00325360  fcn.00022f60  INVALID_ARM_HEURISTIC
+0x003277e0  fcn.000253e0  INVALID_ARM_HEURISTIC
+0x0032c0a0  fcn.00029ca0  INVALID_ARM_HEURISTIC
+0x0032c7b4  fcn.0002a3b4  INVALID_ARM_HEURISTIC
+0x0032ca44  fcn.0002a644  INVALID_ARM_HEURISTIC
+0x0032e13c  fcn.0002bd3c  INVALID_ARM_HEURISTIC
+0x0032e79c  fcn.0002c39c  INVALID_ARM_HEURISTIC
+0x0032e98c  fcn.0002c58c  INVALID_ARM_HEURISTIC
+0x0032ed88  fcn.0002c988  INVALID_ARM_HEURISTIC
+0x0032ee84  fcn.0002ca84  INVALID_ARM_HEURISTIC
+0x00331488  fcn.0002f08c  INVALID_ARM_HEURISTIC
+0x00331844  fcn.0002f444  INVALID_ARM_HEURISTIC
+0x00333a68  fcn.00031668  INVALID_ARM_HEURISTIC
+0x00333aa0  fcn.000316a0  INVALID_ARM_HEURISTIC
+0x00333c50  fcn.00031850  INVALID_ARM_HEURISTIC
+0x00333c64  fcn.00031864  INVALID_ARM_HEURISTIC
+0x00335858  fcn.00033458  INVALID_ARM_HEURISTIC
+
+# =========================================================================
+# EM9305 NVM MEMORY MAP (from SDK + binary analysis)
+# =========================================================================
+# The EM9305 has two NVM areas:
+#
+#   NVM Main Area (area=0):
+#     0x00300000 - 0x003FFFFF   Main flash for patch code
+#     Organized in pages (8KB each based on 29 pages covering ~232KB)
+#     Page 0:  0x00300000 - 0x00301FFF  (contains seg 0 + seg 1)
+#     Page 1:  0x00302000 - 0x00303FFF  (contains seg 2 + start of seg 3)
+#     Pages 2-26: continuation of segment 3 code
+#
+#   NVM Info Area (area=1):
+#     Page 1: 0x00402000 - 0x00403FFF  (8KB, FW version at 0x402000)
+#
+# The firmware version is stored as a 4-byte LE32 at NVM Info Page 1
+# address 0x402000. Format: major.minor.patch.build (one byte each).
+# Invalid/blank version: 0xFFFFFFFF.
+
+# =========================================================================
+# HCI VENDOR-SPECIFIC COMMANDS (from SDK am_devices_em9305.h)
+# =========================================================================
+# These are the HCI commands the Apollo510b sends to the EM9305 for
+# configuration, firmware update, and runtime control.
+#
+# Opcode   Name                       Param Len  Description
+# ------   ----                       ---------  -----------
+# 0xFC43   SET_DEV_PUB_ADDR            6         Set BLE public address (6 bytes)
+# 0xFC49   SET_SLEEP_OPTION            1         Enable(1)/disable(0) sleep mode
+# 0xFC4E   CRC_CALCULATE               8         CRC32 over memory region (start_addr, end_addr)
+# 0xFC4F   ENTER_CM                    0         Enter Configuration Mode (for NVM programming)
+# 0xFC50   EXIT_CM                     0         Exit Configuration Mode
+# 0xFCC1   START_TRANSMIT_TEST         6         TX test mode (mode,chan,len,payload,phy,power)
+# 0xFCC2   END_TRANSMIT_TEST           0         End TX test
+# 0xFCC4   SET_TX_POWER_LEVEL          1         Set TX power (see levels below)
+# 0xFCF0   ENTER_SLEEP                 0         Trigger EM9305 + Apollo510b sleep
+# 0xFD01   READ_AT_ADDRESS             5         Read from NVM (addr[4], len[1])
+# 0xFD03   WRITE_AT_ADDRESS          134         Write to NVM (addr[4], data[130])
+# 0xFD06   NVM_ERASE_NVM_MAIN          0         Erase entire NVM main area
+# 0xFD07   NVM_ERASE_PAGE              2         Erase specific page (area[1], page[1])
+# 0xFFF2   SET_LOCAL_SUP_FEAT          -         Set supported LE features bitmask
+#
+# TX Power Levels (from hci_drv_em9305.h txPowerLevel_t):
+#   0xEC = -20 dBm
+#   0xF1 = -15 dBm
+#   0xF6 = -10 dBm
+#   0xFB =  -5 dBm
+#   0x00 =   0 dBm (default)
+#   0x03 =  +3 dBm
+#   0x04 =  +4 dBm
+#   0x06 =  +6 dBm (maximum)
+
+# =========================================================================
+# HCI VENDOR-SPECIFIC COMMANDS (Cooper/Apollo4 variant, from am_devices_cooper.h)
+# =========================================================================
+# The Cooper driver (Apollo4-era, used for SBL-based update) defines a
+# different set of VSC opcodes. The Even G2 uses the Apollo510b/EM9305
+# direct NVM programming path (above), but the Cooper SBL path may also
+# be present for backward compatibility.
+#
+# Opcode   Name                       Description
+# ------   ----                       -----------
+# 0xFC01   RD_MEM                     Read memory
+# 0xFC02   WR_MEM                     Write memory
+# 0xFC05   ID_FLASH                   Identify flash
+# 0xFC06   ER_FLASH                   Erase flash
+# 0xFC07   WR_FLASH                   Write flash
+# 0xFC08   RD_FLASH                   Read flash
+# 0xFC11   PLF_RESET                  Platform reset
+# 0xFC39   REG_RD                     Register read
+# 0xFC3A   REG_WR                     Register write
+# 0xFC70   SET_TX_POWER_LEVEL         Set TX power (1 byte)
+# 0xFC71   START_TRANS_TEST           Start transmitter test
+# 0xFC72   END_TRANS_TEST             End transmitter test
+# 0xFC73   SET_LOG_BITMAP             Set debug log bitmap (4 bytes)
+# 0xFC74   SET_BD_ADDR                Set BD address (6 bytes)
+# 0xFC75   UPDATE_FW                  Trigger firmware update (4 bytes)
+# 0xFC76   GET_DEVICE_ID              Get device ID
+# 0xFC77   UPDATE_NVDS                Update NVDS parameters (240 bytes)
+# 0xFC78   UPDATE_LL_FEATURE          Update link layer features
+# 0xFC79   GET_DTM_RSSI               Get RSSI in DTM mode
+# 0xFC7A   CFG_EVT_MASK               Configure event mask (4 bytes)
+# 0xFCC0   STORE_INFO0_TRIM           Store info0 trim values to RAM
+# 0xFCC1   FLASH_INFO0_TRIM           Flash info0 trim values
+# 0xFCC2   ENTER_SLEEP                Trigger sleep
+
+# =========================================================================
+# FIRMWARE UPDATE MECHANISM
+# =========================================================================
+# The EM9305 firmware is updated via the Apollo510b host using two possible
+# paths, depending on the SDK version:
+#
+# === Path 1: Direct NVM Programming (Apollo510b / AmbiqSuite R5.x) ===
+#   Used by the Even G2 glasses. The host directly programs NVM via HCI.
+#
+#   1. Enter Configuration Mode
+#      - Pulse GPIO_EN to reset EM9305
+#      - Generate 30KHz square wave on GPIO_CM (pin 15) for 40ms
+#      - EM9305 responds with event [0x04, 0xFF, 0x01, 0x03]
+#
+#   2. Check if already programmed
+#      - For each ImageRecord: CRC32 verify via HCI 0xFC4E
+#      - If all CRCs match, skip programming
+#
+#   3. Erase NVM pages
+#      - Erase entire NVM main area via HCI 0xFD06
+#      - (Individual page erase available via HCI 0xFD07)
+#
+#   4. Write ImageRecords
+#      - For each record: write payload to target address via HCI 0xFD03
+#      - Max 248 bytes per HCI write (PACKET_SIZE in driver)
+#      - Data is written sequentially, advancing address by chunk size
+#
+#   5. Verify data
+#      - CRC32 verify each record via HCI 0xFC4E
+#
+#   6. Update FW version
+#      - Read NVM Info Page 1 (0x402000, 248 bytes)
+#      - Erase NVM Info Page 1
+#      - Write back with updated 4-byte version number at offset 0
+#
+#   Hardware pins (from am_devices_em9305.c):
+#     GPIO 149 = EM9305_CS   (SPI chip select)
+#     GPIO 117 = EM9305_INT  (interrupt / SPI ready)
+#     GPIO 136 = AP5_12M_CLKREQ (12MHz clock request)
+#     GPIO 138 = EM9305_32K_CLK (32kHz clock export)
+#     GPIO  15 = EM9305_CM   (Configuration Mode trigger)
+#     GPIO  93 = EM9305_EN   (enable / reset)
+#     IOM Module 6 = SPI interface (16MHz)
+#
+# === Path 2: SBL (Secure Boot Loader) Update (Cooper/Apollo4 legacy) ===
+#   Used by earlier Apollo4-based designs. May still be present in G2 for
+#   backward compatibility. Uses a state machine with CRC-verified packets.
+#
+#   1. Reset EM9305 and send HELLO message
+#   2. Receive STATUS (FW version, boot status, chip ID)
+#   3. Send UPDATE with image size, packet count, version
+#   4. Send DATA packets (max 512 bytes each, with 64-byte image header first)
+#   5. Send FW_CONTINUE to jump to application firmware
+#   6. Receive final ACK
+#
+#   SBL message types: HELLO(0), STATUS(1), UPDATE_STATUS(2), UPDATE(3),
+#     FW_CONTINUE(4), NACK(5), RESET(6), ACK(7), DATA(8)
+#
+#   Image types: FW(0), INFO_0(1), INFO_1(2), NONE(3)
+#   FW image address: 0x10030000, max size: 0x30000 (192KB)
+
+# =========================================================================
+# CONTEXT: EM9305 in G2 Glasses Architecture
+# =========================================================================
+# The EM9305 is the BLE radio coprocessor connected to the main Apollo510b
+# SoC. The Apollo510b runs the Cordio BLE host stack; the EM9305 handles
+# the physical radio layer (link layer, 2.4GHz transceiver, PHY management).
+#
+# Manufacturer: EM Microelectronic (now Renesas)
+# CPU Core: Synopsys DesignWare ARC EM (ARCv2 ISA)
+# Ambiq codename: "Cooper" (Apollo4-era name, carried forward)
+# Communication: SPI/HCI via Apollo510b IOM6
+# Hardware interface:
+#   - SPI @ 16MHz (IOM6)
+#   - GPIO 117 (INT/RDY)
+#   - GPIO 149 (CS)
+#   - GPIO 93 (EN/Reset)
+#   - GPIO 15 (Configuration Mode)
+#   - GPIO 138 (32kHz clock)
+#   - GPIO 136 (12MHz clock request)
+#
+# BLE services managed through the EM9305 radio:
+#   - EUS (Even UART Service):   0x5401 TX / 0x5402 RX -- protobuf transport
+#   - EFS (Even File Service):   0x7401 TX / 0x7402 RX -- file transfer
+#   - ESS (Even Sensor Service): 0x6401 TX / 0x6402 RX -- display telemetry
+#   - NUS (Nordic UART):         6E400002 TX / 6E400003 RX -- gestures/audio
+#   - OTA service -- firmware updates
+#   - ANCC -- Apple Notification Center Consumer
+#   - Standard GATT/GAP
+#
+# The EM9305 handles:
+#   - BLE advertising, scanning, connection management
+#   - GATT attribute database (hosted on EM9305)
+#   - L2CAP, ATT protocol handling
+#   - Link-layer encryption (AES-CCM)
+#   - PHY management (LE 1M, LE 2M, LE Coded S=2/S=8)
+#   - Power management (sleep modes, clock gating)
+#
+# Supported LE features (from SDK hci_drv_em9305.h):
+#   Byte 0: Encryption, ConnParamReqProc, ExtRejectInd, SlvInitFeatExch,
+#           LE Ping, DataLenExt, Privacy, ExtScanFiltPolicy
+#   Byte 1: LE 2M PHY, StableModIdxRx, LE Coded PHY, LE ExtAdv,
+#           LE PerAdv, ChSel2
+#   Byte 2: MinNumUsedChan
+#   Byte 3: PAST Sender, PAST Recipient, SCA Update, RemotePubKeyValidation
+#   Byte 4: PowerControlReq, PowerChangeInd, PathLossMonitor, PRR AdvADI,
+#           Subrating, ChanClassification
+#   Byte 5: AdvCodingSelection, PerAdvWithRespAdvertiser, PerAdvWithRespScanner
+
+# =========================================================================
+# ANALYSIS CEILING
+# =========================================================================
+# The EM9305 ROM is proprietary EM Microelectronic IP with no public source.
+# The NVM patches modify this ROM by overriding specific functions. Without:
+#   1. The EM9305 ROM binary (proprietary, not publicly available)
+#   2. An ARC EM disassembler/decompiler (Ghidra lacks native support)
+#   3. The EM Micro SDK (NDA-restricted)
+# ...individual patch function identification is not possible.
+#
+# What IS known from the host-side SDK:
+#   - The patch container format (fully documented above)
+#   - HCI vendor commands for programming and configuration
+#   - The hardware interface (SPI pins, GPIO assignments)
+#   - The firmware update state machine
+#   - NVDS parameter IDs and their semantics
+#   - Supported BLE features and TX power levels
+#
+# The patch binary is byte-identical across all 5 analyzed G2 firmware
+# versions (2.0.1.14 through 2.0.7.16), confirming it is a vendor-supplied
+# binary that does not change with Even's application updates.
+#
+# Total: 4 NVM patch records, 211,824 bytes of payload data
+# Real function count: UNKNOWN (requires ARC EM disassembly)
+# Rizin false-positive "functions": 45 (ARM heuristic, all invalid)

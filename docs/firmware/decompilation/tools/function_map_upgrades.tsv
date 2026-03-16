@@ -1,0 +1,189 @@
+address	old_name	new_name	module	confidence	evidence
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Style Getters — call lv_obj_get_style_prop (0x0044a2aa) with property ID
+# Property IDs are hex constants from Ghidra, mapped to LVGL v9.3 lv_style_prop_t enum
+# ══════════════════════════════════════════════════════════════════════════════
+0x0043d9da	lvgl_helper_0043d9da	lv_obj_get_style_bg_color	lvgl.lv_obj_style	HIGH	calls lv_obj_get_style_prop(obj,part,0x10); 0x10=16=LV_STYLE_BG_COLOR
+0x00449d90	lvgl_helper_00449d90	lv_obj_get_style_anim	lvgl.lv_obj_style	HIGH	calls lv_obj_get_style_prop(obj,part,0x78); 0x78=120=LV_STYLE_ANIM
+0x00449d9e	lvgl_helper_00449d9e	lv_obj_get_style_anim_duration	lvgl.lv_obj_style	HIGH	calls lv_obj_get_style_prop(obj,part,0x79); 0x79=121=LV_STYLE_ANIM_DURATION; returns byte
+0x0048483e	lvgl_helper_0048483e	lv_obj_get_style_pad_top	lvgl.lv_obj_style	HIGH	calls lv_obj_get_style_prop(obj,part,0x18); 0x18=24=LV_STYLE_PAD_TOP
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Style Setters — call lv_obj_set_local_style_prop (0x0044a30c) with property ID
+# ══════════════════════════════════════════════════════════════════════════════
+# (These were already HIGH in previous sessions — no new setter upgrades found)
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Linked List (lv_ll) — struct: [node_size:4, head:4, tail:4], node: [prev:0, next:+4]
+# Cross-validated against lv_ll.h from LVGL v9.3 tag on GitHub
+# ══════════════════════════════════════════════════════════════════════════════
+0x0047b9bc	lvgl_page_callee_b9bc	lv_ll_init	lvgl.lv_ll	HIGH	sets head=0,tail=0,node_size=align4(param); matches lv_ll_init(ll,node_size)
+0x0047b9ce	lvgl_page_callee_b9ce	lv_ll_ins_head	lvgl.lv_ll	HIGH	allocs node, links as new head, sets prev=0; matches lv_ll_ins_head(ll)
+0x0047baca	lvgl_page_callee_baca	lv_ll_remove	lvgl.lv_ll	HIGH	unlinks node from head/tail/middle, updates prev/next pointers; matches lv_ll_remove(ll,node)
+0x0047bb94	lvgl_page_callee_bb94	lv_ll_get_head	lvgl.lv_ll	HIGH	returns *(param_1+4) with null check; matches lv_ll_get_head(ll)
+0x0047bba0	lvgl_page_callee_bba0	lv_ll_get_tail	lvgl.lv_ll	HIGH	returns *(param_1+8) with null check; matches lv_ll_get_tail(ll)
+0x0047bbac	lvgl_page_callee_bbac	lv_ll_get_next	lvgl.lv_ll	HIGH	returns *(base+node+4); matches lv_ll_get_next(ll,node)
+0x0047bbb6	lvgl_page_callee_bbb6	lv_ll_get_prev	lvgl.lv_ll	HIGH	returns *(base+node); matches lv_ll_get_prev(ll,node)
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Color Operations — ARGB channel blending with alpha compositing
+# ══════════════════════════════════════════════════════════════════════════════
+0x0047bd08	lvgl_page_callee_bd08	lv_color_mix	lvgl.lv_color	HIGH	per-channel alpha blend: c = (a*c1 + (255-a)*c2) >> 8; handles a>=0xfd as opaque, a<=2 as transparent
+0x0047bdb2	lvgl_page_callee_bdb2	lv_color_mix_premult	lvgl.lv_color	HIGH	premultiplied alpha blend with combined alpha calculation; calls lv_color_mix for sub-blend
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Printf / Format Helpers — internal lv_printf.c implementation
+# ══════════════════════════════════════════════════════════════════════════════
+0x0047beec	lvgl_page_callee_beec	lv_printf_noop	lvgl.lv_printf	MEDIUM	empty function (return only); likely default/null output callback
+0x0047bf28	lvgl_page_callee_bf28	lv_printf_pad_emit	lvgl.lv_printf	HIGH	pad-and-emit: flag bit 0=right-justify pads before, bit 1=left-justify pads after; emits chars via callback
+0x0047bf96	lvgl_page_callee_bf96	lv_printf_format_integer	lvgl.lv_printf	HIGH	zero-pads integer into buffer with sign handling; part of lv_printf integer formatting
+0x0047c20c	lvgl_helper_0047c20c	lv_printf_format_float	lvgl.lv_printf	HIGH	float formatting with NaN/Inf checks, calls pad_emit and format_special; uses VFP double ops
+0x0047c508	lvgl_propagated_0047c508	lv_printf_format_scientific	lvgl.lv_printf	HIGH	scientific notation formatting; handles negative/NaN/Inf edge cases, calls lv_printf_format_float
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Style Core — style property search and object opacity
+# ══════════════════════════════════════════════════════════════════════════════
+0x00449c74	lvgl_neighbor_00449c80_wrapper_wrapper	lv_style_mark_dirty	lvgl.lv_style	MEDIUM	sets *param_1 = 1 if 0; style dirty flag setter pattern
+0x00449c80	lvgl_neighbor_00449c80_wrapper	lv_style_is_const	lvgl.lv_style	HIGH	returns *(param_1+8) == -1 (0xFF); checks const sentinel in style struct
+0x0044a93a	lvgl_helper_0044a93a	lv_obj_get_style_opa_recursive	lvgl.lv_obj_style	HIGH	recursive opacity: gets prop 0x77 (LV_STYLE_OPA), walks parent chain multiplying opa values, clamps to 0/0xFF
+0x00440c32	lvgl_helper_00440c32	lv_color_make	lvgl.lv_color	HIGH	CONCAT13(alpha,rgb) — packs 3-byte RGB + 1-byte alpha into uint32 ARGB color
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Display / Refresh — display invalidation, timer tick, refresh control
+# ══════════════════════════════════════════════════════════════════════════════
+0x004b76f4	lvgl_helper_004b76f4	lv_disp_set_flag	lvgl.lv_disp	HIGH	sets flag bits: *(disp+0x20) |= param_1; invalidation flag accumulator
+0x004fe354	lvgl_propagated_004fe372_wrapper	lv_disp_invalidate_area_set	lvgl.lv_disp	MEDIUM	sets bit in invalidation bitmap: DAT[idx] = 1 << (param & 0x1f); area dirty tracking
+0x004fe372	lvgl_propagated_004fe372	lv_disp_invalidate_area_set_2	lvgl.lv_disp	MEDIUM	same pattern as e354 but different DAT target — second invalidation bitmap layer
+0x004fe390	lvgl_neighbor_004fe390_wrapper_wrapper	lv_disp_set_flush_priority	lvgl.lv_disp	MEDIUM	writes (param_2 << 4) to display struct at param_1 offset; flush priority/mode selector
+0x004fec34	lvgl_helper_004fec34	lv_refr_area	lvgl.lv_refr	HIGH	refresh area: checks dirty region, calls subroutine to flush, handles VDB double-buffer and fractional refresh
+0x004ff176	lvgl_helper_004fec34_wrapper	lv_refr_now	lvgl.lv_refr	HIGH	sets full-refresh flag (byte at +0xf9 = 1) then calls lv_refr_area; forced full screen redraw
+0x004ffab2	lvgl_helper_004ffab2	lv_tick_get	lvgl.lv_tick	HIGH	returns global DAT value; LVGL tick counter getter (called from timer/anim contexts)
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Display Helpers — tick setters, display property accessors
+# ══════════════════════════════════════════════════════════════════════════════
+0x004ffab8	lvgl_neighbor_004ffab8_wrapper	lv_disp_set_rotation	lvgl.lv_disp	MEDIUM	writes byte param to *(disp+0x7c); display rotation setting
+0x004ffac4	lvgl_neighbor_004ffac4_wrapper	lv_disp_set_offset	lvgl.lv_disp	MEDIUM	writes word param to *(disp+0x2d8); display pixel offset
+0x004fe5f0	lvgl_helper_004fe5f0	lv_timer_handler_add	lvgl.lv_timer	MEDIUM	calls FUN_0047d03c (timer insert) with global timer list + param; timer registration
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Object Helpers — tree walk, parent access, event dispatch
+# ══════════════════════════════════════════════════════════════════════════════
+0x00440670	module_callee_00440318	lv_obj_has_flag_scrollable	lvgl.lv_obj	HIGH	walks obj tree via *(obj+4), checks *(obj+8)+0x32 bits for flag==2; scrollable flag detection
+0x00451184	lvgl_neighbor_00451184_wrapper	lv_disp_get_default_screen	lvgl.lv_disp	HIGH	returns *(DAT+0x50); gets default display screen pointer
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Animation — animation path interpolation
+# ══════════════════════════════════════════════════════════════════════════════
+0x0044ede8	module_callee_00481556_ede8	lv_anim_path_calc	lvgl.lv_anim	HIGH	interpolates anim value: start + (end-start) * path(time,dur) >> 10; calls bezier/easing path function
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Draw — draw dispatch and composition helpers
+# ══════════════════════════════════════════════════════════════════════════════
+0x0045af06	module_callee_0045D7D2	lv_draw_rect_inner	lvgl.lv_draw	MEDIUM	calls FUN_00440e2a + FUN_00440e38 (two draw passes); likely lv_draw_rect background + border
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Menu Widget — identified via assert string "lv_menu_get_cur_sidebar_page"
+# ══════════════════════════════════════════════════════════════════════════════
+0x005af93a	lvgl_propagated_005af93a	lv_menu_get_cur_sidebar_page	lvgl.lv_menu	HIGH	assert string PTR_s_lv_menu_get_cur_sidebar_page; returns *(obj+0x48) after null-check
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Slider/Chart Widget — identified via struct patterns and widget callbacks
+# ══════════════════════════════════════════════════════════════════════════════
+0x005b151a	lvgl_propagated_005b151a	lv_slider_get_mode	lvgl.lv_slider	MEDIUM	maps return values 1/2/0 from sub-function; matches lv_slider_mode_t (NORMAL/SYMMETRICAL/RANGE)
+0x0050e316	lvgl_helper_0050e316	lv_chart_set_point_style	lvgl.lv_chart	MEDIUM	sets flag bits on chart point; widget-level style helper
+# ══════════════════════════════════════════════════════════════════════════════
+# NemaGFX Display Controller — hardware register MMIO with memory barriers
+# Module correction: these are NOT lvgl core, they are NemaGFX GPU driver functions
+# ══════════════════════════════════════════════════════════════════════════════
+0x004ce042	lvgl_page_callee_e042	nema_dc_set_layer_config	hal.nemagfx	HIGH	calls FUN_004cdfce (MMIO register write with barriers) on display controller base; layer configuration
+0x004ce052	lvgl_page_callee_e052	nema_dc_disable	hal.nemagfx	HIGH	calls FUN_004cdf44 which clears enable bit and MMIO clock gate with DMB/DSB/ISB barriers
+0x004ce05c	lvgl_page_callee_e05c	nema_dc_enable	hal.nemagfx	HIGH	checks DAT enable bit, calls FUN_004cdf24 to set MMIO enable with DMB/DSB/ISB barriers; 2 params (mode, enable)
+0x004ce07c	lvgl_page_callee_e07c	nema_dc_set_layer_array	hal.nemagfx	HIGH	iterates 11-byte layer descriptors, packs 4-bit channel fields A/B, calls FUN_004cdfa4 per-layer; bounds check *param<8
+0x004ce106	lvgl_page_callee_e106	nema_dc_program_layers	hal.nemagfx	HIGH	packs layer structs (6 words each) into 32-word local buffer, calls nema_dc_set_layer_config; max 16 layers
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL FreeRTOS Integration — mutex, thread, semaphore wrappers
+# ══════════════════════════════════════════════════════════════════════════════
+0x004ce1c0	lvgl_page_callee_e1c0	lv_freertos_thread_delete	lvgl.lv_freertos	HIGH	calls vTaskDelete(*(param_1+8)); deletes FreeRTOS task from thread handle
+0x004ce294	lvgl_page_callee_e294	lv_freertos_cond_signal	lvgl.lv_freertos	HIGH	enters critical, reads/clears flag at +8, sets +4=1 if was 0, calls osEventFlagsSet; condition signal
+0x004ce2cc	lvgl_page_callee_e2cc	lv_freertos_cond_init	lvgl.lv_freertos	HIGH	zeroes two fields (flag+waiters); condition variable initialization
+0x004ce2d8	lvgl_page_callee_e2d8	lv_freertos_thread_entry	lvgl.lv_freertos	HIGH	calls function pointer *(param_1[0])(param_1[1]) then vTaskDelete(0); thread entry trampoline
+0x004ce33c	lvgl_page_callee_e33c	lv_freertos_mutex_init_lazy	lvgl.lv_freertos	HIGH	double-checked locking: enter critical, check *param==0, call prvMutexInit, exit critical; lazy mutex init
+0x004ce35c	lvgl_page_callee_e35c	lv_freertos_cond_reset	lvgl.lv_freertos	HIGH	sets *param=1, clears next two fields; condition variable reset
+0x004ce36a	lvgl_page_callee_e36a	lv_freertos_sem_init_lazy	lvgl.lv_freertos	HIGH	double-checked locking pattern same as e33c but calls lv_freertos_cond_reset; lazy semaphore init
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Cache — comparator functions and cache query wrappers
+# ══════════════════════════════════════════════════════════════════════════════
+0x004ce694	lvgl_page_callee_e694	lv_freetype_cache_has_data	lvgl.lv_cache	HIGH	calls lv_cache_entry_has_data(*(DAT+0x134)); checks freetype glyph cache validity
+0x004ce6a2	lvgl_page_callee_e6a2	lv_cache_entry_compare_typed	lvgl.lv_cache	HIGH	compares two cache entries: first by type byte, then by value (string via lv_font_manager_find or uint compare); returns -1/0/1
+0x004ce704	lvgl_page_callee_e704	lv_cache_entry_compare_wrapper	lvgl.lv_cache	HIGH	unpacks struct fields at +4/+8 and delegates to lv_cache_entry_compare_typed; comparator adapter
+0x004ce714	lvgl_page_callee_e714	lv_cache_entry_free_typed	lvgl.lv_cache	HIGH	calls lv_draw_buf_has_flag(+0xc,0x10), conditionally lv_draw_buf_destroy, then lv_draw_dispatch_check; typed cache entry destructor
+0x004ce7aa	lvgl_page_callee_e7aa	lv_image_cache_compare	lvgl.lv_cache	HIGH	identical structure to e6a2 (type+value compare with string/uint paths); image decoder cache comparator
+0x004ce80c	lvgl_page_callee_e80c	lv_image_cache_compare_wrapper	lvgl.lv_cache	HIGH	unpacks two structs and delegates to lv_image_cache_compare; image cache comparator adapter
+0x004ce81c	lvgl_page_callee_e81c	lv_image_cache_free	lvgl.lv_cache	HIGH	checks type byte==1 at *(param+1), calls lv_draw_dispatch_check(*param); image cache entry destructor
+# ══════════════════════════════════════════════════════════════════════════════
+# LVGL Misc — module callees with identifiable patterns
+# ══════════════════════════════════════════════════════════════════════════════
+0x0047b5b8	lvgl_page_callee_b5b8	lv_mem_zero	lvgl.lv_mem	MEDIUM	calls FUN_004529d2(ptr,0,size) — memset(ptr,0,size) wrapper
+0x0047b648	lvgl_page_callee_b648	lv_mem_zero_12	lvgl.lv_mem	MEDIUM	calls lv_mem_zero(param,0xc) — zeroes 12-byte struct; specific size variant
+0x0047be66	lvgl_page_callee_be66	lv_font_get_bitmap_fmt	lvgl.lv_font	MEDIUM	calls display check fn, returns field at +0x10 (3 bytes) or default 0x11; bitmap format query
+0x0047cff8	module_callee_0046D18E_cff8	nema_dc_init_display	hal.nemagfx	HIGH	calls nema_dc_disable, sets layer configs, programs 6 layers, enables DC; display initialization sequence (caller of e052/e07c/e106/e05c)
+0x005385ac	lvgl_propagated_005385ac	lv_mutex_lock_freetype	lvgl.lv_freertos	MEDIUM	calls FUN_0047d15a(global_mutex); mutex lock thunk for freetype module
+0x004fe4aa	module_callee_004FEC34	lv_refr_check_dirty	lvgl.lv_refr	MEDIUM	called from refresh path to check if area needs redrawing; returns dirty status
+0x004fe4c0	lvgl_neighbor_004fe4c0_wrapper	lv_refr_helper_1	lvgl.lv_refr	MEDIUM	display refresh sub-helper (neighbor of lv_refr_area)
+0x004fe4ca	lvgl_neighbor_004fe4ca_wrapper	lv_refr_helper_2	lvgl.lv_refr	MEDIUM	display refresh sub-helper (neighbor of lv_refr_area)
+0x004ffae0	lvgl_neighbor_004ffae0_wrapper	lv_tick_helper_1	lvgl.lv_tick	MEDIUM	tick subsystem helper; neighbor of lv_tick_get
+0x004ffaf0	lvgl_neighbor_004ffaf0_wrapper	lv_tick_helper_2	lvgl.lv_tick	MEDIUM	tick subsystem helper; neighbor of lv_tick_get
+0x0050e750	lvgl_neighbor_0050e750_wrapper	lv_chart_helper	lvgl.lv_chart	MEDIUM	chart widget helper; neighbor of chart functions
+0x0047d4f6	module_callee_0047D8B8	lv_timer_helper	lvgl.lv_timer	MEDIUM	timer subsystem callee; all callers from lvgl module
+0x00482d84	module_callee_00482E92	lv_image_decoder_helper	lvgl.lv_image_decoder	MEDIUM	image decoder pipeline callee; all callers from lvgl module
+0x004ffa5a	module_callee_0050C884	lv_draw_sw_helper	lvgl.lv_draw	MEDIUM	software draw pipeline callee; neighbor of refresh/draw functions
+0x00514ff4	module_callee_0053A90C_4ff4	lv_freetype_init_helper	lvgl.lv_freetype	MEDIUM	freetype init chain callee; all callers from lvgl module
+0x0053a9d8	lvgl_helper_a9d8	lv_freetype_mutex_helper	lvgl.lv_freetype	MEDIUM	freetype mutex helper; 6/7 callers from lvgl module
+0x0053aa10	module_callee_00514FF4	lv_freetype_module_helper_1	lvgl.lv_freetype	MEDIUM	freetype module init chain; callee of lv_freetype_init_helper
+0x0053aa20	module_callee_0053AA10	lv_freetype_module_helper_2	lvgl.lv_freetype	MEDIUM	freetype module init chain; callee of lv_freetype_module_helper_1
+# ══════════════════════════════════════════════════════════════════════════════
+# FreeType Core — module search, interface access, library management
+# ══════════════════════════════════════════════════════════════════════════════
+0x00511876	lvgl_lv_freetype_helper_1876	FT_Get_Module_Interface	lvgl.lv_freetype	HIGH	calls FT_Find_Module (0x0051183c), returns *(result+0x14) vtable interface pointer; matches FT_Get_Module_Interface
+0x0051188a	lvgl_lv_freetype_helper_188a	FT_Request_Module	lvgl.lv_freetype	HIGH	traverses module list calling vtable[0x20] per module, optionally recurses sub-modules; 8/10 callers from freetype
+0x0051151a	lvgl_lv_freetype_callee_151a	FT_Set_Charmap	lvgl.lv_freetype	HIGH	accesses face->driver->module->charmap chain at +4/+0x60/+4/+0x9c, calls FT_Select_Charmap if mismatch
+0x005128f4	lvgl_lv_freetype_callee_28f4	FT_Init_Modules	lvgl.lv_freetype	HIGH	iterates 9 module slots, calls vtable init per slot via function pointer table at DAT; module initialization loop
+0x00512476	lvgl_lv_freetype_page_callee_2476	FT_Property_Get	lvgl.lv_freetype	HIGH	string-compares property names (3 branches), copies struct fields from face; property getter with strcmp dispatch
+0x00513f68	lvgl_lv_freetype_page_callee_3f68	lv_freetype_cache_entry_free	lvgl.lv_freetype	HIGH	calls lv_draw_buf_destroy(*(param+8)); freetype cache entry destructor
+# ══════════════════════════════════════════════════════════════════════════════
+# FreeType SFNT/TT — cmap validators, table loaders
+# Each validates big-endian cmap subtable format with bounds checking
+# ══════════════════════════════════════════════════════════════════════════════
+0x005c1a12	lib.freetype_neighbor_005c1a12	tt_cmap0_validate	lvgl.lv_freetype	HIGH	cmap format 0: checks length >= 0x106, validates 256-byte mapping array bounds; calls FUN_0050f408 on error
+0x005c1ad0	module_callee_0050F408_1ad0	tt_cmap2_validate	lvgl.lv_freetype	HIGH	cmap format 2: BE parsing at +0x84/+0x88/+0x90 offsets with subHeader iteration; most complex validator
+0x005c2a54	module_callee_0050F408_2a54	tt_cmap4_validate	lvgl.lv_freetype	HIGH	cmap format 4: checks length >= 0x2010, validates segCount*12 records with BE uint32 parsing
+0x005c300a	module_callee_0050F408_300a	tt_cmap6_validate	lvgl.lv_freetype	HIGH	cmap format 6: checks length >= 0x10, validates record_count * 12 entries with start/end range ordering
+0x005c33c8	module_callee_0050F408_33c8	tt_cmap8_validate	lvgl.lv_freetype	HIGH	cmap format 8: same structure as format 6 validator with additional group validation; BE uint32 parsing
+0x005c1736	lib.freetype_neighbor_005c1736	tt_face_free_hdmx	lvgl.lv_freetype	HIGH	checks flag at +0x32c, frees stream at +0x318, zeroes 3 fields; hdmx table cleanup
+0x005c0052	module_callee_0050F3C8	sfnt_init_face	lvgl.lv_freetype	HIGH	calls FUN_0050f3c8 with global SFNT interface; SFNT module face initialization
+# ══════════════════════════════════════════════════════════════════════════════
+# FreeType TrueType Glyph Loading — outline, composite, hinting
+# ══════════════════════════════════════════════════════════════════════════════
+0x005c42e4	lvgl_lv_freetype_page_callee_42e4	TT_Access_Glyph_Frame	lvgl.lv_freetype	HIGH	checks vtable at face->driver+0x30, calls it or returns 0x96 (FT_Err_Invalid_Handle); glyph frame access
+0x005c4486	lvgl_lv_freetype_page_callee_4486	TT_Load_Glyph_Header_Init	lvgl.lv_freetype	HIGH	calls stream read, zeroes 5 fields at +0x304..+0x314; glyph header loading initialization
+0x005c4954	lvgl_lv_freetype_page_callee_4954	TT_Load_Table_Access	lvgl.lv_freetype	HIGH	component vs simple glyph dispatch: param_2==0 uses face->glyf, else calls FUN_005c4628; table stream access
+0x005c4d02	lvgl_lv_freetype_page_callee_4d02	TT_Done_Glyph_Zone	lvgl.lv_freetype	HIGH	frees two arrays (0x14-stride and 0xc-stride) via FUN_005136da, zeroes counts at +0x15c/+0x168; glyph zone cleanup
+0x005c5da0	module_callee_005C5DA0_5da0	TT_Load_Simple_Glyph_Points	lvgl.lv_freetype	HIGH	reads 5 bytes per point into ushort array, optional 3 extra bytes; simple glyph point loader
+0x005c5e0a	lib.freetype_neighbor_005c5e0a	tt_glyph_render_to_bitmap	lvgl.lv_freetype	HIGH	bit-blit with byte-aligned and shifted paths; renders outline to bitmap with bounds checking
+0x005c5f40	lib.freetype_neighbor_005c5f40	tt_glyph_render_to_bitmap_v2	lvgl.lv_freetype	HIGH	same render pattern as 5e0a with variant stride/offset; second rendering path
+0x005c6118	module_callee_005C6384	TT_Process_Simple_Glyph	lvgl.lv_freetype	HIGH	reads glyph header fields (flag/dx/dy/contour), processes point array with flag-based decoding
+0x005c6384	module_callee_005C6200_6384	TT_Load_Glyph_Data	lvgl.lv_freetype	HIGH	reads glyph data from stream at offset+loca, processes contour/point arrays; main glyph data loader
+# ══════════════════════════════════════════════════════════════════════════════
+# FreeType CFF — Compact Font Format parsing and rendering
+# ══════════════════════════════════════════════════════════════════════════════
+0x005b7b26	lvgl_lv_freetype_helper_7b26	cff_parser_init	lvgl.lv_freetype	HIGH	sets 8 fields: memory/limit/cursor ptrs, zeroes stack/error, default=10; CFF parser state initialization
+0x005ba3ee	lvgl_lv_freetype_helper_a3ee	cff_slot_load_metrics	lvgl.lv_freetype	HIGH	processes CFF metrics: sideBearing, stem hints, calls FUN_005bc678/005b8d34; glyph metrics calculation
+0x0057c60a	lvgl_lv_freetype_helper_0057c60a	cff_index_get_sid_string	lvgl.lv_freetype	HIGH	returns *(table + param*4) if param < count at +0x54c, else 0; CFF SID→string index lookup
+0x0057d76c	lvgl_lv_freetype_helper_0057d76c	cff_face_done	lvgl.lv_freetype	HIGH	frees 4 allocated buffers at +0x284/+0x23c/+0x244/+0x250, calls cleanup at +0x260; CFF face destructor
+# ══════════════════════════════════════════════════════════════════════════════
+# FreeType Misc — hinting, property, PSNames, mutex
+# ══════════════════════════════════════════════════════════════════════════════
+0x005758f6	lib.freetype_neighbor_005758f6	tt_face_load_and_interpret	lvgl.lv_freetype	MEDIUM	calls prep/exec sequence (FUN_005753c4, 005754c2, 00575654); TT bytecode load+interpret
+0x005cefde	lib.freetype_neighbor_005cefde	ps_table_helper	lvgl.lv_freetype	MEDIUM	PostScript table manipulation; neighbor of PS module functions
+0x0057519a	lvgl_lv_freetype_neighbor_0057519a	tt_check_single_notdef	lvgl.lv_freetype	HIGH	iterates cmap entries with FUN_0057a384/0057a43c checking for single .notdef mapping; sets flag at +0x20
+0x005d0f9a	lvgl_lv_freetype_helper_0f9a	tt_glyf_zone_select	lvgl.lv_freetype	HIGH	copies 8-byte zone record at index*8+0x1b8 into fields at +0x168/+0x170, sets subglyph data; zone selection
+0x005d0fd2	lvgl_lv_freetype_helper_0fd2	tt_glyf_zone_clear	lvgl.lv_freetype	HIGH	zeroes 8-byte zone record at index*8+0x1b8; glyph zone reset
+0x005d10b4	lvgl_lv_freetype_helper_10b4	FT_GlyphLoader_CheckPoints	lvgl.lv_freetype	HIGH	reallocs if *count < needed: FT_MEM_RENEW_ARRAY pattern with size*count; glyph loader capacity check
+0x005d4118	module_callee_005D4268	tt_hint_adjust_points	lvgl.lv_freetype	HIGH	adjusts hinted point positions: computes delta from original, applies to range [start..end]; TT hinting pass
+0x005d415e	lib.freetype_neighbor_005d415e	tt_hint_shift_points	lvgl.lv_freetype	HIGH	shifts hinted control points with range checks; multi-range point adjustment for composite glyphs
+0x005d60dc	module_callee_00512E16	cff_load_private_dict	lvgl.lv_freetype	HIGH	calls vtable at +0x204 with tag, then FUN_00512e16 to load stream data into +0x28c; CFF private dictionary loader
+0x00538586	lvgl_lv_freetype_propagated_005385ac_wrapper	lv_mutex_lock_freetype_wrapper	lvgl.lv_freetype	MEDIUM	wraps call to lv_mutex_lock_freetype (005385ac); all callers from lv_freetype module
+# ══════════════════════════════════════════════════════════════════════════════
+# Final 2 — remaining lvgl LOW entries
+# ══════════════════════════════════════════════════════════════════════════════
+0x005b36ac	lvgl_helper_005b36ac	lv_table_get_cell_area	lvgl.lv_table	MEDIUM	sums column widths from obj->col_w[0..col], computes row offsets, calculates cell bounding rect; table widget geometry
+0x0044a108	module_callee_0044AE30	lv_obj_invalidate_all_layers	lvgl.lv_obj	MEDIUM	iterates all displays via FUN_0044dee2, walks layer array at +0x2b8 (count at +0x2d4), calls FUN_0044ae30 per layer; bulk layer invalidation
