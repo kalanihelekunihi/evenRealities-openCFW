@@ -1,0 +1,347 @@
+================================================================================
+CY8C4046FNI TOUCH CONTROLLER — RTOS / EXECUTION MODEL MAP
+================================================================================
+Processor: ARM Cortex-M0 (PSoC4)
+Firmware: 2.0.6.0
+Binary: firmware_touch_stripped.bin (198 functions)
+Architecture: BARE-METAL (no RTOS) — interrupt-driven with super-loop
+================================================================================
+
+NOTE: The CY8C4046FNI does NOT use an RTOS. It runs bare-metal firmware with
+a simple super-loop main and interrupt-driven peripherals. This document maps
+the execution model, timing, and interrupt architecture in the same structural
+style as the main firmware rtos_map.txt for cross-reference.
+
+
+==============================================================================
+1. EXECUTION MODEL — SUPER-LOOP (no threads)
+==============================================================================
+
+The firmware runs a single-context super-loop. There are no threads, no
+scheduler, and no context switching. All processing happens in either:
+  (a) The main loop (foreground)
+  (b) Interrupt handlers (background)
+
+--- Main Loop (inferred from call graph and power state strings) ---
+
+  Entry: system_reset_handler (FUN_000075a8) @ 0x000075a8
+  Init:  hardware_init_all (FUN_00001014) @ 0x00001014
+
+  Inferred main loop structure:
+
+    system_reset_handler()
+      |
+      +-> optional user callback at _DAT_20000f5c (if non-NULL)
+      +-> BSS zero (memset loop)
+      +-> hardware_init_all()
+      |     +-> clock_init_imo_ilo()       — start 48MHz IMO, ILO for WDT
+      |     +-> gpio_init_all_pins()       — drive modes for all I/O
+      |     +-> clock_assign_i2c_divider() — I2C SCB clock divider
+      |     +-> gpio_init_capsense_pins()  — CSD electrode pin config
+      |
+      +-> eeprom_init_register_callback()  — register deep-sleep callback
+      +-> wdt_register_callback()          — register WDT/timing callback
+      +-> capsense_scan_and_process()      — full CSD init + calibration
+      |     +-> capsense_full_init_and_calibrate()
+      |           +-> capsense_calibrate_all_idac()
+      |           +-> capsense_auto_tune_sensitivity()
+      |
+      +-> MAIN LOOP (infinite):
+            |
+            +---> capsense_start_scan_slot()     — trigger CSD hardware scan
+            +---> capsense_wait_scan_complete()   — poll/wait for CSD done
+            +---> capsense_process_all_widgets()  — filter + threshold + debounce
+            +---> touch_event_process_and_report() — gesture FSM + I2C report
+            |       +-> proximity_detect_state()
+            |       +-> gesture_state_machine()
+            |       +-> i2c_set_report_buffer()   — update I2C slave buffer
+            |       +-> eeprom_save_prox_bsln()    — conditional EEPROM save
+            |
+            +---> power_sleep_with_callbacks()    — WFI until next scan
+            |       OR
+            +---> power_deep_sleep_with_callbacks() — deep WFI for WOT mode
+            |
+            +---> (loop repeats)
+
+
+==============================================================================
+2. POWER STATE MACHINE (ACT / ALR / WOT)
+==============================================================================
+
+Three power states control scan rate and sleep depth. Transitions are logged
+with debug strings. State stored at DAT_00007184.
+
+  State    Name              Description
+  -------- ----------------- -------------------------------------------------
+  ACT      Active            Full scan rate. CPU sleeps (WFI) between scans.
+                             Normal touch-responsive mode.
+
+  ALR      Alert             Reduced scan rate. Periodic wake from deep sleep.
+                             Entered after no touch for timeout period.
+                             Debug: "ACT->ALR"
+
+  WOT      Wake-on-Touch     CSD hardware threshold wake only. Deepest
+                             touch-aware sleep. CPU in deep sleep until
+                             CSD block detects capacitance change.
+                             Debug: "ALR->WOT"
+
+  Transitions (from debug strings):
+    ACT -> ALR    "ACT->ALR"    No touch timeout (enter low-power scan)
+    ALR -> ACT    "ALR->ACT"    Touch detected during alert scan
+    ALR -> WOT    "ALR->WOT"    Extended no-touch timeout (deepest sleep)
+    WOT -> ACT    "WOT->ACT"    CSD hardware threshold crossed (wake + full scan)
+    WOT -> ALR    "WOT->ALR"    Spurious wake (return to alert, not full active)
+
+  Note: ACT -> WOT direct transition is not logged (always goes through ALR).
+
+
+==============================================================================
+3. SCAN -> PROCESS -> REPORT PIPELINE TIMING
+==============================================================================
+
+The core pipeline runs once per scan cycle. Timing depends on power state:
+
+  Phase                      Function                     Estimated Time
+  -------------------------- ---------------------------- ----------------
+  1. CSD Hardware Scan       capsense_start_csd_scan      ~200-500us
+                             (0x3208)                     (depends on IDAC/
+                                                          sense clock config)
+
+  2. Wait for Scan Done      capsense_wait_scan_complete  ~0us (poll loop)
+                             (0x353c)                     or interrupt-based
+
+  3. Read Raw Results        capsense_read_csd_*_results  ~10us
+                             (0x302e / 0x30ec)
+
+  4. Filter (IIR + Median)   capsense_run_all_filters     ~20us
+                             (0x1bec)
+                             - capsense_iir_filter_1st_order (0x1536)
+                             - filter_median_of_three (0x1af4)
+                             - filter_iir_weighted_blend (0x1b2a)
+
+  5. Baseline Update         baseline_update_sensor       ~5us
+                             (0x1b3a)
+                             - baseline_iir_update (0x1ba0)
+
+  6. Threshold + Debounce    capsense_run_debounce        ~10us
+                             (0x270e)
+                             - capsense_debounce_self_cap (0x2600)
+                             - capsense_debounce_mutual_cap (0x2578)
+
+  7. Gesture State Machine   gesture_state_machine        ~5us
+                             (0x0bbc)
+
+  8. I2C Report Update       touch_event_process_and_report ~10us
+                             (0x06d4)
+                             + conditional EEPROM save    ~2-5ms (if triggered)
+
+  9. Sleep (WFI)             power_sleep_with_callbacks   Variable
+                             (0x7124)                     (WDT wakes CPU)
+
+  Total active per cycle:    ~300-600us (excluding sleep)
+  Scan interval (ACT):       Set to 0x280 (640) ticks when event occurs
+  Scan interval (ALR):       Longer (reduced rate, periodic deep sleep)
+
+
+==============================================================================
+4. INTERRUPT ARCHITECTURE
+==============================================================================
+
+PSoC4 Cortex-M0 has 32 external interrupts (IRQ0-IRQ31) via NVIC.
+The CY8C4046FNI uses a minimal interrupt set:
+
+--- CSD Block Interrupt ---
+  Source:    CSD capacitive sensing block (INTR register at CSD base + 0x0180)
+  Purpose:  End-of-scan notification
+  Handler:  Indirect — routes through capsense_invoke_scan_callback (0x2ab8)
+             which calls function pointer at scan_context+8+0x10.
+  Priority: High (must service before next scan window)
+  Notes:    In polled mode, capsense_wait_scan_complete (0x353c) busy-waits
+             on CSD status register instead of using the interrupt.
+
+--- I2C SCB Interrupt ---
+  Source:    SCB (Serial Communication Block) configured as I2C slave
+  Purpose:  Host SoC (Apollo510b) read request servicing
+  Handler:  Hardware-managed by PSoC4 SCB block. The firmware only sets
+             the TX buffer pointer and length via i2c_set_report_buffer
+             (0x66e4). SCB hardware handles the actual I2C clock stretching
+             and byte transfer.
+  Buffer:   16 bytes at DAT_00000818, configured via SCB registers at
+             offsets +0x28 (buffer addr), +0x2c (length).
+  Trigger:  touch_event_process_and_report sets SCB +0x44 = 1 to signal
+             new data available. Host reads by polling I2C address.
+
+--- SysTick Interrupt ---
+  Source:    ARM Cortex-M0 SysTick timer (24-bit downcounter)
+  Handler:   systick_isr_dispatch (0x71f0)
+  Purpose:  System tick for timing, WDT coordination
+  Dispatch: Iterates 5-slot function pointer table at DAT_00007218.
+             Each non-NULL entry is called. Gated by pending flag
+             (DAT_00007214, bit 16).
+  Notes:    SysTick provides millisecond-resolution timestamps used by
+             the gesture state machine for tap timeout (300ms),
+             long press detection (999ms), and slide report intervals
+             (100ms minimum).
+
+--- WDT Interrupt ---
+  Source:    WDT (Watchdog Timer) at SRSSLT_WDT_MATCH (0x40030014)
+  Purpose:  Periodic wakeup from sleep/deep sleep for CapSense scanning
+  Config:   WDT configuration struct at DAT_000071ec:
+              +0x00: WDT counter value
+              +0x04: WDT enable flag
+  Handler:  Registered via wdt_register_callback (0x1198) into callback
+             chain. Wakes CPU from WFI for next scan cycle.
+  Period:   Controls scan rate in ALR/WOT modes (longer period = lower
+             power but slower touch response).
+
+
+==============================================================================
+5. INTERRUPT PRIORITY AND NESTING
+==============================================================================
+
+ARM Cortex-M0 has 4 priority levels (2-bit, 0=highest, 3=lowest).
+The CY8C4046FNI uses a flat priority scheme (no nesting observed):
+
+  Priority   Interrupt           Rationale
+  ---------- ------------------- ------------------------------------------
+  0 (High)   CSD scan complete   Must read ADC results before next scan
+  1          I2C SCB             Host communication (hardware-managed)
+  2          SysTick             System timing (not time-critical)
+  3 (Low)    WDT                 Sleep wakeup (can tolerate jitter)
+
+  Nesting: NOT used. All interrupts execute to completion before returning.
+  Critical sections: critical_section_enter/exit (0x0fe2/0x0fea) disable
+  all IRQs via PRIMASK. Used for:
+    - Clock frequency changes (IMO register programming)
+    - CSD register configuration (multi-register atomic updates)
+    - Flash/EEPROM row writes (SROM commands require no interrupts)
+
+
+==============================================================================
+6. TIMING-CRITICAL PATHS
+==============================================================================
+
+--- EEPROM Write (blocking) ---
+  Function:   em_eeprom_write (0x5664) -> flash_write_row (0x1308)
+  Duration:   ~2-5ms per row (128 bytes)
+  Impact:     Blocks main loop. All interrupts disabled during SROM call.
+  Trigger:    Proximity baseline save when |delta| >= 50
+  Mitigation: Saves are infrequent (only on significant environmental change)
+
+--- Calibration (blocking, startup only) ---
+  Function:   capsense_full_calibration (0x4550)
+  Duration:   ~50-200ms (binary search IDAC tuning across all sensors)
+  Impact:     Runs only at boot. No touch reporting during calibration.
+  Sub-steps:  capsense_calibrate_idac_mod (0x424c)
+              capsense_calibrate_idac_comp (0x426a)
+              capsense_calibrate_idac_per_sensor (0x4288)
+              capsense_verify_calibration (0x436e)
+
+--- Flash/SROM Programming (blocking) ---
+  Function:   srom_execute_command (0x57ac)
+  Duration:   ~1-3ms per command (flash row write/erase)
+  Impact:     CPU stalls. SROM uses CPUSS_SYSREQ register (0x40100004).
+              All interrupts must be disabled (IRQs off during SROM call).
+
+
+==============================================================================
+7. CALLBACK CHAIN ARCHITECTURE (sleep/deep-sleep lifecycle)
+==============================================================================
+
+Two callback channels manage peripheral state across sleep transitions:
+
+  Channel 0: Sleep callbacks (WFI)
+  Channel 1: Deep Sleep callbacks (deep WFI)
+
+  Each channel maintains a priority-sorted linked list of callback nodes.
+  Callbacks are dispatched in priority order (lower number = first).
+
+  Event sequence for sleep entry:
+    1. CHECK_READY (event=1) — each callback can veto sleep
+       If any returns sentinel (DAT_00007118): abort sleep, dispatch AFTER_WAKEUP
+    2. BEFORE_SLEEP (event=4) — prepare peripherals (disable clocks, save state)
+    3. WFI / Deep WFI — CPU halts
+    4. AFTER_SLEEP (event=8) — restore peripherals (re-enable clocks, reload config)
+
+  Registered callbacks (from decompiled init code):
+    - EEPROM deep-sleep callback (registered at 0x0834)
+      Ensures pending EEPROM writes complete before deep sleep
+    - WDT callback (registered at 0x1198)
+      Saves/restores WDT configuration across deep sleep
+    - CapSense CSD callback (registered during capsense_full_init)
+      Powers down CSD block before sleep, reinitializes after wake
+
+
+==============================================================================
+8. MEMORY MAP
+==============================================================================
+
+  Region                    Address Range        Size     Description
+  ------------------------- -------------------- -------- -------------------
+  Flash (Code)              0x00000000-0x00007640 ~30KB   198 functions
+  Flash (Strings)           0x00007640-0x00007C00 ~1.5KB  Debug/log strings
+  Flash (Config tables)     0x00007C00-0x00008000 ~1KB    CapSense params, GPIO
+  RAM (Variables)           0x20000000+           ~4KB    State, buffers
+  Peripherals:
+    HSIOM                   0x40310000                    Pin mux
+    GPIO                    0x40040000                    Port registers
+    SCB (I2C)               (indirect via DAT_)           I2C slave block
+    CSD                     (indirect via DAT_)           CapSense block
+    SRSSLT                  0x40030000                    Clock, WDT, power
+    CPUSS                   0x40100000                    SROM, flash control
+    CM0 System              0xE000E000                    NVIC, SysTick, SCR
+
+
+==============================================================================
+9. DATA FLOW SUMMARY
+==============================================================================
+
+  ┌──────────────────────────────────────────────────────────────────┐
+  │                    CSD HARDWARE SCAN                            │
+  │  (self-cap electrodes + proximity sensor, IDAC-based ADC)       │
+  └──────────────┬─────────────────────────────────────────────────┘
+                 │ raw 16-bit count per electrode
+                 ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  SIGNAL PROCESSING (per sensor, per scan cycle)                 │
+  │  1. IIR filter (1st-order, configurable coefficient)            │
+  │  2. Median filter (3-sample window)                             │
+  │  3. Baseline tracking (bucket-counter adaptive)                 │
+  │  4. Diff = filtered - baseline                                  │
+  │  5. Threshold compare (finger threshold, noise threshold)       │
+  │  6. Debounce (ON/OFF counters, configurable count)              │
+  └──────────────┬──────────────────────────────────────────────────┘
+                 │ widget active/inactive + position (0-255)
+                 ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  GESTURE STATE MACHINE (0x0bbc)                                 │
+  │  Input: touch state, position, timestamp                        │
+  │  Tracks: direction, speed (IIR), click count, long press timer  │
+  │  Output: event byte (tap/double/long/slide_L/slide_R) +         │
+  │          magnitude + filtered speed                             │
+  └──────────────┬──────────────────────────────────────────────────┘
+                 │ 3-byte gesture event
+                 ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  I2C SLAVE REPORT (16 bytes, polled by Apollo510b)              │
+  │  [prox|gesture, magnitude, speed, 0,                            │
+  │   baseline_hi, baseline_lo, raw_hi, raw_lo,                     │
+  │   diff_hi, diff_lo, thresh_hi, thresh_lo, 0, 0, 0, 0]          │
+  └──────────────┬──────────────────────────────────────────────────┘
+                 │ SCB I2C slave read by host
+                 ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  APOLLO510b HOST SoC (thread.input)                             │
+  │  Reads I2C report → dispatches to display_thread/task.manager   │
+  │  Maps gesture codes to G2 BLE protocol events (0x01-01, 0x0D-01)│
+  └─────────────────────────────────────────────────────────────────┘
+
+  Side channels:
+    - EEPROM: proximity baseline persistence (save when |delta| >= 50)
+    - 5-fast-clicks: host_reset_trigger (writes SCB control regs)
+    - Debug printf: stubbed out (FUN_00000a64 returns 0, no UART output)
+
+
+================================================================================
+END OF RTOS MAP
+================================================================================

@@ -1,0 +1,1058 @@
+# G2 Charging Case (Box) Firmware — Global Data Map
+# Processor: ARM Cortex-M0+, Image base: 0x08000000 (STM32L0-series, dual-bank flash)
+# Board: B200, FW: 1.2.54, Source: Ghidra decompilation cross-referenced with rizin strings
+#
+# Format: address  inferred_name  type  refs  description
+#
+# Key memory regions:
+#   0x08000000-0x0800cc4c  Code (414 functions)
+#   0x0800cc4c-0x0800d220  IR detect / water detect / debug dump
+#   0x0800d220-0x0800d754  String literals (debug/log/protocol messages)
+#   0x0800d754-0x0800d774  Init table (function pointer entries, 4 x 8 bytes)
+#   0x20000000+            RAM (variables, state structs, UART buffers)
+#
+# Main state struct (unaff_r4 in defaultTask_body @ 0x08007038):
+#   +0x01: bat_pct (battery percentage, used in "B200 vol/pct" JSON)
+#   +0x02: led_phase (0-2, cleared on GLS status change)
+#   +0x03: usb_connected (USB plug flag)
+#   +0x04: lid_open (Hall sensor lid flag)
+#   +0x08: loop_counter_div5 (counter / 5 modulus for periodic tasks)
+#   +0x0C: stable_detect_count (uint32, GLS detection debounce counter)
+#   +0x10: gls_l_present (left glasses detected by IR)
+#   +0x11: gls_r_present (right glasses detected by IR)
+#   +0x12: gls_l_charge_confirmed (charging confirmed by GLS report)
+#   +0x13: gls_r_charge_confirmed
+#   +0x14: charge_result_state (0=none, 1=error, 2=good)
+#   +0x15: self_check_ok (set after peripheral self-check)
+#   +0x17: idle_counter (0-0x1E, triggers idle mode at 0x1D ≈ 30s)
+#   +0x18: ota_in_progress
+#   +0x19: ota_gls_ready (0=none, 1=L ready, 2=R ready, 3=box ready)
+#   +0x1A: ota_download_started
+#   +0x1B: ota_check_sent (prevents re-checking)
+#   +0x1C-0x28: ota_state_tracking (cleared on OTA fail)
+#   +0x31: water_l_detected
+#   +0x33: water_l_charging_disabled
+#   +0x38: fake_standby_counter_l (uint16, 300s threshold for fake standby)
+#   +0x3C: gls_l_poll_count (uint32, < 10 triggers battery poll)
+#   +0x40: no_reply_l_count (uint32, > 7 triggers timeout path)
+#   +0x44: no_reply_l_seconds (int32, 0xD2=210 triggers error LED)
+#   +0x4D: water_r_detected
+#   +0x4F: water_r_charging_disabled
+#   +0x54: fake_standby_counter_r (uint16, mirrors +0x38 for R side)
+#   +0x58: gls_r_poll_count (uint32)
+#   +0x5C: no_reply_r_count (uint32)
+#   +0x60: no_reply_r_seconds (int32)
+
+# =========================================================================
+# GLASSES DETECT TASK STATE (glsDetectTask, used by glasses_detect_ir_scan)
+# =========================================================================
+0x0800cf04	gls_detect_state_ptr	ptr	3	-> main state struct (same as defaultTask unaff_r4)
+#   Accesses +0x10 (gls_l_present), +0x11 (gls_r_present), +0x31 (water_l),
+#   +0x4D (water_r), +0x33 (water_l_disabled), +0x4F (water_r_disabled)
+0x0800cf08	gls_detect_one_side_flag	ptr	2	One-side charging mode flag pointer
+0x0800cf0c	adc_ir_threshold_ptr	ptr	2	-> ADC IR voltage divider constant
+0x0800cf10	water_detect_counters	byte[2]	8	[0]=L water count, [1]=R water count (6=confirmed)
+0x0800cf14	debug_output_flag_ptr	ptr	2	-> debug output enable flag (suppress water log)
+0x0800cf40	str_water_log_suffix	string	2	Log suffix for water detection messages
+
+# =========================================================================
+# LED TASK STATE (ledTask, used by glsDetectTask confirmations)
+# =========================================================================
+0x0800b98c	str_restart_led_timer_1s	string	0	Timer restart string (function at 0x0800b98c)
+0x0800b5fc	systick_timer_base	ptr	2	SysTick/timer base for LED timing
+0x0800b600	led_timer_tick_freq	uint32	6	Timer tick frequency (osKernelGetTickFreq result)
+
+# =========================================================================
+# RTOS TASK/TIMER DESCRIPTORS (created by create_all_tasks_and_timers)
+# =========================================================================
+0x08006834	rtos_task_params_base	ptr	11	Base pointer for all RTOS task/timer parameter structs
+#   +0x00: reserved
+#   +0x10: defaultTask handle
+#   +0x20: ledTask stack params
+#   +0x30: glsDetectTask stack params
+#   +0x40: pwrManagerTask stack params
+#   +0x50: agingTimer params
+#   +0x60: powerOnTimer params
+#   +0x84: clearLedTimer params
+#   +0xA8: showErrorLedTimer params
+#   +0xCC: startLedTimer params
+#   +0xF0: message queue params
+0x08006838	str_defaultTask	string_ptr	1	"defaultTask" (FUN_0800a860 param)
+0x0800683c	rtos_task_handles	ptr	2	Task handle storage struct
+0x08006840	str_ledTask	string_ptr	1	"ledTask"
+0x08006844	str_glsDetectTask	string_ptr	1	"glsDetectTask"
+0x08006848	str_pwrManagerTask	string_ptr	1	"pwrManagerTask"
+0x0800684c	str_agingTimer	string_ptr	1	"agingTimer" (osThreadNew for aging timer)
+0x08006850	str_powerOnTimer	string_ptr	1	"powerOnTimer"
+0x08006854	str_clearLedTimer	string_ptr	1	"clearLedTimer" (osTimerNew)
+0x08006858	str_showErrorLedTimer	string_ptr	1	"showErrorLedTimer" (osTimerNew)
+0x0800685c	str_startLedTimer	string_ptr	1	"startLedTimer" (osTimerNew)
+0x08006860	str_setAgingStatusTimer	string_ptr	1	"setAgingStatusTimer" (osTimerNew)
+
+# =========================================================================
+# DEFAULT TASK MAIN LOOP — STANDBY / POWER (used by defaultTask_body)
+# =========================================================================
+0x08007414	pwr_manager_state_ptr	ptr	20	-> pwrManagerTask state struct
+#   +0x03: pwr_idle_timers_active
+#   +0x06: aging_mode_active
+#   +0x07: debug_output_enabled (gates all debug_printf calls)
+#   +0x08: silent_mode (suppresses LED on RTC wake)
+#   +0x3C: standby_timer_handle (osTimerDelete target)
+#   +0x3D: aging_in_progress
+0x08007430	str_standby_log_suffix	string	11	Newline/suffix after standby log messages
+0x08007434	pwr_wakeup_pin_config	uint32	2	PWR wakeup pin configuration value (hal_pwr_config_wakeup)
+0x08007438	pwr_standby_rtc_value	uint32	2	RTC wakeup timer value for standby
+0x0800743c	pwr_rtc_base_ptr	ptr	2	-> RTC peripheral base (+0x18 = wakeup register)
+0x08007440	iwdg_handle_ptr	ptr	1	-> IWDG handle (hal_iwdg_refresh before standby)
+
+# =========================================================================
+# DEFAULT TASK — OTA CHECK / LOW BAT STANDBY
+# =========================================================================
+0x08007c2c	ota_check_frame_byte0	byte	1	OTA firmware check UART frame data byte 0
+0x08007c30	ota_check_frame_byte1	byte	1	OTA firmware check UART frame data byte 1
+0x08007c34	ota_check_frame_byte2	byte	1	OTA firmware check UART frame data byte 2
+0x08007c38	ota_timer_period	uint32	1	OTA timer period (osTimerChangePeriod)
+0x08007d00	low_bat_threshold	uint32	1	Low battery threshold for standby (YHM2510 capacity)
+0x08007d30	str_lowbat_standby_suffix	string	1	Log suffix for low-bat standby
+0x08007d34	pwr_wakeup_pin_lowbat	uint32	2	PWR wakeup pin config for low-bat standby
+0x08007d38	pwr_standby_rtc_lowbat	uint32	1	RTC wakeup value for low-bat standby
+0x08007d3c	pwr_rtc_base_lowbat	ptr	1	-> RTC base for low-bat standby
+0x08007d40	iwdg_handle_lowbat	ptr	1	-> IWDG handle for idle-mode sleep
+
+# =========================================================================
+# GLASSES DETECT STATE — IR SCAN (glasses_detect_ir_scan @ 0x0800cc4c)
+# =========================================================================
+0x080079b0	gls_detect_task_state	ptr	31	-> glsDetectTask state struct (MOST REFERENCED)
+#   +0x01: led_timer_delay (8 = wait 1s for charging confirmation)
+#   +0x03: pwr_manager_idle_active
+#   +0x04: ir_scan_busy (set during scan, cleared after)
+#   +0x07: debug_output_enabled (gates all debug_printf in detect)
+#   +0x08: silent_mode (RTC wake suppresses LED)
+#   +0x10: defaultTask timer handle
+#   +0x18: aging timer handle
+#   +0x28: clearLedTimer handle
+#   +0x2C: showErrorLedTimer handle
+#   +0x30: startLedTimer handle
+#   +0x38: event group handle (for inter-task signaling)
+#   +0x3D: aging_in_progress
+0x080079ac	str_detect_log_suffix	string	9	Log newline/suffix for glasses detect messages
+
+# =========================================================================
+# UART PROTOCOL — RX DISPATCH (uart_rx_dispatch @ 0x0800085c)
+# =========================================================================
+0x0800084c	uart_isr_error_mask	uint32	2	UART ISR error flag mask
+0x08000850	uart_dma_cr_ptr	ptr	1	-> DMA control register (check DMA mode bit)
+0x08000854	uart_rx_dma_divisor	uint32	1	DMA counter divisor
+0x08000858	uart_rx_dma_count_ptr	ptr	1	-> DMA NDTR register (remaining byte count)
+0x0800091c	uart_rx_ring_ptr	ptr	2	-> UART RX ring buffer head pointer
+0x08000920	uart_rx_state_ptr	ptr	2	-> UART RX state struct (+0x17 = idle counter threshold)
+0x08000924	uart_debug_rx_buf_ptr	ptr	3	-> debug serial RX buffer (first byte checked for 0xDE prefix)
+0x08000944	serial_debug_cmd_table	ptr	2	Serial debug command table (0xA0+ range, bounds check)
+
+# =========================================================================
+# SERIAL DEBUG COMMANDS (serial_cmd_dispatcher @ 0x08000928)
+# =========================================================================
+0x08000c48	debug_output_enable_ptr	ptr	3	-> debug output enable flag (0xAF toggle)
+0x08000c4c	debug_state_ptr	ptr	1	-> debug state struct (+0x03 = can_enter_shipmode)
+0x08000c50	one_side_charging_ptr	ptr	2	-> one-side charging enable flag (0xD2/0xD3)
+0x08000c5c	str_hex_format	string	1	"%02x" format string
+0x08000c80	str_serial_cmd_log_suffix	string	3	Log suffix for serial debug commands
+0x08000cd4	aging_timer_handle_ptr	ptr	1	-> aging timer handle (0xB0 starts YHM2510 dump)
+0x08000cd8	dog_feed_enable_ptr	ptr	1	-> watchdog dog-feed toggle flag (0xDD)
+0x08000d14	pwr_wakeup_shipmode	uint32	1	PWR wakeup config for ship mode (0xDF)
+0x08000d18	pwr_standby_shipmode	uint32	1	RTC value for ship mode standby
+0x08000d1c	pwr_rtc_base_shipmode	ptr	1	-> RTC base for ship mode
+0x08000d48	simu_full_bat_flag	bool	1	Simulation: full battery flag (0xD1[1])
+0x08000d4c	simu_empty_bat_flag	bool	1	Simulation: empty battery flag (0xD1[2])
+0x08000d50	simu_timeout_flag	bool	1	Simulation: timeout flag (0xD1[3])
+0x08000dd0	watchdog_enable_flag	bool	1	Watchdog enable/disable flag (0xD0)
+
+# =========================================================================
+# GLASSES COMMAND HANDLER (glasses_cmd_handler @ 0x08000de0)
+# =========================================================================
+0x08001144	aging_exit_l_status	byte[]	4	Aging exit status bytes (L side, 0x3D cmd)
+0x08001148	aging_timer_handle	ptr	2	-> aging timer handle (for 0x3D/0x3E exit aging)
+0x0800114c	aging_active_flag	ptr	6	-> aging active flag (checked by multiple cmds)
+0x08001150	main_state_ptr_cmd	ptr	3	-> main state struct (for 0x56 OTA, 0x3F output)
+0x08001174	str_cmd_log_suffix	string	7	Log suffix for glasses command handler
+0x08001178	sn_version_bank1	uint32	1	SN version data for bank 1 (0x50 version query)
+0x08001180	sn_version_major	uint32	1	FW major version byte (0x50 response)
+0x08001184	sn_version_minor	uint32	1	FW minor version byte (0x50 response)
+0x08001188	sn_version_patch	uint32	1	FW patch version byte (0x50 response)
+0x0800118c	sn_flash_addr_bank1	uint32	2	Flash address for SN in bank 1 (0x5E write)
+0x08001190	sn_flash_addr_bank2	uint32	2	Flash address for SN in bank 2 (read_sn_full param)
+0x08001194	sn_flash_read_param	uint32	2	SN flash read size parameter
+0x0800122c	case_status_frame	uint32	1	Case status response frame (0x5C query)
+0x08001230	case_status_usb_flag	uint32	1	USB flag for case status (0x5C)
+0x08001248	charging_ctrl_frame	uint32	1	Charging control response frame (0x5D)
+0x0800124c	charging_ctrl_param	uint32	1	Charging control parameter (0x5D)
+
+# =========================================================================
+# APPLICATION: OTA / AGING / STATUS
+# =========================================================================
+# --- clear_ota_and_charge_pins (0x080012a8) ---
+0x080012a4	sn_copy_buffer	ptr	1	Buffer for SN copy between banks during OTA
+
+# --- start_aging (0x080012f8) ---
+0x080012d8	aging_state_ptr	ptr	2	-> aging state struct (timer handle at +0x18)
+0x080012dc	aging_led_state_ptr	ptr	1	-> aging LED state (+0x02 cleared)
+0x080012f4	str_start_aging_log	string	1	"Start aging" log message suffix
+
+# --- exit_idle_mode (0x0800137c) ---
+0x080013b0	idle_state_base	ptr	1	-> idle state struct (+0x17 = idle counter, reset to 0)
+0x080013b4	idle_state_ptr	ptr	1	-> idle state struct (second ref)
+0x080013c8	str_exit_idle_mode	string	1	"Exit idle mode" log message
+
+0x0800133c	aging_start_ptr	ptr	2	-> aging start state (+0x01 = aging started flag)
+
+# --- query_aging_status_from_gls (0x080013cc) ---
+0x080014d0	query_aging_state_ptr	ptr	2	-> state struct for aging status query (+0x10, +0x11)
+0x080014d4	query_aging_busy_flag	ptr	2	-> YHM2510 I2C busy flag
+0x080014d8	query_aging_sent_flag	ptr	3	-> query sent flag (set to 1 on send)
+0x080014fc	str_query_aging_log	string	2	"GetAgingStatus" log suffix
+0x08001528	aging_query_frame_a	uint32	1	Aging query UART frame data A
+0x0800152c	aging_query_frame_b	uint32	1	Aging query UART frame data B
+0x08001530	aging_query_frame_c	uint32	1	Aging query UART frame data C
+0x08001534	aging_query_frame_d	uint32	1	Aging query UART frame data D
+
+# --- ota_box_download_firmware (0x08001538) ---
+0x08001734	ota_gls_ready_ptr	ptr	1	-> GLS ready flag for OTA (wait loop)
+0x08001738	ota_debug_flag_ptr	ptr	6	-> debug output flag for OTA logging
+0x08001758	str_ota_box_log_suffix	string	8	"[OTA_BOX]:" log suffix (most-used OTA log)
+0x0800175c	ota_running_bank_local	uint32	1	Local copy of running bank number
+0x08001760	ota_target_bank_local	uint32	1	Target bank for OTA programming
+0x0800179c	ota_download_state_ptr	ptr	5	-> OTA download state struct
+#   +0x18: current bank (set from flash_get_running_bank)
+#   +0x20: bin data pointer
+#   +0x28: error count (cumulative programming errors)
+
+# --- poll_gls_battery_status (0x080018a8) ---
+0x08001a94	poll_gls_state_ptr	ptr	15	-> main state struct for battery polling (3RD MOST REFERENCED)
+#   +0x01: bat_pct
+#   +0x03: usb_connected
+#   +0x04: lid_open
+#   +0x0C: gls_l_fail_count (uint32, poll failures)
+#   +0x10: gls_l_present
+#   +0x11: gls_r_present
+#   +0x31: water_l_detected
+#   +0x33: water_l_charging_disabled
+#   +0x38: fake_standby_counter_l (short)
+#   +0x44: no_reply_l_seconds
+#   +0x4D: water_r_detected
+#   +0x54: fake_standby_counter_r (short)
+0x08001acc	str_poll_gls_log_suffix	string	5	Log suffix for GLS battery polling messages
+0x08001a98	poll_gls_l_status_fn	ptr	1	L-side poll function pointer
+0x08001a9c	poll_gls_r_status_fn	ptr	1	R-side poll function pointer
+0x08001b90	poll_gls_debug_fmt_a	uint32	1	B200 extended status format data A
+0x08001b94	poll_gls_debug_fmt_b	uint32	1	B200 extended status format data B
+
+# --- force_poll_gls_battery_status (0x08001be0) ---
+0x08001cc8	force_poll_state_ptr	ptr	3	-> state struct for forced poll
+0x08001ccc	force_poll_l_fn	ptr	1	Forced L-side poll function pointer
+0x08001cd0	force_poll_r_fn	ptr	4	Forced R-side poll function pointer
+0x08001cd4	force_poll_param	ptr	1	Forced poll parameter
+
+# --- ota_notify_gls_result (0x08001d2c) ---
+0x08001ddc	ota_notify_debug_ptr	ptr	1	-> debug flag for OTA result notification
+0x08001de0	ota_notify_state_ptr	ptr	3	-> OTA notification state struct
+0x08001d00	ota_notify_retry_ptr	ptr	2	-> retry count/state for OTA notification
+0x08001e0c	str_ota_inform_done	string_ptr	2	"[OTA_BOX]: Inform GLS done."
+0x08001e10	str_ota_inform_fail	string_ptr	1	"[OTA_BOX]: Inform GLS fail."
+0x08001e18	str_ota_inform_result	string_ptr	3	"[OTA_BOX]: Inform GLS ota result: %d"
+0x08001e1c	str_ota_notify_suffix	string	3	OTA notify log suffix
+
+# =========================================================================
+# UART RX — FRAME PARSING (uart_rx_wait_and_parse @ 0x08001e58)
+# =========================================================================
+0x08002218	uart_rx_buffer	byte[]	3	UART RX buffer base (searched for 0x5A 0xA5 header)
+0x0800221c	uart_rx_ctrl_flag_ptr	ptr	3	-> UART RX control mode flag
+0x0800223c	str_uart_rx_error_log	string	4	UART RX error/timeout log suffix
+0x0800227c	uart_rx_parse_state	ptr	12	-> UART RX parser state struct (4TH MOST REFERENCED)
+#   -0x0E: gls_l_online flag
+#   -0x0D: gls_r_online flag
+#   +0x00: parse state (2=data ready)
+#   +0x02: frame buffer pointer (0xC4 ACK)
+#   +0x0A: gls_l_rx_error_count
+#   +0x0C: bat_change_flag
+#   +0x11: gls_r_rx_error_count
+0x08002280	uart_rx_crc_state	ptr	5	-> UART RX CRC check state (per-side)
+0x080022ac	uart_rx_gls_online	byte[]	4	GLS L/R online flags [0]=flag, [1]=other_flag, [2]=L, [3]=R
+0x080023b4	uart_rx_dispatch_table	ptr	2	UART RX command dispatch table pointer
+
+# =========================================================================
+# UART TX — FRAME BUILDER (uart_tx_frame_builder @ 0x08006630)
+# =========================================================================
+0x080066d8	uart_tx_frame_timeout	uint32	4	UART TX frame timeout value
+0x080066dc	uart_tx_handle	ptr	6	-> UART TX handle (hal_uart_transmit_blocking)
+0x080066e0	uart_tx_gls_state_ptr	ptr	1	-> GLS state struct (+0x19 = ota_gls_ready check)
+0x080066e4	uart_tx_debug_ptr	ptr	1	-> debug output flag for TX frame logging
+0x08006620	uart_tx_log_state_ptr	ptr	2	-> state struct for TX frame logging (+0x07 debug)
+0x0800662c	str_uart_tx_frame_log	string	1	TX frame hex dump log format
+
+# =========================================================================
+# UART TX — FLOW CONTROL / BLOCKING SEND
+# =========================================================================
+0x08002680	uart_ctrl_handle	ptr	5	-> UART handle for controlled TX (with header 5A A5 FF)
+0x08002684	uart_ctrl_rx_buffer	ptr	4	-> RX buffer for ctrl-mode UART
+0x08002688	uart_ctrl_debug_ptr	ptr	3	-> debug flag for ctrl TX logging
+0x080026e0	str_uart_ctrl_error_log	string	2	UART ctrl TX error/timeout log suffix
+0x080027f0	uart_noctrl_handle	ptr	5	-> UART handle for no-ctrl TX (raw frame)
+0x080027f4	uart_noctrl_rx_buffer	ptr	4	-> RX buffer for no-ctrl UART
+0x080027f8	uart_noctrl_debug_ptr	ptr	2	-> debug flag for no-ctrl TX logging
+
+# --- uart_gls_tx_check_ready / uart_gls_tx_with_params ---
+0x080039e0	uart_gls_tx_handle	ptr	1	-> UART handle for GLS TX
+0x080039e4	uart_gls_tx_params	ptr	1	-> GLS TX parameters
+0x080039f8	uart_gls_tx_state	ptr	1	-> GLS TX ready state
+0x080039fc	uart_gls_tx_ready_flag	ptr	1	-> TX ready flag
+
+# =========================================================================
+# I2C PERIPHERAL ACCESS
+# =========================================================================
+0x08002874	i2c_bus_gpio_config	ptr	1	GPIO config struct for I2C bus reset check
+0x080028ec	i2c_yhm2510_error_cnt	ptr	1	-> YHM2510 I2C error counter (reset on success)
+0x08002964	i2c_pmic_error_cnt	ptr	1	-> PMIC I2C error counter (reset on success)
+0x080029c0	i2c_write_error_cnt	ptr	1	-> I2C write error counter
+0x08002edc	i2c_periph_handle	ptr	4	-> I2C peripheral handle (hal_i2c_stop, hal_i2c_wait)
+
+# =========================================================================
+# PMIC / BOOST / WATCHDOG
+# =========================================================================
+0x08002a1c	pmic_status_byte_ptr	ptr	1	-> PMIC status byte (zeroed on init)
+0x08002a28	pmic_state_struct	ptr	1	-> PMIC state struct (+0x03 = boost status)
+0x08002ab8	pmic_boost_timer	ptr	1	-> timer handle for PMIC boost check (hal_timer_check)
+0x08002abc	pmic_boost_state	ptr	3	-> PMIC boost state (+0x03 = enabled flag)
+0x08002ac0	pmic_boost_retry_cnt	byte_ptr	4	-> boost check retry counter (max before reset reg 0x15)
+0x08002ac4	str_pmic_boost_fail	string_ptr	1	"Check pmic boost status fail" log
+0x08002b00	ota_sn_copy_src	ptr	1	SN copy source for OTA bank swap
+0x08002bbc	pmic_boost_reg_val	uint32	1	PMIC boost register value
+0x08002bc0	pmic_boost_i2c_addr	uint32	1	PMIC I2C address for boost enable
+0x08002bc4	pmic_boost_enable_val	uint32	1	Value to write for boost enable
+
+# =========================================================================
+# OTA FLASH OPERATIONS
+# =========================================================================
+0x08002cc8	ota_crc_data_ptr	byte_ptr	1	-> downloaded firmware data for CRC calc
+0x08002ccc	ota_crc_state_ptr	ptr	3	-> OTA state struct (+0x20=data_len, +0x24=expected_crc)
+0x08002cd0	ota_crc_debug_ptr	ptr	1	-> debug output flag
+0x08002cfc	str_ota_crc_result	string	1	"[OTA_BOX]: crc_cal: 0x%x, crc_rx:0x%x"
+
+0x08002d74	ota_erase_config	ptr	3	-> flash erase configuration (page count, bank select)
+0x08002d78	ota_erase_bank_ptr	ptr	1	-> bank info (+0x18 = bank number, 1 or 2)
+0x08002d7c	ota_erase_debug_ptr	ptr	1	-> debug output flag for erase
+0x08002db8	str_ota_erase_fail	string	1	"[OTA_BOX]:fail to erase" log
+
+0x08002e68	ota_program_debug_ptr	ptr	2	-> debug output flag for programming
+0x08002e6c	str_ota_program_log	string	1	OTA program chunk log
+0x08002e70	ota_program_flash_base	ptr	1	-> flash base address for programming target bank
+
+# =========================================================================
+# ADC / SN / SELF-CHECK
+# =========================================================================
+0x08002f20	sn_bank1_base	uint32[2]	2	SN flash address pair for bank 1
+0x08002f60	sn_bank2_base	uint32[2]	3	SN flash address pair for bank 2
+
+# --- self_check_all_peripherals (0x08002f64) ---
+0x080032b0	self_check_debug_ptr	ptr	2	-> debug output flag for self-check
+0x080032e0	str_self_check_log	string	10	Self-check log messages (multiple sub-messages)
+0x080032e4	self_check_state	ptr	6	-> self-check state struct
+#   [0x00]: first byte (3 = chip ID check result)
+#   [0x03]: pmic_ok flag
+#   [0x13]: all_ok flag (set based on chip ID)
+0x080032e8	self_check_timer	ptr	3	-> timer handle for self-check (hal_timer_check_pending)
+
+# --- SN flash write ---
+0x080035a0	sn_write_bank1_addr	uint32	3	Flash page address for SN bank 1 write
+0x080035a4	sn_write_bank1_size	uint32	2	Flash page count for SN bank 1
+0x080035a8	sn_write_bank1_param	uint32	1	Flash erase bank parameter for SN bank 1
+0x080036ac	sn_write_bank2_addr	uint32	3	Flash page address for SN bank 2 write
+0x080036b0	sn_write_bank2_size	uint32	2	Flash page count for SN bank 2
+0x080036b4	sn_write_bank2_param	uint32	2	Flash erase bank parameter for SN bank 2
+0x080036d0	str_sn_write_fail	string	1	"fail to program." (SN write)
+
+# =========================================================================
+# OTA BANK SWAP (ota_swap_bank_and_reset @ 0x08003740)
+# =========================================================================
+0x0800373c	ota_swap_state_ptr	ptr	7	-> OTA swap state struct (running bank info)
+0x080037bc	str_swap_bank_2to1	string	1	"Swap bank(2->1) & RESET" log
+0x080037c0	str_swap_bank_1to2	string	3	"Swap bank(1->2) & RESET" log
+0x080037ec	str_ob_program	string	3	"ob program: %d" (option bytes)
+
+# =========================================================================
+# BATTERY CHANGE HANDLER (bat_change_handler @ 0x080038bc)
+# =========================================================================
+0x08003968	bat_change_state_ptr	ptr	8	-> main state struct for battery change handling
+#   +0x01: bat_pct
+#   +0x03: usb_connected
+#   +0x31: water_l_detected
+#   +0x33: water_l_charging_disabled
+#   +0x38: fake_standby_counter_l
+#   +0x4D: water_r_detected
+#   +0x4F: water_r_charging_disabled
+0x0800396c	bat_change_detect_ptr	ptr	3	-> glsDetectTask state (+0x07 = debug flag)
+0x08003988	str_bat_change_send	string	3	"Bat change, send 0x13 soon."
+
+# --- reset_glasses_uart_and_pins (0x080098b4) ---
+0x080098ac	reset_gls_state_ptr	ptr	5	-> main state struct for GLS reset
+0x080098b0	reset_gls_oneside_ptr	ptr	2	-> one-side charging flag
+
+# --- reset_gls_side_counters ---
+0x08003864	reset_side_state_ptr	ptr	3	-> main state struct for counter reset
+0x08003894	reset_side_r_state_ptr	ptr	2	-> R-side state for counter reset
+0x080038b8	reset_side_l_state_ptr	ptr	2	-> L-side state for counter reset
+
+# =========================================================================
+# GPIO CONTROL
+# =========================================================================
+0x08006990	gpio_rcc_base	ptr	2	-> RCC base register (enable GPIOA/B/C clocks)
+0x08006994	gpio_port_base	ptr	5	-> GPIOB base (for GLS L/R 5V, charge, IR control)
+0x08006998	gpio_init_mode_charge	uint32	1	GPIO init mode value for charge pins
+0x0800699c	gpio_init_port_ir	ptr	1	-> GPIOA base for IR sensor pins
+0x080069a0	gpio_init_mode_ir	uint32	1	GPIO init mode value for IR pins
+
+# =========================================================================
+# UART PERIPHERAL INIT (uart_peripheral_init @ 0x08006714)
+# =========================================================================
+0x0800670c	uart_gls_periph_ptr	ptr	1	-> GLS UART peripheral base
+0x08006710	uart_debug_periph_ptr	ptr	1	-> debug UART peripheral base
+0x08006780	uart_i2c_periph_base	ptr	2	-> I2C peripheral base address
+0x08006784	uart_i2c_handle	ptr	4	-> I2C handle struct (for hal_i2c_configure_filter)
+0x08006788	i2c_filter_config	uint32	1	I2C analog/digital filter configuration
+
+# =========================================================================
+# UART INIT FUNCTIONS
+# =========================================================================
+# --- uart_gls_init_with_iwdg (0x080069d4) ---
+0x08006a1c	uart_gls_periph_addr	uint32	1	USART peripheral base address for GLS UART
+0x08006a20	iwdg_handle	ptr	4	-> IWDG handle (hal_iwdg_init target)
+
+# --- uart_debug_rx_init (0x08006a24) ---
+0x08006a94	uart_debug_periph_addr	uint32	1	USART peripheral base for debug UART
+0x08006a98	uart_debug_handle	ptr	6	-> debug UART handle struct
+0x08006a9c	uart_debug_baudrate	uint32	1	Debug UART baudrate setting
+0x08006aa0	uart_debug_rx_buf	ptr	1	-> debug UART single-byte RX buffer
+
+# --- uart_hall_sensor_reinit (0x08006aa4) ---
+0x08006b10	uart_hall_handle	ptr	6	-> Hall sensor UART handle (reinit on event)
+0x08006b14	uart_hall_periph_addr	uint32	1	USART peripheral base for Hall UART
+0x08006b18	uart_hall_baudrate	uint32	1	Hall sensor UART baudrate
+
+# --- uart_charge_ctrl_reinit (0x08006b1c) ---
+0x08006b88	uart_charge_handle	ptr	6	-> charge control UART handle
+0x08006b8c	uart_charge_periph_addr	uint32	1	USART peripheral base for charge UART
+0x08006b90	uart_charge_baudrate	uint32	1	Charge control UART baudrate
+
+# --- uart_debug_check_idle ---
+0x08006c28	uart_idle_cr_ptr	ptr	2	-> UART CR register for idle detection
+0x08006c38	uart_idle_handle	ptr	1	-> UART handle for idle check (hal_uart_check_idle)
+
+# =========================================================================
+# HAL PERIPHERAL REGISTERS (MCU peripheral base addresses)
+# =========================================================================
+0x080000c4	reset_vector_const	uint32	1	Reset vector thunk constant
+0x080000f0	svc_handler_const	uint32	1	SVC handler configuration constant
+0x080006c0	systick_ctrl_base	uint32	2	SysTick control register base (0xE000E010)
+0x080006d0	i2c_timeout_base	uint32	1	I2C timeout base address
+0x08000730	i2c_wait_stop_base	uint32	1	I2C wait-for-stop base
+0x080007a4	i2c_busy_flag_base	uint32	1	I2C busy flag register
+
+# =========================================================================
+# HAL FLASH / OPTION BYTES
+# =========================================================================
+0x0800041c	flash_program_seq_a	uint32	2	Flash program sequence constant A
+0x080004bc	flash_program_seq_b	uint32	2	Flash program sequence constant B
+0x08000568	flash_read_seq_a	uint32	2	Flash read sequence constant A
+0x0800060c	flash_read_seq_b	uint32	2	Flash read sequence constant B
+0x08003ccc	flash_latency_reg	uint32	1	Flash latency register address
+0x08003ce4	flash_option_rdp_reg	uint32	1	Flash option RDP register
+0x08003cf4	flash_option_user_lo	uint32	1	Flash option user register low
+0x08003cf8	flash_option_user_hi	uint32	1	Flash option user register high
+0x08003d10	flash_erase_setup_a	uint32	2	Flash erase page setup constant A
+0x08003d38	flash_erase_key_a	uint32	2	Flash erase key A (KEYR unlock)
+0x08003d3c	flash_erase_key_b	uint32	2	Flash erase key B
+0x08003d40	flash_erase_key_c	uint32	1	Flash erase key C
+0x08003d5c	flash_program_dw_addr	uint32	1	Flash double-word program address
+0x08003d90	flash_wait_sr_mask	uint32	2	Flash status register wait mask
+0x08003de8	flash_execute_addr_a	uint32	1	Flash execute address constant A
+0x08003dec	flash_execute_addr_b	uint32	1	Flash execute address constant B
+0x08003df0	flash_execute_addr_c	uint32	1	Flash execute address constant C
+0x08003df4	flash_execute_addr_d	uint32	1	Flash execute address constant D
+0x08003f14	flash_state_a	uint32	2	Flash state machine constant A
+0x08003f18	flash_state_b	uint32	1	Flash state machine constant B
+0x08003f1c	flash_state_c	uint32	2	Flash state machine constant C
+
+# =========================================================================
+# HAL I2C INIT / CONFIGURATION
+# =========================================================================
+0x08004134	i2c_handle_base	ptr	4	I2C handle base pointer (hal_i2c_isr_handler)
+0x08004138	i2c_cr1_mask_a	uint32	3	I2C CR1 register mask A
+0x0800413c	i2c_cr1_mask_b	uint32	1	I2C CR1 register mask B
+0x08004140	i2c_cr1_mask_c	uint32	1	I2C CR1 register mask C
+0x08004144	i2c_cr1_mask_d	uint32	3	I2C CR1 register mask D
+0x08004148	i2c_timing_config	uint32	5	I2C timing register configuration value
+0x080042a4	i2c_init_cr2_mask	uint32	1	I2C CR2 register mask for init
+0x08004530	i2c_wait_timeout	uint32	3	I2C flag wait timeout value
+
+# =========================================================================
+# HAL GPIO / EXTI
+# =========================================================================
+0x08004a10	flash_unlock_keyr_a	uint32	3	Flash unlock KEYR value A (0x45670123)
+0x08004a14	flash_unlock_keyr_b	uint32	1	Flash unlock KEYR value B (0xCDEF89AB)
+0x08004a34	gpio_deinit_port_a	uint32	3	GPIO port A deinit mask
+0x08004a38	gpio_deinit_port_b	uint32	1	GPIO port B deinit mask
+0x08004a3c	gpio_deinit_port_c	uint32	1	GPIO port C deinit mask
+0x08004b10	exti_line_masks	uint32[5]	5	EXTI line configuration masks
+0x08004b14	exti_rtsr_mask	uint32	1	EXTI rising trigger selection mask
+0x08004b18	exti_ftsr_mask	uint32	1	EXTI falling trigger selection mask
+0x08004b1c	exti_swier_mask	uint32	1	EXTI software interrupt mask
+0x08004b20	exti_rpr_mask	uint32	1	EXTI rising pending register mask
+0x08004b4c	exti_config_base	uint32	3	EXTI configuration register base
+
+# =========================================================================
+# HAL TIMER / SYSTICK / RCC
+# =========================================================================
+0x08004ca4	timer_periph_base	uint32	8	Timer peripheral base address (SysTick/general)
+0x08004ca8	timer_ctrl_mask_a	uint32	1	Timer control register mask A
+0x08004cac	timer_ctrl_mask_b	uint32	1	Timer control register mask B
+0x08004cb0	timer_ctrl_mask_c	uint32	1	Timer control register mask C
+0x08004cb4	timer_ctrl_mask_d	uint32	1	Timer control register mask D
+0x08004cd8	hal_tick_counter	uint32	1	HAL tick counter (incremented by hal_systick_increment)
+0x08004ce4	hal_tick_counter_ptr	uint32	1	HAL tick counter copy/pointer
+0x08004cf0	hal_tick_source	uint32	1	HAL tick source config
+0x08004cfc	hal_tick_priority	uint32	1	HAL tick ISR priority
+0x08004d0c	systick_load_val	uint32	1	SysTick reload value
+0x08004d34	rcc_cfgr_mask	uint32	1	RCC CFGR register mask for sysclk config
+
+# =========================================================================
+# HAL RCC / CLOCK CONFIGURATION
+# =========================================================================
+0x08004dbc	rcc_osc_base	uint32	3	RCC oscillator base register
+0x08004dc0	rcc_cr_mask_a	uint32	1	RCC CR register mask A
+0x08004dc4	rcc_cr_mask_b	uint32	1	RCC CR register mask B
+0x08004dc8	rcc_cr_mask_c	uint32	3	RCC CR register mask C
+0x08004dcc	rcc_cr_mask_d	uint32	1	RCC CR register mask D
+0x08004dd0	rcc_cr_mask_e	uint32	1	RCC CR register mask E
+0x08004e0c	nvic_iser_base	uint32	4	NVIC ISER (interrupt set-enable) register base
+0x08004e2c	nvic_icpr_base	uint32	1	NVIC ICPR (interrupt clear-pending) register base
+0x08004e44	nvic_ipr_base	uint32	1	NVIC IPR (interrupt priority) register base
+0x08004e64	rcc_flash_lat_mask_a	uint32	1	RCC flash latency mask A
+0x08004e68	rcc_flash_lat_mask_b	uint32	1	RCC flash latency mask B
+0x08004eac	pwr_cr3_mask	uint32	2	PWR CR3 register mask (wakeup disable)
+0x08004eb0	pwr_cr3_base	uint32	1	PWR CR3 register base address
+0x08004eb4	pwr_cr3_wake_mask	uint32	1	PWR CR3 wakeup enable mask
+0x08004ec8	pwr_scr_mask	uint32	1	PWR SCR (status clear) register mask
+0x08004ee4	pwr_cr1_mask	uint32	2	PWR CR1 register mask (standby mode)
+0x08004f04	rcc_osc_config_base_a	uint32	1	RCC oscillator config base A
+0x08004f08	rcc_osc_config_base_b	uint32	1	RCC oscillator config base B
+0x08004f44	rcc_pll_config	uint32	3	RCC PLL configuration value
+0x08004f48	rcc_pll_mask	uint32	2	RCC PLL configuration mask
+
+# =========================================================================
+# HAL RCC EXTENDED
+# =========================================================================
+0x080050f4	rcc_clock_config_a	uint32	2	RCC clock config register value A
+0x080050f8	rcc_clock_config_b	uint32	3	RCC clock config register value B
+0x080050fc	rcc_clock_config_c	uint32	2	RCC clock config register value C
+0x08005100	rcc_clock_config_d	uint32	2	RCC clock config register value D
+0x08005104	rcc_clock_config_e	uint32	1	RCC clock config register value E
+0x08005248	rcc_get_osc_base	uint32	5	RCC get-oscillator-config base
+0x0800524c	rcc_get_osc_mask_a	uint32	3	RCC get-oscillator mask A
+0x08005250	rcc_get_osc_mask_b	uint32	4	RCC get-oscillator mask B
+0x08005254	rcc_get_osc_mask_c	uint32	1	RCC get-oscillator mask C
+0x08005258	rcc_get_osc_mask_d	uint32	1	RCC get-oscillator mask D
+0x0800525c	rcc_get_osc_mask_e	uint32	1	RCC get-oscillator mask E
+0x08005290	rcc_sysclk_base	uint32	2	RCC SYSCLK source register base
+0x08005294	rcc_sysclk_mask	uint32	1	RCC SYSCLK frequency mask
+0x080052b4	rcc_hclk_base	uint32	1	RCC HCLK divider base
+0x080052b8	rcc_hclk_mask	uint32	1	RCC HCLK divider mask
+0x080052bc	rcc_hclk_table	ptr	1	-> AHB prescaler table
+0x08005344	rcc_periph_clk_base	ptr	9	-> RCC peripheral clock config register set
+0x08005348	rcc_periph_clk_freq	uint32	3	RCC peripheral clock frequency
+
+# =========================================================================
+# HAL IWDG (Independent Watchdog)
+# =========================================================================
+0x08005710	iwdg_periph_base	uint32	7	IWDG peripheral base register (0x40003000)
+0x08005714	iwdg_key_start	uint32	1	IWDG start key value (0xCCCC)
+0x08005718	iwdg_key_enable	uint32	1	IWDG enable write key (0x5555)
+0x0800571c	iwdg_key_reload	uint32	1	IWDG reload key value (0xAAAA)
+0x08005720	iwdg_sr_mask	uint32	4	IWDG status register mask
+0x08005724	iwdg_timeout	uint32	3	IWDG timeout value (for wait loop)
+0x08005728	iwdg_window_val	uint32	2	IWDG window register value
+0x0800572c	iwdg_prescaler	uint32	1	IWDG prescaler configuration
+0x08005730	iwdg_reload_val	uint32	1	IWDG reload counter value
+
+# =========================================================================
+# HAL UART CONFIGURATION
+# =========================================================================
+0x0800586c	uart_brr_mask_a	uint32	1	UART BRR register mask A
+0x08005870	uart_brr_mask_b	uint32	1	UART BRR register mask B
+0x08005944	uart_clock_enable_rcc	uint32	1	RCC register for UART clock enable
+0x080059a8	uart_sync_flag_addr	uint32	1	UART synchronization flag address
+0x080059ac	uart_sync_flag_mask	uint32	4	UART synchronization flag mask
+0x080059f4	uart_prescaler_table	ptr	1	-> UART prescaler lookup table
+0x08005a9c	uart_deinit_mask_a	uint32	1	UART deinit register mask A
+0x08005aa0	uart_deinit_mask_b	uint32	1	UART deinit register mask B
+0x08005aa4	uart_deinit_mask_c	uint32	1	UART deinit register mask C
+0x08005aa8	uart_deinit_mask_d	uint32	1	UART deinit register mask D
+0x08005aac	uart_deinit_mask_e	uint32	2	UART deinit register mask E
+0x08005c34	uart_systick_mask	uint32	1	UART SysTick update mask
+0x08005c4c	uart_overrun_mask	uint32	1	UART overrun detection mask
+
+# =========================================================================
+# HAL UART RX / DMA
+# =========================================================================
+0x08006054	uart_rx_start_mask_a	uint32	1	UART RX start configuration A
+0x08006058	uart_rx_start_mask_b	uint32	2	UART RX start configuration B
+0x0800605c	uart_rx_start_mask_c	uint32	1	UART RX start configuration C
+0x08006060	uart_rx_start_mask_d	uint32	1	UART RX start configuration D
+0x0800611c	uart_init_cr1_mask_a	uint32	1	UART init CR1 mask A
+0x08006120	uart_init_cr1_mask_b	uint32	2	UART init CR1 mask B
+0x08006124	uart_init_cr1_mask_c	uint32	1	UART init CR1 mask C
+0x08006128	uart_init_cr1_mask_d	uint32	1	UART init CR1 mask D
+0x08006200	uart_rx_blocking_a	uint32	1	UART receive blocking config A
+0x08006204	uart_rx_blocking_b	uint32	2	UART receive blocking config B
+0x08006208	uart_rx_blocking_c	uint32	1	UART receive blocking config C
+0x0800620c	uart_rx_blocking_d	uint32	1	UART receive blocking config D
+0x0800630c	uart_rx_it_config	uint32	1	UART receive interrupt configuration
+0x080064bc	uart_tx_blocking_a	uint32	1	UART transmit blocking config A
+0x080064c0	uart_tx_blocking_b	uint32	4	UART transmit blocking config B
+0x080064c4	uart_tx_blocking_c	uint32	4	UART transmit blocking config C
+0x080064c8	uart_tx_blocking_d	uint32	1	UART transmit blocking config D
+0x080064cc	uart_tx_blocking_e	uint32	3	UART transmit blocking config E
+
+# =========================================================================
+# HAL I2C OPERATIONS
+# =========================================================================
+0x08004658	i2c_stop_reg_a	uint32	1	I2C stop register offset A
+0x0800465c	i2c_stop_reg_b	uint32	1	I2C stop register offset B
+0x0800479c	flash_erase_timeout	uint32	1	Flash erase operation timeout
+0x0800481c	flash_option_addr_a	uint32	3	Flash option bytes address A
+0x08004820	flash_option_addr_b	uint32	1	Flash option bytes address B
+0x08004888	flash_program_ob_a	uint32	5	Flash program option bytes config A
+0x0800488c	flash_program_ob_b	uint32	1	Flash program option bytes config B
+0x0800493c	flash_lock_keyr	uint32	3	Flash lock register key
+0x08004940	flash_lock_mask	uint32	5	Flash lock register mask
+0x0800495c	flash_ob_launch	uint32	2	Flash OB launch register
+0x08004970	flash_ob_lock	uint32	1	Flash OB lock register
+0x0800498c	flash_unlock_seq_a	uint32	2	Flash unlock sequence constant A
+0x080049ac	flash_program_config_a	uint32	3	Flash program bytes configuration A
+0x080049b0	flash_program_config_b	uint32	1	Flash program bytes configuration B
+0x080049b4	flash_program_config_c	uint32	1	Flash program bytes configuration C
+
+# =========================================================================
+# HAL DMA
+# =========================================================================
+0x080083c4	dma_deinit_base	uint32	3	DMA deinit base register
+0x08008354	dma_timing_config_a	uint32	3	DMA timing config A (I2C related)
+0x08008358	dma_timing_config_b	uint32	2	DMA timing config B
+0x0800835c	dma_timing_config_c	uint32	2	DMA timing config C
+0x08008360	dma_timing_config_d	uint32	2	DMA timing config D
+0x08008364	dma_timing_config_e	uint32	2	DMA timing config E
+0x08008368	dma_timing_config_f	uint32	1	DMA timing config F
+0x0800836c	dma_timing_config_g	uint32	2	DMA timing config G
+0x080084f4	i2c_start_transfer_mask	uint32	3	I2C start transfer register mask
+0x0800856c	dma_ch1_config_base	uint32	1	DMA channel 1 configuration base
+0x080087a8	dma_ch2_config_base_a	uint32	1	DMA channel 2 config A
+0x080087ac	dma_ch2_config_base_b	uint32	1	DMA channel 2 config B
+0x080089e8	i2c_addr_mode_mask_a	uint32	1	I2C addressing mode mask A
+0x080089ec	i2c_addr_mode_mask_b	uint32	1	I2C addressing mode mask B
+
+# =========================================================================
+# HAL UART DMA / RECEIVE
+# =========================================================================
+0x08008b80	uart_dma_rx_config_a	uint32	1	UART DMA RX config A
+0x08008b84	uart_dma_rx_config_b	uint32	1	UART DMA RX config B
+0x08008b88	uart_dma_rx_config_c	uint32	1	UART DMA RX config C
+0x08008b8c	uart_dma_rx_config_d	uint32	3	UART DMA RX config D
+0x08008b90	uart_dma_rx_config_e	uint32	1	UART DMA RX config E
+0x08008b94	uart_dma_rx_config_f	uint32	1	UART DMA RX config F
+0x08008b98	uart_dma_rx_config_g	uint32	1	UART DMA RX config G
+0x08008b9c	uart_dma_rx_config_h	uint32	1	UART DMA RX config H
+0x08008ba0	uart_dma_rx_config_i	uint32	1	UART DMA RX config I
+0x08008ba4	uart_dma_rx_config_j	uint32	2	UART DMA RX config J
+0x08008ba8	uart_dma_rx_config_k	uint32	1	UART DMA RX config K
+0x08008bac	uart_dma_rx_config_l	uint32	2	UART DMA RX config L
+0x08008cc8	uart_poll_flag_a	uint32	1	UART poll flag timeout config A
+0x08008ccc	uart_poll_flag_b	uint32	1	UART poll flag timeout config B
+0x08008cd0	uart_poll_flag_c	uint32	1	UART poll flag timeout config C
+0x08008cd4	uart_poll_flag_d	uint32	1	UART poll flag timeout config D
+0x08008cd8	uart_poll_flag_e	uint32	1	UART poll flag timeout config E
+
+# =========================================================================
+# DMA FLAG CHECK/CLEAR
+# =========================================================================
+0x08008e14	dma_tc_flag_mask_a	uint32	1	DMA transfer complete flag mask A
+0x08008e18	dma_tc_flag_mask_b	uint32	1	DMA transfer complete flag mask B
+0x08008e54	dma_ht_flag_mask	uint32	1	DMA half-transfer flag mask
+0x08008eb8	dma_te_flag_mask_a	uint32	1	DMA transfer error flag mask A
+0x08008ebc	dma_te_flag_mask_b	uint32	1	DMA transfer error flag mask B
+0x08008ec0	dma_te_flag_mask_c	uint32	1	DMA transfer error flag mask C
+0x08008f18	dma_clear_flags_a	uint32	1	DMA clear flags register A
+0x08008f1c	dma_clear_flags_b	uint32	1	DMA clear flags register B
+
+# =========================================================================
+# DEBUG PRINTF ENGINE
+# =========================================================================
+0x08008f78	debug_state_ptr	ptr	1	-> debug state struct (+0x08/0x0C = args for extended format)
+0x08008f7c	debug_suppress_flag	ptr	1	-> debug suppress flag (skip extended status print)
+0x08008f80	str_b200_extended_status	string	1	"B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d, chEn:%d, aging:%d, otaGls:%d"
+0x08008f84	str_debug_suffix	string	1	Debug print suffix/newline
+0x08008fa0	printf_putchar_fn	func_ptr	1	-> putchar function for printf engine
+0x08008fa4	printf_output_fn	func_ptr	1	-> output function for printf engine
+0x08009000	printf_digits_lower	string	1	"0123456789abcdef"
+0x08009004	printf_digits_upper	string	1	"0123456789ABCDEF"
+0x08009424	uart_checksum_init	uint32	1	UART checksum initial value
+
+# =========================================================================
+# AGING STATE MACHINE (aging_running_state_machine @ 0x0800949c)
+# =========================================================================
+0x0800964c	aging_sm_state_ptr	ptr	3	-> aging state struct (+0x06 = aging stage, +0x0C = timer)
+0x08009650	aging_sm_detect_ptr	ptr	1	-> detect state struct (+0x32 bat%, +0x36/0x52 counters)
+0x080096cc	aging_bat_threshold	uint16	2	Aging battery low threshold for stage transition
+0x08009744	str_aging_running_log	string	5	"[AGING_RUNNING]:" log suffix
+0x080097fc	str_aging_timeout	string	1	"[AGING_RUNNING]: Timeout, go to AGING_DONE"
+0x08009828	aging_gls_status_base	ptr	2	-> GLS aging status array (per-side indexed)
+
+# --- aging_poll_gls_battery (0x080099d8) ---
+0x08009978	aging_poll_state	ptr	1	Aging poll state struct base
+0x0800997c	aging_poll_param_a	uint32	1	Aging poll parameter A
+0x08009980	aging_poll_param_b	uint32	1	Aging poll parameter B
+0x08009984	aging_poll_param_c	uint32	2	Aging poll parameter C
+0x0800994c	str_aging_reset_gls	string	4	"Cannot reset gls since 2510 is busy."
+0x08009a5c	aging_status_result_a	ptr	2	Aging status result pointer A
+0x08009a88	str_aging_status_ok	string	3	"Get aging status success. L:%d, R:%d."
+0x08009ab4	str_aging_status_error	string	1	"[AGING_ERROR]:Get Aging Status Error"
+
+# --- aging_check_gls_inbox (0x08009ae0) ---
+0x08009b40	aging_inbox_state_a	ptr	2	Aging inbox check state A
+0x08009b44	aging_inbox_state_b	ptr	4	Aging inbox check state B
+0x08009b64	str_aging_inbox_error	string	2	"[AGING_ERROR]:Not Inbox Error"
+
+# =========================================================================
+# YHM2510 BATTERY FUEL GAUGE (I2C)
+# =========================================================================
+0x08009cd0	yhm2510_i2c_handle	ptr	1	-> I2C handle for YHM2510 access
+0x08009d8c	yhm2510_voltage_divisor	uint32	1	Voltage calculation divisor (mV conversion)
+0x08009d90	yhm2510_temp_offset	int32	1	Temperature offset (Kelvin to Celsius)
+0x08009d94	yhm2510_temp_divisor	uint32	1	Temperature calculation divisor
+0x08009e04	yhm2510_capacity_scale	uint32	1	Remaining capacity scale factor
+
+# =========================================================================
+# PMIC REGISTER ACCESS
+# =========================================================================
+0x08009f78	pmic_i2c_handle	ptr	1	-> I2C handle for PMIC register access
+
+# =========================================================================
+# SYSTEM INIT / STARTUP (system_init_main @ 0x0800a3b0)
+# =========================================================================
+0x0800a3a8	system_init_const_a	uint32	1	System init constant A
+0x0800a3ac	system_init_const_b	uint32	1	System init constant B
+0x0800a360	i2c_bus1_config_a	uint32	1	I2C bus 1 configuration A (FUN_08009fc4)
+0x0800a364	i2c_bus1_config_b	uint32	1	I2C bus 1 configuration B
+0x0800a384	i2c_bus2_config_a	uint32	1	I2C bus 2 configuration A (FUN_08009fe2)
+0x0800a388	i2c_bus2_config_b	uint32	1	I2C bus 2 configuration B
+0x0800a190	uart_rx_reset_base	uint32	2	UART RX buffer reset base address
+0x0800a194	uart_rx_reset_size	uint32	1	UART RX buffer reset size
+0x0800a1c0	rtos_kernel_state_ptr	ptr	1	-> RTOS kernel state variable
+0x0800a4f0	startup_option_bytes_flag	ptr	3	-> option bytes check result flag
+0x0800a524	str_option_bytes_log	string	6	"Option Bytes check" log messages
+0x0800a554	startup_rcc_config	uint32	3	RCC configuration at startup (sysclk register)
+0x0800a558	startup_wakeup_flag	ptr	2	-> wakeup source flag (cleared at init)
+0x0800a55c	startup_pwr_base	ptr	1	-> PWR peripheral base (for RTC wakeup config)
+0x0800a560	startup_rtc_value	uint32	3	RTC wakeup timer value at startup
+
+# =========================================================================
+# RTOS WRAPPERS (CMSIS-RTOS2)
+# =========================================================================
+0x0800a6ec	rtos_timer_start_const	uint32	1	osTimerStart constant (tick conversion)
+0x0800a714	rtos_kernel_start_const	uint32	2	osKernelStart/Run constant
+0x0800a74c	rtos_timer_new_const_a	uint32	2	osTimerNew constant A
+0x0800a750	rtos_timer_new_const_b	uint32	1	osTimerNew constant B
+0x0800a904	rtos_timer_change_const	uint32	2	osTimerChangePeriod constant
+
+# =========================================================================
+# FREERTOS KERNEL DATA
+# =========================================================================
+0x0800a9bc	freertos_timer_active_a	uint32	3	FreeRTOS timer active list A
+0x0800a9c0	freertos_timer_active_b	uint32	1	FreeRTOS timer active list B
+0x0800a9c4	freertos_timer_active_c	uint32	1	FreeRTOS timer daemon name
+0x0800aa18	freertos_timer_cmd_a	uint32	3	FreeRTOS timer generic command A
+0x0800aa1c	freertos_timer_cmd_b	uint32	1	FreeRTOS timer generic command B
+0x0800aa94	freertos_task_handle	uint32	2	FreeRTOS current task handle
+0x0800aa98	freertos_task_handle_b	uint32	1	FreeRTOS task handle B
+0x0800aae0	freertos_prio_inherit_a	uint32	2	FreeRTOS priority inheritance A
+0x0800aae4	freertos_prio_inherit_b	uint32	3	FreeRTOS priority inheritance B
+0x0800aae8	freertos_prio_inherit_c	uint32	1	FreeRTOS priority inheritance C
+0x0800aaec	freertos_prio_inherit_d	uint32	1	FreeRTOS priority inheritance D
+0x0800aaf0	freertos_prio_inherit_e	uint32	1	FreeRTOS priority inheritance E
+0x0800ab34	freertos_prio_get_a	uint32	2	FreeRTOS uxTaskPriorityGet A
+0x0800ab38	freertos_prio_get_b	uint32	1	FreeRTOS uxTaskPriorityGet B
+0x0800ac20	freertos_task_delete	uint32	1	FreeRTOS vTaskDelete state pointer
+0x0800ac68	freertos_tick_count	uint32	4	FreeRTOS tick count variable
+0x0800ac6c	freertos_tick_overflow	uint32	2	FreeRTOS tick overflow count
+0x0800ac70	freertos_tick_const	uint32	2	FreeRTOS tick constant
+0x0800adc8	freertos_notify_a	uint32	1	FreeRTOS task notify A
+0x0800adcc	freertos_notify_b	uint32	3	FreeRTOS task notify B
+0x0800add0	freertos_notify_c	uint32	1	FreeRTOS task notify C
+0x0800add4	freertos_notify_d	uint32	1	FreeRTOS task notify D
+0x0800add8	freertos_notify_e	uint32	1	FreeRTOS task notify E
+0x0800addc	freertos_notify_f	uint32	1	FreeRTOS task notify F
+0x0800ade0	freertos_notify_g	uint32	2	FreeRTOS task notify G
+0x0800ae34	freertos_event_set_a	uint32	1	FreeRTOS event group set A
+0x0800ae38	freertos_event_set_b	uint32	2	FreeRTOS event group set B
+0x0800ae78	freertos_event_clear	uint32	2	FreeRTOS event group clear
+0x0800af10	freertos_queue_create	uint32	1	FreeRTOS queue generic create
+0x0800b010	freertos_queue_send	uint32	2	FreeRTOS queue send state
+0x0800b074	freertos_queue_recv	uint32	2	FreeRTOS queue receive state
+0x0800b098	freertos_queue_peek	uint32	4	FreeRTOS queue peek state
+0x0800b0c4	freertos_task_create_a	uint32	2	FreeRTOS xTaskCreate A
+0x0800b130	freertos_task_static	uint32	2	FreeRTOS xTaskCreateStatic
+0x0800b170	freertos_timer_create_a	uint32	1	FreeRTOS xTimerCreate A
+0x0800b174	freertos_timer_create_b	uint32	1	FreeRTOS xTimerCreate B
+0x0800b2b4	freertos_mutex_create	uint32	2	FreeRTOS xSemaphoreCreateMutex
+0x0800b2b8	freertos_binary_create	uint32	2	FreeRTOS xSemaphoreCreateBinary
+0x0800b2f4	freertos_svc_handler	uint32	1	FreeRTOS vPortSVCHandler constant
+0x0800b34c	freertos_pendsv_a	uint32	2	FreeRTOS xPortPendSVHandler A
+0x0800b350	freertos_pendsv_b	uint32	1	FreeRTOS xPortPendSVHandler B
+0x0800b3bc	i2c_bus1_read_byte_fn	uint32	2	I2C bus 1 read byte function pointer
+0x0800b3c0	i2c_bus2_read_byte_fn	uint32	1	I2C bus 2 read byte function pointer
+
+# =========================================================================
+# DMA CHANNEL FLAG ADDRESSES
+# =========================================================================
+0x0800b874	dma_ch1_flag_tc_addr	uint32	3	DMA channel 1 transfer complete flag address
+0x0800b878	dma_ch1_flag_tc_mask	uint32	1	DMA channel 1 TC flag mask
+0x0800b898	dma_ch1_flag_ht_addr	uint32	3	DMA channel 1 half-transfer flag address
+0x0800b8b4	dma_ch1_flag_te_addr	uint32	3	DMA channel 1 transfer error flag address
+0x0800b8b8	dma_ch1_flag_te_mask	uint32	1	DMA channel 1 TE flag mask
+0x0800b8d8	dma_ch1_flag_gi_addr	uint32	3	DMA channel 1 global interrupt flag address
+0x0800b8ec	dma_ch1_clear_tc	uint32	1	DMA channel 1 clear TC flag value
+0x0800b910	dma_ch1_clear_te	uint32	1	DMA channel 1 clear TE flag value
+0x0800b93c	dma_ch2_flag_tc_addr	uint32	3	DMA channel 2 transfer complete flag address
+0x0800b940	dma_ch2_flag_tc_mask	uint32	1	DMA channel 2 TC flag mask
+0x0800b960	dma_ch2_flag_ht_addr	uint32	3	DMA channel 2 half-transfer flag address
+0x0800b984	dma_ch2_flag_te_addr	uint32	1	DMA channel 2 transfer error flag address
+0x0800b988	dma_ch2_flag_te_mask	uint32	1	DMA channel 2 TE flag mask
+0x0800b9a4	dma_ch2_flag_gi_addr	uint32	2	DMA channel 2 global interrupt flag address
+
+# =========================================================================
+# FREERTOS LIST / QUEUE / SCHEDULER
+# =========================================================================
+0x0800bd7c	freertos_list_remove_a	uint32	1	FreeRTOS list remove item A
+0x0800bd80	freertos_list_remove_b	uint32	1	FreeRTOS list remove item B
+0x0800bd94	freertos_timer_queue_a	uint32	1	FreeRTOS timer queue params A
+0x0800bd98	freertos_timer_queue_b	uint32	1	FreeRTOS timer queue params B
+0x0800be28	freertos_list_insert	uint32	1	FreeRTOS list insert state
+0x0800be44	freertos_queue_static	uint32	3	FreeRTOS queue create static
+0x0800be8c	freertos_queue_send_int	uint32	3	FreeRTOS queue generic send internal
+0x0800beb0	freertos_queue_recv_int_a	uint32	2	FreeRTOS queue receive internal A
+0x0800beb4	freertos_queue_recv_int_b	uint32	1	FreeRTOS queue receive internal B
+0x0800becc	freertos_queue_spaces	uint32	1	FreeRTOS queue spaces available
+0x0800bef4	freertos_queue_isr	uint32	3	FreeRTOS queue send from ISR
+0x0800bf70	freertos_sched_suspend	uint32	1	FreeRTOS scheduler suspend state
+0x0800bf80	freertos_sched_resume	uint32	2	FreeRTOS scheduler resume state
+0x0800bf8c	freertos_sched_resume_b	uint32	1	FreeRTOS scheduler resume B
+0x0800bfb0	freertos_tick_inc	uint32	1	FreeRTOS tick increment state
+0x0800bfe0	freertos_ctx_switch	uint32	1	FreeRTOS task switch context state
+0x0800c038	freertos_task_create_int_a	uint32	2	FreeRTOS task create internal A
+0x0800c03c	freertos_task_create_int_b	uint32	1	FreeRTOS task create internal B
+0x0800c094	freertos_task_ready_a	uint32	2	FreeRTOS task add to ready A
+0x0800c098	freertos_task_ready_b	uint32	1	FreeRTOS task add to ready B
+0x0800c100	str_IDLE	string	1	"IDLE" (FreeRTOS idle task name)
+0x0800c108	freertos_start_sched_a	uint32	1	FreeRTOS start scheduler A
+0x0800c10c	freertos_start_sched_b	uint32	2	FreeRTOS start scheduler B
+0x0800c190	freertos_end_sched_a	uint32	2	FreeRTOS end scheduler A
+0x0800c194	freertos_end_sched_b	uint32	2	FreeRTOS end scheduler B
+0x0800c1a4	freertos_task_suspend_st	uint32	1	FreeRTOS task suspend internal state
+0x0800c208	i2c_bus1_read_ll_addr	uint32	4	I2C bus 1 low-level read register address
+0x0800c20c	i2c_bus2_read_ll_addr	uint32	3	I2C bus 2 low-level read register address
+0x0800c2a0	freertos_port_yield_a	uint32	1	FreeRTOS port yield constant
+0x0800c390	freertos_timer_reload	uint32	1	FreeRTOS timer reload state
+0x0800c3bc	freertos_timer_switch_a	uint32	2	FreeRTOS timer switch lists A
+0x0800c3c0	freertos_timer_switch_b	uint32	1	FreeRTOS timer switch lists B
+0x0800c3e4	freertos_timer_cmd_proc	uint32	1	FreeRTOS timer process command state
+0x0800c7bc	freertos_notify_take	uint32	3	FreeRTOS task notify take state
+0x0800c880	freertos_idle_task_fn	uint32	1	FreeRTOS idle task function pointer
+0x0800c88c	freertos_idle_hook_fn	uint32	1	FreeRTOS idle hook stub pointer
+0x0800c948	freertos_heap_alloc_a	uint32	5	FreeRTOS heap allocate base pointer
+0x0800c94c	freertos_heap_alloc_b	uint32	1	FreeRTOS heap allocate B
+0x0800c9b0	freertos_heap_free_a	uint32	2	FreeRTOS heap free A
+0x0800c9b4	freertos_heap_free_b	uint32	1	FreeRTOS heap free B
+0x0800ca18	freertos_heap_init_a	uint32	2	FreeRTOS heap init A
+0x0800ca1c	freertos_heap_init_b	uint32	1	FreeRTOS heap init B
+0x0800ca20	freertos_heap_init_c	uint32	1	FreeRTOS heap init C
+0x0800cacc	freertos_port_init_stack_a	uint32	2	FreeRTOS port init stack A
+0x0800cad0	freertos_port_init_stack_b	uint32	2	FreeRTOS port init stack B
+0x0800cad4	freertos_port_init_stack_c	uint32	1	FreeRTOS port init stack C
+0x0800cb88	freertos_port_systick_a	uint32	2	FreeRTOS port SysTick handler A
+0x0800cb94	freertos_port_systick_b	uint32	1	FreeRTOS port SysTick handler B
+0x0800cbf8	freertos_port_suppress_a	uint32	3	FreeRTOS port suppress ticks A
+0x0800cc48	freertos_port_idle_sleep	uint32	1	FreeRTOS port idle sleep constant
+
+# =========================================================================
+# GPIO CHARGE CONTROL (gpio_gls_l/r_charge_start, gpio_gls_l/r_reset_pins)
+# =========================================================================
+0x080082d4	hal_rcc_periph_init_base	uint32	1	RCC peripheral init base address
+
+# =========================================================================
+# INIT TABLE (startup init function pointers)
+# =========================================================================
+0x0800d754	init_table_start	func_ptr[4]	1	Start of init table (4 entries, 4 words each)
+0x0800d774	init_table_end	sentinel	1	End of init table (loop sentinel)
+
+# =========================================================================
+# YHM2510 DEBUG DUMP
+# =========================================================================
+0x0800d04c	yhm2510_dump_debug_flag	ptr	1	-> debug flag for YHM2510 register dump
+0x0800d064	yhm2510_dump_buffer	byte[]	1	Register dump output buffer (8 bytes hex)
+0x0800d080	yhm2510_backup_base	ptr	2	-> backup register storage (8 + 8 bytes)
+
+# =========================================================================
+# STRING LITERALS (debug/log/protocol messages in flash)
+# =========================================================================
+# Firmware version and board identification
+# 0x08000c84  "1.2.54" (firmware version)
+# 0x08000c8c  "B200 %s, %d" (board + version log)
+# 0x080032bc  "****** B200 %s %08x%08x%08x******" (self-check banner)
+#
+# UART protocol strings
+# 0x0800d3c0  "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d" (debug status)
+# 0x0800d410  '{"vol":%d,"pct":%d,"open":%d,"usb":%d,"cur":%d,"GLS_L":%d,"GLS_R":%d,"temp":%d}' (JSON status)
+# 0x0800d5d0  Extended status with chEn, aging, otaGls fields
+# 0x0800d640  "xxxxxx B200 vol:..." (alternate extended status format)
+# 0x00002240  "CRC_Cal: %02x, CRC_Rx: %02x, header: 5a a5 ff %02x, data: " (CRC error detail)
+# 0x0000221f  "GLS_RX error: CRC wrong." (CRC mismatch)
+# 0x00001153  "dst(box) cannot parse cmd: %02x" (unknown command)
+#
+# Glasses detection strings
+# 0x000079d8  "L & R GLS IN, Charging status confirmed directly. Show led now."
+# 0x00007a18  "L & R GLS IN, Charging status unknown. Show led after 1s."
+# 0x00007a54  "L & R GLS OUT, show led after 1s."
+# 0x00007a78  "L OUT, R IN, wait 1s to confirm."
+# 0x00007a9c  "L IN, R OUT, wait 1s to confirm."
+# 0x00007ac0  "Switch charging result: ERROR -> GOOD"
+# 0x00007ae8  "Switch charging result: GOOD -> ERROR"
+# 0x0000bb27  "No reply from GLS_L for 210s, show error led"
+# 0x0000bb5c  "No reply from GLS_R for 210s, show error led"
+# 0x0000bb8c  "L & R GLS IN, RTC wake up, keep silent."
+#
+# Battery / charging strings
+# 0x000022af  "L charging:%d, done:%d, vol:%dmv, bat:%d, cur:%d///" (L-side)
+# 0x000022e4  "R charging:%d, done:%d, vol:%dmv, bat:%d, cur:%d\\\" (R-side)
+# 0x00002283  "Disable charging since bat(%d) >= 98"
+# 0x00002318  "L charging:1, confirmed by GLS_L///"
+# 0x0000233c  "R charging:1, confirmed by GLS_R\\\"
+# 0x0000396f  "Bat change: %d -> %d"
+# 0x0000398c  "Bat change, send 0x13 soon."
+# 0x00007fb8  "Bat change(stucked): 99 -> 100"
+# 0x00007fe3  "Over temperature!!! Stop pmic charging."
+# 0x0000800c  "Temperature back to normal. Start pmic charging."
+#
+# Water detection strings
+# 0x00001ad0  "L water detected, disable 5V, time:%d///"
+# 0x00001b30  "R water detected, disable 5V, time:%d\\\"
+# 0x0000cf17  "L water detected, disable 5V output."
+# 0x0000cf44  "R water detected, disable 5V output."
+# 0x00007464  "L water detected, only clear time cnt"
+# 0x000074bc  "R water detected, only clear time cnt"
+#
+# Power / standby strings
+# 0x00007417  "Standby, reason: idle."
+# 0x00007443  "Standby, reason: gls bat full."
+# 0x00008044  "Standby, reason: low bat."
+# 0x00000cfc  "Standby, reason: cmd."
+# 0x00007514  "Box idle mode ON. (empty box)"
+# 0x00007534  "Box idle mode ON. (gls bat full)"
+# 0x00007558  "ota gls ready L"
+# 0x00007568  "ota gls ready R"
+# 0x00007578  "ota box ready"
+# 0x0000a564  "wake up from HALL"
+# 0x0000a578  "wake up from USB"
+# 0x0000a58c  "wake up from RTC"
+# 0x0000a5a0  "Power up..."
+#
+# OTA strings
+# 0x00001848  "[OTA_BOX]: get bin file"
+# 0x00007588  "[OTA_BOX]: Get bin file success"
+# 0x00007978  "[OTA_BOX]: get bin file fail, exit OTA_BOX status."
+# 0x0000d460  "[OTA_BOX]: new version, cur:1.%d.%d, remote:1.%d.%d, len:%d, crc:0x%x"
+# 0x0000237f  "[OTA_BOX]: nothing new, cur:1.%d.%d, remote:1.%d.%d"
+# 0x000037c3  "Swap bank(2->1) & RESET, cur ob val:%x"
+# 0x000037f0  "Swap bank(1->2) & RESET, cur ob val:%x"
+#
+# Aging test strings
+# 0x0000133f  "[AGING_RUNNING]: Start aging, go to PREPARE_AGING."
+# 0x00009653  "[AGING_RUNNING]: GLS ready, disable charging, go to AGING_ONLY."
+# 0x00009710  "[AGING_RUNNING]: GLS bat low, go to CHARGING_AGING."
+# 0x000097d0  "[AGING_RUNNING]: Timeout, go to AGING_DONE"
+# 0x0000d544  "[AGING_ERROR]: Stop aging now, since GLS not ready after 3 hours."
+# 0x0000b7ab  "AGING_DONE"
+# 0x0000b7c0  "AGING_ERROR"
+#
+# Serial debug strings
+# 0x00000d53  "simu_full_bat:%d, simu_empty_bat:%d, simu_timeout:%d"
+# 0x00000d34  "%s watchdog 4005"
+# 0x00000db8  "One-side charging: %s"
+# 0x00000dd3  "%s dog feed"
+#
+# Self-check strings
+# 0x000032eb  "self check fail, reason: 2217 wrong chip id: 0x%x"
+# 0x00003320  "2217 self check done."
+# 0x00003354  "self check fail, reason: pmic in shipmode."
+# 0x0000338b  "pmic self check done."
+# 0x000033d3  "2510 self check done, adjVal:%d"
+# 0x000033f4  "self check fail, reason: 2510 wrong chip id: 0x%x"
+# 0x00003428  "4005 self check done."
+# 0x00003440  "self check fail, reason: 4005 wrong chip id: 0x%x"
+#
+# RTOS task names
+# 0x0000d6b0  "ledTask"
+# 0x0000d6b8  "pwrManagerTask"
+# 0x0000d6c8  "glsDetectTask"
+# 0x0000d6d8  "defaultTask"
+# 0x0000d6e4  "clearLedTimer"
+# 0x0000d6f4  "showErrorLedTimer"
+# 0x0000d708  "startLedTimer"
+# 0x0000d718  "agingTimer"
+# 0x0000d724  "powerOnTimer"
+# 0x0000d734  "setAgingStatusTimer"
+# 0x0000d748  "appEvent"
+# 0x0000cb8b  "Tmr Svc" (FreeRTOS timer daemon)
+# 0x0000c100  "IDLE" (FreeRTOS idle task)
+
+# =========================================================================
+# HAL I2C/UART ADVANCED (low reference count, peripheral register constants)
+# =========================================================================
+# These 200+ remaining DAT_ addresses (1-2 refs each) are predominantly:
+# - HAL I2C state machine register masks and timing constants
+# - HAL UART ISR dispatch flags and DMA configuration words
+# - FreeRTOS kernel internals (TCB offsets, list sentinels, scheduler flags)
+# - RCC/PWR/NVIC peripheral register addresses
+# All are standard STM32 HAL / FreeRTOS constants with limited naming value
+# beyond their module classification already in function_map.txt.
+
+# =========================================================================
+# NOTES
+# =========================================================================
+# Total: 603 unique DAT_ addresses in decompiled.c
+# Classified above: 310 entries with inferred names and descriptions
+# Remaining: ~293 HAL register constants, FreeRTOS kernel state variables,
+#   and low-level peripheral masks (1-2 refs each, standard STM32L0 patterns)
+#
+# Key insights:
+# 1. DAT_080079b0 (31 refs) is the glsDetectTask state — the single most
+#    referenced global, controlling IR scanning, LED, and inter-task signaling
+# 2. DAT_08007414 (20 refs) is the pwrManagerTask state — standby decisions,
+#    debug output gating, and aging mode control
+# 3. DAT_08001a94 (15 refs) is the main state struct pointer used by
+#    poll_gls_battery_status — battery, charging, water detection, fake standby
+# 4. The main state struct has 0x60+ bytes with per-side (L/R) mirrored
+#    fields at offsets differing by 0x1C (e.g., +0x38/+0x54 for counters)
+# 5. Multiple globals point to the SAME underlying state struct accessed
+#    from different RTOS tasks — the firmware uses shared state with
+#    event flags (osEventFlagsSet/Wait) for synchronization
+# 6. All debug output is gated by a +0x07 flag in the detect state struct,
+#    toggled by serial command 0xAF
+# 7. String literals are embedded in flash alongside code (0x0800xxxx range),
+#    not in a separate .rodata section

@@ -1,0 +1,400 @@
+================================================================================
+GX8002B AUDIO CODEC FIRMWARE — MODULE ARCHITECTURE MAP
+================================================================================
+
+Chip:         GX8002B (NationalChip Co., Ltd)
+Architecture: C-SKY CK803S DSP core with NPU
+Framework:    LVP (Low-Power Voice Preprocess)
+Board ID:     grus_gx8002b_dev_1v ("Grus" constellation codename)
+FW Version:   0.0.2.0, built 2025-11-25 19:36:54
+Binary Size:  319,372 bytes (FWPK container, 2 segments)
+Analysis:     String-based only (C-SKY CK803S unsupported by Ghidra/rizin)
+
+Source tree on Even's build machine (inferred from firmware path strings):
+  D:\01_workspace\s200_ap510b_iar\driver\codec\drv_gx8002b.c     (Apollo510b side)
+  D:\01_workspace\s200_ap510b_iar\platform\audio\service_codec_host.c
+  D:\01_workspace\s200_ap510b_iar\platform\audio\service_codec_dfu.c
+  D:\01_workspace\s200_ap510b_iar\platform\audio\service_codec_porting.c
+  D:\01_workspace\s200_ap510b_iar\third_party\TinyFrame\TinyFrame.c
+  lvp/vma/lavaliermic/gsc.c                                       (GX8002B side)
+
+
+================================================================================
+LAYERED ARCHITECTURE DIAGRAM
+================================================================================
+
+    +=========================================================================+
+    | LAYER 3: APPLICATION / PIPELINE CONTROL                                 |
+    |                                                                         |
+    |  +--lvp_core-------------------+  +--lvp_mode_denoise-----------------+ |
+    |  | LVP framework init/boot     |  | Denoise mode manager              | |
+    |  | Boot banner ([LVP] tag)     |  | 3 modes: DOUBLE_MIC, SINGLE_MIC,  | |
+    |  | Clock config (CPU/SRAM/NPU/ |  |          ORIGIN_MIC               | |
+    |  |   FLASH frequencies)        |  | Mode switch on host command       | |
+    |  | Stack scope monitoring      |  | Allocates/frees DSP buffers       | |
+    |  | LDO voltage trim            |  | DRC post-processing               | |
+    |  | _LvpAppSuspend/Resume       |  | LvpAudioInInit                    | |
+    |  +-----------------------------+  +-----------------------------------+ |
+    |                                                                         |
+    |  +--sample_app (I2S output)----+  +--idle_mode------------------------+ |
+    |  | I2S master output driver    |  | [IDLE]Init / Exit IDLE mode       | |
+    |  | SampleAppSuspend/Resume     |  | Low-power state management        | |
+    |  | [I2S_OUT_APP] log tag       |  | Module suspend/resume coordinator | |
+    |  | Manages DAC/I2S/PCM output  |  +-----------------------------------+ |
+    |  +-----------------------------+                                        |
+    +=========================================================================+
+    | LAYER 2: AUDIO DSP ALGORITHMS                                           |
+    |                                                                         |
+    |  +--gsc_beamformer-------------+  +--imcra_noise_est------------------+ |
+    |  | Source: lvp/vma/lavaliermic/ |  | IMCRA (Improved Minima Controlled | |
+    |  |         gsc.c               |  |  Recursive Averaging)             | |
+    |  | GSC = Generalized Sidelobe  |  | ImcraStateInit: buffer validation | |
+    |  |       Canceller             |  | Memory report: Temp/Static/Total  | |
+    |  | Linear + circular arrays    |  | Single-mic noise estimation       | |
+    |  | FFT frequency-domain        |  +-----------------------------------+ |
+    |  | Beam angle steering         |  |                                     |
+    |  | cosine_x + mic_position     |  +--frame_drc-------------------------+ |
+    |  +-----------------------------+  | DRC (Dynamic Range Compression)    | |
+    |                                   | FrameDrcStateInit                  | |
+    |  +--vad_engine-----------------+  | Post-beamforming gain control      | |
+    |  | Voice Activity Detection    |  | samplerate %d frame size %d       | |
+    |  | 3 tunable parameters        |  +-----------------------------------+ |
+    |  | Reporting on/off control    |                                        |
+    |  | [LVP_AUD] log tag           |  +--npu_engine-----------------------+ |
+    |  +-----------------------------+  | Neural Processing Unit             | |
+    |                                   | Keyword spotting:                  | |
+    |  +--audio_board ([AB])--------+   |   "hey_even" (0x00017254)          | |
+    |  | DMIC multi-channel input    |  |   "hi_even"  (0x000172ac)          | |
+    |  | Ain_gain (analog input)     |  | NPU frequency logged at boot       | |
+    |  | PGA control (0-48 dB)       |  +-----------------------------------+ |
+    |  | PDM channel delay config    |                                        |
+    |  +-----------------------------+                                        |
+    +=========================================================================+
+    | LAYER 1: AUDIO HAL + PERIPHERAL DRIVERS                                 |
+    |                                                                         |
+    |  +--gx_audio_out (20 funcs)---+  +--audio_input (LvpAudioIn)---------+ |
+    |  | gx_audio_out_alloc_playback |  | DMIC → PDM → PCM conversion       | |
+    |  | gx_audio_out_free           |  | Multi-channel digital mic          | |
+    |  | gx_audio_out_config_buffer  |  | PGA (Programmable Gain Amplifier)  | |
+    |  | gx_audio_out_config_pcm     |  | Sample rates: 8k, 16k, 48k Hz     | |
+    |  | gx_audio_out_config_i2s     |  +-----------------------------------+ |
+    |  | gx_audio_out_config_dac     |                                        |
+    |  | gx_audio_out_config_cb      |  +--i2s_driver-----------------------+ |
+    |  | gx_audio_out_push_frame     |  | I2S Master mode output             | |
+    |  | gx_audio_out_drain_frame    |  | MCLK, LRCLK, bit depth config      | |
+    |  | gx_audio_out_set/get_db     |  | Route: "0 route play"              | |
+    |  | gx_audio_out_set/get_mute   |  +-----------------------------------+ |
+    |  | gx_audio_out_set_channel    |                                        |
+    |  | gx_audio_out_exit           |  +--spi_flash_driver------------------+ |
+    |  | gx_audio_out_suspend/resume |  | JEDEC ID probe                     | |
+    |  | gx_audio_out_set_fixed_src  |  | 6 flash models (PUYA/ESMT/ZBIT)    | |
+    |  | gx_audio_out_get_sdc_src    |  | OTP region access                  | |
+    |  | [AOUT ERROR] log tag        |  | Erase, eraseall, serialdown        | |
+    |  +-----------------------------+  | XIP (eXecute In Place) support      | |
+    |                                   +-----------------------------------+ |
+    |  +--uart_driver----------------+                                        |
+    |  | uart0, uart1 peripherals    |  +--gpio_driver----------------------+ |
+    |  | _uartRecvCallback           |  | Pin multiplexing                   | |
+    |  | _uartMsgInit                |  | Conflict detection                 | |
+    |  | [VC_MESSAGE] UART + GPIO    |  | "!!!pin set error!"                | |
+    |  | NOTIFY pin for host wakeup  |  +-----------------------------------+ |
+    |  +-----------------------------+                                        |
+    |                                   +--gsensor_driver-------------------+ |
+    |  +--dma_controller-------------+  | Accelerometer (G-sensor)           | |
+    |  | dma_ prefix functions        |  | gsensor_workstate query            | |
+    |  | TX/RX FIFO interrupt mgmt   |  | Motion-based wakeup                | |
+    |  | XIP FIFO overflow handling   |  +-----------------------------------+ |
+    |  +-----------------------------+                                        |
+    |                                   +--watchdog_driver------------------+ |
+    |  +--rtc_driver-----------------+  | Hardware watchdog timer            | |
+    |  | RTC with prescaler config   |  | Level interrupt handler            | |
+    |  | RTC prescaler error detect  |  | Reboot via WDT timeout             | |
+    |  +-----------------------------+  +-----------------------------------+ |
+    +=========================================================================+
+    | LAYER 0: SYSTEM / C RUNTIME                                             |
+    |                                                                         |
+    |  +--memory_manager-------------+  +--boot_cli-------------------------+ |
+    |  | Custom heap allocator       |  | "boot> " prompt                    | |
+    |  | Magic code validation       |  | 10 commands (help, flash, reboot,  | |
+    |  | Alignment enforcement       |  |   init, ping, write, read, wdt,    | |
+    |  | mem init with heap begin    |  |   serialdown, usbslave)            | |
+    |  | malloc/free/realloc         |  | CLI error handling                 | |
+    |  +-----------------------------+  +-----------------------------------+ |
+    |                                                                         |
+    |  +--exception_handler----------+  +--c_runtime-----------------------+ |
+    |  | CPU Exception : %u          |  | printf (hex table 0-F)            | |
+    |  | Register dump (r/vr/epsr)   |  | Assertion macro                   | |
+    |  | Stack overflow detection    |  | String formatting                  | |
+    |  +-----------------------------+  +-----------------------------------+ |
+    +=========================================================================+
+
+
+================================================================================
+MODULE FUNCTION COUNT ESTIMATE (string-based inference)
+================================================================================
+
+Module               Est.Count  Layer  Log Tag               Description
+-------------------  ---------  -----  --------------------  ---------------------
+lvp_core              ~15        3     [LVP]                 Boot, init, lifecycle
+lvp_mode_denoise      ~12        3     [LVP_MODE_DENOISE]    Denoise mode manager
+sample_app (I2S)      ~6         3     [I2S_OUT_APP]         Audio output app
+idle_mode             ~4         3     [IDLE]                Power state manager
+gsc_beamformer        ~8         2     (none)                Dual-mic beamforming
+imcra_noise_est       ~5         2     (none)                Single-mic noise est.
+frame_drc             ~3         2     (none)                Dynamic range comp.
+vad_engine            ~5         2     [LVP_AUD]             Voice activity detect
+npu_engine            ~4         2     (none)                Wake word inference
+audio_board           ~6         2     [AB]                  DMIC/PGA config
+gx_audio_out          20         1     [AOUT ERROR]          Audio output HAL
+audio_input           ~8         1     (none)                Audio input HAL
+i2s_driver            ~6         1     (none)                I2S interface
+spi_flash_driver      ~10        1     (none)                Flash read/write/erase
+uart_driver           ~8         1     [VC_MESSAGE]          UART communication
+gpio_driver           ~5         1     (none)                Pin multiplexing
+gsensor_driver        ~3         1     (none)                Accelerometer
+dma_controller        ~7         1     (none)                DMA transfers
+watchdog_driver       ~3         1     (none)                Hardware watchdog
+rtc_driver            ~2         1     (none)                Real-time clock
+memory_manager        ~6         0     (none)                Heap allocator
+boot_cli              ~15        0     (none)                Boot shell
+exception_handler     ~3         0     (none)                CPU fault handler
+c_runtime             ~8         0     (none)                Printf, assert
+-------------------  ---------
+TOTAL (est.)          ~172
+
+Note: Function counts are estimates inferred from unique strings per module.
+      Actual function count is unknown — no decompilation possible.
+
+
+================================================================================
+AUDIO PROCESSING PIPELINE (DETAILED)
+================================================================================
+
+                    +-------------------------------------------+
+                    |     Physical DMIC (Digital Microphone)     |
+                    |  Multi-channel, PDM interface              |
+                    |  [AB]dmic [%d Channel]                     |
+                    +-----------------------+-------------------+
+                                            |
+                    +-----------------------v-------------------+
+                    |     PGA (Programmable Gain Amplifier)      |
+                    |  [AB]dmic Ain_gain:[%d dB]                 |
+                    |  Range: 0-48 dB (set pga gain CLI)         |
+                    +-----------------------+-------------------+
+                                            |
+                    +-----------------------v-------------------+
+                    |     PDM -> PCM Conversion                  |
+                    |  PDM channel delay configuration            |
+                    |  Rates: 8kHz, 16kHz, 48kHz                 |
+                    +-----------+-----------+-------------------+
+                                |           |           |
+                   +------------v--+  +-----v------+  +-v-----------+
+                   | DOUBLE_MIC    |  | SINGLE_MIC |  | ORIGIN_MIC  |
+                   | _DENOISE      |  | _DENOISE   |  | (passthru)  |
+                   |               |  |            |  |             |
+                   | GSC Beamfmr   |  | IMCRA      |  | No proc.    |
+                   | - Linear/Circ |  | Noise est. |  |             |
+                   | - FFT bins    |  | Recursive  |  |             |
+                   | - Beam angles |  | averaging  |  |             |
+                   +-------+-------+  +-----+------+  +------+------+
+                           |                |                 |
+                           +--------+-------+-----------------+
+                                    |
+                    +---------------v---------------------------+
+                    |     DRC (Dynamic Range Compression)        |
+                    |  FrameDrcStateInit                          |
+                    |  samplerate %d frame size %d               |
+                    +---------------+---------------------------+
+                                    |
+                    +---------------v---------------------------+
+                    |     VAD (Voice Activity Detection)          |
+                    |  3 tunable params ([LVP_AUD] tag)          |
+                    |  open/close vad reporting                   |
+                    +---------------+---------------------------+
+                                    |
+                    +------+--------v-------+-------------------+
+                    |      |                |                    |
+            +-------v---+  |     +----------v-----------+       |
+            | NPU       |  |     |  Audio Output         |       |
+            | Keyword   |  |     |  gx_audio_out_*        |       |
+            | Spotting  |  |     |  PCM / I2S / DAC       |       |
+            | hey_even  |  |     |  SRC (rate converter)  |       |
+            | hi_even   |  |     +------------------------+       |
+            +-----+-----+  |                                     |
+                  |         |                                     |
+            +-----v---------v---+                                 |
+            |  UART → Apollo510b |                                 |
+            |  TinyFrame (CRC32) |                                 |
+            |  VC_MESSAGE handler|                                 |
+            |  Voice events      |                                 |
+            |  Wake word events  |                                 |
+            +--------------------+                                 |
+                                                                   |
+            +------------------------------------------------------+
+            |
+            v
+    +-----------------------------------------------+
+    |  Apollo510b Main SoC (receiving end)           |
+    |  [codec.host] — runtime command/response       |
+    |  [codec.dfu]  — firmware update                |
+    |  [drv.audio.codec] — I2S bus init              |
+    |  service_codec_host.c                          |
+    |  drv_gx8002b.c                                 |
+    |                                                |
+    |  Processes:                                    |
+    |  - LC3 encoding of captured audio for BLE TX   |
+    |  - LC3 decoding of BLE RX for speaker playback |
+    |  - Voice event routing to app layer            |
+    +-----------------------------------------------+
+
+
+================================================================================
+INTER-MODULE COMMUNICATION PATHS
+================================================================================
+
+1. BOOT CHAIN
+   Power-on → boot_cli ("boot> " prompt available)
+   → lvp_core init (clocks, flash probe, LDO, stack scope)
+   → uart_driver init (_uartMsgInit, VC_MESSAGE config)
+   → spi_flash_driver probe (JEDEC ID, model match)
+   → lvp_mode_denoise init (selected mode)
+   → vad_engine init (3 params)
+   → npu_engine init (wake word model load)
+   → sample_app init (I2S output ready)
+   → idle_mode available
+
+2. AUDIO CAPTURE PATH
+   audio_board → audio_input (LvpAudioInInit) → gsc_beamformer or imcra_noise_est
+   → frame_drc → vad_engine → npu_engine → uart_driver (voice events to host)
+
+3. AUDIO PLAYBACK PATH
+   uart_driver (receive audio from host) → sample_app → gx_audio_out → i2s_driver → DAC
+
+4. HOST COMMAND PATH (Apollo510b → GX8002B)
+   uart_driver (_uartRecvCallback) → TinyFrame decode → command dispatch:
+     SwitchWakeupMode → npu_engine (change wake model)
+     SwitchBFMode     → lvp_mode_denoise (switch GSC/IMCRA/raw)
+     ReadVersion      → lvp_core (return version string)
+     QueryMicState    → audio_board (mic status)
+     SetMicGain       → audio_board (PGA gain 0-48)
+     I2SOutputCtrl    → i2s_driver / sample_app
+     CodecMicDelay1Bit → audio_board (PDM delay calibration)
+     DMICClose/Open   → audio_board (mic power control)
+     GetVoiceEvent    → vad_engine + npu_engine (retrieve pending events)
+
+5. HOST EVENT PATH (GX8002B → Apollo510b)
+   vad_engine (speech onset/offset) → uart_driver (TinyFrame TX) → Apollo510b
+   npu_engine (wake word detected) → uart_driver (TinyFrame TX) → Apollo510b
+   Log on host: [codec.host]voice event: cmd_id=0x%04X, event_id=0x%04X
+
+6. POWER STATE PATH
+   idle_mode_init → _LvpAppSuspend + SampleAppSuspend + UartMessageAsyncSuspend
+   wakeup event → _LvpAppResume + SampleAppResume + UartMessageAsyncResume
+   idle_mode_exit → full pipeline restart
+
+7. DFU PATH (from Apollo510b side)
+   Apollo510b service_codec_dfu.c:
+     reading boot header → parse BINH → stage1 (512 bytes) → wait "wfb"
+     → stage2 (12,288 bytes, configurable baud) → wait "OK"
+     → wait "boot> " prompt → firmware download → CRC32 verify
+   GX8002B boot_cli handles: init, ping, write, read, flash, reboot
+
+8. DENOISE MODE SWITCH PATH
+   Host SwitchBFMode → lvp_mode_denoise:
+     denoise_exit_handler (free current buffers)
+     → denoise_init_handler (allocate new buffers, init selected algorithm)
+     → DRC re-init (FrameDrcStateInit)
+     → LvpAudioInInit (restart audio input for new mode)
+
+9. INTER-EYE COORDINATION (via Apollo510b)
+   Apollo510b manages DMIC power across both eyes:
+     master: send DMIC close request to slave eye
+     slave: "received request from master, closing DMIC"
+     slave: "received low power response, reopening DMIC"
+   The GX8002B itself is unaware of inter-eye coordination — the Apollo510b
+   orchestrates DMIC power states across the two GX8002B chips (one per eye).
+
+
+================================================================================
+SUBSYSTEM DETAIL: LVP FRAMEWORK
+================================================================================
+
+The LVP (Low-Power Voice Preprocess) framework is NationalChip's SDK for voice
+processing on GX800x series chips. Key characteristics:
+
+  - Module lifecycle: Each module registers Suspend/Resume callbacks
+  - Boot banner: Prints system info (board, version, clocks, flash, LDO)
+  - Stack monitoring: Detects stack overflow at runtime
+  - Memory: Custom heap with magic code validation (not libc malloc)
+  - No RTOS: Bare-metal event loop with module callbacks
+
+Log tag hierarchy (in order of abstraction):
+  [LVP]              — Core system boot and initialization
+  [LVP_AUD]          — Audio subsystem (VAD parameters)
+  [LVP_MODE_DENOISE] — Denoise mode lifecycle and algorithm init
+  [I2S_OUT_APP]      — I2S output application (SampleApp)
+  [IDLE]             — IDLE power state transitions
+  [AB]               — Audio Board hardware configuration
+  [VC_MESSAGE]       — Voice Communication message handler
+  [AOUT ERROR]       — Audio output error logging
+
+
+================================================================================
+SUBSYSTEM DETAIL: TINYFRAME COMMUNICATION
+================================================================================
+
+The GX8002B communicates with the Apollo510b via TinyFrame serial protocol:
+
+  Transport: UART (uart0 or uart1)
+  Protocol:  TinyFrame with CRC32 integrity
+  Direction: Bidirectional (commands from host, events from codec)
+
+Message format (from Apollo510b strings):
+  cmd = 0x%04X, decomposed as NR (high byte) + TYPE (low byte)
+  seq = sequence counter
+  flags = message flags
+  length = payload length
+  crc32 = CRC32 over payload
+
+The TinyFrame library source is at:
+  D:\01_workspace\s200_ap510b_iar\third_party\TinyFrame\TinyFrame.c
+
+Apollo510b uses separate TinyFrame instances for:
+  1. Inter-eye communication (left <-> right, uart_sync.c)
+  2. Codec communication (Apollo510b <-> GX8002B, drv_gx8002b.c)
+
+Host notification mechanism:
+  VC_MESSAGE notify pin: GPIO asserted by GX8002B to wake Apollo510b
+  [VC_MESSAGE]NOTIFY PIN %d — pin number configuration
+  [VC_MESSAGE]MASSAGE UART %d — UART port assignment
+
+
+================================================================================
+COMPARISON WITH OTHER G2 FIRMWARE COMPONENTS
+================================================================================
+
+Feature              GX8002B Codec          Box MCU (B200)        Main FW (S200)
+-----------------    -------------------    -------------------   ------------------
+Processor            C-SKY CK803S DSP       STM32L0 Cortex-M0+   Ambiq Apollo510b
+Functions            ~172 (estimated)       414 (confirmed)       7,268 (confirmed)
+Modules              ~24 (estimated)        39 (confirmed)        463 (confirmed)
+RTOS                 None (bare-metal)      FreeRTOS              FreeRTOS
+BLE                  None                   None                  Full BLE stack
+Display              None                   None                  LVGL + NemaGFX
+NPU                  Yes (keyword spot)     No                    No (uses codec NPU)
+Audio                Full DSP pipeline      None                  LC3 codec only
+Communication        UART (TinyFrame)       UART (5A A5 FF)       BLE + UART x3
+Flash                SPI NOR (6 models)     Dual-bank STM32       EVENOTA container
+Binary Size          319,372 bytes          ~50KB                 ~3MB
+FW Stability         Unchanged across all   Per-version           Per-version
+                     G2 versions (2.0.1-    updates               updates
+                     2.0.7)
+
+The GX8002B firmware is notable for being byte-identical across ALL G2 firmware
+versions from 2.0.1.14 to 2.0.7.16, indicating it was finalized early in the
+product development cycle and has not required updates.
+
+
+================================================================================
+END OF MODULE ARCHITECTURE MAP
+================================================================================

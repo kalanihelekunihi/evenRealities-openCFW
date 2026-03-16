@@ -1,0 +1,330 @@
+================================================================================
+G2 CHARGING CASE (BOX) FIRMWARE — RTOS MAP
+================================================================================
+
+Firmware: B200 Box MCU, FW 1.2.54
+Processor: STM32L0xx ARM Cortex-M0+ (dual-bank flash)
+RTOS: FreeRTOS with CMSIS-RTOS2 wrapper layer
+Source: Ghidra decompilation of firmware_box_stripped.bin
+
+All RTOS objects created in create_all_tasks_and_timers() at 0x0800678c,
+called from system_init_main() at 0x0800a3b0.
+
+Boot sequence:
+  reset_vector_thunk (0x080000c0)
+  -> system_init_main (0x0800a3b0)
+     -> hal_systick_init
+     -> hal_rcc_periph_and_clock_init (HSI 16MHz, PLLx2 = 32MHz)
+     -> gpio_and_rcc_init
+     -> i2c_gpio_reinit
+     -> uart_gls_init_with_iwdg
+     -> uart_debug_rx_init
+     -> uart_peripheral_init
+     -> hal_flash_read_option_bytes (verify RDP level 0xAA)
+     -> Detect wake source: HALL(1) / USB(2) / RTC(3) / cold boot(0)
+     -> self_check_all_peripherals (2217, PMIC, YHM2510, 4005)
+     -> osKernelRun -> create_all_tasks_and_timers -> osKernelStart
+
+================================================================================
+FREERTOS TASKS (6 total)
+================================================================================
+
+All tasks created via osThreadNew wrapper (FUN_0800a860), which calls
+xTaskCreateStatic or xTaskCreate depending on whether a stack buffer is provided.
+
+Task stack params are stored at offsets from rtos_task_params_base (0x08006834).
+Task handles are stored in rtos_task_handles struct (0x0800683c).
+
+#  Name              Priority  Entry Function          Stack Offset  Handle Offset  Notes
+-- ----------------  --------  ----------------------  ------------  -------------  -----
+1  defaultTask       0 (Idle)  defaultTask_body        +0x00         +0x10          Main supervisory loop
+                               (0x08007038)
+2  ledTask           1 (Low)   [inlined/indirect]      +0x20         +0x18          LED indicator control
+3  glsDetectTask     1 (Low)   glasses_detect_ir_scan  +0x30         +0x1C          IR glasses-in/out detect
+                               (0x0800cc4c)
+4  pwrManagerTask    1 (Low)   pwrManagerTask_stub      +0x40         +0x20          Power management (stub body)
+                               (0x080082c6)
+5  agingTimer        0 (Idle)  [aging entry point]      +0x10         +0x14          Aging test coordinator
+                               (created as thread, not timer)
+6  powerOnTimer      0 (Idle)  [power-on sequence]      +0x50         +0x24          Power-on LED sequence
+                               (created as thread, not timer)
+
+Notes on task creation:
+  - osThreadNew(name, priority, arg, params_ptr)
+  - Priority 0 = osPriorityNormal (idle-level for CMSIS)
+  - Priority 1 = osPriorityAboveNormal
+  - Despite the names "agingTimer" and "powerOnTimer", both are created via
+    osThreadNew (FUN_0800a860), making them threads, not software timers.
+    They likely block on events and fire callbacks periodically.
+
+TASK DETAILS:
+
+  defaultTask (priority 0):
+    Entry: FUN_08007038 (defaultTask_body)
+    Main supervisory loop, runs every 1000ms (osDelay(1000) at bottom).
+    Recursively calls itself from the bottom of the loop.
+    Responsibilities:
+      - Counter modulo 5 for periodic polling
+      - Glasses detection state monitoring
+      - Charging state management (L/R per-side)
+      - Water detection timeout (300s fake standby counter)
+      - OTA firmware check trigger (after 20+ iterations, bat>50%, bat>20%)
+      - Idle mode entry (30 iterations with no glasses, no USB)
+      - Standby entry (idle, gls_bat_full, low_bat)
+      - Event flag polling: bit 1 = timer reschedule, bit 12 = exit idle mode
+      - IWDG refresh before standby
+      - Sleep mode entry when idle counter > 0x1D
+
+  glsDetectTask (priority 1):
+    Entry: FUN_0800cc4c (glasses_detect_ir_scan)
+    Performs IR LED scan to detect glasses in/out per side.
+    Algorithm:
+      1. Drive IR LED pin (GPIO 3=0xAF/4=0xAF for L, 4=0xAF/3=0xAF for R)
+      2. Wait 3ms (osDelay)
+      3. Read ADC (adc_read_ir_sensor @ 0x08002e94)
+      4. Threshold: ADC*1000/ref < 0x50 = glasses present
+      5. ADC*1000/ref >= 0x79 = definitely absent
+      6. Water detection: 6 consecutive "present but leaking" = disable 5V
+    Signals defaultTask via LED timer restart and state struct updates.
+    Also performs secondary IR verification scans.
+
+  pwrManagerTask (priority 1):
+    Entry: FUN_080082c6 (pwrManagerTask_stub) — EMPTY BODY (just returns)
+    Likely placeholder for future power management features.
+    The actual power management logic is in defaultTask.
+
+  ledTask (priority 1):
+    Controls LED indicators for charging status, error conditions, aging.
+    LED states:
+      - phase 0: idle (cleared on GLS status change)
+      - phase 1: charging in progress
+      - phase 2: cleared/transition
+    LED patterns driven by gpio_gls_l_charge_start / gpio_gls_r_charge_start.
+
+  agingTimer (thread, priority 0):
+    Aging test coordinator — manages the factory aging test state machine.
+    Works with aging_timer_callback (0x08002c70) for periodic checks.
+
+  powerOnTimer (thread, priority 0):
+    Manages power-on LED sequence after boot.
+
+  FreeRTOS Idle Task (internal, priority 0):
+    Entry: freertos_idle_task (0x0800c864)
+    Calls freertos_idle_hook_stub (0x0800c884) — empty hook.
+    Standard FreeRTOS idle behavior.
+
+  Timer Daemon Task (internal):
+    Entry: freertos_timer_daemon_task (0x0800c2f6)
+    Processes software timer commands from the timer queue.
+
+================================================================================
+FREERTOS SOFTWARE TIMERS (4 total)
+================================================================================
+
+All timers created via osTimerNew wrapper (FUN_0800a754), which calls
+xTimerCreate (FUN_0800b18c) internally.
+
+#  Name                 Params Offset  Handle Offset  Type          Notes
+-- -------------------  -------------  -------------  ----          -----
+1  clearLedTimer        +0x84          +0x2C          One-shot      Clears LED after delay
+2  showErrorLedTimer    +0xA8          +0x30          One-shot      Shows error LED pattern
+3  startLedTimer        +0xCC          +0x34          One-shot      Starts LED sequence
+4  setAgingStatusTimer  +0x60          +0x28          One-shot      Sets aging status on YHM2510
+
+Timer creation: osTimerNew(name, type=0, params_ptr)
+  - type=0 in CMSIS-RTOS2 = osTimerOnce (one-shot)
+  - All 4 timers use type=0 (second parameter to FUN_0800a754)
+
+Timer periods are set dynamically via osTimerStart (FUN_0800a6a0) or
+osTimerChangePeriod (FUN_0800a908). Observed periods (in ms):
+
+  Timer                  Period (ms)  Context
+  ---------------------  -----------  -------
+  clearLedTimer          4            Aging status check
+  showErrorLedTimer      4            Aging status check
+  startLedTimer          1000         restart_led_timer_1s (0x0800b98c)
+  setAgingStatusTimer    128 (0x80)   Exit aging status
+  Various contexts:      64 (0x40)    Serial debug timer
+                         256 (0x100)  YHM2510 dump (0xB0 debug cmd)
+                         8            UART frame timeout
+                         1024 (0x400) Glasses command relay
+
+Timer operations observed:
+  osTimerStart  (FUN_0800a6a0): Start timer with specified period
+  osTimerStop   (FUN_0800a818 / FUN_0800a93e): Stop running timer
+  osTimerChange (FUN_0800a908): Change period of running timer
+
+Timer callback:
+  aging_timer_callback (0x08002c70): Called from defaultTask on counter%5==0
+  when aging mode is active. Not a true FreeRTOS timer callback — it's polled.
+
+restart_led_timer_1s (0x0800b98c):
+  Stops the defaultTask timer, then restarts it with 1000ms period.
+  Called when glasses detection state changes to trigger LED update.
+
+================================================================================
+FREERTOS MESSAGE QUEUE (1 total)
+================================================================================
+
+Created via osMessageQueueNew wrapper (FUN_0800a64e):
+
+#  Name       Params Offset  Handle Offset  Item Size  Depth  Notes
+-- ---------  -------------  -------------  ---------  -----  -----
+1  appEvent   +0xF0          +0x38          dynamic    dyn    Inter-task event signaling
+
+The "appEvent" string at 0x0000d748 confirms this is the application event queue.
+Used for passing events between ISR context and task context.
+
+Queue operations:
+  osMessageQueueNew takes a parameter struct at (base + 0xF0) containing
+  buffer pointer, item size, and queue length.
+
+================================================================================
+FREERTOS EVENT FLAGS (via appEvent queue/event group)
+================================================================================
+
+The appEvent handle at offset +0x38 is used with osEventFlagsWait/Set:
+
+  osEventFlagsWait (FUN_0800a62e): defaultTask polls for event bits
+  osEventFlagsSet  (FUN_0800a5ea): ISRs/timers signal events
+
+Observed event flag bits:
+  Bit 1  (0x02):    Timer reschedule — triggers osTimerChangePeriod on defaultTask timer
+  Bit 12 (0x1000):  Exit idle mode — triggers exit_idle_mode (FUN_0800137c)
+
+Event flow:
+  1. ISR (EXTI, UART) or timer callback sets event flag
+  2. defaultTask polls appEvent with osEventFlagsWait
+  3. On bit match, clears the bit and executes corresponding action
+
+================================================================================
+FREERTOS SEMAPHORES / MUTEXES
+================================================================================
+
+FreeRTOS kernel includes:
+  xSemaphoreCreateMutex  (FUN_0800b2bc) — present in kernel
+  xSemaphoreCreateBinary (FUN_0800b2d8) — used by osThreadNew for task creation
+
+No application-level mutexes or semaphores were identified in the box firmware.
+The binary semaphore is used internally by the RTOS for task notification
+(ulTaskNotifyTake / xTaskNotifyGive pattern).
+
+Task synchronization is primarily done through:
+  - Event flags (appEvent group)
+  - Shared state structs (accessed by multiple tasks)
+  - Critical sections (enter_critical/exit_critical at 0x080000f4/0x080000fc)
+
+================================================================================
+INTERRUPT HANDLERS / VECTOR TABLE
+================================================================================
+
+Cortex-M0+ vector table entries (confirmed in decompiled code):
+
+Vector              Address       Handler Function              Module
+------------------  -----------   ----------------------------  --------
+Reset               0x080000c0    reset_vector_thunk            startup
+                                  -> system_init_main (0x0800a3b0)
+NMI                 [default]     Default handler               cortex_m
+HardFault           0x08003cb8    hard_fault_handler            cortex_m
+                                  (infinite loop — no recovery)
+SVC                 0x080000cc    svc_handler (FreeRTOS)        rtos_core
+PendSV              0x0800b354    xPortPendSVHandler            freertos_port
+                                  (context switch)
+SysTick             0x0800cb38    freertos_port_systick_handler freertos_port
+                                  -> freertos_increment_tick
+                                  -> hal_systick_increment (HAL tick)
+
+Peripheral IRQs:
+
+IRQ                 Handler Function                Module         Notes
+------------------  ----------------------------    ----------     -----
+USART2              uart2_isr_entry (0x080082c8)    hal_uart       Glasses UART RX/TX
+USART (debug)       hal_uart_isr_handler            hal_uart       Debug serial port
+                    (0x08005ab4)
+I2C1                hal_i2c_isr_handler             hal_i2c        YHM2510 / PMIC I2C
+                    (0x08004158)
+EXTI Line 0         hal_exti_line0_callback_stub    hal_gpio       GPIO interrupt (lid/USB)
+                    (0x08004b50)
+EXTI Line 1         hal_exti_line1_callback_stub    hal_gpio       GPIO interrupt
+                    (0x08004b24)
+EXTI Lines 4-15     hal_exti_irq_handler            hal_gpio       GPIO group interrupt
+                    (0x08004b28)
+DMA Channel 1       [via hal_dma callbacks]          hal_dma        UART DMA TX
+DMA Channel 2       [via hal_dma callbacks]          hal_dma        UART DMA RX
+
+UART ISR flow:
+  uart2_isr_entry -> hal_uart_irq_dispatch -> uart_rx_isr_callback (0x08006368)
+  -> uart_rx_dispatch (0x0800085c) for protocol parsing
+
+GPIO EXTI callbacks (wired at runtime):
+  Hall sensor (lid open/close) -> sets event flag, logs "hall int, isOpen:%d"
+  USB detect (plug/unplug) -> sets event flag, logs "USB int, hasUsb:%d"
+  2217 IC interrupt -> logs "2217 int"
+
+The EXTI callbacks use osEventFlagsSet to signal the defaultTask when
+hardware state changes (lid, USB, battery change).
+
+================================================================================
+WATCHDOG
+================================================================================
+
+Independent Watchdog (IWDG):
+  hal_iwdg_init   (0x08005734): Configured during uart_gls_init_with_iwdg
+  hal_iwdg_refresh (0x080057b0): Called before standby entry, periodically
+                                  in main loop, and in aging test
+
+Watchdog controller (4005 IC):
+  watchdog_enable  (0x08002c46): Enable/disable via I2C
+  Debug command 0xD0: Toggle watchdog
+  Debug command 0xDD: Toggle dog-feed (periodic refresh)
+  Self-check verifies 4005 chip ID at boot
+
+================================================================================
+RTOS MEMORY CONFIGURATION
+================================================================================
+
+Heap:
+  freertos_heap_alloc (0x0800c890): pvPortMalloc
+  freertos_heap_free  (0x0800c950): vPortFree
+  freertos_heap_init  (0x0800c9b8): Initializes heap on first allocation
+  Heap scheme: heap_4 style (first-fit with coalescing)
+
+Stack:
+  freertos_port_init_stack (0x0800ca24): Initializes task stack frame
+  Stack overflow check: Not evident (Cortex-M0+ has limited MPU)
+
+Tick:
+  freertos_port_systick_handler (0x0800cb38): SysTick ISR
+  freertos_port_setup_timer     (0x0800cb98): Configures SysTick
+  freertos_port_suppress_ticks  (0x0800cbfc): Tickless idle support
+  freertos_port_idle_sleep      (0x0800cc24): WFI in idle task
+
+Tickless idle is present, suggesting the box firmware uses low-power
+tickless mode when no tasks are ready (important for battery life).
+
+================================================================================
+INTER-TASK COMMUNICATION SUMMARY
+================================================================================
+
+  defaultTask <-> glsDetectTask:
+    - Shared state struct at 0x080079b0 (gls_detect_task_state)
+    - Event flags via appEvent (bit 1, bit 12)
+    - restart_led_timer_1s triggers LED update
+
+  defaultTask <-> ledTask:
+    - LED state via shared struct (led_phase field)
+    - Timer callbacks trigger LED pattern changes
+
+  ISR -> defaultTask:
+    - UART RX: uart_rx_isr_callback parses frames, updates state
+    - EXTI: Hall/USB/battery change sets event flags
+    - Event flags: osEventFlagsSet from ISR context
+
+  defaultTask <-> aging threads:
+    - aging_timer_callback polled from defaultTask
+    - Aging state machine in shared structs
+    - osTimerStart triggers aging-related timers
+
+================================================================================
+END OF RTOS MAP
+================================================================================

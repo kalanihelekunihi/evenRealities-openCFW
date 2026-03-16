@@ -1,0 +1,343 @@
+# EM9305 BLE Radio -- RTOS Map (Bare-Metal Architecture)
+# Chip: EM9305 (Synopsys DesignWare ARC EM / ARCv2 ISA)
+# Runtime Model: Bare-metal (NO RTOS)
+# Source: Host-side SDK (openCFW/sdks/em9305/), Cordio architecture docs,
+#         hci_drv_em9305.c, EM Microelectronic design patterns
+
+# =========================================================================
+# 1. EXECUTION MODEL: BARE-METAL EVENT LOOP
+# =========================================================================
+#
+# The EM9305 does NOT run an RTOS (Real-Time Operating System). Unlike the
+# Apollo510b main SoC which runs FreeRTOS, the EM9305 BLE radio uses a
+# bare-metal execution model based on the Cordio BLE stack's built-in
+# event-driven architecture.
+#
+# The execution model is:
+#   1. ROM bootloader runs on power-on/reset
+#   2. Bootloader validates FHDR, loads NVM patches
+#   3. Main loop enters a superloop / event dispatcher
+#   4. Interrupts drive event flags
+#   5. Main loop polls event flags and dispatches handlers
+#   6. CPU enters low-power wait between events (WFI equivalent on ARC EM)
+#
+# This is standard for BLE radio controllers -- the Cordio stack was
+# designed to run either bare-metal or on top of an RTOS, and the EM9305
+# uses the bare-metal configuration where the Cordio event loop IS the
+# scheduler.
+
+# =========================================================================
+# 2. ROM-BASED EVENT LOOP
+# =========================================================================
+#
+# The EM9305 ROM contains the Cordio BLE stack's main event loop. This
+# loop is conceptually equivalent to:
+#
+#   void main_loop(void) {
+#       // One-time initialization
+#       platform_init();          // Hardware peripherals
+#       hci_init();               // HCI transport (SPI slave)
+#       ll_init();                // Link Layer state machines
+#       phy_init();               // Radio PHY configuration
+#       nvds_load();              // Load NVDS parameters from NVM
+#       patch_apply();            // Apply NVM patch dispatch table
+#
+#       // Superloop
+#       while (1) {
+#           // Process pending events (interrupt-driven flags)
+#           if (radio_event_pending) {
+#               ll_process_radio_event();
+#           }
+#           if (hci_command_pending) {
+#               hci_process_command();
+#           }
+#           if (timer_event_pending) {
+#               ll_process_timer_event();
+#           }
+#           if (tx_complete_pending) {
+#               ll_process_tx_complete();
+#           }
+#
+#           // Enter low-power wait if no events pending
+#           if (no_events_pending && sleep_enabled) {
+#               enter_low_power_wait();
+#           }
+#       }
+#   }
+#
+# The actual ROM implementation is proprietary, but this pattern is
+# consistent with all known Cordio bare-metal deployments (including
+# the Apollo4/Cooper variant and the Packetcraft reference implementation).
+
+# =========================================================================
+# 3. INTERRUPT SOURCES
+# =========================================================================
+#
+# The EM9305 ARC EM core uses interrupt-driven event processing. Based
+# on the Cordio BLE controller architecture and the EM9305's hardware
+# interfaces, the following interrupt sources are expected:
+#
+# -------------------------------------------------------------------------
+# 3.1 Radio TX/RX Interrupts
+# -------------------------------------------------------------------------
+# Source:  Internal 2.4GHz radio transceiver
+# Purpose: Signal completion of radio events
+#
+#   Radio TX Complete:
+#     Triggered when a BLE packet transmission finishes.
+#     Handler processes:
+#       - Advance TX buffer pointers
+#       - Update link-layer state (acknowledgment tracking)
+#       - Signal next connection event or return to idle
+#
+#   Radio RX Complete:
+#     Triggered when a BLE packet is received.
+#     Handler processes:
+#       - CRC validation of received packet
+#       - Access address matching
+#       - ACL data extraction and buffering for HCI transport
+#       - Link-layer PDU processing (LLCP, empty PDUs)
+#       - Advertising PDU processing (scan request, connect request)
+#
+#   Radio Event Start:
+#     Triggered at the start of a scheduled radio event (connection event,
+#     advertising event, or scan window).
+#     Handler processes:
+#       - PHY configuration for the event (frequency, PHY mode)
+#       - TX/RX buffer preparation
+#       - Encryption nonce setup (if encrypted connection)
+#
+# These interrupts are the highest priority since BLE timing requirements
+# are strict (150us T_IFS inter-frame spacing, connection event anchors).
+
+# -------------------------------------------------------------------------
+# 3.2 HCI Command Interrupt (SPI Slave)
+# -------------------------------------------------------------------------
+# Source:  SPI slave peripheral (connected to Apollo510b IOM6)
+# Purpose: Signal incoming HCI command from host
+#
+#   SPI RX Complete:
+#     Triggered when the Apollo510b writes a complete HCI command packet
+#     via SPI. The SPI slave interface receives the data into a buffer
+#     and signals the main loop.
+#     Handler processes:
+#       - Parse HCI command header (opcode, parameter length)
+#       - Route to standard HCI handler or VSC handler
+#       - Queue HCI event response for next SPI read cycle
+#
+#   SPI TX Complete:
+#     Triggered when the Apollo510b reads response data via SPI.
+#     Handler processes:
+#       - Advance response buffer
+#       - Clear data-ready signal (INT/RDY line, GPIO 117 from EM9305 side)
+#       - Check for additional pending events to signal
+#
+# The INT/RDY signal (connected to Apollo510b GPIO 117) is driven by
+# the EM9305 to indicate when it has data ready for the host to read.
+# From the EM9305 side:
+#   - Assert INT when HCI event, ACL data, or response is queued
+#   - Deassert INT when all pending data has been read by host
+#   - During SPI TX (host writing to EM9305): INT behavior is independent
+
+# -------------------------------------------------------------------------
+# 3.3 Timer Interrupts
+# -------------------------------------------------------------------------
+# Source:  Hardware timer peripheral(s) on ARC EM
+# Purpose: BLE timing and scheduling
+#
+#   Connection Event Timer:
+#     Fires at the anchor point of each connection event.
+#     Schedules radio TX/RX for the connection.
+#     Precision: Sub-microsecond (BLE requires +/- 2us accuracy).
+#
+#   Advertising Interval Timer:
+#     Fires at each advertising interval for advertising events.
+#     Intervals: 20ms to 10.24s (standard BLE range).
+#
+#   Supervision Timeout Timer:
+#     Monitors connection liveness.
+#     Default: 100ms to 32s (configured per-connection).
+#
+#   Sleep Timer:
+#     Low-power timer that runs during sleep mode.
+#     Drives the 32kHz clock domain for wake-up timing.
+#     Connected to GPIO 138 (32K_CLK) exported to Apollo510b.
+#
+# BLE timing is critical -- the link layer must maintain accurate
+# connection event timing despite clock drift. The EM9305 uses the
+# Sleep Clock Accuracy (SCA) Update feature (LL_FEATURES_BYTE3) to
+# communicate timing accuracy to connected peers.
+
+# -------------------------------------------------------------------------
+# 3.4 Sleep/Wake Interrupts
+# -------------------------------------------------------------------------
+# Source:  Power management unit, SPI interface, radio
+# Purpose: Transition between active and low-power states
+#
+#   Sleep Entry:
+#     Triggered when the main loop determines no events are pending
+#     and sleep is enabled (HCI VSC 0xFC49 SET_SLEEP_OPTION).
+#     Handler processes:
+#       - Save radio state
+#       - Configure wake-up sources (SPI CS, timer, radio)
+#       - Switch to 32kHz clock domain
+#       - Gate high-speed clocks
+#       - Enter ARC EM low-power wait state
+#
+#   Wake-Up:
+#     Triggered by any configured wake source:
+#       - SPI chip select assertion (host wants to communicate)
+#       - Timer expiry (next scheduled radio event)
+#       - Radio event (incoming connection request while advertising)
+#     Handler processes:
+#       - Restore high-speed clocks
+#       - Restore radio state
+#       - Recalibrate radio if needed (temperature drift)
+#       - Resume main event loop
+#
+#   Coordinated Sleep (HCI VSC 0xFCF0):
+#     The Apollo510b can trigger a coordinated sleep where both the
+#     host and the EM9305 enter low-power mode simultaneously.
+#     This requires the EM9305 to defer any pending radio events.
+
+# =========================================================================
+# 4. PRIORITY MODEL
+# =========================================================================
+#
+# The ARC EM processor supports configurable interrupt priorities.
+# For a BLE radio controller, the typical priority assignment is:
+#
+#   Priority  Source           Rationale
+#   --------  ------           ---------
+#   Highest   Radio TX/RX      BLE timing-critical (150us IFS)
+#             Timer            Connection event scheduling
+#             SPI Slave        Host communication
+#   Lowest    Power Mgmt       Sleep/wake (can be deferred)
+#
+# The BLE specification requires that link-layer operations complete
+# within strict timing windows. A missed connection event or advertising
+# event deadline results in connection drops or advertising failures.
+# Therefore, radio and timer interrupts must preempt all other processing.
+
+# =========================================================================
+# 5. CONTRAST WITH HOST-SIDE ARCHITECTURE
+# =========================================================================
+#
+# The Apollo510b host runs a fundamentally different execution model:
+#
+#   Component        EM9305 (Controller)     Apollo510b (Host)
+#   ---------        -------------------     ------------------
+#   RTOS             None (bare-metal)       FreeRTOS
+#   BLE Stack        Cordio LL (ROM+patch)   Cordio Host (WSF tasks)
+#   Event System     Interrupt flags + poll  WSF event framework
+#   Scheduling       Priority interrupts     FreeRTOS task scheduler
+#   Sleep            HW clock gating         FreeRTOS idle task + HAL
+#   HCI Role         Controller (slave SPI)  Host (master SPI)
+#
+# The WSF (Wireless Software Foundation) framework on the Apollo510b
+# provides RTOS-like services (timers, events, message passing) on top
+# of FreeRTOS. The HCI driver (hci_drv_em9305.c) bridges the WSF event
+# system with the SPI hardware interface to the EM9305.
+#
+# Key WSF handlers on the Apollo510b side:
+#   HciDrvHandlerInit()  -- Register as WSF task handler
+#   HciDrvHandler()      -- Main event processor
+#   HciDrvIntService()   -- GPIO 117 ISR -> WSF event
+#
+# WSF Events:
+#   BLE_TRANSFER_NEEDED_EVENT (0x01): SPI data available
+#   BLE_HEARTBEAT_EVENT (0x02):       10s keepalive timer
+#   BLE_SET_WAKEUP (0x03):            Deferred wake-up
+
+# =========================================================================
+# 6. BOOT SEQUENCE
+# =========================================================================
+#
+# The EM9305 boot sequence from power-on to Active State:
+#
+#   1. Power-on or GPIO EN (pin 93) rising edge
+#      - ARC EM core starts executing ROM at reset vector
+#
+#   2. ROM Bootloader Phase
+#      - Initialize minimal hardware (clocks, memory controller)
+#      - Check NVM for FHDR at 0x00302000
+#      - If FHDR present and valid:
+#        a. Read FHDR fields (code size, entry point, CRC)
+#        b. Validate CRC32 of code region
+#        c. Load patch dispatch table from 0x00300000
+#        d. Load NVDS parameters from 0x00300400
+#      - If FHDR absent or invalid:
+#        a. Run with ROM-only BLE stack (no patches)
+#
+#   3. Hardware Initialization
+#      - Configure 2.4GHz radio transceiver
+#      - Set up SPI slave interface
+#      - Initialize timer peripherals
+#      - Configure interrupt priorities
+#      - Set up clock domains (high-speed + 32kHz)
+#
+#   4. BLE Stack Initialization
+#      - Initialize Cordio Link Layer
+#      - Apply NVDS parameter overrides
+#      - Configure default BLE parameters
+#      - Set up HCI command handler dispatch
+#
+#   5. Assert INT signal to host
+#      - Pull INT/RDY (connected to host GPIO 117) HIGH briefly
+#        (hardware behavior during reset -- host waits for this)
+#      - INT goes LOW during initialization
+#      - INT goes HIGH again when Active State event is queued
+#
+#   6. Active State Entered
+#      - Queue vendor-specific event: [0x04, 0xFF, 0x01, 0x01]
+#      - Host reads this event via SPI to confirm boot
+#      - EM9305 enters main event loop
+#      - Ready for HCI commands from host
+#
+# Timing (from SDK):
+#   - Reset pulse: EN LOW for >= 1ms
+#   - Cold start worst case: 1200ms (AM_DEVICES_EM9305_TIMEOUT = 12000
+#     * 100us = 1.2s)
+#   - Typical boot: ~2ms after EN HIGH (AM_BSP_EM9305_READY_DELAY)
+#   - INT HIGH -> LOW -> HIGH transition during reset: ~30ms timeout
+#
+# The host (Apollo510b) monitors this sequence in am_devices_em9305_reset():
+#   1. Assert EN LOW, wait 1ms, assert EN HIGH
+#   2. Wait for INT to go HIGH (hw behavior), then LOW (timeout 30ms)
+#   3. Wait for INT to go HIGH again (Active State event, timeout 30ms)
+#   4. Read SPI and verify [0x04, 0xFF, 0x01, 0x01]
+
+# =========================================================================
+# 7. ERROR RECOVERY
+# =========================================================================
+#
+# If the EM9305 becomes unresponsive (detected by the Apollo510b via
+# heartbeat timeout or HCI command timeout), the host performs a full
+# recovery sequence:
+#
+#   1. HciDrvRadioShutdown()
+#      - Stop heartbeat timer
+#      - Disable GPIO 117 interrupt
+#      - Disable 12MHz clock request
+#      - am_devices_em9305_disable()
+#      - am_devices_em9305_term() (de-init IOM6)
+#
+#   2. HciDrvRadioBoot(0) (warm boot)
+#      - Re-initialize IOM6 SPI
+#      - am_devices_em9305_init() + reset
+#      - Re-register GPIO 117 interrupt
+#      - Re-enable NVIC IRQ
+#
+#   3. HciDrvEmptyWriteQueue()
+#      - Flush all pending HCI write buffers
+#
+#   4. DmDevReset()
+#      - Cordio Device Manager reset
+#      - Triggers full HCI reset sequence
+#      - Restarts BLE advertising/connections
+#
+# Thresholds:
+#   HEARTBEAT_TIMEOUT_MS    = 10000  (10 seconds of inactivity)
+#   HCI_DRV_MAX_IRQ_TIMEOUT = 2000   (2 seconds for command response)
+#   HCI_DRV_MAX_TX_RETRIES  = 10000  (SPI write retries)
+#   HCI_DRV_MAX_READ_PACKET = 4      (consecutive reads per cycle)

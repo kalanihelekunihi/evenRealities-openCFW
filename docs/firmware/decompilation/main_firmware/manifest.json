@@ -1,0 +1,46 @@
+{
+  "filename": "ota_s200_firmware_ota.bin",
+  "description": "G2 Main Application with OTA preamble (strip 0x20 header)",
+  "base_addr": "0x00438000",
+  "header_skip": 32,
+  "ghidra_lang": "ARM:LE:32:Cortex",
+  "note": "Identical payload to s200_firmware_raw.bin after stripping 32-byte OTA header.",
+  "output_files": [
+    {
+      "name": "decompiled.c",
+      "size": 9223433
+    },
+    {
+      "name": "functions.txt",
+      "size": 199484
+    },
+    {
+      "name": "ghidra_log.txt",
+      "size": 13374
+    },
+    {
+      "name": "rizin_disasm.txt",
+      "size": 14
+    },
+    {
+      "name": "rizin_functions.txt",
+      "size": 24
+    },
+    {
+      "name": "rizin_info.txt",
+      "size": 716
+    },
+    {
+      "name": "rizin_strings.txt",
+      "size": 2590509
+    },
+    {
+      "name": "strings.txt",
+      "size": 132
+    },
+    {
+      "name": "summary.json",
+      "size": 265
+    }
+  ]
+}

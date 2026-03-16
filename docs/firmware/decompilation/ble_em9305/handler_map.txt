@@ -1,0 +1,384 @@
+# EM9305 BLE Radio -- Handler Map
+# Chip: EM9305 (Synopsys DesignWare ARC EM / ARCv2 ISA)
+# Host: Apollo510b (Ambiq Micro), communicates via SPI/HCI
+# Source: Host-side SDK at openCFW/sdks/em9305/ and Cordio HCI driver
+#
+# NOTE: The EM9305 internal ROM code is proprietary and cannot be disassembled
+# without ARC EM tooling. This file documents handlers from the HOST SIDE --
+# the Apollo510b code that drives the EM9305 via HCI and GPIO. Internal
+# EM9305 interrupt handlers are inferred from the ROM-based Cordio stack
+# architecture.
+
+# =========================================================================
+# 1. HCI VENDOR-SPECIFIC COMMAND HANDLERS (Apollo510b -> EM9305)
+# =========================================================================
+# These are HCI VSC (Vendor-Specific Command) opcodes sent by the Apollo510b
+# host to control the EM9305. Each opcode has a corresponding handler on
+# the EM9305 side (in ROM or NVM patch code) that processes the command.
+#
+# The host-side implementation is in:
+#   am_devices_em9305.c  -- low-level SPI/HCI transport + NVM programming
+#   hci_drv_em9305.c     -- Cordio HCI driver (WSF event loop integration)
+#   hci_vs_em9305.c      -- Cordio vendor-specific command/event processing
+#   am_util_ble_em9305.c -- higher-level BLE utility wrappers
+
+# -------------------------------------------------------------------------
+# 1.1 NVM Programming Commands (Configuration Mode only)
+# -------------------------------------------------------------------------
+# These commands are only valid after the EM9305 has been placed into
+# Configuration Mode via the GPIO CM signal sequence.
+#
+# Opcode    Name                      Param Len  Host Function              xref function_map.txt
+# ------    ----                      ---------  -------------------------  -------------------
+# 0xFC4E    CRC_CALCULATE             8          crc32_calculation_request   line 246-254
+# 0xFC4F    ENTER_CM                  0          enter_cm_mode              line 247-248
+# 0xFC50    EXIT_CM                   0          (implicit on reset)        line 248-249
+# 0xFD01    READ_AT_ADDRESS           5          read_data_cmd              line 253
+# 0xFD03    WRITE_AT_ADDRESS          134 max    write_data_cmd             line 254
+# 0xFD06    NVM_ERASE_NVM_MAIN        0          erase_entire_nvm_main_area line 255
+# 0xFD07    NVM_ERASE_PAGE            2          send_erase_page_cmd        line 256
+#
+# Host-side flow for NVM programming:
+#   1. enter_cm_mode()          -- GPIO pulse + 30KHz square wave
+#   2. check_programed()        -- CRC32 verify existing records
+#   3. erase_entire_nvm_main_area() -- if update needed
+#   4. write_data_to_nvm()      -- write each ImageRecord via 0xFD03
+#   5. check_data()             -- CRC32 verify written data
+#   6. update_fw_version()      -- write version to NVM Info Page 1
+
+# -------------------------------------------------------------------------
+# 1.2 Runtime Configuration Commands (Active Mode)
+# -------------------------------------------------------------------------
+# These commands are sent during normal BLE operation after the EM9305
+# has booted and entered Active State.
+#
+# Opcode    Name                      Param Len  Host Function              xref function_map.txt
+# ------    ----                      ---------  -------------------------  -------------------
+# 0x0C03    HCI_RESET                 0          am_util_ble_hci_reset      (standard HCI)
+# 0xFC43    SET_DEV_PUB_ADDR          6          am_util_ble_set_bd_addr    line 244
+# 0xFC49    SET_SLEEP_OPTION          1          am_util_ble_sleep_set      line 245
+# 0xFCC1    START_TRANSMIT_TEST       6          am_util_ble_trasmitter_test_ex  line 249
+# 0xFCC2    END_TRANSMIT_TEST         0          am_util_ble_end_test       line 250
+# 0xFCC4    SET_TX_POWER_LEVEL        1          am_util_ble_tx_power_set   line 251
+# 0xFCF0    ENTER_SLEEP               0          HciDrvBleSleepSet          line 252
+# 0xFFF2    SET_LOCAL_SUP_FEAT        8          HciVscUpdateLinklayerFeature  line 257
+#
+# Initialization sequence after reset (from hci_vs_em9305.c hciCoreResetSequence):
+#   1. HCI_RESET (0x0C03)
+#   2. HciVscUpdateBDAddress()     -- SET_DEV_PUB_ADDR (0xFC43)
+#   3. HciVscUpdateLinklayerFeature() -- SET_LOCAL_SUP_FEAT (0xFFF2)
+#   4. HciVscSetRfPowerLevelEx()   -- SET_TX_POWER_LEVEL (0xFCC4, default 0dBm)
+#   5. HciSetEventMaskCmd()        -- standard HCI
+#   6. HciLeSetEventMaskCmd()      -- standard HCI
+#   7. HciSetEventMaskPage2Cmd()   -- standard HCI
+#   8. HciReadBdAddrCmd()          -- standard HCI
+#   9. (continue Cordio init: read buffer sizes, features, etc.)
+
+# -------------------------------------------------------------------------
+# 1.3 Cooper/Apollo4 Legacy Commands (SBL Path)
+# -------------------------------------------------------------------------
+# These opcodes are from the older "Cooper" driver (am_devices_cooper.h)
+# for Apollo4-era SBL-based firmware updates. They may be present in the
+# G2 firmware for backward compatibility but the primary path uses the
+# direct NVM programming commands in section 1.1.
+#
+# Opcode    Name                      Description
+# ------    ----                      -----------
+# 0xFC01    RD_MEM                    Read memory
+# 0xFC02    WR_MEM                    Write memory
+# 0xFC05    ID_FLASH                  Identify flash type
+# 0xFC06    ER_FLASH                  Erase flash region
+# 0xFC07    WR_FLASH                  Write flash region
+# 0xFC08    RD_FLASH                  Read flash region
+# 0xFC11    PLF_RESET                 Platform reset
+# 0xFC39    REG_RD                    Register read
+# 0xFC3A    REG_WR                    Register write
+# 0xFC70    SET_TX_POWER_LEVEL        Set TX power (Apollo4 variant)
+# 0xFC71    START_TRANS_TEST          Start transmitter test
+# 0xFC72    END_TRANS_TEST            End transmitter test
+# 0xFC73    SET_LOG_BITMAP            Set debug log bitmap
+# 0xFC74    SET_BD_ADDR               Set BD address
+# 0xFC75    UPDATE_FW                 Trigger firmware update
+# 0xFC76    GET_DEVICE_ID             Get device ID
+# 0xFC77    UPDATE_NVDS               Update NVDS parameters (240 bytes)
+# 0xFC78    UPDATE_LL_FEATURE         Update link layer features
+# 0xFC79    GET_DTM_RSSI              Get RSSI in DTM mode
+# 0xFC7A    CFG_EVT_MASK              Configure event mask
+# 0xFCC0    STORE_INFO0_TRIM          Store info0 trim to RAM
+# 0xFCC1    FLASH_INFO0_TRIM          Flash info0 trim values
+# 0xFCC2    ENTER_SLEEP               Trigger sleep (Cooper variant)
+
+# =========================================================================
+# 2. NVM PROGRAMMING STATE MACHINE
+# =========================================================================
+# The NVM programming state machine runs on the Apollo510b host and drives
+# the EM9305 through the firmware update process. Implementation is in
+# am_devices_em9305_update_image() in am_devices_em9305.c.
+#
+# State Diagram:
+#
+#   [IDLE]
+#     |
+#     v
+#   [CHECK_SPI_MODE] -- determine SPI or bit-bang mode
+#     |
+#     v
+#   [ENTER_CM] -- enter_cm_mode()
+#     |    1. Pulse GPIO_EN (pin 93) low for 10ms to reset EM9305
+#     |    2. Generate 30KHz square wave on GPIO_CM (pin 15) for 40ms
+#     |    3. Wait for EM9305 event: [0x04, 0xFF, 0x01, 0x03]
+#     |    4. Retry: pulse EN + re-generate square wave on failure
+#     v
+#   [CHECK_PROGRAMMED] -- check_programed()
+#     |    For each of the 4 ImageRecords:
+#     |      - Send CRC32_CALCULATE (0xFC4E) with start/end addresses
+#     |      - Compare returned CRC32 with host-computed CRC32
+#     |    If all 4 match: skip to [DONE_ALREADY_PROGRAMMED]
+#     v
+#   [PUMP_VOLTAGE] -- pump_to_1p9v() (optional)
+#     |    Read register 0xF0040C, clear bits 12:8 (set regulation to 1.9V)
+#     |    Write 985858 to register 0xF0041C (DC-DC V-Mult, 2X VBAT2, max duty)
+#     v
+#   [ERASE] -- erase_entire_nvm_main_area()
+#     |    Send NVM_ERASE_NVM_MAIN (0xFD06) to erase all NVM main pages
+#     v
+#   [WRITE] -- write_data_to_nvm()
+#     |    For each of the 4 ImageRecords:
+#     |      address = record.target_address
+#     |      data    = record.data (from firmware image array)
+#     |      While remaining_data > 0:
+#     |        size_to_send = min(PACKET_SIZE=248, remaining_data)
+#     |        Send WRITE_AT_ADDRESS (0xFD03) with [addr, data[0..size]]
+#     |        Advance address and data pointer
+#     |      Display progress every 10%
+#     v
+#   [VERIFY] -- check_data()
+#     |    For each of the 4 ImageRecords:
+#     |      Send CRC32_CALCULATE (0xFC4E)
+#     |      Compare actual vs expected CRC32
+#     |      Abort on mismatch (CHECKSUM_ERROR)
+#     v
+#   [UPDATE_VERSION] -- am_devices_em9305_upate_fw_version()
+#     |    1. Read 248 bytes from NVM Info Page 1 (0x402000)
+#     |    2. Erase NVM Info Page 1
+#     |    3. Write back data with updated 4-byte version at offset 0
+#     v
+#   [RECONFIGURE_GPIO]
+#     |    Restore GPIO_CM (pin 15) to input mode (12MHz clock from EM9305)
+#     v
+#   [DONE]
+#
+# Error codes (am_devices_em9305_status_t):
+#   SUCCESS                = 0
+#   STATUS_ERROR           = 1
+#   BUS_BUSY               = 2
+#   TX_BUSY                = 3
+#   RESET_SPI_RDY_HIGH     = 4
+#   RESET_FAIL             = 5
+#   NOT_READY              = 6
+#   NO_DATA_TX             = 7
+#   RX_FULL                = 8
+#   DATA_LENGTH_ERROR      = 9
+#   CMD_TRANSFER_ERROR     = 10
+#   DATA_TRANSFER_ERROR    = 11
+#   INVALID_OPERATION      = 12
+#   INSUFFICIENT_LEN       = 13
+#   CHECKSUM_ERROR         = 14
+#   SEND_CMD_FAIL          = 15
+#   INCORRECT_DATA_TYPE    = 16
+#   GET_MEM_INFO_FAIL      = 17
+#   ALREADY_PROGRAMMED     = 18
+
+# =========================================================================
+# 3. GPIO INTERRUPT HANDLER (Pin 117 INT)
+# =========================================================================
+# The EM9305 asserts GPIO 117 (INT/RDY) when it has data ready for the
+# host to read via SPI. This is the primary interrupt path for all HCI
+# events and data flowing from the EM9305 to the Apollo510b.
+#
+# Host-side handler chain:
+#
+#   GPIO 117 rising edge
+#     -> NVIC IRQ (GPIO_INT_IRQ, configured in HciDrvRadioBoot)
+#       -> am_hal_gpio_interrupt_register() dispatches to:
+#         -> HciDrvIntService()  [hci_drv_em9305.c]
+#           1. Increment g_ui32InterruptsSeen counter
+#           2. Set WSF event: WsfSetEvent(g_HciDrvHandleID, BLE_TRANSFER_NEEDED_EVENT)
+#             -> HciDrvHandler() processes the event:
+#               a. Read pending data via am_devices_em9305_block_read()
+#               b. Feed data to Cordio stack via hciTrSerialRxIncoming()
+#               c. Process write queue if pending
+#               d. Restart heartbeat timer
+#
+# SPI ready signal protocol:
+#   - EM9305 asserts INT (high) when it has data to send
+#   - Host reads via SPI: send 0x81 header, check status byte
+#   - Status byte 0: EM9305_STS1_READY_VALUE (0xC0) = ready, byte 1 = rx_count
+#   - After reading, INT goes low until more data is available
+#   - During TX: host sends 0x42 header, gets buffer size in response
+#
+# Interrupt configuration (from HciDrvRadioBoot):
+#   am_hal_gpio_interrupt_register(GPIO_INT_CHANNEL, 117, HciDrvIntService, NULL)
+#   am_devices_em9305_enable_interrupt()  -- GPIO interrupt enable
+#   NVIC_SetPriority(GPIO_INT_IRQ, AM_IRQ_PRIORITY_DEFAULT)
+#   NVIC_EnableIRQ(GPIO_INT_IRQ)
+
+# =========================================================================
+# 4. SPI COMMUNICATION HANDLERS (IOM6)
+# =========================================================================
+# The Apollo510b communicates with the EM9305 via SPI on IOM Module 6.
+# The SPI interface uses blocking full-duplex transfers.
+#
+# SPI Configuration:
+#   Interface:    AM_HAL_IOM_SPI_MODE
+#   Clock:        16 MHz (AM_HAL_IOM_16MHZ)
+#   Mode:         SPI Mode 0 (CPOL=0, CPHA=0)
+#   Module:       IOM6 (AM_BSP_EM9305_SPI_MODULE = 6)
+#   Chip Select:  GPIO 149 (AM_BSP_GPIO_EM9305_CS)
+#   Alt path:     SPI bit-bang mode (GPIO 62 MISO, GPIO 63 MOSI) for swap-SPI
+#
+# SPI Protocol Bytes:
+#   0x42  = EM9305_SPI_HEADER_TX  -- host-to-EM9305 write request
+#   0x81  = EM9305_SPI_HEADER_RX  -- host-to-EM9305 read request
+#   0xC0  = EM9305_STS1_READY_VALUE -- EM9305 ready status
+#
+# TX Flow (am_devices_em9305_block_write):
+#   1. am_devices_em9305_bus_enable()   -- power on IOM6
+#   2. am_devices_em9305_tx_starts()    -- assert CS, wait RDY, send 0x42
+#   3. SPI full-duplex write of payload data
+#   4. am_devices_em9305_tx_ends()      -- deassert CS
+#   5. am_devices_em9305_bus_disable()  -- power off IOM6
+#
+# RX Flow (am_devices_em9305_block_read):
+#   1. Check EM9305_RDY_INT() (GPIO 117)
+#   2. am_devices_em9305_bus_enable()   -- power on IOM6
+#   3. Assert CS, send 0x81 header, read status bytes
+#   4. If ready (0xC0) and count > 0: SPI read of data bytes
+#   5. Repeat while EM9305_RDY_INT() remains asserted
+#   6. am_devices_em9305_bus_disable()  -- power off IOM6
+#
+# Command Write (am_devices_em9305_command_write):
+#   1. am_devices_em9305_block_write()  -- send HCI command
+#   2. WHILE_TIMEOUT_MS: wait for GPIO 117 (up to 5000ms)
+#   3. am_devices_em9305_block_read()   -- read HCI response
+#   4. Match response opcode to command opcode (bytes[1:2])
+
+# =========================================================================
+# 5. CONFIGURATION MODE ENTRY/EXIT SEQUENCE
+# =========================================================================
+# Configuration Mode is a special state of the EM9305 that allows NVM
+# programming. It is entered via a specific GPIO signaling protocol.
+#
+# Entry Sequence (enter_cm_mode in am_devices_em9305.c):
+#
+#   Step 1: Reset EM9305
+#     - Drive GPIO_EN (pin 93) LOW for 10ms
+#     - Drive GPIO_EN HIGH
+#     - (EM9305 begins hardware reset)
+#
+#   Step 2: Generate CM trigger signal
+#     - Configure GPIO_CM (pin 15) as OUTPUT
+#     - Generate 30KHz square wave for 40ms:
+#       Period = 33us (SQUARE_WAVE_PERIOD_US)
+#       Each half-cycle = ~16.5us
+#       Total toggles = 40000us / 33us = ~1212 cycles
+#
+#   Step 3: Check for entry event
+#     - Poll GPIO 117 (INT) for data ready
+#     - If ready: read SPI data via am_devices_em9305_block_read()
+#     - Check for CM entry event: [0x04, 0xFF, 0x01, 0x03]
+#     - If not received: retry (pulse EN + regenerate square wave)
+#
+#   Step 4: Configuration Mode active
+#     - NVM programming commands (0xFC4E..0xFD07) are now accepted
+#     - Standard HCI BLE commands are NOT available
+#
+# Exit Sequence:
+#   - After programming is complete, GPIO_CM (pin 15) is reconfigured
+#     as INPUT (12MHz clock signal from EM9305 during normal operation)
+#   - A reset of the EM9305 transitions it back to Active State
+#   - Active State entry is confirmed by event: [0x04, 0xFF, 0x01, 0x01]
+#
+# EM9305 State Events (vendor-specific HCI events 0xFF):
+#   [0x04, 0xFF, 0x01, 0x01] = Active State Entered (normal boot complete)
+#   [0x04, 0xFF, 0x01, 0x03] = Configuration Mode Entered (ready for NVM ops)
+
+# =========================================================================
+# 6. CORDIO HCI DRIVER EVENT HANDLERS (Host-Side WSF)
+# =========================================================================
+# The Cordio BLE stack on the Apollo510b uses the WSF (Wireless Software
+# Foundation) framework for event-driven processing. The HCI driver
+# integrates with WSF via the following handlers.
+#
+# HciDrvHandlerInit(handlerId):
+#   - Registers the HCI driver as a WSF task handler
+#   - Configures heartbeat timer (10s interval)
+#   - Configures wake timer for deferred wake-up
+#
+# HciDrvHandler(event, pMsg):
+#   Main event loop handler, processes:
+#   - BLE_TRANSFER_NEEDED_EVENT (0x01): Read/write SPI data
+#   - BLE_HEARTBEAT_EVENT (0x02): Send HciReadLocalVerInfoCmd() keepalive
+#   - BLE_SET_WAKEUP (0x03): Deferred wake-up processing
+#
+# HciDrvIntService():
+#   - GPIO 117 interrupt service routine (ISR)
+#   - Increments g_ui32InterruptsSeen
+#   - Posts BLE_TRANSFER_NEEDED_EVENT to WSF
+#
+# HciDrvRadioBoot(bColdBoot):
+#   - Initializes SPI interface (IOM6)
+#   - Calls am_devices_em9305_init() for hardware setup
+#   - Generates BLE MAC address from Apollo510b ChipID (on cold boot)
+#   - Registers HciDrvIntService as GPIO 117 interrupt handler
+#   - Enables NVIC interrupt for GPIO_INT_IRQ
+#
+# HciDrvRadioShutdown():
+#   - Stops heartbeat timer
+#   - Disables GPIO interrupt
+#   - Disables EM9305 12MHz clock output
+#   - Calls am_devices_em9305_disable() and am_devices_em9305_term()
+
+# =========================================================================
+# 7. HEARTBEAT / KEEPALIVE HANDLER
+# =========================================================================
+# The HCI driver includes a heartbeat mechanism to detect if the EM9305
+# has become unresponsive.
+#
+# Configuration:
+#   ENABLE_BLE_HEARTBEAT = 1  (enabled by default)
+#   HEARTBEAT_TIMEOUT_MS = 10000  (10 seconds)
+#
+# Behavior:
+#   - WSF timer fires every 10 seconds of inactivity
+#   - Handler sends HciReadLocalVerInfoCmd() to the EM9305
+#   - If no response within HCI_DRV_MAX_IRQ_TIMEOUT (2000ms), error
+#   - Timer is restarted after every successful HCI transaction
+#   - On error: ERROR_RECOVER macro triggers full radio shutdown + reboot
+#
+# Error recovery (ERROR_RECOVER):
+#   1. error_check(status) -- log/callback
+#   2. HciDrvRadioShutdown() -- full shutdown
+#   3. HciDrvRadioBoot(0) -- warm reboot
+#   4. HciDrvEmptyWriteQueue() -- flush pending writes
+#   5. DmDevReset() -- Cordio device manager reset
+
+# =========================================================================
+# 8. CROSS-REFERENCE WITH function_map.txt
+# =========================================================================
+# The function_map.txt documents the NVM patch binary structure and the
+# 45 invalid ARM-heuristic byte offsets in the main patch code (segment 3).
+# Since the EM9305 uses ARC EM (ARCv2), those offsets are not real function
+# boundaries.
+#
+# However, the HCI VSC opcodes documented here directly correspond to the
+# commands listed in function_map.txt lines 244-265. The handler_map adds:
+#   - The host-side function implementations for each opcode
+#   - The NVM programming state machine flow
+#   - The GPIO interrupt handler chain
+#   - The SPI communication protocol details
+#   - The WSF event-driven processing model
+#
+# The EM9305-internal handlers for these HCI commands are in ROM (or
+# NVM patch overrides in segment 3). Without ARC EM disassembly, the
+# internal handler addresses remain unknown.

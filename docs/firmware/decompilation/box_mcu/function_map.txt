@@ -1,0 +1,701 @@
+# G2 Charging Case (Box) Firmware Function Map
+# Board: B200, FW: 1.2.54, STM32L0xx ARM Cortex-M0+ @ 0x08000000 (GPIO base 0x50000000 confirms L0)
+# 414 functions total (414 high, 0 medium, 0 low). 85 promoted to STM32CubeL0 HAL SDK names (session 34)
+#
+# Format: address	ghidra_name	inferred_name	module	confidence
+#
+# === RTOS TASKS (from string references) ===
+# defaultTask   - main idle loop
+# glsDetectTask - glasses in/out detection
+# ledTask       - LED indicator control
+# pwrManagerTask - power management
+# agingTimer    - aging test timer
+# powerOnTimer  - power-on sequence timer
+# clearLedTimer - LED clear timer
+# startLedTimer - LED start timer
+# showErrorLedTimer - error LED timer
+# setAgingStatusTimer - aging status timer
+#
+# === KEY PROTOCOL DETAILS ===
+#
+# Box UART Frame Format:
+#   Header: 5A A5 FF [cmd_byte]
+#   Data: variable
+#   CRC: 1 byte at end
+#   Max chunk: 240 bytes (from main FW docs)
+#
+# Box Status JSON (sent to glasses):
+#   {"vol":%d,"pct":%d,"open":%d,"usb":%d,"cur":%d,"GLS_L":%d,"GLS_R":%d,"temp":%d}
+#   vol     = battery voltage (mV)
+#   pct     = battery percentage
+#   open    = lid open flag
+#   usb     = USB connected flag
+#   cur     = charging current
+#   GLS_L   = left glasses status
+#   GLS_R   = right glasses status
+#   temp    = temperature
+#
+# Extended status (debug):
+#   B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d
+#   temp:%d, chEn:%d, aging:%d, otaGls:%d
+#
+# Command Bytes (glasses-to-box):
+#   0x3D = Exit aging status (left)
+#   0x3E = Exit aging status (right)
+#   0x3F = Enable/disable output
+#   0x41 = Reset (triggers 0xFF serial cmd)
+#   0x50 = Version query
+#   0x51 = Status query (returns SN + version)
+#   0x56 = OTA GLS status (enter/exit per-eye)
+#   0x5C = Case status query
+#   0x5D = Charging control per-eye
+#   0x5E = Set SN (16 bytes)
+#   0x5F = SN query
+#   0x68 = Silent mode toggle
+#
+# Command Bytes (UART RX from glasses):
+#   0x13 = Status report / battery change notification
+#   0x3E = Aging status response
+#   0x46 = Aging data
+#   0x58 = OTA firmware check
+#   0x59 = OTA start response
+#   0x5A = OTA data response
+#   0x5B = OTA complete response
+#   0x70 = Chip ID query
+#
+# Cross-reference with main firmware (box_uart_mgr.c):
+#   Main FW sends via FUN_00462a1a (inter_eye_relay_tx) and box_uart_mgr pack/unpack
+#   Box UART max chunk: 240 bytes, CRC at last byte
+#   BLE service 0x81-20 (BoxDetect) handles box presence/absence detection
+#   G2GlassesCaseReader in Swift SDK reads: soc, charging, lidOpen, inCase
+#
+# Serial Debug Commands (hex input):
+#   0xAF = Debug output toggle
+#   0xB0 = Dump YHM2510 registers (starts timer)
+#   0xD0 = Watchdog enable/disable
+#   0xD1 = Simulation mode (full bat/empty bat/charging)
+#   0xD2 = One-side charging toggle
+#   0xD3 = Query one-side charging status
+#   0xDD = Dog feed toggle
+#   0xDF = Enter ship mode
+#   0xEE = Enter standby (reason: cmd)
+#   0xFF = System reset
+#
+# Chip IDs:
+#   YHM2510 = Battery fuel gauge IC (I2C addr 0xC8/0xC9)
+#   PMIC    = Power management IC (I2C addr 0x70/0x71)
+#   4005    = Watchdog controller
+#   2217    = Unknown IC (self-check)
+#
+# Aging Test States:
+#   AGING_PRE      - Waiting for glasses ready (up to 2-3 hours)
+#   AGING_RUNNING  - Active aging test
+#   CHARGING_AGING - Charging phase of aging
+#   AGING_ONLY     - Discharge phase of aging
+#   AGING_DONE     - Test complete
+#
+# Glasses Detection:
+#   L & R GLS IN  -> 1s confirmation -> show charging LED
+#   L & R GLS OUT -> 1s confirmation -> show idle LED
+#   One side only -> error LED
+#   RTC wake up   -> keep silent (no LED)
+#
+# Power States:
+#   IDLE     - Idle mode (empty box or full battery)
+#   Standby  - Deep sleep (reasons: idle, cmd, low bat, gls bat full)
+#   Shipmode - Shipping mode (blocked by USB)
+#
+# OTA:
+#   Dual-bank: swap between bank 1 and 2
+#   Version format: 1.%d.%d (major always 1)
+#   SN copied between banks during OTA
+#
+# Water Detection:
+#   Disables 5V output on affected pin
+#   Time-based: tracked per-side
+#
+# Charging:
+#   Per-side: L (/// suffix), R (\\\ suffix) in logs
+#   Status: charging, done, vol(mV), bat(%), cur(mA)
+#   Done detection: confirmed by GLS report, not just voltage
+#   Threshold: bat >= 0x5A (90%) -> disable charging, bat >= 98% -> done
+#   Over-temperature protection: stops PMIC charging
+#   Fake standby: 300s timer, then recheck battery
+
+# =====================================================================
+# === C RUNTIME / STARTUP (0x080000c0 - 0x080002d6) ===
+# =====================================================================
+0x080000c0	thunk_FUN_0800a3b0	reset_vector_thunk	startup	HIGH
+0x080000cc	FUN_080000cc	svc_handler	rtos_core	HIGH
+0x080000f4	FUN_080000f4	enter_critical	rtos_core	HIGH
+0x080000fc	FUN_080000fc	exit_critical	rtos_core	HIGH
+0x08000160	FUN_08000160	uint32_divide	c_runtime	HIGH
+0x0800018c	FUN_0800018c	int32_divide	c_runtime	HIGH
+0x080001b4	FUN_080001b4	memcpy_impl	c_runtime	HIGH
+0x080001d8	FUN_080001d8	memset_impl	c_runtime	HIGH
+0x080001e6	FUN_080001e6	bzero	c_runtime	HIGH
+0x080001ea	FUN_080001ea	memset_wrapper	c_runtime	HIGH
+0x080001fc	FUN_080001fc	read_le32	c_runtime	HIGH
+0x08000210	FUN_08000210	uint64_divide	c_runtime	HIGH
+0x08000270	FUN_08000270	flash_program_sequence	hal_flash	HIGH
+0x08000294	FUN_08000294	shift_left_64	c_runtime	HIGH
+0x080002b4	FUN_080002b4	shift_right_64	c_runtime	HIGH
+0x080002d6	FUN_080002d6	rle_decompress_data_init	startup	HIGH
+
+# =====================================================================
+# === HAL FLASH PROGRAMMING (0x08000310 - 0x080006c4) ===
+# =====================================================================
+0x08000310	FUN_08000310	flash_program_with_verify	hal_flash	HIGH
+0x08000420	FUN_08000420	flash_program_fast	hal_flash	HIGH
+0x080004c0	FUN_080004c0	flash_program_with_erase	hal_flash	HIGH
+0x0800056c	FUN_0800056c	flash_read_sequence	hal_flash	HIGH
+0x08000610	FUN_08000610	flash_read_verified	hal_flash	HIGH
+0x080006c4	FUN_080006c4	init_systick	hal_systick	HIGH
+
+# =====================================================================
+# === HAL I2C LOW-LEVEL (0x080006d4 - 0x080007a8) ===
+# =====================================================================
+0x080006d4	FUN_080006d4	i2c_wait_addr_flag	hal_i2c	HIGH
+0x08000734	FUN_08000734	i2c_wait_stop_flag	hal_i2c	HIGH
+0x080007a8	FUN_080007a8	i2c_wait_busy_flag	hal_i2c	HIGH
+
+# =====================================================================
+# === UART PROTOCOL & COMMAND DISPATCH (0x0800085c - 0x08001e58) ===
+# =====================================================================
+0x0800085c	FUN_0800085c	uart_rx_dispatch	uart_protocol	HIGH
+0x08000928	FUN_08000928	serial_cmd_dispatcher	uart_protocol	HIGH
+0x08000de0	FUN_08000de0	glasses_cmd_handler	uart_protocol	HIGH
+
+# =====================================================================
+# === APPLICATION: AGING, OTA, STATUS (0x080012a8 - 0x08001e58) ===
+# =====================================================================
+0x080012a8	FUN_080012a8	clear_ota_and_charge_pins	app_state	HIGH
+0x080012f8	FUN_080012f8	start_aging	app_aging	HIGH
+0x0800137c	FUN_0800137c	exit_idle_mode	app_power	HIGH
+0x080013cc	FUN_080013cc	query_aging_status_from_gls	app_aging	HIGH
+0x08001538	FUN_08001538	ota_box_download_firmware	app_ota	HIGH
+0x080018a8	FUN_080018a8	poll_gls_battery_status	uart_protocol	HIGH
+0x08001be0	FUN_08001be0	force_poll_gls_battery_status	uart_protocol	HIGH
+0x08001d2c	FUN_08001d2c	ota_notify_gls_result	app_ota	HIGH
+0x08001e58	FUN_08001e58	uart_rx_wait_and_parse	uart_protocol	HIGH
+
+# =====================================================================
+# === UART TX / FLOW CONTROL (0x080023b8 - 0x08002708) ===
+# =====================================================================
+0x080023b8	FUN_080023b8	set_aging_status_L	app_aging	HIGH
+0x08002484	FUN_08002484	set_aging_status_R	app_aging	HIGH
+0x08002550	FUN_08002550	uart_tx_with_ctrl	uart_tx	HIGH
+0x08002708	FUN_08002708	uart_tx_no_ctrl	uart_tx	HIGH
+
+# =====================================================================
+# === I2C PERIPHERAL ACCESS (0x0800284c - 0x080029c4) ===
+# =====================================================================
+0x0800284c	FUN_0800284c	i2c_gpio_reinit	i2c_periph	HIGH
+0x08002878	FUN_08002878	i2c_read_yhm2510	i2c_periph	HIGH
+0x080028f0	FUN_080028f0	i2c_read_pmic	i2c_periph	HIGH
+0x08002968	FUN_08002968	i2c_write_yhm2510	i2c_periph	HIGH
+0x080029c4	FUN_080029c4	i2c_write_pmic	i2c_periph	HIGH
+
+# =====================================================================
+# === PMIC / BOOST / WATCHDOG (0x08002a20 - 0x08002c78) ===
+# =====================================================================
+0x08002a20	FUN_08002a20	get_pmic_status_byte	pmic	HIGH
+0x08002a2c	FUN_08002a2c	pmic_boost_check	pmic	HIGH
+0x08002b04	FUN_08002b04	ota_copy_sn_between_banks	app_ota	HIGH
+0x08002be8	FUN_08002be8	pmic_boost_enable	pmic	HIGH
+0x08002c46	FUN_08002c46	watchdog_enable	pmic	HIGH
+0x08002c70	FUN_08002c70	aging_timer_callback	rtos_wrapper	HIGH
+0x08002c78	FUN_08002c78	ota_verify_downloaded_crc	app_ota	HIGH
+
+# =====================================================================
+# === OTA FLASH OPERATIONS (0x08002d00 - 0x08002f64) ===
+# =====================================================================
+0x08002d00	FUN_08002d00	ota_erase_target_bank	app_ota	HIGH
+0x08002dbc	FUN_08002dbc	ota_program_chunk	app_ota	HIGH
+0x08002e94	FUN_08002e94	adc_read_ir_sensor	adc_periph	HIGH
+0x08002ee0	FUN_08002ee0	flash_get_running_bank	hal_flash	HIGH
+0x08002efc	FUN_08002efc	read_sn_bytes	app_sn	HIGH
+0x08002f24	FUN_08002f24	read_sn_full	app_sn	HIGH
+0x08002f64	FUN_08002f64	self_check_all_peripherals	app_init	HIGH
+
+# =====================================================================
+# === I2C WRAPPERS / SN FLASH (0x080034f4 - 0x080035dc) ===
+# =====================================================================
+0x080034f4	FUN_080034f4	i2c_read_yhm2510_wrapper	i2c_periph	HIGH
+0x080034fc	FUN_080034fc	i2c_read_pmic_wrapper	i2c_periph	HIGH
+0x08003504	FUN_08003504	flash_write_sn_bank1	app_sn	HIGH
+0x080035dc	FUN_080035dc	flash_write_sn_bank2	app_sn	HIGH
+
+# =====================================================================
+# === BATTERY / CHARGING / OTA SWAP (0x080036e8 - 0x080039e8) ===
+# =====================================================================
+0x080036e8	FUN_080036e8	decide_charge_side	app_charging	HIGH
+0x08003740	FUN_08003740	ota_swap_bank_and_reset	app_ota	HIGH
+0x08003828	FUN_08003828	i2c_write_yhm2510_wrapper	i2c_periph	HIGH
+0x08003830	FUN_08003830	i2c_write_pmic_wrapper	i2c_periph	HIGH
+0x08003838	FUN_08003838	reset_gls_side_counters	app_glasses	HIGH
+0x08003868	FUN_08003868	reset_all_gls_counters	app_glasses	HIGH
+0x08003874	FUN_08003874	reset_gls_l_counters	app_glasses	HIGH
+0x08003898	FUN_08003898	reset_gls_r_counters	app_glasses	HIGH
+0x080038bc	FUN_080038bc	bat_change_handler	app_charging	HIGH
+0x080039c8	FUN_080039c8	uart_gls_rx_start_it	uart_rx	HIGH
+0x080039e8	FUN_080039e8	uart_gls_tx_with_params	uart_tx	HIGH	# STM32 HAL UART TX pattern, adjacent to uart_gls_rx_start_it
+
+# =====================================================================
+# === CORTEX-M / NVIC / FAULT HANDLERS (0x08003cb8 - 0x08003d60) ===
+# =====================================================================
+0x08003cb8	FUN_08003cb8	hard_fault_handler	cortex_m	HIGH
+0x08003cbc	FUN_08003cbc	__HAL_FLASH_SET_LATENCY	hal_flash	HIGH	# SDK match: modifies FLASH->ACR latency bits
+0x08003cd0	FUN_08003cd0	FLASH_OB_GetRDP	hal_flash	HIGH	# SDK match: reads OPTR RDP field
+0x08003ce8	FUN_08003ce8	FLASH_OB_GetUser	hal_flash	HIGH	# SDK match: reads OPTR USER field
+0x08003cfc	FUN_08003cfc	FLASH_OB_OptionConfig	hal_flash	HIGH	# SDK match: writes OB RDP/USER/WRP fields
+0x08003d14	FUN_08003d14	FLASH_ErasePage	hal_flash	HIGH	# SDK match: sets ERASE+PROG in PECR, writes to page address
+0x08003d44	FUN_08003d44	FLASH_Program_Word	hal_flash	HIGH	# SDK match: word program via PECR
+0x08003d60	FUN_08003d60	FLASH_Program_HalfPage	hal_flash	HIGH	# SDK match: half-page program via FPRG+PROG bits
+
+# =====================================================================
+# === HAL FLASH STATE MACHINE (0x08003d94 - 0x08003f28) ===
+# =====================================================================
+0x08003d94	FUN_08003d94	FLASH_WaitForLastOperation	hal_flash	HIGH	# SDK match: polls FLASH->SR BSY flag with timeout
+0x08003df8	FUN_08003df8	HAL_I2CEx_ConfigAnalogFilter	hal_i2c	HIGH	# SDK match: modifies CR1 ANFOFF bit
+0x08003f20	FUN_08003f20	HAL_UART_TxCpltCallback_weak	hal_uart	HIGH	# SDK: __weak void HAL_UART_TxCpltCallback()
+0x08003f22	FUN_08003f22	HAL_UART_RxCpltCallback_weak	hal_uart	HIGH	# SDK: __weak void HAL_UART_RxCpltCallback()
+0x08003f24	FUN_08003f24	HAL_UART_ErrorCallback_weak	hal_uart	HIGH	# SDK: __weak void HAL_UART_ErrorCallback()
+0x08003f26	FUN_08003f26	HAL_UART_AbortCpltCallback_weak	hal_uart	HIGH	# SDK: __weak void HAL_UART_AbortCpltCallback()
+0x08003f28	FUN_08003f28	HAL_I2CEx_ConfigDigitalFilter	hal_i2c	HIGH	# SDK match: modifies CR1 DNF bits
+
+# =====================================================================
+# === HAL I2C / UART INIT (0x0800414c - 0x08004534) ===
+# =====================================================================
+0x0800414c	FUN_0800414c	HAL_I2C_AddrCallback_weak	hal_i2c	HIGH	# SDK match: __weak stub
+0x0800414e	FUN_0800414e	HAL_I2C_ErrorCallback_weak	hal_i2c	HIGH	# SDK match: __weak stub
+0x08004150	FUN_08004150	HAL_I2C_GetState	hal_i2c	HIGH	# SDK match: returns hi2c->State
+0x08004158	FUN_08004158	HAL_I2C_EV_IRQHandler	hal_i2c	HIGH	# SDK match: I2C event ISR dispatch
+0x080042a8	FUN_080042a8	HAL_I2C_Init	hal_i2c	HIGH	# SDK match: configures TIMINGR, OAR1, CR1, CR2
+0x080044c4	FUN_080044c4	HAL_I2C_MspInit_weak	hal_i2c	HIGH	# SDK match: __weak empty stub
+0x080044c8	FUN_080044c8	HAL_I2C_MspInit	hal_i2c	HIGH	# SDK match: enables I2C1 clock, configures PA GPIO AF, sets NVIC for IRQ 12
+0x08004534	FUN_08004534	I2C_WaitOnFlagUntilTimeout	hal_i2c	HIGH	# SDK match: polls I2C ISR flags with HAL_GetTick timeout
+
+# =====================================================================
+# === HAL I2C OPERATIONS (0x080045f8 - 0x080049b8) ===
+# =====================================================================
+0x080045f8	FUN_080045f8	hal_i2c_stop	hal_i2c	HIGH
+0x08004660	FUN_08004660	hal_i2c_master_start	hal_i2c	HIGH
+0x0800469e	FUN_0800469e	HAL_DMA_Abort	hal_dma	HIGH	# SDK match: disables channel, clears IFCR
+0x0800470a	FUN_0800470a	HAL_DMA_Abort_IT	hal_dma	HIGH	# SDK match: disables channel, calls XferAbortCallback
+0x0800477c	FUN_0800477c	HAL_Delay	hal_core	HIGH	# SDK match: blocking delay polling HAL_GetTick()
+0x080047a0	FUN_080047a0	HAL_FLASHEx_Erase	hal_flash	HIGH	# SDK match: page erase with option byte handling
+0x08004824	FUN_08004824	HAL_FLASHEx_OBGetConfig	hal_flash	HIGH	# SDK match: reads OPTR/WRP registers
+0x08004890	FUN_08004890	HAL_FLASHEx_OBProgram	hal_flash	HIGH	# SDK match: programs RDP/USER/WRP option bytes
+0x08004944	FUN_08004944	HAL_FLASH_Lock	hal_flash	HIGH	# SDK match: sets PELOCK in PECR
+0x08004960	FUN_08004960	HAL_FLASH_OB_Launch	hal_flash	HIGH	# SDK match: sets OBL_LAUNCH bit
+0x08004974	FUN_08004974	HAL_FLASH_OB_Lock	hal_flash	HIGH	# SDK match: sets OPTLOCK bit
+0x08004990	FUN_08004990	HAL_FLASH_Unlock_PECR	hal_flash	HIGH	# SDK match: writes PEKEY1/PEKEY2 to PEKEYR
+0x080049b8	FUN_080049b8	HAL_FLASH_Program	hal_flash	HIGH	# SDK match: waits BSY, programs word or halfpage
+
+# =====================================================================
+# === HAL GPIO / EXTI (0x08004a18 - 0x08004b54) ===
+# =====================================================================
+0x08004a18	FUN_08004a18	HAL_FLASH_Unlock	hal_flash	HIGH	# SDK match: writes PRGKEY1/PRGKEY2 to PRGKEYR
+0x08004a40	FUN_08004a40	HAL_GPIO_DeInit	hal_gpio	HIGH	# SDK match: resets pin to analog mode, clears EXTI/SYSCFG
+0x08004b24	FUN_08004b24	HAL_GPIO_EXTI_Callback_2	hal_gpio	HIGH	# SDK: second weak EXTI callback stub
+0x08004b28	FUN_08004b28	HAL_GPIO_EXTI_IRQHandler	hal_gpio	HIGH	# SDK match: checks EXTI->PR, clears, calls callback
+0x08004b50	FUN_08004b50	HAL_GPIO_EXTI_Callback	hal_gpio	HIGH	# SDK match: __weak empty callback stub
+0x08004b54	FUN_08004b54	HAL_GPIO_Init	hal_gpio	HIGH	# SDK match: configures MODER/OTYPER/OSPEEDR/PUPDR/AFR/EXTI per pin
+
+# =====================================================================
+# === HAL TIMER / SYSTICK (0x08004cb8 - 0x08004d38) ===
+# =====================================================================
+0x08004cb8	FUN_08004cb8	HAL_GPIO_ReadPin	hal_gpio	HIGH	# SDK match: reads GPIOx->IDR (offset 0x10), returns (IDR & pin) != 0
+0x08004cc2	FUN_08004cc2	HAL_GPIO_WritePin	hal_gpio	HIGH	# SDK match: writes BSRR(0x18) or BRR(0x28) based on PinState
+0x08004cd0	FUN_08004cd0	HAL_GetTick	hal_core	HIGH	# SDK match: returns uwTick global
+0x08004cdc	FUN_08004cdc	HAL_GetTickFreq	hal_core	HIGH	# SDK match: returns uwTickFreq
+0x08004ce8	FUN_08004ce8	hal_get_tick_source	hal_core	HIGH
+0x08004cf4	FUN_08004cf4	hal_get_tick_priority	hal_core	HIGH
+0x08004d00	FUN_08004d00	HAL_IncTick	hal_core	HIGH	# SDK match: uwTick += uwTickFreq
+0x08004d10	FUN_08004d10	HAL_Init	hal_core	HIGH	# SDK match: enables prefetch, calls HAL_InitTick, on fail calls HSI config
+0x08004d38	FUN_08004d38	HAL_InitTick	hal_core	HIGH	# SDK match: configures SysTick from HCLK, sets NVIC priority for SysTick_IRQn
+
+# =====================================================================
+# === HAL RCC / CLOCK (0x08004dd4 - 0x08005108) ===
+# =====================================================================
+0x08004dd4	FUN_08004dd4	hal_rcc_config_hsi	hal_rcc	HIGH
+0x08004e10	FUN_08004e10	HAL_NVIC_EnableIRQ	hal_nvic	HIGH	# SDK match
+0x08004e30	FUN_08004e30	HAL_NVIC_ClearPendingIRQ	hal_nvic	HIGH	# SDK match
+0x08004e48	FUN_08004e48	HAL_NVIC_SetPriority	hal_nvic	HIGH	# SDK match: calls NVIC_EncodePriority
+0x08004e50	FUN_08004e50	NVIC_SystemReset	hal_nvic	HIGH	# SDK match: DSB + AIRCR write + DSB + infinite loop
+0x08004e6c	FUN_08004e6c	__HAL_FLASH_SET_LATENCY	hal_flash	HIGH	# SDK match: modifies FLASH->ACR LATENCY bits
+0x08004eb8	FUN_08004eb8	HAL_PWR_DisableWakeUpPin	hal_pwr	HIGH	# SDK match: clears EWUPx bits in PWR->CSR
+0x08004ecc	FUN_08004ecc	HAL_PWR_EnableWakeUpPin	hal_pwr	HIGH	# SDK match: sets EWUPx bits in PWR->CSR
+0x08004ee8	FUN_08004ee8	HAL_PWR_EnterSTANDBYMode	hal_pwr	HIGH	# SDK match: sets PDDS+SLEEPDEEP, WFI
+0x08004f0c	FUN_08004f0c	HAL_PWR_EnterSLEEPMode	hal_pwr	HIGH	# SDK match: configures LPSDSR, optionally WFI/WFE
+0x08004f4c	FUN_08004f4c	HAL_RCC_OscConfig	hal_rcc	HIGH	# SDK match: configures HSI/HSE/LSI/LSE/PLL
+0x08005108	FUN_08005108	HAL_RCC_ClockConfig	hal_rcc	HIGH	# SDK match: sets HCLK/PCLK1/PCLK2 prescalers, flash latency
+
+# =====================================================================
+# === HAL RCC HELPERS (0x08005260 - 0x0800534c) ===
+# =====================================================================
+0x08005260	FUN_08005260	HAL_RCC_GetOscConfig	hal_rcc	HIGH	# SDK match: reads RCC->CR/CFGR into OscConfig struct
+0x08005298	FUN_08005298	HAL_RCC_GetSysClockFreq	hal_rcc	HIGH	# SDK match: computes SYSCLK from PLL/HSI/MSI source
+0x080052c0	FUN_080052c0	HAL_RCC_GetHCLKFreq	hal_rcc	HIGH	# SDK match: SYSCLK / AHBPrescTable[HPRE]
+0x0800534c	FUN_0800534c	HAL_RCCEx_PeriphCLKConfig	hal_rcc	HIGH	# SDK match: configures USART/I2C/RTC clock sources
+
+# =====================================================================
+# === HAL IWDG (0x08005734 - 0x080057b0) ===
+# =====================================================================
+0x08005734	FUN_08005734	HAL_IWDG_Init	hal_iwdg	HIGH	# SDK match: writes KR=0xCCCC, KR=0x5555, sets PR/RLR/WINR
+0x080057b0	FUN_080057b0	HAL_IWDG_Refresh	hal_iwdg	HIGH	# SDK match: writes KR=0xAAAA
+
+# =====================================================================
+# === HAL UART (0x08005874 - 0x080059fe) ===
+# =====================================================================
+0x08005874	FUN_08005874	HAL_UART_MspInit_weak	hal_uart	HIGH	# SDK match: __weak empty stub
+0x08005876	FUN_08005876	hal_uart_check_idle	hal_uart	HIGH
+0x08005898	FUN_08005898	HAL_UART_Init	hal_uart	HIGH	# SDK match: calls MspInit, SetConfig, enable
+0x08005948	FUN_08005948	hal_uart_clock_enable	hal_uart	HIGH
+0x080059b0	FUN_080059b0	hal_uart_wait_sync_flag	hal_uart	HIGH
+0x080059e4	FUN_080059e4	hal_uart_set_baudrate_reg	hal_uart	HIGH
+0x080059f8	FUN_080059f8	hal_uart_rx_event_stub	hal_uart	HIGH
+0x080059fa	FUN_080059fa	hal_uart_wakeup_stub	hal_uart	HIGH
+0x080059fc	FUN_080059fc	hal_uart_abort_cplt_stub	hal_uart	HIGH
+0x080059fe	FUN_080059fe	UART_SetConfig	hal_uart	HIGH	# SDK match: configures BRR, CR1, CR2, CR3
+
+# =====================================================================
+# === HAL UART ADVANCED (0x08005a4a - 0x08005d74) ===
+# =====================================================================
+0x08005a4a	FUN_08005a4a	hal_uart_deinit_stub	hal_uart	HIGH
+0x08005a4c	FUN_08005a4c	UART_CheckIdleState	hal_uart	HIGH	# SDK match: waits TEACK/REACK, enables UE
+0x08005ab0	FUN_08005ab0	hal_uart_dma_callback_stub	hal_uart	HIGH
+0x08005ab4	FUN_08005ab4	UART_HandleIT	hal_uart	HIGH	# SDK match: internal ISR processing
+0x08005c38	FUN_08005c38	hal_uart_tx_isr_stub	hal_uart	HIGH
+0x08005c3a	FUN_08005c3a	hal_uart_rx_isr_stub	hal_uart	HIGH
+0x08005c3c	FUN_08005c3c	hal_uart_systick_update	hal_uart	HIGH
+0x08005c50	FUN_08005c50	hal_uart_overrun_stub	hal_uart	HIGH
+0x08005c52	FUN_08005c52	hal_uart_disable	hal_uart	HIGH
+0x08005c8e	FUN_08005c8e	hal_uart_dma_tx_half_stub	hal_uart	HIGH
+0x08005c90	FUN_08005c90	hal_uart_idle_callback_stub	hal_uart	HIGH
+0x08005c92	FUN_08005c92	hal_uart_set_baudrate	hal_uart	HIGH
+0x08005cda	FUN_08005cda	hal_uart_set_stopbits	hal_uart	HIGH
+0x08005d20	FUN_08005d20	hal_uart_dma_rx_half_stub	hal_uart	HIGH
+0x08005d22	FUN_08005d22	hal_uart_dma_rx_abort_stub	hal_uart	HIGH
+0x08005d24	FUN_08005d24	HAL_UART_DeInit	hal_uart	HIGH	# SDK match: disables UART, calls MspDeInit
+0x08005d66	FUN_08005d66	hal_uart_clear_error_flags	hal_uart	HIGH	# STM32 __HAL_UART_CLEAR_FLAG pattern, 2-byte stub adjacent to get_error_flags
+0x08005d68	FUN_08005d68	hal_uart_get_error_flags	hal_uart	HIGH
+0x08005d74	FUN_08005d74	HAL_UART_IRQHandler	hal_uart	HIGH	# SDK match: checks ISR flags, dispatches to TX/RX/Error handlers
+
+# =====================================================================
+# === HAL UART DMA / RECEIVE (0x08006064 - 0x08006368) ===
+# =====================================================================
+0x08006064	FUN_08006064	UART_Start_Receive_IT	hal_uart	HIGH	# SDK match: sets pRxBuffPtr, enables RXNEIE
+0x080060d0	FUN_080060d0	hal_uart_deinit_periph	hal_uart	HIGH
+0x0800612c	FUN_0800612c	hal_uart_init_periph	hal_uart	HIGH
+0x08006210	FUN_08006210	HAL_UART_Receive	hal_uart	HIGH	# SDK match: blocking RX polling RXNE flag
+0x08006310	FUN_08006310	HAL_UART_Receive_IT	hal_uart	HIGH	# SDK match: enables RXNEIE interrupt
+0x08006368	FUN_08006368	uart_rx_isr_callback	uart_protocol	HIGH
+
+# =====================================================================
+# === UART TX FRAME / TASKS (0x080064d0 - 0x0800678c) ===
+# =====================================================================
+0x080064d0	FUN_080064d0	HAL_UART_Transmit	hal_uart	HIGH	# SDK match: blocking TX polling TXE/TC flags
+0x0800659a	FUN_0800659a	hal_uart_idle_callback	hal_uart	HIGH	# STM32 HAL weak callback pattern, 4-byte stub
+0x0800659e	FUN_0800659e	hal_i2c_check_busy_sr	hal_i2c	HIGH
+0x080065a6	FUN_080065a6	hal_i2c_check_busy_cr	hal_i2c	HIGH
+0x080065ae	FUN_080065ae	hal_i2c_check_start_bit	hal_i2c	HIGH
+0x080065b6	FUN_080065b6	hal_i2c_check_transfer_done	hal_i2c	HIGH
+0x080065c6	FUN_080065c6	hal_rcc_set_pll_source	hal_rcc	HIGH
+0x080065d4	FUN_080065d4	hal_uart_set_prescaler	hal_uart	HIGH
+0x080065ec	FUN_080065ec	debug_print_hex	app_debug	HIGH
+0x08006630	FUN_08006630	uart_tx_frame_builder	uart_protocol	HIGH
+0x080066f4	FUN_080066f4	send_cmd_ack	uart_protocol	HIGH
+0x08006714	FUN_08006714	uart_peripheral_init	uart_protocol	HIGH
+0x0800678c	FUN_0800678c	create_all_tasks_and_timers	rtos_init	HIGH
+
+# =====================================================================
+# === PERIPHERAL INIT / GPIO SETUP (0x08006864 - 0x08006c2c) ===
+# =====================================================================
+0x08006864	FUN_08006864	gpio_and_rcc_init	app_init	HIGH
+0x080069a4	FUN_080069a4	gpio_set_gls_l_5v	gpio_ctrl	HIGH
+0x080069bc	FUN_080069bc	gpio_set_gls_r_5v	gpio_ctrl	HIGH
+0x080069d4	FUN_080069d4	uart_gls_init_with_iwdg	app_init	HIGH
+0x08006a24	FUN_08006a24	uart_debug_rx_init	app_init	HIGH
+0x08006aa4	FUN_08006aa4	uart_hall_sensor_reinit	app_init	HIGH
+0x08006b1c	FUN_08006b1c	uart_charge_ctrl_reinit	app_init	HIGH
+0x08006b96	FUN_08006b96	hal_uart_wait_tc_flag	hal_uart	HIGH
+0x08006bdc	FUN_08006bdc	hal_uart_wait_teack_flag	hal_uart	HIGH
+0x08006c2c	FUN_08006c2c	uart_debug_check_idle	hal_uart	HIGH
+
+# =====================================================================
+# === RTOS: DEFAULT TASK / MAIN LOOP (0x08007038 - 0x080082c8) ===
+# =====================================================================
+0x08007038	FUN_08007038	defaultTask_body	rtos_task	HIGH
+0x08008250	FUN_08008250	hal_rcc_periph_and_clock_init	hal_rcc	HIGH
+0x080082c6	FUN_080082c6	pwrManagerTask_stub	rtos_task	HIGH
+0x080082c8	FUN_080082c8	uart2_isr_entry	hal_uart	HIGH
+
+# =====================================================================
+# === HAL I2C DMA / STATE MACHINE (0x080082d8 - 0x08008f88) ===
+# =====================================================================
+0x080082d8	FUN_080082d8	I2C_Timing_Config	hal_i2c	HIGH	# SDK match: computes TIMINGR from clock source
+0x08008384	FUN_08008384	hal_i2c_set_clock_config	hal_i2c	HIGH
+0x080083c8	FUN_080083c8	HAL_DMA_DeInit	hal_dma	HIGH	# SDK match: resets channel config
+0x08008494	FUN_08008494	I2C_TransferConfig	hal_i2c	HIGH	# SDK match: configures CR2 SADD/NBYTES/START/STOP
+0x080084f8	FUN_080084f8	hal_i2c_check_nack	hal_i2c	HIGH
+0x0800850c	FUN_0800850c	hal_i2c_handle_error	hal_i2c	HIGH
+0x08008570	FUN_08008570	HAL_DMA_Init_ch1	hal_dma	HIGH	# SDK match: configures DMA1_Channel1 CCR/CPAR/CMAR
+0x08008620	FUN_08008620	HAL_I2C_Master_Transmit_IT	hal_i2c	HIGH	# SDK match
+0x080087b0	FUN_080087b0	HAL_DMA_Init_ch2	hal_dma	HIGH	# SDK match: configures DMA1_Channel2 CCR/CPAR/CMAR
+0x08008860	FUN_08008860	HAL_I2C_Master_Receive_IT	hal_i2c	HIGH	# SDK match
+0x080089f0	FUN_080089f0	hal_i2c_detect_addressing_mode	hal_i2c	HIGH
+0x08008bb0	FUN_08008bb0	HAL_UART_Receive_DMA	hal_uart	HIGH	# SDK match: configures DMA channel for UART RX
+0x08008cdc	FUN_08008cdc	UART_WaitOnFlagUntilTimeout	hal_uart	HIGH	# SDK match: polls USART ISR flag with HAL_GetTick timeout
+0x08008dc0	FUN_08008dc0	flash_read_with_retry	hal_flash	HIGH
+0x08008e1c	FUN_08008e1c	flash_read_verified_with_retry	hal_flash	HIGH
+0x08008e58	FUN_08008e58	flash_program_with_erase_retry	hal_flash	HIGH
+0x08008ec4	FUN_08008ec4	flash_program_verify_retry	hal_flash	HIGH
+0x08008f20	FUN_08008f20	flash_read_verified_retry_log	hal_flash	HIGH
+0x08008f88	FUN_08008f88	debug_printf	app_debug	HIGH
+
+# =====================================================================
+# === PRINTF ENGINE (0x08008fa8 - 0x080099ac) ===
+# =====================================================================
+0x08008fa8	__ARM_common_switch8	arm_switch8_helper	c_runtime	HIGH
+0x08008fc4	FUN_08008fc4	NVIC_EncodePriority	hal_nvic	HIGH	# CMSIS match
+0x08009028	FUN_08009028	vprintf_engine	c_runtime	HIGH
+0x08009450	FUN_08009450	printf_pad_spaces	c_runtime	HIGH
+0x08009470	FUN_08009470	printf_pad_fill	c_runtime	HIGH
+0x08009988	FUN_08009988	calc_uart_checksum	uart_protocol	HIGH
+0x080099ac	FUN_080099ac	hex_char_to_nibble	uart_protocol	HIGH
+
+# =====================================================================
+# === AGING STATE MACHINE (0x0800949c - 0x08009c24) ===
+# =====================================================================
+0x0800949c	FUN_0800949c	aging_running_state_machine	app_aging	HIGH
+0x08009800	FUN_08009800	gpio_write_pin	gpio_ctrl	HIGH
+0x0800982c	FUN_0800982c	update_gls_charge_pins	gpio_ctrl	HIGH
+0x080098b4	FUN_080098b4	reset_glasses_uart_and_pins	app_glasses	HIGH
+0x080099d8	FUN_080099d8	aging_poll_gls_battery	app_aging	HIGH
+0x08009ae0	FUN_08009ae0	aging_check_gls_inbox	app_aging	HIGH
+
+# =====================================================================
+# === CHIP INIT / SELF CHECK (0x08009c0c - 0x08009e8c) ===
+# =====================================================================
+0x08009c0c	FUN_08009c0c	init_2217_with_retry	app_init	HIGH
+0x08009c24	FUN_08009c24	self_check_2217	app_init	HIGH
+0x08009cd4	FUN_08009cd4	yhm2510_read_battery_pct	i2c_periph	HIGH
+0x08009d10	FUN_08009d10	yhm2510_read_voltage	i2c_periph	HIGH
+0x08009d30	FUN_08009d30	yhm2510_read_temperature	i2c_periph	HIGH
+0x08009d98	FUN_08009d98	yhm2510_self_check	i2c_periph	HIGH
+0x08009e08	FUN_08009e08	yhm2510_read_remain_cap_stub	i2c_periph	HIGH
+0x08009e36	FUN_08009e36	yhm2510_read_full_cap	i2c_periph	HIGH
+0x08009e5e	FUN_08009e5e	yhm2510_init_and_validate	i2c_yhm2510	HIGH
+0x08009e8c	FUN_08009e8c	yhm2510_read_reg_16bit	i2c_yhm2510	HIGH
+
+# =====================================================================
+# === YHM2510 I2C EXTENDED / BIT-BANG I2C (0x08009f02 - 0x08009fe2) ===
+# =====================================================================
+0x08009f02	FUN_08009f02	yhm2510_soft_reset	i2c_yhm2510	HIGH
+0x08009f3c	FUN_08009f3c	yhm2510_read_reg_byte	i2c_yhm2510	HIGH
+0x08009f48	FUN_08009f48	yhm2510_read_reg_bytes	i2c_yhm2510	HIGH
+0x08009f52	FUN_08009f52	yhm2510_write_reg_byte	i2c_yhm2510	HIGH
+0x08009f60	FUN_08009f60	yhm2510_delay_ms	i2c_yhm2510	HIGH
+0x08009f7c	FUN_08009f7c	i2c_bus1_write_byte	i2c_periph	HIGH
+0x08009f8e	FUN_08009f8e	i2c_bus2_write_byte	i2c_periph	HIGH
+0x08009fa0	FUN_08009fa0	i2c_bus1_set_direction	i2c_periph	HIGH
+0x08009fb2	FUN_08009fb2	i2c_bus2_set_direction	i2c_periph	HIGH
+0x08009fc4	FUN_08009fc4	i2c_bus1_set_addr_7bit	i2c_periph	HIGH
+0x08009fe2	FUN_08009fe2	i2c_bus2_set_addr_7bit	i2c_periph	HIGH
+
+# =====================================================================
+# === BIT-BANG I2C BUS OPERATIONS (0x0800a000 - 0x0800a38c) ===
+# =====================================================================
+0x0800a000	FUN_0800a000	i2c_bus1_set_addr_10bit	i2c_periph	HIGH
+0x0800a01e	FUN_0800a01e	i2c_bus2_set_addr_10bit	i2c_periph	HIGH
+0x0800a03c	FUN_0800a03c	i2c_bus1_generate_stop	i2c_periph	HIGH
+0x0800a062	FUN_0800a062	i2c_bus2_generate_stop	i2c_periph	HIGH
+0x0800a088	FUN_0800a088	i2c_bus1_enable_ack	i2c_periph	HIGH
+0x0800a0ba	FUN_0800a0ba	i2c_bus1_set_transfer_size	i2c_periph	HIGH
+0x0800a0dc	FUN_0800a0dc	i2c_bus2_set_transfer_size	i2c_periph	HIGH
+0x0800a0fe	FUN_0800a0fe	i2c_bus1_set_nbytes	i2c_periph	HIGH
+0x0800a128	FUN_0800a128	i2c_bus2_enable_start	i2c_periph	HIGH
+0x0800a170	FUN_0800a170	uart_rx_buffer_reset	uart_protocol	HIGH
+0x0800a1b4	FUN_0800a1b4	i2c_bb1_read_sda	i2c_bitbang	HIGH
+0x0800a1c4	FUN_0800a1c4	i2c_bb2_read_sda	i2c_bitbang	HIGH
+0x0800a1d2	FUN_0800a1d2	int16_sign_extend	c_runtime	HIGH
+0x0800a1ea	FUN_0800a1ea	i2c_bb_start_condition	i2c_bitbang	HIGH
+0x0800a220	FUN_0800a220	i2c_bb_bit_delay	i2c_bitbang	HIGH
+0x0800a22c	FUN_0800a22c	i2c_bb_stop_condition	i2c_bitbang	HIGH
+0x0800a24e	FUN_0800a24e	i2c_bb_read_byte	i2c_bitbang	HIGH
+0x0800a284	FUN_0800a284	i2c_bb_write_byte	i2c_bitbang	HIGH
+0x0800a2cc	FUN_0800a2cc	i2c_bb_send_nack	i2c_bitbang	HIGH
+0x0800a2f4	FUN_0800a2f4	i2c_bb_send_ack	i2c_bitbang	HIGH
+0x0800a312	FUN_0800a312	i2c_bb_check_ack	i2c_bitbang	HIGH
+0x0800a340	FUN_0800a340	i2c_bb_read_sda_pin	i2c_bitbang	HIGH
+0x0800a368	FUN_0800a368	i2c_bb_write_scl	i2c_bitbang	HIGH
+0x0800a38c	FUN_0800a38c	i2c_bb_write_sda	i2c_bitbang	HIGH
+
+# =====================================================================
+# === CMSIS-RTOS2 WRAPPERS (0x0800a3b0 - 0x0800a908) ===
+# =====================================================================
+0x0800a3b0	FUN_0800a3b0	system_init_main	startup	HIGH
+0x0800a5ac	FUN_0800a5ac	osKernelInitialize	rtos_wrapper	HIGH
+0x0800a5ba	FUN_0800a5ba	osKernelGetTickFreq	rtos_wrapper	HIGH
+0x0800a5c8	FUN_0800a5c8	osDelay	rtos_wrapper	HIGH
+0x0800a5ea	FUN_0800a5ea	osEventFlagsSet	rtos_wrapper	HIGH
+0x0800a62e	FUN_0800a62e	osEventFlagsWait	rtos_wrapper	HIGH
+0x0800a64e	FUN_0800a64e	osMessageQueueNew	rtos_wrapper	HIGH
+0x0800a6a0	FUN_0800a6a0	osTimerStart	rtos_wrapper	HIGH
+0x0800a6f0	FUN_0800a6f0	osKernelStart	rtos_wrapper	HIGH
+0x0800a718	FUN_0800a718	osKernelRun	rtos_wrapper	HIGH
+0x0800a754	FUN_0800a754	osTimerNew	rtos_wrapper	HIGH
+0x0800a818	FUN_0800a818	osTimerStop	rtos_wrapper	HIGH
+0x0800a83c	FUN_0800a83c	osKernelStartScheduler	rtos_wrapper	HIGH
+0x0800a860	FUN_0800a860	osThreadNew	rtos_wrapper	HIGH
+0x0800a908	FUN_0800a908	osTimerChangePeriod	rtos_wrapper	HIGH
+
+# =====================================================================
+# === FREERTOS KERNEL INTERNALS (0x0800a93e - 0x0800b490) ===
+# =====================================================================
+0x0800a93e	FUN_0800a93e	xTimerStop	freertos_kernel	HIGH
+0x0800a988	FUN_0800a988	xTimerIsTimerActive	freertos_kernel	HIGH
+0x0800a9c8	FUN_0800a9c8	pcTimerGetName	freertos_kernel	HIGH
+0x0800aa20	FUN_0800aa20	xTimerGenericCommand	freertos_kernel	HIGH
+0x0800aa9c	FUN_0800aa9c	xTaskGetCurrentTaskHandle	freertos_kernel	HIGH
+0x0800aafc	FUN_0800aafc	xTaskGetSchedulerState	freertos_kernel	HIGH
+0x0800ab3c	FUN_0800ab3c	uxTaskPriorityGet	freertos_kernel	HIGH
+0x0800ab60	FUN_0800ab60	vTaskPrioritySet	freertos_kernel	HIGH
+0x0800abd0	FUN_0800abd0	vTaskSuspend	freertos_kernel	HIGH
+0x0800ac00	FUN_0800ac00	vTaskResume	freertos_kernel	HIGH
+0x0800ac24	FUN_0800ac24	vTaskDelete	freertos_kernel	HIGH
+0x0800ac8c	FUN_0800ac8c	xTaskGetTickCount	freertos_kernel	HIGH
+0x0800acae	FUN_0800acae	vTaskDelayUntil	freertos_kernel	HIGH
+0x0800ad48	FUN_0800ad48	vTaskDelay	freertos_kernel	HIGH
+0x0800ad88	FUN_0800ad88	xTaskNotifyGive	freertos_kernel	HIGH
+0x0800ade4	FUN_0800ade4	ulTaskNotifyTake	freertos_kernel	HIGH
+0x0800ae3c	FUN_0800ae3c	xEventGroupSetBits	freertos_kernel	HIGH
+0x0800ae7c	FUN_0800ae7c	xEventGroupClearBits	freertos_kernel	HIGH
+0x0800ae98	FUN_0800ae98	xEventGroupGetBitsFromISR	freertos_kernel	HIGH
+0x0800aeb8	FUN_0800aeb8	xEventGroupWaitBits	freertos_kernel	HIGH
+0x0800af14	FUN_0800af14	xQueueGenericCreate	freertos_kernel	HIGH
+0x0800b014	FUN_0800b014	xQueueSend	freertos_kernel	HIGH
+0x0800b078	FUN_0800b078	xQueueReceive	freertos_kernel	HIGH
+0x0800b09c	FUN_0800b09c	xQueuePeek	freertos_kernel	HIGH
+0x0800b0c8	FUN_0800b0c8	xTaskCreate	freertos_kernel	HIGH
+0x0800b148	FUN_0800b148	xTaskCreateStatic	freertos_kernel	HIGH
+0x0800b18c	FUN_0800b18c	xTimerCreate	freertos_kernel	HIGH
+0x0800b200	FUN_0800b200	xTimerCreateStatic	freertos_kernel	HIGH
+0x0800b2bc	FUN_0800b2bc	xSemaphoreCreateMutex	freertos_kernel	HIGH
+0x0800b2d8	FUN_0800b2d8	xSemaphoreCreateBinary	freertos_kernel	HIGH
+0x0800b2f8	FUN_0800b2f8	vPortSVCHandler	freertos_port	HIGH
+0x0800b354	FUN_0800b354	xPortPendSVHandler	freertos_port	HIGH
+0x0800b3c4	FUN_0800b3c4	i2c_bus1_read_byte	i2c_periph	HIGH
+0x0800b3ee	FUN_0800b3ee	i2c_bus2_read_byte	i2c_periph	HIGH
+0x0800b418	FUN_0800b418	vPortStartFirstTask	freertos_port	HIGH
+0x0800b490	FUN_0800b490	HAL_UART_Transmit_DMA	hal_uart	HIGH	# SDK match: configures DMA channel for UART TX
+
+# =====================================================================
+# === GPIO CHANNEL CONTROL (0x0800b85c - 0x0800b98c) ===
+# =====================================================================
+0x0800b85c	FUN_0800b85c	gpio_ch1_disable_and_reset	hal_gpio	HIGH
+0x0800b87c	FUN_0800b87c	gpio_ch2_disable_and_reset	hal_gpio	HIGH
+0x0800b89c	FUN_0800b89c	gpio_ch1_set_output	hal_gpio	HIGH
+0x0800b8bc	FUN_0800b8bc	gpio_ch2_set_output	hal_gpio	HIGH
+0x0800b8dc	FUN_0800b8dc	gpio_ch1_set_bsrr	hal_gpio	HIGH
+0x0800b8f0	FUN_0800b8f0	gpio_ch2_set_bsrr	hal_gpio	HIGH
+0x0800b900	FUN_0800b900	gpio_ch1_clear_brr	hal_gpio	HIGH
+0x0800b914	FUN_0800b914	gpio_ch2_clear_brr	hal_gpio	HIGH
+0x0800b924	FUN_0800b924	gpio_ch3_set_output	hal_gpio	HIGH
+0x0800b944	FUN_0800b944	gpio_ch4_set_output	hal_gpio	HIGH
+0x0800b964	FUN_0800b964	gls_l_toggle_5v_on_aging	gpio_ctrl	HIGH
+0x0800b98c	FUN_0800b98c	restart_led_timer_1s	app_led	HIGH
+
+# =====================================================================
+# === FREERTOS TIMER SERVICE (0x0800bc8c - 0x0800bef8) ===
+# =====================================================================
+0x0800bc8c	FUN_0800bc8c	check_debug_prefix_de	uart_protocol	HIGH
+0x0800bca8	FUN_0800bca8	gpio_gls_l_charge_start	gpio_ctrl	HIGH
+0x0800bcd2	FUN_0800bcd2	gpio_gls_l_reset_pins	gpio_ctrl	HIGH
+0x0800bcf6	FUN_0800bcf6	gpio_gls_r_charge_start	gpio_ctrl	HIGH
+0x0800bd20	FUN_0800bd20	gpio_gls_r_reset_pins	gpio_ctrl	HIGH
+0x0800bd44	FUN_0800bd44	freertos_list_remove_item	freertos_kernel	HIGH
+0x0800bd6c	FUN_0800bd6c	xTimerGetTimerDaemonTaskHandle	freertos_kernel	HIGH	# was: freertos_get_timer_queue_params
+0x0800bd84	FUN_0800bd84	xTaskGetIdleTaskHandle	freertos_kernel	HIGH	# was: freertos_get_idle_task_params
+0x0800bdac	FUN_0800bdac	freertos_list_init	freertos_kernel	HIGH
+0x0800bdc2	FUN_0800bdc2	vListInitialiseItem	freertos_kernel	HIGH	# was: freertos_list_item_init
+0x0800bdc8	FUN_0800bdc8	freertos_list_insert	freertos_kernel	HIGH
+0x0800bdfa	FUN_0800bdfa	freertos_list_insert_end	freertos_kernel	HIGH
+0x0800be14	FUN_0800be14	freertos_list_remove	freertos_kernel	HIGH
+0x0800be2c	FUN_0800be2c	freertos_queue_create_static	freertos_kernel	HIGH
+0x0800be48	FUN_0800be48	freertos_queue_generic_send	freertos_kernel	HIGH
+0x0800be90	FUN_0800be90	freertos_queue_receive_internal	freertos_kernel	HIGH
+0x0800beb8	FUN_0800beb8	freertos_queue_peek_internal	freertos_kernel	HIGH
+0x0800bed0	FUN_0800bed0	freertos_queue_spaces_available	freertos_kernel	HIGH
+0x0800bef8	FUN_0800bef8	freertos_queue_send_from_isr	freertos_kernel	HIGH
+
+# =====================================================================
+# === FREERTOS SCHEDULER (0x0800bf40 - 0x0800c198) ===
+# =====================================================================
+0x0800bf40	FUN_0800bf40	freertos_scheduler_suspend	freertos_kernel	HIGH
+0x0800bf74	FUN_0800bf74	freertos_scheduler_resume	freertos_kernel	HIGH
+0x0800bf84	FUN_0800bf84	freertos_get_tick_count	freertos_kernel	HIGH
+0x0800bf90	FUN_0800bf90	freertos_increment_tick	freertos_kernel	HIGH
+0x0800bfb4	FUN_0800bfb4	freertos_task_switch_context	freertos_kernel	HIGH
+0x0800bfe4	FUN_0800bfe4	freertos_task_create_internal	freertos_kernel	HIGH
+0x0800c040	FUN_0800c040	freertos_task_init_tcb	freertos_kernel	HIGH
+0x0800c09c	FUN_0800c09c	freertos_task_add_to_ready	freertos_kernel	HIGH
+0x0800c110	FUN_0800c110	freertos_start_scheduler	freertos_kernel	HIGH
+0x0800c198	FUN_0800c198	freertos_end_scheduler_stub	freertos_kernel	HIGH
+
+# =====================================================================
+# === FREERTOS TASK MANAGEMENT (0x0800c1a8 - 0x0800c3e8) ===
+# =====================================================================
+0x0800c1a8	FUN_0800c1a8	freertos_task_suspend_internal	freertos_kernel	HIGH
+0x0800c210	FUN_0800c210	i2c_bus1_read_byte_ll	i2c_periph	HIGH
+0x0800c22a	FUN_0800c22a	i2c_bus2_read_byte_ll	i2c_periph	HIGH
+0x0800c244	FUN_0800c244	i2c_bus1_wait_rxne	i2c_periph	HIGH
+0x0800c254	FUN_0800c254	i2c_bus2_wait_rxne	i2c_periph	HIGH
+0x0800c264	FUN_0800c264	freertos_task_resume_internal	freertos_kernel	HIGH
+0x0800c290	FUN_0800c290	freertos_task_resume_from_isr	freertos_kernel	HIGH
+0x0800c2a4	FUN_0800c2a4	freertos_port_yield	freertos_port	HIGH
+0x0800c2c2	FUN_0800c2c2	freertos_port_disable_interrupts	freertos_port	HIGH
+0x0800c2e4	FUN_0800c2e4	freertos_port_enable_interrupts	freertos_port	HIGH
+0x0800c2f6	FUN_0800c2f6	freertos_timer_daemon_task	freertos_kernel	HIGH
+0x0800c380	FUN_0800c380	freertos_timer_process_expired	freertos_kernel	HIGH
+0x0800c394	FUN_0800c394	freertos_timer_switch_lists	freertos_kernel	HIGH
+0x0800c3c4	FUN_0800c3c4	freertos_timer_reload	freertos_kernel	HIGH
+0x0800c3e8	FUN_0800c3e8	freertos_timer_process_command	freertos_kernel	HIGH
+
+# =====================================================================
+# === FREERTOS EVENT / NOTIFY (0x0800c42e - 0x0800c864) ===
+# =====================================================================
+0x0800c42e	FUN_0800c42e	freertos_event_group_wait	freertos_kernel	HIGH
+0x0800c49e	FUN_0800c49e	freertos_event_group_set	freertos_kernel	HIGH
+0x0800c5c0	FUN_0800c5c0	freertos_event_group_clear	freertos_kernel	HIGH
+0x0800c652	FUN_0800c652	freertos_task_notify_wait	freertos_kernel	HIGH
+0x0800c760	FUN_0800c760	freertos_task_notify_give	freertos_kernel	HIGH
+0x0800c7c0	FUN_0800c7c0	freertos_task_notify_take	freertos_kernel	HIGH
+0x0800c81e	FUN_0800c81e	freertos_task_abort_delay	freertos_kernel	HIGH
+0x0800c864	FUN_0800c864	freertos_idle_task	freertos_kernel	HIGH
+0x0800c884	FUN_0800c884	freertos_idle_hook_stub	freertos_kernel	HIGH
+
+# =====================================================================
+# === FREERTOS MEMORY / PORT (0x0800c890 - 0x0800cbfc) ===
+# =====================================================================
+0x0800c890	FUN_0800c890	freertos_heap_alloc	freertos_kernel	HIGH
+0x0800c950	FUN_0800c950	freertos_heap_free	freertos_kernel	HIGH
+0x0800c9b8	FUN_0800c9b8	freertos_heap_init	freertos_kernel	HIGH
+0x0800ca24	FUN_0800ca24	freertos_port_init_stack	freertos_port	HIGH
+0x0800cad8	FUN_0800cad8	freertos_port_enter_critical	freertos_port	HIGH
+0x0800cb0a	FUN_0800cb0a	freertos_port_exit_critical	freertos_port	HIGH
+0x0800cb38	FUN_0800cb38	freertos_port_systick_handler	freertos_port	HIGH
+0x0800cb98	FUN_0800cb98	freertos_port_setup_timer	freertos_port	HIGH
+0x0800cbfc	FUN_0800cbfc	freertos_port_suppress_ticks	freertos_port	HIGH
+0x0800cc24	FUN_0800cc24	vPortSuppressTicksAndSleep	freertos_port	HIGH	# was: freertos_port_idle_sleep
+
+# =====================================================================
+# === GLASSES IR DETECTION (0x0800cc4c - 0x0800d068) ===
+# =====================================================================
+0x0800cc4c	FUN_0800cc4c	glasses_detect_ir_scan	app_glasses	HIGH
+0x0800cf6c	FUN_0800cf6c	gpio_disable_all_charge_output	app_charging	HIGH
+0x0800cf90	FUN_0800cf90	init_pmic_gpio_and_yhm2510	app_init	HIGH
+0x0800d030	FUN_0800d030	dump_yhm2510_regs	app_debug	HIGH
+0x0800d068	FUN_0800d068	backup_yhm2510_regs	app_debug	HIGH

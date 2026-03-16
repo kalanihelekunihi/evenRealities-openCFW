@@ -1,0 +1,78 @@
+address	old_name	new_name	module	confidence	evidence
+0x0043d9da	lvgl_propagated_004fe372_wrapper	lv_obj_get_style_pad_top	lvgl	HIGH	calls lv_obj_get_style_prop with prop=0x10 (LV_STYLE_PAD_TOP in LVGL v9.3)
+0x004fe390	lvgl_neighbor_004fe3b8_wrapper_wrapper	nema_reg_write_priority	lvgl	MEDIUM	writes value shifted left by 4 to hardware register base; priority nibble pattern
+0x004ff176	lvgl_helper_004fec34_wrapper	nema_cl_submit	lvgl	MEDIUM	sets flag byte to 1 then calls nema_cl_process (FUN_004fec34); NemaGFX command list submit
+0x00449c74	lvgl_neighbor_00449c80_wrapper_wrapper	lv_style_prop_mark_set	lvgl	MEDIUM	sets byte from 0 to 1; style property initialization marker in lv_style context
+0x004ce042	lvgl_page_callee_e042	nema_multi_write_wrapper	lvgl	MEDIUM	calls lv_multi_param_handler_16 (FUN_004cdfce) with DAT + params; NemaGFX multi-register write
+0x004ce052	lvgl_page_callee_e052	nema_invalidate_all	lvgl	MEDIUM	calls lv_cache_invalidate_2 (FUN_004cdf44); invalidates entire GPU cache
+0x004ce05c	lvgl_page_callee_e05c	nema_set_cache_mode	lvgl	MEDIUM	checks init flag, calls lv_cache_invalidate (FUN_004cdf24) with encoded mode bits
+0x004ce07c	lvgl_page_callee_e07c	nema_set_cache_regions	lvgl	MEDIUM	iterates region array, validates indices (max 7), calls lv_cache_line_write per region
+0x004ce106	lvgl_page_callee_e106	nema_set_cache_entries	lvgl	MEDIUM	validates count < 0x11, packs entry fields, calls nema_multi_write_wrapper (FUN_004ce042)
+0x004ce1c0	lvgl_page_callee_e1c0	lv_freertos_thread_delete	lvgl	MEDIUM	calls FUN_00452d3a (vTaskDelete) on thread handle at param+8
+0x004ce294	lvgl_page_callee_e294	lv_freertos_thread_join	lvgl	MEDIUM	calls lv_freertos_mutex_ensure_init, reads/clears thread handle, calls FUN_00453ed4 (task notify)
+0x004ce2cc	lvgl_page_callee_e2cc	lv_freertos_cond_init	lvgl	MEDIUM	zeroes 2-field struct; condition variable initialization
+0x004ce2d8	lvgl_page_callee_e2d8	lv_freertos_cond_signal	lvgl	MEDIUM	calls function pointer [0] with param [1], then vTaskDelete(0); condition signal+cleanup
+0x004ce33c	lvgl_page_callee_e33c	lv_freertos_mutex_ensure_init	lvgl	MEDIUM	double-checked locking: enter critical, check *param==0, call prvMutexInit if needed
+0x004ce35c	lvgl_page_callee_e35c	lv_freertos_once_init	lvgl	MEDIUM	sets 3-field struct to {1, 0, 0}; once-initialization structure
+0x004ce36a	lvgl_page_callee_e36a	lv_freertos_once_ensure_init	lvgl	MEDIUM	double-checked locking: enter critical, check *param==0, call lv_freertos_once_init if needed
+0x004ce694	lvgl_page_callee_e694	lv_image_cache_has_data	lvgl	MEDIUM	calls lv_cache_entry_has_data (FUN_004cec74) on global image cache pointer at offset 0x134
+0x004ce6a2	lvgl_page_callee_e6a2	lv_image_cache_entry_compare	lvgl	MEDIUM	comparator: checks type byte equality first, then compares by type (0=uint, 1=string via FUN_00452a4a)
+0x004ce704	lvgl_page_callee_e704	lv_image_cache_entry_compare_wrapper	lvgl	MEDIUM	dereferences two struct pointers and calls lv_image_cache_entry_compare (FUN_004ce6a2)
+0x004ce714	lvgl_page_callee_e714	lv_image_cache_entry_free	lvgl	MEDIUM	checks flag byte=0x10 via FUN_004845f8, calls FUN_004840d2; if type==1, frees string via lv_free
+0x004ce7aa	lvgl_page_callee_e7aa	lv_image_decoder_cache_entry_compare	lvgl	MEDIUM	identical comparator logic to FUN_004ce6a2; used for image decoder cache (at offset 0x138)
+0x004ce80c	lvgl_page_callee_e80c	lv_image_decoder_cache_entry_compare_wrapper	lvgl	MEDIUM	dereferences two struct pointers and calls FUN_004ce7aa; wrapper for decoder cache comparator
+0x004ce81c	lvgl_page_callee_e81c	lv_image_decoder_cache_entry_free	lvgl	MEDIUM	if type byte==1, frees string via lv_free; simplified destructor for decoder cache entries
+0x0047b5b8	lvgl_page_callee_b5b8	lv_memzero	lvgl	HIGH	calls memset(ptr, 0, size) via FUN_004529d2; exact LVGL v9.3 lv_memzero implementation
+0x0047b648	lvgl_page_callee_b648	lv_style_init	lvgl	HIGH	calls lv_memzero(style, 0xc); zeroes 12-byte lv_style_t struct; matches LVGL v9.3 lv_style_init
+0x0047b9bc	lvgl_page_callee_b9bc	_lv_ll_init	lvgl	HIGH	sets n_size=(param+3)&~3, head=0, tail=0; exact lv_ll_t initialization pattern from LVGL v9.3
+0x0047b9ce	lvgl_page_callee_b9ce	_lv_ll_ins_head	lvgl	HIGH	mallocs (n_size+8), links at head with prev/next pointers; linked list insert-at-head
+0x0047baca	lvgl_page_callee_baca	_lv_ll_remove	lvgl	HIGH	unlinks node by updating prev/next of neighbors; handles head/tail edge cases
+0x0047bb94	lvgl_page_callee_bb94	_lv_ll_get_head	lvgl	HIGH	returns list->head at offset+4; null-safe
+0x0047bba0	lvgl_page_callee_bba0	_lv_ll_get_tail	lvgl	HIGH	returns list->tail at offset+8; null-safe
+0x0047bbac	lvgl_page_callee_bbac	_lv_ll_get_next	lvgl	HIGH	returns *(base + node + 4); linked list next-node accessor
+0x0047bbb6	lvgl_page_callee_bbb6	_lv_ll_get_prev	lvgl	HIGH	returns *(base + node); linked list prev-node accessor
+0x0047bd08	lvgl_page_callee_bd08	lv_color_mix	lvgl	HIGH	per-channel (R,G,B) alpha blending: out = (c1*a + c2*(255-a)) >> 8; exact LVGL pattern
+0x0047bdb2	lvgl_page_callee_bdb2	lv_color_mix_premult	lvgl	MEDIUM	premultiplied alpha color mixing; handles opa thresholds 3/0xFD; extends lv_color_mix
+0x0047be66	lvgl_page_callee_be66	lv_theme_get_color_primary	lvgl	MEDIUM	calls lv_obj_helper_9, falls back to lv_palette_main(0x11=GREY); theme primary color getter
+0x0047beec	lvgl_page_callee_beec	lv_noop	lvgl	MEDIUM	empty function body (just returns); no-op stub/placeholder
+0x0047bf28	lvgl_page_callee_bf28	_lv_vsnprintf_field	lvgl	MEDIUM	printf field formatter: handles padding (left/right align), outputs chars via callback
+0x0047bf96	lvgl_page_callee_bf96	_lv_vsnprintf_int	lvgl	MEDIUM	integer-to-string with 0x/0X/0b prefix, sign (+/-/space), zero-padding; printf integer formatter
+0x00440670	module_callee_00440318	lv_obj_has_group_editable_parent	lvgl	MEDIUM	walks parent chain via offset+4, checks class flags at offset+0x32 bits 10-11 == 2 (editable)
+0x0044a108	module_callee_0044AE30	lv_obj_report_style_change	lvgl	MEDIUM	iterates all displays and their objects calling lv_obj_style_apply on each; style change broadcast
+0x0044ede8	module_callee_00481556_ede8	lv_anim_path_calc	lvgl	MEDIUM	calls path callback (offset+0x34), interpolates start(+0x24) to end(+0x2c) with result >> 10
+0x0045af06	module_callee_0045D7D2	lv_obj_set_style_transform_scale	lvgl	HIGH	calls lv_obj_set_style_transform_scale_x AND lv_obj_set_style_transform_scale_y; uniform scale setter
+0x0047cff8	module_callee_0046D18E_cff8	lv_mem_pool_create	lvgl	MEDIUM	calls tlsf_block_validate + malloc; creates TLSF memory pool with given size/alignment
+0x0047d4f6	module_callee_0047D8B8	lv_draw_dispatch	lvgl	MEDIUM	checks draw unit count==1 → lv_draw_buf_create; else searches task list for available draw task
+0x00482d84	module_callee_00482E92	lv_memzero_2	lvgl	HIGH	calls memset(ptr, 0, size) via FUN_004529d2; second instance of lv_memzero (different link address)
+0x004fe4aa	module_callee_004FEC34	nema_cl_wait	lvgl	MEDIUM	polls global counter until >= param; waits for NemaGFX command list completion
+0x004ffa5a	module_callee_0050C884	nema_get_context	lvgl	MEDIUM	returns global NemaGFX context pointer (DAT_004ffb34)
+0x00514ff4	module_callee_0053A90C_4ff4	lv_freetype_calc_glyph_scale	lvgl	MEDIUM	float math: ceilf(10/(h/w)), roundf, fixed-point multiply; glyph metrics scale calculator
+0x0053a9d8	lvgl_helper_a9d8	roundf	lvgl	HIGH	IEEE 754 round-to-nearest-even wrapper; calls __ieee754_roundf then indirect jump
+0x0053aa10	module_callee_00514FF4	ceilf	lvgl	HIGH	IEEE 754 ceiling wrapper; calls __ieee754_ceilf (FUN_0053aa20) then indirect jump
+0x0053aa20	module_callee_0053AA10	__ieee754_ceilf	lvgl	HIGH	IEEE 754 single-precision ceiling: extracts exponent, masks fractional bits, rounds up
+0x004fe4c0	lvgl_neighbor_004fe4c0_wrapper	nema_reg_read	lvgl	MEDIUM	returns *(offset + *nema_base); NemaGFX hardware register read
+0x004fe4ca	lvgl_neighbor_004fe4ca_wrapper	nema_reg_write	lvgl	MEDIUM	writes *(offset + *nema_base) = value; NemaGFX hardware register write
+0x00440c32	lvgl_helper_00440c32	lv_color32_make	lvgl	MEDIUM	CONCAT13(alpha_byte, rgb_3bytes) = packs RGB+A into 32-bit color value
+0x00449d90	lvgl_helper_00449d90	lv_obj_get_style_recolor	lvgl	HIGH	calls lv_obj_get_style_prop with prop=0x78 (LV_STYLE_RECOLOR in LVGL v9.3)
+0x00449d9e	lvgl_helper_00449d9e	lv_obj_get_style_recolor_opa	lvgl	HIGH	calls lv_obj_get_style_prop with prop=0x79 (LV_STYLE_RECOLOR_OPA in LVGL v9.3)
+0x0044a93a	lvgl_helper_0044a93a	lv_obj_get_opa_recursive	lvgl	MEDIUM	walks parent chain multiplying opacities; handles threshold 3/0xFD; effective opa calculator
+0x0047c20c	lvgl_helper_0047c20c	_lv_vsnprintf_float_fixed	lvgl	MEDIUM	fixed-point float formatting with decimal point; handles NaN/Inf/precision; printf %f handler
+0x0048483e	lvgl_helper_0048483e	lv_obj_get_style_margin_top	lvgl	HIGH	calls lv_obj_get_style_prop with prop=0x18 (LV_STYLE_MARGIN_TOP in LVGL v9.3)
+0x004b76f4	lvgl_helper_004b76f4	nema_set_dirty_region	lvgl	MEDIUM	ORs bits into GPU status register at base+0x20; NemaGFX dirty flag setter
+0x004fe5f0	lvgl_helper_004fe5f0	nema_buffer_alloc	lvgl	MEDIUM	calls TLSF allocation (FUN_0047d03c) on global pool DAT_004fe6f4; NemaGFX buffer allocator
+0x004fec34	lvgl_helper_004fec34	nema_cl_process	lvgl	MEDIUM	NemaGFX command list processor: handles ring/linear modes, calls nema_cl_command, waits for GPU
+0x004ffab2	lvgl_helper_004ffab2	nema_get_render_context	lvgl	MEDIUM	returns global NemaGFX render context pointer (DAT_004ffb38)
+0x0050e316	lvgl_helper_0050e316	nema_cl_add_cmd	lvgl	MEDIUM	writes to circular command buffer, increments write pointer with wraparound, signals GPU
+0x005b36ac	lvgl_helper_005b36ac	_lv_grid_calc_cell_area	lvgl	MEDIUM	sums column/row sizes, applies padding/margins; computes grid cell bounding area
+0x0047c508	lvgl_propagated_0047c508	_lv_vsnprintf_float_exp	lvgl	MEDIUM	scientific notation float format; computes exponent via log10; printf %e/%g handler
+0x004fe372	lvgl_propagated_004fe372	nema_irq_set	lvgl	MEDIUM	sets bit in IRQ enable register (offset+0x20 of base array); NemaGFX interrupt configuration
+0x005af93a	lvgl_propagated_005af93a	lv_menu_get_cur_sidebar_page	lvgl	HIGH	assertion string contains "lv_menu_get_cur_sidebar_page"; returns obj->offset_0x48
+0x005b151a	lvgl_propagated_005b151a	lv_slider_get_mode	lvgl	HIGH	calls lv_bar_get_mode, maps result: 1→1(SYMMETRICAL), 2→2(RANGE), else→0(NORMAL)
+0x00449c80	lvgl_neighbor_00449c80_wrapper	lv_style_is_const_2	lvgl	MEDIUM	checks if byte at offset+8 == 0xFF; duplicate of lv_style_is_const (different text segment)
+0x00451184	lvgl_neighbor_00451184_wrapper	lv_display_get_default	lvgl	MEDIUM	returns global display pointer at offset+0x50; used before iterating displays for event handling
+0x004ffab8	lvgl_neighbor_004ffab8_wrapper	nema_set_blend_mode	lvgl	MEDIUM	writes byte to display context at offset 0x7C; NemaGFX blend mode configuration
+0x004ffac4	lvgl_neighbor_004ffac4_wrapper	nema_set_display_config	lvgl	MEDIUM	writes word to display context at offset 0x2D8; NemaGFX display configuration parameter
+0x004ffae0	lvgl_neighbor_004ffae0_wrapper	nema_set_dirty_flags	lvgl	MEDIUM	ORs bits into display context at offset 0x80; NemaGFX dirty/update flags
+0x004ffaf0	lvgl_neighbor_004ffaf0_wrapper	nema_set_display_param	lvgl	MEDIUM	writes word to display context at offset 0x84; NemaGFX display parameter setter
+0x0050e750	lvgl_neighbor_0050e750_wrapper	nema_float_to_fix	lvgl	MEDIUM	converts float to fixed-point: (int)(f * SCALE + 0.5); NemaGFX coordinate conversion
+0x004fe354	lvgl_propagated_004fe372_wrapper	nema_irq_enable	lvgl	MEDIUM	sets bit in IRQ enable register array (different base from FUN_004fe372); NemaGFX IRQ enable

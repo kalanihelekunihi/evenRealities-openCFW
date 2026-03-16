@@ -1,0 +1,378 @@
+# GX8002B Audio Codec Firmware — Handler Map
+# Chip: GX8002B (C-SKY CK803S DSP), NationalChip Co., Ltd
+# Framework: LVP (Low-Power Voice Preprocess)
+# Analysis method: String extraction only (C-SKY CK803S unsupported by Ghidra/rizin)
+# Cross-referenced with main firmware strings ([codec.host], [codec.dfu] at drv_gx8002b.c)
+
+
+# ===========================================================================
+# 1. LVP APPLICATION LIFECYCLE HANDLERS
+#    Module-based suspend/resume lifecycle (bare-metal, no RTOS)
+# ===========================================================================
+
+_LvpAppSuspend (string at 0x0004a9b4, also 0x00013390)
+  Trigger: System entering low-power state (IDLE mode entry)
+  Action: Suspends the LVP core framework — stops audio capture pipeline,
+          halts NPU inference, saves state for resume
+  Lifecycle: Called before IDLE mode entry
+  Log: Printed as suspend/resume function name for debugging
+
+_LvpAppResume (string at 0x0004a9c4, also 0x0001339f)
+  Trigger: System exiting low-power state (wakeup event)
+  Action: Resumes LVP core — restarts audio capture, reinitializes NPU,
+          restores audio pipeline state
+  Lifecycle: Called after wakeup from IDLE mode
+
+SampleAppSuspend (string at 0x0004a9e4, also 0x000133b8, 0x0004aaac)
+  Trigger: Audio output application entering suspend
+  Action: Suspends the I2S output application (SampleApp = I2S output driver)
+  Log tag: [I2S_OUT_APP] ---- %s ---- (0x0004a9f8)
+  Note: "SampleApp" is the NationalChip SDK name for the I2S output application
+        module, NOT a demo — it is the production audio output path
+
+SampleAppResume (string at 0x0004a9d4, also 0x000133c9, 0x0004aac0)
+  Trigger: Audio output application exiting suspend
+  Action: Resumes I2S output path — re-enables DAC/I2S clocking, restores
+          audio buffer state
+  Log tag: [I2S_OUT_APP] ---- %s ----
+
+
+# ===========================================================================
+# 2. UART MESSAGE HANDLERS
+#    Communication with Apollo510b main SoC via TinyFrame serial protocol
+# ===========================================================================
+
+UartMessageAsyncSuspend (string at 0x0004a534, also 0x0001332e)
+  Trigger: System entering low-power mode
+  Action: Suspends UART message handler — stops polling for messages from
+          the Apollo510b host SoC, disasserts VC_MESSAGE notify pin
+  Note: "Async" indicates interrupt-driven (not polled) message handling
+
+UartMessageAsyncResume (string at 0x0004a54c, also 0x00013346)
+  Trigger: System resuming from low-power mode
+  Action: Resumes UART message handler — re-enables interrupt-driven RX,
+          reasserts VC_MESSAGE notify pin for host communication
+
+_uartRecvCallback (string at 0x0004aad0)
+  Trigger: UART byte received (interrupt-driven)
+  Action: Processes incoming bytes from Apollo510b via TinyFrame protocol
+  Protocol: TinyFrame with CRC32 (separate instance from inter-eye TinyFrame)
+  Note: This is the ISR-level byte receiver that feeds the TinyFrame decoder
+
+_uartMsgInit (string at 0x0004aae4)
+  Trigger: Boot initialization
+  Action: Initializes UART message subsystem — configures UART peripheral,
+          sets up TinyFrame instance, registers command handlers
+  Configures: VC_MESSAGE UART port and NOTIFY GPIO pin
+
+# Received command handlers (from Apollo510b host):
+
+receive_misc_test_cmd (string at 0x0004aafc: "receive misc test cmd")
+  Trigger: Host sends miscellaneous test command via TinyFrame
+  Action: Processes factory/debug test command
+  Source: [codec.host] on Apollo510b side
+
+receive_gsensor_test_cmd (string at 0x0004ab14: "receive gsensor test cmd")
+  Trigger: Host sends G-sensor test command
+  Action: Queries accelerometer state, returns gsensor_workstate
+  Cross-ref: gsensor status CLI command
+
+receive_version_req (string at 0x0004ab30: "receive version req")
+  Trigger: Host sends ReadVersion command
+  Action: Returns firmware version string "0.0.2.0" (0x000432f0)
+  Cross-ref: [codec.host]ReadVersion on Apollo510b side
+
+receive_switch_wakeup_model_cmd (string at 0x0004ab4c: "receive switch wakeup model cmd")
+  Trigger: Host sends SwitchWakeupMode command
+  Action: Switches between wake word detection modes (hey_even / hi_even)
+  Cross-ref: [codec.host]SwitchWakeupMode on Apollo510b side
+
+
+# ===========================================================================
+# 3. AUDIO OUTPUT CALLBACKS
+#    gx_audio_out_* API callback handlers
+# ===========================================================================
+
+gx_audio_out_config_cb (string at 0x00049bb4)
+  Trigger: Audio output subsystem configured with callback
+  Action: Registers a callback function for audio output events (buffer
+          underrun, playback complete, etc.)
+  Used by: SampleApp (I2S output application)
+
+# The audio output API (20 functions) uses callbacks for asynchronous
+# notification of audio events. The callback is set via gx_audio_out_config_cb
+# and invoked by the DMA completion handler when audio frames are consumed.
+#
+# Audio output lifecycle:
+#   gx_audio_out_alloc_playback → gx_audio_out_config_buffer →
+#   gx_audio_out_config_pcm → gx_audio_out_config_i2s →
+#   gx_audio_out_config_dac → gx_audio_out_config_cb →
+#   gx_audio_out_push_frame (loop) → gx_audio_out_drain_frame →
+#   gx_audio_out_exit
+#
+# Suspend/resume:
+#   gx_audio_out_suspend (0x00049c88) / gx_audio_out_resume (0x00049ca0)
+
+
+# ===========================================================================
+# 4. VAD EVENT HANDLERS
+#    Voice Activity Detection event dispatch
+# ===========================================================================
+
+# VAD does not have named handler strings, but its behavior is inferred:
+
+vad_reporting_handler (inferred)
+  Trigger: VAD state change (speech onset / speech offset)
+  Action: Reports voice activity event to host SoC via TinyFrame UART
+  Control: "open vad reporting" / "close vad reporting" CLI commands
+           (0x0001341c / 0x0001342f)
+  Parameters: 3 tunable VAD params logged at [LVP_AUD] tag
+    vad param 1 (0x0004a1f0)
+    vad param 2 (0x0004a1d4)
+    vad param 3 (0x0004a1b8)
+
+# VAD events flow to the Apollo510b host as voice events:
+#   [codec.host]voice event: cmd_id=0x%04X, event_id=0x%04X
+# The host retrieves events via GetVoiceEvent TinyFrame command.
+
+
+# ===========================================================================
+# 5. BEAMFORMING MODE SWITCH HANDLER
+#    GSC/IMCRA/raw mode switching
+# ===========================================================================
+
+switch_bf_cmd_handler (string at 0x0001340e: "switch bf cmd")
+  Trigger: Host sends SwitchBFMode command OR CLI "switch bf cmd"
+  Action: Switches between 3 denoise modes:
+    MODE 1 — DOUBLE_MIC_DENOISE: GSC adaptive beamforming (dual-mic)
+      Init log: [LVP_MODE_DENOISE][DOUBLE_MIC_DENOISE]Init gsc Beamforming
+    MODE 2 — SINGLE_MIC_DENOISE: IMCRA noise estimation (single-mic)
+      Init log: [LVP_MODE_DENOISE][SINGLE_MIC_DENOISE]Init Imcra
+    MODE 3 — ORIGIN_MIC: Raw microphone passthrough (no processing)
+      Init log: [LVP_MODE_DENOISE][ORIGIN_MIC]Change origin mic
+  Cross-ref: [codec.host]SwitchBFMode on Apollo510b side
+  Error: [codec.host]SwitchBFMode failed: %d, response status: 0x%02X
+
+switch_wakeup_cmd_handler (string at 0x0004ac34: "switch wakeup cmd")
+  Trigger: Host sends SwitchWakeupMode command OR CLI "switch wakeup cmd"
+  Action: Configures wakeup source / wake word detection mode
+  Wake words: "hey_even" (0x00017254), "hi_even" (0x000172ac)
+  Cross-ref: [codec.host]SwitchWakeupMode on Apollo510b side
+
+
+# ===========================================================================
+# 6. BOOT CLI COMMAND HANDLERS ("boot> " prompt at 0x00008584)
+#    Interactive shell available during boot / DFU mode
+# ===========================================================================
+
+cli_help_handler
+  Command: "help" (0x00008348)
+  Action: "print command description/usage" (0x00008350)
+  Also: "?" aliased to "alias for 'help'" (0x00008334)
+
+cli_flash_handler
+  Command: "flash" (0x00008384)
+  Action: "flash command" (0x0000838c) — erase, eraseall
+  Sub-commands: "erase" (0x0000837c), "eraseall" (0x00008370)
+  Errors: "spi flash probe error!" (0x000083c4),
+          "spi flash write protect unlock error!" (0x000083dc),
+          "flash program failed, offset : 0x%x" (0x00008404)
+
+cli_serialdown_handler
+  Command: "serialdown" (0x0000846c)
+  Action: "burn flash from serial" (0x00008478)
+  Internal: "do_serialdown" (0x0000839c)
+  CRC check: "crc failed, recv : %x, cal : %x" (0x00008448)
+  Memory: "%s memalloc failed, %d" (0x000083ac)
+
+cli_reboot_handler
+  Command: "reboot" (0x000084ec)
+  Action: "reset mcu through watchdog" (0x000084f4)
+  Note: Uses hardware watchdog for reset (no software reset vector)
+
+cli_init_handler
+  Command: "init" (0x000084b0)
+  Action: Initialization / re-initialization during boot CLI
+
+cli_ping_handler
+  Command: "ping" (0x000084b8)
+  Action: Connectivity test — used by Apollo510b DFU driver to verify
+          the codec is alive after boot stage completion
+
+cli_write_handler
+  Command: "write" (0x000084c0)
+  Action: Write data to flash or registers
+  Debug: "0x%x, 0x%x" (0x000084d0) — address/value format
+
+cli_read_handler
+  Command: "read" (0x000084c8)
+  Action: Read data from flash or registers
+
+cli_wdt_handler
+  Command: "wdt" — aliased to "wdt test command" (0x00008514)
+  Action: Watchdog test — triggers or queries hardware watchdog
+
+cli_usbslave_handler
+  Command: "usbslave" — "usbslave send" (0x00008528)
+  Action: USB slave mode data transmission (factory/debug)
+
+# CLI error handling:
+#   "No CLI available" (0x00008538) — CLI disabled in production
+#   "** Too many args (max. %d) **" (0x0000854c)
+#   "## Command too long!" (0x0000856c)
+#   "Unknown command '%s' - try 'help'" (0x00008620)
+#   "[Result]:FAIL" (0x00008644) / "[Result]:SUCC" (0x00008654)
+#   "Command '%s' failed: Error %d" (0x00008664)
+#   "<INTERRUPT>" (0x0000858c) — CLI interrupted
+
+
+# ===========================================================================
+# 7. DMA INTERRUPT HANDLERS
+#    DMA controller for audio data transfer
+# ===========================================================================
+
+# DMA interrupt handlers are inferred from FIFO interrupt strings:
+
+dma_tx_fifo_empty_handler (inferred from "Transmit FIFO empty interrupt." at 0x00007fbc)
+  Trigger: DMA transmit FIFO becomes empty
+  Action: Refill transmit FIFO from audio buffer or signal underrun
+
+dma_tx_fifo_overflow_handler (inferred from "Transmit FIFO overflow interrupt." at 0x00007fdc)
+  Trigger: DMA transmit FIFO overflow
+  Action: Error recovery — discard excess data, log error
+
+dma_rx_fifo_underflow_handler (inferred from "Receive FIFO underflow interrupt." at 0x00008000)
+  Trigger: DMA receive FIFO underflow (read from empty FIFO)
+  Action: Error recovery
+
+dma_rx_fifo_overflow_handler (inferred from "Receive FIFO overflow interrupt." at 0x00008024)
+  Trigger: DMA receive FIFO overflow
+  Action: Error recovery — data loss
+
+dma_rx_fifo_full_handler (inferred from "Receive FIFO full interrupt." at 0x00008048)
+  Trigger: DMA receive FIFO full
+  Action: Drain FIFO to audio processing pipeline
+
+dma_multimaster_contention_handler (inferred from "multi-master contention interrupt." at 0x00008068)
+  Trigger: Multi-master bus contention on SPI bus
+  Action: Arbitration / retry
+
+dma_xip_rx_overflow_handler (inferred from "xip receive fifo overflow interrupt." at 0x0000808c)
+  Trigger: XIP (eXecute In Place) receive FIFO overflow during flash read
+  Action: Error recovery — XIP read stall
+
+# DMA prefix "dma_" found at 0x0002c50e in binary, confirming DMA driver presence
+
+
+# ===========================================================================
+# 8. SPI FLASH HANDLERS
+#    External SPI NOR flash access
+# ===========================================================================
+
+flash_probe_handler (inferred from "flash probe waitting timeout." at 0x00007f04)
+  Trigger: SPI flash initialization at boot
+  Action: JEDEC ID read, model identification, capacity detection
+  Log: "Flash JEDEC = %#x, model = %s." (0x000080e0/0x000080f4)
+  Supported models:
+    p25q21l (PUYA 2Mbit, 0x00008104)
+    p25q40l (PUYA 4Mbit, 0x0000810c)
+    p25q80l (PUYA 8Mbit, 0x00008114)
+    en25s20a (ESMT 2Mbit, 0x0000811c)
+    en25s40a (ESMT 4Mbit, 0x00008128)
+    zb25wq80a (ZBIT 8Mbit, 0x00049d68 / 0x00013a02)
+
+flash_otp_read_handler (inferred from "read flash otp error" at 0x0004998c)
+  Trigger: OTP (One-Time Programmable) region read request
+  Action: Reads factory-programmed OTP data from SPI flash
+  Error: "read flash otp error" on access failure
+
+
+# ===========================================================================
+# 9. WATCHDOG INTERRUPT HANDLER
+# ===========================================================================
+
+watchdog_level_interrupt_handler (string at 0x00008490: "watchdog level interrupt! %d")
+  Trigger: Hardware watchdog timer timeout at warning level
+  Action: Logs the interrupt level, may trigger system reset if not cleared
+  CLI test: "wdt test command" (0x00008514)
+  Note: Watchdog is also used for controlled reboot via cli_reboot_handler
+
+
+# ===========================================================================
+# 10. CPU EXCEPTION HANDLER
+#     C-SKY CK803S exception vector
+# ===========================================================================
+
+cpu_exception_handler (string at 0x000082bc: "CPU Exception : %u")
+  Trigger: Unhandled CPU exception (invalid instruction, bus fault, etc.)
+  Action: Dumps register state and halts:
+    vr%d: %08x  (0x000082d0) — vector registers
+    r%d: %08x   (0x000082dc) — general registers
+    epsr: %8x   (0x000082e8) — exception PSR (C-SKY status register)
+    epc : %8x   (0x000082f4) — exception PC (program counter at fault)
+  Also: Stack overflow detection:
+    [LVP]Error, The Stack May Used Up, Top[%#x],[Addr:%#x, Value:%#x] (0x0004a4a8)
+  Assert: %s:%u: %s: Assertion `%s' failed. (0x00008ff4)
+
+
+# ===========================================================================
+# 11. IDLE MODE HANDLERS
+#     Power state management
+# ===========================================================================
+
+idle_mode_init_handler (string at 0x0004a598: "[IDLE]Init IDLE mode")
+  Trigger: System entering IDLE power state
+  Action: Initializes IDLE mode — suspends non-essential modules,
+          reduces clock frequencies, enables wakeup sources
+
+idle_mode_exit_handler (string at 0x0004a580: "[IDLE]Exit IDLE mode")
+  Trigger: Wakeup event detected (VAD, G-sensor, UART, GPIO)
+  Action: Exits IDLE mode — resumes modules, restores clocks,
+          re-enables full audio pipeline
+
+
+# ===========================================================================
+# 12. DENOISE MODE LIFECYCLE HANDLERS
+#     [LVP_MODE_DENOISE] module init/exit
+# ===========================================================================
+
+denoise_init_handler (string at 0x0004a890: "[LVP_MODE_DENOISE]Init denoise mode")
+  Trigger: Audio pipeline startup or denoise mode switch
+  Action: Initializes selected denoise mode (GSC, IMCRA, or raw)
+  Sequence:
+    1. LvpAudioInInit — initialize audio input
+    2. _beamformingInit or _imarcInit — init selected algorithm
+    3. FrameDrcStateInit — init DRC post-processor
+    4. Denoise Init OK!!!
+  Errors: BF malloc g_bf_mictmp failed, ImcraStateInit Fail!, etc.
+
+denoise_exit_handler (string at 0x0004a5c4: "[LVP_MODE_DENOISE]Exit denoise mode")
+  Trigger: Audio pipeline shutdown or mode switch
+  Action: Tears down current denoise mode, frees buffers
+
+
+# ===========================================================================
+# 13. HOST COMMAND HANDLER SUMMARY (Apollo510b → GX8002B)
+#     Cross-referenced with [codec.host] strings in main firmware
+# ===========================================================================
+#
+# Command                  TinyFrame NR/TYPE    Handler Evidence
+# -----------------------  -----------------    -----------------------------------------------
+# SwitchWakeupMode         varies               "receive switch wakeup model cmd" + CLI
+# SwitchBFMode             varies               "switch bf cmd" CLI + mode switch strings
+# ReadVersion              varies               "receive version req" → returns "0.0.2.0"
+# QueryMicState            varies               "mic status" CLI
+# SetMicGain               varies               "set pga gain" CLI (0-48 dB)
+# I2SOutputCtrl            varies               I2S out Master / i2s set state
+# CodecMicDelay1Bit        varies               "pdm ch delay" CLI
+# DMICClose                varies               "close Dmic cmd" CLI
+# DMICOpen (also DMICCtrl) varies               "start Dmic cmd" CLI
+# GetVoiceEvent            varies               voice event: cmd_id=0x%04X, event_id=0x%04X
+#
+# All commands use retry logic on the Apollo510b side (attempt %d failed: %d)
+# and validate response length before processing.
+
+
+# ===========================================================================
+# END OF HANDLER MAP
+# ===========================================================================

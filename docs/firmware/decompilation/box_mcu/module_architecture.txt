@@ -1,0 +1,452 @@
+================================================================================
+G2 CHARGING CASE (BOX) FIRMWARE MODULE ARCHITECTURE MAP
+================================================================================
+
+Firmware: B200 Box MCU, FW 1.2.54
+Processor: STM32L0xx ARM Cortex-M0+ @ 0x08000000
+Board: B200 (GPIO base 0x50000000 confirms L0 series)
+Total mapped functions: 414 across 39 unique modules
+No BLE, no display, no protobuf — pure embedded controller firmware
+
+================================================================================
+LAYERED ARCHITECTURE DIAGRAM
+================================================================================
+
+    +=========================================================================+
+    | LAYER 4: APPLICATION LOGIC (45 functions, 10 modules)                   |
+    |                                                                         |
+    |  +--app_aging (7)--+  +--app_ota (7)---+  +--app_charging (3)--------+  |
+    |  | start_aging      |  | ota_download   |  | decide_charge_side       |  |
+    |  | query_aging_stat |  | ota_notify_gls |  | bat_change_handler       |  |
+    |  | set_aging_L/R    |  | ota_copy_sn    |  | disable_all_charge_out   |  |
+    |  | aging_running_sm |  | ota_erase_bank |  +-------------------------+  |
+    |  | aging_poll_bat   |  | ota_program    |                               |
+    |  | aging_check_inbox|  | ota_verify_crc |  +--app_sn (4)-------------+  |
+    |  +-----------------+  | ota_swap_bank  |  | read_sn_bytes             |  |
+    |                       +----------------+  | read_sn_full              |  |
+    |  +--app_glasses (6)+ +--app_init (9)---+  | flash_write_sn_bank1/2   |  |
+    |  | reset_side_cnt  | | self_check_all  |  +-------------------------+  |
+    |  | reset_all_cnt   | | gpio_rcc_init   |                               |
+    |  | reset_l/r_cnt   | | uart_gls_init   |  +--app_debug (4)-----------+  |
+    |  | reset_uart_pins | | uart_debug_init |  | debug_printf              |  |
+    |  | glasses_detect  | | uart_hall_reinit |  | debug_print_hex           |  |
+    |  +----------------+ | uart_charge_init |  | dump_yhm2510_regs         |  |
+    |                      | init_2217_retry  |  | backup_yhm2510_regs       |  |
+    |  +--app_power (1)--+ | self_check_2217  |  +-------------------------+  |
+    |  | exit_idle_mode  | | init_pmic_gpio   |                               |
+    |  +----------------+ +------------------+  +--app_state (1)  app_led(1)  |
+    |                                           | clear_ota_pins  restart_tmr |
+    +=========================================================================+
+    | LAYER 3: PROTOCOL & COMMUNICATION (21 functions, 4 modules)             |
+    |                                                                         |
+    |  +--uart_protocol (14)-----------------------------------------------+  |
+    |  | uart_rx_dispatch (0x0800085c)   Main RX packet router              |  |
+    |  | serial_cmd_dispatcher           Debug serial command handler        |  |
+    |  | glasses_cmd_handler             Glasses-to-box command processor    |  |
+    |  | poll_gls_battery_status         Periodic GLS battery query          |  |
+    |  | force_poll_gls_battery_status   Forced GLS battery query            |  |
+    |  | uart_rx_wait_and_parse          Blocking UART RX with timeout       |  |
+    |  | uart_tx_frame_builder           Build UART TX frame (5A A5 FF hdr) |  |
+    |  | send_cmd_ack                    Send ACK to glasses command         |  |
+    |  | uart_peripheral_init            UART peripheral config              |  |
+    |  | uart_rx_isr_callback            ISR-level RX byte handler           |  |
+    |  | calc_uart_checksum              CRC byte calculation                |  |
+    |  | hex_char_to_nibble              Hex parsing helper                  |  |
+    |  | uart_rx_buffer_reset            Reset RX ring buffer                |  |
+    |  | check_debug_prefix_de           Check for "DE" debug prefix         |  |
+    |  +-------------------------------------------------------------------+  |
+    |                                                                         |
+    |  +--uart_tx (3)---------+  +--uart_rx (1)---------+                     |
+    |  | uart_tx_with_ctrl    |  | uart_gls_rx_start_it |                     |
+    |  | uart_tx_no_ctrl      |  +---------------------+                     |
+    |  | uart_gls_tx_params   |                                               |
+    |  +---------------------+                                               |
+    +=========================================================================+
+    | LAYER 2: PERIPHERAL DRIVERS (71 functions, 6 modules)                   |
+    |                                                                         |
+    |  +--i2c_periph (36)--------------------------------------------------+  |
+    |  | i2c_gpio_reinit             I2C GPIO pin reconfiguration           |  |
+    |  | i2c_read/write_yhm2510      YHM2510 fuel gauge I2C (addr 0xC8/C9) |  |
+    |  | i2c_read/write_pmic         PMIC I2C (addr 0x70/71)               |  |
+    |  | i2c_read/write_*_wrapper    Wrapper variants                       |  |
+    |  | yhm2510_read_battery_pct    Read battery percentage                |  |
+    |  | yhm2510_read_voltage        Read battery voltage (mV)              |  |
+    |  | yhm2510_read_temperature    Read temperature sensor                |  |
+    |  | yhm2510_self_check          Chip ID verification                   |  |
+    |  | yhm2510_read_full_cap       Read full capacity                     |  |
+    |  | i2c_bus1/2_read/write_byte  Per-bus I2C low-level ops              |  |
+    |  | i2c_bus1/2_set_addr_*       Address configuration (7/10-bit)       |  |
+    |  | i2c_bus1/2_generate_stop    Stop condition                         |  |
+    |  | i2c_bus1/2_set_transfer_*   Transfer size/nbytes config            |  |
+    |  | i2c_bus1/2_wait_rxne        Wait for receive buffer not empty      |  |
+    |  +-------------------------------------------------------------------+  |
+    |                                                                         |
+    |  +--i2c_yhm2510 (7)-----+  +--i2c_bitbang (13)----------------------+  |
+    |  | yhm2510_init_validate |  | i2c_bb_start/stop_condition            |  |
+    |  | yhm2510_read_reg_16   |  | i2c_bb_read/write_byte                 |  |
+    |  | yhm2510_soft_reset    |  | i2c_bb_send_ack/nack                   |  |
+    |  | yhm2510_read_reg_*    |  | i2c_bb_check_ack                       |  |
+    |  | yhm2510_write_reg_*   |  | i2c_bb_read_sda_pin                    |  |
+    |  | yhm2510_delay_ms      |  | i2c_bb_write_scl/sda                   |  |
+    |  +----------------------+  | i2c_bb1/2_read_sda                      |  |
+    |                             | i2c_bb_bit_delay                        |  |
+    |  +--gpio_ctrl (9)--------+  +----------------------------------------+  |
+    |  | gpio_set_gls_l_5v     |                                              |
+    |  | gpio_set_gls_r_5v     |  +--pmic (4)------------------------------+  |
+    |  | gpio_write_pin        |  | get_pmic_status_byte                   |  |
+    |  | update_gls_charge_pins|  | pmic_boost_check                       |  |
+    |  | gls_l_toggle_5v_aging |  | pmic_boost_enable                      |  |
+    |  | gpio_gls_l_charge_*   |  | watchdog_enable                        |  |
+    |  | gpio_gls_r_charge_*   |  +----------------------------------------+  |
+    |  | gpio_gls_l/r_reset_*  |                                              |
+    |  +----------------------+  +--adc_periph (1)-------------------------+  |
+    |                             | adc_read_ir_sensor                      |  |
+    |                             +----------------------------------------+  |
+    +=========================================================================+
+    | LAYER 1: HAL — Hardware Abstraction Layer (152 functions, 14 modules)   |
+    |                                                                         |
+    |  +--hal_uart (48)----------------------------------------------------+  |
+    |  | hal_uart_init/deinit          UART peripheral init/teardown        |  |
+    |  | hal_uart_enable/disable       UART peripheral enable               |  |
+    |  | hal_uart_isr_handler          UART interrupt handler               |  |
+    |  | hal_uart_irq_dispatch         IRQ routing for UART                 |  |
+    |  | hal_uart_transmit_blocking    Blocking TX                          |  |
+    |  | hal_uart_receive_blocking     Blocking RX                          |  |
+    |  | hal_uart_receive_it           Interrupt-driven RX                  |  |
+    |  | hal_uart_receive_dma          DMA-driven RX                        |  |
+    |  | uart_dma_transmit             DMA TX                               |  |
+    |  | hal_uart_set_baudrate/stop    Config registers                     |  |
+    |  | hal_uart_systick_update       Tick-based UART timeout              |  |
+    |  | hal_uart_poll_flag_timeout    Flag polling with timeout             |  |
+    |  | 20+ stubs (callbacks, error handlers, DMA hooks)                   |  |
+    |  +-------------------------------------------------------------------+  |
+    |                                                                         |
+    |  +--hal_flash (29)---+  +--hal_i2c (27)------------------------------+  |
+    |  | flash_program_*   |  | hal_i2c_init                               |  |
+    |  | flash_read_*      |  | hal_i2c_isr_handler                        |  |
+    |  | flash_erase_*     |  | hal_i2c_master_transmit_it                 |  |
+    |  | flash_wait_op     |  | hal_i2c_master_receive_it                  |  |
+    |  | flash_lock/unlock |  | hal_i2c_start_transfer                     |  |
+    |  | flash_ob_*        |  | hal_i2c_configure_timing                   |  |
+    |  | flash_get_bank    |  | hal_i2c_set_clock_config                   |  |
+    |  | flash_set_latency |  | hal_i2c_detect_addressing_mode             |  |
+    |  | flash_*_retry     |  | hal_i2c_wait_* / hal_i2c_check_*           |  |
+    |  +------------------+  | hal_i2c_configure_analog_filter             |  |
+    |                         +--------------------------------------------+  |
+    |  +--hal_gpio (16)----+  +--hal_rcc (11)-----+  +--hal_core (7)------+  |
+    |  | hal_gpio_init     |  | hal_rcc_osc_config |  | hal_delay_ms       |  |
+    |  | hal_gpio_deinit   |  | hal_rcc_clock_cfg  |  | hal_get_tick       |  |
+    |  | hal_gpio_write    |  | hal_rcc_sysclk_cfg |  | hal_get_tick_*     |  |
+    |  | hal_exti_*        |  | hal_rcc_hsi_config |  | hal_systick_init   |  |
+    |  | gpio_ch1-4_*      |  | hal_rcc_get_*_freq |  | hal_systick_incr   |  |
+    |  +------------------+  | hal_rcc_periph_clk |  +-------------------+  |
+    |                         +-------------------+                          |
+    |  +--hal_nvic (5)-----+  +--hal_dma (5)------+  +--hal_pwr (4)------+  |
+    |  | hal_nvic_enable   |  | hal_dma_init_ch1/2 |  | hal_pwr_standby   |  |
+    |  | hal_nvic_clear    |  | hal_dma_deinit     |  | hal_pwr_sleep     |  |
+    |  | hal_nvic_priority |  | hal_dma_abort      |  | hal_pwr_wakeup_*  |  |
+    |  | nvic_system_reset |  | hal_dma_abort_cb   |  +-------------------+  |
+    |  | nvic_encode_pri   |  +-------------------+                          |
+    |  +------------------+                                                  |
+    |  +--hal_iwdg (2)-----+  +--hal_timer (1)----+  +--hal_systick (1)---+  |
+    |  | hal_iwdg_init     |  | hal_timer_check    |  | init_systick       |  |
+    |  | hal_iwdg_refresh  |  +-------------------+  +-------------------+  |
+    |  +------------------+                                                  |
+    +=========================================================================+
+    | LAYER 0: RTOS & C RUNTIME (118 functions, 7 modules)                    |
+    |                                                                         |
+    |  +--freertos_kernel (74)-------------------------------------------------+
+    |  | Task management: xTaskCreate, vTaskDelay, vTaskSuspend, vTaskResume  |
+    |  | Timer service: xTimerCreate, xTimerStart, xTimerStop, daemon task   |
+    |  | Queue: xQueueCreate, xQueueSend, xQueueReceive, xQueuePeek         |
+    |  | Event groups: xEventGroupWaitBits, xEventGroupSetBits               |
+    |  | Semaphore: xSemaphoreCreateMutex, xSemaphoreCreateBinary            |
+    |  | Task notify: xTaskNotifyGive, ulTaskNotifyTake                      |
+    |  | Scheduler: vTaskStartScheduler, vTaskSwitchContext, tick increment   |
+    |  | Memory: pvPortMalloc (heap_4), vPortFree, heap init                 |
+    |  | List: insert, remove, init (FreeRTOS list primitives)               |
+    |  | Idle: freertos_idle_task, idle hook stub                            |
+    |  +-------------------------------------------------------------------+  |
+    |                                                                         |
+    |  +--freertos_port (13)--+  +--rtos_wrapper (15)----------------------+  |
+    |  | vPortSVCHandler      |  | osKernelInitialize / osKernelStart      |  |
+    |  | xPortPendSVHandler   |  | osDelay                                 |  |
+    |  | vPortStartFirstTask  |  | osThreadNew / osTimerNew                |  |
+    |  | port_systick_handler |  | osTimerStart / osTimerStop              |  |
+    |  | port_enter/exit_crit |  | osTimerChangePeriod                     |  |
+    |  | port_yield           |  | osEventFlagsSet / osEventFlagsWait      |  |
+    |  | port_disable/enable  |  | osMessageQueueNew                       |  |
+    |  | port_init_stack      |  | osKernelGetTickFreq / osKernelRun       |  |
+    |  | port_setup_timer     |  +----------------------------------------+  |
+    |  | port_suppress_ticks  |                                               |
+    |  | port_idle_sleep      |  +--rtos_core (3)--------------------------+  |
+    |  +---------------------+  | svc_handler / enter/exit_critical        |  |
+    |                            +----------------------------------------+  |
+    |  +--rtos_init (1)--------+  +--rtos_task (2)-------------------------+  |
+    |  | create_all_tasks_tmrs |  | defaultTask_body / pwrManagerTask_stub |  |
+    |  +----------------------+  +----------------------------------------+  |
+    |                                                                         |
+    |  +--c_runtime (15)---+  +--startup (3)------+  +--cortex_m (1)------+  |
+    |  | uint32/64_divide  |  | reset_vector_thunk |  | hard_fault_handler |  |
+    |  | int32_divide      |  | system_init_main   |  +-------------------+  |
+    |  | memcpy/memset     |  | rle_decompress_init|                          |
+    |  | bzero / read_le32 |  +-------------------+                          |
+    |  | shift_left/right  |                                                  |
+    |  | int16_sign_extend |                                                  |
+    |  | vprintf_engine    |                                                  |
+    |  | printf_pad_*      |                                                  |
+    |  | arm_switch8_helper|                                                  |
+    |  +------------------+                                                  |
+    +=========================================================================+
+
+================================================================================
+MODULE FUNCTION COUNT SUMMARY (sorted by count)
+================================================================================
+
+Module               Count  Layer  Description
+-------------------  -----  -----  -----------
+freertos_kernel       74      0    FreeRTOS core (tasks, timers, queues, lists)
+hal_uart              48      1    UART HAL (2 UARTs: glasses, debug)
+i2c_periph            36      2    I2C peripheral access (YHM2510, PMIC)
+hal_flash             29      1    Flash HAL (dual-bank, OTA, SN storage)
+hal_i2c               27      1    I2C HAL (hardware I2C controller)
+hal_gpio              16      1    GPIO HAL + EXTI
+rtos_wrapper          15      0    CMSIS-RTOS2 API wrappers
+c_runtime             15      0    C runtime (math, memory, printf)
+uart_protocol         14      3    UART protocol (RX dispatch, frame building)
+i2c_bitbang           13      2    Bit-bang I2C (software I2C fallback)
+freertos_port         13      0    FreeRTOS Cortex-M0+ port
+hal_rcc               11      1    RCC HAL (clocks, PLL, peripherals)
+gpio_ctrl              9      2    GPIO control (5V output, charge pins)
+app_init               9      4    Application init (self-check, peripheral setup)
+i2c_yhm2510            7      2    YHM2510 fuel gauge driver
+hal_core               7      1    Core HAL (tick, delay, systick)
+app_ota                7      4    OTA firmware update (download, verify, swap)
+app_aging              7      4    Factory aging test state machine
+app_glasses            6      4    Glasses detection/reset logic
+hal_nvic               5      1    NVIC (interrupt controller)
+hal_dma                5      1    DMA controller
+pmic                   4      2    PMIC driver (boost, watchdog)
+hal_pwr                4      1    Power HAL (standby, sleep, wakeup)
+app_sn                 4      4    Serial number management (flash R/W)
+app_debug              4      4    Debug output (printf, hex dump)
+uart_tx                3      3    UART TX helpers
+startup                3      0    Boot/reset vector
+rtos_core              3      0    RTOS core (SVC, critical sections)
+app_charging           3      4    Charging logic (per-side, threshold)
+rtos_task              2      0    Task entry points
+hal_iwdg               2      1    Independent watchdog HAL
+uart_rx                1      3    UART RX start
+rtos_init              1      0    RTOS initialization
+hal_timer              1      1    Timer HAL
+hal_systick            1      1    SysTick init
+cortex_m               1      0    Cortex-M fault handler
+app_state              1      4    Application state management
+app_power              1      4    Power state transitions
+app_led                1      4    LED timer restart
+adc_periph             1      2    ADC (IR sensor reading)
+-------------------  -----
+TOTAL                 414
+
+================================================================================
+INTER-MODULE COMMUNICATION PATHS
+================================================================================
+
+The box firmware has a relatively flat call graph compared to the main G2
+firmware. Here are the primary inter-module communication paths:
+
+1. BOOT CHAIN
+   startup -> hal_core -> hal_rcc -> hal_gpio -> app_init -> rtos_init
+
+   system_init_main calls:
+     hal_systick_init, hal_rcc_periph_and_clock_init, gpio_and_rcc_init,
+     i2c_gpio_reinit, uart_gls_init_with_iwdg, uart_debug_rx_init,
+     uart_peripheral_init, self_check_all_peripherals,
+     osKernelRun, create_all_tasks_and_timers, osKernelStart
+
+2. GLASSES UART PROTOCOL PATH
+   ISR: hal_uart -> uart_protocol (uart_rx_isr_callback)
+   Task: uart_protocol (uart_rx_dispatch) -> uart_protocol (glasses_cmd_handler)
+   TX: app_* -> uart_tx -> hal_uart (hal_uart_transmit_blocking)
+
+   Frame format: 5A A5 FF [cmd] [data...] [CRC]
+
+   Command dispatch (glasses_cmd_handler @ 0x08000de0):
+     0x3D/0x3E -> app_aging (exit aging)
+     0x3F      -> gpio_ctrl (enable/disable output)
+     0x41      -> cortex_m (system reset)
+     0x50      -> app_sn (version query)
+     0x51      -> app_sn (status query)
+     0x56      -> app_ota (OTA GLS status)
+     0x5C      -> app_state (case status query)
+     0x5D      -> app_charging (charging control)
+     0x5E      -> app_sn (set SN)
+     0x5F      -> app_sn (SN query)
+     0x68      -> gpio_ctrl (silent mode toggle)
+
+3. SERIAL DEBUG PATH
+   ISR: hal_uart -> uart_protocol (debug port)
+   Task: uart_protocol (serial_cmd_dispatcher) -> app_debug / pmic / hal_iwdg
+
+   Debug command dispatch (serial_cmd_dispatcher @ 0x08000928):
+     0xAF -> app_debug (debug output toggle)
+     0xB0 -> i2c_yhm2510 (dump registers via timer)
+     0xD0 -> pmic (watchdog toggle)
+     0xD1 -> app_debug (simulation modes)
+     0xD2/D3 -> app_charging (one-side charging)
+     0xDD -> hal_iwdg (dog-feed toggle)
+     0xDF -> hal_pwr (ship mode)
+     0xEE -> hal_pwr (standby)
+     0xFF -> cortex_m (system reset)
+
+4. I2C PERIPHERAL BUS
+   app_init -> i2c_periph -> hal_i2c (hardware I2C)
+   app_init -> i2c_periph -> i2c_bitbang (software I2C fallback)
+   app_init -> i2c_yhm2510 -> i2c_periph -> hal_i2c
+
+   I2C devices:
+     YHM2510 (0xC8/0xC9): Battery fuel gauge
+       -> yhm2510_read_battery_pct, voltage, temperature, capacity
+     PMIC (0x70/0x71): Power management IC
+       -> get_pmic_status_byte, pmic_boost_check/enable
+     4005: Watchdog controller (chip ID verified at boot)
+     2217: Unknown IC (chip ID verified at boot)
+
+5. GLASSES DETECTION PATH
+   glsDetectTask -> gpio_ctrl -> adc_periph -> gpio_ctrl
+   glsDetectTask -> rtos_wrapper (osDelay, osTimerStart)
+   glsDetectTask -> app_debug (debug_printf)
+
+   IR scan cycle:
+     gpio_ctrl (drive LED) -> osDelay(3ms) -> adc_periph (read) ->
+     threshold check -> update state struct
+
+6. CHARGING CONTROL PATH
+   defaultTask -> app_charging (bat_change_handler, decide_charge_side)
+   defaultTask -> gpio_ctrl (update_gls_charge_pins, set_5v)
+   defaultTask -> i2c_periph (yhm2510_read_battery_pct)
+   defaultTask -> pmic (pmic_boost_enable/check)
+
+   Charging thresholds:
+     bat >= 0x5A (90%) -> disable charging
+     bat >= 98%        -> charging done
+     Over-temperature  -> stop PMIC charging
+
+7. OTA UPDATE PATH
+   defaultTask -> uart_tx (send OTA check frame)
+   defaultTask -> uart_protocol (uart_rx_wait_and_parse for OTA response)
+   defaultTask -> app_ota (ota_box_download_firmware)
+   app_ota -> hal_flash (erase/program target bank)
+   app_ota -> app_sn (copy SN between banks)
+   app_ota -> app_ota (ota_swap_bank_and_reset)
+
+   OTA flow:
+     1. Check glasses ready (ota_gls_ready L/R/box)
+     2. Get running bank (flash_get_running_bank)
+     3. Erase target bank (ota_erase_target_bank)
+     4. Copy SN (ota_copy_sn_between_banks)
+     5. Download firmware (ota_box_download_firmware)
+     6. Verify CRC (ota_verify_downloaded_crc)
+     7. Notify glasses (ota_notify_gls_result)
+     8. Swap bank and reset (ota_swap_bank_and_reset)
+
+8. POWER MANAGEMENT PATH
+   defaultTask -> hal_pwr (hal_pwr_enter_standby, hal_pwr_enter_sleep)
+   defaultTask -> hal_iwdg (hal_iwdg_refresh before sleep)
+   defaultTask -> pmic (watchdog_enable, pmic_boost_enable)
+
+   Standby reasons:
+     - Idle (empty box, 30 iterations ~30s)
+     - CMD (debug command 0xEE)
+     - Low battery (YHM2510 capacity < threshold)
+     - Glasses battery full (both sides done)
+
+   Wake sources:
+     - HALL sensor (lid open/close)
+     - USB (plug/unplug)
+     - RTC (periodic wake for monitoring)
+
+9. AGING TEST PATH
+   defaultTask -> app_aging (start_aging, aging_running_state_machine)
+   app_aging -> i2c_periph (yhm2510 battery queries)
+   app_aging -> gpio_ctrl (toggle 5V for aging)
+   app_aging -> uart_tx (query glasses aging status)
+
+   Aging states: AGING_PRE -> AGING_RUNNING -> CHARGING_AGING <-> AGING_ONLY -> AGING_DONE
+
+10. EVENT FLAG SIGNALING
+    ISR (EXTI) -> rtos_wrapper (osEventFlagsSet) -> defaultTask (osEventFlagsWait)
+
+    Events:
+      Hall sensor change  -> "hall int, isOpen:%d"   -> event flag
+      USB plug/unplug     -> "USB int, hasUsb:%d"    -> event flag + GLS reset
+      Battery change      -> "Bat change: %d -> %d"  -> send 0x13 to glasses
+      2217 interrupt      -> "2217 int"              -> (handled inline)
+
+================================================================================
+MODULE DEPENDENCY MATRIX
+================================================================================
+
+Caller Module       -> Callee Modules
+-------------------    ----------------
+startup              -> hal_core, hal_rcc, hal_gpio, app_init, rtos_init
+rtos_init            -> rtos_wrapper (osThreadNew, osTimerNew, osMessageQueueNew)
+rtos_task            -> All app_* modules, rtos_wrapper, uart_protocol
+app_init             -> i2c_periph, i2c_yhm2510, pmic, hal_uart, hal_gpio, hal_iwdg
+app_aging            -> i2c_periph, gpio_ctrl, uart_tx, rtos_wrapper, app_debug
+app_ota              -> hal_flash, app_sn, uart_tx, cortex_m (reset)
+app_charging         -> gpio_ctrl, i2c_periph, app_debug
+app_glasses          -> gpio_ctrl, uart_tx, app_debug
+app_sn               -> hal_flash
+uart_protocol        -> app_aging, app_ota, app_sn, app_charging, gpio_ctrl, pmic
+                        uart_tx, hal_uart, rtos_wrapper, app_debug
+gpio_ctrl            -> hal_gpio
+i2c_periph           -> hal_i2c, i2c_bitbang
+i2c_yhm2510          -> i2c_periph
+pmic                 -> i2c_periph
+adc_periph           -> hal_gpio (ADC pin control)
+
+================================================================================
+COMPARISON WITH MAIN G2 FIRMWARE
+================================================================================
+
+Feature              Box (B200)                    Main FW (S200)
+-----------------    -------------------------     --------------------------
+Processor            STM32L0 Cortex-M0+            Ambiq Apollo510b Cortex-M55
+Functions            414                           7,268
+Modules              39                            463
+RTOS                 FreeRTOS (bare)               FreeRTOS + CMSIS-RTOS2
+Tasks                6 (4 app + 2 internal)        30+ (complex task tree)
+BLE                  None                          Full BLE stack (1,012 funcs)
+Display              None                          LVGL + NemaGFX GPU (1,856)
+Protobuf             None                          nanopb (71 funcs)
+I2C devices          4 (YHM2510, PMIC, 4005, 2217) 10+ (IMU, ALS, touch, etc.)
+UART                 2 (glasses, debug)            3 (inter-eye, box, debug)
+Flash                Dual-bank (OTA)               Single app + EVENOTA
+OTA                  Self-update via dual-bank      6-component EVENOTA container
+Communication        UART to glasses (5A A5 FF)     BLE to phone, UART to box
+
+The box firmware is ~18x smaller than the main firmware, reflecting its focused
+role as a charging controller with no BLE, display, or user-facing features.
+
+================================================================================
+KEY CROSS-REFERENCES TO SWIFT SDK
+================================================================================
+
+Box firmware features mapped to Swift SDK types:
+
+  Box JSON status -> G2GlassesCaseReader (soc, charging, lidOpen, inCase)
+    {"vol":%d,"pct":%d,"open":%d,"usb":%d,"cur":%d,"GLS_L":%d,"GLS_R":%d,"temp":%d}
+
+  Box UART protocol -> G2BluetoothClient (0x81-20 BoxDetect service)
+    Main FW relays box status via BLE service 0x81-20
+
+  Box OTA -> G2FirmwareAPIClient, G2FirmwareTransferClient
+    Box component in EVENOTA container (index 5: "box-case-mcu")
+
+  Box commands -> G2ResponseDecoder (onDisplayTriggerResponse on 0x81-00)
+    DisplayTrigger is how main FW signals box presence/absence
+
+================================================================================
+END OF MODULE ARCHITECTURE MAP
+================================================================================

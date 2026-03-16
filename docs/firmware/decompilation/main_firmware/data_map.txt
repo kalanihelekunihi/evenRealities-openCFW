@@ -1,0 +1,667 @@
+# G2 Main Firmware Global Data/Variable Map
+# Firmware: ota_s200_firmware_ota (Apollo510b ARM Cortex-M55)
+# Memory layout: DAT_ addresses are in RAM/BSS region 0x00438000-0x005D8000
+#   Strings live in flash/ROM at 0x00000000-0x00310000 (31,462 strings)
+#   DAT_ addresses are pointers TO strings (not at string addresses)
+#
+# Total unique DAT_ addresses in decompiled.c: 17,364
+# Entries in this map: 577 (top 500 by ref count + 64 handler_map.txt known entries + 13 RTOS config)
+# All entries have semantic names (session 39l: 28 generic buffer_/struct_/ptr_ names resolved)
+#
+# Full-set DAT_ role estimates (17,364 total):
+#   ~3,793 are string pointers (log tags, source files, format strings)
+#   ~161 are buffer/struct targets (memset destinations)
+#   ~35 are protobuf field descriptor tables (pb_encode/pb_decode args)
+#   ~13,375 remain unclassified (mostly low-ref-count locals, small state vars)
+#
+# Key data structures identified:
+#   20 protobuf field descriptor tables (one per BLE service)
+#   27 protobuf encode/stream buffers (paired ostream + encode buffers)
+#   10 message ID auto-increment counters (per-service sequence numbering)
+#   32 struct pointers (display ctx, BLE ctx, codec ctx, dashboard state, etc.)
+#   75 callback/function pointers (per-module dispatch, LVGL, BLE handlers)
+#
+# Classification method:
+#   string     - Pointer to string in flash (log tag, source file, format string)
+#   config     - Read-only constant/configuration value
+#   state      - Read/write state variable (flag, counter, mode)
+#   buffer     - Buffer, struct, or large data region
+#   vtable     - Protobuf field descriptor table or dispatch table
+#   callback   - Function pointer or callback/data pointer
+#   peripheral_reg - Memory-mapped peripheral register (none found in top 500)
+#   unknown    - Unclassified
+#
+# This map summary:
+#   string: 295 (52.7%)
+#   buffer: 80 (14.3%)
+#   callback: 75 (13.4%)
+#   config: 45 (8.0%)
+#   state: 45 (8.0%)
+#   vtable: 20 (3.6%)
+#
+# Top modules (by DAT_ count):
+#   pt_protocol_procsr: 25    ATT: 22            APP: 22
+#   navigation.ui: 22         ble: 19            ota.service: 14
+#   ble.smpdb: 14             evenhub.ui: 13     codec.dfu: 11
+#   quicklist.page: 11        app: 10            pb.evenai: 9
+#   dashboard.stock: 8        codec.host: 7      dashboard: 7
+#   drv.norflash: 7           efs.service: 7     drv.touchdfu: 7
+#   ble_cordio: 7             common_text_container: 7
+#
+# Format: address\ttype\tname\tmodule\tref_count\tdescription
+#
+
+# ============================================================
+# VTABLE (20 entries)
+# ============================================================
+0x00589c50	vtable	pb_field_table_navigation	pb.navigation	15	Protobuf field descriptor table for navigation (0x08)
+0x0059ca7c	vtable	pb_field_table_evenhub	pb.evenhub	7	Protobuf field descriptor table for EvenHub (0xE0)
+0x0054d1f0	vtable	pb_field_table_teleprompter	pb.teleprompter	6	Protobuf field descriptor table for teleprompter (0x06)
+0x004b0168	vtable	pb_field_table_onboarding	pb.onboarding	5	Protobuf field descriptor table for onboarding (0x10)
+0x004ec5d0	vtable	pb_field_table_notification	pb.notification	5	Protobuf field descriptor table for notification (0x04)
+0x0049eaac	vtable	pb_field_table_auth	pb.auth	4	Protobuf field descriptor table for auth (0x80)
+0x004f0458	vtable	pb_field_table_evenai_advanced	pb.evenai	4	Protobuf field descriptor table for EvenAI types 7-9
+0x0056048c	vtable	pb_field_table_dashboard	pb.dashboard	4	Protobuf field descriptor table for dashboard (0x01)
+0x0045bcf0	vtable	pb_field_table_menu	pb.menu	3	Protobuf field descriptor table for menu (0x03)
+0x0046c3f0	vtable	pb_field_table_settings	pb.settings	3	Protobuf field descriptor table for settings (0x0D)
+0x0049f408	vtable	pb_field_table_auth_keepalive	pb.auth	3	Protobuf field descriptor table for auth keepalive
+0x004eef64	vtable	pb_field_table_evenai_basic	pb.evenai	3	Protobuf field descriptor table for EvenAI types 1-4
+0x004fcc98	vtable	pb_field_table_box_detect	pb.box_detect	3	Protobuf field descriptor table for box detect (0x81)
+0x00568d34	vtable	pb_field_table_quicklist	pb.quicklist	3	Protobuf field descriptor table for quicklist+health (0x0C)
+0x0056a73c	vtable	pb_field_table_display_config	pb.display_config	3	Protobuf field descriptor table for display config (0x0E)
+0x005b4e00	vtable	pb_field_table_translate	pb.translate	3	Protobuf field descriptor table for translate (0x05)
+0x0046b934	vtable	pb_field_table_module_config	pb.module_config	2	Protobuf field descriptor table for module configure (0x20)
+0x004efadc	vtable	pb_field_table_evenai_ask_large	pb.evenai	2	Protobuf field descriptor table for EvenAI type 3/ASK large
+0x005932d8	vtable	pb_field_table_conversate	pb.conversate	2	Protobuf field descriptor table for conversate (0x0B)
+0x005b4770	vtable	pb_field_table_ring	pb.ring	2	Protobuf field descriptor table for ring (0x91)
+
+# ============================================================
+# BUFFER (80 entries)
+# ============================================================
+0x0053cb24	buffer	display_render_ctx	display	62	Display render context struct (32 offsets, used in display_render + cm_backtrace)
+0x0059e698	buffer	evenhub_session_ctx	evenhub.main	35	EvenHub session context (offsets +4, +0x34)
+0x0051d350	buffer	codec_dfu_ctx	codec	32	Codec/GX8002B DFU context struct (7 offsets, 0x19 bytes)
+0x004b5140	mutex	charger_mutex_handle	charger_common	-	Mutex handle for charger state access (FUN_00447f06/FUN_00447f6c)
+0x004b5150	buffer	charger_poll_snapshot	charger_common	-	Polled charger snapshot: [0]=battery_level, [1]=in_case_flag
+0x004b51b8	pointer	charger_fuel_gauge_ptr	charger_common	-	Pointer to BQ27427 fuel gauge data struct (+4=SOC, +0x15=charger_flag)
+0x004d0110	mutex	db_mutex_handle	db.api	-	Mutex handle for database/flash access serialization
+0x004d013c	pointer	db_partition_base	db.api	-	Base pointer for KV database partitions (stride=0x36C per partition)
+0x004a90fc	queue	thread_pool_work_queue	thread_pool	-	FreeRTOS queue for thread pool work items (callback+args)
+0x004a9114	state	thread_pool_initialized	thread_pool	-	Thread pool initialized flag (checked before submit)
+0x004a912c	buffer	thread_pool_work_item	thread_pool	-	Pre-allocated work item struct for thread pool submission
+0x004a9138	mutex	thread_pool_submit_mutex	thread_pool	-	Mutex for serializing thread pool submit (3s timeout)
+0x0056e2c8	pointer	quicklist_data_buffer_ptr	quicklist.data_mgr	-	Pointer to 0x1220-byte quicklist data buffer (items at 0xE8 stride, max 20)
+0x004e5080	buffer	ble_disc_state	ble.disc	31	BLE service discovery state struct (offsets 0x2a, 0x57, 0x5a)
+0x00540428	buffer	conversate_tag_buffer	conversate.tag	31	Conversate tag/text buffer (memset target)
+0x00456df0	buffer	dm_conn_ctx	DM	30	BLE DM connection context (offsets 0x9c, 0xa4)
+0x0050b2dc	buffer	nema_gpu_ctx	gpu.nema	30	NemaGFX GPU context (single function, 30 refs)
+0x004795b8	buffer	nv_store_ctx	nv	28	NV storage context struct (13 offsets, up to 0x38)
+0x00447750	buffer	rtos_timer_array	rtos	27	RTOS timer/task descriptor array (7 offsets, stride 8)
+0x004643e4	buffer	dashboard_state	dashboard	27	Dashboard UI state struct (offsets 1-5, 0xb-0x14; gesture dispatch)
+0x0052e610	buffer	notification_list_ctx	message_notify_list	26	Notification list UI context (offsets 0xc, 0x38-0x40)
+0x004542e8	buffer	app_main_ctx	app	25	Main application context struct (9 offsets, up to 0x6c; taskYIELD, ble, lvgl)
+0x004c3fd4	buffer	uled_driver_ctx	driver.uled	25	LED driver context struct (11 offsets, up to 0x34)
+0x004a1cbc	buffer	ble_efs_ancc_ctx	ble	24	BLE EFS/ANCC combined context (offsets up to 0x318)
+0x004d40dc	buffer	hci_event_opcode_counters	APP	24	Pointer to struct (deref 24x, 1 offsets)
+0x0056fec4	buffer	ble_phy_timing_ctx	ble	24	BLE PHY radio timing config struct (offsets 0x54-0x68)
+0x0055ca54	buffer	quicklist_page_data	quicklist.page	23	Quicklist page data array (large: offsets 0x2e48, 0x2e4e)
+0x0043d6c4	buffer	elog_config	elog	22	EasyLogger configuration struct (offsets 0xf0-0xf5)
+0x004d245c	buffer	app_ble_conn_ctx	APP	22	Application BLE connection context (offsets 0x70, 0x7c, 0x82)
+0x00540de8	buffer	teleprompter_page_state_buffer	teleprompt	22	Buffer (memset target)
+0x0052e424	buffer	notify_list_state	message_notify_list.ui	21	Notification list scroll/selection state (offsets 1, 2)
+0x00589c60	buffer	navigation_route_data_buffer	navigation.datahandler	21	Buffer (memset target)
+0x00589c5c	buffer	pb_encode_buf_navigation	pb.navigation	20	Navigation protobuf encode buffer (0x2018 bytes)
+0x00441f64	buffer	display_thread_ctx	display_thread	19	Display thread context struct (offsets 4, 8, 0xc)
+0x004b5e78	buffer	system_datetime_ctx	nv.sysDt	18	System date/time and SN context (offsets 1, 0x10, 0x28)
+0x004bd218	buffer	ble_smp_ctx	ble.smp	18	BLE SMP (Security Manager) context (offsets 4, 0xc, 0x10)
+0x004f0da8	buffer	iom_module_config_array	app	18	Struct pointer (5 offsets, max=0x48)
+0x004f77d4	buffer	onboarding_news_page_list	onboarding.news	18	Buffer (memset target)
+0x0055561c	buffer	dashboard_news_page_list	dashboard.news	18	Buffer (memset target)
+0x00448ed0	buffer	nv_partition_descriptor	hal	17	Small struct (3 offsets, max=0x6)
+0x00453ec0	buffer	rtos_current_tcb_ptr	app.manager	17	Struct pointer (5 offsets, max=0x34)
+0x00469f44	buffer	norflash_spi_command_buf	drv.norflash	17	Small struct (4 offsets, max=0x5)
+0x004795c0	buffer	ble_nv_ctx_ext	ble	17	BLE NV storage context extension
+0x00497dd4	buffer	slave_adv_conn_ctx	app_slave	17	Struct pointer (6 offsets, max=0x74)
+0x004b7c04	buffer	gpu_display_hw_ctx_ptr	app.status	17	Small struct (3 offsets, max=0x20)
+0x00548a24	buffer	lc3_spectral_codebook_vectors	svc	17	Pointer to struct (deref 18x, 1 offsets)
+0x0057382c	buffer	ble_conn_param_bitfield_ctx	ble	17	Small struct (4 offsets, max=0x60)
+0x0046a1ac	buffer	norflash_block_address_table	drv_mx25u25643g	16	Small struct (4 offsets, max=0x5)
+0x004968e8	buffer	app_ble_data_xfer_ctx	APP	16	Small struct (2 offsets, max=0x7c)
+0x004b2014	buffer	onboarding_anim_state	onboarding.ui	16	Small struct (2 offsets, max=0x4)
+0x0050b0ec	buffer	nema_gpu_state	gpu.nema	16	NemaGFX GPU state buffer
+0x0052eef0	buffer	msg_notify_list_ui_ctx	message_notify_list	16	Small struct (3 offsets, max=0x3c)
+0x00542a3c	buffer	dashboard_sync_data_buf	dashboard	16	Buffer (memset target)
+0x00557c6c	buffer	quicklist_item_storage	quicklist.page	16	Buffer (memset target)
+0x004960b8	buffer	slave_inter_eye_conn_ctx	app_slave	15	Small struct (4 offsets, max=0x78)
+0x0049abb0	buffer	ble_comm_session_table	ble.comm	15	Struct pointer (5 offsets, max=0x33)
+0x0049c420	buffer	dm_adv_param_config	ble.dm_adv	15	Struct pointer (5 offsets, max=0x1d)
+0x004b514c	buffer	charger_state_struct	charger_common	15	Charger state: [0]=battery_level, [1]=charging_flag, [2]=clamped_level, [3]=fully_charged
+0x0059ca78	buffer	evenhub_data_parse_buf	evenhub.data_parser	15	Buffer (memset target)
+0x00446e2c	buffer	ota_file_transfer_ctx	ota.service	14	Small struct (2 offsets, max=0x6d)
+0x004763b8	buffer	elog_stream_buffer_ctx	app	14	Buffer (memset target)
+0x0049582c	buffer	ble_slave_session_ctx	ble	14	Small struct (3 offsets, max=0x78)
+0x004dec68	buffer	atts_ccc_descriptor_table	ATT	14	Buffer (memset target)
+0x004ffb30	buffer	nema_gpu_context_ptr	gpu.nema	14	Struct pointer (6 offsets, max=0x2d8)
+0x0059ca74	buffer	pb_encode_buf_evenhub	pb.evenhub	14	EvenHub protobuf encode buffer (0x2654 bytes)
+0x0054d218	buffer	pb_encode_buf_teleprompter	pb.teleprompter	12	Teleprompter protobuf encode buffer (0xF58 / 3928 bytes)
+0x0054d21c	buffer	pb_ostream_buf_teleprompter	pb.teleprompter	12	Teleprompter pb_ostream buffer (0x100 bytes)
+0x004b0318	buffer	pb_ostream_buf_onboarding	pb.onboarding	10	Onboarding pb_ostream buffer (0x100 bytes)
+0x004b031c	buffer	pb_encode_buf_onboarding	pb.onboarding	10	Onboarding protobuf encode buffer (0x10 / 16 bytes)
+0x004ef28c	buffer	pb_ostream_buf_evenai	pb.evenai	8	EvenAI pb_ostream buffer (0x100 bytes)
+0x004ef290	buffer	pb_encode_buf_evenai	pb.evenai	8	EvenAI protobuf encode buffer (0x20C bytes)
+0x00569188	buffer	pb_ostream_buf_quicklist	pb.quicklist	8	Quicklist pb_ostream buffer (0x400 bytes)
+0x0056918c	buffer	pb_encode_buf_quicklist	pb.quicklist	8	Quicklist protobuf encode buffer (0x1238 / 4664 bytes)
+0x004ab0cc	buffer	pb_encode_buf_device_info	pb.device_info	6	Device info encode buffer (0x100 / 256 bytes)
+0x004ec60c	buffer	pb_ostream_buf_notification	pb.notification	6	Notification pb_ostream buffer (0x100 bytes)
+0x004ec610	buffer	pb_encode_buf_notification	pb.notification	6	Notification protobuf encode buffer (0x4A / 74 bytes)
+0x005b4e34	buffer	pb_encode_buf_translate	pb.translate	6	Translate protobuf encode buffer (0x854 / 2132 bytes)
+0x005b4e40	buffer	pb_ostream_buf_translate	pb.translate	6	Translate pb_ostream buffer (0x100 bytes)
+0x0045bce8	buffer	pb_encode_buf_menu	pb.menu	4	Menu protobuf encode buffer (0x37C bytes)
+0x0046b92c	buffer	pb_encode_buf_module_config	pb.module_config	4	Module config protobuf encode buffer (8 bytes)
+0x004efc7c	buffer	pb_encode_buf_evenai_skill	pb.evenai	4	EvenAI SKILL separate encode buffer
+0x004efc80	buffer	pb_encode_buf_evenai_alt	pb.evenai	4	EvenAI alternate encode struct
+0x004fccd0	buffer	pb_ostream_buf_box_detect	pb.box_detect	4	Box detect pb_ostream buffer (0x100 bytes)
+0x004fccd4	buffer	pb_encode_buf_box_detect	pb.box_detect	4	Box detect protobuf encode buffer (10 bytes)
+0x0056a8fc	buffer	pb_ostream_buf_display_config	pb.display_config	4	Display config pb_ostream buffer (0x100 bytes)
+0x0056a900	buffer	pb_encode_buf_display_config	pb.display_config	4	Display config protobuf encode buffer (0x31C bytes)
+0x0059330c	buffer	pb_encode_buf_conversate	pb.conversate	4	Conversate protobuf encode buffer (0x1D6C / 7532 bytes)
+0x00593318	buffer	pb_ostream_buf_conversate	pb.conversate	4	Conversate pb_ostream buffer (0x100 bytes)
+0x005b47b8	buffer	pb_ostream_buf_ring	pb.ring	2	Ring pb_ostream buffer (0x100 bytes)
+0x005b47bc	buffer	pb_encode_buf_ring	pb.ring	2	Ring protobuf encode buffer (0x40 / 64 bytes)
+
+# ============================================================
+# STATE (45 entries)
+# ============================================================
+0x004cd574	state	smp_pairing_state	ble.smp	47	SMP pairing state variable (written 46x, heavy write)
+0x00476128	state	ring_protocol_state	ring.proto	41	Ring protocol state variable (written 28x)
+0x0055bd44	state	quicklist_page_counter	quicklist.page	40	Quicklist page counter/index (assigned 22x, read 3x)
+0x00571718	state	ble_conn_state_var	ble	28	BLE connection state variable (written 28x)
+0x005717f4	state	ble_conn_state_var2	ble	24	BLE connection state variable 2 (written 24x)
+0x0056d344	state	state_flag_0056d344	system_close	23	State flag (compared 9x, assigned 5x)
+0x00572bf0	state	var_00572bf0	ble_cordio	22	State variable (R0/W22)
+0x004a64b8	state	state_flag_004a64b8	rtos.queue	21	State flag (compared 2x, assigned 1x)
+0x0056fec8	state	counter_0056fec8	ble	21	Counter/accumulator (assigned 14x, read 3x)
+0x00572910	state	var_00572910	ble_cordio	20	State variable (R0/W20)
+0x004a0b18	state	eus_conn_state	profile.eus	19	EUS GATT conn state: [0]=conn_handle, [1]=pipe_id, [2]=subscribed, [3]=ready
+0x00453430	state	state_flag_00453430	elog	18	State flag (compared 1x, assigned 2x)
+0x0057180c	state	counter_0057180c	ble	18	Counter/accumulator (assigned 12x, read 6x)
+0x00571810	state	counter_00571810	ble	18	Counter/accumulator (assigned 12x, read 6x)
+0x00572598	state	counter_00572598	ble_cordio	18	Counter/accumulator (assigned 12x, read 6x)
+0x00449a30	state	counter_00449a30	ble	17	Counter/accumulator (assigned 5x, read 3x)
+0x0056f4f4	state	counter_0056f4f4	ble	17	Counter/accumulator (assigned 8x, read 3x)
+0x004415cc	state	nus_conn_state	profile.nus	16	NUS GATT conn state: [0]=conn_handle, [1]=pipe_id, [2]=subscribed, [3]=ready
+0x004499ec	state	var_004499ec	ble.smp	16	State variable (R0/W16)
+0x004a0fe4	state	efs_conn_state	profile.efs	16	EFS GATT conn state: [0]=conn_handle, [1]=pipe_id, [2]=subscribed, [3]=ready
+0x0057259c	state	var_0057259c	ble_cordio	16	State variable (R0/W16)
+0x005158d8	state	var_005158d8		15	State variable (R0/W10)
+0x0052e27c	state	state_flag_0052e27c	message_notify_list.ui	15	State flag (compared 6x, assigned 6x)
+0x0043d6f4	state	elog_runtime_state	elog	14	EasyLogger runtime state/flags
+0x00443198	state	state_flag_00443198	codec.host	14	State flag (compared 1x, assigned 4x)
+0x00479d84	state	counter_00479d84	ble	14	Counter/accumulator (assigned 8x, read 2x)
+0x00522f28	state	state_flag_00522f28	app	14	State flag (compared 3x, assigned 2x)
+0x0055ca50	state	counter_0055ca50	quicklist.page	14	Counter/accumulator (assigned 4x, read 2x)
+0x00572590	state	var_00572590	ble_cordio	14	State variable (R0/W14)
+0x0046b8f8	state	module_config_validate_input	pb.module_config	5	Module config validation input byte
+0x0054d200	state	msg_id_counter_teleprompter	pb.teleprompter	5	Teleprompter message ID auto-increment counter
+0x0046b91c	state	module_config_current_value	pb.module_config	4	Module config current calibration value
+0x004b0338	state	msg_id_counter_onboarding	pb.onboarding	4	Onboarding message ID auto-increment counter
+0x004aaecc	state	device_info_init_flag	pb.device_info	3	Device info initialized guard flag
+0x004ab108	state	device_info_counter	pb.device_info	3	Device info request counter
+0x004fd6bc	state	box_detect_trigger_count	pb.box_detect	3	Box detect trigger counter
+0x0056049c	state	dashboard_init_flag	pb.dashboard	3	Dashboard initialized guard flag
+0x0046b948	state	module_config_pending_flag	pb.module_config	2	Module config pending response flag
+0x0046b960	state	module_config_apply_flag	pb.module_config	2	Module config apply flag
+0x004ef37c	state	msg_id_counter_evenai_ctrl	pb.evenai	2	EvenAI CTRL message ID auto-increment counter
+0x004f05c8	state	msg_id_counter_evenai_event	pb.evenai	2	EvenAI EVENT message ID auto-increment counter
+0x004fccf0	state	msg_id_counter_box_detect	pb.box_detect	2	BoxDetect message ID auto-increment counter
+0x005b4e10	state	msg_id_counter_translate	pb.translate	2	Translate message ID auto-increment counter
+0x005932e8	state	msg_id_counter_conversate	pb.conversate	1	Conversate message ID auto-increment counter
+0x00593e80	state	conversate_active_flag	pb.conversate	1	Conversate active flag (1=active)
+
+# ============================================================
+# CONFIG (45 entries)
+# ============================================================
+0x0049d42c	config	dm_adv_config	ble.dm_adv	47	BLE DM advertising configuration constant
+0x004baa80	config	smp_config_const	ble.smp	47	SMP security configuration constant
+0x004b9584	config	ble_config_const	ble	35	BLE configuration constant
+0x004bb50c	config	smp_config_const2	ble.smp	30	SMP configuration constant 2
+0x0055be94	config	const_0055be94	quicklist.page	29	Read-only constant/config (read 2x, never written)
+0x0053c888	config	inline_data_0053c888	app.display	28	Inline data at address (used with &)
+0x0046e920	config	const_0046e920	app	25	Read-only constant/config (read 13x, never written)
+0x004523f4	config	const_004523f4	lv_refr	24	Read-only constant/config (read 7x, never written)
+0x0053caf4	config	inline_data_0053caf4	app.display	24	Inline data at address (used with &)
+0x005281e4	config	const_005281e4	app	23	Read-only constant/config (read 6x, never written)
+0x00572bf4	config	const_00572bf4	ble_cordio	22	Read-only constant/config (read 2x, never written)
+0x004931a0	config	const_004931a0	pt_protocol_procsr	20	Read-only constant/config (read 2x, never written)
+0x0050e4d0	config	const_0050e4d0	app	20	Read-only constant/config (read 6x, never written)
+0x0053cfa4	config	inline_data_0053cfa4	app	20	Inline data at address (used with &)
+0x00572194	config	const_00572194	ble_cordio	20	Read-only constant/config (read 1x, never written)
+0x00471244	config	const_00471244	ble	19	Read-only constant/config (read 9x, never written)
+0x0053c094	config	const_0053c094	ble	19	Read-only constant/config (read 3x, never written)
+0x005715e8	config	const_005715e8	ble	19	Read-only constant/config (read 1x, never written)
+0x004c939c	config	const_004c939c	lib.lfs	18	Read-only constant/config (read 2x, never written)
+0x004a4fc8	config	const_004a4fc8	svc.ancc	17	Read-only constant/config (read 6x, never written)
+0x004bc054	config	const_004bc054	ble	17	Read-only constant/config (read 1x, never written)
+0x0054ca94	config	const_0054ca94	nanopb	17	Read-only constant/config (read 7x, never written)
+0x0055ca6c	config	const_0055ca6c	quicklist.page	17	Read-only constant/config (read 5x, never written)
+0x0053c424	config	inline_data_0053c424	app	16	Inline data at address (used with &)
+0x005a8d90	config	const_005a8d90	lib.lv_cache_lru_rb	16	Read-only constant/config (read 2x, never written)
+0x0043bac4	config	npmx_driver_config	npmx_driver	15	nPM1300 PMIC driver configuration
+0x0045d448	config	const_0045d448	menu.page	15	Read-only constant/config (read 7x, never written)
+0x004a7eb0	config	const_004a7eb0	lib.lv_label	15	Read-only constant/config (read 2x, never written)
+0x004b0fa8	config	const_004b0fa8	onboarding.ui	15	Read-only constant/config (read 5x, never written)
+0x004b9d8c	config	const_004b9d8c	ble	15	Read-only constant/config (read 1x, never written)
+0x004feffc	config	const_004feffc	gpu.nema	15	Read-only constant/config (read 5x, never written)
+0x00522f44	config	const_00522f44	app	15	Read-only constant/config (read 15x, never written)
+0x00553bb4	config	const_00553bb4	dashboard.calendar	15	Read-only constant/config (read 3x, never written)
+0x00558d50	config	const_00558d50	quicklist.page	15	Read-only constant/config (read 1x, never written)
+0x00559b10	config	const_00559b10	quicklist	15	Read-only constant/config (read 5x, never written)
+0x00584948	config	const_00584948	navigation.ui	15	Read-only constant/config (read 1x, never written)
+0x005a8d88	config	const_005a8d88	lib.lv_cache_lru_rb	15	Read-only constant/config (read 2x, never written)
+0x00457eec	config	const_00457eec	evtloop	14	Read-only constant/config (read 2x, never written)
+0x004f0db0	config	const_004f0db0	app.status	14	Read-only constant/config (read 5x, never written)
+0x004fc524	config	const_004fc524	onboarding	14	Read-only constant/config (read 7x, never written)
+0x0050d750	config	const_0050d750	gpu.nema	14	Read-only constant/config (read 14x, never written)
+0x005648e8	config	const_005648e8	codec	14	Read-only constant/config (read 2x, never written)
+0x0057c0ac	config	const_0057c0ac	lib.freetype	14	Read-only constant/config (read 1x, never written)
+0x0058730c	config	const_0058730c	navigation.ui	14	Read-only constant/config (read 3x, never written)
+0x0059b470	config	const_0059b470	even_ai	14	Read-only constant/config (read 7x, never written)
+
+# ============================================================
+# CALLBACK (75 entries)
+# ============================================================
+0x00444cd8	callback	cb_ota_service_fn6	ota.service	35	Callback/data pointer in ota_service_fn6 (ota.service)
+0x004e92a8	callback	cb_efs_service_fn3	efs.service	35	Callback/data pointer in efs_service_fn3 (efs.service)
+0x0059d76c	callback	cb_evenhub_data_parser_fn2	evenhub.data_parser	31	Callback/data pointer in evenhub_data_parser_fn2 (evenhub.data_parser)
+0x00472104	callback	cb_ble_smpdb_fn3	ble.smpdb	30	Callback/data pointer in ble_smpdb_fn3 (ble.smpdb)
+0x005854c8	callback	cb_navigation_ui_fn19	navigation.ui	29	Callback/data pointer in navigation_ui_fn19 (navigation.ui)
+0x005847dc	callback	cb_navigation_ui_fn19	navigation.ui	27	Callback/data pointer in navigation_ui_fn19 (navigation.ui)
+0x00459180	callback	cb_ble_Slave_fn7	ble.Slave	26	Callback/data pointer in ble_Slave_fn7 (ble.Slave)
+0x004a0368	callback	cb_ble_ui_handler	ble.ui	26	Callback/data pointer in ble_ui_handler (ble.ui)
+0x004c8764	callback	cb_lfs_rawmount	lib.lfs	26	Callback/data pointer in lfs_rawmount (lib.lfs)
+0x004e5070	callback	cb_ble_disc_fn2	ble.disc	26	Callback/data pointer in ble_disc_fn2 (ble.disc)
+0x0058be6c	callback	cb_common_list_container_fn4	common_list_container	26	Callback/data pointer in common_list_container_fn4 (common_list_container)
+0x0058caf4	callback	cb_common_list_container_fn6	common_list_container	26	Callback/data pointer in common_list_container_fn6 (common_list_container)
+0x005a2400	callback	cb_evenhub_ui_fn16	evenhub.ui	26	Callback/data pointer in evenhub_ui_fn16 (evenhub.ui)
+0x00446200	callback	cb_ota_service_fn7	ota.service	25	Callback/data pointer in ota_service_fn7 (ota.service)
+0x0054280c	callback	cb_dashboard_async_update	dashboard	25	Callback/data pointer in dashboard_async_update (dashboard)
+0x0058735c	callback	cb_navigation_ui_fn25	navigation.ui	24	Callback/data pointer in navigation_ui_fn25 (navigation.ui)
+0x004bfc30	callback	cb_ble_master_fn7	ble.master	23	Callback/data pointer in ble_master_fn7 (ble.master)
+0x004c308c	callback	cb_load_indexed	lv_bin_decoder	23	Callback/data pointer in load_indexed (lv_bin_decoder)
+0x004ca01c	callback	cb_tlsf_block_absorb	lib.tlsf	23	Callback/data pointer in tlsf_block_absorb (lib.tlsf)
+0x005a09e0	callback	cb_evenhub_ui_fn12	evenhub.ui	23	Callback/data pointer in evenhub_ui_fn12 (evenhub.ui)
+0x005a1680	callback	cb_evenhub_ui_fn13	evenhub.ui	23	Callback/data pointer in evenhub_ui_fn13 (evenhub.ui)
+0x0045cfa4	callback	cb_menu_page_fn9	menu.page	22	Callback/data pointer in menu_page_fn9 (menu.page)
+0x004845f0	callback	cb_lv_draw_buf_invalidate_cache	lvgl.lv_draw_buf	22	Callback/data pointer in lv_draw_buf_invalidate_cache (lvgl.lv_draw_buf)
+0x00496d00	callback	cb_app_slave_fn2	app_slave	22	Callback/data pointer in app_slave_fn2 (app_slave)
+0x004b86e4	callback	cb_lv_freetype_init	lvgl.lv_freetype	22	Callback/data pointer in lv_freetype_init (lvgl.lv_freetype)
+0x0058e884	callback	cb_common_text_container_fn11	common_text_container	22	Callback/data pointer in common_text_container_fn11 (common_text_container)
+0x005a8d98	callback	cb_alloc_new_node	lv_cache_lru_rb	22	Callback/data pointer in alloc_new_node (lv_cache_lru_rb)
+0x0044c610	callback	cb_lv_obj_delete	lvgl.lv_obj_tree	21	Callback/data pointer in lv_obj_delete (lvgl.lv_obj_tree)
+0x0048a100	callback	cb_ATT_fn7	ATT	21	Callback/data pointer in ATT_fn7 (ATT)
+0x0048c548	callback	cb_dmConnSmExecute	ble.dm_conn_sm	21	Callback/data pointer in dmConnSmExecute (ble.dm_conn_sm)
+0x004455fc	callback	cb_ota_service_fn6	ota.service	20	Callback/data pointer in ota_service_fn6 (ota.service)
+0x00489338	callback	cb_ATT_fn5	ATT	20	Callback/data pointer in ATT_fn5 (ATT)
+0x00497b8c	callback	cb_APP_page_command_dispatch	APP	20	Callback/data pointer in APP_page_command_dispatch (APP)
+0x004b74cc	callback	cb_lvgl_internal_18	lvgl	20	Callback/data pointer in lvgl_internal_18 (lvgl)
+0x0051adcc	callback	cb_SMP_fn4	SMP	20	Callback/data pointer in SMP_fn4 (SMP)
+0x0051b24c	callback	cb_SmpDbGetPairingDisabledTime	ble.smp_db	20	Callback/data pointer in SmpDbGetPairingDisabledTime (ble.smp_db)
+0x00473274	callback	cb_ble_smpdb_fn7	ble.smpdb	19	Callback/data pointer in ble_smpdb_fn7 (ble.smpdb)
+0x0048f5cc	callback	cb_pt_protocol_procsr_fn11	pt_protocol_procsr	19	Callback/data pointer in pt_protocol_procsr_fn11 (pt_protocol_procsr)
+0x004e7ca4	callback	cb_pb_ser_handler	pb.ser	19	Callback/data pointer in pb_ser_handler (pb.ser)
+0x004ebae8	callback	cb_svc_whitelist_notify	svc_whitelist	19	Callback/data pointer in svc_whitelist_notify (svc_whitelist)
+0x00532628	callback	cb_drv_touchdfu_fn12	drv.touchdfu	19	Callback/data pointer in drv_touchdfu_fn12 (drv.touchdfu)
+0x004a7fc0	callback	cb_lv_label_set_text	lvgl.lv_label	18	Callback/data pointer in lv_label_set_text (lvgl.lv_label)
+0x0058d688	callback	cb_common_text_container_fn1	common_text_container	18	Callback/data pointer in common_text_container_fn1 (common_text_container)
+0x00492a44	callback	cb_pt_protocol_procsr_fn36	pt_protocol_procsr	17	Callback/data pointer in pt_protocol_procsr_fn36 (pt_protocol_procsr)
+0x004ea288	callback	cb_efs_service_fn5	efs.service	17	Callback/data pointer in efs_service_fn5 (efs.service)
+0x005457cc	callback	cb_codec_dfu_write_boot_config	codec.dfu	17	Callback/data pointer in codec_dfu_write_boot_config (codec.dfu)
+0x0048974c	callback	cb_ATT_fn5	ATT	16	Callback/data pointer in ATT_fn5 (ATT)
+0x00497b90	callback	cb_APP_page_command_dispatch	APP	16	Callback/data pointer in APP_page_command_dispatch (APP)
+0x00499c70	callback	cb_ble_comm_fn1	ble.comm	16	Callback/data pointer in ble_comm_fn1 (ble.comm)
+0x004de884	callback	cb_ATT_fn12	ATT	16	Callback/data pointer in ATT_fn12 (ATT)
+0x00514690	callback	cb_lv_freetype_set_cbs_outline_font	lvgl.lv_freetype_outline	16	Callback/data pointer in lv_freetype_set_cbs_outline_font (lvgl.lv_freetype_outline)
+0x0054401c	string	codec_dfu_source_file	codec.dfu	16	Log source file path used across codec DFU functions
+0x00447020	callback	cb_ota_service_fn9	ota.service	15	Callback/data pointer in ota_service_fn9 (ota.service)
+0x00467ca4	callback	cb_service_settings_main	service_settings	15	Callback/data pointer in service_settings_main (service_settings)
+0x00488284	callback	cb_ATT_fn1	ATT	15	Callback/data pointer in ATT_fn1 (ATT)
+0x0049d450	callback	cb_dmAdvStopDirected	ble.dm_adv	15	Callback/data pointer in dmAdvStopDirected (ble.dm_adv)
+0x004d39dc	callback	cb_APP_notification_display_handler	APP	15	Callback/data pointer in APP_notification_display_handler (APP)
+0x004e17e0	callback	cb_APP_settings_page_create	APP	15	Callback/data pointer in APP_settings_page_create (APP)
+0x004e29c4	callback	cb_APP_dashboard_page_create	APP	15	Callback/data pointer in APP_dashboard_page_create (APP)
+0x004e313c	callback	cb_AppDiscFindService	ble.app_disc	15	Callback/data pointer in AppDiscFindService (ble.app_disc)
+0x004e6e84	callback	cb_SMP_fn1	SMP	15	Callback/data pointer in SMP_fn1 (SMP)
+0x0052b00c	callback	cb_SmpScGetCancelMsgWithReattempt	ble.smp_sc_main	15	Callback/data pointer in SmpScGetCancelMsgWithReattempt (ble.smp_sc_main)
+0x00585f54	callback	cb_navigation_ui_fn19	navigation.ui	15	Callback/data pointer in navigation_ui_fn19 (navigation.ui)
+0x005861b4	callback	cb_navigation_ui_fn19	navigation.ui	15	Callback/data pointer in navigation_ui_fn19 (navigation.ui)
+0x0044358c	callback	cb_display_thread_main_loop	display_thread	14	Callback/data pointer in display_thread_main_loop (display_thread)
+0x0044c5fc	callback	cb_lv_obj_delete	lvgl.lv_obj_tree	14	Callback/data pointer in lv_obj_delete (lvgl.lv_obj_tree)
+0x0044c604	callback	cb_lv_obj_delete	lvgl.lv_obj_tree	14	Callback/data pointer in lv_obj_delete (lvgl.lv_obj_tree)
+0x0045589c	callback	cb_DM_fn1	DM	14	Callback/data pointer in DM_fn1 (DM)
+0x004760f8	callback	cb_ux_setting_handler	ux.setting	14	Callback/data pointer in ux_setting_handler (ux.setting)
+0x004b62a0	callback	cb_nv_sysDt_fn1	nv.sysDt	14	Callback/data pointer in nv_sysDt_fn1 (nv.sysDt)
+0x004cedac	callback	cb_lvgl_page_callee	lvgl	14	Callback/data pointer in lvgl_page_callee (lvgl)
+0x004cf08c	callback	cb_lv_cache_entry_inc_ref	lvgl.lv_cache_entry	14	Callback/data pointer in lv_cache_entry_inc_ref (lvgl.lv_cache_entry)
+0x005454b0	callback	cb_codec_dfu_erase_and_write_data	codec.dfu	14	Callback/data pointer in codec_dfu_erase_and_write_data (codec.dfu)
+0x0057f5cc	callback	cb_common_image_container_fn1	common_image_container	14	Callback/data pointer in common_image_container_fn1 (common_image_container)
+0x00583b28	callback	cb_navigation_ui_fn17	navigation.ui	14	Callback/data pointer in navigation_ui_fn17 (navigation.ui)
+
+# ============================================================
+# STRING (295 entries)
+# ============================================================
+0x00489748	string	log_fmt_ATT	ATT	52	Log format string in ATT (ATT_fn5)
+0x00444cdc	string	source_file_ota_service	ota.service	35	Source file path for ota.service module
+0x00444ce0	string	log_tag_ota_service	ota.service	35	EasyLogger module tag for [ota.service]
+0x004e92ac	string	source_file_efs_service	efs.service	35	Source file path for efs.service module
+0x004e92b0	string	log_tag_efs_service	efs.service	35	EasyLogger module tag for [efs.service]
+0x004a036c	string	source_file_ble_ui	ble.ui	34	Source file path for ble.ui module
+0x00472108	string	source_file_ble_smpdb	ble.smpdb	32	Source file path for ble.smpdb module
+0x0047210c	string	log_tag_ble_smpdb	ble.smpdb	32	EasyLogger module tag for [ble.smpdb]
+0x005454b4	string	source_file_codec_dfu	codec.dfu	31	Source file path for codec.dfu module
+0x005454b8	string	log_tag_codec_dfu	codec.dfu	31	EasyLogger module tag for [codec.dfu]
+0x0059d770	string	source_file_evenhub_data_parser	evenhub.data_parser	31	Source file path for evenhub.data_parser module
+0x0059d774	string	log_tag_evenhub_data_parser	evenhub.data_parser	31	EasyLogger module tag for [evenhub.data_parser]
+0x004706c8	string	source_file_ble_param	ble.param	30	Source file path for ble.param module
+0x004706cc	string	log_tag_ble_param	ble.param	30	EasyLogger module tag for [ble.param]
+0x004e3fb0	string	log_fmt_APP	APP	30	Log format string in APP (APP_quicklist_page_close)
+0x005854cc	string	source_file_navigation_ui	navigation.ui	29	Source file path for navigation.ui module
+0x005854d0	string	log_tag_navigation_ui	navigation.ui	29	EasyLogger module tag for [navigation.ui]
+0x005a1684	string	source_file_evenhub_ui	evenhub.ui	29	Source file path for evenhub.ui module
+0x00459184	string	source_file_ble_Slave	ble.Slave	28	Source file path for ble.Slave module
+0x00459188	string	log_tag_ble_Slave	ble.Slave	28	EasyLogger module tag for [ble.Slave]
+0x0058e84c	string	source_file_common_text_container	common_text_container	28	Source file path for common_text_container module
+0x0058e850	string	log_tag_common_text_container	common_text_container	28	EasyLogger module tag for [common_text_container]
+0x004968fc	string	source_file_app_slave	app_slave	27	Source file path for app_slave module
+0x00496900	string	log_tag_app_slave	app_slave	27	EasyLogger module tag for [app_slave]
+0x005847e0	string	source_file_navigation_ui	navigation.ui	27	Source file path for navigation.ui module
+0x005847e4	string	log_tag_navigation_ui	navigation.ui	27	EasyLogger module tag for [navigation.ui]
+0x0059f254	string	source_file_evenhub_ui	evenhub.ui	27	Source file path for evenhub.ui module
+0x0059f258	string	log_tag_evenhub_ui	evenhub.ui	27	EasyLogger module tag for [evenhub.ui]
+0x004678cc	string	source_file_service_settings	service.settings	26	Source file path for service.settings module
+0x004678d0	string	log_tag_service_settings	service.settings	26	EasyLogger module tag for [service.settings]
+0x004a0370	string	log_tag_ble_ui	ble.ui	26	EasyLogger module tag for [ble.ui]
+0x004bfc34	string	source_file_ble_master	ble.master	26	Source file path for ble.master module
+0x004bfc38	string	log_tag_ble_master	ble.master	26	EasyLogger module tag for [ble.master]
+0x004e2464	string	source_file_app_disc	app.disc	26	Source file path for app.disc module
+0x004e5074	string	source_file_ble_disc	ble.disc	26	Source file path for ble.disc module
+0x004e5078	string	log_tag_ble_disc	ble.disc	26	EasyLogger module tag for [ble.disc]
+0x004eba94	string	source_file_svc_whitelist	svc_whitelist	26	Source file path for svc_whitelist module
+0x0052a060	string	log_fmt_ATT	ATT	26	Log format string in ATT (ATT_fn20)
+0x0058be70	string	source_file_common_list_container	common_list_container	26	Source file path for common_list_container module
+0x0058be74	string	log_tag_common_list_container	common_list_container	26	EasyLogger module tag for [common_list_container]
+0x0058caf8	string	source_file_common_list_container	common_list_container	26	Source file path for common_list_container module
+0x0058cafc	string	log_tag_common_list_container	common_list_container	26	EasyLogger module tag for [common_list_container]
+0x005a2404	string	source_file_evenhub_ui	evenhub.ui	26	Source file path for evenhub.ui module
+0x005a2408	string	log_tag_evenhub_ui	evenhub.ui	26	EasyLogger module tag for [evenhub.ui]
+0x00446204	string	source_file_ota_service	ota.service	25	Source file path for ota.service module
+0x00446208	string	log_tag_ota_service	ota.service	25	EasyLogger module tag for [ota.service]
+0x00446f48	string	source_file_ota_service	ota.service	25	Source file path for ota.service module
+0x00446f4c	string	log_tag_ota_service	ota.service	25	EasyLogger module tag for [ota.service]
+0x00468c6c	string	source_file_font_manager	font_manager	25	Source file path for font_manager module
+0x00468c70	string	log_tag_font_manager	font_manager	25	EasyLogger module tag for [font_manager]
+0x004aac60	string	source_file_pb_service_setting	pb_service_setting	25	Source file path for pb_service_setting module
+0x004aac64	string	log_tag_pb_service_setting	pb_service_setting	25	EasyLogger module tag for [pb_service_setting]
+0x004b02e8	string	source_file_pb_onboarding	pb.onboarding	25	Source file path for pb.onboarding module
+0x004bef40	string	source_file_ble_master	ble.master	25	Source file path for ble.master module
+0x004bef44	string	log_tag_ble_master	ble.master	25	EasyLogger module tag for [ble.master]
+0x004dfb8c	string	source_file_srv_em9305	srv.em9305	25	Source file path for srv.em9305 module
+0x004dfb90	string	log_tag_srv_em9305	srv.em9305	25	EasyLogger module tag for [srv.em9305]
+0x004e9eec	string	source_file_efs_service	efs.service	25	Source file path for efs.service module
+0x004e9ef0	string	log_tag_efs_service	efs.service	25	EasyLogger module tag for [efs.service]
+0x00531784	string	source_file_drv_touchdfu	drv.touchdfu	25	Source file path for drv.touchdfu module
+0x00531788	string	log_tag_drv_touchdfu	drv.touchdfu	25	EasyLogger module tag for [drv.touchdfu]
+0x00542810	string	source_file_dashboard	dashboard	25	Source file path for dashboard module
+0x00542814	string	log_tag_dashboard	dashboard	25	EasyLogger module tag for [dashboard]
+0x0045cde4	string	source_file_menu_page	menu.page	24	Source file path for menu.page module
+0x0045cde8	string	log_tag_menu_page	menu.page	24	EasyLogger module tag for [menu.page]
+0x00472e4c	string	source_file_ble_smpdb	ble.smpdb	24	Source file path for ble.smpdb module
+0x00472e50	string	log_tag_ble_smpdb	ble.smpdb	24	EasyLogger module tag for [ble.smpdb]
+0x00489750	string	source_file_ATT	ATT	24	Source file path for ATT module
+0x0048f764	string	source_file_pt_protocol_procsr	pt_protocol_procsr	24	Source file path for pt_protocol_procsr module
+0x0048f768	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	24	EasyLogger module tag for [pt_protocol_procsr]
+0x004918ac	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	24	EasyLogger module tag for [pt_protocol_procsr]
+0x00493f98	string	source_file_pt_protocol_procsr	pt_protocol_procsr	24	Source file path for pt_protocol_procsr module
+0x00493f9c	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	24	EasyLogger module tag for [pt_protocol_procsr]
+0x0051add8	string	source_file_SMP	SMP	24	Source file path for SMP module
+0x00587360	string	source_file_navigation_ui	navigation.ui	24	Source file path for navigation.ui module
+0x00587364	string	log_tag_navigation_ui	navigation.ui	24	EasyLogger module tag for [navigation.ui]
+0x0058d728	string	source_file_common_text_container	common_text_container	24	Source file path for common_text_container module
+0x0058d72c	string	log_tag_common_text_container	common_text_container	24	EasyLogger module tag for [common_text_container]
+0x0045f118	string	source_file_conversate_fsm	conversate.fsm	23	Source file path for conversate.fsm module
+0x0045f11c	string	log_tag_conversate_fsm	conversate.fsm	23	EasyLogger module tag for [conversate.fsm]
+0x00463a58	string	source_file_sync_module	sync.module	23	Source file path for sync.module module
+0x00463a5c	string	log_tag_sync_module	sync.module	23	EasyLogger module tag for [sync.module]
+0x0047124c	string	source_file_ble_param	ble.param	23	Source file path for ble.param module
+0x00471250	string	log_tag_ble_param	ble.param	23	EasyLogger module tag for [ble.param]
+0x00492af0	string	source_file_pt_protocol_procsr	pt_protocol_procsr	23	Source file path for pt_protocol_procsr module
+0x00492af4	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	23	EasyLogger module tag for [pt_protocol_procsr]
+0x0054499c	string	source_file_codec_dfu	codec.dfu	23	Source file path for codec.dfu module
+0x005449a0	string	log_tag_codec_dfu	codec.dfu	23	EasyLogger module tag for [codec.dfu]
+0x0057f5d0	string	source_file_common_image_container	common_image_container	23	Source file path for common_image_container module
+0x0057f5d4	string	log_tag_common_image_container	common_image_container	23	EasyLogger module tag for [common_image_container]
+0x005a09e4	string	source_file_evenhub_ui	evenhub.ui	23	Source file path for evenhub.ui module
+0x005a09e8	string	log_tag_evenhub_ui	evenhub.ui	23	EasyLogger module tag for [evenhub.ui]
+0x005a1354	string	log_tag_evenhub_ui	evenhub.ui	23	EasyLogger module tag for [evenhub.ui]
+0x0045fb48	string	source_file_sync_module_framework	sync.module.framework	22	Source file path for sync.module.framework module
+0x0045fb4c	string	log_tag_sync_module_framework	sync.module.framework	22	EasyLogger module tag for [sync.module.framework]
+0x00462eb8	string	source_file_sync_module	sync.module	22	Source file path for sync.module module
+0x00462ebc	string	log_tag_sync_module	sync.module	22	EasyLogger module tag for [sync.module]
+0x004750b4	string	source_file_ble_smpdb	ble.smpdb	22	Source file path for ble.smpdb module
+0x004750b8	string	log_tag_ble_smpdb	ble.smpdb	22	EasyLogger module tag for [ble.smpdb]
+0x00494a34	string	source_file_pt_protocol_procsr	pt_protocol_procsr	22	Source file path for pt_protocol_procsr module
+0x00494a38	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	22	EasyLogger module tag for [pt_protocol_procsr]
+0x004e2468	string	log_tag_app_disc	app.disc	22	EasyLogger module tag for [app.disc]
+0x00544020	string	source_file_codec_dfu	codec.dfu	22	Source file path for codec.dfu module
+0x00544024	string	log_tag_codec_dfu	codec.dfu	22	EasyLogger module tag for [codec.dfu]
+0x00585f58	string	source_file_navigation_ui	navigation.ui	22	Source file path for navigation.ui module
+0x00585f5c	string	log_tag_navigation_ui	navigation.ui	22	EasyLogger module tag for [navigation.ui]
+0x00490280	string	source_file_pt_protocol_procsr	pt_protocol_procsr	21	Source file path for pt_protocol_procsr module
+0x00490284	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	21	EasyLogger module tag for [pt_protocol_procsr]
+0x0049e8a8	string	source_file_pb_devc	pb.devc	21	Source file path for pb.devc module
+0x0049e8ac	string	log_tag_pb_devc	pb.devc	21	EasyLogger module tag for [pb.devc]
+0x004dc190	string	source_file_codec_host	codec.host	21	Source file path for codec.host module
+0x004dc194	string	log_tag_codec_host	codec.host	21	EasyLogger module tag for [codec.host]
+0x004ec5bc	string	source_file_pb_notif	pb.notif	21	Source file path for pb.notif module
+0x00541a14	string	source_file_dashboard	dashboard	21	Source file path for dashboard module
+0x00541a18	string	log_tag_dashboard	dashboard	21	EasyLogger module tag for [dashboard]
+0x00445600	string	source_file_ota_service	ota.service	20	Source file path for ota.service module
+0x00445604	string	log_tag_ota_service	ota.service	20	EasyLogger module tag for [ota.service]
+0x00455830	string	source_file_DM	DM	20	Source file path for DM module
+0x0045768c	string	source_file_task_ble_production	task.ble_production	20	Source file path for task.ble_production module
+0x00457690	string	log_tag_task_ble_production	task.ble_production	20	EasyLogger module tag for [task.ble_production]
+0x00469dec	string	source_file_drv_norflash	drv.norflash	20	Source file path for drv.norflash module
+0x00469df0	string	log_tag_drv_norflash	drv.norflash	20	EasyLogger module tag for [drv.norflash]
+0x0047393c	string	source_file_ble_smpdb	ble.smpdb	20	Source file path for ble.smpdb module
+0x00473998	string	log_tag_ble_smpdb	ble.smpdb	20	EasyLogger module tag for [ble.smpdb]
+0x0048a10c	string	source_file_ATT	ATT	20	Source file path for ATT module
+0x00499c74	string	source_file_ble_comm	ble.comm	20	Source file path for ble.comm module
+0x00499ccc	string	log_tag_ble_comm	ble.comm	20	EasyLogger module tag for [ble.comm]
+0x004b6914	string	source_file_nv_sysDt	nv.sysDt	20	Source file path for nv.sysDt module
+0x004b6918	string	log_tag_nv_sysDt	nv.sysDt	20	EasyLogger module tag for [nv.sysDt]
+0x004c3fe8	string	log_fmt_driver_uled	driver.uled	20	Log format string in driver.uled (driver_uled_fn2)
+0x004d8a40	string	source_file_npmx_driver	npmx_driver	20	Source file path for npmx_driver module
+0x004d8a44	string	log_tag_npmx_driver	npmx_driver	20	EasyLogger module tag for [npmx_driver]
+0x00565574	string	source_file_teleprompt_ui	teleprompt.ui	20	Source file path for teleprompt.ui module
+0x00565578	string	log_tag_teleprompt_ui	teleprompt.ui	20	EasyLogger module tag for [teleprompt.ui]
+0x00595878	string	source_file_driver_a6n-g	driver.a6n-g	20	Source file path for driver.a6n-g module
+0x0059587c	string	log_tag_driver_a6n-g	driver.a6n-g	20	EasyLogger module tag for [driver.a6n-g]
+0x00596358	string	source_file_driver_uled_common	driver.uled_common	20	Source file path for driver.uled_common module
+0x0059635c	string	log_tag_driver_uled_common	driver.uled_common	20	EasyLogger module tag for [driver.uled_common]
+0x00465e04	string	source_file_onboarding	onboarding	19	Source file path for onboarding module
+0x00465e08	string	log_tag_onboarding	onboarding	19	EasyLogger module tag for [onboarding]
+0x0046e058	string	source_file_device_mgr	device_mgr	19	Source file path for device_mgr module
+0x0046e05c	string	log_tag_device_mgr	device_mgr	19	EasyLogger module tag for [device_mgr]
+0x00474790	string	source_file_ble_smpdb	ble.smpdb	19	Source file path for ble.smpdb module
+0x00474794	string	log_tag_ble_smpdb	ble.smpdb	19	EasyLogger module tag for [ble.smpdb]
+0x0048e4b4	string	source_file_pt_protocol_procsr	pt_protocol_procsr	19	Source file path for pt_protocol_procsr module
+0x0048e4b8	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	19	EasyLogger module tag for [pt_protocol_procsr]
+0x004e7ca8	string	source_file_pb_ser	pb.ser	19	Source file path for pb.ser module
+0x004e7cac	string	log_tag_pb_ser	pb.ser	19	EasyLogger module tag for [pb.ser]
+0x0053262c	string	source_file_drv_touchdfu	drv.touchdfu	19	Source file path for drv.touchdfu module
+0x00532630	string	log_tag_drv_touchdfu	drv.touchdfu	19	EasyLogger module tag for [drv.touchdfu]
+0x0046f7cc	string	source_file_ble_msgtx	ble.msgtx	18	Source file path for ble.msgtx module
+0x0046f7d0	string	log_tag_ble_msgtx	ble.msgtx	18	EasyLogger module tag for [ble.msgtx]
+0x00490cdc	string	source_file_pt_protocol_procsr	pt_protocol_procsr	18	Source file path for pt_protocol_procsr module
+0x00490ce0	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	18	EasyLogger module tag for [pt_protocol_procsr]
+0x00491664	string	source_file_pt_protocol_procsr	pt_protocol_procsr	18	Source file path for pt_protocol_procsr module
+0x00493574	string	source_file_pt_protocol_procsr	pt_protocol_procsr	18	Source file path for pt_protocol_procsr module
+0x00493578	string	log_tag_pt_protocol_procsr	pt_protocol_procsr	18	EasyLogger module tag for [pt_protocol_procsr]
+0x004a3654	string	source_file_kv_module_cfg	kv.module_cfg	18	Source file path for kv.module_cfg module
+0x004a3658	string	log_tag_kv_module_cfg	kv.module_cfg	18	EasyLogger module tag for [kv.module_cfg]
+0x004d4dbc	string	source_file_pb_devc	pb.devc	18	Source file path for pb.devc module
+0x004d4dc0	string	log_tag_pb_devc	pb.devc	18	EasyLogger module tag for [pb.devc]
+0x004dcb84	string	source_file_codec_host	codec.host	18	Source file path for codec.host module
+0x004dcb88	string	log_tag_codec_host	codec.host	18	EasyLogger module tag for [codec.host]
+0x004dd5a0	string	source_file_codec_host	codec.host	18	Source file path for codec.host module
+0x004dd5a4	string	log_tag_codec_host	codec.host	18	EasyLogger module tag for [codec.host]
+0x004e3e98	string	source_file_APP	APP	18	Source file path for APP module
+0x00540488	string	source_file_conversate_tag	conversate.tag	18	Source file path for conversate.tag module
+0x0054048c	string	log_tag_conversate_tag	conversate.tag	18	EasyLogger module tag for [conversate.tag]
+0x00540dd8	string	source_file_teleprompt_data	teleprompt.data	18	Source file path for teleprompt.data module
+0x00540ddc	string	log_tag_teleprompt_data	teleprompt.data	18	EasyLogger module tag for [teleprompt.data]
+0x00545c0c	string	source_file_codec_dfu	codec.dfu	18	Source file path for codec.dfu module
+0x00545c10	string	log_tag_codec_dfu	codec.dfu	18	EasyLogger module tag for [codec.dfu]
+0x0054fc08	string	source_file_dashboard_stock	dashboard.stock	18	Source file path for dashboard.stock module
+0x0054fc0c	string	log_tag_dashboard_stock	dashboard.stock	18	EasyLogger module tag for [dashboard.stock]
+0x00568ef8	string	source_file_pb_quicklist	pb.quicklist	18	Source file path for pb.quicklist module
+0x0056a744	string	source_file_pb_health	pb.health	18	Source file path for pb.health module
+0x00442938	string	source_file_system	system	17	Source file path for system module
+0x0044293c	string	log_tag_system	system	17	EasyLogger module tag for [system]
+0x00443590	string	source_file_display_thread	display_thread	17	Source file path for display_thread module
+0x00443594	string	log_tag_display_thread	display_thread	17	EasyLogger module tag for [display_thread]
+0x00455b24	string	log_fmt_ble_dm_conn	ble.dm_conn	17	Log format string in ble.dm_conn (dmConnCcbDealloc)
+0x00456898	string	log_fmt_ble_dm_conn	ble.dm_conn	17	Log format string in ble.dm_conn (dmConnUpdExecute)
+0x00456e18	string	log_fmt_DM	DM	17	Log format string in DM (DM_fn7)
+0x0046a6a8	string	source_file_drv_norflash	drv.norflash	17	Source file path for drv.norflash module
+0x0046a6ac	string	log_tag_drv_norflash	drv.norflash	17	EasyLogger module tag for [drv.norflash]
+0x00488288	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn1)
+0x0048a104	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn7)
+0x0048a120	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn9)
+0x0048a9b0	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn11)
+0x00497b94	string	source_file_APP	APP	17	Source file path for APP module
+0x0049dda8	string	log_fmt_APP	APP	17	Log format string in APP (APP_evenai_page_handler)
+0x0049ddb8	string	log_fmt_APP	APP	17	Log format string in APP (APP_evenhub_page_handler)
+0x0049f22c	string	source_file_pb_auth	pb.auth	17	Source file path for pb.auth module
+0x0049f230	string	log_tag_pb_auth	pb.auth	17	EasyLogger module tag for [pb.auth]
+0x004a045c	string	log_fmt_APP	APP	17	Log format string in APP (APP_navigation_close_handler)
+0x004a0468	string	log_fmt_APP	APP	17	Log format string in APP (APP_navigation_update_handler)
+0x004b0154	string	log_tag_pb_onboarding	pb.onboarding	17	EasyLogger module tag for [pb.onboarding]
+0x004c3fe0	string	source_file_driver_uled	driver.uled	17	Source file path for driver.uled module
+0x004c3fe4	string	log_tag_driver_uled	driver.uled	17	EasyLogger module tag for [driver.uled]
+0x004dec6c	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn13)
+0x004dec8c	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn14)
+0x004dec94	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn15)
+0x004deca4	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn15)
+0x004e1b78	string	log_fmt_APP	APP	17	Log format string in APP (APP_settings_page_update)
+0x004e1e50	string	log_fmt_APP	APP	17	Log format string in APP (APP_settings_page_close)
+0x004e29c8	string	log_fmt_APP	APP	17	Log format string in APP (APP_dashboard_page_create)
+0x004e2f18	string	log_fmt_APP	APP	17	Log format string in APP (APP_dashboard_page_update)
+0x004e2f20	string	source_file_APP	APP	17	Source file path for APP module
+0x004e3140	string	log_fmt_ble_app_disc	ble.app_disc	17	Log format string in ble.app_disc (AppDiscFindService)
+0x004e3150	string	log_fmt_ble_app_disc	ble.app_disc	17	Log format string in ble.app_disc (AppDiscConfigure)
+0x004e315c	string	log_fmt_APP	APP	17	Log format string in APP (APP_quicklist_page_create)
+0x004e3cb8	string	log_fmt_APP	APP	17	Log format string in APP (APP_quicklist_page_update)
+0x004e70d8	string	log_fmt_SMP	SMP	17	Log format string in SMP (SMP_fn2)
+0x0051b258	string	log_fmt_SMP	SMP	17	Log format string in SMP (SMP_fn6)
+0x0051b27c	string	log_fmt_SMP	SMP	17	Log format string in SMP (SMP_fn7)
+0x00529a44	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn18)
+0x00529e30	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn19)
+0x00529e60	string	log_fmt_ATT	ATT	17	Log format string in ATT (ATT_fn19)
+0x0052b010	string	log_fmt_ble_smp_sc_main	ble.smp_sc_main	17	Log format string in ble.smp_sc_main (SmpScGetCancelMsgWithReattempt)
+0x00569b38	string	source_file_health_data_mgr	health.data_mgr	17	Source file path for health.data_mgr module
+0x00569b3c	string	log_tag_health_data_mgr	health.data_mgr	17	EasyLogger module tag for [health.data_mgr]
+0x00583b2c	string	source_file_navigation_ui	navigation.ui	17	Source file path for navigation.ui module
+0x00583b30	string	log_tag_navigation_ui	navigation.ui	17	EasyLogger module tag for [navigation.ui]
+0x00588750	string	source_file_navigation_ui	navigation.ui	17	Source file path for navigation.ui module
+0x00588754	string	log_tag_navigation_ui	navigation.ui	17	EasyLogger module tag for [navigation.ui]
+0x00441f7c	string	source_file_display_thread	display_thread	16	Source file path for display_thread module
+0x00441f80	string	log_tag_display_thread	display_thread	16	EasyLogger module tag for [display_thread]
+0x0045c094	string	source_file_pb_menu	pb.menu	16	Source file path for pb.menu module
+0x0045c098	string	log_tag_pb_menu	pb.menu	16	EasyLogger module tag for [pb.menu]
+0x00463158	string	log_fmt_sync_module	sync.module	16	Log format string in sync.module (sync_module_register)
+0x004909ec	string	log_fmt_pt_protocol_procsr	pt_protocol_procsr	16	Log format string in pt_protocol_procsr (pt_protocol_procsr_fn19)
+0x00494b50	string	log_fmt_pt_protocol_procsr	pt_protocol_procsr	16	Log format string in pt_protocol_procsr (pt_protocol_procsr_fn50)
+0x004b5e84	string	source_file_nv_sysDt	nv.sysDt	16	Source file path for nv.sysDt module
+0x004b5e88	string	log_tag_nv_sysDt	nv.sysDt	16	EasyLogger module tag for [nv.sysDt]
+0x004be238	string	source_file_task_ring	task.ring	16	Source file path for task.ring module
+0x004be23c	string	log_tag_task_ring	task.ring	16	EasyLogger module tag for [task.ring]
+0x004de890	string	source_file_ATT	ATT	16	Source file path for ATT module
+0x0052449c	string	source_file_charge	charge	16	Source file path for charge module
+0x005244a0	string	log_tag_charge	charge	16	EasyLogger module tag for [charge]
+0x00531fa4	string	source_file_drv_touchdfu	drv.touchdfu	16	Source file path for drv.touchdfu module
+0x00531fa8	string	log_tag_drv_touchdfu	drv.touchdfu	16	EasyLogger module tag for [drv.touchdfu]
+0x00551294	string	source_file_dashboard_stock	dashboard.stock	16	Source file path for dashboard.stock module
+0x00551298	string	log_tag_dashboard_stock	dashboard.stock	16	EasyLogger module tag for [dashboard.stock]
+0x0059e6a4	string	source_file_evenhub_main	evenhub.main	16	Source file path for evenhub.main module
+0x0059e6a8	string	log_tag_evenhub_main	evenhub.main	16	EasyLogger module tag for [evenhub.main]
+0x0059f9d4	string	source_file_evenhub_ui	evenhub.ui	16	Source file path for evenhub.ui module
+0x0059f9d8	string	log_tag_evenhub_ui	evenhub.ui	16	EasyLogger module tag for [evenhub.ui]
+0x00457e80	string	source_file_fw_evt_loop	fw_evt_loop	15	Source file path for fw_evt_loop module
+0x00457e84	string	log_tag_fw_evt_loop	fw_evt_loop	15	EasyLogger module tag for [fw_evt_loop]
+0x0049abc0	string	source_file_ble_comm	ble.comm	15	Source file path for ble.comm module
+0x0049abc4	string	log_tag_ble_comm	ble.comm	15	EasyLogger module tag for [ble.comm]
+0x004a1c74	string	log_tag_ble_ancc	ble.ancc	15	EasyLogger module tag for [ble.ancc]
+0x004c0e54	string	source_file_input_manager	input.manager	15	Source file path for input.manager module
+0x004c0e58	string	log_tag_input_manager	input.manager	15	EasyLogger module tag for [input.manager]
+0x004d6f3c	string	source_file_svc_audio	svc.audio	15	Source file path for svc.audio module
+0x004d6f40	string	log_tag_svc_audio	svc.audio	15	EasyLogger module tag for [svc.audio]
+0x0053e8f0	string	source_file_conversate	conversate	15	Source file path for conversate module
+0x0053e8f4	string	log_tag_conversate	conversate	15	EasyLogger module tag for [conversate]
+0x0054f058	string	source_file_dashboard_stock	dashboard.stock	15	Source file path for dashboard.stock module
+0x0054f05c	string	log_tag_dashboard_stock	dashboard.stock	15	EasyLogger module tag for [dashboard.stock]
+0x00550a74	string	source_file_dashboard_stock	dashboard.stock	15	Source file path for dashboard.stock module
+0x00550a78	string	log_tag_dashboard_stock	dashboard.stock	15	EasyLogger module tag for [dashboard.stock]
+0x0055ce74	string	source_file_quicklist_page	quicklist.page	15	Source file path for quicklist.page module
+0x0055ce78	string	log_tag_quicklist_page	quicklist.page	15	EasyLogger module tag for [quicklist.page]
+0x00597214	string	source_file_driver_jbd4010	driver.jbd4010	15	Source file path for driver.jbd4010 module
+0x00597218	string	log_tag_driver_jbd4010	driver.jbd4010	15	EasyLogger module tag for [driver.jbd4010]
+0x00446f78	string	log_fmt_ota_service	ota.service	14	Log format string in ota.service (ota_service_fn8)
+0x00462390	string	source_file_sync_module_framework	sync.module.framework	14	Source file path for sync.module.framework module
+0x00462394	string	log_tag_sync_module_framework	sync.module.framework	14	EasyLogger module tag for [sync.module.framework]
+0x00463ca0	string	log_fmt_sync_module	sync.module	14	Log format string in sync.module (inter_eye_command_sync)
+0x0046af08	string	source_file_drv_norflash	drv.norflash	14	Source file path for drv.norflash module
+0x0046af0c	string	log_tag_drv_norflash	drv.norflash	14	EasyLogger module tag for [drv.norflash]
+0x004756b8	string	source_file_ble_smpdb	ble.smpdb	14	Source file path for ble.smpdb module
+0x004756bc	string	log_tag_ble_smpdb	ble.smpdb	14	EasyLogger module tag for [ble.smpdb]
+0x004760fc	string	source_file_ux_setting	ux.setting	14	Source file path for ux.setting module
+0x00476100	string	log_tag_ux_setting	ux.setting	14	EasyLogger module tag for [ux.setting]
+0x0048757c	string	source_file_task_manager	task.manager	14	Source file path for task.manager module
+0x00487580	string	log_tag_task_manager	task.manager	14	EasyLogger module tag for [task.manager]
+0x0048ff48	string	log_fmt_pt_protocol_procsr	pt_protocol_procsr	14	Log format string in pt_protocol_procsr (pt_protocol_procsr_fn12)
+0x00491eac	string	source_file_pt_protocol_procsr	pt_protocol_procsr	14	Source file path for pt_protocol_procsr module
+0x004a1bf0	string	source_file_ble_ancc	ble.ancc	14	Source file path for ble.ancc module
+0x004b5134	string	source_file_charger_common	charger_common	14	Source file path for charger_common module
+0x004b5138	string	log_tag_charger_common	charger_common	14	EasyLogger module tag for [charger_common]
+0x004e8f30	string	log_fmt_efs_service	efs.service	14	Log format string in efs.service (efs_service_fn2)
+0x004ecb20	string	source_file_callback_mgr	callback.mgr	14	Source file path for callback.mgr module
+0x004ecb24	string	log_tag_callback_mgr	callback.mgr	14	EasyLogger module tag for [callback.mgr]
+0x0055a20c	string	source_file_quicklist_page	quicklist.page	14	Source file path for quicklist.page module
+0x0055a210	string	log_tag_quicklist_page	quicklist.page	14	EasyLogger module tag for [quicklist.page]
+0x0056adc0	string	source_file_pb_health	pb.health	14	Source file path for pb.health module
+0x0056adc4	string	log_tag_pb_health	pb.health	14	EasyLogger module tag for [pb.health]
+0x00587e1c	string	source_file_navigation_ui	navigation.ui	14	Source file path for navigation.ui module
+0x00587e20	string	log_tag_navigation_ui	navigation.ui	14	EasyLogger module tag for [navigation.ui]
+0x0058dd14	string	log_tag_common_text_container	common_text_container	13	EasyLogger module tag for [common_text_container]
+0x005b4758	string	source_file_pb_ring	pb.ring	13	Source file path for pb.ring module
+0x005b475c	string	log_tag_pb_ring	pb.ring	13	EasyLogger module tag for [pb.ring]
+
+# === RTOS CONFIGURATION (Thread attrs, function pointers, timer callbacks) ===
+0x004437bc	config	elog_async_thread_attr	elog.async	-	osThreadAttr_t for elog async handler thread (0x24 bytes)
+0x004437c0	callback	elog_async_thread_entry	elog.async	-	Function pointer: elog async log writer thread entry
+0x00457eb0	config	fw_evt_loop_thread_attr	evtloop	-	osThreadAttr_t for fw_evt_loop event dispatch thread
+0x00459978	config	task_ble_wsf_thread_attr	task.ble.wsf	-	osThreadAttr_t for BLE WSF (Cordio) event thread
+0x004614f8	config	display_thread_attr	display_thread	-	osThreadAttr_t for display/LVGL UI thread
+0x004615d8	callback	display_timer_callback	display_thread	-	Timer callback for display periodic refresh (100ms)
+0x0046e04c	config	displaydrvmgr_thread_attr	task.displaydrvmgr	-	osThreadAttr_t for JBD4010 display driver manager
+0x004a918c	callback	worker_pool_entry	rtos.worker	-	Function pointer: common worker pool thread entry
+0x004d07dc	config	codec_i2s_thread_attr	codec.i2s	-	osThreadAttr_t for codec I2S DMA handler thread
+0x004d07e0	callback	codec_i2s_thread_entry	codec.i2s	-	Function pointer: GX8002B codec I2S thread entry
+0x004d0b20	config	uart_sync_thread_attr	uart_sync	-	osThreadAttr_t for inter-eye UART sync (TinyFrame)
+0x004d0b24	callback	uart_sync_thread_entry	uart_sync	-	Function pointer: inter-eye TinyFrame sync thread entry
+0x004d8080	callback	npm1300_pmic_timer_cb	sensor.pmic	-	Timer callback: nPM1300 PMIC periodic monitoring
+
+# === PROTOBUF SERVICE DATA (Field tables, encode buffers, message structs) ===
+0x0046c3e8	state	pb_struct_settings	pb.settings	-	Protobuf message struct for SETTINGS (0x0C bytes)
+0x0046c3ec	buffer	pb_encode_buf_settings	pb.settings	-	Protobuf encode buffer for SETTINGS
+0x004f06e8	buffer	pb_encode_buf_even	pb.even	-	Protobuf encode buffer for EVEN
+0x00560488	state	pb_struct_dashboard	pb.dashboard	-	Protobuf message struct for DASHBOARD (0x100 bytes)

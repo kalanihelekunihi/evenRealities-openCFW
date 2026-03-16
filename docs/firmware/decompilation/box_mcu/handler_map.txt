@@ -1,0 +1,1052 @@
+# G2 Charging Case (Box) Firmware Handler Map
+# Board: B200, FW: 1.2.54, STM32L0xx ARM Cortex-M0+ @ 0x08000000
+# Source: Ghidra decompilation of firmware_box_stripped.bin (414 functions)
+# Cross-referenced with function_map.txt, module_architecture.txt, rtos_map.txt, data_map.txt
+#
+# This map documents all handler entry points: UART command handlers, interrupt
+# handlers, FreeRTOS task entry points, timer callbacks, and state machine transitions.
+
+
+# ===========================================================================
+# 1. BOOT / RESET CHAIN
+#    Reset vector -> system init -> RTOS start
+# ===========================================================================
+
+reset_vector_thunk (0x080000c0)
+  Trigger: Power-on reset, watchdog reset, NVIC system reset
+  Action: Thunk to system_init_main (0x0800a3b0)
+
+system_init_main (0x0800a3b0)
+  Trigger: Called from reset_vector_thunk at boot
+  Action: Full system initialization sequence
+  Sub-functions called:
+    1. hal_systick_init (0x08004d10)         — Configure SysTick timer
+    2. hal_rcc_periph_and_clock_init (0x08008250) — HSI 16MHz, PLLx2 = 32MHz
+    3. gpio_and_rcc_init (0x08006864)        — GPIO port clocks, pin config, EXTI
+       - Configures EXTI IRQs 5,6,7 (priority 3) for Hall, USB, 2217 interrupts
+    4. i2c_gpio_reinit (0x0800284c)          — I2C bus pin reconfiguration
+    5. uart_gls_init_with_iwdg (0x080069d4)  — Glasses UART (USART2) + IWDG init
+       - Baud: derived from 0x7F divisor, 1 stop bit
+       - Calls hal_uart_init, hal_iwdg_init, hal_iwdg_refresh
+    6. uart_debug_rx_init (0x08006a24)       — Debug serial port init (RX interrupt)
+       - 12-byte word length, RX idle interrupt, 1-byte DMA buffer
+    7. uart_peripheral_init (0x08006714)     — UART peripheral config
+    8. hal_flash_read_option_bytes (0x08004824) — Verify RDP level = 0xAA
+       - If RDP != 0xAA: reprogram option bytes (flash unlock + program + lock)
+    9. Wake source detection:
+       - Reads PWR->CSR register bits to determine wake reason
+       - Bit 28 clear, bit 27 set -> HALL sensor wake (code 1, "wake up from HALL")
+       - Bit 28 clear, bit 29 set -> USB plug wake (code 2, "wake up from USB")
+       - Neither -> RTC wake (code 3, "wake up from RTC")
+       - All clear -> Cold boot (code 0, "Power up!")
+   10. self_check_all_peripherals (0x08002f64) — Verify all I2C chips
+       - Prints "B200  s  08x 08x 08x" with FW version "1.2.54"
+       - Checks: 2217 chip (I2C reg 0xA0), PMIC (chip ID 0x14), YHM2510, 4005
+   11. osKernelRun (0x0800a6f0)              — Initialize FreeRTOS kernel
+   12. create_all_tasks_and_timers (0x0800678c) — Create all RTOS objects
+   13. osKernelStart (0x0800a718)             — Start scheduler (never returns)
+
+
+# ===========================================================================
+# 2. FREERTOS TASK ENTRY POINTS (6 application tasks)
+#    Created in create_all_tasks_and_timers (0x0800678c)
+# ===========================================================================
+
+create_all_tasks_and_timers (0x0800678c)
+  Trigger: Called from system_init_main during boot
+  Action: Creates 6 threads, 4 timers, 1 message queue
+  Sub-functions called:
+    - osThreadNew (0x0800a860) x6 for task creation
+    - osTimerNew  (0x0800a754) x4 for timer creation
+    - osMessageQueueNew (0x0800a64e) x1 for event queue
+
+  Tasks created (in order):
+    #  Name              Priority  Entry Addr   Params Offset  Handle Offset
+    1  defaultTask       0 (Idle)  0x08007038   +0x00          +0x10
+    2  ledTask           1 (Low)   [indirect]   +0x20          +0x18
+    3  glsDetectTask     1 (Low)   0x0800cc4c   +0x30          +0x1C
+    4  pwrManagerTask    1 (Low)   0x080082c6   +0x40          +0x20
+    5  agingTimer        0 (Idle)  [indirect]   +0x10          +0x14
+    6  powerOnTimer      0 (Idle)  [indirect]   +0x50          +0x24
+
+  Timers created (in order):
+    #  Name                 Type       Params Offset  Handle Offset
+    1  clearLedTimer        One-shot   +0x84          +0x2C
+    2  showErrorLedTimer    One-shot   +0xA8          +0x30
+    3  startLedTimer        One-shot   +0xCC          +0x34
+    4  setAgingStatusTimer  One-shot   +0x60          +0x28
+
+  Queue created:
+    1  appEvent             +0xF0          +0x38
+
+--- defaultTask_body (0x08007038) ---
+  Trigger: FreeRTOS scheduler start (priority 0)
+  Action: Main supervisory loop, runs every 1000ms via osDelay(1000) + tail recursion
+  Responsibilities (per loop iteration):
+    1. Counter increment: loop_counter++, loop_counter_div5 = counter / 5
+    2. Aging check: if counter%5 == 0 AND aging active -> aging_timer_callback (0x08002c70)
+    3. Idle/Standby detection:
+       - No USB, no lid open, no glasses L, no glasses R:
+         - idle_counter reaches 10 (0x0A) -> "Standby, reason: idle"
+           -> read PMIC, disable watchdog/boost, configure wakeup, enter standby
+    4. Glasses battery full detection:
+       - Both L+R present, both charging confirmed, both charge_done:
+         - fake_standby_counter reaches 5 -> "Standby, reason: gls_bat_full"
+           -> IWDG refresh(0x3840), standby sequence
+    5. Water detection timeout:
+       - Per-side 300s counter; if water detected, only clear timer
+       - If no water after 300s: reset_gls_side_counters, exit_idle_mode
+    6. OTA check trigger:
+       - Conditions: both glasses present, loop_counter > 20, bat > 50%, bat > 20%
+       - Sends 0x58 OTA check frame to glasses via uart_tx_with_ctrl
+       - On 0x59 response: get running bank, erase target, copy SN, download FW
+       - On success: ota_swap_bank_and_reset (0x08003740)
+       - On failure: ota_notify_gls_result(0), clear OTA state
+    7. Glasses detection state change:
+       - Calls glasses_detect_ir_scan (0x0800cc4c) inline
+       - State transitions: GLS IN/OUT -> LED timer restart, counter reset
+       - Detection strings: "L & R GLS IN", "L & R GLS OUT", "L IN, R OUT", etc.
+    8. Charging management:
+       - Per-side charge_result tracking (0=none, 1=error, 2=good)
+       - poll_gls_battery_status (0x080018a8) every 10 cycles
+       - No-reply timeout: 15 cycles -> log, 180 cycles -> reset UART+pins
+    9. Event flag polling:
+       - osEventFlagsWait on appEvent handle
+       - Bit 1 (0x02): timer reschedule -> osTimerChangePeriod on defaultTask timer
+       - Bit 12 (0x1000): exit idle mode -> exit_idle_mode (0x0800137c)
+   10. Sleep mode entry:
+       - idle_counter > 0x1D (29): stop all LED timers, set idle flag
+       - IWDG refresh, configure wakeup, enter WFI sleep
+       - On wake: tail-recurse into FUN_08007038()
+  Sub-functions called:
+    - aging_timer_callback (0x08002c70)
+    - glasses_detect_ir_scan (0x0800cc4c)
+    - poll_gls_battery_status (0x080018a8)
+    - exit_idle_mode (0x0800137c)
+    - ota_box_download_firmware (0x08001538)
+    - ota_swap_bank_and_reset (0x08003740)
+    - ota_notify_gls_result (0x08001d2c)
+    - clear_ota_and_charge_pins (0x080012a8)
+    - update_gls_charge_pins (0x0800982c)
+    - reset_gls_side_counters (0x08003838)
+    - reset_gls_l_counters (0x08003874)
+    - reset_gls_r_counters (0x08003898)
+    - restart_led_timer_1s (0x0800b98c)
+    - hal_pwr_enter_standby (0x08004ee8)
+    - hal_pwr_enter_sleep (0x08004f0c)
+    - hal_iwdg_refresh (0x080057b0)
+    - watchdog_enable (0x08002c46)
+    - pmic_boost_enable (0x08002be8)
+    - osEventFlagsWait (0x0800a62e)
+    - osEventFlagsSet (0x0800a5ea)
+    - osDelay (0x0800a5c8)
+
+--- glasses_detect_ir_scan (0x0800cc4c) ---
+  Trigger: Called from defaultTask_body when self_check_ok is set
+  Action: IR LED scan to detect glasses in/out per side (L then R)
+  Algorithm:
+    Phase 1 — Left side scan:
+      1. Check preconditions: gls_l_present set AND no water detected (0x31)
+         - If one-side-only mode: skip if other eye present
+      2. Set GPIO pins: gpio_write_pin(5, 3), gpio_write_pin(3, 0xAF)
+         gpio_write_pin(6, 0x8B)
+      3. osDelay(3ms) — IR LED settling time
+      4. adc_read_ir_sensor (0x08002e94) — Read ADC value
+      5. Threshold math: ADC * 1000 / reference_value
+         - Result < 0x50 (80): glasses PRESENT (IR reflected)
+         - Result >= 0x79 (121): glasses ABSENT (no reflection)
+         - In between: indeterminate
+      6. Water detection: if "present" but leaking threshold hit 6 times:
+         - "L water detected, disable 5V output" -> set water flag
+    Phase 2 — Right side scan (same algorithm, different GPIO pins):
+      - gpio_write_pin(6, 0x87), different ADC channel
+      - "R water detected, disable 5V output" on 6 consecutive leaks
+    Phase 3 — Verification scan:
+      - Secondary IR check with different GPIO config (0x85, 0x0B)
+      - Confirms/denies initial detection
+    Final: update_gls_charge_pins (0x0800982c) to set charge pin state
+  Sub-functions called:
+    - gpio_write_pin (0x08009800)
+    - adc_read_ir_sensor (0x08002e94)
+    - osDelay (0x0800a5c8)
+    - update_gls_charge_pins (0x0800982c)
+    - gpio_disable_all_charge_output (0x0800cf6c)
+    - backup_yhm2510_regs (0x0800d068)
+
+--- pwrManagerTask_stub (0x080082c6) ---
+  Trigger: FreeRTOS scheduler start (priority 1)
+  Action: EMPTY BODY — stub that immediately returns
+  Notes: Power management is handled entirely in defaultTask_body.
+         This task exists as a placeholder for future expansion.
+
+--- ledTask [indirect entry] ---
+  Trigger: FreeRTOS scheduler start (priority 1)
+  Action: LED indicator control based on charging/error/aging state
+  LED phases:
+    - Phase 0: idle (cleared on GLS status change)
+    - Phase 1: charging in progress (green/amber pattern)
+    - Phase 2: cleared/transition
+  Sub-functions called:
+    - gpio_gls_l_charge_start (0x0800bca8)
+    - gpio_gls_r_charge_start (0x0800bcf6)
+    - gpio_gls_l_reset_pins (0x0800bcd2)
+    - gpio_gls_r_reset_pins (0x0800bd20)
+
+--- agingTimer [thread, indirect entry] ---
+  Trigger: FreeRTOS scheduler start (priority 0)
+  Action: Factory aging test coordinator
+  Works with: aging_timer_callback (0x08002c70) for periodic checks
+  State machine driven by aging_running_state_machine (0x0800949c)
+
+--- powerOnTimer [thread, indirect entry] ---
+  Trigger: FreeRTOS scheduler start (priority 0)
+  Action: Power-on LED sequence after boot
+
+
+# ===========================================================================
+# 3. UART COMMAND HANDLERS — Glasses-to-Box Protocol (5A A5 FF)
+#    Main dispatch chain: uart_rx_isr_callback -> uart_rx_dispatch ->
+#    glasses_cmd_handler / serial_cmd_dispatcher
+# ===========================================================================
+
+# --- ISR Level ---
+
+uart_rx_isr_callback (0x08006368)
+  Trigger: UART RX interrupt (byte received on glasses UART or debug UART)
+  Action: Byte-level frame assembly into RX buffer
+  Protocol parsing:
+    - Looks for 'Z' (0x5A) as frame start byte
+    - Accumulates bytes into buffer at DAT_080064c4
+    - Tracks byte count at pcVar2+2 (ushort)
+    - Frame validation:
+      - Byte 0: must be 'Z' (0x5A), 'D' (0x44), or 'd' (0x64)
+      - Byte 1: must be 0xA5
+      - Byte 2: 0x7F = short frame, 0xCF = long frame
+      - Short frame (0x7F): length = byte[3], total = length + 5
+      - Long frame (0xCF): length = byte[3] + byte[4]*256, total = length + 6
+    - When complete frame received: osTimerStart(appEvent_timer, 8ms)
+    - Buffer overflow at 0x4B0 (1200 bytes): uart_rx_buffer_reset (0x0800a170)
+    - Debug prefix "DE" check via check_debug_prefix_de (0x0800bc8c)
+  Sub-functions called:
+    - hal_uart_receive_blocking (0x08006210) — for mid-frame blocking reads
+    - uart_rx_buffer_reset (0x0800a170) — on overflow or error
+    - osTimerStart (0x0800a6a0) — trigger frame processing (8ms timer)
+    - check_debug_prefix_de (0x0800bc8c) — detect "DE" debug prefix
+
+# --- Task Level: Frame Router ---
+
+uart_rx_dispatch (0x0800085c)
+  Trigger: Called from defaultTask when RX buffer has >= 2 bytes
+  Action: Routes complete UART frames to appropriate handler
+  Frame format parsing:
+    1. Check first byte for debug prefix:
+       - hex_char_to_nibble(byte[0]) == 0x0D AND hex_char_to_nibble(byte[1]) == 0x0E:
+         -> Convert hex-encoded bytes, route to serial_cmd_dispatcher
+    2. Check for 5A A5 protocol frame:
+       - byte[0] must be 'Z' (0x5A)
+       - byte[1] must be 0xA5
+       - byte[2] == 0x7F (short frame):
+         - payload_len = byte[3]
+         - Validate: payload_len == total_len - 5
+         - extended_flag = 0, data starts at byte+4
+       - byte[2] == 0xCF (long frame):
+         - payload_len = byte[3] + byte[4]*256
+         - Validate: payload_len == total_len - 6
+         - extended_flag = 1, data starts at byte+5
+       - Route to glasses_cmd_handler (0x08000de0)
+    3. Fallback: serial_cmd_dispatcher for single-byte debug commands
+  Sub-functions called:
+    - glasses_cmd_handler (0x08000de0) — for 5A A5 FF protocol frames
+    - serial_cmd_dispatcher (0x08000928) — for debug/hex commands
+    - hex_char_to_nibble (0x080099ac) — hex byte conversion
+
+# --- 5A A5 FF Glasses Command Handler ---
+
+glasses_cmd_handler (0x08000de0)
+  Trigger: Called from uart_rx_dispatch for valid 5A A5 FF frames
+  Signature: (byte *payload, uint length, int extended_flag)
+  Action: Dispatch based on command byte (payload[0])
+
+  Frame validation (all commands):
+    - payload[2] must == 2 (glasses protocol frame marker)
+      Exception: payload[2] != 2 routes to sub-protocol (aging exit / relay)
+    - payload[1] must == 0 (reserved)
+    - payload[2] must be <= 1 (direction flag)
+    - Length validation per frame type
+
+  === Glasses Command Byte Dispatch Table ===
+
+  CMD 0x06 — Relay Standby Command
+    Handler: inline
+    Action: Send ACK (0x06) via send_cmd_ack, then relay 0xEE to serial_cmd_dispatcher
+    Effect: Triggers box standby via debug command path
+
+  CMD 0x14 — Extended Status Query
+    Handler: inline
+    Action: Read YHM2510 remaining capacity, temperature, full capacity
+    Response: 11-byte frame with voltage, temperature, capacity fields
+    Sub-calls: yhm2510_read_remain_cap_stub, yhm2510_read_temperature, yhm2510_read_full_cap
+
+  CMD 0x3D — Exit Aging Status (Left eye)
+    Handler: inline
+    Trigger: Left glasses reports aging exit
+    Action: If aging flag set, starts setAgingStatusTimer with 128ms period
+    Debug: "[AGING NOT] exit aging status (L)"
+
+  CMD 0x3E — Exit Aging Status (Right eye / Aging Data Response)
+    Handler: inline (two paths)
+    Path 1 (payload[2] == 2): Glasses-to-box aging status response
+      - Updates aging flag: aging_flag = (payload[4] != 0)
+      - Clears aging counters on transition from active to inactive
+      - ACK via send_cmd_ack(0x3E)
+    Path 2 (payload[2] != 2, from uart_rx_wait_and_parse): Aging data
+      - Return value 0x3E if payload[4] == 0 or 4
+
+  CMD 0x3F — Enable/Disable Output
+    Handler: inline
+    Action: Sets output_enabled flag at state+0x15 from payload[4]
+    Effect: When enabled (payload[4] != 0):
+      - gpio_disable_all_charge_output (0x0800cf6c)
+      - Clears gls_l_present and gls_r_present
+    ACK: send_cmd_ack(0x3F)
+    Debug: "[enable/disable] output, reason: cmd"
+
+  CMD 0x41 — System Reset
+    Handler: inline
+    Action: Send ACK (0x41) via send_cmd_ack, then relay 0xFF to serial_cmd_dispatcher
+    Effect: Triggers nvic_system_reset (0x08004e50) via debug command path
+
+  CMD 0x50 — Version Query
+    Handler: inline
+    Response: 7-byte frame containing firmware version
+    Format: [version_header, 0x01, 0x02, 0x36, version_byte]
+    Version: 1.2.54 (0x36 = 54 decimal)
+
+  CMD 0x51 — Status Query (SN + Version)
+    Handler: inline
+    Action: Read SN from flash via read_sn_bytes (0x08002efc)
+    Response: 12-byte frame with SN + version data
+
+  CMD 0x56 — OTA GLS Status (Enter/Exit per-eye)
+    Handler: inline
+    Parsing:
+      - payload[4] == 0: ENTER OTA mode
+        - payload[5] == 0: Left eye ("Enter GLS OTA Status, L")
+          -> ota_gls_ready = 1
+        - payload[5] != 0: Right eye ("Enter GLS OTA Status, R")
+          -> ota_gls_ready = 2
+        - ota_download_started = 0
+      - payload[4] != 0: EXIT OTA mode ("Exit GLS OTA Status")
+        -> ota_gls_ready = 0
+        -> clear_ota_and_charge_pins (0x080012a8)
+        -> send_cmd_ack(0x56)
+
+  CMD 0x5C — Case Status Query
+    Handler: inline
+    Response: 5-byte frame
+    Content: Battery status + lid open flag
+    Format: [header, status_byte, lid_is_closed]
+
+  CMD 0x5D — Charging Control Per-Eye
+    Handler: inline
+    Parsing:
+      - payload[4] == 0: RIGHT eye
+        -> gpio_set_gls_r_5v(payload[5] == 0) — enable/disable 5V to right
+      - payload[4] != 0: LEFT eye
+        -> gpio_set_gls_l_5v(payload[5] == 0) — enable/disable 5V to left
+    ACK: send_cmd_ack(0x5D)
+
+  CMD 0x5E — Set Serial Number
+    Handler: inline
+    Validation: payload length must be > 0x13 (19 bytes: 4 header + 16 SN)
+    Action: flash_write_sn_bank2(payload+4)
+    Success: send_cmd_ack(0x5E), "Set SN Even done"
+    Failure: Send error frame, "Set SN Even fail"
+    Always: debug_print_hex(payload+4, 16) to dump SN bytes
+
+  CMD 0x5F — Serial Number Query
+    Handler: inline
+    Action: read_sn_full (0x08002f24) from flash
+    Response: 20-byte frame (0x14) with 16-byte SN
+
+  CMD 0x68 — Silent Mode Toggle
+    Handler: inline
+    Action: Sets silent_mode flag from payload[4]
+    Effect: Controls debug output (silent_mode != 0 suppresses all prints)
+    ACK: send_cmd_ack(0x68)
+
+  Unrecognized commands:
+    - Debug print: "dst_box: cannot parse cmd: %02x"
+
+  === Sub-protocol: Non-glasses frames (payload[2] != 2) ===
+  These are relay frames from the main firmware, not direct glasses commands.
+  Handler: inline in glasses_cmd_handler
+  Validation:
+    - Short frame (extended_flag==0): payload[1]==0, payload[2]<=1, payload[3]+5==length
+      -> Timer period 0x20 (32ms)
+    - Long frame (extended_flag==1): payload[1]==0, payload[2]<=1,
+      payload[3]+payload[4]*256+6==length
+      -> Timer period 0x400 (1024ms)
+  Action: Start timer, memcpy payload to relay buffer at DAT_080012a4
+
+
+# ===========================================================================
+# 4. SERIAL DEBUG COMMAND HANDLER
+#    For development/manufacturing via debug UART port
+# ===========================================================================
+
+serial_cmd_dispatcher (0x08000928)
+  Trigger: Called from uart_rx_dispatch for debug hex commands
+  Signature: (byte *data, uint length)
+  Action: Dispatch based on first byte (*data)
+
+  === Debug Command Byte Dispatch Table ===
+
+  CMD 0xAF — Debug Output Toggle
+    Requires: length >= 2
+    Action: silent_mode = (data[1] != 0)
+    Effect: Toggles all debug_printf output on/off
+    Debug: prints new state if debug was previously on
+
+  CMD 0xB0 — Dump YHM2510 Registers
+    Action: osTimerStart(setAgingStatusTimer, 256ms)
+    Effect: Timer fires dump_yhm2510_regs (0x0800d030) which prints
+            "2510: 0x00~0x07:" followed by 8 register bytes
+
+  CMD 0xD0 — Watchdog Enable/Disable
+    Requires: length >= 2
+    Action: watchdog_enable(data[1] != 0) via (0x08002c46)
+    Debug: "[Enable/Disable] watchdog 4005"
+
+  CMD 0xD1 — Simulation Mode
+    Requires: length >= 4
+    Action: Sets 3 simulation flags from data[1..3]:
+      - simu_full_bat = data[1] != 0
+      - simu_empty_bat = data[2] != 0
+      - simu_charging = data[3] != 0
+    Debug: "simu_full_bat:%d, simu_empty_bat:%d"
+
+  CMD 0xD2 — One-Side Charging Toggle
+    Requires: length >= 2
+    Action: one_side_charging_enabled = (data[1] != 0)
+    Debug: "[Enable/Disable] one side charging"
+
+  CMD 0xD3 — Query One-Side Charging Status
+    Action: Print current one-side charging state
+    Debug: "One side charging: [enabled/disabled]"
+
+  CMD 0xDD — Dog Feed Toggle
+    Action: dog_feed_enabled = (data[1] != 0)
+    Effect: Controls whether IWDG is periodically refreshed
+
+  CMD 0xDF — Enter Ship Mode
+    Guard: USB must not be connected (checks state+3 flag)
+    Blocked: "usb in, cannot enter shipmode!"
+    Action (when allowed):
+      1. i2c_read_pmic_wrapper(0x10, buf, 1) — save PMIC state
+      2. i2c_read_pmic_wrapper(0x11, buf, 1) — save PMIC state
+      3. watchdog_enable(0) — disable watchdog
+      4. pmic_boost_enable(0) — disable boost converter
+      5. hal_pwr_disable_wakeup(0x2B) — disable wakeup sources
+      6. hal_pwr_config_wakeup(config) — configure ship mode wakeup
+      7. Set PWR->CR flags for ship mode
+      8. hal_pwr_enter_standby() — enter shipping standby
+    Debug: "Standby, reason: cmd"
+
+  CMD 0xEE — Enter Standby
+    Guard: USB must not be connected
+    Action: Same standby sequence as 0xDF but with different wakeup config
+    Debug: "Standby, reason: cmd"
+
+  CMD 0xFF — System Reset
+    Action:
+      1. debug_printf("Reset, reason: cmd")
+      2. nvic_system_reset (0x08004e50) — ARM NVIC system reset
+    Effect: Full MCU reset, re-enters reset_vector_thunk
+
+  CMD 0xA0-0xAE — Jump Table Commands
+    Handler: Computed jump table at 0x08000940
+    Action: Indirect call via byte lookup table
+    Note: Ghidra could not fully recover this jump table.
+          These are likely manufacturing/calibration commands.
+
+  Unrecognized commands: silently ignored (return without action)
+
+
+# ===========================================================================
+# 5. UART RX FROM GLASSES — Response Parser
+#    Parses responses from glasses when box initiates communication
+# ===========================================================================
+
+uart_rx_wait_and_parse (0x08001e58)
+  Trigger: Called after box sends a command to glasses, to receive response
+  Signature: (int side) — side: 1=left, 0=right
+  Action: Parse response frame from glasses, return command byte or 0xFF on error
+  Timeout: Polls 4 buffer slots looking for 5A A5 FF header
+
+  === Response Command Byte Handlers ===
+
+  RESP 0x00 — Null Response
+    Action: Ignored (no-op)
+
+  RESP 0x07 — Unknown Acknowledgment
+    Action: Return 0x07
+
+  RESP 0x08 — Unknown Acknowledgment
+    Action: Return 0x08
+
+  RESP 0x13 — Battery Status Report / Charging State
+    Parsing (length == 6):
+      - payload[3] = data length (must == 6)
+      - payload[4] = flags: bit 0 = charging active
+      - payload[5..6] = voltage (LE u16, byte-swapped to BE)
+      - payload[7] = battery percentage (raw)
+      - payload[8] = temperature sign (0=positive, 1=negative)
+      - payload[9] = temperature value (degrees)
+      Per-side processing (side==1 for L, side==0 for R):
+        LEFT:
+          - Track charging cycle count (7-bit counter)
+          - If charging OR cycle < 10: increment counter
+          - Set gls_l_charge_confirmed = 1
+          - Charging done threshold: bat >= 0x62 (98%) -> charge_done flag
+          - "Disable charging since bat %d > 97" when threshold crossed
+          - Debug: "L charging:%d, done:%d, vol:%dmV, bat:%d, cur:%dmA"
+        RIGHT:
+          - Same logic with right-side state offsets
+          - Debug: "R charging:%d, done:%d, vol:%dmV, bat:%d, cur:%dmA"
+    Parsing (length == 1, payload[4] == 1):
+      - Charging confirmed by glasses
+      - "L charging 1, confirmed by GLS L"
+      - "R charging 1, confirmed by GLS R"
+    Return: 0x13
+
+  RESP 0x3E — Aging Status Response
+    Parsing: payload[4] == 0 OR payload[4] == 4 -> return 0x3E
+    Otherwise: return 0xFF (invalid)
+
+  RESP 0x46 — Aging Data
+    Parsing:
+      - side==1 (L): aging_data_L = (payload[4] != 0)
+      - side==0 (R): aging_data_R = (payload[4] != 0)
+    Return: 0x46
+
+  RESP 0x58 — OTA Firmware Check Response
+    Parsing:
+      - payload[3] must == 0x20 (32 bytes of OTA info)
+      - payload[9] = major version (must == 2)
+      - payload[10] = minor version (must > 0x36 = 54)
+      - If new version available:
+        - ota_gls_ready = 3 (box ready)
+        - Extract firmware size (4 bytes BE at payload+0x0C)
+        - Extract CRC (4 bytes BE at payload+0x10)
+        - Debug: "[OTA BOX] new FW: %d.%d, size:%d, crc:0x%x"
+      - If no update: "[OTA BOX] nothing new, cur 1.%d.%d"
+    Return: implicit (state set for OTA flow)
+
+  RESP 0x59 — OTA Start Response
+    Parsing: payload[3]==1 AND payload[4]==0 -> return 0x59 (glasses ready)
+    Otherwise: return 0xFF
+
+  RESP 0x5A — OTA Data Chunk Response
+    Parsing:
+      - payload[3] & 7 must == 1 (valid chunk marker)
+      - Compute checksum of payload[4..4+len-1]
+      - Verify checksum at payload[4+len]
+      - On valid: memcpy chunk to download buffer, record chunk size
+    Return: implicit (chunk stored)
+
+  RESP 0x5B — OTA Complete Response
+    Parsing: payload[3]==1 AND payload[4]==0 -> return 0x5B
+    Otherwise: return 0xFF
+
+  CRC validation for all responses:
+    - Compute checksum over payload[0..len-1]
+    - Compare with payload[len]
+    - Mismatch: "GLS RX error, CRC wrong" + hex dump
+    - Mismatch on 0x5A responses: tolerated (return 0xFF without error log)
+
+
+# ===========================================================================
+# 6. INTERRUPT HANDLERS
+#    ARM Cortex-M0+ vector table entries
+# ===========================================================================
+
+hard_fault_handler (0x08003cb8)
+  Trigger: ARM HardFault exception (invalid memory access, etc.)
+  Action: disableIRQinterrupts() then infinite loop (no recovery)
+  Effect: System hangs until watchdog reset
+
+svc_handler (0x080000cc)
+  Trigger: SVC instruction (FreeRTOS context switch request)
+  Action: FreeRTOS SVC handler for initial task start
+
+xPortPendSVHandler (0x0800b354)
+  Trigger: PendSV exception (FreeRTOS context switch)
+  Action: Save/restore task context, switch to highest-priority ready task
+
+freertos_port_systick_handler (0x0800cb38)
+  Trigger: SysTick timer interrupt (every 1ms)
+  Action:
+    1. freertos_increment_tick — advance RTOS tick counter
+    2. hal_systick_increment (0x08004d00) — advance HAL tick counter
+  Effect: Drives all RTOS timing, delays, and timer expiration
+
+uart2_isr_entry (0x080082c8)
+  Trigger: USART2 IRQ (glasses UART)
+  Action: hal_uart_irq_dispatch (0x08005d74) -> uart_rx_isr_callback (0x08006368)
+  Flow: Reads byte from USART2->RDR, stores in RX buffer, triggers frame assembly
+
+hal_uart_isr_handler (0x08005ab4)
+  Trigger: USART IRQ (debug serial port)
+  Action: STM32 HAL UART ISR — handles RX/TX/error interrupts
+  Sub-functions called:
+    - hal_uart_rx_isr_stub (0x08005c3a) — RX complete callback
+    - hal_uart_tx_isr_stub (0x08005c38) — TX complete callback
+    - hal_uart_error_stub (0x08003f24) — error callback
+    - hal_uart_idle_callback (0x0800659a) — idle line callback
+
+hal_i2c_isr_handler (0x08004158)
+  Trigger: I2C1 IRQ (YHM2510 / PMIC bus)
+  Action: STM32 HAL I2C ISR — handles NACK, stop, transfer complete, address match
+  Sub-functions:
+    - hal_i2c_check_nack (0x080084f8)
+    - hal_i2c_handle_error (0x0800850c)
+    - hal_i2c_addr_callback_stub (0x0800414c)
+    - hal_i2c_error_callback_stub (0x0800414e)
+
+hal_exti_irq_handler (0x08004b28)
+  Trigger: EXTI Lines 4-15 group IRQ
+  Action: Check pending EXTI lines, call registered callbacks, clear flags
+  Wired callbacks (at runtime):
+    - Hall sensor (lid open/close):
+      -> osEventFlagsSet(appEvent, bit)
+      -> Debug: "hall int, isOpen:%d"
+    - USB detect (plug/unplug):
+      -> osEventFlagsSet(appEvent, bit)
+      -> Debug: "USB int, hasUsb:%d"
+      -> Reset glasses UART and pins
+    - 2217 IC interrupt:
+      -> Debug: "2217 int"
+
+hal_exti_line0_callback_stub (0x08004b50)
+  Trigger: EXTI Line 0 IRQ
+  Action: Stub (weak callback, empty)
+
+hal_exti_line1_callback_stub (0x08004b24)
+  Trigger: EXTI Line 1 IRQ
+  Action: Stub (weak callback, empty)
+
+
+# ===========================================================================
+# 7. TIMER CALLBACKS
+# ===========================================================================
+
+aging_timer_callback (0x08002c70)
+  Trigger: Called from defaultTask_body when loop_counter % 5 == 0 AND aging active
+  Action: Calls i2c_bus1_enable_ack (0x0800a088) — likely re-enables I2C ACK for
+          aging status I2C queries
+  Note: Despite the name, this is polled from the main loop, not a true
+        FreeRTOS timer callback. It gates periodic aging I2C reads.
+
+restart_led_timer_1s (0x0800b98c)
+  Trigger: Called when glasses detection state changes
+  Action:
+    1. Stop current defaultTask timer
+    2. Restart with 1000ms period
+  Effect: Triggers LED update cycle in ledTask
+
+clearLedTimer callback [indirect]
+  Trigger: osTimerStart with period 4ms from aging status check
+  Action: Clears LED indicator after brief delay
+
+showErrorLedTimer callback [indirect]
+  Trigger: osTimerStart with period 4ms from aging status check
+  Action: Shows error LED pattern
+
+startLedTimer callback [indirect]
+  Trigger: osTimerStart with period 1000ms from restart_led_timer_1s
+  Action: Starts LED display sequence
+
+setAgingStatusTimer callback [indirect]
+  Trigger: osTimerStart with period 128ms (0x80) from exit aging commands
+           Also: 256ms from 0xB0 debug command (YHM2510 register dump)
+  Action: Sets aging status on YHM2510 fuel gauge via I2C
+
+
+# ===========================================================================
+# 8. UART TX FRAME BUILDER
+#    Builds and sends 5A A5 FF protocol frames to glasses
+# ===========================================================================
+
+uart_tx_frame_builder (0x08006630)
+  Trigger: Called from glasses_cmd_handler and poll_gls_battery_status
+  Signature: (int *payload, uint length)
+  Action: Build and transmit UART frame
+  Frame construction:
+    1. TX byte 0x5A via hal_uart_transmit_blocking
+    2. TX byte 0xA5
+    3. TX byte 0xFF
+    4. TX byte (length) — payload size
+    5. TX payload bytes [0..length-1]
+    6. Compute checksum: sum of all payload bytes + (length - 2), truncated to 8 bits
+    7. TX checksum byte
+  Debug: prints "[checksum: %02x]" and hex dump of payload (if not in OTA mode)
+  Sub-functions: hal_uart_transmit_blocking (0x080064d0)
+
+send_cmd_ack (0x080066f4)
+  Trigger: Called after processing a glasses command
+  Signature: (byte cmd_byte)
+  Action: Build 5-byte ACK frame and send via uart_tx_frame_builder
+  Format: [cmd_byte, header_bytes...] — 5 bytes total
+
+uart_tx_with_ctrl (0x08002550)
+  Trigger: Called from poll_gls_battery_status, aging queries
+  Signature: (int side, byte *data, uint length)
+  Action: TX frame with flow control (waits for UART idle before send)
+
+uart_tx_no_ctrl (0x08002708)
+  Trigger: Called from OTA notification, OTA download
+  Signature: (int side, byte *data, uint length)
+  Action: TX frame without flow control (immediate send)
+
+
+# ===========================================================================
+# 9. BATTERY POLLING HANDLERS
+# ===========================================================================
+
+poll_gls_battery_status (0x080018a8)
+  Trigger: Called from defaultTask_body every 10 loop iterations
+  Action: Send 0x13 battery query to both glasses, parse responses
+  Flow per side:
+    1. Check glasses present AND charge allowed AND not done AND not water-detected
+       - Water detection: skips polling, "L water detected, disable 5V, timer:%d"
+       - Charge done: skips polling, "L charging done, dont send 0x13, timer:%d"
+    2. Build 7-byte status frame:
+       [header, bat_pct | (lid<<7), usb_flag, side_byte, ...]
+    3. calc_uart_checksum (0x08009988)
+    4. uart_tx_with_ctrl to send query
+    5. uart_rx_wait_and_parse to receive response
+    6. On response == 0x13: clear fail counters, increment success counter
+    7. On failure: increment fail counter, "Fail to get GLS L/R status, cnt:%d"
+  Sub-functions:
+    - calc_uart_checksum (0x08009988)
+    - uart_tx_with_ctrl (0x08002550)
+    - uart_rx_wait_and_parse (0x08001e58)
+
+force_poll_gls_battery_status (0x08001be0)
+  Trigger: Called from bat_change_handler on battery percentage change
+  Signature: (int poll_left, int poll_right)
+  Action: Same as poll_gls_battery_status but forced (ignores periodic schedule)
+  Debug: "Fail to get GLS L/R status FORCE"
+
+bat_change_handler (0x080038bc)
+  Trigger: Called when YHM2510 fuel gauge reports battery percentage change
+  Action:
+    1. Read new battery percentage via yhm2510_read_battery_pct (0x08009cd4)
+    2. Compare with stored value — skip if new <= old (prevents oscillation)
+    3. Update stored bat_pct
+    4. Debug: "Bat change: %d -> %d"
+    5. Debug: "Bat change, send 0x13 soon"
+    6. For each side: if glasses present AND charge timer running AND not water-detected:
+       -> reset_gls_side_counters(side) to restart charge cycle
+    7. Write YHM2510 register 10 with value 0x40
+  Sub-functions:
+    - yhm2510_read_battery_pct (0x08009cd4)
+    - reset_gls_side_counters (0x08003838)
+    - i2c_write_yhm2510_wrapper (0x08003828)
+
+
+# ===========================================================================
+# 10. OTA FIRMWARE UPDATE HANDLERS
+# ===========================================================================
+
+ota_box_download_firmware (0x08001538)
+  Trigger: Called from defaultTask_body when OTA conditions met:
+           both glasses present, loop_counter > 20, bat > 50%, ota_check_sent == 0
+  Action: Full OTA download sequence
+  Flow:
+    1. Wait for UART idle
+    2. Send 0x59 start command to glasses via uart_tx_no_ctrl
+    3. Wait for 0x59 response (glasses ready)
+    4. Get running bank via flash_get_running_bank (0x08002ee0)
+       - Failure: "[OTA BOX] Get running bank fail"
+    5. Erase target bank via ota_erase_target_bank (0x08002d00)
+       - Failure: "[OTA BOX] Erase bank fail"
+    6. Copy SN between banks via ota_copy_sn_between_banks (0x08002b04)
+       - Failure: "[OTA BOX] Copy SN fail"
+    7. Download firmware chunks in 0xF0 (240) byte pages:
+       - Build 10-byte request: [header, offset_LE_4bytes, chunk_size]
+       - Send via uart_tx_no_ctrl, wait for 0x5A response
+       - Verify chunk internal checksum
+       - Program chunk via ota_program_chunk (0x08002dbc)
+       - On 10 consecutive failures: abort download
+       - Debug: "[OTA BOX] get bin file done, total:%d"
+    8. Verify CRC via ota_verify_downloaded_crc (0x08002c78)
+    9. Return success/failure
+
+ota_notify_gls_result (0x08001d2c)
+  Trigger: Called after OTA download attempt (success or failure)
+  Signature: (int success)
+  Action:
+    - Build 10-byte result frame with version info
+    - Success: version bytes from OTA state
+    - Failure: fixed failure bytes [0x02, 0x01, 0x00, 0x36]
+    - Retry up to 3 times with 200ms delay between attempts
+    - Wait for 0x5B response (glasses acknowledged)
+    - Debug: "[OTA BOX] Inform GLS ota result:%d"
+  Sub-functions:
+    - uart_tx_no_ctrl (0x08002708)
+    - uart_rx_wait_and_parse (0x08001e58)
+
+ota_swap_bank_and_reset (0x08003740)
+  Trigger: Called after successful OTA download + CRC verify
+  Action:
+    1. Modify flash option bytes to swap active bank
+    2. Program new option bytes via hal_flash_program_option_bytes
+    3. Launch option byte reload via hal_flash_ob_launch
+    4. System automatically resets into new firmware bank
+
+ota_verify_downloaded_crc (0x08002c78)
+  Trigger: Called from ota_box_download_firmware after all chunks received
+  Action: Compute CRC32 over downloaded firmware, compare with expected
+  Debug: "[OTA BOX] crc_cal: 0x%x, crc_rx: 0x%x"
+  Return: 1 if match, 0 if mismatch
+
+ota_erase_target_bank (0x08002d00)
+  Trigger: Called from ota_box_download_firmware before programming
+  Action: Erase all pages in the non-running flash bank
+
+ota_program_chunk (0x08002dbc)
+  Trigger: Called for each 240-byte chunk during OTA download
+  Signature: (uint offset)
+  Action: Program chunk data from download buffer to target flash address
+
+ota_copy_sn_between_banks (0x08002b04)
+  Trigger: Called during OTA before erasing target bank
+  Action: Read SN from current bank, write to target bank
+  Ensures: SN survives firmware update
+
+
+# ===========================================================================
+# 11. AGING TEST STATE MACHINE
+# ===========================================================================
+
+start_aging (0x080012f8)
+  Trigger: Aging command received (factory test)
+  Action: Initialize aging state machine
+    - Set aging_active = 1, aging_state_flag = 1
+    - Clear all aging counters and timers
+    - Set aging_phase = 4 (AGING_PRE)
+    - Debug: "[AGING RUNNING] Start aging, go..."
+    - Start timers: setAgingStatusTimer, showErrorLedTimer
+
+aging_running_state_machine (0x0800949c)
+  Trigger: Called from defaultTask_body via aging_timer_callback every 5 seconds
+  Action: State machine for factory aging test
+  Prerequisite: aging_state_flag must == 1
+
+  State transitions:
+    aging_phase == 1 (AGING_ONLY — discharge phase):
+      1. aging_poll_gls_battery (0x080099d8)
+      2. Check L+R battery > threshold AND L+R voltage > threshold:
+         - All good: clear low-bat retry counter
+         - Not good: increment retry counter
+           - retry < 2: "[AGING RUNNING] GLS bat low, delay..."
+           - retry >= 2: transition to phase 2 (CHARGING_AGING)
+             -> gpio_disable_all_charge_output, clear gls presence
+             -> "[AGING RUNNING] GLS bat low, go to CHARGING_AGING"
+      3. Debug: "[AGING RUNNING] AGING_ONLY, timer:%d"
+
+    aging_phase == 2 (CHARGING_AGING — charge phase):
+      1. aging_poll_gls_battery (0x080099d8)
+      2. Check if both sides charge_done:
+         - Done: transition back to phase 1 (AGING_ONLY)
+           -> Clear retry counter, disable output, clear presence
+           -> "[AGING RUNNING] GLS charge done, go to AGING_ONLY"
+      3. Debug: "[AGING RUNNING] CHARGING_AGING, timer:%d"
+
+    aging_phase == 4 (AGING_PRE — waiting for glasses):
+      1. aging_check_gls_inbox (0x08009ae0) — verify both glasses in case
+      2. If not both present: "[AGING RUNNING] GLS not inbox"
+      3. If both present AND USB connected:
+         -> Disable output, clear presence
+         -> Set aging started flag
+         -> "[AGING RUNNING] GLS ready, disable output"
+
+    Completion checks:
+      - Total time (charge + discharge) >= 0x3840 (14400s = 4 hours):
+        -> "[AGING RUNNING] Timeout, go to AGING_DONE"
+        -> aging_state_flag = 3 (AGING_DONE)
+      - Discharge time > 0x1C1F (7199s) AND charge time > 0x3B (59s):
+        -> aging_state_flag = 2 (AGING_DONE)
+        -> Start timer with 4ms period
+
+query_aging_status_from_gls (0x080013cc)
+  Trigger: Called during aging to query both glasses for aging data
+  Action:
+    1. Verify both glasses present (gls_l_present AND gls_r_present)
+    2. Send aging query frame to L via uart_tx_with_ctrl
+    3. Wait for response via uart_rx_wait_and_parse
+    4. Send 0x13 status to both sides (L then R)
+    5. Send aging query to R
+    6. Return: true if both sides returned 0x46 (aging data)
+
+
+# ===========================================================================
+# 12. CHARGING CONTROL STATE MACHINE
+# ===========================================================================
+
+decide_charge_side (0x080036e8)
+  Trigger: Called when both glasses present and charge decision needed
+  Action: Determine which side to charge first based on battery levels
+
+update_gls_charge_pins (0x0800982c)
+  Trigger: Called after glasses detection scan, and after battery polling
+  Action: Set GPIO pins for charging control
+  Pin mapping:
+    - gpio_write_pin(5, 3)     — Set charge control register
+    - gpio_write_pin(6, 0x81)  — Set charge direction
+    - gpio_write_pin(7, 0x20)  — Set charge enable
+    - gpio_write_pin(3, 0xAF/0xAE) — Left charge enable/disable
+      - 0xAF: charge enabled (conditions met: present, self_check ok, not done, not water)
+      - 0xAE: charge disabled
+    - gpio_write_pin(4, 0xAF/0xAE) — Right charge enable/disable
+      - Same logic as left side
+
+gpio_disable_all_charge_output (0x0800cf6c)
+  Trigger: Called when disabling all charging (output disable, OTA, aging)
+  Action: Set all charge pins to disabled state
+    - gpio_write_pin(3, 0xAE) — Left off
+    - gpio_write_pin(4, 0xAE) — Right off
+    - gpio_write_pin(5, 3) — Control
+    - gpio_write_pin(6, 0x81) — Direction
+
+
+# ===========================================================================
+# 13. POWER STATE TRANSITIONS
+# ===========================================================================
+
+Standby entry sequence (used by defaultTask and serial_cmd_dispatcher):
+  1. i2c_read_pmic_wrapper(0x10, buf, 1) — save PMIC register 0x10
+  2. i2c_read_pmic_wrapper(0x11, buf, 1) — save PMIC register 0x11
+  3. watchdog_enable(0) (0x08002c46) — disable watchdog
+  4. pmic_boost_enable(0) (0x08002be8) — disable boost converter
+  5. hal_pwr_disable_wakeup(0x2B) (0x08004eb8) — disable wakeup pins
+  6. hal_pwr_config_wakeup(config) (0x08004ecc) — configure wakeup sources
+  7. Set PWR->CR register for standby mode
+  8. hal_pwr_enter_standby() (0x08004ee8) — enter standby (WFE)
+
+Standby reasons (from debug strings):
+  - "Standby, reason: idle"        — 30 iterations with no glasses, no USB
+  - "Standby, reason: gls_bat_full" — both glasses batteries full
+  - "Standby, reason: cmd"         — debug command 0xEE
+  - "Standby from idle mode, reason: low_bat" — YHM2510 capacity below threshold
+
+Sleep entry (lighter than standby):
+  Trigger: idle_counter > 0x1D (29) in defaultTask
+  Sequence:
+    1. Stop timers: clearLedTimer, showErrorLedTimer, setAgingStatusTimer
+    2. Set idle_mode flag
+    3. hal_iwdg_refresh (save IWDG state)
+    4. hal_pwr_disable_wakeup(0x2B)
+    5. hal_pwr_config_wakeup (different config than standby)
+    6. hal_pwr_enter_sleep(0, 1) — WFI with interrupts enabled
+    7. On wake: vPortStartFirstTask (0x0800b418) — resume RTOS scheduling
+
+exit_idle_mode (0x0800137c)
+  Trigger: Event flag bit 12 (0x1000) from EXTI ISR (lid open, USB plug)
+  Action:
+    1. Clear idle_counter to 0
+    2. Stop all LED timers (clearLedTimer, showErrorLedTimer, setAgingStatusTimer)
+    3. Clear idle_mode flag
+    4. Debug: "Exit idle mode"
+
+clear_ota_and_charge_pins (0x080012a8)
+  Trigger: Called on OTA exit, charging cleanup
+  Action:
+    1. xTimerStop on ledTask timer
+    2. gpio_set_gls_l_5v(0) — disable left 5V
+    3. gpio_set_gls_r_5v(0) — disable right 5V
+    4. Clear LED phase to 0
+    5. Debug: "clear led status"
+
+
+# ===========================================================================
+# 14. I2C PERIPHERAL HANDLERS
+# ===========================================================================
+
+yhm2510_read_battery_pct (0x08009cd4)
+  Action: Read battery SOC from YHM2510 fuel gauge register
+  I2C addr: 0xC8/0xC9
+
+yhm2510_read_voltage (0x08009d10)
+  Action: Read battery voltage (mV) from YHM2510
+
+yhm2510_read_temperature (0x08009d30)
+  Action: Read temperature sensor from YHM2510
+
+yhm2510_self_check (0x08009d98)
+  Action: Read and verify YHM2510 chip ID
+
+yhm2510_init_and_validate (0x08009e5e)
+  Action: Initialize YHM2510 and validate chip presence
+
+yhm2510_soft_reset (0x08009f02)
+  Action: Issue soft reset command to YHM2510
+
+get_pmic_status_byte (0x08002a20)
+  Action: Read PMIC status register via I2C (addr 0x70/0x71)
+
+pmic_boost_check (0x08002a2c)
+  Action: Check PMIC boost converter status
+
+pmic_boost_enable (0x08002be8)
+  Signature: (int enable)
+  Action: Enable/disable PMIC boost converter for 5V output
+
+watchdog_enable (0x08002c46)
+  Signature: (int enable)
+  Action: Enable/disable external watchdog controller (4005 IC) via PMIC I2C
+
+self_check_all_peripherals (0x08002f64)
+  Action: Boot-time peripheral validation
+  Sequence:
+    1. Print "B200  1.2.54  08x 08x 08x" with tick/source/priority
+    2. Initialize state struct (clear all flags)
+    3. Check 2217 IC (I2C reg read, expect 0xA0): 3 retries with 100ms delay
+       - Failure: "Pself_check fail, reason: 2217 wrong, reg: %x"
+    4. Initialize 2217 with retry: init_2217_with_retry (0x08009c0c)
+    5. Check PMIC (chip ID 0x14): retry loop with 100ms delay
+       - Failure: "using (0x70) chipid: 0x%x"
+    6. Check YHM2510: yhm2510_init_and_validate (0x08009e5e)
+    7. Check 4005 watchdog controller
+    8. Initialize PMIC GPIO and YHM2510: init_pmic_gpio_and_yhm2510 (0x0800cf90)
+
+
+# ===========================================================================
+# 15. CROSS-REFERENCE: BOX FIRMWARE <-> SWIFT SDK
+# ===========================================================================
+
+# Box JSON status -> G2GlassesCaseReader.swift
+#   The box sends status via UART to glasses, which relay to phone over BLE.
+#   JSON format: {"vol":%d,"pct":%d,"open":%d,"usb":%d,"cur":%d,"GLS_L":%d,"GLS_R":%d,"temp":%d}
+#   Swift mapping:
+#     pct   -> G2GlassesCaseStatus.soc (field 1)
+#     usb   -> G2GlassesCaseStatus.charging (field 2)
+#     open  -> G2GlassesCaseStatus.lidOpen (field 3)
+#     GLS_* -> G2GlassesCaseStatus.inCase (field 4)
+#
+# Box UART protocol -> G2BluetoothClient (0x81-20 BoxDetect service)
+#   Main FW relays box status via BLE service 0x81-20 (DisplayTrigger)
+#   f3.f1=77 in DisplayTrigger = case battery SOC
+#
+# Box OTA -> G2FirmwareAPIClient, G2FirmwareTransferClient
+#   Box component in EVENOTA container (index 5: "box-case-mcu")
+#   Box self-updates via dual-bank flash swap
+#
+# Box commands -> G2ResponseDecoder (onDisplayTriggerResponse on 0x81-00)
+#   DisplayTrigger is how main FW signals box presence/absence
+
+# ===========================================================================
+# END OF HANDLER MAP
+# ===========================================================================

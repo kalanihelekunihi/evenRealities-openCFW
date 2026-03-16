@@ -1,0 +1,533 @@
+# EM9305 BLE Radio -- Data Map (NVM Memory Layout)
+# Chip: EM9305 (Synopsys DesignWare ARC EM / ARCv2 ISA)
+# Source: Host-side SDK (openCFW/sdks/em9305/), binary analysis,
+#         am_devices_em9305.h, am_devices_em9305.c, function_map.txt
+
+# =========================================================================
+# 1. NVM MEMORY MAP OVERVIEW
+# =========================================================================
+#
+# The EM9305 has two distinct NVM (Non-Volatile Memory) areas, each
+# organized into 8KB pages:
+#
+#   ┌──────────────────────────────────────────────────────────────┐
+#   │                    NVM MAIN AREA (area=0)                    │
+#   │             0x00300000 - 0x003FFFFF (1 MB range)             │
+#   │                                                              │
+#   │   Page 0:  0x00300000 - 0x00301FFF  (8 KB)                   │
+#   │   Page 1:  0x00302000 - 0x00303FFF  (8 KB)                   │
+#   │   Page 2:  0x00304000 - 0x00305FFF  (8 KB)                   │
+#   │   ...                                                        │
+#   │   Page 26: 0x00334000 - 0x00335FFF  (8 KB)                   │
+#   │                                                              │
+#   │   Total erased: 29 pages (pages 0-26, some listed twice)     │
+#   │   Total capacity: 27 * 8KB = 216 KB (pages 0-26)            │
+#   │   Used by G2 patch: ~207 KB (4 records)                      │
+#   ├──────────────────────────────────────────────────────────────┤
+#   │                    NVM INFO AREA (area=1)                    │
+#   │                                                              │
+#   │   Page 1:  0x00402000 - 0x00403FFF  (8 KB)                   │
+#   │     +0x0000: FW version (4 bytes, LE32)                      │
+#   │     +0x0004: (remainder of 248-byte read block)              │
+#   │     +0x00F8: (end of readable block)                         │
+#   │     +0x00F8 - 0x1FFF: (unknown / reserved)                   │
+#   │                                                              │
+#   │   W2PASS info at: 0x00407F80 (8 bytes, read-only)            │
+#   └──────────────────────────────────────────────────────────────┘
+
+# =========================================================================
+# 2. NVM MAIN AREA -- DETAILED LAYOUT
+# =========================================================================
+#
+# The NVM Main Area hosts the 4 patch segments written by the Apollo510b.
+# The layout below shows how the patch records map to NVM pages.
+#
+# Address Range          Page(s)    Content                     Segment
+# -------------------    -------    -------------------------   -------
+# 0x00300000-0x003000DF  Page 0     Patch Config (224 B)        Seg 0
+# 0x003000E0-0x003003FF  Page 0     (gap: 800 bytes, 0xFF)      ---
+# 0x00300400-0x00300690  Page 0     BLE Parameters (656 B)      Seg 1
+# 0x00300691-0x00301FFF  Page 0     (gap to page boundary)      ---
+# 0x00302000-0x00302037  Page 1     FHDR (56 B)                 Seg 2
+# 0x00302038-0x003023FF  Page 1     (gap: 968 bytes)            ---
+# 0x00302400-0x00303FFF  Page 1-2   Main patch start (7168 B)   Seg 3
+# 0x00304000-0x00335BC7  Page 2-26  Main patch cont. (203720 B) Seg 3
+#
+# End of segment 3:      0x00335BC8 (computed: 0x302400 + 0x337C8)
+#
+# Page Utilization:
+#   Page 0:  Contains segments 0 + 1 with gaps between
+#   Page 1:  Contains segment 2 (FHDR) + start of segment 3
+#   Pages 2-26: Continuation of segment 3 (main patch code)
+#   Pages 27+: Not used by G2 firmware (available for future patches)
+
+# =========================================================================
+# 3. NVM INFO AREA -- FIRMWARE VERSION STORAGE
+# =========================================================================
+#
+# The NVM Info Area Page 1 stores the firmware version and other metadata.
+# This is separate from the main patch data and persists across NVM main
+# area erases.
+#
+# Info Page 1 Address: 0x00402000  (EM9305_NVM_INFO_PAGE1_START_ADDR)
+# Info Page 1 Size:    8 KB (0x00402000 - 0x00403FFF)
+# Readable block:      248 bytes (EM9305_NVM_INFO_READ_LEN)
+#
+# Firmware Version Field:
+#   Address:  0x00402000 (first 4 bytes of Info Page 1)
+#   Size:     4 bytes (EM9305_FW_VER_NUM_LEN)
+#   Format:   LE32, interpreted as major.minor.patch.build
+#             Byte 3 (MSB) = major
+#             Byte 2 = minor
+#             Byte 1 = patch
+#             Byte 0 (LSB) = build
+#   Invalid:  0xFFFFFFFF (EM9305_FW_VER_INVALID -- blank/unprogrammed flash)
+#   Example:  0x04040200 -> version 4.4.2.0 (patch format version)
+#
+# Display format: "%d.%d.%d.%d" where:
+#   (image_version & 0xFF000000) >> 24  = major
+#   (image_version & 0xFF0000) >> 16    = minor
+#   (image_version & 0xFF00) >> 8       = patch
+#   image_version & 0xFF               = build
+#
+# Version Update Process (am_devices_em9305_upate_fw_version):
+#   1. Read 248 bytes from 0x402000 into buffer
+#   2. Erase NVM Info Page 1 (area=1, page=1)
+#   3. Modify first 4 bytes in buffer with new version
+#   4. Write 248 bytes back to 0x402000
+#
+# W2PASS Information:
+#   Address:  0x00407F80
+#   Size:     8 bytes
+#   Access:   Read-only via HCI VSC 0xFD01 (READ_AT_ADDRESS)
+#   Purpose:  Manufacturing test / calibration data ("w2pass" = wafer-to-pass)
+#   Function: am_util_ble_get_w2pass_info()
+
+# =========================================================================
+# 4. THE 4 PATCH SEGMENTS -- DETAILED CONTENT
+# =========================================================================
+#
+# -------------------------------------------------------------------------
+# 4.1 Segment 0: Patch Config (224 bytes @ 0x00300000)
+# -------------------------------------------------------------------------
+#
+# Target:     0x00300000
+# Size:       224 bytes (0xE0)
+# File offset: 0x0000007C
+# Purpose:    Patch dispatch table / ROM override configuration
+#
+# This segment contains the configuration that tells the EM9305 ROM
+# bootloader which ROM functions should be redirected to NVM patch code
+# in segment 3. On ARC EM, this is likely a table of:
+#   - ROM function addresses (original targets)
+#   - NVM patch function addresses (replacement targets)
+#   - Override enable flags
+#
+# Known data points:
+#   Offset 0x00-0x03: 0xB7C81CD0 (first LE32 word)
+#   Offset 0x04-0x07: 0x00200CA2
+#   Offset 0x08-0x0B: 0x1C04C082
+#   Offset 0x0C-0x0F: 0x16003001
+#   Offset 0x82:       "DRFH1" string (patch format marker)
+#
+# The "DRFH1" marker at offset 0x82 appears to be related to the FHDR
+# magic in segment 2 (reversed: "1HFRD"). This may be a format version
+# identifier for the patch dispatch table structure.
+#
+# Without ARC EM disassembly, the exact table format cannot be determined.
+# The 224 bytes could encode approximately:
+#   - 28 entries of 8 bytes each (source_addr + target_addr), or
+#   - 14 entries of 16 bytes each (with additional metadata per entry)
+
+# -------------------------------------------------------------------------
+# 4.2 Segment 1: BLE Parameters (656 bytes @ 0x00300400)
+# -------------------------------------------------------------------------
+#
+# Target:     0x00300400
+# Size:       656 bytes (0x290)
+# File offset: 0x0000015C
+# Purpose:    NVDS parameter storage and radio configuration
+#
+# This segment contains NVDS (Non-Volatile Data Store) parameters that
+# override the ROM defaults. The NVDS system uses a tagged format:
+#
+#   NVDS Entry Format:
+#     Byte 0:   param_id       (parameter identifier)
+#     Byte 1:   0x06           (tag marker / type indicator)
+#     Byte 2:   length         (data length in bytes)
+#     Bytes 3+: data           (parameter value, length bytes)
+#
+# Known NVDS Parameter IDs (from Cooper/Apollo4 SDK, am_devices_cooper.h):
+#
+#   ID     Name                    Size   Description
+#   ----   ----                    ----   -----------
+#   0x01   BD_ADDRESS              6      Bluetooth device address
+#   0x06   DEVICE_NAME             var    Device name string
+#   0x07   LPCLK_DRIFT             2      Low-power clock drift (ppm)
+#   0x08   LPCLK_JITTER            1      Low-power clock jitter (us)
+#   0x0D   EXT_WAKEUP_TIME         2      External wakeup time (us)
+#   0x0E   OSC_WAKEUP_TIME         2      Oscillator wakeup time (us)
+#   0x23   SLEEP_ALGO_DUR          2      Sleep algorithm duration
+#   0x24   SLEEP_ENABLE            1      Sleep enable flag (0/1)
+#   0x26   DIAG_BLE_HW             4      BLE HW diagnostic config
+#   0x2D   AGC_CONFIG              8      Automatic Gain Control parameters
+#
+# Additional parameter categories in the 656-byte block:
+#
+#   Radio Calibration:
+#     - TX power calibration tables
+#     - Frequency offset compensation
+#     - IQ mismatch correction
+#     - Temperature drift coefficients
+#
+#   BLE Stack Configuration:
+#     - Default advertising interval
+#     - Default connection parameters (interval, latency, timeout)
+#     - Maximum number of simultaneous connections
+#     - RX/TX buffer sizes
+#     - Feature enable/disable flags
+#
+#   Clock Configuration:
+#     - Sleep clock accuracy (SCA) value
+#     - Clock drift compensation
+#     - Jitter parameters
+#     - 32kHz calibration data
+#
+# No meaningful ASCII strings are present in this segment. The data is
+# structured binary (little-endian NVDS entries).
+
+# -------------------------------------------------------------------------
+# 4.3 Segment 2: FHDR -- File Header Descriptor (56 bytes @ 0x00302000)
+# -------------------------------------------------------------------------
+#
+# Target:     0x00302000
+# Size:       56 bytes (0x38)
+# File offset: 0x000003EC
+# Purpose:    Firmware image header for ROM bootloader validation
+#
+# The FHDR is the first thing the ROM bootloader checks after power-on.
+# It contains metadata about the main patch code (segment 3).
+#
+# FHDR Structure (56 bytes):
+#
+#   Offset  Size  Value          Field
+#   ------  ----  -----          -----
+#   +0x00     4   "FHDR"         Magic identifier (ASCII)
+#   +0x04     4   0x00032800     Code region size (206,848 bytes)
+#   +0x08     4   0x00302028     Entry point / code start address
+#   +0x0C     4   0x00033BA0     Total image size incl. metadata (211,872 B)
+#   +0x10     4   0xCEB7F4F3     CRC32 of code region
+#   +0x14     4   0xFFFFFFFF     Blank / uninitialized
+#   +0x18     4   0x00000000     Reserved
+#   +0x1C     4   0x20280000     Unknown (may be byte-swapped fields)
+#   +0x20     4   0x3B940030     Unknown
+#   +0x24     4   0x00008730     Unknown
+#   +0x28     4   0x008044DB     Unknown
+#   +0x2C     4   0x0555F978     Unknown
+#   +0x30     4   0xFFFF0640     Unknown (partially blank)
+#   +0x34     4   0xFFFFFFFF     Blank / uninitialized
+#
+# Validation by ROM bootloader:
+#   1. Check for "FHDR" magic at 0x00302000
+#   2. Read code region size from +0x04
+#   3. Read entry point from +0x08
+#   4. Compute CRC32 over code region (starting at entry point)
+#   5. Compare with stored CRC32 at +0x10
+#   6. If valid: apply patches and jump to entry point
+#   7. If invalid: run with ROM-only stack (no patches)
+#
+# Entry Point Note:
+#   The entry point 0x00302028 falls in the gap between segment 2
+#   (ends at 0x302038) and segment 3 (starts at 0x302400). This gap
+#   may be filled by the ROM bootloader, or the address interpretation
+#   on ARC EM may differ from a simple flat memory model.
+
+# -------------------------------------------------------------------------
+# 4.4 Segment 3: Main Patch Code (210,888 bytes @ 0x00302400)
+# -------------------------------------------------------------------------
+#
+# Target:     0x00302400
+# Size:       210,888 bytes (0x337C8)
+# File offset: 0x00000424
+# Purpose:    ARC EM machine code -- ROM function overrides/extensions
+#
+# This is the bulk of the NVM patch, containing compiled ARC EM (ARCv2)
+# machine code that replaces or extends functions in the ROM-based
+# Cordio BLE stack.
+#
+# Memory span: 0x00302400 to 0x00335BC7
+# Pages occupied: Pages 1 through 26 (partial page 1, full pages 2-25,
+#                 partial page 26)
+#
+# Content categories (inferred from Cordio architecture):
+#
+#   BLE Link Layer patches:
+#     - Connection event handling fixes
+#     - Advertising/scanning improvements
+#     - Channel selection algorithm updates
+#     - Data Length Extension (DLE) support
+#     - PHY update procedure fixes
+#
+#   Radio driver patches:
+#     - TX power calibration routines
+#     - Frequency compensation algorithms
+#     - Radio state machine fixes
+#     - Timing-critical interrupt handlers
+#
+#   HCI patches:
+#     - Vendor-specific command handler additions
+#     - Event generation for new features
+#     - Buffer management improvements
+#
+#   Security patches:
+#     - AES-CCM encryption fixes
+#     - Pairing/bonding procedure updates
+#     - Privacy (RPA) handling improvements
+#
+#   Feature additions:
+#     - BLE 5.x feature support not in original ROM
+#     - Extended advertising
+#     - Periodic advertising
+#     - Power control / path loss monitoring
+#     - Connection subrating
+#
+# Analysis Status:
+#   - Rizin detected 45 "functions" using ARM Thumb heuristics
+#   - ALL 45 are INVALID (wrong ISA -- EM9305 is ARC EM, not ARM)
+#   - Ghidra found 0 functions (no ARC EM processor module)
+#   - No meaningful ASCII strings (all "strings" are ARC opcode artifacts)
+#   - Real function count: UNKNOWN without ARC EM disassembler
+#   - See function_map.txt for the 45 invalid byte-offset markers
+
+# =========================================================================
+# 5. ERASE PAGE TABLE
+# =========================================================================
+#
+# Before writing the 4 patch segments, the Apollo510b erases 29 NVM pages.
+# The erase page table is stored in the patch container header at file
+# offset 0x0040 (58 bytes = 29 entries x 2 bytes each).
+#
+# Erase Page Table Format:
+#   Each entry is 2 bytes: { page: uint8, area: uint8 }
+#   NvmPage struct from am_devices_em9305.h
+#
+# Erase Page Entries (29 total):
+#
+#   Entry  Page  Area  Address Range              Notes
+#   -----  ----  ----  -------------------------  -----
+#    0      0     0    0x300000-0x301FFF           Listed twice (seg 0+1)
+#    1      0     0    (duplicate)                 Redundant entry
+#    2      1     0    0x302000-0x303FFF           Listed twice (seg 2+3 start)
+#    3      1     0    (duplicate)                 Redundant entry
+#    4      2     0    0x304000-0x305FFF           Segment 3 continuation
+#    5      3     0    0x306000-0x307FFF           Segment 3 continuation
+#    6      4     0    0x308000-0x309FFF           Segment 3 continuation
+#    7      5     0    0x30A000-0x30BFFF           Segment 3 continuation
+#    8      6     0    0x30C000-0x30DFFF           Segment 3 continuation
+#    9      7     0    0x30E000-0x30FFFF           Segment 3 continuation
+#   10      8     0    0x310000-0x311FFF           Segment 3 continuation
+#   11      9     0    0x312000-0x313FFF           Segment 3 continuation
+#   12     10     0    0x314000-0x315FFF           Segment 3 continuation
+#   13     11     0    0x316000-0x317FFF           Segment 3 continuation
+#   14     12     0    0x318000-0x319FFF           Segment 3 continuation
+#   15     13     0    0x31A000-0x31BFFF           Segment 3 continuation
+#   16     14     0    0x31C000-0x31DFFF           Segment 3 continuation
+#   17     15     0    0x31E000-0x31FFFF           Segment 3 continuation
+#   18     16     0    0x320000-0x321FFF           Segment 3 continuation
+#   19     17     0    0x322000-0x323FFF           Segment 3 continuation
+#   20     18     0    0x324000-0x325FFF           Segment 3 continuation
+#   21     19     0    0x326000-0x327FFF           Segment 3 continuation
+#   22     20     0    0x328000-0x329FFF           Segment 3 continuation
+#   23     21     0    0x32A000-0x32BFFF           Segment 3 continuation
+#   24     22     0    0x32C000-0x32DFFF           Segment 3 continuation
+#   25     23     0    0x32E000-0x32FFFF           Segment 3 continuation
+#   26     24     0    0x330000-0x331FFF           Segment 3 continuation
+#   27     25     0    0x332000-0x333FFF           Segment 3 continuation
+#   28     26     0    0x334000-0x335FFF           Segment 3 tail
+#
+# All entries have area=0 (NVM Main). The Info Area (area=1) is NOT
+# erased during normal firmware update -- version data is preserved
+# and updated separately.
+#
+# Note: Pages 0 and 1 each appear twice in the table. This is likely
+# because they contain data from multiple segments (page 0 has seg 0+1,
+# page 1 has seg 2 + start of seg 3). The actual erase operation
+# (erase_entire_nvm_main_area via HCI 0xFD06) erases all main pages
+# in a single command, making the per-page table redundant for the
+# bulk erase path. The per-page table is used for individual page
+# erase via HCI 0xFD07 if needed.
+
+# =========================================================================
+# 6. NVM PATCH CONTAINER HEADER (Binary Details)
+# =========================================================================
+#
+# The patch container file starts with a 16-byte header followed by
+# the record table, erase page table, and payload data.
+#
+# File Header (16 bytes at offset 0x0000):
+#   Offset  Size  Type     Value          Description
+#   ------  ----  ------   ----------     -----------
+#   0x0000    4   uint32   0x04040200     Patch format version
+#   0x0004    4   uint32   0x00033B70     Total payload (211,824 bytes)
+#   0x0008    4   uint32   0x00000004     Record count (4)
+#   0x000C    4   uint32   0x0000001D     Erase page count (29)
+#
+# Record Table (48 bytes at offset 0x0010, 4 x 12 bytes):
+#   0x0010: 7C000000 E0000000 00003000  rec0: off=0x7C, sz=224, addr=0x300000
+#   0x001C: 5C010000 90020000 00043000  rec1: off=0x15C, sz=656, addr=0x300400
+#   0x0028: EC030000 38000000 00203000  rec2: off=0x3EC, sz=56, addr=0x302000
+#   0x0034: 24040000 C8370300 00243000  rec3: off=0x424, sz=210888, addr=0x302400
+#
+# ImageRecord struct (from SDK am_devices_em9305.h):
+#   typedef struct {
+#       const uint8_t *data;     // pointer to payload data
+#       uint32_t       length;   // payload size in bytes
+#       uint32_t       address;  // target NVM address on EM9305
+#   } ImageRecord;
+#
+# On-disk record table entry differs from in-memory struct:
+#   +0x00: LE32  file_offset   (offset into file where payload begins)
+#   +0x04: LE32  size          (payload length in bytes)
+#   +0x08: LE32  target_addr   (NVM address on EM9305)
+#
+# Erase Page Table (58 bytes at offset 0x0040):
+#   29 entries of { uint8 page, uint8 area }
+#
+# Padding (2 bytes at offset 0x007A):
+#   Alignment to 4-byte boundary before payload data
+#
+# Payload Data (starts at offset 0x007C):
+#   Concatenated record payloads, in order:
+#     Segment 0: 0x007C - 0x015B  (224 bytes)
+#     Segment 1: 0x015C - 0x03EB  (656 bytes)
+#     Segment 2: 0x03EC - 0x0423  (56 bytes)
+#     Segment 3: 0x0424 - 0x33BEB (210,888 bytes)
+#
+# Validation checksums:
+#   Sum of record sizes: 224 + 656 + 56 + 210888 = 211824 = 0x33B70 (matches header)
+#   File size: 0x007C + 211824 = 211948 bytes (total file)
+
+# =========================================================================
+# 7. NVM PROGRAMMING DATA FLOW
+# =========================================================================
+#
+# The NVM programming process writes data from the Apollo510b to the
+# EM9305 NVM in chunks of up to 248 bytes (PACKET_SIZE constant).
+#
+# HCI Write Command (0xFD03) Packet Format:
+#   Byte 0:     0x01  (HCI command indicator / AM_DEVICES_EM9305_CMD)
+#   Byte 1-2:   0x03FD (opcode 0xFD03, little-endian)
+#   Byte 3:     param_len (4 + data_len)
+#   Byte 4-7:   target_address (LE32)
+#   Byte 8+:    data (up to PACKET_SIZE=248 bytes per write)
+#
+# HCI Read Command (0xFD01) Packet Format:
+#   Byte 0:     0x01  (HCI command indicator)
+#   Byte 1-2:   0x01FD (opcode 0xFD01, little-endian)
+#   Byte 3:     0x05  (param_len = 4 + 1)
+#   Byte 4-7:   read_address (LE32)
+#   Byte 8:     read_length (max 248 bytes)
+#
+# HCI CRC32 Calculate Command (0xFC4E) Packet Format:
+#   Byte 0:     0x01  (HCI command indicator)
+#   Byte 1-2:   0x4EFC (opcode 0xFC4E, little-endian)
+#   Byte 3:     0x08  (param_len)
+#   Byte 4-7:   start_address (LE32)
+#   Byte 8-11:  end_address (LE32)
+#
+# HCI Response Format (common for VSC commands):
+#   Byte 0-2:   HCI event header
+#   Byte 3-4:   Command opcode echo (LE16)
+#   Byte 5:     Num HCI command packets
+#   Byte 6:     Status (0 = success)
+#   Byte 7+:    Response data (e.g., CRC32 result for 0xFC4E)
+
+# =========================================================================
+# 8. INTERNAL REGISTER ADDRESSES
+# =========================================================================
+#
+# The following register addresses inside the EM9305 are accessed during
+# NVM programming via HCI READ_AT_ADDRESS / WRITE_AT_ADDRESS commands.
+# These are NOT NVM addresses -- they are memory-mapped I/O registers.
+#
+# Address      Access  Purpose
+# ----------   ------  -------
+# 0xF0040C     R/W     DC-DC regulation target voltage control
+#                       Bits 12:8: regulation target (clear = 1.9V)
+#                       Default state enables 1.7V target
+#
+# 0xF0041C     R/W     DC-DC V-Mult configuration
+#                       Value 985858 (0x000F0B02):
+#                         - DC-DC in V-Mult mode
+#                         - Doubler output: 2X VBAT2
+#                         - Bits 19:16 = 0xF (max PWM duty cycle)
+#                       Used to maximize NVM programming voltage
+#
+# These registers are only accessed during the pump_to_1p9v() function
+# when g_bump_to_v1p9v is set to true before firmware programming.
+# They are not used during normal BLE operation.
+
+# =========================================================================
+# 9. SPI INTERFACE DATA FORMATS
+# =========================================================================
+#
+# SPI communication between Apollo510b and EM9305 uses a custom protocol
+# with specific header bytes.
+#
+# SPI TX (host writes to EM9305):
+#   Byte 0: 0x42 (EM9305_SPI_HEADER_TX)
+#   Response byte: buffer size available (0 = full)
+#   Then: payload bytes (up to buffer size)
+#
+# SPI RX (host reads from EM9305):
+#   Byte 0: 0x81 (EM9305_SPI_HEADER_RX)
+#   Response byte 0: 0xC0 (EM9305_STS1_READY_VALUE) if ready
+#   Response byte 1: number of bytes available (0 = no data)
+#   Then: data bytes (byte count from response)
+#
+# Max RX packet: 258 bytes (EM9305_MAX_RX_PACKET = 255 data + 3 header)
+# Max TX packet: 259 bytes (HCI_DRV_MAX_TX_PACKET = 255 data + 4 header)
+
+# =========================================================================
+# 10. BINARY INTEGRITY
+# =========================================================================
+#
+# The EM9305 NVM patch binary is byte-identical across all 5 analyzed
+# G2 firmware versions (2.0.1.14 through 2.0.7.16), confirming it is
+# a vendor-supplied binary from EM Microelectronic that does not change
+# with Even's application updates.
+#
+# File size:     211,948 bytes (header + payload)
+# Payload size:  211,824 bytes (sum of 4 records)
+# MD5:           af598d1e9a6dab7a3145d92a1f1bd2c5
+# SHA-256:       91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9
+#
+# This stability is expected -- the EM9305 patch configures the BLE radio
+# layer, which does not change with G2 feature updates.
+
+# =========================================================================
+# 11. CROSS-REFERENCES
+# =========================================================================
+#
+# Related analysis files in this directory:
+#   function_map.txt        -- NVM container format, segment analysis,
+#                              HCI opcodes, 45 invalid ARM heuristic offsets
+#   handler_map.txt         -- HCI command handlers, state machine,
+#                              GPIO interrupt chain, SPI protocol
+#   module_architecture.txt -- Architecture overview, stack layers,
+#                              PHY/LL features, power management
+#   rtos_map.txt            -- Bare-metal execution model, interrupts,
+#                              boot sequence, error recovery
+#   manifest.json           -- File metadata and segment index
+#
+# SDK source files (openCFW/sdks/em9305/):
+#   src/am_devices_em9305.h  -- Device structures, status codes, opcodes
+#   src/am_devices_em9305.c  -- NVM programming, SPI driver, GPIO config
+#   src/am_util_ble_em9305.h -- BLE utility declarations
+#   src/am_util_ble_em9305.c -- BLE utility implementations
+#   include/ble_fw_image_em9305.h -- Firmware image binary data array
+#
+# Documentation:
+#   docs/firmware/ble-em9305.md     -- High-level EM9305 overview
+#   docs/firmware/firmware-files.md -- EVENOTA container format
+#   docs/devices/g2-glasses.md      -- G2 hardware BOM

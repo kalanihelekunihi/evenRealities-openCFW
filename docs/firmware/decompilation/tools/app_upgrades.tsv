@@ -1,0 +1,193 @@
+# App module LOW-confidence upgrades
+# Generated from decompiled.c analysis of 116 LOW-confidence "app" module entries
+# Format: address	old_name	new_name	module	confidence	evidence
+#
+# === FreeRTOS Task Enumeration (0x4531-0x4542) ===
+0x004531c4	app_callee_31c4	uxTaskGetSystemState	rtos.freertos	HIGH	iterates 0x38 ready lists + delayed + suspended + terminated via vTaskSuspendAll/xTaskResumeAll, fills 0x24-byte TaskStatus_t array
+0x004539b4	app_callee_39b4	vTaskGetInfo_internal	rtos.freertos	HIGH	fills TaskStatus_t struct (0x24 bytes) from TCB: base priority, stack watermark, handle, state
+0x00453a3c	app_callee_3a3c	prvListTasksWithinSingleList	rtos.freertos	HIGH	iterates FreeRTOS list, calls vTaskGetInfo_internal for each item, returns count
+0x00453aac	app_callee_3aac	usTaskCheckFreeStackSpace	rtos.freertos	HIGH	counts consecutive 0xA5 (tskSTACK_FILL_BYTE) canary bytes, returns count>>2 = stack high watermark
+0x004542b2	app_callee_42b2	pcTaskGetName_current	rtos.freertos	MEDIUM	returns *(pxCurrentTCB + 0x54) which is the task name pointer in TCB
+0x004542ba	app_callee_42ba	pxTaskGetName_ptr	rtos.freertos	MEDIUM	returns pxCurrentTCB + 0x34 which is the name field offset in TCB
+#
+# === BLE WSF Event Post (0x4565) ===
+0x004565e4	APP_callee_65e4	DmSecGeneralIndSend	ble.dm	MEDIUM	allocs 8-byte WSF msg, sets event=0x24, conn/params, posts via WsfMsgSend to handler
+#
+# === SMP DB Record Helpers (0x4731-0x473f) ===
+0x0047313c	APP_callee_313c	appSmpDbIsRecordActive	ble.smpdb	MEDIUM	iterates 10 records (stride 200), checks +0x2f and +0x30 flags, returns 1 if match found
+0x00473fa8	APP_callee_3fa8	appSmpDbSetSecLevelAll	ble.smpdb	MEDIUM	iterates 10 records (stride 200) or single record, writes param_2 to +0x84 (security level)
+0x00473fca	APP_callee_3fca	appSmpDbGetDbPtr	ble.smpdb	MEDIUM	returns DAT_00474784 = pointer to SMP database global struct
+0x00473fd8	APP_callee_3fd8	appSmpDbSetDbKeys	ble.smpdb	MEDIUM	copies 0x10 bytes (key data) to SMP DB struct if param_1 != 0
+0x00473ff8	APP_neighbor_00473ff8	appSmpDbSetRecordFlag	ble.smpdb	MEDIUM	sets byte at record+0xC2 = param_2, single-field setter on SMP DB record
+#
+# === Ring Buffer / EasyLogger Stream (0x4761) ===
+0x00476184	app_callee_6184	elog_stream_remaining_space	elog.stream	MEDIUM	checks buffer offset < 0x1195, calls FUN_004cd110 to compute remaining; returns 0 if full
+0x0047619e	app_callee_619e	elog_stream_validate	elog.stream	MEDIUM	validates stream buffer state: checks magic, mode=1, size in [1..0x1194], compares computed hash
+0x004761e0	app_neighbor_004761e0	elog_stream_reset	elog.stream	MEDIUM	clears buffer (memset 0x11ac bytes to 0), resets write pointer to 0
+0x00476200	app_callee_6200	elog_stream_append_formatted	elog.stream	MEDIUM	appends formatted data to stream buffer via snprintf-like call, clamps to 0x1194 max
+#
+# === DM Connection / Slave UART Handlers (0x48b6-0x48b7) ===
+0x0048b694	APP_callee_b694	dmConnSmProcessCredits	ble.dm	MEDIUM	iterates conn entries by handle, adjusts +0x18/+0x19 credit counters, calls flow control callback
+0x0048b7e0	APP_callee_b7e0	dmConnSmIsSlaveReady	ble.dm	MEDIUM	returns bool from DAT+0x91 flag (slave connection readiness check)
+#
+# === Slave Eye Processing Helpers (0x495e-0x4968) ===
+0x00495e08	APP_callee_5e08	slave_frame_extract_payload	app.slave	MEDIUM	if sync frame active, copies param_1+0x10 into destination via task handler
+0x00496022	APP_callee_6022	slave_display_cmd_complete	app.slave	MEDIUM	calls slave_cmd_extract, invokes callback at +0x7c, then APP_evenhub_page_handler
+0x00496046	APP_callee_6046	slave_display_cmd_init	app.slave	MEDIUM	calls FUN_0049db7c (disconnect check), then slave_cmd_reset, invokes callback
+0x0049606c	APP_callee_606c	slave_cmd_extract_pipe	app.slave	MEDIUM	extracts pipe byte from *param_1 into param_2+4
+0x00496072	APP_callee_6072	slave_cmd_reset	app.slave	MEDIUM	resets slave command state: clears pipe, descriptor, display lock, iterates 2 eyes
+0x00496894	APP_callee_6894	slave_audio_route_cmd	app.slave	MEDIUM	routes audio command based on mode flag (0=coordinate copy, 1=direct dispatch)
+0x0049db7c	APP_neighbor_0049db7c	slave_conn_disconnect_cleanup	app.slave	MEDIUM	checks connection flags, calls system_alert handler and SMP DB cleanup on disconnect
+#
+# === Protobuf / Nanopb Encode Helpers (0x4a29) ===
+0x004a298c	app_callee_298c	pb_encode_svarint_zigzag	nanopb	HIGH	implements zigzag encoding: negative -> ~(val<<1), positive -> val<<1, then calls pb_encode varint
+0x004a29ba	app_callee_29ba	pb_encode_fixed32	nanopb	HIGH	calls nanopb_process(param_1, param_2, 4) - writes 4-byte fixed-width field
+0x004a29c4	app_callee_29c4	pb_encode_fixed64	nanopb	HIGH	calls nanopb_process(param_1, param_2, 8) - writes 8-byte fixed-width field
+#
+# === CRC32 Table-Driven (0x4cd1) ===
+0x004cd144	app_callee_d144	crc32_compute	lib.crc	HIGH	table-driven CRC32 with inverted init (~*param_3) and final (~result), byte-by-byte via DAT_004cd17c lookup table
+#
+# === frexp wrapper (0x4cdca8) ===
+0x004cdca8	app_helper_dca8	frexp_wrapper	compiler_rt	MEDIUM	calls frexp(), stores exponent in *param_1, returns mantissa
+#
+# === L2CAP Connection-Oriented Channel Management (0x4d1c-0x4d24) ===
+0x004d1cc4	APP_callee_1cc4	l2cCocRegisterCid	ble.l2c	HIGH	finds empty slot (handle==-1) in 3-slot table (stride 0x1c), assigns handle and zeros state
+0x004d1cf8	APP_callee_1cf8	l2cCocDeregisterCid	ble.l2c	HIGH	finds slot by handle, frees WSF buffers, resets handle to 0xFFFF, adjusts credit counter
+0x004d1d4c	APP_neighbor_004d1d4c	l2cCocFindCidByHandle	ble.l2c	HIGH	searches 3-slot table for matching handle, returns slot pointer or 0
+0x004d1d76	APP_neighbor_004d1d76	l2cCocFindActiveCid	ble.l2c	HIGH	searches 3-slot table for entry with valid handle AND active flag set
+0x004d1da0	APP_callee_1da0	l2cCocRegisterCid_wrapper	ble.l2c	MEDIUM	thin wrapper calling l2cCocRegisterCid
+0x004d1daa	APP_callee_1daa	l2cCocDeregisterCid_wrapper	ble.l2c	MEDIUM	thin wrapper calling l2cCocDeregisterCid
+0x004d1e98	module_callee_0048B7C0	l2cCocDataSend	ble.l2c	MEDIUM	manages L2CAP credit flow: splits data if needed, writes handle bytes, calls l2cCocSendPacket
+#
+# === L2CAP PSM Registration (0x4d23-0x4d24) ===
+0x004d23e4	APP_callee_23e4	l2cCocAddPsm	ble.l2c	HIGH	finds empty slot (-1) in 6-element PSM table, stores protocol/service multiplexer handle
+0x004d240a	APP_callee_240a	l2cCocRemovePsm	ble.l2c	HIGH	finds matching PSM handle in 6-element table, sets slot to -1
+#
+# === ANCC Notification Config Parser (0x4d36) ===
+0x004d36d6	APP_neighbor_004d36d6	ancc_parse_notification_attributes	svc.ancc	MEDIUM	parses variable-length ANCC attribute list (max 5 attrs, max 4 bytes each) from byte stream
+#
+# === GATT UUID Event Filter (0x4d39) ===
+0x004d399c	APP_callee_399c	ancc_handle_gatt_notification	svc.ancc	MEDIUM	filters GATT notification for handle 0x2026, pipe 0x12; allocs WSF msg with opcode 0x26
+#
+# === Audio IRQ Pending Bit Set (0x4d62) ===
+0x004d625c	app_callee_625c	svc_audio_irq_set_pending	svc.audio	MEDIUM	sets bit in DAT_004d649c bitmap based on short param (audio channel pending flag)
+#
+# === SPI Bit-Bang I/O (0x4d9f-0x4da0) ===
+0x004d9fb8	app_callee_9fb8	spi_bitbang_write_byte	drv.spi	HIGH	writes 8 bits via GPIO clock/data lines (MSB first), shifts param_1 left each iteration
+0x004d9ffe	app_callee_9ffe	spi_bitbang_read_byte	drv.spi	HIGH	reads 8 bits via GPIO data line with clock toggling, returns assembled byte
+0x004da03c	app_callee_a03c	spi_bitbang_read_status	drv.spi	MEDIUM	reads single byte from DAT_004dac58 (SPI device status register)
+0x004da044	app_callee_a044	spi_gpio_init	drv.spi	MEDIUM	configures GPIO pins 0x3d/0x3e/0x3f for SPI bit-bang (CS/CLK/MOSI), sets initial direction
+#
+# === EM9305 BLE Radio Control (0x4da7) ===
+0x004da7ba	app_callee_a7ba	em9305_set_deep_sleep_mode	drv.em9305	MEDIUM	configures register 0x75 with deep sleep bit (0x2000) based on enable param
+#
+# === MSPI/SPI Flash Operations (0x4da9-0x4db5) ===
+0x004da932	app_callee_a932	mspi_spi_flash_transact	drv.mspi	MEDIUM	SPI flash transaction: validates params, waits for BUSY clear, performs read/write via mspi_spi_flash_read
+0x004daaa8	app_callee_aaa8	mspi_flash_get_image_table	drv.mspi	MEDIUM	reads image table pointer and count from flash based on device status (primary/secondary)
+0x004daae0	app_callee_aae0	mspi_flash_verify_images	drv.mspi	MEDIUM	iterates image table entries, reads each from flash, verifies CRC32 against stored checksum
+0x004dab74	app_callee_ab74	mspi_flash_blink_led	drv.mspi	MEDIUM	blinks GPIO pin 0x0F with ~33ms period for (param_1 * 1000 / 33) cycles
+0x004dabde	app_callee_abde	mspi_flash_discover_device	drv.mspi	MEDIUM	reads device ID via SPI flash, compares against expected value in loop
+0x004dacd4	app_callee_acd4	mspi_flash_read_jedec_id	drv.mspi	MEDIUM	sends JEDEC ID command (0x01, 0x06, 0xFD, 0x00) via mspi_spi_flash_transact, checks NACK
+0x004dad48	app_neighbor_004dad48	mspi_flash_read_register	drv.mspi	MEDIUM	sends register read command (0x01, 0x01, 0xFD, 0x05) with address, copies response
+0x004dae18	app_neighbor_004dae18	mspi_flash_write_register	drv.mspi	MEDIUM	sends register write command (0x01, 0x03, 0xFD) with address and data payload
+0x004daeea	app_callee_aeea	mspi_flash_write_firmware	drv.mspi	MEDIUM	writes firmware data in 0xF8-byte chunks via mspi_flash_write_register, calls progress callback
+0x004dafa4	app_callee_afa4	mspi_flash_verify_firmware	drv.mspi	MEDIUM	reads firmware from flash, computes CRC32, verifies against expected value for each image
+0x004db054	app_callee_b054	mspi_flash_config_registers	drv.mspi	MEDIUM	reads then modifies two flash config registers (clears bits, writes new value), logs results
+0x004db294	app_callee_b294	mspi_flash_read_bdaddr	drv.mspi	MEDIUM	reads 8-byte Bluetooth device address from flash via SPI transaction with 9-byte command
+0x004db2da	app_callee_b2da	mspi_flash_reset_device	drv.mspi	MEDIUM	sends 6-byte reset command to flash device via SPI transaction
+0x004db30c	app_callee_b30c	mspi_flash_write_patch	drv.mspi	MEDIUM	writes 0x8C-byte patch with CRC32 header (0x805C4000, type=2) and 8-byte payload via SPI
+0x004db3b4	app_callee_b3b4	mspi_flash_read_version	drv.mspi	MEDIUM	reads 8-byte version info from flash via SPI transaction with 9-byte command (same as bdaddr pattern)
+#
+# === BLE Connection / Pairing (0x4e31-0x4e3a) ===
+0x004e316c	APP_callee_316c	appConnSecResolveAddr	ble.app_main	MEDIUM	resolves BLE address for pairing: checks bond records, allocates SMP DB record, initiates security via DmSecPairReq
+0x004e3a80	APP_callee_3a80	APP_quicklist_page_get_state	app	MEDIUM	returns byte at DAT+0x96 (quicklist/health page state flag), adjacent to APP_quicklist_page_close
+#
+# === IOM GPIO Pin Setup (0x4f07) ===
+0x004f0792	app_callee_0792	am_hal_iom_gpio_setup	hal.i2c	MEDIUM	waits for IOM power control completion, then configures GPIO pin mux and mode registers
+#
+# === NemaGFX GPU Draw Command (0x5010) ===
+0x00501062	app_callee_1062	nema_vg_draw_command	gpu.nema	MEDIUM	builds 10-word GPU command list entry with src/dst dimensions, blend flags, clip rect via lv_nema_helper
+#
+# === MSPI DMA Display Transfer Setup (0x50e1) ===
+0x0050e10c	app_callee_e10c	nema_display_dma_setup	gpu.nema	MEDIUM	initializes DMA display transfer: clears control registers, configures source/format/stride, calls MSPI DMA sync
+#
+# === FreeType Font Engine (0x5116) ===
+0x00511644	app_callee_1644	FT_Load_Glyph_dispatch	lvgl.lv_freetype	HIGH	dispatches glyph load through driver vtable (+0x3c), retries on error 0x13 (FT_Err_Unimplemented_Feature)
+0x005116ac	app_callee_16ac	FT_Load_Char	lvgl.lv_freetype	HIGH	wrapper: validates face/module, then calls FT_Load_Glyph_dispatch via driver chain
+#
+# === FlashDB KV Store (0x51b3-0x51b5) ===
+0x0051b33c	app_callee_b33c	fdb_kvdb_find_handle	lib.flashdb	MEDIUM	searches 8-entry table (stride 0x18, offset 0x2ac) for matching handle value
+0x0051b564	app_propagated_0051b564	fdb_kvdb_scan_for_magic	lib.flashdb	MEDIUM	scans flash sectors for 4-byte magic marker (DAT_0051bf2c), returns offset or -1
+#
+# === Audio ADC HAL (0x5227-0x522d) ===
+0x005227fa	app_callee_27fa	am_hal_audadc_deinit	hal.audadc	HIGH	validates handle magic (0x1ffffff mask), clears handle and status fields
+0x00522830	app_callee_2830	am_hal_audadc_configure	hal.audadc	HIGH	validates handle, checks config version==2, packs 7 config fields into single 32-bit control register
+0x005228be	app_callee_28be	am_hal_audadc_slot_configure	hal.audadc	HIGH	validates handle, slot<8, sample rate in [0x20..0x3f], packs 6 fields into per-slot register
+0x0052293c	app_callee_293c	am_hal_audadc_window_set	hal.audadc	HIGH	validates handle, configures window comparator: threshold bits and range value (10-bit)
+0x00522972	app_callee_2972	am_hal_audadc_window_enable	hal.audadc	HIGH	validates handle, enables window comparator flag and sets interrupt enable bit
+0x005229aa	app_callee_29aa	am_hal_audadc_window_disable	hal.audadc	HIGH	validates handle, clears window comparator MSB flag (0x7FFFFFFF mask)
+0x00522b28	app_callee_2b28	am_hal_audadc_enable	hal.audadc	HIGH	validates handle, sets enable bit 0x2000000 in handle and control register
+0x00522b68	app_callee_2b68	am_hal_audadc_disable	hal.audadc	HIGH	validates handle, clears enable bits, resets config mode, calls power control
+0x00522bc8	app_callee_2bc8	am_hal_audadc_gain_correct	hal.audadc	MEDIUM	applies floating-point gain correction to ADC sample using calibration coefficients
+0x00522dbc	app_callee_2dbc	am_hal_audadc_refgen_powerup	hal.audadc	MEDIUM	validates handle, writes 0x37 to reference generator config register for powerup
+#
+# === LC3 Codec Configuration (0x5255-0x5256) ===
+0x005255f0	app_callee_55f0	lc3_frame_duration_to_index	svc.audio.lc3	HIGH	maps frame duration (2500/5000/7500/10000us) to index 0-4, returns encode quality tier
+0x00525628	app_callee_5628	lc3_sampling_rate_to_index	svc.audio.lc3	HIGH	maps sample rate (8000-48000Hz) to index 0-6 for LC3 codec, with stereo mode offset
+#
+# === IOM HAL Register Config (0x5279-0x527e) ===
+0x00527984	app_callee_7984	am_hal_iom_build_cmd	hal.iom	MEDIUM	builds IOM command register value: direction, address, length, speed from params, with bit packing
+0x00527a0c	module_callee_005288B8	am_hal_iom_check_status	hal.iom	MEDIUM	reads IOM status register, checks error bits (0x6c=error), returns status code
+0x00527e7c	app_callee_7e7c	am_hal_iom_validate_transfer	hal.iom	MEDIUM	validates IOM transfer params: speed<6, address alignment, buffer size, DMA requirements
+#
+# === BLE ATT Client Discovery (0x529e) ===
+0x00529e34	APP_callee_9e34	attcDiscCharListStart	ble.att	MEDIUM	resets discovery state (pending=0, end=0xFF), initiates ATT Read By Type via attcWriteReq
+#
+# === BLE ATT Client Write (0x52a1) ===
+0x0052a1e2	APP_callee_a1e2	attcWriteReq	ble.att	MEDIUM	allocates WSF msg (payload+0xd), sets length/handle/params, submits via ble_att_handler
+#
+# === BLE DM Security Operations (0x52a2-0x52a3) ===
+0x0052a26a	APP_callee_a26a	DmSecPairReq	ble.dm	HIGH	allocs 8-byte WSF msg, sets type=1, encodes address/auth/bond/key params, sends to SMP via DmSecMsgSendToSmp
+0x0052a29e	APP_callee_a29e	DmSecAuthRsp	ble.dm	HIGH	allocs 0x20-byte WSF msg, sets type=0x28, copies 0x1a bytes auth response data, posts to handler
+0x0052a356	APP_neighbor_0052a356	DmConnUpdate	ble.dm	MEDIUM	finds connection by handle via dmConnCcbByHandle, sends connection update (opcode 0x72) via dmConnUpdExecute
+#
+# === cJSON Parser (0x52c8-0x52d0) ===
+0x0052c802	app_callee_c802	cJSON_New_Item	lib.cjson	HIGH	allocates 0x28 bytes via vtable allocator, clears to zero = cJSON item node allocation
+0x0052c87c	app_callee_c87c	cJSON_GetDecimalPoint	lib.cjson	HIGH	returns 0x2e ('.') = locale-independent decimal point character
+0x0052c884	app_callee_c884	cJSON_ParseNumber	lib.cjson	HIGH	parses numeric value from JSON stream: handles +/-/./e/E, calls strtod, stores as double and int32
+0x0052cc46	app_callee_cc46	parse_buffer_skip_whitespace	lib.cjson	HIGH	advances buffer position past whitespace chars (<0x21), stops at end or non-whitespace
+0x0052cc80	app_callee_cc80	skip_utf8_bom	lib.cjson	HIGH	checks for UTF-8 BOM (0xEF 0xBB 0xBF via strncmp) at buffer start, advances 3 bytes if found
+0x0052cdc0	app_callee_cdc0	cJSON_ParseValue	lib.cjson	HIGH	main value dispatcher: checks for true/false/null/string/number/array/object prefix, dispatches to sub-parsers
+0x0052cf00	app_callee_cf00	cJSON_ParseArray	lib.cjson	HIGH	parses JSON array: checks depth<1000, iterates comma-separated values, builds linked list of cJSON items
+#
+# === Math / tanf (0x534e) ===
+0x00534e00	app_neighbor_00534e00	tanf	lib.math	HIGH	tangent function: normalizes by pi, Payne-Hanek reduction, polynomial approximation, reciprocal for cotangent
+#
+# === strtod / atof (0x53ad-0x53ae) ===
+0x0053adbc	app_propagated_0053adbc	strtod	libc	HIGH	string-to-double: handles sign, integer/fraction digits, exponent, via FT_MulFix-based polynomial
+0x0053aee4	app_propagated_0053adbc_wrapper	strtod_simple	libc	HIGH	thin wrapper: calls strtod(param_1, param_2, 0, 0) with zero exponent offset and no endptr
+#
+# === FlashDB Flash Read (0x53b0) ===
+0x0053b004	app_callee_b004	fdb_flash_read_and_verify	lib.flashdb	MEDIUM	asserts param_3!=0, reads from flash via fdb_read_raw, then verifies data integrity
+#
+# === CmBacktrace / Stack Unwinder (0x53c1-0x53ca) ===
+0x0053c194	app_callee_c194	cm_backtrace_get_psp	lib.cmbacktrace	HIGH	calls ARM getProcessStackPointer() intrinsic and returns PSP value
+0x0053c19c	app_callee_c19c	cm_backtrace_get_msp	lib.cmbacktrace	MEDIUM	empty function (returns void) - MSP retrieval stub or no-op for single-stack mode
+0x0053c3ec	app_callee_c3ec	cm_backtrace_is_branch_instr	lib.cmbacktrace	HIGH	checks Thumb-2 BL/BLX encoding (F800/F000 prefix) or BX (4700 prefix), returns 1 if branch
+0x0053c428	app_callee_c428	cm_backtrace_call_stack	lib.cmbacktrace	MEDIUM	collects call stack: scans stack for return addresses, validates with is_branch_instr, fills array
+0x0053ca9e	app_callee_ca9e	cm_backtrace_check_exc_return	lib.cmbacktrace	MEDIUM	checks ICSR active exception bit, adjusts stack offset +0x48 if in handler mode (FP context)
+0x0053cabc	app_callee_cabc	cm_backtrace_get_fault_name	lib.cmbacktrace	MEDIUM	maps fault type (0-5) to string pointer from 6-entry lookup table
+#
+# === HAL Module / Peripheral Init (0x54b7-0x54b9) ===
+0x0054b74c	app_callee_b74c	am_hal_module_validate_all	hal	MEDIUM	iterates module table entries, validates init data (0x18-byte compare), checks version constraint
+0x0054b78e	app_callee_b78e	am_hal_module_init_default	hal	MEDIUM	sets module count=2, validates all modules, sets init flag on success
+0x0054b890	app_callee_b890	am_hal_module_read	hal	MEDIUM	validates read bounds against module size (+0x38), dispatches via vtable at +0x30
+0x0054b8fc	app_callee_b8fc	am_hal_module_global_init	hal	MEDIUM	iterates all registered modules, calls init function at +0x24 for each, sets global init flag
+0x0054b934	app_callee_b934	am_hal_module_find_by_name	hal	MEDIUM	searches module table comparing 0x18 bytes (name/descriptor) via strncmp, returns match
+#
+# === MSPI Display IRQ / Callback (0x595a) ===
+0x00595a04	app_callee_5a04	mspi_display_irq_set_pending	driver.uled_common	MEDIUM	sets bit in pending IRQ bitmap based on param (same pattern as svc_audio_irq_set_pending)
+0x00595a4a	module_callee_00448108	mspi_display_set_callback	driver.uled_common	MEDIUM	stores callback param into *param_1, then triggers task_ble_wsf_process
+#
+# === Miscellaneous Getters/Wrappers (0x439c) ===
+0x00439cc4	module_callee_0046E6C8	app_get_global_config_ptr	app	MEDIUM	returns DAT_00439cd8 (global config/state pointer)

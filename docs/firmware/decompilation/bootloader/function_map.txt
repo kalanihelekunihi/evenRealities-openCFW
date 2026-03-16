@@ -1,0 +1,1017 @@
+# Function Map: ota_s200_bootloader.bin (Ambiq Apollo510b)
+# Base address: 0x00410000   Size: 0x2410F (144.3K)   Functions: 796 (796 HIGH, 0 MEDIUM, 0 LOW)
+# Source: D:\01_workspace\s200_ap510b_iar\product\s200\bootloader\
+# Compiler: IAR EWARM   RTOS: FreeRTOS (CMSIS-RTOS2 wrapper)
+# Flash: MX25U25643G (MSPI)   Filesystem: LittleFS   Allocator: TLSF
+#
+# Format: address  ghidra_name  inferred_name  module  confidence
+# Confidence: HIGH = string ref or clear pattern, MEDIUM = call context, LOW = structural guess
+# Confidence counts: HIGH=795, MEDIUM=0, LOW=1 (total=796)  [session 28: +26 LittleFS v2.5 SDK match]
+#
+# ============================================================================
+# MODULE: lfs_util - LittleFS utility functions
+# Source: third_party/littlefs/lfs.c
+# ============================================================================
+0x00410400	FUN_00410400	lfs_min	lfs_util	HIGH
+0x00410408	FUN_00410408	lfs_min_alt	lfs_util	HIGH
+0x00410410	FUN_00410410	lfs_aligndown	lfs_util	HIGH
+0x0041041c	FUN_0041041c	lfs_alignup	lfs_util	HIGH
+0x00410428	FUN_00410428	lfs_npw2	lfs_util	HIGH
+0x00410482	FUN_00410482	lfs_ctz	lfs_util	HIGH
+0x00410492	FUN_00410492	lfs_popc	lfs_util	HIGH
+0x004104ba	FUN_004104ba	lfs_scmp	lfs_util	HIGH	# lfs.c v2.5 confirmed
+0x004104be	FUN_004104be	lfs_tole32	lfs_util	HIGH
+0x004104e0	FUN_004104e0	lfs_fromle32	lfs_util	HIGH
+0x004104e8	FUN_004104e8	lfs_frombe32	lfs_util	HIGH
+
+# ============================================================================
+# MODULE: lfs_core - LittleFS core filesystem operations
+# Source: third_party/littlefs/lfs.c
+# These are the large LFS functions that handle metadata, commits, dirs, files
+# ============================================================================
+0x0041050a	FUN_0041050a	lfs_cache_zero_050a	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410512	FUN_00410512	lfs_cache_drop_0512	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x0041051a	FUN_0041051a	lfs_cache_read_mark	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410522	FUN_00410522	lfs_cache_drop_0522	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x0041052a	FUN_0041052a	lfs_cache_zero_052a	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410544	FUN_00410544	lfs_bd_read	lfs_core	HIGH
+0x0041070c	FUN_0041070c	lfs_bd_flush	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410790	FUN_00410790	lfs_bd_sync	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410802	FUN_00410802	lfs_bd_prog	lfs_core	HIGH
+0x004108c4	FUN_004108c4	lfs_bd_erase	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x0041090c	FUN_0041090c	lfs_bd_cmp	lfs_core	HIGH	# was: lfs_bd_read_ext
+0x00410a36	FUN_00410a36	lfs_alloc_ack	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410a7e	FUN_00410a7e	lfs_path_separator_find	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410a88	FUN_00410a88	lfs_path_next_component	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410ab4	FUN_00410ab4	lfs_path_has_more	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410ace	FUN_00410ace	lfs_pair_swap	lfs_core	HIGH
+0x00410ad8	FUN_00410ad8	lfs_pair_isnull_0ad8	lfs_core	HIGH
+0x00410af2	FUN_00410af2	lfs_pair_cmp_0af2	lfs_core	HIGH
+0x00410b1c	FUN_00410b1c	lfs_pair_cmp_0b1c	lfs_core	HIGH	# lfs.c v2.5: lfs_pair_cmp; suffix avoids dup; was: lfs_pair_iseq
+0x00410b46	FUN_00410b46	lfs_pair_tole32	lfs_core	HIGH
+0x00410b5c	FUN_00410b5c	lfs_pair_fromle32	lfs_core	HIGH
+0x00410b72	FUN_00410b72	lfs_tag_isvalid	lfs_core	HIGH
+0x00410b7c	FUN_00410b7c	lfs_tag_isdelete	lfs_core	HIGH
+0x00410b90	FUN_00410b90	lfs_tag_type1	lfs_core	HIGH
+0x00410b98	FUN_00410b98	lfs_tag_type2	lfs_core	HIGH
+0x00410ba0	FUN_00410ba0	lfs_tag_type3	lfs_core	HIGH
+0x00410ba8	FUN_00410ba8	lfs_tag_chunk	lfs_core	HIGH
+0x00410bae	FUN_00410bae	lfs_tag_splice	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410bb8	FUN_00410bb8	lfs_tag_id	lfs_core	HIGH
+0x00410bc0	FUN_00410bc0	lfs_tag_size	lfs_core	HIGH
+0x00410bc6	FUN_00410bc6	lfs_tag_dsize	lfs_core	HIGH
+0x00410bdc	FUN_00410bdc	lfs_gstate_hasorphans	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410bfa	FUN_00410bfa	lfs_gstate_hasmove	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410c14	FUN_00410c14	lfs_gstate_hasmovehere	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410c2a	FUN_00410c2a	lfs_gstate_getid	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410c36	FUN_00410c36	lfs_gstate_hastype	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410c4c	FUN_00410c4c	lfs_pair_cmp_0c4c	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410c64	FUN_00410c64	lfs_pair_isnull_0c64	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410c8a	FUN_00410c8a	lfs_gstate_tole32	lfs_core	HIGH
+0x00410ca8	FUN_00410ca8	lfs_gstate_fromle32	lfs_core	HIGH
+0x00410cc6	FUN_00410cc6	lfs_superblock_tole32_a	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410cdc	FUN_00410cdc	lfs_superblock_fromle32_a	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410cf2	FUN_00410cf2	lfs_superblock_tole32_b	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410d08	FUN_00410d08	lfs_superblock_fromle32_b	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410d1e	FUN_00410d1e	lfs_dir_commit_tole32	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410d54	FUN_00410d54	lfs_dir_commit_fromle32	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410d8a	FUN_00410d8a	lfs_mlist_isopen	lfs_core	HIGH
+0x00410da8	FUN_00410da8	lfs_mlist_remove	lfs_core	HIGH
+0x00410dc4	FUN_00410dc4	lfs_mlist_append	lfs_core	HIGH
+0x00410dcc	FUN_00410dcc	lfs_fs_disk_version	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410dd2	FUN_00410dd2	lfs_fs_disk_version_major	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410dde	FUN_00410dde	lfs_fs_disk_version_minor	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410de8	FUN_00410de8	lfs_alloc_ack_update	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00410dee	FUN_00410dee	lfs_alloc_drop	lfs_core	HIGH	# lfs.c v2.5; was: lfs_alloc_reset
+0x00410e36	FUN_00410e36	lfs_alloc_lookahead	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410e8e	FUN_00410e8e	lfs_alloc	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00410f42	FUN_00410f42	lfs_bd_read_0f42	lfs_core	HIGH	# lfs.c v2.5: lfs_bd_read; suffix avoids dup; was: lfs_bd_read_inner
+0x004110d0	FUN_004110d0	lfs_dir_commitattr	lfs_core	HIGH	# lfs.c; was: lfs_dir_commit_attr
+0x004110f8	FUN_004110f8	lfs_dir_commitprog	lfs_core	HIGH	# lfs.c; was: lfs_dir_commit_prog
+0x0041121c	FUN_0041121c	lfs_dir_commitcrc	lfs_core	HIGH	# lfs.c; was: lfs_dir_commit_crc
+0x004112b4	FUN_004112b4	lfs_dir_commit	lfs_core	HIGH
+0x00411670	FUN_00411670	lfs_dir_compact	lfs_core	HIGH
+0x00411be4	FUN_00411be4	lfs_dir_splittingcompact	lfs_core	HIGH	# lfs.c v2.5; was: lfs_dir_compact_wrapper
+0x00411c04	FUN_00411c04	lfs_dir_split	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00411caa	FUN_00411caa	lfs_dir_needsrelocation	lfs_core	HIGH	# lfs.c v2.5; was: lfs_dir_relocate
+0x00411e60	FUN_00411e60	lfs_dir_orphaningcommit	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00411e9c	FUN_00411e9c	lfs_dir_relocatingcommit	lfs_core	HIGH	# lfs.c v2.5; was: lfs_dir_orphaningcommit_inner
+0x00411f52	FUN_00411f52	lfs_dir_traverse	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00412162	FUN_00412162	lfs_dir_fetchmatch	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00412208	FUN_00412208	lfs_dir_fetch	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00412282	FUN_00412282	lfs_dir_getgstate	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x004122a6	FUN_004122a6	lfs_dir_getinfo	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x004122d2	FUN_004122d2	lfs_dir_find_match	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x004125a8	FUN_004125a8	lfs_dir_commit_size	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00412784	FUN_00412784	lfs_dir_commit_commit	lfs_core	HIGH	# lfs.c v2.5; was: lfs_dir_commit_core
+0x00412b80	FUN_00412b80	lfs_dir_append	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00412f8c	FUN_00412f8c	lfs_fs_rawsize	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00412fae	FUN_00412fae	lfs_fs_deorphan	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x0041315c	FUN_0041315c	lfs_fs_forceconsistency	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413208	FUN_00413208	lfs_mlist_remove_3208	lfs_core	HIGH	# lfs.c v2.5: lfs_mlist_remove; suffix avoids dup; was: lfs_mlist_remove_wrapper
+0x00413234	FUN_00413234	lfs_fs_rawstat	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413278	FUN_00413278	lfs_fs_rawmount	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00413322	FUN_00413322	lfs_rawformat	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x004134c4	FUN_004134c4	lfs_rawmount_inner	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00413586	FUN_00413586	lfs_rawmount_superblock	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00413818	FUN_00413818	lfs_dir_open	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413834	FUN_00413834	lfs_dir_close	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x0041385e	FUN_0041385e	lfs_dir_read	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x0041397c	FUN_0041397c	lfs_file_relocate	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x004139a4	FUN_004139a4	lfs_file_outline	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413ac4	FUN_00413ac4	lfs_file_flush	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413b92	FUN_00413b92	lfs_file_rawclose	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413ca8	FUN_00413ca8	lfs_file_rawread	lfs_core	HIGH
+0x00413cf0	FUN_00413cf0	lfs_file_rawwrite	lfs_core	HIGH
+0x00413e58	FUN_00413e58	lfs_file_flushedwrite	lfs_core	HIGH	# lfs.c v2.5 confirmed; called from lfs_file_rawwrite
+0x00413f0c	FUN_00413f0c	lfs_file_rawseek	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413fac	FUN_00413fac	lfs_file_rawsync	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413fbe	FUN_00413fbe	lfs_file_rawtell	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00413ff8	FUN_00413ff8	lfs_rawmount_validate	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x004144dc	FUN_004144dc	lfs_rawformat_superblock	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x0041450e	FUN_0041450e	lfs_rawstat_inner	lfs_core	HIGH # LittleFS v2.5 SDK match (session 28)
+0x004145fc	FUN_004145fc	lfs_rawremove	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414650	FUN_00414650	lfs_rawrename	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414948	FUN_00414948	lfs_dir_rawopen	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414954	FUN_00414954	lfs_file_rawopen	lfs_core	HIGH
+0x00414ada	FUN_00414ada	lfs_file_rawopen_config	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414b64	FUN_00414b64	lfs_ctz_index	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414baa	FUN_00414baa	lfs_ctz_find	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414c34	FUN_00414c34	lfs_file_setflag_dirty	lfs_core	HIGH	# session 39i: decompiled verified — sets bit 9 (LFS_F_DIRTY) in file->flags at +0x30: clear 0xFFFFFDFF then OR (param_2 & 1) << 9
+0x00414c40	FUN_00414c40	lfs_ctz_extend	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414cbc	FUN_00414cbc	lfs_ctz_traverse	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414d18	FUN_00414d18	lfs_fs_pred	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414db8	FUN_00414db8	lfs_fs_parent	lfs_core	HIGH	# lfs.c v2.5 confirmed
+0x00414e7c	FUN_00414e7c	lfs_fs_relocate	lfs_core	HIGH	# lfs.c v2.5 confirmed
+
+# ============================================================================
+# MODULE: lfs_api - LittleFS public API wrappers (thread-safe)
+# Source: third_party/littlefs/lfs.c + port/littlefs_mx25u25643g_porting.c
+# ============================================================================
+0x004150b0	FUN_004150b0	lfs_rawmkdir	lfs_api	HIGH	# lfs.c v2.5 confirmed
+0x004150e2	FUN_004150e2	lfs_rawmkdir_inner	lfs_api	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00415128	FUN_00415128	lfs_rename	lfs_api	HIGH	# lfs.c v2.5 confirmed
+0x00415132	FUN_00415132	lfs_remove	lfs_api	HIGH	# lfs.c v2.5 confirmed
+0x0041513c	FUN_0041513c	lfs_dir_open_api	lfs_api	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00415146	FUN_00415146	lfs_file_open	lfs_api	HIGH
+0x00415180	FUN_00415180	lfs_file_close	lfs_api	HIGH
+0x004151c0	FUN_004151c0	lfs_file_read	lfs_api	HIGH
+0x004151fc	FUN_004151fc	lfs_file_write	lfs_api	HIGH
+0x00415232	FUN_00415232	lfs_file_seek	lfs_api	HIGH
+0x00415274	FUN_00415274	lfs_file_sync	lfs_api	HIGH
+0x0041527e	FUN_0041527e	lfs_fs_deorphan_api	lfs_api	HIGH # LittleFS v2.5 SDK match (session 28)
+0x00415288	FUN_00415288	lfs_stat	lfs_api	HIGH	# lfs.c v2.5 confirmed
+0x0041531c	FUN_0041531c	lfs_dir_read_api	lfs_api	HIGH # LittleFS v2.5 SDK match (session 28)
+# ============================================================================
+# MODULE: lfs_port - LittleFS porting layer for MX25U25643G
+# Source: third_party/littlefs/port/littlefs_mx25u25643g_porting.c
+# ============================================================================
+0x00415326	FUN_00415326	lfs_port_read	lfs_port	HIGH # LittleFS v2.5 SDK match (session 28)
+0x004153a4	FUN_004153a4	lfs_fopen	lfs_port	HIGH
+0x00415446	FUN_00415446	lfs_fclose	lfs_port	HIGH
+0x00415484	FUN_00415484	lfs_fread	lfs_port	HIGH
+0x004154d2	FUN_004154d2	lfs_fseek	lfs_port	HIGH
+0x0041552c	FUN_0041552c	lfs_malloc	lfs_port	HIGH
+0x00415558	FUN_00415558	lfs_free	lfs_port	HIGH
+
+# ============================================================================
+# MODULE: libc - C runtime / standard library functions
+# ============================================================================
+0x0041560c	FUN_0041560c	memset	libc	HIGH
+0x0041568c	FUN_0041568c	memcpy	libc	HIGH
+0x004156ac	FUN_004156ac	memcpy_word	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415734	FUN_00415734	__assert_fail	libc	HIGH
+0x00415758	FUN_00415758	memcmp	libc	HIGH
+0x004157c0	FUN_004157c0	lfs_crc	lfs_util	HIGH
+0x004157f8	FUN_004157f8	strcspn_57f8	libc	HIGH
+0x0041581a	FUN_0041581a	strcspn_581a	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415844	FUN_00415844	__aeabi_uldivmod	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415900	FUN_00415900	__ultoa_digit_count	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415924	FUN_00415924	memmove	libc	HIGH
+0x00415936	FUN_00415936	__utoa_hex_digit_count	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041595c	FUN_0041595c	atoi	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004159a0	FUN_004159a0	__ultoa	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415a08	FUN_00415a08	__ultoa_hex	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415a7c	FUN_00415a7c	strlen	libc	HIGH
+0x00415a94	FUN_00415a94	printf_pad_char	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: printf - Printf/sprintf implementation (with IAR safe_printf)
+# Strings: "printf_s: bad %s argument", "printf_s: %n disallowed"
+# ============================================================================
+0x00415ab6	FUN_00415ab6	vsnprintf_core	printf	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415bf6	FUN_00415bf6	vsnprintf	printf	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415fae	FUN_00415fae	printf_s	printf	HIGH
+0x00415ff4	FUN_00415ff4	__aeabi_memclr	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00415ffa	FUN_00415ffa	strstr	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: rtos - FreeRTOS / CMSIS-RTOS2 kernel wrappers
+# ============================================================================
+0x00416028	FUN_00416028	osKernelGetState	rtos	HIGH
+0x0041602a	FUN_0041602a	osKernelIsRunning	rtos	HIGH
+0x00416058	FUN_00416058	osKernelInitialize	rtos	HIGH
+0x00416088	FUN_00416088	osKernelStart	rtos	HIGH
+0x004160c0	FUN_004160c0	osKernelGetTickCount	rtos	HIGH
+0x004160d6	FUN_004160d6	osThreadNew	rtos	HIGH
+0x0041619e	FUN_0041619e	osThreadGetId	rtos	HIGH
+0x004161a6	FUN_004161a6	osThreadGetName	rtos	HIGH
+0x004161d8	FUN_004161d8	osThreadTerminate	rtos	HIGH
+0x00416212	FUN_00416212	osThreadFlagsSet	rtos	HIGH
+0x0041629c	FUN_0041629c	osThreadFlagsWait	rtos	HIGH
+0x00416350	FUN_00416350	osDelay	rtos	HIGH
+0x00416372	FUN_00416372	osDelayUntil	rtos	HIGH
+0x0041638a	FUN_0041638a	osTimerNew	rtos	HIGH
+0x00416472	FUN_00416472	osTimerStart	rtos	HIGH
+0x004164b2	FUN_004164b2	osTimerStop	rtos	HIGH
+0x00416506	FUN_00416506	osEventFlagsNew	rtos	HIGH
+0x00416568	FUN_00416568	osEventFlagsWait	rtos	HIGH
+0x004165e8	FUN_004165e8	osEventFlagsSet	rtos	HIGH
+0x00416682	FUN_00416682	osMutexAcquire	rtos	HIGH
+0x004166e8	FUN_004166e8	osMutexRelease	rtos	HIGH
+0x0041673a	FUN_0041673a	osSemaphoreNew	rtos	HIGH
+0x004167ee	FUN_004167ee	osMessageQueueNew	rtos	HIGH
+0x0041687a	FUN_0041687a	osMessageQueuePut	rtos	HIGH
+0x004168f8	FUN_004168f8	osMessageQueueGet	rtos	HIGH
+0x0041697c	FUN_0041697c	osMutexNew	rtos	HIGH
+
+# ============================================================================
+# MODULE: rtos_internal - FreeRTOS internal / port functions
+# ============================================================================
+0x004169ba	FUN_004169ba	tlsf_ffs	tlsf	HIGH
+0x004169ca	FUN_004169ca	tlsf_fls	tlsf	HIGH
+0x004169d4	FUN_004169d4	tlsf_block_size	tlsf	HIGH
+0x004169e8	FUN_004169e8	tlsf_block_set_size	tlsf	HIGH
+0x00416a04	FUN_00416a04	tlsf_block_is_last	tlsf	HIGH
+0x00416a18	FUN_00416a18	tlsf_block_is_free	tlsf	HIGH
+0x00416a24	FUN_00416a24	tlsf_block_set_free	tlsf	HIGH
+0x00416a32	FUN_00416a32	tlsf_block_set_used	tlsf	HIGH
+0x00416a40	FUN_00416a40	tlsf_block_is_prev_free	tlsf	HIGH
+0x00416a4c	FUN_00416a4c	tlsf_block_set_prev_free	tlsf	HIGH
+0x00416a5a	FUN_00416a5a	tlsf_block_set_prev_used	tlsf	HIGH
+0x00416a68	FUN_00416a68	tlsf_block_from_ptr	tlsf	HIGH
+0x00416a74	FUN_00416a74	tlsf_block_to_ptr	tlsf	HIGH
+0x00416a7e	FUN_00416a7e	tlsf_offset_to_block	tlsf	HIGH
+0x00416a82	FUN_00416a82	tlsf_block_prev	tlsf	HIGH
+0x00416aa8	FUN_00416aa8	tlsf_block_next	tlsf	HIGH
+0x00416aec	FUN_00416aec	tlsf_block_link_next	tlsf	HIGH
+0x00416afa	FUN_00416afa	tlsf_block_mark_as_free	tlsf	HIGH
+0x00416b10	FUN_00416b10	tlsf_block_mark_as_used	tlsf	HIGH
+0x00416b26	FUN_00416b26	tlsf_mapping_search	tlsf	HIGH	# TLSF source confirmed
+0x00416b52	FUN_00416b52	tlsf_search_suitable_block	tlsf	HIGH	# TLSF source confirmed
+0x00416b7c	FUN_00416b7c	tlsf_block_merge_next	tlsf	HIGH	# TLSF source confirmed
+0x00416ba6	FUN_00416ba6	tlsf_block_trim_free_leading	tlsf	HIGH	# TLSF source confirmed
+0x00416bd0	FUN_00416bd0	tlsf_block_trim_used_trailing	tlsf	HIGH	# TLSF source confirmed
+# ============================================================================
+# MODULE: tlsf - TLSF memory allocator
+# Source: third_party/tlsf/tlsf.c + third_party/tlsf/tlsf_init.c
+# ============================================================================
+0x00416bfe	FUN_00416bfe	tlsf_fls_generic	tlsf	HIGH
+0x00416c26	FUN_00416c26	tlsf_block_absorb	tlsf	HIGH	# TLSF source confirmed
+0x00416c9e	FUN_00416c9e	tlsf_remove_free_block	tlsf	HIGH	# TLSF source confirmed
+0x00416d34	FUN_00416d34	tlsf_insert_free_block	tlsf	HIGH	# TLSF source confirmed
+0x00416ddc	FUN_00416ddc	tlsf_block_can_split	tlsf	HIGH	# TLSF source confirmed
+0x00416dfe	FUN_00416dfe	tlsf_adjust_request_size	tlsf	HIGH	# TLSF source confirmed
+0x00416e20	FUN_00416e20	tlsf_mapping_insert	tlsf	HIGH	# TLSF source confirmed
+0x00416e38	FUN_00416e38	tlsf_block_split	tlsf	HIGH	# TLSF source confirmed
+0x00416ef8	FUN_00416ef8	tlsf_block_trim_free	tlsf	HIGH	# TLSF source confirmed
+0x00416f3a	FUN_00416f3a	tlsf_block_trim_used	tlsf	HIGH	# TLSF source confirmed
+0x00416f9e	FUN_00416f9e	tlsf_block_locate_free	tlsf	HIGH	# TLSF source confirmed
+0x00417002	FUN_00417002	tlsf_block_prepare_used	tlsf	HIGH	# TLSF source confirmed
+0x00417054	FUN_00417054	tlsf_malloc_inner	tlsf	HIGH	# TLSF source confirmed
+0x004170b6	FUN_004170b6	tlsf_block_merge_prev	tlsf	HIGH	# TLSF source confirmed
+0x00417242	FUN_00417242	tlsf_malloc	tlsf	HIGH
+0x00417268	FUN_00417268	tlsf_free	tlsf	HIGH
+0x00417410	FUN_00417410	tlsf_realloc	tlsf	HIGH	# TLSF source confirmed
+0x0041747e	FUN_0041747e	tlsf_memalign	tlsf	HIGH	# TLSF source confirmed
+0x004174e8	FUN_004174e8	tlsf_pool_create	tlsf	HIGH	# TLSF source confirmed
+0x00417548	FUN_00417548	tlsf_lock	tlsf	HIGH	# TLSF source confirmed
+0x0041756a	FUN_0041756a	tlsf_unlock	tlsf	HIGH	# TLSF source confirmed
+0x0041758c	FUN_0041758c	tlsf_create	tlsf	HIGH
+0x004175e2	FUN_004175e2	tlsf_add_pool	tlsf	HIGH
+0x004176a6	FUN_004176a6	elog_output	elog	HIGH
+
+# ============================================================================
+# MODULE: elog - EasyLogger
+# Source: third_party/EasyLogger-master/easylogger/src/elog.c
+# Source: third_party/EasyLogger-master/easylogger/src/elog_utils.c
+# Strings: "elog", "elog_start", "elog_output", "EasyLogger V%s"
+# ============================================================================
+0x00417aac	FUN_00417aac	elog_get_filter_tag_lvl	elog	HIGH
+0x00417b20	FUN_00417b20	elog_set_filter_lvl	elog	HIGH
+0x00417b3a	FUN_00417b3a	elog_set_output_enabled	elog	HIGH
+0x00417b54	FUN_00417b54	elog_set_text_color_enabled	elog	HIGH
+0x00417c00	FUN_00417c00	__semihost_write	debug	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00417c3c	FUN_00417c3c	strchr	libc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00417c54	FUN_00417c54	xTaskCreateStatic	freertos_core	HIGH
+0x00417cee	FUN_00417cee	xTaskCreate_7cee	freertos_core	HIGH
+0x00417d6c	FUN_00417d6c	prvInitialiseNewTask_7d6c	freertos_core	HIGH
+0x00417e30	FUN_00417e30	prvAddNewTaskToReadyList_7e30	freertos_core	HIGH
+0x00417ee2	FUN_00417ee2	vTaskDelete_7ee2	freertos_core	HIGH
+0x00417f80	FUN_00417f80	vTaskSuspend_7f80	freertos_core	HIGH
+0x00417fbc	FUN_00417fbc	eTaskGetState	freertos_core	HIGH
+0x00418046	FUN_00418046	vTaskPrioritySet	freertos_core	HIGH
+0x00418120	FUN_00418120	vTaskStartScheduler	freertos_core	HIGH
+# ============================================================================
+# MODULE: freertos_core - FreeRTOS kernel core
+# Strings: "task %s stack overflow", "Tmr Svc", "IDLE", "MallocFaile"
+# ============================================================================
+0x004181b0	FUN_004181b0	vApplicationStackOverflowHook	freertos_core	HIGH
+0x004181bc	FUN_004181bc	prvInitialiseMutex	freertos_core	HIGH
+0x00418200	FUN_00418200	xPortPendSVHandler	freertos_core	HIGH
+0x00418332	FUN_00418332	xTaskGetTickCount	freertos_core	HIGH
+0x0041833a	FUN_0041833a	xTaskGetTickCountFromISR	freertos_core	HIGH
+0x00418344	FUN_00418344	uxTaskGetNumberOfTasks	freertos_core	HIGH
+0x0041834a	FUN_0041834a	pcTaskGetName	freertos_core	HIGH
+0x0041836c	FUN_0041836c	xTaskIncrementTick	freertos_core	HIGH
+0x004183e0	FUN_004183e0	xPortSysTickHandler	freertos_core	HIGH
+0x00418548	FUN_00418548	prvTimerCommandReceiveHandler	freertos_core	HIGH
+0x00418616	FUN_00418616	prvProcessExpiredTimer	freertos_core	HIGH
+0x00418642	FUN_00418642	prvTimerTaskHelper	freertos_core	HIGH
+0x004186b4	FUN_004186b4	prvReloadTimer	freertos_core	HIGH
+0x00418704	FUN_00418704	xTaskCreate_8704	freertos_core	HIGH
+0x00418810	FUN_00418810	xTaskCreate_inner	freertos_core	HIGH
+0x004188ea	FUN_004188ea	prvInitialiseNewTask_stack	freertos_core	HIGH
+0x004188fa	FUN_004188fa	prvInitialiseNewTask_88fa	freertos_core	HIGH
+0x0041897a	FUN_0041897a	prvAddNewTaskToReadyList_897a	freertos_core	HIGH
+0x004189d8	FUN_004189d8	vTaskDelete_89d8	freertos_core	HIGH
+0x00418a1c	FUN_00418a1c	vTaskSuspend_8a1c	freertos_core	HIGH
+0x00418a70	FUN_00418a70	vTaskResume	freertos_core	HIGH
+0x00418ac0	FUN_00418ac0	xTaskResumeAll	freertos_core	HIGH
+0x00418b00	FUN_00418b00	prvResetNextTaskUnblockTime	freertos_core	HIGH
+0x00418b26	FUN_00418b26	vApplicationGetIdleTaskMemory	freertos_core	HIGH
+0x00418b2e	FUN_00418b2e	xTaskGetSchedulerState	freertos_core	HIGH
+0x00418b54	FUN_00418b54	xTaskPriorityInherit	freertos_core	HIGH
+0x00418bf6	FUN_00418bf6	xTaskPriorityDisinherit	freertos_core	HIGH
+0x00418ca4	FUN_00418ca4	vListInitialise	freertos_core	HIGH
+0x00418d52	FUN_00418d52	taskENTER_CRITICAL_helper	freertos_core	HIGH
+0x00418d68	FUN_00418d68	pvTaskIncrementMutexHeldCount	freertos_core	HIGH
+0x00418d84	FUN_00418d84	xTaskNotifyStateClear	freertos_core	HIGH
+0x00418e48	FUN_00418e48	xQueueGenericCreate	freertos_core	HIGH
+0x00418fc0	FUN_00418fc0	xQueueGenericSend	freertos_core	HIGH
+0x0041915e	FUN_0041915e	xQueueGenericReceive	freertos_core	HIGH
+0x00419218	FUN_00419218	xQueueSemaphoreTake	freertos_core	HIGH
+0x00419280	FUN_00419280	xQueueGenericSendFromISR	freertos_core	HIGH
+0x004192b6	FUN_004192b6	xQueueReceiveFromISR	freertos_core	HIGH
+0x004192fe	FUN_004192fe	xQueueGenericReset	freertos_core	HIGH
+0x00419354	FUN_00419354	prvCopyDataToQueue	freertos_core	HIGH
+0x004193b6	FUN_004193b6	prvCopyDataFromQueue	freertos_core	HIGH
+0x004193de	FUN_004193de	prvAddCurrentTaskToDelayedList	freertos_core	HIGH
+0x0041941c	FUN_0041941c	vTaskPlaceOnEventList	freertos_core	HIGH
+0x00419430	FUN_00419430	xTaskRemoveFromEventList	freertos_core	HIGH
+0x00419496	FUN_00419496	vTaskMissedYield	freertos_core	HIGH
+0x004194ba	FUN_004194ba	xTaskCheckForTimeOut	freertos_core	HIGH
+0x004194e0	FUN_004194e0	vTaskSetTimeOutState	freertos_core	HIGH
+0x0041951e	FUN_0041951e	prvTimerTask	freertos_core	HIGH
+0x00419634	FUN_00419634	prvProcessTimerOrBlockTask	freertos_core	HIGH
+0x0041965c	FUN_0041965c	prvGetNextExpireTime	freertos_core	HIGH
+0x0041969a	FUN_0041969a	prvSwitchTimerLists	freertos_core	HIGH
+0x004196be	FUN_004196be	prvProcessReceivedCommands	freertos_core	HIGH
+0x00419708	FUN_00419708	prvInsertTimerInActiveList	freertos_core	HIGH
+0x00419808	FUN_00419808	xTimerGenericCommand	freertos_core	HIGH
+0x00419878	FUN_00419878	xTimerGenericCommandFromISR	freertos_core	HIGH
+0x004198d2	FUN_004198d2	xTimerCreateTimerTask	freertos_core	HIGH
+0x00419950	FUN_00419950	vApplicationGetTimerTaskMemory	freertos_core	HIGH
+0x00419994	FUN_00419994	prvYieldForTask	freertos_core	HIGH
+0x004199b4	FUN_004199b4	xEventGroupCreate	freertos_core	HIGH
+0x00419acc	FUN_00419acc	xEventGroupSetBits	freertos_core	HIGH
+0x00419ade	FUN_00419ade	xEventGroupWaitBits	freertos_core	HIGH
+0x00419b90	FUN_00419b90	xEventGroupClearBits	freertos_core	HIGH
+0x00419baa	FUN_00419baa	xEventGroupGetBits	freertos_core	HIGH
+0x00419bc0	FUN_00419bc0	xEventGroupSync	freertos_core	HIGH
+0x00419c74	FUN_00419c74	xQueueCreateMutex	freertos_core	HIGH
+0x00419ce0	FUN_00419ce0	xQueueCreateCountingSemaphore	freertos_core	HIGH
+0x00419d40	FUN_00419d40	prvCheckTasksWaitingTermination	freertos_core	HIGH
+0x00419d62	FUN_00419d62	vTaskSwitchContext	freertos_core	HIGH
+0x00419d80	FUN_00419d80	xTaskGetCurrentTaskHandle	freertos_core	HIGH
+0x00419d9a	FUN_00419d9a	vTaskSuspendAll	freertos_core	HIGH
+0x00419dba	FUN_00419dba	xTaskResumeAll_inner	freertos_core	HIGH
+0x00419dfa	FUN_00419dfa	prvIdleTask	freertos_core	HIGH
+0x00419e3a	FUN_00419e3a	vApplicationIdleHook	freertos_core	HIGH
+0x00419e6c	FUN_00419e6c	xTaskPriorityDisinherit_inner	freertos_core	HIGH
+# ============================================================================
+# MODULE: freertos_port - FreeRTOS Cortex-M port layer
+# ============================================================================
+0x00419e98	FUN_00419e98	pxPortInitialiseStack	freertos_port	HIGH
+0x00419ffc	FUN_00419ffc	xPortStartScheduler	freertos_port	HIGH
+0x0041a0ec	FUN_0041a0ec	vPortSVCHandler	freertos_port	HIGH
+0x0041a226	FUN_0041a226	xPortPendSVHandler_inner	freertos_port	HIGH
+0x0041a388	FUN_0041a388	vPortSetupTimerInterrupt	freertos_port	HIGH
+0x0041a448	FUN_0041a448	vPortEnterCritical	freertos_port	HIGH
+0x0041a46a	FUN_0041a46a	vPortExitCritical	freertos_port	HIGH
+0x0041a47e	FUN_0041a47e	xPortIsInsideInterrupt	freertos_port	HIGH
+0x0041a504	FUN_0041a504	vPortEnableVFP	freertos_port	HIGH
+0x0041a52e	FUN_0041a52e	vPortRestoreContextOfFirstTask	freertos_port	HIGH
+0x0041a59c	FUN_0041a59c	pxCurrentTCBConst_accessor	freertos_port	HIGH
+0x0041a5b8	FUN_0041a5b8	vPortSetBASEPRI	freertos_port	HIGH
+0x0041a5d6	FUN_0041a5d6	vPortClearBASEPRI	freertos_port	HIGH
+0x0041a620	FUN_0041a620	ulPortGetIPSR	freertos_port	HIGH
+0x0041a634	FUN_0041a634	vPortRaiseBASEPRI	freertos_port	HIGH
+0x0041a64a	FUN_0041a64a	vPortValidateInterruptPriority	freertos_port	HIGH
+0x0041a66a	FUN_0041a66a	xPortIsPrivileged	freertos_port	HIGH
+0x0041a672	FUN_0041a672	vPortResetPrivilege	freertos_port	HIGH
+0x0041a67a	FUN_0041a67a	ulPortCountLeadingZeros	freertos_port	HIGH
+0x0041a682	FUN_0041a682	vPortEnterCriticalFromISR	freertos_port	HIGH
+0x0041a69a	FUN_0041a69a	vPortExitCriticalFromISR	freertos_port	HIGH
+# ============================================================================
+# MODULE: heap - FreeRTOS heap management (heap_4 or heap_5)
+# String: "MallocFaile", "cannot malloc memory"
+# ============================================================================
+0x0041a6c8	FUN_0041a6c8	vApplicationMallocFailedHook	heap	HIGH
+0x0041a6d0	FUN_0041a6d0	xPortGetFreeHeapSize	heap	HIGH
+0x0041a6d8	FUN_0041a6d8	pvPortMalloc_wrapper	heap	HIGH
+0x0041a6f6	FUN_0041a6f6	pvPortMalloc	heap	HIGH
+0x0041ac62	FUN_0041ac62	xPortGetMinimumEverFreeHeapSize	heap	HIGH
+0x0041ac6a	FUN_0041ac6a	vPortFree_coalesce	heap	HIGH
+0x0041ac8a	FUN_0041ac8a	vPortFree	heap	HIGH
+
+# ============================================================================
+# MODULE: hal_misc - Ambiq HAL miscellaneous
+# ============================================================================
+0x0041b0cc	FUN_0041b0cc	am_hal_memcmp	hal_misc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041b0f8	FUN_0041b0f8	am_hal_mcuctrl_info_get	hal_misc	HIGH	# was: am_hal_mcuctrl_device_info_get
+0x0041b130	FUN_0041b130	am_hal_mcuctrl_status_get	hal_misc	HIGH
+0x0041b1f0	FUN_0041b1f0	am_hal_security_get_info	hal_misc	HIGH
+0x0041b234	FUN_0041b234	am_hal_burst_mode_initialize	hal_misc	HIGH
+0x0041b284	FUN_0041b284	am_hal_burst_mode_enable	hal_misc	HIGH
+0x0041b2b8	FUN_0041b2b8	am_hal_burst_mode_disable	hal_misc	HIGH
+0x0041b2d0	FUN_0041b2d0	am_hal_fatal_error	hal_misc	HIGH
+0x0041b2e6	FUN_0041b2e6	am_hal_itm_not_busy	hal_misc	HIGH
+0x0041b368	FUN_0041b368	am_hal_itm_enable	hal_misc	HIGH
+0x0041b392	FUN_0041b392	am_hal_itm_disable	hal_misc	HIGH
+0x0041b3a8	FUN_0041b3a8	am_hal_tpiu_enable	hal_misc	HIGH
+0x0041b3bc	FUN_0041b3bc	am_hal_interrupt_disable	hal_misc	HIGH
+0x0041b3d4	FUN_0041b3d4	am_hal_interrupt_enable	hal_misc	HIGH
+0x0041b420	FUN_0041b420	am_hal_delay_us	hal_misc	HIGH
+0x0041b446	FUN_0041b446	am_hal_delay_cycles	hal_misc	HIGH
+0x0041b4ce	FUN_0041b4ce	am_hal_stimer_config	hal_misc	HIGH
+0x0041b514	FUN_0041b514	am_hal_stimer_counter_get	hal_misc	HIGH
+0x0041b532	FUN_0041b532	am_hal_stimer_compare_get	hal_misc	HIGH
+0x0041b54a	FUN_0041b54a	am_hal_stimer_compare_set	hal_misc	HIGH
+0x0041b580	FUN_0041b580	am_hal_stimer_int_enable	hal_misc	HIGH
+0x0041b5a8	FUN_0041b5a8	am_hal_stimer_int_disable	hal_misc	HIGH
+0x0041b5c0	FUN_0041b5c0	am_hal_stimer_int_clear	hal_misc	HIGH
+0x0041b5cc	FUN_0041b5cc	am_hal_nop	hal_misc	HIGH
+0x0041b5ce	FUN_0041b5ce	am_hal_stimer_int_status_get	hal_misc	HIGH
+0x0041b5d8	FUN_0041b5d8	am_hal_flash_info_get	hal_misc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041b5ec	FUN_0041b5ec	am_hal_flash_addr_get	hal_misc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041b608	FUN_0041b608	am_hal_flash_size_get	hal_misc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041b624	FUN_0041b624	am_hal_flash_page_size_get	hal_misc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041b648	FUN_0041b648	am_hal_sysctrl_periph_power_on	hal_misc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041b6d2	FUN_0041b6d2	am_hal_sysctrl_periph_power_off	hal_misc	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041b72c	FUN_0041b72c	am_hal_clkgen_control	hal_misc	HIGH
+0x0041b814	FUN_0041b814	am_hal_clkgen_clkout_enable	hal_misc	HIGH
+0x0041b82c	FUN_0041b82c	am_hal_clkgen_clkout_disable	hal_misc	HIGH
+# ============================================================================
+# MODULE: hal_power - Ambiq HAL power management
+# String: "Error switching to high performance mode"
+# ============================================================================
+0x0041b8b8	FUN_0041b8b8	am_hal_pwrctrl_status	hal_power	HIGH
+0x0041b8c4	FUN_0041b8c4	am_hal_pwrctrl_periph_disable_all	hal_power	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041b8d0	FUN_0041b8d0	am_hal_pwrctrl_dsp_mode_select	hal_power	HIGH
+0x0041b8f0	FUN_0041b8f0	am_hal_pwrctrl_dsp_memory_config	hal_power	HIGH
+0x0041b92c	FUN_0041b92c	am_hal_pwrctrl_mcu_mode_select	hal_power	HIGH
+0x0041ba58	FUN_0041ba58	am_hal_pwrctrl_periph_enable	hal_power	HIGH
+0x0041bac0	FUN_0041bac0	am_hal_pwrctrl_periph_disable	hal_power	HIGH
+0x0041bba8	FUN_0041bba8	am_hal_cachectrl_config	hal_power	HIGH
+0x0041bd6a	FUN_0041bd6a	am_hal_cachectrl_disable	hal_power	HIGH
+0x0041bdbc	FUN_0041bdbc	am_hal_cachectrl_config_impl	hal_power	HIGH
+0x0041be0e	FUN_0041be0e	am_hal_cachectrl_enable	hal_power	HIGH
+0x0041bf12	FUN_0041bf12	am_hal_cachectrl_invalidate	hal_power	HIGH
+0x0041bf5c	FUN_0041bf5c	am_hal_sysctrl_power_init	hal_power	HIGH
+0x0041c096	FUN_0041c096	am_hal_sysctrl_sleep_config	hal_power	HIGH
+0x0041c152	FUN_0041c152	am_hal_sysctrl_high_perf_mode	hal_power	HIGH
+0x0041c2b0	FUN_0041c2b0	am_hal_pwrctrl_restore_factory_trim	hal_power	HIGH
+# ============================================================================
+# MODULE: hal_uart - Ambiq HAL UART (debug output redirect)
+# Source: product/s200/bootloader/config/redirect.c
+# String: "redirect", "redirect_init", "redirect init with mutex protection"
+# ============================================================================
+0x0041c810	FUN_0041c810	am_hal_uart_power_on	hal_uart	HIGH
+0x0041c968	FUN_0041c968	am_hal_uart_fifo_init	hal_uart	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041c9a2	FUN_0041c9a2	am_hal_uart_fifo_write	hal_uart	HIGH
+0x0041c9e4	FUN_0041c9e4	am_hal_uart_fifo_read	hal_uart	HIGH
+0x0041ca04	FUN_0041ca04	am_hal_uart_tx_complete_check	hal_uart	HIGH
+0x0041ca34	FUN_0041ca34	am_hal_uart_interrupt_enable	hal_uart	HIGH
+0x0041ca7a	FUN_0041ca7a	am_hal_uart_interrupt_clear	hal_uart	HIGH
+0x0041cac0	FUN_0041cac0	am_hal_uart_interrupt_service_cac0	hal_uart	HIGH
+# ============================================================================
+# MODULE: hal_gpio - Ambiq HAL GPIO configuration
+# ============================================================================
+0x0041cbdc	FUN_0041cbdc	am_hal_gpio_pinconfig	hal_gpio	HIGH
+0x0041cc20	FUN_0041cc20	am_hal_gpio_pinconfig_impl	hal_gpio	HIGH
+0x0041cc6a	FUN_0041cc6a	am_hal_gpio_pinconfig_get	hal_gpio	HIGH
+0x0041ccae	FUN_0041ccae	am_hal_gpio_state_write	hal_gpio	HIGH
+0x0041ccf2	FUN_0041ccf2	am_hal_gpio_state_read	hal_gpio	HIGH
+0x0041cd0c	FUN_0041cd0c	am_hal_gpio_interrupt_register	hal_gpio	HIGH
+0x0041cd22	FUN_0041cd22	am_hal_gpio_interrupt_enable	hal_gpio	HIGH
+0x0041cd38	FUN_0041cd38	am_hal_gpio_interrupt_disable	hal_gpio	HIGH
+0x0041cd4e	FUN_0041cd4e	am_hal_gpio_interrupt_clear	hal_gpio	HIGH
+0x0041cd64	FUN_0041cd64	am_hal_gpio_interrupt_status_get	hal_gpio	HIGH
+0x0041cd7a	FUN_0041cd7a	am_hal_gpio_interrupt_irq_status_get	hal_gpio	HIGH
+0x0041cd90	FUN_0041cd90	am_hal_gpio_output_tristate_enable	hal_gpio	HIGH
+0x0041cdb8	FUN_0041cdb8	am_hal_gpio_output_tristate_disable	hal_gpio	HIGH
+0x0041cdd2	FUN_0041cdd2	am_hal_gpio_pincfg_defaults_set	hal_gpio	HIGH
+0x0041cde8	FUN_0041cde8	am_hal_gpio_interrupt_service	hal_gpio	HIGH
+0x0041cdfe	FUN_0041cdfe	am_hal_gpio_interrupt_control	hal_gpio	HIGH
+0x0041ce14	FUN_0041ce14	am_hal_gpio_fast_pinconfig	hal_gpio	HIGH
+0x0041ce2a	FUN_0041ce2a	am_hal_gpio_output_set	hal_gpio	HIGH
+
+# ============================================================================
+# MODULE: hal_interrupt - Ambiq HAL interrupt / NVIC
+# ============================================================================
+0x0041d198	FUN_0041d198	am_hal_interrupt_master_disable	hal_interrupt	HIGH
+0x0041d1f4	FUN_0041d1f4	am_hal_interrupt_master_enable	hal_interrupt	HIGH
+0x0041d21e	FUN_0041d21e	am_hal_interrupt_restore	hal_interrupt	HIGH
+0x0041d262	FUN_0041d262	am_hal_interrupt_save_and_disable	hal_interrupt	HIGH
+0x0041d26c	FUN_0041d26c	am_hal_interrupt_priority_set	hal_interrupt	HIGH
+0x0041d3bc	FUN_0041d3bc	am_hal_interrupt_enable_irq	hal_interrupt	HIGH
+# ============================================================================
+# MODULE: hal_i2c - Ambiq HAL I2C (IOM) driver
+# Source: driver/hal/src/hal_i2c.c
+# String: "HAL_I2CInit", "hal.i2c", "Error - Failed to create semaphore for I2C4"
+# ============================================================================
+0x0041d64e	FUN_0041d64e	am_hal_iom_power_control	hal_i2c	HIGH
+0x0041d674	FUN_0041d674	am_hal_iom_init_inner	hal_i2c	HIGH
+0x0041d76a	FUN_0041d76a	am_hal_iom_configure_inner	hal_i2c	HIGH
+0x0041d8d0	FUN_0041d8d0	am_hal_iom_transfer_setup_d8d0	hal_i2c	HIGH
+0x0041d8e6	FUN_0041d8e6	am_hal_iom_transfer_complete	hal_i2c	HIGH
+0x0041d904	FUN_0041d904	am_hal_iom_configure	hal_i2c	HIGH
+0x0041d982	FUN_0041d982	am_hal_iom_enable	hal_i2c	HIGH
+0x0041da5c	FUN_0041da5c	am_hal_iom_transfer	hal_i2c	HIGH
+0x0041dca2	FUN_0041dca2	am_hal_iom_interrupt_enable	hal_i2c	HIGH
+0x0041de14	FUN_0041de14	am_hal_iom_interrupt_clear	hal_i2c	HIGH
+0x0041df20	FUN_0041df20	HAL_I2CInit	hal_i2c	HIGH
+0x0041df9e	FUN_0041df9e	HAL_I2CTransfer	hal_i2c	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041dfd8	FUN_0041dfd8	am_hal_iom_interrupt_register	hal_i2c	HIGH
+
+# ============================================================================
+# MODULE: hal_adc - Ambiq HAL ADC driver (HW config voltage measurement)
+# Strings: "Error - ADC power on failed", "ADC correction offset"
+# ============================================================================
+0x0041e072	FUN_0041e072	am_hal_adc_init	hal_adc	HIGH
+0x0041e1c0	FUN_0041e1c0	am_hal_adc_configure	hal_adc	HIGH
+0x0041e206	FUN_0041e206	am_hal_adc_configure_slot	hal_adc	HIGH
+0x0041e23e	FUN_0041e23e	am_hal_adc_enable	hal_adc	HIGH
+0x0041e320	FUN_0041e320	am_hal_adc_samples_read	hal_adc	HIGH
+0x0041e44c	FUN_0041e44c	am_hal_adc_disable	hal_adc	HIGH
+0x0041e452	FUN_0041e452	am_hal_adc_init_and_measure	hal_adc	HIGH
+
+# ============================================================================
+# MODULE: hal_mspi - Ambiq HAL MSPI controller driver
+# Strings: "Error - Failed to power on MSPI", "Error - Failed to configure MSPI"
+# ============================================================================
+0x0041f134	FUN_0041f134	printf_format_integer	libc	HIGH	# was: am_hal_mspi_init_inner
+0x0041f248	FUN_0041f248	printf_float_power	libc	HIGH	# was: am_hal_mspi_configure_inner
+0x0041f2a0	FUN_0041f2a0	printf_output_chars	libc	HIGH	# was: am_hal_mspi_device_configure_inner
+0x0041f318	FUN_0041f318	am_hal_mspi_command_write	hal_mspi	HIGH
+0x0041f330	FUN_0041f330	am_hal_mspi_command_read	hal_mspi	HIGH
+0x0041f3c8	FUN_0041f3c8	am_hal_mspi_interrupt_enable_inner_f3c8	hal_mspi	HIGH
+0x0041f3fc	FUN_0041f3fc	am_hal_mspi_interrupt_disable_inner_f3fc	hal_mspi	HIGH
+0x0041f418	FUN_0041f418	am_hal_mspi_interrupt_clear_inner_f418	hal_mspi	HIGH
+0x0041f484	FUN_0041f484	am_hal_mspi_interrupt_status_get	hal_mspi	HIGH
+0x0041f48e	FUN_0041f48e	am_hal_mspi_dma_status_get	hal_mspi	HIGH
+0x0041f498	FUN_0041f498	am_hal_mspi_hiprio_check	hal_mspi	HIGH
+0x0041f530	FUN_0041f530	am_hal_mspi_interrupt_service	hal_mspi	HIGH
+0x0041f756	FUN_0041f756	am_hal_mspi_dma_transfer	hal_mspi	HIGH
+0x0041f89a	FUN_0041f89a	am_hal_mspi_power_control	hal_mspi	HIGH
+0x0041f8f8	FUN_0041f8f8	am_hal_mspi_enable	hal_mspi	HIGH
+0x0041f9b4	FUN_0041f9b4	am_hal_delay_ms	hal_utils	HIGH	# was: am_hal_mspi_timing_configure
+0x0041f9c2	FUN_0041f9c2	am_hal_delay_us_wrapper	hal_utils	HIGH	# was: am_hal_mspi_disable
+0x0041fab8	FUN_0041fab8	am_hal_mspi_control	hal_mspi	HIGH
+
+# ============================================================================
+# MODULE: hal_mspi_config - MSPI timing / configuration
+# Strings: "mspi_timing_check", "mspi_timing_auto_check", "Time scan success"
+# ============================================================================
+0x0041fd9c	FUN_0041fd9c	am_hal_gpio_interrupt_clear_pin	hal_gpio	HIGH	# was: mspi_timing_scan_init
+0x0041fdba	FUN_0041fdba	mspi_timing_scan_txneg	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041fde2	FUN_0041fde2	mspi_timing_scan_rxneg	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041fe04	FUN_0041fe04	mspi_timing_scan_rxcap	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041fe24	FUN_0041fe24	mspi_timing_scan_turnaround	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041fe3e	FUN_0041fe3e	mspi_timing_set_default	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041fe78	FUN_0041fe78	mspi_timing_apply	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041feb0	FUN_0041feb0	mspi_timing_validate	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041fee4	FUN_0041fee4	mspi_timing_scan_pass_check	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041fefa	FUN_0041fefa	mspi_timing_scan_window	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041ff10	FUN_0041ff10	mspi_timing_scan_center	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041ff3c	FUN_0041ff3c	mspi_timing_scan_result	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041ff50	FUN_0041ff50	mspi_timing_scan_iterate	hal_mspi_config	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0041ffde	FUN_0041ffde	mspi_timing_check	hal_mspi_config	HIGH
+0x00420196	FUN_00420196	mspi_timing_auto_check	hal_mspi_config	HIGH
+
+# ============================================================================
+# MODULE: drv_norflash - MX25U25643G NOR flash driver (MSPI)
+# Source: driver/flash/drv_mx25u25643g.c
+# Strings: "DRV_Mx25u25643g_init", "mx25u25643g_sector_erase", etc.
+# ============================================================================
+0x00420230	FUN_00420230	DRV_Mx25u25643g_init	drv_norflash	HIGH
+0x00420452	FUN_00420452	DRV_Mx25u25643g_read_status	drv_norflash	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00420506	FUN_00420506	DRV_Mx25u25643g_write_status	drv_norflash	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042057a	FUN_0042057a	DRV_Mx25u25643g_read_config	drv_norflash	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004205d0	FUN_004205d0	DRV_Mx25u25643g_SoftReset	drv_norflash	HIGH
+0x00420658	FUN_00420658	DRV_Mx25u25643g_read_id	drv_norflash	HIGH
+0x0042070e	FUN_0042070e	mx25u25643g_is_busy	drv_norflash	HIGH
+0x00420762	FUN_00420762	mx25u25643g_enable_write_enable	drv_norflash	HIGH
+0x0042078e	FUN_0042078e	mx25u25643g_enable_write_disable	drv_norflash	HIGH
+0x00420814	FUN_00420814	mx25u25643g_enter_4byte_mode	drv_norflash	HIGH
+0x00420908	FUN_00420908	mx25u25643g_is_4byte_mode	drv_norflash	HIGH
+0x0042094c	FUN_0042094c	mx25u25643g_wait_not_busy	drv_norflash	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00420990	FUN_00420990	mx25u25643g_quad_enable	drv_norflash	HIGH
+0x00420ac4	FUN_00420ac4	mx25u25643g_set_quad_mode	drv_norflash	HIGH
+0x00420c00	FUN_00420c00	mx25u25643g_set_serail_mode	drv_norflash	HIGH
+0x00420da4	FUN_00420da4	mx25u25643g_page_program	drv_norflash	HIGH
+0x00420e2c	FUN_00420e2c	mx25u25643g_page_program_inner	drv_norflash	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00420eac	FUN_00420eac	mx25u25643g_sector_erase	drv_norflash	HIGH
+0x00420f18	FUN_00420f18	am_devices_mx25u25643g_write	drv_norflash	HIGH
+
+# ============================================================================
+# MODULE: flash_wrapper - Flash abstraction layer with mutex
+# Source: driver/flash/drv_mx25u25643g.c (upper layer)
+# Strings: "mspi_flash_mutex_init", "flash_mutex", "Flash init fail"
+# ============================================================================
+0x00421048	FUN_00421048	check_and_create_directories_1048	boot_fs	HIGH
+0x00421130	FUN_00421130	littlefs_format_1130	boot_fs	HIGH
+0x00421190	FUN_00421190	littlefs_init_1190	boot_fs	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421258	FUN_00421258	flash_wrapper_write_impl	flash_wrapper	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421324	FUN_00421324	flash_wrapper_sync_nop	flash_wrapper	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421326	FUN_00421326	flash_wrapper_erase_impl	flash_wrapper	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421332	FUN_00421332	mspi_flash_mutex_init	flash_wrapper	HIGH
+0x00421494	FUN_00421494	mspi_flash_mutex_lock	flash_wrapper	HIGH
+0x004214d0	FUN_004214d0	mspi_flash_mutex_unlock	flash_wrapper	HIGH
+0x004214fa	FUN_004214fa	flash_read_wrapper	flash_wrapper	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421528	FUN_00421528	flash_write_wrapper	flash_wrapper	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042154a	FUN_0042154a	flash_erase_wrapper	flash_wrapper	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042157e	FUN_0042157e	flash_sync_wrapper	flash_wrapper	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004215fe	FUN_004215fe	flash_wrapper_get_config	flash_wrapper	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: littlefs_init - LittleFS initialization and directory management
+# Source: third_party/littlefs/port/littlefs_mx25u25643g_porting.c
+# Strings: "littlefs_init", "littlefs_format", "boot_count", filesystem dirs
+# ============================================================================
+0x0042171e	FUN_0042171e	check_and_create_directories_171e	littlefs_init	HIGH
+0x004218c4	FUN_004218c4	littlefs_format_18c4	littlefs_init	HIGH
+0x0042197c	FUN_0042197c	littlefs_init_197c	littlefs_init	HIGH
+0x004219ae	FUN_004219ae	littlefs_check_dir_exists	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004219e0	FUN_004219e0	littlefs_create_dir_if_missing	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421a22	FUN_00421a22	littlefs_read_boot_count	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421a54	FUN_00421a54	littlefs_increment_boot_count	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421aa8	FUN_00421aa8	littlefs_mount_retry	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421af0	FUN_00421af0	littlefs_verify_mount	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421b1e	FUN_00421b1e	littlefs_init_config_setup	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421c1a	FUN_00421c1a	littlefs_init_read_file	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421c74	FUN_00421c74	littlefs_init_write_file	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421caa	FUN_00421caa	littlefs_init_mkdir	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421d96	FUN_00421d96	littlefs_stat_helper	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421dd8	FUN_00421dd8	littlefs_remove_helper	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421e06	FUN_00421e06	littlefs_rename_helper	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421f8c	FUN_00421f8c	littlefs_dir_list	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00421ffe	FUN_00421ffe	littlefs_file_copy	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042216c	FUN_0042216c	littlefs_file_size_check	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042223c	FUN_0042223c	littlefs_storage_info	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004222b0	FUN_004222b0	littlefs_verify_file_integrity	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00422324	FUN_00422324	littlefs_cleanup_temp_files	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00422362	FUN_00422362	littlefs_init_finalize	littlefs_init	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: redirect - UART debug output redirection
+# Source: product/s200/bootloader/config/redirect.c
+# Strings: "redirect_init", "redirect init with mutex protection"
+# ============================================================================
+0x004224dc	FUN_004224dc	redirect_uart_write	redirect	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042251c	FUN_0042251c	redirect_buffer_flush	redirect	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00422574	FUN_00422574	redirect_mutex_init	redirect	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00422580	FUN_00422580	redirect_init	redirect	HIGH
+0x004225e4	FUN_004225e4	redirect_register_callback	redirect	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00422618	FUN_00422618	redirect_set_default_output	redirect	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042264c	FUN_0042264c	redirect_lock	redirect	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00422660	FUN_00422660	redirect_output	redirect	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+
+# ============================================================================
+# MODULE: hal_uart_inner - Ambiq HAL UART inner driver
+# ============================================================================
+0x00422750	FUN_00422750	am_hal_uart_fifo_config_tx	hal_uart_inner	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042275e	FUN_0042275e	am_hal_uart_fifo_config_rx	hal_uart_inner	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042276c	FUN_0042276c	am_hal_uart_fifo_enable	hal_uart_inner	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042277e	FUN_0042277e	am_hal_uart_fifo_disable	hal_uart_inner	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00422790	FUN_00422790	am_hal_uart_baudrate_set	hal_uart_inner	HIGH
+0x0042279e	FUN_0042279e	am_hal_uart_parity_set	hal_uart_inner	HIGH
+0x004227ac	FUN_004227ac	__aeabi_dmul	aeabi_fp	HIGH	# was: am_hal_uart_stopbits_set
+0x004227c0	FUN_004227c0	__aeabi_d2f_const	aeabi_fp	HIGH	# was: am_hal_uart_databits_set
+0x004227c8	FUN_004227c8	__aeabi_uldivmod	aeabi_fp	HIGH	# was: am_hal_uart_init
+0x004229f8	FUN_004229f8	am_hal_uart_power_on_impl	hal_uart_inner	HIGH
+0x00422af4	FUN_00422af4	am_hal_uart_power_control	hal_uart_inner	HIGH	# was: am_hal_uart_configure
+0x00422c6c	FUN_00422c6c	am_hal_uart_power_off_impl	hal_uart_inner	HIGH
+0x00422c98	FUN_00422c98	am_hal_uart_fifo_flush	hal_uart_inner	HIGH
+0x00422cc6	FUN_00422cc6	am_hal_uart_rts_enable	hal_uart_inner	HIGH
+0x00422d12	FUN_00422d12	am_hal_uart_initialize	hal_uart_inner	HIGH	# was: am_hal_uart_cts_enable
+0x00422d74	FUN_00422d74	am_hal_uart_configure	hal_uart_inner	HIGH	# was: am_hal_uart_power_control
+0x00422e2e	FUN_00422e2e	am_hal_uart_transfer	hal_uart_inner	HIGH
+0x00422e98	FUN_00422e98	am_hal_uart_transfer_inner	hal_uart_inner	HIGH
+0x00422eee	FUN_00422eee	am_hal_uart_tx_byte	hal_uart_inner	HIGH
+0x00422f2a	FUN_00422f2a	am_hal_uart_rx_byte	hal_uart_inner	HIGH
+0x00422fda	FUN_00422fda	am_hal_uart_interrupt_service_2fda	hal_uart_inner	HIGH
+
+# ============================================================================
+# MODULE: hal_iom - Ambiq HAL IOM (I/O Master - SPI/I2C)
+# ============================================================================
+0x00423214	FUN_00423214	am_hal_iom_validate_handle	hal_iom	HIGH
+0x0042325a	FUN_0042325a	am_hal_iom_get_base_addr	hal_iom	HIGH
+0x0042328e	FUN_0042328e	am_hal_iom_reset	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042329c	FUN_0042329c	am_hal_iom_clock_config	hal_iom	HIGH
+0x004232dc	FUN_004232dc	am_hal_iom_fifo_config	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00423334	FUN_00423334	am_hal_iom_dma_config	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00423390	FUN_00423390	am_hal_iom_dma_start	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004233da	FUN_004233da	am_hal_iom_dma_complete_check	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00423424	FUN_00423424	am_hal_iom_command_send	hal_iom	HIGH
+0x00423446	FUN_00423446	am_hal_iom_command_complete_wait	hal_iom	HIGH
+0x00423470	FUN_00423470	am_hal_iom_interrupt_enable_impl	hal_iom	HIGH
+0x00423554	FUN_00423554	am_hal_iom_interrupt_disable_impl	hal_iom	HIGH
+0x0042364c	FUN_0042364c	am_hal_iom_interrupt_clear_impl	hal_iom	HIGH
+0x00423676	FUN_00423676	am_hal_iom_interrupt_status_get	hal_iom	HIGH
+0x004236c8	FUN_004236c8	am_hal_iom_transfer_validate	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004237b0	FUN_004237b0	am_hal_iom_transfer_setup_37b0	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00423806	FUN_00423806	am_hal_iom_transfer_execute	hal_iom	HIGH
+0x00423874	FUN_00423874	am_hal_iom_transfer_execute_dma	hal_iom	HIGH
+0x004238be	FUN_004238be	am_hal_iom_power_control_impl	hal_iom	HIGH
+0x0042390e	FUN_0042390e	am_hal_iom_power_on	hal_iom	HIGH
+0x00423994	FUN_00423994	am_hal_iom_initialize	hal_iom	HIGH	# was: am_hal_iom_init
+0x00423d60	FUN_00423d60	am_hal_iom_uninitialize	hal_iom	HIGH	# was: am_hal_iom_deinit
+0x00423d8c	FUN_00423d8c	am_hal_iom_enable	hal_iom	HIGH	# was: am_hal_iom_enable_impl
+0x00423dd6	FUN_00423dd6	am_hal_iom_disable	hal_iom	HIGH	# was: am_hal_iom_disable_impl
+0x00423e74	FUN_00423e74	am_hal_iom_sequence_setup	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00423ea0	FUN_00423ea0	am_hal_iom_sequence_run	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00423eda	FUN_00423eda	am_hal_iom_sequence_abort	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00423ef8	FUN_00423ef8	am_hal_iom_fifo_read	hal_iom	HIGH
+0x00423f04	FUN_00423f04	am_hal_iom_fifo_write	hal_iom	HIGH
+0x00423f8a	FUN_00423f8a	am_hal_iom_interrupt_service_impl	hal_iom	HIGH
+0x00423ff6	FUN_00423ff6	am_hal_iom_error_check	hal_iom	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042406c	FUN_0042406c	am_hal_mspi_device_configure	hal_iom	HIGH
+0x004247da	FUN_004247da	am_hal_mspi_device_configure_helper	hal_iom	HIGH
+0x004248ec	FUN_004248ec	am_hal_mspi_xip_config	hal_iom	HIGH
+0x00424964	FUN_00424964	am_hal_mspi_scramble_config	hal_iom	HIGH
+0x004249a6	FUN_004249a6	am_hal_mspi_initialize	hal_mspi_inner	HIGH	# was: am_hal_mspi_configure
+
+# ============================================================================
+# MODULE: hal_mspi_inner - Ambiq MSPI lower-level operations
+# ============================================================================
+0x00424a3c	FUN_00424a3c	am_hal_mspi_configure	hal_mspi_inner	HIGH	# was: am_hal_mspi_init_impl
+0x00424b30	FUN_00424b30	am_hal_mspi_device_configure	hal_mspi_inner	HIGH	# was: am_hal_mspi_dma_config
+0x00424fb2	FUN_00424fb2	am_hal_mspi_enable	hal_mspi_inner	HIGH	# was: am_hal_mspi_dma_start
+0x0042503c	FUN_0042503c	am_hal_mspi_disable	hal_mspi_inner	HIGH	# was: am_hal_mspi_power_on
+0x004250b8	FUN_004250b8	am_hal_mspi_deinitialize	hal_mspi_inner	HIGH	# was: am_hal_mspi_power_off
+0x0042510c	FUN_0042510c	am_hal_mspi_control	hal_mspi_inner	HIGH	# was: am_hal_mspi_command
+0x0042622c	FUN_0042622c	am_hal_mspi_dma_complete_check	hal_mspi_inner	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042639c	FUN_0042639c	am_hal_mspi_interrupt_enable_inner_639c	hal_mspi_inner	HIGH
+0x004263d0	FUN_004263d0	am_hal_mspi_interrupt_disable_inner_63d0	hal_mspi_inner	HIGH
+0x00426406	FUN_00426406	am_hal_mspi_interrupt_clear_inner_6406	hal_mspi_inner	HIGH
+0x00426452	FUN_00426452	am_hal_mspi_interrupt_status_get_inner	hal_mspi_inner	HIGH
+0x00426482	FUN_00426482	am_hal_mspi_dma_abort	hal_mspi_inner	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426754	FUN_00426754	am_hal_mspi_power_control	hal_mspi_inner	HIGH	# was: am_hal_mspi_xipm_config
+# ============================================================================
+# MODULE: fw_event_loop - Firmware event loop (application framework)
+# Source: framework/fw_event_loop/fw_event_loop.c
+# Strings: "fw_evt_loop_init", "fw_evt_loop_task", "fw_evt_loop_push"
+# ============================================================================
+0x00426b5c	FUN_00426b5c	fw_evt_loop_memset_zero	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426b70	FUN_00426b70	fw_evt_loop_default_handler	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426ba4	FUN_00426ba4	fw_evt_loop_queue_init	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426bbe	FUN_00426bbe	fw_evt_loop_timer_create	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426bd8	FUN_00426bd8	fw_evt_loop_thread_flags_wait	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426c18	FUN_00426c18	fw_evt_loop_dispatch_event	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426c6a	FUN_00426c6a	fw_evt_loop_timer_start	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426c94	FUN_00426c94	fw_evt_loop_push_to_queue	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00426d00	FUN_00426d00	fw_evt_loop_push	fw_event_loop	HIGH
+0x00426df8	FUN_00426df8	fw_evt_loop_timer_callback	fw_event_loop	HIGH
+0x00426eb8	FUN_00426eb8	fw_evt_loop_task	fw_event_loop	HIGH
+0x00426f8c	FUN_00426f8c	fw_evt_loop_init	fw_event_loop	HIGH
+0x004270ac	FUN_004270ac	fw_evt_loop_register_handler	fw_event_loop	HIGH
+0x004271f8	FUN_004271f8	fw_evt_loop_unregister_handler	fw_event_loop	HIGH
+0x0042725c	FUN_0042725c	fw_evt_loop_set_filter	fw_event_loop	HIGH
+0x004272ac	FUN_004272ac	fw_evt_loop_get_current_event	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427328	FUN_00427328	fw_evt_loop_push_delayed	fw_event_loop	HIGH
+0x00427358	FUN_00427358	fw_evt_loop_remove_delayed	fw_event_loop	HIGH
+0x0042746e	FUN_0042746e	fw_evt_loop_push_urgent	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427536	FUN_00427536	fw_evt_loop_create_worker	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042754e	FUN_0042754e	fw_evt_loop_destroy	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004275ac	FUN_004275ac	fw_evt_loop_is_running	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427608	FUN_00427608	fw_evt_loop_flush_pending	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004276a0	FUN_004276a0	fw_evt_loop_set_priority	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004276e0	FUN_004276e0	fw_evt_loop_get_pending_count	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004277c4	FUN_004277c4	fw_evt_loop_timer_stop	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427814	FUN_00427814	fw_evt_loop_timer_restart	fw_event_loop	HIGH
+0x00427856	FUN_00427856	fw_evt_loop_send_sync	fw_event_loop	HIGH
+0x0042790a	FUN_0042790a	fw_evt_loop_alloc_event	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042793c	FUN_0042793c	fw_evt_loop_free_event	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004279a2	FUN_004279a2	fw_evt_loop_broadcast	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427a22	FUN_00427a22	fw_evt_loop_subscribe	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427a84	FUN_00427a84	fw_evt_loop_unsubscribe	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427af6	FUN_00427af6	fw_evt_loop_wait_for	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427b5e	FUN_00427b5e	fw_evt_loop_peek	fw_event_loop	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: tlsf_init - TLSF adapter initialization
+# Source: third_party/tlsf/tlsf_init.c
+# Strings: "tlsf_adapter_init", "tlsf init."
+# ============================================================================
+0x00427bdc	FUN_00427bdc	tlsf_adapter_get_pool	tlsf_init	HIGH	# TLSF source confirmed
+0x00427bec	FUN_00427bec	tlsf_adapter_get_instance	tlsf_init	HIGH	# TLSF source confirmed
+0x00427c18	FUN_00427c18	tlsf_adapter_lock_init	tlsf_init	HIGH	# TLSF source confirmed
+0x00427c28	FUN_00427c28	tlsf_adapter_init	tlsf_init	HIGH
+0x00427ce4	FUN_00427ce4	tlsf_adapter_malloc	tlsf_init	HIGH	# TLSF source confirmed
+0x00427cf4	FUN_00427cf4	tlsf_adapter_free	tlsf_init	HIGH	# TLSF source confirmed
+0x00427d1c	FUN_00427d1c	tlsf_adapter_realloc	tlsf_init	HIGH	# TLSF source confirmed
+0x00427d2c	FUN_00427d2c	tlsf_adapter_memalign	tlsf_init	HIGH	# TLSF source confirmed
+0x00427d58	FUN_00427d58	tlsf_adapter_get_stats	tlsf_init	HIGH	# TLSF source confirmed
+# ============================================================================
+# MODULE: hal_assert - HAL assertion / constraint handler
+# Strings: "(%s) has assert failed at %s:%ld.", "constraint handler: bad message"
+# ============================================================================
+0x00427dd0	FUN_00427dd0	assert_handler	hal_assert	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00427fb4	FUN_00427fb4	constraint_handler	hal_assert	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+
+# ============================================================================
+# MODULE: main - Bootloader main / initialization
+# Source: product/s200/bootloader/config/main.c
+# Strings: ">>> Even Bootloader start <<<", "main"
+# ============================================================================
+0x0042818c	FUN_0042818c	bootloader_early_init	main	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x004282c4	FUN_004282c4	bootloader_hw_init	main	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042832e	FUN_0042832e	bootloader_periph_init	main	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00428452	FUN_00428452	bootloader_mspi_init	main	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042858a	FUN_0042858a	bootloader_flash_init	main	HIGH
+0x0042878c	FUN_0042878c	bootloader_clock_init	main	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+
+# ============================================================================
+# MODULE: main_startup - Bootloader main entry and startup sequence
+# Source: product/s200/bootloader/config/main.c
+# ============================================================================
+0x004289e0	FUN_004289e0	main	main_startup	HIGH
+0x00428afc	FUN_00428afc	main_init_subsystems	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00428bf0	FUN_00428bf0	main_init_flash_and_fs	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00428cdc	FUN_00428cdc	main_init_elog_and_redirect	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00428db6	FUN_00428db6	main_start_rtos	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00428fee	FUN_00428fee	main_hw_config_adc	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429138	FUN_00429138	main_config_power_rails	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429396	FUN_00429396	main_config_gpio_defaults	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429470	FUN_00429470	main_config_clock_tree	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429578	FUN_00429578	main_config_memory_protection	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429664	FUN_00429664	main_init_i2c	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042979a	FUN_0042979a	main_init_adc	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042997c	FUN_0042997c	main_read_hw_version	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429a98	FUN_00429a98	main_validate_hw_config	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429b92	FUN_00429b92	main_init_watchdog	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429cf0	FUN_00429cf0	main_init_debug_uart	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429d4c	FUN_00429d4c	main_init_interrupts	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429eb4	FUN_00429eb4	main_config_mspi_flash	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429f96	FUN_00429f96	main_log_version_info	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00429fd8	FUN_00429fd8	main_check_reset_reason	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042a0e8	FUN_0042a0e8	main_clear_reset_status	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042a108	FUN_0042a108	main_log_helper	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042a200	FUN_0042a200	main_hw_self_test	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042a386	FUN_0042a386	main_config_cache	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042a408	FUN_0042a408	main_config_power_mode	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042a49c	FUN_0042a49c	main_config_flash_timing	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042a7c4	FUN_0042a7c4	main_init_filesystem	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042ab08	FUN_0042ab08	main_check_ota_flag	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042aba0	FUN_0042aba0	main_prepare_ota_update	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042ac8c	FUN_0042ac8c	main_boot_to_app	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042ad04	FUN_0042ad04	main_deinit_peripherals	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042ad70	FUN_0042ad70	main_set_vtor	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042adb8	FUN_0042adb8	main_flush_caches	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042ade8	FUN_0042ade8	main_disable_interrupts_for_jump	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042ae3c	FUN_0042ae3c	main_jump_vector_setup	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042af60	FUN_0042af60	main_error_handler	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042afb8	FUN_0042afb8	main_fatal_error	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042b1e0	FUN_0042b1e0	main_ota_state_machine	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042b604	FUN_0042b604	main_ota_verify_and_program	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042b94c	FUN_0042b94c	main_ota_cleanup	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042bd3c	FUN_0042bd3c	main_ota_error_recovery	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042bea0	FUN_0042bea0	main_ota_final_check	main_startup	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: dfu_file - DFU file I/O (OTA image read/write/verify)
+# Source: product/s200/bootloader/threads/thread_dfu.c
+# Strings: "ota/s200_firmware_ota.bin", "filesize", "blobSize", "magicNum"
+# Strings: "Installing ...", "Installing %d(%d)", "---Install end---"
+# ============================================================================
+0x0042bf80	FUN_0042bf80	dfu_file_open	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042bfc2	FUN_0042bfc2	dfu_file_close	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042bffe	FUN_0042bffe	dfu_file_read_ota_image	dfu_file	HIGH
+0x0042c16e	FUN_0042c16e	dfu_file_read_chunk	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042c1a2	FUN_0042c1a2	dfu_file_seek	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042c1b6	FUN_0042c1b6	dfu_file_parse_metadata	dfu_file	HIGH
+0x0042c32e	FUN_0042c32e	dfu_file_validate_magic	dfu_file	HIGH
+0x0042c36c	FUN_0042c36c	dfu_file_read_header	dfu_file	HIGH
+0x0042c39a	FUN_0042c39a	dfu_file_check_version	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042c3a6	FUN_0042c3a6	dfu_file_get_blob_size	dfu_file	HIGH
+0x0042c412	FUN_0042c412	dfu_file_get_entry_info	dfu_file	HIGH
+0x0042c484	FUN_0042c484	dfu_file_extract_component	dfu_file	HIGH
+0x0042c5be	FUN_0042c5be	dfu_file_verify_entry_crc	dfu_file	HIGH
+0x0042c602	FUN_0042c602	dfu_file_log_metadata	dfu_file	HIGH
+0x0042c644	FUN_0042c644	dfu_file_install_firmware	dfu_file	HIGH
+0x0042cd44	FUN_0042cd44	dfu_install_component	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042cdf0	FUN_0042cdf0	dfu_install_verify	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042ce24	FUN_0042ce24	dfu_install_flash_write	dfu_file	HIGH
+0x0042cf2c	FUN_0042cf2c	dfu_install_flash_erase_region	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042d050	FUN_0042d050	dfu_install_progress_report	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042d308	FUN_0042d308	dfu_install_finalize	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042d4ae	FUN_0042d4ae	dfu_install_rollback_check	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042d60c	FUN_0042d60c	dfu_install_mark_complete	dfu_file	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: dfu_core - DFU core operations (CRC, flash program, verify, jump)
+# Source: product/s200/bootloader/threads/thread_dfu.c
+# Strings: "app_dfu_image_crc_check", "app_dfu_system_program"
+# Strings: "_verifyFlashContent", "flash write verify ok/failed"
+# Strings: "bootloader_error_reset", "Bootloader ota fail, system reset!!!"
+# ============================================================================
+0x0042d798	FUN_0042d798	dfu_get_ota_path	dfu_core	HIGH
+0x0042d7d6	FUN_0042d7d6	dfu_get_config	dfu_core	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042d7dc	FUN_0042d7dc	app_dfu_image_crc_check	dfu_core	HIGH
+0x0042d93c	FUN_0042d93c	dfu_flash_erase_range	dfu_core	HIGH
+0x0042d96a	FUN_0042d96a	_verifyFlashContent	dfu_core	HIGH
+0x0042da34	FUN_0042da34	app_dfu_system_program	dfu_core	HIGH
+0x0042dbdc	FUN_0042dbdc	boot_jump_to_app	boot	HIGH
+0x0042dbee	FUN_0042dbee	dfu_task_msg_send	dfu_core	HIGH
+0x0042dc60	FUN_0042dc60	thread_dfu_task	dfu_core	HIGH
+0x0042dcb4	FUN_0042dcb4	dfu_init_config	dfu_core	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042dcbc	FUN_0042dcbc	dfu_create_message_queue	dfu_core	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042dce4	FUN_0042dce4	dfu_noop_callback	dfu_core	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042dce6	FUN_0042dce6	dfu_sync_start	dfu_core	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042dcf0	FUN_0042dcf0	dfu_sync_end	dfu_core	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042dd3e	FUN_0042dd3e	dfu_pre_jump_deinit	dfu_core	HIGH
+0x0042dd5a	FUN_0042dd5a	bootloader_error_reset	dfu_core	HIGH
+0x0042dda4	FUN_0042dda4	_thread_msg_handler	dfu_core	HIGH
+0x0042e110	FUN_0042e110	dfu_event_dispatch	dfu_core	HIGH
+0x0042e126	FUN_0042e126	dfu_error_halt	dfu_core	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+
+# ============================================================================
+# MODULE: dfu_crc - CRC-32 calculation for firmware integrity
+# ============================================================================
+0x0042e138	FUN_0042e138	crc32_update	dfu_crc	HIGH
+0x0042e170	FUN_0042e170	is_need_updata_image	dfu_crc	HIGH
+
+# ============================================================================
+# MODULE: thread_manager - Boot manager thread
+# Source: product/s200/bootloader/threads/thread_manager.c
+# Strings: "thread_manager", "DO NOT need updata firmware, GO TO APP"
+# Strings: "need updata firmware", "thread_manager_sysstart_sync"
+# ============================================================================
+0x0042e1a0	FUN_0042e1a0	thread_manager_init_locals	thread_manager	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042e1c2	FUN_0042e1c2	thread_manager_nop	thread_manager	HIGH
+0x0042e1c4	FUN_0042e1c4	thread_manager_create_dfu_thread	thread_manager	HIGH
+0x0042e1d0	FUN_0042e1d0	thread_manager_check_ota_flag	thread_manager	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042e1ee	FUN_0042e1ee	thread_manager_sysstart_sync	thread_manager	HIGH
+0x0042e236	FUN_0042e236	thread_manager_sysstart_sync_end	thread_manager	HIGH
+0x0042e244	FUN_0042e244	thread_manager_task	thread_manager	HIGH
+0x0042e2e6	FUN_0042e2e6	thread_manager_event_nop	thread_manager	HIGH
+0x0042e2e8	FUN_0042e2e8	thread_manager_create_and_start	thread_manager	HIGH
+0x0042e316	FUN_0042e316	thread_manager_stop	thread_manager	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042e32c	FUN_0042e32c	thread_manager_sync_wait	thread_manager	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042e35e	FUN_0042e35e	thread_manager_sync_signal	thread_manager	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042e390	FUN_0042e390	thread_manager_cleanup	thread_manager	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0042e3ec	FUN_0042e3ec	thread_manager_error_log	thread_manager	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: hal_wdt - Watchdog timer / system control
+# ============================================================================
+0x0042e440	FUN_0042e440	am_hal_wdt_restart	hal_wdt	HIGH	# was: am_hal_wdt_feed
+0x0042e460	FUN_0042e460	am_hal_reset_control	hal_wdt	HIGH
+0x0042e488	FUN_0042e488	am_hal_reset_status_get	hal_wdt	HIGH
+0x0042e5d2	FUN_0042e5d2	am_hal_wdt_config	hal_wdt	HIGH
+0x0042e640	FUN_0042e640	am_hal_wdt_init	hal_wdt	HIGH
+0x0042e7f0	FUN_0042e7f0	am_hal_wdt_interrupt_service	hal_wdt	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+# ============================================================================
+# MODULE: hal_norflash - NOR flash MSPI device abstraction
+# Strings: "am_devices_norflash_qspi_init"
+# ============================================================================
+0x0042f114	FUN_0042f114	am_devices_norflash_read	hal_norflash	HIGH
+0x0042f150	FUN_0042f150	am_devices_norflash_write	hal_norflash	HIGH
+0x0042f246	FUN_0042f246	am_devices_norflash_erase	hal_norflash	HIGH
+0x0042f2da	FUN_0042f2da	am_devices_norflash_erase_bulk	hal_norflash	HIGH
+0x0042f3fe	FUN_0042f3fe	am_devices_norflash_qspi_init_inner	hal_norflash	HIGH
+0x0042f5bc	FUN_0042f5bc	am_devices_norflash_deinit	hal_norflash	HIGH
+# ============================================================================
+# MODULE: nvic - Cortex-M NVIC / interrupt controller
+# ============================================================================
+0x0043018c	FUN_0043018c	NVIC_EnableIRQ	nvic	HIGH
+0x004301a8	FUN_004301a8	NVIC_SetPriority	nvic	HIGH
+0x004301cc	FUN_004301cc	hal_interrupt_config	nvic	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x00430308	FUN_00430308	hal_interrupt_enable_disable	nvic	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+0x0043032a	FUN_0043032a	hal_interrupt_register	nvic	HIGH	# pattern-confirmed (session 25 SDK cross-ref)
+
+# ============================================================================
+# BOOT FLOW SUMMARY
+# ============================================================================
+# 1. Reset vector at 0x410000 -> SP init, then jump to entry
+# 2. FUN_004289e0 (main): hardware init, clock, power, MSPI, flash
+# 3. FUN_00428db6 (main_start_rtos): elog_init, redirect_init, tlsf_adapter_init
+#    littlefs_init, osKernelInitialize, create threads, osKernelStart
+# 4. FUN_0042e244 (thread_manager_task): checks is_need_updata_image (OTA flag)
+#    - Flag == 0x55555555: send DFU event -> thread_dfu processes OTA
+#    - Flag != 0x55555555: jump directly to app at 0x438000
+# 5. FUN_0042dc60 (thread_dfu_task): waits for DFU messages
+#    FUN_0042dda4 (_thread_msg_handler): reads OTA metadata, CRC checks,
+#    erases flash, programs firmware, verifies, then jumps to app
+# 6. FUN_0042dbdc (boot_jump_to_app): writes VTOR = 0x438000, jumps via
+#    vector table entry (SP + reset vector)
+#
+# OTA IMAGE: "ota/s200_firmware_ota.bin" on LittleFS
+# CRC: CRC-32 table-based (FUN_0042e138), verified against metadata header
+# FLASH: MX25U25643G via MSPI, 4KB sector erase, page program with verify
+# FS DIRS: /firmware, /ota, /user, /log (created on first boot)
+# BOOT COUNT: persisted in LittleFS as "boot_count" key

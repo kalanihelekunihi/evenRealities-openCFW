@@ -1,0 +1,526 @@
+# G2 Firmware Source Tree (from embedded elog source paths)
+# 330 unique source files recovered from v2.0.7.16 firmware strings
+# Build path: D:\01_workspace\s200_ap510b_iar\
+# Toolchain: IAR Embedded Workbench for ARM (Apollo510b)
+
+├── app
+│   ├── gui
+│   │   ├── AgingTest
+│   │   │   └── aging_test.c
+│   │   ├── EvenAI
+│   │   │   ├── even_ai.c
+│   │   │   ├── even_ai_animation.c
+│   │   │   ├── even_ai_timer.c
+│   │   │   ├── text_stream_service.c
+│   │   │   └── ui_even_ai.c
+│   │   ├── EvenHub
+│   │   │   ├── common_image_container.c
+│   │   │   ├── common_list_container.c
+│   │   │   ├── common_text_container.c
+│   │   │   ├── evenhub_data_parser.c
+│   │   │   ├── evenhub_main.c
+│   │   │   └── evenhub_ui.c
+│   │   ├── LegalRegulatory
+│   │   │   └── legal_regulatory.c
+│   │   ├── MessageNotify
+│   │   │   ├── message_notify.c
+│   │   │   ├── msg_notif_timer.c
+│   │   │   └── ui_msg_notif_list.c
+│   │   ├── PdtGrayScreen
+│   │   │   └── pdt_gray_screen.c
+│   │   ├── ProductionTest
+│   │   │   └── production_test.c
+│   │   ├── Silent_Mode
+│   │   │   └── silent_mode.c
+│   │   ├── SystemAlert
+│   │   │   └── systemAlert.c
+│   │   ├── SystemClose
+│   │   │   └── systemClose.c
+│   │   ├── anim
+│   │   │   ├── bounce_anim.c
+│   │   │   ├── dot_anim.c
+│   │   │   ├── exit_prompt.c
+│   │   │   ├── fade_anim.c
+│   │   │   └── list_anim.c
+│   │   ├── common
+│   │   │   ├── generic_animation.c
+│   │   │   ├── lvgl_font_manager.c
+│   │   │   └── ui_common_api.c
+│   │   ├── conversate
+│   │   │   ├── conversate.c
+│   │   │   ├── conversate_comm_data.c
+│   │   │   ├── conversate_fsm.c
+│   │   │   ├── conversate_tag_data.c
+│   │   │   ├── conversate_timer_mgr.c
+│   │   │   └── conversate_ui.c
+│   │   ├── dashboard
+│   │   │   ├── dashboard.c
+│   │   │   ├── page_state_sync.c
+│   │   │   └── screens
+│   │   │       ├── ui_DashBaord_Main_Screen.c
+│   │   │       ├── ui_calendar_page.c
+│   │   │       ├── ui_news_page.c
+│   │   │       └── ui_stock_page.c
+│   │   ├── health
+│   │   │   ├── health.c
+│   │   │   ├── health_data_manager.c
+│   │   │   └── ui_health_page.c
+│   │   ├── logger
+│   │   │   └── logger_setting.c
+│   │   ├── menu
+│   │   │   └── menu_page.c
+│   │   ├── module_configure
+│   │   │   └── general_configure.c
+│   │   ├── navigation
+│   │   │   ├── navigation.c
+│   │   │   ├── navigation_data_handler.c
+│   │   │   └── navigation_ui.c
+│   │   ├── onboarding
+│   │   │   ├── onboarding.c
+│   │   │   ├── onboarding_animation.c
+│   │   │   ├── onboarding_data_manager.c
+│   │   │   ├── ui_onboarding_main_page.c
+│   │   │   ├── ui_onboarding_news_page.c
+│   │   │   └── ui_onboarding_stock_page.c
+│   │   ├── quicklist
+│   │   │   ├── quicklist.c
+│   │   │   ├── quicklist_data_manager.c
+│   │   │   └── ui_quicklist_page.c
+│   │   ├── setting
+│   │   │   └── setting.c
+│   │   ├── sync_info
+│   │   │   └── sync_info.c
+│   │   ├── system
+│   │   │   └── system_monitor.c
+│   │   ├── teleprompt
+│   │   │   ├── teleprompt.c
+│   │   │   ├── teleprompt_data.c
+│   │   │   ├── teleprompt_fsm.c
+│   │   │   ├── teleprompt_timer_mgr.c
+│   │   │   └── teleprompt_ui.c
+│   │   └── translate
+│   │       ├── translate.c
+│   │       ├── translate_data.c
+│   │       ├── translate_fsm.c
+│   │       └── translate_ui.c
+│   └── ux
+│       ├── ux_battery_sync
+│       │   └── ux_battery_sync.c
+│       ├── ux_production
+│       │   └── ux_production.c
+│       ├── ux_settings
+│       │   └── ux_settings.c
+│       ├── ux_system
+│       │   └── ux_system.c
+│       └── ux_wear_detect
+│           └── ux_wear_detect.c
+├── driver
+│   ├── buzzer
+│   │   └── drv_buzzer.c
+│   ├── chg
+│   │   ├── drv_bq25180.c
+│   │   └── drv_bq27427.c
+│   ├── codec
+│   │   └── drv_gx8002b.c
+│   ├── flash
+│   │   └── drv_mx25u25643g.c
+│   ├── hal
+│   │   └── src
+│   │       └── hal_i2c.c
+│   ├── npmx_driver_transplant
+│   │   └── src
+│   │       └── npmx_main_driver.c
+│   ├── pdm
+│   │   ├── drv_pdm.c
+│   │   └── drv_pdm_production.c
+│   ├── rtc
+│   │   └── drv_rtc.c
+│   ├── sensor
+│   │   ├── als
+│   │   │   ├── als.c
+│   │   │   └── opt3007
+│   │   │       └── opt3007_registers.c
+│   │   └── imu
+│   │       └── imu_icm45608.c
+│   ├── touch
+│   │   └── drv_cy8c4046fni.c
+│   ├── uled
+│   │   ├── display_preprocess.c
+│   │   ├── drv_mspi_uled.c
+│   │   ├── drv_mspi_uled_common.c
+│   │   ├── hongshi_a6ng
+│   │   │   └── drv_mspi_a6ng.c
+│   │   └── jbd4010
+│   │       └── drv_mspi_jbd4010.c
+│   └── wdt
+│       └── watchdog.c
+├── framework
+│   ├── fw_event_loop
+│   │   └── fw_event_loop.c
+│   ├── page_manager
+│   │   └── page_manager.c
+│   └── sync
+│       ├── display_thread.c
+│       ├── sync_framework.c
+│       ├── sync_interface_api.c
+│       ├── thread_pool.c
+│       └── uart_sync.c
+├── kernel
+│   └── FreeRTOS-Plus-CLI
+│       └── prvCommand
+│           └── prvCommand_filesystem.c
+├── platform
+│   ├── audio
+│   │   ├── service_algo.c
+│   │   ├── service_audio.c
+│   │   ├── service_audio_manager.c
+│   │   ├── service_codec_dfu.c
+│   │   ├── service_codec_host.c
+│   │   └── service_codec_porting.c
+│   ├── ble
+│   │   ├── app_ble.c
+│   │   ├── app_ble_central.c
+│   │   ├── app_ble_discovery.c
+│   │   ├── app_ble_peer_mgr.c
+│   │   ├── app_ble_peripheral.c
+│   │   ├── app_connect_params.c
+│   │   └── profiles
+│   │       ├── ancc
+│   │       │   └── profile_ancc.c
+│   │       ├── efs
+│   │       │   └── profile_efs.c
+│   │       ├── ess
+│   │       │   └── profile_ess.c
+│   │       ├── eus
+│   │       │   └── profile_eus.c
+│   │       ├── gatt
+│   │       │   └── profile_gatt.c
+│   │       ├── nus
+│   │       │   └── profile_nus.c
+│   │       ├── ota
+│   │       │   └── profile_ota.c
+│   │       └── ring
+│   │           └── profile_ring.c
+│   ├── device_mgr
+│   │   ├── box_uart_mgr.c
+│   │   └── device_mgr.c
+│   ├── display_mgr
+│   │   └── displaydrv_manager.c
+│   ├── input
+│   │   ├── service_gesture_processor.c
+│   │   ├── service_input_manager.c
+│   │   └── touchDFU
+│   │       └── service_touch_dfu.c
+│   ├── product_test
+│   │   ├── product_common.c
+│   │   ├── production_mic_func.c
+│   │   └── pt_protocol_procsr.c
+│   ├── protocols
+│   │   ├── dashboard_service
+│   │   │   └── dashboard_data_process.c
+│   │   ├── efs_service
+│   │   │   ├── efs_service.c
+│   │   │   └── efs_transport.c
+│   │   ├── ota_service
+│   │   │   ├── ota_service.c
+│   │   │   └── ota_transport.c
+│   │   ├── pb_service_conversate
+│   │   │   └── pb_service_conversate.c
+│   │   ├── pb_service_dev_config
+│   │   │   ├── pb_service_dev_config.c
+│   │   │   ├── pb_service_dev_setting.c
+│   │   │   └── pb_service_pair_mgr.c
+│   │   ├── pb_service_even_ai
+│   │   │   └── pb_service_even_ai.c
+│   │   ├── pb_service_glasses_case
+│   │   │   └── pb_service_glasses_case.c
+│   │   ├── pb_service_health
+│   │   │   └── pb_service_health.c
+│   │   ├── pb_service_notification
+│   │   │   └── pb_service_notification.c
+│   │   ├── pb_service_onboarding
+│   │   │   └── pb_service_onboarding.c
+│   │   ├── pb_service_quicklist
+│   │   │   └── pb_service_quicklist.c
+│   │   ├── pb_service_ring
+│   │   │   └── pb_service_ring.c
+│   │   ├── pb_service_setting
+│   │   │   └── pb_service_setting.c
+│   │   ├── pb_service_teleprompt
+│   │   │   └── pb_service_teleprompt.c
+│   │   ├── pb_service_translate
+│   │   │   └── pb_service_translate.c
+│   │   ├── ring_service
+│   │   │   └── ring_service.c
+│   │   └── transport_protocol
+│   │       └── transport_protocol.c
+│   ├── sensor_hub
+│   │   └── sensor_hub.c
+│   ├── service
+│   │   ├── DFU
+│   │   │   └── service_em9305_dfu.c
+│   │   ├── box_detect
+│   │   │   └── service_box_detect.c
+│   │   ├── callback_mgr
+│   │   │   ├── callback_manager.c
+│   │   │   ├── cb_ble_status.c
+│   │   │   ├── cb_charge.c
+│   │   │   └── cb_msg_notif.c
+│   │   ├── charger
+│   │   │   └── charger_common.c
+│   │   ├── eAT
+│   │   │   ├── at_buzzer.c
+│   │   │   ├── at_codec.c
+│   │   │   ├── at_fs.c
+│   │   │   ├── at_tp.c
+│   │   │   └── core
+│   │   │       └── at_core.c
+│   │   ├── evenAI
+│   │   │   └── service_even_ai.c
+│   │   ├── flashDB
+│   │   │   ├── NV
+│   │   │   │   ├── service_nvdb.c
+│   │   │   │   ├── service_nvdb_buzzer.c
+│   │   │   │   ├── service_nvdb_mac.c
+│   │   │   │   ├── service_nvdb_product_mode.c
+│   │   │   │   ├── service_nvdb_sensor_caldata.c
+│   │   │   │   └── service_nvdb_sys_dt.c
+│   │   │   ├── db_api
+│   │   │   │   └── service_db_api.c
+│   │   │   └── kv
+│   │   │       ├── service_kvdb.c
+│   │   │       ├── service_kvdb_module_configure.c
+│   │   │       ├── service_kvdb_onboarding_config.c
+│   │   │       ├── service_kvdb_ring.c
+│   │   │       ├── service_kvdb_setting.c
+│   │   │       ├── service_kvdb_temperature_unit.c
+│   │   │       ├── service_kvdb_time.c
+│   │   │       ├── service_kvdb_time_format.c
+│   │   │       └── service_kvdb_universal_setting.c
+│   │   ├── message_notify
+│   │   │   ├── service_ancc.c
+│   │   │   ├── service_android_notify.c
+│   │   │   └── service_whitelist.c
+│   │   ├── service_universal_setting
+│   │   │   └── service_universal_setting.c
+│   │   ├── settings
+│   │   │   └── service_settings.c
+│   │   └── time
+│   │       └── service_time.c
+│   └── threads
+│       ├── thread_audio.c
+│       ├── thread_ble_msgrx.c
+│       ├── thread_ble_msgtx.c
+│       ├── thread_ble_production.c
+│       ├── thread_ble_wsf.c
+│       ├── thread_evenai.c
+│       ├── thread_input.c
+│       ├── thread_manager.c
+│       ├── thread_notification.c
+│       └── thread_ring.c
+├── product
+│   └── s200
+│       └── app
+│           └── config
+│               ├── board_config.c
+│               ├── main.c
+│               ├── redirect.c
+│               └── rtos.c
+├── third_party
+│   ├── EasyLogger-master
+│   │   └── easylogger
+│   │       └── src
+│   │           ├── elog.c
+│   │           ├── elog_async_api.c
+│   │           └── elog_utils.c
+│   ├── TinyFrame
+│   │   └── TinyFrame.c
+│   ├── cordio
+│   │   ├── ble-host
+│   │   │   └── sources
+│   │   │       ├── hci
+│   │   │       │   └── ambiq
+│   │   │       │       └── hci_evt.c
+│   │   │       └── stack
+│   │   │           ├── att
+│   │   │           │   ├── att_main.c
+│   │   │           │   ├── attc_disc.c
+│   │   │           │   ├── attc_main.c
+│   │   │           │   ├── attc_proc.c
+│   │   │           │   ├── atts_ccc.c
+│   │   │           │   ├── atts_csf.c
+│   │   │           │   ├── atts_ind.c
+│   │   │           │   ├── atts_main.c
+│   │   │           │   ├── atts_proc.c
+│   │   │           │   └── atts_sign.c
+│   │   │           ├── dm
+│   │   │           │   ├── dm_adv_leg.c
+│   │   │           │   ├── dm_conn.c
+│   │   │           │   ├── dm_conn_master.c
+│   │   │           │   ├── dm_conn_master_leg.c
+│   │   │           │   ├── dm_conn_sm.c
+│   │   │           │   └── dm_dev.c
+│   │   │           ├── l2c
+│   │   │           │   ├── l2c_main.c
+│   │   │           │   ├── l2c_master.c
+│   │   │           │   └── l2c_slave.c
+│   │   │           └── smp
+│   │   │               ├── smp_act.c
+│   │   │               ├── smp_db.c
+│   │   │               ├── smp_main.c
+│   │   │               ├── smp_sc_main.c
+│   │   │               └── smpr_act.c
+│   │   ├── ble-profiles
+│   │   │   └── sources
+│   │   │       └── apps
+│   │   │           └── app
+│   │   │               ├── app_disc.c
+│   │   │               ├── app_main.c
+│   │   │               ├── app_master.c
+│   │   │               ├── app_master_leg.c
+│   │   │               ├── app_server.c
+│   │   │               ├── app_slave.c
+│   │   │               ├── app_slave_leg.c
+│   │   │               └── common
+│   │   │                   ├── app_db.c
+│   │   │                   └── app_ui.c
+│   │   └── wsf
+│   │       └── sources
+│   │           └── port
+│   │               └── freertos
+│   │                   ├── wsf_assert.c
+│   │                   ├── wsf_buf.c
+│   │                   ├── wsf_timer.c
+│   │                   └── wsf_trace.c
+│   ├── littlefs
+│   │   ├── lfs.c
+│   │   └── port
+│   │       └── littlefs_mx25u25643g_porting.c
+│   ├── lvgl_v9.3
+│   │   ├── LVGL
+│   │   │   └── src
+│   │   │       ├── core
+│   │   │       │   ├── lv_group.c
+│   │   │       │   ├── lv_obj.c
+│   │   │       │   ├── lv_obj_class.c
+│   │   │       │   ├── lv_obj_draw.c
+│   │   │       │   ├── lv_obj_event.c
+│   │   │       │   ├── lv_obj_pos.c
+│   │   │       │   ├── lv_obj_scroll.c
+│   │   │       │   ├── lv_obj_style.c
+│   │   │       │   ├── lv_obj_tree.c
+│   │   │       │   └── lv_refr.c
+│   │   │       ├── display
+│   │   │       │   └── lv_display.c
+│   │   │       ├── draw
+│   │   │       │   ├── ambiq
+│   │   │       │   │   ├── lv_draw_ambiq.c
+│   │   │       │   │   ├── lv_draw_ambiq_arc.c
+│   │   │       │   │   ├── lv_draw_ambiq_box_shadow.c
+│   │   │       │   │   ├── lv_draw_ambiq_buffer.c
+│   │   │       │   │   ├── lv_draw_ambiq_fill.c
+│   │   │       │   │   ├── lv_draw_ambiq_img.c
+│   │   │       │   │   ├── lv_draw_ambiq_letter.c
+│   │   │       │   │   ├── lv_draw_ambiq_mask_rect.c
+│   │   │       │   │   ├── lv_draw_ambiq_private.c
+│   │   │       │   │   ├── lv_draw_ambiq_triangle.c
+│   │   │       │   │   └── lv_draw_ambiq_vector_font.c
+│   │   │       │   ├── lv_draw.c
+│   │   │       │   ├── lv_draw_arc.c
+│   │   │       │   ├── lv_draw_buf.c
+│   │   │       │   ├── lv_draw_image.c
+│   │   │       │   ├── lv_draw_label.c
+│   │   │       │   ├── lv_draw_line.c
+│   │   │       │   ├── lv_draw_mask.c
+│   │   │       │   ├── lv_draw_rect.c
+│   │   │       │   └── lv_image_decoder.c
+│   │   │       ├── font
+│   │   │       │   ├── lv_font.c
+│   │   │       │   └── lv_font_fmt_txt.c
+│   │   │       ├── layouts
+│   │   │       │   ├── flex
+│   │   │       │   │   └── lv_flex.c
+│   │   │       │   └── grid
+│   │   │       │       └── lv_grid.c
+│   │   │       ├── libs
+│   │   │       │   ├── bin_decoder
+│   │   │       │   │   └── lv_bin_decoder.c
+│   │   │       │   ├── bmp
+│   │   │       │   │   └── lv_bmp.c
+│   │   │       │   ├── freetype
+│   │   │       │   │   ├── lv_freetype.c
+│   │   │       │   │   ├── lv_freetype_glyph.c
+│   │   │       │   │   ├── lv_freetype_image.c
+│   │   │       │   │   └── lv_freetype_outline.c
+│   │   │       │   └── fsdrv
+│   │   │       │       └── lv_fs_littlefs.c
+│   │   │       ├── lv_init.c
+│   │   │       ├── misc
+│   │   │       │   ├── cache
+│   │   │       │   │   ├── lv_cache.c
+│   │   │       │   │   ├── lv_cache_entry.c
+│   │   │       │   │   └── lv_cache_lru_rb.c
+│   │   │       │   ├── lv_anim.c
+│   │   │       │   ├── lv_array.c
+│   │   │       │   ├── lv_event.c
+│   │   │       │   ├── lv_fs.c
+│   │   │       │   ├── lv_iter.c
+│   │   │       │   ├── lv_palette.c
+│   │   │       │   ├── lv_rb.c
+│   │   │       │   ├── lv_style.c
+│   │   │       │   ├── lv_text.c
+│   │   │       │   └── lv_timer.c
+│   │   │       ├── osal
+│   │   │       │   └── lv_freertos.c
+│   │   │       ├── stdlib
+│   │   │       │   └── lv_mem.c
+│   │   │       └── widgets
+│   │   │           ├── animimage
+│   │   │           │   └── lv_animimage.c
+│   │   │           ├── arc
+│   │   │           │   └── lv_arc.c
+│   │   │           ├── bar
+│   │   │           │   └── lv_bar.c
+│   │   │           ├── buttonmatrix
+│   │   │           │   └── lv_buttonmatrix.c
+│   │   │           ├── calendar
+│   │   │           │   ├── lv_calendar.c
+│   │   │           │   └── lv_calendar_header_arrow.c
+│   │   │           ├── chart
+│   │   │           │   └── lv_chart.c
+│   │   │           ├── dropdown
+│   │   │           │   └── lv_dropdown.c
+│   │   │           ├── image
+│   │   │           │   └── lv_image.c
+│   │   │           ├── keyboard
+│   │   │           │   └── lv_keyboard.c
+│   │   │           ├── label
+│   │   │           │   └── lv_label.c
+│   │   │           ├── menu
+│   │   │           │   └── lv_menu.c
+│   │   │           ├── roller
+│   │   │           │   └── lv_roller.c
+│   │   │           ├── span
+│   │   │           │   └── lv_span.c
+│   │   │           ├── spinbox
+│   │   │           │   └── lv_spinbox.c
+│   │   │           ├── switch
+│   │   │           │   └── lv_switch.c
+│   │   │           ├── tabview
+│   │   │           │   └── lv_tabview.c
+│   │   │           └── textarea
+│   │   │               └── lv_textarea.c
+│   │   ├── lvgl_ambiq_demo
+│   │   │   └── lvgl_ttf
+│   │   │       └── src
+│   │   │           └── am_ftsystem.c
+│   │   └── lvgl_ambiq_porting
+│   │       └── lv_ambiq_display.c
+│   ├── ringBuffer
+│   │   └── ringbuffer.c
+│   └── tlsf
+│       ├── tlsf.c
+│       └── tlsf_init.c
+└── utils
+    └── assert
+        └── util_error_check.c

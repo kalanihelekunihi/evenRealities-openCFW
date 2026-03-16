@@ -1,0 +1,84 @@
+{
+  "filename": "firmware_ble_em9305.bin",
+  "description": "BLE Radio (EM9305 ARC EM / ARCv2 ISA) - Segmented NVM patch records",
+  "base_addr": "0x00300000",
+  "header_skip": 0,
+  "ghidra_lang": "ARM:LE:32:Cortex",
+  "isa_correction": "Actual ISA is ARC EM (ARCv2), NOT ARM. Ghidra ARM disassembly produced invalid results. Requires ghidra-arc plugin or Synopsys MetaWare for proper analysis.",
+  "note": "4 segmented NVM patch records targeting 0x00300000 region. All 45 'functions' are INVALID_ARM_HEURISTIC byte-pattern boundaries.",
+  "segments": [
+    {
+      "index": 0,
+      "target": "0x00300000",
+      "size": 224
+    },
+    {
+      "index": 1,
+      "target": "0x00300400",
+      "size": 656
+    },
+    {
+      "index": 2,
+      "target": "0x00302000",
+      "size": 56
+    },
+    {
+      "index": 3,
+      "target": "0x00302400",
+      "size": 210888
+    }
+  ],
+  "output_files": [
+    {
+      "name": "segment_0_0x00300000/",
+      "contents": [
+        "decompiled.c",
+        "functions.txt",
+        "ghidra_log.txt",
+        "rizin_disasm.txt",
+        "rizin_functions.txt",
+        "rizin_info.txt",
+        "rizin_strings.txt",
+        "strings.txt",
+        "summary.json"
+      ]
+    },
+    {
+      "name": "segment_1_0x00300400/",
+      "contents": [
+        "decompiled.c",
+        "functions.txt",
+        "ghidra_log.txt",
+        "rizin_disasm.txt",
+        "rizin_functions.txt",
+        "rizin_info.txt",
+        "rizin_strings.txt",
+        "strings.txt",
+        "summary.json"
+      ]
+    },
+    {
+      "name": "segment_2_0x00302000/",
+      "contents": [
+        "rizin_disasm.txt",
+        "rizin_functions.txt",
+        "rizin_info.txt",
+        "rizin_strings.txt"
+      ]
+    },
+    {
+      "name": "segment_3_0x00302400/",
+      "contents": [
+        "decompiled.c",
+        "functions.txt",
+        "ghidra_log.txt",
+        "rizin_disasm.txt",
+        "rizin_functions.txt",
+        "rizin_info.txt",
+        "rizin_strings.txt",
+        "strings.txt",
+        "summary.json"
+      ]
+    }
+  ]
+}

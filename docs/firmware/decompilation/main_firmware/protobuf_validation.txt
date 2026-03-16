@@ -1,0 +1,1003 @@
+================================================================================
+G2 FIRMWARE PROTOBUF vs SWIFT SDK CROSS-VALIDATION REPORT
+Generated: 2026-03-06
+Firmware: v2.0.7.16, SoC: Ambiq Apollo510b
+SDK: EvenG2Shortcuts (Sources/EvenG2Shortcuts/)
+================================================================================
+
+METHODOLOGY
+-----------
+For each BLE service with a known firmware protobuf schema:
+  1. Read the firmware's nanopb field descriptor table and encoder functions
+  2. Read the corresponding Swift SDK protocol/sender files
+  3. Compare field numbers, types, TX payload construction, and RX decoding
+  4. Note mismatches, missing fields, and undiscovered features
+
+Confidence: HIGH = confirmed by capture + firmware, MEDIUM = firmware only, LOW = inferred
+
+================================================================================
+1. AUTH (Service 0x80)
+   Firmware schemas: AuthResponse (DAT_0049eaac), AuthKeepalive (DAT_0049f408)
+   SDK files: ProtocolConstants.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA (AuthResponse):
+  f1: uint32 type          (4=auth_success, 5=auth_response)     [HIGH]
+  f2: uint32 msg_id        (connection handle / eye ID)           [HIGH]
+  f3: uint32 conn_handle   (u16 at offset 2)                     [MEDIUM]
+  f4: bool   status        (param_1 != 0)                        [MEDIUM]
+  f5: uint32 padding       (always 0)                            [LOW]
+
+FIRMWARE TX SCHEMA (AuthKeepalive):
+  f1: uint32 type          (6=keepalive)                         [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 auth_flag     (auth mode byte)                      [MEDIUM]
+  f4: message time_data    (system_time_get)                     [MEDIUM]
+  f5: uint32 tz_param      (timezone byte)                       [MEDIUM]
+  f6: uint32 end_marker    (always 0)                            [LOW]
+
+SDK RX HANDLING (G2ResponseDecoder.swift):
+  0x80-00: Heartbeat echo (type=14) parsed into G2HeartbeatEcho
+           Non-heartbeat treated as auth success indicator
+  0x80-01: Auth success (type=4, f3={f1=1}) or keepalive (type=6)
+  0x80-02: Transport ACK (8-byte header-only)
+
+COMPARISON:
+  Field Match:  f1, f2 match (type, msg_id)
+
+  GAPS FOUND:
+  [GAP-AUTH-1] AuthResponse f3 (conn_handle) NOT parsed by SDK
+     - Firmware sends connection handle in f3 of auth response
+     - SDK only checks f3 for nested {f1=1} success flag
+     - Potential: conn_handle could be used for eye identification
+
+  [GAP-AUTH-2] AuthResponse f4 (status bool) NOT parsed by SDK
+     - Firmware encodes a boolean status field
+     - SDK does not extract this, only reads nested f3.f1
+
+  [GAP-AUTH-3] AuthKeepalive f3-f6 NOT parsed by SDK
+     - auth_flag, time_data, tz_param are sent by firmware in keepalive
+     - SDK logs "Auth keepalive received (type=6 on 0x80-01)" but discards fields
+     - Potential: time_data contains system clock, useful for time sync verification
+
+  [GAP-AUTH-4] Heartbeat echo f3/f4/f5 speculatively mapped but never confirmed
+     - G2HeartbeatEcho has isWearing, isCharging, isInCase (all nil)
+     - Firmware heartbeat handler (PB_RxBaseConnHeartBeat) validates 0xAA magic
+     - These fields may not exist in heartbeat echoes at all
+
+  MISMATCHES: None (field numbers align)
+  TYPE COMPATIBILITY: OK (varint maps to UInt8/UInt64 in SDK)
+
+
+================================================================================
+2. SETTINGS / CONFIGURATION (Service 0x0D)
+   Firmware schema: ProtoBaseSettings (DAT_0046c3f0)
+   SDK files: G2BrightnessSender.swift, G2BrightnessConstants.swift,
+              G2DeviceConfigProtocol.swift, G2GlassesSettingsProtocol.swift,
+              G2WearDetectionProtocol.swift, G2OnboardingProtocol.swift,
+              G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA (ProtoBaseSettings):
+  f1: uint32 type          (0=query, 1=notify)                  [HIGH]
+  f2: uint32 sub_service   (sub-service ID / eye)               [HIGH]
+  f3: uint32 flag          (always 1)                           [MEDIUM]
+  f4: uint32 timestamp_lo  (timestamp pair lo)                  [MEDIUM]
+  f5: uint32 timestamp_hi  (timestamp pair hi)                  [MEDIUM]
+
+SDK TX (G2BrightnessSender):
+  Sends: f1=commandId(12), f3=nested{f1=level, f2=auto}, f8=magic
+
+SDK TX (G2DeviceConfigProtocol):
+  Sends: f1=setting_id, f3=nested{...}
+
+COMPARISON:
+  [GAP-SETTINGS-1] Firmware ProtoBaseSettings wraps with type/sub_service/timestamp
+     but SDK brightness/config payloads skip the ProtoBaseSettings wrapper entirely.
+     - SDK sends: f1=cmdId, f3=nested_data, f8=magic directly on 0x0D-20
+     - Firmware decodes via settings_rx_router which expects ProtoBaseSettings
+     - RISK: This MIGHT work if firmware routes 0x0D-20 RX differently from 0x0D-00 TX,
+       but the wrapper encoding mismatch needs hardware validation
+
+  [GAP-SETTINGS-2] Firmware ProtoBaseSettings f4/f5 (timestamps) NOT sent by SDK
+     - Firmware populates timestamp_lo/timestamp_hi via get_timestamp_pair()
+     - SDK never includes timestamp fields in settings payloads
+     - Impact: Unknown — firmware may ignore timestamps on phone→glasses direction
+
+  [GAP-SETTINGS-3] Firmware settings_buzzer_command builds a 4-byte fixed packet
+     [0x00, 0x1A, 0x94, 0x01] and calls buzzer_play_command
+     - SDK G2BuzzerProtocol uses speculative protobuf encoding (not confirmed)
+     - The firmware uses a FIXED byte sequence, not protobuf, for the buzzer
+
+  [GAP-SETTINGS-4] settings_compact_notify uses 8-byte packet with 0xAA marker
+     - This notification format is not decoded anywhere in the SDK
+
+  MISMATCHES: None in field numbers
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+3. EVEN AI (Service 0x07)
+   Firmware schemas: EvenAIBasic (DAT_004eef64), EvenAIExtended (DAT_004efadc),
+                     EvenAIAdvanced (DAT_004f0458), EvenAIConfig (PTR_DAT_004f0754)
+   SDK files: G2EvenAIProtocol.swift, G2EvenAIConstants.swift,
+              G2EvenAISender.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMAS:
+  EvenAIBasic (types 1-4): f1=type, f2=msgId, f3=command, f4=flags
+  EvenAIExtended (types 3,5): f1=type, f2=msgId, f3=command, f4=payload, f5=term
+                               SKILL: f6, f7 additional
+  EvenAIAdvanced (types 7-10): f1=type, f2=msgId, f3=command, f4=flags, f5-f9 payload
+                                HB: flags=0(codec ready)/8(not ready), field_count=11
+  EvenAIConfig (type 10): f1=type, f2=msgId, f3-f5=config, f6-f13=additional
+
+SDK TX (G2EvenAIProtocol.swift):
+  CTRL enter/exit:  f1=1, f2=magic, f3=nested{f1=enter/exit}
+  ASK:              f1=3, f2=magic, f5=nested{textInfo}
+  REPLY:            f1=5, f2=magic, f7=nested{textInfo}
+  SKILL:            f1=6, f2=magic, f6=nested{f1=skillId, f2=value}
+  ANALYSE:          f1=4, f2=magic, f5=nested{textInfo}
+  PROMPT:           f1=7, f2=magic, f5=nested{textInfo}
+  EVENT:            f1=8, f2=magic
+  CONFIG:           f1=10, f2=magic, f3=nested{f1=streamSpeed, f2=textMode}
+  HEARTBEAT:        f1=9, f2=magic
+
+SDK RX (G2ResponseDecoder.swift):
+  0x07-00: f1=161 → COMM_RSP (completionType from f12.f1)
+           f1=2 → VAD (isActive from f3.f1)
+           f1=1/3/5/6 → EvenAI echo
+           else → EvenHub decoder
+  0x07-01: f1=161 → completion
+           else → status (f3.f1=mode)
+
+COMPARISON:
+  Field numbers: MATCH for all command types
+
+  [GAP-AI-1] HEARTBEAT firmware checks codec state (flags=0/8)
+     - Firmware sets puVar1[5] = 0 if codec ready, else 8
+     - SDK heartbeatPayload() sends only f1=9, f2=magic — NO codec state field
+     - SDK is TX (phone→glasses) so firmware codec state only matters for RX direction
+     - But the firmware HEARTBEAT response field_count=11 means 11 fields are encoded
+     - SDK only decodes f1/f2 of heartbeat responses — missing fields 3-11
+
+  [GAP-AI-2] CONFIG firmware encodes 13 fields (field_count=0x0D)
+     - Firmware: puVar1[4]=*param_2, puVar1[5]=param_2[1], puVar1[6]=0, plus f6-f13
+     - SDK configPayload sends: f1=10, f2=magic, f3=nested{f1=speed, f2=mode}
+     - Only 3 fields sent vs firmware's 13 possible — 10 config fields unused
+     - Potential: Additional config for AI persona, language, context window, etc.
+
+  [GAP-AI-3] SKILL firmware uses field_count=7 and separate buffer DAT_004efc7c
+     - Firmware encodes 7 fields for SKILL; SDK sends f1, f2, f6 (3 fields)
+     - Fields 3-5 and f7 are not populated by SDK
+     - Potential: f3=command byte, f4/f5=payload, f7=additional params
+
+  [GAP-AI-4] PROMPT firmware uses field_count=9 on EvenAIAdvanced table
+     - SDK sends: f1=7, f2=magic, f5=textInfo (3 fields)
+     - Firmware encodes up to 9 fields
+     - Missing fields 3, 4, 6-9 could carry prompt parameters (temperature, max_tokens, etc.)
+
+  [GAP-AI-5] EVENT firmware uses field_count=10 with auto-increment at DAT_004f05c8
+     - SDK eventPayload sends: f1=8, f2=magic only (2 fields)
+     - Firmware encodes 10 fields — 8 fields undiscovered
+     - EVENT has auto-increment counter separate from phone msgId
+
+  [GAP-AI-6] EvenAI echo for ANALYSE (type=4) not handled
+     - SDK handles echoes for f1=1/3/5/6 but NOT f1=4 (ANALYSE)
+     - Firmware's type=2 encoder is labeled ANALYSE echo (field_count=4)
+     - When glasses echo an ANALYSE command, SDK falls through to EvenHub decoder
+
+  [GAP-AI-7] REPLY via task queue — firmware enqueues type=5 as task_queue(5, data, 0x208)
+     - SDK sends REPLY synchronously, firmware processes async
+     - No impact on wire format but explains why REPLY responses may be delayed
+
+  MISMATCHES:
+  [MISMATCH-AI-1] SDK ASK uses f5 for text, firmware EvenAIBasic uses f3 for command
+     - SDK: f1=3, f2=magic, f5=textInfo
+     - Firmware basic: f1=3, f2=msgId, f3=command, f4=flags
+     - Firmware ASK large: f1=3, f2=msgId, f3=command, f4=payload, f5=terminator
+     - SDK puts text in f5 which maps to firmware's f5 (terminator) in basic table
+     - BUT: firmware ASK large table has f4=bytes payload for large content
+     - The SDK format works because the large table's f4 accepts the text payload
+     - Still, the SDK skips f3 (command byte) which firmware expects
+     - RISK: Medium — firmware may use f3 to determine ASK sub-type
+
+  TYPE COMPATIBILITY: OK (varint→UInt8/UInt64, bytes→Data)
+
+
+================================================================================
+4. EVEN HUB (Service 0xE0)
+   Firmware schema: EvenHubMessage (DAT_0059ca7c) — up to 19 fields
+   SDK files: G2EvenHubProtocol.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (2/4/0x0B/0x0C/0x0E/0x10)          [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 sub_field_count                                     [MEDIUM]
+  f4: uint32 payload_word                                        [MEDIUM]
+  f5: uint32 sub_type                                            [MEDIUM]
+  f6: bytes  content_block  (16 bytes)                           [MEDIUM]
+  f7-f12: uint32 extra words                                     [LOW]
+  f13-f19: extended payload                                      [LOW]
+
+  Type-specific field counts:
+    0x0C (primary): 15 fields
+    0x0E (COMM_RSP): 17 fields
+    2 (display_content): 13 fields, 3 sub-variants on param_1
+    0x0B (data_relay): 16 fields
+    4 (full): 6 fields
+    0x10 (simple): 19 fields
+
+COMPARISON:
+  [GAP-HUB-1] Firmware has 6 type variants with variable field counts (1-19)
+     - SDK EvenHub TX sends specific protobuf payloads per feature
+     - Firmware schema is the LARGEST in the system (0x2654-byte struct, 0x279E buffer)
+     - SDK does not expose type 0x0B (data_relay) or type 0x10 (simple) at all
+
+  [GAP-HUB-2] Type 2 (display_content) has 3 sub-variants dispatched on param_1
+     - param_1=0: 3 sub-fields + single byte at offset 8
+     - param_1=1: 1 sub-field + u32 + 16-byte memcpy + u32 extra
+     - param_1=2: 2 sub-fields + u32 + 16-byte memcpy + byte
+     - SDK does not differentiate display_content sub-variants
+
+  [GAP-HUB-3] content_block (f6) is a 16-byte block — SDK handles as generic bytes
+     - Could contain UUID, hash, or image data reference
+
+  MISMATCHES: None identified
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+5. CONVERSATE (Service 0x0B)
+   Firmware schema: ConversateResponse (DAT_005932d8)
+   SDK files: G2ConversateProtocol.swift, G2ConversateSender.swift,
+              G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (0xA1=COMM_RSP, 0xA2=text_update)   [HIGH]
+  f2: uint32 msg_id         (auto-increment at DAT_005932e8)     [HIGH]
+  f3: uint32 command        (phone command echo)                 [HIGH]
+  f4-f9: text content, status, lifecycle state (7.5KB struct)
+
+SDK TX (G2ConversateProtocol.swift):
+  Init:       f1=1, f2=msgId, f3=nested{settings}, f8=nested{magic}
+  Marker:     f1=255, f2=msgId, f10=empty_LD, f8=nested{magic}
+  Transcript: f1=5, f2=updateId, f7=nested{f1=text, f2=isFinal}, f8=nested{magic}
+  Pause:      f1=2, f2=msgId, f8=nested{magic}
+  Resume:     f1=3, f2=msgId, f8=nested{magic}
+  Close:      f1=4, f2=msgId, f8=nested{magic}
+
+SDK RX (G2ResponseDecoder.swift):
+  0x0B-00: G2ConversateResponse (rawFields, responseType from f1, messageId from f2,
+           isFinalizeConfirmed from f9.f1)
+  0x0B-01: G2ConversateAutoClose (f1=161, f2=msgId, f8={f1=2}=timeout)
+
+COMPARISON:
+  [GAP-CONV-1] Firmware struct is 7,532 bytes but SDK only uses f1, f2, f7, f8
+     - Firmware ConversateResponse has 8-9 fields (field_count 8 or 9)
+     - SDK transcript uses f7 for text content; firmware might expect different fields
+     - Fields f3-f6 and f9 exist in firmware but SDK never sends them
+
+  [GAP-CONV-2] Firmware has 0xA3 type (secondary process) not in SDK
+     - pb_translate_process: type=0xA3, field_count=6
+     - Wait — this is in TRANSLATE, not CONVERSATE (mislabeled in schema comment)
+     - Actually: firmware conversate handler (FUN_005934cc) dispatches via FSM
+     - Conversate FSM states NONE/START/PAUSE/RESUME/CLOSE/CONFIG mapped correctly
+
+  [GAP-CONV-3] CONFIG event (type=5) shares type value with transcript updates
+     - CONVERSATE_EVENT_CONFIG = 5 in firmware enum table
+     - SDK uses type=5 for transcript updates
+     - These appear to be the same (config is carried inside type=5 payloads)
+
+  [GAP-CONV-4] SDK does not parse firmware's text_update (type=0xA2) responses
+     - Firmware sends 0xA2 with field_count=9 for text updates from glasses
+     - SDK G2ConversateResponse is generic — captures rawFields but doesn't decode
+     - Potential: Glasses could be echoing formatted text back for confirmation
+
+  MISMATCHES: None in field numbers
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+6. TRANSLATE (Service 0x05)
+   Firmware schema: TranslateResponse (DAT_005b4e00)
+   SDK files: G2TranslateProtocol.swift, G2TranslateSender.swift,
+              G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (0xA1=ctrl, 0xA2=result, 0xA3=hb)   [HIGH]
+  f2: uint32 msg_id         (auto-increment at DAT_005b4e10)     [HIGH]
+  f3: uint32 command        (from phone or u32)                  [HIGH]
+  f4-f7: text result, language, mode data (2KB struct)
+
+  Encoder functions with field counts:
+    type=0xA1, field_count=5 (ctrl response)
+    type=0xA2, field_count=7 (result/decode)
+    type=0xA3, field_count=6 (process/heartbeat)
+
+SDK TX (G2TranslateProtocol.swift):
+  Ctrl:       f1=20, f2=msgId, f3=nested{f1=action}, f8=nested{magic}
+  Result:     f1=21, f2=msgId, f7=nested{f1=text, f2=isFinal}, f8=nested{magic}
+  Heartbeat:  f1=22, f2=msgId
+  ModeSwitch: f1=23, f2=msgId, f3=nested{f1=mode}
+
+SDK RX (G2ResponseDecoder.swift):
+  0x05-00: G2TranslateResponse (type from f1, messageId from f2,
+           isCompletion when f1=161, completionType from f12.f1)
+
+COMPARISON:
+  [GAP-TRANS-1] Firmware result response (0xA2) has field_count=7; SDK parses only f1, f2
+     - Fields f3-f7 in firmware result response are NOT decoded
+     - Could contain: language pair, confidence score, alternative translations
+
+  [GAP-TRANS-2] Firmware heartbeat response (0xA3) has field_count=6; SDK parses only f1, f2
+     - Fields f3-f6 in firmware heartbeat response are NOT decoded
+     - Could contain: session duration, usage stats, quality indicators
+
+  [GAP-TRANS-3] Translate heartbeat does NOT include magic_random
+     - SDK heartbeatPayload sends only f1=22, f2=msgId
+     - Conversate/teleprompter heartbeats include f8=nested{magic}
+     - Firmware may still accept without magic — but inconsistent with other services
+
+  [GAP-TRANS-4] Firmware text struct is 2KB (0x854 bytes) but SDK uses 30-byte fixed text
+     - SDK reuses G2ConversateConstants.textFieldLength (30 bytes)
+     - Firmware allocates 2,132 bytes for translate struct
+     - Potential: Translate may support longer text than conversate
+     - Even.app might send larger text blocks for multi-sentence translation
+
+  MISMATCHES:
+  [MISMATCH-TRANS-1] SDK type values (20-23) vs firmware response types (0xA1-0xA3)
+     - SDK TX uses types 20-23 (confirmed from Even.app RE)
+     - Firmware RX likely decodes these same values
+     - Firmware TX responses use types 0xA1=161, 0xA2=162, 0xA3=163
+     - This is CORRECT — TX and RX use different type enumerations
+     - Phone sends 20-23, firmware responds with 161-163 (COMM_RSP pattern)
+
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+7. TELEPROMPTER (Service 0x06)
+   Firmware schema: TeleprompterResponse (DAT_0054d1f0)
+   SDK files: G2TeleprompterProtocol.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (0xA6=cmd_ack, 0xA1=scroll, 0xA2=text,
+                              0xA3=scroll_pos, 0xA4=completion)   [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 command                                             [HIGH]
+  f4-f12: scroll state, page info, timing (3.9KB struct)
+
+  Encoder functions:
+    type=0xA6, field_count=12 (full command ACK)
+    type=0xA1, field_count=7  (scroll progress decode)
+    type=0xA2, field_count=8  (text update)
+    type=0xA3, field_count=9  (scroll position, 0x42 bytes payload)
+    type=0xA4, field_count=?  (completion)
+
+SDK TX (G2TeleprompterProtocol.swift):
+  DisplayConfig: f1=type, f2=msgId, f4=configData (opaque hex blob)
+  Init:          f1=1, f2=msgId, f3=nested{settings}, f8=nested{magic}
+  ContentPage:   f1=3, f2=msgId, f5=nested{page_num, lines, text}, f8=nested{magic}
+  Complete:      f1=4, f2=msgId, f6=nested{startPage, totalPages, totalLines}, f8
+  Marker:        f1=255, f2=msgId, hardcoded marker bytes, f8=nested{magic}
+  Pause:         f1=pause_type, f2=msgId, f8=nested{magic}
+  Resume:        f1=resume_type, f2=msgId, f8=nested{magic}
+  Speed/Font:    f1=type, f2=msgId, f3=nested{value}, f8=nested{magic}
+  StartScroll:   f1=1, f2=msgId, f3=nested{f1=4}
+
+SDK RX (G2ResponseDecoder.swift):
+  0x06-00: G2TeleprompterAck (f1=166, f2=msgId, f12={f1=1} = replacing)
+  0x06-01: G2TeleprompterProgress (f1=164 progress or f1=161 completion)
+
+COMPARISON:
+  [GAP-TELE-1] Firmware text update (0xA2, field_count=8) not decoded by SDK
+     - Firmware can send text update responses with 8 fields
+     - SDK only decodes ACK (0xA6) and progress (0xA4) types
+     - Potential: Glasses echo rendered text for verification
+
+  [GAP-TELE-2] Firmware scroll position (0xA3, field_count=9) with 0x42 byte payload
+     - Firmware sends 66-byte scroll position data (memcpy at offset 4)
+     - SDK does not handle type=0xA3 responses at all
+     - Potential: Real-time scroll position tracking for sync
+
+  [GAP-TELE-3] Firmware scroll progress (0xA1) SDK maps as "completion"
+     - SDK uses responseType 161 = COMM_RSP completion
+     - Firmware type 0xA1 = scroll progress (field_count=7)
+     - These might be the same (0xA1 = 161 decimal) — completion IS the final scroll
+
+  [GAP-TELE-4] DisplayConfig payload is opaque hex blob
+     - SDK sends captured hex string, does not understand individual fields
+     - Firmware decodes 6 regions with IEEE 754 floats
+     - SDK CAN decode received config (G2ResponseDecoder.decodeDisplayConfigRegions)
+       but does not dynamically construct the TX config from parameters
+
+  MISMATCHES: None
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+8. DASHBOARD / GESTURE (Service 0x01)
+   Firmware schema: DashboardMessage (DAT_0056048c)
+   SDK files: G2DashboardStateProtocol.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (1=base, 3=state, 6=gesture, 7=?)   [HIGH]
+  f2: uint32 state_word     (u32 at offset 4)                   [HIGH]
+  f3: uint32 field_count    (u16, nested count)                  [MEDIUM]
+  f4: DashboardSubField nested (state data)                      [MEDIUM]
+
+  Type 3 (state) has sub-dispatch on param_1+5:
+    sub=0: no extra fields
+    sub=1: field_count=3, float pair (possibly GPS coords)
+    sub=2: field_count=4, nested u32 pairs
+    sub=3: field_count=5, 0x40 byte memcpy block
+  Type 6 (gesture): field_count=8, gesture data at offset 0x10
+
+SDK RX:
+  0x01-01: G2GestureEvent (tap, double_tap, swipe_forward, swipe_backward)
+  0x0D-01: Long press or display mode notification (disambiguated by f3 presence)
+
+COMPARISON:
+  [GAP-DASH-1] Dashboard type=3 state with sub-dispatch NOT decoded by SDK
+     - 4 state sub-variants with different payloads (including float pair)
+     - SDK handles dashboard via G2DashboardStateProtocol but only from 0x0D-00
+     - Direct dashboard state from 0x01 is not parsed
+
+  [GAP-DASH-2] Dashboard type=1 (base) and type=7 (query) not handled
+     - Firmware encodes type=1 with gesture/state data
+     - SDK only handles 0x01-01 as gesture events
+
+  [GAP-DASH-3] Type 3 sub=1 float pair (possibly GPS coordinates)
+     - Firmware encodes IEEE 754 float pair in type=3, sub=1
+     - Could be location data for dashboard weather/navigation widgets
+     - SDK does not decode this at all
+
+  [GAP-DASH-4] SDK does not send TO dashboard (0x01-20)
+     - No G2DashboardSender exists
+     - Dashboard service is receive-only in SDK
+     - Firmware has decode function for RX on 0x01 — phone CAN send commands
+
+  MISMATCHES: None
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+9. NAVIGATION (Service 0x08)
+   Firmware schema: NavigationMessage (DAT_00589c50)
+   SDK files: G2NavigationProtocol.swift, G2NavigationSender.swift,
+              G2NavigationConstants.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (0/1/5/6/10/11/12/13/17)            [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 data_byte                                           [HIGH]
+
+  Navigation encoder variants (9 types):
+    Type  0: init/base (static)
+    Type  1: route_data (DYNAMIC alloc 0x2018+10000)
+    Type  5: route_update (static)
+    Type  6: direction_update (static)
+    Type 10: eta_distance (static)
+    Type 11: turn_info (static)
+    Type 12: waypoint (static)
+    Type 13: nav_type_d (DYNAMIC alloc)
+    Type 17: nav_type_11 (DYNAMIC alloc)
+
+SDK TX (G2NavigationProtocol.swift):
+  All payloads: f1=state(7=active/2=dashboard), f2=msgId, f5=nested{...}
+  SubCommands: start=1, basicInfo=2, miniMap=3, overviewMap=4, heartbeat=5,
+               recalculating=6, arrive=7, stop=8, startError=9, favoriteList=10
+
+SDK RX:
+  0x08-00: G2NavigationResponse (f1=state, f2=distance, f3=instruction)
+
+COMPARISON:
+  [GAP-NAV-1] Firmware has 9 navigation encoder types vs SDK's sub-command system
+     - Firmware uses f1 as TYPE (0,1,5,6,10,11,12,13,17)
+     - SDK uses f1 as STATE (2 or 7) and routes via f5.f1 as sub-command
+     - These are DIFFERENT protocols — firmware TX types ≠ SDK TX sub-commands
+     - SDK sub-commands (1-10 in f5.f1) likely map to firmware RX handler dispatch
+     - Firmware TX types (0-17 in f1) are the RESPONSE format
+
+  [GAP-NAV-2] Firmware types 1, 13, 17 use DYNAMIC allocation (8KB+10KB buffers)
+     - Type 1: route_data with massive buffer — likely full route geometry
+     - Type 13, 17: unknown dynamic payloads
+     - SDK does not handle types 13 or 17 in responses
+     - SDK handles route data via file transfer (0xC4/0xC5), not type 1
+
+  [GAP-NAV-3] Firmware types 5 (route_update), 6 (direction_update), 10 (eta_distance),
+     11 (turn_info), 12 (waypoint) — SDK response decoder does not distinguish
+     - SDK G2NavigationResponse only extracts state/distance/instruction
+     - Firmware has 5 distinct response types with type-specific payloads
+     - Turn info, waypoint, and eta_distance likely have structured fields
+
+  [GAP-NAV-4] SDK navigation payload format uses NESTED field5
+     - SDK: outer f1=state, f2=msgId, f5=nested{f1=innerType, f2-f8=data}
+     - Firmware: f1=type, f2=msgId, f3=data_byte (flat, not nested)
+     - The SDK's nested f5 format comes from Even.app RE and appears correct for TX
+     - But the RESPONSE format from firmware is FLAT (f1=type, f3=data)
+
+  [GAP-NAV-5] Navigation uses the LARGEST encode buffer in firmware (10,000 bytes)
+     - Map data and route geometry require this buffer
+     - SDK only sends map data via file transfer, not inline protobuf
+     - This is intentional: BMP maps go through 0xC4/0xC5 file service
+
+  MISMATCHES: None in TX format (TX and RX use different schemas)
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+10. QUICKLIST + HEALTH (Service 0x0C)
+    Firmware schema: QuicklistResponse (DAT_00568d34)
+    SDK files: G2QuicklistProtocol.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (1=response, 2=item_update)         [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 item_data_0    (u32 from *param_2)                 [MEDIUM]
+  f4: uint32 item_data_1    (param_2[1])                        [MEDIUM]
+  f5: uint32 item_data_2    (param_2[2])                        [MEDIUM]
+
+SDK TX (G2QuicklistProtocol.swift):
+  fullUpdate:     f1=1, f2=msgId, f5=repeated nested items
+  batchAdd:       f1=2, f2=msgId, f5=repeated nested items
+  singleItem:     f1=3, f2=msgId, f5=nested item
+  deleteItem:     f1=4, f2=msgId, f5=nested{f1=uid}
+  toggleComplete: f1=5, f2=msgId, f5=nested{f1=uid, f3=flag}
+  pagingRequest:  f1=6, f2=msgId, f5=nested{f1=uid}
+
+SDK RX:
+  0x0C-00: G2QuicklistACK (f1=type, f2=msgId, items from f5 repeated)
+
+COMPARISON:
+  [GAP-QUICK-1] Firmware response has f3-f5 (item_data fields) SDK doesn't decode
+     - Firmware encodes 3-4 fields for responses; SDK only parses f1, f2, and f5
+     - f3 and f4 may contain item count, page info, or status codes
+
+  [GAP-QUICK-2] Firmware type=2 (item_update) uses field_count=4
+     - SDK only handles type=1 (response/ACK)
+     - Item updates pushed from glasses are not handled
+
+  [GAP-QUICK-3] Health command IDs (10-12) are speculative
+     - SDK G2HealthDataProtocol uses cmdId 10=batchSave, 11=highlight, 12=query
+     - These are inferred from handler dispatch ordering, not confirmed
+     - Firmware health.c handler is shared with quicklist.c
+
+  MISMATCHES: None in field numbers
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+11. DISPLAY CONFIG (Service 0x0E)
+    Firmware schema: DisplayConfigResponse (DAT_0056a73c)
+    SDK files: G2TeleprompterProtocol.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (1=config_ack, 2=secondary)         [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: bytes  region_data    (22 bytes, IEEE 754 floats)          [MEDIUM]
+
+SDK TX: Opaque hex blob in displayConfigBytes()
+SDK RX: decodeDisplayConfigRegions (6 regions with floats)
+
+COMPARISON:
+  [GAP-DC-1] Firmware type=2 (secondary encode) not handled by SDK
+     - FUN_0056a5a0 encodes a secondary display config
+     - SDK only handles type=1 ACKs on receive side
+
+  [GAP-DC-2] Firmware has 6-region display config parser (FUN_0056965e)
+     - SDK RX does decode 6 regions — MATCH
+     - But SDK TX sends opaque captured bytes, not parameterized regions
+
+  MISMATCHES: None
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+12. ONBOARDING (Service 0x10)
+    Firmware schema: OnboardingResponse (DAT_004b0168)
+    SDK files: G2OnboardingProtocol.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (1=onboarding state)                [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 state          (state byte from *param_2)           [HIGH]
+  f4: uint32 padding        (always 0)                           [LOW]
+
+SDK TX: sendStartUp, sendStart, sendEnd, queryHeadUpStatus
+SDK RX: G2OnboardingBLEResponse (type, flag, processId, wearStatus)
+
+COMPARISON:
+  [GAP-OB-1] Firmware response f3 is a single state byte; SDK parses as multiple fields
+     - SDK G2OnboardingProtocol.parseBLEResponse extracts flag/processId/wearStatus
+     - These may be sub-fields within the state byte (bitfield interpretation)
+     - Firmware only encodes 3 fields (type, msgId, state) — no separate flag/process fields
+
+  [GAP-OB-2] Firmware auto-increment counter at DAT_004b0338
+     - Firmware has its own msgId counter separate from phone
+     - SDK should not assume response f2 matches request f2
+
+  MISMATCHES: None
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+13. MODULE CONFIGURE (Service 0x20)
+    Firmware schema: ModuleConfigureResponse (DAT_0046b934)
+    SDK files: G2ModuleConfigureProtocol.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (0=query, 2=set)                    [HIGH]
+  f2: uint32 eye_id                                              [HIGH]
+  f3: uint32 calibration_value (from *DAT_0046b91c)             [MEDIUM]
+
+  13-byte encode buffer — smallest in firmware
+  Inter-eye sync: 10-byte packet via inter_eye_command_sync
+
+SDK TX: 4 cmd types in G2ModuleConfigureProtocol
+SDK RX: G2CommitResponse (type, messageId)
+
+COMPARISON:
+  [GAP-MC-1] Firmware f3 (calibration_value) not decoded in SDK responses
+     - SDK G2CommitResponse only extracts type and messageId
+     - Missing: per-eye brightness calibration value from glasses
+
+  [GAP-MC-2] Inter-eye sync mechanism not observable from phone
+     - 10-byte inter-eye packets are glasses-internal
+     - No SDK action needed, but good to know for understanding timing
+
+  MISMATCHES: None
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+14. BOX DETECT / DISPLAY TRIGGER (Service 0x81)
+    Firmware schema: BoxDetectResponse (DAT_004fcc98)
+    SDK files: G2GlassesCaseReader.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (1=box detect info)                 [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 soc            (case_get_soc)                      [HIGH]
+  f4: uint32 charging       (case_get_charging_state)           [HIGH]
+  f5: uint32 lid_state      (case_get_lid_state)                [HIGH]
+  f6: uint32 in_case        (case_get_in_case)                  [HIGH]
+  f7: uint32 padding        (always 0)                          [LOW]
+
+SDK RX:
+  0x81-00: G2DisplayTriggerResponse (type from f1, glassesCounter from f2,
+           innerValue from f3.f1)
+  G2GlassesCaseReader: soc, charging, lidOpen, inCase
+
+COMPARISON:
+  [GAP-BOX-1] SDK DisplayTriggerResponse reads f3 as NESTED (f3.f1)
+     - Firmware sends f3 as plain varint (uint32 soc value)
+     - SDK decodes: f3.data → G2ProtobufDecoder → inner f1
+     - This is CORRECT only if firmware wraps soc in a submessage
+     - If soc is a raw varint, SDK is misinterpreting the value
+     - G2GlassesCaseReader may use a different path (via 0x0D-00 ProtoBaseSettings)
+
+  [GAP-BOX-2] Firmware sends f4-f6 (charging, lid_state, in_case) as separate fields
+     - SDK DisplayTriggerResponse only extracts f1, f2, f3
+     - f4 (charging), f5 (lid), f6 (in_case) are NOT parsed from 0x81-00
+     - These values may arrive via 0x0D-00 (ProtoBaseSettings) instead
+
+  [GAP-BOX-3] Firmware auto-increment counter at DAT_004fccf0
+     - Glasses have their own box detect message counter
+
+  MISMATCHES:
+  [MISMATCH-BOX-1] f3 interpretation: firmware=plain varint, SDK=nested message
+     - Need to verify: does firmware wrap soc in a submessage or send as raw varint?
+     - If raw varint, SDK's nested decode will fail to extract the value correctly
+
+  TYPE COMPATIBILITY: Potential issue with f3 nesting
+
+
+================================================================================
+15. RING RELAY (Service 0x91)
+    Firmware schema: RingRelayResponse (DAT_005b4770)
+    SDK files: G2RingRelaySender.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (1=ring relay)                      [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 payload_len    (u16 from *param_2)                 [MEDIUM]
+  f4: bytes  payload_data   (6 bytes max from param_2[1..6])    [MEDIUM]
+  f5: uint32 ring_command   (char from param_2[4])              [MEDIUM]
+  f6: uint32 ring_data      (u32 from param_2+6)                [MEDIUM]
+  f7: uint32 terminator     (always 0)                          [LOW]
+
+SDK RX:
+  0x91-00: G2RingRelayResponse (type from f1, messageId from f2, payload=raw)
+
+COMPARISON:
+  [GAP-RING-1] Firmware sends 7 structured fields; SDK keeps raw payload only
+     - f3 (payload_len), f4 (payload_data), f5 (ring_command), f6 (ring_data)
+       are NOT individually parsed
+     - SDK stores entire payload as raw Data for "detailed analysis" (comment)
+     - These fields contain actual ring gesture/health data
+
+  [GAP-RING-2] Ring gesture dispatch: param_1=0 → ring_gesture_process
+     - Firmware routes ring data to gesture processing
+     - SDK does not distinguish between gesture and non-gesture ring responses
+
+  MISMATCHES: None
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+16. MENU (Service 0x03)
+    Firmware schema: MenuResponse (DAT_0045bcf0)
+    SDK files: G2MenuProtocol.swift, G2ResponseDecoder.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (0=item_list, 1=menu_info)          [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: uint32 item_index     (menu item index)                   [MEDIUM]
+  f4: repeated MenuItemEntry (per-item: index, name, extra)     [MEDIUM]
+
+SDK TX: sendMenuInfo, sendDefaultMenu (display lifecycle + payload)
+SDK RX: G2MenuResponse (type, selectedAppId, text)
+
+COMPARISON:
+  [GAP-MENU-1] Firmware f4 is a repeated message with per-item entries
+     - Each item at offset iVar4*0x2C+0x0C: u32 index, string name, u32 extra
+     - SDK does not decode the repeated item structure
+     - Menu items list from glasses is not parsed
+
+  [GAP-MENU-2] Firmware relays menu to peer eye via inter-eye TinyFrame
+     - Inter-eye relay at FUN_00462a1a for menu synchronization
+     - SDK sends to both eyes — inter-eye relay is firmware-internal
+
+  MISMATCHES: None
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+17. NOTIFICATION / DISPLAY WAKE (Service 0x04)
+    Firmware schema: NotificationResponse (DAT_004ec5d0)
+    SDK files: G2ResponseDecoder.swift, ProtocolConstants.swift
+================================================================================
+
+FIRMWARE TX SCHEMA:
+  f1: uint32 type           (1=display_wake_ack, 0xA1=whitelist) [HIGH]
+  f2: uint32 msg_id                                              [HIGH]
+  f3: bytes  payload        (5 payload bytes)                    [MEDIUM]
+  Whitelist: additional 2 bytes from param_2
+
+SDK RX:
+  0x04-00: G2DisplayWakeAck (type from f1, always 1)
+  0x04-01: G2NotifyAppInfo or G2RawDeviceInfo
+
+COMPARISON:
+  [GAP-NOTIF-1] Firmware notification whitelist (type=0xA1) with field_count=5
+     - SDK does not handle type=0xA1 whitelist responses
+     - pb_notif_whitelist encoder uses 5 fields including 2-byte whitelist data
+     - SDK sends whitelist via file transfer on 0xC4/0xC5, not 0x04
+
+  [GAP-NOTIF-2] Firmware f3 payload (5 bytes) with forced zero at payload[3]
+     - SDK ignores f3 in display wake ACK
+     - These bytes could carry display state information
+
+  [GAP-NOTIF-3] Firmware has dynamic alloc encoder (pb_notif_ctrl, complex)
+     - FUN_004ec190 allocates dynamic buffer for complex notification control
+     - This encoder path is not triggered by any SDK command
+
+  MISMATCHES: None
+  TYPE COMPATIBILITY: OK
+
+
+================================================================================
+SUMMARY: ALL GAPS AND MISMATCHES
+================================================================================
+
+CRITICAL MISMATCHES (likely causing incorrect behavior):
+  [MISMATCH-BOX-1] 0x81-00 f3: firmware=plain varint vs SDK=nested decode
+     - Impact: Box detect SOC value may be misread
+     - Fix: Check if f3 is nested submessage or raw varint; adjust decode
+
+  [MISMATCH-AI-1] EvenAI ASK: SDK skips f3 (command byte) firmware expects
+     - Impact: Medium — firmware may use f3 to determine ASK sub-type
+     - Fix: Add f3 command byte to ASK payload
+
+MODERATE GAPS (missing data in SDK):
+  [GAP-AI-2] CONFIG: SDK sends 3 fields, firmware encodes 13
+     - 10 undiscovered config parameters
+  [GAP-AI-3] SKILL: SDK sends 3 fields, firmware encodes 7
+     - 4 undiscovered SKILL parameters
+  [GAP-AI-4] PROMPT: SDK sends 3 fields, firmware encodes 9
+     - 6 undiscovered PROMPT parameters
+  [GAP-AI-5] EVENT: SDK sends 2 fields, firmware encodes 10
+     - 8 undiscovered EVENT parameters
+  [GAP-AI-6] ANALYSE echo (type=4) falls through to EvenHub decoder
+  [GAP-NAV-2] Navigation types 1/13/17 with dynamic 8KB+10KB buffers
+  [GAP-NAV-3] 5 distinct navigation response types not distinguished
+  [GAP-RING-1] Ring relay 7 structured fields kept as raw blob
+  [GAP-TELE-2] Teleprompter scroll position (type=0xA3, 66 bytes) ignored
+  [GAP-AUTH-3] Auth keepalive f3-f6 (time sync data) discarded
+
+MINOR GAPS (firmware features SDK doesn't use):
+  [GAP-AUTH-1] Auth f3 conn_handle not parsed
+  [GAP-AUTH-2] Auth f4 status bool not parsed
+  [GAP-SETTINGS-2] ProtoBaseSettings timestamps not sent
+  [GAP-SETTINGS-3] Buzzer uses fixed bytes, not protobuf
+  [GAP-SETTINGS-4] settings_compact_notify 8-byte format unknown
+  [GAP-CONV-1] Conversate 7.5KB struct — only f1/f2/f7/f8 used
+  [GAP-CONV-4] Conversate text_update (0xA2) responses not decoded
+  [GAP-TRANS-1] Translate result response f3-f7 not decoded
+  [GAP-TRANS-2] Translate heartbeat response f3-f6 not decoded
+  [GAP-TRANS-3] Translate heartbeat missing magic_random
+  [GAP-TRANS-4] Translate may support longer text than 30 bytes
+  [GAP-QUICK-1] Quicklist response f3-f5 not decoded
+  [GAP-QUICK-2] Quicklist item_update (type=2) not handled
+  [GAP-DC-1] DisplayConfig type=2 (secondary) not handled
+  [GAP-OB-1] Onboarding state byte vs multiple SDK fields
+  [GAP-MC-1] ModuleConfigure calibration_value not decoded
+  [GAP-MENU-1] Menu repeated items not parsed
+  [GAP-NOTIF-1] Notification whitelist response not handled
+  [GAP-NOTIF-2] Display wake f3 (5 bytes) ignored
+  [GAP-DASH-1] Dashboard type=3 state sub-dispatch not decoded
+  [GAP-DASH-3] Dashboard float pair (GPS?) not decoded
+  [GAP-DASH-4] No SDK sender for dashboard (0x01-20)
+  [GAP-HUB-1] EvenHub types 0x0B/0x10 not exposed
+  [GAP-HUB-2] EvenHub display_content 3 sub-variants not handled
+  [GAP-BOX-2] Box detect f4-f6 not parsed from 0x81-00
+
+================================================================================
+UNDISCOVERED FIRMWARE FEATURES
+================================================================================
+
+1. EvenAI CONFIG has 10+ undiscovered parameters (13 total fields)
+   - Likely includes: AI persona selection, language preference, context window size,
+     response format, confidence threshold, streaming mode, audio codec config
+   - PRIORITY: HIGH — unlocking these would enable full AI customization
+
+2. EvenAI EVENT auto-increment counter at DAT_004f05c8
+   - Glasses maintain their own event counter separate from phone
+   - EVENT has 10 fields — 8 unknown, likely triggering on-glasses AI behaviors
+
+3. Navigation types 13 and 17 with dynamic buffers
+   - Purpose unknown — possibly advanced route features (3D view, lane guidance?)
+   - Both use dynamic allocation → large payloads
+
+4. Dashboard state sub-dispatch with float pairs
+   - Type 3, sub=1: float pair (possibly GPS coordinates for weather/location widgets)
+   - Type 3, sub=3: 0x40 byte block (64 bytes of dashboard state data)
+
+5. Translate struct supports 2KB text (vs 30-byte fixed in SDK)
+   - Firmware allocates 2,132 bytes for translate
+   - Even.app may use variable-length text for full-sentence translation
+
+6. Teleprompter scroll position data (66 bytes)
+   - Real-time scroll position for UI sync between phone and glasses
+   - Could enable bidirectional scroll control
+
+7. EvenHub data_relay (type=0x0B) and simple (type=0x10)
+   - Two EvenHub sub-types completely unexposed in SDK
+   - data_relay: 16 fields with u32+16B+int+u32 layout
+   - simple: 19 fields (largest field count) with single byte at offset 4
+
+8. Settings buzzer uses fixed 4-byte packet, not protobuf
+   - [0x00, 0x1A, 0x94, 0x01] → buzzer_play_command
+   - SDK G2BuzzerProtocol speculative encoding may not work
+
+9. Auth keepalive time sync data (system_time_get + timezone)
+   - Firmware sends system time and timezone in keepalive responses
+   - Could be used for clock drift detection and time synchronization
+
+10. Notification complex control (dynamic alloc encoder)
+    - FUN_004ec190 with dynamic buffer — purpose unclear
+    - Separate from whitelist and display wake
+
+================================================================================
+RECOMMENDED SWIFT SDK FIXES (Priority Order)
+================================================================================
+
+1. [P0] ~~Fix MISMATCH-BOX-1~~ **DONE** (2026-03-07)
+   - G2DisplayTriggerResponse restructured: f3=SOC, f4=charging, f5=lid, f6=inCase
+   - All fields read as plain varints (not nested submessages)
+
+2. [P0] ~~Fix GAP-AI-6~~ **DONE** (2026-03-07)
+   - Echo condition now: `f1 == 1 || f1 == 3 || f1 == 4 || f1 == 5 || f1 == 6`
+   - ANALYSE echoes correctly routed to onEvenAIEcho
+
+3. [P1] Fix MISMATCH-AI-1: Add f3 command byte to EvenAI ASK payload
+   - G2EvenAIProtocol.askPayload should include:
+     `payload.append(G2Protobuf.varint(3, UInt64(some_command_value)))`
+   - Need to determine correct command byte (possibly always 0)
+
+4. [P1] Fix GAP-TRANS-3: Add magic_random to translate heartbeat
+   - G2TranslateProtocol.heartbeatPayload should include:
+     `payload.append(G2Protobuf.nested(8) { m in m.append(G2Protobuf.varint(1, magic)) })`
+   - Consistent with conversate/teleprompter heartbeats
+
+5. [P2] Enhance G2RingRelayResponse: Parse f3-f6 individually
+   - payload_len (f3), payload_data (f4), ring_command (f5), ring_data (f6)
+   - Enables proper ring gesture/health data interpretation
+
+6. [P2] Add navigation response type disambiguation
+   - Parse f1 type to distinguish: route_update(5), direction(6), eta(10),
+     turn_info(11), waypoint(12)
+   - Each type likely has type-specific fields
+
+7. [P2] Parse translate response f3-f7
+   - Add language, confidence, alternative translations to G2TranslateResponse
+
+8. [P3] Add teleprompter scroll position handler (type=0xA3)
+   - 66-byte scroll position data for bidirectional sync
+
+9. [P3] Add dashboard state decoder for 0x01 responses
+   - Distinguish types 1/3/6/7, parse sub-dispatch variants
+
+10. [P3] Investigate EvenAI CONFIG additional parameters
+    - Send CONFIG with incrementally more fields to discover parameter effects
+    - Could unlock AI customization features (persona, language, etc.)
+
+================================================================================
+SESSION 26 ADDENDUM (2026-03-07): iOS↔Firmware Deep Cross-Validation
+================================================================================
+
+CRITICAL BUGS FOUND (ALL FIXED 2026-03-07):
+
+1. [P0-CRITICAL] SERVICE 0x81 (BOX DETECT) — f3 Encoding Wrong — **FIXED**
+   Firmware sends f3 as plain uint32 varint (case battery SOC value)
+   SDK decoded f3 as nested submessage {f1=...} — SOC was lost
+   FIX APPLIED: G2DisplayTriggerResponse now reads f3-f6 as direct varints
+   (caseBatterySOC, caseCharging, caseLidState, inCase). Legacy innerValue accessor kept.
+
+2. [P0-CRITICAL] SERVICE 0x0D (SETTINGS) — Buzzer Uses Fixed Bytes, NOT Protobuf — **FIXED**
+   Firmware handler (FUN_0046c438) builds fixed 4-byte packet [0x00, 0x1A, 0x94, 0x01]
+   FIX APPLIED: G2BuzzerProtocol.triggerPayload now sends cmdId=type + fixed bytes
+   instead of speculative protobuf encoding.
+
+3. [P0-HIGH] SERVICE 0x07 (EVENAI) — ANALYSE Echo Missing — **FIXED**
+   SDK checked f1 in [1, 3, 5, 6] but missed type=4 (ANALYSE echo)
+   FIX APPLIED: Echo condition now includes f1==4. ANALYSE responses correctly
+   routed to onEvenAIEcho instead of falling through to EvenHub decoder.
+
+NEW UNDISCOVERED FEATURES:
+
+4. EvenAI CONFIG (type=10) has 10 undiscovered parameters (f4-f13)
+   Inferred: AI personality, language preference, context window, temperature,
+   max tokens, response format, confidence threshold, codec config
+   Discovery: send CONFIG with incrementally more fields
+
+5. EvenHub hidden message types
+   Type 0x0B (data_relay): 16 protobuf fields, unknown purpose
+   Type 0x10 (simple): 19 fields (largest schema in entire system)
+
+6. Dashboard GPS coordinates
+   Type=3 sub-variant 1: float pair (possibly location for weather widgets)
+
+7. Teleprompter bidirectional scroll (type=0xA3)
+   66-byte scroll position data — enables phone↔glasses scroll sync
+
+8. Auth keepalive time sync
+   f3-f6 carry system time + timezone offset (not currently parsed)
+
+ARCHITECTURAL PATTERNS CONFIRMED:
+
+- magic_random (f8={f1=counter}) present in: Conversate, Translate, Teleprompter, EvenAI
+  Missing from: Translate heartbeat (should be added)
+- field_count is encoding selector (firmware struct offset), not a transmitted field
+- Glasses maintain independent auto-increment counters per service
+- COMM_RSP (type=161) is universal completion envelope: f12={f1=service_type}
+- Settings (0x0D) multiplexes ~15 sub-services, some protobuf, some fixed bytes
+
+================================================================================
+END OF VALIDATION REPORT
+================================================================================

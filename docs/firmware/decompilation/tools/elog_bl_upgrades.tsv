@@ -1,0 +1,19 @@
+# elog BL R3 __FUNCTION__ parameter resolution
+# address	old_name	new_name	module	confidence	evidence
+0x0043c260	svc_callee_c260	aging_test_page_event_handler	svc	HIGH	LDR R3, [PC, #0x308] @ 0x0043c466; string @ 0x007108b8
+0x0045fb16	display_thread_refresh_step	_SyncScheduleManagerThreadHandler	display_thread	HIGH	LDR.W R3, [PC, #0xcb8] @ 0x0045fc0c; string @ 0x0070e2c8
+0x0046ece0	ota_callee_ece0	thread_ble_msgtx	ota	HIGH	LDR.W R3, [PC, #0xa40] @ 0x0046ed86; string @ 0x00733894
+0x0049b448	ble_49b448	thread_ble_msgrx	ble	HIGH	LDR.W R3, [PC, #0x52c] @ 0x0049b58a; string @ 0x0073386c
+0x0049d6ac	ble_callee_d6ac	AppHandler	ble	HIGH	LDR.W R3, [PC, #0x698] @ 0x0049d700; string @ 0x00739260
+0x004a0544	ble_callee_0544	APP_EvenOtaWriteCback	ble	HIGH	LDR R3, [PC, #0x15c] @ 0x004a0606; string @ 0x0072ad24
+0x004ae3ce	navigation_get_state	HUB_ThreadInit	navigation	HIGH	LDR.W R3, [PC, #0xa80] @ 0x004ae4ce; string @ 0x00737860
+0x004b51c8	module_callee_004EC77E	CB_CHG_RegisterBatInfoCallback	callback	HIGH	LDR R3, [PC, #0x9c] @ 0x004b51ea; string @ 0x00711898
+0x004cc860	ble_4cc860	system_alert_common_data_handler	ble	HIGH	LDR.W R3, [PC, #0x77c] @ 0x004cc8fc; string @ 0x0070e598
+0x004d70b0	__ieee754_round	production_test_gesture_process	lib	HIGH	LDR.W R3, [PC, #0x4b4] @ 0x004d7128; string @ 0x00717cd8
+0x004def04	ble_callee_ef04	watchdog_init	ble	HIGH	LDR R3, [PC, #0x78] @ 0x004def36; string @ 0x00738f00
+0x004e01e0	ble.gatt_neighbor_004e01e0	attcDataCback	ble.gatt	HIGH	LDR.W R3, [PC, #0xb74] @ 0x004e02b6; string @ 0x00734840
+0x004ed5a8	svc.ancc_neighbor_004ed5a8	CB_ANCC_RegisterMsgCountCallback	svc.ancc	HIGH	LDR R3, [PC, #0x9c] @ 0x004ed5ca; string @ 0x00706c3c
+0x00563738	quicklist_563738	Health_common_data_handler	quicklist	HIGH	LDR R3, [PC, #0xe4] @ 0x005637be; string @ 0x0071dd08
+0x0058ec26	timer_58ec26	conversate_heartbeat_check	timer	HIGH	LDR.W R3, [PC, #0x55c] @ 0x0058ec76; string @ 0x0071c4a4
+0x00598c74	lvgl_process_2	even_ai_manage_char_window	lvgl	HIGH	LDR.W R3, [PC, #0x918] @ 0x00598ec8; string @ 0x00724c98
+0x005a4138	inflateEnd	legal_regulatory_ui_event_handler	lib.zlib	HIGH	LDR R3, [PC, #0x11c] @ 0x005a4762; string @ 0x00708e8c
