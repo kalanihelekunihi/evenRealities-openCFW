@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "component": "FlashDB",
+  "license": "Apache-2.0",
+  "upstream": {
+    "repository": "https://github.com/armink/FlashDB.git",
+    "repository_web": "https://github.com/armink/FlashDB",
+    "selected_ref": "refs/tags/2.1.1",
+    "selected_tag": "2.1.1",
+    "tag_type": "lightweight",
+    "tag_target": "714d6159e7e6afb267a3953756abca445c350e61",
+    "selected_commit": "714d6159e7e6afb267a3953756abca445c350e61",
+    "commit_object_payload_path": "upstream/714d6159e7e6afb267a3953756abca445c350e61.commit",
+    "commit_object_payload_size": 1122,
+    "commit_object_payload_sha256": "c8aa69a97bdbaebdc283abd3e46fb025270654e4104de7b5caf9981528122ee5",
+    "tree_closure_path": "upstream/trees.json",
+    "tree_closure_size": 4972,
+    "tree_closure_sha256": "358dd855154c58cd8e4f0d90f69f89860e3f800b5289ea2d92be5771dd3fb464",
+    "tree_object_count": 7,
+    "tree_closure_qualification": "Complete entry lists for every tree on the 14 selected commit-to-path traversals are vendored; the verifier reconstructs and hashes the canonical Git tree payloads offline.",
+    "commit_signature": {
+      "present": true,
+      "format": "OpenPGP",
+      "signature_bytes_pinned": true,
+      "signer_trust_verified": false,
+      "qualification": "The exact signed commit payload is pinned; no public key is vendored and signer trust is not claimed."
+    },
+    "selected_tree": "3410ae8111e4dbf6ae22d995bfcf37274abf89ea",
+    "parent_commit": "f0af0eeda4d43732c620451ef6b5fff4e31dfc82",
+    "author_date": "2024-10-06T13:45:40+08:00",
+    "committer_date": "2024-10-06T13:45:40+08:00",
+    "declared_library_version": "2.1.1",
+    "declared_version_macro": "FDB_SW_VERSION"
+  },
+  "selection": {
+    "classification": "authenticated upstream release snapshot; production-excluded source candidate",
+    "exact_g2_checkout_proven": false,
+    "qualification": "G2 proves FlashDB 2.1.1 and stock source/configuration behavior, but not an unpatched full upstream checkout. Vendored Git tree objects prove that every selected source path/blob belongs to the pinned upstream commit.",
+    "selected_file_count": 14,
+    "selection_rule": "Exact Apache-2.0 KVDB core/public headers plus generic FAL core/headers; upstream config retained only as a reference template.",
+    "included_features": [
+      "KVDB core",
+      "CRC/status utilities",
+      "generic FAL device and partition core"
+    ],
+    "excluded_features": [
+      "TSDB source (not needed by the recovered minimal build; the original FDB_USING_TSDB macro state is not statically proven)",
+      "file mode",
+      "RT-Thread glue",
+      "shells",
+      "demos",
+      "sample device ports"
+    ],
+    "source_records_sha256": "4685bc7cd1b6ac2078d7c9308a84419dfcdab8c018efe7deb30e9fc75a3a5076",
+    "integration_status": "authenticated and verified offline; no production registration"
+  },
+  "g2_boundary": {
+    "evidence": "docs/research/flashdb-configuration-recovery-audit.md",
+    "analyzer": "tools/analyze_g2_flashdb.py",
+    "official_image": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "official_image_size": 3523396,
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "load_mapping": "run_address = file_offset + 0x00437fe0",
+    "recovered_config_header": "g2-config/fdb_cfg.h",
+    "recovered_config_header_size": 707,
+    "recovered_config_header_sha256": "e265d70f58d4dc27ddd3125f85a5c006156d4c1501ffdd75b476bd0b6e412482",
+    "configuration": {
+      "FDB_USING_KVDB": true,
+      "FDB_USING_FAL_MODE": true,
+      "FDB_USING_FILE_MODE": false,
+      "FDB_WRITE_GRAN": 1,
+      "sec_size": 4096,
+      "FDB_KV_CACHE_TABLE_SIZE": 64,
+      "FDB_SECTOR_CACHE_TABLE_SIZE": 64,
+      "FDB_KV_AUTO_UPDATE": false,
+      "FDB_DEBUG_ENABLE": false,
+      "compiler_short_enums": true
+    },
+    "feature_evidence": {
+      "retained_tsdb_subsystem": false,
+      "original_FDB_USING_TSDB_macro_state": "not statically proven",
+      "minimal_recovered_config_uses_tsdb": false
+    },
+    "database_object": {
+      "base": "0x2005DFFC",
+      "count": 2,
+      "stride": 2220,
+      "kv_cache_table_offset": 168,
+      "sector_cache_table_offset": 680,
+      "user_data_offset": 2216
+    },
+    "database_bindings": [
+      {
+        "index": 0,
+        "database_name": "sysenv",
+        "partition_name": "kvdb"
+      },
+      {
+        "index": 1,
+        "database_name": "factory",
+        "partition_name": "NVdb"
+      }
+    ],
+    "partitions": [
+      {
+        "name": "kvdb",
+        "flash_name": "norflash",
+        "offset": 33292288,
+        "length": 229376
+      },
+      {
+        "name": "NVdb",
+        "flash_name": "norflash",
+        "offset": 33521664,
+        "length": 32768
+      }
+    ],
+    "default_kv_tables": [
+      {
+        "database": "sysenv",
+        "address": "0x2000372C",
+        "node_count": 12,
+        "node_size": 12,
+        "initialized_values_recovered": 11,
+        "runtime_value_unresolved": "kvbooCount at 0x20074988"
+      },
+      {
+        "database": "factory",
+        "address": "0x20003868",
+        "node_count": 9,
+        "node_size": 12,
+        "initialized_values_recovered": 9
+      }
+    ],
+    "database_callbacks": {
+      "mutex_object": "0x20074944",
+      "lock_thumb_entry": "0x005410DB",
+      "unlock_thumb_entry": "0x00541127",
+      "lock_wait": "forever"
+    },
+    "norflash_error_mapping": "Even callbacks return zero on driver failure while FlashDB 2.1.1 treats only negative FAL returns as errors; source port must map failures to -1",
+    "first_party_reset_policy": {
+      "sysenv_magic": "kvMagic=0x5A000020",
+      "factory_magic": "nvMagic=0x55550022",
+      "missing_or_mismatch": "wholesale fdb_kv_set_default",
+      "versioned_key_migration": false
+    },
+    "unresolved": [
+      "source-owned fail-closed norflash FAL port with negative error mapping",
+      "runtime-backed kvbooCount default value lifecycle",
+      "application type/schema semantics for the recovered raw default blobs",
+      "non-destructive replacement for Even magic/corruption reset policy",
+      "read-only golden-capture on-disk oracle and power-loss validation"
+    ]
+  },
+  "files": [
+    {
+      "local_path": "LICENSE",
+      "upstream_path": "LICENSE",
+      "git_mode": "100644",
+      "size": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    },
+    {
+      "local_path": "inc/fdb_cfg.h",
+      "upstream_path": "inc/fdb_cfg.h",
+      "git_mode": "100644",
+      "size": 1318,
+      "sha256": "8efbdebe0f9a48e8ac3fb1c2f08dd65892b99f43815a3307e3ae50cfc071bca6",
+      "git_blob_sha1": "e8748ab8b2642af0e91dc1200a092d0e4dc4f929"
+    },
+    {
+      "local_path": "inc/fdb_def.h",
+      "upstream_path": "inc/fdb_def.h",
+      "git_mode": "100644",
+      "size": 14779,
+      "sha256": "748d07c650c6c0be98b380af4af43a556791f9a37cc205167176df0c7ec8e10b",
+      "git_blob_sha1": "559fd6b4733029eb754d634ce754ce04542dce8f"
+    },
+    {
+      "local_path": "inc/fdb_low_lvl.h",
+      "upstream_path": "inc/fdb_low_lvl.h",
+      "git_mode": "100644",
+      "size": 2742,
+      "sha256": "e9b67a9211879708f21498aeca486136c6c6ebb8c6f26cc8f5f3f5dd4e17dad9",
+      "git_blob_sha1": "c252dcac5097b1dd68099013ac70fbbaa603d812"
+    },
+    {
+      "local_path": "inc/flashdb.h",
+      "upstream_path": "inc/flashdb.h",
+      "git_mode": "100644",
+      "size": 2921,
+      "sha256": "b0dbf0404a0289c6cc552ddf861fca82b0bdc5bae8115743610d352ff8507904",
+      "git_blob_sha1": "61634fd0acd125b78caa391676f25b1a89faa82e"
+    },
+    {
+      "local_path": "src/fdb.c",
+      "upstream_path": "src/fdb.c",
+      "git_mode": "100644",
+      "size": 4451,
+      "sha256": "bd880bdfc33cb81368236a90a2508f69e9da25bae2a47804e16cb728272d087f",
+      "git_blob_sha1": "8de2b2a41be408678b6f82ae8e63bdde6326aed8"
+    },
+    {
+      "local_path": "src/fdb_kvdb.c",
+      "upstream_path": "src/fdb_kvdb.c",
+      "git_mode": "100644",
+      "size": 68168,
+      "sha256": "96e09b3f7b8b0dc77b51cb387701e4e9ef7a5cbce2eaa606380962aff25582ac",
+      "git_blob_sha1": "2bf237563eb7a1caf411ca00283cc4bcb85d7ae6"
+    },
+    {
+      "local_path": "src/fdb_utils.c",
+      "upstream_path": "src/fdb_utils.c",
+      "git_mode": "100644",
+      "size": 11358,
+      "sha256": "f3ec5d0ec094ceb16f9ad4c73b277d29029b1b3f1b8c7699ddc9ee8ce0efc9a7",
+      "git_blob_sha1": "0776f137a90881b98767bb4b5045c77c77da13be"
+    },
+    {
+      "local_path": "port/fal/LICENSE",
+      "upstream_path": "port/fal/LICENSE",
+      "git_mode": "100644",
+      "size": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    },
+    {
+      "local_path": "port/fal/inc/fal.h",
+      "upstream_path": "port/fal/inc/fal.h",
+      "git_mode": "100644",
+      "size": 3637,
+      "sha256": "37d28f905573c44d1b62757762b10f4091342749be9760e757de0779abce7724",
+      "git_blob_sha1": "19a996f04a7adc97c0af496c73a7c922204e7ec3"
+    },
+    {
+      "local_path": "port/fal/inc/fal_def.h",
+      "upstream_path": "port/fal/inc/fal_def.h",
+      "git_mode": "100644",
+      "size": 3643,
+      "sha256": "159d4cef03eeb27becff3fa41dd7f9a30265b4efce8900429ad37ae145530099",
+      "git_blob_sha1": "de8aada887bf013fd8a65a50e0d9ca0ceda72812"
+    },
+    {
+      "local_path": "port/fal/src/fal.c",
+      "upstream_path": "port/fal/src/fal.c",
+      "git_mode": "100644",
+      "size": 1268,
+      "sha256": "75a2066ba14315c17d18adce087163fa482478c290a105879fecf6b5712db0bb",
+      "git_blob_sha1": "85d466042b33cc8b45ab38e4606a6d461cdf1dfc"
+    },
+    {
+      "local_path": "port/fal/src/fal_flash.c",
+      "upstream_path": "port/fal/src/fal_flash.c",
+      "git_mode": "100644",
+      "size": 1880,
+      "sha256": "6136a96fe88f3b595961d58a89824e2c3356545b561eee5ff66d6cec59a96aed",
+      "git_blob_sha1": "8cef82c2bbf4922465093f6aa38074e326e4bfe1"
+    },
+    {
+      "local_path": "port/fal/src/fal_partition.c",
+      "upstream_path": "port/fal/src/fal_partition.c",
+      "git_mode": "100644",
+      "size": 14574,
+      "sha256": "25b7ade441576561e5ebee1ef43c92c9e03c494e0a459588d82a1ebccc7c498c",
+      "git_blob_sha1": "a24e6313f35d273bfd0ab048dc3139a49302b52f"
+    }
+  ]
+}

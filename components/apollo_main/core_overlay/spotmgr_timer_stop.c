@@ -1,0 +1,102 @@
+/*
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 2025, Ambiq Micro, Inc.
+ * All rights reserved.
+ *
+ * Bounded Apollo510 SPOT-manager timer-stop adaptation from AmbiqSuite SDK
+ * 5.1.0. Reviewed stock and SDK evidence is recorded in EVIDENCE.md.
+ */
+
+typedef __UINTPTR_TYPE__ open_cfw_spotmgr_timer_stop_uintptr;
+
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_CTRL0_ADDRESS 0x400083E0U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_GLOBEN_ADDRESS 0x40008010U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_INTCLR_ADDRESS 0x40008068U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_NVIC_ICER_ADDRESS 0xE000E188U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_NVIC_ICPR_ADDRESS 0xE000E288U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_SYSBUS_FLUSH_ADDRESS 0x47FF0000U
+
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_RELEASE_ENTRY 0x004C4531U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_HFRC 4U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_USER_TIMER_A 49U
+
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_ENABLE_MASK 0x00000001U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_GLOBAL_ENABLE_MASK 0x00008000U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_COMPARE_BOTH_MASK 0xC0000000U
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_NVIC_MASK 0x00040000U
+
+#ifndef OPEN_CFW_SPOTMGR_TIMER_STOP_READ32
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_READ32(address) \
+    (*(const volatile unsigned int *)( \
+        open_cfw_spotmgr_timer_stop_uintptr)(address))
+#endif
+
+#ifndef OPEN_CFW_SPOTMGR_TIMER_STOP_WRITE32
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_WRITE32(address, value) \
+    (*(volatile unsigned int *)( \
+        open_cfw_spotmgr_timer_stop_uintptr)(address) = (value))
+#endif
+
+#ifndef OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_RELEASE
+typedef unsigned int (*open_cfw_spotmgr_timer_stop_clock_function)(
+    unsigned int,
+    unsigned int
+);
+#define OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_RELEASE(clock, user) \
+    (((open_cfw_spotmgr_timer_stop_clock_function) \
+        OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_RELEASE_ENTRY)((clock), (user)))
+#endif
+
+/*
+ * ABI-compatible source replacement for AmbiqSuite's public
+ * am_hal_spotmgr_timer_stop at 0x004802CE...0x00480311.
+ */
+__attribute__((used, noinline))
+void open_cfw_spotmgr_timer_stop(void)
+{
+    unsigned int value;
+
+    value = OPEN_CFW_SPOTMGR_TIMER_STOP_READ32(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_CTRL0_ADDRESS
+    );
+    OPEN_CFW_SPOTMGR_TIMER_STOP_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_CTRL0_ADDRESS,
+        value & ~OPEN_CFW_SPOTMGR_TIMER_STOP_ENABLE_MASK
+    );
+
+    value = OPEN_CFW_SPOTMGR_TIMER_STOP_READ32(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_GLOBEN_ADDRESS
+    );
+    OPEN_CFW_SPOTMGR_TIMER_STOP_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_GLOBEN_ADDRESS,
+        value & ~OPEN_CFW_SPOTMGR_TIMER_STOP_GLOBAL_ENABLE_MASK
+    );
+
+    (void)OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_RELEASE(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_HFRC,
+        OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_USER_TIMER_A
+    );
+
+    OPEN_CFW_SPOTMGR_TIMER_STOP_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_NVIC_ICER_ADDRESS,
+        OPEN_CFW_SPOTMGR_TIMER_STOP_NVIC_MASK
+    );
+    OPEN_CFW_SPOTMGR_TIMER_STOP_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_INTCLR_ADDRESS,
+        OPEN_CFW_SPOTMGR_TIMER_STOP_COMPARE_BOTH_MASK
+    );
+
+    (void)OPEN_CFW_SPOTMGR_TIMER_STOP_READ32(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_SYSBUS_FLUSH_ADDRESS
+    );
+
+    OPEN_CFW_SPOTMGR_TIMER_STOP_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_STOP_NVIC_ICPR_ADDRESS,
+        OPEN_CFW_SPOTMGR_TIMER_STOP_NVIC_MASK
+    );
+}
+
+#undef OPEN_CFW_SPOTMGR_TIMER_STOP_CLOCK_RELEASE
+#undef OPEN_CFW_SPOTMGR_TIMER_STOP_WRITE32
+#undef OPEN_CFW_SPOTMGR_TIMER_STOP_READ32

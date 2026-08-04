@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "component": "cmsis-core-apollo510-compile-closure",
+  "license": "Apache-2.0",
+  "upstream": {
+    "repository": "https://github.com/ARM-software/CMSIS_5.git",
+    "selected_commit": "d23a6949a0331ca96853bcd98b0fdcc4db47184c",
+    "selected_tree": "3474af187114165f3623732474e4e1bd4b3d01d8",
+    "selected_commit_date": "2023-04-20T07:53:19+02:00",
+    "commit_subject": "Correct bit field width in EWIC Event Number ID Reg and TCM Error Bank Reg (#1622)"
+  },
+  "selection": {
+    "classification": "authenticated minimal header dependency closure",
+    "consumer": "../ambiqsuite-apollo510/mcu/apollo510/hal/mcu/am_hal_mspi.c",
+    "dependency_method": "Clang preprocessor dependency closure"
+  },
+  "safety": {
+    "headers_only": true,
+    "hardware_operations": []
+  },
+  "files": [
+    {
+      "path": "CMSIS/Core/Include/cachel1_armv7.h",
+      "size": 13261,
+      "sha256": "49c034dbd7e3756e205f1cf729acd0919b0e8b849951dde50abd593992a148d1",
+      "git_blob_sha1": "13215e223b5e6319cb6de68cb37b2438ff766b38"
+    },
+    {
+      "path": "CMSIS/Core/Include/cmsis_compiler.h",
+      "size": 10265,
+      "sha256": "747c5edd04a88d4e228c7856750ec475908545c77464a162a305b38d9e362d82",
+      "git_blob_sha1": "192f9b7c9319ff6bb73f4426bc2ae1550de4640f"
+    },
+    {
+      "path": "CMSIS/Core/Include/cmsis_gcc.h",
+      "size": 63620,
+      "sha256": "2f92cd832b6f58e4d4803b28d7340443f5e46b0f357a307cda76a42a0e530108",
+      "git_blob_sha1": "4f0762d6dc4197d0715a2403b409de03d09e10fe"
+    },
+    {
+      "path": "CMSIS/Core/Include/cmsis_version.h",
+      "size": 1680,
+      "sha256": "184c19fd3ee73632edf35a0b4d49cd48be75fbf49e6ccb19d9db05fa83bea4b3",
+      "git_blob_sha1": "8b4765f186efe577be5245b59c610056d3c54cbc"
+    },
+    {
+      "path": "CMSIS/Core/Include/core_cm55.h",
+      "size": 325041,
+      "sha256": "23c98f9996ce044c7a4a3affe4d7be36d15c67d4a1389d604e06d02672bdb1d7",
+      "git_blob_sha1": "d4c8baa628c6653fe6514b2fee7b47eed0ca5446"
+    },
+    {
+      "path": "CMSIS/Core/Include/mpu_armv8.h",
+      "size": 14242,
+      "sha256": "613879f7eb6e2fe09cbe1c50459776777aa00c8af9609394c4506b7424884bae",
+      "git_blob_sha1": "3a0aa575a57ffd7aced1b211659251a0a2078d6f"
+    },
+    {
+      "path": "CMSIS/Core/Include/pmu_armv8.h",
+      "size": 22786,
+      "sha256": "cea8c105c5f41ba831fe4d9e8e39758068cd4c414383348dc2835d6be447cca0",
+      "git_blob_sha1": "f8f3d8935b82467b9c1d09d2b91f4fc9f07ee9bf"
+    },
+    {
+      "path": "LICENSE.txt",
+      "size": 11357,
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "git_blob_sha1": "8dada3edaf50dbc082c9a125058f25def75e625a"
+    }
+  ]
+}

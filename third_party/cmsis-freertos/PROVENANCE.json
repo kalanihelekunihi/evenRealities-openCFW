@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "component": "CMSIS-FreeRTOS-v10.5.1-constructor-compile-closure",
+  "license": "Apache-2.0",
+  "license_qualification": "The wrapper source and CMSIS headers carry Apache-2.0 notices. CMSIS-FreeRTOS's unmodified License/license.txt is also retained; it is the MIT notice for the separately supplied FreeRTOS kernel, not a replacement license for the wrapper source.",
+  "upstreams": {
+    "cmsis_freertos": {
+      "repository": "https://github.com/ARM-software/CMSIS-FreeRTOS.git",
+      "repository_web": "https://github.com/ARM-software/CMSIS-FreeRTOS",
+      "selected_ref": "refs/tags/v10.5.1",
+      "selected_tag": "v10.5.1",
+      "annotated_tag_object": "34e6e4c403c17de35ec0acf29610e374dc938604",
+      "tag_peeled_commit": "d213f261b5be6bb29a7cce8b84071706b72f4d53",
+      "selected_commit": "d213f261b5be6bb29a7cce8b84071706b72f4d53",
+      "selected_commit_url": "https://github.com/ARM-software/CMSIS-FreeRTOS/commit/d213f261b5be6bb29a7cce8b84071706b72f4d53",
+      "selected_tree": "d3689a816acc77a3f0b7d35439d666ad8434b6ba",
+      "selected_commit_date": "2022-11-30T15:34:08+01:00",
+      "commit_subject": "IAR: Change project type to CMSIS (#61)",
+      "tag_kind": "annotated",
+      "tag_cryptographically_signed": false
+    },
+    "cmsis_5": {
+      "repository": "https://github.com/ARM-software/CMSIS_5.git",
+      "repository_web": "https://github.com/ARM-software/CMSIS_5",
+      "selected_ref": "refs/tags/5.9.0",
+      "selected_tag": "5.9.0",
+      "annotated_tag_object": "61e36449f53c25ef7825c40f7dd93685736f457f",
+      "tag_peeled_commit": "2b7495b8535bdcb306dac29b9ded4cfb679d7e5c",
+      "selected_commit": "2b7495b8535bdcb306dac29b9ded4cfb679d7e5c",
+      "selected_commit_url": "https://github.com/ARM-software/CMSIS_5/commit/2b7495b8535bdcb306dac29b9ded4cfb679d7e5c",
+      "selected_tree": "b88e747b2a2309b81ea77831481a58393465cd7b",
+      "selected_commit_date": "2022-05-02T12:56:44+02:00",
+      "commit_subject": "Merge branch 'develop'",
+      "tag_kind": "annotated",
+      "tag_cryptographically_signed": false
+    },
+    "authentication_qualification": "Both official annotated tags are unsigned. Authentication therefore pins the official repository URLs, tag objects, peeled commits, trees, and every selected Git blob, with independent SHA-256 pins for the copied bytes."
+  },
+  "selection": {
+    "classification": "authenticated minimal source and header compile-input closure",
+    "root": "CMSIS-FreeRTOS/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c",
+    "reviewed_constructor_roots": [
+      "osMessageQueueNew",
+      "osMutexNew",
+      "osSemaphoreNew"
+    ],
+    "cmsis_pack_dependency": {
+      "vendor": "ARM",
+      "name": "CMSIS",
+      "version": "5.9.0",
+      "evidence": "CMSIS-FreeRTOS/ARM.CMSIS-FreeRTOS.pdsc"
+    },
+    "compiler_header_branch": "GNU-compatible compilers defining __GNUC__, including the current Clang-based source-reconstruction toolchain",
+    "rte_profile": "_RTE_ is intentionally undefined; defining it expands the closure to target-specific RTE, device, and optional event-recorder inputs.",
+    "external_compile_dependencies": [
+      "the C implementation's string.h, stdint.h, and stddef.h",
+      "../freertos-kernel/include and its separately authenticated V10.5.1 header closure",
+      "the externally selected FreeRTOS portmacro.h",
+      "a reviewed G2 FreeRTOSConfig.h"
+    ],
+    "excluded_upstream_scope": {
+      "other_cmsis_compiler_backends": "The bounded openCFW compile path selects cmsis_gcc.h through __GNUC__; Arm Compiler, IAR, TI, and COSMIC compiler headers are not reached.",
+      "rte_and_event_recorder_support": "The bounded path leaves _RTE_ undefined and therefore does not reach RTE_Components.h, a CMSIS device header, or Event Recorder integration.",
+      "unrelated_examples_templates_and_metadata": "They are not inputs to compiling the authenticated cmsis_os2.c constructor roots."
+    }
+  },
+  "safety": {
+    "compile_inputs_only": true,
+    "production_ready": false,
+    "integrated_into_firmware_build": false,
+    "hardware_operations": []
+  },
+  "files": {
+    "CMSIS-FreeRTOS/ARM.CMSIS-FreeRTOS.pdsc": {
+      "upstream": "cmsis_freertos",
+      "source_path": "ARM.CMSIS-FreeRTOS.pdsc",
+      "size": 90736,
+      "sha256": "5efe70987fb0e3182d5c693b50409422091415498ef4253db233dab8285d90ca",
+      "git_blob_sha1": "18a7fa19ce8ae7541746a1c6f665285a50efc342"
+    },
+    "CMSIS-FreeRTOS/CMSIS/RTOS2/FreeRTOS/Include/freertos_mpool.h": {
+      "upstream": "cmsis_freertos",
+      "source_path": "CMSIS/RTOS2/FreeRTOS/Include/freertos_mpool.h",
+      "size": 2395,
+      "sha256": "ee814ffa60a09e0d114f7f0b1a2a46dc299f8ce5ce1800e909417e71bfe7af08",
+      "git_blob_sha1": "cea5017eeb3f1558488d6941b2ef724b0e5169fa"
+    },
+    "CMSIS-FreeRTOS/CMSIS/RTOS2/FreeRTOS/Include/freertos_os2.h": {
+      "upstream": "cmsis_freertos",
+      "source_path": "CMSIS/RTOS2/FreeRTOS/Include/freertos_os2.h",
+      "size": 13642,
+      "sha256": "15c62526b847bfe965b5f66f6303a9962fac9f3e96c0edcd3a5404441a303610",
+      "git_blob_sha1": "f67d2ae9f322d853df98f036241a46e4ca5e310e"
+    },
+    "CMSIS-FreeRTOS/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c": {
+      "upstream": "cmsis_freertos",
+      "source_path": "CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c",
+      "size": 70106,
+      "sha256": "8a0d60b56ad30c4f7957f64fa581158017b6812ec94b832d974c773ae4f2bc36",
+      "git_blob_sha1": "88dca1d881f1a960872572a8a0efd94cde19dcea"
+    },
+    "CMSIS-FreeRTOS/License/license.txt": {
+      "upstream": "cmsis_freertos",
+      "source_path": "License/license.txt",
+      "size": 1294,
+      "sha256": "7a753f27fa57df83878755b1b65b530a3552b024a83cd5ad81bce099600005a5",
+      "git_blob_sha1": "e39478b5ad7baa349bf2f4fe28cc0ce97c3f9010"
+    },
+    "CMSIS_5/CMSIS/Core/Include/cmsis_compiler.h": {
+      "upstream": "cmsis_5",
+      "source_path": "CMSIS/Core/Include/cmsis_compiler.h",
+      "size": 9481,
+      "sha256": "b51963d271c1571ca3463654c76aa7ea50c4eac5d0a2710df10414ac64d9e0f8",
+      "git_blob_sha1": "adbf296f15a47a93e5058abddad6742bb4b9854d"
+    },
+    "CMSIS_5/CMSIS/Core/Include/cmsis_gcc.h": {
+      "upstream": "cmsis_5",
+      "source_path": "CMSIS/Core/Include/cmsis_gcc.h",
+      "size": 63374,
+      "sha256": "43bfd1fe69fbbc2ca70aaf7d43cc3e20f16e0c7f66e1bdef9b51af6dc14b2617",
+      "git_blob_sha1": "67bda4ef3c38dadc4471129d39eb4e870dc08fc7"
+    },
+    "CMSIS_5/CMSIS/RTOS2/Include/cmsis_os2.h": {
+      "upstream": "cmsis_5",
+      "source_path": "CMSIS/RTOS2/Include/cmsis_os2.h",
+      "size": 35976,
+      "sha256": "784bdeeff0c7ba179215e205834a3226506458717c092dea58b99cec4fda7a1b",
+      "git_blob_sha1": "76612e29291583f6b74396300598a795363bc89c"
+    },
+    "CMSIS_5/CMSIS/RTOS2/Include/os_tick.h": {
+      "upstream": "cmsis_5",
+      "source_path": "CMSIS/RTOS2/Include/os_tick.h",
+      "size": 2286,
+      "sha256": "7fe50f667730a74087d3c94ba9443d4c5d7c14a8f7b6c1429bec2b0daea316d8",
+      "git_blob_sha1": "3cfd89547592c36837c2b50106bcec2508bfefb1"
+    },
+    "CMSIS_5/LICENSE.txt": {
+      "upstream": "cmsis_5",
+      "source_path": "LICENSE.txt",
+      "size": 11357,
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "git_blob_sha1": "8dada3edaf50dbc082c9a125058f25def75e625a"
+    }
+  }
+}

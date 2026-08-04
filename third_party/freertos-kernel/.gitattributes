@@ -1,0 +1,19 @@
+# Preserve every selected upstream file byte-for-byte.  These entries disable
+# checkout newline conversion and whitespace cleanup for the authenticated
+# blobs from FreeRTOS-Kernel V10.5.1.
+LICENSE.md -text -whitespace
+croutine.c -text -whitespace
+event_groups.c -text -whitespace
+list.c -text -whitespace
+queue.c -text -whitespace
+stream_buffer.c -text -whitespace
+tasks.c -text -whitespace
+timers.c -text -whitespace
+include/** -text -whitespace
+portable/** -text -whitespace
+
+# Keep openCFW-owned metadata and verification tooling LF-terminated.
+.gitattributes text eol=lf
+PROVENANCE.json text eol=lf
+README.openCFW.md text eol=lf
+verify_snapshot.py text eol=lf

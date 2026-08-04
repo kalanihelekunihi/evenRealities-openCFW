@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "extends": "g2-2.2.6.10.json",
+  "package": {
+    "output_name": "g2-openCFW-s200_v2.2.6.10-ring-source.evenota.bin",
+    "expected_size": 4301387,
+    "expected_sha256": "cde2fc78d14862a08211b4aedf03687e4c1b1855789f71326f9a2f496aad300f",
+    "profiles": {
+      "linux-clang": {
+        "expected_size": 4301387,
+        "expected_sha256": "44c4535803b4d1d2bcce63ca880cf6392e190ed1b033b20a107d678b5961b9eb"
+      }
+    }
+  },
+  "component_overrides": {
+    "apollo_main": {
+      "function": "Primary glasses-temple application with source-owned ring gesture forwarding",
+      "provider": {
+        "kind": "source_build",
+        "path": "components/apollo_main/ring_gesture/build/ota_s200_firmware_ota.bin",
+        "size": 3523556,
+        "sha256": "fbfd509585c9487b5f65c32b0b5729c1d693a5dedbb84dc303c02d74aef6e2db",
+        "profiles": {
+          "linux-clang": {
+            "size": 3523556,
+            "sha256": "fabeb5cedc0f82ad248c1ff96cd90944ec1cde7d827ecb3010f6ea7db9ca93dc"
+          }
+        }
+      },
+      "regions": [
+        {
+          "name": "ota_preamble",
+          "function": "Generated 32-byte staging header with source-image size and CRC-32",
+          "file_offset": 0,
+          "size": 32,
+          "address_status": "container_only",
+          "output": "apollo510b/main-ota-preamble.bin"
+        },
+        {
+          "name": "opaque_application_before_long_press_redirect",
+          "function": "Official Apollo application bytes before the first generated branch redirect",
+          "file_offset": 32,
+          "size": 44690,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4423680,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x00438000.bin"
+        },
+        {
+          "name": "long_press_source_redirect",
+          "function": "Generated Thumb BL to source function evenhub_longpress",
+          "file_offset": 44722,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4468370,
+          "address_status": "generated_source_redirect",
+          "output": "apollo510b/generated-bl-evenhub-longpress-0x00442e92.bin"
+        },
+        {
+          "name": "opaque_application_between_redirects",
+          "function": "Official Apollo application bytes between generated ring redirects",
+          "file_offset": 44726,
+          "size": 812,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4468374,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x00442e96.bin"
+        },
+        {
+          "name": "release_source_redirect",
+          "function": "Generated Thumb BL to source function ring_release",
+          "file_offset": 45538,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4469186,
+          "address_status": "generated_source_redirect",
+          "output": "apollo510b/generated-bl-ring-release-0x004431c2.bin"
+        },
+        {
+          "name": "opaque_application_after_redirects",
+          "function": "Official Apollo application bytes after the generated ring redirects",
+          "file_offset": 45542,
+          "size": 3477854,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4469190,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x004431c6.bin"
+        },
+        {
+          "name": "ring_gesture_source_overlay",
+          "function": "Clang-built evenhub_longpress and ring_release source implementation",
+          "file_offset": 3523396,
+          "size": 160,
+          "target": "apollo510b_internal_mram",
+          "target_address": 7947044,
+          "address_status": "source_compiled",
+          "output": "apollo510b/source-ring-gesture-0x00794324.bin"
+        }
+      ]
+    }
+  }
+}

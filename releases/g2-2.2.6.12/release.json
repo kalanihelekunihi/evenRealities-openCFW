@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "product": "Even Realities G2",
+  "release_name": "SybilSight G2 CFW",
+  "release_version": "2.2.6.12",
+  "vendor_base": {
+    "version": "2.2.6.10",
+    "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+  },
+  "g2flash": {
+    "commit": "d5eb48dd9dcda4cc630458ec365bc546036678c2"
+  },
+  "source_patch": "components/apollo_main/canvas480/g2flash-canvas480.patch",
+  "source_patch_sha256": "e704d01281dbfc320ab69f3507a95940d827ca13716f47676e7a4b54ad965e78",
+  "capability_marker": "EVENCFW/4 img576 imgz rle xordelta stereo canvas480",
+  "features": [
+    "img576",
+    "imgz",
+    "rle",
+    "xordelta",
+    "stereo",
+    "canvas480"
+  ],
+  "removed_features": [
+    "faceclaw-wake-lease",
+    "faceclaw-idle-double-tap-takeover",
+    "faceclaw-even-ai-interception"
+  ],
+  "native_even_ai_behavior": "stock",
+  "virtual_canvas": {
+    "width": 576,
+    "height": 480,
+    "physical_viewport_height": 288,
+    "maximum_viewport_y": 192,
+    "pixel_format": "packed-4bpp-grayscale"
+  },
+  "output_name": "g2-2.2.6.12-sybilsight-cfw.bin",
+  "expected_output": {
+    "size": 4319387,
+    "sha256": "093b2271c1f0f63d477216887a1b4dde5ef9b9c5024690f0bf11a4e9ba824fb3"
+  },
+  "flashes_devices": false
+}

@@ -1,0 +1,482 @@
+{
+  "schema_version": 1,
+  "component": "Packetcraft Cordio",
+  "license": "Apache-2.0",
+  "upstream": {
+    "repository": "https://github.com/packetcraft-inc/cordio.git",
+    "repository_web": "https://github.com/packetcraft-inc/cordio",
+    "selected_release": "r20.05c",
+    "selected_ref": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+    "release_identity": "official Packetcraft release commit with exact subject r20.05c; no annotated or lightweight tag object is claimed",
+    "tag_object": null,
+    "selected_commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+    "commit_object_payload_path": "upstream/3656312d6b73e2a2c1c8b33ee0385bc199dd97e6.commit",
+    "commit_object_payload_size": 222,
+    "commit_object_payload_sha256": "5dab57d27af0548331378a1b5fcda9bf89724aeecd1b3b92a8df19b516c24c80",
+    "commit_signature": {
+      "present": false,
+      "qualification": "The pinned commit payload contains no gpgsig header; provenance rests on exact Git object reconstruction, not a signature claim."
+    },
+    "selected_tree": "0a76c7dde46d3b94bb9185a4a5327d0e3f38ec97",
+    "parent_commit": "eb4282c7abe78dad8fb3984791b9c193fe904052",
+    "author_date": "2020-11-11T07:53:18-08:00",
+    "committer_date": "2020-11-11T07:53:18-08:00",
+    "commit_subject": "r20.05c",
+    "tree_closure_path": "upstream/trees.json",
+    "tree_closure_size": 46490,
+    "tree_closure_sha256": "ff5cfc9516ad240bef69c72df42486dfa82fa54eaa4e5e4dca74cc62917ae5da",
+    "tree_object_count": 21,
+    "tree_closure_qualification": "Complete entry lists for every Git tree on all 41 selected commit-to-path traversals are vendored; the offline verifier reconstructs their canonical tree objects."
+  },
+  "selection": {
+    "classification": "authenticated upstream source-oracle snapshot; production-excluded",
+    "exact_g2_checkout_proven": false,
+    "compatibility_choice": "Packetcraft r20.05c is the newest commit in the audited r20.05 through r20.05c function-level source-equivalence interval.",
+    "qualification": "Only bounded algorithms/source blobs are reusable oracles. G2 local trace changes and its Ambiq FreeRTOS port preclude a whole-tree identity claim.",
+    "selected_file_count": 41,
+    "selected_c_source_count": 5,
+    "selected_header_count": 35,
+    "selected_license_count": 1,
+    "root_source_paths": [
+      "ble-host/sources/stack/att/atts_csf.c",
+      "ble-host/sources/stack/dm/dm_conn_sm.c",
+      "ble-host/sources/stack/smp/smp_db.c",
+      "ble-profiles/sources/af/common/app_db.c",
+      "wsf/sources/targets/baremetal/wsf_buf.c"
+    ],
+    "selection_rule": "Five audited source blobs plus the exact recursive quoted-header closure resolved under Packetcraft r20.05c build include order, and the root Apache-2.0 license.",
+    "source_records_sha256": "2d9ba02bd31e3784789af3ddb3f2bbcaa9e7187f12eb76506b4b2d14a2d55d9a",
+    "integration_status": "authenticated and verified offline; no production registration",
+    "excluded_features": [
+      "Ambiq FreeRTOS WSF and HCI ports",
+      "Even platform/ble, MRAM persistence, custom services/profiles, policy, and callbacks",
+      "controller and radio firmware",
+      "unselected Packetcraft host/profile/WSF/mesh/controller modules, samples, build files, and tests"
+    ]
+  },
+  "g2_boundary": {
+    "evidence": "docs/research/cordio-version-recovery-audit.md",
+    "analyzer": "tools/analyze_g2_cordio_version.py",
+    "official_image": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "official_image_size": 3523396,
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "load_mapping": "run_address = file_offset + 0x00437FE0",
+    "whole_stack_identity": "unresolved",
+  "bounded_equivalence_interval": {
+      "releases": {
+        "r20.05": {
+          "commit": "eeb34839755da1c19cc85b8795cc863483c16ef0",
+          "tree": "906eb9beaf5e8c3b39ab445f6522f7febeda38b5"
+        },
+        "r20.05a": {
+          "commit": "5e21ee596a80a3dc75ae5ef0938712a6042b2ac3",
+          "tree": "5001d075e93220d66ae1340208046c0526b0dc3a"
+        },
+        "r20.05b": {
+          "commit": "eb4282c7abe78dad8fb3984791b9c193fe904052",
+          "tree": "c8204fcb39847aa6d3cae3ec49772a70f6097765"
+        },
+        "r20.05c": {
+          "commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+          "tree": "0a76c7dde46d3b94bb9185a4a5327d0e3f38ec97"
+        }
+      },
+      "scope": [
+        "AttsCsfWriteFeatures behavior",
+        "dmConnSmExecute eight-event state-machine shape",
+        "the five audited source blobs"
+      ],
+      "not_an_upper_bound_for": "the complete G2 Cordio vendor tree"
+    },
+    "source_oracles": [
+      {
+        "algorithm": "ATT client supported features",
+        "path": "ble-host/sources/stack/att/atts_csf.c"
+      },
+      {
+        "algorithm": "DM connection state machine",
+        "path": "ble-host/sources/stack/dm/dm_conn_sm.c"
+      },
+      {
+        "algorithm": "SMP device database",
+        "path": "ble-host/sources/stack/smp/smp_db.c"
+      },
+      {
+        "algorithm": "application-framework RAM/NVM database comparator",
+        "path": "ble-profiles/sources/af/common/app_db.c"
+      },
+      {
+        "algorithm": "WSF buffer manager bare-metal comparator",
+        "path": "wsf/sources/targets/baremetal/wsf_buf.c"
+      }
+    ],
+    "recovered_config_header": "g2-config/cordio_recovered_config.h",
+    "recovered_config_header_size": 574,
+    "recovered_config_header_sha256": "a908d4d003392c4fa2cfceef0e5d000bb448a67dbb4cf94fcb431c14366e68a2",
+    "proven_configuration": {
+      "DM_CONN_MAX": 3,
+      "DM_CONN_ID_NONE": 0,
+      "ATT_client_record_stride": 2,
+      "ATT_DB_READ_PENDING": 2,
+      "ATT_PENDING_AWARE": 1,
+      "WSF_BUF_FREE_CHECK_ASSERT": true,
+      "WSF_BUF_STATS": false,
+      "WSF_BUF_STATS_HIST": false,
+      "WSF_OS_DIAG": false,
+      "WSF_buffer_pool_descriptor_bytes": 12,
+      "WSF_buffer_free_list_pointer_offset": 8,
+      "WSF_buffer_free_marker": "0xFAABD00D"
+    },
+    "upstream_config_templates": [
+      "ble-host/sources/stack/cfg/cfg_stack.h",
+      "ble-profiles/include/app_cfg.h",
+      "wsf/include/wsf_buf.h",
+      "wsf/include/wsf_os.h"
+    ],
+    "config_qualification": "Only recovered_config_header facts are G2-proven. Other values in the upstream templates are reference defaults; APP_DB_NUM_RECS=3 is specifically not the ten-record Even MRAM database.",
+    "port_boundary": {
+      "g2_source_path": "wsf/sources/port/freertos/wsf_buf.c",
+      "vendored_comparator": "wsf/sources/targets/baremetal/wsf_buf.c",
+      "qualification": "Algorithm/configuration comparator only; not a text-identical or drop-in G2 port.",
+      "ambiq_hci_port": "excluded and unresolved",
+      "even_mram_platform_glue": "excluded and unresolved"
+    },
+    "unresolved": [
+      "authenticated AmbiqSuite 5.1.0 Cordio source archive",
+      "exact G2 Ambiq FreeRTOS WSF and HCI port sources",
+      "complete G2 Cordio compile configuration and ABI flags",
+      "Even application database and MRAM glue source identities",
+      "per-function link closure for any future production promotion"
+    ]
+  },
+  "files": [
+    {
+      "local_path": "LICENSE.md",
+      "upstream_path": "LICENSE.md",
+      "git_mode": "100644",
+      "size": 562,
+      "sha256": "682ae5978019e4ee9d439b300efb125525b2e4cc4181ebd1e676dd60dc69d7cd",
+      "git_blob_sha1": "5fe50d5491f1166292380f46c8beae44ca83cadb"
+    },
+    {
+      "local_path": "ble-host/include/att_api.h",
+      "upstream_path": "ble-host/include/att_api.h",
+      "git_mode": "100644",
+      "size": 60104,
+      "sha256": "0f632e6219a2896d24a01d323a10a8f692e17f2a3bb2f5cf01067f1a7e15222e",
+      "git_blob_sha1": "fd285de1828e050b63132fdc61baa599e0989947"
+    },
+    {
+      "local_path": "ble-host/include/att_defs.h",
+      "upstream_path": "ble-host/include/att_defs.h",
+      "git_mode": "100644",
+      "size": 18648,
+      "sha256": "50880a6320df3f42405e26c9df990500a3487373fcb638b02700c91b55e71616",
+      "git_blob_sha1": "8fea47d94f74b99cc5fc429c6058dd434033d56b"
+    },
+    {
+      "local_path": "ble-host/include/att_uuid.h",
+      "upstream_path": "ble-host/include/att_uuid.h",
+      "git_mode": "100644",
+      "size": 41896,
+      "sha256": "99798365374bce998962b9890f04cc12998d350ad5238e1c1b0438f1f30a40d1",
+      "git_blob_sha1": "5896a1c9baef6f90f00fe388f130aaeae130cff2"
+    },
+    {
+      "local_path": "ble-host/include/dm_api.h",
+      "upstream_path": "ble-host/include/dm_api.h",
+      "git_mode": "100644",
+      "size": 152029,
+      "sha256": "b2307049705d1419d88f04033949178d6b68ce6fa6ef98b0b9ffa11691ecfd05",
+      "git_blob_sha1": "717b0b6585266948f07dcc96c80c0d1195674f94"
+    },
+    {
+      "local_path": "ble-host/include/hci_api.h",
+      "upstream_path": "ble-host/include/hci_api.h",
+      "git_mode": "100644",
+      "size": 135198,
+      "sha256": "169ba93aaad2e8cec24b6f40f6f059df8164fc53fc76016a415ce421dc159ff2",
+      "git_blob_sha1": "6a6474b9c2d8fa170c2da150abe47c78c7e790a1"
+    },
+    {
+      "local_path": "ble-host/include/l2c_api.h",
+      "upstream_path": "ble-host/include/l2c_api.h",
+      "git_mode": "100644",
+      "size": 22423,
+      "sha256": "23a45635fefae9815c22d9644536515d81b609959920aaa8f9a1cf911ebbfac9",
+      "git_blob_sha1": "c2a002146de3c5cf8ef08d908f3647910718f8be"
+    },
+    {
+      "local_path": "ble-host/include/l2c_defs.h",
+      "upstream_path": "ble-host/include/l2c_defs.h",
+      "git_mode": "100644",
+      "size": 8731,
+      "sha256": "f311a1e1e7af96b757c61ba3a0f6a59333fc6b8b94ae82c2c51b54bc7a215e50",
+      "git_blob_sha1": "d32568fd660ddd9946dd9f7863ff29d0c7fbd702"
+    },
+    {
+      "local_path": "ble-host/include/sec_api.h",
+      "upstream_path": "ble-host/include/sec_api.h",
+      "git_mode": "100644",
+      "size": 15230,
+      "sha256": "89953cf8aff93ccbb412644f8ee75180b969a1318ff1cf220d7e394e8980acc5",
+      "git_blob_sha1": "69d231b991e43807e844ac2a2aa9df24105bbf1a"
+    },
+    {
+      "local_path": "ble-host/include/smp_api.h",
+      "upstream_path": "ble-host/include/smp_api.h",
+      "git_mode": "100644",
+      "size": 12973,
+      "sha256": "dd1beb54ef6dc19a6753c2abbcc126a9f2dbb4d20cec1716e72bb0fb7322cf41",
+      "git_blob_sha1": "bf1be72f1145016f29b3bb76fca1ff8c8cd574a1"
+    },
+    {
+      "local_path": "ble-host/include/smp_defs.h",
+      "upstream_path": "ble-host/include/smp_defs.h",
+      "git_mode": "100644",
+      "size": 11029,
+      "sha256": "3c00fa76eeb567a3b329677a5f116cba712f6a8ba6e1820b78efc7012d5bf387",
+      "git_blob_sha1": "727952ca205d61a0a0278de7b48a6d6be75c1098"
+    },
+    {
+      "local_path": "ble-host/sources/stack/att/att_main.h",
+      "upstream_path": "ble-host/sources/stack/att/att_main.h",
+      "git_mode": "100644",
+      "size": 8346,
+      "sha256": "957d9c8bf17dbf244a06e5073368e0eacfe2f74d3d90fde97e4ee9c3eb2bc296",
+      "git_blob_sha1": "cdb6f524ba752c9955acf0081e2f68954a03abe8"
+    },
+    {
+      "local_path": "ble-host/sources/stack/att/atts_csf.c",
+      "upstream_path": "ble-host/sources/stack/att/atts_csf.c",
+      "git_mode": "100644",
+      "size": 14270,
+      "sha256": "1464bff0dbb063ce0e69c5781b73fd7b95656afcd8f710084449298189f2f747",
+      "git_blob_sha1": "ed4f051194b77827ec991f0d5c0c38969ea7548a"
+    },
+    {
+      "local_path": "ble-host/sources/stack/att/atts_main.h",
+      "upstream_path": "ble-host/sources/stack/att/atts_main.h",
+      "git_mode": "100644",
+      "size": 7628,
+      "sha256": "58a066dde787349032f1c366b22795435a1714633f48495d706e47548da3c64b",
+      "git_blob_sha1": "5c46da8b79d6dd7a6775c0ec195d8dc14d8e0edf"
+    },
+    {
+      "local_path": "ble-host/sources/stack/cfg/cfg_stack.h",
+      "upstream_path": "ble-host/sources/stack/cfg/cfg_stack.h",
+      "git_mode": "100644",
+      "size": 5884,
+      "sha256": "9694ceef8ee338ca747614de9bc433532bb8a031a13a04c1a426ab4956f07364",
+      "git_blob_sha1": "5612481547cad7c3aafed74ebfda9289ae03a889"
+    },
+    {
+      "local_path": "ble-host/sources/stack/dm/dm_conn.h",
+      "upstream_path": "ble-host/sources/stack/dm/dm_conn.h",
+      "git_mode": "100644",
+      "size": 14490,
+      "sha256": "870b24846d24eb64d2bbdbe102a8bf8ee7fffbbbadf9c1b6532f0ab81c028040",
+      "git_blob_sha1": "09b3b29c79a93c6cb3f438767def3a4746aa7aac"
+    },
+    {
+      "local_path": "ble-host/sources/stack/dm/dm_conn_sm.c",
+      "upstream_path": "ble-host/sources/stack/dm/dm_conn_sm.c",
+      "git_mode": "100644",
+      "size": 7950,
+      "sha256": "cdab18be5711866031487f164d39ea1806bd7f75032992c3050a75bdd0a85de8",
+      "git_blob_sha1": "58c5c6e1e4df5744c9a41902634cdd23a1aef906"
+    },
+    {
+      "local_path": "ble-host/sources/stack/dm/dm_main.h",
+      "upstream_path": "ble-host/sources/stack/dm/dm_main.h",
+      "git_mode": "100644",
+      "size": 4959,
+      "sha256": "660fd2518aafbcc08f1625bcf509ebd5958ece73b124f1bb8e16e7c76439f5cc",
+      "git_blob_sha1": "723b0610f6c8d52ad3ff131865f493ee12885816"
+    },
+    {
+      "local_path": "ble-host/sources/stack/smp/smp_db.c",
+      "upstream_path": "ble-host/sources/stack/smp/smp_db.c",
+      "git_mode": "100644",
+      "size": 13268,
+      "sha256": "d73d33be7c3d64476b8edb763bb0f32f4a49b54e07a65d44cbfbc4b2deb76645",
+      "git_blob_sha1": "cbd056aaab32eab0838b2bd9bbaac872012ca06b"
+    },
+    {
+      "local_path": "ble-host/sources/stack/smp/smp_main.h",
+      "upstream_path": "ble-host/sources/stack/smp/smp_main.h",
+      "git_mode": "100644",
+      "size": 21243,
+      "sha256": "afac968b47223c215ffa428de22d80290995313e59a4258326052172441a843d",
+      "git_blob_sha1": "45a073775086411531089acfc5138b3a44a41a5b"
+    },
+    {
+      "local_path": "ble-profiles/include/app_api.h",
+      "upstream_path": "ble-profiles/include/app_api.h",
+      "git_mode": "100644",
+      "size": 51014,
+      "sha256": "75d31ad7022d3323759fba42b7652c900175c98e293159da2b881a36ca3b50c1",
+      "git_blob_sha1": "5ed16cbf18ad12a502507f86f8e381144ce1d760"
+    },
+    {
+      "local_path": "ble-profiles/include/app_cfg.h",
+      "upstream_path": "ble-profiles/include/app_cfg.h",
+      "git_mode": "100644",
+      "size": 2094,
+      "sha256": "88cf529351f5d16a9cc07c7e016ef3d637a173ecda5ff15c37644e3e73930859",
+      "git_blob_sha1": "731d7a62307d348d3ec8272171c9cd30ff1fcf71"
+    },
+    {
+      "local_path": "ble-profiles/include/app_db.h",
+      "upstream_path": "ble-profiles/include/app_db.h",
+      "git_mode": "100644",
+      "size": 25224,
+      "sha256": "62d5ffa0d823bc565ee9864792f1fe0133e1f4358e267a1f26d763ccc6c76371",
+      "git_blob_sha1": "3e657a49a245f61b05d90772da49113109b034dd"
+    },
+    {
+      "local_path": "ble-profiles/sources/af/app_main.h",
+      "upstream_path": "ble-profiles/sources/af/app_main.h",
+      "git_mode": "100644",
+      "size": 10024,
+      "sha256": "c4e13ec5fb65f3f661eaf4045c9b8dff2570d34ea496da844de3070266e51ebd",
+      "git_blob_sha1": "67f83478370b606a7825caa033b47818ad63c875"
+    },
+    {
+      "local_path": "ble-profiles/sources/af/common/app_db.c",
+      "upstream_path": "ble-profiles/sources/af/common/app_db.c",
+      "git_mode": "100644",
+      "size": 43385,
+      "sha256": "9d96742d3dcb100f9156bdc339cee04e34a2ef5ca4bc5ee3b9971d1d7876f3df",
+      "git_blob_sha1": "789f4c9bac29a5b7eb92c2cb22a221cdd720fe83"
+    },
+    {
+      "local_path": "ble-profiles/sources/services/svc_core.h",
+      "upstream_path": "ble-profiles/sources/services/svc_core.h",
+      "git_mode": "100644",
+      "size": 6973,
+      "sha256": "9335900155d5e4908a4b7d751f8e914cb01b9a1665aa8e8036ccb93712a9dcfa",
+      "git_blob_sha1": "3203d22f6c809d03bda154ff0828bd33290d1ff3"
+    },
+    {
+      "local_path": "wsf/include/hci_defs.h",
+      "upstream_path": "wsf/include/hci_defs.h",
+      "git_mode": "100644",
+      "size": 97305,
+      "sha256": "2cea8eee944150621804c2e87824111625582828cd9196116dc3d88517e2966b",
+      "git_blob_sha1": "69eeffa0ebec662ae8d753e762cbc484857edc39"
+    },
+    {
+      "local_path": "wsf/include/util/bda.h",
+      "upstream_path": "wsf/include/util/bda.h",
+      "git_mode": "100644",
+      "size": 4689,
+      "sha256": "286a4aa661382fc873c4988e258a38e7a533b3fbde57fbafdb2590d92b323a77",
+      "git_blob_sha1": "ed160a28018c981c449120aa7d6ff71f89ca9d1c"
+    },
+    {
+      "local_path": "wsf/include/util/bstream.h",
+      "upstream_path": "wsf/include/util/bstream.h",
+      "git_mode": "100644",
+      "size": 15207,
+      "sha256": "cfe3140597125d93e05457e939835d353589568ea7709164ba21ed6ceb9dbba7",
+      "git_blob_sha1": "ee2b12c6609dd90f420c53b8c7e89f6130bca962"
+    },
+    {
+      "local_path": "wsf/include/wsf_assert.h",
+      "upstream_path": "wsf/include/wsf_assert.h",
+      "git_mode": "100644",
+      "size": 4255,
+      "sha256": "cd330e06d7fcfa4ab3428bfc8a5a41df4a5c02f57076181dd295543d5cf5c3c1",
+      "git_blob_sha1": "7f09e4112c9f65163a2bdd6245adaaf5267f300d"
+    },
+    {
+      "local_path": "wsf/include/wsf_buf.h",
+      "upstream_path": "wsf/include/wsf_buf.h",
+      "git_mode": "100644",
+      "size": 8491,
+      "sha256": "52dcc50ff07422ef9cff4a481105dfffbd5e9caf002d7d7a1d56c384162d2b18",
+      "git_blob_sha1": "d8f8138041c8cff164c4a0ae2801efb4f6bbea70"
+    },
+    {
+      "local_path": "wsf/include/wsf_cs.h",
+      "upstream_path": "wsf/include/wsf_cs.h",
+      "git_mode": "100644",
+      "size": 3718,
+      "sha256": "bde58eb2efda2c39b071ae371f7a1b0d30c2b9cd13c7614915ba87520b75f0e4",
+      "git_blob_sha1": "dff5b4ac8362744a2746fc2b011216ebb7967dcd"
+    },
+    {
+      "local_path": "wsf/include/wsf_heap.h",
+      "upstream_path": "wsf/include/wsf_heap.h",
+      "git_mode": "100644",
+      "size": 2522,
+      "sha256": "1b6a8245ab0781f1ef6325d213430ad2bbd0740c313eb03e2053f48b9967d235",
+      "git_blob_sha1": "9c75846ae3be7c653a4519e25c1f39d97be6d3ab"
+    },
+    {
+      "local_path": "wsf/include/wsf_math.h",
+      "upstream_path": "wsf/include/wsf_math.h",
+      "git_mode": "100644",
+      "size": 1601,
+      "sha256": "b26606e5bac4a2cd5610568dbcdaea94c79a6821a46984a2fc343dfe91dd9043",
+      "git_blob_sha1": "e3cf69255550b2566b6272d6de6de34e8fe34289"
+    },
+    {
+      "local_path": "wsf/include/wsf_nvm.h",
+      "upstream_path": "wsf/include/wsf_nvm.h",
+      "git_mode": "100644",
+      "size": 4279,
+      "sha256": "59f9e86c08f8caf8322d624c40fd6b4b88c19e4dc407662ea99cc1bd8f911bab",
+      "git_blob_sha1": "f058f0bc7749dda6ba3481e9adef220f0b4fff41"
+    },
+    {
+      "local_path": "wsf/include/wsf_os.h",
+      "upstream_path": "wsf/include/wsf_os.h",
+      "git_mode": "100644",
+      "size": 8973,
+      "sha256": "661e334690d27f74b5e74a5f76ede37199d3fff0b94d96126b73fe12c8ed2075",
+      "git_blob_sha1": "2f526954f7dbab2fc630821c68ac3796e95bcad1"
+    },
+    {
+      "local_path": "wsf/include/wsf_queue.h",
+      "upstream_path": "wsf/include/wsf_queue.h",
+      "git_mode": "100644",
+      "size": 5818,
+      "sha256": "26086152ecfde301611f296471b5b47b55cfebcc81bc2b353204aaf21c9054ee",
+      "git_blob_sha1": "37b85dca15a67055fc9505aca6973c9365646e66"
+    },
+    {
+      "local_path": "wsf/include/wsf_timer.h",
+      "upstream_path": "wsf/include/wsf_timer.h",
+      "git_mode": "100644",
+      "size": 5897,
+      "sha256": "84363db4eb73fea69bc718beb50c347fab2a38b08e975fba1393e47841dda178",
+      "git_blob_sha1": "c6851a0efc7d465997594759a59783b14ca0f6a9"
+    },
+    {
+      "local_path": "wsf/include/wsf_trace.h",
+      "upstream_path": "wsf/include/wsf_trace.h",
+      "git_mode": "100644",
+      "size": 37120,
+      "sha256": "f8d23d4f6570c10b753e202ceddb7f1585b22fc047aa1f5f8ab6d9b7a877b573",
+      "git_blob_sha1": "c9c7a4370ebb6d99f2369a4d72c0f1866ae51794"
+    },
+    {
+      "local_path": "wsf/include/wsf_types.h",
+      "upstream_path": "wsf/include/wsf_types.h",
+      "git_mode": "100644",
+      "size": 1636,
+      "sha256": "646d206ff6bac3029d778bc25d883e8536ae8cc33bfde002816642ca83db221f",
+      "git_blob_sha1": "e7815d5b9d5f1c9dd8d39d05323822d6c75b24d4"
+    },
+    {
+      "local_path": "wsf/sources/targets/baremetal/wsf_buf.c",
+      "upstream_path": "wsf/sources/targets/baremetal/wsf_buf.c",
+      "git_mode": "100644",
+      "size": 14486,
+      "sha256": "d50d374e87b8bed25a0afd50156abac8abad0ae395a7b3db6671decfb50c701d",
+      "git_blob_sha1": "be2ab9cfc03b65390ba25d8d97321fa2d304fc64"
+    }
+  ]
+}

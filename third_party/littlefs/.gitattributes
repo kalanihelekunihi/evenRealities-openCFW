@@ -1,0 +1,12 @@
+# Preserve the selected upstream blobs byte-for-byte. Their official bytes
+# include a few Git-whitespace patterns, so do not "fix" those pinned bytes.
+lfs.c -text -whitespace
+lfs.h -text -whitespace
+lfs_util.c -text -whitespace
+lfs_util.h -text -whitespace
+LICENSE.md -text -whitespace
+
+# Keep openCFW-owned metadata and tooling consistently LF-terminated.
+PROVENANCE.json text eol=lf
+README.openCFW.md text eol=lf
+verify_snapshot.py text eol=lf

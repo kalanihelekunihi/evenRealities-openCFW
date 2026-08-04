@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "component": "EasyLogger",
+  "license": "MIT",
+  "upstream": {
+    "repository": "https://github.com/armink/EasyLogger.git",
+    "repository_web": "https://github.com/armink/EasyLogger",
+    "selected_ref": "refs/heads/master",
+    "selected_commit": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+    "selected_commit_url": "https://github.com/armink/EasyLogger/commit/a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+    "selected_tree": "dc9ceb7202c5dd2d58e5e5a9b408b1c05a5ec4f3",
+    "selected_commit_date": "2024-12-26T13:57:19+08:00",
+    "github_commit_verification": {
+      "verified": true,
+      "reason": "valid"
+    },
+    "observed_remote_head": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+    "declared_version": "2.2.99",
+    "declared_version_file": "easylogger/inc/elog.h",
+    "version_introduced_commit": "a607e1715b83d42b2d431e4e415263b7044e0ecb",
+    "version_introduced_commit_url": "https://github.com/armink/EasyLogger/commit/a607e1715b83d42b2d431e4e415263b7044e0ecb",
+    "version_introduced_date": "2019-11-30T21:27:51+08:00",
+    "official_version_tag": null,
+    "nearest_preceding_tag": "2.2.0",
+    "nearest_preceding_tag_commit": "980eac7383e26a98837a6b42e9cefcd219b15166",
+    "tags_observed": {
+      "2.0.0": "d56a991170857bf0b39930c6c7790e54df4cee8e",
+      "2.1.0": "4ba5a626fc25a22695142ff35d2fa23394c15cc5",
+      "2.2.0": "980eac7383e26a98837a6b42e9cefcd219b15166"
+    },
+    "release_tags_observed": [
+      "2.2.0",
+      "2.1.0",
+      "2.0.0"
+    ]
+  },
+    "selection": {
+        "basis": "Latest commit in the three-commit official source-equivalent set proven by the G2 core; all four relevant core/header/config Git blobs are identical from cd93d9c through the selected a596b264 snapshot.",
+        "release_ambiguity": "The primary repository has no 2.2.99 tag or release. Commit a607e1715b83d42b2d431e4e415263b7044e0ecb changed the version string from 2.2.0 to 2.2.99, and later master commits retained that version. The selected commit is therefore a reproducible official 2.2.99-labeled snapshot, not proof of a tagged 2.2.99 release or of the exact G2 source revision.",
+        "source_equivalent_earliest_commit": "cd93d9c768415f4b7279f2d3ef2366ce15ea087c",
+        "source_equivalent_commits": [
+            "cd93d9c768415f4b7279f2d3ef2366ce15ea087c",
+            "34cc1717825c799979a1b4b3739be1e5668a7322",
+            "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24"
+        ],
+        "source_equivalent_core_blobs": {
+            "easylogger/src/elog.c": "b3a00e3927edf97013ddfffeb157be5c1462a6b4",
+            "easylogger/src/elog_utils.c": "165d855d2c8e8470b3543380ca6064c0799a8a44",
+            "easylogger/inc/elog.h": "adde47c2df84ea40e4a876f02557c7a4801e8c03",
+            "easylogger/inc/elog_cfg.h": "0b4481ed49de06e310e72f4ba53bd5871d0e1722"
+        },
+        "source_equivalence_audit": "docs/research/easylogger-version-audit.md",
+        "g2_async_filename": "The G2 firmware retains the downstream path easylogger/src/elog_async_api.c. No file or historical object with that path exists in the official repository refs inspected. The pristine upstream async implementation is easylogger/src/elog_async.c and is vendored under that name; elog_async_api.c must be treated as G2-local glue or a downstream derivative until its provenance is independently proven."
+    },
+  "files": [
+    {
+      "upstream_path": "LICENSE",
+      "vendored_path": "LICENSE",
+      "upstream_size": 1100,
+      "vendored_size": 1101,
+      "upstream_sha256": "c80023edf0b6ab08a88059549d4a79daa1f3ac3dc6a6350f25dff42fd9a88e44",
+      "vendored_sha256": "4a7be67e9701d0344c62d1b92eed8f40b874d00d64a9ee6b3853eb47ef4ea7f9",
+      "byte_identical": false,
+      "normalization": "One terminal LF appended; removing that LF reproduces the upstream blob hash."
+    },
+    {
+      "upstream_path": "easylogger/src/elog.c",
+      "vendored_path": "src/elog.c",
+      "upstream_size": 28740,
+      "vendored_size": 28740,
+      "upstream_sha256": "d4291ab1314a34cf940c8e0d7246e05570f8d32ae0704b498cf6fbacab76acb1",
+      "vendored_sha256": "d4291ab1314a34cf940c8e0d7246e05570f8d32ae0704b498cf6fbacab76acb1",
+      "byte_identical": true,
+      "normalization": null
+    },
+    {
+      "upstream_path": "easylogger/src/elog_utils.c",
+      "vendored_path": "src/elog_utils.c",
+      "upstream_size": 2975,
+      "vendored_size": 2975,
+      "upstream_sha256": "937eaf98151cb5fa25f102621802637d71ccadd56028098e3a45978a0707d9d0",
+      "vendored_sha256": "937eaf98151cb5fa25f102621802637d71ccadd56028098e3a45978a0707d9d0",
+      "byte_identical": true,
+      "normalization": null
+    },
+    {
+      "upstream_path": "easylogger/src/elog_async.c",
+      "vendored_path": "src/elog_async.c",
+      "upstream_size": 10713,
+      "vendored_size": 10713,
+      "upstream_sha256": "2a3d496f9e7e2a7b0135c0ffbecbbf367b484134cf20909853338a8f919b8e6c",
+      "vendored_sha256": "2a3d496f9e7e2a7b0135c0ffbecbbf367b484134cf20909853338a8f919b8e6c",
+      "byte_identical": true,
+      "normalization": null
+    },
+    {
+      "upstream_path": "easylogger/inc/elog.h",
+      "vendored_path": "inc/elog.h",
+      "upstream_size": 10428,
+      "vendored_size": 10428,
+      "upstream_sha256": "2890b272a01820a6336da544c056e7735b88330cd91a5092fb83a5538de11f48",
+      "vendored_sha256": "2890b272a01820a6336da544c056e7735b88330cd91a5092fb83a5538de11f48",
+      "byte_identical": true,
+      "normalization": null
+    },
+    {
+      "upstream_path": "easylogger/inc/elog_cfg.h",
+      "vendored_path": "inc/elog_cfg.h",
+      "upstream_size": 3995,
+      "vendored_size": 3995,
+      "upstream_sha256": "bccd34ca41c36ce8201d78fd2b844b071bad25bfbac452d02764617ca4ed3073",
+      "vendored_sha256": "bccd34ca41c36ce8201d78fd2b844b071bad25bfbac452d02764617ca4ed3073",
+      "byte_identical": true,
+      "normalization": null
+    },
+    {
+      "upstream_path": "easylogger/port/elog_port.c",
+      "vendored_path": "port/elog_port.c",
+      "upstream_size": 2449,
+      "vendored_size": 2450,
+      "upstream_sha256": "e2c111ee42211a789fb3f7786a471e85333204992e316026ab15af61d159d4cc",
+      "vendored_sha256": "2cf63c54ca1d4a1a95fd490fdd977a7ac8686bb6639db39eba38ec0e54755f9b",
+      "byte_identical": false,
+      "normalization": "One terminal LF appended; removing that LF reproduces the upstream blob hash."
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+diff --git a/patches/settings_ext.c b/patches/settings_ext.c
+index 36eb96f..0000000 100644
+--- a/patches/settings_ext.c
++++ b/patches/settings_ext.c
+@@ -28,0 +29 @@
++//   rle        -> packed 4bpp RLE frames (mode 6)
+@@ -30,0 +32 @@
++//   canvas480  -> 576x480 virtual 4bpp canvas with a pannable 576x288 viewport
+@@ -37 +39 @@ int settings_send_wrapper(int type, int sid, unsigned char *buf, unsigned len) {
+-        static const char caps[] = "EVENCFW/1 img576 imgz xordelta stereo";
++        static const char caps[] = "EVENCFW/4 img576 imgz rle xordelta stereo canvas480";
+diff --git a/patches/zlib_glue.c b/patches/zlib_glue.c
+index 2eaebf1..0000000 100644
+--- a/patches/zlib_glue.c
++++ b/patches/zlib_glue.c
+@@ -71,0 +72,8 @@
++ *   10          -> virtual 576x480 canvas behind the physical 576x288 viewport:
++ *                                [10][0][viewportY16][576u16][480u16][zlib(rle4)]
++ *                                      atomically replaces the virtual canvas and presents
++ *                                      rows viewportY...(viewportY+287).
++ *                                [10][1][viewportY16]
++ *                                      pans the existing canvas without retransmitting pixels.
++ *                                [10][2]
++ *                                      releases the CFW-owned virtual canvas.
+@@ -148,0 +157,6 @@ typedef int  (*complete_emit_fn)(uint32_t id, void *hdr, int kind, uint32_t p4); /* completion emit */
++#define CFW_CANVAS480_WIDTH 576u
++#define CFW_CANVAS480_HEIGHT 480u
++#define CFW_CANVAS480_VIEWPORT_HEIGHT 288u
++#define CFW_CANVAS480_STRIDE (CFW_CANVAS480_WIDTH / 2u)
++#define CFW_CANVAS480_BYTES (CFW_CANVAS480_STRIDE * CFW_CANVAS480_HEIGHT)
++
+@@ -276,0 +291,6 @@ typedef struct {
++    /* 576x480 virtual image canvas. The stock panel/LVGL pipeline remains 576x288;
++     * mode 10 copies one clamped 288-row viewport into the normal display buffer. */
++    uint8_t *canvas480;
++    uint8_t *canvas480_state;
++    uint16_t canvas480_y;
++    uint8_t canvas480_valid;
+@@ -350,0 +371,2 @@ static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen,
++static int canvas480_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen,
++                              int present);
+@@ -523,0 +546,3 @@ static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen,
++    if (mode == 10)
++        return canvas480_dispatch(state, src, srclen, present);
++
+@@ -778,0 +804,82 @@ static void present_shadow(uint8_t *state, uint32_t w, uint32_t h, cfw_rectlist *rl) {
++/* Mode 10 keeps the proven stock scanout geometry and owns only a packed 4bpp virtual
++ * backing store. A keyframe is decoded into a fresh allocation and swapped in only after
++ * complete zlib/RLE validation, so malformed or truncated traffic leaves the prior frame
++ * intact. The 576x288 image container's existing 8bpp buffer remains the sole LVGL source. */
++static int canvas480_present(uint8_t *state, customCfwContext *ctx) {
++    if (ctx == 0 || !ctx->canvas480_valid || ctx->canvas480 == 0) return -1;
++    if (ctx->canvas480_state != state) return -1;
++    uint32_t w = *(uint16_t *)(state + 0x40);
++    uint32_t h = *(uint16_t *)(state + 0x42);
++    if (w != CFW_CANVAS480_WIDTH || h != CFW_CANVAS480_VIEWPORT_HEIGHT) return -1;
++    if ((uint32_t)ctx->canvas480_y + h > CFW_CANVAS480_HEIGHT) return -1;
++    uint8_t *disp = *(uint8_t **)(state + 0x8);
++    if (disp == 0) return -1;
++    const uint8_t *visible = ctx->canvas480
++        + (uint32_t)ctx->canvas480_y * CFW_CANVAS480_STRIDE;
++    unpack4bpp(disp, w, visible, w, h, CFW_CANVAS480_STRIDE, 0);
++    push_display(state, disp, w, h);
++    return 0;
++}
++
++static int canvas480_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen,
++                              int present) {
++    if (!present || srclen < 2) return -1;
++    customCfwContext *ctx = getCustomCfwContext();
++    if (ctx == 0) return -1;
++    uint8_t sub = src[1];
++
++    if (sub == 2) {
++        if (srclen != 2) return -1;
++        if (ctx->canvas480) FW_FREE(ctx->canvas480);
++        ctx->canvas480 = 0;
++        ctx->canvas480_state = 0;
++        ctx->canvas480_y = 0;
++        ctx->canvas480_valid = 0;
++        return 0;
++    }
++
++    if (sub == 1) {
++        if (srclen != 4 || !ctx->canvas480_valid || ctx->canvas480_state != state) return -1;
++        uint32_t top = rd16(src + 2);
++        if (top > CFW_CANVAS480_HEIGHT - CFW_CANVAS480_VIEWPORT_HEIGHT) return -1;
++        ctx->canvas480_y = (uint16_t)top;
++        return canvas480_present(state, ctx);
++    }
++
++    if (sub != 0 || srclen < 14) return -1;  /* 8-byte header + minimum zlib stream */
++    uint32_t top = rd16(src + 2);
++    uint32_t virtual_w = rd16(src + 4);
++    uint32_t virtual_h = rd16(src + 6);
++    if (virtual_w != CFW_CANVAS480_WIDTH || virtual_h != CFW_CANVAS480_HEIGHT ||
++        top > CFW_CANVAS480_HEIGHT - CFW_CANVAS480_VIEWPORT_HEIGHT)
++        return -1;
++    if (*(uint16_t *)(state + 0x40) != CFW_CANVAS480_WIDTH ||
++        *(uint16_t *)(state + 0x42) != CFW_CANVAS480_VIEWPORT_HEIGHT)
++        return -1;
++
++    uint8_t *candidate = (uint8_t *)FW_MALLOC(CFW_CANVAS480_BYTES);
++    if (candidate == 0) return -1;
++    uint8_t strm[ZS_SIZE];
++    for (uint32_t i = 0; i < ZS_SIZE; i++) strm[i] = 0;
++    *(const uint8_t **)(strm + ZS_NEXT_IN) = src + 8;
++    *(uint32_t *)(strm + ZS_AVAIL_IN) = srclen - 8;
++    *(uint32_t *)(strm + ZS_ZALLOC) = (uint32_t)(uintptr_t)&zwrap_alloc;
++    *(uint32_t *)(strm + ZS_ZFREE) = (uint32_t)(uintptr_t)&zwrap_free;
++    *(uint32_t *)(strm + ZS_OPAQUE) = 0;
++    if (!inflate_rle(
++            strm, candidate, CFW_CANVAS480_STRIDE,
++            CFW_CANVAS480_STRIDE, CFW_CANVAS480_HEIGHT) ||
++        *(uint32_t *)(strm + ZS_AVAIL_IN) != 0) {
++        FW_FREE(candidate);
++        return -1;
++    }
++
++    uint8_t *previous = ctx->canvas480;
++    ctx->canvas480 = candidate;
++    ctx->canvas480_state = state;
++    ctx->canvas480_y = (uint16_t)top;
++    ctx->canvas480_valid = 1;
++    if (previous) FW_FREE(previous);
++    return canvas480_present(state, ctx);
++}
++

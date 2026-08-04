@@ -1,0 +1,9 @@
+# Preserve the authenticated upstream files byte-for-byte.
+lz4.c -text -whitespace
+lz4.h -text -whitespace
+LICENSE -text -whitespace
+
+# Keep openCFW-owned metadata and verification tooling LF-terminated.
+PROVENANCE.json text eol=lf
+README.openCFW.md text eol=lf
+verify_snapshot.py text eol=lf

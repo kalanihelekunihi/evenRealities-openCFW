@@ -1,0 +1,1745 @@
+{
+  "schema_version": 1,
+  "name": "bootloader_core_overlay",
+  "target": "apollo_bootloader",
+  "firmware_version": "2.2.6.10",
+  "run_base": 4259840,
+  "partition_end_exclusive": 4423680,
+  "preamble_bytes": 0,
+  "alignment": 4,
+  "padding_byte": 0,
+  "base": {
+    "path": "blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+    "size": 148599,
+    "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+  },
+  "sources": [
+    {
+      "path": "components/bootloader/core_overlay/runtime_littlefs_scmp.c",
+      "sha256": "17e54399716e18799a5601f73e06f032b427f8621c0f6ba8ce1cb40007ee8330",
+      "license": "BSD-3-Clause",
+      "origin": "bounded freestanding port of the exact littlefs v2.10.1 private unsigned-wrap sequence comparator",
+      "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs_util.h",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "evidence": "docs/research/littlefs-scmp-source-boundary-audit.md"
+    },
+    {
+      "path": "components/bootloader/core_overlay/runtime_littlefs_alloc_ckpoint.c",
+      "sha256": "16acfce3da9211512631113cb717abd012a0d551ceed36c57b4af300c21e7395",
+      "license": "BSD-3-Clause",
+      "origin": "bounded freestanding port of the exact littlefs v2.10.1 private allocator checkpoint leaf using the recovered 32-bit lfs_t ABI",
+      "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "evidence": "docs/research/littlefs-alloc-ckpoint-source-boundary-audit.md"
+    },
+    {
+      "path": "components/bootloader/core_overlay/runtime_littlefs_alloc_drop.c",
+      "sha256": "38904bccaac4ef0fd39ad49374f287023e5f03d9b28dc0957d70f460ddfc07ee",
+      "license": "BSD-3-Clause",
+      "origin": "bounded freestanding port of exact littlefs v2.10.1 lfs_alloc_drop with source-local allocator checkpoint semantics",
+      "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "evidence": "docs/research/littlefs-alloc-drop-source-boundary-audit.md"
+    },
+    {
+      "path": "components/apollo_main/core_overlay/runtime_littlefs_disk_version.c",
+      "sha256": "736a87363e5e009cb29f338c3245c22c02df375e275207f3c6e107b456c26d00",
+      "license": "BSD-3-Clause",
+      "origin": "shared bounded freestanding port of exact littlefs v2.10.1 lfs_fs_disk_version with a source-local LFS_DISK_VERSION constant",
+      "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "evidence": "docs/research/littlefs-disk-version-source-boundary-audit.md"
+    },
+    {
+      "path": "components/apollo_main/core_overlay/runtime_littlefs_mlist_append.c",
+      "sha256": "e5423adbe01a734a67944b577bbd543a950aefecccd14708bec5e951c58a2f8b",
+      "license": "BSD-3-Clause",
+      "origin": "shared bounded freestanding port of exact littlefs v2.10.1 lfs_mlist_append using the recovered lfs_t mlist ABI",
+      "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "evidence": "docs/research/littlefs-mlist-append-source-boundary-audit.md"
+    },
+    {
+      "path": "components/apollo_main/core_overlay/runtime_littlefs_mlist_remove.c",
+      "sha256": "be21546c80eaec4d8ad738ea6875bb6760fae7a873105658bd94a2a751b0bd7d",
+      "license": "BSD-3-Clause",
+      "origin": "shared bounded freestanding port of exact littlefs v2.10.1 lfs_mlist_remove using the recovered lfs_t mlist ABI",
+      "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "evidence": "docs/research/littlefs-mlist-remove-source-boundary-audit.md"
+    },
+    {
+      "path": "components/apollo_main/core_overlay/runtime_littlefs_util.c",
+      "sha256": "2730d0f39e02d7b6e07396894b796b26d9f73332deff23a685b5a06da0f7fb22",
+      "license": "BSD-3-Clause",
+      "origin": "shared bounded freestanding port of exact littlefs v2.10.1 lfs_max, lfs_min, lfs_aligndown, and lfs_alignup utility leaves",
+      "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs_util.h",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+    },
+    {
+      "path": "components/apollo_main/core_overlay/runtime_littlefs_util_bitops.c",
+      "sha256": "405092c6e8fc65a740f951cb2affaad8766e2553c7b8d290ff58f435e8830f47",
+      "license": "BSD-3-Clause",
+      "origin": "shared bounded freestanding port of the exact littlefs v2.10.1 LFS_NO_INTRINSICS lfs_npw2, lfs_ctz, and lfs_popc fallback cluster",
+      "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs_util.h",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+    }
+  ],
+  "isolated_leaves": [
+    {
+      "function": "am_hal_mspi_interrupt_clear",
+      "source": {
+        "path": "third_party/ambiqsuite-apollo510/mcu/apollo510/hal/mcu/am_hal_mspi.c",
+        "sha256": "5a91ab0c67bda4bd61c7d436b94b5a7c81693b948a331d282ae10e88cc5bf85f",
+        "license": "BSD-3-Clause",
+        "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Wno-unused-function",
+          "-Wno-sign-compare",
+          "-Wno-unused-parameter"
+        ],
+        "include_dirs": [
+          "third_party/ambiqsuite-apollo510/mcu/apollo510",
+          "third_party/ambiqsuite-apollo510/mcu/apollo510/hal",
+          "third_party/ambiqsuite-apollo510/CMSIS/AmbiqMicro/Include",
+          "third_party/cmsis-core/CMSIS/Core/Include"
+        ]
+      },
+      "expected": {
+        "size": 48,
+        "sha256": "87505e035fa5fe7c0dfd7c4d85b66c6b8f3b57ced45dc7afd787db6c52b0fd7b"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_mlist_isopen",
+      "source": {
+        "path": "components/apollo_main/core_overlay/runtime_littlefs_mlist_isopen.c",
+        "sha256": "7d0bc398c8ecd85fd00b34cc6dcc2b9fc75c754e1aed0bfbca01dd58ae9d6e0c",
+        "license": "BSD-3-Clause",
+        "origin": "shared bounded freestanding port of exact littlefs v2.10.1 lfs_mlist_isopen using the recovered zero-offset list linkage and 32-bit G2 boolean return ABI",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 18,
+        "sha256": "9b7caac591f8aea5d0eff0dc2b5ff7ff15ba85ab156ba5f95d47b1e4181db489"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_util_fromle32",
+      "source": {
+        "path": "components/apollo_main/core_overlay/runtime_littlefs_util_endian.c",
+        "sha256": "830d49b043181d270ac0aedda432c5e232ce8d6ce65e8e537b80b1a706fd6cac",
+        "license": "BSD-3-Clause",
+        "origin": "shared bounded freestanding port of exact littlefs v2.10.1 32-bit endian conversion leaves with the reviewed Apollo510 little-endian selection",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs_util.h",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 2,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_util_tole32",
+      "source": {
+        "path": "components/apollo_main/core_overlay/runtime_littlefs_util_endian.c",
+        "sha256": "830d49b043181d270ac0aedda432c5e232ce8d6ce65e8e537b80b1a706fd6cac",
+        "license": "BSD-3-Clause",
+        "origin": "shared bounded freestanding port of exact littlefs v2.10.1 32-bit endian conversion leaves with the reviewed Apollo510 little-endian selection",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs_util.h",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 2,
+        "sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_util_frombe32",
+      "source": {
+        "path": "components/apollo_main/core_overlay/runtime_littlefs_util_endian.c",
+        "sha256": "830d49b043181d270ac0aedda432c5e232ce8d6ce65e8e537b80b1a706fd6cac",
+        "license": "BSD-3-Clause",
+        "origin": "shared bounded freestanding port of exact littlefs v2.10.1 32-bit endian conversion leaves with the reviewed Apollo510 little-endian selection",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs_util.h",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 4,
+        "sha256": "7a8f0cc1ae130c65908d3dbd4e89f7c7bd898743a4ee62deced9203383df3d11"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_util_tobe32",
+      "source": {
+        "path": "components/apollo_main/core_overlay/runtime_littlefs_util_endian.c",
+        "sha256": "830d49b043181d270ac0aedda432c5e232ce8d6ce65e8e537b80b1a706fd6cac",
+        "license": "BSD-3-Clause",
+        "origin": "shared bounded freestanding port of exact littlefs v2.10.1 32-bit endian conversion leaves with the reviewed Apollo510 little-endian selection",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs_util.h",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 4,
+        "sha256": "7a8f0cc1ae130c65908d3dbd4e89f7c7bd898743a4ee62deced9203383df3d11"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    }
+  ],
+  "relocated_leaves": [
+    {
+      "function": "open_cfw_littlefs_disk_version_major",
+      "source": {
+        "path": "components/apollo_main/core_overlay/runtime_littlefs_disk_version_parts.c",
+        "size": 1734,
+        "sha256": "920d03e80c9d16a1d0b4299f8151eefe4d9f3ac1ba89c2d40bcc5830335eb5a7",
+        "license": "BSD-3-Clause",
+        "origin": "shared bounded freestanding port of exact littlefs v2.10.1 lfs_fs_disk_version_major closed over the existing source-owned disk-version provider",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 10,
+        "sha256": "15251b134de5617995984b9d8140d6fb88dca904ef8ef72e480b99f3c0250b2a",
+        "alignment": 2,
+        "offset": 282,
+        "unrelocated_sha256": "ebb72edfdb508cbf5b617452eb60cbceb58bfdfc879dcece076544efa75c092f"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_littlefs_disk_version",
+          "target_function": "open_cfw_littlefs_disk_version"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_disk_version_minor",
+      "source": {
+        "path": "components/apollo_main/core_overlay/runtime_littlefs_disk_version_parts.c",
+        "size": 1734,
+        "sha256": "920d03e80c9d16a1d0b4299f8151eefe4d9f3ac1ba89c2d40bcc5830335eb5a7",
+        "license": "BSD-3-Clause",
+        "origin": "shared bounded freestanding port of exact littlefs v2.10.1 lfs_fs_disk_version_minor closed over the existing source-owned disk-version provider",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 10,
+        "sha256": "685d7f3e70053272d9a3920aaf7867d0a84e8adb402bbccd4ef3afc76195b2b7",
+        "alignment": 2,
+        "offset": 292,
+        "unrelocated_sha256": "da349b05b3a26d6a22ba3f707c4c21e1591915aeb8451e21f7509905926a4b9d"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_littlefs_disk_version",
+          "target_function": "open_cfw_littlefs_disk_version"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_alloc_lookahead",
+      "source": {
+        "path": "components/apollo_main/core_overlay/runtime_littlefs_alloc_lookahead.c",
+        "size": 5445,
+        "sha256": "44ab9037747a4cb209404423d52cf817b035cbab5177a8c0cb05090df4b68491",
+        "license": "BSD-3-Clause",
+        "origin": "shared bounded freestanding port of exact littlefs v2.10.1 lfs_alloc_lookahead using the recovered G2 lfs_t layout",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "docs/research/littlefs-next-closed-leaves-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 48,
+        "sha256": "bd8e7c926d98a940f215cd41a2fb5932bfbf1abcf7378839dcadd537ae55324d",
+        "alignment": 2,
+        "offset": 302,
+        "unrelocated_sha256": "bd8e7c926d98a940f215cd41a2fb5932bfbf1abcf7378839dcadd537ae55324d"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 48,
+            "sha256": "d04a19944d648e24cdd60770d4b6f4619b07e258268f0d1f6cf2d65a106b14b7",
+            "alignment": 2,
+            "offset": 302,
+            "unrelocated_sha256": "d04a19944d648e24cdd60770d4b6f4619b07e258268f0d1f6cf2d65a106b14b7"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "function": "open_cfw_easylogger_helpers_get_logger",
+      "source": {
+        "path": "components/shared/easylogger/runtime_easylogger_helper_seams.c",
+        "size": 7068,
+        "sha256": "78dc5aa9a7eb4f072b3169ae1837855007f25e1adccec7deaefecc486c8f0823",
+        "license": "MIT",
+        "origin": "bootloader image seam binding the shared authenticated EasyLogger helper quartet to the recovered logger object",
+        "upstream": "third_party/easylogger/src/elog.c",
+        "upstream_commit": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+        "evidence": "docs/research/easylogger-boot-port-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_PROFILE=OPEN_CFW_EASYLOGGER_HELPERS_PROFILE_BOOTLOADER",
+          "-DOPEN_CFW_EASYLOGGER_HELPER_SEAMS_BUILD_LEAF",
+          "-DOPEN_CFW_EASYLOGGER_HELPER_SEAMS_LEAF_GET_LOGGER"
+        ]
+      },
+      "expected": {
+        "size": 8,
+        "sha256": "3f32a69299002872bb9364f79744be1311bcb8bce47f24f43558806931990064",
+        "alignment": 4,
+        "offset": 352,
+        "unrelocated_sha256": "3f32a69299002872bb9364f79744be1311bcb8bce47f24f43558806931990064"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_easylogger_helpers_assert_failed",
+      "source": {
+        "path": "components/shared/easylogger/runtime_easylogger_helper_seams.c",
+        "size": 7068,
+        "sha256": "78dc5aa9a7eb4f072b3169ae1837855007f25e1adccec7deaefecc486c8f0823",
+        "license": "MIT",
+        "origin": "bootloader image seam preserving the recovered EasyLogger assertion hook, diagnostic, and wait policy",
+        "upstream": "third_party/easylogger/src/elog.c",
+        "upstream_commit": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+        "evidence": "docs/research/easylogger-boot-port-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_PROFILE=OPEN_CFW_EASYLOGGER_HELPERS_PROFILE_BOOTLOADER",
+          "-DOPEN_CFW_EASYLOGGER_HELPER_SEAMS_BUILD_LEAF",
+          "-DOPEN_CFW_EASYLOGGER_HELPER_SEAMS_LEAF_ASSERT_FAILED"
+        ]
+      },
+      "expected": {
+        "size": 132,
+        "sha256": "f57622ddc7fdbe8555760ca15bf049b8fb68abfb3203aa290500e22bbbf82b7a",
+        "alignment": 4,
+        "offset": 360,
+        "unrelocated_sha256": "f57622ddc7fdbe8555760ca15bf049b8fb68abfb3203aa290500e22bbbf82b7a"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 132,
+            "sha256": "d63e8db04653bde027cbf1ac2577fdfd9a19b69ce46cf4f4a01b6b2c5e918213",
+            "alignment": 4,
+            "offset": 360,
+            "unrelocated_sha256": "d63e8db04653bde027cbf1ac2577fdfd9a19b69ce46cf4f4a01b6b2c5e918213"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "function": "open_cfw_easylogger_get_fmt_enabled",
+      "source": {
+        "path": "components/shared/easylogger/runtime_easylogger_helpers.c",
+        "size": 4975,
+        "sha256": "8f2850f789fba3b08bdc3e1fa8f3a4646aaef7e4b16862f3be53478071aa22b5",
+        "license": "MIT",
+        "origin": "shared source-equivalent adaptation of authenticated EasyLogger get_fmt_enabled with the recovered G2 ABI",
+        "upstream": "third_party/easylogger/src/elog.c",
+        "upstream_commit": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+        "evidence": "docs/research/easylogger-boot-port-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_PROFILE=OPEN_CFW_EASYLOGGER_HELPERS_PROFILE_BOOTLOADER",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_BUILD_LEAF",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_LEAF_GET_FMT_ENABLED"
+        ]
+      },
+      "expected": {
+        "size": 38,
+        "sha256": "8d2909984779762c0abf28369b018b99b4b30f8d23391fe8670e57f43a166697",
+        "alignment": 2,
+        "offset": 492,
+        "unrelocated_sha256": "563bc931557c5aae324ecfb98dbc4aa2342c43c90163d462bea5e215c0de6390"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_easylogger_helpers_assert_failed",
+          "target_function": "open_cfw_easylogger_helpers_assert_failed"
+        },
+        {
+          "offset": 18,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_easylogger_helpers_get_logger",
+          "target_function": "open_cfw_easylogger_helpers_get_logger"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_easylogger_get_fmt_used_and_enabled_u32",
+      "source": {
+        "path": "components/shared/easylogger/runtime_easylogger_helpers.c",
+        "size": 4975,
+        "sha256": "8f2850f789fba3b08bdc3e1fa8f3a4646aaef7e4b16862f3be53478071aa22b5",
+        "license": "MIT",
+        "origin": "shared source-equivalent adaptation of authenticated EasyLogger argument-aware line predicate",
+        "upstream": "third_party/easylogger/src/elog.c",
+        "upstream_commit": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+        "evidence": "docs/research/easylogger-boot-port-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_PROFILE=OPEN_CFW_EASYLOGGER_HELPERS_PROFILE_BOOTLOADER",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_BUILD_LEAF",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_LEAF_GET_FMT_USED_AND_ENABLED_U32"
+        ]
+      },
+      "expected": {
+        "size": 20,
+        "sha256": "7663e51e49d8c5099f140e85a2f898c64083a0f02d1574db69294745ee8e5a93",
+        "alignment": 2,
+        "offset": 530,
+        "unrelocated_sha256": "3e6f46ecf152d9192ec638cd0eafa92f9c8adcfe7b36e8581add1a865234629a"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_easylogger_get_fmt_enabled",
+          "target_function": "open_cfw_easylogger_get_fmt_enabled"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_easylogger_get_fmt_used_and_enabled_ptr",
+      "source": {
+        "path": "components/shared/easylogger/runtime_easylogger_helpers.c",
+        "size": 4975,
+        "sha256": "8f2850f789fba3b08bdc3e1fa8f3a4646aaef7e4b16862f3be53478071aa22b5",
+        "license": "MIT",
+        "origin": "shared source-equivalent adaptation of authenticated EasyLogger argument-aware pointer predicate",
+        "upstream": "third_party/easylogger/src/elog.c",
+        "upstream_commit": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+        "evidence": "docs/research/easylogger-boot-port-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_PROFILE=OPEN_CFW_EASYLOGGER_HELPERS_PROFILE_BOOTLOADER",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_BUILD_LEAF",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_LEAF_GET_FMT_USED_AND_ENABLED_PTR"
+        ]
+      },
+      "expected": {
+        "size": 20,
+        "sha256": "b5f581ef33404949889812a73244d6b5c7807ad5707074228a188df7d89ad898",
+        "alignment": 2,
+        "offset": 550,
+        "unrelocated_sha256": "3e6f46ecf152d9192ec638cd0eafa92f9c8adcfe7b36e8581add1a865234629a"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_easylogger_get_fmt_enabled",
+          "target_function": "open_cfw_easylogger_get_fmt_enabled"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_easylogger_strcpy",
+      "source": {
+        "path": "components/shared/easylogger/runtime_easylogger_helpers.c",
+        "size": 4975,
+        "sha256": "8f2850f789fba3b08bdc3e1fa8f3a4646aaef7e4b16862f3be53478071aa22b5",
+        "license": "MIT",
+        "origin": "shared source-equivalent adaptation of authenticated EasyLogger bounded append helper",
+        "upstream": "third_party/easylogger/src/elog_utils.c",
+        "upstream_commit": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+        "evidence": "docs/research/easylogger-boot-port-audit.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_PROFILE=OPEN_CFW_EASYLOGGER_HELPERS_PROFILE_BOOTLOADER",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_BUILD_LEAF",
+          "-DOPEN_CFW_EASYLOGGER_HELPERS_LEAF_STRCPY"
+        ]
+      },
+      "expected": {
+        "size": 52,
+        "sha256": "d19a927665be77d79bd2df6a64575431db8962aa023f0546f5c3fe5f47805752",
+        "alignment": 2,
+        "offset": 570,
+        "unrelocated_sha256": "1fac8de3a83876460e17014da0f845384b253a88d5b79e25f6e5e838e6f46013"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_easylogger_helpers_assert_failed",
+          "target_function": "open_cfw_easylogger_helpers_assert_failed"
+        },
+        {
+          "offset": 20,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_easylogger_helpers_assert_failed",
+          "target_function": "open_cfw_easylogger_helpers_assert_failed"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_tag_chunk",
+      "source": {
+        "path": "components/shared/littlefs/runtime_littlefs_tag_chunk.c",
+        "size": 773,
+        "sha256": "71851bd05e26e703b8697b9994b556db46511c37e9500da98e3406b37a92c8da",
+        "license": "BSD-3-Clause",
+        "origin": "shared altered production adaptation of authenticated littlefs v2.10.1 lfs_tag_chunk using the recovered 32-bit lfs_tag_t ABI",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "third_party/littlefs/PROVENANCE.json"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 6,
+        "sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74",
+        "alignment": 2,
+        "offset": 622,
+        "unrelocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_tag_isvalid",
+      "source": {
+        "path": "components/shared/littlefs/runtime_littlefs_tag_isvalid.c",
+        "size": 848,
+        "sha256": "a91417d6193cdfb9589cd9e62f9b6eebe65e1e11a75ca36d0f42d85c36d907a2",
+        "license": "BSD-3-Clause",
+        "origin": "shared altered production adaptation of authenticated littlefs v2.10.1 lfs_tag_isvalid using the recovered 32-bit lfs_tag_t and boolean ABI",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "third_party/littlefs/PROVENANCE.json"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 6,
+        "sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e",
+        "alignment": 2,
+        "offset": 628,
+        "unrelocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_tag_type1",
+      "source": {
+        "path": "components/shared/littlefs/runtime_littlefs_tag_type1.c",
+        "size": 857,
+        "sha256": "7c0df44bd2ebce1eae4cacbfa174c0f963dd03dcc5719ab386c0400201357b46",
+        "license": "BSD-3-Clause",
+        "origin": "shared altered production adaptation of authenticated littlefs v2.10.1 lfs_tag_type1 using the recovered 32-bit lfs_tag_t ABI",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "third_party/littlefs/PROVENANCE.json"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 10,
+        "sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf",
+        "alignment": 2,
+        "offset": 634,
+        "unrelocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_tag_type3",
+      "source": {
+        "path": "components/shared/littlefs/runtime_littlefs_tag_type3.c",
+        "size": 857,
+        "sha256": "6940b4ac0622dc1f2b84a0c663dc1522dfc7b198f59d6f452828adfd299e37c8",
+        "license": "BSD-3-Clause",
+        "origin": "shared altered production adaptation of authenticated littlefs v2.10.1 lfs_tag_type3 using the recovered 32-bit lfs_tag_t ABI",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "third_party/littlefs/PROVENANCE.json"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 6,
+        "sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921",
+        "alignment": 2,
+        "offset": 644,
+        "unrelocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_tag_id",
+      "source": {
+        "path": "components/shared/littlefs/runtime_littlefs_tag_id.c",
+        "size": 845,
+        "sha256": "5b6c3ce0f4236d6c6bc0a12891e41929e9034a7ddc2f68bd4f6a1d5d4fa07638",
+        "license": "BSD-3-Clause",
+        "origin": "shared altered production adaptation of authenticated littlefs v2.10.1 lfs_tag_id using the recovered 32-bit lfs_tag_t ABI",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "third_party/littlefs/PROVENANCE.json"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 6,
+        "sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c",
+        "alignment": 2,
+        "offset": 650,
+        "unrelocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_littlefs_tag_size",
+      "source": {
+        "path": "components/shared/littlefs/runtime_littlefs_tag_size.c",
+        "size": 854,
+        "sha256": "533bbfcbfc2440e02b79692a2a7ccff87c3cb62cbb0788c1d5bf806fd3bca849",
+        "license": "BSD-3-Clause",
+        "origin": "shared altered production adaptation of authenticated littlefs v2.10.1 lfs_tag_size using the recovered 32-bit lfs_tag_t ABI",
+        "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.c",
+        "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+        "evidence": "third_party/littlefs/PROVENANCE.json"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 6,
+        "sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54",
+        "alignment": 2,
+        "offset": 656,
+        "unrelocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    }
+  ],
+  "toolchain": {
+    "target": "arm-none-eabi",
+    "reviewed_version_prefix": "Apple clang version 21.0.0",
+    "flags": [
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-Oz",
+      "-ffreestanding",
+      "-fno-jump-tables",
+      "-fomit-frame-pointer",
+      "-fno-builtin",
+      "-mno-unaligned-access",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fropi",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ]
+  },
+  "functions": {
+    "open_cfw_littlefs_scmp": {
+      "expected_offset": 0,
+      "expected_size": 4
+    },
+    "open_cfw_littlefs_alloc_ckpoint": {
+      "expected_offset": 4,
+      "expected_size": 6
+    },
+    "open_cfw_littlefs_alloc_drop": {
+      "expected_offset": 10,
+      "expected_size": 12
+    },
+    "open_cfw_littlefs_disk_version": {
+      "expected_offset": 24,
+      "expected_size": 8
+    },
+    "open_cfw_littlefs_mlist_append": {
+      "expected_offset": 32,
+      "expected_size": 8
+    },
+    "open_cfw_littlefs_mlist_remove": {
+      "expected_offset": 40,
+      "expected_size": 18
+    },
+    "open_cfw_littlefs_util_max": {
+      "expected_offset": 58,
+      "expected_size": 8
+    },
+    "open_cfw_littlefs_util_min": {
+      "expected_offset": 66,
+      "expected_size": 8
+    },
+    "open_cfw_littlefs_util_aligndown": {
+      "expected_offset": 74,
+      "expected_size": 8
+    },
+    "open_cfw_littlefs_util_alignup": {
+      "expected_offset": 82,
+      "expected_size": 8
+    },
+    "open_cfw_littlefs_util_npw2": {
+      "expected_offset": 90,
+      "expected_size": 56
+    },
+    "open_cfw_littlefs_util_ctz": {
+      "expected_offset": 146,
+      "expected_size": 16
+    },
+    "open_cfw_littlefs_util_popc": {
+      "expected_offset": 162,
+      "expected_size": 42
+    },
+    "am_hal_mspi_interrupt_clear": {
+      "expected_offset": 204,
+      "expected_size": 48
+    },
+    "open_cfw_littlefs_mlist_isopen": {
+      "expected_offset": 252,
+      "expected_size": 18
+    },
+    "open_cfw_littlefs_util_fromle32": {
+      "expected_offset": 270,
+      "expected_size": 2
+    },
+    "open_cfw_littlefs_util_tole32": {
+      "expected_offset": 272,
+      "expected_size": 2
+    },
+    "open_cfw_littlefs_util_frombe32": {
+      "expected_offset": 274,
+      "expected_size": 4
+    },
+    "open_cfw_littlefs_util_tobe32": {
+      "expected_offset": 278,
+      "expected_size": 4
+    },
+    "open_cfw_littlefs_disk_version_major": {
+      "expected_offset": 282,
+      "expected_size": 10
+    },
+    "open_cfw_littlefs_disk_version_minor": {
+      "expected_offset": 292,
+      "expected_size": 10
+    },
+    "open_cfw_littlefs_alloc_lookahead": {
+      "expected_offset": 302,
+      "expected_size": 48
+    },
+    "open_cfw_easylogger_helpers_get_logger": {
+      "expected_offset": 352,
+      "expected_size": 8
+    },
+    "open_cfw_easylogger_helpers_assert_failed": {
+      "expected_offset": 360,
+      "expected_size": 132
+    },
+    "open_cfw_easylogger_get_fmt_enabled": {
+      "expected_offset": 492,
+      "expected_size": 38
+    },
+    "open_cfw_easylogger_get_fmt_used_and_enabled_u32": {
+      "expected_offset": 530,
+      "expected_size": 20
+    },
+    "open_cfw_easylogger_get_fmt_used_and_enabled_ptr": {
+      "expected_offset": 550,
+      "expected_size": 20
+    },
+    "open_cfw_easylogger_strcpy": {
+      "expected_offset": 570,
+      "expected_size": 52
+    },
+    "open_cfw_littlefs_tag_chunk": {
+      "expected_offset": 622,
+      "expected_size": 6
+    },
+    "open_cfw_littlefs_tag_isvalid": {
+      "expected_offset": 628,
+      "expected_size": 6
+    },
+    "open_cfw_littlefs_tag_type1": {
+      "expected_offset": 634,
+      "expected_size": 10
+    },
+    "open_cfw_littlefs_tag_type3": {
+      "expected_offset": 644,
+      "expected_size": 6
+    },
+    "open_cfw_littlefs_tag_id": {
+      "expected_offset": 650,
+      "expected_size": 6
+    },
+    "open_cfw_littlefs_tag_size": {
+      "expected_offset": 656,
+      "expected_size": 6
+    }
+  },
+  "placement": {
+    "strategy": "fixed_aligned_after_authenticated_stock_eof",
+    "runtime_address": 4408440
+  },
+  "patch_sites": [
+    {
+      "name": "replace_littlefs_scmp",
+      "runtime_address": 4261050,
+      "expected_size": 4,
+      "expected_sha256": "787fad2973d1b4f1c6c585f29ee07707e6951499c3772a9e8e4e1bc997ba94fe",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_scmp"
+    },
+    {
+      "name": "replace_littlefs_tag_chunk",
+      "runtime_address": 4262824,
+      "expected_size": 6,
+      "expected_sha256": "63fc572597119c756fa5d4ee0904c8c34dfa545495b77bba02e2ff3298ce23ae",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_tag_chunk"
+    },
+    {
+      "name": "replace_littlefs_tag_isvalid",
+      "runtime_address": 4262770,
+      "expected_size": 10,
+      "expected_sha256": "0249b2c9c987097c7c0e628917a7dd6b67d4d1ee24f64339a7e0dd11977e4c9e",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_tag_isvalid"
+    },
+    {
+      "name": "replace_littlefs_tag_type1",
+      "runtime_address": 4262800,
+      "expected_size": 8,
+      "expected_sha256": "fc26e04a6784b91dc07f170f8a3bd23096f7caa92c15430a179edf215b509fdd",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_tag_type1"
+    },
+    {
+      "name": "replace_littlefs_tag_type3",
+      "runtime_address": 4262816,
+      "expected_size": 8,
+      "expected_sha256": "818012c47ba81ee18e2996d51a8a29a96a78ced50854b6fefcebf92e7b9ed9d6",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_tag_type3"
+    },
+    {
+      "name": "replace_littlefs_tag_id",
+      "runtime_address": 4262840,
+      "expected_size": 8,
+      "expected_sha256": "0843abb3e9ef39afac8e69ae1e181efa0b5b5c8ebf53e20844b53fdf245b1036",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_tag_id"
+    },
+    {
+      "name": "replace_littlefs_tag_size",
+      "runtime_address": 4262848,
+      "expected_size": 6,
+      "expected_sha256": "8596106584e598a657aea7fdd2e1156a748158d2d63d9c121c92587fabbdf8ca",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_tag_size"
+    },
+    {
+      "name": "replace_littlefs_util_fromle32",
+      "runtime_address": 4261054,
+      "expected_size": 34,
+      "expected_sha256": "0666243f83f942c21b4428e4027b6f7815771c2f8a51dcddc550ffa9710add76",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_fromle32"
+    },
+    {
+      "name": "replace_littlefs_util_tole32",
+      "runtime_address": 4261088,
+      "expected_size": 8,
+      "expected_sha256": "b217ac730c7d1b392e0f57a67477d6db88a751a8d3afb3a50ff5bebe0e273f66",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_tole32"
+    },
+    {
+      "name": "replace_littlefs_util_frombe32",
+      "runtime_address": 4261096,
+      "expected_size": 34,
+      "expected_sha256": "a0fc2d34d780abf4de23efe08746eefee5cb84cae2728950c4123464e0f952c9",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_frombe32"
+    },
+    {
+      "name": "replace_littlefs_util_tobe32",
+      "runtime_address": 4261130,
+      "expected_size": 8,
+      "expected_sha256": "b217ac730c7d1b392e0f57a67477d6db88a751a8d3afb3a50ff5bebe0e273f66",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_tobe32"
+    },
+    {
+      "name": "replace_littlefs_util_npw2",
+      "runtime_address": 4260904,
+      "expected_size": 90,
+      "expected_sha256": "291ab0ccd15efe1085ce5bcdc6551581ed4eccf67fa84f6560c4500fd68b8b63",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_npw2"
+    },
+    {
+      "name": "replace_littlefs_util_ctz",
+      "runtime_address": 4260994,
+      "expected_size": 16,
+      "expected_sha256": "4ae07bfa492e5dfad5869ea491ca43f720e6fc153315a126e2e686313c3de08c",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_ctz"
+    },
+    {
+      "name": "replace_littlefs_util_popc",
+      "runtime_address": 4261010,
+      "expected_size": 40,
+      "expected_sha256": "2cc25090f38dd5c2121cb4bfc7ddf0bd71df984312c9b9c52e87feeef5aea872",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_popc"
+    },
+    {
+      "name": "replace_littlefs_alloc_ckpoint",
+      "runtime_address": 4263400,
+      "expected_size": 6,
+      "expected_sha256": "74d41d77541fa368dfc90160c9fc3a8dfd62d891ea72f29ef9c115465b71a32c",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_alloc_ckpoint"
+    },
+    {
+      "name": "replace_littlefs_alloc_drop",
+      "runtime_address": 4263406,
+      "expected_size": 16,
+      "expected_sha256": "55b7d516bb75d425ebbc077729c8c03aef31b93897d422450084cfed8a771f66",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_alloc_drop"
+    },
+    {
+      "name": "replace_littlefs_disk_version",
+      "runtime_address": 4263372,
+      "expected_size": 6,
+      "expected_sha256": "1ff8f5ac86a29e52674a91191c4ed763fe635aed200e701063e8224aa15c3870",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_disk_version"
+    },
+    {
+      "name": "replace_littlefs_disk_version_major",
+      "runtime_address": 4263378,
+      "expected_size": 12,
+      "expected_sha256": "c9ab0025e9e77a75e9240efbd5b15da22807bdaa9f9deaf2cb425d4850f3bf08",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_disk_version_major"
+    },
+    {
+      "name": "replace_littlefs_disk_version_minor",
+      "runtime_address": 4263390,
+      "expected_size": 10,
+      "expected_sha256": "c03343d554dbdd887485eff548d1f2852a1e2f1fe86e662759d478f1d28c7253",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_disk_version_minor"
+    },
+    {
+      "name": "replace_littlefs_alloc_lookahead",
+      "runtime_address": 4263422,
+      "expected_size": 56,
+      "expected_sha256": "58285c138461a673be0bed2c5376f8d739e40e2aea753ad05d5061bfbc9265cf",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_alloc_lookahead"
+    },
+    {
+      "name": "replace_littlefs_mlist_append",
+      "runtime_address": 4263364,
+      "expected_size": 8,
+      "expected_sha256": "e3ed290e4e62fc9cce34b0530080dbc08efbca65f80ca1b7d182e18bb20c24b9",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_mlist_append"
+    },
+    {
+      "name": "replace_littlefs_mlist_isopen",
+      "runtime_address": 4263306,
+      "expected_size": 30,
+      "expected_sha256": "e4963bfc9db9aa487d15261ebce9dd5b1429c708f6fe78ff47968718821c0c4e",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_mlist_isopen"
+    },
+    {
+      "name": "replace_littlefs_mlist_remove",
+      "runtime_address": 4263336,
+      "expected_size": 28,
+      "expected_sha256": "55bb19e48e301285459cecc31d6177555f04d0b41ea3ae3c1ed3225fd357a8bd",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_mlist_remove"
+    },
+    {
+      "name": "replace_littlefs_util_max",
+      "runtime_address": 4260864,
+      "expected_size": 8,
+      "expected_sha256": "3caa49d8a68e47b2cd91fcb01cae26b6262c904e8b96d8b3ba35f7fb33d07464",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_max"
+    },
+    {
+      "name": "replace_littlefs_util_min",
+      "runtime_address": 4260872,
+      "expected_size": 8,
+      "expected_sha256": "7ec81166f84c44a60f4ecf93ad37d93f52ec00c77bb5db5a7dda659b1319c8a3",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_min"
+    },
+    {
+      "name": "replace_littlefs_util_aligndown",
+      "runtime_address": 4260880,
+      "expected_size": 12,
+      "expected_sha256": "d0d7407bcf93abaef33623047467d1230d2176ce9b4a4e93bfcd8adde884f349",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_aligndown"
+    },
+    {
+      "name": "replace_littlefs_util_alignup",
+      "runtime_address": 4260892,
+      "expected_size": 12,
+      "expected_sha256": "18874b0eb5cf5c7bd6f20b2b29f787157294b9e9be16d14ab0d9064d44a97c37",
+      "branch": "b_w",
+      "target_function": "open_cfw_littlefs_util_alignup"
+    },
+    {
+      "name": "replace_ambiq_mspi_interrupt_clear",
+      "runtime_address": 4351238,
+      "expected_size": 48,
+      "expected_sha256": "4b01a25a8075cf158eb59da277f8730e36c751ee01c67bae86bc172ec877bd48",
+      "branch": "b_w",
+      "target_function": "am_hal_mspi_interrupt_clear"
+    },
+    {
+      "name": "replace_easylogger_get_fmt_enabled",
+      "runtime_address": 4291284,
+      "expected_size": 106,
+      "expected_sha256": "eb04732c56e958be0b715c98f23dafc9aa9c29a6321a1b58297529e39eb3eb5a",
+      "branch": "b_w",
+      "target_function": "open_cfw_easylogger_get_fmt_enabled"
+    },
+    {
+      "name": "replace_easylogger_get_fmt_used_and_enabled_u32",
+      "runtime_address": 4291400,
+      "expected_size": 26,
+      "expected_sha256": "95bba933ae9e65022ef0ff0daa76324678aa539c2ba79435b80181ce34a23db7",
+      "branch": "b_w",
+      "target_function": "open_cfw_easylogger_get_fmt_used_and_enabled_u32"
+    },
+    {
+      "name": "replace_easylogger_get_fmt_used_and_enabled_ptr",
+      "runtime_address": 4291426,
+      "expected_size": 26,
+      "expected_sha256": "3af2631ad7a44be557a9454da2df68862b6458bf2359f58d41c3d6d2ff86c8a2",
+      "branch": "b_w",
+      "target_function": "open_cfw_easylogger_get_fmt_used_and_enabled_ptr"
+    },
+    {
+      "name": "replace_easylogger_strcpy",
+      "runtime_address": 4305240,
+      "expected_size": 162,
+      "expected_sha256": "9708f61ea38bbac62f5542fdd2701a950ba1bde9fd480c5baf7cb0be6a8461b5",
+      "branch": "b_w",
+      "target_function": "open_cfw_easylogger_strcpy"
+    }
+  ],
+  "transport_contract": {
+    "format": "EVENOTA",
+    "package_filename": "ota/s200_bootloader.bin",
+    "entry_id": 5,
+    "type_id": 1,
+    "storage_type": 3,
+    "component_header_bytes": 128,
+    "payload_size_field_offset": 8,
+    "payload_crc32c_msb_field_offset": 12,
+    "toc_entry_size_field": "component_header_bytes + payload_size",
+    "toc_checksum": "CRC-32C/Castagnoli, non-reflected, init=0, xorout=0, over the raw provider payload"
+  },
+  "overlay_artifact": "bootloader_core_overlay.bin",
+  "provider_artifact": "ota_s200_bootloader.bin",
+  "expected": {
+    "overlay_size": 662,
+    "overlay_sha256": "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b",
+    "component_size": 149262,
+    "component_sha256": "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267"
+  },
+  "toolchain_profiles": {
+    "linux-clang": {
+      "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+      "expected": {
+        "overlay_size": 662,
+        "overlay_sha256": "e4c743531f56c190b7e3129768d410480a2f3433a5b680c7bf432ef0b05a7021",
+        "component_size": 149262,
+        "component_sha256": "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74"
+      }
+    }
+  },
+  "function_profiles": {
+    "linux-clang": {
+      "open_cfw_littlefs_scmp": {
+        "expected_offset": 0,
+        "expected_size": 4
+      },
+      "open_cfw_littlefs_alloc_ckpoint": {
+        "expected_offset": 4,
+        "expected_size": 6
+      },
+      "open_cfw_littlefs_alloc_drop": {
+        "expected_offset": 10,
+        "expected_size": 12
+      },
+      "open_cfw_littlefs_disk_version": {
+        "expected_offset": 24,
+        "expected_size": 8
+      },
+      "open_cfw_littlefs_mlist_append": {
+        "expected_offset": 32,
+        "expected_size": 8
+      },
+      "open_cfw_littlefs_mlist_remove": {
+        "expected_offset": 40,
+        "expected_size": 18
+      },
+      "open_cfw_littlefs_util_max": {
+        "expected_offset": 58,
+        "expected_size": 8
+      },
+      "open_cfw_littlefs_util_min": {
+        "expected_offset": 66,
+        "expected_size": 8
+      },
+      "open_cfw_littlefs_util_aligndown": {
+        "expected_offset": 74,
+        "expected_size": 8
+      },
+      "open_cfw_littlefs_util_alignup": {
+        "expected_offset": 82,
+        "expected_size": 8
+      },
+      "open_cfw_littlefs_util_npw2": {
+        "expected_offset": 90,
+        "expected_size": 56
+      },
+      "open_cfw_littlefs_util_ctz": {
+        "expected_offset": 146,
+        "expected_size": 16
+      },
+      "open_cfw_littlefs_util_popc": {
+        "expected_offset": 162,
+        "expected_size": 42
+      },
+      "am_hal_mspi_interrupt_clear": {
+        "expected_offset": 204,
+        "expected_size": 48
+      },
+      "open_cfw_littlefs_mlist_isopen": {
+        "expected_offset": 252,
+        "expected_size": 18
+      },
+      "open_cfw_littlefs_util_fromle32": {
+        "expected_offset": 270,
+        "expected_size": 2
+      },
+      "open_cfw_littlefs_util_tole32": {
+        "expected_offset": 272,
+        "expected_size": 2
+      },
+      "open_cfw_littlefs_util_frombe32": {
+        "expected_offset": 274,
+        "expected_size": 4
+      },
+      "open_cfw_littlefs_util_tobe32": {
+        "expected_offset": 278,
+        "expected_size": 4
+      },
+      "open_cfw_littlefs_disk_version_major": {
+        "expected_offset": 282,
+        "expected_size": 10
+      },
+      "open_cfw_littlefs_disk_version_minor": {
+        "expected_offset": 292,
+        "expected_size": 10
+      },
+      "open_cfw_littlefs_alloc_lookahead": {
+        "expected_offset": 302,
+        "expected_size": 48
+      },
+      "open_cfw_easylogger_helpers_get_logger": {
+        "expected_offset": 352,
+        "expected_size": 8
+      },
+      "open_cfw_easylogger_helpers_assert_failed": {
+        "expected_offset": 360,
+        "expected_size": 132
+      },
+      "open_cfw_easylogger_get_fmt_enabled": {
+        "expected_offset": 492,
+        "expected_size": 38
+      },
+      "open_cfw_easylogger_get_fmt_used_and_enabled_u32": {
+        "expected_offset": 530,
+        "expected_size": 20
+      },
+      "open_cfw_easylogger_get_fmt_used_and_enabled_ptr": {
+        "expected_offset": 550,
+        "expected_size": 20
+      },
+      "open_cfw_easylogger_strcpy": {
+        "expected_offset": 570,
+        "expected_size": 52
+      },
+      "open_cfw_littlefs_tag_chunk": {
+        "expected_offset": 622,
+        "expected_size": 6
+      },
+      "open_cfw_littlefs_tag_isvalid": {
+        "expected_offset": 628,
+        "expected_size": 6
+      },
+      "open_cfw_littlefs_tag_type1": {
+        "expected_offset": 634,
+        "expected_size": 10
+      },
+      "open_cfw_littlefs_tag_type3": {
+        "expected_offset": 644,
+        "expected_size": 6
+      },
+      "open_cfw_littlefs_tag_id": {
+        "expected_offset": 650,
+        "expected_size": 6
+      },
+      "open_cfw_littlefs_tag_size": {
+        "expected_offset": 656,
+        "expected_size": 6
+      }
+    }
+  }
+}

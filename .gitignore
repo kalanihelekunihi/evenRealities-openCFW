@@ -1,4 +1,102 @@
-.DS_Store
-/sdks
-/firmware_blobs
+# openCFW .gitignore
+#
+# Rule of thumb: if `make` (or a tool under tools/) can regenerate it, it does
+# not belong in the repo.  Source, manifests, provenance records and the
+# vendored third_party/ snapshots ARE tracked -- they are build inputs.
 
+# ---------------------------------------------------------------------------
+# Build + analysis output
+# ---------------------------------------------------------------------------
+# Top-level build tree written by tools/open_cfw.py (reference/, ring-source/,
+# source/) plus every ad-hoc analysis-*, repro-*, agent-*, validation/,
+# toolchains/ and tmp* scratch directory.  `make clean` deletes this wholesale.
+/build/
+
+# Per-component build trees (components/*/*/build) emitted by build_component.py.
+# Matches any directory literally named "build"; build_component.py and friends
+# are files, so they are unaffected.
+build/
+
+# Toolchain/host/probe build variants: build-linux, build-console-apple-a,
+# build-task3-linux-probe, ...
+build-*/
+
+# Loose object/binary output, wherever it lands.
+*.o
+*.obj
+*.a
+*.elf
+*.axf
+*.hex
+*.su
+*.d
+*.map
+*.lst
+*.so
+*.dylib
+*.dll
+
+# Scratch/intermediate files from analysis runs.
+tmp*/
+*.tmp
+*.bak
+*.orig
+*.rej
+*.log
+
+# ---------------------------------------------------------------------------
+# Python (tools/ and tests/)
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+.tox/
+.venv/
+venv/
+env/
+
+# ---------------------------------------------------------------------------
+# Vendor-proprietary inputs (not redistributable -- fetch locally)
+# ---------------------------------------------------------------------------
+# Official OTA payloads under blobs/official/ are vendor-proprietary; the
+# PROVENANCE.md alongside them records hashes and origin so a local copy can be
+# reproduced and verified.  Track the provenance, not the bytes.
+/blobs/official/**
+!/blobs/official/**/
+!/blobs/official/**/PROVENANCE.md
+/firmware_blobs
+/sdks
+
+# Decompiler projects / databases -- large, regenerable from the blobs.
+*.gpr
+*.rep
+*.gzf
+*.i64
+*.idb
+*.bndb
+/ghidra_projects/
+
+# ---------------------------------------------------------------------------
+# Editor / OS noise
+# ---------------------------------------------------------------------------
+.DS_Store
+._*
+.AppleDouble
+.Spotlight-V100
+.Trashes
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+!.vscode/extensions.json
+compile_commands.json
+.cache/

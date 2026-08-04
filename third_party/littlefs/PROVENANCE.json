@@ -1,0 +1,811 @@
+{
+  "schema_version": 1,
+  "component": "littlefs",
+  "license": "BSD-3-Clause",
+  "upstream": {
+    "repository": "https://github.com/littlefs-project/littlefs.git",
+    "repository_web": "https://github.com/littlefs-project/littlefs",
+    "selected_ref": "refs/tags/v2.10.1",
+    "selected_tag": "v2.10.1",
+    "selected_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+    "selected_commit_url": "https://github.com/littlefs-project/littlefs/commit/0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+    "selected_tree": "06dd0162169d3cb550cd24a3e34d0e4d02983ad3",
+    "selected_commit_date": "2024-12-20T09:02:13-06:00",
+    "declared_library_version": "2.10",
+    "declared_library_version_hex": "0x0002000a",
+    "declared_disk_version": "2.1",
+    "declared_disk_version_hex": "0x00020001"
+  },
+  "selection": {
+    "classification": "source-equivalent release baseline",
+    "evidence": "openCFW/docs/research/littlefs-version-audit.md",
+    "basis": "The complete 38-assertion bootloader line fingerprint matches only official v2.10.1 among all 38 inspected v2 tags; Apollo main has the same source generation.",
+    "exact_historical_checkout_proven": false,
+    "qualification": "This snapshot is an exact source-equivalent pin. It is not proof that Even Realities used the v2.10.1 tag commit as its historical checkout.",
+    "unresolvable_binary_ambiguity": "The selected lfs.c state and two later official upstream source states compile byte-identically under the recovered G2 configuration. Trace is disabled, so the stripped G2 executable cannot distinguish all candidate repository states.",
+    "equivalent_candidate_source_states": [
+      {
+        "commit": "366100b1403d2b680ed7a0f3bd0ba982c34d5c07",
+        "lfs_c_git_blob": "7520f2ea7eb1d3d29ab29422ca3d6d0a3057397a",
+        "relationship": "source state carried by v2.10.1"
+      },
+      {
+        "commit": "152d03043ccab2ca6c454dd6cef43dc072d5810a",
+        "lfs_c_git_blob": "00a0a5450b64e81de97e82be65c44ab1695ab373",
+        "relationship": "explicit cast with identical generated object under recovered configuration"
+      },
+      {
+        "commit": "936919d13488f307731fa203981ffb62d9e43479",
+        "lfs_c_git_blob": "416ec7299046f1c31011c4f0fcbb654ff4e5e59f",
+        "relationship": "disabled trace-only difference with identical generated object"
+      }
+    ]
+  },
+  "recovered_g2_configuration": {
+    "config_abi_size": 84,
+    "target_pointer_size": 4,
+    "target_endianness": "little",
+    "read_size": 16,
+    "prog_size": 256,
+    "block_size": 4096,
+    "block_count": 3008,
+    "block_cycles": 500,
+    "cache_size": 4096,
+    "lookahead_size": 256,
+    "compact_thresh": 0,
+    "optional_buffers": "all null; dynamic allocation paths are used",
+    "name_max": 0,
+    "file_max": 0,
+    "attr_max": 0,
+    "metadata_max": 0,
+    "inline_max": 0,
+    "build_options": {
+      "LFS_THREADSAFE": false,
+      "LFS_MULTIVERSION": false,
+      "LFS_YES_TRACE": false,
+      "assertions": true,
+      "debug_diagnostics": true,
+      "warning_diagnostics": true,
+      "error_diagnostics": true
+    },
+    "official_images": [
+      {
+        "name": "Apollo main",
+        "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+        "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+        "load_address": "0x00438000",
+        "payload_offset": 32,
+        "config_address": "0x006e83a4",
+        "config_size": 84,
+        "config_sha256": "f38bd899e180d29ee60609a2452d25c2d2d6c6fef4eb455064e23a6ca7c6e813",
+        "callbacks": {
+          "read": "0x004763b9",
+          "prog": "0x004763f1",
+          "erase": "0x00476429",
+          "sync": "0x004764dd"
+        }
+      },
+      {
+        "name": "bootloader",
+        "path": "blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+        "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+        "load_address": "0x00410000",
+        "payload_offset": 0,
+        "config_address": "0x00431070",
+        "config_size": 84,
+        "config_sha256": "724c351d2136e3c2f10b59ad84d547da4632739ea1f20eb839e9af2cfbd5b6e8",
+        "callbacks": {
+          "read": "0x004212d9",
+          "prog": "0x00421311",
+          "erase": "0x00421349",
+          "sync": "0x004213d5"
+        }
+      }
+    ]
+  },
+  "safety": {
+    "integration_status": "selected audited bounded leaves are integrated into openCFW overlays; the pristine library translation units and G2 block-device port remain reference-only",
+    "includes_g2_block_device_port": false,
+    "permits_hardware_format": false,
+    "permits_hardware_erase": false,
+    "policy": "Do not call lfs_format, lfs_migrate, the recovered erase callback, or any mutating littlefs API on hardware until read-only golden-image and disposable-copy power-loss validation is complete."
+  },
+  "production_integration": {
+    "qualification": "Only the exact allowlisted bounded local adaptations are production-registered against this source-equivalent v2.10.1 baseline. This is not proof that Even Realities used the v2.10.1 tag commit as its historical vendor checkout, and the pristine library translation units and G2 block-device port remain unregistered.",
+    "allowed_production_source_paths": [
+      "components/apollo_main/core_overlay/runtime_littlefs_file_tell_private.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_scmp.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_alloc_ckpoint.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_alloc_drop.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_disk_version.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_mlist_append.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_mlist_remove.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_util.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_util_bitops.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_mlist_isopen.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_util_endian.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_disk_version_parts.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_alloc_lookahead.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_file_size_private.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_file_size_private.h",
+      "components/apollo_main/core_overlay/runtime_littlefs_file_rewind_private.c",
+      "components/apollo_main/core_overlay/runtime_littlefs_file_rewind_private.h",
+      "components/bootloader/core_overlay/runtime_littlefs_scmp.c",
+      "components/bootloader/core_overlay/runtime_littlefs_alloc_ckpoint.c",
+      "components/bootloader/core_overlay/runtime_littlefs_alloc_drop.c",
+      "components/shared/littlefs/runtime_littlefs_tag_type2.c",
+      "components/shared/littlefs/runtime_littlefs_tag_type2.h",
+      "components/shared/littlefs/runtime_littlefs_tag_chunk.c",
+      "components/shared/littlefs/runtime_littlefs_tag_chunk.h",
+      "components/shared/littlefs/runtime_littlefs_tag_isvalid.c",
+      "components/shared/littlefs/runtime_littlefs_tag_isvalid.h",
+      "components/shared/littlefs/runtime_littlefs_tag_type1.c",
+      "components/shared/littlefs/runtime_littlefs_tag_type1.h",
+      "components/shared/littlefs/runtime_littlefs_tag_type3.c",
+      "components/shared/littlefs/runtime_littlefs_tag_type3.h",
+      "components/shared/littlefs/runtime_littlefs_tag_id.c",
+      "components/shared/littlefs/runtime_littlefs_tag_id.h",
+      "components/shared/littlefs/runtime_littlefs_tag_size.c",
+      "components/shared/littlefs/runtime_littlefs_tag_size.h"
+    ],
+    "allowed_production_symbols": [
+      "open_cfw_littlefs_file_tell_private",
+      "open_cfw_littlefs_scmp",
+      "open_cfw_littlefs_alloc_ckpoint",
+      "open_cfw_littlefs_alloc_drop",
+      "open_cfw_littlefs_disk_version",
+      "open_cfw_littlefs_mlist_append",
+      "open_cfw_littlefs_mlist_remove",
+      "open_cfw_littlefs_util_max",
+      "open_cfw_littlefs_util_min",
+      "open_cfw_littlefs_util_aligndown",
+      "open_cfw_littlefs_util_alignup",
+      "open_cfw_littlefs_util_npw2",
+      "open_cfw_littlefs_util_ctz",
+      "open_cfw_littlefs_util_popc",
+      "open_cfw_littlefs_mlist_isopen",
+      "open_cfw_littlefs_util_fromle32",
+      "open_cfw_littlefs_util_tole32",
+      "open_cfw_littlefs_util_frombe32",
+      "open_cfw_littlefs_util_tobe32",
+      "open_cfw_littlefs_disk_version_major",
+      "open_cfw_littlefs_disk_version_minor",
+      "open_cfw_littlefs_alloc_lookahead",
+      "open_cfw_littlefs_file_size_private",
+      "open_cfw_littlefs_file_rewind_private",
+      "open_cfw_littlefs_tag_type2",
+      "open_cfw_littlefs_tag_chunk",
+      "open_cfw_littlefs_tag_isvalid",
+      "open_cfw_littlefs_tag_type1",
+      "open_cfw_littlefs_tag_type3",
+      "open_cfw_littlefs_tag_id",
+      "open_cfw_littlefs_tag_size"
+    ],
+    "rewind_leaf": {
+      "upstream_function": "lfs_file_rewind_",
+      "upstream_source": "lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "upstream_definition_span": "lfs.c bytes [118157,118349)",
+      "upstream_definition_offset": 118157,
+      "upstream_definition_size": 192,
+      "upstream_definition_sha256": "74638292061613417c2ce7c6bbed200d2bee046c35a7a835fb4d9bb183ab755a",
+      "local_source": "components/apollo_main/core_overlay/runtime_littlefs_file_rewind_private.c",
+      "local_source_size": 1239,
+      "local_source_sha256": "e6afb5b67671b3219971b19c20290c601568752d814064147f5ccd4118f5acc8",
+      "local_header": "components/apollo_main/core_overlay/runtime_littlefs_file_rewind_private.h",
+      "local_header_size": 1743,
+      "local_header_sha256": "7430dcd1ad1ea3973d619f2d67d8d8b11a688018d48a3bc26a40e407d1fedb56",
+      "stock_span": "[0x004CE460,0x004CE472)",
+      "stock_size": 18,
+      "stock_sha256": "be02691b2e7339d7dd1d54b31712c3e8563e5a86f4406a469888640fad9435cd",
+      "stock_seek_seams": [
+        "0x004CE3BC"
+      ],
+      "production_profiles": {
+        "apple-clang": {
+          "leaf_size": 16,
+          "overlay_offset": 124480,
+          "runtime_address": "0x007B2964",
+          "relocated_sha256": "1c2e2b1fded0de515345b90fe34de51a9c0f08a02a5ad983c1120481c51c5783",
+          "unrelocated_sha256": "46e8bab056ad39ced45edb5da2612f6470674ab5a428df7f08822f6c2d9e184b"
+        },
+        "linux-clang": {
+          "leaf_size": 16,
+          "overlay_offset": 126300,
+          "runtime_address": "0x007B3080",
+          "relocated_sha256": "9731cbf3ff15be31186591ed148d009ae8985cb18bdfca3ba365aeb0897e3fd1",
+          "unrelocated_sha256": "46e8bab056ad39ced45edb5da2612f6470674ab5a428df7f08822f6c2d9e184b"
+        }
+      },
+      "sole_relocation": {
+        "offset": 6,
+        "type": "R_ARM_THM_CALL",
+        "symbol": "open_cfw_littlefs_file_seek_private",
+        "symbol_type": "STT_NOTYPE",
+        "target_address": "0x004CE3BC"
+      },
+      "qualification": "Altered bounded local source selected against the authenticated littlefs v2.10.1 source-equivalent baseline; not proof of the exact historical vendor checkout. The complete pristine littlefs library and G2 block-device port remain unregistered."
+    },
+    "tag_type2_leaf": {
+      "upstream_function": "lfs_tag_type2",
+      "upstream_source": "lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "upstream_definition_span": "lfs.c bytes [10326,10418)",
+      "upstream_definition_offset": 10326,
+      "upstream_definition_size": 92,
+      "upstream_definition_sha256": "65f614cf5ed7152f7ad2176547453c329b1f15442e550ef6632b0f7773970f78",
+      "local_source": "components/shared/littlefs/runtime_littlefs_tag_type2.c",
+      "local_source_size": 789,
+      "local_source_sha256": "c2ea0965e62aa126fb4b8e752526b8a926a9088739811cba09dcf7d1ed6f3940",
+      "local_header": "components/shared/littlefs/runtime_littlefs_tag_type2.h",
+      "local_header_size": 883,
+      "local_header_sha256": "17915b900db79e3e611379645a8780723410e5c826f6bfa7619d86bac28f0b13",
+      "stock_span": "[0x004CAE90,0x004CAE98)",
+      "stock_size": 8,
+      "stock_sha256": "a017094f8fc58d202d8c5a588f66dd319248578fa39e0f392ba3c7857d3500ef",
+      "stock_callers": [
+        {
+          "address": "0x004CBB26",
+          "encoding": "fff7b3f9"
+        },
+        {
+          "address": "0x004CBC38",
+          "encoding": "fff72af9"
+        }
+      ],
+      "production_profiles": {
+        "apple-clang": {
+          "leaf_size": 10,
+          "overlay_offset": 124548,
+          "runtime_address": "0x007B29A8",
+          "relocated_sha256": "88be40d05d37142bf0bae8306026d8c405a4f8f441aabd87ee6731557d4149fd",
+          "unrelocated_sha256": "88be40d05d37142bf0bae8306026d8c405a4f8f441aabd87ee6731557d4149fd"
+        },
+        "linux-clang": {
+          "leaf_size": 10,
+          "overlay_offset": 126368,
+          "runtime_address": "0x007B30C4",
+          "relocated_sha256": "88be40d05d37142bf0bae8306026d8c405a4f8f441aabd87ee6731557d4149fd",
+          "unrelocated_sha256": "88be40d05d37142bf0bae8306026d8c405a4f8f441aabd87ee6731557d4149fd"
+        }
+      },
+      "relocations": [],
+      "qualification": "Altered scalar-only local adaptation selected against the authenticated littlefs v2.10.1 source-equivalent baseline; not proof of the exact historical vendor checkout. The complete pristine littlefs library and G2 block-device port remain unregistered."
+    },
+    "tag_chunk_leaf": {
+      "upstream_function": "lfs_tag_chunk",
+      "upstream_source": "lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "upstream_definition_span": "lfs.c bytes [10514,10607)",
+      "upstream_definition_offset": 10514,
+      "upstream_definition_size": 93,
+      "upstream_definition_sha256": "406b74c2d10482c959cf1048d9589d00d8b416ee4661203bd339144baa74cd09",
+      "upstream_tag_typedef_span": "lfs.c bytes [9602,9629)",
+      "upstream_tag_typedef_offset": 9602,
+      "upstream_tag_typedef_size": 27,
+      "upstream_tag_typedef_sha256": "cb4dcd6212b1a269371d86dddf98ed74853e2eb43753c5d8f8659abbca167ce2",
+      "local_source": "components/shared/littlefs/runtime_littlefs_tag_chunk.c",
+      "local_source_size": 773,
+      "local_source_sha256": "71851bd05e26e703b8697b9994b556db46511c37e9500da98e3406b37a92c8da",
+      "local_header": "components/shared/littlefs/runtime_littlefs_tag_chunk.h",
+      "local_header_size": 879,
+      "local_header_sha256": "1061f5d68ff6f81a6f1853bfefe37b77f5f3b8b09e627b1bfa0d191842d1f6f5",
+      "stock_size": 6,
+      "stock_sha256": "63fc572597119c756fa5d4ee0904c8c34dfa545495b77bba02e2ff3298ce23ae",
+      "stock_images": {
+        "apollo_main": {
+          "stock_span": "[0x004CAEA0,0x004CAEA6)",
+          "stock_file_offset": 601792,
+          "stock_callers": [
+            {"address": "0x004CAEA8", "encoding": "fff7faff"},
+            {"address": "0x004CBB68", "encoding": "fff79af9"},
+            {"address": "0x004CBD1E", "encoding": "fff7bff8"},
+            {"address": "0x004CCBC4", "encoding": "fef76cf9"}
+          ]
+        },
+        "apollo_bootloader": {
+          "stock_span": "[0x00410BA8,0x00410BAE)",
+          "stock_file_offset": 2984,
+          "stock_callers": [
+            {"address": "0x00410BB0", "encoding": "fff7faff"},
+            {"address": "0x00411870", "encoding": "fff79af9"},
+            {"address": "0x00411A26", "encoding": "fff7bff8"},
+            {"address": "0x004127C8", "encoding": "fef7eef9"}
+          ]
+        }
+      },
+      "production_profiles": {
+        "apple-clang": {
+          "apollo_main": {
+            "leaf_size": 6,
+            "overlay_offset": 124560,
+            "runtime_address": "0x007B29B4",
+            "relocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74",
+            "unrelocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74"
+          },
+          "apollo_bootloader": {
+            "leaf_size": 6,
+            "overlay_offset": 622,
+            "runtime_address": "0x004346E6",
+            "relocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74",
+            "unrelocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74"
+          }
+        },
+        "linux-clang": {
+          "apollo_main": {
+            "leaf_size": 6,
+            "overlay_offset": 126380,
+            "runtime_address": "0x007B30D0",
+            "relocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74",
+            "unrelocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74"
+          },
+          "apollo_bootloader": {
+            "leaf_size": 6,
+            "overlay_offset": 622,
+            "runtime_address": "0x004346E6",
+            "relocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74",
+            "unrelocated_sha256": "db1dfda72afb267e96cd4e11eaf5d44659195b0afecbdcd8ed8572c34049df74"
+          }
+        }
+      },
+      "relocations": [],
+      "qualification": "Altered scalar-only shared adaptation selected against the authenticated littlefs v2.10.1 source-equivalent baseline and atomically registered in Apollo main and bootloader; not proof of the exact historical vendor checkout. The complete pristine littlefs library and G2 block-device ports remain unregistered."
+    },
+    "tag_isvalid_leaf": {
+      "upstream_function": "lfs_tag_isvalid",
+      "upstream_source": "lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "upstream_definition_span": "lfs.c bytes [10042,10129)",
+      "upstream_definition_offset": 10042,
+      "upstream_definition_size": 87,
+      "upstream_definition_sha256": "bb8e571d6dbddd1fe446ec7b4838979a4ab9bd6d6184e2f8d9b6c00cc0835b13",
+      "upstream_tag_typedef_span": "lfs.c bytes [9602,9629)",
+      "upstream_tag_typedef_offset": 9602,
+      "upstream_tag_typedef_size": 27,
+      "upstream_tag_typedef_sha256": "cb4dcd6212b1a269371d86dddf98ed74853e2eb43753c5d8f8659abbca167ce2",
+      "local_source": "components/shared/littlefs/runtime_littlefs_tag_isvalid.c",
+      "local_source_size": 848,
+      "local_source_sha256": "a91417d6193cdfb9589cd9e62f9b6eebe65e1e11a75ca36d0f42d85c36d907a2",
+      "local_header": "components/shared/littlefs/runtime_littlefs_tag_isvalid.h",
+      "local_header_size": 928,
+      "local_header_sha256": "6efcd1b229fb0477285f8fbdfbc6f1c92701a787fb17995a6115bfa5a944c6cd",
+      "stock_size": 10,
+      "stock_sha256": "0249b2c9c987097c7c0e628917a7dd6b67d4d1ee24f64339a7e0dd11977e4c9e",
+      "stock_images": {
+        "apollo_main": {
+          "stock_span": "[0x004CAE6A,0x004CAE74)",
+          "stock_file_offset": 601738,
+          "stock_callers": [
+            {"address": "0x004CBB06", "encoding": "fff7b0f9"},
+            {"address": "0x004CBE92", "encoding": "fef7eaff"},
+            {"address": "0x004CF230", "encoding": "fbf71bfe"}
+          ]
+        },
+        "apollo_bootloader": {
+          "stock_span": "[0x00410B72,0x00410B7C)",
+          "stock_file_offset": 2930,
+          "stock_callers": [
+            {"address": "0x0041180E", "encoding": "fff7b0f9"},
+            {"address": "0x00411B9A", "encoding": "fef7eaff"},
+            {"address": "0x00414908", "encoding": "fcf733f9"}
+          ]
+        }
+      },
+      "production_profiles": {
+        "apple-clang": {
+          "apollo_main": {"leaf_size": 6, "overlay_offset": 124568, "runtime_address": "0x007B29BC", "relocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e", "unrelocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e"},
+          "apollo_bootloader": {"leaf_size": 6, "overlay_offset": 628, "runtime_address": "0x004346EC", "relocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e", "unrelocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e"}
+        },
+        "linux-clang": {
+          "apollo_main": {"leaf_size": 6, "overlay_offset": 126388, "runtime_address": "0x007B30D8", "relocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e", "unrelocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e"},
+          "apollo_bootloader": {"leaf_size": 6, "overlay_offset": 628, "runtime_address": "0x004346EC", "relocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e", "unrelocated_sha256": "65e477818b1c6002b2ceb88812da258524e438ded36dfa059e034c3bce19624e"}
+        }
+      },
+      "relocations": [],
+      "qualification": "Altered scalar-only shared adaptation selected against the authenticated littlefs v2.10.1 source-equivalent baseline and atomically registered in Apollo main and bootloader; not proof of the exact historical vendor checkout. The complete pristine littlefs library and G2 block-device ports remain unregistered."
+    },
+    "tag_type1_leaf": {
+      "upstream_function": "lfs_tag_type1",
+      "upstream_source": "lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "upstream_definition_span": "lfs.c bytes [10232,10326)",
+      "upstream_definition_offset": 10232,
+      "upstream_definition_size": 94,
+      "upstream_definition_sha256": "ebf0229d6e0f78175c43641b09906fea19575fc3f34ac8862ae60159df1ec743",
+      "upstream_tag_typedef_span": "lfs.c bytes [9602,9629)",
+      "upstream_tag_typedef_offset": 9602,
+      "upstream_tag_typedef_size": 27,
+      "upstream_tag_typedef_sha256": "cb4dcd6212b1a269371d86dddf98ed74853e2eb43753c5d8f8659abbca167ce2",
+      "local_source": "components/shared/littlefs/runtime_littlefs_tag_type1.c",
+      "local_source_size": 857,
+      "local_source_sha256": "7c0df44bd2ebce1eae4cacbfa174c0f963dd03dcc5719ab386c0400201357b46",
+      "local_header": "components/shared/littlefs/runtime_littlefs_tag_type1.h",
+      "local_header_size": 893,
+      "local_header_sha256": "0993093546ead7b159179c7aaebbef926be24b39ca5202d04b17f0569ca830f6",
+      "stock_size": 8,
+      "stock_sha256": "fc26e04a6784b91dc07f170f8a3bd23096f7caa92c15430a179edf215b509fdd",
+      "stock_images": {
+        "apollo_main": {
+          "stock_span": "[0x004CAE88,0x004CAE90)",
+          "stock_file_offset": 601768,
+          "stock_callers": [
+            {"address": "0x004CAF32", "encoding": "fff7a9ff"},
+            {"address": "0x004CAF64", "encoding": "fff790ff"},
+            {"address": "0x004CB2F0", "encoding": "fff7cafd"},
+            {"address": "0x004CB560", "encoding": "fff792fc"},
+            {"address": "0x004CBC94", "encoding": "fff7f8f8"},
+            {"address": "0x004CBCBA", "encoding": "fff7e5f8"},
+            {"address": "0x004CBD12", "encoding": "fff7b9f8"},
+            {"address": "0x004CCBA2", "encoding": "fef771f9"}
+          ]
+        },
+        "apollo_bootloader": {
+          "stock_span": "[0x00410B90,0x00410B98)",
+          "stock_file_offset": 2960,
+          "stock_callers": [
+            {"address": "0x00410C3A", "encoding": "fff7a9ff"},
+            {"address": "0x00410C6C", "encoding": "fff790ff"},
+            {"address": "0x00410FF8", "encoding": "fff7cafd"},
+            {"address": "0x00411268", "encoding": "fff792fc"},
+            {"address": "0x0041199C", "encoding": "fff7f8f8"},
+            {"address": "0x004119C2", "encoding": "fff7e5f8"},
+            {"address": "0x00411A1A", "encoding": "fff7b9f8"},
+            {"address": "0x004127A6", "encoding": "fef7f3f9"}
+          ]
+        }
+      },
+      "production_profiles": {
+        "apple-clang": {
+          "apollo_main": {"leaf_size": 10, "overlay_offset": 124576, "runtime_address": "0x007B29C4", "relocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf", "unrelocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf"},
+          "apollo_bootloader": {"leaf_size": 10, "overlay_offset": 634, "runtime_address": "0x004346F2", "relocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf", "unrelocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf"}
+        },
+        "linux-clang": {
+          "apollo_main": {"leaf_size": 10, "overlay_offset": 126396, "runtime_address": "0x007B30E0", "relocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf", "unrelocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf"},
+          "apollo_bootloader": {"leaf_size": 10, "overlay_offset": 634, "runtime_address": "0x004346F2", "relocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf", "unrelocated_sha256": "079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf"}
+        }
+      },
+      "relocations": [],
+      "qualification": "Altered scalar-only shared adaptation selected against the authenticated littlefs v2.10.1 source-equivalent baseline and atomically registered in Apollo main and bootloader; not proof of the exact historical vendor checkout. The complete pristine littlefs library and G2 block-device ports remain unregistered."
+    },
+    "tag_type3_leaf": {
+      "upstream_function": "lfs_tag_type3",
+      "upstream_source": "lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "upstream_definition_span": "lfs.c bytes [10420,10514)",
+      "upstream_definition_offset": 10420,
+      "upstream_definition_size": 94,
+      "upstream_definition_sha256": "3cc2c9ec46ebb7fc3d3d71c6b39b235a5da0cde23adf2c182cafd24d6410b53e",
+      "upstream_tag_typedef_span": "lfs.c bytes [9602,9629)",
+      "upstream_tag_typedef_offset": 9602,
+      "upstream_tag_typedef_size": 27,
+      "upstream_tag_typedef_sha256": "cb4dcd6212b1a269371d86dddf98ed74853e2eb43753c5d8f8659abbca167ce2",
+      "local_source": "components/shared/littlefs/runtime_littlefs_tag_type3.c",
+      "local_source_size": 857,
+      "local_source_sha256": "6940b4ac0622dc1f2b84a0c663dc1522dfc7b198f59d6f452828adfd299e37c8",
+      "local_header": "components/shared/littlefs/runtime_littlefs_tag_type3.h",
+      "local_header_size": 893,
+      "local_header_sha256": "4e3b70d5ad8e8fce0e5dc2bd43fc8459c62c742d84a93f949bf0dd4fb44fe869",
+      "stock_size": 8,
+      "stock_sha256": "818012c47ba81ee18e2996d51a8a29a96a78ced50854b6fefcebf92e7b9ed9d6",
+      "stock_images": {
+        "apollo_main": {
+          "stock_span": "[0x004CAE98,0x004CAEA0)",
+          "stock_file_offset": 601784,
+          "stock_callers": [
+            {"address": "0x004CB70A", "encoding": "fff7c5fb"},
+            {"address": "0x004CB716", "encoding": "fff7bffb"},
+            {"address": "0x004CB7C0", "encoding": "fff76afb"},
+            {"address": "0x004CBD5E", "encoding": "fff79bf8"},
+            {"address": "0x004CBF82", "encoding": "fef789ff"},
+            {"address": "0x004CBFB2", "encoding": "fef771ff"},
+            {"address": "0x004CBFC6", "encoding": "fef767ff"},
+            {"address": "0x004CC07E", "encoding": "fef70bff"},
+            {"address": "0x004CC12E", "encoding": "fef7b3fe"},
+            {"address": "0x004CCBDC", "encoding": "fef75cf9"},
+            {"address": "0x004CCC18", "encoding": "fef73ef9"},
+            {"address": "0x004CCE72", "encoding": "fef711f8"},
+            {"address": "0x004CCEB2", "encoding": "fdf7f1ff"},
+            {"address": "0x004CCEF8", "encoding": "fdf7ceff"},
+            {"address": "0x004CD57A", "encoding": "fdf78dfc"},
+            {"address": "0x004CDB46", "encoding": "fdf7a7f9"},
+            {"address": "0x004CDC4C", "encoding": "fdf724f9"},
+            {"address": "0x004CE4B6", "encoding": "fcf7effc"},
+            {"address": "0x004CE520", "encoding": "fcf7bafc"},
+            {"address": "0x004CE5C8", "encoding": "fcf766fc"},
+            {"address": "0x004CE6C6", "encoding": "fcf7e7fb"},
+            {"address": "0x004CE702", "encoding": "fcf7c9fb"},
+            {"address": "0x004CE70A", "encoding": "fcf7c5fb"},
+            {"address": "0x004CE718", "encoding": "fcf7befb"},
+            {"address": "0x004CE746", "encoding": "fcf7a7fb"},
+            {"address": "0x004CE802", "encoding": "fcf749fb"},
+            {"address": "0x004CE8CA", "encoding": "fcf7e5fa"},
+            {"address": "0x004CF346", "encoding": "fbf7a7fd"},
+            {"address": "0x004CF376", "encoding": "fbf78ffd"},
+            {"address": "0x004CF726", "encoding": "fbf7b7fb"}
+          ]
+        },
+        "apollo_bootloader": {
+          "stock_span": "[0x00410BA0,0x00410BA8)",
+          "stock_file_offset": 2976,
+          "stock_callers": [
+            {"address": "0x00411412", "encoding": "fff7c5fb"},
+            {"address": "0x0041141E", "encoding": "fff7bffb"},
+            {"address": "0x004114C8", "encoding": "fff76afb"},
+            {"address": "0x00411A66", "encoding": "fff79bf8"},
+            {"address": "0x00411CDE", "encoding": "fef75fff"},
+            {"address": "0x00411D8E", "encoding": "fef707ff"},
+            {"address": "0x004127E0", "encoding": "fef7def9"},
+            {"address": "0x0041281C", "encoding": "fef7c0f9"},
+            {"address": "0x00412A76", "encoding": "fef793f8"},
+            {"address": "0x00412AB6", "encoding": "fef773f8"},
+            {"address": "0x00412AFC", "encoding": "fef750f8"},
+            {"address": "0x0041317E", "encoding": "fdf70ffd"},
+            {"address": "0x00413696", "encoding": "fdf783fa"},
+            {"address": "0x0041379C", "encoding": "fdf700fa"},
+            {"address": "0x00414A16", "encoding": "fcf7c3f8"},
+            {"address": "0x00414A46", "encoding": "fcf7abf8"},
+            {"address": "0x00414DF6", "encoding": "fbf7d3fe"}
+          ]
+        }
+      },
+      "production_profiles": {
+        "apple-clang": {
+          "apollo_main": {"leaf_size": 6, "overlay_offset": 124588, "runtime_address": "0x007B29D0", "relocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921", "unrelocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921"},
+          "apollo_bootloader": {"leaf_size": 6, "overlay_offset": 644, "runtime_address": "0x004346FC", "relocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921", "unrelocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921"}
+        },
+        "linux-clang": {
+          "apollo_main": {"leaf_size": 6, "overlay_offset": 126408, "runtime_address": "0x007B30EC", "relocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921", "unrelocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921"},
+          "apollo_bootloader": {"leaf_size": 6, "overlay_offset": 644, "runtime_address": "0x004346FC", "relocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921", "unrelocated_sha256": "a6781f0a92086cca25476ca00824d8f0fd736ac7d800aa9e3f6e4d6544490921"}
+        }
+      },
+      "relocations": [],
+      "qualification": "Altered scalar-only shared adaptation selected against the authenticated littlefs v2.10.1 source-equivalent baseline and atomically registered in Apollo main and bootloader; not proof of the exact historical vendor checkout. The complete pristine littlefs library and G2 block-device ports remain unregistered."
+    },
+    "tag_id_leaf": {
+      "upstream_function": "lfs_tag_id",
+      "upstream_source": "lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "upstream_definition_span": "lfs.c bytes [10702,10793)",
+      "upstream_definition_offset": 10702,
+      "upstream_definition_size": 91,
+      "upstream_definition_sha256": "50140c563689852013dfad180ec3b6464c6b6c5b22854f5492d63cf5de57fbe2",
+      "upstream_tag_typedef_span": "lfs.c bytes [9602,9629)",
+      "upstream_tag_typedef_offset": 9602,
+      "upstream_tag_typedef_size": 27,
+      "upstream_tag_typedef_sha256": "cb4dcd6212b1a269371d86dddf98ed74853e2eb43753c5d8f8659abbca167ce2",
+      "local_source": "components/shared/littlefs/runtime_littlefs_tag_id.c",
+      "local_source_size": 845,
+      "local_source_sha256": "5b6c3ce0f4236d6c6bc0a12891e41929e9034a7ddc2f68bd4f6a1d5d4fa07638",
+      "local_header": "components/shared/littlefs/runtime_littlefs_tag_id.h",
+      "local_header_size": 872,
+      "local_header_sha256": "5d6d1c5df9a0fb31f80ad0f6a876795cb154b039fa72df17c615b38cd5e2099e",
+      "stock_size": 8,
+      "stock_sha256": "0843abb3e9ef39afac8e69ae1e181efa0b5b5c8ebf53e20844b53fdf245b1036",
+      "stock_images": {
+        "apollo_main": {
+          "stock_span": "[0x004CAEB0,0x004CAEB8)",
+          "stock_file_offset": 601808,
+          "stock_callers": [
+            {"address": "0x004CB262", "encoding": "fff725fe"},
+            {"address": "0x004CB26C", "encoding": "fff720fe"},
+            {"address": "0x004CB274", "encoding": "fff71cfe"},
+            {"address": "0x004CB286", "encoding": "fff713fe"},
+            {"address": "0x004CB28E", "encoding": "fff70ffe"},
+            {"address": "0x004CB2E6", "encoding": "fff7e3fd"},
+            {"address": "0x004CB2FE", "encoding": "fff7d7fd"},
+            {"address": "0x004CB306", "encoding": "fff7d3fd"},
+            {"address": "0x004CB56C", "encoding": "fff7a0fc"},
+            {"address": "0x004CB574", "encoding": "fff79cfc"},
+            {"address": "0x004CB64A", "encoding": "fff731fc"},
+            {"address": "0x004CB786", "encoding": "fff793fb"},
+            {"address": "0x004CB7EA", "encoding": "fff761fb"},
+            {"address": "0x004CB92A", "encoding": "fff7c1fa"},
+            {"address": "0x004CB936", "encoding": "fff7bbfa"},
+            {"address": "0x004CB944", "encoding": "fff7b4fa"},
+            {"address": "0x004CBC9E", "encoding": "fff707f9"},
+            {"address": "0x004CBCAC", "encoding": "fff700f9"},
+            {"address": "0x004CBCEE", "encoding": "fff7dff8"},
+            {"address": "0x004CBCF8", "encoding": "fff7daf8"},
+            {"address": "0x004CBDF8", "encoding": "fff75af8"},
+            {"address": "0x004CBE02", "encoding": "fff755f8"},
+            {"address": "0x004CBE3A", "encoding": "fff739f8"},
+            {"address": "0x004CBE42", "encoding": "fff735f8"},
+            {"address": "0x004CBE60", "encoding": "fff726f8"},
+            {"address": "0x004CBE68", "encoding": "fff722f8"},
+            {"address": "0x004CBE82", "encoding": "fff715f8"},
+            {"address": "0x004CBEA0", "encoding": "fff706f8"},
+            {"address": "0x004CC138", "encoding": "fef7bafe"},
+            {"address": "0x004CC146", "encoding": "fef7b3fe"},
+            {"address": "0x004CCE82", "encoding": "fef715f8"},
+            {"address": "0x004CCEBE", "encoding": "fdf7f7ff"},
+            {"address": "0x004CCF04", "encoding": "fdf7d4ff"},
+            {"address": "0x004CD184", "encoding": "fdf794fe"},
+            {"address": "0x004CD1B6", "encoding": "fdf77bfe"},
+            {"address": "0x004CD2A8", "encoding": "fdf702fe"},
+            {"address": "0x004CD58A", "encoding": "fdf791fc"},
+            {"address": "0x004CD5A2", "encoding": "fdf785fc"},
+            {"address": "0x004CE4C6", "encoding": "fcf7f3fc"},
+            {"address": "0x004CE502", "encoding": "fcf7d5fc"},
+            {"address": "0x004CE52A", "encoding": "fcf7c1fc"},
+            {"address": "0x004CE59E", "encoding": "fcf787fc"},
+            {"address": "0x004CE63C", "encoding": "fcf738fc"},
+            {"address": "0x004CE66A", "encoding": "fcf721fc"},
+            {"address": "0x004CE6A8", "encoding": "fcf702fc"},
+            {"address": "0x004CE82C", "encoding": "fcf740fb"},
+            {"address": "0x004CE89C", "encoding": "fcf708fb"},
+            {"address": "0x004CF700", "encoding": "fbf7d6fb"},
+            {"address": "0x004CF756", "encoding": "fbf7abfb"},
+            {"address": "0x004CF894", "encoding": "fbf70cfb"}
+          ]
+        },
+        "apollo_bootloader": {
+          "stock_span": "[0x00410BB8,0x00410BC0)",
+          "stock_file_offset": 3000,
+          "stock_callers": [
+            {"address": "0x00410F6A", "encoding": "fff725fe"},
+            {"address": "0x00410F74", "encoding": "fff720fe"},
+            {"address": "0x00410F7C", "encoding": "fff71cfe"},
+            {"address": "0x00410F8E", "encoding": "fff713fe"},
+            {"address": "0x00410F96", "encoding": "fff70ffe"},
+            {"address": "0x00410FEE", "encoding": "fff7e3fd"},
+            {"address": "0x00411006", "encoding": "fff7d7fd"},
+            {"address": "0x0041100E", "encoding": "fff7d3fd"},
+            {"address": "0x00411274", "encoding": "fff7a0fc"},
+            {"address": "0x0041127C", "encoding": "fff79cfc"},
+            {"address": "0x00411352", "encoding": "fff731fc"},
+            {"address": "0x0041148E", "encoding": "fff793fb"},
+            {"address": "0x004114F2", "encoding": "fff761fb"},
+            {"address": "0x00411632", "encoding": "fff7c1fa"},
+            {"address": "0x0041163E", "encoding": "fff7bbfa"},
+            {"address": "0x0041164C", "encoding": "fff7b4fa"},
+            {"address": "0x004119A6", "encoding": "fff707f9"},
+            {"address": "0x004119B4", "encoding": "fff700f9"},
+            {"address": "0x004119F6", "encoding": "fff7dff8"},
+            {"address": "0x00411A00", "encoding": "fff7daf8"},
+            {"address": "0x00411B00", "encoding": "fff75af8"},
+            {"address": "0x00411B0A", "encoding": "fff755f8"},
+            {"address": "0x00411B42", "encoding": "fff739f8"},
+            {"address": "0x00411B4A", "encoding": "fff735f8"},
+            {"address": "0x00411B68", "encoding": "fff726f8"},
+            {"address": "0x00411B70", "encoding": "fff722f8"},
+            {"address": "0x00411B8A", "encoding": "fff715f8"},
+            {"address": "0x00411BA8", "encoding": "fff706f8"},
+            {"address": "0x00411D98", "encoding": "fef70eff"},
+            {"address": "0x00411DA6", "encoding": "fef707ff"},
+            {"address": "0x00412A86", "encoding": "fef797f8"},
+            {"address": "0x00412AC2", "encoding": "fef779f8"},
+            {"address": "0x00412B08", "encoding": "fef756f8"},
+            {"address": "0x00412D88", "encoding": "fdf716ff"},
+            {"address": "0x00412DBA", "encoding": "fdf7fdfe"},
+            {"address": "0x00412EAC", "encoding": "fdf784fe"},
+            {"address": "0x0041318E", "encoding": "fdf713fd"},
+            {"address": "0x004131A6", "encoding": "fdf707fd"},
+            {"address": "0x00414DD0", "encoding": "fbf7f2fe"},
+            {"address": "0x00414E26", "encoding": "fbf7c7fe"},
+            {"address": "0x00414F64", "encoding": "fbf728fe"}
+          ]
+        }
+      },
+      "production_profiles": {
+        "apple-clang": {
+          "apollo_main": {"leaf_size": 6, "overlay_offset": 124596, "runtime_address": "0x007B29D8", "relocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c", "unrelocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c"},
+          "apollo_bootloader": {"leaf_size": 6, "overlay_offset": 650, "runtime_address": "0x00434702", "relocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c", "unrelocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c"}
+        },
+        "linux-clang": {
+          "apollo_main": {"leaf_size": 6, "overlay_offset": 126416, "runtime_address": "0x007B30F4", "relocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c", "unrelocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c"},
+          "apollo_bootloader": {"leaf_size": 6, "overlay_offset": 650, "runtime_address": "0x00434702", "relocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c", "unrelocated_sha256": "6194594e24288e708887a0e938b2a54401c8c732210d91af7a5927d03bd3604c"}
+        }
+      },
+      "relocations": [],
+      "qualification": "Altered scalar-only shared adaptation selected against the authenticated littlefs v2.10.1 source-equivalent baseline and atomically registered in Apollo main and bootloader; not proof of the exact historical vendor checkout. The complete pristine littlefs library and G2 block-device ports remain unregistered."
+    },
+    "tag_size_leaf": {
+      "upstream_function": "lfs_tag_size",
+      "upstream_source": "lfs.c",
+      "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+      "upstream_definition_span": "lfs.c bytes [10793,10880)",
+      "upstream_definition_offset": 10793,
+      "upstream_definition_size": 87,
+      "upstream_definition_sha256": "9df85bc43ca9f90ef58c425c5fd9bbbbf53585093be5fad0cc580fc88814ea5c",
+      "upstream_tag_typedef_span": "lfs.c bytes [9602,9629)",
+      "upstream_tag_typedef_offset": 9602,
+      "upstream_tag_typedef_size": 27,
+      "upstream_tag_typedef_sha256": "cb4dcd6212b1a269371d86dddf98ed74853e2eb43753c5d8f8659abbca167ce2",
+      "local_source": "components/shared/littlefs/runtime_littlefs_tag_size.c",
+      "local_source_size": 854,
+      "local_source_sha256": "533bbfcbfc2440e02b79692a2a7ccff87c3cb62cbb0788c1d5bf806fd3bca849",
+      "local_header": "components/shared/littlefs/runtime_littlefs_tag_size.h",
+      "local_header_size": 1000,
+      "local_header_sha256": "0f29febdc25b081de1821a41c9065870c02154375985bf648d8e1b63f6cc3528",
+      "stock_size": 6,
+      "stock_sha256": "8596106584e598a657aea7fdd2e1156a748158d2d63d9c121c92587fabbdf8ca",
+      "stock_images": {
+        "apollo_main": {
+          "stock_span": "[0x004CAEB8,0x004CAEBE)",
+          "stock_file_offset": 601816,
+          "stock_callers": [
+            {"address": "0x004CAECC", "encoding": "fff7f4ff"},
+            {"address": "0x004CAF10", "encoding": "fff7d2ff"},
+            {"address": "0x004CAF26", "encoding": "fff7c7ff"},
+            {"address": "0x004CAF48", "encoding": "fff7b6ff"},
+            {"address": "0x004CB368", "encoding": "fff7a6fd"},
+            {"address": "0x004CB3D4", "encoding": "fff770fd"},
+            {"address": "0x004CB77E", "encoding": "fff79bfb"},
+            {"address": "0x004CB7DA", "encoding": "fff76dfb"},
+            {"address": "0x004CBFD4", "encoding": "fef770ff"},
+            {"address": "0x004CBFFA", "encoding": "fef75dff"},
+            {"address": "0x004CC026", "encoding": "fef747ff"},
+            {"address": "0x004CC032", "encoding": "fef741ff"},
+            {"address": "0x004CDC5C", "encoding": "fdf72cf9"},
+            {"address": "0x004CF578", "encoding": "fbf79efc"},
+            {"address": "0x004CF59E", "encoding": "fbf78bfc"}
+          ]
+        },
+        "apollo_bootloader": {
+          "stock_span": "[0x00410BC0,0x00410BC6)",
+          "stock_file_offset": 3008,
+          "stock_callers": [
+            {"address": "0x00410BD4", "encoding": "fff7f4ff"},
+            {"address": "0x00410C18", "encoding": "fff7d2ff"},
+            {"address": "0x00410C2E", "encoding": "fff7c7ff"},
+            {"address": "0x00410C50", "encoding": "fff7b6ff"},
+            {"address": "0x00411070", "encoding": "fff7a6fd"},
+            {"address": "0x004110DC", "encoding": "fff770fd"},
+            {"address": "0x00411486", "encoding": "fff79bfb"},
+            {"address": "0x004114E2", "encoding": "fff76dfb"},
+            {"address": "0x00411C5A", "encoding": "fef7b1ff"},
+            {"address": "0x00411C86", "encoding": "fef79bff"},
+            {"address": "0x00411C92", "encoding": "fef795ff"},
+            {"address": "0x004137AC", "encoding": "fdf708fa"},
+            {"address": "0x00414C48", "encoding": "fbf7baff"},
+            {"address": "0x00414C6E", "encoding": "fbf7a7ff"}
+          ]
+        }
+      },
+      "production_profiles": {
+        "apple-clang": {
+          "apollo_main": {"leaf_size": 6, "overlay_offset": 124604, "runtime_address": "0x007B29E0", "relocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54", "unrelocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54"},
+          "apollo_bootloader": {"leaf_size": 6, "overlay_offset": 656, "runtime_address": "0x00434708", "relocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54", "unrelocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54"}
+        },
+        "linux-clang": {
+          "apollo_main": {"leaf_size": 6, "overlay_offset": 126424, "runtime_address": "0x007B30FC", "relocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54", "unrelocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54"},
+          "apollo_bootloader": {"leaf_size": 6, "overlay_offset": 656, "runtime_address": "0x00434708", "relocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54", "unrelocated_sha256": "35890ebcdee5cb7f51b3e8d874201b7e0214f6111eebe56c772133f259cf9b54"}
+        }
+      },
+      "relocations": [],
+      "qualification": "Altered scalar-only shared adaptation selected against the authenticated littlefs v2.10.1 source-equivalent baseline and atomically registered in Apollo main and bootloader; not proof of the exact historical vendor checkout. The complete pristine littlefs library and G2 block-device ports remain unregistered."
+    }
+  },
+  "files": [
+    {
+      "path": "lfs.c",
+      "size": 196753,
+      "sha256": "81a209e8551754d13b24fc0a2b6707fb3b2475e14feba00bf0df722b98a31398",
+      "git_blob_sha1": "7520f2ea7eb1d3d29ab29422ca3d6d0a3057397a"
+    },
+    {
+      "path": "lfs.h",
+      "size": 26439,
+      "sha256": "ee44e99d6b19119b3e577b969b80c9d5e6f96410c9593794afddf6d4b314c486",
+      "git_blob_sha1": "45315603e4498249266b78bbaff540520ef10429"
+    },
+    {
+      "path": "lfs_util.c",
+      "size": 988,
+      "sha256": "f2fbde533670560434bd9f5a547174cc7c5a4670a02c47b4bd85180dced8b2ec",
+      "git_blob_sha1": "dac72abc3c101dc720727d3379723548d46dae1e"
+    },
+    {
+      "path": "lfs_util.h",
+      "size": 7954,
+      "sha256": "f5d249326646c818e62af3cefefe8a57e7b484446a0f48d1050b95e60925088e",
+      "git_blob_sha1": "0aec48855359df6e39d2f5bb3c45ca22b4a28811"
+    },
+    {
+      "path": "LICENSE.md",
+      "size": 1523,
+      "sha256": "0cb4ff1daf5fdc1359c6a6ee3116092f08fc100c9d58b1b77ab17bfd801f856d",
+      "git_blob_sha1": "e6c3a7bac1d8b3ed2ff3160a5bb49abebdd6fe7e"
+    }
+  ]
+}

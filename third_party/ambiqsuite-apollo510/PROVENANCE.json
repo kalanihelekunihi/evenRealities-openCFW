@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "component": "ambiqsuite-apollo510-mspi-closure",
+  "license": "BSD-3-Clause",
+  "upstream": {
+    "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq.git",
+    "selected_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+    "selected_tree": "02b79dbf428a8cded053c65c92cc58fa5fdb8e78",
+    "selected_commit_date": "2025-10-15T15:30:58+08:00",
+    "commit_subject": "Import Apollo510 HAL from AmbiqSuite SDK 5.1.0",
+    "sdk_revision": "AmbiqSuite SDK 5.1.0 / release_sdk5p1p0-366b80e084"
+  },
+  "selection": {
+    "classification": "authenticated public source dependency closure",
+    "evidence": "docs/research/ambiqsuite-mspi-interrupt-clear-source-boundary-audit.md",
+    "root_translation_unit": "mcu/apollo510/hal/mcu/am_hal_mspi.c",
+    "root_function": "am_hal_mspi_interrupt_clear",
+    "dependency_method": "Clang preprocessor dependency closure for the complete unmodified translation unit",
+    "cmsis_core_component": "../cmsis-core"
+  },
+  "safety": {
+    "hardware_operations": [],
+    "includes_programmer": false,
+    "includes_board_support_package": false,
+    "permits_flash_program_or_erase": false
+  },
+  "files": [
+    {
+      "path": "CMSIS/AmbiqMicro/Include/apollo510.h",
+      "size": 10449123,
+      "sha256": "b6ca35dc828ef95825c0a22f06e6ca5ed558a6542dc74310515fdc350051a797",
+      "git_blob_sha1": "a63686ff4feb43e97a33fcc0787e76b748a783e6"
+    },
+    {
+      "path": "CMSIS/AmbiqMicro/Include/system_apollo510.h",
+      "size": 2915,
+      "sha256": "b1bc37880aae9a430763be5d6d878b4109e863cb0d615f1ca59b0fb7b2fe081b",
+      "git_blob_sha1": "13019c743dec94082a16af205f7a12e55d2a79cf"
+    },
+    {
+      "path": "mcu/am_sdk_version.h",
+      "size": 3472,
+      "sha256": "1ff5cde0b1c25ae58d80d3d430ebfc5bcf2b9599593629859b01261cfa969f21",
+      "git_blob_sha1": "d83cba0a9b84aedd7f4d53b26b68e4a049b335f4"
+    },
+    {
+      "path": "mcu/apollo510/am_mcu_apollo.h",
+      "size": 7299,
+      "sha256": "c79aef5ca1e75c11e78b023cfbb39ca478245ec4997c537b97f6c939d317c457",
+      "git_blob_sha1": "bf3dc61f42140c476ed4f7805c3fa99b353d77ba"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_access.h",
+      "size": 9531,
+      "sha256": "73338ce73c2d0b3ad7ab1b9c07c6aafa4666d25214e4456963c0845625600b59",
+      "git_blob_sha1": "bf327bf34406bf582c17d9a7d72f4c6cde68a50d"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_adc.h",
+      "size": 33142,
+      "sha256": "9b551d0863b33fd3d2acd1e884d8f6fb2088fb87e1efb2e07a01d10afa74d89a",
+      "git_blob_sha1": "c9cb73821ec4e6b92dd05853bd06c454c5c74ae3"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_audadc.h",
+      "size": 46528,
+      "sha256": "ec247bc1f441625e8e2d4a7817da90ba0ecacd64cc871b3f24e907b0b3a954fa",
+      "git_blob_sha1": "ac5bb1af96feae82c808de650c50a8b462f766aa"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_clkmgr.h",
+      "size": 15438,
+      "sha256": "39ea260e7f1bcd06c0ced31bea86508e6861f0fa2a4ddc09571fe01a4f7573e5",
+      "git_blob_sha1": "ca38d65fe69805f6ab8ba039f2b2f01d67920a70"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_dcu.h",
+      "size": 7215,
+      "sha256": "6a7d6c6667dcc347973db457a489c6be6bd2487fad61b77517a85b25a162cd75",
+      "git_blob_sha1": "86a4ecfe12ad8e502c260a750a13d690bade3785"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_global.h",
+      "size": 11520,
+      "sha256": "05218d399ad4bb1338aa76d84f76bcc9e8f8585cf8c1530e262316cfddc6b075",
+      "git_blob_sha1": "864573031f74d9ef56ba6f58b6e3ef04d7dbc9b3"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_gpio.h",
+      "size": 61110,
+      "sha256": "6c8d3cf841feab4df2c4ab79bd7d62cf4afe3a98b7bdf1035ea9a2aa98430ec7",
+      "git_blob_sha1": "9cbc5ea43722c16ede6f577457db5da2c11ddad6"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_i2s.h",
+      "size": 39673,
+      "sha256": "ae1ca2def3518d950d0d725821f5178b3c7f9d0daab74052b38effec8df93b42",
+      "git_blob_sha1": "fa90e1535271e6a51a057929eb1fd9a19aa6d4ee"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_info.h",
+      "size": 11552,
+      "sha256": "43bf671719ceab7d56b0e7b11c35894c75088771d156b84838fd71d136121858",
+      "git_blob_sha1": "6a160f57b6ce0910295a4adb1e21f7b99bfc4479"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_infoc.h",
+      "size": 4282,
+      "sha256": "c7eca6412f42c201fc61883b063544f2c9a77f4c2622c5ddcc8b67d37152d8af",
+      "git_blob_sha1": "6474080712c346181eed751d611b0d0016e8784a"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_pdm.h",
+      "size": 26539,
+      "sha256": "f2319c6cf008702f2b1a26e018fbbb3f5cc85a2bd398b8c0e2815c719789ec99",
+      "git_blob_sha1": "dd5ac874e372c047437d30d74ed48c3c74982939"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_pin.h",
+      "size": 180286,
+      "sha256": "ad4dbde48daba65121e8534f7b849b235a480891dff5d8b1c596d906ff1f6d78",
+      "git_blob_sha1": "840d3a1793f9e5337a7bb3623e133abf57b0279d"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_pwrctrl.h",
+      "size": 36764,
+      "sha256": "54ce1a2242e3d48ca14ad6f49c14e28667975314f7ef06f071f362404afb073f",
+      "git_blob_sha1": "565e633433c854ab3961cbc9157cc0afee778b53"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_queue.h",
+      "size": 10115,
+      "sha256": "eabc8d95b06f06c24cc160ca85e20bd2fca32d1e7b0d9c8d815b7b3f9dffd2db",
+      "git_blob_sha1": "12f20bfeefa091224ad16626c51b450acab529e1"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_security.h",
+      "size": 8229,
+      "sha256": "7561b575efd29b4556a9be96ee5d328a64688492841ea196f411f47a09c36129",
+      "git_blob_sha1": "ae9c485cc6f8003f07fd4288090d1cfb526482c8"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_spotmgr.h",
+      "size": 27518,
+      "sha256": "63fefbd897b5be0d0b29ba3b8017b10269e50f84fbeed841a98b74620a053f55",
+      "git_blob_sha1": "f3eceb0727f45b1419bb36a87cdc6582c993227a"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_spotmgr_pcm0_7.h",
+      "size": 7972,
+      "sha256": "d52ebdc36ccf4e32495ce3adb71701585a097699c43c2e9fe7f3b8cdbc31f203",
+      "git_blob_sha1": "a8cb2569eac70fcefedadcd9d36a17c2cca97f6a"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_spotmgr_pcm2_0.h",
+      "size": 9735,
+      "sha256": "7fc1c347e2accdbaedc6920ed27e8c0b3c3d68d52386decad7c5ff2b2b547915",
+      "git_blob_sha1": "f5aa715c1954a0098399343d17043d8928ca963c"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_spotmgr_pcm2_1.h",
+      "size": 8455,
+      "sha256": "92d683a7d8566613a777a5b9b3a10761915e9bc7a3a6cef7ed37a2101d388b65",
+      "git_blob_sha1": "7e4a84c99ed9be8d525d354aefe4203cc159c092"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.h",
+      "size": 8077,
+      "sha256": "095931032dda2c8e581222b659522e91552efa3659b2261fc86b6b9b5bef87ed",
+      "git_blob_sha1": "cf33a551284c8b1cf89d33580d7a9d8ff1dd90b0"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_status.h",
+      "size": 4903,
+      "sha256": "7ffa44277fab4731bdcb742c807c9f026aadfe8456545d8f04f5053621661ee2",
+      "git_blob_sha1": "00be99527c29f02d481b9a835a2d3e567729f6e8"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_stimer.h",
+      "size": 22894,
+      "sha256": "32c5a92479b4588e9e541dadacca66a181b27ac0570b0ca0a8f65196a35d65a5",
+      "git_blob_sha1": "e3e5fffa8088d9690f58dfa1217721c7af3635aa"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_sysctrl.h",
+      "size": 6001,
+      "sha256": "7ca14c631b87b7b306ab547aa32c0a6c60d53e6ffaf21d6f854c8ab11a89370c",
+      "git_blob_sha1": "538393beb229861d618ce664b35ce34f4b11b69d"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_timer.h",
+      "size": 44568,
+      "sha256": "0a75d83ff508fb61b92aaa759f6229c69aee4841bec606cf17ff399ad5eeff35",
+      "git_blob_sha1": "3eca0a0b1b02b27501f3b8eff3cda54843fd9641"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_usb.h",
+      "size": 43375,
+      "sha256": "8fd0295c970c8882b58baf5943a6b705e1ef4596c31504fe5db3bdddcdb0961f",
+      "git_blob_sha1": "a0f69a5b5c850f9682e015be73f8920b84d0dd4e"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_usbcharger.h",
+      "size": 19500,
+      "sha256": "6ae3e7ff0ebae55d032e173080568bd0e2416436fb023513c1420521729ff8c9",
+      "git_blob_sha1": "0946ae6ef85812279a2079cd690166ca70c0fd23"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_utils.h",
+      "size": 5857,
+      "sha256": "15f4657c5838278f3cf3bf68862e61ccb222569660dc3bc180e85520bd869154",
+      "git_blob_sha1": "fc33977b2fe5b043911025665fb5cabb9b5ec3e4"
+    },
+    {
+      "path": "mcu/apollo510/hal/am_hal_wdt.h",
+      "size": 12054,
+      "sha256": "70d48da1926ae0b961dc39fa6cf960973747e55b9df1c99f76829ccbd154a94a",
+      "git_blob_sha1": "877567c4c4ca8a917f2a3203899f33ff5e12fec3"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_bootrom_helper.h",
+      "size": 6903,
+      "sha256": "33b9b2808f8df9749f8d6ad9e83905015a724bf27713621bdadcef6ac434166e",
+      "git_blob_sha1": "f47e840d4e958b61c724c0c95a2afe562c4f28f6"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_cachectrl.h",
+      "size": 7596,
+      "sha256": "52345d89dbea42196459f6a9c3049a79ce35de0708eb05ad1cd73c78f257cb2d",
+      "git_blob_sha1": "74259438889b3e393676fd5f3e6d93d946d24aa4"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_card.h",
+      "size": 65788,
+      "sha256": "6d60003ecda2f0598e371e71687885204be44fb57a3ace074d83b3cf4f2bbb90",
+      "git_blob_sha1": "6a201dc12942e08aaa4fc67e4abbc0d23df84d78"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_card_host.h",
+      "size": 9067,
+      "sha256": "a48ae78e927905aa83d6629eeb8f291f8889638f1df5fddaf86f46d20ef21b60",
+      "git_blob_sha1": "ae77fa2170878a7d4fa663689d1ab4c642438202"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_clkgen.h",
+      "size": 18201,
+      "sha256": "974f141264cfc39eef78bcbc6850f0614c8b10247573c6108c793213a94083fa",
+      "git_blob_sha1": "deed0f50cfd471b58cac5eb3e82165a492105a6b"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_cmdq.h",
+      "size": 10496,
+      "sha256": "0113aed2f109c5f022d38055b83a75c2cf141e8621177296757fc8315926762f",
+      "git_blob_sha1": "9baaf36c6c4e906602b76abf45f5d90e33451ce0"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_debug.h",
+      "size": 4914,
+      "sha256": "3be697d2efeca3977e8843d43085cfe2db81833145b2294e710ff52add182145",
+      "git_blob_sha1": "a7251c6f5bd50cc93201f3f99e6104cf23b8e7f1"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_dsi.h",
+      "size": 15076,
+      "sha256": "ebd38bed0c737a7b528c9714b419c9e0d6194fdfcc399f74b669527632db988a",
+      "git_blob_sha1": "9fa7138ea5467d44d2e674df74d5d60af84ed10b"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_iom.h",
+      "size": 33761,
+      "sha256": "86135b68a11e12dccf041515bb09a22103c8ec26270d40d042fb65928b99c621",
+      "git_blob_sha1": "88e8b56a3cda4371db2d4be3780f36f06a03e362"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_ios.h",
+      "size": 30617,
+      "sha256": "87dacd6ea57897347ee966e41e05cfa174860c42933e0eec38cf3f223ca30df2",
+      "git_blob_sha1": "70fe61374c22649d6d6f8c1c1d490fba6fc8a93b"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_itm.h",
+      "size": 10781,
+      "sha256": "94f2b3526d548e1c5dfece0c64caef511b78cd0fe9c66c25ba7316bcecadb350",
+      "git_blob_sha1": "59ea99708a9e22c18659e28007fd693a92996567"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mcu.h",
+      "size": 3392,
+      "sha256": "b2392ccd9f337ce9dc90ae90d3b88a3aa880f816fc3736b169fdac3a82364a4b",
+      "git_blob_sha1": "0d25e7e988e9a646eac058ca39c81444ac6777b9"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mcu_interrupt.h",
+      "size": 5710,
+      "sha256": "4647969dcd7bf656f57e4056f0a3241dd011a3f95969049c656ff298f51ca211",
+      "git_blob_sha1": "931fbfc8f19b828529a4315291d9cf2a305e46f8"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mcu_sysctrl.h",
+      "size": 9139,
+      "sha256": "aeb426530896cefddc05a9c50013c0160df3ac6965ef7c8dfb62373ed3473d7e",
+      "git_blob_sha1": "0f2689cc9acd0bb176da6263d2697b4204bc3e8b"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mcuctrl.h",
+      "size": 20042,
+      "sha256": "6504a1af04209e0c111e704a63f0628537a0c59ed8750806784e049fc21fc7f8",
+      "git_blob_sha1": "c54b8f86786ca237d5e0fb5e2cdbc3380d45d5cb"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mpu.h",
+      "size": 8935,
+      "sha256": "d9a9b6432072e08694881313ab47d911920f0d27900722a6a620e5410a86a12e",
+      "git_blob_sha1": "988e82acdfa02acbab93081ed3ffd399f9a11759"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mram.h",
+      "size": 13676,
+      "sha256": "6997e72e3d551e90867c64e4b8bc3a71b6f15a78e0076e925143c256399a2ab4",
+      "git_blob_sha1": "72a5322242baab30889df775e444eda96b8a6db1"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mram_recovery.h",
+      "size": 6167,
+      "sha256": "1853a263e4b6bca888b05d3a4cc523acf678cfc891ded795ae2baaa3b1bcfe7c",
+      "git_blob_sha1": "c7ca48c2acca4f34093bd9365d950c8204e21eae"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mspi.c",
+      "size": 168473,
+      "sha256": "5a91ab0c67bda4bd61c7d436b94b5a7c81693b948a331d282ae10e88cc5bf85f",
+      "git_blob_sha1": "c12ef914660227aba3ebef3a0fb3ec749510c1bc"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_mspi.h",
+      "size": 36982,
+      "sha256": "2a682bb7c1618982d6a802f3220a38696cd594c89d90e64b1a698d226b0a557b",
+      "git_blob_sha1": "738ae35ffbe8ca3158df18d3b28794bf0c7b2589"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_reset.h",
+      "size": 11397,
+      "sha256": "f64a293ef48afad7173df67208f36360fac383806df63f449ade7f829feda530",
+      "git_blob_sha1": "b7652de54b23541d4aa09b9cf9519781e0a4597e"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_rtc.h",
+      "size": 15177,
+      "sha256": "705e8734a61f45ed0a0a7f597e53bfc2c3a2cf210af60db99a612b70567d676e",
+      "git_blob_sha1": "f8ace86045e4d778c905e41e646cd89618d05eec"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_sdhc.h",
+      "size": 18448,
+      "sha256": "f24ce3ac4fedc405012ff6ee0267abb0130bb7f9ba82d5e4cccf0ae1b509e6b2",
+      "git_blob_sha1": "041979c3bef1277fd405e82db3f4e9b0f2d38014"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_secure_ota.h",
+      "size": 15637,
+      "sha256": "042c971f531206f0236132d311aee5aa3b4f0125c325dd81bac762af7c705ab3",
+      "git_blob_sha1": "cb8ae708d750ab86986053fab3ca10c35393367b"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_sysctrl_ton_config.h",
+      "size": 3814,
+      "sha256": "853e525658e5d1074f74dd395ebeabf1e50c4091cf73805f85d6bde7848d89fb",
+      "git_blob_sha1": "45c62abcc7b28c140011a6e7b6fa7273e0815c4f"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_syspll.h",
+      "size": 23156,
+      "sha256": "534eb371ce7830aee411284593d0c85a6e6e2396c04bf88ccb33f20758014cfa",
+      "git_blob_sha1": "dc417cb830842aa6f58de0f13a840131b72d308d"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_systick.h",
+      "size": 8498,
+      "sha256": "87148dc3dd31d8e6b8b6053727b682c62898bb5c028944b2c4be78d1f965f2a1",
+      "git_blob_sha1": "ed543e9ccc2cbe32192a578c42ef8c470a7a64a5"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_tpiu.h",
+      "size": 5610,
+      "sha256": "3690fcc3710317f7e5e06c5b1c929682cb8356d74e2967e16873a7a44f50345c",
+      "git_blob_sha1": "cd5c483ac9731c2458d71746868b1cb12aac66ef"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_uart.h",
+      "size": 35086,
+      "sha256": "78d78e42f30fd1f28ca2b3f9e5621f7a1da8642005bdf7a35b23d54314d7a005",
+      "git_blob_sha1": "130158109a8a3c15b8fcb0ace73adbd71a32aa26"
+    },
+    {
+      "path": "mcu/apollo510/hal/mcu/am_hal_uart_stream.h",
+      "size": 28527,
+      "sha256": "a2eff70d30644d1b5757b82cc12c190636ef93368229e0c9361ecb73dea8a9d5",
+      "git_blob_sha1": "fc2b42579c54a25e00f56a61de7220acde064bc1"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_mcu_apollo510_mraminfo0.h",
+      "size": 41240,
+      "sha256": "fd0daf899e8f836844e99629e7855bb23349eb87a7e23695580f9cbeb0af76b5",
+      "git_blob_sha1": "323d4819745032580d7ba8eccb07f84f9b9669d8"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_mcu_apollo510_mraminfo1.h",
+      "size": 74792,
+      "sha256": "1113c8b5e668077e5546614f5b8d16a50921186dc10ecf042c4c097ef5488b38",
+      "git_blob_sha1": "ca64228cc5f0a31b5f713ea4f43b2e7fd1255224"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_mcu_apollo510_otpinfo0.h",
+      "size": 43028,
+      "sha256": "e6275790cf9e0ff40f12fab362031b0dc06931963533514cf82c745c44b222a6",
+      "git_blob_sha1": "e19d89b09f06dbae3abf4a5b14641e289077eaed"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_mcu_apollo510_otpinfo1.h",
+      "size": 83371,
+      "sha256": "2578377cd221c4e510d5a677ce52a95ac15acf144556dc8f3a322e11aa15e7c6",
+      "git_blob_sha1": "8d4c93d57a2c84847a33eec802a162614a32e559"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_mcu_apollo510_otpinfoc.h",
+      "size": 82504,
+      "sha256": "9c5e5a2c4e5dbbf80a3f9bd521308aa84fb1ea9f1819356bd7d90cf104aec76a",
+      "git_blob_sha1": "7cfe9785fe982702c5c28aa9870c62387c464cad"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_reg.h",
+      "size": 15165,
+      "sha256": "c73d6702d5246a0fe6996712c4e83444260b5a09d18bf69ab8675ad349bc326a",
+      "git_blob_sha1": "e36ce6fd7c7543eb6b68990958fa0c2e757529d2"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_reg_base_addresses.h",
+      "size": 5513,
+      "sha256": "e6d15af8c495288f88a8ad0eea1ccae07cb14cac356f4fb3c138e4c3fedae16d",
+      "git_blob_sha1": "3b7338a3711ebb10b45335412ba6ae69da437a89"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_reg_jedec.h",
+      "size": 12833,
+      "sha256": "e9672ca3a653d80a10c08d7b62986281b6d93f460b66df45a55aa9180159301a",
+      "git_blob_sha1": "188074256f05fee70064bcb6337aff591c1e0f5a"
+    },
+    {
+      "path": "mcu/apollo510/regs/am_reg_macros.h",
+      "size": 10804,
+      "sha256": "a8e67be579ba864f93977cd98d3715a23a93632906f8cd7a5c6e2b1aad267bfd",
+      "git_blob_sha1": "407abe4808e763ab9ed7857180e6dbc4205eb5f4"
+    }
+  ]
+}

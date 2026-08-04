@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "subject": "EasyLogger corrected single-owner production promotion",
+  "initial_core_overlay_run": {
+    "tests_run": 275,
+    "tests_passed": 229,
+    "failures": 46,
+    "duration_seconds": 630.273
+  },
+  "failure_classification": [
+    {
+      "cause": "single_owner_12_byte_closure_reduction",
+      "count": 5,
+      "tests": [
+        {"name": "test_overlay_and_complete_component_are_pinned", "count": 1},
+        {"name": "test_core_source_evenota_and_flash_regions_are_pinned", "count": 1},
+        {"name": "test_freertos_reset_and_unordered_removal_are_source_closed", "count": 2},
+        {"name": "test_freertos_semaphore_take_upstream_pair_is_source_closed", "count": 1}
+      ]
+    },
+    {
+      "cause": "pre_existing_stale_canonical_pin",
+      "count": 41,
+      "tests": [
+        {"name": "test_ambiq_mspi_interrupt_clear_isolated_leaf_is_pinned", "count": 1},
+        {"name": "test_boot_identity_helpers_are_pinned_to_stock_spans", "count": 1},
+        {"name": "test_easylogger_and_queue_state_overlay_increment_is_pinned", "count": 1},
+        {"name": "test_entry_replacements_are_nonlinking_branches_with_nop_fill", "count": 1},
+        {"name": "test_freertos_interrupt_mask_isolated_leaves_and_copies_are_pinned", "count": 2},
+        {"name": "test_freertos_queue_creation_cluster_is_pinned", "count": 7},
+        {"name": "test_littlefs_endian_isolated_leaves_are_aggregate_pinned", "count": 4},
+        {"name": "test_littlefs_mlist_isopen_isolated_leaf_and_redirect_are_pinned", "count": 1},
+        {"name": "test_mcuctrl_device_info_is_source_owned", "count": 1},
+        {"name": "test_pwrctrl_peripheral_descriptor_is_pinned_to_stock_span", "count": 1},
+        {"name": "test_rtc_time_set_is_pinned_to_stock_span", "count": 1},
+        {"name": "test_runtime_style_through_format_cluster_is_source_owned", "count": 3},
+        {"name": "test_sarc_state_helpers_are_pinned_to_reviewed_stock_spans", "count": 1},
+        {"name": "test_tracepoint_file_io_cluster_is_pinned_to_stock_spans", "count": 1},
+        {"name": "test_tracepoint_runtime_bootstrap_is_pinned_to_stock_span", "count": 1},
+        {"name": "test_tracepoint_storage_cluster_is_pinned_to_stock_spans", "count": 1},
+        {"name": "test_upstream_list_and_littlefs_leaf_increment_is_pinned", "count": 13}
+      ]
+    }
+  ],
+  "scope_controls": {
+    "async_queue_candidate_files_modified_by_this_promotion": false,
+    "hardware_operated": false,
+    "git_index_modified_by_this_validation": false
+  },
+  "final_validation": {
+    "focused_builder_and_submit": {
+      "tests_run": 24,
+      "failures": 0,
+      "status": "passed"
+    },
+    "core_overlay": {
+      "tests_run": 251,
+      "failures": 0,
+      "duration_seconds": 1195.424,
+      "status": "passed"
+    },
+    "make_source_verify": {
+      "status": "passed"
+    },
+    "exact_root_linux": {
+      "source_root": "/Users/kalani/Repo/SybilSightABCD/openCFW",
+      "toolchain": "Homebrew clang 22.1.8",
+      "overlay_size": 123558,
+      "overlay_sha256": "f2c33def6131981c1a283968bc02bd55cde32536f4f33a7fa3cbf905d42693fc",
+      "component_size": 3646954,
+      "component_sha256": "5ff7dd5894b74573971912371f22d0b463c32552ea1037441e1de992a6a8d3b9",
+      "package_size": 4425408,
+      "package_sha256": "fe49c0d9830327a0fdd0e7815a147bb6b810e27b9a9277b3bbfe9021de247a75",
+      "status": "passed_byte_identical"
+    }
+  }
+}

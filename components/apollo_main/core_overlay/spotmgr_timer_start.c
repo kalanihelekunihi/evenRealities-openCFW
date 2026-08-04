@@ -1,0 +1,109 @@
+/*
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 2025, Ambiq Micro, Inc.
+ * All rights reserved.
+ *
+ * Bounded Apollo510 SPOT-manager timer-start adaptation from AmbiqSuite SDK
+ * 5.1.0. Reviewed stock and SDK evidence is recorded in EVIDENCE.md.
+ */
+
+typedef __UINTPTR_TYPE__ open_cfw_spotmgr_timer_start_uintptr;
+
+#define OPEN_CFW_SPOTMGR_TIMER_START_CTRL0_ADDRESS 0x400083E0U
+#define OPEN_CFW_SPOTMGR_TIMER_START_COMPARE0_ADDRESS 0x400083E8U
+#define OPEN_CFW_SPOTMGR_TIMER_START_GLOBEN_ADDRESS 0x40008010U
+#define OPEN_CFW_SPOTMGR_TIMER_START_NVIC_ISER_ADDRESS 0xE000E108U
+
+#define OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_REQUEST_ENTRY 0x004C44BDU
+#define OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_HFRC 4U
+#define OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_USER_TIMER_A 49U
+
+#define OPEN_CFW_SPOTMGR_TIMER_START_TICKS_PER_MICROSECOND 6U
+#define OPEN_CFW_SPOTMGR_TIMER_START_GLOBAL_ENABLE_MASK 0x00008000U
+#define OPEN_CFW_SPOTMGR_TIMER_START_CLEAR_MASK 0x00000002U
+#define OPEN_CFW_SPOTMGR_TIMER_START_ENABLE_MASK 0x00000001U
+#define OPEN_CFW_SPOTMGR_TIMER_START_NVIC_MASK 0x00040000U
+
+#ifndef OPEN_CFW_SPOTMGR_TIMER_START_READ32
+#define OPEN_CFW_SPOTMGR_TIMER_START_READ32(address) \
+    (*(const volatile unsigned int *)( \
+        open_cfw_spotmgr_timer_start_uintptr)(address))
+#endif
+
+#ifndef OPEN_CFW_SPOTMGR_TIMER_START_WRITE32
+#define OPEN_CFW_SPOTMGR_TIMER_START_WRITE32(address, value) \
+    (*(volatile unsigned int *)( \
+        open_cfw_spotmgr_timer_start_uintptr)(address) = (value))
+#endif
+
+#ifndef OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_REQUEST
+typedef unsigned int (*open_cfw_spotmgr_timer_start_clock_function)(
+    unsigned int,
+    unsigned int
+);
+#define OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_REQUEST(clock, user) \
+    (((open_cfw_spotmgr_timer_start_clock_function) \
+        OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_REQUEST_ENTRY)((clock), (user)))
+#endif
+
+/*
+ * ABI-compatible source replacement for AmbiqSuite's public
+ * am_hal_spotmgr_timer_start at 0x00480240...0x00480289.
+ */
+__attribute__((used, noinline))
+void open_cfw_spotmgr_timer_start(unsigned int delay_microseconds)
+{
+    unsigned int value;
+
+    (void)OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_REQUEST(
+        OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_HFRC,
+        OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_USER_TIMER_A
+    );
+
+    OPEN_CFW_SPOTMGR_TIMER_START_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_START_COMPARE0_ADDRESS,
+        delay_microseconds *
+            OPEN_CFW_SPOTMGR_TIMER_START_TICKS_PER_MICROSECOND
+    );
+
+    value = OPEN_CFW_SPOTMGR_TIMER_START_READ32(
+        OPEN_CFW_SPOTMGR_TIMER_START_GLOBEN_ADDRESS
+    );
+    OPEN_CFW_SPOTMGR_TIMER_START_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_START_GLOBEN_ADDRESS,
+        value | OPEN_CFW_SPOTMGR_TIMER_START_GLOBAL_ENABLE_MASK
+    );
+
+    value = OPEN_CFW_SPOTMGR_TIMER_START_READ32(
+        OPEN_CFW_SPOTMGR_TIMER_START_CTRL0_ADDRESS
+    );
+    OPEN_CFW_SPOTMGR_TIMER_START_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_START_CTRL0_ADDRESS,
+        value | OPEN_CFW_SPOTMGR_TIMER_START_CLEAR_MASK
+    );
+    value = OPEN_CFW_SPOTMGR_TIMER_START_READ32(
+        OPEN_CFW_SPOTMGR_TIMER_START_CTRL0_ADDRESS
+    );
+    OPEN_CFW_SPOTMGR_TIMER_START_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_START_CTRL0_ADDRESS,
+        value & ~OPEN_CFW_SPOTMGR_TIMER_START_CLEAR_MASK
+    );
+
+    OPEN_CFW_SPOTMGR_TIMER_START_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_START_NVIC_ISER_ADDRESS,
+        OPEN_CFW_SPOTMGR_TIMER_START_NVIC_MASK
+    );
+
+    value = OPEN_CFW_SPOTMGR_TIMER_START_READ32(
+        OPEN_CFW_SPOTMGR_TIMER_START_CTRL0_ADDRESS
+    );
+    OPEN_CFW_SPOTMGR_TIMER_START_WRITE32(
+        OPEN_CFW_SPOTMGR_TIMER_START_CTRL0_ADDRESS,
+        value | OPEN_CFW_SPOTMGR_TIMER_START_ENABLE_MASK
+    );
+}
+
+#undef OPEN_CFW_SPOTMGR_TIMER_START_CLOCK_REQUEST
+#undef OPEN_CFW_SPOTMGR_TIMER_START_WRITE32
+#undef OPEN_CFW_SPOTMGR_TIMER_START_READ32

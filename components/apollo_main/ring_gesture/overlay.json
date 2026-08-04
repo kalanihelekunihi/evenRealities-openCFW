@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "name": "ring_gesture",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "run_base": 4423680,
+  "preamble_bytes": 32,
+  "alignment": 4,
+  "base": {
+    "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "size": 3523396,
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "source": {
+    "path": "components/apollo_main/ring_gesture/ring_gesture.c",
+    "sha256": "e7824afc0f4d3f567b6b6247df3c0198e2af18275644313da9b199fd3b33605f",
+    "license": "GPL-3.0-only",
+    "upstream": "https://github.com/jimrandomh/g2flash",
+    "upstream_commit": "6d5c58598e047ca5980065a9ee7570ce2d172ca7"
+  },
+  "toolchain": {
+    "target": "thumbv7em-none-eabi",
+    "reviewed_version_prefix": "Apple clang version 21.0.0",
+    "flags": [
+      "-mthumb",
+      "-O2",
+      "-ffreestanding",
+      "-fno-jump-tables",
+      "-fomit-frame-pointer",
+      "-fno-builtin",
+      "-mno-unaligned-access",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ]
+  },
+  "functions": [
+    "evenhub_longpress",
+    "ring_release"
+  ],
+  "patch_sites": [
+    {
+      "name": "evenhub_ring_long_press",
+      "runtime_address": 4468370,
+      "expected_hex": "28f003f8",
+      "branch": "bl",
+      "target_function": "evenhub_longpress"
+    },
+    {
+      "name": "ring_long_press_release",
+      "runtime_address": 4469186,
+      "expected_hex": "1cf09bfb",
+      "branch": "bl",
+      "target_function": "ring_release"
+    }
+  ],
+  "expected": {
+    "overlay_size": 160,
+    "overlay_sha256": "69eac5d0808709dce5946956d9b0568e610468b5298cbe23786f3d02868b8c78",
+    "component_size": 3523556,
+    "component_sha256": "fbfd509585c9487b5f65c32b0b5729c1d693a5dedbb84dc303c02d74aef6e2db"
+  },
+  "toolchain_profiles": {
+    "linux-clang": {
+      "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+      "expected": {
+        "overlay_size": 160,
+        "overlay_sha256": "0535cf0a9a3ffc2729f3e7d6182d7cdff7fedd81df418f95a1b228cfa3d13edc",
+        "component_size": 3523556,
+        "component_sha256": "fabeb5cedc0f82ad248c1ff96cd90944ec1cde7d827ecb3010f6ea7db9ca93dc"
+      }
+    }
+  }
+}

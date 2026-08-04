@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "component": "lz4",
+  "license": "BSD-2-Clause",
+  "upstream": {
+    "repository": "https://github.com/lz4/lz4.git",
+    "repository_web": "https://github.com/lz4/lz4",
+    "selected_ref": "refs/tags/v1.10.0",
+    "selected_tag": "v1.10.0",
+    "selected_commit": "ebb370ca83af193212df4dcbadcc5d87bc0de2f0",
+    "selected_commit_url": "https://github.com/lz4/lz4/commit/ebb370ca83af193212df4dcbadcc5d87bc0de2f0",
+    "selected_tree": "1ff35e0f086e3b431ea0efd001eb5c6254561953",
+    "selected_commit_date": "2024-07-21T10:29:49-07:00",
+    "declared_library_version": "1.10.0",
+    "declared_library_version_number": 11000
+  },
+  "selection": {
+    "classification": "authenticated upstream release candidate",
+    "evidence": "openCFW/docs/research/lz4-1.10.0-candidate-audit.md",
+    "exact_historical_checkout_proven": false,
+    "qualification": "The snapshot is pristine official LZ4 v1.10.0 source. It is a safe source candidate, not proof that the G2 firmware used this exact tag.",
+    "stock_point_release_status": "unresolved between authenticated v1.9.4 and v1.10.0 decoder source states",
+    "disproved_version_discriminators": [
+      "three-argument read_variable_length signature",
+      "strict *ip > ilimit extension bound",
+      "rvl_error size_t sentinel",
+      "32-bit accumulator guard above INT32_MAX"
+    ],
+    "comparison_baseline": {
+      "tag": "v1.9.4",
+      "commit": "5ff839680134437dbf4678f3d0c7b371d84f4964",
+      "tree": "939d919c3903b42ed637542a4799fb3f4fa8b5fc",
+      "lz4_c_size": 113390,
+      "lz4_c_sha256": "b6a85fd8f9be0fedb568abd1338719b23b999583ccda6f3404d5ae11e4ce7b8e",
+      "lz4_c_git_blob_sha1": "654bfdf32f96ac633a5d4bc4dde097dbdff46882",
+      "read_variable_length_lines": "1901-1928",
+      "finding": "Official v1.9.4 already contains all four formerly claimed v1.10.0-only semantics. v1.10.0 splits the first extension iteration into a fast path without changing these edge results."
+    }
+  },
+  "g2_boundary": {
+    "official_image": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "official_image_size": 3523396,
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "load_mapping": "run_address = file_offset + 0x00437fe0",
+    "functions": [
+      {
+        "name": "read_variable_length",
+        "start": "0x0054ee90",
+        "end": "0x0054ef08",
+        "size": 120,
+        "sha256": "ac7afc67dfe6e35d5ccf23ba3e232439b75084fb80ae8b997674c0e473412a55"
+      },
+      {
+        "name": "LZ4_decompress_generic",
+        "start": "0x0054ef08",
+        "end": "0x0054f338",
+        "size": 1072,
+        "sha256": "8d8e6a9598ea565a6ca9b7fa1a41a67a2b1756b8fb43e84e684ed5b11de990ae"
+      },
+      {
+        "name": "LZ4_decompress_safe",
+        "start": "0x0054f338",
+        "end": "0x0054f356",
+        "size": 30,
+        "sha256": "d824bb067efb6bac662409f00f466631da69272c25c9bea6134c658e713eaef1"
+      }
+    ]
+  },
+  "candidate": {
+    "path": "research/candidates/evenhub_lz4_1_10_0.c",
+    "public_symbol": "open_cfw_lz4_decompress_safe",
+    "integration_status": "isolated and not production-configured",
+    "upstream_entry": "LZ4_decompress_safe",
+    "dictionary_mode": "no dictionary",
+    "block_mode": "independent full block",
+    "compressor_required": false
+  },
+  "files": [
+    {
+      "path": "lz4.c",
+      "size": 118145,
+      "sha256": "9396f7de527bc8435de9c7569fb7998e56545a84b4f3c2d808c0235c01774539",
+      "git_blob_sha1": "a2f7abee19fb9a5c768f2a6c266acf5b571f0855"
+    },
+    {
+      "path": "lz4.h",
+      "size": 46014,
+      "sha256": "26b82efc53d1570f3b54eef02e9c4764c1ad374ff03cac04e2ced5ea4d4c552f",
+      "git_blob_sha1": "80e3e5ca04d22db9ec4980dfc43672a13984aa15"
+    },
+    {
+      "path": "LICENSE",
+      "size": 1311,
+      "sha256": "8b58c446121a109ccf32edc094bba3010a3d85e4ee3702950db55e4d3e87736c",
+      "git_blob_sha1": "488491695a6b6984aa3a49a8392b192ed2bcac1d"
+    }
+  ]
+}

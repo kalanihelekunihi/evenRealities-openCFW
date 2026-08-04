@@ -1,0 +1,256 @@
+{
+  "schema_version": 2,
+  "component": "CmBacktrace",
+  "license": "MIT",
+  "upstream": {
+    "repository": "https://github.com/armink/CmBacktrace.git",
+    "repository_web": "https://github.com/armink/CmBacktrace",
+    "selected_ref": "73714489f9d8af130aacb515586b397b604a5768",
+    "selected_commit": "73714489f9d8af130aacb515586b397b604a5768",
+    "selected_commit_url": "https://github.com/armink/CmBacktrace/commit/73714489f9d8af130aacb515586b397b604a5768",
+    "selected_tree": "541c20dbeb1165f9b2862e2b84cdc63b3d7c718f",
+    "parent_commits": [
+      "6013293ced1fc2a1fd5544472a53c7bc0bce3ab6",
+      "a300d9030b139267291a45b1def460c940890ad0"
+    ],
+    "author_date": "2024-07-03T14:25:10+08:00",
+    "committer_date": "2024-07-03T14:25:10+08:00",
+    "declared_library_version": "1.4.2",
+    "declared_version_macro": "CMB_SW_VERSION",
+    "official_version_tag": null,
+    "nearest_preceding_tag": "1.4.1",
+    "nearest_preceding_tag_commit": "a8973df098d60f7572e839d7456b69e3c2fcf4f9",
+    "following_tag": "1.5.0",
+    "following_tag_commit": "3be35d99673805f258de5c2f156fac94eb896da4",
+    "commit_object_record_path": "upstream/commit.json",
+    "commit_object_record_size": 1706,
+    "commit_object_record_sha256": "0d623e61ed39db44d15560dd9070dcc962c243a0cd4d8799d71ddd0f0cd12baa",
+    "commit_payload_size": 1158,
+    "commit_payload_sha256": "54cebc708aa0910efbed7b1792f5265a2f629bb3e5c592262e9f8c63db5520d6",
+    "tree_closure_path": "upstream/trees.json",
+    "tree_closure_size": 4705,
+    "tree_closure_sha256": "63f740fb3f10c83793f10ae74e1666fdad36433003fc50e03e2f309c1b1bc718",
+    "tree_object_count": 6,
+    "tree_closure_qualification": "Complete entry lists for every Git tree on the seven selected commit-to-path traversals are vendored; the verifier reconstructs and hashes canonical Git tree payloads offline.",
+    "commit_signature": {
+      "present": true,
+      "format": "OpenPGP",
+      "signature_bytes_pinned": true,
+      "signer_trust_verified": false,
+      "qualification": "The exact signed Git commit payload fetched from the official repository is pinned. No public key is vendored, so signer trust is not independently claimed."
+    }
+  },
+  "selection": {
+    "classification": "authenticated upstream compatibility snapshot; snapshot tree remains production-excluded; selected commit is the bounded get_cur_thread_name production baseline",
+    "compatibility_choice": "Newest unmodified upstream state in the proven G2-compatible interval.",
+    "exact_g2_checkout_proven": false,
+    "qualification": "Commit 73714489 is an explicit openCFW reproducibility choice and must not be represented as the exact Even vendor checkout. The G2 image proves only the compatible unmodified-upstream interval 4abadfa0..73714489; a vendor fork remains possible.",
+    "compatible_floor_commit": "4abadfa0c4f86f22352aa5ab9ebbb4f687125a1c",
+    "compatible_ceiling_commit": "73714489f9d8af130aacb515586b397b604a5768",
+    "first_incompatible_commit": "55e7b6990640c481e83ae8a3c0f3af2092b9f7a6",
+    "compatibility_evidence": "docs/research/cmbacktrace-version-recovery-audit.md",
+    "selected_file_count": 7,
+    "selection_rule": "Exact MIT license plus minimal upstream implementation/public-header/config/language/IAR-fault-handler closure for the recovered FreeRTOS, English-content, M33-class, IAR behavior.",
+    "included_features": [
+      "CmBacktrace core",
+      "public API and definitions",
+      "upstream configuration dispatch template",
+      "English message table",
+      "IAR fault entry"
+    ],
+    "excluded_features": [
+      "Chinese and custom language headers",
+      "GCC, Keil, and GHS fault entries",
+      "bare-metal and non-FreeRTOS ports",
+      "demos, documentation, host addr2line tools, and packaging files"
+    ],
+    "source_records_sha256": "85f08955771a380589634c50fe2771aa38d0f2cc3acc5c3251c0d3b12b2184ae",
+    "integration_status": "snapshot remains unregistered; selected commit authenticates the bounded production get_cur_thread_name source adaptation"
+  },
+  "production_integration": {
+    "scope": "bounded CmBacktrace FreeRTOS get_cur_thread_name source adaptation",
+    "aggregate_registration_scope": "Production overlay, placement, manifest, package, and flash-plan validation are outside this snapshot verifier and must remain fail-closed in their dedicated gates.",
+    "upstream_compatibility_baseline": {
+      "commit": "73714489f9d8af130aacb515586b397b604a5768",
+      "source_path": "cm_backtrace/cm_backtrace.c",
+      "function": "get_cur_thread_name",
+      "selected_platform": "CMB_OS_PLATFORM_FREERTOS",
+      "selected_branch": "return vTaskName();",
+      "qualification": "This upstream branch authenticates returning the current-task-name adapter result only; it does not define the G2 fixed address, TCB layout, or null-TCB behavior."
+    },
+    "stock_g2_boundary": {
+      "get_cur_thread_name_span": "[0x00593AF6,0x00593AFE)",
+      "get_cur_thread_name_size": 8,
+      "get_cur_thread_name_hex": "80b5c2f699fa02bd",
+      "get_cur_thread_name_sha256": "75f860b4a8f7d60464eeb5216946dbefe0875c65fb0c7a6641abdd9f9daa979b",
+      "vtask_name_adapter_span": "[0x0045602E,0x00456036)",
+      "vtask_name_adapter_size": 8,
+      "vtask_name_adapter_hex": "0b48006834307047",
+      "vtask_name_adapter_sha256": "a4150246c7816b7ffab201b6ae3bc6da8c6147e9a5541a921733369dd1e6c09b",
+      "current_tcb_word_address": "0x20074A20",
+      "task_name_offset": "0x34",
+      "null_current_tcb_result": "0x34",
+      "classification": "local recovered Even G2 integration evidence; not upstream CmBacktrace source or configuration"
+    },
+    "production_files": [
+      {
+        "local_path": "components/shared/cmbacktrace/runtime_cmbacktrace_get_cur_thread_name.c",
+        "classification": "MIT upstream-derived bounded production helper",
+        "size": 2089,
+        "sha256": "4b1141957314acb9c3a8846bd9b893ba1d3a7c14227949b670ca024e9761e1ea"
+      },
+      {
+        "local_path": "components/shared/cmbacktrace/runtime_cmbacktrace_get_cur_thread_name.h",
+        "classification": "MIT bounded production helper interface",
+        "size": 669,
+        "sha256": "fccc238707db04730ad288c419c283208344d9da34019e5b7e6ba374492f7d0c"
+      },
+      {
+        "local_path": "components/apollo_main/core_overlay/runtime_cmbacktrace_pc_task_get_name_current.c",
+        "classification": "MIT local adapter implementing recovered G2 vTaskName semantics",
+        "size": 1581,
+        "sha256": "80db039fbca9128059f625bd00066673857256e73fbe104998c4053f905ceaf6"
+      },
+      {
+        "local_path": "components/apollo_main/core_overlay/runtime_cmbacktrace_pc_task_get_name_current.h",
+        "classification": "MIT local recovered-adapter interface",
+        "size": 316,
+        "sha256": "0d3cd2a900e053f9b2358da8e50c4755c2574ca738dcaa871930ae771fcfbc7a"
+      },
+      {
+        "local_path": "components/apollo_main/core_overlay/LICENSE-CmBacktrace-MIT",
+        "classification": "component copy of the upstream CmBacktrace MIT license with a terminal LF",
+        "size": 1101,
+        "sha256": "32ff92a2e9392b6acbcc734dd7c1e9f3c2e097b320b3cd87b3d7c01daf4a661a"
+      }
+    ],
+    "candidate_separation": {
+      "status": "production-excluded research candidates remain separate from the bounded production sources",
+      "candidate_paths": [
+        "components/shared/cmbacktrace/runtime_cmbacktrace_get_cur_thread_name_candidate.c",
+        "components/shared/cmbacktrace/runtime_cmbacktrace_get_cur_thread_name_candidate.h"
+      ],
+      "candidate_symbols": [
+        "open_cfw_cmbacktrace_get_cur_thread_name_candidate",
+        "open_cfw_cmbacktrace_pc_task_get_name_current_candidate"
+      ]
+    },
+    "registration_exclusion": {
+      "scan_scope": [
+        "components/**/overlay.json excluding directories named build or build-*",
+        "manifests/**/*.json excluding directories named build or build-*",
+        "Makefile"
+      ],
+      "path_normalization": "POSIX lexical normalization is applied to path-like JSON strings and Makefile path tokens before exclusion and allowlist checks.",
+      "generated_directory_exclusions": [
+        "build",
+        "build-*"
+      ],
+      "forbidden_snapshot_prefix": "third_party/cmbacktrace",
+      "allowed_production_source_paths": [
+        "components/shared/cmbacktrace/runtime_cmbacktrace_get_cur_thread_name.c",
+        "components/shared/cmbacktrace/runtime_cmbacktrace_get_cur_thread_name.h",
+        "components/apollo_main/core_overlay/runtime_cmbacktrace_pc_task_get_name_current.c",
+        "components/apollo_main/core_overlay/runtime_cmbacktrace_pc_task_get_name_current.h"
+      ],
+      "allowed_production_symbols": [
+        "open_cfw_cmbacktrace_get_cur_thread_name",
+        "open_cfw_cmbacktrace_pc_task_get_name_current"
+      ],
+      "allowed_makefile_snapshot_lines": [
+        "CMBACKTRACE_DIR := third_party/cmbacktrace",
+        "$(PYTHON) $(CMBACKTRACE_DIR)/verify_snapshot.py"
+      ],
+      "qualification": "The verifier scans source-controlled production configuration only; generated build and build-* directories are deliberately excluded and cannot authorize registration."
+    }
+  },
+  "g2_boundary": {
+    "evidence": "docs/research/cmbacktrace-version-recovery-audit.md",
+    "analyzer": "tools/analyze_g2_cmbacktrace_version.py",
+    "recovered_config_header": "g2-config/cmb_user_cfg.h",
+    "recovered_config_header_size": 1776,
+    "recovered_config_header_sha256": "9599205cc01589927c5384a316c8fd0919d2fb238f094c9f1b1933c55f85c411",
+    "proven_effective_configuration": {
+      "CMB_USING_OS_PLATFORM": true,
+      "CMB_OS_PLATFORM_TYPE": "CMB_OS_PLATFORM_FREERTOS",
+      "CMB_USING_DUMP_STACK_INFO": true,
+      "CMB_NAME_MAX": 40,
+      "CMB_CALL_STACK_MAX_DEPTH": 32,
+      "CMB_DUMP_STACK_DEPTH_SIZE": 16,
+      "compiler_branch": "IAR / __ICCARM__",
+      "effective_language_content": "English",
+      "cpu_behavior": "M33-class",
+      "StackType_t_size": 4
+    },
+    "explicit_compatibility_choices": {
+      "CMB_CPU_PLATFORM_TYPE": "CMB_CPU_ARM_CORTEX_M33",
+      "CMB_PRINT_LANGUAGE": "CMB_PRINT_LANGUAGE_ENGLISH"
+    },
+    "unresolved": [
+      "exact vendor-fork commit within the compatible interval",
+      "upstream M33 selector versus a vendor-added Cortex-M55 alias with equivalent retained branches",
+      "patched English header versus custom-language selector producing the same retained table",
+      "source-level cmb_println integration beyond its recovered dual-logging behavior",
+      "source-level IAR CSTACK and code-section override macro spellings"
+    ],
+    "fault_behavior_note": "This chosen historical snapshot predates upstream 55e7b699 stacked-xPSR bit-9 alignment handling. Promotion requires an explicit parity-versus-safety decision and exception-frame tests."
+  },
+  "files": [
+    {
+      "local_path": "LICENSE",
+      "upstream_path": "LICENSE",
+      "git_mode": "100644",
+      "size": 1100,
+      "sha256": "e8ed0e84184d2130bd1fcf5a52ce8c16b5bf338c272cab6bbd7993a9d723934e",
+      "git_blob_sha1": "d061e99e900175055d39aed49e73ac696509665d"
+    },
+    {
+      "local_path": "cm_backtrace/cm_backtrace.c",
+      "upstream_path": "cm_backtrace/cm_backtrace.c",
+      "git_mode": "100644",
+      "size": 26436,
+      "sha256": "6e444224af3ef223067849b88f61281ec0661e3f38425e84758bf12be057e01c",
+      "git_blob_sha1": "3e76321f7785cfd7e1e67d306a57717dea90c32f"
+    },
+    {
+      "local_path": "cm_backtrace/cm_backtrace.h",
+      "upstream_path": "cm_backtrace/cm_backtrace.h",
+      "git_mode": "100644",
+      "size": 1832,
+      "sha256": "91591c2fc8bb4129c51899d80c1188c4c683167bf28cf892aacfc9f955bc7fbe",
+      "git_blob_sha1": "9d0319e4a55924866730f0014e67a567066f0ecd"
+    },
+    {
+      "local_path": "cm_backtrace/cmb_cfg.h",
+      "upstream_path": "cm_backtrace/cmb_cfg.h",
+      "git_mode": "100644",
+      "size": 2492,
+      "sha256": "bfa13d7d6e1136e3106566b1fdccbff0d43210963e70827fc23ce9cee756bbf5",
+      "git_blob_sha1": "a269cb54a7dcc28a976b9bf9af491068eca00d94"
+    },
+    {
+      "local_path": "cm_backtrace/cmb_def.h",
+      "upstream_path": "cm_backtrace/cmb_def.h",
+      "git_mode": "100644",
+      "size": 17505,
+      "sha256": "897c0818d0e062866edecb467e655d5b02494d7ee1612b036035be08809e75eb",
+      "git_blob_sha1": "0740c6103919c63701d72e76caaefd2d7c3c9bbe"
+    },
+    {
+      "local_path": "cm_backtrace/Languages/en-US/cmb_en_US.h",
+      "upstream_path": "cm_backtrace/Languages/en-US/cmb_en_US.h",
+      "git_mode": "100644",
+      "size": 4961,
+      "sha256": "ad77299fecaa9a63c766bfbe9d17099c7542751fc11084bf88520bc88c35a844",
+      "git_blob_sha1": "a8d5fdff485355c2ab0719ade0acc9751ea12c47"
+    },
+    {
+      "local_path": "cm_backtrace/fault_handler/iar/cmb_fault.S",
+      "upstream_path": "cm_backtrace/fault_handler/iar/cmb_fault.S",
+      "git_mode": "100644",
+      "size": 1764,
+      "sha256": "b0245cb9deee392ecf80df528d6fe0e161a939b3ff321ea014b87d153f0d4576",
+      "git_blob_sha1": "0d75d530bf1aa090c1026b40ee01dd0f44dec10c"
+    }
+  ]
+}

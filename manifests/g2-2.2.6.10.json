@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "target": "Even Realities G2",
+  "package": {
+    "format": "EVENOTA",
+    "build_date": "2026-07-06",
+    "build_time": "21:39:36",
+    "version": "s200_v2.2.6.10",
+    "expected_size": 4301227,
+    "expected_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "output_name": "g2-openCFW-s200_v2.2.6.10.evenota.bin"
+  },
+  "components": [
+    {
+      "entry_id": 1,
+      "name": "codec",
+      "function": "Audio codec and DSP firmware package",
+      "type_id": 4,
+      "storage_type": 3,
+      "package_filename": "firmware/codec.bin",
+      "provider": {
+        "kind": "official_blob",
+        "path": "blobs/official/g2-2.2.6.10/firmware_codec.bin",
+        "size": 326092,
+        "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+      },
+      "regions": [
+        {
+          "name": "fwpk_metadata",
+          "function": "FWPK header and two-entry segment table",
+          "file_offset": 0,
+          "size": 48,
+          "address_status": "container_only",
+          "output": "codec/fwpk-metadata.bin"
+        },
+        {
+          "name": "codec_stage_1",
+          "function": "Codec package segment 1",
+          "file_offset": 48,
+          "size": 38236,
+          "address_status": "unknown",
+          "output": "codec/segment-1-address-unresolved.bin"
+        },
+        {
+          "name": "codec_stage_2",
+          "function": "Codec package segment 2",
+          "file_offset": 38284,
+          "size": 287808,
+          "address_status": "unknown",
+          "output": "codec/segment-2-address-unresolved.bin"
+        }
+      ]
+    },
+    {
+      "entry_id": 2,
+      "name": "ble_em9305",
+      "function": "EM9305 Bluetooth controller patch package",
+      "type_id": 5,
+      "storage_type": 3,
+      "package_filename": "firmware/ble_em9305.bin",
+      "provider": {
+        "kind": "official_blob",
+        "path": "blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+        "size": 211948,
+        "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+      },
+      "regions": [
+        {
+          "name": "record_metadata",
+          "function": "EM9305 record table, erase geometry, and alignment metadata",
+          "file_offset": 0,
+          "size": 124,
+          "address_status": "container_only",
+          "output": "em9305/record-metadata.bin"
+        },
+        {
+          "name": "record_0",
+          "function": "EM9305 record 0",
+          "file_offset": 124,
+          "size": 224,
+          "target": "em9305",
+          "target_address": 3145728,
+          "address_status": "confirmed_from_record_table",
+          "output": "em9305/record-0-0x00300000.bin"
+        },
+        {
+          "name": "record_1",
+          "function": "EM9305 record 1",
+          "file_offset": 348,
+          "size": 656,
+          "target": "em9305",
+          "target_address": 3146752,
+          "address_status": "confirmed_from_record_table",
+          "output": "em9305/record-1-0x00300400.bin"
+        },
+        {
+          "name": "record_2_fhdr",
+          "function": "EM9305 FHDR image descriptor; entry point 0x00302028",
+          "file_offset": 1004,
+          "size": 56,
+          "target": "em9305",
+          "target_address": 3153920,
+          "address_status": "confirmed_from_record_table",
+          "output": "em9305/record-2-fhdr-0x00302000.bin"
+        },
+        {
+          "name": "record_3_application",
+          "function": "EM9305 application record",
+          "file_offset": 1060,
+          "size": 210888,
+          "target": "em9305",
+          "target_address": 3154944,
+          "address_status": "confirmed_from_record_table",
+          "output": "em9305/record-3-application-0x00302400.bin"
+        }
+      ]
+    },
+    {
+      "entry_id": 3,
+      "name": "touch",
+      "function": "Touch-controller firmware package",
+      "type_id": 3,
+      "storage_type": 3,
+      "package_filename": "firmware/touch.bin",
+      "provider": {
+        "kind": "official_blob",
+        "path": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
+        "size": 34464,
+        "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+      },
+      "regions": [
+        {
+          "name": "fwpk_wrapper",
+          "function": "FWPK metadata and reflected CRC-32C",
+          "file_offset": 0,
+          "size": 32,
+          "address_status": "container_only",
+          "output": "touch/fwpk-wrapper.bin"
+        },
+        {
+          "name": "touch_application",
+          "function": "Touch-controller Cortex-M vector table and application",
+          "file_offset": 32,
+          "size": 34432,
+          "target": "touch_controller",
+          "target_address": 0,
+          "address_status": "inferred_from_vector_table",
+          "output": "touch/application-0x00000000.bin"
+        }
+      ]
+    },
+    {
+      "entry_id": 4,
+      "name": "case",
+      "function": "Charging-case STM32G0 application and case-to-glasses updater",
+      "type_id": 6,
+      "storage_type": 3,
+      "package_filename": "firmware/box.bin",
+      "provider": {
+        "kind": "official_blob",
+        "path": "blobs/official/g2-2.2.6.10/firmware_box.bin",
+        "size": 55784,
+        "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+      },
+      "regions": [
+        {
+          "name": "even_wrapper",
+          "function": "EVEN header, case version 1.2.57, length, and additive checksum",
+          "file_offset": 0,
+          "size": 32,
+          "address_status": "container_only",
+          "output": "case/even-wrapper.bin"
+        },
+        {
+          "name": "case_application",
+          "function": "STM32G0 Cortex-M0+ vector table and charging-case application",
+          "file_offset": 32,
+          "size": 55752,
+          "target": "case_stm32g0",
+          "target_address": 134217728,
+          "alternate_target_addresses": [
+            134479872
+          ],
+          "address_status": "confirmed_from_vector_and_ota_code",
+          "output": "case/application-logical-0x08000000.bin"
+        }
+      ]
+    },
+    {
+      "entry_id": 5,
+      "name": "apollo_bootloader",
+      "function": "Even bootloader for each glasses temple",
+      "type_id": 1,
+      "storage_type": 3,
+      "package_filename": "ota/s200_bootloader.bin",
+      "provider": {
+        "kind": "official_blob",
+        "path": "blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+        "size": 148599,
+        "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+      },
+      "regions": [
+        {
+          "name": "apollo_bootloader",
+          "function": "Apollo510B bootloader, filesystem recovery, staged-image validation, and application handoff",
+          "file_offset": 0,
+          "size": 148599,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4259840,
+          "address_status": "confirmed_from_vector_and_bootloader_code",
+          "output": "apollo510b/bootloader-0x00410000.bin"
+        }
+      ]
+    },
+    {
+      "entry_id": 6,
+      "name": "apollo_main",
+      "function": "Primary glasses-temple application",
+      "type_id": 0,
+      "storage_type": 3,
+      "package_filename": "ota/s200_firmware_ota.bin",
+      "provider": {
+        "kind": "official_blob",
+        "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+        "size": 3523396,
+        "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+      },
+      "regions": [
+        {
+          "name": "ota_preamble",
+          "function": "32-byte staging header with size, CRC-32, data type, and install address",
+          "file_offset": 0,
+          "size": 32,
+          "address_status": "container_only",
+          "output": "apollo510b/main-ota-preamble.bin"
+        },
+        {
+          "name": "apollo_main_application",
+          "function": "Apollo510B Cortex-M55 vector table and primary application",
+          "file_offset": 32,
+          "size": 3523364,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4423680,
+          "address_status": "confirmed_from_preamble_and_bootloader_code",
+          "output": "apollo510b/main-0x00438000.bin"
+        }
+      ]
+    }
+  ],
+  "protected_regions": [
+    {
+      "target": "apollo510b_internal_mram",
+      "name": "ambiq_secure_bootloader",
+      "start": 4194304,
+      "end_exclusive": 4259840,
+      "policy": "not_present_in_evenota_do_not_overwrite"
+    },
+    {
+      "target": "apollo510b_internal_mram",
+      "name": "update_flag",
+      "start": 8380416,
+      "end_exclusive": 8380432,
+      "policy": "bootloader_owned_do_not_include_in_application_image"
+    },
+    {
+      "target": "case_stm32g0",
+      "name": "bank_1_serial_16",
+      "start": 134475776,
+      "end_exclusive": 134475792,
+      "policy": "device_specific_preserve_before_case_bank_update"
+    },
+    {
+      "target": "case_stm32g0",
+      "name": "bank_1_serial_8",
+      "start": 134477824,
+      "end_exclusive": 134477832,
+      "policy": "device_specific_preserve_before_case_bank_update"
+    },
+    {
+      "target": "case_stm32g0",
+      "name": "bank_2_serial_16",
+      "start": 134737920,
+      "end_exclusive": 134737936,
+      "policy": "device_specific_preserve_before_case_bank_update"
+    },
+    {
+      "target": "case_stm32g0",
+      "name": "bank_2_serial_8",
+      "start": 134739968,
+      "end_exclusive": 134739976,
+      "policy": "device_specific_preserve_before_case_bank_update"
+    }
+  ]
+}

@@ -1,0 +1,5408 @@
+# Source coverage ledger
+
+This ledger describes the pinned
+`g2-2.2.6.10-core-source` artifact. “Generated” means bytes whose complete
+format and values are emitted by openCFW tooling. “Source compiled” means
+machine code produced from human-readable controller source. “Opaque” means
+bytes copied from the official compatibility inputs.
+
+## Preceding constructor-era package-level ownership
+
+| Ownership | Bytes | Share of the preceding 4,426,806-byte package |
+|---|---:|---:|
+| Source-compiled Apollo main and bootloader code | 125,709 | 2.839722% |
+| Generated EVENOTA transport, Apollo wrapper, alignment, and replacement entries | 88,436 | 1.997738% |
+| Total source-controlled or generator-owned output | 214,145 | 4.837461% |
+| Remaining opaque controller bytes | 4,212,661 | 95.162539% |
+
+At the preceding constructor milestone, the manifest partitioned all
+4,426,806 bytes into 1,021 placed, two deliberately unresolved, and five
+container-only regions. The cross-profile Apollo-main config had 660
+functions, 609 patch sites, and 91 relocated leaves; the bootloader config
+remained 34/32/15. The Apple main builder emitted
+125,098 source-owned, 86,396 generated patch, 32 wrapper, and 3,436,786 opaque
+component bytes. The bootloader builder recorded 660 source, 860 generated
+patch, three generated alignment, and 147,739 opaque bytes. The source-compiled accounting included the exact
+littlefs v2.10.1 fallback-bitops, disk-version major/minor, and allocator
+lookahead leaves in both
+Apollo images, the relocation-free `lfs_tag_type2` leaf in Apollo main, the
+relocation-free `lfs_tag_chunk`, `lfs_tag_isvalid`, `lfs_tag_type1`,
+`lfs_tag_type3`, and `lfs_tag_id`
+leaves in both Apollo images, and
+five fixed-address FreeRTOS NTZ context/exception leaves in
+Apollo main, plus the production CMSIS-FreeRTOS `osMessageQueueNew`,
+`osMutexNew`, and `osSemaphoreNew` leaves, FreeRTOS `pcTaskGetName`,
+`vQueueDelete`, the four-function `heap_4` closure, and the shared
+EasyLogger helper quartet with image-specific source seam providers in both
+Apollo images, plus the Apollo-main FreeRTOS tick-count provider, normal and
+ISR getter leaves, exact upstream `vTaskMissedYield` store,
+`uxTaskResetEventItemValue`, `pvTaskIncrementMutexHeldCount`,
+`vTaskSuspendAll`, and `vTaskInternalSetTimeOutState`.
+It also includes the six-function FreeRTOS scheduler cluster and the active
+authenticated upstream LZ4 v1.10.0 decoder text, 64-byte read-only table
+closure, safe adapter, and EvenHub mode-2 adapter, plus
+`xTaskRemoveFromEventList`, `xQueueGiveFromISR`, and
+`prvTaskCheckFreeStackSpace`, plus `xTaskCheckForTimeOut`. The prior hand
+decoder and mode-2 caller remain unreachable source-compiled `_legacy`
+sections, while the two stock EABI memory providers remain opaque.
+It also includes the bounded nanopb `pb_read`, private `buf_read`/`pb_readbyte`,
+and stream-constructor source leaves. The constructor and `pb_read` preserve
+the canonical callback identity; the two error strings remain explicit binary
+seams.
+Checksums inside generated framing are computed from their actual payloads.
+At that preceding constructor milestone, the 733,107-byte flash plan hashed to
+`367fa85686d517ba3e85b26f7aba43890880ea737cd5258adb26b479aad058ef`.
+The subsequent signed-varint coverage section records the current Apple plan
+and ownership boundary.
+
+## Apollo-bootloader ownership
+
+| Runtime span | Bytes | Ownership | Function |
+|---|---:|---|---|
+| `0x00410000...0x004103FF` | 1,024 | Opaque | Official bootloader before the littlefs utility quartet |
+| `0x00410400...0x00410407` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_max` entry redirect |
+| `0x00410408...0x0041040F` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_min` entry redirect |
+| `0x00410410...0x0041041B` | 12 | Generated | Exact upstream littlefs v2.10.1 `lfs_aligndown` entry redirect and NOP fill |
+| `0x0041041C...0x00410427` | 12 | Generated | Exact upstream littlefs v2.10.1 `lfs_alignup` entry redirect and NOP fill |
+| `0x00410428...0x00410481` | 90 | Generated | Exact upstream littlefs v2.10.1 fallback `lfs_npw2` entry redirect and NOP fill |
+| `0x00410482...0x00410491` | 16 | Generated | Exact upstream littlefs v2.10.1 fallback `lfs_ctz` entry redirect and NOP fill |
+| `0x00410492...0x004104B9` | 40 | Generated | Exact upstream littlefs v2.10.1 fallback `lfs_popc` entry redirect and NOP fill |
+| `0x004104BA...0x004104BD` | 4 | Generated | Exact upstream littlefs v2.10.1 `lfs_scmp` entry redirect |
+| `0x004104BE...0x004104DF` | 34 | Generated | Exact upstream littlefs v2.10.1 `lfs_fromle32` entry redirect and NOP fill |
+| `0x004104E0...0x004104E7` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_tole32` entry redirect and NOP fill |
+| `0x004104E8...0x00410509` | 34 | Generated | Exact upstream littlefs v2.10.1 `lfs_frombe32` entry redirect and NOP fill |
+| `0x0041050A...0x00410511` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_tobe32` entry redirect and NOP fill |
+| `0x00410512...0x00410B71` | 1,632 | Opaque | Official bootloader before the private littlefs tag-validity helper |
+| `0x00410B72...0x00410B7B` | 10 | Generated | Complete littlefs v2.10.1 `lfs_tag_isvalid` entry redirect and NOP fill |
+| `0x00410B7C...0x00410B8F` | 20 | Opaque | Official bootloader between tag-validity and tag-type1 helpers |
+| `0x00410B90...0x00410B97` | 8 | Generated | Complete littlefs v2.10.1 `lfs_tag_type1` entry redirect and NOP fill |
+| `0x00410B98...0x00410B9F` | 8 | Opaque | Official bootloader between tag-type1 and tag-type3 helpers |
+| `0x00410BA0...0x00410BA7` | 8 | Generated | Complete littlefs v2.10.1 `lfs_tag_type3` entry redirect and NOP fill |
+| `0x00410BA8...0x00410BAD` | 6 | Generated | Complete littlefs v2.10.1 `lfs_tag_chunk` entry redirect and NOP fill |
+| `0x00410BAE...0x00410BB7` | 10 | Opaque | Official bootloader between tag-chunk and tag-ID helpers |
+| `0x00410BB8...0x00410BBF` | 8 | Generated | Complete littlefs v2.10.1 `lfs_tag_id` entry redirect and NOP fill |
+| `0x00410BC0...0x00410D89` | 458 | Opaque | Official bootloader between tag-ID and the metadata-list predicate |
+| `0x00410D8A...0x00410DA7` | 30 | Generated | Exact upstream littlefs v2.10.1 `lfs_mlist_isopen` entry redirect and NOP fill |
+| `0x00410DA8...0x00410DC3` | 28 | Generated | Exact upstream littlefs v2.10.1 `lfs_mlist_remove` entry redirect and NOP fill |
+| `0x00410DC4...0x00410DCB` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_mlist_append` entry redirect and NOP fill |
+| `0x00410DCC...0x00410DD1` | 6 | Generated | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version` entry redirect and NOP fill |
+| `0x00410DD2...0x00410DDD` | 12 | Generated | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version_major` entry redirect and NOP fill |
+| `0x00410DDE...0x00410DE7` | 10 | Generated | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version_minor` entry redirect and NOP fill |
+| `0x00410DE8...0x00410DED` | 6 | Generated | Exact upstream littlefs v2.10.1 `lfs_alloc_ckpoint` entry redirect and NOP fill |
+| `0x00410DEE...0x00410DFD` | 16 | Generated | Exact upstream littlefs v2.10.1 `lfs_alloc_drop` entry redirect and NOP fill |
+| `0x00410DFE...0x00410E35` | 56 | Generated | Exact upstream littlefs v2.10.1 `lfs_alloc_lookahead` entry redirect and NOP fill |
+| `0x00410E36...0x00417AD3` | 27,806 | Opaque | Official bootloader before the EasyLogger format helper boundary |
+| `0x00417AD4...0x00417B3D` | 106 | Generated | Complete EasyLogger `get_fmt_enabled` replaced by source entry redirect |
+| `0x00417B3E...0x00417B47` | 10 | Opaque | Official EasyLogger punctuation/alignment gap |
+| `0x00417B48...0x00417B61` | 26 | Generated | Complete EasyLogger unsigned-argument format predicate replaced by source entry redirect |
+| `0x00417B62...0x00417B7B` | 26 | Generated | Complete EasyLogger pointer-argument format predicate replaced by source entry redirect |
+| `0x00417B7C...0x0041B157` | 13,788 | Opaque | Official bootloader between EasyLogger format predicates and bounded copy |
+| `0x0041B158...0x0041B1F9` | 162 | Generated | Complete EasyLogger `elog_strcpy` replaced by source entry redirect |
+| `0x0041B1FA...0x00426505` | 45,836 | Opaque | Official bootloader before the MSPI interrupt-clear leaf |
+| `0x00426506...0x00426535` | 48 | Generated | Authenticated AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_clear` entry redirect |
+| `0x00426536...0x00434476` | 57,153 | Opaque | Remaining official bootloader |
+| `0x00434477` | 1 | Generated | Zero alignment before source overlay |
+| `0x00434478...0x004344D1` | 90 | Source compiled | Exact littlefs utility, comparator, open-list, disk-version, and allocator helpers |
+| `0x004344D2...0x00434509` | 56 | Source compiled | Exact upstream littlefs v2.10.1 `LFS_NO_INTRINSICS` `lfs_npw2` leaf |
+| `0x0043450A...0x00434519` | 16 | Source compiled | Exact upstream littlefs v2.10.1 `LFS_NO_INTRINSICS` `lfs_ctz` leaf |
+| `0x0043451A...0x00434543` | 42 | Source compiled | Exact upstream littlefs v2.10.1 `LFS_NO_INTRINSICS` `lfs_popc` leaf |
+| `0x00434544...0x00434573` | 48 | Source compiled | Authenticated AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_clear` leaf retained by section GC |
+| `0x00434574...0x00434585` | 18 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_mlist_isopen` isolated source leaf |
+| `0x00434586...0x00434587` | 2 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_fromle32` isolated source leaf |
+| `0x00434588...0x00434589` | 2 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_tole32` isolated source leaf |
+| `0x0043458A...0x0043458D` | 4 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_frombe32` isolated source leaf |
+| `0x0043458E...0x00434591` | 4 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_tobe32` isolated source leaf |
+| `0x00434592...0x0043459B` | 10 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version_major` relocated source leaf |
+| `0x0043459C...0x004345A5` | 10 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version_minor` relocated source leaf |
+| `0x004345A6...0x004345D5` | 48 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_alloc_lookahead` relocation-free source leaf |
+| `0x004345D6...0x004345D7` | 2 | Generated | Zero alignment before the EasyLogger image-seam provider |
+| `0x004345D8...0x004345DF` | 8 | Source compiled | Bootloader EasyLogger logger-object provider |
+| `0x004345E0...0x00434663` | 132 | Source compiled | Bootloader EasyLogger assertion-policy provider |
+| `0x00434664...0x00434689` | 38 | Source compiled | EasyLogger `get_fmt_enabled` source leaf |
+| `0x0043468A...0x0043469D` | 20 | Source compiled | EasyLogger unsigned-argument format predicate |
+| `0x0043469E...0x004346B1` | 20 | Source compiled | EasyLogger pointer-argument format predicate |
+| `0x004346B2...0x004346E5` | 52 | Source compiled | EasyLogger `elog_strcpy` source leaf |
+| `0x004346E6...0x004346EB` | 6 | Source compiled | Authenticated littlefs v2.10.1 `lfs_tag_chunk` scalar source leaf |
+| `0x004346EC...0x004346F1` | 6 | Source compiled | Authenticated littlefs v2.10.1 `lfs_tag_isvalid` scalar source leaf |
+| `0x004346F2...0x004346FB` | 10 | Source compiled | Authenticated littlefs v2.10.1 `lfs_tag_type1` scalar source leaf |
+| `0x004346FC...0x00434701` | 6 | Source compiled | Authenticated littlefs v2.10.1 `lfs_tag_type3` scalar source leaf |
+| `0x00434702...0x00434707` | 6 | Source compiled | Authenticated littlefs v2.10.1 `lfs_tag_id` scalar source leaf |
+
+## Apollo-main ownership
+
+| Runtime span | Bytes | Ownership | Function |
+|---|---:|---|---|
+| `0x00438000...0x0043D25F` | 21,088 | Opaque | Stock application before the EasyLogger control boundary |
+| `0x0043D260...0x0043D2CD` | 110 | Generated | Complete EasyLogger output-enabled setter replaced by source entry redirect |
+| `0x0043D2CE...0x0043D33B` | 110 | Generated | Complete EasyLogger text-color setter replaced by source entry redirect |
+| `0x0043D33C...0x0043D3A5` | 106 | Generated | Complete EasyLogger per-level format setter replaced by source entry redirect |
+| `0x0043D3A6...0x0043D405` | 96 | Generated | Complete EasyLogger filter-level setter replaced by source entry redirect |
+| `0x0043D406...0x0043D415` | 16 | Generated | Complete EasyLogger filter-tag setter replaced by source entry redirect |
+| `0x0043D416...0x0043D437` | 34 | Generated | Complete EasyLogger output-lock operation replaced by source entry redirect |
+| `0x0043D438...0x0043D459` | 34 | Generated | Complete EasyLogger output-unlock operation replaced by source entry redirect |
+| `0x0043D45A...0x0043D4AF` | 86 | Generated | Complete EasyLogger five-slot tag-level default initializer replaced by source entry redirect |
+| `0x0043D4B0...0x0043D573` | 196 | Generated | Complete EasyLogger tag-level getter replaced by source entry redirect |
+| `0x0043D574...0x0043D975` | 1,026 | Generated | Complete EasyLogger `elog_output` replaced by source entry redirect |
+| `0x0043D976...0x0043D97B` | 6 | Opaque | Retained official alignment and CSI data |
+| `0x0043D97C...0x0043D9E5` | 106 | Generated | Complete EasyLogger `get_fmt_enabled` replaced by source entry redirect |
+| `0x0043D9E6...0x0043D9EF` | 10 | Opaque | Official EasyLogger punctuation/alignment gap |
+| `0x0043D9F0...0x0043DA09` | 26 | Generated | Complete EasyLogger unsigned-argument format predicate replaced by source entry redirect |
+| `0x0043DA0A...0x0043DA23` | 26 | Generated | Complete EasyLogger pointer-argument format predicate replaced by source entry redirect |
+| `0x0043DA24...0x0043DA5F` | 60 | Generated | Complete EasyLogger output-lock-enabled transition replaced by source entry redirect |
+| `0x0043DA60...0x004416D5` | 15,478 | Opaque | Stock application before the FreeRTOS mutex-create boundary |
+| `0x004416D6...0x004416EF` | 26 | Generated | Complete FreeRTOS V10.5.1 mutex creator replaced by source entry redirect |
+| `0x004416F0...0x0044170F` | 32 | Generated | Complete FreeRTOS V10.5.1 static mutex creator replaced by source entry redirect |
+| `0x00441710...0x0044174F` | 64 | Generated | Complete FreeRTOS V10.5.1 recursive mutex give replaced by source entry redirect |
+| `0x00441750...0x0044178F` | 64 | Generated | Complete FreeRTOS V10.5.1 recursive mutex take replaced by source entry redirect |
+| `0x00441790...0x004417C1` | 50 | Generated | Complete FreeRTOS V10.5.1 static counting-semaphore creator replaced by source entry redirect |
+| `0x004417C2...0x004417ED` | 44 | Generated | Complete FreeRTOS V10.5.1 dynamic counting-semaphore creator replaced by source entry redirect |
+| `0x004417EE...0x00441951` | 356 | Generated | Complete FreeRTOS V10.5.1 generic task-context queue send replaced by source entry redirect |
+| `0x00441952...0x00441C43` | 754 | Opaque | Retained queue-core bytes before semaphore/mutex take |
+| `0x00441C44...0x00441DA5` | 354 | Generated | Complete FreeRTOS V10.5.1 semaphore/mutex take replaced by source entry redirect |
+| `0x00441DA6...0x00441EA1` | 252 | Opaque | Retained queue-core bytes before `vQueueDelete` |
+| `0x00441EA2...0x00441EC3` | 34 | Generated | Complete FreeRTOS V10.5.1 `vQueueDelete` replaced by source entry redirect |
+| `0x00441EC4...0x00441FF5` | 306 | Opaque | Retained queue-core bytes between `vQueueDelete` and the private empty predicate; the first 20-byte stock timeout-disinherit helper is byte-pinned and unreachable after its sole caller was promoted |
+| `0x00441FF6...0x00442011` | 28 | Generated | Complete FreeRTOS V10.5.1 private queue-empty predicate replaced by source entry redirect |
+| `0x00442012...0x0044202F` | 30 | Generated | Complete FreeRTOS V10.5.1 private queue-full predicate replaced by source entry redirect |
+| `0x00442030...0x00442289` | 602 | Opaque | Retained queue/port bytes before the UI-module registry event path |
+| `0x0044228A...0x00442455` | 460 | Generated | Complete stock UI-module targeted event dispatcher replaced by source entry redirect |
+| `0x00442456...0x00442523` | 206 | Generated | Complete stock UI-module mode-1 broadcast-close helper replaced by source entry redirect |
+| `0x00442524...0x004425A5` | 130 | Generated | Complete stock UI-module common-data dispatcher replaced by source entry redirect |
+| `0x004425A6...0x00442617` | 114 | Generated | Complete stock UI-module registry initializer replaced by source entry redirect |
+| `0x00442618...0x0044264D` | 54 | Generated | Complete stock UI-module mode lookup replaced by source entry redirect |
+| `0x0044264E...0x00442BA7` | 1,370 | Generated | Complete stock UI display-mode transition state machine replaced by source entry redirect |
+| `0x00442BA8...0x00442CC7` | 288 | Generated | Complete stock startup application-ID policy helper replaced by source entry redirect |
+| `0x00442CC8...0x00442D63` | 156 | Opaque | Preserved shared UI display literal pool |
+| `0x00442D64...0x00442D85` | 34 | Generated | Complete stock onboarding-state gate replaced by source entry redirect |
+| `0x00442D86...0x00443479` | 1,780 | Generated | Complete packed display input-event handler replaced by source entry redirect |
+| `0x0044347A...0x004437DF` | 870 | Opaque | Preserved display input-handler literal pool |
+| `0x004437E0...0x004441DD` | 2,558 | Generated | Complete registered main display-thread command loop replaced by source entry redirect |
+| `0x004441DE...0x00444683` | 1,190 | Opaque | Preserved display-thread literal/data pool before the callback |
+| `0x00444684...0x0044468F` | 12 | Generated | Complete dynamic display callback wrapper replaced by source entry redirect |
+| `0x00444690...0x00444693` | 4 | Opaque | Preserved callback literal word |
+| `0x00444694...0x004446A5` | 18 | Generated | Complete display preparation helper replaced by source entry redirect |
+| `0x004446A6...0x004446B3` | 14 | Opaque | Preserved inter-helper literal/data gap |
+| `0x004446B4...0x004446FD` | 74 | Generated | Complete persistent input preparation helper replaced by source entry redirect |
+| `0x004446FE...0x0044471F` | 34 | Opaque | Preserved post-helper literal/data gap |
+| `0x00444720...0x0044484B` | 300 | Generated | Complete display-subsystem initializer replaced by source entry redirect |
+| `0x0044484C...0x0044971B` | 20,176 | Opaque | Preserved initializer literal/data pool and stock application before CMSIS mutex creation |
+| `0x0044971C...0x004497B5` | 154 | Generated | Complete CMSIS-FreeRTOS v10.5.1 `osMutexNew` replaced by source entry redirect |
+| `0x004497B6...0x00449899` | 228 | Opaque | Preserved application bytes between CMSIS mutex and semaphore creation |
+| `0x0044989A...0x0044994D` | 180 | Generated | Complete CMSIS-FreeRTOS v10.5.1 `osSemaphoreNew` replaced by source entry redirect |
+| `0x0044994E...0x00449A31` | 228 | Opaque | Preserved application bytes between CMSIS semaphore and message-queue creation |
+| `0x00449A32...0x00449ABD` | 140 | Generated | Complete CMSIS-FreeRTOS v10.5.1 `osMessageQueueNew` replaced by source entry redirect |
+| `0x00449ABE...0x0044A43B` | 2,430 | Opaque | Preserved stock application between CMSIS message-queue creation and string length |
+| `0x0044A43C...0x0044A471` | 54 | Generated | Complete shared string-length primitive replaced by source entry redirect |
+| `0x0044A472...0x0044B667` | 4,598 | Opaque | Stock application between string length and EasyLogger bounded copy |
+| `0x0044B668...0x0044B709` | 162 | Generated | Complete EasyLogger `elog_strcpy` replaced by source entry redirect |
+| `0x0044B70A...0x0044F717` | 16,398 | Opaque | Stock application between EasyLogger bounded copy and the public heap wrappers |
+| `0x0044F718...0x0044F72F` | 24 | Generated | Complete public heap-allocation veneer replaced by source entry redirect |
+| `0x0044F730...0x0044F757` | 40 | Opaque | Preserved inter-wrapper stock application |
+| `0x0044F758...0x0044F769` | 18 | Generated | Complete public heap-free veneer replaced by source entry redirect |
+| `0x0044F76A...0x0045476F` | 20,486 | Opaque | Stock application between the heap wrappers and bounded string length |
+| `0x00454770...0x00454777` | 8 | Generated | Complete bounded string-length veneer replaced by source entry redirect |
+| `0x00454778...0x00454EFD` | 1,926 | Opaque | Stock application before the FreeRTOS tick getters |
+| `0x00454EFE...0x00454F05` | 8 | Generated | Complete FreeRTOS V10.5.1 `xTaskGetTickCount` replaced by source entry redirect |
+| `0x00454F06...0x00454F0F` | 10 | Generated | Complete FreeRTOS V10.5.1 `xTaskGetTickCountFromISR` replaced by source entry redirect |
+| `0x00454F10...0x00454F15` | 6 | Generated | Exact upstream FreeRTOS V10.5.1 `uxTaskGetNumberOfTasks` replaced by source entry redirect |
+| `0x00454F16...0x00454F37` | 34 | Generated | Complete FreeRTOS V10.5.1 `pcTaskGetName` replaced by source entry redirect |
+| `0x00454F38...0x0045504B` | 276 | Opaque | Stock FreeRTOS task bytes before the tick increment routine |
+| `0x0045504C...0x0045519D` | 338 | Generated | Complete FreeRTOS V10.5.1 `xTaskIncrementTick` replaced by source entry redirect |
+| `0x0045519E...0x0045536F` | 466 | Opaque | Stock FreeRTOS task bytes before event-list removal |
+| `0x00455370...0x00455465` | 246 | Generated | Complete FreeRTOS V10.5.1 `xTaskRemoveFromEventList` replaced by source entry redirect |
+| `0x00455466...0x00455555` | 240 | Opaque | Stock FreeRTOS task bytes before internal timeout-state capture |
+| `0x00455556...0x00455565` | 16 | Generated | Complete FreeRTOS V10.5.1 `vTaskInternalSetTimeOutState` replaced by source entry redirect |
+| `0x00455566...0x004555E5` | 128 | Generated | Complete FreeRTOS V10.5.1 `xTaskCheckForTimeOut` replaced by source entry redirect |
+| `0x004555E6...0x004555EF` | 10 | Generated | Exact upstream FreeRTOS V10.5.1 `vTaskMissedYield` replaced by source entry redirect |
+| `0x004555F0...0x0045581F` | 560 | Opaque | Stock task bytes between the missed-yield setter and stack checker |
+| `0x00455820...0x00455835` | 22 | Generated | Complete FreeRTOS V10.5.1 `prvTaskCheckFreeStackSpace` replaced by source entry redirect |
+| `0x00455836...0x00455875` | 64 | Opaque | Stock `prvDeleteTCB` bytes before next-unblock reset |
+| `0x00455876...0x0045589B` | 38 | Generated | Complete FreeRTOS V10.5.1 `prvResetNextTaskUnblockTime` replaced by source entry redirect |
+| `0x0045589C...0x004558A3` | 8 | Generated | Exact upstream FreeRTOS V10.5.1 `xTaskGetCurrentTaskHandle` replaced by source entry redirect |
+| `0x004558A4...0x004558C3` | 32 | Generated | Exact upstream FreeRTOS V10.5.1 `xTaskGetSchedulerState` replaced by source entry redirect |
+| `0x004558C4...0x00455AC9` | 518 | Opaque | Stock application before the FreeRTOS event-item reset leaf |
+| `0x00455ACA...0x00455ADF` | 22 | Generated | Exact upstream FreeRTOS V10.5.1 `uxTaskResetEventItemValue` replaced by source entry redirect |
+| `0x00455AE0...0x00455AF5` | 22 | Generated | Exact upstream FreeRTOS V10.5.1 `pvTaskIncrementMutexHeldCount` replaced by source entry redirect |
+| `0x00455AF6...0x0045607B` | 1,414 | Opaque | Stock application before FreeRTOS list initialization |
+| `0x0045607C...0x00456099` | 30 | Generated | Exact upstream FreeRTOS V10.5.1 `vListInitialise` replaced by source entry redirect |
+| `0x0045609A...0x004560B1` | 24 | Generated | Exact upstream FreeRTOS V10.5.1 `vListInsertEnd` replaced by source entry redirect |
+| `0x004560B2...0x004560E7` | 54 | Generated | Exact upstream FreeRTOS V10.5.1 `vListInsert` replaced by source entry redirect |
+| `0x004560E8...0x0045610D` | 38 | Generated | Exact upstream FreeRTOS V10.5.1 `uxListRemove` replaced by source entry redirect |
+| `0x0045610E...0x0045610F` | 2 | Opaque | Preserved alignment gap before the FreeRTOS heap |
+| `0x00456110...0x0045620F` | 256 | Generated | Complete FreeRTOS V10.5.1 `heap_4` allocation function replaced by source entry redirect |
+| `0x00456210...0x0045627F` | 112 | Generated | Complete FreeRTOS V10.5.1 `heap_4` free function replaced by source entry redirect |
+| `0x00456280...0x004562D9` | 90 | Generated | Complete FreeRTOS V10.5.1 private heap initializer replaced by source entry redirect |
+| `0x004562DA...0x00456337` | 94 | Generated | Complete FreeRTOS V10.5.1 private free-list insertion/coalescing helper replaced by source entry redirect |
+| `0x00456338...0x0045A567` | 16,944 | Opaque | Stock application between the source-replaced FreeRTOS heap and lens-side accessor |
+| `0x0045A568...0x0045A56F` | 8 | Generated | Complete stock lens-side body replaced by source entry redirect |
+| `0x0045A570...0x0045A577` | 8 | Generated | Complete duplicate lens-side body replaced by source entry redirect |
+| `0x0045A578...0x0045A6CF` | 344 | Generated | Complete stock lens-side initializer replaced by source entry redirect |
+| `0x0045A6D0...0x00472C7B` | 99,756 | Opaque | Stock application before the dynamic display-handler setter |
+| `0x00472C7C...0x00472C83` | 8 | Generated | Complete dynamic display-handler setter replaced by source entry redirect |
+| `0x00472C84...0x00472D3F` | 188 | Generated | Complete unsigned 64-bit divide-by-ten logging helper replaced by source entry redirect |
+| `0x00472D40...0x00472D63` | 36 | Generated | Complete unsigned decimal digit-count helper replaced by source entry redirect |
+| `0x00472D64...0x00472D75` | 18 | Generated | Complete signed decimal digit-count helper replaced by source entry redirect |
+| `0x00472D76...0x00472D9B` | 38 | Generated | Complete hexadecimal digit-count helper replaced by source entry redirect |
+| `0x00472D9C...0x00472DDF` | 68 | Generated | Complete signed width/precision parser replaced by source entry redirect |
+| `0x00472DE0...0x00472E47` | 104 | Generated | Complete unsigned 64-bit decimal writer replaced by source entry redirect |
+| `0x00472E48...0x00472EBB` | 116 | Generated | Complete unsigned 64-bit hexadecimal writer replaced by source entry redirect |
+| `0x00472EBC...0x00472ED3` | 24 | Generated | Complete nullable logging string-length helper replaced by source entry redirect |
+| `0x00472ED4...0x00472EF5` | 34 | Generated | Complete logging padding writer replaced by source entry redirect |
+| `0x00472EF6...0x00473035` | 320 | Generated | Complete floating-point logging formatter helper replaced by source entry redirect |
+| `0x00473036...0x004733ED` | 952 | Generated | Complete application logging conversion parser and formatter core replaced by source entry redirect |
+| `0x004733EE...0x00473419` | 44 | Generated | Complete application-wide variadic logging dispatcher replaced by source entry redirect |
+| `0x0047341A...0x00473473` | 90 | Opaque | Logging-dispatch literal and data pool |
+| `0x00473474...0x00473481` | 14 | Generated | Complete LVGL tick increment helper replaced by source entry redirect |
+| `0x00473482...0x0047349F` | 30 | Generated | Complete LVGL tick getter replaced by source entry redirect |
+| `0x004734A0...0x004734BB` | 28 | Generated | Complete wrap-safe LVGL elapsed-time helper replaced by source entry redirect |
+| `0x004734BC...0x004734BF` | 4 | Opaque | Retained literal word for LVGL tick state `0x2006F600` |
+| `0x004734C0...0x004734CB` | 12 | Generated | Complete LVGL zero-fill wrapper replaced by source entry redirect |
+| `0x004734CC...0x00473547` | 124 | Generated | Complete LVGL global-state initializer replaced by source entry redirect |
+| `0x00473548...0x00473625` | 222 | Generated | Complete LVGL subsystem initializer replaced by source entry redirect |
+| `0x00473626...0x0047366B` | 70 | Opaque | Inactive alignment and literal pool following the LVGL subsystem initializer |
+| `0x0047366C...0x004736F3` | 136 | Generated | Complete full-screen LVGL buffer synchronizer replaced by source entry redirect |
+| `0x004736F4...0x00473781` | 142 | Generated | Complete installed LVGL display synchronization callback replaced by source entry redirect |
+| `0x00473782...0x0047381D` | 156 | Generated | Complete LVGL display setup sequence replaced by source entry redirect |
+| `0x0047381E...0x00473869` | 76 | Generated | Complete LVGL display-buffer lock helper replaced by source entry redirect |
+| `0x0047386A...0x004738A7` | 62 | Generated | Complete LVGL display-buffer unlock helper replaced by source entry redirect |
+| `0x004738A8...0x004738DD` | 54 | Generated | Complete LVGL display-buffer mutex initializer replaced by source entry redirect |
+| `0x004738DE...0x00473927` | 74 | Opaque | Retained inactive shared LVGL display synchronization literal pool |
+| `0x00473928...0x00473933` | 12 | Generated | Complete LVGL display-port initializer replaced by source entry redirect |
+| `0x00473934...0x0047393F` | 12 | Generated | Complete PRIMASK-read and IRQ-enable primitive replaced by source entry redirect |
+| `0x00473940...0x0047394B` | 12 | Generated | Complete PRIMASK-read and IRQ-disable primitive replaced by source entry redirect |
+| `0x0047394C...0x00473951` | 6 | Generated | Complete display-task attribute accessor replaced by source entry redirect |
+| `0x00473952...0x004739FB` | 170 | Generated | Complete display-driver thread initializer replaced by source entry redirect |
+| `0x004739FC...0x00473AA3` | 168 | Generated | Complete display-driver message-queue initializer replaced by source entry redirect |
+| `0x00473AA4...0x00473ABB` | 24 | Generated | Complete display-driver thread teardown helper replaced by source entry redirect |
+| `0x00473ABC...0x00473AC5` | 10 | Generated | Complete display resource-acquire wrapper replaced by source entry redirect |
+| `0x00473AC6...0x00473ACF` | 10 | Generated | Complete display resource-release wrapper replaced by source entry redirect |
+| `0x00473AD0...0x00473B33` | 100 | Generated | Complete display timer initializer replaced by source entry redirect |
+| `0x00473B34...0x00473B45` | 18 | Generated | Complete 2,000-tick display timer starter replaced by source entry redirect |
+| `0x00473B46...0x00473B53` | 14 | Generated | Complete display timer stopper replaced by source entry redirect |
+| `0x00473B54...0x00473BC3` | 112 | Generated | Complete command-6 display timer callback replaced by source entry redirect |
+| `0x00473BC4...0x00473C43` | 128 | Generated | Complete byte-valued display queue command 8 sender replaced by source entry redirect |
+| `0x00473C44...0x00473E2D` | 490 | Generated | Complete display-driver manager receive loop and command dispatcher replaced by source entry redirect |
+| `0x00473E2E...0x00473E9F` | 114 | Generated | Complete asynchronous display clear-screen sender replaced by source entry redirect |
+| `0x00473EA0...0x00473F11` | 114 | Generated | Complete asynchronous display-initialize sender replaced by source entry redirect |
+| `0x00473F12...0x00473F83` | 114 | Generated | Complete asynchronous display power-up sender replaced by source entry redirect |
+| `0x00473F84...0x00473FF5` | 114 | Generated | Complete asynchronous display power-down sender replaced by source entry redirect |
+| `0x00473FF6...0x00474065` | 112 | Generated | Complete asynchronous brightness-control sender replaced by source entry redirect |
+| `0x00474066...0x004740FF` | 154 | Generated | Complete six-word asynchronous reflash sender replaced by source entry redirect |
+| `0x00474100...0x004742F7` | 504 | Generated | Complete forced display initialization lifecycle replaced by source entry redirect |
+| `0x004742F8...0x0047432B` | 52 | Opaque | Retained shared display lifecycle literal pool |
+| `0x0047432C...0x00474473` | 328 | Generated | Complete forced display deinitialization lifecycle replaced by source entry redirect |
+| `0x00474474...0x0047454F` | 220 | Opaque | Retained display-lifecycle/file-runtime diagnostic and literal pool |
+| `0x00474550...0x004745F3` | 164 | Generated | Complete shared file-open wrapper replaced by source entry redirect |
+| `0x004745F4...0x00474633` | 64 | Generated | Complete shared file-close wrapper replaced by source entry redirect |
+| `0x00474634...0x00474681` | 78 | Generated | Complete shared file-read wrapper replaced by source entry redirect |
+| `0x00474682...0x00474803` | 386 | Generated | Complete shared file-write wrapper replaced by source entry redirect |
+| `0x00474804...0x00474813` | 16 | Opaque | Retained single-character `r`, `w`, `a`, and `+` mode literals between write and seek |
+| `0x00474814...0x0047486F` | 92 | Generated | Complete shared file-seek wrapper replaced by source entry redirect |
+| `0x00474870...0x004748B3` | 68 | Generated | Complete shared file-tell wrapper replaced by source entry redirect |
+| `0x004748B4...0x0047490F` | 92 | Generated | Complete shared file-size wrapper replaced by source entry redirect |
+| `0x00474910...0x0047498B` | 124 | Generated | Complete shared file-flush wrapper replaced by source entry redirect |
+| `0x0047498C...0x00474A01` | 118 | Generated | Complete shared path-removal wrapper replaced by source entry redirect |
+| `0x00474A02...0x00474A75` | 116 | Generated | Complete shared path-rename wrapper replaced by source entry redirect |
+| `0x00474A76...0x00474B01` | 140 | Generated | Complete shared directory-create wrapper replaced by source entry redirect |
+| `0x00474B02...0x00474BB7` | 182 | Generated | Complete shared directory-open wrapper replaced by source entry redirect |
+| `0x00474BB8...0x00474C65` | 174 | Generated | Complete shared directory-read wrapper replaced by source entry redirect |
+| `0x00474C66...0x00474CD1` | 108 | Generated | Complete shared directory-close wrapper replaced by source entry redirect |
+| `0x00474CD2...0x00474D15` | 68 | Generated | Complete synchronized allocation wrapper replaced by source entry redirect |
+| `0x00474D16...0x00474D53` | 62 | Generated | Complete synchronized free wrapper replaced by source entry redirect |
+| `0x00474D54...0x00474D9B` | 72 | Generated | Complete synchronized reallocation wrapper replaced by source entry redirect |
+| `0x00474D9C...0x00474E3B` | 160 | Generated | Complete file-runtime mutex initializer replaced by source entry redirect |
+| `0x00474E3C...0x00474EB3` | 120 | Opaque | Retained file-runtime heap, mutex, and diagnostic literal pool |
+| `0x00474EB4...0x00474EF9` | 70 | Generated | Complete Apollo510 instruction-cache enable function replaced by source entry redirect |
+| `0x00474EFA...0x00474F31` | 56 | Generated | Complete Apollo510 instruction-cache disable function replaced by source entry redirect |
+| `0x00474F32...0x00475013` | 226 | Generated | Complete Apollo510 data-cache enable function replaced by source entry redirect |
+| `0x00475014...0x0047510D` | 250 | Generated | Complete Apollo510 data-cache invalidate function replaced by source entry redirect |
+| `0x0047510E...0x00475193` | 134 | Generated | Complete Apollo510 data-cache clean function replaced by source entry redirect |
+| `0x00475194...0x004751C7` | 52 | Opaque | Retained cache-controller register and prefetch-configuration literal pool |
+| `0x004751C8...0x0047522F` | 104 | Generated | Complete application-wide memory comparator replaced by source entry redirect |
+| `0x00475230...0x00475285` | 86 | Generated | Complete Apollo510 secure-OTA descriptor-addition routine replaced by source entry redirect |
+| `0x00475286...0x0047528F` | 10 | Opaque | Retained secure-OTA state and pointer-register literal pool |
+| `0x00475290...0x00475307` | 120 | Generated | Complete BLE message-transmit thread entry replaced by source entry redirect |
+| `0x00475308...0x00475309` | 2 | Generated | Exact source replacement for intentional BLE transmit application-initialization no-op |
+| `0x0047530A...0x00475331` | 40 | Generated | Complete BLE transmit queue initializer replaced by source entry redirect |
+| `0x00475332...0x00475333` | 2 | Generated | Exact source replacement for intentional BLE transmit thread-initialization no-op |
+| `0x00475334...0x0047533D` | 10 | Generated | Complete BLE transmit stage-enter adapter replaced by source entry redirect |
+| `0x0047533E...0x00475347` | 10 | Generated | Complete BLE transmit stage-leave adapter replaced by source entry redirect |
+| `0x00475348...0x00475373` | 44 | Generated | Complete BLE transmit thread creator replaced by source entry redirect |
+| `0x00475374...0x0047538B` | 24 | Generated | Complete BLE transmit thread destructor replaced by source entry redirect |
+| `0x0047538C...0x004754B9` | 302 | Generated | Complete BLE transmit nonblocking queue drain and command router replaced by source entry redirect |
+| `0x004754BA...0x004754CF` | 22 | Generated | Complete BLE transmit thread-flag router replaced by source entry redirect |
+| `0x004754D0...0x00475523` | 84 | Generated | Complete BLE transmit bit-23 wait handler replaced by source entry redirect |
+| `0x00475524...0x0047564D` | 298 | Generated | Complete BLE transmit queue-clear and freed-count routine replaced by source entry redirect |
+| `0x0047564E...0x00475A37` | 1,002 | Generated | Complete BLE transmit allocation, construction, backpressure, enqueue, and wakeup core replaced by source entry redirect |
+| `0x00475A38...0x00475AA5` | 110 | Generated | Complete direct protobuf-over-BLE transmit wrapper and OTA diagnostic gate replaced by source entry redirect |
+| `0x00475AA6...0x00475B13` | 110 | Generated | Complete direct protobuf-notification-over-BLE transmit wrapper and OTA diagnostic gate replaced by source entry redirect |
+| `0x00475B14...0x00475C19` | 262 | Generated | Complete guarded protobuf-over-BLE transmitter, OTA/left-side rejection policy, diagnostics, and enqueue forwarding replaced by source entry redirect |
+| `0x00475C1A...0x00475D5D` | 324 | Generated | Complete guarded protobuf-notification transmitter, OTA/left-side/command-role policy, diagnostics, and enqueue forwarding replaced by source entry redirect |
+| `0x00475D5E...0x00475D77` | 26 | Opaque | Retained shared BLE message-transmit literal pool |
+| `0x00475D78...0x00475DD7` | 96 | Generated | Complete streaming BLE notification wrapper, OTA gate, diagnostics, and enqueue forwarding replaced by source entry redirect |
+| `0x00475DD8...0x00475DDF` | 8 | Opaque | Retained queue-drain diagnostic pointer pool |
+| `0x00475DE0...0x00475DF9` | 26 | Generated | Complete ungated transport-three BLE sender replaced by source entry redirect |
+| `0x00475DFA...0x00475E61` | 104 | Generated | Complete EFS-over-BLE sender, OTA gate, diagnostics, and enqueue forwarding replaced by source entry redirect |
+| `0x00475E62...0x00475E6B` | 10 | Opaque | Retained alignment and EFS-send pointer literals |
+| `0x00475E6C...0x00475ED3` | 104 | Generated | Complete EFS-over-BLE notification wrapper, OTA gate, diagnostics, and enqueue forwarding replaced by source entry redirect |
+| `0x00475ED4...0x00475FBF` | 236 | Opaque | Retained shared BLE message-transmit diagnostic and dependency pointer table |
+| `0x00475FC0...0x00475FE1` | 34 | Generated | Complete variadic string-scanner adapter replaced by source entry redirect and linked to its source input callback |
+| `0x00475FE2...0x00475FE7` | 6 | Opaque | Retained alignment and now-inactive stock callback displacement literal |
+| `0x00475FE8...0x004761D1` | 490 | Generated | Complete littlefs directory existence/create/close loop replaced by source entry redirect |
+| `0x004761D2...0x0047627D` | 172 | Generated | Complete littlefs format, remount, and directory-recovery helper replaced by source entry redirect |
+| `0x0047627E...0x004763B7` | 314 | Generated | Complete littlefs startup, recovery, readiness, and boot-count routine replaced by source entry redirect |
+| `0x004763B8...0x004763EF` | 56 | Generated | Complete littlefs external-flash read callback replaced by source entry redirect |
+| `0x004763F0...0x00476427` | 56 | Generated | Complete littlefs external-flash program callback replaced by source entry redirect |
+| `0x00476428...0x00476451` | 42 | Generated | Complete littlefs external-flash erase callback replaced by source entry redirect |
+| `0x00476452...0x004764DB` | 138 | Opaque | Retained littlefs path, diagnostic, state, configuration, and boot-count dependency pool |
+| `0x004764DC...0x004764DF` | 4 | Generated | Exact source-assembled littlefs sync callback |
+| `0x004764E0...0x0047667D` | 414 | Generated | Complete event-loop queue/timer/mutex/thread initializer replaced by source entry redirect |
+| `0x0047667E...0x0047667F` | 2 | Opaque | Retained zero alignment before the event-loop worker |
+| `0x00476680...0x004766EB` | 108 | Generated | Complete blocking event-loop worker replaced by source entry redirect |
+| `0x004766EC...0x004767A7` | 188 | Generated | Complete event-loop queue push path replaced by source entry redirect |
+| `0x004767A8...0x0047697D` | 470 | Generated | Complete 64-slot delayed-callback timer scheduler replaced by source entry redirect |
+| `0x0047697E...0x00476ACD` | 336 | Generated | Complete delayed-callback insertion path replaced by source entry redirect |
+| `0x00476ACE...0x00476BEF` | 290 | Generated | Complete delayed-callback removal path replaced by source entry redirect |
+| `0x00476BF0...0x00476CBB` | 204 | Opaque | Retained event-loop handles, attributes, delayed state, and diagnostic dependency pool |
+| `0x00476CBC...0x00476DB7` | 252 | Generated | Complete BLE connection-parameter immediate update and delayed scheduler replaced by source entry redirect |
+| `0x00476DB8...0x00476FE1` | 554 | Generated | Complete primary BLE connection-parameter mode selector replaced by source entry redirect |
+| `0x00476FE2...0x0047720B` | 554 | Generated | Complete secondary BLE connection-parameter mode selector replaced by source entry redirect |
+| `0x0047720C...0x0047761B` | 1,040 | Generated | Complete BLE connection-mode coordinator replaced by source entry redirect |
+| `0x0047761C...0x0047773D` | 290 | Generated | Complete BLE connection delayed callback replaced by source entry redirect |
+| `0x0047773E...0x00477773` | 54 | Opaque | Retained callback dependency and diagnostic literal pool |
+| `0x00477774...0x00477A69` | 758 | Generated | Complete BLE remote connection-parameter handler replaced by source entry redirect |
+| `0x00477A6A...0x00477ADB` | 114 | Opaque | Retained remote-parameter dependency and diagnostic literal pool |
+| `0x00477ADC...0x004780D7` | 1,532 | Generated | Complete BLE connection-update event state machine replaced by source entry redirect |
+| `0x004780D8...0x004780DB` | 4 | Opaque | Retained connection-event diagnostic pointer literal |
+| `0x004780DC...0x004780F7` | 28 | Generated | Complete BLE connection-global initializer replaced by source entry redirect |
+| `0x004780F8...0x0047810B` | 20 | Generated | Complete BLE stream-readiness helper replaced by source entry redirect |
+| `0x0047810C...0x0047810F` | 4 | Opaque | Retained post-readiness diagnostic pointer literal |
+| `0x00478110...0x0047814B` | 60 | Generated | Complete BLE short-mode scheduler replaced by source entry redirect |
+| `0x0047814C...0x0047815F` | 20 | Opaque | Retained short-mode scheduler diagnostic pointer pool |
+| `0x00478160...0x004781EF` | 144 | Generated | Complete BLE stream-reset retry-holdoff helper replaced by source entry redirect |
+| `0x004781F0...0x004781F3` | 4 | Opaque | Retained stream-reset diagnostic pointer literal |
+| `0x004781F4...0x00478251` | 94 | Generated | Complete BLE remote-mode reset helper replaced by source entry redirect |
+| `0x00478252...0x0047826B` | 26 | Generated | Complete BLE long-mode scheduler replaced by source entry redirect |
+| `0x0047826C...0x004782DB` | 112 | Opaque | Retained BLE connection control, state, callback, and diagnostic pointer pool |
+| `0x004782DC...0x004786B3` | 984 | Generated | Complete BLE connection-event dispatcher replaced by source entry redirect |
+| `0x004786B4...0x004787A3` | 240 | Opaque | Retained BLE dispatcher state, default-profile, diagnostic, and dependency pointer pool |
+| `0x004787A4...0x0047885F` | 188 | Generated | Complete MRAM zero-region programmer replaced by source entry redirect |
+| `0x00478860...0x00478965` | 262 | Generated | Complete protected update-flag setter replaced by source entry redirect |
+| `0x00478966...0x004789AF` | 74 | Opaque | Retained MRAM persistence size, buffer, destination, key, template, and diagnostic pointer pool |
+| `0x004789B0...0x004793E9` | 2,618 | Generated | Complete protected-MRAM record diagnostic dump replaced by source entry redirect |
+| `0x004793EA...0x00479417` | 46 | Opaque | Retained protected-record base, selector-label, and initial diagnostic pointer pool |
+| `0x00479418...0x0047956B` | 340 | Generated | Complete two-pass protected-MRAM record synchronizer replaced by source entry redirect |
+| `0x0047956C...0x004795DB` | 112 | Opaque | Retained shared protected-record function, module, file, label, hex-tag, and diagnostic identity pointer pool |
+| `0x004795DC...0x00479981` | 934 | Generated | Complete protected-MRAM-to-RAM record-list loader replaced by source entry redirect |
+| `0x00479982...0x004799A7` | 38 | Opaque | Retained protected-record diagnostic label and identity continuation pool |
+| `0x004799A8...0x00479AB3` | 268 | Generated | Complete protected-MRAM single-record programmer replaced by source entry redirect |
+| `0x00479AB4...0x00479B73` | 192 | Opaque | Retained protected-MRAM programmer destination, key, diagnostic, and dependency pointer pool |
+| `0x00479B74...0x0047A461` | 2,286 | Generated | Complete protected-MRAM application record-database updater replaced by source entry redirect |
+| `0x0047A462...0x0047A47B` | 26 | Opaque | Retained record-database base, type-label, diagnostic, and dependency pointer pool |
+| `0x0047A47C...0x0047A49B` | 32 | Generated | Complete protected-MRAM record-deactivation and persistence adapter replaced by source entry redirect |
+| `0x0047A49C...0x0047A5B5` | 282 | Generated | Complete protected-MRAM record-activation, timestamping, persistence, verification, and diagnostic adapter replaced by source entry redirect |
+| `0x0047A5B6...0x0047A5BF` | 10 | Opaque | Retained record-activation adapter padding and literal pool |
+| `0x0047A5C0...0x0047A5CF` | 16 | Generated | Complete protected-MRAM conditional deactivation adapter replaced by source entry redirect |
+| `0x0047A5D0...0x0047A5FF` | 48 | Generated | Complete protected-MRAM active-record membership query replaced by source entry redirect |
+| `0x0047A600...0x0047A62B` | 44 | Generated | Complete protected-MRAM untyped-record presence query replaced by source entry redirect |
+| `0x0047A62C...0x0047A62F` | 4 | Opaque | Retained protected-record table literal |
+| `0x0047A630...0x0047A675` | 70 | Generated | Complete protected-MRAM next-active-record traversal helper replaced by source entry redirect |
+| `0x0047A676...0x0047A6AB` | 54 | Generated | Complete protected-MRAM active-type counter replaced by source entry redirect |
+| `0x0047A6AC...0x0047A6B3` | 8 | Opaque | Retained protected-record table and diagnostic literal pool |
+| `0x0047A6B4...0x0047A6FF` | 76 | Generated | Complete protected-MRAM oldest-active-type selector replaced by source entry redirect |
+| `0x0047A700...0x0047A71B` | 28 | Opaque | Retained protected-record table and allocator literal pool |
+| `0x0047A71C...0x0047A855` | 314 | Generated | Complete protected-MRAM record allocator and threshold-eviction policy replaced by source entry redirect |
+| `0x0047A856...0x0047A85B` | 6 | Opaque | Retained protected-record allocator alignment and diagnostic-pointer gap |
+| `0x0047A85C...0x0047A891` | 54 | Generated | Complete protected-MRAM record initialization wrapper replaced by source entry redirect |
+| `0x0047A892...0x0047A8C3` | 50 | Opaque | Retained protected-record initialization literal pool |
+| `0x0047A8C4...0x0047AB4D` | 650 | Generated | Complete Cordio application-database address resolver replaced by source entry redirect |
+| `0x0047AB4E...0x0047AB6B` | 30 | Opaque | Retained address-resolver diagnostic pointer pool |
+| `0x0047AB6C...0x0047ACE9` | 382 | Generated | Complete Cordio resolved-address callback replaced by source entry redirect |
+| `0x0047ACEA...0x0047ACF7` | 14 | Opaque | Retained resolved-address callback diagnostic pointer pool |
+| `0x0047ACF8...0x0047AD69` | 114 | Generated | Complete Cordio application-database delete-all adapter replaced by source entry redirect |
+| `0x0047AD6A...0x0047AD73` | 10 | Opaque | Retained delete-all adapter record-table and diagnostic pointer pool |
+| `0x0047AD74...0x0047ADC5` | 82 | Generated | Complete Cordio application-database address lookup replaced by source entry redirect |
+| `0x0047ADC6...0x0047ADD3` | 14 | Opaque | Retained address-lookup compatibility pointer pool |
+| `0x0047ADD4...0x0047AE25` | 82 | Generated | Complete Cordio security-database LTK-request lookup replaced by source entry redirect |
+| `0x0047AE26...0x0047AE77` | 82 | Opaque | Retained shared Cordio compatibility pointer pool |
+| `0x0047AE78...0x0047AEBF` | 72 | Generated | Complete Cordio application-database key accessor replaced by source entry redirect |
+| `0x0047AEC0...0x0047AEC7` | 8 | Generated | Complete peer-address accessor replaced by source entry redirect |
+| `0x0047AEC8...0x0047AED3` | 12 | Generated | Complete peer-address-type accessor replaced by source entry redirect |
+| `0x0047AED4...0x0047B3AD` | 1,242 | Generated | Complete Cordio application-database key writer replaced by source entry redirect |
+| `0x0047B3AE...0x0047B3CB` | 30 | Generated | Complete peer database-hash setter replaced by source entry redirect |
+| `0x0047B3CC...0x0047B3E1` | 22 | Generated | Complete cache-by-hash setter replaced by source entry redirect |
+| `0x0047B3E2...0x0047B40B` | 42 | Generated | Complete CCC-table setter replaced by source entry redirect |
+| `0x0047B40C...0x0047B417` | 12 | Generated | Complete client-supported-features getter replaced by source entry redirect |
+| `0x0047B418...0x0047B437` | 32 | Generated | Complete client-supported-features setter replaced by source entry redirect |
+| `0x0047B438...0x0047B459` | 34 | Generated | Complete client change-aware-state setter replaced by source entry redirect |
+| `0x0047B45A...0x0047B45F` | 6 | Generated | Complete device database-hash getter replaced by source entry redirect |
+| `0x0047B460...0x0047B467` | 8 | Opaque | Retained database-hash getter literal/alignment pool |
+| `0x0047B468...0x0047B47D` | 22 | Generated | Complete device database-hash setter replaced by source entry redirect |
+| `0x0047B47E...0x0047B487` | 10 | Opaque | Retained database-hash setter literal/alignment pool |
+| `0x0047B488...0x0047B48D` | 6 | Generated | Complete discovery-status setter replaced by source entry redirect |
+| `0x0047B48E...0x0047B4AB` | 30 | Generated | Complete handle-list setter replaced by source entry redirect |
+| `0x0047B4AC...0x0047B4C7` | 28 | Opaque | Retained record-metadata helper literal pool |
+| `0x0047B4C8...0x0047B4CD` | 6 | Generated | Complete peer sign-counter setter replaced by source entry redirect |
+| `0x0047B4CE...0x0047B4D3` | 6 | Generated | Complete peer address-resolution setter replaced by source entry redirect |
+| `0x0047B4D4...0x0047B567` | 148 | Generated | Complete Cordio resolving-list reload wrapper replaced by source entry redirect |
+| `0x0047B568...0x0047B59B` | 52 | Opaque | Retained resolving-list reload diagnostic pointer pool |
+| `0x0047B59C...0x0047B6DB` | 320 | Generated | Complete Cordio record-clearing wrapper replaced by source entry redirect |
+| `0x0047B6DC...0x0047B72F` | 84 | Opaque | Retained record-clearing diagnostic and dependency pointer pool |
+| `0x0047B730...0x0047BBF7` | 1,224 | Generated | Complete protected-MRAM write verifier replaced by source entry redirect |
+| `0x0047BBF8...0x0047BC2F` | 56 | Opaque | Retained verifier diagnostic and dependency pointer pool |
+| `0x0047BC30...0x0047C069` | 1,082 | Generated | Complete protected-MRAM record-status reporter replaced by source entry redirect |
+| `0x0047C06A...0x0047C083` | 26 | Opaque | Retained record-status diagnostic and dependency pointer pool |
+| `0x0047C084...0x0047C149` | 198 | Generated | Complete Cordio record timestamp-update wrapper replaced by source entry redirect |
+| `0x0047C14A...0x0047C163` | 26 | Opaque | Retained timestamp-update diagnostic and dependency pointer pool |
+| `0x0047C164...0x0047C275` | 274 | Generated | Complete Cordio record timestamp-renumbering routine replaced by source entry redirect |
+| `0x0047C276...0x0047C2BB` | 70 | Opaque | Retained timestamp-renumbering diagnostic and dependency pointer pool |
+| `0x0047C2BC...0x0047C503` | 584 | Generated | Complete Cordio persistent-record status reporter replaced by source entry redirect |
+| `0x0047C504...0x0047C567` | 100 | Opaque | Retained persistent-record status diagnostic and dependency pointer pool |
+| `0x0047C568...0x0047C8A1` | 826 | Generated | Complete Cordio pairing-failure handler replaced by source entry redirect |
+| `0x0047C8A2...0x0047C8CB` | 42 | Opaque | Retained alignment and diagnostic pointer data |
+| `0x0047C8CC...0x0047CA97` | 460 | Generated | Complete Cordio connection-indexed pairing-record clearer replaced by source entry redirect |
+| `0x0047CA98...0x0047CA9B` | 4 | Opaque | Retained dependency pointer following the connection-indexed record clearer |
+| `0x0047CA9C...0x0047CABD` | 34 | Generated | Complete Cordio ten-slot record diagnostic iterator replaced by source entry redirect |
+| `0x0047CABE...0x0047CBC3` | 262 | Opaque | Retained alignment, table data, pointers, and record-table holder literal |
+| `0x0047CBC4...0x0047CBE7` | 36 | Generated | Complete EFS non-reflected Castagnoli CRC updater replaced by source entry redirect |
+| `0x0047CBE8...0x0047CC13` | 44 | Generated | Complete protected-MRAM byte-program wrapper replaced by source entry redirect |
+| `0x0047CC14...0x0047CC1B` | 8 | Opaque | Retained CRC-table and protected-program-key literals |
+| `0x0047CC1C...0x0047CC5D` | 66 | Generated | Complete ARM EABI signed 64-bit division/modulo front end replaced by source entry redirect |
+| `0x0047CC5E...0x0047CC5F` | 2 | Opaque | Retained alignment between the signed front end and unsigned core |
+| `0x0047CC60...0x0047CE8F` | 560 | Generated | Complete ARM EABI unsigned 64-bit division/modulo core replaced by source entry redirect |
+| `0x0047CE90...0x0047CED5` | 70 | Generated | Complete template-3 eight-byte lens/status packet reporter replaced by source entry redirect |
+| `0x0047CED6...0x0047CF27` | 82 | Generated | Complete template-6 eight-byte lens/status packet reporter replaced by source entry redirect |
+| `0x0047CF28...0x0047CF5F` | 56 | Generated | Complete template-5 eight-byte lens/status packet reporter replaced by source entry redirect |
+| `0x0047CF60...0x0047D817` | 2,232 | Opaque | Registered command-`0x103` lens-status dispatcher retained as one function-specific compatibility blob |
+| `0x0047D818...0x0047D86F` | 88 | Generated | Complete lens-status publisher replaced by source entry redirect |
+| `0x0047D870...0x0047D8B7` | 72 | Generated | Complete template-4 eight-byte lens/status packet reporter replaced by source entry redirect |
+| `0x0047D8B8...0x0047D8C1` | 10 | Generated | Complete lens-status state-bit-0 accessor replaced by source entry redirect |
+| `0x0047D8C2...0x0047D8CD` | 12 | Generated | Complete lens-status state-bit-1 accessor replaced by source entry redirect |
+| `0x0047D8CE...0x0047D8E3` | 22 | Generated | Complete paired state-bits-2-and-3 accessor replaced by source entry redirect |
+| `0x0047D8E4...0x0047D8EF` | 12 | Generated | Complete lens-status state-bit-4 accessor replaced by source entry redirect |
+| `0x0047D8F0...0x0047D8FB` | 12 | Generated | Complete lens-status state-bit-5 accessor replaced by source entry redirect |
+| `0x0047D8FC...0x0047D9C3` | 200 | Opaque | Retained lens-status diagnostic, dependency, template, and state literal pool |
+| `0x0047D9C4...0x0047D9CB` | 8 | Generated | Complete retained-availability wrapper replaced by source entry redirect |
+| `0x0047D9CC...0x0047D9F9` | 46 | Generated | Complete selector-dependent lens-status query replaced by source entry redirect |
+| `0x0047D9FA...0x0047D9FB` | 2 | Opaque | Retained alignment after the lens-status query |
+| `0x0047D9FC...0x0047DA15` | 26 | Generated | Complete bounded SARC state-header checksum wrapper replaced by source entry redirect |
+| `0x0047DA16...0x0047DA57` | 66 | Generated | Complete SARC state validator replaced by source entry redirect |
+| `0x0047DA58...0x0047DA77` | 32 | Generated | Complete SARC state initializer replaced by source entry redirect |
+| `0x0047DA78...0x0047DABF` | 72 | Generated | Complete bounded variadic SARC report appender replaced by source entry redirect |
+| `0x0047DAC0...0x0047DB01` | 66 | Generated | Complete SARC report finalizer replaced by source entry redirect |
+| `0x0047DB02...0x0047DC21` | 288 | Generated | Complete SARC crash-report file persistence routine replaced by source entry redirect |
+| `0x0047DC22...0x0047DC73` | 82 | Opaque | Retained inactive SARC path/mode/state literal pool |
+| `0x0047DC74...0x0047DCB3` | 64 | Generated | Complete wrap-extending monotonic-seconds helper replaced by source entry redirect |
+| `0x0047DCB4...0x0047DCE3` | 48 | Generated | Complete bounded wall-clock seconds and validity helper replaced by source entry redirect |
+| `0x0047DCE4...0x0047DCEB` | 8 | Generated | Complete interrupt-disable primitive redirected to the existing source-owned implementation |
+| `0x0047DCEC...0x0047DD07` | 28 | Generated | Complete boot reset-status word helper replaced by source entry redirect |
+| `0x0047DD08...0x0047DD61` | 90 | Generated | Complete firmware-version component encoder replaced by source entry redirect |
+| `0x0047DD62...0x0047DD89` | 40 | Generated | Complete tracepoint deferral dispatcher replaced by source entry redirect |
+| `0x0047DD8A...0x0047DD91` | 8 | Generated | Complete tracepoint one-shot timer callback replaced by source entry redirect |
+| `0x0047DD92...0x0047DDAB` | 26 | Generated | Complete tracepoint deferral begin helper replaced by source entry redirect |
+| `0x0047DDAC...0x0047DDFD` | 82 | Generated | Complete bounded tracepoint capture-retry worker replaced by source entry redirect |
+| `0x0047DDFE...0x0047DE09` | 12 | Generated | Complete tracepoint-state reflected CRC-32 wrapper replaced by source entry redirect |
+| `0x0047DE0A...0x0047DE17` | 14 | Generated | Complete tracepoint data-path formatter replaced by source entry redirect |
+| `0x0047DE18...0x0047DE79` | 98 | Generated | Complete tracepoint filename/index parser replaced by source entry redirect |
+| `0x0047DE7A...0x0047DEB3` | 58 | Generated | Complete positive tracepoint file-size query replaced by source entry redirect |
+| `0x0047DEB4...0x0047DF27` | 116 | Generated | Complete tracepoint directory extrema scan replaced by source entry redirect |
+| `0x0047DF28...0x0047DF89` | 98 | Generated | Complete 16-byte tracepoint state-record writer replaced by source entry redirect |
+| `0x0047DF8A...0x0047DFEB` | 98 | Generated | Complete tracepoint state-record loader/validator replaced by source entry redirect |
+| `0x0047DFEC...0x0047E069` | 126 | Generated | Complete tracepoint storage initializer replaced by source entry redirect |
+| `0x0047E06A...0x0047E07F` | 22 | Generated | Complete active tracepoint stream closer replaced by source entry redirect |
+| `0x0047E080...0x0047E087` | 8 | Opaque | Reviewed alignment and `tp_` compatibility literal |
+| `0x0047E088...0x0047E08F` | 8 | Generated | Complete active tracepoint stream close callback replaced by source entry redirect |
+| `0x0047E090...0x0047E0C7` | 56 | Generated | Complete repeated oldest-tracepoint-file pruning helper replaced by source entry redirect |
+| `0x0047E0C8...0x0047E13D` | 118 | Generated | Complete new tracepoint file/header creation helper replaced by source entry redirect |
+| `0x0047E13E...0x0047E143` | 6 | Opaque | Reviewed alignment and `rb` compatibility literal |
+| `0x0047E144...0x0047E171` | 46 | Generated | Complete active tracepoint append-open helper replaced by source entry redirect |
+| `0x0047E172...0x0047E177` | 6 | Opaque | Reviewed alignment and `wb` compatibility literal |
+| `0x0047E178...0x0047E1EB` | 116 | Generated | Complete bounded tracepoint write/rotation helper replaced by source entry redirect |
+| `0x0047E1EC...0x0047E21F` | 52 | Generated | Complete tracepoint payload commit helper replaced by source entry redirect |
+| `0x0047E220...0x0047E231` | 18 | Generated | Complete active tracepoint stream flush helper replaced by source entry redirect |
+| `0x0047E232...0x0047E271` | 64 | Generated | Complete idempotent tracepoint timer bootstrap replaced by source entry redirect |
+| `0x0047E272...0x0047E2CF` | 94 | Opaque | Reviewed tracepoint literal/data pool retained as compatibility data |
+| `0x0047E2D0...0x0047E31F` | 80 | Generated | Complete protobuf onboarding command/control-state update replaced by source entry redirect |
+| `0x0047E320...0x0047E3E5` | 198 | Generated | Complete gated protobuf onboarding wear-status notifier replaced by source entry redirect |
+| `0x0047E3E6...0x0047E46F` | 138 | Generated | Complete deferred onboarding-flag persistence worker replaced by source entry redirect |
+| `0x0047E470...0x0047E4A5` | 54 | Generated | Complete onboarding-flag change detector/updater replaced by source entry redirect |
+| `0x0047E4A6...0x0047E51B` | 118 | Generated | Complete peer onboarding-flag RPC notification replaced by source entry redirect |
+| `0x0047E51C...0x0047E58D` | 114 | Generated | Complete peer onboarding-flag RPC reply replaced by source entry redirect |
+| `0x0047E58E...0x0047E609` | 124 | Generated | Complete peer onboarding-process RPC synchronization replaced by source entry redirect |
+| `0x0047E60A...0x0047E673` | 106 | Opaque | Reviewed onboarding-process state and shared diagnostic literal table |
+| `0x0047E674...0x0047E6DB` | 104 | Generated | Complete onboarding runtime and timer-service thread initializer replaced by source entry redirect |
+| `0x0047E6DC...0x0047E711` | 54 | Generated | Complete dynamic RTOS timer-object creator replaced by source entry redirect |
+| `0x0047E712...0x0047E759` | 72 | Generated | Complete static-control-block RTOS timer-object creator replaced by source entry redirect |
+| `0x0047E75A...0x0047E7AF` | 86 | Generated | Complete shared RTOS timer-object initializer replaced by source entry redirect |
+| `0x0047E7B0...0x0047E811` | 98 | Generated | Complete RTOS timer command-submission function replaced by source entry redirect |
+| `0x0047E812...0x0047E839` | 40 | Generated | Complete RTOS auto-reload catch-up loop replaced by source entry redirect |
+| `0x0047E83A...0x0047E877` | 62 | Generated | Complete RTOS expired-timer processor replaced by source entry redirect |
+| `0x0047E878...0x0047E88B` | 20 | Generated | Complete RTOS timer-service task loop replaced by source entry redirect |
+| `0x0047E88C...0x0047E8F1` | 102 | Generated | Complete RTOS timer wait-or-expire processor replaced by source entry redirect |
+| `0x0047E8F2...0x0047E915` | 36 | Generated | Complete RTOS active-timer-list query replaced by source entry redirect |
+| `0x0047E916...0x0047E93B` | 38 | Generated | Complete RTOS tick/list-switch sampler replaced by source entry redirect |
+| `0x0047E93C...0x0047E979` | 62 | Generated | Complete RTOS timer-list insertion helper replaced by source entry redirect |
+| `0x0047E97A...0x0047EA8F` | 278 | Generated | Complete RTOS timer-command drain replaced by source entry redirect |
+| `0x0047EA90...0x0047EAB7` | 40 | Generated | Complete RTOS timer-list overflow switch replaced by source entry redirect |
+| `0x0047EAB8...0x0047EAF5` | 62 | Generated | Complete RTOS timer list/queue runtime initializer replaced by source entry redirect |
+| `0x0047EAF6...0x0047EB25` | 48 | Generated | Complete RTOS timer active-state query replaced by source entry redirect |
+| `0x0047EB26...0x0047EB49` | 36 | Generated | Complete RTOS timer callback-context getter replaced by source entry redirect |
+| `0x0047EB4A...0x0047EB6B` | 34 | Generated | Complete RTOS timer pended-callback ISR submission wrapper replaced by source entry redirect |
+| `0x0047EB6C...0x0047EB93` | 40 | Opaque | Reviewed RTOS timer queue/task/list/object literal pool retained for neighboring stock consumers |
+| `0x0047EB94...0x0047EBD7` | 68 | Generated | Complete static RTOS event-group constructor replaced by source entry redirect |
+| `0x0047EBD8...0x0047EBF7` | 32 | Generated | Complete dynamic RTOS event-group constructor replaced by source entry redirect |
+| `0x0047EBF8...0x0047ED0F` | 280 | Generated | Complete RTOS event-group wait operation replaced by source entry redirect |
+| `0x0047ED10...0x0047ED51` | 66 | Generated | Complete RTOS event-group clear-bits operation replaced by source entry redirect |
+| `0x0047ED52...0x0047ED63` | 18 | Generated | Complete RTOS event-group clear-from-ISR submission wrapper replaced by source entry redirect and linked directly to the source clear callback |
+| `0x0047ED64...0x0047ED75` | 18 | Generated | Complete RTOS event-group ISR-safe bit-snapshot getter replaced by source entry redirect |
+| `0x0047ED76...0x0047EE1D` | 168 | Generated | Complete RTOS event-group set-bits operation replaced by source entry redirect |
+| `0x0047EE1E...0x0047EE25` | 8 | Generated | Complete RTOS event-group set-bits timer callback replaced by source entry redirect |
+| `0x0047EE26...0x0047EE27` | 2 | Opaque | Reviewed zero alignment before the clear-bits timer callback |
+| `0x0047EE28...0x0047EE2F` | 8 | Generated | Complete RTOS event-group clear-bits timer callback replaced by source entry redirect |
+| `0x0047EE30...0x0047EE49` | 26 | Generated | Complete RTOS event-group wait-condition predicate replaced by source entry redirect |
+| `0x0047EE4A...0x0047EE59` | 16 | Generated | Complete RTOS event-group set-from-ISR submission wrapper replaced by source entry redirect |
+| `0x0047EE5A...0x0047EE5B` | 2 | Opaque | Retained reviewed zero alignment after the set-from-ISR wrapper |
+| `0x0047EE5C...0x0047EE5F` | 4 | Opaque | Retained reviewed `0x0047EE1F` set-callback Thumb literal |
+| `0x0047EE60...0x0047EE77` | 24 | Generated | Complete priority-1 RTC XTAL-selection and oscillator-enable initializer replaced by source entry redirect |
+| `0x0047EE78...0x0047EEF9` | 130 | Generated | Complete RTC calendar/time setter replaced by source entry redirect |
+| `0x0047EEFA...0x0047EEFB` | 2 | Opaque | Retained reviewed zero alignment after the RTC time setter |
+| `0x0047EEFC...0x0047EF0F` | 20 | Opaque | Retained reviewed RTC diagnostic literal island |
+| `0x0047EF10...0x0047EF17` | 8 | Generated | Complete RTC calendar/time getter wrapper and underlying read path replaced by source entry redirect |
+| `0x0047EF18...0x0047EF37` | 32 | Generated | Complete Apollo510 private peripheral-power descriptor lookup replaced by source entry redirect |
+| `0x0047EF38...0x0047EF73` | 60 | Generated | Complete Apollo510 cached trim-version getter replaced by source entry redirect |
+| `0x0047EF74...0x0047F09F` | 300 | Generated | Complete Apollo510 private MCU HP/LP switching sequence replaced by source entry redirect |
+| `0x0047F0A0...0x0047F107` | 104 | Generated | Complete Apollo510 public MCU power-mode selector replaced by source entry redirect |
+| `0x0047F108...0x0047F11B` | 20 | Generated | Complete Apollo510 public GPU power-mode status getter replaced by source entry redirect |
+| `0x0047F11C...0x0047F203` | 232 | Generated | Complete Apollo510 public GPU power-mode selector replaced by source entry redirect |
+| `0x0047F204...0x0047F3C5` | 450 | Generated | Complete Apollo510 public MCU memory-power configuration routine replaced by source entry redirect |
+| `0x0047F3C6...0x0047F417` | 82 | Generated | Complete Apollo510 public ROM power-domain enable routine replaced by source entry redirect |
+| `0x0047F418...0x0047F469` | 82 | Generated | Complete Apollo510 public ROM power-domain disable routine replaced by source entry redirect |
+| `0x0047F46A...0x0047F56D` | 260 | Generated | Complete Apollo510 public shared-SRAM power configuration routine replaced by source entry redirect |
+| `0x0047F56E...0x0047F5B7` | 74 | Generated | Complete Apollo510 private crypto power-down quiesce helper replaced by source entry redirect |
+| `0x0047F5B8...0x0047F6F1` | 314 | Generated | Complete Apollo510 public peripheral-power enable routine replaced by source entry redirect |
+| `0x0047F6F2...0x0047F7AD` | 188 | Generated | Complete private peripheral-disable shared-domain mask checker replaced by source entry redirect |
+| `0x0047F7AE...0x0047F90B` | 350 | Generated | Complete Apollo510 public peripheral-power disable routine replaced by source entry redirect |
+| `0x0047F90C...0x0047F941` | 54 | Generated | Complete Apollo510 public peripheral enabled-state query replaced by source entry redirect |
+| `0x0047F942...0x0047F953` | 18 | Opaque | Retained data/alignment island before INFO1 cache population |
+| `0x0047F954...0x0047FAB3` | 352 | Generated | Complete Apollo510 private INFO1 cache-population routine replaced by source entry redirect |
+| `0x0047FAB4...0x0047FAE7` | 52 | Opaque | Retained data island between INFO1 cache population and low-power initialization |
+| `0x0047FAE8...0x0047FE11` | 810 | Generated | Complete Apollo510 public low-power initialization routine replaced by source entry redirect |
+| `0x0047FE12...0x0047FE67` | 86 | Generated | Complete Apollo510 private buck/LDO override initializer replaced by source entry redirect |
+| `0x0047FE68...0x0047FE6B` | 4 | Opaque | Retained `0x40021028` literal word after the buck/LDO override initializer |
+| `0x0047FE6C...0x0047FE93` | 40 | Generated | Complete Apollo510 private dynamic buck/LDO override updater replaced by source entry redirect |
+| `0x0047FE94...0x0047FE9F` | 12 | Opaque | Retained `0x4002101C`, `0x40021024`, and `0x4002102C` literal words after the dynamic override updater |
+| `0x0047FEA0...0x0047FFB9` | 282 | Generated | Complete Apollo510 public miscellaneous power-control dispatcher replaced by source entry redirect |
+| `0x0047FFBA...0x0047FFC3` | 10 | Opaque | Retained data island after the miscellaneous power-control dispatcher |
+| `0x0047FFC4...0x00480001` | 62 | Generated | Complete Apollo510 public CPDLPSTATE configuration routine replaced by source entry redirect |
+| `0x00480002...0x00480003` | 2 | Opaque | Retained alignment pad after the CPDLPSTATE configurator |
+| `0x00480004...0x00480007` | 4 | Opaque | Retained `0x20074F61` compatibility pointer before the CPDLPSTATE getter |
+| `0x00480008...0x00480027` | 32 | Generated | Complete Apollo510 public CPDLPSTATE getter replaced by source entry redirect |
+| `0x00480028...0x00480057` | 48 | Generated | Complete Apollo510 public temperature-update routine replaced by source entry redirect |
+| `0x00480058...0x0048009D` | 70 | Generated | Complete Apollo510 public system-PLL enable routine replaced by source entry redirect |
+| `0x0048009E...0x004800DD` | 64 | Generated | Complete Apollo510 public system-PLL disable routine replaced by source entry redirect |
+| `0x004800DE...0x004800DF` | 2 | Opaque | Retained alignment pad after the system-PLL disable routine |
+| `0x004800E0...0x004800E3` | 4 | Opaque | Retained `0x40021040` `PWRCTRLMODESTATUS` literal used by the earlier power-control routine |
+| `0x004800E4...0x004800F3` | 16 | Generated | Complete Apollo510 public system-PLL enabled-state query replaced by source entry redirect |
+| `0x004800F4...0x004801FB` | 264 | Opaque | Retained 66-word power-control register, state, constant, and compatibility-pointer literal pool |
+| `0x004801FC...0x0048023F` | 68 | Generated | Complete Apollo510 public SPOT-manager timer initializer replaced by source entry redirect |
+| `0x00480240...0x00480289` | 74 | Generated | Complete Apollo510 public SPOT-manager timer-start routine replaced by source entry redirect |
+| `0x0048028A...0x004802CD` | 68 | Generated | Complete Apollo510 public SPOT-manager timer-restart routine replaced by source entry redirect |
+| `0x004802CE...0x00480311` | 68 | Generated | Complete Apollo510 public SPOT-manager timer-stop routine replaced by source entry redirect |
+| `0x00480312...0x0048032B` | 26 | Generated | Complete SPOT-manager power-state update callback dispatcher replaced by source entry redirect |
+| `0x0048032C...0x00480341` | 22 | Generated | Complete SPOT-manager TempCo-postpone callback dispatcher replaced by source entry redirect |
+| `0x00480342...0x00480357` | 22 | Generated | Complete SPOT-manager pending-TempCo callback dispatcher replaced by source entry redirect |
+| `0x00480358...0x0048036D` | 22 | Generated | Complete SPOT-manager pre-override SIMOBUCK callback dispatcher replaced by source entry redirect |
+| `0x0048036E...0x00480383` | 22 | Generated | Complete SPOT-manager pre-enable SIMOBUCK callback dispatcher replaced by source entry redirect |
+| `0x00480384...0x00480399` | 22 | Generated | Complete SPOT-manager post-enable SIMOBUCK callback dispatcher replaced by source entry redirect |
+| `0x0048039A...0x004803AB` | 18 | Generated | Complete SPOT-manager timer-interrupt callback dispatcher replaced by source entry redirect |
+| `0x004803AC...0x004803C1` | 22 | Generated | Complete SPOT-manager TON-configuration initializer dispatcher replaced by source entry redirect |
+| `0x004803C2...0x004803DB` | 26 | Generated | Complete SPOT-manager TON-configuration update dispatcher replaced by source entry redirect |
+| `0x004803DC...0x004803F1` | 22 | Generated | Complete SPOT-manager post-LP-to-HP callback dispatcher replaced by source entry redirect |
+| `0x004803F2...0x00480407` | 22 | Generated | Complete SPOT-manager SIMOBUCK low-power autoswitch initializer dispatcher replaced by source entry redirect |
+| `0x00480408...0x0048041D` | 22 | Generated | Complete SPOT-manager SIMOBUCK low-power autoswitch-enable dispatcher replaced by source entry redirect |
+| `0x0048041E...0x00480433` | 22 | Generated | Complete SPOT-manager SIMOBUCK low-power autoswitch-disable dispatcher replaced by source entry redirect |
+| `0x00480434...0x004806CF` | 668 | Generated | Complete Apollo510 public SPOT-manager initializer, revision/trim selection matrix, analog repair, and callback-table setup replaced by source entry redirect |
+| `0x004806D0...0x0048079F` | 208 | Opaque | Retained shared timer literals plus SPOT-manager initializer state/global/handler-pointer pool |
+| `0x004807A0...0x004807FB` | 92 | Generated | Exact source-assembled replacement for the complete microsecond-delay primitive and literal pool |
+| `0x004807FC...0x00480825` | 42 | Generated | Complete Apollo510 delay-until-masked-status-change helper replaced by source entry redirect |
+| `0x00480826...0x00480869` | 68 | Generated | Complete Apollo510 configurable equal/not-equal masked-status wait helper replaced by source entry redirect |
+| `0x0048086A...0x00480871` | 8 | Generated | Complete Apollo510 public word-copy wrapper replaced by source entry redirect, removing its active dependency on the retained private ITCM implementation |
+| `0x00480872...0x00480873` | 2 | Opaque | Retained zero alignment between reviewed function boundaries |
+| `0x00480874...0x004809C3` | 336 | Generated | Complete private Apollo510 MCUCTRL device-information collector replaced by source entry redirect |
+| `0x004809C4...0x00480C55` | 658 | Generated | Complete public Apollo510 MCUCTRL control dispatcher replaced by source entry redirect |
+| `0x00480C56...0x00480C7B` | 38 | Generated | Complete public Apollo510 external-32-MHz-clock status getter replaced by source entry redirect |
+| `0x00480C7C...0x00480D71` | 246 | Generated | Complete private Apollo510 MCUCTRL trim-version decoder replaced by source entry redirect |
+| `0x00480D72...0x00480E6B` | 250 | Generated | Complete public Apollo510 MCUCTRL information getter replaced by source entry redirect |
+| `0x00480E6C...0x00480ED7` | 108 | Opaque | Retained Apollo MCUCTRL information-getter literal pool and alignment before the GPIO interrupt helper |
+| `0x00480ED8...0x00480EED` | 22 | Generated | Complete stock GPIO interrupt-index helper replaced by source entry redirect |
+| `0x00480EEE...0x00480F0B` | 30 | Generated | Complete stock GPIO pin-configuration reader replaced by source entry redirect |
+| `0x00480F0C...0x00480F89` | 126 | Generated | Complete stock GPIO pin configuration replaced by source entry redirect |
+| `0x00480F8A...0x00480FD5` | 76 | Generated | Complete stock GPIO state reader replaced by source entry redirect |
+| `0x00480FD6...0x004810AF` | 218 | Generated | Complete stock GPIO state writer replaced by source entry redirect |
+| `0x004810B0...0x004812F5` | 582 | Generated | Complete stock GPIO interrupt-control function replaced by source entry redirect |
+| `0x004812F6...0x00481467` | 370 | Generated | Complete stock GPIO interrupt-status function replaced by source entry redirect |
+| `0x00481468...0x00481573` | 268 | Generated | Complete stock GPIO interrupt-clear function replaced by source entry redirect |
+| `0x00481574...0x004815F1` | 126 | Generated | Complete IRQ-specific GPIO status helper replaced by source entry redirect |
+| `0x004815F2...0x0048162B` | 58 | Generated | Complete IRQ-specific GPIO clear helper replaced by source entry redirect |
+| `0x0048162C...0x004816C5` | 154 | Generated | Complete GPIO interrupt-handler registration function replaced by source entry redirect |
+| `0x004816C6...0x00481739` | 116 | Generated | Complete GPIO interrupt-handler service function replaced by source entry redirect |
+| `0x0048173A...0x00481817` | 222 | Opaque | Preserved GPIO literal/data pool and alignment before the shared character-search primitive |
+| `0x00481818...0x0048182D` | 22 | Generated | Complete shared character-search primitive replaced by source entry redirect |
+| `0x0048182E...0x0048182F` | 2 | Opaque | Preserved alignment between the character-search and ASCII case-folding primitives |
+| `0x00481830...0x00481835` | 6 | Generated | Complete shared ASCII case-folding primitive replaced by source entry redirect |
+| `0x00481836...0x00482517` | 3,298 | Opaque | Preserved formatting core, literal pool, and alignment before the integer-formatting helper |
+| `0x00482518...0x0048262B` | 276 | Generated | Complete shared integer-formatting helper replaced by source entry redirect |
+| `0x0048262C...0x00482671` | 70 | Generated | Complete shared decimal power-scaling helper replaced by source entry redirect |
+| `0x00482672...0x00482683` | 18 | Opaque | Preserved alignment and literal pool after the decimal helper |
+| `0x00482684...0x004826B1` | 46 | Generated | Complete runtime byte-span emitter replaced by source entry redirect |
+| `0x004826B2...0x004826FB` | 74 | Opaque | Preserved runtime alignment, scalar data, and literal words before the zero-fill adapter |
+| `0x004826FC...0x00482707` | 12 | Generated | Complete runtime zero-fill adapter replaced by source entry redirect |
+| `0x00482708...0x00482715` | 14 | Generated | Complete runtime lookup-layout predicate replaced by source entry redirect |
+| `0x00482716...0x0048277D` | 104 | Generated | Complete dual-layout runtime byte-map lookup replaced by source entry redirect |
+| `0x0048277E...0x0048278B` | 14 | Generated | Complete runtime property-group index helper replaced by source entry redirect |
+| `0x0048278C...0x00482795` | 10 | Generated | Complete style initializer replaced by source entry redirect |
+| `0x00482796...0x004827AF` | 26 | Generated | Complete mutable/static style reset replaced by source entry redirect |
+| `0x004827B0...0x00482867` | 184 | Generated | Complete packed style-property removal routine replaced by source entry redirect |
+| `0x00482868...0x00482945` | 222 | Generated | Complete style-property mutation routine replaced by source entry redirect |
+| `0x00482946...0x0048294F` | 10 | Generated | Complete public byte-normalizing map lookup adapter replaced by source entry redirect |
+| `0x00482950...0x0048297B` | 44 | Generated | Complete transition-descriptor initializer replaced by source entry redirect |
+| `0x0048297C...0x00482A59` | 222 | Generated | Complete style-property default-value dispatcher replaced by source entry redirect |
+| `0x00482A5A...0x00482A69` | 16 | Generated | Complete style-empty predicate replaced by source entry redirect |
+| `0x00482A6A...0x00482AB1` | 72 | Generated | Complete built-in/custom style-property flag lookup replaced by source entry redirect |
+| `0x00482AB2...0x00482AFF` | 78 | Opaque | Preserved alignment and shared style literal pool |
+| `0x00482B00...0x00482B11` | 18 | Generated | Complete LVGL linked-list initializer replaced by source entry redirect |
+| `0x00482B12...0x00482B55` | 68 | Generated | Complete linked-list head insertion routine replaced by source entry redirect |
+| `0x00482B56...0x00482BC9` | 116 | Generated | Complete linked-list insert-before routine replaced by source entry redirect |
+| `0x00482BCA...0x00482C0D` | 68 | Generated | Complete linked-list tail insertion routine replaced by source entry redirect |
+| `0x00482C0E...0x00482C99` | 140 | Generated | Complete linked-list unlink routine replaced by source entry redirect |
+| `0x00482C9A...0x00482CD7` | 62 | Generated | Complete callback-driven linked-list clear routine replaced by source entry redirect |
+| `0x00482CD8...0x00482D21` | 74 | Generated | Linked-list head, tail, next, previous, and length accessors replaced by source entry redirects |
+| `0x00482D22...0x00482D87` | 102 | Generated | Complete linked-list move-before mutation routine replaced by source entry redirect |
+| `0x00482D88...0x00482DAD` | 38 | Generated | Linked-list empty predicate and clear wrapper replaced by source entry redirects |
+| `0x00482DAE...0x00482DC1` | 20 | Generated | Complete linked-list previous-pointer setter replaced by source entry redirect |
+| `0x00482DC2...0x00482DD7` | 22 | Generated | Complete linked-list next-pointer setter replaced by source entry redirect |
+| `0x00482DD8...0x00482E4B` | 116 | Generated | Complete LVGL RGB888 color mixer replaced by source entry redirect |
+| `0x00482E4C...0x00482ED3` | 136 | Generated | Complete LVGL packed-alpha color mixer replaced by source entry redirect |
+| `0x00482ED4...0x00482EF5` | 34 | Generated | Complete LVGL packed-color brightness helper replaced by source entry redirect |
+| `0x00482EF6...0x00482F71` | 124 | Generated | Complete LVGL packed-alpha composition helper replaced by source entry redirect |
+| `0x00482F72...0x00482F73` | 2 | Opaque | Preserved color-cluster alignment |
+| `0x00482F74...0x00482F89` | 22 | Generated | Complete LVGL object-theme resolver replaced by source entry redirect |
+| `0x00482F8A...0x00482FA9` | 32 | Generated | Complete public LVGL theme-application routine replaced by source entry redirect |
+| `0x00482FAA...0x00482FCD` | 36 | Generated | Complete LVGL primary-theme-color getter replaced by source entry redirect |
+| `0x00482FCE...0x00482FF1` | 36 | Generated | Complete parent-first LVGL theme callback traversal replaced by source entry redirect |
+| `0x00482FF2...0x00483027` | 54 | Generated | Complete inheritable-class LVGL theme traversal replaced by source entry redirect |
+| `0x00483028...0x0048302F` | 8 | Generated | Complete bounded formatting output callback replaced by source entry redirect |
+| `0x00483030...0x00483031` | 2 | Generated | Complete no-op formatting output callback replaced by exact in-place source bytes |
+| `0x00483032...0x00483043` | 18 | Generated | Complete low-byte ASCII digit predicate replaced by source entry redirect |
+| `0x00483044...0x0048306B` | 40 | Generated | Complete unsigned decimal parser replaced by source entry redirect |
+| `0x0048306C...0x004830D9` | 110 | Generated | Complete mpaland reverse-output and field-padding helper replaced by source entry redirect |
+| `0x004830DA...0x00483209` | 304 | Generated | Complete mpaland integer prefix/sign/precision/width formatter replaced by source entry redirect |
+| `0x0048320A...0x0048329B` | 146 | Generated | Complete mpaland 32-bit integer digit converter replaced by source entry redirect |
+| `0x0048329C...0x0048334D` | 178 | Generated | Complete mpaland 64-bit integer digit converter replaced by source entry redirect |
+| `0x0048334E...0x0048334F` | 2 | Opaque | Preserved integer-formatting alignment halfword |
+| `0x00483350...0x00483611` | 706 | Generated | Complete mpaland fixed-point floating conversion body replaced by source entry redirect |
+| `0x00483612...0x0048364B` | 58 | Opaque | Preserved fixed-point converter literal tail |
+| `0x0048364C...0x00483907` | 700 | Generated | Complete mpaland exponential floating conversion body replaced by source entry redirect |
+| `0x00483908...0x0048395F` | 88 | Opaque | Preserved exponential converter literal pool |
+| `0x00483960...0x00483FCB` | 1,644 | Generated | Complete mpaland-derived variadic formatter core replaced by source entry redirect, including recovered G2 pointer and recursive descriptor behavior |
+| `0x00483FCC...0x00483FCF` | 4 | Opaque | Inactive reversed `fni-\0` token formerly read by stock fixed-format conversion; source `ftoa` no longer references it |
+| `0x00483FD0...0x00483FE9` | 26 | Generated | Complete public `snprintf` wrapper replaced by source entry redirect |
+| `0x00483FEA...0x00483FFB` | 18 | Generated | Complete public `vsnprintf` wrapper replaced by source entry redirect |
+| `0x00483FFC...0x00484013` | 24 | Opaque | Preserved formatter/async literal gap |
+| `0x00484014...0x00484051` | 62 | Generated | Complete LVGL asynchronous-call creator replaced by source entry redirect |
+| `0x00484052...0x004840A9` | 88 | Generated | Complete LVGL asynchronous-call cancellation replaced by source entry redirect |
+| `0x004840AA...0x004840AB` | 2 | Opaque | Preserved async alignment halfword |
+| `0x004840AC...0x004840C5` | 26 | Generated | Complete LVGL asynchronous timer callback replaced by source entry redirect |
+| `0x004840C6...0x0048413B` | 118 | Opaque | Preserved stock application bytes before the generic heap coordinator |
+| `0x0048413C...0x0048417F` | 68 | Generated | Complete generic heap descriptor initializer replaced by source entry redirect |
+| `0x00484180...0x004841D7` | 88 | Generated | Complete generic heap allocation coordinator replaced by source entry redirect |
+| `0x004841D8...0x00484233` | 92 | Generated | Complete generic aligned-allocation coordinator replaced by source entry redirect |
+| `0x00484234...0x0048429D` | 106 | Generated | Complete generic heap reallocation coordinator replaced by source entry redirect |
+| `0x0048429E...0x004842E5` | 72 | Generated | Complete generic heap free coordinator replaced by source entry redirect |
+| `0x004842E6...0x0048431D` | 56 | Opaque | Preserved heap-family initializer binding the three reviewed descriptors to their arenas |
+| `0x0048431E...0x00484329` | 12 | Generated | Complete primary-heap allocation adapter replaced by source entry redirect |
+| `0x0048432A...0x00484337` | 14 | Generated | Complete primary-heap reallocation adapter replaced by source entry redirect |
+| `0x00484338...0x00484343` | 12 | Generated | Complete primary-heap free adapter replaced by source entry redirect |
+| `0x00484344...0x0048D4E7` | 37,284 | Opaque | Preserved stock application bytes after the heap adapters and before the bounded string-length leaf |
+| `0x0048D4E8...0x0048D53D` | 86 | Generated | Complete optimized bounded string-length leaf replaced by source entry redirect |
+| `0x0048D53E...0x00490615` | 12,504 | Opaque | Preserved stock application bytes between bounded string length and the shared formatting append primitive |
+| `0x00490616...0x00490677` | 98 | Generated | Complete stock shared formatting append primitive replaced by source entry redirect |
+| `0x00490678...0x0049068F` | 24 | Generated | Complete stock formatting boolean reader replaced by source entry redirect |
+| `0x00490690...0x00490879` | 490 | Generated | Complete stock repeated-field encoder replaced by source entry redirect |
+| `0x0049087A...0x00490A45` | 460 | Generated | Complete stock protobuf-style default-value checker replaced by source entry redirect |
+| `0x00490A46...0x00490AE9` | 164 | Generated | Complete stock field-value dispatcher replaced by source entry redirect |
+| `0x00490AEA...0x00490B1D` | 52 | Generated | Complete stock indirect-field callback helper replaced by source entry redirect |
+| `0x00490B1E...0x00490BC7` | 170 | Generated | Complete stock regular field encoder replaced by source entry redirect |
+| `0x00490BC8...0x00490BF7` | 48 | Generated | Complete stock default extension-field wrapper replaced by source entry redirect |
+| `0x00490BF8...0x00490C31` | 58 | Generated | Complete stock linked extension-field dispatcher replaced by source entry redirect |
+| `0x00490C32...0x00490C83` | 82 | Generated | Complete stock generic message encoder replaced by source entry redirect |
+| `0x00490C84...0x00490CDF` | 92 | Generated | Complete stock unsigned LEB128 encoder replaced by source entry redirect |
+| `0x00490CE0...0x00490D07` | 40 | Generated | Complete stock unsigned 64-bit prefix writer replaced by source entry redirect |
+| `0x00490D08...0x00490D35` | 46 | Generated | Complete stock signed 64-bit zigzag writer replaced by source entry redirect |
+| `0x00490D36...0x00490D3F` | 10 | Generated | Complete stock fixed four-byte append wrapper replaced by source entry redirect |
+| `0x00490D40...0x00490D49` | 10 | Generated | Complete stock fixed eight-byte append wrapper replaced by source entry redirect |
+| `0x00490D4A...0x00490D65` | 28 | Generated | Complete stock formatting field-key encoder replaced by source entry redirect |
+| `0x00490D66...0x00490DB5` | 80 | Generated | Complete stock descriptor-to-field-key adapter replaced by source entry redirect |
+| `0x00490DB6...0x00490DDB` | 38 | Generated | Complete stock length-prefixed formatting buffer writer replaced by source entry redirect |
+| `0x00490DDC...0x00490E8F` | 180 | Generated | Complete stock two-pass formatting submessage writer replaced by source entry redirect |
+| `0x00490E90...0x00490EAD` | 30 | Generated | Complete stock formatting boolean value adapter replaced by source entry redirect |
+| `0x00490EAE...0x00490F71` | 196 | Generated | Complete stock formatting integer value adapter replaced by source entry redirect |
+| `0x00490F72...0x00490FA1` | 48 | Generated | Complete stock formatting fixed-width value adapter replaced by source entry redirect |
+| `0x00490FA2...0x00490FE3` | 66 | Generated | Complete stock formatting bytes descriptor adapter replaced by source entry redirect |
+| `0x00490FE4...0x0049104B` | 104 | Generated | Complete stock formatting string descriptor adapter replaced by source entry redirect |
+| `0x0049104C...0x004910A3` | 88 | Generated | Complete stock formatting submessage-field and extension-callback adapter replaced by source entry redirect |
+| `0x004910A4...0x004910E7` | 68 | Opaque | Preserved shared formatting error/helper literal pool |
+| `0x004910E8...0x004910F3` | 12 | Generated | Exact source-assembled format type-11 span adapter; sole dispatcher caller preserved |
+| `0x004910F4...0x00491101` | 14 | Generated | Exact source-assembled millisecond-to-microsecond delay wrapper; 53 direct callers preserved |
+| `0x00491102...0x00491109` | 8 | Generated | Exact source-assembled microsecond delay passthrough; 66 direct callers preserved |
+| `0x0049110A...0x004C23DD` | 201,428 | Opaque | Stock application after the duration wrappers and before the MSPI interrupt-clear leaf |
+| `0x004C23DE...0x004C240D` | 48 | Generated | Authenticated AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_clear` entry redirect |
+| `0x004C240E...0x004CA6F7` | 33,514 | Opaque | Stock application after the MSPI leaf and before the littlefs utility quartet |
+| `0x004CA6F8...0x004CA6FF` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_max` replaced by source entry redirect |
+| `0x004CA700...0x004CA707` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_min` replaced by source entry redirect |
+| `0x004CA708...0x004CA713` | 12 | Generated | Exact upstream littlefs v2.10.1 `lfs_aligndown` replaced by source entry redirect and NOP fill |
+| `0x004CA714...0x004CA71F` | 12 | Generated | Exact upstream littlefs v2.10.1 `lfs_alignup` replaced by source entry redirect and NOP fill |
+| `0x004CA720...0x004CA779` | 90 | Generated | Exact littlefs v2.10.1 `lfs_npw2` fallback replaced by source entry redirect and NOP fill |
+| `0x004CA77A...0x004CA789` | 16 | Generated | Exact littlefs v2.10.1 `lfs_ctz` fallback replaced by source entry redirect |
+| `0x004CA78A...0x004CA7B1` | 40 | Generated | Exact littlefs v2.10.1 `lfs_popc` fallback replaced by source entry redirect and NOP fill |
+| `0x004CA7B2...0x004CA7B5` | 4 | Generated | Exact upstream littlefs v2.10.1 `lfs_scmp` replaced by source entry redirect in Apollo main |
+| `0x004CA7B6...0x004CA7D7` | 34 | Generated | Exact upstream littlefs v2.10.1 `lfs_fromle32` replaced by source entry redirect and NOP fill |
+| `0x004CA7D8...0x004CA7DF` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_tole32` replaced by source entry redirect and NOP fill |
+| `0x004CA7E0...0x004CA801` | 34 | Generated | Exact upstream littlefs v2.10.1 `lfs_frombe32` replaced by source entry redirect and NOP fill |
+| `0x004CA802...0x004CA809` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_tobe32` replaced by source entry redirect and NOP fill |
+| `0x004CA80A...0x004CB081` | 2,168 | Opaque | Retained littlefs core before the metadata-list predicate |
+| `0x004CB082...0x004CB09F` | 30 | Generated | Exact upstream littlefs v2.10.1 `lfs_mlist_isopen` replaced by source entry redirect |
+| `0x004CB0A0...0x004CB0BB` | 28 | Generated | Exact upstream littlefs v2.10.1 `lfs_mlist_remove` replaced by source entry redirect |
+| `0x004CB0BC...0x004CB0C3` | 8 | Generated | Exact upstream littlefs v2.10.1 `lfs_mlist_append` replaced by source entry redirect |
+| `0x004CB0C4...0x004CB0C9` | 6 | Generated | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version` replaced by source entry redirect |
+| `0x004CB0CA...0x004CB0D5` | 12 | Generated | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version_major` replaced by source entry redirect |
+| `0x004CB0D6...0x004CB0DF` | 10 | Generated | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version_minor` replaced by source entry redirect |
+| `0x004CB0E0...0x004CB0E5` | 6 | Generated | Exact upstream littlefs v2.10.1 `lfs_alloc_ckpoint` replaced by source entry redirect in Apollo main |
+| `0x004CB0E6...0x004CB0F5` | 16 | Generated | Exact upstream littlefs v2.10.1 `lfs_alloc_drop` replaced by source entry redirect |
+| `0x004CB0F6...0x004CB12D` | 56 | Generated | Exact upstream littlefs v2.10.1 `lfs_alloc_lookahead` replaced by source entry redirect |
+| `0x004CB12E...0x004CE45B` | 13,102 | Opaque | Retained littlefs core before private file-position getter |
+| `0x004CE45C...0x004CE45F` | 4 | Generated | Exact upstream littlefs v2.10.1 `lfs_file_tell_` replaced by source entry redirect |
+| `0x004CE460...0x004CE471` | 18 | Generated | Bounded littlefs v2.10.1 `lfs_file_rewind_` replaced by source entry redirect |
+| `0x004CE472...0x004CE489` | 24 | Generated | Bounded littlefs v2.10.1 `lfs_file_size_` replaced by source entry redirect |
+| `0x004CE48A...0x004CFD17` | 6,286 | Opaque | Retained littlefs core before the TLSF closure |
+| `0x004CFD18...0x004D057F` | 2,152 | Opaque | Explicitly retained internal TLSF implementation and literals before the externally reached pool walker |
+| `0x004D0580...0x004D05E3` | 100 | Generated | Complete externally reached TLSF pool walker atomically replaced by source entry redirect |
+| `0x004D05E4...0x004D05F9` | 22 | Generated | Complete externally reached TLSF block-size query atomically replaced by source entry redirect |
+| `0x004D05FA...0x004D0603` | 10 | Generated | Complete externally reached TLSF pool-overhead query atomically replaced by source entry redirect |
+| `0x004D0604...0x004D0607` | 4 | Opaque | Explicitly retained TLSF literal island |
+| `0x004D0608...0x004D06AB` | 164 | Opaque | Explicitly retained TLSF pool-add implementation |
+| `0x004D06AC...0x004D06B3` | 8 | Opaque | Explicitly retained TLSF literal island |
+| `0x004D06B4...0x004D06D5` | 34 | Opaque | Explicitly retained TLSF control-creation implementation |
+| `0x004D06D6...0x004D06EB` | 22 | Opaque | Explicitly retained TLSF literal island before create-with-pool |
+| `0x004D06EC...0x004D0715` | 42 | Generated | Complete externally reached TLSF create-with-pool entry atomically replaced by source entry redirect |
+| `0x004D0716...0x004D0721` | 12 | Generated | Complete externally reached TLSF pool accessor atomically replaced by source entry redirect |
+| `0x004D0722...0x004D0743` | 34 | Generated | Complete externally reached TLSF allocation entry atomically replaced by source entry redirect |
+| `0x004D0744...0x004D0801` | 190 | Generated | Complete externally reached TLSF aligned-allocation entry atomically replaced by source entry redirect |
+| `0x004D0802...0x004D0807` | 6 | Opaque | Explicitly retained TLSF inter-function literal data |
+| `0x004D0808...0x004D0851` | 74 | Generated | Complete externally reached TLSF free entry atomically replaced by source entry redirect |
+| `0x004D0852...0x004D0867` | 22 | Opaque | Explicitly retained TLSF inter-function literal data |
+| `0x004D0868...0x004D0949` | 226 | Generated | Complete externally reached TLSF reallocation entry atomically replaced by source entry redirect |
+| `0x004D094A...0x004D09B3` | 106 | Opaque | Explicitly retained TLSF assertion strings and literal data |
+| `0x004D09B4...0x004E0C0B` | 66,136 | Opaque | Stock application after the retained TLSF closure and before the EvenHub decompression adapters |
+| `0x004E0C0C...0x004E0C33` | 40 | Generated | Complete stock EvenHub mode-2 decompression adapter replaced by source entry redirect |
+| `0x004E0C34...0x004E0C3B` | 8 | Generated | Complete stock public EvenHub RLE wrapper replaced by source entry redirect |
+| `0x004E0C3C...0x004E0C9F` | 100 | Generated | Complete stock EvenHub byte-run decoder replaced by source entry redirect |
+| `0x004E0CA0...0x004E0CA9` | 10 | Generated | Complete stock EvenHub active-state marker replaced by source entry redirect |
+| `0x004E0CAA...0x004E0CB1` | 8 | Generated | Complete stock EvenHub state getter replaced by source entry redirect |
+| `0x004E0CB2...0x004E0CB9` | 8 | Generated | Complete stock EvenHub state setter replaced by source entry redirect |
+| `0x004E0CBA...0x004E0CC3` | 10 | Generated | Complete stock keepalive-reset body replaced by source entry redirect |
+| `0x004E0CC4...0x004E0CCD` | 10 | Generated | Complete stock EvenHub shutdown marker replaced by source entry redirect |
+| `0x004E0CCE...0x004E0D39` | 108 | Generated | Complete stock EvenHub container lookup replaced by source entry redirect |
+| `0x004E0D3A...0x004E1191` | 1,112 | Generated | Complete stock EvenHub page-event callback replaced by source entry redirect |
+| `0x004E1192...0x004E1405` | 628 | Generated | Complete stock EvenHub common-data callback replaced by source entry redirect |
+| `0x004E1406...0x004E1441` | 60 | Generated | Complete stock EvenHub IMU enable policy replaced by source entry redirect |
+| `0x004E1442...0x004E148F` | 78 | Opaque | Preserved EvenHub literal pool between the IMU policy and UI-event handler |
+| `0x004E1490...0x004E1955` | 1,222 | Generated | Complete stock EvenHub registry UI-event handler replaced by source entry redirect |
+| `0x004E1956...0x00530083` | 321,326 | Opaque | Stock application between the EvenHub UI-event handler and generic ring-write primitive |
+| `0x00530084...0x005300E1` | 94 | Generated | Complete generic ring-write primitive replaced by source entry redirect |
+| `0x005300E2...0x0053013B` | 90 | Generated | Complete generic ring-read primitive replaced by source entry redirect |
+| `0x0053013C...0x005415C1` | 70,790 | Opaque | Stock application between the generic ring-read primitive and installed dynamic display handler |
+| `0x005415C2...0x005415D7` | 22 | Generated | Complete installed dynamic display handler replaced by source entry redirect |
+| `0x005415D8...0x0054F337` | 56,672 | Opaque | Stock application between the installed dynamic display handler and LZ4 wrapper |
+| `0x0054F338...0x0054F355` | 30 | Generated | Complete stock LZ4 safe block-decoder wrapper replaced by source entry redirect |
+| `0x0054F356...0x0055E7F9` | 62,628 | Opaque | Stock application between the LZ4 wrapper and asynchronous display sink |
+| `0x0055E7FA...0x0055E897` | 158 | Generated | Complete asynchronous four-channel display sink replaced by source entry redirect |
+| `0x0055E898...0x0058DD2F` | 193,688 | Opaque | Stock application between the asynchronous display sink and IRQ special-transfer finish helper |
+| `0x0058DD30...0x0058DD5B` | 44 | Generated | Complete IRQ special-transfer finish helper replaced by source entry redirect |
+| `0x0058DD5C...0x0058DD89` | 46 | Generated | Complete IRQ bit-12 cleanup helper replaced by source entry redirect |
+| `0x0058DD8A...0x0058DDD5` | 76 | Generated | Complete IRQ completion-result helper replaced by source entry redirect |
+| `0x0058DDD6...0x0058DEF1` | 284 | Opaque | Stock application between the IRQ completion-result helper and lower-level begin helper |
+| `0x0058DEF2...0x0058DF5B` | 106 | Generated | Complete lower-level display-operation begin helper replaced by source entry redirect |
+| `0x0058DF5C...0x0058DFB1` | 86 | Generated | Complete event-side display-operation begin helper replaced by source entry redirect |
+| `0x0058DFB2...0x0058DFED` | 60 | Generated | Complete event-side display-operation abort/reset helper replaced by source entry redirect |
+| `0x0058DFEE...0x0058E09D` | 176 | Generated | Complete IRQ bit-6 cleanup/restore helper replaced by source entry redirect |
+| `0x0058E09E...0x0058E2D7` | 570 | Opaque | Stock application between the IRQ bit-6 helper and direct FIFO reader |
+| `0x0058E2D8...0x0058E31D` | 70 | Generated | Complete direct display FIFO reader replaced by source entry redirect |
+| `0x0058E31E...0x0058E351` | 52 | Generated | Complete direct display FIFO writer replaced by source entry redirect |
+| `0x0058E352...0x0058E35F` | 14 | Generated | Complete 32-byte FIFO-discard wrapper replaced by source entry redirect |
+| `0x0058E360...0x0058E39F` | 64 | Generated | Complete display FIFO-to-ring fill helper replaced by source entry redirect |
+| `0x0058E3A0...0x0058E3EF` | 80 | Generated | Complete display ring-drain helper replaced by source entry redirect |
+| `0x0058E3F0...0x0058E3F7` | 8 | Opaque | Submit-dispatcher literals retained after the ring-drain helper |
+| `0x0058E3F8...0x0058E43F` | 72 | Generated | Complete display-operation submit dispatcher replaced by source entry redirect |
+| `0x0058E440...0x0058E453` | 20 | Opaque | Preserved gap between the display-operation submit dispatcher and operation-zero backend |
+| `0x0058E454...0x0058E49D` | 74 | Generated | Complete display submit operation-zero backend replaced by source entry redirect |
+| `0x0058E49E...0x0058E4E7` | 74 | Generated | Complete display submit operation-one backend replaced by source entry redirect |
+| `0x0058E4E8...0x0058E509` | 34 | Generated | Complete shared operation-start/operation-two helper replaced by source entry redirect |
+| `0x0058E50A...0x0058E533` | 42 | Generated | Complete display submit operation-three backend replaced by source entry redirect |
+| `0x0058E534...0x0058E617` | 228 | Generated | Complete display-operation service replaced by source entry redirect |
+| `0x0058E618...0x0058E6DD` | 198 | Generated | Complete event-side display-operation service replaced by source entry redirect |
+| `0x0058E6DE...0x0058E85F` | 386 | Opaque | Stock application between the event-side service and IRQ-side transport owner |
+| `0x0058E860...0x0058E90F` | 176 | Generated | Complete IRQ-side display transport owner replaced by source entry redirect |
+| `0x0058E910...0x005FA057` | 440,136 | Opaque | Stock application after the IRQ-side display transport owner and before the FreeRTOS NTZ port tranche |
+| `0x005FA058...0x005FA07D` | 38 | Source compiled | Exact FreeRTOS V10.5.1 `vRestoreContextOfFirstTask` assembly copied in place |
+| `0x005FA07E...0x005FA08B` | 14 | Source compiled | Exact FreeRTOS V10.5.1 `vRaisePrivilege` assembly copied in place |
+| `0x005FA08C...0x005FA0A3` | 24 | Source compiled | Exact FreeRTOS V10.5.1 `vStartFirstTask` assembly copied in place |
+| `0x005FA0A4...0x005FA0B9` | 22 | Source compiled | Exact FreeRTOS V10.5.1 `ulSetInterruptMask` assembly copied in place |
+| `0x005FA0BA...0x005FA0C7` | 14 | Source compiled | Exact FreeRTOS V10.5.1 `vClearInterruptMask` assembly copied in place |
+| `0x005FA0C8...0x005FA11F` | 88 | Source compiled | Exact FreeRTOS V10.5.1 `PendSV_Handler` assembly copied in place |
+| `0x005FA120...0x005FA131` | 18 | Source compiled | Exact FreeRTOS V10.5.1 `SVC_Handler` assembly copied in place |
+| `0x005FA132...0x006BECAF` | 805,758 | Opaque | Stock application after the FreeRTOS NTZ port tranche and before the retired peripheral-power descriptor table |
+| `0x006BECB0...0x006BEECF` | 544 | Opaque | Reviewed, separately mapped stock peripheral-power descriptor table retained but no longer referenced by the source implementation |
+| `0x006BEED0...0x0079430F` | 873,536 | Opaque | Stock application after the retired descriptor table through the ITCM stream header |
+| `0x00794310...0x00794315` | 6 | Generated | Exact source-assembled delay-cycle load literal, scatter-loaded to ITCM `0x00000040` |
+| `0x00794316...0x00794323` | 14 | Opaque | Remaining compressed ITCM load-stream tail |
+| `0x00794324...0x00794359` | 54 | Source compiled | `evenhub_longpress` |
+| `0x0079435A...0x0079435B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079435C...0x007943C3` | 104 | Source compiled | `ring_release` |
+| `0x007943C4...0x007943CF` | 12 | Source compiled | `open_cfw_lens_side` |
+| `0x007943D0...0x0079459D` | 462 | Source compiled | `open_cfw_initialize_lens_side` |
+| `0x0079459E...0x0079459F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007945A0...0x00794631` | 146 | Source compiled | `open_cfw_gpio_pinconfig` |
+| `0x00794632...0x00794633` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00794634...0x0079466B` | 56 | Source compiled | `open_cfw_gpio_state_read` |
+| `0x0079466C...0x00794693` | 40 | Source compiled | `open_cfw_classify_lens_samples` |
+| `0x00794694...0x00794863` | 464 | Source compiled | `open_cfw_ui_module_dispatch_event` |
+| `0x00794864...0x00794953` | 240 | Source compiled | `open_cfw_ui_modules_close_mode1` |
+| `0x00794954...0x007949FF` | 172 | Source compiled | `open_cfw_ui_module_dispatch_data` |
+| `0x00794A00...0x00794A97` | 152 | Source compiled | `open_cfw_ui_modules_initialize` |
+| `0x00794A98...0x00794AD1` | 58 | Source compiled | `open_cfw_ui_module_mode` |
+| `0x00794AD2...0x00794AD3` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00794AD4...0x00795239` | 1,894 | Source compiled | `open_cfw_ui_switch_display` |
+| `0x0079523A...0x0079523B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079523C...0x0079535B` | 288 | Source compiled | `open_cfw_ui_startup_app_id` |
+| `0x0079535C...0x0079538D` | 50 | Source compiled | `open_cfw_ui_onboarding_running` |
+| `0x0079538E...0x0079538F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00795390...0x00795B77` | 2,024 | Source compiled | `open_cfw_ui_input_event_handler` |
+| `0x00795B78...0x00796AB5` | 3,902 | Source compiled | `open_cfw_ui_display_thread` |
+| `0x00796AB6...0x00796AB7` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796AB8...0x00796AE1` | 42 | Source compiled | `open_cfw_strlen` |
+| `0x00796AE2...0x00796AE3` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796AE4...0x00796B45` | 98 | Source compiled | `open_cfw_ui_display_operation_begin` |
+| `0x00796B46...0x00796B47` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796B48...0x00796B9B` | 84 | Source compiled | `open_cfw_ui_display_direct_read` |
+| `0x00796B9C...0x00796BA5` | 10 | Source compiled | `open_cfw_ui_display_fifo_discard` |
+| `0x00796BA6...0x00796BA7` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796BA8...0x00796C39` | 146 | Source compiled | `open_cfw_ui_display_direct_write` |
+| `0x00796C3A...0x00796C3B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796C3C...0x00796C75` | 58 | Source compiled | `open_cfw_ui_display_ring_fill` |
+| `0x00796C76...0x00796C77` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796C78...0x00796CD7` | 96 | Source compiled | `open_cfw_ring_write` |
+| `0x00796CD8...0x00796D33` | 92 | Source compiled | `open_cfw_ui_display_ring_drain` |
+| `0x00796D34...0x00796D8F` | 92 | Source compiled | `open_cfw_ring_read` |
+| `0x00796D90...0x00796E4D` | 190 | Source compiled | `open_cfw_ui_display_operation_service` |
+| `0x00796E4E...0x00796E4F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796E50...0x00796E75` | 38 | Source compiled | `open_cfw_ui_display_operation_start` |
+| `0x00796E76...0x00796E77` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796E78...0x00796ECD` | 86 | Source compiled | `open_cfw_ui_display_operation_zero` |
+| `0x00796ECE...0x00796ECF` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796ED0...0x00796EF5` | 38 | Source compiled | `open_cfw_ui_display_operation_three` |
+| `0x00796EF6...0x00796EF7` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00796EF8...0x00796F47` | 80 | Source compiled | `open_cfw_ui_display_event_begin` |
+| `0x00796F48...0x00796FEF` | 168 | Source compiled | `open_cfw_ui_display_event_service` |
+| `0x00796FF0...0x00797045` | 86 | Source compiled | `open_cfw_ui_display_operation_one` |
+| `0x00797046...0x00797047` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00797048...0x00797089` | 66 | Source compiled | `open_cfw_ui_display_submit` |
+| `0x0079708A...0x0079708B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079708C...0x00797107` | 124 | Source compiled | `open_cfw_ui_display_sink` |
+| `0x00797108...0x00797115` | 14 | Source compiled | `open_cfw_ui_display_callback` |
+| `0x00797116...0x00797117` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00797118...0x00797123` | 12 | Source compiled | `open_cfw_ui_display_handler_set` |
+| `0x00797124...0x00797139` | 22 | Source compiled | `open_cfw_ui_display_handler` |
+| `0x0079713A...0x0079713B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079713C...0x00797165` | 42 | Source compiled | `open_cfw_ui_prepare_display` |
+| `0x00797166...0x00797167` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00797168...0x007971D5` | 110 | Source compiled | `open_cfw_ui_prepare_input` |
+| `0x007971D6...0x007971D7` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007971D8...0x007973E5` | 526 | Source compiled | `open_cfw_ui_display_initialize` |
+| `0x007973E6...0x007973E7` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007973E8...0x00797405` | 30 | Source compiled, inactive | `open_cfw_evenhub_mode2_decompress_legacy`; retained to preserve later primary-overlay positions |
+| `0x00797406...0x00797407` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00797408...0x007976BF` | 696 | Source compiled, inactive | `open_cfw_lz4_decompress_safe_legacy`; retained to preserve later primary-overlay positions |
+| `0x007976C0...0x007977A9` | 234 | Source compiled | `open_cfw_evenhub_rle_decode` |
+| `0x007977AA...0x007977AB` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007977AC...0x007977AF` | 4 | Source compiled | `open_cfw_evenhub_rle_decompress` |
+| `0x007977B0...0x0079783F` | 144 | Source compiled | `open_cfw_evenhub_container_find_node_by_id` |
+| `0x00797840...0x0079784D` | 14 | Source compiled | `open_cfw_evenhub_active_mark` |
+| `0x0079784E...0x0079784F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00797850...0x0079785B` | 12 | Source compiled | `open_cfw_evenhub_state_get` |
+| `0x0079785C...0x00797867` | 12 | Source compiled | `open_cfw_evenhub_state_set` |
+| `0x00797868...0x00797875` | 14 | Source compiled | `open_cfw_evenhub_keepalive_reset` |
+| `0x00797876...0x00797877` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00797878...0x00797885` | 14 | Source compiled | `open_cfw_evenhub_shutdown_mark` |
+| `0x00797886...0x00797887` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00797888...0x007978CB` | 68 | Source compiled | `open_cfw_evenhub_imu_enable` |
+| `0x007978CC...0x00797E0B` | 1,344 | Source compiled | `open_cfw_evenhub_page_event_handler` |
+| `0x00797E0C...0x007982B1` | 1,190 | Source compiled | `open_cfw_evenhub_common_data_handler` |
+| `0x007982B2...0x007982B3` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007982B4...0x007988AB` | 1,528 | Source compiled | `open_cfw_evenhub_ui_event_handler` |
+| `0x007988AC...0x007988BD` | 18 | Source compiled | `open_cfw_gpio_interrupt_index` |
+| `0x007988BE...0x007988BF` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007988C0...0x00798AD3` | 532 | Source compiled | `open_cfw_gpio_interrupt_control` |
+| `0x00798AD4...0x00798B75` | 162 | Source compiled | `open_cfw_gpio_interrupt_status_get` |
+| `0x00798B76...0x00798B77` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00798B78...0x00798C1F` | 168 | Source compiled | `open_cfw_gpio_interrupt_clear` |
+| `0x00798C20...0x00798C8B` | 108 | Source compiled | `open_cfw_gpio_interrupt_irq_status_get` |
+| `0x00798C8C...0x00798CCF` | 68 | Source compiled | `open_cfw_gpio_interrupt_irq_clear` |
+| `0x00798CD0...0x00798D3B` | 108 | Source compiled | `open_cfw_gpio_interrupt_register` |
+| `0x00798D3C...0x00798DB1` | 118 | Source compiled | `open_cfw_gpio_interrupt_service` |
+| `0x00798DB2...0x00798DB3` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00798DB4...0x00798DD3` | 32 | Source compiled | `open_cfw_gpio_pinconfig_get` |
+| `0x00798DD4...0x00798E87` | 180 | Source compiled | `open_cfw_gpio_state_write` |
+| `0x00798E88...0x00798F4F` | 200 | Source compiled | `open_cfw_ui_display_irq_service` |
+| `0x00798F50...0x00798FD3` | 132 | Source compiled | `open_cfw_ui_display_irq_bit6` |
+| `0x00798FD4...0x00798FFB` | 40 | Source compiled | `open_cfw_ui_display_irq_bit12` |
+| `0x00798FFC...0x00799041` | 70 | Source compiled | `open_cfw_ui_display_irq_result` |
+| `0x00799042...0x00799043` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799044...0x00799069` | 38 | Source compiled | `open_cfw_ui_display_irq_finish` |
+| `0x0079906A...0x0079906B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079906C...0x007990BD` | 82 | Source compiled | `open_cfw_ui_display_event_abort` |
+| `0x007990BE...0x007990BF` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007990C0...0x007990C5` | 6 | Source compiled | `open_cfw_delay_cycles` |
+| `0x007990C6...0x007990C7` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007990C8...0x00799123` | 92 | Source compiled | `open_cfw_delay_us` |
+| `0x00799124...0x00799131` | 14 | Source compiled | `open_cfw_delay_ms` |
+| `0x00799132...0x00799133` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799134...0x0079913B` | 8 | Source compiled | `open_cfw_delay_us_passthrough` |
+| `0x0079913C...0x00799147` | 12 | Source compiled | `open_cfw_format_span` |
+| `0x00799148...0x00799169` | 34 | Source compiled | `open_cfw_format_buffer_write` |
+| `0x0079916A...0x0079916B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079916C...0x00799195` | 42 | Source compiled | `open_cfw_format_u64_prefix_write` |
+| `0x00799196...0x00799197` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799198...0x007991EB` | 84 | Source compiled | `open_cfw_format_append` |
+| `0x007991EC...0x0079928B` | 160 | Source compiled | `open_cfw_format_uleb128_write` |
+| `0x0079928C...0x0079929F` | 20 | Source compiled | `open_cfw_format_s64_zigzag_write` |
+| `0x007992A0...0x007992A5` | 6 | Source compiled | `open_cfw_format_fixed4_write` |
+| `0x007992A6...0x007992A7` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007992A8...0x007992AD` | 6 | Source compiled | `open_cfw_format_fixed8_write` |
+| `0x007992AE...0x007992AF` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x007992B0...0x007992BB` | 12 | Source compiled | `open_cfw_format_field_key_write` |
+| `0x007992BC...0x00799311` | 86 | Source compiled | `open_cfw_format_descriptor_key_write` |
+| `0x00799312...0x00799313` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799314...0x0079931D` | 10 | Source compiled | `open_cfw_format_read_bool` |
+| `0x0079931E...0x0079931F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799320...0x00799339` | 26 | Source compiled | `open_cfw_format_bool_write` |
+| `0x0079933A...0x0079933B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079933C...0x00799431` | 246 | Source compiled | `open_cfw_format_integer_write` |
+| `0x00799432...0x00799433` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799434...0x00799465` | 50 | Source compiled | `open_cfw_format_fixed_write` |
+| `0x00799466...0x00799467` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799468...0x00799519` | 178 | Source compiled | `open_cfw_format_submessage_write` |
+| `0x0079951A...0x0079951B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079951C...0x0079956B` | 80 | Source compiled | `open_cfw_format_bytes_write` |
+| `0x0079956C...0x0079962F` | 196 | Source compiled | `open_cfw_format_string_write` |
+| `0x00799630...0x00799681` | 82 | Source compiled | `open_cfw_format_submessage_field_write` |
+| `0x00799682...0x00799683` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799684...0x007996E3` | 96 | Source compiled | `open_cfw_format_message_encode` |
+| `0x007996E4...0x0079978B` | 168 | Source compiled | `open_cfw_format_regular_field_encode` |
+| `0x0079978C...0x007998A3` | 280 | Source compiled | `open_cfw_format_default_check` |
+| `0x007998A4...0x00799A31` | 398 | Source compiled | `open_cfw_format_repeated_field_encode` |
+| `0x00799A32...0x00799A33` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799A34...0x00799AC7` | 148 | Source compiled | `open_cfw_format_value_encode` |
+| `0x00799AC8...0x00799AF3` | 44 | Source compiled | `open_cfw_format_indirect_field_encode` |
+| `0x00799AF4...0x00799B27` | 52 | Source compiled | `open_cfw_format_extension_default_encode` |
+| `0x00799B28...0x00799B59` | 50 | Source compiled | `open_cfw_format_extension_fields_encode` |
+| `0x00799B5A...0x00799B5B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799B5C...0x00799BA7` | 76 | Source compiled | `open_cfw_log_format_dispatch` |
+| `0x00799BA8...0x00799C5D` | 182 | Source compiled | `open_cfw_log_decimal_digits` |
+| `0x00799C5E...0x00799C5F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799C60...0x00799C77` | 24 | Source compiled | `open_cfw_log_signed_decimal_digits` |
+| `0x00799C78...0x00799CDF` | 104 | Source compiled | `open_cfw_log_hex_digits` |
+| `0x00799CE0...0x00799D6D` | 142 | Source compiled | `open_cfw_log_parse_integer` |
+| `0x00799D6E...0x00799D6F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x00799D70...0x00799EC7` | 344 | Source compiled | `open_cfw_log_decimal_write` |
+| `0x00799EC8...0x00799F8B` | 196 | Source compiled | `open_cfw_log_hex_write` |
+| `0x00799F8C...0x00799FC7` | 60 | Source compiled | `open_cfw_log_string_length` |
+| `0x00799FC8...0x0079A045` | 126 | Source compiled | `open_cfw_log_padding_write` |
+| `0x0079A046...0x0079A047` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079A048...0x0079A485` | 1,086 | Source compiled | `open_cfw_log_format_core` |
+| `0x0079A486...0x0079A487` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079A488...0x0079A6B9` | 562 | Source compiled | `open_cfw_log_float_write` |
+| `0x0079A6BA...0x0079A6BB` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079A6BC...0x0079A759` | 158 | Source compiled | `open_cfw_log_divide_u64_by_10` |
+| `0x0079A75A...0x0079A75B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079A75C...0x0079A76F` | 20 | Source compiled | `open_cfw_lv_tick_increment` |
+| `0x0079A770...0x0079A791` | 34 | Source compiled | `open_cfw_lv_tick_get` |
+| `0x0079A792...0x0079A793` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079A794...0x0079A79F` | 12 | Source compiled | `open_cfw_lv_tick_elapsed` |
+| `0x0079A7A0...0x0079A7B5` | 22 | Source compiled | `open_cfw_lv_memory_zero` |
+| `0x0079A7B6...0x0079A7B7` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079A7B8...0x0079A859` | 162 | Source compiled | `open_cfw_lv_global_initialize` |
+| `0x0079A85A...0x0079A85B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079A85C...0x0079A9E1` | 390 | Source compiled | `open_cfw_lv_initialize` |
+| `0x0079A9E2...0x0079A9E3` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079A9E4...0x0079AA95` | 178 | Source compiled | `open_cfw_lv_buffer_sync` |
+| `0x0079AA96...0x0079AA97` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079AA98...0x0079AB43` | 172 | Source compiled | `open_cfw_lv_display_sync` |
+| `0x0079AB44...0x0079AC31` | 238 | Source compiled | `open_cfw_lv_display_setup` |
+| `0x0079AC32...0x0079AC33` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079AC34...0x0079ACB1` | 126 | Source compiled | `open_cfw_lv_display_lock` |
+| `0x0079ACB2...0x0079ACB3` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079ACB4...0x0079AD29` | 118 | Source compiled | `open_cfw_lv_display_unlock` |
+| `0x0079AD2A...0x0079AD2B` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079AD2C...0x0079AD8D` | 98 | Source compiled | `open_cfw_lv_display_lock_initialize` |
+| `0x0079AD8E...0x0079AD8F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079AD90...0x0079AD9D` | 14 | Source compiled | `open_cfw_lv_display_port_initialize` |
+| `0x0079AD9E...0x0079AD9F` | 2 | Compiler alignment | Padding inside the source overlay |
+| `0x0079ADA0...0x0079ADA7` | 8 | Source compiled | `open_cfw_lv_irq_enable` |
+| `0x0079ADA8...0x0079ADAF` | 8 | Source compiled | `open_cfw_lv_irq_disable` |
+| `0x0079ADB0...0x0079ADB9` | 10 | Source compiled | `open_cfw_lv_display_task_attributes` |
+| `0x0079ADBA...0x0079ADBB` | 2 | Compiler alignment | Padding before the display-driver initializer source |
+| `0x0079ADBC...0x0079AEB1` | 246 | Source compiled | `open_cfw_display_thread_initialize` |
+| `0x0079AEB2...0x0079AEB3` | 2 | Compiler alignment | Padding between display-driver initializer functions |
+| `0x0079AEB4...0x0079AFA7` | 244 | Source compiled | `open_cfw_display_queue_initialize` |
+| `0x0079AFA8...0x0079AFC9` | 34 | Source compiled | `open_cfw_display_thread_deinitialize` |
+| `0x0079AFCA...0x0079AFCB` | 2 | Compiler alignment | Padding before the display resource wrappers |
+| `0x0079AFCC...0x0079AFD7` | 12 | Source compiled | `open_cfw_display_resource_acquire` |
+| `0x0079AFD8...0x0079AFE3` | 12 | Source compiled | `open_cfw_display_resource_release` |
+| `0x0079AFE4...0x0079B081` | 158 | Source compiled | `open_cfw_display_timer_initialize` |
+| `0x0079B082...0x0079B083` | 2 | Compiler alignment | Padding before the display timer controls |
+| `0x0079B084...0x0079B09B` | 24 | Source compiled | `open_cfw_display_timer_start` |
+| `0x0079B09C...0x0079B0AF` | 20 | Source compiled | `open_cfw_display_timer_stop` |
+| `0x0079B0B0...0x0079B14F` | 160 | Source compiled | `open_cfw_display_timer_callback` |
+| `0x0079B150...0x0079B1F7` | 168 | Source compiled | `open_cfw_display_queue_command8` |
+| `0x0079B1F8...0x0079B529` | 818 | Source compiled | `open_cfw_display_manager_thread` |
+| `0x0079B52A...0x0079B52B` | 2 | Compiler alignment | Padding before the display queue senders |
+| `0x0079B52C...0x0079B5CB` | 160 | Source compiled | `open_cfw_display_clear_screen` |
+| `0x0079B5CC...0x0079B669` | 158 | Source compiled | `open_cfw_display_initialize_async` |
+| `0x0079B66A...0x0079B66B` | 2 | Compiler alignment | Padding inside the display queue-sender family |
+| `0x0079B66C...0x0079B709` | 158 | Source compiled | `open_cfw_display_power_up` |
+| `0x0079B70A...0x0079B70B` | 2 | Compiler alignment | Padding inside the display queue-sender family |
+| `0x0079B70C...0x0079B7AB` | 160 | Source compiled | `open_cfw_display_power_down` |
+| `0x0079B7AC...0x0079B84B` | 160 | Source compiled | `open_cfw_display_brightness_control` |
+| `0x0079B84C...0x0079B8F5` | 170 | Source compiled | `open_cfw_display_send_reflash` |
+| `0x0079B8F6...0x0079B8F7` | 2 | Compiler alignment | Padding before the forced display lifecycle source |
+| `0x0079B8F8...0x0079BB8F` | 664 | Source compiled | `open_cfw_display_initialize_force` |
+| `0x0079BB90...0x0079BD6B` | 476 | Source compiled | `open_cfw_display_deinitialize_force` |
+| `0x0079BD6C...0x0079BE93` | 296 | Source compiled | `open_cfw_file_open` |
+| `0x0079BE94...0x0079BEE7` | 84 | Source compiled | `open_cfw_file_close` |
+| `0x0079BEE8...0x0079BF49` | 98 | Source compiled | `open_cfw_file_read` |
+| `0x0079BF4A...0x0079BF4B` | 2 | Compiler alignment | Padding before the file-write source |
+| `0x0079BF4C...0x0079C167` | 540 | Source compiled | `open_cfw_file_write` |
+| `0x0079C168...0x0079C1C7` | 96 | Source compiled | `open_cfw_file_seek` |
+| `0x0079C1C8...0x0079C20D` | 70 | Source compiled | `open_cfw_file_tell` |
+| `0x0079C20E...0x0079C20F` | 2 | Compiler alignment | Padding before the file-size source |
+| `0x0079C210...0x0079C26F` | 96 | Source compiled | `open_cfw_file_size` |
+| `0x0079C270...0x0079C301` | 146 | Source compiled | `open_cfw_file_flush` |
+| `0x0079C302...0x0079C303` | 2 | Compiler alignment | Padding before the path-removal source |
+| `0x0079C304...0x0079C37F` | 124 | Source compiled | `open_cfw_file_remove` |
+| `0x0079C380...0x0079C403` | 132 | Source compiled | `open_cfw_file_rename` |
+| `0x0079C404...0x0079C499` | 150 | Source compiled | `open_cfw_file_mkdir` |
+| `0x0079C49A...0x0079C49B` | 2 | Compiler alignment | Padding before directory-open source |
+| `0x0079C49C...0x0079C6FF` | 612 | Source compiled | `open_cfw_file_opendir` |
+| `0x0079C700...0x0079C96D` | 622 | Source compiled | `open_cfw_file_readdir` |
+| `0x0079C96E...0x0079C96F` | 2 | Compiler alignment | Padding before directory-close source |
+| `0x0079C970...0x0079C9EF` | 128 | Source compiled | `open_cfw_file_closedir` |
+| `0x0079C9F0...0x0079CA5F` | 112 | Source compiled | `open_cfw_file_heap_allocate` |
+| `0x0079CA60...0x0079CACF` | 112 | Source compiled | `open_cfw_file_heap_free` |
+| `0x0079CAD0...0x0079CB45` | 118 | Source compiled | `open_cfw_file_heap_reallocate` |
+| `0x0079CB46...0x0079CB47` | 2 | Compiler alignment | Padding before file-runtime initializer source |
+| `0x0079CB48...0x0079CC3F` | 248 | Source compiled | `open_cfw_file_runtime_initialize` |
+| `0x0079CC40...0x0079CC8D` | 78 | Source compiled | `open_cfw_cache_icache_enable` |
+| `0x0079CC8E...0x0079CC8F` | 2 | Compiler alignment | Padding before instruction-cache disable source |
+| `0x0079CC90...0x0079CCCB` | 60 | Source compiled | `open_cfw_cache_icache_disable` |
+| `0x0079CCCC...0x0079D047` | 892 | Source compiled | `open_cfw_cache_dcache_enable` |
+| `0x0079D048...0x0079D3E9` | 930 | Source compiled | `open_cfw_cache_dcache_invalidate` |
+| `0x0079D3EA...0x0079D3EB` | 2 | Compiler alignment | Padding before data-cache clean source |
+| `0x0079D3EC...0x0079D5F3` | 520 | Source compiled | `open_cfw_cache_dcache_clean` |
+| `0x0079D5F4...0x0079D6D3` | 224 | Source compiled | `open_cfw_memory_compare` |
+| `0x0079D6D4...0x0079D745` | 114 | Source compiled | `open_cfw_secure_ota_add` |
+| `0x0079D746...0x0079D747` | 2 | Compiler alignment | Padding before BLE transmit-thread source |
+| `0x0079D748...0x0079D7EF` | 168 | Source compiled | `open_cfw_ble_msgtx_thread` |
+| `0x0079D7F0...0x0079D7FB` | 12 | Source compiled | `open_cfw_ble_msgtx_stage_enter` |
+| `0x0079D7FC...0x0079D835` | 58 | Source compiled | `open_cfw_ble_msgtx_queue_initialize` |
+| `0x0079D836...0x0079D837` | 2 | Compiler alignment | Padding before BLE application-initialization source |
+| `0x0079D838...0x0079D839` | 2 | Source compiled | `open_cfw_ble_msgtx_application_initialize` exact no-op |
+| `0x0079D83A...0x0079D83B` | 2 | Compiler alignment | Padding before BLE thread-initialization source |
+| `0x0079D83C...0x0079D83D` | 2 | Source compiled | `open_cfw_ble_msgtx_thread_initialize` exact no-op |
+| `0x0079D83E...0x0079D83F` | 2 | Compiler alignment | Padding before BLE stage-leave source |
+| `0x0079D840...0x0079D84B` | 12 | Source compiled | `open_cfw_ble_msgtx_stage_leave` |
+| `0x0079D84C...0x0079D861` | 22 | Source compiled | `open_cfw_ble_msgtx_dispatch_flags` |
+| `0x0079D862...0x0079D863` | 2 | Compiler alignment | Padding before BLE thread-creator source |
+| `0x0079D864...0x0079D8A9` | 70 | Source compiled | `open_cfw_ble_msgtx_thread_create` |
+| `0x0079D8AA...0x0079D8AB` | 2 | Compiler alignment | Padding before BLE thread-destructor source |
+| `0x0079D8AC...0x0079D8CF` | 36 | Source compiled | `open_cfw_ble_msgtx_thread_destroy` |
+| `0x0079D8D0...0x0079DA5D` | 398 | Source compiled | `open_cfw_ble_msgtx_queue_drain` |
+| `0x0079DA5E...0x0079DA5F` | 2 | Compiler alignment | Padding before BLE queue-clear source |
+| `0x0079DA60...0x0079DBF3` | 404 | Source compiled | `open_cfw_ble_msgtx_queue_clear` |
+| `0x0079DBF4...0x0079DC77` | 132 | Source compiled | `open_cfw_ble_msgtx_wait_handler` |
+| `0x0079DC78...0x0079E159` | 1,250 | Source compiled | `open_cfw_ble_msgtx_enqueue` |
+| `0x0079E15A...0x0079E15B` | 2 | Compiler alignment | Padding before direct protobuf-send source |
+| `0x0079E15C...0x0079E1F1` | 150 | Source compiled | `open_cfw_ble_msgtx_pb_direct_send` |
+| `0x0079E1F2...0x0079E1F3` | 2 | Compiler alignment | Padding before direct protobuf-notification source |
+| `0x0079E1F4...0x0079E289` | 150 | Source compiled | `open_cfw_ble_msgtx_pb_notify_direct_send` |
+| `0x0079E28A...0x0079E28B` | 2 | Compiler alignment | Padding before guarded protobuf-send source |
+| `0x0079E28C...0x0079E395` | 266 | Source compiled | `open_cfw_ble_msgtx_pb_send` |
+| `0x0079E396...0x0079E397` | 2 | Compiler alignment | Padding before guarded protobuf-notification source |
+| `0x0079E398...0x0079E50D` | 374 | Source compiled | `open_cfw_ble_msgtx_pb_notify` |
+| `0x0079E50E...0x0079E50F` | 2 | Compiler alignment | Padding before streaming-notification source |
+| `0x0079E510...0x0079E5A3` | 148 | Source compiled | `open_cfw_ble_msgtx_stream_notify` |
+| `0x0079E5A4...0x0079E5C1` | 30 | Source compiled | `open_cfw_ble_msgtx_transport3_send` |
+| `0x0079E5C2...0x0079E5C3` | 2 | Compiler alignment | Padding before EFS-send source |
+| `0x0079E5C4...0x0079E659` | 150 | Source compiled | `open_cfw_ble_msgtx_efs_send` |
+| `0x0079E65A...0x0079E65B` | 2 | Compiler alignment | Padding before EFS-notification source |
+| `0x0079E65C...0x0079E6F1` | 150 | Source compiled | `open_cfw_ble_msgtx_efs_notify` |
+| `0x0079E6F2...0x0079E6F3` | 2 | Compiler alignment | Padding before string-reader source |
+| `0x0079E6F4...0x0079E717` | 36 | Source compiled | `open_cfw_scan_string_reader` |
+| `0x0079E718...0x0079E757` | 64 | Source compiled | `open_cfw_scan_string` |
+| `0x0079E758...0x0079E9FD` | 678 | Source compiled | `open_cfw_file_system_check_directories` |
+| `0x0079E9FE...0x0079E9FF` | 2 | Compiler alignment | Padding before filesystem format helper |
+| `0x0079EA00...0x0079EB11` | 274 | Source compiled | `open_cfw_file_system_format` |
+| `0x0079EB12...0x0079EB13` | 2 | Compiler alignment | Padding before filesystem initializer |
+| `0x0079EB14...0x0079ECE5` | 466 | Source compiled | `open_cfw_file_system_initialize` |
+| `0x0079ECE6...0x0079ECE7` | 2 | Compiler alignment | Padding before filesystem read callback |
+| `0x0079ECE8...0x0079ED37` | 80 | Source compiled | `open_cfw_file_system_read` |
+| `0x0079ED38...0x0079ED87` | 80 | Source compiled | `open_cfw_file_system_program` |
+| `0x0079ED88...0x0079EDBD` | 54 | Source compiled | `open_cfw_file_system_erase` |
+| `0x0079EDBE...0x0079EDBF` | 2 | Compiler alignment | Padding before filesystem sync callback |
+| `0x0079EDC0...0x0079EDC3` | 4 | Source compiled | `open_cfw_file_system_sync` |
+| `0x0079EDC4...0x0079F019` | 598 | Source compiled | `open_cfw_event_loop_initialize` |
+| `0x0079F01A...0x0079F01B` | 2 | Compiler alignment | Padding before event-loop timer callback |
+| `0x0079F01C...0x0079F385` | 874 | Source compiled | `open_cfw_event_loop_timer_callback` |
+| `0x0079F386...0x0079F387` | 2 | Compiler alignment | Padding before event-loop worker |
+| `0x0079F388...0x0079F423` | 156 | Source compiled | `open_cfw_event_loop_task` |
+| `0x0079F424...0x0079F52D` | 266 | Source compiled | `open_cfw_event_loop_push` |
+| `0x0079F52E...0x0079F52F` | 2 | Compiler alignment | Padding before delayed insertion |
+| `0x0079F530...0x0079F86B` | 828 | Source compiled | `open_cfw_event_loop_push_delayed` |
+| `0x0079F86C...0x0079FAE9` | 638 | Source compiled | `open_cfw_event_loop_remove_delayed` |
+| `0x0079FAEA...0x0079FAEB` | 2 | Compiler alignment | Padding before BLE connection scheduler |
+| `0x0079FAEC...0x0079FC0B` | 288 | Source compiled | `open_cfw_ble_connection_schedule` |
+| `0x0079FC0C...0x0079FE37` | 556 | Source compiled | `open_cfw_ble_connection_select_primary` |
+| `0x0079FE38...0x007A0063` | 556 | Source compiled | `open_cfw_ble_connection_select_secondary` |
+| `0x007A0064...0x007A0507` | 1,188 | Source compiled | `open_cfw_ble_connection_coordinate` |
+| `0x007A0508...0x007A06A5` | 414 | Source compiled | `open_cfw_ble_connection_delayed_callback` |
+| `0x007A06A6...0x007A06A7` | 2 | Compiler alignment | Padding before remote-parameter handler |
+| `0x007A06A8...0x007A0A73` | 972 | Source compiled | `open_cfw_ble_connection_apply_remote_parameters` |
+| `0x007A0A74...0x007A11A5` | 1,842 | Source compiled | `open_cfw_ble_connection_handle_event` |
+| `0x007A11A6...0x007A11A7` | 2 | Compiler alignment | Padding before BLE connection-global initializer |
+| `0x007A11A8...0x007A11C9` | 34 | Source compiled | `open_cfw_ble_connection_initialize_globals` |
+| `0x007A11CA...0x007A11CB` | 2 | Compiler alignment | Padding before BLE stream-readiness helper |
+| `0x007A11CC...0x007A11DF` | 20 | Source compiled | `open_cfw_ble_connection_stream_ready` |
+| `0x007A11E0...0x007A12AF` | 208 | Source compiled | `open_cfw_ble_connection_schedule_short` |
+| `0x007A12B0...0x007A13F5` | 326 | Source compiled | `open_cfw_ble_connection_stream_reset` |
+| `0x007A13F6...0x007A13F7` | 2 | Compiler alignment | Padding before BLE remote-mode reset helper |
+| `0x007A13F8...0x007A14FF` | 264 | Source compiled | `open_cfw_ble_connection_remote_reset` |
+| `0x007A1500...0x007A151F` | 32 | Source compiled | `open_cfw_ble_connection_schedule_long` |
+| `0x007A1520...0x007A1A75` | 1,366 | Source compiled | `open_cfw_ble_connection_dispatch` |
+| `0x007A1A76...0x007A1A77` | 2 | Compiler alignment | Padding before MRAM zero-region programmer |
+| `0x007A1A78...0x007A1B97` | 288 | Source compiled | `open_cfw_mram_program_zero_region` |
+| `0x007A1B98...0x007A1D39` | 418 | Source compiled | `open_cfw_mram_update_flag_set` |
+| `0x007A1D3A...0x007A1D3B` | 2 | Compiler alignment | Padding before protected-MRAM record diagnostic dump |
+| `0x007A1D3C...0x007A2A7B` | 3,392 | Source compiled | `open_cfw_mram_record_diagnostic_dump` |
+| `0x007A2A7C...0x007A2C53` | 472 | Source compiled | `open_cfw_mram_sync_records_body` |
+| `0x007A2C54...0x007A2C5B` | 8 | Source compiled | `open_cfw_mram_sync_records` ABI-preserving wrapper |
+| `0x007A2C5C...0x007A3169` | 1,294 | Source compiled | `open_cfw_mram_copy_record_list_to_ram` |
+| `0x007A316A...0x007A316B` | 2 | Compiler alignment | Padding before protected-MRAM single-record programmer |
+| `0x007A316C...0x007A32AD` | 322 | Source compiled | `open_cfw_mram_update_one_record` |
+| `0x007A32AE...0x007A32AF` | 2 | Compiler alignment | Padding before protected-MRAM application record-database updater |
+| `0x007A32B0...0x007A406D` | 3,518 | Source compiled | `open_cfw_mram_app_db_update` |
+| `0x007A406E...0x007A406F` | 2 | Compiler alignment | Padding before record-database diagnostic dispatcher |
+| `0x007A4070...0x007A41DF` | 368 | Source compiled | `open_cfw_mram_db_diagnostic` |
+| `0x007A41E0...0x007A4203` | 36 | Source compiled | `open_cfw_mram_deactivate_record` |
+| `0x007A4204...0x007A434F` | 332 | Source compiled | `open_cfw_mram_activate_record` |
+| `0x007A4350...0x007A435D` | 14 | Source compiled | `open_cfw_mram_deactivate_if_unconfirmed` |
+| `0x007A435E...0x007A435F` | 2 | Compiler alignment | Padding before active-record membership query |
+| `0x007A4360...0x007A4395` | 54 | Source compiled | `open_cfw_mram_record_is_active` |
+| `0x007A4396...0x007A4397` | 2 | Compiler alignment | Padding before untyped-record presence query |
+| `0x007A4398...0x007A43C7` | 48 | Source compiled | `open_cfw_mram_has_untyped_record` |
+| `0x007A43C8...0x007A43F5` | 46 | Source compiled | `open_cfw_mram_next_active_record` |
+| `0x007A43F6...0x007A43F7` | 2 | Compiler alignment | Padding before active-type counter |
+| `0x007A43F8...0x007A442F` | 56 | Source compiled | `open_cfw_mram_count_active_type` |
+| `0x007A4430...0x007A447B` | 76 | Source compiled | `open_cfw_mram_oldest_active_type` |
+| `0x007A447C...0x007A45F7` | 380 | Source compiled | `open_cfw_mram_allocate_record` |
+| `0x007A45F8...0x007A4621` | 42 | Source compiled | `open_cfw_mram_initialize_records` |
+| `0x007A4622...0x007A4623` | 2 | Compiler alignment | Padding before Cordio address resolver |
+| `0x007A4624...0x007A4945` | 802 | Source compiled | `open_cfw_mram_resolve_and_connect_by_address` |
+| `0x007A4946...0x007A4947` | 2 | Compiler alignment | Padding before Cordio resolved-address callback |
+| `0x007A4948...0x007A4B2B` | 484 | Source compiled | `open_cfw_mram_handle_resolved_address` |
+| `0x007A4B2C...0x007A4CCB` | 416 | Source compiled | `open_cfw_mram_delete_all_records` |
+| `0x007A4CCC...0x007A4D35` | 106 | Source compiled | `open_cfw_mram_find_by_address` |
+| `0x007A4D36...0x007A4D37` | 2 | Compiler alignment | Padding before Cordio LTK-request lookup |
+| `0x007A4D38...0x007A4D95` | 94 | Source compiled | `open_cfw_mram_find_by_ltk_request` |
+| `0x007A4D96...0x007A4D97` | 2 | Compiler alignment | Padding before Cordio key accessor |
+| `0x007A4D98...0x007A4DE5` | 78 | Source compiled | `open_cfw_mram_get_key` |
+| `0x007A4DE6...0x007A4DE7` | 2 | Compiler alignment | Padding before peer-address accessor |
+| `0x007A4DE8...0x007A4DE9` | 2 | Source compiled | `open_cfw_mram_get_peer_address` |
+| `0x007A4DEA...0x007A4DEB` | 2 | Compiler alignment | Padding before peer-address-type accessor |
+| `0x007A4DEC...0x007A4DF5` | 10 | Source compiled | `open_cfw_mram_get_peer_address_type` |
+| `0x007A4DF6...0x007A4DF7` | 2 | Compiler alignment | Padding before Cordio key writer |
+| `0x007A4DF8...0x007A52D9` | 1,250 | Source compiled | `open_cfw_mram_set_key` |
+| `0x007A52DA...0x007A52DB` | 2 | Compiler alignment | Padding before key-writer diagnostic dispatcher |
+| `0x007A52DC...0x007A5537` | 604 | Source compiled | `open_cfw_mram_set_key_diagnostic` |
+| `0x007A5538...0x007A55B1` | 122 | Source compiled | `open_cfw_mram_set_peer_db_hash` |
+| `0x007A55B2...0x007A55B3` | 2 | Compiler alignment | Padding before cache-by-hash setter |
+| `0x007A55B4...0x007A55CF` | 28 | Source compiled | `open_cfw_mram_set_cache_by_hash` |
+| `0x007A55D0...0x007A5619` | 74 | Source compiled | `open_cfw_mram_set_ccc_table_value` |
+| `0x007A561A...0x007A561B` | 2 | Compiler alignment | Padding before client-supported-features getter |
+| `0x007A561C...0x007A5627` | 12 | Source compiled | `open_cfw_mram_get_csf_record` |
+| `0x007A5628...0x007A563D` | 22 | Source compiled | `open_cfw_mram_set_csf_record` |
+| `0x007A563E...0x007A563F` | 2 | Compiler alignment | Padding before client change-aware-state setter |
+| `0x007A5640...0x007A5679` | 58 | Source compiled | `open_cfw_mram_set_client_change_aware_state` |
+| `0x007A567A...0x007A567B` | 2 | Compiler alignment | Padding before device database-hash getter |
+| `0x007A567C...0x007A5685` | 10 | Source compiled | `open_cfw_mram_get_device_db_hash` |
+| `0x007A5686...0x007A5687` | 2 | Compiler alignment | Padding before device database-hash setter |
+| `0x007A5688...0x007A56D7` | 80 | Source compiled | `open_cfw_mram_set_device_db_hash` |
+| `0x007A56D8...0x007A56DD` | 6 | Source compiled | `open_cfw_mram_set_discovery_status` |
+| `0x007A56DE...0x007A56DF` | 2 | Compiler alignment | Padding before handle-list setter |
+| `0x007A56E0...0x007A5809` | 298 | Source compiled | `open_cfw_mram_set_handle_list` |
+| `0x007A580A...0x007A580B` | 2 | Compiler alignment | Padding before peer sign-counter setter |
+| `0x007A580C...0x007A5823` | 24 | Source compiled | `open_cfw_mram_set_peer_sign_counter` |
+| `0x007A5824...0x007A5829` | 6 | Source compiled | `open_cfw_mram_set_peer_address_resolution` |
+| `0x007A582A...0x007A582B` | 2 | Compiler alignment | Padding before resolving-list reload wrapper |
+| `0x007A582C...0x007A58F3` | 200 | Source compiled | `open_cfw_mram_reload_resolving_list` |
+| `0x007A58F4...0x007A5A89` | 406 | Source compiled | `open_cfw_mram_clear_record_by_mac_address` |
+| `0x007A5A8A...0x007A5A8B` | 2 | Compiler alignment | Padding before protected-MRAM write verifier |
+| `0x007A5A8C...0x007A606F` | 1,508 | Source compiled | `open_cfw_mram_verify_write` |
+| `0x007A6070...0x007A6721` | 1,714 | Source compiled | `open_cfw_mram_show_all_records_status` |
+| `0x007A6722...0x007A6723` | 2 | Compiler alignment | Padding before record timestamp-update wrapper |
+| `0x007A6724...0x007A682F` | 268 | Source compiled | `open_cfw_mram_update_record_timestamp` |
+| `0x007A6830...0x007A69D9` | 426 | Source compiled | `open_cfw_mram_reset_record_timestamps` |
+| `0x007A69DA...0x007A69DB` | 2 | Compiler alignment | Padding before persistent-record status reporter |
+| `0x007A69DC...0x007A6D23` | 840 | Source compiled | `open_cfw_mram_show_nvm_status` |
+| `0x007A6D24...0x007A70BD` | 922 | Source compiled | `open_cfw_mram_handle_pairing_failure` |
+| `0x007A70BE...0x007A70BF` | 2 | Compiler alignment | Padding before connection-indexed record clearer |
+| `0x007A70C0...0x007A732B` | 620 | Source compiled | `open_cfw_mram_clear_record_by_connection` |
+| `0x007A732C...0x007A7349` | 30 | Source compiled | `open_cfw_mram_dump_all_records` |
+| `0x007A734A...0x007A734B` | 2 | Compiler alignment | Padding before EFS CRC updater |
+| `0x007A734C...0x007A738B` | 64 | Source compiled | `open_cfw_efs_crc32c_msb_update` |
+| `0x007A738C...0x007A73BD` | 50 | Source compiled | `open_cfw_mram_program_bytes` |
+| `0x007A73BE...0x007A73BF` | 2 | Compiler alignment | Padding before unsigned ARM EABI core |
+| `0x007A73C0...0x007A7459` | 154 | Source compiled | `open_cfw_aeabi_uldivmod_core` |
+| `0x007A745A...0x007A745B` | 2 | Compiler alignment | Padding before signed ARM EABI core |
+| `0x007A745C...0x007A74D5` | 122 | Source compiled | `open_cfw_aeabi_ldivmod_core` |
+| `0x007A74D6...0x007A74D7` | 2 | Compiler alignment | Padding before ARM EABI ABI wrappers |
+| `0x007A74D8...0x007A74EB` | 20 | Source compiled | `open_cfw_aeabi_uldivmod` four-register wrapper |
+| `0x007A74EC...0x007A74FF` | 20 | Source compiled | `open_cfw_aeabi_ldivmod` four-register wrapper |
+| `0x007A7500...0x007A7555` | 86 | Source compiled | `open_cfw_status_packet_template3` |
+| `0x007A7556...0x007A7557` | 2 | Compiler alignment | Padding before template-6 packet reporter |
+| `0x007A7558...0x007A75B3` | 92 | Source compiled | `open_cfw_status_packet_template6` |
+| `0x007A75B4...0x007A75F7` | 68 | Source compiled | `open_cfw_status_packet_template5` |
+| `0x007A75F8...0x007A7691` | 154 | Source compiled | `open_cfw_lens_status_publish` |
+| `0x007A7692...0x007A7693` | 2 | Compiler alignment | Padding before template-4 packet reporter |
+| `0x007A7694...0x007A76E3` | 80 | Source compiled | `open_cfw_status_packet_template4` |
+| `0x007A76E4...0x007A76F3` | 16 | Source compiled | `open_cfw_lens_status_bit0` |
+| `0x007A76F4...0x007A7703` | 16 | Source compiled | `open_cfw_lens_status_bit1` |
+| `0x007A7704...0x007A771B` | 24 | Source compiled | `open_cfw_lens_status_pair23` |
+| `0x007A771C...0x007A772B` | 16 | Source compiled | `open_cfw_lens_status_bit4` |
+| `0x007A772C...0x007A773B` | 16 | Source compiled | `open_cfw_lens_status_bit5` |
+| `0x007A773C...0x007A7745` | 10 | Source compiled | `open_cfw_lens_status_available` |
+| `0x007A7746...0x007A7747` | 2 | Compiler alignment | Padding before selected-side query |
+| `0x007A7748...0x007A7765` | 30 | Source compiled | `open_cfw_lens_status_selected` |
+| `0x007A7766...0x007A7767` | 2 | Compiler alignment | Padding before SARC helpers |
+| `0x007A7768...0x007A7783` | 28 | Source compiled | `open_cfw_sarc_header_checksum` |
+| `0x007A7784...0x007A77C5` | 66 | Source compiled | `open_cfw_sarc_state_valid` |
+| `0x007A77C6...0x007A77C7` | 2 | Compiler alignment | Padding before SARC initializer |
+| `0x007A77C8...0x007A77F9` | 50 | Source compiled | `open_cfw_sarc_state_initialize` |
+| `0x007A77FA...0x007A77FB` | 2 | Compiler alignment | Padding before SARC report appender |
+| `0x007A77FC...0x007A7861` | 102 | Source compiled | `open_cfw_sarc_report_append` |
+| `0x007A7862...0x007A7863` | 2 | Compiler alignment | Padding before SARC report finalizer |
+| `0x007A7864...0x007A78BD` | 90 | Source compiled | `open_cfw_sarc_report_finalize` |
+| `0x007A78BE...0x007A78BF` | 2 | Compiler alignment | Padding before SARC persistence routine |
+| `0x007A78C0...0x007A7A69` | 426 | Source compiled | `open_cfw_sarc_report_persist` |
+| `0x007A7A6A...0x007A7A6B` | 2 | Compiler alignment | Padding before monotonic-seconds helper |
+| `0x007A7A6C...0x007A7AAF` | 68 | Source compiled | `open_cfw_monotonic_seconds` |
+| `0x007A7AB0...0x007A7AF1` | 66 | Source compiled | `open_cfw_wall_time_seconds` |
+| `0x007A7AF2...0x007A7AF3` | 2 | Compiler alignment | Padding before boot-identity helpers |
+| `0x007A7AF4...0x007A7B57` | 100 | Source compiled | `open_cfw_reset_status_word` |
+| `0x007A7B58...0x007A7C05` | 174 | Source compiled | `open_cfw_firmware_version_code` |
+| `0x007A7C06...0x007A7C07` | 2 | Compiler alignment | Padding before tracepoint helpers |
+| `0x007A7C08...0x007A7C4F` | 72 | Source compiled | `open_cfw_tracepoint_defer_dispatch` |
+| `0x007A7C50...0x007A7C53` | 4 | Source compiled | `open_cfw_tracepoint_defer_timer_callback` |
+| `0x007A7C54...0x007A7C6B` | 24 | Source compiled | `open_cfw_tracepoint_defer_begin` |
+| `0x007A7C6C...0x007A7CCB` | 96 | Source compiled | `open_cfw_tracepoint_capture_retry` |
+| `0x007A7CCC...0x007A7DFF` | 308 | Source compiled | `open_cfw_tracepoint_state_crc32` |
+| `0x007A7E00...0x007A7E15` | 22 | Source compiled | `open_cfw_tracepoint_path_format` |
+| `0x007A7E16...0x007A7E17` | 2 | Compiler alignment | Padding before tracepoint path parser |
+| `0x007A7E18...0x007A7E8B` | 116 | Source compiled | `open_cfw_tracepoint_path_parse` |
+| `0x007A7E8C...0x007A7ECB` | 64 | Source compiled | `open_cfw_tracepoint_file_size` |
+| `0x007A7ECC...0x007A7F43` | 120 | Source compiled | `open_cfw_tracepoint_directory_scan` |
+| `0x007A7F44...0x007A7FB7` | 116 | Source compiled | `open_cfw_tracepoint_state_persist` |
+| `0x007A7FB8...0x007A802B` | 116 | Source compiled | `open_cfw_tracepoint_state_load` |
+| `0x007A802C...0x007A80B5` | 138 | Source compiled | `open_cfw_tracepoint_storage_initialize` |
+| `0x007A80B6...0x007A80B7` | 2 | Compiler alignment | Padding before tracepoint active-file closer |
+| `0x007A80B8...0x007A80D5` | 30 | Source compiled | `open_cfw_tracepoint_active_close` |
+| `0x007A80D6...0x007A80D7` | 2 | Compiler alignment | Padding before tracepoint close callback |
+| `0x007A80D8...0x007A80DB` | 4 | Source compiled | `open_cfw_tracepoint_active_close_callback` |
+| `0x007A80DC...0x007A8113` | 56 | Source compiled | `open_cfw_tracepoint_prune_files` |
+| `0x007A8114...0x007A81A1` | 142 | Source compiled | `open_cfw_tracepoint_active_create` |
+| `0x007A81A2...0x007A81A3` | 2 | Compiler alignment | Padding before tracepoint append opener |
+| `0x007A81A4...0x007A81E1` | 62 | Source compiled | `open_cfw_tracepoint_active_open` |
+| `0x007A81E2...0x007A81E3` | 2 | Compiler alignment | Padding before tracepoint writer |
+| `0x007A81E4...0x007A8259` | 118 | Source compiled | `open_cfw_tracepoint_write` |
+| `0x007A825A...0x007A825B` | 2 | Compiler alignment | Padding before tracepoint commit helper |
+| `0x007A825C...0x007A8293` | 56 | Source compiled | `open_cfw_tracepoint_commit` |
+| `0x007A8294...0x007A82AB` | 24 | Source compiled | `open_cfw_tracepoint_flush` |
+| `0x007A82AC...0x007A8321` | 118 | Source compiled | `open_cfw_tracepoint_runtime_initialize` |
+| `0x007A8322...0x007A8323` | 2 | Compiler alignment | Padding before protobuf onboarding control update |
+| `0x007A8324...0x007A8383` | 96 | Source compiled | `open_cfw_onboarding_control_update` |
+| `0x007A8384...0x007A8493` | 272 | Source compiled | `open_cfw_onboarding_notify_wear_status_to_app` |
+| `0x007A8494...0x007A857B` | 232 | Source compiled | `open_cfw_onboarding_flag_save_to_flash` |
+| `0x007A857C...0x007A85CB` | 80 | Source compiled | `open_cfw_onboarding_flag_update` |
+| `0x007A85CC...0x007A867D` | 178 | Source compiled | `open_cfw_onboarding_flag_send_to_peer` |
+| `0x007A867E...0x007A867F` | 2 | Compiler alignment | Padding before peer onboarding-flag reply |
+| `0x007A8680...0x007A8727` | 168 | Source compiled | `open_cfw_onboarding_flag_reply_to_peer` |
+| `0x007A8728...0x007A87E5` | 190 | Source compiled | `open_cfw_onboarding_process_sync_to_peer` |
+| `0x007A87E6...0x007A87E7` | 2 | Compiler alignment | Padding before onboarding runtime initializer |
+| `0x007A87E8...0x007A8861` | 122 | Source compiled | `open_cfw_onboarding_runtime_initialize` |
+| `0x007A8862...0x007A8863` | 2 | Compiler alignment | Padding before RTOS timer runtime initializer |
+| `0x007A8864...0x007A88D3` | 112 | Source compiled | `open_cfw_rtos_timer_runtime_initialize` |
+| `0x007A88D4...0x007A891B` | 72 | Source compiled | `open_cfw_rtos_timer_dynamic_create` |
+| `0x007A891C...0x007A8959` | 62 | Source compiled | `open_cfw_rtos_timer_static_create` |
+| `0x007A895A...0x007A895B` | 2 | Compiler alignment | Padding before shared RTOS timer initializer |
+| `0x007A895C...0x007A89AD` | 82 | Source compiled | `open_cfw_rtos_timer_initialize` |
+| `0x007A89AE...0x007A89AF` | 2 | Compiler alignment | Padding before RTOS timer command submission |
+| `0x007A89B0...0x007A8A1D` | 110 | Source compiled | `open_cfw_rtos_timer_command` |
+| `0x007A8A1E...0x007A8A1F` | 2 | Compiler alignment | Padding before RTOS auto-reload catch-up |
+| `0x007A8A20...0x007A8A4F` | 48 | Source compiled | `open_cfw_rtos_timer_reload` |
+| `0x007A8A50...0x007A8A97` | 72 | Source compiled | `open_cfw_rtos_timer_insert` |
+| `0x007A8A98...0x007A8AE1` | 74 | Source compiled | `open_cfw_rtos_timer_expire` |
+| `0x007A8AE2...0x007A8AE3` | 2 | Compiler alignment | Padding before RTOS timer-service task loop |
+| `0x007A8AE4...0x007A8B05` | 34 | Source compiled | `open_cfw_rtos_timer_service_loop` |
+| `0x007A8B06...0x007A8B07` | 2 | Compiler alignment | Padding before RTOS active-list query |
+| `0x007A8B08...0x007A8B2D` | 38 | Source compiled | `open_cfw_rtos_timer_query` |
+| `0x007A8B2E...0x007A8B2F` | 2 | Compiler alignment | Padding before RTOS timer-command drain |
+| `0x007A8B30...0x007A8C69` | 314 | Source compiled | `open_cfw_rtos_timer_drain` |
+| `0x007A8C6A...0x007A8C6B` | 2 | Compiler alignment | Padding before RTOS timer wait-or-expire processing |
+| `0x007A8C6C...0x007A8CE5` | 122 | Source compiled | `open_cfw_rtos_timer_wait_or_expire` |
+| `0x007A8CE6...0x007A8CE7` | 2 | Compiler alignment | Padding before RTOS tick/list-switch sampling |
+| `0x007A8CE8...0x007A8D17` | 48 | Source compiled | `open_cfw_rtos_timer_sample` |
+| `0x007A8D18...0x007A8D43` | 44 | Source compiled | `open_cfw_rtos_timer_switch_lists` |
+| `0x007A8D44...0x007A8D79` | 54 | Source compiled | `open_cfw_rtos_timer_is_active` |
+| `0x007A8D7A...0x007A8D7B` | 2 | Compiler alignment | Padding before RTOS timer callback-context getter |
+| `0x007A8D7C...0x007A8DAD` | 50 | Source compiled | `open_cfw_rtos_timer_get_context` |
+| `0x007A8DAE...0x007A8DAF` | 2 | Compiler alignment | Padding before RTOS timer pended-callback ISR submission |
+| `0x007A8DB0...0x007A8DDD` | 46 | Source compiled | `open_cfw_rtos_timer_pend_from_isr` |
+| `0x007A8DDE...0x007A8DDF` | 2 | Compiler alignment | Padding before static RTOS event-group creation |
+| `0x007A8DE0...0x007A8E35` | 86 | Source compiled | `open_cfw_rtos_event_group_static_create` |
+| `0x007A8E36...0x007A8E37` | 2 | Compiler alignment | Padding before dynamic RTOS event-group creation |
+| `0x007A8E38...0x007A8E61` | 42 | Source compiled | `open_cfw_rtos_event_group_dynamic_create` |
+| `0x007A8E62...0x007A8E63` | 2 | Compiler alignment | Padding before RTOS event-group wait operation |
+| `0x007A8E64...0x007A8F65` | 258 | Source compiled | `open_cfw_rtos_event_group_wait` |
+| `0x007A8F66...0x007A8F67` | 2 | Compiler alignment | Padding before RTOS event-group wait-condition predicate |
+| `0x007A8F68...0x007A8F7D` | 22 | Source compiled | `open_cfw_rtos_event_group_test_wait_condition` |
+| `0x007A8F7E...0x007A8F7F` | 2 | Compiler alignment | Padding before RTOS event-group clear-bits operation |
+| `0x007A8F80...0x007A8FC1` | 66 | Source compiled | `open_cfw_rtos_event_group_clear` |
+| `0x007A8FC2...0x007A8FC3` | 2 | Compiler alignment | Padding before RTOS event-group clear-from-ISR submission |
+| `0x007A8FC4...0x007A8FD7` | 20 | Source compiled | `open_cfw_rtos_event_group_clear_from_isr` |
+| `0x007A8FD8...0x007A8FDB` | 4 | Source compiled | `open_cfw_rtos_event_group_clear_callback` |
+| `0x007A8FDC...0x007A8FF5` | 26 | Source compiled | `open_cfw_rtos_event_group_get_bits_from_isr` |
+| `0x007A8FF6...0x007A8FF7` | 2 | Compiler alignment | Padding before RTOS event-group set-bits operation |
+| `0x007A8FF8...0x007A9089` | 146 | Source compiled | `open_cfw_rtos_event_group_set` |
+| `0x007A908A...0x007A908B` | 2 | Compiler alignment | Padding before RTOS event-group set-bits timer callback |
+| `0x007A908C...0x007A908F` | 4 | Source compiled | `open_cfw_rtos_event_group_set_callback` |
+| `0x007A9090...0x007A90A3` | 20 | Source compiled | `open_cfw_rtos_event_group_set_from_isr` |
+| `0x007A90A4...0x007A90CF` | 44 | Source compiled | `open_cfw_rtc_initialize` |
+| `0x007A90D0...0x007A9337` | 616 | Source compiled | `open_cfw_rtc_time_set`, including source weekday, validation, BCD, and RTC MMIO logic |
+| `0x007A9338...0x007A945B` | 292 | Source compiled | `open_cfw_rtc_time_get`, including source timer-edge polling, IRQ protection, BCD decode, and RTC MMIO logic |
+| `0x007A945C...0x007A948B` | 48 | Source compiled | `open_cfw_pwrctrl_peripheral_descriptor_get`, including bounds/error handling and exact four-word descriptor copy |
+| `0x007A948C...0x007A94C9` | 62 | Source compiled | `open_cfw_pwrctrl_trim_version_get`, including one-time INFO1 loading, cache normalization, and output/status handling |
+| `0x007A94CA...0x007A94CB` | 2 | Compiler alignment | Padding before the MCU switching sequence |
+| `0x007A94CC...0x007A9609` | 318 | Source compiled | `open_cfw_pwrctrl_mcu_switch_sequence`, including SPOT coordination, HFRC2 forcing, readiness/ACK polling, cache update, and exact PRIMASK restoration |
+| `0x007A960A...0x007A960B` | 2 | Compiler alignment | Padding before the public MCU-mode selector |
+| `0x007A960C...0x007A9671` | 102 | Source compiled | `open_cfw_pwrctrl_mcu_mode_select`, including validation, SIMOBUCK gating, source switching, error propagation, and hardware-status verification |
+| `0x007A9672...0x007A9673` | 2 | Compiler alignment | Padding before the public GPU-mode status getter |
+| `0x007A9674...0x007A968B` | 24 | Source compiled | `open_cfw_pwrctrl_gpu_mode_status`, including null validation and exact cached-byte copy |
+| `0x007A968C...0x007A976B` | 224 | Source compiled | `open_cfw_pwrctrl_gpu_mode_select`, including validation, GPU-use checks, voltage/performance sequencing, cached modes, SPOT TON updates, settle delays, and exact PRIMASK restoration |
+| `0x007A976C...0x007A98F3` | 392 | Source compiled | `open_cfw_pwrctrl_mcu_memory_config`, including ROM/TCM/NVM transitions, SPOT coordination, bounded waits, AXI-clock forcing, verification, and retention policy |
+| `0x007A98F4...0x007A994D` | 90 | Source compiled | `open_cfw_pwrctrl_rom_enable`, including AUTO gate, SPOT desired-status publication, enable-bit update, bounded poll, and timeout behavior |
+| `0x007A994E...0x007A994F` | 2 | Compiler alignment | Padding before the public ROM power-domain disable routine |
+| `0x007A9950...0x007A99A9` | 90 | Source compiled | `open_cfw_pwrctrl_rom_disable`, including AUTO gate, enable-bit clear, bounded status poll, post-clear SPOT notification, and timeout behavior |
+| `0x007A99AA...0x007A99AB` | 2 | Compiler alignment | Padding before the public shared-SRAM power configuration routine |
+| `0x007A99AC...0x007A9AA9` | 254 | Source compiled | `open_cfw_pwrctrl_sram_config`, including bank transition ordering, SPOT coordination, status verification, active-client retention fields, retention policy, and override clearing |
+| `0x007A9AAA...0x007A9AAB` | 2 | Compiler alignment | Padding before the private crypto power-down quiesce helper |
+| `0x007A9AAC...0x007A9B0F` | 100 | Source compiled | `open_cfw_pwrctrl_crypto_quiesce`, including ready/idle status checks, power-down register preservation, bit-zero update, and exact status propagation |
+| `0x007A9B10...0x007A9C4F` | 320 | Source compiled | `open_cfw_pwrctrl_periph_enable`, including descriptor lookup, GPU/device/audio policy, critical enable write, readiness checks, and crypto/OTP special handling |
+| `0x007A9C50...0x007A9C9F` | 80 | Source compiled | `open_cfw_pwrctrl_periph_disable_mask_check`, including descriptor fallback and five shared-domain last-member predicates |
+| `0x007A9CA0...0x007A9E35` | 406 | Source compiled | `open_cfw_pwrctrl_periph_disable`, including OTP/crypto and debug gates, critical enable clear, source domain-mask check, status wait, GPU/clock and SPOT policy, and TempCo sequencing |
+| `0x007A9E36...0x007A9E37` | 2 | Compiler alignment | Padding before the public peripheral enabled-state query |
+| `0x007A9E38...0x007A9E6B` | 52 | Source compiled | `open_cfw_pwrctrl_periph_enabled`, including null validation, output clearing, source descriptor lookup, and status-mask predicate |
+| `0x007A9E6C...0x007A9FC1` | 342 | Source compiled | `open_cfw_pwrctrl_info1_populate`, including hardware-validity gates, nine fixed INFO1 reads, partial commits, and final validity publication |
+| `0x007A9FC2...0x007A9FC3` | 2 | Compiler alignment | Padding before the public low-power initializer |
+| `0x007A9FC4...0x007AA2AD` | 746 | Source compiled | `open_cfw_pwrctrl_low_power_init`, including reset/debug errata, source-linked CPDLP/WIC and OTP setup, INFO1 fallback, memory/clock and trim policy, retention, SPOT/SIMOBUCK sequencing, and revision-gated MRAM setup |
+| `0x007AA2AE...0x007AA2AF` | 2 | Compiler alignment | Padding before the CPDLPSTATE configurator |
+| `0x007AA2B0...0x007AA2E9` | 58 | Source compiled | `open_cfw_pwrctrl_cpdlp_config`, including the packed short-enum ABI, cache-use safety gate, exact field packing, and status policy |
+| `0x007AA2EA...0x007AA2EB` | 2 | Compiler alignment | Padding before the buck/LDO override initializer |
+| `0x007AA2EC...0x007AA343` | 88 | Source compiled | `open_cfw_pwrctrl_buck_ldo_override_init`, including all ten ordered volatile SIMOBUCK, CoreLDO, and MemLDO `VRCTRL` updates |
+| `0x007AA344...0x007AA36F` | 44 | Source compiled | `open_cfw_pwrctrl_buck_ldo_update_override`, including low-bit enable semantics and three fresh ordered volatile SIMOBUCK/CoreLDO/MemLDO override updates |
+| `0x007AA370...0x007AA4E5` | 374 | Source compiled | `open_cfw_pwrctrl_control`, including low-byte command dispatch, SIMOBUCK initialization, crypto power-down, deep-sleep crystal shutdown, and all-peripheral disable sequencing |
+| `0x007AA4E6...0x007AA4E7` | 2 | Compiler alignment | Padding before the CPDLPSTATE getter |
+| `0x007AA4E8...0x007AA505` | 30 | Source compiled | `open_cfw_pwrctrl_cpdlp_get`, including one CPDLPSTATE read and exact RLP/ELP/CLP byte extraction |
+| `0x007AA506...0x007AA507` | 2 | Compiler alignment | Padding before the temperature-update routine |
+| `0x007AA508...0x007AA54F` | 72 | Source compiled | `open_cfw_pwrctrl_temp_update`, including hard-float entry ABI, retained SPOT-manager call, threshold copy, and failure normalization |
+| `0x007AA550...0x007AA5AF` | 96 | Source compiled | `open_cfw_pwrctrl_syspll_enable`, including revision gating, isolation release, ordered PLL-rail updates, PRIMASK restoration, and settle delays |
+| `0x007AA5B0...0x007AA60B` | 92 | Source compiled | `open_cfw_pwrctrl_syspll_disable`, including ordered PLL-rail power-down, revision gating, delayed isolation assertion, and PRIMASK restoration |
+| `0x007AA60C...0x007AA621` | 22 | Source compiled | `open_cfw_pwrctrl_syspll_enabled`, including one `PLLCTL0` read and one-byte boolean result |
+| `0x007AA622...0x007AA623` | 2 | Compiler alignment | Padding before the SPOT-manager timer initializer |
+| `0x007AA624...0x007AA667` | 68 | Source compiled | `open_cfw_spotmgr_timer_init`, including ordered volatile timer configuration, compare, clear, and interrupt-enable operations |
+| `0x007AA668...0x007AA6C1` | 90 | Source compiled | `open_cfw_spotmgr_timer_start`, including clock request, delay scaling, global enable, clear-bit toggle, NVIC enable, and final timer enable |
+| `0x007AA6C2...0x007AA6C3` | 2 | Compiler alignment | Padding before the SPOT-manager timer restart routine |
+| `0x007AA6C4...0x007AA711` | 78 | Source compiled | `open_cfw_spotmgr_timer_restart`, including ordered disable and clear pulse, delay scaling, interrupt acknowledgement, pending-IRQ clear, and final timer enable |
+| `0x007AA712...0x007AA713` | 2 | Compiler alignment | Padding before the SPOT-manager timer stop routine |
+| `0x007AA714...0x007AA761` | 78 | Source compiled | `open_cfw_spotmgr_timer_stop`, including ordered timer/global disable, clock release, IRQ disable and acknowledgement, APB write flush, and pending-IRQ clear |
+| `0x007AA762...0x007AA763` | 2 | Compiler alignment | Padding before the SPOT-manager public callback-dispatch layer |
+| `0x007AA764...0x007AA781` | 30 | Source compiled | `open_cfw_spotmgr_power_state_update`, including state slot `+0x04`, null-success behavior, two volatile handler reads, byte truncation, and third-argument forwarding |
+| `0x007AA782...0x007AA783` | 2 | Compiler alignment | Padding before the TempCo-postpone dispatcher |
+| `0x007AA784...0x007AA799` | 22 | Source compiled | `open_cfw_spotmgr_tempco_postpone`, including slot `+0x0C`, null-success behavior, and two volatile handler reads |
+| `0x007AA79A...0x007AA79B` | 2 | Compiler alignment | Padding before the pending-TempCo dispatcher |
+| `0x007AA79C...0x007AA7B1` | 22 | Source compiled | `open_cfw_spotmgr_tempco_pending_handle`, including slot `+0x10`, null-success behavior, and two volatile handler reads |
+| `0x007AA7B2...0x007AA7B3` | 2 | Compiler alignment | Padding before the pre-override SIMOBUCK dispatcher |
+| `0x007AA7B4...0x007AA7C9` | 22 | Source compiled | `open_cfw_spotmgr_simobuck_init_bfr_ovr`, including slot `+0x14`, null-success behavior, and two volatile handler reads |
+| `0x007AA7CA...0x007AA7CB` | 2 | Compiler alignment | Padding before the pre-enable SIMOBUCK dispatcher |
+| `0x007AA7CC...0x007AA7E1` | 22 | Source compiled | `open_cfw_spotmgr_simobuck_init_bfr_enable`, including slot `+0x18`, null-success behavior, and two volatile handler reads |
+| `0x007AA7E2...0x007AA7E3` | 2 | Compiler alignment | Padding before the post-enable SIMOBUCK dispatcher |
+| `0x007AA7E4...0x007AA7F9` | 22 | Source compiled | `open_cfw_spotmgr_simobuck_init_aft_enable`, including slot `+0x1C`, null-success behavior, and two volatile handler reads |
+| `0x007AA7FA...0x007AA7FB` | 2 | Compiler alignment | Padding before the timer-interrupt dispatcher |
+| `0x007AA7FC...0x007AA80F` | 20 | Source compiled | `open_cfw_spotmgr_boost_timer_interrupt_service`, including void slot `+0x2C`, null no-op, and two volatile handler reads |
+| `0x007AA810...0x007AA825` | 22 | Source compiled | `open_cfw_spotmgr_ton_config_init`, including slot `+0x20`, null-success behavior, and two volatile handler reads |
+| `0x007AA826...0x007AA827` | 2 | Compiler alignment | Padding before the TON-update dispatcher |
+| `0x007AA828...0x007AA841` | 26 | Source compiled | `open_cfw_spotmgr_ton_config_update`, including slot `+0x24`, null-success behavior, two volatile handler reads, and byte truncation of both arguments |
+| `0x007AA842...0x007AA843` | 2 | Compiler alignment | Padding before the post-LP-to-HP dispatcher |
+| `0x007AA844...0x007AA859` | 22 | Source compiled | `open_cfw_spotmgr_post_lptohp_handle`, including slot `+0x28`, null-success behavior, and two volatile handler reads |
+| `0x007AA85A...0x007AA85B` | 2 | Compiler alignment | Padding before the autoswitch initializer dispatcher |
+| `0x007AA85C...0x007AA871` | 22 | Source compiled | `open_cfw_spotmgr_simobuck_lp_autosw_init`, including slot `+0x30`, null-success behavior, and two volatile handler reads |
+| `0x007AA872...0x007AA873` | 2 | Compiler alignment | Padding before the autoswitch-enable dispatcher |
+| `0x007AA874...0x007AA889` | 22 | Source compiled | `open_cfw_spotmgr_simobuck_lp_autosw_enable`, including slot `+0x34`, null-success behavior, and two volatile handler reads |
+| `0x007AA88A...0x007AA88B` | 2 | Compiler alignment | Padding before the autoswitch-disable dispatcher |
+| `0x007AA88C...0x007AA8A1` | 22 | Source compiled | `open_cfw_spotmgr_simobuck_lp_autosw_disable`, including slot `+0x38`, null-success behavior, and two volatile handler reads |
+| `0x007AA8A2...0x007AA8A3` | 2 | Compiler alignment | Padding before the SPOT-manager initializer |
+| `0x007AA8A4...0x007AAB73` | 720 | Source compiled | `open_cfw_spotmgr_init`, including ordered state clearing, revision/trim classification, six cached flags, analog-rail repair, 29 reviewed handler constants, and fresh call-time initializer dispatch |
+| `0x007AAB74...0x007AABAD` | 58 | Source compiled | `open_cfw_delay_us_status_change`, including initial masked read, exact post-decrement timeout budget, fixed one-microsecond source-delay entry, and status results |
+| `0x007AABAE...0x007AABAF` | 2 | Compiler alignment | Padding before the configurable status-check helper |
+| `0x007AABB0...0x007AAC17` | 104 | Source compiled | `open_cfw_delay_us_status_check`, including byte-truncated equality mode, one masked read per poll, exact timeout budget, and status results |
+| `0x007AAC18...0x007AAC85` | 110 | Source compiled | `open_cfw_read_words`, including volatile read-before-write order, forward pointer advancement, and stock nonzero-count behavior |
+| `0x007AAC86...0x007AAC87` | 2 | Compiler alignment | Padding before the MCUCTRL device-information collector |
+| `0x007AAC88...0x007AADB7` | 304 | Source compiled | `open_cfw_mcuctrl_device_info_get`, including chip identity, qualified flag, RAM/MRAM sizing, JEDEC PID/CID decoding, and ten source-owned delays |
+| `0x007AADB8...0x007AB007` | 592 | Source compiled | `open_cfw_mcuctrl_control`, including seven low-byte commands, exact oscillator register transactions, argument rereads, and clock ownership calls |
+| `0x007AB008...0x007AB025` | 30 | Source compiled | `open_cfw_mcuctrl_extclk32m_status_get`, including external-clock precedence, fresh powered-state sampling, and one-byte enum output |
+| `0x007AB026...0x007AB027` | 2 | Compiler alignment | Padding before the MCUCTRL trim-version decoder |
+| `0x007AB028...0x007AB087` | 96 | Source compiled | `open_cfw_mcuctrl_trim_version_get`, including INFO1 status propagation, fresh chip-revision reads, PCM qualification, and packed trim output |
+| `0x007AB088...0x007AB11B` | 148 | Source compiled | `open_cfw_mcuctrl_info_get`, including low-byte dispatch, nine fresh SKU reads, feature-byte mapping, and direct calls to source-owned trim/device helpers |
+| `0x007AB11C...0x007AB131` | 22 | Source compiled | `open_cfw_strchr`, including low-byte search-value truncation, first-match/terminator return, and absent-character null result |
+| `0x007AB132...0x007AB133` | 2 | Compiler alignment | Padding before the ASCII case-folding primitive |
+| `0x007AB134...0x007AB139` | 6 | Source compiled | `open_cfw_ascii_fold_lower`, preserving the stock unconditional unsigned 32-bit `value \| 0x20` contract |
+| `0x007AB13A...0x007AB13B` | 2 | Compiler alignment | Padding before the integer-formatting helper |
+| `0x007AB13C...0x007AB28F` | 340 | Source compiled | `open_cfw_integer_format`, preserving 64-bit signed/unsigned magnitude conversion, base and case selection, alternate octal form, precision, zero padding, field width, and pointer-bound digit generation |
+| `0x007AB290...0x007AB293` | 4 | Compiler alignment | Padding before the decimal power-scaling helper |
+| `0x007AB294...0x007AB2EB` | 88 | Source compiled | `open_cfw_decimal_scale`, preserving non-negative decimal exponentiation by squaring and the fixed stock double-multiply ABI |
+| `0x007AB2EC...0x007AB329` | 62 | Source compiled | `open_cfw_runtime_emit_span`, preserving callback state threading, failure return, accepted-byte count, and zero-extension |
+| `0x007AB32A...0x007AB32B` | 2 | Compiler alignment | Padding before the runtime zero-fill adapter |
+| `0x007AB32C...0x007AB337` | 12 | Source compiled | `open_cfw_runtime_memory_zero`, forwarding to the source LVGL zero-fill primitive and returning the destination |
+| `0x007AB338...0x007AB343` | 12 | Source compiled | `open_cfw_runtime_lookup_is_static`, preserving the byte-eight `0xFF` static-layout sentinel |
+| `0x007AB344...0x007AB3B9` | 118 | Source compiled | `open_cfw_runtime_byte_map_lookup`, preserving mutable split-array and static record layouts, first-match output, and miss immutability |
+| `0x007AB3BA...0x007AB3BB` | 2 | Compiler alignment | Padding before the property-group index helper |
+| `0x007AB3BC...0x007AB3CB` | 16 | Source compiled | `open_cfw_runtime_lookup_bucket_index`, preserving low-byte shift and group-31 saturation |
+| `0x007AB3CC...0x007AB3D1` | 6 | Source compiled | `open_cfw_runtime_style_init`, clearing the complete descriptor through the source zero-fill adapter |
+| `0x007AB3D2...0x007AB3D3` | 2 | Compiler alignment | Padding before the style reset |
+| `0x007AB3D4...0x007AB3F7` | 36 | Source compiled | `open_cfw_runtime_style_reset`, preserving static-table ownership and mutable-table release |
+| `0x007AB3F8...0x007AB4B5` | 190 | Source compiled | `open_cfw_runtime_style_remove_property`, preserving packed stable removal and transactional allocation failure |
+| `0x007AB4B6...0x007AB4B7` | 2 | Compiler alignment | Padding before the style setter |
+| `0x007AB4B8...0x007AB5CD` | 278 | Source compiled | `open_cfw_runtime_style_set_property`, preserving reverse lookup, packed growth, diagnostics, and group bitmap updates |
+| `0x007AB5CE...0x007AB5CF` | 2 | Compiler alignment | Padding before the public lookup adapter |
+| `0x007AB5D0...0x007AB5D5` | 6 | Source compiled | `open_cfw_runtime_byte_map_lookup_u8`, preserving explicit byte normalization and direct source lookup forwarding |
+| `0x007AB5D6...0x007AB5D7` | 2 | Compiler alignment | Padding before the transition-descriptor initializer |
+| `0x007AB5D8...0x007AB611` | 58 | Source compiled | `open_cfw_runtime_transition_descriptor_init`, preserving its six-word ABI and 20-byte layout |
+| `0x007AB612...0x007AB613` | 2 | Compiler alignment | Padding before the style default dispatcher |
+| `0x007AB614...0x007AB6CB` | 184 | Source compiled | `open_cfw_runtime_style_default_value`, preserving all property classes and volatile defaults |
+| `0x007AB6CC...0x007AB6D5` | 10 | Source compiled | `open_cfw_runtime_style_is_empty`, preserving the exact count-byte test |
+| `0x007AB6D6...0x007AB6D7` | 2 | Compiler alignment | Padding before the style-property flag lookup |
+| `0x007AB6D8...0x007AB719` | 66 | Source compiled | `open_cfw_runtime_style_prop_lookup_flags`, using the source-owned 138-byte built-in table and bounded custom table |
+| `0x007AB71A...0x007AB71B` | 2 | Compiler alignment | Padding before the linked-list initializer |
+| `0x007AB71C...0x007AB72B` | 16 | Source compiled | `open_cfw_runtime_linked_list_init`, preserving head/tail clearing and wrapped four-byte size rounding |
+| `0x007AB72C...0x007AB775` | 74 | Source compiled | `open_cfw_runtime_linked_list_insert_head`, allocating and linking a new head |
+| `0x007AB776...0x007AB777` | 2 | Compiler alignment | Padding before insert-before |
+| `0x007AB778...0x007AB7FD` | 134 | Source compiled | `open_cfw_runtime_linked_list_insert_before`, including direct source linkage to head insertion |
+| `0x007AB7FE...0x007AB7FF` | 2 | Compiler alignment | Padding before tail insertion |
+| `0x007AB800...0x007AB849` | 74 | Source compiled | `open_cfw_runtime_linked_list_insert_tail`, allocating and linking a new tail |
+| `0x007AB84A...0x007AB84B` | 2 | Compiler alignment | Padding before unlink |
+| `0x007AB84C...0x007AB8DD` | 146 | Source compiled | `open_cfw_runtime_linked_list_remove`, preserving endpoint and middle-node mutation order |
+| `0x007AB8DE...0x007AB8DF` | 2 | Compiler alignment | Padding before callback-clear |
+| `0x007AB8E0...0x007AB933` | 84 | Source compiled | `open_cfw_runtime_linked_list_clear_custom`, caching next before callback or remove/free |
+| `0x007AB934...0x007AB93D` | 10 | Source compiled | `open_cfw_runtime_linked_list_get_head` |
+| `0x007AB93E...0x007AB93F` | 2 | Compiler alignment | Padding before the tail accessor |
+| `0x007AB940...0x007AB949` | 10 | Source compiled | `open_cfw_runtime_linked_list_get_tail` |
+| `0x007AB94A...0x007AB94B` | 2 | Compiler alignment | Padding before the next accessor |
+| `0x007AB94C...0x007AB953` | 8 | Source compiled | `open_cfw_runtime_linked_list_get_next` |
+| `0x007AB954...0x007AB959` | 6 | Source compiled | `open_cfw_runtime_linked_list_get_previous` |
+| `0x007AB95A...0x007AB95B` | 2 | Compiler alignment | Padding before the length traversal |
+| `0x007AB95C...0x007AB981` | 38 | Source compiled | `open_cfw_runtime_linked_list_get_length`, traversing through source-owned head/next accessors |
+| `0x007AB982...0x007AB983` | 2 | Compiler alignment | Padding before the empty predicate |
+| `0x007AB984...0x007AB995` | 18 | Source compiled | `open_cfw_runtime_linked_list_is_empty`, preserving null and dual-endpoint semantics |
+| `0x007AB996...0x007AB997` | 2 | Compiler alignment | Padding before the clear wrapper |
+| `0x007AB998...0x007AB9A3` | 12 | Source compiled | `open_cfw_runtime_linked_list_clear`, forwarding a null cleanup callback |
+| `0x007AB9A4...0x007ABA1B` | 120 | Source compiled | `open_cfw_runtime_linked_list_move_before`, preserving exact remove/relink and head/tail mutation order |
+| `0x007ABA1C...0x007ABA25` | 10 | Source compiled | `open_cfw_runtime_linked_list_set_previous` |
+| `0x007ABA26...0x007ABA27` | 2 | Compiler alignment | Padding before the next-pointer setter |
+| `0x007ABA28...0x007ABA35` | 14 | Source compiled | `open_cfw_runtime_linked_list_set_next` |
+| `0x007ABA36...0x007ABA37` | 2 | Compiler alignment | Padding before the RGB888 color mixer |
+| `0x007ABA38...0x007ABA95` | 94 | Source compiled | `open_cfw_runtime_color_mix`, preserving B/G/R aggregate layout and exact divide-by-255 channel mixing |
+| `0x007ABA96...0x007ABA97` | 2 | Compiler alignment | Padding before the packed-alpha mixer |
+| `0x007ABA98...0x007ABB01` | 106 | Source compiled | `open_cfw_runtime_color_mix_alpha`, preserving alpha thresholds, destination alpha, and divide-by-256 lanes |
+| `0x007ABB02...0x007ABB03` | 2 | Compiler alignment | Padding before the brightness helper |
+| `0x007ABB04...0x007ABB1B` | 24 | Source compiled | `open_cfw_runtime_color_brightness`, preserving the exact weighted integer result |
+| `0x007ABB1C...0x007ABB75` | 90 | Source compiled | `open_cfw_runtime_color_over32`, preserving two-layer composite alpha and source-owned mixing |
+| `0x007ABB76...0x007ABB77` | 2 | Compiler alignment | Padding before public theme resolution |
+| `0x007ABB78...0x007ABB9F` | 40 | Source compiled | `open_cfw_runtime_theme_get_from_object`, selecting an object or default display and returning its theme |
+| `0x007ABBA0...0x007ABBCD` | 46 | Source compiled | `open_cfw_runtime_theme_apply`, preserving null-theme gating and remove-before-recursion order |
+| `0x007ABBCE...0x007ABBCF` | 2 | Compiler alignment | Padding before primary-color access |
+| `0x007ABBD0...0x007ABC0D` | 62 | Source compiled | `open_cfw_runtime_theme_get_primary_color`, preserving the three-byte B/G/R field and palette-17 fallback |
+| `0x007ABC0E...0x007ABC0F` | 2 | Compiler alignment | Padding before theme-chain traversal |
+| `0x007ABC10...0x007ABC31` | 34 | Source compiled | `open_cfw_runtime_theme_apply_chain`, preserving parent-first callback order |
+| `0x007ABC32...0x007ABC33` | 2 | Compiler alignment | Padding before inheritable-class traversal |
+| `0x007ABC34...0x007ABC5D` | 42 | Source compiled | `open_cfw_runtime_theme_apply_recursion`, preserving base-first class traversal and class restoration |
+| `0x007ABC5E...0x007ABC5F` | 2 | Compiler alignment | Padding before the bounded output callback |
+| `0x007ABC60...0x007ABC67` | 8 | Source compiled | `open_cfw_runtime_bounded_byte_store`, preserving unsigned capacity comparison |
+| `0x007ABC68...0x007ABC69` | 2 | Source compiled | `open_cfw_runtime_noop_output`, preserving exact no-op behavior |
+| `0x007ABC6A...0x007ABC6B` | 2 | Compiler alignment | Padding before the ASCII digit predicate |
+| `0x007ABC6C...0x007ABC7D` | 18 | Source compiled | `open_cfw_runtime_ascii_is_digit`, testing the low byte against ASCII digits |
+| `0x007ABC7E...0x007ABC7F` | 2 | Compiler alignment | Padding before decimal parsing |
+| `0x007ABC80...0x007ABCBB` | 60 | Source compiled | `open_cfw_runtime_parse_decimal`, advancing a byte cursor with modulo-2^32 accumulation |
+| `0x007ABCBC...0x007ABD3D` | 130 | Source compiled | `open_cfw_runtime_format_out_reverse`, preserving mpaland leading/reverse/trailing output and 32-bit index wrap |
+| `0x007ABD3E...0x007ABD3F` | 2 | Compiler alignment | Padding before integer prefix/sign formatting |
+| `0x007ABD40...0x007ABEEF` | 432 | Source compiled | `open_cfw_runtime_ntoa_format`, preserving precision, zero padding, alternate prefixes, sign policy, and source reverse-output dispatch |
+| `0x007ABEF0...0x007ABF73` | 132 | Source compiled | `open_cfw_runtime_ntoa_long`, preserving 32-bit bases, case, digit bounds, and source formatter dispatch |
+| `0x007ABF74...0x007AC00D` | 154 | Source compiled | `open_cfw_runtime_ntoa_long_long`, preserving 64-bit bases and using the source-owned quotient/remainder core |
+| `0x007AC00E...0x007AC013` | 6 | Compiler alignment | Padding before the hard-float fixed-point converter |
+| `0x007AC014...0x007AC2EF` | 732 | Source compiled | `open_cfw_runtime_ftoa`, preserving fixed-format rounding, flags, and source-owned exponential fallback |
+| `0x007AC2F0...0x007AC2F3` | 4 | Compiler alignment | Padding before the hard-float exponential converter |
+| `0x007AC2F4...0x007AC5BB` | 712 | Source compiled | `open_cfw_runtime_etoa`, preserving exponential/adaptive formatting and source-owned fixed/integer dispatch |
+| `0x007AC5BC...0x007AC5D5` | 26 | Source compiled | `open_cfw_runtime_bounded_string_length`, preserving the bounded return-value contract without the stock speculative overread |
+| `0x007AC5D6...0x007AC5D7` | 2 | Compiler alignment | Padding before the bounded string-length veneer |
+| `0x007AC5D8...0x007AC5DB` | 4 | Source compiled | `open_cfw_runtime_strnlen_s`, directly tail-dispatching to the source bounded scanner |
+| `0x007AC5DC...0x007ACBE9` | 1,550 | Source compiled | `open_cfw_runtime_vsnprintf`, preserving the reviewed formatter dispatcher, AAPCS variadic cursor, G2 pointer policy, and recursive `%PV`/`%pV` descriptors |
+| `0x007ACBEA...0x007ACBEB` | 2 | Compiler alignment | Padding before the generic heap coordinator |
+| `0x007ACBEC...0x007ACC41` | 86 | Source compiled | Generic heap descriptor initialization, TLSF/mutex creation, and reviewed fatal diagnostics |
+| `0x007ACC42...0x007ACC43` | 2 | Compiler alignment | Padding before generic allocation |
+| `0x007ACC44...0x007ACCA1` | 94 | Source compiled | Generic allocation with mutex serialization and usable-size accounting |
+| `0x007ACCA2...0x007ACCA3` | 2 | Compiler alignment | Padding before generic aligned allocation |
+| `0x007ACCA4...0x007ACD09` | 102 | Source compiled | Generic aligned allocation with reviewed size/alignment argument order |
+| `0x007ACD0A...0x007ACD0B` | 2 | Compiler alignment | Padding before generic reallocation |
+| `0x007ACD0C...0x007ACD7D` | 114 | Source compiled | Generic reallocation with unsigned old/new usable-size accounting |
+| `0x007ACD7E...0x007ACD7F` | 2 | Compiler alignment | Padding before generic free |
+| `0x007ACD80...0x007ACDDD` | 94 | Source compiled | Generic free with size-before-free ordering and saturating accounting |
+| `0x007ACDDE...0x007ACDDF` | 2 | Compiler alignment | Padding before the primary-heap adapter trio |
+| `0x007ACDE0...0x007ACDED` | 14 | Source compiled | Primary allocation adapter linking descriptor `0x20000338` directly to source generic allocation |
+| `0x007ACDEE...0x007ACDEF` | 2 | Compiler alignment | Padding before the reallocation adapter |
+| `0x007ACDF0...0x007ACDFF` | 16 | Source compiled | Primary reallocation adapter linking directly to source generic reallocation |
+| `0x007ACE00...0x007ACE0D` | 14 | Source compiled | Primary free adapter linking directly to source generic free |
+| `0x007ACE0E...0x007ACE0F` | 2 | Compiler alignment | Padding before the public heap veneer |
+| `0x007ACE10...0x007ACE21` | 18 | Source compiled | `open_cfw_runtime_heap_allocate`, preserving the zero-size sentinel and calling the source adapter |
+| `0x007ACE22...0x007ACE23` | 2 | Compiler alignment | Padding before the heap-free veneer |
+| `0x007ACE24...0x007ACE3B` | 24 | Source compiled | `open_cfw_runtime_heap_free`, preserving null/sentinel no-op behavior and calling the source adapter |
+| `0x007ACE3C...0x007ACE6F` | 52 | Source compiled | `open_cfw_runtime_snprintf`, forwarding a new variadic cursor into the source formatter core |
+| `0x007ACE70...0x007ACE91` | 34 | Source compiled | `open_cfw_runtime_vsnprintf_wrapper`, forwarding an existing `va_list` into the source formatter core |
+| `0x007ACE92...0x007ACE93` | 2 | Compiler alignment | Padding before the asynchronous-call creator |
+| `0x007ACE94...0x007ACEEB` | 88 | Source compiled | `open_cfw_runtime_async_call`, preserving allocation, timer creation, cleanup, and one-shot arming |
+| `0x007ACEEC...0x007ACF5F` | 116 | Source compiled | `open_cfw_runtime_async_call_cancel`, removing every exact callback/user-data match with delete-before-free ordering |
+| `0x007ACF60...0x007ACF87` | 40 | Source compiled | `open_cfw_runtime_async_timer_callback`, copying callback state before timer deletion/free and invocation |
+| `0x007ACF88...0x007ACF9D` | 22 | Source compiled | Deterministic source TLSF assertion stop |
+| `0x007ACF9E...0x007ACF9F` | 2 | Compiler alignment | Padding before the TLSF diagnostic sink |
+| `0x007ACFA0...0x007ACFEB` | 76 | Source compiled | Freestanding source TLSF diagnostic sink |
+| `0x007ACFEC...0x007AD053` | 104 | Source compiled | Freestanding source TLSF byte-copy primitive |
+| `0x007AD054...0x007AD287` | 564 | Source compiled | Source TLSF control-structure consistency checker |
+| `0x007AD288...0x007AD2F3` | 108 | Source compiled | Source TLSF pool walker |
+| `0x007AD2F4...0x007AD333` | 64 | Source compiled | Source TLSF default pool-walker callback |
+| `0x007AD334...0x007AD343` | 16 | Source compiled | Source TLSF allocation block-size query |
+| `0x007AD344...0x007AD387` | 68 | Source compiled | Source TLSF pool consistency checker |
+| `0x007AD388...0x007AD38D` | 6 | Source compiled | Source TLSF control-size query |
+| `0x007AD38E...0x007AD38F` | 2 | Compiler alignment | Padding before TLSF constant queries |
+| `0x007AD390...0x007AD393` | 4 | Source compiled | Source TLSF alignment query |
+| `0x007AD394...0x007AD397` | 4 | Source compiled | Source TLSF minimum-block-size query |
+| `0x007AD398...0x007AD39D` | 6 | Source compiled | Source TLSF maximum-block-size query |
+| `0x007AD39E...0x007AD39F` | 2 | Compiler alignment | Padding before TLSF overhead queries |
+| `0x007AD3A0...0x007AD3A3` | 4 | Source compiled | Source TLSF pool-overhead query |
+| `0x007AD3A4...0x007AD3A7` | 4 | Source compiled | Source TLSF allocation-overhead query |
+| `0x007AD3A8...0x007AD42F` | 136 | Source compiled | Source TLSF pool addition |
+| `0x007AD430...0x007AD507` | 216 | Source compiled | Source TLSF free-block insertion helper |
+| `0x007AD508...0x007AD675` | 366 | Source compiled | Source TLSF pool removal |
+| `0x007AD676...0x007AD677` | 2 | Compiler alignment | Padding before TLSF control creation |
+| `0x007AD678...0x007AD8CF` | 600 | Source compiled | Source TLSF control creation |
+| `0x007AD8D0...0x007AD96B` | 156 | Source compiled | Source TLSF create-with-pool entry |
+| `0x007AD96C...0x007AD96D` | 2 | Source compiled | Source TLSF destroy no-op |
+| `0x007AD96E...0x007AD96F` | 2 | Compiler alignment | Padding before TLSF pool access |
+| `0x007AD970...0x007AD975` | 6 | Source compiled | Source TLSF pool accessor |
+| `0x007AD976...0x007AD977` | 2 | Compiler alignment | Padding before TLSF allocation |
+| `0x007AD978...0x007AD9A9` | 50 | Source compiled | Source TLSF allocation entry |
+| `0x007AD9AA...0x007AD9AB` | 2 | Compiler alignment | Padding before TLSF free-block lookup |
+| `0x007AD9AC...0x007ADBBB` | 528 | Source compiled | Source TLSF free-block lookup helper |
+| `0x007ADBBC...0x007ADC75` | 186 | Source compiled | Source TLSF used-block preparation helper |
+| `0x007ADC76...0x007ADC77` | 2 | Compiler alignment | Padding before TLSF aligned allocation |
+| `0x007ADC78...0x007ADDCF` | 344 | Source compiled | Source TLSF aligned-allocation entry |
+| `0x007ADDD0...0x007ADEDF` | 272 | Source compiled | Source TLSF free entry |
+| `0x007ADEE0...0x007ADF73` | 148 | Source compiled | Source TLSF next-block coalescing helper |
+| `0x007ADF74...0x007AE0FD` | 394 | Source compiled | Source TLSF reallocation entry |
+| `0x007AE0FE...0x007AE0FF` | 2 | Compiler alignment | Padding before the source FreeRTOS queue boundary |
+| `0x007AE100...0x007AE11D` | 30 | Source compiled | FreeRTOS V10.5.1 mutex-create public entry |
+| `0x007AE11E...0x007AE11F` | 2 | Compiler alignment | Padding before generic queue send |
+| `0x007AE120...0x007AE34B` | 556 | Source compiled | FreeRTOS V10.5.1 generic task-context queue send |
+| `0x007AE34C...0x007AE36F` | 36 | Source compiled | FreeRTOS V10.5.1 private queue-full predicate |
+| `0x007AE370...0x007AE5C3` | 596 | Source compiled | FreeRTOS V10.5.1 semaphore/mutex take |
+| `0x007AE5C4...0x007AE5E3` | 32 | Source compiled | FreeRTOS V10.5.1 private queue-empty predicate |
+| `0x007AE5E4...0x007AE62D` | 74 | Source compiled | FreeRTOS V10.5.1 recursive mutex give |
+| `0x007AE62E...0x007AE62F` | 2 | Compiler alignment | Padding before recursive mutex take |
+| `0x007AE630...0x007AE675` | 70 | Source compiled | FreeRTOS V10.5.1 recursive mutex take |
+| `0x007AE676...0x007AE677` | 2 | Compiler alignment | Padding before FreeRTOS list-end insertion |
+| `0x007AE678...0x007AE691` | 26 | Source compiled | Exact upstream FreeRTOS V10.5.1 `vListInsertEnd` |
+| `0x007AE692...0x007AE693` | 2 | Compiler alignment | Padding before the EasyLogger control cluster |
+| `0x007AE694...0x007AE72B` | 152 | Source compiled | EasyLogger output-enabled setter |
+| `0x007AE72C...0x007AE7C3` | 152 | Source compiled | EasyLogger text-color setter |
+| `0x007AE7C4...0x007AE863` | 160 | Source compiled | EasyLogger per-level format setter |
+| `0x007AE864...0x007AE8FB` | 152 | Source compiled | EasyLogger filter-level setter |
+| `0x007AE8FC...0x007AE911` | 22 | Source compiled | EasyLogger bounded filter-tag setter |
+| `0x007AE912...0x007AE913` | 2 | Compiler alignment | Padding before EasyLogger output locking |
+| `0x007AE914...0x007AE937` | 36 | Source compiled | EasyLogger output-lock operation |
+| `0x007AE938...0x007AE95B` | 36 | Source compiled | EasyLogger output-unlock operation |
+| `0x007AE95C...0x007AE98D` | 50 | Source compiled | EasyLogger output-lock-enabled transition |
+| `0x007AE98E...0x007AE98F` | 2 | Compiler alignment | Padding before EasyLogger tag-level filtering |
+| `0x007AE990...0x007AE9E9` | 90 | Source compiled | EasyLogger five-slot tag-level default initializer |
+| `0x007AE9EA...0x007AE9EB` | 2 | Compiler alignment | Padding before the source-owned tag clearer |
+| `0x007AE9EC...0x007AEA2D` | 66 | Source compiled | EasyLogger source-owned 31-byte tag clearer |
+| `0x007AEA2E...0x007AEA2F` | 2 | Compiler alignment | Padding before the tag-level getter |
+| `0x007AEA30...0x007AEB4B` | 284 | Source compiled | EasyLogger five-slot tag-level getter |
+| `0x007AEB4C...0x007AEC4D` | 258 | Source compiled | EasyLogger source-owned 30-byte tag equality helper |
+| `0x007AEC4E...0x007AEC4F` | 2 | Compiler alignment | Padding before the delayed TLSF helpers |
+| `0x007AEC50...0x007AEC71` | 34 | Source compiled | Exact upstream FreeRTOS V10.5.1 `uxListRemove` |
+| `0x007AEC72...0x007AEC73` | 2 | Compiler alignment | Padding before the littlefs private leaves |
+| `0x007AEC74...0x007AEC77` | 4 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_file_tell_` |
+| `0x007AEC78...0x007AEC7B` | 4 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_scmp` |
+| `0x007AEC7C...0x007AEC91` | 22 | Source compiled | Exact upstream FreeRTOS V10.5.1 `vListInitialise` |
+| `0x007AEC92...0x007AEC93` | 2 | Compiler alignment | Padding before FreeRTOS ordered list insertion |
+| `0x007AEC94...0x007AECCD` | 58 | Source compiled | Exact upstream FreeRTOS V10.5.1 `vListInsert` |
+| `0x007AECCE...0x007AECCF` | 2 | Compiler alignment | Padding before littlefs allocator checkpoint reset |
+| `0x007AECD0...0x007AECD5` | 6 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_alloc_ckpoint` |
+| `0x007AECD6...0x007AECD7` | 2 | Compiler alignment | Padding before the task and littlefs leaf cluster |
+| `0x007AECD8...0x007AECE3` | 12 | Source compiled | FreeRTOS V10.5.1 `xTaskGetCurrentTaskHandle` |
+| `0x007AECE4...0x007AECEF` | 12 | Source compiled | littlefs v2.10.1 `lfs_alloc_drop` |
+| `0x007AECF0...0x007AECFB` | 12 | Source compiled | FreeRTOS V10.5.1 `uxTaskGetNumberOfTasks` |
+| `0x007AECFC...0x007AED1B` | 32 | Source compiled | FreeRTOS V10.5.1 `xTaskGetSchedulerState` |
+| `0x007AED1C...0x007AED23` | 8 | Source compiled | littlefs v2.10.1 `lfs_fs_disk_version` |
+| `0x007AED24...0x007AED2B` | 8 | Source compiled | littlefs v2.10.1 `lfs_mlist_append` |
+| `0x007AED2C...0x007AED63` | 56 | Source compiled | littlefs v2.10.1 `lfs_mlist_remove` |
+| `0x007AED64...0x007AEDE5` | 130 | Source compiled | FreeRTOS V10.5.1 static generic queue creator |
+| `0x007AEDE6...0x007AEDE7` | 2 | Compiler alignment | Padding before the queue initializer |
+| `0x007AEDE8...0x007AEE0D` | 38 | Source compiled | FreeRTOS V10.5.1 new-queue initializer |
+| `0x007AEE0E...0x007AEE0F` | 2 | Compiler alignment | Padding before the dynamic queue creator |
+| `0x007AEE10...0x007AEE99` | 138 | Source compiled | FreeRTOS V10.5.1 dynamic generic queue creator |
+| `0x007AEE9A...0x007AEE9B` | 2 | Compiler alignment | Padding before the mutex initializer |
+| `0x007AEE9C...0x007AEEBB` | 32 | Source compiled | FreeRTOS V10.5.1 mutex initializer |
+| `0x007AEEBC...0x007AEEE1` | 38 | Source compiled | FreeRTOS V10.5.1 static mutex creator wrapper |
+| `0x007AEEE2...0x007AEEE3` | 2 | Compiler alignment | Padding before the static counting-semaphore wrapper |
+| `0x007AEEE4...0x007AEF21` | 62 | Source compiled | FreeRTOS V10.5.1 static counting-semaphore creator wrapper |
+| `0x007AEF22...0x007AEF23` | 2 | Compiler alignment | Padding before the dynamic counting-semaphore wrapper |
+| `0x007AEF24...0x007AEF51` | 46 | Source compiled | FreeRTOS V10.5.1 dynamic counting-semaphore creator wrapper |
+| `0x007AEF52...0x007AEF53` | 2 | Compiler alignment | Padding before the littlefs utility quartet |
+| `0x007AEF54...0x007AEF5B` | 8 | Source compiled | Exact littlefs v2.10.1 `lfs_max` |
+| `0x007AEF5C...0x007AEF63` | 8 | Source compiled | Exact littlefs v2.10.1 `lfs_min` |
+| `0x007AEF64...0x007AEF6B` | 8 | Source compiled | Exact littlefs v2.10.1 `lfs_aligndown` |
+| `0x007AEF6C...0x007AEF73` | 8 | Source compiled | Exact littlefs v2.10.1 `lfs_alignup` |
+| `0x007AEF74...0x007AEFBB` | 72 | Source compiled | Exact littlefs v2.10.1 `LFS_NO_INTRINSICS` `lfs_npw2` fallback |
+| `0x007AEFBC...0x007AEFCB` | 16 | Source compiled | Exact littlefs v2.10.1 `lfs_ctz` fallback; internal call to source `lfs_npw2` resolved |
+| `0x007AEFCC...0x007AEFF5` | 42 | Source compiled | Exact littlefs v2.10.1 `lfs_popc` fallback |
+| `0x007AEFF6...0x007AEFF7` | 2 | Compiler alignment | Padding before the delayed TLSF helpers |
+| `0x007AEFF8...0x007AF0AF` | 184 | Source compiled | Source TLSF block-splitting helper |
+| `0x007AF0B0...0x007AF18B` | 220 | Source compiled | Source TLSF free-block removal helper |
+| `0x007AF18C...0x007AF7A3` | 1,560 | Source compiled | Source-owned tables, scalar data, event templates, RTC data, peripheral descriptors, memory-size data, the built-in style-property table, and floating power-of-ten data |
+| `0x007AF7A4...0x007AF7B3` | 16 | Source compiled | Full-screen LVGL synchronization area |
+| `0x007AF7B4...0x007B011B` | 2,408 | Source compiled | Source-owned paths, firmware strings, diagnostics, EasyLogger assertion strings, floating special values, and TLSF assertions |
+| `0x007B011C...0x007B0123` | 8 | Source compiled | Source-owned Apollo510 MRAM size table |
+| `0x007B0124...0x007B0127` | 4 | Source compiled | Protected-record key-field offset table |
+| `0x007B0128...0x007B0157` | 48 | Source compiled | Authenticated AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_clear` leaf retained by section GC |
+| `0x007B0158...0x007B016D` | 22 | Source compiled | Exact FreeRTOS V10.5.1 `ulSetInterruptMask` isolated source leaf |
+| `0x007B016E...0x007B017B` | 14 | Source compiled | Exact FreeRTOS V10.5.1 `vClearInterruptMask` isolated source leaf |
+| `0x007B017C...0x007B01A7` | 44 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_mlist_isopen` isolated source leaf |
+| `0x007B01A8...0x007B01A9` | 2 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_fromle32` isolated source leaf |
+| `0x007B01AA...0x007B01AB` | 2 | Compiler alignment | Generated zero padding before `lfs_tole32` |
+| `0x007B01AC...0x007B01AD` | 2 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_tole32` isolated source leaf |
+| `0x007B01AE...0x007B01AF` | 2 | Compiler alignment | Generated zero padding before `lfs_frombe32` |
+| `0x007B01B0...0x007B01B3` | 4 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_frombe32` isolated source leaf |
+| `0x007B01B4...0x007B01B7` | 4 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_tobe32` isolated source leaf |
+| `0x007B01B8...0x007B01C1` | 10 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version_major` relocated source leaf |
+| `0x007B01C2...0x007B01C3` | 2 | Compiler alignment | Generated zero padding before `lfs_fs_disk_version_minor` |
+| `0x007B01C4...0x007B01CD` | 10 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_fs_disk_version_minor` relocated source leaf |
+| `0x007B01CE...0x007B01CF` | 2 | Compiler alignment | Generated zero padding before `lfs_alloc_lookahead` |
+| `0x007B01D0...0x007B0201` | 50 | Source compiled | Exact upstream littlefs v2.10.1 `lfs_alloc_lookahead` relocation-free source leaf |
+| `0x007B0202...0x007B0203` | 2 | Compiler alignment | Generated zero padding before `osMessageQueueNew` |
+| `0x007B0204...0x007B027F` | 124 | Source compiled | Authenticated CMSIS-FreeRTOS v10.5.1 `osMessageQueueNew` relocated source leaf |
+| `0x007B0280...0x007B02A5` | 38 | Source compiled | Authenticated FreeRTOS V10.5.1 `pcTaskGetName` relocated source leaf |
+| `0x007B02A6...0x007B02A7` | 2 | Compiler alignment | Generated zero padding before `osMutexNew` |
+| `0x007B02A8...0x007B031B` | 116 | Source compiled | Authenticated CMSIS-FreeRTOS v10.5.1 `osMutexNew` relocated source leaf |
+| `0x007B031C...0x007B035D` | 66 | Source compiled | Authenticated FreeRTOS V10.5.1 private heap initializer |
+| `0x007B035E...0x007B035F` | 2 | Compiler alignment | Generated zero padding before heap free-list insertion |
+| `0x007B0360...0x007B03D5` | 118 | Source compiled | Authenticated FreeRTOS V10.5.1 private free-list insertion/coalescing helper |
+| `0x007B03D6...0x007B03D7` | 2 | Compiler alignment | Generated zero padding before heap allocation |
+| `0x007B03D8...0x007B050B` | 308 | Source compiled | Authenticated FreeRTOS V10.5.1 `heap_4` allocation leaf |
+| `0x007B050C...0x007B057D` | 114 | Source compiled | Authenticated FreeRTOS V10.5.1 `heap_4` free leaf |
+| `0x007B057E...0x007B057F` | 2 | Compiler alignment | Generated zero padding before `vQueueDelete` |
+| `0x007B0580...0x007B05A5` | 38 | Source compiled | Authenticated FreeRTOS V10.5.1 `vQueueDelete` leaf |
+| `0x007B05A6...0x007B05A7` | 2 | Compiler alignment | Generated zero padding before `osSemaphoreNew` |
+| `0x007B05A8...0x007B0659` | 178 | Source compiled | Authenticated CMSIS-FreeRTOS v10.5.1 `osSemaphoreNew` leaf |
+| `0x007B065A...0x007B065B` | 2 | Compiler alignment | Generated zero padding before the EasyLogger logger-object provider |
+| `0x007B065C...0x007B0665` | 10 | Source compiled | Apollo-main EasyLogger logger-object provider |
+| `0x007B0666...0x007B0667` | 2 | Compiler alignment | Generated zero padding before the EasyLogger assertion-policy provider |
+| `0x007B0668...0x007B070F` | 168 | Source compiled | Apollo-main EasyLogger assertion-policy provider |
+| `0x007B0710...0x007B0735` | 38 | Source compiled | EasyLogger `get_fmt_enabled` source leaf |
+| `0x007B0736...0x007B0737` | 2 | Compiler alignment | Generated zero padding before the unsigned-argument predicate |
+| `0x007B0738...0x007B074D` | 22 | Source compiled | EasyLogger unsigned-argument format predicate |
+| `0x007B074E...0x007B074F` | 2 | Compiler alignment | Generated zero padding before the pointer-argument predicate |
+| `0x007B0750...0x007B0765` | 22 | Source compiled | EasyLogger pointer-argument format predicate |
+| `0x007B0766...0x007B0767` | 2 | Compiler alignment | Generated zero padding before `elog_strcpy` |
+| `0x007B0768...0x007B07E9` | 130 | Source compiled | EasyLogger bounded `elog_strcpy` source leaf |
+| `0x007B07EA...0x007B07EB` | 2 | Compiler alignment | Generated zero padding before the FreeRTOS tick provider |
+| `0x007B07EC...0x007B07F7` | 12 | Source compiled | Relocation-free FreeRTOS V10.5.1 `xTickCount` provider for RAM `0x20074A34` |
+| `0x007B07F8...0x007B07FB` | 4 | Source compiled | FreeRTOS V10.5.1 `xTaskGetTickCount`, linked to the source provider |
+| `0x007B07FC...0x007B07FF` | 4 | Source compiled | FreeRTOS V10.5.1 `xTaskGetTickCountFromISR`, linked to the source provider |
+| `0x007B0800...0x007B080D` | 14 | Source compiled | Relocation-free FreeRTOS V10.5.1 `vTaskMissedYield`, binding `xYieldPending` at `0x20074A44` |
+| `0x007B080E...0x007B080F` | 2 | Compiler alignment | Generated zero padding before `uxTaskResetEventItemValue` |
+| `0x007B0810...0x007B0829` | 26 | Source compiled | FreeRTOS V10.5.1 `uxTaskResetEventItemValue`, preserving three volatile `pxCurrentTCB` evaluations |
+| `0x007B082A...0x007B082B` | 2 | Compiler alignment | Generated zero padding before `pvTaskIncrementMutexHeldCount` |
+| `0x007B082C...0x007B0843` | 24 | Source compiled | FreeRTOS V10.5.1 `pvTaskIncrementMutexHeldCount`, preserving three volatile `pxCurrentTCB` evaluations |
+| `0x007B0844...0x007B0853` | 16 | Source compiled | FreeRTOS V10.5.1 `vTaskSuspendAll`, binding nested depth at `0x20074A58` |
+| `0x007B0854...0x007B0865` | 18 | Source compiled | FreeRTOS V10.5.1 `vTaskInternalSetTimeOutState`, binding overflow/tick words at `0x20074A48` and `0x20074A34` |
+
+The source overlay is 116,034 bytes at
+`0x00794324...0x007B0866` (end exclusive), with SHA-256
+`d0b36ab3661f3b3487e3962bfe58d9f588f6a6f1ea14e1d9389f7e45d98094bd`.
+It produces 596 functions and 563 hash-validated replacement sites. The
+remaining opaque Apollo application is 3,441,474 bytes. The 563 patch sites
+replace 81,890 authenticated stock bytes and occupy 81,708 generated bytes;
+the two exact
+mask copies and five fixed-address NTZ leaves replace 218 opaque bytes with
+byte-identical source output while preserving their public addresses.
+Other source functions still call reviewed stock routines
+through fixed 2.2.6.10 addresses, so those entry points form the current
+source/blob ABI.
+
+The FreeRTOS task boundary now also source-owns exact upstream V10.5.1
+`xTaskGetTickCount`, `xTaskGetTickCountFromISR`, `vTaskMissedYield`,
+`uxTaskGetNumberOfTasks`, `xTaskGetCurrentTaskHandle`, and
+`xTaskGetSchedulerState`, `uxTaskResetEventItemValue`, and
+`pvTaskIncrementMutexHeldCount`, `vTaskSuspendAll`, and
+`vTaskInternalSetTimeOutState` semantics at `[0x00454EFE,0x00454F06)`,
+`[0x00454F06,0x00454F10)`, `[0x004555E6,0x004555F0)`,
+`[0x00454F10,0x00454F16)`,
+`[0x0045589C,0x004558A4)`, `[0x004558A4,0x004558C4)`,
+`[0x00455ACA,0x00455AE0)`, `[0x00455AE0,0x00455AF6)`,
+`[0x00454D7C,0x00454D88)`, and `[0x00455556,0x00455566)`. Their source
+bodies compile to 4, 4, 14, 12, 12, 32, 26, 24, 16, and 18 Thumb bytes, with the
+tick pair sharing a 12-byte provider. Focused disassembly pins the
+G2-specific state seam rather than re-creating the kernel: current-task
+storage is at
+`0x20074A20`, task count is at `0x20074A30`, tick count is at `0x20074A34`,
+yield-pending state is at `0x20074A44`, and scheduler state is derived from
+stock globals at `0x20074A3C` and `0x20074A58`; timeout capture reads
+`xNumOfOverflows` at `0x20074A48` and `xTickCount` at `0x20074A34`.
+
+The FreeRTOS list boundary source-owns exact upstream `vListInitialise`,
+`vListInsertEnd`, `vListInsert`, and `uxListRemove` at
+`[0x0045607C,0x0045609A)`, `[0x0045609A,0x004560B2)`,
+`[0x004560B2,0x004560E8)`, and `[0x004560E8,0x0045610E)`. Their source
+bodies compile to 22, 26, 58, and 34 relocation-free Thumb bytes,
+respectively.
+The focused upstream-oracle, 32-bit ABI, call-topology, target-body, and
+manifest tests pass for all four leaves. The two existing timer consumers
+that construct the Thumb address `0x004560E9` now enter the generated
+`uxListRemove` redirect; converting those consumers to direct source calls is
+deferred until their complete cluster can be relinked without perturbing
+unrelated source placement.
+
+The Apollo-main littlefs boundary source-owns twenty-two v2.10.1 leaves:
+`lfs_max`, `lfs_min`, `lfs_aligndown`, and `lfs_alignup` at the contiguous
+`[0x004CA6F8,0x004CA720)` utility boundary, `lfs_npw2`, `lfs_ctz`, and
+`lfs_popc` at `[0x004CA720,0x004CA7B2)`, `lfs_scmp` at
+`[0x004CA7B2,0x004CA7B6)`, `lfs_fromle32`, `lfs_tole32`,
+`lfs_frombe32`, and `lfs_tobe32` at
+`[0x004CA7B6,0x004CA80A)`, `lfs_mlist_isopen` at
+`[0x004CB082,0x004CB0A0)`, `lfs_mlist_remove` at
+`[0x004CB0A0,0x004CB0BC)`, `lfs_mlist_append` at
+`[0x004CB0BC,0x004CB0C4)`, `lfs_fs_disk_version` at
+`[0x004CB0C4,0x004CB0CA)`, `lfs_fs_disk_version_major` at
+`[0x004CB0CA,0x004CB0D6)`, `lfs_fs_disk_version_minor` at
+`[0x004CB0D6,0x004CB0E0)`, `lfs_alloc_ckpoint` at
+`[0x004CB0E0,0x004CB0E6)`, `lfs_alloc_drop` at
+`[0x004CB0E6,0x004CB0F6)`, `lfs_alloc_lookahead` at
+`[0x004CB0F6,0x004CB12E)`, and `lfs_file_tell_` at
+`[0x004CE45C,0x004CE460)`. These are upstream source integrations, with
+focused target disassembly used only to select the main `-O2` versus
+bootloader `-Oz` profiles and to prove local object-layout behavior.
+
+The separate raw-bootloader builder source-owns twenty-one leaves present in
+that image: `lfs_max`, `lfs_min`, `lfs_aligndown`, `lfs_alignup`,
+`lfs_npw2`, `lfs_ctz`, `lfs_popc`, `lfs_scmp`, `lfs_fromle32`,
+`lfs_tole32`, `lfs_frombe32`, `lfs_tobe32`,
+`lfs_mlist_isopen`, `lfs_mlist_remove`, `lfs_mlist_append`,
+`lfs_fs_disk_version`, `lfs_fs_disk_version_major`,
+`lfs_fs_disk_version_minor`, `lfs_alloc_ckpoint`, `lfs_alloc_drop`, and
+`lfs_alloc_lookahead`. It
+redirects their complete stock entries at `[0x004104BA,0x004104BE)`,
+`[0x00410D8A,0x00410DA8)`, `[0x00410DA8,0x00410DC4)`,
+`[0x00410DC4,0x00410DCC)`,
+`[0x00410DCC,0x00410DD2)`, `[0x00410DD2,0x00410DDE)`,
+`[0x00410DDE,0x00410DE8)`, `[0x00410DE8,0x00410DEE)`, and
+`[0x00410DEE,0x00410DFE)`, and `[0x00410DFE,0x00410E36)`, in addition to
+the contiguous utility entries at
+`[0x00410400,0x00410428)`, fallback-bitops entries at
+`[0x00410428,0x004104BA)`, and endian-conversion entries at
+`[0x004104BE,0x00410512)`. The 90-byte pre-existing primary source overlay at
+`[0x00434478,0x004344D2)` contains 32 utility bytes plus the prior 58-byte
+comparator, metadata-list, disk-version, and allocator closure. The three
+fallback-bitops bodies extend the primary text to 204 bytes through
+`0x00434544`: 56-byte `lfs_npw2`, 16-byte `lfs_ctz`, and 42-byte
+`lfs_popc`. The 48-byte authenticated AmbiqSuite leaf follows at
+`[0x00434544,0x00434574)`, whose stock body at
+`[0x00426506,0x00426536)` is redirected. The relocation-free 18-byte
+`lfs_mlist_isopen` source leaf follows at `[0x00434574,0x00434586)`.
+The endian-conversion leaves follow contiguously at
+`[0x00434586,0x00434592)`. The relocated disk-version major/minor leaves
+follow at `[0x00434592,0x0043459C)` and
+`[0x0043459C,0x004345A6)`. The 48-byte allocator-lookahead source leaf
+follows at `[0x004345A6,0x004345D6)`.
+This component deliberately omits
+the Apollo-main 32-byte staging preamble and preserves the EVENOTA wrapper as
+package-level generated framing.
+
+The shared disk-version-parts source is 1,734 bytes with SHA-256
+`920d03e80c9d16a1d0b4299f8151eefe4d9f3ac1ba89c2d40bcc5830335eb5a7`.
+It ports the exact littlefs v2.10.1 functions from commit
+`0494ce7169f06a734a7bd7585f49a9fa91fa7318`. Both ten-byte leaves have one
+reviewed `R_ARM_THM_CALL` relocation to the existing source-owned
+disk-version provider and no other undefined dependency. Apollo main appends
+the major leaf at `[0x007B01B8,0x007B01C2)`, two alignment bytes through
+`0x007B01C4`, and the minor leaf through `0x007B01CE`.
+
+The shared allocator-lookahead source is 5,445 bytes with SHA-256
+`44ab9037747a4cb209404423d52cf817b035cbab5177a8c0cb05090df4b68491`.
+It preserves the exact littlefs v2.10.1 algorithm while recovering only
+`lfs_t` offsets `0x54`, `0x58`, `0x64`, and `0x6C`. The main and boot
+profiles emit relocation-free 50- and 48-byte leaves and pass 20,000
+deterministic differential cases against the authenticated upstream body.
+
+The final seven-function increment was audited through its complete linked
+artifact rather than by assuming unchanged addresses. Every new target body,
+stock replacement span, source hash, relocation record, and redirect is
+manifest-pinned. Relocation-sensitive pre-existing body hashes were rechecked
+after the appended functions moved the delayed TLSF helpers and read-only
+sections; the aggregate overlay gate accepts the resulting 902 resolved
+relocations with no unreviewed target or source input.
+
+The subsequent queue-creation increment source-owns upstream FreeRTOS V10.5.1
+`xQueueGenericCreateStatic`, `xQueueGenericCreate`,
+`prvInitialiseNewQueue`, and `prvInitialiseMutex` across the contiguous stock
+span `[0x004415CA,0x004416D6)`. Focused disassembly supplies only the G2
+configuration and ABI facts: the 80-byte `Queue_t` layout, both allocation
+modes, trace-field offsets, empty trace hooks, and the retained
+`xQueueGenericReset`, `heap_4`, and assertion seams. The four new complete
+entry redirects add 268 generated bytes and the bounded upstream source unit
+adds 344 compiled bytes.
+
+The preceding upstream tranche additionally source-owns the 32-byte static
+mutex creator, 50-byte static counting-semaphore creator, and 44-byte dynamic
+counting-semaphore creator stock entries. Their compiled 38-, 62-, and
+46-byte wrappers link directly to the source-owned generic queue creators and
+mutex initializer; focused disassembly supplies only the fixed assertion seam.
+The same tranche compiles authenticated AmbiqSuite 5.1.0
+`am_hal_mspi_interrupt_clear` from its complete translation unit in both
+Apollo images and retains only the 48-byte, relocation-free leaf.
+
+The preceding port-layer increment source-owns exact FreeRTOS V10.5.1
+`ulSetInterruptMask` and `vClearInterruptMask` assembly. The IAR source is
+syntax-adapted into dedicated Clang sections without changing the emitted
+22- and 14-byte bodies. Exact `copy` replacements preserve the public spans
+`[0x005FA0A4,0x005FA0BA)` and `[0x005FA0BA,0x005FA0C8)`, the shifted
+`BASEPRI=0x30` configuration, and DSB/ISB ordering. No caller is rewritten
+and neither leaf has a relocation or private-state dependency. The appended
+authenticated copies add 36 overlay bytes; the primary link and its 909
+resolved relocations remain byte-for-byte unchanged.
+
+The preceding scalar/alignment increment adds exact littlefs v2.10.1 `lfs_max`,
+`lfs_min`, `lfs_aligndown`, and `lfs_alignup` semantics from authenticated
+`lfs_util.h`. The shared bounded source has SHA-256
+`2730d0f39e02d7b6e07396894b796b26d9f73332deff23a685b5a06da0f7fb22`.
+All four functions compile to eight bytes in both reviewed profiles; the only
+new relocation is the source-closed `alignup` call to `aligndown`. Eight
+complete `B.W` entry replacements cover the identical 40-byte stock clusters
+at `[0x004CA6F8,0x004CA720)` and `[0x00410400,0x00410428)`. No global,
+structure, callback, filesystem configuration, block-device, or hardware seam
+is involved.
+
+The subsequent `lfs_mlist_isopen` increment source-owns the byte-identical
+30-byte stock predicate at `[0x004CB082,0x004CB0A0)` and
+`[0x00410D8A,0x00410DA8)`. Its final 1,801-byte source has SHA-256
+`7d0bc398c8ecd85fd00b34cc6dcc2b9fc75c754e1aed0bfbca01dd58ae9d6e0c`
+and owns only 32-bit pointers, `struct lfs_mlist.next` at offset zero, and a
+32-bit unsigned 0/1 return. The main `-O2` profile emits a relocation-free
+44-byte leaf and the bootloader `-Oz` profile emits a relocation-free
+18-byte leaf.
+
+The preceding endian-conversion increment source-owns the four byte-identical
+stock leaves at Apollo-main `[0x004CA7B6,0x004CA80A)` and bootloader
+`[0x004104BE,0x00410512)`. The final shared source has SHA-256
+`830d49b043181d270ac0aedda432c5e232ce8d6ce65e8e537b80b1a706fd6cac`.
+Both profiles select two-byte little-endian identity leaves and four-byte
+big-endian byte-swap leaves. All eight extracted functions are relocation-,
+literal-, data-, and undefined-symbol-free. Complete-image scans pin 26, 19,
+4, and 2 direct callers per image and find no stored pointer, non-linking
+incoming edge, or external interior entry.
+
+### Historical fallback-bitops increment
+
+The historical fallback-bitops increment compiled the exact littlefs v2.10.1
+`LFS_NO_INTRINSICS` implementations of `lfs_npw2`, `lfs_ctz`, and
+`lfs_popc` from the 2,795-byte shared source with SHA-256
+`405092c6e8fc65a740f951cb2affaad8766e2553c7b8d290ff58f435e8830f47`.
+It preserves the upstream edge semantics `npw2(0) == 32`, `npw2(1) == 1`,
+and `ctz(0) == 0`. The only new relocation is the internal Thumb call
+`lfs_ctz -> lfs_npw2`; there are no external, undefined, literal, or data
+dependencies.
+
+That release's Apollo-main overlay is 114,324 bytes with SHA-256
+`00318de9ff51e19f77d889fa691a3a2a54e035b1287843bda857f944af58e065`;
+the complete 3,637,720-byte provider has SHA-256
+`f0da043e234dc38481059459755e091622d689313cd12e5c8d5155c7b4ba3202`.
+Its 3,637,688 installed bytes have SHA-256
+`cfa3e79abf4ac4d932d3612ced595f950c1c2355b1890fd9a13e9635c59c2e85`,
+end at `0x007B01B8`, and leave 261,704 bytes below `0x007F0000` and
+319,048 below `0x007FE000`. The bootloader overlay is 282 bytes with
+SHA-256
+`b934dbea7624660c3c774eb0f4edd5e73a738fc59023fc69cfac96417dfe2fee`;
+its 148,882-byte provider has SHA-256
+`1aa7920a16ed2857a2743394c0f62395a2f2477f95c965da47d1e29c4d2d8247`
+and ends at `0x00434592`. The 4,415,834-byte package has SHA-256
+`058782604ab6cb946aff0acedbbef7d367bb1d82114f28c9a70276bcdf178e9a`.
+
+### Prior FreeRTOS NTZ in-place increment
+
+That historical increment added five byte-identical, fixed-address source leaves
+from the authenticated FreeRTOS-Kernel V10.5.1
+`ARM_CM55_NTZ/non_secure/portasm.s` boundary:
+
+| Function | Stock span | Bytes | Stock SHA-256 |
+|---|---|---:|---|
+| `vRestoreContextOfFirstTask` | `[0x005FA058,0x005FA07E)` | 38 | `10edd4871b5f0c829e38618f1003ef0c45ec3629219317e23c62a2e255b0f4f8` |
+| `vRaisePrivilege` | `[0x005FA07E,0x005FA08C)` | 14 | `29bceedf776515c291813e4eecd9a836378b81550c42d08aee35cf15df3bd8db` |
+| `vStartFirstTask` | `[0x005FA08C,0x005FA0A4)` | 24 | `44ba0097fbbc1d0691837d5c51bee83e6b61509c9d89efffee9c202d930e6347` |
+| `PendSV_Handler` | `[0x005FA0C8,0x005FA120)` | 88 | `d8e234bfa34805ad160e41ef54801973c9c871b36cf7ac0f365b56fe503253e3` |
+| `SVC_Handler` | `[0x005FA120,0x005FA132)` | 18 | `d0fac197473b52d6ed466462d237ddb20dd8096a6507ea559e75d4bd9d88da94` |
+
+The 5,487-byte adapter has SHA-256
+`38c6a259ca2fbfbefb373ef5a80216f2e5f1cad998173ca2b4c9cfde6c01aee8`.
+Its five raw ELF function sections are 38, 14, 24, 88, and 18 bytes with
+SHA-256 values
+`6cd49195f965664fa52a501576fafc8f84a77f4719cf755515ef7606b3a1d8be`,
+`29bceedf776515c291813e4eecd9a836378b81550c42d08aee35cf15df3bd8db`,
+`28d1d6e471df04ae8476e1355225e2d4d3673d4af90b68338fc8589441ae16b7`,
+`12c7f208de16f3d5636cd00d8307847552937eb484b86b185b45b686553953ee`,
+and
+`1807cfce5ab3df565e585de5dd35011f18e5994e748363f15cb7376aa796e1c4`.
+The exact six-relocation allowlist consists of four `R_ARM_THM_PC8` records
+to `0x005FA134`/`0x005FA138`, one `R_ARM_THM_CALL` to
+`vTaskSwitchContext` at `0x004551B4`, and one `R_ARM_THM_JUMP24` to
+`vPortSVCHandler_C` at `0x00442134`. The literal words remain
+`204a0720` and `08ed00e0`; SVC and PendSV vectors remain `0x005FA121` and
+`0x005FA0C9`.
+
+The `in_place_leaves` builder contract excludes these names from both
+`functions` and `patch_sites`, compiles and extracts each section
+independently, requires exact stock and output pins, rejects any relocation
+outside the allowlist, authenticates literal dependencies, rejects overlap,
+and verifies the original bytes before installation. The component report
+records 182 fixed-address source bytes, 114,506 total source-owned component
+bytes, and 3,443,066 opaque base bytes.
+
+That release's appended overlay/provider/package hashes remained
+`00318de9ff51e19f77d889fa691a3a2a54e035b1287843bda857f944af58e065`,
+`f0da043e234dc38481059459755e091622d689313cd12e5c8d5155c7b4ba3202`,
+and
+`058782604ab6cb946aff0acedbbef7d367bb1d82114f28c9a70276bcdf178e9a`.
+Its 750/2/5 placed/unresolved/container-only manifest had flash-plan SHA-256
+`eda45c2cc276bd70bc123267d9fbdc09b0ae4aa030a7557f874c259ca7f5fee8`.
+Package ownership was 114,820 source bytes (2.600188%), 81,477 generated
+bytes (1.845110%), 4,219,537 opaque bytes (95.554702%), and 196,297
+controlled bytes (4.445298%).
+
+### Prior littlefs disk-version-parts increment
+
+That increment added exact littlefs v2.10.1
+`lfs_fs_disk_version_major` and `lfs_fs_disk_version_minor` leaves from
+commit `0494ce7169f06a734a7bd7585f49a9fa91fa7318`. Their shared 1,734-byte
+source has SHA-256
+`920d03e80c9d16a1d0b4299f8151eefe4d9f3ac1ba89c2d40bcc5830335eb5a7`.
+The main stock spans are `[0x004CB0CA,0x004CB0D6)` and
+`[0x004CB0D6,0x004CB0E0)`; the boot spans are
+`[0x00410DD2,0x00410DDE)` and `[0x00410DDE,0x00410DE8)`.
+
+The main overlay is 114,346 bytes with SHA-256
+`bdc1e353d1adcb0075231afb6c423616dcc0da8335b4b430afe51763a0b9df20`,
+and its 3,637,742-byte component has SHA-256
+`d69c4834f65b0661834f990da8167ca6989a1b1c97fda838edc488a4ed0b3e8e`.
+Its 3,637,710 installed bytes end at `0x007B01CE`, leaving 261,682 bytes
+below `0x007F0000` and 319,026 bytes below `0x007FE000`.
+The boot overlay is 302 bytes with SHA-256
+`e94e33658aca89d3830182bc6c17c656256a194262835c041fecc93e1d72dc59`,
+and its 148,902-byte component has SHA-256
+`abc583d976a01e237ffa4ed29e4be1b6ff0e5ae2d9756bccec58d1779fe20239`;
+it ends at `0x004345A6` with 14,938 bytes of partition headroom.
+The package is 4,415,876 bytes with SHA-256
+`60cd913a716266b349ce18295064f2484749a7dbad2ab9244c923c927bd56c2f`.
+The 546,404-byte flash plan has SHA-256
+`52124c17205ae10e47f0b02d0cd6bae7c2b30e10d65d787aa34201a53fe0dc68`
+and contains 757 placed, two unresolved, and five container-only regions.
+Package ownership is 114,860 source bytes, 81,523 generated bytes,
+4,219,493 opaque bytes, and 196,383 controlled bytes.
+
+### Prior littlefs allocator-lookahead increment
+
+That increment added the exact littlefs v2.10.1
+`lfs_alloc_lookahead` algorithm. The shared 5,445-byte source has SHA-256
+`44ab9037747a4cb209404423d52cf817b035cbab5177a8c0cb05090df4b68491`.
+Both complete stock spans are 56 bytes with SHA-256
+`58285c138461a673be0bed2c5376f8d739e40e2aea753ad05d5061bfbc9265cf`;
+their main and boot entries are `0x004CB0F6` and `0x00410DFE`.
+
+The main overlay is 114,398 bytes with SHA-256
+`2189ec69f7076e216c2ba7388f4eb9d19647feb9f89c382864012902be4e0fdf`,
+and its 3,637,794-byte component has SHA-256
+`557fe93fdf79c5cb332c7db731db29ed7cfc42be3daa49fb0d022f81e7fe0ba8`.
+Its 3,637,762 installed bytes end at `0x007B0202`, leaving 261,630 bytes
+below `0x007F0000` and 318,974 bytes below `0x007FE000`.
+The boot overlay is 350 bytes with SHA-256
+`1b8bb2893a33a18b8481b785a57d49c2849396cc05c5ef20d86f8cf5cef255a5`,
+and its 148,950-byte component has SHA-256
+`9af8b65041bbd576b49b4f88e2f7427daf7bb445981d608799d86e1987468736`;
+it ends at `0x004345D6` with 14,890 bytes of partition headroom.
+The package is 4,415,976 bytes with SHA-256
+`3d4b2f3e22a10d0755642c0544786c9a881b2ab7c2271d8a184a83f5d3d7d13f`.
+The 550,026-byte flash plan has SHA-256
+`73978705e32bbb968a9741620a80e1a70f866b5e43db60f4a9f08b4404ce34d1`
+and contains 762 placed, two unresolved, and five container-only regions.
+Package ownership is 114,958 source bytes, 81,637 generated bytes,
+4,219,381 opaque bytes, and 196,595 controlled bytes.
+
+### Prior CMSIS-FreeRTOS `osMessageQueueNew` increment
+
+That increment added the exact CMSIS-FreeRTOS v10.5.1
+`osMessageQueueNew` allocation/validation algorithm from authenticated
+commit `d213f261b5be6bb29a7cce8b84071706b72f4d53`. The bounded 8,427-byte
+Apache-2.0 source has SHA-256
+`8897019aa7a2beca32a88dc60808fb1f99b1538933b8ab4fbd9ed4fed38d433c`.
+The complete 140-byte stock span is `[0x00449A32,0x00449ABE)`, SHA-256
+`52d0abf097914cc84b2cdfe7f628dc61f9efb40bac880112062315d2b1bfba47`;
+its 15 callers have ordered digest
+`7974f375f4b38120a6df7ce5416cef9fa65031d5768226b8785d2916d0f96f18`.
+
+The raw 124-byte leaf hashes to
+`543fb1ef418aeadd05e2f3b3e60c3f48c0f3521dfa995a3079a86b86ccc58eee`.
+Three reviewed relocations at `+0x10`, `+0x44`, and `+0x78` bind it directly
+to the source-owned scheduler-state getter and static/dynamic generic queue
+creators. Two alignment bytes precede the final source leaf at
+`[0x007B0204,0x007B0280)`, SHA-256
+`afbba4f9f08b2df17a4350d7a7e83d99b8439283ee40c1a1604bd879dff75f04`.
+The complete stock replacement region hashes to
+`b9e761042539e109acea61b03a522bb5795539850f0751906c6e06d0da198a47`.
+
+The main overlay is 114,524 bytes with SHA-256
+`de76f5db2f04f48c81ea480c348a3c9151d4441c522eba68621ad812290153e2`,
+and its 3,637,920-byte component has SHA-256
+`874bdc621a6cd91848dee66038c3ba97d7e4b7c7ab1fb5063739bf69fc3047e1`.
+Its 3,637,888 installed bytes end at `0x007B0280`, leaving 261,504 bytes
+below `0x007F0000` and 318,848 bytes below `0x007FE000`.
+The boot component remains 148,950 bytes. The package is 4,416,102 bytes
+with SHA-256
+`c7baf50cd5386a5e27b4c284cc0084e8cf5d0b83d74eb08b8d4a997bf66474f4`.
+The 552,937-byte flash plan has SHA-256
+`79da631918503c668516e1af5d3844e3dab65c9e63d8add4834a43536ef69407`
+and contains 766 placed, two unresolved, and five container-only regions.
+Package ownership is 115,082 source bytes, 81,779 generated bytes,
+4,219,241 opaque bytes, and 196,861 controlled bytes.
+
+The authenticated CMSIS-FreeRTOS/CMSIS_5 compile-input closure remains a
+candidate for `osSemaphoreNew` and broad CMSIS services. Candidate
+shims at
+`components/apollo_main/core_overlay/candidates/cmsis_freertos_constructors/`
+provide `{FreeRTOSConfig.h,portmacro.h,cmsis_freertos_target.h,string.h}`.
+They let the authenticated, unmodified `cmsis_os2.c` compile for Cortex-M55
+with `-Oz -Werror`. The retained candidate closure is 370 text bytes:
+`IRQ_Context` 46, `osMessageQueueNew` 88, `osMutexNew` 98, and
+`osSemaphoreNew` 138. It retains zero read-only or writable data and four
+8-byte EHABI `.ARM.exidx` sections; 6/6 isolated tests pass in 0.231 seconds.
+Only the separately bounded `osMessageQueueNew` and `osMutexNew` leaves are
+counted as source-owned production coverage.
+
+The candidate proof does not establish Even's historical checkout identity or
+stock byte identity for `osSemaphoreNew` or unrelated services. No authenticated G2
+RTE/device header exists;
+`SystemCoreClock` and MVE remain unresolved; `INCLUDE_*` switches are
+compile-only assumptions; assert, NVIC, and libc seams remain outside the
+retained root; and candidate `StaticTask_t` is 108 bytes versus the 112-byte
+stock G2 TCB.
+
+The focused `osMessageQueueNew` production gate passes 10/10 tests, offline.
+No physical device, serial endpoint, debugger, or flasher was accessed.
+
+## Validation state
+
+- The prior complete offline regression baseline passed 1,649 tests in 810.914
+  seconds with no failures, errors, or skips. It covers the combined formatter,
+  bounded-length, heap, public-wrapper, asynchronous-lifecycle, and
+  aggregate-overlay gates. Coverage also includes eight Apollo510
+  MCUCTRL information-getter model/topology tests, eight Apollo510
+  MCUCTRL trim-version model/topology tests, seven Apollo510
+  external-32-MHz-clock status model/topology tests, nine Apollo510 MCUCTRL
+  control model/topology tests, nine Apollo510 MCUCTRL
+  device-information model/topology tests, nine Apollo510 word-copy
+  model/topology tests, ten Apollo510 delay-status helper
+  model/topology tests, ten Apollo510 SPOT-manager
+  initializer model/topology tests, ten Apollo510 SPOT-manager
+  public-dispatch tests, seven Apollo510
+  SPOT-manager timer-stop model tests, seven Apollo510
+  SPOT-manager timer-restart model tests, seven Apollo510
+  SPOT-manager timer-start model tests, six Apollo510
+  SPOT-manager timer-initialization model tests, seven Apollo510
+  system-PLL enabled-state query model tests, seven Apollo510
+  system-PLL disable model tests, seven Apollo510 system-PLL enable
+  model tests, six Apollo510 temperature-update
+  model tests, six Apollo510 CPDLPSTATE
+  getter model tests, six Apollo510 CPDLPSTATE
+  configuration model tests, ten Apollo510 miscellaneous
+  power-control dispatcher model tests, six Apollo510
+  dynamic buck/LDO override model tests, five Apollo510 buck/LDO
+  override initialization model tests, twelve Apollo510
+  low-power initialization model tests, seven INFO1
+  cache-population model tests, six
+  peripheral enabled-state query model tests, twelve peripheral-disable model
+  tests, seven peripheral-disable mask-check model tests, ten
+  Apollo510 peripheral-enable model tests, six
+  Apollo510 crypto-quiesce model tests, nine Apollo510 shared-SRAM
+  power-configuration model tests, eight Apollo510
+  ROM-disable model tests, eight Apollo510 ROM-enable model tests,
+  eleven Apollo510 MCU memory-power
+  configuration model tests, eleven Apollo510
+  GPU-mode selector model tests, six GPU-mode status model tests,
+  ten MCU-mode selector model tests,
+  nine MCU switching-sequence model
+  tests, seven Apollo510 trim-version
+  model tests, six Apollo510 peripheral-power
+  descriptor model tests, six RTC calendar/time
+  getter model tests, six RTC calendar/time setter model tests,
+  five priority-1 RTC initializer model
+  tests, four
+  RTOS event-group set-from-ISR submission model tests, five RTOS event-group
+  wait-condition predicate model tests, four
+  RTOS event-group clear-bits callback model tests, four RTOS event-group
+  set-bits callback model tests, nine RTOS event-group
+  set-bits model tests, five RTOS event-group ISR-safe
+  bit-snapshot model tests, four RTOS event-group
+  clear-from-ISR model tests, six RTOS event-group
+  clear-bits model tests, ten RTOS event-group
+  wait-operation model tests, seven static/dynamic RTOS
+  event-group creation model tests, seven RTOS timer
+  pended-callback ISR submission model tests, seven RTOS timer
+  callback-context getter model tests, seven RTOS timer
+  active-state query model tests, seven RTOS timer list/queue
+  runtime-initializer model tests, seven RTOS timer-list
+  overflow-switch model tests, eleven RTOS timer-command drain
+  model tests, eight RTOS timer-list insertion model
+  tests, seven RTOS tick/list-switch sampler
+  model tests, seven RTOS active-timer-list
+  query model tests, nine
+  RTOS timer wait-or-expire model tests, eight RTOS timer-service task-loop
+  model tests, eight RTOS expired-timer processor model tests, eight RTOS
+  auto-reload catch-up model tests, eight RTOS timer command-submission
+  model tests, seven shared RTOS
+  timer-initializer model tests, seven static-control-block RTOS
+  timer-object model tests, six dynamic RTOS
+  timer-object model tests, six onboarding runtime-initializer
+  model tests, six peer onboarding-process
+  synchronization model tests, six peer onboarding-flag
+  reply model tests, seven peer onboarding-flag notification
+  model tests, six onboarding-flag update
+  model tests, six deferred onboarding-flag
+  persistence model tests, six protobuf onboarding
+  wear-status model tests, five protobuf onboarding
+  control-state model tests, five tracepoint
+  timer-bootstrap model tests, twelve
+  tracepoint file-I/O/rotation/commit model tests, nine tracepoint
+  storage/CRC/path/state model tests, eight tracepoint
+  deferral/capture-retry model tests, six boot identity model tests, five
+  wall-clock validity model tests, five
+  monotonic-seconds model tests,
+  eighteen SARC
+  state-header/staging/finalization/persistence tests, eight lens-status
+  publisher/template-4/state-accessor/query
+  model tests, five eight-byte
+  lens/status packet reporter model and edge-case tests, five ARM EABI
+  signed/unsigned 64-bit division/modulo model and edge-case tests, the six
+  resolved-address host-oracle cases, five database-delete-all host-oracle
+  cases, six address-lookup cases, six LTK-request-lookup cases, seven
+  record-accessor cases, seven record-metadata cases, five resolving-list
+  reload cases, seven record-clearing cases, eight protected-MRAM verifier
+  cases, seven record-status cases, six timestamp-update cases, six
+  timestamp-renumbering cases, seven persistent-record status cases, seven
+  pairing-failure cases, seven connection-indexed record-clearing cases, four
+  all-record diagnostic-iterator cases, five EFS CRC cases, four protected
+  byte-program cases, and all stock/target integration guards.
+- The exact Apple Clang 21.0.0 output, exported function offsets, source hashes,
+  overlay hash, component hash, and package hash are pinned.
+- Every generated branch is decoded after encoding and must land on the
+  intended exported function. Redirected function replacements use
+  non-linking `B.W` entries and NOP-fill the entire former stock body. Exact
+  source-copy replacements must compile to precisely the declared stock span.
+- The littlefs startup cluster is host-executed across directory
+  present/create/already-exists/failure paths, mount and format recovery,
+  boot-count persistence, read/program/erase success and failure, exact flash
+  address calculations and diagnostics, and sync. Raw scans pin all three
+  direct-caller sets, all four configuration-table callback words, and the
+  absence of alternate or interior entries.
+- The CMSIS event-loop cluster is host-executed across object creation and
+  existing-worker replacement, worker callback/error iterations, exact
+  queue-event layout and timeout forwarding, timer expiry and minimum
+  selection, saturating delay subtraction, the distinct `0x7FFFFFFF`
+  sentinel, worker-start waiting, immediate/delayed insertion, multi-slot
+  removal, and timer/tick rescheduling. Raw scans pin all 198 direct calls,
+  both initializer `ADR.W` callback bindings, the two-byte alignment, the
+  204-byte dependency pool, and absence of alternate or interior entries.
+- The BLE connection-parameter scheduler is host-executed across immediate
+  update, retry-counter wrap, failed/not-ready rescheduling, both mode-derived
+  delays, exact callback/argument forwarding, and fresh diagnostic status
+  reads. Raw scans pin all three direct calls and the absence of alternate or
+  interior entries.
+- Both BLE connection-parameter mode selectors are host-executed across their
+  25- and 72-unit threshold boundaries, exact interval/timeout conversion,
+  defaults-table forwarding, disabled and fully enabled diagnostic gates, and
+  all distinct structured/trace identities. Raw scans pin their one- and
+  two-call caller sets and the absence of alternate or interior entries.
+- The BLE connection-mode coordinator is host-executed across invalid context,
+  both selector short-circuits, pending-state clearing and 10,000-tick retry,
+  command allocation, exact packet layout, endpoint forwarding, and
+  diagnostics. Its sole raw caller is pinned, and the apparent interior call
+  produced by decoding the second halfword of an unrelated `UDIV`/`MLS`
+  sequence is explicitly rejected.
+- The delayed BLE callback is host-executed across its controller, context,
+  and role rejection paths plus successful allocation and send. The oracle
+  pins the `0xB9` packet, endpoint, diagnostics, low-mode truncation, original
+  return-register ABI, all three stored Thumb entry words, and absence of
+  interior references.
+- The remote connection-parameter handler is host-executed across parameter
+  publication, secondary-mode selection, current/previous/active state,
+  delayed callback removal, and both role-gated retry branches. All eight
+  structured/trace diagnostic pairs, maximum conversion arithmetic, its sole
+  caller, and absence of alternate or interior entries are pinned.
+- The connection-update event state machine is host-executed across
+  non-kind-one rejection, both special statuses, every 25/72-unit threshold
+  boundary, matching state publication, zero/nonzero-status mismatches, and
+  2/4/10/30/60-second callback paths. Its sole caller and the false interior
+  decode inside an unrelated `SDIV`/`MLS` pair are pinned.
+- The BLE connection-global initializer is host-executed across nonzero and
+  zero overwrite cases. Its endpoint byte, caller-supplied connection and
+  state pointers, fixed defaults-table pointer, sole caller, five backing
+  literal words, and absence of alternate or interior entries are pinned.
+- The five adjacent BLE connection-mode control helpers are host-executed
+  across mode readiness, optional 60-second long-mode restoration, byte
+  truncation, retry-disabled and timestamp-disabled reset, the 29,999/30,000
+  tick holdoff boundary, exact holdoff diagnostics, remote-active clearing,
+  and arbitrary long-mode delays. Raw scans pin all 28 callers, four retained
+  pools, and the absence of alternate or interior entries.
+- The BLE connection-event dispatcher is host-executed across null/default
+  messages and all seven recovered message classes. Tests cover identifier
+  mapping, profile defaults, callback cancellation, remote/event/coordinator
+  forwarding, parameter scheduling, argument truncation, and exact
+  diagnostics. Its sole caller and absence of alternate/interior entries are
+  pinned.
+- The two MRAM persistence helpers are host-executed across non-word-aligned
+  zero sizes, prefix-only clearing, word-count truncation, both protected flag
+  selector values, equal-value idempotence, template copying, success/error
+  diagnostics, and exact PRIMASK restoration. Raw scans pin their one and two
+  callers, retained 74-byte literal pool, and absence of alternate/interior
+  entries.
+- The protected-MRAM record diagnostic dump is host-executed across its null
+  diagnostic, byte-index truncation, ignored first argument, all 31 record
+  groups, enum/boolean label mappings, four exact hex ranges, and both sparse
+  halfword tables. Raw scans pin its five callers, sole internal wide branch,
+  retained 46-byte front-literal pool, and absence of external interior
+  entries.
+- The protected-MRAM record synchronizer is host-executed across zero, one,
+  and multiple qualifying records, flag short-circuiting, equal-key
+  exclusion, pointer reload between passes, bit-two preservation, timestamps,
+  publication pointers/order, final-record marking, batch commit, and exact
+  structured/trace diagnostic gates. Raw scans pin its five callers, the
+  following 112-byte shared diagnostic pool, absence of alternate/interior
+  entries, and the
+  target wrapper's exact `r0`-through-`r3` preservation sequence.
+- The protected-MRAM-to-RAM record-list loader is host-executed across zero
+  and erased first-slot sentinels, sentinel termination after prior records,
+  exact-active rejection, zero-key masks, mask mismatch repair, persistence
+  callback mutation, valid record copying, forced destination flags, invalid
+  destination clearing, all four key bits and comparison order, IRK hex
+  dumps, all ten slots, loaded counts, and exact diagnostic gates and
+  arguments. Raw scans pin its sole caller, following 38-byte diagnostic
+  continuation pool, and absence of alternate or interior entries. Target
+  checks pin its source cache-invalidate and memory-compare links and the
+  read-only key-offset table.
+- The protected-MRAM single-record programmer is host-executed across thread
+  and handler mode, all first/second transaction result combinations,
+  unconditional second-half programming, byte-index destination arithmetic,
+  fixed key and word counts, cache/yield/program ordering, and exact
+  structured and fallback-trace gates. Raw scans pin its three callers,
+  following 192-byte literal pool, and absence of alternate or interior
+  entries. The target check pins its direct source cache-invalidate link.
+- The protected-MRAM application record-database updater is host-executed
+  across first existing matches, all-zero/all-erased identifiers, mixed
+  zero/erased nonempty identifiers, first empty slots, direct reusable slots,
+  strict oldest-inactive ties, same-type active priority, active-any fallback,
+  no-candidate failure, and post-write verification success and mismatch.
+  Tests pin cache/compare/program/dump ordering, all selection pointers and
+  indices, the stock success return after verification failure, and every
+  recovered structured/trace diagnostic path and bit-four fallback gate. Raw
+  scans pin its ten direct callers, 26-byte following literal pool, and
+  absence of alternate or interior entries. Target checks pin direct links to
+  source cache invalidation, memory comparison, single-record programming,
+  and record diagnostic dumping.
+- The protected-MRAM record-deactivation adapter is host-executed to prove
+  ordered clearing of flags `0x2F` and `0x30`, source database persistence,
+  retained NVM verification, same-pointer forwarding, and propagation of the
+  verifier result even when the updater returns failure. Raw scans pin its
+  three callers and absence of alternate or interior entries. Target checks
+  pin the direct source updater link and the fixed `0x0047B731` retained
+  verifier tail.
+- The record-activation and conditional-deactivation adapters are
+  host-executed across byte-mask truncation, ordered flag mutation, unsigned
+  timestamp wrap, exact-one success diagnostics, unconditional verification,
+  zero-only confirmation gating, same-pointer forwarding, and incidental
+  stock return suppression. Raw scans pin both caller sets and the retained
+  10-byte activation literal pool.
+- The five protected-MRAM record-query helpers are host-executed across exact
+  table membership, flag combinations, untyped-record detection, null and
+  arbitrary-pointer traversal, low-byte type truncation, confirmation
+  independence, strict first-minimum selection, and the `UINT32_MAX`
+  exclusion. Raw scans pin all caller sets, all five complete bodies, three
+  intervening literal pools, and the absence of alternate or interior
+  entries; target hashes pin all five relocation-free compiled functions.
+- The protected-MRAM record allocator is host-executed across first-free
+  selection, exact 200-byte zeroing, low-byte owner/type mapping, counter
+  wrap, the five-record eviction threshold, oldest-record release and
+  deactivation ordering, null-oldest continuation, full-table failure, and
+  both diagnostics. Raw scans pin its three callers, complete body, six-byte
+  following gap, and absence of alternate or interior entries; target
+  relocations prove that counting, oldest selection, deactivation, and
+  zeroing link directly to source-owned functions.
+- The protected-MRAM record initialization wrapper is host-executed to pin
+  cache invalidation, record loading, synchronization, all ten diagnostic
+  pointer/index pairs, exact call order, and ignored cache status. Raw scans
+  pin its sole caller, complete body, following 50-byte literal pool, and the
+  absence of alternate or interior entries; target relocations prove that all
+  four operations link directly to source-owned functions.
+- The Cordio application-database address resolver is host-executed across
+  null input, both halves of the exact RPA classification, all active,
+  confirmation, IRK, and mapped-owner filters, first-valid-IRK submission,
+  first matching paired record, full-table failures, dependency arguments,
+  and all six diagnostic pairs. Raw scans pin both callers, the complete
+  stock body, the following 30-byte pointer pool, no alternate or stored
+  entries, and one data-only false interior-call signature; the compiled
+  target is relocation-free and hash-pinned.
+- The Cordio resolved-address callback is host-executed across low-16-bit
+  index truncation, invalid index and record paths before address use, both
+  LTK outcomes, exact diagnostic arguments and address-byte order, the trace
+  fallback read, and the stock valid-path null-address behavior. Raw scans
+  pin its sole caller, complete body, following 14-byte pointer pool, next
+  function prologue, and the absence of alternate, interior, or stored
+  entries; the compiled target is relocation-free and hash-pinned.
+- The Cordio database delete-all adapter is host-executed across all 2,000
+  record bytes, exact flag/address clearing and persistence order, structured
+  and trace diagnostics, and both trace gates. Raw scans pin its sole caller,
+  complete body, following pointer pool, and absence of alternate, interior,
+  or stored entries; its persistence tail jump resolves directly to source.
+- The adjacent Cordio address and LTK-request lookups are each host-executed
+  across 200 deterministic randomized record layouts plus focused owner or
+  diversifier truncation, pre-comparison gates, first-match behavior,
+  timestamp refresh and wrap, no-match scans, and null-pointer progression.
+  Raw scans pin their five and one direct callers, complete bodies, following
+  14-byte and 82-byte pools, and absence of alternate, interior, or stored
+  entries. The LTK lookup links its exact eight-byte comparison directly to
+  the source memory comparator.
+- The adjacent Cordio key, peer-address, and peer-address-type accessors are
+  host-executed across all four key classes, mask misses, unsupported and
+  combined types, security-level output rules, byte truncation, both null
+  contracts, and 500 deterministic randomized records. Raw scans pin ten,
+  one, and one direct callers and prove the absence of alternate, interior,
+  and stored entries; all three emitted targets are relocation-free.
+- The following Cordio key writer is host-executed across exact local/peer
+  LTK, IRK, and CSRK layouts, invalid types, mask preservation, sign-counter
+  reset, exact-one persistence and call order, every structured/trace
+  diagnostic, dynamic trace-event encoding, independent gates, and 500
+  randomized records. Raw scans pin both callers, the complete 1,242-byte
+  body, every literal word, the following function boundary, no alternate
+  branch entry, and one documented unaligned pointer-shaped byte sequence.
+  Its persistence relocation resolves directly to the source database updater.
+- The five Apollo510 cache-controller functions totaling 736 stock bytes are
+  replaced by decoded `B.W` entries. Host execution substitutes every cache
+  register and barrier, covering powered-off failures, already-enabled paths,
+  instruction-cache invalidate/control sequencing, prefetch masking,
+  inclusive set/way traversal, low-byte clean selection, whole-cache and
+  unaligned range operations, signed zero/negative-size no-ops, and exact
+  DSB/ISB order. Raw call scans pin 5/4/1/17/6 branch-shaped callers and prove
+  that no stored Thumb pointers target the entries and no decoded `BL` or
+  `B.W` targets a function interior. The sole pointer-shaped interior value
+  is pinned as a member of the numeric lookup table at `0x006A414C`.
+- The complete 104-byte application memory comparator is replaced by a decoded
+  `B.W` entry while all 64 raw `BL` callers retain its ABI. Host execution
+  covers both pointer alignments, zero and equal ranges, every useful mismatch
+  position, exact byte-difference results, and normalized aligned-word
+  minus-one/plus-one results. No branch or stored Thumb word targets its
+  interior.
+- The complete 86-byte Apollo510 secure-OTA addition routine is replaced by a
+  decoded `B.W` entry while its sole raw `BL` caller retains the stock ABI.
+  Host execution covers both MRAM bounds, the exact eight-image guard and
+  count-nine behavior, pending-bit encoding, descriptor selection, count
+  increment before programming, backend failure propagation, ignored image
+  magic, and successful pointer-register update. No branch or stored Thumb
+  word targets its interior; the following ten-byte literal pool remains
+  pinned official data.
+- The complete 120-byte BLE message-transmit thread entry is replaced by a
+  decoded `B.W` entry. Its sole stored Thumb pointer remains at
+  `0x00475E68`; no decoded branch or stored word targets the body interior.
+  Host execution covers the five-hook lifecycle order, consecutive valid flag
+  dispatches through `0x7FFFFFFF`, zero and CMSIS error returns, exact wait
+  mask/options/timeout, conditional log and trace gates, diagnostic constants,
+  ignored thread argument, and the otherwise-indefinite retry boundary.
+- The following BLE transmit lifecycle slice through `0x00475333` is
+  source-owned too. Both two-byte no-op hooks compile exactly to the stock
+  `BX LR`; the intervening 40-byte queue initializer uses a decoded `B.W`.
+  Host execution pins the state object, 150×4-byte null-attribute queue
+  request, handle publication, untouched neighboring state, and allocation
+  failure callback. Each stock function has exactly one caller and no stored
+  entry or interior pointer.
+- The four adjacent BLE transmit setup/thread-lifecycle bodies through
+  `0x0047538B` are source-owned. Host execution pins stage index 8, the exact
+  CMSIS thread entry/argument/attributes tuple, handle publication, creation
+  failure, conditional termination, and handle clearing. The creator's stock
+  pointer remains at `0x007940C8`; exhaustive scans find no interior target.
+- The adjacent BLE transmit queue drain, thread-flag router, and wait handler
+  plus the queue-clear routine through `0x0047564D` are source-owned. Host
+  execution covers all four
+  command layouts, unknown/empty/error queue outcomes, message freeing,
+  boolean and 16-bit normalization, both flag bits and their order, exact
+  diagnostic constants and gates, stage index 8, and the infinite-wait
+  boundary, plus null-handle clearing, initial/final queue depth, returned
+  freed count, and the two ASCII pointer-shaped false positives. The active TX
+  thread and router link directly to source handlers.
+- The following 1,002-byte BLE message-transmit enqueue core through
+  `0x00475A37` is source-owned. All eight raw callers retain its six-argument
+  ABI; no `B.W`, stored entry word, or control-flow target reaches its
+  interior. Host execution covers null payload/queue and allocation failure,
+  all four command layouts, exact alignment and 16-bit length behavior,
+  stream reset, odd-capacity half-full backpressure, invalid transport
+  behavior, queue success/failure, source-owned free paths, diagnostic
+  gates/arguments, and bit-22 thread wakeup.
+- The adjacent 110-byte direct protobuf-over-BLE wrapper through
+  `0x00475AA5` is source-owned. Its three raw callers retain the four-register
+  ABI; no wide branch, stored entry word, or interior target exists. Host
+  execution covers exact byte/length truncation, source enqueue forwarding
+  and result propagation, OTA-active suppression and zero return, diagnostic
+  level short-circuiting, and every structured/trace constant.
+- The following 110-byte direct protobuf-notification-over-BLE wrapper through
+  `0x00475B13` is source-owned too. Its two raw callers retain the same
+  four-register ABI with subtype one; host execution covers its distinct
+  function, line, structured-message, and trace-message constants in addition
+  to forwarding, suppression, and fallback diagnostic behavior.
+- The following 262-byte guarded protobuf-over-BLE sender through
+  `0x00475C19` is source-owned too. All 76 raw callers retain its four-register
+  ABI and no alternate or interior entry exists. Host execution proves OTA
+  rejection with status zero, left-lens rejection with status eight, exact
+  diagnostic gates/constants, enqueue suppression on both rejections, exact
+  byte/16-bit truncation on acceptance, and source-enqueue result propagation.
+  The stock not-auth diagnostic is unreachable behind a compile-time true
+  gate and is intentionally absent from the source body.
+- The following 324-byte guarded protobuf-notification sender through
+  `0x00475D5D` is source-owned too. All 39 raw callers retain its
+  four-register ABI, including six callers omitted by Ghidra's call graph.
+  Host execution proves OTA precedence and zero return, left-lens and
+  non-command-role status-eight rejection, exact diagnostic gates/constants,
+  suppression of later predicates and enqueue, subtype-one forwarding,
+  byte/16-bit truncation, and enqueue-result propagation. Its compile-time
+  true auth block is unreachable and omitted from source.
+- The 44-byte application-wide variadic logging dispatcher is replaced by a
+  decoded `B.W` entry while all 731 direct callers retain the original ABI.
+  Target checks pin handler word `0x200742F0`, context `0x2006B930`, retained
+  formatter core `0x00473036`, the AAPCS variadic cursor, and a relocation-free
+  76-byte source body. Host execution proves the disabled gate, six register-
+  and stack-carried arguments, format/context identity, formatter-before-
+  handler order, result propagation, and the stock handler reload after
+  formatting.
+- The complete 188-byte unsigned 64-bit divide-by-ten runtime is replaced by
+  a decoded `B.W` entry. Ghidra and a raw call scan agree that its only stock
+  callers are the decimal digit counter and writer, which are themselves
+  source-replaced. The 158-byte source body retains the two-word input and
+  `r0/r1` quotient ABI, uses a fixed 64-step binary division, has no external
+  relocations, and matches integer division across 14 boundary values plus
+  1,024 deterministic 64-bit inputs.
+- Eight adjacent non-floating logging helpers totaling 438 stock bytes are
+  replaced by decoded `B.W` entries. Host execution covers zero through
+  `UINT64_MAX`, signed `INT64_MIN...INT64_MAX`, deterministic random decimal
+  and upper/lower hexadecimal output, null-destination sizing, signed parser
+  consumption and 32-bit wraparound, nullable string length, and positive,
+  zero, and negative padding. The source uses 32-bit long division, and target
+  relocation checks prove it has no compiler 64-bit division dependency; its
+  sole relocation is the signed digit counter's internal jump to the unsigned
+  source counter.
+- The complete 952-byte logging formatter core is replaced by a decoded
+  `B.W` entry. Host execution covers literals, unknown conversions, `%%`,
+  optional CRLF expansion, `%c/%s/%d/%i/%u/%x/%X/%f/%F`, zero and signed
+  widths, static and `*` precision, single-`l` and aligned `ll` arguments,
+  null-output sizing, all float fallback results, and the stock negative
+  string-width and null-output-float quirks. Target checks distinguish two
+  executable callers from one branch-like literal-pool word, pin all 13
+  source-helper relocations, and prove the float call uses fixed Thumb entry
+  `0x00472EF7` plus the same `VCVT.F32.F64` instruction as stock without
+  `__aeabi_d2f`.
+- The complete 320-byte floating-point logging helper is replaced by a
+  decoded `B.W` entry while its sole hard-float caller at `0x0047339E`
+  remains unchanged. Target checks pin its one relocation to the source
+  decimal writer. Host execution uses an independent IEEE-754 bit-level
+  oracle across zero, range errors, capacity and precision limits, rounding
+  and carry behavior, infinities, NaNs, and 512 deterministic float32
+  patterns.
+- The three complete LVGL tick helpers totaling 72 stock bytes are replaced
+  by decoded `B.W` entries. Source preserves state `0x2006F600`, callback
+  offset eight, the stable-read handshake, increment wraparound, and elapsed
+  subtraction modulo `2^32`; the elapsed helper's only relocation resolves to
+  the source getter. Host execution covers fallback and callback clocks,
+  increment overflow, callback-path state preservation, and elapsed
+  wraparound. Ghidra resolves 1/10/5 executable callers while raw scans also
+  classify five branch-like words in the `0x005C0000` data/literal area.
+- The complete 12-byte LVGL zero-fill wrapper is replaced by a decoded `B.W`
+  entry. Its 22-byte source body has no relocations or opaque memory-runtime
+  dependency. Host execution checks null-plus-zero length, zero, one, 31, and
+  64-byte clears with leading and trailing guards; Ghidra and the raw scanner
+  agree on its sole caller at `0x00473512`.
+- The complete 124-byte LVGL global-state initializer is replaced by a decoded
+  `B.W` entry while its sole caller at `0x00473566` retains the original ABI.
+  Its 162-byte source body links only to the source zero-fill function and
+  preserves the retained list initializer, finalize hook, diagnostic logger,
+  and fatal path at reviewed fixed Thumb addresses. Host execution verifies
+  the 492-byte clear, both embedded-list pointers and node sizes, all five
+  recovered default fields, finalization cookie, trailing guards, and exact
+  null-pointer diagnostic arguments.
+- The complete 222-byte LVGL subsystem initializer is replaced by a decoded
+  `B.W` entry while its sole caller at `0x00444696` retains the original ABI.
+  Its 390-byte source body calls the source global initializer directly and
+  exposes all 17 retained subsystem entries and their arguments as reviewed
+  fixed Thumb ABIs. Host execution checks exact ordering, normal completion,
+  the already-initialized short circuit, UTF-8 warning, big-endian fatal path,
+  all diagnostic constants, and that flag `0x2006F548` is published only
+  after successful completion.
+- The complete 136-byte full-screen LVGL buffer synchronizer is replaced by a
+  decoded `B.W` entry while its sole caller at `0x0047374E` retains the
+  original ABI. Source owns the fixed `(0,0)...(575,287)` area and its size
+  checks, has no placement relocations, and preserves four fixed display-port
+  calls plus display word `0x200746B8`. Host execution covers rejected and
+  accepted readiness, exact transfer pointers and `576x288` dimensions,
+  completion ordering and byte truncation, and the non-null-area fatal
+  diagnostic path.
+- The complete 142-byte installed LVGL display synchronization callback is
+  replaced by a decoded `B.W` entry. Its unique stored Thumb pointer remains
+  `0x004736F5` at `0x00473908`, preserving registration through the stock
+  setup routine. Source performs the copied-area translation with unsigned
+  wrap semantics, preserves buffer word `0x200746B4`, clears display field
+  `+0x30` on both branches, and calls the source buffer synchronizer directly.
+  Host execution checks exact calls and arguments for readiness values zero,
+  one, and two, including the two begin calls, one end call, null area,
+  completion byte one, and final `576x288` clear.
+- The complete 156-byte LVGL display setup sequence is replaced by a decoded
+  `B.W` entry while its sole caller at `0x0047392E` retains the original ABI.
+  Its relocation-free source body publishes state word `0x200746B8` and
+  buffer word `0x200746B4`, preserves callback pointer `0x004736F5`, and
+  exposes all eleven retained setup and diagnostic entries as reviewed fixed
+  Thumb ABIs. Host execution verifies configuration failure and nonzero
+  success results, exact dimensions/formats/byte count, diagnostic constants,
+  callback registration, global publication, and attach/mode/size/position
+  ordering.
+- The adjacent 76-byte lock, 62-byte unlock, 54-byte mutex initializer, and
+  12-byte display-port initializer are each replaced by decoded `B.W`
+  entries. All five lock callers and three unlock callers retain their
+  original ABIs. Host execution covers missing mutex, acquisition success and
+  timeout, task and IRQ release contexts, successful and failed mutex
+  creation, exact diagnostic tuples, and unconditional initial release. The
+  port initializer links directly to the source mutex initializer and display
+  setup; the other three functions are relocation-free.
+- The adjacent two 12-byte PRIMASK helpers and six-byte task-attribute
+  accessor are replaced by decoded `B.W` entries. Target source emits
+  relocation-free `MRS PRIMASK` followed by `CPSIE i` or `CPSID i`, preserving
+  the previous-mask return value for three enable and 91 disable callers.
+  Host execution checks read-before-update ordering and multiple full-width
+  mask values. The four-caller accessor returns retained pointer
+  `0x00776A3C`.
+- The display-driver thread and 96-by-36 message-queue initializers preserve
+  their retained constructors, attribute pointers, handle publication, and
+  separately reread structured/backend logging flags. Host traces cover null
+  and non-null constructor results, exact arguments, success/failure
+  diagnostics, and bit-zero short-circuiting.
+- The eight-function runtime cluster at `0x00473AA4...0x00473C43` is replaced
+  by decoded `B.W` entries. Host execution proves terminate-before-clear
+  ordering, resource ID 12, timer callback/attributes/publication and
+  2,000-tick control, complete zeroed command-6/8 messages, command-8 byte
+  truncation, zero/minus-one result normalization, and every recovered
+  diagnostic flag sequence. Ghidra and raw scans pin its six direct callers;
+  the callback remains installed through its original Thumb pointer.
+- The complete 490-byte display-driver manager thread is replaced by a decoded
+  `B.W` entry while its retained registered Thumb pointer continues to enter
+  the original address. Host execution bounds the otherwise infinite loop and
+  covers queue failure retry/clear, gate filtering, commands 0–6 and 8,
+  active-state transitions, timer start/stop, six-word forwarding, query
+  output order, byte truncation, and both structured/backend diagnostic paths.
+  Eight reviewed relocations link its initializer, timer, resource, and
+  display-unlock calls directly to source-owned functions.
+- The six-function public display queue-sender family is replaced by decoded
+  `B.W` entries. Host execution verifies every zeroed 36-byte message, command
+  number, brightness word-seven value, six reflash words, fixed queue/
+  priority/timeout tuple, API-specific diagnostic identity, dynamic flag-read
+  sequence, and the reflash sender's zero/-one return. Raw and Ghidra call
+  scans agree that only the six-word reflash sender has direct callers.
+- The ITCM delay-cycle replacement additionally proves reset's second
+  scatter-load record resolves decompressor `0x0043A11E`, 22-byte stream
+  `0x0079430E`, destination `0x00000040`, and a first 14-byte literal run.
+  The builder derives the storage-to-runtime mapping before accepting the
+  exact six-byte copy; a destination-drift fixture is rejected fail-closed.
+- Both application delay wrappers must compile byte-identically to their
+  14-byte and eight-byte stock spans, and their installed `BL` instructions
+  must decode to `0x004807A0`. Target checks also prove timing-sensitive
+  overlay consumers materialize fixed Thumb entry `0x004807A1` and do not
+  relocate calls to the placement-specific builder-input copy.
+- The format type-11 span adapter must compile byte-identically to its 12-byte
+  stock span, and its installed branch must decode to shared writer
+  `0x00490DB6`. Host execution checks descriptor offsets `+0x12/+0x1C`,
+  16-bit length, pointer identity, one call, and unchanged result propagation.
+- The 38-byte shared formatting buffer writer is replaced by a decoded `B.W`
+  entry. Host execution proves prefix-before-payload call order, unsigned
+  32-to-64-bit length promotion, prefix-failure short circuit, exact data
+  pointer and length forwarding, and append-result propagation. Target checks
+  prove the source body calls the source-owned prefix function by a reviewed
+  relocation and materializes only append primitive `0x00490617`.
+- The 92-byte unsigned LEB128 encoder and 40-byte unsigned prefix writer are
+  each replaced by decoded `B.W` entries. Host execution covers one- through
+  ten-byte boundary values against an independent encoder, the direct
+  low/high-word ABI, output identity, one append call, and result propagation.
+  The adjacent 46-byte signed adapter is checked from `INT64_MIN` through
+  `INT64_MAX` against independent zigzag-plus-ULEB128 output. Target checks
+  pin the one-, nine-, and one-caller stock sets, source relocations, and all
+  three decoded redirects.
+- The 98-byte shared append primitive is replaced by a decoded `B.W` entry.
+  Host execution covers zero-length and null-callback paths, overflow and
+  capacity rejection, sticky errors, callback failure/success and arguments,
+  plus callback mutation of committed length. Target checks pin all seven
+  callers and the exact `"stream full"`/`"io error"` stock literal pointers.
+- The 10-byte fixed four-/eight-byte wrappers, 28-byte field-key encoder, and
+  80-byte descriptor adapter are each replaced by decoded `B.W` entries. Host
+  execution checks exact fixed lengths, every descriptor wire-type mapping,
+  field-number/type offsets, invalid types, arbitrary result propagation, and
+  sticky `"invalid field type"` errors. Target checks pin all six stock caller
+  edges and source append/prefix/field relocations.
+- The 24-byte boolean reader and 30-/196-/48-byte boolean, integer, and
+  fixed-width value adapters are each replaced by decoded `B.W` entries. Host
+  execution checks zero/nonzero booleans, unsigned and sign-extended
+  1/2/4/8-byte reads, zigzag encoding, fixed-width dispatch, invalid sizes,
+  downstream result propagation, and sticky `"invalid data_size"` errors.
+  Target checks pin all nine stock caller edges, the error literal, and source
+  relocations to the boolean, prefix, zigzag, and fixed-width dependencies.
+- The 180-byte two-pass submessage writer and 66-/104-/88-byte bytes, string,
+  and submessage-field adapters are each replaced by decoded `B.W` entries.
+  Host execution checks sizing and encoding passes, callback/state/error
+  publication, capacity and size-change failures, static/pointer storage,
+  byte-array bounds, string termination, extension callbacks, and all five
+  sticky errors. Target checks pin all four stock caller edges, the retained
+  generic encoder entry, and source prefix/append/buffer/submessage
+  relocations.
+- The 82-byte generic message encoder is replaced by a decoded `B.W` entry.
+  Host execution checks empty descriptors, regular and extension fields,
+  low-nibble type selection, multi-field iteration, failure short circuits,
+  call order, and argument identity. Target checks pin 125 direct stock call
+  sites and prove the compiled body materializes iterator begin/next entries
+  `0x004D94BB`/`0x004D93D9` and regular/extension encoders
+  `0x00490B1F`/`0x00490BF9` without placement relocations.
+- The 460-byte protobuf-style default-value checker is replaced by a decoded
+  `B.W` entry. Host execution checks every storage/allocation family, scalar
+  zero scans, bytes/string/span defaults, indirect callback policy, and
+  recursively empty/nonempty submessages. Target checks pin its recursive and
+  regular-field callers, special callback literal, source boolean/self
+  relocations, and retained iterator ABI entries.
+- The 490-byte repeated-field encoder is replaced by a decoded `B.W` entry.
+  Host execution checks count bounds, packed fixed/integer sizing and encoding,
+  sizing-error propagation, size-only streams, unpacked iteration, pointer-
+  backed null bytes/strings, low-byte result handling, data-pointer restoration,
+  and partial-progress semantics. Target checks pin its sole caller, both error
+  literals, and ten relocations into source-owned formatting dependencies.
+- The 170-byte regular field encoder is replaced by a decoded `B.W` entry.
+  Host execution checks oneof-tag and optional-presence skips, proto3-default
+  omission, required-null sticky error behavior, indirect/repeated/value
+  selection, and exact downstream result propagation. Target checks pin its
+  two stock callers, source boolean/default/repeated relocations,
+  `"missing required field"` literal, and retained indirect/value helper
+  entries.
+- The 164-byte field-value dispatcher is replaced by a decoded `B.W` entry.
+  Host execution checks null-data and key-failure short circuits, all valid
+  low-nibble types, ignored high type bits, downstream result propagation,
+  invalid-type sticky errors, and argument identity. Target checks pin all
+  three stock callers, the `"invalid field type"` literal, and eight direct
+  relocations to source-owned key/scalar/bytes/string/submessage/span adapters.
+- The 52-byte indirect-field callback helper is replaced by a decoded `B.W`
+  entry. Host execution checks absent, successful, and failing callbacks,
+  success normalization, exact null/output callback arguments, and sticky
+  `"callback error"` behavior. Target checks pin its sole stock caller and
+  prove the compiled body has no placement relocation.
+- A compiler fixture proves the mini-linker resolves an internal Thumb jump
+  plus `-fropi` MOVW/MOVT read-only-data relocations while rejecting other
+  relocation families and writable storage.
+- The source lens-side policy is also compiled for the host and executed
+  against matching-right, matching-left/other, and all four mismatch-position
+  behavioral oracles.
+- The EvenHub lifecycle source is host-executed against substituted state and
+  driver hooks. Tests cover active/shutdown markers, state get/set, keepalive
+  reset, exact-one start, duplicate start suppression, noncanonical no-op,
+  exact-one stop state, duplicate stop suppression, driver selector five, and
+  status-word forwarding.
+- The EvenHub container lookup is host-executed against substituted manager
+  state, search, and diagnostic hooks. Tests cover a valid matching/null
+  result, every missing manager anchor, exact foreground-ID forwarding,
+  diagnostic gate short-circuiting, and every fixed diagnostic argument.
+- The EvenHub page-event callback is host-executed against substituted manager
+  state, opacity, validation, status, display-stop, cleanup, time, queue,
+  lifecycle, lens-side, input-device, and diagnostic hooks. Tests cover all
+  recognized events, unknown/null records, foreground exclusions, dim/restore
+  transitions, lens/active stop gating, validation rejection, every status and
+  input-device mapping, system-exit record construction/order, and diagnostics.
+- The EvenHub common-data callback is host-executed against substituted
+  forwarding, peer-state, registration, status, display-stop, IMU, and
+  diagnostic hooks. Tests cover all event/subtype branches, both validation
+  failures, the stock peer-approved zero-length edge, exact six-argument
+  status propagation, short IMU records, three little-endian float32 values,
+  unknown subtypes, downstream returns, and record/trace gates. Target
+  disassembly confirms that the IMU call uses `s0`, `s1`, and `s2`.
+- The registered EvenHub UI-event handler is host-executed against substituted
+  allocation, display, route, timer, queue, state, IMU, lifecycle, lens-side,
+  and diagnostic hooks. Tests cover create, route, both timer thresholds,
+  destroy, allocation/display failures, state publication/reset, elapsed-time
+  record ordering, exact low-16-bit route forwarding, unknown events, and
+  every fixed diagnostic gate and argument.
+- The five-function UI-module registry layer is host-executed against
+  substituted registry rows, flash/runtime tables, display-manager contexts,
+  memcpy, callbacks, state modes, transitions, activation, and diagnostics.
+  Tests cover both targeted-event modes, terminal-state gates and the
+  state-`0x30` exception, create-event stage/current-service writes, special
+  IDs, mode-1 broadcast close and exclusions, ordered duplicate data IDs,
+  null callbacks, exact callback arguments including low-16-bit events and
+  callback contexts, missing/signed counts, partial rows, the 128-row cap,
+  exact initialization copies, mode lookup, and every fixed diagnostic
+  argument. Target disassembly independently confirms the indirect-call
+  registers, manager offsets, transition ordering, and constant 43-row
+  initialization.
+- The adjacent UI display-mode transition is host-executed against
+  substituted terminal, active/primary state, registry mode, open/lookup,
+  resource, timing, lens-side, peer-transition, event, and diagnostic hooks.
+  Tests cover every rejection class, both mode directions, service-three
+  packet construction and resource classes, exact-one open semantics, all 22
+  poll/delay iterations, 16-bit peer-boundary truncation, full-width
+  replacement arguments, event-five dispatch, and current-service
+  publication. Target disassembly confirms its fixed call addresses,
+  register arguments, two consecutive ten-byte fills, loop bound, and
+  resolved cross-source calls.
+- The startup application-ID helper is host-executed against substituted
+  policy and diagnostic hooks. Tests cover all recognized and rejected input
+  types, system-status low-byte truncation, the exact operation mapping,
+  policy results zero and one, unexpected-policy fallback, returned
+  application IDs, and both diagnostic records. The recovered target listing
+  independently confirms its fixed policy call, branch mapping, and diagnostic
+  constants.
+- The onboarding-state gate is host-executed against three substituted state
+  queries. Tests cover success at every query position, exact call order and
+  short-circuit counts, all-inactive behavior, and noncanonical nonzero
+  results. Stock and source target disassembly independently confirm the
+  three fixed query addresses, full-width exact-one comparisons, and
+  canonical zero/one result.
+- The packed display input-event handler is host-executed against substituted
+  display state, queue, onboarding, terminal, lens, ring, mode, registry,
+  coordinate, system-event, and diagnostic hooks. Tests cover unaligned
+  ten-byte record decoding, every event-ID class, all queue-code and payload
+  mappings, signed coordinates, the deliberate ID-13 no-op, unknown and
+  missing-state diagnostics, onboarding/terminal gating, every long-press
+  display/application path, stage-two early return, active-module dispatch,
+  post-result gating, and current-service writes. Target compilation confirms
+  direct links to the source onboarding, ring, lens, and registry functions.
+- The registered main display thread is host-executed with a bounded
+  one-iteration loop against substituted driver, queue, mutex, input-ring,
+  manager, registry, display-switch, input-handler, timing, power, and
+  diagnostic hooks. Tests cover driver rejection, startup, idle ticks,
+  matching/rejected data, both switch and input results, every close policy,
+  close-all, unknown commands, state-two and invalid-state cleanup, exact
+  24-iteration drains, persistent SRAM state writes, and all driver callback
+  offsets. Ghidra independently confirms the complete 2,558-byte body,
+  `0x004437E1` stored entry, and `0x00444720` initializer registration.
+- The dynamic display callback wrapper is host-executed against a substituted
+  SRAM handler word. Tests prove that it ignores its first argument, forwards
+  only its second, and reloads the current handler for each invocation. The
+  same fixture calls the source setter and proves that it publishes the exact
+  new handler pointer before the next callback. Ghidra independently confirms
+  the complete 12-byte callback, complete 8-byte setter, dynamic handler word
+  `0x200742F0`, callback's lack of direct branch callers, and setter's sole
+  initialization caller.
+- The installed dynamic display handler is host-executed against substituted
+  length-query and sink entries. Tests prove the exact length-then-sink call
+  order, selector one, buffer identity, and propagation of zero and `0x1234`
+  lengths. Ghidra independently confirms the complete 22-byte stock body, two
+  direct call sites, and its installed Thumb pointer `0x005415C3`.
+- The shared string-length source is host-executed for all four pointer
+  alignments and lengths from zero through 4,096 bytes, with exact
+  null-termination and trailing-guard checks. Ghidra independently confirms
+  the complete 54-byte optimized stock body and 88 direct references; target
+  relocation evidence proves the source display handler calls
+  `open_cfw_strlen` directly.
+- The shared character-search source is host-executed across all four pointer
+  alignments, empty and embedded-match inputs, absent characters, terminator
+  searches, high-bit bytes, and signed/high-bit search arguments. Ghidra
+  independently confirms the complete 22-byte stock body and six executable
+  callers; a seventh raw branch-shaped data word is pinned separately, and
+  whole-image scans find no entry jump, external interior target, dependency,
+  or stored Thumb pointer.
+- The shared ASCII case-folding source is host-executed across all 256 low-byte
+  inputs and representative high-word values, including both sign-bit states.
+  Tests prove the exact unconditional unsigned 32-bit `value | 0x20` contract,
+  pin the sole executable caller and its formatting context, and preserve the
+  two-byte prefix alignment and following 3,256-byte formatting-core boundary.
+  Ghidra independently confirms the exact six-byte body and sole call at
+  `0x0048252C`; whole-image scans find no entry jump, external interior target,
+  dependency, or stored Thumb pointer.
+- The integer-formatting source is host-executed against an independent model
+  for signed and unsigned 64-bit extremes, decimal/octal/lowercase and
+  uppercase hexadecimal selection, precision-zero suppression, alternate
+  octal form, precision and field-width zero padding, and digit-pointer
+  bounds. A deterministic 256-case mixed oracle pins full-width specifier
+  behavior and all recovered context mutations. Ghidra independently
+  confirms the complete 276-byte stock body, sole caller at `0x00482478`,
+  source-owned ASCII-fold and 64-bit divmod dependencies, and the caller's
+  non-use of transient return registers. Whole-image scans separately pin one
+  narrow-branch-shaped gap word and three unaligned stored-word false
+  positives, none of which Ghidra indexes as a reference.
+- The adjacent decimal power-scaling source is host-executed bit-for-bit
+  across its reviewed exponent range, finite magnitude edges, zero and
+  negative zero, plus 256 deterministic finite cases. The oracle records
+  every multiply operand and result to pin the stock bit-selection,
+  multiply-before-square order, exponent shift, and zero-exponent no-call
+  identity. Ghidra confirms the complete 70-byte body, both callers at
+  `0x00481F90` and `0x00481F9E`, the `10.0` factor, and both calls to the
+  fixed double-multiply ABI at `0x004D4354`; whole-image wide/narrow branch
+  and stored-pointer scans find no alternate entry or external interior
+  target.
+- The runtime byte-span emitter is host-executed with an instrumented
+  callback across zero length, all byte-extension edges, state threading,
+  immediate and later failures, count wrap, and 256 deterministic spans.
+  Ghidra confirms the complete 46-byte body, context fields at `+0x08` and
+  `+0x2C`, indirect callback ABI, and all five callers. Whole-image scans
+  independently find no entry jump, fixed dependency, external interior
+  target, or stored pointer.
+- The runtime lookup-layout predicate is host-executed across all 256
+  sentinel-byte values and 256 randomized surrounding contexts. Tests pin
+  its three callers, exact 14-byte stock body, and the adjacent retained
+  zero-fill wrapper, including its three callers, sole fixed dependency, and
+  compiler-artifact-sensitive saved-`r7` return register. Whole-image scans
+  find no alternate entry, exterior interior target, or stored pointer in
+  either bounded span.
+- The dual-layout byte-map lookup is host-executed against mutable packed
+  value/key arrays and static eight-byte records. Ten tests cover empty,
+  singleton, duplicate, maximum-count, zero-key, terminator, high-word key,
+  output-immutability, and 512 deterministic randomized cases. Ghidra
+  confirms the complete 104-byte body, the sole public-adapter caller, and
+  the source-owned layout predicate dependency; whole-image scans isolate
+  one byte-unaligned instruction-word coincidence as non-topological data.
+- The property-group index helper is host-executed over all 256 byte values,
+  pinning exact four-key buckets and saturation at group 31. Ghidra confirms
+  the complete 14-byte leaf and sole setter caller; it has no dependency,
+  entry jump, external interior target, or stored pointer.
+- The public byte-map adapter is host-executed across full-width property
+  identifiers and dependency success/miss cases, proving explicit low-byte
+  normalization, output-pointer identity, and return propagation. Ghidra and
+  raw scans pin all 44 direct callers, the sole call to the source lookup,
+  adjacent style mutation/transition boundaries, and one non-topological
+  unaligned stored-word coincidence.
+- The asynchronous display sink is host-executed against substituted channel
+  records, submit, and delay hooks. Tests cover selector truncation, all
+  invalid and inactive gates, exact 56-byte descriptor construction, handle
+  and buffer identity, immediate and delayed acknowledgement, exact-one
+  acknowledgement semantics, submit success/error normalization, 10 µs poll
+  intervals, and the 1,000-poll timeout. Ghidra independently confirms the
+  complete 158-byte body, four direct callers, four 28-byte records rooted at
+  `0x20000D2C`, and its submit/delay dependencies. Target relocation evidence
+  proves the sink now calls the source submit dispatcher directly.
+- The display-operation submit dispatcher is host-executed against substituted
+  operation backends. Tests prove null and invalid handles return two, high
+  handle bits are ignored, operations zero through three route to the exact
+  backend with pointer identity and unmodified result propagation, and all
+  other operation bytes return one without a backend call. Ghidra independently
+  confirms the complete 72-byte body, low-25-bit signature `0x01EA9E06`, sole
+  caller in the display sink, and the four backend mappings. Target relocation
+  evidence proves all four operations now resolve directly to source.
+- The active display submit operation-zero backend is host-executed against
+  substituted start, service, and delay hooks. Tests cover start-error
+  propagation, initially idle completion, indefinite waits, finite timeout
+  with result four and busy-byte cancellation, successful clearing before the
+  limit, timeout precedence when clearing occurs exactly at the limit, exact
+  pointer forwarding, and delay argument 1,000. Ghidra independently confirms
+  the complete 74-byte body, its sole submit-dispatcher caller, handle busy byte
+  `+0x119`, descriptor limit `+0x0C`, and `0xFFFFFFFF` indefinite-wait policy.
+  Target relocation evidence proves its service call now resolves directly to
+  source.
+- Display submit operation one is host-executed against substituted
+  operation-three start, event service, delay, busy-byte, and limit hooks.
+  Tests cover start-error propagation, initially idle completion, indefinite
+  waits, finite timeout and cancellation, completion before the limit,
+  timeout precedence on the limiting poll, a zero limit that does not time out
+  immediately, noncanonical busy values, exact pointer forwarding, service-
+  then-delay ordering, and delay argument 1,000. Fresh Ghidra analysis
+  confirms the complete 74-byte body, its sole dispatcher caller, handle busy
+  byte `+0x11A`, descriptor limit `+0x0C`, and event service/delay calls.
+  Target relocation evidence proves its start call resolves directly to
+  source operation three and its polling call resolves to source event
+  service.
+- Display submit operation three is host-executed against substituted
+  event-side begin and service hooks. Tests prove the optional descriptor
+  completion pointer at `+8` is cleared before begin, a null pointer is
+  accepted without a write, begin errors propagate unchanged, success invokes
+  service exactly once, and handle/descriptor identity is preserved. Fresh
+  Ghidra analysis confirms the complete 42-byte body, both callers, the
+  two-register begin ABI, and its one service call. Target relocations prove
+  both operation one and the submit dispatcher resolve directly to source
+  operation three, whose begin and service calls now resolve to source.
+- The event-side display-operation begin helper is host-executed against a
+  whole-handle state oracle and substituted critical-section hooks. Tests
+  prove exact 28-byte descriptor copying into handle `+0x64...+0x7C`,
+  operation-byte publication at `+0x98`, progress reset at `+0x9C`,
+  preservation of unrelated state, busy error `0x08000005`, noncanonical
+  busy rejection, and exact PRIMASK restoration. Fresh Ghidra analysis
+  confirms the complete 86-byte body and operation three as its sole caller.
+  Target relocation evidence proves operation three calls the source helper
+  directly.
+- The event-side display-operation service is host-executed against
+  substituted FIFO-to-ring fill, direct FIFO read, ring read, progress,
+  callback, and critical-section hooks. Tests cover idle direct/ring paths,
+  partial and complete direct reads, ignored direct-read status, ring
+  availability limiting, low-byte ring status, callback-present and
+  callback-absent failures, the stock failure callback before PRIMASK
+  restoration, progress publication, successful completion, pointer/count
+  identity, and exact call ordering. Fresh Ghidra analysis confirms the
+  complete 198-byte body and three callers. Source relocations prove
+  operations one and three plus the source IRQ-side owner call it directly.
+  Its fill, direct-read, and ring-read dependencies all resolve directly to
+  source.
+- The IRQ-side display transport owner is host-executed against substituted
+  event/operation services, FIFO-position MMIO, special-status helpers,
+  callback-result/finish hooks, and mutable handle-state oracles. Tests cover
+  null and invalid handles, ignored high handle bits, normal status routing
+  and ordering, normal completion-flag publication, special progress with and
+  without a destination pointer, status bits 6/11/12, callback dispatch and
+  clearing, callback-null finish, and special-latch clearing. Fresh Ghidra
+  analysis confirms the complete 176-byte body at `0x0058E860`, its sole
+  caller at `0x0055E30A`, low-25-bit signature `0x01EA9E06`, instance byte
+  `+0x28`, special latch `+0x11B`, and FIFO MMIO base `0x40039000`.
+  Relocations prove its normal event and operation service calls and all four
+  special-transfer helper calls resolve directly to source.
+- The four IRQ special-transfer helpers are host-executed against substituted
+  instance MMIO, handle clock/latch state, delay, FIFO-discard, and event-abort
+  hooks. Tests cover exact finish and bit-12 register masks, FIFO-position
+  clearing, all six prioritized completion errors from both supplied and MMIO
+  status, the no-error path, bit-6 control clearing/restoration with and
+  without saved bit 14, conditional delay calculation, special-latch bit-12
+  cleanup, discard/abort identity and order, and preservation of unrelated
+  register bits. Pinned raw-image disassembly confirms complete stock spans of
+  44, 46, 76, and 176 bytes, MMIO base `0x40039000`, delay numerator
+  `0x00989680`, result constants `0x08000006...0x0800000B`, and every direct
+  caller. Relocations prove the owner calls all four source helpers and the
+  bit-6 helper calls source bit-12 cleanup, FIFO discard, and event abort
+  directly.
+- The shared microsecond delay is exact source assembly adapted from AmbiqSuite
+  SDK 5.1.0 `am_hal_delay_us`. The compiled 92-byte function and literal span
+  is byte-identical to stock SHA-256
+  `10ca20e1a01a30d82ec2e215caaa2abe57087c1e68ff4182e4e848d974326a6f`
+  at `0x004807A0...0x004807FB`; this preserves all 116 stock callers, the
+  Apollo510 performance-frequency test at `0x40021000`, LP/HP scaling,
+  calibrated 15/24-iteration adjustments, and the BL from `0x004807EA` to
+  ITCM `0x00000040`. Host tests cover zero, LP, HP, noncanonical status, and
+  large-duration cases while source relocations prove operation zero,
+  operation one, and IRQ bit-6 cleanup call the overlay implementation
+  directly.
+- The event-side abort/reset helper is host-executed against a whole-handle
+  state oracle and substituted critical-section hooks. Tests prove only busy
+  byte value one is accepted, result seven and no mutation for zero and
+  noncanonical busy values, exact clearing of state
+  `+0x64...+0x9F`, preservation of every unrelated byte, success result zero,
+  one critical-section pair, and exact PRIMASK restoration. Pinned raw-image
+  disassembly confirms the complete 60-byte body at `0x0058DFB2` and its sole
+  bit-6-helper caller. The source relocation removes the event-abort blob call
+  from IRQ cleanup.
+- The shared display-operation start helper is host-executed against
+  substituted lower-level begin and service hooks. Tests prove the optional
+  descriptor completion pointer at `+8` is cleared before begin, a null
+  completion pointer is accepted without a write, begin errors propagate
+  without service, success invokes service exactly once, and both handle and
+  descriptor identity are preserved. Ghidra independently confirms the
+  complete 34-byte body and its
+  two callers: operation zero and dispatcher operation two. Target relocations
+  prove both routes now resolve directly to the shared source helper and its
+  service call resolves directly to source.
+- The lower-level display-operation begin helper is host-executed against a
+  whole-handle state oracle and substituted critical-section hooks. Tests prove
+  exact 28-byte descriptor copying, operation-byte publication, busy/reset
+  writes, preservation of all unrelated handle bytes, busy error
+  `0x08000004` without mutation, one enter/exit pair, and exact restoration of
+  both enabled and already-disabled PRIMASK states. Ghidra independently
+  confirms the complete 106-byte body, its sole start-helper caller, both
+  argument registers, and every state offset. Target relocation evidence proves
+  the source start helper now calls the source begin helper directly.
+- The display-operation service is host-executed against substituted direct
+  transport, ring-buffer write/drain, callback, progress, and critical-section
+  hooks. Tests cover idle direct/ring paths, partial and complete direct
+  transfers, direct pointer/count identity, ring availability and remaining
+  limits, low-byte status truncation, callback-present and callback-absent
+  write failures, progress publication, callback result/context/order,
+  completion, busy-state changes, and exact PRIMASK restoration. Ghidra
+  independently confirms the complete 228-byte body, all state offsets, and
+  three callers; source relocations prove the start and operation-zero paths
+  call it directly while the third stock caller retains the original entry
+  redirect. Its direct-write, ring-write, and ring-drain dependencies all
+  resolve directly to source.
+- The direct display FIFO reader is host-executed against substituted instance,
+  FIFO-status, and data-register hooks. Tests cover zero-length and initially
+  empty requests, partial and complete reads, nullable destinations and count
+  outputs, high-bit byte values, exact instance propagation, every data-error
+  bit in `0x00000F00`, preservation of the failing destination byte, and the
+  accepted count on error. Fresh analysis confirms the complete 70-byte body,
+  handle instance word `+0x28`, MMIO base/stride, empty status bit 4, data
+  register, `0x08000000` error, and all six stock callers.
+- The 14-byte FIFO-discard wrapper is host-executed against a substituted
+  direct reader. Tests prove the exact `(handle, NULL, 32, NULL)` call and
+  unchanged propagation of success, hardware error, and arbitrary results.
+  Its five stock callers retain the guarded entry redirect, while target
+  relocation evidence proves the wrapper calls the source reader directly.
+- The direct display FIFO writer is host-executed against substituted instance,
+  FIFO-status, and data-register hooks. Tests cover zero-length requests,
+  immediate-full and partial-full exits, all byte values including high-bit
+  values, exact accepted counts, optional count output, instance identity, and
+  the routine's constant-zero result. A fresh Ghidra import independently
+  confirms the complete 52-byte body, handle instance word `+0x28`, MMIO base
+  `0x40039000`, instance stride `0x1000`, status bit 5 at register `+0x18`,
+  and its two callers. Source relocation evidence proves the operation service
+  and source ring drain now call the source writer directly.
+- The display FIFO-to-ring fill helper is host-executed against substituted
+  critical-section, FIFO-read, and ring-write hooks. Tests cover lower-reader
+  error propagation without publication, zero- and nonzero-length successful
+  reads, exact 32-byte capacity and handle/buffer/count identities, acceptance
+  of every nonzero ring-write result, mapping a zero result to `0x08000001`,
+  exact call order, and restoration of both prior PRIMASK states. Fresh
+  analysis confirms the complete 64-byte body, sole event-service caller at
+  `0x0058E628`, reader `0x0058E2D8`, embedded ring at handle `+0x4C`, and
+  ring-write call. Source relocation evidence proves both reading and
+  publication resolve directly to source.
+- The display ring-drain helper is host-executed against substituted critical,
+  FIFO-status, ring-read, and direct-write hooks. Tests cover an initially full
+  FIFO, an empty ring, complete multi-byte draining including high-bit bytes,
+  fullness reached between bytes without consuming another ring byte,
+  nonzero direct-writer status propagation, exact handle/ring/count/instance
+  identity, and restoration of enabled and already-disabled PRIMASK states. A
+  fresh Ghidra import independently confirms the complete 80-byte body, its
+  sole service caller, ring state at `handle+0x34`, instance word `+0x28`,
+  MMIO status check, ring-read entry `0x005300E2`, and direct-writer call.
+- The generic ring-write primitive is host-executed against a complete ring
+  layout and substituted critical-section hooks. Tests cover zero-byte and
+  unsigned-multiplication-wrap requests without dividing by zero, insufficient
+  capacity without mutation, contiguous and wrapped multi-byte copies,
+  null-source publication without buffer mutation, byte-count availability
+  updates, and exact restoration of both prior PRIMASK states. Fresh Ghidra
+  analysis confirms the complete 94-byte stock body and all three callers,
+  including transport function `0x004B4A02` whose `(ring, NULL, 1)` call
+  publishes an element already written into ring storage. Source relocation
+  evidence proves the source FIFO-to-ring fill helper and display-operation
+  service call the source primitive directly.
+- The generic ring-read primitive is host-executed against a complete ring
+  layout and substituted critical-section hooks. Tests cover zero-byte and
+  unsigned-multiplication-wrap requests without dividing by zero, insufficient
+  availability without mutation, contiguous and wrapped multi-byte copies,
+  null-destination discard, byte-count availability updates, and exact
+  restoration of both prior PRIMASK states. Fresh Ghidra analysis confirms
+  the complete 90-byte stock body and all three callers; source relocation
+  evidence proves the source ring drain calls the source primitive directly.
+- The adjacent display and input preparation helpers are host-executed against
+  substituted binding, record-reset, event, and display-command hooks. Tests
+  check exact call order and selectors, the bound source callback, persistent
+  `0x20073B48` record, preservation of unspecified reset bytes, exact field
+  writes at offsets 0, 2, 12, and 16, and all downstream arguments. Ghidra
+  independently confirms both complete stock bodies and their sole caller in
+  the display initializer.
+- The complete display-subsystem initializer is host-executed against
+  substituted driver, queue, ring, mutex, thread-registration, and diagnostic
+  hooks. Tests cover exact initialization order, every queue and thread
+  configuration word, ring descriptor/storage/capacity, direct source-thread
+  registration with null context, all three failure cutoffs, retained partial
+  ownership on later failures, return values, and diagnostic constants.
+  Target disassembly confirms that the registered Thumb pointer resolves to
+  `open_cfw_ui_display_thread` at `0x00795B79`.
+- The EvenHub mode-2 adapter is host-executed against a substituted decoder,
+  covering every null/zero guard, exact argument reordering, positive result
+  propagation, and non-positive clamping. The source LZ4 decoder and real
+  adapter path are checked against empty, literal, match, overlapping-match,
+  extended-length, capacity, null, malformed-input, and output-guard oracles.
+  During implementation, their valid output and success/error classification
+  were also compared across 20,700 cases with upstream `liblz4`. The complete
+  byte-run decoder and its public wrapper are checked against fixed cases plus
+  128 deterministic generated streams, including zero-count pairs, odd tails,
+  exact-capacity output, truncation, 255-byte runs, and guard-byte
+  preservation.
+- The source GPIO state reader is host-executed against substituted input,
+  output, and enable register banks, including selector truncation, GPIO-number
+  truncation, bit extraction, and the invalid-selector no-write path.
+- The source GPIO state writer is host-executed against all output and enable
+  register families, including all six selector paths, both atomic toggles,
+  input truncation, and the unrecognized-selector no-op.
+- The source GPIO pin-configuration function is host-executed against
+  substituted configuration registers and critical-section hooks, covering
+  range and validation errors, both successful pin classes, key relocking, and
+  interrupt-mask restoration.
+- The GPIO pin-configuration reader is host-executed against the same
+  substituted register array, covering a successful read, range failure, null
+  destination, and no-write-on-error behavior.
+- The GPIO interrupt-index helper is host-executed across word boundaries, the
+  maximum physical pin, and an unvalidated 32-bit input.
+- The GPIO interrupt controller is host-executed against two substituted
+  seven-word register banks and critical-section hooks, covering every
+  individual/mask control, channel 0/1/both, validation errors, enum
+  truncation, upstream invalid-channel behavior, and interrupt-mask
+  restoration.
+- The TLSF replacement is compiled and inspected as ARM ELF32 with the G2
+  ILP32 constants pinned. A separate import-free wasm32 module executes the
+  same allocator through pool creation/access, allocation, aligned allocation,
+  block-size queries, grow/shrink reallocation with data preservation,
+  freeing/coalescing, exhaustion, consistency checks, and 5,000 deterministic
+  randomized operations. The 9,018-byte proof module has SHA-256
+  `198e6d5bae33d502605ac1696f764a4bd0cf1c7653433315c79afa862228c3eb`.
+  Native host execution is retained as a semantics lane only and is not
+  counted as 32-bit ABI evidence.
+- GPIO interrupt status and clear are host-executed against substituted
+  enable/status/clear banks, covering both channels, filtered and unfiltered
+  status, all clear-channel modes, invalid and truncated enums, no-write error
+  behavior, the post-clear status read, and critical-section restoration.
+- The IRQ-specific status and clear helpers are host-executed across all four
+  channel range boundaries, both invalid gaps/outside boundaries, enabled
+  filtering and boolean truncation, destination preservation on error, and
+  every selected clear-register destination.
+- Handler registration and service are host-executed against substituted
+  14-by-32 handler and argument tables. Tests cover channel 0/1/both,
+  channel truncation, the stock unvalidated GPIO-number alias, exact IRQ-row
+  mapping, least-significant-bit-first indirect callback dispatch, argument
+  forwarding, null-handler continuation, zero-mask success, and invalid IRQs.
+- The three FreeRTOS task getters and four newly added littlefs leaves pass 55
+  focused upstream-oracle, ABI, stock-span, target-body, manifest, and source
+  hash tests. The final six-leaf bootloader overlay passes ten provider,
+  redirect, CRC, ownership, and mutation-boundary tests. After reviewing and
+  repinning every relocation-sensitive compiled-body hash displaced by this
+  increment, all ten affected Apollo-main aggregate methods pass on rerun.
+  The immediately preceding whole-repository release gate passed all 1,706
+  tests in 828.498 seconds.
+- The preceding queue-creation release gate passed all 244 Apollo-main aggregate
+  tests in 526.769 seconds and all 1,763 repository tests in 873.770 seconds.
+  All six providers, the three manifests, the authenticated upstream
+  snapshots, and the read-only upstream analyzers pass verification.
+- The preceding queue-wrapper and dual-image AmbiqSuite tranche passed all 245
+  Apollo-main aggregate tests in 524.768 seconds. Its 19 focused wrapper and
+  bootloader tests pass in 1.527 seconds. All six providers, all three
+  manifests, all six authenticated upstream snapshots, and the four
+  then-wired read-only upstream analyzers passed that verification gate.
+- The FreeRTOS interrupt-mask release gate passes all 246 Apollo-main
+  aggregate tests in 534.398 seconds. Its eight dedicated source/instruction/
+  topology tests plus the four read-only assertion-seam analyzer tests pass
+  together in 14.058 seconds. All provider, manifest, authenticated-snapshot,
+  and five standard read-only upstream analyzer checks pass. Three independent
+  reproducibility lanes and both offline main-only inspectors accept that
+  mask-pair artifact without opening a serial endpoint.
+- The preceding dual-image littlefs-utility focused gate passed 37 source,
+  topology, semantics, bootloader, isolated-leaf, and TLSF tests in 44.596
+  seconds. After the final relocation-sensitive digest and provenance repins,
+  all 246 Apollo-main aggregate tests pass in 545.945 seconds and the complete
+  repository passes all 1,788 tests in 906.771 seconds. `make.sh verify`
+  accepts every authenticated snapshot, both source overlays, the littlefs,
+  MSPI, and FreeRTOS analyzers, all six providers, and all three deterministic
+  manifests. Three output-isolated rebuild lanes reproduce every current
+  artifact, and the EVENOTA analyzer plus both offline main-only inspectors
+  accept the resulting package.
+- The preceding `lfs_mlist_isopen` increment passed all five dedicated source,
+  dual-profile codegen, ABI, semantics, and topology tests. Both provider
+  builders authenticate the final 1,801-byte source with SHA-256
+  `7d0bc398c8ecd85fd00b34cc6dcc2b9fc75c754e1aed0bfbca01dd58ae9d6e0c`;
+  package assembly accepts both generated providers and the complete
+  non-overlapping manifest partition. The combined source, bootloader,
+  inherited littlefs, FreeRTOS, and TLSF focused gate passes 50 tests in
+  25.520 seconds. All 247 Apollo-main aggregate tests pass in 518.563 seconds,
+  and the complete repository passes all 1,794 tests in 879.239 seconds.
+  `make.sh verify` accepts all authenticated snapshots, both source overlays,
+  all read-only upstream analyzers, six providers, and all three manifests.
+- The preceding endian-conversion increment passed all five dedicated
+  provenance, semantics, dual-profile code-generation, stock-span, and
+  topology tests. Both component builders authenticate the final 2,222-byte
+  source with SHA-256
+  `830d49b043181d270ac0aedda432c5e232ce8d6ce65e8e537b80b1a706fd6cac`,
+  extract all eight leaves with zero relocations, and reproduce their exact
+  placements, redirects, overlay hashes, and provider hashes. The combined
+  focused and inherited gate passes 55 tests in 41.693 seconds, all 248
+  Apollo-main aggregate tests pass in 521.732 seconds, and all 1,800
+  repository tests pass in 916.875 seconds. `./make.sh verify` accepts every
+  authenticated input, analyzer, provider, and manifest.
+- The historical fallback-bitops increment passed 6/6 dedicated provenance,
+  fallback-semantics, dual-profile code-generation, relocation-topology,
+  stock-span, and production-artifact tests in 13.693 seconds.
+  The inherited focused gate passes 55/55 tests in 39.997 seconds, for 61
+  tests across the two isolated suites in 53.690 seconds summed. The
+  relocation-repin audit reviewed 22 shifted compiled-body pins; every
+  function boundary and all 185 relocation records remained unchanged, and
+  all 100 differing bytes were relocation write sites. All five rodata
+  sections were byte-identical and shifted by 128 bytes. The canonical
+  repository run passed all 1,806 tests in 1,139.177 seconds;
+  inside that run, all 248 Apollo-main aggregate methods passed.
+  `./make.sh source` and `./make.sh verify` pass. The independent EVENOTA
+  analyzer reports valid topology, layout, checksums, and instruction
+  signatures; both main-only inspectors accept 3,638 records covering
+  3,637,688 installed bytes through `0x007B01B8` and reject bootloader
+  transfer by policy. Three output-isolated lanes under
+  `build/repro-littlefs-bitops-output-{a,b,c}` reproduce both overlays, both
+  providers, the package, and the flash plan byte-for-byte.
+- The prior FreeRTOS NTZ increment passed 23/23 focused production tests in
+  18.333 seconds. Its linker and inherited focused gates pass 21/21 tests in
+  0.705 seconds. `./make.sh source` and direct verification of
+  `manifests/g2-2.2.6.10-core-source.json` pass. Three isolated lanes at
+  `build/repro-freertos-ntz-output-{a,b,c}` byte-identically reproduce the
+  main overlay/provider, boot overlay/provider, package, and flash plan; the
+  lane-local temporary manifests were moved to Trash. All 248 Apollo-main
+  tests passed in 582.904 seconds. `./make.sh test` passed all 1,838 tests in
+  1,038.709 seconds, including all six CMSIS constructor compile-closure
+  tests.
+- Tests prove that the Apollo component differs from the official input only
+  in its regenerated wrapper fields, declared redirect/replacement spans, and
+  appended overlay.
+- The generated flash plan contains 757 placed regions, two deliberately
+  unresolved codec segments inherited from the reviewed base manifest, and
+  five container-only regions.
+- The preceding utility-quartet builders produced a 114,136-byte Apollo-main overlay,
+  3,637,532-byte Apollo-main component, 140-byte bootloader overlay,
+  148,740-byte bootloader provider, and 4,415,504-byte EVENOTA package. Their
+  pinned SHA-256 values are
+  `33e4b70baf06cf5e7b173c127c26972990be29af151bd5e5490b9928f67d0e67`,
+  `26efb41119a584cd8b1093ca35fcd87de8c39e051ce715b7719392f13ee9c536`,
+  `671f04e7d78bb2502ea5ca0c8e8752c04fc2939f63793b4bb57ba5f7dd90d0e1`,
+  `23e73b9134cde9822880b678f4df7a7fbc13cf3722a806b7891dca1f96af8460`,
+  and
+  `e8432777db3619478f32f5f57ca862ffeb0799857dde2274aa09b33a51dac96b`,
+  respectively. Three independent output trees under
+  `build/repro-littlefs-util-{a,b,c}` reproduce those five artifacts
+  byte-for-byte. Their flash plans are also byte-identical with SHA-256
+  `5de2881136448afe915748fe55c9e3565670b14d8b4b0da505fe63f16cbd6c62`.
+- The preceding endian-conversion builders produced a 114,196-byte Apollo-main overlay,
+  3,637,592-byte Apollo-main component, 170-byte bootloader overlay,
+  148,770-byte bootloader provider, and 4,415,594-byte EVENOTA package. Their
+  pinned SHA-256 values are
+  `a111e90b993114d175aeceed74a58b89d365996fb9eefdb8d0d9cac42717f2f6`,
+  `0a55496307eee536a60196c7e7bcec3f2d92501418756877e790bac11756573f`,
+  `9c41f38d0d6fdde4dcbb40222adb637bbfe7625e6117eb1f475594bad8a613e8`,
+  `b2922a93cf19d63a057c473e8937410efe32a8ad9202607972d34dac12e6f19e`,
+  and
+  `cbfc505c73900cc15c0ccfa7956f6adb27d62a0d60d2d98417ac9a516ccd0c98`.
+  The generated flash plan has SHA-256
+  `fd195b0f2954ff20bac946ebaf33b430f1a4fc92da873dfcd567ba3a418a4cbb`.
+  The main and boot package-entry CRC-32C/MSB values are `0x70351378` and
+  `0xB08D0A80`.
+  Three independent output trees under
+  `build/repro-littlefs-endian-output-{a,b,c}` reproduce both overlays, both
+  providers, the package, and the flash plan byte-for-byte. The prior
+  `build/repro-mlist-isopen-output-{a,b,c}` trees remain the preceding
+  milestone.
+  The preceding `build/repro-interrupt-mask-{a,b,c}`,
+  `build/repro-upstream-tranche-{a,b,c}`,
+  `build/repro-queue-create-{a,b,c}`,
+  `build/repro-final-upstream-{a,b,c}`, and
+  `build/repro-upstream-{a,b,c}` lanes remain historical reproducibility
+  milestones. Relocating the complete source checkout still
+  changes TLSF's absolute `__FILE__` diagnostic spelling, so
+  source-root-independent path-prefix normalization remains a build-tool
+  follow-up.
+- The historical fallback-bitops builders produced a 114,324-byte Apollo-main overlay,
+  3,637,720-byte Apollo-main provider, 282-byte bootloader overlay,
+  148,882-byte bootloader provider, and 4,415,834-byte EVENOTA package. Their
+  pinned SHA-256 values are
+  `00318de9ff51e19f77d889fa691a3a2a54e035b1287843bda857f944af58e065`,
+  `f0da043e234dc38481059459755e091622d689313cd12e5c8d5155c7b4ba3202`,
+  `b934dbea7624660c3c774eb0f4edd5e73a738fc59023fc69cfac96417dfe2fee`,
+  `1aa7920a16ed2857a2743394c0f62395a2f2477f95c965da47d1e29c4d2d8247`,
+  and
+  `058782604ab6cb946aff0acedbbef7d367bb1d82114f28c9a70276bcdf178e9a`.
+  The generated flash plan has SHA-256
+  `2015673f529e550e67c2f219d789746cceef1b022bdcf2db16f1ba451a8aa05e`;
+  the boot and main package-entry CRC-32C/MSB values are `0x1162559F` and
+  `0xB436A24C`. Three independent output trees under
+  `build/repro-littlefs-bitops-output-{a,b,c}` reproduce all six pinned
+  artifacts byte-for-byte.
+- The prior NTZ builders retained the same 114,324-byte Apollo-main overlay,
+  3,637,720-byte Apollo-main provider, 282-byte bootloader overlay,
+  148,882-byte bootloader provider, and 4,415,834-byte package hashes. The
+  manifest-only ownership split changes the flash-plan SHA-256 to
+  `eda45c2cc276bd70bc123267d9fbdc09b0ae4aa030a7557f874c259ca7f5fee8`.
+  Three independent output trees under
+  `build/repro-freertos-ntz-output-{a,b,c}` reproduce all five artifacts and
+  the flash plan byte-for-byte; their temporary manifests were moved to
+  Trash.
+- The prior disk-version-parts builders produce a 114,346-byte Apollo-main
+  overlay, 3,637,742-byte Apollo-main provider, 302-byte bootloader overlay,
+  148,902-byte bootloader provider, and 4,415,876-byte EVENOTA package. Their
+  SHA-256 values are
+  `bdc1e353d1adcb0075231afb6c423616dcc0da8335b4b430afe51763a0b9df20`,
+  `d69c4834f65b0661834f990da8167ca6989a1b1c97fda838edc488a4ed0b3e8e`,
+  `e94e33658aca89d3830182bc6c17c656256a194262835c041fecc93e1d72dc59`,
+  `abc583d976a01e237ffa4ed29e4be1b6ff0e5ae2d9756bccec58d1779fe20239`,
+  and
+  `60cd913a716266b349ce18295064f2484749a7dbad2ab9244c923c927bd56c2f`.
+  The 546,404-byte flash plan has SHA-256
+  `52124c17205ae10e47f0b02d0cd6bae7c2b30e10d65d787aa34201a53fe0dc68`.
+- The prior allocator-lookahead builders produced a 114,398-byte
+  Apollo-main overlay, 3,637,794-byte Apollo-main provider, 350-byte
+  bootloader overlay, 148,950-byte bootloader provider, and 4,415,976-byte
+  EVENOTA package. Their SHA-256 values are
+  `2189ec69f7076e216c2ba7388f4eb9d19647feb9f89c382864012902be4e0fdf`,
+  `557fe93fdf79c5cb332c7db731db29ed7cfc42be3daa49fb0d022f81e7fe0ba8`,
+  `1b8bb2893a33a18b8481b785a57d49c2849396cc05c5ef20d86f8cf5cef255a5`,
+  `9af8b65041bbd576b49b4f88e2f7427daf7bb445981d608799d86e1987468736`,
+  and
+  `3d4b2f3e22a10d0755642c0544786c9a881b2ab7c2271d8a184a83f5d3d7d13f`.
+  The 550,026-byte flash plan has SHA-256
+  `73978705e32bbb968a9741620a80e1a70f866b5e43db60f4a9f08b4404ce34d1`.
+- The prior CMSIS `osMessageQueueNew` builders produced a 114,524-byte
+  Apollo-main overlay, 3,637,920-byte Apollo-main provider, unchanged
+  350-byte/148,950-byte bootloader artifacts, and 4,416,102-byte EVENOTA
+  package. The main overlay, main provider, and package SHA-256 values are
+  `de76f5db2f04f48c81ea480c348a3c9151d4441c522eba68621ad812290153e2`,
+  `874bdc621a6cd91848dee66038c3ba97d7e4b7c7ab1fb5063739bf69fc3047e1`,
+  and
+  `c7baf50cd5386a5e27b4c284cc0084e8cf5d0b83d74eb08b8d4a997bf66474f4`.
+  The 552,937-byte flash plan has SHA-256
+  `79da631918503c668516e1af5d3844e3dab65c9e63d8add4834a43536ef69407`.
+- The independent EVENOTA analyzer reports valid topology, layout, inner
+  checksums, and known instruction signatures.
+- The final independent direct-temple and case-bridge offline inspectors
+  accept the Apollo-main-only transfer policy as 3,638 records covering
+  3,637,888 installed bytes and ending at `0x007B0280`; bootloader and
+  peripheral transfer remain rejected by policy. No serial endpoint was
+  opened.
+- No physical G2 installation or behavioral test has been performed for this
+  isolated overlay. The artifact is structurally flashable but remains
+  experimental hardware code.
+
+## Upstream-first recovery policy
+
+Every remaining binary cluster is classified before source re-creation work:
+
+1. An exact upstream/version/configuration match is vendored or ported under
+   its original license. Focused disassembly is limited to build options,
+   object layouts, platform hooks, fixed-address globals, and caller ABI.
+2. A library family or source-equivalent range is recorded without guessing
+   a commit. Small discriminating functions and configuration-dependent
+   branches are disassembled until one revision/configuration is defensible.
+3. Code that remains proprietary or unattributable is re-created from the
+   reviewed behavioral contract and host/target tests.
+
+The current high-confidence upstream set is FreeRTOS Kernel V10.5.1 at
+`def7d2df2b0506d3d249334974f51e427c17a41c`, CMSIS-FreeRTOS v10.5.1 at
+`d213f261b5be6bb29a7cce8b84071706b72f4d53`, littlefs v2.10.1 at
+`0494ce7169f06a734a7bd7585f49a9fa91fa7318`, and the documented TLSF v3.1
+source-equivalent range ending at
+`deff9ab509341f264addbd3c8ada533678591905`. These clusters use upstream
+source as the semantic base; disassembly recovers only the G2-specific
+configuration and ABI gaps. These are authenticated reconstruction baselines;
+they are not claims about Even Realities' historical checkout identities.
+
+## Next opaque boundaries
+
+The next Apollo replacements should continue moving one coherent stock ABI
+boundary at a time and add a behavioral oracle before growing the overlay.
+The public heap allocation/free veneers, primary allocation/reallocation/free
+adapters, and all five generic descriptor initialization/allocation/memalign/
+reallocation/free coordinators are source-owned. The vendored TLSF v3.1
+source-equivalent snapshot is integrated as well: all nine externally reached
+entries are redirected atomically, replacing 710 stock bytes, while the other
+2,518 bytes of the reviewed stock closure remain explicitly mapped
+compatibility bytes. The FreeRTOS V10.5.1 public mutex-create,
+task-context generic-send, and semaphore/mutex-take entries are now
+source-owned. Their retained private queue helpers and task-side
+mutex-priority operations, followed by the recursive-mutex pair and the
+task/ISR receive-and-send family, form the next coherent queue dependency
+closures.
+The public `snprintf`/`vsnprintf` wrappers and reviewed 1,644-byte
+mpaland-derived core at `0x00483960...0x00483FCB` are source-owned, including
+the recovered G2 pointer and recursive descriptor extensions. LVGL
+asynchronous call creation, remove-all cancellation, and timer
+callback dispatch are source-owned through their reviewed allocator and timer
+ABI seams.
+The bounded Apollo510 GPIO HAL slice is now source-owned through handler
+dispatch. The UI-module registry event/data dispatchers, mode-1 broadcast
+close, initializer, and mode lookup are source-owned through the registered
+EvenHub callbacks. The adjacent complete display-mode transition, startup
+application-ID policy helper, onboarding-state gate, and complete packed input
+handler are also source-owned. The shared literal pool at
+`0x00442CC8...0x00442D63` remains stock-owned until all of its consumers are
+replaced; the input-handler pool at `0x0044347A...0x004437DF` is likewise
+retained. The registered main display-thread body at
+`0x004437E0...0x004441DD` and its complete initializer at
+`0x00444720...0x0044484B` are now source-owned. Its adjacent display setup
+helper at `0x00444694...0x004446A5` and input setup helper at
+`0x004446B4...0x004446FD` are source-owned as well, along with the dynamic
+callback wrapper at `0x00444684...0x0044468F`. The surrounding thread
+data/literal pool, three narrow literal gaps, and initializer's now-inactive
+literal pool remain stock-owned.
+The first EvenHub decompression, container lookup, lifecycle, page/common
+callbacks, and IMU policy boundaries are also source-owned, including both
+RLE and LZ4 block algorithms. The sole setter for SRAM word `0x200742F0`, its
+installed handler at `0x005415C2`, and shared string-length primitive at
+`0x0044A43C` are source-owned. The shared character-search primitive at
+`0x00481818` and adjacent six-byte ASCII case-folding helper at `0x00481830`
+are source-owned too; their two-byte alignment remains stock-owned. The
+integer-formatting helper at `0x00482518...0x0048262B` is source-owned as
+well, including its 64-bit magnitude, base/case selection, alternate-octal,
+precision, zero-padding, field-width, and digit-bound policy. The preceding
+formatting core at `0x00481836...0x004824ED`, its 42-byte literal pool, and
+the following formatter/runtime boundaries remain stock-owned. The
+158-byte asynchronous four-channel sink at
+`0x0055E7FA` is source-owned as well; its channel table at `0x20000D2C`,
+submit dispatcher at `0x0058E3F8`, and its exact masked-handle and operation
+routing policy are now source-owned. All four submit operations are now
+source-owned: operation zero at `0x0058E454`, operation one at `0x0058E49E`,
+the shared operation-two/start helper at `0x0058E4E8`, and operation three at
+`0x0058E50A`. Operation one links directly to source operation three. The
+lower-level operation-zero/two begin entry at `0x0058DEF2` is source-owned too.
+The event-side begin entry at `0x0058DF5C` is source-owned too, and operations
+one and three now link directly to source event service `0x0058E618`. Service
+entry `0x0058E534` is source-owned as well, as are its direct transport reader at
+`0x0058E2D8`, writer at `0x0058E31E`, discard wrapper at `0x0058E352`,
+FIFO-to-ring fill helper at `0x0058E360`, and ring drain at `0x0058E3A0`.
+Generic ring read
+`0x005300E2` and generic ring write `0x00530084` are now source-owned too.
+Their complete 90-byte and 94-byte stock bodies and all three callers apiece
+are recovered, including the read-side transport-service function
+`0x004B4AB2...0x004B4C89`, whose call at `0x004B4B3C` passes
+`(ring, NULL, 1)` to discard one queued element after a successful send, and
+the write-side transport function `0x004B4A02...0x004B4A7B`, whose matching
+null-source call publishes an element already written into ring storage.
+The IRQ-side event owner at `0x0058E860` is now source-owned, including its
+normal event/operation-service dispatch and special-transfer completion
+policy. Its four lower special-status dependencies at `0x0058DD30`,
+`0x0058DD5C`, `0x0058DD8A`, and `0x0058DFEE` are source-owned too. The
+60-byte event-abort helper at `0x0058DFB2`, called by bit-6 cleanup, is
+source-owned as well. Duration-delay entry `0x004807A0...0x004807FB` is now
+exact source-assembled in place; all 116 stock callers remain valid and the
+three recovered display consumers materialize and call its exact in-place
+Thumb entry. The raw placement-specific builder input is not executed from
+the overlay. Its
+six-byte Ambiq cycle loop at runtime `0x00000040` is source-owned too. Reset's
+second scatter record at `0x0075D3E0` maps the 22-byte stream at
+`0x0079430E` to ITCM, and the stream's first literal run maps source-generated
+storage `0x00794310...0x00794315` exactly onto the function. The loader,
+record table, stream framing, and neighboring compressed ITCM functions remain
+opaque compatibility dependencies.
+The 14-byte millisecond wrapper at `0x004910F4` and eight-byte microsecond
+passthrough at `0x00491102` are exact source copies, preserving 53 and 66
+direct callers. The sink passes 10 to the latter and therefore polls at
+10-microsecond, not 10-millisecond, intervals. The adjacent format type-11
+span adapter at `0x004910E8` is an exact source copy and forwards directly to
+the source-owned 38-byte shared buffer writer at `0x00490DB6`. That writer
+calls the source-owned unsigned prefix writer replacing `0x00490CE0`, which
+uses the source-owned full ULEB128 encoder replacing `0x00490C84`. Both
+call the source-owned shared append primitive replacing `0x00490616`. The
+adjacent 46-byte signed zigzag adapter at `0x00490D08` is source-owned too.
+The fixed-width wrappers at `0x00490D36/0x00490D40`, field-key encoder at
+`0x00490D4A`, and descriptor adapter at `0x00490D66` are source-owned too,
+making `0x00490C84...0x00490DDB` a continuous generated-entry slice. The
+boolean reader at `0x00490678`, the boolean, integer, and fixed-width value
+adapters at `0x00490E90...0x00490FA1`, the two-pass submessage writer at
+`0x00490DDC`, and the bytes/string/submessage-field adapters at
+`0x00490FA2...0x004910A3` are source-owned too. The 82-byte generic message
+encoder at `0x00490C32` is source-owned as well; it preserves only iterator
+begin/next as reviewed stock ABI entries. Its extension-field dispatcher at
+`0x00490BF8` and default wrapper at `0x00490BC8` now redirect to source, as
+does its regular field entry at `0x00490B1E`. That regular encoder links
+directly to the source-owned protobuf-style default checker at `0x0049087A`
+and repeated-field encoder at `0x00490690`.
+Its indirect callback helper at
+`0x00490AEA` is source-owned. Its value dispatcher
+at `0x00490A46` now links directly to source-owned key, scalar, bytes, string,
+submessage, and span functions. The local formatting encoder slice is now
+source-owned from the append entry at `0x00490616` through the
+submessage-field adapter at `0x004910A3`, apart from preserved literal/data
+pools. The application-wide dispatcher at `0x004733EE` is source-owned too;
+its adjacent divide-by-ten runtime, eight non-floating helpers, and floating
+converter at `0x00472C84...0x00473035` are source-owned as well, and the
+952-byte variadic formatter core at `0x00473036` now links directly to them.
+The complete local formatter cluster is therefore source-owned. After its
+literal pool, the adjacent LVGL tick runtime at
+`0x00473474...0x004734BB`, the zero-fill wrapper at `0x004734C0`, the
+global-state initializer at `0x004734CC...0x00473547`, and the complete
+subsystem initializer at `0x00473548...0x00473625` are source-owned too.
+Its inactive 70-byte alignment/literal pool remains in place. The full-screen
+buffer synchronizer at `0x0047366C...0x004736F3` and its installed display
+synchronization callback at `0x004736F4...0x00473781`, display setup sequence
+at `0x00473782...0x0047381D`, and display-buffer synchronization cluster
+through `0x00473933` are source-owned too. The following PRIMASK helpers and
+display-task attribute accessor through `0x00473951` are source-owned as well.
+The adjacent display-driver thread and message-queue initializers at
+`0x00473952...0x00473AA3` are source-owned too. The following 24-byte
+thread teardown, resource-ID-12 acquire/release wrappers, timer lifecycle and
+command-6 callback, and byte-valued queue command 8 through
+`0x00473C43` are now source-owned as well. The complete adjacent manager
+thread at `0x00473C44...0x00473E2D` is source-owned too. The public
+queue-sender family through `0x004740FF` is source-owned as well. The forced
+display initialization sequence at `0x00474100...0x004742F7` and forced
+deinitialization sequence at `0x0047432C...0x00474473` are source-owned too;
+their intervening 52-byte shared literal pool remains retained. The following
+shared file open, close, read, write, seek, tell, size, flush, remove, rename,
+directory-create, directory-open, directory-read, and directory-close
+wrappers at `0x00474550...0x00474CD1` are source-owned too. The 220-byte
+diagnostic/data
+pool before them and the intervening 16-byte `r`/`w`/`a`/`+` mode pool remain
+retained. The synchronized allocation/free/reallocation wrappers at
+`0x00474CD2...0x00474D9B` are source-owned too. The file-runtime initializer
+at `0x00474D9C...0x00474E3B` is source-owned as well; its following 120-byte
+literal pool at `0x00474E3C...0x00474EB3` remains mapped official data. The
+five-function cache-controller HAL at `0x00474EB4...0x00475193` is
+source-owned too; its following 52-byte register literal pool remains mapped
+official data. The application-wide comparator at
+`0x004751C8...0x0047522F` is source-owned too. The following Apollo510
+secure-OTA descriptor-addition routine at `0x00475230...0x00475285` is
+source-owned as well; its ten-byte state/register literal pool remains
+official compatibility data. The BLE message-transmit thread entry at
+`0x00475290...0x00475307` is source-owned too, including its five lifecycle
+hooks, flag dispatch, diagnostics, and retry loop. Its stored pointer remains
+at the original redirected entry. The following two exact no-op hooks and BLE
+transmit queue initializer at `0x00475308...0x00475333` are source-owned as
+well. The setup-stage adapters and thread creation/destruction lifecycle at
+`0x00475334...0x0047538B` are source-owned too. The following executable
+slice—the queue drain, thread-flag router, and wait handler through
+`0x00475523`—is source-owned as well. The following queue-clear routine
+through `0x0047564D` and enqueue core through `0x00475A37` are source-owned
+too. The direct protobuf-over-BLE sender and notification wrappers with their
+OTA diagnostic gates through `0x00475B13` are now source-owned as well. The
+following guarded protobuf sender, including its OTA and left-lens rejection
+policy, is source-owned through `0x00475C19`. The following guarded protobuf
+notification sender is source-owned through `0x00475D5D`, including its OTA,
+left-lens, and command-role gates. Its 26-byte shared literal pool remains
+official data at `0x00475D5E...0x00475D77`. The streaming-notification,
+transport-three, EFS-send, and EFS-notification wrappers through
+`0x00475ED3` are source-owned as well. Their 8-byte and 10-byte intervening
+literal pools and 236-byte shared pointer table remain official data. The
+variadic string-scanner adapter at `0x00475FC0...0x00475FE1` is now
+source-owned too and passes its source reader callback directly to the
+retained scan engine. Its 6-byte alignment/displacement pool remains official
+data. The following littlefs directory check, format/recovery helper, initializer,
+and read/program/erase callbacks through `0x00476451` are source-owned too,
+as is the exact sync callback at `0x004764DC...0x004764DF`. The intervening
+138-byte dependency pool remains official data. The following event-loop
+initializer, worker, queue-push path, timer callback, delayed insertion, and
+delayed removal through `0x00476BEF` are source-owned too. Their two-byte
+worker alignment and 204-byte dependency pool remain official data. The
+following BLE connection-parameter update scheduler through `0x00476DB7` is
+source-owned too, with its three direct callers, immediate-update path, and
+mode-derived delayed retries covered by the native oracle. The following two
+connection-mode selectors through `0x0047720B` are source-owned too, with
+their complete diagnostics and 25- and 72-unit thresholds covered. The
+adjacent connection-mode coordinator through `0x0047761B` and delayed
+callback through `0x0047773D` are source-owned too, with pending retry,
+selector, context/controller/role, packet, diagnostics, and return-register
+behavior covered. Their 54-byte literal pool remains official compatibility
+data. The following remote connection-parameter handler through `0x00477A69`
+is source-owned too, with received state, all diagnostics, secondary-mode
+selection, state publication, and role-gated 60-second retry covered. Its
+114-byte literal pool remains official compatibility data. The following
+connection-update event state machine through `0x004780D7` is source-owned
+too, with status-specific retry behavior, both threshold families, matching
+state publication, all delayed callbacks, and diagnostics covered. Its
+four-byte pointer literal remains official compatibility data. The following
+connection-global initializer through `0x004780F7` is source-owned too, with
+its endpoint byte, connection/state pointers, fixed defaults-table pointer,
+and sole caller covered. The five following mode-control helpers through
+`0x0047826B` are source-owned too, covering stream readiness, immediate short
+mode, retry holdoff/reset, remote-mode reset, and delayed long mode. Their
+interleaved 4-, 20-, 4-, and 112-byte literal pools remain official
+compatibility data. The following connection-event dispatcher through
+`0x004786B3` is source-owned too, covering null/default messages and message
+classes `0x27`, `0x28`, `0x29`, `0x40`, `0xA3`, `0xA4`, and `0xB9`, including
+identifier-to-state mapping, profile defaults, callback cancellation,
+source-owned remote/event/scheduling calls, coordinator forwarding, and all
+recovered diagnostics. Its 240-byte dependency pool remains official
+compatibility data. The following MRAM zero-region programmer and protected
+update-flag setter through `0x00478965` are source-owned too, covering cache
+coherence, zero-fill and word-count behavior, idempotent template-backed flag
+updates, exact PRIMASK restoration, and all recovered diagnostics. Their
+74-byte literal pool remains official compatibility data. The following
+protected-MRAM record diagnostic dump through `0x004793E9` is source-owned
+too, covering byte-index selection, all scalar/label fields, four hex ranges,
+both sparse halfword tables, and all 31 recovered diagnostic groups. Its
+46-byte front-literal pool remains official compatibility data. The following
+protected-MRAM record synchronizer through `0x0047956B` is source-owned too,
+covering both ten-record scans, comparison-key filtering, pointer reload,
+bit-two mutation, ordered timestamped publication, final-record signaling,
+batch commit, diagnostics, and caller-register preservation. Its 112-byte
+shared protected-record diagnostic pool remains official compatibility data.
+The following protected-MRAM record-list loader through `0x00479981` is
+source-owned too, covering cache-coherent ten-slot traversal, zero/erased
+termination, exact active-state validation, four-key mask reconstruction and
+repair, persistence ordering, source-owned copy/clear loops, forced RAM flags,
+invalid-record clearing, IRK hex dumps, loaded counts, and exact diagnostics.
+Its following 38-byte diagnostic continuation pool remains official
+compatibility data. The following protected-MRAM single-record programmer
+through `0x00479AB3` is source-owned too, covering exact byte-index
+truncation, cache invalidation, two ordered 0x20-word transactions, the
+thread-mode-only inter-half yield, independent status capture, and exact
+success/error diagnostics. Its 192-byte destination/key/diagnostic/dependency
+pool remains official compatibility data. The following protected-MRAM
+application record-database updater through `0x0047A461` is source-owned too,
+covering existing and empty-slot updates, full-table replacement priorities,
+strict timestamp ties, type preference, diagnostic slot dumps,
+source-programmer invocation, cache-coherent six-byte verification, all
+recovered diagnostics, and the stock success return after verification
+failure. Its 26-byte base/type-label/diagnostic/dependency pool remains
+official compatibility data. The following record-deactivation adapter
+through `0x0047A49B` is source-owned too, preserving both activity-flag
+clears, source database persistence, retained NVM verification, exact
+same-pointer ordering, and the verifier return value. The following
+record-activation adapter through `0x0047A5B5` is source-owned too,
+preserving both diagnostic pairs, byte-mask truncation, ordered flag
+mutation, global-counter increment and record timestamp, source database
+update, unconditional retained verification, the exact-one success
+diagnostic, and the original full-width mask return. Both stock callers
+discard the unusual restored argument registers before use, so the ordinary
+C return ABI is sufficient. Its following 10-byte padding/literal pool
+remains official compatibility data. The following conditional deactivation
+adapter through `0x0047A5CF` is source-owned too, preserving the zero-only
+confirmation-byte gate and same-pointer source deactivation call. Both stock
+callers discard the incidental saved-`r7` return, so its source interface is
+void. The following membership, untyped-presence, active-traversal,
+active-type count, and oldest-active-type helpers through `0x0047A6FF` are
+source-owned too. Their oracles preserve the ten-slot bounds, arbitrary
+nonnull traversal behavior, low-byte type ABI, confirmation independence,
+and strict first-minimum timestamp rule. The three intervening literal pools
+remain official compatibility data. The following allocator through
+`0x0047A855` is source-owned too, preserving the five-record type threshold,
+oldest release/deactivation order, first-free scan, exact zero/init sequence,
+low-byte owner/type fields, and unsigned timestamp. Its following six-byte
+gap remains official compatibility data. The following record initialization
+wrapper through `0x0047A891` is source-owned too, preserving cache
+invalidation, record loading, synchronization, and all ten diagnostic dumps.
+Its following 50-byte literal pool remains official compatibility data. The
+following Cordio address resolver through `0x0047AB4D` is source-owned too,
+preserving null rejection, exact RPA classification, first-valid-IRK
+submission, mapped-owner paired-record matching, and all diagnostics. Its
+following 30-byte diagnostic-pointer pool remains official compatibility
+data. The following Cordio resolved-address callback through `0x0047ACE9` is
+source-owned too, preserving low-16-bit index truncation, record validity
+checks before address use, resolved-address byte order, all diagnostics, and
+the LTK-valid return contract. Its following 14-byte diagnostic-pointer pool
+remains official compatibility data. The following Cordio database delete-all
+adapter through `0x0047AD69` is source-owned too, preserving flag and address
+clearing order across all ten records, diagnostics, and persistent database
+zeroing. Its following 10-byte record-table and diagnostic-pointer pool
+remains official compatibility data. The following Cordio address lookup
+through `0x0047ADC5` is source-owned too, preserving low-byte owner
+normalization, activity/owner/address filtering, first-match selection, and
+timestamp refresh. Its following 14-byte compatibility pointer pool remains
+official data. The following Cordio LTK-request lookup through `0x0047AE25`
+is source-owned too, preserving low-16-bit diversifier matching, exact
+eight-byte random-number comparison, first-match selection, and timestamp
+refresh. Its following 82-byte shared pointer pool remains official
+compatibility data. The following Cordio key accessor through `0x0047AEBF`
+is source-owned too, preserving valid-mask gating, all four key classes,
+security-level output rules, unsupported types, and byte truncation. The
+peer-address and peer-address-type accessors through `0x0047AED3` are
+source-owned too, preserving their exact null contracts. The following
+1,242-byte key writer through `0x0047B3AD` is source-owned too, preserving
+all four key layouts, mask updates, diagnostics, sign-counter reset, and
+exact-one persistence. The following 12 Cordio application-database
+record-metadata functions through `0x0047B4D3` are source-owned too,
+preserving peer/device database hashes, cache/discovery state, CCC values,
+client supported features and change awareness, handle-list persistence,
+peer sign counters, address-resolution state, null contracts, and conditional
+persistence. Their three literal/alignment pools remain official
+compatibility data. The following resolving-list reload wrapper through
+`0x0047B567` is source-owned too, preserving both diagnostics, its retained
+reload request, and source-owned MRAM synchronization. Its following 52-byte
+literal pool remains official compatibility data. The following complete
+record-clearing wrapper through `0x0047B6DB` is source-owned too, preserving
+owner-byte truncation, null/miss/success diagnostics, source-owned lookup and
+deactivation, and retained record release. Its following 84-byte pointer pool
+remains official compatibility data. The following complete protected-MRAM
+write verifier through `0x0047BBF7` is source-owned too, preserving whole-cache
+invalidation, first persisted-record matching, validity/activity/key-mask
+checks, selected local-LTK/IRK/CSRK comparisons, diagnostics, and key hex
+dumps. Its following 56-byte pointer pool remains official compatibility data.
+The following complete protected-MRAM record-status reporter through
+`0x0047C069` is source-owned too, preserving cache invalidation, inactive
+classifications, active record metadata and identifier ordering, strict
+oldest/newest selection, and diagnostics. Its following 26-byte pointer pool
+remains official compatibility data. The following complete Cordio record
+timestamp-update wrapper through `0x0047C149` is source-owned too, preserving
+its null guard, overflow renumbering call, monotonic counter and record write,
+diagnostics, source-owned persistence, and source-owned verification. Its
+following 26-byte pointer pool remains official compatibility data. The
+following complete Cordio timestamp-renumbering routine through `0x0047C275`
+is source-owned too, preserving its start/per-record/end diagnostics,
+ten-slot allocation/activity gates, counter reset, slot-ordered timestamp
+assignment, and source-owned persistence. Its following 70-byte pointer pool
+remains official compatibility data. The following complete Cordio
+persistent-record status reporter through `0x0047C503` is source-owned too,
+preserving its initial cache clean/invalidation, ten-slot protected-MRAM scan,
+exact valid/in-use/nonempty filter, reversed address display, key masks,
+selected and total counts, base address, geometry, and start/end diagnostics
+without record mutation. Its following 100-byte pointer pool remains official
+compatibility data. The following complete Cordio pairing-failure handler
+through `0x0047C8A1` is source-owned too, preserving connection/status
+truncation, NVM reporting before lookup, validity and LTK-mask qualification,
+all four named SMP failure reasons, unknown reasons, retained record clearing,
+direct invalid-record flag clearing, and diagnostics. After 42 bytes of
+retained alignment and diagnostic pointer data, the complete
+connection-indexed record clearer through `0x0047CA97` is source-owned too.
+It preserves handle truncation, retained lookup and missing-record handling,
+validity/key-mask qualification, direct invalid-record flag clearing, address
+diagnostics, source-owned MAC-address clearing and resolving-list reload, and
+success/fail diagnostics. Its following four-byte dependency pointer remains
+official compatibility data. The following complete ten-slot record
+diagnostic iterator through `0x0047CABD` is source-owned too, preserving the
+single record-table-holder read, exact 200-byte stride, slot ordering, and
+source-owned diagnostic-dump calls without mutation. Its following 262-byte
+alignment/table/pointer pool remains official compatibility data. The
+following non-reflected CRC-32C updater and protected-MRAM byte-program wrapper
+through `0x0047CC13` are source-owned too. The CRC source reproduces the
+Castagnoli polynomial directly without its formerly sole opaque table
+dependency; the program wrapper preserves byte-to-word rounding, interrupt
+masking/restoration, key `0x12344321`, fixed protected-program ABI, and ignored
+result. Their following eight-byte literal pair remains official compatibility
+data. The following ARM EABI signed and unsigned 64-bit division/modulo
+helpers through `0x0047CE8F` are source-owned too, preserving magnitude
+conversion, signed quotient/remainder rules, divide-by-zero behavior, and the
+four-register result ABI. The signed/unsigned alignment pad remains official
+compatibility data. The following three eight-byte lens/status packet reporters
+through `0x0047CF5F` are source-owned too, preserving template IDs 3, 6, and
+5, two lens-side reads, opposite-side mapping, state-bit status encoding, and
+the fixed command `0x103` send ABI. Their templates are now source constants,
+removing the active dependency on the three old eight-byte template blobs.
+The registered command-`0x103` dispatcher through `0x0047D817` is now
+isolated as one 2,232-byte function-specific compatibility blob. The
+following publisher, template-4 reporter, and five state accessors through
+`0x0047D8FB` are source-owned. The 200-byte literal pool remains separately
+mapped compatibility data. The following availability wrapper and selected-
+side state query through `0x0047D9F9` are source-owned too. Their two-byte
+alignment pad remains compatibility data. The following SARC state-header
+checksum, validator, initializer, bounded variadic report appender, and
+payload finalizer through `0x0047DB01` are source-owned too. The following
+crash-report filesystem persistence routine through `0x0047DC21` is
+source-owned as well. Its 82-byte inactive literal pool remains mapped as
+compatibility data. The following wrap-extending monotonic-seconds helper
+through `0x0047DCB3` is source-owned as well. The following bounded wall-clock
+seconds helper and shared interrupt-disable primitive through `0x0047DCEB`
+are source-owned too. The following boot reset-status and source firmware-
+version encoding helpers through `0x0047DD61` are source-owned too. The next
+four-function EasyLogger tracepoint deferral and bounded capture-retry cluster
+through `0x0047DDFD` is source-owned too. The following reflected CRC-32,
+path formatter/parser, positive
+file-size query, directory scan, `TPS1` state writer/loader, and storage
+initializer, all source-owned through `0x0047E069`. The following active-file
+close/callback, oldest-file pruning, creation/header emission, append reopen,
+bounded write/rotation, commit, and flush functions are source-owned through
+`0x0047E231`; three intervening data islands remain explicitly retained. The
+following timer bootstrap through `0x0047E271` is source-owned too. Its
+94-byte literal/data pool remains opaque compatibility data. The following
+protobuf onboarding control update through `0x0047E31F` is source-owned too,
+and the following gated protobuf wear-status notifier through `0x0047E3E5`
+is source-owned too. The following deferred onboarding-flag persistence
+worker through `0x0047E46F` is source-owned too. The following
+onboarding-flag updater through `0x0047E4A5` is source-owned too. The following
+peer onboarding-flag notification through `0x0047E51B` is source-owned too.
+The following peer onboarding-flag reply through `0x0047E58D` is source-owned
+too. The following peer onboarding-process synchronization through
+`0x0047E609` is source-owned too. Its 106-byte literal/data table remains
+opaque compatibility data. The following onboarding runtime initializer
+through `0x0047E6DB` is source-owned too. The following dynamic RTOS
+timer-object creator through `0x0047E711` is source-owned too. The paired
+static-control-block timer-object creator through `0x0047E759` is source-owned
+too. Their shared timer-object initializer through `0x0047E7AF` is
+source-owned too. The following timer command-submission path through
+`0x0047E811` is source-owned too. The following auto-reload catch-up loop
+through `0x0047E839` is source-owned too. The following expired-timer
+processor through `0x0047E877` is source-owned too. The following
+timer-service task loop through `0x0047E88B` is source-owned too. The following
+timer wait-or-expire processor through `0x0047E8F1` is source-owned too. The
+following active-timer-list query through `0x0047E915` is source-owned too.
+The following tick/list-switch sampler through `0x0047E93B` is source-owned
+too. The following timer-list insertion helper through `0x0047E979` is
+source-owned too. The following timer-command drain through `0x0047EA8F` is
+source-owned too. The following timer-list overflow switch through
+`0x0047EAB7` is source-owned too. The following timer list/queue runtime
+initializer through `0x0047EAF5` is source-owned too. The following timer
+active-state query through `0x0047EB25` is source-owned too. The following
+timer callback-context getter through `0x0047EB49` is source-owned too. The
+following timer pended-callback ISR submission through `0x0047EB6B` is
+source-owned too. The reviewed timer runtime literal pool through
+`0x0047EB93` remains compatibility data. The following static and dynamic
+event-group constructors through `0x0047EBF7` are source-owned too. The
+following event-group wait operation through `0x0047ED0F` is source-owned
+too. The following event-group clear-bits operation through `0x0047ED51` is
+source-owned too. The following event-group clear-from-ISR submission wrapper
+through `0x0047ED63` is source-owned too. The following event-group ISR-safe
+bit-snapshot getter through `0x0047ED75` is source-owned too. The following
+event-group set-bits operation through `0x0047EE1D` is source-owned too. The
+following set-bits timer callback through `0x0047EE25` is source-owned too.
+The two bytes through `0x0047EE27` remain alignment. The following clear-bits
+timer callback through `0x0047EE2F` is source-owned too. The following
+wait-condition predicate through `0x0047EE49` is source-owned too and both
+source wait-operation calls resolve directly to it. The following
+set-bits-from-ISR wrapper through `0x0047EE59` is source-owned too. The two
+bytes through `0x0047EE5B` remain alignment, and the following four-byte
+set-callback Thumb literal through `0x0047EE5F` remains compatibility data.
+The following priority-1 RTC initializer through `0x0047EE77` is
+source-owned too. Its sole priority-1 initializer-table record, XTAL
+selection through both reviewed Ambiq control paths, oscillator enable,
+unrelated-bit preservation, and zero return are pinned. The following RTC
+calendar/time setter through `0x0047EEF9` is source-owned too. Its Ambiq
+weekday/calendar validation—including the shipped century predicate—BCD
+packing, write-enable sequence, three RTC registers, and invalid-input
+diagnostics are pinned. The reviewed 22-byte alignment and diagnostic literal
+island through `0x0047EF0F` remains compatibility data. The following RTC
+calendar/time getter wrapper through `0x0047EF17` is source-owned too. Its
+IRQ-protected RTC-edge polling workaround, timer-14 configuration, ordered
+counter reads, error short circuit, BCD decoding, and five void callers are
+pinned. The following private Apollo510 peripheral-power descriptor lookup
+through `0x0047EF37` is source-owned too. Its exact Ambiq status contract,
+all four callers, four-word descriptor ABI, and byte-identical 34-entry source
+table are pinned; the now-unreferenced stock table remains separately mapped
+at `0x006BECB0...0x006BEECF`. The following cached trim-version getter through
+`0x0047EF73` is source-owned too. Its sole caller, one-time INFO1 word
+`0x244` read, `0x200001E8` cache, zero/error normalization, and null-output
+status six are pinned. The following private MCU HP/LP switching sequence
+through `0x0047F09F` is source-owned too. Its sole public-selector caller,
+SPOT preflight and rollback, HFRC2 forcing, readiness and bounded ACK polls,
+mode-cache update, result propagation, and exact PRIMASK restoration are
+pinned. The following public MCU-mode selector through `0x0047F107` is
+source-owned too. Its low-byte validation, HP SIMOBUCK gate, already-selected
+short circuit, sole application caller, source sequence dependency, result
+propagation, and hardware-status verification are pinned. The following
+public GPU-mode status getter through `0x0047F11B` is source-owned too. Its
+null-output status, `0x20074F60` cache, one-byte copy, and sole
+GPU-initialization caller are pinned. The following public GPU-mode selector
+through `0x0047F203` is source-owned too. Its low-byte validation, HP
+SIMOBUCK gate, graphics-enabled rejection, cached current/previous-mode
+behavior, voltage/performance sequencing, SPOT TON coordination, settle
+delays, exact PRIMASK restoration, and all three callers are pinned. The
+following public MCU memory-power configuration routine through `0x0047F3C5`
+is source-owned too. Its short-enum ABI, ROM/TCM/NVM target derivation,
+disable/SPOT/enable sequencing, bounded status waits, AXI-clock forcing
+quirks, post-transition verification, retention ordering, and sole caller are
+pinned. The following public ROM power-domain enable routine through
+`0x0047F417` is source-owned too. Its AUTO gate, desired-status SPOT update,
+ignored SPOT result, enable-bit update, exact 10,000-read bound, timeout, and
+sole caller are pinned. The paired public ROM power-domain disable routine
+through `0x0047F469` is source-owned too. Its AUTO gate, enable-bit clear,
+exact 10,000-read bound, timeout-without-SPOT path, post-clear status read,
+ignored SPOT result, and sole caller are pinned. The following public
+shared-SRAM power configuration routine through `0x0047F56D` is source-owned
+too. Its five-byte short-enum ABI, grow-before and shrink-after SPOT ordering,
+ignored SPOT results, power-enable/status verification, active MCU/GFX/display
+fields, retain-mode mapping, override clearing, and sole caller are pinned.
+The following private crypto power-down quiesce helper through `0x0047F5B7`
+is source-owned too. Its MRAM crypto-ready probe, idle fallback, bit-preserving
+power-down write, final ready probe, exact status propagation, and sole caller
+are pinned. The following public peripheral-power enable routine through
+`0x0047F6F1` is source-owned too. Its low-byte ABI, descriptor and
+already-enabled gates, OTP dependency, GPU/device/audio SPOT policy, critical
+enable write, readiness checks, crypto-idle clock request, OTP delay, final
+hardware verification, and all 22 callers are pinned. The following private
+peripheral-disable domain-mask helper through `0x0047F7AD` is source-owned
+too. Its low-byte descriptor ABI,
+descriptor-error fallback, five shared-domain masks, last-enabled-member
+predicate, sole real caller, and one raw data false positive are pinned. The
+following public peripheral-disable routine through `0x0047F90B` is
+source-owned too. Its low-byte ABI, descriptor and already-disabled gates,
+pre-B1 OTP/crypto interlock, OTP-busy wait, debug-domain quiescing, TempCo and
+critical-section sequencing, shared-domain status policy, crypto/GPU clock
+release, cached GPU-mode handling, device/audio SPOT updates, 23 typed callers,
+and two raw data false positives are pinned. The following public peripheral
+enabled-state query through `0x0047F941` is source-owned too. Its null-output
+validation, eager false initialization, low-byte descriptor ABI, descriptor
+error propagation, status-register/mask predicate, all five callers, and
+absence of alternate entry topology are pinned. After the retained 18-byte
+data/alignment island, the private INFO1 cache-population routine through
+`0x0047FAB3` is source-owned too. Its shadow-valid and OTP-power gates, nine
+ordered INFO1 reads, exact 32-word cache mapping, partial commits, final valid
+marker, sole caller, and absence of alternate entry topology are pinned. A
+52-byte data island remains opaque through `0x0047FAE7`. The following public
+Apollo510 low-power initializer through `0x0047FE11` is source-owned. Its
+reset erratum, debug shutdown, CPDLP/WIC setup, OTP and INFO1 fallback policy,
+memory and clock setup, factory-trim capture/correction, retention,
+SPOT/SIMOBUCK sequencing, exact interrupt restoration, revision gates, sole
+caller, and all 19 stock dependencies are pinned. The following private
+buck/LDO override initializer through `0x0047FE67` is source-owned too. Its
+ten ordered volatile `MCUCTRL->VRCTRL` read/modify/write operations, unrelated
+bit preservation, sole caller, and absence of alternate entry topology are
+pinned. Its four-byte literal remains opaque through `0x0047FE6B`. The
+following dynamic override updater through `0x0047FE93` is source-owned too.
+Its three fresh volatile reads and writes, low-bit enable semantics,
+SIMOBUCK/CoreLDO/MemLDO update order, all six raw direct callers, and absence
+of alternate entry topology are pinned. Its 12-byte literal island remains
+opaque through `0x0047FE9F`. The following public miscellaneous power-control
+dispatcher through `0x0047FFB9` is source-owned too. Its low-byte command ABI,
+SIMOBUCK already-active and initialization paths, conditional crypto
+quiesce/disable, crystal power-down register policy, ordered debug/device/audio
+shutdown, both bounded waits, both SPOT updates, sole raw caller, all eleven
+stock dependencies, and absence of alternate entry topology are pinned. Its
+ten-byte data island remains opaque through `0x0047FFC3`. The following
+public CPDLPSTATE configurator through `0x00480001` is source-owned too. Its
+packed three-short-enum ABI, instruction/data-cache safety gate, unvalidated
+field packing semantics, all three raw direct callers, sole Ghidra-indexed
+caller, two literal registers, absence of calls, and alternate-entry topology
+are pinned. Its two-byte alignment pad remains opaque through `0x00480003`.
+The four-byte compatibility pointer at `0x00480004...0x00480007` remains
+opaque. The public CPDLPSTATE getter through `0x00480027` is source-owned too.
+Its one state-register read, three consecutive short-enum byte writes, sole
+raw direct caller, and absence of alternate entry topology are pinned. The
+public temperature-update routine through `0x00480057` is source-owned too.
+Its hard-float input ABI, retained SPOT-manager dependency, successful
+threshold copy, normalized failure outputs, three direct callers, and absence
+of executable alternate-entry topology are pinned. The following public
+system-PLL enable routine through `0x0048009D` is source-owned too. Its B1
+revision gate, isolation release, two fresh PLL-control updates, exact
+critical-section and delay order, two direct callers, three retained calls,
+register literals, and absence of executable alternate-entry topology are
+pinned. The following public system-PLL disable routine through `0x004800DD`
+is source-owned too. Its ordered VDDF/VDDH power-down, low-byte B1 revision
+gate, one-microsecond delay before isolation assertion, two direct callers,
+two retained calls, and absence of executable alternate-entry topology are
+pinned. Its two-byte alignment pad and the `0x40021040`
+`PWRCTRLMODESTATUS` literal at `0x004800E0` remain stock-owned; the literal
+is still loaded by the earlier power-control routine at `0x0047F556`. The
+public system-PLL enabled-state query through `0x004800F3` is source-owned
+too. Its single `PLLCTL0` read, one-byte boolean output, sole caller, and
+absence of calls or alternate-entry topology are pinned. The 66-word
+power-control literal pool remains stock-owned at
+`0x004800F4...0x004801FB`. The following public SPOT-manager timer initializer
+through `0x0048023F` is source-owned too. Its ordered timer-disable and full
+configuration writes, compare resets, interrupt clear, compare-0 interrupt
+enable, two direct callers, six register literals, and absence of executable
+alternate-entry topology are pinned. The public timer-start routine through
+`0x00480289` is source-owned too. Its ignored HFRC request result, unsigned
+delay-to-tick scaling, global timer enable, mandatory clear-bit toggle, NVIC
+enable, final timer enable, three direct callers, and absence of alternate
+entries are pinned. The public timer-stop routine through `0x00480311` is
+source-owned too. Its ordered timer/global disable, ignored clock-release
+result, IRQ disable, timer interrupt acknowledgement, mandatory APB
+write-flush read, NVIC pending clear, five direct callers, and absence of
+alternate entries are pinned. The complete 13-entry public SPOT-manager
+callback-dispatch layer through `0x00480433` is source-owned too. Its
+`0x20073270` state table, slots `+0x04...+0x38`, null-success/no-op behavior,
+fresh second volatile callback reads, byte truncation for power-state and TON
+updates, third-argument forwarding, 33 reviewed executable call sites, eight
+non-code raw-scan false positives, absence of aligned stored entry/interior
+pointers, and clean following initializer boundary are pinned. The complete
+SPOT-manager initializer through `0x004806CF` is source-owned too. Its 15-slot
+ordered clear, Apollo510 B0/B1/B2 and later trim matrix, six cached revision
+flags, patch-tracker gate, ordered ACRG/VRCTRL repair, 29 reviewed handler
+constants, null-success behavior, fresh second initializer read, sole caller,
+single retained memset dependency, and absence of external interior targets
+or aligned stored pointers are pinned. The retained shared/initializer literal
+pool is now only `0x004806D0...0x0048079F`. The source-owned microsecond-delay
+primitive is followed by source-owned masked status-change and configurable
+equal/not-equal status-wait helpers through `0x00480869`. Their exact
+post-decrement timeout budgets, initial and per-poll reads, one-microsecond
+delay order, byte-truncated mode, success/timeout results, 38 reviewed
+executable callers, two retained delay calls, one non-code raw-call false
+positive, and absence of executable interior entries or aligned stored
+pointers are pinned. The following public word-copy wrapper through
+`0x00480871` is source-owned as well. Its sole caller, forward
+read-before-write ordering, nonzero-count precondition, lack of alternate
+entries or stored pointers, and removed private-ITCM call are pinned. After
+two alignment bytes, the private MCUCTRL device-information collector through
+`0x004809C3` is source-owned too. Its sole public-info caller, 64-byte output
+ABI, untouched flash-size word, qualified flag, fresh SKU reads, four-by-three
+RAM and four-entry MRAM tables, JEDEC PID/CID masking, ten source-owned
+ten-microsecond delays, and lack of alternate entries or stored pointers are
+pinned. The following public MCUCTRL control dispatcher through `0x00480C55`
+is source-owned too. Its seven low-byte commands, oscillator register
+transactions, cap-trim composition, argument validation and fresh reread,
+clock request/release order, five callers, three retained dependencies, and
+lack of alternate entries or stored pointers are pinned. The following
+external-32-MHz-clock status getter through `0x00480C7B` is source-owned too.
+Its bit-8 external-clock precedence, fresh second read for bit-0 powered
+state, one-byte short-enum store, sole caller, and lack of dependencies,
+alternate entries, or stored pointers are pinned. The following private
+MCUCTRL trim-version decoder through `0x00480D71` is source-owned too. Its
+INFO1 word `0x244` read, reader-status propagation, fresh short-circuit
+CHIPREV sampling, B1/B2 PCM numbering rules, packed feature word, sole caller,
+single retained dependency, and absence of alternate entries or stored
+pointers are pinned. The following public MCUCTRL information getter through
+`0x00480E6B` is source-owned too. Its low-byte selector ABI, null/invalid
+status-six behavior, nine fresh SKU reads, ITCM/DTCM/shared-SRAM and feature
+field mapping, untouched padding, ignored trim-helper status, device-ID
+dispatch, two executable callers, two non-code raw branch false positives,
+two direct source-owned helper calls, and absence of interior entries or
+stored pointers are pinned. Its 108-byte literal/alignment pool remains
+opaque through `0x00480ED7`; the next executable function at `0x00480ED8`
+is already source-owned.
+Other
+candidates include the wider
+EvenHub event parser, allocation/UI
+primitives, the IMU driver calls behind the policy adapter, wake-lease
+handling, and image-buffer transport.
+The old stock LZ4 generic body and variable-length reader remain unreachable
+opaque compatibility bytes. The completed whole-image branch and stored-pointer
+audit found no hidden route into either body; future reclamation is a separate
+layout/compaction change. The earlier source-owned hand decoder and mode-2
+caller likewise remain as unreachable `_legacy` sections so later primary
+functions do not move. Outside Apollo,
+the codec segment destinations remain the most important unresolved addresses;
+the touch install base still needs updater-level confirmation.
+
+## Prior FreeRTOS task-name source increment
+
+Apollo main now source-owns the complete 34-byte `pcTaskGetName` entry at
+`[0x00454F16,0x00454F38)` through a generated redirect and a 38-byte
+FreeRTOS V10.5.1 leaf at `[0x007B0280,0x007B02A6)`. Its raw/final SHA-256
+values are
+`b680e949844cca19a586fbe865837f8180e592434ac1517b29ceb1482c9dd3b6`
+and
+`88edbdea558812d213013a8d319a09c63dafa86ec91a7640f427c72c77552da1`.
+Its only relocation binds to source-owned `ulSetInterruptMask`.
+
+The package now classifies 115,120 source bytes, 81,813 generated bytes, and
+4,219,207 opaque bytes; 196,933 bytes are controlled. The flash plan contains
+768 placed, two unresolved, five container-only, and six protected regions.
+
+## Prior CMSIS-FreeRTOS mutex source increment
+
+Apollo main now source-owns the complete 154-byte `osMutexNew` entry at
+`[0x0044971C,0x004497B6)` through a generated redirect and NOP fill. The
+stock SHA-256 is
+`09f88d8a6a64730936a52aa0c2f90d9bcb0152f6e2439919f6409110148999ec`;
+30 direct callers have ordered digest
+`14d18197e409351bfa6ded1310c61c1f27246ebd93ecf86452d19ac0bdadbfd0`,
+with no alternate, interior, or stored entry.
+
+Two generated alignment bytes at `[0x007B02A6,0x007B02A8)` precede the
+116-byte source leaf at `[0x007B02A8,0x007B031C)`. Its raw and relocated
+SHA-256 values are
+`59e1d787a4beaa36b01d932672e43893331fc5d22a46e2371cc111ec4dacb192`
+and
+`4b404daca19132875236099c06bd18ab6441ade2d61a7f3c855210ddd2a28863`.
+Five reviewed relocations bind only to the source-owned scheduler-state
+getter and static/dynamic mutex creators.
+
+The 9,798-byte Apache-2.0 adapter has SHA-256
+`28081734a384c089635681014ed028414b75d375c22f0a52a64f53e22842cf2d`.
+It retains the exact authenticated CMSIS-FreeRTOS v10.5.1 algorithm and the
+recovered static/dynamic, recursive/robust, 80-byte control-block, 16-byte
+attribute, recursive-handle, and IRQ-context policies. Its FreeRTOS
+dependencies retain MIT terms.
+
+That release's 114,680-byte overlay, 3,638,076-byte Apollo-main component, and
+4,416,258-byte package have SHA-256 values
+`7603cf2a0de6e8b05d66dc356bf3e0701f6157536d29bdac8ad692dc56e0362c`,
+`f696c6dfbd8ab1f7b5cc44fdc06fcdc5baf44f368ad55130e7571d82ee31ec82`,
+and
+`11d40cd1b3648f96b5ec98c9fa2dff6de121e878978206a0a9694ede38d3a0ff`.
+The package classifies 115,236 source bytes, 81,969 generated bytes, and
+4,219,053 opaque bytes; 197,205 bytes are controlled. The focused production
+gate passes 10/10 tests offline; no hardware was accessed.
+
+At that point `osSemaphoreNew` remained candidate-only pending the production
+`heap_4` closure.
+
+## Prior FreeRTOS heap and CMSIS semaphore source increment
+
+Apollo main now source-owns four FreeRTOS-Kernel V10.5.1 `heap_4` functions,
+`vQueueDelete`, and CMSIS-FreeRTOS v10.5.1 `osSemaphoreNew`. Generated
+redirects replace 552 stock heap bytes at `[0x00456110,0x00456338)`, 34 queue
+deletion bytes at `[0x00441EA2,0x00441EC4)`, and 180 semaphore-constructor
+bytes at `[0x0044989A,0x0044994E)`.
+
+The six source leaves and four two-byte alignment gaps occupy
+`[0x007B031C,0x007B065A)`. Their sixteen reviewed relocations resolve to
+source-owned heap, interrupt-mask, scheduler, queue-creation/send/delete, and
+counting-semaphore functions. The bounded heap adapter keeps fixed scheduler
+suspend/resume and malloc-hook calls as explicit stock seams.
+
+The 115,510-byte overlay hashes to
+`6359e4e8c824af3cea36280a1aabd6ad671027e38fb3263fe9ac0cbb292660b4`.
+The 3,638,906-byte Apollo-main component hashes to
+`00d112e265f40dd8bf98fc9021bba54b3bcc94f159111b2f4815d5484e91c67c`
+and accounts for 81,470 replaced stock bytes, 81,288 generated patch bytes,
+182 source-owned in-place bytes, 115,692 total source-owned bytes, 32 wrapper
+bytes, and 3,441,894 opaque bytes.
+
+The 4,417,088-byte package hashes to
+`064c9429352132cee2a5dfe45c2bf52349e10111b89db91f093b1ce16ed0c2b0`.
+Its 570,697-byte flash plan hashes to
+`8334c9308a7ae7f03d7a2a214cca946063963b1636a9088fe730a15303dd2975`
+and records 791 placed, two unresolved, five container-only, and six
+protected regions.
+
+## Prior dual-image EasyLogger helper source increment
+
+Both Apollo images now redirect the complete EasyLogger `get_fmt_enabled`,
+unsigned-argument predicate, pointer-argument predicate, and `elog_strcpy`
+entries to shared MIT source with image-specific source seam providers. Each
+image retires 320 opaque stock bytes. Main appends 390 source bytes plus ten
+alignment bytes; boot appends 270 source bytes plus two alignment bytes.
+
+The main overlay/component pins are 115,910 bytes/
+`e59da6e6753c0c8a9fa73bad8cd555313d0e2ae6ed95006c818e6697e4fbe32d`
+and 3,639,306 bytes/
+`00f5f11dd18c13c56137d0f527da3ecd8ae850a9ae35dc96d671a4b998d79b61`.
+Main component ownership is 116,098 source-compiled bytes, 81,602 generated
+bytes, and 3,441,574 opaque bytes. The boot overlay/provider pins are 622
+bytes/
+`fc02cf66854adace4d213e08764e435e27c8c2bc7cc4f7caac6ff286f3adf813`
+and 149,222 bytes/
+`b4a5b0f2028842a2d6fde9424fff05fac2db3bf0e26e7f01d16a990e67ed9052`.
+Boot component ownership is 620 source-compiled bytes, 817 generated bytes,
+and 147,785 opaque bytes.
+
+The 4,417,760-byte package hashes to
+`fb662322f26e06aa04eb1d3f55f8c8f18606e510fac9c35885de3e4f92864c4d`.
+Its 592,687-byte flash plan hashes to
+`c06c84e277bad2160479e0ec1f7a626abb804574f42ecee0709f0978657cd1b3`
+and records 822 placed, two unresolved, five container-only, and six
+protected regions. Package ownership is 116,718 source bytes (2.642018%),
+83,395 generated bytes (1.887721%), and 4,217,647 opaque bytes
+(95.470261%); 200,113 bytes (4.529739%) are controlled.
+
+## Preceding Apollo-main FreeRTOS tick-getter source increment
+
+The production profile source-owns upstream FreeRTOS V10.5.1
+`xTaskGetTickCount` and `xTaskGetTickCountFromISR` from commit
+`def7d2df2b0506d3d249334974f51e427c17a41c`. The pinned 223,695-byte
+`tasks.c` hashes to
+`14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463`
+and retains its MIT license. The bounded 3,412-byte adapter and 1,186-byte
+header hash to
+`948d1b2de6026adc7cf84a34a359c859c32126b3afcafe92c2347f5f7ab56363`
+and
+`adc4065b3504a7eacb2e29e2d357636917e2b690afc49b265689e36d66171dae`.
+
+The exact stock functions are `[0x00454EFE,0x00454F06)` (8 bytes) and
+`[0x00454F06,0x00454F10)` (10 bytes). Their aggregate SHA-256 is
+`d0b93ff29439d26b92dcd56fd012a9dab842364f7c5f4b4f7f39a27ed8cfe077`.
+The former boundary at `0x00454F08` is corrected: it is the ISR getter's
+second instruction and has no direct or stored reference. The nine normal
+call sites are
+`0x004490DC`, `0x004492F6`, `0x0044933E`, `0x0047DC7C`, `0x0047E91A`,
+`0x004C6932`, `0x0052A4AE`, `0x0052A576`, and `0x00576084`; their ordered
+digest is
+`3b032511b7c47b3afe47149262380345e354dea6d00f2b9dda369d10ce89abcd`.
+The sole ISR caller is `0x004490D6`.
+
+The appended provider/getter source seam occupies 20 bytes at
+`[0x007B07EC,0x007B0800)`, after two generated alignment bytes. The provider
+is relocation-free and returns the recovered `xTickCount` value at
+`0x20074A34`; each four-byte getter has one `R_ARM_THM_JUMP24` relocation to
+it. Complete `B.W` plus NOP redirects own the full 18 stock bytes.
+
+The 115,932-byte overlay hashes to
+`272ba0e0492b0c6b721adec53a007809158d6871ccdb7ec52d4b6ceadd4b4529`
+and ends at `0x007B0800`. The manifest's raw installed-application partition
+is 116,118 source bytes, 81,622 generated bytes, and 3,441,556 opaque bytes.
+The main component accounts for 116,114 source-owned bytes (including 182
+fixed-address bytes), 81,626 generated patch-site bytes, 81,808
+replaced-stock bytes, 3,441,556 opaque base bytes, and a 32-byte generated
+wrapper, for 3,639,328 bytes total. Its SHA-256 is
+`615304858150f5ee6b7b4c62a714629375010c6f4ab20bea1b6958daa6a5b4af`.
+
+The 4,417,782-byte package hashes to
+`3bf635fb81439451e67642dc5ce11dde47a1773bda8ef11c12b35cd9bbbec01d`.
+Ownership is 116,738 source bytes (2.642457%), 83,415 generated bytes
+(1.888165%), and 4,217,629 opaque bytes (95.469378%); 200,153 bytes
+(4.530622%) are controlled. Its 596,957-byte flash plan hashes to
+`2b89447a0a867d1ec34f51e5798a4da7b28effe8bc5d7e27b1b7f24ce1c9cd3c`
+and records 828 placed, two unresolved, five container-only, and six
+protected regions. That inventory contains 53 source-compiled regions, 574
+generated source-entry replacement regions, and 18 generated alignment
+regions.
+
+## Preceding Apollo-main FreeRTOS missed-yield source increment
+
+The authenticated FreeRTOS-Kernel V10.5.1 `vTaskMissedYield` leaf is now
+source-owned. Its complete ten-byte stock span
+`[0x004555E6,0x004555F0)` hashes to
+`8cada1af8ad4973f2ad647d45c8a0ac9c56fdf2d8b270607844b7940eb7d5d2d`
+and has only two direct callers, at `0x00441FA2` and `0x00441FD8`. The exact
+upstream operation stores `pdTRUE` once to `xYieldPending`; focused
+disassembly binds that word to `0x20074A44`.
+
+The canonical relocation-free 14-byte leaf occupies
+`[0x007B0800,0x007B080E)`, taking the overlay to 115,946 bytes and SHA-256
+`a24cd67ac1d308b8812c329a294f3f07cbe9db4bc815be3fe081ba0c2fd9008c`.
+The overlay records 592 functions and 559 patch sites. The resulting
+3,639,342-byte component hashes to
+`f037745e9b85d16fc048ba2fedb282f7fc498a524a90b803b652556e286cf77d`;
+its accounting is 116,128 source-owned bytes including 182 in place, 81,636
+generated patch bytes, 81,818 replaced-stock bytes, and 3,441,546 opaque
+bytes.
+
+The 4,417,796-byte package hashes to
+`f06fdc7a1e9034e72321680b35fbd542b12dad06135e6f01f701d670dba676ae`.
+Ownership is 116,752 source bytes (2.642766%), 83,425 generated bytes
+(1.888385%), and 4,217,619 opaque bytes (95.468849%); 200,177 bytes
+(4.531151%) are controlled. The manifest records 831 placed, two unresolved,
+and five container-only regions. The focused audit is
+[`research/freertos-missed-yield-source-boundary-audit.md`](research/freertos-missed-yield-source-boundary-audit.md).
+
+## Prior Apollo-main FreeRTOS task-leaf source increment
+
+FreeRTOS-Kernel V10.5.1 commit
+`def7d2df2b0506d3d249334974f51e427c17a41c` unequivocally supplies both
+new source bodies. The complete stock boundaries are:
+
+| Function | Stock span | Bytes | SHA-256 | Direct caller |
+|---|---|---:|---|---|
+| `uxTaskResetEventItemValue` | `[0x00455ACA,0x00455AE0)` | 22 | `76463ec53fbc06884c159bf5b7d01708c06e404e9b51bdcaab307b219179c049` | `0x0047ECCE` |
+| `pvTaskIncrementMutexHeldCount` | `[0x00455AE0,0x00455AF6)` | 22 | `3cca7b821687976e59eccd737dc20b2064b86d66195c6f60f6a7cc2353f40d2f` | `0x00441D46` |
+
+Both functions preserve the stock volatile evaluations of `pxCurrentTCB` at
+`0x20074A20`. The reset leaf uses event-list value offset `+0x18`, priority
+offset `+0x2C`, and `configMAX_PRIORITIES=56`; the mutex leaf is admitted
+under `configUSE_MUTEXES=1` and increments the held-mutex field at `+0x64`.
+
+Canonical placement retains two alignment bytes before reset and mutex-held;
+suspend and timeout follow consecutively without padding:
+
+| Span | Bytes | Current ownership | Meaning |
+|---|---:|---|---|
+| `[0x007B080E,0x007B0810)` | 2 B | Generated alignment | Padding before reset leaf |
+| `[0x007B0810,0x007B082A)` | 26 B | Source compiled | `uxTaskResetEventItemValue`, SHA-256 `04fee613f7c2fb46a3e6f5832f7ea61875543a30160757ffd63579b58f0c45c6` |
+| `[0x007B082A,0x007B082C)` | 2 B | Generated alignment | Padding before mutex-held leaf |
+| `[0x007B082C,0x007B0844)` | 24 B | Source compiled | `pvTaskIncrementMutexHeldCount`, SHA-256 `494b41afb48389988e2678920ae7e1796b41a3d568e5c01c35c12c48bf7b57bf` |
+| `[0x00454D7C,0x00454D88)` | 12 B | Generated redirect/NOP fill | Complete `vTaskSuspendAll`, stock SHA-256 `3651c872be8fd55503df57fb49f5d0b7b94b0e784237141389a4b965b8edb6e2` |
+| `[0x00455556,0x00455566)` | 16 B | Generated redirect/NOP fill | Complete `vTaskInternalSetTimeOutState`, stock SHA-256 `6ff12b123d1647953300d002a439daf4df52f96e369eebbb0b183a1a4fb3e862` |
+| `[0x007B0844,0x007B0854)` | 16 B | Source compiled | `vTaskSuspendAll`, SHA-256 `0928ce291a4a96b18baf7304bc7f87fb828ac06902619f1f42500e04c73883be` |
+| `[0x007B0854,0x007B0866)` | 18 B | Source compiled | `vTaskInternalSetTimeOutState`, SHA-256 `8319202babe42ee571774682793c4c4c1a54c3a72826a92ba5c60273ba451c6a` |
+
+Suspend preserves the released barrier/read/wrapping-increment/write/barrier
+sequence for `uxSchedulerSuspended` at `0x20074A58`; retained
+`xTaskResumeAll` decrements the same word. Timeout capture preserves
+overflow-then-tick ordering from `0x20074A48` and `0x20074A34` into
+`TimeOut_t` offsets `+0` and `+4`.
+
+The 116,034-byte overlay hashes to
+`d0b36ab3661f3b3487e3962bfe58d9f588f6a6f1ea14e1d9389f7e45d98094bd`
+and records 596 functions and 563 patch sites. The 3,639,430-byte component
+hashes to
+`8a747653cc4d938e447197f2bec199933b68072318f0743e3cd85dcf656db8bc`.
+Builder accounting is 116,216 source-owned bytes including 182 in place,
+81,708 generated patch bytes, 81,890 replaced-stock bytes, and 3,441,474
+opaque bytes. Its installed partition is 116,216 source, 81,708 generated,
+and 3,441,474 opaque bytes.
+
+The 4,417,884-byte package hashes to
+`e3b7f29a19a4b3c19a14377a8ea8a77d14458a48678955d406ef7eea274dd6e7`.
+Ownership is 116,836 source bytes (2.644614%), 83,501 generated bytes
+(1.890068%), and 4,217,547 opaque bytes (95.465318%); 200,337 bytes
+(4.534682%) are controlled. Its 608,608-byte flash plan hashes to
+`c6cde87716d8ff407e06998aadaaa0da6e78e5689ea1ac2963f104178447cae2`
+and records 844 placed, two unresolved, and five container-only regions.
+Focused evidence is in
+[`research/freertos-reset-event-item-value-source-boundary-audit.md`](research/freertos-reset-event-item-value-source-boundary-audit.md)
+and
+[`research/freertos-mutex-held-source-boundary-audit.md`](research/freertos-mutex-held-source-boundary-audit.md).
+Suspend-specific caller, resume-coupling, and redirect evidence is in
+[`research/freertos-suspend-all-source-boundary-audit.md`](research/freertos-suspend-all-source-boundary-audit.md).
+
+## Prior FreeRTOS scheduler-cluster source increment
+
+Six authenticated FreeRTOS-Kernel V10.5.1 functions replace 770 complete
+stock bytes:
+
+| Stock span | Bytes | Ownership after this increment |
+|---|---:|---|
+| `[0x004420BC,0x004420D0)` | 20 | Generated redirect/NOP fill for `vPortYield` |
+| `[0x004420D0,0x004420E8)` | 24 | Generated redirect/NOP fill for `vPortEnterCritical` |
+| `[0x004420E8,0x00442114)` | 44 | Generated redirect/NOP fill for `vPortExitCritical` |
+| `[0x00454DCC,0x00454EFE)` | 306 | Generated redirect/NOP fill for `xTaskResumeAll` |
+| `[0x0045504C,0x0045519E)` | 338 | Generated redirect/NOP fill for `xTaskIncrementTick` |
+| `[0x00455876,0x0045589C)` | 38 | Generated redirect/NOP fill for `prvResetNextTaskUnblockTime` |
+
+The canonical source tail is `[0x007B0866,0x007B0B74)`: six alignment bytes
+and 776 compiled bytes. The overlay/component are 116,816/3,640,212 bytes
+with SHA-256 values
+`b9cb2b00d4859650d120ff713a8af9a1ca626876b46bac751098abdbca575153`
+and
+`fcb218fd5d9a33b2398cd046550b26258ca9da90d423c50ae635203535614a58`.
+Builder accounting is 116,998 source-owned bytes including 182 in place,
+82,478 generated patch bytes, 82,660 replaced-stock bytes, and 3,440,704
+opaque bytes. The production graph records 602 functions and 569 patch sites.
+
+The canonical package/flash plan are 4,418,666/620,534 bytes with SHA-256
+`5a31772a8a4fb746fa9eff53d618541fd38cf44a93c9d602eb88e15d142cef01`
+and
+`4c71800d5c33b618ff8cfaf9c0fb4adf06d59b1dcf753b18c56c6bf7f8a2139a`.
+The package classifies 117,612 source, 84,277 generated, and 4,216,777 opaque
+bytes and contains 861 placed regions. Focused boundary evidence is in the
+[port trio](research/freertos-scheduler-port-trio-source-boundary-audit.md),
+[reset-next](research/freertos-reset-next-task-unblock-time-source-boundary-audit.md),
+[increment-tick](research/freertos-task-increment-tick-source-boundary-audit.md),
+and [resume-all](research/freertos-task-resume-all-source-boundary-audit.md)
+audits. No hardware operation was performed.
+
+## Prior authenticated upstream LZ4 source increment
+
+openCFW now selects authenticated upstream LZ4 v1.10.0 commit
+`ebb370ca83af193212df4dcbadcc5d87bc0de2f0` as the maintained source for
+the active `LZ4_decompress_safe` path. This identifies the replacement source,
+not the stock point release. The active closure contains no compressor or
+writable data:
+
+| Ownership | Apple span | Linux span | Bytes |
+|---|---|---|---:|
+| Upstream decoder text | `[0x007B0B74,0x007B11F0)` | `[0x007B12A8,0x007B1942)` | 1,660 / 1,690 |
+| Generated alignment | none | `[0x007B1942,0x007B1944)` | 0 / 2 |
+| Source read-only `inc32table` + `dec64table` | `[0x007B11F0,0x007B1230)` | `[0x007B1944,0x007B1984)` | 64 |
+| Source safe ABI adapter | `[0x007B1230,0x007B1234)` | `[0x007B1984,0x007B1988)` | 4 |
+| Source mode-2 adapter | `[0x007B1234,0x007B1252)` | `[0x007B1988,0x007B19A6)` | 30 |
+
+The Apple relocated text/tables/safe/mode-2 hashes are
+`a7e5690af5e74e5395a51a716c9ebde2ee692dcf38decbf92141a3be261d358e`,
+`361b3c2a85717050294fd9e3c6440690de35c0a9455d50e487ea8f0881c40f03`,
+`589f67fc5b672f2be0809e999e8168708b11b90452088fb401a8d76d604959f5`,
+and
+`577501eac08ce8028c0262f19c84864439e11378314bc9f2874bd8acc77729b6`.
+Linux text and safe-adapter hashes are
+`632ad34cdf299a714e4d81b7f2ba55e4edb1ac897ff65744622ab29b914bc542`
+and
+`b30709dd4480368a7662bc4ec880846e7d74cb1da1386d4bbad8240d447894c2`;
+its tables and mode-2 leaf match Apple.
+
+The 40-byte stock mode-2 entry at `0x004E0C0C` and 30-byte stock safe entry
+at `0x0054F338` are generated redirects. The stock generic decoder and reader
+remain opaque. Full-image direct-branch and byte-granular even/Thumb pointer
+scans prove that retargeting safe makes them unreachable. The active upstream
+text calls the authenticated opaque void-EABI providers `__aeabi_memcpy` at
+`0x00439BE4` and `__aeabi_memmove` at `0x00439710`; their complete 166- and
+150-byte spans, including all memmove backward returns and its non-overlap
+tail to memcpy, remain pinned.
+
+| Artifact | Apple clang 21 | Linux clang 22.1.8 |
+|---|---|---|
+| Overlay | 118,574 / `1a0b92e12203b78f48191969744128bfbcc2559c811ae40a1f393370eceacea9` | 120,450 / `2901320d6169c2b9ad49d501cb25e7f50ceaa90b94e7d0640f80d318932d8fc7` |
+| Apollo-main component | 3,641,970 / `6621c7d0403e37d0598c5f2f521633afb13b98034542c8010cf9d210f576e91d` | 3,643,846 / `140cac71e8ec612f2129800ee9a205c30f743dfd51664207c1661fdb337d8f8d` |
+| Package | 4,420,424 / `d576be2c4626006a830593a5ad1aae21da8ee3e16d67d80c62eb8f3994bfc294` | 4,422,300 / `cb1516c2c61402626a723f05f4fb315e8af91adae599818830b2f8e1ffee0bf8` |
+
+Canonical component accounting is 118,756 source-owned, 82,478 generated
+patch-site, 82,660 replaced-stock, 3,440,704 opaque-base, and 32 wrapper
+bytes. Canonical package accounting is 119,370 source, 84,277 generated, and
+4,216,777 opaque bytes. Coverage increased through appended maintained source;
+the retained stock providers and unreachable compatibility bodies remain
+explicitly opaque. Validation was offline; no hardware was flashed or
+executed.
+
+## Prior FreeRTOS queue/task closure source increment
+
+That tranche moved 468 additional authenticated stock bytes to complete
+generated redirects: `xQueueGiveFromISR` (200),
+`xTaskRemoveFromEventList` (246), and `prvTaskCheckFreeStackSpace` (22).
+The maintained FreeRTOS V10.5.1 sources add 490 compiled bytes and one
+two-byte alignment region. Canonical source placement is
+`[0x007B1254,0x007B143E)`; Linux placement is
+`[0x007B19A8,0x007B1B92)`.
+
+Canonical component ownership is 119,248 source-owned, 82,946 generated
+patch-site, 83,128 replaced-stock, 3,440,236 opaque-base, and 32 wrapper
+bytes. Canonical package ownership is 119,860 source, 84,747 generated, and
+4,216,309 opaque bytes. The 4,420,916-byte package is therefore 4.628159%
+controlled and 95.371841% opaque.
+
+The qualified Linux component owns 121,124 source bytes, 83,112 generated
+patch bytes, 83,294 replaced-stock bytes, 3,440,070 opaque bytes, and 32
+wrapper bytes. Its 4,422,792-byte package contains 121,781 source, 84,702
+generated, and 4,216,309 opaque bytes: 206,483 bytes (4.668612%) are
+controlled. The Linux aggregate was reproduced by two normal fail-closed
+builds. Coverage accounting is structural and offline; no hardware was
+flashed or executed.
+
+## Preceding FreeRTOS timeout-check source increment
+
+That preceding tranche moved the complete 128-byte
+`xTaskCheckForTimeOut` stock span `[0x00455566,0x004555E6)` from opaque to
+generated replacement ownership. It appends a 136-byte source-compiled
+FreeRTOS V10.5.1 leaf plus two generated alignment bytes. Canonical placement
+is alignment `[0x007B143E,0x007B1440)` followed by source
+`[0x007B1440,0x007B14C8)`; Linux placement is
+`[0x007B1B92,0x007B1B94)` followed by
+`[0x007B1B94,0x007B1C1C)`.
+
+The canonical component now owns 119,386 source bytes (including 182 in
+place), 83,074 generated patch bytes, 83,256 replaced-stock bytes, 3,440,108
+opaque bytes, and 32 wrapper bytes. Its package partitions exactly into
+119,996 source, 84,877 generated, and 4,216,181 opaque bytes. Of 4,421,054
+total bytes, 204,873 bytes (4.634031%) are controlled and 95.365969% remain
+opaque. The canonical package SHA-256 is
+`4fb13f64e81b8a6ef9bdf784ac38d5fc08ed03e4d310601a48bf4b395c20ab37`.
+
+The Linux component owns 121,262 source bytes (including 182 in place),
+83,240 generated patch bytes, 83,422 replaced-stock bytes, 3,439,942 opaque
+bytes, and 32 wrapper bytes. Its 4,422,930-byte package partitions into
+121,917 source, 84,832 generated, and 4,216,181 opaque bytes. Thus 206,749
+bytes (4.674480%) are controlled and 95.325519% remain opaque.
+The Linux package SHA-256 is
+`22c0e367882b005c1b85ee40d138e596c423d5a6335b8d93bc5a68873323c3ab`.
+
+The canonical manifest has 821 Apollo-main regions and 884 regions across
+the whole package. Its phase-local plan recorded 877 placed, two unresolved,
+and five container-only regions. Apple has 609 effective compiled functions and
+573 effective patches; raw configuration and Linux have 613 functions and
+577 patches. The whole-package status partition is four confirmed records,
+one confirmed vector/OTA region, five container-only, 25 alignment, 589
+generated source-entry, one generated load-address, seven generated exact,
+one inferred-vector, 177 official, 72 source-compiled, and two unknown
+regions. The 821 main regions cover all component bytes without a gap or
+overlap. The Linux coarse plan is 563,135 bytes with SHA-256
+`7128a3311f0a0ded53394dbf49a1a1f71d5d559b891aba080cd41de2c5cf9066`
+and records 789 placed, two unresolved, and five container-only regions. This
+accounting was generated and verified offline. No firmware
+was signed, flashed, reset, booted, or executed on a G2.
+
+## Prior EasyLogger output/async production increment
+
+That prior tranche replaced 1,182 complete stock bytes with deterministic
+redirect/NOP-fill regions: `elog_output` contributes 1,026 bytes at
+`[0x0043D574,0x0043D976)`, the stock-compatible record builder contributes
+132 bytes at `[0x00448D4E,0x00448DD2)`, and the G2 submit wrapper contributes
+24 bytes at `[0x0044AA80,0x0044AA98)`. The six official alignment/CSI bytes
+immediately following `elog_output` remain opaque and unmodified.
+
+The three appended source closures occupied `[0x007B14C8,0x007B1CF6)` on
+Apple clang 21.0.0 and `[0x007B1C1C,0x007B2346)` on exact-root Linux clang
+22.1.8. This historical tranche selected stock's observed enqueue-failure
+double recycle; it is superseded by the corrected single-owner production
+promotion recorded below.
+
+Canonical component ownership is 121,480 source-owned bytes (including 182
+in-place bytes and four appended alignment bytes), 84,256 generated patch
+bytes, 84,438 replaced-stock bytes, 3,438,926 opaque bytes, and 32 wrapper
+bytes. The 4,423,148-byte Apple package partitions into 122,086 source,
+86,063 generated, and 4,214,999 opaque bytes. The corresponding exact-root
+Linux component owns 123,352 source bytes (including two appended alignment
+bytes), 84,422 generated patch bytes, 84,604 replaced-stock bytes, 3,438,760
+opaque bytes, and 32 wrapper bytes. Its 4,425,020-byte package partitions
+into 124,005 source, 86,016 generated, and 4,214,999 opaque bytes.
+
+The canonical manifest now has 833 Apollo-main regions and 896 regions
+across the package: 889 placed, two unresolved, and five container-only.
+Apple has 612 effective compiled functions and 576 effective patch sites;
+raw configuration and Linux have 616 functions and 580 patches. Strict
+closure processing authenticates each selected-function 8-byte `.ARM.exidx`
+CANTUNWIND/`R_ARM_PREL31` companion and deliberately discards it as metadata;
+it is not counted as executable source closure.
+
+The Apple overlay/component/package SHA-256 values are
+`02bfc227db4ad32c51303ea0dc49f908b277b78db1f2e5d7a5108559d863b249`,
+`eecf209bf4df5f61252099b16fb0a17f4493ec5db3c29eb266d07e6cf64d956b`,
+and `2b1008c2fc533f1257ee58bd6d0c08b449d2e12bc57d918f101586ba1d3e3d29`.
+The Linux values are
+`36479ef84126bc0075a2bcfa93c86591376eb4f18eb32983f84865f9d51e72e9`,
+`43d02017caa63a2bbe96e7dda056fa61009abcdb2913a12b2298dde131eb0a9c`,
+and `12386dc6f165053c3a308b4ec64bf2df90becf2b793a2404830a598b62b7a33d`.
+Both profiles reproduced byte-identically across two builds. Validation was
+offline; no firmware was signed, flashed, reset, booted, or executed on G2.
+
+## Preceding FreeRTOS semaphore-take production increment
+
+The legacy broad queue implementation no longer contributes its 596-byte
+semaphore body to the production overlay. The authenticated FreeRTOS-Kernel
+V10.5.1 candidate is appended with its previously qualified private
+timeout-disinherit helper. Apple contributes 18 helper bytes, two alignment
+bytes, two more alignment bytes, and 602 linked semaphore bytes; Linux emits
+the same helper and a 600-byte semaphore leaf. The candidate has exactly one
+`R_ARM_THM_CALL`, resolved to the source helper. The public stock span remains
+a generated redirect/NOP-fill region.
+
+Whole-image assembled scans find no wide or narrow external branch and no
+stored even or Thumb-form pointer into the retained stock helper
+`[0x00441EC4,0x00441ED8)`. Those 20 official bytes remain opaque and
+unmodified, but they are not executable dependency debt. The recursive mutex
+wrapper has exactly one authenticated first-take route: `MOVW/MOVT` materialize
+odd public entry `0x00441C45` in `r2`, followed by `BLX r2`.
+
+Canonical Apple component ownership is now 121,512 source-owned bytes
+(including 182 in place and eight appended alignment bytes), 84,256 generated
+patch bytes, 84,438 replaced-stock bytes, 3,438,926 opaque bytes, and 32
+wrapper bytes. Its 4,423,180-byte package partitions into 122,114 source,
+86,067 generated, and 4,214,999 opaque bytes. Exact-root Linux owns 123,366
+component source bytes and its 4,425,034-byte package partitions into 124,025
+source, 86,010 generated, and the same 4,214,999 opaque bytes. Against the
+prior package accounting, semantic source coverage increases by 28 bytes,
+generated alignment increases by four bytes, and opaque bytes do not change.
+
+The canonical manifest has 837 Apollo-main regions and 900 regions across the
+package: 893 placed, two unresolved, and five container-only. Apple records
+613 effective functions and 576 patch sites. Final overlay/component/package
+pins are:
+
+| Profile | Overlay | Apollo-main component | Package |
+|---|---|---|---|
+| Apple Clang 21.0.0 | 121,330 / `b0e7ec99bdf68b0b42b79e2bb935274f6b5a12d53a449cca3f021fa906ad1e3c` | 3,644,726 / `d9af47dd5b4668f23722a530df40b12dfb926ef5c0cc6fb603733b2e14a05a17` | 4,423,180 / `74278f0c7ae44e5364a6bca3abc762fcb48a0b2dcb06d816412566c5e974541d` |
+| exact-root Linux Clang 22.1.8 | 123,184 / `2ece296109ba518aa5e9474bc46dc0f77003abd57231c5becd6525dd18673c63` | 3,646,580 / `0c65b98e4867b7aa143572ccb831879c88ebeded4c8e41d2e294a72bd0ea61a9` | 4,425,034 / `b07ee2e813356553bd5c8f0a7c2f951376f8b338be6e53b6aff75824062f47f1` |
+
+Validation was offline; no firmware was signed, flashed, reset, booted, or
+executed on G2 hardware.
+
+## Preceding FreeRTOS queue-reset and unordered-removal source tranche
+
+The canonical Apollo-main component now source-owns the complete
+`xQueueGenericReset` range `[0x00441516,0x004415CA)` and
+`vTaskRemoveFromUnorderedEventList` range `[0x0045547C,0x00455556)` from
+authenticated FreeRTOS-Kernel V10.5.1. Their 180 and 218 stock bytes are
+generated full-span redirects with NOP fill. Apple appends a two-byte
+alignment region, a 172-byte reset leaf, and a 214-byte unordered leaf. Linux
+appends a 174-byte reset leaf, two alignment bytes, and a 210-byte unordered
+leaf. All four source sections are relocation-free.
+
+| Profile | Source-owned component bytes | Generated patch bytes | Replaced stock | Opaque component bytes | Package source/generated/opaque |
+|---|---:|---:|---:|---:|---|
+| Apple Clang 21.0.0 | 121,900 (182 in place) | 84,654 | 84,836 | 3,438,528 | 122,500 / 86,467 / 4,214,601 |
+| exact-root Linux Clang 22.1.8 | 123,752 (182 in place) | 84,820 | 85,002 | 3,438,362 | 124,409 / 86,410 / 4,214,601 |
+
+The canonical manifest has 842 Apollo-main regions and tiles all 3,645,114
+component bytes exactly. It records 615 effective functions and 578 effective
+patch sites; raw configuration and Linux have 619 functions and 582 patches.
+Final overlay/component/package pins are:
+
+| Profile | Overlay | Apollo-main component | Core-source package |
+|---|---|---|---|
+| Apple | 121,718 / `76e21a06d75ed5c3beb5343014621e432726ea285e46d54978a4de43d9b6b666` | 3,645,114 / `c32ff5c5daf946812df503cfaa328c1cc22dc4206201da0b752a365f235e0108` | 4,423,568 / `0e18c7c435edaff3fa5b692e8c17251f075c472933c93b05153ac0307e6f4ca8` |
+| Linux | 123,570 / `6885adb2da4019a5595fd14fefe7e6682e6d32e63b45c47b3436828a1238d288` | 3,646,966 / `657140490b0bd0b1f5aeb44505cc24b01377d16254f91c30e31893d1890731ca` | 4,425,420 / `d7870c13b9417f8a9866ad6b87858e712c1c6c005b0b534bdd1d4ba540b64d60` |
+
+The focused nine-test source/oracle and topology suite passes for both
+profiles. All work was offline; no G2 was signed, flashed, reset, booted, or
+executed.
+
+## Preceding corrected EasyLogger single-owner production integration
+
+The complete 132-byte official record-builder span
+`[0x00448D4E,0x00448DD2)` is still replaced by a generated full-span redirect,
+but its selected source is now the corrected single-owner builder. Apple
+emits 216 text bytes plus 54 read-only-data bytes; exact-root Linux emits 210
+text bytes plus the same 54-byte data closure. Each profile has exactly nine
+builder relocations: ready/default metadata pairs, allocator, consuming
+enqueue, two read-only-data bindings, and diagnostic output. Neither closure
+declares or relocates a recycler.
+
+| Profile | Source-owned component bytes | Generated patch bytes | Replaced stock | Opaque component bytes | Package source/generated/opaque |
+|---|---:|---:|---:|---:|---|
+| Apple Clang 21.0.0 | 121,888 (182 in place) | 84,654 | 84,836 | 3,438,528 | 122,488 / 86,467 / 4,214,601 |
+| exact-root Linux Clang 22.1.8 | 123,740 (182 in place) | 84,820 | 85,002 | 3,438,362 | 124,397 / 86,410 / 4,214,601 |
+
+| Profile | Overlay | Apollo-main component | Core-source package |
+|---|---|---|---|
+| Apple | 121,706 / `03dd692b55204fc36f67469ece0175e981b6281123a1b20b3db592ee2dd0b44c` | 3,645,102 / `ae123c6a119bfebd0420898aef590a9ba1fd7f7dc7da00b3d347f6573bba43ec` | 4,423,556 / `7cf86c7311b4684eb6d2fdd4f832989317c858733f8438dc01ee649fcd1cf250` |
+| Linux | 123,558 / `f2c33def6131981c1a283968bc02bd55cde32536f4f33a7fa3cbf905d42693fc` | 3,646,954 / `5ff7dd5894b74573971912371f22d0b463c32552ea1037441e1de992a6a8d3b9` | 4,425,408 / `fe49c0d9830327a0fdd0e7815a147bb6b810e27b9a9277b3bbfe9021de247a75` |
+
+This promotion was compiled and qualified offline. No G2 was connected,
+signed, flashed, reset, booted, or executed.
+
+## Preceding production EasyLogger hexdump tranche
+
+Apollo main now source-owns authenticated `elog_hexdump`, its two-argument
+raw-submit wrapper, and its level-less record builder. Full-span `B.W` plus
+NOP-fill replacements cover `[0x0043DACC,0x0043DC88)`,
+`[0x00448CCC,0x00448D4E)`, and `[0x0044AA76,0x0044AA80)`. The latter
+two end exactly at the existing level-aware builder and formatted-submit
+entries. Ten strict leaves preserve the 41/1/1 stock caller topology and the
+hexdump literal pool.
+
+The main function is derived from authenticated EasyLogger under MIT; bounded
+formatters and the G2 transport adapter are clean-room GPL-3.0-only code.
+Independent leaves use arithmetic uppercase conversion instead of sharing
+unowned digit-table rodata. The raw route leaves record byte `+0x0C`
+untouched and has no recycler, event-set, level-aware, or formatted-submit
+route. Its enqueue dependency is consuming.
+
+| Profile | Overlay | Apollo-main component | Core-source package |
+|---|---|---|---|
+| Apple Clang 21.0.0 | 123,197 / `bb870969ad9913e2cc4f012c0abec05b5a946bfbcaff4ab3cf7d7ac3b1e08966` | 3,646,593 / `24bb10715c6650429bcdbe0b2942f8b1a16ddd9b2f6aa2a65a69361df2611c7f` | 4,425,047 / `24d4b6527621c87622a5fdee96c63d266f10c3452e0a52322386ad717084b81c` |
+| exact-root Linux Clang 22.1.8 | 125,023 / `47f588845f4bd202d1d184282996cf45dd2cb514b4795ac9cdd5a7835da90d02` | 3,648,419 / `df9a1b00038d07ea0137258cc879547ecc86a11a737d1954bd1f4babd259c8e3` | 4,426,873 / `2eef6375f1ac218701f438afd8f5b5752b789a20db1e73f6dfd71486acc94423` |
+
+The canonical package accounts for 123,979 source, 87,051 generated, and
+4,214,017 opaque bytes. Exact-root Linux accounts for 125,862 source, 86,994
+generated, and the same 4,214,017 opaque bytes. The manifest has 864
+Apollo-main regions; Apple exposes 625 functions and 581 patch sites. The
+dedicated production suite executes all 256 byte-format values and boundary
+cases, checks exact stock topology and relocation closure, and verifies
+literal/NOP preservation. Qualification was offline; no image was signed or
+flashed and no hardware was operated.
+
+## Preceding FreeRTOS+CLI accessor-only production increment
+
+This phase assigned the complete 100-byte official
+`FreeRTOS_CLIGetParameter` span
+`[0x005848FC,0x00584960)` is now generated replacement ownership: a `B.W`
+to a 252-byte source-compiled MIT adaptation followed by 48 Thumb NOPs. The
+collector's exact two-byte comparison at `0x00541708` is also generated
+replacement ownership and copies a two-byte source fragment changing the
+capacity from 128 to 127. Static startup scatter-zero evidence, the existing
+post-command clear, and the reserved final byte together close the accessor's
+NUL-termination precondition.
+
+Apple appends 252 source bytes at `0x007B2464` and the two-byte fragment at
+`0x007B2560`; Linux appends them at `0x007B2B84` and `0x007B2C80`. Both
+leaves are strict and relocation-free. Assembled-image scans prove that the
+only external branch into the accessor range is the planned stock-entry
+`B.W`, that no stored pointer or branch targets an interior address, and that
+the copied capacity fragment has no branch or pointer ingress.
+
+| Profile | Overlay | Apollo-main component | Core-source package |
+|---|---|---|---|
+| Apple Clang 21.0.0 | 123,454 / `9e5004af49fb14a22e7e7ed7357e4c10f87dc8da3a7fb4d7b97fcffcde804c43` | 3,646,850 / `8722e5565bf54dade66fb751155c11ebd128d7a12853e3e4b8671c3c97807827` | 4,425,304 / `f2688fb35061283c05e9eb165d4f3eeb2cb2c4abd18cd28d074e58cb9da021db` |
+| exact-root Linux Clang 22.1.8 | 125,278 / `a0a520069e497613b397af1d7327752201ced44c876d6925a7561ae45c91fa7c` | 3,648,674 / `8c477d28a9f58feaf722bd1e00b9767a8ca745ba618515d46339271cd0288c1a` | 4,427,128 / `5598cb1f2a3b9a8b6101f61afcc5e24de54b01c3d5aa45396bf161344b3618bb` |
+
+Exact manifest ownership gives the Apple package 124,236 source bytes
+(2.807400%), 87,305 generated bytes (1.972859%), and 4,213,763 opaque bytes
+(95.219741%). Linux contains 126,117 source bytes (2.848732%), 87,248
+generated bytes (1.970758%), and the same 4,213,763 opaque bytes (95.180510%).
+The coarser Apple flash-plan calculation gives 124,221 source, 87,168
+generated, and 4,213,915 opaque bytes. The current Apollo-main manifest tiles
+871 regions. Cross-profile overlay configuration registers 631 functions and
+587 patches; the Apple-effective build report emits 627/583 and Linux emits
+631/587 because four CRC/TinyFrame leaves are Linux-profile-only. Coverage
+accounting and qualification are offline; no firmware was signed, flashed,
+reset, booted, or executed on G2 hardware.
+
+## Prior phase-local nanopb varint production coverage increment
+
+Authenticated nanopb-compatible `pb_decode_varint` is now a bounded altered
+production leaf. The exact stock body `[0x0048F5B8,0x0048F628)` changes from
+112 opaque bytes to generated source-entry replacement ownership. The
+canonical overlay appends two generated alignment bytes, 128 source text
+bytes at `0x007B2564`, and 16 source rodata bytes at `0x007B25E4`. Exact-root
+Linux appends two alignment bytes, 124 text bytes at `0x007B2C84`, and the
+same 16-byte closure at `0x007B2D00`.
+
+The canonical Apollo-main manifest now has 876 exactly tiled regions. Its
+complete status/count/byte ownership is: container 1/32; generated alignment
+36/73; generated entry replacement 573/85,274; generated exact load 1/6;
+generated exact replacement 8/136; official blob 176/3,437,730; and source
+compiled 81/123,745. Exact canonical package ownership is therefore 124,380
+source, 87,419 generated, and 4,213,651 opaque bytes. The canonical flash-plan
+view is 124,365 source, 87,282 generated, and 4,213,803 opaque bytes.
+Exact-root Linux coarsens the appended overlay and accounts for 126,259
+source, 87,360 generated, and 4,213,651 opaque bytes.
+
+Cross-profile overlay configuration registers 632 functions and 588 patches;
+Apple emits 628/584 after excluding the four Linux-only CRC/TinyFrame entries,
+while Linux emits all 632/588. Final package sizes/hashes are 4,425,450 /
+`cdbc1c41607d4623625ce25d0757457c72c550915c60d4b5ab7077c5760d0812`
+for Apple and 4,427,270 /
+`81729530e02fc666dfdef831933b44ec74e45bc3412c81d7c1161e03a5055152`
+for Linux. Qualification was offline; no firmware was signed or flashed and
+no hardware was operated.
+
+## Preceding CmBacktrace production coverage increment
+
+CmBacktrace `get_cur_thread_name` at `[0x00593AF6,0x00593AFE)` is now
+source-owned through an authenticated MIT compatibility leaf plus a separate
+recovered G2 adapter. The adapter implements the exact volatile current-TCB
+load, `0x34` task-name offset, and null-to-`0x34` behavior. The candidate and
+vendored snapshot remain production-excluded.
+
+Canonical component accounting is 123,802 source-owned bytes, 85,460
+generated patch-site bytes, 32 wrapper bytes, and 3,437,722 opaque bytes. The
+881-region manifest records source compiled 83/123,763, alignment 37/75,
+entry replacement 574/85,282, and official blob 177/3,437,722. Exact package
+ownership is 124,398 source, 87,429 generated, and 4,213,643 opaque bytes.
+Apple produces 123,620 / 3,647,016 / 4,425,470-byte overlay, component, and
+package artifacts; exact-root Linux produces 125,440 / 3,648,836 / 4,427,290.
+Qualification was offline with no signing, flashing, or hardware operation.
+
+## Prior phase-local complete FreeRTOS+CLI console-task coverage increment
+
+The complete stock task `[0x00541600,0x0054171C)` is now generated entry
+replacement ownership, while seven appended GPL-3.0-only leaves are source
+ownership. The leaves cover fill, state initialization, 22-group registration,
+command processing, byte consumption, one bounded receive, and task entry.
+The source boundary retains all 76 proprietary descriptors and the stock
+FreeRTOS+CLI interpreter ABI as opaque callable dependencies; it does not
+reclassify those bytes as source.
+
+Source behavior reserves the final byte of the 128-byte input array for NUL
+and rejects every receive count other than one. The former in-place capacity
+halfword and appended capacity fragment have been removed from current
+ownership because the whole source task supersedes them. The production-
+excluded console candidate and FreeRTOS-Plus-CLI snapshot remain outside the
+coverage census. Compact nanopb/CmBacktrace repinning changes placement only,
+not source classification or provenance.
+
+The 890-region canonical Apollo-main manifest records container 1/32;
+generated alignment 39/78; generated source-entry replacement 575/85,566;
+exact load 1/6; exact replacement 7/134; official blob 177/3,437,440; and
+source compiled 90/124,352. These regions tile all 3,647,608 component bytes.
+Exact Apple package ownership is 124,987 source, 87,714 generated, and
+4,213,361 opaque bytes out of 4,426,062. The cross-profile config contains
+640 functions, 589 patch sites, and 71 relocated leaves.
+
+The exact-root Linux package is 4,427,882 bytes. Its coarser flash-plan view
+classifies 126,873 source, 87,496 generated, and 4,213,513 opaque bytes; the
+corresponding Apple flash-plan view is 124,972 / 87,577 / 4,213,513. These
+coarse plan values do not replace the canonical exact-manifest ownership
+above. Exact Linux package ownership is 126,868 source, 87,653 generated, and
+4,213,361 opaque bytes.
+
+Coverage accounting and qualification are offline; no image was signed or
+flashed and no hardware was operated.
+
+## Prior phase-local FreeRTOS queue-message-count coverage increment
+
+The complete stock `uxQueueMessagesWaiting` and
+`uxQueueMessagesWaitingFromISR` spans, 36 and 24 bytes respectively, move from
+official-blob ownership to generated source-entry replacement ownership. Two
+new MIT source leaves add 50 and 34 source-compiled bytes, with two generated
+alignment bytes between them. The original six CMSIS callers remain in their
+prior ownership classes and enter the generated redirects at the unchanged
+stock addresses.
+
+The canonical Apollo-main manifest now has 895 regions and exactly tiles
+3,647,694 bytes:
+
+| Address status | Regions | Bytes |
+|---|---:|---:|
+| container-only | 1 | 32 |
+| generated alignment | 40 | 80 |
+| generated source-entry replacement | 577 | 85,626 |
+| generated exact load image | 1 | 6 |
+| generated exact replacement | 7 | 134 |
+| official blob | 177 | 3,437,380 |
+| source compiled | 92 | 124,436 |
+
+Exact Apple package ownership is 125,071 source, 87,776 generated, and
+4,213,301 opaque bytes out of 4,426,148. Exact-root Linux ownership is
+126,952 source, 87,715 generated, and the same 4,213,301 opaque bytes out of
+4,427,968. Separately, the coarser flash-plan view classifies Apple as
+125,056 source, 87,639 generated, and 4,213,453 opaque bytes, and Linux as
+126,957 source, 87,558 generated, and 4,213,453 opaque bytes. The config
+census is 642 functions, 591 patch sites, and 73 relocated leaves. The
+preceding console accounting remains explicitly phase-local rather than being
+rewritten. Coverage qualification was offline; no image was signed or flashed
+and no hardware was operated.
+
+## Prior phase-local nanopb `pb_skip_varint` coverage increment
+
+The complete 36-byte stock `pb_skip_varint` body at
+`[0x0048F628,0x0048F64C)` moves from official-blob ownership to generated
+source-entry replacement ownership. Two generated alignment bytes and one
+36-byte Zlib source leaf are appended. The sole caller and the retained
+150-byte stock `pb_read` dependency remain in their prior ownership classes.
+
+The canonical Apollo-main manifest now contains 898 exactly tiled regions:
+
+| Address status | Regions | Bytes |
+|---|---:|---:|
+| container-only | 1 | 32 |
+| generated alignment | 41 | 82 |
+| generated source-entry replacement | 578 | 85,662 |
+| generated exact load image | 1 | 6 |
+| generated exact replacement | 7 | 134 |
+| official blob | 177 | 3,437,344 |
+| source compiled | 93 | 124,472 |
+
+Exact Apple package ownership is 125,107 source, 87,814 generated, and
+4,213,265 opaque bytes out of 4,426,186. Exact-root Linux ownership is
+126,988 source, 87,753 generated, and 4,213,265 opaque bytes out of 4,428,006.
+The config contains 643 functions, 592 patch sites, and 74 relocated leaves.
+
+The coarser Apple flash-plan view is 125,092 / 87,677 / 4,213,417
+source/generated/opaque bytes; its 686,335-byte plan hashes to
+`ade1ae21d30884a7007289b6f53a3ce60e71d8c4227293c935f0b0019acd71b7`
+and has 954 placed, two unresolved, and 961 total records. Linux's 579,136-byte
+plan hashes to
+`b8b604173230837fddf9553eaf6307c47677404987ce8eec772bc2f815f0f986`,
+has 811 placed, two unresolved, and 818 total records, and its package-envelope
+view is 126,997 / 87,592 / 4,213,417. These coarse classifications do not
+replace exact manifest ownership.
+
+The authenticated nanopb 0.4.9 source is a compatibility selection within the
+pristine 0.4.7–0.4.9 range, not vendor revision proof. The preceding queue
+accounting remains phase-local. Coverage qualification was offline; no image
+was signed or flashed and no hardware was operated.
+
+## Preceding littlefs `lfs_file_size_` coverage increment
+
+The complete 24-byte stock `lfs_file_size_` body at
+`[0x004CE472,0x004CE48A)` moves from official-blob ownership to generated
+source-entry replacement ownership. One 20-byte BSD-3-Clause source leaf is
+appended with no new alignment. Its only relocation resolves to the existing
+source-owned `open_cfw_littlefs_util_max`; both original callers remain in
+their prior ownership classes.
+
+The canonical Apollo-main manifest now contains 901 exactly tiled regions:
+
+| Address status | Regions | Bytes |
+|---|---:|---:|
+| container-only | 1 | 32 |
+| generated alignment | 41 | 82 |
+| generated source-entry replacement | 579 | 85,686 |
+| generated exact load image | 1 | 6 |
+| generated exact replacement | 7 | 134 |
+| official blob | 178 | 3,437,320 |
+| source compiled | 94 | 124,492 |
+
+Exact canonical package ownership is 125,127 source bytes (2.826958%), 87,838
+generated bytes (1.984499%), and 4,213,241 opaque bytes (95.188543%) out of
+4,426,206. The Apple flash-plan view is 125,112 / 87,701 / 4,213,393
+source/generated/opaque bytes. Its 688,384-byte plan hashes to
+`c828571c91eb6eacd42a9ba17c7ae95c9c280f1169bedddbe9266216da403fb9`
+and has 957 placed, two unresolved, and five container-only records.
+
+The exact-root Linux package is 4,428,026 bytes. Its 580,508-byte plan hashes
+to `a052ade1c8d9153a6f9fb14db33ba14dab1c42c5eca84b67c4446c7efaad1da6`,
+has 813 placed, two unresolved, and five container-only records, and classifies
+127,017 source, 87,616 generated, and 4,213,393 opaque bytes. These coarse plan
+views do not replace the exact canonical manifest ownership above. The config
+contains 644 functions, 593 patch sites, and 75 relocated leaves.
+
+The littlefs v2.10.1 source-equivalent snapshot is authenticated reuse; this
+coverage claim includes no G2 block-device port and authorizes no mount,
+format, erase, or other hardware mutation. The preceding nanopb and queue
+accounting remains explicitly phase-local. Qualification was offline; no image
+was signed or flashed and no hardware was operated.
+
+## Preceding FreeRTOS task-list initializer coverage increment
+
+The complete 84-byte stock `prvInitialiseTaskLists` body at
+`[0x0045568C,0x004556E0)` moves from official-blob ownership to generated
+source-entry replacement ownership. One 88-byte MIT source leaf is appended
+without alignment. Its six relocations all resolve to the existing
+source-owned `open_cfw_freertos_list_initialise`; the sole stock caller remains
+in its prior ownership class.
+
+The canonical Apollo-main manifest now contains 904 exactly tiled regions:
+
+| Address status | Regions | Bytes |
+|---|---:|---:|
+| container-only | 1 | 32 |
+| generated alignment | 41 | 82 |
+| generated source-entry replacement | 580 | 85,770 |
+| generated exact load image | 1 | 6 |
+| generated exact replacement | 7 | 134 |
+| official blob | 179 | 3,437,236 |
+| source compiled | 95 | 124,580 |
+
+Exact canonical package ownership is 125,215 source bytes (2.828890%), 87,922
+generated bytes (1.986357%), and 4,213,157 opaque bytes (95.184753%) out of
+4,426,294. Canonical builder accounting is 124,626 source-owned bytes,
+including 182 in-place bytes; 85,946 generated patch-site bytes; 32 generated
+wrapper bytes; and 3,437,236 opaque base bytes.
+
+The 690,488-byte Apple flash plan hashes to
+`630a0252bdd89d3f4256c7f74d8c473c11271ba2601ed33ce28433ea341fc046`,
+reports 960 placed, two unresolved, and five container-only records, and
+classifies 125,200 source, 87,785 generated, and 4,213,309 opaque bytes. The
+581,929-byte Linux plan hashes to
+`a13a7ffc624804bcc91484bf601e775cd14d081ca840715753af27fef2a633ad`,
+reports 815 placed, two unresolved, and five container-only records, and
+classifies 127,105 / 87,700 / 4,213,309 bytes. These plan views do not replace
+the exact canonical ownership above. The config contains 645 functions, 594
+patch sites, and 76 relocated leaves. The preceding littlefs, nanopb, and
+queue accounting remains phase-local; all qualification was offline.
+
+## Preceding nanopb `pb_close_string_substream` coverage increment
+
+The exact 42-byte stock span `[0x0048F7CA,0x0048F7F4)` moves from
+`official_blob` ownership to `generated_source_entry_replacement` ownership,
+and one 36-byte Zlib source leaf is appended. The surrounding official region
+is split exactly at both function boundaries. The three callers remain in
+their prior ownership classes. At that milestone the leaf depended on the
+binary `pb_read` ABI entry at `0x0048F3BE`; the current read increment now
+source-owns that entry.
+
+The canonical Apollo-main manifest now contains 907 exactly tiled regions:
+
+| Address status | Regions | Bytes |
+|---|---:|---:|
+| container-only | 1 | 32 |
+| generated alignment | 41 | 82 |
+| generated source-entry replacement | 581 | 85,812 |
+| generated exact load image | 1 | 6 |
+| generated exact replacement | 7 | 134 |
+| official blob | 180 | 3,437,194 |
+| source compiled | 96 | 124,616 |
+
+Exact Apple package ownership is 125,251 source bytes, 87,964 generated bytes,
+and 4,213,115 opaque bytes out of 4,426,330. Canonical Apollo-main builder
+accounting is 124,662 source-owned bytes, 85,988 generated patch-site bytes,
+32 generated wrapper bytes, and 3,437,194 opaque base bytes.
+
+The 692,652-byte Apple flash plan hashes to
+`014379f55ad0ed067b0cae99565c4605972ce04c2d1c2cff571d4166010ad038`,
+reports 963 placed, two unresolved, and five container-only/skipped records
+(970 total), and classifies 125,236 source, 87,827 generated, and 4,213,267
+opaque bytes. The 583,414-byte exact-root Linux plan hashes to
+`b8654efdc30ec77fec4fff795d58782eb8fa853e5f1010989570388e2b02bdec`,
+reports 817 placed, two unresolved, and five container-only/skipped records
+(824 total), and classifies 127,141 / 87,742 / 4,213,267 bytes.
+
+Linux builder accounting is 126,482 source-owned, 86,154 generated patch,
+32 wrapper, and 3,437,028 opaque bytes. Its component/package sizes are
+3,649,696 / 4,428,150, while Apple uses 3,647,876 / 4,426,330. The config
+contains 646 functions, 595 patch sites, and 77 relocated leaves. These
+figures measure precise ownership classes; they do not claim that the entire
+firmware, or retained opaque bytes, are source-authenticated.
+
+## Preceding littlefs private rewind coverage increment
+
+The 18-byte `[0x004CE460,0x004CE472)` stock region moves from `official_blob`
+to `generated_source_entry_replacement`, and one 16-byte BSD-3-Clause source
+leaf is appended. The canonical Apollo-main manifest now has 908 regions:
+
+| Address status | Regions | Bytes |
+|---|---:|---:|
+| container-only | 1 | 32 |
+| generated alignment | 41 | 82 |
+| generated source-entry replacement | 582 | 85,830 |
+| generated exact load image | 1 | 6 |
+| generated exact replacement | 7 | 134 |
+| official blob | 179 | 3,437,176 |
+| source compiled | 97 | 124,632 |
+
+Exact Apple package ownership is 125,267 source, 87,982 generated, and
+4,213,097 opaque bytes. Its 693,369-byte flash plan hashes to
+`0cf8c53e57627c4628399c21f65fbceeb75be033086e305b0fac58d442232c0b`
+and reports 964 placed, two unresolved, and five container-only records.
+Exact-root Linux's 583,448-byte plan hashes to
+`60bdc9a9bff4b70df9b88dcb3964ed13ccd0c77a91c48c9a6ad1c0077c8f46a9`
+and retains 817/two/five records because its appended source tail is coarsened.
+The config census is 647/596/78; retained opaque ownership remains explicit.
+
+## Preceding nanopb `pb_decode_fixed32` coverage increment
+
+The 28-byte stock region `[0x00490190,0x004901AC)` moves from
+`official_blob` to `generated_source_entry_replacement` ownership. Its stock
+SHA-256 is
+`1ee27599a8ac5b8d2a0cbaac59986fb49be7b24c348a960a216b8cbbecce5bf3`.
+One 50-byte Zlib source leaf is appended; its SHA-256 is
+`798f8f7cbed57f6ba11dad46a6de9d25cb1f1710eb4fa904d79b6fe449952a04`.
+The leaf's sole call remains a relocation to opaque-but-authenticated stock
+`pb_read` at `0x0048F3BE`, so those 150 provider bytes do not change ownership.
+
+The canonical Apollo-main manifest now contains 911 exactly tiled regions:
+
+| Address status | Regions | Bytes |
+|---|---:|---:|
+| container-only | 1 | 32 |
+| generated alignment | 41 | 82 |
+| generated source-entry replacement | 583 | 85,858 |
+| generated exact load image | 1 | 6 |
+| generated exact replacement | 7 | 134 |
+| official blob | 180 | 3,437,148 |
+| source compiled | 98 | 124,682 |
+
+Exact canonical package ownership is 125,317 source, 88,010 generated, and
+4,213,069 opaque bytes out of 4,426,396. Apple builder accounting is 124,728
+source-owned bytes, 86,034 generated patch bytes, 32 generated wrapper bytes,
+and 3,437,148 opaque bytes; 86,216 stock bytes are replaced. Linux builder
+accounting is 126,548 source-owned, 86,200 generated patch, 32 wrapper, and
+3,436,982 opaque bytes; 86,382 stock bytes are replaced.
+
+The Apple plan is 695,459 bytes /
+`c9bfdf074b8718ce43f33dd41bbbe68577a0c779b22d4e1f33bdc91d2cf9bd0d`,
+with 967 placed, two unresolved, and five container-only records. Linux is
+584,883 bytes /
+`96e3339d6740ad96ef15fb0888afb18ddfba958e2324f910e5d6be3f0b5fb633`,
+with 819/two/five. Their coarse source/generated/opaque views are
+125,302/87,873/4,213,221 and 127,207/87,788/4,213,221. The config census is
+648 functions, 597 patch sites, and 79 relocated leaves.
+
+The nanopb 0.4.9 snapshot is a selected baseline inside an authenticated
+0.4.7–0.4.9 compatibility range, not a vendor-version claim. This increment
+was assembled and audited offline; no signing, flashing, or hardware operation
+is included.
+
+## Preceding littlefs `lfs_tag_type2` coverage increment
+
+The complete eight-byte stock region `[0x004CAE90,0x004CAE98)` moves from
+`official_blob` to `generated_source_entry_replacement`. Its SHA-256 is
+`a017094f8fc58d202d8c5a588f66dd319248578fa39e0f392ba3c7857d3500ef`.
+One ten-byte BSD-3-Clause source leaf is appended after two generated
+alignment bytes. The function text hashes to
+`88be40d05d37142bf0bae8306026d8c405a4f8f441aabd87ee6731557d4149fd`
+and has no relocation or provider.
+
+The canonical Apollo-main manifest now contains 915 exactly tiled regions:
+
+| Address status | Regions | Bytes |
+|---|---:|---:|
+| container-only | 1 | 32 |
+| generated alignment | 42 | 84 |
+| generated source-entry replacement | 584 | 85,866 |
+| generated exact load image | 1 | 6 |
+| generated exact replacement | 7 | 134 |
+| official blob | 181 | 3,437,140 |
+| source compiled | 99 | 124,692 |
+
+Exact canonical package ownership is 125,327 source, 88,020 generated, and
+4,213,061 opaque bytes out of 4,426,408. Apple builder accounting is 124,740
+source-owned bytes, 86,042 generated patch bytes, 32 wrapper bytes,
+3,437,140 opaque bytes, 86,224 replaced-stock bytes, and 182 in-place bytes.
+Linux builder accounting is 126,560 source-owned, 86,208 patch, 32 wrapper,
+3,436,974 opaque, 86,390 replaced, and 182 in place.
+
+The Apple plan is 698,204 bytes /
+`3ac4c2dfdce764389721b2c81f87d6bd0730cfefcdd0cfbe98bf6afa32935bcd`,
+with 971 placed, two unresolved, and five container-only records. Linux is
+586,282 bytes /
+`64522f68968b3a063fef934c0304c3d37caaff21b7650aa6d31c10f25e2cbda8`,
+with 821/two/five. Their coarse source/generated/opaque views are
+125,312/87,883/4,213,213 and 127,219/87,796/4,213,213. The config census is
+649 functions, 598 patch sites, and 80 relocated leaves; the Apple build
+report records 645 overlay functions and 594 generated patch records.
+
+The selected littlefs v2.10.1 commit is a source-equivalent compatibility
+baseline, not proof of the vendor's exact checkout. This scalar leaf does not
+include a block-device port or authorize signing, flashing, filesystem format
+or erase, or any hardware operation.
+
+## Preceding atomic dual-image littlefs tag-chunk coverage increment
+
+The byte-identical six-byte stock helpers at `[0x004CAEA0,0x004CAEA6)` in
+Apollo main and `[0x00410BA8,0x00410BAE)` in the bootloader move from
+`official_blob` to `generated_source_entry_replacement` ownership. Both
+images append the same six-byte BSD-3-Clause source leaf; Apollo main also
+adds two generated alignment bytes. Each replacement is a complete `B.W`
+plus NOP patch and leaves all four authenticated callers per image unchanged.
+
+That tag-chunk tranche's component manifests were exactly tiled as follows:
+
+| Component/status | Regions | Bytes |
+|---|---:|---:|
+| Apollo main: container-only | 1 | 32 |
+| Apollo main: generated alignment | 43 | 86 |
+| Apollo main: generated source-entry replacement | 585 | 85,872 |
+| Apollo main: generated exact load image | 1 | 6 |
+| Apollo main: generated exact replacement | 7 | 134 |
+| Apollo main: official blob | 182 | 3,437,134 |
+| Apollo main: source compiled | 100 | 124,698 |
+| Bootloader: generated alignment | 2 | 3 |
+| Bootloader: generated source-entry replacement | 27 | 820 |
+| Bootloader: official blob | 8 | 147,779 |
+| Bootloader: source compiled | 17 | 626 |
+
+The 919 Apollo-main regions and 54 bootloader regions classify the complete
+providers. Exact Apple package ownership is 125,339 source bytes, 88,034
+generated bytes, and 4,213,049 opaque bytes out of 4,426,422. Apollo-main
+builder accounting is 124,748 source-owned, including 182 in-place bytes;
+86,048 generated patch, 32 generated wrapper, and 3,437,134 opaque bytes,
+with 86,230 stock bytes replaced. Bootloader builder accounting is 626 source,
+820 generated patch, three generated alignment, and 147,779 opaque bytes.
+
+The 703,058-byte Apple flash plan hashes to
+`31e0aae47197e0c2d06d59a1382c5bd40868c1b4e48e39e5fd102881a34219cd`
+and records 978 placed, two unresolved, and five container-only regions. The
+Apollo-main config contains 650 functions, 599 patches, and 81 relocated
+leaves; boot has 29/27/10. These are source/build and ownership statements,
+not proof of the vendor's exact littlefs checkout or permission to sign,
+flash, mount, format, erase, reset, or operate G2 hardware.
+
+## Preceding atomic littlefs tag-validity/type1 coverage increment
+
+The ten-byte `lfs_tag_isvalid` spans and eight-byte `lfs_tag_type1` spans in
+both Apollo images move from `official_blob` to complete generated entry
+replacement ownership. Both images append six- and ten-byte BSD-3-Clause
+source leaves; Apollo main adds two two-byte alignment regions. The component
+manifests are exactly tiled as follows:
+
+| Component/status | Regions | Bytes |
+|---|---:|---:|
+| Apollo main: container-only | 1 | 32 |
+| Apollo main: generated alignment | 45 | 90 |
+| Apollo main: generated source-entry replacement | 587 | 85,890 |
+| Apollo main: generated exact load image | 1 | 6 |
+| Apollo main: generated exact replacement | 7 | 134 |
+| Apollo main: official blob | 183 | 3,437,116 |
+| Apollo main: source compiled | 102 | 124,714 |
+| Bootloader: generated alignment | 2 | 3 |
+| Bootloader: generated source-entry replacement | 29 | 838 |
+| Bootloader: official blob | 10 | 147,761 |
+| Bootloader: source compiled | 19 | 642 |
+
+The 926 Apollo-main and 60 bootloader regions give exact Apple package
+ownership of 125,371 source, 88,074 generated, and 4,213,013 opaque bytes.
+The 712,116-byte Apple plan hashes to
+`3dc88a1ad27c9fd1720806e190cff629116749b2e38766d331dfee786a05f3a8`
+and reports 991 placed, two unresolved, and five container-only records; its
+coarse ownership is 125,356 / 87,937 / 4,213,165. Exact-root Linux's
+594,109-byte plan hashes to
+`f59945999bdff46a4d86cc0d886adafae75ba23d136b7de448adbb1f7c12f3a4`
+and reports 832/two/five; its coarse ownership is 127,263 / 87,850 /
+4,213,165. Exact Linux manifest ownership is 127,265 / 87,848 / 4,213,165.
+
+These source and ownership claims use the authenticated littlefs v2.10.1
+source-equivalent baseline and focused G2 disassembly; they do not prove the
+exact vendor checkout. Offline assembly is GO. Signing, flashing, mount,
+format, erase, reset, boot, and hardware operation remain NO-GO.
+
+## Preceding atomic littlefs tag-type3 coverage increment
+
+The eight-byte `lfs_tag_type3` spans at `[0x004CAE98,0x004CAEA0)` and
+`[0x00410BA0,0x00410BA8)` move from `official_blob` to complete generated
+entry-replacement ownership. Apollo main appends two alignment bytes and a
+six-byte source leaf; boot appends the same source leaf without alignment.
+The resulting phase-local component tiling was:
+
+| Component/status | Regions | Bytes |
+|---|---:|---:|
+| Apollo main: container-only | 1 | 32 |
+| Apollo main: generated alignment | 46 | 92 |
+| Apollo main: generated source-entry replacement | 588 | 85,898 |
+| Apollo main: generated exact load image | 1 | 6 |
+| Apollo main: generated exact replacement | 7 | 134 |
+| Apollo main: official blob | 182 | 3,437,108 |
+| Apollo main: source compiled | 103 | 124,720 |
+| Bootloader: generated alignment | 2 | 3 |
+| Bootloader: generated source-entry replacement | 30 | 846 |
+| Bootloader: official blob | 10 | 147,753 |
+| Bootloader: source compiled | 20 | 648 |
+
+The 928 Apollo-main and 62 bootloader manifest regions produce exact Apple
+package ownership of 125,385 source, 88,090 generated, and 4,212,997 opaque
+bytes. The plan's coarse view is 125,368 / 87,955 / 4,213,149. It records 995
+placed, two unresolved, and five container-only records. Exact-root Linux
+records 833/two/five and exact ownership 127,279 / 87,864 / 4,213,149.
+
+Focused production qualification passes five tests. At that preceding
+accounting milestone, the `lfs_tag_size` candidate passed five tests and
+nanopb `pb_decode_fixed64` passed seven; both were awaiting promotion at that
+preceding accounting milestone and
+contributed zero bytes above. `lfs_tag_id` was promoted by the now-preceding
+increment below, while tag-size is promoted by the current increment that
+follows it. Nanopb fixed64 is promoted by the current Apollo-main-only
+coverage increment at the end of this ledger. Offline assembly is GO. Signing,
+flashing, filesystem mutation, reset, boot, and hardware operation remain
+NO-GO.
+
+## Preceding atomic littlefs tag-ID coverage increment
+
+The eight-byte `lfs_tag_id` spans at `[0x004CAEB0,0x004CAEB8)` and
+`[0x00410BB8,0x00410BC0)` move from `official_blob` to complete generated
+entry-replacement ownership. Both images append the same six-byte
+BSD-3-Clause source leaf; any required profile-specific alignment remains
+explicit in the final manifest rather than being folded into source bytes.
+
+The source is the exact compatible mask-and-shift behavior from authenticated
+littlefs v2.10.1 commit `0494ce7169f06a734a7bd7585f49a9fa91fa7318`.
+Complete-image scans authenticate 50 main and 41 boot callers, and the emitted
+text has no provider or relocation closure.
+
+Final build-dependent coverage values are:
+
+| Coverage property | Final value |
+|---|---|
+| Main/boot config censuses | `654/603/85`; `33/31/14` |
+| Manifest region counts | `932 main / 65 boot` |
+| Exact Apple source/generated/opaque ownership | `125,397 source / 88,108 generated / 4,212,981 opaque bytes` |
+| Exact Linux source/generated/opaque ownership | `127,291 source / 87,882 generated / 4,213,133 opaque bytes` |
+| Apple plan size/hash/counts | `719,656` / `162da721de3c6d59c85d99f06946757b08438aebec63422c30dcae166a62af90`; `1,002 placed / two unresolved / five container-only` |
+| Linux plan size/hash/counts | `597,634` / `165e5cb41e271e2b55e4330aa2872504bce55d98dd3c0c6e3c099788f0ad42c1`; `837 placed / two unresolved / five container-only` |
+
+The final component reports classify Apple main as 124,784 source, 86,082
+patch, 86,264 replaced-stock, and 3,437,100 opaque bytes; Linux main is
+126,604 / 86,248 / 86,430 / 3,436,934. Boot is 654 source, 854 patch, three
+alignment, and 147,745 opaque bytes under both profiles.
+
+The helper extracts ten scalar ID bits and imports no filesystem object or G2
+block-device path. Offline source assembly is GO; signing, flashing, mount,
+format, program, erase, reset, boot, and hardware operation remain NO-GO.
+
+## Preceding atomic littlefs tag-size coverage increment
+
+The complete six-byte `lfs_tag_size` spans at
+`[0x004CAEB8,0x004CAEBE)` and `[0x00410BC0,0x00410BC6)` move
+from `official_blob` to generated full-span entry-replacement ownership. Each
+image appends one six-byte BSD-3-Clause source leaf. The official bytes
+`8005800d7047` hash to
+`8596106584e598a657aea7fdd2e1156a748158d2d63d9c121c92587fabbdf8ca`;
+complete scans authenticate 15 main and 14 boot direct callers. The exact
+upstream authority is littlefs v2.10.1 `lfs.c[10793:10880]`, SHA-256
+`9df85bc43ca9f90ef58c425c5fd9bbbbf53585093be5fad0cc580fc88814ea5c`,
+commit `0494ce7169f06a734a7bd7585f49a9fa91fa7318`; the leaf has no filesystem
+object, provider, relocation, or hardware closure.
+
+| Coverage property | Final value |
+|---|---|
+| Main/boot function/patch/relocated-leaf config censuses | `655/604/86`; `34/32/15` |
+| Manifest region counts | `935 main / 67 boot` |
+| Exact Apple source/generated/opaque ownership | `125409 / 88122 / 4212969` |
+| Exact Linux source/generated/opaque ownership | `127305 / 87894 / 4213121` |
+| Apple plan size/hash/counts | `723104` / `8307f6d4fef67b7a762e53ddd5f8d09d690f04411b5383b8b3ac2e7bf2d138a1`; `1,007 placed / two unresolved / five container-only` |
+| Linux plan size/hash/counts | `599070` / `d40ee728ef3c5b5420aef232224ec178013a52d084d28ce9522b01f2387a3dc7`; `839 placed / two unresolved / five container-only` |
+
+Exact canonical ownership above must not be replaced by effective flash-plan
+coarse accounting. If retained, the latter is separately
+`125392 / 87987 / 4213121`
+and
+`127311 / 87888 / 4213121`.
+Component-report accounting is independently closed. Apple main is
+`124792 /
+86088 /
+86270 /
+3437094`; Linux main is
+`126612 /
+86254 /
+86436 /
+3436928`, ordered as source-owned,
+generated patch, replaced-stock, and opaque. Apple boot is
+`660 /
+860 /
+3 /
+147739`; Linux boot is
+`660 /
+860 /
+3 /
+147739`, ordered as source-owned,
+generated patch, generated alignment, and opaque.
+
+At that milestone these pins made tag-size the active coverage boundary;
+tag-ID was the settled preceding milestone. The production low-ten-bit mask
+imports no filesystem object or G2
+block-device path and authorizes no signing, flashing, mount, format, program,
+erase, reset, boot, or hardware operation.
+
+## Preceding nanopb fixed64 coverage increment
+
+Apollo main moves the complete 32-byte `pb_decode_fixed64` stock span from
+`official_blob` to generated full-span entry-replacement ownership and appends
+one bounded Zlib source leaf. Apple adds two alignment plus 28 source bytes;
+Linux adds two alignment plus 30 source bytes. At that fixed64-only milestone
+the `pb_read` entry at `0x0048F3BE` remained opaque; the subsequent `pb_read`
+increment below reclassified it. No bootloader
+coverage changes because no homolog was authenticated.
+
+| Coverage property | Final value |
+|---|---|
+| Main/boot function/patch/relocated-leaf censuses | `656/605/87`; `34/32/15` |
+| Manifest region counts | `938 main / 67 boot` |
+| Exact Apple source/generated/opaque | `125437 / 88156 / 4212937` |
+| Exact Linux source/generated/opaque | `127335 / 87928 / 4213089` |
+| Coarse Apple source/generated/opaque | `125420 / 88021 / 4213089` |
+| Coarse Linux source/generated/opaque | `127343 / 87920 / 4213089` |
+| Apple plan | `725221` / `506b34cd171e5d03da34faa9431f44e57b512d5d9e211cff8e9490ab0c716897`; 1,010/two/five |
+| Linux plan | `599794` / `14644134ce433085cfba526710635ae6c1f769ab9cd90e27857da15779c3fc80`; 840/two/five |
+
+Apollo-main component accounting is
+`124822 / 86120 / 86302 / 3437062` on Apple and
+`126644 / 86286 / 86468 / 3436896` on Linux, ordered as source-owned,
+generated patch, replaced stock, and opaque. Boot component accounting remains
+unchanged at `660 / 860 / 3 / 147739`. These are offline ownership and assembly
+claims only; they authorize no device operation.
+
+## Preceding nanopb `pb_read` coverage increment
+
+At this preceding milestone Apollo main moved the complete 150-byte `pb_read`
+span at
+`[0x0048F3BE,0x0048F454)` from `official_blob` to generated full-span
+entry-replacement ownership and appended one 158-byte Zlib source leaf. Apple
+required no new alignment; Linux added two alignment bytes before the leaf.
+All 13 external callers continued through the stock ABI address, with no
+reviewed interior or stored-pointer ingress. No bootloader ownership changed
+because no homolog was authenticated.
+
+| Coverage property | `pb_read` milestone value |
+|---|---|
+| Main/boot function/patch/relocated-leaf censuses | `657/606/88`; `34/32/15` |
+| Manifest region counts | `941 main / 67 boot` |
+| Exact Apple source/generated/opaque | `125595 / 88306 / 4212787` |
+| Exact Linux source/generated/opaque | `127493 / 88080 / 4212939` |
+| Coarse Apple source/generated/opaque | `125578 / 88171 / 4212939` |
+| Coarse Linux source/generated/opaque | `127503 / 88070 / 4212939` |
+| Apple plan | `727340` / `3a8eaa36c051d245c8ccc7d4c93868ab23f34e03a6113d35f6d0418185fc8702`; 1,013/two/five |
+| Linux plan | `601182` / `8ba103a92bcbfe060878c0091e6ef1608b3b5c2c55b1a94f5da8b4a2cf7fdcbc`; 842/two/five |
+
+Apollo-main component accounting is
+`124980 / 86270 / 86452 / 3436912` on Apple and
+`126804 / 86436 / 86618 / 3436746` on Linux, ordered as source-owned,
+generated patch, replaced stock, and opaque. At that milestone the source leaf
+retained three explicit binary dependencies: the private `buf_read` identity
+and two error strings. Boot accounting remained `660 / 860 / 3 / 147739`.
+The preceding constructor coverage and its `660/609/91`, 949-region ledger
+follow immediately below. These are offline ownership and assembly
+claims only; they authorize no signing, flashing, reset, boot, filesystem
+mutation, or hardware operation.
+
+## Preceding nanopb stream-constructor coverage milestone
+
+At that milestone, Apollo main moved the complete 28-byte
+`pb_istream_from_buffer` span at
+`[0x0048F49C,0x0048F4B8)` from official ownership to generated full-span entry
+replacement and appended one 20-byte Zlib source leaf. All 30 callers kept the
+stock entry; no alternate or interior ingress was found. The bootloader was
+unchanged.
+
+| Coverage property | Preceding Apple milestone value |
+|---|---|
+| Main function/patch/relocated-leaf censuses | `660 / 609 / 91` |
+| Apollo-main manifest regions | `949` |
+| Official blob | `184 regions / 3,436,786 bytes` |
+| Generated entry replacement | `595 regions / 86,220 bytes` |
+| Source compiled | `110 regions / 125,032 bytes` |
+| Exact package source/generated/opaque | `125709 / 88436 / 4212661` |
+| Overlay/component/package sizes | `124916 / 3648312 / 4426806` |
+
+These are offline ownership and assembly claims only; they authorize no
+signing, flashing, reset, boot, filesystem mutation, or hardware operation.
+
+## Preceding nanopb signed-varint coverage increment
+
+At that milestone the complete 64-byte `pb_decode_svarint` stock body became generated entry
+replacement ownership, and its 54-byte altered Zlib source leaf is source
+compiled. This changes the Apple Apollo-main census from 949 to 951 regions:
+official bytes decrease by 64, generated entry-replacement bytes increase by
+64, and source-compiled bytes increased by 54. That component report
+records 125,152 source-owned bytes, 182 source-owned-in-place bytes, 86,460
+generated patch-site bytes, 32 wrapper bytes, and 3,436,722 opaque base bytes.
+The Apple overlay/component/package are 124,970 / 3,648,366 / 4,426,860
+bytes. Exact-root Linux Clang 22.1.8 records a 50-byte source leaf and closes
+the overlay/component/package at 126,794 / 3,650,190 / 4,428,684 bytes. Its
+effective package ownership is 127,675 source / 88,260 generated / 4,212,749
+opaque bytes, with 846 placed flash records.
+
+## Preceding nanopb varint32-pair coverage increment
+
+The two stock bodies add 256 generated replacement bytes and the installed
+Apple closure adds 248 source bytes (222 private text, 16 literal, 10 public
+text) plus four generated alignment bytes. The Apollo-main manifest now has
+957 regions. Current component ownership is 125,404 source-compiled bytes plus
+182 source-owned-in-place bytes, 86,716 generated patch-site bytes plus 32
+wrapper bytes, and 3,436,466 opaque base bytes. Effective package ownership is
+125,994 source, 88,625 generated, and 4,212,493 opaque bytes. The Apple
+overlay/component/package sizes are 125,222 / 3,648,618 / 4,427,112 bytes.
+Exact-root Linux independently records 127,046 / 3,650,442 / 4,428,936 bytes,
+an effective 847-region flash plan, and 127,927 source / 88,516 generated /
+4,212,493 opaque package bytes. No bootloader source coverage or hardware claim
+is added.
+
+## Current nanopb skip-string coverage increment
+
+The complete 32-byte stock routine is generated replacement coverage; the
+installed leaf adds 34 source-compiled bytes and two alignment bytes. The
+960-region Apple build has effective package ownership 126,028 source / 88,659
+generated / 4,212,461 opaque bytes; exact-root Linux has 127,963 / 88,548 /
+4,212,461. Current overlay/component/package sizes are
+125,258/3,648,654/4,427,148 and 127,082/3,650,478/4,428,972. No bootloader or
+hardware coverage is added.

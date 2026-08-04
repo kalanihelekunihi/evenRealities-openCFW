@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "component": "FreeRTOS-Plus-CLI",
+  "license": "MIT",
+  "upstream": {
+    "repository": "https://github.com/FreeRTOS/FreeRTOS.git",
+    "repository_web": "https://github.com/FreeRTOS/FreeRTOS",
+    "selected_ref": "43defa566cc440251dbd6b48d1fcca27f88cfcdd",
+    "selected_commit": "43defa566cc440251dbd6b48d1fcca27f88cfcdd",
+    "selected_tree": "1244875832c8ef8a39ee5b97a9dad657f7ea13ec",
+    "selected_commit_date": "2021-12-23T10:16:27-08:00",
+    "selected_commit_payload_size": 1919,
+    "selected_commit_payload_sha256": "4cfa2d11824e0becc99f4ce83f628860a1597dd27d6ffa33356342d2357bed19",
+    "selected_parent": "4f71a94a7001f9cdf2c7a0a2572d376f1c6d14af",
+    "selected_commit_signature": {
+      "present": true,
+      "signer_trust_verified": false,
+      "qualification": "The exact signed commit payload is reconstructible offline, but no signer identity or trust decision is claimed."
+    },
+    "object_closure_path": "upstream/objects.json",
+    "object_closure_size": 9480,
+    "object_closure_sha256": "d5dd36c97cb1f2fb0a285e3e3345a1bdf4d71007ce40916ac390724bab015872",
+    "tree_object_count": 7,
+    "identical_file_pair_ceiling": {
+      "commit": "1309654d6f5d1342b4a9d3d7ae0824e8fcaefaf2",
+      "tree": "6d95fe580646a9f12b9cc2f37bd1e9c4d72fbad7",
+      "commit_date": "2023-04-11T11:52:56-07:00",
+      "commit_payload_size": 1119,
+      "commit_payload_sha256": "76dee2077a0e872fb3c576420b0cab5c14eda34832a101621767aa345b01c744",
+      "parent": "d57e2b746b6ae086719d8e68f12f3665c08a0452",
+      "unchanged_paths": [
+        "FreeRTOS_CLI.c",
+        "FreeRTOS_CLI.h"
+      ]
+    },
+    "next_source_topology_change": {
+      "commit": "4727d6b3cc369310306ff24f61cafc1017853f82",
+      "date": "2023-04-13T10:32:41-04:00",
+      "qualification": "Adds static registration and restructures registration; it is outside this source choice."
+    },
+    "declared_component_version": "V1.0.4"
+  },
+  "selection": {
+    "classification": "authenticated official MIT V1.0.4-compatible source choice; production-excluded",
+    "exact_g2_vendor_commit_proven": false,
+    "compatibility_choice": "43defa56 source bytes",
+    "qualification": "The C/H pair is a deliberate openCFW source choice compatible with the recovered G2 ABI and behavior. It is not a claim that Even used this exact commit.",
+    "selected_file_count": 4,
+    "selection_rule": "Exact official interpreter, public header, version history, and component license closure.",
+    "included_features": [
+      "dynamic command registration",
+      "command dispatch",
+      "stateful help iterator",
+      "space-delimited parameter accessor"
+    ],
+    "excluded_features": [
+      "76 Even command descriptors, strings, ordering, and handlers",
+      "Even console transport and task integration",
+      "production source registration, overlay placement, and firmware patching",
+      "a chosen static-allocation policy"
+    ],
+    "integration_status": "authenticated and verified offline; no production registration"
+  },
+  "g2_boundary": {
+    "evidence": "docs/research/freertos-plus-cli-source-recovery-audit.md",
+    "analyzer": "tools/analyze_g2_freertos_plus_cli.py",
+    "official_image": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "official_image_size": 3523396,
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "load_mapping": "run_address = file_offset + 0x00437fe0",
+    "functions": [
+      {
+        "name": "FreeRTOS_CLIRegisterCommand",
+        "start": "0x005847AC",
+        "end": "0x005847FE",
+        "size": 82,
+        "sha256": "f38c77e0e672a21d1bb24fd6a26e604b1a782b5d633839aad036a96a69f7390b"
+      },
+      {
+        "name": "FreeRTOS_CLIProcessCommand",
+        "start": "0x005847FE",
+        "end": "0x005848FC",
+        "size": 254,
+        "sha256": "a276b358abd3ec722f4da8e17928590941d16f06ae92ad1375a1baf963e2893d"
+      },
+      {
+        "name": "FreeRTOS_CLIGetParameter",
+        "start": "0x005848FC",
+        "end": "0x00584960",
+        "size": 100,
+        "sha256": "35c6a4ce194bbea2a6044c3ab8f1108bb6c88806bafbf196fdb88c49a983a6f4"
+      },
+      {
+        "name": "prvHelpCommand",
+        "start": "0x00584960",
+        "end": "0x0058498E",
+        "size": 46,
+        "sha256": "7603491ef1e11c9a1163028ac35a5800f53402536eb99633a45fee477948a32c"
+      },
+      {
+        "name": "prvGetNumberOfParameters",
+        "start": "0x005849A8",
+        "end": "0x005849D4",
+        "size": 44,
+        "sha256": "e490fbface011c7219cd628b01e189998e661015dc22991ef18ed63f7faea508"
+      }
+    ],
+    "recovered_abi": {
+      "target_pointer_bits": 32,
+      "size_t_bits": 32,
+      "descriptor_size": 16,
+      "descriptor_offsets": {
+        "pcCommand": 0,
+        "pcHelpString": 4,
+        "pxCommandInterpreter": 8,
+        "cExpectedNumberOfParameters": 12
+      },
+      "callback": "BaseType_t callback(char *output, size_t output_len, const char *input)",
+      "expected_parameter_count_bits": 8,
+      "variable_parameter_sentinel": -1,
+      "negative_expected_counts_bypass_validation": true,
+      "registered_list_node_size": 8,
+      "registered_list_node_offsets": {
+        "definition": 0,
+        "next": 4
+      },
+      "non_reentrant_stateful_iterators": true
+    },
+    "recovered_configuration": {
+      "effective_output_buffer_bytes": 128,
+      "safe_nul_terminated_input_payload_max": 127,
+      "configCOMMAND_INT_MAX_OUTPUT_SIZE": "not recoverable; G2 passes an external 128-byte buffer",
+      "configAPPLICATION_PROVIDES_cOutputBuffer": "not recoverable; FreeRTOS_CLIGetOutputBuffer is dead",
+      "observed_registration_api": "dynamic",
+      "dynamic_registration_count": 76,
+      "minimum_dynamic_node_payload_bytes": 608,
+      "configSUPPORT_STATIC_ALLOCATION": "not statically proven",
+      "selected_openCFW_static_allocation_policy": "unresolved"
+    },
+    "first_party_glue": {
+      "included": false,
+      "registered_descriptor_count": 76,
+      "descriptor_aggregate_sha256": "268128313cc6da003e82e72b4341f5208a480196b3da1a1c0085b49a79d51788",
+      "qualification": "All Even descriptors, command/help strings, callbacks, and ordering remain first-party glue outside this upstream snapshot."
+    },
+    "local_patch": {
+      "source_patch": "g2-patches/0001-suppress-unknown-command-for-blank-input.patch",
+      "source_patch_size": 1077,
+      "source_patch_sha256": "ada47a9141d44e465be3be4b878e61b1056c65986dd728003c169d9383491d70",
+      "stock_instruction_range": [
+        "0x005848CA",
+        "0x005848F4"
+      ],
+      "stock_instruction_size": 42,
+      "stock_instruction_sha256": "4ed35ac83ff6802181aee553929f5eadff5e6b6c797601145d1c688c88eae7c1",
+      "behavior": "Do not copy the unknown-command text when input is exactly carriage return or the empty string.",
+      "present_in_official_history": false,
+      "production_status": "documented source delta only; not production-configured"
+    }
+  },
+  "files": [
+    {
+      "local_path": "FreeRTOS_CLI.c",
+      "upstream_path": "FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.c",
+      "git_mode": "100644",
+      "size": 11623,
+      "sha256": "1719b355951afaf3349a371ff633d9dd4867a3e3442b91552fd3550082ef93f4",
+      "git_blob_sha1": "52dbe0d4a616b094ba92a7285bb4f31124b90e51"
+    },
+    {
+      "local_path": "FreeRTOS_CLI.h",
+      "upstream_path": "FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.h",
+      "git_mode": "100644",
+      "size": 4972,
+      "sha256": "c60d23b875d04429ba745b340d934b6c5eae89ce3be2b3a4aa92a034e6176890",
+      "git_blob_sha1": "0f670ca8303f4732559d4a40a615f186a2d07985"
+    },
+    {
+      "local_path": "History.txt",
+      "upstream_path": "FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI/History.txt",
+      "git_mode": "100644",
+      "size": 1576,
+      "sha256": "5a561aba760ef014190a64fcf7235af99e005bc63a6732fffc2cc00d8ef5a960",
+      "git_blob_sha1": "8c62cf90bb1d1995ece6ba95f12862505ab27303"
+    },
+    {
+      "local_path": "LICENSE_INFORMATION.txt",
+      "upstream_path": "FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI/LICENSE_INFORMATION.txt",
+      "git_mode": "100644",
+      "size": 1178,
+      "sha256": "6aa2663d0ffab6e9c830273b00d6f7b233955773057881c808bc368ca0079928",
+      "git_blob_sha1": "6812e2716eee9232d8a247daa300584675a1a83a"
+    }
+  ]
+}
