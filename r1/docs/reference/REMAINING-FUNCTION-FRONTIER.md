@@ -1,33 +1,37 @@
 # Remaining application-function frontier
 
-Snapshot: 2026-08-13, after the complete 128...202-byte inventory frontier closure.
+Snapshot: 2026-08-13, after the complete sub-32...127-byte inventory frontier closure.
 
 ## Current inventory
 
 The generated ownership ledger contains 3,165 application/bootloader functions. All 304
 bootloader entries are source-routed. Of 2,861 application entries, including 174 exact manual
-provenance supplements, 622 remain `unclassified` and implementation-blocked. The
-corresponding recovered function bodies total 26,162 bytes. The complete 63-function
-128...202-byte tier (10,126 declared bytes) is now source-routed by
-[`FRONTIER-128-202-CORRELATION.md`](../correlation/FRONTIER-128-202-CORRELATION.md): forty R1
-product functions, one Nordic nrfx_pwm closure, nine GoMore and four Goodix licensed-provider
-candidates, two YHM2710 candidates, one time/calendar candidate, two generic device-registry
-candidates, one sensor-stream framework candidate, and three shared quantized-neural runtime
-candidates. Eleven
-generic device-registry, fifteen time/calendar-provider, forty software-TWI-provider, and seven
+provenance supplements, 53 remain `unclassified` and implementation-blocked. The
+corresponding recovered function bodies total 1,548 bytes. The complete 128...202-byte tier
+(63 functions / 10,126 declared bytes) is source-routed by
+[`FRONTIER-128-202-CORRELATION.md`](../correlation/FRONTIER-128-202-CORRELATION.md), the
+64...127-byte tier (150 functions / 13,652 declared bytes) by
+[`FRONTIER-64-127-CORRELATION.md`](../correlation/FRONTIER-64-127-CORRELATION.md), the
+32...63-byte tier (151 functions / 6,636 declared bytes) by
+[`FRONTIER-32-63-CORRELATION.md`](../correlation/FRONTIER-32-63-CORRELATION.md), and the
+sub-32-byte tier (268 functions / 4,326 declared bytes) by
+[`FRONTIER-SUB32-CORRELATION.md`](../correlation/FRONTIER-SUB32-CORRELATION.md). The surviving
+unclassified set is small and documented per function: callerless or orphan-record bodies,
+framework plumbing shared between two blocked candidate families, and libc-like helpers under
+the no-transitive-admission precedent. Thirty
+generic device-registry, sixteen time/calendar-provider, forty software-TWI-provider, and seven
 RTC-device-provider candidates remain separately blocked under their distinct provider families.
-Thirteen sensor-algorithm heap functions / 1,202 executable bytes are now also separately blocked
+Thirty-four sensor-algorithm heap functions are separately blocked
 under `unknown_sensor_algorithm_heap_provider_candidate` rather than left unclassified.
-Five generic sensor-stream registration/dispatch/unregistration/timer/object-create functions are
-separately
+Thirty-two generic sensor-stream functions are separately
 blocked under `unknown_sensor_stream_framework_candidate`; their adjacent registry, list,
 allocator, buffer, and timer implementations are not admitted by that function-local
 classification.
-Nine shared quantized-neural runtime functions / 1,790 bytes are separately blocked under
-`unknown_shared_quantized_neural_runtime_candidate`. They include the indirect 434-byte signed-int8
-pooling executor plus the float quantizer, parameter helper, descriptor constructor, and int8-add
-executor shared by
-independently gated GoMore and Goodix graph builders; no exact provider source has been authenticated.
+Twenty-five shared quantized-neural runtime functions are separately blocked under
+`unknown_shared_quantized_neural_runtime_candidate`, including the indirect 434-byte signed-int8
+pooling executor, the float quantizer, parameter helper, descriptor constructors, the int8-add,
+float tensor-add, and float softmax executors, and the twelve-descriptor tensor-arena alloc/free
+pair; no exact provider source has been authenticated.
 The completed 264...274-byte tier routes three R1 product functions and three GoMore-private
 functions / 1,386 bytes. The existing EUS producer now has its exact 272-byte body pinned; clean
 metadata-only policies add the five/30-cycle battery diagnostic cadence and `ep.bin` recovery

@@ -185,6 +185,38 @@ from summarize_r1_frontier_128_202 import (
     TIME_CALENDAR_FRONTIER_128_202_FUNCTIONS,
     YHM_FRONTIER_128_202_FUNCTIONS,
 )
+from summarize_r1_frontier_64_127 import (
+    ALL_FUNCTIONS as FRONTIER_64_127_FUNCTIONS,
+    GOODIX_FRONTIER_64_127_FUNCTIONS,
+    GOMORE_FRONTIER_64_127_FUNCTIONS,
+    NORDIC_FRONTIER_64_127_FUNCTIONS,
+    R1_FRONTIER_64_127_FUNCTIONS,
+    TOOLCHAIN_FRONTIER_64_127_FUNCTIONS,
+    YHM_FRONTIER_64_127_FUNCTIONS,
+)
+from summarize_r1_frontier_32_63 import (
+    ALL_FUNCTIONS as FRONTIER_32_63_FUNCTIONS,
+    GOODIX_FRONTIER_32_63_FUNCTIONS,
+    GOMORE_FRONTIER_32_63_FUNCTIONS,
+    R1_FRONTIER_32_63_FUNCTIONS,
+)
+from summarize_r1_frontier_sub32 import (
+    ALL_FUNCTIONS as FRONTIER_LT32_FUNCTIONS,
+    GOODIX_FRONTIER_LT32_FUNCTIONS,
+    GOMORE_FRONTIER_LT32_FUNCTIONS,
+    NORDIC_FRONTIER_LT32_FUNCTIONS,
+    R1_FRONTIER_LT32_FUNCTIONS,
+    TOOLCHAIN_FRONTIER_LT32_FUNCTIONS,
+    YHM_FRONTIER_LT32_FUNCTIONS,
+)
+
+
+def _candidate_label(item: dict) -> str:
+    """Deterministic short label for an unresolved-provider candidate entry."""
+    import re as _re
+    words = _re.findall(r"[a-z0-9]+", str(item["role"]).lower())
+    label = "_".join(words[:5]) or "candidate"
+    return f"{label}_{int(item['entry']):05x}"
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1144,6 +1176,14 @@ APP_PRODUCT_FUNCTIONS.update({
     int(item["entry"]): str(item["symbol"])
     for item in R1_FRONTIER_128_202_PRODUCT_FUNCTIONS
 })
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in (
+        R1_FRONTIER_64_127_FUNCTIONS
+        + R1_FRONTIER_32_63_FUNCTIONS
+        + R1_FRONTIER_LT32_FUNCTIONS
+    )
+})
 APP_PRODUCT_DATA_MODEL_FUNCTIONS = {
     int(item["entry"]): str(item["symbol"])
     for item in R1_FRONTIER_230_248_PRODUCT_HELPERS
@@ -1280,6 +1320,10 @@ APP_YHM2710_FRONTIER_CANDIDATES = {
     0x0003530C: "yhm2710_chip_id_verify",
     0x00035508: "yhm2710_ladder_field_update",
 }
+APP_YHM2710_FRONTIER_CANDIDATES.update({
+    int(item["entry"]): str(item["symbol"]) or _candidate_label(item)
+    for item in YHM_FRONTIER_64_127_FUNCTIONS + YHM_FRONTIER_LT32_FUNCTIONS
+})
 
 
 # Product lifecycle and feed scheduling around Nordic's attributable WDT
@@ -1420,6 +1464,31 @@ APP_UNKNOWN_TIME_CALENDAR_CANDIDATES.update({
 })
 
 
+# The 64...127-byte, 32...63-byte, and sub-32-byte frontier closures add their
+# unresolved-provider candidates to the same blocked families. Labels derive
+# deterministically from the recovered roles.
+_FRONTIER_TIER2_FUNCTIONS = (
+    tuple(FRONTIER_64_127_FUNCTIONS)
+    + tuple(FRONTIER_32_63_FUNCTIONS)
+    + tuple(FRONTIER_LT32_FUNCTIONS)
+)
+for _item in _FRONTIER_TIER2_FUNCTIONS:
+    _entry = int(_item["entry"])
+    _label = str(_item["symbol"]) or _candidate_label(_item)
+    _family = _item["provider_family"]
+    if _family == "unknown_time_calendar_provider_candidate":
+        APP_UNKNOWN_TIME_CALENDAR_CANDIDATES[_entry] = _label
+    elif _family == "unknown_generic_device_registry_candidate":
+        APP_UNKNOWN_DEVICE_REGISTRY_CANDIDATES[_entry] = _label
+    elif _family == "unknown_sensor_stream_framework_candidate":
+        APP_UNKNOWN_SENSOR_STREAM_CANDIDATES[_entry] = _label
+    elif _family == "unknown_shared_quantized_neural_runtime_candidate":
+        APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES[_entry] = _label
+    elif _family == "unknown_sensor_algorithm_heap_provider_candidate":
+        APP_UNKNOWN_SENSOR_ALGORITHM_HEAP_CANDIDATES[_entry] = _label
+del _item, _entry, _label, _family
+
+
 # Exact semantic/source correlations to Nordic modules. These functions must be
 # supplied by the pinned SDK rather than reconstructed locally. Each newly
 # admitted entry has a function-local SDK fingerprint plus matching control flow;
@@ -1460,6 +1529,11 @@ APP_NORDIC_SYMBOLS = {
     **{
         int(function["entry"]): str(function["symbol"])
         for function in NORDIC_FRONTIER_128_202_FUNCTIONS
+    },
+    **{
+        int(function["entry"]): str(function["symbol"])
+        for function in NORDIC_FRONTIER_64_127_FUNCTIONS
+            + NORDIC_FRONTIER_LT32_FUNCTIONS
     },
     0x000272B8: "nrf_atfifo_wspace_req",
     0x000272F0: "nrf_atfifo_wspace_close",
@@ -1799,6 +1873,10 @@ APP_NORDIC_SOURCES = {
         int(function["entry"]): "modules/nrfx/drivers/src/nrfx_pwm.c"
         for function in NORDIC_FRONTIER_128_202_FUNCTIONS
     },
+    0x00087ED0: "components/ble/peer_manager/peer_database.c",
+    0x00030CA8: "modules/nrfx/drivers/src/nrfx_pwm.c",
+    0x00030CB8: "modules/nrfx/drivers/src/nrfx_pwm.c",
+    0x00030CC8: "modules/nrfx/drivers/src/nrfx_pwm.c",
     0x000272B8: "components/libraries/atomic_fifo/nrf_atfifo_internal.h",
     0x000272F0: "components/libraries/atomic_fifo/nrf_atfifo_internal.h",
     0x00027302: "components/libraries/atomic_fifo/nrf_atfifo_internal.h",
@@ -2195,6 +2273,11 @@ APP_TOOLCHAIN_RUNTIME_SYMBOLS = {
     0x0003B328: "tanhf",
     0x0003B5C0: "expm1",
 }
+APP_TOOLCHAIN_RUNTIME_SYMBOLS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in TOOLCHAIN_FRONTIER_64_127_FUNCTIONS
+        + TOOLCHAIN_FRONTIER_LT32_FUNCTIONS
+})
 
 # Stripped Arm C-library internals whose provider and role are proven by their
 # complete semantics and runtime-only call graph, but whose private upstream
@@ -2893,6 +2976,15 @@ APP_GOMORE_AUDIT_GROUPS = {
     "gomore_frontier_128_202": tuple(
         int(item["entry"]) for item in GOMORE_FRONTIER_128_202_FUNCTIONS
     ),
+    "gomore_frontier_64_127": tuple(
+        int(item["entry"]) for item in GOMORE_FRONTIER_64_127_FUNCTIONS
+    ),
+    "gomore_frontier_32_63": tuple(
+        int(item["entry"]) for item in GOMORE_FRONTIER_32_63_FUNCTIONS
+    ),
+    "gomore_frontier_lt32": tuple(
+        int(item["entry"]) for item in GOMORE_FRONTIER_LT32_FUNCTIONS
+    ),
 }
 
 APP_GOMORE_AUDIT_FUNCTIONS: dict[int, tuple[str, ...]] = {}
@@ -2939,6 +3031,12 @@ APP_GOODIX_EXACT_CANDIDATES = {
     **{
         int(item["entry"]): str(item["role"])
         for item in GOODIX_FRONTIER_128_202_FUNCTIONS
+    },
+    **{
+        int(item["entry"]): str(item["role"])
+        for item in GOODIX_FRONTIER_64_127_FUNCTIONS
+            + GOODIX_FRONTIER_32_63_FUNCTIONS
+            + GOODIX_FRONTIER_LT32_FUNCTIONS
     },
     **{
         int(item["entry"]): str(item["role"])
