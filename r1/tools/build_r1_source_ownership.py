@@ -209,6 +209,13 @@ from summarize_r1_frontier_sub32 import (
     TOOLCHAIN_FRONTIER_LT32_FUNCTIONS,
     YHM_FRONTIER_LT32_FUNCTIONS,
 )
+from summarize_r1_frontier_final53 import (
+    ALL_FUNCTIONS as FRONTIER_FINAL53_FUNCTIONS,
+    GOMORE_FRONTIER_FINAL53_FUNCTIONS,
+    GOODIX_FRONTIER_FINAL53_FUNCTIONS,
+    NORDIC_FRONTIER_FINAL53_FUNCTIONS,
+    R1_FRONTIER_FINAL53_FUNCTIONS,
+)
 
 
 def _candidate_label(item: dict) -> str:
@@ -1182,6 +1189,7 @@ APP_PRODUCT_FUNCTIONS.update({
         R1_FRONTIER_64_127_FUNCTIONS
         + R1_FRONTIER_32_63_FUNCTIONS
         + R1_FRONTIER_LT32_FUNCTIONS
+        + R1_FRONTIER_FINAL53_FUNCTIONS
     )
 })
 APP_PRODUCT_DATA_MODEL_FUNCTIONS = {
@@ -1471,6 +1479,7 @@ _FRONTIER_TIER2_FUNCTIONS = (
     tuple(FRONTIER_64_127_FUNCTIONS)
     + tuple(FRONTIER_32_63_FUNCTIONS)
     + tuple(FRONTIER_LT32_FUNCTIONS)
+    + tuple(FRONTIER_FINAL53_FUNCTIONS)
 )
 for _item in _FRONTIER_TIER2_FUNCTIONS:
     _entry = int(_item["entry"])
@@ -1486,6 +1495,10 @@ for _item in _FRONTIER_TIER2_FUNCTIONS:
         APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES[_entry] = _label
     elif _family == "unknown_sensor_algorithm_heap_provider_candidate":
         APP_UNKNOWN_SENSOR_ALGORITHM_HEAP_CANDIDATES[_entry] = _label
+    elif _family == "unknown_rtc_device_provider_candidate":
+        APP_UNKNOWN_RTC_DEVICE_CANDIDATES[_entry] = _label
+    elif _family == "unknown_software_twi_provider_candidate":
+        APP_UNKNOWN_SOFTWARE_TWI_CANDIDATES[_entry] = _label
 del _item, _entry, _label, _family
 
 
@@ -1534,6 +1547,7 @@ APP_NORDIC_SYMBOLS = {
         int(function["entry"]): str(function["symbol"])
         for function in NORDIC_FRONTIER_64_127_FUNCTIONS
             + NORDIC_FRONTIER_LT32_FUNCTIONS
+            + NORDIC_FRONTIER_FINAL53_FUNCTIONS
     },
     0x000272B8: "nrf_atfifo_wspace_req",
     0x000272F0: "nrf_atfifo_wspace_close",
@@ -1877,6 +1891,10 @@ APP_NORDIC_SOURCES = {
     0x00030CA8: "modules/nrfx/drivers/src/nrfx_pwm.c",
     0x00030CB8: "modules/nrfx/drivers/src/nrfx_pwm.c",
     0x00030CC8: "modules/nrfx/drivers/src/nrfx_pwm.c",
+    0x00093960: "integration/nrfx/legacy/nrf_drv_twi.c",
+    0x0005C034: "components/ble/peer_manager/gatt_cache_manager.c",
+    0x00034A7C: "modules/nrfx/drivers/src/nrfx_wdt.c",
+    0x00034410: "modules/nrfx/drivers/src/prs/nrfx_prs.c",
     0x000272B8: "components/libraries/atomic_fifo/nrf_atfifo_internal.h",
     0x000272F0: "components/libraries/atomic_fifo/nrf_atfifo_internal.h",
     0x00027302: "components/libraries/atomic_fifo/nrf_atfifo_internal.h",
@@ -2388,6 +2406,7 @@ APP_FREERTOS_EXACT_SYMBOLS = {
     0x00084CF0: "prvAddCurrentTaskToDelayedList",
     0x00084D68: "prvAddNewTaskToReadyList",
     0x0008522C: "prvIsQueueEmpty",
+    0x0009566C: "uxTaskGetNumberOfTasks",
     0x00085468: "prvResetNextTaskUnblockTime",
     0x00085534: "prvUnlockQueue",
     0x00084E58: "prvCheckForValidListAndQueue",
@@ -2500,6 +2519,7 @@ APP_FREERTOS_EXACT_SOURCES = {
     0x00084CF0: "external/freertos/source/tasks.c",
     0x00084D68: "external/freertos/source/tasks.c",
     0x0008522C: "external/freertos/source/queue.c",
+    0x0009566C: "external/freertos/source/tasks.c",
     0x00085468: "external/freertos/source/tasks.c",
     0x00085534: "external/freertos/source/queue.c",
     0x00084E58: "external/freertos/source/timers.c",
@@ -2985,6 +3005,9 @@ APP_GOMORE_AUDIT_GROUPS = {
     "gomore_frontier_lt32": tuple(
         int(item["entry"]) for item in GOMORE_FRONTIER_LT32_FUNCTIONS
     ),
+    "gomore_frontier_final53": tuple(
+        int(item["entry"]) for item in GOMORE_FRONTIER_FINAL53_FUNCTIONS
+    ),
 }
 
 APP_GOMORE_AUDIT_FUNCTIONS: dict[int, tuple[str, ...]] = {}
@@ -3037,6 +3060,7 @@ APP_GOODIX_EXACT_CANDIDATES = {
         for item in GOODIX_FRONTIER_64_127_FUNCTIONS
             + GOODIX_FRONTIER_32_63_FUNCTIONS
             + GOODIX_FRONTIER_LT32_FUNCTIONS
+            + GOODIX_FRONTIER_FINAL53_FUNCTIONS
     },
     **{
         int(item["entry"]): str(item["role"])

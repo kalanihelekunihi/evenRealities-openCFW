@@ -1,33 +1,33 @@
 # Remaining application-function frontier
 
-Snapshot: 2026-08-13, after the complete sub-32...127-byte inventory frontier closure.
+Snapshot: 2026-08-13, after the final-53 residue closure.
 
 ## Current inventory
 
 The generated ownership ledger contains 3,165 application/bootloader functions. All 304
 bootloader entries are source-routed. Of 2,861 application entries, including 174 exact manual
-provenance supplements, 53 remain `unclassified` and implementation-blocked. The
-corresponding recovered function bodies total 1,548 bytes. The complete 128...202-byte tier
-(63 functions / 10,126 declared bytes) is source-routed by
-[`FRONTIER-128-202-CORRELATION.md`](../correlation/FRONTIER-128-202-CORRELATION.md), the
-64...127-byte tier (150 functions / 13,652 declared bytes) by
-[`FRONTIER-64-127-CORRELATION.md`](../correlation/FRONTIER-64-127-CORRELATION.md), the
-32...63-byte tier (151 functions / 6,636 declared bytes) by
-[`FRONTIER-32-63-CORRELATION.md`](../correlation/FRONTIER-32-63-CORRELATION.md), and the
-sub-32-byte tier (268 functions / 4,326 declared bytes) by
-[`FRONTIER-SUB32-CORRELATION.md`](../correlation/FRONTIER-SUB32-CORRELATION.md). The surviving
-unclassified set is small and documented per function: callerless or orphan-record bodies,
-framework plumbing shared between two blocked candidate families, and libc-like helpers under
-the no-transitive-admission precedent. Thirty
-generic device-registry, sixteen time/calendar-provider, forty software-TWI-provider, and seven
+provenance supplements, **zero remain `unclassified`**: every recovered function now carries an
+ownership disposition. The final 53-entry residue (1,548 declared bytes) is closed by
+[`FRONTIER-FINAL53-CORRELATION.md`](../correlation/FRONTIER-FINAL53-CORRELATION.md); earlier
+closures are the 128...202-byte tier
+([`FRONTIER-128-202-CORRELATION.md`](../correlation/FRONTIER-128-202-CORRELATION.md)), the
+64...127-byte tier
+([`FRONTIER-64-127-CORRELATION.md`](../correlation/FRONTIER-64-127-CORRELATION.md)), the
+32...63-byte tier
+([`FRONTIER-32-63-CORRELATION.md`](../correlation/FRONTIER-32-63-CORRELATION.md)), and the
+sub-32-byte tier
+([`FRONTIER-SUB32-CORRELATION.md`](../correlation/FRONTIER-SUB32-CORRELATION.md)).
+
+The remaining frontier is therefore provider-boundary work, not inventory: forty
+generic device-registry, sixteen time/calendar-provider, forty software-TWI-provider, and ten
 RTC-device-provider candidates remain separately blocked under their distinct provider families.
 Thirty-four sensor-algorithm heap functions are separately blocked
-under `unknown_sensor_algorithm_heap_provider_candidate` rather than left unclassified.
+under `unknown_sensor_algorithm_heap_provider_candidate`.
 Thirty-two generic sensor-stream functions are separately
 blocked under `unknown_sensor_stream_framework_candidate`; their adjacent registry, list,
 allocator, buffer, and timer implementations are not admitted by that function-local
 classification.
-Twenty-five shared quantized-neural runtime functions are separately blocked under
+Twenty-six shared quantized-neural runtime functions are separately blocked under
 `unknown_shared_quantized_neural_runtime_candidate`, including the indirect 434-byte signed-int8
 pooling executor, the float quantizer, parameter helper, descriptor constructors, the int8-add,
 float tensor-add, and float softmax executors, and the twelve-descriptor tensor-arena alloc/free
