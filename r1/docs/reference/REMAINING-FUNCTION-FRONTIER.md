@@ -1,22 +1,29 @@
 # Remaining application-function frontier
 
-Snapshot: 2026-08-13, after the complete 204...210-byte inventory frontier closure.
+Snapshot: 2026-08-13, after the complete 128...202-byte inventory frontier closure.
 
 ## Current inventory
 
 The generated ownership ledger contains 3,165 application/bootloader functions. All 304
 bootloader entries are source-routed. Of 2,861 application entries, including 174 exact manual
-provenance supplements, 685 remain `unclassified` and implementation-blocked. The
-corresponding recovered function bodies total 36,288 bytes. Nine
-generic device-registry, fourteen time/calendar-provider, forty software-TWI-provider, and seven
+provenance supplements, 622 remain `unclassified` and implementation-blocked. The
+corresponding recovered function bodies total 26,162 bytes. The complete 63-function
+128...202-byte tier (10,126 declared bytes) is now source-routed by
+[`FRONTIER-128-202-CORRELATION.md`](../correlation/FRONTIER-128-202-CORRELATION.md): forty R1
+product functions, one Nordic nrfx_pwm closure, nine GoMore and four Goodix licensed-provider
+candidates, two YHM2710 candidates, one time/calendar candidate, two generic device-registry
+candidates, one sensor-stream framework candidate, and three shared quantized-neural runtime
+candidates. Eleven
+generic device-registry, fifteen time/calendar-provider, forty software-TWI-provider, and seven
 RTC-device-provider candidates remain separately blocked under their distinct provider families.
 Thirteen sensor-algorithm heap functions / 1,202 executable bytes are now also separately blocked
 under `unknown_sensor_algorithm_heap_provider_candidate` rather than left unclassified.
-Four generic sensor-stream registration/dispatch/unregistration/timer functions / 1,670 bytes are separately
+Five generic sensor-stream registration/dispatch/unregistration/timer/object-create functions are
+separately
 blocked under `unknown_sensor_stream_framework_candidate`; their adjacent registry, list,
 allocator, buffer, and timer implementations are not admitted by that function-local
 classification.
-Six shared quantized-neural runtime functions / 1,328 bytes are separately blocked under
+Nine shared quantized-neural runtime functions / 1,790 bytes are separately blocked under
 `unknown_shared_quantized_neural_runtime_candidate`. They include the indirect 434-byte signed-int8
 pooling executor plus the float quantizer, parameter helper, descriptor constructor, and int8-add
 executor shared by

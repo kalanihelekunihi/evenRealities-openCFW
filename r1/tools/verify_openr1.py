@@ -327,6 +327,10 @@ from summarize_r1_frontier_204_210 import (
     SHARED_TENSOR_FRONTIER_204_210_FUNCTIONS,
     summarize as summarize_r1_frontier_204_210,
 )
+from summarize_r1_frontier_128_202 import (
+    ALL_FUNCTIONS as R1_FRONTIER_128_202_FUNCTIONS,
+    summarize as summarize_r1_frontier_128_202,
+)
 from summarize_r1_delayed_event_timer import (
     R1_DELAYED_EVENT_TIMER_FUNCTIONS,
     summarize as summarize_r1_delayed_event_timer,
@@ -1271,6 +1275,23 @@ def main() -> None:
         "investigate_before_implementing",
     ):
         require(frontier_204_210, marker)
+    frontier_128_202 = DOCS / "FRONTIER-128-202-CORRELATION.md"
+    for marker in (
+        "63 functions",
+        "10,126 declared body bytes",
+        "0x00072A32..<0x00072ACE",
+        "modules/nrfx/drivers/src/nrfx_pwm.c",
+        "0x20019EF4",
+        "0x20015708",
+        "0x00030AC9",
+        "SD_BLE_GAP_TX_POWER_SET",
+        "dev_info",
+        "0x00074CB0",
+        "0x00074CE0",
+        "0xA0",
+        "investigate_before_implementing",
+    ):
+        require(frontier_128_202, marker)
     delayed_event_timer = DOCS / "DELAYED-EVENT-TIMER-CORRELATION.md"
     for marker in (
         "0x00065F84..<0x000660FC",
@@ -1340,8 +1361,8 @@ def main() -> None:
         require(activity_day_merge, marker)
     remaining_frontier = DOCS / "REMAINING-FUNCTION-FRONTIER.md"
     for marker in (
-        "685 remain `unclassified`",
-        "36,288 bytes",
+        "622 remain `unclassified`",
+        "26,162 bytes",
         "Thirteen sensor-algorithm heap functions / 1,202 executable bytes",
         "Eight composite-initializer functions / 586 bytes",
         "Six paired sleep-classifier graph-builder/allocator functions / 2,188 bytes",
@@ -2871,6 +2892,10 @@ def main() -> None:
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
         "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_frontier_128_202.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_pmic_charge_event.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
@@ -2951,15 +2976,15 @@ def main() -> None:
     application_provider_counts = Counter(
         row["provider_family"] for row in ownership_rows if row["image"] == "application"
     )
-    if application_provider_counts["unclassified"] != 685:
+    if application_provider_counts["unclassified"] != 622:
         raise AssertionError("application unclassified-function count changed")
-    if application_provider_counts["nordic_nrf5_sdk_17_1_0"] != 538:
+    if application_provider_counts["nordic_nrf5_sdk_17_1_0"] != 539:
         raise AssertionError("application Nordic provider count changed")
-    if application_provider_counts["r1_product_specific"] != 285:
+    if application_provider_counts["r1_product_specific"] != 325:
         raise AssertionError("R1 product-function count changed")
-    if application_provider_counts["unknown_generic_device_registry_candidate"] != 9:
+    if application_provider_counts["unknown_generic_device_registry_candidate"] != 11:
         raise AssertionError("unknown generic device-registry boundary count changed")
-    if application_provider_counts["unknown_time_calendar_provider_candidate"] != 14:
+    if application_provider_counts["unknown_time_calendar_provider_candidate"] != 15:
         raise AssertionError("unknown time/calendar provider boundary count changed")
     if application_provider_counts["unknown_software_twi_provider_candidate"] != 40:
         raise AssertionError("unknown software-TWI provider boundary count changed")
@@ -2969,12 +2994,12 @@ def main() -> None:
             "unknown_sensor_algorithm_heap_provider_candidate"] != 13:
         raise AssertionError("unknown sensor-algorithm heap boundary count changed")
     if application_provider_counts[
-            "unknown_sensor_stream_framework_candidate"] != 4:
+            "unknown_sensor_stream_framework_candidate"] != 5:
         raise AssertionError("unknown sensor-stream framework boundary count changed")
     if application_provider_counts[
-            "unknown_shared_quantized_neural_runtime_candidate"] != 6:
+            "unknown_shared_quantized_neural_runtime_candidate"] != 9:
         raise AssertionError("unknown quantized-neural runtime boundary count changed")
-    if application_provider_counts["gomore_health_algorithm_candidate"] != 269:
+    if application_provider_counts["gomore_health_algorithm_candidate"] != 278:
         raise AssertionError("GoMore provider-boundary count changed")
     if application_provider_counts["r1_gomore_provider_adapter"] != 3:
         raise AssertionError("R1 GoMore adapter count changed")
@@ -2984,13 +3009,13 @@ def main() -> None:
         raise AssertionError("R1 Nordic/CMSIS synchronization adapter count changed")
     if application_provider_counts["r1_device_registry_configuration_adapter"] != 9:
         raise AssertionError("R1 device-registry configuration adapter count changed")
-    if application_provider_counts["yhmicros_yhm2710_candidate"] != 18:
+    if application_provider_counts["yhmicros_yhm2710_candidate"] != 20:
         raise AssertionError("YHM2710 provider-boundary count changed")
     if application_provider_counts["r1_nordic_wdt_provider_adapter"] != 2:
         raise AssertionError("R1 Nordic-WDT adapter count changed")
     if application_provider_counts["r1_provider_configuration_glue"] != 10:
         raise AssertionError("R1 provider-configuration glue count changed")
-    if application_provider_counts["goodix_gh3x2x_candidate"] != 395:
+    if application_provider_counts["goodix_gh3x2x_candidate"] != 399:
         raise AssertionError("Goodix GH3X2X provider-boundary count changed")
     if application_provider_counts["r1_goodix_provider_adapter"] != 18:
         raise AssertionError("R1 Goodix adapter count changed")
@@ -3024,7 +3049,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in gomore_rows
     ).encode()).hexdigest()
     if gomore_entry_digest != \
-            "7b99508679c65c6bd7c3ccc7bb1c35855029a87aef3b4610fa5cfc3bec480f81":
+            "b290d075c1aa2e1e30258a1c8a8b570cc30b62db2f5ca74f4bad3abf070dbce1":
         raise AssertionError("GoMore exact function-entry set changed")
     goodix_rows = [
         row for row in ownership_rows
@@ -3035,7 +3060,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in goodix_rows
     ).encode()).hexdigest()
     if goodix_entry_digest != \
-            "b5f0b5247f75855f409051b3ecc53a58e0a99fd71436bd7a81b9bd7453fce798":
+            "b44e168efe4dfb8970e366713a98b9934abfc2df66bd905a47b371e0ad2c657c":
         raise AssertionError("Goodix exact function-entry set changed")
     goodix_adapter_rows = [
         row for row in ownership_rows
@@ -6740,6 +6765,58 @@ def main() -> None:
             raise AssertionError(
                 f"R1 204...210-byte frontier changed: 0x{entry:08x}"
             )
+    frontier_128_202_summary = summarize_r1_frontier_128_202(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if frontier_128_202_summary["function_count"] != 63 or \
+            frontier_128_202_summary["function_bytes"] != 10126 or \
+            frontier_128_202_summary["pinned_bytes"] != 9716 or \
+            frontier_128_202_summary["omitted_bytes"] != 410 or \
+            frontier_128_202_summary["product_function_count"] != 40 or \
+            frontier_128_202_summary["nordic_function_count"] != 1 or \
+            frontier_128_202_summary["gomore_function_count"] != 9 or \
+            frontier_128_202_summary["goodix_function_count"] != 4 or \
+            frontier_128_202_summary["yhm_function_count"] != 2 or \
+            frontier_128_202_summary["time_calendar_function_count"] != 1 or \
+            frontier_128_202_summary["device_registry_function_count"] != 2 or \
+            frontier_128_202_summary["sensor_stream_function_count"] != 1 or \
+            frontier_128_202_summary["quantized_runtime_function_count"] != 3 or \
+            any(frontier_128_202_summary["safety"].values()):
+        raise AssertionError("R1 128...202-byte frontier metadata changed")
+    frontier_128_202_confidence = {
+        "r1_product_specific": "high",
+        "nordic_nrf5_sdk_17_1_0": "high",
+        "gomore_health_algorithm_candidate": "candidate",
+        "goodix_gh3x2x_candidate": "high",
+        "yhmicros_yhm2710_candidate": "high",
+        "unknown_time_calendar_provider_candidate": "candidate",
+        "unknown_generic_device_registry_candidate": "candidate",
+        "unknown_sensor_stream_framework_candidate": "candidate",
+        "unknown_shared_quantized_neural_runtime_candidate": "high",
+    }
+    frontier_128_202_labels = {
+        0x0005D244: "quantized_runtime_float_softmax_executor",
+        0x00074AAC: "quantized_runtime_descriptor_constructor",
+        0x00098EDC: "quantized_runtime_float_add_executor",
+        0x0005DB14: "device_registry_name_task_insert",
+        0x000734E8: "device_registry_module_enabled_scan",
+        0x000896F0: "sensor_stream_object_create",
+        0x0008AC28: "time_calendar_local_datetime_fill",
+    }
+    for function in R1_FRONTIER_128_202_FUNCTIONS:
+        entry = int(function["entry"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        expected_symbol = frontier_128_202_labels.get(entry, function["symbol"])
+        if row["inventory_source"] != function["inventory"] or \
+                row["provider_family"] != function["provider_family"] or \
+                row["source_disposition"] != function["source_disposition"] or \
+                row["upstream_symbol"] != expected_symbol or \
+                row["confidence"] != frontier_128_202_confidence[
+                    function["provider_family"]] or \
+                int(row["size"]) != function["size"]:
+            raise AssertionError(
+                f"R1 128...202-byte frontier changed: 0x{entry:08x}"
+            )
     delayed_timer_summary = summarize_r1_delayed_event_timer(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
     )
@@ -7462,6 +7539,7 @@ def main() -> None:
     for entry, (symbol, _, _) in gpiote_driver_hash_expected.items():
         nordic_expected[f"0x{entry:08x}"] = symbol
     nordic_expected["0x000789e4"] = "nrf_drv_twi_init"
+    nordic_expected["0x00072a32"] = "irq_handler"
     for entry, (symbol, _, _) in twi_driver_expected.items():
         nordic_expected[f"0x{entry:08x}"] = symbol
     for entry, (symbol, _, _) in rtc_timer_driver_expected.items():

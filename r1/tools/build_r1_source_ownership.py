@@ -174,6 +174,17 @@ from summarize_r1_frontier_204_210 import (
     R1_FRONTIER_204_210_STORAGE_ADAPTERS,
     SHARED_TENSOR_FRONTIER_204_210_FUNCTIONS,
 )
+from summarize_r1_frontier_128_202 import (
+    DEVICE_REGISTRY_FRONTIER_128_202_FUNCTIONS,
+    GOODIX_FRONTIER_128_202_FUNCTIONS,
+    GOMORE_FRONTIER_128_202_FUNCTIONS,
+    NORDIC_FRONTIER_128_202_FUNCTIONS,
+    QUANTIZED_RUNTIME_FRONTIER_128_202_FUNCTIONS,
+    R1_FRONTIER_128_202_PRODUCT_FUNCTIONS,
+    SENSOR_STREAM_FRONTIER_128_202_FUNCTIONS,
+    TIME_CALENDAR_FRONTIER_128_202_FUNCTIONS,
+    YHM_FRONTIER_128_202_FUNCTIONS,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1129,6 +1140,10 @@ APP_PRODUCT_FUNCTIONS.update({
     int(item["entry"]): str(item["symbol"])
     for item in R1_FRONTIER_204_210_PRODUCT_FUNCTIONS
 })
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_FRONTIER_128_202_PRODUCT_FUNCTIONS
+})
 APP_PRODUCT_DATA_MODEL_FUNCTIONS = {
     int(item["entry"]): str(item["symbol"])
     for item in R1_FRONTIER_230_248_PRODUCT_HELPERS
@@ -1257,6 +1272,15 @@ APP_YHM2710_STACMD_CANDIDATES = {
     if item["provider_family"] == "yhmicros_yhm2710_candidate"
 }
 
+# The 128...202-byte frontier adds the chip-ID 0xA0 verification body called
+# from the pinned YHM2710 diagnostic at 0x0003510C and the 8-step float-ladder
+# register-field update over the same single-wire transport. Both remain
+# provider-gated evidence; no wire or register body is recreated locally.
+APP_YHM2710_FRONTIER_CANDIDATES = {
+    0x0003530C: "yhm2710_chip_id_verify",
+    0x00035508: "yhm2710_ladder_field_update",
+}
+
 
 # Product lifecycle and feed scheduling around Nordic's attributable WDT
 # driver. Only the fixed recovered configuration and scheduler seam are local.
@@ -1336,6 +1360,10 @@ APP_UNKNOWN_DEVICE_REGISTRY_CANDIDATES = {
     0x00085D58: "device_registry_register",
     0x00085DA8: "device_operation_dispatch_slot_14",
 }
+APP_UNKNOWN_DEVICE_REGISTRY_CANDIDATES.update({
+    0x0005DB14: "device_registry_name_task_insert",
+    0x000734E8: "device_registry_module_enabled_scan",
+})
 
 APP_UNKNOWN_SENSOR_STREAM_CANDIDATES = {
     int(item["entry"]): str(item["symbol"])
@@ -1345,6 +1373,9 @@ APP_UNKNOWN_SENSOR_STREAM_CANDIDATES = {
 APP_UNKNOWN_SENSOR_STREAM_CANDIDATES.update({
     int(item["entry"]): str(item["symbol"])
     for item in UNKNOWN_SENSOR_STREAM_FRONTIER_212_222_FUNCTIONS
+})
+APP_UNKNOWN_SENSOR_STREAM_CANDIDATES.update({
+    0x000896F0: "sensor_stream_object_create",
 })
 
 APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES = {
@@ -1356,6 +1387,11 @@ APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES = {
         + SHARED_TENSOR_FRONTIER_204_210_FUNCTIONS
     )
 }
+APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES.update({
+    0x0005D244: "quantized_runtime_float_softmax_executor",
+    0x00074AAC: "quantized_runtime_descriptor_constructor",
+    0x00098EDC: "quantized_runtime_float_add_executor",
+})
 
 
 # Complete clock-backend, Unix/Gregorian conversion, timezone, and local
@@ -1379,6 +1415,9 @@ APP_UNKNOWN_TIME_CALENDAR_CANDIDATES = {
     0x0008AEB0: "time_backend_update_adapter",
     0x0008AF40: "time_utc_to_calendar_adapter",
 }
+APP_UNKNOWN_TIME_CALENDAR_CANDIDATES.update({
+    0x0008AC28: "time_calendar_local_datetime_fill",
+})
 
 
 # Exact semantic/source correlations to Nordic modules. These functions must be
@@ -1417,6 +1456,10 @@ APP_NORDIC_SYMBOLS = {
     **{
         int(function["entry"]): str(function["symbol"])
         for function in NORDIC_FRONTIER_224_230_FUNCTIONS
+    },
+    **{
+        int(function["entry"]): str(function["symbol"])
+        for function in NORDIC_FRONTIER_128_202_FUNCTIONS
     },
     0x000272B8: "nrf_atfifo_wspace_req",
     0x000272F0: "nrf_atfifo_wspace_close",
@@ -1751,6 +1794,10 @@ APP_NORDIC_SOURCES = {
     **{
         int(function["entry"]): "modules/nrfx/drivers/src/nrfx_pdm.c"
         for function in NORDIC_FRONTIER_224_230_FUNCTIONS
+    },
+    **{
+        int(function["entry"]): "modules/nrfx/drivers/src/nrfx_pwm.c"
+        for function in NORDIC_FRONTIER_128_202_FUNCTIONS
     },
     0x000272B8: "components/libraries/atomic_fifo/nrf_atfifo_internal.h",
     0x000272F0: "components/libraries/atomic_fifo/nrf_atfifo_internal.h",
@@ -2843,6 +2890,9 @@ APP_GOMORE_AUDIT_GROUPS = {
     "gomore_frontier_230_248": tuple(
         int(item["entry"]) for item in GOMORE_FRONTIER_230_248_FUNCTIONS
     ),
+    "gomore_frontier_128_202": tuple(
+        int(item["entry"]) for item in GOMORE_FRONTIER_128_202_FUNCTIONS
+    ),
 }
 
 APP_GOMORE_AUDIT_FUNCTIONS: dict[int, tuple[str, ...]] = {}
@@ -2885,6 +2935,10 @@ APP_GOODIX_EXACT_CANDIDATES = {
     **{
         int(item["entry"]): str(item["role"])
         for item in GOODIX_FRONTIER_334_342_FUNCTIONS
+    },
+    **{
+        int(item["entry"]): str(item["role"])
+        for item in GOODIX_FRONTIER_128_202_FUNCTIONS
     },
     **{
         int(item["entry"]): str(item["role"])
@@ -3620,6 +3674,21 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
                 "are SHA-pinned. The component is not Nordic FreeRTOS heap_4 or the "
                 "pinned TLSF v3.1 source, and no attributable source/version/license "
                 "is established; do not recreate it locally."
+            ),
+        )
+    elif entry in APP_YHM2710_FRONTIER_CANDIDATES:
+        row.update(
+            provider_family="yhmicros_yhm2710_candidate",
+            source_disposition="vendor_source_required_not_redistributable",
+            upstream_symbol="",
+            confidence="high",
+            evidence=(
+                "SHA-pinned YHM2710 chip-ID verification or float-ladder "
+                "register-field update reached through the pinned single-wire "
+                "transport used by the 0x0003510C diagnostic closure. Behavior "
+                "is evidence only; exact provider source, version, and license "
+                "remain unresolved, so no local wire or register body is "
+                "authorized."
             ),
         )
     elif entry in APP_YHM2710_STACMD_CANDIDATES:
