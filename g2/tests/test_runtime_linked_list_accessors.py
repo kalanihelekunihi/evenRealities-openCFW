@@ -356,7 +356,7 @@ class RuntimeLinkedListAccessorTests(unittest.TestCase):
             "clear": [(0x00482DA8, 0x00482C9A, "fff777ff")],
         }
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = {name: [] for name in FUNCTIONS}

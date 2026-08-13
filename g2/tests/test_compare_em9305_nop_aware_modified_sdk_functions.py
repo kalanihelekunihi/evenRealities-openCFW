@@ -14,7 +14,7 @@ TOOL = ROOT / "tools/compare_em9305_nop_aware_modified_sdk_functions.py"
 
 
 def load_tool():
-    sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+    sys.path.insert(0, str(ROOT / "tools"))
     try:
         spec = importlib.util.spec_from_file_location(
             "compare_em9305_nop_aware_modified_sdk_functions", TOOL

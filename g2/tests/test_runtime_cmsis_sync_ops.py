@@ -151,7 +151,7 @@ class RuntimeCmsisSyncOpsTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(target)

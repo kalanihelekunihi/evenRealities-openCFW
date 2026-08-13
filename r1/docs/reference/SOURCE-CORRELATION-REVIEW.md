@@ -2,7 +2,7 @@
 
 ## Purpose
 
-the raw BSim correlation CSV (regenerable; see [`bsim/APPLICATION-SOURCE-CORRELATION.md`](bsim/APPLICATION-SOURCE-CORRELATION.md)) is a ranking aid, not an
+`generated/application-source-correlation/source-correlations-raw.csv` is a ranking aid, not an
 ownership verdict. Its normalized comparison is valuable for locating candidates, but exact scores
 on tiny thunks can arise when unrelated functions share the same register shuffle or tail-call
 shape. Provider admission still requires complete function semantics, call context, constants, and

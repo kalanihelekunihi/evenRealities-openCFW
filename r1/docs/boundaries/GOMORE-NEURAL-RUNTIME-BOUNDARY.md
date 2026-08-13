@@ -43,7 +43,7 @@ The exact body SHA-256 is
 The read-only verifier is reproducible with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_gomore_neural_runtime.py
+python3 tools/summarize_r1_gomore_neural_runtime.py
 ```
 
 OpenR1 must bind a matching licensed provider or leave this inference capability unavailable.

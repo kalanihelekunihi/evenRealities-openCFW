@@ -24,5 +24,5 @@ is copied or reconstructed.
 The exact image, instruction encodings, destinations, hashes, and callers are checked by:
 
 ```sh
-python3 scripts/firmware/summarize_r1_resolved_thunks.py
+python3 tools/summarize_r1_resolved_thunks.py
 ```

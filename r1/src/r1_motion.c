@@ -7,6 +7,71 @@ static bool provider_complete(const r1_motion_provider_ops *provider) {
            provider->configure != NULL && provider->read_fifo != NULL;
 }
 
+void r1_ring_stability_initialize(r1_ring_stability_state *state) {
+    if (state != NULL) {
+        *state = (r1_ring_stability_state){0};
+    }
+}
+
+static bool raw_float_greater_than_positive(uint32_t raw, uint32_t threshold) {
+    return (raw & UINT32_C(0x80000000)) == 0u && raw > threshold;
+}
+
+static bool raw_float_less_than_positive(uint32_t raw, uint32_t threshold) {
+    return (raw & UINT32_C(0x80000000)) != 0u || raw < threshold;
+}
+
+r1_error r1_ring_stability_observe(
+    r1_ring_stability_state *state, float smoothed_deviation,
+    bool callback_registered, r1_ring_stability_result *result) {
+    if (state == NULL || result == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *result = (r1_ring_stability_result){0};
+    float *slot = &state->window[state->cursor];
+    if (state->sample_count >= R1_RING_STABILITY_WINDOW) {
+        state->window_sum -= *slot;
+    }
+    *slot = smoothed_deviation;
+    state->window_sum += smoothed_deviation;
+    state->cursor = (uint8_t)((state->cursor + 1u) & 7u);
+    if (state->sample_count < R1_RING_STABILITY_WINDOW) {
+        state->sample_count += 1u;
+    }
+    if (state->sample_count < R1_RING_STABILITY_WINDOW) {
+        return R1_OK;
+    }
+
+    result->evaluated = true;
+    const bool previous = state->detected;
+    union {
+        float value;
+        uint32_t raw;
+    } bits = {.value = smoothed_deviation};
+    const uint32_t raw = bits.raw;
+    if (raw_float_greater_than_positive(raw, UINT32_C(0x3d4ccccd))) {
+        state->low_motion_count = 0u;
+        state->detected = false;
+    } else if (raw_float_less_than_positive(raw, UINT32_C(0x3e051eb8))) {
+        state->low_motion_count = (uint16_t)(state->low_motion_count + 1u);
+        if (state->low_motion_count >= R1_RING_STABILITY_DETECT_COUNT) {
+            state->detected = true;
+        }
+    } else if (state->low_motion_count != 0u) {
+        state->low_motion_count -= 1u;
+        if (state->low_motion_count == 0u) {
+            state->detected = false;
+        }
+    } else {
+        state->detected = false;
+    }
+    result->state_changed = state->detected != previous;
+    result->callback_requested = callback_registered;
+    result->detected = state->detected;
+    result->low_motion_count = state->low_motion_count;
+    return R1_OK;
+}
+
 void r1_motion_adapter_initialize(r1_motion_adapter *adapter) {
     if (adapter == NULL) {
         return;

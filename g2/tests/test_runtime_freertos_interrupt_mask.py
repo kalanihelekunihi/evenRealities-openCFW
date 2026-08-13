@@ -79,8 +79,8 @@ OFFICIAL_APPLICATION_SHA256 = (
     "e13cc18928528d84d999b6bcc0ba9701"
 )
 GENERATED_COMPONENT_SHA256 = (
-    "8722e5565bf54dade66fb751155c11eb"
-            "d128d7a12853e3e4b8671c3c97807827"
+    "5cef32ba7350e7f6476336fa6a087010"
+            "e6143e3e692205215c271430aa110d22"
 )
 GENERATED_APPLICATION_SHA256 = (
     "4db039a4769b3b68943f5fb626408444b"
@@ -204,7 +204,7 @@ _APPLE_ONLY = unittest.skipUnless(
 class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import analyze_g2_freertos_assert_port_seam
         import apollo_overlay
 
@@ -728,7 +728,7 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
         self.assertEqual(
             self.config["expected"],
             {
-                "overlay_size": 123454,
+                "overlay_size": 142578,
                 "overlay_sha256": (
                     "9e5004af49fb14a22e7e7ed7357e4c10"
                     "f87dc8da3a7fb4d7b97fcffcde804c43"
@@ -863,8 +863,8 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
             self.report["component"]["sha256"],
             GENERATED_COMPONENT_SHA256,
         )
-        self.assertEqual(self.report["component"]["size"], 3_645_102)
-        self.assertEqual(self.report["overlay"]["size"], 121_706)
+        self.assertEqual(self.report["component"]["size"], 3_665_974)
+        self.assertEqual(self.report["overlay"]["size"], 142_578)
         self.assertEqual(
             self.report["overlay"]["sha256"],
             self.config["expected"]["overlay_sha256"],

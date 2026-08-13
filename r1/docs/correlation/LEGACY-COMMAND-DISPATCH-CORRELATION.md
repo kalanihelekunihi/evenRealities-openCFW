@@ -11,7 +11,7 @@ copies the received legacy command frame into it, reads the opcode at byte offse
 `be3357d945c4470611d70da7e97691fe9fb6a87bbda16b8da2e6d3eea48e3ca1` and one direct caller,
 at `0x0004514E`.
 
-`../../scripts/firmware/summarize_r1_legacy_command_dispatch.py`
+`../../tools/summarize_r1_legacy_command_dispatch.py`
 authenticates the recovered application, complete function body, caller set, workspace pointer
 `0x2001A174`, and routing metadata.
 
@@ -38,7 +38,7 @@ closure records that routing distinction but exposes no pairing or authorization
 
 ## Clean-room boundary
 
-[`../../src/r1_dispatch.c`](../../src/r1_dispatch.c) implements only the R1-owned
+`../src/r1_dispatch.c` implements only the R1-owned
 workspace and opcode-selection policy. It deliberately returns a typed route instead of invoking
 the recovered handler addresses. Each handler retains its own ownership and source-admission
 status; classifying this router does not admit or recreate any handler, provider, transport,
@@ -53,5 +53,5 @@ oversized frames/workspaces, an unknown opcode, and null arguments.
 Reproduce the evidence check with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_legacy_command_dispatch.py
+python3 tools/summarize_r1_legacy_command_dispatch.py
 ```

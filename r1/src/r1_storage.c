@@ -86,6 +86,37 @@ r1_error r1_flash_erase(const r1_flash *flash, uint32_t offset, size_t length) {
     return flash->erase(flash->context, offset, length) ? R1_OK : R1_ERROR_STATE;
 }
 
+r1_error r1_latest_valid_flash_slot_scan_adapter(
+    const r1_flash *flash, uint32_t base_offset, uint32_t slot_bytes,
+    uint8_t slot_count, uint32_t expected_magic,
+    r1_latest_valid_flash_slot_scan_result *result) {
+    if (flash == NULL || result == NULL || slot_bytes == 0u) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *result = (r1_latest_valid_flash_slot_scan_result){0};
+    uint8_t header[R1_FLASH_SLOT_HEADER_BYTES];
+    for (uint8_t remaining = slot_count; remaining > 0u; --remaining) {
+        const uint8_t slot = (uint8_t)(remaining - 1u);
+        if ((uint32_t)slot > (UINT32_MAX - base_offset) / slot_bytes) {
+            return R1_ERROR_LENGTH;
+        }
+        const uint32_t offset = base_offset + (uint32_t)slot * slot_bytes;
+        ++result->read_count;
+        if (r1_flash_read(flash, offset, header, sizeof header) != R1_OK) {
+            result->provider_read_failed = true;
+            continue;
+        }
+        if (storage_read_u32(header + R1_FLASH_SLOT_MAGIC_OFFSET) ==
+            expected_magic) {
+            result->found = true;
+            result->latest_slot = slot;
+            result->next_slot = (uint8_t)(slot + 1u);
+            return R1_OK;
+        }
+    }
+    return R1_OK;
+}
+
 static void memory_fill(uint8_t *bytes, uint8_t value, size_t length) {
     for (size_t index = 0u; index < length; ++index) {
         bytes[index] = value;
@@ -272,5 +303,116 @@ r1_error r1_ep_scan_cursor(const uint8_t *records, size_t length,
         ? result->first_free_index
         : (uint16_t)((result->latest_timestamp_index + 1u)
                      & (R1_EP_RECORD_COUNT - 1u));
+    return R1_OK;
+}
+
+/* Recovered R1 ep.bin readiness policy. FAL lookup, device lookup, logging,
+ * synchronization creation, and the actual cursor scan remain external. */
+r1_error r1_ep_plan_initialization(
+    bool already_initialized, bool partition_found, bool device_found,
+    uint32_t partition_bytes, r1_ep_initialization_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_ep_initialization_plan){0};
+    if (already_initialized) {
+        plan->initialized = true;
+        plan->retain_partition = true;
+        plan->retain_device = true;
+        plan->reason = R1_EP_INITIALIZATION_READY;
+        return R1_OK;
+    }
+    if (!partition_found) {
+        plan->reason = R1_EP_INITIALIZATION_PARTITION_NOT_FOUND;
+        return R1_OK;
+    }
+    if (!device_found) {
+        plan->reason = R1_EP_INITIALIZATION_DEVICE_NOT_FOUND;
+        return R1_OK;
+    }
+    if (partition_bytes < R1_EP_PARTITION_BYTES) {
+        plan->reason = R1_EP_INITIALIZATION_PARTITION_TOO_SMALL;
+        return R1_OK;
+    }
+    plan->initialized = true;
+    plan->retain_partition = true;
+    plan->retain_device = true;
+    plan->scan_cursor = true;
+    plan->reason = R1_EP_INITIALIZATION_READY;
+    return R1_OK;
+}
+
+/* Recovered stored-sleep transport ACK callback policy. The private context,
+ * event queue, marker writer, logging, and allocator remain external. */
+r1_error r1_sleep_sync_plan_acknowledgement(
+    bool context_present, bool event_publish_succeeded,
+    r1_sleep_sync_ack_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_sleep_sync_ack_plan){
+        .context_present = context_present,
+    };
+    if (!context_present) {
+        return R1_OK;
+    }
+    plan->publish_event = true;
+    plan->publish_failed = !event_publish_succeeded;
+    plan->release_context = true;
+    plan->event_identifier = R1_SLEEP_SYNC_MARK_EVENT;
+    plan->event_payload_length = R1_SLEEP_SYNC_ACK_CONTEXT_BYTES;
+    return R1_OK;
+}
+
+r1_error r1_fds_plan_event(
+    uint8_t provider_event_id, uint32_t provider_result,
+    uint16_t record_key, uint32_t record_id, bool metadata_validated,
+    bool retry_already_pending, r1_fds_event_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_fds_event_plan){0};
+    plan->provider_result = provider_result;
+    plan->record_id = record_id;
+    plan->request_next_queued_operation = retry_already_pending;
+
+    const bool succeeded = provider_result == 0u;
+    switch (provider_event_id) {
+        case 1u: /* FDS_EVT_WRITE */
+        case 2u: /* FDS_EVT_UPDATE */
+        case 3u: /* FDS_EVT_DEL_RECORD */
+            if (!metadata_validated) {
+                return R1_OK;
+            }
+            plan->publish_event = true;
+            plan->updated_record = provider_event_id == 3u;
+            plan->logical_record_key = (uint16_t)(record_key + UINT16_C(0x4000));
+            plan->persistence_event = succeeded
+                ? R1_FDS_PERSISTENCE_RECORD_SUCCEEDED
+                : R1_FDS_PERSISTENCE_RECORD_FAILED;
+            break;
+        case 4u: /* FDS_EVT_DEL_FILE */
+            if (!metadata_validated) {
+                return R1_OK;
+            }
+            plan->publish_event = true;
+            plan->logical_record_key = (uint16_t)(record_key + UINT16_C(0x4000));
+            plan->clear_file_bookkeeping = succeeded;
+            plan->mark_retry_pending = true;
+            plan->request_next_queued_operation = true;
+            plan->persistence_event = succeeded
+                ? R1_FDS_PERSISTENCE_FILE_DELETE_SUCCEEDED
+                : R1_FDS_PERSISTENCE_FILE_DELETE_FAILED;
+            break;
+        case 5u: /* FDS_EVT_GC */
+            plan->publish_event = true;
+            plan->logical_record_key = UINT16_MAX;
+            plan->persistence_event = succeeded
+                ? R1_FDS_PERSISTENCE_GC_SUCCEEDED
+                : R1_FDS_PERSISTENCE_GC_FAILED;
+            break;
+        default:
+            break;
+    }
     return R1_OK;
 }

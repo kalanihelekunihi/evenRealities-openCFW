@@ -246,7 +246,7 @@ class RuntimeFtoaTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         cls.target_data, cls.target_sections = apollo_overlay.parse_elf32(

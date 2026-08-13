@@ -56,7 +56,7 @@ verifies the application image, all nine exact bodies and inbound callsite sets,
 root, aggregate count, and provider disposition:
 
 ```sh
-python3 scripts/firmware/summarize_r1_gomore_energy_model.py
+python3 tools/summarize_r1_gomore_energy_model.py
 ```
 
 It emits no algorithm source and performs no live sensor access.

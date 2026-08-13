@@ -49,7 +49,7 @@ consume the R1-compatible stage stream and must reproduce the documented output 
 Run the read-only verifier against the recovered image:
 
 ```sh
-python3 scripts/firmware/summarize_r1_gomore_sleep_stage_statistics.py
+python3 tools/summarize_r1_gomore_sleep_stage_statistics.py
 ```
 
 The script verifies the application SHA-256, every function body, the caller-set digests, the

@@ -9,7 +9,7 @@ is `a079977932ae1d297bb451311bc998e001d9b3ae13efe0ff2769f14bc00ef67a`; direct ca
 `clean_room_behavior_only`.
 
 The clean implementation is `r1_pmic_plan_charge_event` in
-[`../../src/r1_battery.c`](../../src/r1_battery.c). It is a pure planner and packet
+`../src/r1_battery.c`. It is a pure planner and packet
 template builder. It performs no live PMIC write, NFC operation, timer mutation, logging, or
 internal-event publication.
 
@@ -69,14 +69,14 @@ Host tests exhaust all 65,536 UInt16 temperature inputs, both target equality br
 state mapping, packet byte order and reserved bytes, the `0x5A` cancellation exception, and invalid
 input immutability. Sanitized host and freestanding Cortex-M4 builds compile the same planner.
 The planner is retained at nonzero address `0x00036DE8` in the verified unsigned Nordic SDK image.
-That image has 90,956 bytes text, 236 bytes data, and 132,456 bytes BSS; its standalone HEX and BIN
-SHA-256 values are `0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`
-and `31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+That image has 94,804 bytes text, 236 bytes data, and 132,544 bytes BSS; its standalone HEX and BIN
+SHA-256 values are `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`
+and `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 Reproduce the evidence gate with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_pmic_charge_event.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_pmic_charge_event.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```

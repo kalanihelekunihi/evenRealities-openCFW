@@ -49,25 +49,36 @@ openCFW/
 │   ├── Makefile          profiles, snapshot verifiers, closure audits
 │   ├── blobs/            official OTA provenance (payloads not redistributed)
 │   ├── components/       compiled overlay sources, per component
-│   ├── docs/             G2 memory map, source coverage, upstream inventory
+│   ├── docs/             reference documents + 502 per-closure audits
 │   ├── manifests/        region/flash layout pins per build profile
-│   ├── research/         source candidates under review
+│   ├── research/         evidence corpus: candidates, readiness, decompilation
 │   ├── tests/            736 test modules gating the above
 │   ├── third_party/      vendored upstream snapshots (see third-party/README.md)
-│   └── tools/            analyzers, packagers, overlay builder
+│   └── tools/            4 entry points + 355 read-only analyzers
 ├── r1/                   R1 firmware: clean-room implementation
-│   ├── Makefile          host, sanitizer, freestanding, and SDK-image targets
-│   ├── docs/             per-subsystem correlation and provider-boundary records
+│   ├── Makefile          host, sanitizer, freestanding, verify, SDK-image
+│   ├── docs/             correlation/ boundaries/ closures/ reference/
 │   ├── include/openr1/   public headers
 │   ├── src/              portable implementation
 │   ├── platform/         nRF52840 platform layer and Nordic SDK integration
 │   ├── port/             R1-owned FlashDB/FAL port and configuration
+│   ├── research/         decompilation corpus, image reconstruction, BSim runs
 │   ├── tests/            host, storage, and crypto tests
-│   └── tools/            simulator and SDK-image verifier
+│   └── tools/            ~220 evidence scripts, simulator, verifiers
 └── third-party/          shared dependency registry
     ├── README.md         full inventory: pin, license, consuming target
     └── fetched/          non-redistributable upstreams: manifest, fetch, verify
 ```
+
+Every directory large enough to need one carries a `README.md` index —
+[`g2/tools/`](g2/tools/README.md), [`g2/docs/`](g2/docs/README.md),
+[`g2/research/`](g2/research/README.md), [`r1/docs/`](r1/docs/README.md),
+[`r1/tools/`](r1/tools/README.md), [`r1/research/`](r1/research/README.md),
+[`third-party/`](third-party/README.md).
+
+The repository is self-contained. Each target carries its own evidence and the
+tooling that produced it, so every claim in the documentation can be regenerated
+here — nothing points at another checkout.
 
 ## Quick start
 
@@ -106,6 +117,11 @@ Full details, including the R1 vendor SDK fetch, are in
 | [`g2/README.md`](g2/README.md) | G2 status, current source coverage, build profiles |
 | [`r1/README.md`](r1/README.md) | R1 status, implemented contract, open gaps |
 | [`r1/docs/README.md`](r1/docs/README.md) | R1 evidence provenance and remaining hardware work |
+| [`g2/tools/README.md`](g2/tools/README.md) | which G2 script to run, and what the 355 analyzers are |
+| [`g2/docs/README.md`](g2/docs/README.md) | which G2 document answers which question |
+| [`g2/research/README.md`](g2/research/README.md) | the G2 evidence corpus and how it is authenticated |
+| [`r1/tools/README.md`](r1/tools/README.md) | the R1 evidence toolchain and how to reproduce any claim |
+| [`r1/research/README.md`](r1/research/README.md) | the R1 decompilation corpus and image reconstruction |
 
 ## Licensing
 

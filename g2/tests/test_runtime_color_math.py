@@ -227,7 +227,7 @@ class RuntimeColorMathTests(unittest.TestCase):
                 text=True,
             )
 
-            sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+            sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
             import apollo_overlay
 
             data, sections = apollo_overlay.parse_elf32(object_path)
@@ -338,7 +338,7 @@ class RuntimeColorMathTests(unittest.TestCase):
                 self.assertEqual(len(body), size)
                 self.assertEqual(hashlib.sha256(body).hexdigest(), expected)
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         expected_callers = {

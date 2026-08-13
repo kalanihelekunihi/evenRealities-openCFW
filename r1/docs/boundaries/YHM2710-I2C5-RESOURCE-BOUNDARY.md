@@ -56,7 +56,7 @@ explicitly `yhmicros_yhm2710_candidate`. The remaining 18-byte initcall at
 `0x000565F4..<0x00056606` is configuration-only: OpenR1 may preserve a direct typed provider
 binding, but may not recreate the transport or the stock registry. Exact segments, including the
 three-block `0x0005CBE4` function, and every digest are emitted by
-`../../scripts/firmware/summarize_r1_pmic_transport.py`.
+`../../tools/summarize_r1_pmic_transport.py`.
 
 The exact production descriptor is software-driven I2C-style state-command
 framing, not ordinary addressed I2C:
@@ -69,7 +69,7 @@ framing, not ordinary addressed I2C:
 - no fixed slave-address phase (odd command values remain odd).
 
 The `i2c_5` facts are preserved by the immutable parser
-`../../scripts/firmware/summarize_r1_pmic_transport.py`.
+`../../tools/summarize_r1_pmic_transport.py`.
 The separately recovered P1.01 state-command evidence is likewise static and is not used to create
 a replacement live sender.
 
@@ -80,7 +80,7 @@ similarly named HM2710 material is a different part and is not admissible.
 
 ## Implemented clean-room resource layer
 
-[`../../src/r1_power_lease.c`](../../src/r1_power_lease.c)
+`../src/r1_power_lease.c`
 implements only the three-bit product ownership policy. Its provider has one
 semantic operation, `set_shared_power_enabled(context, enabled)`. Duplicate
 acquires, absent releases, and non-boundary transitions do not call the
@@ -93,7 +93,7 @@ or shutdown data appears in that module. Until a lawfully obtained provider is
 admitted and hardware-tested, touch cannot bind this power service and remains
 fail closed.
 
-[`../../platform/nrf52840/sdk/openr1_i2c5_resources.c`](../../platform/nrf52840/sdk/openr1_i2c5_resources.c)
+`../platform/nrf52840/sdk/openr1_i2c5_resources.c`
 uses the pinned Nordic SDK/CMSIS-FreeRTOS primitives to reproduce the R1-owned
 NFC board lifecycle and serialize the shared conductors:
 
@@ -121,7 +121,7 @@ This is static and host verification. P1.10 electrical behavior, physical
 `i2c_5` coexistence, YHM state transitions, touch power, dock behavior, and
 recovery after interrupted transitions still require owned-hardware validation.
 
-The verified unsigned SDK application is 90,956 bytes text, 236 bytes data,
-and 132,456 bytes BSS. Its standalone HEX and BIN SHA-256 values are
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`
-and `31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+The verified unsigned SDK application is 94,804 bytes text, 236 bytes data,
+and 132,544 bytes BSS. Its standalone HEX and BIN SHA-256 values are
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`
+and `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.

@@ -159,7 +159,7 @@ class RuntimeCmsisCoreLeavesTests(unittest.TestCase):
         cls.capacity.argtypes = [ctypes.c_void_p]
         cls.capacity.restype = ctypes.c_uint32
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.target_results = {}

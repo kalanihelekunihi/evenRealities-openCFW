@@ -59,7 +59,7 @@ class RuntimeFreeRTOSQueueSendFromISRTests(unittest.TestCase):
         cls.lib.open_cfw_send_isr_host_storage.argtypes = [ctypes.c_uint32]
         cls.lib.open_cfw_send_isr_host_storage.restype = ctypes.c_uint32
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         cls.sections = {}
         cls.relocations = {}

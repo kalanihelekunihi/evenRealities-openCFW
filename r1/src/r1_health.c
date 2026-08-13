@@ -2069,6 +2069,57 @@ r1_error r1_activity_offline_enqueue(
     return R1_OK;
 }
 
+r1_error r1_activity_flash_record_enqueue_plan(
+    r1_activity_offline_queue *queue, uint32_t local_day_start,
+    int16_t utc_offset_minutes, uint8_t hour,
+    const uint32_t packed_words[6], uint32_t recorded_timestamp,
+    uint32_t maximum_allowed_timestamp, uint32_t firmware_timestamp,
+    r1_activity_flash_record_enqueue_result *result) {
+    if (queue == NULL || packed_words == NULL || result == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *result = (r1_activity_flash_record_enqueue_result){
+        .action = R1_ACTIVITY_FLASH_RECORD_ACCEPTED,
+    };
+    if (hour >= 24u) {
+        result->action = R1_ACTIVITY_FLASH_RECORD_IGNORED_HOUR;
+        return R1_OK;
+    }
+    if (recorded_timestamp > maximum_allowed_timestamp) {
+        result->action = R1_ACTIVITY_FLASH_RECORD_IGNORED_MAXIMUM_TIMESTAMP;
+        return R1_OK;
+    }
+    if (recorded_timestamp > firmware_timestamp) {
+        result->action = R1_ACTIVITY_FLASH_RECORD_IGNORED_FUTURE_RECORDED;
+        return R1_OK;
+    }
+    if (local_day_start > firmware_timestamp) {
+        result->action = R1_ACTIVITY_FLASH_RECORD_IGNORED_FUTURE_DAY;
+        return R1_OK;
+    }
+
+    for (size_t index = 0u; index < 6u; ++index) {
+        r1_activity_offline_enqueue_result enqueue;
+        ++result->attempted_count;
+        const r1_error error = r1_activity_offline_enqueue(
+            queue, packed_words[index], local_day_start, recorded_timestamp,
+            utc_offset_minutes, (uint8_t)((size_t)hour * 6u + index),
+            firmware_timestamp, &enqueue);
+        if (error != R1_OK) {
+            return error;
+        }
+        if (enqueue.action == R1_ACTIVITY_OFFLINE_ENQUEUED) {
+            ++result->enqueued_count;
+            if (enqueue.overwrote_oldest) {
+                ++result->overwritten_count;
+            }
+        } else {
+            ++result->dropped_count;
+        }
+    }
+    return R1_OK;
+}
+
 r1_error r1_activity_offline_consume_through(
     r1_activity_offline_queue *queue, uint32_t cutoff_timestamp,
     size_t *consumed_count) {

@@ -129,7 +129,7 @@ class AmbiqGpuPatchAccessorCandidateTests(unittest.TestCase):
         self.assertEqual(self.lib.open_cfw_test_ambiq_gpu_get_data(), 0x20005678)
 
     def test_target_layout_assertions_compile_and_functions_are_relocation_free(self) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(self.target_object)

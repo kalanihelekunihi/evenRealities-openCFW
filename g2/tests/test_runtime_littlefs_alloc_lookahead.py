@@ -401,7 +401,7 @@ class RuntimeLittlefsAllocLookaheadTests(unittest.TestCase):
             "open_cfw_oracle_littlefs_alloc_lookahead_",
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

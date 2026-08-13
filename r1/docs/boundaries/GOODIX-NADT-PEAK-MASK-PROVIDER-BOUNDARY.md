@@ -50,7 +50,7 @@ The summarizer is read-only, consumes only the pinned firmware image, reads no l
 and emits no algorithm implementation:
 
 ```sh
-python3 scripts/firmware/summarize_r1_goodix_nadt_peak_mask.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_goodix_nadt_peak_mask.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```

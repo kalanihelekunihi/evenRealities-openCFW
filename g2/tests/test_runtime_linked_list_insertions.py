@@ -195,7 +195,7 @@ class RuntimeLinkedListInsertionTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         from apollo_overlay import extract_linked_overlay
 
         (
@@ -602,7 +602,7 @@ class RuntimeLinkedListInsertionTests(unittest.TestCase):
                 (0x00482BFC, 0x00482DC2, "00f0e1f8"),
             ],
         }
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = {name: [] for name in FUNCTIONS}

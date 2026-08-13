@@ -164,7 +164,7 @@ class RuntimeMemoryZeroTests(unittest.TestCase):
             "007aff2801d1012000e000207047",
         )
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

@@ -186,7 +186,7 @@ all direct callsites, the identity marker, aggregate counts, and the non-redistr
 disposition:
 
 ```sh
-python3 scripts/firmware/summarize_r1_goodix_nadt_boundary.py
+python3 tools/summarize_r1_goodix_nadt_boundary.py
 ```
 
 It emits no algorithm source and performs no live sensor access.

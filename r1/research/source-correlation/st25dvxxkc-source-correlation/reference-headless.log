@@ -1,0 +1,114 @@
+2026-08-11 06:32:46 INFO  (LoggingInitialization) Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml
+2026-08-11 06:32:46 INFO  (LoggingInitialization) Using log file: /tmp/r1-application-correlation.8zBzus/reference-headless.log
+2026-08-11 06:32:46 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter
+2026-08-11 06:32:47 INFO  (Preferences) Loading user preferences: /Users/kalani/Library/ghidra/ghidra_12.1.2_PUBLIC/preferences
+2026-08-11 06:32:47 INFO  (Preferences) Loading previous preferences: /Users/kalani/Library/ghidra/ghidra_12.1.1_PUBLIC/preferences
+2026-08-11 06:32:47 INFO  (ClassSearcher) Searching for classes...
+2026-08-11 06:32:48 INFO  (ClassSearcher) Class search complete (1418 ms)
+2026-08-11 06:32:48 INFO  (DefaultSSLContextInitializer) Initializing SSL Context
+2026-08-11 06:32:49 INFO  (SecureRandomFactory) Initializing Random Number Generator...
+2026-08-11 06:32:49 INFO  (SecureRandomFactory) Random Number Generator initialization complete: NativePRNGNonBlocking
+2026-08-11 06:32:49 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set
+2026-08-11 06:32:50 INFO  (AnalyzeHeadless) Headless startup complete (6398 ms)
+2026-08-11 06:32:50 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)
+2026-08-11 06:32:51 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+2026-08-11 06:32:51 INFO  (HeadlessAnalyzer) HEADLESS: execution starts
+2026-08-11 06:32:51 INFO  (HeadlessAnalyzer) Creating project: /tmp/r1-application-correlation.8zBzus/r1_application_correlation
+2026-08-11 06:32:51 INFO  (DefaultProject) Creating project: /tmp/r1-application-correlation.8zBzus/r1_application_correlation
+2026-08-11 06:32:51 INFO  (HeadlessAnalyzer) REPORT: Processing input files:
+2026-08-11 06:32:51 INFO  (HeadlessAnalyzer)      project: /tmp/r1-application-correlation.8zBzus/r1_application_correlation
+2026-08-11 06:32:51 INFO  (HeadlessAnalyzer) IMPORTING: file:///private/tmp/openr1-st25-ref/st25dvxxkc.elf
+2026-08-11 06:32:54 DEBUG (ElfHeader) Elf symbol table section .symtab linked to string table section .strtab
+2026-08-11 06:32:54 INFO  (ProgramLoader) Using Loader: Executable and Linking Format (ELF)
+2026-08-11 06:32:54 INFO  (ProgramLoader) Using Language/Compiler: ARM:LE:32:v8:default
+2026-08-11 06:32:54 INFO  (ProgramLoader) Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/kalani/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java]
+2026-08-11 06:32:55 DEBUG (ElfHeader) Elf symbol table section .symtab linked to string table section .strtab
+2026-08-11 06:32:56 INFO  (ProgramLoader) Additional info:
+Loading file:///private/tmp/openr1-st25-ref/st25dvxxkc.elf?MD5=c47ab20df85d33cb48a336c339914838...
+Skipping section [.noinit] with invalid size 0x0
+Unable to place symbol due to non-loaded section: .noinit - value=0x112364, section=.noinit
+Function address is two bit aligned (reserved per ARM manual): 00100086
+------------------------------------------------
+
+
+2026-08-11 06:32:56 INFO  (HeadlessAnalyzer) IMPORTING: Loaded 0 additional files
+2026-08-11 06:32:57 INFO  (HeadlessAnalyzer) ANALYZING all memory and code: file:///private/tmp/openr1-st25-ref/st25dvxxkc.elf
+2026-08-11 06:32:58 INFO  (DWARFImporter) Added 4432 source map entries
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF ver[4], 2 compUnits, 2864 DIES, import - total elapsed: 1239ms
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF data type import - elapsed: 66ms
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF func & symbol import - elapsed: 954ms
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF types imported: 98
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF enums from macros - elapsed: 1ms
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF compile dirs: [/Users/kalani/Repo/SybilSight]
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF producers: [GNU C17 9.3.1 20200408 (release) -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -march=armv7e-m -g3 -Os -ffunction-sections -fdata-sections]
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF source languages: [DW_LANG_C99]
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF compUnit: /private/tmp/st25dvxxkc.c
+2026-08-11 06:32:58 INFO  (DWARFImportSummary) DWARF compUnit: /private/tmp/st25dvxxkc_reg.c
+2026-08-11 06:32:58 ERROR (DWARFImportSummary) DWARF un-recoverable expressions:
+2026-08-11 06:32:58 ERROR (DWARFImportSummary)   DW_OP_reg0 -> 232
+2026-08-11 06:32:58 ERROR (DWARFImportSummary)   DW_OP_reg3 -> 12
+2026-08-11 06:32:58 ERROR (DWARFImportSummary)   DW_OP_reg2 -> 20
+2026-08-11 06:32:58 ERROR (DWARFImportSummary)   DW_OP_reg1 -> 210
+2026-08-11 06:32:58 ERROR (DWARFImportSummary)   DW_OP_lit0; DW_OP_stack_value -> 1
+2026-08-11 06:33:03 DEBUG (FidAnalyzer) No FID Libraries apply for language ARM:LE:32:v8
+2026-08-11 06:33:03 INFO  (PackedDatabaseCache) Packed database cache: /var/tmp/kalani-ghidra/packed-db-cache
+2026-08-11 06:33:04 DEBUG (PackedDatabaseCache) Using cached packed database: /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/Base/data/typeinfo/generic/generic_clib.gdt
+2026-08-11 06:33:04 INFO  (ApplyDataArchiveAnalyzer) Applied data type archive: generic_clib
+2026-08-11 06:33:08 INFO  (AutoAnalysisManager) -----------------------------------------------------
+    ARM Constant Reference Analyzer            0.287 secs
+    ARM Symbol                                 0.005 secs
+    ASCII Strings                              0.522 secs
+    Apply Data Archives                        0.841 secs
+    Call Convention ID                         2.942 secs
+    Call-Fixup Installer                       0.005 secs
+    Create Address Tables                      0.004 secs
+    Create Function                            0.000 secs
+    DWARF                                      1.474 secs
+    Data Reference                             0.015 secs
+    Decompiler Switch Analysis                 3.134 secs
+    Demangler GNU                              0.064 secs
+    Disassemble Entry Points                   0.900 secs
+    Embedded Media                             0.005 secs
+    External Entry References                  0.004 secs
+    Function ID                                0.111 secs
+    Function Start Pre Search                  0.010 secs
+    Function Start Search                      0.185 secs
+    Function Start Search After Code           0.039 secs
+    Function Start Search After Data           0.035 secs
+    GCC Exception Handlers                     0.246 secs
+    Non-Returning Functions - Discovered       0.044 secs
+    Non-Returning Functions - Known            0.006 secs
+    Reference                                  0.003 secs
+    Shared Return Calls                        0.017 secs
+    Stack                                      0.247 secs
+    Subroutine References                      0.016 secs
+-----------------------------------------------------
+     Total Time   11 secs
+-----------------------------------------------------
+
+2026-08-11 06:33:08 INFO  (HeadlessAnalyzer) REPORT: Analysis succeeded for file: file:///private/tmp/openr1-st25-ref/st25dvxxkc.elf
+2026-08-11 06:33:08 INFO  (LocalFileSystem) /st25dvxxkc.elf: file created (kalani)
+2026-08-11 06:33:08 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for: /st25dvxxkc.elf (r1_application_correlation:/st25dvxxkc.elf)
+2026-08-11 06:33:08 INFO  (HeadlessAnalyzer) REPORT: Import succeeded

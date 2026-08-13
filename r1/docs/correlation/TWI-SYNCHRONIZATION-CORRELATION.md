@@ -167,8 +167,8 @@ CMSIS-FreeRTOS snapshot. The provider binding calls the upstream APIs directly a
   `0x0003AF04` (8 bytes), sync `0x0003AF0C` (24 bytes), and transfer `0x0003AF24`
   (20 bytes).
 
-The unsigned application image has text 90,956 bytes, data 236 bytes, and BSS 132,456 bytes. Its
-HEX SHA-256 is `0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`
+The unsigned application image has text 94,804 bytes, data 236 bytes, and BSS 132,544 bytes. Its
+HEX SHA-256 is `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`
 and its BIN SHA-256 is
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 No signing, verifier modification, or protection bypass is part of this closure.

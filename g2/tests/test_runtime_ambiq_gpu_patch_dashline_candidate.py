@@ -174,7 +174,7 @@ class AmbiqGpuPatchDashlineCandidateTests(unittest.TestCase):
         self.assertEqual(dashline["variables"], ["dash_buffer_size_pixel", "ratio", "w"])
 
     def test_target_candidate_is_relocation_free_and_hard_float(self) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(self.target)

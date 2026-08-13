@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "third_party/ring-buffer"
-sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "tools"))
 import apollo_overlay  # noqa: E402
 
 

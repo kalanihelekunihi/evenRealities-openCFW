@@ -10,7 +10,7 @@ matches either configured right- or left-side target address. Its 54-byte addres
 implementation is present in these bodies, so only their R1 matching behavior is implemented
 locally.
 
-`../../scripts/firmware/summarize_r1_peer_target_policy.py`
+`../../tools/summarize_r1_peer_target_policy.py`
 authenticates the recovered application, function bodies, direct caller sets, erased-address
 literal, and product state pointers.
 
@@ -38,7 +38,7 @@ guarantee. Callers must continue to use the separately recovered BLE security an
 authorization policy; this helper must not be promoted into a trust boundary.
 
 The implementation in
-[`../../src/r1_peer_target.c`](../../src/r1_peer_target.c) is pure and bounded.
+`../src/r1_peer_target.c` is pure and bounded.
 Nordic connection state, peer-address acquisition, logging, disconnection, advertising, and
 transport remain external. Tests cover all-zero/all-`FF` sentinels, slot bounds, both target
 matches, mismatch, single-side configuration, no configured targets, and unavailable lookup.

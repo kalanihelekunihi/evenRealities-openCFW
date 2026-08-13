@@ -1,0 +1,104 @@
+2026-08-11 05:55:12 INFO  (LoggingInitialization) Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml
+2026-08-11 05:55:12 INFO  (LoggingInitialization) Using log file: /tmp/r1-source-correlation.ssnvjH/correlation-headless.log
+2026-08-11 05:55:12 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter
+2026-08-11 05:55:12 INFO  (Preferences) Loading user preferences: /Users/kalani/Library/ghidra/ghidra_12.1.2_PUBLIC/preferences
+2026-08-11 05:55:12 INFO  (Preferences) Loading previous preferences: /Users/kalani/Library/ghidra/ghidra_12.1.1_PUBLIC/preferences
+2026-08-11 05:55:12 INFO  (ClassSearcher) Searching for classes...
+2026-08-11 05:55:13 INFO  (ClassSearcher) Class search complete (742 ms)
+2026-08-11 05:55:13 INFO  (DefaultSSLContextInitializer) Initializing SSL Context
+2026-08-11 05:55:13 INFO  (SecureRandomFactory) Initializing Random Number Generator...
+2026-08-11 05:55:13 INFO  (SecureRandomFactory) Random Number Generator initialization complete: NativePRNGNonBlocking
+2026-08-11 05:55:13 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set
+2026-08-11 05:55:14 INFO  (AnalyzeHeadless) Headless startup complete (2968 ms)
+2026-08-11 05:55:14 INFO  (ClassSearcher) Class searcher loaded 210 extension points (114 false positives)
+2026-08-11 05:55:14 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /tmp/r1-source-correlation.ssnvjH/scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+2026-08-11 05:55:14 INFO  (HeadlessAnalyzer) HEADLESS: execution starts
+2026-08-11 05:55:14 INFO  (HeadlessAnalyzer) Opening existing project: /tmp/r1-source-correlation.ssnvjH/r1_source_correlation
+2026-08-11 05:55:14 INFO  (HeadlessProject) Opening project: /tmp/r1-source-correlation.ssnvjH/r1_source_correlation
+2026-08-11 05:55:14 INFO  (HeadlessAnalyzer) REPORT: Processing input files:
+2026-08-11 05:55:14 INFO  (HeadlessAnalyzer)      project: /tmp/r1-source-correlation.ssnvjH/r1_source_correlation
+2026-08-11 05:55:14 INFO  (HeadlessAnalyzer) IMPORTING: file:///Users/kalani/Repo/SybilSight/firmware/analysis/r1-live-2026-08-10/r1-bootloader-live.bin
+2026-08-11 05:55:14 INFO  (ProgramLoader) Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x000f8000")
+2026-08-11 05:55:14 INFO  (ProgramLoader) Using Loader: Raw Binary
+2026-08-11 05:55:14 INFO  (ProgramLoader) Using Language/Compiler: ARM:LE:32:Cortex:default
+2026-08-11 05:55:14 INFO  (ProgramLoader) Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/kalani/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java]
+2026-08-11 05:55:15 INFO  (HeadlessAnalyzer) IMPORTING: Loaded 0 additional files
+2026-08-11 05:55:15 INFO  (HeadlessAnalyzer) REPORT: Execute script: SeedCortexMVectorTable.java '0x000f8000' '0x000fe000' '64'
+2026-08-11 05:55:16 INFO  (HeadlessAnalyzer) SCRIPT: /tmp/r1-source-correlation.ssnvjH/scripts/SeedCortexMVectorTable.java
+2026-08-11 05:55:16 INFO  (GhidraScript) SeedCortexMVectorTable.java> OPENCFW_VECTOR_SEED_SUMMARY unique=15 rejected=10 words=64
+2026-08-11 05:55:16 INFO  (HeadlessAnalyzer) REPORT: Execute script: R1BootloaderSeedKnownFunctions.java
+2026-08-11 05:55:16 INFO  (HeadlessAnalyzer) SCRIPT: /tmp/r1-source-correlation.ssnvjH/scripts/R1BootloaderSeedKnownFunctions.java
+2026-08-11 05:55:17 INFO  (GhidraScript) R1BootloaderSeedKnownFunctions.java> R1_BOOTLOADER_SEED created=41 named=26
+2026-08-11 05:55:17 INFO  (HeadlessAnalyzer) ANALYZING all memory and code: file:///Users/kalani/Repo/SybilSight/firmware/analysis/r1-live-2026-08-10/r1-bootloader-live.bin
+2026-08-11 05:55:22 DEBUG (FidAnalyzer) No FID Libraries apply for language ARM:LE:32:Cortex
+2026-08-11 05:55:22 INFO  (PackedDatabaseCache) Packed database cache: /var/tmp/kalani-ghidra/packed-db-cache
+2026-08-11 05:55:22 DEBUG (PackedDatabaseCache) Using cached packed database: /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/Base/data/typeinfo/generic/generic_clib.gdt
+2026-08-11 05:55:22 INFO  (ApplyDataArchiveAnalyzer) Applied data type archive: generic_clib
+2026-08-11 05:55:24 INFO  (AutoAnalysisManager) -----------------------------------------------------
+    ARM Constant Reference Analyzer            0.680 secs
+    ARM Symbol                                 0.002 secs
+    ASCII Strings                              0.212 secs
+    Apply Data Archives                        0.420 secs
+    Call Convention ID                         0.003 secs
+    Call-Fixup Installer                       0.005 secs
+    Create Address Tables                      0.008 secs
+    Create Address Tables - One Time           0.016 secs
+    Create Function                            0.064 secs
+    Data Reference                             0.004 secs
+    Decompiler Switch Analysis                 4.675 secs
+    Demangler GNU                              0.031 secs
+    Disassemble                                0.037 secs
+    Disassemble Entry Points                   0.007 secs
+    Embedded Media                             0.007 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.069 secs
+    Function Start Pre Search                  0.007 secs
+    Function Start Search                      0.094 secs
+    Function Start Search After Code           0.057 secs
+    Function Start Search After Data           0.001 secs
+    Function Start Search delayed - One Time   0.003 secs
+    Non-Returning Functions - Discovered       0.036 secs
+    Reference                                  0.055 secs
+    Shared Return Calls                        0.017 secs
+    Stack                                      0.373 secs
+    Subroutine References                      0.033 secs
+    Subroutine References - One Time           0.001 secs
+-----------------------------------------------------
+     Total Time   6 secs
+-----------------------------------------------------
+
+2026-08-11 05:55:24 INFO  (HeadlessAnalyzer) REPORT: Analysis succeeded for file: file:///Users/kalani/Repo/SybilSight/firmware/analysis/r1-live-2026-08-10/r1-bootloader-live.bin
+2026-08-11 05:55:24 INFO  (HeadlessAnalyzer) REPORT: Execute script: R1BootloaderApplyNames.java '/Users/kalani/Repo/SybilSight/docs/r1-bootloader-reconstruction/generated/function-names.csv'
+2026-08-11 05:55:24 INFO  (HeadlessAnalyzer) SCRIPT: /tmp/r1-source-correlation.ssnvjH/scripts/R1BootloaderApplyNames.java
+2026-08-11 05:55:24 INFO  (GhidraScript) R1BootloaderApplyNames.java> R1_NAME_LEDGER recovered=304 synthetic=0 output=/Users/kalani/Repo/SybilSight/docs/r1-bootloader-reconstruction/generated/function-names.csv
+2026-08-11 05:55:24 INFO  (HeadlessAnalyzer) REPORT: Execute script: R1BootloaderBSimCompare.java '/nrf52840_xxaa_s140.out' '/Users/kalani/Repo/SybilSight/docs/r1-bootloader-reconstruction/generated/source-correlations-raw.csv'
+2026-08-11 05:55:24 INFO  (HeadlessAnalyzer) SCRIPT: /tmp/r1-source-correlation.ssnvjH/scripts/R1BootloaderBSimCompare.java
+2026-08-11 05:55:29 INFO  (GhidraScript) R1BootloaderBSimCompare.java> R1_BSIM_COMPARE source=298 reference=319 output=/Users/kalani/Repo/SybilSight/docs/r1-bootloader-reconstruction/generated/source-correlations-raw.csv
+2026-08-11 05:55:29 INFO  (HeadlessAnalyzer) ANALYZING changes made by post scripts: file:///Users/kalani/Repo/SybilSight/firmware/analysis/r1-live-2026-08-10/r1-bootloader-live.bin
+2026-08-11 05:55:29 INFO  (HeadlessAnalyzer) REPORT: Post-analysis succeeded for file: file:///Users/kalani/Repo/SybilSight/firmware/analysis/r1-live-2026-08-10/r1-bootloader-live.bin
+2026-08-11 05:55:30 INFO  (LocalFileSystem) /r1-bootloader-live.bin: file created (kalani)
+2026-08-11 05:55:30 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for: /r1-bootloader-live.bin (r1_source_correlation:/r1-bootloader-live.bin)
+2026-08-11 05:55:30 INFO  (HeadlessAnalyzer) REPORT: Import succeeded

@@ -76,7 +76,7 @@ class RuntimeAsyncCallTests(unittest.TestCase):
         cls.info = Info.in_dll(cls.loaded, "open_cfw_test_runtime_async_info")
         target = temp / "a.o"
         subprocess.run([os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"), *FLAGS, "-c", str(SOURCE), "-o", str(target)], check=True, capture_output=True, text=True)
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         data, sections = apollo_overlay.parse_elf32(target)
         text = apollo_overlay.section_named(sections, ".text")
@@ -357,7 +357,7 @@ class RuntimeAsyncCallTests(unittest.TestCase):
     def test_stock_cancel_boundary_caller_dependencies_and_topology_are_exact(
         self,
     ) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         body = self.application[

@@ -218,7 +218,7 @@ class RuntimeDecimalScaleTests(unittest.TestCase):
             "22edb33e3b5d9fa5036650fb429532dc",
         )
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

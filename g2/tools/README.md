@@ -1,0 +1,78 @@
+# G2 tools
+
+378 Python scripts sit in this directory. Four of them are things you run; the
+rest are evidence producers named by what they analyze. This file is the map.
+
+## Entry points
+
+These are the ones you invoke directly.
+
+| Script | What it does |
+| --- | --- |
+| [`open_cfw.py`](open_cfw.py) | build, verify, and inspect a firmware package from a manifest — the packager behind `make reference` / `ring-source` / `source` |
+| [`apollo_overlay.py`](apollo_overlay.py) | compile an Apollo source overlay from a component's `overlay.json` and place it byte-exactly |
+| [`detect_toolchain.py`](detect_toolchain.py) | resolve the reviewed compiler profile for this host (`make toolchain` prints the result) |
+| [`verify_research_corpus.py`](verify_research_corpus.py) | authenticate [`../research/`](../research) against its delivered manifests |
+
+`open_cfw.py` and `apollo_overlay.py` are pinned **by path** in the vendored
+snapshots' production-exclusion gates. They cannot move.
+
+## Analyzers — `analyze_*.py` (355)
+
+Read-only. Each one reads the official image, proves something about one
+subsystem, and emits a JSON report; each has a matching
+`tests/test_<name>.py` that pins the report's values. They never write to the
+image or the build.
+
+Naming is `analyze_<target>_<subsystem>.py`:
+
+| Prefix | Count | Target |
+| --- | ---: | --- |
+| `analyze_g2_*` | 350 | the Apollo510 application and bootloader |
+| `analyze_em9305_*` | 4 | the EM9305 BLE controller image |
+| `analyze_apollo_*` | 1 | Apollo-wide embedded source-path recovery |
+
+To find the analyzer for a subsystem, guess the name — `ls analyze_g2_cordio_*`,
+`ls analyze_g2_service_*`, `ls analyze_g2_nanopb_*`. The subsystem vocabulary
+matches [`../docs/source-coverage.md`](../docs/source-coverage.md).
+
+## Other evidence producers (19)
+
+| Family | Scripts | Purpose |
+| --- | --- | --- |
+| `compare_em9305_*` | 4 | diff the EM9305 image against built SDK references |
+| `emulate_*` | 4 | executable models used as oracles for recovered behavior |
+| `recover_*`, `prove_*`, `disassemble_*` | 3 | targeted recovery and proof runs |
+| `build_*`, `run_*`, `generate_*` | 3 | drive corpus generation (Ghidra chunks, SDK batches) |
+| `*_audit.py`, `thumb_branch_audit.py` | 2 | standalone audits with their own pinned evidence |
+| `benchmark_*` | 1 | measured comparisons |
+| `unittest_identity_baseline.py` | 1 | compare test-suite identity across revisions |
+| `verify_ambiqsuite_cordio_wsf_timer_archive.py` | 1 | authenticate one delivered archive |
+
+## Data and scripts
+
+| Path | Contents |
+| --- | --- |
+| [`manifests/`](manifests) | 958 TSV/JSON evidence tables the analyzers read row-by-row — function maps, provenance, closures, readiness matrices |
+| [`ghidra_scripts/`](ghidra_scripts) | 15 Ghidra headless scripts for Thumb and ARCompact targets |
+| [`patches/`](patches) | source patches applied to vendored upstreams |
+| [`prompts/`](prompts) | recorded prompts for the analysis lanes |
+| `*.sh` | 3 headless-Ghidra batch drivers |
+
+## Why this is one flat directory
+
+It reads like a directory that wants subdirectories. It resists them for two
+reasons, both load-bearing:
+
+1. **The analyzers import each other by bare module name** — 180 of them do.
+   They have to stay co-located.
+2. **Their paths and digests are pinned outside this directory.** The vendored
+   snapshot verifiers record `(path, size, sha256)` triples for seven analyzers
+   and for eleven `docs/research/` audits; those verifiers are themselves
+   hash-pinned by the test suite. Adding a directory level to these paths means
+   editing pinned evidence records and then re-pinning the hashes that exist to
+   detect exactly that edit.
+
+The convention does the work instead: **entry points are the four scripts named
+above; everything matching `analyze_*` is read-only evidence; every analyzer has
+a test with the same name.** Navigate by name, not by directory.

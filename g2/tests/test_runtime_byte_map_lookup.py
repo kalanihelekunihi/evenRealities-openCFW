@@ -308,7 +308,7 @@ class RuntimeByteMapLookupTests(unittest.TestCase):
             "bef107ac09a125bfbfc4c0093ccfb7af",
         )
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

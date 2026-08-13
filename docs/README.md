@@ -13,6 +13,8 @@ here, and everything specific to a device lives with that device.
 
 ## G2 — [`../g2/docs`](../g2/docs)
 
+Index: [`../g2/docs/README.md`](../g2/docs/README.md). Tools: [`../g2/tools/README.md`](../g2/tools/README.md).
+
 | Document | Contents |
 | --- | --- |
 | [`../g2/README.md`](../g2/README.md) | current status, build profiles, per-dependency snapshot posture |
@@ -42,7 +44,7 @@ Those four orient a reader. Everything below them is filed by document kind:
 
 | Directory | Kind | Count |
 | --- | --- | ---: |
-| [`../r1/docs/correlation`](../r1/docs/correlation) | one record per subsystem, pinning recovered behavior to the stock image: exact addresses, byte counts, record layouts, and how the reimplementation corresponds | 75 |
+| [`../r1/docs/correlation`](../r1/docs/correlation) | one record per subsystem, pinning recovered behavior to the stock image: exact addresses, byte counts, record layouts, and how the reimplementation corresponds | 80 |
 | [`../r1/docs/boundaries`](../r1/docs/boundaries) | one record per licensed-provider seam — what the R1-owned adapter implements, and what stays disabled until that provider is supplied | 29 |
 | [`../r1/docs/closures`](../r1/docs/closures) | Nordic SDK closure proofs | 5 |
 | [`../r1/docs/reference`](../r1/docs/reference) | function ownership, coverage, remaining frontier, and BSim run summaries under `reference/bsim/` | 9 |

@@ -132,7 +132,7 @@ class RuntimeEasyLoggerHexdumpProductionTests(unittest.TestCase):
         cls.config = json.loads(CONFIG.read_text(encoding="utf-8"))
         cls.package = OFFICIAL.read_bytes()
         cls.application = cls.package[PREAMBLE:]
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

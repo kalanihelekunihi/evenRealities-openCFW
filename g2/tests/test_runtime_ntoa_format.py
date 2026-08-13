@@ -448,7 +448,7 @@ class RuntimeNtoaFormatTests(unittest.TestCase):
         )
 
     def test_callers_dependency_and_wide_topology_are_exact(self) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         from apollo_overlay import BuildError, decode_thumb_branch
 
         callers = []
@@ -566,7 +566,7 @@ class RuntimeNtoaFormatTests(unittest.TestCase):
             self.assertEqual(target & 1, 0)
 
     def test_reviewed_target_artifact_and_relocation_are_exact(self) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(self.target_object)

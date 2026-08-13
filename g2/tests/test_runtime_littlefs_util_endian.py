@@ -332,7 +332,7 @@ def compile_host_library(source: Path, output: Path) -> ctypes.CDLL:
 class RuntimeLittlefsUtilEndianTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

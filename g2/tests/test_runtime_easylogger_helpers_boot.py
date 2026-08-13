@@ -289,7 +289,7 @@ TARGET_CLOSURE_SHA256 = (
     "dfcf359c2c53dad9ab29f3dd2e7c083b"
 )
 
-sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "tools"))
 import apollo_overlay  # noqa: E402
 
 

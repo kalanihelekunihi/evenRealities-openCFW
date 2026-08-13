@@ -65,7 +65,7 @@ class RuntimeCmsisMessageQueueDeleteTests(unittest.TestCase):
 
         target = temporary / "leaf.o"
         subprocess.run([clang, *TARGET_FLAGS, "-c", str(SOURCE), "-o", str(target)], check=True, capture_output=True, text=True)
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         data, sections = apollo_overlay.parse_elf32(target)
         section = apollo_overlay.section_named(sections, ".text.open_cfw_cmsis_message_queue_delete")

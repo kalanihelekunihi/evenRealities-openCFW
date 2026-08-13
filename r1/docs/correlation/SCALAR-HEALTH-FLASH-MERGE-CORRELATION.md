@@ -29,16 +29,16 @@ reading, calendar conversion, logging, transport, and biometric algorithms are
 not reimplemented.
 
 The shared function is retained in the unsigned Nordic SDK image at
-`0x000349D0`. The image contains 90,956 bytes of text, 236 bytes of data,
-and 132,456 bytes of BSS. Its standalone BIN is 91,192 bytes. The HEX and
+`0x000349D0`. The image contains 94,804 bytes of text, 236 bytes of data,
+and 132,544 bytes of BSS. Its standalone BIN is 95,040 bytes. The HEX and
 BIN SHA-256 values are
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 Reproduce with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_scalar_health_flash_merge.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_scalar_health_flash_merge.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```

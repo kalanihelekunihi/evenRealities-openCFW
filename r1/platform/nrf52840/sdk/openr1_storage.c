@@ -224,11 +224,34 @@ uint32_t openr1_storage_end_address(void) {
     return storage_ready ? storage_instance.end_addr + 1u : 0u;
 }
 
+r1_error openr1_storage_plan_fds_event(
+    const fds_evt_t *event, bool metadata_validated,
+    bool retry_already_pending, r1_fds_event_plan *plan) {
+    if (event == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    uint16_t record_key = 0u;
+    uint32_t record_id = 0u;
+    if (event->id == FDS_EVT_WRITE || event->id == FDS_EVT_UPDATE) {
+        record_key = event->write.record_key;
+        record_id = event->write.record_id;
+    } else if (event->id == FDS_EVT_DEL_RECORD ||
+               event->id == FDS_EVT_DEL_FILE) {
+        record_key = event->del.record_key;
+        record_id = event->del.record_id;
+    }
+    return r1_fds_plan_event(
+        (uint8_t)event->id, event->result, record_key, record_id,
+        metadata_validated, retry_already_pending, plan);
+}
+
 typedef struct {
     ret_code_t (*initialize)(void);
     r1_flash *(*flash)(void);
     uint32_t (*start_address)(void);
     uint32_t (*end_address)(void);
+    r1_error (*fds_event_plan)(
+        const fds_evt_t *, bool, bool, r1_fds_event_plan *);
     r1_error (*export_plan_command)(
         r1_export_state *, const r1_export_observation *, r1_export_plan *);
 } openr1_storage_api;
@@ -239,5 +262,6 @@ static const openr1_storage_api retained_storage_api = {
     openr1_storage_flash,
     openr1_storage_start_address,
     openr1_storage_end_address,
+    openr1_storage_plan_fds_event,
     r1_export_plan_command,
 };

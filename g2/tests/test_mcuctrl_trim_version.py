@@ -269,7 +269,7 @@ class McuctrlTrimVersionTests(unittest.TestCase):
             CHIPREV_ADDRESS,
         )
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

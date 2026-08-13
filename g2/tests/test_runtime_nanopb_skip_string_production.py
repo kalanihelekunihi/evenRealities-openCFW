@@ -834,7 +834,7 @@ class NanopbSkipStringCandidateTests(unittest.TestCase):
         cls.host_test.argtypes = []
         cls.host_test.restype = ctypes.c_int
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         import analyze_g2_nanopb_point_release
         cls.apollo_overlay = apollo_overlay
@@ -1139,7 +1139,7 @@ class NanopbSkipStringProductionContractTests(StableUnittestIdentityCase):
     maxDiff = None
 
     def test_active_profile_mutation_helpers_reach_effective_leaf(self) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         baseline = json.loads(OVERLAY.read_text(encoding="utf-8"))
@@ -1284,7 +1284,7 @@ class NanopbSkipStringProductionContractTests(StableUnittestIdentityCase):
         if pins["object"] is None or pins["text"] is None:
             self.fail(f"unrecorded production compiler pins:\n{profile}")
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         with tempfile.TemporaryDirectory(
@@ -1524,7 +1524,7 @@ class NanopbSkipStringProductionContractTests(StableUnittestIdentityCase):
         profile, _ = resolve_compiler_profile(
             clang, version, os.environ.get("OPENCFW_TOOLCHAIN_PROFILE")
         )
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         build_root = ROOT / "build"
@@ -1680,7 +1680,7 @@ class NanopbSkipStringProductionMutationTests(StableUnittestIdentityCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay
@@ -2259,7 +2259,7 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
             historical_manifest["component_overrides"]["apollo_bootloader"],
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import open_cfw
 
         build_environment = os.environ.copy()

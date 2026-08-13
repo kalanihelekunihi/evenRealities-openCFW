@@ -216,7 +216,7 @@ class RuntimeFreeRTOSTaskResumeAllTests(unittest.TestCase):
                 [cls.clang, *TARGET_FLAGS, "-c", str(SOURCE), "-o", str(target)],
                 check=True, capture_output=True, text=True,
             )
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         cls.apollo_overlay = apollo_overlay
         cls.package = OFFICIAL.read_bytes()

@@ -173,7 +173,7 @@ class RuntimeLinkedListInitTests(unittest.TestCase):
             (0x005C9E9E, "b8f62ffe"),
         ]
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         observed = []
@@ -229,7 +229,7 @@ class RuntimeLinkedListInitTests(unittest.TestCase):
         )
 
     def test_no_dependency_or_alternate_entry_topology_exists(self) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         jumps = []

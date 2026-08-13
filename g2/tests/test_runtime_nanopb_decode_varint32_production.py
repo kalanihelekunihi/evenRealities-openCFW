@@ -979,7 +979,7 @@ def validate_atomic_production_topology(
         // overlay["alignment"] * overlay["alignment"]
         - overlay["preamble_bytes"]
     )
-    sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+    sys.path.insert(0, str(ROOT / "tools"))
     import apollo_overlay
     leaves_by_function = {leaf["function"]: leaf for leaf in pair_leaves}
     for patch in pair_patches:
@@ -1491,7 +1491,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
         self.assertEqual((len(header), sha256(header)), PROSPECTIVE_HEADER_PIN)
         self.assertNotIn(b"_candidate", source + header)
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         clang = os.environ.get("OPENCFW_CLANG", "/usr/bin/clang")
@@ -1597,7 +1597,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             production_config, projected_regions = production_topology_fixture()
             validate_atomic_production_topology(production_config, projected_regions)
 
-            sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+            sys.path.insert(0, str(ROOT / "tools"))
             import open_cfw
 
             projected_manifest = json.loads(
@@ -1682,7 +1682,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
 
     def test_real_builder_rejects_mutated_production_configs(self) -> None:
         """Exercise the real full-overlay path for every production seam."""
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         clang = os.environ.get("OPENCFW_CLANG", "/usr/bin/clang")
@@ -2429,7 +2429,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
                 capture_output=True, text=True,
             )
 
-            sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+            sys.path.insert(0, str(ROOT / "tools"))
             import apollo_overlay
             data, sections = apollo_overlay.parse_elf32(target)
             symtab = apollo_overlay.section_named(sections, ".symtab")
@@ -2569,7 +2569,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             self.assertEqual(outputs[0], outputs[1])
             self.assertEqual((len(outputs[0]), sha256(outputs[0])), pins["object"])
 
-            sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+            sys.path.insert(0, str(ROOT / "tools"))
             import apollo_overlay
             data, sections = apollo_overlay.parse_elf32(Path(temporary) / "candidate-0.o")
             symbols = apollo_overlay.parse_elf32_symbols(data, sections)

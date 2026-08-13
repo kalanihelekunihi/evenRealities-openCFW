@@ -72,10 +72,10 @@ empty midnight subscriber slot.
 
 The retained Nordic application exposes the three portable APIs through `.openr1_health_api`.
 The transition planner, cursor reconciler, and hour planner link at `0x00031D54`, `0x00031E98`,
-and `0x00031F06`; the table is at `0x0003B274`. The verified unsigned application is 90,956 bytes
-text, 236 bytes data, and 132,456 bytes BSS. Its HEX and BIN SHA-256 values are
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+and `0x00031F06`; the table is at `0x0003B274`. The verified unsigned application is 94,804 bytes
+text, 236 bytes data, and 132,544 bytes BSS. Its HEX and BIN SHA-256 values are
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 FlashDB 2.0.0/FAL remains the storage provider; the GoMore path remains disabled until its exact
 licensed SDK is authenticated. No internal-event sender, live clock setter, private SRAM reader,
 database formatter, BLE command, signing bypass, or deployment mechanism is added.

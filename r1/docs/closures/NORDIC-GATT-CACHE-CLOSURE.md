@@ -24,7 +24,7 @@ The CAR helper persists the one-word Central Address Resolution value through Pe
 All complete bodies, hashes, and direct caller sets are checked by:
 
 ```sh
-python3 scripts/firmware/summarize_r1_nordic_gatt_cache_closure.py
+python3 tools/summarize_r1_nordic_gatt_cache_closure.py
 ```
 
 Provider family is `nordic_nrf5_sdk_17_1_0`; disposition is `use_nordic_sdk`. openR1 already

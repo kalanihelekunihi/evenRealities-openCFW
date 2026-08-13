@@ -128,7 +128,7 @@ class RuntimeColorMixTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         from apollo_overlay import extract_linked_overlay
 
         (
@@ -313,7 +313,7 @@ class RuntimeColorMixTests(unittest.TestCase):
         self.assertNotIn("8df803", body.hex())
 
     def test_callers_and_three_byte_consumers_are_complete(self) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

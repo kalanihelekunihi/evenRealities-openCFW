@@ -19,6 +19,8 @@
 #define R1_MOTION_LIS2DW12_CHIP_ID UINT8_C(0x44)
 #define R1_MOTION_SAMPLE_BYTES 6u
 #define R1_MOTION_FIFO_SAMPLE_LIMIT 31u
+#define R1_RING_STABILITY_WINDOW 8u
+#define R1_RING_STABILITY_DETECT_COUNT 600u
 
 typedef enum {
     R1_MOTION_VARIANT_NONE = 0,
@@ -60,6 +62,23 @@ typedef struct {
     bool configured;
 } r1_motion_adapter;
 
+typedef struct {
+    float window[R1_RING_STABILITY_WINDOW];
+    float window_sum;
+    uint8_t cursor;
+    uint16_t sample_count;
+    uint16_t low_motion_count;
+    bool detected;
+} r1_ring_stability_state;
+
+typedef struct {
+    bool evaluated;
+    bool state_changed;
+    bool callback_requested;
+    bool detected;
+    uint16_t low_motion_count;
+} r1_ring_stability_result;
+
 void r1_motion_adapter_initialize(r1_motion_adapter *adapter);
 r1_error r1_motion_adapter_bind(r1_motion_adapter *adapter,
                                  r1_motion_variant variant,
@@ -75,5 +94,9 @@ r1_error r1_motion_adapter_read_fifo(r1_motion_adapter *adapter,
 r1_error r1_motion_adapter_disable_double_tap(r1_motion_adapter *adapter);
 r1_motion_variant r1_motion_adapter_selected(const r1_motion_adapter *adapter);
 int16_t r1_motion_normalize_axis(int16_t raw_axis);
+void r1_ring_stability_initialize(r1_ring_stability_state *state);
+r1_error r1_ring_stability_observe(
+    r1_ring_stability_state *state, float smoothed_deviation,
+    bool callback_registered, r1_ring_stability_result *result);
 
 #endif

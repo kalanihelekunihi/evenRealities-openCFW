@@ -50,15 +50,15 @@ weights, tensor ABI, formulas, or substitute neural runtime are implemented.
 Reproduce with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_frontier_314_328.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_frontier_314_328.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```
 
 The two clean-room product APIs are retained at `0x00033D30` and `0x00033F22` in the unsigned
 Nordic link; the upstream `SAADC_IRQHandler` is linked at `0x0002F5B4`. The application contains
-90,956 bytes of text, 236 bytes of data, and 132,456 bytes of BSS. Its 91,192-byte BIN has SHA-256
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`, and its standalone HEX
-has SHA-256 `0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`.
+94,804 bytes of text, 236 bytes of data, and 132,544 bytes of BSS. Its 95,040-byte BIN has SHA-256
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`, and its standalone HEX
+has SHA-256 `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`.
 Code signing, deployment authorization, private keys, and security-enforcement bypasses are
 outside this closure.

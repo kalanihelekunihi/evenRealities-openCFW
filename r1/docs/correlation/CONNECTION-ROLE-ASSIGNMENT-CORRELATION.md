@@ -15,7 +15,7 @@ when the slot is already occupied. Reusing the other role's live handle enters a
 in stock firmware. OpenR1 returns `R1_CONNECTION_ROLE_ASSIGN_CROSS_ROLE_CONFLICT` instead, so
 untrusted connection state cannot trigger a fatal callback.
 
-[`../../src/r1_connection_params.c`](../../src/r1_connection_params.c) implements
+`../src/r1_connection_params.c` implements
 only this caller-owned state transition. Nordic connection state, logging, role-event delivery,
 and fatal handling remain external. Tests cover assignment, repeat, occupied slot, cross-role
 conflict, invalid handle, and null state.
@@ -23,5 +23,5 @@ conflict, invalid handle, and null state.
 Evidence is reproducible with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_connection_role_assignment.py
+python3 tools/summarize_r1_connection_role_assignment.py
 ```

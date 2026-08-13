@@ -8,7 +8,7 @@ delay selection, and a product field-seen flag. They do not implement ST registe
 mailbox transport and are eligible for a clean-room behavioral implementation.
 
 The evidence gate is
-`../../scripts/firmware/summarize_r1_nfc_dock_policy.py`.
+`../../tools/summarize_r1_nfc_dock_policy.py`.
 It checks the recovered application SHA-256, every function body, direct caller set, the dock
 state pointer, the shared field-seen state pointer, and the delayed-callback pointer.
 
@@ -46,7 +46,7 @@ otherwise. The strict comparison and the uint8 counter wrap are preserved. A rec
 functional effect beyond stock logging.
 
 The clean-room implementation is in
-[`../../src/r1_st25dvxxkc.c`](../../src/r1_st25dvxxkc.c). It is a bounded pure
+`../src/r1_st25dvxxkc.c`. It is a bounded pure
 planner: callers provide the ST-reported mailbox-control byte and the existing 23-byte R1
 packet, and receive either no action, a send action, or a delayed charge-field action. It
 adds explicit frame and packet bounds that the stock internal call path assumed.

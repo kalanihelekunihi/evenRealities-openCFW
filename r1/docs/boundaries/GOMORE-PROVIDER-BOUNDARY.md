@@ -35,7 +35,7 @@ used to classify adjacent functions.
 
 ## Audit-scoped algorithm functions
 
-The firmware audit independently pins another 238 exact function entries. These are not inferred
+The firmware audit independently pins another 259 exact function entries. These are not inferred
 from a broad address interval: each entry begins a code-only range whose bytes, constants, and
 direct-call relationships are checked by at least one read-only audit. Overlap between scopes is
 expected because an output producer can also participate in the sleep or energy pipeline.
@@ -57,10 +57,16 @@ expected because an output producer can also participate in the sleep or energy 
 | private IIR coefficient designer | 1 |
 | SDK authorization parser | 1 |
 | sleep-stage statistics closure | 3 |
-| unique additional entries | 240 |
+| unique additional entries | 259 |
 
 Together with the ten direct diagnostic-marker functions, the current ownership ledger contains
-256 GoMore-gated functions. The newest three additions are the 274-byte private timestamp-to-sample
+269 GoMore-gated functions. The newest three additions are private sleep-step orchestrator
+`0x00094070`, rolling accumulator `0x000947DE`, and reset helper `0x00071B24`, documented in
+[`FRONTIER-230-248-CORRELATION.md`](../correlation/FRONTIER-230-248-CORRELATION.md). The preceding ten additions
+are the floating-point pooling executor and
+constructor plus the private sleep/history force-wake reducer, wrappers, weighted merge, snapshot
+selector, tail reconciliation, timestamp setter, and two-bit extraction/lookup helpers documented
+in [`FRONTIER-256-262-CORRELATION.md`](../correlation/FRONTIER-256-262-CORRELATION.md). The preceding three additions are the 274-byte private timestamp-to-sample
 segment expansion at `0x00067C30`, its exclusive 44-byte fill helper at `0x000641C4`, and the
 264-byte fixed-coefficient IIR filter at `0x00064274`. All remain licensed-provider-only; see
 [`FRONTIER-264-274-CORRELATION.md`](../correlation/FRONTIER-264-274-CORRELATION.md). The preceding two additions are the 314-byte private convolution tensor
@@ -96,7 +102,7 @@ SHA-pinned GoMore sleep body at `0x0006FEA0`; it initializes ten already gated G
 plus the newly bounded helpers. The 8-byte reset at `0x00071D96` is byte-identical to the already
 gated reset at `0x0007170A`, but the classification relies on this exclusive call context rather
 than on generic bytes alone. The complete 586-byte census and caller sets are pinned by
-`../../scripts/firmware/summarize_r1_gomore_initializer_boundary.py`.
+`../../tools/summarize_r1_gomore_initializer_boundary.py`.
 
 The earlier audit treated `GH_HRV_pre_pv_v1.0.1.0_ed953ff3` as a GoMore version marker. Goodix's
 primary-source developer trace reproduces that exact string and identifies it as a GH3X2X

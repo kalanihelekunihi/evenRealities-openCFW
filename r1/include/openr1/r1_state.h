@@ -50,6 +50,9 @@ typedef struct {
 #define R1_SYSTEM_SETTINGS_BYTES 12u
 #define R1_SYSTEM_SETTINGS_SWITCH_TYPE_REG1 0u
 #define R1_TEMPERATURE_TIMED_MODE_PERIOD 600u
+#define R1_HEART_RATE_TIMED_MODE_PERIOD 600u
+#define R1_SYSTEM_CONTROL_MAX_REPLY_BYTES 64u
+#define R1_SYSTEM_CONTROL_DELAY_TICKS 200u
 
 typedef struct {
     bool write_command;
@@ -69,6 +72,39 @@ typedef struct {
     bool create_timed_mode;
     uint32_t timed_mode_period;
 } r1_temperature_mode_transition_plan;
+
+typedef struct {
+    bool changed;
+    bool unregister_previous_stream;
+    bool stop_mode_timer;
+    bool stop_measurement_timer;
+    bool stop_hrv_timer;
+    bool clear_hrv_timing_state;
+    bool create_mode_timer;
+    uint32_t mode_timer_period;
+} r1_heart_rate_mode_transition_plan;
+
+typedef enum {
+    R1_SYSTEM_CONTROL_RESET_NONE = 0,
+    R1_SYSTEM_CONTROL_RESET_STANDARD = 4,
+    R1_SYSTEM_CONTROL_RESET_CONFIRMED = 5,
+    R1_SYSTEM_CONTROL_RESET_MARKED = 6,
+    R1_SYSTEM_CONTROL_RESET_ALTERNATE = 7
+} r1_system_control_reset_action;
+
+typedef struct {
+    bool send_reply;
+    size_t reply_length;
+    bool zero_reply_byte4;
+    bool set_configuration_byte;
+    uint8_t configuration_byte;
+    bool refresh_configuration;
+    bool delay_requested;
+    uint32_t delay_ticks;
+    bool persist_reset_trace;
+    bool system_reset_requested;
+    r1_system_control_reset_action reset_action;
+} r1_system_control_command_37_result;
 
 typedef struct {
     uint8_t battery_percent;
@@ -99,5 +135,13 @@ r1_error r1_temperature_mode_plan_transition(
     uint8_t previous_mode, uint8_t next_mode,
     bool previous_stream_registered, bool timed_mode_registered,
     r1_temperature_mode_transition_plan *plan);
+r1_error r1_heart_rate_mode_plan_transition(
+    uint8_t previous_mode, uint8_t next_mode,
+    bool previous_stream_registered, bool mode_timer_registered,
+    bool measurement_timer_registered, bool hrv_timer_registered,
+    r1_heart_rate_mode_transition_plan *plan);
+r1_error r1_system_control_command_37_plan(
+    uint8_t subcommand, uint32_t request_word, uint8_t configuration_byte,
+    uint8_t variable_reply_bytes, r1_system_control_command_37_result *plan);
 
 #endif

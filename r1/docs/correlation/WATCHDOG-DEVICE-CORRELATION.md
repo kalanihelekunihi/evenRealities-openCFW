@@ -8,7 +8,7 @@ device registry. Local code is limited to the recovered fixed configuration, one
 lifecycle, and scheduler feed seam.
 
 The immutable census is
-`../../scripts/firmware/summarize_r1_watchdog_device_boundary.py`.
+`../../tools/summarize_r1_watchdog_device_boundary.py`.
 It validates seven exact functions totaling 386 executable bytes against the rebuilt application.
 
 ## Exact function split
@@ -45,7 +45,7 @@ transitions. These are compiled from Nordic source under `use_nordic_sdk`.
 
 ## OpenR1 integration
 
-[`../../platform/nrf52840/sdk/openr1_watchdog.c`](../../platform/nrf52840/sdk/openr1_watchdog.c)
+`../platform/nrf52840/sdk/openr1_watchdog.c`
 contains only the R1 adapter. It supplies the values above, allocates exactly one Nordic channel,
 creates a low-priority scheduler-liveness worker, and feeds that channel every 1,024 RTOS ticks.
 The provider implementation is the unmodified Nordic translation unit added to the SDK build.
@@ -61,8 +61,8 @@ channel surface is exposed.
 
 The linked SDK map retains `nrfx_wdt.c.o`, `openr1_watchdog.c.o`, all four Nordic WDT entry
 points, and `openr1_watchdog_initialize`. A clean GNU Arm Embedded 9-2020-q2 build produces an
-unsigned application with 90,956 bytes text, 236 bytes data, and 132,456 bytes BSS. The standalone
-HEX SHA-256 is `0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`;
+unsigned application with 94,804 bytes text, 236 bytes data, and 132,544 bytes BSS. The standalone
+HEX SHA-256 is `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`;
 the 85,020-byte BIN SHA-256 is
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`. These values are pinned by
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`. These values are pinned by
 the SDK image verifier; no SoftDevice merge, bootloader merge, signing, or flashing is performed.

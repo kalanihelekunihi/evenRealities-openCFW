@@ -112,7 +112,7 @@ class RuntimeHeapWrapperTests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(cls.target_object)
@@ -300,7 +300,7 @@ class RuntimeHeapWrapperTests(unittest.TestCase):
             "f7e82e5705ae9eb8118e0c1b846521da",
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         self.assertEqual(
@@ -327,7 +327,7 @@ class RuntimeHeapWrapperTests(unittest.TestCase):
     def test_all_wide_callers_and_wrapper_dependencies_are_pinned(
         self,
     ) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         callers = {ALLOCATE_START: [], FREE_START: []}

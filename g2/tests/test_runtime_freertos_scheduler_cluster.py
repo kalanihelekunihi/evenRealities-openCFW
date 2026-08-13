@@ -628,7 +628,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         cls.official = OFFICIAL.read_bytes()
         cls.application = cls.official[PREAMBLE_BYTES:]
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         import open_cfw
 

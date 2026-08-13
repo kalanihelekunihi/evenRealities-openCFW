@@ -118,6 +118,115 @@ r1_error r1_temperature_mode_plan_transition(
     return R1_OK;
 }
 
+r1_error r1_heart_rate_mode_plan_transition(
+    uint8_t previous_mode, uint8_t next_mode,
+    bool previous_stream_registered, bool mode_timer_registered,
+    bool measurement_timer_registered, bool hrv_timer_registered,
+    r1_heart_rate_mode_transition_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_heart_rate_mode_transition_plan){0};
+    if (previous_mode > 3u || next_mode > 3u) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (previous_mode == next_mode) {
+        return R1_OK;
+    }
+    plan->changed = true;
+    plan->unregister_previous_stream = previous_stream_registered;
+    if (previous_mode == 1u) {
+        plan->stop_mode_timer = mode_timer_registered;
+        plan->stop_measurement_timer = measurement_timer_registered;
+        plan->stop_hrv_timer = hrv_timer_registered;
+        plan->clear_hrv_timing_state = true;
+    }
+    if (next_mode == 1u && !mode_timer_registered) {
+        plan->create_mode_timer = true;
+        plan->mode_timer_period = R1_HEART_RATE_TIMED_MODE_PERIOD;
+    }
+    return R1_OK;
+}
+
+/* Recovered command-0x37 decision model. Packet copying, configuration I/O,
+ * delays, retained reset tags, and NVIC reset execution remain external. */
+r1_error r1_system_control_command_37_plan(
+    uint8_t subcommand, uint32_t request_word, uint8_t configuration_byte,
+    uint8_t variable_reply_bytes, r1_system_control_command_37_result *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_system_control_command_37_result){0};
+    switch (subcommand) {
+        case 0u:
+            plan->send_reply = true;
+            plan->reply_length = 5u;
+            plan->zero_reply_byte4 = request_word < 60u;
+            break;
+        case 1u:
+            plan->send_reply = true;
+            plan->reply_length = 8u;
+            break;
+        case 2u:
+            plan->send_reply = true;
+            plan->reply_length = 5u;
+            plan->set_configuration_byte = true;
+            plan->configuration_byte = UINT8_C(0x5a);
+            plan->refresh_configuration = true;
+            plan->delay_requested = true;
+            plan->delay_ticks = R1_SYSTEM_CONTROL_DELAY_TICKS;
+            plan->system_reset_requested = true;
+            if (configuration_byte == UINT8_C(0x55)) {
+                plan->reset_action = R1_SYSTEM_CONTROL_RESET_ALTERNATE;
+            } else {
+                plan->persist_reset_trace = true;
+                plan->reset_action = R1_SYSTEM_CONTROL_RESET_STANDARD;
+            }
+            break;
+        case 3u:
+            plan->send_reply = true;
+            plan->reply_length = 5u;
+            if ((request_word & UINT32_C(0xff)) == 1u) {
+                plan->delay_requested = true;
+                plan->delay_ticks = R1_SYSTEM_CONTROL_DELAY_TICKS;
+                plan->persist_reset_trace = true;
+                plan->system_reset_requested = true;
+                plan->reset_action = R1_SYSTEM_CONTROL_RESET_CONFIRMED;
+            }
+            break;
+        case 4u:
+            if (variable_reply_bytes >
+                R1_SYSTEM_CONTROL_MAX_REPLY_BYTES - 4u) {
+                return R1_ERROR_CAPACITY;
+            }
+            plan->send_reply = true;
+            plan->reply_length = (size_t)variable_reply_bytes + 4u;
+            break;
+        case 5u:
+            plan->set_configuration_byte = true;
+            plan->configuration_byte = UINT8_C(0x55);
+            plan->delay_requested = true;
+            plan->delay_ticks = R1_SYSTEM_CONTROL_DELAY_TICKS;
+            plan->persist_reset_trace = true;
+            plan->system_reset_requested = true;
+            plan->reset_action = R1_SYSTEM_CONTROL_RESET_MARKED;
+            break;
+        case 13u:
+            plan->send_reply = true;
+            plan->reply_length = 10u;
+            break;
+        case UINT8_C(0xfd):
+        case UINT8_C(0xfe):
+            plan->send_reply = true;
+            plan->reply_length = 5u;
+            break;
+        case UINT8_C(0xff):
+        default:
+            break;
+    }
+    return R1_OK;
+}
+
 void r1_state_initialize(r1_device_state *state) {
     if (state == NULL) {
         return;

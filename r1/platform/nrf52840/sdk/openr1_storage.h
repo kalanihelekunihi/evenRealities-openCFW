@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "sdk_errors.h"
+#include "fds.h"
 
 #include "openr1/r1_storage.h"
 
@@ -16,5 +17,8 @@ r1_flash *openr1_storage_flash(void);
 uint32_t openr1_storage_start_address(void);
 /* Returns the exclusive end address used by the recovered R1 layout. */
 uint32_t openr1_storage_end_address(void);
+r1_error openr1_storage_plan_fds_event(
+    const fds_evt_t *event, bool metadata_validated,
+    bool retry_already_pending, r1_fds_event_plan *plan);
 
 #endif

@@ -204,7 +204,7 @@ class RuntimeFormatOutReverseTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         from apollo_overlay import extract_linked_overlay
 
         (

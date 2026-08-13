@@ -902,7 +902,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
             )
             cls.target_objects.append(target_object)
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.elf_data, cls.sections = apollo_overlay.parse_elf32(

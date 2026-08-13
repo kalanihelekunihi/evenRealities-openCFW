@@ -396,7 +396,7 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                 cls.target_compile.stderr or cls.target_compile.stdout
             )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

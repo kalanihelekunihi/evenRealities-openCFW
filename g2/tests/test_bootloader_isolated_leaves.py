@@ -67,7 +67,7 @@ BOOT_OVERLAY_SHA256 = (
     "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b"
 )
 
-sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "tools"))
 import apollo_overlay  # noqa: E402
 
 

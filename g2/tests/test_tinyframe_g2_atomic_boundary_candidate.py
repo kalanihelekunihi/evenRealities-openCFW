@@ -113,7 +113,7 @@ class TinyFrameG2AtomicBoundaryCandidateTests(unittest.TestCase):
             boundary = temporary / "boundary.o"
             subprocess.run([self.clang, *flags, "-c", str(SOURCE), "-o", str(boundary)],
                            check=True, capture_output=True, text=True)
-            sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+            sys.path.insert(0, str(ROOT / "tools"))
             import apollo_overlay
 
             graph = {}

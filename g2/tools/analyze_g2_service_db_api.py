@@ -10,7 +10,7 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_dashboard_watchface_manager as d
 import analyze_g2_flashdb as flashdb
 import analyze_g2_ux_system as c

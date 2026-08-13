@@ -55,8 +55,8 @@ its 74-byte hash concatenates `0x00058A9A..<0x00058AB8` and
 The exact complete caller sets, including all byte-write sites, are machine-checked by:
 
 ```sh
-PYTHONPATH=scripts/firmware \
-python3 scripts/firmware/summarize_r1_reset_trace_closure.py
+PYTHONPATH=tools \
+python3 tools/summarize_r1_reset_trace_closure.py
 ```
 
 ## Product/provider boundary
@@ -88,7 +88,7 @@ The Nordic target retains the record in `.openr1_noinit` and publishes a retaine
 - `.openr1_reset_trace_api` is 16 bytes at `0x0003BE48`;
 - the 16-byte record is at RAM `0x20026AD4`;
 - the image is text 85,608, data 220, BSS 132,448 bytes;
-- HEX SHA-256 is `0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`;
-- BIN SHA-256 is `31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+- HEX SHA-256 is `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`;
+- BIN SHA-256 is `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 Code signing, boot redirection, and deployment bypass remain outside this implementation.

@@ -222,15 +222,15 @@ SOURCE_SHA256 = (
     "d848b90a00da24db963c49dbff247231"
     "4b2a76c6cf269efef46e6cac56889986"
 )
-PRODUCTION_OVERLAY_SIZE = 121_706
+PRODUCTION_OVERLAY_SIZE = 142_578
 PRODUCTION_OVERLAY_SHA256 = (
-    "9e5004af49fb14a22e7e7ed7357e4c10"
-            "f87dc8da3a7fb4d7b97fcffcde804c43"
+    "3d5c9fe87fd46cbc40bb5670653f45d3"
+            "d61f9d777168aa47b70fb10712698ab4"
 )
-PRODUCTION_COMPONENT_SIZE = 3_645_102
+PRODUCTION_COMPONENT_SIZE = 3_665_974
 PRODUCTION_COMPONENT_SHA256 = (
-    "8722e5565bf54dade66fb751155c11eb"
-            "d128d7a12853e3e4b8671c3c97807827"
+    "5cef32ba7350e7f6476336fa6a087010"
+            "e6143e3e692205215c271430aa110d22"
 )
 PRODUCTION_FUNCTIONS = {
     "open_cfw_freertos_heap4_init": {
@@ -395,7 +395,7 @@ class RuntimeFreeRTOSHeap4Tests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

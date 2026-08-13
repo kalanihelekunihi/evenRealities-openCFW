@@ -914,8 +914,15 @@ the caller-prechecked two-copy path.
 The formatter matches flag parsing, decimal/hex conversion, padding/sign behavior, and buffered
 character emission. Nordic's `nrf_fprintf` and flush wrappers remain listed in the Nordic table.
 
-The function ownership generator and verifier encode 755 Nordic source-routed entries in total:
-537 application entries documented here and 218 bootloader entries, plus thirteen SDK-bundled SEGGER
+The application PDM vector at `0x000270B4` points to `0x000309DC`, whose complete 224-byte body
+matches `modules/nrfx/drivers/src/nrfx_pdm.c::nrfx_pdm_irq_handler`: STARTED/STOPPED event handling,
+double-buffer release, overflow reporting, active-buffer selection, and deferred buffer request.
+OpenR1 uses the pinned Nordic translation unit when validated PDM hardware requires it and does not
+recreate or enable the peripheral driver locally. See
+[`FRONTIER-224-230-CORRELATION.md`](FRONTIER-224-230-CORRELATION.md).
+
+The function ownership generator and verifier encode 756 Nordic source-routed entries in total:
+538 application entries documented here and 218 bootloader entries, plus thirteen SDK-bundled SEGGER
 entries and six bounded R1/Nordic adapters. Any new match must
 meet the same function-local standard before its disposition changes from
 `investigate_before_implementing` to `use_nordic_sdk`.

@@ -158,7 +158,7 @@ class RuntimeEtoaTests(unittest.TestCase):
             [os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"), *TARGET_FLAGS, "-c", str(SOURCE), "-o", str(target)],
             check=True, capture_output=True, text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
         data, sections = apollo_overlay.parse_elf32(target)
         text = apollo_overlay.section_named(sections, ".text")
@@ -304,7 +304,7 @@ class RuntimeEtoaTests(unittest.TestCase):
             self.assertIn(token, source)
 
     def test_callers_dependencies_and_branch_topology_are_exact(self) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
         callers, jumps, interior, dependencies = [], [], [], []
         for offset in range(0, len(self.application) - 3, 2):

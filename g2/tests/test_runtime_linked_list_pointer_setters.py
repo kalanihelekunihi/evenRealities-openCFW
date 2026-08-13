@@ -135,7 +135,7 @@ class RuntimeLinkedListPointerSetterTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         from apollo_overlay import extract_linked_overlay
 
         (
@@ -301,7 +301,7 @@ class RuntimeLinkedListPointerSetterTests(unittest.TestCase):
             "next": "eeee5a7a3f85c839000c99aed0cb02ed"
                     "c2608e8d58ab825f1d9356ee08cbebfd",
         }
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = {name: [] for name in FUNCTIONS}

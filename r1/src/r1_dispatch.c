@@ -78,6 +78,68 @@ r1_error r1_legacy_command_route_frame(
         ? R1_ERROR_UNSUPPORTED : R1_OK;
 }
 
+static void fill_bytes(uint8_t *output, uint8_t value, size_t length) {
+    for (size_t index = 0u; index < length; ++index) {
+        output[index] = value;
+    }
+}
+
+/* Recovered selector 0...4 legacy device-info formatter. Persistent getters,
+ * FICR/UICR reads, active-link selection, and transport sending remain external. */
+r1_error r1_legacy_device_info_build(
+    const uint8_t request_prefix[R1_LEGACY_DEVICE_INFO_PREFIX_BYTES],
+    const r1_legacy_device_info_sources *sources,
+    r1_legacy_device_info_response *response) {
+    if (request_prefix == NULL || sources == NULL || response == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *response = (r1_legacy_device_info_response){0};
+    copy_bytes(response->bytes, request_prefix,
+               R1_LEGACY_DEVICE_INFO_PREFIX_BYTES);
+
+    switch (request_prefix[3]) {
+        case 0u:
+            if (sources->product_bsn_length == UINT8_MAX) {
+                fill_bytes(response->bytes + 4u, UINT8_MAX, 21u);
+            } else {
+                copy_bytes(response->bytes + 4u, sources->product_bsn, 21u);
+            }
+            response->length = 25u;
+            break;
+        case 1u:
+            if (sources->product_sn_length == UINT8_MAX) {
+                fill_bytes(response->bytes + 4u, UINT8_MAX, 15u);
+            } else {
+                copy_bytes(response->bytes + 4u, sources->product_sn, 15u);
+            }
+            response->length = 25u;
+            break;
+        case 2u:
+            copy_bytes(response->bytes + 4u,
+                       sources->temperature_calibration, 6u);
+            copy_bytes(response->bytes + 10u,
+                       sources->accelerometer_calibration, 6u);
+            /* Stock passes length 13, exposing only the first three bytes of
+             * the second six-byte copy. Preserve that wire quirk exactly. */
+            response->length = 13u;
+            break;
+        case 3u:
+            fill_bytes(response->bytes + 4u, UINT8_MAX, 36u);
+            response->bytes[40] = sources->configuration_byte_0x70;
+            response->bytes[41] = (uint8_t)sources->configuration_word_0x74;
+            response->bytes[42] = sources->configuration_byte_0x78;
+            response->length = 43u;
+            break;
+        case 4u:
+            copy_bytes(response->bytes + 4u, sources->device_identity, 20u);
+            response->length = 24u;
+            break;
+        default:
+            return R1_ERROR_UNSUPPORTED;
+    }
+    return R1_OK;
+}
+
 r1_error r1_ati_calibration_plan_command(
     uint8_t subcommand, uint8_t argument_0, uint8_t argument_1,
     const r1_ati_calibration_observation *observation,

@@ -69,10 +69,10 @@ The retained Nordic application exposes all six portable operations through its 
 API table. The UInt8 reset/write/read operations link at `0x00033104`, `0x00033134`, and
 `0x00033B10`; the UInt16 operations link at `0x0003311C`, `0x00033158`, and `0x00033CC8`.
 The table is at
-`0x0003B274`, and the unsigned standalone image is 90,956 bytes text, 236 bytes
-data, and 132,456 bytes BSS. Its HEX and BIN SHA-256 values are
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+`0x0003B274`, and the unsigned standalone image is 94,804 bytes text, 236 bytes
+data, and 132,544 bytes BSS. Its HEX and BIN SHA-256 values are
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 Nordic SDK code continues to own the platform, scheduler, SoftDevice, and runtime
 providers. Goodix and GoMore remain source-gated, FlashDB owns health database persistence, and no

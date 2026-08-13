@@ -286,7 +286,7 @@ class RuntimeTlsfTests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.target_data, cls.target_sections = apollo_overlay.parse_elf32(

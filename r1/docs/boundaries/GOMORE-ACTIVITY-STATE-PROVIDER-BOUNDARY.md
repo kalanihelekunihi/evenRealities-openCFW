@@ -52,5 +52,5 @@ provider remains required. Until one is admitted, the OpenR1 health engine must 
 disabled and expose capability absence rather than substitute an inferred classifier.
 
 ```sh
-python3 scripts/firmware/summarize_r1_gomore_activity_state_classifier.py
+python3 tools/summarize_r1_gomore_activity_state_classifier.py
 ```

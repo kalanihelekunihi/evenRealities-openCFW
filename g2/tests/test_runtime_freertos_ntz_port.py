@@ -361,7 +361,7 @@ _APPLE_ONLY = unittest.skipUnless(
 class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import analyze_g2_freertos_assert_port_seam
         import apollo_overlay
 
@@ -778,7 +778,7 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 123454,
+                "overlay_size": 142578,
                 "overlay_sha256": (
                     "9e5004af49fb14a22e7e7ed7357e4c10"
                     "f87dc8da3a7fb4d7b97fcffcde804c43"
@@ -908,7 +908,7 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 "patch_site_count": len(overlay["patched_sites"]),
             },
             {
-                "size": 123454,
+                "size": 142578,
                 "sha256": (
                     "9e5004af49fb14a22e7e7ed7357e4c10"
                     "f87dc8da3a7fb4d7b97fcffcde804c43"

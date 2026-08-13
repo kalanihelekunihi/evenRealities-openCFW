@@ -141,7 +141,7 @@ class FreeRTOSTaskSwitchContextTests(unittest.TestCase):
 
     @staticmethod
     def parse_target(path: Path) -> dict[str, object]:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         data, sections = apollo_overlay.parse_elf32(path)
         symtab = apollo_overlay.section_named(sections, ".symtab")

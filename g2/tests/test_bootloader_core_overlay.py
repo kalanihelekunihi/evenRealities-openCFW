@@ -306,7 +306,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             CORE_SOURCE_MANIFEST_PATH.read_text(encoding="utf-8")
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         import open_cfw
 

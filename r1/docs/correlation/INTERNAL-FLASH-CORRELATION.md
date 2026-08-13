@@ -66,7 +66,7 @@ accessing physical hardware.
 
 ## Clean implementation
 
-[`openr1_storage.c`](../../platform/nrf52840/sdk/openr1_storage.c) defines a separate Nordic
+`openr1_storage.c` defines a separate Nordic
 `nrf_fstorage_sd` instance over the recovered 36-page region. Reads, writes, and erases remain
 bounded to that instance. Mutations are word/page aligned and serialized through CMSIS-RTOS2;
 accepted asynchronous operations complete through Nordic's event callback before the synchronous

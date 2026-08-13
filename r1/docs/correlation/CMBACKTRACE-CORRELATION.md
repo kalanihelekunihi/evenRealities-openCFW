@@ -7,7 +7,7 @@ recovered image does not prove one exact vendor checkout, but it does prove an u
 compatibility interval from commit `4abadfa0c4f86f22352aa5ab9ebbb4f687125a1c` through
 `73714489f9d8af130aacb515586b397b604a5768`. The latter is the newest compatible state and is the
 authenticated reproducibility baseline already stored at
-[`../../../g2/components/shared/cmbacktrace`](../../../g2/components/shared/cmbacktrace). It declares
+`../../g2/third_party/cmbacktrace`. It declares
 CmBacktrace 1.4.2; it is not represented as the exact Even Realities checkout.
 
 Two version boundaries establish the interval:

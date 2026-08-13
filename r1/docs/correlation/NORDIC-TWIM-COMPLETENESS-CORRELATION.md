@@ -15,7 +15,7 @@ compiler blocks with the already source-routed entries `0x00031A84` and
 The census is reproducible with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_nordic_twim_completeness.py
+python3 tools/summarize_r1_nordic_twim_completeness.py
 ```
 
 ## Function-local match

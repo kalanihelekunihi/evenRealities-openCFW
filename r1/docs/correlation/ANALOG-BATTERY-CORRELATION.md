@@ -84,7 +84,7 @@ callsites `0x0009127A` and `0x000913CE`. It is now explicitly product-routed rat
 an overlapping unclassified entry. The reconciliation retains the four leading veneer bytes and
 two trailing alignment bytes in the existing 412-byte manual extent; it creates no second
 algorithm implementation. Reproduce this check with
-`python3 scripts/firmware/summarize_r1_battery_runtime_service.py`.
+`python3 tools/summarize_r1_battery_runtime_service.py`.
 
 ## Implemented behavior
 
@@ -121,11 +121,11 @@ Host tests cover normal and boundary behavior, invalid sample counts/types, conv
 all profile families, elapsed-time carry, the full gate, saturation, the recovery latch, controller
 transitions, invalid-state immutability, and runtime-state propagation. The image verifier requires
 every battery helper, controller entry point, runtime seam, and analog bridge to have a nonzero
-linked address. The verified unsigned Nordic image is 90,956 bytes text, 236 bytes data, and
-132,456 bytes BSS.
+linked address. The verified unsigned Nordic image is 94,804 bytes text, 236 bytes data, and
+132,544 bytes BSS.
 Its standalone HEX and BIN SHA-256 values are
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 ## Remaining gates
 

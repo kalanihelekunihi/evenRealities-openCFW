@@ -46,9 +46,9 @@ the exact checkout originally used by R1 has not been uniquely proven.
 | `0x00077D20` | `ST25DVxxKC_WriteMailboxData` | maximum 256 bytes, address `0x2008` |
 
 Every entry, size, and recovered body SHA-256 is enforced by
-`../../scripts/firmware/verify_openr1.py`.
+`../../tools/verify_openr1.py`.
 The raw 31,776-row comparison and its independent hashes are in
-[`../reference/bsim/ST25DVXXKC-SOURCE-CORRELATION.md`](../reference/bsim/ST25DVXXKC-SOURCE-CORRELATION.md).
+[`generated/st25dvxxkc-source-correlation/README.md`](../README.md).
 
 ## R1-owned adapters
 
@@ -84,9 +84,9 @@ the provider.
 ## Implemented clean-room boundary
 
 The R1 policy adapter is implemented in
-[`../../src/r1_st25dvxxkc.c`](../../src/r1_st25dvxxkc.c), with its
+`../src/r1_st25dvxxkc.c`, with its
 Nordic board port in
-[`../../platform/nrf52840/sdk/openr1_nfc.c`](../../platform/nrf52840/sdk/openr1_nfc.c).
+`../platform/nrf52840/sdk/openr1_nfc.c`.
 The Nordic image links and retains the pinned ST component rather than reproducing any of
 its register or password-message code.
 
@@ -133,9 +133,9 @@ Verified through 2026-08-13:
 - FlashDB/FAL, tiny-AES-c, vendor provenance, and the Nordic SDK linked-image checks pass;
 - the map retains the required ST component and R1 adapter symbols; and
 - the unsigned standalone application artifacts have SHA-256
-  `0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`
+  `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`
   (HEX) and
-  `31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`
+  `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`
   (BIN).
 
 This is compilation and static/host verification, not physical NFC or dock validation.

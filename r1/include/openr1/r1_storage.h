@@ -17,6 +17,8 @@
 #define R1_EP_RECORD_BYTES 8u
 #define R1_EP_RECORD_COUNT 1024u
 #define R1_EP_RECORD_MAGIC UINT8_C(0x0a)
+#define R1_SLEEP_SYNC_MARK_EVENT UINT16_C(0x2001)
+#define R1_SLEEP_SYNC_ACK_CONTEXT_BYTES 12u
 
 typedef struct {
     const char *name;
@@ -46,6 +48,22 @@ r1_error r1_flash_read(const r1_flash *flash, uint32_t offset,
 r1_error r1_flash_program(const r1_flash *flash, uint32_t offset,
                           const uint8_t *input, size_t length);
 r1_error r1_flash_erase(const r1_flash *flash, uint32_t offset, size_t length);
+
+#define R1_FLASH_SLOT_HEADER_BYTES 24u
+#define R1_FLASH_SLOT_MAGIC_OFFSET 12u
+
+typedef struct {
+    bool found;
+    bool provider_read_failed;
+    uint8_t latest_slot;
+    uint8_t next_slot;
+    size_t read_count;
+} r1_latest_valid_flash_slot_scan_result;
+
+r1_error r1_latest_valid_flash_slot_scan_adapter(
+    const r1_flash *flash, uint32_t base_offset, uint32_t slot_bytes,
+    uint8_t slot_count, uint32_t expected_magic,
+    r1_latest_valid_flash_slot_scan_result *result);
 
 typedef struct {
     uint8_t *bytes;
@@ -95,10 +113,66 @@ typedef struct {
     bool all_records_have_magic;
 } r1_ep_scan_result;
 
+typedef enum {
+    R1_EP_INITIALIZATION_READY = 0,
+    R1_EP_INITIALIZATION_PARTITION_NOT_FOUND,
+    R1_EP_INITIALIZATION_DEVICE_NOT_FOUND,
+    R1_EP_INITIALIZATION_PARTITION_TOO_SMALL
+} r1_ep_initialization_reason;
+
+typedef struct {
+    bool initialized;
+    bool retain_partition;
+    bool retain_device;
+    bool scan_cursor;
+    r1_ep_initialization_reason reason;
+} r1_ep_initialization_plan;
+
+typedef struct {
+    bool context_present;
+    bool publish_event;
+    bool publish_failed;
+    bool release_context;
+    uint16_t event_identifier;
+    size_t event_payload_length;
+} r1_sleep_sync_ack_plan;
+
+typedef enum {
+    R1_FDS_PERSISTENCE_EVENT_NONE = 0,
+    R1_FDS_PERSISTENCE_RECORD_SUCCEEDED = 9,
+    R1_FDS_PERSISTENCE_RECORD_FAILED = 10,
+    R1_FDS_PERSISTENCE_FILE_DELETE_SUCCEEDED = 11,
+    R1_FDS_PERSISTENCE_FILE_DELETE_FAILED = 12,
+    R1_FDS_PERSISTENCE_GC_SUCCEEDED = 20,
+    R1_FDS_PERSISTENCE_GC_FAILED = 21
+} r1_fds_persistence_event;
+
+typedef struct {
+    bool publish_event;
+    bool updated_record;
+    bool clear_file_bookkeeping;
+    bool mark_retry_pending;
+    bool request_next_queued_operation;
+    r1_fds_persistence_event persistence_event;
+    uint16_t logical_record_key;
+    uint32_t record_id;
+    uint32_t provider_result;
+} r1_fds_event_plan;
+
 r1_error r1_export_plan_command(
     r1_export_state *state, const r1_export_observation *observation,
     r1_export_plan *plan);
 r1_error r1_ep_scan_cursor(const uint8_t *records, size_t length,
                            r1_ep_scan_result *result);
+r1_error r1_ep_plan_initialization(
+    bool already_initialized, bool partition_found, bool device_found,
+    uint32_t partition_bytes, r1_ep_initialization_plan *plan);
+r1_error r1_sleep_sync_plan_acknowledgement(
+    bool context_present, bool event_publish_succeeded,
+    r1_sleep_sync_ack_plan *plan);
+r1_error r1_fds_plan_event(
+    uint8_t provider_event_id, uint32_t provider_result,
+    uint16_t record_key, uint32_t record_id, bool metadata_validated,
+    bool retry_already_pending, r1_fds_event_plan *plan);
 
 #endif

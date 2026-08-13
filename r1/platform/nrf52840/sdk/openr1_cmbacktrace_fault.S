@@ -8,8 +8,11 @@
 .type \name, %function
 .thumb_func
 \name:
-    mov r0, lr
-    mov r1, sp
+    mov r4, lr
+    mov r5, sp
+    bl openr1_cmbacktrace_log_task_snapshot
+    mov r0, r4
+    mov r1, r5
     bl cm_backtrace_fault
     adr r0, 1f
     mov r1, lr

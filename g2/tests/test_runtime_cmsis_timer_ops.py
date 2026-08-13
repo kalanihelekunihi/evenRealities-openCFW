@@ -120,7 +120,7 @@ class RuntimeCmsisTimerOpsTests(unittest.TestCase):
             "-fdata-sections", "-Wall", "-Wextra", "-Werror",
         ]
         subprocess.run([clang, *flags, "-c", str(SOURCE), "-o", str(target)], check=True, capture_output=True, text=True)
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         data, sections = apollo_overlay.parse_elf32(target)
         cls.target = {}

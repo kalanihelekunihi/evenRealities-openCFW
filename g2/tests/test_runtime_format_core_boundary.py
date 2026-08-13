@@ -78,7 +78,7 @@ class RuntimeFormatCoreBoundaryTests(unittest.TestCase):
         )
 
     def test_callers_dependencies_and_wide_topology_are_exact(self) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         from apollo_overlay import BuildError, decode_thumb_branch
 
         callers = []

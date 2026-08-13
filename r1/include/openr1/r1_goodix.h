@@ -23,6 +23,9 @@
 #define R1_GOODIX_DIAGNOSTIC_SNAPSHOT_BYTES 240u
 #define R1_GOODIX_DIAGNOSTIC_REFRESH_TICKS UINT32_C(500)
 #define R1_GOODIX_DIAGNOSTIC_OUTPUT_MAX 124u
+#define R1_SENSOR_STREAM_REGISTRATION_COUNT 8u
+#define R1_SENSOR_STREAM_CALLBACK_COUNT 8u
+#define R1_SENSOR_STREAM_STATE_BYTES 240u
 
 typedef enum {
     R1_GOODIX_STOCK_PROFILE_2000 = 0,
@@ -57,6 +60,24 @@ typedef struct {
     bool prepared;
 } r1_goodix_adapter;
 
+/* Product-owned registration metadata recovered at 0x00089eec. Callback
+ * implementations and the generic stream registry remain provider-owned. */
+typedef struct {
+    const char *name;
+    uint16_t payload_bytes;
+    uint8_t type;
+    bool enabled;
+} r1_sensor_stream_registration;
+
+typedef struct {
+    bool initialize_goodix;
+    bool clear_state;
+    size_t clear_bytes;
+    size_t callback_count;
+    r1_sensor_stream_registration
+        registrations[R1_SENSOR_STREAM_REGISTRATION_COUNT];
+} r1_sensor_stream_registration_plan_result;
+
 void r1_goodix_adapter_initialize(r1_goodix_adapter *adapter);
 r1_error r1_goodix_adapter_bind(r1_goodix_adapter *adapter,
                                 const r1_goodix_provider_ops *provider,
@@ -74,5 +95,7 @@ bool r1_goodix_diagnostic_refresh_due(uint32_t now_tick,
 r1_error r1_goodix_diagnostic_select(
     uint8_t snapshot[R1_GOODIX_DIAGNOSTIC_SNAPSHOT_BYTES], uint8_t selector,
     uint8_t *output, size_t output_capacity, size_t *written);
+r1_error r1_sensor_stream_registration_plan(
+    r1_sensor_stream_registration_plan_result *plan);
 
 #endif

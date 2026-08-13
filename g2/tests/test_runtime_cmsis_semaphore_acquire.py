@@ -45,7 +45,7 @@ class RuntimeCmsisSemaphoreAcquireTests(unittest.TestCase):
         target = temporary / "sem.o"
         flags = ["--target=thumbv7em-none-eabi", "-mthumb", "-O2", "-ffreestanding", "-fno-jump-tables", "-fomit-frame-pointer", "-fno-builtin", "-mno-unaligned-access", "-fno-unwind-tables", "-fno-asynchronous-unwind-tables", "-fropi", "-ffunction-sections", "-fdata-sections", "-Wall", "-Wextra", "-Werror"]
         subprocess.run([clang, *flags, "-c", str(SOURCE), "-o", str(target)], check=True, capture_output=True, text=True)
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         data, sections = apollo_overlay.parse_elf32(target)
         section = apollo_overlay.section_named(sections, ".text.open_cfw_cmsis_semaphore_acquire")

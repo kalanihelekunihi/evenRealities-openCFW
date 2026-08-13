@@ -33,15 +33,15 @@ and Nordic logging remain independently owned providers. No provider source is
 copied into this policy model.
 
 The pure step is retained in the unsigned Nordic SDK image at `0x00035D2C`.
-That image contains 90,956 bytes of text, 236 bytes of data, and 132,456 bytes
-of BSS; its standalone BIN is 91,192 bytes. The HEX and BIN SHA-256 values are
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+That image contains 94,804 bytes of text, 236 bytes of data, and 132,544 bytes
+of BSS; its standalone BIN is 95,040 bytes. The HEX and BIN SHA-256 values are
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 Reproduce with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_delayed_event_timer.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_delayed_event_timer.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```

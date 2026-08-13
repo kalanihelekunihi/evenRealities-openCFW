@@ -85,9 +85,9 @@ return, plain stress reads, invalid indexes, and accumulator saturation.
 The retained Nordic application exposes these five portable APIs through `.openr1_health_api`.
 The average helper, temperature store, stress store, temperature read, and stress read link at
 `0x00031F54`, `0x00032902`, `0x000329B4`, `0x0003317C`, and `0x000331EC`. The retained table is at
-`0x0003B274`. The verified unsigned application is 90,956 bytes text, 236 bytes data, and 132,456 bytes BSS. Its HEX and BIN SHA-256 values are
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+`0x0003B274`. The verified unsigned application is 94,804 bytes text, 236 bytes data, and 132,544 bytes BSS. Its HEX and BIN SHA-256 values are
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 It adds no GXT310 register constants or transport, no GoMore stress algorithm, no raw sensor or
 private SRAM access, no internal-event injection, no BLE command, no signing bypass, and no
 deployment path.

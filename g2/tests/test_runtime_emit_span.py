@@ -310,7 +310,7 @@ class RuntimeEmitSpanTests(unittest.TestCase):
             "e35fc4f7a01d5ab1ffdcc35daaff80b",
         )
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

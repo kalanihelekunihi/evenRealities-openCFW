@@ -359,6 +359,22 @@ typedef struct {
     bool overwrote_oldest;
 } r1_activity_offline_enqueue_result;
 
+typedef enum {
+    R1_ACTIVITY_FLASH_RECORD_ACCEPTED = 0,
+    R1_ACTIVITY_FLASH_RECORD_IGNORED_HOUR,
+    R1_ACTIVITY_FLASH_RECORD_IGNORED_MAXIMUM_TIMESTAMP,
+    R1_ACTIVITY_FLASH_RECORD_IGNORED_FUTURE_RECORDED,
+    R1_ACTIVITY_FLASH_RECORD_IGNORED_FUTURE_DAY
+} r1_activity_flash_record_action;
+
+typedef struct {
+    r1_activity_flash_record_action action;
+    size_t attempted_count;
+    size_t enqueued_count;
+    size_t dropped_count;
+    size_t overwritten_count;
+} r1_activity_flash_record_enqueue_result;
+
 typedef struct {
     r1_activity_history history;
     uint32_t maximum_recorded_timestamp;
@@ -961,6 +977,12 @@ r1_error r1_activity_offline_enqueue(
     uint32_t local_day_start, uint32_t recorded_timestamp,
     int16_t utc_offset_minutes, uint8_t bucket_index,
     uint32_t firmware_timestamp, r1_activity_offline_enqueue_result *result);
+r1_error r1_activity_flash_record_enqueue_plan(
+    r1_activity_offline_queue *queue, uint32_t local_day_start,
+    int16_t utc_offset_minutes, uint8_t hour,
+    const uint32_t packed_words[6], uint32_t recorded_timestamp,
+    uint32_t maximum_allowed_timestamp, uint32_t firmware_timestamp,
+    r1_activity_flash_record_enqueue_result *result);
 r1_error r1_activity_offline_consume_through(
     r1_activity_offline_queue *queue, uint32_t cutoff_timestamp,
     size_t *consumed_count);

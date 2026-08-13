@@ -580,7 +580,7 @@ class RuntimeEasyLoggerHelpersMainTests(unittest.TestCase):
             prefix="test-runtime-easylogger-helpers-main-",
             dir=temporary_parent,
         )
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

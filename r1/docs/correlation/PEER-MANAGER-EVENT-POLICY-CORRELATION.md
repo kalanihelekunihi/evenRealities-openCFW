@@ -53,7 +53,7 @@ OpenR1 intentionally keeps three hardening properties while reproducing the func
   exports, or reconstructs bond keys.
 
 The clean-room SDK adapter is
-[`openr1_peer.c`](../../platform/nrf52840/sdk/openr1_peer.c). It invokes the two Nordic
+`openr1_peer.c`. It invokes the two Nordic
 standard handlers, replies to repairing requests through Peer Manager, synchronizes encrypted and
 bonded state into the runtime without granting authorization, and records provider errors. It does
 not recreate Nordic internals or the recovered secret-bearing diagnostic helper.
@@ -61,8 +61,8 @@ not recreate Nordic internals or the recovered secret-bearing diagnostic helper.
 ## Verification
 
 ```sh
-python3 scripts/firmware/summarize_r1_peer_manager_event_policy.py
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_peer_manager_event_policy.py
+python3 tools/verify_openr1.py
 ```
 
 The summarizer pins the image, exact executable segments, body hash, callback registration pointer,

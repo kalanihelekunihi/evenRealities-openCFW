@@ -16,7 +16,7 @@ those actions.
 
 ## Exact function closure
 
-`scripts/firmware/summarize_r1_wear_fusion_closure.py` verifies the rebuilt application SHA-256
+`tools/summarize_r1_wear_fusion_closure.py` verifies the rebuilt application SHA-256
 `0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a`, every function body,
 all direct branch callsites, and both indirect callback literals.
 
@@ -34,7 +34,7 @@ The seven Ghidra functions total 1,506 bytes. The callback entry points have no 
 callers: exact Thumb literals bind motion callback `0x0003CD81` at `0x0004C614` and living callback
 `0x0003CE45` at `0x0003D644`.
 
-The earlier full-service audit in `scripts/firmware/summarize_r1_wear_fusion_service.py` separately
+The earlier full-service audit in `tools/summarize_r1_wear_fusion_service.py` separately
 pins 20 executable ranges and public/lifecycle neighbors. This narrower ownership closure admits
 only complete Ghidra functions whose behavior is implemented or isolated here; composite runtime
 and generic topic-provider bodies remain outside it.
@@ -93,7 +93,7 @@ becoming a vendor-library rewrite.
 ## Reproduction
 
 ```sh
-python3 scripts/firmware/summarize_r1_wear_fusion_closure.py
+python3 tools/summarize_r1_wear_fusion_closure.py
 make -C openR1 test
 make -C openR1 sanitize
 make -C openR1 arm-objects

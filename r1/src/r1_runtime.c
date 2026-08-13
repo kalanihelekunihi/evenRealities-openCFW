@@ -36,6 +36,21 @@ r1_bae8_event_plan r1_runtime_plan_bae8_event(uint8_t event_type) {
     return plan;
 }
 
+r1_error r1_bae8_plan_hvx_result(
+    bool serialized_path, bool credit_acquired, r1_tx_status status,
+    uint8_t completed_retries, r1_bae8_hvx_retry_plan *plan) {
+    if (plan == NULL || status > R1_TX_DROP) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_bae8_hvx_retry_plan){0};
+    plan->release_credit = credit_acquired && status != R1_TX_SENT;
+    plan->retry_once = serialized_path && credit_acquired &&
+        status == R1_TX_RESOURCES && completed_retries == 0u;
+    plan->retry_delay_ticks = plan->retry_once
+        ? R1_EUS_RESOURCE_RETRY_TICKS : 0u;
+    return R1_OK;
+}
+
 static void runtime_write_u32(uint8_t *output, uint32_t value) {
     output[0] = (uint8_t)value;
     output[1] = (uint8_t)(value >> 8u);

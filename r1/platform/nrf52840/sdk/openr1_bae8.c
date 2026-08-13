@@ -7,10 +7,12 @@
 
 #include "ble.h"
 #include "ble_srv_common.h"
+#include "ble_conn_state.h"
 #include "nrf_error.h"
 #include "nrf_sdh_ble.h"
 
 #include "openr1/r1_protocol.h"
+#include "openr1/r1_connection_params.h"
 #include "openr1/r1_runtime.h"
 #include "openr1_scheduler.h"
 
@@ -148,6 +150,22 @@ r1_tx_status openr1_bae8_transmit(const r1_tx_event *event) {
     }
     service.last_error = error;
     return R1_TX_DROP;
+}
+
+uint32_t openr1_bae8_request_phy_update(
+    uint16_t connection, uint8_t transmit_phy, uint8_t receive_phy) {
+    r1_phy_update_plan plan;
+    const r1_error error = r1_connection_phy_update_plan(
+        connection, ble_conn_state_status(connection) == BLE_CONN_STATUS_CONNECTED,
+        transmit_phy, receive_phy, &plan);
+    if (error != R1_OK || !plan.request_update) {
+        return NRF_ERROR_INVALID_STATE;
+    }
+    const ble_gap_phys_t phys = {
+        .tx_phys = plan.transmit_phy,
+        .rx_phys = plan.receive_phy,
+    };
+    return sd_ble_gap_phy_update(plan.connection, &phys);
 }
 
 static bool is_cccd_write(const ble_gatts_evt_write_t *write,

@@ -13,6 +13,7 @@
 #include "openr1_advertising.h"
 #include "openr1_analog.h"
 #include "openr1_cmbacktrace_port.h"
+#include "openr1_connection_params.h"
 #include "openr1_gatt.h"
 #include "openr1_i2c5_resources.h"
 #include "openr1_motion.h"
@@ -25,10 +26,16 @@
 
 #include "openr1/r1_runtime.h"
 #include "openr1/r1_battery.h"
+#include "openr1/r1_connection_params.h"
+#include "openr1/r1_event.h"
+#include "openr1/r1_goodix.h"
 #include "openr1/r1_health.h"
+#include "openr1/r1_kv_store.h"
+#include "openr1/r1_motion.h"
 #include "openr1/r1_protocol.h"
 #include "openr1/r1_peer_target.h"
 #include "openr1/r1_storage.h"
+#include "openr1/r1_state.h"
 
 void openr1_platform_initialize(void);
 r1_runtime *openr1_platform_runtime(void);
@@ -79,6 +86,9 @@ typedef r1_error (*openr1_pb_fragment_fn)(
 typedef r1_error (*openr1_delayed_event_schedule_fn)(
     r1_delayed_event_state *, uint32_t, uint32_t, uint32_t, uint32_t,
     r1_delayed_event_schedule_result *);
+typedef r1_error (*openr1_delayed_event_cancel_fn)(
+    r1_delayed_event_state *, uint32_t, uint32_t, uint32_t,
+    r1_delayed_event_cancel_result *);
 typedef r1_error (*openr1_health_settings_plan_fn)(
     bool, const r1_health_settings_record *, const uint8_t *, size_t,
     r1_health_settings_command_plan *);
@@ -86,8 +96,47 @@ typedef r1_battery_diagnostic_cadence (*openr1_battery_diagnostic_cadence_fn)(
     uint8_t);
 typedef r1_error (*openr1_ep_scan_cursor_fn)(
     const uint8_t *, size_t, r1_ep_scan_result *);
+typedef r1_error (*openr1_ep_initialization_plan_fn)(
+    bool, bool, bool, uint32_t, r1_ep_initialization_plan *);
+typedef r1_error (*openr1_kv_store_get_fn)(
+    const r1_kv_store *, r1_kv_class, uint8_t *, size_t, size_t *);
+typedef r1_error (*openr1_legacy_device_info_fn)(
+    const uint8_t[R1_LEGACY_DEVICE_INFO_PREFIX_BYTES],
+    const r1_legacy_device_info_sources *, r1_legacy_device_info_response *);
 typedef r1_error (*openr1_eus_fragment_fn)(
     const uint8_t *, size_t, r1_fragment_set *);
+typedef r1_error (*openr1_system_settings_plan_fn)(
+    bool, bool, const uint8_t *, size_t, r1_system_settings_command_plan *);
+typedef r1_error (*openr1_temperature_mode_plan_fn)(
+    uint8_t, uint8_t, bool, bool, r1_temperature_mode_transition_plan *);
+typedef r1_error (*openr1_heart_rate_mode_plan_fn)(
+    uint8_t, uint8_t, bool, bool, bool, bool,
+    r1_heart_rate_mode_transition_plan *);
+typedef r1_error (*openr1_ring_stability_fn)(
+    r1_ring_stability_state *, float, bool, r1_ring_stability_result *);
+typedef r1_error (*openr1_phy_update_plan_fn)(
+    uint16_t, bool, uint8_t, uint8_t, r1_phy_update_plan *);
+typedef uint32_t (*openr1_phy_update_request_fn)(uint16_t, uint8_t, uint8_t);
+typedef r1_error (*openr1_goodix_diagnostic_select_fn)(
+    uint8_t[R1_GOODIX_DIAGNOSTIC_SNAPSHOT_BYTES], uint8_t, uint8_t *,
+    size_t, size_t *);
+typedef r1_error (*openr1_sleep_sync_ack_plan_fn)(
+    bool, bool, r1_sleep_sync_ack_plan *);
+typedef r1_error (*openr1_system_control_37_plan_fn)(
+    uint8_t, uint32_t, uint8_t, uint8_t,
+    r1_system_control_command_37_result *);
+typedef uint32_t (*openr1_connection_parameter_mode_apply_fn)(
+    uint16_t, uint16_t, uint16_t, uint8_t, uint8_t, bool, bool,
+    r1_connection_parameter_mode_plan *);
+typedef r1_error (*openr1_activity_flash_record_enqueue_fn)(
+    r1_activity_offline_queue *, uint32_t, int16_t, uint8_t,
+    const uint32_t[6], uint32_t, uint32_t, uint32_t,
+    r1_activity_flash_record_enqueue_result *);
+typedef r1_error (*openr1_sensor_stream_registration_plan_fn)(
+    r1_sensor_stream_registration_plan_result *);
+typedef r1_error (*openr1_latest_valid_flash_slot_scan_fn)(
+    const r1_flash *, uint32_t, uint32_t, uint8_t, uint32_t,
+    r1_latest_valid_flash_slot_scan_result *);
 
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_ble_thread_encode_fn retained_ble_thread_encode =
@@ -120,6 +169,9 @@ __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_delayed_event_schedule_fn retained_delayed_event_schedule =
     r1_delayed_event_schedule;
 __attribute__((used, section(".openr1_frontier_api")))
+static const openr1_delayed_event_cancel_fn retained_delayed_event_cancel =
+    r1_delayed_event_cancel;
+__attribute__((used, section(".openr1_frontier_api")))
 static const openr1_health_settings_plan_fn retained_health_settings_plan =
     r1_health_settings_plan_command;
 __attribute__((used, section(".openr1_frontier_api")))
@@ -129,8 +181,60 @@ __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_ep_scan_cursor_fn retained_ep_scan_cursor =
     r1_ep_scan_cursor;
 __attribute__((used, section(".openr1_frontier_api")))
+static const openr1_ep_initialization_plan_fn retained_ep_initialization_plan =
+    r1_ep_plan_initialization;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_kv_store_get_fn retained_kv_store_get =
+    r1_kv_store_get;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_legacy_device_info_fn retained_legacy_device_info =
+    r1_legacy_device_info_build;
+__attribute__((used, section(".openr1_frontier_api")))
 static const openr1_eus_fragment_fn retained_eus_fragment =
     r1_fragment_message;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_system_settings_plan_fn retained_system_settings_plan =
+    r1_system_settings_plan_command;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_temperature_mode_plan_fn retained_temperature_mode_plan =
+    r1_temperature_mode_plan_transition;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_heart_rate_mode_plan_fn retained_heart_rate_mode_plan =
+    r1_heart_rate_mode_plan_transition;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_ring_stability_fn retained_ring_stability =
+    r1_ring_stability_observe;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_phy_update_plan_fn retained_phy_update_plan =
+    r1_connection_phy_update_plan;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_phy_update_request_fn retained_phy_update_request =
+    openr1_bae8_request_phy_update;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_goodix_diagnostic_select_fn retained_goodix_diagnostic_select =
+    r1_goodix_diagnostic_select;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_sleep_sync_ack_plan_fn retained_sleep_sync_ack_plan =
+    r1_sleep_sync_plan_acknowledgement;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_system_control_37_plan_fn retained_system_control_37_plan =
+    r1_system_control_command_37_plan;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_connection_parameter_mode_apply_fn
+    retained_connection_parameter_mode_apply =
+        openr1_connection_parameter_mode_apply;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_activity_flash_record_enqueue_fn
+    retained_activity_flash_record_enqueue =
+        r1_activity_flash_record_enqueue_plan;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_sensor_stream_registration_plan_fn
+    retained_sensor_stream_registration_plan =
+        r1_sensor_stream_registration_plan;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_latest_valid_flash_slot_scan_fn
+    retained_latest_valid_flash_slot_scan =
+        r1_latest_valid_flash_slot_scan_adapter;
 
 static void touch_enabled_changed(void *context, bool enabled) {
     (void)context;

@@ -136,7 +136,7 @@ class RuntimeFreeRTOSTaskCurrentTests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(cls.target_object)
@@ -336,7 +336,7 @@ class RuntimeFreeRTOSTaskCurrentTests(unittest.TestCase):
             self.assertNotIn(disallowed, source)
 
     def test_whole_image_direct_branch_topology_is_closed(self) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         calls = []

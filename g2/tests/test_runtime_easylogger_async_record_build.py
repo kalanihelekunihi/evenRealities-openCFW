@@ -150,7 +150,7 @@ class RuntimeEasyLoggerAsyncRecordBuildTests(unittest.TestCase):
             )
             cls.variants[name] = loaded
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.target_objects = {}

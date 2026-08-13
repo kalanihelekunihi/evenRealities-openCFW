@@ -54,5 +54,5 @@ they are not a clean-room model specification. A matching licensed GoMore provid
 required.
 
 ```sh
-python3 scripts/firmware/summarize_r1_gomore_sleep_graphs.py
+python3 tools/summarize_r1_gomore_sleep_graphs.py
 ```

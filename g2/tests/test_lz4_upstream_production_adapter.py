@@ -130,7 +130,7 @@ class Lz4UpstreamProductionAdapterTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory()
         cls.temp = Path(cls.temporary.name)
         cls.clang = os.environ.get("OPENCFW_CLANG", "/usr/bin/clang")
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

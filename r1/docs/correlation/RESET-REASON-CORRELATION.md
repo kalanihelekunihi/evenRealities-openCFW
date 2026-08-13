@@ -66,8 +66,8 @@ remain in Nordic's `nrf_power.h` provider.
 The exact bytes, register literal, caller sets, masks, and source boundary are checked with:
 
 ```sh
-PYTHONPATH=scripts/firmware \
-python3 scripts/firmware/summarize_r1_reset_reason_closure.py
+PYTHONPATH=tools \
+python3 tools/summarize_r1_reset_reason_closure.py
 ```
 
 ## openR1 result
@@ -79,7 +79,7 @@ CRC rejection, and null arguments. Host, ASAN/UBSAN, and Cortex-M4 builds pass.
 The Nordic integration runs before CmBacktrace and the scheduler, saves the report behind a
 retained internal `.openr1_reset_reason_api`, and clears RESETREAS through the provider HAL. The
 current linked image has text 85,608, data 220, and BSS 132,448 bytes; its HEX SHA-256 is
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and BIN SHA-256 is
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and BIN SHA-256 is
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 Code signing, boot redirection, and deployment bypass remain outside this implementation.

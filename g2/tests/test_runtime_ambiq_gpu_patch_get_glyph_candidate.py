@@ -108,7 +108,7 @@ class AmbiqGpuPatchGetGlyphCandidateTests(unittest.TestCase):
         self.assertEqual(item["relocation_targets"], ["utf8_codepoint_size"])
 
     def test_target_layout_assertions_compile_and_body_is_relocation_free(self) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(self.target)

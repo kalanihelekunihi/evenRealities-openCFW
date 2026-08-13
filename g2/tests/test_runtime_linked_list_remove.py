@@ -409,7 +409,7 @@ class RuntimeLinkedListRemoveTests(unittest.TestCase):
                 text=True,
             )
 
-            sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+            sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
             import apollo_overlay
 
             data, sections = apollo_overlay.parse_elf32(object_path)
@@ -487,7 +487,7 @@ class RuntimeLinkedListRemoveTests(unittest.TestCase):
                     expected,
                 )
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

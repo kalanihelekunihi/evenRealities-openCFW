@@ -628,7 +628,7 @@ class EasyLoggerAsyncQueueCandidateTests(unittest.TestCase):
 
     @staticmethod
     def parse_target_object(path: Path) -> dict[str, object]:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(path)

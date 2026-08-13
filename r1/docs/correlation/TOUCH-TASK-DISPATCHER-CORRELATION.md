@@ -59,7 +59,7 @@ The summarizer is static, performs no live GPIO or I2C operation, and exposes no
 ## Reproduce
 
 ```sh
-python3 scripts/firmware/summarize_r1_touch_task_dispatcher.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_touch_task_dispatcher.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```

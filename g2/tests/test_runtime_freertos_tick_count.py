@@ -274,7 +274,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             )
             cls.target_objects[leaf_name] = target_object
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         import open_cfw
 

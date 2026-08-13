@@ -453,7 +453,7 @@ class RuntimeLittlefsFileSizePrivateTests(unittest.TestCase):
         )
         cls.read_target_object()
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         import open_cfw
 
@@ -522,7 +522,7 @@ class RuntimeLittlefsFileSizePrivateTests(unittest.TestCase):
 
     @classmethod
     def read_target_object(cls) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(cls.target_object)
@@ -1329,7 +1329,7 @@ class RuntimeLittlefsFileSizePrivateTests(unittest.TestCase):
             "5680d1c717e7e9ac6ea05b5932d17366",
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         self.assertEqual(

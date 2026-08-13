@@ -56,7 +56,7 @@ class RuntimePrintfWrapperTests(unittest.TestCase):
 
         target = temporary / "w.o"
         subprocess.run([os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"), *TARGET_FLAGS, "-c", str(SOURCE), "-o", str(target)], check=True, capture_output=True, text=True)
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         data, sections = apollo_overlay.parse_elf32(target)
         text = apollo_overlay.section_named(sections, ".text")
@@ -132,7 +132,7 @@ class RuntimePrintfWrapperTests(unittest.TestCase):
         self.assertEqual(struct.unpack_from("<I", following, 20)[0], 0x00483029)
 
     def test_wide_callers_dependencies_and_interior_topology_are_exact(self) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         expected_callers = {
             "snprintf": [0x44D302, 0x498738, 0x4C8FBA, 0x4C90C0, 0x4C9154, 0x5C3CD4, 0x5C3D1E, 0x5C3D5E, 0x5CA220, 0x5CC4EC],

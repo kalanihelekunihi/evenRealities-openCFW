@@ -14,7 +14,7 @@ OPENCFW_ROOT = Path(__file__).resolve().parent.parent
 COMPONENT_ROOT = (
     OPENCFW_ROOT / "components" / "apollo_main" / "ring_gesture"
 )
-sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
 sys.path.insert(0, str(COMPONENT_ROOT))
 
 import build_component as ring_component  # noqa: E402

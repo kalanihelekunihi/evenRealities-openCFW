@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 OPENCFW_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
 
 import open_cfw  # noqa: E402
 

@@ -150,7 +150,7 @@ class RuntimeStrchrTests(unittest.TestCase):
 
     def test_stock_branch_and_pointer_topology_is_pinned(self) -> None:
         application = OFFICIAL.read_bytes()[32:]
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

@@ -93,9 +93,9 @@ address coincidence is not attribution evidence for the R1 body at `0x00046FD4`.
 ## Reproduce
 
 ```sh
-python3 scripts/firmware/summarize_r1_structured_log_cache.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_structured_log_cache.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```
 
 The summarizer is static and reads no live ring or private log content.

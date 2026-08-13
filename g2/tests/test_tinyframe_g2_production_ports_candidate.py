@@ -76,7 +76,7 @@ class TinyFrameG2ProductionPortsCandidateTests(unittest.TestCase):
                             "-I", str(SNAPSHOT / "g2-compat"), "-I", str(SNAPSHOT / "g2-config"),
                             "-I", str(SNAPSHOT), "-I", str(ADAPTER), "-c", str(SOURCE), "-o", str(target)],
                            check=True, capture_output=True)
-            sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+            sys.path.insert(0, str(ROOT / "tools"))
             import apollo_overlay
             data, sections = apollo_overlay.parse_elf32(target)
             symbols = apollo_overlay.parse_elf32_symbols(data, sections)

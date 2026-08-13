@@ -215,7 +215,7 @@ class RuntimeLittlefsFileTellPrivateTests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(cls.target_object)
@@ -486,7 +486,7 @@ class RuntimeLittlefsFileTellPrivateTests(unittest.TestCase):
     def test_stock_caller_interior_and_stored_topology_is_exact(
         self,
     ) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         callers = []

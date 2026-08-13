@@ -113,16 +113,16 @@ PROFILE_PINS = {
         ),
         "production_offset": 123_200,
         "overlay": (
-            124_640,
-            "476843181113c88594d1a766a60b91a15a3ec76a4c898c46d3176f64ea21c867",
+            142_578,
+            "3d5c9fe87fd46cbc40bb5670653f45d3d61f9d777168aa47b70fb10712698ab4",
         ),
         "component": (
             3_648_036,
             "d334b5d063701af87691b2c946a315d481d2317f91293517fd16638b06182f07",
         ),
         "package": (
-            4_426_530,
-            "a3d06dd732722859a7cd4da1582cea49464cbbfccdb90e329afa6ec9352195d4",
+            4_444_468,
+            "e6472064c2536c055fb9a47efe49c9d9b553ce15ed1bc308115730454e3b94bc",
         ),
         "replacement_sha256": (
             "725846b2fb35bfa360ede03e42d542262fbc7f74a4aea101e6d8a9d2e2bc9bf6"

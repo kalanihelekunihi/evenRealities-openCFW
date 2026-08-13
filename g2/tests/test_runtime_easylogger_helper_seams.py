@@ -32,7 +32,7 @@ BOOT_IMAGE = (
     / "ota_s200_bootloader.bin"
 )
 
-sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "tools"))
 import apollo_overlay  # noqa: E402
 
 

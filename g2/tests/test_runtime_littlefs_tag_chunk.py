@@ -289,7 +289,7 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
             )
             cls.objects.append(output)
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

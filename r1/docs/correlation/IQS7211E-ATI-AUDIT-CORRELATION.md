@@ -11,7 +11,7 @@ CMSIS tick source, and logging framework. It is admitted as
 
 The clean implementation is split into `r1_iqs7211e_ati_audit_begin` and
 `r1_iqs7211e_ati_audit_summarize` in
-[`../../src/r1_iqs7211e.c`](../../src/r1_iqs7211e.c). This split
+`../src/r1_iqs7211e.c`. This split
 lets an executor perform the provider read only when the recovered cadence says
 it is due.
 
@@ -45,16 +45,16 @@ Host tests cover first-call scheduling, 9,999/10,000-tick boundaries, UInt32
 sequence and tick wrap, both layouts and read lengths, null/all-disabled maps,
 stable value order, min/max, and invalid-input immutability. The same routines
 are compiled freestanding for Cortex-M4 and retained in the unsigned Nordic SDK
-image at `0x000366B4` and `0x0003670C`. The image contains 90,956 bytes of
-text, 236 bytes of data, and 132,456 bytes of BSS; its 91,192-byte BIN has
-SHA-256 `31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`
+image at `0x000366B4` and `0x0003670C`. The image contains 94,804 bytes of
+text, 236 bytes of data, and 132,544 bytes of BSS; its 95,040-byte BIN has
+SHA-256 `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`
 and its HEX has SHA-256
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`.
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`.
 
 Reproduce the evidence with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_iqs7211e_ati_audit.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_iqs7211e_ati_audit.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```

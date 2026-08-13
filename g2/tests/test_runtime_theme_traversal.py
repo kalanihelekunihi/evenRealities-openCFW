@@ -167,7 +167,7 @@ class RuntimeThemeTraversalTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         from apollo_overlay import extract_linked_overlay
 
         (
@@ -388,7 +388,7 @@ class RuntimeThemeTraversalTests(unittest.TestCase):
     def test_wide_callers_dependencies_and_interior_topology_are_exact(
         self,
     ) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         functions = {

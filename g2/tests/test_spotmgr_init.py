@@ -430,7 +430,7 @@ class SpotmgrInitTests(unittest.TestCase):
 
     def test_stock_topology_and_handler_literal_table_are_pinned(self) -> None:
         application = OFFICIAL.read_bytes()[32:]
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         start = 0x00480434

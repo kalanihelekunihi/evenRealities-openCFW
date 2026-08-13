@@ -184,7 +184,7 @@ class RuntimeNtoaIntegerTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(target_object)
@@ -233,7 +233,7 @@ class RuntimeNtoaIntegerTests(unittest.TestCase):
         dict[str, dict[str, int]],
         list[dict[str, int | str]],
     ]:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         symbols_section = apollo_overlay.section_named(
@@ -619,7 +619,7 @@ class RuntimeNtoaIntegerTests(unittest.TestCase):
     def test_wide_callers_dependencies_and_interior_topology_are_exact(
         self,
     ) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         functions = {

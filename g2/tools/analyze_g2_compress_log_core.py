@@ -20,7 +20,7 @@ from capstone import (
 from capstone.arm import ARM_OP_IMM
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 

@@ -91,10 +91,10 @@ through `.openr1_health_api`. The UInt8/UInt16 average helpers link at `0x00031F
 `0x00031FA4`; snapshot/restore at `0x00031FF4` and `0x00032016`; latest-point helpers at
 `0x0003234C` and `0x00032376`; and HR, SpO2, and HRV stores at `0x000325C2`, `0x00032682`, and
 `0x0003272E`. The retained table is at `0x0003B274` with size `0x110`. The verified unsigned image
-is 90,956 bytes text, 236 bytes data, and 132,456 bytes BSS.
+is 94,804 bytes text, 236 bytes data, and 132,544 bytes BSS.
 Its HEX and BIN SHA-256 values are
-`0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 It contains no Goodix register or algorithm code, no GoMore code, no raw sensor access, no BLE
 command path, no signing bypass, and no deployment operation.

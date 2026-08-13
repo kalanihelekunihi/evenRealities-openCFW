@@ -41,7 +41,10 @@ static void send_channel1(const r1_tx_event *event) {
     const bool acquired = osSemaphoreAcquire(
         glasses_credits, R1_TX_ENQUEUE_WAIT_TICKS) == osOK;
     const r1_tx_status status = openr1_bae8_transmit(event);
-    if (acquired && status == R1_TX_RESOURCES) {
+    r1_bae8_hvx_retry_plan plan;
+    if (r1_bae8_plan_hvx_result(
+            false, acquired, status, 0u, &plan) == R1_OK &&
+        plan.release_credit) {
         (void)osSemaphoreRelease(glasses_credits);
     }
 }
@@ -51,16 +54,25 @@ static void send_eus(const r1_tx_event *event) {
         return;
     }
     r1_tx_status status = openr1_bae8_transmit(event);
-    if (status != R1_TX_RESOURCES) {
+    r1_bae8_hvx_retry_plan plan;
+    if (r1_bae8_plan_hvx_result(
+            true, true, status, 0u, &plan) != R1_OK) {
         return;
     }
-    (void)osSemaphoreRelease(phone_credits);
-    (void)osDelay(R1_EUS_RESOURCE_RETRY_TICKS);
+    if (plan.release_credit) {
+        (void)osSemaphoreRelease(phone_credits);
+    }
+    if (!plan.retry_once) {
+        return;
+    }
+    (void)osDelay(plan.retry_delay_ticks);
     if (osSemaphoreAcquire(phone_credits, R1_EUS_CREDIT_WAIT_TICKS) != osOK) {
         return;
     }
     status = openr1_bae8_transmit(event);
-    if (status == R1_TX_RESOURCES) {
+    if (r1_bae8_plan_hvx_result(
+            true, true, status, 1u, &plan) == R1_OK &&
+        plan.release_credit) {
         (void)osSemaphoreRelease(phone_credits);
     }
 }
@@ -252,32 +264,33 @@ void vApplicationStackOverflowHook(TaskHandle_t task, char *task_name) {
     }
 }
 
-bool openr1_scheduler_current_stack(uint32_t **start, uint32_t *words) {
+bool openr1_scheduler_task_stack(
+    void *task, uint32_t **start, uint32_t *words) {
     if (start == NULL || words == NULL) {
         return false;
     }
-    const TaskHandle_t current = xTaskGetCurrentTaskHandle();
-    if (current == (TaskHandle_t)channel1_thread) {
+    const TaskHandle_t handle = (TaskHandle_t)task;
+    if (handle == (TaskHandle_t)channel1_thread) {
         *start = (uint32_t *)channel1_stack;
         *words = configMINIMAL_STACK_SIZE;
         return true;
     }
-    if (current == (TaskHandle_t)runtime_thread) {
+    if (handle == (TaskHandle_t)runtime_thread) {
         *start = (uint32_t *)runtime_stack;
         *words = configMINIMAL_STACK_SIZE;
         return true;
     }
-    if (current == (TaskHandle_t)softdevice_thread) {
+    if (handle == (TaskHandle_t)softdevice_thread) {
         *start = (uint32_t *)softdevice_stack;
         *words = configMINIMAL_STACK_SIZE;
         return true;
     }
-    if (current == xTaskGetIdleTaskHandle()) {
+    if (handle == xTaskGetIdleTaskHandle()) {
         *start = (uint32_t *)idle_stack;
         *words = configMINIMAL_STACK_SIZE;
         return true;
     }
-    if (current == xTimerGetTimerDaemonTaskHandle()) {
+    if (handle == xTimerGetTimerDaemonTaskHandle()) {
         *start = (uint32_t *)timer_stack;
         *words = configTIMER_TASK_STACK_DEPTH;
         return true;
@@ -285,4 +298,9 @@ bool openr1_scheduler_current_stack(uint32_t **start, uint32_t *words) {
     *start = NULL;
     *words = 0u;
     return false;
+}
+
+bool openr1_scheduler_current_stack(uint32_t **start, uint32_t *words) {
+    return openr1_scheduler_task_stack(
+        (void *)xTaskGetCurrentTaskHandle(), start, words);
 }

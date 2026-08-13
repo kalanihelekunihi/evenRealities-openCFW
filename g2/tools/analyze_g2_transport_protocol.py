@@ -240,7 +240,7 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
     if path_hits != PATH_POINTER_CELLS:
         raise AuditError(f"source-path pointer topology changed: {path_hits!r}")
 
-    sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+    sys.path.insert(0, str(ROOT / "tools"))
     import recover_apollo_embedded_source_paths as decoder
 
     entries: list[tuple[int, int]] = []

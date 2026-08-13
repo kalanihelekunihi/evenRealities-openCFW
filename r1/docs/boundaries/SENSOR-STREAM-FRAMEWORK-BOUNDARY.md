@@ -87,9 +87,9 @@ summarizer reads no live sensor data and exposes no registration or unregistrati
 ## Reproduce
 
 ```sh
-python3 scripts/firmware/summarize_r1_sensor_stream_unregister.py
-python3 scripts/firmware/summarize_r1_sensor_stream_register.py
-python3 scripts/firmware/summarize_r1_sensor_stream_dispatch.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_sensor_stream_unregister.py
+python3 tools/summarize_r1_sensor_stream_register.py
+python3 tools/summarize_r1_sensor_stream_dispatch.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```

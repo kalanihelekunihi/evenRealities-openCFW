@@ -172,7 +172,7 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay
@@ -751,17 +751,17 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                121_706,
+                142_578,
                 (
-                    "9e5004af49fb14a22e7e7ed7357e4c10"
-            "f87dc8da3a7fb4d7b97fcffcde804c43"
+                    "3d5c9fe87fd46cbc40bb5670653f45d3"
+            "d61f9d777168aa47b70fb10712698ab4"
                 ),
                 615,
                 578,
-                3_645_102,
+                3_665_974,
                 (
-                    "8722e5565bf54dade66fb751155c11eb"
-            "d128d7a12853e3e4b8671c3c97807827"
+                    "5cef32ba7350e7f6476336fa6a087010"
+            "e6143e3e692205215c271430aa110d22"
                 ),
                 121_900,
                 3_438_528,

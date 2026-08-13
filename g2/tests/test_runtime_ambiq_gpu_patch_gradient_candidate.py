@@ -169,7 +169,7 @@ class AmbiqGpuPatchGradientCandidateTests(unittest.TestCase):
         self.assertIn("EXPECTED_SECTION_SHA256", ORACLE.read_text())
 
     def test_target_candidate_has_no_external_relocations(self) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         _, sections = apollo_overlay.parse_elf32(self.target)

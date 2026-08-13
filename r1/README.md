@@ -90,55 +90,55 @@ BLE value. Mutating requests require the final `authorized` argument.
 See [`docs/README.md`](docs/README.md) for evidence
 provenance, coverage, safety differences, and remaining hardware work. The function-level motion
 split is in
-[`docs/correlation/MOTION-PROVIDER-CORRELATION.md`](docs/correlation/MOTION-PROVIDER-CORRELATION.md).
+[`docs/MOTION-PROVIDER-CORRELATION.md`](docs/correlation/MOTION-PROVIDER-CORRELATION.md).
 The GoMore health/sleep algorithm boundary remains disabled until a matching licensed provider is
 authenticated; see
-[`docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md`](docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md).
+[`docs/GOMORE-PROVIDER-BOUNDARY.md`](docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md).
 The IQS7211E path uses pinned MIT provider/settings references and the R1-only adapter in
 `src/r1_iqs7211e.c`; its Nordic TWIM0/GPIOTE board binding is recorded in
-[`docs/boundaries/IQS7211E-PROVIDER-BOUNDARY.md`](docs/boundaries/IQS7211E-PROVIDER-BOUNDARY.md)
+[`docs/IQS7211E-PROVIDER-BOUNDARY.md`](docs/boundaries/IQS7211E-PROVIDER-BOUNDARY.md)
 and remains unavailable until identity, shared-power, and wear/factory lease gates are provisioned.
 The GXCAS GXT310 and YHMICROS YHM2710 boundaries are documented in
-[`docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md`](docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md).
+[`docs/NAMED-PERIPHERAL-BOUNDARIES.md`](docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md).
 The R1-owned three-client power lease and shared NFC/YHM conductor arbitration are implemented
 separately in `src/r1_power_lease.c` and `platform/nrf52840/sdk/openr1_i2c5_resources.c`; see
-[`docs/boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md`](docs/boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md).
+[`docs/YHM2710-I2C5-RESOURCE-BOUNDARY.md`](docs/boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md).
 The lease calls only a semantic provider and contains no YHM register/framing data. Without a
 licensed YHM provider, touch power remains fail closed. NFC receives the recovered P1.10 lifecycle
 and an exclusive CMSIS mutex but still starts disabled and exposes no raw transfer surface.
 The Goodix GH3X2X demo/config/event boundary remains licensed-provider-only; see
-[`docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md`](docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md).
+[`docs/GOODIX-PROVIDER-BOUNDARY.md`](docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md).
 `src/r1_goodix.c` implements only the recovered R1 power/lifecycle/profile adapter. It requires an
 explicit provider binding and returns `R1_ERROR_UNSUPPORTED` instead of fabricating biometric data
 when that provider is absent.
 The ST25DVxxKC provider/adapter split and source hashes are in
-[`docs/correlation/ST25DVXXKC-CORRELATION.md`](docs/correlation/ST25DVXXKC-CORRELATION.md).
+[`docs/ST25DVXXKC-CORRELATION.md`](docs/correlation/ST25DVXXKC-CORRELATION.md).
 The storage format and intentional audit corrections are in
-[`docs/correlation/KV-STORE-CORRELATION.md`](docs/correlation/KV-STORE-CORRELATION.md).
+[`docs/KV-STORE-CORRELATION.md`](docs/correlation/KV-STORE-CORRELATION.md).
 The physical storage provider and exact UICR/FDS layout are in
-[`docs/correlation/INTERNAL-FLASH-CORRELATION.md`](docs/correlation/INTERNAL-FLASH-CORRELATION.md).
+[`docs/INTERNAL-FLASH-CORRELATION.md`](docs/correlation/INTERNAL-FLASH-CORRELATION.md).
 The Nordic/R1 analog split, exact routes, byte hashes, and battery behavior are in
-[`docs/correlation/ANALOG-BATTERY-CORRELATION.md`](docs/correlation/ANALOG-BATTERY-CORRELATION.md).
+[`docs/ANALOG-BATTERY-CORRELATION.md`](docs/correlation/ANALOG-BATTERY-CORRELATION.md).
 The recovered health scheduler evidence and provider separation are in
-[`docs/correlation/AUTOMATIC-HEALTH-SYNC-CORRELATION.md`](docs/correlation/AUTOMATIC-HEALTH-SYNC-CORRELATION.md).
+[`docs/AUTOMATIC-HEALTH-SYNC-CORRELATION.md`](docs/correlation/AUTOMATIC-HEALTH-SYNC-CORRELATION.md).
 The activity offline queue and acknowledgement boundary are in
-[`docs/correlation/ACTIVITY-OFFLINE-SYNC-CORRELATION.md`](docs/correlation/ACTIVITY-OFFLINE-SYNC-CORRELATION.md).
+[`docs/ACTIVITY-OFFLINE-SYNC-CORRELATION.md`](docs/correlation/ACTIVITY-OFFLINE-SYNC-CORRELATION.md).
 The scalar-health offline queues and acknowledgement boundary are in
-[`docs/correlation/SCALAR-HEALTH-OFFLINE-SYNC-CORRELATION.md`](docs/correlation/SCALAR-HEALTH-OFFLINE-SYNC-CORRELATION.md).
+[`docs/SCALAR-HEALTH-OFFLINE-SYNC-CORRELATION.md`](docs/correlation/SCALAR-HEALTH-OFFLINE-SYNC-CORRELATION.md).
 The bounded HR/SpO2/HRV daily-cache callbacks and invalid-clock routing are in
-[`docs/correlation/SCALAR-HEALTH-DAILY-CACHE-CORRELATION.md`](docs/correlation/SCALAR-HEALTH-DAILY-CACHE-CORRELATION.md).
+[`docs/SCALAR-HEALTH-DAILY-CACHE-CORRELATION.md`](docs/correlation/SCALAR-HEALTH-DAILY-CACHE-CORRELATION.md).
 The provider-separated HR/SpO2/HRV sample consumers, latest-point rules, and hourly storage
 aggregation are in
-[`docs/correlation/SCALAR-HEALTH-SAMPLE-STORAGE-CORRELATION.md`](docs/correlation/SCALAR-HEALTH-SAMPLE-STORAGE-CORRELATION.md).
+[`docs/SCALAR-HEALTH-SAMPLE-STORAGE-CORRELATION.md`](docs/correlation/SCALAR-HEALTH-SAMPLE-STORAGE-CORRELATION.md).
 The exact health registration lookup and bounded internal history-record routing are in
-[`docs/correlation/HEALTH-HISTORY-ROUTING-CORRELATION.md`](docs/correlation/HEALTH-HISTORY-ROUTING-CORRELATION.md).
+[`docs/HEALTH-HISTORY-ROUTING-CORRELATION.md`](docs/correlation/HEALTH-HISTORY-ROUTING-CORRELATION.md).
 The product/provider split for the health TSDB startup controller is in
-[`docs/correlation/HEALTH-DATABASE-STARTUP-CORRELATION.md`](docs/correlation/HEALTH-DATABASE-STARTUP-CORRELATION.md).
+[`docs/HEALTH-DATABASE-STARTUP-CORRELATION.md`](docs/correlation/HEALTH-DATABASE-STARTUP-CORRELATION.md).
 The pure material-time/local-hour planners and exact known-cursor reconciliation are in
-[`docs/correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md`](docs/correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md).
+[`docs/TIME-HEALTH-ROLLOVER-CORRELATION.md`](docs/correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md).
 The provider-separated temperature/stress storage aggregation and daily-cache callbacks are in
-[`docs/correlation/TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md`](docs/correlation/TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md).
+[`docs/TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md`](docs/correlation/TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md).
 The activity daily-cache callback boundary is in
-[`docs/correlation/ACTIVITY-DAILY-CACHE-CORRELATION.md`](docs/correlation/ACTIVITY-DAILY-CACHE-CORRELATION.md).
+[`docs/ACTIVITY-DAILY-CACHE-CORRELATION.md`](docs/correlation/ACTIVITY-DAILY-CACHE-CORRELATION.md).
 The activity RAM/decoded-flash merge and packet-flush boundary is in
-[`docs/correlation/ACTIVITY-DAY-MERGE-CORRELATION.md`](docs/correlation/ACTIVITY-DAY-MERGE-CORRELATION.md).
+[`docs/ACTIVITY-DAY-MERGE-CORRELATION.md`](docs/correlation/ACTIVITY-DAY-MERGE-CORRELATION.md).

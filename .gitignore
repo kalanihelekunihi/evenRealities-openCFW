@@ -76,6 +76,7 @@ env/
 # extensions with build output but are inputs -- authenticated by the delivered
 # SHA256SUMS manifests and by g2/research/MANIFEST.sha256. Keep them.
 !/g2/research/**
+!/r1/research/**
 
 # ---------------------------------------------------------------------------
 # Vendor-proprietary inputs (not redistributable -- fetch locally)
@@ -86,6 +87,15 @@ env/
 /g2/blobs/official/**
 !/g2/blobs/official/**/
 !/g2/blobs/official/**/PROVENANCE.md
+
+# The R1 reconstruction embeds the stock application, bootloader, UICR and
+# APPROTECT images verbatim as C byte arrays. Those are the vendor firmware in
+# another encoding, so the same policy applies: keep the reconstruction sources,
+# manifest and verifier; supply the payload arrays locally.
+# See r1/research/decompilation/rebuild/PROVENANCE.md.
+/r1/research/decompilation/rebuild/*.bytes.inc
+/r1/research/decompilation/rebuild/emit_image
+/r1/research/decompilation/rebuild/rebuilt-*.bin
 /firmware_blobs
 /sdks
 

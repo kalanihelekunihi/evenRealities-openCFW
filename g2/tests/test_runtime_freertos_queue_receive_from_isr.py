@@ -60,7 +60,7 @@ class RuntimeFreeRTOSQueueReceiveFromISRTests(unittest.TestCase):
             function.restype = ctypes.c_int32 if name in ("receive_lock", "flag") else ctypes.c_uint32
             cls.getters[name] = function
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         cls.target_sections = {}
         cls.target_relocations = {}

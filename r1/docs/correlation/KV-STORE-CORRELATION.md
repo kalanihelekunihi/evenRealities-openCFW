@@ -7,7 +7,7 @@ binds an 8,192-byte partition as four fixed 2,048-byte snapshots. Core initializ
 `0x000731A0` registers seven fixed classes. FlashDB 2.0.0 remains admitted only for the separate
 `health.db` TSDB.
 
-The clean-room implementation is [`r1_kv_store.c`](../../src/r1_kv_store.c). It uses only
+The clean-room implementation is `r1_kv_store.c`. It uses only
 the R1 flash HAL and the already recovered MODBUS CRC helper; it contains no reconstructed vendor
 library body and exposes no raw host flash command.
 

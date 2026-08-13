@@ -20,7 +20,7 @@ THIRD_PARTY_DIR := third-party
 .PHONY: all help \
         build test verify clean \
         g2 g2-build g2-test g2-verify g2-inspect g2-clean \
-        r1 r1-build r1-test r1-sanitize r1-arm r1-sim r1-clean \
+        r1 r1-build r1-test r1-sanitize r1-verify r1-arm r1-sim r1-clean \
         third-party third-party-vendored third-party-fetched
 
 all: build
@@ -46,6 +46,7 @@ help:
 	@echo '  r1-sanitize      host tests under ASan/UBSan'
 	@echo '  r1-arm           freestanding Cortex-M4 objects'
 	@echo '  r1-sim           host protocol/device simulator'
+	@echo '  r1-verify        full R1 evidence gate (needs reconstructed images)'
 	@echo
 	@echo 'The R1 SDK image needs fetched vendor roots; see third-party/fetched/README.md.'
 	@echo 'G2 targets need the official OTA blobs; see g2/blobs/official/*/PROVENANCE.md.'
@@ -92,6 +93,11 @@ r1-test:
 
 r1-sanitize:
 	$(MAKE) -C $(R1_DIR) sanitize
+
+# Needs the reconstructed R1 images; see
+# r1/research/decompilation/rebuild/PROVENANCE.md.
+r1-verify:
+	$(MAKE) -C $(R1_DIR) verify
 
 r1-arm:
 	$(MAKE) -C $(R1_DIR) arm-objects

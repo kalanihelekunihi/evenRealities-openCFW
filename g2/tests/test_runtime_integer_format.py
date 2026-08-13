@@ -429,7 +429,7 @@ class RuntimeIntegerFormatTests(unittest.TestCase):
             "55adaac92a75550c82d285373443fe7a",
         )
 
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

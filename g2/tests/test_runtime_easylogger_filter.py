@@ -266,7 +266,7 @@ class RuntimeEasyLoggerFilterTests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(cls.target_object)
@@ -443,7 +443,7 @@ class RuntimeEasyLoggerFilterTests(unittest.TestCase):
         self.assertEqual((self.lock_count(), self.unlock_count()), (0, 0))
 
     def test_stock_branch_and_pointer_topology_is_exact(self) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         expected_callers = {

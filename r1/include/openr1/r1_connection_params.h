@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "openr1/r1_protocol.h"
+
 #define R1_CONNECTION_HANDLE_INVALID UINT16_C(0xffff)
 #define R1_CONNECTION_FAST_MAX_INTERVAL UINT16_C(50)
 #define R1_CONNECTION_RETRY_AFTER_SLOW_MS UINT32_C(4)
@@ -64,6 +66,28 @@ typedef struct {
     r1_connection_role published_role;
 } r1_connection_role_assign_result;
 
+typedef struct {
+    bool request_update;
+    uint16_t connection;
+    uint8_t transmit_phy;
+    uint8_t receive_phy;
+} r1_phy_update_plan;
+
+typedef enum {
+    R1_CONNECTION_PARAMETER_SET_DEFAULT = 0,
+    R1_CONNECTION_PARAMETER_SET_FAST_A,
+    R1_CONNECTION_PARAMETER_SET_FAST_B,
+    R1_CONNECTION_PARAMETER_SET_GLASSES
+} r1_connection_parameter_set;
+
+typedef struct {
+    bool set_preferred;
+    bool request_update;
+    bool mark_fast_active;
+    uint16_t connection;
+    r1_connection_parameter_set parameter_set;
+} r1_connection_parameter_mode_plan;
+
 void r1_connection_parameter_policy_initialize(
     r1_connection_parameter_policy *policy);
 r1_connection_speed r1_connection_parameters_speed(
@@ -79,5 +103,13 @@ r1_connection_parameter_action r1_connection_parameters_updated(
 r1_connection_role_assign_result r1_connection_role_assign(
     r1_connection_role_handles *handles, r1_connection_role role,
     uint16_t connection);
+r1_error r1_connection_phy_update_plan(
+    uint16_t connection, bool connected, uint8_t transmit_phy,
+    uint8_t receive_phy, r1_phy_update_plan *plan);
+r1_error r1_connection_parameter_mode_adapter(
+    uint16_t connection, uint16_t phone_connection,
+    uint16_t glasses_connection, uint8_t requested_mode,
+    uint8_t current_phone_mode, bool glasses_fast_active,
+    bool alternate_fast_profile, r1_connection_parameter_mode_plan *plan);
 
 #endif

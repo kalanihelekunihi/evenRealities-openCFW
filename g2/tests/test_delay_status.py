@@ -357,7 +357,7 @@ class DelayStatusTests(unittest.TestCase):
 
     def test_raw_branch_topology_and_dependencies_are_pinned(self) -> None:
         application = OFFICIAL.read_bytes()[32:]
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         expectations = (

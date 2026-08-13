@@ -72,9 +72,9 @@ acknowledgement modes, and corrupt-state rejection.
 
 The verified Nordic link retains the empty, enqueue, consume, merge, and acknowledgement APIs at
 `0x00033086`, `0x00033098`, `0x000332C8`, `0x0003332C`, and `0x00033466`. The resulting unsigned
-application is 90,956 bytes text, 236 bytes data, and 132,456 bytes BSS. Its standalone HEX and BIN
-SHA-256 values are `0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81` and
-`31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+application is 94,804 bytes text, 236 bytes data, and 132,544 bytes BSS. Its standalone HEX and BIN
+SHA-256 values are `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
+`421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 This component does not expose private SRAM, internal event injection, raw motion samples, or a
 new BLE command. It does not alter authorization, signing, boot verification, rollback, ACL,

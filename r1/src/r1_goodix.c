@@ -2,6 +2,35 @@
 
 #include <stddef.h>
 
+static const r1_sensor_stream_registration sensor_stream_registrations[] = {
+    {"hr", 4u, 1u, true},
+    {"spo2", 6u, 2u, true},
+    {"raw_hr", 124u, 5u, true},
+    {"wear", 2u, 3u, true},
+    {"gray", 12u, 8u, true},
+    {"aging", 12u, 9u, true},
+    {"hrv", 10u, 4u, true},
+    {"adt", 24u, 7u, true},
+};
+
+r1_error r1_sensor_stream_registration_plan(
+    r1_sensor_stream_registration_plan_result *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_sensor_stream_registration_plan_result){
+        .initialize_goodix = true,
+        .clear_state = true,
+        .clear_bytes = R1_SENSOR_STREAM_STATE_BYTES,
+        .callback_count = R1_SENSOR_STREAM_CALLBACK_COUNT,
+    };
+    for (size_t index = 0u; index < R1_SENSOR_STREAM_REGISTRATION_COUNT;
+         ++index) {
+        plan->registrations[index] = sensor_stream_registrations[index];
+    }
+    return R1_OK;
+}
+
 static uint32_t diagnostic_u32(const uint8_t *bytes) {
     return (uint32_t)bytes[0] | ((uint32_t)bytes[1] << 8u) |
         ((uint32_t)bytes[2] << 16u) | ((uint32_t)bytes[3] << 24u);

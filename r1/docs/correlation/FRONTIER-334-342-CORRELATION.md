@@ -42,13 +42,13 @@ selection implementation, and dlCom state remain in the matching licensed Goodix
 Reproduce with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_frontier_334_342.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
-python3 scripts/firmware/verify_openr1.py
+python3 tools/summarize_r1_frontier_334_342.py
+python3 tools/build_r1_source_ownership.py --check
+python3 tools/verify_openr1.py
 ```
 
 The two product APIs are retained by the Nordic SDK link at `0x00037F66` and `0x00037F92`.
-The current unsigned application is 91,192 bytes (`text=90,956`, `data=236`, `bss=132,456`),
-with HEX SHA-256 `0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81`
-and BIN SHA-256 `31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91`.
+The current unsigned application is 95,040 bytes (`text=94,804`, `data=236`, `bss=132,544`),
+with HEX SHA-256 `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`
+and BIN SHA-256 `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 No code signing or deployment bypass is part of this closure.

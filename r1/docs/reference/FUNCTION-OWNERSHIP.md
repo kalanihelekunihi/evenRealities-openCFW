@@ -7,7 +7,7 @@ may use a pinned provider implementation, may independently implement product be
 pause for ownership research. Regenerate it with:
 
 ```sh
-python3 scripts/firmware/build_r1_source_ownership.py
+python3 tools/build_r1_source_ownership.py
 ```
 
 ## Interpretation
@@ -84,7 +84,7 @@ ST-specific BSim corpus includes exact `ReadReg` and `WriteReg` anchors; the rem
 require matching register constants and complete function semantics, not address proximity.
 Five adjacent R1 resource functions separately cover the P1.10 NFC lifecycle, exclusive `i2c_5`
 ownership, and three-client battery/optical/touch lease without admitting any YHM register sender.
-CmBacktrace likewise has five exact core functions and fourteen bounded adapters. Five hundred seventeen
+CmBacktrace likewise has five exact core functions and fifteen bounded adapters. Five hundred seventeen
 application entries now route directly to Nordic SDK 17.1.0, thirteen route to SDK-bundled SEGGER
 sources, and the mixed log-prefix and BAE8 write functions are bounded as R1/Nordic adapters. The
 exact map is in
@@ -249,7 +249,7 @@ adapters around Nordic and CMSIS providers. They own only framing/bounds, event/
 the kernel-state semaphore gate, timeout conversion, recovered polling policy, bus configuration,
 hardware shutdown power-cycle policy, and four Nordic-default software-bus pin-release paths. The
 GPIO-driven bit engines are not admitted.
-A total of 733 application entries / 44,218 bytes remain unclassified and blocked; nine additional generic device-registry and
+A total of 685 application entries / 36,288 bytes remain unclassified and blocked; nine additional generic device-registry and
 fourteen time/calendar-provider candidates plus forty software-TWI-provider candidates remain
 separately implementation-blocked, as do seven RTC-device-provider candidates and thirteen
 sensor-algorithm heap-provider candidates. Fourteen exact

@@ -351,7 +351,7 @@ class SpotmgrDispatchTests(unittest.TestCase):
 
     def test_reviewed_direct_calls_target_only_public_entries(self) -> None:
         application = OFFICIAL.read_bytes()[32:]
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         entries = {start: callers for _, _, start, _, _, _, callers in SPANS}

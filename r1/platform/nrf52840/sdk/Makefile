@@ -61,6 +61,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_app_timer_compat.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_bae8.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_cmbacktrace_port.c \
+  $(PROJ_DIR)/platform/nrf52840/sdk/openr1_connection_params.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_gatt.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_health.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_health_db.c \

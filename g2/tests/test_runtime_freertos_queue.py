@@ -271,7 +271,7 @@ class RuntimeFreeRTOSQueueTests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(cls.target_object)
@@ -1169,7 +1169,7 @@ class RuntimeFreeRTOSQueueTests(unittest.TestCase):
                     expected[name][1],
                 )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         callers = {name: [] for name in FUNCTIONS}
@@ -1262,7 +1262,7 @@ class RuntimeFreeRTOSQueueTests(unittest.TestCase):
     def test_stock_internal_dependencies_match_recovered_seams(
         self,
     ) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         targets = {name: set() for name in FUNCTIONS}

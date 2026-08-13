@@ -12,6 +12,10 @@
 #define R1_DISPATCH_MODEL_MAX 1100u
 #define R1_LEGACY_COMMAND_WORKSPACE_SIZE 36u
 #define R1_LEGACY_COMMAND_OPCODE_OFFSET 2u
+#define R1_LEGACY_DEVICE_INFO_PREFIX_BYTES 4u
+#define R1_LEGACY_DEVICE_INFO_RESPONSE_MAX 43u
+#define R1_LEGACY_PRODUCT_BSN_BYTES 30u
+#define R1_LEGACY_PRODUCT_SN_BYTES 30u
 #define R1_ATI_CALIBRATION_RESPONSE_STATUS_DEFAULT 5u
 #define R1_ATI_CALIBRATION_RESPONSE_STATUS_QUERY 6u
 
@@ -90,11 +94,33 @@ typedef struct {
     size_t count;
 } r1_dispatch_result;
 
+typedef struct {
+    uint8_t product_bsn[R1_LEGACY_PRODUCT_BSN_BYTES];
+    uint8_t product_bsn_length;
+    uint8_t product_sn[R1_LEGACY_PRODUCT_SN_BYTES];
+    uint8_t product_sn_length;
+    uint8_t temperature_calibration[6u];
+    uint8_t accelerometer_calibration[6u];
+    uint8_t configuration_byte_0x70;
+    uint32_t configuration_word_0x74;
+    uint8_t configuration_byte_0x78;
+    uint8_t device_identity[20u];
+} r1_legacy_device_info_sources;
+
+typedef struct {
+    uint8_t bytes[R1_LEGACY_DEVICE_INFO_RESPONSE_MAX];
+    size_t length;
+} r1_legacy_device_info_response;
+
 r1_error r1_dispatch(r1_device_state *state, r1_session *session,
                      const r1_model *request, r1_dispatch_result *result);
 r1_error r1_legacy_command_route_frame(
     const uint8_t *frame, size_t frame_length, uint8_t *workspace,
     size_t workspace_length, r1_legacy_command_route *route);
+r1_error r1_legacy_device_info_build(
+    const uint8_t request_prefix[R1_LEGACY_DEVICE_INFO_PREFIX_BYTES],
+    const r1_legacy_device_info_sources *sources,
+    r1_legacy_device_info_response *response);
 r1_error r1_ati_calibration_plan_command(
     uint8_t subcommand, uint8_t argument_0, uint8_t argument_1,
     const r1_ati_calibration_observation *observation,

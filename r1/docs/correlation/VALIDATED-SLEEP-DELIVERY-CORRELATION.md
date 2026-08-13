@@ -11,7 +11,7 @@ fallback, append, and post-storage policy implemented.
 | `0x0008DC94..<0x0008DD18` | 132 | `5c5baba208acd202ffc19aad32ad644b708259ff6989b976af31c93b8bad429b` | storage result and automatic-sync orchestration |
 | `0x0008DD90..<0x0008DF42` | 434 | `5f375de1093b593b9df32fa774b51ffa063e7086884562e01633838373530e6c` | one-hour admission, private storage event, and direct fallback |
 
-`../../scripts/firmware/summarize_r1_validated_sleep_delivery.py`
+`../../tools/summarize_r1_validated_sleep_delivery.py`
 authenticates the application, all three bodies, their complete direct caller sets, related
 storage and automatic-sync branches, state literals, and diagnostic strings. The 434-byte ingress
 has the sole caller `0x00042960`; storage-task thunk `0x00042BC6` and the ingress fallback at
@@ -40,8 +40,8 @@ for analysis without treating corrupt time as valid persistent data.
 These functions contain R1-specific sleep lifecycle and persistence policy, not Nordic, GoMore,
 Goodix, or FlashDB provider implementation. OpenR1 implements the ingress and post-storage
 decisions as pure planners in
-[`../../src/r1_health.c`](../../src/r1_health.c), while the bounded two-sector
-journal in [`../../src/r1_sleep_db.c`](../../src/r1_sleep_db.c) supplies the already
+`../src/r1_health.c`, while the bounded two-sector
+journal in `../src/r1_sleep_db.c` supplies the already
 tested two-attempt append behavior over the caller-provided flash interface.
 
 The recovered logging/event frameworks and live task dispatch remain external. The stock path's
@@ -54,5 +54,5 @@ failure without destructive reset.
 Reproduce the evidence check with:
 
 ```sh
-python3 scripts/firmware/summarize_r1_validated_sleep_delivery.py
+python3 tools/summarize_r1_validated_sleep_delivery.py
 ```

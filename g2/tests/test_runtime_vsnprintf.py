@@ -160,7 +160,7 @@ class RuntimeVsnprintfTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         data, sections = apollo_overlay.parse_elf32(cls.target_object)
@@ -591,7 +591,7 @@ class RuntimeVsnprintfTests(unittest.TestCase):
     def test_wide_callers_dependencies_and_interior_topology_are_exact(
         self,
     ) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         callers = []

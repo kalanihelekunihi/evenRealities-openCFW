@@ -38,7 +38,7 @@ class RuntimeCmsisKernelLifecycleTests(unittest.TestCase):
         cls.lib.open_cfw_cmsis_kernel_lifecycle_host_get.restype = ctypes.c_int32
 
         flags = ["--target=thumbv7em-none-eabi", "-mthumb", "-O2", "-ffreestanding", "-fno-jump-tables", "-fomit-frame-pointer", "-fno-builtin", "-mno-unaligned-access", "-fno-unwind-tables", "-fno-asynchronous-unwind-tables", "-fropi", "-ffunction-sections", "-fdata-sections", "-Wall", "-Wextra", "-Werror"]
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         cls.closures = {}
         for name, selector in (

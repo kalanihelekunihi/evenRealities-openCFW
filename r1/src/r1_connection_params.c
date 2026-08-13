@@ -111,3 +111,54 @@ r1_connection_role_assign_result r1_connection_role_assign(
     }
     return result;
 }
+
+r1_error r1_connection_phy_update_plan(
+    uint16_t connection, bool connected, uint8_t transmit_phy,
+    uint8_t receive_phy, r1_phy_update_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_phy_update_plan){0};
+    if (connection == R1_CONNECTION_HANDLE_INVALID || !connected) {
+        return R1_ERROR_STATE;
+    }
+    plan->request_update = true;
+    plan->connection = connection;
+    plan->transmit_phy = transmit_phy;
+    plan->receive_phy = receive_phy;
+    return R1_OK;
+}
+
+r1_error r1_connection_parameter_mode_adapter(
+    uint16_t connection, uint16_t phone_connection,
+    uint16_t glasses_connection, uint8_t requested_mode,
+    uint8_t current_phone_mode, bool glasses_fast_active,
+    bool alternate_fast_profile, r1_connection_parameter_mode_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_connection_parameter_mode_plan){
+        .connection = connection,
+        .parameter_set = R1_CONNECTION_PARAMETER_SET_DEFAULT,
+    };
+    if (connection == R1_CONNECTION_HANDLE_INVALID ||
+        (connection == phone_connection && current_phone_mode == requested_mode)) {
+        return R1_OK;
+    }
+
+    if (requested_mode == 2u) {
+        if (connection == glasses_connection && glasses_fast_active) {
+            return R1_OK;
+        }
+        plan->parameter_set = R1_CONNECTION_PARAMETER_SET_GLASSES;
+        plan->mark_fast_active = true;
+    } else if (requested_mode == 1u) {
+        plan->parameter_set = alternate_fast_profile
+            ? R1_CONNECTION_PARAMETER_SET_FAST_B
+            : R1_CONNECTION_PARAMETER_SET_FAST_A;
+        plan->mark_fast_active = true;
+    }
+    plan->set_preferred = true;
+    plan->request_update = true;
+    return R1_OK;
+}

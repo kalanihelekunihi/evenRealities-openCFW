@@ -286,9 +286,9 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "bd3b32c736e57005c1cbe65a2725fb66ed5389227686ff7961793f699364e68c",
             ),
         },
-        "overlay": (124640, "476843181113c88594d1a766a60b91a15a3ec76a4c898c46d3176f64ea21c867"),
+        "overlay": (142578, "3d5c9fe87fd46cbc40bb5670653f45d3d61f9d777168aa47b70fb10712698ab4"),
         "component": (3648036, "d334b5d063701af87691b2c946a315d481d2317f91293517fd16638b06182f07"),
-        "package": (4426530, "a3d06dd732722859a7cd4da1582cea49464cbbfccdb90e329afa6ec9352195d4"),
+        "package": (4444468, "e6472064c2536c055fb9a47efe49c9d9b553ce15ed1bc308115730454e3b94bc"),
     },
     "linux-clang": {
         "placements": {
@@ -675,7 +675,7 @@ class RuntimeFreeRTOSQueueMessagesWaitingProductionTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay

@@ -244,7 +244,7 @@ class NanopbDecodeVarint32EofCandidateTests(unittest.TestCase):
         cls.host_test.argtypes = []
         cls.host_test.restype = ctypes.c_int
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         import analyze_g2_nanopb_point_release
         cls.apollo_overlay = apollo_overlay

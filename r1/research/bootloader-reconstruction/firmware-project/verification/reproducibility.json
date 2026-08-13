@@ -1,0 +1,46 @@
+{
+  "captured": {
+    "artifacts": {
+      "r1_bootloader.bin": "583bb6b52a055f4955c4e1336c1d8b0397f742ac44b368678a50861755ac238e",
+      "r1_bootloader.hex": "b0889621b1f467a762fcedd336987525ca391b693aa62047de16825281eeb904",
+      "r1_bootloader.out": "47226c7e6986e01212306c424bc6d9df143b6d07da234fc4db015b6d109bda54"
+    },
+    "metrics": {
+      "bootloader_bin_bytes": 24576,
+      "bootloader_used_bytes": 24256,
+      "bss_bytes": 21976,
+      "data_bytes": 184,
+      "flash_function_addresses": 321,
+      "initial_stack_pointer": "0x20040000",
+      "public_key_address": "0x000fda44",
+      "reset_vector": "0x000f82bd",
+      "signed_updates_required": true,
+      "source_objects": 74,
+      "text_bytes": 24080
+    },
+    "rebuilds_match": true,
+    "relocated_rebuild_matches": true
+  },
+  "hardened": {
+    "artifacts": {
+      "r1_bootloader.bin": "c391cb17f90d85e433a6e103ecd312b636ea4c78b8bd2a74f15dab43ec137ac5",
+      "r1_bootloader.hex": "62aac1d5fe29ec66418b154a4228049fa24362f18136824f933480260c13b964",
+      "r1_bootloader.out": "081c61e4d8ecbfdd8d84cb40e2ab145da0788dcc5fb335510c6c7f3728cd2c91"
+    },
+    "metrics": {
+      "bootloader_bin_bytes": 24576,
+      "bootloader_used_bytes": 24192,
+      "bss_bytes": 21976,
+      "data_bytes": 184,
+      "flash_function_addresses": 321,
+      "initial_stack_pointer": "0x20040000",
+      "public_key_address": "0x000fda10",
+      "reset_vector": "0x000f82bd",
+      "signed_updates_required": true,
+      "source_objects": 74,
+      "text_bytes": 24016
+    },
+    "rebuilds_match": true,
+    "relocated_rebuild_matches": true
+  }
+}

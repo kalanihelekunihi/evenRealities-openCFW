@@ -110,11 +110,20 @@ guarantee they exist to provide.
 
 ## Evidence provenance
 
-Recovered evidence — decompilation corpora, Ghidra BSim correlations, emulation
-models — was produced in a separate research workspace. Where an R1 document
-cites an analysis script by a `scripts/firmware/...` path, that citation names
-the tool that produced the evidence in that workspace; it is provenance, and it
-is left exactly as written rather than rewritten to point somewhere in this
-repository. Raw run artifacts (Ghidra logs, correlation CSVs) are regenerable
-and not tracked here; their hashes and conclusions are recorded in the
-correlation documents.
+Every claim in this repository is checkable from this repository. Both targets
+carry their own evidence and the tooling that produced it:
+
+| Target | Evidence | Tooling | Gate |
+| --- | --- | --- | --- |
+| G2 | `g2/research/` | `g2/tools/` | `make -C g2 verify` |
+| R1 | `r1/research/` | `r1/tools/` | `make -C r1 verify` |
+
+Each correlation document ends with the exact command that regenerates its
+numbers, and that command runs here.
+
+Two categories of input are deliberately not distributed, because they are
+vendor-proprietary rather than because they live elsewhere: the G2 OTA payloads
+and the R1 image byte arrays. Both record their digests and origin in a
+`PROVENANCE.md` beside where they belong, so a local copy can be supplied and
+checked. Everything else — decompilation corpora, compiler matrices, correlation
+runs, readiness artifacts — is tracked and hash-authenticated in place.

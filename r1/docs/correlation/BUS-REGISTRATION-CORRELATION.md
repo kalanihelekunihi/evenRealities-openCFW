@@ -34,7 +34,7 @@ The four software wrappers use fixed records at `0x20007400`, `0x20007470`, `0x2
 `0x20007550`. Each copies its leading instance word into the embedded record at offset `0x34`,
 points that record at the operation table at offset `0x4C`, and tail-calls the same stock registry.
 They create no semaphore. Their recovered pins, consumers, and operation entry points remain
-machine-readable through `scripts/firmware/summarize_r1_bus_registry.py`.
+machine-readable through `tools/summarize_r1_bus_registry.py`.
 
 ## Ownership and replacement boundary
 

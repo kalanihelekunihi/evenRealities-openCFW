@@ -1,30 +1,61 @@
 # Remaining application-function frontier
 
-Snapshot: 2026-08-13, after the complete 264...274-byte frontier closure.
+Snapshot: 2026-08-13, after the complete 204...210-byte inventory frontier closure.
 
 ## Current inventory
 
 The generated ownership ledger contains 3,165 application/bootloader functions. All 304
 bootloader entries are source-routed. Of 2,861 application entries, including 174 exact manual
-provenance supplements, 733 remain `unclassified` and implementation-blocked. The
-corresponding recovered function bodies total 44,218 bytes. Nine
+provenance supplements, 685 remain `unclassified` and implementation-blocked. The
+corresponding recovered function bodies total 36,288 bytes. Nine
 generic device-registry, fourteen time/calendar-provider, forty software-TWI-provider, and seven
 RTC-device-provider candidates remain separately blocked under their distinct provider families.
 Thirteen sensor-algorithm heap functions / 1,202 executable bytes are now also separately blocked
 under `unknown_sensor_algorithm_heap_provider_candidate` rather than left unclassified.
-Three generic sensor-stream registration/dispatch/unregistration functions / 1,448 bytes are separately
+Four generic sensor-stream registration/dispatch/unregistration/timer functions / 1,670 bytes are separately
 blocked under `unknown_sensor_stream_framework_candidate`; their adjacent registry, list,
 allocator, buffer, and timer implementations are not admitted by that function-local
 classification.
-The indirect 434-byte signed-int8 pooling executor is separately blocked under
-`unknown_shared_quantized_neural_runtime_candidate`; its constructor is shared by independently
-gated GoMore and Goodix graph builders, but no exact provider source has been authenticated.
+Six shared quantized-neural runtime functions / 1,328 bytes are separately blocked under
+`unknown_shared_quantized_neural_runtime_candidate`. They include the indirect 434-byte signed-int8
+pooling executor plus the float quantizer, parameter helper, descriptor constructor, and int8-add
+executor shared by
+independently gated GoMore and Goodix graph builders; no exact provider source has been authenticated.
 The completed 264...274-byte tier routes three R1 product functions and three GoMore-private
 functions / 1,386 bytes. The existing EUS producer now has its exact 272-byte body pinned; clean
 metadata-only policies add the five/30-cycle battery diagnostic cadence and `ep.bin` recovery
 cursor. GoMore timestamp expansion, its exclusive fill helper, and fixed-coefficient IIR filtering
 remain licensed-provider-only. See
 [`FRONTIER-264-274-CORRELATION.md`](../correlation/FRONTIER-264-274-CORRELATION.md).
+The completed 256...262-byte inventory tier routes thirteen more entries / 2,090 ledger bytes.
+One Ghidra extent is corrected from 262 to 272 executable bytes, making the immutable executable
+census 2,100 bytes. The clean-room side is limited to the system-settings/REG1 action plan,
+temperature timed-mode transition plan, and bounded selector over a caller-supplied Goodix
+snapshot. Ten pooling and sleep/history functions remain GoMore licensed-provider-only. See
+[`FRONTIER-256-262-CORRELATION.md`](../correlation/FRONTIER-256-262-CORRELATION.md).
+The completed 230...248-byte inventory tier routes seventeen entries / 1,928 ledger bytes. One
+Ghidra extent is corrected from 234 to 240 executable bytes, making the immutable executable
+census 1,934 bytes. The clean-room side reuses the R1 `kv.bin` store and adds only an `ep.bin`
+readiness plan, a bounded legacy device-info formatter, and fixed-record data fields. Three
+GoMore functions remain licensed-provider-only, while three shared quantized-runtime functions
+remain blocked pending attribution. See
+[`FRONTIER-230-248-CORRELATION.md`](../correlation/FRONTIER-230-248-CORRELATION.md).
+The completed 224...230-byte tier routes eight entries / 1,458 bytes. Four frontier functions and
+two helpers are R1 product behavior: delayed-event cancellation, heart-rate mode transitions,
+ring-stability decisions, and the connected-link PHY gate. The PDM IRQ handler is routed to Nordic
+SDK 17.1.0, and the int8-add executor expands the blocked shared-runtime boundary. See
+[`FRONTIER-224-230-CORRELATION.md`](../correlation/FRONTIER-224-230-CORRELATION.md).
+The completed 212...222-byte inventory tier routes seven entries / 1,524 ledger bytes and corrects
+three truncated inventory extents, yielding 1,542 executable bytes. Two bodies remain provider-owned
+(Goodix signal processing and the unattributed sensor-stream framework); the five bounded R1 seams
+cover stored-sleep acknowledgement, CmBacktrace/FreeRTOS task diagnostics, serialized BAE8 HVX,
+system-control command `0x37`, and Nordic FDS-event translation. See
+[`FRONTIER-212-222-CORRELATION.md`](../correlation/FRONTIER-212-222-CORRELATION.md).
+The completed 204...210-byte inventory tier routes five entries / 1,030 bytes. Four bounded R1
+seams cover named Goodix-facing stream configuration, six-bucket activity-record expansion,
+Nordic GAP connection-profile selection, and newest-valid FAL/device-slot scanning. The shared
+twelve-descriptor tensor-arena allocator remains blocked pending exact attribution. See
+[`FRONTIER-204-210-CORRELATION.md`](../correlation/FRONTIER-204-210-CORRELATION.md).
 Eight composite-initializer functions / 586 bytes are newly routed into the existing GoMore
 licensed-provider gate, bringing that boundary to 221 exact functions. The indirect 1,234-byte
 floating-point neural-layer executor at `0x00076BDC` is now also routed to that gate, bringing the
@@ -56,7 +87,8 @@ bringing the complete Goodix-gated census to 231 at that stage.
 The GH_HRV lifecycle closure adds seven formerly unclassified functions / 1,154 executable bytes
 around the two already gated identity/output functions. Its nine functions / 1,288 bytes precede
 the later GH_SPO2/dlCom, supplemental NADT, packed-channel, NADT-quality, register-profile, and
-peak-mask, accumulation/decision, and dlCom peak-selector closures; the complete Goodix gate is now 395.
+peak-mask, accumulation/decision, and dlCom peak-selector closures; after correcting one shared
+quantizer constructor's attribution, the complete Goodix gate is now 394.
 The GH_SPO2/dlCom closure adds 82 formerly unclassified Ghidra functions / 19,520 executable bytes
 and three exact 16-byte dispatcher-table wrappers omitted by Ghidra, bringing the complete
 Goodix-gated census to 316 at that stage / 85 newly bounded entries in this closure.
@@ -67,7 +99,8 @@ coefficients, and floating-point formulas remain provider-only.
 The sole-thunk 514-byte GH3X2X register-profile decoder adds one provider entry, and the closed
 seven-function / 1,098-byte GH_NADT peak-mask chain and the remaining 30-function / 5,126-byte
 accumulation/decision graph, GH_HR initializer, quantization helper, dlCom peak selector, and the
-channel-decimation/rolling-window body at `0x00029D5C` bring the current Goodix gate to 395 functions; their private
+channel-decimation/rolling-window body at `0x00029D5C` bring the Goodix gate to 395 functions at
+that stage; the later shared-quantizer correction makes the current count 394. Their private
 signal-processing behavior remains excluded.
 Twelve formerly unclassified Ghidra functions / 1,720 bytes and four exact manual functions / 82
 bytes now form a 16-function / 1,802-byte R1 structured-log cache closure. Nordic logging,
@@ -277,7 +310,7 @@ The 406-byte GH_HR private-context initializer at `0x0006D204` is now Goodix-gat
 only private ABI `pv_v1.1.0`, allocates 0x150/0x158-byte contexts, seeds private defaults, and is
 called solely by the already gated `0x0006D3C0` heart-rate wrapper. No private layout, default,
 or biometric algorithm is implemented locally. Reproduce with
-`python3 scripts/firmware/summarize_r1_goodix_hr_init_boundary.py`.
+`python3 tools/summarize_r1_goodix_hr_init_boundary.py`.
 
 The native 406-byte R1 battery runtime entry at `0x00031FD0` is now reconciled with the already
 accepted 412-byte `0x00031FCC..<0x00032168` veneer-plus-body extent. Exact body/caller pins show
@@ -969,8 +1002,9 @@ the activity accumulator is closed in
 [`ACTIVITY-ACCUMULATOR-CORRELATION.md`](../correlation/ACTIVITY-ACCUMULATOR-CORRELATION.md), and the HR/SpO2/HRV
 sample-storage consumers are closed in
 [`SCALAR-HEALTH-SAMPLE-STORAGE-CORRELATION.md`](../correlation/SCALAR-HEALTH-SAMPLE-STORAGE-CORRELATION.md).
-The next candidates are the remaining bounded internal health-event, cache-lifecycle, and public
-history orchestration functions. Each must receive the same
+The next unresolved inventory leaders are the two 222-byte functions at `0x00072FB8` and
+`0x0008A45C`, followed by 220 bytes at `0x0008F780`, 218 bytes at `0x0008EF28`, and 216 bytes at
+`0x0003E7A8`. Each must receive the same
 function-local evidence, provider screening, behavioral implementation, and exact body pinning
 before ownership changes. Nordic- or third-party-looking clusters remain source-correlation tasks,
 not clean-room implementation tasks. QMA6100, YHM2710, Goodix, and GoMore stay gated exactly as

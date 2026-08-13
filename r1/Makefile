@@ -18,7 +18,7 @@ ARM_FLAGS := --target=armv7em-none-eabi -mcpu=cortex-m4 -mthumb \
 ARM_SOURCES := $(SOURCES) platform/nrf52840/r1_nrf52840.c
 ARM_OBJECTS := $(patsubst %.c,$(ARM_BUILD)/%.o,$(ARM_SOURCES))
 
-.PHONY: all test sim sanitize arm-objects sdk-image sdk-verify vendor-audit vendor-storage-test vendor-crypto-test clean
+.PHONY: all test sim sanitize verify arm-objects sdk-image sdk-verify vendor-audit vendor-storage-test vendor-crypto-test clean
 
 all: test
 
@@ -43,6 +43,12 @@ sanitize: $(SAN_TEST)
 
 arm-objects: $(ARM_OBJECTS)
 	@echo "Built freestanding Cortex-M4 objects under $(ARM_BUILD)"
+
+# Full evidence gate: capability ledger, source ownership, per-subsystem
+# summaries, and the host/sanitizer/ARM builds. Needs the reconstructed
+# images -- see research/decompilation/rebuild/PROVENANCE.md.
+verify:
+	python3 tools/verify_openr1.py
 
 sdk-image:
 	@test -n "$(SDK_ROOT)" || (echo "SDK_ROOT is required" >&2; exit 2)

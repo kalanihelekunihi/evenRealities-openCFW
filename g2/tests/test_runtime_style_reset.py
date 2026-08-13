@@ -249,7 +249,7 @@ class RuntimeStyleResetTests(unittest.TestCase):
 
     def test_reset_wide_call_and_dependency_topology_is_complete(self) -> None:
         application = OFFICIAL.read_bytes()[32:]
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []
@@ -301,7 +301,7 @@ class RuntimeStyleResetTests(unittest.TestCase):
         self,
     ) -> None:
         application = OFFICIAL.read_bytes()[32:]
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         def span(start: int, end: int) -> bytes:

@@ -93,10 +93,10 @@ address planning, and adapters into those providers.
 Run:
 
 ```sh
-python3 scripts/firmware/summarize_r1_connection_control.py \
-  docs/r1-firmware-decompilation/rebuild/rebuilt-application.bin
-python3 scripts/firmware/emulate_r1_connection_control.py \
-  docs/r1-firmware-decompilation/rebuild/rebuilt-application.bin
+python3 tools/summarize_r1_connection_control.py \
+  research/decompilation/rebuild/rebuilt-application.bin
+python3 tools/emulate_r1_connection_control.py \
+  research/decompilation/rebuild/rebuilt-application.bin
 ```
 
 The summarizer authenticates the application image, ten related ranges, both registration records,

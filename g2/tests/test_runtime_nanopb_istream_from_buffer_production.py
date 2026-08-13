@@ -315,7 +315,7 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
         cls.host_test.argtypes = []
         cls.host_test.restype = ctypes.c_int
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         cls.apollo_overlay = apollo_overlay
         cls.package = OFFICIAL.read_bytes()

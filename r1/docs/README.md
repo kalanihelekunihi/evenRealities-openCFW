@@ -10,32 +10,28 @@ one, [`SECURITY.md`](SECURITY.md), [`PROVENANCE.md`](PROVENANCE.md), and
 
 | Directory | What it holds |
 | --- | --- |
-| [`correlation/`](correlation) | one record per subsystem, pinning recovered behavior to the stock image — exact addresses, byte counts, record layouts, and how this implementation corresponds to them |
-| [`boundaries/`](boundaries) | one record per licensed-provider seam — what the R1-owned adapter implements, and what stays disabled until that provider is supplied |
+| [`correlation/`](correlation) | one record per subsystem, pinning recovered behavior to the stock image -- exact addresses, byte counts, record layouts, and how this implementation corresponds to them |
+| [`boundaries/`](boundaries) | one record per licensed-provider seam -- what the R1-owned adapter implements, and what stays disabled until that provider is supplied |
 | [`closures/`](closures) | Nordic SDK closure proofs |
-| [`reference/`](reference) | function ownership, coverage, the remaining frontier, and the BSim run summaries under `reference/bsim/` |
+| [`reference/`](reference) | function ownership, coverage, the capability ledger, the remaining frontier, and the BSim run summaries under `reference/bsim/` |
 
 To understand what the firmware *does*, read `correlation/`. To understand what
 it deliberately refuses to do without a licensed provider, read `boundaries/`.
 
-## Analysis tooling
+## Reproducing any claim here
 
-The evidence these documents rest on -- the decompilation corpus, the Ghidra
-BSim correlations, the executable emulation models, and the per-subsystem
-`summarize_r1_*.py` pinning scripts -- was produced in a separate research
-workspace, under `scripts/firmware/`. Those scripts read a decompilation corpus
-and rebuilt images that are derived data, and they are not part of this
-repository.
+Each correlation document ends with the command that regenerates its numbers.
+Those commands run in this repository:
 
-Citations to them are written as plain paths (`scripts/firmware/summarize_r1_*.py`,
-`run_r1_application_source_correlation.sh`) rather than links. They record which
-tool established a given pin, so a reader with access to that workspace can
-re-derive it. The same applies to citations of the SybilSight R1 protocol
-controllers and the R1 firmware-analysis documents.
+```sh
+make -C r1/research/decompilation/rebuild verify   # reconstruct the pinned images
+python3 tools/summarize_r1_<subsystem>.py          # from the r1/ directory
+make -C r1 verify                                  # the whole evidence gate at once
+```
 
-What *is* reproducible from this repository alone: every hash and dimension
-quoted below, checked against your own copy of the pinned images, and the full
-`r1` test suite (`make -C r1 test sanitize`).
+The reconstruction needs the vendor byte arrays, which are supplied locally --
+see [`../research/decompilation/rebuild/PROVENANCE.md`](../research/decompilation/rebuild/PROVENANCE.md).
+The firmware itself builds and passes its full test suite without them.
 
 ## Outcome
 
@@ -126,10 +122,10 @@ The implementation is pinned to these repository-owned evidence sets:
 - The recovered cross-peripheral name registry and nine operation/list functions remain an
   unidentified, non-reimplemented framework boundary; see
   [`GENERIC-DEVICE-REGISTRY-BOUNDARY.md`](boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md).
-- The current 733-function / 44,218-byte unclassified frontier, plus nine separately blocked
+- The current 685-function / 36,288-byte unclassified frontier, plus nine separately blocked
   generic device-registry candidates, fourteen blocked time/calendar-provider candidates, forty
   software-TWI-provider candidates, seven RTC-device-provider candidates, and thirteen
-  sensor-algorithm heap-provider candidates, plus three sensor-stream framework candidates, and
+  sensor-algorithm heap-provider candidates, plus four sensor-stream framework candidates, and
   the next evidence-ranked closure
   are recorded in
   [`REMAINING-FUNCTION-FRONTIER.md`](reference/REMAINING-FUNCTION-FRONTIER.md).
@@ -142,6 +138,24 @@ The implementation is pinned to these repository-owned evidence sets:
   R1 behaviors and three GoMore provider bodies. The local APIs retain the existing five-byte EUS
   producer and add only battery diagnostic cadence and payload-redacting `ep.bin` cursor recovery.
   See [`FRONTIER-264-274-CORRELATION.md`](correlation/FRONTIER-264-274-CORRELATION.md).
+- The five-function 256...262-byte inventory frontier (including one corrected 272-byte extent)
+  plus eight exclusive helpers is closed as two R1 policies, one bounded R1/Goodix adapter, and
+  ten GoMore provider bodies. See
+  [`FRONTIER-256-262-CORRELATION.md`](correlation/FRONTIER-256-262-CORRELATION.md).
+- The five-function 230...248-byte inventory frontier plus twelve supporting helpers is closed as
+  eleven R1 product/data entries, three GoMore provider bodies, and three blocked shared-runtime
+  entries. The local work reuses the bounded `kv.bin` store and adds only `ep.bin` readiness and
+  legacy device-info formatting over caller-supplied data. See
+  [`FRONTIER-230-248-CORRELATION.md`](correlation/FRONTIER-230-248-CORRELATION.md).
+- The seven-function 212...222-byte inventory frontier is closed with three corrected executable
+  extents: five bounded R1 product/provider seams, one Goodix provider body, and one blocked
+  sensor-stream scheduler. See
+  [`FRONTIER-212-222-CORRELATION.md`](correlation/FRONTIER-212-222-CORRELATION.md).
+- The five-function / 1,030-byte 204...210-byte frontier is closed as four bounded R1
+  policies/adapters and one blocked unattributed shared tensor-arena allocator. Nordic GAP and
+  FAL/device access use their admitted provider APIs; the sensor-stream framework is not
+  recreated. See
+  [`FRONTIER-204-210-CORRELATION.md`](correlation/FRONTIER-204-210-CORRELATION.md).
 - The 402-byte PMIC charge-event boundary is implemented as a pure status-template and thermal
   action planner in [`PMIC-CHARGE-EVENT-CORRELATION.md`](correlation/PMIC-CHARGE-EVENT-CORRELATION.md);
   YHM2710, ST25DVxxKC, timers/events, logging, and live transport remain provider-owned.
@@ -279,8 +293,8 @@ The implementation is pinned to these repository-owned evidence sets:
   [`VALIDATED-SLEEP-DELIVERY-CORRELATION.md`](correlation/VALIDATED-SLEEP-DELIVERY-CORRELATION.md). OpenR1
   keeps the event/logging frameworks external and replaces the stock destructive reset with an
   explicit error for deployer-owned recovery.
-- The indirect 434-byte signed-int8 pooling executor shared by GoMore and Goodix graph builders
-  is isolated in
+- Six functions / 1,328 bytes of shared quantized-neural machinery—including the indirect
+  signed-int8 pooling executor, float quantizer, int8-add executor, and tensor-arena compactor—are isolated in
   [`QUANTIZED-POOLING-PROVIDER-BOUNDARY.md`](boundaries/QUANTIZED-POOLING-PROVIDER-BOUNDARY.md). No local
   executor or generic library substitution is admitted until an exact source, version, license,
   descriptor ABI, and tensor behavior are authenticated.
@@ -408,9 +422,9 @@ The implementation is pinned to these repository-owned evidence sets:
 - The exact clock/calendar/backend cluster and its unresolved source-admission gate are documented
   in [`TIME-CALENDAR-PROVIDER-BOUNDARY.md`](boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md).
 
-- `../r1-firmware-decompilation/README.md`: the complete
+- [`../research/decompilation/README.md`](../research/decompilation/README.md): the complete
   supplied-image function, address, symbol, call-graph, disassembly, and decompiler corpus.
-- `../r1-bootloader-reconstruction/README.md`:
+- [`../r1-bootloader-reconstruction/README.md`](README.md):
   bootloader control-flow and memory reconstruction.
 - `../r1-2.2.6.0009-firmware-analysis.md`: subsystem-level
   behavioral findings and exact handlers.
@@ -420,13 +434,13 @@ The implementation is pinned to these repository-owned evidence sets:
   including R1-193 through R1-202.
 - `../r1-firmware-security-follow-up.md`: application,
   bootloader, update, ACL, debug, and malformed-input findings.
-- [`reference/bsim/APPLICATION-SOURCE-CORRELATION.md`](reference/bsim/APPLICATION-SOURCE-CORRELATION.md):
+- [`generated/application-source-correlation/README.md`](README.md):
   reproducible 31,776-row semantic comparison against the symbol-bearing Nordic SDK reference;
   candidates remain subject to function-local review.
-- [`reference/bsim/ST25DVXXKC-SOURCE-CORRELATION.md`](reference/bsim/ST25DVXXKC-SOURCE-CORRELATION.md):
+- [`generated/st25dvxxkc-source-correlation/README.md`](README.md):
   reproducible 31,776-row comparison against a symbol-bearing build of ST's pinned ST25DVxxKC
   component, including exact `ReadReg` and `WriteReg` anchors.
-- `../../Vendor/SybilSightBluetoothSDK/ios/Source/controllers/R1.swift`
+- the version-pinned Swift R1 protocol controllers and their tests (external to this repository)
   and `R1ProtocolModels.swift`:
   version-pinned, tested executable specifications.
 
@@ -437,15 +451,15 @@ separate vendor-source policy and exact dependency inventory are in
 Source admission is also enforced for every recovered function by
 [`FUNCTION-OWNERSHIP.csv`](reference/FUNCTION-OWNERSHIP.csv). Unclassified functions are blocked for
 ownership research rather than presumed eligible for rewriting; methodology and dispositions are
-documented in [`FUNCTION-OWNERSHIP.md`](reference/FUNCTION-OWNERSHIP.md). The exact 755-entry Nordic mapping
-(537 application and 218 bootloader entries) and thirteen-entry SDK-bundled SEGGER mapping, plus the R1
+documented in [`FUNCTION-OWNERSHIP.md`](reference/FUNCTION-OWNERSHIP.md). The exact 756-entry Nordic mapping
+(538 application and 218 bootloader entries) and thirteen-entry SDK-bundled SEGGER mapping, plus the R1
 log-prefix adapter boundary, are documented in
 [`NORDIC-SDK-CORRELATION.md`](correlation/NORDIC-SDK-CORRELATION.md). The standard-C/EABI provider subset is
 documented in [`TOOLCHAIN-RUNTIME-CORRELATION.md`](correlation/TOOLCHAIN-RUNTIME-CORRELATION.md).
-The current ledger has 256 GoMore-gated entries, three bounded R1/GoMore adapters, three bounded
+The current ledger has 269 GoMore-gated entries, three bounded R1/GoMore adapters, three bounded
 R1 health-storage provider adapters, fifteen R1 TWI provider adapters, nine R1 direct
-record-binding configuration adapters, 395
-Goodix-gated provider/demo/closure entries, 17 clean-room R1/Goodix adapters, 12 clean-room
+record-binding configuration adapters, 394
+Goodix-gated provider/demo/closure entries, 18 clean-room R1/Goodix adapters, 12 clean-room
 R1/IQS7211E configuration/port/policy adapters, 23 clean-room common motion adapters, 27
 ST25DVxxKC provider bodies, eleven R1/ST25DVxxKC adapters, five R1 `i2c_5`/power resource adapters,
 ten R1 internal-flash adapters, four R1 analog adapters, nine blocked generic device-registry
@@ -460,7 +474,7 @@ health crash-record lifecycle functions, one R1/FlashDB handle accessor, one R1 
 startup orchestrator, and nine
 scalar-health daily-cache callbacks. The ledger
 also admits fifteen temperature/stress storage-cache functions while keeping GXCAS and GoMore
-providers gated. It now leaves 733 unclassified
+providers gated. It now leaves 685 unclassified
 application entries. The gated provider bodies and
 unclassified entries are not
 eligible for local implementation. IQS7211E's admitted adapters are compiled and linked, but cannot
@@ -707,7 +721,7 @@ make -C openR1 test
 make -C openR1 sanitize
 make -C openR1 arm-objects
 make -C openR1 sim
-python3 scripts/firmware/verify_openr1.py
+python3 tools/verify_openr1.py
 ```
 
 The first command uses strict warnings as errors. The second runs AddressSanitizer and

@@ -1000,6 +1000,73 @@ static void test_legacy_command_routing(void) {
                frame, 3u, workspace, sizeof workspace, NULL) == R1_ERROR_ARGUMENT);
 }
 
+static void test_legacy_device_info_builder(void) {
+    r1_legacy_device_info_sources sources = {
+        .product_bsn_length = 21u,
+        .product_sn_length = 15u,
+        .configuration_byte_0x70 = 0x70u,
+        .configuration_word_0x74 = UINT32_C(0x12345678),
+        .configuration_byte_0x78 = 0x78u,
+    };
+    for (size_t index = 0u; index < R1_LEGACY_PRODUCT_BSN_BYTES; ++index) {
+        sources.product_bsn[index] = (uint8_t)(0x20u + index);
+        sources.product_sn[index] = (uint8_t)(0x60u + index);
+    }
+    for (size_t index = 0u; index < 6u; ++index) {
+        sources.temperature_calibration[index] = (uint8_t)(0xa0u + index);
+        sources.accelerometer_calibration[index] = (uint8_t)(0xb0u + index);
+    }
+    for (size_t index = 0u; index < 20u; ++index) {
+        sources.device_identity[index] = (uint8_t)(0xc0u + index);
+    }
+
+    uint8_t prefix[4u] = {0x11u, 0x22u, 0x33u, 0u};
+    r1_legacy_device_info_response response;
+    assert(r1_legacy_device_info_build(prefix, &sources, &response) == R1_OK);
+    assert(response.length == 25u && memcmp(response.bytes, prefix, 4u) == 0);
+    assert(memcmp(response.bytes + 4u, sources.product_bsn, 21u) == 0);
+
+    prefix[3] = 1u;
+    assert(r1_legacy_device_info_build(prefix, &sources, &response) == R1_OK);
+    assert(response.length == 25u);
+    assert(memcmp(response.bytes + 4u, sources.product_sn, 15u) == 0);
+    for (size_t index = 19u; index < 25u; ++index) {
+        assert(response.bytes[index] == 0u);
+    }
+    sources.product_sn_length = UINT8_MAX;
+    assert(r1_legacy_device_info_build(prefix, &sources, &response) == R1_OK);
+    for (size_t index = 4u; index < 19u; ++index) {
+        assert(response.bytes[index] == UINT8_MAX);
+    }
+
+    prefix[3] = 2u;
+    assert(r1_legacy_device_info_build(prefix, &sources, &response) == R1_OK);
+    assert(response.length == 13u);
+    assert(memcmp(response.bytes + 4u, sources.temperature_calibration, 6u) == 0);
+    assert(memcmp(response.bytes + 10u, sources.accelerometer_calibration, 6u) == 0);
+
+    prefix[3] = 3u;
+    assert(r1_legacy_device_info_build(prefix, &sources, &response) == R1_OK);
+    assert(response.length == 43u);
+    for (size_t index = 4u; index < 40u; ++index) {
+        assert(response.bytes[index] == UINT8_MAX);
+    }
+    assert(response.bytes[40] == 0x70u && response.bytes[41] == 0x78u &&
+           response.bytes[42] == 0x78u);
+
+    prefix[3] = 4u;
+    assert(r1_legacy_device_info_build(prefix, &sources, &response) == R1_OK);
+    assert(response.length == 24u);
+    assert(memcmp(response.bytes + 4u, sources.device_identity, 20u) == 0);
+
+    prefix[3] = 5u;
+    assert(r1_legacy_device_info_build(prefix, &sources, &response) ==
+           R1_ERROR_UNSUPPORTED);
+    assert(response.length == 0u);
+    assert(r1_legacy_device_info_build(NULL, &sources, &response) ==
+           R1_ERROR_ARGUMENT);
+}
+
 static void test_ati_calibration_command(void) {
     const r1_ati_calibration_observation observation = {
         true, 0x12u, 0x34u, 9u
@@ -6406,6 +6473,301 @@ static void test_next_frontier_256_262_policies(void) {
                snapshot, 5u, output, 123u, &written) == R1_ERROR_CAPACITY);
 }
 
+static void test_next_frontier_230_248_policies(void) {
+    r1_ep_initialization_plan plan;
+    assert(r1_ep_plan_initialization(
+               false, false, false, 0u, &plan) == R1_OK);
+    assert(!plan.initialized && !plan.retain_partition && !plan.retain_device);
+    assert(plan.reason == R1_EP_INITIALIZATION_PARTITION_NOT_FOUND);
+    assert(r1_ep_plan_initialization(
+               false, true, false, R1_EP_PARTITION_BYTES, &plan) == R1_OK);
+    assert(plan.reason == R1_EP_INITIALIZATION_DEVICE_NOT_FOUND);
+    assert(r1_ep_plan_initialization(
+               false, true, true, R1_EP_PARTITION_BYTES - 1u, &plan) == R1_OK);
+    assert(plan.reason == R1_EP_INITIALIZATION_PARTITION_TOO_SMALL);
+    assert(!plan.initialized && !plan.scan_cursor);
+    assert(r1_ep_plan_initialization(
+               false, true, true, R1_EP_PARTITION_BYTES, &plan) == R1_OK);
+    assert(plan.initialized && plan.retain_partition && plan.retain_device);
+    assert(plan.scan_cursor && plan.reason == R1_EP_INITIALIZATION_READY);
+    assert(r1_ep_plan_initialization(
+               true, false, false, 0u, &plan) == R1_OK);
+    assert(plan.initialized && plan.retain_partition && plan.retain_device);
+    assert(!plan.scan_cursor && plan.reason == R1_EP_INITIALIZATION_READY);
+    assert(r1_ep_plan_initialization(
+               false, true, true, R1_EP_PARTITION_BYTES, NULL) ==
+           R1_ERROR_ARGUMENT);
+}
+
+static void test_next_frontier_224_230_policies(void) {
+    r1_delayed_event_state delayed = {0};
+    delayed.last_timer_start_milliseconds = 1000u;
+    delayed.last_timer_delay_milliseconds = 500u;
+    delayed.slots[0] = (r1_delayed_event_slot){0x1111u, 0xaaaau, 1500u};
+    delayed.slots[1] = (r1_delayed_event_slot){0x2222u, 0xbbbbu, 1800u};
+    delayed.slots[2] = (r1_delayed_event_slot){0x1111u, 0xccccu, 1900u};
+    r1_delayed_event_cancel_result cancelled;
+    assert(r1_delayed_event_cancel(
+               &delayed, 0x1111u, 0xaaaau, 2048u, &cancelled) == R1_OK);
+    assert(cancelled.removed_count == 1u && cancelled.worker_wakeup_requested);
+    assert(cancelled.elapsed_milliseconds == 1000u);
+    assert(delayed.slots[0].event == 0u && delayed.slots[1].event == 0x2222u);
+    assert(delayed.slots[1].remaining_milliseconds == 800u);
+    assert(delayed.slots[2].remaining_milliseconds == 900u);
+    assert(cancelled.timer_step.next_delay_milliseconds == 800u);
+    assert(r1_delayed_event_cancel(
+               &delayed, 0x1111u, 0u, 2048u, &cancelled) == R1_OK);
+    assert(cancelled.removed_count == 1u);
+    assert(r1_delayed_event_cancel(
+               &delayed, 0u, 0u, 0u, &cancelled) == R1_ERROR_ARGUMENT);
+
+    r1_heart_rate_mode_transition_plan heart_rate;
+    assert(r1_heart_rate_mode_plan_transition(
+               0u, 1u, true, false, false, false, &heart_rate) == R1_OK);
+    assert(heart_rate.changed && heart_rate.unregister_previous_stream);
+    assert(heart_rate.create_mode_timer &&
+           heart_rate.mode_timer_period == R1_HEART_RATE_TIMED_MODE_PERIOD);
+    assert(r1_heart_rate_mode_plan_transition(
+               1u, 2u, false, true, true, true, &heart_rate) == R1_OK);
+    assert(heart_rate.stop_mode_timer && heart_rate.stop_measurement_timer);
+    assert(heart_rate.stop_hrv_timer && heart_rate.clear_hrv_timing_state);
+    assert(!heart_rate.create_mode_timer);
+    assert(r1_heart_rate_mode_plan_transition(
+               4u, 0u, false, false, false, false, &heart_rate) ==
+           R1_ERROR_ARGUMENT);
+
+    r1_ring_stability_state stability;
+    r1_ring_stability_initialize(&stability);
+    r1_ring_stability_result stability_result;
+    for (size_t index = 0u; index < 7u; ++index) {
+        assert(r1_ring_stability_observe(
+                   &stability, 0.05f, true, &stability_result) == R1_OK);
+        assert(!stability_result.evaluated);
+    }
+    for (size_t index = 0u; index < 599u; ++index) {
+        assert(r1_ring_stability_observe(
+                   &stability, 0.05f, true, &stability_result) == R1_OK);
+    }
+    assert(stability_result.evaluated && !stability_result.detected);
+    assert(stability_result.low_motion_count == 599u);
+    assert(r1_ring_stability_observe(
+               &stability, 0.05f, true, &stability_result) == R1_OK);
+    assert(stability_result.detected && stability_result.state_changed);
+    assert(stability_result.callback_requested);
+    assert(r1_ring_stability_observe(
+               &stability, 0.051f, false, &stability_result) == R1_OK);
+    assert(!stability_result.detected && stability_result.state_changed);
+    assert(!stability_result.callback_requested);
+
+    r1_phy_update_plan phy;
+    assert(r1_connection_phy_update_plan(
+               7u, true, 1u, 4u, &phy) == R1_OK);
+    assert(phy.request_update && phy.connection == 7u);
+    assert(phy.transmit_phy == 1u && phy.receive_phy == 4u);
+    assert(r1_connection_phy_update_plan(
+               R1_CONNECTION_HANDLE_INVALID, true, 1u, 1u, &phy) ==
+           R1_ERROR_STATE);
+    assert(!phy.request_update);
+    assert(r1_connection_phy_update_plan(
+               7u, false, 1u, 1u, &phy) == R1_ERROR_STATE);
+}
+
+static void test_next_frontier_212_222_policies(void) {
+    r1_bae8_hvx_retry_plan hvx;
+    assert(r1_bae8_plan_hvx_result(
+               false, true, R1_TX_DROP, 0u, &hvx) == R1_OK);
+    assert(hvx.release_credit && !hvx.retry_once &&
+           hvx.retry_delay_ticks == 0u);
+    assert(r1_bae8_plan_hvx_result(
+               true, true, R1_TX_RESOURCES, 0u, &hvx) == R1_OK);
+    assert(hvx.release_credit && hvx.retry_once &&
+           hvx.retry_delay_ticks == R1_EUS_RESOURCE_RETRY_TICKS);
+    assert(r1_bae8_plan_hvx_result(
+               true, true, R1_TX_RESOURCES, 1u, &hvx) == R1_OK);
+    assert(hvx.release_credit && !hvx.retry_once);
+    assert(r1_bae8_plan_hvx_result(
+               true, false, R1_TX_RESOURCES, 0u, &hvx) == R1_OK);
+    assert(!hvx.release_credit && !hvx.retry_once);
+
+    r1_fds_event_plan fds;
+    assert(r1_fds_plan_event(
+               1u, 0u, UINT16_C(0x25), UINT32_C(0x12345678),
+               true, false, &fds) == R1_OK);
+    assert(fds.publish_event &&
+           fds.persistence_event == R1_FDS_PERSISTENCE_RECORD_SUCCEEDED);
+    assert(fds.logical_record_key == UINT16_C(0x4025));
+    assert(fds.record_id == UINT32_C(0x12345678));
+    assert(r1_fds_plan_event(
+               3u, 7u, 2u, 9u, true, false, &fds) == R1_OK);
+    assert(fds.publish_event && fds.updated_record &&
+           fds.persistence_event == R1_FDS_PERSISTENCE_RECORD_FAILED &&
+           fds.provider_result == 7u);
+    assert(r1_fds_plan_event(
+               4u, 0u, 3u, 0u, true, false, &fds) == R1_OK);
+    assert(fds.clear_file_bookkeeping && fds.mark_retry_pending &&
+           fds.request_next_queued_operation);
+    assert(fds.persistence_event ==
+           R1_FDS_PERSISTENCE_FILE_DELETE_SUCCEEDED);
+    assert(r1_fds_plan_event(
+               5u, 8u, 0u, 0u, false, true, &fds) == R1_OK);
+    assert(fds.publish_event && fds.logical_record_key == UINT16_MAX &&
+           fds.request_next_queued_operation &&
+           fds.persistence_event == R1_FDS_PERSISTENCE_GC_FAILED);
+    assert(r1_fds_plan_event(
+               2u, 0u, 1u, 1u, false, false, &fds) == R1_OK);
+    assert(!fds.publish_event);
+
+    r1_sleep_sync_ack_plan acknowledgement;
+    assert(r1_sleep_sync_plan_acknowledgement(
+               false, false, &acknowledgement) == R1_OK);
+    assert(!acknowledgement.publish_event &&
+           !acknowledgement.release_context);
+    assert(r1_sleep_sync_plan_acknowledgement(
+               true, true, &acknowledgement) == R1_OK);
+    assert(acknowledgement.publish_event &&
+           acknowledgement.release_context &&
+           !acknowledgement.publish_failed);
+    assert(acknowledgement.event_identifier == R1_SLEEP_SYNC_MARK_EVENT);
+    assert(acknowledgement.event_payload_length ==
+           R1_SLEEP_SYNC_ACK_CONTEXT_BYTES);
+    assert(r1_sleep_sync_plan_acknowledgement(
+               true, false, &acknowledgement) == R1_OK);
+    assert(acknowledgement.publish_failed &&
+           acknowledgement.release_context);
+
+    r1_system_control_command_37_result control;
+    assert(r1_system_control_command_37_plan(
+               0u, 59u, 0u, 0u, &control) == R1_OK);
+    assert(control.send_reply && control.reply_length == 5u &&
+           control.zero_reply_byte4);
+    assert(r1_system_control_command_37_plan(
+               2u, 0u, UINT8_C(0x54), 0u, &control) == R1_OK);
+    assert(control.send_reply && control.reply_length == 5u);
+    assert(control.set_configuration_byte &&
+           control.configuration_byte == UINT8_C(0x5a));
+    assert(control.refresh_configuration && control.delay_requested);
+    assert(control.delay_ticks == R1_SYSTEM_CONTROL_DELAY_TICKS);
+    assert(control.persist_reset_trace && control.system_reset_requested);
+    assert(control.reset_action == R1_SYSTEM_CONTROL_RESET_STANDARD);
+    assert(r1_system_control_command_37_plan(
+               2u, 0u, UINT8_C(0x55), 0u, &control) == R1_OK);
+    assert(!control.persist_reset_trace &&
+           control.reset_action == R1_SYSTEM_CONTROL_RESET_ALTERNATE);
+    assert(r1_system_control_command_37_plan(
+               3u, 1u, 0u, 0u, &control) == R1_OK);
+    assert(control.send_reply && control.system_reset_requested &&
+           control.reset_action == R1_SYSTEM_CONTROL_RESET_CONFIRMED);
+    assert(r1_system_control_command_37_plan(
+               4u, 0u, 0u, 60u, &control) == R1_OK);
+    assert(control.send_reply && control.reply_length == 64u);
+    assert(r1_system_control_command_37_plan(
+               4u, 0u, 0u, 61u, &control) == R1_ERROR_CAPACITY);
+    assert(r1_system_control_command_37_plan(
+               5u, 0u, 0u, 0u, &control) == R1_OK);
+    assert(!control.send_reply && control.persist_reset_trace &&
+           control.configuration_byte == UINT8_C(0x55));
+    assert(r1_system_control_command_37_plan(
+               UINT8_C(0xff), 0u, 0u, 0u, &control) == R1_OK);
+    assert(!control.send_reply && !control.system_reset_requested);
+}
+
+static void test_next_frontier_204_210_policies(void) {
+    r1_sensor_stream_registration_plan_result streams;
+    assert(r1_sensor_stream_registration_plan(&streams) == R1_OK);
+    assert(streams.initialize_goodix && streams.clear_state);
+    assert(streams.clear_bytes == R1_SENSOR_STREAM_STATE_BYTES);
+    assert(streams.callback_count == R1_SENSOR_STREAM_CALLBACK_COUNT);
+    static const char *const names[] = {
+        "hr", "spo2", "raw_hr", "wear", "gray", "aging", "hrv", "adt",
+    };
+    static const uint16_t sizes[] = {4u, 6u, 124u, 2u, 12u, 12u, 10u, 24u};
+    static const uint8_t types[] = {1u, 2u, 5u, 3u, 8u, 9u, 4u, 7u};
+    for (size_t index = 0u; index < R1_SENSOR_STREAM_REGISTRATION_COUNT;
+         ++index) {
+        assert(strcmp(streams.registrations[index].name, names[index]) == 0);
+        assert(streams.registrations[index].payload_bytes == sizes[index]);
+        assert(streams.registrations[index].type == types[index]);
+        assert(streams.registrations[index].enabled);
+    }
+    assert(r1_sensor_stream_registration_plan(NULL) == R1_ERROR_ARGUMENT);
+
+    r1_activity_offline_queue queue;
+    r1_activity_offline_initialize(&queue);
+    const uint32_t words[6] = {1u, 0u, 2u, 3u, 4u, 5u};
+    r1_activity_flash_record_enqueue_result activity;
+    assert(r1_activity_flash_record_enqueue_plan(
+               &queue, 100u, -60, 2u, words, 150u, 200u, 200u,
+               &activity) == R1_OK);
+    assert(activity.action == R1_ACTIVITY_FLASH_RECORD_ACCEPTED);
+    assert(activity.attempted_count == 6u && activity.enqueued_count == 5u);
+    assert(activity.dropped_count == 1u && queue.count == 5u);
+    assert(queue.entries[0].bucket_index == 12u);
+    assert(queue.entries[4].bucket_index == 17u);
+    assert(r1_activity_flash_record_enqueue_plan(
+               &queue, 100u, 0, 24u, words, 150u, 200u, 200u,
+               &activity) == R1_OK);
+    assert(activity.action == R1_ACTIVITY_FLASH_RECORD_IGNORED_HOUR);
+    assert(activity.attempted_count == 0u && queue.count == 5u);
+    assert(r1_activity_flash_record_enqueue_plan(
+               &queue, 100u, 0, 0u, words, 201u, 200u, 300u,
+               &activity) == R1_OK);
+    assert(activity.action ==
+           R1_ACTIVITY_FLASH_RECORD_IGNORED_MAXIMUM_TIMESTAMP);
+    assert(r1_activity_flash_record_enqueue_plan(
+               &queue, 100u, 0, 0u, words, 250u, 300u, 200u,
+               &activity) == R1_OK);
+    assert(activity.action == R1_ACTIVITY_FLASH_RECORD_IGNORED_FUTURE_RECORDED);
+    assert(r1_activity_flash_record_enqueue_plan(
+               &queue, 201u, 0, 0u, words, 150u, 300u, 200u,
+               &activity) == R1_OK);
+    assert(activity.action == R1_ACTIVITY_FLASH_RECORD_IGNORED_FUTURE_DAY);
+
+    r1_connection_parameter_mode_plan connection;
+    assert(r1_connection_parameter_mode_adapter(
+               7u, 7u, 8u, 1u, 0u, false, false, &connection) == R1_OK);
+    assert(connection.set_preferred && connection.request_update);
+    assert(connection.mark_fast_active);
+    assert(connection.parameter_set == R1_CONNECTION_PARAMETER_SET_FAST_A);
+    assert(r1_connection_parameter_mode_adapter(
+               7u, 7u, 8u, 1u, 0u, false, true, &connection) == R1_OK);
+    assert(connection.parameter_set == R1_CONNECTION_PARAMETER_SET_FAST_B);
+    assert(r1_connection_parameter_mode_adapter(
+               8u, 7u, 8u, 2u, 0u, false, false, &connection) == R1_OK);
+    assert(connection.parameter_set == R1_CONNECTION_PARAMETER_SET_GLASSES);
+    assert(r1_connection_parameter_mode_adapter(
+               8u, 7u, 8u, 2u, 0u, true, false, &connection) == R1_OK);
+    assert(!connection.set_preferred && !connection.request_update);
+    assert(r1_connection_parameter_mode_adapter(
+               7u, 7u, 8u, 0u, 1u, false, false, &connection) == R1_OK);
+    assert(connection.parameter_set == R1_CONNECTION_PARAMETER_SET_DEFAULT);
+    assert(!connection.mark_fast_active);
+    assert(r1_connection_parameter_mode_adapter(
+               R1_CONNECTION_HANDLE_INVALID, 7u, 8u, 0u, 1u, false, false,
+               &connection) == R1_OK);
+    assert(!connection.request_update);
+
+    uint8_t flash_bytes[96];
+    r1_memory_flash memory;
+    r1_memory_flash_initialize(&memory, flash_bytes, sizeof flash_bytes);
+    const uint32_t magic = UINT32_C(0x52494e47);
+    flash_bytes[2u * 32u + R1_FLASH_SLOT_MAGIC_OFFSET] = (uint8_t)magic;
+    flash_bytes[2u * 32u + R1_FLASH_SLOT_MAGIC_OFFSET + 1u] =
+        (uint8_t)(magic >> 8u);
+    flash_bytes[2u * 32u + R1_FLASH_SLOT_MAGIC_OFFSET + 2u] =
+        (uint8_t)(magic >> 16u);
+    flash_bytes[2u * 32u + R1_FLASH_SLOT_MAGIC_OFFSET + 3u] =
+        (uint8_t)(magic >> 24u);
+    const r1_flash flash = r1_memory_flash_interface(&memory);
+    r1_latest_valid_flash_slot_scan_result scan;
+    assert(r1_latest_valid_flash_slot_scan_adapter(
+               &flash, 0u, 32u, 4u, magic, &scan) == R1_OK);
+    assert(scan.found && scan.latest_slot == 2u && scan.next_slot == 3u);
+    assert(scan.read_count == 2u && scan.provider_read_failed);
+    assert(r1_latest_valid_flash_slot_scan_adapter(
+               &flash, 0u, 32u, 2u, magic, &scan) == R1_OK);
+    assert(!scan.found && scan.next_slot == 0u && scan.read_count == 2u);
+}
+
 int main(void) {
     test_checksums();
     test_retained_crash_log();
@@ -6422,6 +6784,7 @@ int main(void) {
     test_fragment_boundaries();
     test_dispatch();
     test_legacy_command_routing();
+    test_legacy_device_info_builder();
     test_ati_calibration_command();
     test_health_history_routing();
     test_activity_cumulative_counter_service();
@@ -6476,6 +6839,10 @@ int main(void) {
     test_next_frontier_280_308_policies();
     test_next_frontier_264_274_policies();
     test_next_frontier_256_262_policies();
+    test_next_frontier_230_248_policies();
+    test_next_frontier_224_230_policies();
+    test_next_frontier_212_222_policies();
+    test_next_frontier_204_210_policies();
     puts("openR1: all tests passed");
     return 0;
 }

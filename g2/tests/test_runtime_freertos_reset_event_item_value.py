@@ -209,7 +209,7 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
             text=True,
         )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay
@@ -761,10 +761,10 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                121_706,
+                142_578,
                 (
-                    "9e5004af49fb14a22e7e7ed7357e4c10"
-            "f87dc8da3a7fb4d7b97fcffcde804c43"
+                    "3d5c9fe87fd46cbc40bb5670653f45d3"
+            "d61f9d777168aa47b70fb10712698ab4"
                 ),
                 615,
                 578,
@@ -784,10 +784,10 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                3_645_102,
+                3_665_974,
                 (
-                    "8722e5565bf54dade66fb751155c11eb"
-            "d128d7a12853e3e4b8671c3c97807827"
+                    "5cef32ba7350e7f6476336fa6a087010"
+            "e6143e3e692205215c271430aa110d22"
                 ),
                 84_654,
                 84_836,
@@ -812,10 +812,10 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 )
             },
             {
-                "expected_size": 4_423_556,
+                "expected_size": 4_444_468,
                 "expected_sha256": (
-                    "f2688fb35061283c05e9eb165d4f3eeb"
-            "2cb2c4abd18cd28d074e58cb9da021db"
+                    "e6472064c2536c055fb9a47efe49c9d9"
+            "b553ce15ed1bc308115730454e3b94bc"
                 ),
                 "profiles": {
                     "linux-clang": {

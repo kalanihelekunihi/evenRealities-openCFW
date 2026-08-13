@@ -305,7 +305,7 @@ class RuntimeStylePropLookupFlagsTests(unittest.TestCase):
     def test_complete_branch_and_stored_pointer_topology_is_pinned(
         self,
     ) -> None:
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = []

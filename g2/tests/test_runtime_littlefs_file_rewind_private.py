@@ -581,7 +581,7 @@ class RuntimeLittlefsFileRewindPrivateProductionTests(unittest.TestCase):
             )
             cls.objects.append(target)
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         import open_cfw
 

@@ -118,20 +118,20 @@ PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 121_706
+PRODUCTION_OVERLAY_SIZE = 142_578
 PRODUCTION_OVERLAY_SHA256 = (
-    "9e5004af49fb14a22e7e7ed7357e4c10"
-            "f87dc8da3a7fb4d7b97fcffcde804c43"
+    "3d5c9fe87fd46cbc40bb5670653f45d3"
+            "d61f9d777168aa47b70fb10712698ab4"
 )
-PRODUCTION_COMPONENT_SIZE = 3_645_102
+PRODUCTION_COMPONENT_SIZE = 3_665_974
 PRODUCTION_COMPONENT_SHA256 = (
-    "8722e5565bf54dade66fb751155c11eb"
-            "d128d7a12853e3e4b8671c3c97807827"
+    "5cef32ba7350e7f6476336fa6a087010"
+            "e6143e3e692205215c271430aa110d22"
 )
-PACKAGE_SIZE = 4_423_556
+PACKAGE_SIZE = 4_444_468
 PACKAGE_SHA256 = (
-    "f2688fb35061283c05e9eb165d4f3eeb"
-            "2cb2c4abd18cd28d074e58cb9da021db"
+    "e6472064c2536c055fb9a47efe49c9d9"
+            "b553ce15ed1bc308115730454e3b94bc"
 )
 
 
@@ -231,7 +231,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 cls.target_compile.stderr or cls.target_compile.stdout
             )
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         import open_cfw
 

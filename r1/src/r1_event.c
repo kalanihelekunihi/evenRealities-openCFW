@@ -228,3 +228,32 @@ r1_error r1_delayed_event_schedule(
             | (elapsed & R1_DELAYED_EVENT_ELAPSED_MASK),
         kernel_tick, &result->timer_step);
 }
+
+r1_error r1_delayed_event_cancel(
+    r1_delayed_event_state *state, uint32_t event, uint32_t context,
+    uint32_t kernel_tick, r1_delayed_event_cancel_result *result) {
+    if (state == NULL || result == NULL || event == 0u) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *result = (r1_delayed_event_cancel_result){0};
+    for (size_t index = 0u; index < R1_DELAYED_EVENT_CAPACITY; ++index) {
+        r1_delayed_event_slot *slot = &state->slots[index];
+        if (slot->event == event &&
+            (context == 0u || slot->context == context)) {
+            slot->event = 0u;
+            result->removed_count += 1u;
+        }
+    }
+    if (result->removed_count == 0u) {
+        return R1_OK;
+    }
+    const uint32_t now_milliseconds =
+        (kernel_tick * UINT32_C(1000)) >> 10u;
+    result->elapsed_milliseconds =
+        now_milliseconds - state->last_timer_start_milliseconds;
+    result->worker_wakeup_requested = true;
+    return r1_delayed_event_timer_step(
+        state, R1_DELAYED_EVENT_ELAPSED_TAG |
+            (result->elapsed_milliseconds & R1_DELAYED_EVENT_ELAPSED_MASK),
+        kernel_tick, &result->timer_step);
+}

@@ -42,6 +42,12 @@ typedef struct {
 } r1_bae8_event_plan;
 
 typedef struct {
+    bool release_credit;
+    bool retry_once;
+    uint32_t retry_delay_ticks;
+} r1_bae8_hvx_retry_plan;
+
+typedef struct {
     bool wear_changed;
     bool secondary_mode_changed;
     bool cancel_slow_event;
@@ -131,6 +137,9 @@ r1_error r1_runtime_set_security(r1_runtime *runtime, uint16_t connection,
 r1_peer_role r1_runtime_connection_role(const r1_runtime *runtime,
                                         uint16_t connection);
 r1_bae8_event_plan r1_runtime_plan_bae8_event(uint8_t event_type);
+r1_error r1_bae8_plan_hvx_result(
+    bool serialized_path, bool credit_acquired, r1_tx_status status,
+    uint8_t completed_retries, r1_bae8_hvx_retry_plan *plan);
 r1_error r1_ble_thread_message_encode(
     uint32_t message_type, uint32_t context, const uint8_t *payload,
     size_t payload_length, uint8_t *output, size_t output_capacity,

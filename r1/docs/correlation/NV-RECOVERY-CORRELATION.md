@@ -65,7 +65,7 @@ restored. Configuration, power, and ring-size changes are tracked independently.
 
 ## Clean-room implementation and security boundary
 
-[`r1_nv_recovery.c`](../../src/r1_nv_recovery.c) implements a bounded pure report builder
+`r1_nv_recovery.c` implements a bounded pure report builder
 and fill-only merge planner over caller-owned state. It performs no flash write, commit, BLE send,
 allocation, logging, or device access. Tests cover null/length/CRC rejection, all-field recovery,
 valid-local preservation, invalid-incoming rejection, reserved-byte behavior, and the zero-voltage
@@ -80,5 +80,5 @@ The static verifier pins all four bodies, the two manual function extents, compl
 maps, dispatcher/report-builder edges, and exact diagnostics:
 
 ```sh
-python3 scripts/firmware/summarize_r1_nv_recovery_closure.py
+python3 tools/summarize_r1_nv_recovery_closure.py
 ```

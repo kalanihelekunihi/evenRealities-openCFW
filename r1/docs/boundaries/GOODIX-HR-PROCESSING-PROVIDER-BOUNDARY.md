@@ -70,7 +70,7 @@ The static summarizer verifies the supplied application-image hash, the exact si
 every function, every executable segment, and all direct callsites:
 
 ```sh
-python3 scripts/firmware/summarize_r1_goodix_hr_boundary.py
+python3 tools/summarize_r1_goodix_hr_boundary.py
 ```
 
 The census deliberately excludes attributable compiler/runtime functions, the separately gated

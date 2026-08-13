@@ -66,10 +66,10 @@ arguments.
 ## Reproduce
 
 ```sh
-python3 scripts/firmware/summarize_r1_ati_calibration_command.py
-python3 scripts/firmware/build_r1_source_ownership.py --check
+python3 tools/summarize_r1_ati_calibration_command.py
+python3 tools/build_r1_source_ownership.py --check
 make -C openR1 test
 make -C openR1 sanitize
 make -C openR1 arm-objects
-python3 scripts/firmware/verify_openr1.py
+python3 tools/verify_openr1.py
 ```

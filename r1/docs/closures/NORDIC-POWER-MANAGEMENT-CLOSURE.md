@@ -29,5 +29,5 @@ The exact image, body extents, hashes, caller sets, provider configuration, and 
 are checked by:
 
 ```sh
-python3 scripts/firmware/summarize_r1_nordic_power_management_closure.py
+python3 tools/summarize_r1_nordic_power_management_closure.py
 ```

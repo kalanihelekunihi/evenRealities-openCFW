@@ -151,7 +151,7 @@ class RuntimeThemeTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         from apollo_overlay import extract_linked_overlay
 
         (
@@ -408,7 +408,7 @@ class RuntimeThemeTests(unittest.TestCase):
                 (0x00482FC4, 0x00488290, "05f064f9"),
             ],
         }
-        sys.path.insert(0, str(OPENCFW_ROOT / "tools")); sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
+        sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
         import apollo_overlay
 
         callers = {name: [] for name in FUNCTIONS}

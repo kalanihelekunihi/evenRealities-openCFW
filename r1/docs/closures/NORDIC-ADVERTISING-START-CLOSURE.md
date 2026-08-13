@@ -70,5 +70,5 @@ The seven non-start-function hashes are:
 The exact image, extents, Ghidra body, inline table, hashes, and caller sets are checked by:
 
 ```sh
-python3 scripts/firmware/summarize_r1_nordic_advertising_closure.py
+python3 tools/summarize_r1_nordic_advertising_closure.py
 ```

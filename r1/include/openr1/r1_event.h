@@ -84,6 +84,13 @@ typedef struct {
     r1_delayed_event_step_result timer_step;
 } r1_delayed_event_schedule_result;
 
+typedef struct {
+    size_t removed_count;
+    uint32_t elapsed_milliseconds;
+    bool worker_wakeup_requested;
+    r1_delayed_event_step_result timer_step;
+} r1_delayed_event_cancel_result;
+
 void r1_event_plane_initialize(r1_event_plane *plane);
 r1_error r1_event_enqueue(r1_event_plane *plane, bool eus, const r1_tx_event *event);
 bool r1_event_take(r1_event_plane *plane, bool eus, r1_tx_event *event);
@@ -101,5 +108,8 @@ r1_error r1_delayed_event_schedule(
     r1_delayed_event_state *state, uint32_t event, uint32_t context,
     uint32_t delay_milliseconds, uint32_t kernel_tick,
     r1_delayed_event_schedule_result *result);
+r1_error r1_delayed_event_cancel(
+    r1_delayed_event_state *state, uint32_t event, uint32_t context,
+    uint32_t kernel_tick, r1_delayed_event_cancel_result *result);
 
 #endif

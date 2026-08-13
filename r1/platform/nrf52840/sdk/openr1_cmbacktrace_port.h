@@ -6,6 +6,7 @@
 
 void openr1_cmbacktrace_initialize(void);
 void openr1_cmbacktrace_log(const char *format, ...);
+void openr1_cmbacktrace_log_task_snapshot(void);
 
 /* Read-only access for a future authenticated diagnostic transport. */
 size_t openr1_cmbacktrace_retained_log(uint8_t *output, size_t capacity);

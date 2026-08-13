@@ -510,7 +510,7 @@ class FreeRTOSAgentAExactSourceCandidateTests(unittest.TestCase):
                 )
             cls.target_objects[name] = outputs
 
-        sys.path.insert(0, str(ROOT / "tools")); sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "tools"))
         import apollo_overlay
         cls.apollo_overlay = apollo_overlay
         cls.package = OFFICIAL.read_bytes()
