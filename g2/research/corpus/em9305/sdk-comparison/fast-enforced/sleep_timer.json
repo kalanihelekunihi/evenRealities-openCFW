@@ -1,0 +1,178 @@
+{
+  "expected_exact_match_count": 3,
+  "expected_vendor_modified_count": 0,
+  "function_count": 6,
+  "functions": [
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3225452,
+      "masked_byte_count": 0,
+      "matches": [
+        3225452
+      ],
+      "name": "SleepTimer_Init",
+      "normalized_sha256": "df5bd1fc8dd64b3f468b68667b5257206485bc2985959b149e45761e1f1ed24d",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.SleepTimer_Init",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 2,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "SleepTimer_Store",
+      "normalized_sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.SleepTimer_Store",
+      "size": 2
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 2,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "SleepTimer_ReStore",
+      "normalized_sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.SleepTimer_ReStore",
+      "size": 2
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 54,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3225468,
+      "masked_byte_count": 0,
+      "matches": [
+        3225468
+      ],
+      "name": "SleepTimer_SetCompareValue",
+      "normalized_sha256": "d6c79e64e2d49a7f3d134aa715574cae7978dfa7282a2f242d3b1922932a331e",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.SleepTimer_SetCompareValue",
+      "size": 54
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 58,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3225524,
+      "masked_byte_count": 4,
+      "matches": [
+        3225524
+      ],
+      "name": "SleepTimer_SetWakeupTime",
+      "normalized_sha256": "e05207df37d27231724179dd3628aefaa796a38ad5036f749ef936a2fbf61b1f",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.SleepTimer_SetWakeupTime",
+      "size": 62
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 58,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "SleepTimer_DisableWakeupTime",
+      "normalized_sha256": "348a6ec7a49492d6d430d789e21b4af29d248d17cf7bf978c1c2a411c5af43bd",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.SleepTimer_DisableWakeupTime",
+      "size": 58
+    }
+  ],
+  "identity": {
+    "architecture": "ARCv2 EM",
+    "archive_git_blob": "3713f176b7f1614920a3043c4dcb41ba730e3fe0",
+    "archive_kind": "sleep_timer",
+    "archive_path": "libs/sleep_timer/lib_sleep_timer.a",
+    "archive_sha256": "cbf143b6d90832b349925bc1cfdd0963c2a7102b66c11b6aee9277739dcbe1b9",
+    "compiler": "Synopsys MetaWare ARC Compiler T-2022.09 build 004 / LLVM 14.0.6 (EM-Micro)",
+    "compiler_anchors_matched": true,
+    "compiler_comment_sha256": "929918ddd8913f60418908e65d12e5b7baa0e2b904423b6fb95c8c32cdfecddd",
+    "optimization": "-Os"
+  },
+  "known_expected_address_match_count": 3,
+  "known_function_count": 3,
+  "unique_discovered_matches": [
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3225452,
+      "masked_byte_count": 0,
+      "matches": [
+        3225452
+      ],
+      "name": "SleepTimer_Init",
+      "normalized_sha256": "df5bd1fc8dd64b3f468b68667b5257206485bc2985959b149e45761e1f1ed24d",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.SleepTimer_Init",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 54,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3225468,
+      "masked_byte_count": 0,
+      "matches": [
+        3225468
+      ],
+      "name": "SleepTimer_SetCompareValue",
+      "normalized_sha256": "d6c79e64e2d49a7f3d134aa715574cae7978dfa7282a2f242d3b1922932a331e",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.SleepTimer_SetCompareValue",
+      "size": 54
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 58,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3225524,
+      "masked_byte_count": 4,
+      "matches": [
+        3225524
+      ],
+      "name": "SleepTimer_SetWakeupTime",
+      "normalized_sha256": "e05207df37d27231724179dd3628aefaa796a38ad5036f749ef936a2fbf61b1f",
+      "object": "sleep_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.SleepTimer_SetWakeupTime",
+      "size": 62
+    }
+  ]
+}

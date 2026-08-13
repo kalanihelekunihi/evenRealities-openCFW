@@ -1,0 +1,5 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	10 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99 source-equivalent core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Startup and exit diagnostics; linker-shared tail entries are explicitly pinned
+LVGL scroll primitive	1 direct BL site	0x0044EA04	lvgl/lvgl with G2 integration	9.3-compatible	344c7c318047b7348e1be8572a9fd4260c251cfa	source-admitted	Scrolls the active legal content object
+IAR DLIB memory primitives	2 direct BL sites	0x00439BE4,0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded/source-recreated	Copies the eight-byte event payload after clearing local storage
+G2 legal page and animation policy	2 direct BL sites	0x0058C238,0x005BF332	Even Realities first-party	private G2 source	unobservable	provider seams identified	Creates the legal page and starts its 250-unit display animation

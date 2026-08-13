@@ -1,0 +1,93 @@
+openjdk version "21.0.12" 2026-07-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.12+8 (build 21.0.12+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12+8 (build 21.0.12+8-LTS, mixed mode)
+INFO  Using log config file: jar:file:/var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (2200 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (8278 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 210 extension points (114 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/tmp/opencfw-em9305-ghidra-residual-round4.nDo0W6/scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: /var/tmp/opencfw-em9305-ghidra-residual-round4.nDo0W6/output/projects/adv_scan_control_gap/adv_scan_control_gap (HeadlessAnalyzer)  
+INFO  Creating project: /var/tmp/opencfw-em9305-ghidra-residual-round4.nDo0W6/output/projects/adv_scan_control_gap/adv_scan_control_gap (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /var/tmp/opencfw-em9305-ghidra-residual-round4.nDo0W6/output/projects/adv_scan_control_gap/adv_scan_control_gap (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/tmp/opencfw-em9305-ghidra-residual-round4.nDo0W6/firmware_ble_em9305.bin (HeadlessAnalyzer)  
+INFO  Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x301fdc") (ProgramLoader)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: ARCompact:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DisassembleArcompactRange.java '0x309aa4' '0x309cb8'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/tmp/opencfw-em9305-ghidra-residual-round4.nDo0W6/scripts/DisassembleArcompactRange.java (HeadlessAnalyzer)  
+INFO  DisassembleArcompactRange.java> OPENCFW_ARC_RANGE_SUMMARY start=ram:00309aa4 end=ram:00309cb8 attempted=16 seeded=16 (GhidraScript)  
+INFO  REPORT: Execute script: DumpInstructionsAround.java '64' '0x309aa4'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/tmp/opencfw-em9305-ghidra-residual-round4.nDo0W6/scripts/DumpInstructionsAround.java (HeadlessAnalyzer)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION_WINDOW_BEGIN target=ram:00309aa4 start=ram:00309a64 end=ram:00309ae4 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309aa6 length=2 text=sub_s sp,0x4 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309aa8 length=4 text=EXT08 0x8,r3,r39,r3 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309aac length=4 text=be0x10.d 0x003c232c (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ab0 length=4 text=_EXT08 0x29,r21,r21,r22 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ab4 length=4 text=ldb.x r0,[r4, -0xf2] (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ab8 length=4 text=EXT08.f 0x30,r0,r32,r2 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309abc length=2 text=add_s r13,r13,r14 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309abe length=4 text=ldb r18,[r13, 0x42] (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ac2 length=4 text=EXT08 0x21,r17,r17,0x6 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ac8 length=4 text=bl.d 0x00332fc4 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309acc length=2 text=_mov_s r12,r34 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ace length=2 text=mov_s r0,r33 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ad0 length=4 text=bl.d 0x00310230 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ad4 length=4 text=_EXT08 0x2,r16,r32,r4 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ad8 length=2 text=ldb_s r0,[r13,0x1] (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ada length=4 text=extb r16,r17 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION address=ram:00309ade length=8 text=EXT06 0x1c,r1,0x1010101,r16 (GhidraScript)  
+INFO  DumpInstructionsAround.java> OPENCFW_INSTRUCTION_WINDOW_END target=ram:00309aa4 count=17 (GhidraScript)  
+INFO  REPORT: Execute script: CreateAndDumpFunctions.java '0x309aa4'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/tmp/opencfw-em9305-ghidra-residual-round4.nDo0W6/scripts/CreateAndDumpFunctions.java (HeadlessAnalyzer)  
+INFO  CreateAndDumpFunctions.java> FUNCTION ram:00309aa4 ram:00309aa4 ram:00309aa4 FUN_ram_00309aa4 (GhidraScript)  
+WARN  Decompiling ram:00309aa4, pcode error at ram:00309aa4: Unable to resolve constructor at ram:00309aa4 (DecompileCallback)  
+INFO  CreateAndDumpFunctions.java> DECOMPILE_BEGIN (GhidraScript)  
+INFO  CreateAndDumpFunctions.java> 
+/* WARNING: Control flow encountered bad instruction data */
+
+void FUN_ram_00309aa4(void)
+
+{
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
+}
+
+ (GhidraScript)  
+INFO  CreateAndDumpFunctions.java> DECOMPILE_END (GhidraScript)  
+INFO  /firmware_ble_em9305.bin: file created (kalani) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /firmware_ble_em9305.bin (adv_scan_control_gap:/firmware_ble_em9305.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

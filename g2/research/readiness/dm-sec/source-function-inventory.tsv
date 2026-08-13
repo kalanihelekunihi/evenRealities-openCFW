@@ -1,0 +1,13 @@
+function	linkage	source_line	signature
+DmSecAuthRsp	global	298	void DmSecAuthRsp(dmConnId_t connId, uint8_t authDataLen, uint8_t *pAuthData)
+DmSecCancelReq	global	271	void DmSecCancelReq(dmConnId_t connId, uint8_t reason)
+DmSecGetLocalCsrk	global	373	uint8_t *DmSecGetLocalCsrk(void)
+DmSecGetLocalIrk	global	385	uint8_t *DmSecGetLocalIrk(void)
+DmSecInit	global	327	void DmSecInit(void)
+DmSecSetLocalCsrk	global	343	void DmSecSetLocalCsrk(uint8_t *pCsrk)
+DmSecSetLocalIrk	global	359	void DmSecSetLocalIrk(uint8_t *pIrk)
+DmSmpCbackExec	global	245	void DmSmpCbackExec(dmEvt_t *pDmEvt)
+dmSecApiLtkMsg	global	70	void dmSecApiLtkMsg(dmConnId_t connId, uint8_t status, dmSecLtk_t *pLtk, uint8_t event)
+dmSecHciHandler	global	94	void dmSecHciHandler(hciEvt_t *pEvent)
+dmSecMsgHandler	global	185	void dmSecMsgHandler(dmSecMsg_t *pMsg)
+dmSecReset	global	397	void dmSecReset(void)

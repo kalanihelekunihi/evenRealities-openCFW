@@ -1,0 +1,10 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	entry_evidence	qualification
+1	hal_i2c_irq_enable	semantic behavior label	0x0050412C	0x0050414A	30	c8731b84113db8584e7d5f5cc997674f551e8133bfd21801f2a5305a4ae0a03f	no	internal BL at 0x0050430A	enables one NVIC IRQ bit
+2	hal_i2c_power_down	semantic behavior label	0x0050414A	0x005041C6	124	8fab9f95d6dac3fa679a9e7811316ae89ad9462cad30483ce49b79d033dbf882	no	four internal BL entries	waits for idle then powers down and deconfigures pins
+3	hal_i2c_power_up	semantic behavior label	0x005041C6	0x0050423A	116	72680362c30e379f5f1fd7def30a9f380760f02fd65632f0f5ae081718602e68	no	eight internal BL entries	configures pins and restores IOM power
+4	HAL_I2CInit	exact retained diagnostic symbol	0x0050423A	0x0050436E	308	8f363395a5b909ab4f2048cd003455c67ced64cae4e21af379dba69b69faa04c	yes	BL at 0x005093C2	initializes eight IOM slots, mutexes, pins, interrupts, and I2C configuration
+5	hal_i2c_transfer_full	semantic behavior label	0x0050436E	0x00504488	282	33bfb0714f58f5adb67772ee8dacb2667beedee458259df39f208fa9f13d63fd	no	twelve external BL entries	performs a two-phase nonblocking I2C transfer under the per-port mutex
+6	hal_i2c_irq_handler	semantic behavior label	0x00504488	0x005044B4	44	85163d407710168bf65a6d25df7b4444531352a41e1ed652c57badca5fa64b9f	no	vector-table Thumb pointer at 0x00438068	gets, clears, and services IOM interrupt status
+7	hal_i2c_transfer_joined	semantic behavior label	0x005044B4	0x005045C0	268	e3c791dbdc0738f4eda9b97cdd65fc3e61dd4a7a06e54a12425cf212295ec098	no	ten external BL entries	joins two bounded buffers and submits one nonblocking transfer
+8	hal_i2c_transfer_read	semantic behavior label	0x005045C0	0x0050468E	206	b93ee6ff709ecdba1d2f5d8b106133ea6417db16951638ddefe85b2e0ce75237	no	BL at 0x0055B33A	submits a read-direction nonblocking transfer
+9	hal_i2c_transfer_write	semantic behavior label	0x0050468E	0x0050475C	206	90e2187f2779f55bedfffe818fe1d01e4100b672de6f062c2db16130f02dcff7	no	BL at 0x0055B328	submits a write-direction nonblocking transfer

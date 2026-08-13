@@ -1,0 +1,90 @@
+{
+  "expected_exact_match_count": 1,
+  "expected_vendor_modified_count": 0,
+  "function_count": 3,
+  "functions": [
+    {
+      "binding": "l",
+      "compared_byte_count": 288,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 44,
+      "matches": [],
+      "name": "SLEEP_MANAGER_GetTimeToFirstEvent",
+      "normalized_sha256": "f7fa48f2fbb4b820a0a745c6fe42aab84670955dc86113be29f8b0903d472eb0",
+      "object": "sleep_manager.c.obj",
+      "offset": 0,
+      "relocation_count": 11,
+      "section": ".text.SLEEP_MANAGER_GetTimeToFirstEvent",
+      "size": 332
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 44,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3221732,
+      "masked_byte_count": 8,
+      "matches": [
+        3221732
+      ],
+      "name": "SLEEP_MANAGER_RCCAL_Callback",
+      "normalized_sha256": "c3a71e74518c69b1f287b01a98ac348754a382d4f8bbe99955bcf5b9f09c76a2",
+      "object": "sleep_manager.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.SLEEP_MANAGER_RCCAL_Callback",
+      "size": 52
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 456,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 52,
+      "matches": [],
+      "name": "SLEEP_MANAGER_GoToSleep",
+      "normalized_sha256": "11181a86a99a34f6614d68880a9a89d0c1ef53c367474809c149c88be8755ef2",
+      "object": "sleep_manager.c.obj",
+      "offset": 0,
+      "relocation_count": 13,
+      "section": ".text.SLEEP_MANAGER_GoToSleep",
+      "size": 508
+    }
+  ],
+  "identity": {
+    "architecture": "ARCv2 EM",
+    "archive_git_blob": "05af021ac9132dc8c727913c4382eba9019aebdb",
+    "archive_kind": "sleep_manager",
+    "archive_path": "libs/sleep_manager/lib_sleep_manager.a",
+    "archive_sha256": "82968846c25b2a6685aa357386ad1dcb6bbe33bb138359de66ce91d10d600856",
+    "compiler": "Synopsys MetaWare ARC Compiler T-2022.09 build 004 / LLVM 14.0.6 (EM-Micro)",
+    "compiler_anchors_matched": true,
+    "compiler_comment_sha256": "929918ddd8913f60418908e65d12e5b7baa0e2b904423b6fb95c8c32cdfecddd",
+    "optimization": "-Os"
+  },
+  "known_expected_address_match_count": 1,
+  "known_function_count": 1,
+  "unique_discovered_matches": [
+    {
+      "binding": "l",
+      "compared_byte_count": 44,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3221732,
+      "masked_byte_count": 8,
+      "matches": [
+        3221732
+      ],
+      "name": "SLEEP_MANAGER_RCCAL_Callback",
+      "normalized_sha256": "c3a71e74518c69b1f287b01a98ac348754a382d4f8bbe99955bcf5b9f09c76a2",
+      "object": "sleep_manager.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.SLEEP_MANAGER_RCCAL_Callback",
+      "size": 52
+    }
+  ]
+}

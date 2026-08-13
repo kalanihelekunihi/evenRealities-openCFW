@@ -1,0 +1,2 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	ingress	evidence
+1	DRV_RtcSetTime	exact retained function string	0x0047EE78	0x0047EEFA	130	302009d8a0203801946379cd10edf6d4b4c985e76a9d9929012475b21700cc6a	yes	sole exterior BL at 0x0044A20C	maps the application year/month/day/time structure into Ambiq RTC form, computes weekday, sets the RTC, normalizes status, and emits invalid-input diagnostics

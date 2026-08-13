@@ -1,0 +1,39 @@
+metric	value
+object_identity	embedded cJSON parser body (pathless third-party; flagged by g2-service-android-notify closure)
+upstream_family	cJSON (DaveGamble/cJSON)
+upstream_version_interval	v1.7.9 through v1.7.12 (2018-12-16 to 2019-05-17); linked parse-side functions source-identical across the interval
+retained_path	none (no embedded source path; Ghidra-missed body)
+linked_functions	21
+ghidra_discovered_functions	0
+path_anchored_functions	0
+body_bytes	2572
+body_concat_sha256	ad3ec2fe0550a87aca90b84d7bd9481445cc75d6a11571c8f9f13270097e37d5
+physical_interval	[0x004D798C,0x004D83D8)
+physical_bytes	2636
+physical_sha256	07f8a8063cb577146e1c24ee87557012f76b4066c1cf0681102ae20210e4e394
+noncode_bytes	64
+noncode_concat_sha256	26d32b1b8ba37bc805b8b86de34fcc5168b310fe4d6c13641371199d59944d45
+pool_regions	6
+pool_contents	alignment pads; double constants 0.0/INT_MAX/(double)INT_MIN; &global_error (0x2007410C); UTF-8 BOM literal EF BB BF 00; &global_hooks (0x200004BC); &"null" (0x0078D15C); utf16 mask 0x000FFC00; &"false" (0x0078D164); &"true" (0x0078D16C)
+reachable_instructions	1172
+reachable_instruction_digest	5a8b6793781392ac2d56fc3f95691ad94a0c1bd371533f000879ca6884c6232a
+direct_bl_entry_sites	68
+direct_bl_entry_digest	9d39c3743dfe5e8d5fe8b70c89687aec20bd1deecf7ef6d8e220edf762f62b03
+external_direct_bl_entry_sites	34
+external_direct_bl_entry_digest	ce3f46f29265246b1ba57c6e5a3bef42b1cb9dc52d4ad135eb3cf52d625eb7f1
+external_entry_breakdown	service_android_notify.c 13 sites (cJSON_Parse 1, cJSON_Delete 2, cJSON_GetObjectItem 10); service_whitelist.c 21 sites (cJSON_Parse 1, cJSON_Delete 8, cJSON_GetObjectItem 9, cJSON_GetArraySize 1, cJSON_GetArrayItem 1, cJSON_IsArray 1)
+stored_aligned_function_entry_pointers	0
+raw_instruction_word_interior_collisions	0
+b_w_entry_or_interior_targets	0
+direct_body_calls	47
+internal_direct_body_calls	34
+external_direct_body_calls	13
+direct_body_call_digest	cd7956de06b337e934ca7e36317924e86e6c57e8274291dfbc6348891b10fc06
+indirect_body_calls	6
+indirect_call_classification	all six blx sites dispatch through cJSON internal_hooks: 1 allocate (cJSON_New_Item), 3 global_hooks.deallocate (cJSON_Delete), 1 buffer.hooks.allocate (parse_string), 1 buffer.hooks.deallocate (parse_string fail path)
+strict_interior_ingress	0
+provider_boundary	admitted nanopb 0.4.9 shared initializer 0x0048949C (1); bounded IAR DLIB memset/strlen/strncmp/strcmp (7); unclosed bounded IAR runtime bodies: tolower trampoline 0x004D58C2 (4) and strtod 0x00542D48 (1)
+struct_layout	cJSON node: next+0x00 prev+0x04 child+0x08 type+0x0C valuestring+0x10 valueint+0x14 valuedouble+0x18 string+0x20 sizeof=0x28; parse_buffer: content+0x00 length+0x04 offset+0x08 depth+0x0C hooks+0x10 (28 bytes)
+version_discriminators	get_object_item post-#315 string NULL checks (>=1.7.9); buffer_skip_whitespace without exhausted-buffer early return (<1.7.13); parse_array/parse_object without head->prev tail store (<1.7.14); parse_number 64-byte stack buffer (<1.7.19)
+private_producing_commit_observable	false
+production_routed	false

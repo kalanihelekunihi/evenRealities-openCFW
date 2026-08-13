@@ -1,0 +1,7 @@
+function	linkage	source_line	signature
+DmConnOpen	global	137	dmConnId_t DmConnOpen(uint8_t clientId, uint8_t initPhys, uint8_t addrType, uint8_t *pAddr)
+DmConnSetAddrType	global	151	void DmConnSetAddrType(uint8_t addrType)
+DmL2cConnUpdateInd	global	110	void DmL2cConnUpdateInd(uint8_t identifier, uint16_t handle, hciConnSpec_t *pConnSpec)
+dmConnSmActCancelOpen	global	55	void dmConnSmActCancelOpen(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
+dmConnUpdActL2cUpdateInd	global	90	void dmConnUpdActL2cUpdateInd(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
+dmConnUpdActUpdateMaster	global	74	void dmConnUpdActUpdateMaster(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)

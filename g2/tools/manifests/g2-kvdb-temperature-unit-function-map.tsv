@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	kvdbTemperatureUnitDefaultInitialize	inferred semantic name	0x0049B014	0x0049B028	20	06b1d8566f7f7686e7d0ae6c2ee8c46cc2f227183db1301de0638cfd868d5a5e	stored Thumb pointer 0x006D1E54	computes CRC-16 over the first eight bytes of the twelve-byte factory record
+2	_kvdbUpdataTemperatureUnit	exact retained symbol string	0x0049B028	0x0049B0F8	208	f1acbafb6f3571ebc7054ffacb90ff35d1bb69993d9ab4b715cbe5684222929a	stored Thumb pointer 0x00746D38	reads a stack temporary and rewrites live defaults only for missing or v0 CRC-mismatched data
+3	SVC_KvdbWriteTemperatureUnit	exact retained symbol string	0x0049B0F8	0x0049B166	110	b5fd4ef6d6f8da8e21ff45ff152a15cdb30868bfd4ee4fef72afa9848491be2c	BL sites 0x00466152,0x0049B0E6,0x0049B0EE	copies twelve bytes, forces version one, recomputes CRC, and persists the whole record

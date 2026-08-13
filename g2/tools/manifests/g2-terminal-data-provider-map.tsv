@@ -1,0 +1,4 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	30 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99 source-equivalent core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	All timer, session, and content diagnostics terminate at the admitted logger
+IAR DLIB memory runtime	13 direct BL sites	0x00439BE4,0x0043C0E4	IAR DLIB	9.20 lower bound; 9.60.2 compatible	unavailable proprietary source	bounded runtime seam	memcpy/memset only; no embedded DLIB implementation
+Closed time-service provider	2 direct BL sites	0x0044A1EA	Even Realities first-party service_time.c (closed)	private G2 source	unobservable	bounded closed object	Response-timer start and elapsed-time reads for record timestamps

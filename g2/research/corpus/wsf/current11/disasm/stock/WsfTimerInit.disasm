@@ -1,0 +1,37 @@
+
+/work/stock/WsfTimerInit.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0052a474 <.data>:
+  52a474:	b51c      	push	{r2, r3, r4, lr}
+  52a476:	4867      	ldr	r0, [pc, #412]	@ (0x52a614)
+  52a478:	2100      	movs	r1, #0
+  52a47a:	6001      	str	r1, [r0, #0]
+  52a47c:	2100      	movs	r1, #0
+  52a47e:	6041      	str	r1, [r0, #4]
+  52a480:	4c65      	ldr	r4, [pc, #404]	@ (0x52a618)
+  52a482:	6820      	ldr	r0, [r4, #0]
+  52a484:	2800      	cmp	r0, #0
+  52a486:	d116      	bne.n	0x52a4b6
+  52a488:	4864      	ldr	r0, [pc, #400]	@ (0x52a61c)
+  52a48a:	9000      	str	r0, [sp, #0]
+  52a48c:	2300      	movs	r3, #0
+  52a48e:	2200      	movs	r2, #0
+  52a490:	210a      	movs	r1, #10
+  52a492:	4863      	ldr	r0, [pc, #396]	@ (0x52a620)
+  52a494:	f754 f922 	bl	0x47e6dc
+  52a498:	6020      	str	r0, [r4, #0]
+  52a49a:	6820      	ldr	r0, [r4, #0]
+  52a49c:	2800      	cmp	r0, #0
+  52a49e:	d106      	bne.n	0x52a4ae
+  52a4a0:	f0cf fe00 	bl	0x5fa0a4
+  52a4a4:	2000      	movs	r0, #0
+  52a4a6:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  52a4aa:	6008      	str	r0, [r1, #0]
+  52a4ac:	e7fe      	b.n	0x52a4ac
+  52a4ae:	f72a fd26 	bl	0x454efe
+  52a4b2:	495c      	ldr	r1, [pc, #368]	@ (0x52a624)
+  52a4b4:	6008      	str	r0, [r1, #0]
+  52a4b6:	bd13      	pop	{r0, r1, r4, pc}

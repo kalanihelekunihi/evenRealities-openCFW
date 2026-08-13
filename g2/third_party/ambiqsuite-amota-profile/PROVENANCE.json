@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "component": "AmbiqSuite AMOTA application/profile skeleton",
+  "license": "BSD-3-Clause per-file Ambiq license",
+  "upstream": {
+    "repository": "https://github.com/sparkfun/AmbiqSuiteSDK.git",
+    "selected_release": "2.5.1",
+    "selected_commit": "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f",
+    "earliest_authenticated_stable_skeleton_commit": "ca79fc6e140d25b0c596a5c87c3d311cd2710ad9",
+    "release_commits": {
+      "2.2.0": "ca79fc6e140d25b0c596a5c87c3d311cd2710ad9",
+      "2.3.2": "8f2a86b4b4a200291ea607fd94e585d6e4f15447",
+      "2.4.2": "c4b62222921b1b87ddd21108cdaeaa4c4cf9f76d",
+      "2.5.1": "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f"
+    },
+    "release_source_blobs": {
+      "2.2.0": "d52a9b38ac214bca0bf24cde9878905879928570",
+      "2.3.2": "baeab1b7c8ee72f98f6c274b989c1d0b45d8f347",
+      "2.4.2": "fe280136fb8d0066e65d5bb0ff17aea765ab7690",
+      "2.5.1": "91a80afc7faea435e947a4e0c3841c41ba0ec481"
+    },
+    "stable_amotaProcCccState_sha256": "3742662bf0b70f436df4a903f76c5e2cf9cc853bc4313ca65fa3826b1167e4a2",
+    "historical_g2_generating_commit": null,
+    "qualification": "The complete application file changes across the four releases, but the AMOTA CCC function, A0/A1 timer-event assignment, CCC diagnostic, and dispatcher architecture used by G2 remain stable. G2 substantially rewrites the actions and cannot select one private producing checkout. Release 2.5.1 is the reproducible oracle already selected for the surrounding Ambiq/Cordio tree."
+  },
+  "files": [
+    {"path":"amota_main.c","upstream_path":"ambiq_ble/apps/amota/amota_main.c","size":21593,"sha256":"63c89982b2c0392d9a603780ea3227ff1fb0a2f67680d81f05607b1475cc2d35","git_blob_sha1":"91a80afc7faea435e947a4e0c3841c41ba0ec481"},
+    {"path":"amota_api.h","upstream_path":"ambiq_ble/apps/amota/amota_api.h","size":4086,"sha256":"b796bdfe494aefdc306161183103369d5d5b3be39edf9eb72753ca34868fa068","git_blob_sha1":"591f79aabf0a1b1b174bc544cc0774ae52c09d58"},
+    {"path":"amotas_api.h","upstream_path":"ambiq_ble/profiles/amota/amotas_api.h","size":4251,"sha256":"6cfb5988cd49d6ea49bb157e7e742ef495796a50624713659830a8dd9eaf2050","git_blob_sha1":"e0647018f3121eee2432177f26a1971645826090"}
+  ],
+  "g2_boundary": {
+    "retained_path": "platform\\ble\\profiles\\ota\\profile_ota.c",
+    "stock_interval": "[0x004BDB90,0x004BDE4C)",
+    "linked_functions": 7,
+    "ambiq_skeleton_derived_stock_functions": 4,
+    "g2_local_stock_functions": 3,
+    "local_delta": "G2 reduces the Ambiq application dispatcher to connection/CCC and A0/A1/A7 product events, replaces AMOTAS state with a four-byte Even control block, and calls the separate Even OTA provider.",
+    "production_routed": false
+  }
+}

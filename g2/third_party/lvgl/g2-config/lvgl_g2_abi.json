@@ -1,0 +1,109 @@
+{
+  "schema_version": 2,
+  "status": "abi-and-gpu-dependency-identity-closed-production-source-incomplete",
+  "target": {
+    "architecture": "Arm Cortex-M55",
+    "pointer_size": 4,
+    "enum_abi": "short enums (-fshort-enums-compatible)"
+  },
+  "g2_vendor_configuration": {
+    "sizeof_lv_global_t": 492,
+    "sizeof_lv_display_t": 796,
+    "sizeof_lv_indev_t": 220,
+    "sizeof_lv_draw_buf_t": 28,
+    "sizeof_lv_async_info_t": 8,
+    "lv_async_info_fields": [
+      "callback@0",
+      "user_data@4"
+    ],
+    "lv_global_offsets": {
+      "draw_buf_handlers": 200,
+      "font_draw_buf_handlers": 232,
+      "image_cache_draw_buf_handlers": 264,
+      "img_decoder_ll": 296,
+      "img_cache": 308,
+      "img_header_cache": 312,
+      "draw_info": 316,
+      "draw_sw_blend_handler_ll": 352,
+      "custom_log_print_cb": 364,
+      "log_last_log_time": 368,
+      "theme_simple": 372,
+      "theme_default": 376,
+      "theme_mono": 380,
+      "fsdrv_ll": 384,
+      "littlefs_fs_drv": 396,
+      "ft_context": 448,
+      "span_snippet_stack": 452,
+      "objid_array": 456,
+      "objid_count": 460,
+      "lv_general_mutex": 464,
+      "freertos_idle_time_sum": 472,
+      "user_data": 488
+    }
+  },
+  "display": {
+    "width": 576,
+    "height": 288,
+    "native_color_format": {
+      "name": "LV_COLOR_FORMAT_L8",
+      "ordinal": 6,
+      "bits_per_pixel": 8
+    },
+    "ambiq_output_color_format": {
+      "name": "LV_COLOR_FORMAT_A4",
+      "ordinal": 13,
+      "bits_per_pixel": 4
+    },
+    "ambiq_output_allocation_bytes": 82944
+  },
+  "official_ceiling_reference_compile": {
+    "purpose": "ABI discriminator only; not a recovered production configuration",
+    "configuration": "upstream defaults with LV_COLOR_DEPTH=8, LV_USE_FLEX=1, and LV_USE_GRID=1",
+    "compiler_abi": "Arm Cortex-M55, 32-bit pointers, short enums",
+    "sizeof_lv_global_t": 504,
+    "sizeof_lv_display_t": 796,
+    "sizeof_lv_indev_t": 220,
+    "sizeof_lv_draw_buf_t": 28
+  },
+  "recovered_vendor_compile": {
+    "purpose": "Exact host-independent Arm layout model for the stock G2 LVGL global object",
+    "official_core_commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+    "ambiq_abi_patch": "tools/patches/lvgl-g2-ambiq-draw-buffer-abi.patch",
+    "ambiq_generic_hook_origin_commit": "d4dcd26bd97a0b09778ab9f789b6e7a7354bc967",
+    "configuration": [
+      "LV_COLOR_DEPTH=8",
+      "LV_USE_OS=LV_OS_FREERTOS",
+      "LV_USE_FREETYPE=1",
+      "LV_USE_FLEX=1",
+      "LV_USE_GRID=1",
+      "LV_USE_FS_LITTLEFS=1",
+      "LV_USE_BMP=1",
+      "LV_USE_LOG=1",
+      "LV_LOG_LEVEL=LV_LOG_LEVEL_WARN",
+      "LV_USE_ASSERT_NULL=1",
+      "LV_BIG_ENDIAN_SYSTEM=0",
+      "LV_DRAW_SW_COMPLEX=0",
+      "LV_USE_STDLIB_MALLOC=LV_STDLIB_CUSTOM",
+      "LV_USE_SPAN=1",
+      "LV_USE_OBJ_ID_BUILTIN=1",
+      "LV_USE_DRAW_AMBIQ=1",
+      "LV_USE_AMBIQ_VG=1",
+      "LV_AMBIQ_COMMAND_LIST_SECTOR=100",
+      "LV_AMBIQ_COMMAND_LIST_SECTOR_SIZE=1024",
+      "NEMAGFX_POWER_SAVE=1"
+    ],
+    "compiler_abi": "Arm Cortex-M55, 32-bit pointers, short enums",
+    "draw_buffer_handler_size": 32,
+    "sizeof_lv_global_t": 492,
+    "sizeof_lv_display_t": 796,
+    "sizeof_lv_indev_t": 220,
+    "sizeof_lv_draw_buf_t": 28,
+    "matches_stock_layout": true
+  },
+  "promotion_gate": {
+    "closed": false,
+    "abi_closed": true,
+    "gpu_dependency_identity_closed": true,
+    "reason": "The global-object ABI, public NemaGFX/NemaVG identities, all 11 GPU-patch exports, and all 18 stock bare-metal HAL functions are recovered. Production remains excluded because the stock IAR/private generating source, hardware validation, candidate admission, and atomic source-integration boundary are not closed."
+  }
+}

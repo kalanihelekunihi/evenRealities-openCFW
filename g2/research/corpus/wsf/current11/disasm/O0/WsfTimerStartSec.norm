@@ -1,0 +1,13 @@
+push {lr}
+sub sp,#12
+str r0,[sp,#4]
+str r1,[sp,#0]
+ldr r3,[sp,#0]
+movs r2,#100 @ 0ximm
+mul.w r3,r2,r3
+mov r1,r3
+ldr r0,[sp,#4]
+bl <call>
+nop
+sp ,#12
+ldr.w pc,[sp],#4

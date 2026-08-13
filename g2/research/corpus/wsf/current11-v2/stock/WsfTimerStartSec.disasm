@@ -1,0 +1,12 @@
+
+/work/stock/WsfTimerStartSec.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0052a4b8 <.data>:
+  52a4b8:	b580      	push	{r7, lr}
+  52a4ba:	2264      	movs	r2, #100	@ 0x64
+  52a4bc:	4351      	muls	r1, r2
+  52a4be:	f7ff ffb1 	bl	0x52a424
+  52a4c2:	bd01      	pop	{r0, pc}

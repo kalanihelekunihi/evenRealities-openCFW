@@ -1,0 +1,5 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	direct_callers	evidence
+1	APP_PbTranslateRxFrameDataProcess	exact retained diagnostic symbol	0x0059F53C	0x0059F71A	478	66167ccde82eccaadf31c001a9e007eee8061dfa217a3e3826a831f2999f648b	0x0059F10E	protobuf decode, duplicate magic/tick suppression, and status returns
+2	APP_PbTranslateTxEncodeNotify	exact retained diagnostic symbol	0x0059F71A	0x0059F842	296	bc734d218dcf7894be578f5874c9228bc7e341824457cfb97defdd9cbe7cc4f2	0x0059E476,0x0059F39A	builds subtype 5 notify envelope, encodes, and conditionally sends
+3	APP_PbTranslateTxEncodeCommResp	exact retained diagnostic symbol	0x0059F842	0x0059F960	286	afbde3c1daa21707eee0ee81c22a56ce003f03e951c30edbd64da04016d24964	0x0059F162,0x0059F1BA,0x0059F212,0x0059F220	builds subtype 7 command response, encodes, and conditionally sends
+4	APP_PbTranslateTxEncodeModeSwitch	exact retained diagnostic symbol	0x0059F960	0x0059FA68	264	2286ba0996b67cd60ce7a35ecf1b56e787d39db591af04d4040945b79be6c1af	0x0059E1E4	builds subtype 6 mode-switch envelope, encodes, and conditionally notifies

@@ -1,0 +1,9 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	80 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Controller state and error diagnostics
+IAR DLIB memory primitives	4 direct BL sites	0x00439BE4,0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded or source-recreated	One copy and three fills add no release discriminator
+CMSIS-FreeRTOS wrappers	7 direct BL sites	0x004490CC,0x0044971C,0x004497B6,0x0044981C	ARM CMSIS-FreeRTOS v10.5.1	10.5.1	d213f261b5be6bb29a7cce8b84071706b72f4d53	source-admitted	Tick and mutex operations
+LVGL UI primitive	2 direct BL sites	0x00441488	lvgl/lvgl with G2 integration	9.3-compatible	344c7c318047b7348e1be8572a9fd4260c251cfa	source-admitted	Object state query
+nanopb decoder	3 direct BL sites	0x0048EB32	nanopb/nanopb	0.4.7 through 0.4.9.1 compatible	98bf4db69897b53434f3d0ba72e0a3ab1a902824	source-admitted	Known message decode primitive
+ARM EABI unsigned division	1 direct BL site	0x0047CC60	OpenCFW bounded reconstruction of compiler helper	AAPCS32 unsigned 64-bit quotient/remainder	unobservable	production source-owned	Elapsed-time conversion uses the already routed helper
+CmBacktrace fault provider	1 direct BL site	0x005944BC	armink/CmBacktrace	compatible interval 4abadfa0 through 73714489; 1.4.2 banner	73714489 selected for OpenCFW compatibility	source-admitted oracle; production-excluded	Vector-referenced fail-stop entry reuses the already identified fault provider and does not narrow its historical commit
+G2 conversation UI service and policy	41 direct BL sites	22 bounded first-party entries	Even Realities first-party over admitted providers	private G2 source	unobservable	bounded first-party provider graph	Role display transport UI and conversation service behavior

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "component": "AmbiqSuite Apple Notification Center Service client profile",
+  "license": "BSD-3-Clause per-file Ambiq license",
+  "upstream": {
+    "repository": "https://github.com/sparkfun/AmbiqSuiteSDK.git",
+    "selected_release": "2.5.1",
+    "selected_commit": "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f",
+    "earliest_authenticated_same_implementation_commit": "ca79fc6e140d25b0c596a5c87c3d311cd2710ad9",
+    "compatible_release_commits": {
+      "2.2.0": "ca79fc6e140d25b0c596a5c87c3d311cd2710ad9",
+      "2.3.2": "8f2a86b4b4a200291ea607fd94e585d6e4f15447",
+      "2.4.2": "c4b62222921b1b87ddd21108cdaeaa4c4cf9f76d",
+      "2.5.1": "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f"
+    },
+    "implementation_body_sha256": "ffe2356399545ad7d0f617f14a2f2621df788e978f8da5d069e97340002701f4",
+    "historical_g2_generating_commit": null,
+    "qualification": "The implementation after the 48-line Ambiq release header is byte-identical at all four authenticated public release imports. Public 4.3.0 and 4.5.0 package copies independently retain the same implementation. The stock object therefore identifies the Ambiq ANCC lineage but cannot select one historical release or private G2 commit. Release 2.5.1 is selected because its official archive is already authenticated in this repository and its public Git import is reproducible."
+  },
+  "files": [
+    {"path":"ancc_main.c","upstream_path":"ambiq_ble/profiles/ancc/ancc_main.c","size":25099,"sha256":"1435b838f7a7b18cec6f0b24f49266d4254c2d10f3ed6dd08eb029193069002d","git_blob_sha1":"4023359bf02612b07ed95f51561e7b8e7936810c"},
+    {"path":"ancc_api.h","upstream_path":"ambiq_ble/profiles/ancc/ancc_api.h","size":11988,"sha256":"c1af7746ddb649c2906b4ee69d06bf2d234baabad8197d3d7dba3754826cfce6","git_blob_sha1":"5594c66a09026d49592ae1a0983c75ffc0c1ec53"}
+  ],
+  "g2_boundary": {
+    "retained_path": "platform\\ble\\profiles\\ancc\\profile_ancc.c",
+    "stock_interval": "[0x004BEA04,0x004BF990)",
+    "linked_functions": 21,
+    "source_derived_stock_functions": 12,
+    "g2_local_stock_functions": 9,
+    "upstream_source_definitions": 17,
+    "local_delta": "G2 replaces Ambiq timers with its message service, adds EasyLogger, sync/whitelist policy, callback adapters, and central parser reset logic while preserving the distinctive Ambiq queue, request, discovery, and fragmented-parser architecture.",
+    "production_routed": false
+  }
+}

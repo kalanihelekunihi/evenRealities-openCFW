@@ -1,0 +1,52 @@
+
+/work/out/Os/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_update_ticks_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_update_ticks_candidate>:
+   0:	b530      	push	{r4, r5, lr}
+   2:	b085      	sub	sp, #20
+   4:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_tick_counter_get_candidate>
+			4: R_ARM_THM_CALL	open_cfw_cordio_wsf_tick_counter_get_candidate
+   8:	4d15      	ldr	r5, [pc, #84]	@ (60 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x60>)
+   a:	4604      	mov	r4, r0
+   c:	682b      	ldr	r3, [r5, #0]
+   e:	1ac3      	subs	r3, r0, r3
+  10:	2b09      	cmp	r3, #9
+  12:	d905      	bls.n	20 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x20>
+  14:	200a      	movs	r0, #10
+  16:	fbb3 f0f0 	udiv	r0, r3, r0
+  1a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_update_ticks_candidate>
+			1a: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_update_candidate
+  1e:	602c      	str	r4, [r5, #0]
+  20:	f10d 000f 	add.w	r0, sp, #15
+  24:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_update_ticks_candidate>
+			24: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_next_expiration_candidate
+  28:	b1b8      	cbz	r0, 5a <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x5a>
+  2a:	f242 7310 	movw	r3, #10000	@ 0x2710
+  2e:	f44f 727a 	mov.w	r2, #1000	@ 0x3e8
+  32:	4358      	muls	r0, r3
+  34:	2364      	movs	r3, #100	@ 0x64
+  36:	fbb0 f2f2 	udiv	r2, r0, r2
+  3a:	480a      	ldr	r0, [pc, #40]	@ (64 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x64>)
+  3c:	9300      	str	r3, [sp, #0]
+  3e:	2104      	movs	r1, #4
+  40:	2300      	movs	r3, #0
+  42:	6800      	ldr	r0, [r0, #0]
+  44:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_command_candidate>
+			44: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_command_candidate
+  48:	2801      	cmp	r0, #1
+  4a:	d006      	beq.n	5a <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x5a>
+  4c:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_command_failure_candidate>
+			4c: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_command_failure_candidate
+  50:	b005      	add	sp, #20
+  52:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+  56:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_timer_fatal_candidate>
+			56: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_timer_fatal_candidate
+  5a:	b005      	add	sp, #20
+  5c:	bd30      	pop	{r4, r5, pc}
+  5e:	bf00      	nop
+	...
+			60: R_ARM_ABS32	open_cfw_cordio_wsf_last_tick_candidate
+			64: R_ARM_ABS32	open_cfw_cordio_wsf_freertos_timer_candidate

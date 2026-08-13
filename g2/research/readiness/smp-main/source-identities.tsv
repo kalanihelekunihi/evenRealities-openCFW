@@ -1,0 +1,5 @@
+source	commit	tree	blob	sha256	bytes	assessment
+Packetcraft r20.05c smp_main.c	3656312d6b73e2a2c1c8b33ee0385bc199dd97e6	0a76c7dde46d3b94bb9185a4a5327d0e3f38ec97	ba4889305cc903c7283972a12532a83c2a5b9cfe	c0d63cc679b63a0ad188a3a5b9ce36a5457812b077cc6a87d40bb189873d3810	24676	base source and exact dependency tree
+AmbiqSuite 2.5.1 smp_main.c			3b13d5fcb672f6ea35d862d96d4505916bb8b16a	8a2de7608f5ac8d39c876fe4a4e37f58f96f37d32c724959013011fc28595fc1	24249	authenticated source of AES stale-result queue cleanup semantics
+hybrid base copy				c0d63cc679b63a0ad188a3a5b9ce36a5457812b077cc6a87d40bb189873d3810	24676	identical to Packetcraft r20.05c base
+hybrid patched result				dd813e9b3bdf5d4ea6c879a78b7c7e542518a573ea70d18d9e144eb8909b6d74	24979	r20.05c plus isolated Ambiq AES queue cleanup patch; source bytes excluded

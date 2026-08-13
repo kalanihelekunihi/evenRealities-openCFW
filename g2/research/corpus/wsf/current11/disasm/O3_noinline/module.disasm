@@ -1,0 +1,304 @@
+
+/work/out/O3_noinline/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_callback_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_callback_candidate>:
+   0:	2102      	movs	r1, #2
+   2:	2000      	movs	r0, #0
+   4:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_task_set_ready_candidate>
+			4: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_task_set_ready_candidate
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_remove_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_remove_candidate>:
+   0:	4b0b      	ldr	r3, [pc, #44]	@ (30 <open_cfw_cordio_wsf_timer_remove_candidate+0x30>)
+   2:	681b      	ldr	r3, [r3, #0]
+   4:	b19b      	cbz	r3, 2e <open_cfw_cordio_wsf_timer_remove_candidate+0x2e>
+   6:	4283      	cmp	r3, r0
+   8:	b510      	push	{r4, lr}
+   a:	4604      	mov	r4, r0
+   c:	d102      	bne.n	14 <open_cfw_cordio_wsf_timer_remove_candidate+0x14>
+   e:	e006      	b.n	1e <open_cfw_cordio_wsf_timer_remove_candidate+0x1e>
+  10:	429c      	cmp	r4, r3
+  12:	d005      	beq.n	20 <open_cfw_cordio_wsf_timer_remove_candidate+0x20>
+  14:	461a      	mov	r2, r3
+  16:	681b      	ldr	r3, [r3, #0]
+  18:	2b00      	cmp	r3, #0
+  1a:	d1f9      	bne.n	10 <open_cfw_cordio_wsf_timer_remove_candidate+0x10>
+  1c:	bd10      	pop	{r4, pc}
+  1e:	2200      	movs	r2, #0
+  20:	4621      	mov	r1, r4
+  22:	4803      	ldr	r0, [pc, #12]	@ (30 <open_cfw_cordio_wsf_timer_remove_candidate+0x30>)
+  24:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_remove_candidate>
+			24: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_remove_candidate
+  28:	2300      	movs	r3, #0
+  2a:	7363      	strb	r3, [r4, #13]
+  2c:	bd10      	pop	{r4, pc}
+  2e:	4770      	bx	lr
+  30:	00000000 	.word	0x00000000
+			30: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_insert_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_insert_candidate>:
+   0:	b570      	push	{r4, r5, r6, lr}
+   2:	4606      	mov	r6, r0
+   4:	460d      	mov	r5, r1
+   6:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			6: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   a:	7b73      	ldrb	r3, [r6, #13]
+   c:	b9b3      	cbnz	r3, 3c <open_cfw_cordio_wsf_timer_insert_candidate+0x3c>
+   e:	2101      	movs	r1, #1
+  10:	4b0c      	ldr	r3, [pc, #48]	@ (44 <open_cfw_cordio_wsf_timer_insert_candidate+0x44>)
+  12:	2200      	movs	r2, #0
+  14:	681b      	ldr	r3, [r3, #0]
+  16:	6075      	str	r5, [r6, #4]
+  18:	7371      	strb	r1, [r6, #13]
+  1a:	b923      	cbnz	r3, 26 <open_cfw_cordio_wsf_timer_insert_candidate+0x26>
+  1c:	e006      	b.n	2c <open_cfw_cordio_wsf_timer_insert_candidate+0x2c>
+  1e:	681c      	ldr	r4, [r3, #0]
+  20:	461a      	mov	r2, r3
+  22:	b11c      	cbz	r4, 2c <open_cfw_cordio_wsf_timer_insert_candidate+0x2c>
+  24:	4623      	mov	r3, r4
+  26:	685c      	ldr	r4, [r3, #4]
+  28:	42ac      	cmp	r4, r5
+  2a:	d9f8      	bls.n	1e <open_cfw_cordio_wsf_timer_insert_candidate+0x1e>
+  2c:	4631      	mov	r1, r6
+  2e:	4805      	ldr	r0, [pc, #20]	@ (44 <open_cfw_cordio_wsf_timer_insert_candidate+0x44>)
+  30:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_insert_candidate>
+			30: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_insert_candidate
+  34:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+  38:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			38: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_task_unlock_candidate
+  3c:	4630      	mov	r0, r6
+  3e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_insert_candidate>
+			3e: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_remove_candidate
+  42:	e7e4      	b.n	e <open_cfw_cordio_wsf_timer_insert_candidate+0xe>
+  44:	00000000 	.word	0x00000000
+			44: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_init_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_init_candidate>:
+   0:	2100      	movs	r1, #0
+   2:	b510      	push	{r4, lr}
+   4:	4c0e      	ldr	r4, [pc, #56]	@ (40 <open_cfw_cordio_wsf_timer_init_candidate+0x40>)
+   6:	4a0f      	ldr	r2, [pc, #60]	@ (44 <open_cfw_cordio_wsf_timer_init_candidate+0x44>)
+   8:	6823      	ldr	r3, [r4, #0]
+   a:	b082      	sub	sp, #8
+   c:	6011      	str	r1, [r2, #0]
+   e:	6051      	str	r1, [r2, #4]
+  10:	b10b      	cbz	r3, 16 <open_cfw_cordio_wsf_timer_init_candidate+0x16>
+  12:	b002      	add	sp, #8
+  14:	bd10      	pop	{r4, pc}
+  16:	490c      	ldr	r1, [pc, #48]	@ (48 <open_cfw_cordio_wsf_timer_init_candidate+0x48>)
+  18:	461a      	mov	r2, r3
+  1a:	9100      	str	r1, [sp, #0]
+  1c:	480b      	ldr	r0, [pc, #44]	@ (4c <open_cfw_cordio_wsf_timer_init_candidate+0x4c>)
+  1e:	210a      	movs	r1, #10
+  20:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_create_candidate>
+			20: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_create_candidate
+  24:	6020      	str	r0, [r4, #0]
+  26:	b128      	cbz	r0, 34 <open_cfw_cordio_wsf_timer_init_candidate+0x34>
+  28:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_tick_counter_get_candidate>
+			28: R_ARM_THM_CALL	open_cfw_cordio_wsf_tick_counter_get_candidate
+  2c:	4b08      	ldr	r3, [pc, #32]	@ (50 <open_cfw_cordio_wsf_timer_init_candidate+0x50>)
+  2e:	6018      	str	r0, [r3, #0]
+  30:	b002      	add	sp, #8
+  32:	bd10      	pop	{r4, pc}
+  34:	b002      	add	sp, #8
+  36:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+  3a:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_timer_fatal_candidate>
+			3a: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_timer_fatal_candidate
+  3e:	bf00      	nop
+	...
+			40: R_ARM_ABS32	open_cfw_cordio_wsf_freertos_timer_candidate
+			44: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate
+			48: R_ARM_ABS32	open_cfw_cordio_wsf_timer_callback_candidate
+			4c: R_ARM_ABS32	.rodata.open_cfw_cordio_wsf_timer_init_candidate.str1.4
+			50: R_ARM_ABS32	open_cfw_cordio_wsf_last_tick_candidate
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_start_sec_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_start_sec_candidate>:
+   0:	2364      	movs	r3, #100	@ 0x64
+   2:	fb03 f101 	mul.w	r1, r3, r1
+   6:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_timer_start_sec_candidate>
+			6: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_timer_insert_candidate
+   a:	bf00      	nop
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_start_ms_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_start_ms_candidate>:
+   0:	4b02      	ldr	r3, [pc, #8]	@ (c <open_cfw_cordio_wsf_timer_start_ms_candidate+0xc>)
+   2:	fba3 3101 	umull	r3, r1, r3, r1
+   6:	08c9      	lsrs	r1, r1, #3
+   8:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_timer_start_ms_candidate>
+			8: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_timer_insert_candidate
+   c:	cccccccd 	.word	0xcccccccd
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_stop_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_stop_candidate>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			4: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   8:	4620      	mov	r0, r4
+   a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_stop_candidate>
+			a: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_remove_candidate
+   e:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+  12:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			12: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_task_unlock_candidate
+  16:	bf00      	nop
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_update_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_update_candidate>:
+   0:	b570      	push	{r4, r5, r6, lr}
+   2:	4605      	mov	r5, r0
+   4:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			4: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   8:	4b0e      	ldr	r3, [pc, #56]	@ (44 <open_cfw_cordio_wsf_timer_update_candidate+0x44>)
+   a:	681c      	ldr	r4, [r3, #0]
+   c:	b14c      	cbz	r4, 22 <open_cfw_cordio_wsf_timer_update_candidate+0x22>
+   e:	2600      	movs	r6, #0
+  10:	6863      	ldr	r3, [r4, #4]
+  12:	42ab      	cmp	r3, r5
+  14:	eba3 0205 	sub.w	r2, r3, r5
+  18:	d907      	bls.n	2a <open_cfw_cordio_wsf_timer_update_candidate+0x2a>
+  1a:	6062      	str	r2, [r4, #4]
+  1c:	6824      	ldr	r4, [r4, #0]
+  1e:	2c00      	cmp	r4, #0
+  20:	d1f6      	bne.n	10 <open_cfw_cordio_wsf_timer_update_candidate+0x10>
+  22:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+  26:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			26: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_task_unlock_candidate
+  2a:	7b20      	ldrb	r0, [r4, #12]
+  2c:	6066      	str	r6, [r4, #4]
+  2e:	2102      	movs	r1, #2
+  30:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_set_ready_candidate>
+			30: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_set_ready_candidate
+  34:	6824      	ldr	r4, [r4, #0]
+  36:	2c00      	cmp	r4, #0
+  38:	d1ea      	bne.n	10 <open_cfw_cordio_wsf_timer_update_candidate+0x10>
+  3a:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+  3e:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			3e: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_task_unlock_candidate
+  42:	bf00      	nop
+  44:	00000000 	.word	0x00000000
+			44: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_next_expiration_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_next_expiration_candidate>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4604      	mov	r4, r0
+   4:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			4: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   8:	4b08      	ldr	r3, [pc, #32]	@ (2c <open_cfw_cordio_wsf_timer_next_expiration_candidate+0x2c>)
+   a:	681b      	ldr	r3, [r3, #0]
+   c:	b133      	cbz	r3, 1c <open_cfw_cordio_wsf_timer_next_expiration_candidate+0x1c>
+   e:	2201      	movs	r2, #1
+  10:	685d      	ldr	r5, [r3, #4]
+  12:	7022      	strb	r2, [r4, #0]
+  14:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			14: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  18:	4628      	mov	r0, r5
+  1a:	bd38      	pop	{r3, r4, r5, pc}
+  1c:	461a      	mov	r2, r3
+  1e:	461d      	mov	r5, r3
+  20:	7022      	strb	r2, [r4, #0]
+  22:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			22: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  26:	4628      	mov	r0, r5
+  28:	bd38      	pop	{r3, r4, r5, pc}
+  2a:	bf00      	nop
+  2c:	00000000 	.word	0x00000000
+			2c: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_service_expired_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_service_expired_candidate>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			2: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   6:	4809      	ldr	r0, [pc, #36]	@ (2c <open_cfw_cordio_wsf_timer_service_expired_candidate+0x2c>)
+   8:	6804      	ldr	r4, [r0, #0]
+   a:	b10c      	cbz	r4, 10 <open_cfw_cordio_wsf_timer_service_expired_candidate+0x10>
+   c:	6865      	ldr	r5, [r4, #4]
+   e:	b125      	cbz	r5, 1a <open_cfw_cordio_wsf_timer_service_expired_candidate+0x1a>
+  10:	2400      	movs	r4, #0
+  12:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			12: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  16:	4620      	mov	r0, r4
+  18:	bd38      	pop	{r3, r4, r5, pc}
+  1a:	462a      	mov	r2, r5
+  1c:	4621      	mov	r1, r4
+  1e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_remove_candidate>
+			1e: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_remove_candidate
+  22:	7365      	strb	r5, [r4, #13]
+  24:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			24: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  28:	4620      	mov	r0, r4
+  2a:	bd38      	pop	{r3, r4, r5, pc}
+  2c:	00000000 	.word	0x00000000
+			2c: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_update_ticks_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_update_ticks_candidate>:
+   0:	b530      	push	{r4, r5, lr}
+   2:	b085      	sub	sp, #20
+   4:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_tick_counter_get_candidate>
+			4: R_ARM_THM_CALL	open_cfw_cordio_wsf_tick_counter_get_candidate
+   8:	4d17      	ldr	r5, [pc, #92]	@ (68 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x68>)
+   a:	682b      	ldr	r3, [r5, #0]
+   c:	1ac3      	subs	r3, r0, r3
+   e:	2b09      	cmp	r3, #9
+  10:	d820      	bhi.n	54 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x54>
+  12:	f10d 000f 	add.w	r0, sp, #15
+  16:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_update_ticks_candidate>
+			16: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_next_expiration_candidate
+  1a:	4602      	mov	r2, r0
+  1c:	b908      	cbnz	r0, 22 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x22>
+  1e:	b005      	add	sp, #20
+  20:	bd30      	pop	{r4, r5, pc}
+  22:	f242 7c10 	movw	r12, #10000	@ 0x2710
+  26:	2564      	movs	r5, #100	@ 0x64
+  28:	fb0c f202 	mul.w	r2, r12, r2
+  2c:	4c0f      	ldr	r4, [pc, #60]	@ (6c <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x6c>)
+  2e:	4b10      	ldr	r3, [pc, #64]	@ (70 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x70>)
+  30:	fba4 4202 	umull	r4, r2, r4, r2
+  34:	6818      	ldr	r0, [r3, #0]
+  36:	2104      	movs	r1, #4
+  38:	2300      	movs	r3, #0
+  3a:	9500      	str	r5, [sp, #0]
+  3c:	0992      	lsrs	r2, r2, #6
+  3e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_command_candidate>
+			3e: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_command_candidate
+  42:	2801      	cmp	r0, #1
+  44:	d0eb      	beq.n	1e <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x1e>
+  46:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_command_failure_candidate>
+			46: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_command_failure_candidate
+  4a:	b005      	add	sp, #20
+  4c:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+  50:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_timer_fatal_candidate>
+			50: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_timer_fatal_candidate
+  54:	4604      	mov	r4, r0
+  56:	4a07      	ldr	r2, [pc, #28]	@ (74 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x74>)
+  58:	fba2 2303 	umull	r2, r3, r2, r3
+  5c:	08d8      	lsrs	r0, r3, #3
+  5e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_update_ticks_candidate>
+			5e: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_update_candidate
+  62:	602c      	str	r4, [r5, #0]
+  64:	e7d5      	b.n	12 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x12>
+  66:	bf00      	nop
+  68:	00000000 	.word	0x00000000
+			68: R_ARM_ABS32	open_cfw_cordio_wsf_last_tick_candidate
+  6c:	10624dd3 	.word	0x10624dd3
+  70:	00000000 	.word	0x00000000
+			70: R_ARM_ABS32	open_cfw_cordio_wsf_freertos_timer_candidate
+  74:	cccccccd 	.word	0xcccccccd

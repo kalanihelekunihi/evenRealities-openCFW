@@ -1,0 +1,5 @@
+push {r3,lr}
+movs r3,#100 @ 0ximm
+mul.w r1,r3,r1
+bl <call>
+pop {r3,pc}

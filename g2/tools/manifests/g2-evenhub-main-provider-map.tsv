@@ -1,0 +1,8 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	120 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	EvenHub state and message diagnostics only
+IAR DLIB and EABI runtime	6 direct BL sites	0x00439BE4,0x0043C0E4,0x0047CC60	IAR proprietary DLIB plus source-owned ARM EABI division	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded or source-recreated	Copies zero fills and integer division add no release discriminator
+LVGL UI primitive	2 direct BL sites	0x00441488	lvgl/lvgl with G2 integration	9.3-compatible	344c7c318047b7348e1be8572a9fd4260c251cfa	source-admitted	Already admitted object-state query
+CMSIS-FreeRTOS tick wrapper	2 direct BL sites	0x004490CC	ARM CMSIS-FreeRTOS v10.5.1	10.5.1	d213f261b5be6bb29a7cce8b84071706b72f4d53	source-admitted	Exact osKernelGetTickCount provider
+nanopb decoder	3 direct BL sites	0x0048EB32	nanopb/nanopb with G2 messages	0.4.7 through 0.4.9.1 compatible	98bf4db69897b53434f3d0ba72e0a3ab1a902824	source-admitted	Known message decode primitive; no new point-release discriminator
+Synchronized TLSF heap wrappers	2 direct BL sites	0x00474CD2,0x00474D16	G2 wrappers over mattconte/TLSF	v3.1-compatible	deff9ab509341f264addbd3c8ada533678591905	production source-owned	Allocation and release terminate at already routed wrappers
+G2 EvenHub and service providers	45 direct BL sites	27 bounded first-party entries	Even Realities first-party over separately admitted providers	private G2 source	unobservable	bounded first-party provider graph	UI state protobuf service time and fail-stop helpers

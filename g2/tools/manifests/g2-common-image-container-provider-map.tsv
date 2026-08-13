@@ -1,0 +1,7 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	70 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Container diagnostics
+LVGL image and object primitives	3 direct BL sites	0x00440656,0x00441068,0x0044D7B8	lvgl/lvgl with G2 integration	9.3-compatible	344c7c318047b7348e1be8572a9fd4260c251cfa	source-admitted	Image/object lifecycle
+TLSF-backed synchronized free	3 direct BL sites	0x00474D16	OpenCFW G2 wrapper over mattconte/tlsf	v3.1-compatible	deff9ab509341f264addbd3c8ada533678591905	production source-owned	Releases image records
+Apollo510 cache clean	1 direct BL site	0x0047510E	AmbiqSuite 5.1.0-lineage Apollo510 source	5.1.0 public replay	5efc0228528a8adce5eae0d226fac85d2551eb3b	production source-owned	Cleans updated image storage
+Bounded signed absolute value	1 direct BL site	0x00509694	compiler-emitted or project runtime helper	8-byte source-equivalent leaf	unobservable	fully bounded	Adds no dependency/version discriminator
+G2 image/navigation providers	2 direct BL sites	0x00498680,0x005456D6	Even Realities first-party	private G2 source	unobservable	bounded first-party graph	Image resource and navigation policy

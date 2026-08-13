@@ -1,0 +1,17 @@
+
+out/O0/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_callback_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_callback_candidate>:
+   0:	b500      	push	{lr}
+   2:	b083      	sub	sp, #12
+   4:	9001      	str	r0, [sp, #4]
+   6:	2102      	movs	r1, #2
+   8:	2000      	movs	r0, #0
+   a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_set_ready_candidate>
+			a: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_set_ready_candidate
+   e:	bf00      	nop
+  10:	b003      	add	sp, #12
+  12:	f85d fb04 	ldr.w	pc, [sp], #4

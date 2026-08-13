@@ -1,0 +1,16 @@
+recovery_order	function	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	ghidra_discovered	qualification
+1	_ring_policy_tick_now	0x0049F020	0x0049F028	8	399f8823ff2e7619348dd8203b094b8690d93092b96bfc1a04a4a2b203f46e93	no	no	thin exact call-through to CMSIS osKernelGetTickCount
+2	_ring_policy_elapsed_ticks	0x0049F028	0x0049F040	24	a93904f09e05ffdf4e4b2f7b4eab4a33f94ba0ccbd48c3178ed710183119d89d	no	no	returns UINT32_MAX for a zero timestamp or the unsigned delta from the current kernel tick
+3	_ring_policy_timeout_for_mode	0x0049F040	0x0049F05C	28	132bfda1ca40f362c33d5f97bc9a6c107c642df63128a9d15b17c8507af7d0fb	no	no	maps policy modes one and two to 20000 and 3000 ticks and all other values to zero
+4	_GetState	0x0049F05C	0x0049F0DA	126	f92fb29b41f3292ec294b01c39018a34f3824c9ed53d23d5365a7c072f86bd79	yes	yes	returns the current state after expiring a timed state back to IDLE
+5	_EnterState	0x0049F0DA	0x0049F15A	128	4da2896b85831b8b21473a05d49202680e969e56a6ffc806f6b17c9af567a349	yes	yes	logs a state transition and records its start tick
+6	RING_ConnectPolicyOnDominantHand	0x0049F15A	0x0049F326	460	99f16d53f2ce9e8596c218e5fbddbd6b5e62cf40ba2c95fc5411a4c6fb0177df	yes	yes	accepts rejects or follows up dominant-hand changes through the bounded switch window
+7	RING_ConnectPolicyShouldBlockRingConnectInfo	0x0049F326	0x0049F438	274	b2c67165c888f74d4f28f3ddee66799a4edb5f0b3bfa43788614e61584c83744	yes	yes	allows the first connect-info message in a switch window and throttles subsequent messages
+8	RING_ConnectPolicyMarkRingConnectInfoProcessed	0x0049F438	0x0049F4A8	112	f69b25e11cc437312afa76ca53380c4667fbbf4e26965c571206ae59f1ce758c	yes	yes	records the connect-info processing tick and advances policy state
+9	RING_ConnectPolicyScheduleConnectTimeout	0x0049F4A8	0x0049F500	88	8b3daad04e9868894e22d2426b3582b4c03beefd378da0503110fbfa98d632c4	yes	yes	replaces the delayed connect-timeout callback through the closed event loop
+10	_ringReconnectTimeoutFire	0x0049F500	0x0049F552	82	4b4ab91e467f32361bb97ccb5a82b761bdba6d4e184a8b9f391d360fdf29ec08	yes	no	clears pending state and queues the ring-connect-failed protobuf notification after 20000 ticks
+11	RING_ConnectPolicyScheduleReconnectTimeout	0x0049F552	0x0049F5F8	166	13dd372a0da75533f877767ef7d93be5697aea2bc84fb4ac3f7a9bb47784695c	yes	yes	keeps an existing reconnect timeout or schedules the callback through the closed event loop
+12	RING_ConnectPolicyCancelConnectTimeout	0x0049F5F8	0x0049F646	78	e493887eb11c6f1dcd88105e0dde17d897710a278774bf7e06543139c43cd7dd	yes	yes	removes both connect-timeout callbacks and clears the pending marker
+13	RING_ConnectPolicyNotifyConnectSuccessSoon	0x0049F646	0x0049F6AE	104	68c7a35459ba021afe9174e0c49c8e24d87af250b21b2c728ebc233de783e8d8	yes	yes	cancels timeout work and schedules success notification when the local side owns the Ring
+14	RING_ConnectPolicyReset	0x0049F6AE	0x0049F702	84	4d1d0fc15b1db26eb45a2e28af7cacbaf5965217dc4b98826841224d3ef08f1c	yes	yes	resets dominant-hand throttle and delayed-timeout policy state
+15	RING_ConnectPolicyResetRingConnectInfoThrottle	0x0049F702	0x0049F744	66	93a7a86cc4d4cc94c6e9cce4b73892c2602095f680083772375a1d50ac0cc022	yes	yes	resets connect-info throttling while retaining dominant-hand state

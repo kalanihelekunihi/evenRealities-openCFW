@@ -1,0 +1,5 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	direct_or_stored_callers	evidence
+1	APP_PbRxRingFrameDataProcess	exact retained diagnostic symbol	0x005CE1DC	0x005CE3CE	498	91584b2a82140bf9e7a99283d76e3ceef267daeb75d469caf283037b3c9e2ed6	0x005CE6E4	nanopb decode, command dispatch, and exact RX status policy
+2	PB_RxRingEvent	exact retained diagnostic symbol	0x005CE3CE	0x005CE4E6	280	807dda29aad8d7dd432396548b36068614a066a0a7e1c128b0e1051798080ddc	0x005CE36C	validates the nested event pointer and diagnoses event/MAC fields
+3	APP_PbTxEncodeRingEvent	exact retained diagnostic symbol	0x005CE4E6	0x005CE690	426	c50bfc78dcb2a0925d27509bf7b122ce1a0e5ce8c749e77a331578fda85d93eb	0x005CE378	encodes bounded MAC/event fields and transmits service 0x91
+4	RingDataRelay_common_data_handler	exact retained diagnostic symbol	0x005CE690	0x005CE72E	158	db44519e2c518465e77aeedeee75f7eb8d9cde03d2240804cbab70f2dc3407e9	stored Thumb pointer 0x006A45B4	dispatches relay event type zero to the protobuf RX body

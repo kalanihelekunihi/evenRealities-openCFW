@@ -1,0 +1,3 @@
+stock_name	start	end	candidate_symbol	evidence
+WsfTrace	0x0052A63C	0x0052A672	WsfTrace	126 direct BL callers; source-path literal and line 137; exact 1024-byte stack buffer and provider call order
+WsfAssert	0x00569A44	0x00569ADE	WsfAssert	sole direct BL from WsfTrace; complete return boundary; retained wsf_assert.c path and EasyLogger literals; downstream-modified implementation

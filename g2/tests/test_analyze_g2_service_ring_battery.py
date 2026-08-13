@@ -1,0 +1,14 @@
+import importlib.util,sys,unittest
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+class ServiceRingBatteryTests(unittest.TestCase):
+ @classmethod
+ def setUpClass(cls):
+  spec=importlib.util.spec_from_file_location("service_ring_battery",ROOT/"tools/analyze_g2_service_ring_battery.py");cls.m=importlib.util.module_from_spec(spec);sys.modules[spec.name]=cls.m;spec.loader.exec_module(cls.m);cls.r=cls.m.analyze()
+ def test_surface(self):
+  expected={"linked_functions":5,"ghidra_discovered_functions":5,"path_anchored_functions":2,"body_bytes":352,"physical_bytes":396,"outer_pool_bytes":44,"direct_body_calls":19,"internal_direct_body_calls":0,"external_direct_body_calls":19,"indirect_body_calls":0,"direct_bl_entry_sites":9,"stored_entry_pointers":0}
+  for key,value in expected.items():self.assertEqual(self.r["surface"][key],value,key)
+ def test_providers(self):
+  p=self.r["provider_boundary"];self.assertEqual((p["easylogger_calls"],p["iar_dlib_calls"],p["first_party_transport_calls"]),(15,2,2));self.assertEqual(p["easylogger_commit"],"a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24");self.assertFalse(p["new_version_discriminator"])
+ def test_not_routed(self):self.assertFalse(self.r["production"]["production_routed"])
+if __name__=="__main__":unittest.main()

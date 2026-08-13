@@ -1,0 +1,7 @@
+ordinal	function	stock_start	stock_end_exclusive	interval_bytes	interval_sha256	provenance	behavior
+1	__NVIC_EnableIRQ	0x0057B444	0x0057B460	28	cc0b6121bbc9a3a1e720faeb8a9a7d0b83c7895fff3185d109774b158fd8f9af	exact CMSIS-Core inline semantics	sets the selected NVIC ISER bit for a nonnegative IRQ
+2	__NVIC_DisableIRQ	0x0057B460	0x0057B484	36	d136e83a1f294f65eb71ffcacf26454dc934dd1b0c1653c0ded7d17529b3482c	exact CMSIS-Core inline semantics	sets the selected NVIC ICER bit then executes DSB and ISB
+3	__NVIC_SetPriority	0x0057B484	0x0057B4A8	36	e68185fe040891abbf5a3b6aaf0bd7482841bb629b98e2c4c295a491ec65f95b	exact CMSIS-Core inline semantics	writes an external or system-handler priority byte
+4	DRV_PdmProductionInit	0x0057B4A8	0x0057B586	222	a22c31f573d7d9c2c2d8922481b2999342adfaddb7e04640e67c07380a6c59bb	retained exact diagnostic symbol	idempotently configures pins initializes powers configures thresholds interrupts priority and enables PDM0
+5	DRV_PdmProductionDeinit	0x0057B586	0x0057B640	186	bf55e1fc9efe58a43b6d1c3462cd1181e051f21df632acac6c3b909062bdd9f5	retained exact diagnostic symbol	idempotently disables interrupts and PDM powers down deinitializes and releases pins
+6	drv_pdm_production_buffer_get	0x0057B640	0x0057B6A6	102	68ffe3d7e8765057b6d61d9a316312fcb20357ad70e8c9e5084b1adfac8b32d9	sole production microphone caller	gets the inactive Ambiq DMA buffer invalidates it and extracts 1600 signed 16-bit samples into a 3200-byte scratch buffer

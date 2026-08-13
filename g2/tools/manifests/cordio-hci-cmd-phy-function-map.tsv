@@ -1,0 +1,4 @@
+source_order	function	stock_status	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	r20c_lines	r20c_body_sha256	ingress
+1	HciLeReadPhyCmd	source_only			0		39-50	4c7289e22ccdb9145c64f489e396412bc3fd593e8b10a59af8c091f91aa1ad35	no body caller or pointer
+2	HciLeSetDefaultPhyCmd	source_only			0		59-72	44a49d9ebcd97e18ed9cd35defe09440a84443d83aa57feb0fd02e9c7da90b92	no body caller or pointer
+3	HciLeSetPhyCmd	linked	0x00539E48	0x00539E92	74	99adfd215aa56b86644b456c9ccd2821ffed6d3243280bf60fbad7d0d48d4d2c	81-96	d0076f1756dc24d11943b5d320dcfe6f1f5245962f6568e203c4e4e834c00ea3	direct call from DmSetPhy

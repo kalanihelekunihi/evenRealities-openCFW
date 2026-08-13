@@ -1,0 +1,4 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	15 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99 source-equivalent core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Log-level query, structured output, and raw output around the two service sends
+IAR DLIB memset	2 direct BL sites	0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded/source-recreated	Twelve-byte message-record initialization only
+G2 service-record transport	2 direct BL sites	0x00464D1C,0x004651E0	Even Realities first-party	private G2 source	unobservable	provider seams identified	Posts a local status update or schedules a peer request under service record ID 0x105

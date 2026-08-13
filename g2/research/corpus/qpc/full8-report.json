@@ -1,0 +1,937 @@
+{
+  "compiler": "arc-linux-gnu-gcc (GCC) 16.1.1 20260501 (Red Hat Cross 16.1.1-1)",
+  "epochs": [
+    {
+      "equivalent_source_tags": [
+        "v6.0.1"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "cec067f2b385ecf607a79d233f5673afeab585dc60554a57193ebbf785872c3e",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "2d6abb3f6dc84a857d348bf04ed4bdbe1a48ff86fab0bcb0459407461ca0e1fd",
+          "object_sha256": "a5e0da84c3f8b44cef91836e20766dfbcb5bf4b2d2472ef7f48c2aff9b6979f1",
+          "object_size": 2332,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "2d014fe41301bb20aa29140dd3bd57c498b514dc2480777dc10675ad06c61cf6",
+          "object_sha256": "be996501c38782502a148b67f086f3dcbe1bfa124d8f1dfea4001d79fbc76ad6",
+          "object_size": 4204,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "d88b011a2fea5949b1c67eaa3ef1862ea574366b7f4b9c20c7966cd6d686635f",
+          "object_sha256": "05d0d00040f48bc3d92718d34725617d188abc28fd72de1574c9fef8ff46b02d",
+          "object_size": 3008,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "6b3be023faffc532b7fa3e27fbb53f451745effecf4aceb670d8ec815c1b4a01",
+          "object_sha256": "d4a5764b031a99fbdaedc26fe8e7d8f67687030cbfc2782bcea6a8c1da51d3d7",
+          "object_size": 2400,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "1574f8c49c4731612abc17da1db761c1eef655a6357a810b54177db1407a27a9",
+          "object_sha256": "6f57294011fe9997b420891dba3b399eaa3813384d3c6e171a741ff770e9bcba",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "d8dc32165b70b8714f29952cb79644c2c572281a9a5eff9bcd45127b9511cafe",
+          "object_sha256": "fc09d30bb5b2d621aba758eebfec5184a6e4ab76207e346d569a6d84adcb0b87",
+          "object_size": 2140,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "4400ca81618f37838bfd38813283acb63ed1f800331702991ac456777481d3f4",
+          "object_sha256": "2e86d8caf228b2da9046de9b4990b3ea3b65a06b112826b2102e7c9e71dbccb9",
+          "object_size": 4552,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": false,
+      "tag": "v6.0.1"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.0.4"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "ef2ed4f4e8261b4be690ae505960ce2e7cea3fe4aedf533a3c8826c71402f8c9",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "2b9bfdf6d10374cff1158bf1a00961a95321f2f3f8df57378fa600e2e1f114f4",
+          "object_sha256": "94a703c7577bf988e7a77534c64515256c9a3665e3d6430cf0c7fc61a4002775",
+          "object_size": 2072,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "2d014fe41301bb20aa29140dd3bd57c498b514dc2480777dc10675ad06c61cf6",
+          "object_sha256": "be996501c38782502a148b67f086f3dcbe1bfa124d8f1dfea4001d79fbc76ad6",
+          "object_size": 4204,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "d88b011a2fea5949b1c67eaa3ef1862ea574366b7f4b9c20c7966cd6d686635f",
+          "object_sha256": "05d0d00040f48bc3d92718d34725617d188abc28fd72de1574c9fef8ff46b02d",
+          "object_size": 3008,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "6b3be023faffc532b7fa3e27fbb53f451745effecf4aceb670d8ec815c1b4a01",
+          "object_sha256": "d4a5764b031a99fbdaedc26fe8e7d8f67687030cbfc2782bcea6a8c1da51d3d7",
+          "object_size": 2400,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "1574f8c49c4731612abc17da1db761c1eef655a6357a810b54177db1407a27a9",
+          "object_sha256": "6f57294011fe9997b420891dba3b399eaa3813384d3c6e171a741ff770e9bcba",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "d8dc32165b70b8714f29952cb79644c2c572281a9a5eff9bcd45127b9511cafe",
+          "object_sha256": "fc09d30bb5b2d621aba758eebfec5184a6e4ab76207e346d569a6d84adcb0b87",
+          "object_size": 2140,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "2e1b59a4c1baad1351b9475202bb9c5e77d929e3e9d8ee2bf4c9d972011fcd28",
+          "object_sha256": "7c816017c2e714bd30b5b9463f212111fea85994be970fcaece58e8485d797ab",
+          "object_size": 4540,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": false,
+      "tag": "v6.0.4"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.2.0",
+        "v6.3.0",
+        "v6.3.1"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "342845349a9cc84d7212ffe12a888f428e9644d5c4a6bcfa4ba0f27d72a6f2f6",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "f704f9536419ce6fb9df9bc2682d449dc42bcefa8007b987c70cf55ba8e7a07a",
+          "object_sha256": "9e9daddec168722b0cefef155678d41e883966093b09636e588dfd751bc355bf",
+          "object_size": 1724,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "e9a9d4b59facb87b4f931940590c03b76fda0d43e02dac726a4dc777f2007c5b",
+          "object_sha256": "68b8a75062f49c75d30fe3d066243ea8a74247c4a7190625b528f749ca1ee7c2",
+          "object_size": 4208,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "13ad7c95d9d7b3a21123ea33d1ab3ab617a1bb9808bdd4716a31dc442ea778f6",
+          "object_sha256": "82eec083aac838d87e274f8f3894198af132659316aedbb4592622bb47e67bc4",
+          "object_size": 3176,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "6b3be023faffc532b7fa3e27fbb53f451745effecf4aceb670d8ec815c1b4a01",
+          "object_sha256": "d4a5764b031a99fbdaedc26fe8e7d8f67687030cbfc2782bcea6a8c1da51d3d7",
+          "object_size": 2400,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "717196f1cd0502ed66e79031379cbbc07f5802b378a2b424f2d9e5951a5bfdf1",
+          "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "d8dc32165b70b8714f29952cb79644c2c572281a9a5eff9bcd45127b9511cafe",
+          "object_sha256": "fc09d30bb5b2d621aba758eebfec5184a6e4ab76207e346d569a6d84adcb0b87",
+          "object_size": 2140,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "01d2e777d80db0212d58de447b382be4dc7d19ed9c6b6027861c7c0cb67fc2ae",
+          "object_sha256": "18cbce0fb4d59442b4322c11f00979e6e5ba86403b94198980ff7ad50cf1c252",
+          "object_size": 5012,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": false,
+      "tag": "v6.3.1"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.3.2",
+        "v6.3.3",
+        "v6.3.3a",
+        "v6.3.4"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "53a1097caad8c85dbb08ece67989ff76e340b95fdf430e05d1efabd5f88d2365",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "f704f9536419ce6fb9df9bc2682d449dc42bcefa8007b987c70cf55ba8e7a07a",
+          "object_sha256": "9e9daddec168722b0cefef155678d41e883966093b09636e588dfd751bc355bf",
+          "object_size": 1724,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "8cc920028bea54d2f579542e13125effeebba2d69908b813568b33d351e40838",
+          "object_sha256": "b4720e280a62e22752513103764cb2de3864a56395a2a636114e92eebc3dbd30",
+          "object_size": 4244,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "13ad7c95d9d7b3a21123ea33d1ab3ab617a1bb9808bdd4716a31dc442ea778f6",
+          "object_sha256": "82eec083aac838d87e274f8f3894198af132659316aedbb4592622bb47e67bc4",
+          "object_size": 3176,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "e1eafd4baf7933110bc1fc4aa7fe433231eeb2dc5dc8b7e7a7a54a3878504364",
+          "object_sha256": "a81a0e198aec236660360d39eaed94b95efdd0b7b50a0412c9c9b9ec22101eb3",
+          "object_size": 2436,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "717196f1cd0502ed66e79031379cbbc07f5802b378a2b424f2d9e5951a5bfdf1",
+          "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "b45f0fa2545c96635f719edbeb5cfde1646d00f41b9b0f77fa9861f70df3b68c",
+          "object_sha256": "c581f213738ce8a1555e8b53358f1825bf272927e6bbce866bd8709bd401c30f",
+          "object_size": 2176,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "01d2e777d80db0212d58de447b382be4dc7d19ed9c6b6027861c7c0cb67fc2ae",
+          "object_sha256": "18cbce0fb4d59442b4322c11f00979e6e5ba86403b94198980ff7ad50cf1c252",
+          "object_size": 5012,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": false,
+      "tag": "v6.3.4"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.3.6"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "1e731a509468ed465f96888b18ae1218cb3c736465c4f26fbb634cb4ae94cd3a",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "f704f9536419ce6fb9df9bc2682d449dc42bcefa8007b987c70cf55ba8e7a07a",
+          "object_sha256": "9e9daddec168722b0cefef155678d41e883966093b09636e588dfd751bc355bf",
+          "object_size": 1724,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "e39722d0040def607e398aa8fb1edcfe01e2447a098d16084e06749e6cae8c5e",
+          "object_sha256": "738fb4032fe21df8d0b4c0de3a0c6572e1f5ba48ac5e6b192c6e6aa290c7b1d4",
+          "object_size": 4268,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "13ad7c95d9d7b3a21123ea33d1ab3ab617a1bb9808bdd4716a31dc442ea778f6",
+          "object_sha256": "82eec083aac838d87e274f8f3894198af132659316aedbb4592622bb47e67bc4",
+          "object_size": 3176,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "e1eafd4baf7933110bc1fc4aa7fe433231eeb2dc5dc8b7e7a7a54a3878504364",
+          "object_sha256": "a81a0e198aec236660360d39eaed94b95efdd0b7b50a0412c9c9b9ec22101eb3",
+          "object_size": 2436,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "717196f1cd0502ed66e79031379cbbc07f5802b378a2b424f2d9e5951a5bfdf1",
+          "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "b45f0fa2545c96635f719edbeb5cfde1646d00f41b9b0f77fa9861f70df3b68c",
+          "object_sha256": "c581f213738ce8a1555e8b53358f1825bf272927e6bbce866bd8709bd401c30f",
+          "object_size": 2176,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "01d2e777d80db0212d58de447b382be4dc7d19ed9c6b6027861c7c0cb67fc2ae",
+          "object_sha256": "18cbce0fb4d59442b4322c11f00979e6e5ba86403b94198980ff7ad50cf1c252",
+          "object_size": 5012,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": true,
+      "tag": "v6.3.6"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.3.7",
+        "v6.3.8"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "31d04b4f6b10394650c3394a512c4aed0366862a4edc0b6bf5df1b5f34683371",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "f704f9536419ce6fb9df9bc2682d449dc42bcefa8007b987c70cf55ba8e7a07a",
+          "object_sha256": "9e9daddec168722b0cefef155678d41e883966093b09636e588dfd751bc355bf",
+          "object_size": 1724,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "e39722d0040def607e398aa8fb1edcfe01e2447a098d16084e06749e6cae8c5e",
+          "object_sha256": "738fb4032fe21df8d0b4c0de3a0c6572e1f5ba48ac5e6b192c6e6aa290c7b1d4",
+          "object_size": 4268,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "13ad7c95d9d7b3a21123ea33d1ab3ab617a1bb9808bdd4716a31dc442ea778f6",
+          "object_sha256": "82eec083aac838d87e274f8f3894198af132659316aedbb4592622bb47e67bc4",
+          "object_size": 3176,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "e1eafd4baf7933110bc1fc4aa7fe433231eeb2dc5dc8b7e7a7a54a3878504364",
+          "object_sha256": "a81a0e198aec236660360d39eaed94b95efdd0b7b50a0412c9c9b9ec22101eb3",
+          "object_size": 2436,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "717196f1cd0502ed66e79031379cbbc07f5802b378a2b424f2d9e5951a5bfdf1",
+          "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "b45f0fa2545c96635f719edbeb5cfde1646d00f41b9b0f77fa9861f70df3b68c",
+          "object_sha256": "c581f213738ce8a1555e8b53358f1825bf272927e6bbce866bd8709bd401c30f",
+          "object_size": 2176,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "01d2e777d80db0212d58de447b382be4dc7d19ed9c6b6027861c7c0cb67fc2ae",
+          "object_sha256": "18cbce0fb4d59442b4322c11f00979e6e5ba86403b94198980ff7ad50cf1c252",
+          "object_size": 5012,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": true,
+      "tag": "v6.3.8"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.4.0"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "95d3e9ec185d91328b84b426764247a520dda19e598e060d643ae65751f5466e",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "bb5fc9b053084548ebe32a738b418160d4154ec8372c0f70035e70de8305317a",
+          "object_sha256": "c13fc4aed2f390259192b368defecd1b2946e343467c3aa01612d848eedf4455",
+          "object_size": 2056,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "d79fefe9b02b49aa9bd37b8092b6e158f89de0a105f921fa8f6ddd15fc6cac14",
+          "object_sha256": "25a7e3b96ffc793db039435c741bb696a22dcfdec60f198d75e79929c0a898df",
+          "object_size": 4268,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "13ad7c95d9d7b3a21123ea33d1ab3ab617a1bb9808bdd4716a31dc442ea778f6",
+          "object_sha256": "82eec083aac838d87e274f8f3894198af132659316aedbb4592622bb47e67bc4",
+          "object_size": 3176,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "e1eafd4baf7933110bc1fc4aa7fe433231eeb2dc5dc8b7e7a7a54a3878504364",
+          "object_sha256": "a81a0e198aec236660360d39eaed94b95efdd0b7b50a0412c9c9b9ec22101eb3",
+          "object_size": 2436,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "717196f1cd0502ed66e79031379cbbc07f5802b378a2b424f2d9e5951a5bfdf1",
+          "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "b45f0fa2545c96635f719edbeb5cfde1646d00f41b9b0f77fa9861f70df3b68c",
+          "object_sha256": "c581f213738ce8a1555e8b53358f1825bf272927e6bbce866bd8709bd401c30f",
+          "object_size": 2176,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "3bfe08077f83c852764a9013a9360971e82cebc7757c8a6b4f9f1af2bd650222",
+          "object_sha256": "4d7ceac6f4200a3feae11748e7ec8a91c7fd075e4d61ab38f9823547c87427fd",
+          "object_size": 4340,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": true,
+      "tag": "v6.4.0"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.5.0"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "9e936f65a1f0fcc534601d3551791a2f2d357ea3f332122f2c73a409b9266bf1",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "bb5fc9b053084548ebe32a738b418160d4154ec8372c0f70035e70de8305317a",
+          "object_sha256": "c13fc4aed2f390259192b368defecd1b2946e343467c3aa01612d848eedf4455",
+          "object_size": 2056,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "d79fefe9b02b49aa9bd37b8092b6e158f89de0a105f921fa8f6ddd15fc6cac14",
+          "object_sha256": "25a7e3b96ffc793db039435c741bb696a22dcfdec60f198d75e79929c0a898df",
+          "object_size": 4268,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "13ad7c95d9d7b3a21123ea33d1ab3ab617a1bb9808bdd4716a31dc442ea778f6",
+          "object_sha256": "82eec083aac838d87e274f8f3894198af132659316aedbb4592622bb47e67bc4",
+          "object_size": 3176,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "e1eafd4baf7933110bc1fc4aa7fe433231eeb2dc5dc8b7e7a7a54a3878504364",
+          "object_sha256": "a81a0e198aec236660360d39eaed94b95efdd0b7b50a0412c9c9b9ec22101eb3",
+          "object_size": 2436,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "717196f1cd0502ed66e79031379cbbc07f5802b378a2b424f2d9e5951a5bfdf1",
+          "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "b45f0fa2545c96635f719edbeb5cfde1646d00f41b9b0f77fa9861f70df3b68c",
+          "object_sha256": "c581f213738ce8a1555e8b53358f1825bf272927e6bbce866bd8709bd401c30f",
+          "object_size": 2176,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "3bfe08077f83c852764a9013a9360971e82cebc7757c8a6b4f9f1af2bd650222",
+          "object_sha256": "4d7ceac6f4200a3feae11748e7ec8a91c7fd075e4d61ab38f9823547c87427fd",
+          "object_size": 4340,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": true,
+      "tag": "v6.5.0"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.5.1"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "a63067583534020e352b25de3724de9dd8401f11841c5071e8532c95e1e1f05a",
+          "object_sha256": "f6e0a5f15881a1ee4787775d0d1c5f1399bfdb33af96176cd3611089fa640b36",
+          "object_size": 3696,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "bb5fc9b053084548ebe32a738b418160d4154ec8372c0f70035e70de8305317a",
+          "object_sha256": "c13fc4aed2f390259192b368defecd1b2946e343467c3aa01612d848eedf4455",
+          "object_size": 2056,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "d79fefe9b02b49aa9bd37b8092b6e158f89de0a105f921fa8f6ddd15fc6cac14",
+          "object_sha256": "25a7e3b96ffc793db039435c741bb696a22dcfdec60f198d75e79929c0a898df",
+          "object_size": 4268,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "13ad7c95d9d7b3a21123ea33d1ab3ab617a1bb9808bdd4716a31dc442ea778f6",
+          "object_sha256": "82eec083aac838d87e274f8f3894198af132659316aedbb4592622bb47e67bc4",
+          "object_size": 3176,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "e1eafd4baf7933110bc1fc4aa7fe433231eeb2dc5dc8b7e7a7a54a3878504364",
+          "object_sha256": "a81a0e198aec236660360d39eaed94b95efdd0b7b50a0412c9c9b9ec22101eb3",
+          "object_size": 2436,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "717196f1cd0502ed66e79031379cbbc07f5802b378a2b424f2d9e5951a5bfdf1",
+          "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
+          "object_size": 1416,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "b45f0fa2545c96635f719edbeb5cfde1646d00f41b9b0f77fa9861f70df3b68c",
+          "object_sha256": "c581f213738ce8a1555e8b53358f1825bf272927e6bbce866bd8709bd401c30f",
+          "object_size": 2176,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "3bfe08077f83c852764a9013a9360971e82cebc7757c8a6b4f9f1af2bd650222",
+          "object_sha256": "4d7ceac6f4200a3feae11748e7ec8a91c7fd075e4d61ab38f9823547c87427fd",
+          "object_size": 4340,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": true,
+      "tag": "v6.5.1"
+    },
+    {
+      "equivalent_source_tags": [
+        "v6.6.0+"
+      ],
+      "modules": {
+        "qep_hsm": {
+          "normalized_disassembly_sha256": "0185fcf8027b461e096f24ef9ff90ba9ebb003bc9d37a207c2f9aae36f7e0f08",
+          "object_sha256": "ae626e1b448b733676f4a9333c99955ca4caf156a880dcef47211ed0218d7fd2",
+          "object_size": 3704,
+          "source": "src/qf/qep_hsm.c"
+        },
+        "qf_act": {
+          "normalized_disassembly_sha256": "bb5fc9b053084548ebe32a738b418160d4154ec8372c0f70035e70de8305317a",
+          "object_sha256": "c13fc4aed2f390259192b368defecd1b2946e343467c3aa01612d848eedf4455",
+          "object_size": 2056,
+          "source": "src/qf/qf_act.c"
+        },
+        "qf_actq": {
+          "normalized_disassembly_sha256": "1199cc3e49550cdc3798c1a0ba0691e40b74b151e3e17e61189d795708e67c4d",
+          "object_sha256": "e2973ed60f65ce5ff1ffa0812bbac9d945af369113524ca8e12e03f881daa574",
+          "object_size": 4268,
+          "source": "src/qf/qf_actq.c"
+        },
+        "qf_dyn": {
+          "normalized_disassembly_sha256": "13ad7c95d9d7b3a21123ea33d1ab3ab617a1bb9808bdd4716a31dc442ea778f6",
+          "object_sha256": "82eec083aac838d87e274f8f3894198af132659316aedbb4592622bb47e67bc4",
+          "object_size": 3176,
+          "source": "src/qf/qf_dyn.c"
+        },
+        "qf_mem": {
+          "normalized_disassembly_sha256": "e1eafd4baf7933110bc1fc4aa7fe433231eeb2dc5dc8b7e7a7a54a3878504364",
+          "object_sha256": "a81a0e198aec236660360d39eaed94b95efdd0b7b50a0412c9c9b9ec22101eb3",
+          "object_size": 2436,
+          "source": "src/qf/qf_mem.c"
+        },
+        "qf_qact": {
+          "normalized_disassembly_sha256": "abbbe65f880110d9a7fe7a949c506d7ca073bf0d9e035f0ffbfa74c61a22459f",
+          "object_sha256": "f333adb6a4ad0f6acb4d8c213fb43f4273a595cbe50d95274a08feac3e3d79f4",
+          "object_size": 1420,
+          "source": "src/qf/qf_qact.c"
+        },
+        "qf_qeq": {
+          "normalized_disassembly_sha256": "b45f0fa2545c96635f719edbeb5cfde1646d00f41b9b0f77fa9861f70df3b68c",
+          "object_sha256": "c581f213738ce8a1555e8b53358f1825bf272927e6bbce866bd8709bd401c30f",
+          "object_size": 2176,
+          "source": "src/qf/qf_qeq.c"
+        },
+        "qk": {
+          "normalized_disassembly_sha256": "3bfe08077f83c852764a9013a9360971e82cebc7757c8a6b4f9f1af2bd650222",
+          "object_sha256": "4d7ceac6f4200a3feae11748e7ec8a91c7fd075e4d61ab38f9823547c87427fd",
+          "object_size": 4340,
+          "source": "src/qk/qk.c"
+        }
+      },
+      "stock_portable_semantics_compatible": true,
+      "tag": "v6.6.0+"
+    }
+  ],
+  "flags": [
+    "-mcpu=em",
+    "-Os",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-fno-common",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-std=c99"
+  ],
+  "format": "openCFW.em9305-qpc-arcv2-em-source-epoch-matrix.v1",
+  "objdump": "GNU objdump version 2.46-1.fc44",
+  "parallel_epoch_jobs": 4,
+  "portable_sources": [
+    "src/qf/qf_actq.c",
+    "src/qf/qf_dyn.c",
+    "src/qf/qf_act.c",
+    "src/qf/qep_hsm.c",
+    "src/qf/qf_mem.c",
+    "src/qk/qk.c",
+    "src/qf/qf_qact.c",
+    "src/qf/qf_qeq.c"
+  ],
+  "selection": "all_authenticated_epochs",
+  "source_audit": {
+    "checked_tag_count": 16,
+    "distinct_source_epoch_count": 10,
+    "epochs": [
+      {
+        "blob_ids": [
+          "9b323d160e572bc8508e75ada9692891e036d178",
+          "f7eacd6ce62f530781ab2081540717eb0e16192b",
+          "4d8eca65456ab49d9d89cf696c827b69f44b8e9b",
+          "fb4a8cba7d00905d979aa8d611b7fca9bd4d19eb",
+          "c7544ab3aa05fe92f71a4468db07feb167fd10b8",
+          "3c8a4814c75b15e137882c7531404aeab5c80078",
+          "8f76643fb5fd3eeab88509ebc3f14e60d3ca4006",
+          "98523c2bb5f2bf6f202feb4832a8cdb11a9270ce"
+        ],
+        "representative": "v6.0.1",
+        "representative_commit": "25636b87b0dbf4ccb015cb6eb9fb42aeb6010ef6",
+        "tags": [
+          "v6.0.1"
+        ]
+      },
+      {
+        "blob_ids": [
+          "9b323d160e572bc8508e75ada9692891e036d178",
+          "f7eacd6ce62f530781ab2081540717eb0e16192b",
+          "de1ddccaf41d5da07b64e39d74a8bd3ff87f3ace",
+          "6324085243cb6a6cba005ba13a023c5c3b9317ae",
+          "c7544ab3aa05fe92f71a4468db07feb167fd10b8",
+          "e36871f34519e6662b67e34ca0ac775a7415057f",
+          "8f76643fb5fd3eeab88509ebc3f14e60d3ca4006",
+          "98523c2bb5f2bf6f202feb4832a8cdb11a9270ce"
+        ],
+        "representative": "v6.0.4",
+        "representative_commit": "a1acc1d0e296780686d7246adb3c5c305b4c347d",
+        "tags": [
+          "v6.0.4"
+        ]
+      },
+      {
+        "blob_ids": [
+          "279cf70383f29d549329c4e3c54512f9c05312be",
+          "4e02b04283fd46c252e4fb017e963f72d83195ea",
+          "13f9ce7b744d01c812cf69186d51ad0c3abc48db",
+          "4be2f03dfa94f01560f7baf9f50a72102cffd4b7",
+          "c1cd5f91434b3d4fab5e0ade11a438164ff76fe6",
+          "a907255c48e394cc71b8fc5031bb521c23339572",
+          "b4ad1b3248f9104fa25dee0c305ad6d39d1dfa33",
+          "faafeb23df27c1805192411e402bbdd756c067f8"
+        ],
+        "representative": "v6.3.1",
+        "representative_commit": "58f80da3a7c2a2c9ba29637a76d4eda3f9488c7d",
+        "tags": [
+          "v6.2.0",
+          "v6.3.0",
+          "v6.3.1"
+        ]
+      },
+      {
+        "blob_ids": [
+          "e33e0b803d0264206abc31943f9d2709dea0691a",
+          "4e02b04283fd46c252e4fb017e963f72d83195ea",
+          "160b06c4c23c93beaa59d305adf36b64ce717c0b",
+          "4be2f03dfa94f01560f7baf9f50a72102cffd4b7",
+          "3569e93d32122ff8e725a5e69a4ac0f54e23b187",
+          "a907255c48e394cc71b8fc5031bb521c23339572",
+          "b4ad1b3248f9104fa25dee0c305ad6d39d1dfa33",
+          "b0e79e76c36b4120aedb41eb77b1ece6a6a25ea6"
+        ],
+        "representative": "v6.3.4",
+        "representative_commit": "2b231b3383d98b36585435030e7440dbade3da9b",
+        "tags": [
+          "v6.3.2",
+          "v6.3.3",
+          "v6.3.3a",
+          "v6.3.4"
+        ]
+      },
+      {
+        "blob_ids": [
+          "6f56d8c12d218450e06cdc65150da050f67ca37b",
+          "46858a35270c5067d458551cdbf26de79605e044",
+          "160b06c4c23c93beaa59d305adf36b64ce717c0b",
+          "4be2f03dfa94f01560f7baf9f50a72102cffd4b7",
+          "321b7b64ed514f00924c63d888893b2cff5abd57",
+          "a907255c48e394cc71b8fc5031bb521c23339572",
+          "b4ad1b3248f9104fa25dee0c305ad6d39d1dfa33",
+          "b67bfc96f7975c6afbaa63e10995468c30ba86ff"
+        ],
+        "representative": "v6.3.6",
+        "representative_commit": "5550cca87dedf72d45250ad01e9cdeee8c4140ba",
+        "tags": [
+          "v6.3.6"
+        ]
+      },
+      {
+        "blob_ids": [
+          "6f56d8c12d218450e06cdc65150da050f67ca37b",
+          "46858a35270c5067d458551cdbf26de79605e044",
+          "160b06c4c23c93beaa59d305adf36b64ce717c0b",
+          "4be2f03dfa94f01560f7baf9f50a72102cffd4b7",
+          "321b7b64ed514f00924c63d888893b2cff5abd57",
+          "a907255c48e394cc71b8fc5031bb521c23339572",
+          "d14134e8c4fb046cd3fb93da1bb90accbef3674a",
+          "b67bfc96f7975c6afbaa63e10995468c30ba86ff"
+        ],
+        "representative": "v6.3.8",
+        "representative_commit": "a39a56b5ef3482aeaa7aa9d749d1368a5899d417",
+        "tags": [
+          "v6.3.7",
+          "v6.3.8"
+        ]
+      },
+      {
+        "blob_ids": [
+          "6f56d8c12d218450e06cdc65150da050f67ca37b",
+          "46858a35270c5067d458551cdbf26de79605e044",
+          "ab7aa3513c292ff720f5d9666eefeba90b8da643",
+          "ecb8d4899b169277be06694de545d36f180bc8f3",
+          "321b7b64ed514f00924c63d888893b2cff5abd57",
+          "87f299baa9b0f00571222bc9bfa5ec9a66cdb8fc",
+          "d14134e8c4fb046cd3fb93da1bb90accbef3674a",
+          "b67bfc96f7975c6afbaa63e10995468c30ba86ff"
+        ],
+        "representative": "v6.4.0",
+        "representative_commit": "5d14aa368a014be23dc51ca7b0be9f20cb3e15a5",
+        "tags": [
+          "v6.4.0"
+        ]
+      },
+      {
+        "blob_ids": [
+          "6f56d8c12d218450e06cdc65150da050f67ca37b",
+          "46858a35270c5067d458551cdbf26de79605e044",
+          "ab7aa3513c292ff720f5d9666eefeba90b8da643",
+          "3c2449c7d022f29f047e01df5ee14921f7cc3e2c",
+          "321b7b64ed514f00924c63d888893b2cff5abd57",
+          "87f299baa9b0f00571222bc9bfa5ec9a66cdb8fc",
+          "d14134e8c4fb046cd3fb93da1bb90accbef3674a",
+          "b67bfc96f7975c6afbaa63e10995468c30ba86ff"
+        ],
+        "representative": "v6.5.0",
+        "representative_commit": "076a8d5d6f9c093c8bc49a331f923668de52f10d",
+        "tags": [
+          "v6.5.0"
+        ]
+      },
+      {
+        "blob_ids": [
+          "6f56d8c12d218450e06cdc65150da050f67ca37b",
+          "46858a35270c5067d458551cdbf26de79605e044",
+          "ab7aa3513c292ff720f5d9666eefeba90b8da643",
+          "3c2449c7d022f29f047e01df5ee14921f7cc3e2c",
+          "321b7b64ed514f00924c63d888893b2cff5abd57",
+          "90f1f609c7de8c6005db5045a8d7ec4ead74009a",
+          "d14134e8c4fb046cd3fb93da1bb90accbef3674a",
+          "b67bfc96f7975c6afbaa63e10995468c30ba86ff"
+        ],
+        "representative": "v6.5.1",
+        "representative_commit": "416dcec8820b9cdb5827497e645d0d9375db53c6",
+        "tags": [
+          "v6.5.1"
+        ]
+      },
+      {
+        "blob_ids": [
+          "5d01c6d206681e32c7baf9471fc8407c22b9a89e",
+          "7adb84dabda6d1cd24861a344f98a23a60a04cd6",
+          "d6033c2ae73a8cce0c69cba16dd73870c9be7492",
+          "783d8a41d26a01beee1480e043a13cd169a48123",
+          "df1928bedd118ae89c8ef6d003080685c3a476c5",
+          "d171a839e3cdc2b2db8b70a67383f65cb50f82c2",
+          "75b598cbbb75f40b4d808be59d87d038ac6c4fdc",
+          "372e68642e07b6a5cbbc6d6e38a9a97a895340f0"
+        ],
+        "representative": "v6.6.0+",
+        "representative_commit": "a280d203c0f55753b18dd9fc76104936729e471a",
+        "tags": [
+          "v6.6.0+"
+        ]
+      }
+    ],
+    "portable_files": [
+      "src/qf/qf_actq.c",
+      "src/qf/qf_dyn.c",
+      "src/qf/qf_act.c",
+      "src/qf/qep_hsm.c",
+      "src/qf/qf_mem.c",
+      "src/qk/qk.c",
+      "src/qf/qf_qact.c",
+      "src/qf/qf_qeq.c"
+    ],
+    "qactive_post_lineage": {
+      "v6.0.1": {
+        "critical_assert_restores_interrupt_state": false,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.0.4": {
+        "critical_assert_restores_interrupt_state": false,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.2.0": {
+        "critical_assert_restores_interrupt_state": false,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.3.0": {
+        "critical_assert_restores_interrupt_state": false,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.3.1": {
+        "critical_assert_restores_interrupt_state": false,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.3.2": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.3.3": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.3.3a": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.3.4": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": false,
+        "stock_compatible": false
+      },
+      "v6.3.6": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": true,
+        "stock_compatible": true
+      },
+      "v6.3.7": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": true,
+        "stock_compatible": true
+      },
+      "v6.3.8": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": true,
+        "stock_compatible": true
+      },
+      "v6.4.0": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": true,
+        "stock_compatible": true
+      },
+      "v6.5.0": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": true,
+        "stock_compatible": true
+      },
+      "v6.5.1": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": true,
+        "stock_compatible": true
+      },
+      "v6.6.0+": {
+        "critical_assert_restores_interrupt_state": true,
+        "dynamic_reference_increment_precedes_status_branch": true,
+        "stock_compatible": true
+      }
+    },
+    "qf_time_assertion_sources": {
+      "v6.3.6": [
+        "Q_DEFINE_THIS_MODULE(\"qf_time\")",
+        "Q_ASSERT_CRIT_(110",
+        "Q_REQUIRE_ID(300",
+        "Q_REQUIRE_ID(400"
+      ],
+      "v6.3.7": [
+        "Q_DEFINE_THIS_MODULE(\"qf_time\")",
+        "Q_ASSERT_CRIT_(110",
+        "Q_REQUIRE_ID(300",
+        "Q_REQUIRE_ID(400"
+      ],
+      "v6.3.8": [
+        "Q_DEFINE_THIS_MODULE(\"qf_time\")",
+        "Q_ASSERT_CRIT_(110",
+        "Q_REQUIRE_ID(300",
+        "Q_REQUIRE_ID(400"
+      ],
+      "v6.4.0": [
+        "Q_DEFINE_THIS_MODULE(\"qf_time\")",
+        "Q_ASSERT_CRIT_(110",
+        "Q_REQUIRE_ID(300",
+        "Q_REQUIRE_ID(400"
+      ],
+      "v6.5.0": [
+        "Q_DEFINE_THIS_MODULE(\"qf_time\")",
+        "Q_ASSERT_CRIT_(110",
+        "Q_REQUIRE_ID(300",
+        "Q_REQUIRE_ID(400"
+      ],
+      "v6.5.1": [
+        "Q_DEFINE_THIS_MODULE(\"qf_time\")",
+        "Q_ASSERT_CRIT_(110",
+        "Q_REQUIRE_ID(300",
+        "Q_REQUIRE_ID(400"
+      ],
+      "v6.6.0+": [
+        "Q_DEFINE_THIS_MODULE(\"qf_time\")",
+        "Q_ASSERT_CRIT_(110",
+        "Q_REQUIRE_ID(300",
+        "Q_REQUIRE_ID(400"
+      ]
+    },
+    "repository": "https://github.com/QuantumLeaps/qpc.git",
+    "stock_compatible_source_epoch_count": 6,
+    "stock_compatible_tag_count": 7,
+    "stock_compatible_tags": [
+      "v6.3.6",
+      "v6.3.7",
+      "v6.3.8",
+      "v6.4.0",
+      "v6.5.0",
+      "v6.5.1",
+      "v6.6.0+"
+    ]
+  },
+  "status": "comparison_only_not_stock_equivalent",
+  "stock_compatible_source_epoch_count": 6
+}

@@ -1,0 +1,169 @@
+openjdk version "21.0.12" 2026-07-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.12+8 (build 21.0.12+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12+8 (build 21.0.12+8-LTS, mixed mode)
+INFO  Using log config file: jar:file:/var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (2124 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (7425 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 210 extension points (114 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/kalani/.cache/opencfw-tools/ghidra-scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-12/iar_runtime_12 (HeadlessAnalyzer)  
+INFO  Creating project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-12/iar_runtime_12 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-12/iar_runtime_12 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/kalani/Repo/SybilSight/openCFW/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin (HeadlessAnalyzer)  
+INFO  Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x437fe0") (ProgramLoader)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: ARM:LE:32:Cortex:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DumpFunctionDecomp.java '0x00439ce0' '0x00439e90'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/kalani/.cache/opencfw-tools/ghidra-scripts/DumpFunctionDecomp.java (HeadlessAnalyzer)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 00439ce0 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+void open_cfw_target_0x00439ce0
+               (undefined4 param_1,uint param_2,float *param_3,undefined4 param_4,int *param_5,
+               int *param_6)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  int *piVar4;
+  undefined4 *puVar5;
+  undefined4 *extraout_r2;
+  int *piVar6;
+  int *piVar7;
+  undefined4 *extraout_r3;
+  undefined4 *extraout_r3_00;
+  undefined4 in_cr7;
+  float fVar8;
+  undefined8 uVar9;
+  undefined1 uStack_70;
+  undefined1 uStack_6f;
+  undefined1 uStack_6e;
+  int iStack_6c;
+  int iStack_68;
+  int aiStack_64 [3];
+  undefined1 auStack_58 [8];
+  int aiStack_50 [11];
+  
+  if (param_2 == 3) {
+    uVar9 = func_0x00887e38(3,param_4,param_4,auStack_58);
+    puVar5 = (undefined4 *)((ulonglong)uVar9 >> 0x20);
+    uVar1 = *puVar5;
+    *extraout_r3_00 = uVar1;
+    func_0x01048e50((int)uVar9,puVar5 + 1,uVar1,extraout_r3_00 + 1);
+    goto LAB_00439d64;
+  }
+  aiStack_50[2] = 0;
+  aiStack_50[3] = 0;
+  coprocessor_store(0xf,in_cr7,auStack_58);
+  if ((int)(param_2 << 0x18) < 0) {
+    uVar9 = func_0x00439e90(aiStack_50 + 4,param_4,0x3fc);
+LAB_00439d2c:
+    uVar1 = func_0x00887d3c((int)uVar9,(int)((ulonglong)uVar9 >> 0x20),aiStack_50 + 4,auStack_58);
+    uVar3 = *extraout_r2;
+    *extraout_r3 = uVar3;
+    func_0x01048d54(uVar1,uVar3,extraout_r2 + 1,extraout_r3 + 1);
+  }
+  else if ((param_2 & 0x7f) != 0) {
+    uVar9 = func_0x00439e90(aiStack_50 + 4,param_4,(param_2 & 0x7f) << 3);
+    goto LAB_00439d2c;
+  }
+  if (param_2 != 0) {
+    piVar4 = aiStack_50;
+    piVar7 = aiStack_50 + param_2 + 4;
+    do {
+      piVar4 = piVar4 + 1;
+      piVar6 = piVar7 + 1;
+      *piVar4 = *piVar7;
+      piVar7 = piVar6;
+    } while (piVar6 != aiStack_50 + param_2 * 2 + 4);
+  }
+LAB_00439d64:
+  uVar1 = func_0x00439e9c(param_3);
+  uVar1 = func_0x00439efc(param_1,uVar1);
+  uVar3 = func_0x00439f24(param_3);
+  fVar8 = (float)func_0x00439f88(uVar1,uVar3);
+  uStack_70 = *param_3 == fVar8;
+  uStack_6f = (float)*(undefined8 *)(param_3 + 1) == fVar8;
+  uStack_6e = (float)((ulonglong)*(undefined8 *)(param_3 + 1) >> 0x20) == fVar8;
+  iVar2 = func_0x00439fb4(&uStack_70,aiStack_64);
+  if (iVar2 == 0) {
+    func_0x00439fe4(fVar8,param_3,auStack_58,&iStack_6c);
+    *param_6 = 1;
+    param_6[1] = 2;
+    *param_5 = iStack_6c;
+    param_5[1] = iStack_68;
+    return;
+  }
+  *param_6 = iVar2;
+  param_6[1] = 2;
+  if (0 < iVar2) {
+    piVar4 = param_5;
+    piVar7 = aiStack_64;
+    do {
+      piVar6 = piVar4 + 1;
+      *piVar4 = aiStack_64[*piVar7 + 2];
+      piVar4 = piVar6;
+      piVar7 = piVar7 + 1;
+    } while (param_5 + iVar2 != piVar6);
+    piVar4 = aiStack_64;
+    piVar7 = param_5 + iVar2;
+    do {
+      piVar6 = piVar7 + 1;
+      *piVar7 = aiStack_50[*piVar4];
+      piVar4 = piVar4 + 1;
+      piVar7 = piVar6;
+    } while (piVar6 != param_5 + iVar2 * 2);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 00439ce0 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 00439e90 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+undefined4 open_cfw_target_0x00439e90(undefined4 param_1)
+
+{
+  func_0x00439be4();
+  return param_1;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 00439e90 (GhidraScript)  
+INFO  /ota_s200_firmware_ota.bin: file created (kalani) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /ota_s200_firmware_ota.bin (iar_runtime_12:/ota_s200_firmware_ota.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

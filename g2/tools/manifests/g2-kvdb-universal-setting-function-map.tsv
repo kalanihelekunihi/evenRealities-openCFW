@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	kvdbUniversalSettingDefaultInitialize	inferred semantic name	0x0049AD0C	0x0049AD20	20	8d2f5adbb185b7369e3e63460df44a8199ace0c36148cb6e3fa2d6bad4126832	stored Thumb pointer 0x006D1E74	computes CRC-16 over the first eighteen bytes of the twenty-byte factory record
+2	_kvdbUpdataUniversalSetting	exact retained symbol string	0x0049AD20	0x0049ADF0	208	289664d43303d98ff6d6d292c197fb58b2a372156524aebaba11dcf628ba78c6	stored Thumb pointer 0x00746D48	reads a stack temporary and rewrites live defaults only for missing or pre-v3 CRC-mismatched data
+3	SVC_KvdbWriteUniversalSetting	exact retained symbol string	0x0049ADF0	0x0049AE60	112	99c63f38cdcdf43567efbc6aa21ef766f63390b8ecb988b860a9346b730b36f9	BL sites 0x00466092,0x0049ADDE,0x0049ADE6	copies twenty bytes, forces version three, recomputes CRC, and persists the whole record

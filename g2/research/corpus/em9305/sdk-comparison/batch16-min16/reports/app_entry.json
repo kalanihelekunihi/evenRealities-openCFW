@@ -1,0 +1,962 @@
+{
+  "expected_exact_match_count": 0,
+  "expected_vendor_modified_count": 0,
+  "function_count": 45,
+  "functions": [
+    {
+      "binding": "g",
+      "compared_byte_count": 102,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 120,
+      "matches": [],
+      "name": "APP_EntryFunction",
+      "normalized_sha256": "5eb52a16e55d42f0cf947aca0cdc97a4f1b219e2eff0fa4b54b3ecd3333028d4",
+      "object": "app_entry.c.obj",
+      "offset": 0,
+      "relocation_count": 30,
+      "section": ".app_entry.APP_EntryFunction",
+      "size": 222
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 16,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3228508
+      ],
+      "name": "_initdatCopy",
+      "normalized_sha256": "32a5908bf013bc13aa88791b4cfee6639d85a91c4f48921b4297e4d08da632cc",
+      "object": "initcopy.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text._initdatCopy",
+      "size": 20
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 32,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3357732
+      ],
+      "name": "validate",
+      "normalized_sha256": "c96914378534140bbbfd1bc5f9cdf04d672671b411159d5cbc2ed0d942deaa3f",
+      "object": "initcopy.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.validate",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 4,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "_initcopy",
+      "normalized_sha256": "82e3de6d2eeac7626160915e02c66a995d420116cdc78e4cfd3d80623f20f0c7",
+      "object": "initcopy.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text._initcopy",
+      "size": 4
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 166,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 40,
+      "matches": [
+        3206980
+      ],
+      "name": "APP_InitCopy",
+      "normalized_sha256": "d86d6910add9baff12e6d3775eb63a7a896e06a5746040d9f8bc24bb8886346d",
+      "object": "initcopy.c.obj",
+      "offset": 0,
+      "relocation_count": 10,
+      "section": ".text.APP_InitCopy",
+      "size": 206
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "NullHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "MemoryErrorHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "InstructionErrorHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_MachineCheckHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_ProtVHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_PrivilegeVHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_SWIHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_TrapHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_ExtensionHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_DivZeroHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_DCErrorHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "EV_MalignedHandler",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_ArcWatchdog",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_ArcDmaDone",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_ArcDmaError",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp0",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp1",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp3",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_ProtocolTimerFullVal",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_RadioTx",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_RadioRx",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_SpiSlaveTx",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_SpiSlaveRx",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_UartTx",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_UartRx",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_UniversalTimer2",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_UniversalTimer3",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_SpiMaster",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_I2cMaster",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_RcCalib",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_ADC",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_PmlSvld",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_QDec",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_USB",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_CryptoUnit",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_I2s",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_SWI0",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_SWI1",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_SWI8",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 88,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392,
+        3207536
+      ],
+      "name": "IRQHandler_SWI9",
+      "normalized_sha256": "71401ef6b8a5675de137e953d025f9e30b56e3f664a7a94a4b16f09a240eb201",
+      "object": "isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.NullHandler",
+      "size": 92
+    }
+  ],
+  "identity": {
+    "architecture": "ARCv2 EM",
+    "archive_git_blob": "ffca8a5bc6b956f8899d05971e0dce040ada7902",
+    "archive_kind": "app_entry",
+    "archive_path": "libs/app_entry/lib_app_entry.a",
+    "archive_sha256": "26ae4bcdeeee1be9fb411de0111b06b2f5c6b3c342d78270a42e75c359331532",
+    "compiler": "Synopsys MetaWare ARC Compiler T-2022.09 build 004 / LLVM 14.0.6 (EM-Micro)",
+    "compiler_anchors_matched": true,
+    "compiler_comment_sha256": "929918ddd8913f60418908e65d12e5b7baa0e2b904423b6fb95c8c32cdfecddd",
+    "optimization": "-Os"
+  },
+  "known_expected_address_match_count": 0,
+  "known_function_count": 0,
+  "unique_discovered_matches": [
+    {
+      "binding": "g",
+      "compared_byte_count": 16,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3228508
+      ],
+      "name": "_initdatCopy",
+      "normalized_sha256": "32a5908bf013bc13aa88791b4cfee6639d85a91c4f48921b4297e4d08da632cc",
+      "object": "initcopy.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text._initdatCopy",
+      "size": 20
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 32,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3357732
+      ],
+      "name": "validate",
+      "normalized_sha256": "c96914378534140bbbfd1bc5f9cdf04d672671b411159d5cbc2ed0d942deaa3f",
+      "object": "initcopy.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.validate",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 166,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 40,
+      "matches": [
+        3206980
+      ],
+      "name": "APP_InitCopy",
+      "normalized_sha256": "d86d6910add9baff12e6d3775eb63a7a896e06a5746040d9f8bc24bb8886346d",
+      "object": "initcopy.c.obj",
+      "offset": 0,
+      "relocation_count": 10,
+      "section": ".text.APP_InitCopy",
+      "size": 206
+    }
+  ]
+}

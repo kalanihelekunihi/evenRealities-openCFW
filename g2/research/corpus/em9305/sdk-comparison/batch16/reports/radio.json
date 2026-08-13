@@ -1,0 +1,1882 @@
+{
+  "expected_exact_match_count": 0,
+  "expected_vendor_modified_count": 0,
+  "function_count": 65,
+  "functions": [
+    {
+      "binding": "l",
+      "compared_byte_count": 90,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [],
+      "name": "RF_802_15_4_GetRadioAverageRssi",
+      "normalized_sha256": "41e31da85a20afe53c7f3f792d1eab533212833d3824f1b0cdc1f1d7679b9b55",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.RF_802_15_4_GetRadioAverageRssi",
+      "size": 102
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 158,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_802_15_4_SetTxMode",
+      "normalized_sha256": "540355c7a8cceea801f352559609b9e544690aa338582d28238e380145a72792",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_802_15_4_SetTxMode",
+      "size": 162
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 262,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_802_15_4_SetRxMode",
+      "normalized_sha256": "7c324d8c7071950d4817b304f9f48dc3248eae056796d20927642c30f2485963",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_802_15_4_SetRxMode",
+      "size": 266
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 14,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "RF_802_15_4_GetLinqQualityIndicator",
+      "normalized_sha256": "81d69c9f413155f7df57c7643efe22535973c786509381ac64e31193da7a549c",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_802_15_4_GetLinqQualityIndicator",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 86,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_802_15_4_SetRfFrequency",
+      "normalized_sha256": "be17beb6be05959468acf255a6a951b308feea4cffdeb9bac96f3aee77b61fc0",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_802_15_4_SetRfFrequency",
+      "size": 90
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 28,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_802_15_4_SetRfChannel",
+      "normalized_sha256": "72b398f99832f64677dd1dde978d2122568b0e1999ee3a141e4c1f67a6a54644",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_802_15_4_SetRfChannel",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 246,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 52,
+      "matches": [],
+      "name": "RF_802_15_4_StartChannelScan",
+      "normalized_sha256": "ae6c7c91926b9a96c311c4a37482621d6786db60e102dbb395c2e58590313457",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 13,
+      "section": ".text.RF_802_15_4_StartChannelScan",
+      "size": 298
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 8,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_802_12_4_GetScanRssi",
+      "normalized_sha256": "acb6e0bdbfe6b3568f366e91cf57c2d2cd7e02b981767a2d5ba9bf7bc917c9fc",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_802_12_4_GetScanRssi",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 34,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [],
+      "name": "RF_802_12_4_GetRadioRssi",
+      "normalized_sha256": "85df4d032603b2331fb44714491ea648efad314192c0c6b8affc17af80ef0c05",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_802_12_4_GetRadioRssi",
+      "size": 42
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 56,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [],
+      "name": "RF_802_15_4_GetRssiAfterChannelScan",
+      "normalized_sha256": "8a0f9e0fbe7df25e41629f6476fc88b044d3ebe4f07cf8c8bf7d161d8ae13bd8",
+      "object": "radio_802_15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_802_15_4_GetRssiAfterChannelScan",
+      "size": 72
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 8,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3161580,
+        3163040,
+        3212852,
+        3217820,
+        3227584
+      ],
+      "name": "RF_BypassSetRFPower",
+      "normalized_sha256": "eed6dbf152b5075d8b42f902522fc9dc0c9e109370652625df055d3b672461da",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_BypassSetRFPower",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 394,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 80,
+      "matches": [],
+      "name": "RF_SetMode",
+      "normalized_sha256": "3a1b60ff9a019570420fb3cc98e95edefd033bba4f8f281ef0d004580cdf2242",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 20,
+      "section": ".text.RF_SetMode",
+      "size": 474
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 42,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220160
+      ],
+      "name": "RF_SetRfChannel",
+      "normalized_sha256": "5b1b73c59f08bf78dfeaf3669ce0da3cd8e6e5af01ab49b82e425a019346715b",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetRfChannel",
+      "size": 46
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 34,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3220236
+      ],
+      "name": "RF_SetSyncwordBle",
+      "normalized_sha256": "a04d95069a6ae66a7e05113603efa96baa0f23651a2a82f023a66f304b359c2e",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetSyncwordBle",
+      "size": 34
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 22,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220292
+      ],
+      "name": "RF_SetWhiteningModeBle",
+      "normalized_sha256": "ad11dde9f0a78c040a7d409a62f43156acaf393dad9065f0f12926272039a8b2",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetWhiteningModeBle",
+      "size": 26
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 46,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3219404
+      ],
+      "name": "RF_SetEncryptionParametersBle",
+      "normalized_sha256": "3a37594fdb9ab789b0d32142e0cba52e908e1ccf3ced9352317ecab86e0c252d",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetEncryptionParametersBle",
+      "size": 46
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3219376
+      ],
+      "name": "RF_SetEncryptionPacketCounterBle",
+      "normalized_sha256": "35fc58959dd593bb896c772122fb1e9fb6c71eb00b2d501ae4ba23eb2f65e7b1",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetEncryptionPacketCounterBle",
+      "size": 26
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 30,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3219344
+      ],
+      "name": "RF_SetEncryptionEnableBle",
+      "normalized_sha256": "aa16b9b8eb04612478c21b77f098610f5993929f9206a7a4c4e7c1c64168f43f",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetEncryptionEnableBle",
+      "size": 30
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3218928
+      ],
+      "name": "RF_IsMicResultOkBle",
+      "normalized_sha256": "491a03cfd0af8b8e93a7f846dbbbfe09fe1ccdc54d483e08480d50f68706e16c",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_IsMicResultOkBle",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3217788
+      ],
+      "name": "RF_BleCteSetRxTiming",
+      "normalized_sha256": "4f6254a9cd040a526da610ce78b265218fa0413c9eea09229b4c1d3eae097f39",
+      "object": "radio_ble_cte.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_BleCteSetRxTiming",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3217808
+      ],
+      "name": "RF_BleCteSetTxTiming",
+      "normalized_sha256": "b7563065d9b3351e4c7cd2fe6bb2d9c456d0d6b1a23f1de16e7565e95d6c59e8",
+      "object": "radio_ble_cte.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_BleCteSetTxTiming",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 10,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3219312
+      ],
+      "name": "RF_SetCteDeltaRxTime",
+      "normalized_sha256": "a902cb65dbda4612f020a72821987723b4a685cc074862b29ce1d43f63ebce1a",
+      "object": "radio_ble_cte.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_SetCteDeltaRxTime",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_SetCteDeltaTxTime",
+      "normalized_sha256": "83df4a4fd5e6b0c21a8b89cfec0104715382234102390520d4ed26e195af2c88",
+      "object": "radio_ble_cte.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetCteDeltaTxTime",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 118,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 20,
+      "matches": [
+        3218732
+      ],
+      "name": "RF_InitHw",
+      "normalized_sha256": "312a6454958b686a00fb5488a51900d0df90fb3b77ebfac05474e71df58657d1",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 5,
+      "section": ".text.RF_InitHw",
+      "size": 138
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 52,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3218664
+      ],
+      "name": "RF_Init",
+      "normalized_sha256": "d2b16cf68abc8a0ae3f088db4ed30247bec5f9aab2a274bad8d7f2fb675fd373",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_Init",
+      "size": 68
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 56,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3220708
+      ],
+      "name": "RF_UpdateLNAProtectionFlag",
+      "normalized_sha256": "89abd209b6204235a1f841d687919ad40166a7e4e85f292822050f0759ec4232",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_UpdateLNAProtectionFlag",
+      "size": 72
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 92,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3220780
+      ],
+      "name": "RF_UpdateLdoAntConfig",
+      "normalized_sha256": "0fca79a4d21b51ef1f96717f84409bf9d15e3d4e61d396ac1e6023c6d1cc1a3f",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_UpdateLdoAntConfig",
+      "size": 108
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3220888
+      ],
+      "name": "RF_WriteReg",
+      "normalized_sha256": "321e1222323cc09886090349b10b3a0c4f21f0dc56acc2660613a428d2ddcfa5",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_WriteReg",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 8,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3219168
+      ],
+      "name": "RF_RegisterModule",
+      "normalized_sha256": "c68659f3359cc5c9b5c7ac39c597f160172364ce8f41e2b557f66cf7bf377860",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_RegisterModule",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 52,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3220368
+      ],
+      "name": "RF_StartTx",
+      "normalized_sha256": "f94b8b4fd99b967a10475c2b89c8eda31940723d59ad972d9411fe8740a614c6",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.RF_StartTx",
+      "size": 64
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 40,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [],
+      "name": "RF_StartRx",
+      "normalized_sha256": "4c217fba57b14925ef565a5c5bc83139b1c4fa6167bc76ac4a9fbca8f7295f6a",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_StartRx",
+      "size": 48
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 52,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3220432
+      ],
+      "name": "RF_StartTxHw",
+      "normalized_sha256": "0f8c63e392dc6e0078014f8b16860de74659af5c6feac544de77733cb90d41bd",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.RF_StartTxHw",
+      "size": 64
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 40,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3220320
+      ],
+      "name": "RF_StartRxHw",
+      "normalized_sha256": "7fec6eb0789ad226058e303b163766f54a63cf388b2ca91be3a39c3bdb304cda",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_StartRxHw",
+      "size": 48
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 28,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220496
+      ],
+      "name": "RF_Stop",
+      "normalized_sha256": "c5c4a86d9b1d2427e7bfc6d380fd63f85626836246fe3bd9090dde022c9fa629",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_Stop",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 8,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3161580,
+        3163040,
+        3212852,
+        3217820,
+        3227584
+      ],
+      "name": "RF_WaitForSyncwordAfterStopSet",
+      "normalized_sha256": "eed6dbf152b5075d8b42f902522fc9dc0c9e109370652625df055d3b672461da",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_WaitForSyncwordAfterStopSet",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 20,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3220272
+      ],
+      "name": "RF_SetWhiteningEnable",
+      "normalized_sha256": "bcc9b0884ebd9ff036319221f352ad433ee53548722ee5b05def54836194c929",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetWhiteningEnable",
+      "size": 20
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 14,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3220220
+      ],
+      "name": "RF_SetRxTimeout",
+      "normalized_sha256": "2cfdf51cbda93b5132006aee3e79f5306e3b993549669122a741cb88d2e899f9",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetRxTimeout",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 148,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3219452
+      ],
+      "name": "RF_SetMacTiming",
+      "normalized_sha256": "04cbb30ce547875077bf67656bd858a7f1e8b70cbb8da9ff564c8534c22515c0",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetMacTiming",
+      "size": 152
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 98,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 28,
+      "matches": [
+        3219184
+      ],
+      "name": "RF_SendData",
+      "normalized_sha256": "1d6bbd4d98003fd97db7f754ee68f5bb1331f7fa8062b771339453da0c1ddea3",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 7,
+      "section": ".text.RF_SendData",
+      "size": 126
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3219604
+      ],
+      "name": "RF_SetMaximumPacketLength",
+      "normalized_sha256": "8132559f6f9e6f018e92f065489d72cee0929f2a81af9567b453586833f0ef8c",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetMaximumPacketLength",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "RF_SetRxPDULength",
+      "normalized_sha256": "5a0c3b2aed1dbacb1fdfdbe0ad9734d7d4f74a933bb1f708ea3b4e1e5936adc3",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetRxPDULength",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 98,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 28,
+      "matches": [
+        3219040
+      ],
+      "name": "RF_ReceiveData",
+      "normalized_sha256": "540f08c528278accb6f2620f215e32f55be5644ed48ee1a3edee61a43dca21ad",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 7,
+      "section": ".text.RF_ReceiveData",
+      "size": 126
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 2,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_DoVoltageMeasurementIfTimeElapsed",
+      "normalized_sha256": "694eb94f751bf0ce3074b8457b59a589c11a973408b34e622303bfbf12c09d20",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_DoVoltageMeasurementIfTimeElapsed",
+      "size": 6
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3218908
+      ],
+      "name": "RF_IsCrcResultOk",
+      "normalized_sha256": "d8ba189a20cd70c3db6d890e9df2973f2df732ca4206f0f9dc495efbd28034df",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_IsCrcResultOk",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 104,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3217984
+      ],
+      "name": "RF_GetRssiValue",
+      "normalized_sha256": "f9ab4fa83bf930de217d8818f351dc92bff79f85c6110e246a13309feb5dd881",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.RF_GetRssiValue",
+      "size": 116
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_SetRssiOffset",
+      "normalized_sha256": "e73b60631dd6f5559b374f27ccaaf37e10fe65e5e00fa7873a8070c618dead37",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetRssiOffset",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 134,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220528
+      ],
+      "name": "RF_TestModeStart",
+      "normalized_sha256": "9536dc5d867887437c46ebcca0fd3a7ad67188449eb23e1083d02ff635f416d0",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_TestModeStart",
+      "size": 138
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220668
+      ],
+      "name": "RF_TestModeStop",
+      "normalized_sha256": "2577514f984037b18198479800406b6d00f987c94e0402f7fcd8cb8c3c7aaf90",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_TestModeStop",
+      "size": 40
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_WaitForSyncwordAfterStop",
+      "normalized_sha256": "3773a3115c3ac5a542cb0b51184c46388e4a290e92b38f773448768cb8acc1a1",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_WaitForSyncwordAfterStop",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 8,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3159808,
+        3160332,
+        3161792,
+        3282976
+      ],
+      "name": "RF_WaitForSyncwordAfterStopClear",
+      "normalized_sha256": "341bceff32e53478f83df9fa23e07a13de41f158d943614b3c45771922b2372b",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_WaitForSyncwordAfterStopClear",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_SetDefaultRxCallback",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetDefaultRxCallback",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "RF_SetDefaultTxCallback",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetDefaultTxCallback",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 90,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3218948
+      ],
+      "name": "RF_Ln",
+      "normalized_sha256": "a07d514c80f8529dbdaf56c943985b5617f927c61b8d97876d77cd97b6431cfc",
+      "object": "radio_helper.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_Ln",
+      "size": 90
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3217752
+      ],
+      "name": "RF_BleChannel2RfChannel",
+      "normalized_sha256": "8212be6fdf42ce6ed16f841312fd39eb6e19342a9b933d0fbc7942493552ac2a",
+      "object": "radio_helper.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_BleChannel2RfChannel",
+      "size": 36
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 32,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3353648
+      ],
+      "name": "RF_RfChannel2BleChannel",
+      "normalized_sha256": "2c6156561d59c19c7513004c3d127b27604bbdb6a345ec7ba5b9327940937dc8",
+      "object": "radio_helper.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_RfChannel2BleChannel",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3218872
+      ],
+      "name": "RF_IrqConfigure",
+      "normalized_sha256": "1aa4654fef175706de5f639900ff19c0b3326e770ee308c179e6b653a22fb7ad",
+      "object": "radio_irq.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_IrqConfigure",
+      "size": 36
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 330,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 20,
+      "matches": [
+        3218100
+      ],
+      "name": "RF_HandleInterrupt_Rx",
+      "normalized_sha256": "9bcbd30d878ff1cfcfcabd2529feb91986fd87c7331dd45ac7a3e9c3d39abdae",
+      "object": "radio_irq.c.obj",
+      "offset": 0,
+      "relocation_count": 5,
+      "section": ".text.RF_HandleInterrupt_Rx",
+      "size": 350
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 368,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [],
+      "name": "IRQHandler_RadioTx",
+      "normalized_sha256": "ca2934faee30358c5e5cfaf7093606bf7afb8934737981f93ee2290e091c7419",
+      "object": "radio_irq.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.IRQHandler_RadioTx",
+      "size": 380
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 182,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171204,
+        3171392
+      ],
+      "name": "IRQHandler_RadioRx",
+      "normalized_sha256": "b7ec2bc5a977728ca19c7cbc77b66fb75e39016e4dd521edb39e377ec98ed1ce",
+      "object": "radio_irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_RadioRx",
+      "size": 186
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 32,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3217952
+      ],
+      "name": "RF_GetOutputPowerConfigIndex",
+      "normalized_sha256": "25797796f41dde438b2630cb8f8c8a3fab046568241613115ad6803026753f19",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_GetOutputPowerConfigIndex",
+      "size": 32
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [],
+      "name": "RF_GetMaximumOutputPower",
+      "normalized_sha256": "06c7dcf4f8e80c216b5054693565787610bf2d00e21b5bb4903440e67fe8ecaf",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_GetMaximumOutputPower",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 188,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 36,
+      "matches": [
+        3217528
+      ],
+      "name": "RF_ApplyOutputPower",
+      "normalized_sha256": "81ba0b09ea75a420710b9ad47f679eef289e6a40b5a858a4a81e53d22acf5fc9",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 9,
+      "section": ".text.RF_ApplyOutputPower",
+      "size": 224
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 30,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3220112
+      ],
+      "name": "RF_SetOutputPower",
+      "normalized_sha256": "1f1709b1d8d781c1dfb7c076551fb57b19e4344db567b8b20b9734f321a2d864",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_SetOutputPower",
+      "size": 46
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 22,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3217920
+      ],
+      "name": "RF_GetOutputPower",
+      "normalized_sha256": "8f368457ea3fbfa554c76944754b2ac922c2c754980ecdddc4c457065ae61649",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_GetOutputPower",
+      "size": 30
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 60,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3217840
+      ],
+      "name": "RF_GetMaxAllowedOutputPower",
+      "normalized_sha256": "c7a174425d9a8b6bec2a71cae76392663c4bdce8b14bf6432b3b26c23ac710b9",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_GetMaxAllowedOutputPower",
+      "size": 64
+    }
+  ],
+  "identity": {
+    "architecture": "ARCv2 EM",
+    "archive_git_blob": "00ce66bc3ff9968c8b233fd740332fde85d061b4",
+    "archive_kind": "radio",
+    "archive_path": "libs/radio/lib_radio.a",
+    "archive_sha256": "de6ae31e5bf6436533296efa116c17a4fa37c3cce7652118b0b3e9e2474759cc",
+    "compiler": "Synopsys MetaWare ARC Compiler T-2022.09 build 004 / LLVM 14.0.6 (EM-Micro)",
+    "compiler_anchors_matched": true,
+    "compiler_comment_sha256": "929918ddd8913f60418908e65d12e5b7baa0e2b904423b6fb95c8c32cdfecddd",
+    "optimization": "-Os"
+  },
+  "known_expected_address_match_count": 0,
+  "known_function_count": 0,
+  "unique_discovered_matches": [
+    {
+      "binding": "g",
+      "compared_byte_count": 42,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220160
+      ],
+      "name": "RF_SetRfChannel",
+      "normalized_sha256": "5b1b73c59f08bf78dfeaf3669ce0da3cd8e6e5af01ab49b82e425a019346715b",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetRfChannel",
+      "size": 46
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 34,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3220236
+      ],
+      "name": "RF_SetSyncwordBle",
+      "normalized_sha256": "a04d95069a6ae66a7e05113603efa96baa0f23651a2a82f023a66f304b359c2e",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetSyncwordBle",
+      "size": 34
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 22,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220292
+      ],
+      "name": "RF_SetWhiteningModeBle",
+      "normalized_sha256": "ad11dde9f0a78c040a7d409a62f43156acaf393dad9065f0f12926272039a8b2",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetWhiteningModeBle",
+      "size": 26
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 46,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3219404
+      ],
+      "name": "RF_SetEncryptionParametersBle",
+      "normalized_sha256": "3a37594fdb9ab789b0d32142e0cba52e908e1ccf3ced9352317ecab86e0c252d",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetEncryptionParametersBle",
+      "size": 46
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3219376
+      ],
+      "name": "RF_SetEncryptionPacketCounterBle",
+      "normalized_sha256": "35fc58959dd593bb896c772122fb1e9fb6c71eb00b2d501ae4ba23eb2f65e7b1",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetEncryptionPacketCounterBle",
+      "size": 26
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 30,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3219344
+      ],
+      "name": "RF_SetEncryptionEnableBle",
+      "normalized_sha256": "aa16b9b8eb04612478c21b77f098610f5993929f9206a7a4c4e7c1c64168f43f",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetEncryptionEnableBle",
+      "size": 30
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3218928
+      ],
+      "name": "RF_IsMicResultOkBle",
+      "normalized_sha256": "491a03cfd0af8b8e93a7f846dbbbfe09fe1ccdc54d483e08480d50f68706e16c",
+      "object": "radio_ble.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_IsMicResultOkBle",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3217788
+      ],
+      "name": "RF_BleCteSetRxTiming",
+      "normalized_sha256": "4f6254a9cd040a526da610ce78b265218fa0413c9eea09229b4c1d3eae097f39",
+      "object": "radio_ble_cte.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_BleCteSetRxTiming",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3217808
+      ],
+      "name": "RF_BleCteSetTxTiming",
+      "normalized_sha256": "b7563065d9b3351e4c7cd2fe6bb2d9c456d0d6b1a23f1de16e7565e95d6c59e8",
+      "object": "radio_ble_cte.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_BleCteSetTxTiming",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 10,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3219312
+      ],
+      "name": "RF_SetCteDeltaRxTime",
+      "normalized_sha256": "a902cb65dbda4612f020a72821987723b4a685cc074862b29ce1d43f63ebce1a",
+      "object": "radio_ble_cte.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_SetCteDeltaRxTime",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 118,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 20,
+      "matches": [
+        3218732
+      ],
+      "name": "RF_InitHw",
+      "normalized_sha256": "312a6454958b686a00fb5488a51900d0df90fb3b77ebfac05474e71df58657d1",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 5,
+      "section": ".text.RF_InitHw",
+      "size": 138
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 52,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3218664
+      ],
+      "name": "RF_Init",
+      "normalized_sha256": "d2b16cf68abc8a0ae3f088db4ed30247bec5f9aab2a274bad8d7f2fb675fd373",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_Init",
+      "size": 68
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 56,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3220708
+      ],
+      "name": "RF_UpdateLNAProtectionFlag",
+      "normalized_sha256": "89abd209b6204235a1f841d687919ad40166a7e4e85f292822050f0759ec4232",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_UpdateLNAProtectionFlag",
+      "size": 72
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 92,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3220780
+      ],
+      "name": "RF_UpdateLdoAntConfig",
+      "normalized_sha256": "0fca79a4d21b51ef1f96717f84409bf9d15e3d4e61d396ac1e6023c6d1cc1a3f",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_UpdateLdoAntConfig",
+      "size": 108
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3220888
+      ],
+      "name": "RF_WriteReg",
+      "normalized_sha256": "321e1222323cc09886090349b10b3a0c4f21f0dc56acc2660613a428d2ddcfa5",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_WriteReg",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 8,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3219168
+      ],
+      "name": "RF_RegisterModule",
+      "normalized_sha256": "c68659f3359cc5c9b5c7ac39c597f160172364ce8f41e2b557f66cf7bf377860",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_RegisterModule",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 52,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3220368
+      ],
+      "name": "RF_StartTx",
+      "normalized_sha256": "f94b8b4fd99b967a10475c2b89c8eda31940723d59ad972d9411fe8740a614c6",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.RF_StartTx",
+      "size": 64
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 52,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3220432
+      ],
+      "name": "RF_StartTxHw",
+      "normalized_sha256": "0f8c63e392dc6e0078014f8b16860de74659af5c6feac544de77733cb90d41bd",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.RF_StartTxHw",
+      "size": 64
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 40,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3220320
+      ],
+      "name": "RF_StartRxHw",
+      "normalized_sha256": "7fec6eb0789ad226058e303b163766f54a63cf388b2ca91be3a39c3bdb304cda",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_StartRxHw",
+      "size": 48
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 28,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220496
+      ],
+      "name": "RF_Stop",
+      "normalized_sha256": "c5c4a86d9b1d2427e7bfc6d380fd63f85626836246fe3bd9090dde022c9fa629",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_Stop",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 20,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3220272
+      ],
+      "name": "RF_SetWhiteningEnable",
+      "normalized_sha256": "bcc9b0884ebd9ff036319221f352ad433ee53548722ee5b05def54836194c929",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetWhiteningEnable",
+      "size": 20
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 14,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3220220
+      ],
+      "name": "RF_SetRxTimeout",
+      "normalized_sha256": "2cfdf51cbda93b5132006aee3e79f5306e3b993549669122a741cb88d2e899f9",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetRxTimeout",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 148,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3219452
+      ],
+      "name": "RF_SetMacTiming",
+      "normalized_sha256": "04cbb30ce547875077bf67656bd858a7f1e8b70cbb8da9ff564c8534c22515c0",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_SetMacTiming",
+      "size": 152
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 98,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 28,
+      "matches": [
+        3219184
+      ],
+      "name": "RF_SendData",
+      "normalized_sha256": "1d6bbd4d98003fd97db7f754ee68f5bb1331f7fa8062b771339453da0c1ddea3",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 7,
+      "section": ".text.RF_SendData",
+      "size": 126
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3219604
+      ],
+      "name": "RF_SetMaximumPacketLength",
+      "normalized_sha256": "8132559f6f9e6f018e92f065489d72cee0929f2a81af9567b453586833f0ef8c",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_SetMaximumPacketLength",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 98,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 28,
+      "matches": [
+        3219040
+      ],
+      "name": "RF_ReceiveData",
+      "normalized_sha256": "540f08c528278accb6f2620f215e32f55be5644ed48ee1a3edee61a43dca21ad",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 7,
+      "section": ".text.RF_ReceiveData",
+      "size": 126
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3218908
+      ],
+      "name": "RF_IsCrcResultOk",
+      "normalized_sha256": "d8ba189a20cd70c3db6d890e9df2973f2df732ca4206f0f9dc495efbd28034df",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_IsCrcResultOk",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 104,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3217984
+      ],
+      "name": "RF_GetRssiValue",
+      "normalized_sha256": "f9ab4fa83bf930de217d8818f351dc92bff79f85c6110e246a13309feb5dd881",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.RF_GetRssiValue",
+      "size": 116
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 134,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220528
+      ],
+      "name": "RF_TestModeStart",
+      "normalized_sha256": "9536dc5d867887437c46ebcca0fd3a7ad67188449eb23e1083d02ff635f416d0",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_TestModeStart",
+      "size": 138
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3220668
+      ],
+      "name": "RF_TestModeStop",
+      "normalized_sha256": "2577514f984037b18198479800406b6d00f987c94e0402f7fcd8cb8c3c7aaf90",
+      "object": "radio_common.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_TestModeStop",
+      "size": 40
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 90,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3218948
+      ],
+      "name": "RF_Ln",
+      "normalized_sha256": "a07d514c80f8529dbdaf56c943985b5617f927c61b8d97876d77cd97b6431cfc",
+      "object": "radio_helper.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_Ln",
+      "size": 90
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3217752
+      ],
+      "name": "RF_BleChannel2RfChannel",
+      "normalized_sha256": "8212be6fdf42ce6ed16f841312fd39eb6e19342a9b933d0fbc7942493552ac2a",
+      "object": "radio_helper.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_BleChannel2RfChannel",
+      "size": 36
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 32,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3353648
+      ],
+      "name": "RF_RfChannel2BleChannel",
+      "normalized_sha256": "2c6156561d59c19c7513004c3d127b27604bbdb6a345ec7ba5b9327940937dc8",
+      "object": "radio_helper.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_RfChannel2BleChannel",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3218872
+      ],
+      "name": "RF_IrqConfigure",
+      "normalized_sha256": "1aa4654fef175706de5f639900ff19c0b3326e770ee308c179e6b653a22fb7ad",
+      "object": "radio_irq.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_IrqConfigure",
+      "size": 36
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 330,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 20,
+      "matches": [
+        3218100
+      ],
+      "name": "RF_HandleInterrupt_Rx",
+      "normalized_sha256": "9bcbd30d878ff1cfcfcabd2529feb91986fd87c7331dd45ac7a3e9c3d39abdae",
+      "object": "radio_irq.c.obj",
+      "offset": 0,
+      "relocation_count": 5,
+      "section": ".text.RF_HandleInterrupt_Rx",
+      "size": 350
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 32,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3217952
+      ],
+      "name": "RF_GetOutputPowerConfigIndex",
+      "normalized_sha256": "25797796f41dde438b2630cb8f8c8a3fab046568241613115ad6803026753f19",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.RF_GetOutputPowerConfigIndex",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 188,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 36,
+      "matches": [
+        3217528
+      ],
+      "name": "RF_ApplyOutputPower",
+      "normalized_sha256": "81ba0b09ea75a420710b9ad47f679eef289e6a40b5a858a4a81e53d22acf5fc9",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 9,
+      "section": ".text.RF_ApplyOutputPower",
+      "size": 224
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 30,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3220112
+      ],
+      "name": "RF_SetOutputPower",
+      "normalized_sha256": "1f1709b1d8d781c1dfb7c076551fb57b19e4344db567b8b20b9734f321a2d864",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.RF_SetOutputPower",
+      "size": 46
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 22,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3217920
+      ],
+      "name": "RF_GetOutputPower",
+      "normalized_sha256": "8f368457ea3fbfa554c76944754b2ac922c2c754980ecdddc4c457065ae61649",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.RF_GetOutputPower",
+      "size": 30
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 60,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3217840
+      ],
+      "name": "RF_GetMaxAllowedOutputPower",
+      "normalized_sha256": "c7a174425d9a8b6bec2a71cae76392663c4bdce8b14bf6432b3b26c23ac710b9",
+      "object": "radio_power.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.RF_GetMaxAllowedOutputPower",
+      "size": 64
+    }
+  ]
+}

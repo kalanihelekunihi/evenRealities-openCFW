@@ -1,0 +1,5 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	ingress	evidence
+1	health_data_mutex_init	exact retained function string	0x004FFBD8	0x004FFC32	90	ce202179945c7a53466944719fb13fc4009cb20cf4739958b36a7b1ae5222b6e	yes	1 external and 1 internal direct BL site	lazily creates the health storage mutex and reports allocation failure
+2	health_lock_storage	exact retained function string	0x004FFC32	0x004FFC90	94	3961f6ecb9411694bfcd29e3741a67383a91d0e753edb64c7b7570156e5426cb	yes	27 external direct BL sites	acquires the health mutex forever and maps osOK to true
+3	health_unlock_storage	semantic behavior label	0x004FFC90	0x004FFCA2	18	11df6a5e05cbaed63d871402f6c7f9fcd787db69d96c1a59a533b1b3de8ce474	no	29 external direct BL sites	releases the health mutex when initialized
+4	Health_common_data_handler	exact retained function string and stored callback	0x004FFCA2	0x004FFDD0	302	8025711b9292730419c9e3630e7dcb7e0d8785491f1ba33f23303307ee7d939f	yes	stored Thumb pointer at 0x006A4544	dispatches common events zero and five validates incoming health data and conditionally posts a six-byte service-one record

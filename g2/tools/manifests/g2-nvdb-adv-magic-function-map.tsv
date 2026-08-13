@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	nvdbAdvMagicDefaultCrcInitialize	inferred semantic name	0x005D9ED0	0x005D9EE4	20	5653f1fb6916c167139c85501e4ae5549e034304da38265b2adfc24669a6a4b1	stored Thumb pointer 0x006D1E7C	computes CCITT-FALSE over the first two bytes of the four-byte boot record and stores the CRC at +2
+2	nvdbAdvMagicLoadAndMigrate	inferred semantic name	0x005D9EE4	0x005D9F1C	56	d0487cc379b27adbf94fd10ddacadc86464ec7fa5d36f574ace3daed4adee841	stored Thumb pointer 0x0078F514	reads nvAdvMagic; rewrites current defaults on missing data or a stale v0 checksum mismatch
+3	nvdbAdvMagicUpdate	inferred semantic name	0x005D9F1C	0x005D9F3E	34	6fed33bca24b9e6f7f04583889016a7cfd39a747501d042db2ac7c0c872f8d76	internal BLs 0x005D9F0A and 0x005D9F14	sets version one and magic byte; recomputes CRC; writes four-byte nvAdvMagic record

@@ -1,0 +1,15 @@
+module	recovery_order	function	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ownership	qualification
+ota	1	_evenOtaProcCccState	0x004BDB90	0x004BDC0C	124	eb58a69cd7a94bcca41bd0592ad8dcf6fc2b4930ccc44e0ee7667b350e951566	ambiq_skeleton_derived	retains AMOTA CCC diagnostic/event skeleton but writes the G2 four-byte control block
+ota	2	evenOtaProcMsg	0x004BDC0C	0x004BDC9C	144	cfff659208e5fd0a7d32d8e369baac85449bd7bf0b35d1363628366e4ad4c414	ambiq_skeleton_derived	reduces AMOTA dispatcher to connection, CCC, A0/A1, and product A7 events
+ota	3	APP_EvenOtaWriteCback	0x004BDC9C	0x004BDD00	100	a61f23adb4f1cec6f071a6f97dc9a97801c2110e6e9d4cf5251dc4bf111d7d02	g2_local	forwards writes to the Even OTA provider and logs nonzero status
+ota	4	APP_EvenOtaHandlerInit	0x004BDD00	0x004BDD18	24	3e87a9f0da3664c91bc226271f4209e8789dc84a612c172070618d66a5ef8037	ambiq_skeleton_derived	stores handler ID, resets the local control block, and initializes the product OTA provider
+ota	5	APP_EvenOtaDisconnect	0x004BDD18	0x004BDD70	88	c20fbd954b4e2375e3ef657b7ef9074498491d0eac484862f863a3fdfcf86030	g2_local	allocates and queues AMOTA-compatible disconnect event 0xA1
+ota	6	APP_EvenOtaProcMsg	0x004BDD70	0x004BDD7E	14	92b76c00f5880f7c8dad5b0a490b2d27d00e31cb60336a7a4cd88ec838d71d05	ambiq_skeleton_derived	public WSF handler wrapper around the reduced dispatcher
+ota	7	APP_EvenOtaSendDataMsg	0x004BDD7E	0x004BDDFC	126	e5c78508649e6863525ae81a5db3dd38c3498ffb88376495727b310e7be7cc8d	g2_local	allocates and queues product event 0xA7 when connection and CCC state permit
+ring	1	ringPackCccdEpochValue	0x004C46C0	0x004C46D0	16	5253485c728919595e5a0b78b2354dbb964f271d59b7e1832be3765298a982ce	g2_local	packs connId, enable flag, and 16-bit connection epoch for delayed CCC writes
+ring	2	_ringEnableCccd	0x004C46D0	0x004C4810	320	a3e14ecb2f6781258903eaea1a0a7872ee00b3b1f0ebcd9fc34705018ffc86cd	g2_local	validates connection/epoch and writes the discovered CCC handle
+ring	3	APP_BleRingHandlerInit	0x004C4810	0x004C487C	108	9f15317589791c3c6e74f5d2aad0267f08b558f790b0cc90e943941dbb721149	g2_local	initializes handler, epoch, discovery list, and control state
+ring	4	APP_BleRingSvcDiscover	0x004C487C	0x004C48AC	48	7dbb9605a5f4b57c1f9d0d21e9e2b574a1b4f6de40e429236084463082e0c38c	g2_local	starts three-handle discovery for the product 128-bit service UUID
+ring	5	_bleRingReceiveData	0x004C48AC	0x004C4910	100	cacb10192efbe04e97f00e27fe61f1bb08cbc504cf80809977b27f81ca0646cf	g2_local	accepts matching discovered RX-handle value events
+ring	6	APP_BleRingProcMsg	0x004C4910	0x004C4B7E	622	6698734dc25fe37714846d077d9e2ca32f02f1b877b09089126e726eb053ff6d	g2_local	dispatches ATT, open/close, discovery, delayed CCC, and product send events
+ring	7	APP_BleRingSendDataMsg	0x004C4B7E	0x004C4C66	232	5f1a198a786cf239b377aa90c9b2d345a76d86fc5bf2d8d2549106e121ebf827	g2_local	allocates and queues event 0xAC when connection and TX handle are valid

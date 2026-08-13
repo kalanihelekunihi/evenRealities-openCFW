@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	kvdbTimeDefaultInitialize	inferred semantic name	0x00585618	0x0058562C	20	862508208afbbb15ae5a9fcbf3d98a0e1c11667fcaf380c98df4d899593e24ee	stored Thumb pointer 0x006D1E64	computes CRC-16 over the first ten bytes of the twelve-byte factory record
+2	_kvdbUpdataTime	exact retained symbol string	0x0058562C	0x00585758	300	5493134cbdf79ef2c10c30f677e8bde02a4d3f3ef0e67c098604e52208338645	stored Thumb pointer 0x00746D40	audits stored data and rewrites live values only for missing or pre-v3 CRC-mismatched data
+3	SVC_KvdbWriteTime	exact retained symbol string	0x00585758	0x00585806	174	fba27ada5805aad0ebe42a206549d84d62ba9dda85517e41fb8101adede3bb61	BL sites 0x005438AE,0x00585740,0x0058574E	updates timestamp/timezone, forces version three, recomputes CRC, and persists the record

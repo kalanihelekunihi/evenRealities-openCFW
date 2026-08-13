@@ -1,0 +1,26 @@
+
+/work/stock/wsfTimerRemove.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0052a3fc <.data>:
+  52a3fc:	b510      	push	{r4, lr}
+  52a3fe:	0004      	movs	r4, r0
+  52a400:	2200      	movs	r2, #0
+  52a402:	4884      	ldr	r0, [pc, #528]	@ (0x52a614)
+  52a404:	6801      	ldr	r1, [r0, #0]
+  52a406:	e001      	b.n	0x52a40c
+  52a408:	000a      	movs	r2, r1
+  52a40a:	6809      	ldr	r1, [r1, #0]
+  52a40c:	2900      	cmp	r1, #0
+  52a40e:	d001      	beq.n	0x52a414
+  52a410:	42a1      	cmp	r1, r4
+  52a412:	d1f9      	bne.n	0x52a408
+  52a414:	2900      	cmp	r1, #0
+  52a416:	d004      	beq.n	0x52a422
+  52a418:	0021      	movs	r1, r4
+  52a41a:	f00e fc55 	bl	0x538cc8
+  52a41e:	2000      	movs	r0, #0
+  52a420:	7360      	strb	r0, [r4, #13]
+  52a422:	bd10      	pop	{r4, pc}

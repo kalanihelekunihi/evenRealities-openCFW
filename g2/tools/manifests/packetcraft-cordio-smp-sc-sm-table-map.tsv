@@ -1,0 +1,13 @@
+role	artifact	stock_address	bytes	entries	stock_sha256	assessment
+initiator	physical_object	0x00537F14	456	1	f3064c0be233c40088ecb5885ec0d7c89aa19c65f99ab1bcb18f927a692d8b98	code plus owned literal/string-pointer tail ending at the next translation unit
+initiator	interface	0x0078C320	12	3	1508b605bff288e2b52c70a9da85a432d7cadd5c69906a61afb4bc1c100af5c0	state-pointer table, action table, and common-table roots
+initiator	action_pointer_table	0x006D1214	204	51	2f7d77ff2105f2a6153d40c15bff8ed0ee8197df738ea1547ff57a023185dd01	exact source-order action targets
+initiator	state_pointer_table	0x006D3980	152	38	8dcc4c5a65d77037ce373b6682bba705c9753c7a5338f94d3ef7b106bea44877	one pointer for each initiator state
+initiator	state_entry_concat	pointer-order	345	39	bc2cc72e72729f50e4798d141300e8a38e8492f1d233c0ce06b2f833d98175a1	common table followed by 38 NUL-terminated three-byte state tables
+initiator	owned_concat	role-order	1169	1	36d79cdd666d033f2c936895a1250578108f8034ad463f6bf4a61d8e1480a43f	physical object, interface, action pointers, state pointers, common table, and state tables
+responder	physical_object	0x00538104	480	1	9d2c76c594328e391b1befb588ccd45131a078f13ee8edcb55c217581c7eb663	code plus two-byte alignment and owned literal/string-pointer tail
+responder	interface	0x0078C470	12	3	d7b358d531fbc4969b6f7a9b89b7d607251993e16f46e946c32f4fed47c34cf7	state-pointer table, action table, and common-table roots
+responder	action_pointer_table	0x006D0B64	220	55	bbcc96d09c9c3d6842797ab8c9c61604dca828aaaf230fba8e5df96d77245718	exact r20 source-order action targets
+responder	state_pointer_table	0x006D33F8	160	40	872a6660494cf59f8c2e18110d460ebd1a35e08163f65d286dbecf143d0e5080	one pointer for each responder state
+responder	state_entry_concat	pointer-order	390	41	382342288ac6a9e9ebbfd4c4fbb51af5ff6ecba8fdaf81432f5676aa7d211eeb	common table followed by 40 NUL-terminated three-byte state tables
+responder	owned_concat	role-order	1262	1	15ada20aace7996dbcc692d7eef76a374690251494703a43b3043e450d406057	physical object, interface, action pointers, state pointers, common table, and state tables

@@ -1,0 +1,7 @@
+macro_or_layout	value	evidence
+WSF_BUF_FREE_CHECK	1	0xFAABD00D store and 8-byte free-buffer unit
+WSF_BUF_STATS	0	12-byte pool descriptor
+WSF_BUF_STATS_HIST	0	no histogram update shape
+WSF_OS_DIAG	0	simple allocation-failure warning path
+WSF_ASSERT_ENABLED	0 lane	stock lacks argument/range/double-free assertion branches; warning backend remains separately shimmed
+pool_internal_size	12	len+num/padding, pStart +4, pFree +8

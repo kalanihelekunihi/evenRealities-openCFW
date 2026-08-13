@@ -1,0 +1,571 @@
+#!/usr/bin/env python3
+"""Verify the linked Nordic SDK application without flashing or combining images."""
+
+from __future__ import annotations
+
+import hashlib
+import re
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+BUILD = ROOT / "platform" / "nrf52840" / "sdk" / "_build"
+HEX = BUILD / "openr1_nrf52840_s140.hex"
+BIN = BUILD / "openr1_nrf52840_s140.bin"
+MAP = BUILD / "openr1_nrf52840_s140.map"
+EXPECTED_HEX_SHA256 = "0954a9375874ee4f88139ba6243e20e1afba122e67afccba9d410e638053fa81"
+EXPECTED_BIN_SHA256 = "31f3a97de9805239b03c51297f1de2ea9eaeff6fee372f1ea1f0c0a5c2f7bc91"
+EXPECTED_BIN_BYTES = 91192
+REQUIRED_OBJECTS = (
+    BUILD / "openr1_nrf52840_s140" / "bma4.c.o",
+    BUILD / "openr1_nrf52840_s140" / "bma456w.c.o",
+    BUILD / "openr1_nrf52840_s140" / "lis2dw12_reg.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_kv_store.c.o",
+    BUILD / "openr1_nrf52840_s140" / "nrfx_gpiote.c.o",
+    BUILD / "openr1_nrf52840_s140" / "nrf_drv_twi.c.o",
+    BUILD / "openr1_nrf52840_s140" / "nrfx_twim.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_touch.c.o",
+    BUILD / "openr1_nrf52840_s140" / "st25dvxxkc.c.o",
+    BUILD / "openr1_nrf52840_s140" / "st25dvxxkc_reg.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_st25dvxxkc.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_power_lease.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_motion.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_motion.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_storage.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_battery.c.o",
+    BUILD / "openr1_nrf52840_s140" / "nrfx_saadc.c.o",
+    BUILD / "openr1_nrf52840_s140" / "nrfx_spim.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_analog.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_health.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_health_db.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_health_db.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_twi_sync.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_twi_sync.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_retained_log.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_retained_log.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_reset_trace.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_reset_trace_port.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_reset_reason.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_reset_reason.c.o",
+    BUILD / "openr1_nrf52840_s140" / "SEGGER_RTT.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_fal_port.c.o",
+    BUILD / "openr1_nrf52840_s140" / "fal.c.o",
+    BUILD / "openr1_nrf52840_s140" / "fal_flash.c.o",
+    BUILD / "openr1_nrf52840_s140" / "fal_partition.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_nfc.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_i2c5_resources.c.o",
+    BUILD / "openr1_nrf52840_s140" / "nrfx_wdt.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_watchdog.c.o",
+    BUILD / "openr1_nrf52840_s140" / "system_nrf52840.c.o",
+    BUILD / "openr1_nrf52840_s140" / "peer_manager_handler.c.o",
+    BUILD / "openr1_nrf52840_s140" / "timers.c.o",
+)
+
+REQUIRED_LINKED_SYMBOLS = (
+    "r1_battery_discharge_percent",
+    "r1_battery_charging_initial_percent",
+    "r1_battery_advance_charging",
+    "r1_battery_updated_charged_refresh_count",
+    "r1_battery_stalled_replacement",
+    "r1_battery_update_stuck_recovery",
+    "r1_battery_controller_initialize",
+    "r1_battery_controller_set_type",
+    "r1_battery_controller_update",
+    "r1_pmic_plan_charge_event",
+    "r1_pmic_plan_charged_notification",
+    "r1_iqs7211e_ati_audit_begin",
+    "r1_iqs7211e_ati_audit_summarize",
+    "r1_delayed_event_timer_step",
+    "r1_runtime_configure_battery",
+    "r1_runtime_update_battery",
+    "openr1_analog_update_runtime_battery",
+    "r1_health_note_explicit_history_query",
+    "r1_health_run_automatic_sync",
+    "r1_runtime_run_automatic_health_sync",
+    "r1_health_plan_time_transition",
+    "r1_health_reconcile_sync_cursors",
+    "r1_health_plan_hour_boundary",
+    "r1_health_u8_accumulate_average",
+    "r1_health_u16_accumulate_average",
+    "r1_health_accumulator_snapshot",
+    "r1_health_accumulator_restore",
+    "r1_health_u8_latest_sample",
+    "r1_health_u16_latest_sample",
+    "r1_health_history_route_command",
+    "r1_health_history_encode_event14",
+    "r1_health_history_decode_event14",
+    "r1_heart_rate_store_sample",
+    "r1_spo2_store_sample",
+    "r1_hrv_store_sample",
+    "r1_hrv_plan_timing_start",
+    "r1_temperature_store_sample",
+    "r1_stress_store_sample",
+    "r1_activity_accumulator_initialize",
+    "r1_activity_accumulator_periodic",
+    "r1_activity_accumulator_refresh",
+    "r1_activity_accumulator_pending_delta",
+    "r1_activity_delta_event_encode",
+    "r1_activity_delta_event_decode",
+    "r1_activity_consume_delta_event",
+    "r1_activity_offline_is_empty",
+    "r1_activity_offline_enqueue",
+    "r1_activity_offline_consume_through",
+    "r1_activity_offline_merge",
+    "r1_activity_offline_acknowledge",
+    "r1_health_u8_offline_is_empty",
+    "r1_health_u8_offline_enqueue",
+    "r1_health_u8_offline_consume_through",
+    "r1_health_u8_offline_merge",
+    "r1_health_u8_flash_record_merge",
+    "r1_health_u8_ram_cache_merge",
+    "r1_protocol_send_response",
+    "r1_export_plan_command",
+    "r1_ble_thread_message_encode",
+    "r1_user_profile_plan_transition",
+    "r1_peer_bond_diagnostic_plan",
+    "r1_glasses_status_plan_command",
+    "r1_factory_thread_message_encode",
+    "r1_peripheral_watchdog_plan_step",
+    "r1_health_clear_all_caches",
+    "r1_temperature_pair_reduce",
+    "r1_pb_fragment_message",
+    "r1_delayed_event_schedule",
+    "r1_health_settings_plan_command",
+    "r1_battery_diagnostic_cadence_step",
+    "r1_ep_scan_cursor",
+    "r1_fragment_message",
+    "r1_health_u8_offline_acknowledge",
+    "r1_health_u16_offline_is_empty",
+    "r1_health_u16_offline_enqueue",
+    "r1_health_u16_offline_consume_through",
+    "r1_health_u16_offline_merge",
+    "r1_health_u16_ram_cache_merge",
+    "r1_health_u16_offline_acknowledge",
+    "r1_health_u8_cache_reset",
+    "r1_health_u8_cache_write_slot",
+    "r1_health_u8_cache_read_slot",
+    "r1_temperature_cache_read_slot",
+    "r1_stress_cache_read_slot",
+    "r1_health_u16_cache_reset",
+    "r1_health_u16_cache_write_slot",
+    "r1_health_u16_cache_read_slot",
+    "r1_activity_cache_reset",
+    "r1_activity_cache_refresh_metadata",
+    "r1_activity_cache_write_hour",
+    "r1_activity_cache_read_hour",
+    "r1_activity_clamp_acknowledgement_timestamp",
+    "r1_activity_day_builder_reset",
+    "r1_activity_day_builder_flush",
+    "r1_activity_ram_cache_merge",
+    "r1_activity_flash_record_merge",
+    "SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler",
+    "SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler",
+    "SPIM2_SPIS2_SPI2_IRQHandler",
+    "nrfx_wdt_init",
+    "nrfx_wdt_channel_alloc",
+    "nrfx_wdt_channel_feed",
+    "nrfx_wdt_enable",
+    "openr1_watchdog_initialize",
+    "SystemInit",
+    "nvmc_wait",
+    "vApplicationStackOverflowHook",
+    "SEGGER_RTT_WriteString",
+    "r1_reset_trace_valid",
+    "r1_reset_trace_get_snapshot",
+    "openr1_reset_trace_retained_record",
+    "openr1_reset_trace_capture",
+    "openr1_reset_trace_fault_and_reset",
+    "r1_reset_reason_decode",
+    "openr1_reset_reason_initialize",
+    "openr1_reset_reason_latest",
+    "pm_handler_on_pm_evt",
+    "pm_handler_flash_clean",
+)
+
+REQUIRED_LOCAL_LINKED_SECTIONS = (
+    ("prvReloadTimer", "timers.c.o"),
+)
+
+
+def load_ihex(path: Path) -> dict[int, int]:
+    memory: dict[int, int] = {}
+    upper = 0
+    for number, raw in enumerate(path.read_text().splitlines(), 1):
+        if not raw.startswith(":"):
+            raise AssertionError(f"invalid Intel HEX line {number}")
+        record = bytes.fromhex(raw[1:])
+        if sum(record) & 0xFF:
+            raise AssertionError(f"Intel HEX checksum failure on line {number}")
+        count = record[0]
+        offset = int.from_bytes(record[1:3], "big")
+        kind = record[3]
+        data = record[4:4 + count]
+        if kind == 0:
+            address = upper + offset
+            for index, value in enumerate(data):
+                memory[address + index] = value
+        elif kind == 1:
+            break
+        elif kind == 2:
+            if count != 2:
+                raise AssertionError("invalid extended-segment-address record")
+            upper = int.from_bytes(data, "big") << 4
+        elif kind == 4:
+            if count != 2:
+                raise AssertionError("invalid extended-linear-address record")
+            upper = int.from_bytes(data, "big") << 16
+        elif kind not in (3, 5):
+            raise AssertionError(f"unsupported Intel HEX record type {kind}")
+    return memory
+
+
+def word(memory: dict[int, int], address: int) -> int:
+    return sum(memory[address + index] << (8 * index) for index in range(4))
+
+
+def digest(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main() -> None:
+    for path in (HEX, BIN, MAP):
+        if not path.is_file():
+            raise AssertionError(f"missing SDK build output: {path}")
+    for path in REQUIRED_OBJECTS:
+        if not path.is_file():
+            raise AssertionError(f"required SDK source was not compiled: {path}")
+    if len(BIN.read_bytes()) != EXPECTED_BIN_BYTES:
+        raise AssertionError("reproducible SDK BIN length changed")
+    if digest(HEX) != EXPECTED_HEX_SHA256 or digest(BIN) != EXPECTED_BIN_SHA256:
+        raise AssertionError("reproducible SDK image digest changed")
+    memory = load_ihex(HEX)
+    if min(memory) != 0x27000:
+        raise AssertionError(f"application begins at 0x{min(memory):08x}, not 0x00027000")
+    initial_sp = word(memory, 0x27000)
+    reset = word(memory, 0x27004)
+    if initial_sp != 0x20040000:
+        raise AssertionError(f"unexpected initial stack pointer 0x{initial_sp:08x}")
+    if reset & 1 == 0 or not 0x27000 <= (reset & ~1) < 0xD1000:
+        raise AssertionError(f"invalid Thumb reset vector 0x{reset:08x}")
+    application_addresses = [address for address in memory if address < 0x100000]
+    if max(application_addresses) >= 0xD1000:
+        raise AssertionError("application overlaps the recovered FDS range at 0x000d1000")
+
+    map_text = MAP.read_text()
+    for symbol in REQUIRED_LINKED_SYMBOLS:
+        match = re.search(
+            rf"^\s*0x([0-9a-fA-F]+)\s+{re.escape(symbol)}\s*$",
+            map_text,
+            re.MULTILINE,
+        )
+        if match is None or int(match.group(1), 16) == 0:
+            raise AssertionError(f"required symbol was not linked: {symbol}")
+    for symbol, object_name in REQUIRED_LOCAL_LINKED_SECTIONS:
+        match = re.search(
+            rf"^\s*\.text\.{re.escape(symbol)}\s*$\n"
+            rf"\s*0x([0-9a-fA-F]+)\s+0x[0-9a-fA-F]+\s+.*{re.escape(object_name)}\s*$",
+            map_text,
+            re.MULTILINE,
+        )
+        if match is None or int(match.group(1), 16) == 0:
+            raise AssertionError(f"required local symbol was not linked: {symbol}")
+    for marker in (
+        "FLASH            0x0000000000027000",
+        "RAM              0x00000000200064a8",
+        "FLASH            0x0000000000027000 0x00000000000aa000",
+        "nrf_sdh_enable_request",
+        "nrf_sdh_ble_default_cfg_set",
+        "characteristic_add",
+        "ble_advertising_init",
+        "ble_advertising_start",
+        "ble_advdata_encode",
+        "sd_ble_gap_device_name_set",
+        "openr1_advertising_initialize",
+        "openr1_gatt_initialize",
+        "nrf_ble_gatt_init",
+        "nrf_ble_gatt_att_mtu_periph_set",
+        "nrf_ble_gatt_data_length_set",
+        "sd_ble_gattc_exchange_mtu_request",
+        "sd_ble_gatts_exchange_mtu_reply",
+        "sd_ble_gap_data_length_update",
+        "openr1_bae8_initialize",
+        "sd_ble_gatts_value_get",
+        ".sdh_ble_observers2",
+        ".sdh_ble_observers1",
+        ".sdh_ble_observers0",
+        "openr1_peer_initialize",
+        "pm_init",
+        "pm_sec_params_set",
+        "pm_conn_secure",
+        "r1_runtime_set_role_handler",
+        "r1_runtime_set_touch_handler",
+        "fds_init",
+        "nrf_fstorage_init",
+        "nrf_fstorage_read",
+        "nrf_fstorage_write",
+        "nrf_fstorage_erase",
+        "openr1_storage_initialize",
+        "openr1_storage_flash",
+        "openr1_storage_start_address",
+        "openr1_storage_end_address",
+        "r1_fal_bind",
+        "fal_init",
+        "fal_flash_device_find",
+        ".openr1_storage_api",
+        "nrfx_saadc_init",
+        "nrfx_saadc_channel_init",
+        "nrfx_saadc_sample_convert",
+        "nrfx_saadc_uninit",
+        "SAADC_IRQHandler",
+        "openr1_analog_initialize",
+        "openr1_analog_bind_power",
+        "openr1_analog_battery_millivolts",
+        "openr1_analog_update_runtime_battery",
+        "r1_health_note_explicit_history_query",
+        "r1_health_run_automatic_sync",
+        "r1_runtime_run_automatic_health_sync",
+        "r1_health_plan_time_transition",
+        "r1_health_reconcile_sync_cursors",
+        "r1_health_plan_hour_boundary",
+        "r1_health_u8_accumulate_average",
+        "r1_health_u16_accumulate_average",
+        "r1_health_accumulator_snapshot",
+        "r1_health_accumulator_restore",
+        "r1_health_build_crash_snapshot",
+        "r1_health_crash_record_valid",
+        "r1_health_crash_record_has_magic",
+        "r1_health_crash_record_clear_provider_blob",
+        "r1_health_crash_record_clear_snapshot",
+        "r1_health_crash_record_clear_time",
+        "r1_health_crash_record_get_provider_blob",
+        "r1_health_crash_record_get_snapshot",
+        "r1_health_crash_record_get_time",
+        "r1_health_crash_record_initialize",
+        "r1_health_crash_record_restore",
+        "r1_health_db_provider_handle",
+        "r1_health_db_startup",
+        "r1_twi_sync_complete",
+        "r1_twi_sync_wait",
+        "r1_twi_primary_register_read",
+        "r1_twi_primary_register_write",
+        "r1_twi_secondary_register_read",
+        "r1_twi_secondary_register_write",
+        "r1_twi_lifecycle_initialize",
+        "r1_twi_primary_lifecycle_initialize",
+        "r1_twi_secondary_lifecycle_initialize",
+        "r1_twi_lifecycle_shutdown",
+        "r1_twi_software_lifecycle_shutdown",
+        "openr1_nrf52840_twi_sync_ops",
+        "openr1_nrf52840_twi_transfer_ops",
+        "openr1_nrf52840_twi_lifecycle_ops",
+        "openr1_nrf52840_twi_software_lifecycle_ops",
+        "openr1_twi_release_pin",
+        "r1_retained_log_reset",
+        "r1_retained_log_append_rendered",
+        "openr1_retained_log_rtt_write",
+        "r1_health_u8_latest_sample",
+        "r1_health_u16_latest_sample",
+        "r1_health_history_route_command",
+        "r1_health_history_encode_event14",
+        "r1_health_history_decode_event14",
+        "r1_heart_rate_store_sample",
+        "r1_spo2_store_sample",
+        "r1_hrv_store_sample",
+        "r1_hrv_plan_timing_start",
+        "r1_temperature_store_sample",
+        "r1_stress_store_sample",
+        "r1_activity_accumulator_initialize",
+        "r1_activity_accumulator_periodic",
+        "r1_activity_accumulator_refresh",
+        "r1_activity_accumulator_pending_delta",
+        "r1_activity_delta_event_encode",
+        "r1_activity_delta_event_decode",
+        "r1_activity_consume_delta_event",
+        "r1_activity_offline_is_empty",
+        "r1_activity_offline_enqueue",
+        "r1_activity_offline_consume_through",
+        "r1_activity_offline_merge",
+        "r1_activity_offline_acknowledge",
+        "r1_health_u8_offline_is_empty",
+        "r1_health_u8_offline_enqueue",
+        "r1_health_u8_offline_consume_through",
+        "r1_health_u8_offline_merge",
+        "r1_health_u8_ram_cache_merge",
+        "r1_health_u8_offline_acknowledge",
+        "r1_health_u16_offline_is_empty",
+        "r1_health_u16_offline_enqueue",
+        "r1_health_u16_offline_consume_through",
+        "r1_health_u16_offline_merge",
+        "r1_health_u16_ram_cache_merge",
+        "r1_health_u16_offline_acknowledge",
+        "r1_health_u8_cache_reset",
+        "r1_health_u8_cache_write_slot",
+        "r1_health_u8_cache_read_slot",
+        "r1_temperature_cache_read_slot",
+        "r1_stress_cache_read_slot",
+        "r1_health_u16_cache_reset",
+        "r1_health_u16_cache_write_slot",
+        "r1_health_u16_cache_read_slot",
+        "r1_activity_cache_reset",
+        "r1_health_clear_all_caches",
+        "r1_temperature_pair_reduce",
+        "r1_pb_fragment_message",
+        "r1_delayed_event_schedule",
+        "r1_health_settings_plan_command",
+        "r1_battery_diagnostic_cadence_step",
+        "r1_ep_scan_cursor",
+        "r1_fragment_message",
+        "r1_activity_cache_refresh_metadata",
+        "r1_activity_cache_write_hour",
+        "r1_activity_cache_read_hour",
+        "r1_activity_clamp_acknowledgement_timestamp",
+        "r1_activity_day_builder_reset",
+        "r1_activity_day_builder_flush",
+        "r1_activity_ram_cache_merge",
+        "r1_activity_flash_record_merge",
+        ".openr1_health_api",
+        ".openr1_event_api",
+        ".openr1_protocol_api",
+        ".openr1_health_db_api",
+        ".openr1_twi_sync_api",
+        ".openr1_retained_log_api",
+        ".openr1_reset_trace_api",
+        ".openr1_reset_reason_api",
+        "openr1_analog_pmic_current_millivolts",
+        "openr1_analog_nfc_rectifier_millivolts",
+        "r1_battery_base_millivolts",
+        "r1_battery_runtime_millivolts",
+        "r1_battery_discharge_percent",
+        "r1_battery_charging_initial_percent",
+        "r1_battery_advance_charging",
+        "r1_battery_updated_charged_refresh_count",
+        "r1_battery_stalled_replacement",
+        "r1_battery_update_stuck_recovery",
+        "r1_battery_controller_initialize",
+        "r1_battery_controller_set_type",
+        "r1_battery_controller_update",
+        "r1_pmic_plan_charge_event",
+        "r1_pmic_plan_charged_notification",
+        "r1_iqs7211e_ati_audit_begin",
+        "r1_iqs7211e_ati_audit_summarize",
+        ".openr1_touch_audit_api",
+        "r1_delayed_event_timer_step",
+        "r1_runtime_configure_battery",
+        "r1_runtime_update_battery",
+        ".openr1_analog_api",
+        "ble_conn_state_encrypted",
+        "nrf_sortlist_add",
+        ".fs_data",
+        "osKernelInitialize",
+        "osKernelStart",
+        "osThreadNew",
+        "osThreadFlagsSet",
+        "osThreadFlagsWait",
+        "osDelay",
+        "osTimerNew",
+        "osTimerStart",
+        "osTimerStop",
+        "osMutexNew",
+        "osMutexAcquire",
+        "osMutexRelease",
+        "osSemaphoreNew",
+        "osSemaphoreAcquire",
+        "osSemaphoreRelease",
+        "osMessageQueueNew",
+        "osMessageQueuePut",
+        "osMessageQueueGet",
+        "xTaskCreate",
+        "xQueueGenericCreateStatic",
+        "vTaskStartScheduler",
+        "pvPortMalloc",
+        "vPortFree",
+        "SVC_Handler",
+        "PendSV_Handler",
+        "RTC1_IRQHandler",
+        "app_timer_freertos.c.o",
+        "openr1_scheduler_initialize",
+        "openr1_scheduler_start",
+        "openr1_scheduler_complete_credits",
+        "openr1_scheduler_reset_credits",
+        "openr1_touch_initialize",
+        "openr1_touch_bind_power",
+        "openr1_touch_set_identity",
+        "openr1_touch_acquire",
+        "openr1_touch_release",
+        "openr1_touch_set_enabled",
+        "r1_iqs7211e_deactivate",
+        "openr1_nfc_initialize",
+        "openr1_nfc_bind_resources",
+        "openr1_nfc_set_enabled",
+        "openr1_i2c5_resources_initialize",
+        "openr1_i2c5_try_acquire",
+        "openr1_i2c5_release",
+        "r1_st25dvxxkc_activate",
+        "r1_st25dvxxkc_poll",
+        ".openr1_motion_api",
+        "openr1_motion_initialize",
+        "openr1_motion_read_fifo",
+        "openr1_motion_disable_double_tap",
+        "openr1_motion_variant",
+        "openr1_motion_is_enabled",
+        "r1_motion_adapter_configure",
+        "r1_motion_adapter_read_fifo",
+        "bma456w_init",
+        "bma4_set_accel_config",
+        "bma4_set_fifo_config",
+        "lis2dw12_device_id_get",
+        "lis2dw12_fifo_data_level_get",
+        "lis2dw12_pin_int1_route_set",
+        "ST25DVxxKC_RegisterBusIO",
+        "ST25DVxxKC_Init",
+        "ST25DVxxKC_ReadID",
+        "ST25DVxxKC_PresentI2CPassword",
+        "ST25DVxxKC_ReadMBMode",
+        "ST25DVxxKC_ReadMailboxData",
+        "ST25DVxxKC_ReadI2CSecuritySession_Dyn",
+        "ST25DVxxKC_ResetEHENMode_Dyn",
+        "ST25DVxxKC_ReadMBCtrl_Dyn",
+        "ST25DVxxKC_SetMBEN_Dyn",
+        "ST25DVxxKC_ReadMBLength_Dyn",
+        "ST25DVxxKC_SetGPO1_ALL",
+        "ST25DVxxKC_GetGPO2_ALL",
+        "ST25DVxxKC_SetGPO2_ALL",
+        "nrfx_twim_init",
+        "nrf_drv_twi_init",
+        "nrfx_twim_enable",
+        "nrfx_twim_disable",
+        "nrfx_twim_uninit",
+        "nrfx_twim_tx",
+        "nrfx_twim_rx",
+        "nrfx_gpiote_in_init",
+        "nrfx_gpiote_in_event_enable",
+        "GPIOTE_IRQHandler",
+        "openr1_bae8_transmit",
+        "cm_backtrace_init",
+        "cm_backtrace_fault",
+        "cm_backtrace_call_stack_any",
+        "openr1_cmbacktrace_initialize",
+        "openr1_cmbacktrace_log",
+        "openr1_scheduler_current_stack",
+        "vTaskStackAddr",
+        "vTaskStackSize",
+        "vTaskName",
+        "HardFault_Handler",
+        ".openr1_noinit",
+        "r1_runtime_receive_eus",
+        "openr1_platform_initialize",
+        "r1_kv_store_initialize",
+        "main",
+    ):
+        if marker not in map_text:
+            raise AssertionError(f"missing {marker!r} in SDK map")
+
+    print(
+        "openR1 Nordic SDK image verified: "
+        f"SP=0x{initial_sp:08x}, reset=0x{reset:08x}, "
+        f"hex_sha256={digest(HEX)}, bin_sha256={digest(BIN)}"
+    )
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1620 @@
+{
+  "expected_exact_match_count": 0,
+  "expected_vendor_modified_count": 0,
+  "function_count": 52,
+  "functions": [
+    {
+      "binding": "l",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3157280
+      ],
+      "name": "BOOT_ConfigAllModules",
+      "normalized_sha256": "fc0f429c23f0682959b3508f9d82cc84e2b681e86570a07f7a59b33f1d84a689",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.BOOT_ConfigAllModules",
+      "size": 30
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 64,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [],
+      "name": "BOOT_PumpTo1_9V_VMULT",
+      "normalized_sha256": "ad3fe790f07264566300f1c0e17522ed3198963d762f22402516078a650f458e",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.BOOT_PumpTo1_9V_VMULT",
+      "size": 80
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "BOOT_SetIrqActionRoutineCallback",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.BOOT_SetIrqActionRoutineCallback",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 20,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3157492
+      ],
+      "name": "BOOT_PrepareToSleepAndWakeUp",
+      "normalized_sha256": "324149061a45f198dec97925357021df6ffb4cfb23eedccec812b5a2c27663b1",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.BOOT_PrepareToSleepAndWakeUp",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 24,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3157604
+      ],
+      "name": "BOOT_RegisterWakeUpAction",
+      "normalized_sha256": "19659e519e09c2647d3a5f821a9146e74f4e2f4701180cab0b331f138e95cffe",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.BOOT_RegisterWakeUpAction",
+      "size": 28
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 80,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3157380
+      ],
+      "name": "BOOT_IrqActionRoutine",
+      "normalized_sha256": "4f2216b486526a33078154101dd1227ee36b2a800acf9407810b406a9fe712f1",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.BOOT_IrqActionRoutine",
+      "size": 96
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 52,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3157312
+      ],
+      "name": "BOOT_IRQHandlerPMLHFColdStart",
+      "normalized_sha256": "81b37850136c40884624ca87285153ecde9e3390399fda309d5abc852bb29970",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.BOOT_IRQHandlerPMLHFColdStart",
+      "size": 64
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 2,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "BOOT_IRQHandlerProtoTimerSync",
+      "normalized_sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.BOOT_IRQHandlerProtoTimerSync",
+      "size": 2
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 62,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3156964
+      ],
+      "name": "BOOT_BootUpFromPor",
+      "normalized_sha256": "1bb035415fc0af8c5094c022b8e9bf5bb157e9a62dec2cfb684b6bcaeb2381e6",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.BOOT_BootUpFromPor",
+      "size": 74
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 220,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 20,
+      "matches": [
+        3157040
+      ],
+      "name": "BOOT_BootUpFromSleep",
+      "normalized_sha256": "cd09c62441b0a67a4124f617177b3fab17d92aa0c56ef7fbaf6765a28248ccbd",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 5,
+      "section": ".text.BOOT_BootUpFromSleep",
+      "size": 240
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 10,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3157476
+      ],
+      "name": "BOOT_IsAllActionHandled",
+      "normalized_sha256": "a97e2480646e2ac52575cfe01b2e9aec01881b5f1579868356eb506a6d6aff65",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.BOOT_IsAllActionHandled",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 174,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 76,
+      "matches": [
+        3156712
+      ],
+      "name": "BOOT_BootUp",
+      "normalized_sha256": "d72f09a33f6f4f9c09d0d9808d07a7498617f8869f9342f50fab2ad9f51d0f95",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 19,
+      "section": ".text.BOOT_BootUp",
+      "size": 250
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 64,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172644
+      ],
+      "name": "IRQ_Init",
+      "normalized_sha256": "0e82e0f7a5666f1a4d1793d9b9481ac691f8967f6a660d8f3f86ac798c0b179d",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_Init",
+      "size": 68
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 86,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172804
+      ],
+      "name": "IRQ_Store",
+      "normalized_sha256": "7e513013bde0031298dd3da47389aeab84613902ee319fabb3f7514e620aa2db",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_Store",
+      "size": 90
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 74,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172712
+      ],
+      "name": "IRQ_Restore",
+      "normalized_sha256": "6e1578ef4e42760158423f689c498eb58ec0a1e827754fd3305990d5b91dc765",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_Restore",
+      "size": 78
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 68,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3172552
+      ],
+      "name": "IRQ_Cleaning",
+      "normalized_sha256": "00e23deb878b09fb920d569158424d10cfdd8655021e2acb4a0630287882230a",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.IRQ_Cleaning",
+      "size": 68
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172620
+      ],
+      "name": "IRQ_EnableAfterRestore",
+      "normalized_sha256": "3b4a7196842f99fc57c470bdede56c121d9928f52b3057d64c3bfd26031534e5",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_EnableAfterRestore",
+      "size": 22
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 220,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3169668
+      ],
+      "name": "IRQHandler_PmlClock",
+      "normalized_sha256": "82138f0a1f9d15ccca30a62c7484718790385145b06621c561943dee3528d50d",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_PmlClock",
+      "size": 228
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3169444
+      ],
+      "name": "IRQHandler_GPIO",
+      "normalized_sha256": "9438657eb38aab282ee3fb956a52cbc3dc6b63ade3c87a67c9e70d76c802a556",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_GPIO",
+      "size": 224
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 202,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172072
+      ],
+      "name": "IRQHandler_SleepTimerFullVal",
+      "normalized_sha256": "3f5f55c159a31590692dd5e33ede78aaf86b9047b4e7de9fd19e7ea5b91893e0",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SleepTimerFullVal",
+      "size": 206
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 206,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3170988
+      ],
+      "name": "IRQHandler_ProtocolTimerSync",
+      "normalized_sha256": "a2446001624cd8297d4b6d1a8bb17c1edbd9d1e1055a2427c019af39da279ef9",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_ProtocolTimerSync",
+      "size": 214
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 190,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3169052,
+        3169248
+      ],
+      "name": "IRQHandler_ArcTimer0",
+      "normalized_sha256": "d098b3cdb0c927270e384d7b01fb6c405b4ce6efac47d6fce3cfc0ee28af331d",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ArcTimer0",
+      "size": 194
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 190,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3169052,
+        3169248
+      ],
+      "name": "IRQHandler_ArcTimer1",
+      "normalized_sha256": "d098b3cdb0c927270e384d7b01fb6c405b4ce6efac47d6fce3cfc0ee28af331d",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ArcTimer1",
+      "size": 194
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp0",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp1",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp2",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp3",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI2",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI3",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI4",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI5",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI6",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI7",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp2",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp4",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp5",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp6",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp7",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "IRQ_SetIRQUserHandlerSW1",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "irq_user_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_SetIRQUserHandlerSW1",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "IRQ_SetIRQUserHandlerGPIO",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "irq_user_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_SetIRQUserHandlerGPIO",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "IRQ_SetIRQUserHandlerSleepTimerOutCmp",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "irq_user_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_SetIRQUserHandlerSleepTimerOutCmp",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "IRQ_SetIRQUserHandlerSleepTimerFullValue",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "irq_user_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_SetIRQUserHandlerSleepTimerFullValue",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "IRQ_SetIRQUserHandlerProtoTimerOutCmp",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "irq_user_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_SetIRQUserHandlerProtoTimerOutCmp",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "IRQ_SetIRQUserHandlerProtoTimerSync",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "irq_user_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_SetIRQUserHandlerProtoTimerSync",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "IRQ_SetIRQUserHandlerARCTimer0",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "irq_user_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_SetIRQUserHandlerARCTimer0",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "IRQ_SetIRQUserHandlerARCTimer1",
+      "normalized_sha256": "621e625a206cc9e0193ec967b93e08b318b76deee419c676664f76f3bd7d7260",
+      "object": "irq_user_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_SetIRQUserHandlerARCTimer1",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 2,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "System_Init",
+      "normalized_sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4",
+      "object": "system.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.System_Init",
+      "size": 2
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 126,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3225728
+      ],
+      "name": "System_Save",
+      "normalized_sha256": "2e4746393703346b91444f479320ebf8dcf402440c153660a5e540a4d283ec10",
+      "object": "system.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.System_Save",
+      "size": 130
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 122,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3225596
+      ],
+      "name": "System_Restore",
+      "normalized_sha256": "2f6a325f786678c66c3fbbd7ef8ce04b3e355e38072d5b1797ce2720d07c8536",
+      "object": "system.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.System_Restore",
+      "size": 130
+    }
+  ],
+  "identity": {
+    "architecture": "ARCv2 EM",
+    "archive_git_blob": "729ca978bb728f0289db4b3ee743e333670e4dc1",
+    "archive_kind": "em_hw_api",
+    "archive_path": "libs/em_hw_api/lib_em_hw_api.a",
+    "archive_sha256": "74888e6952ff261b080e50c6267eed3e77d3a931dbe2dbb12f910068ca229865",
+    "compiler": "Synopsys MetaWare ARC Compiler T-2022.09 build 004 / LLVM 14.0.6 (EM-Micro)",
+    "compiler_anchors_matched": true,
+    "compiler_comment_sha256": "929918ddd8913f60418908e65d12e5b7baa0e2b904423b6fb95c8c32cdfecddd",
+    "optimization": "-Os"
+  },
+  "known_expected_address_match_count": 0,
+  "known_function_count": 0,
+  "unique_discovered_matches": [
+    {
+      "binding": "l",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3157280
+      ],
+      "name": "BOOT_ConfigAllModules",
+      "normalized_sha256": "fc0f429c23f0682959b3508f9d82cc84e2b681e86570a07f7a59b33f1d84a689",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.BOOT_ConfigAllModules",
+      "size": 30
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 20,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3157492
+      ],
+      "name": "BOOT_PrepareToSleepAndWakeUp",
+      "normalized_sha256": "324149061a45f198dec97925357021df6ffb4cfb23eedccec812b5a2c27663b1",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.BOOT_PrepareToSleepAndWakeUp",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 24,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3157604
+      ],
+      "name": "BOOT_RegisterWakeUpAction",
+      "normalized_sha256": "19659e519e09c2647d3a5f821a9146e74f4e2f4701180cab0b331f138e95cffe",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.BOOT_RegisterWakeUpAction",
+      "size": 28
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 80,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3157380
+      ],
+      "name": "BOOT_IrqActionRoutine",
+      "normalized_sha256": "4f2216b486526a33078154101dd1227ee36b2a800acf9407810b406a9fe712f1",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.BOOT_IrqActionRoutine",
+      "size": 96
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 52,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3157312
+      ],
+      "name": "BOOT_IRQHandlerPMLHFColdStart",
+      "normalized_sha256": "81b37850136c40884624ca87285153ecde9e3390399fda309d5abc852bb29970",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.BOOT_IRQHandlerPMLHFColdStart",
+      "size": 64
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 62,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3156964
+      ],
+      "name": "BOOT_BootUpFromPor",
+      "normalized_sha256": "1bb035415fc0af8c5094c022b8e9bf5bb157e9a62dec2cfb684b6bcaeb2381e6",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.BOOT_BootUpFromPor",
+      "size": 74
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 220,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 20,
+      "matches": [
+        3157040
+      ],
+      "name": "BOOT_BootUpFromSleep",
+      "normalized_sha256": "cd09c62441b0a67a4124f617177b3fab17d92aa0c56ef7fbaf6765a28248ccbd",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 5,
+      "section": ".text.BOOT_BootUpFromSleep",
+      "size": 240
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 10,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3157476
+      ],
+      "name": "BOOT_IsAllActionHandled",
+      "normalized_sha256": "a97e2480646e2ac52575cfe01b2e9aec01881b5f1579868356eb506a6d6aff65",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.BOOT_IsAllActionHandled",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 174,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 76,
+      "matches": [
+        3156712
+      ],
+      "name": "BOOT_BootUp",
+      "normalized_sha256": "d72f09a33f6f4f9c09d0d9808d07a7498617f8869f9342f50fab2ad9f51d0f95",
+      "object": "boot.c.obj",
+      "offset": 0,
+      "relocation_count": 19,
+      "section": ".text.BOOT_BootUp",
+      "size": 250
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 64,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172644
+      ],
+      "name": "IRQ_Init",
+      "normalized_sha256": "0e82e0f7a5666f1a4d1793d9b9481ac691f8967f6a660d8f3f86ac798c0b179d",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_Init",
+      "size": 68
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 86,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172804
+      ],
+      "name": "IRQ_Store",
+      "normalized_sha256": "7e513013bde0031298dd3da47389aeab84613902ee319fabb3f7514e620aa2db",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_Store",
+      "size": 90
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 74,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172712
+      ],
+      "name": "IRQ_Restore",
+      "normalized_sha256": "6e1578ef4e42760158423f689c498eb58ec0a1e827754fd3305990d5b91dc765",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_Restore",
+      "size": 78
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 68,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3172552
+      ],
+      "name": "IRQ_Cleaning",
+      "normalized_sha256": "00e23deb878b09fb920d569158424d10cfdd8655021e2acb4a0630287882230a",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.IRQ_Cleaning",
+      "size": 68
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172620
+      ],
+      "name": "IRQ_EnableAfterRestore",
+      "normalized_sha256": "3b4a7196842f99fc57c470bdede56c121d9928f52b3057d64c3bfd26031534e5",
+      "object": "irq.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQ_EnableAfterRestore",
+      "size": 22
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 220,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3169668
+      ],
+      "name": "IRQHandler_PmlClock",
+      "normalized_sha256": "82138f0a1f9d15ccca30a62c7484718790385145b06621c561943dee3528d50d",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_PmlClock",
+      "size": 228
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3169444
+      ],
+      "name": "IRQHandler_GPIO",
+      "normalized_sha256": "9438657eb38aab282ee3fb956a52cbc3dc6b63ade3c87a67c9e70d76c802a556",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_GPIO",
+      "size": 224
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 202,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3172072
+      ],
+      "name": "IRQHandler_SleepTimerFullVal",
+      "normalized_sha256": "3f5f55c159a31590692dd5e33ede78aaf86b9047b4e7de9fd19e7ea5b91893e0",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SleepTimerFullVal",
+      "size": 206
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 206,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3170988
+      ],
+      "name": "IRQHandler_ProtocolTimerSync",
+      "normalized_sha256": "a2446001624cd8297d4b6d1a8bb17c1edbd9d1e1055a2427c019af39da279ef9",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_ProtocolTimerSync",
+      "size": 214
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp0",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp1",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp2",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 212,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3172280
+      ],
+      "name": "IRQHandler_SleepTimerOutCmp3",
+      "normalized_sha256": "d618a0d243d4f181c59c5ddc0d92cf61d72272ac6d04b2fa66f5a9c85b4cb5ba",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.IRQHandler_SleepTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI2",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI3",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI4",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI5",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI6",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 214,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3171852
+      ],
+      "name": "IRQHandler_SWI7",
+      "normalized_sha256": "e92f26ca59dd5163bb27082189278773ec123cd74900c353e1b7eb5b40b05cae",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_SWI",
+      "size": 218
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp2",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp4",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp5",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp6",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 216,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3170164
+      ],
+      "name": "IRQHandler_ProtocolTimerOutCmp7",
+      "normalized_sha256": "d089ea37a686791878f215346553ab2e3009f31bc7e5d0343bb6e59e34b071e5",
+      "object": "irq_system_isr.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.IRQHandler_ProtocolTimerOutCmp",
+      "size": 220
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 126,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3225728
+      ],
+      "name": "System_Save",
+      "normalized_sha256": "2e4746393703346b91444f479320ebf8dcf402440c153660a5e540a4d283ec10",
+      "object": "system.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.System_Save",
+      "size": 130
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 122,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3225596
+      ],
+      "name": "System_Restore",
+      "normalized_sha256": "2f6a325f786678c66c3fbbd7ef8ce04b3e355e38072d5b1797ce2720d07c8536",
+      "object": "system.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.System_Restore",
+      "size": 130
+    }
+  ]
+}

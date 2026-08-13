@@ -1,0 +1,5 @@
+container_tag=opencfw-arm-gcc:13.2-rel1
+container_image_id=sha256:4bf18d22a8e9e1dffa4c21ea1ba44decf7a88a4a2e9c766e47c523f4bef26db0
+compiler=arm-none-eabi-gcc (15:13.2.rel1-2) 13.2.1 20231009
+binutils=GNU objdump (2.42-1ubuntu1+23) 2.42
+target_flags=-std=c99 -mcpu=cortex-m55 -mthumb -mno-unaligned-access -ffreestanding -fno-lto -fno-builtin -ffunction-sections -fdata-sections -fomit-frame-pointer -fno-unwind-tables -fno-asynchronous-unwind-tables -DWSF_TRACE_ENABLED=1 -DWSF_ASSERT_ENABLED=1 -DDM_CONN_MAX=3 -DDM_NUM_ADV_SETS=1 -Wno-unused-parameter

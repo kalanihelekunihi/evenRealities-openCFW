@@ -1,0 +1,8 @@
+ordinal	function	stock_start	stock_end_exclusive	interval_bytes	interval_sha256	provenance	behavior
+1	__NVIC_EnableIRQ	0x0057B704	0x0057B722	30	17aff8183525896f6ba4ca86a44db894b32e4e3b8a0ccb458649421657fabb04	exact CMSIS-Core inline semantics	sets the selected NVIC ISER bit for a nonnegative IRQ
+2	__NVIC_DisableIRQ	0x0057B722	0x0057B748	38	dce02bb665a299894c6a5299754284126554158350bf6678861ff09a32a804f3	exact CMSIS-Core inline semantics	sets the selected NVIC ICER bit then executes DSB and ISB
+3	__NVIC_SetPriority	0x0057B748	0x0057B770	40	64ba1209bac74b46eec960c3547150106a638500041965c21fc001cb9c7eb490	exact CMSIS-Core inline semantics	writes an external or system-handler priority byte
+4	DRV_PdmInit	0x0057B770	0x0057B86C	252	2cef620bed5f12bcd13e038f8ca94397471161345e4f5ed7110fa4e283fd857a	semantic high confidence	idempotently initializes powers configures interrupts priority pins and DMA for PDM0
+5	DRV_PdmDeinit	0x0057B86C	0x0057B940	212	31d813c372793e044dee29043ee72f250968fc9b8691f12579307a33ed427335	semantic high confidence	idempotently disables interrupts DMA pins power and the PDM0 handle
+6	PDM0_IRQHandler	0x0057B940	0x0057B9BA	122	71ade65920f712807ecf27fabf74d0112f61a89a7c9d007ea1d0d78460b42309	vector-table Thumb pointer at 0x00438100	reads clears and services PDM status then dispatches generic audio processing
+7	drv_pdm_buffer_get	0x0057B9BA	0x0057BA1E	100	07ecdc8391b9a5a066487455ad5e68fa3e49fd98c93e7bfa94cbefd8386e037c	sole local caller from IRQ path	gets and invalidates the inactive DMA buffer then extracts 160 signed 16-bit samples into 320 bytes

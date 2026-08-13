@@ -1,0 +1,3446 @@
+openjdk version "21.0.12" 2026-07-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.12+8 (build 21.0.12+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12+8 (build 21.0.12+8-LTS, mixed mode)
+INFO  Using log config file: jar:file:/var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (11452 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (31886 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/tmp/opencfw-apollo64.A58cAv/ghidra
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /var/tmp/opencfw-apollo64.A58cAv/balanced64-j64/projects/apollo-36/apollo_main_template (HeadlessAnalyzer)  
+INFO  Opening project: /var/tmp/opencfw-apollo64.A58cAv/balanced64-j64/projects/apollo-36/apollo_main_template (HeadlessProject)  
+INFO  REPORT: Processing project file: /ota_s200_firmware_ota.bin (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DumpDecompilationChunk.java '0x00528298' '0x0052AF40' '60'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/tmp/opencfw-apollo64.A58cAv/ghidra/DumpDecompilationChunk.java (HeadlessAnalyzer)  
+INFO  DumpDecompilationChunk.java> OPENCFW_CHUNK_BEGIN start=00528298 end=0052af40 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528298 body_start=00528298 body_end=0052846f name=FUN_00528298 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_00528298(undefined4 *param_1,int param_2,int param_3,int param_4,int param_5,char param_6,
+            int *param_7,int *param_8)
+
+{
+  bool bVar1;
+  short sVar2;
+  undefined2 uVar3;
+  int iVar4;
+  uint uVar5;
+  int iVar6;
+  int iVar7;
+  undefined4 uVar8;
+  int iVar9;
+  int unaff_r9;
+  int unaff_r10;
+  int local_28;
+  
+  uVar8 = *param_1;
+  iVar7 = param_2;
+  local_28 = param_4;
+  local_28 = FUN_005288e0(param_2,param_3);
+  if (local_28 == 0) {
+    sVar2 = FUN_00528b4a(param_2,&local_28);
+    if (local_28 == 0) {
+      iVar7 = sVar2 + 1;
+      if (iVar7 < 0xff0) {
+        for (iVar9 = 0; iVar9 < iVar7; iVar9 = iVar9 + 1) {
+          iVar4 = FUN_00528ba8(param_2,&local_28);
+          if (local_28 == 0) {
+            sVar2 = FUN_00528b4a(param_2,&local_28);
+            unaff_r9 = (int)sVar2;
+            if (local_28 != 0) goto LAB_0052832e;
+            sVar2 = FUN_00528b4a(param_2,&local_28);
+            unaff_r10 = (int)sVar2;
+            if (local_28 != 0) goto LAB_0052832e;
+            bVar1 = false;
+          }
+          else {
+LAB_0052832e:
+            bVar1 = true;
+          }
+          if (bVar1) goto LAB_0052846c;
+          if (iVar4 == param_5) {
+            *param_8 = unaff_r9 + 1;
+            if (0xaa6 < *param_8 - 1U) {
+              local_28 = 8;
+              goto LAB_0052846c;
+            }
+            local_28 = FUN_005288e0(param_2,param_3 + unaff_r10);
+            if (local_28 != 0) goto LAB_0052846c;
+            iVar7 = 0;
+            iVar9 = FUN_0052919c(uVar8,8,0,*param_8,0,&local_28);
+            if (local_28 != 0) goto LAB_0052846c;
+            iVar4 = 0;
+            goto LAB_005283a6;
+          }
+        }
+        local_28 = 1;
+      }
+      else {
+        local_28 = 8;
+      }
+    }
+  }
+  goto LAB_0052846c;
+LAB_005283a6:
+  if (*param_8 <= iVar4) goto LAB_005283fe;
+  uVar3 = FUN_00528b4a(param_2,&local_28);
+  *(undefined2 *)(iVar9 + iVar4 * 8) = uVar3;
+  if ((((local_28 != 0) || (local_28 = FUN_00528914(param_2,2), local_28 != 0)) ||
+      (uVar5 = FUN_00528ba8(param_2,&local_28), local_28 != 0)) ||
+     (local_28 = FUN_00528914(param_2,4), local_28 != 0)) goto LAB_0052845c;
+  if ((int)uVar5 < 0) {
+    local_28 = 8;
+    goto LAB_0052845c;
+  }
+  *(uint *)(iVar9 + iVar4 * 8 + 4) = uVar5 & 0xffffff;
+  iVar4 = iVar4 + 1;
+  goto LAB_005283a6;
+LAB_005283fe:
+  if (param_6 != '\0') {
+    FUN_00567c4c(iVar9,*param_8,8,DAT_00528710);
+    for (iVar7 = 0; iVar7 < *param_8; iVar7 = iVar7 + 1) {
+    }
+  }
+  iVar7 = 0;
+  iVar4 = FUN_0052919c(uVar8,4,0,*param_8,0,&local_28);
+  if (local_28 == 0) {
+    for (iVar6 = 0; iVar6 < *param_8; iVar6 = iVar6 + 1) {
+      *(int *)(iVar4 + iVar6 * 4) = *(int *)(iVar9 + iVar6 * 8 + 4) + param_4;
+    }
+    *param_7 = iVar4;
+    local_28 = 0;
+  }
+LAB_0052845c:
+  FUN_00529256(uVar8,iVar9);
+LAB_0052846c:
+  return CONCAT44(iVar7,local_28);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528298 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528470 body_start=00528470 body_end=005284dd name=FUN_00528470 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_00528470(undefined4 param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 local_28;
+  
+  local_28 = param_3;
+  for (iVar2 = 0; iVar2 < 9; iVar2 = iVar2 + 1) {
+    *(undefined4 *)(param_4 + iVar2 * 4) = 0;
+    if (param_2 == 0) {
+      *(undefined4 *)(param_6 + iVar2 * 4) = 0;
+    }
+    else {
+      uVar1 = FUN_005288e0(param_2,0);
+      *(undefined4 *)(param_6 + iVar2 * 4) = uVar1;
+    }
+    if (*(int *)(param_6 + iVar2 * 4) == 0) {
+      local_28 = param_5 + iVar2 * 4;
+      uVar1 = (**(code **)(DAT_00528714 + iVar2 * 8))(param_1,param_2,param_3,param_4 + iVar2 * 4);
+      *(undefined4 *)(param_6 + iVar2 * 4) = uVar1;
+    }
+  }
+  return CONCAT44(param_4,local_28);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528470 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005284de body_start=005284de body_end=005284f3 name=FUN_005284de (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_005284de(undefined4 param_1,uint param_2)
+
+{
+  int iVar1;
+  
+  if (param_2 < 9) {
+    iVar1 = (int)*(char *)(DAT_00528714 + param_2 * 8 + 4);
+  }
+  else {
+    iVar1 = -2;
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005284de (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005284f4 body_start=005284f4 body_end=00528507 name=FUN_005284f4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_005284f4(void)
+
+{
+  int iVar1;
+  undefined4 unaff_r7;
+  
+  iVar1 = FUN_005284de();
+  return CONCAT44(unaff_r7,(uint)(iVar1 - 3U < 2));
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005284f4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528508 body_start=00528508 body_end=00528523 name=FUN_00528508 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_00528508(undefined4 param_1,int param_2,undefined4 param_3,undefined4 *param_4,
+            undefined4 *param_5)
+
+{
+  undefined4 uVar1;
+  undefined4 local_10;
+  
+  *param_4 = 0;
+  if (param_2 == 0) {
+    uVar1 = 0x51;
+    local_10 = param_4;
+  }
+  else {
+    local_10 = param_5;
+    uVar1 = FUN_00528720();
+  }
+  return CONCAT44(local_10,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528508 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528524 body_start=00528524 body_end=0052853f name=FUN_00528524 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_00528524(undefined4 param_1,int param_2,undefined4 param_3,undefined4 *param_4,
+            undefined4 *param_5)
+
+{
+  undefined4 uVar1;
+  undefined4 local_10;
+  
+  *param_4 = 0;
+  if (param_2 == 0) {
+    uVar1 = 0x51;
+    local_10 = param_4;
+  }
+  else {
+    local_10 = param_5;
+    uVar1 = FUN_00528720();
+  }
+  return CONCAT44(local_10,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528524 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528540 body_start=00528540 body_end=0052857d name=FUN_00528540 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_00528540(undefined4 *param_1,undefined4 param_2,undefined4 param_3,int *param_4,
+            undefined4 param_5)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined4 uVar3;
+  
+  uVar3 = *param_1;
+  iVar1 = FUN_00528842(uVar3,param_3,&DAT_005286f4);
+  if (iVar1 == 0) {
+    iVar2 = 0x40;
+  }
+  else {
+    iVar2 = FUN_00528802(param_1,iVar1,param_5);
+    if (iVar2 == 0) {
+      *param_4 = iVar1;
+    }
+    else {
+      FUN_00529256(uVar3,iVar1);
+    }
+  }
+  return CONCAT44(param_4,iVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528540 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005285d4 body_start=005285d4 body_end=0052862b name=FUN_005285d4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_005285d4(undefined4 *param_1,undefined4 param_2,undefined4 param_3,int *param_4,
+            undefined4 *param_5)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  int *local_20;
+  
+  local_20 = param_4;
+  iVar1 = FUN_0044a43c(param_3);
+  iVar2 = FUN_00529148(*param_1,iVar1 + 0x12,&local_20);
+  piVar3 = local_20;
+  if (local_20 == (int *)0x0) {
+    FUN_00439be4(iVar2,param_3,iVar1);
+    FUN_00439be4(iVar1 + iVar2,DAT_00528ed8,0x12);
+    *param_4 = iVar2;
+    *param_5 = 0;
+    piVar3 = (int *)0x0;
+  }
+  return CONCAT44(local_20,piVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005285d4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052862c body_start=0052862c body_end=0052864f name=FUN_0052862c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4
+FUN_0052862c(undefined4 *param_1,undefined4 param_2,undefined4 param_3,int *param_4,
+            undefined4 *param_5)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = FUN_00528842(*param_1,param_3,DAT_00528edc);
+  if (iVar1 == 0) {
+    uVar2 = 0x40;
+  }
+  else {
+    *param_4 = iVar1;
+    *param_5 = 0;
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052862c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528720 body_start=00528720 body_end=00528801 name=FUN_00528720 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_00528720(undefined4 param_1,undefined4 param_2,int param_3,int param_4,undefined4 *param_5)
+
+{
+  bool bVar1;
+  ushort uVar2;
+  int iVar3;
+  int iVar4;
+  undefined4 uVar5;
+  int iVar6;
+  int local_20;
+  int iStack_1c;
+  
+  local_20 = param_3;
+  iStack_1c = param_4;
+  iVar3 = FUN_00528ba8(param_2,&local_20);
+  iVar6 = local_20;
+  if (local_20 == 0) {
+    if (iVar3 == param_4) {
+      FUN_00528ba8(param_2,&local_20);
+      iVar6 = local_20;
+      if (((local_20 == 0) &&
+          (local_20 = FUN_00528914(param_2,0x10), iVar6 = local_20, local_20 == 0)) &&
+         (uVar2 = FUN_00528b4a(param_2,&local_20), iVar6 = local_20, local_20 == 0)) {
+        if (uVar2 == 0) {
+          iVar6 = 2;
+        }
+        else {
+          for (iVar3 = 0; iVar3 < (int)(uint)uVar2; iVar3 = iVar3 + 1) {
+            iVar4 = FUN_00528ba8(param_2,&local_20);
+            iVar6 = local_20;
+            if (local_20 != 0) goto LAB_005287fe;
+            if (iVar4 == 2) {
+              uVar5 = FUN_00528ba8(param_2,&local_20);
+              if ((local_20 == 0) && (FUN_00528ba8(param_2,&local_20), local_20 == 0)) {
+                bVar1 = false;
+              }
+              else {
+                bVar1 = true;
+              }
+              if (!bVar1) {
+                *param_5 = uVar5;
+                iVar6 = 0;
+                goto LAB_005287fe;
+              }
+            }
+            else {
+              iVar6 = FUN_00528914(param_2,8);
+              local_20 = iVar6;
+              if (iVar6 != 0) goto LAB_005287fe;
+            }
+          }
+          iVar6 = 2;
+        }
+      }
+    }
+    else {
+      iVar6 = 2;
+    }
+  }
+LAB_005287fe:
+  return CONCAT44(local_20,iVar6);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528720 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528802 body_start=00528802 body_end=00528841 name=FUN_00528802 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00528802(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  undefined4 local_3c;
+  undefined4 local_38;
+  undefined4 local_34 [3];
+  undefined4 local_28;
+  undefined4 uStack_14;
+  
+  local_38 = 0;
+  local_34[0] = 4;
+  local_28 = param_2;
+  uStack_14 = param_4;
+  iVar1 = FUN_00524f96(param_1,local_34,&local_3c);
+  if (iVar1 == 0) {
+    iVar1 = FUN_00528508(param_1,local_3c,param_2,&local_38,param_3);
+    FUN_0052502a(local_3c,0);
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528802 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528842 body_start=00528842 body_end=005288b7 name=FUN_00528842 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528842(undefined4 param_1,int param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined1 *puVar3;
+  int local_18;
+  
+  local_18 = 0;
+  iVar1 = FUN_0044a43c(param_2);
+  iVar2 = FUN_0044a43c(param_3);
+  puVar3 = (undefined1 *)FUN_00529148(param_1,iVar2 + iVar1 + 1,&local_18);
+  if (local_18 == 0) {
+    iVar1 = FUN_00567c64(param_2,0x2f);
+    if (iVar1 == 0) {
+      *puVar3 = 0;
+    }
+    else {
+      FUN_0044b5a0(puVar3,param_2,(iVar1 - param_2) + 1);
+      puVar3[(iVar1 - param_2) + 1] = 0;
+      param_2 = iVar1 + 1;
+    }
+    FUN_00567c80(puVar3,param_3);
+    FUN_00567c80(puVar3,param_2);
+  }
+  else {
+    puVar3 = (undefined1 *)0x0;
+  }
+  return CONCAT44(local_18,puVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528842 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005288b8 body_start=005288b8 body_end=005288cd name=FUN_005288b8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_005288b8(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  *param_1 = param_2;
+  param_1[1] = param_3;
+  param_1[2] = 0;
+  param_1[8] = 0;
+  param_1[5] = 0;
+  param_1[6] = 0;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005288b8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005288ce body_start=005288ce body_end=005288df name=FUN_005288ce (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_005288ce(int param_1)
+
+{
+  undefined4 unaff_r7;
+  
+  if ((param_1 != 0) && (*(int *)(param_1 + 0x18) != 0)) {
+    (**(code **)(param_1 + 0x18))();
+  }
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005288ce (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005288e0 body_start=005288e0 body_end=00528913 name=FUN_005288e0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_005288e0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  iVar2 = 0;
+  if (*(int *)(param_1 + 0x14) == 0) {
+    if (*(uint *)(param_1 + 4) < param_2) {
+      iVar2 = 0x55;
+    }
+  }
+  else {
+    iVar1 = (**(code **)(param_1 + 0x14))(param_1,param_2,0,0);
+    if (iVar1 != 0) {
+      iVar2 = 0x55;
+    }
+  }
+  if (iVar2 == 0) {
+    *(uint *)(param_1 + 8) = param_2;
+  }
+  return CONCAT44(param_4,iVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005288e0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528914 body_start=00528914 body_end=00528927 name=FUN_00528914 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528914(int param_1,int param_2)
+
+{
+  undefined4 uVar1;
+  undefined4 unaff_r7;
+  
+  if (param_2 < 0) {
+    uVar1 = 0x55;
+  }
+  else {
+    uVar1 = FUN_005288e0(param_1,param_2 + *(int *)(param_1 + 8));
+  }
+  return CONCAT44(unaff_r7,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528914 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528928 body_start=00528928 body_end=00528935 name=FUN_00528928 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00528928(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  FUN_00528936(param_1,*(undefined4 *)(param_1 + 8),param_2,param_3);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528928 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528936 body_start=00528936 body_end=00528991 name=FUN_00528936 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528936(int *param_1,uint param_2,undefined4 param_3,uint param_4)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if (param_2 < (uint)param_1[1]) {
+    if (param_1[5] == 0) {
+      uVar1 = param_1[1] - param_2;
+      if (param_4 < param_1[1] - param_2) {
+        uVar1 = param_4;
+      }
+      FUN_00439be4(param_3,*param_1 + param_2,uVar1);
+    }
+    else {
+      uVar1 = (*(code *)param_1[5])(param_1,param_2,param_3,param_4);
+    }
+    param_1[2] = uVar1 + param_2;
+    if (uVar1 < param_4) {
+      uVar2 = 0x55;
+    }
+  }
+  else {
+    uVar2 = 0x55;
+  }
+  return CONCAT44(param_4,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528936 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528992 body_start=00528992 body_end=005289af name=FUN_00528992 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00528992(int param_1,undefined4 param_2,undefined4 *param_3)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_005289d0(param_1);
+  if (iVar1 == 0) {
+    *param_3 = *(undefined4 *)(param_1 + 0x20);
+    *(undefined4 *)(param_1 + 0x20) = 0;
+    *(undefined4 *)(param_1 + 0x24) = 0;
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528992 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005289b0 body_start=005289b0 body_end=005289cf name=FUN_005289b0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_005289b0(int param_1,undefined4 *param_2)
+
+{
+  if ((param_1 != 0) && (*(int *)(param_1 + 0x14) != 0)) {
+    FUN_00529256(*(undefined4 *)(param_1 + 0x1c),*param_2);
+    *param_2 = 0;
+  }
+  *param_2 = 0;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005289b0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005289d0 body_start=005289d0 body_end=00528a65 name=FUN_005289d0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_005289d0(int *param_1,uint param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  int local_18;
+  
+  local_18 = 0;
+  if (param_1[5] == 0) {
+    if (((uint)param_1[2] < (uint)param_1[1]) && (param_2 <= (uint)(param_1[1] - param_1[2]))) {
+      param_1[8] = *param_1 + param_1[2];
+      param_1[9] = param_1[8] + param_2;
+      param_1[2] = param_2 + param_1[2];
+    }
+    else {
+      local_18 = 0x55;
+    }
+  }
+  else {
+    iVar3 = param_1[7];
+    if ((uint)param_1[1] < param_2) {
+      local_18 = 0x55;
+    }
+    else {
+      iVar1 = FUN_00529176(iVar3,param_2,&local_18);
+      *param_1 = iVar1;
+      if (local_18 == 0) {
+        uVar2 = (*(code *)param_1[5])(param_1,param_1[2],*param_1,param_2);
+        if (uVar2 < param_2) {
+          FUN_00529256(iVar3,*param_1);
+          *param_1 = 0;
+          local_18 = 0x55;
+        }
+        param_1[8] = *param_1;
+        param_1[9] = param_1[8] + param_2;
+        param_1[2] = uVar2 + param_1[2];
+      }
+    }
+  }
+  return CONCAT44(local_18,local_18);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005289d0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528a66 body_start=00528a66 body_end=00528a85 name=FUN_00528a66 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00528a66(undefined4 *param_1)
+
+{
+  if (param_1[5] != 0) {
+    FUN_00529256(param_1[7],*param_1);
+    *param_1 = 0;
+  }
+  param_1[8] = 0;
+  param_1[9] = 0;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528a66 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528a86 body_start=00528a86 body_end=00528a9f name=FUN_00528a86 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00528a86(int param_1)
+
+{
+  char cVar1;
+  char *pcVar2;
+  
+  cVar1 = '\0';
+  if (*(uint *)(param_1 + 0x20) < *(uint *)(param_1 + 0x24)) {
+    pcVar2 = *(char **)(param_1 + 0x20);
+    *(char **)(param_1 + 0x20) = pcVar2 + 1;
+    cVar1 = *pcVar2;
+  }
+  return (int)cVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528a86 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528aa0 body_start=00528aa0 body_end=00528ac5 name=FUN_00528aa0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined2 FUN_00528aa0(int param_1)
+
+{
+  undefined2 uVar1;
+  undefined1 *puVar2;
+  undefined1 *puVar3;
+  
+  uVar1 = 0;
+  puVar2 = *(undefined1 **)(param_1 + 0x20);
+  puVar3 = puVar2;
+  if (puVar2 + 1 < *(undefined1 **)(param_1 + 0x24)) {
+    puVar3 = puVar2 + 2;
+    uVar1 = CONCAT11(*puVar2,puVar2[1]);
+  }
+  *(undefined1 **)(param_1 + 0x20) = puVar3;
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528aa0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528ac6 body_start=00528ac6 body_end=00528af9 name=FUN_00528ac6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+uint FUN_00528ac6(int param_1)
+
+{
+  uint uVar1;
+  byte *pbVar2;
+  byte *pbVar3;
+  
+  uVar1 = 0;
+  pbVar2 = *(byte **)(param_1 + 0x20);
+  pbVar3 = pbVar2;
+  if (pbVar2 + 3 < *(byte **)(param_1 + 0x24)) {
+    pbVar3 = pbVar2 + 4;
+    uVar1 = (uint)pbVar2[3] | (uint)pbVar2[1] << 0x10 | (uint)*pbVar2 << 0x18 | (uint)pbVar2[2] << 8
+    ;
+  }
+  *(byte **)(param_1 + 0x20) = pbVar3;
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528ac6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528afa body_start=00528afa body_end=00528b49 name=FUN_00528afa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528afa(int *param_1,undefined4 *param_2,uint param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  uint local_18;
+  undefined4 uStack_14;
+  
+  local_18 = param_3 & 0xffffff00;
+  *param_2 = 0;
+  if (param_1[5] == 0) {
+    if ((uint)param_1[2] < (uint)param_1[1]) {
+      local_18 = CONCAT31((int3)(param_3 >> 8),*(undefined1 *)(*param_1 + param_1[2]));
+      goto LAB_00528b3a;
+    }
+  }
+  else {
+    uStack_14 = param_4;
+    iVar1 = (*(code *)param_1[5])(param_1,param_1[2],&local_18,1);
+    if (iVar1 == 1) {
+LAB_00528b3a:
+      param_1[2] = param_1[2] + 1;
+      iVar1 = (int)(char)local_18;
+      goto LAB_00528b26;
+    }
+  }
+  *param_2 = 0x55;
+  iVar1 = 0;
+LAB_00528b26:
+  return CONCAT44(local_18,iVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528afa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528b4a body_start=00528b4a body_end=00528ba7 name=FUN_00528b4a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528b4a(int *param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  uint uVar3;
+  undefined4 uStack_18;
+  
+  puVar2 = &uStack_18;
+  uStack_18 = param_4;
+  uVar3 = 0;
+  *param_2 = 0;
+  if (param_1[2] + 1U < (uint)param_1[1]) {
+    if (param_1[5] == 0) {
+      puVar2 = (undefined4 *)(*param_1 + param_1[2]);
+    }
+    else {
+      iVar1 = (*(code *)param_1[5])(param_1,param_1[2],puVar2,2);
+      if (iVar1 != 2) goto LAB_00528ba0;
+    }
+    if (puVar2 != (undefined4 *)0x0) {
+      uVar3 = (uint)CONCAT11(*(undefined1 *)puVar2,*(undefined1 *)((int)puVar2 + 1));
+    }
+    param_1[2] = param_1[2] + 2;
+  }
+  else {
+LAB_00528ba0:
+    *param_2 = 0x55;
+    uVar3 = 0;
+  }
+  return CONCAT44(uStack_18,uVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528b4a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528ba8 body_start=00528ba8 body_end=00528c13 name=FUN_00528ba8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528ba8(int *param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  byte *pbVar2;
+  uint uVar3;
+  undefined4 uStack_18;
+  
+  pbVar2 = (byte *)&uStack_18;
+  uStack_18 = param_4;
+  uVar3 = 0;
+  *param_2 = 0;
+  if (param_1[2] + 3U < (uint)param_1[1]) {
+    if (param_1[5] == 0) {
+      pbVar2 = (byte *)(*param_1 + param_1[2]);
+    }
+    else {
+      iVar1 = (*(code *)param_1[5])(param_1,param_1[2],pbVar2,4);
+      if (iVar1 != 4) goto LAB_00528c0c;
+    }
+    if (pbVar2 != (byte *)0x0) {
+      uVar3 = (uint)pbVar2[3] |
+              (uint)pbVar2[1] << 0x10 | (uint)*pbVar2 << 0x18 | (uint)pbVar2[2] << 8;
+    }
+    param_1[2] = param_1[2] + 4;
+  }
+  else {
+LAB_00528c0c:
+    *param_2 = 0x55;
+    uVar3 = 0;
+  }
+  return CONCAT44(uStack_18,uVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528ba8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528c14 body_start=00528c14 body_end=00528db7 name=FUN_00528c14 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528c14(int param_1,byte *param_2,int param_3,undefined4 param_4)
+
+{
+  byte bVar1;
+  bool bVar2;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  uint *puVar6;
+  ushort *puVar7;
+  
+  bVar2 = false;
+  if (param_2 == (byte *)0x0) {
+    iVar3 = 6;
+  }
+  else {
+    if (param_1 != 0) {
+      puVar7 = *(ushort **)(param_1 + 0x20);
+      iVar3 = 0;
+LAB_00528c54:
+      for (; uVar4 = (uint)*param_2, uVar4 == 4; param_2 = param_2 + 4) {
+        iVar3 = FUN_005289d0(param_1,*(undefined2 *)(param_2 + 2));
+        if (iVar3 != 0) goto LAB_00528ca6;
+        bVar2 = true;
+        puVar7 = *(ushort **)(param_1 + 0x20);
+      }
+      if (uVar4 - 8 < 2) {
+        uVar4 = (uint)(byte)*puVar7;
+        puVar7 = (ushort *)((int)puVar7 + 1);
+        iVar5 = 0x18;
+      }
+      else if (uVar4 - 0xc < 2) {
+        uVar4 = (uint)CONCAT11((byte)*puVar7,*(byte *)((int)puVar7 + 1));
+        iVar5 = 0x10;
+        puVar7 = puVar7 + 1;
+      }
+      else if (uVar4 - 0xe < 2) {
+        uVar4 = (uint)*puVar7;
+        iVar5 = 0x10;
+        puVar7 = puVar7 + 1;
+      }
+      else if (uVar4 - 0x10 < 2) {
+        uVar4 = (uint)*(byte *)((int)puVar7 + 3) |
+                (uint)*(byte *)((int)puVar7 + 1) << 0x10 | (uint)(byte)*puVar7 << 0x18 |
+                (uint)(byte)puVar7[1] << 8;
+        iVar5 = 0;
+        puVar7 = puVar7 + 2;
+      }
+      else if (uVar4 - 0x12 < 2) {
+        uVar4 = (uint)(byte)*puVar7 |
+                (uint)(byte)puVar7[1] << 0x10 | (uint)*(byte *)((int)puVar7 + 3) << 0x18 |
+                (uint)*(byte *)((int)puVar7 + 1) << 8;
+        iVar5 = 0;
+        puVar7 = puVar7 + 2;
+      }
+      else if (uVar4 - 0x14 < 2) {
+        uVar4 = (uint)(byte)puVar7[1] |
+                (uint)*(byte *)((int)puVar7 + 1) << 8 | (uint)(byte)*puVar7 << 0x10;
+        iVar5 = 8;
+        puVar7 = (ushort *)((int)puVar7 + 3);
+      }
+      else {
+        if (1 < uVar4 - 0x16) {
+          if (uVar4 - 0x18 < 2) {
+            uVar4 = (uint)param_2[1];
+            if (*(byte **)(param_1 + 0x24) < (byte *)((int)puVar7 + uVar4)) {
+              iVar3 = 0x55;
+              goto LAB_00528ca6;
+            }
+            if (*param_2 == 0x18) {
+              FUN_00439be4(param_3 + (uint)*(ushort *)(param_2 + 2),puVar7,uVar4);
+            }
+            puVar7 = (ushort *)((int)puVar7 + uVar4);
+            param_2 = param_2 + 4;
+            goto LAB_00528c54;
+          }
+          *(ushort **)(param_1 + 0x20) = puVar7;
+LAB_00528ca6:
+          if (bVar2) {
+            FUN_00528a66(param_1);
+          }
+          goto LAB_00528cb8;
+        }
+        uVar4 = (uint)(byte)*puVar7 |
+                (uint)*(byte *)((int)puVar7 + 1) << 8 | (uint)(byte)puVar7[1] << 0x10;
+        iVar5 = 8;
+        puVar7 = (ushort *)((int)puVar7 + 3);
+      }
+      if ((int)((uint)*param_2 << 0x1f) < 0) {
+        uVar4 = (int)(uVar4 << iVar5) >> iVar5;
+      }
+      puVar6 = (uint *)((uint)*(ushort *)(param_2 + 2) + param_3);
+      bVar1 = param_2[1];
+      if (bVar1 == 1) {
+        *(char *)puVar6 = (char)uVar4;
+      }
+      else if (bVar1 == 2) {
+        *(short *)puVar6 = (short)uVar4;
+      }
+      else if (bVar1 == 4) {
+        *puVar6 = uVar4;
+      }
+      else {
+        *puVar6 = uVar4;
+      }
+      param_2 = param_2 + 4;
+      goto LAB_00528c54;
+    }
+    iVar3 = 0x28;
+  }
+LAB_00528cb8:
+  return CONCAT44(param_4,iVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528c14 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528db8 body_start=00528db8 body_end=00528e17 name=FUN_00528db8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00528db8(uint param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  iVar2 = 1;
+  if ((int)param_1 < 0) {
+    param_1 = -param_1;
+    iVar2 = -1;
+  }
+  uVar4 = (param_1 >> 0x10) * 0x5b16;
+  uVar3 = uVar4 + (param_1 & 0xffff) * 0xdbd9;
+  iVar1 = (param_1 >> 0x10) * 0xdbd9 + (uint)(uVar3 < uVar4) * 0x10000 + (uVar3 >> 0x10);
+  uVar4 = uVar3 * 0x10000 + (param_1 & 0xffff) * 0x5b16;
+  if (uVar4 < uVar3 * 0x10000) {
+    iVar1 = iVar1 + 1;
+  }
+  if (uVar4 + 0x40000000 < 0x40000000) {
+    iVar1 = iVar1 + 1;
+  }
+  if (iVar2 < 0) {
+    iVar1 = -iVar1;
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528db8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528e18 body_start=00528e18 body_end=00528e59 name=FUN_00528e18 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+uint FUN_00528e18(uint *param_1)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  
+  uVar4 = *param_1;
+  uVar5 = param_1[1];
+  uVar2 = uVar4;
+  if ((int)uVar4 < 0) {
+    uVar2 = -uVar4;
+  }
+  uVar3 = uVar5;
+  if ((int)uVar5 < 0) {
+    uVar3 = -uVar5;
+  }
+  iVar1 = FUN_00524506(uVar2 | uVar3);
+  if (iVar1 < 0x1e) {
+    uVar2 = 0x1d - iVar1;
+    *param_1 = uVar4 << (uVar2 & 0xff);
+    param_1[1] = uVar5 << (uVar2 & 0xff);
+  }
+  else {
+    uVar2 = iVar1 - 0x1d;
+    *param_1 = (int)uVar4 >> (uVar2 & 0xff);
+    param_1[1] = (int)uVar5 >> (uVar2 & 0xff);
+    uVar2 = -uVar2;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528e18 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528e5a body_start=00528e5a body_end=00528ed3 name=FUN_00528e5a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00528e5a(int *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  int *piVar8;
+  
+  iVar7 = *param_1;
+  iVar6 = param_1[1];
+  for (; param_2 < -0x2d0000; param_2 = (int)&DAT_005a0000 + param_2) {
+    iVar5 = -iVar7;
+    iVar7 = iVar6;
+    iVar6 = iVar5;
+  }
+  for (; iVar5 = iVar7, DAT_0052912c <= param_2; param_2 = param_2 + -0x5a0000) {
+    iVar7 = -iVar6;
+    iVar6 = iVar5;
+  }
+  iVar7 = 1;
+  piVar8 = DAT_00529130;
+  for (uVar3 = 1; (int)uVar3 < 0x17; uVar3 = uVar3 + 1) {
+    if (param_2 < 0) {
+      iVar1 = iVar7 + iVar6 >> (uVar3 & 0xff);
+      iVar4 = -(iVar7 + iVar5 >> (uVar3 & 0xff));
+      iVar2 = *piVar8;
+    }
+    else {
+      iVar1 = -(iVar7 + iVar6 >> (uVar3 & 0xff));
+      iVar4 = iVar7 + iVar5 >> (uVar3 & 0xff);
+      iVar2 = -*piVar8;
+    }
+    iVar6 = iVar6 + iVar4;
+    iVar5 = iVar1 + iVar5;
+    piVar8 = piVar8 + 1;
+    param_2 = iVar2 + param_2;
+    iVar7 = iVar7 << 1;
+  }
+  *param_1 = iVar5;
+  param_1[1] = iVar6;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528e5a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528ee4 body_start=00528ee4 body_end=00528f85 name=FUN_00528ee4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00528ee4(int *param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  uint uVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  int iVar8;
+  int *piVar9;
+  
+  iVar5 = *param_1;
+  iVar8 = param_1[1];
+  if (iVar5 < iVar8) {
+    if (-iVar5 < iVar8) {
+      puVar3 = &DAT_005a0000;
+      iVar7 = iVar8;
+      iVar8 = -iVar5;
+    }
+    else {
+      puVar3 = DAT_00529134;
+      if (0 < iVar8) {
+        puVar3 = (undefined4 *)0xb40000;
+      }
+      iVar7 = -iVar5;
+      iVar8 = -iVar8;
+    }
+  }
+  else if (iVar8 + iVar5 < 0 == SCARRY4(iVar8,iVar5)) {
+    puVar3 = (undefined4 *)0x0;
+    iVar7 = iVar5;
+  }
+  else {
+    puVar3 = DAT_00529138;
+    iVar7 = -iVar8;
+    iVar8 = iVar5;
+  }
+  iVar5 = 1;
+  piVar9 = DAT_00529130;
+  for (uVar4 = 1; (int)uVar4 < 0x17; uVar4 = uVar4 + 1) {
+    if (iVar8 < 1) {
+      iVar1 = -(iVar5 + iVar8 >> (uVar4 & 0xff));
+      iVar6 = iVar5 + iVar7 >> (uVar4 & 0xff);
+      iVar2 = -*piVar9;
+    }
+    else {
+      iVar1 = iVar5 + iVar8 >> (uVar4 & 0xff);
+      iVar6 = -(iVar5 + iVar7 >> (uVar4 & 0xff));
+      iVar2 = *piVar9;
+    }
+    iVar8 = iVar8 + iVar6;
+    iVar7 = iVar1 + iVar7;
+    piVar9 = piVar9 + 1;
+    puVar3 = (undefined4 *)(iVar2 + (int)puVar3);
+    iVar5 = iVar5 << 1;
+  }
+  if ((int)puVar3 < 0) {
+    uVar4 = -(8U - (int)puVar3 & 0xfffffff0);
+  }
+  else {
+    uVar4 = (uint)(puVar3 + 2) & 0xfffffff0;
+  }
+  *param_1 = iVar7;
+  param_1[1] = uVar4;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528ee4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528f8c body_start=00528f8c body_end=00528f99 name=FUN_00528f8c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528f8c(undefined4 param_1)
+
+{
+  undefined4 unaff_r5;
+  
+  FUN_00528fde(&stack0xfffffff0,param_1);
+  return CONCAT44(unaff_r5,unaff_r5);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528f8c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528f9a body_start=00528f9a body_end=00528fa7 name=FUN_00528f9a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528f9a(undefined4 param_1)
+
+{
+  undefined4 unaff_r5;
+  undefined4 unaff_r6;
+  
+  FUN_00528fde(&stack0xfffffff0,param_1);
+  return CONCAT44(unaff_r5,unaff_r6);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528f9a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528fa8 body_start=00528fa8 body_end=00528fbb name=FUN_00528fa8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00528fa8(undefined4 param_1)
+
+{
+  undefined4 unaff_r5;
+  undefined4 unaff_r6;
+  
+  FUN_00528fde(&stack0xfffffff0,param_1);
+  FUN_00524754(unaff_r6,unaff_r5);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528fa8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528fbc body_start=00528fbc body_end=00528fdd name=FUN_00528fbc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00528fbc(int param_1,int param_2)
+
+{
+  int unaff_r5;
+  
+  if (param_2 == 0 && param_1 == 0) {
+    param_2 = 0;
+    param_1 = unaff_r5;
+  }
+  else {
+    FUN_00528e18(&stack0xfffffff0);
+    FUN_00528ee4(&stack0xfffffff0);
+  }
+  return CONCAT44(param_1,param_2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528fbc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00528fde body_start=00528fde body_end=00529005 name=FUN_00528fde (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00528fde(int *param_1)
+
+{
+  if (param_1 != (int *)0x0) {
+    *param_1 = DAT_0052913c;
+    param_1[1] = 0;
+    FUN_00528e5a(param_1);
+    *param_1 = *param_1 + 0x80 >> 8;
+    param_1[1] = param_1[1] + 0x80 >> 8;
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00528fde (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529006 body_start=00529006 body_end=00529085 name=FUN_00529006 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529006(int *param_1,int param_2,int param_3,int param_4)
+
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  int local_18;
+  int local_14;
+  
+  iVar1 = param_3;
+  local_14 = param_4;
+  if ((param_1 != (int *)0x0) && (iVar1 = param_3, param_2 != 0)) {
+    local_18 = *param_1;
+    local_14 = param_1[1];
+    if ((local_18 != 0) || (iVar1 = 0, local_14 != 0)) {
+      uVar2 = FUN_00528e18(&local_18);
+      FUN_00528e5a(&local_18,param_2);
+      local_18 = FUN_00528db8(local_18);
+      local_14 = FUN_00528db8(local_14);
+      iVar1 = local_18;
+      if ((int)uVar2 < 1) {
+        *param_1 = local_18 << (-uVar2 & 0xff);
+        param_1[1] = local_14 << (-uVar2 & 0xff);
+      }
+      else {
+        iVar3 = 1 << (uVar2 + 0xff & 0xff);
+        *param_1 = iVar3 + local_18 + (local_18 >> 0x1f) >> (uVar2 & 0xff);
+        param_1[1] = iVar3 + local_14 + (local_14 >> 0x1f) >> (uVar2 & 0xff);
+      }
+    }
+  }
+  local_18 = iVar1;
+  return CONCAT44(local_14,local_18);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529006 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529086 body_start=00529086 body_end=005290f9 name=FUN_00529086 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529086(int *param_1,undefined4 param_2,int param_3)
+
+{
+  uint uVar1;
+  int local_10;
+  int local_c;
+  
+  if (param_1 == (int *)0x0) {
+    local_c = 0;
+    local_10 = param_3;
+  }
+  else {
+    local_10 = *param_1;
+    local_c = param_1[1];
+    if (local_10 == 0) {
+      if (local_c < 0) {
+        local_c = -local_c;
+      }
+    }
+    else if (local_c == 0) {
+      local_c = local_10;
+      if (local_10 < 0) {
+        local_c = -local_10;
+      }
+    }
+    else {
+      uVar1 = FUN_00528e18(&local_10);
+      FUN_00528ee4(&local_10);
+      local_10 = FUN_00528db8(local_10);
+      if ((int)uVar1 < 1) {
+        local_c = local_10 << (-uVar1 & 0xff);
+      }
+      else {
+        local_c = (1 << (uVar1 + 0xff & 0xff)) + local_10 >> (uVar1 & 0xff);
+      }
+    }
+  }
+  return CONCAT44(local_10,local_c);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529086 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005290fa body_start=005290fa body_end=0052910d name=FUN_005290fa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_005290fa(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 unaff_r7;
+  
+  if (param_1 != (undefined4 *)0x0) {
+    *param_1 = param_2;
+    param_1[1] = 0;
+    FUN_00529006(param_1,param_3);
+  }
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005290fa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052910e body_start=0052910e body_end=00529129 name=FUN_0052910e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052910e(int param_1,int param_2)
+
+{
+  for (param_2 = param_2 - param_1; param_2 < DAT_00529140; param_2 = param_2 + 0x1680000) {
+  }
+  for (; DAT_00529144 <= param_2; param_2 = param_2 + -0x1680000) {
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052910e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529148 body_start=00529148 body_end=00529175 name=FUN_00529148 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529148(undefined4 param_1,int param_2,int *param_3,int param_4)
+
+{
+  undefined4 uVar1;
+  int local_18;
+  
+  local_18 = param_4;
+  uVar1 = FUN_00529176(param_1,param_2,&local_18);
+  if ((local_18 == 0) && (0 < param_2)) {
+    FUN_0043c0e4(uVar1,param_2,0);
+  }
+  *param_3 = local_18;
+  return CONCAT44(local_18,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529148 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529176 body_start=00529176 body_end=0052919b name=FUN_00529176 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529176(int param_1,int param_2,undefined4 *param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  iVar1 = 0;
+  if (param_2 < 1) {
+    if (param_2 < 0) {
+      uVar2 = 6;
+    }
+  }
+  else {
+    iVar1 = (**(code **)(param_1 + 4))(param_1);
+    if (iVar1 == 0) {
+      uVar2 = 0x40;
+    }
+  }
+  *param_3 = uVar2;
+  return CONCAT44(param_4,iVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529176 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052919c body_start=0052919c body_end=005291e3 name=FUN_0052919c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_0052919c(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,int *param_6)
+
+{
+  int iVar1;
+  int local_18;
+  
+  local_18 = 0;
+  iVar1 = FUN_005291e4(param_1,param_2,param_3,param_4,param_5,&local_18);
+  if ((local_18 == 0) && (param_3 < param_4)) {
+    FUN_0043c0e4(param_2 * param_3 + iVar1,param_2 * (param_4 - param_3),0);
+  }
+  *param_6 = local_18;
+  return CONCAT44(param_5,iVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052919c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005291e4 body_start=005291e4 body_end=00529255 name=FUN_005291e4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_005291e4(int param_1,int param_2,int param_3,int param_4,int param_5,undefined4 *param_6)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  iVar1 = param_5;
+  if (((param_3 < 0) || (param_4 < 0)) || (param_2 < 0)) {
+    uVar2 = 6;
+  }
+  else if ((param_4 == 0) || (param_2 == 0)) {
+    FUN_00529256(param_1,param_5);
+    iVar1 = 0;
+  }
+  else if (0x7fffffff / param_2 < param_4) {
+    uVar2 = 10;
+  }
+  else if (param_3 == 0) {
+    iVar1 = (**(code **)(param_1 + 4))(param_1,param_2 * param_4);
+    if (iVar1 == 0) {
+      uVar2 = 0x40;
+    }
+  }
+  else {
+    iVar1 = (**(code **)(param_1 + 0xc))(param_1,param_2 * param_3,param_2 * param_4,param_5);
+    if (iVar1 == 0) {
+      uVar2 = 0x40;
+      iVar1 = param_5;
+    }
+  }
+  *param_6 = uVar2;
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005291e4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529256 body_start=00529256 body_end=00529261 name=FUN_00529256 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00529256(int param_1,int param_2)
+
+{
+  undefined4 unaff_r7;
+  
+  if (param_2 != 0) {
+    (**(code **)(param_1 + 8))();
+  }
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529256 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529262 body_start=00529262 body_end=00529295 name=FUN_00529262 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529262(undefined4 param_1,int param_2,int param_3,int *param_4)
+
+{
+  undefined4 uVar1;
+  int local_20;
+  int *piStack_1c;
+  
+  local_20 = param_3;
+  piStack_1c = param_4;
+  uVar1 = FUN_00529176(param_1,param_3,&local_20);
+  if ((local_20 == 0) && (param_2 != 0)) {
+    FUN_00439be4(uVar1,param_2,param_3);
+  }
+  *param_4 = local_20;
+  return CONCAT44(local_20,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529262 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529296 body_start=00529296 body_end=005292bb name=FUN_00529296 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00529296(undefined4 param_1,int param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  
+  if (param_2 == 0) {
+    iVar1 = 0;
+  }
+  else {
+    iVar1 = FUN_0044a43c(param_2);
+    iVar1 = iVar1 + 1;
+  }
+  FUN_00529262(param_1,param_2,iVar1,param_3);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529296 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005292bc body_start=005292bc body_end=005292bd name=thunk_FUN_005292c8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+bool thunk_FUN_005292c8(char *param_1,char *param_2,uint param_3)
+
+{
+  for (; (1 < param_3 && (*param_2 != '\0')); param_2 = param_2 + 1) {
+    *param_1 = *param_2;
+    param_1 = param_1 + 1;
+    param_3 = param_3 - 1;
+  }
+  *param_1 = '\0';
+  return *param_2 != '\0';
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005292bc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005292c8 body_start=005292be body_end=005292e5 name=FUN_005292c8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+bool FUN_005292c8(char *param_1,char *param_2,uint param_3)
+
+{
+  for (; (1 < param_3 && (*param_2 != '\0')); param_2 = param_2 + 1) {
+    *param_1 = *param_2;
+    param_1 = param_1 + 1;
+    param_3 = param_3 - 1;
+  }
+  *param_1 = '\0';
+  return *param_2 != '\0';
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005292c8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005292e6 body_start=005292e6 body_end=00529303 name=FUN_005292e6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_005292e6(int *param_1,int param_2)
+
+{
+  int iVar1;
+  
+  if (param_1 != (int *)0x0) {
+    for (iVar1 = *param_1; iVar1 != 0; iVar1 = *(int *)(iVar1 + 4)) {
+      if (*(int *)(iVar1 + 8) == param_2) {
+        return iVar1;
+      }
+    }
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005292e6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529304 body_start=00529304 body_end=00529323 name=FUN_00529304 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00529304(int *param_1,int *param_2)
+
+{
+  int iVar1;
+  
+  if ((param_1 != (int *)0x0) && (param_2 != (int *)0x0)) {
+    iVar1 = param_1[1];
+    param_2[1] = 0;
+    *param_2 = iVar1;
+    if (iVar1 == 0) {
+      *param_1 = (int)param_2;
+    }
+    else {
+      *(int **)(iVar1 + 4) = param_2;
+    }
+    param_1[1] = (int)param_2;
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529304 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529324 body_start=00529324 body_end=00529347 name=FUN_00529324 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00529324(int *param_1,int *param_2)
+
+{
+  int *piVar1;
+  int iVar2;
+  
+  if ((param_1 != (int *)0x0) && (param_2 != (int *)0x0)) {
+    iVar2 = *param_2;
+    piVar1 = (int *)param_2[1];
+    if (iVar2 == 0) {
+      *param_1 = (int)piVar1;
+    }
+    else {
+      *(int **)(iVar2 + 4) = piVar1;
+    }
+    if (piVar1 == (int *)0x0) {
+      param_1[1] = iVar2;
+    }
+    else {
+      *piVar1 = iVar2;
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529324 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529348 body_start=00529348 body_end=00529377 name=FUN_00529348 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00529348(int *param_1,code *param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  
+  if ((param_1 == (int *)0x0) || (param_2 == (code *)0x0)) {
+    iVar1 = 6;
+  }
+  else {
+    iVar2 = *param_1;
+    do {
+      if (iVar2 == 0) {
+        return 0;
+      }
+      iVar3 = *(int *)(iVar2 + 4);
+      iVar1 = (*param_2)(iVar2,param_3);
+      iVar2 = iVar3;
+    } while (iVar1 == 0);
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529348 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529378 body_start=00529378 body_end=005293bd name=FUN_00529378 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00529378(int *param_1,code *param_2,int param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  if ((param_1 != (int *)0x0) && (param_3 != 0)) {
+    iVar1 = *param_1;
+    while (iVar1 != 0) {
+      iVar2 = *(int *)(iVar1 + 4);
+      if (param_2 != (code *)0x0) {
+        (*param_2)(param_3,*(undefined4 *)(iVar1 + 8),param_4);
+      }
+      FUN_00529256(param_3,iVar1);
+      iVar1 = iVar2;
+    }
+    *param_1 = 0;
+    param_1[1] = 0;
+  }
+  return param_4;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529378 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005293c0 body_start=005293c0 body_end=00529405 name=FUN_005293c0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_005293c0(undefined4 param_1)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_004d4cd4(DAT_0052972c,0x28,param_1,*DAT_00529728,DAT_00529728[1],DAT_00529728[2]);
+  FUN_004d5114(uVar1,DAT_00529730);
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005293c0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529406 body_start=00529406 body_end=0052945f name=FUN_00529406 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529406(int *param_1)
+
+{
+  undefined4 unaff_r5;
+  undefined4 unaff_r6;
+  
+  if (param_1 == (int *)0x0) {
+    FUN_0044d25c(3,DAT_00529744,0x47,DAT_00529740,DAT_0052973c,DAT_00529738,DAT_00529734);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (*param_1 != DAT_00529748) {
+    FUN_0044d25c(3,DAT_00529744,0x47,DAT_00529740,DAT_00529750,DAT_0052974c,*param_1);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  param_1[1] = 0x529461;
+  return CONCAT44(unaff_r6,unaff_r5);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529406 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529460 body_start=00529460 body_end=005295a7 name=FUN_00529460 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00529460(int param_1,int param_2,uint param_3,int param_4)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  int iVar3;
+  uint *puVar4;
+  uint local_48;
+  uint local_44;
+  int iStack_20;
+  
+  iStack_20 = param_4;
+  if (param_1 == 0) {
+    local_48 = DAT_00529734;
+    FUN_0044d25c(3,DAT_00529744,0x52,DAT_00529758,DAT_0052973c,DAT_00529754);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (param_2 == 0) {
+    local_48 = DAT_00529734;
+    FUN_0044d25c(3,DAT_00529744,0x53,DAT_00529758,DAT_0052973c,DAT_0052975c);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (param_3 < 0x20) {
+    *(undefined2 *)(param_2 + 4) = 0;
+    *(undefined2 *)(param_2 + 8) = 0;
+    *(undefined2 *)(param_2 + 6) = 0;
+    *(undefined2 *)(param_2 + 10) = 0;
+    *(undefined2 *)(param_2 + 0xc) = 0;
+    *(undefined1 *)(param_2 + 0xe) = 0;
+    uVar1 = 1;
+  }
+  else {
+    puVar4 = *(uint **)(param_1 + 0x18);
+    if (puVar4 == (uint *)0x0) {
+      local_48 = DAT_00529734;
+      FUN_0044d25c(3,DAT_00529744,0x62,DAT_00529758,DAT_0052973c,DAT_00529738);
+      do {
+                    /* WARNING: Do nothing block with infinite loop */
+      } while( true );
+    }
+    if (*puVar4 != DAT_00529748) {
+      local_48 = *puVar4;
+      FUN_0044d25c(3,DAT_00529744,0x62,DAT_00529758,DAT_00529750,DAT_0052974c);
+      do {
+                    /* WARNING: Do nothing block with infinite loop */
+      } while( true );
+    }
+    FUN_0048949c(&local_48,0x28);
+    local_44 = puVar4[10];
+    uVar1 = *(undefined4 *)(puVar4[0xd] + 0x18);
+    local_48 = param_3;
+    iVar2 = FUN_004d4f90(uVar1,&local_48,puVar4);
+    if (iVar2 == 0) {
+      FUN_0044d25c(3,DAT_00529744,0x6d,DAT_00529758,DAT_00529760,param_3);
+      uVar1 = 0;
+    }
+    else {
+      iVar3 = FUN_004d5396(iVar2);
+      FUN_00439c04(param_2,iVar3 + 8,0x20);
+      if (((int)((uint)(byte)puVar4[0xb] << 0x1f) < 0) && (param_4 == 0)) {
+        *(short *)(param_2 + 4) = *(short *)(param_2 + 10) + *(short *)(param_2 + 6);
+      }
+      *(undefined4 *)(param_2 + 0x1c) = 0;
+      FUN_004d4e72(uVar1,iVar2,0);
+      uVar1 = 1;
+    }
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529460 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005295a8 body_start=005295a8 body_end=00529725 name=FUN_005295a8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_005295a8(undefined4 *param_1,int param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined2 uVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  int iVar5;
+  int iVar6;
+  
+  iVar6 = param_2;
+  FUN_004d4666(*(int *)(param_2 + 0x34) + 0x10);
+  iVar5 = *(int *)(*(int *)(param_2 + 0x34) + 0xc);
+  iVar2 = FUN_00526f10(iVar5,*param_1);
+  if ((int)((uint)*(byte *)(iVar5 + 8) << 0x1f) < 0) {
+    iVar3 = FUN_00526d54(iVar5,0,*(undefined4 *)(param_2 + 0x28));
+  }
+  else {
+    iVar3 = FUN_00526ca8(iVar5,0);
+  }
+  if (iVar3 == 0) {
+    if (*(char *)(param_2 + 0x2d) == '\x01') {
+      iVar3 = FUN_00525574(iVar5,iVar2,DAT_0052976c);
+    }
+    else {
+      iVar3 = 0;
+      if (*(char *)(param_2 + 0x2d) == '\0') {
+        iVar3 = FUN_00525574(iVar5,iVar2,0x208000);
+      }
+    }
+    if (iVar3 == 0) {
+      iVar3 = *(int *)(iVar5 + 0x54);
+      if (*(char *)(param_2 + 0x2d) == '\x01') {
+        *(short *)(param_1 + 3) = (short)(*(int *)(iVar3 + 0x28) >> 6);
+        *(short *)(param_1 + 4) = (short)(*(int *)(iVar3 + 0x1c) >> 6);
+        *(short *)((int)param_1 + 0xe) = (short)(*(int *)(iVar3 + 0x18) >> 6);
+        *(short *)((int)param_1 + 0x12) = (short)(*(int *)(iVar3 + 0x20) >> 6);
+        *(short *)(param_1 + 5) = (short)(*(int *)(iVar3 + 0x24) - *(int *)(iVar3 + 0x1c) >> 6);
+        *(undefined1 *)((int)param_1 + 0x16) = 0x1a;
+        if ((int)((uint)*(byte *)(param_2 + 0x2c) << 0x1f) < 0) {
+          uVar1 = FUN_004b201e(*(undefined2 *)((int)param_1 + 0xe),*(undefined2 *)(param_1 + 4));
+          *(undefined2 *)((int)param_1 + 0xe) = uVar1;
+        }
+      }
+      else if (*(char *)(param_2 + 0x2d) == '\0') {
+        iVar5 = *(int *)(iVar5 + 0x54);
+        *(short *)(param_1 + 3) = (short)(*(int *)(iVar3 + 0x40) >> 6);
+        *(short *)(param_1 + 4) = (short)*(undefined4 *)(iVar5 + 0x4c);
+        *(short *)((int)param_1 + 0xe) = (short)*(undefined4 *)(iVar5 + 0x50);
+        *(short *)((int)param_1 + 0x12) = (short)*(undefined4 *)(iVar3 + 100);
+        *(short *)(param_1 + 5) = (short)*(undefined4 *)(iVar3 + 0x68) - *(short *)(param_1 + 4);
+        if (*(int *)(iVar3 + 0x48) == DAT_00529774) {
+          *(undefined1 *)((int)param_1 + 0x16) = 0x19;
+        }
+        else {
+          *(undefined1 *)((int)param_1 + 0x16) = 8;
+        }
+      }
+      *(byte *)((int)param_1 + 0x17) = *(byte *)((int)param_1 + 0x17) & 0xfe | iVar2 == 0;
+      param_1[8] = iVar2;
+      FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+      uVar4 = 1;
+    }
+    else {
+      iVar6 = DAT_00529770;
+      FUN_0044d25c(3,DAT_00529744,0xa2,DAT_00529768,DAT_00529770,iVar3);
+      FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+      uVar4 = 0;
+    }
+  }
+  else {
+    iVar6 = DAT_00529764;
+    FUN_0044d25c(3,DAT_00529744,0x96,DAT_00529768,DAT_00529764,iVar3,param_4);
+    FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+    uVar4 = 0;
+  }
+  return CONCAT44(iVar6,uVar4);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005295a8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005297b8 body_start=005297b8 body_end=005297f7 name=FUN_005297b8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_005297b8(undefined4 param_1)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_004d4cd4(DAT_00529a90,0xc,param_1,*DAT_00529a8c,DAT_00529a8c[1],DAT_00529a8c[2]);
+  FUN_004d5114(uVar1,DAT_00529a94);
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005297b8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=005297f8 body_start=005297f8 body_end=00529857 name=FUN_005297f8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_005297f8(int *param_1)
+
+{
+  undefined4 unaff_r5;
+  undefined4 unaff_r6;
+  
+  if (param_1 == (int *)0x0) {
+    FUN_0044d25c(3,DAT_00529aa8,0x4c,DAT_00529aa4,DAT_00529aa0,DAT_00529a9c,DAT_00529a98);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (*param_1 != DAT_00529aac) {
+    FUN_0044d25c(3,DAT_00529aa8,0x4c,DAT_00529aa4,DAT_00529ab4,DAT_00529ab0,*param_1);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  param_1[2] = 0x529859;
+  param_1[3] = (int)&LAB_005298f8_1;
+  return CONCAT44(unaff_r6,unaff_r5);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=005297f8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529858 body_start=00529858 body_end=005298f5 name=FUN_00529858 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00529858(int *param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int *piVar3;
+  int iVar4;
+  int local_20;
+  int local_1c;
+  undefined4 uStack_18;
+  
+  piVar3 = *(int **)(*param_1 + 0x18);
+  if (piVar3 == (int *)0x0) {
+    local_20 = DAT_00529a98;
+    FUN_0044d25c(3,DAT_00529aa8,0x5b,DAT_00529ab8,DAT_00529aa0,DAT_00529a9c);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (*piVar3 != DAT_00529aac) {
+    local_20 = *piVar3;
+    FUN_0044d25c(3,DAT_00529aa8,0x5b,DAT_00529ab8,DAT_00529ab4,DAT_00529ab0);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  iVar4 = param_1[6];
+  uStack_18 = 0;
+  local_1c = piVar3[10];
+  local_20 = iVar4;
+  iVar1 = FUN_004d4f90(*(undefined4 *)(piVar3[0xd] + 0x1c),&local_20);
+  if (iVar1 == 0) {
+    FUN_0044d25c(3,DAT_00529aa8,0x68,DAT_00529ab8,DAT_00529abc,iVar4);
+    uVar2 = 0;
+  }
+  else {
+    param_1[7] = iVar1;
+    iVar1 = FUN_004d5396();
+    uVar2 = *(undefined4 *)(iVar1 + 8);
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529858 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529936 body_start=00529936 body_end=00529a89 name=FUN_00529936 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529936(undefined4 *param_1,int param_2,undefined4 param_3,int param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  uint uVar6;
+  int iVar7;
+  undefined1 uVar8;
+  int iVar9;
+  int local_28;
+  
+  local_28 = param_4;
+  FUN_004d4666(*(int *)(param_2 + 0x34) + 0x10);
+  iVar3 = *(int *)(*(int *)(param_2 + 0x34) + 0xc);
+  if ((int)((uint)*(byte *)(iVar3 + 8) << 0x1f) < 0) {
+    iVar1 = FUN_00526d54(iVar3,0,*(undefined4 *)(param_2 + 0x28));
+  }
+  else {
+    iVar1 = FUN_00526ca8(iVar3,0);
+  }
+  if (iVar1 == 0) {
+    iVar1 = FUN_00525574(iVar3,*param_1,DAT_00529ad0);
+    if (iVar1 == 0) {
+      iVar1 = FUN_00527228(*(undefined4 *)(iVar3 + 0x54),0);
+      if (iVar1 == 0) {
+        iVar1 = FUN_00567ec8(*(undefined4 *)(iVar3 + 0x54),&local_28);
+        iVar3 = local_28;
+        if (iVar1 == 0) {
+          uVar4 = *(uint *)(local_28 + 0x1c);
+          uVar6 = *(uint *)(local_28 + 0x20);
+          if (*(char *)(local_28 + 0x2e) == '\a') {
+            uVar8 = 0x10;
+          }
+          else {
+            uVar8 = 0xe;
+          }
+          iVar5 = *(int *)(local_28 + 0x24);
+          iVar1 = FUN_0048aad8(uVar6 & 0xffff,uVar8);
+          iVar9 = iVar1;
+          uVar2 = FUN_0048b010(DAT_00529ae0,uVar6 & 0xffff,uVar4 & 0xffff,uVar8);
+          param_1[2] = uVar2;
+          for (iVar7 = 0; iVar7 < (int)(uVar4 & 0xffff); iVar7 = iVar7 + 1) {
+            FUN_00454738(*(int *)(param_1[2] + 0x10) + iVar1 * iVar7,
+                         iVar5 * iVar7 + *(int *)(iVar3 + 0x28),iVar5);
+          }
+          FUN_00567f88(local_28);
+          FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+          uVar2 = 1;
+        }
+        else {
+          iVar9 = DAT_00529adc;
+          FUN_0044d25c(3,DAT_00529aa8,0xa9,DAT_00529acc,DAT_00529adc,iVar1);
+          FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+          uVar2 = 0;
+        }
+      }
+      else {
+        iVar9 = DAT_00529ad8;
+        FUN_0044d25c(3,DAT_00529aa8,0xa0,DAT_00529acc,DAT_00529ad8,iVar1);
+        FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+        uVar2 = 0;
+      }
+    }
+    else {
+      iVar9 = DAT_00529ad4;
+      FUN_0044d25c(3,DAT_00529aa8,0x99,DAT_00529acc,DAT_00529ad4,iVar1);
+      FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+      uVar2 = 0;
+    }
+  }
+  else {
+    iVar9 = DAT_00529ac8;
+    FUN_0044d25c(3,DAT_00529aa8,0x92,DAT_00529acc,DAT_00529ac8,iVar1);
+    FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+    uVar2 = 0;
+  }
+  return CONCAT44(iVar9,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529936 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529ae4 body_start=00529ae4 body_end=00529aed name=FUN_00529ae4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00529ae4(int param_1)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_0048b216(*(undefined4 *)(param_1 + 8));
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529ae4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529b2c body_start=00529b2c body_end=00529b37 name=FUN_00529b2c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00529b2c(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_00454746(param_1,0,param_2);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529b2c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529b38 body_start=00529b38 body_end=00529b7d name=FUN_00529b38 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00529b38(undefined4 param_1)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_004d4cd4(DAT_0052a1f4,8,param_1,*DAT_0052a1f0,DAT_0052a1f0[1],DAT_0052a1f0[2]);
+  FUN_004d5114(uVar1,DAT_0052a1f8);
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529b38 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529b7e body_start=00529b7e body_end=00529bf1 name=FUN_00529b7e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529b7e(int *param_1)
+
+{
+  undefined4 unaff_r5;
+  undefined4 unaff_r6;
+  
+  if (param_1 == (int *)0x0) {
+    FUN_0044d25c(3,DAT_0052a20c,0x4f,DAT_0052a208,DAT_0052a204,DAT_0052a200,DAT_0052a1fc);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (*param_1 != DAT_0052a210) {
+    FUN_0044d25c(3,DAT_0052a20c,0x4f,DAT_0052a208,DAT_0052a218,DAT_0052a214,*param_1);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  param_1[2] = (int)&LAB_00529d70_1;
+  param_1[3] = (int)&LAB_00529e04_1;
+  return CONCAT44(unaff_r6,unaff_r5);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529b7e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529bf2 body_start=00529bf2 body_end=00529bfd name=FUN_00529bf2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00529bf2(undefined4 param_1)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_004b1fcc();
+  *(undefined4 *)(iVar1 + 0x10) = param_1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529bf2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529bfe body_start=00529bfe body_end=00529ca3 name=FUN_00529bfe (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529bfe(int param_1)
+
+{
+  int *piVar1;
+  undefined4 unaff_r5;
+  
+  if (param_1 == 0) {
+    FUN_0044d25c(3,DAT_0052a20c,0x5f,DAT_0052a220,DAT_0052a204,DAT_0052a21c,DAT_0052a1fc);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  piVar1 = *(int **)(param_1 + 0x18);
+  if (piVar1 == (int *)0x0) {
+    FUN_0044d25c(3,DAT_0052a20c,0x61,DAT_0052a220,DAT_0052a204,DAT_0052a200,DAT_0052a1fc);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (*piVar1 != DAT_0052a210) {
+    FUN_0044d25c(3,DAT_0052a20c,0x61,DAT_0052a220,DAT_0052a218,DAT_0052a214,*piVar1);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  return CONCAT44(unaff_r5,(uint)(piVar1[10] << 6) / *(uint *)(piVar1[0xd] + 8));
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529bfe (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529ca4 body_start=00529ca4 body_end=00529cf7 name=FUN_00529ca4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529ca4(int param_1)
+
+{
+  uint uVar1;
+  undefined4 unaff_r5;
+  
+  if (param_1 == 0) {
+    FUN_0044d25c(3,DAT_0052a20c,0x68,DAT_0052a224,DAT_0052a204,DAT_0052a21c,DAT_0052a1fc);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (**(int **)(param_1 + 0x18) == DAT_0052a210) {
+    uVar1 = (uint)(*(char *)((int)*(int **)(param_1 + 0x18) + 0x2d) == '\x01');
+  }
+  else {
+    uVar1 = 0;
+  }
+  return CONCAT44(unaff_r5,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529ca4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529cf8 body_start=00529cf8 body_end=00529d3f name=FUN_00529cf8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00529cf8(undefined4 *param_1,int param_2)
+
+{
+  uint uVar1;
+  int iVar2;
+  
+  FUN_004d4666(*(int *)(param_2 + 0x34) + 0x10);
+  uVar1 = *(byte *)(param_2 + 0x2c) >> 1 & 1;
+  iVar2 = FUN_00529f8e(*(undefined4 *)(param_2 + 0x30),
+                       *(undefined4 *)(*(int *)(param_2 + 0x34) + 0xc),*param_1,
+                       *(undefined4 *)(*(int *)(param_2 + 0x34) + 8),uVar1,
+                       *(undefined4 *)(param_2 + 0x40));
+  FUN_004d4696(*(int *)(param_2 + 0x34) + 0x10);
+  if (iVar2 != 0) {
+    param_1[1] = iVar2;
+  }
+  return CONCAT44(uVar1,(uint)(iVar2 != 0));
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529cf8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529d40 body_start=00529d40 body_end=00529d4f name=FUN_00529d40 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00529d40(int param_1)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  
+  uVar2 = *(undefined4 *)(param_1 + 4);
+  uVar1 = FUN_004b1fcc();
+  FUN_0052a264(uVar1,uVar2);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529d40 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529e52 body_start=00529e52 body_end=00529e87 name=FUN_00529e52 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00529e52(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  undefined4 local_10;
+  undefined4 uStack_c;
+  
+  local_10 = param_2;
+  uStack_c = param_4;
+  iVar1 = FUN_004d4f90(*(undefined4 *)(*(int *)(param_1 + 0x34) + 0x1c),&local_10,param_1,param_4,
+                       param_1,param_2);
+  if (iVar1 == 0) {
+    FUN_0044d25c(3,DAT_0052a20c,0xd1,DAT_0052a234,DAT_0052a230,param_2);
+    iVar1 = 0;
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529e52 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529e88 body_start=00529e88 body_end=00529ea1 name=FUN_00529e88 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00529e88(undefined4 *param_1,undefined4 *param_2)
+
+{
+  undefined4 uVar1;
+  
+  if (param_2 == (undefined4 *)0x0) {
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = *param_2;
+  }
+  *param_1 = uVar1;
+  if (param_2 == (undefined4 *)0x0) {
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = param_2[1];
+  }
+  param_1[1] = uVar1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529e88 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529ea2 body_start=00529ea2 body_end=00529ee7 name=FUN_00529ea2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+bool FUN_00529ea2(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  bool bVar1;
+  undefined4 local_30 [2];
+  undefined4 local_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 uStack_14;
+  
+  bVar1 = *(int *)(param_1 + 0x10) != 0;
+  uStack_14 = param_4;
+  if (bVar1) {
+    FUN_00529b2c(local_30,0x1c);
+    local_24 = 0;
+    local_28 = param_2;
+    local_20 = param_3;
+    (**(code **)(param_1 + 0x10))(local_30);
+  }
+  else {
+    local_30[0] = DAT_0052a238;
+    FUN_0044d25c(3,DAT_0052a20c,0xe3,DAT_0052a23c);
+  }
+  return bVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529ea2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529ee8 body_start=00529ee8 body_end=00529f35 name=FUN_00529ee8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00529ee8(undefined4 param_1,undefined1 param_2,undefined4 param_3,undefined4 param_4,
+                 undefined4 param_5)
+
+{
+  undefined4 uVar1;
+  undefined4 local_48;
+  undefined1 local_44;
+  undefined1 auStack_40 [8];
+  undefined1 auStack_38 [8];
+  undefined1 auStack_30 [16];
+  undefined4 uStack_20;
+  
+  uStack_20 = param_4;
+  uVar1 = FUN_004b1fcc();
+  FUN_00529b2c(&local_48,0x28);
+  local_48 = param_1;
+  local_44 = param_2;
+  FUN_00529e88(auStack_38,param_3);
+  FUN_00529e88(auStack_30,param_4);
+  FUN_00529e88(auStack_40,param_5);
+  FUN_00529ea2(uVar1,0x24,&local_48);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529ee8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529f36 body_start=00529f36 body_end=00529f4b name=FUN_00529f36 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+longlong FUN_00529f36(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  FUN_00529ee8(param_2,1,0,0,param_1,param_4);
+  return (ulonglong)param_1 << 0x20;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529f36 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529f4c body_start=00529f4c body_end=00529f61 name=FUN_00529f4c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+longlong FUN_00529f4c(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  FUN_00529ee8(param_2,2,0,0,param_1,param_4);
+  return (ulonglong)param_1 << 0x20;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529f4c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00529f8e body_start=00529f8e body_end=0052a1ef name=FUN_00529f8e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00529f8e(undefined4 *param_1,int param_2,undefined4 param_3,undefined4 param_4,int param_5,
+                int param_6)
+
+{
+  char cVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int unaff_r6;
+  int iVar5;
+  undefined4 local_78;
+  int local_74;
+  short local_70;
+  short local_6e;
+  int local_68;
+  int local_5c [8];
+  int local_3c;
+  int local_38;
+  undefined1 auStack_34 [24];
+  undefined4 uStack_1c;
+  
+  uStack_1c = param_4;
+  if (param_1 == (undefined4 *)0x0) {
+    local_78 = DAT_0052a1fc;
+    FUN_0044d25c(3,DAT_0052a20c,0x138,DAT_0052a244,DAT_0052a204,DAT_0052a240);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  iVar2 = FUN_00526d54(param_2,0,param_4);
+  if (iVar2 == 0) {
+    iVar2 = FUN_00525574(param_2,param_3,0x8008);
+    if (iVar2 == 0) {
+      if ((param_5 != 0) &&
+         (iVar2 = FUN_00527bca(*(int *)(param_2 + 0x54) + 0x6c,param_5 << 6), iVar2 != 0)) {
+        FUN_0044d25c(3,DAT_0052a20c,0x153,DAT_0052a244,DAT_0052a250,iVar2);
+      }
+      FUN_00439c04(auStack_34,DAT_0052a254,0x18);
+      FUN_00529b2c(local_5c,0x28);
+      iVar2 = 0;
+      while( true ) {
+        if (param_6 == 0) {
+          iVar3 = 1;
+        }
+        else {
+          iVar3 = 2;
+        }
+        if (iVar3 <= iVar2) {
+          return unaff_r6;
+        }
+        if (iVar2 == 1) {
+          FUN_005687b6(*param_1,&local_78);
+          FUN_005687fe(local_78,param_6 << 6,1,0,0);
+          FUN_00567ec8(*(undefined4 *)(param_2 + 0x54),&local_74);
+          FUN_00569954(&local_74,local_78,0,1);
+          iVar3 = local_74;
+          FUN_00568844(local_78);
+          FUN_00439c04(&local_70,iVar3 + 0x14,0x14);
+        }
+        else {
+          FUN_00439c04(&local_70,*(int *)(param_2 + 0x54) + 0x6c,0x14);
+        }
+        local_3c = 0;
+        iVar3 = 0;
+        for (iVar4 = 0; iVar4 < local_6e; iVar4 = iVar4 + 1) {
+          if ((int)((uint)*(byte *)(local_68 + iVar4) << 0x1f) < 0) {
+            local_3c = local_3c + 1;
+            iVar3 = iVar3 + 1;
+          }
+          else {
+            if (iVar4 + 1 < (int)local_6e) {
+              iVar5 = iVar4 + 1;
+            }
+            else {
+              iVar5 = 0;
+            }
+            if ((int)((uint)*(byte *)(local_68 + iVar5) << 0x1f) < 0) {
+              iVar3 = iVar3 + 1;
+            }
+            else {
+              local_3c = local_3c + 1;
+              iVar3 = iVar3 + 2;
+            }
+          }
+        }
+        local_3c = local_70 + local_3c;
+        local_38 = (local_70 + iVar3) * 2;
+        cVar1 = FUN_00529ea2(param_1,0x28,local_5c);
+        unaff_r6 = local_5c[0];
+        if ((cVar1 != '\x01') || (local_5c[0] == 0)) break;
+        iVar3 = FUN_00527508(&local_70,auStack_34,local_5c[0]);
+        if (iVar3 != 0) {
+          FUN_0044d25c(3,DAT_0052a20c,0x1b9,DAT_0052a244,DAT_0052a25c,iVar3);
+          FUN_0052a264(param_1,unaff_r6);
+          return 0;
+        }
+        if ((iVar2 == 0) && (param_6 != 0)) {
+          cVar1 = FUN_00529ee8(unaff_r6,5,0,0,0);
+          if (cVar1 != '\x01') {
+            FUN_0044d25c(3,DAT_0052a20c,0x1c4,DAT_0052a244,DAT_0052a260);
+            FUN_0052a264(param_1,unaff_r6);
+            return 0;
+          }
+        }
+        else if (((iVar2 == 0) || ((iVar2 == 1 && (param_6 != 0)))) &&
+                (cVar1 = FUN_00529ee8(unaff_r6,0,0,0,0), cVar1 != '\x01')) {
+          FUN_0044d25c(3,DAT_0052a20c,0x1d0,DAT_0052a244,DAT_0052a260);
+          FUN_0052a264(param_1,unaff_r6);
+          return 0;
+        }
+        iVar2 = iVar2 + 1;
+      }
+      FUN_0044d25c(3,DAT_0052a20c,0x1b1,DAT_0052a244,DAT_0052a258);
+      return 0;
+    }
+    FUN_0044d25c(3,DAT_0052a20c,0x14b,DAT_0052a244,DAT_0052a24c,iVar2);
+  }
+  else {
+    FUN_0044d25c(3,DAT_0052a20c,0x13f,DAT_0052a244,DAT_0052a248,iVar2);
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00529f8e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a264 body_start=0052a264 body_end=0052a283 name=FUN_0052a264 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052a264(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 local_38 [10];
+  undefined4 uStack_10;
+  
+  uStack_10 = param_4;
+  FUN_00529b2c(local_38,0x28);
+  local_38[0] = param_2;
+  FUN_00529ea2(param_1,0x29,local_38);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a264 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a284 body_start=0052a284 body_end=0052a2d5 name=FUN_0052a284 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0052a284(undefined4 param_1,int param_2,uint param_3,int param_4,code *param_5)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  while (param_3 != 0) {
+    iVar2 = param_2 + param_4 * (param_3 >> 1);
+    iVar1 = (*param_5)(param_1,iVar2);
+    if (iVar1 < 1) {
+      if (-1 < iVar1) goto LAB_0052a2d2;
+      param_3 = param_3 >> 1;
+    }
+    else {
+      param_3 = (param_3 >> 1) - (param_3 & 1 ^ 1);
+      param_2 = iVar2 + param_4;
+    }
+  }
+  iVar2 = 0;
+LAB_0052a2d2:
+  return CONCAT44(param_4,iVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a284 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a3da body_start=0052a3da body_end=0052a3ed name=FUN_0052a3da (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+bool FUN_0052a3da(char param_1)
+
+{
+  if (param_1 == '\0') {
+    *DAT_0052a3f4 = 0xb2;
+  }
+  return param_1 != '\0';
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a3da (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a3fc body_start=0052a3fc body_end=0052a423 name=FUN_0052a3fc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052a3fc(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  undefined4 *puVar3;
+  
+  puVar1 = (undefined4 *)*DAT_0052a614;
+  puVar3 = (undefined4 *)0x0;
+  while ((puVar2 = puVar1, puVar2 != (undefined4 *)0x0 && (puVar2 != param_1))) {
+    puVar3 = puVar2;
+    puVar1 = (undefined4 *)*puVar2;
+  }
+  if (puVar2 != (undefined4 *)0x0) {
+    FUN_00538cc8(DAT_0052a614,param_1,puVar3);
+    *(undefined1 *)((int)param_1 + 0xd) = 0;
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a3fc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a424 body_start=0052a424 body_end=0052a467 name=FUN_0052a424 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052a424(int param_1,undefined4 param_2)
+
+{
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  undefined4 *puVar3;
+  
+  FUN_0052b8c8();
+  if (*(char *)(param_1 + 0xd) != '\0') {
+    FUN_0052a3fc(param_1);
+  }
+  *(undefined1 *)(param_1 + 0xd) = 1;
+  *(undefined4 *)(param_1 + 4) = param_2;
+  puVar1 = (undefined4 *)*DAT_0052a614;
+  puVar3 = (undefined4 *)0x0;
+  while ((puVar2 = puVar1, puVar2 != (undefined4 *)0x0 &&
+         ((uint)puVar2[1] <= *(uint *)(param_1 + 4)))) {
+    puVar3 = puVar2;
+    puVar1 = (undefined4 *)*puVar2;
+  }
+  FUN_00538c8c(DAT_0052a614,param_1,puVar3);
+  FUN_0052b8d0();
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a424 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a468 body_start=0052a468 body_end=0052a473 name=FUN_0052a468 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052a468(void)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_0052b95e(0,2);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a468 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a4b8 body_start=0052a4b8 body_end=0052a4c3 name=FUN_0052a4b8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052a4b8(undefined4 param_1,int param_2)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_0052a424(param_1,param_2 * 100);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a4b8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a4c4 body_start=0052a4c4 body_end=0052a4d1 name=FUN_0052a4c4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052a4c4(undefined4 param_1,uint param_2)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_0052a424(param_1,param_2 / 10);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a4c4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a4d2 body_start=0052a4d2 body_end=0052a4e5 name=FUN_0052a4d2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052a4d2(undefined4 param_1)
+
+{
+  FUN_0052b8c8();
+  FUN_0052a3fc(param_1);
+  FUN_0052b8d0();
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a4d2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a4e6 body_start=0052a4e6 body_end=0052a519 name=FUN_0052a4e6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052a4e6(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  
+  FUN_0052b8c8();
+  for (puVar1 = (undefined4 *)*DAT_0052a614; puVar1 != (undefined4 *)0x0;
+      puVar1 = (undefined4 *)*puVar1) {
+    if (param_1 < (uint)puVar1[1]) {
+      puVar1[1] = puVar1[1] - param_1;
+    }
+    else {
+      puVar1[1] = 0;
+      FUN_0052b95e(*(undefined1 *)(puVar1 + 3),2);
+    }
+  }
+  FUN_0052b8d0();
+  return param_4;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a4e6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a63c body_start=0052a63c body_end=0052a671 name=FUN_0052a63c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052a63c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  uint uVar1;
+  undefined1 auStack_410 [1024];
+  undefined4 uStack_c;
+  undefined4 uStack_8;
+  undefined4 uStack_4;
+  
+  uStack_c = param_2;
+  uStack_8 = param_3;
+  uStack_4 = param_4;
+  FUN_00473036(auStack_410,param_1,&uStack_c);
+  uVar1 = FUN_004733ee(auStack_410);
+  if (0x3ff < uVar1) {
+    FUN_00569a44(DAT_0052a678,0x89);
+  }
+  FUN_004733ee(&DAT_0052a674);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a63c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a67c body_start=0052a67c body_end=0052a6af name=FUN_0052a67c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052a67c(undefined2 param_1)
+
+{
+  char cVar1;
+  int iVar2;
+  
+  cVar1 = '\x03';
+  iVar2 = DAT_0052ae14;
+  while( true ) {
+    if (cVar1 == '\0') {
+      return;
+    }
+    if (*(short *)(iVar2 + 0x10) == -1) break;
+    cVar1 = cVar1 + -1;
+    iVar2 = iVar2 + 0x1c;
+  }
+  *(undefined2 *)(iVar2 + 0x10) = param_1;
+  *(undefined1 *)(iVar2 + 0x17) = 0;
+  *(undefined1 *)(iVar2 + 0x19) = 0;
+  *(undefined1 *)(iVar2 + 0x18) = 0;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a67c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a6b0 body_start=0052a6b0 body_end=0052a703 name=FUN_0052a6b0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052a6b0(short param_1)
+
+{
+  char cVar1;
+  int *piVar2;
+  
+  cVar1 = '\x03';
+  piVar2 = DAT_0052ae14;
+  while( true ) {
+    if (cVar1 == '\0') {
+      return;
+    }
+    if ((short)piVar2[4] == param_1) break;
+    cVar1 = cVar1 + -1;
+    piVar2 = piVar2 + 7;
+  }
+  if (*piVar2 != 0) {
+    FUN_004bf9b0(*piVar2);
+    *piVar2 = 0;
+  }
+  *(undefined1 *)((int)piVar2 + 0x16) = 0;
+  if (piVar2[2] != 0) {
+    FUN_004bf9b0(piVar2[2]);
+    piVar2[2] = 0;
+  }
+  *(undefined2 *)(piVar2 + 4) = 0xffff;
+  FUN_0052a79e(*(undefined1 *)((int)piVar2 + 0x19));
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a6b0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a704 body_start=0052a704 body_end=0052a72d name=FUN_0052a704 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_0052a704(short param_1)
+
+{
+  int iVar1;
+  char cVar2;
+  
+  cVar2 = '\x03';
+  iVar1 = DAT_0052ae14;
+  while( true ) {
+    if (cVar2 == '\0') {
+      return 0;
+    }
+    if (*(short *)(iVar1 + 0x10) == param_1) break;
+    cVar2 = cVar2 + -1;
+    iVar1 = iVar1 + 0x1c;
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a704 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a72e body_start=0052a72e body_end=0052a757 name=FUN_0052a72e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_0052a72e(void)
+
+{
+  int iVar1;
+  char cVar2;
+  
+  cVar2 = '\x03';
+  iVar1 = DAT_0052ae14;
+  while( true ) {
+    if (cVar2 == '\0') {
+      return 0;
+    }
+    if ((*(short *)(iVar1 + 0x10) != -1) && (*(char *)(iVar1 + 0x16) != '\0')) break;
+    cVar2 = cVar2 + -1;
+    iVar1 = iVar1 + 0x1c;
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a72e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a758 body_start=0052a758 body_end=0052a761 name=FUN_0052a758 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052a758(undefined2 param_1)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_0052a67c(param_1);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a758 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a762 body_start=0052a762 body_end=0052a76b name=FUN_0052a762 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052a762(undefined2 param_1)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_0052a6b0(param_1);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a762 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a76c body_start=0052a76c body_end=0052a79d name=FUN_0052a76c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052a76c(int param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = FUN_0053013c(param_1);
+  if (iVar1 == 0) {
+    uVar2 = 0;
+  }
+  else {
+    *(char *)(param_1 + 0x19) = *(char *)(param_1 + 0x19) + '\x01';
+    if (*(char *)(DAT_0052ae14 + 0x82) != '\0') {
+      *(char *)(DAT_0052ae14 + 0x82) = *(char *)(DAT_0052ae14 + 0x82) + -1;
+    }
+    uVar2 = 1;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a76c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a79e body_start=0052a79e body_end=0052a84f name=FUN_0052a79e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0052a79e(char param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  byte bVar1;
+  byte bVar2;
+  int iVar3;
+  byte *pbVar4;
+  int iVar5;
+  byte bVar6;
+  int iVar7;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  
+  iVar7 = DAT_0052ae14;
+  bVar6 = 0;
+  uStack_20 = param_3;
+  uStack_1c = param_4;
+  if ((param_1 != '\0') &&
+     (*(char *)(DAT_0052ae14 + 0x82) = param_1 + *(char *)(DAT_0052ae14 + 0x82),
+     *(byte *)(iVar7 + 0x83) < *(byte *)(iVar7 + 0x82))) {
+    *(undefined1 *)(iVar7 + 0x82) = *(undefined1 *)(iVar7 + 0x83);
+  }
+  while (iVar7 = DAT_0052ae14, *(char *)(DAT_0052ae14 + 0x82) != '\0') {
+    iVar3 = FUN_0052a8b0(0);
+    if (iVar3 == 0) {
+      iVar7 = iVar7 + 0x70;
+      pbVar4 = (byte *)FUN_004bfa00(iVar7,&uStack_20);
+      if (pbVar4 == (byte *)0x0) break;
+      bVar1 = pbVar4[2];
+      bVar2 = pbVar4[3];
+      iVar3 = FUN_0052a704((uint)pbVar4[1] * 0x100 + (uint)*pbVar4);
+      if (iVar3 == 0) {
+        FUN_004bf9ec(iVar7,&uStack_20);
+        FUN_004bf9b0();
+      }
+      else {
+        iVar5 = FUN_0052a850(iVar3,(uint)bVar2 * 0x100 + (uint)bVar1,pbVar4);
+        if (iVar5 != 1) break;
+        FUN_004bf9ec(iVar7,&uStack_20);
+        FUN_0052a936(iVar3,pbVar4);
+        bVar6 = 1;
+      }
+    }
+  }
+  return CONCAT44(uStack_20,(uint)bVar6);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a79e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a850 body_start=0052a850 body_end=0052a8af name=FUN_0052a850 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052a850(int *param_1,uint param_2,int param_3)
+
+{
+  uint uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  
+  uVar1 = FUN_00530d34();
+  if ((uVar1 & 0xffff) < (param_2 & 0xffff)) {
+    *(short *)((int)param_1 + 0x12) = (short)param_2 - (short)uVar1;
+    param_1[1] = (uVar1 & 0xffff) + param_3;
+    *param_1 = param_3;
+    *(undefined1 *)((int)param_1 + 0x16) = 1;
+    *(char *)(param_3 + 2) = (char)uVar1;
+    *(char *)(param_3 + 3) = (char)(uVar1 >> 8);
+    iVar2 = FUN_0052a76c(param_1,param_3);
+    if (iVar2 == 1) {
+      uVar3 = 1;
+    }
+    else {
+      *param_1 = 0;
+      *(undefined1 *)((int)param_1 + 0x16) = 0;
+      *(char *)(param_3 + 2) = (char)param_2;
+      *(char *)(param_3 + 3) = (char)(param_2 >> 8);
+      uVar3 = 0;
+    }
+  }
+  else {
+    uVar3 = FUN_0052a76c(param_1,param_3);
+  }
+  return uVar3;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a850 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a8b0 body_start=0052a8b0 body_end=0052a935 name=FUN_0052a8b0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0052a8b0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  ushort uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  uint uVar4;
+  
+  if (param_1 == 0) {
+    param_1 = FUN_0052a72e();
+  }
+  if (param_1 != 0) {
+    uVar1 = FUN_00530d34();
+    if (*(ushort *)(param_1 + 0x12) < uVar1) {
+      uVar4 = (uint)*(ushort *)(param_1 + 0x12);
+    }
+    else {
+      uVar4 = FUN_00530d34();
+    }
+    if ((uVar4 & 0xffff) != 0) {
+      **(undefined1 **)(param_1 + 4) = (char)*(undefined2 *)(param_1 + 0x10);
+      *(byte *)(*(int *)(param_1 + 4) + 1) =
+           (byte)((ushort)*(undefined2 *)(param_1 + 0x10) >> 8) | 0x10;
+      *(char *)(*(int *)(param_1 + 4) + 2) = (char)uVar4;
+      *(char *)(*(int *)(param_1 + 4) + 3) = (char)(uVar4 >> 8);
+      iVar2 = FUN_0052a76c(param_1,*(undefined4 *)(param_1 + 4));
+      if (iVar2 == 1) {
+        *(short *)(param_1 + 0x12) = *(short *)(param_1 + 0x12) - (short)uVar4;
+        if (*(short *)(param_1 + 0x12) != 0) {
+          *(uint *)(param_1 + 4) = *(int *)(param_1 + 4) + (uVar4 & 0xffff);
+        }
+        FUN_0052a936(param_1,*(undefined4 *)(param_1 + 4));
+        uVar3 = 1;
+      }
+      else {
+        uVar3 = 0;
+      }
+      goto LAB_0052a934;
+    }
+  }
+  uVar3 = 0;
+LAB_0052a934:
+  return CONCAT44(param_4,uVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a8b0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a936 body_start=0052a936 body_end=0052a961 name=FUN_0052a936 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052a936(undefined4 *param_1,int param_2)
+
+{
+  if (*(char *)((int)param_1 + 0x16) == '\0') {
+    if (param_2 != 0) {
+      FUN_004bf9b0();
+    }
+  }
+  else if (*(short *)((int)param_1 + 0x12) == 0) {
+    FUN_004bf9b0(*param_1);
+    *param_1 = 0;
+    *(undefined1 *)((int)param_1 + 0x16) = 0;
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a936 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052a962 body_start=0052a962 body_end=0052ac01 name=FUN_0052a962 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+byte * FUN_0052a962(byte *param_1)
+
+{
+  undefined1 uVar1;
+  short sVar2;
+  bool bVar3;
+  int iVar4;
+  undefined4 uVar5;
+  undefined1 *puVar6;
+  char *pcVar7;
+  int iVar8;
+  byte *pbVar9;
+  uint uVar10;
+  uint uVar11;
+  uint uVar12;
+  int iVar13;
+  
+  pbVar9 = (byte *)0x0;
+  bVar3 = true;
+  uVar10 = (uint)param_1[1] * 0x100 + (uint)*param_1;
+  uVar12 = uVar10 & 0x3000;
+  uVar10 = uVar10 & 0xfff;
+  uVar11 = (uint)param_1[3] * 0x100 + (uint)param_1[2];
+  iVar4 = FUN_0052a704(uVar10);
+  if (iVar4 != 0) {
+    sVar2 = (short)uVar11;
+    if (uVar12 == 0x2000) {
+      if (*(int *)(iVar4 + 8) != 0) {
+        FUN_004bf9b0(*(undefined4 *)(iVar4 + 8));
+        *(undefined4 *)(iVar4 + 8) = 0;
+      }
+      iVar13 = DAT_0052ae14;
+      uVar1 = (undefined1)(uVar10 >> 8);
+      if (uVar11 < 2) {
+        if (uVar11 != 0) {
+          uVar5 = FUN_004bf990(*(short *)(DAT_0052ae14 + 0x7c) + 4,0);
+          *(undefined4 *)(iVar4 + 8) = uVar5;
+          if (*(int *)(iVar4 + 8) != 0) {
+            *(undefined4 *)(iVar4 + 0xc) = *(undefined4 *)(iVar4 + 8);
+            puVar6 = *(undefined1 **)(iVar4 + 0xc);
+            *(undefined1 **)(iVar4 + 0xc) = puVar6 + 1;
+            *puVar6 = (char)uVar10;
+            puVar6 = *(undefined1 **)(iVar4 + 0xc);
+            *(undefined1 **)(iVar4 + 0xc) = puVar6 + 1;
+            *puVar6 = uVar1;
+            puVar6 = *(undefined1 **)(iVar4 + 0xc);
+            *(undefined1 **)(iVar4 + 0xc) = puVar6 + 1;
+            *puVar6 = 0;
+            puVar6 = *(undefined1 **)(iVar4 + 0xc);
+            *(undefined1 **)(iVar4 + 0xc) = puVar6 + 1;
+            *puVar6 = 0;
+            FUN_00439be4(*(undefined4 *)(iVar4 + 0xc),param_1 + 4,uVar11);
+            *(uint *)(iVar4 + 0xc) = *(int *)(iVar4 + 0xc) + uVar11;
+            *(short *)(iVar4 + 0x14) = *(short *)(iVar13 + 0x7c) - sVar2;
+          }
+        }
+      }
+      else {
+        iVar13 = (uint)param_1[5] * 0x100 + (uint)param_1[4];
+        if (iVar13 + 4U <= (uint)*(ushort *)(DAT_0052ae14 + 0x7c)) {
+          if (uVar11 < iVar13 + 4U) {
+            uVar5 = FUN_004bf990(iVar13 + 8U & 0xffff,0);
+            *(undefined4 *)(iVar4 + 8) = uVar5;
+            if (*(int *)(iVar4 + 8) != 0) {
+              *(undefined4 *)(iVar4 + 0xc) = *(undefined4 *)(iVar4 + 8);
+              puVar6 = *(undefined1 **)(iVar4 + 0xc);
+              *(undefined1 **)(iVar4 + 0xc) = puVar6 + 1;
+              *puVar6 = (char)uVar10;
+              puVar6 = *(undefined1 **)(iVar4 + 0xc);
+              *(undefined1 **)(iVar4 + 0xc) = puVar6 + 1;
+              *puVar6 = uVar1;
+              pcVar7 = *(char **)(iVar4 + 0xc);
+              *(char **)(iVar4 + 0xc) = pcVar7 + 1;
+              *pcVar7 = (char)iVar13 + '\x04';
+              puVar6 = *(undefined1 **)(iVar4 + 0xc);
+              *(undefined1 **)(iVar4 + 0xc) = puVar6 + 1;
+              *puVar6 = (char)((uint)(iVar13 + 4) >> 8);
+              if (2 < uVar11) {
+                FUN_00439be4(*(undefined4 *)(iVar4 + 0xc),param_1 + 4,uVar11);
+              }
+              *(uint *)(iVar4 + 0xc) = *(int *)(iVar4 + 0xc) + uVar11;
+              *(short *)(iVar4 + 0x14) = ((short)iVar13 + 4) - sVar2;
+            }
+          }
+          else {
+            bVar3 = false;
+            pbVar9 = param_1;
+          }
+        }
+      }
+    }
+    else if ((uVar12 == 0x1000) && (*(int *)(iVar4 + 8) != 0)) {
+      if (*(ushort *)(iVar4 + 0x14) < uVar11) {
+        FUN_004bf9b0(*(undefined4 *)(iVar4 + 8));
+        *(undefined4 *)(iVar4 + 8) = 0;
+      }
+      else {
+        FUN_00439be4(*(undefined4 *)(iVar4 + 0xc),param_1 + 4,uVar11);
+        iVar13 = DAT_0052ae14;
+        if (*(int *)(iVar4 + 0xc) - *(int *)(iVar4 + 8) < 6) {
+          iVar8 = (uint)*(byte *)(*(int *)(iVar4 + 8) + 5) * 0x100 +
+                  (uint)*(byte *)(*(int *)(iVar4 + 8) + 4);
+          if ((uint)*(ushort *)(DAT_0052ae14 + 0x7c) < iVar8 + 4U) {
+            FUN_004bf9b0(*(undefined4 *)(iVar4 + 8));
+            *(undefined4 *)(iVar4 + 8) = 0;
+          }
+          else {
+            *(char *)(*(int *)(iVar4 + 8) + 2) = (char)iVar8 + '\x04';
+            *(char *)(*(int *)(iVar4 + 8) + 3) = (char)((uint)(iVar8 + 4) >> 8);
+            *(short *)(iVar4 + 0x14) =
+                 (short)iVar8 + (*(short *)(iVar4 + 0x14) - *(short *)(iVar13 + 0x7c)) + 4;
+          }
+        }
+        *(uint *)(iVar4 + 0xc) = *(int *)(iVar4 + 0xc) + uVar11;
+        *(short *)(iVar4 + 0x14) = *(short *)(iVar4 + 0x14) - sVar2;
+        if (*(short *)(iVar4 + 0x14) == 0) {
+          pbVar9 = *(byte **)(iVar4 + 8);
+          *(undefined4 *)(iVar4 + 8) = 0;
+        }
+      }
+    }
+  }
+  if (bVar3) {
+    FUN_004bf9b0(param_1);
+  }
+  return pbVar9;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052a962 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052ac6a body_start=0052ac6a body_end=0052accd name=FUN_0052ac6a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0052ac6a(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  char cVar4;
+  undefined4 uStack_18;
+  undefined4 uStack_14;
+  
+  piVar3 = DAT_0052ae14;
+  uStack_18 = param_3;
+  uStack_14 = param_4;
+  while( true ) {
+    iVar1 = DAT_0052ae18;
+    iVar2 = FUN_004bf9ec(DAT_0052ae18,&uStack_18);
+    if (iVar2 == 0) break;
+    FUN_004bf9b0();
+  }
+  for (cVar4 = '\x03'; cVar4 != '\0'; cVar4 = cVar4 + -1) {
+    if (*piVar3 != 0) {
+      FUN_004bf9b0(*piVar3);
+      *piVar3 = 0;
+    }
+    *(undefined1 *)((int)piVar3 + 0x16) = 0;
+    if (piVar3[2] != 0) {
+      FUN_004bf9b0(piVar3[2]);
+      piVar3[2] = 0;
+    }
+    *(undefined2 *)(piVar3 + 4) = 0xffff;
+    FUN_0052a79e(*(undefined1 *)((int)piVar3 + 0x19));
+    piVar3 = piVar3 + 7;
+  }
+  *(undefined1 *)(iVar1 + 0x21) = 1;
+  FUN_00569b4a();
+  return CONCAT44(uStack_14,uStack_18);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052ac6a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052ad04 body_start=0052ad04 body_end=0052ad9b name=FUN_0052ad04 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052ad04(byte *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  byte bVar1;
+  byte bVar2;
+  int iVar3;
+  ushort uVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  
+  iVar6 = (uint)param_1[1] * 0x100 + (uint)*param_1;
+  bVar1 = param_1[2];
+  bVar2 = param_1[3];
+  iVar5 = FUN_0052a704(iVar6);
+  iVar3 = DAT_0052ae14;
+  if (iVar5 == 0) {
+    FUN_004bf9b0(param_1);
+  }
+  else {
+    iVar7 = DAT_0052ae14 + 0x70;
+    FUN_004bf9de(iVar7,0,param_1);
+    iVar7 = FUN_00538cf6(iVar7);
+    if ((iVar7 == 1) && (*(char *)(iVar3 + 0x82) != '\0')) {
+      FUN_0052a79e(0);
+    }
+    uVar4 = FUN_00530d34();
+    *(char *)(iVar5 + 0x18) =
+         (char)((int)((uint)bVar2 * 0x100 + (uint)bVar1 + -1) / (int)(uint)uVar4) +
+         *(char *)(iVar5 + 0x18) + '\x01';
+    if ((*(byte *)(iVar3 + 0x80) <= *(byte *)(iVar5 + 0x18)) && (*(char *)(iVar5 + 0x17) == '\0')) {
+      *(undefined1 *)(iVar5 + 0x17) = 1;
+      (**(code **)(DAT_0052ae18 + 0x14))(iVar6,1);
+    }
+  }
+  return param_4;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052ad04 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052ad9c body_start=0052ad9c body_end=0052adc1 name=FUN_0052ad9c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052ad9c(short param_1)
+
+{
+  char cVar1;
+  short *psVar2;
+  
+  cVar1 = '\x06';
+  psVar2 = DAT_0052ae20;
+  while( true ) {
+    if (cVar1 == '\0') {
+      return;
+    }
+    if (*psVar2 == -1) break;
+    cVar1 = cVar1 + -1;
+    psVar2 = psVar2 + 1;
+  }
+  *psVar2 = param_1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052ad9c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052adc2 body_start=0052adc2 body_end=0052adeb name=FUN_0052adc2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052adc2(short param_1)
+
+{
+  char cVar1;
+  short *psVar2;
+  
+  cVar1 = '\x06';
+  psVar2 = DAT_0052ae20;
+  while( true ) {
+    if (cVar1 == '\0') {
+      return;
+    }
+    if (*psVar2 == param_1) break;
+    cVar1 = cVar1 + -1;
+    psVar2 = psVar2 + 1;
+  }
+  *psVar2 = -1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052adc2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052adec body_start=0052adec body_end=0052ae13 name=FUN_0052adec (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+short * FUN_0052adec(short param_1)
+
+{
+  short *psVar1;
+  char cVar2;
+  
+  cVar2 = '\x06';
+  psVar1 = DAT_0052ae20;
+  while( true ) {
+    if (cVar2 == '\0') {
+      return (short *)0x0;
+    }
+    if (*psVar1 == param_1) break;
+    cVar2 = cVar2 + -1;
+    psVar1 = psVar1 + 1;
+  }
+  return psVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052adec (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052ae24 body_start=0052ae24 body_end=0052ae2d name=FUN_0052ae24 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052ae24(undefined2 param_1)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_0052ad9c(param_1);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052ae24 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052ae2e body_start=0052ae2e body_end=0052ae37 name=FUN_0052ae2e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052ae2e(undefined2 param_1)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_0052adc2(param_1);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052ae2e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052ae38 body_start=0052ae38 body_end=0052ae5d name=FUN_0052ae38 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0052ae38(undefined2 param_1,short param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined1 *puVar1;
+  
+  puVar1 = (undefined1 *)FUN_004bf99e(param_2 + 3);
+  if (puVar1 != (undefined1 *)0x0) {
+    *puVar1 = (char)param_1;
+    puVar1[1] = (char)((ushort)param_1 >> 8);
+    puVar1[2] = (char)param_2;
+  }
+  return CONCAT44(param_4,puVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052ae38 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052ae5e body_start=0052ae5e body_end=0052aec5 name=FUN_0052ae5e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0052ae5e(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  byte *pbVar2;
+  int iVar3;
+  undefined4 uVar4;
+  int iVar5;
+  undefined4 uStack_18;
+  undefined4 uStack_14;
+  
+  uStack_18 = param_3;
+  uStack_14 = param_4;
+  if (param_1 != 0) {
+    FUN_004bf9de(DAT_0052b6b0,0);
+  }
+  iVar1 = DAT_0052b6b4;
+  if (*(char *)(DAT_0052b6b4 + 0x1a) != '\0') {
+    iVar5 = DAT_0052b6b4 + 0x10;
+    pbVar2 = (byte *)FUN_004bfa00(iVar5,&uStack_18);
+    if (pbVar2 != (byte *)0x0) {
+      *(ushort *)(iVar1 + 0x18) = (ushort)pbVar2[1] * 0x100 + (ushort)*pbVar2;
+      FUN_0052a4b8(iVar1,10);
+      iVar3 = FUN_00530166(pbVar2);
+      if (iVar3 == 1) {
+        FUN_004bf9ec(iVar5,&uStack_18);
+        *(char *)(iVar1 + 0x1a) = *(char *)(iVar1 + 0x1a) + -1;
+        FUN_004bf9b0(pbVar2);
+        uVar4 = 1;
+        goto LAB_0052aec4;
+      }
+    }
+  }
+  uVar4 = 0;
+LAB_0052aec4:
+  return CONCAT44(uStack_18,uVar4);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052ae5e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052aee6 body_start=0052aee6 body_end=0052aef7 name=FUN_0052aee6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052aee6(void)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_004b49ce();
+  FUN_004b48a6(0);
+  FUN_004b3026();
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052aee6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052aef8 body_start=0052aef8 body_end=0052af0f name=FUN_0052aef8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0052aef8(void)
+
+{
+  int iVar1;
+  
+  iVar1 = DAT_0052b6b4;
+  FUN_0052a4d2(DAT_0052b6b4);
+  *(undefined1 *)(iVar1 + 0x1a) = 1;
+  FUN_0052ae5e(0);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052aef8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0052af10 body_start=0052af10 body_end=0052af3f name=FUN_0052af10 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0052af10(undefined2 param_1,undefined1 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_0052ae38(0x406,3);
+  if (iVar1 != 0) {
+    *(char *)(iVar1 + 3) = (char)param_1;
+    *(char *)(iVar1 + 4) = (char)((ushort)param_1 >> 8);
+    *(undefined1 *)(iVar1 + 5) = param_2;
+    FUN_0052ae5e(iVar1);
+  }
+  return param_4;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0052af10 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_CHUNK_SUMMARY start=00528298 end=0052af40 functions=115 completed=115 failed=0 (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /ota_s200_firmware_ota.bin (HeadlessAnalyzer)  

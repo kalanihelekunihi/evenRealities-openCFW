@@ -1,0 +1,9 @@
+profiles=Os,O1
+language=-std=c99
+target=-mcpu=cortex-m55 -mthumb -mno-unaligned-access
+codegen=-ffreestanding -fno-lto -fno-builtin -ffunction-sections -fdata-sections -fomit-frame-pointer -fno-unwind-tables -fno-asynchronous-unwind-tables
+common_config=-DWSF_TRACE_ENABLED=1 -DWSF_ASSERT_ENABLED=1 -DDM_CONN_MAX=3 -DDM_NUM_ADV_SETS=1 -DDM_NUM_PHYS=1
+r441_bounded_config_shim=-DHCI_EVT_VENDOR_SPEC_CMD_CMPL_PARAM_MAX_LEN=1 -DHCI_EVT_VENDOR_SPEC_EVT_PARAM_MAX_LEN=1
+r441_config_caveat=the supplied official selected headers require board-defined vendor-event maxima; values were unavailable, so 1-byte structural placeholders were used and exact dmEvtCbackLen values are not claimed
+warnings=-Wall -Wextra -Werror -Wno-unused-parameter
+closure=-nostdlib -Wl,-e,opencfw_closure_entry -Wl,-Ttext=0x8000; intentionally no --gc-sections

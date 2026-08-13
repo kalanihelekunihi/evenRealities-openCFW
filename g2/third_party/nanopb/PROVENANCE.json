@@ -1,0 +1,2086 @@
+{
+  "schema_version": 1,
+  "component": "nanopb",
+  "license": "Zlib",
+  "upstream": {
+    "repository": "https://github.com/nanopb/nanopb.git",
+    "repository_web": "https://github.com/nanopb/nanopb",
+    "selected_ref": "refs/tags/nanopb-0.4.9",
+    "selected_tag": "nanopb-0.4.9",
+    "tag_type": "annotated",
+    "tag_object": "b3056c326da0e6cf702fd13ae2fe63225caa0801",
+    "tag_target": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+    "tag_object_payload_path": "upstream/b3056c326da0e6cf702fd13ae2fe63225caa0801.tag",
+    "tag_object_payload_size": 151,
+    "tag_object_payload_sha256": "155ac515df4fdf4d006e096008c6c9ee1e50894b829187f7cb1b214804646152",
+    "tagger_date": "2024-09-19T13:56:40+03:00",
+    "tag_signature": {
+      "present": false,
+      "signer_trust_verified": false,
+      "qualification": "The official annotated tag object is pinned byte-for-byte but is unsigned; no identity trust beyond Git object integrity is claimed."
+    },
+    "selected_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+    "commit_object_payload_path": "upstream/98bf4db69897b53434f3d0ba72e0a3ab1a902824.commit",
+    "commit_object_payload_size": 250,
+    "commit_object_payload_sha256": "e6ecbdf1157055f4327b9083265e0cd807e51211d5cd767ea6d2ae7f172dbdce",
+    "selected_tree": "2c4c260bcff3f9f7081238d377274dd385d76582",
+    "parent_commit": "2c50b0298dbb2008d0123f340dff7b522d315cea",
+    "author_date": "2024-09-19T13:56:19+03:00",
+    "committer_date": "2024-09-19T13:56:19+03:00",
+    "commit_signature": {
+      "present": false,
+      "signer_trust_verified": false,
+      "qualification": "The exact commit payload is pinned and unsigned; no signer identity claim is made."
+    },
+    "tree_closure_path": "upstream/trees.json",
+    "tree_closure_size": 6558,
+    "tree_closure_sha256": "7604008d26767601712b60dc125baa7da9ebfdea907556b79ea677b79137c16e",
+    "tree_object_count": 1,
+    "root_tree_entry_count": 38,
+    "tree_closure_qualification": "All selected files are root-level blobs. The complete 38-entry root tree is vendored, allowing the verifier to reconstruct the canonical tree payload and prove path membership offline.",
+    "declared_library_version": "0.4.9",
+    "declared_version_macro": "NANOPB_VERSION"
+  },
+  "selection": {
+    "classification": "authenticated upstream compatibility snapshot; bounded altered-source production reuse",
+    "compatibility_choice": "nanopb-0.4.9",
+    "exact_g2_point_release_proven": false,
+    "g2_compatible_pristine_release_range": [
+      "0.4.7",
+      "0.4.8",
+      "0.4.9",
+      "0.4.9.1"
+    ],
+    "qualification": "Authenticated G2 runtime evidence and controlled reference builds cannot distinguish the retained code of pristine nanopb 0.4.7, 0.4.8, 0.4.9, and 0.4.9.1. The sole 0.4.9.1 runtime behavior change is in dead-stripped pb_decode_ex, and the firmware build timestamp postdates that release. openCFW deliberately selects 0.4.9; this is not proof of the Even Realities vendor point release or checkout.",
+    "selected_file_count": 8,
+    "selection_rule": "Exact minimal C runtime/header closure plus the complete upstream Zlib license.",
+    "included_features": [
+      "common field iterator/runtime support",
+      "decode runtime",
+      "encode runtime",
+      "callback streams",
+      "packed repeated scalars",
+      "fixed-count and fixed-length runtime support"
+    ],
+    "excluded_features": [
+      "generator and Python tooling",
+      "protoc plugin",
+      "tests, examples, documentation, and build-system integrations",
+      "CMake/Bazel/Swift/Zephyr packaging",
+      "all Even schemas and generated message sources",
+      "Even transport bindings, callbacks, allocation policy, and hardware integration"
+    ],
+    "source_records_sha256": "bb36791b9ae9a6cff412516db0b93911240fff8e8109d56136ca76173ac3a3e0",
+    "integration_status": "authenticated and verified offline; forty-three bounded altered production functions registered, including the nine-leaf pb_common iterator closure, the paired private defaults routines, the field/extension dispatch trio, the five-function field-decoder closure, pb_decode_tag with its recovered one-byte wire-type ABI, and private pb_decode_inner",
+    "production_istream_from_buffer_leaf": {
+      "upstream_function": "pb_istream_from_buffer",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "upstream_definition_span": "pb_decode.c bytes [5114,5692)",
+      "upstream_definition_size": 578,
+      "upstream_definition_sha256": "087c2b851d9ea55d5a81d70a37a88385ee7fe8db86daef34ea3d0584183b0b13",
+      "local_source": "components/shared/nanopb/runtime_nanopb_istream_from_buffer.c",
+      "local_source_size": 1741,
+      "local_source_sha256": "f56a603644c5e9cd85781f8d3be2c69e85e458c48fa7ecd8633d6c6a9dbda3d9",
+      "local_header": "components/shared/nanopb/runtime_nanopb_istream_from_buffer.h",
+      "local_header_size": 1290,
+      "local_header_sha256": "b72524945afeec8eb3f304b8a7e0002c0d842598a908ddb82f59cc4894fc773f",
+      "stock_span": "[0x0048F49C,0x0048F4B8)",
+      "stock_size": 28,
+      "stock_sha256": "852314bb8f86dcbd550deb0f51bc285b662e39c1b4fae66690c44a7bf4f7a674",
+      "stock_topology": {
+        "direct_caller_count": 30,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "canonical_callback_identity": "0x0048F3A5",
+      "relocations": [
+        {
+          "offset": 0,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_nanopb_stock_buffer_read_identity",
+          "target_address": "0x0048F3A5"
+        },
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_nanopb_stock_buffer_read_identity",
+          "target_address": "0x0048F3A5"
+        }
+      ],
+      "toolchain_profiles": {
+        "apple-clang": {
+          "size": 20,
+          "alignment": 4,
+          "offset": 124896,
+          "runtime_address": "0x007B2B04",
+          "unrelocated_sha256": "d106ce1009ddcbd4d39a7c56edbcd51f50d4cfa6768f78d224ea988aa9a416d7",
+          "relocated_sha256": "af3357e8178ab650d5476d0ad0fbfee0b44cdb288d9251da909b3ba7a1de92c4",
+          "entry_patch_sha256": "e2e120080f18fdd443e08a5def120575a2eae21139a5276f3f8fbb53e1aea6dd"
+        },
+        "linux-clang": {
+          "size": 22,
+          "alignment": 4,
+          "offset": 126720,
+          "runtime_address": "0x007B3224",
+          "unrelocated_sha256": "6c23e37c9468d866db2e2cb6bf0ce8e103fb34df1078e740b4b8d5d799c257ff",
+          "relocated_sha256": "59438f30232883560f65ad4e58ff97c05dcdffdb6287fffcb7c1b79487df436d",
+          "entry_patch_sha256": "902daf1332ace8eae1d3f71e324ddbc03ec2542d93530fa876f24228d40c86ed"
+        }
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_istream_from_buffer_source_replacement",
+        "source_leaf": "apollo_nanopb_istream_from_buffer_source_leaf"
+      },
+      "evidence": "docs/research/nanopb-istream-from-buffer-source-audit.md",
+      "evidence_size": 5333,
+      "evidence_sha256": "5904de4d352cb2d891f17e56568e6feb6dd94f5251a35c012d32eb3478947278",
+      "bootloader_homolog": false,
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered local source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; this does not prove the vendor nanopb revision or checkout. The 16-byte stream ABI and canonical stock callback identity are preserved."
+    },
+    "production_leaf": {
+      "upstream_function": "pb_decode_varint",
+      "local_source": "components/shared/nanopb/runtime_nanopb_decode_varint.c",
+      "local_source_size": 2224,
+      "local_source_sha256": "b1de68b98ee043bd07d1e10706166a13b13693534e382705bbad6866411fbe05",
+      "stock_span": "[0x0048F5B8,0x0048F628)",
+      "stock_sha256": "f93d678981f92603982c9afc6c6f9976ca14d1a7a7e0bfc949d3ff73f2791ff2",
+      "source_backed_readbyte_entry": "0x0048F454",
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered local source selected against the authenticated 0.4.9 compatibility baseline; not a claim that the vendor used nanopb 0.4.9. Its read-byte call retains stable entry 0x0048F454, whose complete body redirects to the separately pinned production_private_read_pair. The broader pristine pb_common, pb_decode, and pb_encode translation units remain unregistered."
+    },
+    "production_skip_varint_leaf": {
+      "upstream_function": "pb_skip_varint",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "upstream_definition_span": "pb_decode.c bytes [8160,8360)",
+      "upstream_definition_size": 200,
+      "upstream_definition_sha256": "4c9c2629d6c8bf7e8e986a8cb54413d39a804ddb0e848c64aae009d3b10aac62",
+      "local_source": "components/shared/nanopb/runtime_nanopb_skip_varint.c",
+      "local_source_size": 1925,
+      "local_source_sha256": "89e53ebc01a2d28c4a94ac4a38313b8213788a23ed55bf767a9e8a5c6d961225",
+      "local_header": "components/shared/nanopb/runtime_nanopb_skip_varint.h",
+      "local_header_size": 2401,
+      "local_header_sha256": "30a8aea087894af29396746a31bbebfc9195e12ee4d66e79b4b637828eeab103",
+      "stock_span": "[0x0048F628,0x0048F64C)",
+      "stock_size": 36,
+      "stock_sha256": "fae83b1a62a07bb9c7a3d3f6c398bc13433ebe1cd75d01945f83f30e6fcc9c5d",
+      "stock_read_seam": "0x0048F3BE",
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered local source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the vendor nanopb revision or checkout. The broader pristine pb_common, pb_decode, and pb_encode translation units remain unregistered."
+    },
+    "production_close_string_substream_leaf": {
+      "upstream_function": "pb_close_string_substream",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "upstream_definition_span": "pb_decode.c bytes [11223,11568)",
+      "upstream_definition_size": 345,
+      "upstream_definition_sha256": "527e5ca208a04366c0911baf793af7dc7045fd73014eefc6e31ce3a8b6dc332f",
+      "local_source": "components/shared/nanopb/runtime_nanopb_close_string_substream.c",
+      "local_source_size": 2061,
+      "local_source_sha256": "736e7ec228f9282ba5b093fd482441e6e2017fff860d989dc3aadb2bdeff0fcb",
+      "local_header": "components/shared/nanopb/runtime_nanopb_close_string_substream.h",
+      "local_header_size": 2537,
+      "local_header_sha256": "851af370162d79f4bd0be8b8bb9a5731d47cf02527078b9e278019340f2d65d4",
+      "stock_span": "[0x0048F7CA,0x0048F7F4)",
+      "stock_size": 42,
+      "stock_sha256": "439bbeecb6a0b8266dc3dcd913e98793352b6b346a7a58cdd44322c734621818",
+      "stock_read_seam": "0x0048F3BE",
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered local source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the vendor nanopb revision or checkout. The broader pristine pb_common, pb_decode, and pb_encode translation units remain unregistered."
+    },
+    "production_decode_fixed32_leaf": {
+      "upstream_function": "pb_decode_fixed32",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "upstream_definition_span": "pb_decode.c bytes [43210,43828)",
+      "upstream_definition_size": 618,
+      "upstream_definition_sha256": "1952ee1f743334c82f206c910392f63b2e7fdd702cbdd404dae04367aa8ae518",
+      "local_source": "components/shared/nanopb/runtime_nanopb_decode_fixed32.c",
+      "local_source_size": 1975,
+      "local_source_sha256": "fefd8a899174fb9332c366df691dc2c8ec6f4792f3fd464b65dbb573ace8ee19",
+      "local_header": "components/shared/nanopb/runtime_nanopb_decode_fixed32.h",
+      "local_header_size": 1750,
+      "local_header_sha256": "738e4c7d4ea983b0ba967fa42cdcc61cb2e20837531bc6176b7f95a5fe8e2460",
+      "stock_span": "[0x00490190,0x004901AC)",
+      "stock_size": 28,
+      "stock_sha256": "1ee27599a8ac5b8d2a0cbaac59986fb49be7b24c348a960a216b8cbbecce5bf3",
+      "stock_read_seam": "0x0048F3BE",
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered local source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the vendor nanopb revision or checkout. The broader pristine pb_common, pb_decode, and pb_encode translation units remain unregistered."
+    },
+    "production_decode_svarint_leaf": {
+      "upstream_function": "pb_decode_svarint",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "upstream_definition_span": "pb_decode.c bytes [42912,43210)",
+      "upstream_definition_size": 298,
+      "upstream_definition_sha256": "df1caa71053163bdefaea7d6b19bdc72f10c63f09430003b88f10fb7dac3ff6e",
+      "local_source": "components/shared/nanopb/runtime_nanopb_decode_svarint.c",
+      "local_source_size": 1943,
+      "local_source_sha256": "f361cafc8813257e16fafb9ee986c88c632eb2c7edc604dcb02e27ec85a7df4d",
+      "local_header": "components/shared/nanopb/runtime_nanopb_decode_svarint.h",
+      "local_header_size": 1789,
+      "local_header_sha256": "d1ca3c0520784c4837c9570416934c7884eeeba2eba2a42091cd040d5222e72c",
+      "stock_span": "[0x00490150,0x00490190)",
+      "stock_size": 64,
+      "stock_sha256": "80b24be422cf924f3ae1b79669312535dc0d5a56dd88be8a6b9e4ee5ff064048",
+      "stock_topology": {
+        "direct_callers": [
+          "0x00490290"
+        ],
+        "direct_caller_count": 1,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "source_dependency": "open_cfw_nanopb_decode_varint",
+      "relocations": [
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_nanopb_decode_varint",
+          "target_function": "open_cfw_nanopb_decode_varint"
+        }
+      ],
+      "toolchain_profiles": {
+        "apple-clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "object_size": 972,
+          "object_sha256": "ac61ef30926a714ee4338414dcdc0de304d50b866f69a3f7c625b12c5d5a8435",
+          "size": 54,
+          "alignment": 4,
+          "offset": 124916,
+          "runtime_address": "0x007B2B18",
+          "unrelocated_sha256": "19e103f83ab8879d36eb1b0513bf541601e40bc82e69e0dc252308c0646d1286",
+          "relocated_sha256": "1b181a82adbbb72dc6fc09b1b70dd48f4c0eefdf25a8c4e71701710cb12dae3f",
+          "entry_patch_sha256": "e8c5601b86e9a38362fb292b0a8ba70250d2ccc3094d0c8c117b1c33f5bf11cc"
+        },
+        "linux-clang": {
+          "compiler": "Homebrew clang version 22.1.8",
+          "reviewed_source_root": "/Users/kalani/Repo/SybilSightABCD/openCFW",
+          "object_size": 968,
+          "object_sha256": "866820ef347453a3cbf2feed221eeab0b571a9b79b6988cc17d2861b1aeaced5",
+          "size": 50,
+          "alignment": 4,
+          "offset": 126744,
+          "runtime_address": "0x007B323C",
+          "unrelocated_sha256": "3617ea95d4a2cbabf3a1abb375e572323fffcebfa68cb4e19874cb4a831d9662",
+          "relocated_sha256": "63e4707f5fd537094855d38f6b4df8578b77644c131e180db2e682d32fbc1fab",
+          "entry_patch_sha256": "e6bb4ee4baec73757a5f465cf99a32e787fb25bd651b2b16e2e76fda4c6d18fd"
+        }
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_decode_svarint_source_replacement",
+        "source_leaf": "apollo_nanopb_decode_svarint_source_leaf"
+      },
+      "evidence": "docs/research/nanopb-decode-svarint-source-audit.md",
+      "evidence_size": 12820,
+      "evidence_sha256": "b483e5b1915f54e99e8aefd047ece54153aadc6df4af51cdc4ef1cf81cc983d0",
+      "bootloader_homolog": false,
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered local source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the vendor nanopb revision or checkout. Its only executable relocation binds directly to the separately source-owned open_cfw_nanopb_decode_varint leaf. The broader pristine pb_common, pb_decode, and pb_encode translation units remain unregistered."
+    },
+    "production_decode_varint32_eof_leaf": {
+      "license": "Zlib",
+      "upstream_function": "pb_decode_varint32_eof",
+      "pair_order": 0,
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "upstream_definition_span": "pb_decode.c bytes [5762,7483)",
+      "upstream_definition_size": 1721,
+      "upstream_definition_sha256": "66833ae2defb892aa17162625ef107bda03be44e73f0b120d48e6d2b52770e2c",
+      "upstream_extraction_rule": "Brace-balanced C definition beginning at the exact private function signature; strings, character literals, line comments, and block comments do not affect brace depth; stop immediately after the matching closing brace.",
+      "local_source": "components/shared/nanopb/runtime_nanopb_decode_varint32.c",
+      "local_source_size": 3642,
+      "local_source_sha256": "6938f17fc8faefdc1006cc05f9b7959e80fba771749ca0d9e67716e9ed0d2e04",
+      "local_header": "components/shared/nanopb/runtime_nanopb_decode_varint32.h",
+      "local_header_size": 1543,
+      "local_header_sha256": "46ad826405762ed52cee0797b0d93fc22f74b6f92aa012d26adf1b70609c4f7c",
+      "stock_span": "[0x0048F4B8,0x0048F5AE)",
+      "stock_size": 246,
+      "stock_sha256": "8583fa17383d72bbdcab6c2a7a20369dc0598d3ac3061feaf8a7b29dfa520150",
+      "patch_region": {"name": "replace_nanopb_decode_varint32_eof", "runtime_address": "0x0048F4B8", "size": 246, "stock_sha256": "8583fa17383d72bbdcab6c2a7a20369dc0598d3ac3061feaf8a7b29dfa520150"},
+      "stock_topology": {
+        "direct_callers": ["0x0048F5B2", "0x0048F682"],
+        "direct_caller_count": 2,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "source_dependency_calls": ["open_cfw_nanopb_readbyte", "open_cfw_nanopb_readbyte"],
+      "relocations": [
+        {"offset": 16, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_nanopb_readbyte", "target_function": "open_cfw_nanopb_readbyte"},
+        {"offset": 106, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_nanopb_readbyte", "target_function": "open_cfw_nanopb_readbyte"},
+        {"offset": 208, "type": "R_ARM_THM_MOVW_PREL_NC", "symbol": "open_cfw_nanopb_varint32_overflow_error"},
+        {"offset": 212, "type": "R_ARM_THM_MOVT_PREL", "symbol": "open_cfw_nanopb_varint32_overflow_error"}
+      ],
+      "literal_closure": {
+        "symbol": "open_cfw_nanopb_varint32_overflow_error",
+        "contents": "varint overflow\u0000",
+        "size": 16,
+        "alignment": 1,
+        "sha256": "e9b62825b028cfc32f718b48de14fcbc783a9009279d2c88cf4394d54767141d"
+      },
+      "toolchain_profiles": {
+        "apple-clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "object_size": 1628,
+          "object_sha256": "626893ac400caac8fa733f5740b272d218a1e32572fad4bfa636a4bce142c166",
+          "text_size": 222,
+          "text_alignment": 4,
+          "text_offset": 124972,
+          "text_runtime_address": "0x007B2B50",
+          "text_unrelocated_sha256": "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff",
+          "text_relocated_sha256": "36bb0167f4d3407b99ed2255cc9e77dd60dc1e9070781a257bfea59abc408171",
+          "closure_size": 238,
+          "closure_sha256": "2c49567cfe23e36c504586218719c2e590163bec804353c8106680328d64a480",
+          "leading_alignment_size": 2,
+          "leading_alignment_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "rodata_size": 16,
+          "rodata_alignment": 1,
+          "rodata_offset": 125194,
+          "rodata_runtime_address": "0x007B2C2E",
+          "rodata_sha256": "e9b62825b028cfc32f718b48de14fcbc783a9009279d2c88cf4394d54767141d",
+          "entry_patch_sha256": "39cbc613617df123fca8a706d6d8664f110ed5075f6586ade5947db3d7ea6450"
+        },
+        "linux-clang": {
+          "compiler": "Homebrew clang version 22.1.8",
+          "source_root": "/Users/kalani/Repo/SybilSightABCD/openCFW",
+          "object_size": 1628,
+          "object_sha256": "626893ac400caac8fa733f5740b272d218a1e32572fad4bfa636a4bce142c166",
+          "text_size": 222,
+          "text_alignment": 4,
+          "text_offset": 126796,
+          "text_runtime_address": "0x007B3270",
+          "text_unrelocated_sha256": "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff",
+          "text_relocated_sha256": "36bb0167f4d3407b99ed2255cc9e77dd60dc1e9070781a257bfea59abc408171",
+          "closure_size": 238,
+          "closure_sha256": "2c49567cfe23e36c504586218719c2e590163bec804353c8106680328d64a480",
+          "leading_alignment_size": 2,
+          "leading_alignment_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "rodata_size": 16,
+          "rodata_alignment": 1,
+          "rodata_offset": 127018,
+          "rodata_runtime_address": "0x007B334E",
+          "rodata_sha256": "e9b62825b028cfc32f718b48de14fcbc783a9009279d2c88cf4394d54767141d",
+          "exidx_result": "CANTUNWIND with exactly one same-function R_ARM_PREL31 relocation; authenticated 8-byte metadata deliberately discarded",
+          "exidx_size": 8,
+          "exidx_sha256": "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d",
+          "entry_patch_sha256": "1f64403d69443c2467c739594a66bd4f251ab9ad13cd55a2e6a42cb147788eba"
+        }
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_decode_varint32_eof_source_replacement",
+        "source_alignment": "apollo_nanopb_decode_varint32_eof_source_alignment",
+        "source_leaf": "apollo_nanopb_decode_varint32_eof_source_leaf",
+        "literal_closure": "apollo_nanopb_decode_varint32_overflow_rodata"
+      },
+      "evidence": "docs/research/nanopb-decode-varint32-pair-source-audit.md",
+      "evidence_size": 8938,
+      "evidence_sha256": "be0511c1dd4162585aa0478c5242c25e0d34d08ea6331d297c67636f784a8893",
+      "bootloader_homolog": false,
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered Zlib-licensed source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the Even Realities historical nanopb point release or checkout. The private decoder closes directly over the separately source-owned open_cfw_nanopb_readbyte leaf and its authenticated literal. No bootloader homolog exists; signing, flashing, reset, boot, and hardware execution remain deferred."
+    },
+    "production_decode_varint32_leaf": {
+      "license": "Zlib",
+      "upstream_function": "pb_decode_varint32",
+      "pair_order": 1,
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "upstream_definition_span": "pb_decode.c bytes [7485,7617)",
+      "upstream_definition_size": 132,
+      "upstream_definition_sha256": "ef3f2bd19c12b07ca055ab63f8e82ea6f4b34e67aefb277435092e7485834f0f",
+      "upstream_extraction_rule": "Brace-balanced C definition beginning at the exact public function signature; strings, character literals, line comments, and block comments do not affect brace depth; stop immediately after the matching closing brace.",
+      "local_source": "components/shared/nanopb/runtime_nanopb_decode_varint32.c",
+      "local_source_size": 3642,
+      "local_source_sha256": "6938f17fc8faefdc1006cc05f9b7959e80fba771749ca0d9e67716e9ed0d2e04",
+      "local_header": "components/shared/nanopb/runtime_nanopb_decode_varint32.h",
+      "local_header_size": 1543,
+      "local_header_sha256": "46ad826405762ed52cee0797b0d93fc22f74b6f92aa012d26adf1b70609c4f7c",
+      "stock_span": "[0x0048F5AE,0x0048F5B8)",
+      "stock_size": 10,
+      "stock_sha256": "48218a658cffd7aeddfb623c9d0e7bd038ceb2a6898e9f8d08b10d5779f4f79b",
+      "patch_region": {"name": "replace_nanopb_decode_varint32", "runtime_address": "0x0048F5AE", "size": 10, "stock_sha256": "48218a658cffd7aeddfb623c9d0e7bd038ceb2a6898e9f8d08b10d5779f4f79b"},
+      "stock_topology": {
+        "direct_callers": ["0x0048F654", "0x0048F788", "0x00490132", "0x00490362", "0x004903F6", "0x00490546"],
+        "direct_caller_count": 6,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "source_dependency_calls": ["open_cfw_nanopb_decode_varint32_eof"],
+      "relocations": [
+        {"offset": 4, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_nanopb_decode_varint32_eof", "target_function": "open_cfw_nanopb_decode_varint32_eof"}
+      ],
+      "toolchain_profiles": {
+        "apple-clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "object_size": 1628,
+          "object_sha256": "626893ac400caac8fa733f5740b272d218a1e32572fad4bfa636a4bce142c166",
+          "text_size": 10,
+          "text_alignment": 4,
+          "text_offset": 125212,
+          "text_runtime_address": "0x007B2C40",
+          "text_unrelocated_sha256": "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93",
+          "text_relocated_sha256": "1f0924d25c50933e7cd5aac05d718da6d44b7a20d4af901fa833c555eca6ff1a",
+          "leading_alignment_size": 2,
+          "leading_alignment_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "entry_patch_sha256": "d9ece4c36d9d25d448b14b93d09176014efb56468d4c4570be54a232522a04aa"
+        },
+        "linux-clang": {
+          "compiler": "Homebrew clang version 22.1.8",
+          "source_root": "/Users/kalani/Repo/SybilSightABCD/openCFW",
+          "object_size": 1628,
+          "object_sha256": "626893ac400caac8fa733f5740b272d218a1e32572fad4bfa636a4bce142c166",
+          "text_size": 10,
+          "text_alignment": 4,
+          "text_offset": 127036,
+          "text_runtime_address": "0x007B3360",
+          "text_unrelocated_sha256": "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93",
+          "text_relocated_sha256": "1f0924d25c50933e7cd5aac05d718da6d44b7a20d4af901fa833c555eca6ff1a",
+          "leading_alignment_size": 2,
+          "leading_alignment_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+          "exidx_result": "CANTUNWIND with exactly one same-function R_ARM_PREL31 relocation; authenticated 8-byte metadata deliberately discarded",
+          "exidx_size": 8,
+          "exidx_sha256": "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d",
+          "entry_patch_sha256": "7f1122db2b85b3c028dbe0c818caa26e7fee00d0e772f9ae423e369ec1d49309"
+        }
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_decode_varint32_source_replacement",
+        "source_alignment": "apollo_nanopb_decode_varint32_source_alignment",
+        "source_leaf": "apollo_nanopb_decode_varint32_source_leaf"
+      },
+      "evidence": "docs/research/nanopb-decode-varint32-pair-source-audit.md",
+      "evidence_size": 8938,
+      "evidence_sha256": "be0511c1dd4162585aa0478c5242c25e0d34d08ea6331d297c67636f784a8893",
+      "bootloader_homolog": false,
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered Zlib-licensed source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the Even Realities historical nanopb point release or checkout. The public wrapper calls the private source-owned decoder directly with no opaque dependency. No bootloader homolog exists; signing, flashing, reset, boot, and hardware execution remain deferred."
+    },
+    "production_skip_string_leaf": {
+      "license": "Zlib",
+      "upstream_function": "pb_skip_string",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "authenticated_release_definitions": [
+        {"release": "0.4.7", "commit": "b97aa657a706d3ba4a9a6ccca7043c9d6fe41cba", "span": "pb_decode.c bytes [8276,8575)", "size": 299, "sha256": "8da14b4cc741fc15884b11d3447d0c2c529f65c31b3823170837229d36f81585"},
+        {"release": "0.4.8", "commit": "6cfe48d6f1593f8fa5c0f90437f5e6522587745e", "span": "pb_decode.c bytes [8276,8575)", "size": 299, "sha256": "8da14b4cc741fc15884b11d3447d0c2c529f65c31b3823170837229d36f81585"},
+        {"release": "0.4.9", "commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824", "span": "pb_decode.c bytes [8362,8661)", "size": 299, "sha256": "8da14b4cc741fc15884b11d3447d0c2c529f65c31b3823170837229d36f81585"}
+      ],
+      "local_source": "components/shared/nanopb/runtime_nanopb_skip_string.c",
+      "local_source_size": 1688,
+      "local_source_sha256": "b1f492b0358e51ce89db622e4af13a7f1eef7ffce9fc81fd954609cdcd934876",
+      "local_header": "components/shared/nanopb/runtime_nanopb_skip_string.h",
+      "local_header_size": 1732,
+      "local_header_sha256": "807fb52ae19de372024ebea64268aca011e573e9ad6d4247e911b2e037058303",
+      "stock_span": "[0x0048F64C,0x0048F66C)",
+      "stock_size": 32,
+      "stock_sha256": "03afe2d60436676fffba342c7b8c9504992fa903d7cba768396fd1de2c6c66cd",
+      "stock_topology": {
+        "direct_callers": ["0x0048F6C6"],
+        "direct_caller_count": 1,
+        "caller_encoding": "fff7c1ff",
+        "caller_span": "[0x0048F6A0,0x0048F6EA)",
+        "caller_span_sha256": "36089daffbbc82abad65d97ae0fd64b58b8ad227ed585aa704611bc30369912d",
+        "outgoing_calls": [
+          {"call_site": "0x0048F654", "target": "0x0048F5AE", "provider": "open_cfw_nanopb_decode_varint32"},
+          {"call_site": "0x0048F666", "target": "0x0048F3BE", "provider": "open_cfw_nanopb_read"}
+        ],
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "source_dependency_calls": ["open_cfw_nanopb_decode_varint32", "open_cfw_nanopb_read"],
+      "relocations": [
+        {"offset": 8, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_nanopb_decode_varint32", "target_function": "open_cfw_nanopb_decode_varint32"},
+        {"offset": 20, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_nanopb_read", "target_function": "open_cfw_nanopb_read"}
+      ],
+      "patch_region": {"name": "replace_nanopb_skip_string", "runtime_address": "0x0048F64C", "size": 32, "stock_sha256": "03afe2d60436676fffba342c7b8c9504992fa903d7cba768396fd1de2c6c66cd", "branch": "b_w"},
+      "manifest_regions": {
+        "entry_replacement": "nanopb_skip_string_source_replacement",
+        "official_successor": "opaque_application_between_nanopb_skip_string_and_nanopb_close_string_substream",
+        "source_alignment": "apollo_nanopb_skip_string_source_alignment",
+        "source_leaf": "apollo_nanopb_skip_string_source_leaf"
+      },
+      "evidence": "docs/research/nanopb-skip-string-source-audit.md",
+      "evidence_size": 6632,
+      "evidence_sha256": "e1465b8f8fc220907f811df2c354e91a2e1a4e7149edeb4c56ffa7d94246e2ee",
+      "compatibility": "Altered Zlib-licensed source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the Even Realities historical nanopb point release or checkout.",
+      "bootloader_homolog": false,
+      "hardware_boundary": "No signing, flashing, reset, boot, or hardware execution is claimed.",
+      "toolchain_profiles": {
+        "apple-clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "source_root": "/tmp/opencfw-skip-string-task2-apple/openCFW",
+          "object_size": 988,
+          "object_sha256": "d2bdca5570c8e7a0ee1adfc9decfb3ad54f6c77abe7c7e3f05e0e3dd9f1c5bbe",
+          "text_size": 34,
+          "text_alignment": 4,
+          "text_unrelocated_sha256": "d3216f569354900680dae5d78350af7668be4d8fbdae64a47afc4f440b0df920",
+          "exidx_result": "CANTUNWIND with exactly one same-function R_ARM_PREL31 relocation; authenticated 8-byte metadata deliberately discarded",
+          "exidx_size": 8,
+          "exidx_sha256": "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d",
+          "text_offset": 125224,
+          "text_runtime_address": "0x007B2C4C",
+          "text_relocated_sha256": "3b1a0dbe465d562770e02d5afe04357087a6bfee22342a0f6844986a0161f547",
+          "leading_alignment_size": 2,
+          "entry_patch_sha256": "86ba480676461c25f262f93c3d1cc0e0e6080e6c44c367a261e1ac857ce81c3d"
+        },
+        "linux-clang": {
+          "compiler": "Homebrew clang version 22.1.8",
+          "source_root": "/Users/kalani/Repo/SybilSightABCD/openCFW",
+          "object_size": 988,
+          "object_sha256": "d2bdca5570c8e7a0ee1adfc9decfb3ad54f6c77abe7c7e3f05e0e3dd9f1c5bbe",
+          "text_size": 34,
+          "text_alignment": 4,
+          "text_unrelocated_sha256": "d3216f569354900680dae5d78350af7668be4d8fbdae64a47afc4f440b0df920",
+          "exidx_result": "CANTUNWIND with exactly one same-function R_ARM_PREL31 relocation; authenticated 8-byte metadata deliberately discarded",
+          "exidx_size": 8,
+          "exidx_sha256": "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d",
+          "text_offset": 127048,
+          "text_runtime_address": "0x007B336C",
+          "text_relocated_sha256": "3b1a0dbe465d562770e02d5afe04357087a6bfee22342a0f6844986a0161f547",
+          "leading_alignment_size": 2,
+          "entry_patch_sha256": "738d3ad448d28a408c0aaa76f7c7188181966ac44bc22afe675bde4fd83a9f7d"
+        }
+      },
+      "aggregates": {
+        "apple-clang": {
+          "configuration_inventory": {"functions": 664, "patch_sites": 613, "relocated_leaves": 95},
+          "emitted_report": {"functions": 660, "patch_sites": 609, "relocated_leaves": 91},
+          "manifest_region_count": 960,
+          "overlay": {"size": 125258, "sha256": "1f71240bd75af28798d93eba217b99464156ee40ae353333c2fd0f449b9a8c76"},
+          "component": {"size": 3648654, "sha256": "36b7f32f9f5f1a4c2fbf800b8cda0f48aa521bfc87638d671932b80b49f7e991"},
+          "package": {"size": 4427148, "sha256": "532743c6a1b96f198f0991c320bf3318eac88bc538a90a9e0b0267aaacef07b3"},
+          "component_build_report": {"size": 1525641, "sha256": "626364c48e2c2916fb44b48525eb9b08d8a386196787122dc48304e1b0f713d3"},
+          "package_build_report": {"size": 2323, "sha256": "19972d9794b3b6ac6272b2c5d5cd782e528378fcdce4133b9f0856caf6e36f4a"},
+          "flash_plan": {"size": 740977, "sha256": "b4b6e72d4ff7be47ca96a845a943320dfb65732c1de10d2bbb18051626cf2f95", "programmed": 1032, "preserved": 2, "skipped": 5},
+          "package_ownership": {"source_owned": 126028, "generated": 88659, "opaque": 4212461},
+          "manifest": {"size": 514359, "sha256": "5ebe8335d0e6c0738948df5cf6e054f0b6154aa4664d88467fc1582fe07dfe17"}
+        },
+        "linux-clang": {
+          "configuration_inventory": {"functions": 664, "patch_sites": 613, "relocated_leaves": 95},
+          "emitted_report": {"functions": 664, "patch_sites": 613, "relocated_leaves": 95},
+          "manifest_region_count": 960,
+          "effective_flash_region_count": 848,
+          "overlay": {"size": 127082, "sha256": "f24cf0e060530429679df9389571ffee397819dfa2c3abc00d26deb75a3e47ad"},
+          "component": {"size": 3650478, "sha256": "5fe58e3af2a0b7fed55c6b7c33afbd1ac5c887860721b04859e2d49d81be828c"},
+          "package": {"size": 4428972, "sha256": "22117e0cd7d0b827a8c31d22eb509edb30651fef6a6308838a8220ff80f6c702"},
+          "component_build_report": {"size": 1545743, "sha256": "3e67859fefa8a82b615babb725cc662f957b3c3e902d6a26b74716841fd69182"},
+          "package_build_report": {"size": 2322, "sha256": "91c854c0a580bdd2cbc961a47b3f89943920c109b5baaa9a7e40a73ccb520fb5"},
+          "flash_plan": {"size": 605604, "sha256": "9da3d20004434bace4a5af3b88c720de1a38eb8b6cfda426f0d053309bbca327", "programmed": 848, "preserved": 2, "skipped": 5},
+          "package_ownership": {"source_owned": 127963, "generated": 88548, "opaque": 4212461},
+          "manifest": {"size": 514359, "sha256": "5ebe8335d0e6c0738948df5cf6e054f0b6154aa4664d88467fc1582fe07dfe17"}
+        }
+      }
+    },
+    "production_skip_field_leaf": {
+      "license": "Zlib",
+      "upstream_function": "pb_skip_field",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "authenticated_release_range": "0.4.7--0.4.9",
+      "upstream_definition_span": "pb_decode.c bytes [9043,9458)",
+      "upstream_definition_size": 415,
+      "upstream_definition_sha256": "4f447e98f77d58030aa39bf1d0e936b01253f828440f362336f96a8d7c679be1",
+      "local_source": "components/shared/nanopb/runtime_nanopb_skip_field.c",
+      "local_source_size": 2417,
+      "local_source_sha256": "b0fbb6fc99f0a47a40e53662393a43c88b01d29d4b4457910b9f6be8063e7353",
+      "local_header": "components/shared/nanopb/runtime_nanopb_skip_field.h",
+      "local_header_size": 2152,
+      "local_header_sha256": "9a76c3455119f814be099085c5fac2e2394c4a293e10c2e74d9bc33cf21866a4",
+      "stock_span": "[0x0048F6A0,0x0048F6EA)",
+      "stock_size": 74,
+      "stock_sha256": "36089daffbbc82abad65d97ae0fd64b58b8ad227ed585aa704611bc30369912d",
+      "stock_topology": {
+        "direct_callers": ["0x0048FB44", "0x0048FFBE"],
+        "direct_caller_count": 2,
+        "outgoing_calls": [
+          {"call_site": "0x0048F6B6", "provider": "open_cfw_nanopb_skip_varint"},
+          {"call_site": "0x0048F6C0", "provider": "open_cfw_nanopb_read", "count": 8},
+          {"call_site": "0x0048F6C6", "provider": "open_cfw_nanopb_skip_string"},
+          {"call_site": "0x0048F6D0", "provider": "open_cfw_nanopb_read", "count": 4}
+        ],
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "source_dependency_calls": ["open_cfw_nanopb_read", "open_cfw_nanopb_skip_varint", "open_cfw_nanopb_skip_string"],
+      "source_rodata": {"symbol": "open_cfw_nanopb_invalid_wire_type_error", "size": 18, "sha256": "6e35ebc2e585a3ca08ee2d60871a7d16749421ae2b6c1a33bb20c50175e1048a"},
+      "relocations": [
+        {"offset": 14, "type": "R_ARM_THM_JUMP24", "symbol": "open_cfw_nanopb_read", "target_function": "open_cfw_nanopb_read"},
+        {"offset": 30, "type": "R_ARM_THM_JUMP24", "symbol": "open_cfw_nanopb_read", "target_function": "open_cfw_nanopb_read"},
+        {"offset": 42, "type": "R_ARM_THM_JUMP24", "symbol": "open_cfw_nanopb_skip_varint", "target_function": "open_cfw_nanopb_skip_varint"},
+        {"offset": 46, "type": "R_ARM_THM_JUMP24", "symbol": "open_cfw_nanopb_skip_string", "target_function": "open_cfw_nanopb_skip_string"},
+        {"offset": 50, "type": "R_ARM_THM_MOVW_PREL_NC", "symbol": "open_cfw_nanopb_invalid_wire_type_error"},
+        {"offset": 54, "type": "R_ARM_THM_MOVT_PREL", "symbol": "open_cfw_nanopb_invalid_wire_type_error"}
+      ],
+      "patch_region": {"name": "replace_nanopb_skip_field", "runtime_address": "0x0048F6A0", "size": 74, "stock_sha256": "36089daffbbc82abad65d97ae0fd64b58b8ad227ed585aa704611bc30369912d", "branch": "b_w"},
+      "manifest_regions": {
+        "entry_replacement": "nanopb_skip_field_source_replacement",
+        "official_predecessor": "opaque_application_between_nanopb_skip_string_and_nanopb_close_string_substream",
+        "official_successor": "opaque_application_between_nanopb_skip_field_and_nanopb_close_string_substream",
+        "source_alignment": "apollo_nanopb_skip_field_source_alignment",
+        "source_leaf": "apollo_nanopb_skip_field_source_leaf",
+        "source_rodata": "apollo_nanopb_skip_field_error_rodata"
+      },
+      "evidence": "docs/research/nanopb-skip-field-source-candidate-audit.md",
+      "evidence_size": 5382,
+      "evidence_sha256": "9358ffec368cf8a9d27947ed554083f08bbe03d6b2c619090f82827fe6b31b86",
+      "compatibility": "Altered Zlib-licensed source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the Even Realities historical nanopb point release or checkout.",
+      "bootloader_homolog": false,
+      "hardware_boundary": "No signing, flashing, reset, boot, or hardware execution is claimed.",
+      "toolchain_profiles": {
+        "apple-clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "object_size": 1212,
+          "object_sha256": "b33f904946842af2f5bd5e12429362b13f0b90943a635e1532bc3ee568699158",
+          "text_size": 66,
+          "text_alignment": 4,
+          "text_unrelocated_sha256": "893a37e8366996cbea7d54f63bcc81700e7feab62c4414d01b1f818aa9b77dd4",
+          "text_offset": 125260,
+          "text_runtime_address": "0x007B2C70",
+          "text_relocated_sha256": "31037e87e7a667852271b7fa3be6543232376b1ee6e10443517d75f1dc4126ca",
+          "closure_size": 84,
+          "closure_sha256": "72fad2dba75d1fbbc06b3c0e3d250579b5116a1cb793b7886ff5c62b49f3004e",
+          "leading_alignment_size": 2,
+          "exidx_result": "CANTUNWIND with exactly one same-function R_ARM_PREL31 relocation; authenticated 8-byte metadata deliberately discarded",
+          "exidx_size": 8,
+          "exidx_sha256": "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d"
+        },
+        "linux-clang": {
+          "status": "pending_reviewed_toolchain_reproduction",
+          "required_compiler": "Homebrew clang version 22.1.8",
+          "qualification": "No Linux object, placement, or aggregate pins are inferred from the Apple build."
+        }
+      },
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 665, "patch_sites": 614, "relocated_leaves": 96},
+        "emitted_report": {"functions": 661, "patch_sites": 610, "relocated_leaves": 92},
+        "manifest_region_count": 965,
+        "overlay": {"size": 125344, "sha256": "c47822a6b396ab9d78d7418ed4966e97587a98f180d07dee73040b1f3167a7b5"},
+        "component": {"size": 3648740, "sha256": "2e460c5a4f30957942d7e6094cb3b6099606b8dc9f011641a5e0487905c30a47"},
+        "package": {"size": 4427234, "sha256": "c6d8b103c3cbed46e22056dd9b264549d17cc5e9f6bde44a51982b2f72a488d5"},
+        "flash_plan": {"programmed": 1037, "preserved": 2, "skipped": 5},
+        "package_ownership": {"source_owned": 126112, "generated": 88735, "opaque": 4212387}
+      }
+    },
+    "production_read_raw_value_leaf": {
+      "license": "Zlib",
+      "upstream_function": "read_raw_value",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "authenticated_release_range": "0.4.7--0.4.9",
+      "upstream_definition_span": "pb_decode.c bytes [9612,10656)",
+      "upstream_definition_size": 1044,
+      "upstream_definition_sha256": "a4c975f632934b80ee707520096f428a670516d4dc7368ac6c9a5959da83ded6",
+      "local_source": "components/shared/nanopb/runtime_nanopb_read_raw_value.c",
+      "local_source_size": 2762,
+      "local_source_sha256": "e8d9e5da342086614ef842849bba068daf72bbca52a24a24293f3ec7ac6e20f5",
+      "local_header": "components/shared/nanopb/runtime_nanopb_read_raw_value.h",
+      "local_header_size": 1719,
+      "local_header_sha256": "59caa890004c376aa08d9eff6fe6525694a05d0cc878484be7a83b51c413aca4",
+      "stock_span": "[0x0048F6EA,0x0048F77E)",
+      "stock_size": 148,
+      "stock_sha256": "1e970a9b198943e309550811010fc1ba4008d671d023abfc5c893b965fee2bc9",
+      "stock_topology": {
+        "direct_callers": ["0x0048FBBE"],
+        "direct_caller_count": 1,
+        "outgoing_calls": [
+          {"call_site": "0x0048F71A", "provider": "open_cfw_nanopb_read"},
+          {"call_site": "0x0048F754", "provider": "open_cfw_nanopb_read"},
+          {"call_site": "0x0048F764", "provider": "open_cfw_nanopb_read"}
+        ],
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "source_dependency_calls": ["open_cfw_nanopb_read"],
+      "source_rodata": {
+        "symbol": "open_cfw_nanopb_raw_errors",
+        "size": 34,
+        "sha256": "00cc371a291caa8db335b89568275a82eda4075b086c285c8fafb674f6cb09f7"
+      },
+      "relocations": [
+        {"offset": 44, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_nanopb_read", "target_function": "open_cfw_nanopb_read"},
+        {"offset": 90, "type": "R_ARM_THM_JUMP24", "symbol": "open_cfw_nanopb_read", "target_function": "open_cfw_nanopb_read"},
+        {"offset": 98, "type": "R_ARM_THM_MOVW_PREL_NC", "symbol": "open_cfw_nanopb_raw_errors"},
+        {"offset": 102, "type": "R_ARM_THM_MOVT_PREL", "symbol": "open_cfw_nanopb_raw_errors"},
+        {"offset": 116, "type": "R_ARM_THM_MOVW_PREL_NC", "symbol": "open_cfw_nanopb_raw_errors"},
+        {"offset": 120, "type": "R_ARM_THM_MOVT_PREL", "symbol": "open_cfw_nanopb_raw_errors"}
+      ],
+      "patch_region": {
+        "name": "replace_nanopb_read_raw_value",
+        "runtime_address": "0x0048F6EA",
+        "size": 148,
+        "stock_sha256": "1e970a9b198943e309550811010fc1ba4008d671d023abfc5c893b965fee2bc9",
+        "branch": "b_w"
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_read_raw_value_source_replacement",
+        "official_successor": "opaque_application_between_nanopb_read_raw_value_and_nanopb_close_string_substream",
+        "source_leaf": "apollo_nanopb_read_raw_value_source_leaf",
+        "source_rodata": "apollo_nanopb_read_raw_value_error_rodata"
+      },
+      "evidence": "docs/research/nanopb-raw-substream-boundary-audit.md",
+      "evidence_size": 6345,
+      "evidence_sha256": "e962d5bcd0bdaf2f9a75f25372901502b4e0fde04766d850ffddb844c987fd31",
+      "compatibility": "Altered Zlib-licensed source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the Even Realities historical nanopb point release or checkout.",
+      "bootloader_homolog": false,
+      "hardware_boundary": "No signing, flashing, reset, boot, or hardware execution is claimed.",
+      "toolchain_profiles": {
+        "apple-clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "object_size": 1208,
+          "object_sha256": "b16359b1d931b3efa718d583776576546d1fde7dbca2de95658e07410812759c",
+          "text_size": 134,
+          "text_alignment": 4,
+          "text_unrelocated_sha256": "6c851acf04b751f90e485e687dc606e02c0bdde0a9dbc8729a915b3937599356",
+          "text_offset": 125344,
+          "text_runtime_address": "0x007B2CC4",
+          "text_relocated_sha256": "9bb42749b65a0adeefd2fa4136a441cd638a9120d1d8c94715ccf79302d8bba8",
+          "closure_size": 168,
+          "closure_sha256": "cffa185a70f039bc04ae9e095e8a40b1b95f14df0c1525a7091e411c8ec230e4",
+          "leading_alignment_size": 0,
+          "exidx_result": "CANTUNWIND with exactly one same-function R_ARM_PREL31 relocation; authenticated 8-byte metadata deliberately discarded",
+          "exidx_size": 8,
+          "exidx_sha256": "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d"
+        },
+        "linux-clang": {
+          "status": "pending_reviewed_toolchain_reproduction",
+          "required_compiler": "Homebrew clang version 22.1.8",
+          "qualification": "No Linux object, placement, or aggregate pins are inferred from the Apple build."
+        }
+      },
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 666, "patch_sites": 615, "relocated_leaves": 97},
+        "emitted_report": {"functions": 662, "patch_sites": 611, "relocated_leaves": 93},
+        "manifest_region_count": 968,
+        "overlay": {"size": 125512, "sha256": "7e41215f2f1ef43e960a1d702c5c25a560a853810769b8f6346db811ec0c734a"},
+        "component": {"size": 3648908, "sha256": "c39c50f489e2f53a7822a7ff90df86e66669a2b1c486fb62c09516fe2f68e4f9"},
+        "package": {"size": 4427402, "sha256": "c689411618ec2d8bb63cd0d62174c251b8f65fc261ee0861cdc2ebf336f0efa7"},
+        "component_build_report": {"size": 1545697, "sha256": "adc82f72a86c75ca6085e504eb3fb073954446ad3e9e9148f2c420a3a8f14062"},
+        "package_build_report": {"size": 2323, "sha256": "fe0797952d75ba55d06e05a8e96291e1bbabd725f4a99f6147d96f3bc25de349"},
+        "flash_plan": {"size": 746718, "sha256": "ad6883e55eb3604bfb04d9e4f25a32e04de75fb67a18f86f77624821cea35416", "programmed": 1040, "preserved": 2, "skipped": 5},
+        "package_ownership": {"source_owned": 126280, "generated": 88883, "opaque": 4212239},
+        "manifest": {"size": 518436, "sha256": "064dc639886adb430ef8b8ea01dcad67b140d73c448120ff32b51fb05b1a7f44"}
+      }
+    },
+    "production_make_string_substream_leaf": {
+      "license": "Zlib",
+      "upstream_function": "pb_make_string_substream",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "authenticated_release_range": "0.4.7--0.4.9",
+      "upstream_definition_span": "pb_decode.c bytes [10811,11222)",
+      "upstream_definition_size": 411,
+      "upstream_definition_sha256": "2a7f4dcaef603858918bcc6eac47039308e336ee74d439af6abc257ddcd9a0d8",
+      "local_source": "components/shared/nanopb/runtime_nanopb_make_string_substream.c",
+      "local_source_size": 2734,
+      "local_source_sha256": "85f543a33de5b543ac29a5422983eaf7cd06af4e236a2453a3f658020ecba15b",
+      "local_header": "components/shared/nanopb/runtime_nanopb_make_string_substream.h",
+      "local_header_size": 1551,
+      "local_header_sha256": "92e7c1eb37799fd09b4682a0ee45ba496d8c37f08ce7047a7b62bc1a73b8cda7",
+      "stock_span": "[0x0048F77E,0x0048F7CA)",
+      "stock_size": 76,
+      "stock_sha256": "db925e0c532bac2f2e38f398c7b7d99669afe4d41e6690b08116e9f06ec7d88d",
+      "stock_callers": ["0x0048F9DA", "0x0048FB56", "0x0049049C"],
+      "stock_copy_seam": {
+        "provider_span": "[0x00439BE4,0x00439C8A)",
+        "provider_sha256": "8e696e1fb54917a436f850e562f74e8cc8734c259fdaac9f767a3c264ff427cd",
+        "aligned_interior_entry": "0x00439C04",
+        "call_site": "0x0048F79A",
+        "count": 16,
+        "production_policy": "four named 32-bit ABI-field assignments; no compiler-runtime relocation"
+      },
+      "source_dependency_calls": ["open_cfw_nanopb_decode_varint32"],
+      "source_rodata": {"symbol": "open_cfw_nanopb_parent_too_short_error", "size": 24, "sha256": "ad56a096e4d8599a2d1ab4eddf3012ca093e63ef13a6d99cabde7680d4ae0401"},
+      "relocations": [
+        {"offset": 10, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_nanopb_decode_varint32", "target_function": "open_cfw_nanopb_decode_varint32"},
+        {"offset": 40, "type": "R_ARM_THM_MOVW_PREL_NC", "symbol": "open_cfw_nanopb_parent_too_short_error"},
+        {"offset": 44, "type": "R_ARM_THM_MOVT_PREL", "symbol": "open_cfw_nanopb_parent_too_short_error"}
+      ],
+      "patch_region": {"name": "replace_nanopb_make_string_substream", "runtime_address": "0x0048F77E", "size": 76, "stock_sha256": "db925e0c532bac2f2e38f398c7b7d99669afe4d41e6690b08116e9f06ec7d88d", "branch": "b_w"},
+      "manifest_regions": {"entry_replacement": "nanopb_make_string_substream_source_replacement", "source_leaf": "apollo_nanopb_make_string_substream_source_leaf", "source_rodata": "apollo_nanopb_make_string_substream_error_rodata"},
+      "evidence": "docs/research/nanopb-raw-substream-boundary-audit.md",
+      "evidence_size": 6345,
+      "evidence_sha256": "e962d5bcd0bdaf2f9a75f25372901502b4e0fde04766d850ffddb844c987fd31",
+      "compatibility": "Altered Zlib-licensed source selected against authenticated nanopb 0.4.9 within the source-equivalent 0.4.7-0.4.9 range; not proof of the vendor checkout.",
+      "toolchain_profiles": {
+        "apple-clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "object_size": 1156,
+          "object_sha256": "2a38da3f37189bd265413d460ff30c10ccf916ce6d89eef71c4e12b9da3fc71b",
+          "text_size": 72,
+          "text_unrelocated_sha256": "edbbae60795141997eaee9a0050783071d26c61c845dff5a222e013cd7b62825",
+          "text_offset": 125512,
+          "text_runtime_address": "0x007B2D6C",
+          "text_relocated_sha256": "ee2437609fdbd2cde3b07e1bd5534c5b44feb06ba27a27318ef814568162dc01",
+          "closure_size": 96,
+          "closure_sha256": "b04439cdc14874d78b48ed35be5797455cb3be7c3fb2b811adf3397e06256202"
+        },
+        "linux-clang": {"status": "pending_reviewed_toolchain_reproduction", "required_compiler": "Homebrew clang version 22.1.8"}
+      },
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 667, "patch_sites": 616, "relocated_leaves": 98},
+        "emitted_report": {"functions": 663, "patch_sites": 612, "relocated_leaves": 94},
+        "manifest_region_count": 970,
+        "overlay": {"size": 125608, "sha256": "4c01357f49e9bc34bf5e702c82a5e758c53b2bf86af4f19e6985dae575fc86e6"},
+        "component": {"size": 3649004, "sha256": "58d687d97b43a33723bb5c5fa1d2409d483b939a41ca9d775edd22cc25597bc4"},
+        "package": {"size": 4427498, "sha256": "98c534a34f9cff4bc916a3035c0b56092cb68e3616931a1049ae685594f1153d"},
+        "flash_plan": {"programmed": 1042, "preserved": 2, "skipped": 5},
+        "package_ownership": {"source_owned": 126376, "generated": 88959, "opaque": 4212163}
+      }
+    },
+    "production_bool_cluster": {
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated 0.4.7-0.4.9 compatible range",
+      "public": {
+        "upstream_function": "pb_decode_bool",
+        "upstream_definition_span": "pb_decode.c bytes [42715,42911)",
+        "upstream_definition_size": 196,
+        "upstream_definition_sha256": "5db66c94774daecd96a5daf5d83ff441462e4793a76638ef096f82d1c3a9c38f",
+        "local_source": "components/shared/nanopb/runtime_nanopb_decode_bool.c",
+        "local_source_size": 1592,
+        "local_source_sha256": "ac020d4746af6c6e68dbf10eb796475f3e39fbc63e253fa4320a265f508ca286",
+        "local_header": "components/shared/nanopb/runtime_nanopb_decode_bool.h",
+        "local_header_size": 1632,
+        "local_header_sha256": "9dfa4eb516bf8394af1d68fdd294ba60d3e7531301a1a2e20fc1474446ae455a",
+        "stock_span": "[0x0049012C,0x00490150)",
+        "stock_size": 36,
+        "stock_sha256": "946ebcb7df90360a19f331bbe5c3962deade8c0525ce4c3ef2d1698263e94b1e",
+        "stock_callers": ["0x004901D0"],
+        "source_dependency": "open_cfw_nanopb_decode_varint32",
+        "relocation": {"offset": 8, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_nanopb_decode_varint32", "target_function": "open_cfw_nanopb_decode_varint32"},
+        "apple_clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "object_size": 936,
+          "object_sha256": "52b965c6ba1ed396a5407bbe83b7a8793b3a7098e371507590ac5fbc70c798c3",
+          "text_size": 28,
+          "text_unrelocated_sha256": "78ba0cb5e4d04780ccf342901f5b391cb7e83c1ddaea2f4c16568b2046c55565",
+          "text_offset": 125608,
+          "runtime_address": "0x007B2DCC",
+          "text_relocated_sha256": "740079cb6d09fc781988afdffaef731dcc7b3f077270cc6838d640f3bd442dfb",
+          "entry_patch_sha256": "320c3cf0e367dd80e427d586702c429c33908fdd572c0c7c514274d393fe4f4c"
+        }
+      },
+      "adapter": {
+        "upstream_function": "pb_dec_bool",
+        "upstream_definition_span": "pb_decode.c bytes [44696,44844)",
+        "upstream_definition_size": 148,
+        "upstream_definition_sha256": "e3e930719ed531df7d647cdf9ecd002c522c2d4d55e6f8299c258532713f6e6c",
+        "local_source": "components/shared/nanopb/runtime_nanopb_dec_bool.c",
+        "local_source_size": 1508,
+        "local_source_sha256": "8f2c510bba9eb1fdec823b0855fb17ee08aad39bae6e863369a9877cdb700674",
+        "local_header": "components/shared/nanopb/runtime_nanopb_dec_bool.h",
+        "local_header_size": 2038,
+        "local_header_sha256": "d6867428ea9adfe2552199d9716c72e7fb83db6f116c0c390051c7e82132a34a",
+        "stock_span": "[0x004901CC,0x004901D6)",
+        "stock_size": 10,
+        "stock_sha256": "572c2ada01c7ee81d56e65766e4e7219783592d34f3399ee6bc761b7c494f3e7",
+        "stock_callers": ["0x0048F848"],
+        "source_dependency": "open_cfw_nanopb_decode_bool",
+        "relocation": {"offset": 2, "type": "R_ARM_THM_JUMP24", "symbol": "open_cfw_nanopb_decode_bool", "target_function": "open_cfw_nanopb_decode_bool"},
+        "apple_clang": {
+          "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+          "object_size": 904,
+          "object_sha256": "29cb46491f2b9e0afc48bfc2ddc32bb57d6504a480220b7c1fc0e05a0f2c5d53",
+          "text_size": 6,
+          "text_unrelocated_sha256": "9b19b7f735da3d5d0e070ed5728ee0ece919d6a6a40891554cb611112067b452",
+          "text_offset": 125636,
+          "runtime_address": "0x007B2DE8",
+          "text_relocated_sha256": "f167416fe762edc4e2f78fa03d83a26df55774635ae39a3e641596a15af26d64",
+          "entry_patch_sha256": "4ef15d913b67ef0e6f8af3f7b072f1fb7a7eb3ed980955b030ccbfd7bc6509f7"
+        }
+      },
+      "configuration": {
+        "bool_size": 1,
+        "pointer_size": 4,
+        "field_iter_size": 40,
+        "field_data_offset": 28,
+        "stock_data_seam_count": 0
+      },
+      "manifest_regions": {
+        "public_entry": "nanopb_decode_bool_source_replacement",
+        "public_leaf": "apollo_nanopb_decode_bool_source_leaf",
+        "adapter_entry": "nanopb_dec_bool_source_replacement",
+        "adapter_leaf": "apollo_nanopb_dec_bool_source_leaf"
+      },
+      "evidence": "docs/research/nanopb-bool-cluster-source-audit.md",
+      "linux_clang": {"status": "pending_reviewed_toolchain_reproduction", "required_compiler": "Homebrew clang version 22.1.8"},
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 669, "patch_sites": 618, "relocated_leaves": 100},
+        "emitted_report": {"functions": 665, "patch_sites": 614, "relocated_leaves": 96},
+        "manifest_region_count": 974,
+        "overlay": {"size": 125642, "sha256": "1b3b0079c710cd4eab93e3a2fdf9b08df541e31ac127e222ea584cff3e639997"},
+        "component": {"size": 3649038, "sha256": "589379f0eec3008700d74277b61e006c264f5e89f8db4505cba302c602d0baa8"},
+        "package": {"size": 4427532, "sha256": "8d48624d32ba7303eb7bbb65aa5e3280177ae97f31a6af2facbf68eadcf3100f"},
+        "flash_plan": {"size": 751001, "sha256": "07527dbc81492435c093e9008c1ecae5b7fe6b3c08273fa3983a3b1802ca4c44", "programmed": 1046, "preserved": 2, "skipped": 5},
+        "package_ownership": {"source_owned": 126410, "generated": 89005, "opaque": 4212117}
+      }
+    },
+    "production_dec_varint_leaf": {
+      "upstream_function": "pb_dec_varint",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated 0.4.7-0.4.9 compatible range",
+      "upstream_definition_span": "pb_decode.c bytes [44845,47571)",
+      "upstream_definition_size": 2726,
+      "upstream_definition_sha256": "be9044f37413d5f5ccacf8b94473552824d913037aa23ff853c59bd77c111b93",
+      "local_source": "components/shared/nanopb/runtime_nanopb_dec_varint.c",
+      "local_source_size": 4579,
+      "local_source_sha256": "e5638a305dde899b62aa7965015eece645cd2e892fa37c31430ee84e02886092",
+      "local_header": "components/shared/nanopb/runtime_nanopb_dec_varint.h",
+      "local_header_size": 2126,
+      "local_header_sha256": "a3454bd8400f38da67f9b4a74dc2bf9c3365f0b1b63b2df8a085c50fcff7154a",
+      "stock_span": "[0x004901D6,0x00490352)",
+      "stock_size": 380,
+      "stock_sha256": "ccae20aa7dff8515a5a2b6ad4a05248a865dfaa8c912fd38c8c5f77c3a6a8e0a",
+      "stock_callers": ["0x0048F872"],
+      "stock_topology": {
+        "direct_caller_count": 1,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "source_dependencies": [
+        "open_cfw_nanopb_decode_varint",
+        "open_cfw_nanopb_decode_svarint"
+      ],
+      "source_rodata": {
+        "symbol": "open_cfw_nanopb_dec_varint_errors",
+        "size": 36,
+        "sha256": "42b784209d1e9ff26348f821c401beb47dfdda57c3a399c0c28b002f52540f0f"
+      },
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "object_size": 1452,
+        "object_sha256": "02f0886edcb5466cafec9d3904bda0a1ab88a8ab1ae5b9ecd12fb0f5d2c82e20",
+        "text_size": 304,
+        "text_offset": 125644,
+        "runtime_address": "0x007B2DF0",
+        "text_unrelocated_sha256": "87d285297c00b55c45b2ec5705495c772f80f1331ab54667fb7d9f4b3196efad",
+        "text_relocated_sha256": "b1e508ee7571c033c7beb95301e6323e226b5865e7c9a9c45fd11a2c7c590125",
+        "closure_size": 340,
+        "closure_sha256": "b015c63f85d575a9d181d2c8c51b5387c86b8759ec6b29e81f48824b2b1dfaca",
+        "rodata_runtime_address": "0x007B2F20",
+        "entry_patch_sha256": "83503acd8c8719da6e706a535cf9fea83d8be887fdfcf57fc040830e8a6cf5e5"
+      },
+      "linux_clang": {
+        "status": "pending_reviewed_toolchain_reproduction",
+        "required_compiler": "Homebrew clang version 22.1.8"
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_dec_varint_source_replacement",
+        "source_alignment": "apollo_nanopb_dec_varint_source_alignment",
+        "source_leaf": "apollo_nanopb_dec_varint_source_leaf",
+        "source_rodata": "apollo_nanopb_dec_varint_error_rodata"
+      },
+      "evidence": "docs/research/nanopb-dec-varint-source-audit.md",
+      "evidence_size": 6035,
+      "evidence_sha256": "4665f2eb07438f40937d3c46852c0266cda854ce73056bdd8687f835567c0117",
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 670, "patch_sites": 619, "relocated_leaves": 101},
+        "emitted_report": {"functions": 666, "patch_sites": 615, "relocated_leaves": 97},
+        "manifest_region_count": 978,
+        "overlay": {"size": 125984, "sha256": "22a9696573e83ba0d79664dcfbdf4d7424fa326bcb5e95bc9d4ce4bdb6079e70"},
+        "component": {"size": 3649380, "sha256": "51bb3220d572527954e78a3e51c30f5b4235ec936613c2f6684527ba43bd8be1"},
+        "package": {"size": 4427874, "sha256": "f13f305ab510f4e6ac3dd20576b2d543fc171314a35b9d194153bbff194b3f87"},
+        "flash_plan": {"size": 753820, "sha256": "db98175be8544487a9a95010f160d448a42ad303fef095aa0e1e84c48170111b", "programmed": 1050, "preserved": 2, "skipped": 5},
+        "package_ownership": {"source_owned": 126750, "generated": 89387, "opaque": 4211737}
+      }
+    },
+    "production_dec_bytes_leaf": {
+      "upstream_function": "pb_dec_bytes",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated 0.4.7-0.4.9 compatible range",
+      "upstream_definition_span": "pb_decode.c bytes [47571,48677)",
+      "upstream_definition_size": 1106,
+      "upstream_definition_sha256": "343c9c20cbd27012513eac9e7950d3c7d03733bb318d608be2f2538c44705374",
+      "local_source": "components/shared/nanopb/runtime_nanopb_dec_bytes.c",
+      "local_source_size": 3163,
+      "local_source_sha256": "16156212768637a22587c72d3aec916e1b011c4deae4974c7cb73417e3d57ddc",
+      "local_header": "components/shared/nanopb/runtime_nanopb_dec_bytes.h",
+      "local_header_size": 1801,
+      "local_header_sha256": "5b7955c8dfd4606a95ed58319a0a8f860e37bc2642444db648ca8cff638c5910",
+      "stock_span": "[0x00490358,0x004903EA)",
+      "stock_size": 146,
+      "stock_sha256": "c7543cf3079885d044833361ff8331ac10403760377ba3448419255ccae74c37",
+      "stock_callers": ["0x0048F8E8"],
+      "stock_topology": {
+        "direct_caller_count": 1,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0,
+        "classified_data_collision_count": 2
+      },
+      "configuration": {
+        "PB_ENABLE_MALLOC": false,
+        "pb_size_t_bits": 16,
+        "stock_data_seam_count": 0
+      },
+      "source_dependencies": [
+        "open_cfw_nanopb_decode_varint32",
+        "open_cfw_nanopb_read"
+      ],
+      "source_rodata": {
+        "symbol": "open_cfw_nanopb_dec_bytes_errors",
+        "size": 48,
+        "sha256": "718eead5f51032fc1fbec902f9720d51167ad6c95bca4d7314a30e8226a5f255"
+      },
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "object_size": 1224,
+        "object_sha256": "976f145657ac31e8cc1561667dc970de0704377e52f32b72ad5b205f23891395",
+        "text_size": 98,
+        "text_offset": 125984,
+        "runtime_address": "0x007B2F44",
+        "text_unrelocated_sha256": "015e10515e87a2993c78839e9152a5d1bdc4cc864a7d5b6f4a12945595168506",
+        "text_relocated_sha256": "5ea32d890eb894b11cc01c95edddef23f6e8f7560a44f77878f8884f8ec11f70",
+        "closure_size": 146,
+        "closure_sha256": "8e35a40f624a8356e7b158fb442afdeb76eba54fe663a5b812cd7dd3cdb368d5",
+        "rodata_runtime_address": "0x007B2FA6",
+        "entry_patch_sha256": "739656a5e08296d19f5a917f8b175907b92dadf5a60acd36e4d6d6816965615c"
+      },
+      "linux_clang": {
+        "status": "pending_reviewed_toolchain_reproduction",
+        "required_compiler": "Homebrew clang version 22.1.8"
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_dec_bytes_source_replacement",
+        "source_leaf": "apollo_nanopb_dec_bytes_source_leaf",
+        "source_rodata": "apollo_nanopb_dec_bytes_error_rodata"
+      },
+      "evidence": "docs/research/nanopb-dec-bytes-source-audit.md",
+      "evidence_size": 5651,
+      "evidence_sha256": "10663d614f4608f01db281dc61f73e0774218df79d0c143621693d5fcdf3cd55",
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 671, "patch_sites": 620, "relocated_leaves": 102},
+        "emitted_report": {"functions": 667, "patch_sites": 616, "relocated_leaves": 98},
+        "manifest_region_count": 982,
+        "overlay": {"size": 126130, "sha256": "0a6aa0d4c0736a3fdc4dfb4cafdb80fad4e6ab3befe3cc3e8d5d383822ec5502"},
+        "component": {"size": 3649526, "sha256": "c387d5b4afdd50834c833d942f4b4e8e398bbbc5e31bd9f6c8daced8a9380148"},
+        "package": {"size": 4428020, "sha256": "e2f7cf1f06f70e9ea1c0a4c7afb57205789f4dfa366d496edcbe3707795c2de2"},
+        "flash_plan": {"size": 756646, "sha256": "fd7b6932c780572f6edc35f79eacd791854d4dd5e7e84e57d2151384d56d453c", "programmed": 1054, "preserved": 2, "skipped": 5},
+        "package_ownership": {"source_owned": 126896, "generated": 89533, "opaque": 4211591}
+      }
+    },
+    "production_dec_string_leaf": {
+      "upstream_function": "pb_dec_string",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated 0.4.7-0.4.9 compatible range",
+      "upstream_definition_span": "pb_decode.c bytes [48677,49908)",
+      "upstream_definition_size": 1231,
+      "upstream_definition_sha256": "73375d35f4938cd170ac34eb6f32668fcdf253c9b850955524e3a8e5357f8646",
+      "local_source": "components/shared/nanopb/runtime_nanopb_dec_string.c",
+      "local_source_size": 3110,
+      "local_source_sha256": "6b023235be31a1917f1a3466e5b5ad1ed3294f91dc4fb3764f411b5c0278d20c",
+      "local_header": "components/shared/nanopb/runtime_nanopb_dec_string.h",
+      "local_header_size": 1347,
+      "local_header_sha256": "67edc0b05ce695d7e286a4099f5d3b8b793f4c14ded91e8e4fbeb13cf3151661",
+      "stock_span": "[0x004903EA,0x00490488)",
+      "stock_size": 158,
+      "stock_sha256": "8be0060c8134054cbe4964c682b8b2c22aa6dc170bdf235d3fee97220aaded2f",
+      "stock_callers": ["0x0048F90A"],
+      "stock_topology": {
+        "direct_caller_count": 1,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "configuration": {
+        "PB_ENABLE_MALLOC": false,
+        "PB_VALIDATE_UTF8": false,
+        "pb_size_t_bits": 16,
+        "size_t_bits": 32,
+        "stock_data_seam_count": 0
+      },
+      "source_dependencies": [
+        "open_cfw_nanopb_decode_varint32",
+        "open_cfw_nanopb_read"
+      ],
+      "source_rodata": {
+        "symbol": "open_cfw_nanopb_dec_string_errors",
+        "size": 49,
+        "sha256": "997f0ec78270c8595ea07bc75acc9467b3adb246d10a6ad02da619d1d4686161"
+      },
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "object_size": 1260,
+        "object_sha256": "ffbb4295bfecc6a32306669cf6b367e1692cfc56766f5bcefa72aa45c29b3f91",
+        "text_size": 114,
+        "text_offset": 126132,
+        "runtime_address": "0x007B2FD8",
+        "text_unrelocated_sha256": "8bb5ae7a48ad06f4f7d8748ca7b39c1274ac997d3eca59a8cb2e08ca5a40af58",
+        "text_relocated_sha256": "7fd11bd5b7f323722739a9f0a19ccba696e5b04659b2d917ec8bd69ae96161c4",
+        "closure_size": 163,
+        "closure_sha256": "c0be9fa4a77f3390c9e37325512cb946fe2e673224c0b7d05c3558111926b5cf",
+        "rodata_runtime_address": "0x007B304A",
+        "entry_patch_sha256": "c0f90e1f28318642ddb43e5d5963203ca6ec1d9695c97a2280162f27db51e536"
+      },
+      "linux_clang": {
+        "status": "pending_reviewed_toolchain_reproduction",
+        "required_compiler": "Homebrew clang version 22.1.8"
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_dec_string_source_replacement",
+        "source_alignment": "apollo_nanopb_dec_string_source_alignment",
+        "source_leaf": "apollo_nanopb_dec_string_source_leaf",
+        "source_rodata": "apollo_nanopb_dec_string_error_rodata"
+      },
+      "evidence": "docs/research/nanopb-dec-string-source-audit.md",
+      "evidence_size": 5241,
+      "evidence_sha256": "a1f4959746491cd090fc9bbe7537c5429557b9d8bbad588122fe0301b13b4b78",
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 672, "patch_sites": 621, "relocated_leaves": 103},
+        "emitted_report": {"functions": 668, "patch_sites": 617, "relocated_leaves": 99},
+        "manifest_region_count": 986,
+        "overlay": {"size": 126295, "sha256": "5474d06c7141c0a518190089711452b2533cd0c62a907c679b8f38f5d06ea055"},
+        "component": {"size": 3649691, "sha256": "f7c06b0652a7e7ddd3f974cf27ecabb9c3289b1c946520fc141bc90a5ecae9e8"},
+        "package": {"size": 4428185, "sha256": "f96c90d1f55b86130b827ab64e4e2eea6c976e972ef5f457ba624b7e23dceaec"},
+        "flash_plan": {"size": 759478, "sha256": "b5819e9b940a21c990f7af67f6be8a4fb64e6875eec9ef2d9221e4480f890053", "programmed": 1058, "preserved": 2, "skipped": 5},
+        "package_ownership": {"source_owned": 127059, "generated": 89693, "opaque": 4211433}
+      }
+    },
+    "production_dec_submessage_leaf": {
+      "upstream_function": "pb_dec_submessage",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated 0.4.7-0.4.9 compatible range",
+      "upstream_definition_span": "pb_decode.c bytes [49908,51557)",
+      "upstream_definition_size": 1649,
+      "upstream_definition_sha256": "94000cbd5547153805c6b687cb80650a6f57cf9a030434cbf179cfde94ae3f4e",
+      "local_source": "components/shared/nanopb/runtime_nanopb_dec_submessage.c",
+      "local_source_size": 3010,
+      "local_source_sha256": "afcc411be858e82fff816b2354cae4698069e1ca3d277022f6ef4d64a00a2d87",
+      "local_header": "components/shared/nanopb/runtime_nanopb_dec_submessage.h",
+      "local_header_size": 1736,
+      "local_header_sha256": "4ab90681e293268fd0ad3798b3e4902fdb942bd59394ea48d374c409b9583234",
+      "stock_span": "[0x0049048C,0x00490538)",
+      "stock_size": 172,
+      "stock_sha256": "3e28ac2fb953613cff7b8a7c30cfdc91aa6c585ea44769e7f64603be853f6f91",
+      "stock_callers": ["0x0048F92C"],
+      "stock_topology": {
+        "direct_caller_count": 1,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0,
+        "unaligned_instruction_collision_count": 1
+      },
+      "source_dependencies": [
+        "open_cfw_nanopb_make_string_substream",
+        "open_cfw_nanopb_close_string_substream"
+      ],
+      "retained_seams": {
+        "fixed_stock_executable": [{"symbol": "open_cfw_nanopb_decode_inner", "address": "0x0048FE98"}],
+        "dynamic_application_callbacks": 1,
+        "stock_data": 0
+      },
+      "source_rodata": {
+        "symbol": "open_cfw_nanopb_dec_submessage_error",
+        "size": 25,
+        "sha256": "4a8ee02adbdcb9935acc0b5869b671767c30b19fb114043d2327edb45d3085fc"
+      },
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "object_size": 1320,
+        "object_sha256": "86d99d6a183ad6d17ddba85f51ce37d1e260b2a17ca95b57b69229db70238f81",
+        "text_size": 138,
+        "text_offset": 126296,
+        "runtime_address": "0x007B307C",
+        "text_unrelocated_sha256": "ae1d41d5b11734d754d8511f0e782434d757d4fa097b0431ef46c64e1344018c",
+        "text_relocated_sha256": "6164e7106258de3ee838ef6847afa63cf509c8cd7696d99dddf2c2f56cfa84ea",
+        "closure_size": 163,
+        "closure_sha256": "85d3f4025b36602f47fb0ddb9145a40bbe54226de4ea044a6a2db5671245d82b",
+        "rodata_runtime_address": "0x007B3106",
+        "entry_patch_sha256": "24ead852701a33f497a850ca4f52cdb744297ef6a360779e3d54adaff0183ba8"
+      },
+      "linux_clang": {
+        "status": "pending_reviewed_toolchain_reproduction",
+        "required_compiler": "Homebrew clang version 22.1.8"
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_dec_submessage_source_replacement",
+        "source_alignment": "apollo_nanopb_dec_submessage_source_alignment",
+        "source_leaf": "apollo_nanopb_dec_submessage_source_leaf",
+        "source_rodata": "apollo_nanopb_dec_submessage_error_rodata"
+      },
+      "evidence": "docs/research/nanopb-dec-submessage-source-audit.md",
+      "evidence_size": 4113,
+      "evidence_sha256": "7c3644bf04f4d89ac0984227d41cb42c2b67962fd045629cc364b19b023083bf",
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 673, "patch_sites": 622, "relocated_leaves": 104},
+        "emitted_report": {"functions": 669, "patch_sites": 618, "relocated_leaves": 100},
+        "manifest_region_count": 991,
+        "overlay": {"size": 126459, "sha256": "8321e5677f1d270dcae5eca93c9d2e2caa70fa88d9bd37ececc7d31294f0c052"},
+        "component": {"size": 3649855, "sha256": "71524975406fb2f710d0834930d9e913c49976a23726e8f336232e0f33ef4e74"},
+        "package": {"size": 4428349, "sha256": "c026bcb756c24e4127e061a62b923b48ce12582844ec39d8be39e5719e839bad"},
+        "flash_plan": {"size": 763090, "sha256": "9757827a7c7827fe63845d76c692cc4b94c602e88ce560fc3b7ebc7523d7f912", "programmed": 1063, "preserved": 2, "skipped": 5},
+        "package_ownership": {"source_owned": 127222, "generated": 89866, "opaque": 4211261}
+      }
+    },
+    "production_decode_inner_leaf": {
+      "upstream_function": "pb_decode_inner",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated 0.4.7-0.4.9 compatible range",
+      "upstream_definition_span": "pb_decode.c bytes [32121,37346)",
+      "upstream_definition_size": 5225,
+      "upstream_definition_sha256": "01b0015f6b8450e27d38a5f60e57708d9007d005d9ece2ef3fdb287b27ed23f4",
+      "local_source": "components/shared/nanopb/runtime_nanopb_decode_inner.c",
+      "local_source_size": 7049,
+      "local_source_sha256": "791c5e45b5f3cf53bcb2f7a0bb8f2877dc112bd4c08c0c4603acca2da0d8f1b1",
+      "local_header": "components/shared/nanopb/runtime_nanopb_decode_inner.h",
+      "local_header_size": 2308,
+      "local_header_sha256": "9058eb4bdabefcff3c1e79edbfbf6fe0e2111b2d8f78fcef3599d7a9ff7768d6",
+      "stock_span": "[0x0048FE98,0x00490112)",
+      "stock_size": 634,
+      "stock_sha256": "13f2b83cd22ed38a6b74d52b0bd4eb6e8577becdcf5a1c8816a4af6aef1eea52",
+      "stock_callers": ["0x00490124", "0x0049051A"],
+      "stock_topology": {
+        "direct_caller_count": 2,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0,
+        "authenticated_nonpointer_collision_count": 19
+      },
+      "source_dependencies": [
+        "open_cfw_nanopb_field_iter_begin",
+        "open_cfw_nanopb_message_set_to_defaults",
+        "open_cfw_nanopb_decode_tag",
+        "open_cfw_nanopb_field_iter_find",
+        "open_cfw_nanopb_field_iter_find_extension",
+        "open_cfw_nanopb_decode_field",
+        "open_cfw_nanopb_decode_extension",
+        "open_cfw_nanopb_skip_field"
+      ],
+      "retained_seams": {
+        "guarded_source_replacement_entries": [
+          "0x004D9384", "0x0048FDF2", "0x0048F66C", "0x004D93F8",
+          "0x004D946E", "0x0048FC88", "0x0048FBE4"
+        ],
+        "direct_overlay_bindings": ["0x007B39CC", "0x007B3A70"],
+        "fixed_stock_executable": [],
+        "helper_family_count": 8,
+        "eliminated_memory_fill": "0x0043C0E4",
+        "stock_data": 0
+      },
+      "source_rodata": {
+        "symbol": "open_cfw_nanopb_decode_inner_errors",
+        "size": 88,
+        "sha256": "993d8d66d07a300c6c9d5492209c05f66129ed68b6a0cb109782cb8f79581025"
+      },
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "object_size": 2096,
+        "object_sha256": "a75663fb6c15fb03d86e821e77b8beabc2a4089513a510a98b5f265ff2029aa4",
+        "text_size": 530,
+        "text_offset": 126460,
+        "runtime_address": "0x007B3120",
+        "text_unrelocated_sha256": "94760bea8227002de63284f309e2dce73a798932a5dab28e97650cf2695d3035",
+        "text_relocated_sha256": "bb7c39bf211af376c6c2bed5e718da7e2462847ea1616666eb8f57a287541d86",
+        "closure_size": 618,
+        "closure_sha256": "6edb8cd4882360355fe16a09acd3fbc4affd24aeb8aeb98b311a0be3c14424f4",
+        "rodata_runtime_address": "0x007B3332"
+      },
+      "linux_clang": {
+        "status": "pending_reviewed_toolchain_reproduction",
+        "required_compiler": "Homebrew clang version 22.1.8"
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_decode_inner_source_replacement",
+        "source_alignment": "apollo_nanopb_decode_inner_source_alignment",
+        "source_leaf": "apollo_nanopb_decode_inner_source_leaf",
+        "source_rodata": "apollo_nanopb_decode_inner_error_rodata"
+      },
+      "analyzer": "tools/analyze_g2_nanopb_decode_inner.py",
+      "analyzer_size": 12737,
+      "analyzer_sha256": "2f1610679f1fc7d551c046b43caab4db92b73bdc3c356c0bc62fcd749f442534",
+      "evidence": "docs/research/nanopb-decode-inner-source-audit.md",
+      "evidence_size": 4107,
+      "evidence_sha256": "cc380241ee099906919f73f9bc55d9e8560aa9e70f5077a6a9da439d24824ac3",
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 675, "patch_sites": 624, "relocated_leaves": 106},
+        "manifest_region_count": 998,
+        "overlay": {"size": 127122, "sha256": "69432c9b965fbe020de4439ed5b74d15bb01150dcdd23a4ac32ebae10d18d799"},
+        "component": {"size": 3650518, "sha256": "10b8ca1319b630d7b694f4de0f46563e21557b0287ae07d1b55c08e56c3a16fa"},
+        "package": {"size": 4429012, "sha256": "7c62e89e6d051bb818c2b4c5c99b94a402a533f589feec3c6c5989ba35a1dbcf"},
+        "package_ownership": {"source_owned": 127882, "generated": 90555, "opaque": 4210575}
+      }
+    },
+    "production_decode_tag_leaf": {
+      "upstream_function": "pb_decode_tag",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated 0.4.7-0.4.9 compatible range",
+      "upstream_definition_span": "pb_decode.c bytes [8663,9043)",
+      "upstream_definition_size": 380,
+      "upstream_definition_sha256": "6cb0e89f976070f9d561474343e0ef46414107bbf64cbb17302be46dba412cfb",
+      "local_source": "components/shared/nanopb/runtime_nanopb_decode_tag.c",
+      "local_source_size": 1223,
+      "local_source_sha256": "4975c11d7435c31fa236063e0b3304b5c425726deb660343fd9304c0ae91b20d",
+      "local_header": "components/shared/nanopb/runtime_nanopb_decode_tag.h",
+      "local_header_size": 1080,
+      "local_header_sha256": "95f5f45c357410df5a0a65ca56139107f86fe13f389b832da7708d743dcb1f3c",
+      "stock_span": "[0x0048F66C,0x0048F6A0)",
+      "stock_size": 52,
+      "stock_sha256": "727a94d16ba7b4018c3addee83a6c63e87f0c3f2a3fe6afdb315549d10f53114",
+      "stock_callers": [
+        {"address": "0x0048FE2A", "encoding": "fff71ffc", "context_sha256": "d422a51f8fe44545d3fb046a1c81d6b750465cbe731c932fa0d446822be78f2e"},
+        {"address": "0x0048FE5E", "encoding": "fff705fc", "context_sha256": "35263a54c7095bada0fc499aac205fa2ae77adb7fd1622e63c2816148d255c4e"},
+        {"address": "0x0048FF68", "encoding": "fff780fb", "context_sha256": "dfcfc277e3191ec34bf664f1b71acd4738e1aeb3333cf26fe84168c28d4c8846"}
+      ],
+      "stock_topology": {
+        "direct_caller_count": 3,
+        "alternate_ingress_count": 0,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0,
+        "predecessor": {"span": "[0x0048F64C,0x0048F66C)", "sha256": "03afe2d60436676fffba342c7b8c9504992fa903d7cba768396fd1de2c6c66cd"},
+        "successor": {"span": "[0x0048F6A0,0x0048F6EA)", "sha256": "36089daffbbc82abad65d97ae0fd64b58b8ad227ed585aa704611bc30369912d"}
+      },
+      "stock_outgoing_call": {
+        "address": "0x0048F682",
+        "encoding": "fff719ff",
+        "target": "0x0048F4B8",
+        "function": "pb_decode_varint32_eof"
+      },
+      "abi_evidence": {
+        "wire_type_width_bytes": 1,
+        "short_enum_stores": ["0x0048F674", "0x0048F678", "0x0048F69A"]
+      },
+      "source_dependency": "open_cfw_nanopb_decode_varint32_eof",
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "object_size": 952,
+        "object_sha256": "c0939dd8265d5bc33919e44a2cf764b1543c3313bc250b6f835c0887c450ed3b",
+        "text_size": 42,
+        "text_offset": 127080,
+        "runtime_address": "0x007B338C",
+        "text_unrelocated_sha256": "1c1c3627e3f4e4e31029f32513dfe2a10e09a15c8c49f6e3cd5946a50ea753bc",
+        "text_relocated_sha256": "f36301a6c133d6fcb0842f674a4c794a100d708843997b01ce57180b387ebaab"
+      },
+      "linux_clang": {
+        "status": "pending_reviewed_toolchain_reproduction",
+        "required_compiler": "Homebrew clang version 22.1.8"
+      },
+      "manifest_regions": {
+        "entry_replacement": "nanopb_decode_tag_source_replacement",
+        "source_alignment": "apollo_nanopb_decode_tag_source_alignment",
+        "source_leaf": "apollo_nanopb_decode_tag_source_leaf"
+      },
+      "analyzer": "tools/analyze_g2_nanopb_decode_tag.py",
+      "analyzer_size": 7668,
+      "analyzer_sha256": "d89e04abf3698c159689e333715c6374328a9d4cf41a3b04aa0eb0034d8be91e",
+      "evidence": "docs/research/nanopb-decode-tag-source-audit.md",
+      "evidence_size": 2575,
+      "evidence_sha256": "58661d21beab70bc0fd9d8e7dadcf13e4847fae583550e84145860ca3a5136cd",
+      "apple_aggregates": {
+        "configuration_inventory": {"functions": 675, "patch_sites": 624, "relocated_leaves": 106},
+        "manifest_region_count": 998,
+        "overlay": {"size": 127122, "sha256": "69432c9b965fbe020de4439ed5b74d15bb01150dcdd23a4ac32ebae10d18d799"},
+        "component": {"size": 3650518, "sha256": "10b8ca1319b630d7b694f4de0f46563e21557b0287ae07d1b55c08e56c3a16fa"},
+        "package": {"size": 4429012, "sha256": "7c62e89e6d051bb818c2b4c5c99b94a402a533f589feec3c6c5989ba35a1dbcf"},
+        "package_ownership": {"source_owned": 127882, "generated": 90555, "opaque": 4210575}
+      }
+    },
+    "production_iterator_cluster": {
+      "upstream_functions": [
+        "load_descriptor_values", "advance_iterator", "pb_field_iter_begin",
+        "pb_field_iter_begin_extension", "pb_field_iter_next", "pb_field_iter_find",
+        "pb_field_iter_find_extension", "pb_const_cast",
+        "pb_field_iter_begin_const", "pb_field_iter_begin_extension_const",
+        "pb_default_field_callback"
+      ],
+      "upstream_source": "pb_common.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated pristine 0.4.7-0.4.9.1 range",
+      "upstream_definition_span": "pb_common.c bytes [145,10196)",
+      "upstream_definition_size": 10051,
+      "upstream_definition_sha256": "cfd4ae8e8dac527ba9332809e3038c101199a26d271fd51ae0bc154c927469e8",
+      "local_source": "components/shared/nanopb/runtime_nanopb_iterator_cluster.c",
+      "local_source_size": 13395,
+      "local_source_sha256": "edcff9480ae181a22aba9eb28641257fe62fb9652c1268cd3ef1658e5a3690eb",
+      "local_header": "components/shared/nanopb/runtime_nanopb_iterator_cluster.h",
+      "local_header_size": 2995,
+      "local_header_sha256": "f9664d9eb409a731dbf1a7c664ee91f10b58b3b0f818844eab5f77fbaac8f0b2",
+      "stock_span": "[0x004D916E,0x004D9522)",
+      "stock_size": 948,
+      "stock_sha256": "067d3a89db02db4ecc9b71e17dc4243c1f61b64ec3c40cfaf90cf07bb1d0b362",
+      "production_leaf_count": 9,
+      "production_entry_patch_count": 8,
+      "source_owned_overlay_bytes": 1132,
+      "generated_alignment_bytes": 10,
+      "generated_entry_replacement_bytes": 412,
+      "unreachable_unowned_stock_bytes": 536,
+      "closed_decoder_defaults_calls": 6,
+      "closed_unique_iterator_entries": 5,
+      "dynamic_application_callback_sites": 2,
+      "stored_callback_pointer": {"slot": "0x004910BC", "stock_thumb_target": "0x004D94E7", "status": "lands on generated entry redirect"},
+      "eliminated_stock_dependency": {"function": "memory fill", "address": "0x0043C0E4"},
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "full_object_size": 4564,
+        "full_object_sha256": "b4049aec70c47ed1b617661d44fc400894e409f00bf472af19b34a0ff69d2ebc",
+        "overlay": {"size": 128264, "sha256": "742e44dd839010c3c14ae59419fc06bcd50a7fe91e7ba06b4946f5c4154c870b"},
+        "component": {"size": 3651660, "sha256": "ea39a91f574b464d9071e581f5104d870e1f7e484d52de9b86407f0a90ac5d2e"},
+        "package": {"size": 4430154, "sha256": "aa71330ceed2775494fb7ff599a23701ef746a25452a8d335574a3bac12674a9"},
+        "package_ownership": {"source_owned": 129014, "generated": 90977, "opaque": 4210163},
+        "manifest_region_count": 1022,
+        "flash_plan": {"size": 784999, "sha256": "bfb010d525451379189ebfd316051a6fb9fae0a755be6a41f9955d02455803f9", "programmed": 1094, "preserved": 2, "skipped": 5}
+      },
+      "linux_clang": {
+        "status": "pending_reviewed_toolchain_reproduction",
+        "required_compiler": "Homebrew clang version 22.1.8"
+      },
+      "analyzer": "tools/analyze_g2_nanopb_iterator_cluster.py",
+      "analyzer_size": 17399,
+      "analyzer_sha256": "66a9eb493205ae31d04db2b7843daf4cbc488205204402af9e48248cdda7c62c",
+      "evidence": "docs/research/nanopb-iterator-cluster-source-audit.md",
+      "evidence_size": 6941,
+      "evidence_sha256": "66b50072d6a19c95d1431de61e7cfe75e3d192782bc7ea5db41869b56490681f"
+    },
+    "production_defaults_pair": {
+      "upstream_functions": ["pb_field_set_to_default", "pb_message_set_to_defaults"],
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9 within the authenticated pristine 0.4.7-0.4.9.1 range",
+      "upstream_definitions": {
+        "pb_field_set_to_default": {"span": "pb_decode.c bytes [28476,31080)", "size": 2604, "sha256": "dced6e406d8c2c657a90cd599a60457a83bbc123b6ddfbfb9bff71778a773265"},
+        "pb_message_set_to_defaults": {"span": "pb_decode.c bytes [31080,32048)", "size": 968, "sha256": "b907b8141e8f0376e9d5e86bf58efde7465d2a16ca3d30ece27ffda16d3afe9e"}
+      },
+      "local_source": "components/shared/nanopb/runtime_nanopb_defaults_pair.c",
+      "local_source_size": 6284,
+      "local_source_sha256": "76dc1344eb1187f8631e935613246724287c6b1e917efd795dabe17ec5d84491",
+      "local_header": "components/shared/nanopb/runtime_nanopb_defaults_pair.h",
+      "local_header_size": 867,
+      "local_header_sha256": "fd49a5df94ff89c5c0032f72c304f5efd4ec0bf4ecd5908742c6ef0810e51ab9",
+      "stock_span": "[0x0048FCE2,0x0048FE98)",
+      "stock_size": 438,
+      "stock_functions": {
+        "pb_field_set_to_default": {"size": 272, "sha256": "0d0dd0be0ae68f84bb20e39f7c95f500656316563d95b6d5cc3e290d4b131728"},
+        "pb_message_set_to_defaults": {"size": 166, "sha256": "1409633f121586a45b076e247e2f1f33f6120be85044245f42ca777955bd34e4"}
+      },
+      "source_owned_overlay_bytes": 414,
+      "generated_alignment_bytes": 2,
+      "generated_entry_replacement_bytes": 438,
+      "successor_source_binding": {"function": "decode_field", "address": "0x007B39CC", "status": "production-integrated"},
+      "eliminated_stock_dependency": {"function": "memory fill", "address": "0x0043C0E4"},
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "message_leaf": {"size": 158, "offset": 128264, "runtime_address": "0x007B382C", "unrelocated_sha256": "dc70ed59c4f28728251ce41b219a3d145e52dec7b98ec3940bd88e5cdbcc105c", "relocated_sha256": "c912af492c733b311f45ba61171d8678f7d2f346e0bced9a6ecde8de5d7ca61c"},
+        "field_leaf": {"size": 256, "offset": 128424, "runtime_address": "0x007B38CC", "unrelocated_sha256": "5450f92492613c95ce01f97ab9da3450a9142a33acaa64790c85453d2ce314d9", "relocated_sha256": "5cfe4525760f82d39ca487e4a4dfb5120b30401ddaca71b49d73ad81fc6a409a"},
+        "overlay": {"size": 128924, "sha256": "555cee5a2bf43bafef750c77658b654fc72642699d5e432226d209337b69eb57"},
+        "component": {"size": 3652320, "sha256": "60d9a28c2dc38e04d2ea3fd6109d7d26b3229d1e0b8ec04a695cde7c3146f4e8"},
+        "package": {"size": 4430814, "sha256": "764b752f15d7cc5a0609091a2c6852aee1a4b1892125b1ac185134ab0897a751"},
+        "package_ownership": {"source_owned": 129671, "generated": 91656, "opaque": 4209487},
+        "manifest_region_count": 1035,
+        "flash_plan": {"size": 794486, "sha256": "88937e355a085d2c9d8d627808ccea796aa91b93ed1a2d58efe2efd5f70b875e", "programmed": 1107, "preserved": 2, "skipped": 5}
+      },
+      "linux_clang": {"status": "pending_reviewed_toolchain_reproduction", "required_compiler": "Homebrew clang version 22.1.8"},
+      "manifest_regions": {
+        "field_entry_replacement": "nanopb_field_set_to_default_source_replacement",
+        "message_entry_replacement": "nanopb_message_set_to_defaults_source_replacement",
+        "message_source_leaf": "apollo_nanopb_message_set_to_defaults_source_leaf",
+        "field_source_alignment": "apollo_nanopb_field_set_to_default_alignment",
+        "field_source_leaf": "apollo_nanopb_field_set_to_default_source_leaf"
+      },
+      "analyzers": [
+        {"path": "tools/analyze_g2_nanopb_field_default.py", "size": 8233, "sha256": "d80ce526a8de93c36ec3829246c4eeb5fb96a58e6c0be5100528ae9244e3e7cb"},
+        {"path": "tools/analyze_g2_nanopb_message_defaults.py", "size": 8382, "sha256": "b2b497057181f108499ad625d4c292fc80856c075363ee90b7b4c5f1031de1ad"}
+      ],
+      "evidence": [
+        {"path": "docs/research/nanopb-field-default-source-audit.md", "size": 4891, "sha256": "064e1f8901cffff3b21ca554373ee9bb298a970eb23731cebee2f8a040579707"},
+        {"path": "docs/research/nanopb-message-defaults-source-audit.md", "size": 4042, "sha256": "769615938888d4f8cbfa516669aa739ae5e260516cb0189e6f60766dfe64b86c"}
+      ]
+    },
+    "production_dispatch_extension": {
+      "upstream_functions": ["decode_field", "default_extension_decoder", "decode_extension"],
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9; exact checked definitions are byte-identical across official 0.4.4-0.4.9.1 tags",
+      "upstream_definitions": {
+        "decode_field": {"span": "pb_decode.c bytes [26221,27053)", "size": 832, "sha256": "1c6111be8313e278c2b1753401a701245c1baa7c90acd085f18c1eb277d7e42d"},
+        "default_extension_decoder": {"span": "pb_decode.c bytes [27227,27659)", "size": 432, "sha256": "175e06435cc0c7e7f0bf3d44aa6b2d3e0f5f9bc8384ce52d28c80bf21777a691"},
+        "decode_extension": {"span": "pb_decode.c bytes [27810,28413)", "size": 603, "sha256": "3229a97ca148e192ca3b1d0fd33df3a1654b6405bd247e0b6f6320041460f7da"}
+      },
+      "local_source": "components/shared/nanopb/runtime_nanopb_dispatch_extension.c",
+      "local_source_size": 3804,
+      "local_source_sha256": "b4a6620fdc79fdbb3b3891166d6248176b396cf18b7157cd3d300d66ee15de96",
+      "local_header": "components/shared/nanopb/runtime_nanopb_dispatch_extension.h",
+      "local_header_size": 1560,
+      "local_header_sha256": "f6918d0d89b223e9ad33601de800931a73a0c9ad5ac66177ea83c435441c2ec8",
+      "stock_span": "[0x0048FBE4,0x0048FCE2)",
+      "stock_size": 254,
+      "stock_functions": {
+        "decode_field": {"start": "0x0048FBE4", "size": 66, "sha256": "a7e2136d4de19007cab84722398b120c6cf806ec558163447cf11d33064e8479"},
+        "default_extension_decoder": {"start": "0x0048FC26", "size": 82, "sha256": "dbd41534fcd6ff0fc27f1bf87225f233020ba5c904e4aa4a5c9c85a83bd988d6"},
+        "literal_island": {"start": "0x0048FC78", "size": 16, "sha256": "1026cb9d3335a6464ffa01ebd4901588496b37013be9aa1bf13a7de1c95c7fe3"},
+        "decode_extension": {"start": "0x0048FC88", "size": 90, "sha256": "0f630c1173971762af8df1ec82ed50cff6f292a9b77eafae06e56b9f3b659472"}
+      },
+      "source_owned_overlay_bytes": 243,
+      "generated_alignment_bytes": 1,
+      "generated_entry_replacement_bytes": 238,
+      "fixed_executable_seams": [
+        {"function": "decode_static_field", "address": "0x0048F968"},
+        {"function": "decode_pointer_field", "address": "0x0048FB1C", "configuration": "PB_ENABLE_MALLOC disabled stub"},
+        {"function": "decode_callback_field", "address": "0x0048FB30"}
+      ],
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "decode_field": {"text_size": 52, "closure_size": 71, "offset": 128680, "runtime_address": "0x007B39CC", "unrelocated_sha256": "041eeef52b7cee972328166a448d95454de480aff4f79da472479075af403648", "relocated_sha256": "ad148296b0bf6fc0fb06567d7a2f81a503d38b8c7d8bd013804110d3b755615c", "closure_sha256": "913ef508165e0281668479d13d1dc9cabff8f0cc1b264193d5b42c972e14026b"},
+        "default_extension_decoder": {"text_size": 74, "closure_size": 92, "offset": 128752, "runtime_address": "0x007B3A14", "unrelocated_sha256": "e343e1706c3cf67b596f0c50bdf7a6379f7a22baa23bcfb5402206345c44830d", "relocated_sha256": "cc38007d8f49563214acec19b8dcbe0f984198d793b50a8e8c4bd550c4d4de94", "closure_sha256": "569b19bc1745605dd3cb19da57ff5b22ba4caecf08287664a125d0dd964bc6a1"},
+        "decode_extension": {"size": 80, "offset": 128844, "runtime_address": "0x007B3A70", "unrelocated_sha256": "6b7b562d0571411689c7ea1402ffba86cfd8255d6aed6bca349288a7d89887da", "relocated_sha256": "50d9c17ea04afb7b55f05269eadae500e4036c505a9311cccf9eb10a1fc2f154"},
+        "overlay": {"size": 128924, "sha256": "555cee5a2bf43bafef750c77658b654fc72642699d5e432226d209337b69eb57"},
+        "component": {"size": 3652320, "sha256": "60d9a28c2dc38e04d2ea3fd6109d7d26b3229d1e0b8ec04a695cde7c3146f4e8"},
+        "package": {"size": 4430814, "sha256": "764b752f15d7cc5a0609091a2c6852aee1a4b1892125b1ac185134ab0897a751"},
+        "package_ownership": {"source_owned": 129671, "generated": 91656, "opaque": 4209487},
+        "manifest_region_count": 1035,
+        "flash_plan": {"size": 794486, "sha256": "88937e355a085d2c9d8d627808ccea796aa91b93ed1a2d58efe2efd5f70b875e", "programmed": 1107, "preserved": 2, "skipped": 5},
+        "build_report": {"size": 2323, "sha256": "b6c7aef5e7246fcbacb8252e2f249e3ed60def4cb4e8de8fe9ee45792a3b7298"}
+      },
+      "linux_clang": {"status": "pending_reviewed_toolchain_reproduction", "required_compiler": "Homebrew clang version 22.1.8"},
+      "manifest_regions": {
+        "decode_field_entry": "nanopb_decode_field_source_replacement",
+        "default_extension_entry": "nanopb_default_extension_decoder_source_replacement",
+        "literal_island": "nanopb_dispatch_literal_island",
+        "decode_extension_entry": "nanopb_decode_extension_source_replacement",
+        "decode_field_closure": "apollo_nanopb_decode_field_source_closure",
+        "default_extension_alignment": "apollo_nanopb_default_extension_decoder_alignment",
+        "default_extension_closure": "apollo_nanopb_default_extension_decoder_source_closure",
+        "decode_extension_leaf": "apollo_nanopb_decode_extension_source_leaf"
+      },
+      "analyzer": {"path": "tools/analyze_g2_nanopb_dispatch_extension.py", "size": 15651, "sha256": "919bdfe79d539ba96543d7f0d51b722a22224fb4c8e0ad3afeae3e6b159652eb"},
+      "evidence": {"path": "docs/research/nanopb-dispatch-extension-source-audit.md", "size": 5498, "sha256": "cba2ab3edb607aa85d57803da2dba92765290fab0bc9a1fba48e2e345746e2f1"}
+    },
+    "production_field_decoder_cluster": {
+      "upstream_functions": ["decode_basic_field", "decode_static_field", "decode_pointer_field", "decode_callback_field", "pb_dec_fixed_length_bytes"],
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "compatibility_baseline": "nanopb-0.4.9; official-tag definition intervals are 0.4.4-0.4.9.1 for decode_basic_field, 0.4.5-0.4.9.1 for decode_static_field, and 0.4.6-0.4.9.1 for decode_pointer_field, decode_callback_field, and pb_dec_fixed_length_bytes",
+      "upstream_definitions": {
+        "decode_basic_field": {"span": "pb_decode.c bytes [11653,13922)", "size": 2269, "sha256": "c4465869ffee60864637b4710e393a7bb5c60c00a847e6f28137f4b480c5af71"},
+        "decode_static_field": {"span": "pb_decode.c bytes [13922,17541)", "size": 3619, "sha256": "64eb9ced4f650be17dbb7db6fa58f45ccdb9036460ae6d7aa355c3cfb8bcb24e"},
+        "decode_pointer_field": {"span": "pb_decode.c bytes [19783,24704)", "size": 4921, "sha256": "06f716c1f96bb2c77c5651b26a9ec5e465958258395e687c1d87dfbd01d70477"},
+        "decode_callback_field": {"span": "pb_decode.c bytes [24704,26221)", "size": 1517, "sha256": "45c67a796415dd023421f9108696478250e175837956c48fe8f960e3535afa24"},
+        "pb_dec_fixed_length_bytes": {"span": "pb_decode.c bytes [51557,52223)", "size": 666, "sha256": "3ede65e67d2d4dd729e53b5ef5a55d109e7479368ada22bf87760b072563e6ce"}
+      },
+      "local_source": "components/shared/nanopb/runtime_nanopb_field_decoder_cluster.c",
+      "local_source_size": 14057,
+      "local_source_sha256": "6c34245f6d3c305499ffb6be2bae69508fe6c6f4c4b79e8306d3b998f84c9901",
+      "local_header": "components/shared/nanopb/runtime_nanopb_field_decoder_cluster.h",
+      "local_header_size": 888,
+      "local_header_sha256": "812560e152e879f3181bcb20a2b65b0a6c81673aa4bebe46ff3bb6c99de1a8ac",
+      "host_fixture": "tests/fixtures/runtime_nanopb_field_decoder_cluster_host.c",
+      "host_fixture_size": 9211,
+      "host_fixture_sha256": "c3fee7a4ff21332c33629d63fb003c45de8b37cdbb026dc2f8a78ea57d9d2682",
+      "stock_functions": {
+        "decode_basic_field": {"start": "0x0048F7F4", "size": 372, "sha256": "2b1bf389327c0f6ccde636bbb51e36cd0bab3eccc811db9aa0efd3dbfef9e445"},
+        "decode_static_field": {"start": "0x0048F968", "size": 436, "sha256": "58eeda598e1b8e418e41323c1749fa1cd7270a38afb93f0e092bec2a8cfa19f1"},
+        "decode_pointer_field": {"start": "0x0048FB1C", "size": 20, "sha256": "05dac50e007fa534e74598ebbf096b7de8143dee0738977e91b36bfa420cdc83"},
+        "decode_callback_field": {"start": "0x0048FB30", "size": 180, "sha256": "8e278f306b51ccd2cabc176f7674d17665ca0647facb310c2fe99cfd00a62379"},
+        "pb_dec_fixed_length_bytes": {"start": "0x0049053C", "size": 108, "sha256": "2f28238051979b38684521cc6d6d759d73d128304441dd1a26a2ea1506b5c5d1"}
+      },
+      "field_cluster": {"span": "[0x0048F7F4,0x0048FBE4)", "size": 1008, "sha256": "ac71748abf2908adf7850dd7fe339f1c8befcee4fbe416250f80aa3159d37098"},
+      "source_owned_overlay_bytes": 1132,
+      "generated_alignment_bytes": 8,
+      "generated_entry_replacement_bytes": 1116,
+      "fixed_executable_seams": [],
+      "dynamic_callback_abi_sites": 2,
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "pb_dec_fixed_length_bytes": {"text_size": 170, "closure_size": 219, "offset": 128924, "runtime_address": "0x007B3AC0", "unrelocated_sha256": "698a7a82c5e44180d47ccd281728afaa543a7dba45e53abbfd8a5eb2cdf6db23", "closure_sha256": "ec0892fe933694e9d57105e0a2213c7e78231e44048411d2af1ea603fe65d001"},
+        "decode_basic_field": {"text_size": 210, "closure_size": 245, "offset": 129144, "runtime_address": "0x007B3B9C", "unrelocated_sha256": "5bef14d4d499a5978c4b38514d05ec43f805e87b40538df64861746d774c0b27", "closure_sha256": "e64a68dd86c2f9001380ba8f1f26fffa9191784955b9c564fee9c828fa8a77f0"},
+        "decode_static_field": {"text_size": 408, "closure_size": 446, "offset": 129392, "runtime_address": "0x007B3C94", "unrelocated_sha256": "0601d198670393966036e2a7da7e637f3bd705b681b60eb3940a8910e52bf276", "closure_sha256": "39bf16892cc2d21e3f29488af68abdca591ea99dff7ee926f65fcb38218773c4"},
+        "decode_pointer_field": {"text_size": 24, "closure_size": 42, "offset": 129840, "runtime_address": "0x007B3E54", "unrelocated_sha256": "ba1895bd432b7421ac2982b1fdb9551b3df5ce0f7d0a7e47f858e9347f41cffc", "closure_sha256": "6dedcc717d53948f1a45e23801e5efe137901957408bbd5d427dc1d4967589dd"},
+        "decode_callback_field": {"text_size": 164, "closure_size": 180, "offset": 129884, "runtime_address": "0x007B3E80", "unrelocated_sha256": "6342c56d0adca0bc7da0ac55d2dd96c3e3f19657e93abb5a70820654016a0b13", "closure_sha256": "20e96830bc8eee39c0edf42af49f48abe5507c5de1d1937b2dc02993bc70e921"},
+        "overlay": {"size": 130316, "sha256": "c293b537dfc3481b6b42de12eda24a1dd1afde12afd6eac45c4d5b1ef31f3478"},
+        "component": {"size": 3653712, "sha256": "1fd350535ba9f271601a5923c0cc20212f3212594f73ceebd107f79ad65f1c1d"},
+        "package": {"size": 4432206, "sha256": "a5625a4bcc1ff20ff9e339f9bb0a074d999508674c7aeb315101e653c90630c2"},
+        "package_ownership": {"source_owned": 131051, "generated": 93036, "opaque": 4208119},
+        "manifest_region_count": 1067,
+        "flash_plan": {"size": 816896, "sha256": "58a3db7f1120bfe2d9a9ed5b9585781919c954830431fb6ba1eda010d621228d", "programmed": 1139, "preserved": 2, "skipped": 5},
+        "build_report": {"size": 2323, "sha256": "f8681101a1ab179efa6582bd80cbd737d8a9fd105a7c4f15c0fd83db8950a97a"}
+      },
+      "linux_clang": {"status": "pending_reviewed_toolchain_reproduction", "required_compiler": "Homebrew clang version 22.1.8"},
+      "manifest_regions": {
+        "basic_entry": "nanopb_decode_basic_field_source_replacement",
+        "static_entry": "nanopb_decode_static_field_source_replacement",
+        "pointer_entry": "nanopb_decode_pointer_field_source_replacement",
+        "callback_entry": "nanopb_decode_callback_field_source_replacement",
+        "fixed_entry": "nanopb_dec_fixed_length_bytes_source_replacement",
+        "fixed_closure": "apollo_nanopb_dec_fixed_length_bytes_source_closure",
+        "basic_alignment": "apollo_nanopb_decode_basic_field_alignment",
+        "basic_closure": "apollo_nanopb_decode_basic_field_source_closure",
+        "static_alignment": "apollo_nanopb_decode_static_field_alignment",
+        "static_closure": "apollo_nanopb_decode_static_field_source_closure",
+        "pointer_alignment": "apollo_nanopb_decode_pointer_field_alignment",
+        "pointer_closure": "apollo_nanopb_decode_pointer_field_source_closure",
+        "callback_alignment": "apollo_nanopb_decode_callback_field_alignment",
+        "callback_closure": "apollo_nanopb_decode_callback_field_source_closure"
+      },
+      "analyzer": {"path": "tools/analyze_g2_nanopb_field_decoder_cluster.py", "size": 18685, "sha256": "99467e10049473efb18e26f025664ec60553bb1ec209289625f21832d29195b6"},
+      "evidence": {"path": "docs/research/nanopb-field-decoder-cluster-boundary-audit.md", "size": 9099, "sha256": "22ff59f6d848e8460de845e49210aa9bf6305bd88aaeff5b5e194bff34aa8010"}
+    },
+    "production_varint32_apple_aggregate": {
+      "configuration_inventory": {"functions": 663, "patch_sites": 612, "relocated_leaves": 94},
+      "emitted_report": {"functions": 659, "patch_sites": 608, "relocated_leaves": 90},
+      "manifest_region_count": 957,
+      "overlay": {"size": 125222, "sha256": "a21779625714a5c029652287e38939ac4290306b3a8781045501839d385a1c62"},
+      "component": {"size": 3648618, "sha256": "99b1718f989695a4fe39655e8cf31ea7ef19ce97ed96b70fc1796c847bd2dead"},
+      "package": {"size": 4427112, "sha256": "92d1d9a2f2d80b503b2b68d1533a1c990da5a215381a0a22b604e63b6f7fb229"},
+      "build_report": {"size": 2323, "sha256": "eb0c87492532f136569cb529b2202805bd8bd84a45f76e0538b4ec1822bfe1b7"},
+      "flash_plan": {"size": 738871, "sha256": "1ee4d8d5a21a2b0d79173c5b78bcdf752407ae0e26d086ea5c5df4b504c939d9", "programmed": 1029, "preserved": 2, "skipped": 5},
+      "package_ownership": {"source_owned": 125994, "generated": 88625, "opaque": 4212493}
+    },
+    "production_varint32_linux_aggregate": {
+      "compiler": "Homebrew clang version 22.1.8",
+      "source_root": "/Users/kalani/Repo/SybilSightABCD/openCFW",
+      "configuration_inventory": {"functions": 663, "patch_sites": 612, "relocated_leaves": 94},
+      "emitted_report": {"functions": 663, "patch_sites": 612, "relocated_leaves": 94},
+      "manifest_region_count": 957,
+      "effective_flash_region_count": 847,
+      "overlay": {"size": 127046, "sha256": "593833cbe89b7f195f97d0e9bef8b57c98c4efe4b7cf13a035b4604738c38364"},
+      "component": {"size": 3650442, "sha256": "2712b0ca1feef4e75cb25c0d619814273d06d4aa82fbe85feb29dd874107c5ef"},
+      "package": {"size": 4428936, "sha256": "2a3c7b0298f3dcd52dc05fc3b0cbcf0bd3e282daa9c3b93ba47e4deff442865b"},
+      "component_build_report": {"size": 1540536, "sha256": "37f414b756c38766a2894dde6174efdb9ed174a8253071963d57c032b42f3592"},
+      "package_build_report": {"size": 2322, "sha256": "e79568709dcd979a2a06ed986b8fcc0d717bca88772e82e67d91ba4a475d048d"},
+      "flash_plan": {"size": 604887, "sha256": "de21f80249bcfda259e017512b8b25ba9e07437926cbe05d1e8e558f1177f424", "programmed": 847, "preserved": 2, "skipped": 5},
+      "package_ownership": {"source_owned": 127927, "generated": 88516, "opaque": 4212493}
+    },
+    "production_decode_fixed64_leaf": {
+      "upstream_function": "pb_decode_fixed64",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "upstream_definition_span": "pb_decode.c bytes [43854,44688)",
+      "upstream_definition_size": 834,
+      "upstream_definition_sha256": "7f9da692a631280aa5b91a5d08440ac68f5060a64814997dde8dcbdb2f0b4974",
+      "local_source": "components/shared/nanopb/runtime_nanopb_decode_fixed64.c",
+      "local_source_size": 2083,
+      "local_source_sha256": "865fa587e7b783e83f24107e52bf3010053d0660b06dc0ac2e7f72bb8ad969bc",
+      "local_header": "components/shared/nanopb/runtime_nanopb_decode_fixed64.h",
+      "local_header_size": 1726,
+      "local_header_sha256": "6394df89057700817341e0550ae21033629d3a1ea458d5a68a6edc2b233cc6bd",
+      "stock_span": "[0x004901AC,0x004901CC)",
+      "stock_size": 32,
+      "stock_sha256": "96228dfbdfe30665d79281ba0fd5ba3b3af38701396671cd20b77623ffd82d54",
+      "stock_read_seam": "0x0048F3BE",
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered local source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the vendor nanopb revision or checkout. Its pb_read ABI entry now redirects to the separately pinned production_read_leaf, while that provider retains three authenticated stock identity/data seams. The broader pristine pb_common, pb_decode, and pb_encode translation units remain unregistered."
+    },
+    "production_read_leaf": {
+      "upstream_function": "pb_read",
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "authenticated_release_definitions": [
+        {
+          "release": "0.4.7",
+          "commit": "b97aa657a706d3ba4a9a6ccca7043c9d6fe41cba",
+          "span": "pb_decode.c bytes [3659,4473)",
+          "size": 814,
+          "sha256": "3b69f6f4eb56a87c3f8a7f9ac30ac7573328c560047cbc5b2295daceef18fb1c"
+        },
+        {
+          "release": "0.4.8",
+          "commit": "6cfe48d6f1593f8fa5c0f90437f5e6522587745e",
+          "span": "pb_decode.c bytes [3659,4473)",
+          "size": 814,
+          "sha256": "3b69f6f4eb56a87c3f8a7f9ac30ac7573328c560047cbc5b2295daceef18fb1c"
+        },
+        {
+          "release": "0.4.9",
+          "commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+          "span": "pb_decode.c bytes [3745,4559)",
+          "size": 814,
+          "sha256": "3b69f6f4eb56a87c3f8a7f9ac30ac7573328c560047cbc5b2295daceef18fb1c"
+        }
+      ],
+      "local_source": "components/shared/nanopb/runtime_nanopb_read.c",
+      "local_source_size": 2944,
+      "local_source_sha256": "e4f99df8121553d4cb6d6c2f94aa7ef1b1445efd200cee4d872dd75894d24089",
+      "local_header": "components/shared/nanopb/runtime_nanopb_read.h",
+      "local_header_size": 2032,
+      "local_header_sha256": "22203e33b8cd9e07b94d24477ffb8a6f096a9ea8393c5723071b5f12c3ec4296",
+      "stock_span": "[0x0048F3BE,0x0048F454)",
+      "stock_size": 150,
+      "stock_sha256": "69aecb900c749fd98bd2d05e2229e9a3d6829bd36f3e393f624e3579a9b4af7f",
+      "stock_topology": {
+        "internal_recursive_calls": [
+          "0x0048F3EA",
+          "0x0048F3FC"
+        ],
+        "external_direct_callers": [
+          "0x0048F632",
+          "0x0048F666",
+          "0x0048F6C0",
+          "0x0048F6D0",
+          "0x0048F71A",
+          "0x0048F754",
+          "0x0048F764",
+          "0x0048F7DC",
+          "0x00490198",
+          "0x004901B4",
+          "0x004903E4",
+          "0x00490478",
+          "0x004905A2"
+        ],
+        "external_direct_caller_count": 13,
+        "interior_ingress_count": 0,
+        "stored_pointer_ingress_count": 0
+      },
+      "retained_stock_seams": [
+        {
+          "symbol": "open_cfw_nanopb_end_of_stream_error",
+          "kind": "NUL-terminated data",
+          "target_address": "0x00787C70",
+          "size": 14,
+          "sha256": "e167d4f2ec31a2197c7bc32affd9865ac8609d7dae984d0916e01f044fcc67b4"
+        },
+        {
+          "symbol": "open_cfw_nanopb_stock_buffer_read_identity",
+          "kind": "Thumb function-pointer identity",
+          "stock_span": "[0x0048F3A4,0x0048F3BE)",
+          "stock_size": 26,
+          "stock_sha256": "9d6c6690294b82bbafba82ec0f63a6bb5b78e4146543db3a30fac92469ace723",
+          "target_address": "0x0048F3A5"
+        },
+        {
+          "symbol": "open_cfw_nanopb_io_error",
+          "kind": "NUL-terminated data",
+          "target_address": "0x0078B690",
+          "size": 9,
+          "sha256": "3faaf40b4ee3e3b23823ed9851dc77bf6fc2d7c7c330240eeaed08bd9d084ec1"
+        }
+      ],
+      "relocations": [
+        {
+          "offset": 28,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_nanopb_end_of_stream_error",
+          "target_address": "0x00787C70"
+        },
+        {
+          "offset": 32,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_nanopb_end_of_stream_error",
+          "target_address": "0x00787C70"
+        },
+        {
+          "offset": 66,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_nanopb_stock_buffer_read_identity",
+          "target_address": "0x0048F3A5"
+        },
+        {
+          "offset": 70,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_nanopb_stock_buffer_read_identity",
+          "target_address": "0x0048F3A5"
+        },
+        {
+          "offset": 134,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_nanopb_io_error",
+          "target_address": "0x0078B690"
+        },
+        {
+          "offset": 138,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_nanopb_io_error",
+          "target_address": "0x0078B690"
+        }
+      ],
+      "toolchain_profiles": {
+        "apple-clang": {
+          "size": 158,
+          "alignment": 4,
+          "offset": 124640,
+          "runtime_address": "0x007B2A04",
+          "unrelocated_sha256": "06def086733fd9801b712161943b0da64e3b2bdf82e6f5962ee9207c738c00b1",
+          "relocated_sha256": "8b3de44a2cf7ca2e07715c913db0fa454ef65cbc453366190b12736e455aa7a8",
+          "entry_patch_sha256": "c2c44419ee24c41c8d0e8bc7f04689bb7f1c18b1f7ec3d7304e04c37579938a1"
+        },
+        "linux-clang": {
+          "size": 158,
+          "alignment": 4,
+          "offset": 126464,
+          "runtime_address": "0x007B3124",
+          "unrelocated_sha256": "06def086733fd9801b712161943b0da64e3b2bdf82e6f5962ee9207c738c00b1",
+          "relocated_sha256": "8b3de44a2cf7ca2e07715c913db0fa454ef65cbc453366190b12736e455aa7a8",
+          "entry_patch_sha256": "4dc433588344c12d1a0abfab8c5f1673c24f6702d8f285f67fb0fd8b8e6e3eab"
+        }
+      },
+      "bootloader_homolog": {
+        "found": false,
+        "official_image_size": 148599,
+        "official_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+        "qualification": "No full stock pb_read provider body, private buf_read body, or nanopb runtime error strings occur in the authenticated bootloader."
+      },
+      "configuration": "g2-config/pb_g2_options.h",
+      "qualification": "Altered local source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the vendor nanopb revision or checkout. The production leaf preserves canonical buf_read function-pointer identity 0x0048F3A5 through the source-backed stock entry and retains three explicit retained seams: that identity and two stock error strings. The broader pristine pb_common, pb_decode, and pb_encode translation units remain unregistered."
+    },
+    "production_private_read_pair": {
+      "upstream_source": "pb_decode.c",
+      "upstream_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+      "authenticated_release_range": [
+        "0.4.7",
+        "0.4.8",
+        "0.4.9"
+      ],
+      "upstream_definitions": [
+        {
+          "function": "buf_read",
+          "span_0_4_9": "pb_decode.c bytes [3421,3743)",
+          "size": 322,
+          "sha256": "34b5a0a938c4cbfe431c24afc0a8f273879eef4ee4853282d4c44708f27f4867"
+        },
+        {
+          "function": "pb_readbyte",
+          "span_0_4_9": "pb_decode.c bytes [4678,5112)",
+          "size": 434,
+          "sha256": "5a63231a2b3b2d79004219076ec6b6089c9d4ed2d9487cae9f0488e8c607c650"
+        }
+      ],
+      "local_sources": [
+        {
+          "function": "open_cfw_nanopb_buf_read",
+          "path": "components/shared/nanopb/runtime_nanopb_buf_read.c",
+          "size": 1685,
+          "sha256": "d7e464755bb4eff09207d33f1eb6b98ea49b43a91291001652d867f27bcd1bec"
+        },
+        {
+          "function": "open_cfw_nanopb_readbyte",
+          "path": "components/shared/nanopb/runtime_nanopb_readbyte.c",
+          "size": 2065,
+          "sha256": "f0cfa08ee31a67544f225830a023c38dd2c2e2903bfe6466ddcfc0a9dfb4bdbb"
+        }
+      ],
+      "local_header": "components/shared/nanopb/runtime_nanopb_private_read_pair.h",
+      "local_header_size": 2046,
+      "local_header_sha256": "00bb2c9885f951a711d60c37b02b77f3e679742ddce4255b0f108cec280535e4",
+      "stock_providers": [
+        {
+          "function": "buf_read",
+          "span": "[0x0048F3A4,0x0048F3BE)",
+          "size": 26,
+          "sha256": "9d6c6690294b82bbafba82ec0f63a6bb5b78e4146543db3a30fac92469ace723",
+          "canonical_thumb_identity": "0x0048F3A5",
+          "direct_callers": [],
+          "stored_pointer": "0x0048FC78 -> 0x0048F3A5",
+          "interior_ingress_count": 0
+        },
+        {
+          "function": "pb_readbyte",
+          "span": "[0x0048F454,0x0048F49C)",
+          "size": 72,
+          "sha256": "15c8303c5c1dbf1b3f143142c6169026cb8bc56b37a6291dd0457b3664b67ae5",
+          "direct_callers": [
+            "0x0048F4C4",
+            "0x0048F4FA",
+            "0x0048F5CC"
+          ],
+          "stored_pointer_ingress_count": 0,
+          "interior_ingress_count": 0
+        }
+      ],
+      "retained_stock_seams": [
+        {
+          "symbol": "__aeabi_memcpy",
+          "target_address": "0x00439BE4",
+          "provider_span": "[0x00439BE4,0x00439C8A)",
+          "provider_size": 166,
+          "provider_sha256": "8e696e1fb54917a436f850e562f74e8cc8734c259fdaac9f767a3c264ff427cd"
+        },
+        {
+          "symbol": "open_cfw_nanopb_end_of_stream_error",
+          "target_address": "0x00787C70",
+          "size": 14,
+          "sha256": "e167d4f2ec31a2197c7bc32affd9865ac8609d7dae984d0916e01f044fcc67b4"
+        },
+        {
+          "symbol": "open_cfw_nanopb_io_error",
+          "target_address": "0x0078B690",
+          "size": 9,
+          "sha256": "3faaf40b4ee3e3b23823ed9851dc77bf6fc2d7c7c330240eeaed08bd9d084ec1"
+        }
+      ],
+      "toolchain_profiles": {
+        "apple-clang": {
+          "buf_read": {
+            "offset": 124800,
+            "runtime_address": "0x007B2AA4",
+            "size": 30,
+            "unrelocated_sha256": "db26e5bd51f3d313907af94bfe545cc9962b867ed18285f2025c401e8613700a",
+            "relocated_sha256": "f312e087cf1fbecf19bd5fa0052d3a63ca91287c811de169aaf2a09322e0115e",
+            "entry_patch_sha256": "7b95b1a632ce6362c74c2a3f3ae2e9ef15f5abb6800d1dd8ca1dd4586b4f73ac"
+          },
+          "pb_readbyte": {
+            "offset": 124832,
+            "runtime_address": "0x007B2AC4",
+            "size": 64,
+            "unrelocated_sha256": "eda66d0ae6274a2078b6eceaefc0e773169d5e15b26bce650a8d48b818e4f2b8",
+            "relocated_sha256": "f3395a19a7406016e6b1f1daf14969dee91ccde4e9a98ba4eeaba0016e131871",
+            "entry_patch_sha256": "ed8460907148368a780a57a2abab8bb48cc80a78b980c38b0097e1b81ce1967e"
+          }
+        },
+        "linux-clang": {
+          "buf_read": {
+            "offset": 126624,
+            "runtime_address": "0x007B31C4",
+            "size": 30,
+            "unrelocated_sha256": "db26e5bd51f3d313907af94bfe545cc9962b867ed18285f2025c401e8613700a",
+            "relocated_sha256": "a6b4d3a4e969f078683f1cde3a4043b70d8495d577f550ae35c6c2789ff470de",
+            "entry_patch_sha256": "db7d0da006d031b33b6858a4b829d68403c9039f66d2ac4db576b00bdef94bec"
+          },
+          "pb_readbyte": {
+            "offset": 126656,
+            "runtime_address": "0x007B31E4",
+            "size": 64,
+            "unrelocated_sha256": "eda66d0ae6274a2078b6eceaefc0e773169d5e15b26bce650a8d48b818e4f2b8",
+            "relocated_sha256": "f3395a19a7406016e6b1f1daf14969dee91ccde4e9a98ba4eeaba0016e131871",
+            "entry_patch_sha256": "b571a49431ddbdd7c71059acf67da1227af1eecba58b09fafea45177eda87fd0"
+          }
+        }
+      },
+      "constructor_identity": {
+        "constructor_span": "[0x0048F49C,0x0048F4B8)",
+        "constructor_sha256": "852314bb8f86dcbd550deb0f51bc285b662e39c1b4fae66690c44a7bf4f7a674",
+        "literal_slot": "0x0048FC78",
+        "stored_thumb_pointer": "0x0048F3A5",
+        "constructor_replaced": true
+      },
+      "bootloader_homolog": {
+        "found": false,
+        "official_image_size": 148599,
+        "official_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+      },
+      "configuration": "g2-config/pb_g2_options.h",
+      "evidence": "docs/research/nanopb-private-read-pair-source-audit.md",
+      "evidence_size": 11344,
+      "evidence_sha256": "f025b71ce15c5b8f959524d34296e985a490cbcd43e81fc2f15428504526d075",
+      "qualification": "Altered local source selected against authenticated nanopb 0.4.9 as a compatibility baseline within the authenticated 0.4.7-0.4.9 range; not proof of the vendor nanopb revision or checkout. Full-span entry trampolines preserve canonical callback identity and cover every authenticated ingress. The source-owned constructor retains that canonical identity."
+    }
+  },
+  "g2_boundary": {
+    "evidence": "docs/research/nanopb-point-release-recovery-audit.md",
+    "analyzer": "tools/analyze_g2_nanopb_point_release.py",
+    "official_image": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "official_image_size": 3523396,
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "load_mapping": "run_address = file_offset + 0x00437fe0",
+    "runtime_range": [
+      "0x0048F000",
+      "0x00491400"
+    ],
+    "runtime_sha256": "ff42ff15a4574a6485b8b3e16de986679f059f2358d5d354b29f713760f43ea2",
+    "recovered_config_header": "g2-config/pb_g2_options.h",
+    "recovered_config_header_size": 1551,
+    "recovered_config_header_sha256": "ae758999d239e49e2d5c5bf6de3f4aef3aab5cd3c29d8de65c4db301c62899db",
+    "config_header_qualification": "openCFW-authored fail-closed option contract, not an upstream file or recovered vendor header",
+    "configuration": {
+      "PB_ENABLE_MALLOC": false,
+      "PB_FIELD_32BIT": false,
+      "pb_size_t_bits": 16,
+      "PB_WITHOUT_64BIT": false,
+      "64_bit_scalars": true,
+      "PB_CONVERT_DOUBLE_FLOAT": false,
+      "native_double_bits": 64,
+      "PB_VALIDATE_UTF8": false,
+      "PB_MAX_REQUIRED_FIELDS": 64,
+      "PB_BUFFER_ONLY": false,
+      "callback_streams": true,
+      "PB_NO_ERRMSG": false,
+      "runtime_error_strings": true,
+      "PB_NO_PACKED_STRUCTS": false,
+      "packed_structures": true,
+      "PB_ENCODE_ARRAYS_UNPACKED": false,
+      "packed_repeated_scalars": true,
+      "fixed_count_fields_supported": true,
+      "fixed_length_fields_supported": true
+    },
+    "first_party_glue": {
+      "included": false,
+      "separate_required_inputs": [
+        "Even .proto schemas",
+        "generated Even .pb.c/.pb.h messages and descriptors",
+        "generator-version stamp",
+        "application callbacks and transports",
+        "ownership/allocation policy",
+        "firmware address and call-site integration"
+      ],
+      "qualification": "Fixed-count/fixed-length selections reside in generated descriptors. No Even schema or generated message is part of this upstream snapshot."
+    }
+  },
+  "files": [
+    {
+      "local_path": "LICENSE.txt",
+      "upstream_path": "LICENSE.txt",
+      "git_mode": "100644",
+      "size": 898,
+      "sha256": "e2f2fc8fe3faa7dcb09dbe995db48c6ec5c1f72705db915101e4a83fed44f66d",
+      "git_blob_sha1": "d11c9af1d7e469e9a5357a660fd184f58c3a4ff2"
+    },
+    {
+      "local_path": "pb.h",
+      "upstream_path": "pb.h",
+      "git_mode": "100644",
+      "size": 44072,
+      "sha256": "8cceb4abf46bc1df7f2e7ccb9ab87f84e509f9bfa5733f5ce1f70e7dbc82d18f",
+      "git_blob_sha1": "1bff70e4e6fbf029e3d6140f5ffd812b9bc7d12e"
+    },
+    {
+      "local_path": "pb_common.c",
+      "upstream_path": "pb_common.c",
+      "git_mode": "100644",
+      "size": 12141,
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+      "git_blob_sha1": "6aee76b1efa1e6f2f3fe7d43629da9b2114eea19"
+    },
+    {
+      "local_path": "pb_common.h",
+      "upstream_path": "pb_common.h",
+      "git_mode": "100644",
+      "size": 1677,
+      "sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+      "git_blob_sha1": "58aa90f76d58596d3f45a120b65b4a0bff7fd688"
+    },
+    {
+      "local_path": "pb_decode.c",
+      "upstream_path": "pb_decode.c",
+      "git_mode": "100644",
+      "size": 53845,
+      "sha256": "e980f2a41d9abe37b7e6fb4c9ba1ebfd68507a6fd2653f8d755e1947a9c84b1a",
+      "git_blob_sha1": "068306a05339af05b3b3fb80894746ed9a077bf8"
+    },
+    {
+      "local_path": "pb_decode.h",
+      "upstream_path": "pb_decode.h",
+      "git_mode": "100644",
+      "size": 7870,
+      "sha256": "1747746e5961de5789bcf0795588da0790cd18b2e4e706ad9c7099a0fa1cc83f",
+      "git_blob_sha1": "3f392b29386e3dbbc69337316eb98029d239690a"
+    },
+    {
+      "local_path": "pb_encode.c",
+      "upstream_path": "pb_encode.c",
+      "git_mode": "100644",
+      "size": 30425,
+      "sha256": "d8dff2a1acc58683095a41b0dc3103ba46248e4a8d8c4e20f5810be04127b650",
+      "git_blob_sha1": "f9034a542848f0be0656e2e9eb2b467b2a83cf41"
+    },
+    {
+      "local_path": "pb_encode.h",
+      "upstream_path": "pb_encode.h",
+      "git_mode": "100644",
+      "size": 7176,
+      "sha256": "9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf",
+      "git_blob_sha1": "6dc089da307a10a6d440e70acb2775ed6e7fb07c"
+    }
+  ]
+}

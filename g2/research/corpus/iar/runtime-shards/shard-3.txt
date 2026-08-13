@@ -1,0 +1,396 @@
+openjdk version "21.0.12" 2026-07-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.12+8 (build 21.0.12+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12+8 (build 21.0.12+8-LTS, mixed mode)
+INFO  Using log config file: jar:file:/var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1484 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (6741 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 210 extension points (114 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/kalani/.cache/opencfw-tools/ghidra-scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-3/iar_runtime_3 (HeadlessAnalyzer)  
+INFO  Creating project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-3/iar_runtime_3 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-3/iar_runtime_3 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/kalani/Repo/SybilSight/openCFW/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin (HeadlessAnalyzer)  
+INFO  Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x437fe0") (ProgramLoader)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: ARM:LE:32:Cortex:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DumpFunctionDecomp.java '0x00438fb8' '0x004396b8'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/kalani/.cache/opencfw-tools/ghidra-scripts/DumpFunctionDecomp.java (HeadlessAnalyzer)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 00438fb8 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+/* WARNING: Type propagation algorithm not settling */
+
+int open_cfw_target_0x00438fb8
+              (uint param_1,byte param_2,char *param_3,undefined4 param_4,char *param_5)
+
+{
+  short *psVar1;
+  short *psVar2;
+  short *psVar3;
+  short sVar4;
+  char cVar5;
+  int iVar6;
+  short *psVar7;
+  int iVar8;
+  undefined4 uVar9;
+  uint uVar10;
+  float *pfVar11;
+  int extraout_r1;
+  int extraout_r1_00;
+  char *pcVar12;
+  int iVar13;
+  int extraout_r2;
+  float *extraout_r2_00;
+  float *extraout_r2_01;
+  uint uVar14;
+  int iVar15;
+  char *pcVar16;
+  int iVar17;
+  float fVar18;
+  uint uVar19;
+  short *psVar20;
+  bool bVar21;
+  float fVar22;
+  float extraout_s0;
+  float extraout_s0_00;
+  float fVar23;
+  float fVar24;
+  float fVar25;
+  undefined8 uVar26;
+  float fStack_290;
+  char *pcStack_28c;
+  float fStack_288;
+  float afStack_284 [16];
+  undefined1 auStack_244 [256];
+  undefined1 auStack_144 [260];
+  char cStack_2c;
+  
+  uVar14 = param_1 + 1;
+  iVar15 = uVar14 * 0x20;
+  func_0x00439710(param_3 + 0x20,param_3 + uVar14 * 0x40 + 0x20,(uVar14 * -0x20 + 0x180) * 2);
+  (**(code **)((uint)param_2 * 4 + 0x439680))
+            (param_3 + 0x10,param_4,param_3 + uVar14 * -0x40 + 800,iVar15);
+  if ((param_1 & 0xff) == 2) {
+    iVar6 = -0x58;
+  }
+  else {
+    iVar6 = -0x30;
+  }
+  pcStack_28c = param_3 + uVar14 * -0x40 + 800 + iVar6;
+  uVar19 = uVar14 & 0x7ffffff;
+  iVar6 = uVar19 * 0x10;
+  func_0x00439710(param_3 + 800,param_3 + 800 + uVar14 * 0x20,(uVar19 * -0x10 + 0xb2) * 2);
+  pcVar16 = param_3 + uVar19 * -0x20 + 0x484;
+  psVar20 = (short *)(pcStack_28c + -2);
+  for (pcVar12 = pcVar16; pcVar12 < pcVar16 + uVar14 * 0x20; pcVar12 = pcVar12 + 4) {
+    psVar7 = psVar20 + 2;
+    *(short *)pcVar12 =
+         (short)((uint)(((int)*psVar7 + (int)psVar20[-2]) * 0x1fa9 +
+                       ((int)psVar20[1] + (int)psVar20[-1]) * 0x3c40 + *psVar20 * 0x482d) >> 0x10);
+    if (pcVar16 + uVar14 * 0x20 <= pcVar12 + 2) break;
+    psVar3 = psVar20 + 1;
+    psVar1 = psVar20 + 3;
+    sVar4 = *psVar20;
+    psVar2 = psVar20 + 4;
+    psVar20 = psVar20 + 4;
+    *(short *)(pcVar12 + 2) =
+         (short)((uint)(((int)*psVar2 + (int)sVar4) * 0x1fa9 +
+                       ((int)*psVar1 + (int)*psVar3) * 0x3c40 + *psVar7 * 0x482d) >> 0x10);
+  }
+  fVar18 = fRam00439350;
+  cStack_2c = (char)param_1;
+  if (cStack_2c == '\0') {
+    iVar15 = uVar14 * 0x40;
+    iVar6 = uVar14 * 0x20;
+    pcStack_28c = pcStack_28c + uVar14 * -0x40;
+    pcVar16 = pcVar16 + uVar14 * -0x20;
+  }
+  uVar14 = 0;
+  iVar8 = *(int *)(param_3 + 0x484) + -4;
+  iVar17 = 0;
+  if (0 < iVar8) {
+    iVar17 = iVar8;
+  }
+  iVar8 = *(int *)(param_3 + 0x484) + 4;
+  if (0x61 < iVar8) {
+    iVar8 = 0x61;
+  }
+  fStack_290 = 1.37327e-43;
+  func_0x004387b0(pcVar16,pcVar16 + -0x22,iVar6,&fStack_288);
+  bVar21 = (int)((uint)(fStack_288 < afStack_284[0] * fRam00439354) << 0x1f) < 0;
+  fVar22 = fStack_288;
+  if (bVar21) {
+    fStack_288 = afStack_284[0] * fRam00439354;
+    fVar22 = afStack_284[0];
+  }
+  uVar19 = (uint)bVar21;
+  uVar10 = 2;
+  fVar23 = fRam0043935c;
+  pfVar11 = &fStack_290;
+  do {
+    fVar24 = pfVar11[4];
+    fVar25 = fVar24 * fVar23;
+    if (fStack_288 < fVar25) {
+      uVar19 = uVar10;
+      fStack_288 = fVar25;
+      fVar22 = fVar24;
+    }
+    fVar24 = pfVar11[5] * (fVar23 + fRam00439358);
+    if (fStack_288 < fVar24) {
+      uVar19 = uVar10 + 1;
+      fStack_288 = fVar24;
+      fVar22 = pfVar11[5];
+    }
+    fVar23 = fVar23 + fRam00439358 + fRam00439358;
+    fVar24 = pfVar11[6] * fVar23;
+    if (fStack_288 < fVar24) {
+      uVar19 = uVar10 + 2;
+      fStack_288 = fVar24;
+      fVar22 = pfVar11[6];
+    }
+    fVar23 = fVar23 + fRam00439358;
+    fVar24 = pfVar11[7] * fVar23;
+    if (fStack_288 < fVar24) {
+      uVar19 = uVar10 + 3;
+      fStack_288 = fVar24;
+      fVar22 = pfVar11[7];
+    }
+    uVar10 = uVar10 + 4;
+    fVar23 = fVar23 + fRam00439358;
+    pfVar11 = pfVar11 + 4;
+  } while ((int)uVar10 < 0x62);
+  iVar13 = 0;
+  fVar23 = (&fStack_288)[iVar17];
+  if (1 < (iVar8 - iVar17) + 1) {
+    fStack_290 = (float)(iVar8 - iVar17);
+    uVar26 = func_0x0108721c(1,(int)afStack_284 + iVar17 * 4);
+    pfVar11 = (float *)((ulonglong)uVar26 >> 0x20);
+    fVar24 = *pfVar11;
+    if (fVar23 < fVar24) {
+      fVar23 = fVar24;
+    }
+    func_0x00c48224((int)uVar26 + 1,pfVar11 + 1);
+    uVar26 = func_0x00c8728c();
+    pfVar11 = (float *)((ulonglong)uVar26 >> 0x20);
+    if (fVar23 < *pfVar11) {
+      fVar23 = *pfVar11;
+    }
+    if (fVar23 < pfVar11[1]) {
+      fVar23 = pfVar11[1];
+    }
+    if (fVar23 < pfVar11[2]) {
+      fVar23 = pfVar11[2];
+    }
+    if (fVar23 < pfVar11[3]) {
+      fVar23 = pfVar11[3];
+    }
+    func_0x010482b4((int)uVar26 + 4,pfVar11 + 4);
+    iVar13 = extraout_r2;
+  }
+  fVar24 = fRam00439350;
+  if (0.0 < fVar22) {
+    fVar24 = (float)func_0x00438770(pcVar16,pcVar16,iVar6);
+    fVar25 = (float)func_0x00438770(pcVar16 + (uVar19 + 0x11) * -2,pcVar16 + (uVar19 + 0x11) * -2,
+                                    iVar6);
+    fVar24 = (float)func_0x004397a8(fVar24 * fVar25);
+    fVar24 = fVar22 / fVar24;
+  }
+  fVar22 = fRam00439350;
+  if (0.0 < fVar23) {
+    fVar22 = (float)func_0x00438770(pcVar16,pcVar16,iVar6);
+    fVar25 = (float)func_0x00438770(pcVar16 + (iVar17 + iVar13 + 0x11U) * -2,
+                                    pcVar16 + (iVar17 + iVar13 + 0x11U) * -2,iVar6);
+    fVar22 = (float)func_0x004397a8(fVar22 * fVar25);
+    fVar22 = fVar23 / fVar22;
+  }
+  bVar21 = fVar24 * fRam00439614 < fVar22;
+  if (bVar21) {
+    uVar19 = iVar17 + iVar13;
+  }
+  *(uint *)(param_3 + 0x484) = uVar19;
+  if (bVar21) {
+    fVar24 = fVar22;
+  }
+  if (fVar24 < fRam00439668) {
+    iVar6 = 0;
+  }
+  else {
+    iVar17 = (uVar19 + 0x11) * 2;
+    iVar8 = iVar17 + -4;
+    iVar6 = 1;
+    if (iVar8 < 0x20) {
+      iVar8 = 0x20;
+    }
+    iVar17 = iVar17 + 4;
+    if (0xe4 < iVar17) {
+      iVar17 = 0xe4;
+    }
+    fVar18 = (float)(iVar17 - iVar8);
+    fStack_290 = (float)((int)fVar18 + 9);
+    func_0x004387b0(pcStack_28c,pcStack_28c + (iVar8 + -4) * -2,iVar15,&fStack_288);
+    iVar17 = 0;
+    if (1 < (int)fVar18 + 1) {
+      fStack_290 = fVar18;
+      iVar17 = func_0x010873c4(afStack_284[3],0,1,afStack_284 + 4);
+      fVar18 = extraout_s0;
+      if (extraout_s0 < *extraout_r2_00) {
+        iVar17 = extraout_r1;
+        fVar18 = *extraout_r2_00;
+      }
+      func_0x00c483cc(fVar18,iVar17,extraout_r1 + 1,extraout_r2_00 + 1);
+      iVar17 = func_0x00c87434();
+      fVar18 = extraout_s0_00;
+      if (extraout_s0_00 < *extraout_r2_01) {
+        iVar17 = extraout_r1_00;
+        fVar18 = *extraout_r2_01;
+      }
+      if (fVar18 < extraout_r2_01[1]) {
+        iVar17 = extraout_r1_00 + 1;
+        fVar18 = extraout_r2_01[1];
+      }
+      if (fVar18 < extraout_r2_01[2]) {
+        iVar17 = extraout_r1_00 + 2;
+        fVar18 = extraout_r2_01[2];
+      }
+      if (fVar18 < extraout_r2_01[3]) {
+        iVar17 = extraout_r1_00 + 3;
+        fVar18 = extraout_r2_01[3];
+      }
+      iVar17 = func_0x0104845c(fVar18,iVar17,extraout_r1_00 + 4,extraout_r2_01 + 4);
+    }
+    iVar17 = iVar17 + iVar8;
+    iVar8 = iVar17 - iVar8;
+    pfVar11 = (float *)((int)afStack_284 + (iVar8 + 3) * 4);
+    uVar19 = 0;
+    fVar18 = *(float *)((int)afStack_284 + iVar8 * 4) * fRam0043966c +
+             *(float *)((int)afStack_284 + (iVar8 + 1) * 4) * fRam00439670 +
+             *(float *)((int)afStack_284 + (iVar8 + 2) * 4) * fRam00439674 + *pfVar11 * fRam00439678
+             + *(float *)((int)afStack_284 + (iVar8 + 4) * 4) * fRam00439674 +
+             *(float *)((int)afStack_284 + (iVar8 + 5) * 4) * fRam00439670 +
+             *(float *)((int)afStack_284 + (iVar8 + 6) * 4) * fRam0043966c;
+    uVar14 = 1;
+    do {
+      if ((iVar17 < 0x7f) || (iVar17 < 0x9d && (uVar14 & 1) == 0)) {
+        fVar22 = (float)func_0x00438ef0(pfVar11,uVar14);
+        if (fVar18 < fVar22) {
+          uVar19 = uVar14;
+          fVar18 = fVar22;
+        }
+        if (0x20 < iVar17) {
+          fVar22 = (float)func_0x00438ef0(pfVar11,-uVar14);
+          if (fVar18 < fVar22) {
+            uVar19 = -uVar14;
+            fVar18 = fVar22;
+          }
+        }
+      }
+      uVar14 = uVar14 + 1;
+    } while ((int)uVar14 < 4);
+    if ((int)uVar19 < 0) {
+      iVar17 = iVar17 + -1;
+      uVar19 = uVar19 + 4;
+    }
+    uVar14 = uVar19 + iVar17 * 4;
+    if (iVar17 < 0x7f) {
+      iVar17 = uVar14 - 0x80;
+    }
+    else if (iVar17 < 0x9d) {
+      iVar17 = ((int)uVar19 >> 1) + iVar17 * 2 + 0x7e;
+    }
+    else {
+      iVar17 = iVar17 + 0x11b;
+    }
+    *(int *)(param_5 + 4) = iVar17;
+    func_0x00438924(pcStack_28c,iVar15,0,auStack_144);
+    func_0x00438924(pcStack_28c + ((int)uVar14 >> 2) * -2,iVar15,uVar14 & 3,auStack_244);
+    fVar18 = (float)func_0x00438770(auStack_144,auStack_244,iVar15);
+    fVar22 = (float)func_0x00438770(auStack_144,auStack_144,iVar15);
+    fVar23 = (float)func_0x00438770(auStack_244,auStack_244,iVar15);
+    fVar22 = (float)func_0x004397a8(fVar22 * fVar23);
+    fVar18 = fVar18 / fVar22;
+  }
+  if (*param_3 == '\0') {
+    if ((param_2 < 5 && iVar6 == 1) &&
+       ((cStack_2c == '\x03' || (fRam004396a4 <= *(float *)(param_3 + 0xc))))) {
+      fVar22 = *(float *)(param_3 + 8);
+      bVar21 = NAN(fVar22) || NAN(fRam004396a4);
+      if (fVar22 >= fRam004396a4) {
+        bVar21 = NAN(fVar18) || NAN(fRam004396a4);
+      }
+      if ((fVar22 < fRam004396a4 || fVar18 < fRam004396a4) == bVar21) goto LAB_00439662;
+    }
+  }
+  else {
+    uVar10 = *(uint *)(param_3 + 4);
+    uVar19 = uVar14;
+    if (((int)uVar14 <= (int)uVar10) && (uVar19 = uVar10, (int)uVar14 <= (int)uVar10)) {
+      uVar10 = uVar14;
+    }
+    if ((param_2 < 5 && iVar6 == 1) &&
+       ((fRam0043967c <= fVar18 ||
+        (((fRam0043969c <= fVar18 && ((int)(uVar19 - uVar10) < 8)) &&
+         (fRam004396a0 <= fVar18 - *(float *)(param_3 + 8))))))) {
+LAB_00439662:
+      cVar5 = '\x01';
+      goto LAB_004395ea;
+    }
+  }
+  cVar5 = '\0';
+LAB_004395ea:
+  *param_5 = cVar5;
+  *param_3 = cVar5;
+  *(uint *)(param_3 + 4) = uVar14;
+  uVar9 = *(undefined4 *)(param_3 + 8);
+  *(float *)(param_3 + 8) = fVar18;
+  *(undefined4 *)(param_3 + 0xc) = uVar9;
+  return iVar6;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 00438fb8 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 004396b8 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+int open_cfw_target_0x004396b8(int param_1)
+
+{
+  return param_1 * 10 + 1;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 004396b8 (GhidraScript)  
+INFO  /ota_s200_firmware_ota.bin: file created (kalani) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /ota_s200_firmware_ota.bin (iar_runtime_3:/ota_s200_firmware_ota.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

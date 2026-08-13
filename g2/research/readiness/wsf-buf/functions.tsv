@@ -1,0 +1,4 @@
+stock_name	start	end	candidate_symbol	evidence
+WsfBufInit	0x00530364	0x00530446	WsfBufInit	source-order semantics, globals/literals, sole BL caller 0x004B7F7C
+WsfBufAlloc	0x00530446	0x005304D4	WsfBufAlloc	retained source-path/line-321 anchor and 24 direct BL callers
+WsfBufFree	0x005304D4	0x00530512	WsfBufFree	free-magic/config discriminator and 28 direct BL callers

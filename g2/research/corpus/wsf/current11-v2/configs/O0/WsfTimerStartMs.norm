@@ -1,0 +1,16 @@
+push {lr}
+sub sp,#12
+str r0,[sp,#4]
+str r1,[sp,#0]
+ldr r3,[sp,#0]
+ldr r2,[pc,#pcrel] @ (24 <symbol>)
+umull r2,r3,r2,r3
+lsrs r3,r3,#3
+mov r1,r3
+ldr r0,[sp,#4]
+bl <call>
+nop
+sp ,#12
+ldr.w pc,[sp],#4
+nop
+.word <literal>

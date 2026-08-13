@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	kvdbRingDefaultInitialize	inferred semantic name	0x005D9B6C	0x005D9B82	22	ef35718875dd86b68dcb6ce403d801def07fb263ebce8e276f899e0aaf34c36d	stored Thumb pointer 0x006D1E44	computes CRC-16 over the first twenty-two bytes of the live record
+2	_kvdbUpdataRing	exact retained symbol string	0x005D9B82	0x005D9D40	446	8820609ec9c69ccca51e740e6c6e90c1482bb29b3d7688b13508a787a368dd9a	stored Thumb pointer 0x00746D30	reads a stack temporary and rewrites live fields only for missing or v0 CRC-mismatched data
+3	SVC_KvdbWriteRing	exact retained symbol string	0x005D9D40	0x005D9E88	328	009e81ba8b01aef6489577a8241a55330e68791f2a6c8d6edea9c2223781f6f4	BL sites 0x005D9D2A,0x005D9D36	updates MAC/name, forces version one, recomputes CRC, and persists 24 bytes

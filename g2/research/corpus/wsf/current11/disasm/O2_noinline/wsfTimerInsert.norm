@@ -1,0 +1,30 @@
+push {r4,r5,r6,lr}
+mov r6,r0
+mov r5,r1
+bl <call>
+ldrb r3,[r6,#13]
+cbnz r3,<branch>
+movs r1,#1
+ldr r3,[pc,#pcrel] @ (44 <symbol>)
+movs r2,#0
+ldr r3,[r3,#0]
+str r5,[r6,#4]
+strb r1,[r6,#13]
+cbnz r3,<branch>
+b.n <branch>
+ldr r4,[r3,#0]
+mov r2,r3
+cbz r4,<branch>
+mov r3,r4
+ldr r4,[r3,#4]
+cmp r4,r5
+bls.n <branch>
+mov r1,r6
+ldr r0,[pc,#pcrel] @ (44 <symbol>)
+bl <call>
+ldmia.w sp!,{r4,r5,r6,lr}
+b.w <branch>
+mov r0,r6
+bl <call>
+b.n <branch>
+.word <literal>

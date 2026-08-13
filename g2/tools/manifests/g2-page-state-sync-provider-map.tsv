@@ -1,0 +1,5 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	50 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Page-state sync diagnostics
+IAR DLIB memory primitives	3 direct BL sites	0x00439BE4,0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded/source-recreated	Memcpy and memset add no release discriminator
+nanopb stream initializer	1 direct BL site	0x0048949C	nanopb/nanopb	0.4.7 through 0.4.9.1 compatible	98bf4db69897b53434f3d0ba72e0a3ab1a902824	source-admitted	Shared pb_istream_from_buffer descriptor initializer
+G2 dashboard state providers	3 direct BL sites	0x0045A570,0x004FF7DC,0x00558142	Even Realities first-party	private G2 source	unobservable	bounded first-party provider graph	Peer sync transport closed dashboard-data-process writer and watchface kind getter

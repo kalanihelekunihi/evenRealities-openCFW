@@ -1,0 +1,30 @@
+metric	value
+linked_functions	14
+body_bytes	2332
+body_concat_sha256	502a7480281cb8beefe16a10a1a066fe7236712086eb01341c38c97161ee250e
+physical_interval	[0x004C9D44,0x004CA6F8)
+physical_bytes	2484
+physical_sha256	c0630c1686b6a9d6d10802f3620206a4cf73047a53d1aed00e4b079bb410c760
+owned_noncode_bytes	152
+owned_noncode_sha256	e6519cf253e67cd737e6ccfa9f7533ec14380b6f1fc6ce5e3967acb1d8e6c813
+direct_bl_entry_sites	18 total / 1 intra-object / 17 exterior
+direct_bl_entry_digest	dac994ae5c6265c9aedb0251a8e885cc3ed73c082b00514d072f7e6bb058152a
+direct_body_call_sites	97 real calls after 15 qualified multiply/VFP false windows
+direct_body_call_digest	36ae75caf1b59ffbe7e8724ce42e3616034c1bdccb1dc68def404744c4af772a
+stored_entry_pointers	one Thumb entry 0x00438090->0x004C9D45 in the firmware startup termination table
+stored_entry_pointer_digest	a5b8917b149c508956bd34875b38b91e6f0824e3eaa56c05703034cb27c0dd41
+runtime_entry_materialization	0x004C9FA8 addw r0,pc,#0x301 -> 0x004CA2AD uled_clean_fb_data Thumb callback
+stored_strict_interior_pointers	0
+raw_interior_byte_windows	0x0064CF7B=0x004CA600;odd-byte overlap, not a pointer
+raw_interior_window_digest	11dbf7a72df133b0a4caa07a8dc2c9f484bd56a247f040db309f883ca68e9c1b
+direct_b_w_entry_or_interior_targets	0
+retained_path	D:\01_workspace\s200_ap510b_iar_git\driver\uled\drv_mspi_uled.c
+retained_path_pointer_cells	0x004CA670
+operations_linker_list	[0x0078EE24,0x0078EE2C);{0x0070AFE4 A6N-G,0x0070B024 JBD4010};SHA256 2dfd9fd3eca94e66fbeecdd42d7dd6a26e54971d00dc7d50f2d68f028dbd63f0
+active_operations_pointer	0x20074530
+selection_rule	configuration key 1 byte equals 0x06 -> type 1 A6N-G; otherwise type 0 JBD4010
+operations_layout	callbacks term/read-id/mspi-init/driver-init/power-up/power-down/brightness/clear/current/offset/async-refresh/blocking-refresh/status/mode/serial then type byte at +0x3C
+framebuffer	pointer at 0x200007B8;640x480;4bpp;320-byte scanlines
+production_routed	false
+ownership_bytes	0
+source_inventory	unavailable; linked-object census complete but source-only function count unknown

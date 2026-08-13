@@ -1,0 +1,7 @@
+recovery_order	function	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	ghidra_discovered	qualification
+1	fw_event_loop_initialize	0x004764E0	0x0047667E	414	d5c8eee2a3aa006b6cacb9ecdf509aae6a4e3552bc0eb26e208ec64bd0dc3c71	yes	yes	creates the 15-entry event queue, timer, mutex, and worker thread through exact CMSIS wrappers
+2	fw_event_loop_task	0x00476680	0x004766EC	108	cd18e9f3b84c8ee5f394202e1831b093856cfa4df675c44c4a5c92983ac95d76	no	no	dequeues callback/argument pairs and invokes one bounded registered callback
+3	fw_event_loop_push	0x004766EC	0x004767A8	188	13fca29403f4d51ebce4643fda4b92976832612cad8cef65f1faea4970f984be	yes	yes	queues immediate callbacks through exact CMSIS message-queue put
+4	fw_event_loop_timer_callback	0x004767A8	0x0047697E	470	5240df073fc2190b345796c52e1cb58c513984bb877e48cac02c1d238dca764b	yes	yes	updates the bounded 64-slot delayed-callback arrays and posts callbacks that expire
+5	fw_event_loop_push_delayed	0x0047697E	0x00476ACE	336	496f1779e410338cac437436bd548d4e38f48a23764f7134f6a1100e5da81048	yes	yes	registers a delayed callback under the CMSIS mutex and starts the one-shot timer
+6	fw_event_loop_remove_delayed	0x00476ACE	0x00476BF0	290	6491c4dabd2c4ad8867e7f32e46439da9a1f321dfde163a6d5f710b1a29667ec	yes	yes	removes matching delayed callback/argument pairs under the CMSIS mutex

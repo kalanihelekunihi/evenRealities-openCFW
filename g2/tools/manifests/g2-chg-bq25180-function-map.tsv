@@ -1,0 +1,29 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	bq25180_write_register	semantic	0x0053A670	0x0053A694	36	5f054d722fd1ebcdc37eb5d419e7259c063264f09c984af79ebb62ac51beb90b	intra-TU BL at 0x0053A6E2 and 0x0053AB48	I2C bus 7/address 0x6A write wrapper
+2	bq25180_read_register	semantic	0x0053A694	0x0053A6B6	34	0c00159b47f88cf2598f26ff6bcc4905ef3b256d43f9159dce407df3d8690a42	intra-TU BL at 0x0053A6C6 and four read paths	I2C bus 7/address 0x6A one-byte read wrapper
+3	bq25180_update_field	semantic	0x0053A6B6	0x0053A6E8	50	c69f2da3fb23a3f207b993040661f841021b1c20186538c40ecbaee0b8b5b655	27 intra-TU BL sites	register read/clear/OR/write field helper
+4	bq25180_configure_event_mask	semantic	0x0053A6E8	0x0053A7C0	216	cd99facc658fb2b060f5383117c678dc5fa4e021dca53ae2c5f4a27d6c269b3d	intra-TU BL at 0x0053A7C6	seven event bits map to CHARGECTRL1 and MASK_ID
+5	bq25180_mask_events	semantic	0x0053A7C0	0x0053A7CC	12	0ef4fae877a65142ae34ad175e2773998d12c52bb48861eba38fafefe2726f31	intra-TU BL at 0x0053AE58	mask wrapper passes enabled=false
+6	DRV_Bq25180ReadEvent	exact retained function string	0x0053A7CC	0x0053A8AC	224	2ffb7ed8fed9bdf2468d2fcbf8a56f85746ac03315fb384e47f3f9663d57afd4	intra-TU BL at 0x0053AE6E	retained name, null assertion, FLAG0 read and one-byte output
+7	DRV_Bq25180ReadStatet	exact retained function string (stock typo)	0x0053A8AC	0x0053A9D0	292	f4764d0d8157d8c917472fd97d30e1ad95118d1a27e88dd5bff26281c4ddbffb	intra-TU BL at 0x0053AE76	retained name, STAT0/STAT1 packing and charge-state cache
+8	bq25180_read_device_id	exact retained function string	0x0053A9D0	0x0053AA84	180	e6404eaa81eade54be3c8b1f31b260f03a22a15e29c41d658df9891d388c9ee6	intra-TU BL at 0x0053AEBA	retained name and MASK_ID low-nibble diagnostics
+9	DRV_Bq25180SetChargeEnabled	semantic	0x0053AA84	0x0053AAA0	28	b0d11f885f410c569ab178a0422764b92196fcb72b6b066af94e17c21aba9591	intra-TU BL at 0x0053ADEA and 0x0053AE5E	ICHG_CTRL CE bit uses inverted enable polarity
+10	DRV_Bq25180SetTsEnabled	semantic	0x0053AAA0	0x0053AAB2	18	5a24f3a763aad3d95d723cc646ec6cce43c593768e3c0cc3a035a110e2344c44	intra-TU BL at 0x0053ADF0	IC_CTRL TS_EN field
+11	DRV_Bq25180SetSafetyTimer	semantic	0x0053AAB2	0x0053AAC4	18	758b3da2ca9a1b9a795efe20ecbb0cd015cd10811c4c1c8916ff4984af53f0f1	intra-TU BL at 0x0053AE46	IC_CTRL safety-timer field
+12	DRV_Bq25180SetWatchdog	semantic	0x0053AAC4	0x0053AAD6	18	8aff5fb5ea84e26fd3211112c7db04d8d8fc6b013427f1cdf9eb10a11ab7c5c4	intra-TU BL at 0x0053AE4C	IC_CTRL watchdog field
+13	DRV_Bq25180SetBatteryRegulationVoltage	exact retained function string	0x0053AAD6	0x0053AB50	122	53abad6b880231bc264d979999d19d253ac65d38babde0a92d0cf05f5b128215	intra-TU BL at 0x0053AE1E	retained range assertion and (mV-3500)/10 encoding
+14	DRV_Bq25180SetBatteryOvercurrent	semantic	0x0053AB50	0x0053AB62	18	5894c213d476786d20c1b466fc43c6519412c8c1bf5ba1a955c1e813b19e76d3	intra-TU BL at 0x0053AE10	CHARGECTRL1 BATOCP field
+15	DRV_Bq25180SetBatteryUnderVoltage_lockout	exact retained function string	0x0053AB62	0x0053AC20	190	5d9cb9dcc0f7748973032acd1337e81d0cddd93cb9c6b78e50f971f58a0923d1	intra-TU BL at 0x0053AE2C	retained assertion and six voltage buckets
+16	DRV_Bq25180SetPrechargeThreshold	semantic	0x0053AC20	0x0053AC3E	30	2d6338bb172e44e6a26b5bcf33b25d0ef78fecd73533e8c08dd6c924fbfa80f1	intra-TU BL at 0x0053AE34	IC_CTRL VLOWV selector at 2800 mV
+17	DRV_Bq25180SetPrechargeRatio	semantic	0x0053AC3E	0x0053AC5C	30	ffa00028db6ae02a3432130d289115d7e1924f2ce8427949c332eda15bf8523d	intra-TU BL at 0x0053AE04	CHARGECTRL0 precharge ratio selector
+18	DRV_Bq25180SetFastchargeCurrent	exact retained function string	0x0053AC5C	0x0053ACE2	134	62b2fe5df0db4b120de9976de9a745a5ab2789caa545fd0982e9a2e1ad4a362c	intra-TU BL at 0x0053ADF6	retained assertion and dual-range ICHG encoding
+19	DRV_Bq25180SetTerminationPercent	semantic	0x0053ACE2	0x0053AD14	50	3db14f368be150d44668e5d1660f539200cc24bb2222851519b6a09e51f13ce5	intra-TU BL at 0x0053AE0A	termination percentage buckets 0/5/10/20
+20	DRV_Bq25180SetVindpm	semantic	0x0053AD14	0x0053AD26	18	3f3b6a84b13c2b59cbf070cbf89e8a0f4ec4c85a9bd5c79e7181824c2529186f	intra-TU BL at 0x0053AE24	CHARGECTRL0 VINDPM field
+21	DRV_Bq25180SetVdppmEnabled	semantic	0x0053AD26	0x0053AD42	28	eac81a0dfb48627e9e9493672a6681907269df3b59586a2fe9b7054eadc009be	intra-TU BL at 0x0053AE40	SYS_REG VDPPM bit uses inverted enable polarity
+22	DRV_Bq25180SetInputCurrentLimit	semantic	0x0053AD42	0x0053ADB0	110	22116f6f42af9adc92d92eebd0cb143277941e80d210339ef4974c698afa571a	intra-TU BL at 0x0053ADFE	eight TMR_ILIM current buckets
+23	DRV_Bq25180SetSystemMode	semantic	0x0053ADB0	0x0053ADC2	18	edd6bce30be66516883a5341d4a75eb9eede51b299a5f2d494382384f33e102f	intra-TU BL at 0x0053AE3A	SYS_REG mode field
+24	DRV_Bq25180SetSystemVoltage	semantic	0x0053ADC2	0x0053ADD4	18	0dac0f3a3f626c21120fe6e3a824ccf3314973962371b5a9d6a8f168cb89ba67	intra-TU BL at 0x0053AE16	SYS_REG voltage field
+25	DRV_Bq25180SetTsAutoEnabled	semantic	0x0053ADD4	0x0053ADE6	18	a8347071eaaebef0f48ed0107cf1e0ab1676c6ca124eb530af1fcb4a32a25309	intra-TU BL at 0x0053AE52	second IC_CTRL TS_EN wrapper retained by defaults
+26	bq25180_apply_defaults	semantic	0x0053ADE6	0x0053AE66	128	77066895d861ebfea53fa841c4a001adcaa0fcbffc88ad4579ce44a7548dee79	intra-TU BL at 0x0053AF08	exact 19-call charger-default sequence
+27	DRV_Bq25180RefreshStatus	semantic	0x0053AE66	0x0053AE7E	24	58aae337d1c0264f8be3da7069d60eb569f27b08aca5ebe1c46ef97ab5ebd0ef	exterior BL at 0x004C6886	writes event/state at runtime offsets 0x14/0x16
+28	DRV_Bq25180HwInit	exact retained function string	0x0053AE7E	0x0053AF4C	206	df88ce0ebdd1477c5fc1069c878ed5da0d85ff9b6aae1ac9d9afde3feb882ec2	exterior BL at 0x00509438	retained name, device-ID gate and default configuration

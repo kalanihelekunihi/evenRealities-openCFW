@@ -1,0 +1,70 @@
+
+/work/out/O3/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_start_ms_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_start_ms_candidate>:
+   0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+   2:	4606      	mov	r6, r0
+   4:	4b1d      	ldr	r3, [pc, #116]	@ (7c <open_cfw_cordio_wsf_timer_start_ms_candidate+0x7c>)
+   6:	fba3 3501 	umull	r3, r5, r3, r1
+   a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			a: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   e:	7b73      	ldrb	r3, [r6, #13]
+  10:	08ed      	lsrs	r5, r5, #3
+  12:	b9b3      	cbnz	r3, 42 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x42>
+  14:	4b1a      	ldr	r3, [pc, #104]	@ (80 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x80>)
+  16:	681b      	ldr	r3, [r3, #0]
+  18:	2201      	movs	r2, #1
+  1a:	6075      	str	r5, [r6, #4]
+  1c:	7372      	strb	r2, [r6, #13]
+  1e:	b35b      	cbz	r3, 78 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x78>
+  20:	2200      	movs	r2, #0
+  22:	e003      	b.n	2c <open_cfw_cordio_wsf_timer_start_ms_candidate+0x2c>
+  24:	681c      	ldr	r4, [r3, #0]
+  26:	461a      	mov	r2, r3
+  28:	b11c      	cbz	r4, 32 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x32>
+  2a:	4623      	mov	r3, r4
+  2c:	685c      	ldr	r4, [r3, #4]
+  2e:	42a5      	cmp	r5, r4
+  30:	d2f8      	bcs.n	24 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x24>
+  32:	4631      	mov	r1, r6
+  34:	4812      	ldr	r0, [pc, #72]	@ (80 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x80>)
+  36:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_insert_candidate>
+			36: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_insert_candidate
+  3a:	e8bd 40f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, lr}
+  3e:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			3e: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_task_unlock_candidate
+  42:	4f0f      	ldr	r7, [pc, #60]	@ (80 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x80>)
+  44:	683b      	ldr	r3, [r7, #0]
+  46:	b1a3      	cbz	r3, 72 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x72>
+  48:	429e      	cmp	r6, r3
+  4a:	d00b      	beq.n	64 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x64>
+  4c:	461c      	mov	r4, r3
+  4e:	e001      	b.n	54 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x54>
+  50:	42a6      	cmp	r6, r4
+  52:	d008      	beq.n	66 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x66>
+  54:	4622      	mov	r2, r4
+  56:	6824      	ldr	r4, [r4, #0]
+  58:	2c00      	cmp	r4, #0
+  5a:	d1f9      	bne.n	50 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x50>
+  5c:	2201      	movs	r2, #1
+  5e:	6075      	str	r5, [r6, #4]
+  60:	7372      	strb	r2, [r6, #13]
+  62:	e7dd      	b.n	20 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x20>
+  64:	2200      	movs	r2, #0
+  66:	4631      	mov	r1, r6
+  68:	4805      	ldr	r0, [pc, #20]	@ (80 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x80>)
+  6a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_remove_candidate>
+			6a: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_remove_candidate
+  6e:	683b      	ldr	r3, [r7, #0]
+  70:	e7d2      	b.n	18 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x18>
+  72:	2301      	movs	r3, #1
+  74:	6075      	str	r5, [r6, #4]
+  76:	7373      	strb	r3, [r6, #13]
+  78:	2200      	movs	r2, #0
+  7a:	e7da      	b.n	32 <open_cfw_cordio_wsf_timer_start_ms_candidate+0x32>
+  7c:	cccccccd 	.word	0xcccccccd
+  80:	00000000 	.word	0x00000000
+			80: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate

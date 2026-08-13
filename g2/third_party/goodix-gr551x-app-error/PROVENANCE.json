@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "component": "Goodix GR551x SDK application-error utility source oracle",
+  "license": "BSD-3-Clause per-file Goodix notice",
+  "upstream": {
+    "origin": "Goodix GR551x SDK",
+    "source_version": "1.7.0 exact app_error.c snapshot",
+    "source_path": "components/libraries/app_error/app_error.c",
+    "official_repository_with_older_family_snapshot": "https://github.com/goodix-ble/GR551x-MicroPython.git",
+    "official_v1_00_commit": "fe8706b37dee646aaa4643edbd75364357ec1dbf",
+    "official_v1_00_blob": "8f39f2fd7814ba893af00e27c894e6a542c0769d",
+    "selected_public_carrier_repository": "https://github.com/tiko0755/X216.git",
+    "selected_public_carrier_commit": "854c43e0b96a24051ffce4c06ff629255aa56c59",
+    "selected_public_carrier_commit_date": "2023-05-31T06:31:27Z",
+    "selected_git_blob": "d5027735dd01b0948a7315d9c595356fcb91f59b",
+    "exact_generating_commit": null,
+    "qualification": "The selected carrier is the earliest located public commit containing the byte-exact SDK 1.7.0 file. It is not an official Goodix release commit and is not claimed to be Even's checkout."
+  },
+  "version_boundary": {
+    "exact_compatible_snapshot": "GR551x SDK 1.7.0",
+    "earlier_official_snapshot": "GR551x SDK V1.00: same 43-row shape but different 1024-byte buffer and wording",
+    "first_located_incompatible_snapshot": "GR551x SDK 2.0.1",
+    "first_located_incompatible_blob": "639f5cf10c5c293c899c76af83a9404b847d1090",
+    "incompatibility": "2.0.1 expands the table from 43 to 46 rows, adds repeat-CID/cache errors, and moves the formatter buffer to static storage",
+    "current_cross_family_blob": "0ddea24a182f72b30714fa9945408ccef702e747"
+  },
+  "vendored_files": [
+    {
+      "path": "upstream/app_error.c",
+      "bytes": 7833,
+      "sha256": "2f64e42b0528db162846e91179d4f5be46811b10fae16cfb80c827df7016f40d",
+      "git_blob_sha1": "d5027735dd01b0948a7315d9c595356fcb91f59b"
+    }
+  ],
+  "g2_boundary": {
+    "retained_path": "utils/assert/util_error_check.c",
+    "source_derived_function": "APP_errorFaultHandler",
+    "stock_error_rows": 43,
+    "production_routed": false,
+    "classification": "copied and adapted third-party utility under a first-party retained path; not evidence that the G2 Apollo firmware links a Goodix BLE stack"
+  }
+}

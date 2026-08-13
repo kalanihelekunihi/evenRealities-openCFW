@@ -1,0 +1,22 @@
+ldr r3,[pc,#pcrel] @ (2c <symbol>)
+ldr r3,[r3,#0]
+cbz r3,<branch>
+push {r4,lr}
+mov r4,r0
+cmp r3,r0
+beq.n <branch>
+mov r2,r3
+ldr r3,[r3,#0]
+cbz r3,<branch>
+cmp r4,r3
+bne.n <branch>
+mov r1,r4
+ldr r0,[pc,#pcrel] @ (2c <symbol>)
+bl <call>
+movs r3,#0
+strb r3,[r4,#13]
+pop {r4,pc}
+movs r2,#0
+b.n <branch>
+bx <branch>
+.word <literal>

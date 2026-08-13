@@ -1,0 +1,31 @@
+
+/work/out/Os_noinline/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_service_expired_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_service_expired_candidate>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			2: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   6:	4809      	ldr	r0, [pc, #36]	@ (2c <open_cfw_cordio_wsf_timer_service_expired_candidate+0x2c>)
+   8:	6804      	ldr	r4, [r0, #0]
+   a:	b154      	cbz	r4, 22 <open_cfw_cordio_wsf_timer_service_expired_candidate+0x22>
+   c:	6865      	ldr	r5, [r4, #4]
+   e:	b945      	cbnz	r5, 22 <open_cfw_cordio_wsf_timer_service_expired_candidate+0x22>
+  10:	462a      	mov	r2, r5
+  12:	4621      	mov	r1, r4
+  14:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_remove_candidate>
+			14: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_remove_candidate
+  18:	7365      	strb	r5, [r4, #13]
+  1a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			1a: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  1e:	4620      	mov	r0, r4
+  20:	bd38      	pop	{r3, r4, r5, pc}
+  22:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			22: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  26:	2400      	movs	r4, #0
+  28:	e7f9      	b.n	1e <open_cfw_cordio_wsf_timer_service_expired_candidate+0x1e>
+  2a:	bf00      	nop
+  2c:	00000000 	.word	0x00000000
+			2c: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate

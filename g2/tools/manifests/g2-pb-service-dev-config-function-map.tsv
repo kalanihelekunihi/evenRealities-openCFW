@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	direct_callers	evidence
+1	APP_PbRxDevCfgFrameDataProcess	exact retained diagnostic symbol	0x004D83D8	0x004D8B7C	1956	69951ec1a195305ba2c59192a2438cd773e76e43b03dd7199504d352735fc99f	0x0048EEFE	decodes a 208-byte device-config message and dispatches command IDs 4..15,128,129 or an error response
+2	APP_PbRxErrorCode	exact retained diagnostic symbol	0x004D8BE0	0x004D8DA0	448	418574a8c8a9ed8fd25ad5be7e725591e09ea870cc7e563900cfc72a24d83626	0x004D88A0	classifies error codes 1,5,7,8,9 for diagnostics and returns success
+3	APP_PbTxEncodeErrorCode	exact retained diagnostic symbol	0x004D8DB8	0x004D8EAA	242	6888fee6ea99d635685cec12fa213de11544af9a8f192e4a5a340ac6e5dfa9b7	0x004D8B72	encodes command 10/tag 9 with original command and error code and transmits service 0x80

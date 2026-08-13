@@ -1,0 +1,42 @@
+
+/work/out/Og_nosibling/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_init_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_init_candidate>:
+   0:	4b0e      	ldr	r3, [pc, #56]	@ (3c <open_cfw_cordio_wsf_timer_init_candidate+0x3c>)
+   2:	2200      	movs	r2, #0
+   4:	601a      	str	r2, [r3, #0]
+   6:	605a      	str	r2, [r3, #4]
+   8:	4b0d      	ldr	r3, [pc, #52]	@ (40 <open_cfw_cordio_wsf_timer_init_candidate+0x40>)
+   a:	681b      	ldr	r3, [r3, #0]
+   c:	b103      	cbz	r3, 10 <open_cfw_cordio_wsf_timer_init_candidate+0x10>
+   e:	4770      	bx	lr
+  10:	b500      	push	{lr}
+  12:	b083      	sub	sp, #12
+  14:	4b0b      	ldr	r3, [pc, #44]	@ (44 <open_cfw_cordio_wsf_timer_init_candidate+0x44>)
+  16:	9300      	str	r3, [sp, #0]
+  18:	4613      	mov	r3, r2
+  1a:	210a      	movs	r1, #10
+  1c:	480a      	ldr	r0, [pc, #40]	@ (48 <open_cfw_cordio_wsf_timer_init_candidate+0x48>)
+  1e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_create_candidate>
+			1e: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_create_candidate
+  22:	4b07      	ldr	r3, [pc, #28]	@ (40 <open_cfw_cordio_wsf_timer_init_candidate+0x40>)
+  24:	6018      	str	r0, [r3, #0]
+  26:	b130      	cbz	r0, 36 <open_cfw_cordio_wsf_timer_init_candidate+0x36>
+  28:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_tick_counter_get_candidate>
+			28: R_ARM_THM_CALL	open_cfw_cordio_wsf_tick_counter_get_candidate
+  2c:	4b07      	ldr	r3, [pc, #28]	@ (4c <open_cfw_cordio_wsf_timer_init_candidate+0x4c>)
+  2e:	6018      	str	r0, [r3, #0]
+  30:	b003      	add	sp, #12
+  32:	f85d fb04 	ldr.w	pc, [sp], #4
+  36:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_fatal_candidate>
+			36: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_fatal_candidate
+  3a:	e7f9      	b.n	30 <open_cfw_cordio_wsf_timer_init_candidate+0x30>
+	...
+			3c: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate
+			40: R_ARM_ABS32	open_cfw_cordio_wsf_freertos_timer_candidate
+			44: R_ARM_ABS32	open_cfw_cordio_wsf_timer_callback_candidate
+			48: R_ARM_ABS32	.rodata.open_cfw_cordio_wsf_timer_init_candidate.str1.4
+			4c: R_ARM_ABS32	open_cfw_cordio_wsf_last_tick_candidate

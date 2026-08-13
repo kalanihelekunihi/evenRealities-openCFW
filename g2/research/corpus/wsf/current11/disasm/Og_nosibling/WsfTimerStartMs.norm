@@ -1,0 +1,7 @@
+push {r3,lr}
+ldr r3,[pc,#pcrel] @ (10 <symbol>)
+umull r3,r1,r3,r1
+lsrs r1,r1,#3
+bl <call>
+pop {r3,pc}
+.word <literal>

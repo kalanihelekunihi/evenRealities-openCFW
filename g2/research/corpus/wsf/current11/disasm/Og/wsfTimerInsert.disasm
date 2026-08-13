@@ -1,0 +1,41 @@
+
+/work/out/Og/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_insert_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_insert_candidate>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4605      	mov	r5, r0
+   4:	460c      	mov	r4, r1
+   6:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			6: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   a:	7b6b      	ldrb	r3, [r5, #13]
+   c:	b933      	cbnz	r3, 1c <open_cfw_cordio_wsf_timer_insert_candidate+0x1c>
+   e:	2301      	movs	r3, #1
+  10:	736b      	strb	r3, [r5, #13]
+  12:	606c      	str	r4, [r5, #4]
+  14:	4b0a      	ldr	r3, [pc, #40]	@ (40 <open_cfw_cordio_wsf_timer_insert_candidate+0x40>)
+  16:	681b      	ldr	r3, [r3, #0]
+  18:	2200      	movs	r2, #0
+  1a:	e005      	b.n	28 <open_cfw_cordio_wsf_timer_insert_candidate+0x28>
+  1c:	4628      	mov	r0, r5
+  1e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_insert_candidate>
+			1e: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_remove_candidate
+  22:	e7f4      	b.n	e <open_cfw_cordio_wsf_timer_insert_candidate+0xe>
+  24:	461a      	mov	r2, r3
+  26:	681b      	ldr	r3, [r3, #0]
+  28:	b113      	cbz	r3, 30 <open_cfw_cordio_wsf_timer_insert_candidate+0x30>
+  2a:	6859      	ldr	r1, [r3, #4]
+  2c:	42a1      	cmp	r1, r4
+  2e:	d9f9      	bls.n	24 <open_cfw_cordio_wsf_timer_insert_candidate+0x24>
+  30:	4629      	mov	r1, r5
+  32:	4803      	ldr	r0, [pc, #12]	@ (40 <open_cfw_cordio_wsf_timer_insert_candidate+0x40>)
+  34:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_insert_candidate>
+			34: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_insert_candidate
+  38:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			38: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  3c:	bd38      	pop	{r3, r4, r5, pc}
+  3e:	bf00      	nop
+  40:	00000000 	.word	0x00000000
+			40: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate

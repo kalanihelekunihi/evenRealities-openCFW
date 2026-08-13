@@ -1,0 +1,5 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	findConnIdByAddr	exact retained function string	0x004D8F4C	0x004D8FF6	170	23b7753742de983a09b22faf294807a3737b1b6cbfc43e008f927bc2fe2dfd4e	direct call from AppBleMasterPeerMgrUnpairDev	checks three Cordio connection records by six-byte peer address and returns connId or zero
+2	AppMasterSecClearAddr	exact prior-firmware symbol and invariant body	0x004D8FF6	0x004D900C	22	7f75383e07f18a5304882c384e5498030f60715de702b163cba6b63f068f1bd8	four exact-entry callers	clears the seven-byte pending peer tuple and writes address type 0xFF
+3	AppMasterSecGetAddr	exact prior-firmware symbol and invariant body	0x004D900C	0x004D9010	4	63c70684a5097fd2dae818dfed1c35f42d2a425f90488776e8d72218790d22ca	one exact-entry caller	returns the pending peer tuple address
+4	AppBleMasterPeerMgrUnpairDev	exact retained function string	0x004D9010	0x004D910A	250	e105475b2193d0f99de77081078f2f35645adb06ab7b8aa013d853854f882bf6	one exact-entry caller	copies address/type then either unpairs immediately or closes an active/opening connection before deferred unpair

@@ -1,0 +1,7 @@
+provider	edges	targets	origin	version	selected_commit	status
+EasyLogger diagnostics/hexdump	76 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574,0x0043DACC	armink/EasyLogger with G2 integration	2.2.99-compatible	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted
+CMSIS-FreeRTOS tick wrapper	2 direct BL sites	0x004490CC	ARM-software/CMSIS-FreeRTOS	v10.5.1	d213f261b5be6bb29a7cce8b84071706b72f4d53	authenticated and production source-owned
+IAR DLIB/runtime	8 direct BL sites	0x0043C0E4	IAR EWARM runtime	9.20+ floor; 9.60.2 leading candidate	unavailable	bounded or source-recreated
+nanopb iterator helper	1 direct BL site	0x0048EB32	nanopb	0.4.7 through 0.4.9.1 compatible	98bf4db69897b53434f3d0ba72e0a3ab1a902824	source-admitted
+Packetcraft Cordio host/provider	0 direct BL sites	none	Packetcraft Cordio plus Ambiq port	mixed r20/R4-era host	3656312d6b73e2a2c1c8b33ee0385bc199dd97e6	not called by this object
+G2 first-party providers	34 direct BL sites	16 input/thread/device/role/event-loop/ring-profile/sensor providers	Even Realities first-party	private G2 source	unobservable	bounded first-party graph

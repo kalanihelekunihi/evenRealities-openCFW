@@ -1,0 +1,4 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	120 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Health record validation and aggregation diagnostics
+IAR runtime memory primitives	6 direct BL sites	0x00439BE4,0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded or source-recreated	Bounded record copies and zero fills add no release discriminator
+Closed G2 health lock providers	10 direct BL sites	0x004FFC32,0x004FFC90	Even Realities first-party over exact CMSIS-FreeRTOS mutex wrappers	private G2 source over CMSIS-FreeRTOS v10.5.1	d213f261b5be6bb29a7cce8b84071706b72f4d53	object-closed	All shared health storage mutations use the already closed acquire/release wrappers

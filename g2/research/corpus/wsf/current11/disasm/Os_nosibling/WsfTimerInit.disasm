@@ -1,0 +1,39 @@
+
+/work/out/Os_nosibling/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_init_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_init_candidate>:
+   0:	2200      	movs	r2, #0
+   2:	b513      	push	{r0, r1, r4, lr}
+   4:	4b0b      	ldr	r3, [pc, #44]	@ (34 <open_cfw_cordio_wsf_timer_init_candidate+0x34>)
+   6:	4c0c      	ldr	r4, [pc, #48]	@ (38 <open_cfw_cordio_wsf_timer_init_candidate+0x38>)
+   8:	601a      	str	r2, [r3, #0]
+   a:	605a      	str	r2, [r3, #4]
+   c:	6823      	ldr	r3, [r4, #0]
+   e:	b953      	cbnz	r3, 26 <open_cfw_cordio_wsf_timer_init_candidate+0x26>
+  10:	4a0a      	ldr	r2, [pc, #40]	@ (3c <open_cfw_cordio_wsf_timer_init_candidate+0x3c>)
+  12:	210a      	movs	r1, #10
+  14:	9200      	str	r2, [sp, #0]
+  16:	480a      	ldr	r0, [pc, #40]	@ (40 <open_cfw_cordio_wsf_timer_init_candidate+0x40>)
+  18:	461a      	mov	r2, r3
+  1a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_create_candidate>
+			1a: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_create_candidate
+  1e:	6020      	str	r0, [r4, #0]
+  20:	b918      	cbnz	r0, 2a <open_cfw_cordio_wsf_timer_init_candidate+0x2a>
+  22:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_fatal_candidate>
+			22: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_fatal_candidate
+  26:	b002      	add	sp, #8
+  28:	bd10      	pop	{r4, pc}
+  2a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_tick_counter_get_candidate>
+			2a: R_ARM_THM_CALL	open_cfw_cordio_wsf_tick_counter_get_candidate
+  2e:	4b05      	ldr	r3, [pc, #20]	@ (44 <open_cfw_cordio_wsf_timer_init_candidate+0x44>)
+  30:	6018      	str	r0, [r3, #0]
+  32:	e7f8      	b.n	26 <open_cfw_cordio_wsf_timer_init_candidate+0x26>
+	...
+			34: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate
+			38: R_ARM_ABS32	open_cfw_cordio_wsf_freertos_timer_candidate
+			3c: R_ARM_ABS32	open_cfw_cordio_wsf_timer_callback_candidate
+			40: R_ARM_ABS32	.rodata.open_cfw_cordio_wsf_timer_init_candidate.str1.1
+			44: R_ARM_ABS32	open_cfw_cordio_wsf_last_tick_candidate

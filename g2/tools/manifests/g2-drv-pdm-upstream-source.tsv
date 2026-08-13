@@ -1,0 +1,15 @@
+stock_target	upstream_symbol	upstream_source	selected_commit	qualification
+0x00591FAC	am_hal_pdm_initialize	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact signature and module-handle initialization graph
+0x00592014	am_hal_pdm_deinitialize	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact teardown graph
+0x00592046	am_hal_pdm_power_control	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact power and retain-state graph
+0x005920CC	am_hal_pdm_configure	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact configuration-field graph
+0x00592230	am_hal_pdm_enable	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact clock pin and enable graph
+0x005922D6	am_hal_pdm_disable	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact inverse clock pin and disable graph
+0x0059235E	am_hal_pdm_dma_start	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact dual-buffer DMA descriptor graph
+0x00592462	am_hal_pdm_fifo_threshold_setup	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact FIFO threshold graph
+0x00592484	am_hal_pdm_interrupt_service	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact interrupt and DMA continuation graph
+0x00592556	am_hal_pdm_interrupt_enable	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact INTEN set graph
+0x00592584	am_hal_pdm_interrupt_disable	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact INTEN clear graph
+0x005925B4	am_hal_pdm_interrupt_clear	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact INTCLR write graph
+0x005925E0	am_hal_pdm_interrupt_status_get	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact enabled-only status selection graph
+0x0059262C	am_hal_pdm_dma_get_buffer	mcu/apollo510/hal/am_hal_pdm.c	5efc0228528a8adce5eae0d226fac85d2551eb3b	exact active-buffer selection leaf

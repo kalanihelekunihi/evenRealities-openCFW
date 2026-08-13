@@ -1,0 +1,214 @@
+openjdk version "21.0.12" 2026-07-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.12+8 (build 21.0.12+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12+8 (build 21.0.12+8-LTS, mixed mode)
+INFO  Using log config file: jar:file:/var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1607 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (6697 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 210 extension points (114 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/kalani/.cache/opencfw-tools/ghidra-scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-2/iar_runtime_2 (HeadlessAnalyzer)  
+INFO  Creating project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-2/iar_runtime_2 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-2/iar_runtime_2 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/kalani/Repo/SybilSight/openCFW/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin (HeadlessAnalyzer)  
+INFO  Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x437fe0") (ProgramLoader)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: ARM:LE:32:Cortex:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DumpFunctionDecomp.java '0x00438bf0' '0x00438ef0'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/kalani/.cache/opencfw-tools/ghidra-scripts/DumpFunctionDecomp.java (HeadlessAnalyzer)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 00438bf0 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void open_cfw_target_0x00438bf0
+               (int param_1,int param_2,longlong *param_3,int param_4,undefined2 *param_5,
+               int param_6)
+
+{
+  short sVar1;
+  short sVar2;
+  longlong lVar3;
+  longlong lVar4;
+  int iVar5;
+  int iVar6;
+  short *psVar7;
+  short *psVar8;
+  short *psVar9;
+  short *psVar10;
+  short *psVar11;
+  short *psVar12;
+  short *psVar13;
+  short *psVar14;
+  short *psVar15;
+  short *psVar16;
+  short *psVar17;
+  short *psVar18;
+  short *psVar19;
+  short *psVar20;
+  short *psVar21;
+  uint uVar22;
+  short *psVar23;
+  short *psVar24;
+  short *psVar25;
+  short *psVar26;
+  short *psVar27;
+  short *psVar28;
+  short *psVar29;
+  short *psVar30;
+  short *psVar31;
+  short *psVar32;
+  short *psVar33;
+  short *psVar34;
+  short *psVar35;
+  short *psVar36;
+  short *psVar37;
+  int iVar38;
+  int iVar39;
+  
+  iVar5 = (0x78 / param_1) * 2;
+  iVar6 = 0;
+  if (0 < param_6 * 0xf) {
+    lVar3 = *param_3;
+    lVar4 = param_3[1];
+    do {
+      iVar39 = 0;
+      psVar7 = (short *)(param_2 + iVar5 * (iVar6 - param_1 * (iVar6 / param_1)) * 2);
+      psVar23 = (short *)(param_4 + (iVar5 + -1) * -2 + (iVar6 / param_1) * 2);
+      iVar38 = 0;
+      if (0 < iVar5) {
+        do {
+          psVar24 = psVar23 + 1;
+          sVar1 = *psVar23;
+          psVar8 = psVar7 + 1;
+          sVar2 = *psVar7;
+          psVar25 = psVar23 + 2;
+          psVar9 = psVar7 + 2;
+          psVar26 = psVar23 + 3;
+          psVar10 = psVar7 + 3;
+          psVar27 = psVar23 + 4;
+          psVar11 = psVar7 + 4;
+          psVar28 = psVar23 + 5;
+          psVar12 = psVar7 + 5;
+          psVar29 = psVar23 + 6;
+          psVar13 = psVar7 + 6;
+          psVar30 = psVar23 + 7;
+          psVar14 = psVar7 + 7;
+          psVar31 = psVar23 + 8;
+          psVar15 = psVar7 + 8;
+          psVar32 = psVar23 + 9;
+          psVar16 = psVar7 + 9;
+          psVar33 = psVar23 + 10;
+          psVar17 = psVar7 + 10;
+          psVar34 = psVar23 + 0xb;
+          psVar18 = psVar7 + 0xb;
+          psVar35 = psVar23 + 0xc;
+          psVar19 = psVar7 + 0xc;
+          psVar36 = psVar23 + 0xd;
+          psVar20 = psVar7 + 0xd;
+          psVar37 = psVar23 + 0xe;
+          psVar21 = psVar7 + 0xe;
+          psVar23 = psVar23 + 0xf;
+          psVar7 = psVar7 + 0xf;
+          iVar38 = iVar38 + 0xf;
+          iVar39 = (int)*psVar37 * (int)*psVar21 +
+                   (int)*psVar36 * (int)*psVar20 +
+                   (int)*psVar35 * (int)*psVar19 +
+                   (int)*psVar34 * (int)*psVar18 +
+                   (int)*psVar33 * (int)*psVar17 +
+                   (int)*psVar32 * (int)*psVar16 +
+                   (int)*psVar31 * (int)*psVar15 +
+                   (int)*psVar30 * (int)*psVar14 +
+                   (int)*psVar29 * (int)*psVar13 +
+                   (int)*psVar28 * (int)*psVar12 +
+                   (int)*psVar27 * (int)*psVar11 +
+                   (int)*psVar26 * (int)*psVar10 +
+                   (int)*psVar25 * (int)*psVar9 +
+                   (int)*psVar24 * (int)*psVar8 + (int)sVar1 * (int)sVar2 + iVar39;
+        } while (iVar38 < iVar5);
+      }
+      lVar3 = lVar3 + (longlong)_DAT_00438fa4 * (longlong)iVar39;
+      uVar22 = (uint)lVar3 >> 0x1e | (int)((ulonglong)lVar3 >> 0x20) * 4;
+      lVar3 = ((longlong)_DAT_00438fa8 * (longlong)iVar39 + lVar4) -
+              (longlong)_DAT_00438fa0 * (longlong)(int)uVar22;
+      lVar4 = (longlong)_DAT_00438fa4 * (longlong)iVar39 -
+              (longlong)_DAT_00438fac * (longlong)(int)uVar22;
+      *param_5 = (short)(uVar22 + 0x8000 >> 0x10);
+      iVar6 = iVar6 + 0xf;
+      param_5 = param_5 + 1;
+    } while (iVar6 < param_6 * 0xf);
+    *param_3 = lVar3;
+    param_3[1] = lVar4;
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 00438bf0 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 00438ef0 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+float open_cfw_target_0x00438ef0(float *param_1,int param_2)
+
+{
+  int iVar1;
+  float *pfVar2;
+  float fVar3;
+  
+  iVar1 = param_2 + 4;
+  pfVar2 = (float *)(_DAT_004396b4 +
+                    (iVar1 - (iVar1 + ((uint)(iVar1 >> 1) >> 0x1e) & 0xfffffffc)) * 0x20);
+  if (param_2 < 0) {
+    fVar3 = *pfVar2;
+    pfVar2 = pfVar2 + 1;
+    fVar3 = param_1[-4] * fVar3;
+  }
+  else {
+    fVar3 = fRam00438f9c;
+    if (0 < param_2) {
+      fVar3 = param_1[4] * pfVar2[7];
+    }
+  }
+  return param_1[-3] * *pfVar2 + param_1[-2] * pfVar2[1] + param_1[-1] * pfVar2[2] +
+         *param_1 * pfVar2[3] + param_1[1] * pfVar2[4] + param_1[2] * pfVar2[5] +
+         param_1[3] * pfVar2[6] + fVar3;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 00438ef0 (GhidraScript)  
+INFO  /ota_s200_firmware_ota.bin: file created (kalani) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /ota_s200_firmware_ota.bin (iar_runtime_2:/ota_s200_firmware_ota.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

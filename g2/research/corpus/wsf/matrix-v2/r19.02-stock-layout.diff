@@ -1,0 +1,12 @@
+--- /var/tmp/opencfw-wsf-matrix.vWkFdb/src/r19.02/wsf_timer.upstream.h	2026-08-08 18:51:18.087474932 -0500
++++ /var/tmp/opencfw-wsf-matrix.vWkFdb/src/r19.02/wsf_timer.stock-layout-v2.h	2026-08-08 18:57:17.913646335 -0500
+@@ -53,8 +53,8 @@
+ typedef struct wsfTimer_tag
+ {
+   struct wsfTimer_tag *pNext;             /*!< \brief pointer to next timer in queue */
+-  wsfMsgHdr_t         msg;                /*!< \brief application-defined timer event parameters */
+   wsfTimerTicks_t     ticks;              /*!< \brief number of ticks until expiration */
++  wsfMsgHdr_t         msg;                /*!< \brief application-defined timer event parameters */
+   wsfHandlerId_t      handlerId;          /*!< \brief event handler for this timer */
+   bool_t              isStarted;          /*!< \brief TRUE if timer has been started */
+ } wsfTimer_t;

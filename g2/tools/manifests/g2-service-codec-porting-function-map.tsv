@@ -1,0 +1,3 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	entry_evidence	qualification
+1	uart_init	exact retained diagnostic symbol	0x0058FB52	0x0058FC0C	186	a674dd367f19cd6dd65fcb5ee3a4ead12ae281b35c23978419a30a2fd12223d3	yes	three BL entry sites	one-time 64-byte RX ring initialization and callback registration followed by UART3 resume
+2	uart_close	exact retained diagnostic symbol	0x0058FC0C	0x0058FCA8	156	3bad5828dd218631ebf8665d8809e3fc85aaaac36d696d6d6713ca270e316a57	yes	four BL entry sites	suspends UART3 when active and maintains the local resumed flag

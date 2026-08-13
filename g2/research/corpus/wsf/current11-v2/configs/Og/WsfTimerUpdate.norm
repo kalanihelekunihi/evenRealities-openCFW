@@ -1,0 +1,22 @@
+push {r3,r4,r5,lr}
+mov r5,r0
+bl <call>
+ldr r3,[pc,#pcrel] @ (30 <symbol>)
+ldr r4,[r3,#0]
+b.n <branch>
+subs r3,r3,r5
+str r3,[r4,#4]
+ldr r4,[r4,#0]
+cbz r4,<branch>
+ldr r3,[r4,#4]
+cmp r3,r5
+bhi.n <branch>
+movs r3,#0
+str r3,[r4,#4]
+movs r1,#2
+ldrb r0,[r4,#12]
+bl <call>
+b.n <branch>
+bl <call>
+pop {r3,r4,r5,pc}
+.word <literal>

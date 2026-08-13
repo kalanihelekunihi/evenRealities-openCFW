@@ -1,0 +1,27 @@
+
+/work/out/Os/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_remove_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_remove_candidate>:
+   0:	2200      	movs	r2, #0
+   2:	4b08      	ldr	r3, [pc, #32]	@ (24 <open_cfw_cordio_wsf_timer_remove_candidate+0x24>)
+   4:	b510      	push	{r4, lr}
+   6:	681c      	ldr	r4, [r3, #0]
+   8:	b13c      	cbz	r4, 1a <open_cfw_cordio_wsf_timer_remove_candidate+0x1a>
+   a:	4284      	cmp	r4, r0
+   c:	d106      	bne.n	1c <open_cfw_cordio_wsf_timer_remove_candidate+0x1c>
+   e:	4621      	mov	r1, r4
+  10:	4804      	ldr	r0, [pc, #16]	@ (24 <open_cfw_cordio_wsf_timer_remove_candidate+0x24>)
+  12:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_remove_candidate>
+			12: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_remove_candidate
+  16:	2300      	movs	r3, #0
+  18:	7363      	strb	r3, [r4, #13]
+  1a:	bd10      	pop	{r4, pc}
+  1c:	4622      	mov	r2, r4
+  1e:	6824      	ldr	r4, [r4, #0]
+  20:	e7f2      	b.n	8 <open_cfw_cordio_wsf_timer_remove_candidate+0x8>
+  22:	bf00      	nop
+  24:	00000000 	.word	0x00000000
+			24: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate

@@ -1,0 +1,5 @@
+variant	compile_macros	status	evidence
+stockabi_1024	AM_DEBUG_PRINTF=1;WSF_TRACE_ENABLED=1;WSF_TOKEN_ENABLED=0;WSF_ASSERT_ENABLED=1;AM_PRINTF_BUFSIZE=1024	matrix-selected	stock WsfTrace reserves 0x400 bytes and calls vsprintf, printf, WsfAssert, printf in official source order
+archive_default_256	AM_PRINTF_BUFSIZE=256	eliminated without matrix expansion	contradicted by stock 0x400-byte local buffer
+tokenized_trace	WSF_TRACE_ENABLED=0;WSF_TOKEN_ENABLED=1	eliminated	stock has printf call graph and 126 WsfTrace callers; no token-ring body at bounded entry
+upstream_spin_assert	official wsf_assert.c body	compiled but downstream-drifted	stock body adds EasyLogger diagnostics, hook handling, and fail-stop seam absent from official source

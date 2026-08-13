@@ -1,0 +1,495 @@
+{
+  "schema_version": 1,
+  "component": "Think Silicon NemaGFX/NemaVG with Ambiq GPU extension and HAL port",
+  "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq.git",
+  "public_source_state": {
+    "subtree_path": "components/graphics/NemaGFX_SDK",
+    "first_complete_exact_commit": "b853fded7e545f005727e13bf2ce83018c7e242d",
+    "subtree_git_tree_sha1": "e690768a6e7b4d6a8d526fc75e8278a2764deff3",
+    "commit_root_tree_sha1": "c1793b8fc7f0a2bf1ff26015d2b1df6f11b0a4ba",
+    "commit_parent": "604c15a3e7de06c1cab2496a04b58574694cadf5",
+    "commit_author_date": "2025-11-14T18:15:44+08:00",
+    "commit_subject": "hal: ambiq: components: graphics: update nema_dc_hal.c",
+    "file_count": 50,
+    "byte_count": 3913845,
+    "qualification": "This is the first public commit whose complete NemaGFX_SDK subtree is byte-identical to the available AmbiqSuite 5.1.0 package. It is a reproducible public source/artifact pin, not proof that Even built G2 from this later public commit object."
+  },
+  "public_artifact_history": {
+    "apollo5_archive_first_commit": {
+      "commit": "c6f54a9587fcdc3cd10a9af5db0b602f34d5304f",
+      "tree": "8692243b550912535f993a984d3e9fe043c6c56a",
+      "parent": "4e7d42766d5af90810c9cea5d774970c17d5ac14",
+      "author_date": "2025-08-04T17:59:23+08:00",
+      "subject": "hal: ambiq: nemasdk: update nemasdk for compliance"
+    },
+    "gpu_patch_archive_first_commit": {
+      "commit": "e3eec7f3c1148fee3dfa33ca861be176de66c584",
+      "tree": "219e26c41602badcd70061cb4d69745ee68c16b3",
+      "parent": "182aa85b27824127725a55bc9da6c7a0d03447d9",
+      "author_date": "2025-09-29T14:38:51+08:00",
+      "subject": "components: graphics: Added a GPU extension library"
+    }
+  },
+  "ambiqsuite_candidate": {
+    "sdk_version": "5.1.0",
+    "sdk_revision": "release_sdk5p1p0-634f7c117b",
+    "package_path": "components/graphics/NemaGFX_SDK",
+    "tree_matches_public_state": true,
+    "versions": {
+      "nemagfx": {
+        "semantic_version": "1.4.12",
+        "api_version_hex": "0x01040C",
+        "implementation_version_hex": "0x00241000",
+        "implementation_month": "2024-10",
+        "stock_resolution": "firmware-authenticated lower bound and exact packaged candidate"
+      },
+      "nemavg": {
+        "semantic_version": "1.1.8",
+        "api_version_hex": "0x010108",
+        "implementation_version_hex": "0x00241000",
+        "implementation_month": "2024-10",
+        "stock_resolution": "exact co-packaged candidate; not independently unique from stock bytes"
+      }
+    }
+  },
+  "selected_artifacts": [
+    {
+      "path": "headers/LICENSE",
+      "size": 1232,
+      "sha256": "bb504491bd00c656c9622c9b9cfe805273c8c626ceb35480b5907983de718fbc",
+      "git_blob_sha1": "4ba5d2cc1db909af5c8111414976cc9ce23e215b",
+      "role": "Think Silicon permissive NemaSDK notice"
+    },
+    {
+      "path": "headers/CHANGELOG.md",
+      "size": 7193,
+      "sha256": "09c01747a286ae77699c1eff0daf904715a9a1ec568811cf21446651c6294c10",
+      "git_blob_sha1": "480c5ecd538e830530f08a1dbd4334adf9615030",
+      "role": "NemaGFX release discriminator"
+    },
+    {
+      "path": "headers/CHANGELOG.VG.md",
+      "size": 10897,
+      "sha256": "41af0867865e8491fb0b67292339953a7ca12beec2e8ac9262d61ae938ae52ca",
+      "git_blob_sha1": "16983fa73a00eecbece8e7474670aac14d7269aa",
+      "role": "NemaVG release discriminator"
+    },
+    {
+      "path": "headers/include/tsi/NemaGFX/nema_version.h",
+      "size": 2399,
+      "sha256": "c0b2ec7681603a6b9f4268f665f73e9ea3038cf9763dd94453412a40c8cce7b7",
+      "git_blob_sha1": "76df02be5ddc189887e5e15e98bfac43b2b4fdb4",
+      "role": "NemaGFX 1.4.12 version header"
+    },
+    {
+      "path": "headers/include/tsi/NemaVG/nema_vg_version.h",
+      "size": 2430,
+      "sha256": "8482e9f089fe3d45dcf2552252923b5a75a1d705de077d94f3c3064751eb6374",
+      "git_blob_sha1": "680942c90139045a2f58d147d2594fcf80c44e83",
+      "role": "NemaVG 1.1.8 version header"
+    },
+    {
+      "path": "libraries/lib_nema_apollo5x_nemagfx.a",
+      "size": 1809800,
+      "sha256": "109840f6e0bbeb8618a1a853966cdf68cf169620bcc4075ed7a1c86ab0d3286f",
+      "git_blob_sha1": "98cfec6fa60c7372777ec0a31cea477c33df1483",
+      "role": "Apollo5 Cortex-M55 GCC NemaGFX/NemaVG archive"
+    },
+    {
+      "path": "extensions/gpu_patch.a",
+      "size": 51902,
+      "sha256": "31a0e5494cf27a3794212118c152513c16efa0424c51311c70a6f55024b4c95c",
+      "git_blob_sha1": "f05c83b4306c9f21efc495325d1214eb72f85e49",
+      "role": "Ambiq GPU extension binary archive"
+    },
+    {
+      "path": "extensions/gpu_patch.h",
+      "size": 13595,
+      "sha256": "9aa403a02f5ef6c88f362337b85007cf7af77206d0218fd3b3d0ac408efd45e3",
+      "git_blob_sha1": "79e6e220c5798a76e75d4af3789b19fa7ffc3f9a",
+      "role": "Ambiq BSD-3-Clause GPU extension interface"
+    },
+    {
+      "path": "port/nema_hal.c",
+      "size": 17527,
+      "sha256": "053044dd8db3a84e57ff1c55200fdfefaef3e463361ea8de3fc238c40ed51cac",
+      "git_blob_sha1": "3db4d884dce154c3f4107688d8992184e67b88d5",
+      "role": "public Zephyr/Ambiq Nema HAL port candidate"
+    },
+    {
+      "path": "port/nema_sys_defs.h",
+      "size": 18553,
+      "sha256": "d24a872ba3f8885d6fc6812f5cb57c10de70f7156d1fd58fb6f56829639e8be5",
+      "git_blob_sha1": "a28d480db287e502e7dc99204f7265cee6cf333d",
+      "role": "Nema port interface"
+    }
+  ],
+  "archive_metadata": {
+    "apollo5_archive_object_count": 33,
+    "compiler_comment": "GNU C99 13.2.1 20231009 -mthumb -mcpu=cortex-m55 -mfpu=auto -mfloat-abi=hard -march=armv8.1-m.main+fp.dp+mve.fp -g -g -ggdb -O3 -std=c99 -ffunction-sections -fdata-sections -fno-strict-aliasing",
+    "dwarf_compilation_directory": "C:\\Users\\zhichao.feng\\bitbucket\\ambiqsuite\\third_party\\ThinkSi\\config\\apollo5b_nemagfx\\gcc",
+    "dwarf_source_example": "../../../../../third_party/ThinkSi/NemaGFX_SDK/NemaGFX/Nema/nema_blender.c",
+    "stock_compiler_relation": "The public archive retains GCC DWARF. Stock functions have IAR code generation and are therefore source/interface candidates, not byte-identical archive members."
+  },
+  "gpu_patch": {
+    "archive_object": "ambiq_nema_extension.o",
+    "license_spdx": "BSD-3-Clause",
+    "exported_functions": [
+      "lv_ambiq_create_corner_mask",
+      "lv_ambiq_dashline_create",
+      "lv_ambiq_draw_bitmap_glyph",
+      "lv_ambiq_get_glyph",
+      "lv_ambiq_get_path_aabb",
+      "lv_ambiq_get_path_vbuf",
+      "lv_ambiq_get_vg_paint_tex",
+      "lv_ambiq_gradient_create",
+      "lv_ambiq_l8_l4_convert",
+      "lv_ambiq_shadow_blur_corner",
+      "lv_ambiq_shadow_blur_corner_vg"
+    ],
+    "functions_required_by_recovered_lvgl_subtree": [
+      "lv_ambiq_dashline_create",
+      "lv_ambiq_get_path_aabb",
+      "lv_ambiq_get_path_vbuf",
+      "lv_ambiq_get_vg_paint_tex",
+      "lv_ambiq_gradient_create",
+      "lv_ambiq_shadow_blur_corner"
+    ],
+    "source_availability": "public header and GCC binary archive only; implementation source is not present in the public subtree; five exports have bounded clean-room source candidates",
+    "binary_recovery": {
+      "dwarf_source": "gpu_patch/ambiq_nema_extension.c",
+      "dwarf_original_path": "/Users/wangzhengwei/lv_port_ambiq/lvgl_ambiq_porting/gpu_patch/ambiq_nema_extension.c",
+      "private_header_original_path": "/Users/wangzhengwei/lv_port_ambiq/lvgl_ambiq_porting/gpu_patch/nema_vg_p.h",
+      "private_layouts": {
+        "nema_vg_paint_tex_t": 48,
+        "nema_vg_paint_t": 224,
+        "nema_vg_path_bbox_t": 80,
+        "nema_vbuf_t_": 96,
+        "nema_vg_path_t": 136
+      },
+      "function_census": [
+        {
+          "function": "lv_ambiq_create_corner_mask",
+          "source_line": 349,
+          "section_size": 164,
+          "symbol_size": 164,
+          "section_sha256": "6b1cbd72576ee8310eb7eab466570e6daa51a9446696ea8e748eea0088e0f95c",
+          "relocation_count": 10,
+          "relocation_targets": ["nema_bind_tex", "nema_raster_rect", "nema_raster_stroked_arc_aa", "nema_rgba", "nema_set_blend", "nema_set_clip_pop", "nema_set_clip_temp", "nema_set_raster_color"],
+          "required_by_recovered_lvgl": false,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_dashline_create",
+          "source_line": 268,
+          "section_size": 144,
+          "symbol_size": 144,
+          "section_sha256": "9f465e5e7bc8c95a022a491d937c46f461071479093ad7f7101581c4a902f20b",
+          "relocation_count": 8,
+          "relocation_targets": ["nema_context", "nema_raster_rect", "nema_set_blend", "nema_set_clip_pop", "nema_set_clip_temp", "nema_set_raster_color"],
+          "required_by_recovered_lvgl": true,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_draw_bitmap_glyph",
+          "source_line": 590,
+          "section_size": 1036,
+          "symbol_size": 1036,
+          "section_sha256": "37ad8ca8a082a00d04feae707022535448d1920940335db4819130901c47f0a1",
+          "relocation_count": 34,
+          "relocation_targets": ["nema_bind_src_tex", "nema_bind_tex", "nema_mat3x3_copy", "nema_mat3x3_invert", "nema_mat3x3_load_identity", "nema_mat3x3_mul_vec", "nema_mat3x3_rotate", "nema_mat3x3_translate", "nema_raster_quad_f", "nema_raster_rect", "nema_set_blend", "nema_set_clip_pop", "nema_set_clip_temp", "nema_set_const_color", "nema_set_matrix", "nema_set_tex_color"],
+          "required_by_recovered_lvgl": false,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_get_glyph",
+          "source_line": 818,
+          "section_size": 188,
+          "symbol_size": 188,
+          "section_sha256": "73c9856b02da209dbe68f4985f79cee430c4bea04dfadd66cd22b2b44b191205",
+          "relocation_count": 1,
+          "relocation_targets": ["utf8_codepoint_size"],
+          "required_by_recovered_lvgl": false,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_get_path_aabb",
+          "source_line": 313,
+          "section_size": 24,
+          "symbol_size": 24,
+          "section_sha256": "e51f6519f355e32c18447d6b26329e6da16cd2e54f0515586f883171de7e2e5c",
+          "relocation_count": 0,
+          "relocation_targets": [],
+          "required_by_recovered_lvgl": true,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_get_path_vbuf",
+          "source_line": 326,
+          "section_size": 28,
+          "symbol_size": 26,
+          "section_sha256": "bdf5a63391e7b275cff1f7b393b3f34ee7bb564d6733dd023e7d107dcecef2af",
+          "relocation_count": 0,
+          "relocation_targets": [],
+          "required_by_recovered_lvgl": true,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_get_vg_paint_tex",
+          "source_line": 301,
+          "section_size": 16,
+          "symbol_size": 16,
+          "section_sha256": "f3a3a1a552751faddd5cc8a53cbcd5a030048dc39572004d56221486e5d44633",
+          "relocation_count": 0,
+          "relocation_targets": [],
+          "required_by_recovered_lvgl": true,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_gradient_create",
+          "source_line": 138,
+          "section_size": 1416,
+          "symbol_size": 1416,
+          "section_sha256": "5870d79c49ee8bd0dfa4b5bf8f6f39b04ed45148c0c00b774467149292d83ae4",
+          "relocation_count": 16,
+          "relocation_targets": [".rodata", "nema_context", "nema_enable_gradient", "nema_fill_rect", "nema_interpolate_rect_colors", "nema_rgba", "nema_set_blend", "nema_set_clip_pop", "nema_set_clip_temp", "nema_set_gradient"],
+          "required_by_recovered_lvgl": true,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_l8_l4_convert",
+          "source_line": 706,
+          "section_size": 224,
+          "symbol_size": 224,
+          "section_sha256": "180127efa5ccd439952423bbd6dbde4123c59c574fd367f0c808a37ea0643bbe",
+          "relocation_count": 15,
+          "relocation_targets": ["nema_bind_tex", "nema_mat3x3_load_identity", "nema_raster_rect", "nema_set_blend", "nema_set_clip_pop", "nema_set_clip_temp", "nema_set_const_color", "nema_set_matrix", "nema_set_tex_color"],
+          "required_by_recovered_lvgl": false,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_shadow_blur_corner",
+          "source_line": 383,
+          "section_size": 668,
+          "symbol_size": 668,
+          "section_sha256": "cea1f3cb0efe575af62a887e8daec87479bc94807355f14df019cf02613faef8",
+          "relocation_count": 39,
+          "relocation_targets": ["nema_blit_subrect_fit", "nema_raster_rect", "nema_rgba", "nema_set_blend", "nema_set_clip_pop", "nema_set_clip_temp", "nema_set_const_color", "nema_set_raster_color"],
+          "required_by_recovered_lvgl": true,
+          "source_status": "bounded-clean-room-candidate"
+        },
+        {
+          "function": "lv_ambiq_shadow_blur_corner_vg",
+          "source_line": 454,
+          "section_size": 324,
+          "symbol_size": 324,
+          "section_sha256": "a600d42433a84fe56934d36b167177bf1c617ce3cb8fafcbfecb9ca1948b9974",
+          "relocation_count": 15,
+          "relocation_targets": [".rodata", "nema_bind_tex", "nema_get_context", "nema_raster_rect", "nema_set_blend", "nema_set_clip", "nema_set_raster_color", "nema_vg_draw_circle", "nema_vg_grad_set", "nema_vg_paint_set_grad_radial", "nema_vg_paint_set_type", "nema_vg_set_blend", "nema_vg_set_fill_rule"],
+          "required_by_recovered_lvgl": false,
+          "source_status": "bounded-clean-room-candidate"
+        }
+      ],
+      "accessors": [
+        {
+          "function": "lv_ambiq_get_vg_paint_tex",
+          "source_line": 301,
+          "section_size": 16,
+          "section_sha256": "f3a3a1a552751faddd5cc8a53cbcd5a030048dc39572004d56221486e5d44633",
+          "relocations": 0,
+          "semantics": "return texture image and LUT palette; write NULL to palette output for a non-LUT texture"
+        },
+        {
+          "function": "lv_ambiq_get_path_aabb",
+          "source_line": 313,
+          "section_size": 24,
+          "section_sha256": "e51f6519f355e32c18447d6b26329e6da16cd2e54f0515586f883171de7e2e5c",
+          "relocations": 0,
+          "semantics": "return path shape bbox min.x, min.y, max.x, and max.y at path offsets 0x10 through 0x1C"
+        },
+        {
+          "function": "lv_ambiq_get_path_vbuf",
+          "source_line": 326,
+          "section_size": 28,
+          "symbol_size": 26,
+          "section_sha256": "bdf5a63391e7b275cff1f7b393b3f34ee7bb564d6733dd023e7d107dcecef2af",
+          "relocations": 0,
+          "semantics": "return segment size, data size, segment pointer, and data pointer at path offsets 0x00 through 0x0C"
+        }
+      ],
+      "dashline": {
+        "function": "lv_ambiq_dashline_create",
+        "source_line": 268,
+        "section_size": 144,
+        "section_sha256": "9f465e5e7bc8c95a022a491d937c46f461071479093ad7f7101581c4a902f20b",
+        "relocations": 8,
+        "function_relocations": 7,
+        "relocation_targets": [
+          "nema_context",
+          "nema_set_clip_temp",
+          "nema_set_blend",
+          "nema_set_raster_color",
+          "nema_raster_rect",
+          "nema_set_clip_pop"
+        ],
+        "variables": [
+          "dash_buffer_size_pixel",
+          "ratio",
+          "w"
+        ],
+        "stock_span": {
+          "start": "0x005FA7C0",
+          "end_exclusive": "0x005FA84A",
+          "size": 138,
+          "sha256": "aeda115cd2ea2bba4eee91b8510ec396bdb40b94184a16d51bfc86ba12ae70c0",
+          "nema_context_pointer_cell": "0x20074EFC"
+        },
+        "candidate_source": "components/shared/lvgl/runtime_ambiq_gpu_patch_dashline_candidate.c",
+        "qualification": "The exact public GCC body and stock IAR body have the same context-width lookup, float ratio/truncation, clip/blend/color/rectangle order, and clip-pop tail. The candidate expresses those effects through explicit ports and remains production-excluded."
+      },
+      "get_glyph": {
+        "function": "lv_ambiq_get_glyph",
+        "source_line": 818,
+        "inlined_helpers": [
+          {"name": "get_codepoint", "source_line": 761},
+          {"name": "nema_get_codepoint_range", "source_line": 801}
+        ],
+        "glyph_size": 36,
+        "range_size": 12,
+        "font_ranges_offset": 4,
+        "candidate_source": "components/shared/lvgl/runtime_ambiq_gpu_patch_get_glyph_candidate.c",
+        "qualification": "The exact archive body decodes one-to-four-byte UTF-8 through utf8_codepoint_size, rejects codepoint zero, walks glyph-pointer-terminated ranges, and indexes 36-byte glyph records. The public font header independently fixes the layouts."
+      },
+      "gradient": {
+        "function": "lv_ambiq_gradient_create",
+        "source_line": 138,
+        "section_size": 1416,
+        "section_sha256": "5870d79c49ee8bd0dfa4b5bf8f6f39b04ed45148c0c00b774467149292d83ae4",
+        "relocations": 16,
+        "recovered_lvgl_max_stops": 2,
+        "candidate_source": "components/shared/lvgl/runtime_ambiq_gpu_patch_gradient_candidate.c",
+        "oracle": "tools/emulate_ambiq_gpu_patch_gradient.py",
+        "stock_span": {
+          "start": "0x005FA238",
+          "end_exclusive": "0x005FA7C0",
+          "size": 1416,
+          "sha256": "82d1ae24eff6da055d251b067ce54e002940cd90a8283af0063381448ea6dc93"
+        },
+        "qualification": "The exact Ambiq LVGL caller inherits LV_GRADIENT_MAX_STOPS=2 and normalizes byte fractions to [0,1]. Exact Cortex-M55 object emulation fixes the endpoint, implicit-segment, equal-stop, descending-fallback, enable/disable, and hard-coded endpoint-pixel effects for that recovered live contract."
+      },
+      "shadow_blur_corner": {
+        "function": "lv_ambiq_shadow_blur_corner",
+        "source_line": 383,
+        "section_size": 668,
+        "section_sha256": "cea1f3cb0efe575af62a887e8daec87479bc94807355f14df019cf02613faef8",
+        "relocations": 39,
+        "relocation_targets": ["nema_blit_subrect_fit", "nema_raster_rect", "nema_rgba", "nema_set_blend", "nema_set_clip_pop", "nema_set_clip_temp", "nema_set_const_color", "nema_set_raster_color"],
+        "candidate_source": "components/shared/lvgl/runtime_ambiq_gpu_patch_shadow_blur_candidate.c",
+        "qualification": "Exact-object DWARF, headless decompilation, and instruction-level call-argument checking recover the complete odd/even two-pass command stream. Trace tests pin horizontal and vertical extension, clear, blend, average-alpha, sample-loop, and clip-pop effects through explicit Nema ports."
+      },
+      "small_raster": {
+        "functions": ["lv_ambiq_create_corner_mask", "lv_ambiq_l8_l4_convert"],
+        "candidate_source": "components/shared/lvgl/runtime_ambiq_gpu_patch_small_raster_candidate.c",
+        "qualification": "Exact-object decompilation and instruction-level constants fix the ten-effect A8 corner-mask arc and the two-pass even-width L8/L4 matrix pipeline, including the odd-width no-op. Both are trace-tested through explicit Nema ports."
+      },
+      "shadow_blur_corner_vg": {
+        "function": "lv_ambiq_shadow_blur_corner_vg",
+        "source_line": 454,
+        "section_size": 324,
+        "section_sha256": "a600d42433a84fe56934d36b167177bf1c617ce3cb8fafcbfecb9ca1948b9974",
+        "relocations": 15,
+        "candidate_source": "components/shared/lvgl/runtime_ambiq_gpu_patch_shadow_blur_vg_candidate.c",
+        "qualification": "Exact-object decompilation, public NemaVG signatures, literal recovery, and context-offset checking fix the radial stop/color pipeline and exact texture/clip restore. The complete command trace is host-tested through explicit ports."
+      },
+      "bitmap_glyph": {
+        "function": "lv_ambiq_draw_bitmap_glyph",
+        "source_line": 590,
+        "section_size": 1036,
+        "section_sha256": "37ad8ca8a082a00d04feae707022535448d1920940335db4819130901c47f0a1",
+        "relocations": 34,
+        "candidate_source": "components/shared/lvgl/runtime_ambiq_gpu_patch_bitmap_glyph_candidate.c",
+        "qualification": "Exact-object DWARF and decompilation plus the public 76-byte descriptor recover direct aligned binding, packed-row one-line blitting, 32-bit-aligned/2,046-pixel temporary staging, and rotated-quad rendering. All four paths are trace-tested through explicit Nema ports."
+      },
+      "candidate_source": "components/shared/lvgl/runtime_ambiq_gpu_patch_accessors_candidate.c",
+      "qualification": "The exact public archive's DWARF, section bytes, and private layouts bound these three candidates. They remain separately named and production-excluded because the original implementation source and stock IAR archive are unavailable."
+    }
+  },
+  "licenses": {
+    "nemasdk_headers_and_archive": {
+      "classification": "LicenseRef-Think-Silicon-NemaSDK-Permissive",
+      "notice_path": "headers/LICENSE",
+      "note": "MIT-like permission with an additional normative-header warning; preserve the exact notice rather than simplifying it to a standard SPDX assertion."
+    },
+    "ambiq_gpu_patch_and_port": {
+      "spdx": "BSD-3-Clause",
+      "note": "Ambiq files carry the complete three-clause notice; port files also retain Think Silicon notices where applicable."
+    }
+  },
+  "stock_evidence": {
+    "official_image": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "retained_error": {
+      "run_address": "0x0076C8E8",
+      "text": "INVALID_SECTORED_CL_SIZE",
+      "introduced_in_nemagfx": "1.4.12"
+    },
+    "retained_paths": [
+      {
+        "pointer_cell": "0x004B1054",
+        "run_address": "0x006D8E14",
+        "path": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c"
+      },
+      {
+        "pointer_cell": "0x004C7938",
+        "run_address": "0x006DD8F4",
+        "path": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq.c"
+      }
+    ],
+    "resolved_symbols": {
+      "0x004B092A": "lv_ambiq_common_start",
+      "0x004C73D6": "lv_draw_ambiq_init",
+      "0x0051418E": "nema_get_last_cl_id",
+      "0x00514194": "nema_get_last_submission_id",
+      "0x0051419A": "nemagfx_power_control",
+      "0x00514278": "nema_cl_create_sized",
+      "0x00514384": "nema_cl_rewind",
+      "0x005143D4": "nema_cl_bind_sectored_circular",
+      "0x005144FA": "nema_cl_get_bound",
+      "0x005FA238": "lv_ambiq_gradient_create",
+      "0x005FA7C0": "lv_ambiq_dashline_create"
+    },
+    "recovered_configuration": {
+      "LV_USE_DRAW_AMBIQ": 1,
+      "LV_USE_AMBIQ_VG": 1,
+      "LV_AMBIQ_COMMAND_LIST_SECTOR": 100,
+      "LV_AMBIQ_COMMAND_LIST_SECTOR_SIZE": 1024,
+      "command_list_bytes": 102400,
+      "NEMAGFX_POWER_SAVE": 1,
+      "power_wake_retain_state": true
+    },
+    "version_qualification": "The stock calls nema_cl_bind_sectored_circular and retains NEMA_ERR_INVALID_SECTORED_CL_SIZE, both first documented in NemaGFX 1.4.12. The exact 1.4.12/1.1.8 public package is therefore the strongest reproducible candidate; only the NemaGFX lower bound is independently forced by stock bytes."
+  },
+  "integration_status": {
+    "dependency_identity_closed": true,
+    "public_reproduction_commit": "b853fded7e545f005727e13bf2ce83018c7e242d",
+    "production_ready": false,
+    "closed_gaps": [
+      "NemaGFX API family and 1.4.12 stock lower bound",
+      "NemaVG 1.1.8 exact co-packaged candidate",
+      "Apollo5 GCC archive identity and compiler metadata",
+      "Ambiq GPU patch archive/header identity and complete export census",
+      "command-list size, sector count, sector size, and GPU power policy",
+      "complete public AmbiqSuite 5.1.0 subtree reproduction commit",
+      "three relocation-free GPU-patch accessors recovered from exact archive DWARF and machine code",
+      "GPU-patch dash-line creation recovered from matching public GCC and stock IAR behavior",
+      "GPU-patch UTF-8 glyph lookup recovered from exact archive DWARF and public font layouts"
+    ],
+    "remaining_gaps": [
+      "the original IAR-built NemaGFX/NemaVG archive or its exact internal source commit",
+      "implementation source for the six GPU-patch exports not represented by bounded clean-room candidates",
+      "the stock bare-metal Nema HAL/allocator/IRQ source and board-specific GPU policy",
+      "hardware validation of the public GCC archives against Apollo510 GPU behavior",
+      "atomic LVGL/Ambiq/Nema/HAL source integration and placement review"
+    ]
+  }
+}

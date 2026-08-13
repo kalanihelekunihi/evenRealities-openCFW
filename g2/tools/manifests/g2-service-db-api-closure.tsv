@@ -1,0 +1,29 @@
+metric	value
+retained_path	platform\service\flashDB\db_api\service_db_api.c
+linked_functions	11
+path_anchored_functions	5
+raw_path_referencing_functions	7
+body_bytes	908
+body_concat_sha256	4543128905f9c50185a34ca423ad0e0ed0ac61f1a8d0847d18a501cbe20a13bc
+physical_interval	[0x00540ED0,0x005412E0)
+physical_bytes	1040
+physical_sha256	5bc673adf9a8d39874f81329837fabfca45dbeab8d5af0d1c16b799e784cc4c4
+outer_pool_regions	1
+outer_pool_bytes	132
+outer_pool_concat_sha256	175570b9821b29ab5e79ac426a166db7975a8c3f2544351b1fc1c1aef0a032ff
+direct_bl_entry_sites	23
+direct_bl_entry_digest	91e8ecc1d60f89279d72110a1ee45beea7220fd6e817464e7881b032cf36402f
+stored_entry_pointers	6
+stored_entry_pointer_digest	b71e7c1c755a2e6f72eea346d70746ace306a2a294a51254202d855df61bdc96
+direct_body_calls	60
+internal_direct_body_calls	1
+external_direct_body_calls	59
+direct_body_call_digest	6f30ebbeec42c912578d718f089a4686fd0c75b271e117bf140b5ccb131ba3f9
+indirect_body_calls	0
+unrecovered_direct_object_targets	0
+embedded_third_party_definitions	0
+third_party_dependency	FlashDB 2.1.1, CMSIS-FreeRTOS v10.5.1, and EasyLogger 2.2.99 source-equivalent core
+historical_source_available	true for all third-party dependencies; false for the G2 adapter
+private_producing_commit_observable	false
+stock_error_seam	FAL callbacks return zero on device failure while FlashDB 2.1.1 maps only negative callback returns to FDB errors
+production_routed	false

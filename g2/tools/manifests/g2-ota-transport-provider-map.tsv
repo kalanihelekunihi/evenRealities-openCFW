@@ -1,0 +1,8 @@
+provider	edges	targets	origin	version	selected_commit	status
+EasyLogger diagnostics	60 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted
+IAR DLIB memory primitives	8 direct BL sites	0x00439BE4,0x0043C0E4	IAR EWARM runtime	9.20+ floor; 9.60.2 leading candidate	unavailable	bounded or source-recreated
+Closed G2 OTA service	5 direct BL sites	0x0044871A,0x0044874C	Even Realities first-party OTA service	private G2 source	unobservable	complete linked-object closure
+Source-owned CRC-16/CCITT-FALSE leaf	4 direct BL sites	0x0049ACD4	OpenCFW clean-room replacement	CCITT-FALSE polynomial 0x1021	working-tree source	production source-owned
+TLSF through synchronized heap wrapper	6 direct BL sites	0x00474D16	mattconte/tlsf behind G2 locking	v3.1-compatible	deff9ab509341f264addbd3c8ada533678591905	production source-owned behind wrapper
+G2 event/transport providers	3 direct BL sites	0x0046F2C6,0x0047697E,0x00476ACE	Even Realities first-party	private G2 source	unobservable	bounded first-party graph
+Registered OTA transport callbacks	4 indirect BLX sites	RAM slots 0x20003058 and 0x2000305C	Even Realities first-party registration ABI	private G2 source	unobservable	bounded callback seam; targets depend on product registration

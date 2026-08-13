@@ -1,0 +1,69 @@
+
+/work/stock/WsfTimerUpdateTicks.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0052a574 <.data>:
+  52a574:	b53e      	push	{r1, r2, r3, r4, r5, lr}
+  52a576:	f72a fcc2 	bl	0x454efe
+  52a57a:	0004      	movs	r4, r0
+  52a57c:	4d29      	ldr	r5, [pc, #164]	@ (0x52a624)
+  52a57e:	6829      	ldr	r1, [r5, #0]
+  52a580:	1a61      	subs	r1, r4, r1
+  52a582:	200a      	movs	r0, #10
+  52a584:	fbb1 f0f0 	udiv	r0, r1, r0
+  52a588:	2800      	cmp	r0, #0
+  52a58a:	d005      	beq.n	0x52a598
+  52a58c:	200a      	movs	r0, #10
+  52a58e:	fbb1 f0f0 	udiv	r0, r1, r0
+  52a592:	f7ff ffa8 	bl	0x52a4e6
+  52a596:	602c      	str	r4, [r5, #0]
+  52a598:	a802      	add	r0, sp, #8
+  52a59a:	f7ff ffbe 	bl	0x52a51a
+  52a59e:	2800      	cmp	r0, #0
+  52a5a0:	d037      	beq.n	0x52a612
+  52a5a2:	2164      	movs	r1, #100	@ 0x64
+  52a5a4:	9100      	str	r1, [sp, #0]
+  52a5a6:	2300      	movs	r3, #0
+  52a5a8:	f242 7110 	movw	r1, #10000	@ 0x2710
+  52a5ac:	4348      	muls	r0, r1
+  52a5ae:	f44f 717a 	mov.w	r1, #1000	@ 0x3e8
+  52a5b2:	fbb0 f2f1 	udiv	r2, r0, r1
+  52a5b6:	2104      	movs	r1, #4
+  52a5b8:	4817      	ldr	r0, [pc, #92]	@ (0x52a618)
+  52a5ba:	6800      	ldr	r0, [r0, #0]
+  52a5bc:	f754 f8f8 	bl	0x47e7b0
+  52a5c0:	0004      	movs	r4, r0
+  52a5c2:	2c01      	cmp	r4, #1
+  52a5c4:	d01c      	beq.n	0x52a600
+  52a5c6:	f712 fd82 	bl	0x43d0ce
+  52a5ca:	0780      	lsls	r0, r0, #30
+  52a5cc:	d50a      	bpl.n	0x52a5e4
+  52a5ce:	4816      	ldr	r0, [pc, #88]	@ (0x52a628)
+  52a5d0:	9001      	str	r0, [sp, #4]
+  52a5d2:	f240 1099 	movw	r0, #409	@ 0x199
+  52a5d6:	9000      	str	r0, [sp, #0]
+  52a5d8:	4b14      	ldr	r3, [pc, #80]	@ (0x52a62c)
+  52a5da:	4a15      	ldr	r2, [pc, #84]	@ (0x52a630)
+  52a5dc:	4915      	ldr	r1, [pc, #84]	@ (0x52a634)
+  52a5de:	2001      	movs	r0, #1
+  52a5e0:	f712 ffc8 	bl	0x43d574
+  52a5e4:	f712 fd73 	bl	0x43d0ce
+  52a5e8:	07c0      	lsls	r0, r0, #31
+  52a5ea:	d403      	bmi.n	0x52a5f4
+  52a5ec:	f712 fd6f 	bl	0x43d0ce
+  52a5f0:	0740      	lsls	r0, r0, #29
+  52a5f2:	d505      	bpl.n	0x52a600
+  52a5f4:	4910      	ldr	r1, [pc, #64]	@ (0x52a638)
+  52a5f6:	000a      	movs	r2, r1
+  52a5f8:	f05f 6080 	movs.w	r0, #67108864	@ 0x4000000
+  52a5fc:	f712 fc4f 	bl	0x43ce9e
+  52a600:	2c01      	cmp	r4, #1
+  52a602:	d006      	beq.n	0x52a612
+  52a604:	f0cf fd4e 	bl	0x5fa0a4
+  52a608:	2000      	movs	r0, #0
+  52a60a:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  52a60e:	6008      	str	r0, [r1, #0]
+  52a610:	e7fe      	b.n	0x52a610
+  52a612:	bd37      	pop	{r0, r1, r2, r4, r5, pc}

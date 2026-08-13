@@ -1,0 +1,31 @@
+metric	value
+linked_functions	24
+body_bytes	4588
+body_concat_sha256	282897dacb6bac34ce77cfa56e28ebdefc318589bfb1363c753e7c86d418d83a
+physical_interval	[0x00592658,0x005939A0)
+physical_bytes	4936
+physical_sha256	0dc52441e3eb2272fc97972eee102f01a3d3e9f59499e4708d8f95be565e5391
+owned_noncode_bytes	348
+owned_noncode_sha256	9383f55824c401b734170954caf85267a6a55a26a47b64a8406b803e93c8f258
+direct_bl_entry_sites	77 total / 75 intra-object / 2 exterior
+direct_bl_entry_digest	7d81e9a6bb5e39782971ac96ce48705c1503425aa1018026814ff1e8ae2e7987
+exterior_bl_entry_sites	0x0057E5CC->0x0059308C;0x0057E610->0x00592F9A
+exterior_bl_entry_digest	2806ea37fb06abee7cafcc0f16c9adcae1473d1d6a0816dadfeda6f309b19952
+direct_body_call_sites	289
+direct_body_call_digest	320cb0698b9cdd47d6f05f93f19b6ff6f54360acf74c6a02214f06c455224cab
+stored_entry_pointers	14 exact Thumb entries in external ULED operations table [0x0070B024,0x0070B05C)
+stored_entry_pointer_digest	028b33caff6f72304e4a33cd8bb58c002771707a30bdcf4d5ed2684a23a00881
+external_ops_object	[0x0070B024,0x0070B064);64 bytes;14 callbacks plus two zero fields;SHA256 7eecc0a32f95c8d1d712327198d4b473a7f065eeb1c2e8132f98526debef4418
+stored_strict_interior_pointers	0
+raw_interior_byte_windows	5 unaligned byte overlaps plus aligned packed-ASCII words 0x0078F390=0x00593057 and 0x0078F39C=0x00593157; none executable pointers
+raw_interior_window_digest	1b55325294362922a711bdcee2d8efd09d0034536abed715ef1ef08515b1f757
+direct_b_w_entry_or_interior_targets	0
+retained_path	D:\01_workspace\s200_ap510b_iar_git\driver\uled\jbd4010\drv_mspi_jbd4010.c
+retained_path_pointer_cells	0x0059331C;0x005938FC
+request_templates	four 28-byte templates at 0x0076B244/60/7C/98;concat SHA256 568d17202d90a57a652a07e99cce0780372261cc61910ade92ededad20a2e015
+common_driver_calls	0x005926A8 init;0x00592716 write;0x00592754 QSPI write;0x00592786/0x005927BE read;0x00592E2A async QSPI write
+driver_globals	MSPI handle 0x20074524;framebuffer 0x20074528;optional clear callback 0x2007452C;offset-mode flag 0x2007501A
+display_geometry	640x480 pixels;4-bit packed framebuffer with 320-byte scanlines
+production_routed	false
+ownership_bytes	0
+source_inventory	unavailable; linked-object census complete but source-only function count unknown

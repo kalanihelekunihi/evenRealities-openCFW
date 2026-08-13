@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "component": "AndersKaloer/Ring-Buffer",
+  "license": "MIT",
+  "upstream": {
+    "repository": "https://github.com/AndersKaloer/Ring-Buffer.git",
+    "repository_web": "https://github.com/AndersKaloer/Ring-Buffer",
+    "selected_ref": "190e30bebcec22d7311fd941179d70b4f439c441",
+    "selected_commit": "190e30bebcec22d7311fd941179d70b4f439c441",
+    "selected_tree": "017721c429f238ebd40216c9d832866c5323dfaa",
+    "parent_commit": "e5ff131a45643848da341efc5be05dee8b5fe145",
+    "author_date": "2024-11-13T08:41:32+01:00",
+    "committer_date": "2024-11-13T16:41:32+09:00",
+    "commit_signature": {
+      "present": true,
+      "format": "OpenPGP",
+      "signer_trust_verified": false,
+      "qualification": "The official GitHub commit reports a signature, but this compact snapshot does not vendor a trust root."
+    }
+  },
+  "selection": {
+    "classification": "authenticated upstream compatibility snapshot; production-integrated",
+    "exact_g2_checkout_proven": false,
+    "compatible_floor_commit": "cda00e1efb815bad5100757f0d10d117f633ced6",
+    "compatible_ceiling_commit": "190e30bebcec22d7311fd941179d70b4f439c441",
+    "firmware_build_timestamp": "2025-04-28T13:29:15Z",
+    "compatibility_choice": "Newest source-equivalent upstream commit available at the firmware build timestamp.",
+    "qualification": "The dynamic-buffer ABI, exact expanded assertion, seven-function API, overwrite policy, and control flow prove the cda00e1-or-later source family. Retained behavior cannot distinguish commits inside the interval."
+  },
+  "g2_boundary": {
+    "analyzer": "tools/analyze_g2_ring_buffer.py",
+    "evidence": "docs/research/ring-buffer-lineage-recovery-audit.md",
+    "stock_span": "[0x00598134,0x0059823C)",
+    "stock_size": 264,
+    "stock_sha256": "19b070eb57bf11089632a16a58f077f816d3b45502914ab2dc435dbd2b10d009",
+    "executable_bytes": 250,
+    "literal_alignment_bytes": 14,
+    "object_size": 16,
+    "production_integration_percent": 100,
+    "production": {
+      "source": {
+        "path": "components/shared/ring_buffer/runtime_ring_buffer.c",
+        "size": 5290,
+        "sha256": "7357f1229ccb40cab3e23204ff7e98176d1026c5c86fbabb67a0a5067c8074b2"
+      },
+      "source_owned_bytes": 248,
+      "generated_alignment_bytes": 4,
+      "generated_entry_replacement_bytes": 252,
+      "apple_clang": {
+        "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "overlay": {"size": 130316, "sha256": "c293b537dfc3481b6b42de12eda24a1dd1afde12afd6eac45c4d5b1ef31f3478"},
+        "component": {"size": 3653712, "sha256": "1fd350535ba9f271601a5923c0cc20212f3212594f73ceebd107f79ad65f1c1d"},
+        "package": {"size": 4432206, "sha256": "a5625a4bcc1ff20ff9e339f9bb0a074d999508674c7aeb315101e653c90630c2"},
+        "package_ownership": {"source_owned": 131051, "generated": 93036, "opaque": 4208119},
+        "manifest_region_count": 1067,
+        "flash_plan": {"size": 816896, "sha256": "58a3db7f1120bfe2d9a9ed5b9585781919c954830431fb6ba1eda010d621228d", "programmed": 1139, "preserved": 2, "skipped": 5},
+        "build_report": {"size": 2323, "sha256": "f8681101a1ab179efa6582bd80cbd737d8a9fd105a7c4f15c0fd83db8950a97a"}
+      },
+      "linux_clang": {
+        "status": "pending_reviewed_toolchain_reproduction",
+        "qualification": "No Linux aggregate pins are inferred from the reviewed Apple build."
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "ringbuffer.c",
+      "local_size": 2202,
+      "local_sha256": "c930c1bb55d7efe1116566bacfb00b55ddf031e7df22b22e7138849068819c7f",
+      "upstream_size": 2203,
+      "upstream_sha256": "21fde4113929246e00ad79533f83bb6def2bb154a18c12c2d84159bc61d4c39f",
+      "git_blob_sha1": "39fbea599e9e2c62561f1cd2e80bb08717e9e656",
+      "normalization": "one redundant terminal blank line removed"
+    },
+    {
+      "path": "ringbuffer.h",
+      "local_size": 4446,
+      "local_sha256": "065589a731ffa8367ace4a17885968a53f35e265c7d0d45cdddbe3fa09cfa9e9",
+      "upstream_size": 4446,
+      "upstream_sha256": "065589a731ffa8367ace4a17885968a53f35e265c7d0d45cdddbe3fa09cfa9e9",
+      "git_blob_sha1": "36da6eb18805853f79f5b558714204517fd969a0",
+      "normalization": null
+    },
+    {
+      "path": "LICENSE",
+      "local_size": 1080,
+      "local_sha256": "d96c4b746ca4a4b8a901e8e0b4ff2ae87026055d2799dcfc58632cd02f422825",
+      "upstream_size": 1079,
+      "upstream_sha256": "b894277418ceef41a36383e6337978192505f2385f36a6cb8d27cb5c4b4db36d",
+      "git_blob_sha1": "4e5491e49deef7fce4c58480177f501d8cc8dea9",
+      "normalization": "terminal LF added"
+    }
+  ]
+}

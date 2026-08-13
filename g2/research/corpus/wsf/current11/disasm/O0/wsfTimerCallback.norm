@@ -1,0 +1,9 @@
+push {lr}
+sub sp,#12
+str r0,[sp,#4]
+movs r1,#2
+movs r0,#0
+bl <call>
+nop
+sp ,#12
+ldr.w pc,[sp],#4

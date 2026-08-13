@@ -1,21 +1,19 @@
 # openCFW .gitignore
 #
-# Rule of thumb: if `make` (or a tool under tools/) can regenerate it, it does
-# not belong in the repo.  Source, manifests, provenance records and the
-# vendored third_party/ snapshots ARE tracked -- they are build inputs.
+# Rule of thumb: if `make` (or a tool under g2/tools/) can regenerate it, it does
+# not belong in the repo. Source, manifests, provenance records, documentation
+# and the vendored third-party snapshots ARE tracked -- they are build inputs.
 
 # ---------------------------------------------------------------------------
 # Build + analysis output
 # ---------------------------------------------------------------------------
-# Top-level build tree written by tools/open_cfw.py (reference/, ring-source/,
-# source/) plus every ad-hoc analysis-*, repro-*, agent-*, validation/,
-# toolchains/ and tmp* scratch directory.  `make clean` deletes this wholesale.
-/build/
-
-# Per-component build trees (components/*/*/build) emitted by build_component.py.
-# Matches any directory literally named "build"; build_component.py and friends
-# are files, so they are unaffected.
+# G2: top-level build tree written by g2/tools/open_cfw.py (reference/,
+# ring-source/, source/) plus every ad-hoc analysis-*, repro-*, agent-*,
+# validation/, toolchains/ and tmp* scratch directory.
+# R1: host binaries, freestanding object tree, and the SDK image tree.
+# `make clean` deletes these wholesale.
 build/
+_build/
 
 # Toolchain/host/probe build variants: build-linux, build-console-apple-a,
 # build-task3-linux-probe, ...
@@ -27,6 +25,7 @@ build-*/
 *.a
 *.elf
 *.axf
+*.out
 *.hex
 *.su
 *.d
@@ -35,6 +34,7 @@ build-*/
 *.so
 *.dylib
 *.dll
+*.dSYM/
 
 # Scratch/intermediate files from analysis runs.
 tmp*/
@@ -44,8 +44,14 @@ tmp*/
 *.rej
 *.log
 
+# Recorded (non-canonical) manifest and overlay variants, replayed for
+# compiler-profile experiments. The verifiers classify these as generated
+# output; the canonical manifests/overlays alongside them are tracked.
+/g2/manifests/*-record*.json
+/g2/components/**/*-record*.json
+
 # ---------------------------------------------------------------------------
-# Python (tools/ and tests/)
+# Python (g2/tools/, g2/tests/, third-party/fetched/)
 # ---------------------------------------------------------------------------
 __pycache__/
 *.py[cod]
@@ -63,16 +69,28 @@ venv/
 env/
 
 # ---------------------------------------------------------------------------
+# Research evidence is data, not build output
+# ---------------------------------------------------------------------------
+# g2/research/ holds delivered reverse-engineering evidence: Ghidra run logs,
+# compiler-matrix object files, disassembly, and linked images. They share
+# extensions with build output but are inputs -- authenticated by the delivered
+# SHA256SUMS manifests and by g2/research/MANIFEST.sha256. Keep them.
+!/g2/research/**
+
+# ---------------------------------------------------------------------------
 # Vendor-proprietary inputs (not redistributable -- fetch locally)
 # ---------------------------------------------------------------------------
-# Official OTA payloads under blobs/official/ are vendor-proprietary; the
+# Official OTA payloads under g2/blobs/official/ are vendor-proprietary; the
 # PROVENANCE.md alongside them records hashes and origin so a local copy can be
-# reproduced and verified.  Track the provenance, not the bytes.
-/blobs/official/**
-!/blobs/official/**/
-!/blobs/official/**/PROVENANCE.md
+# reproduced and verified. Track the provenance, not the bytes.
+/g2/blobs/official/**
+!/g2/blobs/official/**/
+!/g2/blobs/official/**/PROVENANCE.md
 /firmware_blobs
 /sdks
+
+# Fetched vendor cache, if it is ever placed inside the tree.
+/vendor-cache/
 
 # Decompiler projects / databases -- large, regenerable from the blobs.
 *.gpr

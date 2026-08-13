@@ -1,0 +1,11 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	direct_callers	evidence
+1	APP_PbRxQuicklistFrameDataProcess	exact retained string and dispatcher semantics	0x0055894C	0x00558B3C	496	5aeb4f6b269886c802f6d58ff7bc35bd5ed9c288a36e6bd0a54bd3020e2f3d5e	0x004FFB4E	dispatches item, multi-item, and event commands after nanopb decode
+2	APP_DecodePbRxQuicklistData	exact retained string and source order	0x00558B3C	0x00558CB0	372	7d49cd5542f001703021bca04a7d424ee1876ee263a841cea1ae39b5e432a9d3	0x004FFB56	decodes command payloads and validates event values 1..2
+3	PB_RxQuicklistItem	exact retained assertion symbol	0x00558CB0	0x00558D9E	238	5024387a70041183631386d3b07ce4377febf0d185190c3f779d12bbb5eea28b	0x00558AEA	processes one quicklist item and logs its bounded fields
+4	APP_PbTxEncodeQuicklistItem	exact retained assertion symbol	0x00558D9E	0x00558F34	406	d9ce7858e017854dcd0e97d3b689ea4fbb39b02bc25b9d5fd8c7c7b2f1367ff2	0x00558AF6	encodes command 1/tag 3 over service 0x0C
+5	PB_RxQuicklistMultItems	exact retained assertion symbol	0x00558F34	0x00558FFE	202	08f6120a39d3533ee49a6faceebb2ea6a40fd72cbf94f7ecf51e86a3b68f1428	0x00558B06	processes multi-item type/count metadata
+6	APP_PbTxEncodeQuicklistMultItems	exact retained assertion symbol	0x00558FFE	0x0055918A	396	5c9b1d8c429ced73962c66e410931b40fc0113a5b38f216293bf9c06776e21e7	0x00558B12	encodes command 2/tag 4 over service 0x0C
+7	APP_PbNotifyEncodeQuicklistMultItems	exact retained assertion symbol	0x005591B0	0x0055936A	442	0c91e871f30ca78f1c38a4b491c44683d5763eda846e1c94a080631eb6cc5ef5	0x004F6502	copies bounded item records, increments sequence, and notifies
+8	PB_RxQuicklistEvent	exact retained assertion symbol	0x00559378	0x00559432	186	6e9d623092c4de5dbec60fa38f6a916ddb60176a16069b7dd0a14bb19cb7276f	0x00558B22	validates quicklist event 1..2 and logs its UID
+9	APP_PbTxEncodeQuicklistEvent	exact retained assertion symbol	0x00559470	0x005595DE	366	7f8aa7561d01188679e6825eb4b4b4db8ab592e4199bb3e82c999ad3ab928582	0x00558B2E	encodes command 3/tag 5 over service 0x0C
+10	APP_PbNotifyEncodeQuicklistEvent	exact retained assertion symbol	0x0055960C	0x00559778	364	667480b15f99fbac32a19a02fc65b26ffdc26cb3eca990fe46c5803e3abacd79	0x004F609E	increments sequence and sends an event notification

@@ -1,0 +1,38 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	bq27427_i2c_read_reg	exact semantic/name oracle	0x0053AFC0	0x0053B032	114	09c78bb4a5291dbad0b58ea713c288f395b9c8741303a3cb905d4e8c48611258	22 intra-TU BL sites	bus 7/address 0x55 and split little-endian register reads
+2	bq27427_i2c_write_reg	exact semantic/name oracle	0x0053B032	0x0053B076	68	599e37e3ff27830146509de1eba6266853d5604b9094a0cec9e7670bb7e18096	16 intra-TU BL sites	one/two-byte little-endian writes
+3	bq27427_i2c_read_block	exact semantic/name oracle	0x0053B076	0x0053B08E	24	78f4e78ea173ba9145a88557ba631ad1d9bd8d5efae5ec8c3721eb06e9f389f5	intra-TU BL at 0x0053B624	block read transport wrapper
+4	bq27427_i2c_write_block	exact semantic/name oracle	0x0053B08E	0x0053B10A	124	462dc4e2766ab653cfc7c6688e7854e0850a64e18ef4f3e296641284623dd2b9	intra-TU BL at 0x0053BB30	35-byte staging buffer and log-only transport error
+5	bq27427_read_flags	exact retained function string	0x0053B10A	0x0053B160	86	0728d87d1621321e8927cacf9e6da4cc5a5c4e04a19b36c4bd53d3eadf14aa40	intra-TU BL at 0x0053C02A	register 0x06
+6	bq27427_read_soc	exact retained function string	0x0053B160	0x0053B1B6	86	703990a20d8045c5d5475252bbdd477eded40dcd465f36c1616f522fee6d97f0	intra-TU BL at 0x0053C07E	register 0x1C
+7	bq27427_read_temperature	exact retained function string	0x0053B1B6	0x0053B210	90	d40b1a7b66e8181def9807f206dee5235473a66d8d9cd703b1fecff84c162a85	intra-TU BL at 0x0053C084	register 0x02 minus 2731
+8	bq27427_read_battery_voltage	exact retained function string	0x0053B210	0x0053B268	88	50807c5b3839945b1e2ebd772d3b68fa274d5533fe57e8fb5cd1ae261bb5522a	intra-TU BL at 0x0053C08A	register 0x04
+9	bq27427_read_charge	exact retained function string	0x0053B268	0x0053B2D8	112	454a9d1000b56b2d25ec4d1bf35752c4477e017cd547caec212882d569397295	12 intra-TU BL sites	generic two-byte command reader
+10	bq27427_read_nom_capacity	exact semantic/name oracle	0x0053B2D8	0x0053B2E2	10	a920002bb323c5704fc877f596d06b110d4adf2465f22a2739c32291d4fc7f29	intra-TU BL at 0x0053C090	register 0x08
+11	bq27427_read_avail_capacity	exact semantic/name oracle	0x0053B2E2	0x0053B2EC	10	5a7129d00d2662d4890dc359df521c6ffa5a6f000b06b92245005c9aa81a6b0d	intra-TU BL at 0x0053C094	register 0x0A
+12	bq27427_read_rem_capacity	exact semantic/name oracle	0x0053B2EC	0x0053B2F6	10	dc259a213b7bda99116020e14562094ce50e808beeab4b17ce7e9dd5960bf3f6	intra-TU BL at 0x0053C098	register 0x0C
+13	bq27427_read_full_capacity	exact semantic/name oracle	0x0053B2F6	0x0053B300	10	82d5ddc33a0bd1af86a48cb33842b12807c493fe42cc0f2ecdda165481dbe697	intra-TU BL at 0x0053C09C	register 0x0E
+14	bq27427_read_ai	exact retained function string	0x0053B300	0x0053B35C	92	c67de10a4ba2ee3637973a152982ffa822a0413f451cb6ef7cc6de1cf3ce6225	intra-TU BL at 0x0053C0A0	signed register 0x10
+15	bq27427_read_ap	exact retained function string	0x0053B35C	0x0053B3B8	92	93dddcc0de8656bc4cf6ff89738237ddce731a048cd44002bb9d19c594f4434c	intra-TU BL at 0x0053C0A6	signed register 0x18
+16	bq27427_read_int_temp	exact semantic/name oracle	0x0053B3B8	0x0053B3C2	10	629fecbd605223a984567dabaf128107e5367ef62735df6523ac9f61240f6842	intra-TU BL at 0x0053C0AA	register 0x1E
+17	bq27427_read_rem_cap_unfl	exact semantic/name oracle	0x0053B3C2	0x0053B3CC	10	57432df7e5590a57ace30e2fec171f274d39b7bf991d4d46af6a596a54e3d946	intra-TU BL at 0x0053C0AE	register 0x28
+18	bq27427_read_rem_cap_fil	exact semantic/name oracle	0x0053B3CC	0x0053B3D6	10	bb0ce0177c5ab578866e33dc5b887dfe7ec3fde9ce2fad8367bd4e6902ede1c4	intra-TU BL at 0x0053C0B2	register 0x2A
+19	bq27427_read_full_cap_unfl	exact semantic/name oracle	0x0053B3D6	0x0053B3E0	10	41af9ea9608e012a71987a84af047c2254868defb9df7cdaa86685007083dd9d	intra-TU BL at 0x0053C0B6	register 0x2C
+20	bq27427_read_full_cap_fil	exact semantic/name oracle	0x0053B3E0	0x0053B3EA	10	7416d145e60fc09b76beda01124fc776059299ccb768060396605704dd08f3e0	intra-TU BL at 0x0053C0BA	register 0x2E
+21	bq27427_read_soc_unfl	exact semantic/name oracle	0x0053B3EA	0x0053B3F4	10	d8ab9018090d2eb7a6a2373ada9d1d4ef2a037a24491efdcd1c714e5fdfe1df2	intra-TU BL at 0x0053C0BE	register 0x30
+22	bq27427_seal	exact retained function string	0x0053B3F4	0x0053B458	100	e0e5090fa8e176220fa6f086f1305b3e22ab8b981d2e167326728bbac339ef37	intra-TU BL at 0x0053BCD2 and 0x0053BE80	control word 0x0020
+23	bq27427_unseal	exact retained function string	0x0053B458	0x0053B522	202	a9b9c3cebcb739bcf8e937df1ed8e9494481a15094bc9520b8ba349bb7879ef9	intra-TU BL at 0x0053BC16 and 0x0053BD0E	initialized key 0x80008000
+24	bq27427_checksum_dm_block	exact retained function string	0x0053B522	0x0053B5A0	126	0f5c6c2a0a77e5c674c0bd9d7abb69071a7af4332b2c89601c1d2a71c975f3b1	intra-TU BL at 0x0053B6D0 and 0x0053BB3C	0xFF minus eight-bit sum of 32 bytes
+25	bq27427_read_dm_block	exact retained function string	0x0053B5A0	0x0053B6F0	336	48711b766d41e248ee1c4dd806f4fcfbf353d13c85003cb323a4ff13e99c0956	five intra-TU BL sites	class/block/data/checksum protocol
+26	bq27427_update_dm_block	exact retained function string	0x0053B6F0	0x0053B8BA	458	ffa13effca5ff6bfbc0f8400917e362a63f02ed8334ba11e1d711ca4c2a688f7	five intra-TU BL sites	initialized seven-entry descriptor table
+27	bq27427_cfgupdate_priv	exact retained function string	0x0053B8BA	0x0053B966	172	4bb713af3fbc1e8d6b77885cc77770f9a1d9347b4d04e8b8d272eb63da9f9e58	intra-TU BL at 0x0053B96A and 0x0053B9C2	control 0x13/0x42 and 100 flag polls
+28	bq27427_set_cfgupdate	exact retained function string	0x0053B966	0x0053B9BE	88	ee7adb8e6a690b61b708ec12bde9711e058b96e3be577c2a1d46776b4f7120de	intra-TU BL at 0x0053BA9E and 0x0053BDC0	cfgupdate activation wrapper
+29	bq27427_soft_reset	exact retained function string	0x0053B9BE	0x0053BA16	88	b11c6412f91f0a2525eda2f62d90eb620ab88457ffa3220fcb2d9889a144b866	four intra-TU BL sites	cfgupdate deactivation/soft-reset wrapper
+30	bq27427_execute_control_word	exact semantic/name oracle	0x0053BA16	0x0053BA32	28	a5aaa1061b44e653ab579b69799dad115e555f91a6b8470d4b3f62b3df6909f6	intra-TU BL at 0x0053BDCA	control write and 100-ms delay
+31	bq27427_write_dm_block	exact retained function string	0x0053BA32	0x0053BB6A	312	44134f7391a61a7dc4374c84d60c102a5259f696555e17dfa8005a4b2a460371	four intra-TU BL sites	dirty-gated data-memory commit
+32	bq27427_configure_from_params	exact semantic/name oracle	0x0053BB8C	0x0053BCDA	334	aa1a85372d9952b3cba9ec540200536d9e832d0a5c072819e84f246344c0ddb4	intra-TU BL at 0x0053C00A	five stock DM blocks and seven descriptor mappings
+33	bq27427_change_chemistry_profile	exact retained function string	0x0053BD0C	0x0053BE8A	382	867ced92a59a1a3a84363de29c1744651450bfd019a8680afb5882ff3aebb28f	intra-TU BL at 0x0053C00E	chem-ID subcommand 8 and control word 0x31
+34	bq27427_settings	exact retained function string	0x0053BEB4	0x0053C016	354	68dc4670db668825805a2d76074decab7e38e41c7e7e1ff9de34f7580d2d8e9f	intra-TU BL at 0x0053C13A	defaults 240/80/3100 and exact validity ranges
+35	bq27427_status_update	exact retained function string	0x0053C024	0x0053C0D4	176	58488b32df2e40c5bc46172e9911f4f3390979054f3917fba9e5961ea36bca3d	intra-TU BL at 0x0053C0F6 and 0x0053C13E	telemetry refresh at 0x20073B18
+36	bq27427_init_wrapper	exact semantic/name oracle	0x0053C0F4	0x0053C0FE	10	a87205d11d6220d3d04f0a31d2ce97a25e622884c004dc8f20bdc8dc6b569f44	exterior BL at 0x004C688A	status-update wrapper
+37	DRV_Bq27427HwInit	exact retained function string	0x0053C0FE	0x0053C1C4	198	11b61edcd86c46bdbb22cd1a88a13463518a92f46f7548fc3141171745f495c0	exterior BL at 0x0050943C	settings then status update

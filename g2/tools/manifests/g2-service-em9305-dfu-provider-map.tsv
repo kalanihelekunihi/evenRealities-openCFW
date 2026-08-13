@@ -1,0 +1,6 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	125 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	DFU state and failure diagnostics
+Production source-owned file and heap runtime	18 direct BL sites	0x00474550,0x004745F4,0x00474634,0x00474CD2,0x00474D16	OpenCFW file-runtime reconstruction over littlefs and TLSF	private G2 wrappers over admitted sources	littlefs 38c87ecb…; TLSF deff9ab5…	production source-owned	Firmware file open read close allocation and free
+IAR DLIB memory primitives	4 direct BL sites	0x00439BE4,0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded or source-recreated	Copy and fill add no release discriminator
+Shared nanopb-compatible zero initializer	1 direct BL site	0x0048949C	nanopb-linked shared initializer	0.4.7 through 0.4.9.1 compatible	98bf4db69897b53434f3d0ba72e0a3ab1a902824	source-admitted shared code address	Initializes a local transfer descriptor without nanopb behavior
+G2 DFU providers	4 direct BL sites	0x0052F3A0,0x0052F3F8	Even Realities first-party	private G2 source	unobservable	bounded first-party provider graph	DFU transport/status helpers

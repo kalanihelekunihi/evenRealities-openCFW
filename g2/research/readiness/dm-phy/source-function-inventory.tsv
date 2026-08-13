@@ -1,0 +1,9 @@
+function	linkage	source_line	signature
+DmPhyInit	global	240	void DmPhyInit(void)
+DmReadPhy	global	171	void DmReadPhy(dmConnId_t connId)
+DmSetDefaultPhy	global	199	void DmSetDefaultPhy(uint8_t allPhys, uint8_t txPhys, uint8_t rxPhys)
+DmSetPhy	global	217	void DmSetPhy(dmConnId_t connId, uint8_t allPhys, uint8_t txPhys, uint8_t rxPhys, uint16_t phyOptions)
+dmPhyActDefPhySet	static	126	static void dmPhyActDefPhySet(hciEvt_t *pEvent)
+dmPhyActPhyRead	static	102	static void dmPhyActPhyRead(dmConnCcb_t *pCcb, hciEvt_t *pEvent)
+dmPhyActPhyUpdate	static	147	static void dmPhyActPhyUpdate(dmConnCcb_t *pCcb, hciEvt_t *pEvent)
+dmPhyHciHandler	global	63	void dmPhyHciHandler(hciEvt_t *pEvent)

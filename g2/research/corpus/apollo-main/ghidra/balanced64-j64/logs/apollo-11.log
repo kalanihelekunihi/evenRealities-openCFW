@@ -1,0 +1,5454 @@
+openjdk version "21.0.12" 2026-07-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.12+8 (build 21.0.12+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12+8 (build 21.0.12+8-LTS, mixed mode)
+INFO  Using log config file: jar:file:/var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (15738 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (35368 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/tmp/opencfw-apollo64.A58cAv/ghidra
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /var/tmp/opencfw-apollo64.A58cAv/balanced64-j64/projects/apollo-11/apollo_main_template (HeadlessAnalyzer)  
+INFO  Opening project: /var/tmp/opencfw-apollo64.A58cAv/balanced64-j64/projects/apollo-11/apollo_main_template (HeadlessProject)  
+INFO  REPORT: Processing project file: /ota_s200_firmware_ota.bin (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DumpDecompilationChunk.java '0x00472362' '0x00478110' '60'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/tmp/opencfw-apollo64.A58cAv/ghidra/DumpDecompilationChunk.java (HeadlessAnalyzer)  
+INFO  DumpDecompilationChunk.java> OPENCFW_CHUNK_BEGIN start=00472362 end=00478110 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472362 body_start=00472362 body_end=00472377 name=FUN_00472362 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00472362(undefined2 param_1)
+
+{
+  char cVar1;
+  undefined4 unaff_r7;
+  
+  cVar1 = FUN_004c549c(0x1000,&stack0xfffffff8,2);
+  return CONCAT44(CONCAT22((short)((uint)unaff_r7 >> 0x10),param_1),(int)cVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472362 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472378 body_start=00472378 body_end=004723d5 name=FUN_00472378 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00472378(char param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined1 local_110;
+  undefined1 local_10f;
+  undefined1 local_10e;
+  undefined1 local_10d;
+  undefined1 local_10c;
+  undefined1 local_10b;
+  undefined1 local_10a;
+  undefined1 local_109;
+  undefined4 uStack_10;
+  
+  uStack_10 = param_4;
+  FUN_0043c0e4(&local_110,0xfe,0);
+  local_110 = 0;
+  local_10f = 0x1a;
+  local_10e = 0x85;
+  local_10d = 1;
+  local_10b = 0xaa;
+  local_10a = 0xaa;
+  local_109 = 0xaa;
+  if (param_1 == '\0') {
+    local_10c = 0xff;
+  }
+  else {
+    local_10c = 0;
+  }
+  FUN_004c4b7e(&local_110,8);
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472378 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004723d6 body_start=004723d6 body_end=00472425 name=FUN_004723d6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_004723d6(char param_1,char param_2)
+
+{
+  undefined1 local_110;
+  undefined1 local_10f;
+  undefined1 local_10e;
+  undefined1 local_10d;
+  byte local_10c [252];
+  
+  FUN_0043c0e4(&local_110,0xfe,0);
+  local_110 = 0;
+  local_10f = 0x1a;
+  local_10e = 0x89;
+  local_10d = 1;
+  FUN_0043c0e4(local_10c,4,0);
+  local_10c[0] = param_2 << 6 | param_1 << 7;
+  FUN_004c4b7e(&local_110,8);
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004723d6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472426 body_start=00472426 body_end=00472439 name=FUN_00472426 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00472426(undefined1 param_1)
+
+{
+  char cVar1;
+  undefined4 unaff_r7;
+  
+  cVar1 = FUN_004c549c(0x80,&stack0xfffffff8,1);
+  return CONCAT44(CONCAT31((int3)((uint)unaff_r7 >> 8),param_1),(int)cVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472426 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047243a body_start=0047243a body_end=00472545 name=FUN_0047243a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_0047243a(void)
+
+{
+  char cVar1;
+  char cVar2;
+  char cVar3;
+  char cVar4;
+  int iVar5;
+  undefined4 in_r3;
+  undefined1 local_20;
+  bool local_1f;
+  undefined4 uStack_1c;
+  
+  uStack_1c = in_r3;
+  cVar1 = FUN_004acad0();
+  cVar2 = FUN_00443484();
+  cVar3 = FUN_004a4822();
+  cVar4 = FUN_0049eb8e();
+  FUN_0043c0e4(&local_20,2,0);
+  if ((cVar3 == '\0') || (cVar4 == '\x02')) {
+    local_20 = 1;
+  }
+  else {
+    local_20 = 0;
+  }
+  if (cVar1 == '\x01') {
+    local_20 = 0;
+  }
+  local_1f = cVar1 != '\x01' && cVar2 == '\x01';
+  iVar5 = FUN_0043d0ce();
+  if (iVar5 << 0x1e < 0) {
+    FUN_0043d574(3,DAT_00472bbc,DAT_00472bb8,DAT_00472bd8,0x187,DAT_00472bd4,cVar1,cVar4,cVar3,cVar2
+                 ,local_20,local_1f);
+  }
+  iVar5 = FUN_0043d0ce();
+  if ((iVar5 << 0x1f < 0) || (iVar5 = FUN_0043d0ce(), iVar5 << 0x1d < 0)) {
+    FUN_0043ce9e(0xd800000,DAT_00472bdc,DAT_00472bdc,cVar1,cVar4,cVar3,cVar2,local_20,local_1f);
+  }
+  cVar1 = FUN_004c549c(0x400,&local_20,2);
+  return (int)cVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047243a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472546 body_start=00472546 body_end=0047257b name=FUN_00472546 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00472546(void)
+
+{
+  undefined1 local_108;
+  undefined1 local_107;
+  undefined1 local_106;
+  undefined1 local_105;
+  
+  FUN_0043c0e4(&local_108,0xfe,0);
+  local_108 = 0;
+  local_107 = 0x35;
+  local_106 = 0x88;
+  local_105 = 0;
+  FUN_004c4b7e(&local_108,4);
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472546 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047257c body_start=0047257c body_end=00472587 name=FUN_0047257c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+longlong FUN_0047257c(void)
+
+{
+  uint unaff_r7;
+  
+  FUN_004a2254(0);
+  return (ulonglong)unaff_r7 << 0x20;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047257c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472588 body_start=00472588 body_end=00472595 name=FUN_00472588 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+longlong FUN_00472588(void)
+
+{
+  uint unaff_r7;
+  
+  FUN_004c543e(0x800);
+  return (ulonglong)unaff_r7 << 0x20;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472588 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472596 body_start=00472596 body_end=0047262f name=FUN_00472596 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00472596(undefined1 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(3,DAT_00472bbc,DAT_00472bb8,DAT_00472be4,0x1b8,DAT_00472be0,param_1,4,1,2,param_4);
+  }
+  iVar1 = FUN_0043d0ce();
+  if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+    FUN_0043ce9e(0xd000000,DAT_00472be8,DAT_00472be8,param_1,4,1,2);
+  }
+  FUN_004c5810(param_1,0,4,1,2);
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472596 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472630 body_start=00472630 body_end=0047263b name=FUN_00472630 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+longlong FUN_00472630(void)
+
+{
+  uint unaff_r7;
+  
+  FUN_004c543e(0x40);
+  return (ulonglong)unaff_r7 << 0x20;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472630 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047263c body_start=0047263c body_end=0047269d name=FUN_0047263c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0047263c(int param_1)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 unaff_r5;
+  
+  if (param_1 == 0) {
+    uVar1 = 0xffffffff;
+  }
+  else {
+    if ((*(char *)(param_1 + 3) == '\x01') && (*(char *)(param_1 + 4) == '\x01')) {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        unaff_r5 = 0x1d5;
+        FUN_0043d574(4,DAT_00472bbc,DAT_00472bb8,DAT_00472bf0,0x1d5,DAT_00472bec);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x10000000,DAT_00472bf4,DAT_00472bf4);
+      }
+    }
+    uVar1 = 0;
+  }
+  return CONCAT44(unaff_r5,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047263c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047269e body_start=0047269e body_end=004727a9 name=FUN_0047269e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0047269e(int param_1,ushort param_2)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  int iVar3;
+  int *piVar4;
+  
+  if (param_1 == 0) {
+    uVar2 = 0xffffffff;
+  }
+  else {
+    if (7 < param_2) {
+      piVar4 = (int *)(param_1 + 7);
+      if (((*(char *)(param_1 + 4) != '\b') && (*DAT_00472bf8 != 0)) &&
+         ((uint)(*piVar4 - *DAT_00472bf8) < 100)) {
+        return 0;
+      }
+      *DAT_00472bf8 = *piVar4;
+      iVar3 = FUN_0043d0ce();
+      if (iVar3 << 0x1e < 0) {
+        FUN_0043d574(4,DAT_00472bbc,DAT_00472bb8,DAT_00472c00,500,DAT_00472bfc,*piVar4,
+                     *(undefined1 *)(param_1 + 4));
+      }
+      iVar3 = FUN_0043d0ce();
+      if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+        FUN_0043ce9e(0x10800000,DAT_00472c04,DAT_00472c04,*piVar4,*(undefined1 *)(param_1 + 4));
+      }
+    }
+    if (*(char *)(param_1 + 3) == '\0') {
+      cVar1 = *(char *)(param_1 + 4);
+      if (cVar1 == '\0') {
+        FUN_004c5916(4,3,0,0);
+      }
+      else if (cVar1 == '\x01') {
+        FUN_004c5916(4,0,0,0);
+      }
+      else if (cVar1 == '\x02') {
+        FUN_004c5916(4,1,0,0);
+      }
+      else if (cVar1 == '\x04') {
+        FUN_004c5916(4,5,*(undefined1 *)(param_1 + 5),*(undefined1 *)(param_1 + 6));
+      }
+      else if (cVar1 == '\x05') {
+        FUN_004c5916(4,4,*(undefined1 *)(param_1 + 5),*(undefined1 *)(param_1 + 6));
+      }
+      else if (cVar1 == '\b') {
+        FUN_004c5916(4,0xe,0,0);
+      }
+    }
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047269e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004727aa body_start=004727aa body_end=0047289f name=FUN_004727aa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_004727aa(int param_1,ushort param_2)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 local_10;
+  undefined4 local_c;
+  
+  if (param_1 == 0) {
+    uVar1 = 0xffffffff;
+  }
+  else if (param_2 < 6) {
+    iVar2 = FUN_0043d0ce();
+    if (iVar2 << 0x1e < 0) {
+      FUN_0043d574(2,DAT_00472bbc,DAT_00472bb8,DAT_00472c0c,0x22b,DAT_00472c08,param_2);
+    }
+    iVar2 = FUN_0043d0ce();
+    if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8400000,DAT_00472c10,DAT_00472c10,param_2);
+    }
+    uVar1 = 0xffffffff;
+  }
+  else {
+    local_10 = 0x20004;
+    local_c = CONCAT22((short)((uint)*(undefined4 *)(DAT_00472c14 + 4) >> 0x10),
+                       *(undefined2 *)(param_1 + 4));
+    FUN_004c659a(&local_10);
+    iVar2 = FUN_0043d0ce();
+    if (iVar2 << 0x1e < 0) {
+      FUN_0043d574(3,DAT_00472bbc,DAT_00472bb8,DAT_00472c0c,0x237,DAT_00472c18,local_c & 0xff,
+                   local_c >> 8 & 0xff);
+    }
+    iVar2 = FUN_0043d0ce();
+    if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+      FUN_0043ce9e(0xc800000,DAT_00472c1c,DAT_00472c1c,local_c & 0xff,local_c >> 8 & 0xff);
+    }
+    uVar1 = 0;
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004727aa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004728a0 body_start=004728a0 body_end=004728b1 name=FUN_004728a0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_004728a0(void)
+
+{
+  *DAT_00472c20 = 0;
+  *DAT_00472c24 = 0;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004728a0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004728b2 body_start=004728b2 body_end=00472987 name=FUN_004728b2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_004728b2(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  bool bVar4;
+  int local_14;
+  undefined4 uStack_10;
+  
+  bVar4 = *(char *)(param_1 + 4) != '\0';
+  if (bVar4 != (bool)*DAT_00472c20) {
+    *DAT_00472c20 = bVar4;
+    piVar1 = DAT_00472c24;
+    uStack_10 = param_4;
+    if (bVar4) {
+      iVar2 = FUN_004490cc();
+      *DAT_00472c24 = iVar2;
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        FUN_0043d574(3,DAT_00472bbc,DAT_00472bb8,DAT_00472c2c,0x24f,DAT_00472c28);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0xc000000,DAT_00472c30,DAT_00472c30);
+      }
+    }
+    else if (*DAT_00472c24 != 0) {
+      iVar2 = FUN_004490cc();
+      iVar2 = iVar2 - *piVar1;
+      local_14 = iVar2;
+      FUN_0048eb32(DAT_00472c34,1,&local_14);
+      iVar3 = FUN_0043d0ce();
+      if (iVar3 << 0x1e < 0) {
+        FUN_0043d574(3,DAT_00472bbc,DAT_00472bb8,DAT_00472c2c,0x253,DAT_00472c38,iVar2);
+      }
+      iVar3 = FUN_0043d0ce();
+      if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+        FUN_0043ce9e(0xc400000,DAT_00472c3c,DAT_00472c3c,iVar2);
+      }
+      *piVar1 = 0;
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004728b2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472988 body_start=00472988 body_end=00472baf name=FUN_00472988 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00472988(int param_1,undefined2 param_2)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined1 local_10;
+  undefined1 local_f;
+  undefined1 local_e;
+  undefined1 local_d;
+  undefined1 local_c;
+  undefined1 local_b;
+  
+  cVar1 = *(char *)(param_1 + 2);
+  if (cVar1 == 'a') {
+    FUN_0047269e(param_1,param_2);
+  }
+  else if (cVar1 == -0x7b) {
+    FUN_00476ace(DAT_00472c40);
+    FUN_00476ace(DAT_00472c44);
+    iVar3 = FUN_004a2914();
+    if (iVar3 == 0) {
+      FUN_004bc418(0);
+    }
+    else {
+      FUN_004a271e();
+    }
+    FUN_0047263c(param_1);
+  }
+  else if (cVar1 == -0x76) {
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      FUN_0043d574(3,DAT_00472bbc,DAT_00472bb8,DAT_00472c4c,0x272,DAT_00472c48);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0xc000000,DAT_00472c50,DAT_00472c50);
+    }
+  }
+  else if (cVar1 == -0x75) {
+    FUN_004727aa(param_1,param_2);
+  }
+  else if (cVar1 == -0x74) {
+    FUN_004728b2(param_1);
+  }
+  else if (cVar1 == -0x6c) {
+    if ((*(char *)(param_1 + 4) == ' ') || (*(char *)(param_1 + 4) == '@')) {
+      if (*(char *)(param_1 + 4) == ' ') {
+        iVar3 = FUN_0043d0ce();
+        if (iVar3 << 0x1e < 0) {
+          FUN_0043d574(1,DAT_00472bbc,DAT_00472bb8,DAT_00472c4c,0x282,DAT_00472c54);
+        }
+        iVar3 = FUN_0043d0ce();
+        if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+          FUN_0043ce9e(0x4000000,DAT_00472c58,DAT_00472c58);
+        }
+      }
+      else {
+        iVar3 = FUN_0043d0ce();
+        if (iVar3 << 0x1e < 0) {
+          FUN_0043d574(1,DAT_00472bbc,DAT_00472bb8,DAT_00472c4c,0x286,DAT_00472c5c);
+        }
+        iVar3 = FUN_0043d0ce();
+        if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+          FUN_0043ce9e(0x4000000,DAT_00472c60,DAT_00472c60);
+        }
+      }
+      uVar2 = DAT_00472c64;
+      FUN_00476ace(DAT_00472c64);
+      FUN_0047697e(uVar2,0,100);
+      uVar2 = DAT_00472c68;
+      FUN_00476ace(DAT_00472c68);
+      FUN_0047697e(uVar2,0,500);
+    }
+    else {
+      iVar3 = FUN_0043d0ce();
+      if (iVar3 << 0x1e < 0) {
+        FUN_0043d574(4,DAT_00472bbc,DAT_00472bb8,DAT_00472c4c,0x28f,DAT_00472c6c);
+      }
+      iVar3 = FUN_0043d0ce();
+      if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+        FUN_0043ce9e(0x10000000,DAT_00472c70,DAT_00472c70);
+      }
+    }
+  }
+  else if (cVar1 == -0x6a) {
+    FUN_0043c0e4(&local_10,6,0);
+    FUN_004a2190(&local_10,0);
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      FUN_0043d574(2,DAT_00472bbc,DAT_00472bb8,DAT_00472c4c,0x2aa,DAT_00472c74,local_b,local_c,
+                   local_d,local_e,local_f,local_10);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0x9800000,DAT_00472c78,DAT_00472c78,local_b,local_c,local_d,local_e,local_f,
+                   local_10);
+    }
+    FUN_004a2c9c(&local_10);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472988 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472c7c body_start=00472c7c body_end=00472c83 name=FUN_00472c7c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00472c7c(undefined4 param_1)
+
+{
+  *DAT_0047345c = param_1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472c7c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472c84 body_start=00472c84 body_end=00472d3f name=FUN_00472c84 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00472c84(uint param_1,uint param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  uint uVar6;
+  
+  if (param_2 == 0) {
+    uVar3 = (param_1 >> 2) + (param_1 >> 1);
+    uVar3 = uVar3 + (uVar3 >> 4);
+    uVar3 = uVar3 + (uVar3 >> 8);
+    uVar3 = uVar3 + (uVar3 >> 0x10) >> 3;
+    iVar1 = uVar3 + (uVar3 * -10 + param_1 + 6 >> 4);
+    iVar2 = 0;
+  }
+  else {
+    uVar4 = (uint)((param_2 & 1) != 0) << 0x1f | param_1 >> 1;
+    uVar3 = param_1 >> 2 | param_2 << 0x1e;
+    uVar5 = uVar4 + uVar3;
+    uVar6 = (param_2 >> 1) + (param_2 >> 2) + (uint)CARRY4(uVar4,uVar3);
+    uVar3 = uVar5 >> 4 | uVar6 * 0x10000000;
+    uVar4 = uVar5 + uVar3;
+    uVar6 = uVar6 + (uVar6 >> 4) + (uint)CARRY4(uVar5,uVar3);
+    uVar3 = uVar4 >> 8 | uVar6 * 0x1000000;
+    uVar5 = uVar4 + uVar3;
+    uVar6 = uVar6 + (uVar6 >> 8) + (uint)CARRY4(uVar4,uVar3);
+    uVar3 = uVar5 >> 0x10 | uVar6 * 0x10000;
+    uVar4 = uVar5 + uVar3;
+    uVar3 = uVar6 + (uVar6 >> 0x10) + (uint)CARRY4(uVar5,uVar3);
+    uVar6 = uVar3 + CARRY4(uVar4,uVar3);
+    uVar5 = uVar4 + uVar3 >> 3 | uVar6 * 0x20000000;
+    uVar6 = uVar6 >> 3;
+    uVar4 = (uint)((ulonglong)uVar5 * 0xfffffff6);
+    uVar3 = param_1 + uVar4;
+    uVar4 = param_2 + ((uVar6 * -10 + (int)((ulonglong)uVar5 * 0xfffffff6 >> 0x20)) - uVar5) +
+            (uint)CARRY4(param_1,uVar4) + (uint)(0xfffffff9 < uVar3);
+    uVar3 = uVar3 + 6 >> 4 | uVar4 * 0x10000000;
+    iVar1 = uVar5 + uVar3;
+    iVar2 = (uVar4 >> 4) + uVar6 + (uint)CARRY4(uVar5,uVar3);
+  }
+  return CONCAT44(iVar2,iVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472c84 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472d40 body_start=00472d40 body_end=00472d63 name=FUN_00472d40 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00472d40(int param_1,int param_2)
+
+{
+  int iVar1;
+  longlong lVar2;
+  
+  lVar2 = CONCAT44(param_2,param_1);
+  if ((param_2 == 0) && (param_1 == 0)) {
+    iVar1 = 1;
+  }
+  else {
+    iVar1 = 0;
+    lVar2 = CONCAT44(param_2,param_1);
+  }
+  while (lVar2 != 0) {
+    lVar2 = FUN_00472c84();
+    iVar1 = iVar1 + 1;
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472d40 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472d64 body_start=00472d64 body_end=00472d75 name=FUN_00472d64 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00472d64(int param_1,int param_2)
+
+{
+  bool bVar1;
+  
+  if (param_2 < 0) {
+    bVar1 = param_1 != 0;
+    param_1 = -param_1;
+    param_2 = -param_2 - (uint)bVar1;
+  }
+  FUN_00472d40(param_1,param_2);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472d64 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472d76 body_start=00472d76 body_end=00472d9b name=FUN_00472d76 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00472d76(uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  int iVar2;
+  
+  if ((param_2 == 0) && (param_1 == 0)) {
+    iVar2 = 1;
+  }
+  else {
+    iVar2 = 0;
+  }
+  for (; (param_2 != 0 || (param_1 != 0)); param_1 = param_1 >> 4 | uVar1) {
+    uVar1 = param_2 << 0x1c;
+    param_2 = param_2 >> 4;
+    iVar2 = iVar2 + 1;
+  }
+  return iVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472d76 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472d9c body_start=00472d9c body_end=00472ddf name=FUN_00472d9c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00472d9c(byte *param_1,int *param_2)
+
+{
+  bool bVar1;
+  int iVar2;
+  int iVar3;
+  
+  bVar1 = false;
+  iVar2 = 0;
+  iVar3 = 0;
+  if (*param_1 == 0x2d) {
+    bVar1 = true;
+    param_1 = param_1 + 1;
+    iVar3 = 1;
+  }
+  for (; *param_1 - 0x30 < 10; param_1 = param_1 + 1) {
+    iVar3 = iVar3 + 1;
+    iVar2 = (*param_1 - 0x30) + iVar2 * 10;
+  }
+  if (param_2 != (int *)0x0) {
+    *param_2 = iVar3;
+  }
+  if (bVar1) {
+    iVar2 = -iVar2;
+  }
+  return iVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472d9c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472de0 body_start=00472de0 body_end=00472e47 name=FUN_00472de0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00472de0(undefined4 param_1,undefined4 param_2,char *param_3)
+
+{
+  longlong lVar1;
+  int iVar2;
+  int iVar3;
+  longlong lVar4;
+  char acStack_39 [29];
+  
+  iVar2 = 0;
+  lVar1 = CONCAT44(param_2,param_1);
+  do {
+    lVar4 = FUN_00472c84((int)lVar1,(int)((ulonglong)lVar1 >> 0x20));
+    acStack_39[iVar2 + 1] = (char)lVar1 + (char)lVar4 * -10 + '0';
+    iVar2 = iVar2 + 1;
+    lVar1 = lVar4;
+  } while (lVar4 != 0);
+  iVar3 = iVar2;
+  if (param_3 != (char *)0x0) {
+    while (iVar3 != 0) {
+      *param_3 = acStack_39[iVar3];
+      param_3 = param_3 + 1;
+      iVar3 = iVar3 + -1;
+    }
+    *param_3 = '\0';
+  }
+  return iVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472de0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472e48 body_start=00472e48 body_end=00472ebb name=FUN_00472e48 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00472e48(uint param_1,uint param_2,char *param_3,char param_4)
+
+{
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  char cVar4;
+  char cVar5;
+  char acStack_21 [21];
+  
+  iVar2 = 0;
+  if ((param_2 == 0) && (param_1 == 0)) {
+    acStack_21[1] = 0x30;
+    iVar2 = 1;
+  }
+  for (; (param_2 != 0 || (param_1 != 0)); param_1 = param_1 >> 4 | uVar1) {
+    cVar4 = (char)(param_1 & 0xf);
+    if (9 < (param_1 & 0xf)) {
+      if (param_4 == '\0') {
+        cVar5 = '\a';
+      }
+      else {
+        cVar5 = '\'';
+      }
+      cVar4 = cVar5 + cVar4;
+    }
+    acStack_21[iVar2 + 1] = cVar4 + '0';
+    iVar2 = iVar2 + 1;
+    uVar1 = param_2 << 0x1c;
+    param_2 = param_2 >> 4;
+  }
+  iVar3 = iVar2;
+  if (param_3 != (char *)0x0) {
+    while (iVar3 != 0) {
+      *param_3 = acStack_21[iVar3];
+      param_3 = param_3 + 1;
+      iVar3 = iVar3 + -1;
+    }
+    *param_3 = '\0';
+  }
+  return iVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472e48 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472ebc body_start=00472ebc body_end=00472ed3 name=FUN_00472ebc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00472ebc(char *param_1)
+
+{
+  int iVar1;
+  
+  iVar1 = 0;
+  if (param_1 != (char *)0x0) {
+    while (*param_1 != '\0') {
+      iVar1 = iVar1 + 1;
+      param_1 = param_1 + 1;
+    }
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472ebc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472ed4 body_start=00472ed4 body_end=00472ef5 name=FUN_00472ed4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00472ed4(undefined1 *param_1,undefined1 param_2,int param_3)
+
+{
+  int iVar1;
+  
+  iVar1 = 0;
+  if (0 < param_3) {
+    while (param_3 != 0) {
+      if (param_1 != (undefined1 *)0x0) {
+        *param_1 = param_2;
+        param_1 = param_1 + 1;
+      }
+      iVar1 = iVar1 + 1;
+      param_3 = param_3 + -1;
+    }
+  }
+  return iVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472ed4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00472ef6 body_start=00472ef6 body_end=00473035 name=FUN_00472ef6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00472ef6(float param_1,int *param_2,int param_3,float param_4,uint param_5)
+
+{
+  int iVar1;
+  int *piVar2;
+  uint uVar3;
+  int iVar4;
+  uint uVar5;
+  uint uVar6;
+  uint uVar7;
+  int iVar8;
+  int *piVar9;
+  
+  iVar8 = *param_2;
+  if (iVar8 < 4) {
+    iVar8 = -3;
+    param_1 = param_4;
+  }
+  else if (param_1 == 0.0) {
+    *param_2 = DAT_00473464;
+    iVar8 = 3;
+    param_1 = param_4;
+  }
+  else {
+    uVar3 = (uint)ABS(param_1) >> 0x17;
+    iVar4 = uVar3 - 0x7f;
+    uVar5 = (uint)param_1 & 0xffffff | 0x800000;
+    uVar7 = 0;
+    iVar1 = 0;
+    if (iVar4 < 0x1f) {
+      if (iVar4 < -0x17) {
+        iVar8 = -1;
+      }
+      else {
+        uVar6 = param_5;
+        if (iVar4 < 0x17) {
+          if (iVar4 < 0) {
+            uVar7 = (int)((uint)param_1 & 0xffffff | 0x800000) >> (-(uVar3 - 0x7e) & 0xff);
+          }
+          else {
+            iVar1 = (int)uVar5 >> (0x17U - iVar4 & 0xff);
+            uVar7 = uVar5 << (uVar3 - 0x7e & 0xff) & 0xffffff;
+            uVar6 = 0x17U - iVar4;
+          }
+        }
+        else {
+          iVar1 = uVar5 << (uVar3 - 0x96 & 0xff);
+        }
+        piVar9 = param_2;
+        if ((int)param_1 < 0) {
+          *(char *)param_2 = '-';
+          piVar9 = (int *)((int)param_2 + 1);
+        }
+        if (iVar1 == 0) {
+          *(char *)piVar9 = '0';
+          piVar9 = (int *)((int)piVar9 + 1);
+        }
+        else {
+          if (iVar1 < 1) {
+            *(char *)piVar9 = '-';
+            piVar9 = (int *)((int)piVar9 + 1);
+            FUN_00472de0(-iVar1,-iVar1 >> 0x1f,piVar9,uVar6,param_1,param_5);
+          }
+          else {
+            FUN_00472de0(iVar1,iVar1 >> 0x1f,piVar9,uVar6,param_1,param_5);
+          }
+          for (; (char)*piVar9 != '\0'; piVar9 = (int *)((int)piVar9 + 1)) {
+          }
+        }
+        *(char *)piVar9 = '.';
+        piVar2 = (int *)((int)piVar9 + 1);
+        if (uVar7 == 0) {
+          *(char *)piVar2 = '0';
+          piVar2 = (int *)((int)piVar9 + 2);
+        }
+        else {
+          iVar8 = (iVar8 - ((int)piVar2 - (int)param_2)) + -1;
+          if (iVar8 <= param_3) {
+            param_3 = iVar8;
+          }
+          for (iVar8 = 0; iVar8 < param_3; iVar8 = iVar8 + 1) {
+            *(char *)piVar2 = (char)(uVar7 * 10 >> 0x18) + '0';
+            piVar2 = (int *)((int)piVar2 + 1);
+            uVar7 = uVar7 * 10 & 0xffffff;
+          }
+          piVar9 = piVar2;
+          if (4 < (int)(uVar7 * 10) >> 0x18) {
+            while (piVar9 = (int *)((int)piVar9 + -1), param_2 <= piVar9) {
+              if (*(char *)piVar9 != '.') {
+                if (*(char *)piVar9 != '9') {
+                  *(char *)piVar9 = *(char *)piVar9 + '\x01';
+                  break;
+                }
+                *(char *)piVar9 = '0';
+              }
+            }
+          }
+        }
+        *(char *)piVar2 = '\0';
+        iVar8 = (int)piVar2 - (int)param_2;
+      }
+    }
+    else {
+      iVar8 = -2;
+    }
+  }
+  return CONCAT44(param_1,iVar8);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00472ef6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473036 body_start=00473036 body_end=004733ed name=FUN_00473036 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00473036(char *param_1,char *param_2,double *param_3,undefined4 param_4)
+
+{
+  char cVar1;
+  uint uVar2;
+  uint *puVar3;
+  int iVar4;
+  int iVar5;
+  undefined4 uVar6;
+  char *pcVar7;
+  char *pcVar8;
+  uint uVar9;
+  int iVar10;
+  uint uVar11;
+  bool bVar12;
+  bool bVar13;
+  double dVar14;
+  char local_38;
+  undefined1 local_37;
+  int local_34;
+  uint local_30;
+  uint uStack_2c;
+  undefined4 uStack_28;
+  
+  iVar10 = 0;
+  uStack_28 = param_4;
+  do {
+    while( true ) {
+      if (*param_2 == '\0') {
+        if (param_1 != (char *)0x0) {
+          *param_1 = '\0';
+        }
+        return iVar10;
+      }
+      uVar11 = 0xffffffff;
+      if (*param_2 == '%') break;
+      if (param_1 != (char *)0x0) {
+        if ((*param_2 == '\n') && (*DAT_00473460 != '\0')) {
+          *param_1 = '\r';
+          param_1 = param_1 + 1;
+          iVar10 = iVar10 + 1;
+        }
+        *param_1 = *param_2;
+        param_1 = param_1 + 1;
+      }
+      param_2 = param_2 + 1;
+      iVar10 = iVar10 + 1;
+    }
+    pcVar7 = param_2 + 1;
+    bVar12 = false;
+    local_37 = 0;
+    local_38 = ' ';
+    if (*pcVar7 == '0') {
+      local_38 = '0';
+      pcVar7 = param_2 + 2;
+    }
+    uVar2 = FUN_00472d9c(pcVar7,&local_34);
+    pcVar7 = pcVar7 + local_34;
+    if ((*pcVar7 != 's') && ((int)uVar2 < 0)) {
+      uVar2 = -uVar2;
+    }
+    if (*pcVar7 == '.') {
+      pcVar8 = pcVar7 + 1;
+      if (*pcVar8 == '*') {
+        uVar11 = *(uint *)param_3;
+        param_3 = (double *)((int)param_3 + 4);
+        pcVar7 = pcVar7 + 2;
+      }
+      else {
+        uVar11 = FUN_00472d9c(pcVar8,&local_34);
+        pcVar7 = pcVar8 + local_34;
+      }
+    }
+    param_2 = pcVar7;
+    if ((*pcVar7 == 'l') && (param_2 = pcVar7 + 1, *param_2 == 'l')) {
+      param_2 = pcVar7 + 2;
+      bVar12 = true;
+    }
+    cVar1 = *param_2;
+    if (cVar1 == 'F') {
+LAB_00473380:
+      if (param_1 != (char *)0x0) {
+        param_3 = (double *)((int)param_3 + 7U & 0xfffffff8);
+        dVar14 = *param_3;
+        param_3 = param_3 + 1;
+        param_1[0] = '\x14';
+        param_1[1] = '\0';
+        param_1[2] = '\0';
+        param_1[3] = '\0';
+        iVar4 = FUN_00472ef6((float)dVar14,param_1,uVar11);
+        if (iVar4 < 0) {
+          uVar6 = DAT_00473464;
+          if ((iVar4 != -1) && (uVar6 = DAT_0047346c, iVar4 == -2)) {
+            uVar6 = DAT_00473468;
+          }
+          *(undefined4 *)param_1 = uVar6;
+          iVar4 = 3;
+        }
+        iVar10 = iVar4 + iVar10;
+        param_1 = param_1 + iVar4;
+      }
+    }
+    else if (cVar1 == 'X') {
+LAB_004731ea:
+      if (bVar12) {
+        puVar3 = (uint *)((int)param_3 + 7U & 0xfffffff8);
+        uVar11 = *puVar3;
+        uVar9 = puVar3[1];
+        param_3 = (double *)(puVar3 + 2);
+      }
+      else {
+        uVar11 = *(uint *)param_3;
+        param_3 = (double *)((int)param_3 + 4);
+        uVar9 = 0;
+      }
+      if (uVar2 != 0) {
+        iVar4 = FUN_00472d76(uVar11,uVar9);
+        iVar5 = FUN_00472ed4(param_1,local_38,uVar2 - iVar4);
+        iVar4 = iVar5;
+        if (param_1 == (char *)0x0) {
+          iVar4 = 0;
+        }
+        param_1 = param_1 + iVar4;
+        iVar10 = iVar5 + iVar10;
+      }
+      iVar4 = FUN_00472e48(uVar11,uVar9,param_1,local_37);
+      if (param_1 != (char *)0x0) {
+        param_1 = param_1 + iVar4;
+      }
+      iVar10 = iVar4 + iVar10;
+    }
+    else if (cVar1 == 'c') {
+      uVar11 = *(uint *)param_3;
+      param_3 = (double *)((int)param_3 + 4);
+      if (param_1 != (char *)0x0) {
+        *param_1 = (char)uVar11;
+        param_1 = param_1 + 1;
+      }
+      iVar10 = iVar10 + 1;
+    }
+    else {
+      if (cVar1 != 'd') {
+        if (cVar1 == 'f') goto LAB_00473380;
+        if (cVar1 != 'i') {
+          if (cVar1 == 's') {
+            pcVar7 = *(char **)param_3;
+            param_3 = (double *)((int)param_3 + 4);
+            uVar9 = FUN_00472ebc(pcVar7);
+            if ((-1 < (int)uVar11) && (uVar11 < uVar9)) {
+              uVar9 = uVar11;
+            }
+            if ((0 < (int)uVar2) && (uVar9 < uVar2)) {
+              iVar5 = FUN_00472ed4(param_1,local_38,uVar2 - uVar9);
+              iVar4 = iVar5;
+              if (param_1 == (char *)0x0) {
+                iVar4 = 0;
+              }
+              param_1 = param_1 + iVar4;
+              iVar10 = iVar5 + iVar10;
+              uVar2 = 0;
+            }
+            for (; (*pcVar7 != '\0' && (uVar9 != 0)); uVar9 = uVar9 - 1) {
+              if (param_1 != (char *)0x0) {
+                *param_1 = *pcVar7;
+                param_1 = param_1 + 1;
+              }
+              pcVar7 = pcVar7 + 1;
+              iVar10 = iVar10 + 1;
+            }
+            if ((uVar2 != 0) && (uVar9 < -uVar2)) {
+              iVar5 = FUN_00472ed4(param_1,local_38,-uVar2 - uVar9);
+              iVar4 = iVar5;
+              if (param_1 == (char *)0x0) {
+                iVar4 = 0;
+              }
+              param_1 = param_1 + iVar4;
+              iVar10 = iVar5 + iVar10;
+            }
+          }
+          else if (cVar1 == 'u') {
+            if (bVar12) {
+              puVar3 = (uint *)((int)param_3 + 7U & 0xfffffff8);
+              uVar11 = *puVar3;
+              uVar9 = puVar3[1];
+              param_3 = (double *)(puVar3 + 2);
+            }
+            else {
+              uVar11 = *(uint *)param_3;
+              param_3 = (double *)((int)param_3 + 4);
+              uVar9 = 0;
+            }
+            if (uVar2 != 0) {
+              iVar4 = FUN_00472d40(uVar11,uVar9);
+              iVar5 = FUN_00472ed4(param_1,local_38,uVar2 - iVar4);
+              iVar4 = iVar5;
+              if (param_1 == (char *)0x0) {
+                iVar4 = 0;
+              }
+              param_1 = param_1 + iVar4;
+              iVar10 = iVar5 + iVar10;
+            }
+            iVar4 = FUN_00472de0(uVar11,uVar9,param_1);
+            if (param_1 != (char *)0x0) {
+              param_1 = param_1 + iVar4;
+            }
+            iVar10 = iVar4 + iVar10;
+          }
+          else {
+            if (cVar1 == 'x') {
+              local_37 = 1;
+              goto LAB_004731ea;
+            }
+            if (param_1 != (char *)0x0) {
+              *param_1 = *param_2;
+              param_1 = param_1 + 1;
+            }
+            iVar10 = iVar10 + 1;
+          }
+          goto LAB_004733d8;
+        }
+      }
+      if (bVar12) {
+        puVar3 = (uint *)((int)param_3 + 7U & 0xfffffff8);
+        local_30 = *puVar3;
+        uStack_2c = puVar3[1];
+        param_3 = (double *)(puVar3 + 2);
+      }
+      else {
+        local_30 = *(uint *)param_3;
+        param_3 = (double *)((int)param_3 + 4);
+        uStack_2c = (int)local_30 >> 0x1f;
+      }
+      bVar12 = (int)uStack_2c < 0;
+      if (bVar12) {
+        bVar13 = local_30 != 0;
+        local_30 = -local_30;
+        uStack_2c = -uStack_2c - (uint)bVar13;
+      }
+      if (uVar2 == 0) {
+        if (bVar12) {
+          if (param_1 != (char *)0x0) {
+            *param_1 = '-';
+            param_1 = param_1 + 1;
+          }
+          iVar10 = iVar10 + 1;
+        }
+      }
+      else {
+        iVar4 = FUN_00472d64(local_30,uStack_2c);
+        iVar4 = uVar2 - iVar4;
+        if ((bVar12) && (iVar4 = iVar4 + -1, local_38 == '0')) {
+          if (param_1 != (char *)0x0) {
+            *param_1 = '-';
+            param_1 = param_1 + 1;
+          }
+          iVar10 = iVar10 + 1;
+        }
+        iVar5 = FUN_00472ed4(param_1,local_38,iVar4);
+        iVar4 = iVar5;
+        if (param_1 == (char *)0x0) {
+          iVar4 = 0;
+        }
+        param_1 = param_1 + iVar4;
+        iVar10 = iVar5 + iVar10;
+        if ((bVar12) && (local_38 == ' ')) {
+          if (param_1 != (char *)0x0) {
+            *param_1 = '-';
+            param_1 = param_1 + 1;
+          }
+          iVar10 = iVar10 + 1;
+        }
+      }
+      iVar4 = FUN_00472de0(local_30,uStack_2c,param_1);
+      if (param_1 != (char *)0x0) {
+        param_1 = param_1 + iVar4;
+      }
+      iVar10 = iVar4 + iVar10;
+    }
+LAB_004733d8:
+    param_2 = param_2 + 1;
+  } while( true );
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473036 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004733ee body_start=004733ee body_end=00473419 name=FUN_004733ee (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_004733ee(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uStack_c;
+  undefined4 uStack_8;
+  undefined4 uStack_4;
+  
+  uVar2 = DAT_00473470;
+  piVar1 = DAT_0047345c;
+  if (*DAT_0047345c == 0) {
+    uVar3 = 0;
+  }
+  else {
+    uStack_c = param_2;
+    uStack_8 = param_3;
+    uStack_4 = param_4;
+    uVar3 = FUN_00473036(DAT_00473470,param_1,&uStack_c);
+    (*(code *)*piVar1)(uVar2);
+  }
+  return CONCAT44(param_4,uVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004733ee (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473474 body_start=00473474 body_end=00473481 name=FUN_00473474 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00473474(int param_1)
+
+{
+  int *piVar1;
+  
+  piVar1 = DAT_004734bc;
+  *(undefined1 *)(DAT_004734bc + 1) = 0;
+  *piVar1 = param_1 + *piVar1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473474 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473482 body_start=00473482 body_end=0047349f name=FUN_00473482 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00473482(void)
+
+{
+  undefined4 *puVar1;
+  undefined4 uVar2;
+  undefined4 unaff_r7;
+  
+  puVar1 = DAT_004734bc;
+  if (DAT_004734bc[2] == 0) {
+    do {
+      *(undefined1 *)(puVar1 + 1) = 1;
+      uVar2 = *puVar1;
+    } while (*(char *)(puVar1 + 1) == '\0');
+  }
+  else {
+    uVar2 = (*(code *)DAT_004734bc[2])();
+  }
+  return CONCAT44(unaff_r7,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473482 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004734a0 body_start=004734a0 body_end=004734bb name=FUN_004734a0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_004734a0(int param_1)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00473482();
+  return iVar1 - param_1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004734a0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004734c0 body_start=004734c0 body_end=004734cb name=FUN_004734c0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_004734c0(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_00454746(param_1,0,param_2);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004734c0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004734cc body_start=004734cc body_end=00473547 name=FUN_004734cc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_004734cc(undefined *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined *puVar1;
+  
+  if (param_1 == (undefined *)0x0) {
+    FUN_0044d25c(3,PTR_s_D__01_workspace_s200_ap510b_iar__0047363c,0x7c,
+                 PTR_s_lv_global_init_00473638,PTR_s_Asserted_at_expression___s___s__00473634,
+                 PTR_s_global____NULL_00473630,PTR_s_NULL_pointer_0047362c,param_4);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  if (param_1 == (undefined *)0x0) {
+    puVar1 = PTR_s_lv_global_cannot_be_null_00473640;
+    FUN_0044d25c(3,PTR_s_D__01_workspace_s200_ap510b_iar__0047363c,0x7f,
+                 PTR_s_lv_global_init_00473638,PTR_s_lv_global_cannot_be_null_00473640,param_2,
+                 param_3,param_4);
+  }
+  else {
+    puVar1 = param_1;
+    FUN_004734c0(param_1,0x1ec);
+    FUN_00482b00(param_1 + 4,0x31c);
+    FUN_00482b00(param_1 + 0x44,0xdc);
+    *(undefined4 *)(param_1 + 100) = DAT_00473644;
+    param_1[0x24] = 1;
+    *(undefined4 *)(param_1 + 0x58) = 3;
+    *(undefined4 *)(param_1 + 0x2c) = 0x89;
+    *(undefined4 *)(param_1 + 0x70) = 0x42;
+    FUN_004888f6(DAT_00473648);
+  }
+  return CONCAT44(param_2,puVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004734cc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473548 body_start=00473548 body_end=00473625 name=FUN_00473548 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00473548(undefined *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  char *pcVar1;
+  
+  pcVar1 = DAT_0047364c;
+  if (*DAT_0047364c == '\0') {
+    FUN_004734cc(DAT_0047364c);
+    FUN_0048aa60();
+    FUN_004c6d04();
+    FUN_0049acb0();
+    FUN_00464330();
+    FUN_004c6d8c();
+    FUN_004546dc();
+    FUN_004503a4();
+    FUN_0044d32c();
+    FUN_004b1b98(0x40);
+    FUN_0048438c();
+    FUN_004c73d6();
+    FUN_0044b90c();
+    FUN_00488f4c(0,0);
+    FUN_004c794c();
+    if (((DAT_00473628 != -0x3d) || (DAT_00473629 != -0x7f)) || (DAT_0047362a != '\0')) {
+      param_1 = PTR_s_The_strings_have_no_UTF_8_encodi_00473658;
+      FUN_0044d25c(2,PTR_s_D__01_workspace_s200_ap510b_iar__0047363c,300,PTR_s_lv_init_00473654);
+    }
+    if ((char)DAT_0047365c == '\x11') {
+      FUN_0044d25c(3,PTR_s_D__01_workspace_s200_ap510b_iar__0047363c,0x135,PTR_s_lv_init_00473654,
+                   PTR_s_Asserted_at_expression___s___s__00473634,DAT_00473664,DAT_00473660);
+      do {
+                    /* WARNING: Do nothing block with infinite loop */
+      } while( true );
+    }
+    FUN_004c8f0a();
+    FUN_004c8efc(DAT_00473668);
+    FUN_004c91a8();
+    *pcVar1 = '\x01';
+  }
+  else {
+    param_1 = PTR_s_lv_init__already_initialized_00473650;
+    FUN_0044d25c(2,PTR_s_D__01_workspace_s200_ap510b_iar__0047363c,0xb9,PTR_s_lv_init_00473654,
+                 PTR_s_lv_init__already_initialized_00473650,param_2,param_3,param_4);
+  }
+  return CONCAT44(param_2,param_1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473548 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047366c body_start=0047366c body_end=004736f3 name=FUN_0047366c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0047366c(int param_1,undefined4 param_2,undefined1 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  char cVar2;
+  int iVar3;
+  int iVar4;
+  undefined4 local_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 uStack_18;
+  
+  uStack_18 = param_4;
+  if (param_1 == 0) {
+    FUN_00439c04(&local_28,DAT_004738f4,0x10);
+    iVar3 = FUN_00451598(&local_28);
+    iVar4 = FUN_004515a4(&local_28);
+    piVar1 = DAT_004738f8;
+    if (((0 < iVar3) && (0 < iVar4)) &&
+       (cVar2 = FUN_004b092a(*DAT_004738f8,&local_28,0), cVar2 == '\x01')) {
+      FUN_005fa13c(param_2,*(undefined4 *)(*piVar1 + 0x10),0x240,0x120);
+      FUN_004b075e(0);
+      FUN_004b0c8a(param_3);
+    }
+    return;
+  }
+  local_20 = DAT_004738e0;
+  local_24 = DAT_004738e4;
+  local_28 = DAT_004738e8;
+  FUN_0044d25c(3,DAT_004738f0,0xa1,DAT_004738ec);
+  do {
+                    /* WARNING: Do nothing block with infinite loop */
+  } while( true );
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047366c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004736f4 body_start=004736f4 body_end=00473781 name=FUN_004736f4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_004736f4(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  char cVar1;
+  int iVar2;
+  int iVar3;
+  undefined1 auStack_20 [16];
+  
+  FUN_00439c04(auStack_20,param_2,0x10);
+  iVar2 = FUN_0044fb4e(param_1);
+  iVar3 = FUN_0044fb9a(param_1);
+  FUN_00450bb2(auStack_20,-iVar2,-iVar3);
+  FUN_0048abb8(*DAT_004738fc,0);
+  cVar1 = FUN_0044fc42(param_1);
+  if (cVar1 == '\0') {
+    *(undefined4 *)(param_1 + 0x30) = 0;
+  }
+  else {
+    FUN_0047381e();
+    FUN_0047366c(0,param_3,1);
+    FUN_0047386a();
+    *(undefined4 *)(param_1 + 0x30) = 0;
+    if (cVar1 != '\0') {
+      FUN_0047381e();
+      FUN_00474066(0,0,0,0,0x240,0x120);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004736f4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473782 body_start=00473782 body_end=0047381d name=FUN_00473782 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00473782(void)
+
+{
+  undefined4 *puVar1;
+  char cVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  
+  puVar1 = DAT_004738f8;
+  uVar3 = FUN_0044f718(0x1c);
+  *puVar1 = uVar3;
+  uVar4 = FUN_0046ca6e();
+  uVar3 = 0;
+  cVar2 = FUN_0048aef8(*puVar1,0x240,0x120,0xd,0,uVar4,0x14400);
+  if (cVar2 == '\0') {
+    uVar3 = DAT_00473900;
+    FUN_0044d25c(3,DAT_004738f0,0x105,DAT_00473904);
+  }
+  else {
+    uVar5 = FUN_0044f7c0(0x240,0x120);
+    FUN_0044fc2e(uVar5,DAT_00473908);
+    puVar1 = DAT_004738fc;
+    uVar6 = FUN_0048affa(0x240,0x120,6,0);
+    *puVar1 = uVar6;
+    FUN_0044fbfc(uVar5,*puVar1,0);
+    FUN_0044fc18(uVar5,1);
+    FUN_0044fa3e(uVar5,0x240,0x120);
+    FUN_0044fa5e(uVar5,0,0);
+  }
+  return CONCAT44(uVar4,uVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473782 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047381e body_start=0047381e body_end=00473869 name=FUN_0047381e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0047381e(void)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 unaff_r7;
+  
+  uVar1 = DAT_00473910;
+  if (*DAT_0047390c == 0) {
+    FUN_0044d25c(3,DAT_004738f0,0x124,DAT_00473914);
+    unaff_r7 = uVar1;
+  }
+  else {
+    iVar2 = FUN_00441c44(*DAT_0047390c,1000);
+    uVar1 = DAT_00473918;
+    if (iVar2 == 0) {
+      FUN_0044d25c(3,DAT_004738f0,0x12a,DAT_00473914);
+      unaff_r7 = uVar1;
+    }
+  }
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047381e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047386a body_start=0047386a body_end=004738a7 name=FUN_0047386a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0047386a(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  int iVar2;
+  undefined4 local_10;
+  
+  piVar1 = DAT_0047390c;
+  if (*DAT_0047390c == 0) {
+    local_10 = DAT_00473910;
+    FUN_0044d25c(3,DAT_004738f0,0x131,PTR_s_display_buffer_unlock_0047391c);
+  }
+  else {
+    iVar2 = FUN_00442228();
+    local_10 = param_3;
+    if (iVar2 == 0) {
+      FUN_004417ee(*piVar1,0,0,0);
+    }
+    else {
+      FUN_00441a42(*piVar1,0);
+    }
+  }
+  return CONCAT44(param_4,local_10);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047386a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004738a8 body_start=004738a8 body_end=004738dd name=FUN_004738a8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_004738a8(undefined4 param_1,undefined4 param_2,undefined *param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  int iVar2;
+  undefined4 local_10;
+  
+  piVar1 = DAT_0047390c;
+  iVar2 = FUN_00441636(1,0,3);
+  *piVar1 = iVar2;
+  local_10 = param_3;
+  if (*piVar1 == 0) {
+    local_10 = PTR_s_display_buffer_lock_mutex_create_00473920;
+    FUN_0044d25c(3,DAT_004738f0,0x140,PTR_s_display_buffer_lock_init_00473924);
+  }
+  FUN_004417ee(*piVar1,0,0,0);
+  return CONCAT44(param_4,local_10);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004738a8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473928 body_start=00473928 body_end=00473933 name=FUN_00473928 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00473928(void)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_004738a8();
+  FUN_00473782();
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473928 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473934 body_start=00473934 body_end=0047393b name=FUN_00473934 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00473934(void)
+
+{
+  bool bVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  bVar1 = (bool)isCurrentModePrivileged();
+  if (bVar1) {
+    uVar2 = isIRQinterruptsEnabled();
+  }
+  enableIRQinterrupts();
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473934 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473940 body_start=00473940 body_end=00473947 name=FUN_00473940 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00473940(void)
+
+{
+  bool bVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  bVar1 = (bool)isCurrentModePrivileged();
+  if (bVar1) {
+    uVar2 = isIRQinterruptsEnabled();
+  }
+  disableIRQinterrupts();
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473940 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047394c body_start=0047394c body_end=00473951 name=FUN_0047394c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0047394c(void)
+
+{
+  return DAT_00474474;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047394c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004739fc body_start=004739fc body_end=00473aa3 name=FUN_004739fc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_004739fc(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  int iVar3;
+  
+  iVar2 = DAT_004742f8;
+  uVar1 = FUN_00449a32(0x60,0x24,DAT_00474318);
+  *(undefined4 *)(iVar2 + 0xc) = uVar1;
+  if (*(int *)(iVar2 + 0xc) == 0) {
+    iVar2 = FUN_0043d0ce();
+    if (iVar2 << 0x1e < 0) {
+      param_1 = 0x6e;
+      param_2 = DAT_0047431c;
+      FUN_0043d574(1,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_00474320,0x6e,DAT_0047431c,
+                   param_3,param_4);
+    }
+    iVar2 = FUN_0043d0ce();
+    if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00474324);
+    }
+  }
+  else {
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      param_1 = 0x70;
+      param_2 = DAT_00474328;
+      FUN_0043d574(4,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_00474320,0x70,DAT_00474328,
+                   *(undefined4 *)(iVar2 + 0xc),param_4);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10400000,DAT_0047447c,DAT_0047447c,*(undefined4 *)(iVar2 + 0xc));
+    }
+  }
+  return CONCAT44(param_2,param_1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004739fc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473abc body_start=00473abc body_end=00473ac5 name=FUN_00473abc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00473abc(void)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_004c9b86(0xc);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473abc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473ac6 body_start=00473ac6 body_end=00473acf name=FUN_00473ac6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00473ac6(void)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_004c9be2(0xc);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473ac6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473ad0 body_start=00473ad0 body_end=00473b33 name=FUN_00473ad0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00473ad0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  int iVar2;
+  undefined4 local_10;
+  undefined4 local_c;
+  
+  piVar1 = DAT_00474484;
+  iVar2 = FUN_004493b0(&LAB_00473b54_1,1,0,DAT_00474488);
+  *piVar1 = iVar2;
+  local_10 = param_3;
+  local_c = param_4;
+  if (*piVar1 == 0) {
+    iVar2 = FUN_0043d0ce();
+    if (iVar2 << 0x1e < 0) {
+      local_c = DAT_0047448c;
+      local_10 = 0x9f;
+      FUN_0043d574(1,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_00474490);
+    }
+    iVar2 = FUN_0043d0ce();
+    if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00474494);
+    }
+  }
+  return CONCAT44(local_c,local_10);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473ad0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473b34 body_start=00473b34 body_end=00473b45 name=FUN_00473b34 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00473b34(void)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_00449498(*DAT_00474484,2000);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473b34 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473b46 body_start=00473b46 body_end=00473b53 name=FUN_00473b46 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00473b46(void)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_004494d8(*DAT_00474484);
+  return unaff_r7;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473b46 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473bc4 body_start=00473bc4 body_end=00473c41 name=FUN_00473bc4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00473bc4(byte param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  undefined4 local_30 [7];
+  uint local_14;
+  
+  FUN_0043c0e4(local_30,0x24,0);
+  local_30[0] = 8;
+  local_14 = (uint)param_1;
+  iVar1 = FUN_00449abe(*(undefined4 *)(DAT_004742f8 + 0xc),local_30,0,1000);
+  if (iVar1 == 0) {
+    uVar2 = 0;
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_004744a4,0xc1,DAT_00474498);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_004744a0);
+    }
+    uVar2 = 0xffffffff;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473bc4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473c44 body_start=00473c44 body_end=00473e2d name=FUN_00473c44 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00473c44(void)
+
+{
+  int *piVar1;
+  char cVar2;
+  int iVar3;
+  undefined4 local_38;
+  undefined4 local_34;
+  int local_30;
+  int local_2c;
+  undefined4 local_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined4 local_14;
+  uint local_10;
+  int local_c;
+  
+  FUN_004739fc();
+  FUN_00473abc();
+  FUN_004c9f32();
+  FUN_00473ac6();
+  FUN_00473ad0();
+  do {
+    while( true ) {
+      do {
+        FUN_0043c0e4(&local_2c,0x24,0);
+        iVar3 = FUN_00449b3c(*(undefined4 *)(DAT_004742f8 + 0xc),&local_2c,0,0xffffffff);
+      } while (iVar3 != 0);
+      FUN_0046d816();
+      if (local_2c == 3) {
+        FUN_0046ca14();
+        FUN_0047386a();
+      }
+      iVar3 = FUN_0046b238();
+      piVar1 = DAT_004744a8;
+      if ((iVar3 != 0) || (local_c != 0)) break;
+      FUN_0046d826();
+    }
+    if (local_2c == 0) {
+      FUN_004ca18a();
+    }
+    else if (local_2c == 1) {
+      FUN_004ca010();
+      FUN_00473b34();
+      *DAT_004744a8 = 1;
+    }
+    else if (local_2c == 2) {
+      if (*DAT_004744a8 == 1) {
+        FUN_004c9fb4();
+      }
+    }
+    else if (local_2c == 3) {
+      if (*DAT_004744a8 == 1) {
+        local_34 = local_14;
+        local_38 = local_18;
+        FUN_004ca564(local_28,local_24,local_20,local_1c);
+      }
+    }
+    else if (local_2c == 4) {
+      if (*DAT_004744a8 == 1) {
+        local_34 = 0;
+        local_38 = 0;
+        FUN_0046c410(local_10,&local_38,&local_34);
+        FUN_004ca1ee(local_10,local_34,local_38);
+      }
+    }
+    else if (local_2c == 5) {
+      if (*DAT_004744a8 == 1) {
+        FUN_00473b46();
+        FUN_004ca126();
+        *piVar1 = 0;
+      }
+    }
+    else if (local_2c == 6) {
+      if ((*DAT_004744a8 == 1) && (cVar2 = FUN_004ca5be(1), cVar2 == '\0')) {
+        FUN_0046ca14();
+        FUN_0047386a();
+        local_34 = local_14;
+        local_38 = local_18;
+        FUN_004ca564(local_28,local_24,local_20,local_1c);
+        iVar3 = FUN_0043d0ce();
+        if (iVar3 << 0x1e < 0) {
+          local_34 = DAT_004744ac;
+          local_38 = 0x10d;
+          FUN_0043d574(3,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_004744b0);
+        }
+        iVar3 = FUN_0043d0ce();
+        if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+          FUN_0043ce9e(0xc000000,DAT_004744b4,DAT_004744b4);
+        }
+      }
+    }
+    else if (local_2c == 8) {
+      if (*DAT_004744a8 == 1) {
+        FUN_004ca60e(local_10 & 0xff);
+      }
+    }
+    else {
+      iVar3 = FUN_0043d0ce();
+      if (iVar3 << 0x1e < 0) {
+        local_30 = local_2c;
+        local_34 = DAT_004744b8;
+        local_38 = 0x117;
+        FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_004744b0);
+      }
+      iVar3 = FUN_0043d0ce();
+      if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+        FUN_0043ce9e(0x8400000,DAT_004744bc,DAT_004744bc,local_2c);
+      }
+    }
+    FUN_0046d826();
+  } while( true );
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473c44 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473e2e body_start=00473e2e body_end=00473e9f name=FUN_00473e2e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00473e2e(void)
+
+{
+  int iVar1;
+  undefined4 in_r3;
+  undefined4 local_30 [9];
+  undefined4 uStack_c;
+  
+  uStack_c = in_r3;
+  FUN_0043c0e4(local_30,0x24,0);
+  local_30[0] = 2;
+  iVar1 = FUN_00449abe(*(undefined4 *)(DAT_004742f8 + 0xc),local_30,0,1000);
+  if (iVar1 != 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_004744c4,0x127,DAT_004744c0)
+      ;
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_004744c8);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473e2e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473ea0 body_start=00473ea0 body_end=00473f11 name=FUN_00473ea0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00473ea0(void)
+
+{
+  int iVar1;
+  undefined4 in_r3;
+  undefined4 local_30 [9];
+  undefined4 uStack_c;
+  
+  uStack_c = in_r3;
+  FUN_0043c0e4(local_30,0x24,0);
+  local_30[0] = 1;
+  iVar1 = FUN_00449abe(*(undefined4 *)(DAT_004742f8 + 0xc),local_30,0,1000);
+  if (iVar1 != 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_004744d0,0x131,DAT_004744cc)
+      ;
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_004744d4);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473ea0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473f12 body_start=00473f12 body_end=00473f83 name=FUN_00473f12 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00473f12(void)
+
+{
+  int iVar1;
+  undefined4 in_r3;
+  undefined4 local_30 [9];
+  undefined4 uStack_c;
+  
+  uStack_c = in_r3;
+  FUN_0043c0e4(local_30,0x24,0);
+  local_30[0] = 0;
+  iVar1 = FUN_00449abe(*(undefined4 *)(DAT_004742f8 + 0xc),local_30,0,1000);
+  if (iVar1 != 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_004744dc,0x13b,DAT_004744d8)
+      ;
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_004744e0);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473f12 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473f84 body_start=00473f84 body_end=00473ff5 name=FUN_00473f84 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00473f84(void)
+
+{
+  int iVar1;
+  undefined4 in_r3;
+  undefined4 local_30 [9];
+  undefined4 uStack_c;
+  
+  uStack_c = in_r3;
+  FUN_0043c0e4(local_30,0x24,0);
+  local_30[0] = 5;
+  iVar1 = FUN_00449abe(*(undefined4 *)(DAT_004742f8 + 0xc),local_30,0,1000);
+  if (iVar1 != 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_004744e8,0x145,DAT_004744e4)
+      ;
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_004744ec);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473f84 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00473ff6 body_start=00473ff6 body_end=00474065 name=FUN_00473ff6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00473ff6(undefined4 param_1)
+
+{
+  int iVar1;
+  undefined4 local_30 [7];
+  undefined4 local_14;
+  
+  FUN_0043c0e4(local_30,0x24,0);
+  local_30[0] = 4;
+  local_14 = param_1;
+  iVar1 = FUN_00449abe(*(undefined4 *)(DAT_004742f8 + 0xc),local_30,0,1000);
+  if (iVar1 != 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_004744f4,0x150,DAT_004744f0)
+      ;
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_004744f8);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00473ff6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474066 body_start=00474066 body_end=004740ff name=FUN_00474066 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4
+FUN_00474066(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+            undefined4 param_5,undefined4 param_6)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  undefined4 local_48;
+  undefined4 local_44;
+  undefined4 local_40;
+  undefined4 local_3c;
+  undefined4 local_38;
+  undefined4 local_34;
+  undefined4 local_30;
+  undefined4 uStack_24;
+  
+  uStack_24 = param_4;
+  FUN_0043c0e4(&local_48,0x24,0);
+  local_48 = 3;
+  local_34 = param_5;
+  local_30 = param_6;
+  local_44 = param_1;
+  local_40 = param_2;
+  local_3c = param_3;
+  local_38 = param_4;
+  iVar1 = FUN_00449abe(*(undefined4 *)(DAT_004742f8 + 0xc),&local_48,0,1000);
+  if (iVar1 == 0) {
+    uVar2 = 0;
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_00474500,0x161,DAT_004744fc)
+      ;
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_00474504,DAT_00474504);
+    }
+    uVar2 = 0xffffffff;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474066 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474100 body_start=00474100 body_end=004742f7 name=FUN_00474100 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00474100(void)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined4 in_r3;
+  undefined4 local_30 [8];
+  undefined4 local_10;
+  undefined4 uStack_c;
+  
+  uStack_c = in_r3;
+  if (*DAT_004744a8 == 0) {
+    iVar1 = FUN_00443484();
+    if (iVar1 == 0) {
+      iVar1 = FUN_0043d0ce();
+      if (iVar1 << 0x1e < 0) {
+        FUN_0043d574(3,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_0047450c,0x170,
+                     DAT_00474514);
+      }
+      iVar1 = FUN_0043d0ce();
+      if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+        FUN_0043ce9e(0xc000000,DAT_00474518);
+      }
+      uVar2 = 0;
+    }
+    else {
+      iVar1 = FUN_0043d0ce();
+      if (iVar1 << 0x1e < 0) {
+        FUN_0043d574(3,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_0047450c,0x174,
+                     DAT_0047451c);
+      }
+      iVar1 = FUN_0043d0ce();
+      if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+        FUN_0043ce9e(0xc000000,DAT_00474520,DAT_00474520);
+      }
+      FUN_0043c0e4(local_30,0x24,0);
+      iVar1 = DAT_004742f8;
+      local_10 = 1;
+      local_30[0] = 0;
+      iVar3 = FUN_00449abe(*(undefined4 *)(DAT_004742f8 + 0xc),local_30,0,1000);
+      if (iVar3 == 0) {
+        local_30[0] = 1;
+        iVar3 = FUN_00449abe(*(undefined4 *)(iVar1 + 0xc),local_30,0,1000);
+        if (iVar3 == 0) {
+          local_30[0] = 3;
+          iVar1 = FUN_00449abe(*(undefined4 *)(iVar1 + 0xc),local_30,0,1000);
+          if (iVar1 == 0) {
+            uVar2 = 0;
+          }
+          else {
+            iVar1 = FUN_0043d0ce();
+            if (iVar1 << 0x1e < 0) {
+              FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_0047450c,0x188,
+                           DAT_004744fc);
+            }
+            iVar1 = FUN_0043d0ce();
+            if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+              FUN_0043ce9e(0x8000000,DAT_00474504,DAT_00474504);
+            }
+            uVar2 = 0xffffffff;
+          }
+        }
+        else {
+          iVar1 = FUN_0043d0ce();
+          if (iVar1 << 0x1e < 0) {
+            FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_0047450c,0x182,
+                         DAT_00474524);
+          }
+          iVar1 = FUN_0043d0ce();
+          if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+            FUN_0043ce9e(0x8000000,DAT_00474528,DAT_00474528);
+          }
+          uVar2 = 0xffffffff;
+        }
+      }
+      else {
+        iVar1 = FUN_0043d0ce();
+        if (iVar1 << 0x1e < 0) {
+          FUN_0043d574(2,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_0047450c,0x17c,
+                       DAT_004744d8);
+        }
+        iVar1 = FUN_0043d0ce();
+        if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+          FUN_0043ce9e(0x8000000,DAT_004744e0,DAT_004744e0);
+        }
+        uVar2 = 0xffffffff;
+      }
+    }
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(4,PTR_s_task_displaydrvmgr_0047430c,DAT_00474308,DAT_0047450c,0x16a,DAT_00474508)
+      ;
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00474510,DAT_00474510);
+    }
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474100 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047432c body_start=0047432c body_end=00474473 name=FUN_0047432c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0047432c(void)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined4 in_r3;
+  undefined4 local_30 [8];
+  undefined4 local_10;
+  undefined4 uStack_c;
+  
+  uStack_c = in_r3;
+  if (*DAT_004744a8 == 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_00474538,DAT_00474534,DAT_00474530,0x191,DAT_0047452c);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_0047453c,DAT_0047453c);
+    }
+    uVar2 = 0;
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(3,DAT_00474538,DAT_00474534,DAT_00474530,0x194,DAT_00474540);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0xc000000,DAT_00474544);
+    }
+    FUN_0043c0e4(local_30,0x24,0);
+    iVar1 = DAT_00474480;
+    local_10 = 1;
+    local_30[0] = 2;
+    iVar3 = FUN_00449abe(*(undefined4 *)(DAT_00474480 + 0xc),local_30,0,1000);
+    if (iVar3 == 0) {
+      local_30[0] = 5;
+      iVar1 = FUN_00449abe(*(undefined4 *)(iVar1 + 0xc),local_30,0,1000);
+      if (iVar1 == 0) {
+        uVar2 = 0;
+      }
+      else {
+        iVar1 = FUN_0043d0ce();
+        if (iVar1 << 0x1e < 0) {
+          FUN_0043d574(2,DAT_00474538,DAT_00474534,DAT_00474530,0x1a1,DAT_004744e4);
+        }
+        iVar1 = FUN_0043d0ce();
+        if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+          FUN_0043ce9e(0x8000000,DAT_004744ec,DAT_004744ec);
+        }
+        uVar2 = 0xffffffff;
+      }
+    }
+    else {
+      iVar1 = FUN_0043d0ce();
+      if (iVar1 << 0x1e < 0) {
+        FUN_0043d574(2,DAT_00474538,DAT_00474534,DAT_00474530,0x19b,DAT_00474548);
+      }
+      iVar1 = FUN_0043d0ce();
+      if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+        FUN_0043ce9e(0x8000000,DAT_0047454c,DAT_0047454c);
+      }
+      uVar2 = 0xffffffff;
+    }
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047432c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474550 body_start=00474550 body_end=004745f3 name=FUN_00474550 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00474550(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  uint uVar4;
+  
+  puVar2 = (undefined4 *)FUN_00474cd2(0x60);
+  if (puVar2 == (undefined4 *)0x0) {
+    puVar2 = (undefined4 *)0x0;
+  }
+  else {
+    *puVar2 = DAT_00474e44;
+    iVar3 = FUN_0044b63a(param_2,&DAT_00474804);
+    uVar4 = (uint)(iVar3 != 0);
+    iVar3 = FUN_0044b63a(param_2,&DAT_00474808);
+    if (iVar3 != 0) {
+      uVar4 = uVar4 | 0x502;
+    }
+    iVar3 = FUN_0044b63a(param_2,&DAT_0047480c);
+    if (iVar3 != 0) {
+      uVar4 = uVar4 | 0x902;
+    }
+    iVar3 = FUN_0044b63a(param_2,&DAT_00474810);
+    puVar1 = DAT_00474e48;
+    if (iVar3 != 0) {
+      uVar4 = uVar4 | 3;
+    }
+    iVar3 = FUN_004497b6(*DAT_00474e48,1000);
+    if (iVar3 == 0) {
+      iVar3 = FUN_004cfa94(*puVar2,puVar2 + 1,param_1,uVar4);
+      FUN_0044981c(*puVar1);
+      if (iVar3 < 0) {
+        FUN_00474d16(puVar2);
+        puVar2 = (undefined4 *)0x0;
+      }
+    }
+    else {
+      FUN_00474d16(puVar2);
+      puVar2 = (undefined4 *)0x0;
+    }
+  }
+  return CONCAT44(param_4,puVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474550 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004745f4 body_start=004745f4 body_end=00474633 name=FUN_004745f4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_004745f4(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  undefined4 uVar3;
+  
+  puVar1 = DAT_00474e48;
+  iVar2 = FUN_004497b6(*DAT_00474e48,1000);
+  if (iVar2 == 0) {
+    iVar2 = FUN_004cfad0(*param_1,param_1 + 1);
+    FUN_0044981c(*puVar1);
+    FUN_00474d16(param_1);
+    if (iVar2 < 0) {
+      uVar3 = 0xffffffff;
+    }
+    else {
+      uVar3 = 0;
+    }
+  }
+  else {
+    uVar3 = 0xffffffff;
+  }
+  return uVar3;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004745f4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474634 body_start=00474634 body_end=00474681 name=FUN_00474634 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+uint FUN_00474634(undefined4 param_1,uint param_2,int param_3,undefined4 *param_4)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  uint uVar3;
+  
+  puVar1 = DAT_00474e48;
+  iVar2 = FUN_004497b6(*DAT_00474e48,1000);
+  if (iVar2 == 0) {
+    uVar3 = FUN_004cfb40(*param_4,param_4 + 1,param_1,param_3 * param_2);
+    FUN_0044981c(*puVar1);
+    if ((int)uVar3 < 0) {
+      uVar3 = 0;
+    }
+    else {
+      uVar3 = uVar3 / param_2;
+    }
+  }
+  else {
+    uVar3 = 0;
+  }
+  return uVar3;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474634 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474682 body_start=00474682 body_end=00474801 name=FUN_00474682 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+uint FUN_00474682(undefined4 param_1,uint param_2,int param_3,undefined4 *param_4)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  puVar1 = DAT_00474e48;
+  uVar4 = param_3 * param_2;
+  if (param_4 == (undefined4 *)0x0) {
+    iVar2 = FUN_0043d0ce();
+    if (iVar2 << 0x1e < 0) {
+      FUN_0043d574(1,DAT_00474e58,DAT_00474e54,DAT_00474e50,0x236,DAT_00474e4c);
+    }
+    iVar2 = FUN_0043d0ce();
+    if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00474e5c,DAT_00474e5c);
+    }
+    uVar3 = 0;
+  }
+  else {
+    iVar2 = FUN_004497b6(*DAT_00474e48,1000,param_3,param_4,param_1,param_2,param_3,param_4);
+    if (iVar2 == 0) {
+      uVar3 = FUN_004cfb7c(*param_4,param_4 + 1,param_1,uVar4);
+      FUN_0044981c(*puVar1);
+      if ((int)uVar3 < 0) {
+        iVar2 = FUN_0043d0ce();
+        if (iVar2 << 0x1e < 0) {
+          FUN_0043d574(1,DAT_00474e58,DAT_00474e54,DAT_00474e50,0x24a,DAT_00474e68,uVar3,uVar4);
+        }
+        iVar2 = FUN_0043d0ce();
+        if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+          FUN_0043ce9e(0x4800000,DAT_00474e6c,DAT_00474e6c,uVar3,uVar4);
+        }
+        uVar3 = 0;
+      }
+      else {
+        if (uVar3 < uVar4) {
+          iVar2 = FUN_0043d0ce();
+          if (iVar2 << 0x1e < 0) {
+            FUN_0043d574(2,DAT_00474e58,DAT_00474e54,DAT_00474e50,0x24e,DAT_00474e70,uVar3,uVar4);
+          }
+          iVar2 = FUN_0043d0ce();
+          if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+            FUN_0043ce9e(0x8800000,DAT_00474e74,DAT_00474e74,uVar3,uVar4);
+          }
+        }
+        uVar3 = uVar3 / param_2;
+      }
+    }
+    else {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        FUN_0043d574(1,DAT_00474e58,DAT_00474e54,DAT_00474e50,0x23c,DAT_00474e60,uVar4);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4400000,DAT_00474e64,DAT_00474e64,uVar4);
+      }
+      uVar3 = 0;
+    }
+  }
+  return uVar3;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474682 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474814 body_start=00474814 body_end=0047486f name=FUN_00474814 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00474814(undefined4 *param_1,undefined4 param_2,uint param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  undefined4 uVar3;
+  
+  puVar1 = DAT_00474e48;
+  if (param_3 == 0) {
+    uVar3 = 0;
+  }
+  else if (param_3 == 2) {
+    uVar3 = 2;
+  }
+  else {
+    if (1 < param_3) {
+      uVar3 = 0xffffffff;
+      goto LAB_0047486e;
+    }
+    uVar3 = 1;
+  }
+  iVar2 = FUN_004497b6(*DAT_00474e48,1000);
+  if (iVar2 == 0) {
+    iVar2 = FUN_004cfbb2(*param_1,param_1 + 1,param_2,uVar3);
+    FUN_0044981c(*puVar1);
+    if (iVar2 < 0) {
+      uVar3 = 0xffffffff;
+    }
+    else {
+      uVar3 = 0;
+    }
+  }
+  else {
+    uVar3 = 0xffffffff;
+  }
+LAB_0047486e:
+  return CONCAT44(param_4,uVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474814 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474870 body_start=00474870 body_end=004748b3 name=FUN_00474870 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_00474870(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  
+  puVar1 = DAT_00474e48;
+  if (param_1 == (undefined4 *)0x0) {
+    iVar2 = -1;
+  }
+  else {
+    iVar2 = FUN_004497b6(*DAT_00474e48,1000);
+    if (iVar2 == 0) {
+      iVar2 = FUN_004cfbe8(*param_1,param_1 + 1);
+      FUN_0044981c(*puVar1);
+      if (iVar2 < 0) {
+        iVar2 = -1;
+      }
+    }
+    else {
+      iVar2 = -1;
+    }
+  }
+  return CONCAT44(param_4,iVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474870 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004748b4 body_start=004748b4 body_end=0047490f name=FUN_004748b4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_004748b4(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  
+  puVar1 = DAT_00474e48;
+  if (param_1 == (undefined4 *)0x0) {
+    puVar1 = (undefined4 *)FUN_00439cc4();
+    *puVar1 = 9;
+    iVar2 = -1;
+  }
+  else {
+    iVar2 = FUN_004497b6(*DAT_00474e48,1000);
+    if (iVar2 == 0) {
+      iVar2 = FUN_004cfc2e(*param_1,param_1 + 1);
+      FUN_0044981c(*puVar1);
+      if (iVar2 < 0) {
+        puVar1 = (undefined4 *)FUN_00439cc4();
+        *puVar1 = 5;
+        iVar2 = -1;
+      }
+    }
+    else {
+      puVar1 = (undefined4 *)FUN_00439cc4();
+      *puVar1 = 0x10;
+      iVar2 = -1;
+    }
+  }
+  return CONCAT44(param_4,iVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004748b4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474910 body_start=00474910 body_end=0047498b name=FUN_00474910 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_00474910(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 uVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  
+  puVar2 = DAT_00474e48;
+  if ((((param_1 == (undefined4 *)0x0) || (param_1 == DAT_00474e78)) || (param_1 == DAT_00474e7c))
+     || (param_1 == DAT_00474e80)) {
+    uVar1 = 0;
+  }
+  else if (param_1 == (undefined4 *)0x0) {
+    puVar2 = (undefined4 *)FUN_00439cc4();
+    *puVar2 = 9;
+    uVar1 = 0xffffffff;
+  }
+  else {
+    iVar3 = FUN_004497b6(*DAT_00474e48,1000);
+    if (iVar3 == 0) {
+      iVar3 = FUN_004cfb08(*param_1,param_1 + 1);
+      FUN_0044981c(*puVar2);
+      if (iVar3 < 0) {
+        puVar2 = (undefined4 *)FUN_00439cc4();
+        *puVar2 = 5;
+        uVar1 = 0xffffffff;
+      }
+      else {
+        uVar1 = 0;
+      }
+    }
+    else {
+      puVar2 = (undefined4 *)FUN_00439cc4();
+      *puVar2 = 0x10;
+      uVar1 = 0xffffffff;
+    }
+  }
+  return CONCAT44(param_4,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474910 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047498c body_start=0047498c body_end=00474a01 name=FUN_0047498c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0047498c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 uVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  
+  puVar2 = DAT_00474e48;
+  if (*DAT_00474e84 == 1) {
+    if (param_1 == 0) {
+      puVar2 = (undefined4 *)FUN_00439cc4();
+      *puVar2 = 0x16;
+      uVar1 = 0xffffffff;
+    }
+    else {
+      iVar3 = FUN_004497b6(*DAT_00474e48,1000);
+      if (iVar3 == 0) {
+        iVar3 = FUN_004cfa76(DAT_00474e44,param_1);
+        FUN_0044981c(*puVar2);
+        if (iVar3 < 0) {
+          if (iVar3 == -2) {
+            uVar1 = 0;
+          }
+          else {
+            puVar2 = (undefined4 *)FUN_00439cc4();
+            *puVar2 = 5;
+            uVar1 = 0xffffffff;
+          }
+        }
+        else {
+          uVar1 = 0;
+        }
+      }
+      else {
+        puVar2 = (undefined4 *)FUN_00439cc4();
+        *puVar2 = 0x10;
+        uVar1 = 0xffffffff;
+      }
+    }
+  }
+  else {
+    uVar1 = 0;
+  }
+  return CONCAT44(param_4,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047498c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474a02 body_start=00474a02 body_end=00474a75 name=FUN_00474a02 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00474a02(int param_1,int param_2)
+
+{
+  undefined4 uVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  
+  puVar2 = DAT_00474e48;
+  if (*DAT_00474e84 == 1) {
+    if ((param_1 == 0) || (param_2 == 0)) {
+      puVar2 = (undefined4 *)FUN_00439cc4();
+      *puVar2 = 0x16;
+      uVar1 = 0xffffffff;
+    }
+    else {
+      iVar3 = FUN_004497b6(*DAT_00474e48,1000);
+      if (iVar3 == 0) {
+        iVar3 = FUN_004cfa80(DAT_00474e44,param_1,param_2);
+        FUN_0044981c(*puVar2);
+        if (iVar3 < 0) {
+          puVar2 = (undefined4 *)FUN_00439cc4();
+          *puVar2 = 5;
+          uVar1 = 0xffffffff;
+        }
+        else {
+          uVar1 = 0;
+        }
+      }
+      else {
+        puVar2 = (undefined4 *)FUN_00439cc4();
+        *puVar2 = 0x10;
+        uVar1 = 0xffffffff;
+      }
+    }
+  }
+  else {
+    uVar1 = 0;
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474a02 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474a76 body_start=00474a76 body_end=00474b01 name=FUN_00474a76 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00474a76(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 uVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  
+  puVar2 = DAT_00474e48;
+  if (*DAT_00474e84 == 1) {
+    if (param_1 == 0) {
+      puVar2 = (undefined4 *)FUN_00439cc4();
+      *puVar2 = 0x16;
+      uVar1 = 0xffffffff;
+    }
+    else {
+      iVar3 = FUN_004497b6(*DAT_00474e48,1000);
+      if (iVar3 == 0) {
+        iVar3 = FUN_004cfc5c(DAT_00474e44,param_1);
+        FUN_0044981c(*puVar2);
+        if (iVar3 < 0) {
+          if (iVar3 == -0x11) {
+            puVar2 = (undefined4 *)FUN_00439cc4();
+            *puVar2 = 0x11;
+          }
+          else if (iVar3 == -2) {
+            puVar2 = (undefined4 *)FUN_00439cc4();
+            *puVar2 = 2;
+          }
+          else {
+            puVar2 = (undefined4 *)FUN_00439cc4();
+            *puVar2 = 5;
+          }
+          uVar1 = 0xffffffff;
+        }
+        else {
+          uVar1 = 0;
+        }
+      }
+      else {
+        puVar2 = (undefined4 *)FUN_00439cc4();
+        *puVar2 = 0x10;
+        uVar1 = 0xffffffff;
+      }
+    }
+  }
+  else {
+    uVar1 = 0;
+  }
+  return CONCAT44(param_4,uVar1);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474a76 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474b02 body_start=00474b02 body_end=00474bb7 name=FUN_00474b02 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 * FUN_00474b02(int param_1)
+
+{
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  undefined4 uVar4;
+  
+  if (*DAT_00474e84 == 1) {
+    if (param_1 == 0) {
+      puVar2 = (undefined4 *)FUN_00439cc4();
+      *puVar2 = 0x16;
+      puVar2 = (undefined4 *)0x0;
+    }
+    else {
+      puVar2 = (undefined4 *)FUN_00474cd2(0x240);
+      if (puVar2 == (undefined4 *)0x0) {
+        puVar2 = (undefined4 *)FUN_00439cc4();
+        *puVar2 = 0xc;
+        puVar2 = (undefined4 *)0x0;
+      }
+      else {
+        *puVar2 = DAT_00474e44;
+        FUN_0044b5a0(puVar2 + 0x50,param_1,0xff);
+        *(undefined1 *)((int)puVar2 + 0x23f) = 0;
+        puVar1 = DAT_00474e48;
+        iVar3 = FUN_004497b6(*DAT_00474e48,1000);
+        if (iVar3 == 0) {
+          iVar3 = FUN_004cfc66(*puVar2,puVar2 + 1,param_1);
+          FUN_0044981c(*puVar1);
+          if (iVar3 < 0) {
+            FUN_00474d16(puVar2);
+            puVar2 = (undefined4 *)FUN_00439cc4();
+            if (iVar3 == -2) {
+              uVar4 = 2;
+            }
+            else {
+              uVar4 = 5;
+            }
+            *puVar2 = uVar4;
+            puVar2 = (undefined4 *)0x0;
+          }
+        }
+        else {
+          FUN_00474d16(puVar2);
+          puVar2 = (undefined4 *)FUN_00439cc4();
+          *puVar2 = 0x10;
+          puVar2 = (undefined4 *)0x0;
+        }
+      }
+    }
+  }
+  else {
+    puVar2 = (undefined4 *)FUN_00439cc4();
+    *puVar2 = 2;
+    puVar2 = (undefined4 *)0x0;
+  }
+  return puVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474b02 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474bb8 body_start=00474bb8 body_end=00474c65 name=FUN_00474bb8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00474bb8(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  int iVar3;
+  
+  puVar1 = DAT_00474e48;
+  if (*DAT_00474e84 == 1) {
+    if (param_1 == (undefined4 *)0x0) {
+      puVar1 = (undefined4 *)FUN_00439cc4();
+      *puVar1 = 9;
+      iVar2 = 0;
+    }
+    else {
+      iVar2 = FUN_004497b6(*DAT_00474e48,1000);
+      if (iVar2 == 0) {
+        iVar3 = FUN_004cfd02(*param_1,param_1 + 1,param_1 + 0xe);
+        FUN_0044981c(*puVar1);
+        iVar2 = DAT_00474e88;
+        if (iVar3 < 0) {
+          puVar1 = (undefined4 *)FUN_00439cc4();
+          *puVar1 = 5;
+          iVar2 = 0;
+        }
+        else if (iVar3 == 0) {
+          iVar2 = 0;
+        }
+        else {
+          FUN_0044b5a0(DAT_00474e88,param_1 + 0x10,0xff);
+          *(undefined1 *)(iVar2 + 0xff) = 0;
+          if (*(char *)(param_1 + 0xe) == '\x02') {
+            *(undefined1 *)(iVar2 + 0x100) = 4;
+          }
+          else if (*(char *)(param_1 + 0xe) == '\x01') {
+            *(undefined1 *)(iVar2 + 0x100) = 8;
+          }
+          else {
+            *(undefined1 *)(iVar2 + 0x100) = 0;
+          }
+        }
+      }
+      else {
+        puVar1 = (undefined4 *)FUN_00439cc4();
+        *puVar1 = 0x10;
+        iVar2 = 0;
+      }
+    }
+  }
+  else {
+    puVar1 = (undefined4 *)FUN_00439cc4();
+    *puVar1 = 9;
+    iVar2 = 0;
+  }
+  return iVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474bb8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474c66 body_start=00474c66 body_end=00474cd1 name=FUN_00474c66 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00474c66(undefined4 *param_1)
+
+{
+  undefined4 uVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  
+  puVar2 = DAT_00474e48;
+  if (*DAT_00474e84 == 1) {
+    if (param_1 == (undefined4 *)0x0) {
+      puVar2 = (undefined4 *)FUN_00439cc4();
+      *puVar2 = 9;
+      uVar1 = 0xffffffff;
+    }
+    else {
+      iVar3 = FUN_004497b6(*DAT_00474e48,1000);
+      if (iVar3 == 0) {
+        iVar3 = FUN_004cfcf8(*param_1,param_1 + 1);
+        FUN_0044981c(*puVar2);
+        FUN_00474d16(param_1);
+        if (iVar3 < 0) {
+          puVar2 = (undefined4 *)FUN_00439cc4();
+          *puVar2 = 5;
+          uVar1 = 0xffffffff;
+        }
+        else {
+          uVar1 = 0;
+        }
+      }
+      else {
+        puVar2 = (undefined4 *)FUN_00439cc4();
+        *puVar2 = 0x10;
+        uVar1 = 0xffffffff;
+      }
+    }
+  }
+  else {
+    uVar1 = 0;
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474c66 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474cd2 body_start=00474cd2 body_end=00474d15 name=FUN_00474cd2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00474cd2(undefined4 param_1)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  undefined4 uVar3;
+  
+  puVar1 = DAT_00474e8c;
+  uVar3 = 0;
+  iVar2 = FUN_004497b6(*DAT_00474e8c,1000);
+  if (iVar2 == 0) {
+    uVar3 = FUN_004d0722(*DAT_00474e90,param_1);
+    FUN_0044981c(*puVar1);
+  }
+  else {
+    FUN_004733ee(DAT_00474e94);
+    FUN_004d09b4(&DAT_00474e40,DAT_00474e54,0x432);
+  }
+  return uVar3;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474cd2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474d16 body_start=00474d16 body_end=00474d53 name=FUN_00474d16 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00474d16(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  
+  puVar1 = DAT_00474e8c;
+  iVar2 = FUN_004497b6(*DAT_00474e8c,1000);
+  if (iVar2 == 0) {
+    FUN_004d0808(*DAT_00474e90,param_1);
+    FUN_0044981c(*puVar1);
+  }
+  else {
+    FUN_004733ee(DAT_00474e98);
+    FUN_004d09b4(&DAT_00474e40,DAT_00474e54,0x43e);
+  }
+  return param_4;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474d16 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474d54 body_start=00474d54 body_end=00474d9b name=FUN_00474d54 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00474d54(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  undefined4 uVar3;
+  
+  puVar1 = DAT_00474e8c;
+  uVar3 = 0;
+  iVar2 = FUN_004497b6(*DAT_00474e8c,1000);
+  if (iVar2 == 0) {
+    uVar3 = FUN_004d0868(*DAT_00474e90,param_1,param_2);
+    FUN_0044981c(*puVar1);
+  }
+  else {
+    FUN_004733ee(DAT_00474e9c);
+    FUN_004d09b4(&DAT_00474e40,DAT_00474e54,0x449);
+  }
+  return CONCAT44(param_4,uVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474d54 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474d9c body_start=00474d9c body_end=00474e3b name=FUN_00474d9c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00474d9c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  int *piVar2;
+  int iVar3;
+  undefined4 uVar4;
+  
+  piVar1 = DAT_00474e48;
+  iVar3 = FUN_0044971c(0);
+  *piVar1 = iVar3;
+  piVar2 = DAT_00474e8c;
+  iVar3 = FUN_0044971c(0);
+  *piVar2 = iVar3;
+  if ((*piVar1 == 0) || (*piVar2 == 0)) {
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      param_2 = 0x47a;
+      FUN_0043d574(1,DAT_00474e58,DAT_00474e54,DAT_00474ea4,0x47a,DAT_00474ea0,param_4);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00474ea8,DAT_00474ea8);
+    }
+    uVar4 = 0xffffffff;
+  }
+  else {
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      param_2 = 0x47e;
+      FUN_0043d574(3,DAT_00474e58,DAT_00474e54,DAT_00474ea4,0x47e,DAT_00474eac,param_4);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0xc000000,DAT_00474eb0,DAT_00474eb0);
+    }
+    uVar4 = 0;
+  }
+  return CONCAT44(param_2,uVar4);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474d9c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474eb4 body_start=00474eb4 body_end=00474ef9 name=FUN_00474eb4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00474eb4(void)
+
+{
+  uint *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = DAT_00475198;
+  if ((*DAT_00475194 & 0x300) == 0) {
+    if (-1 < (int)(*DAT_00475198 << 0xe)) {
+      DataSynchronizationBarrier(0xf);
+      InstructionSynchronizationBarrier(0xf);
+      *DAT_0047519c = 0;
+      DataSynchronizationBarrier(0xf);
+      InstructionSynchronizationBarrier(0xf);
+      *puVar1 = *puVar1 | 0x20000;
+      DataSynchronizationBarrier(0xf);
+      InstructionSynchronizationBarrier(0xf);
+    }
+    uVar2 = 0;
+  }
+  else {
+    uVar2 = 1;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474eb4 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474efa body_start=00474efa body_end=00474f31 name=FUN_00474efa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+bool FUN_00474efa(void)
+
+{
+  bool bVar1;
+  
+  bVar1 = (*DAT_00475194 & 0x300) == 0;
+  if (bVar1) {
+    DataSynchronizationBarrier(0xf);
+    InstructionSynchronizationBarrier(0xf);
+    *DAT_00475198 = *DAT_00475198 & 0xfffdffff;
+    *DAT_0047519c = 0;
+    DataSynchronizationBarrier(0xf);
+    InstructionSynchronizationBarrier(0xf);
+  }
+  return !bVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474efa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00474f32 body_start=00474f32 body_end=00475013 name=FUN_00474f32 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00474f32(char param_1)
+
+{
+  uint *puVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  bool bVar6;
+  
+  if ((*DAT_00475194 & 0x300) == 0) {
+    *DAT_004751a4 =
+         (*DAT_004751a0 & 7) << 7 | (DAT_004751a0[1] & 7) << 4 | (DAT_004751a0[2] & 7) << 1 | 1;
+    puVar1 = DAT_00475198;
+    if (-1 < (int)(*DAT_00475198 << 0xf)) {
+      *DAT_004751a8 = 0;
+      DataSynchronizationBarrier(0xf);
+      uVar4 = *DAT_004751ac;
+      uVar3 = (uVar4 & 0xfffffff) >> 0xd;
+      do {
+        uVar5 = (uVar4 & 0x1fff) >> 3;
+        do {
+          *DAT_004751b0 = (uVar3 & 0x1ff) << 5 | uVar5 << 0x1e;
+          bVar6 = uVar5 != 0;
+          uVar5 = uVar5 - 1;
+        } while (bVar6);
+        bVar6 = uVar3 != 0;
+        uVar3 = uVar3 - 1;
+      } while (bVar6);
+      DataSynchronizationBarrier(0xf);
+      *puVar1 = *puVar1 | 0x10000;
+      DataSynchronizationBarrier(0xf);
+      InstructionSynchronizationBarrier(0xf);
+    }
+    if (param_1 != '\0') {
+      *DAT_004751a8 = 0;
+      DataSynchronizationBarrier(0xf);
+      uVar4 = *DAT_004751ac;
+      uVar3 = (uVar4 & 0xfffffff) >> 0xd;
+      do {
+        uVar5 = (uVar4 & 0x1fff) >> 3;
+        do {
+          *DAT_004751b4 = (uVar3 & 0x1ff) << 5 | uVar5 << 0x1e;
+          bVar6 = uVar5 != 0;
+          uVar5 = uVar5 - 1;
+        } while (bVar6);
+        bVar6 = uVar3 != 0;
+        uVar3 = uVar3 - 1;
+      } while (bVar6);
+      DataSynchronizationBarrier(0xf);
+      InstructionSynchronizationBarrier(0xf);
+    }
+    uVar2 = 0;
+  }
+  else {
+    uVar2 = 1;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00474f32 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475014 body_start=00475014 body_end=0047510d name=FUN_00475014 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00475014(uint *param_1,char param_2)
+
+{
+  uint uVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  bool bVar5;
+  
+  if (*DAT_00475198 << 0xf < 0) {
+    if (param_1 == (uint *)0x0) {
+      if (param_2 == '\0') {
+        *DAT_004751a8 = 0;
+        DataSynchronizationBarrier(0xf);
+        uVar1 = *DAT_004751ac;
+        uVar3 = (uVar1 & 0xfffffff) >> 0xd;
+        do {
+          uVar4 = (uVar1 & 0x1fff) >> 3;
+          do {
+            *DAT_004751b0 = (uVar3 & 0x1ff) << 5 | uVar4 << 0x1e;
+            bVar5 = uVar4 != 0;
+            uVar4 = uVar4 - 1;
+          } while (bVar5);
+          bVar5 = uVar3 != 0;
+          uVar3 = uVar3 - 1;
+        } while (bVar5);
+        DataSynchronizationBarrier(0xf);
+        InstructionSynchronizationBarrier(0xf);
+      }
+      else {
+        *DAT_004751a8 = 0;
+        DataSynchronizationBarrier(0xf);
+        uVar1 = *DAT_004751ac;
+        uVar3 = (uVar1 & 0xfffffff) >> 0xd;
+        do {
+          uVar4 = (uVar1 & 0x1fff) >> 3;
+          do {
+            *DAT_004751bc = (uVar3 & 0x1ff) << 5 | uVar4 << 0x1e;
+            bVar5 = uVar4 != 0;
+            uVar4 = uVar4 - 1;
+          } while (bVar5);
+          bVar5 = uVar3 != 0;
+          uVar3 = uVar3 - 1;
+        } while (bVar5);
+        DataSynchronizationBarrier(0xf);
+        InstructionSynchronizationBarrier(0xf);
+      }
+    }
+    else if (param_2 == '\0') {
+      uVar3 = *param_1;
+      if (0 < (int)param_1[1]) {
+        iVar2 = (uVar3 & 0x1f) + param_1[1];
+        DataSynchronizationBarrier(0xf);
+        do {
+          *DAT_004751c0 = uVar3;
+          uVar3 = uVar3 + 0x20;
+          iVar2 = iVar2 + -0x20;
+        } while (0 < iVar2);
+        DataSynchronizationBarrier(0xf);
+        InstructionSynchronizationBarrier(0xf);
+      }
+    }
+    else {
+      uVar3 = *param_1;
+      if (0 < (int)param_1[1]) {
+        iVar2 = (uVar3 & 0x1f) + param_1[1];
+        DataSynchronizationBarrier(0xf);
+        do {
+          *DAT_004751b8 = uVar3;
+          uVar3 = uVar3 + 0x20;
+          iVar2 = iVar2 + -0x20;
+        } while (0 < iVar2);
+        DataSynchronizationBarrier(0xf);
+        InstructionSynchronizationBarrier(0xf);
+      }
+    }
+  }
+  else {
+    DataSynchronizationBarrier(0xf);
+    InstructionSynchronizationBarrier(0xf);
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475014 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047510e body_start=0047510e body_end=00475193 name=FUN_0047510e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0047510e(uint *param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  bool bVar5;
+  
+  if (*DAT_00475198 << 0xf < 0) {
+    if (param_1 == (uint *)0x0) {
+      *DAT_004751a8 = 0;
+      DataSynchronizationBarrier(0xf);
+      uVar1 = *DAT_004751ac;
+      uVar3 = (uVar1 & 0xfffffff) >> 0xd;
+      do {
+        uVar4 = (uVar1 & 0x1fff) >> 3;
+        do {
+          *DAT_004751b4 = (uVar3 & 0x1ff) << 5 | uVar4 << 0x1e;
+          bVar5 = uVar4 != 0;
+          uVar4 = uVar4 - 1;
+        } while (bVar5);
+        bVar5 = uVar3 != 0;
+        uVar3 = uVar3 - 1;
+      } while (bVar5);
+      DataSynchronizationBarrier(0xf);
+      InstructionSynchronizationBarrier(0xf);
+    }
+    else {
+      uVar3 = *param_1;
+      if (0 < (int)param_1[1]) {
+        iVar2 = (uVar3 & 0x1f) + param_1[1];
+        DataSynchronizationBarrier(0xf);
+        do {
+          *DAT_004751c4 = uVar3;
+          uVar3 = uVar3 + 0x20;
+          iVar2 = iVar2 + -0x20;
+        } while (0 < iVar2);
+        DataSynchronizationBarrier(0xf);
+        InstructionSynchronizationBarrier(0xf);
+      }
+    }
+  }
+  else {
+    DataSynchronizationBarrier(0xf);
+    InstructionSynchronizationBarrier(0xf);
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047510e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004751c8 body_start=004751c8 body_end=0047522f name=FUN_004751c8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+uint FUN_004751c8(uint *param_1,uint *param_2,uint param_3)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint in_r12;
+  uint uVar3;
+  bool bVar4;
+  
+  uVar1 = 0;
+  while (((uint)param_1 & 3) != 0) {
+    bVar4 = param_3 != 0;
+    param_3 = param_3 - 1;
+    uVar2 = param_3;
+    if (bVar4) {
+      in_r12 = (uint)(byte)*param_2;
+      uVar1 = (byte)*param_1 - in_r12;
+      uVar2 = uVar1;
+      param_2 = (uint *)((int)param_2 + 1);
+      param_1 = (uint *)((int)param_1 + 1);
+    }
+    if (uVar2 != 0) {
+      return uVar1;
+    }
+  }
+  if (((uint)param_2 & 3) == 0) {
+    do {
+      uVar3 = param_3;
+      uVar2 = uVar3 - 4;
+      bVar4 = uVar2 == 0;
+      if (3 < uVar3) {
+        uVar1 = *param_1;
+        in_r12 = *param_2;
+        bVar4 = uVar1 == in_r12;
+        param_2 = param_2 + 1;
+        param_1 = param_1 + 1;
+      }
+      param_3 = uVar2;
+    } while (bVar4);
+    param_3 = uVar3;
+    if (uVar2 < 0xfffffffc) {
+      uVar1 = uVar1 << 0x18 | (uVar1 >> 8 & 0xff) << 0x10 | (uVar1 >> 0x10 & 0xff) << 8 |
+              uVar1 >> 0x18;
+      uVar3 = in_r12 << 0x18 | (in_r12 >> 8 & 0xff) << 0x10 | (in_r12 >> 0x10 & 0xff) << 8 |
+              in_r12 >> 0x18;
+      uVar2 = uVar1 - uVar3;
+      bVar4 = uVar2 != 0;
+      if (uVar1 < uVar3) {
+        uVar2 = 0xffffffff;
+      }
+      if (uVar1 >= uVar3 && bVar4) {
+        uVar2 = 1;
+      }
+      return uVar2;
+    }
+  }
+  do {
+    uVar3 = param_3;
+    uVar2 = uVar3 - 1;
+    if (uVar3 != 0) {
+      uVar1 = (uint)(byte)*param_1 - (uint)(byte)*param_2;
+      uVar2 = uVar1;
+      param_2 = (uint *)((int)param_2 + 1);
+      param_1 = (uint *)((int)param_1 + 1);
+    }
+    param_3 = uVar3 - 1;
+  } while (uVar2 == 0);
+  if (uVar3 == 0) {
+    uVar1 = 0;
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004751c8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475230 body_start=00475230 body_end=00475285 name=FUN_00475230 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00475230(undefined4 param_1,undefined4 param_2,uint param_3)
+
+{
+  int *piVar1;
+  int iVar2;
+  
+  piVar1 = DAT_00475288;
+  if ((*DAT_00475288 + 0x400000U < param_3) || (param_3 < 0x400000)) {
+    iVar2 = 6;
+  }
+  else if (DAT_00475288[2] == 8) {
+    iVar2 = 5;
+  }
+  else {
+    param_3 = param_3 | 3;
+    iVar2 = DAT_00475288[2];
+    DAT_00475288[2] = iVar2 + 1;
+    iVar2 = FUN_004d09d8(param_1,&stack0xfffffff8,piVar1[1] + iVar2 * 4,1);
+    if (iVar2 == 0) {
+      *DAT_0047528c = *DAT_0047528c | 1;
+    }
+  }
+  return CONCAT44(param_3,iVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475230 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475524 body_start=00475524 body_end=0047564d name=FUN_00475524 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+int FUN_00475524(void)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined4 in_r3;
+  int iVar4;
+  int local_18;
+  undefined4 uStack_14;
+  
+  iVar1 = DAT_00475d70;
+  iVar4 = 0;
+  local_18 = 0;
+  uStack_14 = in_r3;
+  if (*(int *)(DAT_00475d70 + 0xc) == 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(2,DAT_00475d6c,DAT_00475d68,DAT_00475ee8,0x10f,DAT_00475ee4);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_00475eec,DAT_00475eec);
+    }
+    iVar4 = 0;
+  }
+  else {
+    uVar2 = FUN_00449bc8(*(undefined4 *)(DAT_00475d70 + 0xc));
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475ee8,0x114,DAT_00475ef0,uVar2);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10400000,DAT_00475ef4,DAT_00475ef4,uVar2);
+    }
+    while ((iVar3 = FUN_00449b3c(*(undefined4 *)(iVar1 + 0xc),&local_18,0,0), iVar3 == 0 &&
+           (local_18 != 0))) {
+      FUN_00474d16(local_18);
+      local_18 = 0;
+      iVar4 = iVar4 + 1;
+    }
+    uVar2 = FUN_00449bc8(*(undefined4 *)(iVar1 + 0xc));
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475ee8,0x123,DAT_00475ef8,iVar4,uVar2);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10800000,DAT_00475efc,DAT_00475efc,iVar4,uVar2);
+    }
+  }
+  return iVar4;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475524 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047564e body_start=0047564e body_end=00475a37 name=FUN_0047564e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4
+FUN_0047564e(byte param_1,undefined1 param_2,undefined1 param_3,undefined1 param_4,int param_5,
+            ushort param_6)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  undefined4 *local_28;
+  
+  iVar1 = DAT_00475d70;
+  if (param_5 == 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(1,DAT_00475d6c,DAT_00475d68,DAT_00475f04,0x131,DAT_00475f00);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00475f08,DAT_00475f08);
+    }
+    uVar2 = 0xffffffff;
+  }
+  else if (*(int *)(DAT_00475d70 + 0xc) == 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(1,DAT_00475d6c,DAT_00475d68,DAT_00475f04,0x136,DAT_00475f0c);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00475f10,DAT_00475f10);
+    }
+    uVar2 = 0xffffffff;
+  }
+  else {
+    if ((param_1 == 1) && (iVar3 = FUN_004780f8(), iVar3 == 0)) {
+      iVar3 = FUN_0043d0ce();
+      if (iVar3 << 0x1e < 0) {
+        FUN_0043d574(2,DAT_00475d6c,DAT_00475d68,DAT_00475f04,0x13b,DAT_00475f14);
+      }
+      iVar3 = FUN_0043d0ce();
+      if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+        FUN_0043ce9e(0x8000000,DAT_00475f18,DAT_00475f18);
+      }
+      FUN_00478160();
+    }
+    local_28 = (undefined4 *)0x0;
+    local_28 = (undefined4 *)FUN_00474cd2(param_6 + 0xe & 0xfffffffc);
+    if (local_28 == (undefined4 *)0x0) {
+      iVar1 = FUN_0043d0ce();
+      if (iVar1 << 0x1e < 0) {
+        FUN_0043d574(1,DAT_00475d6c,DAT_00475d68,DAT_00475f04,0x144,DAT_00475f1c);
+      }
+      iVar1 = FUN_0043d0ce();
+      if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,DAT_00475f20,DAT_00475f20);
+      }
+      uVar2 = 0xffffffff;
+    }
+    else {
+      uVar2 = 0;
+      if (param_1 == 0) {
+        *local_28 = 1;
+        local_28[1] = param_6 + 3;
+        *(undefined1 *)(local_28 + 2) = param_2;
+        *(undefined1 *)((int)local_28 + 9) = param_3;
+        *(undefined1 *)((int)local_28 + 10) = param_4;
+        FUN_00439be4((int)local_28 + 0xb,param_5,param_6);
+      }
+      else if (param_1 == 2) {
+        *local_28 = 4;
+        local_28[1] = param_6 + 3;
+        *(undefined1 *)(local_28 + 2) = param_2;
+        *(undefined1 *)((int)local_28 + 9) = param_3;
+        *(undefined1 *)((int)local_28 + 10) = param_4;
+        FUN_00439be4((int)local_28 + 0xb,param_5,param_6);
+      }
+      else if (param_1 < 2) {
+        *local_28 = 2;
+        local_28[1] = (uint)param_6;
+        FUN_00439be4(local_28 + 2,param_5,param_6);
+      }
+      else if (param_1 == 3) {
+        *local_28 = 8;
+        local_28[1] = param_6 + 3;
+        *(undefined1 *)(local_28 + 2) = param_2;
+        *(undefined1 *)((int)local_28 + 9) = param_3;
+        *(undefined1 *)((int)local_28 + 10) = param_4;
+        FUN_00439be4((int)local_28 + 0xb,param_5,param_6);
+      }
+      else {
+        iVar3 = FUN_0043d0ce();
+        if (iVar3 << 0x1e < 0) {
+          FUN_0043d574(1,DAT_00475d6c,DAT_00475d68,DAT_00475f04,0x173,DAT_00475f24,param_1);
+        }
+        iVar3 = FUN_0043d0ce();
+        if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+          FUN_0043ce9e(0x4400000,DAT_00475f28,DAT_00475f28,param_1);
+        }
+      }
+      uVar4 = FUN_00449bc8(*(undefined4 *)(iVar1 + 0xc));
+      uVar5 = FUN_00449bbc(*(undefined4 *)(iVar1 + 0xc));
+      if (param_1 != 1) {
+        iVar3 = FUN_0043d0ce();
+        if (iVar3 << 0x1e < 0) {
+          FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475f04,0x17b,DAT_00475f2c,uVar4,uVar5);
+        }
+        iVar3 = FUN_0043d0ce();
+        if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+          FUN_0043ce9e(0x10800000,DAT_00475f30,DAT_00475f30,uVar4,uVar5);
+        }
+      }
+      if ((param_1 == 1) && (uVar5 >> 1 <= uVar4)) {
+        iVar1 = FUN_0043d0ce();
+        if (iVar1 << 0x1e < 0) {
+          FUN_0043d574(2,DAT_00475d6c,DAT_00475d68,DAT_00475f04,0x181,DAT_00475f34,uVar4,uVar5);
+        }
+        iVar1 = FUN_0043d0ce();
+        if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+          FUN_0043ce9e(0x8800000,DAT_00475f38,DAT_00475f38,uVar4,uVar5);
+        }
+        FUN_00474d16(local_28);
+        uVar2 = 0;
+      }
+      else {
+        iVar3 = FUN_00449abe(*(undefined4 *)(iVar1 + 0xc),&local_28,0,500);
+        if (iVar3 == 0) {
+          FUN_00449238(*(undefined4 *)(iVar1 + 8),0x400000);
+        }
+        else {
+          iVar1 = FUN_0043d0ce();
+          if (iVar1 << 0x1e < 0) {
+            FUN_0043d574(1,DAT_00475d6c,DAT_00475d68,DAT_00475f04,0x189,DAT_00475f3c,iVar3);
+          }
+          iVar1 = FUN_0043d0ce();
+          if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+            FUN_0043ce9e(0x4400000,DAT_00475f40,DAT_00475f40,iVar3);
+          }
+          FUN_00474d16(local_28);
+          uVar2 = 0xffffffff;
+        }
+      }
+    }
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047564e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475a38 body_start=00475a38 body_end=00475aa5 name=FUN_00475a38 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00475a38(undefined1 param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar3 = param_2;
+  uVar4 = param_4;
+  iVar1 = FUN_004487ac();
+  if (iVar1 == 0) {
+    uVar2 = FUN_0047564e(0,0,param_1,param_2 & 0xff,param_3,param_4 & 0xffff,uVar4);
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    param_3 = uVar3;
+    if (iVar1 << 0x1e < 0) {
+      param_3 = 0x198;
+      FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475f48,0x198,DAT_00475f44);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00475f4c,DAT_00475f4c);
+    }
+    uVar2 = 0;
+  }
+  return CONCAT44(param_3,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475a38 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475aa6 body_start=00475aa6 body_end=00475b13 name=FUN_00475aa6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00475aa6(undefined1 param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar3 = param_2;
+  uVar4 = param_4;
+  iVar1 = FUN_004487ac();
+  if (iVar1 == 0) {
+    uVar2 = FUN_0047564e(0,1,param_1,param_2 & 0xff,param_3,param_4 & 0xffff,uVar4);
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    param_3 = uVar3;
+    if (iVar1 << 0x1e < 0) {
+      param_3 = 0x1a2;
+      FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475f54,0x1a2,DAT_00475f50);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00475f58,DAT_00475f58);
+    }
+    uVar2 = 0;
+  }
+  return CONCAT44(param_3,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475aa6 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475b14 body_start=00475b14 body_end=00475c19 name=FUN_00475b14 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+/* WARNING: Removing unreachable block (ram,0x00475b72) */
+/* WARNING: Removing unreachable block (ram,0x00475b7a) */
+/* WARNING: Removing unreachable block (ram,0x00475b94) */
+/* WARNING: Removing unreachable block (ram,0x00475b9c) */
+/* WARNING: Removing unreachable block (ram,0x00475ba4) */
+/* WARNING: Removing unreachable block (ram,0x00475bb2) */
+
+undefined8 FUN_00475b14(undefined1 param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar3 = param_2;
+  uVar4 = param_4;
+  iVar1 = FUN_004487ac();
+  if (iVar1 == 0) {
+    iVar1 = FUN_0046f258();
+    if (iVar1 == 0) {
+      uVar2 = FUN_0047564e(0,0,param_1,param_2 & 0xff,param_3,param_4 & 0xffff,uVar4);
+    }
+    else {
+      iVar1 = FUN_0043d0ce();
+      param_3 = uVar3;
+      if (iVar1 << 0x1e < 0) {
+        param_3 = 0x1b9;
+        FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475f60,0x1b9,DAT_00475f70);
+      }
+      iVar1 = FUN_0043d0ce();
+      if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+        FUN_0043ce9e(0x10000000,DAT_00475f74,DAT_00475f74);
+      }
+      uVar2 = 8;
+    }
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    param_3 = uVar3;
+    if (iVar1 << 0x1e < 0) {
+      param_3 = 0x1ac;
+      FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475f60,0x1ac,DAT_00475f5c);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00475f64,DAT_00475f64);
+    }
+    uVar2 = 0;
+  }
+  return CONCAT44(param_3,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475b14 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475c1a body_start=00475c1a body_end=00475d5d name=FUN_00475c1a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+/* WARNING: Removing unreachable block (ram,0x00475c78) */
+/* WARNING: Removing unreachable block (ram,0x00475c80) */
+/* WARNING: Removing unreachable block (ram,0x00475c9a) */
+/* WARNING: Removing unreachable block (ram,0x00475ca2) */
+/* WARNING: Removing unreachable block (ram,0x00475caa) */
+/* WARNING: Removing unreachable block (ram,0x00475cb6) */
+
+undefined8 FUN_00475c1a(undefined1 param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar3 = param_2;
+  uVar4 = param_4;
+  iVar1 = FUN_004487ac();
+  if (iVar1 == 0) {
+    iVar1 = FUN_0046f258();
+    if (iVar1 == 0) {
+      iVar1 = FUN_0046f1d0();
+      if (iVar1 == 0) {
+        iVar1 = FUN_0043d0ce();
+        param_3 = uVar3;
+        if (iVar1 << 0x1e < 0) {
+          param_3 = 0x1d5;
+          FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475f7c,0x1d5,DAT_00475f8c);
+        }
+        iVar1 = FUN_0043d0ce();
+        if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+          FUN_0043ce9e(0x10000000,DAT_00475f90,DAT_00475f90);
+        }
+        uVar2 = 8;
+      }
+      else {
+        uVar2 = FUN_0047564e(0,1,param_1,param_2 & 0xff,param_3,param_4 & 0xffff,uVar4);
+      }
+    }
+    else {
+      iVar1 = FUN_0043d0ce();
+      param_3 = uVar3;
+      if (iVar1 << 0x1e < 0) {
+        param_3 = 0x1d0;
+        FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475f7c,0x1d0,DAT_00475f84);
+      }
+      iVar1 = FUN_0043d0ce();
+      if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+        FUN_0043ce9e(0x10000000,DAT_00475f88,DAT_00475f88);
+      }
+      uVar2 = 8;
+    }
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    param_3 = uVar3;
+    if (iVar1 << 0x1e < 0) {
+      param_3 = 0x1c4;
+      FUN_0043d574(4,DAT_00475d6c,DAT_00475d68,DAT_00475f7c,0x1c4,DAT_00475f78);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00475f80,DAT_00475f80);
+    }
+    uVar2 = 0;
+  }
+  return CONCAT44(param_3,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475c1a (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475d78 body_start=00475d78 body_end=00475dd7 name=FUN_00475d78 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00475d78(uint param_1,uint param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  
+  uVar3 = param_2;
+  iVar1 = FUN_004487ac();
+  if (iVar1 == 0) {
+    uVar2 = FUN_0047564e(1,1,0,0,param_1,param_2 & 0xffff,param_4);
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    param_1 = uVar3;
+    if (iVar1 << 0x1e < 0) {
+      param_1 = 0x1e9;
+      FUN_0043d574(4,DAT_00475f98,DAT_00475f94,DAT_00475fa0,0x1e9,DAT_00475f9c);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00475fa4,DAT_00475fa4);
+    }
+    uVar2 = 0;
+  }
+  return CONCAT44(param_1,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475d78 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475de0 body_start=00475de0 body_end=00475df9 name=FUN_00475de0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00475de0(undefined1 param_1,undefined1 param_2,undefined4 param_3,undefined2 param_4)
+
+{
+  FUN_0047564e(3,0,param_1,param_2,param_3,param_4);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475de0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475dfa body_start=00475dfa body_end=00475e61 name=FUN_00475dfa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00475dfa(undefined1 param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar3 = param_2;
+  uVar4 = param_4;
+  iVar1 = FUN_004487ac();
+  if (iVar1 == 0) {
+    uVar2 = FUN_0047564e(2,0,param_1,param_2 & 0xff,param_3,param_4 & 0xffff,uVar4);
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    param_3 = uVar3;
+    if (iVar1 << 0x1e < 0) {
+      param_3 = 0x1fd;
+      FUN_0043d574(4,DAT_00475f98,DAT_00475f94,DAT_00475fac,0x1fd,DAT_00475fa8);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,PTR_s__ble_msgtx_OTA_is_going__efs_tx_f_00475fb0,
+                   PTR_s__ble_msgtx_OTA_is_going__efs_tx_f_00475fb0);
+    }
+    uVar2 = 0;
+  }
+  return CONCAT44(param_3,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475dfa (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475e6c body_start=00475e6c body_end=00475ed3 name=FUN_00475e6c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00475e6c(undefined1 param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar3 = param_2;
+  uVar4 = param_4;
+  iVar1 = FUN_004487ac();
+  if (iVar1 == 0) {
+    uVar2 = FUN_0047564e(2,1,param_1,param_2 & 0xff,param_3,param_4 & 0xffff,uVar4);
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    param_3 = uVar3;
+    if (iVar1 << 0x1e < 0) {
+      param_3 = 0x207;
+      FUN_0043d574(4,DAT_00475f98,DAT_00475f94,PTR_s_Thread_MsgEfsNotifyByBle_00475fb8,0x207,
+                   PTR_s_OTA_is_going__efs_notify_failed_00475fb4);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,PTR_s__ble_msgtx_OTA_is_going__efs_not_00475fbc,
+                   PTR_s__ble_msgtx_OTA_is_going__efs_not_00475fbc);
+    }
+    uVar2 = 8;
+  }
+  return CONCAT44(param_3,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475e6c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475fc0 body_start=00475fc0 body_end=00475fe1 name=FUN_00475fc0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00475fc0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 uStack_c;
+  undefined4 uStack_8;
+  undefined4 uStack_4;
+  
+  uStack_c = param_1;
+  uStack_8 = param_3;
+  uStack_4 = param_4;
+  FUN_004d1638((int)&DAT_00475fe4 + DAT_00475fe4,&uStack_c,param_2,&stack0xffffffec,0);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475fc0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00475fe8 body_start=00475fe8 body_end=004761d1 name=FUN_00475fe8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00475fe8(void)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 in_r3;
+  int iVar4;
+  undefined4 local_60 [4];
+  undefined1 auStack_50 [52];
+  undefined4 uStack_1c;
+  
+  uStack_1c = in_r3;
+  FUN_00439c04(local_60,DAT_00476454,0x10);
+  iVar4 = 0;
+  do {
+    uVar1 = DAT_00476474;
+    if (3 < iVar4) {
+      return 0;
+    }
+    iVar2 = FUN_004cfc66(DAT_00476474,auStack_50,local_60[iVar4]);
+    if (iVar2 == -2) {
+      iVar2 = FUN_004cfc5c(uVar1,local_60[iVar4]);
+      if (iVar2 == 0) {
+        iVar2 = FUN_0043d0ce();
+        if (iVar2 << 0x1e < 0) {
+          FUN_0043d574(4,DAT_00476464,DAT_00476460,DAT_0047645c,0x51,DAT_00476458,local_60[iVar4]);
+        }
+        iVar2 = FUN_0043d0ce();
+        if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+          FUN_0043ce9e(0x10400000,DAT_00476468,DAT_00476468,local_60[iVar4]);
+        }
+      }
+      else if (iVar2 == -0x11) {
+        iVar2 = FUN_0043d0ce();
+        if (iVar2 << 0x1e < 0) {
+          FUN_0043d574(4,DAT_00476464,DAT_00476460,DAT_0047645c,0x53,DAT_00476478,local_60[iVar4]);
+        }
+        iVar2 = FUN_0043d0ce();
+        if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+          FUN_0043ce9e(0x10400000,DAT_0047647c,DAT_0047647c,local_60[iVar4]);
+        }
+      }
+      else {
+        iVar3 = FUN_0043d0ce();
+        if (iVar3 << 0x1e < 0) {
+          FUN_0043d574(2,DAT_00476464,DAT_00476460,DAT_0047645c,0x55,DAT_00476480,local_60[iVar4],
+                       iVar2);
+        }
+        iVar3 = FUN_0043d0ce();
+        if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+          FUN_0043ce9e(0x8800000,DAT_00476484,DAT_00476484,local_60[iVar4],iVar2);
+        }
+      }
+    }
+    else {
+      if (iVar2 != 0) {
+        iVar3 = FUN_0043d0ce();
+        if (iVar3 << 0x1e < 0) {
+          FUN_0043d574(2,DAT_00476464,DAT_00476460,DAT_0047645c,0x5c,DAT_00476488,local_60[iVar4],
+                       iVar2);
+        }
+        iVar3 = FUN_0043d0ce();
+        if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+          FUN_0043ce9e(0x8800000,DAT_0047648c,DAT_0047648c,local_60[iVar4],iVar2);
+        }
+        return 0xffffffff;
+      }
+      FUN_004cfcf8(uVar1,auStack_50);
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        FUN_0043d574(4,DAT_00476464,DAT_00476460,DAT_0047645c,0x5a,DAT_0047646c,local_60[iVar4]);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x10400000,DAT_00476470,DAT_00476470,local_60[iVar4]);
+      }
+    }
+    iVar4 = iVar4 + 1;
+  } while( true );
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00475fe8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004761d2 body_start=004761d2 body_end=0047627d name=FUN_004761d2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_004761d2(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  
+  uVar4 = DAT_00476474;
+  FUN_004cfa6c(DAT_00476474);
+  uVar1 = DAT_00476490;
+  FUN_004cfa58(uVar4,DAT_00476490);
+  iVar2 = FUN_004cfa62(uVar4,uVar1);
+  if (iVar2 == 0) {
+    iVar2 = FUN_00475fe8();
+    if (iVar2 == 0) {
+      uVar4 = 0;
+    }
+    else {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        param_2 = 0x6f;
+        FUN_0043d574(2,DAT_00476464,DAT_00476460,DAT_00476498,0x6f,DAT_004764a0);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x8000000,DAT_004764a4);
+      }
+      uVar4 = 9;
+    }
+  }
+  else {
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      param_2 = 0x6b;
+      FUN_0043d574(2,DAT_00476464,DAT_00476460,DAT_00476498,0x6b,DAT_00476494,iVar2);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8400000,DAT_0047649c,DAT_0047649c,iVar2);
+    }
+    uVar4 = 9;
+  }
+  return CONCAT44(param_2,uVar4);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004761d2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047627e body_start=0047627e body_end=004763b7 name=FUN_0047627e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_0047627e(void)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  int iVar3;
+  int iVar4;
+  undefined4 in_r3;
+  int local_14;
+  undefined4 uStack_10;
+  
+  uVar2 = DAT_00476490;
+  uVar1 = DAT_00476474;
+  uStack_10 = in_r3;
+  iVar3 = FUN_004cfa62(DAT_00476474,DAT_00476490);
+  if (iVar3 != 0) {
+    FUN_004cfa58(uVar1,uVar2);
+    iVar3 = FUN_004cfa62(uVar1,uVar2);
+    if (iVar3 != 0) {
+      iVar4 = FUN_0043d0ce();
+      if (iVar4 << 0x1e < 0) {
+        FUN_0043d574(2,DAT_00476464,DAT_00476460,DAT_004764ac,0x7f,DAT_004764a8,iVar3);
+      }
+      iVar4 = FUN_0043d0ce();
+      if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+        FUN_0043ce9e(0x8400000,DAT_004764b0,DAT_004764b0,iVar3);
+      }
+      return 9;
+    }
+  }
+  iVar3 = FUN_00475fe8();
+  if (iVar3 != 0) {
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      FUN_0043d574(2,DAT_00476464,DAT_00476460,DAT_004764ac,0x86,DAT_004764b4);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8000000,DAT_004764b8);
+    }
+    FUN_004761d2();
+  }
+  *DAT_004764bc = 1;
+  uVar2 = DAT_004764c0;
+  local_14 = 0;
+  FUN_004cfa94(uVar1,DAT_004764c0,DAT_004764c4,0x103);
+  FUN_004cfb40(uVar1,uVar2,&local_14,4);
+  local_14 = local_14 + 1;
+  FUN_004cfc24(uVar1,uVar2);
+  FUN_004cfb7c(uVar1,uVar2,&local_14,4);
+  FUN_004cfad0(uVar1,uVar2);
+  iVar3 = FUN_0043d0ce();
+  if (iVar3 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_00476464,DAT_00476460,DAT_004764ac,0x9a,DAT_004764c8,local_14);
+  }
+  iVar3 = FUN_0043d0ce();
+  if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,PTR_s__file_system_boot_count___d_004764cc,
+                 PTR_s__file_system_boot_count___d_004764cc,local_14);
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047627e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004763b8 body_start=004763b8 body_end=004763ef name=FUN_004763b8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8
+FUN_004763b8(undefined4 param_1,int param_2,int param_3,undefined4 param_4,undefined4 param_5)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  int iVar4;
+  
+  iVar3 = param_3 + param_2 * 0x1000 + 0x1400000;
+  iVar4 = param_2;
+  iVar1 = FUN_00471020(iVar3,param_4,param_5,param_4,param_2,param_3,param_4);
+  if (iVar1 == 0) {
+    uVar2 = 0;
+  }
+  else {
+    FUN_004733ee(PTR_s_lfs_READ_fail__block__u__off__u__004764d0,param_2,param_3,param_5,iVar3,iVar1
+                );
+    uVar2 = 0xfffffffb;
+    iVar4 = iVar3;
+  }
+  return CONCAT44(iVar4,uVar2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004763b8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004764e0 body_start=004764e0 body_end=0047667d name=FUN_004764e0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_004764e0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined *param_4)
+
+{
+  int *piVar1;
+  int iVar2;
+  undefined4 local_10;
+  undefined *local_c;
+  
+  piVar1 = DAT_00476bf0;
+  local_10 = param_3;
+  local_c = param_4;
+  if (*DAT_00476bf0 == 0) {
+    iVar2 = FUN_00449a32(0xf,8,PTR_DAT_00476bf4);
+    *piVar1 = iVar2;
+    if (*piVar1 == 0) {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        local_c = PTR_s__fw_evt_loop_init_osMessageQueue_00476bf8;
+        local_10 = 0x58;
+        FUN_0043d574(1,DAT_00476c04,DAT_00476c00,PTR_s_fw_evt_loop_init_00476bfc);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,DAT_00476c08);
+      }
+    }
+  }
+  piVar1 = DAT_00476c0c;
+  if (*DAT_00476c0c == 0) {
+    iVar2 = FUN_004493b0(0x4767a9,0,0,PTR_DAT_00476c10);
+    *piVar1 = iVar2;
+    if (*piVar1 == 0) {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        local_c = PTR_s__fw_evt_loop_init_osTimerNew__fa_00476c14;
+        local_10 = 0x61;
+        FUN_0043d574(1,DAT_00476c04,DAT_00476c00,PTR_s_fw_evt_loop_init_00476bfc);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,PTR_s__evtloop__fw_evt_loop_init_osTim_00476c18,
+                     PTR_s__evtloop__fw_evt_loop_init_osTim_00476c18);
+      }
+    }
+  }
+  piVar1 = DAT_00476c1c;
+  if (*DAT_00476c1c == 0) {
+    iVar2 = FUN_0044971c(PTR_DAT_00476c20);
+    *piVar1 = iVar2;
+    if (*piVar1 == 0) {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        local_c = PTR_s_Warning__failed_to_Create_fw_evt_00476c24;
+        local_10 = 0x6a;
+        FUN_0043d574(1,DAT_00476c04,DAT_00476c00,PTR_s_fw_evt_loop_init_00476bfc);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,PTR_s__evtloop_Warning__failed_to_Crea_00476c28,
+                     PTR_s__evtloop_Warning__failed_to_Crea_00476c28);
+      }
+    }
+  }
+  piVar1 = DAT_00476c2c;
+  if (*DAT_00476c2c != 0) {
+    FUN_004491fe(*DAT_00476c2c);
+    *piVar1 = 0;
+  }
+  if (*piVar1 == 0) {
+    iVar2 = FUN_004490e2(&LAB_00476680_1,0,PTR_DAT_00476c30);
+    *piVar1 = iVar2;
+    if (*piVar1 == 0) {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        local_c = PTR_s__fw_evt_loop_init_osThreadNew__f_00476c34;
+        local_10 = 0x79;
+        FUN_0043d574(1,DAT_00476c04,DAT_00476c00,PTR_s_fw_evt_loop_init_00476bfc);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,PTR_s__evtloop__fw_evt_loop_init_osThr_00476c38,
+                     PTR_s__evtloop__fw_evt_loop_init_osThr_00476c38);
+      }
+    }
+  }
+  return CONCAT44(local_c,local_10);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004764e0 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004766ec body_start=004766ec body_end=004767a7 name=FUN_004766ec (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_004766ec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined4 local_14;
+  undefined4 local_10;
+  undefined4 uStack_c;
+  
+  uStack_c = param_4;
+  if (*DAT_00476c2c == 0) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476c4c,0x96,DAT_00476c48);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00476c50,DAT_00476c50);
+    }
+  }
+  else if ((*DAT_00476bf0 != 0) &&
+          (local_14 = param_2, local_10 = param_1,
+          iVar1 = FUN_00449abe(*DAT_00476bf0,&local_14,0,param_3), iVar1 != 0)) {
+    iVar2 = FUN_0043d0ce();
+    if (iVar2 << 0x1e < 0) {
+      FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476c4c,0xa0,DAT_00476c54,iVar1);
+    }
+    iVar2 = FUN_0043d0ce();
+    if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4400000,DAT_00476c58,DAT_00476c58,iVar1);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004766ec (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004767a8 body_start=004767a8 body_end=0047697d name=FUN_004767a8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_004767a8(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  uint *puVar2;
+  int iVar3;
+  int iVar4;
+  undefined4 uVar5;
+  uint uVar6;
+  uint uVar7;
+  uint uVar8;
+  
+  uVar6 = 0xffffffff;
+  uVar8 = param_1;
+  FUN_004420d0(0);
+  puVar2 = DAT_00476c5c;
+  uVar7 = *DAT_00476c5c;
+  FUN_004420e8();
+  puVar1 = DAT_00476c1c;
+  if ((param_1 & 0xff000000) == 0xff000000) {
+    uVar7 = param_1 & 0xffffff;
+  }
+  iVar4 = FUN_004497b6(*DAT_00476c1c,0xffffffff);
+  if (iVar4 != 0) {
+    iVar4 = FUN_0043d0ce();
+    if (iVar4 << 0x1e < 0) {
+      uVar8 = 0xb8;
+      param_2 = DAT_00476c60;
+      FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476c64,0xb8,DAT_00476c60,param_3,param_4);
+    }
+    iVar4 = FUN_0043d0ce();
+    if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00476c68,DAT_00476c68);
+    }
+  }
+  for (iVar4 = 0; iVar3 = DAT_00476c6c, iVar4 < 0x40; iVar4 = iVar4 + 1) {
+    if (*(int *)(DAT_00476c6c + iVar4 * 4) != 0) {
+      if (uVar7 < *(uint *)(DAT_00476c6c + iVar4 * 4 + 0x200)) {
+        *(uint *)(DAT_00476c6c + iVar4 * 4 + 0x200) =
+             *(int *)(DAT_00476c6c + iVar4 * 4 + 0x200) - uVar7;
+      }
+      else {
+        *(undefined4 *)(DAT_00476c6c + iVar4 * 4 + 0x200) = 0;
+      }
+      if (*(int *)(iVar3 + iVar4 * 4 + 0x200) == 0) {
+        uVar5 = *(undefined4 *)(iVar3 + iVar4 * 4);
+        *(undefined4 *)(iVar3 + iVar4 * 4) = 0;
+        FUN_004766ec(uVar5,*(undefined4 *)(iVar3 + iVar4 * 4 + 0x100),1);
+      }
+    }
+  }
+  for (iVar4 = 0; iVar4 < 0x40; iVar4 = iVar4 + 1) {
+    if ((*(int *)(DAT_00476c6c + iVar4 * 4) != 0) &&
+       (*(uint *)(DAT_00476c6c + iVar4 * 4 + 0x200) < uVar6)) {
+      uVar6 = *(uint *)(DAT_00476c6c + iVar4 * 4 + 0x200);
+    }
+  }
+  iVar4 = FUN_0044981c(*puVar1);
+  if (iVar4 != 0) {
+    iVar4 = FUN_0043d0ce();
+    if (iVar4 << 0x1e < 0) {
+      uVar8 = 0xd5;
+      param_2 = DAT_00476c70;
+      FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476c64);
+    }
+    iVar4 = FUN_0043d0ce();
+    if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00476c74);
+    }
+  }
+  if ((uVar6 == 0x7fffffff) || (uVar6 == 0)) goto LAB_0047697a;
+  FUN_004420d0();
+  *puVar2 = uVar6;
+  FUN_004420e8();
+  uVar7 = FUN_00449498(*DAT_00476c0c,uVar6);
+  if (uVar7 != 0) {
+    iVar4 = FUN_0043d0ce();
+    if (iVar4 << 0x1e < 0) {
+      uVar8 = 0xe1;
+      param_2 = DAT_00476c78;
+      FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476c64,0xe1,DAT_00476c78,uVar6,uVar7);
+    }
+    iVar4 = FUN_0043d0ce();
+    if (-1 < iVar4 << 0x1f) {
+      iVar4 = FUN_0043d0ce();
+      if (-1 < iVar4 << 0x1d) goto LAB_00476972;
+    }
+    FUN_0043ce9e(0x4800000,DAT_00476c7c,DAT_00476c7c,uVar6);
+    uVar8 = uVar7;
+  }
+LAB_00476972:
+  uVar5 = FUN_004490cc();
+  *DAT_00476c80 = uVar5;
+LAB_0047697a:
+  return CONCAT44(param_2,uVar8);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004767a8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047697e body_start=0047697e body_end=00476acd name=FUN_0047697e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0047697e(undefined4 param_1,undefined4 param_2,uint param_3,undefined4 param_4)
+
+{
+  undefined4 *puVar1;
+  int *piVar2;
+  int iVar3;
+  int iVar4;
+  uint unaff_r4;
+  int iVar5;
+  undefined4 local_28;
+  undefined4 local_24;
+  
+  piVar2 = DAT_00476c2c;
+  local_28 = param_3;
+  local_24 = param_4;
+  if (*DAT_00476c2c == 0) {
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      local_24 = DAT_00476c84;
+      local_28 = 0xef;
+      FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476c88);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00476c8c,DAT_00476c8c);
+    }
+    do {
+      FUN_00449376(10);
+    } while (*piVar2 == 0);
+  }
+  puVar1 = DAT_00476c1c;
+  if (param_3 < 2) {
+    FUN_004766ec(param_1,param_2,0xffffffff);
+  }
+  else {
+    iVar3 = FUN_004497b6(*DAT_00476c1c,0xffffffff);
+    if (iVar3 != 0) {
+      iVar3 = FUN_0043d0ce();
+      if (iVar3 << 0x1e < 0) {
+        local_24 = DAT_00476c90;
+        local_28 = 0x100;
+        FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476c88);
+      }
+      iVar3 = FUN_0043d0ce();
+      if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,DAT_00476c94,DAT_00476c94);
+      }
+    }
+    iVar3 = DAT_00476c6c;
+    for (iVar5 = 0; (iVar5 < 0x40 && (*(int *)(DAT_00476c6c + iVar5 * 4) != 0)); iVar5 = iVar5 + 1)
+    {
+    }
+    if (iVar5 < 0x40) {
+      *(undefined4 *)(DAT_00476c6c + iVar5 * 4) = param_1;
+      *(undefined4 *)(iVar3 + iVar5 * 4 + 0x100) = param_2;
+      iVar4 = FUN_004490cc();
+      unaff_r4 = iVar4 - *DAT_00476c80;
+      *(uint *)(iVar3 + iVar5 * 4 + 0x200) = unaff_r4 + param_3;
+    }
+    iVar3 = FUN_0044981c(*puVar1);
+    if (iVar3 != 0) {
+      iVar3 = FUN_0043d0ce();
+      if (iVar3 << 0x1e < 0) {
+        local_24 = DAT_00476c98;
+        local_28 = 0x110;
+        FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476c88);
+      }
+      iVar3 = FUN_0043d0ce();
+      if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,DAT_00476c9c,DAT_00476c9c);
+      }
+    }
+    if (iVar5 < 0x40) {
+      FUN_004494d8(*DAT_00476c0c);
+      FUN_004767a8(unaff_r4 | 0xff000000);
+    }
+  }
+  return CONCAT44(local_24,local_28);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047697e (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00476ace body_start=00476ace body_end=00476bef name=FUN_00476ace (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_00476ace(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  uint uVar3;
+  int iVar4;
+  byte bVar5;
+  
+  puVar1 = DAT_00476c1c;
+  bVar5 = 0;
+  if (*DAT_00476c2c == 0) {
+    iVar2 = FUN_0043d0ce();
+    if (iVar2 << 0x1e < 0) {
+      param_3 = 0x11e;
+      FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476ca4,0x11e,DAT_00476ca0);
+    }
+    iVar2 = FUN_0043d0ce();
+    if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00476ca8,DAT_00476ca8);
+    }
+    uVar3 = 0;
+  }
+  else {
+    iVar2 = FUN_004497b6(*DAT_00476c1c,0xffffffff);
+    if (iVar2 != 0) {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        param_3 = 0x124;
+        FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476ca4,0x124,DAT_00476cac);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,DAT_00476cb0);
+      }
+    }
+    for (iVar2 = 0; iVar2 < 0x40; iVar2 = iVar2 + 1) {
+      if (param_1 == *(int *)(DAT_00476c6c + iVar2 * 4)) {
+        *(undefined4 *)(DAT_00476c6c + iVar2 * 4) = 0;
+        bVar5 = 1;
+      }
+    }
+    iVar2 = FUN_0044981c(*puVar1);
+    if (iVar2 != 0) {
+      iVar2 = FUN_0043d0ce();
+      if (iVar2 << 0x1e < 0) {
+        param_3 = 0x12e;
+        FUN_0043d574(1,DAT_00476c04,DAT_00476c00,DAT_00476ca4,0x12e,DAT_00476cb4);
+      }
+      iVar2 = FUN_0043d0ce();
+      if ((iVar2 << 0x1f < 0) || (iVar2 = FUN_0043d0ce(), iVar2 << 0x1d < 0)) {
+        FUN_0043ce9e(0x4000000,DAT_00476cb8,DAT_00476cb8);
+      }
+    }
+    if (bVar5 != 0) {
+      iVar2 = FUN_004490cc();
+      iVar4 = *DAT_00476c80;
+      FUN_004494d8(*DAT_00476c0c);
+      FUN_004767a8(iVar2 - iVar4 | 0xff000000);
+    }
+    uVar3 = (uint)bVar5;
+  }
+  return CONCAT44(param_3,uVar3);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00476ace (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00476cbc body_start=00476cbc body_end=00476db7 name=FUN_00476cbc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00476cbc(char param_1,int param_2)
+
+{
+  undefined4 uVar1;
+  undefined2 uVar2;
+  int iVar3;
+  undefined4 uVar4;
+  bool bVar5;
+  undefined2 local_1c;
+  undefined2 local_1a;
+  undefined2 local_18;
+  undefined2 local_16;
+  undefined2 local_14;
+  undefined2 local_12;
+  
+  iVar3 = FUN_004b73a2(*(undefined1 *)(param_2 + 4));
+  bVar5 = iVar3 == 0;
+  iVar3 = FUN_0043d0ce();
+  if (iVar3 << 0x1e < 0) {
+    uVar2 = FUN_004b73a2(*(undefined1 *)(param_2 + 4));
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477744,0xa0,DAT_00477740,bVar5,
+                 *(undefined1 *)(param_2 + 10),uVar2);
+  }
+  iVar3 = FUN_0043d0ce();
+  if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+    uVar2 = FUN_004b73a2(*(undefined1 *)(param_2 + 4));
+    FUN_0043ce9e(0x10c00000,DAT_00477750,DAT_00477750,bVar5,*(undefined1 *)(param_2 + 10),uVar2);
+  }
+  if ((bVar5) && (*(char *)(param_2 + 10) != '\0')) {
+    *(char *)(param_2 + 0xc) = *(char *)(param_2 + 0xc) + '\x01';
+    local_1c = *(undefined2 *)(*DAT_00477754 + 4);
+    local_1a = *(undefined2 *)(*DAT_00477754 + 6);
+    local_18 = *(undefined2 *)(*DAT_00477754 + 8);
+    local_16 = *(undefined2 *)(*DAT_00477754 + 10);
+    local_14 = 0;
+    local_12 = 0xffff;
+    FUN_004b6d26(*(undefined1 *)(param_2 + 4),&local_1c);
+  }
+  else {
+    *(bool *)(param_2 + 10) = bVar5;
+    uVar1 = DAT_00477758;
+    FUN_00476ace(DAT_00477758);
+    if (param_1 == -0x5d) {
+      uVar4 = 2000;
+    }
+    else {
+      uVar4 = 4000;
+    }
+    FUN_0047697e(uVar1,param_1,uVar4);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00476cbc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00476db8 body_start=00476db8 body_end=00476fe1 name=FUN_00476db8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00476db8(int param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477764,0xc6,DAT_00477760,
+                 *(undefined2 *)(param_1 + 0x18),*(undefined2 *)(param_1 + 0x18),
+                 *(undefined2 *)(param_1 + 0x1a),*(undefined2 *)(DAT_0047775c + 4),
+                 *(undefined2 *)(DAT_0047775c + 6),*(undefined2 *)(DAT_0047775c + 8));
+  }
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1f < 0) {
+LAB_00476e0e:
+    FUN_0043ce9e(0x11800000,DAT_00477768,DAT_00477768,*(undefined2 *)(param_1 + 0x18),
+                 *(undefined2 *)(param_1 + 0x18),*(undefined2 *)(param_1 + 0x1a),
+                 *(undefined2 *)(DAT_0047775c + 4),*(undefined2 *)(DAT_0047775c + 6),
+                 *(undefined2 *)(DAT_0047775c + 8));
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1d < 0) goto LAB_00476e0e;
+  }
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477764,0xc9,DAT_0047776c,
+                 ((uint)*(ushort *)(param_1 + 0x18) * 0x4e2) / 1000,0x18);
+  }
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1f < 0) {
+LAB_00476e80:
+    FUN_0043ce9e(0x10800000,DAT_00477770,DAT_00477770,
+                 ((uint)*(ushort *)(param_1 + 0x18) * 0x4e2) / 1000,0x18);
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1d < 0) goto LAB_00476e80;
+  }
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477764,0xca,DAT_00477a6c,
+                 *(undefined2 *)(param_1 + 0x1a));
+  }
+  iVar1 = FUN_0043d0ce();
+  if (-1 < iVar1 << 0x1f) {
+    iVar1 = FUN_0043d0ce();
+    if (-1 < iVar1 << 0x1d) goto LAB_00476eea;
+  }
+  FUN_0043ce9e(0x10400000,DAT_00477a70,DAT_00477a70,*(undefined2 *)(param_1 + 0x1a));
+LAB_00476eea:
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477764,0xcb,DAT_00477a74,
+                 ((uint)*(ushort *)(param_1 + 0x1c) * 10000) / 1000);
+  }
+  iVar1 = FUN_0043d0ce();
+  if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00477a78,DAT_00477a78,
+                 ((uint)*(ushort *)(param_1 + 0x1c) * 10000) / 1000);
+  }
+  if (*(ushort *)(param_1 + 0x18) < 0x19) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477764,0xce,DAT_00477a7c);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00477a80,DAT_00477a80);
+    }
+    uVar2 = 0xa3;
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477764,0xd1,DAT_00477a84);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00477a88,DAT_00477a88);
+    }
+    uVar2 = 0xa4;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00476db8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00476fe2 body_start=00476fe2 body_end=0047720b name=FUN_00476fe2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined4 FUN_00476fe2(int param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a8c,0xd7,DAT_00477760,
+                 *(undefined2 *)(param_1 + 0x18),*(undefined2 *)(param_1 + 0x18),
+                 *(undefined2 *)(param_1 + 0x1a),*(undefined2 *)(DAT_0047775c + 4),
+                 *(undefined2 *)(DAT_0047775c + 6),*(undefined2 *)(DAT_0047775c + 8));
+  }
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1f < 0) {
+LAB_00477038:
+    FUN_0043ce9e(0x11800000,DAT_00477768,DAT_00477768,*(undefined2 *)(param_1 + 0x18),
+                 *(undefined2 *)(param_1 + 0x18),*(undefined2 *)(param_1 + 0x1a),
+                 *(undefined2 *)(DAT_0047775c + 4),*(undefined2 *)(DAT_0047775c + 6),
+                 *(undefined2 *)(DAT_0047775c + 8));
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1d < 0) goto LAB_00477038;
+  }
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a8c,0xda,DAT_0047776c,
+                 ((uint)*(ushort *)(param_1 + 0x18) * 0x4e2) / 1000,0x18);
+  }
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1f < 0) {
+LAB_004770aa:
+    FUN_0043ce9e(0x10800000,DAT_00477770,DAT_00477770,
+                 ((uint)*(ushort *)(param_1 + 0x18) * 0x4e2) / 1000,0x18);
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1d < 0) goto LAB_004770aa;
+  }
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a8c,0xdb,DAT_00477a6c,
+                 *(undefined2 *)(param_1 + 0x1a));
+  }
+  iVar1 = FUN_0043d0ce();
+  if (-1 < iVar1 << 0x1f) {
+    iVar1 = FUN_0043d0ce();
+    if (-1 < iVar1 << 0x1d) goto LAB_00477114;
+  }
+  FUN_0043ce9e(0x10400000,DAT_00477a70,DAT_00477a70,*(undefined2 *)(param_1 + 0x1a));
+LAB_00477114:
+  iVar1 = FUN_0043d0ce();
+  if (iVar1 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a8c,0xdc,DAT_00477a74,
+                 ((uint)*(ushort *)(param_1 + 0x1c) * 10000) / 1000);
+  }
+  iVar1 = FUN_0043d0ce();
+  if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00477a78,DAT_00477a78,
+                 ((uint)*(ushort *)(param_1 + 0x1c) * 10000) / 1000);
+  }
+  if (*(ushort *)(param_1 + 0x18) < 0x48) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a8c,0xe2,DAT_00477a7c);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00477a80,DAT_00477a80);
+    }
+    uVar2 = 0xa3;
+  }
+  else {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a8c,0xdf,DAT_00477a84);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10000000,DAT_00477a88,DAT_00477a88);
+    }
+    uVar2 = 0xa4;
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00476fe2 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047720c body_start=0047720c body_end=0047761b name=FUN_0047720c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_0047720c(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  char *pcVar1;
+  char cVar2;
+  int iVar3;
+  int iVar4;
+  ushort *puVar5;
+  
+  iVar3 = FUN_0046efcc();
+  if (((iVar3 == 0) || (*(char *)(iVar3 + 4) == '\0')) || (3 < *(byte *)(iVar3 + 4))) {
+    iVar4 = FUN_0043d0ce();
+    if (iVar4 << 0x1e < 0) {
+      FUN_0043d574(2,DAT_0047774c,DAT_00477748,DAT_00477a94,0xed,DAT_00477a90,iVar3);
+    }
+    iVar4 = FUN_0043d0ce();
+    if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+      FUN_0043ce9e(0x8400000,DAT_00477a98,DAT_00477a98,iVar3);
+    }
+    *DAT_00477a9c = '\0';
+    return;
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a94,0xf2,DAT_00477aa8,param_1 & 0xff,
+                 *DAT_00477aa4,*DAT_00477aa0,param_4);
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10c00000,DAT_00477aac,DAT_00477aac,param_1 & 0xff,*DAT_00477aa4,*DAT_00477aa0);
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a94,0xf3,DAT_00477ab4,
+                 ((uint)*(ushort *)(*DAT_00477ab0 + 0x18) * 0x4e2) / 1000);
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00477ab8,DAT_00477ab8,
+                 ((uint)*(ushort *)(*DAT_00477ab0 + 0x18) * 0x4e2) / 1000);
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a94,0xf4,DAT_00477a6c,
+                 *(undefined2 *)(*DAT_00477ab0 + 0x1a));
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00477a70,DAT_00477a70,*(undefined2 *)(*DAT_00477ab0 + 0x1a));
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a94,0xf5,DAT_00477a74,
+                 ((uint)*(ushort *)(*DAT_00477ab0 + 0x1c) * 10000) / 1000);
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00477a78,DAT_00477a78,
+                 ((uint)*(ushort *)(*DAT_00477ab0 + 0x1c) * 10000) / 1000);
+  }
+  if ((param_1 & 0xff) == 0xa4) {
+    cVar2 = FUN_00476fe2(*DAT_00477ab0);
+    iVar4 = FUN_0043d0ce();
+    if (iVar4 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a94,0xf8,DAT_00477abc,param_1 & 0xff,
+                   *DAT_00477aa4,cVar2);
+    }
+    iVar4 = FUN_0043d0ce();
+    if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10c00000,DAT_00477ac0,DAT_00477ac0,param_1 & 0xff,*DAT_00477aa4,cVar2);
+    }
+    if (cVar2 == -0x5c) {
+      *DAT_00477aa4 = 0xa4;
+      return;
+    }
+  }
+  else if ((param_1 & 0xff) == 0xa3) {
+    cVar2 = FUN_00476db8(*DAT_00477ab0);
+    iVar4 = FUN_0043d0ce();
+    if (iVar4 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a94,0xff,DAT_00477ac4,param_1 & 0xff,
+                   *DAT_00477aa4,cVar2);
+    }
+    iVar4 = FUN_0043d0ce();
+    if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10c00000,DAT_00477ac8,DAT_00477ac8,param_1 & 0xff,*DAT_00477aa4,cVar2);
+    }
+    if (cVar2 == -0x5d) {
+      *DAT_00477aa4 = 0xa3;
+      *DAT_00477a9c = '\0';
+      return;
+    }
+  }
+  pcVar1 = DAT_00477a9c;
+  if ((*DAT_00477a9c != '\0') && ((param_1 & 0xff) == (uint)*DAT_00477aa0)) {
+    iVar3 = FUN_0043d0ce();
+    if (iVar3 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a94,0x109,DAT_00477acc,param_1 & 0xff);
+    }
+    iVar3 = FUN_0043d0ce();
+    if ((iVar3 << 0x1f < 0) || (iVar3 = FUN_0043d0ce(), iVar3 << 0x1d < 0)) {
+      FUN_0043ce9e(0x10400000,DAT_00477ad0,DAT_00477ad0,param_1 & 0xff);
+    }
+    *pcVar1 = '\0';
+    FUN_00476ace(0x47761d);
+    FUN_0047697e(0x47761d,param_1,10000);
+    return;
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_0047774c,DAT_00477748,DAT_00477a94,0x110,DAT_004780d8,param_1 & 0xff);
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_0047810c,DAT_0047810c,param_1 & 0xff);
+  }
+  *pcVar1 = '\x01';
+  puVar5 = (ushort *)FUN_004bf99e(0xc);
+  if (puVar5 != (ushort *)0x0) {
+    *(char *)(puVar5 + 1) = (char)param_1;
+    *puVar5 = (ushort)*(byte *)(iVar3 + 4);
+    FUN_004bf9ba(*DAT_0047826c,puVar5);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047720c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=0047761c body_start=0047761c body_end=0047773d name=FUN_0047761c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+undefined8 FUN_0047761c(byte param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined2 *puVar3;
+  
+  iVar1 = FUN_004b8122();
+  if ((iVar1 == 0) || (*(char *)(iVar1 + 0x56) == '\0')) {
+    iVar1 = FUN_0043d0ce();
+    if (iVar1 << 0x1e < 0) {
+      param_2 = 0x120;
+      param_3 = DAT_0047814c;
+      FUN_0043d574(1,DAT_00477ad8,DAT_00477ad4,DAT_00478150,0x120,DAT_0047814c,param_4);
+    }
+    iVar1 = FUN_0043d0ce();
+    if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+      FUN_0043ce9e(0x4000000,DAT_00478154,DAT_00478154);
+    }
+  }
+  else {
+    iVar2 = FUN_0046efcc();
+    if (iVar2 == 0) {
+      iVar1 = FUN_0043d0ce();
+      if (iVar1 << 0x1e < 0) {
+        param_2 = 0x125;
+        param_3 = DAT_00478158;
+        FUN_0043d574(2,DAT_00477ad8,DAT_00477ad4,DAT_00478150,0x125,DAT_00478158,param_4);
+      }
+      iVar1 = FUN_0043d0ce();
+      if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+        FUN_0043ce9e(0x8000000,DAT_0047815c,DAT_0047815c);
+      }
+    }
+    else {
+      iVar2 = FUN_0046c630();
+      if ((iVar2 == 1) && (param_1 == 0xa4)) {
+        iVar1 = FUN_0043d0ce();
+        if (iVar1 << 0x1e < 0) {
+          param_2 = 0x12a;
+          param_3 = DAT_004781f0;
+          FUN_0043d574(2,DAT_00477ad8,DAT_00477ad4,DAT_00478150,0x12a,DAT_004781f0,param_4);
+        }
+        iVar1 = FUN_0043d0ce();
+        if ((iVar1 << 0x1f < 0) || (iVar1 = FUN_0043d0ce(), iVar1 << 0x1d < 0)) {
+          FUN_0043ce9e(0x8000000,DAT_00478270,DAT_00478270);
+        }
+      }
+      else {
+        puVar3 = (undefined2 *)FUN_004bf99e(0xc);
+        if (puVar3 != (undefined2 *)0x0) {
+          *(undefined1 *)(puVar3 + 1) = 0xb9;
+          *puVar3 = 0;
+          puVar3[4] = (ushort)param_1;
+          FUN_004bf9ba(*(undefined1 *)(iVar1 + 0x56),puVar3);
+        }
+      }
+    }
+  }
+  return CONCAT44(param_3,param_2);
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=0047761c (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00477774 body_start=00477774 body_end=00477a69 name=FUN_00477774 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00477774(int param_1)
+
+{
+  char *pcVar1;
+  int *piVar2;
+  char cVar3;
+  int iVar4;
+  undefined4 uVar5;
+  
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_00477ad8,DAT_00477ad4,DAT_00478278,0x141,DAT_00478274);
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10000000,DAT_0047827c,DAT_0047827c);
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_00477ad8,DAT_00477ad4,DAT_00478278,0x142,DAT_00478280,
+                 *(undefined2 *)(param_1 + 6));
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00478284,DAT_00478284,*(undefined2 *)(param_1 + 6));
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_00477ad8,DAT_00477ad4,DAT_00478278,0x143,DAT_00478288,
+                 *(undefined1 *)(param_1 + 8));
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_0047828c,DAT_0047828c,*(undefined1 *)(param_1 + 8));
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_00477ad8,DAT_00477ad4,DAT_00478278,0x144,DAT_00478290,
+                 *(undefined1 *)(param_1 + 0xf),*(undefined1 *)(param_1 + 0xe),
+                 *(undefined1 *)(param_1 + 0xd),*(undefined1 *)(param_1 + 0xc),
+                 *(undefined1 *)(param_1 + 0xb),*(undefined1 *)(param_1 + 10));
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x11800000,DAT_00478294,DAT_00478294,*(undefined1 *)(param_1 + 0xf),
+                 *(undefined1 *)(param_1 + 0xe),*(undefined1 *)(param_1 + 0xd),
+                 *(undefined1 *)(param_1 + 0xc),*(undefined1 *)(param_1 + 0xb),
+                 *(undefined1 *)(param_1 + 10));
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_00477ad8,DAT_00477ad4,DAT_00478278,0x145,DAT_00477ab4,
+                 ((uint)*(ushort *)(param_1 + 0x10) * 0x4e2) / 1000);
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00477ab8,DAT_00477ab8,
+                 ((uint)*(ushort *)(param_1 + 0x10) * 0x4e2) / 1000);
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_00477ad8,DAT_00477ad4,DAT_00478278,0x146,DAT_00477a6c,
+                 *(undefined2 *)(param_1 + 0x12));
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00477a70,DAT_00477a70,*(undefined2 *)(param_1 + 0x12));
+  }
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_00477ad8,DAT_00477ad4,DAT_00478278,0x147,DAT_00477a74,
+                 ((uint)*(ushort *)(param_1 + 0x14) * 10000) / 1000);
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_00477a78,DAT_00477a78,
+                 ((uint)*(ushort *)(param_1 + 0x14) * 10000) / 1000);
+  }
+  piVar2 = DAT_00477ab0;
+  *(undefined2 *)(*DAT_00477ab0 + 0x18) = *(undefined2 *)(param_1 + 0x10);
+  *(undefined2 *)(*piVar2 + 0x1a) = *(undefined2 *)(param_1 + 0x12);
+  *(undefined2 *)(*piVar2 + 0x1c) = *(undefined2 *)(param_1 + 0x14);
+  pcVar1 = DAT_00477aa4;
+  cVar3 = FUN_00476fe2(*piVar2);
+  *pcVar1 = cVar3;
+  *DAT_00477aa0 = *pcVar1;
+  *DAT_00478298 = 1;
+  iVar4 = FUN_0043d0ce();
+  if (iVar4 << 0x1e < 0) {
+    uVar5 = DAT_004782a0;
+    if (*pcVar1 == -0x5d) {
+      uVar5 = DAT_0047829c;
+    }
+    FUN_0043d574(4,DAT_00477ad8,DAT_00477ad4,DAT_00478278,0x14e,DAT_004782a4,
+                 *(undefined2 *)(param_1 + 0x10),uVar5);
+  }
+  iVar4 = FUN_0043d0ce();
+  if ((iVar4 << 0x1f < 0) || (iVar4 = FUN_0043d0ce(), iVar4 << 0x1d < 0)) {
+    uVar5 = DAT_004782a0;
+    if (*pcVar1 == -0x5d) {
+      uVar5 = DAT_0047829c;
+    }
+    FUN_0043ce9e(0x10800000,DAT_004782a8,DAT_004782a8,*(undefined2 *)(param_1 + 0x10),uVar5);
+  }
+  uVar5 = DAT_004782ac;
+  FUN_00476ace(DAT_004782ac);
+  iVar4 = FUN_0046c630();
+  if (iVar4 == 0) {
+    FUN_0047697e(uVar5,0xa4,60000);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00477774 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=00477adc body_start=00477adc body_end=004780d7 name=FUN_00477adc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_00477adc(undefined2 *param_1)
+
+{
+  undefined2 uVar1;
+  undefined1 uVar2;
+  bool bVar3;
+  char *pcVar4;
+  char *pcVar5;
+  int *piVar6;
+  undefined1 uVar7;
+  char cVar8;
+  int iVar9;
+  undefined4 uVar10;
+  undefined4 uVar11;
+  
+  uVar1 = *param_1;
+  FUN_0046efcc();
+  iVar9 = FUN_0043d0ce();
+  uVar2 = (undefined1)uVar1;
+  if (iVar9 << 0x1e < 0) {
+    uVar7 = FUN_004b73c4(uVar2);
+    FUN_0043d574(4,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x161,DAT_004782b0,
+                 *(undefined1 *)(param_1 + 2),uVar7);
+  }
+  iVar9 = FUN_0043d0ce();
+  if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+    uVar7 = FUN_004b73c4(uVar2);
+    FUN_0043ce9e(0x10800000,DAT_004782c0,DAT_004782c0,*(undefined1 *)(param_1 + 2),uVar7);
+  }
+  iVar9 = FUN_0043d0ce();
+  if (iVar9 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x162,DAT_004782c4,param_1[4],param_1[4],
+                 param_1[5]);
+  }
+  iVar9 = FUN_0043d0ce();
+  if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10c00000,DAT_004782c8,DAT_004782c8,param_1[4],param_1[4],param_1[5]);
+  }
+  iVar9 = FUN_0043d0ce();
+  if (iVar9 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x163,DAT_004782cc,
+                 ((uint)(ushort)param_1[4] * 0x4e2) / 1000);
+  }
+  iVar9 = FUN_0043d0ce();
+  if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_004782d0,DAT_004782d0,((uint)(ushort)param_1[4] * 0x4e2) / 1000);
+  }
+  iVar9 = FUN_0043d0ce();
+  if (iVar9 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x164,DAT_004782d4,param_1[5]);
+  }
+  iVar9 = FUN_0043d0ce();
+  if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_004782d8,DAT_004782d8,param_1[5]);
+  }
+  iVar9 = FUN_0043d0ce();
+  if (iVar9 << 0x1e < 0) {
+    FUN_0043d574(4,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x165,DAT_004786b4,
+                 ((uint)(ushort)param_1[6] * 10000) / 1000);
+  }
+  iVar9 = FUN_0043d0ce();
+  if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+    FUN_0043ce9e(0x10400000,DAT_004786b8,DAT_004786b8,((uint)(ushort)param_1[6] * 10000) / 1000);
+  }
+  iVar9 = FUN_004b73c4(uVar2);
+  if (iVar9 == 1) {
+    iVar9 = FUN_0043d0ce();
+    if (iVar9 << 0x1e < 0) {
+      uVar10 = DAT_004782a0;
+      if (*DAT_004786bc == -0x5d) {
+        uVar10 = DAT_0047829c;
+      }
+      FUN_0043d574(4,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x169,DAT_004786c0,uVar10);
+    }
+    iVar9 = FUN_0043d0ce();
+    if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+      uVar10 = DAT_004782a0;
+      if (*DAT_004786bc == -0x5d) {
+        uVar10 = DAT_0047829c;
+      }
+      FUN_0043ce9e(0x10400000,DAT_004786c4,DAT_004786c4,uVar10);
+    }
+    iVar9 = FUN_0043d0ce();
+    if (iVar9 << 0x1e < 0) {
+      FUN_0043d574(4,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x16a,DAT_004786cc,param_1[4],param_1[4]
+                   ,param_1[5],*(undefined2 *)(DAT_004786c8 + 4),*(undefined2 *)(DAT_004786c8 + 6),
+                   *(undefined2 *)(DAT_004786c8 + 8));
+    }
+    iVar9 = FUN_0043d0ce();
+    if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+      FUN_0043ce9e(0x11800000,DAT_004786d0,DAT_004786d0,param_1[4],param_1[4],param_1[5],
+                   *(undefined2 *)(DAT_004786c8 + 4),*(undefined2 *)(DAT_004786c8 + 6),
+                   *(undefined2 *)(DAT_004786c8 + 8));
+    }
+    bVar3 = false;
+    if (*(char *)(param_1 + 2) != '\0') {
+      bVar3 = true;
+      iVar9 = FUN_0043d0ce();
+      if (iVar9 << 0x1e < 0) {
+        FUN_0043d574(2,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x172,DAT_004786d4,
+                     *(undefined1 *)(param_1 + 2));
+      }
+      iVar9 = FUN_0043d0ce();
+      if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+        FUN_0043ce9e(0x8400000,DAT_004786d8,DAT_004786d8,*(undefined1 *)(param_1 + 2));
+      }
+      if ((*(char *)(param_1 + 2) == '\f') || (*(char *)(param_1 + 2) == ';')) {
+        iVar9 = FUN_0043d0ce();
+        if (iVar9 << 0x1e < 0) {
+          FUN_0043d574(2,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x177,DAT_004786dc,
+                       *(undefined1 *)(param_1 + 2));
+        }
+        iVar9 = FUN_0043d0ce();
+        if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+          FUN_0043ce9e(0x8400000,DAT_004786e0,DAT_004786e0,*(undefined1 *)(param_1 + 2));
+        }
+        uVar10 = FUN_004490cc();
+        *DAT_004786e4 = uVar10;
+        *DAT_004786e8 = 1;
+        *DAT_004786ec = 0;
+        uVar10 = DAT_004782ac;
+        FUN_00476ace(DAT_004782ac);
+        FUN_0047697e(uVar10,*DAT_004786bc,30000);
+        return;
+      }
+    }
+    piVar6 = DAT_00478700;
+    pcVar5 = DAT_004786bc;
+    pcVar4 = DAT_00478298;
+    if (*DAT_00478298 == '\0') {
+      if ((ushort)param_1[4] < 0x19) {
+        cVar8 = -0x5d;
+      }
+      else {
+        cVar8 = -0x5c;
+      }
+    }
+    else if ((ushort)param_1[4] < 0x48) {
+      cVar8 = -0x5d;
+    }
+    else {
+      cVar8 = -0x5c;
+    }
+    if (cVar8 == *DAT_004786bc) {
+      *(undefined2 *)(*DAT_00478700 + 0x18) = param_1[4];
+      *(undefined2 *)(*piVar6 + 0x1a) = param_1[5];
+      *(undefined2 *)(*piVar6 + 0x1c) = param_1[6];
+      *DAT_00478704 = *pcVar5;
+      *(bool *)(*piVar6 + 0x1e) = *pcVar5 == -0x5d;
+      iVar9 = FUN_0043d0ce();
+      if (iVar9 << 0x1e < 0) {
+        uVar10 = DAT_004782a0;
+        if (*pcVar5 == -0x5d) {
+          uVar10 = DAT_0047829c;
+        }
+        FUN_0043d574(3,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x1a5,DAT_00478708,uVar10);
+      }
+      iVar9 = FUN_0043d0ce();
+      if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+        uVar10 = DAT_004782a0;
+        if (*pcVar5 == -0x5d) {
+          uVar10 = DAT_0047829c;
+        }
+        FUN_0043ce9e(0xc400000,DAT_0047870c,DAT_0047870c,uVar10);
+      }
+      *DAT_004786e8 = 0;
+      *DAT_004786ec = 0;
+    }
+    else {
+      iVar9 = FUN_0043d0ce();
+      if (iVar9 << 0x1e < 0) {
+        uVar10 = DAT_004782a0;
+        if (*pcVar5 == -0x5d) {
+          uVar10 = DAT_0047829c;
+        }
+        FUN_0043d574(1,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x18d,DAT_004786f0,uVar10);
+      }
+      iVar9 = FUN_0043d0ce();
+      if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+        uVar10 = DAT_004782a0;
+        if (*pcVar5 == -0x5d) {
+          uVar10 = DAT_0047829c;
+        }
+        FUN_0043ce9e(0x4400000,DAT_004786f4,DAT_004786f4,uVar10);
+      }
+      if (bVar3) {
+        iVar9 = FUN_0043d0ce();
+        if (iVar9 << 0x1e < 0) {
+          FUN_0043d574(2,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x191,DAT_004786f8);
+        }
+        iVar9 = FUN_0043d0ce();
+        if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+          FUN_0043ce9e(0x8000000,DAT_004786fc,DAT_004786fc);
+        }
+        uVar10 = FUN_004490cc();
+        *DAT_004786e4 = uVar10;
+        *DAT_004786e8 = 1;
+        *DAT_004786ec = 0;
+        uVar10 = DAT_004782ac;
+        FUN_00476ace(DAT_004782ac);
+        FUN_0047697e(uVar10,*pcVar5,10000);
+      }
+      else {
+        *DAT_004786e8 = 0;
+        *DAT_004786ec = 0;
+        uVar10 = DAT_004782ac;
+        FUN_00476ace(DAT_004782ac);
+        if (*pcVar5 == -0x5d) {
+          uVar11 = 2000;
+        }
+        else {
+          uVar11 = 4000;
+        }
+        FUN_0047697e(uVar10,*pcVar5,uVar11);
+      }
+    }
+    if (*pcVar4 != '\0') {
+      iVar9 = FUN_0043d0ce();
+      if (iVar9 << 0x1e < 0) {
+        FUN_0043d574(4,DAT_004782bc,DAT_004782b8,DAT_004782b4,0x1ad,DAT_00478710,*pcVar5);
+      }
+      iVar9 = FUN_0043d0ce();
+      if ((iVar9 << 0x1f < 0) || (iVar9 = FUN_0043d0ce(), iVar9 << 0x1d < 0)) {
+        FUN_0043ce9e(0x10400000,DAT_00478714,DAT_00478714,*pcVar5);
+      }
+      uVar10 = DAT_004782ac;
+      if (*pcVar5 == -0x5c) {
+        *pcVar4 = '\0';
+      }
+      else {
+        FUN_00476ace(DAT_004782ac);
+        FUN_0047697e(uVar10,0xa4,60000);
+      }
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=00477adc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004780dc body_start=004780dc body_end=004780f7 name=FUN_004780dc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+void FUN_004780dc(undefined1 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  *DAT_0047826c = param_1;
+  *DAT_00478718 = param_2;
+  *DAT_00478700 = param_3;
+  *DAT_00478720 = DAT_0047871c;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004780dc (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_BEGIN entry=004780f8 body_start=004780f8 body_end=0047810b name=FUN_004780f8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> 
+bool FUN_004780f8(void)
+
+{
+  return *DAT_00478704 == -0x5d;
+}
+
+ (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_FUNCTION_END entry=004780f8 (GhidraScript)  
+INFO  DumpDecompilationChunk.java> OPENCFW_CHUNK_SUMMARY start=00472362 end=00478110 functions=115 completed=115 failed=0 (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /ota_s200_firmware_ota.bin (HeadlessAnalyzer)  

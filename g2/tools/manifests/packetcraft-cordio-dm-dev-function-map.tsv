@@ -1,0 +1,19 @@
+stock_name	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	r44_source_lines	direct_bl_caller_count	indirect_ingress	classification
+dmDevActReset	0x004B2DF8	0x004B2E28	48	91967cb83911bd29109f0d21bd9c1a7c5625e035662050e4503e503c22a72901	63-83	0	dmDevAct table	linked_official_r44_definition
+dmDevHciEvtReset	0x004B2E28	0x004B2E3A	18	48aa36048ef5e321b055832d32ccd883cca9faff71cc3bd032c520a6de9e0ef4	94-101	1	-	linked_official_r44_definition
+dmDevHciEvtVendorSpecCmdCmpl	0x004B2E3A	0x004B2E48	14	dfe81b4e9c74bb053b543332c630ab2f8df13c500299b9e983b7389bc8c084a5	112-116	1	-	linked_official_r44_definition
+dmDevHciEvtVendorSpec	0x004B2E48	0x004B2E56	14	dd96c85703da73f6cb466cd499880bc139fbca2a5a30e00fe5af5ec80c27403b	127-131	1	-	linked_official_r44_definition
+dmDevHciEvtHwError	0x004B2E56	0x004B2E64	14	432100d15fd5ee350cda124028fc496e8fc6e8f89ff65d860b19b9f53aba6e11	142-146	1	-	linked_official_r44_definition
+dmDevHciHandler	0x004B2E64	0x004B2E94	48	3359e2509625fd1d9a8a4923e855857546a6be30c88fc9e333342fd3b7491a56	157-181	0	dmDevFcnIf HCI slot	linked_official_r44_definition
+dmDevMsgHandler	0x004B2E94	0x004B2EA6	18	32df7fdde0ebdd1fe81674cdd74c243228a98ed8c415f16daef5c793254dfd45	192-196	0	dmDevFcnIf message slot	linked_official_r44_definition
+dmDevPassEvtToDevPriv	0x004B2EA6	0x004B3008	354	27a81d71b84b52ea142867a8b1d533cbade64918c07353c1610bab98739e807c	210-224	13	-	linked_official_r44_definition_with_product_logger_lowering
+dmDevPassEvtToConnCte	0x004B3008	0x004B3026	30	9efd8e97a9a6147c399f8517d8ba7a7c3b2e7997eca9b1a26de0dcef12220a7d	236-247	2	-	linked_official_r44_definition
+DmDevReset	0x004B3026	0x004B304C	38	91065f6d1a91ecec6a2f11fc5854db96ec432f1dadc49a106cfeaac909ae07d3	256-272	8	-	linked_official_r44_definition
+DmDevSetRandAddr	0x004B304C	0x004B3060	20	6127d0b2092ed9812aa20c3da5c9f2dd2ebc6ea2686a49328fbcf90596dfcac5	283-287	1	-	linked_official_r44_definition
+DmDevVsInit	0x004B308C	0x004B3096	10	058828ca551b9136228f90db0d56c746a664209740aeeb2bd73b4363a4a9787a	445-448	1	-	linked_official_r44_definition_noop_provider
+DmDevWhiteListAdd	-	-	0	-	300-303	0	-	source_only_dead_stripped
+DmDevWhiteListRemove	-	-	0	-	316-319	0	-	source_only_dead_stripped
+DmDevWhiteListClear	-	-	0	-	329-332	0	-	source_only_dead_stripped
+dmDevSetFilterPolicy	-	-	0	-	345-402	0	-	source_only_dead_stripped
+DmDevSetFilterPolicy	-	-	0	-	414-417	0	-	source_only_dead_stripped
+DmDevSetExtFilterPolicy	-	-	0	-	431-434	0	-	source_only_dead_stripped

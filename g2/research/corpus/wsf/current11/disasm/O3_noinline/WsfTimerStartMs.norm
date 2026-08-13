@@ -1,0 +1,5 @@
+ldr r3,[pc,#pcrel] @ (c <symbol>)
+umull r3,r1,r3,r1
+lsrs r1,r1,#3
+b.w <branch>
+.word <literal>

@@ -1,0 +1,22 @@
+module	recovery_order	function	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ownership	qualification
+eus	1	eusProcCccState	0x004BDE4C	0x004BDED6	138	1e797f45eab46de8546b45ee80d950a193fbd6a5a59e7816b9f2e56f192452e2	g2_local	updates CCC enable state only for the active connection
+eus	2	eusProcMsg	0x004BDED6	0x004BDF3C	102	44d2c2369ac3193040a532d8b2320b3a4e56c655f87075b6e6f9d24476da5586	g2_local	dispatches connection, CCC, and service-specific send events
+eus	3	APP_BleEusHandlerInit	0x004BDF98	0x004BDFE6	78	b1fd3fb2d892568dd11050412166a48cc00f96887a2ce2b720d4c77d4ec456ee	g2_local	zeros the four-byte profile control block and records handler ID
+eus	4	APP_BleEusProcMsg	0x004BDFE6	0x004BDFF4	14	15113d731c89ee1cca9a74f346484367b66b40f92e08a2f4b5a80646cfa60fe0	g2_local	public event-dispatch wrapper
+eus	5	APP_BleEusSendDataMsg	0x004BDFF4	0x004BE14E	346	546ee8e3c60c1689aa3e291d5f1057328c2388c5007967af65c29c073f37bf45	g2_local	allocates and queues event 0xA8 with product OTA/log policy
+eus	6	APP_BleEusDirectSendDataMsg	0x004BE14E	0x004BE1C8	122	a792069f49ebf51ced0627f1875c6b2d9d4865168513ac0838b9261e60134f5d	g2_local	direct-send companion unique to EUS
+ess	1	essProcCccState	0x004BE228	0x004BE24E	38	95ef07e6c56606efcd7038bd239c6e1acc6374f776a2d2d72adc87f818f8b57d	g2_local	updates CCC enable state for the active connection
+ess	2	essProcMsg	0x004BE24E	0x004BE2B4	102	ae24f09c345420f43d6a1b5e0ecebb1d0750faaf5d54d2c612951caf3d9567b4	g2_local	dispatches connection, CCC, and service-specific send events
+ess	3	APP_BleEssHandlerInit	0x004BE2D6	0x004BE2E8	18	3a3c15f2b3c982784d6a839f2487623a2eec33c77339d76abfd97091101c74d1	g2_local	zeros the four-byte profile control block and records handler ID
+ess	4	APP_BleEssProcMsg	0x004BE2E8	0x004BE2F6	14	586a2b1e14f3616c618b595bcaff27fdcc463d04d38286b02da8906e39f31ae6	g2_local	public event-dispatch wrapper
+ess	5	APP_BleEssSendDataMsg	0x004BE2F6	0x004BE384	142	60c87b7654c97dcfbb34b137171da84748963d0be9dabcdac5b5ec0a503962bd	g2_local	allocates and queues event 0xA9
+efs	1	efsProcCccState	0x004BE3A4	0x004BE420	124	066d5505212c7f42159964bf0527471cdc08eeeb523ce3d74177430f3016cb1b	g2_local	updates CCC enable state only for the active connection
+efs	2	efsProcMsg	0x004BE420	0x004BE486	102	e486ae918d475794e509674f26aae9c48756110aaacc774b0e56a50a5432efa0	g2_local	dispatches connection, CCC, and service-specific send events
+efs	3	APP_BleEfsHandlerInit	0x004BE524	0x004BE572	78	c3bf9818761dc8ef047ba393be795b7eac1a3eb3b38eef9ace11e74819575e92	g2_local	zeros the four-byte profile control block and records handler ID
+efs	4	APP_BleEfsProcMsg	0x004BE572	0x004BE580	14	b17c87e49deaddcc4c4fb3a5252fa564ce1a548f906b1ea2799e33244092d0fa	g2_local	public event-dispatch wrapper
+efs	5	APP_BleEfsSendDataMsg	0x004BE580	0x004BE696	278	e3c1f037bf3e368db1fa9128b2fec01d5d63b07bc38560c2a839ef278881e995	g2_local	allocates and queues event 0xAA with product OTA/log policy
+nus	1	nusProcCccState	0x004BE6F0	0x004BE76C	124	a0826533c2a81c61c17a37a3445acc8e53ba23714564ed90ae540fce93858b98	g2_local	updates CCC enable state only for the active connection
+nus	2	nusProcMsg	0x004BE76C	0x004BE7D2	102	a23f6783bde3fa09f5e00efc40bcddce7bac2b37601dbc133c1bb64305eac3f1	g2_local	dispatches connection, CCC, and service-specific send events
+nus	3	APP_BleNusHandlerInit	0x004BE7FA	0x004BE848	78	2cec083d0cab62b31ebeea8f2c6fc4543ce3de9bd1c0bd894ebb8540869bf037	g2_local	zeros the four-byte profile control block and records handler ID
+nus	4	APP_BleNusProcMsg	0x004BE848	0x004BE856	14	bdd34ba7019e5828e957151846a07ef0acbea11193a7407359fa762f80b87a76	g2_local	public event-dispatch wrapper
+nus	5	APP_BleNusSendDataMsg	0x004BE856	0x004BE9B0	346	7f81d84244a2265b460a29e132105c5fd574bc21a03fb33564474e7895e4de96	g2_local	allocates and queues event 0xAB with product OTA/log policy

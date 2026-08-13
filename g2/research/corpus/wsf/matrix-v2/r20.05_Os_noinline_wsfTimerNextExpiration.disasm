@@ -1,0 +1,21 @@
+
+/work/out-v2/r20.05/Os_noinline/wsf_timer.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.wsfTimerNextExpiration:
+
+00000000 <wsfTimerNextExpiration>:
+   0:	b510      	push	{r4, lr}
+   2:	f7ff fffe 	bl	0 <WsfTaskLock>
+			2: R_ARM_THM_CALL	WsfTaskLock
+   6:	4b04      	ldr	r3, [pc, #16]	@ (18 <wsfTimerNextExpiration+0x18>)
+   8:	681b      	ldr	r3, [r3, #0]
+   a:	461c      	mov	r4, r3
+   c:	b103      	cbz	r3, 10 <wsfTimerNextExpiration+0x10>
+   e:	685c      	ldr	r4, [r3, #4]
+  10:	f7ff fffe 	bl	0 <WsfTaskUnlock>
+			10: R_ARM_THM_CALL	WsfTaskUnlock
+  14:	4620      	mov	r0, r4
+  16:	bd10      	pop	{r4, pc}
+  18:	00000000 	.word	0x00000000
+			18: R_ARM_ABS32	wsfTimerTimerQueue

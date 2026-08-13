@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "component": "AmbiqSuite Cordio application framework",
+  "license": "Apache-2.0",
+  "upstream": {
+    "repository": "https://github.com/sparkfun/AmbiqSuiteSDK.git",
+    "selected_release": "2.5.1",
+    "selected_commit": "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f",
+    "selected_tree": "3a06dca6e2222fdc2058e9587596e22325a6f024",
+    "commit_subject": "bump to sdk release 2.5.1",
+    "release_commits": {
+      "2.3.2": "8f2a86b4b4a200291ea607fd94e585d6e4f15447",
+      "2.4.2": "c4b62222921b1b87ddd21108cdaeaa4c4cf9f76d",
+      "2.5.1": "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f"
+    },
+    "historical_g2_generating_commit": null,
+    "qualification": "The source paths and application architecture identify the Ambiq Cordio fork. Four selected files are blob-identical from authenticated 2.3.2 through 2.5.1 imports; the remaining five changed at 2.5.1. G2 contains substantial later MRAM, logging, privacy, connection, and policy extensions, so 2.5.1 is a reproducible source oracle rather than the private producing checkout."
+  },
+  "packetcraft_ancestor": {
+    "repository": "https://github.com/packetcraft-inc/cordio.git",
+    "selected_release": "r20.05c",
+    "selected_commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+    "qualification": "Public Apache-2.0 ancestor and comparison baseline. AmbiqSuite 2.5.1 carries application-framework deltas, so pristine r20.05c is not the G2 source."
+  },
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "upstream_path": "Packetcraft Cordio LICENSE.md",
+      "size": 562,
+      "sha256": "682ae5978019e4ee9d439b300efb125525b2e4cc4181ebd1e676dd60dc69d7cd",
+      "git_blob_sha1": "5fe50d5491f1166292380f46c8beae44ca83cadb"
+    },
+    {
+      "path": "app_disc.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/app_disc.c",
+      "size": 30467,
+      "sha256": "3fd6e00fe14e903441c151b990f045ad3790a796cb2f19067e45cb8189d654c9",
+      "git_blob_sha1": "c9bc68c9e82d07b6d5887d33aa9d02a40f8d885b",
+      "stable_since_release": "2.3.2"
+    },
+    {
+      "path": "app_main.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/app_main.c",
+      "size": 13634,
+      "sha256": "40226fef44b937e45c5a0030fc64af502710a4f8eb7d4eb758d2188516b9da35",
+      "git_blob_sha1": "8afd083f2798ba4c2fcf559ed92f0c2a325315ef",
+      "stable_since_release": "2.5.1"
+    },
+    {
+      "path": "app_master.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/app_master.c",
+      "size": 30265,
+      "sha256": "712c0cde3cb0591df48a0204d17d07accbced73656822f9ad48eee384f176a9b",
+      "git_blob_sha1": "0bb507e74107a7f959034f48e1d5ce2e93c3a052",
+      "stable_since_release": "2.5.1"
+    },
+    {
+      "path": "app_master_leg.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/app_master_leg.c",
+      "size": 3937,
+      "sha256": "d09e4a15cedd3f3983a04c7af6b566cca863ebe52f23c7be4f82abcb9f616563",
+      "git_blob_sha1": "2d6d01f16ebae3d7ae332bc26078e06274eef1f4",
+      "stable_since_release": "2.3.2"
+    },
+    {
+      "path": "app_server.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/app_server.c",
+      "size": 8689,
+      "sha256": "24454f150cd4f988e1a6032eea243c0729cd25f4136364a3d1240063aaec778c",
+      "git_blob_sha1": "ead2a1da76b047b84e27921d82bbf1519d44d8d5",
+      "stable_since_release": "2.3.2"
+    },
+    {
+      "path": "app_slave.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/app_slave.c",
+      "size": 55381,
+      "sha256": "075a8ce18bf5bd04e27d7f97f5dcde02055e1a0b0e4eedfd086653e0b370652f",
+      "git_blob_sha1": "71cae1f71385f72a7f46f9ed555e965cffbf586d",
+      "stable_since_release": "2.5.1"
+    },
+    {
+      "path": "app_slave_leg.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/app_slave_leg.c",
+      "size": 12338,
+      "sha256": "6d3ea912468ef488f181fbd7f453e35e2cb7d604b27981d7cb1af1c549e259c4",
+      "git_blob_sha1": "6a0fe8d6f8ce4a4cba6feaae70eed6aa52d6e54a",
+      "stable_since_release": "2.5.1"
+    },
+    {
+      "path": "common/app_db.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/common/app_db.c",
+      "size": 33371,
+      "sha256": "2b7d3b4d35adf9783966215134c3a62cc9ae1016204f150c0a3a9bf9f58ee646",
+      "git_blob_sha1": "15dc1a189a7715649588ecfdd4b8faf06a89616f",
+      "stable_since_release": "2.5.1"
+    },
+    {
+      "path": "common/app_ui.c",
+      "upstream_path": "third_party/cordio/ble-profiles/sources/apps/app/common/app_ui.c",
+      "size": 9951,
+      "sha256": "d02a478cf431b8a5693d5a833659d106190166609b6b805d9f6d766342f657ec",
+      "git_blob_sha1": "de657c3e82fa6d806bb00cebb5b6a63f928d4588",
+      "stable_since_release": "2.3.2"
+    }
+  ],
+  "g2_boundary": {
+    "retained_paths": 9,
+    "anchored_functions": 50,
+    "anchored_body_bytes": 29110,
+    "stock_anchor_summary_sha256": "5fca10f44bf5b308ba89e1afcded7f0fb470c8ac19f29d587f2e3e0d27cb055b",
+    "lineage": "AmbiqSuite application-framework fork of Packetcraft Cordio with G2 downstream extensions",
+    "source_identification_closed": true,
+    "exact_source_text_identity": false,
+    "production_routed": false,
+    "local_delta": "G2 expands the Ambiq application database from the sample NVM model into a ten-record role-aware MRAM database and adds product connection, privacy, pairing-failure, discovery, diagnostics, and UI policy."
+  }
+}

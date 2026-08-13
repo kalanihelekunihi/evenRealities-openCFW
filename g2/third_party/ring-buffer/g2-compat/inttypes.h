@@ -1,0 +1,6 @@
+#ifndef OPEN_CFW_RING_BUFFER_INTTYPES_H
+#define OPEN_CFW_RING_BUFFER_INTTYPES_H
+
+typedef __UINT8_TYPE__ uint8_t;
+
+#endif

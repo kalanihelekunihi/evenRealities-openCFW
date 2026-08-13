@@ -1,0 +1,9 @@
+identity	release_or_path	bytes	sha256	git_blob_sha1	license_or_qualification
+official_archive	AmbiqSuite-R2.5.1.zip	200161418	87b03680c0ac5a5291938e7c522f86146a954d935588f1deb046f35012fe4133		Ambiq official S3 archive; version SZxNfetLb6ZNVkN_tZ76GH00R.h44Mf0
+assert_source	AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_assert.c	1864	f51b7b1441cef0aaed55fdaf84680684813d1fe6182245660e8b21313ce54b1f	3ffe904be53a7d2248f6324cd96c4bcbe75c0397	Wicentric confidential/proprietary; source-family oracle only
+assert_header	AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_assert.h	2862	d3518013f48697e0033a5d8488cb7ec5a7cb75e6961f129f66a0d562802dcbe4	82020666a9b09e188743b1b82b4115a965bbe84e	Wicentric confidential/proprietary; ABI oracle only
+trace_source	AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_trace.c	6275	677ad691762aebf972304cf3720a1d7d7ca3eb77077231f52d68e5658cd7d918	13d6b7720da262e55aefac109577f42ebe7b1f56	Wicentric confidential/proprietary; source-family oracle only
+trace_header	AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_trace.h	15307	41d28cd39d4e0fda71ba031ed766321c4df1d90888cb40c1f7d62cad1198d50f	856cfe94998813a71fc6bc2fd981c6866464a25a	Wicentric confidential/proprietary; pre-R4.4.1 macro family
+same_sources	AmbiqSuite-R2.4.2 third_party/exactle equivalents				all four blobs byte-identical; tranche alone does not distinguish releases
+later_corroboration	AmbiqAI/neuralSPOT R4.3.0 tree at commit 4264b9309e03064ffad13a0468d5d0c1110c5288				official later Git corroboration; not historical commit pin
+packetcraft_public	Packetcraft r20.05c commit 3656312d6b73e2a2c1c8b33ee0385bc199dd97e6				Apache API/header oracle only; public assert/trace bodies are not stock-equivalent

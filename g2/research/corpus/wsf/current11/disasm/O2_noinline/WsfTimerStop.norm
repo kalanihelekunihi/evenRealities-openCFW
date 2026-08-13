@@ -1,0 +1,8 @@
+push {r4,lr}
+mov r4,r0
+bl <call>
+mov r0,r4
+bl <call>
+ldmia.w sp!,{r4,lr}
+b.w <branch>
+nop

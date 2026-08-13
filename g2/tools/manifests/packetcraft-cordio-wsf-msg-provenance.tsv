@@ -1,0 +1,5 @@
+identity	release_or_path	bytes	sha256	git_blob_sha1	license_or_qualification
+selected_apache_source	Packetcraft r19.02 commit 86372d84ef0386d8834ed036e613c8f2ded1ff16 wsf/sources/port/baremetal/wsf_msg.c		daafe6b6f7a092e35549d4587917b01f97f6d2e8575eedc132f1676f5f42e19d	9f475dc631ba5001542b07d1098ba5fc52bdc7b8	Apache-2.0; exact seven stock function-definition texts
+ambiq_copy	AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_msg.c	6046	3860750172958e515b47ba5e009c2a222271e6d93f5ddbe9138498ba6f7b8de7	5225bf713f194af0f60c873ba14470a4b6028d52	proprietary header; identity oracle only because Apache route is available
+ambiq_header	AmbiqSuite-R2.5.1/third_party/cordio/wsf/include/wsf_msg.h	4930	56709406fefde3b7b01fb5146ac2c73b111c18debedab523c1ea74f2d3afa5d7	d472ac2c3c610c3f9cdb9b7bfbcbd6cb020d4285	proprietary header; ABI oracle only
+r20_05c_delta	Packetcraft r20.05c commit 3656312d6b73e2a2c1c8b33ee0385bc199dd97e6				retains seven exact definitions but adds WsfMsgNPeek; stock cluster ends after Peek

@@ -1,0 +1,62 @@
+push {r1,r2,r3,r4,r5,lr}
+bl <call>
+movs r4,r0
+ldr r5,[pc,#pcrel] @ (0ximm)
+ldr r1,[r5,#0]
+subs r1,r4,r1
+movs r0,#10
+udiv r0,r1,r0
+cmp r0,#0
+beq.n <branch>
+movs r0,#10
+udiv r0,r1,r0
+bl <call>
+str r4,[r5,#0]
+r0 ,sp,#8
+bl <call>
+cmp r0,#0
+beq.n <branch>
+movs r1,#100 @ 0ximm
+str r1,[sp,#0]
+movs r3,#0
+movw r1,#reloc @ 0ximm
+muls r0,r1
+mov.w r1,#1000 @ 0ximm
+udiv r2,r0,r1
+movs r1,#4
+ldr r0,[pc,#pcrel] @ (0ximm)
+ldr r0,[r0,#0]
+bl <call>
+movs r4,r0
+cmp r4,#1
+beq.n <branch>
+bl <call>
+lsls r0,r0,#30
+bpl.n <branch>
+ldr r0,[pc,#pcrel] @ (0ximm)
+str r0,[sp,#4]
+movw r0,#reloc @ 0ximm
+str r0,[sp,#0]
+ldr r3,[pc,#pcrel] @ (0ximm)
+ldr r2,[pc,#pcrel] @ (0ximm)
+ldr r1,[pc,#pcrel] @ (0ximm)
+movs r0,#1
+bl <call>
+bl <call>
+lsls r0,r0,#31
+bmi.n <branch>
+bl <call>
+lsls r0,r0,#29
+bpl.n <branch>
+ldr r1,[pc,#pcrel] @ (0ximm)
+movs r2,r1
+movs.w r0,#67108864 @ 0ximm
+bl <call>
+cmp r4,#1
+beq.n <branch>
+bl <call>
+movs r0,#0
+movs.w r1,#4294967295 @ 0ximm
+str r0,[r1,#0]
+b.n <branch>
+pop {r0,r1,r2,r4,r5,pc}

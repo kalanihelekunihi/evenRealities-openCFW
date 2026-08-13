@@ -1,0 +1,13 @@
+
+out/Os_nosibling/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_start_ms_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_start_ms_candidate>:
+   0:	b508      	push	{r3, lr}
+   2:	230a      	movs	r3, #10
+   4:	fbb1 f1f3 	udiv	r1, r1, r3
+   8:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_start_ms_candidate>
+			8: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_insert_candidate
+   c:	bd08      	pop	{r3, pc}

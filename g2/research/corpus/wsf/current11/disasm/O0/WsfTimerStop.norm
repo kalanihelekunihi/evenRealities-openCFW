@@ -1,0 +1,10 @@
+push {lr}
+sub sp,#12
+str r0,[sp,#4]
+bl <call>
+ldr r0,[sp,#4]
+bl <call>
+bl <call>
+nop
+sp ,#12
+ldr.w pc,[sp],#4

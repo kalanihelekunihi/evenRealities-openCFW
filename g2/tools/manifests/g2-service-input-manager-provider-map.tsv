@@ -1,0 +1,7 @@
+provider	edges	targets	origin	version	selected_commit	status
+EasyLogger diagnostics	85 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted
+CMSIS-FreeRTOS tick wrapper	2 direct BL sites	0x004490CC	ARM-software/CMSIS-FreeRTOS	v10.5.1	d213f261b5be6bb29a7cce8b84071706b72f4d53	authenticated and production source-owned
+IAR DLIB memory/runtime	2 direct BL sites	0x00439BE4,0x0043C0E4	IAR EWARM runtime	9.20+ floor; 9.60.2 leading candidate	unavailable	bounded or source-recreated
+nanopb iterator helper	2 direct BL sites	0x0048EB32	nanopb	0.4.7 through 0.4.9.1 compatible	98bf4db69897b53434f3d0ba72e0a3ab1a902824	source-admitted
+Trivial signed absolute-value leaf	1 direct BL site	0x00509694	compiler-emitted or project runtime helper	8-byte source-equivalent leaf	unobservable	fully bounded; no release discriminator
+G2 first-party providers	11 direct BL sites	0x0045A568,0x00464B2E,0x00464D1C,0x00465748,0x00468034,0x00469388,0x0046B0EC,0x0046C630,0x0047697E,0x00476ACE	Even Realities first-party	private G2 source	unobservable	bounded first-party graph

@@ -1,0 +1,59 @@
+
+/work/out/O3_noinline/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_update_ticks_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_update_ticks_candidate>:
+   0:	b530      	push	{r4, r5, lr}
+   2:	b085      	sub	sp, #20
+   4:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_tick_counter_get_candidate>
+			4: R_ARM_THM_CALL	open_cfw_cordio_wsf_tick_counter_get_candidate
+   8:	4d17      	ldr	r5, [pc, #92]	@ (68 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x68>)
+   a:	682b      	ldr	r3, [r5, #0]
+   c:	1ac3      	subs	r3, r0, r3
+   e:	2b09      	cmp	r3, #9
+  10:	d820      	bhi.n	54 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x54>
+  12:	f10d 000f 	add.w	r0, sp, #15
+  16:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_update_ticks_candidate>
+			16: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_next_expiration_candidate
+  1a:	4602      	mov	r2, r0
+  1c:	b908      	cbnz	r0, 22 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x22>
+  1e:	b005      	add	sp, #20
+  20:	bd30      	pop	{r4, r5, pc}
+  22:	f242 7c10 	movw	r12, #10000	@ 0x2710
+  26:	2564      	movs	r5, #100	@ 0x64
+  28:	fb0c f202 	mul.w	r2, r12, r2
+  2c:	4c0f      	ldr	r4, [pc, #60]	@ (6c <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x6c>)
+  2e:	4b10      	ldr	r3, [pc, #64]	@ (70 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x70>)
+  30:	fba4 4202 	umull	r4, r2, r4, r2
+  34:	6818      	ldr	r0, [r3, #0]
+  36:	2104      	movs	r1, #4
+  38:	2300      	movs	r3, #0
+  3a:	9500      	str	r5, [sp, #0]
+  3c:	0992      	lsrs	r2, r2, #6
+  3e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_command_candidate>
+			3e: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_command_candidate
+  42:	2801      	cmp	r0, #1
+  44:	d0eb      	beq.n	1e <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x1e>
+  46:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_command_failure_candidate>
+			46: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_command_failure_candidate
+  4a:	b005      	add	sp, #20
+  4c:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+  50:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_timer_fatal_candidate>
+			50: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_timer_fatal_candidate
+  54:	4604      	mov	r4, r0
+  56:	4a07      	ldr	r2, [pc, #28]	@ (74 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x74>)
+  58:	fba2 2303 	umull	r2, r3, r2, r3
+  5c:	08d8      	lsrs	r0, r3, #3
+  5e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_update_ticks_candidate>
+			5e: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_update_candidate
+  62:	602c      	str	r4, [r5, #0]
+  64:	e7d5      	b.n	12 <open_cfw_cordio_wsf_timer_update_ticks_candidate+0x12>
+  66:	bf00      	nop
+  68:	00000000 	.word	0x00000000
+			68: R_ARM_ABS32	open_cfw_cordio_wsf_last_tick_candidate
+  6c:	10624dd3 	.word	0x10624dd3
+  70:	00000000 	.word	0x00000000
+			70: R_ARM_ABS32	open_cfw_cordio_wsf_freertos_timer_candidate
+  74:	cccccccd 	.word	0xcccccccd

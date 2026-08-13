@@ -1,0 +1,24 @@
+push {r3,r4,r5,r6,r7,lr}
+mov r5,r0
+bl <call>
+ldr r3,[pc,#pcrel] @ (34 <symbol>)
+ldr r4,[r3,#0]
+cbz r4,<branch>
+movs r7,#0
+movs r6,#2
+b.n <branch>
+subs r3,r3,r5
+str r3,[r4,#4]
+ldr r4,[r4,#0]
+cbz r4,<branch>
+ldr r3,[r4,#4]
+cmp r3,r5
+bhi.n <branch>
+str r7,[r4,#4]
+mov r1,r6
+ldrb r0,[r4,#12]
+bl <call>
+b.n <branch>
+bl <call>
+pop {r3,r4,r5,r6,r7,pc}
+.word <literal>

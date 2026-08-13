@@ -1,0 +1,12 @@
+jobs	64
+processor	ARM:LE:32:Cortex
+loader	BinaryLoader
+base_address	0x437fe0
+vector_base	0x438000
+image_end	0x794324
+vector_words	256
+analysis_timeout_seconds	1800
+decompile_timeout_seconds	60
+template_project	/var/tmp/opencfw-apollo64.A58cAv/smoke/template
+keep_projects	0
+shard_limit	0

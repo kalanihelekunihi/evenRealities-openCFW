@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "component": "MightyPork/TinyFrame",
+  "license": "MIT",
+  "upstream": {
+    "repository": "https://github.com/MightyPork/TinyFrame.git",
+    "selected_ref": "eb75483e035916ef9f3e9fce0d2ae389cb09785f",
+    "selected_commit": "eb75483e035916ef9f3e9fce0d2ae389cb09785f",
+    "selected_tree": "0e166ad5f97162b1dbcbcafd2bfef144f68aff13",
+    "parent_commit": "44ecc0686c6a6b89ec357b6ab187763089e2b2bc",
+    "author_date": "2021-12-09T13:29:04+01:00",
+    "committer_date": "2021-12-09T13:31:42+01:00",
+    "commit_signature_present": false
+  },
+  "selection": {
+    "classification": "authenticated upstream core snapshot; production source-admitted",
+    "exact_historical_checkout_proven": false,
+    "behavior_floor_commit": "44ecc0686c6a6b89ec357b6ab187763089e2b2bc",
+    "minimum_patch_core_commit": "eb75483e035916ef9f3e9fce0d2ae389cb09785f",
+    "core_identical_ceiling_commit": "a29167a69f052975b0e0134a73b4d31d03afa8fa",
+    "qualification": "Ten retained G2 TF_Error source lines select eb75483e's TinyFrame.c/TinyFrame.h layout as the minimum-patch baseline. a29167a changes demo content only and retains both core blobs, so linked firmware cannot distinguish the historical checkout."
+  },
+  "g2_boundary": {
+    "analyzer": "tools/analyze_g2_tinyframe_send_version.py",
+    "evidence": "docs/research/tinyframe-send-version-recovery-audit.md",
+    "configuration_path": "third_party/tinyframe/g2-config/TF_Config.h",
+    "required_compile_option": "-fshort-enums",
+    "pristine_core_size": 29016,
+    "vendor_object_size": 29024,
+    "vendor_prefix_magic": "0xA5A5A5A5",
+    "vendor_suffix_magic": "0x5A5A5A5A",
+    "linked_translation_unit": {
+      "range": [4789960, 4793078],
+      "linked_functions": 31,
+      "code_bytes": 2994,
+      "literal_pool_bytes": 124,
+      "physical_bytes": 3118,
+      "literal_pool_sha256": "fb922d9523d1afd800c10195240574f3fab0541a9655fd09ceab91990b2e82d0"
+    },
+    "runtime_instance": {
+      "count": 1,
+      "global_pointer_slot": "0x200749C4",
+      "role_1": "TF_MASTER / peer bit 1",
+      "role_2": "TF_SLAVE / peer bit 0",
+      "application_field_dereferences": 0
+    },
+    "adapter_candidate": "components/shared/tinyframe/runtime_tinyframe_g2_adapter_candidate.c",
+    "adapter_evidence": "docs/research/tinyframe-source-admission-boundary-audit.md",
+    "atomic_boundary_candidate": "components/shared/tinyframe/runtime_tinyframe_g2_atomic_boundary_candidate.c",
+    "production_status": "atomic source admission complete with dual-profile placement, redirects, and ownership accounting; hardware golden packets pending"
+  },
+  "files": [
+    {
+      "path": "TinyFrame.c",
+      "size": 34707,
+      "sha256": "24c2712966df846fadf54067ac5ed4061e4a19adf11dab1af3f203e17bf41eab",
+      "git_blob_sha1": "ac64150369dd155f26d1e47c1f5a10f92887298b"
+    },
+    {
+      "path": "TinyFrame.h",
+      "size": 15554,
+      "sha256": "e70ea75c3642fff3f1b28463d4b564402efcd09824b51db7b556cf3a04319b7f",
+      "git_blob_sha1": "a142b4bba086f27565bd26282055c357364616b3"
+    },
+    {
+      "path": "TF_Config.example.h",
+      "size": 2927,
+      "sha256": "e5faec9f64114f99b744e48de5b1d3de631e3065129004c664197681359aa2f6",
+      "git_blob_sha1": "099d026bfd4c8c7705647958127dee002f1bac88"
+    },
+    {
+      "path": "TF_Integration.example.c",
+      "size": 1326,
+      "sha256": "fc3533898b58f0a350dea8e2551e1c985f1ecd5961f038f230d068e099ccca6f",
+      "git_blob_sha1": "1e1b3572021629891682e49dcf50c1e4d33bbfb6"
+    },
+    {
+      "path": "LICENSE",
+      "size": 1072,
+      "sha256": "eb7b9df3ca390100d31f9aac23f2d8dfe0183a63987112675fc58af9a42f6874",
+      "git_blob_sha1": "22acaabc6b85723107caae262ec537e710c19aac"
+    }
+  ]
+}

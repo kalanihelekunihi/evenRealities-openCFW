@@ -1,0 +1,39 @@
+
+/work/out/Oz_nosibling/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_insert_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_insert_candidate>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4604      	mov	r4, r0
+   4:	460d      	mov	r5, r1
+   6:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			6: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   a:	7b63      	ldrb	r3, [r4, #13]
+   c:	b113      	cbz	r3, 14 <open_cfw_cordio_wsf_timer_insert_candidate+0x14>
+   e:	4620      	mov	r0, r4
+  10:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_insert_candidate>
+			10: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_remove_candidate
+  14:	2301      	movs	r3, #1
+  16:	2200      	movs	r2, #0
+  18:	7363      	strb	r3, [r4, #13]
+  1a:	4b08      	ldr	r3, [pc, #32]	@ (3c <open_cfw_cordio_wsf_timer_insert_candidate+0x3c>)
+  1c:	6065      	str	r5, [r4, #4]
+  1e:	681b      	ldr	r3, [r3, #0]
+  20:	b933      	cbnz	r3, 30 <open_cfw_cordio_wsf_timer_insert_candidate+0x30>
+  22:	4621      	mov	r1, r4
+  24:	4805      	ldr	r0, [pc, #20]	@ (3c <open_cfw_cordio_wsf_timer_insert_candidate+0x3c>)
+  26:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_insert_candidate>
+			26: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_insert_candidate
+  2a:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			2a: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  2e:	bd38      	pop	{r3, r4, r5, pc}
+  30:	6859      	ldr	r1, [r3, #4]
+  32:	42a9      	cmp	r1, r5
+  34:	d8f5      	bhi.n	22 <open_cfw_cordio_wsf_timer_insert_candidate+0x22>
+  36:	461a      	mov	r2, r3
+  38:	681b      	ldr	r3, [r3, #0]
+  3a:	e7f1      	b.n	20 <open_cfw_cordio_wsf_timer_insert_candidate+0x20>
+  3c:	00000000 	.word	0x00000000
+			3c: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate

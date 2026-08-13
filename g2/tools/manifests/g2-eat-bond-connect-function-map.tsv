@@ -1,0 +1,3 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	atCleanBondHandler	exact command registration / descriptive handler	0x005A4FA4	0x005A4FB4	16	9d8c47a404adce88b079fcb1b5500af234556c00491be0c21610fb5569796d2a	stored Thumb pointer 0x006C9268 in AT^CLEANBOND record	calls bond-clean provider, emits CLEANBOND+OK, and returns zero
+2	atBleKeepConnectHandler	exact command registration / descriptive handler	0x005A4FB4	0x005A4FC6	18	39f91ad5eb3e2e8aac41c16e5f599a709cce727801804a42af6a9394b8287a9f	stored Thumb pointer 0x006C9278 in AT^BLE_KEEPCONNECT record	calls keep-connect provider with one, emits BLE_KEEPCONNECT+OK, and returns zero

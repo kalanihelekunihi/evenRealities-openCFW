@@ -1,0 +1,4 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	10 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99 source-equivalent core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Initialization and parser diagnostics terminate at the admitted logger seam
+IAR DLIB memory/string/format primitives	6 direct BL sites	0x0043C0E4,0x0044A43C,0x0044B728,0x0044B76C,0x004751C8	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded or source-owned	Memset, strlen, snprintf, vsnprintf, and memcmp add no release discriminator
+G2 eAT parser policy	4 direct BL sites	0x0057DDFC,0x0057DE0A,0x0057DEB0	Even Realities first-party/private eAT framework	private G2 source	unobservable	provider seams identified	Owns parser initialization, incremental parsing, and adapted handler invocation

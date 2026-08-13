@@ -1,0 +1,3 @@
+variant	extra_flags	providers	purpose
+archive_notrace		WsfCsEnter;WsfCsExit	exact archive headers with warning trace compiled out; lower-bound source shape
+stock_warn_seam	-include shim/wsf_buf_trace_override.h	WsfCsEnter;WsfCsExit;open_cfw_wsf_buf_stock_warn1	preserve retained line-321 seven-argument warning metadata seam; best stock-ABI approximation

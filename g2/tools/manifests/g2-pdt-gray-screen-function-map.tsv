@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	PdtGrayScreen_common_data_handler	exact retained function string	0x005CF634	0x005CF67A	70	7fccfd1ce780493302f640a3e2d13212e318b1f42b685218e08603aa9268eebf	stored Thumb pointer at 0x006A45D4	logs received data length and returns zero
+2	semantic_gray_screen_predicate_true	semantic; adjacent-module template	0x005CF67A	0x005CF67E	4	64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb	stored Thumb pointer at 0x0079373C	returns one unconditionally
+3	semantic_pdt_gray_screen_event	semantic	0x005CF67E	0x005CF788	266	98a6172b4fd466267ec70b0d9b1373c16d93c27f5a6940f3a172b90f7406f24c	stored Thumb pointer at 0x006A45D8	constructs eight symmetric grayscale bands for event two and publishes the root

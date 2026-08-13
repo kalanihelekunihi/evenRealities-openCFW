@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "component": "NordicSemiconductor/npmx",
+  "license": "BSD-3-Clause",
+  "upstream": {
+    "repository": "https://github.com/NordicSemiconductor/npmx.git",
+    "repository_web": "https://github.com/NordicSemiconductor/npmx",
+    "selected_ref": "e1aaec53f456887a7d7b80d82f684d1ac3cb08c8",
+    "selected_commit": "e1aaec53f456887a7d7b80d82f684d1ac3cb08c8",
+    "selected_tree": "87fb8b8e3e1068736cd2c02526442e03e67c381c",
+    "parent_commit": "1bee8636f265c9142676ba1afea85a78ef37da17",
+    "nearest_tag": "v1.0.1",
+    "describe": "v1.0.1-1-ge1aaec5",
+    "author_date": "2025-02-12T09:46:52+01:00",
+    "committer_date": "2025-02-19T13:54:19+01:00",
+    "subject": "drivers: src: npmx_adc: fix and simplify usage of result registers"
+  },
+  "selection": {
+    "classification": "authenticated exact public source candidate and compact driver snapshot",
+    "exact_public_candidate": true,
+    "exact_private_checkout_proven": false,
+    "firmware_build_timestamp": "2025-04-28T13:29:15Z",
+    "lower_discriminator": "The stock npmx_adc_meas_all_get reads the ten-register result bank and uses separate MSB and LSB offset helpers introduced by e1aaec53.",
+    "upper_discriminator": "Stock npmx_common_ln_get retains the five double constants and VFP f32-to-f64 promotion removed by adjacent commit 53de7af4394382e1a21008eaa18ed9e5e1809504.",
+    "qualification": "e1aaec53 and 53de7af are adjacent in the official repository. The paired positive and negative fingerprints select e1aaec53 uniquely among public upstream commits. A private fork with equivalent changes cannot be excluded."
+  },
+  "snapshot": {
+    "scope": "LICENSE, release metadata, backend, complete driver headers and sources, root API headers, and integration templates; generated nPM1300 ADK omitted from this compact tranche",
+    "file_count": 38,
+    "hash_manifest": "SNAPSHOT.sha256",
+    "hash_manifest_sha256": "a192788fc60c2568154053e1f4144d72e9d4781449d05cea29ab8512c6beba83",
+    "normalization": null,
+    "byte_identical_to_upstream": true
+  },
+  "g2_boundary": {
+    "retained_path": "driver\\npmx_driver_transplant\\src\\npmx_main_driver.c",
+    "analyzer": "tools/analyze_g2_npmx_main_driver.py",
+    "evidence": "docs/research/g2-npmx-main-driver-recovery.md",
+    "stock_wrapper_span": "[0x00511002,0x00512BC0)",
+    "stock_wrapper_body_bytes": 6560,
+    "direct_npmx_calls": 72,
+    "direct_npmx_entry_targets": 42,
+    "npmx_sources_observed": [
+      "backends/npmx_backend.c",
+      "drivers/src/npmx_adc.c",
+      "drivers/src/npmx_buck.c",
+      "drivers/src/npmx_charger.c",
+      "drivers/src/npmx_common.c",
+      "drivers/src/npmx_core.c",
+      "drivers/src/npmx_ldsw.c",
+      "drivers/src/npmx_ship.c",
+      "drivers/src/npmx_timer.c",
+      "drivers/src/npmx_vbusin.c"
+    ],
+    "production_routed": false
+  }
+}

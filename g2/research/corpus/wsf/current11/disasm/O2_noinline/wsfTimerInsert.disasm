@@ -1,0 +1,42 @@
+
+/work/out/O2_noinline/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_insert_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_insert_candidate>:
+   0:	b570      	push	{r4, r5, r6, lr}
+   2:	4606      	mov	r6, r0
+   4:	460d      	mov	r5, r1
+   6:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			6: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   a:	7b73      	ldrb	r3, [r6, #13]
+   c:	b9b3      	cbnz	r3, 3c <open_cfw_cordio_wsf_timer_insert_candidate+0x3c>
+   e:	2101      	movs	r1, #1
+  10:	4b0c      	ldr	r3, [pc, #48]	@ (44 <open_cfw_cordio_wsf_timer_insert_candidate+0x44>)
+  12:	2200      	movs	r2, #0
+  14:	681b      	ldr	r3, [r3, #0]
+  16:	6075      	str	r5, [r6, #4]
+  18:	7371      	strb	r1, [r6, #13]
+  1a:	b923      	cbnz	r3, 26 <open_cfw_cordio_wsf_timer_insert_candidate+0x26>
+  1c:	e006      	b.n	2c <open_cfw_cordio_wsf_timer_insert_candidate+0x2c>
+  1e:	681c      	ldr	r4, [r3, #0]
+  20:	461a      	mov	r2, r3
+  22:	b11c      	cbz	r4, 2c <open_cfw_cordio_wsf_timer_insert_candidate+0x2c>
+  24:	4623      	mov	r3, r4
+  26:	685c      	ldr	r4, [r3, #4]
+  28:	42ac      	cmp	r4, r5
+  2a:	d9f8      	bls.n	1e <open_cfw_cordio_wsf_timer_insert_candidate+0x1e>
+  2c:	4631      	mov	r1, r6
+  2e:	4805      	ldr	r0, [pc, #20]	@ (44 <open_cfw_cordio_wsf_timer_insert_candidate+0x44>)
+  30:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_queue_insert_candidate>
+			30: R_ARM_THM_CALL	open_cfw_cordio_wsf_queue_insert_candidate
+  34:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+  38:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			38: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_task_unlock_candidate
+  3c:	4630      	mov	r0, r6
+  3e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_timer_insert_candidate>
+			3e: R_ARM_THM_CALL	open_cfw_cordio_wsf_timer_remove_candidate
+  42:	e7e4      	b.n	e <open_cfw_cordio_wsf_timer_insert_candidate+0xe>
+  44:	00000000 	.word	0x00000000
+			44: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate

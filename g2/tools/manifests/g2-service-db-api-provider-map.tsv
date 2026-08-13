@@ -1,0 +1,5 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+FlashDB KVDB	2 direct BL sites	0x0054454A,0x0054503A	armink/FlashDB	2.1.1	714d6159e7e6afb267a3953756abca445c350e61	authenticated source-owned	Exact fdb_kv_get_blob and fdb_kv_set_blob signatures; this object embeds no FlashDB definitions
+CMSIS-FreeRTOS	7 direct BL sites	0x004490CC,0x0044971C,0x004497B6,0x0044981C	ARM-software/CMSIS-FreeRTOS	v10.5.1	d213f261b5be6bb29a7cce8b84071706b72f4d53	authenticated and production source-owned	Four osKernelGetTickCount calls plus osMutexNew, osMutexAcquire, and osMutexRelease
+EasyLogger diagnostics	45 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99 source-equivalent core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Logging gates and formatted diagnostics only
+G2 platform and database initialization	5 direct BL sites	0x004708A8,0x004709C8,0x0047075C,0x004D96D8,0x0051079C	Even Realities first-party	private G2 source	unobservable	provider seams identified	NOR-flash read/write/erase plus sysenv and factory database initialization

@@ -1,0 +1,38 @@
+
+out/O0/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_next_expiration_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_next_expiration_candidate>:
+   0:	b500      	push	{lr}
+   2:	b085      	sub	sp, #20
+   4:	9001      	str	r0, [sp, #4]
+   6:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_lock_candidate>
+			6: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_lock_candidate
+   a:	4b0c      	ldr	r3, [pc, #48]	@ (3c <open_cfw_cordio_wsf_timer_next_expiration_candidate+0x3c>)
+   c:	681b      	ldr	r3, [r3, #0]
+   e:	9302      	str	r3, [sp, #8]
+  10:	9b02      	ldr	r3, [sp, #8]
+  12:	2b00      	cmp	r3, #0
+  14:	d105      	bne.n	22 <open_cfw_cordio_wsf_timer_next_expiration_candidate+0x22>
+  16:	9b01      	ldr	r3, [sp, #4]
+  18:	2200      	movs	r2, #0
+  1a:	701a      	strb	r2, [r3, #0]
+  1c:	2300      	movs	r3, #0
+  1e:	9303      	str	r3, [sp, #12]
+  20:	e005      	b.n	2e <open_cfw_cordio_wsf_timer_next_expiration_candidate+0x2e>
+  22:	9b01      	ldr	r3, [sp, #4]
+  24:	2201      	movs	r2, #1
+  26:	701a      	strb	r2, [r3, #0]
+  28:	9b02      	ldr	r3, [sp, #8]
+  2a:	685b      	ldr	r3, [r3, #4]
+  2c:	9303      	str	r3, [sp, #12]
+  2e:	f7ff fffe 	bl	0 <open_cfw_cordio_wsf_task_unlock_candidate>
+			2e: R_ARM_THM_CALL	open_cfw_cordio_wsf_task_unlock_candidate
+  32:	9b03      	ldr	r3, [sp, #12]
+  34:	4618      	mov	r0, r3
+  36:	b005      	add	sp, #20
+  38:	f85d fb04 	ldr.w	pc, [sp], #4
+  3c:	00000000 	.word	0x00000000
+			3c: R_ARM_ABS32	open_cfw_cordio_wsf_timer_queue_candidate

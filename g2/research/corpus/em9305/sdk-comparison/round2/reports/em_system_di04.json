@@ -1,0 +1,1458 @@
+{
+  "expected_exact_match_count": 0,
+  "expected_vendor_modified_count": 0,
+  "function_count": 54,
+  "functions": [
+    {
+      "binding": "w",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "EMSG_WeakFunction",
+      "normalized_sha256": "e9e14747f4bb4cf4d5df295c464a409789386d829f7460a114faa12d1040af77",
+      "object": "EMSG_CallWeakFunction.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.EMSG_WeakFunction",
+      "size": 6
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 10,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [],
+      "name": "EMSG_CallWeakFunction_Callback",
+      "normalized_sha256": "727048061e50209e515f12023ce2d65df26ae218a32b0d76fa18ec23d2193de8",
+      "object": "EMSG_CallWeakFunction.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_CallWeakFunction_Callback",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 54,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3165108
+      ],
+      "name": "EMSG_CallWeakFunction",
+      "normalized_sha256": "6c34eeca3f586f60a0204e4348f0ab8752bebd4a6389f3dca1a75865f81f118c",
+      "object": "EMSG_CallWeakFunction.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSG_CallWeakFunction",
+      "size": 66
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 16,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3207688
+      ],
+      "name": "PML_ClearModeFlag",
+      "normalized_sha256": "e293d34557d79df619c63e6009a36f926d352031be696885838640087d8c7e2d",
+      "object": "EMSG_ClearBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.PML_ClearModeFlag",
+      "size": 16
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 14,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "PML_ClearConfigurationModeFlag",
+      "normalized_sha256": "c0fc1e94e671e7a63ba26be93cd6f0bd632cc3799e517edf00ed204dd1558a74",
+      "object": "EMSG_ClearBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.PML_ClearConfigurationModeFlag",
+      "size": 14
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 2,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [],
+      "name": "EMSG_ClearBootModeFlags_Callback",
+      "normalized_sha256": "62263fb2519be835076eade20741071a76222051fd2f76f0403e3d411123c42d",
+      "object": "EMSG_ClearBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSG_ClearBootModeFlags_Callback",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165196,
+        3165248,
+        3165300
+      ],
+      "name": "EMSG_ClearBootModeFlags",
+      "normalized_sha256": "a3c2bd0548b3a37b90657f5a8980805ea94eff40dbd60cba94b33bcf6ef1ed16",
+      "object": "EMSG_ClearBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_ClearBootModeFlags",
+      "size": 34
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [],
+      "name": "EMSG_CpuReset_Callback",
+      "normalized_sha256": "cb2c919f1a2e0e64c534a3433e4d1c51a046334b903f23d11b2c4a45f8c1990f",
+      "object": "EMSG_CpuReset.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_CpuReset_Callback",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165196,
+        3165248,
+        3165300
+      ],
+      "name": "EMSG_CpuReset",
+      "normalized_sha256": "a3c2bd0548b3a37b90657f5a8980805ea94eff40dbd60cba94b33bcf6ef1ed16",
+      "object": "EMSG_CpuReset.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_CpuReset",
+      "size": 34
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 14,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "PML_SetConfigurationModeFlag",
+      "normalized_sha256": "562c7e6e4c5f3abf11d39caea8bfde83f1a771690a4e3750875d0b8a38b75bcc",
+      "object": "EMSG_EnterConfigurationMode.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.PML_SetConfigurationModeFlag",
+      "size": 14
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [],
+      "name": "EMSG_EnterConfigurationMode_Callback",
+      "normalized_sha256": "6baa64d0778d08a1edec94cf3efd6cb98575c5d96334b50f1d402f8f4f56b80e",
+      "object": "EMSG_EnterConfigurationMode.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSG_EnterConfigurationMode_Callback",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165196,
+        3165248,
+        3165300
+      ],
+      "name": "EMSG_EnterConfigurationMode",
+      "normalized_sha256": "a3c2bd0548b3a37b90657f5a8980805ea94eff40dbd60cba94b33bcf6ef1ed16",
+      "object": "EMSG_EnterConfigurationMode.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_EnterConfigurationMode",
+      "size": 34
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 44,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3165356
+      ],
+      "name": "EMSG_GetEmCoreInformation",
+      "normalized_sha256": "f3d621caa445a1876dd917c8250939cc13661f16eb1fda73d759b37342fdeea1",
+      "object": "EMSG_GetEmCoreInformation.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.EMSG_GetEmCoreInformation",
+      "size": 48
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 14,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "EMSG_ReadSupportedFeatures",
+      "normalized_sha256": "c86ff775ded961fc84f0ce064ca7cf550efaf99fb936318a0c91b26a6f44bff2",
+      "object": "EMSG_ReadSupportedFeatures.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.EMSG_ReadSupportedFeatures",
+      "size": 18
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 94,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165472
+      ],
+      "name": "EMSG_SetBootModeFlags_Callback",
+      "normalized_sha256": "cd3dded1b404db6e23c5be47aa2f478e132a2a864b88c10cdf1b29684a6a1a63",
+      "object": "EMSG_SetBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_SetBootModeFlags_Callback",
+      "size": 102
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3165424
+      ],
+      "name": "EMSG_SetBootModeFlags",
+      "normalized_sha256": "71c28b4cb39eae1faae691d56c32e4b51c10d28462d73bc07f5ec11771aabaa7",
+      "object": "EMSG_SetBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSG_SetBootModeFlags",
+      "size": 48
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 34,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165616
+      ],
+      "name": "EMSG_SetRssiOffset",
+      "normalized_sha256": "456ee9a6613d9e57b53d816611e9ac90fa30da62b63c86278b3276c14c5dd660",
+      "object": "EMSG_SetRssiOffset.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_SetRssiOffset",
+      "size": 42
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 42,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165660
+      ],
+      "name": "EMSG_SetSleepOptions",
+      "normalized_sha256": "a3946f6b988cb54be8b2687240f66221447dd5b80ca9b8bd53f8962268b309a4",
+      "object": "EMSG_SetSleepOptions.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_SetSleepOptions",
+      "size": 50
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 4,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "UART_SetBaudRate",
+      "normalized_sha256": "82e3de6d2eeac7626160915e02c66a995d420116cdc78e4cfd3d80623f20f0c7",
+      "object": "EMSG_SetUartBaudRate.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.UART_SetBaudRate",
+      "size": 4
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3165772
+      ],
+      "name": "EMSG_SetUartBaudRate_Callback",
+      "normalized_sha256": "0613bacb0a57bbcd70125f51c88c0de350d4a2b1a69924e0d8b43e5259a573dd",
+      "object": "EMSG_SetUartBaudRate.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSG_SetUartBaudRate_Callback",
+      "size": 38
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 44,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3165712
+      ],
+      "name": "EMSG_SetUartBaudRate",
+      "normalized_sha256": "bf4b1c637e847609242af43769ff2c8a29c9f93894d10e82ba8c49872f3aea5d",
+      "object": "EMSG_SetUartBaudRate.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSG_SetUartBaudRate",
+      "size": 60
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 48,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3165812
+      ],
+      "name": "EMSG_SvldMeasurement",
+      "normalized_sha256": "610edcd259eead58271dadca791c114b47405d0fef1451beec0757162c1b5862",
+      "object": "EMSG_SvldMeasurement.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSG_SvldMeasurement",
+      "size": 64
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 110,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3166116
+      ],
+      "name": "EMSMM_ReadAtAddress",
+      "normalized_sha256": "fad8d747e69ba233fdab32bc0edf53bc5a8759a79082fc2e1a51bc58b4f152f6",
+      "object": "EMSMM_ReadAtAddress.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSMM_ReadAtAddress",
+      "size": 122
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 110,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3166240
+      ],
+      "name": "EMSMM_WriteAtAddress",
+      "normalized_sha256": "5890c4ec85b697b10802a5a03458a017de1792ef1e1b36da36dfa6f8f1029a6a",
+      "object": "EMSMM_WriteAtAddress.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSMM_WriteAtAddress",
+      "size": 122
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 44,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3166468,
+        3166520,
+        3166572,
+        3166624
+      ],
+      "name": "EMSPM_PatchQuery",
+      "normalized_sha256": "9f60819bc551c2eb04560201354ef0b1e4d9b3e6a7d0d0dde6bcb25d6700a918",
+      "object": "EMSPM_PatchQuery.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSPM_PatchQuery",
+      "size": 52
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 44,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3166468,
+        3166520,
+        3166572,
+        3166624
+      ],
+      "name": "EMSPM_WritePatchAbort",
+      "normalized_sha256": "9f60819bc551c2eb04560201354ef0b1e4d9b3e6a7d0d0dde6bcb25d6700a918",
+      "object": "EMSPM_WritePatchAbort.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSPM_WritePatchAbort",
+      "size": 52
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 44,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3166468,
+        3166520,
+        3166572,
+        3166624
+      ],
+      "name": "EMSPM_WritePatchContinue",
+      "normalized_sha256": "9f60819bc551c2eb04560201354ef0b1e4d9b3e6a7d0d0dde6bcb25d6700a918",
+      "object": "EMSPM_WritePatchContinue.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSPM_WritePatchContinue",
+      "size": 52
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 44,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3166468,
+        3166520,
+        3166572,
+        3166624
+      ],
+      "name": "EMSPM_WritePatchStart",
+      "normalized_sha256": "9f60819bc551c2eb04560201354ef0b1e4d9b3e6a7d0d0dde6bcb25d6700a918",
+      "object": "EMSPM_WritePatchStart.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSPM_WritePatchStart",
+      "size": 52
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 60,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3166780
+      ],
+      "name": "EMSRC_EmCoreReceiverTest",
+      "normalized_sha256": "734c478eead401f7e2b3b95010fa47e18bb5e9899349b16d98e0a944a4da14e2",
+      "object": "EMSRC_ReceiverTest.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSRC_EmCoreReceiverTest",
+      "size": 72
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 72,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3166852
+      ],
+      "name": "EMSRC_EmCoreReceiverTestEnd",
+      "normalized_sha256": "f71ad7a0b9917e6b01ba242a6fb8d129a94498fb82a6d7cbe7fbf77d8b9bf6b8",
+      "object": "EMSRC_ReceiverTestEnd.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSRC_EmCoreReceiverTestEnd",
+      "size": 88
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 86,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3166676
+      ],
+      "name": "EMSRC_EmCoreReceiver154TestEnd",
+      "normalized_sha256": "69f9f9d2fc35d38946f686c5b42894a992e2ed1556496c124c001b567c155f3c",
+      "object": "EMSRC_ReceiverTestEnd.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSRC_EmCoreReceiver154TestEnd",
+      "size": 102
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 80,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 24,
+      "matches": [
+        3168948
+      ],
+      "name": "EMSystem_TransmitCM",
+      "normalized_sha256": "0afd5c8ea4c415dd8dc18a6b364c558549490c06175092611916cdd8d4a385c2",
+      "object": "EMSRC_RfUtils.c.obj",
+      "offset": 0,
+      "relocation_count": 6,
+      "section": ".text.EMSystem_TransmitCM",
+      "size": 104
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 4,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "EMSystemStack_TransmitStart",
+      "normalized_sha256": "df76b0aba1f705436023e9ee970e8c37d8da26059a7798d11b602b9a118d51d8",
+      "object": "EMSRC_RfUtils.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.EMSystemStack_TransmitStart",
+      "size": 4
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 4,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "EMSystemStack_TransmitStop",
+      "normalized_sha256": "df76b0aba1f705436023e9ee970e8c37d8da26059a7798d11b602b9a118d51d8",
+      "object": "EMSRC_RfUtils.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.EMSystemStack_TransmitStop",
+      "size": 4
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 4,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "EMSystemStack_ReceiveStart",
+      "normalized_sha256": "df76b0aba1f705436023e9ee970e8c37d8da26059a7798d11b602b9a118d51d8",
+      "object": "EMSRC_RfUtils.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.EMSystemStack_ReceiveStart",
+      "size": 4
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 4,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "EMSystemStack_ReceiveStop",
+      "normalized_sha256": "df76b0aba1f705436023e9ee970e8c37d8da26059a7798d11b602b9a118d51d8",
+      "object": "EMSRC_RfUtils.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.EMSystemStack_ReceiveStop",
+      "size": 4
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 4,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "EMSystemStack_StartAdvertising",
+      "normalized_sha256": "df76b0aba1f705436023e9ee970e8c37d8da26059a7798d11b602b9a118d51d8",
+      "object": "EMSRC_RfUtils.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.EMSystemStack_StartAdvertising",
+      "size": 4
+    },
+    {
+      "binding": "w",
+      "compared_byte_count": 4,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "EMSystemStack_StartScan_15_4",
+      "normalized_sha256": "df76b0aba1f705436023e9ee970e8c37d8da26059a7798d11b602b9a118d51d8",
+      "object": "EMSRC_RfUtils.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.EMSystemStack_StartScan_15_4",
+      "size": 4
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 62,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3166940
+      ],
+      "name": "EMSRC_EmCoreScan15_4",
+      "normalized_sha256": "949dad9ccccf547a9c05080a5461d52df8ab6419b0100a9057b8c06d8e83e182",
+      "object": "EMSRC_Scan15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSRC_EmCoreScan15_4",
+      "size": 74
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 14,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "EMSRC_SetRfActivity",
+      "normalized_sha256": "c86ff775ded961fc84f0ce064ca7cf550efaf99fb936318a0c91b26a6f44bff2",
+      "object": "EMSRC_SetRfActivity.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.EMSRC_SetRfActivity",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3167016
+      ],
+      "name": "EMSRC_EmCoreStartAdvPattern",
+      "normalized_sha256": "d30bdd381718ff8045c3aba687c89ff0ef9dbdca9afee77a5519a02af577a79a",
+      "object": "EMSRC_StartAdvPattern.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSRC_EmCoreStartAdvPattern",
+      "size": 48
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 76,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3167064
+      ],
+      "name": "EMSRC_EmCoreTransmitterTest",
+      "normalized_sha256": "a93eb1675cb135b18fc965acab74e76a77f5f36cf24b44c55f8d45f3e3d8a009",
+      "object": "EMSRC_TransmitterTest.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSRC_EmCoreTransmitterTest",
+      "size": 92
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 110,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 36,
+      "matches": [
+        3167156
+      ],
+      "name": "EMSRC_EmCoreTransmitterTestEnd",
+      "normalized_sha256": "e1d9a819396a9741b93a5b2fed7718dc16a3c3919f645e2e88a5715832871056",
+      "object": "EMSRC_TransmitterTestEnd.c.obj",
+      "offset": 0,
+      "relocation_count": 9,
+      "section": ".text.EMSRC_EmCoreTransmitterTestEnd",
+      "size": 146
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 134,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3167916
+      ],
+      "name": "EMSS_LeDecrypt",
+      "normalized_sha256": "7ecea543807d4bae89ee8d8f7b49bd2fcf2178105bd9960bd2735df5ad6e1cbc",
+      "object": "EMSS_LeDecrypt.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSS_LeDecrypt",
+      "size": 142
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 114,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3168060
+      ],
+      "name": "EMSS_LeDecryptKC",
+      "normalized_sha256": "ec0c054da07339ba7ce93810850141a559b05c35034b104672ca4ad2f305db8b",
+      "object": "EMSS_LeDecryptKC.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSS_LeDecryptKC",
+      "size": 122
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 130,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3168184
+      ],
+      "name": "EMSS_LeEncrypt",
+      "normalized_sha256": "68f01f18c6ded8d2a29bde45923ca76c6144b5a6d92af85723a6389a5bc5611e",
+      "object": "EMSS_LeEncrypt.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSS_LeEncrypt",
+      "size": 138
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 114,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3168324
+      ],
+      "name": "EMSS_LeEncryptKC",
+      "normalized_sha256": "6316752d3bc331c028c8cff6f986d4929bd2ec630d010ba018d5449841147c8e",
+      "object": "EMSS_LeEncryptKC.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSS_LeEncryptKC",
+      "size": 122
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 92,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3168448
+      ],
+      "name": "EMSS_LeRand",
+      "normalized_sha256": "b6059dd5feff1f54312a66b317a8aa52a56e51ef12c0ffe897de6d3d8061a0ac",
+      "object": "EMSS_LeRand.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSS_LeRand",
+      "size": 108
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 12,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "EMTransportManager_SleepCallback",
+      "normalized_sha256": "04a15fcd4bf57b74bce9227e4598ba9793c812bb37cb81d7b42c9517007f0420",
+      "object": "em_transport_manager.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.EMTransportManager_SleepCallback",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [],
+      "name": "EMTransportManager_InitWithSleepCB",
+      "normalized_sha256": "1a97ade415e87a3ebb1deed2e1256a95ab56178d4561279f2ce8ff052fd87ede",
+      "object": "em_transport_manager.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMTransportManager_InitWithSleepCB",
+      "size": 38
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 46,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [],
+      "name": "EMSystem_WaitTransportCompleted",
+      "normalized_sha256": "3ea5d0c923e676943377b5fa7f7d39cc77cddcaea9f055aa988d0b8f339ac4fd",
+      "object": "fix_11745_wait_transport_completed.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSystem_WaitTransportCompleted",
+      "size": 54
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 162,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "transmitterTestCheckParameters",
+      "normalized_sha256": "c4601fc14cb463683b7f6ca50fa4bcb02f2a9b20fd7fab5e138fd60923d53332",
+      "object": "parameter_checks.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.transmitterTestCheckParameters",
+      "size": 162
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 128,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3356148
+      ],
+      "name": "receiverTestCheckParameters",
+      "normalized_sha256": "541ad1a7925778f9aa927effdcdfb36f5355760f9ec586e844ef299f5952b73a",
+      "object": "parameter_checks.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.receiverTestCheckParameters",
+      "size": 128
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 28,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3356276
+      ],
+      "name": "scan15_4CheckParameters",
+      "normalized_sha256": "a343c1f610e2808f2f8ac5709ce23f67a9563808de2c841ac61590870892803b",
+      "object": "parameter_checks.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.scan15_4CheckParameters",
+      "size": 28
+    }
+  ],
+  "identity": {
+    "architecture": "ARCv2 EM",
+    "archive_git_blob": "e37d4f321d85f5ff6d7bb114a5a795a495168c94",
+    "archive_kind": "em_system_di04",
+    "archive_path": "libs/em_system/lib_em_system_di04.a",
+    "archive_sha256": "4376c640692341529f004535096c24a8675469e9afb82d65bf4b2ca5e75d2b4e",
+    "compiler": "Synopsys MetaWare ARC Compiler T-2022.09 build 004 / LLVM 14.0.6 (EM-Micro)",
+    "compiler_anchors_matched": true,
+    "compiler_comment_sha256": "929918ddd8913f60418908e65d12e5b7baa0e2b904423b6fb95c8c32cdfecddd",
+    "optimization": "-Os"
+  },
+  "known_expected_address_match_count": 0,
+  "known_function_count": 0,
+  "unique_discovered_matches": [
+    {
+      "binding": "g",
+      "compared_byte_count": 54,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3165108
+      ],
+      "name": "EMSG_CallWeakFunction",
+      "normalized_sha256": "6c34eeca3f586f60a0204e4348f0ab8752bebd4a6389f3dca1a75865f81f118c",
+      "object": "EMSG_CallWeakFunction.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSG_CallWeakFunction",
+      "size": 66
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 16,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3207688
+      ],
+      "name": "PML_ClearModeFlag",
+      "normalized_sha256": "e293d34557d79df619c63e6009a36f926d352031be696885838640087d8c7e2d",
+      "object": "EMSG_ClearBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.PML_ClearModeFlag",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 44,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [
+        3165356
+      ],
+      "name": "EMSG_GetEmCoreInformation",
+      "normalized_sha256": "f3d621caa445a1876dd917c8250939cc13661f16eb1fda73d759b37342fdeea1",
+      "object": "EMSG_GetEmCoreInformation.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.EMSG_GetEmCoreInformation",
+      "size": 48
+    },
+    {
+      "binding": "l",
+      "compared_byte_count": 94,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165472
+      ],
+      "name": "EMSG_SetBootModeFlags_Callback",
+      "normalized_sha256": "cd3dded1b404db6e23c5be47aa2f478e132a2a864b88c10cdf1b29684a6a1a63",
+      "object": "EMSG_SetBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_SetBootModeFlags_Callback",
+      "size": 102
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3165424
+      ],
+      "name": "EMSG_SetBootModeFlags",
+      "normalized_sha256": "71c28b4cb39eae1faae691d56c32e4b51c10d28462d73bc07f5ec11771aabaa7",
+      "object": "EMSG_SetBootModeFlags.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSG_SetBootModeFlags",
+      "size": 48
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 34,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165616
+      ],
+      "name": "EMSG_SetRssiOffset",
+      "normalized_sha256": "456ee9a6613d9e57b53d816611e9ac90fa30da62b63c86278b3276c14c5dd660",
+      "object": "EMSG_SetRssiOffset.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_SetRssiOffset",
+      "size": 42
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 42,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3165660
+      ],
+      "name": "EMSG_SetSleepOptions",
+      "normalized_sha256": "a3946f6b988cb54be8b2687240f66221447dd5b80ca9b8bd53f8962268b309a4",
+      "object": "EMSG_SetSleepOptions.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSG_SetSleepOptions",
+      "size": 50
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 26,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3165772
+      ],
+      "name": "EMSG_SetUartBaudRate_Callback",
+      "normalized_sha256": "0613bacb0a57bbcd70125f51c88c0de350d4a2b1a69924e0d8b43e5259a573dd",
+      "object": "EMSG_SetUartBaudRate.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSG_SetUartBaudRate_Callback",
+      "size": 38
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 44,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3165712
+      ],
+      "name": "EMSG_SetUartBaudRate",
+      "normalized_sha256": "bf4b1c637e847609242af43769ff2c8a29c9f93894d10e82ba8c49872f3aea5d",
+      "object": "EMSG_SetUartBaudRate.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSG_SetUartBaudRate",
+      "size": 60
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 48,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3165812
+      ],
+      "name": "EMSG_SvldMeasurement",
+      "normalized_sha256": "610edcd259eead58271dadca791c114b47405d0fef1451beec0757162c1b5862",
+      "object": "EMSG_SvldMeasurement.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSG_SvldMeasurement",
+      "size": 64
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 110,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3166116
+      ],
+      "name": "EMSMM_ReadAtAddress",
+      "normalized_sha256": "fad8d747e69ba233fdab32bc0edf53bc5a8759a79082fc2e1a51bc58b4f152f6",
+      "object": "EMSMM_ReadAtAddress.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSMM_ReadAtAddress",
+      "size": 122
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 110,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3166240
+      ],
+      "name": "EMSMM_WriteAtAddress",
+      "normalized_sha256": "5890c4ec85b697b10802a5a03458a017de1792ef1e1b36da36dfa6f8f1029a6a",
+      "object": "EMSMM_WriteAtAddress.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSMM_WriteAtAddress",
+      "size": 122
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 60,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3166780
+      ],
+      "name": "EMSRC_EmCoreReceiverTest",
+      "normalized_sha256": "734c478eead401f7e2b3b95010fa47e18bb5e9899349b16d98e0a944a4da14e2",
+      "object": "EMSRC_ReceiverTest.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSRC_EmCoreReceiverTest",
+      "size": 72
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 72,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3166852
+      ],
+      "name": "EMSRC_EmCoreReceiverTestEnd",
+      "normalized_sha256": "f71ad7a0b9917e6b01ba242a6fb8d129a94498fb82a6d7cbe7fbf77d8b9bf6b8",
+      "object": "EMSRC_ReceiverTestEnd.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSRC_EmCoreReceiverTestEnd",
+      "size": 88
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 86,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3166676
+      ],
+      "name": "EMSRC_EmCoreReceiver154TestEnd",
+      "normalized_sha256": "69f9f9d2fc35d38946f686c5b42894a992e2ed1556496c124c001b567c155f3c",
+      "object": "EMSRC_ReceiverTestEnd.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSRC_EmCoreReceiver154TestEnd",
+      "size": 102
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 80,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 24,
+      "matches": [
+        3168948
+      ],
+      "name": "EMSystem_TransmitCM",
+      "normalized_sha256": "0afd5c8ea4c415dd8dc18a6b364c558549490c06175092611916cdd8d4a385c2",
+      "object": "EMSRC_RfUtils.c.obj",
+      "offset": 0,
+      "relocation_count": 6,
+      "section": ".text.EMSystem_TransmitCM",
+      "size": 104
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 62,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3166940
+      ],
+      "name": "EMSRC_EmCoreScan15_4",
+      "normalized_sha256": "949dad9ccccf547a9c05080a5461d52df8ab6419b0100a9057b8c06d8e83e182",
+      "object": "EMSRC_Scan15_4.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSRC_EmCoreScan15_4",
+      "size": 74
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 36,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3167016
+      ],
+      "name": "EMSRC_EmCoreStartAdvPattern",
+      "normalized_sha256": "d30bdd381718ff8045c3aba687c89ff0ef9dbdca9afee77a5519a02af577a79a",
+      "object": "EMSRC_StartAdvPattern.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.EMSRC_EmCoreStartAdvPattern",
+      "size": 48
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 76,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3167064
+      ],
+      "name": "EMSRC_EmCoreTransmitterTest",
+      "normalized_sha256": "a93eb1675cb135b18fc965acab74e76a77f5f36cf24b44c55f8d45f3e3d8a009",
+      "object": "EMSRC_TransmitterTest.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSRC_EmCoreTransmitterTest",
+      "size": 92
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 110,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 36,
+      "matches": [
+        3167156
+      ],
+      "name": "EMSRC_EmCoreTransmitterTestEnd",
+      "normalized_sha256": "e1d9a819396a9741b93a5b2fed7718dc16a3c3919f645e2e88a5715832871056",
+      "object": "EMSRC_TransmitterTestEnd.c.obj",
+      "offset": 0,
+      "relocation_count": 9,
+      "section": ".text.EMSRC_EmCoreTransmitterTestEnd",
+      "size": 146
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 134,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3167916
+      ],
+      "name": "EMSS_LeDecrypt",
+      "normalized_sha256": "7ecea543807d4bae89ee8d8f7b49bd2fcf2178105bd9960bd2735df5ad6e1cbc",
+      "object": "EMSS_LeDecrypt.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSS_LeDecrypt",
+      "size": 142
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 114,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3168060
+      ],
+      "name": "EMSS_LeDecryptKC",
+      "normalized_sha256": "ec0c054da07339ba7ce93810850141a559b05c35034b104672ca4ad2f305db8b",
+      "object": "EMSS_LeDecryptKC.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSS_LeDecryptKC",
+      "size": 122
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 130,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3168184
+      ],
+      "name": "EMSS_LeEncrypt",
+      "normalized_sha256": "68f01f18c6ded8d2a29bde45923ca76c6144b5a6d92af85723a6389a5bc5611e",
+      "object": "EMSS_LeEncrypt.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSS_LeEncrypt",
+      "size": 138
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 114,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [
+        3168324
+      ],
+      "name": "EMSS_LeEncryptKC",
+      "normalized_sha256": "6316752d3bc331c028c8cff6f986d4929bd2ec630d010ba018d5449841147c8e",
+      "object": "EMSS_LeEncryptKC.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.EMSS_LeEncryptKC",
+      "size": 122
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 92,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 16,
+      "matches": [
+        3168448
+      ],
+      "name": "EMSS_LeRand",
+      "normalized_sha256": "b6059dd5feff1f54312a66b317a8aa52a56e51ef12c0ffe897de6d3d8061a0ac",
+      "object": "EMSS_LeRand.c.obj",
+      "offset": 0,
+      "relocation_count": 4,
+      "section": ".text.EMSS_LeRand",
+      "size": 108
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 128,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3356148
+      ],
+      "name": "receiverTestCheckParameters",
+      "normalized_sha256": "541ad1a7925778f9aa927effdcdfb36f5355760f9ec586e844ef299f5952b73a",
+      "object": "parameter_checks.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.receiverTestCheckParameters",
+      "size": 128
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 28,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [
+        3356276
+      ],
+      "name": "scan15_4CheckParameters",
+      "normalized_sha256": "a343c1f610e2808f2f8ac5709ce23f67a9563808de2c841ac61590870892803b",
+      "object": "parameter_checks.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.scan15_4CheckParameters",
+      "size": 28
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	ingress	evidence
+1	teleprompt_file_list_update	exact retained function string	0x0058BCE0	0x0058BD70	144	85a3dd9a7873eb375c37ce003904425e35a29ef4efe9d440a066f77ce6cfd136	yes	BL at 0x0058CFEE	null-checks then copies the complete 0xF52-byte file-list record into global storage and logs the 16-bit file count
+2	teleprompt_file_list_get	semantic behavior label	0x0058BD70	0x0058BD74	4	199a6226224486b8af2d9fa6738059a331fd9f75d513d3fdd7ddb5cb0a53450a	no	BL sites at 0x00555712,0x00555D20,0x00556016	returns the global file-list record at 0x201093D4
+3	teleprompt_file_list_reset	semantic behavior label	0x0058BD74	0x0058BD86	18	295844f197bdf8246929a7482b129aa1a0e18216aeea35637cf28703402acb28	no	BL sites at 0x005560BC and 0x0058A23A	zeros all 0xF52 bytes of the global file-list record

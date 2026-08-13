@@ -1,0 +1,10 @@
+recovery_order	function	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	ghidra_discovered	qualification
+1	ui_common_api_fn_00509c1c	0x00509C1C	0x00509C96	122	00ac1cca4c47e64610a796ba85cc674ee457836fef3f1ee214cbcde174178000	yes	yes	path-anchored common query; emits diagnostics and calls the closed file-runtime provider
+2	ui_common_api_fn_00509c96	0x00509C96	0x00509CA2	12	477940fc4043d21722a6175a443012ba9be95c4d5c4f50557beb2e3af5bd364a	no	yes	tail wrapper over the second closed file-runtime provider
+3	ui_common_api_fn_00509ca2	0x00509CA2	0x00509DFA	344	8728cab330bbc58d124dcec6257257aafd00a64bb51382e4b7599e06b0ead82c	yes	yes	path-anchored common UI builder; dense EasyLogger diagnostics
+4	ui_common_api_fn_00509dfa	0x00509DFA	0x00509E14	26	70c987b5851d4494c6fb15ce0f68371c3571646af2b921ffd15090639fd97f40	no	yes	leaf field getter over the retained UI record
+5	ui_common_api_fn_00509e14	0x00509E14	0x00509F52	318	f0ed47df64428a6b31ca1646f5dce25cb26ebb10f5e6700b7005863a19bb6979	yes	yes	path-anchored common UI builder; dense EasyLogger diagnostics
+6	ui_common_api_fn_00509f52	0x00509F52	0x00509F7A	40	9dbbb01a75d00ca548a0ac5ae39aa728467487ce8da72de0415fa38a59d9b874	no	yes	field writer; bounded IAR memset plus three stores
+7	ui_common_api_fn_00509f7a	0x00509F7A	0x00509F86	12	b90e5733fb45ddda37b1cf87df3f9d5245f770fbefa28ba8b0abda007482d600	no	yes	leaf three-field writer
+8	ui_common_api_fn_00509f86	0x00509F86	0x00509F8E	8	ca52eb001416047877c19b52f41bb4773b0888497b3a7b25506ac9437f65d16f	no	yes	message-count query; tail call to closed service_ancc_message_count_get
+9	ui_common_api_fn_00509f8e	0x00509F8E	0x00509F98	10	9cde369fe0bbb66fc0ba24d594abb97658055a333d6c0a05c14f009d694f934d	no	yes	battery query; tail call to closed CHG_GetSoc (charger-common records this BL at 0x00509F90)

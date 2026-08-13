@@ -1,0 +1,91 @@
+# FreeRTOS `vTaskStartScheduler` source-candidate audit
+
+Status: authenticated MIT source adaptation; production-excluded pending
+atomic scheduler/global and Apollo-port integration
+
+Scope: official G2 `2.2.6.10` Apollo-main application; offline stock/source,
+host, and dual-profile target-object verification; no assembly, signing,
+flashing, or hardware operation
+
+## Result
+
+The retained scheduler-start entry `[0x00454CEC,0x00454D7C)` is 144 bytes,
+SHA-256
+`2fabf4882dc6db88c73cd573ba3f454e7f6f0cafb1329670ad52e39ef1cbe01d`.
+Its complete control flow is the configured `vTaskStartScheduler()` algorithm
+from authenticated FreeRTOS-Kernel V10.5.1 commit
+`def7d2df2b0506d3d249334974f51e427c17a41c`.
+
+The bounded adaptation in
+`components/shared/freertos/runtime_freertos_task_start_scheduler.c` makes all
+G2-specific dependencies explicit instead of treating the full `tasks.c`
+translation unit as pristine or ready for production.
+
+## Recovered configuration and behavior
+
+The function uses static allocation for the idle task and timers are enabled.
+The application idle-memory hook at `[0x0048D558,0x0048D568)` supplies:
+
+| Item | Value |
+|---|---:|
+| static idle TCB | `0x20071E30` |
+| idle stack | `0x2005F154` |
+| stack depth | `0x400` 32-bit words |
+| task name | `IDLE` |
+| priority | `0` |
+
+It creates the idle task, creates the timer task only after idle success, and
+starts the scheduler only after both succeed. The success path masks
+interrupts, then writes `xNextTaskUnblockTime=0xFFFFFFFF`,
+`xSchedulerRunning=1`, and `xTickCount=0` before entering the Apollo scheduler
+port. Timer-task result `-1` reaches the configured fail-stop assertion;
+ordinary zero failure returns without changing scheduler globals. The final
+volatile `uxTopUsedPriority` read is retained for OpenOCD visibility.
+
+The complete outgoing stock call graph is:
+
+| Call site | Target | Role |
+|---:|---:|---|
+| `0x00454CFE` | `0x0048D558` | application idle-memory hook |
+| `0x00454D1E` | `0x00454820` | `xTaskCreateStatic` |
+| `0x00454D34` | `0x0047E674` | `xTimerCreateTimerTask` |
+| `0x00454D3C` | `0x005FA0A4` | interrupt mask |
+| `0x00454D5A` | `0x004421E2` | Apollo `xPortStartScheduler` |
+| `0x00454D6E` | `0x005FA0A4` | assertion interrupt mask |
+
+Its only direct caller is CMSIS `osKernelStart` at `0x004490BE`, which is
+already source-owned while deliberately retaining this provider.
+
+## Qualification
+
+The host oracle covers successful creation and write-before-port ordering,
+idle creation failure, ordinary timer failure, and timer allocation/assertion
+failure. It pins every static-create argument and the state observed at the
+port boundary. The stock test pins the full body, sole caller, all six outgoing
+calls, all raw word candidates into the function interior, six task-global
+literals, the idle hook bytes, and its RAM/depth contract. It also checks the
+authenticated upstream source tokens and commit pin.
+
+Apple Clang 21 emits a 2,140-byte object and 156-byte function; Linux Clang
+22.1.8 emits a 2,128-byte object and 160-byte function. Both complete object
+hashes, function hashes, undefined seams, and all 20 relocations are pinned.
+The compiler difference is authenticated and does not change the source or
+seam set.
+
+## Production boundary
+
+This result removes semantic opacity from the core scheduler-start algorithm,
+but intentionally does not redirect the stock entry. Production admission must
+atomically bind the idle-task entry/handle, four scheduler globals, assertion
+policy, static task creator, timer task, interrupt mask, and the Apollo
+`xPortStartScheduler` implementation. Companion candidates now close that
+port-start core and its 1,024-Hz STIMER setup without changing production.
+The elapsed-tick ISR and tickless algorithms are now separately qualified;
+first-party power hooks and hardware validation remain required before
+changing this boot-critical path.
+
+Verification:
+
+```sh
+python3 -m unittest -v tests.test_runtime_freertos_task_start_scheduler
+```

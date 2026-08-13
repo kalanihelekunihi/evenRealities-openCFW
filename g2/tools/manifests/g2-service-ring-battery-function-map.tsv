@@ -1,0 +1,6 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	entry_evidence	qualification
+1	SVC_RingBattery_Update	exact retained diagnostic symbol	0x004FF8E4	0x004FF96C	136	df0945fd0d90e6d37c7889a53ae6b4f5391812efbf6fbc5c3fd7b06b347445d8	yes	BL at 0x004C6746 and 0x005F97AE	serializes message type 5 with level and charging state and posts service record 0x105
+2	ring_battery_state_set	semantic behavior label	0x004FF96C	0x004FF98A	30	bb2242cfd158e7987b47e565ff5e23d94919930a2c47a550a90834c6a73218a6	no	BL at 0x005F9866	clamps level to 100 and stores normalized charging state
+3	ring_battery_level_get	semantic behavior label	0x004FF98A	0x004FF994	10	d6c150df1d1d531a552fde16672d3f94c8da08facf6f7f6bff9d527b5508f053	no	BL at 0x0049C5BE and three notification-handler sites	returns cached ring battery level
+4	ring_battery_charging_get	semantic behavior label	0x004FF994	0x004FF99A	6	c9d258eb43a37c428ed92141a7322f6c0e72920cbcd234f42581702f1944a902	no	two BL sites in the notification handler	returns cached ring charging flag
+5	SVC_RingBattery_RequestFromPeer	exact retained diagnostic symbol	0x004FF99A	0x004FFA44	170	2f7d2bffbe3aea243c730a055e12d04e771aef98125c01a072b6a746f240878f	yes	BL at 0x0054193C	serializes message type 6 and schedules peer-bound service record 0x105

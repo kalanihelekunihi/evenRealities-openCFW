@@ -1,0 +1,31 @@
+
+/work/out-v2/r20.05/O2_noinline/wsf_timer.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.WsfTimerServiceExpired:
+
+00000000 <WsfTimerServiceExpired>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	f7ff fffe 	bl	0 <WsfTaskLock>
+			2: R_ARM_THM_CALL	WsfTaskLock
+   6:	4809      	ldr	r0, [pc, #36]	@ (2c <WsfTimerServiceExpired+0x2c>)
+   8:	6804      	ldr	r4, [r0, #0]
+   a:	b10c      	cbz	r4, 10 <WsfTimerServiceExpired+0x10>
+   c:	6865      	ldr	r5, [r4, #4]
+   e:	b125      	cbz	r5, 1a <WsfTimerServiceExpired+0x1a>
+  10:	2400      	movs	r4, #0
+  12:	f7ff fffe 	bl	0 <WsfTaskUnlock>
+			12: R_ARM_THM_CALL	WsfTaskUnlock
+  16:	4620      	mov	r0, r4
+  18:	bd38      	pop	{r3, r4, r5, pc}
+  1a:	462a      	mov	r2, r5
+  1c:	4621      	mov	r1, r4
+  1e:	f7ff fffe 	bl	0 <WsfQueueRemove>
+			1e: R_ARM_THM_CALL	WsfQueueRemove
+  22:	7365      	strb	r5, [r4, #13]
+  24:	f7ff fffe 	bl	0 <WsfTaskUnlock>
+			24: R_ARM_THM_CALL	WsfTaskUnlock
+  28:	4620      	mov	r0, r4
+  2a:	bd38      	pop	{r3, r4, r5, pc}
+  2c:	00000000 	.word	0x00000000
+			2c: R_ARM_ABS32	wsfTimerTimerQueue

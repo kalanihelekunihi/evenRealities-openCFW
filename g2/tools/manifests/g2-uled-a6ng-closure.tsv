@@ -1,0 +1,32 @@
+metric	value
+linked_functions	22
+body_bytes	5276
+body_concat_sha256	067122a8e2f85e5837971a237602bacda5106e9b3c82f79f19d9629da15ab88c
+physical_interval	[0x005BBD48,0x005BD3A0)
+physical_bytes	5720
+physical_sha256	b4fc94ee5c7b645975b89e50425e5b400e7525e28721894c3f3517113dc52846
+owned_noncode_bytes	444
+owned_noncode_sha256	f8d5c55d7b44585bcf4774d784ed19f9ad7eb17cddc1ad24b0930a226cb08caa
+direct_bl_entry_sites	99 total / 99 intra-object / 0 exterior
+direct_bl_entry_digest	57ee0a5dfeb09c6d44775b357bfd9d8f961649810fdc4ac396ca0d9258ac5077
+direct_body_call_sites	366 real calls after four qualified VFP false windows
+direct_body_call_digest	004ab10fe0a7d4e982370adab0e15655ca6c4cc54b1236b91cc7e72cc1cb768a
+qualified_raw_bl_false_windows	0x005BC6CA:04f0a0f2;0x005BC6E6:f0f59df6;0x005BC70E:f0f580f6;0x005BCC90:f4f44ff4
+stored_entry_pointers	15 exact Thumb entries in external manager operations object [0x0070AFE0,0x0070B024)
+stored_entry_pointer_digest	808f45a0f1feab19c5674e7ffbbbe20745314c31492d18e5a8805ff47dbe1678
+external_ops_object	[0x0070AFE0,0x0070B024);68 bytes;panel ID 0;15 callbacks;capability 1;SHA256 ec5c1f936d6fb6967cd8ec6c2f5756de67e17c4c872bd20b8ae5ce16fa73304a
+stored_strict_interior_pointers	0
+raw_interior_byte_windows	0x00643447=0x005BCB00;0x00644B47=0x005BC400;both odd-byte overlaps, not pointers
+raw_interior_window_digest	5b7a4c1b213abe2d41218d4ea776df52200efc9f6bc5463189c768e5619d94ef
+direct_b_w_entry_or_interior_targets	0
+retained_path	D:\01_workspace\s200_ap510b_iar_git\driver\uled\hongshi_a6ng\drv_mspi_a6ng.c
+retained_path_pointer_cells	0x005BC8A8;0x005BD2F0
+request_templates	four 28-byte templates at 0x0076B12C/48/64/80;concat SHA256 e25b08f08ee39a2376c7d8eb46f5e2fe9aa06549d735624fe6a10beecb413549
+configuration_stream	[0x00728ED8,0x00728F0A);50 bytes;SHA256 817aab4e4b6763d2f1eccc26599caad6d867a3e42a8e6d4ac1f16fbcb3e96e13
+status_preamble	[0x0078D484,0x0078D48C);8 bytes 02002a00000001df;SHA256 e3280ece11de406ed5063c8fb4a05dcee97cbf2ffce4ffc67ff698de7039a067
+common_driver_calls	0x005BBD98 init;0x005BBE36 write;0x005BBE78 read;0x005BCDD4 async QSPI write;0x005BD03C status-preamble write
+driver_globals	MSPI handle 0x20074510;framebuffer 0x20074514;optional clear callback 0x20074518;command scratch 0x2007451C;brightness state 0x20074520;offset-mode flag 0x2007501A
+display_geometry	640x480 pixels;4-bit packed framebuffer with 320-byte scanlines
+production_routed	false
+ownership_bytes	0
+source_inventory	unavailable; linked-object census complete but source-only function count unknown

@@ -1,0 +1,4 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	60 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Conversation-record diagnostics only
+IAR DLIB memory primitives	11 direct BL sites	0x00439BE4,0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded or source-recreated	Copies and zero fills add no release discriminator
+LVGL text line measurement	1 direct BL site	0x004897FC	lvgl/lvgl with G2 integration	9.3-compatible	344c7c318047b7348e1be8572a9fd4260c251cfa	source-admitted	lv_text_get_next_line-compatible implementation

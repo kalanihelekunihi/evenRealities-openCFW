@@ -1,0 +1,6 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	60 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger	2.2.99-compatible	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Touch controller init read gesture and error diagnostics
+IAR DLIB memory primitives	9 direct BL sites	0x00439BE4,0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded/source-recreated	Memcpy and memset add no release discriminator
+CMSIS-FreeRTOS delay	2 direct BL sites	0x00449376	ARM-software/CMSIS-FreeRTOS over FreeRTOS-Kernel and CMSIS_5	v10.5.1	d213f261b5be6bb29a7cce8b84071706b72f4d53;def7d2df2b0506d3d249334974f51e427c17a41c;2b7495b8535bdcb306dac29b9ded4cfb679d7e5c	source-admitted	osDelay exact seam for controller reset and init settling
+Closed HAL I2C provider	4 direct BL sites	0x0050436E,0x005044B4,0x005045C0,0x0050468E	Even Realities first-party	closed retained-path object driver\hal\src\hal_i2c.c	unobservable	bounded closed provider	Register read and write transfers to the CY8C4046FNI controller
+Bounded first-party board seam	2 direct BL sites	0x0053A5BE	Even Realities first-party	private G2 source	unobservable	bounded first-party graph	Board cache/invalidate seam around touch data extraction

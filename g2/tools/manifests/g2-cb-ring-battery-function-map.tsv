@@ -1,0 +1,6 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	entry_evidence	qualification
+1	cb_ring_battery_forwarder	semantic behavior label	0x00500378	0x00500380	8	bba79132dfb44dcf84a24a91d8eeaa5258236205dbe138730a45c86b24c18c44	no	BL at 0x0049E706	forwards unchanged to the first-party ring-battery UI/state consumer
+2	CB_RING_BAT_Init	semantic source-order label	0x00500380	0x0050038C	12	5c147fabccb4f0ef73d2658b8902428ced1589fc4c9bf1c6192f2710cfbaf4f7	no	BL at 0x004FF8D6	initializes generic callback list 0x20073F90 with type string RING_BAT_INFO
+3	CB_RING_BAT_Deinit	semantic source-order label	0x0050038C	0x00500396	10	9a5faa85103b457c97565a3ba685dabcd8360d422d93cbf56de10ade42158001	no	BL at 0x004FF8DE	deinitializes generic callback list 0x20073F90
+4	CB_RING_BAT_RegisterCallback	exact retained diagnostic symbol	0x00500396	0x005003E4	78	68e911709b97d221f462173417c120b807f014dcbee02e1ddb34c260a7423097	yes	BL at 0x0049E738	rejects null with diagnostics and otherwise registers the callback in list 0x20073F90
+5	CB_RING_BAT_Notify	semantic behavior label	0x005003E4	0x005003F2	14	92fc210181007cdd8335cfa0248b7f5866a1a7e93d84149a9ebebb826d79a38e	no	BL at 0x005F9876 and 0x005F9886	passes event key and an in/out value word to the generic callback dispatcher

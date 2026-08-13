@@ -1,0 +1,4 @@
+function	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	entry_evidence	qualification
+frexpf	0x0059D244	0x0059D258	20	420aee8c563327dfd7e8b3e1acefd07f473cbe3917f09854c45285866f60a487	four external BL sites	hard-float public wrapper returns the fraction in s0 and stores the exponent through r0
+_internal_frexpf_bits	0x0059D258	0x0059D28C	52	77a18771325e8acc19148f0ed42f562aa5c4b5a948f4720de1e93883723a60b4	internal BL at 0x0059D24C	normalizes finite binary32 values and returns fraction bits plus exponent
+ldexpf	0x0059D28C	0x0059D350	196	314f08b4ed19f0ad2b7afdcdec50da41f1ba983725a3198d813051b31fed93fb	five external BL sites	hard-float binary32 power-of-two scaling including subnormal multiplication overflow saturation and ERANGE tail

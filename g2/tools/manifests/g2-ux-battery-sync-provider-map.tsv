@@ -1,0 +1,5 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	45 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99 source-equivalent core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Log-level query, structured output, and compact raw output around validation and all six dispatch cases
+G2 charger common	4 direct BL sites	0x004AD53E,0x004AD652	Even Realities first-party	private G2 source	unobservable	provider seam closed	Sends request/notify messages or imports peer battery state; both target bodies are independently closed
+G2 ring-battery service	6 direct BL sites	0x004FF8E4,0x004FF96C,0x004FF98A,0x004FF994	Even Realities first-party	private G2 source	unobservable	provider seam closed	Updates, reads, and emits the independently closed ring-battery state service
+G2 callback manager	2 direct BL sites	0x005003E4	Even Realities first-party	private G2 source	unobservable	provider seam identified	Publishes level key 0 and charging key 1 only when the imported value changed

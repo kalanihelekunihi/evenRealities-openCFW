@@ -1,0 +1,122 @@
+{
+  "expected_exact_match_count": 0,
+  "expected_vendor_modified_count": 0,
+  "function_count": 5,
+  "functions": [
+    {
+      "binding": "g",
+      "compared_byte_count": 90,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "AOAD_SetMatrixLookUpTable",
+      "normalized_sha256": "e7860970496b0eb2a5896289f45d26d355325c74ab02cbb92c1b18d83a48ebb2",
+      "object": "aoad.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.AOAD_SetMatrixLookUpTable",
+      "size": 94
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 8,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 8,
+      "matches": [],
+      "name": "AOAD_RegisterModule",
+      "normalized_sha256": "c68659f3359cc5c9b5c7ac39c597f160172364ce8f41e2b557f66cf7bf377860",
+      "object": "aoad.c.obj",
+      "offset": 0,
+      "relocation_count": 2,
+      "section": ".text.AOAD_RegisterModule",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 114,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3156380
+      ],
+      "name": "AOAD_Init",
+      "normalized_sha256": "74ae2849476b201a10d3f5487c7ac724231fb5df29c43e4ce1a5598fee32483f",
+      "object": "aoad_module.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.AOAD_Init",
+      "size": 126
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 0,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "AOAD_Restore",
+      "normalized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "object": "aoad_module.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.AOAD_Restore",
+      "size": 4
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 182,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 20,
+      "matches": [],
+      "name": "AOAD_GetIqSamplesForValidation",
+      "normalized_sha256": "d7d2d1f8612494931beb20761726bd0398c0a72dd0fef38a9e131a7aa62a1652",
+      "object": "pal_aoad_validation.c.obj",
+      "offset": 0,
+      "relocation_count": 5,
+      "section": ".text.AOAD_GetIqSamplesForValidation",
+      "size": 202
+    }
+  ],
+  "identity": {
+    "architecture": "ARCv2 EM",
+    "archive_git_blob": "b31df41c47bdda9ab095d056a3da452b87c7a7bf",
+    "archive_kind": "aoad",
+    "archive_path": "libs/aoad/lib_aoad.a",
+    "archive_sha256": "e429d2d2ed15699bd5eccef8c6b71153e4bd518d98780e336ab96b227704d682",
+    "compiler": "Synopsys MetaWare ARC Compiler T-2022.09 build 004 / LLVM 14.0.6 (EM-Micro)",
+    "compiler_anchors_matched": true,
+    "compiler_comment_sha256": "929918ddd8913f60418908e65d12e5b7baa0e2b904423b6fb95c8c32cdfecddd",
+    "optimization": "-Os"
+  },
+  "known_expected_address_match_count": 0,
+  "known_function_count": 0,
+  "unique_discovered_matches": [
+    {
+      "binding": "g",
+      "compared_byte_count": 114,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [
+        3156380
+      ],
+      "name": "AOAD_Init",
+      "normalized_sha256": "74ae2849476b201a10d3f5487c7ac724231fb5df29c43e4ce1a5598fee32483f",
+      "object": "aoad_module.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.AOAD_Init",
+      "size": 126
+    }
+  ]
+}

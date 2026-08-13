@@ -1,0 +1,11 @@
+push {r4,lr}
+bl <call>
+ldr r3,[pc,#pcrel] @ (18 <symbol>)
+ldr r3,[r3,#0]
+mov r4,r3
+cbz r3,<branch>
+ldr r4,[r3,#4]
+bl <call>
+mov r0,r4
+pop {r4,pc}
+.word <literal>

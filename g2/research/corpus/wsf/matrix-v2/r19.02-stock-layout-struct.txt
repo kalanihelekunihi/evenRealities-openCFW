@@ -1,0 +1,8 @@
+typedef struct wsfTimer_tag
+{
+  struct wsfTimer_tag *pNext;             /*!< \brief pointer to next timer in queue */
+  wsfTimerTicks_t     ticks;              /*!< \brief number of ticks until expiration */
+  wsfMsgHdr_t         msg;                /*!< \brief application-defined timer event parameters */
+  wsfHandlerId_t      handlerId;          /*!< \brief event handler for this timer */
+  bool_t              isStarted;          /*!< \brief TRUE if timer has been started */
+} wsfTimer_t;

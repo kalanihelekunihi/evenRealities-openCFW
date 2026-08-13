@@ -1,0 +1,5 @@
+# Official later Ambiq Git imports corroborating the stock-effective ten-handler source variant.
+# Repository visibility does not override the file-specific proprietary Wicentric license.
+label	repository	commit	path	bytes	sha256	git_blob	base_relation	historical_qualification
+AmbiqSuite-R4.4.1	AmbiqAI/neuralSPOT	4264b9309e03064ffad13a0468d5d0c1110c5288	extern/AmbiqSuite/R4.4.1/third_party/cordio/wsf/sources/port/freertos/wsf_os.c	11666	9a3e95310d78bbaea55dc62b7e0bd22bb6db764afd2822877e3e4ceeeab7d2ff	c37a11641314c53d30d8051937f4c808acc71cfb	one byte/line differs from R2.5.1: guarded WSF_MAX_HANDLERS default 9 becomes 10; all other bytes identical	truncated 2025 import history; official source corroboration, not the G2 historical commit
+AmbiqSuite-vendor-copy	AmbiqAI/nsx-ambiq-sdk	9f36432d875060ca301675131b40452ecf8377ca	modules/nsx-cordio/sdk/third_party/cordio/wsf/sources/port/freertos/wsf_os.c	11666	9a3e95310d78bbaea55dc62b7e0bd22bb6db764afd2822877e3e4ceeeab7d2ff	c37a11641314c53d30d8051937f4c808acc71cfb	byte-identical corroborating vendor copy	2026 import; corroboration only, not historical provenance

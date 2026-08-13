@@ -1,0 +1,13 @@
+role	artifact	stock_address	bytes	entries	stock_sha256	assessment
+initiator	physical_initializer	0x00537EEC	40	1	692ebaa593161de42e912411698481ce0ba40d0dd8e75b19cc5efeb6d15979b4	22-byte SmpiInit plus alignment and four-word owned literal pool
+initiator	interface	0x0078C344	12	3	a0eb9c52d96f5d8dbec3ed04946b77c28175e9f769e57544d568fd97fe76405f	state-pointer table, legacy action table, common-state table
+initiator	action_pointer_table	0x006DBAC4	100	25	2b2fd073285f4dae0973e64cfe07b3d68c4c119797401b2d2d8f932a2250150f	exact source-order legacy initiator action roots
+initiator	state_pointer_table	0x007235E8	56	14	abcfedddf8b6ece51e10104e8179a1c8423a0a679def8008acaf59b9f77af3cd	one pointer for each legacy initiator state
+initiator	state_entry_concat	pointer-order	162	15	b94bcdff170bcac4b156a80b14a6cc802502d340d57037d9b88349b89df4b1eb	common table followed by fourteen terminated three-byte state tables
+initiator	owned_concat	role-order	370	1	ecfe3c9d668814bb4783f5cf046424a255729c271e78881d95bcae466b8c005c	physical initializer, interface, action/state pointers, and all state entries
+responder	physical_initializer	0x005380DC	40	1	e8b27cfbbf917047a50437d2cf68b10640ae740cf9e92fe2bee79fff26316bd3	22-byte SmprInit plus alignment and four-word owned literal pool
+responder	interface	0x0078C4AC	12	3	3df793b9a82597461457fc13ceeb6f0d671bef63630da55b9d55926464596d16	state-pointer table, legacy action table, common-state table
+responder	action_pointer_table	0x006D7E7C	108	27	f98a484ebaee566eda7ad88adbadd10b8e2670de97b1370e35783fea117143cc	exact r20/R4 source-order responder action roots including security-request timeout
+responder	state_pointer_table	0x00718E50	60	15	b99a11d8b8df5246263e583089627e81a2c630c7fe1eb85b6a378d373ded036b	one pointer for each legacy responder state
+responder	state_entry_concat	pointer-order	195	16	5b9fe4ec712191eaef713c870eb07065c037f2c537544358e37a410a4e80fdb2	common table followed by fifteen terminated three-byte state tables
+responder	owned_concat	role-order	415	1	1e94a3355528895406876ad88ea5a3c18315174911355e866d6d2bb9fe0de56a	physical initializer, interface, action/state pointers, and all state entries

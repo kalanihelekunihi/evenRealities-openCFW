@@ -1,0 +1,74 @@
+stmdb sp!,{r4,r5,r6,r7,r8,r9,lr}
+sub sp,#12
+bl <call>
+ldr.w r9,[pc,#pcrel] @ c0 <symbol>
+ldr.w r5,[r9]
+subs r5,r0,r5
+cmp r5,#9
+bhi.n <branch>
+ldr r7,[pc,#pcrel] @ (c4 <symbol>)
+bl <call>
+ldr r3,[r7,#0]
+cmp r3,#0
+beq.n <branch>
+ldr r4,[r3,#4]
+bl <call>
+cbnz r4,<branch>
+sp ,#12
+ldmia.w sp!,{r4,r5,r6,r7,r8,r9,pc}
+movw r2,#reloc @ 0ximm
+movs r6,#100 @ 0ximm
+mul.w r2,r4,r2
+ldr r5,[pc,#pcrel] @ (c8 <symbol>)
+ldr r3,[pc,#pcrel] @ (cc <symbol>)
+umull r5,r2,r5,r2
+ldr r0,[r3,#0]
+movs r1,#4
+movs r3,#0
+str r6,[sp,#0]
+lsrs r2,r2,#6
+bl <call>
+cmp r0,#1
+beq.n <branch>
+bl <call>
+sp ,#12
+ldmia.w sp!,{r4,r5,r6,r7,r8,r9,lr}
+b.w <branch>
+ldr r7,[pc,#pcrel] @ (c4 <symbol>)
+mov r6,r0
+bl <call>
+ldr r4,[r7,#0]
+cbz r4,<branch>
+mov.w r8,#0
+ldr r3,[pc,#pcrel] @ (d0 <symbol>)
+umull r3,r5,r3,r5
+lsrs r5,r5,#3
+ldr r3,[r4,#4]
+cmp r5,r3
+sub.w r2,r3,r5
+bcs.n <branch>
+str r2,[r4,#4]
+ldr r4,[r4,#0]
+cmp r4,#0
+bne.n <branch>
+bl <call>
+str.w r6,[r9]
+bl <call>
+ldr r3,[r7,#0]
+cmp r3,#0
+bne.n <branch>
+sp ,#12
+ldmia.w sp!,{r4,r5,r6,r7,r8,r9,lr}
+b.w <branch>
+ldrb r0,[r4,#12]
+str.w r8,[r4,#4]
+movs r1,#2
+bl <call>
+ldr r4,[r4,#0]
+cmp r4,#0
+bne.n <branch>
+b.n <branch>
+nop
+.word <literal>
+.word <literal>
+.word <literal>

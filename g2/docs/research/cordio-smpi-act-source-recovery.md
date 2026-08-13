@@ -1,0 +1,74 @@
+# Cordio `smpi_act.c` source recovery
+
+## Result
+
+The stock interval `[0x005E3118,0x005E3474)` is the complete Cordio initiator
+action unit `ble-host/sources/stack/smp/smpi_act.c`. All ten source definitions
+survive: 852 code bytes and one eight-byte literal island. No source definition
+is dead-stripped.
+
+Packetcraft r20.05 through r20.05c and the official later AmbiqSuite R4.4.1
+import share Apache-2.0 Git blob
+`404a9e20dac01b1aa466b8758c6e46cb59d4af40`, 11,910 bytes, SHA-256
+`c61194f9d62c5dd974056cd0d6d6e025243b3d10b75c6c08ac7f97ed749e5ac2`.
+The selected public pin is r20.05c commit
+`3656312d6b73e2a2c1c8b33ee0385bc199dd97e6`. The later Ambiq import is exact
+corroboration rather than a claim about G2's historical generating commit.
+
+The r19/AmbiqSuite 2.x blob
+`2db63fd5204268a8fccab6a733184f8b44e28146` differs in one implementation
+line: it omits `pCcb->keyReady = TRUE` after adjusting the initiator STK.
+Stock stores one at `smpCcb_t+0x44` at `0x005E333C` before calling
+`DmSmpEncryptReq`. This independently selects the r20/R4 source family.
+
+## Boundary, tables, and ingress
+
+The 860-byte physical object hashes to
+`b872fde1c48e7f3ca8b9538a4767c94003803903738007ef046e2b094f32c862`.
+Its ten concatenated bodies hash to
+`08a38806ad6b2936fbd3f6ea7f22f0f247982f1d660e7ff0d3bc3de25a5291ed`.
+The only non-code bytes are `[0x005E3404,0x005E340C)`, containing
+`pSmpCfg=0x200004B8` and `smpCb=0x20070AEC`. The next Secure Connections action
+begins at `0x005E3474`. No `smpi_act.c` path string survives, so ownership is
+established by the two exact action-table subsequences, source order, behavior,
+and adjacent closed boundaries rather than a retained-path anchor.
+
+All ten functions are rooted in both initiator action families: ten pointers
+in the Secure Connections table `[0x006D1214,0x006D12E0)` and ten in the
+legacy table `[0x006DBAC4,0x006DBB28)`. There are no genuine direct calls to a
+TU entry and no stored strict-interior address.
+
+A halfword-only BL decoder reports one apparent call to `smpiActStkEncrypt`
+at `0x005E1CEC`. That address is the second halfword of the four-byte multiply
+at `0x005E1CEA` (`07 fb 01 f0`), not an instruction boundary. The analyzer
+pins and rejects this false positive explicitly.
+
+## Behavior and ABI
+
+The linked actions send and process the initiator pairing/security requests,
+build and validate the pairing response, exchange confirm/random values,
+derive and mark the STK ready, request link encryption, and distribute or
+receive keys. Confirmation failures increment the attempt counter, notify the
+closed SMP database, and enter cancel or maximum-attempt handling. The
+initiator and responder key-distribution paths share the already-closed common
+`smpSendKey`, `smpProcRcvKey`, and `smpSmExecute` providers.
+
+Relevant `smpCcb_t` offsets are request/response buffers at `+0x20/+0x27`,
+scratch pointer at `+0x30`, security-request flag at `+0x3B`, connection ID at
+`+0x3D`, next command at `+0x3F`, auth and attempts at `+0x40/+0x42`,
+`keyReady` at `+0x44`, and the Secure Connections record at `+0x48`. The ten
+body hashes lock 28 decoded outbound BL sites and the two registered indirect
+pairing/authentication callbacks.
+
+## Reproducibility
+
+`tools/analyze_g2_cordio_smpi_act.py` pins the official image and manifests,
+every body, the complete physical interval and literal island, both initiator
+tables, the `keyReady` instruction sequence, all stored entry pointers, the
+wide-multiply false positive, and the absence of an interior pointer. Source
+and stock hashes are in
+`tools/manifests/packetcraft-cordio-smpi-act-function-map.tsv`; provenance is
+in `packetcraft-cordio-smpi-act-provenance.tsv`.
+
+This raises identified provenance only. No stock byte is replaced and no
+source-owned production byte is added.

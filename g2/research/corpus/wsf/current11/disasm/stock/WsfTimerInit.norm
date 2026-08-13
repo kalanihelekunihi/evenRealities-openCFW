@@ -1,0 +1,30 @@
+push {r2,r3,r4,lr}
+ldr r0,[pc,#pcrel] @ (0ximm)
+movs r1,#0
+str r1,[r0,#0]
+movs r1,#0
+str r1,[r0,#4]
+ldr r4,[pc,#pcrel] @ (0ximm)
+ldr r0,[r4,#0]
+cmp r0,#0
+bne.n <branch>
+ldr r0,[pc,#pcrel] @ (0ximm)
+str r0,[sp,#0]
+movs r3,#0
+movs r2,#0
+movs r1,#10
+ldr r0,[pc,#pcrel] @ (0ximm)
+bl <call>
+str r0,[r4,#0]
+ldr r0,[r4,#0]
+cmp r0,#0
+bne.n <branch>
+bl <call>
+movs r0,#0
+movs.w r1,#4294967295 @ 0ximm
+str r0,[r1,#0]
+b.n <branch>
+bl <call>
+ldr r1,[pc,#pcrel] @ (0ximm)
+str r0,[r1,#0]
+pop {r0,r1,r4,pc}

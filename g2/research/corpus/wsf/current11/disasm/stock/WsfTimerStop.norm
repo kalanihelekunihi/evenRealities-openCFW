@@ -1,0 +1,7 @@
+push {r4,lr}
+movs r4,r0
+bl <call>
+movs r0,r4
+bl <call>
+bl <call>
+pop {r4,pc}

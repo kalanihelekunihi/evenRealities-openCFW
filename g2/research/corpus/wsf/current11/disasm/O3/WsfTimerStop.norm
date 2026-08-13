@@ -1,0 +1,27 @@
+push {r4,lr}
+mov r4,r0
+bl <call>
+ldr r3,[pc,#pcrel] @ (40 <symbol>)
+ldr r3,[r3,#0]
+cbz r3,<branch>
+cmp r4,r3
+bne.n <branch>
+b.n <branch>
+cmp r4,r3
+beq.n <branch>
+mov r2,r3
+ldr r3,[r3,#0]
+cmp r3,#0
+bne.n <branch>
+ldmia.w sp!,{r4,lr}
+b.w <branch>
+movs r2,#0
+mov r1,r4
+ldr r0,[pc,#pcrel] @ (40 <symbol>)
+bl <call>
+movs r3,#0
+strb r3,[r4,#13]
+ldmia.w sp!,{r4,lr}
+b.w <branch>
+nop
+.word <literal>

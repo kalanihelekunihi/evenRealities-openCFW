@@ -1,0 +1,46 @@
+push {lr}
+sub sp,#20
+str r0,[sp,#4]
+str r1,[sp,#0]
+movs r3,#0
+str r3,[sp,#8]
+bl <call>
+ldr r3,[sp,#4]
+ldrb r3,[r3,#13]
+cmp r3,#0
+beq.n <branch>
+ldr r0,[sp,#4]
+bl <call>
+ldr r3,[sp,#4]
+movs r2,#1
+strb r2,[r3,#13]
+ldr r3,[sp,#4]
+ldr r2,[sp,#0]
+str r2,[r3,#4]
+ldr r3,[pc,#pcrel] @ (64 <symbol>)
+ldr r3,[r3,#0]
+str r3,[sp,#12]
+b.n <branch>
+ldr r3,[sp,#12]
+str r3,[sp,#8]
+ldr r3,[sp,#12]
+ldr r3,[r3,#0]
+str r3,[sp,#12]
+ldr r3,[sp,#12]
+cmp r3,#0
+beq.n <branch>
+ldr r3,[sp,#4]
+ldr r2,[r3,#4]
+ldr r3,[sp,#12]
+ldr r3,[r3,#4]
+cmp r2,r3
+bcs.n <branch>
+ldr r2,[sp,#8]
+ldr r1,[sp,#4]
+ldr r0,[pc,#pcrel] @ (64 <symbol>)
+bl <call>
+bl <call>
+nop
+sp ,#20
+ldr.w pc,[sp],#4
+.word <literal>

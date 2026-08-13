@@ -1,0 +1,8 @@
+provider	edges	targets	origin	version	selected_commit	status
+LVGL UI primitives	702 direct BL sites	64 LVGL object/style/layout/animation/label/image/font targets	lvgl/lvgl with G2 integration	9.3-development hybrid	344c7c318047b7348e1be8572a9fd4260c251cfa	source-admitted
+EasyLogger diagnostics	1245 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted
+CMSIS-FreeRTOS mutex wrappers	20 direct BL sites	0x004497B6,0x0044981C	ARM-software/CMSIS-FreeRTOS over FreeRTOS-Kernel	v10.5.1	d213f261b5be6bb29a7cce8b84071706b72f4d53	authenticated and production source-owned
+IAR DLIB/runtime	67 direct BL sites	0x00439BE4,0x00439C04,0x0043C0E4,0x0044A43C,0x0044B5A0,0x0044B728	IAR EWARM runtime	9.20+ floor; 9.60.2 leading candidate	unavailable	bounded or source-recreated
+nanopb runtime	22 direct BL sites	0x0048EB32	nanopb	0.4.7 through 0.4.9.1 compatible	98bf4db69897b53434f3d0ba72e0a3ab1a902824	source-admitted
+mpaland printf formatter	2 direct BL sites	0x004B4728	mpaland/printf with G2 wrapper	selected compatible lineage	d3b984684bb8a8bdc48cc7a1abecb93ce59bbe3e	known source family
+G2 first-party providers	179 direct BL sites	53 navigation/time/role/resource/dashboard/service targets	Even Realities first-party	private G2 source	unobservable	bounded first-party graph

@@ -1,0 +1,12 @@
+function	linkage	source_line	signature
+DmSecCalcOobReq	global	147	void DmSecCalcOobReq(uint8_t *pRand, uint8_t *pPubKeyX)
+DmSecCompareRsp	global	276	void DmSecCompareRsp(dmConnId_t connId, bool_t valid)
+DmSecGenerateEccKeyReq	global	200	void DmSecGenerateEccKeyReq()
+DmSecGetCompareValue	global	307	uint32_t DmSecGetCompareValue(uint8_t *pConfirm)
+DmSecGetEccKey	global	260	secEccKey_t *DmSecGetEccKey(void)
+DmSecKeypressReq	global	101	void DmSecKeypressReq(dmConnId_t connId, uint8_t keypressType)
+DmSecLescInit	global	325	void DmSecLescInit(void)
+DmSecSetDebugEccKey	global	212	void DmSecSetDebugEccKey()
+DmSecSetEccKey	global	248	void DmSecSetEccKey(secEccKey_t *pKey)
+DmSecSetOob	global	128	void DmSecSetOob(dmConnId_t connId, dmSecLescOobCfg_t *pCfg)
+dmSecLescMsgHandler	global	67	void dmSecLescMsgHandler(dmSecMsg_t *pMsg)

@@ -1,0 +1,5 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	130 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99 source-equivalent core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	All close-page diagnostics terminate at the admitted logger
+LVGL UI primitives	99 direct BL sites	selected object style label animation and resource entries	lvgl/lvgl with G2 display integration	9.3-compatible interval	344c7c318047b7348e1be8572a9fd4260c251cfa	source-admitted	All reusable UI and animation primitives terminate in the selected LVGL family
+IAR DLIB memory runtime	5 direct BL sites	0x0043C0E4	IAR DLIB	EWARM-compatible image interval	unobservable	bounded runtime seam	Exact memset-style runtime entry only
+G2 display sync and page policy	37 direct BL sites	0x00443484,0x00443504,0x0045A568,0x0045A8EE,0x0045ACCC,0x0045FFFE,0x00460084,0x00464BB2,0x00464C36,0x00464D1C	Even Realities first-party over admitted providers	private G2 source	unobservable	provider seams identified	Display state sync foreground-page and resource policy remains first-party

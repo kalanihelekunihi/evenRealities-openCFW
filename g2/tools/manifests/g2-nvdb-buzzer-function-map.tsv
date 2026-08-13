@@ -1,0 +1,6 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	nvdbBuzzerDefaultCrcInitialize	inferred semantic name	0x0058F9D4	0x0058F9E8	20	177a661785b53b0057bdc93eec3ec350e2876399d6a47029c758fb1f47cf72c1	stored Thumb pointer 0x006D1E84	computes CCITT-FALSE over the first ten bytes of the twelve-byte default record and stores the CRC at +10
+2	_nvdbUpdataBuzzer	exact retained symbol string	0x0058F9E8	0x0058FA60	120	06805d442594087356c548b9e6bf1f58fb77d5ae58f1f7db037be790d427ef19	stored Thumb pointer 0x0078F518	retained path and symbol; reads nvBuzzer; rewrites defaults on missing data or a stale pre-v2 record
+3	nvdbBuzzerFrequencyGet	inferred semantic name	0x0058FA60	0x0058FA66	6	f90b05ca12e572b728068cc575c618d3c766251b3551dde1c2da7ca52fca6e61	direct BL 0x00576B30	returns record frequency at +4
+4	nvdbBuzzerDutyGet	inferred semantic name	0x0058FA66	0x0058FA6C	6	8c705b33d544b9b5c56a0a485c8d2bc1550791fb2186c0ca942d908aae5f22be	direct BL 0x00576B4C	returns record duty byte at +8
+5	nvdbBuzzerUpdate	inferred semantic name	0x0058FA6C	0x0058FA90	36	dfcc2933e62aa533c08d37a3554bff2c80502a5a8dffd6b8a78a879d38d87647	direct BL 0x00576CCE and internal BLs 0x0058FA4A/0x0058FA56	sets version two/frequency/duty; recomputes CRC; writes twelve-byte nvBuzzer record

@@ -1,0 +1,4 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	ingress	evidence
+1	nvdbMacDefaultInitialize	inferred semantic name	0x005D9F48	0x005D9FC2	122	6518ae9a8bde9545acffeb0896bdac49b86993c9234e46d88bb7554827be3d6f	stored Thumb pointer 0x006D1E8C	derives a six-byte static-random address from CHIPID1||CHIPID0 using CRC-32 and CCITT-FALSE; checksums the ten-byte default record
+2	_nvdbUpdataMac	exact retained symbol string	0x005D9FC2	0x005DA034	114	b634daa132d5501b66a4ae1545c3a740987e46c46714cfa054b8ab64faa0d089	stored Thumb pointer 0x0078F51C	retained path and symbol; reads nvMAC; rewrites the current derived address on missing data or a stale v0 checksum mismatch
+3	nvdbMacUpdate	inferred semantic name	0x005DA034	0x005DA060	44	03972cfd3d66bf294c5c46c3c4323ea7492976d2c0c2092b75b5b3fa48868145	internal BLs 0x005DA022 and 0x005DA02A	copies six address bytes; sets version one; recomputes CRC; writes ten-byte nvMAC record

@@ -1,0 +1,6 @@
+recovery_order	function	naming_confidence	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	source_path_anchor	entry_evidence	qualification
+1	at_core_register_callback	semantic behavior label	0x005412E0	0x00541302	34	fab1d89d4f37e4b965fb55be1d18dd5c9914a90da2cc56e2ec152857d5adbf31	no	BL at 0x0057DE04	registers one of three parser callbacks and its enabled bit
+2	AT_CoreInit	exact retained diagnostic symbol	0x00541302	0x0054136C	106	acd46f874b6b3df517259310a38e48d52a0c37eb596f65432494faf14a84f010	yes	BL at 0x004C9534	initializes the command table and parser state
+3	AT_Handler	exact retained diagnostic symbol	0x0054136C	0x00541430	196	4a38c32fa8db87db0b6205ce7a843524039dec5d51e9106a24a6158e00ee03ad	yes	BL at 0x00538450	parses up to three command segments and dispatches them
+4	at_core_output	semantic behavior and established call-role label	0x00541430	0x005414BA	138	0a5c7f60749b3de0ad0bfa9d4a156c7771091ed3a5c09c305e4709f98776e026	no	82 external BL entries plus internal dispatch	formats a response into the shared buffer and invokes enabled output callbacks
+5	at_core_dispatch_command	semantic behavior label	0x005414BA	0x0054157A	192	2c8e51043ca69ef8bff9e29223531c192cf9086763969d058b463005923b6855	no	BL at 0x00541428	matches the command table and invokes direct or parser-adapted handlers

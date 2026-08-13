@@ -1,0 +1,9 @@
+source_order	function	stock_status	stock_start	stock_end_exclusive	stock_bytes	stock_sha256	semantic_oracle	oracle_lines	oracle_body_sha256	ingress
+1	hciCoreReadResolvingListSize	linked	0x00569B04	0x00569B2A	38	f77cda35dfa729b09a1879b6cac1b4ac59e734797c559c3f38f7349a33b028a5	R2.5.1 through R4.4.1 invariant definition	77-93	e407f5f77ac16c0dfc70fe8aaece711e86c62e4d5c7caa964dc0a2d9c3d3e21a	direct internal call
+2	hciCoreReadMaxDataLen	linked	0x00569B2A	0x00569B4A	32	d3680524f1e2e1b1c15c05f531fbf527ca6208f37c9ddaf79e3f49b1755143e3	R2.5.1 through R4.4.1 invariant definition	104-118	a14479c9fd8967b79b61ad905cf51386a2b504e5d513aa0b4b9ba47313cb02d7	direct internal calls
+3	hciCoreResetStart	linked	0x00569B4A	0x00569B56	12	a11a65f20956ee1890a1db003bc8de5c2be8ba35290e27e18e9d54c49324e4b7	R3.1.1 Apollo3 semantic oracle	129-137	ee8e867d18a0fc3007c24ca7d0cef1759aa88eb9d9dab31152043f33e4f4b029	direct call from HCI core
+4	hciCoreResetSequence	linked	0x00569B56	0x00569D26	464	9749794a5293dc74c50f3595ac81c7d8a5c28a93cbe15c1ee155a1dda3ba077a	product hybrid of R3.1.1 Apollo3 and R4.4.1 Cooper	150-312		direct call from HCI platform shim
+5	hciCoreVsCmdCmplRcvd	source_only			0		R3.1.1/R4.4.1 invariant	327-330	59ebaf611ec2d1e06ed4dda47dadb8c51083e4a2727a6578a33ad14b05b30df3	custom event port dispatches vendor completion directly
+6	hciCoreVsEvtRcvd	source_only			0		R3.1.1/R4.4.1 invariant	344-347	8f3757c768e342c8cc889e26dcdf25bca618ed3d781ea778de0737b69a4a67e2	no body caller or pointer
+7	hciCoreHwErrorRcvd	source_only			0		R3.1.1/R4.4.1 invariant	360-363	d687e4aab45561ea708562cc753572f3674512c773f6dd2fee4888de07fdfd79	no body caller or pointer
+8	HciVsInit	source_only			0		R3.1.1/R4.4.1 invariant no-op	376-379	d9e19c887a798942ba248e84f9847327e7f39cddca1b4bcba9929e4e82ebeb54	optimized empty and uncalled

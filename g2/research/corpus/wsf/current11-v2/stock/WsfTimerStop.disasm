@@ -1,0 +1,14 @@
+
+/work/stock/WsfTimerStop.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0052a4d2 <.data>:
+  52a4d2:	b510      	push	{r4, lr}
+  52a4d4:	0004      	movs	r4, r0
+  52a4d6:	f001 f9f7 	bl	0x52b8c8
+  52a4da:	0020      	movs	r0, r4
+  52a4dc:	f7ff ff8e 	bl	0x52a3fc
+  52a4e0:	f001 f9f6 	bl	0x52b8d0
+  52a4e4:	bd10      	pop	{r4, pc}

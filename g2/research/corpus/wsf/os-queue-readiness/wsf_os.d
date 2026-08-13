@@ -1,0 +1,25 @@
+wsf_os.o: \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_os.c \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_types.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/include/wsf_os.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_os_int.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/include/wsf_queue.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_assert.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_trace.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/include/wsf_timer.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/include/wsf_os.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/include/wsf_queue.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/include/wsf_buf.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/include/wsf_msg.h \
+ AmbiqSuite-R2.5.1/third_party/cordio/wsf/sources/port/freertos/wsf_cs.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/FreeRTOS.h \
+ AmbiqSuite-R2.5.1/boards/apollo3p_evb/examples/ble_freertos_barebone/src/FreeRTOSConfig.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/projdefs.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/portable.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/deprecated_definitions.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/portable/GCC/ARM_CM4F/portmacro.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/mpu_wrappers.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/event_groups.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/timers.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/task.h \
+ AmbiqSuite-R2.5.1/third_party/FreeRTOSv10.1.1/Source/include/list.h

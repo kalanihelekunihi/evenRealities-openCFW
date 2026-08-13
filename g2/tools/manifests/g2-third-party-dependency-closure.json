@@ -1,0 +1,567 @@
+{
+ "schema_version": 1,
+ "target": "G2 2.2.6.10 Apollo-main",
+ "dependencies": [
+  {
+   "family": "FreeRTOS-Kernel",
+   "origin": "Amazon/FreeRTOS",
+   "version": "V10.5.1 plus recovered one-field G2 TCB patch",
+   "selected_source_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "atomic boot-critical scheduler/port admission decision",
+    "Apollo510 timing, sleep, and scheduling hardware validation",
+    "production admission of bounded first-party power and overflow hooks"
+   ],
+   "evidence": [
+    "docs/research/freertos-g2-config-port-audit.md",
+    "docs/research/freertos-task-switch-context-source-candidate-audit.md",
+    "docs/research/g2-product-rtos-recovery.md",
+    "docs/research/g2-thread-audio-recovery.md",
+    "docs/research/g2-compress-log-core-recovery.md",
+    "docs/research/g2-file-runtime-recovery.md",
+    "docs/research/g2-uart-sync-recovery.md",
+    "docs/research/g2-thread-ble-production-dependency-boundary.md",
+    "docs/research/g2-pt-protocol-procsr-dependency-boundary.md",
+    "docs/research/g2-ui-widget-news-page-dependency-boundary.md",
+    "docs/research/g2-thread-ring-dependency-boundary.md",
+    "docs/research/g2-fw-event-loop-dependency-boundary.md",
+    "docs/research/g2-ring-connect-policy-dependency-boundary.md"
+   ]
+  },
+  {
+   "family": "CMSIS-FreeRTOS",
+   "origin": "Arm CMSIS-FreeRTOS",
+   "version": "v10.5.1",
+   "selected_source_commit": "d213f261b5be6bb29a7cce8b84071706b72f4d53",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "historical checkout is binary-unobservable"
+   ],
+   "evidence": [
+    "docs/research/cmsis-freertos-linked-function-census.md",
+    "docs/research/g2-thread-audio-recovery.md",
+    "docs/research/g2-compress-log-core-recovery.md",
+    "docs/research/g2-file-runtime-recovery.md",
+    "docs/research/g2-uart-sync-recovery.md",
+    "docs/research/g2-service-ancc-dependency-boundary.md",
+    "docs/research/g2-als-dependency-boundary.md",
+    "docs/research/g2-thread-ble-production-dependency-boundary.md",
+    "docs/research/g2-pt-protocol-procsr-dependency-boundary.md",
+    "docs/research/g2-ui-quicklist-page-dependency-boundary.md",
+    "docs/research/g2-ui-widget-news-page-dependency-boundary.md",
+    "docs/research/g2-navigation-ui-dependency-boundary.md",
+    "docs/research/g2-menu-page-dependency-boundary.md",
+    "docs/research/g2-ring-service-dependency-boundary.md",
+    "docs/research/g2-service-input-manager-dependency-boundary.md",
+    "docs/research/g2-ui-calendar-page-dependency-boundary.md",
+    "docs/research/g2-efs-transport-dependency-boundary.md",
+    "docs/research/g2-health-data-manager-dependency-boundary.md",
+    "docs/research/g2-evenhub-main-dependency-boundary.md",
+    "docs/research/g2-translate-dependency-boundary.md",
+    "docs/research/g2-teleprompt-controller-dependency-boundary.md",
+    "docs/research/g2-thread-ring-dependency-boundary.md",
+    "docs/research/g2-fw-event-loop-dependency-boundary.md",
+    "docs/research/g2-ring-connect-policy-dependency-boundary.md"
+   ]
+  },
+  {
+   "family": "CMSIS-Core",
+   "origin": "Arm CMSIS_5",
+   "version": "5.9.0 selected header closure",
+   "selected_source_commit": "d23a6949a0331ca96853bcd98b0fdcc4db47184c",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [],
+   "evidence": [
+    "third_party/cmsis-core/README.openCFW.md"
+   ]
+  },
+  {
+   "family": "AmbiqSuite-Apollo510",
+   "origin": "AmbiqMicro AmbiqSuite",
+   "version": "5.1.0 lineage; private pre-release generating checkout unavailable",
+   "selected_source_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "exact private pre-release commit unavailable",
+    "broader HAL source/binary admission",
+    "Apollo510 hardware validation"
+   ],
+   "evidence": [
+    "third_party/ambiqsuite-apollo510/README.openCFW.md",
+    "docs/research/g2-product-rtos-recovery.md",
+    "tools/manifests/ambiqsuite-apollo510-rtos-provider-source.tsv",
+    "docs/research/g2-drv-gx8002b-recovery.md",
+    "tools/manifests/g2-drv-gx8002b-upstream-source.tsv",
+    "docs/research/g2-drv-pdm-production-recovery.md",
+    "tools/manifests/g2-drv-pdm-production-upstream-source.tsv",
+    "docs/research/g2-drv-pdm-recovery.md",
+    "tools/manifests/g2-drv-pdm-upstream-source.tsv",
+    "docs/research/g2-uart-sync-recovery.md"
+   ]
+  },
+  {
+   "family": "Nordic-nPMX",
+   "origin": "NordicSemiconductor/npmx",
+   "version": "v1.0.1 plus one ADC rewrite commit; describe v1.0.1-1-ge1aaec5",
+   "selected_source_commit": "e1aaec53f456887a7d7b80d82f684d1ac3cb08c8",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "private Even checkout or equivalent cherry-pick is binary-unobservable",
+    "generated nPM1300 ADK and G2 configuration admission",
+    "Apollo510 I2C backend and interrupt wiring",
+    "rail charger and orientation policy reconstruction",
+    "PMIC hardware validation"
+   ],
+   "evidence": [
+    "docs/research/g2-npmx-main-driver-recovery.md",
+    "third_party/npmx/PROVENANCE.json"
+   ]
+  },
+  {
+   "family": "Google-liblc3",
+   "origin": "Google/liblc3",
+   "version": "v1.1.3 selected tagged compatibility baseline; linked C surface compatible from bb85f7d through 1de85e2",
+   "selected_source_commit": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "exact public or private producing checkout is binary-unobservable between v1.1.3 and 1de85e2",
+    "target IAR build profile and floating-point performance validation",
+    "G2 audio-buffer integration and LC3 interoperability validation"
+   ],
+   "evidence": [
+    "docs/research/g2-liblc3-source-recovery.md",
+    "third_party/liblc3/PROVENANCE.json",
+    "tools/manifests/g2-liblc3-source-boundary.tsv"
+   ]
+  },
+  {
+   "family": "AmbiqSuite-ANCC-profile",
+   "origin": "Ambiq Micro AmbiqSuite",
+   "version": "2.2.0-4.5.0 implementation-equivalent; selected 2.5.1",
+   "selected_source_commit": "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "exact private G2 generating commit and release are binary-unobservable",
+    "G2 message/sync/whitelist deltas remain first-party reconstruction work"
+   ],
+   "evidence": [
+    "docs/research/ambiqsuite-ancc-profile-source-recovery.md",
+    "third_party/ambiqsuite-ancc-profile/PROVENANCE.json",
+    "docs/research/g2-service-ancc-dependency-boundary.md"
+   ]
+  },
+  {
+   "family": "AmbiqSuite-AMOTA-profile",
+   "origin": "Ambiq Micro AmbiqSuite",
+   "version": "2.2.0-2.5.1 stable application skeleton; selected 2.5.1",
+   "selected_source_commit": "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "exact private G2 generating release/commit is binary-unobservable",
+    "Even OTA actions remain first-party reconstruction work"
+   ],
+   "evidence": [
+    "docs/research/g2-ble-ota-ring-profiles-recovery.md",
+    "third_party/ambiqsuite-amota-profile/PROVENANCE.json"
+   ]
+  },
+  {
+   "family": "NemaGFX-NemaVG-Ambiq-GPU-patch",
+   "origin": "ThinkSilicon/AmbiqSuite package",
+   "version": "NemaGFX 1.4.12; NemaVG 1.1.8; release_sdk5p1p0-634f7c117b",
+   "selected_source_commit": "b853fded7e545f005727e13bf2ce83018c7e242d",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "original IAR/private GPU-patch and bare-metal HAL commits unavailable",
+    "atomic source/binary admission decision",
+    "Apollo510 rendering and cache-coherency hardware validation"
+   ],
+   "evidence": [
+    "docs/research/nemagfx-ambiq-g2-provenance-audit.md",
+    "docs/research/ambiq-gpu-patch-bitmap-glyph-source-candidate-audit.md"
+   ]
+  },
+  {
+   "family": "FreeType",
+   "origin": "FreeType Project",
+   "version": "2.9.1",
+   "selected_source_commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "external font partitions unavailable",
+    "exact IAR options unavailable",
+    "production configuration/admission decision"
+   ],
+   "evidence": [
+    "docs/research/freetype-recovery-audit.md",
+    "docs/research/freetype-2.9.1-snapshot-audit.md"
+   ]
+  },
+  {
+   "family": "littlefs",
+   "origin": "littlefs-project/littlefs",
+   "version": "v2.10.1-equivalent",
+   "selected_source_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "golden external-flash capture",
+    "non-destructive mount policy"
+   ],
+   "evidence": [
+    "third_party/littlefs/README.openCFW.md",
+    "docs/research/g2-compress-log-port-recovery.md",
+    "docs/research/g2-file-runtime-recovery.md"
+   ]
+  },
+  {
+   "family": "TLSF",
+   "origin": "mattconte/tlsf",
+   "version": "v3.1-compatible",
+   "selected_source_commit": "deff9ab509341f264addbd3c8ada533678591905",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "historical checkout is binary-unobservable"
+   ],
+   "evidence": [
+    "third_party/tlsf/README.openCFW.md",
+    "docs/research/g2-file-runtime-recovery.md",
+    "docs/research/g2-ota-transport-dependency-boundary.md",
+    "docs/research/g2-efs-transport-dependency-boundary.md",
+    "docs/research/g2-evenhub-main-dependency-boundary.md",
+    "docs/research/g2-translate-dependency-boundary.md",
+    "docs/research/g2-teleprompt-controller-dependency-boundary.md",
+    "docs/research/g2-thread-ring-dependency-boundary.md"
+   ]
+  },
+  {
+   "family": "LZ4",
+   "origin": "lz4/lz4",
+   "version": "v1.9.4-v1.10.0 source-equivalent linked decoder",
+   "selected_source_commit": "ebb370ca83af193212df4dcbadcc5d87bc0de2f0",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "point release is binary-unobservable"
+   ],
+   "evidence": [
+    "docs/research/lz4-recovery-audit.md"
+   ]
+  },
+  {
+   "family": "nanopb",
+   "origin": "nanopb/nanopb",
+   "version": "0.4.7-0.4.9.1 compatible; selected 0.4.9",
+   "selected_source_commit": "98bf4db69897b53434f3d0ba72e0a3ab1a902824",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "point release is binary-unobservable",
+    "first-party schemas and generated messages"
+   ],
+   "evidence": [
+    "docs/research/nanopb-point-release-recovery-audit.md",
+    "docs/research/g2-navigation-ui-dependency-boundary.md",
+    "docs/research/g2-menu-page-dependency-boundary.md",
+    "docs/research/g2-ring-service-dependency-boundary.md",
+    "docs/research/g2-service-input-manager-dependency-boundary.md",
+    "docs/research/g2-teleprompt-fsm-dependency-boundary.md",
+    "docs/research/g2-evenhub-main-dependency-boundary.md",
+    "docs/research/g2-translate-dependency-boundary.md",
+    "docs/research/g2-teleprompt-controller-dependency-boundary.md"
+   ]
+  },
+  {
+   "family": "FlashDB",
+   "origin": "armink/FlashDB",
+   "version": "2.1.1",
+   "selected_source_commit": "714d6159e7e6afb267a3953756abca445c350e61",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "golden flash capture",
+    "schema and non-destructive mount policy"
+   ],
+   "evidence": [
+    "docs/research/flashdb-configuration-recovery-audit.md",
+    "docs/research/g2-service-db-api-recovery.md",
+    "docs/research/g2-service-nvdb-recovery.md",
+    "docs/research/g2-service-kvdb-recovery.md"
+   ]
+  },
+  {
+   "family": "EasyLogger",
+   "origin": "armink/EasyLogger",
+   "version": "2.2.99-compatible core",
+   "selected_source_commit": "a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "target concurrency/hardware stress",
+    "production admission decision",
+    "image-specific transports"
+   ],
+   "evidence": [
+    "docs/research/easylogger-output-core-audit.md",
+    "docs/research/g2-thread-audio-recovery.md",
+    "docs/research/g2-compress-log-core-recovery.md",
+    "docs/research/g2-compress-log-port-recovery.md",
+    "docs/research/g2-file-runtime-recovery.md",
+    "docs/research/g2-service-algo-recovery.md",
+    "docs/research/g2-uart-sync-recovery.md",
+    "docs/research/g2-service-nvdb-recovery.md",
+    "docs/research/g2-production-mic-recovery.md",
+    "docs/research/g2-thread-ble-production-dependency-boundary.md",
+    "docs/research/g2-pt-protocol-procsr-dependency-boundary.md",
+    "docs/research/g2-ui-quicklist-page-dependency-boundary.md",
+    "docs/research/g2-ui-widget-news-page-dependency-boundary.md",
+    "docs/research/g2-ui-stock-page-dependency-boundary.md",
+    "docs/research/g2-navigation-ui-dependency-boundary.md",
+    "docs/research/g2-menu-page-dependency-boundary.md",
+    "docs/research/g2-ui-health-page-dependency-boundary.md",
+    "docs/research/g2-ring-service-dependency-boundary.md",
+    "docs/research/g2-service-input-manager-dependency-boundary.md",
+    "docs/research/g2-ui-calendar-page-dependency-boundary.md",
+    "docs/research/g2-ota-transport-dependency-boundary.md",
+    "docs/research/g2-efs-transport-dependency-boundary.md",
+    "docs/research/g2-evenhub-loading-page-dependency-boundary.md",
+    "docs/research/g2-dashboard-watchface-layout1-recovery.md",
+    "docs/research/g2-teleprompt-fsm-dependency-boundary.md",
+    "docs/research/g2-health-data-manager-dependency-boundary.md",
+    "docs/research/g2-evenhub-main-dependency-boundary.md",
+    "docs/research/g2-translate-dependency-boundary.md",
+    "docs/research/g2-teleprompt-controller-dependency-boundary.md",
+    "docs/research/g2-conversate-comm-data-dependency-boundary.md",
+    "docs/research/g2-dashboard-watchface-layout3-recovery.md",
+    "docs/research/g2-thread-ring-dependency-boundary.md",
+    "docs/research/g2-fw-event-loop-dependency-boundary.md",
+    "docs/research/g2-ring-connect-policy-dependency-boundary.md",
+    "docs/research/g2-system-close-dependency-boundary.md"
+   ]
+  },
+  {
+   "family": "FreeRTOS-Plus-CLI",
+   "origin": "FreeRTOS/FreeRTOS-Plus-CLI",
+   "version": "V1.0.4-compatible",
+   "selected_source_commit": "43defa566cc440251dbd6b48d1fcca27f88cfcdd",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "historical checkout is binary-unobservable",
+    "first-party command handlers"
+   ],
+   "evidence": [
+    "docs/research/freertos-plus-cli-source-recovery-audit.md"
+   ]
+  },
+  {
+   "family": "mpaland-printf",
+   "origin": "mpaland/printf",
+   "version": "selected compatible lineage",
+   "selected_source_commit": "d3b984684bb8a8bdc48cc7a1abecb93ce59bbe3e",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "historical checkout is binary-unobservable"
+   ],
+   "evidence": [
+    "components/apollo_main/core_overlay/EVIDENCE.md",
+    "docs/research/g2-pt-protocol-procsr-dependency-boundary.md",
+    "docs/research/g2-navigation-ui-dependency-boundary.md",
+    "docs/research/g2-ui-health-page-dependency-boundary.md",
+    "docs/research/g2-dashboard-watchface-layout1-recovery.md",
+    "docs/research/g2-dashboard-watchface-layout3-recovery.md"
+   ]
+  },
+  {
+   "family": "TinyFrame",
+   "origin": "MightyPork/TinyFrame",
+   "version": "post-2.3.0 exact core blobs",
+   "selected_source_commit": "eb75483e035916ef9f3e9fce0d2ae389cb09785f",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "hardware golden packets",
+    "historical checkout within core-identical interval is binary-unobservable"
+   ],
+   "evidence": [
+    "docs/research/tinyframe-source-admission-boundary-audit.md",
+    "docs/research/g2-uart-sync-recovery.md"
+   ]
+  },
+  {
+   "family": "CmBacktrace",
+   "origin": "armink/CmBacktrace",
+   "version": "post-1.4.1 line advertising 1.4.2",
+   "selected_source_commit": "73714489f9d8af130aacb515586b397b604a5768",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "exact vendor checkout and IAR port/config choices unavailable"
+   ],
+   "evidence": [
+    "docs/research/cmbacktrace-version-recovery-audit.md"
+   ]
+  },
+  {
+   "family": "AndersKaloer-Ring-Buffer",
+   "origin": "AndersKaloer/Ring-Buffer",
+   "version": "source-equivalent dynamic-buffer interval",
+   "selected_source_commit": "190e30bebcec22d7311fd941179d70b4f439c441",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "hardware validation",
+    "historical checkout is binary-unobservable"
+   ],
+   "evidence": [
+    "docs/research/ring-buffer-lineage-recovery-audit.md"
+   ]
+  },
+  {
+   "family": "LVGL",
+   "origin": "LVGL plus Ambiq vendor fork",
+   "version": "9.3-development hybrid",
+   "selected_source_commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "whole hybrid-tree commit is binary-unobservable",
+    "assets and exact configuration",
+    "atomic GPU/HAL admission and hardware validation",
+    "first-party input/display managers"
+   ],
+   "evidence": [
+    "docs/research/lvgl-version-recovery-audit.md",
+    "docs/research/lvgl-ambiq-display-port-closure-audit.md",
+    "docs/research/g2-ui-even-ai-recovery.md",
+    "docs/research/g2-ui-quicklist-page-dependency-boundary.md",
+    "docs/research/g2-ui-widget-news-page-dependency-boundary.md",
+    "docs/research/g2-ui-stock-page-dependency-boundary.md",
+    "docs/research/g2-navigation-ui-dependency-boundary.md",
+    "docs/research/g2-menu-page-dependency-boundary.md",
+    "docs/research/g2-ui-health-page-dependency-boundary.md",
+    "docs/research/g2-ui-calendar-page-dependency-boundary.md",
+    "docs/research/g2-evenhub-loading-page-dependency-boundary.md",
+    "docs/research/g2-dashboard-watchface-layout1-recovery.md",
+    "docs/research/g2-teleprompt-fsm-dependency-boundary.md",
+    "docs/research/g2-evenhub-main-dependency-boundary.md",
+    "docs/research/g2-translate-dependency-boundary.md",
+    "docs/research/g2-teleprompt-controller-dependency-boundary.md",
+    "docs/research/g2-conversate-comm-data-dependency-boundary.md",
+    "docs/research/g2-dashboard-watchface-layout3-recovery.md",
+    "docs/research/g2-system-close-dependency-boundary.md"
+   ]
+  },
+  {
+   "family": "Packetcraft-Cordio",
+   "origin": "Packetcraft Cordio plus Ambiq ports",
+   "version": "mixed r20/R4-era host plus AmbiqSuite 2.5.1 application-framework oracle",
+   "selected_source_commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "exact private mixed-tree commit unavailable",
+    "production admission/placement decision",
+    "controller and hardware validation",
+    "clean reconstruction of the identified Ambiq application framework's G2-local MRAM/privacy/policy delta"
+   ],
+   "evidence": [
+    "docs/research/cordio-aggregate-closure-audit.md",
+    "docs/research/cordio-gatt-profile-source-recovery.md",
+    "docs/research/ambiqsuite-cordio-app-framework-source-recovery.md",
+    "docs/research/g2-thread-ble-production-dependency-boundary.md",
+    "third_party/packetcraft-gatt-profile/PROVENANCE.json",
+    "third_party/ambiqsuite-cordio-app-framework/PROVENANCE.json"
+   ]
+  },
+  {
+   "family": "Goodix-GR551x-app-error",
+   "origin": "Goodix GR551x SDK copied utility",
+   "version": "1.7.0 byte-exact app_error.c snapshot; first located incompatible version 2.0.1",
+   "selected_source_commit": "854c43e0b96a24051ffce4c06ff629255aa56c59",
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "official Goodix SDK 1.7.0 release commit and Even generating checkout are unavailable"
+   ],
+   "evidence": [
+    "docs/research/g2-util-error-check-goodix-recovery.md",
+    "third_party/goodix-gr551x-app-error/PROVENANCE.json"
+   ]
+  },
+  {
+   "family": "IAR-DLIB",
+   "origin": "IAR EWARM runtime",
+   "version": "9.20+ floor; 9.60.2 leading compatibility candidate",
+   "selected_source_commit": null,
+   "historical_generating_commit": null,
+   "functional_status": "closed",
+   "residual_gates": [
+    "release-matched proprietary archives unavailable",
+    "exact VFP and Normal/Full variants unavailable"
+   ],
+   "evidence": [
+    "docs/research/iar-dlib-runtime-census.md",
+    "docs/research/iar-dlib-frexpf-ldexpf-recovery.md",
+    "docs/research/g2-service-time-recovery.md",
+    "docs/research/g2-thread-audio-recovery.md",
+    "docs/research/g2-compress-log-core-recovery.md",
+    "docs/research/g2-compress-log-port-recovery.md",
+    "docs/research/g2-file-runtime-recovery.md",
+    "docs/research/g2-service-algo-recovery.md",
+    "docs/research/g2-uart-sync-recovery.md",
+    "docs/research/g2-service-nvdb-recovery.md",
+    "docs/research/g2-production-mic-recovery.md",
+    "docs/research/g2-pt-protocol-procsr-dependency-boundary.md",
+    "docs/research/g2-ui-quicklist-page-dependency-boundary.md",
+    "docs/research/g2-ui-widget-news-page-dependency-boundary.md",
+    "docs/research/g2-ui-stock-page-dependency-boundary.md",
+    "docs/research/g2-navigation-ui-dependency-boundary.md",
+    "docs/research/g2-menu-page-dependency-boundary.md",
+    "docs/research/g2-ring-service-dependency-boundary.md",
+    "docs/research/g2-service-input-manager-dependency-boundary.md",
+    "docs/research/g2-ui-calendar-page-dependency-boundary.md",
+    "docs/research/g2-ota-transport-dependency-boundary.md",
+    "docs/research/g2-efs-transport-dependency-boundary.md",
+    "docs/research/g2-evenhub-loading-page-dependency-boundary.md",
+    "docs/research/g2-dashboard-watchface-layout1-recovery.md",
+    "docs/research/g2-teleprompt-fsm-dependency-boundary.md",
+    "docs/research/g2-health-data-manager-dependency-boundary.md",
+    "docs/research/g2-evenhub-main-dependency-boundary.md",
+    "docs/research/g2-conversate-comm-data-dependency-boundary.md",
+    "docs/research/g2-dashboard-watchface-layout3-recovery.md",
+    "docs/research/g2-thread-ring-dependency-boundary.md",
+    "docs/research/g2-system-close-dependency-boundary.md"
+   ]
+  },
+  {
+   "family": "DaveGamble-cJSON",
+   "origin": "DaveGamble/cJSON",
+   "version": "v1.7.9–v1.7.12 interval (four binary discriminators)",
+   "selected_source_commit": null,
+   "historical_generating_commit": null,
+   "functional_status": "bounded_waiting_external_gate",
+   "residual_gates": [
+    "explicit source-admission decision; no vendored snapshot exists (identification is not admission)",
+    "selection of a representative v1.7.9–v1.7.12 tag or commit as the baseline once admission is decided"
+   ],
+   "evidence": [
+    "docs/research/g2-json-parser-source-candidate-audit.md",
+    "docs/research/g2-service-android-notify-dependency-boundary.md"
+   ]
+  }
+ ]
+}

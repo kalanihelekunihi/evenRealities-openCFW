@@ -1,0 +1,19 @@
+push {r4,lr}
+movs r4,r0
+movs r2,#0
+ldr r0,[pc,#pcrel] @ (0ximm)
+ldr r1,[r0,#0]
+b.n <branch>
+movs r2,r1
+ldr r1,[r1,#0]
+cmp r1,#0
+beq.n <branch>
+cmp r1,r4
+bne.n <branch>
+cmp r1,#0
+beq.n <branch>
+movs r1,r4
+bl <call>
+movs r0,#0
+strb r0,[r4,#13]
+pop {r4,pc}

@@ -1,0 +1,6 @@
+test	raw_candidates	surviving_candidates	verdict
+compiled complete function raw bytes across 3 GCC profiles x 17 APIs	51	0	no exact stock occurrence
+handle bound plus 52-byte file-table stride and multiply	30	0	no complete WsfEfsGetFileByHandle/RemoveFile semantic fingerprint
+six 52-byte-spaced invalid-size stores	30	0	no unrolled WsfEfsInit fingerprint
+two multiply-plus-minus-one partial hits	2	0	0x507426 and 0x50744C use a 48-byte stride, not the 52-byte EFS control block
+source/profile/UUID marker census	9	0	wsf_efs/WDXS names and all four exact WDX UUIDs absent

@@ -1,0 +1,13 @@
+
+/work/out/O3_noinline/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_start_ms_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_start_ms_candidate>:
+   0:	4b02      	ldr	r3, [pc, #8]	@ (c <open_cfw_cordio_wsf_timer_start_ms_candidate+0xc>)
+   2:	fba3 3101 	umull	r3, r1, r3, r1
+   6:	08c9      	lsrs	r1, r1, #3
+   8:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_timer_start_ms_candidate>
+			8: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_timer_insert_candidate
+   c:	cccccccd 	.word	0xcccccccd

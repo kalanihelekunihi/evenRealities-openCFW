@@ -1,0 +1,15 @@
+ordinal	function	stock_start	stock_end_exclusive	interval_bytes	interval_sha256	source_path_anchor	provenance	behavior
+1	service_audio_pcm_sample_bytes	0x0057A900	0x0057A926	38	5bbff3fde30dd7e091d8d496ab401b1036e0dc5f158c071b57a0404ed0ace8f0	no	Ghidra-discovered	maps the supported PCM format enum to two three or four bytes per sample
+2	service_audio_lc3_encoder_setup	0x0057A926	0x0057A940	26	043e57c0075b4e4c1043d93fe1c9cb7fb3abe91ba6ed24af5160a198f7eb3851	no	Ghidra-discovered	lazily initializes and caches a Google liblc3 encoder
+3	SVC_Lc3EncodeMono	0x0057A940	0x0057AB78	568	a21f5d12546cd8b00b113b5234e004ca2d6c7deccd2040c3c1d019e81cc5d594	yes	Ghidra-discovered	validates frame geometry and encodes one or more mono or interleaved PCM frames through liblc3
+4	SVC_PcmAppRegister	0x0057AB78	0x0057ACD0	344	09ea2ab75a6e9f9abea6a66acac8f3c97f7fab136cafb0c59a90419f8f3ab568	yes	Ghidra-discovered	registers one callback and application ID in either of two PCM source slots
+5	SVC_PcmAppUnregister	0x0057ACD0	0x0057ADF8	296	4a3f9c70b094e63095691ff42147a67a9cd2b6dca66318f9ca98e8da0c7fa247	yes	Ghidra-discovered	clears a matching application registration while rejecting an ID mismatch
+6	SVC_PcmAppProcessData	0x0057ADF8	0x0057AF8C	404	1f459dfffdba978147e9076b06d7baa99bd3f347ab99a3ccbaea43a65da252ae	yes	Ghidra-discovered	dispatches PCM to a registered callback or performs fallback LC3 SSR and TDOA processing and notification
+7	service_audio_format_recording_path	0x0057AF8C	0x0057AFBA	46	d5b69fb0b288a6391786693c47f3104186a4352c7d00e86fa97041ddeab2aca7	no	Ghidra-discovered	formats a numbered /audio PCM recording path for a source
+8	service_audio_recording_basename_get	0x0057AFBA	0x0057AFC6	12	b156eaab88b445d26e57e2b5ee5bca18d5ca0bf4f0321eaff7f5ecd9d9c46551	no	Ghidra-discovered	returns the per-source recording basename
+9	service_audio_recording_open_next	0x0057AFC6	0x0057B0CA	260	cf9c31c35c4f01989a60f55c4c043672b1c723a38b3038a3654e699c618d7e08	yes	Ghidra-discovered	closes the previous file advances the sequence and opens the next PCM recording
+10	service_audio_recording_directory_prepare	0x0057B0CA	0x0057B12C	98	d965623bfc8575a4569668f7cc8a47a8cd47ce20027cce27cb4c3be833f79f81	yes	Ghidra-discovered	stats and creates the /audio directory through the admitted littlefs adapter
+11	service_audio_recording_start	0x0057B12C	0x0057B1F0	196	b8a40307307dd5c130c9d4758edbbabeeeccf828caa6e1890faea0cdbf8967d5	no	Ghidra-discovered	initializes one source recorder and selects the first unused numbered path
+12	SVC_PcmRecoderProcess	0x0057B1F4	0x0057B312	286	9bb7475e5c06ef387ee1e5db84b2d899c8254d578c1eae96f7a1d49272387a74	yes	Ghidra-discovered	rotates at the configured byte ceiling and writes PCM data to the active file
+13	service_audio_recording_stop	0x0057B312	0x0057B352	64	3bd9a609a007b476f3cbb71162d84ee0ed9e02b956d0c64fe81b2403f44672d0	no	Ghidra-discovered	closes one recorder and marks it inactive
+14	service_audio_current_recording_path	0x0057B352	0x0057B378	38	560d83a4b1a04f5c4e4baa9a7e3e01324ff6c79ec152c9e679db8030422605dd	no	Ghidra-discovered	formats the current numbered recording path for a valid source

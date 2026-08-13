@@ -1,0 +1,315 @@
+openjdk version "21.0.12" 2026-07-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.12+8 (build 21.0.12+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12+8 (build 21.0.12+8-LTS, mixed mode)
+INFO  Using log config file: jar:file:/var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/kalani/.config/ghidra/ghidra_12.1.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (2092 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (7638 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 210 extension points (114 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/kalani/.cache/opencfw-tools/ghidra-scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/kalani/.local/opt/ghidra_12.1.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-1/iar_runtime_1 (HeadlessAnalyzer)  
+INFO  Creating project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-1/iar_runtime_1 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /var/tmp/opencfw-iar-runtime-JDR5ne/task-1/iar_runtime_1 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/kalani/Repo/SybilSight/openCFW/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin (HeadlessAnalyzer)  
+INFO  Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x437fe0") (ProgramLoader)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: ARM:LE:32:Cortex:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DumpFunctionDecomp.java '0x00438770' '0x004387b0' '0x00438924'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/kalani/.cache/opencfw-tools/ghidra-scripts/DumpFunctionDecomp.java (HeadlessAnalyzer)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 00438770 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+undefined4 open_cfw_target_0x00438770(undefined4 param_1,undefined4 param_2,int param_3)
+
+{
+  int iVar1;
+  uint in_fpscr;
+  undefined4 in_cr0;
+  undefined4 in_cr1;
+  undefined4 in_cr2;
+  undefined4 in_cr3;
+  undefined4 in_cr4;
+  undefined4 uVar2;
+  undefined8 uVar3;
+  
+  if (0 < param_3 >> 3) {
+    uVar3 = func_0x00886784();
+    iVar1 = (int)((ulonglong)uVar3 >> 0x20);
+    coprocessor_load(0xe,in_cr1,(int)uVar3 + 0x200);
+    coprocessor_load(0xe,in_cr3,iVar1 + 0x200);
+    coprocessor_function(0xe,10,1,in_cr4,in_cr0,in_cr2);
+    func_0x010477ac((int)uVar3 + 0x10,iVar1 + 0x10);
+  }
+  uVar2 = VectorSignedToFloat(0,(byte)(in_fpscr >> 0x16) & 3);
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 00438770 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 004387b0 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+void open_cfw_target_0x004387b0(int param_1,int param_2,int param_3,undefined4 *param_4,int param_5)
+
+{
+  uint uVar1;
+  uint extraout_r2;
+  int iVar2;
+  int extraout_r3;
+  int extraout_r3_00;
+  undefined4 *extraout_r12;
+  int extraout_r12_00;
+  uint in_fpscr;
+  undefined4 in_cr0;
+  undefined4 in_cr1;
+  undefined4 in_cr2;
+  undefined4 in_cr3;
+  undefined4 in_cr4;
+  undefined4 in_cr5;
+  undefined4 in_cr6;
+  undefined4 in_cr7;
+  undefined4 in_cr8;
+  undefined4 in_cr9;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  longlong lVar5;
+  
+  for (; 3 < param_5; param_5 = param_5 + -4) {
+    lVar5 = 0;
+    uVar1 = 0;
+    iVar2 = 0;
+    if (0 < param_3 >> 3) {
+      func_0x00886804();
+      coprocessor_load(0xe,in_cr1,param_1 + 0x200);
+      coprocessor_load(0xe,in_cr5,param_2 + 0x1fe);
+      coprocessor_load(0xe,in_cr3,param_2 + 0x200);
+      coprocessor_load(0xe,in_cr7,param_2 + 0x1fc);
+      coprocessor_function(0xe,10,1,in_cr4,in_cr0,in_cr2);
+      coprocessor_load(0xe,in_cr9,param_2 + 0x1fa);
+      coprocessor_function(0xe,8,1,in_cr0,in_cr0,in_cr4);
+      coprocessor_function(0xe,9,1,in_cr2,in_cr0,in_cr6);
+      coprocessor_function(0xe,0xb,1,in_cr6,in_cr0,in_cr8);
+      lVar5 = func_0x0104787c();
+      uVar1 = extraout_r2;
+      iVar2 = extraout_r3;
+      param_4 = extraout_r12;
+    }
+    uVar3 = VectorSignedToFloat(0,(byte)(in_fpscr >> 0x16) & 3);
+    *param_4 = uVar3;
+    uVar3 = VectorSignedToFloat((uint)(lVar5 + 0x20) >> 6 |
+                                (int)((ulonglong)(lVar5 + 0x20) >> 0x20) * 0x4000000,
+                                (byte)(in_fpscr >> 0x16) & 3);
+    param_4[1] = uVar3;
+    uVar3 = VectorSignedToFloat(uVar1 + 0x20 >> 6 | (iVar2 + (uint)(0xffffffdf < uVar1)) * 0x4000000
+                                ,(byte)(in_fpscr >> 0x16) & 3);
+    uVar4 = VectorSignedToFloat(0,(byte)(in_fpscr >> 0x16) & 3);
+    param_4[2] = uVar3;
+    param_4[3] = uVar4;
+    param_4 = param_4 + 4;
+    param_2 = param_2 + -8;
+  }
+  while (0 < param_5) {
+    lVar5 = 0;
+    if (0 < param_3 >> 3) {
+      func_0x008868e0();
+      coprocessor_load(0xe,in_cr1,extraout_r12_00 + 0x200);
+      coprocessor_load(0xe,in_cr3,param_2 + 0x200);
+      coprocessor_function(0xe,8,1,in_cr0,in_cr0,in_cr2);
+      lVar5 = func_0x00c47908();
+      param_3 = extraout_r3_00;
+    }
+    param_2 = param_2 + -2;
+    param_5 = param_5 + -1;
+    uVar3 = VectorSignedToFloat((uint)(lVar5 + 0x20) >> 6 |
+                                (int)((ulonglong)(lVar5 + 0x20) >> 0x20) * 0x4000000,
+                                (byte)(in_fpscr >> 0x16) & 3);
+    *param_4 = uVar3;
+    param_4 = param_4 + 1;
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 004387b0 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_BEGIN 00438924 (GhidraScript)  
+INFO  DumpFunctionDecomp.java> 
+void open_cfw_target_0x00438924(short *param_1,uint param_2,int param_3,undefined2 *param_4)
+
+{
+  short sVar1;
+  short sVar2;
+  short sVar3;
+  short sVar4;
+  short sVar5;
+  short sVar6;
+  short sVar7;
+  short sVar8;
+  short sVar9;
+  short sVar10;
+  short sVar11;
+  short sVar12;
+  short sVar13;
+  short sVar14;
+  short sVar15;
+  short sVar16;
+  short *psVar17;
+  short *psVar18;
+  int iVar19;
+  uint uVar20;
+  undefined2 *puVar21;
+  int iVar22;
+  uint uVar23;
+  int iVar24;
+  int iVar25;
+  int in_r12;
+  int iVar26;
+  
+  iVar26 = (int)param_1[-2];
+  iVar19 = (int)param_1[-1];
+  uVar20 = param_2 & 0xfffffff8;
+  iVar22 = 0;
+  psVar17 = param_1 + 1;
+  iVar24 = (int)*param_1;
+  if (0 < (int)uVar20) {
+    sVar1 = *(short *)(param_3 * 8 + 0x438bd6);
+    iVar25 = param_3 * 8;
+    sVar2 = *(short *)(iVar25 + 0x438bd4);
+    sVar3 = *(short *)(iVar25 + 0x438bd2);
+    sVar4 = *(short *)(iVar25 + 0x438bd6);
+    sVar5 = *(short *)(iVar25 + 0x438bd4);
+    sVar6 = *(short *)(iVar25 + 0x438bd2);
+    sVar7 = *(short *)(iVar25 + 0x438bd6);
+    sVar8 = *(short *)(iVar25 + 0x438bd4);
+    sVar9 = *(short *)(iVar25 + 0x438bd2);
+    sVar10 = *(short *)(iVar25 + 0x438bd6);
+    sVar11 = *(short *)(iVar25 + 0x438bd4);
+    sVar12 = *(short *)(iVar25 + 0x438bd2);
+    sVar13 = *(short *)(param_3 * 8 + 0x438bd0);
+    do {
+      sVar14 = *(short *)(param_3 * 8 + 0x438bd0);
+      sVar15 = *(short *)(param_3 * 8 + 0x438bd0);
+      iVar25 = (int)sVar15;
+      sVar16 = *(short *)(param_3 * 8 + 0x438bd0);
+      uVar23 = 0;
+      psVar18 = psVar17;
+      puVar21 = param_4;
+      do {
+        psVar17 = psVar18;
+        switch(uVar23 & 3) {
+        case 0:
+          psVar17 = psVar18 + 1;
+          in_r12 = (int)*psVar18;
+          iVar25 = sVar1 * iVar26 + sVar2 * iVar19 + (int)sVar14 * (int)*psVar18 + sVar3 * iVar24;
+          break;
+        case 1:
+          psVar17 = psVar18 + 1;
+          iVar26 = (int)*psVar18;
+          iVar25 = sVar4 * iVar19 + sVar5 * iVar24 + (int)sVar15 * (int)*psVar18 + sVar6 * in_r12;
+          break;
+        case 2:
+          psVar17 = psVar18 + 1;
+          iVar19 = (int)*psVar18;
+          iVar25 = sVar7 * iVar24 + sVar8 * in_r12 + (int)sVar16 * (int)*psVar18 + sVar9 * iVar26;
+          break;
+        case 3:
+          psVar17 = psVar18 + 1;
+          iVar24 = (int)*psVar18;
+          iVar25 = sVar10 * in_r12 + sVar11 * iVar26 + (int)sVar13 * (int)*psVar18 + sVar12 * iVar19
+          ;
+        }
+        iVar25 = iVar25 >> 0xf;
+        uVar23 = uVar23 + 1;
+        param_4 = puVar21 + 1;
+        *puVar21 = (short)iVar25;
+        psVar18 = psVar17;
+        puVar21 = param_4;
+      } while ((int)uVar23 < 8);
+      iVar22 = iVar22 + 8;
+    } while (iVar22 < (int)uVar20);
+  }
+  if ((int)uVar20 < (int)param_2) {
+    iVar22 = param_3 * 8;
+    sVar1 = *(short *)(iVar22 + 0x438bd6);
+    sVar2 = *(short *)(iVar22 + 0x438bd4);
+    sVar3 = *(short *)(iVar22 + 0x438bd2);
+    sVar4 = *(short *)(iVar22 + 0x438bd6);
+    sVar5 = *(short *)(iVar22 + 0x438bd4);
+    sVar6 = *(short *)(iVar22 + 0x438bd2);
+    sVar7 = *(short *)(iVar22 + 0x438bd6);
+    sVar8 = *(short *)(iVar22 + 0x438bd4);
+    sVar9 = *(short *)(iVar22 + 0x438bd2);
+    sVar10 = *(short *)(iVar22 + 0x438bd6);
+    sVar11 = *(short *)(iVar22 + 0x438bd4);
+    sVar12 = *(short *)(iVar22 + 0x438bd2);
+    iVar22 = (int)sVar12;
+    sVar14 = *(short *)(param_3 * 8 + 0x438bd0);
+    sVar13 = *(short *)(param_3 * 8 + 0x438bd0);
+    do {
+      psVar18 = psVar17;
+      switch(uVar20 & 3) {
+      case 0:
+        psVar18 = psVar17 + 1;
+        in_r12 = (int)*psVar17;
+        iVar22 = sVar1 * iVar26 + sVar2 * iVar19 + (int)sVar14 * (int)*psVar17 + sVar3 * iVar24;
+        break;
+      case 1:
+        psVar18 = psVar17 + 1;
+        iVar26 = (int)*psVar17;
+        iVar22 = sVar4 * iVar19 + sVar5 * iVar24 + (int)sVar13 * (int)*psVar17 + sVar6 * in_r12;
+        break;
+      case 2:
+        psVar18 = psVar17 + 1;
+        iVar19 = (int)*psVar17;
+        iVar22 = sVar7 * iVar24 + sVar8 * in_r12 + (int)sVar13 * (int)*psVar17 + sVar9 * iVar26;
+        break;
+      case 3:
+        psVar18 = psVar17 + 1;
+        iVar24 = (int)*psVar17;
+        iVar22 = sVar10 * in_r12 + sVar11 * iVar26 + (int)sVar13 * (int)*psVar17 + sVar12 * iVar19;
+      }
+      iVar22 = iVar22 >> 0xf;
+      uVar20 = uVar20 + 1;
+      *param_4 = (short)iVar22;
+      psVar17 = psVar18;
+      param_4 = param_4 + 1;
+    } while ((int)uVar20 < (int)param_2);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DumpFunctionDecomp.java> OPENCFW_DECOMPILE_END 00438924 (GhidraScript)  
+INFO  /ota_s200_firmware_ota.bin: file created (kalani) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /ota_s200_firmware_ota.bin (iar_runtime_1:/ota_s200_firmware_ota.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

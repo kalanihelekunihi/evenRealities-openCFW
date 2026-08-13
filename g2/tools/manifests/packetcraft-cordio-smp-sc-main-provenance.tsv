@@ -1,0 +1,3 @@
+role	family	commit	path	blob	bytes	sha256	license	assessment
+historical_oracle	Packetcraft-r19.02/AmbiqSuite-R2.4.2-R2.5.1	86372d84ef0386d8834ed036e613c8f2ded1ff16	ble-host/sources/stack/smp/smp_sc_main.c	abf41289efdc01eb3ef79631dc06b85e1efe0ed1	22523	f76887f827260493ce4d355c4ad4349e4197b45add5188c0970763b527000256	Apache-2.0	all definitions except smpEventStr are identical; r19 lacks SMP_MSG_INT_CLEANUP
+selected_public_source	Packetcraft-r20.05c	3656312d6b73e2a2c1c8b33ee0385bc199dd97e6	ble-host/sources/stack/smp/smp_sc_main.c	00515542371b1403f2716a02676064bf4aac2dcb	22613	cc2e97537c11f7eb0df9b713100ad0165c34e1e39d6c5b6846d9772f14b01c33	Apache-2.0	stock event-string switch contains r20-only cleanup event; r20.05 through r20.05c share this exact blob

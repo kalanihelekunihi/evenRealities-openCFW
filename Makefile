@@ -1,154 +1,117 @@
+# openCFW -- unified entry point for the G2 and R1 firmware targets.
+#
+# Each target keeps its own build system; this Makefile is the front door that
+# dispatches to them and provides the cross-target aggregates. Anything not
+# listed here can still be run directly, for example:
+#
+#     make -C g2 lvgl-snapshot
+#     make -C r1 sanitize
+#
+# Every target below fails closed. A hash, checksum, region, or provenance
+# mismatch aborts the build instead of degrading to a warning.
+
+MAKE ?= make
 PYTHON ?= python3
 
-# Toolchain selection.  openCFW pins compiled overlays byte-for-byte per
-# reviewed toolchain profile.  On macOS this resolves to the reviewed Apple
-# clang and the canonical `apple-clang` profile; on a host without Apple clang
-# (for example Linux with a Homebrew clang) it resolves to a present clang and
-# that clang's recorded reproducible profile.  Override either explicitly, e.g.
-# `make ring-source OPENCFW_CLANG=/path/clang OPENCFW_TOOLCHAIN_PROFILE=id`.
-# The blob-only `reference` build is compiler-independent and stays
-# byte-identical under any profile.
-OPENCFW_CLANG ?= $(shell for c in /usr/bin/clang /home/linuxbrew/.linuxbrew/opt/llvm/bin/clang clang; do if command -v "$$c" >/dev/null 2>&1; then command -v "$$c"; break; fi; done)
-export OPENCFW_CLANG
-OPENCFW_TOOLCHAIN_PROFILE ?= $(shell $(PYTHON) tools/detect_toolchain.py --clang "$(OPENCFW_CLANG)" 2>/dev/null || echo apple-clang)
-export OPENCFW_TOOLCHAIN_PROFILE
+G2_DIR := g2
+R1_DIR := r1
+THIRD_PARTY_DIR := third-party
 
-REFERENCE_MANIFEST ?= manifests/g2-2.2.6.10.json
-RING_SOURCE_MANIFEST ?= manifests/g2-2.2.6.10-ring-source.json
-SOURCE_MANIFEST ?= manifests/g2-2.2.6.10-core-source.json
-REFERENCE_BUILD_DIR ?= build/reference
-RING_SOURCE_BUILD_DIR ?= build/ring-source
-SOURCE_BUILD_DIR ?= build/source
-RING_COMPONENT_DIR := components/apollo_main/ring_gesture
-RING_COMPONENT_BUILD_DIR := $(RING_COMPONENT_DIR)/build
-CORE_COMPONENT_DIR := components/apollo_main/core_overlay
-CORE_COMPONENT_BUILD_DIR := $(CORE_COMPONENT_DIR)/build
-BOOT_COMPONENT_DIR := components/bootloader/core_overlay
-BOOT_COMPONENT_BUILD_DIR := $(BOOT_COMPONENT_DIR)/build
-TLSF_DIR := third_party/tlsf
-EASYLOGGER_DIR := third_party/easylogger
-LITTLEFS_DIR := third_party/littlefs
-FREERTOS_DIR := third_party/freertos-kernel
-AMBIQSUITE_DIR := third_party/ambiqsuite-apollo510
-CMSIS_CORE_DIR := third_party/cmsis-core
-CMSIS_FREERTOS_DIR := third_party/cmsis-freertos
-LZ4_DIR := third_party/lz4
-FREETYPE_DIR := third_party/freetype
-FLASHDB_DIR := third_party/flashdb
-CMBACKTRACE_DIR := third_party/cmbacktrace
-NANOPB_DIR := third_party/nanopb
-CORDIO_DIR := third_party/cordio
-FREERTOS_PLUS_CLI_DIR := third_party/freertos-plus-cli
-LVGL_DIR := third_party/lvgl
-
-.PHONY: all build reference ring-source source component ring-component core-component bootloader-component vendor-snapshots upstream-audits tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot ambiqsuite-snapshot cmsis-core-snapshot cmsis-freertos-snapshot lz4-snapshot freetype-snapshot flashdb-snapshot cmbacktrace-snapshot nanopb-snapshot cordio-snapshot freertos-plus-cli-snapshot lvgl-snapshot verify test inspect clean toolchain
+.PHONY: all help \
+        build test verify clean \
+        g2 g2-build g2-test g2-verify g2-inspect g2-clean \
+        r1 r1-build r1-test r1-sanitize r1-arm r1-sim r1-clean \
+        third-party third-party-vendored third-party-fetched
 
 all: build
 
-toolchain:
-	@echo "OPENCFW_CLANG=$(OPENCFW_CLANG)"
-	@echo "OPENCFW_TOOLCHAIN_PROFILE=$(OPENCFW_TOOLCHAIN_PROFILE)"
+help:
+	@echo 'openCFW -- Even Realities G2 and R1 open firmware'
+	@echo
+	@echo 'Aggregate targets:'
+	@echo '  build            build both targets (g2-build + r1-build)'
+	@echo '  test             run both test suites (g2-test + r1-test)'
+	@echo '  verify           full verification of both targets and all dependencies'
+	@echo '  third-party      verify every vendored upstream snapshot'
+	@echo '  clean            remove all build output from both targets'
+	@echo
+	@echo 'G2 (Apollo510 glasses firmware):'
+	@echo '  g2-build         reference + ring-source + source profiles'
+	@echo '  g2-test          G2 unit tests'
+	@echo '  g2-verify        G2 build + upstream audits'
+	@echo '  g2-inspect       inspect the built source package'
+	@echo
+	@echo 'R1 (nRF52840 ring firmware):'
+	@echo '  r1-test          portable host tests'
+	@echo '  r1-sanitize      host tests under ASan/UBSan'
+	@echo '  r1-arm           freestanding Cortex-M4 objects'
+	@echo '  r1-sim           host protocol/device simulator'
+	@echo
+	@echo 'The R1 SDK image needs fetched vendor roots; see third-party/fetched/README.md.'
+	@echo 'G2 targets need the official OTA blobs; see g2/blobs/official/*/PROVENANCE.md.'
 
-build: reference ring-source source
+# --- aggregates ------------------------------------------------------------
 
-ring-component:
-	$(PYTHON) $(RING_COMPONENT_DIR)/build_component.py
+build: g2-build r1-build
 
-tlsf-snapshot:
-	$(PYTHON) $(TLSF_DIR)/verify_snapshot.py
+test: g2-test r1-test
 
-easylogger-snapshot:
-	$(PYTHON) $(EASYLOGGER_DIR)/verify_snapshot.py
+verify: g2-verify third-party r1-test
 
-littlefs-snapshot:
-	$(PYTHON) $(LITTLEFS_DIR)/verify_snapshot.py
+clean: g2-clean r1-clean
 
-freertos-snapshot:
-	$(PYTHON) $(FREERTOS_DIR)/verify_snapshot.py
+# --- G2 --------------------------------------------------------------------
 
-ambiqsuite-snapshot:
-	$(PYTHON) $(AMBIQSUITE_DIR)/verify_snapshot.py
+g2: g2-build
 
-cmsis-core-snapshot:
-	$(PYTHON) $(CMSIS_CORE_DIR)/verify_snapshot.py
+g2-build:
+	$(MAKE) -C $(G2_DIR) build
 
-cmsis-freertos-snapshot:
-	$(PYTHON) $(CMSIS_FREERTOS_DIR)/verify_snapshot.py
+g2-test:
+	$(MAKE) -C $(G2_DIR) test
 
-lz4-snapshot:
-	$(PYTHON) $(LZ4_DIR)/verify_snapshot.py
+g2-verify:
+	$(MAKE) -C $(G2_DIR) verify
 
-freetype-snapshot:
-	$(PYTHON) $(FREETYPE_DIR)/verify_snapshot.py
+g2-inspect:
+	$(MAKE) -C $(G2_DIR) inspect
 
-flashdb-snapshot:
-	$(PYTHON) $(FLASHDB_DIR)/verify_snapshot.py
+g2-clean:
+	$(MAKE) -C $(G2_DIR) clean
 
-cmbacktrace-snapshot:
-	$(PYTHON) $(CMBACKTRACE_DIR)/verify_snapshot.py
+# --- R1 --------------------------------------------------------------------
 
-nanopb-snapshot:
-	$(PYTHON) $(NANOPB_DIR)/verify_snapshot.py
+r1: r1-build
 
-cordio-snapshot:
-	$(PYTHON) $(CORDIO_DIR)/verify_snapshot.py
+# The portable reference implementation is what "building R1" means without a
+# fetched Nordic SDK; the linked nRF52840 image is `make -C r1 sdk-image`.
+r1-build: r1-arm r1-sim
 
-freertos-plus-cli-snapshot:
-	$(PYTHON) $(FREERTOS_PLUS_CLI_DIR)/verify_snapshot.py
+r1-test:
+	$(MAKE) -C $(R1_DIR) test
 
-lvgl-snapshot:
-	$(PYTHON) $(LVGL_DIR)/verify_snapshot.py
+r1-sanitize:
+	$(MAKE) -C $(R1_DIR) sanitize
 
-vendor-snapshots: tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot ambiqsuite-snapshot cmsis-core-snapshot cmsis-freertos-snapshot lz4-snapshot freetype-snapshot flashdb-snapshot cmbacktrace-snapshot nanopb-snapshot cordio-snapshot freertos-plus-cli-snapshot lvgl-snapshot
+r1-arm:
+	$(MAKE) -C $(R1_DIR) arm-objects
 
-upstream-audits:
-	$(PYTHON) tools/analyze_g2_littlefs_ports.py
-	$(PYTHON) tools/analyze_g2_littlefs_mspi_transport.py
-	$(PYTHON) tools/analyze_g2_mspi_interrupt_clear.py
-	$(PYTHON) tools/analyze_g2_freertos_port.py
-	$(PYTHON) tools/analyze_g2_freertos_assert_port_seam.py
-	$(PYTHON) tools/analyze_g2_freertos_ntz_context_handlers.py
-	$(PYTHON) tools/analyze_g2_flashdb.py
-	$(PYTHON) tools/analyze_g2_cmbacktrace_version.py
-	$(PYTHON) tools/analyze_g2_nanopb_point_release.py
-	$(PYTHON) tools/analyze_g2_cordio_version.py
-	$(PYTHON) tools/analyze_g2_freertos_plus_cli.py
-	$(PYTHON) tools/analyze_g2_lvgl_version.py
-	$(PYTHON) tools/analyze_g2_tinyframe_send_version.py
+r1-sim:
+	$(MAKE) -C $(R1_DIR) sim
 
-core-component: vendor-snapshots
-	$(PYTHON) $(CORE_COMPONENT_DIR)/build_component.py
+r1-clean:
+	$(MAKE) -C $(R1_DIR) clean
 
-bootloader-component: littlefs-snapshot
-	$(PYTHON) $(BOOT_COMPONENT_DIR)/build_component.py
+# --- third-party -----------------------------------------------------------
 
-component: bootloader-component core-component
+third-party: third-party-vendored
 
-reference:
-	$(PYTHON) tools/open_cfw.py build \
-		--manifest "$(REFERENCE_MANIFEST)" \
-		--output-dir "$(REFERENCE_BUILD_DIR)"
+# Offline authentication of every vendored upstream snapshot. Consumed by both
+# targets; see third-party/README.md for why the snapshots sit under g2/.
+third-party-vendored:
+	$(MAKE) -C $(G2_DIR) vendor-snapshots
 
-ring-source: ring-component
-	$(PYTHON) tools/open_cfw.py build \
-		--manifest "$(RING_SOURCE_MANIFEST)" \
-		--output-dir "$(RING_SOURCE_BUILD_DIR)"
-
-source: bootloader-component core-component
-	$(PYTHON) tools/open_cfw.py build \
-		--manifest "$(SOURCE_MANIFEST)" \
-		--output-dir "$(SOURCE_BUILD_DIR)"
-
-verify: ring-component bootloader-component core-component upstream-audits
-	$(PYTHON) tools/open_cfw.py verify --manifest "$(REFERENCE_MANIFEST)"
-	$(PYTHON) tools/open_cfw.py verify --manifest "$(RING_SOURCE_MANIFEST)"
-	$(PYTHON) tools/open_cfw.py verify --manifest "$(SOURCE_MANIFEST)"
-
-test: ring-component bootloader-component core-component
-	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -v
-
-inspect: source
-	$(PYTHON) -m json.tool "$(SOURCE_BUILD_DIR)/flash-plan.json"
-
-clean:
-	$(PYTHON) -c 'from pathlib import Path; import shutil; root=Path.cwd().resolve(); targets=tuple((root/path).resolve() for path in ("build", "$(RING_COMPONENT_BUILD_DIR)", "$(CORE_COMPONENT_BUILD_DIR)", "$(BOOT_COMPONENT_BUILD_DIR)")); assert all(root in path.parents and path != root for path in targets); [shutil.rmtree(path, ignore_errors=True) for path in targets]'
+# Requires the fetched vendor roots. Pass them through, for example:
+#   make third-party-fetched SDK_ROOT=... FLASHDB_ROOT=... BMA456_ROOT=...
+third-party-fetched:
+	$(MAKE) -C $(R1_DIR) vendor-audit

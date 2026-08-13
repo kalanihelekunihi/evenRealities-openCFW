@@ -1,0 +1,7 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+EasyLogger diagnostics	140 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99-compatible core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	FSM transition and malformed-event diagnostics
+IAR runtime memory primitives	3 direct BL sites	0x00439BE4,0x0043C0E4	IAR proprietary compiler runtime	EWARM 9.20+ floor; 9.60.2 leading candidate	unobservable	bounded or source-recreated	Bounded record copy and zero fill add no release discriminator
+LVGL object provider	1 direct BL site	0x00450500	lvgl/lvgl with G2 integration	9.3-compatible	344c7c318047b7348e1be8572a9fd4260c251cfa	source-admitted	One object-tree operation in a compact helper
+nanopb iterator helper	2 direct BL sites	0x0048EB32	nanopb	0.4.7 through 0.4.9.1 compatible	98bf4db69897b53434f3d0ba72e0a3ab1a902824	source-admitted	Generic iterator helper only; schemas remain first-party
+G2 teleprompt role UI and timer providers	26 direct BL sites	11 bounded first-party entries	Even Realities first-party over separately admitted providers	private G2 source	unobservable	bounded first-party provider graph	Role gating UI mode event dispatch page-data file-list audio and timer policy
+FSM handler-table dispatch	1 indirect BLX site	9 authenticated Thumb entries at 0x0074EF50	Same authenticated teleprompt FSM object	private G2 source	unobservable	object-closed	State range is checked and the nine-entry table contains only recovered FSM handler starts

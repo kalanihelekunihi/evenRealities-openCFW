@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "component": "Packetcraft Cordio GATT profile",
+  "license": "Apache-2.0",
+  "upstream": {
+    "repository": "https://github.com/packetcraft-inc/cordio.git",
+    "selected_release": "r20.05c",
+    "selected_commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+    "selected_tree": "0a76c7dde46d3b94bb9185a4a5327d0e3f38ec97",
+    "compatibility_interval": [
+      "eeb34839755da1c19cc85b8795cc863483c16ef0",
+      "5e21ee596a80a3dc75ae5ef0938712a6042b2ac3",
+      "eb4282c7abe78dad8fb3984791b9c193fe904052",
+      "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6"
+    ],
+    "historical_g2_generating_commit": null,
+    "qualification": "Both selected files have identical Git blob IDs at every official r20.05 through r20.05c release commit. The newest compatible release is selected; the private G2 checkout itself remains unobservable."
+  },
+  "files": [
+    {
+      "path": "gatt_main.c",
+      "upstream_path": "ble-profiles/sources/profiles/gatt/gatt_main.c",
+      "size": 8447,
+      "sha256": "326c81353ab8405537074d54413c44675a61b236226ea2661416daf0454fc6d0",
+      "git_blob_sha1": "bba9a3041ce14284a0bf527934eabd01c01694d8"
+    },
+    {
+      "path": "gatt_api.h",
+      "upstream_path": "ble-profiles/sources/profiles/gatt/gatt_api.h",
+      "size": 5935,
+      "sha256": "c2ad43bf231276bf20e74b074859b9db3095f2eb918786abde7ed687fad01c37",
+      "git_blob_sha1": "6b71dd3178cbf89bbe3751d0ba33fb4a1603d97b"
+    },
+    {
+      "path": "LICENSE.md",
+      "upstream_path": "LICENSE.md",
+      "size": 562,
+      "sha256": "682ae5978019e4ee9d439b300efb125525b2e4cc4181ebd1e676dd60dc69d7cd",
+      "git_blob_sha1": "5fe50d5491f1166292380f46c8beae44ca83cadb"
+    }
+  ],
+  "g2_boundary": {
+    "retained_path": "platform\\ble\\profiles\\gatt\\profile_gatt.c",
+    "stock_interval": "[0x004B59C0,0x004B5B24)",
+    "linked_functions": 6,
+    "body_bytes": 322,
+    "physical_bytes": 356,
+    "source_owned_functions": 6,
+    "local_delta": "GattDiscover has an inserted EasyLogger expansion; its final AppDiscFindService call and the other five functions preserve the selected upstream source behavior.",
+    "production_routed": false
+  }
+}

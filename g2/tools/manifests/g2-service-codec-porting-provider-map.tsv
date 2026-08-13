@@ -1,0 +1,4 @@
+provider	edges	stock_targets	origin	version_or_interval	commit_or_commits	status	qualification
+AndersKaloer Ring-Buffer	1 direct BL site	0x00598160	AndersKaloer/Ring-Buffer	source-equivalent 2022-11-21 through 2024-11-13	cda00e1efb815bad5100757f0d10d117f633ced6..190e30bebcec22d7311fd941179d70b4f439c441	authenticated and production source-owned	Exact dynamic ring_buffer_init for the 64-byte UART RX buffer
+EasyLogger diagnostics	20 direct BL sites	0x0043CE9E,0x0043D0CE,0x0043D574	armink/EasyLogger with G2 integration	2.2.99 source-equivalent core	a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24	source-admitted	Already-active, resume/suspend failure, and state diagnostics
+G2 UART service	3 direct BL sites	0x0055E5BC,0x0055E630,0x0055E8F0	Even Realities first-party	private G2 source	unobservable	provider seams identified	UART3 resume, suspend, and receive-callback registration

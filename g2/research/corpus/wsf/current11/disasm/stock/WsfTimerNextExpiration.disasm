@@ -1,0 +1,25 @@
+
+/work/stock/WsfTimerNextExpiration.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0052a51a <.data>:
+  52a51a:	b510      	push	{r4, lr}
+  52a51c:	0004      	movs	r4, r0
+  52a51e:	f001 f9d3 	bl	0x52b8c8
+  52a522:	493c      	ldr	r1, [pc, #240]	@ (0x52a614)
+  52a524:	6808      	ldr	r0, [r1, #0]
+  52a526:	2800      	cmp	r0, #0
+  52a528:	d103      	bne.n	0x52a532
+  52a52a:	2000      	movs	r0, #0
+  52a52c:	7020      	strb	r0, [r4, #0]
+  52a52e:	2400      	movs	r4, #0
+  52a530:	e003      	b.n	0x52a53a
+  52a532:	2001      	movs	r0, #1
+  52a534:	7020      	strb	r0, [r4, #0]
+  52a536:	6808      	ldr	r0, [r1, #0]
+  52a538:	6844      	ldr	r4, [r0, #4]
+  52a53a:	f001 f9c9 	bl	0x52b8d0
+  52a53e:	0020      	movs	r0, r4
+  52a540:	bd10      	pop	{r4, pc}

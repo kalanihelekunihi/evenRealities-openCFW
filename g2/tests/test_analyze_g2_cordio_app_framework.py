@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import importlib.util
+import os
+import sys
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+ANALYZER = ROOT / "tools/analyze_g2_cordio_app_framework.py"
+CORPUS = Path(os.environ.get(
+    "OPENCFW_APOLLO_GHIDRA_CORPUS",
+    "/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth",
+))
+
+
+def load_analyzer():
+    spec = importlib.util.spec_from_file_location("analyze_g2_cordio_app_framework", ANALYZER)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+class CordioApplicationFrameworkTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.analyzer = load_analyzer()
+
+    def test_selected_source_boundary(self) -> None:
+        snapshot = self.analyzer._verify_snapshot()
+        self.assertEqual(snapshot["selected_commit"], self.analyzer.SELECTED_COMMIT)
+        self.assertIsNone(snapshot["historical_g2_generating_commit"])
+
+    @unittest.skipUnless(CORPUS.is_dir(), "authenticated 64-shard corpus unavailable")
+    def test_authenticated_lineage_and_legacy_objects(self) -> None:
+        report = self.analyzer.analyze(CORPUS)
+        self.assertEqual(report["stock_path_anchors"]["retained_paths"], 9)
+        self.assertEqual(report["stock_path_anchors"]["anchored_functions"], 50)
+        self.assertEqual(report["stock_path_anchors"]["anchored_body_bytes"], 29110)
+        legacy = report["legacy_master_slave_objects"]["aggregate"]
+        self.assertEqual(legacy["linked_functions"], 14)
+        self.assertEqual(legacy["additional_recovered_functions"], 11)
+        self.assertEqual(legacy["stored_callbacks"], 2)
+        self.assertFalse(report["lineage"]["exact_source_text_identity"])
+        self.assertFalse(report["production"]["production_routed"])
+
+
+if __name__ == "__main__":
+    unittest.main()

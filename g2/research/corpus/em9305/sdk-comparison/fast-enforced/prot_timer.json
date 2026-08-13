@@ -1,0 +1,650 @@
+{
+  "expected_exact_match_count": 13,
+  "expected_vendor_modified_count": 0,
+  "function_count": 23,
+  "functions": [
+    {
+      "binding": "g",
+      "compared_byte_count": 42,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213588,
+      "masked_byte_count": 4,
+      "matches": [
+        3213588
+      ],
+      "name": "ProtTimer_Init",
+      "normalized_sha256": "b4447bfc0e0f7cfa3111fbf3dbff2518f05028bd01a45721f45a6fc59371e307",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_Init",
+      "size": 46
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 222,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214344,
+      "masked_byte_count": 4,
+      "matches": [
+        3214344
+      ],
+      "name": "ProtTimer_StoreConfig",
+      "normalized_sha256": "e72737e2c52b8b7aed13a2c077cf0c60ac1245e37fed73cf3512fdac009931f4",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_StoreConfig",
+      "size": 226
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 92,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213992,
+      "masked_byte_count": 4,
+      "matches": [
+        3213992
+      ],
+      "name": "ProtTimer_RestoreConfig",
+      "normalized_sha256": "1d956de581682e16c062bf4b5dfd712b08999fdf36bd6e90423eea6193d1459f",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_RestoreConfig",
+      "size": 96
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 16,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214228,
+      "masked_byte_count": 0,
+      "matches": [
+        3214228
+      ],
+      "name": "ProtTimer_SetDivider",
+      "normalized_sha256": "c91986f82fbd5e9ee121eca93cdff925e61776bf4b66572eed0f2bce13f277b1",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_SetDivider",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 16,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214212,
+      "masked_byte_count": 0,
+      "matches": [
+        3214212
+      ],
+      "name": "ProtTimer_SetConfiguration",
+      "normalized_sha256": "0a8b143001ab432d12cc82d41e3f79549b6d647875cc1d98bde88f7cce586c2b",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_SetConfiguration",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "ProtTimer_Load",
+      "normalized_sha256": "35eb5c179517664091b92d8db7f3e74cbef372c6afc72a9dc681b40ad151506b",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_Load",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213544,
+      "masked_byte_count": 0,
+      "matches": [
+        3213544
+      ],
+      "name": "ProtTimer_GetDivider",
+      "normalized_sha256": "42a16d4090920786941bf98dc80ec857de3efaf5c31cd475a11551b5b169b8d2",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_GetDivider",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 18,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "ProtTimer_Adjust",
+      "normalized_sha256": "920465c994620aa91d4be957c485796a51d3ed5ad21691f578506cdffe877805",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_Adjust",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 30,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "ProtTimer_SetCompareEnable",
+      "normalized_sha256": "99da113ce5be11d15926dee819b0f4af33c9e7e0583e9d3f9d786371ea305091",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_SetCompareEnable",
+      "size": 30
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 24,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213520,
+      "masked_byte_count": 0,
+      "matches": [
+        3213520
+      ],
+      "name": "ProtTimer_GetCompareEnable",
+      "normalized_sha256": "d5f3760a3d863fa0f1e1b4bc1b30a37011c999f1b86758302e59940547610e26",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_GetCompareEnable",
+      "size": 24
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 40,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "ProtTimer_SetHwTriggerEnable",
+      "normalized_sha256": "712d829f38fcf9eb2d5e1a4610bf710153a03918c38ff88af7cf6f2cecd5275f",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_SetHwTriggerEnable",
+      "size": 40
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 30,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "ProtTimer_SetHWCaptureEnable",
+      "normalized_sha256": "a014b19f8f7e37ea8dae1f97dccea9c1529e13fb328a14b798455ca37ab441e4",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_SetHWCaptureEnable",
+      "size": 30
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 40,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214572,
+      "masked_byte_count": 4,
+      "matches": [
+        3214572
+      ],
+      "name": "ProtTimer_UpdateRestartTime",
+      "normalized_sha256": "740eeed8229cf6602c160d8a1f5e7c062be75b3812ba1b08f7be4177861b763c",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_UpdateRestartTime",
+      "size": 44
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 72,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214088,
+      "masked_byte_count": 4,
+      "matches": [
+        3214088
+      ],
+      "name": "ProtTimer_RestoreStart",
+      "normalized_sha256": "1f2e3f2c9f6d74c8f2f64805666e1bb5ddc85430a049131c1fa014cf170d0e86",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_RestoreStart",
+      "size": 76
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 80,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213900,
+      "masked_byte_count": 12,
+      "matches": [
+        3213900
+      ],
+      "name": "ProtTimer_RestoreAdjust",
+      "normalized_sha256": "0c9bd24eb53b6900873eed9b110d7d0d6ff4cbcdfacd811fe363b5808ab94120",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.ProtTimer_RestoreAdjust",
+      "size": 92
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 14,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "ProtTimer_WasRunning",
+      "normalized_sha256": "6886bd81da15c8a2b4f440b7b3d81eaecbd92909385c5642969af564f9976a89",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_WasRunning",
+      "size": 18
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 164,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213712,
+      "masked_byte_count": 24,
+      "matches": [
+        3213712
+      ],
+      "name": "ProtTimer_RestartAfterSleep",
+      "normalized_sha256": "73cde98d5637393d5e0f8335e99cd8994c6fe05c5e881033d42e3ff184083651",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 6,
+      "section": ".text.ProtTimer_RestartAfterSleep",
+      "size": 188
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 20,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213568,
+      "masked_byte_count": 0,
+      "matches": [
+        3213568
+      ],
+      "name": "ProtTimer_GetSystemTime",
+      "normalized_sha256": "f836d3519fef9de8740300e5c39b46c2caa90c4a055a6c9a5fa173aed4a1ae01",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_GetSystemTime",
+      "size": 20
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 28,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "ProtTimer_GetTimestampedRegister",
+      "normalized_sha256": "aca5bf7a7cffef19b0e920ee0249ed7e82ade546895846e2a7d6fa97867f164a",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_GetTimestampedRegister",
+      "size": 32
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 8,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 0,
+      "matches": [],
+      "name": "ProtTimer_AddUs",
+      "normalized_sha256": "f673e9a2f2f6bf7be2dea11193086514ad919d83df3d8d26779fddc5b442ee6c",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_AddUs",
+      "size": 8
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 72,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213636,
+      "masked_byte_count": 4,
+      "matches": [
+        3213636
+      ],
+      "name": "ProtTimer_RegisterEventTimeCallback",
+      "normalized_sha256": "b3cf28f8970a307c41fed420fe965f2f224d32bc091226ce07a39c18222c9862",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_RegisterEventTimeCallback",
+      "size": 76
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 6,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 4,
+      "matches": [],
+      "name": "ProtTimer_GetFirstEventTimeCallback",
+      "normalized_sha256": "21092d2e044392cda0d4072887d8bf361fc6b10991fecddddf6520225ee8a657",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_GetFirstEventTimeCallback",
+      "size": 10
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 114,
+      "expected_address_matched": null,
+      "expected_match_kind": null,
+      "expected_stock_address": null,
+      "masked_byte_count": 12,
+      "matches": [],
+      "name": "ProtTimer_GetTimeToFirstEvent",
+      "normalized_sha256": "d5d08f591810d87658827a03aef1407bb350bec16d65ae585a680f4be054a1a5",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.ProtTimer_GetTimeToFirstEvent",
+      "size": 126
+    }
+  ],
+  "identity": {
+    "architecture": "ARCv2 EM",
+    "archive_git_blob": "cf8f1f22ea840568c83c6a2662c86e7d95b6581a",
+    "archive_kind": "prot_timer",
+    "archive_path": "libs/prot_timer/lib_prot_timer.a",
+    "archive_sha256": "8ea99f2afa095f90d1c9555d748908bb6e03805db87d38a80a51f640f11788c7",
+    "compiler": "Synopsys MetaWare ARC Compiler T-2022.09 build 004 / LLVM 14.0.6 (EM-Micro)",
+    "compiler_anchors_matched": true,
+    "compiler_comment_sha256": "929918ddd8913f60418908e65d12e5b7baa0e2b904423b6fb95c8c32cdfecddd",
+    "optimization": "-Os"
+  },
+  "known_expected_address_match_count": 13,
+  "known_function_count": 13,
+  "unique_discovered_matches": [
+    {
+      "binding": "g",
+      "compared_byte_count": 42,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213588,
+      "masked_byte_count": 4,
+      "matches": [
+        3213588
+      ],
+      "name": "ProtTimer_Init",
+      "normalized_sha256": "b4447bfc0e0f7cfa3111fbf3dbff2518f05028bd01a45721f45a6fc59371e307",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_Init",
+      "size": 46
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 222,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214344,
+      "masked_byte_count": 4,
+      "matches": [
+        3214344
+      ],
+      "name": "ProtTimer_StoreConfig",
+      "normalized_sha256": "e72737e2c52b8b7aed13a2c077cf0c60ac1245e37fed73cf3512fdac009931f4",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_StoreConfig",
+      "size": 226
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 92,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213992,
+      "masked_byte_count": 4,
+      "matches": [
+        3213992
+      ],
+      "name": "ProtTimer_RestoreConfig",
+      "normalized_sha256": "1d956de581682e16c062bf4b5dfd712b08999fdf36bd6e90423eea6193d1459f",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_RestoreConfig",
+      "size": 96
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 16,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214228,
+      "masked_byte_count": 0,
+      "matches": [
+        3214228
+      ],
+      "name": "ProtTimer_SetDivider",
+      "normalized_sha256": "c91986f82fbd5e9ee121eca93cdff925e61776bf4b66572eed0f2bce13f277b1",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_SetDivider",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 16,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214212,
+      "masked_byte_count": 0,
+      "matches": [
+        3214212
+      ],
+      "name": "ProtTimer_SetConfiguration",
+      "normalized_sha256": "0a8b143001ab432d12cc82d41e3f79549b6d647875cc1d98bde88f7cce586c2b",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_SetConfiguration",
+      "size": 16
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 12,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213544,
+      "masked_byte_count": 0,
+      "matches": [
+        3213544
+      ],
+      "name": "ProtTimer_GetDivider",
+      "normalized_sha256": "42a16d4090920786941bf98dc80ec857de3efaf5c31cd475a11551b5b169b8d2",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_GetDivider",
+      "size": 12
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 24,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213520,
+      "masked_byte_count": 0,
+      "matches": [
+        3213520
+      ],
+      "name": "ProtTimer_GetCompareEnable",
+      "normalized_sha256": "d5f3760a3d863fa0f1e1b4bc1b30a37011c999f1b86758302e59940547610e26",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_GetCompareEnable",
+      "size": 24
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 40,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214572,
+      "masked_byte_count": 4,
+      "matches": [
+        3214572
+      ],
+      "name": "ProtTimer_UpdateRestartTime",
+      "normalized_sha256": "740eeed8229cf6602c160d8a1f5e7c062be75b3812ba1b08f7be4177861b763c",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_UpdateRestartTime",
+      "size": 44
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 72,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3214088,
+      "masked_byte_count": 4,
+      "matches": [
+        3214088
+      ],
+      "name": "ProtTimer_RestoreStart",
+      "normalized_sha256": "1f2e3f2c9f6d74c8f2f64805666e1bb5ddc85430a049131c1fa014cf170d0e86",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_RestoreStart",
+      "size": 76
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 80,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213900,
+      "masked_byte_count": 12,
+      "matches": [
+        3213900
+      ],
+      "name": "ProtTimer_RestoreAdjust",
+      "normalized_sha256": "0c9bd24eb53b6900873eed9b110d7d0d6ff4cbcdfacd811fe363b5808ab94120",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 3,
+      "section": ".text.ProtTimer_RestoreAdjust",
+      "size": 92
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 164,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213712,
+      "masked_byte_count": 24,
+      "matches": [
+        3213712
+      ],
+      "name": "ProtTimer_RestartAfterSleep",
+      "normalized_sha256": "73cde98d5637393d5e0f8335e99cd8994c6fe05c5e881033d42e3ff184083651",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 6,
+      "section": ".text.ProtTimer_RestartAfterSleep",
+      "size": 188
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 20,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213568,
+      "masked_byte_count": 0,
+      "matches": [
+        3213568
+      ],
+      "name": "ProtTimer_GetSystemTime",
+      "normalized_sha256": "f836d3519fef9de8740300e5c39b46c2caa90c4a055a6c9a5fa173aed4a1ae01",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 0,
+      "section": ".text.ProtTimer_GetSystemTime",
+      "size": 20
+    },
+    {
+      "binding": "g",
+      "compared_byte_count": 72,
+      "expected_address_matched": true,
+      "expected_match_kind": "exact",
+      "expected_stock_address": 3213636,
+      "masked_byte_count": 4,
+      "matches": [
+        3213636
+      ],
+      "name": "ProtTimer_RegisterEventTimeCallback",
+      "normalized_sha256": "b3cf28f8970a307c41fed420fe965f2f224d32bc091226ce07a39c18222c9862",
+      "object": "prot_timer.c.obj",
+      "offset": 0,
+      "relocation_count": 1,
+      "section": ".text.ProtTimer_RegisterEventTimeCallback",
+      "size": 76
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+
+/work/out/Os_noinline/module.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.open_cfw_cordio_wsf_timer_start_sec_candidate:
+
+00000000 <open_cfw_cordio_wsf_timer_start_sec_candidate>:
+   0:	2364      	movs	r3, #100	@ 0x64
+   2:	4359      	muls	r1, r3
+   4:	f7ff bffe 	b.w	0 <open_cfw_cordio_wsf_timer_start_sec_candidate>
+			4: R_ARM_THM_JUMP24	open_cfw_cordio_wsf_timer_insert_candidate
