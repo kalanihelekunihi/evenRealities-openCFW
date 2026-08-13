@@ -1,0 +1,1093 @@
+{
+  "freertos": {
+    "cmsis_rtos_wrapper": "undetermined; SysTick gate shape is consistent with the STM32Cube cmsis_os v1 osSystickHandler pattern, raw-API use is not excluded",
+    "kernel_family": "FreeRTOS",
+    "kernel_statics": {
+      "pxCurrentTCB": 536871208,
+      "pxOverflowDelayedTaskList_offset": 52,
+      "uxSchedulerSuspended_offset": 48,
+      "xPendedTicks_offset": 24,
+      "xSchedulerRunning_offset": 20,
+      "xTickCount_offset": 12
+    },
+    "pendsv_handler": {
+      "bytes": 62,
+      "pxCurrentTCB_literal": 536871208,
+      "sha256": "6093899cb710c7c4528991e47a9fd21cc8e4099f36f51ecaebadcc5f6998309c",
+      "vaddr": 134217986
+    },
+    "port": "GCC ARM_CM0 (naked xPortPendSVHandler, empty vPortSVCHandler)",
+    "port_reference": "FreeRTOS-Kernel portable/GCC/ARM_CM0/port.c verified against tag V10.5.1; sequence is stable across the V10 line",
+    "systick_gate": {
+      "behavior": "tick handled only when xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED(1)",
+      "scs_literal": 3758153728,
+      "vaddr": 134251552
+    },
+    "task_names": {
+      "app_tasks": {
+        "agingTimer": 134273280,
+        "appEvent": 134273328,
+        "clearLedTimer": 134273228,
+        "defaultTask": 134273216,
+        "glsDetectTask": 134273200,
+        "ledTask": 134273176,
+        "powerOnTimer": 134273292,
+        "pwrManagerTask": 134273184,
+        "setAgingStatusTimer": 134273308,
+        "showErrorLedTimer": 134273244,
+        "startLedTimer": 134273264
+      },
+      "idle_task_name": [
+        "IDLE",
+        134267624
+      ],
+      "timer_queue_registry_name": [
+        "TmrQ",
+        134261980
+      ],
+      "timer_task_name": [
+        "Tmr Svc",
+        134270324
+      ]
+    },
+    "version_interval": "V10.x (V10.0.0-V10.6.x); V9.x not excluded by port bytes alone; V11.x single-core not excluded; leading candidate V10.3.1-V10.5.1 per STM32CubeG0 distribution lineage",
+    "xPortSysTickHandler": {
+      "pendsvset_bit": 268435456,
+      "scb_literal": 3758157056,
+      "vaddr": 134268332
+    },
+    "xTaskGetSchedulerState": {
+      "vaddr": 134269516
+    },
+    "xTaskIncrementTick": {
+      "vaddr": 134269560
+    }
+  },
+  "hal": {
+    "flash_credentials": {
+      "FLASH_KEY1": {
+        "file_offset": 19508,
+        "value": 1164378403
+      },
+      "FLASH_KEY2": {
+        "file_offset": 19512,
+        "value": 3455027627
+      },
+      "FLASH_OPTKEY1": {
+        "file_offset": 19372,
+        "value": 135866939
+      },
+      "FLASH_OPTKEY2": {
+        "file_offset": 19376,
+        "value": 1281191551
+      }
+    },
+    "flash_driver": "HAL_FLASH_Unlock/HAL_FLASH_OB_Unlock lineage proven by unique FLASH_KEYR/OPTKEYR credential literals",
+    "hal_uart_irqhandler": {
+      "evidence": "USART ISR(+0x1c)/CR1(+0x0)/CR3(+0x8)/ICR(+0x20) sequence",
+      "head_sha256": "7d8522848a8675e99ceda7d0201544437cc409a8bea91823894fa8f9eb9d0560",
+      "vaddr": 134242128
+    },
+    "i2c_note": "no I2C peripheral literal exists; YHM2510/2217/4005 chip traffic is GPIO bit-banged (GPIOB/C/D literals + read_bit_error log strings)",
+    "lineage": "STM32CubeG0 HAL/LL; version not statically provable (HAL carries no version strings); modules enumerated by peripheral-constant and handler-structure evidence",
+    "modules_absent_no_literals": [
+      "I2C1",
+      "I2C2",
+      "DMA1",
+      "DMA2",
+      "USB",
+      "FDCAN",
+      "RNG",
+      "AES",
+      "LPUART",
+      "UCPD",
+      "CRC peripheral",
+      "IWDG",
+      "WWDG",
+      "DBGMCU"
+    ],
+    "modules_present": [
+      "FLASH",
+      "RCC",
+      "PWR",
+      "RTC",
+      "ADC1",
+      "TIM",
+      "USART/UART",
+      "GPIO",
+      "EXTI+SYSCFG",
+      "CORTEX (SCS)"
+    ]
+  },
+  "hardware_gates": [
+    "battery/charging/thermal policy values (98% charge cutoff, over-temperature stop, fake-standby timers) are log-evidenced only; no hardware validation performed",
+    "water-detect thresholds and PMIC register writes are hardware-gated",
+    "nSWAP_BANK option-byte flow proven from code/strings only; no device execution"
+  ],
+  "identity": {
+    "app_alternate_bank_vaddr": 134479872,
+    "app_bytes": 55752,
+    "app_vaddr_base": 134217728,
+    "blob": "blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+    "size": 55784,
+    "wrapper": {
+      "checksum_algorithm": "additive sum of big-endian u32 words over the application payload, stored big-endian",
+      "checksum_be_u32": 1936155695,
+      "checksum_verified": true,
+      "length_be_u32": 55752,
+      "magic": "EVEN",
+      "version": "1.2.57",
+      "version_bytes": [
+        1,
+        2,
+        57,
+        0
+      ]
+    }
+  },
+  "mcu_family": {
+    "confidence": "high for G0Bx-class; medium for the exact member (G0B0/G0B1/G0C1 not statically separable: AES/RNG/FDCAN2 unused, DBGMCU IDCODE never read)",
+    "discriminators": [
+      "46-word vector table = 30 populated peripheral IRQs on the G0Bx interrupt map",
+      "IRQ12 (ADC1_COMP) populated with an ADC ISR/IER-flag worker: 0x80006c5",
+      "IRQ22 (TIM17_FDCAN_IT1) populated with a TIM SR/DIER capture-compare worker: 0x80084b1",
+      "IRQ27 (USART1) populated: 0x8008f99",
+      "USART3/USART4 base literals present (absent on STM32G030)",
+      "dual-bank update flow: bank-2 base 0x08040000 literals + nSWAP_BANK option-byte programming (\"Swap bank\", \"ob program\"), excluding <=128-KB single-bank members",
+      "initial SP 0x20002C88; RAM-resident code/data observed up to 0x2000FC1C (>=64-KB SRAM usage; G0B1 nominal 144 KB)"
+    ],
+    "excluded": {
+      "STM32G030": "28-IRQ map, no USART3/4, no dual-bank, 8-KB SRAM",
+      "STM32G070/G071": "IRQ12=TIM1_BRK/IRQ22=I2C1/IRQ27=USART2 map contradicted by handler evidence; single-bank <=128-KB flash contradicts nSWAP_BANK flow"
+    },
+    "leading_candidate": "STM32G0B1 (STM32G0Bx-class, 512-KB dual-bank flash, Cortex-M0+)"
+  },
+  "ota_state_machine_strings": [
+    {
+      "file_offset": 9148,
+      "step": "ota_check",
+      "string": "ota check (0x58), len:%d"
+    },
+    {
+      "file_offset": 9180,
+      "step": "version_compare_nothing_new",
+      "string": "[OTA_BOX]: nothing new, cur:1.%d.%d, remote:1.%d.%d"
+    },
+    {
+      "file_offset": 54888,
+      "step": "version_compare_new",
+      "string": "[OTA_BOX]: new version, cur:1.%d.%d, remote:1.%d.%d, len:%d, crc:0x%x"
+    },
+    {
+      "file_offset": 6040,
+      "step": "check_gls_ready",
+      "string": "[OTA_BOX]: Check gls ready"
+    },
+    {
+      "file_offset": 6080,
+      "step": "gls_not_ready",
+      "string": "[OTA_BOX]: GLS not ready."
+    },
+    {
+      "file_offset": 6108,
+      "step": "get_running_bank",
+      "string": "[OTA_BOX]: Get running bank"
+    },
+    {
+      "file_offset": 6176,
+      "step": "running_bank_value",
+      "string": "[OTA_BOX]: Running bank: %d"
+    },
+    {
+      "file_offset": 11752,
+      "step": "erase_bank",
+      "string": "[OTA_BOX]:fail to erase %d pages. err:0x%x, retry:%d"
+    },
+    {
+      "file_offset": 6232,
+      "step": "copy_sn",
+      "string": "[OTA_BOX]: Copy SN."
+    },
+    {
+      "file_offset": 6252,
+      "step": "copy_sn_done",
+      "string": "[OTA_BOX]: Copy SN done."
+    },
+    {
+      "file_offset": 6308,
+      "step": "get_bin_file",
+      "string": "[OTA_BOX]: get bin file"
+    },
+    {
+      "file_offset": 6352,
+      "step": "get_bin_file_done",
+      "string": "[OTA_BOX]: get bin file done, total error cnt: %d"
+    },
+    {
+      "file_offset": 11580,
+      "step": "chunk_crc",
+      "string": "[OTA_BOX]: crc_cal: 0x%x, crc_rx:0x%x"
+    },
+    {
+      "file_offset": 11312,
+      "step": "program_fail",
+      "string": "[OTA_BOX]: Fail to program."
+    },
+    {
+      "file_offset": 7744,
+      "step": "inform_result",
+      "string": "[OTA_BOX]: Inform GLS ota result: %d"
+    },
+    {
+      "file_offset": 7832,
+      "step": "inform_done",
+      "string": "[OTA_BOX]: Inform GLS done."
+    },
+    {
+      "file_offset": 32256,
+      "step": "check_box_firmware",
+      "string": "[OTA_BOX]: check box ota firmware."
+    },
+    {
+      "file_offset": 14724,
+      "step": "swap_bank_2_to_1",
+      "string": "Swap bank(2->1) & RESET, cur ob val:%x"
+    },
+    {
+      "file_offset": 14768,
+      "step": "swap_bank_1_to_2",
+      "string": "Swap bank(1->2) & RESET, cur ob val:%x"
+    },
+    {
+      "file_offset": 14808,
+      "step": "ob_program",
+      "string": "ob program: %d"
+    },
+    {
+      "file_offset": 42748,
+      "step": "ob_check_fail",
+      "string": "Option Bytes check fail, UPDATE & RESET. 0x%x"
+    },
+    {
+      "file_offset": 42800,
+      "step": "ob_check_done",
+      "string": "Option Bytes check done. 0x%x, level:0x%x"
+    }
+  ],
+  "ownership_categories": [
+    "generated_transport",
+    "upstream_cmsis_startup",
+    "upstream_freertos_kernel",
+    "upstream_stm32_hal",
+    "first_party_g2",
+    "device_specific_preserve",
+    "unresolved"
+  ],
+  "peripherals": {
+    "absent": [
+      "UID",
+      "FLASHSIZE",
+      "TIM2",
+      "TIM7",
+      "WWDG",
+      "IWDG",
+      "TIM15",
+      "I2C1",
+      "I2C2",
+      "USB_DRD",
+      "FDCAN1",
+      "FDCAN2",
+      "LPUART2",
+      "LPUART1",
+      "UCPD1",
+      "UCPD2",
+      "EXTI",
+      "DBGMCU",
+      "DMA1",
+      "DMA2",
+      "CRC",
+      "RNG",
+      "AES"
+    ],
+    "used": {
+      "ADC1": {
+        "base": 1073816576,
+        "literal_sites": [
+          18216,
+          27004
+        ]
+      },
+      "FLASH": {
+        "base": 1073881088,
+        "literal_sites": [
+          16068,
+          16092,
+          16108,
+          16136,
+          16176,
+          16212,
+          16264,
+          16352,
+          18972,
+          19076,
+          19260,
+          19288,
+          19308,
+          19336,
+          19368,
+          19472,
+          19504,
+          20272,
+          21572,
+          21648
+        ]
+      },
+      "GPIOA": {
+        "base": 1342177280,
+        "literal_sites": [
+          4573,
+          13421,
+          42917
+        ]
+      },
+      "GPIOB": {
+        "base": 1342178304,
+        "literal_sites": [
+          10448,
+          11028,
+          13212,
+          19728,
+          20132,
+          25380,
+          25608,
+          27536,
+          39820,
+          41928,
+          42348,
+          42384,
+          42420,
+          47108,
+          47744,
+          47808,
+          47860,
+          47896,
+          47944
+        ]
+      },
+      "GPIOC": {
+        "base": 1342179328,
+        "literal_sites": [
+          19732,
+          20136,
+          27544
+        ]
+      },
+      "GPIOD": {
+        "base": 1342180352,
+        "literal_sites": [
+          19736,
+          20140
+        ]
+      },
+      "PWR": {
+        "base": 1073770496,
+        "literal_sites": [
+          3432,
+          13396,
+          20648,
+          20676,
+          20704,
+          20736,
+          20800,
+          21240,
+          22816,
+          30260,
+          32580,
+          33392,
+          42852
+        ]
+      },
+      "RCC": {
+        "base": 1073876992,
+        "literal_sites": [
+          21236,
+          21580,
+          21644,
+          21684,
+          21824,
+          22796,
+          25600,
+          27532,
+          42844
+        ]
+      },
+      "RTC": {
+        "base": 1073752064,
+        "literal_sites": [
+          23144,
+          23460,
+          27672,
+          28196
+        ]
+      },
+      "SYSCFG": {
+        "base": 1073807360,
+        "literal_sites": [
+          23536
+        ]
+      },
+      "TIM1": {
+        "base": 1073818624,
+        "literal_sites": [
+          23704,
+          34140
+        ]
+      },
+      "TIM14": {
+        "base": 1073750016,
+        "literal_sites": [
+          17210,
+          34160,
+          54191
+        ]
+      },
+      "TIM16": {
+        "base": 1073824768,
+        "literal_sites": [
+          34156
+        ]
+      },
+      "TIM17": {
+        "base": 1073825792,
+        "literal_sites": [
+          20416,
+          24136,
+          34164
+        ]
+      },
+      "TIM3": {
+        "base": 1073742848,
+        "literal_sites": [
+          23708,
+          34144
+        ]
+      },
+      "TIM6": {
+        "base": 1073743872,
+        "literal_sites": [
+          23712,
+          34148
+        ]
+      },
+      "USART1": {
+        "base": 1073821696,
+        "literal_sites": [
+          25368,
+          25596,
+          26296,
+          27792,
+          36240
+        ]
+      },
+      "USART2": {
+        "base": 1073759232,
+        "literal_sites": [
+          36248
+        ]
+      },
+      "USART3": {
+        "base": 1073760256,
+        "literal_sites": [
+          25376,
+          25604,
+          27920,
+          28040,
+          36252
+        ]
+      },
+      "USART4": {
+        "base": 1073761280,
+        "literal_sites": [
+          36256
+        ]
+      }
+    }
+  },
+  "regions": [
+    {
+      "bytes": 32,
+      "evidence": "EVEN wrapper: magic, case version 1.2.57, BE length, BE additive word-sum checksum; container_only, reconstructed by the package generator",
+      "file_end_exclusive": 32,
+      "file_start": 0,
+      "ownership_category": "generated_transport",
+      "sha256": "50e3b01beaf60791c3b918f8d00e296460b427121dac04a06ed9ecec6e644840"
+    },
+    {
+      "bytes": 184,
+      "evidence": "Cortex-M0+ vector table, 46 words, STM32G0B1-class IRQ map",
+      "file_end_exclusive": 216,
+      "file_start": 32,
+      "ownership_category": "upstream_cmsis_startup",
+      "sha256": "019fe11fc35e0b86be9ec3c189ba57c9cd0f7fbe0f281701639f110fd7a1f3be"
+    },
+    {
+      "bytes": 80,
+      "evidence": "GCC ARM_CM0 port: interrupt-mask helpers, xPortPendSVHandler; exact V10-line instruction sequence",
+      "file_end_exclusive": 356,
+      "file_start": 276,
+      "ownership_category": "upstream_freertos_kernel",
+      "sha256": "63507cac5e5f3e54ea5b40c522715e061d051773e63779248cd345d8c80e6f5a"
+    },
+    {
+      "bytes": 20,
+      "evidence": "reset trampoline (SystemInit -> _start) and default self-loop exception slots",
+      "file_end_exclusive": 376,
+      "file_start": 356,
+      "ownership_category": "upstream_cmsis_startup",
+      "sha256": "298016abe73d12adf42fdcc1ffd4932e6767cf4ceda4556c271663d9f53b2597"
+    },
+    {
+      "bytes": 8,
+      "evidence": "OTA updater literals referencing the bank-2 preserved SN windows",
+      "file_end_exclusive": 11308,
+      "file_start": 11300,
+      "ownership_category": "first_party_g2",
+      "sha256": "e5472bbf8eee23d89bf07a000dce2234e8d98f58d3521e8e40a5e8b29986f4eb"
+    },
+    {
+      "bytes": 144,
+      "evidence": "HAL FLASH credential island: OPTKEYR + KEYR unlock literals and surrounding flash-driver code",
+      "file_end_exclusive": 19516,
+      "file_start": 19372,
+      "ownership_category": "upstream_stm32_hal",
+      "sha256": "e7e70ef511cad8fd78d72e3bc451ccff3a92620ad9b8a313328a1d3c494f5718"
+    },
+    {
+      "bytes": 64,
+      "evidence": "HAL_UART_IRQHandler head (USART ISR/CR1/CR3/ICR sequence)",
+      "file_end_exclusive": 24496,
+      "file_start": 24432,
+      "ownership_category": "upstream_stm32_hal",
+      "sha256": "06e9ae9afddd3cfcddcd156b9f8b034cede4e4b624bd3d62a3b20addb6e7c774"
+    },
+    {
+      "bytes": 24,
+      "evidence": "SysTick vector gate: SCS read + xTaskGetSchedulerState guard",
+      "file_end_exclusive": 33880,
+      "file_start": 33856,
+      "ownership_category": "upstream_freertos_kernel",
+      "sha256": "e62e3ef18fc15122441f2b11b011ef7184578f0a000bafe5dc2366692afad513"
+    },
+    {
+      "bytes": 160,
+      "evidence": "USART1 IRQ thunk plus the two symmetric GLS frame packers (0x5A channel, 10-retry, 0xFF failure fill)",
+      "file_end_exclusive": 36952,
+      "file_start": 36792,
+      "ownership_category": "first_party_g2",
+      "sha256": "adff41d5289542356fe1089378a44c2aa93007f827363063cf473fecaf3b6d2b"
+    },
+    {
+      "bytes": 36,
+      "evidence": "xPortSysTickHandler (mask/tick/PENDSVSET/unmask)",
+      "file_end_exclusive": 50672,
+      "file_start": 50636,
+      "ownership_category": "upstream_freertos_kernel",
+      "sha256": "24524aee9b24bf722d90a4f936c3f6e3350da88b97dc961d8c489b4ba956ea66"
+    },
+    {
+      "bytes": 26,
+      "evidence": "xTaskGetSchedulerState over kernel statics at 0x20000128",
+      "file_end_exclusive": 51846,
+      "file_start": 51820,
+      "ownership_category": "upstream_freertos_kernel",
+      "sha256": "37db3704b7a172db1ef8f74dcc2a7135f9413988a69564d17fb5eec40e85ff78"
+    },
+    {
+      "bytes": 72,
+      "evidence": "xTaskIncrementTick head (xTickCount/xPendedTicks/uxSchedulerSuspended evidence)",
+      "file_end_exclusive": 51936,
+      "file_start": 51864,
+      "ownership_category": "upstream_freertos_kernel",
+      "sha256": "d9ec2fe92ed5b39e018023fb9311cf7ca32c48ff5c5c9c19d3cb8e2fc7ce426c"
+    },
+    {
+      "bytes": 224,
+      "evidence": "static task/timer descriptor table with name and entry literals",
+      "file_end_exclusive": 54176,
+      "file_start": 53952,
+      "ownership_category": "first_party_g2",
+      "sha256": "0e1cf89bc7d94e4ece054fa1677afa4944c2f78fa969b5288ab35cdde7124afc"
+    },
+    {
+      "bytes": 160,
+      "evidence": "application task/timer name string block",
+      "file_end_exclusive": 55640,
+      "file_start": 55480,
+      "ownership_category": "first_party_g2",
+      "sha256": "9ba478bf27b18e3807a19cdb9d03e6457dda2cc9e333eafaf840880fbd7a2782"
+    },
+    {
+      "bytes": 54550,
+      "evidence": "aggregate remainder outside evidence-anchored islands; contains the bulk of the FreeRTOS kernel body, STM32 HAL drivers, first-party policy, rodata, and the compressed-log string corpus; classification requires a full function map",
+      "file_end_exclusive": null,
+      "file_start": null,
+      "ownership_category": "unresolved",
+      "sha256": null
+    },
+    {
+      "bytes": 0,
+      "evidence": "logical flash window 0x0803f000..0x0803f010 (bank 1, 16 bytes): per-device SN; outside this image; updater copies it across OTA; never overwrite",
+      "file_end_exclusive": null,
+      "file_start": null,
+      "ownership_category": "device_specific_preserve",
+      "sha256": null
+    },
+    {
+      "bytes": 0,
+      "evidence": "logical flash window 0x0803f800..0x0803f808 (bank 1, 8 bytes): per-device SN; outside this image; updater copies it across OTA; never overwrite",
+      "file_end_exclusive": null,
+      "file_start": null,
+      "ownership_category": "device_specific_preserve",
+      "sha256": null
+    },
+    {
+      "bytes": 0,
+      "evidence": "logical flash window 0x0807f000..0x0807f010 (bank 2, 16 bytes): per-device SN; outside this image; updater copies it across OTA; never overwrite",
+      "file_end_exclusive": null,
+      "file_start": null,
+      "ownership_category": "device_specific_preserve",
+      "sha256": null
+    },
+    {
+      "bytes": 0,
+      "evidence": "logical flash window 0x0807f800..0x0807f808 (bank 2, 8 bytes): per-device SN; outside this image; updater copies it across OTA; never overwrite",
+      "file_end_exclusive": null,
+      "file_start": null,
+      "ownership_category": "device_specific_preserve",
+      "sha256": null
+    }
+  ],
+  "serial_identity": {
+    "bank2_base_literal_sites": [
+      11568,
+      11992
+    ],
+    "flashsize_0x1fff75e0_literal_sites": [],
+    "identity_model": "per-device SN lives in bank-end flash windows that the updater explicitly copies across OTA (\"Copy SN\" step); set over the USB/factory UART (\"Set SN:\", \"Set SN Even done/fail\"); the STM32 UID is not referenced by this image",
+    "image_contains_preserved_windows": false,
+    "preservation_rule": "never overwrite 0x0803F000..0x0803F00F, 0x0803F800..0x0803F807, or the bank-2 mirrors; any reconstructed image must reproduce the copy-forward behavior",
+    "preserved_window_literal_sites": {
+      "0x0803f000": [
+        12260,
+        14388
+      ],
+      "0x0803f800": [
+        12196,
+        14120
+      ],
+      "0x0807f000": [
+        11304
+      ],
+      "0x0807f800": [
+        11300
+      ]
+    },
+    "preserved_windows": [
+      {
+        "bank": 1,
+        "bytes": 16,
+        "end_exclusive": 134475792,
+        "start": 134475776
+      },
+      {
+        "bank": 1,
+        "bytes": 8,
+        "end_exclusive": 134477832,
+        "start": 134477824
+      },
+      {
+        "bank": 2,
+        "bytes": 16,
+        "end_exclusive": 134737936,
+        "start": 134737920
+      },
+      {
+        "bank": 2,
+        "bytes": 8,
+        "end_exclusive": 134739976,
+        "start": 134739968
+      }
+    ],
+    "uid_0x1fff7590_literal_sites": []
+  },
+  "string_census": {
+    "aging": 24,
+    "gls_uart": 7,
+    "ota_box": 23,
+    "pmic_chips": 27,
+    "power_standby": 12,
+    "total_ascii_strings_ge6": 308,
+    "version": 2,
+    "water_detect": 6
+  },
+  "uart_update_protocol": {
+    "commands_from_strings": {
+      "19": "case->glasses status push (\"send 0x13 soon\" on battery/hall/USB/charging changes)",
+      "61": "aging-exit acknowledge (\"exit aging status(0x3D)\")",
+      "62": "aging-exit acknowledge (\"exit aging status(0x3E)\")",
+      "88": "ota check (\"ota check (0x58), len:%d\")"
+    },
+    "frame_format": {
+      "evidence_file_offset": 8889,
+      "evidence_string": "header: 5a a5 ff %02x",
+      "header_bytes": [
+        90,
+        165,
+        255,
+        "cmd"
+      ],
+      "tail": "CRC over payload (crc_cal/crc_rx log pair); CRC-16/CCITT and CRC-32 tables absent -> bit-wise software CRC, exact polynomial unresolved"
+    },
+    "frame_packer": {
+      "behavior": "critical-section channel write retried up to 10 times; on exhaustion the caller buffer is filled with 0xFF and zero is returned; success bumps a frame counter and conditionally runs a notify callback",
+      "channel_immediate": 90,
+      "failure_fill_byte": 255,
+      "instances": [
+        {
+          "sha256": "50efce392284f11d828dd64c9c1dcd693c2179ecf52aaf00036a66051b0e957a",
+          "vaddr": 134254504
+        },
+        {
+          "sha256": "94947a9d9fc17fb90037792fc6b43f314c0dfd2d12318bc0459aca3fb0f0e7ac",
+          "vaddr": 134254596
+        }
+      ],
+      "retry_bound": 10,
+      "symmetry": "two near-identical instances = glasses-left / glasses-right channels (matches L/R log-string pairs)"
+    },
+    "gls_link_role": "USART1 is the only USART with a populated interrupt vector (IRQ27); USART2/3/4 default or polled; DMA unused",
+    "rx_parser_timeouts": [
+      {
+        "file_offset": 9960,
+        "string": "receive header timeout"
+      },
+      {
+        "file_offset": 9984,
+        "string": "no header in first 5 char. RX:"
+      },
+      {
+        "file_offset": 10016,
+        "string": "receive len timeout"
+      },
+      {
+        "file_offset": 10048,
+        "string": "receive data timeout"
+      },
+      {
+        "file_offset": 10328,
+        "string": "[noctrl]no header in first 5 char. RX:"
+      },
+      {
+        "file_offset": 10368,
+        "string": "[noctrl]receive len timeout"
+      }
+    ],
+    "rx_paths": "two RX parser variants (plain / [noctrl]) consistent with a control port and a non-control port"
+  },
+  "unresolved": [
+    "exact FreeRTOS point release within V10.x",
+    "exact STM32 HAL version (no static version evidence)",
+    "STM32G0B0 vs G0B1 vs G0C1 member split",
+    "GLS UART CRC polynomial/width (bit-wise; no table)",
+    "compressed-log string reference scheme (most log strings have no pointer literals; consistent with an indexed log-strip scheme, exact ID encoding unknown)",
+    "full function-level closure of the kernel/HAL/policy bodies"
+  ],
+  "vectors": {
+    "entries": [
+      {
+        "index": 0,
+        "name": "initial_sp",
+        "value": 536882312
+      },
+      {
+        "index": 1,
+        "kind": "code",
+        "name": "Reset",
+        "value": 134218053
+      },
+      {
+        "index": 2,
+        "kind": "code",
+        "name": "NMI",
+        "value": 134245745
+      },
+      {
+        "index": 3,
+        "kind": "code",
+        "name": "HardFault",
+        "value": 134244217
+      },
+      {
+        "index": 4,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 5,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 6,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 7,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 8,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 9,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 10,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 11,
+        "kind": "code",
+        "name": "SVCall",
+        "value": 134245913
+      },
+      {
+        "index": 12,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 13,
+        "kind": "zero",
+        "name": "reserved",
+        "value": 0
+      },
+      {
+        "index": 14,
+        "kind": "code",
+        "name": "PendSV",
+        "value": 134217987
+      },
+      {
+        "index": 15,
+        "kind": "code",
+        "name": "SysTick",
+        "value": 134251553
+      },
+      {
+        "index": 16,
+        "kind": "code",
+        "name": "IRQ0_WWDG",
+        "value": 134218071
+      },
+      {
+        "index": 17,
+        "kind": "zero",
+        "name": "IRQ1_PVD_VDDIO2",
+        "value": 0
+      },
+      {
+        "index": 18,
+        "kind": "code",
+        "name": "IRQ2_RTC_TAMP",
+        "value": 134245897
+      },
+      {
+        "index": 19,
+        "kind": "code",
+        "name": "IRQ3_FLASH",
+        "value": 134218071
+      },
+      {
+        "index": 20,
+        "kind": "code",
+        "name": "IRQ4_RCC_CRS",
+        "value": 134218071
+      },
+      {
+        "index": 21,
+        "kind": "code",
+        "name": "IRQ5_EXTI0_1",
+        "value": 134233033
+      },
+      {
+        "index": 22,
+        "kind": "code",
+        "name": "IRQ6_EXTI2_3",
+        "value": 134233133
+      },
+      {
+        "index": 23,
+        "kind": "code",
+        "name": "IRQ7_EXTI4_15",
+        "value": 134233381
+      },
+      {
+        "index": 24,
+        "kind": "code",
+        "name": "IRQ8_USB_UCPD1_2",
+        "value": 134218071
+      },
+      {
+        "index": 25,
+        "kind": "code",
+        "name": "IRQ9_DMA1_Channel1",
+        "value": 134218071
+      },
+      {
+        "index": 26,
+        "kind": "code",
+        "name": "IRQ10_DMA1_Channel2_3",
+        "value": 134218071
+      },
+      {
+        "index": 27,
+        "kind": "code",
+        "name": "IRQ11_DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR",
+        "value": 134218071
+      },
+      {
+        "index": 28,
+        "kind": "code",
+        "name": "IRQ12_ADC1_COMP",
+        "value": 134219461
+      },
+      {
+        "index": 29,
+        "kind": "code",
+        "name": "IRQ13_TIM1_BRK_UP_TRG_COM",
+        "value": 134218071
+      },
+      {
+        "index": 30,
+        "kind": "code",
+        "name": "IRQ14_TIM1_CC",
+        "value": 134218071
+      },
+      {
+        "index": 31,
+        "kind": "zero",
+        "name": "IRQ15_TIM2",
+        "value": 0
+      },
+      {
+        "index": 32,
+        "kind": "code",
+        "name": "IRQ16_TIM3_TIM4",
+        "value": 134218071
+      },
+      {
+        "index": 33,
+        "kind": "code",
+        "name": "IRQ17_TIM6_DAC_LPTIM1",
+        "value": 134218071
+      },
+      {
+        "index": 34,
+        "kind": "code",
+        "name": "IRQ18_TIM7_LPTIM2",
+        "value": 134218071
+      },
+      {
+        "index": 35,
+        "kind": "code",
+        "name": "IRQ19_TIM14",
+        "value": 134218071
+      },
+      {
+        "index": 36,
+        "kind": "code",
+        "name": "IRQ20_TIM15",
+        "value": 134218071
+      },
+      {
+        "index": 37,
+        "kind": "code",
+        "name": "IRQ21_TIM16_FDCAN_IT0",
+        "value": 134218071
+      },
+      {
+        "index": 38,
+        "kind": "code",
+        "name": "IRQ22_TIM17_FDCAN_IT1",
+        "value": 134251697
+      },
+      {
+        "index": 39,
+        "kind": "code",
+        "name": "IRQ23_I2C1",
+        "value": 134218071
+      },
+      {
+        "index": 40,
+        "kind": "code",
+        "name": "IRQ24_I2C2_3",
+        "value": 134218071
+      },
+      {
+        "index": 41,
+        "kind": "code",
+        "name": "IRQ25_SPI1",
+        "value": 134218071
+      },
+      {
+        "index": 42,
+        "kind": "code",
+        "name": "IRQ26_SPI2_3",
+        "value": 134218071
+      },
+      {
+        "index": 43,
+        "kind": "code",
+        "name": "IRQ27_USART1",
+        "value": 134254489
+      },
+      {
+        "index": 44,
+        "kind": "code",
+        "name": "IRQ28_USART2_LPUART2",
+        "value": 134218071
+      },
+      {
+        "index": 45,
+        "kind": "code",
+        "name": "IRQ29_USART3_4_5_6_LPUART1",
+        "value": 134218071
+      }
+    ],
+    "initial_sp": 536882312,
+    "irq_map_reference": "stm32g0b1xx.h IRQn_Type (STMicroelectronics CMSIS device header)",
+    "pendsv_handler": 134217986,
+    "peripheral_irq_count": 30,
+    "reset_handler": 134218052,
+    "svc_handler": 134245912,
+    "systick_handler": 134251552,
+    "word_count": 46
+  }
+}

@@ -1,0 +1,15 @@
+region	package_offset	size	sha256	load_address	destination	evidence
+fwpk_header	0x00000000	16	d43727af93245c0c6f88d780b4553ba97d976d4e296d74778c1f91a27b2917ae	container-only	FWPK container metadata	magic/version/record-count parsed and pinned
+fwpk_records	0x00000010	32	5239fba85a06b9525512f34f075325028bde659ed078daec25a7022b8afc2d29	container-only	FWPK record table (type1=boot, type2=main)	<type><size><offset><crc32> records; zlib CRC-32 of payloads verified
+boot_image	0x00000030	38236	393d2ae1f10ed1382f3eec6e3f9f9ac99d744b7ab41d0c89a003f96588afe391	volatile	streamed over UART during DFU; never flashed	NationalChip grus UART boot container, chip_id 0x8002 (GX8002)
+boot_header	0x00000030	32	bb0c1a457c4aa90766a38709a1eeef622cf382c1bb1a16f4b058186e2011ad76	host-consumed	read by Apollo DFU; four BE fields forwarded on wire	public 32-byte boot_header; stage sizes/baud/checksum pinned
+boot_stage1	0x00000050	10240	cbbe85a2d60f5bb805dddb45fa2eac1632bdf0ab80665c040c0892c64074133f	0x10000000	codec MCU IRAM (GX8002 on-chip SRAM)	64-word vector table at base; reset 0x10000100; traps 0x10000130/0x10000134
+boot_stage2	0x00002850	27964	4aacc9e5bf45001bef99785b62302e88bd0b5e6bf4d6186fd7033b1eaeb05b0d	0x10002800	codec MCU IRAM, immediately after stage1	own 64-word vector table; reset 0x10002900; byte-sum checksum 0x24D441 verified
+main_image	0x0000958C	287808	60adadb83f3cc544c4f80729b01c20d5f94dc54dcbca254f7e7ca3f45b1b115f	flash+0x00000000	codec external SPI NOR flash offset 0 (serialdown 0 <size> 8192)	dual-firmware BINH concatenation; Apollo call site pinned
+binh_a_stage1_block	0x0000958C	12288	9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464	0x10000000	flash 0x00000000 -> codec MCU IRAM at power-on	24-byte BINH header inside block; vectors at +0x18; CRC-32/MPEG-2 0x21C58EDB verified
+binh_a_stage2_xip_len	0x0000C58C	4	skip	container-only	stage2 XIP-text length word 0x00008E84	public loader_write stage2 header word
+binh_a_stage2	0x0000C590	51200	2515d7201f82c612cfba7f0c61bb014a0af9fe8b7e9037959f0705b7267850ee	mixed	flash 0x00003004; XIP text executes from flash (public XIP base 0x10200000); SRAM text/data -> codec IRAM/DRAM	stage2_size 0xC800; XIP text 0x8E84; ends exactly at 0x0000F804 (segment-relative)
+binh_a_extra_payload	0x00018D90	129964	7bd407a60d16aeb6ad1289184c8d75bad39dc7d7d3704cfea5ce9402e64ec387	unresolved	flash [0x0000F804, 0x0002F3B0); NPU/audio payload, identification-level only	no header fields in 24-byte BINH format; internal split is a remaining gate
+binh_b_stage1_block	0x0003893C	12288	a80924ccf78205ef1761c4f568d4ce31f909635bf3ad7eecfaed250ad801626c	0x10000000	flash 0x0002F3B0 -> codec MCU IRAM (backup/dual-firmware boot path)	second BINH header; CRC-32/MPEG-2 0xA582510C verified; distinct build from image A
+binh_b_stage2_xip_len	0x0003B93C	4	skip	container-only	stage2 XIP-text length word 0x00000000 (image B runs fully from SRAM)	public loader_write stage2 header word
+binh_b_stage2	0x0003B940	82060	d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941	sram-only	flash 0x000323B4 -> codec SRAM; no XIP	stage2_size 0x1408C; ends exactly at segment end 0x00046440 (exact fit)

@@ -146,7 +146,7 @@ $ make fuzz -j  # Run encoder and decoder fuzzers in parallel
 
 The implementation is qualified under the [_QDID 194161_](https://launchstudio.bluetooth.com/ListingDetails/160904) as part of Google Fluoride 1.5.
 
-The conformance reports can be found [here](README.md)
+The conformance reports can be found [here](conformance/README.md)
 
 ## Listening Test
 

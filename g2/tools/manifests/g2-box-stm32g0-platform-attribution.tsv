@@ -1,0 +1,23 @@
+# G2 charging-case platform attribution map
+# blob: blobs/official/g2-2.2.6.10/firmware_box.bin sha256=36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374
+# categories: generated_transport, upstream_cmsis_startup, upstream_freertos_kernel, upstream_stm32_hal, first_party_g2, device_specific_preserve, unresolved
+file_start	file_end_exclusive	bytes	sha256	ownership_category	evidence
+0x000000	0x000020	32	50e3b01beaf60791c3b918f8d00e296460b427121dac04a06ed9ecec6e644840	generated_transport	EVEN wrapper: magic, case version 1.2.57, BE length, BE additive word-sum checksum; container_only, reconstructed by the package generator
+0x000020	0x0000d8	184	019fe11fc35e0b86be9ec3c189ba57c9cd0f7fbe0f281701639f110fd7a1f3be	upstream_cmsis_startup	Cortex-M0+ vector table, 46 words, STM32G0B1-class IRQ map
+0x000114	0x000164	80	63507cac5e5f3e54ea5b40c522715e061d051773e63779248cd345d8c80e6f5a	upstream_freertos_kernel	GCC ARM_CM0 port: interrupt-mask helpers, xPortPendSVHandler; exact V10-line instruction sequence
+0x000164	0x000178	20	298016abe73d12adf42fdcc1ffd4932e6767cf4ceda4556c271663d9f53b2597	upstream_cmsis_startup	reset trampoline (SystemInit -> _start) and default self-loop exception slots
+0x002c24	0x002c2c	8	e5472bbf8eee23d89bf07a000dce2234e8d98f58d3521e8e40a5e8b29986f4eb	first_party_g2	OTA updater literals referencing the bank-2 preserved SN windows
+0x004bac	0x004c3c	144	e7e70ef511cad8fd78d72e3bc451ccff3a92620ad9b8a313328a1d3c494f5718	upstream_stm32_hal	HAL FLASH credential island: OPTKEYR + KEYR unlock literals and surrounding flash-driver code
+0x005f70	0x005fb0	64	06e9ae9afddd3cfcddcd156b9f8b034cede4e4b624bd3d62a3b20addb6e7c774	upstream_stm32_hal	HAL_UART_IRQHandler head (USART ISR/CR1/CR3/ICR sequence)
+0x008440	0x008458	24	e62e3ef18fc15122441f2b11b011ef7184578f0a000bafe5dc2366692afad513	upstream_freertos_kernel	SysTick vector gate: SCS read + xTaskGetSchedulerState guard
+0x008fb8	0x009058	160	adff41d5289542356fe1089378a44c2aa93007f827363063cf473fecaf3b6d2b	first_party_g2	USART1 IRQ thunk plus the two symmetric GLS frame packers (0x5A channel, 10-retry, 0xFF failure fill)
+0x00c5cc	0x00c5f0	36	24524aee9b24bf722d90a4f936c3f6e3350da88b97dc961d8c489b4ba956ea66	upstream_freertos_kernel	xPortSysTickHandler (mask/tick/PENDSVSET/unmask)
+0x00ca6c	0x00ca86	26	37db3704b7a172db1ef8f74dcc2a7135f9413988a69564d17fb5eec40e85ff78	upstream_freertos_kernel	xTaskGetSchedulerState over kernel statics at 0x20000128
+0x00ca98	0x00cae0	72	d9ec2fe92ed5b39e018023fb9311cf7ca32c48ff5c5c9c19d3cb8e2fc7ce426c	upstream_freertos_kernel	xTaskIncrementTick head (xTickCount/xPendedTicks/uxSchedulerSuspended evidence)
+0x00d2c0	0x00d3a0	224	0e1cf89bc7d94e4ece054fa1677afa4944c2f78fa969b5288ab35cdde7124afc	first_party_g2	static task/timer descriptor table with name and entry literals
+0x00d8b8	0x00d958	160	9ba478bf27b18e3807a19cdb9d03e6457dda2cc9e333eafaf840880fbd7a2782	first_party_g2	application task/timer name string block
+-	-	54550	-	unresolved	aggregate remainder outside evidence-anchored islands; contains the bulk of the FreeRTOS kernel body, STM32 HAL drivers, first-party policy, rodata, and the compressed-log string corpus; classification requires a full function map
+-	-	0	-	device_specific_preserve	logical flash window 0x0803f000..0x0803f010 (bank 1, 16 bytes): per-device SN; outside this image; updater copies it across OTA; never overwrite
+-	-	0	-	device_specific_preserve	logical flash window 0x0803f800..0x0803f808 (bank 1, 8 bytes): per-device SN; outside this image; updater copies it across OTA; never overwrite
+-	-	0	-	device_specific_preserve	logical flash window 0x0807f000..0x0807f010 (bank 2, 16 bytes): per-device SN; outside this image; updater copies it across OTA; never overwrite
+-	-	0	-	device_specific_preserve	logical flash window 0x0807f800..0x0807f808 (bank 2, 8 bytes): per-device SN; outside this image; updater copies it across OTA; never overwrite

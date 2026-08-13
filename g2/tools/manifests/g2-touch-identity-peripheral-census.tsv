@@ -1,0 +1,13 @@
+address	psoc4000t_block	detail	pool_occurrences	ldr_confirmed_refs	evidence_class
+0x40010000	PERI	peripheral clock dividers	5	5	ldr
+0x40020080	HSIOM+0x80	I/O mux port register	2	0	pool
+0x40020100	HSIOM+0x100	I/O mux port register	1	0	pool
+0x40030000	SRSSLT	power/clock/reset/WDT base	15	15	ldr
+0x40040200	GPIO_PRT2	port 2 data registers	1	1	ldr
+0x40040300	GPIO_PRT3	port 3 data registers	1	1	ldr
+0x40040400	GPIO_PRT4	port 4 data registers	5	5	ldr
+0x40100000	CPUSS	SYSREQ/SYSARG SROM syscall interface	6	9	ldr
+0x40100008	CPUSS+0x8	SYSARG syscall argument register	1	0	pool
+0x40250000	SCB1	I2C slave interface to the host	4	14	ldr
+0x40290000	MSCLP0	5th-gen CapSense multi-sense converter	1	1	ldr
+0x40290000	MSCLP0	config-block structural reference @0x85F8	1	0	structural

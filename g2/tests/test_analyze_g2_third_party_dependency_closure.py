@@ -49,7 +49,7 @@ class ThirdPartyDependencyClosureTests(unittest.TestCase):
         )
         census = report["dependency_census"]
         self.assertEqual(census["families"], 26)
-        self.assertEqual(census["selected_source_commit_or_baseline"], 24)
+        self.assertEqual(census["selected_source_commit_or_baseline"], 25)
         self.assertEqual(census["locally_actionable_bounded_functional_gaps"], 0)
         self.assertEqual(report["cross_checks"]["cordio_unclassified_reusable_paths"], 0)
         self.assertEqual(report["cross_checks"]["cordio_copied_gatt_profile_source_owned_functions"], 6)

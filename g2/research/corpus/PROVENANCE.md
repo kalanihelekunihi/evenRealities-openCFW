@@ -74,3 +74,17 @@ make -C g2 research-corpus
 
 This authenticates every file against the embedded `SHA256SUMS` manifests and
 against the repository-level [`../MANIFEST.sha256`](../MANIFEST.sha256).
+
+## Reviewed additions after the original delivery
+
+One, recorded 2026-08-13:
+
+1. **EM9305 controller-cluster recovery lane.** The lorelei GNU ARC cluster
+   recovery returned `cluster-objects.json` (628,176 bytes, SHA-256
+   `0d3d7aebedbbba034bedd430d932047719df12bedd35133c82cd245967bf71c3`) inside
+   its own signed `SHA256SUMS` envelope at
+   `em9305/cluster-recovery/return/`, alongside the deterministic
+   extractor `em9305/cluster-recovery/cluster_extract.py` (5,616 bytes) that
+   produced it from the authenticated SDK ISO archive. The envelope verifies
+   in place. `../MANIFEST.sha256` was re-indexed with
+   `verify_research_corpus.py --write-manifest` for exactly these two paths.

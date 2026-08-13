@@ -1,0 +1,396 @@
+{
+  "audit": {
+    "checks": [
+      {
+        "check": "blob-authenticity",
+        "detail": "size 34,464 and SHA-256 match PROVENANCE.md",
+        "result": "pass"
+      },
+      {
+        "check": "fwpk-wrapper",
+        "detail": "16B header + 16B type-3 record; CRC-32C(reflected) = 0x48674BC7",
+        "result": "pass"
+      },
+      {
+        "check": "trailing-checksum",
+        "detail": "payload[:-4] CRC-32C = 0xF75CF6F4; programmed length = 0x867C",
+        "result": "pass"
+      },
+      {
+        "check": "vector-table",
+        "detail": "ARMv6-M shape; 13 external IRQs = PSoC 4000T NVIC count; all default 0x465D",
+        "result": "pass"
+      },
+      {
+        "check": "region-map",
+        "detail": "10 pinned regions authenticated byte-for-byte",
+        "result": "pass"
+      },
+      {
+        "check": "peripheral-census",
+        "detail": "PERI/HSIOM/SRSSLT/GPIO PRT2-4/CPUSS/SCB1/MSCLP0 block bases match PSoC 4000T SVD",
+        "result": "pass"
+      },
+      {
+        "check": "srom-decoder",
+        "detail": "CPUSS SYSARG 0xA/0xF status-class decoder at 0x58F4 (PSoC 4 flash syscalls)",
+        "result": "pass"
+      },
+      {
+        "check": "tuning-table",
+        "detail": "9 uint32 tuning constants at 0x7DC4 (0x370E-0x384C; MSC/tuning class; earlier switch-table reading corrected in g2-touch-i2c-protocol-recovery.md)",
+        "result": "pass"
+      },
+      {
+        "check": "config-magic",
+        "detail": "0x45564E55 ('UNVE') EEPROM-config magic pools at 0x6FC/0x734/0x770",
+        "result": "pass"
+      },
+      {
+        "check": "config-block",
+        "detail": "128B config block references MSCLP0 and GPIO PRT4",
+        "result": "pass"
+      },
+      {
+        "check": "strings",
+        "detail": "version 2.2.0.1, TP VER, ACT/ALR/WOT power states, gesture/EEPROM logs present",
+        "result": "pass"
+      },
+      {
+        "check": "sram-census",
+        "detail": "140 pointer-like words; plausible data 0x20000400..0x200018e4; stack top 0x20002000",
+        "result": "pass"
+      }
+    ]
+  },
+  "blob": {
+    "path": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
+    "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "size": 34464
+  },
+  "component": "g2-touch",
+  "container": {
+    "format": "FWPK",
+    "header": {
+      "field_0x04": 33685505,
+      "flags": 0,
+      "magic": "FWPK",
+      "version": 1
+    },
+    "programmed_length": 34428,
+    "record": {
+      "crc32c_reflected": 1214729159,
+      "offset": 32,
+      "size": 34432,
+      "type": 3
+    },
+    "trailing_crc32c_reflected": 4150064884
+  },
+  "identity": {
+    "capsense": "5th-generation multi-sense converter (MSCLP0)",
+    "confidence": "high (family); OPN rests on retained host driver path drv_cy8c4046fni.c",
+    "cpu": "ARM Cortex-M0+ (ARMv6-M), 48 MHz max",
+    "firmware_version_string": "2.2.0.1",
+    "flash_kb": 64,
+    "package": "WLCSP-25 (T412T) or QFN (T442T/T452T)",
+    "sram_kb": 8,
+    "verdict": "Infineon/Cypress PSoC 4000T, ordering part CY8C4046FNI"
+  },
+  "memory_map": {
+    "flash_base": 0,
+    "initial_sp": 536879104,
+    "nvic": [
+      {
+        "irq": 0,
+        "name": "ioss_interrupts_gpio_0",
+        "vector": 18013
+      },
+      {
+        "irq": 1,
+        "name": "ioss_interrupts_gpio_1",
+        "vector": 18013
+      },
+      {
+        "irq": 2,
+        "name": "ioss_interrupts_gpio_2",
+        "vector": 18013
+      },
+      {
+        "irq": 3,
+        "name": "ioss_interrupts_gpio_3",
+        "vector": 18013
+      },
+      {
+        "irq": 4,
+        "name": "ioss_interrupt_gpio",
+        "vector": 18013
+      },
+      {
+        "irq": 5,
+        "name": "srss_interrupt_wdt",
+        "vector": 18013
+      },
+      {
+        "irq": 6,
+        "name": "scb_0_interrupt",
+        "vector": 18013
+      },
+      {
+        "irq": 7,
+        "name": "scb_1_interrupt",
+        "vector": 18013
+      },
+      {
+        "irq": 8,
+        "name": "msclp_interrupt_lp",
+        "vector": 18013
+      },
+      {
+        "irq": 9,
+        "name": "cpuss_interrupt_spcif",
+        "vector": 18013
+      },
+      {
+        "irq": 10,
+        "name": "msclp_interrupt",
+        "vector": 18013
+      },
+      {
+        "irq": 11,
+        "name": "tcpwm_interrupts_0",
+        "vector": 18013
+      },
+      {
+        "irq": 12,
+        "name": "tcpwm_interrupts_1",
+        "vector": 18013
+      }
+    ],
+    "peripherals": [
+      {
+        "address": 1073807360,
+        "block": "PERI",
+        "detail": "peripheral clock dividers",
+        "evidence_class": "ldr",
+        "ldr_confirmed_refs": 5,
+        "pool_occurrences": 5
+      },
+      {
+        "address": 1073873024,
+        "block": "HSIOM+0x80",
+        "detail": "I/O mux port register",
+        "evidence_class": "pool",
+        "ldr_confirmed_refs": 0,
+        "pool_occurrences": 2
+      },
+      {
+        "address": 1073873152,
+        "block": "HSIOM+0x100",
+        "detail": "I/O mux port register",
+        "evidence_class": "pool",
+        "ldr_confirmed_refs": 0,
+        "pool_occurrences": 1
+      },
+      {
+        "address": 1073938432,
+        "block": "SRSSLT",
+        "detail": "power/clock/reset/WDT base",
+        "evidence_class": "ldr",
+        "ldr_confirmed_refs": 15,
+        "pool_occurrences": 15
+      },
+      {
+        "address": 1074004480,
+        "block": "GPIO_PRT2",
+        "detail": "port 2 data registers",
+        "evidence_class": "ldr",
+        "ldr_confirmed_refs": 1,
+        "pool_occurrences": 1
+      },
+      {
+        "address": 1074004736,
+        "block": "GPIO_PRT3",
+        "detail": "port 3 data registers",
+        "evidence_class": "ldr",
+        "ldr_confirmed_refs": 1,
+        "pool_occurrences": 1
+      },
+      {
+        "address": 1074004992,
+        "block": "GPIO_PRT4",
+        "detail": "port 4 data registers",
+        "evidence_class": "ldr",
+        "ldr_confirmed_refs": 5,
+        "pool_occurrences": 5
+      },
+      {
+        "address": 1074790400,
+        "block": "CPUSS",
+        "detail": "SYSREQ/SYSARG SROM syscall interface",
+        "evidence_class": "ldr",
+        "ldr_confirmed_refs": 9,
+        "pool_occurrences": 6
+      },
+      {
+        "address": 1074790408,
+        "block": "CPUSS+0x8",
+        "detail": "SYSARG syscall argument register",
+        "evidence_class": "pool",
+        "ldr_confirmed_refs": 0,
+        "pool_occurrences": 1
+      },
+      {
+        "address": 1076166656,
+        "block": "SCB1",
+        "detail": "I2C slave interface to the host",
+        "evidence_class": "ldr",
+        "ldr_confirmed_refs": 14,
+        "pool_occurrences": 4
+      },
+      {
+        "address": 1076428800,
+        "block": "MSCLP0",
+        "detail": "5th-gen CapSense multi-sense converter",
+        "evidence_class": "ldr",
+        "ldr_confirmed_refs": 1,
+        "pool_occurrences": 1
+      },
+      {
+        "address": 1076428800,
+        "block": "MSCLP0",
+        "detail": "config-block structural reference @0x85F8",
+        "evidence_class": "structural",
+        "ldr_confirmed_refs": 0,
+        "pool_occurrences": 1
+      }
+    ],
+    "regions": [
+      {
+        "class": "vector-table",
+        "end": 192,
+        "name": "vectors",
+        "notes": "ARMv6-M shape; reserved core slots 4-10/12-13 zero; 13 external IRQ slots",
+        "sha256": "62575e83fb7b4718742d51d7b5e007ef00a51604b7ed801f4e59a748956e8261",
+        "size": 192,
+        "start": 0,
+        "status": "confirmed"
+      },
+      {
+        "class": "code+pools",
+        "end": 30556,
+        "name": "code",
+        "notes": "Thumb code with embedded literal pools; GCC newlib init-array at 0xC0",
+        "sha256": "fe450d33b3e8e3b8d657ea33f4624fba832f2064a3eadb85c287d7fcd2fa67e0",
+        "size": 30364,
+        "start": 192,
+        "status": "confirmed"
+      },
+      {
+        "class": "const-strings",
+        "end": 32196,
+        "name": "strings",
+        "notes": "EasyLogger-format log strings; version 2.2.0.1; power/gesture telemetry",
+        "sha256": "73fc960cd33e4d9ef33451d5d835c35fcb7e169804e9ee672014e138c599a941",
+        "size": 1640,
+        "start": 30556,
+        "status": "confirmed"
+      },
+      {
+        "class": "const-data",
+        "end": 33040,
+        "name": "const_tables_a",
+        "notes": "nine uint32 tuning constants (0x370E-0x384C, ~14094-14412) at 0x7DC4; runtime descriptors",
+        "sha256": "f65e342c33de6c249321e27b1029f717b78e719ca7866e0b2535671b85d9d224",
+        "size": 844,
+        "start": 32196,
+        "status": "inferred"
+      },
+      {
+        "class": "fill-zero",
+        "end": 33056,
+        "name": "zero_gap_1",
+        "notes": "16-byte zero gap",
+        "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+        "size": 16,
+        "start": 33040,
+        "status": "confirmed"
+      },
+      {
+        "class": "const-data",
+        "end": 33840,
+        "name": "const_tables_b",
+        "notes": "configuration tables with SRAM descriptors; likely CapSense/MSC tuning",
+        "sha256": "02c6e186eca0ae9038a8c52c34026c23658104af3354bce067a47939accf0419",
+        "size": 784,
+        "start": 33056,
+        "status": "inferred"
+      },
+      {
+        "class": "fill-zero",
+        "end": 34256,
+        "name": "zero_gap_2",
+        "notes": "416-byte zero gap",
+        "sha256": "4cc7e6272db6b1ad7581f76c63c694e926e20698e9b02223d5041a55960463f2",
+        "size": 416,
+        "start": 33840,
+        "status": "confirmed"
+      },
+      {
+        "class": "const-config",
+        "end": 34384,
+        "name": "config_block",
+        "notes": "128-byte descriptor referencing MSCLP0 and GPIO PRT4; one flash row",
+        "sha256": "269eea7cd1cf52a8818b95b756ae17ec776ff6a2f231be58dc8ff0da7f2c6c17",
+        "size": 128,
+        "start": 34256,
+        "status": "inferred"
+      },
+      {
+        "class": "fill-ff",
+        "end": 34428,
+        "name": "ff_pad",
+        "notes": "44-byte erased-flash pad",
+        "sha256": "463d5921a6bfd5c98f6047f561495800372e627c07ce458c23b7ac164a22be51",
+        "size": 44,
+        "start": 34384,
+        "status": "confirmed"
+      },
+      {
+        "class": "checksum",
+        "end": 34432,
+        "name": "trailing_crc",
+        "notes": "reflected CRC-32C of payload[0:0x867C]; programmed length excludes it",
+        "sha256": "589f84e105896025c0a2a6c20d780e4e9618cb26072abc6b062630692812b52f",
+        "size": 4,
+        "start": 34428,
+        "status": "confirmed"
+      }
+    ],
+    "reset_vector": 18037,
+    "sram": {
+      "plausible_data_max": 536877284,
+      "plausible_data_min": 536871936,
+      "pointer_like_words": 140,
+      "stack_top": 536879104
+    }
+  },
+  "update_format": {
+    "device_side_corroboration": [
+      "CPUSS SYSREQ/SYSARG SROM flash-syscall decoder at 0x58F4",
+      "enter-DFU handoff: mailbox write + NVIC_SystemReset at 0x4B30 (see g2-touch-i2c-protocol-recovery.md)",
+      "trailing CRC-32C self-checksum consistent with verify-app step"
+    ],
+    "frame": "0x01 | cmd | len16le | payload(<=32B) | cksum16 | 0x17",
+    "packet_payload_bytes": 32,
+    "program_block_bytes": 128,
+    "transport_commands_host_side": {
+      "0x31": "verify application",
+      "0x37": "send one 32-byte packet",
+      "0x38": "enter DFU",
+      "0x3B": "exit DFU",
+      "0x49": "program 128-byte block",
+      "0x4C": "set application metadata",
+      "source": "g2-service-touch-dfu-recovery.md (host-side closure)"
+    }
+  }
+}

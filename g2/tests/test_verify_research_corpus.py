@@ -91,11 +91,11 @@ class ResearchCorpusIntegrityTests(unittest.TestCase):
 
     def test_embedded_manifests_verify_in_place(self) -> None:
         manifests, checked = self.module.verify_embedded()
-        self.assertEqual(manifests, 43)
-        self.assertEqual(checked, 1893)
+        self.assertEqual(manifests, 44)
+        self.assertEqual(checked, 1894)
 
     def test_index_covers_the_corpus_exactly(self) -> None:
-        self.assertEqual(self.module.verify_index(), 1947)
+        self.assertEqual(self.module.verify_index(), 1950)
 
     def test_every_exclusion_is_justified(self) -> None:
         """Nothing may drop out of a delivered manifest without a stated reason."""

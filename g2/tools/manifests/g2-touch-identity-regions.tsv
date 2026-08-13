@@ -1,0 +1,11 @@
+region	start	end_exclusive	size	sha256	class	status	notes
+vectors	0x00000	0x000C0	192	62575e83fb7b4718742d51d7b5e007ef00a51604b7ed801f4e59a748956e8261	vector-table	confirmed	ARMv6-M shape; reserved core slots 4-10/12-13 zero; 13 external IRQ slots
+code	0x000C0	0x0775C	30364	fe450d33b3e8e3b8d657ea33f4624fba832f2064a3eadb85c287d7fcd2fa67e0	code+pools	confirmed	Thumb code with embedded literal pools; GCC newlib init-array at 0xC0
+strings	0x0775C	0x07DC4	1640	73fc960cd33e4d9ef33451d5d835c35fcb7e169804e9ee672014e138c599a941	const-strings	confirmed	EasyLogger-format log strings; version 2.2.0.1; power/gesture telemetry
+const_tables_a	0x07DC4	0x08110	844	f65e342c33de6c249321e27b1029f717b78e719ca7866e0b2535671b85d9d224	const-data	inferred	nine uint32 tuning constants (0x370E-0x384C, ~14094-14412) at 0x7DC4; runtime descriptors
+zero_gap_1	0x08110	0x08120	16	374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb	fill-zero	confirmed	16-byte zero gap
+const_tables_b	0x08120	0x08430	784	02c6e186eca0ae9038a8c52c34026c23658104af3354bce067a47939accf0419	const-data	inferred	configuration tables with SRAM descriptors; likely CapSense/MSC tuning
+zero_gap_2	0x08430	0x085D0	416	4cc7e6272db6b1ad7581f76c63c694e926e20698e9b02223d5041a55960463f2	fill-zero	confirmed	416-byte zero gap
+config_block	0x085D0	0x08650	128	269eea7cd1cf52a8818b95b756ae17ec776ff6a2f231be58dc8ff0da7f2c6c17	const-config	inferred	128-byte descriptor referencing MSCLP0 and GPIO PRT4; one flash row
+ff_pad	0x08650	0x0867C	44	463d5921a6bfd5c98f6047f561495800372e627c07ce458c23b7ac164a22be51	fill-ff	confirmed	44-byte erased-flash pad
+trailing_crc	0x0867C	0x08680	4	589f84e105896025c0a2a6c20d780e4e9618cb26072abc6b062630692812b52f	checksum	confirmed	reflected CRC-32C of payload[0:0x867C]; programmed length excludes it

@@ -1,0 +1,309 @@
+vaddr	text	reference_count
+0x08000110	DFMFVF_F	0
+0x08000c6f	 Enable	0
+0x08000c7b	 disabled	0
+0x08000c93	 Disable	0
+0x08000c9c	%s reset GLS	0
+0x08000cb0	1.2.57	0
+0x08000cb8	B200 %s, %d	0
+0x08000cc4	%s, %d	0
+0x08000ccc	%02x%02x%02x%02x%02x%02x%02x%02x	0
+0x08000cf8	Set SN:	0
+0x08000d07	 usb in, cannot enter shipmode.	0
+0x08000d28	Standby, reason: cmd.	1
+0x08000d4b	@Reset, reason: cmd.	0
+0x08000d60	%s watchdog 4005	1
+0x08000d7f	 simu_full_bat:%d, simu_empty_bat:%d, simu_timeout:%d	0
+0x08000db8	%s one side charging	1
+0x08000dd0	enabled	0
+0x08000dd8	One-side charging: %s	1
+0x08000df0	Set PMIC chip id to 0x08	1
+0x08000e0f	 %s dog feed	0
+0x08000fd2	/tot? 	0
+0x08001172	2F!FZH	0
+0x0800118f	 dst(box) cannot parse cmd: %02x	0
+0x080011d4	[AGING_NOT]: exit aging status(0x3E).	1
+0x080011fc	enable	1
+0x08001204	disable	1
+0x0800120c	%s output, reason: cmd	1
+0x08001224	Enter GLS_OTA Status, L	1
+0x0800123c	Enter GLS_OTA Status, R	1
+0x08001254	Exit GLS_OTA Status	1
+0x08001270	Set SN Even done:	1
+0x0800128c	Set SN Even fail:	1
+0x080012a0	SN Even length wrong.	1
+0x080012b8	[AGING_NOT]: exit aging status(0x3D).	1
+0x0800131b	 clear led status.	0
+0x0800137b	 [AGING_RUNNING]: Start aging, go to PREPARE_AGING.	0
+0x080013f3	 Exit idle mode	0
+0x0800140a	@L@H!|	0
+0x08001517	 GetAgingStatus fail: not inbox	0
+0x0800153c	Skip GetAgingStatus since 2510 busy.	1
+0x0800158b	'yN'p0x	0
+0x08001777	 [OTA_BOX]: Check gls ready	0
+0x080017a0	[OTA_BOX]: GLS not ready.	1
+0x080017bc	[OTA_BOX]: Get running bank	1
+0x080017db	 [OTA_BOX]: Get running bank fail.	0
+0x08001800	[OTA_BOX]: Running bank: %d	1
+0x0800181c	[OTA_BOX]: Erase bank fail.	1
+0x08001838	[OTA_BOX]: Copy SN.	1
+0x0800184c	[OTA_BOX]: Copy SN done.	1
+0x08001868	[OTA_BOX]: Copy SN fail.	1
+0x08001884	[OTA_BOX]: get bin file	1
+0x080018b0	[OTA_BOX]: get bin file done, total error cnt: %d	1
+0x08001992	OL@4`{	0
+0x08001adb	 only one side, dont send 0x13. L:%d, R:%d	0
+0x08001b0c	L water detected, disable 5V, time:%d///	1
+0x08001b38	L charging done, dont send 0x13. chDoneTime:%d///	1
+0x08001b6c	R water detected, disable 5V, time:%d\\\	1
+0x08001b98	R charging done, dont send 0x13. chDoneTime:%d:\\\	1
+0x08001bd4	Fail to get GLS_L status, cnt:%d	1
+0x08001bf8	Fail to get GLS_R status, cnt:%d	1
+0x08001d13	 Fail to get GLS_L status(FORCE), cnt:%d	0
+0x08001d40	Fail to get GLS_R status(FORCE), cnt:%d	1
+0x08001e1f	 [OTA_BOX]: Inform GLS ota result: %d	0
+0x08001e5b	 [OTA_BOX]: Inform GLS fail.	0
+0x08001e78	[OTA_BOX]: Inform GLS done.	1
+0x08002186	LM =+w	0
+0x08002234	 HnI 8	0
+0x0800225b	 GLS_RX error: CRC wrong.	0
+0x0800227c	CRC_Cal: %02x, CRC_Rx: %02x, header: 5a a5 ff %02x, data: 	1
+0x080022bf	 Disable charging since bat(%d) >= 98	0
+0x080022eb	 L charging:%d, done:%d, vol:%dmv, bat:%d, cur:%d///	0
+0x08002320	R charging:%d, done:%d, vol:%dmv, bat:%d, cur:%d\\\	1
+0x08002354	L charging:1, confirmed by GLS_L///	1
+0x08002378	R charging:1, confirmed by GLS_R\\\	1
+0x0800239c	ota check (0x58), len:%d	1
+0x080023bc	[OTA_BOX]: nothing new, cur:1.%d.%d, remote:1.%d.%d	1
+0x08002467	 Skip SetAgingStatusL since 2510 busy.	0
+0x08002494	SetAgingStatusL fail: not inbox	1
+0x08002533	 Skip SetAgingStatusR since 2510 busy.	0
+0x08002560	SetAgingStatusR fail: not inbox	1
+0x080026c7	 receive header timeout	0
+0x080026e0	no header in first 5 char. RX:	1
+0x08002700	receive len timeout, RX:	1
+0x08002720	receive data timeout, RX: len:%d	1
+0x08002837	 [noctrl]no header in first 5 char. RX:	0
+0x08002860	[noctrl]receive len timeout, RX:	1
+0x08002b03	 Check pmic boost status fail, try to reset reg 0x15.	0
+0x08002c0f	 [OTA_BOX]: Fail to program.	0
+0x08002d1b	 [OTA_BOX]: crc_cal: 0x%x, crc_rx:0x%x	0
+0x08002dc7	 [OTA_BOX]:fail to erase %d pages. err:0x%x, retry:%d	0
+0x08002ebc	[OTA_BOX]:fail to program.	1
+0x08003347	 1.2.57	0
+0x08003350	****** B200 %s %08x%08x%08x******	1
+0x0800337f	Pself check fail, reason: 2217 wrong chip id: 0x%x	0
+0x080033b4	2217 self check done.	1
+0x080033cc	using: 0x70, chipid, 0x%x	1
+0x080033e8	reset pmic register...	1
+0x08003400	self check fail, reason: pmic in shipmode.	1
+0x08003437	@pmic self check done.	0
+0x08003450	PMIC reg 0x10-0x17:	1
+0x08003464	PMIC enable boost: %d	1
+0x0800347f	 2510 self check done, adjVal:%d	0
+0x080034a0	self check fail, reason: 2510 wrong chip id: 0x%x	1
+0x080034d4	4005 self check done.	1
+0x080034ec	self check fail, reason: 4005 wrong chip id: 0x%x	1
+0x08003520	wait for %ds to reset!!!!!	1
+0x0800353c	Show led for usb reset.	1
+0x0800359f	 PMIC 0x10-0x1B:	0
+0x0800370c	fail to erase. err:0x%x	1
+0x08003724	fail to program.	1
+0x08003818	fail to erase. err:0x%x	1
+0x08003834	fail to program.	1
+0x08003963	 Swap bank(2->1) & RESET, cur ob val:%x	0
+0x08003990	Swap bank(1->2) & RESET, cur ob val:%x	1
+0x080039b8	ob program: %d	1
+0x08003b37	 Bat change: %d -> %d	0
+0x08003b54	Bat change, send 0x13 soon.	1
+0x08003b70	Bat change(not used): %d -> %d	1
+0x08003c1b	 2217 int	0
+0x08003ceb	 hall int, isOpen:%d	0
+0x08003d07	 Hall int, send 0x13 soon.	0
+0x08003e33	 USB int, hasUsb:%d	0
+0x08003e53	 Reset GLS and BOX, reason: USB.	0
+0x08003e74	USB int, send 0x13 soon.	1
+0x080040f8	pGpGpGpG	1
+0x08004641	b h@iak@	0
+0x080046d5	CAc@kiF	0
+0x080047e8	%F@5(}	1
+0x08004a7d	'w` x&M	0
+0x08004aa1	C(c hA	0
+0x08004b00	 Cha} 	0
+0x08004b59	CJaIiI	0
+0x08004c9b	C5`eF-nrF	0
+0x08004db7	@/CeF/b	0
+0x08004e2f	MfF7f-hNh	0
+0x08004e41	O=`}hNh	0
+0x08004e61	Cu`5hOh	0
+0x08005207	Cha x@	0
+0x0800522b	Cia!xI	0
+0x0800584b	`(h0C(`	0
+0x08005929	 Hb!hS Hb h	0
+0x080059a5	 Hb!hS Hb h	0
+0x08005a7e	%F 5hz	0
+0x08005aa5	!Ab!hS Hb F	0
+0x08005bd3	@pGpGpGp	0
+0x08005f1f	` hE` h	0
+0x08005f81	b+i;C+a	0
+0x08005f99	';C+aK	0
+0x08005fda	3b+i &3C+a+i	0
+0x0800631e	/I h/L	0
+0x08006354	`k8C`c`k	0
+0x080063b8	`k0C`c`k	0
+0x080067ff	 %02x 	0
+0x0800681f	"#FiF$H	0
+0x080068c5	(**%02x**:	0
+0x08006976	(L%K a 3	0
+0x08006a51	'9CAcAk9@	0
+0x08006a5f	%)CAcAk)@	0
+0x08006a6d	&1CAc@k	0
+0x08007106	7twt`y	0
+0x08007147	 restart usb uart rx	0
+0x08007160	reset gls L & R, reason: cmd	1
+0x08007180	reset gls and box.	1
+0x08007194	[AGING_NOT]: GLS_L exit aging.	1
+0x080071b4	[AGING_NOT]: GLS_R exit aging.	1
+0x080071d4	[AGING_NOT]: Fail to exit aging, L:%d, R:%d	1
+0x08007538	,H<0@x	1
+0x08007543	  t`t1	0
+0x080075ef	 Standby, reason: idle.	0
+0x0800761b	 Standby, reason: gls bat full.	0
+0x0800763c	L water detected, only clear time cnt	1
+0x08007664	L fake standby cnt 300s, now check GLS_L bat.	1
+0x08007694	R water detected, only clear time cnt	1
+0x080076bc	R fake standby cnt 300s, now check GLS_R bat.	1
+0x080076ec	Box idle mode ON. (empty box)	1
+0x0800770c	Box idle mode ON. (gls bat full)	1
+0x08007730	ota gls ready L	1
+0x08007740	ota gls ready R	1
+0x08007750	ota box ready	1
+0x08007760	[OTA_BOX]: Get bin file success	1
+0x08007797	  w`w b`b	0
+0x08007b50	[OTA_BOX]: get bin file fail, exit OTA_BOX status.	1
+0x08007b8b	 clear led since gls status updated.	0
+0x08007bb0	L & R GLS IN, Charging status confirmed directly. Show led now.	1
+0x08007bf0	L & R GLS IN, Charging status unknown. Show led after 1s.	1
+0x08007c2c	L & R GLS OUT, show led after 1s.	1
+0x08007c50	L OUT, R IN, wait 1s to confirm.	1
+0x08007c74	L IN, R OUT, wait 1s to confirm.	1
+0x08007c98	Switch charging result: ERROR -> GOOD	1
+0x08007cc0	Switch charging result: GOOD -> ERROR	1
+0x08007ce8	No reply from GLS_L, wait for %ds	1
+0x08007d0c	No reply from GLS_R, wait for %ds	1
+0x08007d30	No reply from GLS_L for %ds, do not reset.	1
+0x08007d5c	No reply from GLS_L for %ds, reset GLS_L	1
+0x08007d88	No reply from GLS_R for %ds, do not reset.	1
+0x08007db4	No reply from GLS_R for %ds, reset GLS_R	1
+0x08007de0	[OTA_BOX]: check box ota firmware.	1
+0x08007eec	Standby from idle mode, reason: low bat.	1
+0x08007f8c	`p`xc(	0
+0x08007ff4	#ybxrH	0
+0x08008022	#ybxhH	0
+0x080081a0	Bat change(stucked): 99 -> 100	1
+0x080081cc	Over temperature!!! Stop pmic charging.	1
+0x080081f4	Temperature back to normal. Start pmic charging.	1
+0x0800822c	Standby, reason: low bat.	1
+0x08008253	@[AGING_PRE]: Start aging led	0
+0x08008274	[AGING_PRE]: GLS not ready after 2 hours, go to aging anyway.	1
+0x080082b4	[AGING_PRE]: GLS not ready, L:%d(%d), R:%d(%d), cnt:%d	1
+0x080083bb	 Get GLS status for too many times, now stop...	0
+0x080083f0	Get GLS status for too many times, now stop.	1
+0x08008647	C"CZ`Bl	0
+0x08008c27	bQJ hQI	0
+0x08008caa	8I8N9O	0
+0x08008fcc	;F2FZ 	0
+0x0800901a	3F:FZ 	0
+0x080092ad	"QC09@	0
+0x08009610	0123456789abcdef	2
+0x08009624	0123456789ABCDEF	1
+0x08009699	y 0'F5F@7<=	0
+0x0800983b	 [AGING_RUNNING]: GLS ready, disable charging, go to AGING_ONLY.	0
+0x0800987c	[AGING_RUNNING]: GLS not inbox.(L:%d,R:%d), waiting...	1
+0x080098b8	[AGING_RUNNING]: GLS bat low, debounce cnt:%d, wait to confirm.	1
+0x080098f8	[AGING_RUNNING]: GLS bat low, go to CHARGING_AGING.	1
+0x08009930	[AGING_RUNNING]: AGING_ONLY, time:%d	1
+0x08009958	[AGING_RUNNING]: GLS charge done, go to AGING_ONLY.	1
+0x0800998c	[AGING_RUNNING]: CHARGING_AGING, time:%d	1
+0x080099b8	[AGING_RUNNING]: Timeout, go to AGING_DONE	1
+0x08009a3e	 F 0@|	0
+0x08009ae8	 OiF8F	0
+0x08009b37	 Cannot reset gls since 2510 is busy.	0
+0x08009c47	 Get aging status success. L:%d, R:%d.	0
+0x08009c74	Cannot get aging status, err_cnt: %d	1
+0x08009c9f	 [AGING_ERROR]:Get Aging Status Error	0
+0x08009d2f	 Gls not inbox, err_cnt: %d	0
+0x08009d50	[AGING_ERROR]:Not Inbox Error	1
+0x08009dbb	 clear led	0
+0x08009dcc	dont clear led, since led status == %d	1
+0x08009ee0	d!HCc!	0
+0x0800a639	 BL(p i	0
+0x0800a6db	 Option Bytes check fail, UPDATE & RESET. 0x%x	0
+0x0800a710	Option Bytes check done. 0x%x, level:0x%x	1
+0x0800a74c	wake up from HALL	1
+0x0800a760	wake up from USB	1
+0x0800a774	wake up from RTC	1
+0x0800a788	Power up...	1
+0x0800af0f	adbfe>v	0
+0x0800b152	(. F 0	0
+0x0800b388	/F$7hj	0
+0x0800b947	 [AGING_RUNNING]: Try to enter aging mode. L:%d, R:%d, cnt:%d	0
+0x0800b994	AGING_DONE	2
+0x0800b9a8	AGING_ERROR	2
+0x0800b9b4	Stop gls aging. glsAgingL:%d, glsAgingR:%d	1
+0x0800b9e3	 Enable GLS charging by default.	0
+0x0800ba04	[AGING_NOT]:Aging done, and GLS aging stopped, RESET BOX now.	1
+0x0800bb92	]L]M F"|A|	0
+0x0800bba6	'F 79}:|	0
+0x0800bd0f	 No reply from GLS_L for 210s, show error led	0
+0x0800bd44	No reply from GLS_R for 210s, show error led	1
+0x0800bd74	L & R GLS IN, RTC wake up, keep silent.	1
+0x0800bda0	L charging not confirmed, show error led	1
+0x0800bdcc	R charging not confirmed, show error led	1
+0x0800bdf8	L & R GLS OUT, confirmed, show led now.	1
+0x0800be24	L OUT, R IN, confirmed, show error led	1
+0x0800be4c	L IN, R OUT, confirmed, show error led	1
+0x0800bf35	hBhZ`Jh	0
+0x0800bfe0	pGBhJ`	0
+0x0800c112	 F2F)F$0	0
+0x0800c163	hA`pG(	0
+0x0800c3cc	JhRhJ`	0
+0x0800c3da	RhJ`Ih	0
+0x0800c4c1	  w F8	0
+0x0800c505	h!h9C!`	0
+0x0800c627	kHC!hA	0
+0x0800c86e	 F%F$0@5	2
+0x0800cd73	 Tmr Svc	0
+0x0800cdbd	#*FiF h	0
+0x0800cdcd	#:FiF0F	0
+0x0800ce44	.F |@6 5	0
+0x0800d0ff	 L water detected, disable 5V output.	0
+0x0800d12c	R water detected, disable 5V output.	1
+0x0800d1ac	Init YHM2510	1
+0x0800d203	 0x00-0x07:	0
+0x0800d237	 2510: 0x00-0x07:	0
+0x0800d408	read--00 error_location code==%d,read_bit_error1==%d, read_bit_error2==%d	1
+0x0800d454	read failed--retry number=%d,error_location_2510 is %d,read_bit_2510_error1==%d, read_bit_2510_error2==%d	1
+0x0800d4c0	read_for_fuse failed--retry number=%d,error_location_2510 is %d,read_bit_2510_error1==%d, read_bit_2510_error2==%d	1
+0x0800d538	write failed--retry number=%d,error_location_2510 is %d,read_bit_2510_error1==%d, read_bit_2510_error2==%d	1
+0x0800d5a8	****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d	1
+0x0800d5f8	{"vol":%d,"pct":%d,"open":%d,"usb":%d,"cur":%d,"GLS_L":%d,"GLS_R":%d,"temp":%d}	1
+0x0800d648	[OTA_BOX]: new version, cur:1.%d.%d, remote:1.%d.%d, len:%d, crc:0x%x	1
+0x0800d690	[AGING_RUNNING]: Enter aging mode success. next stage:CHARGING_AGING.	1
+0x0800d6d8	[AGING_RUNNING]: Fail to check aging mode, go to next stage anyway:CHARGING_AGING.	1
+0x0800d72c	[AGING_ERROR]: Stop aging now, since GLS not ready after 3 hours.	1
+0x0800d770	L & R GLS IN, Charging status(%d%d%d%d) confirmed in 1s. Show led now.	1
+0x0800d7b8	****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d, chEn:%d, aging:%d, otaGls:%d	1
+0x0800d828	xxxxxx B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d, chEn:%d, aging:%d, otaGls:%d	1
+0x0800d898	ledTask	0
+0x0800d8a0	pwrManagerTask	0
+0x0800d8b0	glsDetectTask	0
+0x0800d8c0	defaultTask	0
+0x0800d8cc	clearLedTimer	0
+0x0800d8dc	showErrorLedTimer	0
+0x0800d8f0	startLedTimer	0
+0x0800d900	agingTimer	0
+0x0800d90c	powerOnTimer	0
+0x0800d91c	setAgingStatusTimer	0
+0x0800d930	appEvent	0
+0x0800d974	bWLD=:6|t	0

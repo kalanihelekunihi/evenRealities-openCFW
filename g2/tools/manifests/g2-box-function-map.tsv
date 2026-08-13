@@ -1,0 +1,440 @@
+# G2 charging-case per-function attribution map
+# blob: blobs/official/g2-2.2.6.10/firmware_box.bin sha256=36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374
+# ghidra lane: tools/ghidra_scripts/BoxExportFunctionMap.java on lorelei, Ghidra 12.1.2, ARM:LE:32:Cortex @0x08000000
+# categories: generated_transport, upstream_cmsis_startup, upstream_freertos_kernel, upstream_stm32_hal, first_party_g2, device_specific_preserve, unresolved
+entry	size	name	ownership_category	evidence
+0x080000c0	4	FUN_080000c0	upstream_cmsis_startup	startup trampoline to runtime init
+0x080000cc	34	vPortStartFirstTask	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x080000f4	8	ulSetInterruptMaskFromISR	upstream_freertos_kernel	anchor: port helper: mrs primask/cpsid/bx
+0x080000fc	6	vClearInterruptMaskFromISR	upstream_freertos_kernel	anchor: port helper: msr primask/bx
+0x08000102	62	xPortPendSVHandler	upstream_freertos_kernel	anchor: exact GCC ARM_CM0 V10-line port sequence; pinned island
+0x08000144	8	FUN_08000144	upstream_cmsis_startup	Reset_Handler trampoline (SystemInit -> _start)
+0x08000156	2	FUN_08000156	upstream_cmsis_startup	default exception self-loop
+0x08000160	44	FUN_08000160	upstream_cmsis_startup	__aeabi runtime divide leaf
+0x0800018c	40	FUN_0800018c	upstream_cmsis_startup	__aeabi runtime divmod
+0x080001b4	36	FUN_080001b4	upstream_cmsis_startup	__aeabi runtime helper
+0x080001d8	14	FUN_080001d8	upstream_cmsis_startup	__aeabi runtime helper
+0x080001e6	4	FUN_080001e6	upstream_cmsis_startup	__aeabi runtime helper
+0x080001ea	18	FUN_080001ea	upstream_cmsis_startup	__aeabi runtime helper
+0x080001fc	20	FUN_080001fc	upstream_cmsis_startup	__aeabi runtime helper
+0x08000210	96	FUN_08000210	upstream_cmsis_startup	toolchain runtime block op
+0x08000270	36	FUN_08000270	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08000294	32	FUN_08000294	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080002b4	34	FUN_080002b4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080002d6	58	FUN_080002d6	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08000310	268	FUN_08000310	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08000420	154	FUN_08000420	first_party_g2	GLS channel writer (packer callee)
+0x080004c0	168	FUN_080004c0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800056c	158	FUN_0800056c	first_party_g2	GLS channel writer (packer callee)
+0x08000610	174	FUN_08000610	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080006c4	10	FUN_080006c4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080006d4	92	FUN_080006d4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08000734	110	FUN_08000734	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080007a8	162	FUN_080007a8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800085c	192	FUN_0800085c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08000928	480	FUN_08000928	first_party_g2	references G2 log/status strings
+0x08000e1c	864	FUN_08000e1c	first_party_g2	references G2 log/status strings
+0x080012e4	48	FUN_080012e4	first_party_g2	references G2 log/status strings
+0x08001334	68	FUN_08001334	first_party_g2	references G2 log/status strings
+0x080013b8	50	FUN_080013b8	first_party_g2	references G2 log/status strings
+0x08001408	258	FUN_08001408	first_party_g2	references G2 log/status strings
+0x08001574	508	FUN_08001574	first_party_g2	references G2 log/status strings
+0x080018e4	492	FUN_080018e4	first_party_g2	references G2 log/status strings
+0x08001c1c	230	FUN_08001c1c	first_party_g2	references G2 log/status strings
+0x08001d68	176	FUN_08001d68	first_party_g2	references G2 log/status strings
+0x08001e94	960	gls_frame_validate_dispatch	first_party_g2	references G2 log/status strings
+0x080023f4	104	FUN_080023f4	first_party_g2	references G2 log/status strings
+0x080024c0	104	FUN_080024c0	first_party_g2	references G2 log/status strings
+0x0800258c	304	FUN_0800258c	first_party_g2	references G2 log/status strings
+0x08002744	232	FUN_08002744	first_party_g2	references G2 log/status strings
+0x08002888	40	FUN_08002888	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080028b4	114	FUN_080028b4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800292c	114	FUN_0800292c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080029a4	88	FUN_080029a4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002a00	88	FUN_08002a00	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002a5c	6	FUN_08002a5c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002a68	140	FUN_08002a68	first_party_g2	references G2 log/status strings
+0x08002b40	12	FUN_08002b40	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002b4c	182	FUN_08002b4c	first_party_g2	references G2 log/status strings
+0x08002c30	94	FUN_08002c30	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002c8e	42	FUN_08002c8e	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002cb8	8	FUN_08002cb8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002cc0	80	ota_image_be32_sum_verify	first_party_g2	references G2 log/status strings
+0x08002d48	114	FUN_08002d48	first_party_g2	references G2 log/status strings
+0x08002e04	172	FUN_08002e04	first_party_g2	references G2 log/status strings
+0x08002edc	72	FUN_08002edc	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002f28	30	FUN_08002f28	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002f46	26	FUN_08002f46	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08002f60	34	FUN_08002f60	first_party_g2	OTA updater: bank-1 SN window 0x0803F800 scalar
+0x08002f88	60	FUN_08002f88	first_party_g2	OTA updater: bank-1 SN window 0x0803F000 scalar
+0x08002fc8	890	FUN_08002fc8	first_party_g2	references G2 log/status strings
+0x080035b8	24	FUN_080035b8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080035d4	24	FUN_080035d4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080035f0	102	FUN_080035f0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003656	12	FUN_08003656	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003664	154	FUN_08003664	first_party_g2	references G2 log/status strings
+0x0800373c	206	FUN_0800373c	first_party_g2	references G2 log/status strings
+0x08003848	82	FUN_08003848	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080038a0	62	FUN_080038a0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080038e0	124	FUN_080038e0	first_party_g2	references G2 log/status strings
+0x080039c8	24	FUN_080039c8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080039e4	24	FUN_080039e4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003a00	44	FUN_08003a00	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003a30	12	FUN_08003a30	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003a3c	32	FUN_08003a3c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003a60	30	FUN_08003a60	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003a84	170	FUN_08003a84	first_party_g2	references G2 log/status strings
+0x08003b90	24	FUN_08003b90	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003bb0	16	FUN_08003bb0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003bc8	76	FUN_08003bc8	first_party_g2	references G2 log/status strings
+0x08003c2c	176	FUN_08003c2c	first_party_g2	references G2 log/status strings
+0x08003d24	258	FUN_08003d24	first_party_g2	references G2 log/status strings
+0x08003e90	4	FUN_08003e90	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003e94	16	FUN_08003e94	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003ea8	18	FUN_08003ea8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003ec0	10	FUN_08003ec0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003ed4	20	FUN_08003ed4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003eec	36	FUN_08003eec	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003f1c	22	FUN_08003f1c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003f38	48	FUN_08003f38	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003f6c	82	FUN_08003f6c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08003fd0	282	FUN_08003fd0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080040f8	2	FUN_080040f8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080040fa	2	FUN_080040fa	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080040fc	2	FUN_080040fc	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080040fe	2	FUN_080040fe	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004100	522	FUN_08004100	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004324	2	FUN_08004324	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004326	2	FUN_08004326	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004328	6	FUN_08004328	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004330	330	FUN_08004330	first_party_g2	references G2 log/status strings
+0x08004480	514	FUN_08004480	first_party_g2	references G2 log/status strings
+0x080046a0	2	FUN_080046a0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080046a4	100	FUN_080046a4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004710	196	FUN_08004710	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080047d4	94	FUN_080047d4	first_party_g2	references G2 log/status strings
+0x0800483c	62	FUN_0800483c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800487a	108	FUN_0800487a	upstream_stm32_hal	HAL_UART_IRQHandler cluster (bounded callee closure)
+0x080048e6	112	FUN_080048e6	upstream_stm32_hal	HAL_UART_IRQHandler cluster (bounded callee closure)
+0x08004958	32	FUN_08004958	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800497c	124	FUN_0800497c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004a00	98	FUN_08004a00	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004a6c	170	FUN_08004a6c	first_party_g2	references G2 log/status strings
+0x08004b20	22	FUN_08004b20	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004b3c	16	FUN_08004b3c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004b50	22	FUN_08004b50	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004b6c	28	HAL_FLASH_Unlock	upstream_stm32_hal	FLASH_KEYR/OPTKEYR credential literal user (HAL_FLASH_Unlock/HAL_FLASH_OB_Unlock)
+0x08004b94	88	FUN_08004b94	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004bf4	28	HAL_FLASH_OB_Unlock	upstream_stm32_hal	FLASH_KEYR/OPTKEYR credential literal user (HAL_FLASH_Unlock/HAL_FLASH_OB_Unlock)
+0x08004c1c	206	FUN_08004c1c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004d00	2	FUN_08004d00	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004d04	36	FUN_08004d04	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004d2c	2	FUN_08004d2c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004d30	336	FUN_08004d30	first_party_g2	references G2 log/status strings
+0x08004e94	10	FUN_08004e94	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004e9e	12	FUN_08004e9e	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004eac	6	FUN_08004eac	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004eb8	6	FUN_08004eb8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004ec4	6	FUN_08004ec4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004ed0	6	FUN_08004ed0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004edc	12	FUN_08004edc	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004eec	36	FUN_08004eec	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004f14	132	FUN_08004f14	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004fb0	56	FUN_08004fb0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08004fec	26	FUN_08004fec	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800500c	18	FUN_0800500c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005024	8	FUN_08005024	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800502c	18	FUN_0800502c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005048	62	FUN_08005048	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005094	14	FUN_08005094	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080050a8	24	FUN_080050a8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080050c4	26	FUN_080050c4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080050e8	54	FUN_080050e8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005128	422	FUN_08005128	first_party_g2	references G2 log/status strings
+0x080052e4	318	FUN_080052e4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800543c	48	FUN_0800543c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005474	26	FUN_08005474	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800549c	130	FUN_0800549c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005528	962	FUN_08005528	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005910	122	FUN_08005910	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800598c	188	FUN_0800598c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005a50	2	FUN_08005a50	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005a52	34	FUN_08005a52	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005a74	172	FUN_08005a74	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005b24	96	FUN_08005b24	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005b8c	52	FUN_08005b8c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005bc0	16	FUN_08005bc0	first_party_g2	references G2 log/status strings
+0x08005bd4	2	FUN_08005bd4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005bd6	2	FUN_08005bd6	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005bd8	2	FUN_08005bd8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005bda	76	FUN_08005bda	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005c26	2	FUN_08005c26	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005c28	80	FUN_08005c28	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005c8c	2	FUN_08005c8c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005c90	382	FUN_08005c90	first_party_g2	references G2 log/status strings
+0x08005e14	2	FUN_08005e14	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005e16	2	FUN_08005e16	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005e18	16	FUN_08005e18	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005e2c	2	FUN_08005e2c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005e2e	60	FUN_08005e2e	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005e6a	2	FUN_08005e6a	upstream_stm32_hal	HAL_UART_IRQHandler cluster (bounded callee closure)
+0x08005e6c	2	FUN_08005e6c	upstream_stm32_hal	HAL_UART_IRQHandler cluster (bounded callee closure)
+0x08005e6e	72	FUN_08005e6e	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005eb6	70	FUN_08005eb6	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005efc	2	FUN_08005efc	upstream_stm32_hal	HAL_UART_IRQHandler cluster (bounded callee closure)
+0x08005efe	2	FUN_08005efe	upstream_stm32_hal	HAL_UART_IRQHandler cluster (bounded callee closure)
+0x08005f00	66	FUN_08005f00	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005f42	2	FUN_08005f42	upstream_stm32_hal	HAL_UART_IRQHandler cluster (bounded callee closure)
+0x08005f44	12	FUN_08005f44	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08005f50	732	HAL_UART_IRQHandler	upstream_stm32_hal	anchor: USART ISR/CR1/CR3/ICR handler sequence; pinned island
+0x08006240	108	FUN_08006240	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080062ac	74	FUN_080062ac	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006308	212	FUN_08006308	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080063ec	252	FUN_080063ec	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080064ec	88	FUN_080064ec	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006544	338	FUN_08006544	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080066ac	202	FUN_080066ac	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006776	2	FUN_08006776	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006778	2	FUN_08006778	upstream_cmsis_startup	HardFault default self-loop
+0x0800677a	8	FUN_0800677a	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006782	8	FUN_08006782	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800678a	8	FUN_0800678a	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006792	16	FUN_08006792	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080067a2	14	FUN_080067a2	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080067b0	22	FUN_080067b0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080067c8	52	FUN_080067c8	first_party_g2	references G2 log/status strings
+0x0800680c	166	FUN_0800680c	first_party_g2	references G2 log/status strings
+0x080068d0	24	FUN_080068d0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080068f0	108	FUN_080068f0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006968	166	app_rtos_init	first_party_g2	references G2 log/status strings
+0x08006a40	298	FUN_08006a40	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006b80	24	FUN_08006b80	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006b98	24	FUN_08006b98	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006bb0	72	FUN_08006bb0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006c00	110	FUN_08006c00	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006c80	106	FUN_08006c80	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006cf8	106	FUN_08006cf8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006d70	2	FUN_08006d70	upstream_cmsis_startup	NMI default self-loop
+0x08006d72	68	FUN_08006d72	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006db8	74	FUN_08006db8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006e08	10	FUN_08006e08	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006e18	2	FUN_08006e18	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08007214	2164	FUN_08007214	first_party_g2	references G2 log/status strings
+0x08008420	20	systick_gate	upstream_freertos_kernel	anchor: SysTick vector: SCS read + xTaskGetSchedulerState guard
+0x08008438	118	FUN_08008438	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080084ae	2	FUN_080084ae	upstream_cmsis_startup	SystemInit
+0x080084b0	10	FUN_080084b0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080084c0	122	FUN_080084c0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800856c	62	FUN_0800856c	first_party_g2	descriptor-table consumer
+0x080085b0	202	FUN_080085b0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800867c	96	FUN_0800867c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080086e0	20	FUN_080086e0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080086f4	96	FUN_080086f4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08008758	174	FUN_08008758	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08008808	390	FUN_08008808	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08008998	174	FUN_08008998	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08008a48	390	FUN_08008a48	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08008bd8	398	FUN_08008bd8	first_party_g2	descriptor-table consumer
+0x08008d98	280	FUN_08008d98	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08008ec4	210	FUN_08008ec4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08008f98	10	FUN_08008f98	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08008fa8	84	gls_frame_pack_l	first_party_g2	anchor: GLS frame packer L: 0x5A channel, 10-retry, 0xFF fill
+0x08009004	54	gls_frame_pack_r	first_party_g2	anchor: GLS frame packer R: 0x5A channel, 10-retry, 0xFF fill
+0x08009040	96	FUN_08009040	first_party_g2	references G2 log/status strings
+0x080090ac	84	FUN_080090ac	first_party_g2	references G2 log/status strings
+0x08009108	86	FUN_08009108	first_party_g2	references G2 log/status strings
+0x08009170	24	g2_log_printf	first_party_g2	log sink: direct format-string pointer via ADR/literal
+0x08009190	26	FUN_08009190	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x080091ac	60	FUN_080091ac	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009210	1020	FUN_08009210	first_party_g2	references G2 log/status strings
+0x08009638	32	FUN_08009638	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009658	44	FUN_08009658	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009684	430	FUN_08009684	first_party_g2	references G2 log/status strings
+0x080099e8	38	FUN_080099e8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009a14	126	FUN_08009a14	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009a9c	150	FUN_08009a9c	first_party_g2	references G2 log/status strings
+0x08009b70	36	FUN_08009b70	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009b94	42	FUN_08009b94	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009bc0	130	FUN_08009bc0	first_party_g2	references G2 log/status strings
+0x08009cc8	96	FUN_08009cc8	first_party_g2	references G2 log/status strings
+0x08009df4	22	FUN_08009df4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009e0c	170	FUN_08009e0c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009ebc	60	FUN_08009ebc	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009ef8	32	FUN_08009ef8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009f18	90	FUN_08009f18	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009f80	106	FUN_08009f80	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08009ff0	46	FUN_08009ff0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a01e	40	FUN_0800a01e	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a046	46	FUN_0800a046	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a074	118	FUN_0800a074	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a0ea	58	FUN_0800a0ea	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a124	12	FUN_0800a124	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a130	10	FUN_0800a130	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a13a	12	FUN_0800a13a	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a148	24	FUN_0800a148	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a164	18	FUN_0800a164	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a176	18	FUN_0800a176	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a188	18	FUN_0800a188	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a19a	18	FUN_0800a19a	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a1ac	30	FUN_0800a1ac	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a1ca	30	FUN_0800a1ca	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a1e8	30	FUN_0800a1e8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a206	30	FUN_0800a206	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a224	38	FUN_0800a224	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a24a	38	FUN_0800a24a	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a270	50	FUN_0800a270	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a2a2	34	FUN_0800a2a2	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a2c4	34	FUN_0800a2c4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a2e6	42	FUN_0800a2e6	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a310	70	FUN_0800a310	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a358	30	FUN_0800a358	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a39c	12	FUN_0800a39c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a3ac	14	FUN_0800a3ac	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a3ba	24	FUN_0800a3ba	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a3d2	54	FUN_0800a3d2	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a408	12	FUN_0800a408	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a414	34	FUN_0800a414	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a436	54	FUN_0800a436	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a46c	72	FUN_0800a46c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a4b4	40	FUN_0800a4b4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a4dc	30	FUN_0800a4dc	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a4fa	46	FUN_0800a4fa	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a528	30	FUN_0800a528	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a550	28	FUN_0800a550	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a574	28	FUN_0800a574	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a598	320	FUN_0800a598	first_party_g2	references G2 log/status strings
+0x0800a794	14	FUN_0800a794	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a7a2	14	FUN_0800a7a2	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a7b0	34	FUN_0800a7b0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a7d2	68	FUN_0800a7d2	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a816	32	FUN_0800a816	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a836	80	os_event_flags_create_wrapper	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800a888	76	FUN_0800a888	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800a8d8	36	FUN_0800a8d8	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800a900	52	FUN_0800a900	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800a93c	196	os_timer_or_thread_create_wrapper	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800aa00	36	FUN_0800aa00	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800aa24	36	FUN_0800aa24	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800aa48	164	os_timer_or_thread_create_wrapper	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800aaf0	54	FUN_0800aaf0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800ab26	74	FUN_0800ab26	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800ab70	50	FUN_0800ab70	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool
+0x0800abb0	80	FUN_0800abb0	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ac08	114	FUN_0800ac08	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ac84	68	FUN_0800ac84	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ace4	56	FUN_0800ace4	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ad24	36	FUN_0800ad24	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800ad48	112	FUN_0800ad48	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800adb8	46	FUN_0800adb8	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ae0c	66	FUN_0800ae0c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ae74	34	FUN_0800ae74	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ae96	154	FUN_0800ae96	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800af30	64	FUN_0800af30	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800af70	64	FUN_0800af70	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800afcc	78	FUN_0800afcc	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b024	60	FUN_0800b024	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b064	28	FUN_0800b064	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800b080	30	FUN_0800b080	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b0a0	88	FUN_0800b0a0	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b0fc	242	prvTimerTask	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b260	30	FUN_0800b260	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b284	38	FUN_0800b284	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b2b0	104	FUN_0800b2b0	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b330	38	FUN_0800b330	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b374	116	FUN_0800b374	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b3e8	178	pvPortMalloc	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b4a4	26	FUN_0800b4a4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800b4c0	26	pxPortInitialiseStack	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800b4e0	84	FUN_0800b4e0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800b53c	104	FUN_0800b53c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800b5ac	42	FUN_0800b5ac	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800b5d6	42	FUN_0800b5d6	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800b600	118	FUN_0800b600	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800b678	362	FUN_0800b678	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800ba44	24	FUN_0800ba44	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800ba64	26	FUN_0800ba64	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800ba84	24	FUN_0800ba84	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800baa4	26	FUN_0800baa4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bac4	14	FUN_0800bac4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bad8	16	FUN_0800bad8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bae8	14	FUN_0800bae8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bafc	16	FUN_0800bafc	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bb0c	24	FUN_0800bb0c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bb2c	26	FUN_0800bb2c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bb4c	30	FUN_0800bb4c	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool
+0x0800bb74	22	FUN_0800bb74	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800be74	28	FUN_0800be74	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800be90	42	FUN_0800be90	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800beba	36	FUN_0800beba	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bede	42	FUN_0800bede	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bf08	36	FUN_0800bf08	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800bf2c	38	uxListRemove	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800bf54	14	FUN_0800bf54	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800bf6c	16	FUN_0800bf6c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800bf94	22	FUN_0800bf94	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800bfaa	6	FUN_0800bfaa	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800bfb0	50	FUN_0800bfb0	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800bfe2	24	FUN_0800bfe2	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800bffc	20	FUN_0800bffc	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c014	24	FUN_0800c014	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c030	68	FUN_0800c030	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c078	32	FUN_0800c078	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c0a0	18	FUN_0800c0a0	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c0b8	36	FUN_0800c0b8	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c0e0	70	FUN_0800c0e0	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c128	48	FUN_0800c128	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c15c	12	FUN_0800c15c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c16c	8	FUN_0800c16c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c178	32	FUN_0800c178	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c19c	42	FUN_0800c19c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c1cc	82	FUN_0800c1cc	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c228	84	FUN_0800c228	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c284	98	FUN_0800c284	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c2f8	128	FUN_0800c2f8	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c380	10	FUN_0800c380	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c390	94	vTaskSwitchContext	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c3f8	26	FUN_0800c3f8	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c412	26	FUN_0800c412	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c42c	16	FUN_0800c42c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c43c	16	FUN_0800c43c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c44c	42	FUN_0800c44c	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c478	16	FUN_0800c478	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c48c	30	FUN_0800c48c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c4aa	34	FUN_0800c4aa	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c4cc	18	FUN_0800c4cc	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c4de	138	FUN_0800c4de	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c568	16	FUN_0800c568	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800c57c	40	FUN_0800c57c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c5ac	32	xPortSysTickHandler	upstream_freertos_kernel	anchor: mask/xTaskIncrementTick/PENDSVSET/unmask; SCB literal 0xE000ED00
+0x0800c5d0	70	FUN_0800c5d0	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c616	112	FUN_0800c616	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c686	290	FUN_0800c686	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c7a8	146	FUN_0800c7a8	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c83a	270	FUN_0800c83a	first_party_g2	references G2 log/status strings
+0x0800c948	92	FUN_0800c948	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800c9a8	94	xTaskCreate	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ca06	70	FUN_0800ca06	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ca4c	26	xTaskGetSchedulerState	upstream_freertos_kernel	anchor: exact body over kernel statics at 0x20000128
+0x0800ca6c	6	FUN_0800ca6c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ca78	184	xTaskIncrementTick	upstream_freertos_kernel	anchor: exact head over xTickCount/xPendedTicks/uxSchedulerSuspended
+0x0800cb38	96	FUN_0800cb38	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800cba0	94	FUN_0800cba0	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800cc0c	168	FUN_0800cc0c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ccc0	50	FUN_0800ccc0	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ccf2	44	FUN_0800ccf2	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800cd20	80	FUN_0800cd20	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800cd80	96	FUN_0800cd80	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800cde4	38	FUN_0800cde4	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800ce0c	36	FUN_0800ce0c	upstream_freertos_kernel	kernel-statics reference and/or banded call-graph closure from pinned port/scheduler anchors
+0x0800ce34	696	FUN_0800ce34	first_party_g2	references G2 log/status strings
+0x0800d154	36	FUN_0800d154	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x0800d178	50	FUN_0800d178	first_party_g2	references G2 log/status strings
+0x0800d218	26	FUN_0800d218	first_party_g2	references G2 log/status strings
+0x0800d250	22	FUN_0800d250	unresolved	no kernel-statics/HAL/string/descriptor evidence
+0x08006e1c	0	g2_rtos_entry_7	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool; body outside the discovered map (no direct callers); bytes remain in unresolved accounting
+0x08007200	0	g2_rtos_entry_9	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool; body outside the discovered map (no direct callers); bytes remain in unresolved accounting
+0x08007f2c	0	g2_rtos_entry_8	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool; body outside the discovered map (no direct callers); bytes remain in unresolved accounting
+0x080082ec	0	g2_rtos_entry_10	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool; body outside the discovered map (no direct callers); bytes remain in unresolved accounting
+0x08009d70	0	g2_rtos_entry_1	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool; body outside the discovered map (no direct callers); bytes remain in unresolved accounting
+0x0800b7ec	0	g2_rtos_entry_4	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool; body outside the discovered map (no direct callers); bytes remain in unresolved accounting
+0x0800bb90	0	g2_rtos_entry_5	first_party_g2	RTOS task/timer entry pointer from app_rtos_init literal pool; body outside the discovered map (no direct callers); bytes remain in unresolved accounting

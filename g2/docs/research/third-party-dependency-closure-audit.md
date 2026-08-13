@@ -31,19 +31,23 @@ family:
 - the exact external, hardware, proprietary-input, or admission gate that
   remains.
 
-Across the 26 families, 24 have a selected public source commit or
-compatibility baseline. IAR DLIB is one exception: all ten bounded linked
+Across the 26 families, 25 have a selected public source commit or
+compatibility baseline. IAR DLIB is the sole exception: all ten bounded linked
 runtime units are already source-recreated, but a release-matched proprietary
-archive is unavailable. The 26th family, DaveGamble cJSON, is the other: the
-parser shared by service_android_notify.c and service_whitelist.c is now
-identified to version interval v1.7.9--v1.7.12 from four binary
-discriminators, but it is **identified, not source-admitted** — no vendored
-snapshot exists and no representative tag or commit within the interval has
-been selected. Its 21 functions / 2,572 body bytes at
-`[0x004D798C,0x004D83D8)` and 34 external caller sites are bounded, so the
-row waits on an explicit admission decision rather than on identification
-work. See
-[`g2-json-parser-source-candidate-audit.md`](g2-json-parser-source-candidate-audit.md).
+archive is unavailable. The 26th family, DaveGamble cJSON, is now admitted as
+an authenticated snapshot: the parser shared by service_android_notify.c and
+service_whitelist.c is identified to version interval v1.7.9--v1.7.12 from four
+binary discriminators, and a pristine MIT three-file snapshot selects the
+interval-ceiling tag v1.7.12 (`3c8935676a97c7c97bf006db8312875b4f292f6c`) as
+the reproducible OpenCFW baseline. All 21 linked parse-side functions were
+re-verified byte-identical C text across the interval during admission; the
+whole-file tag diff is confined to dead-stripped print/create/edit/utils code.
+The snapshot is **production-excluded by explicit decision**: its
+21 functions / 2,572 body bytes at
+`[0x004D798C,0x004D83D8)` remain cut-forward pending a compiler/ABI readiness
+matrix and a reviewed production-overlay admission decision. See
+[`g2-json-parser-source-candidate-audit.md`](g2-json-parser-source-candidate-audit.md)
+and [`../third_party/cJSON/README.openCFW.md`](../third_party/cJSON/README.openCFW.md).
 No exact historical *producing* commit is asserted.
 That is deliberate: source-identical commit intervals, mixed vendor trees, and
 private patches make those historical object identities unobservable from the

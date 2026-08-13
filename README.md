@@ -52,7 +52,7 @@ openCFW/
 │   ├── docs/             reference documents + 502 per-closure audits
 │   ├── manifests/        region/flash layout pins per build profile
 │   ├── research/         evidence corpus: candidates, readiness, decompilation
-│   ├── tests/            736 test modules gating the above
+│   ├── tests/            746 test modules gating the above
 │   ├── third_party/      vendored upstream snapshots (see third-party/README.md)
 │   └── tools/            4 entry points + 355 read-only analyzers
 ├── r1/                   R1 firmware: clean-room implementation

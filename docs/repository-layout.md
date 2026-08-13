@@ -55,7 +55,7 @@ make -C g2 build
 | `manifests/` | per-profile region and flash-layout pins |
 | `releases/` | published release definitions |
 | `research/` | reverse-engineering evidence: source candidates, per-module readiness matrices, and the decompilation corpus — see [`../g2/research/README.md`](../g2/research/README.md) |
-| `tests/` | 736 modules gating every claim the build makes |
+| `tests/` | 746 modules gating every claim the build makes |
 | `third_party/` | vendored upstream snapshots — see [below](#third-party-shared-dependency-registry) |
 | `tools/` | image analyzers, evidence manifests, overlay builder, packager |
 
@@ -102,7 +102,7 @@ That last point is the one asymmetry in this layout, and it is load-bearing
 rather than incidental. Each vendored snapshot authenticates its own
 repository-relative path: `PROVENANCE.json` files name `third_party/<name>/...`
 paths, several verifiers scan the G2 `Makefile` and `manifests/` for the literal
-string `third_party/<name>` as a production-exclusion gate, and 61 test modules
+string `third_party/<name>` as a production-exclusion gate, and 62 test modules
 verify the verifiers — some by pinning the verifier script's exact byte size and
 SHA-256. Moving the directory means editing those paths and then re-pinning the
 hashes whose entire purpose is to detect such edits. The snapshots stay where

@@ -551,16 +551,18 @@
    "family": "DaveGamble-cJSON",
    "origin": "DaveGamble/cJSON",
    "version": "v1.7.9–v1.7.12 interval (four binary discriminators)",
-   "selected_source_commit": null,
+   "selected_source_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c",
    "historical_generating_commit": null,
    "functional_status": "bounded_waiting_external_gate",
    "residual_gates": [
-    "explicit source-admission decision; no vendored snapshot exists (identification is not admission)",
-    "selection of a representative v1.7.9–v1.7.12 tag or commit as the baseline once admission is decided"
+    "exact tag within the proven v1.7.9–v1.7.12 interval and the Even vendoring path are binary-unobservable",
+    "compiler/ABI readiness matrix against the authenticated v1.7.12 baseline",
+    "explicit production-overlay admission decision (snapshot admitted, production-excluded)"
    ],
    "evidence": [
     "docs/research/g2-json-parser-source-candidate-audit.md",
-    "docs/research/g2-service-android-notify-dependency-boundary.md"
+    "docs/research/g2-service-android-notify-dependency-boundary.md",
+    "third_party/cJSON/PROVENANCE.json"
    ]
   }
  ]

@@ -26,10 +26,14 @@ version interval v1.7.9–v1.7.12, proven by four binary discriminators (the
 offset behavior, the absent <1.7.14 `head->prev` tail store, and the <1.7.19
 64-byte stack `parse_number` buffer). The family is bounded as 21 functions /
 2,572 body bytes at `[0x004D798C,0x004D83D8)` with 34 external caller sites.
-It is identified but **not yet source-admitted** — no vendored snapshot
-exists — so its remaining gap is an explicit admission decision, not identity
-or function opacity. See
-[`g2-json-parser-source-candidate-audit.md`](g2-json-parser-source-candidate-audit.md).
+It is now admitted as an authenticated pristine MIT snapshot selecting the
+interval-ceiling tag v1.7.12 (`3c8935676a97c7c97bf006db8312875b4f292f6c`) as
+the reproducible OpenCFW baseline, with all 21 linked functions re-verified
+byte-identical across the interval. The snapshot is **production-excluded** by
+explicit decision, so its remaining gap is a compiler/ABI readiness matrix and
+a production-overlay admission decision, not identity or function opacity. See
+[`g2-json-parser-source-candidate-audit.md`](g2-json-parser-source-candidate-audit.md)
+and [`../third_party/cJSON/README.openCFW.md`](../third_party/cJSON/README.openCFW.md).
 
 The newest family correction is a copied Goodix diagnostic helper hidden under
 the first-party path `utils\assert\util_error_check.c`. Its complete handler
@@ -167,7 +171,7 @@ It is not automatically a claim that Even used an unmodified checkout.
 | Packetcraft Cordio | Packetcraft BLE host with mixed Ambiq r20/R4-era ports | public r20.05–r20.05c interval ending at `3656312d6b73e2a2c1c8b33ee0385bc199dd97e6`; r19.02 `86372d84…` ancestry; later Ambiq R4.4.1 oracle `4264b930…`; exact R2.5.1 port-family archive `87b03680…`; 27/27 retained reusable paths and 68/68 focused module audits classified; copied `profile_gatt.c` is upstream while EUS/ESS/EFS/NUS are authenticated G2-local adapters | Exact mixed producing commit is unobservable; production admission/placement and hardware/controller validation; retained application/product paths are first-party boundary work |
 | Goodix GR551x application-error utility | Copied/adapted SDK 1.7.0 `components/libraries/app_error/app_error.c` under G2 `utils/assert` | exact blob `d5027735dd01b0948a7315d9c595356fcb91f59b`; selected earliest carrier `854c43e0b96a24051ffce4c06ff629255aa56c59`; 43 exact rows, 512-byte stack buffer, 178-byte handler and 344-byte table closed | Official SDK 1.7.0 release commit and Even generating checkout unavailable; source behavior is closed and no Goodix BLE-stack linkage is inferred |
 | IAR DLIB | IAR EWARM runtime, practical 9.20+ floor; 9.60.2 leading compatibility candidate | no defensible exact archive/commit pin; all 13 bounded units are exact clean-room source recreations, with the new `frexpf`/helper/`ldexpf` tranche canonical-Apple routed | Exact EWARM release, VFP and Normal/Full library variants, wider archive census, Linux Clang 22.1.8 profile recording, and hardware validation |
-| DaveGamble cJSON | DaveGamble/cJSON, version interval v1.7.9–v1.7.12 | four binary discriminators: ≥1.7.9 issue-#315 `get_object_item` fix, <1.7.13 `buffer_skip_whitespace` offset behavior, absent <1.7.14 `head->prev` tail store, <1.7.19 64-byte stack `parse_number` buffer; 21 functions / 2,572 body bytes at `[0x004D798C,0x004D83D8)` with 34 external caller sites bounded | Identified but not source-admitted: no vendored snapshot or selected tag/commit inside the interval; remaining gate is an explicit source-admission decision, not identity work |
+| DaveGamble cJSON | DaveGamble/cJSON, version interval v1.7.9–v1.7.12 | four binary discriminators: ≥1.7.9 issue-#315 `get_object_item` fix, <1.7.13 `buffer_skip_whitespace` offset behavior, absent <1.7.14 `head->prev` tail store, <1.7.19 64-byte stack `parse_number` buffer; 21 functions / 2,572 body bytes at `[0x004D798C,0x004D83D8)` with 34 external caller sites bounded | Authenticated pristine MIT snapshot admitted at interval-ceiling tag v1.7.12 (`3c8935676a97c7c97bf006db8312875b4f292f6c`); production-excluded by explicit decision: remaining gates are a compiler/ABI readiness matrix and a production-overlay admission decision, not identity work |
 
 The EM9305 controller adds third-party/vendor binary dependencies outside the
 Apollo utility set: QP/C v6.5.1 is pinned to

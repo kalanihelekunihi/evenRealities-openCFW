@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "component": "DaveGamble/cJSON",
+  "license": "MIT",
+  "upstream": {
+    "repository": "https://github.com/DaveGamble/cJSON.git",
+    "repository_web": "https://github.com/DaveGamble/cJSON",
+    "selected_ref": "refs/tags/v1.7.12",
+    "selected_tag": "v1.7.12",
+    "tag_type": "lightweight",
+    "tag_qualification": "The official v1.7.12 ref resolves directly to the commit object; no annotated tag object exists to vendor.",
+    "selected_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c",
+    "selected_tree": "6c770a14e7d9ac1a8fd452a32c51fa4462cf2b45",
+    "parent_commits": [
+      "08d2bc766a82cd75764d036f9efef444590d1cf9",
+      "b93fd34044a3ab3d956b1a6c733d609853ada854"
+    ],
+    "author_date": "2019-05-17T01:05:59+02:00",
+    "committer_date": "2019-05-17T01:05:59+02:00",
+    "subject": "Merge pull request #355 from DaveGamble/release-1.7.12",
+    "commit_signature": {
+      "present": true,
+      "format": "OpenPGP (GitHub web-flow merge signature)",
+      "signer_trust_verified": false,
+      "qualification": "The official commit carries a GitHub web-flow signature, but this compact snapshot does not vendor a trust root; only Git object integrity is claimed."
+    }
+  },
+  "selection": {
+    "classification": "authenticated public tagged compatibility baseline for the stock linked parse-side cJSON implementation; production-excluded",
+    "exact_public_source_candidate": true,
+    "exact_g2_checkout_proven": false,
+    "firmware_build_timestamp": "2025-04-28T13:29:15Z",
+    "compatible_floor_tag": "v1.7.9",
+    "compatible_floor_commit": "f110bd2e585394bf47baca34a06df2569a9232b6",
+    "compatible_floor_date": "2018-12-16T11:17:20+01:00",
+    "compatible_ceiling_tag": "v1.7.12",
+    "compatible_ceiling_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c",
+    "selected_tagged_baseline": "3c8935676a97c7c97bf006db8312875b4f292f6c",
+    "first_excluded_successor_tag": "v1.7.13",
+    "first_excluded_successor_commit": "39853e5148dad8dc5d32ea2b00943cf4a0c6f120",
+    "lower_discriminator": "get_object_item (0x004D8354) carries both the case-sensitive loop guard and the final NULL-string gate of upstream issue #315, shipped in v1.7.9; v1.7.8 has neither.",
+    "upper_discriminator_1": "buffer_skip_whitespace (0x004D7E1E) lacks the v1.7.13 cannot_access_at_index exhausted-buffer early return (#358).",
+    "upper_discriminator_2": "parse_array (0x004D80D8) and parse_object (0x004D81CC) lack the v1.7.14 head->prev tail store (#503).",
+    "upper_discriminator_3": "parse_number (0x004D7A5C) uses the pre-v1.7.19 64-byte stack number buffer, not the v1.7.19 allocated temporary (#939).",
+    "linked_function_identity": "All 21 linked parse-side functions are byte-identical C text between v1.7.9 and v1.7.12 (re-verified function-for-function during snapshot admission); the whole-file diff between those tags is confined to the dead-stripped print/create/edit/utils side.",
+    "compatibility_qualification": "v1.7.12 is the reproducible tagged baseline at the ceiling of the proven interval, not a claim about the private Even checkout, vendoring path, or exact historical tag. No Even modification of the linked functions was found; the binary is consistent with an unmodified upstream build with ENABLE_LOCALES=Off."
+  },
+  "snapshot": {
+    "scope": "The three pristine upstream files that cover the linked parse-side closure: cJSON.c, cJSON.h, and the MIT LICENSE at v1.7.12",
+    "file_count": 3,
+    "normalization": null,
+    "byte_identical_to_upstream": true
+  },
+  "g2_boundary": {
+    "analyzer": "tools/analyze_g2_json_parser.py",
+    "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+    "function_map": "tools/manifests/g2-json-parser-function-map.tsv",
+    "closure_map": "tools/manifests/g2-json-parser-closure.tsv",
+    "caller_paths": {
+      "platform\\service\\message_notify\\service_android_notify.c": 13,
+      "platform\\service\\message_notify\\service_whitelist.c": 21
+    },
+    "stock_span": "[0x004D798C,0x004D83D8)",
+    "stock_physical_bytes": 2636,
+    "stock_body_bytes": 2572,
+    "stock_noncode_bytes": 64,
+    "linked_functions": 21,
+    "external_caller_sites": 34,
+    "production_routed": false,
+    "production_decision": "explicitly production-excluded at admission: the 2,572 stock body bytes remain cut-forward. Production admission requires a compiler/ABI readiness matrix against the authenticated baseline, reviewed overlay integration, and ownership accounting; identification and vendoring are not admission."
+  },
+  "files": [
+    {
+      "path": "cJSON.c",
+      "size": 74184,
+      "sha256": "f5e77e3f11f9d9dc0a5f25f0517c1d643dddb4f437d9ad7e87f96aaa091cafac",
+      "git_blob_sha1": "60b72c01823c671b310008bf10690e5be39b036a"
+    },
+    {
+      "path": "cJSON.h",
+      "size": 14882,
+      "sha256": "42775342bd0cf687de0c35d34b4190d3ed5ad990946db6b63152a6247d8b3e1f",
+      "git_blob_sha1": "592986b86e9fc0cb03af06f753c39b8c831b91a2"
+    },
+    {
+      "path": "LICENSE",
+      "size": 1084,
+      "sha256": "a36dda207c36db5818729c54e7ad4e8b0c6fba847491ba64f372c1a2037b6d5c",
+      "git_blob_sha1": "78deb0406d713ab9730e3c2447be1abdbd70b9a2"
+    }
+  ]
+}

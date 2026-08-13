@@ -12,13 +12,15 @@ The current third-party identity and functional-gap priority is summarized in
 [`research/third-party-utility-gap-priority.md`](research/third-party-utility-gap-priority.md).
 
 The fail-closed aggregate [third-party dependency closure audit](research/third-party-dependency-closure-audit.md)
-now reconciles 26 families, 24 selected public source commits/baselines, the
+now reconciles 26 families, 25 selected public source commits/baselines, the
 130,000-byte retained third-party-path opaque lower bound, zero unclassified
 Cordio reusable paths, the complete seven-function / 638-byte private LVGL
 display port, and FreeType lifecycle absence evidence. The 26th family is the
 DaveGamble cJSON parser shared by service_android_notify.c and
-service_whitelist.c, identified to version interval v1.7.9--v1.7.12 but not
-yet source-admitted; no vendored snapshot exists. The audit reports zero
+service_whitelist.c, identified to version interval v1.7.9--v1.7.12 and now
+admitted as an authenticated pristine MIT snapshot at interval-ceiling tag
+v1.7.12 (`3c8935676a97c7c97bf006db8312875b4f292f6c`), production-excluded by
+explicit decision. The audit reports zero
 bounded third-party functional gaps that are still locally actionable;
 residual work requires hardware, unavailable private/proprietary inputs, or
 an explicit production-admission decision.
@@ -4814,3 +4816,135 @@ stack parse_number buffer. The family is 21 functions / 2,572 body bytes at
 third-party family; it is identified but not yet source-admitted, and no
 vendored snapshot exists. See
 `docs/research/g2-json-parser-source-candidate-audit.md`.
+
+### DaveGamble cJSON snapshot admission
+
+The cJSON family is now admitted as an authenticated vendored snapshot. The
+pristine MIT three-file closure (`cJSON.c`, `cJSON.h`, `LICENSE`) at
+`g2/third_party/cJSON/` selects the interval-ceiling lightweight tag v1.7.12,
+commit `3c8935676a97c7c97bf006db8312875b4f292f6c`, tree
+`6c770a14e7d9ac1a8fd452a32c51fa4462cf2b45`, as the reproducible OpenCFW
+baseline — not a claim about the vendor checkout or vendoring path, which
+remain binary-unobservable. All 21 linked parse-side functions were
+re-verified byte-identical C text between v1.7.9
+(`f110bd2e585394bf47baca34a06df2569a9232b6`) and v1.7.12 during admission;
+the whole-file tag diff is confined to the dead-stripped
+print/create/edit/utils side. The fail-closed offline
+`verify_snapshot.py` pins the commit/tree/interval identities, all three file
+hashes and Git blob ids, and the explicit **production-excluded** decision:
+the 21 functions / 2,572 body bytes at `[0x004D798C,0x004D83D8)` remain
+cut-forward pending a compiler/ABI readiness matrix and a reviewed
+production-overlay admission decision. `tests/test_cjson_snapshot.py` runs
+the verifier, asserts the production-exclusion decision, and adds a
+Cortex-M55 freestanding compile probe proving all six public entry sections.
+The shared registry (`third-party/README.md`), upstream inventory, gap
+priority, closure audit, and the machine-readable closure ledger
+(`selected_source_commit`, residual gates, snapshot evidence) agree. No build
+profile, ownership number, or package hash changed. See
+`third_party/cJSON/README.openCFW.md` and
+`third_party/cJSON/PROVENANCE.json`.
+
+### Four-component controller-boundary evidence wave
+
+A parallel four-lane evidence pass closed one bounded increment on each
+non-Apollo component without touching production ownership:
+
+- **EM9305 BLE controller** — all 175 residual segments / 33,658 bytes
+  (15.96% of the application) are now classified in
+  `tools/manifests/em9305-residual-provenance-map.tsv`: 130 segments /
+  30,564 bytes are proprietary modern-controller or EM vendor-system source
+  (retention recommended), 7 / 1,224 bytes first-party Even application,
+  2 / 980 bytes toolchain/linker-generated, and 36 / 890 bytes remain
+  explicitly unclassified. The MetaWare runtime cluster is structurally
+  proven; the authenticated first-party hook-table entries, QF internal-hook
+  stubs, and the `MyApp` ID-181 assertion site are pinned. See
+  `docs/research/em9305-residual-provenance-audit.md` and
+  `tests/test_analyze_em9305_residual_provenance.py`.
+- **Audio codec/DSP** — both FWPK segment destinations are conclusively
+  resolved: the 38,236-byte type-1 boot image is the NationalChip grus
+  (GX8002) UART-boot container (stage1 to IRAM `0x10000000`, stage2 to
+  `0x10002800`), and the 287,808-byte type-2 BINH main image targets codec
+  SPI NOR offset 0 as a dual-firmware concatenation (image A
+  `[0x0,0x2F3B0)` with 36,484 bytes XIP text and a 129,964-byte NPU/audio
+  payload; image B `[0x2F3B0,0x46440)`); all CRCs, version chains, and the
+  `serialdown 0 <size> 8192` flash command are verified. The image remains
+  an explicit proprietary NationalChip boundary. See
+  `docs/research/g2-codec-fwpk-segments-recovery.md` and
+  `tests/test_analyze_g2_codec_fwpk_segments.py`.
+- **Touch controller** — identity is proven: Infineon/Cypress PSoC 4000T
+  OPN CY8C4046FNI (Cortex-M0+, 64 KiB flash, 8 KiB SRAM, 5th-gen CapSense
+  MSCLP0), with every LDR-confirmed peripheral base an exact psoc4000t SVD
+  block base and the retained host path `driver\touch\drv_cy8c4046fni.c`.
+  A complete ten-region memory map, the polled single-handler vector model,
+  FWPK type-3 framing, and the CRC-32C record and trailing-payload checksums
+  (hardware-instruction-verified) are pinned. See
+  `docs/research/g2-touch-identity-recovery.md` and
+  `tests/test_analyze_g2_touch_identity.py`.
+- **Charging case** — STM32G0Bx-class (leading STM32G0B1) is established
+  from the 46-word vector table and bank-swap literals; FreeRTOS V10-line
+  GCC ARM_CM0 port is instruction-matched against upstream V10.5.1 port.c
+  with kernel statics pinned; STM32CubeG0 HAL/LL module presence is
+  separated from G2 policy; the `5A A5 FF` UART framing and the 22-step
+  OTA-box state machine (including Copy-SN) are mapped; four
+  device-specific SN preservation windows are pinned as never-overwrite
+  regions. See `docs/research/g2-box-stm32g0-platform-recovery.md` and
+  `tests/test_analyze_g2_box_stm32g0_platform.py`.
+
+All four lanes added fail-closed analyzers, machine-readable manifests, and
+tests (42 focused tests, all passing). No build profile, ownership number,
+or package hash changed; all four components remain retained behind their
+declared boundaries.
+
+### Second frontier wave: controller-cluster decompilation, codec stage2, touch protocol, case function map, Apollo unanchored census
+
+- **EM9305 BLE controller** — the two largest high-confidence
+  modern-controller clusters are now function-recovered via the
+  lorelei GNU ARC lane (Ghidra ARC skipped per benchmark guidance):
+  slave-connection `[0x00329888,0x0032A4BE)` and master periodic
+  scan/PAwR `[0x00321C30,0x0032233C)`, ten functions / 4,930 bytes with
+  an exact zero-remainder tiling, bracket-anchored against authenticated
+  Packetcraft object boundaries. Three functions are opcode-exact, five
+  modified (ratios 0.89–0.97), two divergent — sharpening the
+  proprietary-retention verdict: stock is a newer/differently-configured
+  Packetcraft build whose authoritative source is unavailable. The lane
+  return is manifested at `research/corpus/em9305/cluster-recovery/`.
+  See `docs/research/em9305-controller-cluster-recovery.md`.
+- **Audio codec/DSP** — image-A stage2 is conclusively sectioned using
+  the official `c-sky/binutils-gdb` fork (GNU 2.43.1 proven to mis-decode
+  32-bit forms): 36,484 B XIP text, 12,516 B SRAM text at
+  `0x10023400`, and 2,196 B SRAM data, with the combined copy closing
+  exactly on `stage2_size − xip_len`. The entire 129,964 B payload is
+  the LVP_KWS wake-word model: command stream `[0xF804,0x11BD0)` and
+  weights `[0x11BD0,0x2F3B0)`, exact-fit to image B. See
+  `docs/research/g2-codec-stage2-sections-recovery.md`.
+- **Touch controller** — the SCB1 I2C protocol is closed: a 9-slot
+  command switch (version/ID query, prox-baseline read/save, threshold
+  read, gesture-config write, enter-DFU, sensor report), active-low
+  attention line, 16 B report format, deferred EEPROM config with `UNVE`
+  magic, and power entries. Architecturally decisive: the payload is the
+  shipped prefix `[0,0x8680)` of a base-0 image whose resident remainder
+  owns the DFU engine and boot — touch OTA depends on factory-matched
+  resident flash. See `docs/research/g2-touch-i2c-protocol-recovery.md`.
+- **Charging case** — a full lorelei Ghidra function map (428 functions
+  / 40,664 bytes) attributes the image: 79 FreeRTOS-kernel functions /
+  5,440 B (CMSIS-RTOS2 wrapper identified), 10 STM32 HAL functions /
+  1,018 B, 71 first-party G2 functions, 261 unresolved helpers. Both
+  open questions answered: frame checks are additive sums (no polynomial
+  CRC), and logging uses direct ADR/LDR string pointers (no ID scheme).
+  See `docs/research/g2-box-function-map-recovery.md`.
+- **Apollo unanchored census** — the 5,610-function unanchored set is
+  re-derived exactly (7,370 corpus − 1,760 anchored) and triaged with
+  zero drift against the origin accounting: 27% was already reviewed by
+  per-module manifests; the unreviewed core is 1,911 functions /
+  299,736 bytes. Buckets pin first-party (1,782/216,564 B), LVGL
+  (1,054/97,430 B), Cordio (383/27,356 B), and the smaller families;
+  new identifications include the IAR DLIB formatted-I/O cluster
+  (printf core `0x00481836`, scanf core `0x004D1638`) and byte-exact
+  cross-validation of `FT_Done_Face`. See
+  `docs/research/g2-apollo-unanchored-census.md`.
+
+All five lanes added fail-closed analyzers, manifests, and tests (52
+focused tests passing). The corpus index grew to 1,950 files / 44
+manifests (EM9305 cluster-recovery lane). No build profile, ownership
+number, or package hash changed; all controller components remain
+retained behind their declared boundaries.

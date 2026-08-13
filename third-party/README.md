@@ -29,7 +29,7 @@ repository-relative path:
   `Makefile`, `manifests/`, and `components/` for the literal token
   `third_party/<name>` and fails closed unless the only matches are an exact
   allow-listed pair of lines (for example `NANOPB_DIR := third_party/nanopb`);
-- 61 test modules verify the verifiers, and several pin the verifier script's
+- 62 test modules verify the verifiers, and several pin the verifier script's
   exact byte size and SHA-256.
 
 Relocating the directory would mean editing those paths and then re-pinning the
@@ -57,6 +57,7 @@ exact upstream commit and reconstructed offline from the Git object closure.
 | `cmsis-freertos` | v10.5.1 | Apache-2.0 | • | • |
 | `cordio` | `3656312d` (r20.05c) | Apache-2.0 | • | |
 | `cordio-profile-gatt` | see `SNAPSHOT.sha256` | Apache-2.0 | • | |
+| `cJSON` | `3c893567` (v1.7.12; proven interval v1.7.9–v1.7.12) | MIT | • | |
 | `easylogger` | `a596b264` | MIT | • | |
 | `flashdb` | `714d6159` (2.1.1) | Apache-2.0 | • | |
 | `freertos-kernel` | `def7d2df` (V10.5.1) | MIT | • | • |

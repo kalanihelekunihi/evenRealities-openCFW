@@ -1,0 +1,10 @@
+slot_inferred	body_entry	role	reply_contract	confidence
+0	0x0446	version/identity query	16B reply {02,02,00,01,01,00,02,02,...} = version 2.2.0.1 + protocol word 0x01000202	body confirmed; index inferred from layout order
+1	0x0466	read saved proximity baseline	16B reply carrying u16 config[0x200009D4]	body confirmed; index inferred
+2	0x0480	read long-press threshold	16B reply (zeroed) carrying u16 config[0x200009D6]	body confirmed; index inferred
+3	0x04A0	save proximity baseline to EEPROM	sets flag 0x200009CF; reply {5,0,0x17}; deferred save in report builder	body confirmed; index inferred
+4	0x04C8	write gesture configuration (long-press ms)	u16 arg from rx[1..2], arg!=0 else {7,0xFF,0x17}; stores config+mirror, dirty flags; {7,0,0x17}	body confirmed; index inferred; validation matches host at_tp.c 1-65535ms rule
+5	0x052C	enter DFU	reply {2,0,0x17}; mailbox[0x20000000]=0; NVIC_SystemReset	body confirmed; index inferred
+6	0x054C	read current sensor report	10B reply from two sensor_read_mux channels (proximity + slider)	body confirmed; index inferred
+7	-	unresolved slot	no distinct body in shipped prefix (default/shared)	open
+8	-	unresolved slot	no distinct body in shipped prefix (default/shared)	open
