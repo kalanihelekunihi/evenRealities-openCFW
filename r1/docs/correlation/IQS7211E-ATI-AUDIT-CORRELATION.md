@@ -54,7 +54,7 @@ and its HEX has SHA-256
 Reproduce the evidence with:
 
 ```sh
-python3 tools/summarize_r1_iqs7211e_ati_audit.py
+python3 tools/evidence/summarize_r1_iqs7211e_ati_audit.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

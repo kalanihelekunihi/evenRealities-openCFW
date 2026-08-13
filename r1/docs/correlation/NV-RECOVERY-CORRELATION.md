@@ -80,5 +80,5 @@ The static verifier pins all four bodies, the two manual function extents, compl
 maps, dispatcher/report-builder edges, and exact diagnostics:
 
 ```sh
-python3 tools/summarize_r1_nv_recovery_closure.py
+python3 tools/evidence/summarize_r1_nv_recovery_closure.py
 ```

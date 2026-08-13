@@ -42,7 +42,7 @@ selection implementation, and dlCom state remain in the matching licensed Goodix
 Reproduce with:
 
 ```sh
-python3 tools/summarize_r1_frontier_334_342.py
+python3 tools/evidence/summarize_r1_frontier_334_342.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

@@ -197,7 +197,7 @@ model-configuration literals, the five outer-to-inner neural-layer calls, the ca
 the false-positive literal-pool branch encoding:
 
 ```sh
-python3 tools/summarize_r1_goodix_spo2_dlcom_boundary.py
+python3 tools/evidence/summarize_r1_goodix_spo2_dlcom_boundary.py
 ```
 
 The summarizer emits no algorithm source, accesses no live sensor, and does not authorize provider

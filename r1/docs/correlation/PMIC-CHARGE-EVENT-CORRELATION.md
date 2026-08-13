@@ -76,7 +76,7 @@ and `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 Reproduce the evidence gate with:
 
 ```sh
-python3 tools/summarize_r1_pmic_charge_event.py
+python3 tools/evidence/summarize_r1_pmic_charge_event.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

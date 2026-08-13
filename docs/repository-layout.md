@@ -81,7 +81,7 @@ of the evidence record, not free-form prose. One consequence is that
 | `port/` | R1-owned FlashDB/FAL port and its configuration headers |
 | `tests/` | host protocol tests plus vendor storage and crypto tests |
 | `research/` | the decompilation corpus, bootloader reconstruction, and BSim runs — see [`../r1/research/README.md`](../r1/research/README.md) |
-| `tools/` | the evidence toolchain: ~220 pinning scripts, simulator, and verifiers — see [`../r1/tools/README.md`](../r1/tools/README.md) |
+| `tools/` | entry-point verifiers, plus `evidence/` (197 pinning scripts), `probes/` (on-device assembly), and `ghidra_scripts/` — see [`../r1/tools/README.md`](../r1/tools/README.md) |
 
 `port/` was previously `vendor/`, which mixed two unrelated things: R1-authored
 adapter code, and bookkeeping for external dependencies. The adapter code is

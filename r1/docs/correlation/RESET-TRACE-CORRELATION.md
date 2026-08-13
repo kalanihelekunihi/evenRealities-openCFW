@@ -56,7 +56,7 @@ The exact complete caller sets, including all byte-write sites, are machine-chec
 
 ```sh
 PYTHONPATH=tools \
-python3 tools/summarize_r1_reset_trace_closure.py
+python3 tools/evidence/summarize_r1_reset_trace_closure.py
 ```
 
 ## Product/provider boundary

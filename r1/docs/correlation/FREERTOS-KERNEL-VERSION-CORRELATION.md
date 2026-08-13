@@ -15,7 +15,7 @@ this helper nor the recovered status-byte timer layout. The independently recove
 The exact body and caller set are checked by:
 
 ```sh
-python3 tools/summarize_r1_freertos_kernel_version.py
+python3 tools/evidence/summarize_r1_freertos_kernel_version.py
 ```
 
 openR1 compiles the authenticated `g2/third_party/freertos-kernel` 10.5.1 core and allocator,

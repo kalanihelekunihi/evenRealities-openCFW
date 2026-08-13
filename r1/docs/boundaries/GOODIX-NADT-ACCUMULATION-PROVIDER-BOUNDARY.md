@@ -40,7 +40,7 @@ lifecycle adapters, but it may not reproduce this signal-processing closure, its
 its formulas.
 
 ```sh
-python3 tools/summarize_r1_goodix_nadt_accumulation.py
+python3 tools/evidence/summarize_r1_goodix_nadt_accumulation.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

@@ -6,7 +6,7 @@ The former frontier leader `0x0008DA24..<0x0008DBFC` converts the compact stored
 the public synchronization packet, then delegates allocation, transport, acknowledgement, and
 release. Its exact body SHA-256 is
 `d3804f3dd415358d10ced85de5f8cccc64da4db33d40e37830d05096b7b86ac5`; its sole direct caller is
-`0x0008F9C2`. `tools/summarize_r1_sleep_sync_packet.py` authenticates all three facts and
+`0x0008F9C2`. `tools/evidence/summarize_r1_sleep_sync_packet.py` authenticates all three facts and
 the embedded `946080000` legacy-clock cutoff.
 
 The first 32 bytes are the sleep header. Each compact input stage uses its low two bits as type and
@@ -30,6 +30,6 @@ reserved-byte zeroing, exact wire bytes, and zero-duration rejection.
 Reproduce with:
 
 ```sh
-python3 tools/summarize_r1_sleep_sync_packet.py
+python3 tools/evidence/summarize_r1_sleep_sync_packet.py
 make -C openR1 test
 ```

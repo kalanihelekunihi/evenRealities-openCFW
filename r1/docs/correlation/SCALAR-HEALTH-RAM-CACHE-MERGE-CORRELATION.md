@@ -43,7 +43,7 @@ the HEX SHA-256 is
 Reproduce the evidence with:
 
 ```sh
-python3 tools/summarize_r1_scalar_health_ram_cache_merge.py
+python3 tools/evidence/summarize_r1_scalar_health_ram_cache_merge.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

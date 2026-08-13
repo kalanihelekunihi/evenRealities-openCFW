@@ -95,7 +95,7 @@ The static census pins the application image, all thirteen entry/body hashes, ev
 segment and direct caller, the indirect callback pointer, initial configuration, and event map:
 
 ```sh
-python3 tools/summarize_r1_touch_slider_closure.py
+python3 tools/evidence/summarize_r1_touch_slider_closure.py
 ```
 
 The parser accesses no live GPIO or I2C bus and emits no raw IQS7211E sender. These functions are

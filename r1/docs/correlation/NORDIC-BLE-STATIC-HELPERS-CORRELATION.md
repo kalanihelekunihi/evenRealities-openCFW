@@ -24,7 +24,7 @@ and sets the initialized flag only for success or not-found. `set_security_req` 
 The complete extents, SHA-256 hashes, and direct caller sets are checked by:
 
 ```sh
-python3 tools/summarize_r1_nordic_ble_static_helpers.py
+python3 tools/evidence/summarize_r1_nordic_ble_static_helpers.py
 ```
 
 Provider family is `nordic_nrf5_sdk_17_1_0`; disposition is `use_nordic_sdk`. openR1 compiles the

@@ -83,7 +83,7 @@ library is not enough to authorize a substitute.
 Reproduce with:
 
 ```sh
-python3 tools/summarize_r1_frontier_230_248.py
+python3 tools/evidence/summarize_r1_frontier_230_248.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

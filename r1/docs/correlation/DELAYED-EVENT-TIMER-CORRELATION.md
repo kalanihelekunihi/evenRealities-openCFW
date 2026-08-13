@@ -41,7 +41,7 @@ of BSS; its standalone BIN is 95,040 bytes. The HEX and BIN SHA-256 values are
 Reproduce with:
 
 ```sh
-python3 tools/summarize_r1_delayed_event_timer.py
+python3 tools/evidence/summarize_r1_delayed_event_timer.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

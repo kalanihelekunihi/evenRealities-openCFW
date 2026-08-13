@@ -64,7 +64,7 @@ openCFW/
 │   ├── port/             R1-owned FlashDB/FAL port and configuration
 │   ├── research/         decompilation corpus, image reconstruction, BSim runs
 │   ├── tests/            host, storage, and crypto tests
-│   └── tools/            ~220 evidence scripts, simulator, verifiers
+│   └── tools/            verifiers + evidence/ probes/ ghidra_scripts/
 └── third-party/          shared dependency registry
     ├── README.md         full inventory: pin, license, consuming target
     └── fetched/          non-redistributable upstreams: manifest, fetch, verify

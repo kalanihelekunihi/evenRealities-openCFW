@@ -10,7 +10,7 @@ matches either configured right- or left-side target address. Its 54-byte addres
 implementation is present in these bodies, so only their R1 matching behavior is implemented
 locally.
 
-`../../tools/summarize_r1_peer_target_policy.py`
+`../../tools/evidence/summarize_r1_peer_target_policy.py`
 authenticates the recovered application, function bodies, direct caller sets, erased-address
 literal, and product state pointers.
 

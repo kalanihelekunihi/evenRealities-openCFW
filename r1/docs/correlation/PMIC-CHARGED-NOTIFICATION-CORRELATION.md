@@ -92,7 +92,7 @@ and BIN SHA-256 values are
 Reproduce the closure with:
 
 ```sh
-python3 tools/summarize_r1_pmic_charged_notification.py
+python3 tools/evidence/summarize_r1_pmic_charged_notification.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

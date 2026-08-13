@@ -61,5 +61,5 @@ The image, ordered scatter segments, hashes, required callers, inventory distinc
 variant are checked by:
 
 ```sh
-python3 tools/summarize_r1_nordic_buttonless_dfu_closure.py
+python3 tools/evidence/summarize_r1_nordic_buttonless_dfu_closure.py
 ```

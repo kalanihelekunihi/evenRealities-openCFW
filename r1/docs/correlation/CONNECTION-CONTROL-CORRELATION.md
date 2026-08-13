@@ -93,9 +93,9 @@ address planning, and adapters into those providers.
 Run:
 
 ```sh
-python3 tools/summarize_r1_connection_control.py \
+python3 tools/evidence/summarize_r1_connection_control.py \
   research/decompilation/rebuild/rebuilt-application.bin
-python3 tools/emulate_r1_connection_control.py \
+python3 tools/evidence/emulate_r1_connection_control.py \
   research/decompilation/rebuild/rebuilt-application.bin
 ```
 

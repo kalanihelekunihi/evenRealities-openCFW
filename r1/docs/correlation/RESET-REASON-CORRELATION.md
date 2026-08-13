@@ -67,7 +67,7 @@ The exact bytes, register literal, caller sets, masks, and source boundary are c
 
 ```sh
 PYTHONPATH=tools \
-python3 tools/summarize_r1_reset_reason_closure.py
+python3 tools/evidence/summarize_r1_reset_reason_closure.py
 ```
 
 ## openR1 result

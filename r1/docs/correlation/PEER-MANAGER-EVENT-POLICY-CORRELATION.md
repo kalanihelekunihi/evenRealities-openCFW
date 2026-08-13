@@ -61,7 +61,7 @@ not recreate Nordic internals or the recovered secret-bearing diagnostic helper.
 ## Verification
 
 ```sh
-python3 tools/summarize_r1_peer_manager_event_policy.py
+python3 tools/evidence/summarize_r1_peer_manager_event_policy.py
 python3 tools/verify_openr1.py
 ```
 

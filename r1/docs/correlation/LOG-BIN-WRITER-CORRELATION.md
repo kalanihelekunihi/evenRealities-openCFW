@@ -62,7 +62,7 @@ private log content, and exposes no live sender or flash-mutation interface.
 ## Reproduce
 
 ```sh
-python3 tools/summarize_r1_log_bin_writer.py
+python3 tools/evidence/summarize_r1_log_bin_writer.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

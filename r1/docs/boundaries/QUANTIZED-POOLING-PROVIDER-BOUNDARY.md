@@ -24,7 +24,7 @@ That mixed call topology proves this is shared neural-runtime machinery, but it 
 whether GoMore, Goodix, or another bundled runtime owns the implementation. Similarity to generic
 pooling operations is not enough to substitute CMSIS-NN or another library.
 
-`../../tools/summarize_r1_quantized_pooling_boundary.py`
+`../../tools/evidence/summarize_r1_quantized_pooling_boundary.py`
 authenticates the application, complete executor and constructor bodies, empty direct-caller set,
 all ten constructor callsites, and the exact function pointer.
 
@@ -67,5 +67,5 @@ evidence. Until then both GoMore and Goodix integrations must supply their licen
 and this shared executor remains unavailable.
 
 ```sh
-python3 tools/summarize_r1_quantized_pooling_boundary.py
+python3 tools/evidence/summarize_r1_quantized_pooling_boundary.py
 ```

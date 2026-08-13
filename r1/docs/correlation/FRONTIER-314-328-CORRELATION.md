@@ -50,7 +50,7 @@ weights, tensor ABI, formulas, or substitute neural runtime are implemented.
 Reproduce with:
 
 ```sh
-python3 tools/summarize_r1_frontier_314_328.py
+python3 tools/evidence/summarize_r1_frontier_314_328.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

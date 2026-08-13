@@ -53,7 +53,7 @@ reads no private payload and exposes no live BLE sender.
 ## Reproduce
 
 ```sh
-python3 tools/summarize_r1_ble_tx_queue_dispatch.py
+python3 tools/evidence/summarize_r1_ble_tx_queue_dispatch.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

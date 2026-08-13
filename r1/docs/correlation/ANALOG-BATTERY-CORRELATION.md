@@ -84,7 +84,7 @@ callsites `0x0009127A` and `0x000913CE`. It is now explicitly product-routed rat
 an overlapping unclassified entry. The reconciliation retains the four leading veneer bytes and
 two trailing alignment bytes in the existing 412-byte manual extent; it creates no second
 algorithm implementation. Reproduce this check with
-`python3 tools/summarize_r1_battery_runtime_service.py`.
+`python3 tools/evidence/summarize_r1_battery_runtime_service.py`.
 
 ## Implemented behavior
 

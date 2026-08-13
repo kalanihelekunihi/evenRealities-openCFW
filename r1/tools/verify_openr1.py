@@ -12,6 +12,12 @@ import subprocess
 from collections import Counter
 from pathlib import Path
 
+# --- evidence modules live in tools/evidence/ ---
+import sys as _sys
+from pathlib import Path as _Path
+
+_sys.path.insert(0, str(_Path(__file__).resolve().parent / "evidence"))
+
 from summarize_r1_software_twi_engines import (
     SOFTWARE_TWI_FUNCTIONS,
     summarize as summarize_software_twi,
@@ -1428,7 +1434,7 @@ def main() -> None:
         "0x00029D58..<0x00029D5C",
         "0x0006F8F6..<0x0006F8FA",
         "0x0008E69C..<0x0008E6A0",
-        "python3 tools/summarize_r1_resolved_thunks.py",
+        "python3 tools/evidence/summarize_r1_resolved_thunks.py",
         "aliases of already implemented product-owned metadata operations",
     ):
         require(resolved_thunks_doc, marker)
@@ -1444,7 +1450,7 @@ def main() -> None:
         "0x0007F0C8..<0x0007F0DE",
         "0x00094DD8..<0x00094DF0",
         "components/ble/ble_advertising/ble_advertising.c",
-        "python3 tools/summarize_r1_nordic_advertising_closure.py",
+        "python3 tools/evidence/summarize_r1_nordic_advertising_closure.py",
     ):
         require(nordic_advertising_doc, marker)
     nordic_buttonless_dfu_doc = DOCS / "NORDIC-BUTTONLESS-DFU-CLOSURE.md"
@@ -1457,7 +1463,7 @@ def main() -> None:
         "0x000522D8..<0x00052326",
         "0x0007CDC8..<0x0007CE2C",
         "manual provenance supplement",
-        "python3 tools/summarize_r1_nordic_buttonless_dfu_closure.py",
+        "python3 tools/evidence/summarize_r1_nordic_buttonless_dfu_closure.py",
     ):
         require(nordic_buttonless_dfu_doc, marker)
     nordic_power_mgmt_doc = DOCS / "NORDIC-POWER-MANAGEMENT-CLOSURE.md"
@@ -1467,7 +1473,7 @@ def main() -> None:
         "0x0008F234..<0x0008F328",
         "NRF_PWR_MGMT_CONFIG_USE_SCHEDULER=0",
         "SOFTDEVICE_PRESENT",
-        "python3 tools/summarize_r1_nordic_power_management_closure.py",
+        "python3 tools/evidence/summarize_r1_nordic_power_management_closure.py",
     ):
         require(nordic_power_mgmt_doc, marker)
     reset_trace_doc = DOCS / "RESET-TRACE-CORRELATION.md"
@@ -1480,7 +1486,7 @@ def main() -> None:
         "Modbus CRC16",
         "persist tag `7`",
         "Nordic SDK 17.1.0 CMSIS `NVIC_SystemReset`",
-        "python3 tools/summarize_r1_reset_trace_closure.py",
+        "python3 tools/evidence/summarize_r1_reset_trace_closure.py",
     ):
         require(reset_trace_doc, marker)
     reset_reason_doc = DOCS / "RESET-REASON-CORRELATION.md"
@@ -1491,7 +1497,7 @@ def main() -> None:
         "0x00081FB8..<0x0008203E",
         "0x0007000F",
         "Nordic `nrf_power_resetreas_get/clear`",
-        "python3 tools/summarize_r1_reset_reason_closure.py",
+        "python3 tools/evidence/summarize_r1_reset_reason_closure.py",
     ):
         require(reset_reason_doc, marker)
     connection_control_doc = DOCS / "CONNECTION-CONTROL-CORRELATION.md"
@@ -1503,8 +1509,8 @@ def main() -> None:
         "event `0x00000200`",
         "device-info offsets 8 and 14",
         "unclassified along with unresolved timer/role/accessor callees",
-        "python3 tools/summarize_r1_connection_control.py",
-        "python3 tools/emulate_r1_connection_control.py",
+        "python3 tools/evidence/summarize_r1_connection_control.py",
+        "python3 tools/evidence/emulate_r1_connection_control.py",
     ):
         require(connection_control_doc, marker)
     peer_manager_event_doc = DOCS / "PEER-MANAGER-EVENT-POLICY-CORRELATION.md"
@@ -1518,7 +1524,7 @@ def main() -> None:
         "allow_repairing = true",
         "performs no whitelist mutation",
         "never logs",
-        "python3 tools/summarize_r1_peer_manager_event_policy.py",
+        "python3 tools/evidence/summarize_r1_peer_manager_event_policy.py",
     ):
         require(peer_manager_event_doc, marker)
     nv_recovery_doc = DOCS / "NV-RECOVERY-CORRELATION.md"
@@ -1533,7 +1539,7 @@ def main() -> None:
         "CRC-16/MODBUS",
         "fill-only merge planner",
         "normal dispatcher continues to refuse live `nvRecover`",
-        "python3 tools/summarize_r1_nv_recovery_closure.py",
+        "python3 tools/evidence/summarize_r1_nv_recovery_closure.py",
     ):
         require(nv_recovery_doc, marker)
     nv_compiled_restore_doc = DOCS / "NV-COMPILED-RESTORE-CORRELATION.md"
@@ -1545,7 +1551,7 @@ def main() -> None:
         "4f0fe353d4a0b2d5ecdfc49a1a6d8c73f790d693c12ca3462ecbacb0bee5cf5c",
         "raw 59 identity rows are intentionally neither rendered",
         "live restore path remains disabled",
-        "python3 tools/summarize_r1_nv_compiled_restore.py",
+        "python3 tools/evidence/summarize_r1_nv_compiled_restore.py",
     ):
         require(nv_compiled_restore_doc, marker)
     touch_slider_doc = DOCS / "TOUCH-SLIDER-CORRELATION.md"
@@ -1560,7 +1566,7 @@ def main() -> None:
         "213.3333282470703",
         "2,501-raw-unit window",
         "0x80",
-        "python3 tools/summarize_r1_touch_slider_closure.py",
+        "python3 tools/evidence/summarize_r1_touch_slider_closure.py",
     ):
         require(touch_slider_doc, marker)
     health_daily_test_doc = DOCS / "HEALTH-DAILY-TEST-CORRELATION.md"
@@ -1571,7 +1577,7 @@ def main() -> None:
         "0x0008D40C..<0x0008D4C2",
         "0x0008E560..<0x0008E626",
         "75cfeeac1565b8d44e251089066133f06e946af53ed3a849f230787c436ee255",
-        "python3 tools/summarize_r1_health_daily_test.py",
+        "python3 tools/evidence/summarize_r1_health_daily_test.py",
     ):
         require(health_daily_test_doc, marker)
     gomore_neural_runtime_doc = DOCS / "GOMORE-NEURAL-RUNTIME-BOUNDARY.md"
@@ -1585,7 +1591,7 @@ def main() -> None:
         "0x0002966C",
         "0x0004387C",
         "61c6cdae7f85eb4096726de5fe67c5c7f85ce4bc6991ef4d45a19825779875ea",
-        "python3 tools/summarize_r1_gomore_neural_runtime.py",
+        "python3 tools/evidence/summarize_r1_gomore_neural_runtime.py",
     ):
         require(gomore_neural_runtime_doc, marker)
     gomore_sleep_graph_doc = DOCS / "GOMORE-SLEEP-GRAPH-PROVIDER-BOUNDARY.md"
@@ -1602,7 +1608,7 @@ def main() -> None:
         "21,824",
         "0x0004387C",
         "vendor_source_required_not_redistributable",
-        "python3 tools/summarize_r1_gomore_sleep_graphs.py",
+        "python3 tools/evidence/summarize_r1_gomore_sleep_graphs.py",
     ):
         require(gomore_sleep_graph_doc, marker)
     gomore_activity_state_doc = DOCS / "GOMORE-ACTIVITY-STATE-PROVIDER-BOUNDARY.md"
@@ -1619,7 +1625,7 @@ def main() -> None:
         "250 samples",
         "seven internal states",
         "vendor_source_required_not_redistributable",
-        "python3 tools/summarize_r1_gomore_activity_state_classifier.py",
+        "python3 tools/evidence/summarize_r1_gomore_activity_state_classifier.py",
     ):
         require(gomore_activity_state_doc, marker)
     gomore_energy_model_doc = DOCS / "GOMORE-ENERGY-MODEL-PROVIDER-BOUNDARY.md"
@@ -1632,7 +1638,7 @@ def main() -> None:
         "0x00088D4C..<0x00088D4E",
         "4a1eeec9e1e5b6b5563e814c2f17e74d9adb8f1af90fe46a85e6bf95c59aed6a",
         "vendor_source_required_not_redistributable",
-        "python3 tools/summarize_r1_gomore_energy_model.py",
+        "python3 tools/evidence/summarize_r1_gomore_energy_model.py",
     ):
         require(gomore_energy_model_doc, marker)
     gomore_iir_designer_doc = DOCS / "GOMORE-IIR-DESIGNER-PROVIDER-BOUNDARY.md"
@@ -1647,7 +1653,7 @@ def main() -> None:
         "248 exact functions",
         "vendor_source_required_not_redistributable",
         "emits no algorithm or generated coefficients",
-        "python3 tools/summarize_r1_gomore_iir_designer.py",
+        "python3 tools/evidence/summarize_r1_gomore_iir_designer.py",
     ):
         require(gomore_iir_designer_doc, marker)
     gomore_auth_parser_doc = DOCS / "GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md"
@@ -1662,7 +1668,7 @@ def main() -> None:
         "0x00027854",
         "vendor_source_required_not_redistributable",
         "exposes no live authentication operation",
-        "python3 tools/summarize_r1_gomore_auth_parser.py",
+        "python3 tools/evidence/summarize_r1_gomore_auth_parser.py",
     ):
         require(gomore_auth_parser_doc, marker)
     gomore_sleep_statistics_doc = \
@@ -1677,7 +1683,7 @@ def main() -> None:
         "seven-value interval/efficiency block",
         "twelve-value stage-statistics block",
         "vendor_source_required_not_redistributable",
-        "python3 tools/summarize_r1_gomore_sleep_stage_statistics.py",
+        "python3 tools/evidence/summarize_r1_gomore_sleep_stage_statistics.py",
     ):
         require(gomore_sleep_statistics_doc, marker)
     structured_log_doc = DOCS / "STRUCTURED-LOG-CACHE-CORRELATION.md"
@@ -1698,7 +1704,7 @@ def main() -> None:
         "Arm C/EABI",
         "log.bin` flash writer",
         "no live ring or private log content",
-        "python3 tools/summarize_r1_structured_log_cache.py",
+        "python3 tools/evidence/summarize_r1_structured_log_cache.py",
     ):
         require(structured_log_doc, marker)
     log_bin_writer_doc = DOCS / "LOG-BIN-WRITER-CORRELATION.md"
@@ -1714,7 +1720,7 @@ def main() -> None:
         "flash device's read, write, and erase callbacks",
         "composite private-log virtual file",
         "exposes no live sender or flash-mutation interface",
-        "python3 tools/summarize_r1_log_bin_writer.py",
+        "python3 tools/evidence/summarize_r1_log_bin_writer.py",
     ):
         require(log_bin_writer_doc, marker)
     hrv_sync_flush_doc = DOCS / "HRV-SYNC-FLUSH-CORRELATION.md"
@@ -1731,7 +1737,7 @@ def main() -> None:
         "0x0008ACFC",
         "0x0008362C",
         "exposes no live sender",
-        "python3 tools/summarize_r1_hrv_sync_flush.py",
+        "python3 tools/evidence/summarize_r1_hrv_sync_flush.py",
     ):
         require(hrv_sync_flush_doc, marker)
     hr_sync_flush_doc = DOCS / "HR-SYNC-FLUSH-CORRELATION.md"
@@ -1748,7 +1754,7 @@ def main() -> None:
         "0x0008ACFC",
         "0x0008359E",
         "exposes no live sender",
-        "python3 tools/summarize_r1_hr_sync_flush.py",
+        "python3 tools/evidence/summarize_r1_hr_sync_flush.py",
     ):
         require(hr_sync_flush_doc, marker)
     spo2_sync_flush_doc = DOCS / "SPO2-SYNC-FLUSH-CORRELATION.md"
@@ -1765,7 +1771,7 @@ def main() -> None:
         "0x0008ACFC",
         "0x00083792",
         "exposes no live sender",
-        "python3 tools/summarize_r1_spo2_sync_flush.py",
+        "python3 tools/evidence/summarize_r1_spo2_sync_flush.py",
     ):
         require(spo2_sync_flush_doc, marker)
     touch_task_dispatcher_doc = DOCS / "TOUCH-TASK-DISPATCHER-CORRELATION.md"
@@ -1781,7 +1787,7 @@ def main() -> None:
         "0x00046F54",
         "clean_room_adapter_only_use_pinned_provider",
         "performs no live GPIO or I2C operation",
-        "python3 tools/summarize_r1_touch_task_dispatcher.py",
+        "python3 tools/evidence/summarize_r1_touch_task_dispatcher.py",
     ):
         require(touch_task_dispatcher_doc, marker)
     sensor_stream_framework_doc = DOCS / "SENSOR-STREAM-FRAMEWORK-BOUNDARY.md"
@@ -1803,9 +1809,9 @@ def main() -> None:
         "0x0006F228",
         "1024 / maximum_rate",
         "must not clone this unidentified registry architecture",
-        "python3 tools/summarize_r1_sensor_stream_register.py",
-        "python3 tools/summarize_r1_sensor_stream_unregister.py",
-        "python3 tools/summarize_r1_sensor_stream_dispatch.py",
+        "python3 tools/evidence/summarize_r1_sensor_stream_register.py",
+        "python3 tools/evidence/summarize_r1_sensor_stream_unregister.py",
+        "python3 tools/evidence/summarize_r1_sensor_stream_dispatch.py",
     ):
         require(sensor_stream_framework_doc, marker)
     ble_tx_queue_doc = DOCS / "BLE-TX-QUEUE-DISPATCH-CORRELATION.md"
@@ -1821,7 +1827,7 @@ def main() -> None:
         "0x0004CB34",
         "0x0004CBA4",
         "exposes no live BLE sender",
-        "python3 tools/summarize_r1_ble_tx_queue_dispatch.py",
+        "python3 tools/evidence/summarize_r1_ble_tx_queue_dispatch.py",
     ):
         require(ble_tx_queue_doc, marker)
     wear_fusion_doc = DOCS / "WEAR-FUSION-CORRELATION.md"
@@ -1832,7 +1838,7 @@ def main() -> None:
         "9,050,000",
         "strictly between `972.0` and `1076.0`",
         "sensor-stream framework",
-        "tools/summarize_r1_wear_fusion_closure.py",
+        "tools/evidence/summarize_r1_wear_fusion_closure.py",
     ):
         require(wear_fusion_doc, marker)
     connection_parameter_doc = DOCS / "CONNECTION-PARAMETER-POLICY-CORRELATION.md"
@@ -1842,7 +1848,7 @@ def main() -> None:
         "strictly below `50`",
         "4 ms delay",
         "2,000 ms",
-        "tools/summarize_r1_connection_parameter_policy.py",
+        "tools/evidence/summarize_r1_connection_parameter_policy.py",
     ):
         require(connection_parameter_doc, marker)
     sleep_sync_packet_doc = DOCS / "SLEEP-SYNC-PACKET-CORRELATION.md"
@@ -1852,7 +1858,7 @@ def main() -> None:
         "d3804f3dd415358d10ced85de5f8cccc64da4db33d40e37830d05096b7b86ac5",
         "946080000",
         "r1_sleep_build_sync_packet",
-        "tools/summarize_r1_sleep_sync_packet.py",
+        "tools/evidence/summarize_r1_sleep_sync_packet.py",
     ):
         require(sleep_sync_packet_doc, marker)
     nfc_dock_policy_doc = DOCS / "NFC-DOCK-POLICY-CORRELATION.md"
@@ -1862,7 +1868,7 @@ def main() -> None:
         "ae5760b9a6ac03ac46642f7e19b90b11b0e630c406e443902ce1cb31c99a30e1",
         "23-byte product packet",
         "heartbeat 61",
-        "tools/summarize_r1_nfc_dock_policy.py",
+        "tools/evidence/summarize_r1_nfc_dock_policy.py",
     ):
         require(nfc_dock_policy_doc, marker)
     peer_target_doc = DOCS / "PEER-TARGET-POLICY-CORRELATION.md"
@@ -1873,7 +1879,7 @@ def main() -> None:
         "three seven-byte slots",
         "accepts the connection",
         "must not be promoted into a trust boundary",
-        "tools/summarize_r1_peer_target_policy.py",
+        "tools/evidence/summarize_r1_peer_target_policy.py",
     ):
         require(peer_target_doc, marker)
     legacy_command_dispatch_doc = DOCS / "LEGACY-COMMAND-DISPATCH-CORRELATION.md"
@@ -1885,7 +1891,7 @@ def main() -> None:
         "0x2001A174",
         "3-to-36-byte",
         "handler retains its own ownership",
-        "python3 tools/summarize_r1_legacy_command_dispatch.py",
+        "python3 tools/evidence/summarize_r1_legacy_command_dispatch.py",
     ):
         require(legacy_command_dispatch_doc, marker)
     validated_sleep_delivery_doc = DOCS / "VALIDATED-SLEEP-DELIVERY-CORRELATION.md"
@@ -1899,7 +1905,7 @@ def main() -> None:
         "argument `6`",
         "at most 3,888 bytes",
         "destructive reset",
-        "python3 tools/summarize_r1_validated_sleep_delivery.py",
+        "python3 tools/evidence/summarize_r1_validated_sleep_delivery.py",
     ):
         require(validated_sleep_delivery_doc, marker)
     quantized_pooling_doc = DOCS / "QUANTIZED-POOLING-PROVIDER-BOUNDARY.md"
@@ -1917,7 +1923,7 @@ def main() -> None:
         "Goodix GH_SPO2 graph",
         "unknown_shared_quantized_neural_runtime_candidate",
         "Similarity to generic",
-        "python3 tools/summarize_r1_quantized_pooling_boundary.py",
+        "python3 tools/evidence/summarize_r1_quantized_pooling_boundary.py",
     ):
         require(quantized_pooling_doc, marker)
     connection_role_doc = DOCS / "CONNECTION-ROLE-ASSIGNMENT-CORRELATION.md"
@@ -1927,7 +1933,7 @@ def main() -> None:
         "0x0004DA28..<0x0004DBD6",
         "0x200064B2",
         "R1_CONNECTION_ROLE_ASSIGN_CROSS_ROLE_CONFLICT",
-        "python3 tools/summarize_r1_connection_role_assignment.py",
+        "python3 tools/evidence/summarize_r1_connection_role_assignment.py",
     ):
         require(connection_role_doc, marker)
     eus_rx_doc = DOCS / "EUS-RX-REASSEMBLY-CORRELATION.md"
@@ -1940,7 +1946,7 @@ def main() -> None:
         "(first_sequence + 1) * 239",
         "duplicate or discontinuous sequences",
         "clean_room_behavior_only_security_preserving",
-        "python3 tools/summarize_r1_eus_rx_reassembly.py",
+        "python3 tools/evidence/summarize_r1_eus_rx_reassembly.py",
     ):
         require(eus_rx_doc, marker)
     bae8_router_doc = DOCS / "BAE8-EVENT-ROUTER-CORRELATION.md"
@@ -1954,7 +1960,7 @@ def main() -> None:
         "service callback offset `0x2C`",
         "`6`, `7`",
         "r1_runtime_plan_bae8_event",
-        "python3 tools/summarize_r1_bae8_event_router.py",
+        "python3 tools/evidence/summarize_r1_bae8_event_router.py",
     ):
         require(bae8_router_doc, marker)
     ati_calibration_doc = DOCS / "ATI-CALIBRATION-COMMAND-CORRELATION.md"
@@ -1968,7 +1974,7 @@ def main() -> None:
         "`0x40` through `0x800`",
         "source `2`",
         "r1_ati_calibration_plan_command",
-        "python3 tools/summarize_r1_ati_calibration_command.py",
+        "python3 tools/evidence/summarize_r1_ati_calibration_command.py",
     ):
         require(ati_calibration_doc, marker)
     pmic_charge_event_doc = DOCS / "PMIC-CHARGE-EVENT-CORRELATION.md"
@@ -1984,7 +1990,7 @@ def main() -> None:
         "0x4160F5C3",
         "02=F8",
         "r1_pmic_plan_charge_event",
-        "python3 tools/summarize_r1_pmic_charge_event.py",
+        "python3 tools/evidence/summarize_r1_pmic_charge_event.py",
     ):
         require(pmic_charge_event_doc, marker)
     pmic_charged_notification_doc = \
@@ -2000,7 +2006,7 @@ def main() -> None:
         "while retaining\nthe incremented counter",
         "5,120 ms",
         "r1_pmic_plan_charged_notification",
-        "python3 tools/summarize_r1_pmic_charged_notification.py",
+        "python3 tools/evidence/summarize_r1_pmic_charged_notification.py",
     ):
         require(pmic_charged_notification_doc, marker)
     iqs_ati_audit_doc = DOCS / "IQS7211E-ATI-AUDIT-CORRELATION.md"
@@ -2013,7 +2019,7 @@ def main() -> None:
         "21 little-endian UInt16",
         "r1_iqs7211e_ati_audit_begin",
         "r1_iqs7211e_ati_audit_summarize",
-        "python3 tools/summarize_r1_iqs7211e_ati_audit.py",
+        "python3 tools/evidence/summarize_r1_iqs7211e_ati_audit.py",
     ):
         require(iqs_ati_audit_doc, marker)
     goodix_nadt_doc = DOCS / "GOODIX-NADT-PROVIDER-BOUNDARY.md"
@@ -2040,7 +2046,7 @@ def main() -> None:
         "548d894d",
         "25 samples",
         "vendor_source_required_not_redistributable",
-        "python3 tools/summarize_r1_goodix_nadt_boundary.py",
+        "python3 tools/evidence/summarize_r1_goodix_nadt_boundary.py",
     ):
         require(goodix_nadt_doc, marker)
     goodix_hr_doc = DOCS / "GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md"
@@ -2054,7 +2060,7 @@ def main() -> None:
         "GH_HR_exc_pv_v2.0.3.0_CONF_nc_21d2063d_002271a1",
         "vendor_source_required_not_redistributable",
         "0x00032808..<0x00032C10",
-        "python3 tools/summarize_r1_goodix_hr_boundary.py",
+        "python3 tools/evidence/summarize_r1_goodix_hr_boundary.py",
     ):
         require(goodix_hr_doc, marker)
     goodix_hrv_doc = DOCS / "GOODIX-HRV-PROVIDER-BOUNDARY.md"
@@ -2070,7 +2076,7 @@ def main() -> None:
         "pv_v1.1.0",
         "GH_HRV_pre_pv_v1.0.1.0_ed953ff3",
         "vendor_source_required_not_redistributable",
-        "python3 tools/summarize_r1_goodix_hrv_boundary.py",
+        "python3 tools/evidence/summarize_r1_goodix_hrv_boundary.py",
     ):
         require(goodix_hrv_doc, marker)
     goodix_channel_decoder_doc = DOCS / "GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md"
@@ -2085,7 +2091,7 @@ def main() -> None:
         "0x00061ECA",
         "vendor_source_required_not_redistributable",
         "emits no private coefficients",
-        "python3 tools/summarize_r1_goodix_channel_decoder.py",
+        "python3 tools/evidence/summarize_r1_goodix_channel_decoder.py",
     ):
         require(goodix_channel_decoder_doc, marker)
     goodix_nadt_quality_doc = DOCS / "GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md"
@@ -2097,7 +2103,7 @@ def main() -> None:
         "21a9202e4352d08144ee2a1e8a2bf7e63d6776a408fda69b0a98923af823fb52",
         "vendor_source_required_not_redistributable",
         "emits no private thresholds",
-        "python3 tools/summarize_r1_goodix_nadt_quality.py",
+        "python3 tools/evidence/summarize_r1_goodix_nadt_quality.py",
     ):
         require(goodix_nadt_quality_doc, marker)
     goodix_nadt_peak_mask_doc = DOCS / "GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md"
@@ -2108,7 +2114,7 @@ def main() -> None:
         "GH_NADT_pre v1.0.2.0 / 548d894d",
         "vendor_source_required_not_redistributable",
         "emits no algorithm implementation",
-        "python3 tools/summarize_r1_goodix_nadt_peak_mask.py",
+        "python3 tools/evidence/summarize_r1_goodix_nadt_peak_mask.py",
     ):
         require(goodix_nadt_peak_mask_doc, marker)
     goodix_nadt_accumulation_doc = \
@@ -2121,7 +2127,7 @@ def main() -> None:
         "0x0009293E..<0x0009295A",
         "GH_NADT_pre v1.0.2.0 / 548d894d",
         "vendor_source_required_not_redistributable",
-        "python3 tools/summarize_r1_goodix_nadt_accumulation.py",
+        "python3 tools/evidence/summarize_r1_goodix_nadt_accumulation.py",
     ):
         require(goodix_nadt_accumulation_doc, marker)
     goodix_register_profile_doc = DOCS / "GOODIX-REGISTER-PROFILE-PROVIDER-BOUNDARY.md"
@@ -2132,7 +2138,7 @@ def main() -> None:
         "f00d34b85455f97445d8df49ec029d56a569c909aa1fcc2c5941c90202669f0e",
         "vendor_source_required_not_redistributable",
         "no live register I/O",
-        "python3 tools/summarize_r1_goodix_register_profile.py",
+        "python3 tools/evidence/summarize_r1_goodix_register_profile.py",
     ):
         require(goodix_register_profile_doc, marker)
     goodix_spo2_dlcom_doc = DOCS / "GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md"
@@ -2165,7 +2171,7 @@ def main() -> None:
         "1f1cf98b",
         "vendor_source_required_not_redistributable",
         "outside-caller exclusivity",
-        "python3 tools/summarize_r1_goodix_spo2_dlcom_boundary.py",
+        "python3 tools/evidence/summarize_r1_goodix_spo2_dlcom_boundary.py",
     ):
         require(goodix_spo2_dlcom_doc, marker)
     time_calendar_boundary = DOCS / "TIME-CALENDAR-PROVIDER-BOUNDARY.md"
@@ -2784,115 +2790,115 @@ def main() -> None:
         "--check",
     ], check=True)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_wear_fusion_closure.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_connection_parameter_policy.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_sleep_sync_packet.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_nfc_dock_policy.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_peer_target_policy.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_legacy_command_dispatch.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_validated_sleep_delivery.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_quantized_pooling_boundary.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_connection_role_assignment.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_eus_rx_reassembly.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_bae8_event_router.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_35x.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_334_342.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_314_328.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_280_308.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_264_274.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_256_262.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_230_248.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_224_230.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_frontier_204_210.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_pmic_charge_event.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_pmic_charged_notification.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_iqs7211e_ati_audit.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_hrv_ram_cache_merge.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_scalar_health_ram_cache_merge.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_protocol_response.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_export_state_machine.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
-        "python3", str(ROOT / "tools" /
+        "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_delayed_event_timer.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     with (DOCS / "FUNCTION-OWNERSHIP.csv").open(newline="") as handle:

@@ -16,7 +16,7 @@ The pointer literals at `0x00095BCC` and `0x00095BE4`, direct caller sets, and
 complete bodies are verifier-pinned. The static census is reproducible with:
 
 ```sh
-python3 tools/summarize_r1_freertos_static_memory.py
+python3 tools/evidence/summarize_r1_freertos_static_memory.py
 ```
 
 ## Provider/configuration split

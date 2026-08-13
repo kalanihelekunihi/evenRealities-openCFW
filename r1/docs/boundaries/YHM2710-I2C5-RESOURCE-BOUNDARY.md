@@ -56,7 +56,7 @@ explicitly `yhmicros_yhm2710_candidate`. The remaining 18-byte initcall at
 `0x000565F4..<0x00056606` is configuration-only: OpenR1 may preserve a direct typed provider
 binding, but may not recreate the transport or the stock registry. Exact segments, including the
 three-block `0x0005CBE4` function, and every digest are emitted by
-`../../tools/summarize_r1_pmic_transport.py`.
+`../../tools/evidence/summarize_r1_pmic_transport.py`.
 
 The exact production descriptor is software-driven I2C-style state-command
 framing, not ordinary addressed I2C:
@@ -69,7 +69,7 @@ framing, not ordinary addressed I2C:
 - no fixed slave-address phase (odd command values remain odd).
 
 The `i2c_5` facts are preserved by the immutable parser
-`../../tools/summarize_r1_pmic_transport.py`.
+`../../tools/evidence/summarize_r1_pmic_transport.py`.
 The separately recovered P1.01 state-command evidence is likewise static and is not used to create
 a replacement live sender.
 

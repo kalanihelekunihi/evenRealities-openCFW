@@ -18,7 +18,7 @@ local C. Nordic owns the low-level RTC driver; OpenR1 may reproduce only separat
 configuration and must keep the generic device layer abstract until its implementation ownership
 is established.
 
-`tools/summarize_r1_rtc_device_boundary.py` checks every body against the rebuilt
+`tools/evidence/summarize_r1_rtc_device_boundary.py` checks every body against the rebuilt
 application image. It is static and read-only, exposes no live clock mutation or callback
 registration, and has no signing/deployment path.
 

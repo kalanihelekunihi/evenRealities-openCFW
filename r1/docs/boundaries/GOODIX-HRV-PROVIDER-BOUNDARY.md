@@ -49,5 +49,5 @@ remains separate from this boundary.
 The static verifier can reproduce the census with:
 
 ```sh
-python3 tools/summarize_r1_goodix_hrv_boundary.py
+python3 tools/evidence/summarize_r1_goodix_hrv_boundary.py
 ```

@@ -8,7 +8,7 @@ device registry. Local code is limited to the recovered fixed configuration, one
 lifecycle, and scheduler feed seam.
 
 The immutable census is
-`../../tools/summarize_r1_watchdog_device_boundary.py`.
+`../../tools/evidence/summarize_r1_watchdog_device_boundary.py`.
 It validates seven exact functions totaling 386 executable bytes against the rebuilt application.
 
 ## Exact function split

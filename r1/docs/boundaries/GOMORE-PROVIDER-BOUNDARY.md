@@ -102,7 +102,7 @@ SHA-pinned GoMore sleep body at `0x0006FEA0`; it initializes ten already gated G
 plus the newly bounded helpers. The 8-byte reset at `0x00071D96` is byte-identical to the already
 gated reset at `0x0007170A`, but the classification relies on this exclusive call context rather
 than on generic bytes alone. The complete 586-byte census and caller sets are pinned by
-`../../tools/summarize_r1_gomore_initializer_boundary.py`.
+`../../tools/evidence/summarize_r1_gomore_initializer_boundary.py`.
 
 The earlier audit treated `GH_HRV_pre_pv_v1.0.1.0_ed953ff3` as a GoMore version marker. Goodix's
 primary-source developer trace reproduces that exact string and identifies it as a GH3X2X

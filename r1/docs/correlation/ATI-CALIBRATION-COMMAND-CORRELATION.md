@@ -66,7 +66,7 @@ arguments.
 ## Reproduce
 
 ```sh
-python3 tools/summarize_r1_ati_calibration_command.py
+python3 tools/evidence/summarize_r1_ati_calibration_command.py
 python3 tools/build_r1_source_ownership.py --check
 make -C openR1 test
 make -C openR1 sanitize

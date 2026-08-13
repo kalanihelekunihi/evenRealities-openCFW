@@ -23,5 +23,5 @@ conflict, invalid handle, and null state.
 Evidence is reproducible with:
 
 ```sh
-python3 tools/summarize_r1_connection_role_assignment.py
+python3 tools/evidence/summarize_r1_connection_role_assignment.py
 ```

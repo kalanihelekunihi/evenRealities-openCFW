@@ -41,7 +41,7 @@ hardening; permissive malformed-train behavior is not compatibility functionalit
 ## Verification
 
 ```sh
-python3 tools/summarize_r1_eus_rx_reassembly.py
+python3 tools/evidence/summarize_r1_eus_rx_reassembly.py
 ```
 
 The read-only summarizer pins the application image, exact body, sole caller, bounds, checksum

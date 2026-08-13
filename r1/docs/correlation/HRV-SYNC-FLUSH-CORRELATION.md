@@ -56,7 +56,7 @@ The summarizer is static, reads no private history, and exposes no live sender.
 ## Reproduce
 
 ```sh
-python3 tools/summarize_r1_hrv_sync_flush.py
+python3 tools/evidence/summarize_r1_hrv_sync_flush.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

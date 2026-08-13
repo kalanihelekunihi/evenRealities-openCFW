@@ -47,7 +47,7 @@ logging, and response transport remain provider seams.
 Reproduce with:
 
 ```sh
-python3 tools/summarize_r1_frontier_35x.py
+python3 tools/evidence/summarize_r1_frontier_35x.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

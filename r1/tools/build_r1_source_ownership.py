@@ -16,6 +16,12 @@ import re
 from collections import Counter
 from pathlib import Path
 
+# --- evidence modules live in tools/evidence/ ---
+import sys as _sys
+from pathlib import Path as _Path
+
+_sys.path.insert(0, str(_Path(__file__).resolve().parent / "evidence"))
+
 from summarize_r1_software_twi_engines import SOFTWARE_TWI_FUNCTIONS
 from summarize_r1_rtc_device_boundary import RTC_DEVICE_FUNCTIONS
 from summarize_r1_pmic_transport import YHM2710_STACMD_FUNCTIONS

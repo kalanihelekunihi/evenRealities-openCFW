@@ -8,7 +8,7 @@ delay selection, and a product field-seen flag. They do not implement ST registe
 mailbox transport and are eligible for a clean-room behavioral implementation.
 
 The evidence gate is
-`../../tools/summarize_r1_nfc_dock_policy.py`.
+`../../tools/evidence/summarize_r1_nfc_dock_policy.py`.
 It checks the recovered application SHA-256, every function body, direct caller set, the dock
 state pointer, the shared field-seen state pointer, and the delayed-callback pointer.
 

@@ -41,7 +41,7 @@ remain outside this closure. No adjacent function changes ownership by associati
 ## Verification
 
 ```sh
-python3 tools/summarize_r1_bae8_event_router.py
+python3 tools/evidence/summarize_r1_bae8_event_router.py
 ```
 
 The static summarizer validates the recovered application hash, complete callback body, absence of

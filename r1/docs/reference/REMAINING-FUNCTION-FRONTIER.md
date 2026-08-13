@@ -310,7 +310,7 @@ The 406-byte GH_HR private-context initializer at `0x0006D204` is now Goodix-gat
 only private ABI `pv_v1.1.0`, allocates 0x150/0x158-byte contexts, seeds private defaults, and is
 called solely by the already gated `0x0006D3C0` heart-rate wrapper. No private layout, default,
 or biometric algorithm is implemented locally. Reproduce with
-`python3 tools/summarize_r1_goodix_hr_init_boundary.py`.
+`python3 tools/evidence/summarize_r1_goodix_hr_init_boundary.py`.
 
 The native 406-byte R1 battery runtime entry at `0x00031FD0` is now reconciled with the already
 accepted 412-byte `0x00031FCC..<0x00032168` veneer-plus-body extent. Exact body/caller pins show

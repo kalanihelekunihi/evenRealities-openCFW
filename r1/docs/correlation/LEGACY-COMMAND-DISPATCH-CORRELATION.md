@@ -11,7 +11,7 @@ copies the received legacy command frame into it, reads the opcode at byte offse
 `be3357d945c4470611d70da7e97691fe9fb6a87bbda16b8da2e6d3eea48e3ca1` and one direct caller,
 at `0x0004514E`.
 
-`../../tools/summarize_r1_legacy_command_dispatch.py`
+`../../tools/evidence/summarize_r1_legacy_command_dispatch.py`
 authenticates the recovered application, complete function body, caller set, workspace pointer
 `0x2001A174`, and routing metadata.
 
@@ -53,5 +53,5 @@ oversized frames/workspaces, an unknown opcode, and null arguments.
 Reproduce the evidence check with:
 
 ```sh
-python3 tools/summarize_r1_legacy_command_dispatch.py
+python3 tools/evidence/summarize_r1_legacy_command_dispatch.py
 ```

@@ -16,7 +16,7 @@ calls the SoftDevice, schedules a timer, logs, or opens BLE.
 
 ## Exact closure
 
-`tools/summarize_r1_connection_parameter_policy.py` authenticates the recovered
+`tools/evidence/summarize_r1_connection_parameter_policy.py` authenticates the recovered
 application and pins:
 
 | Function | Bytes | SHA-256 | Role |
@@ -58,7 +58,7 @@ boundary here; it is not admitted or recreated until its broader event-routing o
 ## Reproduction
 
 ```sh
-python3 tools/summarize_r1_connection_parameter_policy.py
+python3 tools/evidence/summarize_r1_connection_parameter_policy.py
 make -C openR1 test
 make -C openR1 sanitize
 make -C openR1 arm-objects

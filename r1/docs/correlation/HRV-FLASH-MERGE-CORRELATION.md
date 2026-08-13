@@ -23,7 +23,7 @@ the seven-byte slot representation; no provider body is copied.
 Reproduce with:
 
 ```sh
-python3 tools/summarize_r1_hrv_flash_merge.py
+python3 tools/evidence/summarize_r1_hrv_flash_merge.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

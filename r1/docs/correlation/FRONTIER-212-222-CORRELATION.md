@@ -86,7 +86,7 @@ SHA-256 `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`.
 Reproduce with:
 
 ```sh
-python3 tools/summarize_r1_frontier_212_222.py
+python3 tools/evidence/summarize_r1_frontier_212_222.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

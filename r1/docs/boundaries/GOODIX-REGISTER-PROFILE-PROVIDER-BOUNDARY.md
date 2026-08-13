@@ -30,7 +30,7 @@ and emits no private profile blob.
 ## Reproduce
 
 ```sh
-python3 tools/summarize_r1_goodix_register_profile.py
+python3 tools/evidence/summarize_r1_goodix_register_profile.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```

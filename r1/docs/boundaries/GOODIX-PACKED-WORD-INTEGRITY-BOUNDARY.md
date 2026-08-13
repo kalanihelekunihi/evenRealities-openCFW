@@ -23,7 +23,7 @@ This attribution does not rest on byte identity alone:
 The static census is reproducible with:
 
 ```sh
-python3 tools/summarize_r1_goodix_integrity_boundary.py
+python3 tools/evidence/summarize_r1_goodix_integrity_boundary.py
 ```
 
 ## Exact function census

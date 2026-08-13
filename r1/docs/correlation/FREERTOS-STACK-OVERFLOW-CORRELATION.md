@@ -14,7 +14,7 @@ forms at `0x00095C44` and `0x00095C70`, the complete body, and its caller are
 verifier-pinned. The census is reproducible with:
 
 ```sh
-python3 tools/summarize_r1_freertos_stack_overflow.py
+python3 tools/evidence/summarize_r1_freertos_stack_overflow.py
 ```
 
 ## Recovered kernel configuration

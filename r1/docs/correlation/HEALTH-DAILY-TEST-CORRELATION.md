@@ -28,7 +28,7 @@ Intervening production functions and literal/string pools are excluded.
 The static verifier is reproducible with:
 
 ```sh
-python3 tools/summarize_r1_health_daily_test.py
+python3 tools/evidence/summarize_r1_health_daily_test.py
 ```
 
 The census emits no provider source and performs no live write. Ownership is

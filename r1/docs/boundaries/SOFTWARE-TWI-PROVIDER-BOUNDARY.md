@@ -5,7 +5,7 @@
 Forty recovered functions occupy 3,524 executable bytes in the rebuilt application image. They
 form four compiler-instantiated GPIO-driven two-wire engines, one each for `i2c_2` through
 `i2c_5`. Every extent and SHA-256 digest is checked by
-`tools/summarize_r1_software_twi_engines.py` and the complete OpenR1 verifier.
+`tools/evidence/summarize_r1_software_twi_engines.py` and the complete OpenR1 verifier.
 
 The behavior is high-confidence evidence, but source ownership is unresolved. The ownership
 ledger therefore assigns every body to `unknown_software_twi_provider_candidate` with

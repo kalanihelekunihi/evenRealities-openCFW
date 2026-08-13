@@ -19,7 +19,7 @@ inlined into this recovered 14-byte body.
 The static census is reproducible with:
 
 ```sh
-python3 tools/summarize_r1_nordic_system_init.py
+python3 tools/evidence/summarize_r1_nordic_system_init.py
 ```
 
 ## Source route
