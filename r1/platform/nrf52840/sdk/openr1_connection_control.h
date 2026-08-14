@@ -24,11 +24,12 @@
  * product authorization and owned-hardware validation.
  *
  * The caller must not be the SoftDevice event thread: the kv commit
- * mutates flash, which openr1_storage rejects there.  Two bindings stay
- * deliberately unbound rather than inventing RTOS behavior: the
- * delayed-event timer driver that would fire the scheduled disconnect
- * (the entry is recorded, never fired), and command-to-composition byte
- * order reconciliation with the first-party sender (an e2e concern).
+ * mutates flash, which openr1_storage rejects there.  The delayed-event
+ * timer driver is now bound: a CMSIS one-shot timer steps the portable
+ * r1_delayed_event_state and fires the scheduled disconnect through
+ * sd_ble_gap_disconnect.  One binding stays deliberately unbound rather
+ * than inventing behavior: command-to-composition byte order
+ * reconciliation with the first-party sender (an e2e concern).
  */
 
 uint32_t openr1_connection_control_adv_start(

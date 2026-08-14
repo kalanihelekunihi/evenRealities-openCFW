@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include "ble.h"
+#include "ble_hci.h"
 #include "cmsis_os2.h"
 #include "nrf_error.h"
 
@@ -15,14 +17,137 @@
 
 /* Local delayed-event tag for the scheduled glasses-peer disconnect.  The
  * recovered event id is not pinned, so this module owns a nonzero tag; the
- * connection handle travels as the event context.  No timer-step driver is
- * bound yet, so the entry is recorded state, not a live timer. */
+ * connection handle travels as the event context.  The timer driver below
+ * steps the portable state from a CMSIS one-shot timer and fires the due
+ * disconnect through sd_ble_gap_disconnect. */
 #define OPENR1_CONNECTION_CONTROL_EVENT_DISCONNECT UINT32_C(0x01)
 
 extern r1_runtime *openr1_platform_runtime(void);
 
 static uint32_t last_error;
 static r1_delayed_event_state delayed_events;
+static osTimerId_t delayed_event_timer;
+static osMutexId_t delayed_event_mutex;
+
+/* Milliseconds to kernel ticks at the recovered 1,024-Hz tick rate
+ * (osKernelGetTickFreq), rounding up and never returning zero so a short
+ * delay still arms a real one-shot timer. */
+static uint32_t delayed_event_ticks(uint32_t milliseconds) {
+    const uint64_t ticks =
+        ((uint64_t)milliseconds * osKernelGetTickFreq() + 999u) / 1000u;
+    if (ticks == 0u) {
+        return 1u;
+    }
+    return ticks > UINT32_MAX ? UINT32_MAX : (uint32_t)ticks;
+}
+
+static void delayed_event_fire_disconnect(uint16_t connection) {
+    /* Bounded action for a fired disconnect event.  An already-closed link
+     * is the desired end state and is tolerated; every other failure is
+     * recorded. */
+    const uint32_t error = sd_ble_gap_disconnect(
+        connection, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
+    if (error != NRF_SUCCESS && error != BLE_ERROR_INVALID_CONN_HANDLE) {
+        last_error = error;
+    }
+}
+
+/* One-shot timer callback (timer daemon thread): steps the portable state
+ * with callback argument zero so the elapsed time is the previously
+ * programmed delay, fires due disconnect events, and rearms the timer for
+ * the minimum remaining delay.  The stock empty-table reload of a
+ * UINT32_MAX-millisecond timer is suppressed: it carries no event and only
+ * suppresses one redundant callback, which this driver never needs. */
+static void delayed_event_timeout(void *argument) {
+    (void)argument;
+    if (delayed_event_mutex == NULL ||
+        osMutexAcquire(delayed_event_mutex, osWaitForever) != osOK) {
+        last_error = NRF_ERROR_INVALID_STATE;
+        return;
+    }
+    r1_delayed_event_step_result result;
+    if (r1_delayed_event_timer_step(
+            &delayed_events, 0u, (uint32_t)osKernelGetTickCount(),
+            &result) != R1_OK) {
+        last_error = NRF_ERROR_INTERNAL;
+    } else {
+        for (size_t index = 0u; index < result.due_count; ++index) {
+            if (result.due[index].event ==
+                OPENR1_CONNECTION_CONTROL_EVENT_DISCONNECT) {
+                delayed_event_fire_disconnect(
+                    (uint16_t)result.due[index].context);
+            } else {
+                /* This module owns the only scheduled event tag. */
+                last_error = NRF_ERROR_NOT_FOUND;
+            }
+        }
+        if (result.timer_start_requested &&
+            !result.stock_empty_reload_quirk &&
+            result.next_delay_milliseconds != 0u &&
+            osTimerStart(
+                delayed_event_timer,
+                delayed_event_ticks(
+                    result.next_delay_milliseconds)) != osOK) {
+            last_error = NRF_ERROR_INTERNAL;
+        }
+    }
+    (void)osMutexRelease(delayed_event_mutex);
+}
+
+static uint32_t delayed_event_ensure_driver(void) {
+    if (delayed_event_timer != NULL && delayed_event_mutex != NULL) {
+        return NRF_SUCCESS;
+    }
+    if (delayed_event_mutex == NULL) {
+        delayed_event_mutex = osMutexNew(NULL);
+    }
+    if (delayed_event_timer == NULL) {
+        delayed_event_timer = osTimerNew(
+            delayed_event_timeout, osTimerOnce, NULL, NULL);
+    }
+    return delayed_event_timer != NULL && delayed_event_mutex != NULL
+        ? NRF_SUCCESS : NRF_ERROR_NO_MEM;
+}
+
+/* Schedules the recovered raw 0x5000 delayed disconnect and arms the
+ * one-shot timer.  The raw delay is passed through in the scheduler's
+ * tick-derived millisecond unit; physical timing stays an owned-hardware
+ * gate.  A full table or driver failure is recorded but tolerated,
+ * matching the stock response-before-effect ordering. */
+static void schedule_delayed_disconnect(
+    uint16_t connection, uint32_t delay_milliseconds) {
+    uint32_t error = delayed_event_ensure_driver();
+    if (error == NRF_SUCCESS &&
+        osMutexAcquire(delayed_event_mutex, osWaitForever) != osOK) {
+        error = NRF_ERROR_INVALID_STATE;
+    }
+    if (error != NRF_SUCCESS) {
+        last_error = error;
+        return;
+    }
+    r1_delayed_event_schedule_result schedule;
+    const r1_error scheduled = r1_delayed_event_schedule(
+        &delayed_events, OPENR1_CONNECTION_CONTROL_EVENT_DISCONNECT,
+        connection, delay_milliseconds,
+        (uint32_t)osKernelGetTickCount(), &schedule);
+    if (scheduled == R1_OK &&
+        schedule.action == R1_DELAYED_EVENT_SCHEDULED &&
+        schedule.timer_step.timer_start_requested &&
+        osTimerStart(
+            delayed_event_timer,
+            delayed_event_ticks(
+                schedule.timer_step.next_delay_milliseconds)) != osOK) {
+        last_error = NRF_ERROR_INTERNAL;
+    } else if (scheduled == R1_OK &&
+               schedule.action == R1_DELAYED_EVENT_IMMEDIATE) {
+        /* Sub-two-millisecond delays fire at once (the recovered raw
+         * 0x5000 delay never takes this path). */
+        delayed_event_fire_disconnect(connection);
+    } else if (scheduled != R1_OK) {
+        last_error = NRF_ERROR_NO_MEM;
+    }
+    (void)osMutexRelease(delayed_event_mutex);
+}
 
 static uint32_t persist_targets(
     const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
@@ -97,17 +222,8 @@ uint32_t openr1_connection_control_adv_start(
     }
 
     if (plan.schedule_disconnect) {
-        /* The raw 0x5000 delay is passed through in the scheduler's
-         * tick-derived unit; physical timing stays an owned-hardware gate.
-         * A full table is recorded but tolerated, matching the stock
-         * response-before-effect ordering. */
-        r1_delayed_event_schedule_result schedule;
-        if (r1_delayed_event_schedule(
-                &delayed_events, OPENR1_CONNECTION_CONTROL_EVENT_DISCONNECT,
-                plan.disconnect_connection, plan.disconnect_delay,
-                (uint32_t)osKernelGetTickCount(), &schedule) != R1_OK) {
-            last_error = NRF_ERROR_NO_MEM;
-        }
+        schedule_delayed_disconnect(
+            plan.disconnect_connection, plan.disconnect_delay);
     }
 
     if (plan.start_fast_advertising) {

@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "openr1/r1_crc.h"
@@ -7131,6 +7132,188 @@ DEFINE_EVENT_BUS_LISTENER(event_bus_listener_g, 6u)
 DEFINE_EVENT_BUS_LISTENER(event_bus_listener_h, 7u)
 DEFINE_EVENT_BUS_LISTENER(event_bus_listener_i, 8u)
 
+/* Host model of the platform queue sink and consumer bound in
+ * platform/nrf52840/sdk/openr1_event_bus.c: the recovered 12-byte record
+ * {UInt32 event id, UInt32 length, inline payload or heap pointer}, one
+ * bounded queue per event-id window, publish enqueues, and the consumer
+ * drains every window and multicasts same-context to each populated slot. */
+#define TEST_EVENT_BUS_QUEUE_DEPTH 8u
+
+typedef struct {
+    uint32_t event_id;
+    uint32_t length;
+    uint32_t payload;
+} test_event_record;
+
+typedef struct {
+    test_event_record records[3][TEST_EVENT_BUS_QUEUE_DEPTH];
+    /* Side table for the record's heap-pointer field: the target record
+     * holds the pointer in its 32-bit payload word, which a 64-bit host
+     * cannot round-trip, so the model keeps the real pointer here and the
+     * record carries only the payload length. */
+    void *heap_copies[3][TEST_EVENT_BUS_QUEUE_DEPTH];
+    size_t counts[3];
+    size_t allocations;
+    size_t frees;
+} test_event_bus_queues;
+
+/* Larger delivery trace for the queue roundtrip: ten drained records fan
+ * out to two subscribed slots (twenty deliveries). */
+#define TEST_EVENT_BUS_DELIVERIES 24u
+
+typedef struct {
+    size_t calls;
+    unsigned order[TEST_EVENT_BUS_DELIVERIES];
+    size_t lengths[TEST_EVENT_BUS_DELIVERIES];
+    uint8_t first_bytes[TEST_EVENT_BUS_DELIVERIES];
+} event_bus_roundtrip_trace;
+
+#define DEFINE_EVENT_BUS_ROUNDTRIP_LISTENER(name, index)                   \
+    static void name(const uint8_t *payload, size_t length, void *ctx) {   \
+        event_bus_roundtrip_trace *trace = ctx;                            \
+        trace->order[trace->calls] = (index);                              \
+        trace->lengths[trace->calls] = length;                             \
+        trace->first_bytes[trace->calls] =                                 \
+            payload != NULL ? payload[0] : (uint8_t)0;                     \
+        ++trace->calls;                                                    \
+    }
+
+DEFINE_EVENT_BUS_ROUNDTRIP_LISTENER(event_bus_roundtrip_listener_a, 0u)
+DEFINE_EVENT_BUS_ROUNDTRIP_LISTENER(event_bus_roundtrip_listener_b, 1u)
+
+static bool test_event_bus_queue_sink(
+    const r1_event_bus_event *event, void *context) {
+    test_event_bus_queues *queues = context;
+    test_event_record record = {
+        event->event_id, (uint32_t)event->length, 0u};
+    void *heap_copy = NULL;
+    if (event->length > R1_EVENT_BUS_INLINE_PAYLOAD_LIMIT) {
+        heap_copy = malloc(event->length);
+        assert(heap_copy != NULL);
+        ++queues->allocations;
+        memcpy(heap_copy, event->payload, event->length);
+    } else if (event->length > 0u) {
+        memcpy(&record.payload, event->payload, event->length);
+    }
+    size_t *count = &queues->counts[event->window];
+    if (*count >= TEST_EVENT_BUS_QUEUE_DEPTH) {
+        /* Full queue: fail the handoff and free the heap copy, never
+         * block the publisher. */
+        free(heap_copy);
+        if (heap_copy != NULL) {
+            ++queues->frees;
+        }
+        return false;
+    }
+    queues->records[event->window][*count] = record;
+    queues->heap_copies[event->window][*count] = heap_copy;
+    *count += 1u;
+    return true;
+}
+
+static void test_event_bus_drain(
+    const r1_event_bus *bus, test_event_bus_queues *queues,
+    size_t *delivered_total) {
+    for (size_t window = 0u; window < 3u; ++window) {
+        for (size_t index = 0u; index < queues->counts[window]; ++index) {
+            const test_event_record *record =
+                &queues->records[window][index];
+            void *heap_copy = queues->heap_copies[window][index];
+            const uint8_t *payload = heap_copy != NULL
+                ? (const uint8_t *)heap_copy
+                : (const uint8_t *)&record->payload;
+            for (uint8_t slot = 0u; slot < R1_EVENT_BUS_SLOT_COUNT;
+                 ++slot) {
+                size_t delivered = 0u;
+                assert(r1_event_bus_multicast(
+                           bus, slot, payload, record->length,
+                           &delivered) == R1_OK);
+                *delivered_total += delivered;
+            }
+            if (heap_copy != NULL) {
+                free(heap_copy);
+                ++queues->frees;
+            }
+        }
+        queues->counts[window] = 0u;
+    }
+}
+
+static void test_event_bus_queue_roundtrip(void) {
+    r1_event_bus bus;
+    test_event_bus_queues queues = {0};
+    event_bus_roundtrip_trace trace = {0};
+    static const uint8_t three_bytes[] = {0x11u, 0x22u, 0x33u};
+    static const uint8_t eight_bytes[] = {1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u};
+    size_t delivered_total = 0u;
+
+    /* The platform record is the recovered 12-byte {id, length,
+     * inline-payload-or-heap-pointer} handoff. */
+    assert(sizeof(test_event_record) == 12u);
+
+    r1_event_bus_reset(&bus);
+    assert(r1_event_bus_bind_enqueue(
+               &bus, test_event_bus_queue_sink, &queues) == R1_OK);
+    assert(r1_event_bus_subscribe(
+               &bus, 0u, event_bus_roundtrip_listener_a, &trace) == R1_OK);
+    assert(r1_event_bus_subscribe(
+               &bus, 1u, event_bus_roundtrip_listener_b, &trace) == R1_OK);
+
+    /* With a bound sink, publish stages per-window records instead of
+     * returning R1_ERROR_UNSUPPORTED: inline up to 4 bytes, a bounded heap
+     * copy above that. */
+    assert(r1_event_bus_publish(
+               &bus, 0x0001u, three_bytes, sizeof(three_bytes)) == R1_OK);
+    assert(queues.counts[R1_EVENT_BUS_WINDOW_SENSOR] == 1u);
+    assert(queues.allocations == 0u);
+    const test_event_record *inline_record =
+        &queues.records[R1_EVENT_BUS_WINDOW_SENSOR][0];
+    assert(inline_record->event_id == 0x0001u && inline_record->length == 3u);
+    assert(memcmp(&inline_record->payload, three_bytes, 3u) == 0);
+
+    assert(r1_event_bus_publish(
+               &bus, 0x1fffu, eight_bytes, sizeof(eight_bytes)) == R1_OK);
+    assert(queues.counts[R1_EVENT_BUS_WINDOW_SYSTEM] == 1u);
+    assert(queues.allocations == 1u && queues.frees == 0u);
+
+    assert(r1_event_bus_publish(&bus, 0x2000u, NULL, 0u) == R1_OK);
+    assert(queues.counts[R1_EVENT_BUS_WINDOW_STORAGE] == 1u);
+
+    /* A full window queue rejects the handoff (the stock 0 return becomes
+     * R1_ERROR_CAPACITY) and the heap copy is freed on the send failure. */
+    for (size_t index = queues.counts[R1_EVENT_BUS_WINDOW_SENSOR];
+         index < TEST_EVENT_BUS_QUEUE_DEPTH; ++index) {
+        assert(r1_event_bus_publish(
+                   &bus, 0x0002u, three_bytes, sizeof(three_bytes)) ==
+               R1_OK);
+    }
+    assert(queues.counts[R1_EVENT_BUS_WINDOW_SENSOR] ==
+           TEST_EVENT_BUS_QUEUE_DEPTH);
+    assert(r1_event_bus_publish(
+               &bus, 0x0003u, three_bytes, sizeof(three_bytes)) ==
+           R1_ERROR_CAPACITY);
+    assert(r1_event_bus_publish(
+               &bus, 0x0004u, eight_bytes, sizeof(eight_bytes)) ==
+           R1_ERROR_CAPACITY);
+    assert(queues.allocations == 2u && queues.frees == 1u);
+
+    /* The consumer drains every window and delivers same-context to each
+     * populated slot; heap copies are freed after delivery.  Eight sensor
+     * records plus one system and one storage record, each reaching the
+     * two subscribed slots. */
+    test_event_bus_drain(&bus, &queues, &delivered_total);
+    assert(delivered_total == 20u);
+    assert(trace.calls == 20u);
+    assert(queues.allocations == 2u && queues.frees == 2u);
+    assert(queues.counts[R1_EVENT_BUS_WINDOW_SENSOR] == 0u &&
+           queues.counts[R1_EVENT_BUS_WINDOW_SYSTEM] == 0u &&
+           queues.counts[R1_EVENT_BUS_WINDOW_STORAGE] == 0u);
+    assert(trace.order[0] == 0u && trace.order[1] == 1u);
+    assert(trace.lengths[0] == 3u && trace.first_bytes[0] == 0x11u);
+    assert(trace.lengths[16] == 8u && trace.first_bytes[16] == 1u);
+    assert(trace.lengths[18] == 0u);
+}
+
 static void test_event_bus(void) {
     r1_event_bus bus;
     event_bus_sink_trace sink_trace = {0};
@@ -7326,6 +7509,7 @@ int main(void) {
     test_event_plane();
     test_delayed_event_timer_step();
     test_event_bus();
+    test_event_bus_queue_roundtrip();
     test_runtime_roles();
     test_runtime_role_occupancy();
     test_runtime_touch_effect();

@@ -192,6 +192,8 @@ including `GH3X2X_Init` and `GH3X2X_RegisterI2cOperationFunc` — confirming the
 on I2C at base address 0x28); the 243 closed algorithm-library entries and 53
 `goodix_mem`/`GdMem` allocator/apparatus entries remain blocked (binary-only even publicly;
 license clause 5 bars reverse engineering); 29 residue entries remain gated as unprovable.
+A 2026-08-14 residual re-audit of the 29 residues flipped six further entries to the same
+democode provider (174 attributed, 23 residues remain); see the mapping doc's re-audit section.
 License clause 4 restricts use to Goodix integrated circuits, which the R1 ring satisfies.
 Full evidence: [`goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md`](goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md);
 per-entry mapping: [`GOODIX-DEMO-DRIVER-MAPPING-2026-08.md`](GOODIX-DEMO-DRIVER-MAPPING-2026-08.md).

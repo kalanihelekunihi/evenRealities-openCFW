@@ -13,9 +13,9 @@ BUILD = ROOT / "platform" / "nrf52840" / "sdk" / "_build"
 HEX = BUILD / "openr1_nrf52840_s140.hex"
 BIN = BUILD / "openr1_nrf52840_s140.bin"
 MAP = BUILD / "openr1_nrf52840_s140.map"
-EXPECTED_HEX_SHA256 = "cc082ebf2ed4105a20f4bf1feda7708e8ed2a9a97cea28559cf089d86e109d2d"
-EXPECTED_BIN_SHA256 = "d1b36e3e70e65f1b0847a3a6587813297b2cd782f25ea6bf6cffc723c6d9046c"
-EXPECTED_BIN_BYTES = 126304
+EXPECTED_HEX_SHA256 = "b93d632817043161e138e97987d4f595520f87b3849e7126922b4e8d4c1eacbb"
+EXPECTED_BIN_SHA256 = "4bb7ad7cc81ab6030d027c495327719612ea7a32139ba757c06a6c8d3d2d0c36"
+EXPECTED_BIN_BYTES = 127400
 REQUIRED_OBJECTS = (
     BUILD / "openr1_nrf52840_s140" / "bma4.c.o",
     BUILD / "openr1_nrf52840_s140" / "bma456w.c.o",
@@ -35,6 +35,7 @@ REQUIRED_OBJECTS = (
     BUILD / "openr1_nrf52840_s140" / "openr1_connection_params.c.o",
     BUILD / "openr1_nrf52840_s140" / "openr1_connection_control.c.o",
     BUILD / "openr1_nrf52840_s140" / "openr1_databases.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_event_bus.c.o",
     BUILD / "openr1_nrf52840_s140" / "r1_battery.c.o",
     BUILD / "openr1_nrf52840_s140" / "nrfx_saadc.c.o",
     BUILD / "openr1_nrf52840_s140" / "nrfx_spim.c.o",
@@ -251,6 +252,9 @@ REQUIRED_LINKED_SYMBOLS = (
     "r1_gh3x2x_bind_provider_ops",
     "r1_event_bus_subscribe",
     "r1_event_bus_reset",
+    "openr1_event_bus_bind",
+    "openr1_event_bus_last_error",
+    "openr1_databases_event_bus",
     "r1_connection_control_plan_adv_start",
     "r1_peer_target_persist",
     "openr1_connection_control_adv_start",
@@ -264,6 +268,10 @@ REQUIRED_LINKED_SYMBOLS = (
 
 REQUIRED_LOCAL_LINKED_SECTIONS = (
     ("prvReloadTimer", "timers.c.o"),
+    ("event_bus_queue_sink", "openr1_event_bus.c.o"),
+    ("event_bus_consumer", "openr1_event_bus.c.o"),
+    ("delayed_event_timeout", "openr1_connection_control.c.o"),
+    ("delayed_event_fire_disconnect", "openr1_connection_control.c.o"),
 )
 
 

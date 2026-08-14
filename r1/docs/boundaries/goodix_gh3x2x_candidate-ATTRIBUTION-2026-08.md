@@ -112,3 +112,10 @@ entries to provider family `goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0` with di
 license clause 5), 53 `goodix_mem` allocator/apparatus, and 29 unresolved residues
 (non-unique stubs, HRNet accessor residues for an absent net, and closed-lib-closure helpers
 whose origin is unprovable from public material).
+
+A residual re-audit of those 29 entries (same snapshot, same match standard; see the mapping
+doc's "Residual re-audit 2026-08-14" section) flipped six more entries to the democode
+provider — `goodix_hba_init_func`, `goodix_hba_config_get_arr`, `get_knWeightsArr_addr`,
+`GhDrvConfigManagerGetCurFunctionSupprort`, `Gh3x2x_UserHandleCurrentInfo`, and
+`Gh2x2xUploadDataToMaster` — and confirmed the closed-lib identity of `goodix_hba_init`
+(stays gated). New totals: 174 MATCHED, 319 gated (243 S1, 53 S2, 23 unresolved).

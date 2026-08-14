@@ -13,7 +13,7 @@ one, [`SECURITY.md`](SECURITY.md), [`PROVENANCE.md`](PROVENANCE.md), and
 | [`correlation/`](correlation) | one record per subsystem, pinning recovered behavior to the stock image -- exact addresses, byte counts, record layouts, and how this implementation corresponds to them |
 | [`boundaries/`](boundaries) | one record per licensed-provider seam -- what the R1-owned adapter implements, and what stays disabled until that provider is supplied |
 | [`closures/`](closures) | Nordic SDK closure proofs |
-| [`reference/`](reference) | function ownership, coverage, the capability ledger, the remaining frontier, and the BSim run summaries under `reference/bsim/` |
+| [`reference/`](reference) | function ownership, coverage, the capability ledger, the remaining frontier, the residual provider and production-readiness audit, and the BSim run summaries under `reference/bsim/` |
 
 To understand what the firmware *does*, read `correlation/`. To understand what
 it deliberately refuses to do without a licensed provider, read `boundaries/`.

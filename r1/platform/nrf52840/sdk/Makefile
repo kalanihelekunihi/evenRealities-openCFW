@@ -69,6 +69,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_connection_control.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_connection_params.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_databases.c \
+  $(PROJ_DIR)/platform/nrf52840/sdk/openr1_event_bus.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_gatt.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_health.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_health_db.c \

@@ -17,6 +17,7 @@
 #include "openr1_connection_control.h"
 #include "openr1_connection_params.h"
 #include "openr1_databases.h"
+#include "openr1_event_bus.h"
 #include "openr1_gatt.h"
 #include "openr1_i2c5_resources.h"
 #include "openr1_motion.h"
@@ -276,6 +277,18 @@ __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_connection_control_adv_start_fn
     retained_connection_control_adv_start =
         openr1_connection_control_adv_start;
+typedef r1_event_bus *(*openr1_databases_event_bus_fn)(void);
+typedef uint32_t (*openr1_event_bus_last_error_fn)(void);
+/* Retains the platform event-bus access and observability seams: the
+ * per-window queue sink and consumer thread are bound at startup
+ * (openr1_event_bus.c), but no production publisher exists yet, so these
+ * entry points have no live caller. */
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_databases_event_bus_fn retained_databases_event_bus =
+    openr1_databases_event_bus;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_event_bus_last_error_fn retained_event_bus_last_error =
+    openr1_event_bus_last_error;
 
 static void touch_enabled_changed(void *context, bool enabled) {
     (void)context;

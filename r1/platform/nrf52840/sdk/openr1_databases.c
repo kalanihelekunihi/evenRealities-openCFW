@@ -11,6 +11,7 @@
 #include "openr1/r1_event_bus.h"
 #include "openr1/r1_state.h"
 #include "openr1_clock.h"
+#include "openr1_event_bus.h"
 #include "openr1_storage.h"
 
 /* Recovered health.db schema payload lengths: byte 1 of each of the six
@@ -33,14 +34,13 @@ static bool sleep_ready;
 
 /* Platform instance of the R1 private event bus.  The health startup
  * controller subscribes its recovered time-listener channels (bus slots 1
- * then 0) here.  The queue handoff stays unbound on purpose: the stock
- * publisher hands each event to a per-window RTOS queue consumed by a
- * separate dispatcher task, and recreating that pair of CMSIS queues plus
- * the consumer is more than trivial glue.  r1_event_bus_publish therefore
- * returns R1_ERROR_UNSUPPORTED on this instance until a reviewed queue sink
- * and consumer exist.  Subscription is single-threaded (the storage worker);
- * any future publisher must first bind the sink and take the stock bus
- * mutex role. */
+ * then 0) here.  openr1_databases_initialize binds the queue handoff
+ * through openr1_event_bus_bind: one CMSIS queue per event-id window plus
+ * a consumer thread that delivers records through r1_event_bus_multicast
+ * (openr1_event_bus.c).  If the bind fails the sink stays unbound, the
+ * error is recorded, and r1_event_bus_publish keeps returning
+ * R1_ERROR_UNSUPPORTED on this instance.  Subscription is single-threaded
+ * (the storage worker); any publisher must take the stock bus mutex role. */
 static r1_event_bus event_bus;
 static volatile uint32_t time_listener_deliveries;
 
@@ -361,6 +361,16 @@ ret_code_t openr1_databases_initialize(void) {
     /* Restore the bus power-on state (zero-filled BSS in stock) before the
      * storage worker subscribes the health time-listener slots. */
     r1_event_bus_reset(&event_bus);
+    /* Bind the per-window queue sink and consumer thread.  Fail-explicit:
+     * a bind failure is recorded and the sink stays unbound, so publish
+     * keeps returning R1_ERROR_UNSUPPORTED; the databases below are
+     * independent of the bus and still initialize. */
+    {
+        const ret_code_t bus_error = openr1_event_bus_bind(&event_bus);
+        if (bus_error != NRF_SUCCESS) {
+            databases_record_error(bus_error);
+        }
+    }
     r1_flash *flash = openr1_storage_flash();
     if (flash == NULL) {
         return NRF_ERROR_INVALID_STATE;
@@ -447,6 +457,13 @@ const r1_health_db_startup_result *openr1_databases_health_startup(void) {
 
 r1_kv_store *openr1_databases_kv_store(void) {
     return kv_ready ? &kv_store : NULL;
+}
+
+/* The platform private event bus.  Always valid storage; publishes return
+ * R1_ERROR_UNSUPPORTED until openr1_event_bus_bind succeeded during
+ * openr1_databases_initialize. */
+r1_event_bus *openr1_databases_event_bus(void) {
+    return &event_bus;
 }
 
 r1_sleep_db *openr1_databases_sleep_db(void) {

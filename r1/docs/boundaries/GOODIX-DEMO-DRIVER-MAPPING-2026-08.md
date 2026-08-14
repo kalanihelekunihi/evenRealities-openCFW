@@ -776,3 +776,83 @@ Residual-pass notes:
   callers are S1-pinned (0x32744/0x335B4/0x34B08/0x36BFA/0x37B68/0x3EFD8/0x419C8/0x5683C/
   0x61DA4/0x664F4/0x72FB8/0x765E4/0x929B6 — 13 bodies; 0x34B08/0x36BFA/0x37B68 are callerless
   generic helpers folded into this group). All stay gated.
+
+## Residual re-audit 2026-08-14 (third pass: 29 UNRESOLVED + 0x6D3C0/0x6D204 hint)
+
+Third pass over the 29 UNRESOLVED entries left by the residual pass, plus the re-audit hint
+(0x6D3C0 at the `goodix_hba_init_func` call position, neighbor 0x6D204). Same upstream
+snapshot (`coredevices/pebbleos-nonfree` @ `2c0034a2`, `gh3x2x/`), same match standard
+(control-flow + constants + log-string topology; call-graph adjacency from already-matched
+anchors; rodata gap arithmetic for weight-array accessors). This pass additionally used:
+(a) the upstream `hr_exc/goodix_hba.h` header (`goodix_hba_config` field layout,
+`sizeof == 0x24`, `HBA_INTERFACE_VERSION "pv_v1.1.0"`, `HBA_INTERFACE_VERSION_LEN_MAX 20`,
+`goodix_hba_version(uint8_t[120])`, `GX_ALGO_HBA_RWONG_INPUT == 1`); (b) the byte content of
+the R1 rodata target of 0x6CC2C; (c) the full public HRNet `NET_SIZE` inventory
+(knBasic 1033, knSmall 1861, knWeights 6660, knConfNet 2979, knSceneNet 2599,
+knSceneSwitch 5951, knMulti 1269, knTdfusion 1567); (d) the upstream empty-body functions
+(`gh3x2x_demo_accppg_sync.c`, `gh_demo_user.c:Gh3x2x_UserHandleCurrentInfo`,
+`gh_uprotocol.c`/`gh_zip.c` upload stubs) and their exact upstream call positions.
+
+Result: **6 flips to MATCHED (ledger regenerated: MATCHED 174, candidate family 319), 0x6D204
+identity confirmed but stays S1, 23 stay UNRESOLVED.** The R1 build's HR net revision still
+differs from the public tree (the 4857-word net has no public counterpart).
+
+### Flips (ledger + verify pins updated)
+
+| Address | New mapping | Evidence |
+| --- | --- | --- |
+| `0x0006D3C0` | MATCHED (high) → demo_algo_code/goodix_algo_call/src/gh3x2x_demo_algo_call_hr.c:`goodix_hba_init_func` | Full statement-level topology vs upstream: memset 120-byte version buffer (= `goodix_hba_version(uint8_t[120])` prototype) → version call (0x6D424, S1) with error gate → `GH3X2X_HbaAlgoChnlMapDefultSet` (0x2A630, matched) → `g_stHbaAlgoChnlMap.uchNum` (byte at map+1) > `Gh3x2xGetHrAlgoSupportChnl` (0x2E8C4, matched) → return 1 = `GX_ALGO_HBA_RWONG_INPUT` → `goodix_hba_config_get_arr` (0x6CC2C) → `GH3X2X_Memcpy` (0x2A968, matched) 0x24 = `sizeof(goodix_hba_config)` → `stHbCfg.fs = fs` (offset 4), `stHbCfg.valid_ch_num = uchNum` (offset 8) per upstream struct layout → memset 20-byte `chVer` (`HBA_INTERFACE_VERSION_LEN_MAX`) → `goodix_hba_config_get_version` (0x6CC34, matched) → `goodix_hba_init` (0x6D204). Sole caller 0x2CAA4 = matched `GH3x2xHrAlgoInit`, arg = `pstFunctionInfo->usSampleRate` at the exact upstream call position. Debug logs compiled out as elsewhere in the R1 build. |
+| `0x0006CC2C` | MATCHED (high) → algo_lib/algo_params/HR/04_EXCLUSIVE/goodix_hba_config.c:`goodix_hba_config_get_arr` | Returns &external_hba_cfg at 0xAD13C; the 0x24-byte target content is **byte-exact** with upstream `external_hba_cfg` (mode=0, fs=25, valid_ch_num=4, earliest=9, latest=20, sigma=1, raw_ppg_scale=202, delay_time=5, valid_score_scale=1 — all nine fields). Sole caller 0x6D3C0 at the exact `goodix_hba_config_get_arr` position; consumer copies 0x24 = `sizeof(goodix_hba_config)`. (Residual-pass note "zeroed rodata" was wrong — the array is populated and matches upstream.) |
+| `0x0006A150` | MATCHED (high) → algo_lib/algo_params/HR/04_EXCLUSIVE/HRNet_knWeights.c:`get_knWeightsArr_addr` | Returns 0xA692C; gap to the next proven rodata landmark (external_hba_cfg at 0xAD13C, byte-exact per above) = 0x6810 bytes = **6660 words = knWeights NET_SIZE exact**, unique among the eight public NET_SIZEs; no subset-sum of the other public sizes fits the gap. Same gap-arithmetic standard as 0x6A130 (2979) / 0x6A148 (1567). Adjacency chain confirmed: knConfNet [0x9D640,0xA04CC) → 4857-word R1-revision net [0xA04CC,0xA50B0) → knTdfusion [0xA50B0,0xA692C) → knWeights [0xA692C,0xAD13C). One literal-pool reference into the array interior (0xA7325, from S1 code 0x95C88) is consistent with lib-internal layer slicing. Content not verifiable (R1 HR net revision skew) — same caveat as the previously accepted accessors. |
+| `0x0002EDE0` | MATCHED (high) → driver/src/gh_drv_config.c:`GhDrvConfigManagerGetCurFunctionSupprort` | Body exact: returns word at g_stGhDrvConfigManger+4 (`unGhFuncSupportedAtCurCfg`); same 8-byte global memset by matched `GhDrvConfigManagerInit` (0x2EDEC). Caller position exact: sole caller 0x2E36C = matched `Gh3x2xDemoStartSamplingInner` at the cfg-switch test `(unFuncModeTemp2 & ~support) != 0`, including the ADT special case (`unFuncMode==1 → 1, else & ~1`; GH3X2X_FUNCTION_ADT == 1) verbatim from upstream. |
+| `0x0002EB80` | MATCHED (high) → demo_kernel_code/kernel/gh_demo_user.c:`Gh3x2x_UserHandleCurrentInfo` | Upstream body is empty (comment-only) → `bx lr`; void/no-arg. Call position exact: "Step 5: do soft agc process" in `Gh3x2xDemoInterruptProcess`, immediately before the soft-AGC block (R1: LedAgcProcess = 0x2A84C, matched). R1's two call sites (no-fifo-event path and post-`GH3X2X_UpdateAgcInfo` path, both gated by the `uchIntRepeatNum` equivalent) are the compiler's branch folding of the single upstream unconditional call. Same empty-body + call-position standard as 0x2AE04/0x2AE06. |
+| `0x0002D66C` | MATCHED (candidate/moderate) → demo_kernel_code/module/gh_protocol/gh_uprotocol.c:`Gh2x2xUploadDataToMaster` | Call position exact: immediately after `GH3x2xHandleFrameData` (0x2C694, matched) inside matched `GH3x2xGetFrameDataAndProcess` (0x2C4FC), under the downsample-factor guard, with the exact 4-arg signature (pstFrameInfo, usFrameCnt, usFrameNum, puchTagArray) followed by `usFrameCnt++`. Upstream body is empty in this build configuration. Caveat (hence candidate): the `#if __SUPPORT_ZIP_PROTOCOL__` twin `Gh2x2xUploadZipDataToMaster` (gh_zip.c:820) is also an empty stub; the R1 build's flag choice is not directly recoverable, so the precise upstream name is ambiguous between the two identically-empty bodies. |
+
+### Hint entry confirmed closed (no change)
+
+| Address | Verdict | Evidence |
+| --- | --- | --- |
+| `0x0006D204` | Stays S1 (identity now documented as closed-lib `goodix_hba_init` export) | Called from matched `goodix_hba_init_func` (0x6D3C0) with (cfg, 0x24, interface-ver) exactly per the upstream prototype; body gates on `param_2 != 0x24` and string-compares the interface version against "pv_v1.1.0" = `HBA_INTERFACE_VERSION`; internals allocate the 0x150-byte context via the S2-pinned allocator (0x2D54C), register the HRNet weight accessors (0x6A150/0x6A140/0x6A138/0x6A130/0x6A148), and wire the 0x3DDF4 ops trampoline. No source form exists upstream (HR `.a` only) — license clause 5 keeps it gated. |
+
+### Entries that stay UNRESOLVED (per-entry reasons, re-verified this pass)
+
+| Address | Verdict | Re-audit evidence |
+| --- | --- | --- |
+| `0x0002A54C` | UNRESOLVED (unprovable) | `return 0`; callerless; no rodata/table reference (binary scanned for both 0x2A54C/0x2A54D); no distinguishing content — non-unique by construction. |
+| `0x0002A610` | UNRESOLVED (unprovable) | `return 0`; callerless; no rodata reference; non-unique. |
+| `0x0002A9D2` | UNRESOLVED (unprovable) | Empty void body called from 15 matched Goodix demo functions with pre-formatted 0xB4-byte buffers — R1 deferred-log flush plumbing; no upstream identity (upstream logs inline via macros; the flush indirection is Even-specific, but Even authorship cannot be proven from the body alone). |
+| `0x0002ADD0` | UNRESOLVED (unprovable) | In-place 16-bit byte-pair swap loop; callerless; no rodata reference; no byte-swap counterpart anywhere in the pinned tree (grep-verified). |
+| `0x0002E8CC` | UNRESOLVED (unprovable) | Callerless WriteReg(0x502,0) + WriteRegBitField pair; no 0x502 write exists in the pinned tree (grep-verified); no caller topology available. |
+| `0x0002E950` | UNRESOLVED (unprovable) | Empty void body called with unFuncMode inside matched `Gh3x2xDemoStartAlgoInner`'s inlined `GH3X2X_AlgoInit` 20-function init loop (both the init-fail break path and the per-iteration path). Checked every upstream candidate: all `gh3x2x_demo_accppg_sync.c` empty functions (AccInit takes void and is called from gh_demo_user.c; PpgInit matched at 0x2AE04; Send2AlgoCall/Fill* uncalled or wrong signature/position) and `GH3X2X_SEND_MSG_ALGO_START` (called once, after the loop, not inside it). No upstream counterpart at this position — likely Even instrumentation; unprovable. |
+| `0x0002A168` | UNRESOLVED (stays gated) | Unchanged: FIFO post-read validate-and-patch loop injected into matched `GH3X2X_ReadFifodata`, calling the S1 packed-word validator 0x2950C; no upstream v4.3.0.0 counterpart (Even workaround or newer Goodix revision — unprovable). |
+| `0x0002A1CC` | UNRESOLVED (stays gated) | Unchanged: real `GH3X2X_CheckRawdataBuf` body where upstream is a `return 0` stub; ownership unprovable. |
+| `0x0006A138` | UNRESOLVED (stays gated) | Addr accessor (returns 0xA04CC) for the 4857-word R1-revision HR net; 4857 matches none of the eight public NET_SIZEs (1033/1567/1861/2599/2979/5951/6660/1269 — enumerated this pass). Now known to be consumed by closed-lib `goodix_hba_init` (0x6D204). The R1 HR net revision is absent from the pinned tree — unprovable. |
+| `0x0006A140` | UNRESOLVED (stays gated) | Size accessor paired with 0x6A138 (returns 0x12F9 = 4857); same revision-skew reasoning. |
+| `0x00032744` | UNRESOLVED (stays gated) | Float channel-scale/copy helper; sole caller S1 NADT 0x766AC; no upstream source form. |
+| `0x000335B4` | UNRESOLVED (stays gated) | Packed-channel float scaling helper; sole caller 0x61DA4 (itself gated); no upstream source form. |
+| `0x00034B08` | UNRESOLVED (stays gated) | Vtable-driven command/status poll (cmds 0xA6/0xAE selected by param bit 0x20000, 0x140-tick timeout). New this pass: it is not callerless — its pointer (0x34B09) is stored into an ops-record at offset +0x18 by 0x31D88 (the R1-augmented `ST25DVxxKC_RegisterBusIO` body), reached from the R1 ST25DV bus-registration adapter 0x44BEC. So it is NFC-side poll glue, not Goodix; no 0xA6/0xAE command sequence exists in the pinned gh3x2x tree (grep-verified); exact authorship (Even vs ST-ecosystem example) unprovable. |
+| `0x00036BFA` | UNRESOLVED (unprovable) | Context-buffer zeroing on mode==1 (three buffers, lengths <<2); callerless; no rodata reference. |
+| `0x00037B68` | UNRESOLVED (unprovable) | int→int8 clamp with −0x80 centering; callerless; no rodata reference; generic. |
+| `0x0003EFD8` | UNRESOLVED (stays gated) | Scaled logistic scorer via toolchain expf; sole caller S1 NADT 0x88E80; authorship unprovable. |
+| `0x000419C8` | UNRESOLVED (stays gated) | Threshold-crossing peak accumulator; caller S1 0x3441C; no upstream source form. |
+| `0x0005683C` | UNRESOLVED (stays gated) | Six-field descriptor init + paired buffer zeroing; callers S1 NADT 0x6E574/0x6E664; generic shape. |
+| `0x00061DA4` | UNRESOLVED (stays gated) | Packed three-channel decoder/record assembler; caller S1 SPO2 calc 0x6E838; lib-internal vs integration glue unprovable. |
+| `0x000664F4` | UNRESOLVED (stays gated) | Bounded word-window push with memmove eviction; caller 0x419C8 (gated); generic container helper. |
+| `0x00072FB8` | UNRESOLVED (stays gated) | Sign-mask contiguous-run float fill; caller S1 NADT 0x766AC; no upstream source form. |
+| `0x000765E4` | UNRESOLVED (stays gated) | Half-to-float conversion + double-precision window scaling + heap handoff (S2 alloc 0x2D54C); caller S1 0x766AC; mixed lib-support character — origin unprovable. |
+| `0x000929B6` | UNRESOLVED (stays gated) | Max-plus-argmax scan; caller S1 NADT 0x66AB2; generic. |
+
+Re-audit notes:
+
+- The 499-entry class totals are now: MATCHED 174, S1 243, S2 53, R1-GLUE 6, UNRESOLVED 23.
+- 0x6D3C0's flip removes the stale "heart-rate output wrapper" boundary label (same
+  first-pass mislabel pattern as 0x6EC28, corrected by the residual pass).
+- Ledger/pin updates: generator tables `APP_GOODIX_PUBLIC_DEMOCODE` (+0x6D3C0/0x6CC2C/0x6A150/
+  0x2EDE0/0x2EB80) and `APP_GOODIX_PUBLIC_DEMOCODE_MODERATE` (+0x2D66C) in
+  `r1/tools/build_r1_source_ownership.py`; regenerated `r1/docs/FUNCTION-OWNERSHIP.csv` /
+  `FUNCTION-OWNERSHIP-SUMMARY.json` (+ reference copies); `r1/tools/verify_openr1.py`
+  `goodix_democode_symbols`/`goodix_democode_entries` (+6), provider-count pins
+  (democode 168→174, candidate 325→319), both family entry-set digests re-pinned to the new
+  legitimate state, and the stale cluster comment corrected (64→110 attributed members; the
+  116-entry cluster set and both cluster digests are unchanged — the three cluster-member
+  flips keep their cluster membership, exactly as the previously attributed members do).

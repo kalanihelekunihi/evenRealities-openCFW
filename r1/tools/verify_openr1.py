@@ -562,6 +562,7 @@ goodix_democode_symbols = {
     0x0002D354: ("GH3x2x_Round", "high"),
     0x0002D3A8: ("GH3x2x_SetChipResetRecoveringFlag", "high"),
     0x0002D658: ("GetNextEventPointer", "high"),
+    0x0002D66C: ("Gh2x2xUploadDataToMaster", "candidate"),
     0x0002D670: ("Gh3x2xDemoArrayCfgSwitch", "high"),
     0x0002D824: ("Gh3x2xDemoFunctionProcess", "high"),
     0x0002D87C: ("Gh3x2xDemoInit", "high"),
@@ -582,9 +583,11 @@ goodix_democode_symbols = {
     0x0002E8E8: ("Gh3x2xMovingAvaFilter", "high"),
     0x0002E964: ("Gh3x2xSetCurrentSlotEnReg", "high"),
     0x0002EB0C: ("Gh3x2xSetFrameFlag2", "high"),
+    0x0002EB80: ("Gh3x2x_UserHandleCurrentInfo", "high"),
     0x0002EB84: ("Gh3x2x_WearEventHook", "high"),
     0x0002ED98: ("GH3X2X_ReinitAllSwModuleParam", "high"),
     0x0002EDAA: ("GH3X2X_WriteSwConfigWithVirtualReg_0x1100_arm", "high"),
+    0x0002EDE0: ("GhDrvConfigManagerGetCurFunctionSupprort", "high"),
     0x0002EDEC: ("GhDrvConfigManagerInit", "high"),
     0x0002EDFC: ("GhGetFunctionIdViaVirReg", "high"),
     0x0002EE28: ("GhMultiSensorTimerInit", "high"),
@@ -597,8 +600,11 @@ goodix_democode_symbols = {
     0x0006A020: ("get_Spo2WRWeights_version", "high"),
     0x0006A130: ("get_knConfNetWeightsArr_addr", "high"),
     0x0006A148: ("get_knTdfusionWeightsArr_addr", "high"),
+    0x0006A150: ("get_knWeightsArr_addr", "high"),
     0x0006A500: ("GH3X2X_AlgoCallConfigInit", "high"),
+    0x0006CC2C: ("goodix_hba_config_get_arr", "high"),
     0x0006CC34: ("goodix_hrv_config_get_version", "high"),
+    0x0006D3C0: ("goodix_hba_init_func", "high"),
     0x0006EAF8: ("goodix_spo2_config_get_instance", "high"),
     0x0006EB00: ("goodix_spo2_config_get_version", "high"),
     0x0006EC28: ("goodix_spo2_init_func", "high"),
@@ -3306,9 +3312,9 @@ def main() -> None:
         raise AssertionError("R1 Nordic-WDT adapter count changed")
     if application_provider_counts["r1_provider_configuration_glue"] != 10:
         raise AssertionError("R1 provider-configuration glue count changed")
-    if application_provider_counts["goodix_gh3x2x_candidate"] != 325:
+    if application_provider_counts["goodix_gh3x2x_candidate"] != 319:
         raise AssertionError("Goodix GH3X2X provider-boundary count changed")
-    if application_provider_counts["goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"] != 168:
+    if application_provider_counts["goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"] != 174:
         raise AssertionError("Goodix GH3X2X public-democode attribution count changed")
     if application_provider_counts["r1_goodix_provider_adapter"] != 24:
         raise AssertionError("R1 Goodix adapter count changed")
@@ -3353,7 +3359,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in goodix_rows
     ).encode()).hexdigest()
     if goodix_entry_digest != \
-            "9fd3924c5175ad59654f696df9d7a2ec893832d8ba4059ca4deebdc2af6c0c11":
+            "293cb9183d6cf861dd8fc21243167b9d36b2473e63847e40c7dd9c09c8b2255f":
         raise AssertionError("Goodix exact function-entry set changed")
     goodix_democode_rows = [
         row for row in ownership_rows
@@ -3369,7 +3375,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in goodix_democode_rows
     ).encode()).hexdigest()
     if goodix_democode_entry_digest != \
-            "8a7786a5e7ca0c128c5b5d2e53b00c61e34232a54837bebdf4d9e2e3a5328e70":
+            "e67d748d9134d9f0720351f044a15c63a97bfbac3d64d8eec9be06000c519a65":
         raise AssertionError("Goodix public-democode exact function-entry set changed")
     goodix_adapter_rows = [
         row for row in ownership_rows
@@ -10576,17 +10582,19 @@ def main() -> None:
         0x0002CC94, 0x0002CCC0, 0x0002CCD0, 0x0002CCF4,
         0x0002CD00, 0x0002CDD4, 0x0002CFE8, 0x0002D16C,
         0x0002D184, 0x0002D324, 0x0002D33C, 0x0002D348,
-        0x0002D354, 0x0002D3A8, 0x0002D658, 0x0002D670,
-        0x0002D824, 0x0002D87C, 0x0002DB8C, 0x0002E0D0,
-        0x0002E340, 0x0002E358, 0x0002E36C, 0x0002E61C,
-        0x0002E6A8, 0x0002E6BC, 0x0002E746, 0x0002E778,
-        0x0002E7A4, 0x0002E7C4, 0x0002E8C4, 0x0002E8C8,
-        0x0002E8E8, 0x0002E964, 0x0002EB0C, 0x0002EB4E,
-        0x0002EB84, 0x0002ED98, 0x0002EDAA, 0x0002EDEC,
-        0x0002EDFC, 0x0002EE28, 0x0002EE38, 0x0002EE44,
-        0x0002EE50, 0x0002EF6C, 0x0002F0F8, 0x0006A018,
-        0x0006A020, 0x0006A130, 0x0006A148, 0x0006A500,
-        0x0006CC34, 0x0006EAF8, 0x0006EB00, 0x0006EC28,
+        0x0002D354, 0x0002D3A8, 0x0002D658, 0x0002D66C,
+        0x0002D670, 0x0002D824, 0x0002D87C, 0x0002DB8C,
+        0x0002E0D0, 0x0002E340, 0x0002E358, 0x0002E36C,
+        0x0002E61C, 0x0002E6A8, 0x0002E6BC, 0x0002E746,
+        0x0002E778, 0x0002E7A4, 0x0002E7C4, 0x0002E8C4,
+        0x0002E8C8, 0x0002E8E8, 0x0002E964, 0x0002EB0C,
+        0x0002EB4E, 0x0002EB80, 0x0002EB84, 0x0002ED98,
+        0x0002EDAA, 0x0002EDE0, 0x0002EDEC, 0x0002EDFC,
+        0x0002EE28, 0x0002EE38, 0x0002EE44, 0x0002EE50,
+        0x0002EF6C, 0x0002F0F8, 0x0006A018, 0x0006A020,
+        0x0006A130, 0x0006A148, 0x0006A150, 0x0006A500,
+        0x0006CC2C, 0x0006CC34, 0x0006D3C0, 0x0006EAF8,
+        0x0006EB00, 0x0006EC28,
     }
     for entry, (size, digest) in goodix_candidate_expected.items():
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -10609,7 +10617,7 @@ def main() -> None:
                 len(body) != size or hashlib.sha256(body).hexdigest() != digest:
             raise AssertionError(f"Goodix GH3X2X boundary changed: 0x{entry:08x}")
     # The 116-entry frozen direct-call-graph closure, pinned explicitly by
-    # entry: 64 members are now attributed to the pinned public Goodix
+    # entry: 110 members are now attributed to the pinned public Goodix
     # democode, so the evidence-phrase filter can no longer see them.
     goodix_cluster_entries = {
         0x00029f9c, 0x0002a090, 0x0002a168, 0x0002a198,

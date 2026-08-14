@@ -85,6 +85,41 @@ attacker-influenced length or slot value can drive an out-of-bounds access or un
 allocation. The stock allocation-failure infinite loops are not reproduced. No BLE command,
 internal-event injection surface, flash mutation, or RTOS object is exposed.
 
+## Platform queue binding (Nordic SDK)
+
+Update (2026-08-14): the queue handoff is now bound in the SDK application by
+`../../platform/nrf52840/sdk/openr1_event_bus.c`, following the established
+`openr1_scheduler.c` queue/thread idiom (static CMSIS control blocks and stacks):
+
+- One CMSIS message queue per event-id window (sensor, system, storage), each carrying the
+  recovered 12-byte record `{UInt32 event id, UInt32 payload length, 4-byte inline payload or
+  heap pointer}`. Payloads up to 4 bytes travel inline; larger payloads take a bounded heap
+  copy (`R1_EVENT_BUS_PAYLOAD_LIMIT`, 128 bytes, is enforced by the publisher) that is freed
+  when the queue send fails and after delivery. The per-window queue depth is 8, a local
+  bound: the stock queue depths are not recovered.
+- The sink never blocks: the queue put uses a zero timeout, so a full queue frees the heap
+  copy and fails the handoff, which `r1_event_bus_publish` surfaces as `R1_ERROR_CAPACITY`
+  (the stock queue-full return 0). The SoftDevice event thread can therefore publish without
+  ever sleeping on a full queue.
+- One consumer thread drains all three queues after a thread-flag wake and delivers each
+  record through `r1_event_bus_multicast`.
+- **Divergence.** The stock consumer-side per-id dispatch table (`0x0008D888`,
+  `r1_event_dispatch_by_id`) and the two-entry cross-context republish routing table are not
+  recovered — the routing table depends on RTOS task identity and mutable target state that
+  the evidence does not pin. The consumer therefore delivers same-context to every populated
+  slot in ascending slot order instead of republishing cross-context. No production publisher
+  exists yet; a future publisher with class-specific listeners must first recover the
+  id-to-slot mapping.
+- `openr1_databases_initialize` binds the sink through `openr1_event_bus_bind`. A bind
+  failure is recorded in the databases last-error word and leaves the sink unbound, so
+  `r1_event_bus_publish` keeps returning `R1_ERROR_UNSUPPORTED`. The bus instance is
+  reachable through `openr1_databases_event_bus`, and `openr1_event_bus_last_error` exposes
+  the sticky first consumer-side failure; both are retained in the image for review.
+
+The host test `test_event_bus_queue_roundtrip` models this contract end to end: the 12-byte
+record, per-window bounded queues, inline and heap-copy payload staging, full-queue rejection
+with heap-copy release, and same-context consumer multicast with post-delivery frees.
+
 Host tests cover the window boundaries (`0x0000`/`0x0001`/`0x0FFF`/`0x1000`/`0x1FFF`/`0x2000`/
 `0x2FFF`/`0x3000`), inline-limit and bounded-copy payloads, empty payloads, oversized payload
 rejection, unbound and rejecting queue handoffs, duplicate and cross-slot subscriptions,

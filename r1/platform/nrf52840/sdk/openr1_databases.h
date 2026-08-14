@@ -8,6 +8,7 @@
 #include "app_error.h"
 
 #include "openr1/r1_health_db.h"
+#include "openr1/r1_event_bus.h"
 #include "openr1/r1_kv_store.h"
 #include "openr1/r1_sleep_db.h"
 
@@ -18,7 +19,8 @@
  * openr1_databases_initialize() runs on the SoftDevice event thread during
  * startup.  It binds the kv.bin four-snapshot class store synchronously (the
  * portable initializer only reads flash), loads the persisted REG1 flag (kv
- * dev_info byte 24 bit 1), resets the platform private event bus, and starts
+ * dev_info byte 24 bit 1), resets the platform private event bus and binds its
+ * per-window queue sink and consumer thread (openr1_event_bus.c), and starts
  * the storage worker that runs the health TSDB startup controller and the
  * sleep.db FAL partition bind in the recovered order (stock startup task
  * 0x000926DC: 0x00070030 health startup before the 0x0008DD8C -> 0x0005B0F8
@@ -50,6 +52,10 @@ const r1_health_db_startup_result *openr1_databases_health_startup(void);
 /* Database handles; NULL while the corresponding database is not ready. */
 r1_kv_store *openr1_databases_kv_store(void);
 r1_sleep_db *openr1_databases_sleep_db(void);
+/* The platform private event bus.  Always valid storage; publishes return
+ * R1_ERROR_UNSUPPORTED until the per-window queue sink was bound during
+ * openr1_databases_initialize (openr1_event_bus.c). */
+r1_event_bus *openr1_databases_event_bus(void);
 /* The provider-owned FlashDB TSDB object (r1_health_db_provider_handle seam);
  * NULL until the health startup controller completed. */
 void *openr1_databases_health_handle(void);

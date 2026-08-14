@@ -80,11 +80,20 @@ composition itself is bound and host-tested behind that refusal:
   from the GAP connected-event cache in `openr1_bae8`, schedules the disconnect through
   `r1_delayed_event_schedule`, and drives the Nordic `ble_advertising` start/stop hooks.
 
-Two bindings stay deliberately unbound rather than inventing RTOS behavior: the
-delayed-event timer driver that would fire the scheduled disconnect and issue
-`sd_ble_gap_disconnect` (the entry is recorded, never fired), and command/peer byte-order
-reconciliation with the first-party sender (an e2e validation concern). The durability
-commit is fail-closed: a kv persist failure blocks the disconnect and advertising actions.
+The delayed-event timer driver is now bound (update 2026-08-14): a CMSIS one-shot timer in
+`../../platform/nrf52840/sdk/openr1_connection_control.c` steps the portable
+`r1_delayed_event_state` through `r1_delayed_event_timer_step`, and a fired disconnect event
+issues Nordic `sd_ble_gap_disconnect` with
+`BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION`, tolerating an already-closed handle
+(`BLE_ERROR_INVALID_CONN_HANDLE`) as the desired end state. The millisecond delay is
+converted to kernel ticks with `osKernelGetTickFreq` (the recovered 1,024-Hz tick), rounding
+up and never arming a zero-tick timer; the stock empty-table `0xFFFFFFFF`-millisecond reload
+is suppressed because it carries no event. A mutex serializes the scheduler path against the
+timer-daemon callback. One binding stays deliberately unbound rather than inventing
+behavior: command/peer byte-order reconciliation with the first-party sender (an e2e
+validation concern). The durability commit is fail-closed: a kv persist failure blocks the
+disconnect and advertising actions, and a full delayed-event table or timer failure is
+recorded but tolerated, matching the stock response-before-effect ordering.
 Host tests cover the planner branches, the offset-8/14 persistence, a full kv commit/reopen
 cycle over memory flash, and the delayed-event schedule composition.
 
