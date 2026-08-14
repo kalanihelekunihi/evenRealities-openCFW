@@ -66,8 +66,10 @@ The health-database binding and startup controller preserve the recovered provid
 six-schema size gate, exact
 FlashDB control/init and time-listener order, retained-clock handoff, local-day recovery interval,
 zeroed 128-byte iterator workspace, allocation-failure path, and one-shot crash restore. Pinned
-FlashDB/RTOS code supplies attributable mechanisms; the unresolved time/calendar implementation
-remains an injected, disabled provider seam.
+FlashDB/RTOS code supplies attributable mechanisms. The Nordic image now wires the startup
+controller to the platform clock, CMSIS mutex, and FreeRTOS heap at boot; see
+[`docs/correlation/STORAGE-PRODUCTION-WIRING-CORRELATION.md`](docs/correlation/STORAGE-PRODUCTION-WIRING-CORRELATION.md). The event-bus time subscription and health record
+decode consumers remain provider seams.
 The shared TWI layer now preserves fifteen byte-pinned R1 register-transfer, synchronization, and
 lifecycle adapters: two primary and two secondary register operations, two shutdown paths, distinct
 primary and secondary initializers, four software-bus pin-release paths, the completion callback, and two wait paths. Local code owns only framing,
@@ -142,3 +144,5 @@ The activity daily-cache callback boundary is in
 [`docs/ACTIVITY-DAILY-CACHE-CORRELATION.md`](docs/correlation/ACTIVITY-DAILY-CACHE-CORRELATION.md).
 The activity RAM/decoded-flash merge and packet-flush boundary is in
 [`docs/ACTIVITY-DAY-MERGE-CORRELATION.md`](docs/correlation/ACTIVITY-DAY-MERGE-CORRELATION.md).
+The private event-bus publisher, subscriber table, and multicast contract are in
+[`docs/EVENT-BUS-CORRELATION.md`](docs/correlation/EVENT-BUS-CORRELATION.md).

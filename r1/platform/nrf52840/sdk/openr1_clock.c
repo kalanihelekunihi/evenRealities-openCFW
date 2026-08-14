@@ -74,6 +74,18 @@ bool openr1_clock_epoch(uint32_t *epoch_seconds) {
     return r1_clock_now(&platform_clock, xTaskGetTickCount(), epoch_seconds);
 }
 
+bool openr1_clock_utc_offset(int16_t *utc_offset_minutes) {
+    if (utc_offset_minutes == NULL) {
+        return false;
+    }
+    uint32_t epoch = 0u;
+    if (!openr1_clock_epoch(&epoch)) {
+        return false;
+    }
+    *utc_offset_minutes = platform_clock.utc_offset_minutes;
+    return true;
+}
+
 bool openr1_clock_local_tm(struct tm *out) {
     if (out == NULL) {
         return false;
@@ -92,11 +104,13 @@ bool openr1_clock_local_tm(struct tm *out) {
  * garbage-collect the query path that health storage will consume. */
 typedef struct {
     bool (*epoch)(uint32_t *);
+    bool (*utc_offset)(int16_t *);
     bool (*local_tm)(struct tm *);
 } openr1_clock_api;
 
 __attribute__((used, section(".openr1_clock_api")))
 static const openr1_clock_api retained_clock_api = {
     openr1_clock_epoch,
+    openr1_clock_utc_offset,
     openr1_clock_local_tm,
 };

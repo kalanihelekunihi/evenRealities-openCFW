@@ -49,6 +49,11 @@ typedef struct {
 
 #define R1_SYSTEM_SETTINGS_BYTES 12u
 #define R1_SYSTEM_SETTINGS_SWITCH_TYPE_REG1 0u
+/* Recovered persistence site of the normalized REG1 enable flag: bit 1 of
+ * byte 24 in the kv.bin `dev_info` payload (R1-196,
+ * FRONTIER-256-262-CORRELATION.md). */
+#define R1_DEV_INFO_REG1_FLAG_OFFSET 24u
+#define R1_DEV_INFO_REG1_FLAG_MASK UINT8_C(0x02)
 #define R1_TEMPERATURE_TIMED_MODE_PERIOD 600u
 #define R1_HEART_RATE_TIMED_MODE_PERIOD 600u
 #define R1_SYSTEM_CONTROL_MAX_REPLY_BYTES 64u
@@ -131,6 +136,14 @@ r1_error r1_user_profile_plan_transition(
 r1_error r1_system_settings_plan_command(
     bool write_command, bool stored_enabled, const uint8_t *payload,
     size_t payload_length, r1_system_settings_command_plan *plan);
+/* Reads the persisted normalized REG1 enable flag from a kv.bin `dev_info`
+ * payload image.  Returns false for a short or absent image (fail closed;
+ * the kv defaults are zeroed). */
+bool r1_system_settings_reg1_enabled(const uint8_t *dev_info, size_t length);
+/* Sets or clears the persisted REG1 flag in a `dev_info` payload image
+ * without touching any other byte. */
+r1_error r1_system_settings_store_reg1(
+    uint8_t *dev_info, size_t length, bool enabled);
 r1_error r1_temperature_mode_plan_transition(
     uint8_t previous_mode, uint8_t next_mode,
     bool previous_stream_registered, bool timed_mode_registered,

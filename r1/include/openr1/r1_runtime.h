@@ -83,6 +83,10 @@ typedef r1_error (*r1_runtime_enqueue_fn)(void *context, bool shared_queue,
 typedef r1_error (*r1_runtime_role_fn)(void *context, uint16_t connection,
                                       r1_peer_role role);
 typedef void (*r1_runtime_touch_fn)(void *context, bool enabled);
+/* Invoked after a dispatch that changed the 12-byte system-settings record;
+ * the platform owns any persistence or hardware effect. */
+typedef void (*r1_runtime_settings_fn)(
+    void *context, const uint8_t system_settings[R1_SYSTEM_SETTINGS_BYTES]);
 
 typedef struct {
     bool active;
@@ -106,6 +110,8 @@ typedef struct r1_runtime {
     void *role_context;
     r1_runtime_touch_fn touch_handler;
     void *touch_context;
+    r1_runtime_settings_fn settings_handler;
+    void *settings_context;
 } r1_runtime;
 
 void r1_runtime_initialize(r1_runtime *runtime,
@@ -123,6 +129,9 @@ void r1_runtime_set_role_handler(r1_runtime *runtime,
 void r1_runtime_set_touch_handler(r1_runtime *runtime,
                                   r1_runtime_touch_fn touch_handler,
                                   void *touch_context);
+void r1_runtime_set_settings_handler(r1_runtime *runtime,
+                                     r1_runtime_settings_fn settings_handler,
+                                     void *settings_context);
 void r1_runtime_configure_battery(r1_runtime *runtime, uint8_t battery_type);
 bool r1_runtime_update_battery(
     r1_runtime *runtime, r1_charge_state charge,

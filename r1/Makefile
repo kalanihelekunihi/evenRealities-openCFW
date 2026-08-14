@@ -3,7 +3,7 @@ CLANG ?= clang
 CPPFLAGS := -Iinclude
 CFLAGS := -std=c11 -Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -O2
 SOURCES := src/r1_crc.c src/r1_protocol.c src/r1_health.c src/r1_health_db.c src/r1_twi_sync.c src/r1_retained_log.c src/r1_reset_trace.c src/r1_reset_reason.c src/r1_state.c src/r1_storage.c src/r1_kv_store.c src/r1_nv_recovery.c src/r1_sleep_db.c src/r1_persistence.c src/r1_connection_params.c src/r1_peer_target.c \
-	src/r1_event.c src/r1_dispatch.c src/r1_runtime.c src/r1_goodix.c src/r1_iqs7211e.c \
+	src/r1_event.c src/r1_event_bus.c src/r1_dispatch.c src/r1_runtime.c src/r1_goodix.c src/r1_iqs7211e.c \
 	src/r1_st25dvxxkc.c src/r1_power_lease.c src/r1_motion.c src/r1_wear.c src/r1_battery.c \
 	src/r1_clock.c port/goodix_gh3x2x/r1_gh3x2x_port.c
 TEST_SOURCES := tests/test_openr1.c

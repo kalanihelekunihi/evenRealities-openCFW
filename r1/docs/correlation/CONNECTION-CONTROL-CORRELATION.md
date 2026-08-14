@@ -64,11 +64,29 @@ The official two-target store does not contain a phone address. The exact persis
 `0x000738A8` has only three direct callers: reset erases both slots at `0x00046052`, the store path
 writes both at `0x0004D9E2`, and `removeRingNotify` erases both at `0x000844E6`.
 
-OpenR1 currently keeps the externally callable `advStart` command refused in the normal dispatcher
-until durable target storage, current-peer lookup, delayed-disconnect scheduling, and role-aware
-advertising integration are all bound and tested together. The recovered planner is admissible R1
-behavior; enabling only a subset would create a misleading and potentially unsafe compatibility
-surface.
+OpenR1 keeps the externally callable `advStart` command refused in the normal dispatcher:
+product authorization remains fail-closed and unrefusing requires the bound composition to
+pass end-to-end authorization and owned-hardware validation. As of 2026-08-14 the
+composition itself is bound and host-tested behind that refusal:
+
+- `r1_connection_control_plan_adv_start` (in `../../src/r1_peer_target.c`) composes the
+  recovered consumer policy over the existing target-validity and match helpers: store both
+  targets unconditionally, schedule the raw `0x5000` delayed disconnect for a mismatching
+  connected glasses peer, start fast advertising while either role is unoccupied, and stop
+  advertising only when both roles are occupied and the peer matched.
+- `r1_peer_target_persist` writes both targets at device-info offsets 8 and 14; the SDK
+  `openr1_connection_control_adv_start` entry point drives it through the
+  production-initialized `r1_kv_store` (`kv.bin`), reads the connected glasses peer address
+  from the GAP connected-event cache in `openr1_bae8`, schedules the disconnect through
+  `r1_delayed_event_schedule`, and drives the Nordic `ble_advertising` start/stop hooks.
+
+Two bindings stay deliberately unbound rather than inventing RTOS behavior: the
+delayed-event timer driver that would fire the scheduled disconnect and issue
+`sd_ble_gap_disconnect` (the entry is recorded, never fired), and command/peer byte-order
+reconciliation with the first-party sender (an e2e validation concern). The durability
+commit is fail-closed: a kv persist failure blocks the disconnect and advertising actions.
+Host tests cover the planner branches, the offset-8/14 persistence, a full kv commit/reopen
+cycle over memory flash, and the delayed-event schedule composition.
 
 Update (2026-08-13): the Nordic SDK application now binds the role-occupancy half of this
 contract. `openr1_advertising_set_role_occupancy` reads phone/glasses occupancy from the runtime
@@ -78,9 +96,7 @@ occupied. The binding fires on pair-role assignment (the registered role handler
 disconnect. In the SDK application today the only role-assignment signal is `pairAuth` selecting
 the phone role; the glasses-role planner (`r1_runtime_plan_bae8_event` link groups) still has no
 bound channel parser, so glasses occupancy never becomes true on target and the both-occupied stop
-path is unreachable until that binding lands. Unassigned links occupy no role. The externally
-callable `advStart` command remains refused as stated above: durable target storage, current-peer
-lookup, and delayed-disconnect scheduling are still unbound.
+path is unreachable until that binding lands. Unassigned links occupy no role.
 
 ## Provider boundary
 

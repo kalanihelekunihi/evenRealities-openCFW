@@ -14,7 +14,9 @@
 #include "openr1_analog.h"
 #include "openr1_clock.h"
 #include "openr1_cmbacktrace_port.h"
+#include "openr1_connection_control.h"
 #include "openr1_connection_params.h"
+#include "openr1_databases.h"
 #include "openr1_gatt.h"
 #include "openr1_i2c5_resources.h"
 #include "openr1_motion.h"
@@ -144,6 +146,8 @@ typedef r1_error (*openr1_sensor_stream_registration_plan_fn)(
 typedef r1_error (*openr1_latest_valid_flash_slot_scan_fn)(
     const r1_flash *, uint32_t, uint32_t, uint8_t, uint32_t,
     r1_latest_valid_flash_slot_scan_result *);
+typedef uint32_t (*openr1_connection_control_adv_start_fn)(
+    const uint8_t *, const uint8_t *);
 
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_ble_thread_encode_fn retained_ble_thread_encode =
@@ -265,10 +269,35 @@ __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_latest_valid_flash_slot_scan_fn
     retained_latest_valid_flash_slot_scan =
         r1_latest_valid_flash_slot_scan_adapter;
+/* Retains the advStart two-target composition entry point: the dispatcher
+ * command stays refused, so nothing calls it on target, but the bound
+ * composition stays in the image for review and later authorized wiring. */
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_connection_control_adv_start_fn
+    retained_connection_control_adv_start =
+        openr1_connection_control_adv_start;
 
 static void touch_enabled_changed(void *context, bool enabled) {
     (void)context;
     const ret_code_t error = openr1_touch_set_enabled(enabled);
+    if (error != NRF_SUCCESS) {
+        startup_error = error;
+    }
+}
+
+/* Recovered REG1 persistence: a system-settings write for switch type zero
+ * persists the normalized enable flag at kv dev_info byte 24 bit 1.  The
+ * persist is deferred to the storage worker (this hook runs on the
+ * SoftDevice event thread, which may not mutate flash).  The
+ * sd_power_dcdc_mode_set regulator SVC stays deliberately scoped out. */
+static void system_settings_changed(
+    void *context, const uint8_t system_settings[R1_SYSTEM_SETTINGS_BYTES]) {
+    (void)context;
+    if (system_settings[4] != R1_SYSTEM_SETTINGS_SWITCH_TYPE_REG1) {
+        return;
+    }
+    const ret_code_t error =
+        openr1_databases_persist_reg1(system_settings[5] != 0u);
     if (error != NRF_SUCCESS) {
         startup_error = error;
     }
@@ -359,6 +388,22 @@ static void softdevice_initialize(void) {
     if (error != NRF_SUCCESS) {
         fail(error);
     }
+    /* Binds kv.bin synchronously and starts the storage worker that runs the
+     * health TSDB startup and sleep.db bind in the recovered order.  Placed
+     * after the clock so the health startup ops can adopt/report time, and
+     * after openr1_storage_initialize (above) for the FAL table. */
+    error = openr1_databases_initialize();
+    if (error != NRF_SUCCESS) {
+        fail(error);
+    }
+    /* Adopt the persisted normalized REG1 flag (kv dev_info byte 24 bit 1)
+     * into the runtime system settings so reads reflect the stored state,
+     * and route later settings writes to the deferred persist. */
+    if (openr1_databases_kv_ready()) {
+        runtime->device.system_settings[5] =
+            openr1_databases_reg1_enabled() ? 1u : 0u;
+    }
+    r1_runtime_set_settings_handler(runtime, system_settings_changed, NULL);
     error = openr1_gatt_initialize();
     if (error != NRF_SUCCESS) {
         fail(error);

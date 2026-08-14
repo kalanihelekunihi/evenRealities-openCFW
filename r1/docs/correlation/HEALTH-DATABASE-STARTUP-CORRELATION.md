@@ -85,13 +85,13 @@ Cortex-M4 builds pass.
 
 The ownership verifier pins both stock extents, lengths, hashes, and their
 bounded product/FlashDB dispositions. The linked controller is 464 bytes at
-`0x0003441C` with SHA-256
-`a68bc3cdc502cd89939530f0f0276246f96327af5d154b4f821a4879b8b405d7`.
-The linked provider-handle accessor is at `0x0003441A`. The `.openr1_health_db_api` retention table is at `0x0003B384` with size `0x08`.
-The verified unsigned Nordic application is 94,804 bytes text, 236 bytes data,
-and 132,544 bytes BSS. Its standalone HEX and BIN SHA-256 values are
-`48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`
-and `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
+`0x00039E90` with SHA-256
+`8292ead8e375fa260a6acfdb549e427612388db620572c8f974f0cf4883adaeb`.
+The linked provider-handle accessor is at `0x00039E8C`. The `.openr1_health_db_api` retention table is at `0x00045BD0` with size `0x08`.
+The verified unsigned Nordic application is 126,028 bytes text, 276 bytes data,
+and 148,956 bytes BSS. Its standalone HEX and BIN SHA-256 values are
+`cc082ebf2ed4105a20f4bf1feda7708e8ed2a9a97cea28559cf089d86e109d2d`
+and `d1b36e3e70e65f1b0847a3a6587813297b2cd782f25ea6bf6cffc723c6d9046c`.
 
 This component changes no signing, boot verification, rollback, authorization,
 flash-protection, or deployment behavior.

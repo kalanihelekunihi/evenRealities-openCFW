@@ -94,6 +94,28 @@ r1_error r1_system_settings_plan_command(
     return R1_OK;
 }
 
+bool r1_system_settings_reg1_enabled(const uint8_t *dev_info, size_t length) {
+    if (dev_info == NULL || length <= R1_DEV_INFO_REG1_FLAG_OFFSET) {
+        return false;
+    }
+    return (dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] &
+            R1_DEV_INFO_REG1_FLAG_MASK) != 0u;
+}
+
+r1_error r1_system_settings_store_reg1(
+    uint8_t *dev_info, size_t length, bool enabled) {
+    if (dev_info == NULL || length <= R1_DEV_INFO_REG1_FLAG_OFFSET) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (enabled) {
+        dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] |= R1_DEV_INFO_REG1_FLAG_MASK;
+    } else {
+        dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] &=
+            (uint8_t)~R1_DEV_INFO_REG1_FLAG_MASK;
+    }
+    return R1_OK;
+}
+
 r1_error r1_temperature_mode_plan_transition(
     uint8_t previous_mode, uint8_t next_mode,
     bool previous_stream_registered, bool timed_mode_registered,

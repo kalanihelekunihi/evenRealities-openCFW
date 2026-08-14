@@ -8,6 +8,7 @@
 #include "openr1/r1_connection_params.h"
 #include "openr1/r1_dispatch.h"
 #include "openr1/r1_event.h"
+#include "openr1/r1_event_bus.h"
 #include "openr1/r1_goodix.h"
 #include "openr1/r1_health.h"
 #include "openr1/r1_health_db.h"
@@ -6208,6 +6209,180 @@ static void test_peer_target_policy(void) {
     assert(!r1_peer_is_target_glasses(true, other, zero, left));
 }
 
+static void test_connection_control_composition(void) {
+    const uint8_t first[R1_PEER_ADDRESS_SIZE] = {1u, 2u, 3u, 4u, 5u, 6u};
+    const uint8_t second[R1_PEER_ADDRESS_SIZE] = {7u, 8u, 9u, 10u, 11u, 12u};
+    const uint8_t other[R1_PEER_ADDRESS_SIZE] = {9u, 9u, 9u, 9u, 9u, 9u};
+    const uint8_t zero[R1_PEER_ADDRESS_SIZE] = {0};
+    r1_connection_control_plan plan;
+
+    assert(r1_connection_control_plan_adv_start(
+               false, 0u, false, NULL, NULL, second, false, false, &plan)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_connection_control_plan_adv_start(
+               false, 0u, false, NULL, first, NULL, false, false, &plan)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_connection_control_plan_adv_start(
+               false, 0u, false, NULL, first, second, false, false, NULL)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_connection_control_plan_adv_start(
+               true, 0u, true, NULL, first, second, false, false, &plan)
+           == R1_ERROR_ARGUMENT);
+
+    /* A peer matching the first target with both roles occupied stops
+     * advertising and schedules no disconnect. */
+    assert(r1_connection_control_plan_adv_start(
+               true, 5u, true, first, first, second, true, true, &plan)
+           == R1_OK);
+    assert(plan.store_targets && !plan.schedule_disconnect);
+    assert(!plan.start_fast_advertising && plan.stop_advertising);
+
+    /* A peer matching the second target with the glasses role free starts
+     * fast advertising. */
+    assert(r1_connection_control_plan_adv_start(
+               true, 5u, true, second, first, second, true, false, &plan)
+           == R1_OK);
+    assert(!plan.schedule_disconnect &&
+           plan.start_fast_advertising && !plan.stop_advertising);
+
+    /* A mismatching connected peer schedules the recovered raw 0x5000
+     * delayed disconnect; with both roles occupied no advertising action
+     * fires until the scheduled disconnect frees the role. */
+    assert(r1_connection_control_plan_adv_start(
+               true, 5u, true, other, first, second, true, true, &plan)
+           == R1_OK);
+    assert(plan.schedule_disconnect && plan.disconnect_connection == 5u);
+    assert(plan.disconnect_delay == R1_CONNECTION_CONTROL_DISCONNECT_DELAY);
+    assert(!plan.start_fast_advertising && !plan.stop_advertising);
+    assert(r1_connection_control_plan_adv_start(
+               true, 5u, true, other, first, second, false, true, &plan)
+           == R1_OK);
+    assert(plan.schedule_disconnect && plan.start_fast_advertising);
+
+    /* An unavailable lookup and two invalid targets are both accepted as a
+     * match (recovered behavior); no glasses link never disconnects. */
+    assert(r1_connection_control_plan_adv_start(
+               true, 5u, false, NULL, first, second, true, true, &plan)
+           == R1_OK);
+    assert(!plan.schedule_disconnect && plan.stop_advertising);
+    assert(r1_connection_control_plan_adv_start(
+               true, 5u, true, other, zero, zero, true, true, &plan)
+           == R1_OK);
+    assert(!plan.schedule_disconnect && plan.stop_advertising);
+    assert(r1_connection_control_plan_adv_start(
+               false, R1_INVALID_CONNECTION, false, NULL, first, second,
+               false, false, &plan) == R1_OK);
+    assert(!plan.schedule_disconnect && plan.start_fast_advertising);
+
+    /* Targets persist at dev_info offsets 8 and 14. */
+    uint8_t dev_info[52] = {0};
+    assert(r1_peer_target_persist(NULL, sizeof dev_info, first, second)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_peer_target_persist(dev_info, 19u, first, second)
+           == R1_ERROR_CAPACITY);
+    assert(r1_peer_target_persist(dev_info, sizeof dev_info, first, second)
+           == R1_OK);
+    assert(memcmp(dev_info + R1_DEV_INFO_TARGET_FIRST_OFFSET, first,
+                  R1_PEER_ADDRESS_SIZE) == 0);
+    assert(memcmp(dev_info + R1_DEV_INFO_TARGET_SECOND_OFFSET, second,
+                  R1_PEER_ADDRESS_SIZE) == 0);
+
+    /* The durable composition survives a kv commit and reopen over memory
+     * flash. */
+    r1_memory_flash memory;
+    uint8_t bytes[R1_KV_PARTITION_BYTES];
+    r1_kv_store store;
+    r1_memory_flash_initialize(&memory, bytes, sizeof bytes);
+    assert(r1_kv_store_initialize(&store, r1_memory_flash_interface(&memory))
+           == R1_OK);
+    uint8_t persisted[R1_KV_CLASS_PAYLOAD_MAX];
+    size_t length = 0u;
+    assert(r1_kv_store_get(&store, R1_KV_DEV_INFO, persisted,
+                           sizeof persisted, &length) == R1_OK);
+    assert(r1_peer_target_persist(persisted, length, first, second) == R1_OK);
+    assert(r1_kv_store_set(&store, R1_KV_DEV_INFO, persisted, length)
+           == R1_OK);
+    assert(r1_kv_store_commit(&store) == R1_OK);
+    assert(r1_kv_store_initialize(&store, r1_memory_flash_interface(&memory))
+           == R1_OK);
+    memset(persisted, 0, sizeof persisted);
+    assert(r1_kv_store_get(&store, R1_KV_DEV_INFO, persisted,
+                           sizeof persisted, &length) == R1_OK);
+    assert(memcmp(persisted + R1_DEV_INFO_TARGET_FIRST_OFFSET, first,
+                  R1_PEER_ADDRESS_SIZE) == 0);
+    assert(memcmp(persisted + R1_DEV_INFO_TARGET_SECOND_OFFSET, second,
+                  R1_PEER_ADDRESS_SIZE) == 0);
+
+    /* The scheduled disconnect composes with the portable delayed-event
+     * scheduler. */
+    r1_delayed_event_state delayed = {{0}, 0u, 0u};
+    r1_delayed_event_schedule_result schedule;
+    assert(r1_connection_control_plan_adv_start(
+               true, 5u, true, other, first, second, true, true, &plan)
+           == R1_OK);
+    assert(r1_delayed_event_schedule(
+               &delayed, 1u, plan.disconnect_connection,
+               plan.disconnect_delay, 0u, &schedule) == R1_OK);
+    assert(schedule.action == R1_DELAYED_EVENT_SCHEDULED);
+}
+
+typedef struct {
+    size_t calls;
+    uint8_t settings[R1_SYSTEM_SETTINGS_BYTES];
+} runtime_settings_capture;
+
+static void capture_runtime_settings(
+    void *context, const uint8_t system_settings[R1_SYSTEM_SETTINGS_BYTES]) {
+    runtime_settings_capture *capture = context;
+    capture->calls += 1u;
+    memcpy(capture->settings, system_settings, R1_SYSTEM_SETTINGS_BYTES);
+}
+
+static void test_system_settings_reg1_persistence(void) {
+    uint8_t dev_info[52] = {0};
+    assert(!r1_system_settings_reg1_enabled(NULL, sizeof dev_info));
+    assert(!r1_system_settings_reg1_enabled(
+        dev_info, R1_DEV_INFO_REG1_FLAG_OFFSET));
+    assert(!r1_system_settings_reg1_enabled(dev_info, sizeof dev_info));
+    assert(r1_system_settings_store_reg1(NULL, sizeof dev_info, true)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_system_settings_store_reg1(
+               dev_info, R1_DEV_INFO_REG1_FLAG_OFFSET, true)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_system_settings_store_reg1(dev_info, sizeof dev_info, true)
+           == R1_OK);
+    assert(dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] == R1_DEV_INFO_REG1_FLAG_MASK);
+    assert(r1_system_settings_reg1_enabled(dev_info, sizeof dev_info));
+    dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET - 1u] = 0xa5u;
+    assert(r1_system_settings_store_reg1(dev_info, sizeof dev_info, false)
+           == R1_OK);
+    assert(dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] == 0u &&
+           dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET - 1u] == 0xa5u);
+    assert(!r1_system_settings_reg1_enabled(dev_info, sizeof dev_info));
+
+    /* The runtime settings hook reports each changed record once. */
+    r1_runtime runtime;
+    r1_runtime_initialize(&runtime, NULL, NULL);
+    runtime_settings_capture capture = {0};
+    r1_runtime_set_settings_handler(
+        &runtime, capture_runtime_settings, &capture);
+    assert(r1_runtime_connect(&runtime, 3u) == R1_OK);
+    assert(r1_runtime_set_security(&runtime, 3u, true, true, true) == R1_OK);
+    static const uint8_t enable[R1_SYSTEM_SETTINGS_BYTES] = {
+        0u, 0u, 0u, 0u, R1_SYSTEM_SETTINGS_SWITCH_TYPE_REG1, 1u,
+    };
+    const r1_model set_enable = request(2u, 0x0fu, enable, sizeof enable);
+    assert(runtime_feed_model(&runtime, 3u, &set_enable) == R1_OK);
+    assert(capture.calls == 1u && capture.settings[4] == 0u &&
+           capture.settings[5] == 1u);
+    assert(runtime_feed_model(&runtime, 3u, &set_enable) == R1_OK);
+    assert(capture.calls == 1u);
+    static const uint8_t disable[R1_SYSTEM_SETTINGS_BYTES] = {0};
+    const r1_model set_disable = request(2u, 0x0fu, disable, sizeof disable);
+    assert(runtime_feed_model(&runtime, 3u, &set_disable) == R1_OK);
+    assert(capture.calls == 2u && capture.settings[5] == 0u);
+}
+
 static void test_next_frontier_product_policies(void) {
     static const uint8_t payload[] = {0xaau, 0xbbu, 0xccu, 0xddu, 0xeeu};
     uint8_t envelope[20u];
@@ -6906,6 +7081,206 @@ static void test_next_frontier_204_210_policies(void) {
     assert(!scan.found && scan.next_slot == 0u && scan.read_count == 2u);
 }
 
+typedef struct {
+    size_t calls;
+    uint16_t last_event_id;
+    r1_event_bus_window last_window;
+    size_t last_length;
+    bool last_payload_null;
+    uint8_t last_payload[R1_EVENT_BUS_PAYLOAD_LIMIT];
+    bool accept;
+} event_bus_sink_trace;
+
+static bool event_bus_sink(const r1_event_bus_event *event, void *context) {
+    event_bus_sink_trace *trace = context;
+    ++trace->calls;
+    trace->last_event_id = event->event_id;
+    trace->last_window = event->window;
+    trace->last_length = event->length;
+    trace->last_payload_null = event->payload == NULL;
+    if (event->payload != NULL) {
+        memcpy(trace->last_payload, event->payload, event->length);
+    }
+    return trace->accept;
+}
+
+typedef struct {
+    size_t calls;
+    unsigned order[R1_EVENT_BUS_SLOT_CAPACITY];
+    size_t lengths[R1_EVENT_BUS_SLOT_CAPACITY];
+    uint8_t first_bytes[R1_EVENT_BUS_SLOT_CAPACITY];
+} event_bus_multicast_trace;
+
+#define DEFINE_EVENT_BUS_LISTENER(name, index)                                 \
+    static void name(const uint8_t *payload, size_t length, void *context) {   \
+        event_bus_multicast_trace *trace = context;                            \
+        trace->order[trace->calls] = (index);                                  \
+        trace->lengths[trace->calls] = length;                                 \
+        trace->first_bytes[trace->calls] =                                     \
+            payload != NULL ? payload[0] : (uint8_t)0;                         \
+        ++trace->calls;                                                        \
+    }
+
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_a, 0u)
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_b, 1u)
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_c, 2u)
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_d, 3u)
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_e, 4u)
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_f, 5u)
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_g, 6u)
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_h, 7u)
+DEFINE_EVENT_BUS_LISTENER(event_bus_listener_i, 8u)
+
+static void test_event_bus(void) {
+    r1_event_bus bus;
+    event_bus_sink_trace sink_trace = {0};
+    event_bus_multicast_trace multicast_trace = {0};
+    r1_event_bus_window window = R1_EVENT_BUS_WINDOW_SENSOR;
+    size_t delivered = 99u;
+    static const uint8_t four_bytes[] = {0xdeu, 0xadu, 0xbeu, 0xefu};
+    static const uint8_t five_bytes[] = {1u, 2u, 3u, 4u, 5u};
+    uint8_t oversized[R1_EVENT_BUS_PAYLOAD_LIMIT + 1u] = {0};
+
+    /* Three event-id windows with exact boundaries; id zero and ids at or
+     * above 0x3000 fall outside every window. */
+    assert(!r1_event_bus_classify(0u, &window));
+    assert(!r1_event_bus_classify(0x3000u, &window));
+    assert(!r1_event_bus_classify(0xffffu, &window));
+    assert(r1_event_bus_classify(0x0001u, &window));
+    assert(window == R1_EVENT_BUS_WINDOW_SENSOR);
+    assert(r1_event_bus_classify(0x0fffu, &window));
+    assert(window == R1_EVENT_BUS_WINDOW_SENSOR);
+    assert(r1_event_bus_classify(0x1000u, &window));
+    assert(window == R1_EVENT_BUS_WINDOW_SYSTEM);
+    assert(r1_event_bus_classify(0x1fffu, &window));
+    assert(window == R1_EVENT_BUS_WINDOW_SYSTEM);
+    assert(r1_event_bus_classify(0x2000u, &window));
+    assert(window == R1_EVENT_BUS_WINDOW_STORAGE);
+    assert(r1_event_bus_classify(0x2fffu, &window));
+    assert(window == R1_EVENT_BUS_WINDOW_STORAGE);
+    assert(r1_event_bus_classify(0x0003u, NULL));
+
+    /* Publish argument validation and the unbound queue handoff. */
+    r1_event_bus_reset(&bus);
+    r1_event_bus_reset(NULL);
+    assert(r1_event_bus_publish(NULL, 0x0003u, four_bytes, 4u)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_publish(&bus, 0u, four_bytes, 4u) == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_publish(&bus, 0x3000u, four_bytes, 4u)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_publish(&bus, 0x0003u, NULL, 1u) == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_publish(&bus, 0x0003u, oversized, sizeof(oversized))
+           == R1_ERROR_LENGTH);
+    assert(r1_event_bus_publish(&bus, 0x0003u, four_bytes, 4u)
+           == R1_ERROR_UNSUPPORTED);
+    assert(r1_event_bus_bind_enqueue(NULL, event_bus_sink, &sink_trace)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_bind_enqueue(&bus, NULL, &sink_trace)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_bind_enqueue(&bus, event_bus_sink, &sink_trace)
+           == R1_OK);
+
+    /* Inline-limit payload, bounded-copy payload, and empty payload. */
+    sink_trace.accept = true;
+    assert(r1_event_bus_publish(&bus, 0x0003u, four_bytes, sizeof(four_bytes))
+           == R1_OK);
+    assert(sink_trace.calls == 1u && sink_trace.last_event_id == 0x0003u);
+    assert(sink_trace.last_window == R1_EVENT_BUS_WINDOW_SENSOR);
+    assert(sink_trace.last_length == 4u && !sink_trace.last_payload_null);
+    assert(memcmp(sink_trace.last_payload, four_bytes, 4u) == 0);
+    assert(r1_event_bus_publish(&bus, 0x100cu, five_bytes, sizeof(five_bytes))
+           == R1_OK);
+    assert(sink_trace.last_window == R1_EVENT_BUS_WINDOW_SYSTEM);
+    assert(sink_trace.last_length == 5u && !sink_trace.last_payload_null);
+    assert(memcmp(sink_trace.last_payload, five_bytes, 5u) == 0);
+    assert(r1_event_bus_publish(&bus, 0x2003u, NULL, 0u) == R1_OK);
+    assert(sink_trace.last_window == R1_EVENT_BUS_WINDOW_STORAGE);
+    assert(sink_trace.last_length == 0u && sink_trace.last_payload_null);
+
+    /* A rejecting queue handoff surfaces the stock zero return as
+     * R1_ERROR_CAPACITY. */
+    sink_trace.accept = false;
+    assert(r1_event_bus_publish(&bus, 0x0003u, four_bytes, 4u)
+           == R1_ERROR_CAPACITY);
+    sink_trace.accept = true;
+
+    /* Subscription insert: validation, duplicates, and per-slot counts. */
+    assert(r1_event_bus_subscribe(NULL, 4u, event_bus_listener_a,
+                                  &multicast_trace) == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_subscribe(&bus, 4u, NULL, &multicast_trace)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_subscribe(&bus, 5u, event_bus_listener_a,
+                                  &multicast_trace) == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_subscribe(&bus, 4u, event_bus_listener_a,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 4u, event_bus_listener_b,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 4u, event_bus_listener_c,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 4u, event_bus_listener_a,
+                                  &multicast_trace) == R1_ERROR_STATE);
+    assert(r1_event_bus_subscribe(&bus, 0u, event_bus_listener_a,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscriber_count(&bus, 4u) == 3u);
+    assert(r1_event_bus_subscriber_count(&bus, 0u) == 1u);
+    assert(r1_event_bus_subscriber_count(NULL, 4u) == 0u);
+    assert(r1_event_bus_subscriber_count(&bus, 5u) == 0u);
+
+    /* Multicast validation, empty-slot delivery, and registration order. */
+    assert(r1_event_bus_multicast(NULL, 4u, four_bytes, 4u, &delivered)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_multicast(&bus, 5u, four_bytes, 4u, &delivered)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_multicast(&bus, 4u, NULL, 1u, &delivered)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_event_bus_multicast(&bus, 2u, four_bytes, 4u, &delivered)
+           == R1_OK);
+    assert(delivered == 0u && multicast_trace.calls == 0u);
+    assert(r1_event_bus_multicast(&bus, 4u, four_bytes, sizeof(four_bytes),
+                                  &delivered) == R1_OK);
+    assert(delivered == 3u && multicast_trace.calls == 3u);
+    assert(multicast_trace.order[0] == 0u && multicast_trace.order[1] == 1u &&
+           multicast_trace.order[2] == 2u);
+    assert(multicast_trace.lengths[0] == 4u);
+    assert(multicast_trace.first_bytes[2] == 0xdeu);
+    assert(r1_event_bus_multicast(&bus, 0u, NULL, 0u, NULL) == R1_OK);
+    assert(multicast_trace.calls == 4u);
+
+    /* Slot capacity: eight listeners fill a slot; the ninth is refused
+     * instead of the stock allocation-failure halt. */
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_a,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_b,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_c,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_d,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_e,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_f,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_g,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_h,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscribe(&bus, 1u, event_bus_listener_i,
+                                  &multicast_trace) == R1_ERROR_CAPACITY);
+
+    /* Reset restores the zero-filled power-on state. */
+    r1_event_bus_reset(&bus);
+    assert(r1_event_bus_subscriber_count(&bus, 4u) == 0u);
+    assert(r1_event_bus_subscriber_count(&bus, 1u) == 0u);
+    assert(r1_event_bus_multicast(&bus, 4u, four_bytes, 4u, &delivered)
+           == R1_OK);
+    assert(delivered == 0u);
+    assert(r1_event_bus_publish(&bus, 0x0003u, four_bytes, 4u)
+           == R1_ERROR_UNSUPPORTED);
+    assert(r1_event_bus_subscribe(&bus, 4u, event_bus_listener_a,
+                                  &multicast_trace) == R1_OK);
+    assert(r1_event_bus_subscriber_count(&bus, 4u) == 1u);
+}
+
 int main(void) {
     test_checksums();
     test_retained_crash_log();
@@ -6950,6 +7325,7 @@ int main(void) {
     test_hrv_timing_start_policy();
     test_event_plane();
     test_delayed_event_timer_step();
+    test_event_bus();
     test_runtime_roles();
     test_runtime_role_occupancy();
     test_runtime_touch_effect();
@@ -6974,6 +7350,8 @@ int main(void) {
     test_connection_parameter_policy();
     test_connection_role_assignment();
     test_peer_target_policy();
+    test_connection_control_composition();
+    test_system_settings_reg1_persistence();
     test_next_frontier_product_policies();
     test_next_frontier_334_342_policies();
     test_next_frontier_314_328_policies();

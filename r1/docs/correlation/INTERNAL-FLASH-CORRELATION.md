@@ -84,7 +84,8 @@ their separately documented R1 formats.
 There is no BLE or host raw-flash command. The port cannot address application, FDS, bootloader,
 MBR-parameter, UICR, or signing regions. `pKey.bin`, `ep.bin`, destructive format, and raw export
 remain policy-gated. Host NOR, FlashDB/FAL integration, source-admission, linked-image, sanitizer,
-and freestanding builds pass. The production runtime does not yet instantiate the KV, sleep, or
-health database consumers over this provider. Their non-SoftDevice worker integration, on-device
-power-loss behavior, SoftDevice queue saturation, FDS coexistence, and migration against an
-owner-authorized ring image still require physical validation.
+and freestanding builds pass. The production runtime now instantiates the KV, sleep, and
+health databases over this provider at startup from a dedicated worker thread; see
+[`STORAGE-PRODUCTION-WIRING-CORRELATION.md`](STORAGE-PRODUCTION-WIRING-CORRELATION.md).
+On-device power-loss behavior, SoftDevice queue saturation, FDS coexistence, and
+migration against an owner-authorized ring image still require physical validation.

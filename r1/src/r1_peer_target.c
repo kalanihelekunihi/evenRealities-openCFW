@@ -54,6 +54,53 @@ bool r1_peer_is_target_glasses(
            (left_valid && address_equals(peer, left_target));
 }
 
+r1_error r1_connection_control_plan_adv_start(
+    bool glasses_connected, uint16_t glasses_connection,
+    bool peer_available, const uint8_t peer_address[R1_PEER_ADDRESS_SIZE],
+    const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
+    const uint8_t second_target[R1_PEER_ADDRESS_SIZE],
+    bool phone_occupied, bool glasses_occupied,
+    r1_connection_control_plan *plan) {
+    if (first_target == NULL || second_target == NULL || plan == NULL ||
+        (peer_available && peer_address == NULL)) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_connection_control_plan){0};
+    plan->store_targets = true;
+    const bool matched = r1_peer_is_target_glasses(
+        peer_available, peer_address, first_target, second_target);
+    if (glasses_connected && !matched) {
+        plan->schedule_disconnect = true;
+        plan->disconnect_connection = glasses_connection;
+        plan->disconnect_delay = R1_CONNECTION_CONTROL_DISCONNECT_DELAY;
+    }
+    if (!phone_occupied || !glasses_occupied) {
+        plan->start_fast_advertising = true;
+    } else if (matched) {
+        plan->stop_advertising = true;
+    }
+    return R1_OK;
+}
+
+r1_error r1_peer_target_persist(
+    uint8_t *dev_info, size_t length,
+    const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
+    const uint8_t second_target[R1_PEER_ADDRESS_SIZE]) {
+    if (dev_info == NULL || first_target == NULL || second_target == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length < R1_DEV_INFO_TARGET_SECOND_OFFSET + R1_PEER_ADDRESS_SIZE) {
+        return R1_ERROR_CAPACITY;
+    }
+    for (size_t index = 0u; index < R1_PEER_ADDRESS_SIZE; ++index) {
+        dev_info[R1_DEV_INFO_TARGET_FIRST_OFFSET + index] =
+            first_target[index];
+        dev_info[R1_DEV_INFO_TARGET_SECOND_OFFSET + index] =
+            second_target[index];
+    }
+    return R1_OK;
+}
+
 r1_bond_diagnostic_result r1_peer_bond_diagnostic_plan(
     uint16_t peer_id, int provider_load_result) {
     if (peer_id == UINT16_MAX) {

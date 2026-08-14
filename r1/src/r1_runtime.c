@@ -198,6 +198,8 @@ void r1_runtime_initialize(r1_runtime *runtime,
     runtime->role_context = NULL;
     runtime->touch_handler = NULL;
     runtime->touch_context = NULL;
+    runtime->settings_handler = NULL;
+    runtime->settings_context = NULL;
     for (size_t index = 0u; index < R1_RUNTIME_LINK_MAX; ++index) {
         runtime->links[index].active = false;
         runtime->links[index].connection = R1_INVALID_CONNECTION;
@@ -262,6 +264,15 @@ void r1_runtime_set_touch_handler(r1_runtime *runtime,
     if (runtime != NULL) {
         runtime->touch_handler = touch_handler;
         runtime->touch_context = touch_context;
+    }
+}
+
+void r1_runtime_set_settings_handler(r1_runtime *runtime,
+                                     r1_runtime_settings_fn settings_handler,
+                                     void *settings_context) {
+    if (runtime != NULL) {
+        runtime->settings_handler = settings_handler;
+        runtime->settings_context = settings_context;
     }
 }
 
@@ -474,6 +485,10 @@ r1_error r1_runtime_receive_eus(r1_runtime *runtime, uint16_t connection,
     }
     const r1_peer_role previous_role = link->session.role;
     const bool previous_touch_enabled = runtime->device.touch_enabled;
+    uint8_t previous_settings[R1_SYSTEM_SETTINGS_BYTES];
+    for (size_t index = 0u; index < R1_SYSTEM_SETTINGS_BYTES; ++index) {
+        previous_settings[index] = runtime->device.system_settings[index];
+    }
     const r1_error dispatch_error = r1_dispatch(
         &runtime->device, &link->session, &request, &runtime->dispatch_scratch);
     const r1_error role_error = commit_role_change(runtime, link, previous_role);
@@ -481,6 +496,18 @@ r1_error r1_runtime_receive_eus(r1_runtime *runtime, uint16_t connection,
         runtime->device.touch_enabled != previous_touch_enabled) {
         runtime->touch_handler(
             runtime->touch_context, runtime->device.touch_enabled);
+    }
+    if (runtime->settings_handler != NULL) {
+        bool settings_changed = false;
+        for (size_t index = 0u; index < R1_SYSTEM_SETTINGS_BYTES; ++index) {
+            settings_changed = settings_changed ||
+                runtime->device.system_settings[index] !=
+                    previous_settings[index];
+        }
+        if (settings_changed) {
+            runtime->settings_handler(
+                runtime->settings_context, runtime->device.system_settings);
+        }
     }
     error = enqueue_dispatch(runtime, connection);
     if (error != R1_OK) {

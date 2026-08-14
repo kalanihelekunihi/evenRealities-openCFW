@@ -35,8 +35,8 @@ No code from either blocked family is used. The route decision is recorded in
   before first synchronization (never fabricated).
 - `r1/platform/nrf52840/sdk/openr1_clock.c` — platform glue: adopts phone time-sets from the
   portable device state within one 1024-tick cadence, advances the epoch from the RTC-backed
-  (tickless-idle-correct) FreeRTOS kernel tick, and exposes epoch/local-calendar access via
-  toolchain `gmtime_r`.
+  (tickless-idle-correct) FreeRTOS kernel tick, and exposes epoch, UTC-offset, and
+  local-calendar access via toolchain `gmtime_r`.
 - The vendor-specific validating inverse converter is deliberately not reproduced: no openR1
   consumer exists, because time arrives as epoch seconds.
 

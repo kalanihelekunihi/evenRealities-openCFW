@@ -31,6 +31,10 @@ void openr1_clock_adopt_phone_time(uint32_t epoch_seconds,
 /* Current synchronized epoch, or false when never synchronized. */
 bool openr1_clock_epoch(uint32_t *epoch_seconds);
 
+/* Current synchronized UTC offset in minutes, or false when never
+ * synchronized. */
+bool openr1_clock_utc_offset(int16_t *utc_offset_minutes);
+
 /* Current local broken-down time via the toolchain C library.  Returns false
  * when never synchronized.  `struct tm` is the toolchain's. */
 struct tm;

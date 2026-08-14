@@ -2951,7 +2951,8 @@ def main() -> None:
     require(PROJECT / "platform" / "nrf52840" / "sdk" / "openr1_sdk.ld",
             "KEEP(*(.openr1_storage_api))")
     require(DOCS / "INTERNAL-FLASH-CORRELATION.md", "0x000D4000..<0x000F8000")
-    require(DOCS / "INTERNAL-FLASH-CORRELATION.md", "non-SoftDevice worker")
+    require(DOCS / "INTERNAL-FLASH-CORRELATION.md",
+            "the SoftDevice event thread are rejected instead of deadlocking it")
     require(DOCS / "SECURITY.md", "244-to-36-byte channel-1 overwrite")
     require(DOCS / "SOURCE-ADMISSION.md", "Goodix")
     require(DOCS / "MOTION-PROVIDER-CORRELATION.md", "BMA456 SensorAPI v2.29.0")

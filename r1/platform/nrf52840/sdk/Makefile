@@ -48,6 +48,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/src/r1_connection_params.c \
   $(PROJ_DIR)/src/r1_peer_target.c \
   $(PROJ_DIR)/src/r1_event.c \
+  $(PROJ_DIR)/src/r1_event_bus.c \
   $(PROJ_DIR)/src/r1_dispatch.c \
   $(PROJ_DIR)/src/r1_crypto.c \
   $(PROJ_DIR)/src/r1_goodix.c \
@@ -65,7 +66,9 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_app_timer_compat.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_bae8.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_cmbacktrace_port.c \
+  $(PROJ_DIR)/platform/nrf52840/sdk/openr1_connection_control.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_connection_params.c \
+  $(PROJ_DIR)/platform/nrf52840/sdk/openr1_databases.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_gatt.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_health.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_health_db.c \
@@ -175,6 +178,9 @@ SRC_FILES += \
   $(ST25DVXXKC_ROOT)/st25dvxxkc.c \
   $(ST25DVXXKC_ROOT)/st25dvxxkc_reg.c \
   $(TINY_AES_ROOT)/aes.c \
+  $(FLASHDB_ROOT)/src/fdb.c \
+  $(FLASHDB_ROOT)/src/fdb_tsdb.c \
+  $(FLASHDB_ROOT)/src/fdb_utils.c \
   $(FLASHDB_ROOT)/port/fal/src/fal.c \
   $(FLASHDB_ROOT)/port/fal/src/fal_flash.c \
   $(FLASHDB_ROOT)/port/fal/src/fal_partition.c \

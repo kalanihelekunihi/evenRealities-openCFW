@@ -29,6 +29,7 @@ typedef struct {
     bool channel1_notify;
     bool channel2_notify;
     uint16_t connection;
+    uint8_t peer_address[R1_PEER_ADDRESS_SIZE];
 } openr1_ble_link;
 
 typedef struct {
@@ -229,6 +230,11 @@ static void on_ble_event(ble_evt_t const *event, void *context) {
             openr1_advertising_connection_established(
                 event->evt.gap_evt.params.connected.role == BLE_GAP_ROLE_PERIPH);
             openr1_ble_link *link = allocate_link(connection);
+            if (link != NULL) {
+                memcpy(link->peer_address,
+                       event->evt.gap_evt.params.connected.peer_addr.addr,
+                       R1_PEER_ADDRESS_SIZE);
+            }
             if (link == NULL ||
                 r1_runtime_connect(openr1_platform_runtime(), connection) != R1_OK) {
                 service.last_error = NRF_ERROR_NO_MEM;
@@ -321,4 +327,17 @@ uint32_t openr1_bae8_initialize(void) {
 
 uint32_t openr1_bae8_last_error(void) {
     return service.last_error;
+}
+
+bool openr1_bae8_peer_address(
+    uint16_t connection, uint8_t address[R1_PEER_ADDRESS_SIZE]) {
+    if (address == NULL) {
+        return false;
+    }
+    const openr1_ble_link *link = find_link(connection);
+    if (link == NULL) {
+        return false;
+    }
+    memcpy(address, link->peer_address, R1_PEER_ADDRESS_SIZE);
+    return true;
 }
