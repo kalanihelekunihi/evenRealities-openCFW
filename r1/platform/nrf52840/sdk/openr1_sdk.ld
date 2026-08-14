@@ -76,6 +76,7 @@ SECTIONS
     KEEP(*(.openr1_retained_log_api))
     KEEP(*(.openr1_reset_trace_api))
     KEEP(*(.openr1_reset_reason_api))
+    KEEP(*(.openr1_clock_api))
   } > FLASH
 } INSERT AFTER .text;
 

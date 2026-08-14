@@ -352,6 +352,31 @@ r1_peer_role r1_runtime_connection_role(const r1_runtime *runtime,
     return R1_ROLE_UNASSIGNED;
 }
 
+void r1_runtime_role_occupancy(const r1_runtime *runtime,
+                               bool *phone_occupied, bool *glasses_occupied) {
+    if (phone_occupied != NULL) {
+        *phone_occupied = false;
+    }
+    if (glasses_occupied != NULL) {
+        *glasses_occupied = false;
+    }
+    if (runtime == NULL) {
+        return;
+    }
+    for (size_t index = 0u; index < R1_RUNTIME_LINK_MAX; ++index) {
+        const r1_runtime_link *link = &runtime->links[index];
+        if (!link->active) {
+            continue;
+        }
+        if (link->session.role == R1_ROLE_PHONE && phone_occupied != NULL) {
+            *phone_occupied = true;
+        }
+        if (link->session.role == R1_ROLE_GLASSES && glasses_occupied != NULL) {
+            *glasses_occupied = true;
+        }
+    }
+}
+
 static size_t fragment_count(size_t logical_length) {
     return logical_length / R1_FRAGMENT_PAYLOAD_MAX + 1u;
 }

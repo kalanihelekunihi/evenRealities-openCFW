@@ -44,6 +44,7 @@ def main() -> None:
     parser.add_argument("--tiny-aes-root", type=Path, required=True)
     parser.add_argument("--iqs7211e-root", type=Path, required=True)
     parser.add_argument("--azoteq-settings-root", type=Path, required=True)
+    parser.add_argument("--goodix-democode-root", type=Path, required=False)
     args = parser.parse_args()
 
     sdk = args.sdk_root.resolve()
@@ -217,6 +218,31 @@ def main() -> None:
         raise AssertionError("Azoteq IQS7211E settings header hash mismatch")
     require_text(settings_path, "Copyright (c) 2018 Azoteq (Pty) Ltd")
     require_text(settings_path, "Permission is hereby granted, free of charge")
+
+    if args.goodix_democode_root is not None:
+        goodix = args.goodix_democode_root.resolve()
+        democode = component("goodix-gh3x2x-democode")
+        if democode["commit"] != "2c0034a23b675a5f9a29e4a47e8b504c7a88e321":
+            raise AssertionError("Goodix GH3X2X democode snapshot pin changed")
+        if sha256(goodix / "LICENSE") != democode["license_sha256"]:
+            raise AssertionError("Goodix GH3X2X democode license hash mismatch")
+        require_text(goodix / "LICENSE", "Goodix")
+        require_text(
+            goodix / "demo_code/demo_kernel_code/kernel/gh_demo_version.h",
+            "GH3X2X_DEMO_MAJOR_VERSION_NUMBER",
+        )
+        require_text(
+            goodix / "demo_code/demo_kernel_code/driver/inc/gh_drv_version.h",
+            "2024-12-27",
+        )
+        require_text(
+            goodix / "demo_code/demo_kernel_code/kernel/gh_demo.c",
+            "Gh3x2xDemoStartSamplingInner",
+        )
+        require_text(
+            goodix / "demo_code/demo_kernel_code/driver/src/gh_drv_control.c",
+            "GH3X2X_Init",
+        )
 
     print("openR1 vendor inputs verified: nRF5 SDK 17.1.0/S140 7.2.0; "
           "SEGGER RTT 6.18a/fprintf 6.14d; "

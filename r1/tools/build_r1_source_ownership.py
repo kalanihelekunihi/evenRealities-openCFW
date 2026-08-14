@@ -26,7 +26,10 @@ from summarize_r1_software_twi_engines import SOFTWARE_TWI_FUNCTIONS
 from summarize_r1_rtc_device_boundary import RTC_DEVICE_FUNCTIONS
 from summarize_r1_pmic_transport import YHM2710_STACMD_FUNCTIONS
 from summarize_r1_watchdog_device_boundary import WATCHDOG_DEVICE_FUNCTIONS
-from summarize_r1_sensor_algorithm_heap import SENSOR_ALGORITHM_HEAP_FUNCTIONS
+from summarize_r1_sensor_algorithm_heap import (
+    SENSOR_ALGORITHM_HEAP_FUNCTIONS,
+    SENSOR_ALGORITHM_HEAP_ROUTING,
+)
 from summarize_r1_gomore_initializer_boundary import GOMORE_INITIALIZER_FUNCTIONS
 from summarize_r1_gomore_neural_runtime import GOMORE_NEURAL_RUNTIME_FUNCTIONS
 from summarize_r1_gomore_sleep_graphs import GOMORE_SLEEP_GRAPH_FUNCTIONS
@@ -1299,12 +1302,14 @@ APP_UNKNOWN_RTC_DEVICE_CANDIDATES = {
 }
 
 
-# A separately linked allocator is initialized by the Goodix-candidate demo
-# boundary and terminates through the literal "sensor_algo_mem_fatal" path.
-# Its compact two-bin control structure is neither Nordic FreeRTOS heap_4 nor
-# the pinned TLSF v3.1 implementation.  Exact semantics alone do not establish
-# source ownership, so every body remains blocked pending attributable source.
-APP_UNKNOWN_SENSOR_ALGORITHM_HEAP_CANDIDATES = {
+# The Goodix goodix_mem/GdMem memory-pool boundary: thirteen exact allocator
+# census bodies plus twenty-one guarded alloc/free call-site glue bodies.
+# Provenance is resolved to the Goodix GH3X2X SDK common DSP support library
+# (config tag gh3x2x-v2.23_7ecd2a) by the public goodix_mem.h -1/-2 error
+# contract and instruction-level comparison against the Goodix common-DSP
+# library object.  This dict remains the label census; the per-entry
+# provider routing lives in SENSOR_ALGORITHM_HEAP_ROUTING.
+APP_SENSOR_ALGORITHM_HEAP_BOUNDARY = {
     int(item["entry"]): str(item["symbol"])
     for item in SENSOR_ALGORITHM_HEAP_FUNCTIONS
 }
@@ -1494,7 +1499,7 @@ for _item in _FRONTIER_TIER2_FUNCTIONS:
     elif _family == "unknown_shared_quantized_neural_runtime_candidate":
         APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES[_entry] = _label
     elif _family == "unknown_sensor_algorithm_heap_provider_candidate":
-        APP_UNKNOWN_SENSOR_ALGORITHM_HEAP_CANDIDATES[_entry] = _label
+        APP_SENSOR_ALGORITHM_HEAP_BOUNDARY[_entry] = _label
     elif _family == "unknown_rtc_device_provider_candidate":
         APP_UNKNOWN_RTC_DEVICE_CANDIDATES[_entry] = _label
     elif _family == "unknown_software_twi_provider_candidate":
@@ -3215,6 +3220,198 @@ APP_GOODIX_ADAPTERS.update({
     int(item["entry"]): str(item["symbol"])
     for item in R1_FRONTIER_256_262_GOODIX_ADAPTER_FUNCTIONS
 })
+APP_GOODIX_ADAPTERS.update({
+    0x0002E734: "r1_goodix_sampling_mode_glue",
+    0x0003DDF4: "r1_goodix_gomore_ops_cross_wiring",
+    0x0006A4D8: "r1_goodix_frame_data_hook",
+    0x0006F920: "r1_goodix_gsensor_cache_sample",
+    0x0006F964: "r1_goodix_gsensor_cache_commit",
+    0x0006F9D4: "r1_goodix_gsensor_cache_query",
+})
+
+
+# Goodix GH3X2X demo-kernel/driver bodies with function-level identity proven
+# against the pinned public Goodix-licensed SDK copy
+# (third-party component `goodix-gh3x2x-democode`, commit 2c0034a2, Goodix
+# 5-clause license; clause 4 satisfied because the R1 ring contains the GH3x2x
+# IC).  Evidence per entry: control-flow + constants + log-string topology, per
+# docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md and the
+# per-entry mapping docs/boundaries/GOODIX-DEMO-DRIVER-MAPPING-2026-08.md.
+APP_GOODIX_PUBLIC_DEMOCODE = {
+    0x00029F9C: "Gh3x2xDemoStopAlgoInner",
+    0x0002A090: "GH3X2X_AlgoMemConfig",
+    0x0002A0F4: "GH3X2X_AlgoVersion",
+    0x0002A198: "GH3X2X_CheckChipModel",
+    0x0002A1F8: "GH3X2X_ClearDivZeroFlag",
+    0x0002A204: "GH3X2X_ClearSoftEvent",
+    0x0002A214: "GH3X2X_CommunicateConfirm",
+    0x0002A2AC: "GH3X2X_DelayUs",
+    0x0002A31C: "GH3X2X_DumpModeSet",
+    0x0002A328: "GH3X2X_EnterLowPowerMode",
+    0x0002A380: "GH3X2X_ExitLowPowerMode",
+    0x0002A488: "GH3X2X_FifoWatermarkThrConfig",
+    0x0002A4B4: "GH3X2X_FunctionStart",
+    0x0002A508: "GH3X2X_FunctionStop",
+    0x0002A540: "GH3X2X_GetAlgoMemStatus",
+    0x0002A550: "GH3X2X_GetConfigFuncMode",
+    0x0002A55C: "GH3X2X_GetDemoVersion",
+    0x0002A598: "GH3X2X_GetDriverLibVersion",
+    0x0002A5D0: "GH3X2X_GetIrqStatus",
+    0x0002A604: "GH3X2X_GetSoftEvent",
+    0x0002A614: "GH3X2X_GetVirtualRegVersion",
+    0x0002A754: "GH3X2X_Init",
+    0x0002A8DC: "GH3X2X_LoadNewRegConfigArr",
+    0x0002A968: "GH3X2X_Memcpy",
+    0x0002A99E: "GH3X2X_Memset",
+    0x0002AA10: "GH3X2X_ReadFifodata",
+    0x0002AA74: "GH3X2X_ReadReg",
+    0x0002AA98: "GH3X2X_ReadRegBitField",
+    0x0002AAD0: "GH3X2X_RegisterDelayUsCallback",
+    0x0002AADC: "GH3X2X_RegisterHookFunc",
+    0x0002AAF8: "GH3X2X_RegisterI2cOperationFunc",
+    0x0002ABA4: "GH3X2X_ResetHardAdt",
+    0x0002ABDC: "GH3X2X_SendCmd",
+    0x0002ABFC: "GH3X2X_SetChipSleepFlag",
+    0x0002AC10: "GH3X2X_SetConfigFuncMode",
+    0x0002AC1C: "GH3X2X_SetMaxNumWhenReadFifo",
+    0x0002AC30: "GH3X2X_SetSoftEvent",
+    0x0002AC40: "GH3X2X_SlotEnRegSet",
+    0x0002ACCC: "GH3X2X_SoftReset",
+    0x0002AD18: "GH3X2X_StartSampling",
+    0x0002AD7C: "GH3X2X_StopSampling",
+    0x0002AE08: "GH3X2X_TryWakeUp",
+    0x0002AE28: "GH3X2X_UpdateAgcInfo",
+    0x0002AF84: "GH3X2X_WriteChnlMapConfigWithVirtualReg",
+    0x0002B010: "GH3X2X_WriteFunctionConfigWithVirtualReg",
+    0x0002B0B8: "GH3X2X_WriteReg",
+    0x0002B0DC: "GH3X2X_WriteRegBitField",
+    0x0002B148: "GH3X2X_WriteSwConfigWithVirtualReg",
+    0x0002B180: "GH3X2X_WriteVirtualReg",
+    0x0002C248: "GH3x2xCalFunctionSlotBit",
+    0x0002C27C: "GH3x2xCalGsensorStep",
+    0x0002C2A4: "GH3x2xCreatTagArray",
+    0x0002C2EC: "Gh3x2xDemoSearchCfgListByFunc",
+    0x0002C43C: "GH3x2xFunctionProcess",
+    0x0002C4FC: "GH3x2xGetFrameDataAndProcess",
+    0x0002C640: "GH3x2xGetFrameNum",
+    0x0002C694: "GH3x2xHandleFrameData",
+    0x0002CCC0: "GH3x2xSetFunctionChnlMap",
+    0x0002CCD0: "GH3x2xSetFunctionChnlNum",
+    0x0002CD00: "GH3x2xSlotTimeInfo",
+    0x0002D33C: "GH3x2x_GetActiveChipResetFlag",
+    0x0002D348: "GH3x2x_GetChipResetRecoveringFlag",
+    0x0002D3A8: "GH3x2x_SetChipResetRecoveringFlag",
+    0x0002D658: "GetNextEventPointer",
+    0x0002D670: "Gh3x2xDemoArrayCfgSwitch",
+    0x0002D824: "Gh3x2xDemoFunctionProcess",
+    0x0002D87C: "Gh3x2xDemoInit",
+    0x0002DB8C: "Gh3x2xDemoInterruptProcess",
+    0x0002E0D0: "Gh3x2xDemoSamplingControl",
+    0x0002E340: "Gh3x2xDemoStartAlgoInner",
+    0x0002E358: "Gh3x2xDemoStartSampling",
+    0x0002E36C: "Gh3x2xDemoStartSamplingInner",
+    0x0002E61C: "Gh3x2xDemoStartSamplingWithCfgSwitch",
+    0x0002E6A8: "Gh3x2xDemoStopSampling",
+    0x0002E6BC: "Gh3x2xDemoStopSamplingInner",
+    0x0002E746: "Gh3x2xFifoRecovery",
+    0x0002E778: "Gh3x2xFunctionInfoForUserInit",
+    0x0002E7A4: "Gh3x2xFunctionSlotBitInit",
+    0x0002E7C4: "Gh3x2xGetConfigVersion",
+    0x0002E964: "Gh3x2xSetCurrentSlotEnReg",
+    0x0002EB0C: "Gh3x2xSetFrameFlag2",
+    0x0002EB84: "Gh3x2x_WearEventHook",
+    0x0002ED98: "GH3X2X_ReinitAllSwModuleParam",
+    0x0002EDAA: "GH3X2X_WriteSwConfigWithVirtualReg_0x1100_arm",
+    0x0002EDEC: "GhDrvConfigManagerInit",
+    0x0002EDFC: "GhGetFunctionIdViaVirReg",
+    0x0002EE28: "GhMultiSensorTimerInit",
+    0x0002EE38: "GhGsMoveDetecterIsEnable",
+    0x0002EE44: "GhMultSensorWearEventManagerGetCurTs",
+    0x0002EE50: "GhMultSensorWearEventManagerInit",
+    0x0002EF6C: "GhMultiSensorPrintAllEvt",
+    0x0002F0F8: "GhGsMoveDetecterInit",
+    0x00029C98: "GH32x2xMedSel",
+    0x00029CC0: "GH3X2XDrvConfigInit",
+    0x00029CDC: "GH3X2X_AdtAlgorithmResultReport",
+    0x00029D0A: "GH3X2X_AgcGetExtremum",
+    0x00029D34: "GH3X2X_AgcGetThreshold",
+    0x00029D58: "GH3x2xAgcInfoUpdate",
+    0x00029D5C: "GH3X2X_AgcSubChnlGainAdj",
+    0x00029E8C: "GH3X2X_AlgoCalculate",
+    0x00029F88: "GH3X2X_AlgoChnlMapInit",
+    0x0002A266: "GH3X2X_DecodeRegCfgArr",
+    0x0002A474: "GH3X2X_FifoControlInit",
+    0x0002A5EC: "GH3X2X_GetRegBitField",
+    0x0002A630: "GH3X2X_HbaAlgoChnlMapDefultSet",
+    0x0002A658: "GH3X2X_HrAlgorithmResultReport",
+    0x0002A65A: "GH3X2X_HrvAlgorithmResultReport",
+    0x0002A810: "GH3x2xAgcChnlInfoInit_veneer",
+    0x0002A814: "GH3X2X_LedAgcPramWrite",
+    0x0002A84C: "GH3X2X_LedAgcProcess",
+    0x0002A86C: "GH3X2X_LedAgcReset",
+    0x0002A9EC: "GH3X2X_ReadFifo",
+    0x0002AC4C: "GH3X2X_SoftAdtGreenAlgorithmResultReport",
+    0x0002AC8C: "GH3X2X_SoftAdtIrAlgorithmResultReport",
+    0x0002ACF4: "GH3X2X_Spo2AlgoChnlMapDefultSet",
+    0x0002AD14: "GH3X2X_Spo2AlgorithmResultReport",
+    0x0002ADB0: "GH3X2X_StoreDrvCurrentAfterAgc",
+    0x0002AE00: "GH3X2X_TimestampSyncGetFrameDataFlag",
+    0x0002AE04: "GH3X2X_TimestampSyncPpgInit",
+    0x0002AE06: "GH3X2X_TimestampSyncSetPpgIntFlag",
+    0x0002AEDC: "GH3X2X_WriteAlgConfigWithVirtualReg",
+    0x0002AF32: "GH3X2X_WriteAlgParametersWithVirtualReg",
+    0x0002B218: "GH3x2xAdtAlgoExe",
+    0x0002B4C4: "GH3x2xAdtAlgoInit",
+    0x0002B4D8: "GH3x2xAdtVersion",
+    0x0002B4F8: "GH3x2xAgcCalDrvCurrent",
+    0x0002B524: "GH3x2xAgcCalDrvCurrentAndGain",
+    0x0002B6A4: "GH3x2xAgcCalExtremum",
+    0x0002B6E0: "GH3x2xAgcChnlInfoInit",
+    0x0002B8EC: "GH3x2xAgcFindSubChnlSlotInfo",
+    0x0002B91C: "GH3x2xAgcInfoUpdate",
+    0x0002B998: "GH3x2xAgcMainChnlKeyValueCal",
+    0x0002BD84: "GH3x2xAgcMeanInfoReset",
+    0x0002BE24: "GH3x2xAgcRegParse",
+    0x0002BFAA: "GH3x2xAgcRegvalGet",
+    0x0002C148: "GH3x2xAgcRegvalReset",
+    0x0002C178: "GH3x2xAgcSubChnlAdjGainAndClearCnt",
+    0x0002C4C0: "GH3x2xGetAgcReg",
+    0x0002C4E4: "GH3x2xGetDrvCurrent",
+    0x0002C930: "GH3x2xHrAlgoDeinit",
+    0x0002C944: "GH3x2xHrAlgoExe",
+    0x0002CAA4: "GH3x2xHrAlgoInit",
+    0x0002CAD8: "GH3x2xHrvAlgoExe",
+    0x0002CC94: "GH3x2xSetAgcReg",
+    0x0002CCF4: "Gh3x2xSleepFlagGet",
+    0x0002CDD4: "GH3x2xSoftAdtAlgoExe",
+    0x0002CFE8: "GH3x2xSpo2AlgoExe",
+    0x0002D16C: "GH3x2xSpo2AlgoInit",
+    0x0002D184: "GH3x2x_AgcAdjustGainByExtremum",
+    0x0002D324: "GH3x2x_BitCount",
+    0x0002D354: "GH3x2x_Round",
+    0x0002E8C4: "Gh3x2xGetHrAlgoSupportChnl",
+    0x0002E8C8: "Gh3x2xGetSpo2AlgoSupportChnl",
+    0x0002E8E8: "Gh3x2xMovingAvaFilter",
+    0x0006A018: "get_Spo2WRWeights_addr",
+    0x0006A020: "get_Spo2WRWeights_version",
+    0x0006A130: "get_knConfNetWeightsArr_addr",
+    0x0006A148: "get_knTdfusionWeightsArr_addr",
+    0x0006A500: "GH3X2X_AlgoCallConfigInit",
+    0x0006CC34: "goodix_hrv_config_get_version",
+    0x0006EAF8: "goodix_spo2_config_get_instance",
+    0x0006EB00: "goodix_spo2_config_get_version",
+    0x0006EC28: "goodix_spo2_init_func",
+}
+
+# Moderate-confidence mappings from the same mapping pass: structural match but
+# with a documented caveat (upstream body divergence or partial body).
+APP_GOODIX_PUBLIC_DEMOCODE_MODERATE = {
+    0x0002A5C4: "GH3X2X_GetGsensorEnableFlag",
+    0x0002A7F4: "GH3X2X_InitSensorParameters",
+    0x0002A9D4: "GH3X2X_ReadElectrodeWearDumpData",
+    0x0002ABEC: "GH3X2X_SensorPramInit",
+    0x0002EB4E: "Gh3x2x_NormalizeGsensorSensitivity",
+}
 
 
 # The attributable IQS7211E references supply the controller/register/state-
@@ -3572,7 +3769,47 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
                 "reached through constructors shared by separately gated GoMore "
                 "and Goodix model graphs. No attributable source, version, or "
                 "license is identified; generic neural-library similarity does "
-                "not authorize a substitute."
+                "not authorize a substitute. The 2026-08 re-examination "
+                "(boundaries/unknown_shared_quantized_neural_runtime_candidate"
+                "-ATTRIBUTION-2026-08.md) eliminated CMSIS-NN, TFLM, NNoM, "
+                "uTensor, tinyMaix, and X-CUBE-AI with quoted comparisons and "
+                "identifies the closed Bravechip ChipletRing/BCL603M platform "
+                "as the vendor; licensed acquisition is the unblock route."
+            ),
+        )
+        return row
+    if entry in APP_GOODIX_PUBLIC_DEMOCODE:
+        row.update(
+            provider_family="goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0",
+            source_disposition="use_pinned_upstream",
+            upstream_symbol=APP_GOODIX_PUBLIC_DEMOCODE[entry],
+            confidence="high",
+            evidence=(
+                "Function-level identity with the pinned public Goodix-licensed "
+                "GH3X2X democode (third-party component goodix-gh3x2x-democode, "
+                "pebbleos-nonfree gh3x2x/ @ 2c0034a2, democode v1.6 / DrvLib "
+                "v4.3.0.0, Goodix 5-clause license with clause-4 Goodix-IC use "
+                "satisfied by the R1 ring) is proven by control-flow, constant, "
+                "and log-string topology per "
+                "docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md "
+                "and docs/boundaries/GOODIX-DEMO-DRIVER-MAPPING-2026-08.md; the "
+                "R1 body carries a chip-errata register patch absent from "
+                "public v4.3.0.0 where noted."
+            ),
+        )
+        return row
+    if entry in APP_GOODIX_PUBLIC_DEMOCODE_MODERATE:
+        row.update(
+            provider_family="goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0",
+            source_disposition="use_pinned_upstream",
+            upstream_symbol=APP_GOODIX_PUBLIC_DEMOCODE_MODERATE[entry],
+            confidence="candidate",
+            evidence=(
+                "Moderate-confidence mapping to the pinned public Goodix-licensed "
+                "GH3X2X democode (goodix-gh3x2x-democode @ 2c0034a2) per "
+                "docs/boundaries/GOODIX-DEMO-DRIVER-MAPPING-2026-08.md: structural "
+                "match with a documented caveat (upstream divergence or partial "
+                "body); re-verify before compiling against this entry."
             ),
         )
         return row
@@ -3767,7 +4004,12 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
                 "compiler-instantiated family structure are recovered and SHA-pinned, "
                 "but no attributable source, provider version, or license has been "
                 "established. Do not recreate these bodies; bind an attributable "
-                "licensed provider or Nordic hardware TWIM where electrically valid."
+                "licensed provider or Nordic hardware TWIM where electrically valid. "
+                "The 2026-08 re-examination (boundaries/unknown_software_twi_provider"
+                "_candidate-ATTRIBUTION-2026-08.md) disassembled all forty bodies, "
+                "exhaustively scanned flash references, and rejected RT-Thread, "
+                "Nordic, Linux/Zephyr, and vendor-SDK origins with quoted evidence; "
+                "the engine is B210/Bravechip ChipletRing platform middleware."
             ),
         )
     elif entry in APP_UNKNOWN_RTC_DEVICE_CANDIDATES:
@@ -3781,22 +4023,48 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
                 "and SHA-pinned, but no attributable source, provider version, "
                 "or license has been established. Nordic supplies nrfx_rtc only; "
                 "do not recreate this named-record/calendar/callback layer until "
-                "its implementation ownership is resolved."
+                "its implementation ownership is resolved. The 2026-08 "
+                "re-examination (boundaries/unknown_rtc_device_provider_candidate"
+                "-ATTRIBUTION-2026-08.md) recovered the ops table and nrfx config "
+                "and rejected RT-Thread, mr-library, BabyOS, armink, and vendor "
+                "SDKs with quoted evidence; first-party B210/Bravechip "
+                "ChipletRing authorship is the supported origin."
             ),
         )
-    elif entry in APP_UNKNOWN_SENSOR_ALGORITHM_HEAP_CANDIDATES:
+    elif entry in APP_SENSOR_ALGORITHM_HEAP_BOUNDARY:
+        family, disposition, confidence, basis = \
+            SENSOR_ALGORITHM_HEAP_ROUTING[entry]
+        if family == "r1_product_specific":
+            heap_evidence = (
+                "SHA-pinned R1 integrator glue around the Goodix GH3X2X "
+                f"goodix_mem/GdMem pool manager: {basis}. The public GH3X2X "
+                "SDK header goodix_mem.h declares Gh3x2xPoolIsNotEnough as an "
+                "integrator-supplied extern; only this product behavior may "
+                "be local, never the vendor allocator it serves."
+            )
+        elif confidence == "high":
+            heap_evidence = (
+                "SHA-pinned Goodix GH3X2X goodix_mem/GdMem allocator "
+                f"internal: {basis}. Instruction-level comparison against the "
+                "Goodix common-DSP library object and the public goodix_mem.h "
+                "-1/-2 error contract establish the boundary; the restrictive "
+                "binary-only Goodix SDK license bars any local recreation."
+            )
+        else:
+            heap_evidence = (
+                "SHA-pinned guarded alloc/free call-site glue inside the "
+                f"Goodix GH3X2X gated consumer closure: {basis}. Reached "
+                "only from goodix_gh3x2x_candidate bodies and wrapping the "
+                "Goodix goodix_mem/GdMem pool manager, it is conservatively "
+                "gated with the calling provider; no local substitute is "
+                "authorized."
+            )
         row.update(
-            provider_family="unknown_sensor_algorithm_heap_provider_candidate",
-            source_disposition="investigate_before_implementing",
-            upstream_symbol=APP_UNKNOWN_SENSOR_ALGORITHM_HEAP_CANDIDATES[entry],
-            confidence="high",
-            evidence=(
-                "Exact executable extent, two-bin tagged-block allocator semantics, "
-                "Goodix-candidate initialization edge, and sensor_algo_mem_fatal path "
-                "are SHA-pinned. The component is not Nordic FreeRTOS heap_4 or the "
-                "pinned TLSF v3.1 source, and no attributable source/version/license "
-                "is established; do not recreate it locally."
-            ),
+            provider_family=family,
+            source_disposition=disposition,
+            upstream_symbol=APP_SENSOR_ALGORITHM_HEAP_BOUNDARY[entry],
+            confidence=confidence,
+            evidence=heap_evidence,
         )
     elif entry in APP_YHM2710_FRONTIER_CANDIDATES:
         row.update(
@@ -3899,7 +4167,11 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
                 "Complete function-local name-list or operation-table dispatch semantics "
                 "identify the stock generic device registry, but no attributable source, "
                 "provider version, or license has been established. The framework remains "
-                "blocked and is not recreated by openR1."
+                "blocked and is not recreated by openR1. The 2026-08 re-examination "
+                "(boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION"
+                "-2026-08.md) found every fingerprint globally unique to this firmware "
+                "and rejected Goodix demo SDK, BabyOS, and Bouffalo candidates; the "
+                "registry is B210/Bravechip ChipletRing platform middleware."
             ),
         )
     elif entry in APP_UNKNOWN_TIME_CALENDAR_CANDIDATES:
@@ -3913,7 +4185,13 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
                 "or local-hour/bucket semantics are recovered and byte-pinned, "
                 "but no attributable provider source, version, or license has "
                 "been established. Nordic SDK 17.1.0 does not supply this body; "
-                "openR1 keeps the provider abstract and does not recreate it."
+                "openR1 keeps the provider abstract and does not recreate it. "
+                "The 2026-08 re-examination (boundaries/unknown_time_calendar"
+                "_provider_candidate-ATTRIBUTION-2026-08.md) matched the "
+                "seconds-to-tm converter behaviorally to the old-newlib "
+                "_mktm_r idiom but found no exact public body, and the "
+                "1970-2029 validating inverse converter is unique to this "
+                "firmware."
             ),
         )
     elif entry in APP_NORDIC_SYMBOLS:
@@ -4021,7 +4299,11 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
                 "behavior used across product and "
                 "provider callers. No attributable source, version, or license is "
                 "identified, so neither this framework nor its dependencies may be "
-                "implemented locally."
+                "implemented locally. The 2026-08 re-examination "
+                "(boundaries/unknown_sensor_stream_framework_candidate-ATTRIBUTION"
+                "-2026-08.md) rejected the MultiTimer library (both generations) "
+                "line-by-line and found every distinctive string globally unique; "
+                "B210/Bravechip ChipletRing platform authorship stands."
             ),
         )
         return row
@@ -4365,7 +4647,7 @@ def build() -> tuple[list[dict[str, str]], dict[str, object]]:
         **APP_DEVICE_REGISTRY_CONFIGURATION_ADAPTERS,
         **APP_UNKNOWN_SOFTWARE_TWI_CANDIDATES,
         **APP_UNKNOWN_RTC_DEVICE_CANDIDATES,
-        **APP_UNKNOWN_SENSOR_ALGORITHM_HEAP_CANDIDATES,
+        **APP_SENSOR_ALGORITHM_HEAP_BOUNDARY,
         **APP_YHM2710_STACMD_CANDIDATES,
         **APP_NORDIC_WDT_ADAPTERS,
         **APP_GOODIX_EXACT_CANDIDATES,

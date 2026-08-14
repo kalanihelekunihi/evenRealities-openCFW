@@ -13,9 +13,9 @@ BUILD = ROOT / "platform" / "nrf52840" / "sdk" / "_build"
 HEX = BUILD / "openr1_nrf52840_s140.hex"
 BIN = BUILD / "openr1_nrf52840_s140.bin"
 MAP = BUILD / "openr1_nrf52840_s140.map"
-EXPECTED_HEX_SHA256 = "48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf"
-EXPECTED_BIN_SHA256 = "421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35"
-EXPECTED_BIN_BYTES = 95040
+EXPECTED_HEX_SHA256 = "e51cc6b2aac28fb73096721675252f7f39c306d9ca1b25bfd2d12123ab6469dd"
+EXPECTED_BIN_SHA256 = "80330aef59695977ba327b404beb5ea736fae4f752b3888b20c5cb7de9a99394"
+EXPECTED_BIN_BYTES = 120200
 REQUIRED_OBJECTS = (
     BUILD / "openr1_nrf52840_s140" / "bma4.c.o",
     BUILD / "openr1_nrf52840_s140" / "bma456w.c.o",
@@ -53,10 +53,29 @@ REQUIRED_OBJECTS = (
     BUILD / "openr1_nrf52840_s140" / "fal.c.o",
     BUILD / "openr1_nrf52840_s140" / "fal_flash.c.o",
     BUILD / "openr1_nrf52840_s140" / "fal_partition.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_drv_config.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_drv_control.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_drv_dump.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_drv_interface.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_demo.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_demo_hook.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_demo_reg_array.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_demo_user.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_agc.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_changeinttime.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_movedetect.c.o",
+    BUILD / "openr1_nrf52840_s140" / "gh_multi_sen_pro.c.o",
+    BUILD / "openr1_nrf52840_s140" /
+        "goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_gh3x2x_port.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_gh3x2x_bind.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_gh3x2x_stubs.c.o",
     BUILD / "openr1_nrf52840_s140" / "openr1_nfc.c.o",
     BUILD / "openr1_nrf52840_s140" / "openr1_i2c5_resources.c.o",
     BUILD / "openr1_nrf52840_s140" / "nrfx_wdt.c.o",
     BUILD / "openr1_nrf52840_s140" / "openr1_watchdog.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_clock.c.o",
+    BUILD / "openr1_nrf52840_s140" / "openr1_clock.c.o",
     BUILD / "openr1_nrf52840_s140" / "system_nrf52840.c.o",
     BUILD / "openr1_nrf52840_s140" / "peer_manager_handler.c.o",
     BUILD / "openr1_nrf52840_s140" / "timers.c.o",
@@ -86,6 +105,12 @@ REQUIRED_LINKED_SYMBOLS = (
     "r1_health_plan_time_transition",
     "r1_health_reconcile_sync_cursors",
     "r1_health_plan_hour_boundary",
+    "r1_clock_synchronize",
+    "r1_clock_now",
+    "r1_clock_local_now",
+    "openr1_clock_initialize",
+    "openr1_clock_adopt_phone_time",
+    "openr1_clock_epoch",
     "r1_health_u8_accumulate_average",
     "r1_health_u16_accumulate_average",
     "r1_health_accumulator_snapshot",
@@ -203,6 +228,25 @@ REQUIRED_LINKED_SYMBOLS = (
     "openr1_reset_reason_latest",
     "pm_handler_on_pm_evt",
     "pm_handler_flash_clean",
+    "GH3X2X_Init",
+    "GH3X2X_RegisterI2cOperationFunc",
+    "GH3X2X_ReadFifodata",
+    "GH3X2X_StartSampling",
+    "GH3X2X_StopSampling",
+    "Gh3x2xDemoInit",
+    "Gh3x2xDemoStartSampling",
+    "Gh3x2xDemoStopSampling",
+    "Gh3x2xDemoArrayCfgSwitch",
+    "gh3026_i2c_write",
+    "gh3026_i2c_read",
+    "delay_us",
+    "gh3x2x_print_fmt",
+    "Gh3x2xPoolIsNotEnough",
+    "GH3X2X_AlgoInit",
+    "GH3X2X_AlgoCalculate",
+    "GH3X2X_AlgoDeinit",
+    "goodix_spo2_config_get_instance",
+    "r1_gh3x2x_bind_provider_ops",
 )
 
 REQUIRED_LOCAL_LINKED_SECTIONS = (

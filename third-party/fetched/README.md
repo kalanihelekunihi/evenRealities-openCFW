@@ -40,6 +40,7 @@ layout, so the cache can live anywhere:
 | `TINY_AES_ROOT` | `tiny-aes-c` | AES-128 inverse core |
 | `IQS7211E_ROOT` | `flipperone-iqs7211e` | touch controller reference; audit only |
 | `AZOTEQ_SETTINGS_ROOT` | `azoteq-iqs7211e-settings` | touch settings reference; audit only |
+| `GOODIX_DEMOCODE_ROOT` | `goodix-gh3x2x-democode` | GH3X2X demo/driver attribution reference (point at `.../gh3x2x`); audit only, not linked |
 | `GNU_INSTALL_ROOT` | — | Arm GNU toolchain prefix, for `sdk-image` |
 
 Example:
@@ -59,9 +60,14 @@ make -C r1 vendor-audit SDK_ROOT=$CACHE/nRF5_SDK_17.1.0_ddde560 \
 Some manifest entries are pinned but deliberately not downloaded by `fetch.sh`:
 
 - `nordic-s140` is a vendor SoftDevice binary distributed with the SDK.
-- `goodix-gh3x2x` is not redistributable and has no public archive; the Goodix
-  health/biometric boundary stays disabled until a licensed provider is
-  supplied. See [`../../r1/docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md`](../../r1/docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md).
+- `goodix-gh3x2x` — the biometric algorithm provider stays disabled until a licensed
+  provider is supplied; the algorithm libraries (HR/HRV/NADT/SpO2/dlCom) and the
+  `goodix_mem` allocator are binary-only even in the public tree. The demo-kernel/driver
+  source layer, however, is public under Goodix's 5-clause license and is now fetched as
+  the separate audit-only `goodix-gh3x2x-democode` component above (democode v1.6 /
+  DrvLib v4.3.0.0, exact version-marker match to the R1 image). See
+  [`../../r1/docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md`](../../r1/docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md)
+  and [`../../r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md`](../../r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md).
 - `qst-qma6100` awaits official licensed source; the third accelerometer variant
   is disabled.
 - `r1-sleep-journal` is not an upstream at all — it marks the R1-specific

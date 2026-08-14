@@ -12,6 +12,7 @@
 #include "openr1_bae8.h"
 #include "openr1_advertising.h"
 #include "openr1_analog.h"
+#include "openr1_clock.h"
 #include "openr1_cmbacktrace_port.h"
 #include "openr1_connection_params.h"
 #include "openr1_gatt.h"
@@ -23,12 +24,14 @@
 #include "openr1_scheduler.h"
 #include "openr1_storage.h"
 #include "openr1_touch.h"
+#include "openr1_twim1_arbiter.h"
 
 #include "openr1/r1_runtime.h"
 #include "openr1/r1_battery.h"
 #include "openr1/r1_connection_params.h"
 #include "openr1/r1_event.h"
 #include "openr1/r1_goodix.h"
+#include "r1_gh3x2x_bind.h"
 #include "openr1/r1_health.h"
 #include "openr1/r1_kv_store.h"
 #include "openr1/r1_motion.h"
@@ -120,6 +123,10 @@ typedef uint32_t (*openr1_phy_update_request_fn)(uint16_t, uint8_t, uint8_t);
 typedef r1_error (*openr1_goodix_diagnostic_select_fn)(
     uint8_t[R1_GOODIX_DIAGNOSTIC_SNAPSHOT_BYTES], uint8_t, uint8_t *,
     size_t, size_t *);
+typedef const r1_goodix_provider_ops *(*openr1_gh3x2x_provider_ops_fn)(void);
+typedef void (*openr1_gh3x2x_pool_fatal_fn)(void);
+typedef const void *(*openr1_gh3x2x_spo2_config_instance_fn)(void);
+typedef void (*openr1_gh3x2x_spo2_config_version_fn)(char *, uint8_t);
 typedef r1_error (*openr1_sleep_sync_ack_plan_fn)(
     bool, bool, r1_sleep_sync_ack_plan *);
 typedef r1_error (*openr1_system_control_37_plan_fn)(
@@ -213,6 +220,29 @@ static const openr1_phy_update_request_fn retained_phy_update_request =
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_goodix_diagnostic_select_fn retained_goodix_diagnostic_select =
     r1_goodix_diagnostic_select;
+/* Retains the GH3X2X democode provider (bind table, driver subset, port
+ * trampolines, and fail-closed algorithm stubs) in the image through
+ * --gc-sections.  Retention only: no board ops exist yet, so the provider
+ * stays unbound and unreachable from any command path. */
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_gh3x2x_provider_ops_fn retained_gh3x2x_provider_ops =
+    r1_gh3x2x_bind_provider_ops;
+/* goodix_mem integrator surface and the pinned SPO2 config table
+ * (gh3x2x-v2.23_7ecd2a, the R1's exact config tag); both are retained for
+ * image parity but have no live caller while the algorithm layer is
+ * absent. */
+void Gh3x2xPoolIsNotEnough(void);
+const void *goodix_spo2_config_get_instance(void);
+void goodix_spo2_config_get_version(char *ver, uint8_t ver_len);
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_gh3x2x_pool_fatal_fn retained_gh3x2x_pool_fatal =
+    Gh3x2xPoolIsNotEnough;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_gh3x2x_spo2_config_instance_fn
+    retained_gh3x2x_spo2_config_instance = goodix_spo2_config_get_instance;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_gh3x2x_spo2_config_version_fn
+    retained_gh3x2x_spo2_config_version = goodix_spo2_config_get_version;
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_sleep_sync_ack_plan_fn retained_sleep_sync_ack_plan =
     r1_sleep_sync_plan_acknowledgement;
@@ -309,6 +339,10 @@ static void softdevice_initialize(void) {
     r1_runtime_set_touch_handler(
         runtime, touch_enabled_changed, NULL);
     touch_enabled_changed(NULL, runtime->device.touch_enabled);
+    error = openr1_twim1_arbiter_initialize();
+    if (error != NRF_SUCCESS) {
+        fail(error);
+    }
     error = openr1_nfc_initialize();
     if (error != NRF_SUCCESS) {
         fail(error);
@@ -318,6 +352,10 @@ static void softdevice_initialize(void) {
         fail(error);
     }
     error = openr1_motion_initialize();
+    if (error != NRF_SUCCESS) {
+        fail(error);
+    }
+    error = openr1_clock_initialize();
     if (error != NRF_SUCCESS) {
         fail(error);
     }

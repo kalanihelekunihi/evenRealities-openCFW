@@ -176,13 +176,14 @@
       "provider": "Goodix",
       "version": "gh3x2x-v2.23_7ecd2a",
       "disposition": "vendor_source_required_not_redistributable",
-      "evidence": "embedded version strings, byte-pinned demo/library topology, and Goodix primary-source Gh3x2xDemoInit/GH3X2X_RegisterSpiOperationFunc traces",
+      "evidence": "embedded version strings, byte-pinned demo/library topology, and Goodix primary-source Gh3x2xDemoInit/GH3X2X_RegisterSpiOperationFunc traces; 2026-08 re-examination matched the exact democode v1.6 / DrvLib v4.3.0.0 / Virtual_Reg v3.4 markers to the public Goodix-licensed SDK copy at coredevices/pebbleos-nonfree gh3x2x/",
       "evidence_urls": [
         "https://developers.goodix.com/zh/bbs/detail/c7d1af01d0e8467cac183bc66c74cdb9",
         "https://developers.goodix.com/en/bbs/detail/4de13ec5986d4d989deee3887d43faf2",
-        "https://developers.goodix.com/zh/bbs/detail/875147b152034370a8d4d2037c71edbb"
+        "https://developers.goodix.com/zh/bbs/detail/875147b152034370a8d4d2037c71edbb",
+        "https://github.com/coredevices/pebbleos-nonfree/tree/main/gh3x2x"
       ],
-      "production_role": "optical sensor algorithms and configuration must come from a lawfully obtained matching Goodix SDK; openR1 supplies only bounded adapters and observable-data contracts"
+      "production_role": "optical sensor algorithms and configuration must come from a lawfully obtained matching Goodix SDK; openR1 supplies only bounded adapters and observable-data contracts. The demo-kernel/driver stratum (97 ledger entries, per-entry mapped) is re-attributable to the public Goodix 5-clause-licensed democode (clause 4: Goodix-IC use only, satisfied by the R1 ring); the algorithm libraries and goodix_mem allocator remain binary-only and blocked"
     },
     {
       "id": "tiny-aes-c",
@@ -277,6 +278,20 @@
       "disposition": "clean_room_allowed",
       "evidence": "recovered implementation is explicitly a ring-specific circular journal rather than FlashDB TSDB",
       "production_role": "clean-room implementation of the observable sleep.db format and transaction order"
+    },
+    {
+      "id": "goodix-gh3x2x-democode",
+      "provider": "Goodix (public copy: CoreDevices pebbleos-nonfree)",
+      "version": "democode v1.6 / algo-call v0.5 / DrvLib v4.3.0.0 / Virtual_Reg v3.4",
+      "commit": "2c0034a23b675a5f9a29e4a47e8b504c7a88e321",
+      "disposition": "pinned_upstream_audit_only",
+      "archive_url": "https://github.com/coredevices/pebbleos-nonfree/archive/2c0034a23b675a5f9a29e4a47e8b504c7a88e321.tar.gz",
+      "archive_sha256": "48564d724f1de0004dd19ed3d8b156841400b7e652714f46dcb64d0397c76d29",
+      "license": "Goodix 5-clause (clause 4: use only with a Goodix integrated circuit; clause 5: binary forms must not be reverse engineered)",
+      "license_path": "gh3x2x/LICENSE",
+      "license_sha256": "dfb94b7725971b1696299c6d9fd36b8a447c40c1a9c9e89a8a392377f9823226",
+      "evidence": "R1 firmware strings GH(M)3X2X_DEMO_v1.6_AC_v0.5, v4.3.0.0, Gh3x2x_Virtual_Reg_v3.4, and gh3x2x-v2.23_7ecd2a match this tree exactly; eight function-level matches proven in r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md",
+      "production_role": "audit/attribution reference for the GH3X2X demo-kernel and driver ledger stratum; not yet compiled into the image; the binary-only algorithm libraries and goodix_mem allocator in this tree remain blocked providers"
     }
   ]
 }

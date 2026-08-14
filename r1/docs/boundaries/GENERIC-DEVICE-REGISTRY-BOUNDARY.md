@@ -56,6 +56,73 @@ The slot names are intentionally not guessed. Callers establish that the table i
 named ADC, bus, flash, motion, NFC, PMIC, and touch records, but caller use alone does not identify
 the framework's author.
 
+## Sharpened fingerprint evidence
+
+The provenance investigation added the following detail. None of it changes the admission state;
+the family remains `investigate_before_implementing`.
+
+- The registry candidate family spans 40 functions / 1,514 executable bytes. The record layout is
+  `{name* @ 0x00, ops* @ 0x04, priv @ 0x08..0x10, next @ 0x14}` in a global singly linked list.
+  Register at `0x00085D58` performs a `strcmp` duplicate-name check and returns `0/1`; find at
+  `0x00085CE0` walks the list with `strcmp`.
+- The operation table is nine words wide. The seven dispatchers at
+  `0x00085D08 / 0x00085D1A / 0x00085CBA / 0x00085D2C / 0x00085DA8 / 0x00085CCC / 0x00085D46`
+  return per-slot positive small-integer missing-operation statuses `{5,5,6,2,3,7,9}` and `1` for
+  a null record — the same positive-status scheme documented in the table above.
+- Slots `0x10`/`0x14` carry a static request-block bus protocol:
+  `{u8 cmd = 0xAE, u16 reg, buf, len, data, len2}`.
+- A companion subscriber registry at `0x0005DB14` uses pool-allocated 0x1C-byte nodes, caps names
+  at seven characters at offset `+8`, stores the current-task handle obtained through
+  `xTaskGetCurrentTaskHandle` at `+4`, and relies on intrusive offset-based doubly-linked-list
+  helpers at `0x00077E30`/`0x00077E3C`.
+- The device-name string table at flash `0x000C06D4..0x000C07E4` contains: `device_flash`,
+  `i2c_0`..`i2c_5`, `acc_int_1`, `touch_rdy_in/out`, `pmic_irq`, `device_stacmd(_irq)`,
+  `nfc_gpo_irq`, `mcu_reset_irq`, `ppg_int`, `ppg_led_en`, `ship_mode_en`, `touch_ldo_en`,
+  `ppg_reset_en`, `sys rtc`, `watchdog`.
+- The registry's missing-operation codes `{1,2,3,5,6,7,9}` interlock gap-free with the
+  software-TWI adapter codes `{4,8,10,11,12}` into one positive-integer status enum `0..12` — see
+  [`SOFTWARE-TWI-PROVIDER-BOUNDARY.md`](SOFTWARE-TWI-PROVIDER-BOUNDARY.md). This is strong evidence
+  of single authorship across both families.
+
+## Candidates rejected
+
+- RT-Thread device framework v4.0.x is concretely rejected on ABI grounds, verified against
+  upstream v4.0.3 `device.c`: it uses `rt_object` container lookup rather than a `strcmp` walk,
+  `RT_ASSERT`-guarded dispatchers, negative errnos, and a six-slot operations table with
+  refcounting.
+- Zephyr, the Nordic SDK, and FlashDB/FAL are rejected: none provide a global named-record
+  registry with this record layout, nine-word vtable, or positive-status dispatch scheme.
+- All vendor-cache packs are rejected for the same structural reasons.
+- Code-host searches for `device_stacmd`, `mcu_reset_irq`, and `touch_rdy_out` return only this
+  repository and its mirrors.
+
+## Next evidence step
+
+Run an authenticated gitee/GitHub code search for the exact rare device names, and check earlier
+R1 firmware versions (v2.0.1.14..v2.0.8.20 in the research workspace) for debug builds carrying
+framework-identifying log strings.
+
+Cross-firmware fingerprint search performed 2026-08-13 (negative result): all 59 binary blobs in
+the research workspace (`research/firmware/versions/*` v2.0.1.14..v2.0.8.20 including extracted
+EM9305/codec/box/OTA images, `research/firmware/tagged/r1-ring/*` bootloaders, and this
+repository's r1/g2 blob trees) were scanned for the 24-byte dual month table
+(`1f 1c 1f 1e ... 1f`), the strings `dlCom`, `pre2exc`, `pv_v`, `device_stacmd`,
+`mcu_reset_irq`, `touch_rdy_out`, `ship_mode_en`, `sys rtc`, `vnfc_rect_adc`,
+`lisent register fail`, `sensor_algo_mem_fatal`, `unregister not find obj`,
+`register not find obj`, `only support 1 ord`, and `reset timer,%s, tick`. No blob carries any
+platform-layer fingerprint. The only `B210` occurrences are the `B210_DFU` build strings in the
+two minimal tagged R1 bootloaders, which contain no registry/RTC/TWI framework code. The
+sibling-image attribution route is therefore exhausted for the interlocked families; remaining
+routes are authenticated code-host search and acquisition of a platform SDK through the ODM.
+
+## Cross-family interlock
+
+The software-TWI, generic device-registry, RTC-device, time/calendar, and sensor-stream families
+interlock: shared positive status enum `0..12`, runtime registration of records (including the
+RTC `sys rtc` record at `0x00085D58`), and the `i2c_n` device naming. They most likely form one
+proprietary platform layer inside Even Realities' B210 product tree and therefore share one
+provenance fate.
+
 ## Clean replacement policy
 
 - Nordic SDK APIs own nRF52840 drivers and hardware primitives.
@@ -70,3 +137,23 @@ the framework's author.
 
 This boundary does not authorize any signing, rollback, protection, diagnostic, or deployment
 bypass.
+
+## Attribution re-examination 2026-08
+
+A second attribution pass (2026-08-14) re-analyzed the decompiled bodies, extracted new
+fingerprints (ODM `platform\` build paths `platform\services\eAT\at_system.c`,
+`platform\threads\thread_manager.c`, `platform\ble\app_ble_init.c`; log strings
+`register not find obj`, `only support 1 ord`, `lisent register fail`,
+`sync_store_one_class`), ran authenticated GitHub and Sourcegraph global code searches
+(zero third-party matches for all eight fingerprints), and fetched/compared three new
+candidates — Goodix GH3x2x demo SDK (public copies), BabyOS `b_device.c`, Bouffalo
+`bflb_device` — all structurally rejected. Verdict: **no attribution; the family remains
+proprietary/blocked**. Full report:
+[`unknown_generic_device_registry_candidate-ATTRIBUTION-2026-08.md`](unknown_generic_device_registry_candidate-ATTRIBUTION-2026-08.md).
+
+Platform-vendor cross-reference (2026-08): the interlocked B210 platform middleware that owns
+this family has been identified as Wuxi Bravechip Technologies' "ChipletRing" / BCL603M
+smart-ring platform — firmware identity string `603MV1.9.3` and a byte-exact 128-bit GATT
+base-UUID match to Bravechip's public `BravechipSpace/ChipletRing-APPSDK`. The platform is
+closed-source; this names the commercial acquisition route that would unblock the family.
+See `unknown_shared_quantized_neural_runtime_candidate-ATTRIBUTION-2026-08.md`.

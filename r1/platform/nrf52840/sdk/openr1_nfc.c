@@ -16,6 +16,8 @@
 
 #include "openr1/r1_st25dvxxkc.h"
 
+#include "openr1_twim1_arbiter.h"
+
 #define OPENR1_NFC_TWIM_SCL_PIN NRF_GPIO_PIN_MAP(1, 11)
 #define OPENR1_NFC_TWIM_SDA_PIN NRF_GPIO_PIN_MAP(1, 14)
 #define OPENR1_NFC_GPO_PIN NRF_GPIO_PIN_MAP(0, 3)
@@ -27,7 +29,19 @@
 #define OPENR1_NFC_REGISTER_BYTES 2u
 #define OPENR1_NFC_MAX_WRITE_BYTES 256u
 
-static const nrfx_twim_t nfc_twim = NRFX_TWIM_INSTANCE(1);
+/*
+ * The TWIM1 hardware instance is owned by openr1_twim1_arbiter; this client
+ * only keeps its recovered pin/frequency/priority configuration and passes it
+ * to the arbiter on acquisition. NFC runs in the dock context, so its
+ * acquisition performs the documented handoff from the worn motion context.
+ */
+static const nrfx_twim_config_t nfc_bus_configuration = {
+    .scl = OPENR1_NFC_TWIM_SCL_PIN,
+    .sda = OPENR1_NFC_TWIM_SDA_PIN,
+    .frequency = NRF_TWIM_FREQ_400K,
+    .interrupt_priority = OPENR1_NFC_TWIM_PRIORITY,
+    .hold_bus_uninit = false,
+};
 static ST25DVxxKC_Object_t nfc_tag;
 static r1_st25dvxxkc_adapter nfc_adapter;
 static osThreadId_t nfc_thread;
@@ -56,28 +70,23 @@ static int32_t bus_initialize(void) {
     if (twim_active) {
         return 0;
     }
-    const nrfx_twim_config_t configuration = {
-        .scl = OPENR1_NFC_TWIM_SCL_PIN,
-        .sda = OPENR1_NFC_TWIM_SDA_PIN,
-        .frequency = NRF_TWIM_FREQ_400K,
-        .interrupt_priority = OPENR1_NFC_TWIM_PRIORITY,
-        .hold_bus_uninit = false,
-    };
-    const nrfx_err_t error = nrfx_twim_init(
-        &nfc_twim, &configuration, NULL, NULL);
+    const nrfx_err_t error = openr1_twim1_acquire(
+        OPENR1_TWIM1_CLIENT_NFC, &nfc_bus_configuration);
     if (error != NRFX_SUCCESS) {
         last_error = error;
         return -1;
     }
-    nrfx_twim_enable(&nfc_twim);
     twim_active = true;
     return 0;
 }
 
 static int32_t bus_deinitialize(void) {
     if (twim_active) {
-        nrfx_twim_disable(&nfc_twim);
-        nrfx_twim_uninit(&nfc_twim);
+        const nrfx_err_t error = openr1_twim1_release(OPENR1_TWIM1_CLIENT_NFC);
+        if (error != NRFX_SUCCESS) {
+            last_error = error;
+            return -1;
+        }
         twim_active = false;
     }
     return 0;
@@ -101,10 +110,12 @@ static int32_t bus_read(uint16_t device_address, uint16_t register_address,
     const uint8_t address[OPENR1_NFC_REGISTER_BYTES] = {
         (uint8_t)(register_address >> 8u), (uint8_t)register_address};
     const uint8_t seven_bit_address = (uint8_t)(device_address >> 1u);
-    nrfx_err_t error = nrfx_twim_tx(&nfc_twim, seven_bit_address, address,
-                                    sizeof address, true);
+    nrfx_err_t error = openr1_twim1_tx(OPENR1_TWIM1_CLIENT_NFC,
+                                       seven_bit_address, address,
+                                       sizeof address, true);
     if (error == NRFX_SUCCESS) {
-        error = nrfx_twim_rx(&nfc_twim, seven_bit_address, bytes, length);
+        error = openr1_twim1_rx(OPENR1_TWIM1_CLIENT_NFC, seven_bit_address,
+                                bytes, length);
     }
     if (error != NRFX_SUCCESS) {
         last_error = error;
@@ -127,8 +138,8 @@ static int32_t bus_write(uint16_t device_address, uint16_t register_address,
         memcpy(frame + OPENR1_NFC_REGISTER_BYTES, bytes, length);
     }
     const uint8_t seven_bit_address = (uint8_t)(device_address >> 1u);
-    const nrfx_err_t error = nrfx_twim_tx(
-        &nfc_twim, seven_bit_address, frame,
+    const nrfx_err_t error = openr1_twim1_tx(
+        OPENR1_TWIM1_CLIENT_NFC, seven_bit_address, frame,
         (size_t)length + OPENR1_NFC_REGISTER_BYTES, false);
     if (error != NRFX_SUCCESS) {
         last_error = error;

@@ -176,3 +176,22 @@ version and hashes, target/ABI verification, license and redistribution review, 
 separation of driver/algorithm bodies from R1 SPI, reset, interrupt, allocation, logging,
 configuration, and health-event adapters. Observable host-side behavior models may be retained as
 compatibility tests, but they are not production substitutes for Goodix biometric algorithms.
+
+## Attribution re-examination 2026-08
+
+A 2026-08 provenance pass located a public, Goodix-licensed copy of the GH3X2X SDK at
+`github.com/coredevices/pebbleos-nonfree` under `gh3x2x/` (Goodix 5-clause license,
+`gh3x2x/LICENSE`), whose version markers match the R1 firmware exactly: democode v1.6,
+algo-call v0.5, DrvLib v4.3.0.0, Virtual_Reg v3.4, and config tag `gh3x2x-v2.23_7ecd2a`.
+Stratification of the 499 gated entries: the demo-kernel, driver, soft-AGC, and algo-call
+strata are re-attributable to that public source (initially ~51 entries estimated; the completed
+two-pass per-entry mapping attributes 168 entries, and the ledger now routes them to
+`goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0` / `use_pinned_upstream`; eight
+function-level matches were proven first,
+including `GH3X2X_Init` and `GH3X2X_RegisterI2cOperationFunc` — confirming the GH3x2x is wired
+on I2C at base address 0x28); the 243 closed algorithm-library entries and 53
+`goodix_mem`/`GdMem` allocator/apparatus entries remain blocked (binary-only even publicly;
+license clause 5 bars reverse engineering); 29 residue entries remain gated as unprovable.
+License clause 4 restricts use to Goodix integrated circuits, which the R1 ring satisfies.
+Full evidence: [`goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md`](goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md);
+per-entry mapping: [`GOODIX-DEMO-DRIVER-MAPPING-2026-08.md`](GOODIX-DEMO-DRIVER-MAPPING-2026-08.md).

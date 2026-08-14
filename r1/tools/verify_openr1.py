@@ -40,6 +40,7 @@ from summarize_r1_watchdog_device_boundary import (
 )
 from summarize_r1_sensor_algorithm_heap import (
     SENSOR_ALGORITHM_HEAP_FUNCTIONS,
+    SENSOR_ALGORITHM_HEAP_ROUTING,
     summarize as summarize_sensor_algorithm_heap,
 )
 from summarize_r1_gomore_initializer_boundary import (
@@ -433,6 +434,206 @@ def recovered_application_bytes() -> bytes:
     include = (ROOT / "research" / "decompilation" / "rebuild" /
                "application.bytes.inc").read_text()
     return bytes(int(value, 16) for value in re.findall(r"0x([0-9a-fA-F]{2})", include))
+
+
+# Goodix GH3X2X entries attributed to the pinned public democode
+# (goodix-gh3x2x-democode @ 2c0034a2); mirrors the generator tables.
+goodix_democode_symbols = {
+    0x00029C98: ("GH32x2xMedSel", "high"),
+    0x00029CC0: ("GH3X2XDrvConfigInit", "high"),
+    0x00029CDC: ("GH3X2X_AdtAlgorithmResultReport", "high"),
+    0x00029D0A: ("GH3X2X_AgcGetExtremum", "high"),
+    0x00029D34: ("GH3X2X_AgcGetThreshold", "high"),
+    0x00029D58: ("GH3x2xAgcInfoUpdate", "high"),
+    0x00029D5C: ("GH3X2X_AgcSubChnlGainAdj", "high"),
+    0x00029E8C: ("GH3X2X_AlgoCalculate", "high"),
+    0x00029F88: ("GH3X2X_AlgoChnlMapInit", "high"),
+    0x00029F9C: ("Gh3x2xDemoStopAlgoInner", "high"),
+    0x0002A090: ("GH3X2X_AlgoMemConfig", "high"),
+    0x0002A0F4: ("GH3X2X_AlgoVersion", "high"),
+    0x0002A198: ("GH3X2X_CheckChipModel", "high"),
+    0x0002A1F8: ("GH3X2X_ClearDivZeroFlag", "high"),
+    0x0002A204: ("GH3X2X_ClearSoftEvent", "high"),
+    0x0002A214: ("GH3X2X_CommunicateConfirm", "high"),
+    0x0002A266: ("GH3X2X_DecodeRegCfgArr", "high"),
+    0x0002A2AC: ("GH3X2X_DelayUs", "high"),
+    0x0002A31C: ("GH3X2X_DumpModeSet", "high"),
+    0x0002A328: ("GH3X2X_EnterLowPowerMode", "high"),
+    0x0002A380: ("GH3X2X_ExitLowPowerMode", "high"),
+    0x0002A474: ("GH3X2X_FifoControlInit", "high"),
+    0x0002A488: ("GH3X2X_FifoWatermarkThrConfig", "high"),
+    0x0002A4B4: ("GH3X2X_FunctionStart", "high"),
+    0x0002A508: ("GH3X2X_FunctionStop", "high"),
+    0x0002A540: ("GH3X2X_GetAlgoMemStatus", "high"),
+    0x0002A550: ("GH3X2X_GetConfigFuncMode", "high"),
+    0x0002A55C: ("GH3X2X_GetDemoVersion", "high"),
+    0x0002A598: ("GH3X2X_GetDriverLibVersion", "high"),
+    0x0002A5D0: ("GH3X2X_GetIrqStatus", "high"),
+    0x0002A5EC: ("GH3X2X_GetRegBitField", "high"),
+    0x0002A604: ("GH3X2X_GetSoftEvent", "high"),
+    0x0002A614: ("GH3X2X_GetVirtualRegVersion", "high"),
+    0x0002A630: ("GH3X2X_HbaAlgoChnlMapDefultSet", "high"),
+    0x0002A658: ("GH3X2X_HrAlgorithmResultReport", "high"),
+    0x0002A65A: ("GH3X2X_HrvAlgorithmResultReport", "high"),
+    0x0002A754: ("GH3X2X_Init", "high"),
+    0x0002A810: ("GH3x2xAgcChnlInfoInit_veneer", "high"),
+    0x0002A814: ("GH3X2X_LedAgcPramWrite", "high"),
+    0x0002A84C: ("GH3X2X_LedAgcProcess", "high"),
+    0x0002A86C: ("GH3X2X_LedAgcReset", "high"),
+    0x0002A8DC: ("GH3X2X_LoadNewRegConfigArr", "high"),
+    0x0002A968: ("GH3X2X_Memcpy", "high"),
+    0x0002A99E: ("GH3X2X_Memset", "high"),
+    0x0002A9EC: ("GH3X2X_ReadFifo", "high"),
+    0x0002AA10: ("GH3X2X_ReadFifodata", "high"),
+    0x0002AA74: ("GH3X2X_ReadReg", "high"),
+    0x0002AA98: ("GH3X2X_ReadRegBitField", "high"),
+    0x0002AAD0: ("GH3X2X_RegisterDelayUsCallback", "high"),
+    0x0002AADC: ("GH3X2X_RegisterHookFunc", "high"),
+    0x0002AAF8: ("GH3X2X_RegisterI2cOperationFunc", "high"),
+    0x0002ABA4: ("GH3X2X_ResetHardAdt", "high"),
+    0x0002ABDC: ("GH3X2X_SendCmd", "high"),
+    0x0002ABFC: ("GH3X2X_SetChipSleepFlag", "high"),
+    0x0002AC10: ("GH3X2X_SetConfigFuncMode", "high"),
+    0x0002AC1C: ("GH3X2X_SetMaxNumWhenReadFifo", "high"),
+    0x0002AC30: ("GH3X2X_SetSoftEvent", "high"),
+    0x0002AC40: ("GH3X2X_SlotEnRegSet", "high"),
+    0x0002AC4C: ("GH3X2X_SoftAdtGreenAlgorithmResultReport", "high"),
+    0x0002AC8C: ("GH3X2X_SoftAdtIrAlgorithmResultReport", "high"),
+    0x0002ACCC: ("GH3X2X_SoftReset", "high"),
+    0x0002ACF4: ("GH3X2X_Spo2AlgoChnlMapDefultSet", "high"),
+    0x0002AD14: ("GH3X2X_Spo2AlgorithmResultReport", "high"),
+    0x0002AD18: ("GH3X2X_StartSampling", "high"),
+    0x0002AD7C: ("GH3X2X_StopSampling", "high"),
+    0x0002ADB0: ("GH3X2X_StoreDrvCurrentAfterAgc", "high"),
+    0x0002AE00: ("GH3X2X_TimestampSyncGetFrameDataFlag", "high"),
+    0x0002AE04: ("GH3X2X_TimestampSyncPpgInit", "high"),
+    0x0002AE06: ("GH3X2X_TimestampSyncSetPpgIntFlag", "high"),
+    0x0002AE08: ("GH3X2X_TryWakeUp", "high"),
+    0x0002AE28: ("GH3X2X_UpdateAgcInfo", "high"),
+    0x0002AEDC: ("GH3X2X_WriteAlgConfigWithVirtualReg", "high"),
+    0x0002AF32: ("GH3X2X_WriteAlgParametersWithVirtualReg", "high"),
+    0x0002AF84: ("GH3X2X_WriteChnlMapConfigWithVirtualReg", "high"),
+    0x0002B010: ("GH3X2X_WriteFunctionConfigWithVirtualReg", "high"),
+    0x0002B0B8: ("GH3X2X_WriteReg", "high"),
+    0x0002B0DC: ("GH3X2X_WriteRegBitField", "high"),
+    0x0002B148: ("GH3X2X_WriteSwConfigWithVirtualReg", "high"),
+    0x0002B180: ("GH3X2X_WriteVirtualReg", "high"),
+    0x0002B218: ("GH3x2xAdtAlgoExe", "high"),
+    0x0002B4C4: ("GH3x2xAdtAlgoInit", "high"),
+    0x0002B4D8: ("GH3x2xAdtVersion", "high"),
+    0x0002B4F8: ("GH3x2xAgcCalDrvCurrent", "high"),
+    0x0002B524: ("GH3x2xAgcCalDrvCurrentAndGain", "high"),
+    0x0002B6A4: ("GH3x2xAgcCalExtremum", "high"),
+    0x0002B6E0: ("GH3x2xAgcChnlInfoInit", "high"),
+    0x0002B8EC: ("GH3x2xAgcFindSubChnlSlotInfo", "high"),
+    0x0002B91C: ("GH3x2xAgcInfoUpdate", "high"),
+    0x0002B998: ("GH3x2xAgcMainChnlKeyValueCal", "high"),
+    0x0002BD84: ("GH3x2xAgcMeanInfoReset", "high"),
+    0x0002BE24: ("GH3x2xAgcRegParse", "high"),
+    0x0002BFAA: ("GH3x2xAgcRegvalGet", "high"),
+    0x0002C148: ("GH3x2xAgcRegvalReset", "high"),
+    0x0002C178: ("GH3x2xAgcSubChnlAdjGainAndClearCnt", "high"),
+    0x0002C248: ("GH3x2xCalFunctionSlotBit", "high"),
+    0x0002C27C: ("GH3x2xCalGsensorStep", "high"),
+    0x0002C2A4: ("GH3x2xCreatTagArray", "high"),
+    0x0002C2EC: ("Gh3x2xDemoSearchCfgListByFunc", "high"),
+    0x0002C43C: ("GH3x2xFunctionProcess", "high"),
+    0x0002C4C0: ("GH3x2xGetAgcReg", "high"),
+    0x0002C4E4: ("GH3x2xGetDrvCurrent", "high"),
+    0x0002C4FC: ("GH3x2xGetFrameDataAndProcess", "high"),
+    0x0002C640: ("GH3x2xGetFrameNum", "high"),
+    0x0002C694: ("GH3x2xHandleFrameData", "high"),
+    0x0002C930: ("GH3x2xHrAlgoDeinit", "high"),
+    0x0002C944: ("GH3x2xHrAlgoExe", "high"),
+    0x0002CAA4: ("GH3x2xHrAlgoInit", "high"),
+    0x0002CAD8: ("GH3x2xHrvAlgoExe", "high"),
+    0x0002CC94: ("GH3x2xSetAgcReg", "high"),
+    0x0002CCC0: ("GH3x2xSetFunctionChnlMap", "high"),
+    0x0002CCD0: ("GH3x2xSetFunctionChnlNum", "high"),
+    0x0002CCF4: ("Gh3x2xSleepFlagGet", "high"),
+    0x0002CD00: ("GH3x2xSlotTimeInfo", "high"),
+    0x0002CDD4: ("GH3x2xSoftAdtAlgoExe", "high"),
+    0x0002CFE8: ("GH3x2xSpo2AlgoExe", "high"),
+    0x0002D16C: ("GH3x2xSpo2AlgoInit", "high"),
+    0x0002D184: ("GH3x2x_AgcAdjustGainByExtremum", "high"),
+    0x0002D324: ("GH3x2x_BitCount", "high"),
+    0x0002D33C: ("GH3x2x_GetActiveChipResetFlag", "high"),
+    0x0002D348: ("GH3x2x_GetChipResetRecoveringFlag", "high"),
+    0x0002D354: ("GH3x2x_Round", "high"),
+    0x0002D3A8: ("GH3x2x_SetChipResetRecoveringFlag", "high"),
+    0x0002D658: ("GetNextEventPointer", "high"),
+    0x0002D670: ("Gh3x2xDemoArrayCfgSwitch", "high"),
+    0x0002D824: ("Gh3x2xDemoFunctionProcess", "high"),
+    0x0002D87C: ("Gh3x2xDemoInit", "high"),
+    0x0002DB8C: ("Gh3x2xDemoInterruptProcess", "high"),
+    0x0002E0D0: ("Gh3x2xDemoSamplingControl", "high"),
+    0x0002E340: ("Gh3x2xDemoStartAlgoInner", "high"),
+    0x0002E358: ("Gh3x2xDemoStartSampling", "high"),
+    0x0002E36C: ("Gh3x2xDemoStartSamplingInner", "high"),
+    0x0002E61C: ("Gh3x2xDemoStartSamplingWithCfgSwitch", "high"),
+    0x0002E6A8: ("Gh3x2xDemoStopSampling", "high"),
+    0x0002E6BC: ("Gh3x2xDemoStopSamplingInner", "high"),
+    0x0002E746: ("Gh3x2xFifoRecovery", "high"),
+    0x0002E778: ("Gh3x2xFunctionInfoForUserInit", "high"),
+    0x0002E7A4: ("Gh3x2xFunctionSlotBitInit", "high"),
+    0x0002E7C4: ("Gh3x2xGetConfigVersion", "high"),
+    0x0002E8C4: ("Gh3x2xGetHrAlgoSupportChnl", "high"),
+    0x0002E8C8: ("Gh3x2xGetSpo2AlgoSupportChnl", "high"),
+    0x0002E8E8: ("Gh3x2xMovingAvaFilter", "high"),
+    0x0002E964: ("Gh3x2xSetCurrentSlotEnReg", "high"),
+    0x0002EB0C: ("Gh3x2xSetFrameFlag2", "high"),
+    0x0002EB84: ("Gh3x2x_WearEventHook", "high"),
+    0x0002ED98: ("GH3X2X_ReinitAllSwModuleParam", "high"),
+    0x0002EDAA: ("GH3X2X_WriteSwConfigWithVirtualReg_0x1100_arm", "high"),
+    0x0002EDEC: ("GhDrvConfigManagerInit", "high"),
+    0x0002EDFC: ("GhGetFunctionIdViaVirReg", "high"),
+    0x0002EE28: ("GhMultiSensorTimerInit", "high"),
+    0x0002EE38: ("GhGsMoveDetecterIsEnable", "high"),
+    0x0002EE44: ("GhMultSensorWearEventManagerGetCurTs", "high"),
+    0x0002EE50: ("GhMultSensorWearEventManagerInit", "high"),
+    0x0002EF6C: ("GhMultiSensorPrintAllEvt", "high"),
+    0x0002F0F8: ("GhGsMoveDetecterInit", "high"),
+    0x0006A018: ("get_Spo2WRWeights_addr", "high"),
+    0x0006A020: ("get_Spo2WRWeights_version", "high"),
+    0x0006A130: ("get_knConfNetWeightsArr_addr", "high"),
+    0x0006A148: ("get_knTdfusionWeightsArr_addr", "high"),
+    0x0006A500: ("GH3X2X_AlgoCallConfigInit", "high"),
+    0x0006CC34: ("goodix_hrv_config_get_version", "high"),
+    0x0006EAF8: ("goodix_spo2_config_get_instance", "high"),
+    0x0006EB00: ("goodix_spo2_config_get_version", "high"),
+    0x0006EC28: ("goodix_spo2_init_func", "high"),
+    0x0002A5C4: ("GH3X2X_GetGsensorEnableFlag", "candidate"),
+    0x0002A7F4: ("GH3X2X_InitSensorParameters", "candidate"),
+    0x0002A9D4: ("GH3X2X_ReadElectrodeWearDumpData", "candidate"),
+    0x0002ABEC: ("GH3X2X_SensorPramInit", "candidate"),
+    0x0002EB4E: ("Gh3x2x_NormalizeGsensorSensitivity", "candidate"),
+    }
+
+# Even/Bravechip-authored glue reclassified out of the Goodix provider gate by
+# the 2026-08-14 residual mapping pass.
+GOODIX_ADAPTER_GLUE_SYMBOLS = {
+    0x0002E734: "r1_goodix_sampling_mode_glue",
+    0x0003DDF4: "r1_goodix_gomore_ops_cross_wiring",
+    0x0006A4D8: "r1_goodix_frame_data_hook",
+    0x0006F920: "r1_goodix_gsensor_cache_sample",
+    0x0006F964: "r1_goodix_gsensor_cache_commit",
+    0x0006F9D4: "r1_goodix_gsensor_cache_query",
+}
+
+
+def apply_goodix_democode_attribution(function):
+    """Rewrite a frontier census expectation for democode-attributed entries."""
+    rewritten = dict(function)
+    entry = int(rewritten["entry"])
+    if entry in goodix_democode_symbols:
+        rewritten["provider_family"] = "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
+        rewritten["source_disposition"] = "use_pinned_upstream"
+        rewritten["symbol"] = goodix_democode_symbols[entry][0]
+    elif entry in GOODIX_ADAPTER_GLUE_SYMBOLS:
+        rewritten["provider_family"] = "r1_goodix_provider_adapter"
+        rewritten["symbol"] = GOODIX_ADAPTER_GLUE_SYMBOLS[entry]
+    return rewritten
+
 
 
 def main() -> None:
@@ -1424,7 +1625,7 @@ def main() -> None:
     remaining_frontier = DOCS / "REMAINING-FUNCTION-FRONTIER.md"
     for marker in (
         "zero remain `unclassified`",
-        "Thirty-four sensor-algorithm heap functions",
+        "Thirty-four sensor-algorithm heap functions are now provenance-resolved",
         "FRONTIER-FINAL53-CORRELATION.md",
         "Eight composite-initializer functions / 586 bytes",
         "Six paired sleep-classifier graph-builder/allocator functions / 2,188 bytes",
@@ -2709,11 +2910,22 @@ def main() -> None:
         PROJECT / "platform" / "nrf52840" / "sdk" / "openr1_motion.c"
     )
     for marker in (
-        "NRFX_TWIM_INSTANCE(1)", "NRF_GPIO_PIN_MAP(0, 11)",
+        "openr1_twim1_acquire", "NRF_GPIO_PIN_MAP(0, 11)",
         "NRF_GPIO_PIN_MAP(0, 14)", "NRF_GPIO_PIN_MAP(0, 15)",
         "bma456w_init", "lis2dw12_device_id_get", "openr1_motion_api",
+        "NRFX_GPIOTE_CONFIG_IN_SENSE_LOTOHI", "nrfx_gpiote_in_init",
+        "osThreadFlagsSet", "selected_interrupt_dispatch",
     ):
         require(motion_port, marker)
+    twim1_arbiter = (
+        PROJECT / "platform" / "nrf52840" / "sdk" / "openr1_twim1_arbiter.c"
+    )
+    for marker in (
+        "NRFX_TWIM_INSTANCE(1)", "openr1_twim1_acquire",
+        "openr1_twim1_release", "openr1_twim1_tx", "openr1_twim1_rx",
+        "OPENR1_TWIM1_CLIENT_MOTION", "OPENR1_TWIM1_CLIENT_NFC",
+    ):
+        require(twim1_arbiter, marker)
     require(PROJECT / "platform" / "nrf52840" / "sdk" / "main.c",
             "openr1_motion_initialize")
     require(PROJECT / "platform" / "nrf52840" / "sdk" / "openr1_sdk.ld",
@@ -3058,7 +3270,7 @@ def main() -> None:
         raise AssertionError("application unclassified-function count changed")
     if application_provider_counts["nordic_nrf5_sdk_17_1_0"] != 547:
         raise AssertionError("application Nordic provider count changed")
-    if application_provider_counts["r1_product_specific"] != 669:
+    if application_provider_counts["r1_product_specific"] != 671:
         raise AssertionError("R1 product-function count changed")
     if application_provider_counts["unknown_generic_device_registry_candidate"] != 40:
         raise AssertionError("unknown generic device-registry boundary count changed")
@@ -3069,7 +3281,7 @@ def main() -> None:
     if application_provider_counts["unknown_rtc_device_provider_candidate"] != 10:
         raise AssertionError("unknown RTC-device provider boundary count changed")
     if application_provider_counts[
-            "unknown_sensor_algorithm_heap_provider_candidate"] != 34:
+            "unknown_sensor_algorithm_heap_provider_candidate"] != 0:
         raise AssertionError("unknown sensor-algorithm heap boundary count changed")
     if application_provider_counts[
             "unknown_sensor_stream_framework_candidate"] != 32:
@@ -3093,9 +3305,11 @@ def main() -> None:
         raise AssertionError("R1 Nordic-WDT adapter count changed")
     if application_provider_counts["r1_provider_configuration_glue"] != 10:
         raise AssertionError("R1 provider-configuration glue count changed")
-    if application_provider_counts["goodix_gh3x2x_candidate"] != 467:
+    if application_provider_counts["goodix_gh3x2x_candidate"] != 325:
         raise AssertionError("Goodix GH3X2X provider-boundary count changed")
-    if application_provider_counts["r1_goodix_provider_adapter"] != 18:
+    if application_provider_counts["goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"] != 168:
+        raise AssertionError("Goodix GH3X2X public-democode attribution count changed")
+    if application_provider_counts["r1_goodix_provider_adapter"] != 24:
         raise AssertionError("R1 Goodix adapter count changed")
     if application_provider_counts["r1_iqs7211e_provider_adapter"] != 12:
         raise AssertionError("R1 IQS7211E adapter count changed")
@@ -3138,8 +3352,24 @@ def main() -> None:
         f"{row['entry']}\n" for row in goodix_rows
     ).encode()).hexdigest()
     if goodix_entry_digest != \
-            "ca2fdec2e16b42e4476a6e00d1ff22280a886c6b3b9020044733eaf9852b0464":
+            "9fd3924c5175ad59654f696df9d7a2ec893832d8ba4059ca4deebdc2af6c0c11":
         raise AssertionError("Goodix exact function-entry set changed")
+    goodix_democode_rows = [
+        row for row in ownership_rows
+        if row["image"] == "application" and
+        row["provider_family"] == "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
+    ]
+    if any(
+        row["source_disposition"] != "use_pinned_upstream"
+        for row in goodix_democode_rows
+    ):
+        raise AssertionError("Goodix public-democode function lost its upstream pin")
+    goodix_democode_entry_digest = hashlib.sha256("".join(
+        f"{row['entry']}\n" for row in goodix_democode_rows
+    ).encode()).hexdigest()
+    if goodix_democode_entry_digest != \
+            "8a7786a5e7ca0c128c5b5d2e53b00c61e34232a54837bebdf4d9e2e3a5328e70":
+        raise AssertionError("Goodix public-democode exact function-entry set changed")
     goodix_adapter_rows = [
         row for row in ownership_rows
         if row["image"] == "application" and
@@ -3149,7 +3379,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in goodix_adapter_rows
     ).encode()).hexdigest()
     if goodix_adapter_entry_digest != \
-            "d03617ce0d5408bbe01fbd3b9b335e7d466adeba72ac4854d0263a65bc286d58":
+            "f75970812258a0fd17f204d80c682442669cb066aa46b15188112f2a55c36d7c":
         raise AssertionError("R1 Goodix exact adapter-entry set changed")
     wear_entries = {
         "0x0003cd80", "0x0003ce44", "0x0003ceec", "0x0003d06c",
@@ -4999,7 +5229,10 @@ def main() -> None:
         entry = int(function["entry"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:entry - recovered_base + int(function["size"])]
-        if row["provider_family"] != function["provider"] or \
+        expected_thunk_family = function["provider"]
+        if entry in goodix_democode_symbols:
+            expected_thunk_family = "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
+        if row["provider_family"] != expected_thunk_family or \
                 row["confidence"] != "high" or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
             raise AssertionError(f"resolved branch thunk changed: 0x{entry:08x}")
@@ -6558,6 +6791,7 @@ def main() -> None:
             any(frontier_334_342_summary["safety"].values()):
         raise AssertionError("R1 334...342-byte frontier metadata changed")
     for function in R1_FRONTIER_334_342_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6591,6 +6825,7 @@ def main() -> None:
             any(frontier_314_328_summary["safety"].values()):
         raise AssertionError("R1 314...328-byte frontier metadata changed")
     for function in R1_FRONTIER_314_328_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6623,6 +6858,7 @@ def main() -> None:
             any(frontier_280_308_summary["safety"].values()):
         raise AssertionError("R1 280...308-byte frontier metadata changed")
     for function in R1_FRONTIER_280_308_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6652,6 +6888,7 @@ def main() -> None:
             any(frontier_264_274_summary["safety"].values()):
         raise AssertionError("R1 264...274-byte frontier metadata changed")
     for function in R1_FRONTIER_264_274_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6690,6 +6927,7 @@ def main() -> None:
             any(frontier_256_262_summary["safety"].values()):
         raise AssertionError("R1 256...262-byte frontier metadata changed")
     for function in R1_FRONTIER_256_262_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6729,6 +6967,7 @@ def main() -> None:
             any(frontier_230_248_summary["safety"].values()):
         raise AssertionError("R1 230...248-byte frontier metadata changed")
     for function in R1_FRONTIER_230_248_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6766,6 +7005,7 @@ def main() -> None:
             any(frontier_224_230_summary["safety"].values()):
         raise AssertionError("R1 224...230-byte frontier metadata changed")
     for function in R1_FRONTIER_224_230_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6795,6 +7035,7 @@ def main() -> None:
             any(frontier_212_222_summary["safety"].values()):
         raise AssertionError("R1 212...222-byte frontier metadata changed")
     for function in R1_FRONTIER_212_222_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6828,6 +7069,7 @@ def main() -> None:
             any(frontier_204_210_summary["safety"].values()):
         raise AssertionError("R1 204...210-byte frontier metadata changed")
     for function in R1_FRONTIER_204_210_FUNCTIONS:
+        function = apply_goodix_democode_attribution(function)
         entry = int(function["entry"])
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6861,6 +7103,8 @@ def main() -> None:
             frontier_128_202_summary["quantized_runtime_function_count"] != 3 or \
             any(frontier_128_202_summary["safety"].values()):
         raise AssertionError("R1 128...202-byte frontier metadata changed")
+
+
     frontier_128_202_confidence = {
         "r1_product_specific": "high",
         "nordic_nrf5_sdk_17_1_0": "high",
@@ -6881,22 +7125,35 @@ def main() -> None:
         0x000896F0: "sensor_stream_object_create",
         0x0008AC28: "time_calendar_local_datetime_fill",
     }
+    frontier_128_202_confidence[
+        "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"] = "high"
     for function in R1_FRONTIER_128_202_FUNCTIONS:
         entry = int(function["entry"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
-        expected_symbol = frontier_128_202_labels.get(entry, function["symbol"])
-        if row["inventory_source"] != function["inventory"] or \
-                row["provider_family"] != function["provider_family"] or \
-                row["source_disposition"] != function["source_disposition"] or \
+        if entry in goodix_democode_symbols:
+            democode_symbol, democode_confidence = goodix_democode_symbols[entry]
+            expected_function = dict(function)
+            expected_function["provider_family"] = \
+                "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
+            expected_function["source_disposition"] = "use_pinned_upstream"
+        else:
+            expected_function = function
+        expected_symbol = frontier_128_202_labels.get(
+            entry, expected_function["symbol"])
+        if entry in goodix_democode_symbols:
+            expected_symbol = goodix_democode_symbols[entry][0]
+        if row["inventory_source"] != expected_function["inventory"] or \
+                row["provider_family"] != expected_function["provider_family"] or \
+                row["source_disposition"] != expected_function["source_disposition"] or \
                 row["upstream_symbol"] != expected_symbol or \
-                row["confidence"] != frontier_128_202_confidence[
-                    function["provider_family"]] or \
-                int(row["size"]) != function["size"]:
+                row["confidence"] != (goodix_democode_symbols[entry][1]
+                    if entry in goodix_democode_symbols else
+                    frontier_128_202_confidence[
+                        expected_function["provider_family"]]) or \
+                int(row["size"]) != expected_function["size"]:
             raise AssertionError(
                 f"R1 128...202-byte frontier changed: 0x{entry:08x}"
             )
-    frontier_128_202_confidence[
-        "unknown_sensor_algorithm_heap_provider_candidate"] = "high"
     frontier_128_202_confidence["arm_toolchain_runtime"] = "high"
     frontier_128_202_confidence[
         "freertos_10_5_1_nordic_nrf52_port"] = "high"
@@ -6952,14 +7209,40 @@ def main() -> None:
         for function in tier_functions:
             entry = int(function["entry"])
             row = ownership_by_key[("application", f"0x{entry:08x}")]
+            if entry in goodix_democode_symbols:
+                democode_symbol, democode_confidence = goodix_democode_symbols[entry]
+                expected_family = "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
+                expected_disposition = "use_pinned_upstream"
+                expected_confidence = democode_confidence
+                expected_tier_symbol = democode_symbol
+            elif entry in GOODIX_ADAPTER_GLUE_SYMBOLS:
+                expected_family = "r1_goodix_provider_adapter"
+                expected_disposition = "clean_room_adapter_only_use_licensed_provider"
+                expected_confidence = frontier_128_202_confidence.get(
+                    "r1_goodix_provider_adapter", "high")
+                expected_tier_symbol = GOODIX_ADAPTER_GLUE_SYMBOLS[entry]
+            elif entry in SENSOR_ALGORITHM_HEAP_ROUTING:
+                # The sub-32 frontier census still records these bodies under
+                # their historical heap-family label; the ownership ledger
+                # routes them per the resolved Goodix goodix_mem/GdMem
+                # provenance (or R1 integrator glue for the two local bodies).
+                expected_family, expected_disposition, expected_confidence, _ = \
+                    SENSOR_ALGORITHM_HEAP_ROUTING[entry]
+            else:
+                expected_family = function["provider_family"]
+                expected_disposition = function["source_disposition"]
+                expected_confidence = frontier_128_202_confidence[
+                    function["provider_family"]]
             if row["inventory_source"] != function["inventory"] or \
-                    row["provider_family"] != function["provider_family"] or \
-                    row["source_disposition"] != function["source_disposition"] or \
-                    row["confidence"] != frontier_128_202_confidence[
-                        function["provider_family"]] or \
+                    row["provider_family"] != expected_family or \
+                    row["source_disposition"] != expected_disposition or \
+                    row["confidence"] != expected_confidence or \
                     int(row["size"]) != function["size"] or \
-                    (function["symbol"] and
-                     row["upstream_symbol"] != function["symbol"]):
+                    ((expected_tier_symbol if entry in goodix_democode_symbols
+                      else function["symbol"]) and
+                     row["upstream_symbol"] != (expected_tier_symbol
+                     if entry in goodix_democode_symbols
+                     else function["symbol"])):
                 raise AssertionError(
                     f"R1 {tier_name}-byte frontier changed: 0x{entry:08x}"
                 )
@@ -9375,12 +9658,13 @@ def main() -> None:
             recovered[start - recovered_base:end - recovered_base]
             for start, end in segments
         )
+        expected_family, expected_disposition, expected_confidence, _ = \
+            SENSOR_ALGORITHM_HEAP_ROUTING[entry]
         if row["inventory_source"] != "ghidra_functions_csv" or \
-                row["provider_family"] != \
-                "unknown_sensor_algorithm_heap_provider_candidate" or \
-                row["source_disposition"] != "investigate_before_implementing" or \
+                row["provider_family"] != expected_family or \
+                row["source_disposition"] != expected_disposition or \
                 row["upstream_symbol"] != function["symbol"] or \
-                row["confidence"] != "high" or \
+                row["confidence"] != expected_confidence or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -10064,9 +10348,15 @@ def main() -> None:
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:end - recovered_base]
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if entry in goodix_democode_symbols:
+            family_ok = row["provider_family"] == \
+                "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0" and \
+                row["source_disposition"] == "use_pinned_upstream"
+        else:
+            family_ok = row["provider_family"] == "goodix_gh3x2x_candidate" and \
+                row["source_disposition"] == \
+                "vendor_source_required_not_redistributable"
+        if not family_ok or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10253,17 +10543,108 @@ def main() -> None:
         0x0006EC90: (182, "02bf9cb6f8334524f02c3a57f21db491395924e3e7c5f7d6523184e4074b06be"),
         0x000759F4: (20, "144db00be4dbeff89e673850917c4d4bcbbac8ba2740e7ea056d14a8da04cb80"),
     }
+    goodix_democode_entries = {
+        0x00029C98, 0x00029CC0, 0x00029CDC, 0x00029D0A,
+        0x00029D34, 0x00029D58, 0x00029D5C, 0x00029E8C,
+        0x00029F88, 0x00029F9C, 0x0002A090, 0x0002A0F4,
+        0x0002A198, 0x0002A1F8, 0x0002A204, 0x0002A214,
+        0x0002A266, 0x0002A2AC, 0x0002A31C, 0x0002A328,
+        0x0002A380, 0x0002A474, 0x0002A488, 0x0002A4B4,
+        0x0002A508, 0x0002A540, 0x0002A550, 0x0002A55C,
+        0x0002A598, 0x0002A5C4, 0x0002A5D0, 0x0002A5EC,
+        0x0002A604, 0x0002A614, 0x0002A630, 0x0002A658,
+        0x0002A65A, 0x0002A754, 0x0002A7F4, 0x0002A810,
+        0x0002A814, 0x0002A84C, 0x0002A86C, 0x0002A8DC,
+        0x0002A968, 0x0002A99E, 0x0002A9D4, 0x0002A9EC,
+        0x0002AA10, 0x0002AA74, 0x0002AA98, 0x0002AAD0,
+        0x0002AADC, 0x0002AAF8, 0x0002ABA4, 0x0002ABDC,
+        0x0002ABEC, 0x0002ABFC, 0x0002AC10, 0x0002AC1C,
+        0x0002AC30, 0x0002AC40, 0x0002AC4C, 0x0002AC8C,
+        0x0002ACCC, 0x0002ACF4, 0x0002AD14, 0x0002AD18,
+        0x0002AD7C, 0x0002ADB0, 0x0002AE00, 0x0002AE04,
+        0x0002AE06, 0x0002AE08, 0x0002AE28, 0x0002AEDC,
+        0x0002AF32, 0x0002AF84, 0x0002B010, 0x0002B0B8,
+        0x0002B0DC, 0x0002B148, 0x0002B180, 0x0002B218,
+        0x0002B4C4, 0x0002B4D8, 0x0002B4F8, 0x0002B524,
+        0x0002B6A4, 0x0002B6E0, 0x0002B8EC, 0x0002B91C,
+        0x0002B998, 0x0002BD84, 0x0002BE24, 0x0002BFAA,
+        0x0002C148, 0x0002C178, 0x0002C248, 0x0002C27C,
+        0x0002C2A4, 0x0002C2EC, 0x0002C43C, 0x0002C4C0,
+        0x0002C4E4, 0x0002C4FC, 0x0002C640, 0x0002C694,
+        0x0002C930, 0x0002C944, 0x0002CAA4, 0x0002CAD8,
+        0x0002CC94, 0x0002CCC0, 0x0002CCD0, 0x0002CCF4,
+        0x0002CD00, 0x0002CDD4, 0x0002CFE8, 0x0002D16C,
+        0x0002D184, 0x0002D324, 0x0002D33C, 0x0002D348,
+        0x0002D354, 0x0002D3A8, 0x0002D658, 0x0002D670,
+        0x0002D824, 0x0002D87C, 0x0002DB8C, 0x0002E0D0,
+        0x0002E340, 0x0002E358, 0x0002E36C, 0x0002E61C,
+        0x0002E6A8, 0x0002E6BC, 0x0002E746, 0x0002E778,
+        0x0002E7A4, 0x0002E7C4, 0x0002E8C4, 0x0002E8C8,
+        0x0002E8E8, 0x0002E964, 0x0002EB0C, 0x0002EB4E,
+        0x0002EB84, 0x0002ED98, 0x0002EDAA, 0x0002EDEC,
+        0x0002EDFC, 0x0002EE28, 0x0002EE38, 0x0002EE44,
+        0x0002EE50, 0x0002EF6C, 0x0002F0F8, 0x0006A018,
+        0x0006A020, 0x0006A130, 0x0006A148, 0x0006A500,
+        0x0006CC34, 0x0006EAF8, 0x0006EB00, 0x0006EC28,
+    }
     for entry, (size, digest) in goodix_candidate_expected.items():
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered_function(entry)
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        goodix_adapter_glue_entries = {
+        0x0002E734, 0x0003DDF4, 0x0006A4D8, 0x0006F920, 0x0006F964, 0x0006F9D4,
+    }
+        if entry in goodix_democode_entries:
+            family_ok = row["provider_family"] == \
+                "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0" and \
+                row["source_disposition"] == "use_pinned_upstream"
+        elif entry in goodix_adapter_glue_entries:
+            family_ok = row["provider_family"] == \
+                "r1_goodix_provider_adapter"
+        else:
+            family_ok = row["provider_family"] == "goodix_gh3x2x_candidate" and \
+                row["source_disposition"] == \
+                "vendor_source_required_not_redistributable"
+        if not family_ok or \
                 len(body) != size or hashlib.sha256(body).hexdigest() != digest:
             raise AssertionError(f"Goodix GH3X2X boundary changed: 0x{entry:08x}")
+    # The 116-entry frozen direct-call-graph closure, pinned explicitly by
+    # entry: 64 members are now attributed to the pinned public Goodix
+    # democode, so the evidence-phrase filter can no longer see them.
+    goodix_cluster_entries = {
+        0x00029f9c, 0x0002a090, 0x0002a168, 0x0002a198,
+        0x0002a1cc, 0x0002a1f8, 0x0002a204, 0x0002a214,
+        0x0002a266, 0x0002a2ac, 0x0002a31c, 0x0002a328,
+        0x0002a488, 0x0002a4b4, 0x0002a508, 0x0002a540,
+        0x0002a550, 0x0002a5c4, 0x0002a5d0, 0x0002a5ec,
+        0x0002a604, 0x0002a658, 0x0002a65a, 0x0002a7f4,
+        0x0002a810, 0x0002a814, 0x0002a84c, 0x0002a86c,
+        0x0002a8dc, 0x0002a968, 0x0002a99e, 0x0002a9d2,
+        0x0002a9d4, 0x0002a9ec, 0x0002aa10, 0x0002aa74,
+        0x0002aa98, 0x0002aba4, 0x0002abdc, 0x0002ac10,
+        0x0002ac30, 0x0002ac40, 0x0002ac4c, 0x0002ac8c,
+        0x0002accc, 0x0002ad14, 0x0002ad18, 0x0002ad7c,
+        0x0002adb0, 0x0002ae04, 0x0002ae06, 0x0002ae08,
+        0x0002ae28, 0x0002af84, 0x0002b010, 0x0002b0b8,
+        0x0002b0dc, 0x0002b148, 0x0002b180, 0x0002b218,
+        0x0002b4c4, 0x0002b4d8, 0x0002b4f8, 0x0002b524,
+        0x0002b6a4, 0x0002b8ec, 0x0002b91c, 0x0002b998,
+        0x0002bd84, 0x0002be24, 0x0002bfaa, 0x0002c148,
+        0x0002c178, 0x0002c248, 0x0002c27c, 0x0002c2a4,
+        0x0002c43c, 0x0002c4c0, 0x0002c4e4, 0x0002c4fc,
+        0x0002c640, 0x0002c694, 0x0002c930, 0x0002c944,
+        0x0002caa4, 0x0002cad8, 0x0002cc94, 0x0002ccc0,
+        0x0002ccd0, 0x0002ccf4, 0x0002cdd4, 0x0002cfe8,
+        0x0002d184, 0x0002d324, 0x0002d33c, 0x0002d348,
+        0x0002d354, 0x0002d3a8, 0x0002d658, 0x0002d66c,
+        0x0002e340, 0x0002e734, 0x0002e746, 0x0002e7a4,
+        0x0002e8cc, 0x0002e8e8, 0x0002e950, 0x0002eb0c,
+        0x0002eb4e, 0x0002eb80, 0x0002ed98, 0x0002edaa,
+        0x0002ede0, 0x0002edfc, 0x0002ee38, 0x0002ee44,
+    }
     goodix_cluster_rows = [
-        row for row in goodix_rows
-        if "frozen direct-call-graph component" in row["evidence"]
+        row for row in ownership_rows
+        if row["image"] == "application" and
+        int(row["entry"], 16) in goodix_cluster_entries
     ]
     if len(goodix_cluster_rows) != 116:
         raise AssertionError("Goodix direct-call-graph closure changed")
@@ -10550,7 +10931,7 @@ def main() -> None:
     if len(rows) < 40:
         raise AssertionError(f"coverage ledger unexpectedly short: {len(rows)}")
     statuses = {row["status"] for row in rows}
-    if not {"implemented", "partial", "deferred", "withheld", "separate"} <= statuses:
+    if not {"implemented", "partial", "withheld", "separate"} <= statuses:
         raise AssertionError(f"missing coverage dispositions: {statuses}")
 
     with (ROOT / "docs" / "reference" / "r1-capability-matrix.csv").open(newline="") as handle:
@@ -10584,6 +10965,7 @@ def main() -> None:
     iqs7211e_root = os.environ.get("OPENR1_IQS7211E_ROOT")
     azoteq_settings_root = os.environ.get("OPENR1_AZOTEQ_SETTINGS_ROOT")
     gnu_root = os.environ.get("OPENR1_GNU_INSTALL_ROOT")
+    goodix_democode_root = os.environ.get("OPENR1_GOODIX_DEMOCODE_ROOT")
     vendor_checks = []
     if flashdb_root:
         subprocess.run([
@@ -10597,6 +10979,12 @@ def main() -> None:
             f"TINY_AES_ROOT={tiny_aes_root}",
         ], check=True)
         vendor_checks.append("tiny-AES-c/R1 crypto")
+    if goodix_democode_root:
+        subprocess.run([
+            "make", "-C", str(PROJECT), "vendor-goodix-test",
+            f"GOODIX_DEMOCODE_ROOT={goodix_democode_root}",
+        ], check=True)
+        vendor_checks.append("Goodix GH3X2X democode")
     if sdk_root and flashdb_root and bma456_root and lis2dw12_root and \
             st25dvxxkc_root and tiny_aes_root and iqs7211e_root and \
             azoteq_settings_root:
@@ -10608,10 +10996,12 @@ def main() -> None:
             f"TINY_AES_ROOT={tiny_aes_root}",
             f"IQS7211E_ROOT={iqs7211e_root}",
             f"AZOTEQ_SETTINGS_ROOT={azoteq_settings_root}",
-        ], check=True)
+        ] + ([f"GOODIX_DEMOCODE_ROOT={goodix_democode_root}"]
+             if goodix_democode_root else []), check=True)
         vendor_checks.append("vendor provenance")
     if sdk_root and flashdb_root and bma456_root and lis2dw12_root and \
-            st25dvxxkc_root and tiny_aes_root and gnu_root:
+            st25dvxxkc_root and tiny_aes_root and gnu_root and \
+            goodix_democode_root:
         subprocess.run([
             "make", "-C", str(PROJECT), "sdk-verify",
             f"SDK_ROOT={sdk_root}", f"BMA456_ROOT={bma456_root}",
@@ -10619,6 +11009,7 @@ def main() -> None:
             f"ST25DVXXKC_ROOT={st25dvxxkc_root}",
             f"FLASHDB_ROOT={flashdb_root}",
             f"GNU_INSTALL_ROOT={gnu_root}",
+            f"GOODIX_DEMOCODE_ROOT={goodix_democode_root}",
         ], check=True)
         vendor_checks.append("Nordic SDK image")
 

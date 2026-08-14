@@ -47,6 +47,51 @@ descriptor runtime is shared across separately gated model graphs, but no exact 
 or license is known. [`FRONTIER-204-210-CORRELATION.md`](../correlation/FRONTIER-204-210-CORRELATION.md) pins
 that sixth body and brings the boundary to six functions / 1,328 bytes.
 
+## Sharpened fingerprint evidence
+
+The provenance investigation added the following structural detail. None of it changes the
+admission state; the family remains `investigate_before_implementing`. The ownership-ledger
+candidate family now totals 26 functions / 2,486 executable bytes, of which this boundary pins
+the six-function / 1,328-byte core documented above.
+
+- AOT-compiled static-graph ABI: 24-byte layer records hold eight packed parameter bytes, the
+  model context at `+0x8`, a weights offset at `+0xC`, a bias offset at `+0x10`, and the run
+  function pointer at `+0x14`. A compile-time weight-arena cursor is threaded through the
+  builders (GoMore sleep `0x0002874C`/`0x0002966C`, GH_SPO2 `0x0004387C`, dlCom `0x0005D01C`).
+- Model provenance string triples `{name, "vX.Y.Z", 8-hex git hash}` are embedded and assembled
+  into version reports at `0x0006EC90`: `dlCom_pre2exc` / `v1.3.0` / `c00c91c9`,
+  `pv_v1.1.0` / `v2.0.3.0` / `21d2063d`, and
+  `GH_SPO2_pre_pv_v2.1.10.0` / `277e89de` / `1f1cf98b`. `dlCom` (deep-learning compiler) is a
+  private toolchain name with zero public footprint.
+- Quantization is asymmetric int8 with float min/max metadata, a zero point biased by `-0x80`,
+  and `scale = 255 / (max - min)`. Requantization is performed in float with
+  round-half-away-from-zero: the int8-add executor at `0x00036C7C` dequantizes both operands,
+  adds, requantizes, and saturates. There is no integer multiplier/shift requantization.
+- The pooling executor at `0x00041816` supports only window-2 max (unrolled four times),
+  window-4 max, and window-3 average with sign-aware half rounding. The descriptor encodes
+  byte0 = type, byte1 = window, byte2 = stride; anything else is a silent no-op returning zero.
+- The tensor layer uses a 12-slot descriptor pool with a 0x14 stride and a compacting word arena
+  of 0x6A4 words that qsorts live offsets and memmoves (`0x00093628`).
+- The same runtime serves both the GoMore sleep-classifier graphs and the Goodix GH_SPO2/dlCom
+  graphs, so one private toolchain produced all of the models.
+
+## Candidates rejected
+
+- CMSIS-NN: stateless integer kernels, no descriptor layer.
+- TFLM: C++ flatbuffer interpreter, incompatible ABI.
+- NNoM: checked against upstream source — dynamic allocation, Qm.n q7 arithmetic, HWC 3-D
+  tensors, and a build/run lifecycle do not match.
+- uTensor: C++, incompatible ABI.
+- TinyEngine, tinyMaix, emlearn, X-CUBE-AI: era/ABI mismatches.
+
+## Next evidence step
+
+Acquire a Goodix GH3x2x health-algorithm SDK or evaluation firmware and check for the
+`{name, version, git-hash}` header triple, the `dlCom` string, the 24-byte descriptor with the
+function pointer at `+0x14`, and the 12-slot / 0x14-stride tensor pool with the 0x6A4-word
+compacting arena. Also grep other wearable firmware dumps in the research workspace for
+`dlCom`, `pre2exc`, and `pv_v` strings.
+
 ## Behavioral census, not a rewrite specification
 
 The recovered dispatcher operates on signed eight-bit tensors. It selects maximum pooling for
@@ -69,3 +114,18 @@ and this shared executor remains unavailable.
 ```sh
 python3 tools/evidence/summarize_r1_quantized_pooling_boundary.py
 ```
+
+## Attribution re-examination 2026-08
+
+An independent re-test (see
+[`unknown_shared_quantized_neural_runtime_candidate-ATTRIBUTION-2026-08.md`](unknown_shared_quantized_neural_runtime_candidate-ATTRIBUTION-2026-08.md))
+eliminated CMSIS-NN with quoted upstream evidence (integer-only library: `NN_ROUND` is a
+shift-offset macro, requantization is `arm_nn_requantize` doubling-high-mult, softmax is
+base-2/fixed-point; repo-wide zero float usage) against this family's float requantization
+(`(x-min)*(255.0f/range)`, ±0.5 rounding, −128 bias, float softmax capped at `88.0f`). TFLM,
+tinyMaix, NNoM, and the TensorFlow public nudge variants were also re-confirmed as non-matches.
+The `dlCom` toolchain retains zero public footprint. The runtime therefore remains
+unattributed and blocked; the same report identifies the surrounding platform layer's vendor
+(Wuxi Bravechip BCL603M/ChipletRing, byte-exact BAE8 GATT base UUID at `0x000991A0`, firmware
+string `603MV1.9.3`), which narrows the probable owner of the shared runtime and provides a
+commercial source-acquisition route.

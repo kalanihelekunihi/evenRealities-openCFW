@@ -136,6 +136,8 @@ r1_error r1_runtime_set_security(r1_runtime *runtime, uint16_t connection,
                                  bool encrypted, bool bonded, bool authorized);
 r1_peer_role r1_runtime_connection_role(const r1_runtime *runtime,
                                         uint16_t connection);
+void r1_runtime_role_occupancy(const r1_runtime *runtime,
+                               bool *phone_occupied, bool *glasses_occupied);
 r1_bae8_event_plan r1_runtime_plan_bae8_event(uint8_t event_type);
 r1_error r1_bae8_plan_hvx_result(
     bool serialized_path, bool credit_acquired, r1_tx_status status,

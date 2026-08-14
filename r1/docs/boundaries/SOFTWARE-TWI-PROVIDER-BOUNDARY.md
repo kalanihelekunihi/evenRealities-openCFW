@@ -58,6 +58,52 @@ two pins through Nordic `nrf_gpio_cfg_default`. Similarly, the four fixed bus-bi
 `0x00056508...0x00056550` retain R1 board configuration without admitting either this engine or
 the unidentified global device registry.
 
+## Sharpened fingerprint evidence
+
+The provenance investigation added the following structural detail. None of it changes the
+admission state; the family remains `investigate_before_implementing`.
+
+- Callback-vtable engine: each bus owns a per-bus state struct (delay context, SCL/SDA handles,
+  and six GPIO/delay operations — drive-low, release-high, set-output, set-input(pin, pull),
+  udelay(ctx), read-pin). The operation bodies are byte-identical across the four
+  compiler-instantiated buses `i2c_2`..`i2c_5`, with per-bus state structs at
+  `0x20007400 + n*0x70`.
+- Registry-adapter error enums interlock with the generic device registry: the read adapter at
+  `0x0005547C` returns `4/10/12` and the write adapter at `0x00055DBC` returns `4/8/11`, gap-free
+  alongside the registry's missing-operation codes `{1,2,3,5,6,7,9}`. Together they form one
+  coherent positive-integer status enum `0..12` spanning both families — strong evidence that the
+  software-TWI engine and the generic device registry are one framework by one author.
+- Transaction semantics: the read transaction at `0x000557F8` performs
+  start / address / register / repeated-start / address|1 / N bytes / stop; the write transaction
+  at `0x000560DC` sends address + 16-bit register MSB-first + one data byte.
+- The divergent `i2c_4` open at `0x00055390` calls a Nordic-attributed six-argument
+  `nrf_gpio_cfg` wrapper — vendor-HAL special-casing inside one bus open, not evidence of Nordic
+  authorship of the engine.
+- No pointers to any family entry exist in flash; the operations tables are installed at runtime
+  into the `0x200074xx` records.
+
+## Candidates rejected
+
+- Nordic `twi_sw_master`: single compile-time bus, direct `nrf_gpio` calls, boolean returns.
+- RT-Thread `i2c-bit-ops`: different operations decomposition and negative `rt_err_t` returns.
+- Linux/Zephyr GPIO-I2C bit-bang: wrong ecosystem.
+- Sensor-vendor SDKs: the same engine also drives the ST25DV NFC tag and the YHM2710 PMIC on
+  `i2c_5`, outside any single sensor vendor's scope.
+
+## Next evidence step
+
+Trace the runtime vtable installer that writes `0x2000740C..0x20007424`. If the callbacks resolve
+to already admitted R1 Nordic-GPIO adapters, that further confirms vendor-framework authorship;
+otherwise search code hosts for the exact six-operation set signature.
+
+## Cross-family interlock
+
+The software-TWI, generic device-registry, RTC-device, time/calendar, and sensor-stream families
+interlock: they share the positive status enum `0..12`, runtime registration into the
+`0x200074xx`/registry records, and the `sys rtc` / `i2c_n` device naming. They most likely form
+one proprietary platform layer inside Even Realities' B210 product tree and therefore share one
+provenance fate — evidence resolving any one of them bears directly on the others.
+
 ## Clean-room routing decision
 
 - Prefer Nordic SDK TWIM/TWI providers where peripheral availability, electrical routing, power
@@ -72,3 +118,16 @@ the unidentified global device registry.
 This decision uses all recoverable behavior while respecting the rule that identifiable or
 potentially third-party implementation code is supplied by its vendor or another attributable
 provider, not reconstructed locally.
+
+## Attribution re-examination 2026-08
+
+A full re-examination (instruction-level disassembly of all forty bodies from the rebuilt
+image, exhaustive flash-pointer scans, upstream source comparisons) found no attributable
+upstream: RT-Thread `i2c-bit-ops` was re-tested against fetched v4.1.0 source and rejected on
+four concrete structural grounds (ops model, clock-stretching, ACK polarity, error signing);
+Nordic, Linux/Zephyr, and sensor-vendor SDKs remain rejected. Build-path strings
+(`product/B210/app/_build/B210_Application`, `..\..\..\platform\...`) place the engine in the
+B210 platform middleware tree, identified as Wuxi Bravechip "ChipletRing" / BCL603M (see the
+quantized-runtime sibling report). Verdict: NO ATTRIBUTION — family remains
+`investigate_before_implementing`. Full evidence:
+[`unknown_software_twi_provider_candidate-ATTRIBUTION-2026-08.md`](unknown_software_twi_provider_candidate-ATTRIBUTION-2026-08.md).

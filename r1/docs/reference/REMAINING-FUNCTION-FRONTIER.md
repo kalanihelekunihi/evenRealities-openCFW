@@ -2,6 +2,14 @@
 
 Snapshot: 2026-08-13, after the final-53 residue closure.
 
+Attribution re-examination 2026-08-14: all six `investigate_before_implementing` families were
+re-tested against fetched upstream sources (CMSIS-NN, RT-Thread, MultiTimer, old newlib, Pebble,
+BabyOS, mr-library, μC/Clk, vendor SDKs) and all remain NO ATTRIBUTION; the interlocked "B210
+platform" middleware is identified as Wuxi Bravechip Technologies' closed "ChipletRing" /
+BCL603M smart-ring platform (firmware string `603MV1.9.3`, byte-exact GATT base-UUID match to
+the public `BravechipSpace/ChipletRing-APPSDK`), which names the commercial acquisition route.
+Per-family reports: `../boundaries/unknown_*_candidate-ATTRIBUTION-2026-08.md` (six files).
+
 ## Current inventory
 
 The generated ownership ledger contains 3,165 application/bootloader functions. All 304
@@ -21,8 +29,12 @@ sub-32-byte tier
 The remaining frontier is therefore provider-boundary work, not inventory: forty
 generic device-registry, sixteen time/calendar-provider, forty software-TWI-provider, and ten
 RTC-device-provider candidates remain separately blocked under their distinct provider families.
-Thirty-four sensor-algorithm heap functions are separately blocked
-under `unknown_sensor_algorithm_heap_provider_candidate`.
+Thirty-four sensor-algorithm heap functions are now provenance-resolved as Goodix's
+`goodix_mem`/`GdMem` memory-pool manager from the GH3X2X SDK common DSP support library:
+twelve allocator internals and twenty Goodix consumer call-site glue bodies join
+`goodix_gh3x2x_candidate` under `vendor_source_required_not_redistributable`, while the two
+integrator-authored glue bodies (the `Gh3x2xPoolIsNotEnough` fatal handler at `0x0002E952`
+and the product byte-fill at `0x00092B60`) are R1 product behavior.
 Thirty-two generic sensor-stream functions are separately
 blocked under `unknown_sensor_stream_framework_candidate`; their adjacent registry, list,
 allocator, buffer, and timer implementations are not admitted by that function-local
@@ -180,16 +192,16 @@ adapter to Nordic RESETREAS get/clear primitives.
 The 1,736-byte BLE-thread event consumer is now closed as product-specific role, target-address,
 and advertising orchestration around separately owned Nordic, CMSIS-FreeRTOS, and FreeRTOS calls.
 
-| Address band | Unknown entries | Recovered body bytes |
+| Address band | Investigation-blocked entries | Recovered body bytes |
 | --- | ---: | ---: |
-| `0x00020000...0x0002FFFF` | 34 | 1,514 |
-| `0x00030000...0x0003FFFF` | 72 | 5,084 |
-| `0x00040000...0x0004FFFF` | 129 | 7,492 |
-| `0x00050000...0x0005FFFF` | 110 | 6,208 |
-| `0x00060000...0x0006FFFF` | 123 | 6,786 |
-| `0x00070000...0x0007FFFF` | 93 | 5,036 |
-| `0x00080000...0x0008FFFF` | 107 | 8,668 |
-| `0x00090000...0x0009FFFF` | 71 | 4,816 |
+| `0x00020000...0x0002FFFF` | 3 | 254 |
+| `0x00030000...0x0003FFFF` | 2 | 470 |
+| `0x00040000...0x0004FFFF` | 1 | 434 |
+| `0x00050000...0x0005FFFF` | 81 | 5,928 |
+| `0x00060000...0x0006FFFF` | 3 | 114 |
+| `0x00070000...0x0007FFFF` | 12 | 604 |
+| `0x00080000...0x0008FFFF` | 49 | 3,682 |
+| `0x00090000...0x0009FFFF` | 13 | 820 |
 
 Body size and proximity are prioritization signals only. They do not establish authorship or
 permission to implement a function. Every promotion still requires function-local semantics,
@@ -200,11 +212,13 @@ clean-room disposition.
 
 | Entry | Bytes | Current treatment |
 | --- | ---: | --- |
-| `0x00067C30` | 274 | ownership investigation required |
-| `0x00032408` | 272 | ownership investigation required |
-| `0x0003D9B8` | 268 | ownership investigation required |
-| `0x0003EE34` | 264 | ownership investigation required |
-| `0x00064274` | 264 | ownership investigation required |
+| `0x00089B08` | 562 | sensor-stream framework: source/version/license unresolved |
+| `0x00089890` | 464 | sensor-stream framework: source/version/license unresolved |
+| `0x00041816` | 434 | shared quantized-neural runtime: attribution unresolved |
+| `0x0008A1E0` | 422 | sensor-stream framework: source/version/license unresolved |
+
+The former 294-byte `0x0002D460` heap leader left this table with the Goodix
+`goodix_mem`/`GdMem` provenance resolution; it is vendor-gated, not unresolved.
 
 The remaining large math/DSP bodies are deliberately not treated as attractive local rewrite
 targets. Several lie next to Goodix or GoMore boundaries, where misclassification would recreate
@@ -883,8 +897,14 @@ headers, boundary-record coalescing, allocation/split policy, control pointer at
 direct initialization from Goodix-candidate entry `0x0002A090`, and terminal
 `sensor_algo_mem_fatal` path are recovered. Five bodies are scatter-loaded and are hashed over
 only their executable spans. Function-local comparison rejects both Nordic FreeRTOS `heap_4` and
-the repository's pinned TLSF v3.1 source; no attributable alternative is known. The component is
-therefore separately implementation-blocked rather than translated or silently substituted. See
+the repository's pinned TLSF v3.1 source. Provenance is now resolved: the component is Goodix's
+`goodix_mem`/`GdMem` memory-pool manager from the GH3X2X SDK common DSP support library (config
+tag `gh3x2x-v2.23_7ecd2a`), matched through the public `goodix_mem.h` -1/-2 error contract and
+instruction-level comparison against the Goodix common-DSP library object. The twelve allocator
+internals and twenty Goodix consumer call-site glue bodies are vendor-gated with the restrictive
+binary-only Goodix SDK license; only the integrator-supplied `Gh3x2xPoolIsNotEnough` fatal
+handler and the product byte-fill used for pool clearing are R1 product behavior. The allocator
+itself remains implementation-blocked rather than translated or silently substituted. See
 [`SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md`](../boundaries/SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md).
 
 The primary/secondary register-read/write and shutdown wrappers at

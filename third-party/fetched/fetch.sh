@@ -36,6 +36,9 @@ iqs_sha=4a957ea082ae2146692567ece71abd0b122a6c7c914bc964cee64d3d68656199
 azoteq_settings_name=zmk-driver-iqs7211e-436d3c42172abf812ec104521f29384fc02fc50e
 azoteq_settings_url=https://github.com/sekigon-gonnoc/zmk-driver-iqs7211e/archive/436d3c42172abf812ec104521f29384fc02fc50e.tar.gz
 azoteq_settings_sha=9398174dea8c219988745af246eefcd8b141ef974ac6dacff79784c5364ec967
+goodix_democode_name=pebbleos-nonfree-2c0034a23b675a5f9a29e4a47e8b504c7a88e321
+goodix_democode_url=https://github.com/coredevices/pebbleos-nonfree/archive/2c0034a23b675a5f9a29e4a47e8b504c7a88e321.tar.gz
+goodix_democode_sha=48564d724f1de0004dd19ed3d8b156841400b7e652714f46dcb64d0397c76d29
 
 mkdir -p "$vendor_dir"
 stage=$(mktemp -d "${TMPDIR:-/tmp}/openr1-vendor.XXXXXX")
@@ -97,6 +100,13 @@ if [ ! -d "$vendor_dir/$azoteq_settings_name" ]; then
     mv "$stage/$azoteq_settings_name" "$vendor_dir/$azoteq_settings_name"
 fi
 
+if [ ! -d "$vendor_dir/$goodix_democode_name" ]; then
+    curl --fail --location --silent --show-error "$goodix_democode_url" -o "$stage/goodix-democode.tar.gz"
+    printf '%s  %s\n' "$goodix_democode_sha" "$stage/goodix-democode.tar.gz" | shasum -a 256 -c -
+    tar -xzf "$stage/goodix-democode.tar.gz" -C "$stage"
+    mv "$stage/$goodix_democode_name" "$vendor_dir/$goodix_democode_name"
+fi
+
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 python3 "$script_dir/verify_vendor.py" \
     --sdk-root "$vendor_dir/$sdk_name" \
@@ -106,4 +116,5 @@ python3 "$script_dir/verify_vendor.py" \
     --st25dvxxkc-root "$vendor_dir/$st25_name/Drivers/BSP/Components/st25dvxxkc" \
     --tiny-aes-root "$vendor_dir/$tiny_aes_name" \
     --iqs7211e-root "$vendor_dir/$iqs_name" \
-    --azoteq-settings-root "$vendor_dir/$azoteq_settings_name"
+    --azoteq-settings-root "$vendor_dir/$azoteq_settings_name" \
+    --goodix-democode-root "$vendor_dir/$goodix_democode_name/gh3x2x"

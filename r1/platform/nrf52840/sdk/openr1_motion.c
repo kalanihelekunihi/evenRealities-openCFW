@@ -1,5 +1,7 @@
 #include "openr1_motion.h"
 
+#include "openr1_twim1_arbiter.h"
+
 #include <limits.h>
 #include <string.h>
 
@@ -10,7 +12,9 @@
 #include "lis2dw12_reg.h"
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
+#include "nrfx_gpiote.h"
 #include "nrfx_twim.h"
+#include "task.h"
 
 #define OPENR1_MOTION_SCL_PIN NRF_GPIO_PIN_MAP(0, 11)
 #define OPENR1_MOTION_SDA_PIN NRF_GPIO_PIN_MAP(0, 14)
@@ -23,15 +27,31 @@
 #define OPENR1_MOTION_LIS_RESET_READS 12u
 #define OPENR1_MOTION_LIS_POST_CONFIG_MS UINT32_C(100)
 #define OPENR1_MOTION_INITIAL_RATE_HZ UINT16_C(25)
+#define OPENR1_MOTION_FLAG_INTERRUPT UINT32_C(0x01)
 
 #if OPENR1_MOTION_POLICY < OPENR1_MOTION_POLICY_DISABLED || \
     OPENR1_MOTION_POLICY > OPENR1_MOTION_POLICY_FORCE_BMA456W
 #error "OPENR1_MOTION_POLICY is outside the supported motion policy range"
 #endif
 
-static const nrfx_twim_t motion_twim = NRFX_TWIM_INSTANCE(1);
+/*
+ * The TWIM1 hardware instance is owned by openr1_twim1_arbiter; this client
+ * only keeps its recovered pin/frequency/priority configuration and passes it
+ * to the arbiter on acquisition. See the arbiter header for the dock/worn
+ * handoff contract.
+ */
+static const nrfx_twim_config_t motion_bus_configuration = {
+    .scl = OPENR1_MOTION_SCL_PIN,
+    .sda = OPENR1_MOTION_SDA_PIN,
+    .frequency = NRF_TWIM_FREQ_400K,
+    .interrupt_priority = OPENR1_MOTION_TWIM_PRIORITY,
+    .hold_bus_uninit = false,
+};
 static osMutexId_t motion_mutex;
 static StaticSemaphore_t motion_mutex_control_block;
+static osThreadId_t motion_thread;
+static StaticTask_t motion_control_block;
+static StackType_t motion_stack[configMINIMAL_STACK_SIZE];
 static r1_motion_adapter motion_adapter;
 static struct bma4_dev bma_device;
 static uint8_t bma_address = OPENR1_MOTION_I2C_ADDRESS;
@@ -60,10 +80,15 @@ static int32_t motion_bus_read(uint8_t device_address,
     if (!valid_transfer(bytes, length) || length == 0u || !lock_bus()) {
         return -1;
     }
-    nrfx_err_t error = nrfx_twim_tx(&motion_twim, device_address,
-                                    &register_address, 1u, true);
+    nrfx_err_t error = openr1_twim1_acquire(
+        OPENR1_TWIM1_CLIENT_MOTION, &motion_bus_configuration);
     if (error == NRFX_SUCCESS) {
-        error = nrfx_twim_rx(&motion_twim, device_address, bytes, length);
+        error = openr1_twim1_tx(OPENR1_TWIM1_CLIENT_MOTION, device_address,
+                                &register_address, 1u, true);
+    }
+    if (error == NRFX_SUCCESS) {
+        error = openr1_twim1_rx(OPENR1_TWIM1_CLIENT_MOTION, device_address,
+                                bytes, length);
     }
     unlock_bus();
     return error == NRFX_SUCCESS ? 0 : -1;
@@ -81,8 +106,12 @@ static int32_t motion_bus_write(uint8_t device_address,
     if (length != 0u) {
         memcpy(frame + 1u, bytes, length);
     }
-    const nrfx_err_t error = nrfx_twim_tx(
-        &motion_twim, device_address, frame, length + 1u, false);
+    nrfx_err_t error = openr1_twim1_acquire(
+        OPENR1_TWIM1_CLIENT_MOTION, &motion_bus_configuration);
+    if (error == NRFX_SUCCESS) {
+        error = openr1_twim1_tx(OPENR1_TWIM1_CLIENT_MOTION, device_address,
+                                frame, length + 1u, false);
+    }
     unlock_bus();
     return error == NRFX_SUCCESS ? 0 : -1;
 }
@@ -385,6 +414,69 @@ static ret_code_t map_error(r1_error error) {
     return NRF_ERROR_INVALID_STATE;
 }
 
+/*
+ * Interrupt context does the minimum: record the event for the deferred
+ * worker.  Recovered r1_motion_interrupt_input_lookup (0x00050128) resolves
+ * the P0.15 rising-edge record; nothing else belongs in the handler.
+ */
+static void motion_interrupt(nrfx_gpiote_pin_t pin,
+                             nrf_gpiote_polarity_t action) {
+    (void)pin;
+    (void)action;
+    if (motion_thread != NULL) {
+        (void)osThreadFlagsSet(motion_thread, OPENR1_MOTION_FLAG_INTERRUPT);
+    }
+}
+
+/*
+ * Recovered r1_motion_selected_interrupt_dispatch (0x00050294) routes the
+ * deferred interrupt to the selected provider's hook.  Both admitted hooks
+ * are recovered two-byte no-ops and only the withheld QMA6100 variant has
+ * real interrupt behavior, so every admitted dispatch performs no work.
+ */
+static void selected_interrupt_dispatch(void) {
+    switch (r1_motion_adapter_selected(&motion_adapter)) {
+    case R1_MOTION_VARIANT_LIS2DW12:
+        /* Recovered LIS2DW12 hook at 0x0006F3B2: two-byte no-op. */
+        break;
+    case R1_MOTION_VARIANT_BMA456W:
+        /* Recovered BMA456W hook at 0x0006F1DA: two-byte no-op. */
+        break;
+    default:
+        /* No provider selected: nothing to route to. */
+        break;
+    }
+}
+
+static void motion_worker(void *context) {
+    (void)context;
+    for (;;) {
+        const uint32_t flags = osThreadFlagsWait(
+            OPENR1_MOTION_FLAG_INTERRUPT, osFlagsWaitAny, osWaitForever);
+        if ((flags & osFlagsError) != 0u) {
+            continue;
+        }
+        if ((flags & OPENR1_MOTION_FLAG_INTERRUPT) != 0u) {
+            selected_interrupt_dispatch();
+        }
+    }
+}
+
+static ret_code_t initialize_interrupt(void) {
+    if (!nrfx_gpiote_is_init() && nrfx_gpiote_init() != NRFX_SUCCESS) {
+        return NRF_ERROR_INTERNAL;
+    }
+    const nrfx_gpiote_in_config_t configuration =
+        NRFX_GPIOTE_CONFIG_IN_SENSE_LOTOHI(false);
+    const nrfx_err_t error = nrfx_gpiote_in_init(
+        OPENR1_MOTION_INTERRUPT_PIN, &configuration, motion_interrupt);
+    if (error != NRFX_SUCCESS) {
+        return (ret_code_t)error;
+    }
+    nrfx_gpiote_in_event_enable(OPENR1_MOTION_INTERRUPT_PIN, true);
+    return NRF_SUCCESS;
+}
+
 static ret_code_t initialize_bus(void) {
     static const osMutexAttr_t attributes = {
         .name = "openr1_motion",
@@ -395,22 +487,13 @@ static ret_code_t initialize_bus(void) {
     if (motion_mutex == NULL) {
         return NRF_ERROR_NO_MEM;
     }
-    const nrfx_twim_config_t configuration = {
-        .scl = OPENR1_MOTION_SCL_PIN,
-        .sda = OPENR1_MOTION_SDA_PIN,
-        .frequency = NRF_TWIM_FREQ_400K,
-        .interrupt_priority = OPENR1_MOTION_TWIM_PRIORITY,
-        .hold_bus_uninit = false,
-    };
-    const nrfx_err_t error = nrfx_twim_init(
-        &motion_twim, &configuration, NULL, NULL);
+    const nrfx_err_t error = openr1_twim1_acquire(
+        OPENR1_TWIM1_CLIENT_MOTION, &motion_bus_configuration);
     if (error != NRFX_SUCCESS) {
         return (ret_code_t)error;
     }
-    nrfx_twim_enable(&motion_twim);
     bus_initialized = true;
-    nrf_gpio_cfg_input(OPENR1_MOTION_INTERRUPT_PIN, NRF_GPIO_PIN_NOPULL);
-    return NRF_SUCCESS;
+    return initialize_interrupt();
 }
 
 ret_code_t openr1_motion_initialize(void) {
@@ -422,6 +505,17 @@ ret_code_t openr1_motion_initialize(void) {
     module_initialized = true;
     return NRF_SUCCESS;
 #else
+    static const osThreadAttr_t thread_attributes = {
+        .name = "motion",
+        .cb_mem = &motion_control_block,
+        .cb_size = sizeof motion_control_block,
+        .stack_mem = motion_stack,
+        .stack_size = sizeof motion_stack,
+    };
+    motion_thread = osThreadNew(motion_worker, NULL, &thread_attributes);
+    if (motion_thread == NULL) {
+        return NRF_ERROR_NO_MEM;
+    }
     ret_code_t error = initialize_bus();
     if (error != NRF_SUCCESS) {
         return error;
@@ -439,8 +533,7 @@ ret_code_t openr1_motion_initialize(void) {
     }
     error = map_error(motion_error);
     if (error != NRF_SUCCESS) {
-        nrfx_twim_disable(&motion_twim);
-        nrfx_twim_uninit(&motion_twim);
+        (void)openr1_twim1_release(OPENR1_TWIM1_CLIENT_MOTION);
         bus_initialized = false;
         return error;
     }

@@ -14,6 +14,7 @@
 #include "openr1/r1_protocol.h"
 #include "openr1/r1_connection_params.h"
 #include "openr1/r1_runtime.h"
+#include "openr1_advertising.h"
 #include "openr1_scheduler.h"
 
 #define OPENR1_BAE8_SERVICE_UUID UINT16_C(0x0001)
@@ -225,6 +226,8 @@ static void on_ble_event(ble_evt_t const *event, void *context) {
     const uint16_t connection = event->evt.gap_evt.conn_handle;
     switch (event->header.evt_id) {
         case BLE_GAP_EVT_CONNECTED: {
+            openr1_advertising_connection_established(
+                event->evt.gap_evt.params.connected.role == BLE_GAP_ROLE_PERIPH);
             openr1_ble_link *link = allocate_link(connection);
             if (link == NULL ||
                 r1_runtime_connect(openr1_platform_runtime(), connection) != R1_OK) {
@@ -232,12 +235,25 @@ static void on_ble_event(ble_evt_t const *event, void *context) {
             }
             break;
         }
-        case BLE_GAP_EVT_DISCONNECTED:
+        case BLE_GAP_EVT_DISCONNECTED: {
             openr1_scheduler_reset_credits(r1_runtime_connection_role(
                 openr1_platform_runtime(), connection));
             r1_runtime_disconnect(openr1_platform_runtime(), connection);
             release_link(connection);
+            /* A disconnected link frees its role; the recovered policy
+               advertises while either role is unoccupied. */
+            bool phone_occupied = false;
+            bool glasses_occupied = false;
+            r1_runtime_role_occupancy(openr1_platform_runtime(),
+                                      &phone_occupied, &glasses_occupied);
+            const uint32_t advertising_error =
+                openr1_advertising_set_role_occupancy(
+                    phone_occupied, glasses_occupied);
+            if (advertising_error != NRF_SUCCESS) {
+                service.last_error = advertising_error;
+            }
             break;
+        }
         case BLE_GATTS_EVT_WRITE:
             on_write(event->evt.gatts_evt.conn_handle,
                      &event->evt.gatts_evt.params.write);

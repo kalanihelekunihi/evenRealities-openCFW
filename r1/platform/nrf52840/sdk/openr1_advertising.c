@@ -24,6 +24,21 @@
 BLE_ADVERTISING_DEF(advertising);
 
 static uint32_t last_error;
+static bool advertising_active;
+
+/* The module reports mode transitions it drives itself (boot start, fast/slow
+   timeout transitions, disconnect restart) through this handler so the local
+   active flag tracks the real advertiser state. It does not report the
+   SoftDevice stopping the advertiser when a connection is established; that
+   transition is resynchronized by openr1_advertising_connection_established. */
+static void on_advertising_event(ble_adv_evt_t event) {
+    if (event == BLE_ADV_EVT_IDLE) {
+        advertising_active = false;
+    } else if (event != BLE_ADV_EVT_WHITELIST_REQUEST &&
+               event != BLE_ADV_EVT_PEER_ADDR_REQUEST) {
+        advertising_active = true;
+    }
+}
 
 static char hexadecimal(uint8_t value) {
     value &= 0x0fu;
@@ -133,6 +148,7 @@ uint32_t openr1_advertising_initialize(bool factory_mode,
     configuration.config.ble_adv_slow_interval = OPENR1_SLOW_INTERVAL;
     configuration.config.ble_adv_slow_timeout = 0u;
     configuration.config.ble_adv_on_disconnect_disabled = false;
+    configuration.evt_handler = on_advertising_event;
     configuration.error_handler = on_advertising_error;
 
     error = ble_advertising_init(&advertising, &configuration);
@@ -145,15 +161,47 @@ uint32_t openr1_advertising_initialize(bool factory_mode,
 }
 
 uint32_t openr1_advertising_start(void) {
+    if (advertising_active) {
+        return NRF_SUCCESS;
+    }
     const uint32_t error = ble_advertising_start(&advertising, BLE_ADV_MODE_FAST);
+    if (error == NRF_SUCCESS) {
+        advertising_active = true;
+    }
     last_error = error;
     return error;
 }
 
 uint32_t openr1_advertising_stop(void) {
-    const uint32_t error = sd_ble_gap_adv_stop(advertising.adv_handle);
+    if (!advertising_active) {
+        return NRF_SUCCESS;
+    }
+    uint32_t error = sd_ble_gap_adv_stop(advertising.adv_handle);
+    if (error == NRF_ERROR_INVALID_STATE) {
+        /* The SoftDevice already stopped the set; the desired state holds. */
+        advertising_active = false;
+        return NRF_SUCCESS;
+    }
+    if (error == NRF_SUCCESS) {
+        advertising_active = false;
+    }
     last_error = error;
     return error;
+}
+
+void openr1_advertising_connection_established(bool peripheral_role) {
+    /* Only a peripheral-role connect stops this advertiser set. */
+    if (peripheral_role) {
+        advertising_active = false;
+    }
+}
+
+uint32_t openr1_advertising_set_role_occupancy(bool phone_occupied,
+                                               bool glasses_occupied) {
+    if (phone_occupied && glasses_occupied) {
+        return openr1_advertising_stop();
+    }
+    return openr1_advertising_start();
 }
 
 uint32_t openr1_advertising_last_error(void) {

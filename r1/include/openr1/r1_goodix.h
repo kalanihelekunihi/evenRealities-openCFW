@@ -98,4 +98,31 @@ r1_error r1_goodix_diagnostic_select(
 r1_error r1_sensor_stream_registration_plan(
     r1_sensor_stream_registration_plan_result *plan);
 
+/*
+ * Integrator glue around the Goodix goodix_mem/GdMem pool manager.
+ *
+ * The GH3X2X SDK declares Gh3x2xPoolIsNotEnough() as an integrator-supplied
+ * callback.  The recovered stock body at 0x0002E952 logs
+ * "sensor_algo_mem_fatal, info1: %u", flushes the log, and never returns.
+ * The clean-room seam records the redacted diagnostic first and defers the
+ * terminal action to the platform halt hook, which is not expected to return
+ * on target; the portable implementation itself contains no busy loop.
+ */
+typedef struct {
+    void (*record)(void *context, uint32_t info1);
+    void (*halt)(void *context);
+    void *context;
+} r1_goodix_pool_fatal_ops;
+
+/*
+ * Zero-fill used when clearing the provider pool region.  The recovered
+ * 12-byte body at 0x00092B60 is the product byte-fill that the Goodix
+ * goodix_mem_init path thunks into; the clean-room equivalent is an explicit
+ * zero loop (the freestanding target has no C library headers) behind a
+ * NULL-safe wrapper.
+ */
+void r1_goodix_pool_fill(void *destination, size_t length);
+void r1_goodix_pool_not_enough(const r1_goodix_pool_fatal_ops *ops,
+                               uint32_t info1);
+
 #endif

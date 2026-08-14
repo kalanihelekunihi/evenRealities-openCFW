@@ -70,6 +70,18 @@ advertising integration are all bound and tested together. The recovered planner
 behavior; enabling only a subset would create a misleading and potentially unsafe compatibility
 surface.
 
+Update (2026-08-13): the Nordic SDK application now binds the role-occupancy half of this
+contract. `openr1_advertising_set_role_occupancy` reads phone/glasses occupancy from the runtime
+link roles through `r1_runtime_role_occupancy` and drives the official `ble_advertising` provider:
+fast advertising runs while either role is unoccupied and advertising stops once both roles are
+occupied. The binding fires on pair-role assignment (the registered role handler) and on link
+disconnect. In the SDK application today the only role-assignment signal is `pairAuth` selecting
+the phone role; the glasses-role planner (`r1_runtime_plan_bae8_event` link groups) still has no
+bound channel parser, so glasses occupancy never becomes true on target and the both-occupied stop
+path is unreachable until that binding lands. Unassigned links occupy no role. The externally
+callable `advStart` command remains refused as stated above: durable target storage, current-peer
+lookup, and delayed-disconnect scheduling are still unbound.
+
 ## Provider boundary
 
 This function calls source-routed provider functions as callees; their implementation does not

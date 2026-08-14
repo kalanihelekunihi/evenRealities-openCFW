@@ -2,8 +2,24 @@
 """Emit the exact R1 sensor-algorithm heap provider-boundary census.
 
 This parser is static and read-only.  It records executable extents and
-recovered allocator semantics without claiming authorship or exposing a
-replacement allocator for the still-unattributed provider component.
+recovered allocator semantics without exposing a replacement allocator for
+the vendor-gated provider component.
+
+Provenance is resolved: the censused component is Goodix's ``goodix_mem`` /
+``GdMem`` memory-pool manager from the Goodix GH3X2X health-sensor algorithm
+SDK common DSP support library (R1 carries config tag ``gh3x2x-v2.23_7ecd2a``).
+The public GH3X2X SDK header ``goodix_mem.h`` declares
+``goodix_mem_init``/``deinit``/``malloc``/``free``/``get_free_size`` with the
+-1/-2 error contract the R1 init body implements, and declares
+``extern void Gh3x2xPoolIsNotEnough(void)`` as an integrator-supplied
+callback.  Instruction-level comparison against the Goodix common-DSP library
+object matched the R1 allocator internals (GdMemInit, GdMemMalloc, GdMemFree,
+GdMemRealloc, unlink, insert, GdMemGetFreeSize).  The Goodix SDK license is
+restrictive and the module ships binary-only, so allocator internals and the
+Goodix consumer call-site glue route to ``goodix_gh3x2x_candidate`` /
+``vendor_source_required_not_redistributable``.  Only the two
+integrator-authored glue bodies (the ``Gh3x2xPoolIsNotEnough`` handler and
+the product byte-fill used for pool clearing) are R1 product behavior.
 """
 
 from __future__ import annotations
@@ -36,7 +52,6 @@ def _function(
         "size": sum(end - start for start, end in executable_segments),
         "symbol": symbol,
         "role": role,
-        "provider_family": "unknown_sensor_algorithm_heap_provider_candidate",
         "sha256": sha256,
         "segments": segments,
     }
@@ -133,6 +148,126 @@ SENSOR_ALGORITHM_HEAP_FUNCTIONS = [
 ]
 
 
+# Resolved ownership routing for the complete 34-row boundary: the thirteen
+# exact allocator census bodies above plus the twenty-one guarded
+# alloc/free call-site glue bodies imported from the sub-32-byte frontier
+# census.  Each entry maps to (provider_family, source_disposition,
+# confidence, routing basis).  Allocator internals carry instruction-level
+# matches to the Goodix common-DSP library object; call-site glue sits inside
+# already Goodix-gated consumer closures and is conservatively gated with the
+# calling provider; only the two integrator-authored glue bodies are R1
+# product behavior.
+_GOODIX_INTERNAL = (
+    "goodix_gh3x2x_candidate", "vendor_source_required_not_redistributable",
+    "high",
+)
+_GOODIX_CALLSITE_GLUE = (
+    "goodix_gh3x2x_candidate", "vendor_source_required_not_redistributable",
+    "candidate",
+)
+_R1_INTEGRATOR_GLUE = (
+    "r1_product_specific", "clean_room_behavior_only", "high",
+)
+SENSOR_ALGORITHM_HEAP_ROUTING = {
+    # Allocator internals: instruction-level Goodix goodix_mem/GdMem match.
+    0x0002D460: _GOODIX_INTERNAL + ("GdMemFree validated free/coalescing",),
+    0x0002D54C: _GOODIX_INTERNAL + (
+        "GdMemMalloc minimum-8 zeroing allocation entry",
+    ),
+    0x0002D5C0: _GOODIX_INTERNAL + ("GdMemRealloc grow/copy/free body",),
+    0x00042D1C: _GOODIX_INTERNAL + (
+        "pool control-pointer accessor used only by GdMem bodies",
+    ),
+    0x0006DFC8: _GOODIX_INTERNAL + ("goodix_mem_free tail-call thunk",),
+    0x0006DFCC: _GOODIX_INTERNAL + (
+        "GdMemGetFreeSize behind goodix_mem_get_free_size",
+    ),
+    0x0006DFD6: _GOODIX_INTERNAL + (
+        "goodix_mem_init (-1/-2 contract) tail-calling GdMemInit",
+    ),
+    0x0006E004: _GOODIX_INTERNAL + ("goodix_mem_malloc tail-call thunk",),
+    0x00076A44: _GOODIX_INTERNAL + ("GdMem free-list unlink internal",),
+    0x00093E14: _GOODIX_INTERNAL + ("GdMem size-to-bin mapping internal",),
+    0x00093E5E: _GOODIX_INTERNAL + ("GdMem free-list insert internal",),
+    0x000982C2: _GOODIX_INTERNAL + (
+        "GdMemMalloc bitmap search/remove/split/mark core",
+    ),
+    # Integrator-authored R1 glue around the vendor pool manager.
+    0x0002E952: _R1_INTEGRATOR_GLUE + (
+        "integrator-supplied Gh3x2xPoolIsNotEnough: logs "
+        "'sensor_algo_mem_fatal, info1: %u', flushes, terminal loop",
+    ),
+    0x00092B60: _R1_INTEGRATOR_GLUE + (
+        "R1 product byte-fill (memset) used by goodix_mem_init pool clearing",
+    ),
+    # Goodix consumer call-site glue (guarded alloc/free wrappers), gated
+    # with the calling Goodix provider.
+    0x00028EAC: _GOODIX_CALLSITE_GLUE + (
+        "guarded free-and-null; caller Goodix teardown 0x0007CBA0",
+    ),
+    0x00028EC0: _GOODIX_CALLSITE_GLUE + (
+        "teardown tail-branch step; caller Goodix session teardown 0x0006EB30",
+    ),
+    0x0002963A: _GOODIX_CALLSITE_GLUE + (
+        "0x40 zero-allocate and clear; caller Goodix buffer-pool init 0x00096A20",
+    ),
+    0x00034A3C: _GOODIX_CALLSITE_GLUE + (
+        "0x18-array zero-allocate; caller Goodix 0x0006EB94",
+    ),
+    0x00036230: _GOODIX_CALLSITE_GLUE + (
+        "guarded free returning 0; caller Goodix context destroy 0x0003E6B0",
+    ),
+    0x00036C60: _GOODIX_CALLSITE_GLUE + (
+        "context destroy free; reached only via Goodix teardown step 0x00028EC0",
+    ),
+    0x0003757C: _GOODIX_CALLSITE_GLUE + (
+        "guarded free returning 0; no resolved caller, wraps GdMemFree "
+        "between Goodix-gated neighbors",
+    ),
+    0x00056860: _GOODIX_CALLSITE_GLUE + (
+        "guarded free of *p; exclusive Goodix caller 0x0006DAD0",
+    ),
+    0x00066276: _GOODIX_CALLSITE_GLUE + (
+        "guarded free-and-null; caller Goodix 0x00093E3A",
+    ),
+    0x0006628A: _GOODIX_CALLSITE_GLUE + (
+        "guarded free-and-null; callers Goodix 0x00029BBC plus glue 0x00073154",
+    ),
+    0x0006629E: _GOODIX_CALLSITE_GLUE + (
+        "guarded free-and-null; caller Goodix teardown 0x0006CC60",
+    ),
+    0x000662B2: _GOODIX_CALLSITE_GLUE + (
+        "guarded free-and-null; caller Goodix 0x00091890",
+    ),
+    0x000662C6: _GOODIX_CALLSITE_GLUE + (
+        "guarded free-and-null; callers Goodix 0x00029BBC/0x000304A0/"
+        "0x000305D8/0x00033800/0x0006CC60/0x00091890",
+    ),
+    0x000662EA: _GOODIX_CALLSITE_GLUE + (
+        "buffer-descriptor init with heap zero-allocate; caller Goodix 0x0003727C",
+    ),
+    0x00066304: _GOODIX_CALLSITE_GLUE + (
+        "buffer-descriptor init with heap zero-allocate; callers Goodix "
+        "0x00031914/0x00072C48",
+    ),
+    0x0006631E: _GOODIX_CALLSITE_GLUE + (
+        "buffer-descriptor init with heap zero-allocate; caller Goodix 0x0006D204",
+    ),
+    0x000667C0: _GOODIX_CALLSITE_GLUE + (
+        "tail free of *(p+4); exclusive Goodix caller 0x00029BBC",
+    ),
+    0x00073154: _GOODIX_CALLSITE_GLUE + (
+        "record-field frees via glue 0x0006628A; caller Goodix teardown 0x00037E8A",
+    ),
+    0x00092B58: _GOODIX_CALLSITE_GLUE + (
+        "2-byte thunk into R1 memset 0x00092B60; sole caller goodix_mem_init",
+    ),
+    0x00098FFC: _GOODIX_CALLSITE_GLUE + (
+        "field frees via GdMemFree; caller Goodix session teardown 0x0006EB30",
+    ),
+}
+
+
 def summarize(image_path: Path) -> dict[str, object]:
     image = image_path.read_bytes()
     image_digest = hashlib.sha256(image).hexdigest()
@@ -151,8 +286,13 @@ def summarize(image_path: Path) -> dict[str, object]:
         if len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
             raise ValueError(f"sensor-algorithm heap boundary changed at 0x{entry:08x}")
+        family, disposition, confidence, basis = SENSOR_ALGORITHM_HEAP_ROUTING[entry]
         functions.append({
             **function,
+            "provider_family": family,
+            "source_disposition": disposition,
+            "confidence": confidence,
+            "routing_basis": basis,
             "entry": f"0x{entry:08x}",
             "end_exclusive": f"0x{end:08x}",
             "segments": [
@@ -181,16 +321,29 @@ def summarize(image_path: Path) -> dict[str, object]:
             "minimum_pool_bytes_exclusive": 1024,
         },
         "source_lineage": {
-            "status": "unidentified_sensor_algorithm_provider_candidate",
+            "status": "goodix_gh3x2x_goodix_mem_gdmem_provider",
             "goodix_link": "initialized directly by Goodix-candidate entry 0x0002a090",
+            "attribution": (
+                "Goodix goodix_mem/GdMem memory-pool manager from the GH3X2X "
+                "health-sensor algorithm SDK common DSP support library "
+                "(config tag gh3x2x-v2.23_7ecd2a); public goodix_mem.h "
+                "-1/-2 error contract plus instruction-level match to the "
+                "Goodix common-DSP library object"
+            ),
+            "integrator_supplied": [
+                "Gh3x2xPoolIsNotEnough fatal handler at 0x0002e952",
+                "R1 product byte-fill (memset) at 0x00092b60",
+            ],
             "excluded_matches": [
                 "Nordic SDK FreeRTOS 10.0.0 heap_4",
                 "Matthew Conte TLSF v3.1",
             ],
             "local_implementation_authorized": False,
             "reason": (
-                "Exact allocator semantics and its sensor_algo_mem_fatal path are recovered, "
-                "but no attributable source, version, private API, or license is established."
+                "The Goodix SDK license is restrictive (use limited to Goodix "
+                "ICs, no reverse engineering of binary forms) and the module "
+                "ships binary-only; allocator internals and Goodix consumer "
+                "call-site glue remain vendor_source_required_not_redistributable."
             ),
         },
         "safety": {

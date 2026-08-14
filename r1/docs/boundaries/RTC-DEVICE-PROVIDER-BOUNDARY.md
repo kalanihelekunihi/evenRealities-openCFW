@@ -60,6 +60,54 @@ minute, hour, day, month, year, weekday, and year-day fields, adds 1 to month/ye
 eight-tick divider. The generic status values and named-record API remain uninterpreted beyond the
 observed semantics.
 
+## Sharpened fingerprint evidence
+
+The provenance investigation added the following structural detail. None of it changes the
+admission state; the family remains `investigate_before_implementing`. (The ownership-ledger
+candidate family accounts 10 functions / 608 executable bytes under its own counting; the
+nine-function / 798-byte split above additionally covers the Nordic `nrfx_rtc_init` body and the
+R1 configuration-only wrapper, and its phrasing is pinned by the verifier.)
+
+- Eight-hertz epoch accumulation: open at `0x00056318` builds an `nrfx_rtc_config_t` with
+  prescaler 4095 (32768/4096 = 8 Hz), copies an eight-byte const config containing the
+  tick-handler pointer, and calls `nrfx_rtc_init` / tick-enable / enable. The tick handler at
+  `0x00056274` counts 0..7 and increments the epoch on the eighth tick, applying the signed int16
+  UTC offset in minutes multiplied by 60.
+- A 256-entry named-record table of 88-byte records is iterated with `(r + 1) & 0xFF` and a
+  `strcmp` name lookup. Each record carries an opened flag at `+4`, an embedded `nrfx_rtc_t` at
+  `+0x34`, per-record alarm second/minute compares with callback dispatch, and an embedded
+  registry record `{name @ +0x40, ops @ +0x44, next @ +0x54}` registered into the (blocked)
+  generic registry at `0x00085D58`. Custom positive status codes `0/2/4/17` match the registry's
+  positive-status scheme.
+- Leaked build evidence: the device name `sys rtc` is registered alongside `watchdog`,
+  `i2c_0..5`, `device_flash`, and `vnfc_rect_adc`; `__FILE__` paths include
+  `platform\threads\thread_manager.c` and `platform\services\eAT\at_system.c`, and the build path
+  is `product/B210/app/_build/B210_Application` — a proprietary `platform/` tree, with B210 being
+  Even Realities' board codename.
+- All callees are already attributed (toolchain `gmtime`/`strcmp`/`memmove`, Nordic
+  `nrfx_rtc_*`) or separately blocked (generic registry, time/calendar) — proving dependency, not
+  ownership.
+
+## Candidates rejected
+
+- Nordic SDK: no named-record layer; only the 180-byte `nrfx_rtc_init` body matches and is
+  already admitted.
+- RT-Thread: `rt_object` inline names, negative errnos, and no 256-entry alarm records.
+- Zephyr: static devices, no runtime named-record registration of this shape.
+- Goodix demo SDK: zero RTC/registry code in the public mirror.
+
+## Next evidence step
+
+Mine other Even Realities images sharing this platform (G1/G2 OTA payloads, charging-dock MCU
+image) for the same code with richer `__FILE__`/assert strings.
+
+## Cross-family interlock
+
+The software-TWI, generic device-registry, RTC-device, time/calendar, and sensor-stream families
+interlock: shared positive status enum, runtime registration of the `sys rtc` record into
+`0x00085D58`, and the `sys rtc` / `i2c_n` naming. They most likely form one proprietary platform
+layer inside Even Realities' B210 product tree and therefore share one provenance fate.
+
 ## Source-admission decision
 
 The low-level initializer has function-local control flow, register/configuration behavior, and
@@ -79,3 +127,17 @@ OpenR1 therefore:
 
 This boundary does not authorize a raw clock setter, internal callback-registration command,
 rollback bypass, signing bypass, or deployment action.
+
+## Attribution re-examination 2026-08
+
+A second provenance pass re-disassembled the three Ghidra-missed bodies from the rebuilt image,
+recovered the `sys rtc` ops table at flash `0x00099C8C` and the const nrfx config at
+`0x0009A638`, and tested concrete upstream candidates against fetched sources (RT-Thread v4.0.3
+rtc.c, Mac-Rsh mr-library device.c, BabyOS b_device.c, armink ecosystem, Nordic, plus Goodix /
+GoMore / HRS3300 / PAH800x / Realtek / Bluetrum / Jieli vendor SDKs). All were structurally
+rejected; authenticated code-host searches for the family's rare strings return only this
+repository and its mirror. The evidence converges on first-party B210 platform authorship
+(Bravechip "ChipletRing", shared with the G2 `platform\threads\thread_manager.c` object already
+closed as first-party). Verdict: NO ATTRIBUTION — the family remains
+`investigate_before_implementing`. Full report:
+[`unknown_rtc_device_provider_candidate-ATTRIBUTION-2026-08.md`](unknown_rtc_device_provider_candidate-ATTRIBUTION-2026-08.md).

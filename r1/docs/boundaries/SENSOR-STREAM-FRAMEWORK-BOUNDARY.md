@@ -70,6 +70,56 @@ the object's stored context.
 The exact log strings include `unregister_not_find_obj`, `not_found_in`, and `reset_timer`; they
 describe framework behavior but do not identify an author.
 
+## Sharpened fingerprint evidence
+
+The provenance investigation added the following detail. None of it changes the admission state;
+the family (32 functions / 2,974 executable bytes) remains `investigate_before_implementing`.
+
+- Exact diagnostic strings, all `[RING]`-tagged with paired un-tagged `nRF_LOG` copies:
+  `lisent register fail` (note the typo, at `0x00089A68`), `only support 1 ord`,
+  `reset timer,%s, tick:%d`, `register not find obj:%s`, `unregister not find obj:%s`, and
+  `%s not found in %s, skip unregister`.
+- Health-module initialization creates the stream-object namespace `hr`, `spo2`, `raw_hr`,
+  `wear`, `gray`, `aging`, `hrv`, `adt` (plus `temp`, `acc`); listeners are named `wearled`,
+  `factory`, `aging`, `detect`, `gomore`, `timing`. Names are capped at eight bytes.
+- The stream object is 0x38 bytes with the listener list at offset `+0x2C` and the provider
+  vtable at `+0x0C`; the sample buffer is sized `rate * sample_size * 2`.
+- Scheduling runs on a 1024 Hz tick with period `0x400 / rate` and a drift-compensated custom
+  software-timer list (percent-encoded `d` correction), built only on already attributed FreeRTOS
+  heap and Nordic `nRF_LOG` primitives.
+- Product-wide reuse across GoMore-gated, R1-motion, factory, and timing callers marks this as
+  platform middleware, not a sensor-vendor library.
+
+## Candidates rejected
+
+- Nordic SDK and FreeRTOS `xTimer`: neither provides this named-object/listener registry.
+- RT-Thread sensor framework and Zephyr: wrong framework architecture and ecosystem.
+- Goodix GH3x2x demo SDK: `Gh3x2x*` naming and log style differ.
+- GoMore: a caller of the framework, not its owner.
+- Authenticated GitHub code search for all distinctive strings returned zero matches outside this
+  project.
+
+## Next evidence step
+
+Cross-reference the companion Android app decompilation (research workspace
+`research/apps/even_android_jadx`) for the stream-namespace tokens `raw_hr`, `wearled`, `gray`,
+`adt`, and `aging`.
+
+Companion-app search performed 2026-08-13 (negative result): the jadx tree and the installed
+native libraries (`libapp.so`, `libeven.so`, `liblc3.so`, both `libjiagu` stages) contain no
+occurrence of `raw_hr`, `wearled`, or `lisent`; `gray`/`adt` hits in `libapp.so` are English-word
+substrings unrelated to the registry. The stream namespace is firmware-internal only, so the
+companion-app route cannot attribute the framework. Combined with the negative cross-firmware
+blob scan recorded in `GENERIC-DEVICE-REGISTRY-BOUNDARY.md`, the remaining attribution routes are
+authenticated code-host search and acquisition of the platform SDK through the ODM.
+
+## Cross-family interlock
+
+The software-TWI, generic device-registry, RTC-device, time/calendar, and sensor-stream families
+interlock: shared positive status enum, runtime registration, and `sys rtc` / `i2c_n` naming.
+They most likely form one proprietary platform layer inside Even Realities' B210 product tree and
+therefore share one provenance fate.
+
 ## Excluded dependencies
 
 This classification does not admit or name the implementations at:
@@ -93,3 +143,19 @@ python3 tools/evidence/summarize_r1_sensor_stream_dispatch.py
 python3 tools/build_r1_source_ownership.py --check
 python3 tools/verify_openr1.py
 ```
+
+## Attribution re-examination 2026-08
+
+An independent attribution pass (fresh authenticated GitHub code searches for every
+distinctive string, general web search, and a line-by-line comparison against both
+generations of the MultiTimer software-timer library — the closest public analogue)
+found no upstream match. The verdict is unchanged: no attribution; the family remains
+proprietary/blocked. Full evidence:
+[`unknown_sensor_stream_framework_candidate-ATTRIBUTION-2026-08.md`](unknown_sensor_stream_framework_candidate-ATTRIBUTION-2026-08.md).
+
+Platform-vendor cross-reference (2026-08): the interlocked B210 platform middleware that owns
+this family has been identified as Wuxi Bravechip Technologies' "ChipletRing" / BCL603M
+smart-ring platform — firmware identity string `603MV1.9.3` and a byte-exact 128-bit GATT
+base-UUID match to Bravechip's public `BravechipSpace/ChipletRing-APPSDK`. The platform is
+closed-source; this names the commercial acquisition route that would unblock the family.
+See `unknown_shared_quantized_neural_runtime_candidate-ATTRIBUTION-2026-08.md`.

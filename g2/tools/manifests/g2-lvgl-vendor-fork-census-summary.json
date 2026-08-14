@@ -1,0 +1,411 @@
+{
+  "analysis_mode": "read-only; no signing, flashing, erase, or hardware operation",
+  "inputs": {
+    "ghidra_sha256sums_sha256": "87d0befa001f042918bd6af83b0f50e13dd95aab160b0e520f2cb0bc55c6404e",
+    "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "lvgl_anchored_seed_functions": 344,
+    "lvgl_retained_paths": 78,
+    "parent_census_manifest": "g2-apollo-unanchored-census-functions.tsv"
+  },
+  "limitations": [
+    "module and file labels are triage attributions for queue ordering, not per-function source ownership or behavioral reconstruction",
+    "call-topology tiers infer membership from call targets into retained-path anchor functions; a caller that only uses another file's API is indistinguishable from a member of that file",
+    "second-order and link-order tiers are low-confidence hypotheses and never feed further propagation",
+    "functions with no within-LVGL evidence stay investigation-required; the parent census's 0x5D/0x5A LVGL hypotheses are not confirmed by this census"
+  ],
+  "modules": [
+    {
+      "confidence": {
+        "medium": 1
+      },
+      "evidence": {
+        "call-topology-single-file": 1
+      },
+      "functions": 1,
+      "module": "ambiq-display-port",
+      "official_opaque_bytes": 0,
+      "scopes": {
+        "lvgl-topology": 1
+      },
+      "top_files": {
+        "lvgl_ambiq_porting/lv_ambiq_display.c": 1
+      },
+      "vendor_backend": true
+    },
+    {
+      "confidence": {
+        "low": 12,
+        "medium": 1
+      },
+      "evidence": {
+        "call-topology-single-file": 1,
+        "link-order-file-sandwich": 1,
+        "link-order-module-sandwich": 11
+      },
+      "functions": 13,
+      "module": "ambiq-draw-backend",
+      "official_opaque_bytes": 3932,
+      "scopes": {
+        "lvgl-sandwich": 12,
+        "lvgl-topology": 1
+      },
+      "top_files": {
+        "LVGL/src/draw/ambiq/lv_draw_ambiq_img.c": 1,
+        "LVGL/src/draw/ambiq/lv_draw_ambiq_private.c": 1
+      },
+      "vendor_backend": true
+    },
+    {
+      "confidence": {
+        "medium": 1
+      },
+      "evidence": {
+        "call-topology-single-file": 1
+      },
+      "functions": 1,
+      "module": "ambiq-freetype-system",
+      "official_opaque_bytes": 148,
+      "scopes": {
+        "lvgl-topology": 1
+      },
+      "top_files": {
+        "lvgl_ambiq_demo/lvgl_ttf/src/am_ftsystem.c": 1
+      },
+      "vendor_backend": true
+    },
+    {
+      "confidence": {
+        "none": 680
+      },
+      "evidence": {
+        "call-topology-mixed": 57,
+        "none": 623
+      },
+      "functions": 680,
+      "module": "investigation-required",
+      "official_opaque_bytes": 128646,
+      "scopes": {
+        "lvgl-sandwich": 193,
+        "lvgl-topology": 57,
+        "sea-0x5a": 130,
+        "sea-0x5d": 300
+      },
+      "top_files": {},
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 2
+      },
+      "evidence": {
+        "link-order-file-sandwich": 2
+      },
+      "functions": 2,
+      "module": "lvgl-bin-decoder",
+      "official_opaque_bytes": 218,
+      "scopes": {
+        "lvgl-sandwich": 2
+      },
+      "top_files": {
+        "LVGL/src/libs/bin_decoder/lv_bin_decoder.c": 2
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 4,
+        "medium": 9
+      },
+      "evidence": {
+        "call-topology-second-order-file": 1,
+        "call-topology-single-file": 7,
+        "call-topology-single-module": 2,
+        "link-order-file-sandwich": 3
+      },
+      "functions": 13,
+      "module": "lvgl-cache",
+      "official_opaque_bytes": 710,
+      "scopes": {
+        "lvgl-sandwich": 4,
+        "lvgl-topology": 9
+      },
+      "top_files": {
+        "LVGL/src/misc/cache/lv_cache.c": 9,
+        "LVGL/src/misc/cache/lv_cache_entry.c": 1,
+        "LVGL/src/misc/cache/lv_cache_lru_rb.c": 1
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 112,
+        "medium": 443
+      },
+      "evidence": {
+        "call-topology-second-order-file": 52,
+        "call-topology-second-order-module": 5,
+        "call-topology-single-file": 417,
+        "call-topology-single-module": 26,
+        "link-order-file-sandwich": 19,
+        "link-order-module-sandwich": 36
+      },
+      "functions": 555,
+      "module": "lvgl-core",
+      "official_opaque_bytes": 31740,
+      "scopes": {
+        "lvgl-sandwich": 112,
+        "lvgl-topology": 443
+      },
+      "top_files": {
+        "LVGL/src/core/lv_obj.c": 15,
+        "LVGL/src/core/lv_obj_class.c": 8,
+        "LVGL/src/core/lv_obj_event.c": 7,
+        "LVGL/src/core/lv_obj_pos.c": 29,
+        "LVGL/src/core/lv_obj_scroll.c": 12,
+        "LVGL/src/core/lv_obj_style.c": 388,
+        "LVGL/src/core/lv_obj_tree.c": 25,
+        "LVGL/src/core/lv_refr.c": 3
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 16,
+        "medium": 1
+      },
+      "evidence": {
+        "call-topology-single-file": 1,
+        "link-order-file-sandwich": 16
+      },
+      "functions": 17,
+      "module": "lvgl-display",
+      "official_opaque_bytes": 628,
+      "scopes": {
+        "lvgl-sandwich": 16,
+        "lvgl-topology": 1
+      },
+      "top_files": {
+        "LVGL/src/display/lv_display.c": 17
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 21,
+        "medium": 12
+      },
+      "evidence": {
+        "call-topology-second-order-file": 1,
+        "call-topology-single-file": 12,
+        "link-order-file-sandwich": 8,
+        "link-order-module-sandwich": 12
+      },
+      "functions": 33,
+      "module": "lvgl-draw",
+      "official_opaque_bytes": 1972,
+      "scopes": {
+        "lvgl-sandwich": 21,
+        "lvgl-topology": 12
+      },
+      "top_files": {
+        "LVGL/src/draw/lv_draw.c": 9,
+        "LVGL/src/draw/lv_draw_buf.c": 7,
+        "LVGL/src/draw/lv_draw_label.c": 1,
+        "LVGL/src/draw/lv_draw_rect.c": 2,
+        "LVGL/src/draw/lv_image_decoder.c": 2
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "medium": 4
+      },
+      "evidence": {
+        "call-topology-single-file": 4
+      },
+      "functions": 4,
+      "module": "lvgl-font",
+      "official_opaque_bytes": 922,
+      "scopes": {
+        "lvgl-topology": 4
+      },
+      "top_files": {
+        "LVGL/src/font/lv_font.c": 4
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 8,
+        "medium": 5
+      },
+      "evidence": {
+        "call-topology-second-order-file": 3,
+        "call-topology-single-file": 4,
+        "call-topology-single-module": 1,
+        "link-order-file-sandwich": 4,
+        "link-order-module-sandwich": 1
+      },
+      "functions": 13,
+      "module": "lvgl-freetype-wrapper",
+      "official_opaque_bytes": 604,
+      "scopes": {
+        "lvgl-sandwich": 8,
+        "lvgl-topology": 5
+      },
+      "top_files": {
+        "LVGL/src/libs/freetype/lv_freetype.c": 2,
+        "LVGL/src/libs/freetype/lv_freetype_outline.c": 9
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 7
+      },
+      "evidence": {
+        "link-order-module-sandwich": 7
+      },
+      "functions": 7,
+      "module": "lvgl-layouts",
+      "official_opaque_bytes": 312,
+      "scopes": {
+        "lvgl-sandwich": 7
+      },
+      "top_files": {},
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 40,
+        "medium": 67
+      },
+      "evidence": {
+        "call-topology-second-order-file": 13,
+        "call-topology-single-file": 67,
+        "link-order-file-sandwich": 19,
+        "link-order-module-sandwich": 8
+      },
+      "functions": 107,
+      "module": "lvgl-misc",
+      "official_opaque_bytes": 15232,
+      "scopes": {
+        "lvgl-sandwich": 40,
+        "lvgl-topology": 67
+      },
+      "top_files": {
+        "LVGL/src/misc/lv_anim.c": 3,
+        "LVGL/src/misc/lv_array.c": 6,
+        "LVGL/src/misc/lv_fs.c": 10,
+        "LVGL/src/misc/lv_palette.c": 5,
+        "LVGL/src/misc/lv_rb.c": 7,
+        "LVGL/src/misc/lv_style.c": 52,
+        "LVGL/src/misc/lv_text.c": 8,
+        "LVGL/src/misc/lv_timer.c": 8
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 8,
+        "medium": 3
+      },
+      "evidence": {
+        "call-topology-second-order-file": 1,
+        "call-topology-single-file": 3,
+        "link-order-file-sandwich": 7
+      },
+      "functions": 11,
+      "module": "lvgl-osal-freertos",
+      "official_opaque_bytes": 258,
+      "scopes": {
+        "lvgl-sandwich": 8,
+        "lvgl-topology": 3
+      },
+      "top_files": {
+        "LVGL/src/osal/lv_freertos.c": 11
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "medium": 1
+      },
+      "evidence": {
+        "call-topology-single-file": 1
+      },
+      "functions": 1,
+      "module": "lvgl-stdlib",
+      "official_opaque_bytes": 76,
+      "scopes": {
+        "lvgl-topology": 1
+      },
+      "top_files": {
+        "LVGL/src/stdlib/lv_mem.c": 1
+      },
+      "vendor_backend": false
+    },
+    {
+      "confidence": {
+        "low": 18,
+        "medium": 8
+      },
+      "evidence": {
+        "call-topology-second-order-module": 1,
+        "call-topology-single-file": 7,
+        "call-topology-single-module": 1,
+        "link-order-file-sandwich": 2,
+        "link-order-module-sandwich": 15
+      },
+      "functions": 26,
+      "module": "lvgl-widgets",
+      "official_opaque_bytes": 1956,
+      "scopes": {
+        "lvgl-sandwich": 18,
+        "lvgl-topology": 8
+      },
+      "top_files": {
+        "LVGL/src/widgets/buttonmatrix/lv_buttonmatrix.c": 3,
+        "LVGL/src/widgets/image/lv_image.c": 2,
+        "LVGL/src/widgets/label/lv_label.c": 3,
+        "LVGL/src/widgets/textarea/lv_textarea.c": 1
+      },
+      "vendor_backend": false
+    }
+  ],
+  "reconciliation": {
+    "evidence_classes": {
+      "call-topology-mixed": 57,
+      "call-topology-second-order-file": 71,
+      "call-topology-second-order-module": 6,
+      "call-topology-single-file": 526,
+      "call-topology-single-module": 30,
+      "link-order-file-sandwich": 81,
+      "link-order-module-sandwich": 90,
+      "none": 623
+    },
+    "parent_lvgl_bucket_functions": 1054,
+    "parent_lvgl_bucket_official_bytes": 97430,
+    "scope_functions": 1484,
+    "scopes": {
+      "lvgl-sandwich": {
+        "functions": 441,
+        "official_opaque_bytes": 30356
+      },
+      "lvgl-topology": {
+        "functions": 613,
+        "official_opaque_bytes": 67074
+      },
+      "sea-0x5a": {
+        "functions": 130,
+        "official_opaque_bytes": 37058
+      },
+      "sea-0x5d": {
+        "functions": 300,
+        "official_opaque_bytes": 52866
+      }
+    }
+  },
+  "schema_version": 1,
+  "target": "official G2 s200_v2.2.6.10 Apollo main"
+}

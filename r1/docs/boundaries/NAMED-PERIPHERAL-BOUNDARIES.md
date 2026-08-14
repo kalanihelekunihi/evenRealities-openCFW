@@ -55,3 +55,34 @@ shipping-mode, fault, and system policy.
 The adjacent R1-owned three-client lease and NFC/`i2c_5` resource lifecycle are now split from
 this provider and implemented without YHM register or wire operations. See
 [`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](YHM2710-I2C5-RESOURCE-BOUNDARY.md).
+
+## Attribution re-examination 2026-08
+
+GXT310: the official GXCAS STM32 demo archive now downloads (2,683-byte zip, SHA-256 pinned in
+the report) but is license-free, structurally different from the R1 bodies, and postdates the
+image — a documentation pointer only (address `0x90`, register `0x00`, ×0.0078125 LSB); the 5
+entries stay blocked. QMA6100: the pinned QST V1.0-lineage snapshot remains unlicensed, but
+licensed public drivers now exist (RIOT `qma6100p`, LGPL-2.1; Espressif component, Apache-2.0)
+that fully document the register map for any future datasheet-based rewrite; the R1 identity
+adapter accepts chip IDs `0xFA` (QMA6100) or `0x9x` (QMA6100P). The 3 entries stay blocked.
+Full evidence: [`withheld-providers-ATTRIBUTION-2026-08.md`](withheld-providers-ATTRIBUTION-2026-08.md).
+
+## QMA6100 route decision 2026-08-14
+
+The standing admission policy for QST QMA6100 requires both (a) official licensed source and
+(b) established installed-part identity. Re-evaluated against the 2026-08 audit evidence:
+
+- **Official source:** the only QST-authored code located is the pinned V1.0-lineage evaluation
+  snapshot (`stephenshizl/code-learning @ 3903bd7d`, QST-author-identified `qma6100.cpp`), which
+  carries no license grant. The licensed public drivers are third-party, datasheet-derived
+  reimplementations (RIOT `qma6100p`, LGPL-2.1; Espressif component, Apache-2.0), not official
+  QST source; additionally, RIOT's LGPL-2.1 is incompatible with static linking into this
+  proprietary-blob-adjacent firmware image.
+- **Installed-part identity:** not established. The stock probe order is LIS2DW12, then
+  BMA456W, then QMA6100 as a fallback variant; both resolved variants are licensed and
+  integrated, and no evidence shows a QMA6100-populated R1 ring.
+
+Decision: the QMA6100 route is **declined** under current policy — the three provider bodies
+stay blocked and the variant stays disabled. The RIOT/Espressif register maps remain recorded
+as documentation pointers. Reconsider only if official QST licensed source appears or a
+QMA6100-populated R1 unit is identified.

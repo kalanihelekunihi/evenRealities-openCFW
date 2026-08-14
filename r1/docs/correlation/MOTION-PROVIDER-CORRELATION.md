@@ -125,7 +125,10 @@ the implementation rather than emulated.
 The recovered board mapping is now concrete: Nordic TWIM1 at 400 kHz, SCL P0.11, SDA P0.14,
 seven-bit address `0x18`, and rising interrupt input P0.15 with no pull. The clean Nordic port is
 `platform/nrf52840/sdk/openr1_motion.c`; startup binds both official providers and selects the
-installed admitted part. A retained `.openr1_motion_api` table keeps FIFO read, double-tap disable,
+installed admitted part. A GPIOTE IN event on P0.15 (rising edge, no pull) defers each interrupt
+to a motion worker thread whose dispatch mirrors `r1_motion_selected_interrupt_dispatch`
+(`0x00050294`): it routes to the selected variant's hook, and both admitted hooks are the
+recovered two-byte no-ops. A retained `.openr1_motion_api` table keeps FIFO read, double-tap disable,
 variant, and enabled-state entry points in the linked image.
 
 The fixed product configurations are also recovered rather than guessed:
@@ -190,9 +193,15 @@ provider paths plus the R1 selector, configuration, bus, and FIFO adapters. Host
 priority, forced selection, error behavior, FIFO bounds, over-report rejection, and negative-axis
 normalization.
 
-Coverage remains partial: P0.15 is configured as an input but no interrupt-to-worker path or
-higher-level motion/step/sleep consumer is wired yet, and the implementation has not been tested
-on an owned R1 ring. The current NFC port also uses TWIM1 for the stock P1.11/P1.14 `i2c_5` lines;
-because motion owns TWIM1 continuously, NFC must remain disabled until its stock software-I2C
-transport or an evidence-backed coexistence scheme is implemented. QMA6100 hardware remains
-unsupported until licensed official provider source is admitted.
+Coverage remains partial: the P0.15 interrupt-to-worker path is now wired — a GPIOTE IN event on
+the recovered rising-edge input defers to a motion worker thread, and its dispatch routes to the
+selected variant's hook, which is a recovered two-byte no-op for both admitted variants
+(LIS2DW12 `0x0006F3B2`, BMA456W `0x0006F1DA`), so the wired path intentionally performs no
+per-interrupt work — but no higher-level motion/step/sleep consumer is wired yet (that ingestion
+goes through the blocked sensor-stream framework), and the implementation has not been tested on
+an owned R1 ring. TWIM1 contention between motion and NFC is resolved: the R1-owned arbiter
+`platform/nrf52840/sdk/openr1_twim1_arbiter.c` serializes the substituted hardware instance
+between the worn motion client and the dock NFC client with a documented dock-preempts-worn
+handoff. NFC remains disabled at startup for separate reasons — the identity, shared-power, and
+dock gates — not because of bus ownership. QMA6100 hardware remains unsupported until licensed
+official provider source is admitted.

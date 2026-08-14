@@ -138,3 +138,13 @@ implementation from any bounded R1 configuration, storage, transport, or schedul
 
 Until that happens, openR1 may document observable input/output behavior and preserve integration
 interfaces, but it must not recreate the GoMore health or sleep algorithms locally.
+
+## Attribution re-examination 2026-08
+
+A 2026-08 audit found no public GoMore source: the Bravechip ChipletRing-APPSDK ships only
+app-side wrappers over the closed `LmAPI` AAR, and the only located embedded GoMore SDK copy
+(an unlicensed Jieli BR28 watch-SDK dump with `GoMoreLib.h` and a DWARF-carrying
+`libgomore.a`) is binary-only and unlicensed — retained as ABI/correlation evidence only
+(R1 strings `[sdkAuth]=%d`, `gomore healthIndexInitUser failed:%d`,
+`gomore updateIndex failed:%d` match verbatim). All 362 entries remain blocked.
+Full evidence: [`withheld-providers-ATTRIBUTION-2026-08.md`](withheld-providers-ATTRIBUTION-2026-08.md).

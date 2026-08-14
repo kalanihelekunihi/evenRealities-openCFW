@@ -2,6 +2,29 @@
 
 #include <stddef.h>
 
+void r1_goodix_pool_fill(void *destination, size_t length) {
+    if (destination == NULL) {
+        return;
+    }
+    uint8_t *bytes = destination;
+    for (size_t index = 0u; index < length; ++index) {
+        bytes[index] = 0u;
+    }
+}
+
+void r1_goodix_pool_not_enough(const r1_goodix_pool_fatal_ops *ops,
+                               uint32_t info1) {
+    if (ops == NULL) {
+        return;
+    }
+    if (ops->record != NULL) {
+        ops->record(ops->context, info1);
+    }
+    if (ops->halt != NULL) {
+        ops->halt(ops->context);
+    }
+}
+
 static const r1_sensor_stream_registration sensor_stream_registrations[] = {
     {"hr", 4u, 1u, true},
     {"spo2", 6u, 2u, true},

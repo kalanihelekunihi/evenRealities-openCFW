@@ -20,6 +20,9 @@ endif
 ifndef FLASHDB_ROOT
 $(error FLASHDB_ROOT must name the pinned FlashDB 2.0.0 directory with bundled FAL 0.5.99)
 endif
+ifndef GOODIX_DEMOCODE_ROOT
+$(error GOODIX_DEMOCODE_ROOT must name the pinned Goodix GH3X2X democode gh3x2x directory)
+endif
 
 PROJ_DIR := $(abspath ../../..)
 LINKER_SCRIPT := openr1_sdk.ld
@@ -54,6 +57,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/src/r1_battery.c \
   $(PROJ_DIR)/src/r1_motion.c \
   $(PROJ_DIR)/src/r1_wear.c \
+  $(PROJ_DIR)/src/r1_clock.c \
   $(PROJ_DIR)/src/r1_runtime.c \
   $(PROJ_DIR)/platform/nrf52840/r1_nrf52840.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_advertising.c \
@@ -70,6 +74,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_reset_trace_port.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_reset_reason.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_i2c5_resources.c \
+  $(PROJ_DIR)/platform/nrf52840/sdk/openr1_twim1_arbiter.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_motion.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_nfc.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_peer.c \
@@ -77,8 +82,33 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_storage.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_touch.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_watchdog.c \
+  $(PROJ_DIR)/platform/nrf52840/sdk/openr1_clock.c \
   $(PROJ_DIR)/port/r1_fal_port.c \
+  $(PROJ_DIR)/port/goodix_gh3x2x/r1_gh3x2x_port.c \
+  $(PROJ_DIR)/port/goodix_gh3x2x/r1_gh3x2x_bind.c \
+  $(PROJ_DIR)/port/goodix_gh3x2x/r1_gh3x2x_stubs.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/main.c
+
+# Goodix GH3X2X democode subset (pinned upstream tree; the binary-only
+# algorithm archives and the PC-tool upload protocol are excluded, see
+# r1/docs/correlation/GOODIX-DEMOCODE-INTEGRATION-CORRELATION.md).
+GOODIX_DRIVER_DIR := $(GOODIX_DEMOCODE_ROOT)/demo_code/demo_kernel_code/driver
+GOODIX_KERNEL_DIR := $(GOODIX_DEMOCODE_ROOT)/demo_code/demo_kernel_code/kernel
+GOODIX_MODULE_DIR := $(GOODIX_DEMOCODE_ROOT)/demo_code/demo_kernel_code/module
+GOODIX_SUBSET_SOURCES := \
+  $(GOODIX_DRIVER_DIR)/src/gh_drv_config.c \
+  $(GOODIX_DRIVER_DIR)/src/gh_drv_control.c \
+  $(GOODIX_DRIVER_DIR)/src/gh_drv_dump.c \
+  $(GOODIX_DRIVER_DIR)/src/gh_drv_interface.c \
+  $(GOODIX_KERNEL_DIR)/gh_demo.c \
+  $(GOODIX_KERNEL_DIR)/gh_demo_hook.c \
+  $(GOODIX_KERNEL_DIR)/gh_demo_reg_array.c \
+  $(GOODIX_KERNEL_DIR)/gh_demo_user.c \
+  $(GOODIX_MODULE_DIR)/gh_agc/gh_agc.c \
+  $(GOODIX_MODULE_DIR)/gh_other/gh_changeinttime.c \
+  $(GOODIX_MODULE_DIR)/gh_other/gh_movedetect.c \
+  $(GOODIX_MODULE_DIR)/gh_soft_adt/gh_multi_sen_pro.c \
+  $(GOODIX_DEMOCODE_ROOT)/algo_lib/algo_params/SPO2/goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c
 
 SRC_FILES += \
   $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52840.S \
@@ -148,6 +178,7 @@ SRC_FILES += \
   $(FLASHDB_ROOT)/port/fal/src/fal.c \
   $(FLASHDB_ROOT)/port/fal/src/fal_flash.c \
   $(FLASHDB_ROOT)/port/fal/src/fal_partition.c \
+  $(GOODIX_SUBSET_SOURCES) \
   $(OPENR1_SOURCES)
 
 INC_FOLDERS += \
@@ -163,8 +194,21 @@ INC_FOLDERS += \
   $(ST25DVXXKC_ROOT) \
   $(TINY_AES_ROOT) \
   $(PROJ_DIR)/port \
+  $(PROJ_DIR)/port/goodix_gh3x2x \
+  $(PROJ_DIR)/port/goodix_gh3x2x/config \
   $(FLASHDB_ROOT)/inc \
   $(FLASHDB_ROOT)/port/fal/inc \
+  $(GOODIX_DRIVER_DIR)/inc \
+  $(GOODIX_KERNEL_DIR) \
+  $(GOODIX_MODULE_DIR)/gh_agc \
+  $(GOODIX_MODULE_DIR)/gh_ecg \
+  $(GOODIX_MODULE_DIR)/gh_other \
+  $(GOODIX_MODULE_DIR)/gh_protocol \
+  $(GOODIX_MODULE_DIR)/gh_soft_adt \
+  $(GOODIX_DEMOCODE_ROOT)/demo_code/demo_algo_code/goodix_algo_application/inc \
+  $(GOODIX_DEMOCODE_ROOT)/demo_code/demo_algo_code/goodix_algo_call/inc \
+  $(GOODIX_DEMOCODE_ROOT)/demo_code/demo_algo_code/goodix_algo_call/inc/hr_exc \
+  $(GOODIX_DEMOCODE_ROOT)/demo_code/demo_algo_code/goodix_algo_call/inc/spo2_pre_exc \
   $(FREERTOS_KERNEL_ROOT)/include \
   $(SDK_ROOT)/external/freertos/portable/GCC/nrf52 \
   $(SDK_ROOT)/external/freertos/portable/CMSIS/nrf52 \
@@ -214,6 +258,10 @@ CFLAGS += -DS140 -DSOFTDEVICE_PRESENT
 CFLAGS += -mcpu=cortex-m4 -mthumb -mabi=aapcs
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 CFLAGS += -Wall -Wextra -Wno-unused-parameter -Wno-expansion-to-defined
+# the GH3X2X democode version strings embed __DATE__/__TIME__; pin them so
+# the image stays bit-reproducible for verify_sdk_image.py
+CFLAGS += -Wno-builtin-macro-redefined
+CFLAGS += -D__DATE__='"Aug 14 2026"' -D__TIME__='"00:00:00"'
 CFLAGS += -ffunction-sections -fdata-sections
 CFLAGS += -fno-strict-aliasing -fno-builtin -fshort-enums -fno-math-errno
 

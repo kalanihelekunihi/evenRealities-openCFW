@@ -4,6 +4,7 @@
 
 #include "openr1/r1_crc.h"
 #include "openr1/r1_battery.h"
+#include "openr1/r1_clock.h"
 #include "openr1/r1_connection_params.h"
 #include "openr1/r1_dispatch.h"
 #include "openr1/r1_event.h"
@@ -252,6 +253,55 @@ static void test_reset_reason_decode(void) {
     assert(report.recognized == R1_RESET_REASON_PIN);
     assert(!report.software_trace_valid);
     assert(!r1_reset_reason_decode(0u, &trace, NULL));
+}
+
+static void test_clock_production(void) {
+    r1_clock clock;
+    uint32_t value = 0u;
+
+    r1_clock_initialize(&clock, 1024u);
+    assert(!clock.synchronized);
+    assert(!r1_clock_now(&clock, 0u, &value));
+    assert(!r1_clock_local_now(&clock, 0u, &value));
+
+    /* A zero-frequency clock never reports time. */
+    r1_clock_initialize(&clock, 0u);
+    assert(r1_clock_synchronize(&clock, 1700000000u, 0, 0u) == R1_OK);
+    assert(!r1_clock_now(&clock, 4096u, &value));
+
+    r1_clock_initialize(&clock, 1024u);
+    assert(r1_clock_synchronize(NULL, 1u, 0, 0u) == R1_ERROR_ARGUMENT);
+    assert(r1_clock_synchronize(&clock, 1u, -721, 0u) == R1_ERROR_ARGUMENT);
+    assert(r1_clock_synchronize(&clock, 1u, 841, 0u) == R1_ERROR_ARGUMENT);
+    assert(!clock.synchronized);
+    assert(r1_clock_synchronize(&clock, 1u, -720, 0u) == R1_OK);
+    assert(r1_clock_synchronize(&clock, 1u, 840, 0u) == R1_OK);
+
+    assert(r1_clock_synchronize(&clock, 1700000000u, 60, 1000u) == R1_OK);
+    /* Partial seconds do not advance the epoch. */
+    assert(r1_clock_now(&clock, 2023u, &value));
+    assert(value == 1700000000u);
+    /* Exact whole-second advance. */
+    assert(r1_clock_now(&clock, 1000u + 3u * 1024u, &value));
+    assert(value == 1700000003u);
+    /* Tick-counter wraparound is wrap-safe. */
+    assert(r1_clock_synchronize(&clock, 100u, 0, UINT32_MAX - 511u) == R1_OK);
+    assert(r1_clock_now(&clock, 1536u, &value));
+    assert(value == 102u);
+    /* Epoch advance saturates instead of wrapping. */
+    assert(r1_clock_synchronize(&clock, UINT32_MAX - 1u, 0, 0u) == R1_OK);
+    assert(r1_clock_now(&clock, 5u * 1024u, &value));
+    assert(value == UINT32_MAX);
+    /* Local time applies the signed offset and clamps at zero. */
+    assert(r1_clock_synchronize(&clock, 3600u, -120, 0u) == R1_OK);
+    assert(r1_clock_local_now(&clock, 0u, &value));
+    assert(value == 0u);
+    assert(r1_clock_synchronize(&clock, 3600u, 90, 0u) == R1_OK);
+    assert(r1_clock_local_now(&clock, 0u, &value));
+    assert(value == 3600u + 90u * 60u);
+    assert(!r1_clock_now(NULL, 0u, &value));
+    assert(!r1_clock_now(&clock, 0u, NULL));
+    assert(!r1_clock_local_now(&clock, 0u, NULL));
 }
 
 static void test_battery_provider_boundary(void) {
@@ -4150,6 +4200,41 @@ static void test_runtime_roles(void) {
     assert(runtime.links[1].session.role == R1_ROLE_UNASSIGNED);
 }
 
+static void test_runtime_role_occupancy(void) {
+    r1_runtime runtime;
+    r1_runtime_initialize(&runtime, NULL, NULL);
+    bool phone = true;
+    bool glasses = true;
+    r1_runtime_role_occupancy(NULL, &phone, &glasses);
+    assert(!phone && !glasses);
+    r1_runtime_role_occupancy(&runtime, &phone, &glasses);
+    assert(!phone && !glasses);
+    assert(r1_runtime_connect(&runtime, 1u) == R1_OK);
+    assert(r1_runtime_connect(&runtime, 2u) == R1_OK);
+    /* Connected but unassigned links occupy no role. */
+    r1_runtime_role_occupancy(&runtime, &phone, &glasses);
+    assert(!phone && !glasses);
+
+    static const uint8_t phone_selector[] = {1u};
+    const r1_model pair = {
+        R1_PROTOCOL_VERSION, 1u, R1_MODULE_VERSION, 9u,
+        0u, 0u, 0x08u, phone_selector, sizeof phone_selector,
+    };
+    assert(runtime_feed_model(&runtime, 1u, &pair) == R1_OK);
+    r1_runtime_role_occupancy(&runtime, &phone, &glasses);
+    assert(phone && !glasses);
+
+    runtime.links[1].session.role = R1_ROLE_GLASSES;
+    r1_runtime_role_occupancy(&runtime, &phone, &glasses);
+    assert(phone && glasses);
+
+    r1_runtime_disconnect(&runtime, 1u);
+    r1_runtime_role_occupancy(&runtime, &phone, &glasses);
+    assert(!phone && glasses);
+
+    r1_runtime_role_occupancy(&runtime, NULL, NULL);
+}
+
 static void test_runtime_touch_effect(void) {
     r1_runtime runtime;
     r1_runtime_initialize(&runtime, NULL, NULL);
@@ -4949,6 +5034,59 @@ static void test_goodix_provider_boundary(void) {
            == R1_ERROR_STATE);
     assert(trace.count == 4u && trace.calls[3] == UINT32_C(0x20000000));
     assert(!adapter.initialized && adapter.active_mask == 0u);
+}
+
+typedef struct {
+    uint32_t recorded_info1;
+    size_t record_count;
+    size_t halt_count;
+    bool halt_after_record;
+} goodix_fatal_trace;
+
+static void goodix_fatal_record(void *context, uint32_t info1) {
+    goodix_fatal_trace *trace = context;
+    trace->recorded_info1 = info1;
+    trace->record_count++;
+}
+
+static void goodix_fatal_halt(void *context) {
+    goodix_fatal_trace *trace = context;
+    trace->halt_after_record = trace->record_count == 1u;
+    trace->halt_count++;
+}
+
+static void test_goodix_mem_integrator_glue(void) {
+    uint8_t buffer[8u];
+    memset(buffer, 0xa5, sizeof buffer);
+    r1_goodix_pool_fill(NULL, 4u);
+    r1_goodix_pool_fill(buffer, 0u);
+    for (size_t index = 0u; index < sizeof buffer; ++index) {
+        assert(buffer[index] == 0xa5u);
+    }
+    r1_goodix_pool_fill(buffer, 6u);
+    for (size_t index = 0u; index < 6u; ++index) {
+        assert(buffer[index] == 0u);
+    }
+    assert(buffer[6u] == 0xa5u && buffer[7u] == 0xa5u);
+
+    r1_goodix_pool_not_enough(NULL, UINT32_C(7));
+
+    goodix_fatal_trace trace = {0};
+    const r1_goodix_pool_fatal_ops halt_only = {
+        NULL, goodix_fatal_halt, &trace,
+    };
+    r1_goodix_pool_not_enough(&halt_only, UINT32_C(9));
+    assert(trace.halt_count == 1u && trace.record_count == 0u);
+    assert(!trace.halt_after_record);
+
+    trace = (goodix_fatal_trace){0};
+    const r1_goodix_pool_fatal_ops full = {
+        goodix_fatal_record, goodix_fatal_halt, &trace,
+    };
+    r1_goodix_pool_not_enough(&full, UINT32_C(0xdeadbeef));
+    assert(trace.record_count == 1u && trace.halt_count == 1u);
+    assert(trace.recorded_info1 == UINT32_C(0xdeadbeef));
+    assert(trace.halt_after_record);
 }
 
 typedef struct {
@@ -6773,6 +6911,7 @@ int main(void) {
     test_retained_crash_log();
     test_retained_reset_trace();
     test_reset_reason_decode();
+    test_clock_production();
     test_battery_provider_boundary();
     test_battery_controller();
     test_pmic_charge_event_policy();
@@ -6812,6 +6951,7 @@ int main(void) {
     test_event_plane();
     test_delayed_event_timer_step();
     test_runtime_roles();
+    test_runtime_role_occupancy();
     test_runtime_touch_effect();
     test_runtime_eus_bridge();
     test_bae8_event_route();
@@ -6823,6 +6963,7 @@ int main(void) {
     test_sleep_persistence_bridge();
     test_validated_sleep_delivery_plans();
     test_goodix_provider_boundary();
+    test_goodix_mem_integrator_glue();
     test_iqs7211e_provider_boundary();
     test_iqs7211e_ati_audit_policy();
     test_st25dvxxkc_provider_boundary();

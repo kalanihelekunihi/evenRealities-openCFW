@@ -10,6 +10,7 @@
 #include "peer_manager_handler.h"
 
 #include "openr1/r1_runtime.h"
+#include "openr1_advertising.h"
 
 static uint32_t last_error;
 
@@ -18,28 +19,37 @@ extern r1_runtime *openr1_platform_runtime(void);
 static r1_error on_role_selected(void *context, uint16_t connection,
                                  r1_peer_role role) {
     (void)context;
-    if (role != R1_ROLE_PHONE) {
-        return R1_OK;
+    if (role == R1_ROLE_PHONE) {
+        pm_conn_sec_status_t status;
+        ret_code_t error = pm_conn_sec_status_get(connection, &status);
+        if (error != NRF_SUCCESS) {
+            last_error = error;
+            return R1_ERROR_STATE;
+        }
+        (void)r1_runtime_set_security(openr1_platform_runtime(), connection,
+                                      status.encrypted != 0u,
+                                      status.bonded != 0u,
+                                      false);
+        if (status.encrypted == 0u) {
+            error = pm_conn_secure(connection, false);
+            if (error != NRF_SUCCESS && error != NRF_ERROR_BUSY) {
+                last_error = error;
+                return R1_ERROR_STATE;
+            }
+        }
     }
-    pm_conn_sec_status_t status;
-    ret_code_t error = pm_conn_sec_status_get(connection, &status);
-    if (error != NRF_SUCCESS) {
-        last_error = error;
-        return R1_ERROR_STATE;
+    /* Role assignment occupies a role; the recovered policy stops
+       advertising once both the phone and glasses roles are occupied. */
+    bool phone_occupied = false;
+    bool glasses_occupied = false;
+    r1_runtime_role_occupancy(openr1_platform_runtime(),
+                              &phone_occupied, &glasses_occupied);
+    const uint32_t advertising_error =
+        openr1_advertising_set_role_occupancy(phone_occupied, glasses_occupied);
+    if (advertising_error != NRF_SUCCESS) {
+        last_error = advertising_error;
     }
-    (void)r1_runtime_set_security(openr1_platform_runtime(), connection,
-                                  status.encrypted != 0u,
-                                  status.bonded != 0u,
-                                  false);
-    if (status.encrypted != 0u) {
-        return R1_OK;
-    }
-    error = pm_conn_secure(connection, false);
-    if (error == NRF_SUCCESS || error == NRF_ERROR_BUSY) {
-        return R1_OK;
-    }
-    last_error = error;
-    return R1_ERROR_STATE;
+    return R1_OK;
 }
 
 static void synchronize_runtime_security(uint16_t connection) {

@@ -125,3 +125,10 @@ The verified unsigned SDK application is 94,804 bytes text, 236 bytes data,
 and 132,544 bytes BSS. Its standalone HEX and BIN SHA-256 values are
 `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf`
 and `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
+
+## Attribution re-examination 2026-08
+
+Exhaustive GitHub/Gitee/web searches found zero public YHM2710 driver code and no downloadable
+datasheet; the single-wire stacmd protocol and chip-ID `0xA0` appear in no public document.
+All 36 entries remain blocked with no provider pointer. Full evidence:
+[`withheld-providers-ATTRIBUTION-2026-08.md`](withheld-providers-ATTRIBUTION-2026-08.md).

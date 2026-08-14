@@ -1,0 +1,45 @@
+{
+  "analysis_mode": "read-only; no signing, flashing, erase, or hardware operation",
+  "documented_mspi_leaf": {
+    "end_exclusive": "0x004C240E",
+    "entry": "0x004C23DE",
+    "source": "docs/research/ambiqsuite-mspi-interrupt-clear-source-boundary-audit.md"
+  },
+  "families": {
+    "ambiqsuite-hal": {
+      "envelope_bytes": 7478,
+      "functions": 6,
+      "official_opaque_bytes": 6604
+    },
+    "g2-board-support": {
+      "envelope_bytes": 1044,
+      "functions": 3,
+      "official_opaque_bytes": 976
+    },
+    "investigation-required": {
+      "envelope_bytes": 12454,
+      "functions": 13,
+      "official_opaque_bytes": 12414
+    }
+  },
+  "inputs": {
+    "am_hal_sysctrl_h_sha256": "7ca14c631b87b7b306ab547aa32c0a6c60d53e6ffaf21d6f854c8ab11a89370c",
+    "am_reg_base_addresses_h_sha256": "e6d15af8c495288f88a8ad0eea1ccae07cb14cac356f4fb3c138e4c3fedae16d",
+    "apollo510_h_sha256": "b6ca35dc828ef95825c0a22f06e6ca5ed558a6542dc74310515fdc350051a797",
+    "census_functions_tsv_sha256": "a36c51c0084e51b6e64fc902ab58be16fa76f2c3b361c3ae543f378a8c1f7b96",
+    "ghidra_sha256sums_sha256": "87d0befa001f042918bd6af83b0f50e13dd95aab160b0e520f2cb0bc55c6404e",
+    "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "reconciliation": {
+    "call_topology_members": 2,
+    "census_hardware_hint_functions": 30,
+    "census_register_hint_functions": 22,
+    "census_sram_only_functions": 8,
+    "hint_collision_functions": 10,
+    "sram_indirect_candidates": 1,
+    "validated_register_functions": 9,
+    "validated_register_references": 69
+  },
+  "schema_version": 1,
+  "target": "official G2 s200_v2.2.6.10 Apollo main"
+}

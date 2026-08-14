@@ -157,3 +157,37 @@ The component license is BSD-3-Clause. Preserve the license and attribution when
 provider is fetched or distributed. Do not reconstruct these 27 bodies from decompiler
 output; compile the pinned ST files and keep the eleven product seams in separate local
 translation units.
+
+## Update (2026-08-13)
+
+The Nordic board port no longer instantiates `NRFX_TWIM_INSTANCE(1)` itself. Both the
+motion driver (`openr1_motion.c`, worn context, P0.11/P0.14) and this NFC driver (dock
+context, P1.11/P1.14) previously claimed the same nRF52840 TWIM1 hardware peripheral
+with different pin sets, while TWIM0 is owned by touch. A new R1-owned adaptation
+module, `platform/nrf52840/sdk/openr1_twim1_arbiter.c`, now owns every
+`nrfx_twim` init/uninit/transfer for instance 1.
+
+This arbiter is adaptation glue, not a recovery of stock behavior: the stock firmware
+ran both logical buses (`i2c_1` motion and `i2c_5` NFC/YHM) on the GPIO-driven
+software-TWI engines that remain implementation-blocked. OpenR1 substitutes the single
+hardware TWIM1 for both clients, and the arbiter serializes that substitution.
+
+Ownership semantics match the recovered product contexts, which are mutually exclusive
+(dock NFC versus worn motion):
+
+- acquisition by the current owner is idempotent; acquisition on a free bus
+  initializes TWIM1 with the requester's pin/frequency/priority configuration;
+- NFC (dock context) acquisition while motion owns the bus performs a documented
+  handoff: the motion configuration is uninitialized and the NFC configuration is
+  initialized, so the dock path works when NFC is enabled;
+- motion never preempts NFC; a contested motion acquisition fails honestly with
+  `NRFX_ERROR_BUSY`, and any transfer by a non-owner fails with `NRFX_ERROR_BUSY`
+  rather than silently corrupting the bus;
+- after NFC releases the bus, motion re-acquires it lazily on its next transfer.
+
+Each driver keeps its own recovered pin constants and passes its configuration to the
+arbiter. The existing startup topology is unchanged: NFC remains disabled at startup
+and still holds the external `i2c_5` lease (shared with the future YHM provider) for
+its entire active interval; the arbiter sits beneath that lease and serializes the
+physical peripheral between the two OpenR1 clients. Physical dock/worn switching,
+shared-power coexistence, and owned-hardware validation remain open gates.

@@ -53,8 +53,14 @@ CMSIS-FreeRTOS v10.5.1 wrapper now own scheduling, queues, flags, semaphores, ti
 behavior. Armink's authenticated
 CmBacktrace 1.4.2-compatible source owns crash unwind and fault diagnosis. The recovered 16-byte
 reset-trace record, capture policy, and fault-vector seam are implemented locally, while reset
-mechanics remain Nordic/CMSIS-owned. Remaining board pins,
-product identity authorization, role-aware advertising control,
+mechanics remain Nordic/CMSIS-owned. Role-aware advertising control is now bound: the linked
+application starts fast advertising while either the phone or glasses role is unoccupied and stops
+when both are occupied, driven by runtime role assignment and disconnect; the glasses-role channel
+parser remains deliberately unwired, so the both-occupied stop path awaits that binding. Product
+identity authorization is resolved as a documented fail-closed policy: stock performs no
+cryptographic product challenge, so `authorized` remains false and sensitive mutations stay
+withheld until an evidence-backed product identity verifier is a deliberate product decision.
+Remaining board pins,
 optical/PMIC devices,
 and boot/update integration remain HAL work. Official Bosch BMA456 SensorAPI v2.29.0 and
 ST LIS2DW12 v2.1.0-compatible sources are pinned for the recovered motion variants; only their R1
@@ -300,6 +306,8 @@ The implementation is pinned to these repository-owned evidence sets:
   descriptor ABI, and tensor behavior are authenticated.
 - The two-function boot reset-reason decoder and Nordic RESETREAS lifecycle adapter are documented
   in [`RESET-REASON-CORRELATION.md`](correlation/RESET-REASON-CORRELATION.md).
+- The R1-owned local time production that replaces the blocked stock `sys rtc`/calendar layer is
+  documented in [`CLOCK-PRODUCTION-CORRELATION.md`](correlation/CLOCK-PRODUCTION-CORRELATION.md).
 - The 1,736-byte R1 BLE event consumer, `pairAuth` security scheduling, two-target `advStart`
   policy, and strict Nordic/RTOS provider split are documented in
   [`CONNECTION-CONTROL-CORRELATION.md`](correlation/CONNECTION-CONTROL-CORRELATION.md).
@@ -310,6 +318,14 @@ The implementation is pinned to these repository-owned evidence sets:
 - The thirteen-function / 1,202-byte sensor-algorithm private heap, including its five
   scatter-loaded bodies and `sensor_algo_mem_fatal` path, is separately source-gated in
   [`SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md`](boundaries/SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md).
+- The 2026-08 attribution re-examination tested all six `investigate_before_implementing`
+  platform families (device registry, software TWI, sensor stream, quantized-neural runtime,
+  time/calendar, RTC device — 164 functions) against fetched upstream sources and identified
+  the interlocked "B210 platform" middleware as Wuxi Bravechip's closed ChipletRing / BCL603M
+  platform (firmware string `603MV1.9.3`, byte-exact BAE8 GATT base-UUID match to the public
+  `BravechipSpace/ChipletRing-APPSDK`). All six remain NO ATTRIBUTION and implementation-blocked,
+  with licensed Bravechip acquisition as the named route; per-family reports are the six
+  `boundaries/unknown_*_candidate-ATTRIBUTION-2026-08.md` files.
 - The thirteen-function / 2,784-byte product-owned touch-slider closure, including one exact
   Ghidra-omitted IRQ callback, is admitted as clean-room behavior in
   [`TOUCH-SLIDER-CORRELATION.md`](correlation/TOUCH-SLIDER-CORRELATION.md).
@@ -740,17 +756,21 @@ make -C openR1 vendor-audit SDK_ROOT=/absolute/nRF5_SDK_17.1.0_ddde560 \
   ST25DVXXKC_ROOT=/absolute/fp-sns-stbox1-e9a35449b777699b5e1dd0f1466de0ead554893a/Drivers/BSP/Components/st25dvxxkc \
   TINY_AES_ROOT=/absolute/tiny-AES-c-e72b6eff0884673997d0ca6385169bbd9b31936d \
   IQS7211E_ROOT=/absolute/flipperone-mcu-firmware-0a88e26bb8fd5b6afcdcc607fd748d7bc3d2b067 \
-  AZOTEQ_SETTINGS_ROOT=/absolute/zmk-driver-iqs7211e-436d3c42172abf812ec104521f29384fc02fc50e
+  AZOTEQ_SETTINGS_ROOT=/absolute/zmk-driver-iqs7211e-436d3c42172abf812ec104521f29384fc02fc50e \
+  GOODIX_DEMOCODE_ROOT=/absolute/pebbleos-nonfree-2c0034a23b675a5f9a29e4a47e8b504c7a88e321/gh3x2x
 make -C openR1 vendor-storage-test \
   FLASHDB_ROOT=/absolute/FlashDB-4e5677408256f82d47cd56a6b04605dcee35ed9a
 make -C openR1 vendor-crypto-test \
   TINY_AES_ROOT=/absolute/tiny-AES-c-e72b6eff0884673997d0ca6385169bbd9b31936d
+make -C openR1 vendor-goodix-test \
+  GOODIX_DEMOCODE_ROOT=/absolute/pebbleos-nonfree-2c0034a23b675a5f9a29e4a47e8b504c7a88e321/gh3x2x
 make -C openR1 sdk-verify SDK_ROOT=/absolute/nRF5_SDK_17.1.0_ddde560 \
   FLASHDB_ROOT=/absolute/FlashDB-4e5677408256f82d47cd56a6b04605dcee35ed9a \
   BMA456_ROOT=/absolute/BMA456_SensorAPI-3266db2c5de15be1a00232b8c0f2fd23e07934e0 \
   LIS2DW12_ROOT=/absolute/lis2dw12-pid-8d4bd522015004a9646102702901ba5a15ec6d39 \
   ST25DVXXKC_ROOT=/absolute/fp-sns-stbox1-e9a35449b777699b5e1dd0f1466de0ead554893a/Drivers/BSP/Components/st25dvxxkc \
   TINY_AES_ROOT=/absolute/tiny-AES-c-e72b6eff0884673997d0ca6385169bbd9b31936d \
+  GOODIX_DEMOCODE_ROOT=/absolute/pebbleos-nonfree-2c0034a23b675a5f9a29e4a47e8b504c7a88e321/gh3x2x \
   GNU_INSTALL_ROOT=/absolute/gcc-arm-none-eabi-9-2020-q2-update/bin/
 ```
 
@@ -762,8 +782,9 @@ app-timer backend, and S140 SVC declarations
 rather than clean-room substitutes. The linked image
 contains the exact BAE8 UUID base, `0001` service, `0010...0013` characteristics, per-link EUS
 runtime, notification queue, and persistent bond/GATT-cache provider. This is not yet a
-hardware-validated complete product: product identity authorization, physical CCCD replay,
-role-aware advertising transitions, owned-hardware RTOS timing, remaining board transports,
+hardware-validated complete product: physical CCCD replay,
+the glasses-role channel-1 binding that makes both-occupied advertising stop reachable,
+owned-hardware RTOS timing, remaining board transports,
 the motion interrupt consumer, and owned-ring motion validation are still required. Internal flash
 is now linked through Nordic fstorage and upstream FAL with exact FDS/data separation; physical
 power-loss and migration validation remain.
@@ -771,8 +792,10 @@ Bosch/ST driver bodies are assigned to pinned official sources. Their translatio
 R1 TWIM1 selector/configuration/FIFO adapters are compiled and retained; startup probes the
 recovered P0.11/P0.14 address-`0x18` bus in stock LIS2DW12-then-BMA456W order. The two ST25DVxxKC translation units are hash-verified, compiled, and
 retained through the R1 bus/pin/interrupt adapter. NFC remains disabled at startup, while the exact
-P1.10 lifecycle and exclusive `i2c_5` mutex are provisioned. The port still requires electrical
-coexistence, including resolution of its current TWIM1 conflict with motion, and owned-hardware validation.
+P1.10 lifecycle and exclusive `i2c_5` mutex are provisioned. The former TWIM1 instance conflict with
+motion is resolved by the R1-owned arbiter in `openr1_twim1_arbiter.c`: the dock (NFC) context takes
+the bus through a documented handoff, motion never preempts it, and every transfer by a non-owner
+fails explicitly. Shared-power dock coexistence and owned-hardware validation remain gates.
 QST remains provider-gated. The IQS7211E Nordic transport, GPIO lifecycle, active-low IRQ worker,
 restart timer, and `touchSwitch` policy hook are retained in the image, but live touch remains gated
 on the unresolved shared-power provider, identity provisioning, wear lease, and physical validation.
