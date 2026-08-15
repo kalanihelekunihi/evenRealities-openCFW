@@ -87,23 +87,23 @@ disposition `clean_room_reimplementation_owner_authorized` as their reductions l
 
 - the six Bravechip BCL603M middleware families (generic device registry, software-TWI engines,
   sensor-stream framework, RTC-device framework, time/calendar provider, shared quantized neural
-  runtime — 164 entries),
-- the gated Goodix GH3X2X entries (319: closed algorithm-library closures, the `goodix_mem`
+  runtime — 165 entries),
+- the gated Goodix GH3X2X entries (320: closed algorithm-library closures, the `goodix_mem`
   apparatus, and the documented residue, including neural weight/constant tables),
 - the GoMore health/sleep algorithm families (362),
 - YHMICROS YHM2710 (36), GXCAS GXT310 (5), and QST QMA6100 (3).
 
-Progress at this snapshot: 160 Goodix and 49 GoMore functions now compile from the reconstructed
-Goodix primitive/heap and quantized-runtime modules and the two reconstructed GoMore modules. This moves 141
-previously opaque Goodix entries and 49 opaque GoMore entries into the owner-authorized
-disposition; 178 Goodix and 313 GoMore entries remain. Seventeen of the 160 Goodix functions
+Progress at this snapshot: 331 Goodix and 198 GoMore functions now compile from the reconstructed
+Goodix primitive/heap and quantized-runtime modules and the two reconstructed GoMore modules. This moves 312
+previously opaque Goodix entries and 198 opaque GoMore entries into the owner-authorized
+disposition; 8 Goodix and 164 GoMore entries remain. Seventeen of the 331 Goodix functions
 also replace already-admitted public-democode source, and two replace R1 product entries, so
 those nineteen do not reduce the opaque count. The complete Goodix heap boundary now has local
 C for its twelve allocator bodies, all twenty provider call-site helpers, and the R1 byte-fill.
 The first four heap-dependent descriptor lifecycle bodies are local as well.
 The six-descriptor channel state and enclosing two-channel session state now have paired,
 failure-clean constructor/destructor implementations.
-Twenty-four Goodix generated-model/runtime routines are also local: the owner wrapper, model instance initializer, both graph builders, generated layer-block builder, both complete generated graph executors, complete quantized layer executor, recurrent layer, complete recurrent executor and helper closure (including both exact range-adjust instantiations), four typed stage-pipeline helpers, aligned arena descriptor,
+Twenty-eight Goodix generated-model/runtime routines are also local: the owner wrapper, model instance initializer, both graph builders, generated layer-block builder, both complete generated graph executors, three direct executor veneers, complete signed-int8 grouped convolution executor, complete quantized layer executor, recurrent layer, complete recurrent executor and helper closure (including both exact range-adjust instantiations), four typed stage-pipeline helpers, aligned arena descriptor,
 packed pooling descriptor, external executor accessor, and cursor-pair int8-add descriptor.
 Their enclosing preprocessing session constructor/destructor is also local and releases all 34
 owned allocations on complete teardown.

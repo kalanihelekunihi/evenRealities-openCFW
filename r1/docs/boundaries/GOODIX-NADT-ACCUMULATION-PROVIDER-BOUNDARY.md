@@ -2,10 +2,12 @@
 
 ## Decision
 
-Thirty formerly unclassified functions / 5,126 executable bytes form the remaining closed private
-helper graph beneath the already pinned Goodix `GH_NADT_pre` root at `0x0006E838`. They are routed
-to `goodix_gh3x2x_candidate` with disposition `vendor_source_required_not_redistributable` and
-must not be reconstructed as local OpenR1 code.
+Thirty formerly unclassified functions / 5,126 executable bytes formed the original pinned
+boundary beneath the already pinned Goodix `GH_NADT_pre` root at `0x0006E838`. Under the subsequent
+owner-authorized clean-room reduction, all 30 entries / 5,126 bytes now compile as transparent C.
+The last admitted batch is `0x00036974`, `0x00044A78`, `0x00072DCC`, `0x00076A68`, and
+`0x00077D2C`. No function in this historical boundary remains provider-gated.
+The boundary's former disposition was `vendor_source_required_not_redistributable`.
 
 The closure includes the former largest unresolved function at `0x00072DCC` / 490 bytes. It also
 includes seven other direct root descendants and all of their formerly unclassified descendants,
@@ -33,11 +35,11 @@ remains `GH_NADT_pre v1.0.2.0 / 548d894d`.
 
 ## Provider rule
 
-Use a matching, lawfully licensed Goodix GH3X2X SDK with recorded version, hashes, ABI, license,
-and redistribution terms. Sensor-algorithm heap operations and Arm/toolchain runtime helpers are
-separately source-routed and excluded from this census. OpenR1 may retain R1-owned transport and
-lifecycle adapters, but it may not reproduce this signal-processing closure, its constants, or
-its formulas.
+This historical boundary no longer requires a Goodix binary provider. Sensor-algorithm heap
+operations and Arm/toolchain runtime helpers are separately source-routed and excluded from this
+census. The admitted entries use only the SHA-pinned owner-authorized reconstruction documented
+in `GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md`; no bytes or absolute pointers from the stock image
+are linked into the bundle.
 
 ```sh
 python3 tools/evidence/summarize_r1_goodix_nadt_accumulation.py

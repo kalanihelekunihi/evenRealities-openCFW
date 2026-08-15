@@ -3,7 +3,7 @@
 ## Decision
 
 Under the "Owner-authorized full reduction (2026-08-14)" section of
-[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the 26-function family
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the 27-function family
 `unknown_shared_quantized_neural_runtime_candidate` is reduced from the
 recovered decompilation evidence to compilable C at
 [`../../reconstructed/quantized_runtime/`](../../reconstructed/quantized_runtime/).
@@ -23,8 +23,13 @@ Stock image: application, load base `0x00027000`, SHA-256
 ## Evidence extraction path
 
 - Ghidra bodies: `research/decompilation/application/decompiler-output.c`
-  (all 26 entries; every row's `inventory_source` is
-  `ghidra_functions_csv`, so no manual-provenance disassembly was needed).
+  (26 shared entries and twenty-three Goodix extensions). Ghidra missed two
+  installed executors: the shared float dense body at
+  `0x00085B9C..<0x00085C98` and the Goodix body at `0x00085DC4`; their complete
+  `0x00085DC4..<0x00086BAC` extent is therefore a manual provenance
+  supplements are pinned from constructor Thumb tokens `0x00085B9D` and
+  `0x00085DC5`, full disassembly, literal-pool boundaries, and the next
+  independent prologues.
 - Every body was cross-checked against fresh `arm-none-eabi-objdump -D -b
   binary -m arm -M force-thumb` disassembly of the byte-exact rebuilt image
   (`research/decompilation/rebuild/rebuilt-application.bin`).  The
@@ -34,16 +39,17 @@ Stock image: application, load base `0x00027000`, SHA-256
   `255.0f`, `253.0f` (`0x437D0000`), `254.0f`, `-255.0f`, the fraction
   range-check constants `0xC77FFFFF`/`0x06FFFBFF`, softmax `-FLT_MAX`
   (`0xFF7FFFFF`) and `88.0f` (`0x42B00000`), and the code-pointer constants
-  `0x00095B21`, `0x00036DCD`, `0x00076BDD`, `0x00085B9D`, `0x0005D245`,
+  `0x00095B21`, `0x00036DCD`, `0x00076BDD`, `0x0005D245`,
   `0x000293FD`, `0x00098EDD`.
 - Callee attribution (`research/decompilation/application/functions.csv` +
   ownership ledger): `0x000392D8` = toolchain `fminf`, `0x00039290` =
   `fmaxf`, `0x00039220` = `floorf`, `0x00038F08` = `expf`, `0x00027606` =
   `qsort` (all `arm_toolchain_runtime`); `0x0002775C` = `memmove` thunk,
   `0x000277AA` = `memset(..., 0, n)` thunk; `0x00091CCC` (scaled multiply)
-  and `0x00091E02` (tensor slice) are `gomore_health_algorithm_candidate`
-  (separately blocked family — bound as explicit provider seams, not
-  reconstructed here); `0x00058D4A` (the compactor's qsort comparator, three
+  and `0x00091E02` (tensor slice) are `gomore_health_algorithm_candidate`.
+  Both exact bodies are now separately owner-authorized; the slice is implemented here as
+  `quantized_runtime_tensor_slice`, while cross-family dispatch remains an explicit binding.
+  `0x00058D4A` (the compactor's qsort comparator, three
   instructions: `ldr r0,[r0]; ldr r1,[r1]; subs; bx lr`) sits inside a
   GoMore-candidate audit extent and is reproduced as a local static.
 
@@ -103,14 +109,17 @@ Stock image: application, load base `0x00027000`, SHA-256
 | `0x000739A8..<0x00073E08` | 1,120 | `quantized_runtime_recurrent_execute` / `_target` | complete one-step quantized recurrent cell: dynamic input quantization, three input/recurrent matrix rows, two sigmoid gates, candidate `tanhf`, persistent state, and output; checked API resolves caller-supplied model bytes and workspace, target adapter retains the generated graph ABI |
 | `0x0007400C..<0x0007405C` | 80 | `quantized_runtime_float_min_max` | first-element float minimum/maximum scan; checked no-op replaces stock empty/null fault |
 | `0x0007405C..<0x0007412C` | 208 | `quantized_runtime_u8_matrix_vector` | row-major centered-u8 matrix/vector product with the recovered 32-bit accumulating behavior |
+| `0x0003007E`, `0x00038050`, `0x000417F0` | 48 | `quantized_runtime_goodix_executor_execute` | three byte-identical 16-byte veneers preserve the six-argument target ABI and forward directly to `0x000742E4`; the typed reconstruction aliases them to the already tested complete executor body |
 | `0x000742E4..<0x0007487E` | 1,426 | `quantized_runtime_goodix_executor_execute` | complete Goodix generated-model executor: modes 0/1/2, eighteen direct stages, five explicit nested stage plans, recovered 99→49→24→12 tensor topology, fixed/dynamic scratch banks, 16-byte tail input, alternating four-stage head, optional mode-2 tail, and checked final tensor copy; the opaque stock descriptor table and embedded target words are replaced by typed caller bindings |
+| `0x00085B9C..<0x00085C98` | 252 | `quantized_runtime_float_dense_execute` / `_target` | complete row-major float dense layer with per-output biases, no-activation/leaky-ReLU/sigmoid modes, and the recovered signed-raw-bit 88.0f exponent cap; checked model and buffer extents plus alias scratch replace unchecked target pointers, while the descriptor constructor now installs the local target adapter |
+| `0x00085DC4..<0x00086BAC` | 3,560 | `quantized_runtime_i8_conv1d_execute` / `_target` | complete signed-int8 channel-major grouped 1-D convolution: kernel-5 1/4-channel specializations, kernel-3 ordinary/depthwise paths, every kernel-1 unroll family, zero-point padding/correction, modulo-2^32 MACs, per-channel Q31 requantization, recurrent output-range correction, and final range propagation; the checked API exposes the exact weight/scale/bias/range schema with buffer extents and alias scratch, while the target adapter decodes the recovered arena ABI |
 | `0x000876C8..<0x00087A6C` | 932 | `quantized_runtime_goodix_layer_execute` | complete quantized layer executor used five times by the second generated graph: optional preprocessing, signed-row means, three explicit conversion stages, capped sigmoid weighting, in-place range conversion, three tail stages, and four-input final merge; stock heap temporaries and the `0x00030535` vector are replaced by bounded caller storage and typed callbacks, including explicit handling of the stock unaligned float scratch bank |
 | `0x00074A20..<0x00074A98` | 120 | `quantized_runtime_recurrent_layer_descriptor_construct` | Goodix extension: allocate/clear `units` floats; arena offsets are cursor, cursor+align4(units*input_dim*3), then +align4(units*units*3); advance by `(units*10+6)*4`; bind the local target executor adapter |
 | `0x00074A9C..<0x00074AA0` | 4 | `quantized_runtime_executor_vector_95b20` | return the bound token for stock constant `0x00095B21` (0 unbound) |
 | `0x00074AAC..<0x00074B3E` | 146 | `quantized_runtime_descriptor_construct` | zero 24 bytes; 8 packed bytes; context float +8; weights=*cursor +0xC; bias=*cursor + b5*b0*(b4/b6)*4 +0x10 (unsigned udiv, b6==0 -> 0, ARM quirk); run token +0x14; *cursor += b5*4 + span |
-| `0x00074B44..<0x00074BD4` | 144 | `quantized_runtime_aligned_descriptor_construct` | Goodix extension: same packed header, align4(b5*b0*(b4/b6)) arena span, fixed b5*4+8 secondary offset, b5*8+24 cursor tail, explicit stock-0x85DC5 vector token |
+| `0x00074B44..<0x00074BD4` | 144 | `quantized_runtime_aligned_descriptor_construct` | Goodix extension: same packed header, align4(b5*b0*(b4/b6)) arena span, fixed b5*4+8 secondary offset, b5*8+24 cursor tail, reconstructed `0x85DC4` target-adapter binding |
 | `0x00074BD8..<0x00074BDC` | 4 | `quantized_runtime_executor_vector_36dcc` | return the bound token for stock constant `0x00036DCD` (0 unbound) |
-| `0x00074BE0..<0x00074C42` | 98 | `quantized_runtime_descriptor_record_construct` | 24-byte record: dim_b word +0, flag bytes +4/+5, context float +8, *cursor +0xC, *cursor+dim_a*dim_b*4 +0x10, run token +0x14; *cursor += dim_b*4 + dim_a*dim_b*4 |
+| `0x00074BE0..<0x00074C42` | 98 | `quantized_runtime_descriptor_record_construct` | 24-byte record: dim_b word +0, flag bytes +4/+5, context float +8, *cursor +0xC, *cursor+dim_a*dim_b*4 +0x10, reconstructed float-dense target adapter +0x14; *cursor += dim_b*4 + dim_a*dim_b*4 |
 | `0x00074C6C..<0x00074C8A` | 30 | `quantized_runtime_packed_pool_descriptor_initialize` | Goodix extension: pack four low bytes, bind reconstructed pooling executor at +4 (stock absolute `0x00041817` removed) |
 | `0x00074C90..<0x00074C94` | 4 | `quantized_runtime_executor_vector_30534` | Goodix extension: return explicit provider token for stock constant `0x00030535` (0 unbound) |
 | `0x00074C98..<0x00074CAE` | 22 | `quantized_runtime_operator_descriptor_init` | {type & 0xFF, float argument bits, 0, in-family float-add executor vector} |
@@ -121,6 +130,7 @@ Stock image: application, load base `0x00027000`, SHA-256
 | `0x00091C56..<0x00091C80` | 42 | `quantized_runtime_tensor_release_many` | for i in [0,count): release non-NULL entries, zero every array slot; signed count bound |
 | `0x00091D9C..<0x00091DBE` | 34 | `quantized_runtime_tensor_allocate` | construct + arena allocate + clear bufferless flag |
 | `0x00091DBE..<0x00091E02` | 68 | `quantized_runtime_tensor_create_fill` | construct + arena allocate + fill every word with the fill float's bits (signed count loop) |
+| `0x00091E02..<0x00091E6C` | 106 | `quantized_runtime_tensor_slice` | GoMore-owned first-dimension descriptor view; retain trailing dimensions, derive the exact byte/halfword offset, and propagate int8 scale/flag state |
 | `0x00091E6C..<0x00091EBA` | 78 | `quantized_runtime_tensor_construct` | claim slot, zero 0x14 bytes, bfi ndims into flags, copy dims with count product, set bufferless flag, NULL data |
 | `0x00091EBA..<0x00091EDC` | 34 | `quantized_runtime_tensor_reshape` | bfi ndims into flag bits 0-1, copy dims; count NOT recomputed (quirk); stock's unused first argument dropped |
 | `0x00093628..<0x000936F8` | 208 | `quantized_runtime_arena_allocate` | when used+count >= 0x6A4: collect live arena-backed buffers, qsort by offset (comparator 0x00058D4A), memmove down, rebuild watermark; return arena + old watermark, advance by count |
@@ -139,6 +149,15 @@ Stock image: application, load base `0x00027000`, SHA-256
 3. **`0x00091C48` extent.**  The body is discontiguous (head at
    `0x00091C48` + shared tail at `0x000936FC`); the ledger/Ghidra end
    `0x0009371B` is the tail's end, not a data bug.
+4. **`0x00085DC4` missing function.** Ghidra retained only
+   `LAB_00085dc4+1`; the aligned descriptor constructor installs that Thumb
+   address, control flow starts with a complete stack-frame prologue, and the
+   next independent prologue begins at `0x00086BAC`. The ledger therefore
+   carries the exact 3,560-byte body as a manual provenance supplement.
+5. **`0x00085B9C` missing function.** Ghidra likewise omitted the function
+   installed by `0x00074BE0` as Thumb entry `0x00085B9D`. Its return ends at
+   `0x00085C98`, immediately before the two-word 0/88.0f literal pool, so the
+   ledger carries an exact 252-byte manual supplement.
 
 ## Divergences from the stock binary (all deliberate)
 
@@ -148,17 +167,17 @@ Stock image: application, load base `0x00027000`, SHA-256
    selected toolchain runtime, per the ledger's `use_toolchain_runtime`
    disposition).  Unbound mandatory providers fail explicitly
    (`QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT`, NULL, or 0 per return type).
-2. **Other-family seams.**  The slice helper (`0x00091E02`) and the scaled
-   multiply (`0x00091CCC`) belong to the still-blocked
-   `gomore_health_algorithm_candidate` family and are bound seams; unbound
-   they fail explicitly instead of dispatching.
-3. **Out-of-family pointer tokens.**  The six remaining absolute Thumb constants
+2. **Other-family seams.**  The slice helper (`0x00091E02`) and scaled
+   multiply (`0x00091CCC`) retain explicit bindings at the shared-runtime
+   boundary even though both exact bodies are now owner-authorized in the GoMore
+   reduction. Unbound cross-family dispatch still fails explicitly.
+3. **Out-of-family pointer tokens.**  The four remaining absolute Thumb constants
    `0x00095B21`, `0x00036DCD`, `0x00076BDD` (GoMore candidate
-   `FUN_00076BDC`), `0x00085B9D`, `0x00085DC5`, and `0x00030535`
+   `FUN_00076BDC`), and `0x00030535`
    target bodies outside this family.  The
    reconstruction returns/stores integrator-bound tokens (0 when unbound)
-   instead of fabricating addresses.  The five locally reconstructed vectors
-   (softmax, quantizer, float-add, pooling, int8-add) return/store the reconstructed
+   instead of fabricating addresses.  The seven locally reconstructed vectors
+   (softmax, quantizer, float-add, float-dense, pooling, int8-add, signed-int8 convolution) return/store the reconstructed
    functions' real addresses. The former `0x000739A9` recurrent token now binds
    the reconstructed target adapter; the stock Thumb bit is an image ABI detail.
 4. **Bad-argument handling.**  Stock dereferences every argument unchecked;
@@ -206,6 +225,11 @@ Stock image: application, load base `0x00027000`, SHA-256
    provider (the comparator is a local static).
 13. **qsort ordering.**  The stock comparator subtracts first words; live
    offsets are distinct, so any correct sort yields the recovered order.
+14. **Checked convolution storage.** Stock temporarily pads input rows in
+   place and, on overlap, moves the output pointer past the padded input.
+   The checked API reads virtual zero-point padding without modifying input
+   and requires caller-owned scratch for overlap. The target adapter retains
+   the recovered arena layout while using the same bounded arithmetic core.
 
 Preserved exactly: the rounding idiom including NaN sense and truncation,
 the derivation bit-level range checks (`0xC77FFFFF`/`0x06FFFBFF`,
@@ -228,6 +252,46 @@ inputs always produce differences <= 0, so only NaN reaches the cap) and
 the derivation's fraction range check (rejects fractions near 0 or 1,
 leaving the unadjusted range in place).
 
+## Goodix in-place quantizer wrapper and configured veneer
+
+The 116-byte Goodix entry at `0x00036B58` constructs the admitted default
+quantizer descriptor `{0.0f, 1.0f}`, builds a `[1, rows, columns]` Float32
+tensor over the caller buffer, and passes the same tensor as both input and
+first output to `0x000293FC`. The raw stack layout proves that this alias is
+intentional; the second output is an eight-byte local range scratch. Because
+the quantizer reads Float32 elements forward while writing compact Int8 bytes
+forward, the alias does not overwrite unread input. Mode values other than one
+return exact stock word `0xF000000E`. The adjacent 22-byte entry at
+`0x00095B04` only supplies two shape words from its owner configuration and
+delegates to this wrapper.
+
+`quantized_runtime_goodix_in_place_float_to_int8` and its configured veneer
+replace the absolute configuration root and executor vector with typed shape,
+runtime, buffer, and capacity inputs. Tests pin four exact output bytes,
+in-place aliasing, the non-mode-one return word and no-write behavior,
+configured-shape forwarding, short-buffer rejection, and null-shape
+rejection. These two entries add 138 transparent Goodix bytes without stock
+runtime or model content.
+
+## NADT three-stage Float32 projection
+
+The 138-byte entry at `0x0002F7DC` builds three 20-byte Float32 tensor
+descriptors and invokes the three executor slots at operator-record offsets
+`0x14`, `0x2C`, and `0x44`. Raw register flow pins the banks and shapes:
+the first `{1, shape[0], shape[1]}` tensor uses the target buffer base, the
+middle `{1, shape[2], shape[3]}` tensor uses base `+0x1F0`, and the final
+`{1, shape[4], shape[5]}` tensor returns to the base. The caller supplies
+exact shape `{1,15, 1,15, 8,15}`; the function copies the final 20-byte
+descriptor back to the caller after all three stages.
+
+`quantized_runtime_goodix_nadt_projection_execute` is a checked veneer over
+the already admitted Float32 three-stage engine. It fixes the minimum bank
+span to `0x1F0`, requires the no-padding/no-input-alias plan that preserves the
+stock address, and bounds the complete 556-byte workspace. Tests pin every
+stage descriptor, all three shapes and data addresses, final descriptor copy,
+exact minimum extent, and padding rejection. No generated-model weight or
+executor bytes are embedded.
+
 ## Host test mapping (`tests/test_reconstructed_quantized_runtime.c`)
 
 - `test_round_helpers`: both rounder twins across sign/half boundaries;
@@ -243,11 +307,21 @@ leaving the unadjusted range in place).
   and negative max clamping; untouched outputs on bad arguments.
 - `test_quantize_executor`: bit-exact quantized vectors derived from the
   recovered formula (including the adjusted range stored back), both
-  saturation rails, type flag, and the bad-argument matrix.
+  saturation rails, type flag, the bad-argument matrix, and the Goodix
+  in-place/default-range wrapper plus configured-shape veneer.
 - `test_int8_add_executor`: mixed vectors with independent input/output
   quantization parameters (expected bytes simulated float32-exact from the
   recovered formula), both SSAT rails, output range write-back, bad
   arguments, unbound fmaxf.
+- `test_i8_conv1d_executor`: all nine stock dispatch shapes (kernel 5 with
+  1/4 channels, kernel 3 ordinary/depthwise, kernel 1 with 1/2/4/6 and
+  scalar-remainder channel counts), nonzero zero-point padding, typed model
+  ranges/scales/biases, Q31 output bytes, exact output-range propagation,
+  rejected unsupported shape, and in-place overlap failure/success without
+  and with bounded scratch.
+- `test_float_dense_executor`: exact row-major dot/bias vectors, plain and
+  leaky-ReLU modes, sigmoid and its 88.0f cap, short-model rejection, and
+  overlapping input/output failure then success with caller scratch.
 - `test_pooling_executor`: window-2 max over two signed rows, window-4 max,
   window-3 average (sums 0/5/-3/-5 -> 0/2/-1/-2), five unsupported
   descriptors leaving the output untouched while returning 0, bad
@@ -283,8 +357,8 @@ The module is freestanding and carries host tests. Memory operations are
 local; math resolves through explicit providers or the four attributable
 libm symbols used by the recurrent closure.  The integrator wave owns:
 wiring `test_reconstructed_quantized_runtime()` into `tests/test_openr1.c`,
-adding the TU to the r1 Makefiles' `SOURCES`, flipping the 26 shared-runtime
-and twenty-three Goodix-extension ledger rows to
+adding the TU to the r1 Makefiles' `SOURCES`, flipping the 27 shared-runtime
+and twenty-seven Goodix-extension ledger rows to
 `clean_room_reimplementation_owner_authorized`, and re-pinning verifier
 sites. The generated Goodix instance now stores the local recurrent target
 adapter, while model words remain caller-supplied transparent build input.

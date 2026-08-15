@@ -94,8 +94,8 @@ See [`docs/README.md`](docs/README.md) for evidence
 provenance, coverage, safety differences, and remaining hardware work. The function-level motion
 split is in
 [`docs/MOTION-PROVIDER-CORRELATION.md`](docs/correlation/MOTION-PROVIDER-CORRELATION.md).
-The first 49 GoMore functions—including 43 primitives and six tensor executors—are reconstructed in transparent C;
-the remaining 313 health/sleep algorithm entries stay disabled while their source reductions
+The first 198 GoMore functions—including 185 primitives and thirteen tensor-runtime routines—are reconstructed in transparent C;
+the remaining 164 health/sleep algorithm entries stay disabled while their source reductions
 continue. See
 [`docs/GOMORE-PROVIDER-BOUNDARY.md`](docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md).
 The IQS7211E path uses pinned MIT provider/settings references and the R1-only adapter in
@@ -115,9 +115,9 @@ separately in `src/r1_power_lease.c` and `platform/nrf52840/sdk/openr1_i2c5_reso
 The lease calls only a semantic provider and contains no YHM register/framing data. Touch power
 remains fail closed pending board binding and hardware validation. NFC receives the recovered P1.10 lifecycle
 and an exclusive CMSIS mutex but still starts disabled and exposes no raw transfer surface.
-The first 160 Goodix functions now compile from transparent C with hidden table and executor
-addresses replaced by typed bindings; 141 came from the opaque closure, seventeen replace
-public-democode source, and two replace R1 product entries. The remaining 178 closed Goodix functions are still being
+The first 331 Goodix functions now compile from transparent C with hidden table and executor
+addresses replaced by typed bindings; 312 came from the opaque closure, seventeen replace
+public-democode source, and two replace R1 product entries. The remaining 8 closed Goodix functions are still being
 reduced; see
 [`docs/GOODIX-PROVIDER-BOUNDARY.md`](docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md).
 The complete twelve-function `goodix_mem`/`GdMem` core is reconstructed without the vendor binary;

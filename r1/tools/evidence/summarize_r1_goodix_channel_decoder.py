@@ -76,6 +76,10 @@ def summarize(image_path: Path) -> dict[str, Any]:
         "image_sha256": EXPECTED_IMAGE_SHA256,
         "function_count": 2,
         "function_bytes": 856,
+        "provider_function_count": 1,
+        "provider_function_bytes": 522,
+        "reconstructed_function_count": 1,
+        "reconstructed_function_bytes": 334,
         "functions": functions,
         "callgraph": {
             "decoder_sole_callsite": "0x0006e874",
@@ -86,9 +90,10 @@ def summarize(image_path: Path) -> dict[str, Any]:
         },
         "boundary": {
             "provider_family": "goodix_gh3x2x_candidate",
-            "source_disposition": "vendor_source_required_not_redistributable",
+            "provider_source_disposition": "vendor_source_required_not_redistributable",
             "private_symbol_or_sdk_version_resolved": False,
-            "local_decoder_or_scaling_reimplementation_authorized": False,
+            "local_decoder_reimplementation_authorized": True,
+            "local_scaling_reimplementation_authorized": False,
             "coefficient_tables_or_formula_emitted": False,
             "toolchain_math_reimplemented": False,
         },

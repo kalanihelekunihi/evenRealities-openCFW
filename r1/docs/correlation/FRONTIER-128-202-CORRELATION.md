@@ -105,10 +105,19 @@ conversion `0x00059CB0`, base64 block decoder `0x0005C064`, and 16-digit model-I
 `0x00057B38`. All are reached only from already gated GoMore scopes; no local algorithm
 reconstruction is admitted.
 
-Goodix candidates (4): half-to-float sample conversion `0x000765E4`, 20-channel masked callback
+Goodix candidates (4): half-to-float sample conversion `0x000765E4` (now source-admitted), 20-channel masked callback
 dispatch `0x00029E8C`, 0x3000-windowed register write dispatcher `0x0002AEDC` (78 of 178 bytes
 pinned; 100 remote bytes omitted), and the 0x10-stride teardown loop `0x00029BBC` reached from the
 gated session teardown.
+
+Current reduction note: the later owner-authorized reduction now admits
+`0x00029BBC` as `goodix_primitives_record_family_teardown` and `0x000765E4` as
+`goodix_primitives_fft_magnitude_prepare`. Typed ownership
+arrays preserve all 25 releases, the descriptor order `0..6, 8, 7`, and the
+release-and-clear behavior of the final sixteen slots without retaining the
+opaque target record layout. Caller-owned FFT scratch replaces the stock heap
+handoff, and Float32/packed-5/10 inputs remain explicit. The other two Goodix entries in this historical
+frontier remain gated.
 
 YHM2710 candidates (2): chip-ID `0xA0` verification `0x0003530C` called from the pinned
 `0x0003510C` diagnostic, and the 8-step float-ladder (`{0.2, 0.5, 0.7, 0.9, 1.0, 1.5, 2.0, 3.0}`

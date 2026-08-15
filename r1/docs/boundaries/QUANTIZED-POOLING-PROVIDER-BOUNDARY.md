@@ -51,7 +51,7 @@ that sixth body and brings the boundary to six functions / 1,328 bytes.
 
 The provenance investigation added the following structural detail. None of it changes the
 admission state; the family remains `investigate_before_implementing`. The ownership-ledger
-candidate family now totals 26 functions / 2,486 executable bytes, of which this boundary pins
+candidate family now totals 27 functions / 2,738 executable bytes, of which this boundary pins
 the six-function / 1,328-byte core documented above.
 
 - AOT-compiled static-graph ABI: 24-byte layer records hold eight packed parameter bytes, the
@@ -133,7 +133,7 @@ commercial source-acquisition route.
 ## Reduction 2026-08
 
 Under the owner-authorized full reduction (2026-08-14, see
-[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the twenty-six ledger entries of
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the twenty-seven ledger entries of
 `unknown_shared_quantized_neural_runtime_candidate` (the shared quantized tensor executors and descriptor constructors, including the pooling body above) are reconstructed
 from the recovered decompilation evidence as independently compiled C in
 [`../../reconstructed/quantized_runtime/`](../../reconstructed/quantized_runtime/).  The
@@ -141,6 +141,6 @@ reconstruction is not vendor source; it carries per-function provenance
 banners, and its contract, reconstruction decisions, divergences, and
 host-test mapping are documented in
 [`../correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md`](../correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md).
-The ledger disposition for the twenty-six entries is now
+The ledger disposition for the twenty-seven entries is now
 `clean_room_reimplementation_owner_authorized`.  This document remains the
 provenance record of why no upstream source was admitted.

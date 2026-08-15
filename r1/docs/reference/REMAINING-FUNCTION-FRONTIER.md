@@ -39,11 +39,12 @@ Thirty-two generic sensor-stream functions are separately
 blocked under `unknown_sensor_stream_framework_candidate`; their adjacent registry, list,
 allocator, buffer, and timer implementations are not admitted by that function-local
 classification.
-Twenty-six shared quantized-neural runtime functions are separately blocked under
-`unknown_shared_quantized_neural_runtime_candidate`, including the indirect 434-byte signed-int8
-pooling executor, the float quantizer, parameter helper, descriptor constructors, the int8-add,
-float tensor-add, and float softmax executors, and the twelve-descriptor tensor-arena alloc/free
-pair; no exact provider source has been authenticated.
+Twenty-seven shared quantized-neural runtime functions are reconstructed under the
+owner-authorized `unknown_shared_quantized_neural_runtime_candidate` reduction, including the
+indirect 434-byte signed-int8 pooling executor, float quantizer, parameter helper, descriptor
+constructors, int8-add, float tensor-add, softmax and float dense executors, and the
+twelve-descriptor tensor-arena alloc/free pair; no exact provider source was authenticated, so
+the attribution label remains while the implementation is transparent C.
 The completed 264...274-byte tier routes three R1 product functions and three GoMore-private
 functions / 1,386 bytes. The existing EUS producer now has its exact 272-byte body pinned; clean
 metadata-only policies add the five/30-cycle battery diagnostic cadence and `ep.bin` recovery
@@ -274,8 +275,9 @@ external. See
 The tied 372-byte leader at `0x00072C48` is now routed into the licensed Goodix
 GH_HR provider boundary. Its sole caller is the already gated `pv_v1.1.0`
 private-context initializer, immediately after allocation of the exact
-0x158-byte subcontext. The private layout, buffer construction, and defaults
-remain provider code and are not recreated locally. See
+0x158-byte subcontext. Under the later owner-authorized reduction, its bounded
+buffer layout and defaults are now recreated locally with caller-owned
+coefficient metadata; the primary initializer remains gated. See
 [`GOODIX-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-PROVIDER-BOUNDARY.md).
 
 The former 374-byte leader at `0x00096CC8` is now closed as the composite R1
@@ -331,11 +333,13 @@ nonzero seven-byte slot insertion, duplicate handling, and newest-timestamp beha
 Storage, time/calendar, logging, sending, and biometric providers remain external. See
 [`HRV-FLASH-MERGE-CORRELATION.md`](../correlation/HRV-FLASH-MERGE-CORRELATION.md).
 
-The 406-byte GH_HR private-context initializer at `0x0006D204` is now Goodix-gated. It accepts
-only private ABI `pv_v1.1.0`, allocates 0x150/0x158-byte contexts, seeds private defaults, and is
-called solely by the already gated `0x0006D3C0` heart-rate wrapper. No private layout, default,
-or biometric algorithm is implemented locally. Reproduce with
-`python3 tools/evidence/summarize_r1_goodix_hr_init_boundary.py`.
+The former 406-byte GH_HR private-context initializer at `0x0006D204` is now reconstructed as
+`goodix_primitives_hr_primary_context_create`. It validates the exact 36-byte configuration and
+`pv_v1.1.0` ABI, owns both logical 0x150/0x158 contexts without stock globals, preserves the
+recovered mode/rate/default rules and exact `262144.0f` / `0.0` tails, and replaces selectors
+0/1/6 of the copied ROM constructor table with typed graph bindings. Its paired teardown releases
+all 31 owner allocations and unwinds partial construction. Reproduce the stock extent and caller
+pin with `python3 tools/evidence/summarize_r1_goodix_hr_init_boundary.py`.
 
 The native 406-byte R1 battery runtime entry at `0x00031FD0` is now reconciled with the already
 accepted 412-byte `0x00031FCC..<0x00032168` veneer-plus-body extent. Exact body/caller pins show
@@ -455,9 +459,11 @@ have exact composite segment maps; all 30 bodies and direct callsites are pinned
 constant or formula is admitted. See
 [`GOODIX-NADT-ACCUMULATION-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-ACCUMULATION-PROVIDER-BOUNDARY.md).
 
-The tied 494-byte unknown at `0x00030178` is now part of a seven-function / 1,098-byte Goodix GH_NADT peak-mask
+The tied 494-byte unknown at `0x00030178` belongs to a seven-function / 1,098-byte Goodix GH_NADT peak-mask
 helper closure. The only entry from outside that chain is `0x0006E8E6` in the
-already gated GH_NADT root `0x0006E838`; no private extrema/selection formula is admitted. See
+still-gated GH_NADT root `0x0006E838`. All seven helper entries now compile transparently: the
+five-entry / 918-byte final batch replaces transient allocations with caller-owned scratch while
+preserving packed extrema, plateau, row-selection, newest-index, and threshold-history behavior. See
 [`GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md).
 
 The other tied 494-byte unknown at `0x0007C52C` is a one-function / 494-byte R1 compiled-default restore
@@ -474,19 +480,27 @@ provider register/configuration parser at its profile terminator. No private eig
 layout, parser, fatal-loop behavior, or live register I/O is admitted. See
 [`GOODIX-REGISTER-PROFILE-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-REGISTER-PROFILE-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x00088E80` is a one-function / 518-byte Goodix GH_NADT
-channel-quality boundary. Its sole callsite `0x0006E916` lies in already pinned GH_NADT root
-`0x0006E838`, identified as `GH_NADT_pre v1.0.2.0 / 548d894d`; no outside caller exists. No
-private threshold, transform, score formula, or live optical path is admitted. See
+The former largest unknown at `0x00088E80` was a one-function / 518-byte Goodix GH_NADT
+channel-quality boundary. Its sole callsite `0x0006E916` lies in the pinned GH_NADT root
+`0x0006E838`, identified as `GH_NADT_pre v1.0.2.0 / 548d894d`; no outside caller exists. Its
+six masked flag rules and exact three-component logistic score now compile from bounded C. See
 [`GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x000335B4` is closed with its sole-caller decoder at
-`0x00061DA4` as a two-function / 856-byte Goodix packed-channel boundary. The decoder's only
-upstream callsite `0x0006E874` and its dependency on already gated Goodix version qualifier
-`0x00066890` place it inside the provider component; all three scaling-helper calls are internal
-to the decoder. No private table, coefficient, scaling formula, or live optical pipeline is
-admitted. See
+The former largest unknown at `0x000335B4` completes the two-function / 856-byte packed-channel
+decoder closure. Its sole-caller decoder at `0x00061DA4` is
+`goodix_primitives_spo2_channel_records_assemble`; all three calls now reach
+`goodix_primitives_spo2_channel_scale_decode`. The stock RAM table banks and `pow` dependency are
+explicit bounded bindings, and both direct and width-packed formulas compile locally. See
 [`GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md).
+
+The former largest unknown at `0x00037B80` is the 554-byte NADT auxiliary
+state classifier called only by the still-bounded window classifier at
+`0x000856EC`. It now compiles as
+`goodix_primitives_nadt_auxiliary_state_classify`: the final-50 sample span,
+five configuration fields, result/mode/latch state, diagnostics, two 25-entry
+extrema banks, and square-root dependency are explicit. Tests pin the exact
+range/deviation/extrema clustering and consecutive-window transition. See
+[`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x0008EA0C` is a one-function / 528-byte GoMore SDK
 authorization-parser boundary. Its two exact executable ranges, sole callsite `0x0006B38A`,
@@ -589,7 +603,12 @@ descriptor helper, sensor-algorithm heap, and Arm runtime outside this supplemen
 complete NADT boundary is now 58 functions / 19,274 bytes and, with the later packed-channel,
 NADT-quality, register-profile, peak-mask, accumulation/decision, GH_HR initializer, dlCom
 quantization, peak-selector, and channel-decimation closures, the complete Goodix gate is 395
-entries; no model topology, weights, or inference runtime is reconstructed locally. See
+entries. The outer `0x00037890` seven-stage topology is now reconstructed with typed
+node/subgraph bindings. The nested `0x00034194` runtime is now
+`goodix_primitives_nadt_generated_subgraph_execute`, with all nineteen
+operators, fixed shapes/banks, quantization range, scalar descriptor, and
+branch handoff explicit; only the operator/model contents remain typed
+bindings. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x0007DA30` is now closed with eight recursive descendants as a
@@ -601,14 +620,14 @@ excluded from the supplemental census. The complete GoMore gate was 243 entries 
 energy formula or table is recreated locally. See
 [`GOMORE-ENERGY-MODEL-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-ENERGY-MODEL-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x00095828` is now closed with its eighteen recursive descendants as
-a nineteen-function / 3,246-byte extension of the Goodix GH_NADT boundary. Its sole direct caller
-is authenticated preprocessing core `0x0006E838` at `0x0006EA88`. The graph covers dual-window
-correlation, peak selection, rolling statistics, periodic-rate estimation, and signal-confidence
-state. All exact extents, body hashes, and caller sets are pinned. Two small statistic/conversion
-helpers are shared with adjacent unclassified signal routines, so outside-caller exclusivity is
-not claimed for those helpers. At that stage the complete NADT census was 51 functions / 17,310
-bytes and the complete Goodix gate was 342 entries; no provider algorithm is recreated locally. See
+The former largest unknown at `0x00095828` is now source-admitted as
+`goodix_primitives_nadt_signal_confidence_update`; its sole direct caller is authenticated
+preprocessing core `0x0006E838` at `0x0006EA88`. The typed entry consumes the already-local
+dual-window feature result, replaces the 496-byte stock allocation with a 124-Float32 caller
+workspace, and preserves rate selection/blending, variation-mode counters, rolling acceptance,
+hold recovery, mean, and Gaussian confidence probability. The historical nineteen-function /
+3,246-byte graph remains hash- and caller-pinned; two small statistic/conversion helpers are shared
+with adjacent signal routines, so outside-caller exclusivity is not claimed for those helpers. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x0004387C` is now closed with three private initialization bridges
@@ -620,13 +639,38 @@ and Goodix graphs remain excluded from this provider census. At that stage the c
 gate contained 323 entries; no graph topology or model behavior is recreated locally. See
 [`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x00036F88` is now included in the existing Goodix GH_NADT
-boundary. Its sole caller is preprocessing core `0x0006E838` at callsite `0x0006EA7A`; its only
-direct callees are Arm toolchain floating-point helpers. The 744-byte body is pinned as a private
-NADT state/output-selection helper, bringing that provider census at that stage to 32 functions /
-14,064 bytes and the complete Goodix gate to 319 entries. OpenR1 does not recreate its private states or
-thresholds. See
+The former largest unknown at `0x00036F88` is now source-admitted as
+`goodix_primitives_nadt_output_state_select`. Its sole caller is preprocessing core `0x0006E838`
+at callsite `0x0006EA7A`; its only direct callees are Arm toolchain floating-point helpers. The
+typed entry exposes rate history, thresholds, flags, signal/persistence inputs, retained rate, and
+the exact `0/1/2/12/21` state latch while preserving the 65..100 output clamp and kinds 1/2/5.
+See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
+
+The former largest unknown at `0x0006E838` is now source-admitted as
+`goodix_primitives_nadt_preprocess_execute`. The typed root composes its already reconstructed
+NADT channel assembly, accumulation, spectral, feature, quality, inference, selection,
+confidence, and result stages in the exact recovered order. It preserves both failure encoders,
+the accumulation-readiness return, the 25-frame cadence, quartic transform, three bit-range
+adjustment rules, and inference return status. Five stock heap temporaries are replaced by bounded
+caller-owned records, summaries, and one-lane output spans. See
+[`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
+
+The former largest unknown at `0x0007DD58` is now source-admitted as
+`goodix_primitives_nadt_alternate_state_classify`. Its two callsites remain in the byte-pinned
+NADT window classifier. The fixed 200-sample entry preserves its range/sample gate, paired
+shared-state autocorrelation transforms, signed extrema and 800-amplitude filters, peak-quality
+update, alternating interval ordering, regularity thresholds, and consecutive-match transition.
+Five stock allocations are replaced by one bounded caller workspace. See
+[`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
+
+The former largest unknown at `0x00034CBC` is now source-admitted as
+`goodix_primitives_hr_extrema_tracker_update`. Its sole caller remains the GH_HR core at
+`0x0006D5F2`. The local entry preserves full-buffer and period-boundary behavior, the exact
+rise/fall/equality latch, paired extrema positions and values, amplitudes, spans, and optional
+four-sample cardinal-spline refinement. Static curve coordinates are explicit bindings and the
+41-point interpolation bank is caller-owned. See
+[`GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x0006138C` is now closed with five private helpers as a
 six-function / 1,890-byte GoMore activity-state window classifier. Its only direct caller is the
@@ -667,8 +711,10 @@ GH_SPO2/dlCom input diagnostic formatter. Its sole direct caller is the already 
 wrapper `0x0002C944` at `0x0002CA2C`, immediately after the wrapper invokes processing root
 `0x0006C6A8`. The formatter emits provider algorithm configuration and per-sample PPG, enable,
 accelerometer, and gyroscope fields through optional callbacks. The complete body, sole caller,
-and exact diagnostic strings are pinned. It remains provider code; OpenR1 does not recreate its
-private callback ABI or treat it as product telemetry. See
+and exact diagnostic strings are pinned. It now compiles as
+`goodix_primitives_spo2_input_diagnostics_emit`: bounded typed sinks replace the private variadic
+callback ABI while preserving the two output routes and their separately sampled heap diagnostic.
+It remains provider support and is not treated as product telemetry. See
 [`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x0007F2B0` is now closed as the 1,052-byte R1 Peer Manager event
@@ -698,12 +744,13 @@ model-region resolution, and exact target scratch layout. The model weights rema
 caller-supplied build input rather than copied opaque firmware data. See
 [`QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md`](../correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md).
 
-The former largest unknown at `0x00035850` is now closed with its sole direct caller
+The former largest unknown at `0x00035850` is pinned with its sole direct caller
 `0x000766AC` under the existing Goodix GH_NADT provider boundary. The exact direct chain is
 `0x0006E838 -> 0x000766AC -> 0x00035850`: the already pinned GH_NADT preprocessing core calls a
 478-byte spectral peak-preparation pipeline, which calls the 1,162-byte harmonic-candidate
-selector. Both body hashes, the selector's split executable extent, and both callsites are pinned.
-The pair is provider code and is not eligible for local DSP reconstruction. See
+selector. The 478-byte stage is now transparent C with caller workspace, explicit scale bindings,
+and a typed downstream callback. The larger harmonic selector retains its provider gate. Both
+body hashes, the selector's split executable extent, and both callsites remain pinned. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x00076BDC` is now closed as a 1,234-byte indirect GoMore
@@ -744,7 +791,8 @@ The dormant graph executor at `0x000617F8` and neural-layer executor at `0x00087
 source-admitted through explicit stage plans, recovered shape records, and caller-owned scratch,
 with their shipped-image non-reachability still pinned.
 The sole-caller diagnostic formatter at `0x0006CCC0` is likewise body-, callsite-, and
-field-string-pinned as provider support rather than product telemetry.
+field-string-pinned and source-admitted through bounded typed sinks as provider support rather
+than product telemetry.
 Every executable segment,
 function hash, direct-caller map, marker, and dispatcher word is pinned. Shared runtime helpers are
 not claimed by outside-caller exclusivity. The recurrent runtime and first graph topology are
@@ -764,11 +812,13 @@ The Goodix GH_NADT component is now closed as 58 functions / 19,274 executable b
 functions / 19,148 bytes now leave the unclassified frontier. Direct edges close the chain from
 existing Goodix candidate `0x0002CDD4` through streaming process `0x0006E008`, window classifier
 `0x000856EC`, primary classifier `0x00047240`, the preprocessing spectral/harmonic pair, and the
-private state/output selector `0x00036F88`, the nineteen-function signal-confidence graph rooted
+now source-admitted state/output selector `0x00036F88`, the source-admitted signal-confidence tracker
 at `0x00095828`, and the generated-model inference graph rooted at `0x000968C4`, with processing
-every 25 samples. All segments,
-hashes, and direct callsites are pinned. The provider remains non-redistributable and no NADT
-algorithm body is admitted locally. See
+every 25 samples. The signal-confidence graph's `0x00029144` dual-window feature/correlation
+extractor is now source-admitted with fixed caller workspace, exact packed-5/10 conversion, and
+typed tail-window spans. All segments, hashes, and direct callsites are pinned. The remaining
+classifier, state-selection, harmonic-selection, and generated-subgraph bodies retain the
+non-redistributable provider gate. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
 The BLE-thread event consumer at `0x00045184` is now closed as one R1 product function / 1,736
@@ -892,7 +942,8 @@ functions as an exact 586-byte GoMore candidate boundary. Its only caller is the
 GoMore sleep body at `0x0006FEA0`; it initializes ten existing GoMore-gated substates plus the
 newly bounded helpers. The 8-byte reset at `0x00071D96` exactly duplicates the gated body at
 `0x0007170A`, but the promotion rests on exclusive callgraph context, not generic byte identity.
-No private symbol is asserted and no implementation is admitted. See
+No private symbol is asserted; both reset leaves were subsequently source-admitted as one checked
+C body, while the composite initializer remains gated. See
 [`GOMORE-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-PROVIDER-BOUNDARY.md).
 
 The linked sensor-algorithm heap is now closed as thirteen exact functions and 1,202 executable
@@ -1037,8 +1088,8 @@ the activity accumulator is closed in
 [`ACTIVITY-ACCUMULATOR-CORRELATION.md`](../correlation/ACTIVITY-ACCUMULATOR-CORRELATION.md), and the HR/SpO2/HRV
 sample-storage consumers are closed in
 [`SCALAR-HEALTH-SAMPLE-STORAGE-CORRELATION.md`](../correlation/SCALAR-HEALTH-SAMPLE-STORAGE-CORRELATION.md).
-The next unresolved inventory leaders are the two 222-byte functions at `0x00072FB8` and
-`0x0008A45C`, followed by 220 bytes at `0x0008F780`, 218 bytes at `0x0008EF28`, and 216 bytes at
+The next unresolved inventory leader is the 222-byte function at `0x0008A45C`,
+followed by 220 bytes at `0x0008F780`, 218 bytes at `0x0008EF28`, and 216 bytes at
 `0x0003E7A8`. Each must receive the same
 function-local evidence, provider screening, behavioral implementation, and exact body pinning
 before ownership changes. Nordic- or third-party-looking clusters remain source-correlation tasks,

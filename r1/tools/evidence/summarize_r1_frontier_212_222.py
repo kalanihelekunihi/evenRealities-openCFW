@@ -96,9 +96,10 @@ GOODIX_FRONTIER_212_222_FUNCTIONS = (
     _function(
         0x00072FB8, 222,
         "1052d75e35458b9e04cafb0c1c6161750ce7aad4520647ddc460bb3607109eaa",
-        "", "Goodix sign-mask contiguous-run output fill",
+        "goodix_primitives_zero_masked_sign_runs",
+        "Goodix sign-mask contiguous-run output fill",
         ((0x0007675A, "BL"),), "goodix_gh3x2x_candidate",
-        "vendor_source_required_not_redistributable",
+        "clean_room_reimplementation_owner_authorized",
     ),
 )
 

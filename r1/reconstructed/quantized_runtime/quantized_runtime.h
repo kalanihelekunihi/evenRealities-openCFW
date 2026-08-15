@@ -9,12 +9,14 @@
  *                 runtime; attributed platform: Bravechip BCL603M
  *                 "ChipletRing" middleware serving both the GoMore sleep
  *                 classifier and the Goodix GH_SPO2/dlCom model graphs),
- *                 plus twenty-three Goodix-specific graph/instance/runtime
+ *                 plus twenty-four Goodix-specific graph/instance/runtime
  *                 routines.
  * Stock image:    application image, load base 0x00027000, sha256
  *                 0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a.
  * Evidence:       r1/research/decompilation/application/decompiler-output.c
- *                 (all 26 shared and twenty-three Goodix-extension Ghidra bodies),
+ *                 (26 shared and twenty-three Goodix-extension Ghidra bodies,
+ *                 plus disassembly-pinned executors at 0x00085B9C and
+ *                 0x00085DC4),
  *                 each cross-checked against fresh
  *                 Thumb disassembly of the byte-exact rebuilt image
  *                 r1/research/decompilation/rebuild/rebuilt-application.bin
@@ -56,6 +58,7 @@
  *   0x00091C56..<0x00091C80   42   release loop over a pointer array
  *   0x00091D9C..<0x00091DBE   34   tensor construct + arena allocate
  *   0x00091DBE..<0x00091E02   68   tensor construct + allocate + fill
+ *   0x00091E02..<0x00091E6C   106  first-dimension tensor slice descriptor
  *   0x00091E6C..<0x00091EBA   78   0x14-byte tensor descriptor constructor
  *   0x00091EBA..<0x00091EDC   34   tensor flags/dims update (no recount)
  *   0x00093628..<0x000936F8   208  12-slot / 0x6A4-word arena compactor
@@ -75,7 +78,9 @@
  *   0x000739A8..<0x00073E08   1120 quantized recurrent executor
  *   0x0007400C..<0x0007405C   80   float min/max scan helper
  *   0x0007405C..<0x0007412C   208  unsigned-byte matrix/vector kernel
+ *   0x0003007E / 0x00038050 / 0x000417F0  16 each generated-executor veneers
  *   0x000742E4..<0x0007487E   1426 complete generated graph executor
+ *   0x00085B9C..<0x00085C98   252  float dense-layer executor
  *   0x00085DC4..<0x00086BAC   3560 signed-int8 grouped 1-D convolution
  *   0x000876C8..<0x00087A6C   932  complete quantized layer executor
  *   0x00074A20..<0x00074A98   120  recurrent-layer descriptor constructor
@@ -108,6 +113,8 @@ enum {
     QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT = 4  /* introduced (see above) */
 };
 
+#define QUANTIZED_RUNTIME_GOODIX_MODE_ERROR UINT32_C(0xF000000E)
+
 /* Recovered executor-facing tensor record (20 bytes on target):
  * word dims at +0x04/+0x08/+0x0C, data pointer at +0x10, flag word at
  * +0x00 (the float->int8 quantizer stores 1 there). */
@@ -120,7 +127,7 @@ typedef struct {
 /* Recovered 0x14-byte pool tensor descriptor: arena pointer at +0x00,
  * element count at +0x04, three uint16 dims at +0x08..+0x0D, flag byte at
  * +0x0E (bits 0-1 dimension count, bit 2 "no arena buffer", bit 3
- * slice/view), trailing word at +0x10. */
+ * signed-int8/scale representation), trailing scale word at +0x10. */
 typedef struct {
     uint32_t *data;     /* +0x00 */
     uint32_t count;     /* +0x04 */
@@ -133,7 +140,7 @@ typedef struct {
 #define QUANTIZED_RUNTIME_TENSOR_SLOTS 12u
 #define QUANTIZED_RUNTIME_ARENA_WORDS 0x6A4u /* 1,700 words */
 #define QUANTIZED_RUNTIME_TENSOR_FLAG_BUFFERLESS 0x04u
-#define QUANTIZED_RUNTIME_TENSOR_FLAG_VIEW 0x08u
+#define QUANTIZED_RUNTIME_TENSOR_FLAG_INT8 0x08u
 #define QUANTIZED_RUNTIME_GOODIX_GRAPH_BYTES 0x160u
 #define QUANTIZED_RUNTIME_GOODIX_GRAPH_MODEL_WORDS 439u
 #define QUANTIZED_RUNTIME_GOODIX_MODEL_INSTANCE_MODEL_WORDS 3924u
@@ -159,9 +166,10 @@ typedef void (*quantized_runtime_qsort_fn)(void *base, size_t count,
                                            size_t size,
                                            quantized_runtime_compare_fn compare);
 
-/* GoMore-candidate family seams (that family is separately blocked; do not
- * reconstruct it here): the stock thirds-slice helper 0x00091E02 and the
- * stock scaled-multiply helper 0x00091CCC. */
+/* GoMore-family seams remain explicit at this shared-runtime boundary.  Their
+ * exact bodies are separately owner-authorized: 0x00091E02 is the local
+ * quantized_runtime_tensor_slice below and 0x00091CCC is the local GoMore
+ * scaled activation; integrators bind the appropriate linked adapter. */
 typedef quantized_runtime_tensor *(*quantized_runtime_slice_fn)(
     quantized_runtime_pool *pool, const quantized_runtime_tensor *input,
     uint32_t begin, uint32_t end);
@@ -187,7 +195,6 @@ typedef struct {
     uintptr_t vector_95b20;
     uintptr_t vector_36dcc;
     uintptr_t run_76bdc;
-    uintptr_t run_85b9c;
     uintptr_t vector_30534; /* stock 0x00030535 */
 } quantized_runtime_providers;
 
@@ -271,6 +278,31 @@ typedef struct {
     void *workspace;
     size_t workspace_size;
 } quantized_runtime_i8_conv1d_io;
+
+/* Transparent form of the dense-layer record installed by constructor
+ * 0x00074BE0 for the recovered executor at 0x00085B9C. */
+typedef struct {
+    uint32_t output_count; /* target +0x00 */
+    uint8_t flag;          /* target +0x04; retained, not read by stock */
+    uint8_t activation;    /* target +0x05: 0 none, 1 leaky ReLU, 2 sigmoid */
+    float alpha;           /* target +0x08: negative slope for mode 1 */
+} quantized_runtime_float_dense_descriptor;
+
+typedef struct {
+    const float *weights; /* row-major [output][input] */
+    size_t weight_count;
+    const float *biases;
+    size_t bias_count;
+} quantized_runtime_float_dense_model;
+
+typedef struct {
+    quantized_runtime_exec_tensor *input;
+    quantized_runtime_exec_tensor *output;
+    size_t input_capacity;
+    size_t output_capacity;
+    void *workspace;
+    size_t workspace_size;
+} quantized_runtime_float_dense_io;
 
 typedef uint32_t (*quantized_runtime_stage_execute_fn)(
     const void *descriptor,
@@ -372,6 +404,18 @@ uint32_t quantized_runtime_float_to_int8_quantize(
     quantized_runtime_exec_tensor *const *inputs,
     quantized_runtime_exec_tensor *const *outputs);
 
+/* 0x00036B58: mode one constructs the stock default {0,1} quantizer and a
+ * [1,rows,columns] Float32 tensor, then aliases its Int8 output onto the
+ * input buffer.  Other modes return the recovered provider error word. */
+uint32_t quantized_runtime_goodix_in_place_float_to_int8(
+    const quantized_runtime *rt, uint32_t mode, uint32_t rows,
+    uint32_t columns, float *data, size_t data_count);
+
+/* 0x00095B04: typed replacement for the stock global-shape veneer. */
+uint32_t quantized_runtime_goodix_configured_in_place_float_to_int8(
+    const quantized_runtime *rt, uint32_t mode, const uint32_t shape[2],
+    float *data, size_t data_count);
+
 /* 0x00036C7C: quantized int8-add executor.  descriptor +0x04/+0x08 hold the
  * output {min, max} floats; inputs = {data0, qparams0, data1, qparams1};
  * outputs = {data, qparams}.  Dequantizes both operands, adds, requantizes
@@ -414,6 +458,20 @@ uint32_t quantized_runtime_i8_conv1d_execute(
  * pointers in the recovered 24-byte descriptor and retains stock's assumed
  * backing-storage contract.  Host integrations should use the checked form. */
 uint32_t quantized_runtime_i8_conv1d_execute_target(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs);
+
+/* 0x00085B9C: checked float dense-layer executor.  Input elements are
+ * inputs[0].dims[1]*dims[2]; output_count rows are accumulated from the
+ * row-major model and bias, then activation 1 applies leaky ReLU and
+ * activation 2 applies the recovered expf-capped sigmoid. */
+uint32_t quantized_runtime_float_dense_execute(
+    const quantized_runtime_float_dense_descriptor *descriptor,
+    const quantized_runtime_float_dense_model *model,
+    quantized_runtime_float_dense_io *io);
+
+uint32_t quantized_runtime_float_dense_execute_target(
     const void *descriptor,
     quantized_runtime_exec_tensor *const *inputs,
     quantized_runtime_exec_tensor *const *outputs);
@@ -489,8 +547,9 @@ void quantized_runtime_descriptor_construct(
 
 /* 0x00074BE0: 24-byte descriptor record constructor.  +0x00 = dim_b word,
  * +0x04/+0x05 = flag bytes, +0x08 = context float, +0x0C = *cursor,
- * +0x10 = *cursor + dim_a*dim_b*4, +0x14 = bound run token (stock
- * 0x00085B9D); advances the cursor by dim_b*4 + dim_a*dim_b*4. */
+ * +0x10 = *cursor + dim_a*dim_b*4, +0x14 = reconstructed float-dense target
+ * adapter (stock 0x00085B9D); advances the cursor by dim_b*4 +
+ * dim_a*dim_b*4. */
 void quantized_runtime_descriptor_record_construct(
     const quantized_runtime *rt, void *destination, uint32_t dim_a,
     uint32_t dim_b, uint8_t flag_a, uint8_t flag_b, uint32_t *arena_cursor,
@@ -576,6 +635,14 @@ bool quantized_runtime_goodix_f32_three_stage_execute(
     quantized_runtime_exec_tensor *input,
     quantized_runtime_exec_tensor *output, const uint8_t shape[6],
     size_t minimum_span, void *workspace, size_t workspace_size);
+
+/* 0x0002F7DC: NADT projection veneer over the Float32 three-stage engine.
+ * The stock middle bank begins at byte offset 0x1F0 in output->data. */
+bool quantized_runtime_goodix_nadt_projection_execute(
+    const quantized_runtime_three_stage_plan *plan,
+    quantized_runtime_exec_tensor *input,
+    quantized_runtime_exec_tensor *output, const uint8_t shape[6],
+    size_t workspace_size);
 
 #define QUANTIZED_RUNTIME_GOODIX_LAYER_STAGE_COUNT 8u
 #define QUANTIZED_RUNTIME_GOODIX_LAYER_SHAPE_BYTES 14u
@@ -700,7 +767,9 @@ typedef struct {
     size_t output_capacity;
 } quantized_runtime_goodix_executor_io;
 
-/* 0x000742E4: complete generated Goodix graph executor.  The stock object
+/* 0x0003007E, 0x00038050, and 0x000417F0 are identical ABI-preserving
+ * veneers for 0x000742E4 and therefore map to this same typed body.
+ * 0x000742E4: complete generated Goodix graph executor.  The stock object
  * embedded target pointers throughout a 0x23C+ byte descriptor table; this
  * typed plan makes all eighteen stages and five nested pipelines explicit.
  * Workspace offsets, mode branches, tensor shapes, and final output length
@@ -725,8 +794,8 @@ bool quantized_runtime_recurrent_layer_descriptor_construct(
  * packed byte ABI matches quantized_runtime_descriptor_construct, but its
  * weight span is rounded up to four bytes; +0x10 skips an additional
  * byte5*4 + 8 bytes and the cursor advances past byte5*8 + 24 bytes.  +0x14
- * receives the bound executor token (stock 0x00085DC5).  byte6 == 0 retains
- * the recovered ARM udiv result of zero. */
+ * receives the reconstructed target-adapter address (stock 0x00085DC5).
+ * byte6 == 0 retains the recovered ARM udiv result of zero. */
 void quantized_runtime_aligned_descriptor_construct(
     const quantized_runtime *rt, void *destination, uint8_t byte0,
     uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4,
@@ -826,6 +895,16 @@ void quantized_runtime_tensor_release_many(quantized_runtime_pool *pool,
  * larger values would overwrite the record's own flag/trailing words). */
 quantized_runtime_tensor *quantized_runtime_tensor_construct(
     quantized_runtime_pool *pool, int32_t ndims, const uint16_t *dims);
+
+/* 0x00091E02: construct a first-dimension slice descriptor.  Dimensions
+ * 1..rank-1 are retained and dimension 0 becomes end-begin.  The data offset
+ * is begin*product(trailing dims) bytes for the signed-int8/scale form and
+ * twice that for the int16 form.  The int8 scale word and representation flag
+ * are propagated.  Stock did not validate the interval; this API fails
+ * explicitly for invalid bounds, overflow, or a missing input buffer. */
+quantized_runtime_tensor *quantized_runtime_tensor_slice(
+    quantized_runtime_pool *pool, const quantized_runtime_tensor *input,
+    uint32_t begin, uint32_t end);
 
 /* 0x00093628: arena allocator with compaction.  When
  * used_words + tensor->count >= 0x6A4 the live arena buffers are sorted by

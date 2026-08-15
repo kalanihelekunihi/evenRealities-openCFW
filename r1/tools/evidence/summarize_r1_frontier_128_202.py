@@ -368,9 +368,9 @@ GOODIX_FRONTIER_128_202_FUNCTIONS = (
     ),
     _function(
         0x00029BBC, 184, ((0x00029BBC, 0x00029C74, "375f17d6628a227612c3a54612aab85aaaede5e9bf8ae77baf163b707ce95f23"),),
-        "", "Goodix 0x10-stride per-record teardown loop",
+        "goodix_primitives_record_family_teardown", "Goodix 0x10-stride per-record teardown loop",
         ((0x0006CC68, "BL"),),
-        "goodix_gh3x2x_candidate", "vendor_source_required_not_redistributable",
+        "goodix_gh3x2x_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0002AEDC, 178, ((0x0002AEDC, 0x0002AF14, "fb9465a58546b735b89354e8f05f5293426310edabefdeb6c33d56e3d34842e8"), (0x0002AF1C, 0x0002AF32, "045abe4a5127dd33668c11dcef3084d62f2b79fcb8f12e5fbecdd28ad23542e2"),),

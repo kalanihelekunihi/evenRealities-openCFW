@@ -1,42 +1,53 @@
-# Goodix packed-channel decoder provider boundary
+# Goodix packed-channel decoder source boundary
 
 ## Decision
 
-Two formerly unclassified functions / 856 executable bytes are routed to
-`goodix_gh3x2x_candidate` with disposition `vendor_source_required_not_redistributable`. They are
-private packed-channel decoding and floating-point scaling code, not R1 product behavior, and are
-not eligible for local reconstruction.
+The complete two-function / 856-byte closure is owner-authorized transparent C. The 334-byte
+record assembler maps to `goodix_primitives_spo2_channel_records_assemble`; the formerly private
+522-byte scaling helper now maps to `goodix_primitives_spo2_channel_scale_decode`. Both carry
+`clean_room_reimplementation_owner_authorized`; no opaque firmware byte, absolute RAM table, or
+hidden math callback is linked into the reconstructed bundle.
 
 ## Exact closure
 
-| Entry | Bytes | SHA-256 | Role |
+| Entry | Bytes | SHA-256 | Disposition |
 | --- | ---: | --- | --- |
-| `0x000335B4` | 522 | `f9972cff9f72e10bd9b1bfb21ebaaa92763a058f8f857ef46bd5f1b7c61e0e3f` | private packed-channel scaling helper |
-| `0x00061DA4` | 334 | `39fff2899dacfbad91bcff003cedfdac2ce2d9f0fbdd26f7f01db54927a98bfe` | three-channel presence-mask decoder and output-record assembler |
+| `0x000335B4` | 522 | `f9972cff9f72e10bd9b1bfb21ebaaa92763a058f8f857ef46bd5f1b7c61e0e3f` | source-admitted typed channel scaling |
+| `0x00061DA4` | 334 | `39fff2899dacfbad91bcff003cedfdac2ce2d9f0fbdd26f7f01db54927a98bfe` | source-admitted decoder/assembler |
 
-The decoder's sole direct callsite is `0x0006E874`, inside the already SHA-pinned Goodix GH3X2X
-provider component. It calls the previously gated Goodix shared-version qualifier at
-`0x00066890`. Its three scaling-helper calls are exactly `0x00061E42`, `0x00061E86`, and
-`0x00061ECA`; the helper has no outside caller.
+The decoder's sole direct callsite is `0x0006E874` in the SHA-pinned GH_NADT processing root.
+Its three scaling calls are exactly `0x00061E42`, `0x00061E86`, and `0x00061ECA`; the scaling
+body has no outside caller. The `0x00066890` call leaves the stock integrity prepass enabled.
 
-The decoder walks three channel groups under a packed presence mask and assembles fixed output
-records. The helper selects private width/mode tables and applies floating-point scaling and
-coefficient formulas. Those semantics and the closed provider-internal callgraph establish the
-vendor boundary; they do not authorize copying the private lookup tables, constants, formulas,
-or inferred implementation.
+## Recovered contract
 
-## Provider rule
+The assembler scans `3 * channel_count` presence bytes, replaces integrity failures with exact
+`0x00800000`, reads the three channel-group masks MSB first, copies the sequence/header metadata,
+assembles fixed 24-byte records, advances the wrapped UInt8 record count only on group two, and
+reports expected-count mismatch.
 
-Use a lawfully obtained Goodix GH3X2X provider package with recorded version, hashes, ABI,
-license, and redistribution terms. Until then:
+The scaling callback has two stock encoding modes. Direct mode converts the selected signed Int32,
+then divides in Float32 by exact `1000.0f` and the parallel UInt16 divisor. Packed mode applies the
+recovered bit-width mask and the `max(width - 17, 0)` right shift, reads the signed Int16 divisor
+and one of three explicitly bound scale-code tables, and evaluates one of two formulas in the
+stock operation order:
 
-- do not recreate the channel decoder, scaling formulas, or coefficient tables;
-- do not infer private symbols from the descriptive boundary labels;
-- retain Arm floating-point/toolchain helpers as separately source-routed dependencies; and
-- keep live optical processing disabled.
+- mode zero uses Float32 `value * 2 * 800 * 1000`, then binary64 division by `pow(2,17)`,
+  multiplication by `pow(10,3)`, and division by the table scale and divisor;
+- modes one and two use binary64 `value * 1.8 / pow(2,17) / scale / divisor * pow(10,9)`.
 
-The summarizer is static, reads no live sensor data, and emits no private coefficients or
-algorithm implementation.
+Exact stock literals are `1000.0f`, `800.0f`, binary64 `1.8`, bases/exponents `{10,3}`, `{10,9}`,
+and `{2,17}`. The stock absolute table root `0x20007D68` and its `-0x58` / `-0x24` bank offsets
+become three bounded table spans. `pow` is an explicit typed provider. Zero table/divisor entries
+produce zero scale, unsupported encodings preserve the destination, and malformed spans are
+rejected before mutation.
+
+Focused tests pin direct decoding, unsigned direct divisors, the packed mask/shift rule, all three
+table modes, exact power-provider call order, zero and unsupported-mode fallbacks, record mask
+order, five-call destination layout, integrity replacement, metadata, capacity truncation,
+mismatch/count wrapping, sequence wrapping, and validation before mutation. The source emits no private coefficients;
+deployments supply transparent typed table values and the source-routed
+toolchain math binding.
 
 ## Reproduce
 

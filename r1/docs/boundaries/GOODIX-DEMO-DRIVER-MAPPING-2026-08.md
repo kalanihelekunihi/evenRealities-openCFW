@@ -67,9 +67,9 @@ flagged as approximate. S2 is unchanged at 47.
 | Entry | Size | Ledger name | Disposition | Evidence |
 | --- | ---: | --- | --- | --- |
 | `0x00028ad4` | 62 | `FUN_00028ad4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00028b18` | 114 | `FUN_00028b18` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00028cf4` | 200 | `FUN_00028cf4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00028dda` | 164 | `FUN_00028dda` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00028b18` | 114 | `FUN_00028b18` | S1 attribution; source-admitted | owner-authorized second-order difference-equation output with typed standard-round provider; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md |
+| `0x00028cf4` | 200 | `FUN_00028cf4` | S1 attribution; source-admitted | owner-authorized double-precision 60-sample mean, 59:1 smoothing, and periodic rate-scaled emission |
+| `0x00028dda` | 164 | `FUN_00028dda` | S1 attribution; source-admitted | owner-authorized raw Float32-to-packed-6/9 selector head and shared tail; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00028de0` | 6 | `FUN_00028de0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00028de6` | 106 | `FUN_00028de6` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00028dec` | 40 | `FUN_00028dec` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
@@ -78,21 +78,21 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x00028e70` | 54 | `FUN_00028e70` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md |
 | `0x00028eac` | 20 | `FUN_00028eac` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x00028ec0` | 10 | `FUN_00028ec0` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x0002907c` | 18 | `FUN_0002907c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0002907c` | 18 | `FUN_0002907c` | S1 attribution; source-admitted | owner-authorized seven-word NADT graph-executor veneer with explicit provider binding; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00029090` | 40 | `FUN_00029090` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x000290bc` | 32 | `FUN_000290bc` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x000290bc` | 32 | `FUN_000290bc` | S1 attribution; source-admitted | owner-authorized NADT summary builder and typed five-word downstream dispatch; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x000290dc` | 34 | `FUN_000290dc` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00029144` | 520 | `FUN_00029144` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00029394` | 96 | `FUN_00029394` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00029144` | 520 | `goodix_primitives_nadt_dual_window_features_extract` | source-admitted | owner-authorized fixed-125 dual-window autocorrelation, peak features, exact packed-5/10 quantization, and normalized correlation with caller workspace; no opaque bytes retained |
+| `0x00029394` | 96 | `FUN_00029394` | S1 attribution; source-admitted | owner-authorized row-range normalization with exact threshold; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x000294bc` | 54 | `FUN_000294bc` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md |
 | `0x000294f8` | 20 | `FUN_000294f8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md |
 | `0x0002950c` | 14 | `FUN_0002950c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md |
 | `0x0002951a` | 196 | `FUN_0002951a` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0002963a` | 28 | `FUN_0002963a` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00029656` | 22 | `FUN_00029656` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x000299ec` | 176 | `FUN_000299ec` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00029aa0` | 56 | `FUN_00029aa0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00029ad8` | 340 | `FUN_00029ad8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00029656` | 22 | `FUN_00029656` | S1 attribution; source-admitted | owner-authorized checked buffer-mean wrapper; pinned behavior remains in GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x000299ec` | 176 | `FUN_000299ec` | S1 attribution; source-admitted | owner-authorized six-float interval/state merge; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00029aa0` | 56 | `FUN_00029aa0` | S1 attribution; source-admitted | owner-authorized packed-mask column reduction; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00029ad8` | 340 | `goodix_primitives_spo2_report_state_update` | source-admitted | owner-authorized report reset/provider seam, 512-byte history shift, candidate gate, and three-phase event latch; no opaque bytes retained |
 | `0x00029bbc` | 184 | `FUN_00029bbc` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix 0x10-stride per-record teardown loop |
 | `0x00029c74` | 30 | `FUN_00029c74` | UNRESOLVED (stays gated) | frozen-closure residue: copy 0x1c (7-entry) jump table to stack and call table[*param](param); Goodix-region s |
 | `0x00029c98` | 40 | `FUN_00029c98` | UNRESOLVED (stays gated) | frozen-closure residue: Median-of-three selector; callers are gated Goodix scopes |
@@ -254,7 +254,7 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x0002e7c4` | 174 | `FUN_0002e7c4` | MATCHED → kernel/gh_demo.c:Gh3x2xGetConfigVersion | exact strings "%s : Config Version : %x", "%s : No Config Version !!!" + __FUNCTION__ ref; walks cfg arr for timestamp regs |
 | `0x0002e8c4` | 4 | `FUN_0002e8c4` | UNRESOLVED (stays gated) | frozen-closure residue: constant-4 provider stub; exclusive Goodix-candidate caller 0x6d3c0 |
 | `0x0002e8c8` | 4 | `FUN_0002e8c8` | UNRESOLVED (stays gated) | frozen-closure residue: constant-1 provider stub; exclusive Goodix-candidate caller 0x6ec28 |
-| `0x0002e8cc` | 28 | `FUN_0002e8cc` | UNRESOLVED (stays gated) | frozen-closure residue: Entry belongs to the frozen direct-call-graph component anchored by exact Goodix GH3X2 |
+| `0x0002e8cc` | 28 | `FUN_0002e8cc` | owner-authorized; source-admitted | exact ordered `WriteReg(0x502,0)` then `WriteRegBitField(0,10,10,0)` wrapper over explicit typed bindings |
 | `0x0002e8e8` | 94 | `FUN_0002e8e8` | UNRESOLVED (stays gated) | frozen-closure residue: Entry belongs to the frozen direct-call-graph component anchored by exact Goodix GH3X2 |
 | `0x0002e950` | 2 | `FUN_0002e950` | UNRESOLVED (stays gated) | frozen-closure residue: Entry belongs to the frozen direct-call-graph component anchored by exact Goodix GH3X2 |
 | `0x0002e964` | 374 | `FUN_0002e964` | MATCHED → kernel/gh_demo.c:Gh3x2xSetCurrentSlotEnReg | exact log "Current uchSlotEn= 0x%x"; ReadReg/WriteReg/WriteRegBitField + SlotEnRegSet(0x2AC40) per upstream |
@@ -273,129 +273,129 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x0002ee50` | 36 | `FUN_0002ee50` | MATCHED → module/gh_soft_adt/gh_multi_sen_pro.c:GhMultSensorWearEventManagerInit | Memset(manager,0,0x58); uchHead(+1)=0xFF=LL_INDEX_INVALID; loop 4 events stride 0x10 set uchNext(+0x18)=0xFF — exact |
 | `0x0002ef6c` | 210 | `FUN_0002ef6c` | MATCHED → module/gh_soft_adt/gh_multi_sen_pro.c:GhMultiSensorPrintAllEvt | exact strings "[MultiSensor] print events start…", "EvtPosi = %d, Evt = 0x%x, Ts = %llu.", "print events end, uchEvtNum = %d."; calls GetNextEventPointer=0x2D658 |
 | `0x0002f0f8` | 10 | `FUN_0002f0f8` | MATCHED → module/gh_soft_adt/gh_multi_sen_pro.c:GhGsMoveDetecterInit | Memset(g_stGhGsMoveDetecter,0,0xC) |
-| `0x0002f224` | 56 | `FUN_0002f224` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x0002f260` | 74 | `FUN_0002f260` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x0002f2f8` | 378 | `FUN_0002f2f8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0002f224` | 56 | `FUN_0002f224` | S1 attribution; source-admitted | owner-authorized sample variance; pinned behavior remains in GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x0002f260` | 74 | `FUN_0002f260` | S1 attribution; source-admitted | owner-authorized counted UInt32 history with oldest-value eviction; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x0002f2f8` | 378 | `FUN_0002f2f8` | S1 attribution; source-admitted | owner-authorized positive indexed-difference mean/relative-variance summarizer with terminal recovery; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x0002f624` | 52 | `FUN_0002f624` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0002f65c` | 4 | `thunk_FUN_00036bfa` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0002f660` | 354 | `FUN_0002f660` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0002f7dc` | 138 | `FUN_0002f7dc` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0002fee2` | 114 | `FUN_0002fee2` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0002ff10` | 338 | `FUN_0002ff10` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0003007e` | 16 | `dlCom graph-builder table wrapper` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00030090` | 128 | `FUN_00030090` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x0002f660` | 354 | `FUN_0002f660` | S1 attribution; source-admitted | owner-authorized dual-feature update with explicit ratio windows and bounded half-scale sample conversion; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0002f7dc` | 138 | `FUN_0002f7dc` | S1 attribution; source-admitted | owner-authorized three-stage Float32 tensor projection with fixed `0x1F0` middle bank; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0002fee2` | 114 | `FUN_0002fee2` | S1 attribution; source-admitted | owner-authorized rolling-feature/pair-average composition including the shared `0x0002f2ac` cadence tail; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0002ff10` | 338 | `goodix_primitives_spo2_spectral_peak_concentration_db` | source-admitted | owner-authorized strict spectral-peak, optional second-harmonic window, energy concentration, and typed log10 reconstruction; no opaque bytes retained |
+| `0x0003007e` | 16 | `dlCom graph-builder table wrapper` | S1 attribution; source-admitted | owner-authorized direct veneer to the reconstructed complete generated executor; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00030090` | 128 | `FUN_00030090` | S1 attribution; source-admitted | owner-authorized capped running triplet and explicit timestamp binding; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x00030114` | 96 | `FUN_00030114` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00030178` | 494 | `FUN_00030178` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00030368` | 286 | `FUN_00030368` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00030368` | 286 | `goodix_primitives_hr_weighted_feature_update` | source-admitted | owner-authorized clean-room five-history mean/center/weighted-feature pipeline with typed interpolation and four coefficient banks; no opaque bytes retained |
 | `0x000304a0` | 54 | `FUN_000304a0` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x000305d8` | 50 | `FUN_000305d8` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x00030800` | 364 | `FUN_00030800` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00030970` | 108 | `FUN_00030970` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00030b6c` | 300 | `FUN_00030b6c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00030cd8` | 312 | `FUN_00030cd8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00030e1c` | 72 | `FUN_00030e1c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00030970` | 108 | `FUN_00030970` | S1 attribution; source-admitted | owner-authorized signed-mask count with uniform-sign suppression and caller scratch; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00030b6c` | 300 | `goodix_primitives_nadt_window_filter_i32` | source-admitted | owner-authorized clean-room eleven-boundary plus uniform 23-tap reflected filter with typed matrix and caller scratch; no opaque bytes retained |
+| `0x00030cd8` | 312 | `FUN_00030cd8` | S1 attribution; source-admitted | owner-authorized type-5 interpolated Float32 quantile over caller-owned sort scratch; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00030e1c` | 72 | `FUN_00030e1c` | S1 attribution; source-admitted | owner-authorized wrapping-age/strict-gate triplet snapshot copier; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x0003113c` | 1240 | `FUN_0003113c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00031624` | 192 | `FUN_00031624` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00031774` | 82 | `FUN_00031774` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00031774` | 82 | `FUN_00031774` | S1 attribution; source-admitted | owner-authorized strict positive local-peak maximum selector; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00031914` | 48 | `FUN_00031914` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00032744` | 86 | `FUN_00032744` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix float channel-scale/copy helper (caller gated 0x766AC) |
-| `0x00032788` | 88 | `FUN_00032788` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00032744` | 86 | `FUN_00032744` | owner-authorized; source-admitted | typed channel scale/copy with explicit scale vector and factor replaces both private globals |
+| `0x00032788` | 88 | `goodix_primitives_nadt_default_initialize` | source-admitted | owner-authorized clean-room default initializer wrapper; no opaque bytes retained |
 | `0x00032808` | 2814 | `FUN_00032808` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x000335b4` | 522 | `FUN_000335b4` | UNRESOLVED (stays gated) | frozen-closure residue: private packed-channel floating-point scaling helper |
+| `0x000335b4` | 522 | `goodix_primitives_spo2_channel_scale_decode` | source-admitted | owner-authorized direct/packed width decoding with three explicit scale-table spans and typed `pow`; no opaque bytes retained |
 | `0x00033800` | 38 | `FUN_00033800` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00034194` | 630 | `FUN_00034194` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00034194` | 630 | `goodix_primitives_nadt_generated_subgraph_execute` | source-admitted | owner-authorized fixed 19-operator NADT quantized/Float32 subgraph with explicit range words, scalar descriptor, callbacks, and 0x7C0-byte workspace; no opaque bytes retained |
 | `0x0003441c` | 116 | `FUN_0003441c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00034490` | 106 | `FUN_00034490` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00034500` | 1102 | `FUN_00034500` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00034490` | 106 | `FUN_00034490` | S1 attribution; source-admitted | owner-authorized grouped row-wise weighted-sum kernel; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00034500` | 1102 | `FUN_00034500` | S1 attribution; source-admitted | owner-authorized exact 36-byte SpO2 report analyzer with bounded spectra/history; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0003497c` | 180 | `FUN_0003497c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00034a3c` | 28 | `FUN_00034a3c` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00034a58` | 14 | `FUN_00034a58` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00034a58` | 14 | `FUN_00034a58` | S1 attribution; source-admitted | owner-authorized sample-standard-deviation tail; pinned behavior remains in GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x00034a66` | 22 | `FUN_00034a66` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x00034aa0` | 98 | `FUN_00034aa0` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00034b08` | 76 | `FUN_00034b08` | UNRESOLVED (stays gated) | frozen-closure residue: vtable-driven sensor register command/status poll (cmds 0xA6/0xAE, 0x140-tick timeout) |
-| `0x00034b54` | 348 | `FUN_00034b54` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00034cbc` | 956 | `FUN_00034cbc` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00035084` | 84 | `FUN_00035084` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00035772` | 48 | `FUN_00035772` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00034b08` | 76 | `FUN_00034b08` | source-admitted | owner-authorized typed command/status poll (commands 0xA6/0xAE, bit 0x2000 selection, 0x140-tick timeout) |
+| `0x00034b54` | 348 | `goodix_primitives_spo2_packed_channel_standard_deviations` | source-admitted | owner-authorized four-channel packed-6/9 population-deviation adapter with stride-three selection and caller-owned 60-float scratch; no opaque bytes retained |
+| `0x00034cbc` | 956 | `goodix_primitives_hr_extrema_tracker_update` | source-admitted | owner-authorized full-buffer trough/peak state machine with explicit curves and caller-owned 41-point spline workspace; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00035084` | 84 | `FUN_00035084` | S1 attribution; source-admitted | owner-authorized Float32 round-to-nearest with exact halves away from zero; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00035772` | 48 | `FUN_00035772` | S1 attribution; source-admitted | owner-authorized caller-scratch copy/typed-transform/prefix-copy adapter; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x000357a2` | 44 | `FUN_000357a2` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x000357ce` | 68 | `FUN_000357ce` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00035812` | 62 | `FUN_00035812` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x000357ce` | 68 | `FUN_000357ce` | S1 attribution; source-admitted | owner-authorized channel/geometry wrapper with exact 125-sample and modulo-25 readiness status; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00035812` | 62 | `FUN_00035812` | S1 attribution; source-admitted | owner-authorized stable float insertion sort; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00035850` | 1162 | `FUN_00035850` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00035d6e` | 196 | `FUN_00035d6e` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00035f44` | 44 | `FUN_00035f44` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00035f44` | 44 | `FUN_00035f44` | S1 attribution; source-admitted | owner-authorized signed decimal truncation; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00035f70` | 192 | `FUN_00035f70` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00036034` | 394 | `FUN_00036034` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x000361d8` | 88 | `FUN_000361d8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00036034` | 394 | `goodix_primitives_nadt_sample_prepare` | source-admitted | owner-authorized three-lane direct/calibrated NADT preparation with explicit prior-configuration state and visible seven-level scale table |
+| `0x000361d8` | 88 | `FUN_000361d8` | S1 attribution; source-admitted | owner-authorized capped squared deviation around rounded signed-32 mean; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00036230` | 12 | `FUN_00036230` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x0003623c` | 70 | `FUN_0003623c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00036282` | 52 | `FUN_00036282` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0003623c` | 70 | `FUN_0003623c` | S1 attribution; source-admitted | owner-authorized indexed signed-16 trimmed mean with target-width wrapping; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00036282` | 52 | `FUN_00036282` | S1 attribution; source-admitted | owner-authorized one-record veneer to the admitted transition updater; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x000362b6` | 62 | `FUN_000362b6` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00036394` | 110 | `FUN_00036394` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00036394` | 110 | `FUN_00036394` | S1 attribution; source-admitted | owner-authorized target-width Int16 sample standard deviation; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00036408` | 364 | `FUN_00036408` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00036590` | 364 | `FUN_00036590` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00036718` | 26 | `FUN_00036718` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00036734` | 140 | `FUN_00036734` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x000367c4` | 230 | `FUN_000367c4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x000368d0` | 160 | `FUN_000368d0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00036974` | 460 | `FUN_00036974` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00036b58` | 116 | `FUN_00036b58` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x000367c4` | 230 | `goodix_primitives_spo2_dispatch_logistic_score` | source-admitted | owner-authorized clean-room transient-history dispatch and capped logistic score transform with explicit providers; no opaque bytes retained |
+| `0x000368d0` | 160 | `FUN_000368d0` | S1 attribution; source-admitted | owner-authorized caller-scratch quartile-band median replacement; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00036974` | 460 | `FUN_00036974` | S1 attribution; source-admitted | owner-authorized completed-record builder and sixteen-word live serializer; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00036b58` | 116 | `FUN_00036b58` | S1 attribution; source-admitted | owner-authorized default-range in-place Float32-to-Int8 quantizer wrapper; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00036bd4` | 38 | `FUN_00036bd4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00036bfa` | 44 | `FUN_00036bfa` | UNRESOLVED (stays gated) | frozen-closure residue: context-buffer zeroing (three buffers at 0x1C0/0x1DC/0x1F4, lengths <<2) on mode==1; c |
 | `0x00036c26` | 262 | `FUN_00036c26` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00036c32` | 46 | `FUN_00036c32` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00036c60` | 26 | `FUN_00036c60` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00036dd4` | 216 | `FUN_00036dd4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00036eb4` | 72 | `FUN_00036eb4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00036efc` | 118 | `FUN_00036efc` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00036f88` | 744 | `FUN_00036f88` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00036dd4` | 216 | `FUN_00036dd4` | S1 attribution; source-admitted | owner-authorized five-stage rolling feature with both bit-exact 25-tap kernels visible in C; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00036eb4` | 72 | `FUN_00036eb4` | S1 attribution; source-admitted | owner-authorized two-word bit-reversal permutation; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00036efc` | 118 | `FUN_00036efc` | S1 attribution; source-admitted | owner-authorized strided descending top-selection helper; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00036f88` | 744 | `goodix_primitives_nadt_output_state_select` | source-admitted | owner-authorized exact five-state one-lane rate/output selector with typed thresholds, flags, history, and state |
 | `0x0003727c` | 100 | `FUN_0003727c` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x000372b0` | 214 | `FUN_000372b0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0003738c` | 22 | `FUN_0003738c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x000373a4` | 216 | `FUN_000373a4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x000372b0` | 214 | `goodix_primitives_spo2_decimal_residual` | source-admitted | owner-authorized clean-room scaled decimal-residual extraction with explicit log10f binding; no opaque bytes retained |
+| `0x0003738c` | 22 | `FUN_0003738c` | S1 attribution; source-admitted | owner-authorized conditional float-buffer standard-deviation wrapper; pinned behavior remains in GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x000373a4` | 216 | `goodix_primitives_nadt_optical_sample_transform` | source-admitted | owner-authorized clean-room two-stage optical transform with typed coefficient/history banks and explicit round binding; no opaque bytes retained |
 | `0x0003754a` | 2 | `thunk_FUN_00037574` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00037574` | 48 | `FUN_00037574` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0003757c` | 12 | `FUN_0003757c` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00037588` | 372 | `FUN_00037588` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00037588` | 372 | `goodix_primitives_hr_interpolate_periodic_sample` | source-admitted | owner-authorized 25-phase HR resampler with caller-owned previous-sample and phase state; no opaque bytes or absolute RAM banks retained |
 | `0x00037710` | 16 | `FUN_00037710` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x00037720` | 24 | `FUN_00037720` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x0003773c` | 150 | `FUN_0003773c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x000377d8` | 178 | `FUN_000377d8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00037890` | 500 | `FUN_00037890` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00037a84` | 220 | `FUN_00037a84` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0003773c` | 150 | `FUN_0003773c` | S1 attribution; source-admitted | owner-authorized evenly spaced cardinal-spline sampler; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x000377d8` | 178 | `FUN_000377d8` | S1 attribution; source-admitted | owner-authorized positive cosine-similarity helper; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00037890` | 500 | `goodix_primitives_nadt_generated_graph_execute` | source-admitted | owner-authorized explicit seven-stage tensor topology with typed `0x34194` subgraph and node bindings; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md |
+| `0x00037a84` | 220 | `goodix_primitives_nadt_peak_dispersion_quality` | source-admitted | owner-authorized clean-room phase dispersion and bounded quality estimator; no opaque bytes retained |
 | `0x00037b68` | 24 | `FUN_00037b68` | UNRESOLVED (stays gated) | frozen-closure residue: int -> int8 clamp with -0x80 centering (unsigned-to-signed sample conversion); callerl |
-| `0x00037b80` | 554 | `FUN_00037b80` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00037db4` | 56 | `FUN_00037db4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00037dec` | 158 | `FUN_00037dec` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00037b80` | 554 | `goodix_primitives_nadt_auxiliary_state_classify` | source-admitted | owner-authorized 50-sample NADT range/deviation/extrema classifier with explicit state, thresholds, diagnostics, and caller workspace; no opaque bytes retained |
+| `0x00037db4` | 56 | `FUN_00037db4` | S1 attribution; source-admitted | owner-authorized warm-up sample average finalizer; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00037dec` | 158 | `FUN_00037dec` | S1 attribution; source-admitted | owner-authorized baseline-qualified event-pair/history rebalancer; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x00037e8a` | 44 | `FUN_00037e8a` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00037f54` | 206 | `FUN_00037f54` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00037f54` | 206 | `goodix_primitives_spo2_expand_packed_banks` | source-admitted | owner-authorized clean-room seven-bank packed-6/9 expansion with explicit source bindings; no opaque bytes retained |
 | `0x00038030` | 28 | `FUN_00038030` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00038050` | 16 | `dlCom graph-builder table wrapper` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00038050` | 16 | `dlCom graph-builder table wrapper` | S1 attribution; source-admitted | owner-authorized direct veneer to the reconstructed complete generated executor; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0003ddf4` | 40 | `FUN_0003ddf4` | UNRESOLVED (stays gated) | frozen-closure residue: Copies a seven-entry function table from flash and dispatches by index; three callsite |
-| `0x0003de20` | 234 | `FUN_0003de20` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x0003de20` | 234 | `goodix_primitives_hr_mad_inlier_mask` | source-admitted | owner-authorized clean-room MAD inlier mask with caller scratch; no opaque bytes retained |
 | `0x0003df18` | 104 | `FUN_0003df18` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix per-channel state zero-init helper (0x19/0x7D counts via 0x6635C) |
 | `0x0003e6b0` | 68 | `FUN_0003e6b0` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x0003e6c8` | 216 | `FUN_0003e6c8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0003e6c8` | 216 | `goodix_primitives_nadt_gaussian_interval_probability` | source-admitted | owner-authorized clean-room Gaussian interval integrator with explicit math providers; no opaque bytes retained |
 | `0x0003efd8` | 54 | `FUN_0003efd8` | UNRESOLVED (stays gated) | frozen-closure residue: Scaled logistic 100/(1+exp(-k*(x-t))) scorer; three callsites inside gated Goodix 0x00 |
-| `0x0003f740` | 168 | `FUN_0003f740` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x0003f740` | 168 | `FUN_0003f740` | S1 attribution; source-admitted | owner-authorized gated packed-6/9 triplicate workspace expansion; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0003f7f8` | 164 | `FUN_0003f7f8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0003f89c` | 316 | `FUN_0003f89c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x000417f0` | 16 | `dlCom graph-builder table wrapper` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x000419c8` | 120 | `FUN_000419c8` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix threshold-crossing peak accumulator over int32 sample arrays |
-| `0x00041f4c` | 210 | `FUN_00041f4c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x0003f89c` | 316 | `FUN_0003f89c` | S1 attribution; source-admitted | owner-authorized bounded Int16 mean/deviation/threshold/outlier summarizer; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x000417f0` | 16 | `dlCom graph-builder table wrapper` | S1 attribution; source-admitted | owner-authorized direct veneer to the reconstructed complete generated executor; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x000419c8` | 120 | `FUN_000419c8` | source-admitted | owner-authorized threshold-crossing peak accumulator over signed-32 sample arrays and the admitted word-window state |
+| `0x00041f4c` | 210 | `goodix_primitives_spo2_rolling_percentile_select` | source-admitted | owner-authorized clean-room rolling percentile selector with explicit sorted-window state; no opaque bytes retained |
 | `0x00042024` | 228 | `FUN_00042024` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00042bd0` | 316 | `FUN_00042bd0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00042bd0` | 316 | `goodix_primitives_nadt_periodic_peak_rate` | source-admitted | owner-authorized clean-room peak selection, interval-stability gate, rounded 1500-unit rate, and 40..200 clamp with caller scratch; no opaque bytes retained |
 | `0x00042d1c` | 6 | `FUN_00042d1c` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x0004304c` | 50 | `FUN_0004304c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00043860` | 28 | `FUN_00043860` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00043860` | 28 | `FUN_00043860` | S1 attribution; source-admitted | owner-authorized signed-16 descriptor mean adapter; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x0004387c` | 686 | `FUN_0004387c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00043b30` | 62 | `FUN_00043b30` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00044a78` | 348 | `FUN_00044a78` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00044a78` | 348 | `FUN_00044a78` | S1 attribution; source-admitted | owner-authorized saturating quality counters and tail-spread flag update; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00047240` | 3240 | `FUN_00047240` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00047fa8` | 112 | `FUN_00047fa8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00048018` | 392 | `FUN_00048018` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x000481a4` | 144 | `FUN_000481a4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0004fdb8` | 64 | `FUN_0004fdb8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x0005144c` | 66 | `FUN_0005144c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00048018` | 392 | `FUN_00048018` | S1 attribution; source-admitted | owner-authorized four-point cardinal-spline evaluator; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x000481a4` | 144 | `FUN_000481a4` | S1 attribution; source-admitted | owner-authorized primary/secondary event-pair aligner with wrapping mode offset; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0004fdb8` | 64 | `FUN_0004fdb8` | S1 attribution; source-admitted | owner-authorized fixed-32-byte record history with oldest-record eviction; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x0005144c` | 66 | `FUN_0005144c` | S1 attribution; source-admitted | owner-authorized signed-32 vector mean with 64-bit accumulation; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x000567c4` | 94 | `FUN_000567c4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x00056828` | 20 | `FUN_00056828` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x0005683c` | 36 | `FUN_0005683c` | UNRESOLVED (stays gated) | frozen-closure residue: Six-field provider descriptor init plus paired buffer zeroing; callers are gated Goodi |
@@ -403,20 +403,20 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x00056874` | 56 | `FUN_00056874` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x0005a5ec` | 54 | `FUN_0005a5ec` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md |
 | `0x0005cd90` | 102 | `FUN_0005cd90` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix 0x104-stride session-buffer init driver |
-| `0x0005cdf8` | 150 | `FUN_0005cdf8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0005cea8` | 40 | `FUN_0005cea8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0005ced4` | 158 | `FUN_0005ced4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0005cdf8` | 150 | `FUN_0005cdf8` | S1 attribution; source-admitted | owner-authorized elapsed-gated typed dispatch and exact Float32 output scaler; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x0005cea8` | 40 | `FUN_0005cea8` | S1 attribution; source-admitted | owner-authorized input-word copy and typed five-binding dispatch wrapper; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x0005ced4` | 158 | `FUN_0005ced4` | S1 attribution; source-admitted | owner-authorized signed min/max and Float32 running mean/squared-deviation update; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md |
 | `0x0005d01c` | 400 | `FUN_0005d01c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0005d5d0` | 16 | `FUN_0005d5d0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x000617f8` | 1100 | `FUN_000617f8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00061c48` | 318 | `FUN_00061c48` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00061da4` | 334 | `FUN_00061da4` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix packed three-channel decoder and record assembler |
+| `0x00061c48` | 318 | `FUN_00061c48` | S1 attribution; source-admitted | owner-authorized vector magnitude/delta and cadence-averaged degree-angle state update; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00061da4` | 334 | `goodix_primitives_spo2_channel_records_assemble` | source-admitted | owner-authorized packed three-group record assembler with integrity prepass, MSB-first masks, bounded typed scaling provider, and no opaque bytes retained |
 | `0x00061ef2` | 16 | `FUN_00061ef2` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00061f04` | 138 | `FUN_00061f04` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00061f04` | 138 | `FUN_00061f04` | S1 attribution; source-admitted | owner-authorized strided incremental sample standard deviation; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00061f94` | 30 | `FUN_00061f94` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00061fb4` | 28 | `FUN_00061fb4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00061fd4` | 22 | `FUN_00061fd4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00061fea` | 22 | `FUN_00061fea` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00061fd4` | 22 | `FUN_00061fd4` | S1 attribution; source-admitted | owner-authorized zero-safe sample-standard-deviation wrapper; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md |
+| `0x00061fea` | 22 | `FUN_00061fea` | S1 attribution; source-admitted | owner-authorized zero-safe population-standard-deviation wrapper; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00066276` | 20 | `FUN_00066276` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x0006628a` | 20 | `FUN_0006628a` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x0006629e` | 20 | `FUN_0006629e` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
@@ -429,30 +429,30 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x0006633a` | 34 | `FUN_0006633a` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x0006635c` | 50 | `FUN_0006635c` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x00066394` | 28 | `FUN_00066394` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x000663b4` | 120 | `FUN_000663b4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00066430` | 34 | `FUN_00066430` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x000663b4` | 120 | `FUN_000663b4` | S1 attribution; source-admitted | owner-authorized UInt8 population-standard-deviation helper; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00066430` | 34 | `FUN_00066430` | S1 attribution; source-admitted | owner-authorized float-buffer incremental-deviation wrapper; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00066458` | 52 | `FUN_00066458` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00066470` | 68 | `FUN_00066470` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00066470` | 68 | `FUN_00066470` | S1 attribution; source-admitted | owner-authorized populated float-window mean; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00066490` | 4 | `FUN_00066490` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00066494` | 92 | `FUN_00066494` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00066494` | 92 | `FUN_00066494` | S1 attribution; source-admitted | owner-authorized indexed float-window removal and sum/cursor maintenance; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x000664f4` | 54 | `FUN_000664f4` | UNRESOLVED (stays gated) | frozen-closure residue: Bounded word-window push with oldest-entry eviction; reached from gated Goodix 0x00034 |
-| `0x0006652a` | 54 | `FUN_0006652a` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00066560` | 64 | `FUN_00066560` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x000665a0` | 104 | `FUN_000665a0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00066608` | 154 | `FUN_00066608` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x0006652a` | 54 | `FUN_0006652a` | S1 attribution; source-admitted | owner-authorized signed-16 rolling-window push; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00066560` | 64 | `FUN_00066560` | S1 attribution; source-admitted | owner-authorized byte rolling-window push and cursor wrap; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x000665a0` | 104 | `FUN_000665a0` | S1 attribution; source-admitted | owner-authorized decimated signed-16 rolling window; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00066608` | 154 | `FUN_00066608` | S1 attribution; source-admitted | owner-authorized decimated float rolling window with running sum; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x000666a4` | 110 | `FUN_000666a4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0006671c` | 266 | `FUN_0006671c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x0006671c` | 266 | `goodix_primitives_spo2_biquad_cascade_process` | source-admitted | owner-authorized clean-room scattered biquad cascade with typed state/coefficient bindings; no opaque bytes retained |
 | `0x000667c0` | 6 | `FUN_000667c0` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x000667c6` | 52 | `FUN_000667c6` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x000667e4` | 48 | `FUN_000667e4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00066840` | 46 | `FUN_00066840` | UNRESOLVED (stays gated) | frozen-closure residue: DSP version builder |
 | `0x00066890` | 14 | `FUN_00066890` | UNRESOLVED (stays gated) | frozen-closure residue: shared version qualifier |
-| `0x000668a4` | 50 | `FUN_000668a4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x000668a4` | 50 | `FUN_000668a4` | S1 attribution; source-admitted | owner-authorized reciprocal-maximum vector normalization; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x000668dc` | 36 | `FUN_000668dc` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00066900` | 434 | `FUN_00066900` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00066ab2` | 124 | `FUN_00066ab2` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00066b30` | 222 | `FUN_00066b30` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00066c18` | 48 | `FUN_00066c18` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00066ab2` | 124 | `FUN_00066ab2` | S1 attribution; source-admitted | owner-authorized one-based packed-mask row selector with first-maximum ties; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00066b30` | 222 | `goodix_primitives_nadt_symmetric_fir_i32` | source-admitted | owner-authorized clean-room reflected-boundary FIR with caller scratch; no opaque bytes retained |
+| `0x00066c18` | 48 | `FUN_00066c18` | S1 attribution; source-admitted | owner-authorized bounded percentile lookup; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0006a018` | 4 | `FUN_0006a018` | UNRESOLVED (stays gated) | frozen-closure residue: return library pointer 0x000ad1ac; exclusive Goodix-candidate caller 0x2f624 |
 | `0x0006a020` | 8 | `FUN_0006a020` | UNRESOLVED (stays gated) | frozen-closure residue: GH3X2X driver version builder |
 | `0x0006a130` | 4 | `FUN_0006a130` | UNRESOLVED (stays gated) | frozen-closure residue: return library pointer 0x0009d640; exclusive Goodix-candidate caller 0x6d204 |
@@ -465,13 +465,13 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x0006c6a8` | 1370 | `FUN_0006c6a8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0006cc2c` | 4 | `FUN_0006cc2c` | UNRESOLVED (stays gated) | frozen-closure residue: return library pointer 0x000ad13c; exclusive Goodix-candidate caller 0x6d3c0 |
 | `0x0006cc34` | 30 | `FUN_0006cc34` | UNRESOLVED (stays gated) | frozen-closure residue: bounded copy of version string 'pv_v1_1_0' (max 0xa); exclusive Goodix-candidate calle |
-| `0x0006cc60` | 88 | `FUN_0006cc60` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x0006ccc0` | 984 | `FUN_0006ccc0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0006d204` | 406 | `FUN_0006d204` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x0006cc60` | 88 | `FUN_0006cc60` | S2 attribution; source-admitted | owner-authorized record-family and processing-context teardown over the local allocator/release seams; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
+| `0x0006ccc0` | 984 | `FUN_0006ccc0` | S1 attribution; source-admitted | owner-authorized exact GH_SPO2/dlCom typed input diagnostic emitter with bounded sinks; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x0006d204` | 406 | `goodix_primitives_hr_primary_context_create` | source-admitted | owner-authorized typed constructor validates the exact config/ABI, replaces global owners and ROM constructor dispatch with explicit bindings, and unwinds all allocations |
 | `0x0006d3c0` | 96 | `FUN_0006d3c0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x0006d424` | 180 | `FUN_0006d424` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x0006d424` | 180 | `FUN_0006d424` | S1 attribution; source-admitted | owner-authorized exact GH_HR composite identity builder; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
 | `0x0006d51c` | 1382 | `FUN_0006d51c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x0006da9c` | 4 | `FUN_0006da9c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HRV-PROVIDER-BOUNDARY.md |
+| `0x0006da9c` | 4 | `FUN_0006da9c` | S1 attribution; source-admitted | owner-authorized explicit HRV configuration binding replaces the fixed private RAM address; pinned by GOODIX-HRV-PROVIDER-BOUNDARY.md |
 | `0x0006daa4` | 30 | `FUN_0006daa4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HRV-PROVIDER-BOUNDARY.md |
 | `0x0006dad0` | 126 | `FUN_0006dad0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HRV-PROVIDER-BOUNDARY.md |
 | `0x0006db58` | 4 | `thunk_FUN_0006dad0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HRV-PROVIDER-BOUNDARY.md |
@@ -483,30 +483,30 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x0006dfd6` | 124 | `FUN_0006dfd6` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x0006e004` | 4 | `thunk_FUN_0002d54c` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x0006e008` | 1294 | `FUN_0006e008` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0006e540` | 4 | `FUN_0006e540` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0006e540` | 4 | `FUN_0006e540` | S1 attribution; source-admitted | owner-authorized explicit NADT result binding replaces the fixed private RAM address; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md |
 | `0x0006e548` | 30 | `FUN_0006e548` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0006e574` | 210 | `FUN_0006e574` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0006e664` | 712 | `FUN_0006e664` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0006e788` | 126 | `FUN_0006e788` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0006e838` | 682 | `FUN_0006e838` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0006e574` | 210 | `goodix_primitives_nadt_context_reset` | source-admitted | owner-authorized clean-room selective state/workspace reset with explicit release seam; no opaque bytes retained |
+| `0x0006e664` | 712 | `goodix_primitives_nadt_context_initialize` | source-admitted | owner-authorized clean-room scattered initializer with typed workspace and allocator seam; no opaque bytes retained |
+| `0x0006e788` | 126 | `FUN_0006e788` | S1 attribution; source-admitted | owner-authorized exact GH_NADT preprocessing/DSP identity builder; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0006e838` | 682 | `goodix_primitives_nadt_preprocess_execute` | source-admitted | owner-authorized exact GH_NADT preprocessing stage orchestrator with caller-owned replacements for five transient allocations; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md |
 | `0x0006eaf8` | 4 | `FUN_0006eaf8` | UNRESOLVED (stays gated) | frozen-closure residue: return library pointer 0x000ad160; exclusive Goodix-candidate caller 0x6ec28 |
 | `0x0006eb00` | 30 | `FUN_0006eb00` | UNRESOLVED (stays gated) | frozen-closure residue: bounded copy of version string 'pre_pv_v1_1_0' (max 0xe); exclusive Goodix-candidate c |
 | `0x0006eb30` | 94 | `FUN_0006eb30` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x0006eb94` | 128 | `FUN_0006eb94` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0006ec28` | 100 | `FUN_0006ec28` | UNRESOLVED (stays gated) | frozen-closure residue: SpO2 output wrapper |
 | `0x0006ec90` | 182 | `FUN_0006ec90` | UNRESOLVED (stays gated) | frozen-closure residue: SpO2 version builder |
-| `0x0006f838` | 190 | `FUN_0006f838` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0006f838` | 190 | `FUN_0006f838` | S1 attribution; source-admitted | owner-authorized three-stage UInt8 tensor workspace pipeline; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x0006f920` | 64 | `FUN_0006f920` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix 6-byte record iteration with callback and >100-count trap |
 | `0x0006f964` | 60 | `FUN_0006f964` | UNRESOLVED (stays gated) | frozen-closure residue: hal_gsensor_start_cache diagnostic and cached-buffer arm; sole caller is the gated Goo |
 | `0x0006f9d4` | 12 | `FUN_0006f9d4` | UNRESOLVED (stays gated) | frozen-closure residue: indirect-call trampoline through RAM hook 0x2002fd28+4; exclusive Goodix-candidate cal |
 | `0x0006fde0` | 54 | `FUN_0006fde0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x000708f8` | 498 | `FUN_000708f8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00070b60` | 178 | `FUN_00070b60` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00072c48` | 372 | `FUN_00072c48` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00072dcc` | 490 | `FUN_00072dcc` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00072fb8` | 222 | `FUN_00072fb8` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix sign-mask contiguous-run output fill |
-| `0x0007309c` | 130 | `FUN_0007309c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0007311e` | 54 | `FUN_0007311e` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x000708f8` | 498 | `goodix_primitives_spo2_normalized_spectra_prepare` | source-admitted | owner-authorized fixed four-input plus packed-average normalized spectrum preparation with caller workspace; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00070b60` | 178 | `FUN_00070b60` | S1 attribution; source-admitted | owner-authorized clamped-deviation mean-outlier counter; pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
+| `0x00072c48` | 372 | `goodix_primitives_hr_secondary_context_initialize` | source-admitted | owner-authorized typed constructor for nine pair buffers, nine Int16 buffers, and seven Float32 histories with explicit coefficient binding and failure cleanup |
+| `0x00072dcc` | 490 | `FUN_00072dcc` | S1 attribution; source-admitted | owner-authorized period batch reset/accumulation and channel/vector average finalizer; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00072fb8` | 222 | `FUN_00072fb8` | source-admitted | owner-authorized masked contiguous sign-run zeroing with explicit source/output extents |
+| `0x0007309c` | 130 | `FUN_0007309c` | S1 attribution; source-admitted | owner-authorized quartile-spread signed outlier mask over bounded caller scratch; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0007311e` | 54 | `FUN_0007311e` | S1 attribution; source-admitted | owner-authorized complete mask-count and difference-summary composition; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00073154` | 22 | `FUN_00073154` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x000739a8` | 1120 | `FUN_000739a8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x0007400c` | 80 | `FUN_0007400c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
@@ -521,26 +521,26 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x00074c90` | 4 | `FUN_00074c90` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00074cb4` | 34 | `FUN_00074cb4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x000759f4` | 20 | `FUN_000759f4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00075e1c` | 318 | `FUN_00075e1c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x000765e4` | 192 | `FUN_000765e4` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix half-to-float sample conversion, window scaling, and heap handoff |
-| `0x000766ac` | 478 | `FUN_000766ac` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x000768b8` | 396 | `FUN_000768b8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x00075e1c` | 318 | `FUN_00075e1c` | S1 attribution; source-admitted | owner-authorized real-input FFT magnitude reduction with explicit square-root binding and source-visible cosine table |
+| `0x000765e4` | 192 | `FUN_000765e4` | source-admitted | owner-authorized Float32/packed-5/10 conversion, double-precision normalization, and bounded caller-buffer handoff |
+| `0x000766ac` | 478 | `goodix_primitives_nadt_spectral_peak_prepare` | source-admitted | owner-authorized fixed-125 quartile-mask/scale/FFT/peak pipeline with caller workspace and explicit 0x35850 harmonic-selector binding |
+| `0x000768b8` | 396 | `FUN_000768b8` | S1 attribution; source-admitted | owner-authorized 128-point complex radix-2 DIF core using the recovered mathematical quarter-wave cosine table |
 | `0x00076a44` | 34 | `FUN_00076a44` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00076a68` | 252 | `FUN_00076a68` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00076a68` | 252 | `FUN_00076a68` | S1 attribution; source-admitted | owner-authorized exact sixteen-word scaled record serializer; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00076b78` | 100 | `FUN_00076b78` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00077d2c` | 250 | `FUN_00077d2c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00077d2c` | 250 | `FUN_00077d2c` | S1 attribution; source-admitted | owner-authorized caller-scratch event alignment, dual 125-sample summaries, means, and cosine percentage; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x0007cba0` | 38 | `FUN_0007cba0` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x0007dcd8` | 60 | `FUN_0007dcd8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x0007dd18` | 58 | `FUN_0007dd18` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0007dd58` | 874 | `FUN_0007dd58` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0007dcd8` | 60 | `FUN_0007dcd8` | S1 attribution; source-admitted | owner-authorized zero-safe sample variance; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md |
+| `0x0007dd18` | 58 | `FUN_0007dd18` | S1 attribution; source-admitted | owner-authorized zero-safe population variance; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x0007dd58` | 874 | `goodix_primitives_nadt_alternate_state_classify` | source-admitted | owner-authorized fixed-200 alternate-state classifier with explicit persistent state and caller-owned scratch; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md |
 | `0x000856ec` | 1154 | `FUN_000856ec` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00085ca4` | 22 | `FUN_00085ca4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x00086bac` | 394 | `FUN_00086bac` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00087618` | 176 | `FUN_00087618` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00086bac` | 394 | `goodix_primitives_hr_candidate_window_select` | source-admitted | owner-authorized newest-first four-candidate HR position-band selector with typed records, clamps, tags, fallback, and compaction |
+| `0x00087618` | 176 | `FUN_00087618` | S1 attribution; source-admitted | owner-authorized alternating-extrema index collector; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x000876c8` | 932 | `FUN_000876c8` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x00087a78` | 26 | `FUN_00087a78` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md |
-| `0x00088e80` | 518 | `FUN_00088e80` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00091870` | 32 | `FUN_00091870` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00088e80` | 518 | `goodix_primitives_nadt_channel_quality_update` | source-admitted | owner-authorized one-record flag and exact 0.4/0.4/0.2 logistic quality-score update; pinned by GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md |
+| `0x00091870` | 32 | `FUN_00091870` | S1 attribution; source-admitted | owner-authorized primary statistics plus secondary Int16 mean summary builder; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00091890` | 78 | `FUN_00091890` | UNRESOLVED (stays gated) | frozen-closure residue: Goodix 0x104-stride session-buffer teardown/zero driver |
 | `0x000928ca` | 2 | `thunk_FUN_000928da` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 | `0x000928e0` | 26 | `FUN_000928e0` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
@@ -554,15 +554,15 @@ flagged as approximate. S2 is unchanged at 47.
 | `0x00093e14` | 38 | `FUN_00093e14` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x00093e3a` | 36 | `FUN_00093e3a` | UNRESOLVED (stays gated) | frozen-closure residue: Paired pool-free loop over 0x18-stride records; part of the 0x0006EB30 free chain |
 | `0x00093e5e` | 68 | `FUN_00093e5e` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00095750` | 198 | `FUN_00095750` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00095828` | 674 | `FUN_00095828` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00095b04` | 22 | `FUN_00095b04` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x000968c4` | 290 | `FUN_000968c4` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00095750` | 198 | `FUN_00095750` | S1 attribution; source-admitted | owner-authorized exact Float32 maximum-absolute cap, tiny-signal zeroing, clamp, and normalization |
+| `0x00095828` | 674 | `goodix_primitives_nadt_signal_confidence_update` | source-admitted | owner-authorized exact dual-rate selection, 124-interval deviation classifier, rolling-rate acceptance state, and Gaussian confidence update with caller workspace |
+| `0x00095b04` | 22 | `FUN_00095b04` | S1 attribution; source-admitted | owner-authorized configured-shape veneer for the in-place quantizer; pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
+| `0x000968c4` | 290 | `goodix_primitives_nadt_inference_bridge` | source-admitted | owner-authorized clean-room tail-window preparation, normalization, generated-graph dispatch, and raw-branch scalar clamp with caller scratch; no opaque bytes retained |
 | `0x00096a20` | 32 | `FUN_00096a20` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
-| `0x0009775c` | 58 | `FUN_0009775c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
-| `0x00097984` | 86 | `FUN_00097984` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x0009775c` | 58 | `FUN_0009775c` | S1 attribution; source-admitted | owner-authorized reverse-clamped weighted sum; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00097984` | 86 | `FUN_00097984` | S1 attribution; source-admitted | owner-authorized alternating-extrema bounded-history update; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x000982c2` | 246 | `FUN_000982c2` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
-| `0x00098e4c` | 126 | `FUN_00098e4c` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
+| `0x00098e4c` | 126 | `FUN_00098e4c` | S1 attribution; source-admitted | owner-authorized strict signed-16 local-extrema index extraction; pinned by GOODIX-NADT-PROVIDER-BOUNDARY.md (+NADT accumulation/peak-mask/quality docs) |
 | `0x00098ffc` | 20 | `FUN_00098ffc` | S2 (blocked) | goodix_mem/GdMem allocator or heap-dependent glue; pinned by SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md |
 | `0x00099010` | 4 | `thunk_FUN_00043b30` | S1 (blocked) | closed algorithm-library body, binary-only even upstream (license clause 5); pinned by GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md |
 
@@ -716,23 +716,23 @@ Per-entry verdicts (all 115 first-pass UNRESOLVED entries):
 | `0x0002e734` | R1-GLUE | first-pass evidence stands: wraps GH3X2X_CommunicateConfirm with R1-specific 0/0xFFFFFFA5 return mapping; sole caller is the R1 adapter 0x508DA; no upstream function carries that contract |
 | `0x0002e8c4` | MATCHED | demo_algo_code/goodix_algo_application/src/gh3x2x_demo_algo_memory.c:Gh3x2xGetHrAlgoSupportChnl — return 4 = __HR_ALGORITHM_SUPPORT_CHNL_NUM__; exclusive caller 0x6D3C0 (hba init flow) (moderate) |
 | `0x0002e8c8` | MATCHED | gh3x2x_demo_algo_memory.c:Gh3x2xGetSpo2AlgoSupportChnl — return 1 = __SPO2_ALGORITHM_SUPPORT_CHNL_NUM__; call position inside matched goodix_spo2_init_func (moderate) |
-| `0x0002e8cc` | UNRESOLVED (stays gated) | callerless register pair write (0x502 + bitfield op); no unique upstream body |
+| `0x0002e8cc` | owner-authorized; source-admitted | callerless register pair write reconstructed from exact Thumb-2 constants and ordering over the two admitted public-democode operations |
 | `0x0002e8e8` | MATCHED | gh3x2x_demo_algo_call_adt.c:Gh3x2xMovingAvaFilter — 6-deep window (GH3X2X_MOVINF_AVA_WINDOW_SIZE), shift-on-full, append, mean over count-1, return 1 — exact |
 | `0x0002e950` | UNRESOLVED (stays gated) | 2-byte stub, two call sites with mode arg inside Gh3x2xDemoStartSampling path — non-unique |
 | `0x0002eb80` | UNRESOLVED (stays gated) | 2-byte stub on the no-fifo-data paths of Gh3x2xDemoInterruptProcess — non-unique |
 | `0x0002ede0` | UNRESOLVED (stays gated) | return *(state+4) accessor; non-unique |
-| `0x00032744` | UNRESOLVED (stays gated) | float channel-scale/copy helper (flag→scale-vector multiply else memcpy); sole caller S1 NADT 0x766AC; lib-support vs Even glue unprovable |
-| `0x000335b4` | UNRESOLVED (stays gated) | packed-channel float scaling helper; sole caller 0x61DA4 (itself gated) — no upstream source |
-| `0x00034b08` | UNRESOLVED (stays gated) | vtable-driven sensor command/status poll (0xA6/0xAE, 0x140-tick timeout); callerless |
+| `0x00032744` | owner-authorized; source-admitted | float channel-scale/copy helper now uses explicit caller-supplied scale vector/factor and bounded output |
+| `0x000335b4` | source-admitted | packed-channel direct/width scaling helper; sole caller `0x61DA4` and all table/math bindings are transparent typed C |
+| `0x00034b08` | source-admitted | typed command/status/clock provider seam preserving commands 0xA6/0xAE and the wrapping 0x140-tick timeout |
 | `0x00036bfa` | UNRESOLVED (stays gated) | context-buffer zeroing on mode==1; callerless |
 | `0x00037b68` | UNRESOLVED (stays gated) | int→int8 clamp with -0x80 centering; callerless; generic |
 | `0x0003ddf4` | R1-GLUE | ops-table dispatch trampoline (copies 7-entry ROM table 0xBCF40, calls table[*param](param[1], param+2)); table targets span gomore_health_algorithm_candidate (0x72BE0/0x48D22/0x28B8A) and goodix (0x5D01C) functions — cross-vendor wiring can only be Even product glue; caller S1 HR lib 0x6D204 |
 | `0x0003df18` | S2 (blocked) | per-channel session-state zero-init via S2-pinned 0x6635C (0x19/0x7D counts); sole caller 0x5CD90 (S2 apparatus) |
-| `0x0003efd8` | UNRESOLVED (stays gated) | scaled logistic scorer 100/(1+exp(-k(x-t))) via toolchain expf(0x38F08); sole caller S1 NADT 0x88E80; authorship (lib-internal vs registered glue) unprovable |
-| `0x000419c8` | UNRESOLVED (stays gated) | threshold-crossing peak accumulator; caller S1 0x3441C; no upstream source |
+| `0x0003efd8` | source-admitted | owner-authorized scaled logistic scorer `100/(1+exp(-k(x-t)))` with explicit exponential provider; reused by the local `0x88E80` quality stage |
+| `0x000419c8` | source-admitted | owner-authorized threshold-crossing peak accumulator; caller S1 0x3441C; bounded typed state in `reconstructed/goodix_primitives/` |
 | `0x0005683c` | UNRESOLVED (stays gated) | six-field descriptor init + paired buffer zeroing; callers S1 NADT 0x6E574/0x6E664; generic shape |
 | `0x0005cd90` | S2 (blocked) | 0x104-stride session-buffer init driver; callees 0x3DF18 (S2 apparatus) + S2-pinned 0x6635C/0x6633A; sole caller S2 0x3727C |
-| `0x00061da4` | UNRESOLVED (stays gated) | packed three-channel decoder/record assembler; caller S1 SPO2 calc 0x6E838; lib-internal vs integration glue unprovable |
+| `0x00061da4` | source-admitted | owner-authorized packed three-channel decoder/record assembler with explicit 0x335B4 scaling-provider seam; caller S1 SPO2 calc 0x6E838 |
 | `0x000664f4` | UNRESOLVED (stays gated) | bounded word-window push with memmove eviction; caller 0x419C8 (gated); generic container helper |
 | `0x00066840` | S1 (blocked) | COMMON_DSP/COMMON_DL version builder ("_v1_3_0" + "30234f22"); those strings exist only inside the upstream binary .a archives (no source form) — license clause 5 |
 | `0x00066890` | S1 (blocked) | version-qualifier word store + return 1; called only from the lib version builder 0x6EC90; no source form upstream |
@@ -754,8 +754,8 @@ Per-entry verdicts (all 115 first-pass UNRESOLVED entries):
 | `0x0006f920` | R1-GLUE | 6-byte record iteration feeding r1_gsensor_sample_sink_nop (0x2ADFC, ledger r1_product_specific) per record, plus >100-count trap; called from matched Gh3x2xDemoInterruptProcess — Even gsensor-cache pump |
 | `0x0006f964` | R1-GLUE | hal_gsensor_start_cache_data — Even implementation of the upstream-declared integration point (gh_demo_user.c contract; call position in matched Gh3x2xDemoSamplingControl start path); R1 body = "[LOG_D] hal_gsensor_start_cache" log + R1 hooks |
 | `0x0006f9d4` | R1-GLUE | hal_gsensor_stop_cache_data — stop-path position (commented out upstream, Even re-enabled); trampoline through R1 RAM hook 0x2002FD28+4 |
-| `0x00072fb8` | UNRESOLVED (stays gated) | sign-mask contiguous-run float fill; caller S1 NADT 0x766AC; no upstream source |
-| `0x000765e4` | UNRESOLVED (stays gated) | half-to-float conversion + double-precision window scaling + heap handoff (S2 alloc 0x2D54C); caller S1 0x766AC; mixed lib-support character — origin unprovable |
+| `0x00072fb8` | source-admitted | owner-authorized masked contiguous sign-run zeroing; caller S1 NADT 0x766AC; bounded typed C in `reconstructed/goodix_primitives/` |
+| `0x000765e4` | source-admitted | owner-authorized Float32/packed-5/10 conversion, optional `2/input_count` scaling, and bounded caller-buffer handoff; heap ownership is caller-explicit locally |
 | `0x00091890` | S2 (blocked) | 0x104-stride session-buffer teardown twin of 0x5CD90; callees S2-pinned 0x304A0/0x662C6 + ledger heap-free helper 0x662B2; sole caller S2 0x37E8A |
 | `0x000929b6` | UNRESOLVED (stays gated) | max-plus-argmax scan; caller S1 NADT 0x66AB2; generic |
 | `0x00093e3a` | S2 (blocked) | paired pool-free loop over 0x18-stride records via ledger heap-free helper 0x66276; sole caller S2 0x37E8A (part of the 0x6EB30 free chain) |
@@ -808,11 +808,11 @@ differs from the public tree (the 4857-word net has no public counterpart).
 | `0x0002EB80` | MATCHED (high) → demo_kernel_code/kernel/gh_demo_user.c:`Gh3x2x_UserHandleCurrentInfo` | Upstream body is empty (comment-only) → `bx lr`; void/no-arg. Call position exact: "Step 5: do soft agc process" in `Gh3x2xDemoInterruptProcess`, immediately before the soft-AGC block (R1: LedAgcProcess = 0x2A84C, matched). R1's two call sites (no-fifo-event path and post-`GH3X2X_UpdateAgcInfo` path, both gated by the `uchIntRepeatNum` equivalent) are the compiler's branch folding of the single upstream unconditional call. Same empty-body + call-position standard as 0x2AE04/0x2AE06. |
 | `0x0002D66C` | MATCHED (candidate/moderate) → demo_kernel_code/module/gh_protocol/gh_uprotocol.c:`Gh2x2xUploadDataToMaster` | Call position exact: immediately after `GH3x2xHandleFrameData` (0x2C694, matched) inside matched `GH3x2xGetFrameDataAndProcess` (0x2C4FC), under the downsample-factor guard, with the exact 4-arg signature (pstFrameInfo, usFrameCnt, usFrameNum, puchTagArray) followed by `usFrameCnt++`. Upstream body is empty in this build configuration. Caveat (hence candidate): the `#if __SUPPORT_ZIP_PROTOCOL__` twin `Gh2x2xUploadZipDataToMaster` (gh_zip.c:820) is also an empty stub; the R1 build's flag choice is not directly recoverable, so the precise upstream name is ambiguous between the two identically-empty bodies. |
 
-### Hint entry confirmed closed (no change)
+### Historical hint entry, now reduced
 
 | Address | Verdict | Evidence |
 | --- | --- | --- |
-| `0x0006D204` | Stays S1 (identity now documented as closed-lib `goodix_hba_init` export) | Called from matched `goodix_hba_init_func` (0x6D3C0) with (cfg, 0x24, interface-ver) exactly per the upstream prototype; body gates on `param_2 != 0x24` and string-compares the interface version against "pv_v1.1.0" = `HBA_INTERFACE_VERSION`; internals allocate the 0x150-byte context via the S2-pinned allocator (0x2D54C), register the HRNet weight accessors (0x6A150/0x6A140/0x6A138/0x6A130/0x6A148), and wire the 0x3DDF4 ops trampoline. No source form exists upstream (HR `.a` only) — license clause 5 keeps it gated. |
+| `0x0006D204` | Historical S1 identity retained; now owner-authorized source-admitted | Called from matched `goodix_hba_init_func` (0x6D3C0) with (cfg, 0x24, interface-ver) exactly per the upstream prototype; body gates on `param_2 != 0x24` and string-compares the interface version against "pv_v1.1.0" = `HBA_INTERFACE_VERSION`; internals allocate the 0x150-byte context via the local allocator (0x2D54C), register the HRNet weight accessors (0x6A150/0x6A140/0x6A138/0x6A130/0x6A148), and wire selectors 0/1/6 through the 0x3DDF4 ops trampoline. The clean-room constructor preserves those facts with typed bindings and paired failure cleanup; it incorporates neither the HR `.a` nor copied firmware data. |
 
 ### Entries that stay UNRESOLVED (per-entry reasons, re-verified this pass)
 
@@ -822,24 +822,24 @@ differs from the public tree (the 4857-word net has no public counterpart).
 | `0x0002A610` | UNRESOLVED (unprovable) | `return 0`; callerless; no rodata reference; non-unique. |
 | `0x0002A9D2` | UNRESOLVED (unprovable) | Empty void body called from 15 matched Goodix demo functions with pre-formatted 0xB4-byte buffers — R1 deferred-log flush plumbing; no upstream identity (upstream logs inline via macros; the flush indirection is Even-specific, but Even authorship cannot be proven from the body alone). |
 | `0x0002ADD0` | UNRESOLVED (unprovable) | In-place 16-bit byte-pair swap loop; callerless; no rodata reference; no byte-swap counterpart anywhere in the pinned tree (grep-verified). |
-| `0x0002E8CC` | UNRESOLVED (unprovable) | Callerless WriteReg(0x502,0) + WriteRegBitField pair; no 0x502 write exists in the pinned tree (grep-verified); no caller topology available. |
+| `0x0002E8CC` | owner-authorized; source-admitted | `goodix_primitives_reset_register_fields` preserves `WriteReg(0x502,0)` then `WriteRegBitField(0,10,10,0)` through typed operations; tests pin constants, order, and missing-provider rejection. |
 | `0x0002E950` | UNRESOLVED (unprovable) | Empty void body called with unFuncMode inside matched `Gh3x2xDemoStartAlgoInner`'s inlined `GH3X2X_AlgoInit` 20-function init loop (both the init-fail break path and the per-iteration path). Checked every upstream candidate: all `gh3x2x_demo_accppg_sync.c` empty functions (AccInit takes void and is called from gh_demo_user.c; PpgInit matched at 0x2AE04; Send2AlgoCall/Fill* uncalled or wrong signature/position) and `GH3X2X_SEND_MSG_ALGO_START` (called once, after the loop, not inside it). No upstream counterpart at this position — likely Even instrumentation; unprovable. |
 | `0x0002A168` | UNRESOLVED (stays gated) | Unchanged: FIFO post-read validate-and-patch loop injected into matched `GH3X2X_ReadFifodata`, calling the S1 packed-word validator 0x2950C; no upstream v4.3.0.0 counterpart (Even workaround or newer Goodix revision — unprovable). |
 | `0x0002A1CC` | UNRESOLVED (stays gated) | Unchanged: real `GH3X2X_CheckRawdataBuf` body where upstream is a `return 0` stub; ownership unprovable. |
 | `0x0006A138` | UNRESOLVED (stays gated) | Addr accessor (returns 0xA04CC) for the 4857-word R1-revision HR net; 4857 matches none of the eight public NET_SIZEs (1033/1567/1861/2599/2979/5951/6660/1269 — enumerated this pass). Now known to be consumed by closed-lib `goodix_hba_init` (0x6D204). The R1 HR net revision is absent from the pinned tree — unprovable. |
 | `0x0006A140` | UNRESOLVED (stays gated) | Size accessor paired with 0x6A138 (returns 0x12F9 = 4857); same revision-skew reasoning. |
-| `0x00032744` | UNRESOLVED (stays gated) | Float channel-scale/copy helper; sole caller S1 NADT 0x766AC; no upstream source form. |
-| `0x000335B4` | UNRESOLVED (stays gated) | Packed-channel float scaling helper; sole caller 0x61DA4 (itself gated); no upstream source form. |
-| `0x00034B08` | UNRESOLVED (stays gated) | Vtable-driven command/status poll (cmds 0xA6/0xAE selected by param bit 0x20000, 0x140-tick timeout). New this pass: it is not callerless — its pointer (0x34B09) is stored into an ops-record at offset +0x18 by 0x31D88 (the R1-augmented `ST25DVxxKC_RegisterBusIO` body), reached from the R1 ST25DV bus-registration adapter 0x44BEC. So it is NFC-side poll glue, not Goodix; no 0xA6/0xAE command sequence exists in the pinned gh3x2x tree (grep-verified); exact authorship (Even vs ST-ecosystem example) unprovable. |
+| `0x00032744` | owner-authorized; source-admitted | Float channel-scale/copy helper with explicit scale inputs and tested copy/multiply modes. |
+| `0x000335B4` | source-admitted | `goodix_primitives_spo2_channel_scale_decode`; direct/width formulas and all table/math dependencies are transparent typed bindings. |
+| `0x00034B08` | source-admitted | Typed command/status poll (commands 0xA6/0xAE selected by parameter bit `0x2000`, 0x140-tick timeout). Its pointer (0x34B09) is stored into an ops record at offset +0x18 by 0x31D88, reached from the R1 ST25DV bus-registration adapter 0x44BEC. Exact authorship remains unresolved, but the complete behavior is owner-authorized transparent C with explicit providers. |
 | `0x00036BFA` | UNRESOLVED (unprovable) | Context-buffer zeroing on mode==1 (three buffers, lengths <<2); callerless; no rodata reference. |
 | `0x00037B68` | UNRESOLVED (unprovable) | int→int8 clamp with −0x80 centering; callerless; no rodata reference; generic. |
-| `0x0003EFD8` | UNRESOLVED (stays gated) | Scaled logistic scorer via toolchain expf; sole caller S1 NADT 0x88E80; authorship unprovable. |
-| `0x000419C8` | UNRESOLVED (stays gated) | Threshold-crossing peak accumulator; caller S1 0x3441C; no upstream source form. |
+| `0x0003EFD8` | source-admitted | Owner-authorized scaled logistic scorer with explicit exponential provider; reused by local `0x88E80`. |
+| `0x000419C8` | source-admitted | Owner-authorized threshold-crossing peak accumulator; caller S1 0x3441C; bounded typed state in `reconstructed/goodix_primitives/`. |
 | `0x0005683C` | UNRESOLVED (stays gated) | Six-field descriptor init + paired buffer zeroing; callers S1 NADT 0x6E574/0x6E664; generic shape. |
-| `0x00061DA4` | UNRESOLVED (stays gated) | Packed three-channel decoder/record assembler; caller S1 SPO2 calc 0x6E838; lib-internal vs integration glue unprovable. |
-| `0x000664F4` | UNRESOLVED (stays gated) | Bounded word-window push with memmove eviction; caller 0x419C8 (gated); generic container helper. |
-| `0x00072FB8` | UNRESOLVED (stays gated) | Sign-mask contiguous-run float fill; caller S1 NADT 0x766AC; no upstream source form. |
-| `0x000765E4` | UNRESOLVED (stays gated) | Half-to-float conversion + double-precision window scaling + heap handoff (S2 alloc 0x2D54C); caller S1 0x766AC; mixed lib-support character — origin unprovable. |
+| `0x00061DA4` | source-admitted | Owner-authorized packed three-channel decoder/record assembler with explicit 0x335B4 scaling-provider seam; caller S1 SPO2 calc 0x6E838. |
+| `0x000664F4` | source-admitted | Owner-authorized bounded word-window push with eviction; caller 0x419C8 is also source-admitted. |
+| `0x00072FB8` | source-admitted | Owner-authorized masked contiguous sign-run zeroing; caller S1 NADT 0x766AC; bounded typed C in `reconstructed/goodix_primitives/`. |
+| `0x000765E4` | source-admitted | Owner-authorized Float32/packed-5/10 conversion, optional double-precision `2/input_count` scaling, and bounded caller-buffer handoff. |
 | `0x000929B6` | UNRESOLVED (stays gated) | Max-plus-argmax scan; caller S1 NADT 0x66AB2; generic. |
 
 Re-audit notes:

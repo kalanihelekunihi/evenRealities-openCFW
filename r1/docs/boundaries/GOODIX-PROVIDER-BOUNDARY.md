@@ -1,10 +1,10 @@
 # Goodix GH3X2X biometric provider boundary
 
 > Current reduction note (2026-08-14): under the later owner-authorized
-> source-admission policy, 141 formerly opaque Goodix-candidate functions are
+> source-admission policy, 312 formerly opaque Goodix-candidate functions are
 > now independently reconstructed, including the `0x739A8` recurrent closure
 > and complete `0x617F8` / three-mode `0x742E4` generated graph executors.
-> This report remains the provenance census for the 178 still-gated entries;
+> This report remains the provenance census for the 8 still-gated entries;
 > current totals and local contracts are in `../SOURCE-ADMISSION.md` and the
 > `../correlation/GOODIX-*-REDUCTION-CORRELATION.md` reports.
 
@@ -17,15 +17,16 @@ algorithm version, slot, sampling, and interrupt diagnostics for its official GH
 This establishes a Goodix SDK/demo lineage, but no lawfully redistributable SDK matching the exact
 R1 version has been admitted.
 
-The ownership ledger now separates 392 provider/demo functions across the individually reviewed
-set, direct-call-graph closures, the exact branch-only thunk, GH_NADT, GH_HR, GH_HRV,
-GH_SPO2/dlCom, private-context, packed-channel, quality, peak-mask, accumulation, and register-profile
-closures, plus 17 distinct R1 product adapters. All provider/demo bodies remain
-`goodix_gh3x2x_candidate` with disposition
-`vendor_source_required_not_redistributable`. Power, transport, lifecycle, recovered profile-mask,
-reference-count, and command-routing bodies are `r1_goodix_provider_adapter` and are the only part
-authorized for clean-room implementation. The adapter fails closed when a licensed provider is not
-bound; it does not emit synthetic biometric measurements.
+The ownership ledger separates the provider/demo functions across the individually reviewed set,
+direct-call-graph closures, the exact branch-only thunk, GH_NADT, GH_HR, GH_HRV,
+GH_SPO2/dlCom, private-context, packed-channel, quality, peak-mask, accumulation, and
+register-profile closures, plus distinct R1 product adapters. The current
+owner-authorized reduction has moved 312 opaque `goodix_gh3x2x_candidate`
+bodies to `clean_room_reimplementation_owner_authorized`; 8 remain
+`vendor_source_required_not_redistributable`. Power, transport, lifecycle,
+recovered profile-mask, reference-count, and command-routing bodies remain
+separately classified R1 adapters. Live biometric paths continue to fail closed
+until their complete source closure is bound; no adapter emits synthetic measurements.
 
 Five of the individually reviewed functions close duplicate packed-word integrity helpers. Their
 complete callers, exact bodies, and three identical constant-table copies are documented in
@@ -45,9 +46,10 @@ Goodix component. See
 The GH_HR private-context closure also includes the 372-byte initializer at
 `0x00072C48`. Its sole caller at `0x0006D2B4` allocates the exact 0x158-byte
 secondary context inside the already gated `pv_v1.1.0` initializer. It clears
-that private object and constructs provider-owned buffers using adjacent Goodix
-runtime helpers. The layout and defaults are evidence only and are not
-implemented locally.
+that private object and constructs nine pair buffers, nine Int16 buffers, and
+seven Float32 histories using adjacent Goodix runtime helpers. This bounded
+constructor is now transparent C with an explicit coefficient-table binding;
+the larger primary initializer remains gated.
 
 The GH_SPO2/dlCom closure adds 84 exact functions / 19,204 executable bytes: 81 formerly
 unclassified Ghidra functions plus three valid dispatcher-table wrappers omitted by Ghidra. It
@@ -58,7 +60,8 @@ quantized recurrent executor at `0x000739A8`, its constructor, and four helpers.
 dormant `0x000617F8`/`0x000876C8` generated graph pair using the shared dlCom
 configuration object and provider callback edge without treating them as a production path. The
 same wrapper is the sole caller of the 984-byte `0x0006CCC0` algorithm-input diagnostic formatter,
-which remains provider code rather than an R1 telemetry implementation. See
+which now compiles as a bounded typed diagnostic emitter rather than an R1 telemetry implementation.
+See
 [`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
 
 ## Byte-pinned functions
@@ -98,17 +101,17 @@ which remains provider code rather than an R1 telemetry implementation. See
 | `0x0002EE50` | 36 | demo multisensor-state initializer |
 | `0x0002EF6C` | 210 | Goodix demo `MultiSensor` event dump path |
 | `0x0002F0F8` | 10 | demo output-state initializer |
-| `0x00032788` | 88 | NADT output wrapper linked to the exact version builder |
+| `0x00032788` | 88 | NADT default initializer wrapper linked to the exact version builder; source-admitted |
 | `0x0005A5EC` | 54 | GH_HR integrity-bit encoder called by the heart-rate core |
 | `0x00066840` | 46 | exact `dsp_pv_v1.3.0_30234f22` version builder |
 | `0x00066890` | 14 | shared GH3X2X version qualifier helper |
 | `0x0006A020` | 8 | retained GH3X2X provider thunk |
 | `0x0006A4D8` | 376 | provider algorithm-output callback dispatcher |
 | `0x0006A500` | 110 | provider configuration-table loader |
-| `0x0006D204` | 406 | GH_HR private-context initializer; exact `pv_v1.1.0`, sole caller in the gated output wrapper |
-| `0x00072C48` | 372 | GH_HR 0x158-byte private subcontext initializer; sole caller `0x0006D2B4` in the gated primary initializer |
+| `0x0006D204` | 406 | GH_HR typed primary/private-context constructor with exact config/ABI validation, explicit graph bindings, and 31-allocation unwind; source-admitted |
+| `0x00072C48` | 372 | GH_HR 0x158-byte logical secondary-context constructor with caller-bound coefficients and failure cleanup; source-admitted |
 | `0x0006D3C0` | 96 | heart-rate output wrapper linked to the exact version builder |
-| `0x0006D424` | 180 | exact `GH_HR_exc_pv_v2.0.3.0_CONF_nc_21d2063d_002271a1` version builder |
+| `0x0006D424` | 180 | exact `GH_HR_exc_pv_v2.0.3.0_CONF_nc_21d2063d_002271a1` version builder; source-admitted |
 | `0x0006D51C` | 1382 | heart-rate algorithm core using the integrity-bit encoder |
 | `0x0002CAC6` | 18 | GH_HRV cleanup dispatcher wrapper |
 | `0x0002CC5C` | 46 | GH_HRV output dispatcher wrapper |

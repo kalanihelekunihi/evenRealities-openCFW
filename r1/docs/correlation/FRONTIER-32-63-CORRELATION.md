@@ -22,6 +22,12 @@ Every provider-candidate and unresolved-framework entry above carries the
 `vendor_source_required_not_redistributable` or `investigate_before_implementing`
 disposition and remains implementation-blocked.
 
+Current reduction note: later owner-authorized work has source-admitted a
+subset of these historical provider candidates. In this batch, `0x0002A65C`
+became `goodix_primitives_send_fixed_aa_pair`: the global selector table and
+provider-vtable address are explicit typed bindings, while the exact `AA AA`
+payload, two-byte length, and caller-word forwarding remain local and tested.
+
 ## R1 kv.bin class accessor family
 
 The 24-function cluster at `0x000735E0...0x00073968` and `0x0007BB94...0x0007CA44` is the R1

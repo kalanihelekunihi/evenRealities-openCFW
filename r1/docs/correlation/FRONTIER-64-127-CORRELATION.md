@@ -6,6 +6,16 @@ functions in the tier stayed unclassified for lack of function-local evidence:
 `0x00034B08` (callerless vtable-`0xA6`/`0xAE` transaction), `0x0007260C` (callerless two-word
 record store), and `0x0003E6B0` (callerless heap destructor with unresolvable owner).
 
+Current reduction note: `0x00034B08` and `0x0003E6B0` are now source-admitted
+under the later owner-authorized policy. The former is a typed
+command/status/clock poller; raw Thumb-2 proves that the latter releases its
+`+0x260` owner before tail-entering the missed destructor boundary at
+`0x00029354`. Their original attribution uncertainty remains recorded above.
+The Goodix candidate `0x00032788` is also source-admitted as
+`goodix_primitives_nadt_default_initialize`; it transparently builds the exact
+default configuration and process-version contract before entering the now
+reconstructed context initializer.
+
 | Family | Functions |
 | --- | ---: |
 | R1 product-specific | 96 |

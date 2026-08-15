@@ -5,12 +5,14 @@
  *                 (shared AOT-compiled static-graph quantized-neural
  *                 runtime; Bravechip BCL603M "ChipletRing" middleware
  *                 serving both the GoMore sleep classifier and the Goodix
- *                 GH_SPO2/dlCom model graphs), plus twenty-three Goodix-specific
+ *                 GH_SPO2/dlCom model graphs), plus twenty-four Goodix-specific
  *                 graph, instance, and recurrent-runtime routines.
  * Stock image:    application image, load base 0x00027000, sha256
  *                 0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a.
  * Evidence:       r1/research/decompilation/application/decompiler-output.c
- *                 (all 26 shared and twenty-three Goodix-extension Ghidra bodies),
+ *                 (26 shared and twenty-three Goodix-extension Ghidra bodies,
+ *                 plus disassembly-pinned executors at 0x00085B9C and
+ *                 0x00085DC4),
  *                 each cross-checked against fresh
  *                 Thumb disassembly of the byte-exact rebuilt image
  *                 r1/research/decompilation/rebuild/rebuilt-application.bin.
@@ -49,7 +51,11 @@
  *   0x000739A8..<0x00073E08   1120 -> quantized_runtime_recurrent_execute
  *   0x0007400C..<0x0007405C   80  -> quantized_runtime_float_min_max
  *   0x0007405C..<0x0007412C   208 -> quantized_runtime_u8_matrix_vector
+ *   0x0003007E / 0x00038050 / 0x000417F0  16 each
+ *                               -> quantized_runtime_goodix_executor_execute
  *   0x000742E4..<0x0007487E   1426 -> quantized_runtime_goodix_executor_execute
+ *   0x00085B9C..<0x00085C98   252  -> quantized_runtime_float_dense_execute
+ *   0x00085DC4..<0x00086BAC   3560 -> quantized_runtime_i8_conv1d_execute
  *   0x000876C8..<0x00087A6C   932 -> quantized_runtime_goodix_layer_execute
  *   0x00074A9C..<0x00074AA0   4   -> quantized_runtime_executor_vector_95b20
  *   0x00074A20..<0x00074A98   120 -> quantized_runtime_recurrent_layer_descriptor_construct
@@ -68,6 +74,7 @@
  *   0x00091C56..<0x00091C80   42  -> quantized_runtime_tensor_release_many
  *   0x00091D9C..<0x00091DBE   34  -> quantized_runtime_tensor_allocate
  *   0x00091DBE..<0x00091E02   68  -> quantized_runtime_tensor_create_fill
+ *   0x00091E02..<0x00091E6C   106 -> quantized_runtime_tensor_slice
  *   0x00091E6C..<0x00091EBA   78  -> quantized_runtime_tensor_construct
  *   0x00091EBA..<0x00091EDC   34  -> quantized_runtime_tensor_reshape
  *   0x00093628..<0x000936F8   208 -> quantized_runtime_arena_allocate
@@ -76,7 +83,7 @@
  *
  * Observable behavior is preserved; restructuring is limited to explicit
  * provider bindings (toolchain fminf/fmaxf/floorf/expf/qsort, the
- * GoMore-candidate slice and scaled-mul seams, and six out-of-family
+ * source-admitted GoMore slice/scaled-mul seams, and six out-of-family
  * executor pointer tokens), pointer/argument validation, and checked arena,
  * model-region, and recurrent-workspace bounds.  The recurrent executor's
  * target adapter calls attributable libm floorf/fmaxf/expf/tanhf directly;
@@ -826,6 +833,21 @@ bool quantized_runtime_goodix_f32_three_stage_execute(
     }
     *output = tensors[2];
     return true;
+}
+
+bool quantized_runtime_goodix_nadt_projection_execute(
+    const quantized_runtime_three_stage_plan *plan,
+    quantized_runtime_exec_tensor *input,
+    quantized_runtime_exec_tensor *output, const uint8_t shape[6],
+    size_t workspace_size) {
+    if (plan == NULL || output == NULL || output->data == NULL ||
+            plan->row_padding != 0u || plan->column_padding != 0u ||
+            plan->middle_uses_input_storage) {
+        return false;
+    }
+    void *const workspace = output->data;
+    return quantized_runtime_goodix_f32_three_stage_execute(
+        plan, input, output, shape, 0x1F0u, workspace, workspace_size);
 }
 
 enum {
@@ -2001,6 +2023,46 @@ uint32_t quantized_runtime_float_to_int8_quantize(
     return QUANTIZED_RUNTIME_STATUS_OK;
 }
 
+uint32_t quantized_runtime_goodix_in_place_float_to_int8(
+    const quantized_runtime *rt, uint32_t mode, uint32_t rows,
+    uint32_t columns, float *data, size_t data_count) {
+    if (mode != 1u) {
+        return QUANTIZED_RUNTIME_GOODIX_MODE_ERROR;
+    }
+    if (rt == NULL || data == NULL || rows == 0u || columns == 0u ||
+            rows > SIZE_MAX / columns ||
+            (size_t)rows * (size_t)columns > data_count) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    quantized_runtime_exec_tensor tensor = {
+        .type_flag = 4u,
+        .dims = {1u, rows, columns},
+        .data = data,
+    };
+    float range[2] = {0.0f, 0.0f};
+    quantized_runtime_exec_tensor range_tensor = {
+        .type_flag = 0u,
+        .dims = {0u, 0u, 0u},
+        .data = range,
+    };
+    quantized_runtime_exec_tensor *inputs[1] = {&tensor};
+    quantized_runtime_exec_tensor *outputs[2] = {&tensor, &range_tensor};
+    const float descriptor[2] = {0.0f, 1.0f};
+    return quantized_runtime_float_to_int8_quantize(
+        rt, descriptor, inputs, outputs);
+}
+
+uint32_t quantized_runtime_goodix_configured_in_place_float_to_int8(
+    const quantized_runtime *rt, uint32_t mode, const uint32_t shape[2],
+    float *data, size_t data_count) {
+    if (shape == NULL) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    return quantized_runtime_goodix_in_place_float_to_int8(
+        rt, mode, shape[0], shape[1], data, data_count);
+}
+
 uint32_t quantized_runtime_int8_add_execute(
     const quantized_runtime *rt, const void *descriptor,
     quantized_runtime_exec_tensor *const *inputs,
@@ -2143,6 +2205,492 @@ uint32_t quantized_runtime_pooling_execute(
          * no-op returning zero. */
     }
     return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+static bool f32_is_finite_local(float value) {
+    return (f32_to_bits(value) & UINT32_C(0x7F800000)) !=
+           UINT32_C(0x7F800000);
+}
+
+static int8_t u8_bits_to_i8(uint8_t value) {
+    return (value < 0x80u) ? (int8_t)value
+                           : (int8_t)((int32_t)value - 256);
+}
+
+static int32_t u32_bits_to_i32(uint32_t value) {
+    union {
+        uint32_t u;
+        int32_t i;
+    } pun;
+    pun.u = value;
+    return pun.i;
+}
+
+static int32_t i8_conv_wrap_add(int32_t accumulator, int32_t addend) {
+    return u32_bits_to_i32((uint32_t)accumulator + (uint32_t)addend);
+}
+
+/* Stock forms a signed-accumulator times unsigned-Q31 64-bit product, adds
+ * 2^30, and takes an arithmetic shift by 31.  Spell out floor division so
+ * the result does not depend on C's implementation-defined negative shift. */
+static int32_t i8_conv_requantize(int32_t accumulator, uint32_t multiplier) {
+    const int64_t rounded =
+        (int64_t)accumulator * (int64_t)multiplier + INT64_C(0x40000000);
+    int64_t scaled = rounded / INT64_C(0x80000000);
+    if (rounded < 0 && rounded % INT64_C(0x80000000) != 0) {
+        --scaled;
+    }
+    if (scaled < 0) {
+        scaled = 0;
+    } else if (scaled > 255) {
+        scaled = 255;
+    }
+    return (int32_t)scaled - 128;
+}
+
+static uint32_t i8_conv_q31_multiplier(float value) {
+    if (!(value >= 0.5f)) {
+        return 0u;
+    }
+    if (value >= 2147483648.0f) {
+        return UINT32_C(0x7FFFFFFF);
+    }
+    const uint32_t rounded = (uint32_t)(value + 0.5f);
+    return (rounded < UINT32_C(0x7FFFFFFF))
+               ? rounded
+               : UINT32_C(0x7FFFFFFF);
+}
+
+static bool byte_ranges_overlap(const void *left, size_t left_size,
+                                const void *right, size_t right_size) {
+    if (left == NULL || right == NULL || left_size == 0u || right_size == 0u) {
+        return false;
+    }
+    const uintptr_t left_begin = (uintptr_t)left;
+    const uintptr_t right_begin = (uintptr_t)right;
+    if (left_size > UINTPTR_MAX - left_begin ||
+            right_size > UINTPTR_MAX - right_begin) {
+        return true;
+    }
+    return left_begin < right_begin + right_size &&
+           right_begin < left_begin + left_size;
+}
+
+size_t quantized_runtime_i8_conv1d_workspace_bytes(
+    const quantized_runtime_i8_conv1d_descriptor *descriptor,
+    uint32_t output_width) {
+    size_t bytes = 0u;
+    if (descriptor == NULL || descriptor->output_channels == 0u ||
+            output_width == 0u ||
+            !multiply_size_checked((size_t)descriptor->output_channels,
+                                   (size_t)output_width, &bytes)) {
+        return 0u;
+    }
+    return bytes;
+}
+
+static bool i8_conv_descriptor_supported(
+    const quantized_runtime_i8_conv1d_descriptor *descriptor,
+    uint32_t input_per_group, uint32_t output_per_group) {
+    if (descriptor->kernel_height != 1u) {
+        return false;
+    }
+    if (descriptor->kernel_width == 5u) {
+        return descriptor->groups == 1u &&
+               (input_per_group == 1u || input_per_group == 4u);
+    }
+    if (descriptor->kernel_width == 3u) {
+        return descriptor->groups == 1u ||
+               (input_per_group == 1u && output_per_group == 1u);
+    }
+    return descriptor->kernel_width == 1u && descriptor->groups == 1u;
+}
+
+uint32_t quantized_runtime_i8_conv1d_execute(
+    const quantized_runtime_i8_conv1d_descriptor *descriptor,
+    const quantized_runtime_i8_conv1d_model *model,
+    quantized_runtime_i8_conv1d_io *io) {
+    if (descriptor == NULL || model == NULL || io == NULL ||
+            io->input == NULL || io->input_range == NULL ||
+            io->output == NULL || io->output_range == NULL ||
+            io->input->data == NULL || io->input_range->data == NULL ||
+            io->output->data == NULL || io->output_range->data == NULL ||
+            model->weights == NULL || model->channel_scales == NULL ||
+            model->biases == NULL || descriptor->input_channels == 0u ||
+            descriptor->output_channels == 0u || descriptor->groups == 0u ||
+            descriptor->input_channels % descriptor->groups != 0u ||
+            descriptor->output_channels % descriptor->groups != 0u ||
+            io->input->dims[0] != 1u || io->output->dims[0] != 1u ||
+            io->input->dims[1] != descriptor->input_channels ||
+            io->output->dims[1] != descriptor->output_channels ||
+            io->input->dims[2] == 0u || io->output->dims[2] == 0u ||
+            io->input_range_capacity < 2u * sizeof(float) ||
+            io->output_range_capacity < 2u * sizeof(float)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    const uint32_t input_per_group =
+        descriptor->input_channels / descriptor->groups;
+    const uint32_t output_per_group =
+        descriptor->output_channels / descriptor->groups;
+    if (!i8_conv_descriptor_supported(descriptor, input_per_group,
+                                      output_per_group)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    size_t padded_width = 0u;
+    size_t expected_output_width = 0u;
+    size_t input_bytes = 0u;
+    size_t output_bytes = 0u;
+    size_t weight_count = 0u;
+    if (!add_size_checked((size_t)io->input->dims[2],
+                          descriptor->left_padding, &padded_width) ||
+            !add_size_checked(padded_width, descriptor->right_padding,
+                              &padded_width) ||
+            padded_width < descriptor->kernel_width) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    expected_output_width =
+        padded_width - (size_t)descriptor->kernel_width + 1u;
+    if (expected_output_width != io->output->dims[2] ||
+            !multiply_size_checked(descriptor->input_channels,
+                                   io->input->dims[2], &input_bytes) ||
+            !multiply_size_checked(descriptor->output_channels,
+                                   io->output->dims[2], &output_bytes) ||
+            !multiply_size_checked(descriptor->output_channels,
+                                   input_per_group, &weight_count) ||
+            !multiply_size_checked(weight_count, descriptor->kernel_width,
+                                   &weight_count) ||
+            io->input_capacity < input_bytes ||
+            io->output_capacity < output_bytes ||
+            model->weight_count < weight_count ||
+            model->channel_scale_count < descriptor->output_channels ||
+            model->bias_count < descriptor->output_channels) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    const uint8_t *input_range = (const uint8_t *)io->input_range->data;
+    const float input_min = load_f32_le(input_range);
+    const float input_max = load_f32_le(input_range + sizeof(float));
+    if (!f32_is_finite_local(input_min) ||
+            !f32_is_finite_local(input_max) || input_min > 0.0f ||
+            input_max < 0.0f || input_max < input_min ||
+            !f32_is_finite_local(model->weight_min) ||
+            !f32_is_finite_local(model->weight_max) ||
+            !(model->weight_max > model->weight_min) ||
+            !f32_is_finite_local(model->bias_min) ||
+            !f32_is_finite_local(model->bias_max) ||
+            !f32_is_finite_local(model->output_min) ||
+            !f32_is_finite_local(model->output_max)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    const float input_span = fmaxf(QUANTIZED_RUNTIME_RANGE_FLOOR,
+                                   input_max - input_min);
+    const int32_t input_zero_unwrapped =
+        round_half_away_from_zero(-input_min *
+                                  (QUANTIZED_RUNTIME_FULL_SCALE / input_span)) -
+        128;
+    const int8_t input_zero =
+        u8_bits_to_i8((uint8_t)((uint32_t)input_zero_unwrapped & 0xFFu));
+    const float input_step = input_span / QUANTIZED_RUNTIME_FULL_SCALE;
+    const float weight_step =
+        (model->weight_max - model->weight_min) /
+        QUANTIZED_RUNTIME_FULL_SCALE;
+    const float combined_step = input_step * weight_step;
+    float output_min = model->output_min;
+    float output_max = model->output_max;
+    if (!(combined_step > 0.0f) || !f32_is_finite_local(combined_step) ||
+            quantized_runtime_recurrent_range_adjust(
+                &output_min, &output_max, 3u) < 0 ||
+            !f32_is_finite_local(output_min) ||
+            !f32_is_finite_local(output_max) || !(output_max > output_min)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    const float output_step =
+        (output_max - output_min) / QUANTIZED_RUNTIME_FULL_SCALE;
+    const float multiplier_base =
+        (combined_step / output_step) * 2147483648.0f;
+    const float bias_scale =
+        ((model->bias_max - model->bias_min) * 8388608.0f) / combined_step;
+    const float bias_min_scale = output_min / combined_step;
+    if (!(output_step > 0.0f) || !f32_is_finite_local(multiplier_base) ||
+            !f32_is_finite_local(bias_scale) ||
+            !f32_is_finite_local(bias_min_scale)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    for (uint32_t channel = 0u; channel < descriptor->output_channels;
+         ++channel) {
+        if (!(model->channel_scales[channel] > 0.0f) ||
+                !f32_is_finite_local(model->channel_scales[channel])) {
+            return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+        }
+    }
+
+    uint8_t *destination = (uint8_t *)io->output->data;
+    const bool overlaps = byte_ranges_overlap(
+        io->input->data, input_bytes, io->output->data, output_bytes);
+    if (overlaps) {
+        if (io->workspace == NULL || io->workspace_size < output_bytes ||
+                byte_ranges_overlap(io->workspace, output_bytes,
+                                    io->input->data, input_bytes)) {
+            return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+        }
+        destination = (uint8_t *)io->workspace;
+    }
+
+    const int8_t *input = (const int8_t *)io->input->data;
+    const uint32_t input_width = io->input->dims[2];
+    const uint32_t output_width = io->output->dims[2];
+    for (uint32_t output_channel = 0u;
+         output_channel < descriptor->output_channels; ++output_channel) {
+        const uint32_t group = output_channel / output_per_group;
+        const float channel_scale = model->channel_scales[output_channel];
+        const uint32_t multiplier =
+            i8_conv_q31_multiplier(channel_scale * multiplier_base);
+        const float raw_bias = (float)model->biases[output_channel];
+        const float bias_value =
+            raw_bias * bias_scale / channel_scale -
+            bias_min_scale / channel_scale;
+        if (!f32_is_finite_local(bias_value) ||
+                bias_value > 2147483520.0f ||
+                bias_value < -2147483520.0f) {
+            return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+        }
+        int32_t bias = round_half_away_from_zero(bias_value);
+        const size_t weight_base =
+            (size_t)output_channel * input_per_group *
+            descriptor->kernel_width;
+        for (uint32_t position = 0u; position < output_width; ++position) {
+            int32_t accumulator = bias;
+            for (uint32_t input_channel = 0u;
+                 input_channel < input_per_group; ++input_channel) {
+                const size_t source_row =
+                    (size_t)(group * input_per_group + input_channel) *
+                    input_width;
+                const size_t weight_row =
+                    weight_base + (size_t)input_channel *
+                                      descriptor->kernel_width;
+                for (uint32_t kernel = 0u;
+                     kernel < descriptor->kernel_width; ++kernel) {
+                    const int64_t source_position =
+                        (int64_t)position + kernel -
+                        descriptor->left_padding;
+                    const int32_t input_value =
+                        (source_position < 0 ||
+                         source_position >= (int64_t)input_width)
+                            ? input_zero
+                            : input[source_row + (size_t)source_position];
+                    const int32_t weight = model->weights[weight_row + kernel];
+                    accumulator = i8_conv_wrap_add(
+                        accumulator, (input_value - input_zero) * weight);
+                }
+            }
+            destination[(size_t)output_channel * output_width + position] =
+                (uint8_t)(int8_t)i8_conv_requantize(accumulator, multiplier);
+        }
+    }
+
+    if (overlaps) {
+        move_bytes_local((uint8_t *)io->output->data, destination, output_bytes);
+    }
+    uint8_t *output_range = (uint8_t *)io->output_range->data;
+    store_f32_le(output_range, output_min);
+    store_f32_le(output_range + sizeof(float), output_max);
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+uint32_t quantized_runtime_i8_conv1d_execute_target(
+    const void *descriptor_record,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    if (descriptor_record == NULL || inputs == NULL || outputs == NULL ||
+            inputs[0] == NULL || inputs[1] == NULL || outputs[0] == NULL ||
+            outputs[1] == NULL) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const uint8_t *record = (const uint8_t *)descriptor_record;
+    quantized_runtime_i8_conv1d_descriptor descriptor = {
+        record[0], record[1], record[2], record[3],
+        record[4], record[5], record[6], record[7], load_f32_le(record + 8u),
+    };
+    if (descriptor.groups == 0u ||
+            descriptor.input_channels % descriptor.groups != 0u) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    size_t weight_count = 0u;
+    if (!multiply_size_checked(descriptor.output_channels,
+                               descriptor.input_channels / descriptor.groups,
+                               &weight_count) ||
+            !multiply_size_checked(weight_count, descriptor.kernel_width,
+                                   &weight_count)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const size_t aligned_weight_count = (weight_count + 3u) & ~(size_t)3u;
+    const uint8_t *weights =
+        (const uint8_t *)(uintptr_t)load_u32_le(record + 0x0Cu);
+    const uint8_t *quantization =
+        (const uint8_t *)(uintptr_t)load_u32_le(record + 0x10u);
+    if (weights == NULL || quantization == NULL) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    quantized_runtime_i8_conv1d_model model = {
+        (const int8_t *)weights,
+        weight_count,
+        load_f32_le(weights + aligned_weight_count),
+        load_f32_le(weights + aligned_weight_count + 4u),
+        (const float *)(const void *)(weights + aligned_weight_count + 8u),
+        descriptor.output_channels,
+        (const int32_t *)(const void *)quantization,
+        descriptor.output_channels,
+        load_f32_le(quantization + (size_t)descriptor.output_channels * 4u),
+        load_f32_le(quantization +
+                    ((size_t)descriptor.output_channels + 1u) * 4u),
+        load_f32_le(quantization +
+                    ((size_t)descriptor.output_channels + 2u) * 4u),
+        load_f32_le(quantization +
+                    ((size_t)descriptor.output_channels + 3u) * 4u),
+    };
+    size_t input_bytes = 0u;
+    size_t output_bytes = 0u;
+    size_t padded_elements = 0u;
+    if (!multiply_size_checked(inputs[0]->dims[1], inputs[0]->dims[2],
+                               &input_bytes) ||
+            !multiply_size_checked(outputs[0]->dims[1], outputs[0]->dims[2],
+                                   &output_bytes) ||
+            !add_size_checked(inputs[0]->dims[2], descriptor.left_padding,
+                              &padded_elements) ||
+            !add_size_checked(padded_elements, descriptor.right_padding,
+                              &padded_elements) ||
+            !multiply_size_checked(padded_elements, inputs[0]->dims[1],
+                                   &padded_elements)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    quantized_runtime_i8_conv1d_io io = {
+        inputs[0], inputs[1], outputs[0], outputs[1],
+        input_bytes, 2u * sizeof(float), output_bytes, 2u * sizeof(float),
+        (uint8_t *)inputs[0]->data + padded_elements, output_bytes,
+    };
+    return quantized_runtime_i8_conv1d_execute(&descriptor, &model, &io);
+}
+
+uint32_t quantized_runtime_float_dense_execute(
+    const quantized_runtime_float_dense_descriptor *descriptor,
+    const quantized_runtime_float_dense_model *model,
+    quantized_runtime_float_dense_io *io) {
+    if (descriptor == NULL || model == NULL || io == NULL ||
+            io->input == NULL || io->output == NULL ||
+            io->input->data == NULL || io->output->data == NULL ||
+            model->weights == NULL || model->biases == NULL ||
+            descriptor->output_count == 0u || descriptor->activation > 2u ||
+            io->input->dims[0] != 1u) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    size_t input_count = 0u;
+    size_t output_elements = 0u;
+    size_t weight_count = 0u;
+    size_t input_bytes = 0u;
+    size_t output_bytes = 0u;
+    if (!multiply_size_checked(io->input->dims[1], io->input->dims[2],
+                               &input_count) ||
+            !multiply_size_checked(io->output->dims[0], io->output->dims[1],
+                                   &output_elements) ||
+            !multiply_size_checked(output_elements, io->output->dims[2],
+                                   &output_elements) ||
+            output_elements != descriptor->output_count ||
+            !multiply_size_checked(descriptor->output_count, input_count,
+                                   &weight_count) ||
+            !multiply_size_checked(input_count, sizeof(float), &input_bytes) ||
+            !multiply_size_checked(output_elements, sizeof(float),
+                                   &output_bytes) ||
+            input_count == 0u || io->input_capacity < input_bytes ||
+            io->output_capacity < output_bytes ||
+            model->weight_count < weight_count ||
+            model->bias_count < descriptor->output_count) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    uint8_t *destination_bytes = (uint8_t *)io->output->data;
+    const bool overlaps = byte_ranges_overlap(
+        io->input->data, input_bytes, io->output->data, output_bytes);
+    if (overlaps) {
+        if (io->workspace == NULL || io->workspace_size < output_bytes ||
+                byte_ranges_overlap(io->workspace, output_bytes,
+                                    io->input->data, input_bytes)) {
+            return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+        }
+        destination_bytes = (uint8_t *)io->workspace;
+    }
+    const float *input = (const float *)io->input->data;
+    float *destination = (float *)(void *)destination_bytes;
+    for (uint32_t output = 0u; output < descriptor->output_count; ++output) {
+        float accumulator = 0.0f;
+        const size_t weight_base = (size_t)output * input_count;
+        for (size_t input_index = 0u; input_index < input_count;
+             ++input_index) {
+            accumulator += input[input_index] *
+                           model->weights[weight_base + input_index];
+        }
+        destination[output] = accumulator + model->biases[output];
+    }
+    if (descriptor->activation == 1u) {
+        for (uint32_t output = 0u; output < descriptor->output_count; ++output) {
+            if (destination[output] < 0.0f) {
+                destination[output] *= descriptor->alpha;
+            }
+        }
+    } else if (descriptor->activation == 2u) {
+        for (uint32_t output = 0u; output < descriptor->output_count; ++output) {
+            float exponent = -destination[output];
+            if (u32_bits_to_i32(f32_to_bits(exponent)) >=
+                    INT32_C(0x42B00000)) {
+                exponent = QUANTIZED_RUNTIME_SOFTMAX_CAP;
+            }
+            destination[output] = 1.0f / (1.0f + expf(exponent));
+        }
+    }
+    if (overlaps) {
+        move_bytes_local((uint8_t *)io->output->data, destination_bytes,
+                         output_bytes);
+    }
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+uint32_t quantized_runtime_float_dense_execute_target(
+    const void *descriptor_record,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    if (descriptor_record == NULL || inputs == NULL || outputs == NULL ||
+            inputs[0] == NULL || outputs[0] == NULL) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const uint8_t *record = (const uint8_t *)descriptor_record;
+    quantized_runtime_float_dense_descriptor descriptor = {
+        load_u32_le(record), record[4], record[5], load_f32_le(record + 8u),
+    };
+    size_t input_count = 0u;
+    size_t weight_count = 0u;
+    size_t input_bytes = 0u;
+    size_t output_bytes = 0u;
+    if (!multiply_size_checked(inputs[0]->dims[1], inputs[0]->dims[2],
+                               &input_count) ||
+            !multiply_size_checked(input_count, descriptor.output_count,
+                                   &weight_count) ||
+            !multiply_size_checked(input_count, sizeof(float), &input_bytes) ||
+            !multiply_size_checked(descriptor.output_count, sizeof(float),
+                                   &output_bytes)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    quantized_runtime_float_dense_model model = {
+        (const float *)(uintptr_t)load_u32_le(record + 0x0Cu), weight_count,
+        (const float *)(uintptr_t)load_u32_le(record + 0x10u),
+        descriptor.output_count,
+    };
+    quantized_runtime_float_dense_io io = {
+        inputs[0], outputs[0], input_bytes, output_bytes, NULL, 0u,
+    };
+    return quantized_runtime_float_dense_execute(&descriptor, &model, &io);
 }
 
 uint32_t quantized_runtime_float_softmax_execute(
@@ -2338,9 +2886,9 @@ void quantized_runtime_descriptor_record_construct(
     const uint32_t span = dim_a * dim_b * 4u;
     store_u32_le(record + 0x0C, weights);
     store_u32_le(record + 0x10, weights + span);
-    const uintptr_t run =
-        (rt != NULL) ? rt->providers.run_85b9c : (uintptr_t)0;
-    store_u32_le(record + 0x14, (uint32_t)run);
+    (void)rt;
+    store_u32_le(record + 0x14,
+                 (uint32_t)(uintptr_t)&quantized_runtime_float_dense_execute_target);
     *arena_cursor = weights + dim_b * 4u + span;
 }
 
@@ -2421,9 +2969,9 @@ void quantized_runtime_aligned_descriptor_construct(
     store_u32_le(record + 0x0C, weights);
     store_u32_le(record + 0x10,
                  aligned_end + (uint32_t)byte5 * 4u + 8u);
-    const uintptr_t vector =
-        (rt != NULL) ? rt->providers.vector_85dc4 : (uintptr_t)0;
-    store_u32_le(record + 0x14, (uint32_t)vector);
+    (void)rt;
+    store_u32_le(record + 0x14,
+                 (uint32_t)(uintptr_t)&quantized_runtime_i8_conv1d_execute_target);
     *arena_cursor = aligned_end + (uint32_t)byte5 * 8u + 0x18u;
 }
 
@@ -2840,6 +3388,54 @@ quantized_runtime_tensor *quantized_runtime_tensor_construct(
         (uint8_t)(tensor->flags | QUANTIZED_RUNTIME_TENSOR_FLAG_BUFFERLESS);
     tensor->data = NULL;
     return tensor;
+}
+
+quantized_runtime_tensor *quantized_runtime_tensor_slice(
+    quantized_runtime_pool *pool, const quantized_runtime_tensor *input,
+    uint32_t begin, uint32_t end) {
+    if (pool == NULL || input == NULL || input->data == NULL) {
+        return NULL;
+    }
+    const uint32_t rank = (uint32_t)input->flags & 3u;
+    if (rank == 0u || begin > end || end > (uint32_t)input->dims[0]) {
+        return NULL;
+    }
+    uint16_t dims[3] = {0u, 0u, 0u};
+    dims[0] = (uint16_t)(end - begin);
+    uint32_t trailing_count = 1u;
+    for (uint32_t index = 1u; index < rank; ++index) {
+        const uint32_t dimension = (uint32_t)input->dims[index];
+        if (dimension != 0u && trailing_count > UINT32_MAX / dimension) {
+            return NULL;
+        }
+        trailing_count *= dimension;
+        dims[index] = input->dims[index];
+    }
+    if (begin != 0u && trailing_count > SIZE_MAX / begin) {
+        return NULL;
+    }
+    size_t byte_offset = (size_t)begin * (size_t)trailing_count;
+    const bool int8_form =
+        (input->flags & QUANTIZED_RUNTIME_TENSOR_FLAG_INT8) != 0u;
+    if (!int8_form) {
+        if (byte_offset > SIZE_MAX / 2u) {
+            return NULL;
+        }
+        byte_offset *= 2u;
+    }
+    quantized_runtime_tensor *slice = quantized_runtime_tensor_construct(
+        pool, (int32_t)rank, dims);
+    if (slice == NULL) {
+        return NULL;
+    }
+    slice->data = (uint32_t *)(void *)
+        ((uint8_t *)(void *)input->data + byte_offset);
+    if (int8_form) {
+        slice->reserved_10 = input->reserved_10;
+        slice->flags = (uint8_t)(slice->flags |
+                                 QUANTIZED_RUNTIME_TENSOR_FLAG_INT8);
+    }
+    return slice;
 }
 
 /* Recovered qsort comparator at 0x00058D4A: ascending first-word

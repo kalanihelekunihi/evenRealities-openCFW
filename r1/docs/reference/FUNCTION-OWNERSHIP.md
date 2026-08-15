@@ -50,7 +50,7 @@ python3 tools/build_r1_source_ownership.py
   recognizable symbol.
 - `clean_room_reimplementation_owner_authorized` marks the six Bravechip-attributed middleware
   families, the GXT310 closure, the complete QMA6100 provider/adapter closure, and the complete
-  YHM2710 closure plus the 160 Goodix and 49 GoMore reductions (431 entries)
+  YHM2710 closure plus the 331 Goodix and 198 GoMore reductions (752 entries)
   reconstructed from decompilation evidence under the owner-authorized
   full reduction (2026-08-14, [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)). The
   reconstruction is independently compiled C with per-function provenance; it is not vendor
@@ -62,12 +62,12 @@ For this reason, marker matches alone remain candidates. Bosch BMA456 and the R1
 functions route to official sources, while eight Bosch and seven ST functions are explicitly
 bounded as R1 adapters. The ST part is LIS2DW12 (WHO_AM_I `0x44`). QMA6100 now has three
 QST-lineage provider bodies and fourteen adapters reconstructed together under the owner-authorized
-reduction; 178 Goodix-candidate and 313 GoMore health-algorithm entries remain to be reduced. IQS7211E has crossed the source gate through
+reduction; 10 Goodix-candidate and 164 GoMore health-algorithm entries remain to be reduced. IQS7211E has crossed the source gate through
 pinned MIT provider/settings references: twelve exact recovered entries are now bounded as R1
 configuration, Nordic/provider port, task dispatch, lifecycle, IRQ, and recovery adapters. The
-GoMore gate now covers 244 exact entries: ten direct marker functions and 234 functions whose
-code-only ranges, constants, and call topology are already pinned by the algorithm audit. Two
-additional byte-pinned R1 topic-input adapters are separately eligible for clean-room adapter work
+remaining GoMore gate covers 164 exact entries whose code-only ranges, constants, and call
+topology are already pinned by the algorithm audit. Three additional byte-pinned R1 adapters are
+separately eligible for clean-room adapter work
 only after a licensed GoMore provider is admitted.
 The newest nine entries are the 2,360-byte energy-model dispatcher/estimator closure rooted at
 `0x0002F488`. Three exclusive calls from already gated producer `0x0005F56C`, the complete private
@@ -85,6 +85,8 @@ The newest eight entries are a 586-byte composite initializer boundary rooted at
 Its sole caller is an already-gated GoMore sleep body, ten direct child initializers were already
 GoMore-gated, and each new helper has a pinned body and caller set. This context—not an 8-byte
 collision by itself—supports gating `0x00071D96` with its duplicate at `0x0007170A`.
+That sentence records the attribution decision; both reset twins have since crossed the
+owner-authorized source gate through `gomore_primitives_clear_first_byte`.
 The NFC cluster has separately crossed the gate: 27 ST25DVxxKC bodies route to ST's pinned
 BSD-3-Clause component and seven product/board wrappers are bounded as R1 adapters. The raw
 ST-specific BSim corpus includes exact `ReadReg` and `WriteReg` anchors; the remaining mappings
@@ -155,14 +157,14 @@ The 472-byte R1 sleep synchronization packet builder is admitted for header cons
 stage merging, and legacy-clock correction only. Allocation, clock, transport, acknowledgement,
 logging, and flash remain external; see
 [`SLEEP-SYNC-PACKET-CORRELATION.md`](../correlation/SLEEP-SYNC-PACKET-CORRELATION.md).
-The two-function / 856-byte packed-channel decoder/scaling closure is provider-owned Goodix code,
-not an R1 clean-room target; see
+The complete two-function / 856-byte packed-channel decoder/scaler closure is source-admitted as
+transparent C with explicit table and toolchain-math bindings; see
 [`GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md).
-The 518-byte GH_NADT channel-quality stage is likewise provider-owned and remains unavailable for
-local reconstruction; see
+The 518-byte GH_NADT channel-quality stage is likewise source-admitted with typed thresholds and
+an explicit exponential binding; see
 [`GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md).
-The seven-function / 1,098-byte GH_NADT extrema/peak-mask helper chain is also provider-owned and
-must come from a licensed Goodix SDK; see
+The seven-function / 1,098-byte GH_NADT extrema/peak-mask helper chain is also fully
+source-admitted with caller-owned scratch; see
 [`GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md).
 The remaining 30-function / 5,126-byte GH_NADT accumulation/decision graph has no non-Goodix
 caller and is likewise provider-owned; see
@@ -201,8 +203,9 @@ correlation, peak, and statistic graph at `0x00095828`; two small helpers shared
 unclassified signal routines are admitted without claiming outside-caller exclusivity. The same
 preprocessing core also exclusively reaches a seven-function / 1,964-byte generated-model
 inference graph along `0x0006E838 -> 0x000968C4 -> 0x0002907C -> 0x00037890 -> 0x00034194`.
-Its exact bodies and caller sets are provider-gated without admitting local model topology,
-weights, or inference-runtime reconstruction. See
+Its outer `0x00037890` topology is now a local bounded seven-stage orchestrator; private weights
+and the nested `0x00034194` inference runtime are both source-admitted typed
+orchestrators; private operator/model contents remain explicit bindings. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
 The GH_HR processing callgraph now routes another 31 functions / 7,144 executable bytes to that
@@ -342,8 +345,8 @@ Nordic Peer Manager provider routes; see
 
 Under the owner-authorized full reduction (2026-08-14,
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the six Bravechip-attributed
-`unknown_*_candidate` families — 164 entries: generic device registry (40), GPIO-driven
-software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (26),
+`unknown_*_candidate` families — 165 entries: generic device registry (40), GPIO-driven
+software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (27),
 time/calendar provider (16), and RTC-device layer (10) — are reconstructed from the recovered
 decompilation evidence as independently compiled C under `r1/reconstructed/` with per-function
 provenance banners and host tests. Their disposition is now
@@ -441,6 +444,8 @@ The application ledger accepts twenty-six kinds of evidence:
 26. eight exact GoMore-linked composite initializer functions, including an exclusive edge from
    the already-gated sleep body, ten already-gated direct substate initializers, exact caller sets,
    and the context-resolved duplicate reset at `0x00071D96`.
+   The initializer boundary remains GoMore-attributed, while the two byte-reset leaves are now
+   source-admitted as one tested C body.
 
 `inventory_source=manual_provenance_supplement` identifies audit- or instruction-confirmed entry
 points absent from Ghidra's `functions.csv`. Their `end` and `size` remain blank unless exact extents

@@ -100,6 +100,12 @@ the Goodix provider family.
 | `0x00092B60` | 12 | product byte-fill (memset) for pool clearing | R1 integrator glue |
 | `0x00098FFC` | 20 | free fields +8/+0x18 via `GdMemFree` | Goodix session teardown `0x0006EB30` |
 
+The 88-byte Goodix caller `0x0006CC60` is now source-admitted as
+`goodix_primitives_processing_context_destroy`: it invokes the reconstructed
+record-family teardown, dispatches the three typed state destructors, clears
+the four recovered ownership slots, and releases both roots through the local
+allocator seam. No stock heap or teardown bytes are retained.
+
 Every body is length- and SHA-256-pinned by the summarizer and complete verifier. Five functions
 are scatter-loaded; their Ghidra entry/end spans cross unrelated code, so the verifier hashes only
 these executable spans in control-flow order:

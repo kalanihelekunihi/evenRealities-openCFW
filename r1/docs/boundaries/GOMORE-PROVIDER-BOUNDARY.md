@@ -1,5 +1,10 @@
 # GoMore health-algorithm provider boundary
 
+> Current owner-authorized reduction note: 198 of the 362 candidate entries now compile from
+> transparent C (185 primitives and thirteen tensor-runtime routines); 164 remain gated. The attribution and
+> callgraph census below remains valid, while source-admitted entries are tracked in the two
+> `GOMORE-*-REDUCTION-CORRELATION.md` reports.
+
 ## Decision
 
 The recovered application contains GoMore-specific health-index, authorization, persistence,
@@ -103,6 +108,8 @@ plus the newly bounded helpers. The 8-byte reset at `0x00071D96` is byte-identic
 gated reset at `0x0007170A`, but the classification relies on this exclusive call context rather
 than on generic bytes alone. The complete 586-byte census and caller sets are pinned by
 `../../tools/evidence/summarize_r1_gomore_initializer_boundary.py`.
+Both reset leaves are now owner-authorized local C; the surrounding private initializer remains
+gated. This changes source disposition without erasing the callgraph attribution evidence.
 
 The earlier audit treated `GH_HRV_pre_pv_v1.0.1.0_ed953ff3` as a GoMore version marker. Goodix's
 primary-source developer trace reproduces that exact string and identifies it as a GH3X2X

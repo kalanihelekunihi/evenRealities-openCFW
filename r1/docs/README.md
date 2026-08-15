@@ -174,9 +174,10 @@ The implementation is pinned to these repository-owned evidence sets:
   accepted 412-byte veneer-plus-body extent in
   [`ANALOG-BATTERY-CORRELATION.md`](correlation/ANALOG-BATTERY-CORRELATION.md); the existing clean controller
   is reused and no provider dependency or duplicate algorithm body is introduced.
-- The 406-byte GH_HR private-context initializer at `0x0006D204` is source-gated with Goodix in
-  [`GOODIX-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-PROVIDER-BOUNDARY.md); its `pv_v1.1.0` ABI and private
-  defaults are evidence only and are not recreated locally.
+- The 406-byte GH_HR private-context initializer at `0x0006D204` is reconstructed as a typed,
+  failure-clean constructor in
+  [`GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md);
+  its two stock global owners and copied constructor table are explicit caller bindings.
 - The 402-byte HRV FlashDB iterator callback is product-routed in
   [`HRV-FLASH-MERGE-CORRELATION.md`](correlation/HRV-FLASH-MERGE-CORRELATION.md), with only its bounded
   record/day/slot policy admitted and every storage, calendar, logging, transport, and biometric
@@ -316,7 +317,7 @@ The implementation is pinned to these repository-owned evidence sets:
   [`YHM2710-REDUCTION-CORRELATION.md`](correlation/YHM2710-REDUCTION-CORRELATION.md); the adjacent watchdog
   now compiles Nordic `nrfx_wdt.c` with only an R1 configuration/feed adapter, documented in
   [`WATCHDOG-DEVICE-CORRELATION.md`](correlation/WATCHDOG-DEVICE-CORRELATION.md).
-- The first source-owned algorithm batches—160 Goodix functions and 49 GoMore primitives/tensor executors—are
+- The first source-owned algorithm batches—331 Goodix functions and 198 GoMore primitives/tensor-runtime routines—are
   correlated in [`GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md)
   and [`GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md).
   The tensor subset has its descriptor/allocation seam documented in
@@ -329,7 +330,7 @@ The implementation is pinned to these repository-owned evidence sets:
   [`SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md`](boundaries/SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md).
 - The 2026-08 attribution re-examination tested all six `investigate_before_implementing`
   platform families (device registry, software TWI, sensor stream, quantized-neural runtime,
-  time/calendar, RTC device — 164 functions) against fetched upstream sources and identified
+  time/calendar, RTC device — 165 functions) against fetched upstream sources and identified
   the interlocked "B210 platform" middleware as Wuxi Bravechip's closed ChipletRing / BCL603M
   platform (firmware string `603MV1.9.3`, byte-exact BAE8 GATT base-UUID match to the public
   `BravechipSpace/ChipletRing-APPSDK`). All six remain NO ATTRIBUTION and implementation-blocked,
@@ -360,18 +361,16 @@ The implementation is pinned to these repository-owned evidence sets:
 - The 9-function / 1,288-byte GH_HRV lifecycle, including the former largest unknown at
   `0x0006DB5C`, is source-gated in
   [`GOODIX-HRV-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-HRV-PROVIDER-BOUNDARY.md).
-- The two-function / 856-byte packed-channel decoder/scaling closure is retained behind the
-  licensed Goodix boundary in
-  [`GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md);
-  no private table, coefficient, or scaling formula is reconstructed.
-- The sole-caller 518-byte GH_NADT channel-quality stage is source-gated in
-  [`GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md); its
-  private thresholds and score formula are not reconstructed.
-- The seven-function / 1,098-byte GH_NADT extrema/peak-mask chain is source-gated in
-  [`GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md);
-  its private selection algorithm is not reconstructed.
-- The remaining 30-function / 5,126-byte GH_NADT accumulation/decision helper graph is
-  source-gated in
+- The complete two-function / 856-byte packed-channel decoder/scaler closure is transparent C
+  with explicit table and toolchain-math bindings in
+  [`GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-CHANNEL-DECODER-PROVIDER-BOUNDARY.md).
+- The sole-caller 518-byte GH_NADT channel-quality stage is source-admitted with typed
+  configuration and explicit exponential binding in
+  [`GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-NADT-QUALITY-PROVIDER-BOUNDARY.md).
+- The seven-function / 1,098-byte GH_NADT extrema/peak-mask chain is fully source-admitted in
+  [`GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md).
+- The complete 30-function / 5,126-byte GH_NADT accumulation/decision helper graph is
+  source-admitted in
   [`GOODIX-NADT-ACCUMULATION-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-NADT-ACCUMULATION-PROVIDER-BOUNDARY.md).
 - The 514-byte eight-channel GH3X2X register-profile decoder is source-gated in
   [`GOODIX-REGISTER-PROFILE-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-REGISTER-PROFILE-PROVIDER-BOUNDARY.md);
