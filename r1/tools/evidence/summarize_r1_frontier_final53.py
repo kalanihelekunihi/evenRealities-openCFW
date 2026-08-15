@@ -297,61 +297,61 @@ DEVICE_REGISTRY_FRONTIER_FINAL53_FUNCTIONS = (
         0x00050ABC, 30, ((0x00050ABC, 0x00050ADA, "01493f1cc6ee0eb2e44d322df92df3bb0e187529f198323f0deceac546295e39"),),
         "", "registry client op: registry device_operation_dispatch_slot_08 (0x85D1A) on DAT+4, conditional slot_20 (0x85D46,flag=1); callerless, no pointer hits; neighbors are r1_goodix_provider_adapter wrappers (adapter family not assignable this round)",
         ((0x00050B6E, "BL"), (0x00050B9C, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00087AF8, 30, ((0x00087AF8, 0x00087B16, "8509e07607294c4bd49a4433dfa558fa34908724a64ed53e9a49777998781745"),),
         "", "packs 3-word message into static buffer 0x2001E56C and posts via device_operation_dispatch_slot_10 (0x85D2C, registry candidate); RAM pointer-table hit at 0x200077EC; callerless in call graph",
         (),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0005D8CC, 26, ((0x0005D8CC, 0x0005D8E6, "83c735fdcbc9ed290714cd230d65fc66379ca691afa54dc735d986c546b126a3"),),
         "", "BKDR-style name hash (h = h*0x83 + byte) over buffer; callerless, no pointer hits; sits directly above the shared intrusive-list accessors 0x5D8E6/0x5D8EE/0x5D8F6 used by registry list insert/remove; 0x5D8xx-0x5DCxx list/registry region prior",
         ((0x000731FC, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0006F90E, 18, ((0x0006F90E, 0x0006F920, "0cfdd25c5a42688645f2744bf05dca0483d44bf68450d1a2d8b056fad26d5b53"),),
         "", "ops-table callback: reorders args, calls registry static_request_block_fill 0x509BC with op=0, returns 1; ROM ops-table hit at 0x2DB00 whose first slot is r1_goodix_board_line_prepare_thunk (Goodix device ops table)",
         (),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00077E30, 12, ((0x00077E30, 0x00077E3C, "5d706e51761318a467020a176c78df65e068d82e11acf2e5fc594438acb77339"),),
         "", "intrusive-list link store helper: if offset != 0, *(node + offset + 4) = value; called by registry-candidate list insert 0x5D94A, registry-candidate remove 0x5D998, and sensor-stream node allocate 0x5D90E",
         ((0x0005D92E, "BL"), (0x0005D960, "BL"), (0x0005D976, "BL"), (0x0005D9D6, "B.W"), (0x0005D9EE, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00077E3C, 10, ((0x00077E3C, 0x00077E46, "b7b4fc8d311ba35e4aaf7fa49703a4062558a0a9f8cf80a1660640eaa28dc8a8"),),
         "", "intrusive-list link store helper: if offset != 0, *(node + offset) = value; callers are the same registry-candidate list insert/remove pair 0x5D94A/0x5D998 plus sensor-stream node allocate 0x5D90E",
         ((0x0005D924, "BL"), (0x0005D93A, "BL"), (0x0005D96A, "BL"), (0x0005D9FC, "B.W"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0005D8E6, 8, ((0x0005D8E6, 0x0005D8EE, "0852648987107a62e4221fb31109e0d50dfc55c254528d5a5311b08a1a094c3f"),),
         "", "guarded node-field getter (NULL -> 0, else *(node+4)); callers: registry-candidate 0x5D998/0x5DB14 and sensor-stream-candidate 0x89B08/0x89D54/0x8A1E0/0x8A45C (shared list framework)",
         ((0x0005D99E, "BL"), (0x0005DA6A, "BL"), (0x0005DB32, "BL"), (0x00089BB6, "BL"), (0x00089C38, "BL"), (0x00089D62, "BL"), (0x0008A078, "BL"), (0x0008A260, "BL"), (0x0008A49E, "BL"), (0x0008A4CA, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0005D8EE, 8, ((0x0005D8EE, 0x0005D8F6, "e08000717aba4a99bd865d85b1b4e26170dd831851f6a5d5b9c05664d28c1020"),),
         "", "unguarded node-field getter *(node + offset + 4); same registry + sensor-stream caller set as 0x5D8E6",
         ((0x0005D9AA, "BL"), (0x0005D9E2, "BL"), (0x0005DA9C, "BL"), (0x0005DB54, "BL"), (0x00089BC2, "BL"), (0x00089C74, "BL"), (0x00089D76, "BL"), (0x0008A088, "BL"), (0x0008A2EA, "BL"), (0x0008A4AA, "BL"), (0x0008A4EE, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0005D8F6, 8, ((0x0005D8F6, 0x0005D8FE, "3ed21d493193ae519d2a98164490d5eb7124e824bfd4dff8fd774d7e0f847cfc"),),
         "", "guarded node-field getter (NULL -> 0, else *(node+8)); sole caller registry-candidate remove 0x5D998",
         ((0x0005D9BC, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00077214, 8, ((0x00077214, 0x0007721C, "0c7581b47a7677a260141079a54623b6555fe6e538d3d144fe4e142785701ee6"),),
         "", "pure branch thunk (b.w) to 0x85CBA = registry-candidate device_operation_dispatch_slot_0c with device handle *DAT_0007721C; inherits destination family/disposition",
         ((0x00042D30, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 
@@ -360,7 +360,7 @@ QUANTIZED_RUNTIME_FRONTIER_FINAL53_FUNCTIONS = (
         0x00029120, 34, ((0x00029120, 0x00029142, "bdec0f3376563581f2578e7e253ebd0d44f950cb7cffaf4fe0eac54aafafdead"),),
         "round_half_away_from_zero_29120", "float x -> int(x + copysign(0.5,x)) (vcvt.s32.f32); identical semantics to classified neighbor 0x290FE (round_half_away_from_zero_290fe, same family); callerless, no pointer hits",
         ((0x00085E2A, "BL"), (0x0008601E, "BL"),),
-        "unknown_shared_quantized_neural_runtime_candidate", "investigate_before_implementing",
+        "unknown_shared_quantized_neural_runtime_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 
@@ -369,19 +369,19 @@ RTC_DEVICE_FRONTIER_FINAL53_FUNCTIONS = (
         0x00050DAA, 12, ((0x00050DAA, 0x00050DB6, "7ed3839cbc121b8ce45a995ed1503c99126e28acc33936b2262f1671fb12d09a"),),
         "", "RTC-device ops-table slot 7 (ROM table at 0x99C8C): moves r3->r0, calls 0x50DE0, returns 1; table sits directly after days-in-month arrays and is referenced from time/calendar provider region 0x5A8AC-0x5A983",
         (),
-        "unknown_rtc_device_provider_candidate", "investigate_before_implementing",
+        "unknown_rtc_device_provider_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00050DE0, 12, ((0x00050DE0, 0x00050DEC, "51129a4a7988def880fc9ea1ea1a9ebd4572b7e8c134093cf8afe0aa52b33b91"),),
         "", "shared tail of 0x50DAA: tail-branches to registry device_operation_dispatch_slot_20 (0x85D46) with op=0 on a device handle; sole caller is the RTC-table slot 0x50DAA",
         ((0x00050DAE, "BL"),),
-        "unknown_rtc_device_provider_candidate", "investigate_before_implementing",
+        "unknown_rtc_device_provider_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00050DB6, 10, ((0x00050DB6, 0x00050DC0, "2e064ca1f0afdb9a53e8f599f8291b42f4e037b3df4152747b7ac292f84250d4"),),
         "", "RTC-device ops-table slot 4 (ROM table at 0x99C8C): calls registry static_request_block_fill 0x50DF0, returns 1",
         (),
-        "unknown_rtc_device_provider_candidate", "investigate_before_implementing",
+        "unknown_rtc_device_provider_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 

@@ -626,6 +626,242 @@ GOODIX_ADAPTER_GLUE_SYMBOLS = {
     0x0006F9D4: "r1_goodix_gsensor_cache_query",
 }
 
+GOODIX_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
+    0x0006EB00: "goodix_primitives_copy_preprocess_version",
+    0x0006CC34: "goodix_primitives_copy_process_version",
+    0x00029C74: "goodix_primitives_dispatch_state",
+    0x0002ACF4: "goodix_primitives_record_initialize_once",
+    0x0002D16C: "goodix_primitives_initialize_device",
+    0x00029D34: "goodix_primitives_select_fixed_pair",
+    0x00029F88: "goodix_primitives_record_initialize",
+    0x0002A474: "goodix_primitives_reset_state_record",
+    0x0006F9D4: "goodix_primitives_call_hook",
+    0x0002ABEC: "goodix_primitives_clear_state_flags",
+    0x0006A140: "goodix_primitives_library_code",
+    0x0006A130: "goodix_primitives_table_9d640",
+    0x0006A138: "goodix_primitives_table_a04cc",
+    0x0006A148: "goodix_primitives_table_a50b0",
+    0x0006A150: "goodix_primitives_table_a692c",
+    0x0006A018: "goodix_primitives_table_ad1ac",
+    0x0006CC2C: "goodix_primitives_table_ad13c",
+    0x0006EAF8: "goodix_primitives_table_ad160",
+    0x0002E8C8: "goodix_primitives_constant_one_a",
+    0x0002E8C4: "goodix_primitives_constant_four",
+    0x0002AE00: "goodix_primitives_constant_one_b",
+    0x0002963A: "goodix_primitives_buffer_record_initialize",
+    0x00096A20: "goodix_primitives_buffer_record_create",
+    0x0007CBA0: "goodix_primitives_buffer_record_destroy",
+    0x000929B6: "goodix_primitives_integer_max_index",
+    0x000667E4: "goodix_primitives_copy_dlcom_version",
+    0x000664F4: "goodix_primitives_word_window_push",
+    0x0003EFD8: "goodix_primitives_logistic_score",
+    0x0002A9D2: "goodix_primitives_noop_a",
+    0x0002E950: "goodix_primitives_noop_b",
+    0x0002A54C: "goodix_primitives_zero_a",
+    0x0002A610: "goodix_primitives_zero_b",
+    0x0002D458: "goodix_primitives_second_word",
+    0x000294F8: "goodix_primitives_transformed_differs",
+    0x0002950C: "goodix_primitives_transform_in_place",
+    0x0002CAC6: "goodix_primitives_initialize_status",
+    0x00034A66: "goodix_primitives_is_evenly_divisible",
+    0x00036718: "goodix_primitives_unsigned_power",
+    0x00037710: "goodix_primitives_float_buffer_full",
+    0x00037720: "goodix_primitives_float_buffer_get",
+    0x00037B68: "goodix_primitives_centered_i8",
+    0x00038030: "goodix_primitives_float_sum",
+    0x00056828: "goodix_primitives_decrement_counter",
+    0x0005D5D0: "goodix_primitives_tensor_descriptor_initialize",
+    0x00061EF2: "goodix_primitives_filter_code",
+    0x00061FB4: "goodix_primitives_float_sum",
+    0x00066394: "goodix_primitives_word_window_last",
+    0x00066490: "goodix_primitives_word_window_count",
+    0x00066890: "goodix_primitives_store_version_qualifier",
+    0x0006DAA4: "goodix_primitives_copy_process_version_v1_1",
+    0x0006E548: "goodix_primitives_copy_process_version_v1_0",
+    0x00085CA4: "goodix_primitives_reverse_low_bits",
+    0x00087A78: "goodix_primitives_float_mean",
+    0x000928E0: "goodix_primitives_sum_squares",
+    0x00092900: "goodix_primitives_dot_product",
+    0x00028E5C: "goodix_primitives_transformed_differs",
+    0x00029090: "goodix_primitives_copy_indexed_record",
+    0x000290DC: "goodix_primitives_round_nearest",
+    0x0002A168: "goodix_primitives_transform_packed24_lsb",
+    0x0002A1CC: "goodix_primitives_visit_packed24",
+    0x0002ADD0: "goodix_primitives_swap_u16_bytes",
+    0x000357A2: "goodix_primitives_i32_range",
+    0x00036BD4: "goodix_primitives_processing_record_initialize",
+    0x00036C32: "goodix_primitives_update_transition",
+    0x00037574: "goodix_primitives_sort_floats",
+    0x0004304C: "goodix_primitives_sorted_insert",
+    0x00061F94: "goodix_primitives_float_mean_or_zero",
+    0x000662DA: "goodix_primitives_word_window_full",
+    0x00066458: "goodix_primitives_i16_mean",
+    0x000668DC: "goodix_primitives_i16_min_index",
+    0x00092988: "goodix_primitives_float_min_index",
+    0x000929D6: "goodix_primitives_float_max_index",
+    0x00092B68: "goodix_primitives_float_mean_or_zero",
+    0x00028EAC: "goodix_primitives_release_and_clear",
+    0x00036230: "goodix_primitives_release_if_present",
+    0x0003757C: "goodix_primitives_release_if_present",
+    0x00034A3C: "goodix_primitives_allocate_record_pair",
+    0x00036C60: "goodix_primitives_release_context_pair",
+    0x000662EA: "goodix_primitives_buffer_descriptor_initialize",
+    0x00066304: "goodix_primitives_buffer_descriptor_initialize",
+    0x0006631E: "goodix_primitives_extended_descriptor_initialize",
+    0x0006633A: "goodix_primitives_extended_descriptor_initialize",
+    0x0006635C: "goodix_primitives_float_descriptor_initialize",
+    0x00028EC0: "goodix_primitives_release_context_pair",
+    0x00056860: "goodix_primitives_release_and_clear",
+    0x00066276: "goodix_primitives_release_and_clear",
+    0x0006628A: "goodix_primitives_release_and_clear",
+    0x0006629E: "goodix_primitives_release_and_clear",
+    0x000662B2: "goodix_primitives_release_and_clear",
+    0x000662C6: "goodix_primitives_release_and_clear",
+    0x000667C0: "goodix_primitives_release_if_present",
+    0x00073154: "goodix_primitives_release_two_and_clear",
+    0x00092B58: "goodix_primitives_byte_fill",
+    0x00092B60: "goodix_primitives_byte_fill",
+    0x00098FFC: "goodix_primitives_release_two",
+    0x0005683C: "goodix_primitives_dual_buffer_descriptor_initialize",
+    0x00056874: "goodix_primitives_float_storage_initialize",
+    0x000667C6: "goodix_primitives_pair_buffer_initialize",
+    0x00093E3A: "goodix_primitives_release_two_and_clear",
+    0x0003DF18: "goodix_primitives_channel_state_initialize",
+    0x000304A0: "goodix_primitives_channel_state_release",
+    0x0005CD90: "goodix_primitives_session_state_initialize",
+    0x00091890: "goodix_primitives_session_state_release",
+    0x000362B6: "goodix_primitives_owned_float_record_create",
+    0x00033800: "goodix_primitives_owned_float_record_destroy",
+    0x00034AA0: "goodix_primitives_channel_record_array_create",
+    0x000305D8: "goodix_primitives_channel_record_array_destroy",
+    0x00031914: "goodix_primitives_dual_i16_storage_initialize",
+    0x0003727C: "goodix_primitives_session_aggregate_create",
+    0x00037E8A: "goodix_primitives_session_aggregate_destroy",
+    0x0002F624: "quantized_runtime_goodix_model_owner_initialize",
+    0x00030800: "quantized_runtime_goodix_layer_block_build",
+    0x0002951A: "quantized_runtime_goodix_five_stage_32_execute",
+    0x0006EB30: "goodix_primitives_outer_session_destroy",
+    0x0006EB94: "goodix_primitives_outer_session_create",
+    0x00066840: "goodix_primitives_copy_dsp_version",
+    0x0006EC90: "goodix_primitives_build_spo2_version",
+    0x00036C26: "quantized_runtime_goodix_model_instance_create",
+    0x00036408: "quantized_runtime_recurrent_range_adjust",
+    0x00036590: "quantized_runtime_recurrent_range_adjust",
+    0x000617F8: "quantized_runtime_goodix_second_executor_execute",
+    0x00035D6E: "quantized_runtime_goodix_five_stage_27_execute",
+    0x0003F7F8: "quantized_runtime_goodix_f32_three_stage_execute",
+    0x00042024: "quantized_runtime_goodix_u8_three_stage_execute",
+    0x0004387C: "quantized_runtime_goodix_graph_build",
+    0x0005D01C: "quantized_runtime_goodix_second_graph_build",
+    0x0006FDE0: "quantized_runtime_recurrent_zero_point",
+    0x000739A8: "quantized_runtime_recurrent_execute",
+    0x0007400C: "quantized_runtime_float_min_max",
+    0x0007405C: "quantized_runtime_u8_matrix_vector",
+    0x0007412C: "goodix_primitives_quartic_evaluate",
+    0x00074190: "goodix_primitives_peak_select",
+    0x0005A5EC: "goodix_primitives_integrity_encode",
+    0x000759F4: "goodix_primitives_integrity_invalid",
+    0x00028E14: "goodix_primitives_integrity_invalid",
+    0x00028E70: "goodix_primitives_integrity_encode",
+    0x000294BC: "goodix_primitives_integrity_encode",
+    0x00028DE0: "goodix_primitives_packed_5_10_to_f32_bits",
+    0x00028DE6: "goodix_primitives_packed_6_9_to_f32_bits",
+    0x00028DEC: "goodix_primitives_u32_to_u16_transform",
+    0x000742E4: "quantized_runtime_goodix_executor_execute",
+    0x000876C8: "quantized_runtime_goodix_layer_execute",
+    0x00074A20: "quantized_runtime_recurrent_layer_descriptor_construct",
+    0x00074AA4: "goodix_primitives_release_context_pair_vector",
+    0x00074B44: "quantized_runtime_aligned_descriptor_construct",
+    0x00074C6C: "quantized_runtime_packed_pool_descriptor_initialize",
+    0x00074C90: "quantized_runtime_executor_vector_30534",
+    0x00074CB4: "quantized_runtime_cursor_pair_add_descriptor_construct",
+}
+
+GOODIX_HEAP_RECONSTRUCTED_SYMBOLS = {
+    0x0002D460: "goodix_heap_free",
+    0x0002D54C: "goodix_heap_zero_allocate",
+    0x0002D5C0: "goodix_heap_reallocate",
+    0x00042D1C: "goodix_heap_control",
+    0x0006DFC8: "goodix_heap_free",
+    0x0006DFCC: "goodix_heap_available_bytes",
+    0x0006DFD6: "goodix_heap_initialize",
+    0x0006E004: "goodix_heap_zero_allocate",
+    0x00076A44: "goodix_heap_unlink_free_block",
+    0x00093E14: "goodix_heap_size_to_bin",
+    0x00093E5E: "goodix_heap_insert_free_block",
+    0x000982C2: "goodix_heap_allocate_core",
+}
+
+GOODIX_RECONSTRUCTED_SYMBOLS = {
+    **GOODIX_PRIMITIVES_RECONSTRUCTED_SYMBOLS,
+    **GOODIX_HEAP_RECONSTRUCTED_SYMBOLS,
+}
+
+
+def goodix_candidate_row_matches(row, entry):
+    """Accept only exact local reductions; keep every other candidate gated."""
+    if row["provider_family"] != "goodix_gh3x2x_candidate":
+        return False
+    local_symbol = GOODIX_RECONSTRUCTED_SYMBOLS.get(entry)
+    if local_symbol is not None:
+        return row["source_disposition"] == \
+            "clean_room_reimplementation_owner_authorized" and \
+            row["upstream_symbol"] == local_symbol
+    return row["source_disposition"] == \
+        "vendor_source_required_not_redistributable"
+
+GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
+    0x0006AD04: "gomore_primitives_records_all_clear",
+    0x000715B8: "gomore_primitives_record5_initialize",
+    0x000883D4: "gomore_primitives_clear_two_records",
+    0x00071B2A: "gomore_primitives_fill_missing_pair",
+    0x00068FBC: "gomore_primitives_prepare_and_score",
+    0x00072AD4: "gomore_primitives_float_in_encoded_range",
+    0x000928DA: "gomore_primitives_scale",
+    0x00094A4C: "gomore_primitives_callback_record_initialize",
+    0x00071A20: "gomore_primitives_span_initialize",
+    0x00087600: "gomore_primitives_sort_float_subrange",
+    0x00091A56: "gomore_primitives_max_index",
+    0x00068720: "gomore_primitives_size_736",
+    0x0006841A: "gomore_primitives_size_14816",
+    0x00071704: "gomore_primitives_clear_90",
+    0x00064770: "gomore_primitives_set_second_word",
+    0x0005A442: "gomore_primitives_return_zero",
+    0x00076500: "gomore_primitives_noop_76500",
+    0x000578C8: "gomore_primitives_noop_578c8",
+    0x00049E58: "gomore_primitives_noop_49e58",
+    0x00072B34: "gomore_primitives_state_window_predicate",
+    0x0006AB88: "gomore_primitives_key_or_cached_copy",
+    0x0008ECD8: "gomore_primitives_slot_state_transition",
+    0x0006AD28: "gomore_primitives_copy_key_blob",
+    0x000726C4: "gomore_primitives_stage_32_and_consume",
+    0x00062000: "gomore_primitives_mean",
+    0x000760EC: "gomore_primitives_argmax_from_zero",
+    0x0004C37C: "gomore_primitives_reset_provider_state",
+    0x0006C640: "gomore_primitives_sample_plausible",
+    0x0006ACD8: "gomore_primitives_stamp_time_record",
+    0x00068570: "gomore_primitives_clamp_hysteresis",
+    0x000726FA: "gomore_primitives_parameter_commit",
+    0x0006AB60: "gomore_primitives_records_any_bit2",
+    0x0006AB38: "gomore_primitives_records_any_bit4",
+    0x0006AB10: "gomore_primitives_records_any_bit3",
+    0x0006AAE8: "gomore_primitives_records_any_bit1",
+    0x0004EC9C: "gomore_primitives_quantized_argmin",
+    0x00064774: "gomore_primitives_max_difference_index",
+    0x00062034: "gomore_primitives_median",
+    0x0006208C: "gomore_primitives_standard_deviation",
+    0x000728D4: "gomore_primitives_logistic_score",
+    0x00094938: "gomore_primitives_modulo5_record",
+    0x0008EEBA: "gomore_primitives_compact_25_windows",
+    0x00094300: "gomore_primitives_decimated_ring_write",
+    0x00091A0E: "gomore_tensor_map",
+    0x00091C80: "gomore_tensor_multiply",
+    0x00091CCC: "gomore_tensor_leaky_relu",
+    0x00091EDC: "gomore_tensor_softmax",
+    0x000919BA: "gomore_tensor_dequant_bias_add",
+    0x00091D30: "gomore_tensor_int8_float_dot",
+}
+
 
 def apply_goodix_democode_attribution(function):
     """Rewrite a frontier census expectation for democode-attributed entries."""
@@ -2453,7 +2689,7 @@ def main() -> None:
         "0x000617F8",
         "0x000876C8",
         "0x000BD668",
-        "provider-owned dormant residue",
+        "source-admitted bodies remain dormant",
         "0x000BCF58",
         "dlCom_pre2exc_pv_v1.3.0_c00c91c9",
         "GH_SPO2_pre_pv_v2.1.10.0",
@@ -2641,8 +2877,8 @@ def main() -> None:
         "Fourteen functions / 1,000",
         "0x200075A4",
         "0x20007614",
-        "yhmicros_yhm2710_candidate",
-        "licensed provider",
+        "owner-authorized clean-room reconstructions",
+        "YHM2710-REDUCTION-CORRELATION.md",
     ):
         require(yhm2710_boundary, marker)
     watchdog_boundary = DOCS / "WATCHDOG-DEVICE-CORRELATION.md"
@@ -2667,9 +2903,19 @@ def main() -> None:
         "0x000982C2..<0x00098340",
         "not FreeRTOS `heap_4`",
         "not TLSF v3.1",
-        "implementation-blocked",
+        "Owner-authorized reduction update",
+        "GOODIX-HEAP-REDUCTION-CORRELATION.md",
     ):
         require(sensor_heap_boundary, marker)
+    goodix_heap_reduction = DOCS / "GOODIX-HEAP-REDUCTION-CORRELATION.md"
+    for marker in (
+        "twelve-function Goodix-owned",
+        "1,126 executable bytes",
+        "goodix_heap_initialize",
+        "goodix_heap_allocate_core",
+        "1,000-operation churn test",
+    ):
+        require(goodix_heap_reduction, marker)
     goodix_integrity_boundary = \
         DOCS / "GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md"
     for marker in (
@@ -3339,11 +3585,15 @@ def main() -> None:
         if row["image"] == "application" and
         row["provider_family"] == "gomore_health_algorithm_candidate"
     ]
-    if any(
-        row["source_disposition"] != "vendor_source_required_not_redistributable"
-        for row in gomore_rows
-    ):
-        raise AssertionError("GoMore function bypasses the licensed-provider gate")
+    for row in gomore_rows:
+        entry = int(row["entry"], 16)
+        expected = (
+            "clean_room_reimplementation_owner_authorized"
+            if entry in GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS
+            else "vendor_source_required_not_redistributable"
+        )
+        if row["source_disposition"] != expected:
+            raise AssertionError("GoMore source-ownership disposition changed")
     gomore_entry_digest = hashlib.sha256("".join(
         f"{row['entry']}\n" for row in gomore_rows
     ).encode()).hexdigest()
@@ -3366,11 +3616,15 @@ def main() -> None:
         if row["image"] == "application" and
         row["provider_family"] == "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
     ]
-    if any(
-        row["source_disposition"] != "use_pinned_upstream"
-        for row in goodix_democode_rows
-    ):
-        raise AssertionError("Goodix public-democode function lost its upstream pin")
+    for row in goodix_democode_rows:
+        entry = int(row["entry"], 16)
+        expected = (
+            "clean_room_reimplementation_owner_authorized"
+            if entry in GOODIX_RECONSTRUCTED_SYMBOLS
+            else "use_pinned_upstream"
+        )
+        if row["source_disposition"] != expected:
+            raise AssertionError("Goodix public-democode source ownership changed")
     goodix_democode_entry_digest = hashlib.sha256("".join(
         f"{row['entry']}\n" for row in goodix_democode_rows
     ).encode()).hexdigest()
@@ -3480,7 +3734,7 @@ def main() -> None:
     ]
     if any(row["provider_family"] !=
            "unknown_shared_quantized_neural_runtime_candidate" or
-           row["source_disposition"] != "investigate_before_implementing"
+           row["source_disposition"] != "clean_room_reimplementation_owner_authorized"
            for row in quantized_pooling_rows):
         raise AssertionError("shared quantized-pooling provider gate changed")
     quantized_pooling_digest = hashlib.sha256("".join(
@@ -5948,12 +6202,13 @@ def main() -> None:
             structured_log_boundary["source_disposition"] != \
             "clean_room_behavior_only" or \
             structured_log_boundary["third_party_implementation_identified"] is not False or \
+            structured_log_boundary[
+                "generic_device_registry_reimplemented"] is not True or \
             any(structured_log_boundary[key] is not False for key in (
                 "nordic_log_frontend_reimplemented",
                 "toolchain_runtime_reimplemented",
                 "rtos_critical_section_reimplemented",
                 "clock_calendar_provider_reimplemented",
-                "generic_device_registry_reimplemented",
                 "log_bin_writer_or_export_sender_emitted",
             )) or \
             structured_log_safety != {
@@ -6061,9 +6316,10 @@ def main() -> None:
             "clean_room_behavior_only" or \
             hrv_sync_flush_summary["boundary"][
                 "third_party_implementation_identified"] is not False or \
+            hrv_sync_flush_summary["boundary"][
+                "time_calendar_provider_reimplemented"] is not True or \
             any(hrv_sync_flush_summary["boundary"][key] is not False for key in (
                 "freertos_allocator_reimplemented",
-                "time_calendar_provider_reimplemented",
                 "topic_or_transport_sender_reimplemented",
                 "structured_logging_reimplemented",
                 "sensor_or_biometric_algorithm_included",
@@ -6113,9 +6369,10 @@ def main() -> None:
             "clean_room_behavior_only" or \
             hr_sync_flush_summary["boundary"][
                 "third_party_implementation_identified"] is not False or \
+            hr_sync_flush_summary["boundary"][
+                "time_calendar_provider_reimplemented"] is not True or \
             any(hr_sync_flush_summary["boundary"][key] is not False for key in (
                 "freertos_allocator_reimplemented",
-                "time_calendar_provider_reimplemented",
                 "topic_or_transport_sender_reimplemented",
                 "structured_logging_reimplemented",
                 "sensor_or_biometric_algorithm_included",
@@ -6165,9 +6422,10 @@ def main() -> None:
             "clean_room_behavior_only" or \
             spo2_sync_flush_summary["boundary"][
                 "third_party_implementation_identified"] is not False or \
+            spo2_sync_flush_summary["boundary"][
+                "time_calendar_provider_reimplemented"] is not True or \
             any(spo2_sync_flush_summary["boundary"][key] is not False for key in (
                 "freertos_allocator_reimplemented",
-                "time_calendar_provider_reimplemented",
                 "topic_or_transport_sender_reimplemented",
                 "structured_logging_reimplemented",
                 "sensor_or_biometric_algorithm_included",
@@ -6268,11 +6526,11 @@ def main() -> None:
             sensor_stream_unregister_summary["boundary"]["provider_family"] != \
             "unknown_sensor_stream_framework_candidate" or \
             sensor_stream_unregister_summary["boundary"]["source_disposition"] != \
-            "investigate_before_implementing" or \
+            "clean_room_reimplementation_owner_authorized" or \
             sensor_stream_unregister_summary["boundary"][
                 "attributable_source_identified"] is not False or \
             sensor_stream_unregister_summary["boundary"][
-                "local_framework_reimplementation_authorized"] is not False or \
+                "local_framework_reimplementation_authorized"] is not True or \
             sensor_stream_unregister_summary["boundary"][
                 "dependent_list_allocator_timer_code_admitted"] is not False or \
             sensor_stream_unregister_summary["boundary"][
@@ -6293,9 +6551,9 @@ def main() -> None:
         if row["inventory_source"] != function["inventory"] or \
                 row["provider_family"] != \
                 "unknown_sensor_stream_framework_candidate" or \
-                row["source_disposition"] != "investigate_before_implementing" or \
+                row["source_disposition"] != "clean_room_reimplementation_owner_authorized" or \
                 row["upstream_symbol"] != function["symbol"] or \
-                row["confidence"] != "candidate" or \
+                row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -6320,9 +6578,9 @@ def main() -> None:
                 "optional_provider_open_hook": True,
             } or sensor_stream_register_summary["boundary"] != {
                 "provider_family": "unknown_sensor_stream_framework_candidate",
-                "source_disposition": "investigate_before_implementing",
+                "source_disposition": "clean_room_reimplementation_owner_authorized",
                 "attributable_source_identified": False,
-                "local_framework_reimplementation_authorized": False,
+                "local_framework_reimplementation_authorized": True,
                 "list_allocator_timer_and_resize_dependencies_admitted": False,
                 "provider_open_hook_admitted": False,
             } or sensor_stream_register_summary["safety"] != {
@@ -6339,9 +6597,9 @@ def main() -> None:
         if row["inventory_source"] != function["inventory"] or \
                 row["provider_family"] != \
                 "unknown_sensor_stream_framework_candidate" or \
-                row["source_disposition"] != "investigate_before_implementing" or \
+                row["source_disposition"] != "clean_room_reimplementation_owner_authorized" or \
                 row["upstream_symbol"] != function["symbol"] or \
-                row["confidence"] != "candidate" or \
+                row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -6374,9 +6632,9 @@ def main() -> None:
                 "empty_list_releases_buffer_and_timer": True,
             } or sensor_stream_dispatch_summary["boundary"] != {
                 "provider_family": "unknown_sensor_stream_framework_candidate",
-                "source_disposition": "investigate_before_implementing",
+                "source_disposition": "clean_room_reimplementation_owner_authorized",
                 "attributable_source_identified": False,
-                "local_framework_reimplementation_authorized": False,
+                "local_framework_reimplementation_authorized": True,
                 "dependent_list_allocator_timer_code_admitted": False,
                 "provider_read_and_listener_hooks_admitted": False,
             } or sensor_stream_dispatch_summary["safety"] != {
@@ -6395,9 +6653,9 @@ def main() -> None:
         if row["inventory_source"] != function["inventory"] or \
                 row["provider_family"] != \
                 "unknown_sensor_stream_framework_candidate" or \
-                row["source_disposition"] != "investigate_before_implementing" or \
+                row["source_disposition"] != "clean_room_reimplementation_owner_authorized" or \
                 row["upstream_symbol"] != function["symbol"] or \
-                row["confidence"] != "candidate" or \
+                row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -6809,10 +7067,17 @@ def main() -> None:
                 "gomore_health_algorithm_candidate"
             else "high"
         )
+        if entry in GOODIX_RECONSTRUCTED_SYMBOLS:
+            expected_disposition = \
+                "clean_room_reimplementation_owner_authorized"
+            expected_symbol = GOODIX_RECONSTRUCTED_SYMBOLS[entry]
+        else:
+            expected_disposition = function["source_disposition"]
+            expected_symbol = function["symbol"]
         if row["inventory_source"] != function["inventory"] or \
                 row["provider_family"] != function["provider_family"] or \
-                row["source_disposition"] != function["source_disposition"] or \
-                row["upstream_symbol"] != function["symbol"] or \
+                row["source_disposition"] != expected_disposition or \
+                row["upstream_symbol"] != expected_symbol or \
                 row["confidence"] != expected_confidence or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -7047,12 +7312,7 @@ def main() -> None:
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:end - recovered_base]
-        expected_confidence = (
-            "candidate"
-            if function["provider_family"] ==
-                "unknown_sensor_stream_framework_candidate"
-            else "high"
-        )
+        expected_confidence = "high"
         if row["inventory_source"] != function["inventory"] or \
                 row["provider_family"] != function["provider_family"] or \
                 row["source_disposition"] != function["source_disposition"] or \
@@ -7108,7 +7368,15 @@ def main() -> None:
             frontier_128_202_summary["device_registry_function_count"] != 2 or \
             frontier_128_202_summary["sensor_stream_function_count"] != 1 or \
             frontier_128_202_summary["quantized_runtime_function_count"] != 3 or \
-            any(frontier_128_202_summary["safety"].values()):
+            frontier_128_202_summary["safety"][
+                "time_calendar_provider_recreated"] is not True or \
+            any(frontier_128_202_summary["safety"][key] is not False
+                for key in (
+                    "biometric_or_health_algorithm_reimplemented",
+                    "yhm_wire_or_register_body_recreated",
+                    "unidentified_framework_recreated",
+                    "withheld_dispatch_surface_enabled",
+                )):
         raise AssertionError("R1 128...202-byte frontier metadata changed")
 
 
@@ -7118,9 +7386,9 @@ def main() -> None:
         "gomore_health_algorithm_candidate": "candidate",
         "goodix_gh3x2x_candidate": "high",
         "yhmicros_yhm2710_candidate": "high",
-        "unknown_time_calendar_provider_candidate": "candidate",
-        "unknown_generic_device_registry_candidate": "candidate",
-        "unknown_sensor_stream_framework_candidate": "candidate",
+        "unknown_time_calendar_provider_candidate": "high",
+        "unknown_generic_device_registry_candidate": "high",
+        "unknown_sensor_stream_framework_candidate": "high",
         "unknown_shared_quantized_neural_runtime_candidate": "high",
     }
     frontier_128_202_labels = {
@@ -7145,10 +7413,18 @@ def main() -> None:
             expected_function["source_disposition"] = "use_pinned_upstream"
         else:
             expected_function = function
+        if expected_function["provider_family"] == \
+                "yhmicros_yhm2710_candidate":
+            expected_function = dict(expected_function)
+            expected_function["source_disposition"] = \
+                "clean_room_reimplementation_owner_authorized"
         expected_symbol = frontier_128_202_labels.get(
             entry, expected_function["symbol"])
         if entry in goodix_democode_symbols:
             expected_symbol = goodix_democode_symbols[entry][0]
+        elif expected_function["provider_family"] == \
+                "yhmicros_yhm2710_candidate":
+            expected_symbol = row["upstream_symbol"]
         if row["inventory_source"] != expected_function["inventory"] or \
                 row["provider_family"] != expected_function["provider_family"] or \
                 row["source_disposition"] != expected_function["source_disposition"] or \
@@ -7216,7 +7492,29 @@ def main() -> None:
         for function in tier_functions:
             entry = int(function["entry"])
             row = ownership_by_key[("application", f"0x{entry:08x}")]
-            if entry in goodix_democode_symbols:
+            if entry in GOODIX_RECONSTRUCTED_SYMBOLS:
+                if entry == 0x00092B60:
+                    expected_family = "r1_product_specific"
+                elif entry in goodix_democode_symbols:
+                    expected_family = \
+                        "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
+                elif entry in GOODIX_ADAPTER_GLUE_SYMBOLS:
+                    expected_family = "r1_goodix_provider_adapter"
+                else:
+                    expected_family = "goodix_gh3x2x_candidate"
+                expected_disposition = \
+                    "clean_room_reimplementation_owner_authorized"
+                expected_confidence = "high"
+                expected_tier_symbol = \
+                    GOODIX_RECONSTRUCTED_SYMBOLS[entry]
+            elif entry in GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS:
+                expected_family = "gomore_health_algorithm_candidate"
+                expected_disposition = \
+                    "clean_room_reimplementation_owner_authorized"
+                expected_confidence = "high"
+                expected_tier_symbol = \
+                    GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS[entry]
+            elif entry in goodix_democode_symbols:
                 democode_symbol, democode_confidence = goodix_democode_symbols[entry]
                 expected_family = "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
                 expected_disposition = "use_pinned_upstream"
@@ -7235,6 +7533,13 @@ def main() -> None:
                 # provenance (or R1 integrator glue for the two local bodies).
                 expected_family, expected_disposition, expected_confidence, _ = \
                     SENSOR_ALGORITHM_HEAP_ROUTING[entry]
+            elif function["provider_family"] == \
+                    "yhmicros_yhm2710_candidate":
+                expected_family = "yhmicros_yhm2710_candidate"
+                expected_disposition = \
+                    "clean_room_reimplementation_owner_authorized"
+                expected_confidence = "high"
+                expected_tier_symbol = row["upstream_symbol"]
             else:
                 expected_family = function["provider_family"]
                 expected_disposition = function["source_disposition"]
@@ -7245,10 +7550,15 @@ def main() -> None:
                     row["source_disposition"] != expected_disposition or \
                     row["confidence"] != expected_confidence or \
                     int(row["size"]) != function["size"] or \
-                    ((expected_tier_symbol if entry in goodix_democode_symbols
+                    ((expected_tier_symbol if entry in
+                      GOODIX_RECONSTRUCTED_SYMBOLS or entry in
+                      GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS or entry in
+                      goodix_democode_symbols
                       else function["symbol"]) and
                      row["upstream_symbol"] != (expected_tier_symbol
-                     if entry in goodix_democode_symbols
+                     if entry in GOODIX_RECONSTRUCTED_SYMBOLS or
+                     entry in GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS or
+                     entry in goodix_democode_symbols
                      else function["symbol"])):
                 raise AssertionError(
                     f"R1 {tier_name}-byte frontier changed: 0x{entry:08x}"
@@ -7454,7 +7764,7 @@ def main() -> None:
         if row["inventory_source"] != function["inventory"] or \
                 row["provider_family"] != \
                 "unknown_shared_quantized_neural_runtime_candidate" or \
-                row["source_disposition"] != "investigate_before_implementing" or \
+                row["source_disposition"] != "clean_room_reimplementation_owner_authorized" or \
                 row["upstream_symbol"] != function["symbol"] or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
@@ -9491,7 +9801,7 @@ def main() -> None:
                 row["provider_family"] != \
                 "unknown_software_twi_provider_candidate" or \
                 row["source_disposition"] != \
-                "investigate_before_implementing" or \
+                "clean_room_reimplementation_owner_authorized" or \
                 row["upstream_symbol"] != function["symbol"] or \
                 row["confidence"] != "high" or \
                 len(body) != function["size"] or \
@@ -9516,7 +9826,7 @@ def main() -> None:
     }
     rtc_dispositions = {
         "unknown_rtc_device_provider_candidate":
-            "investigate_before_implementing",
+            "clean_room_reimplementation_owner_authorized",
         "r1_device_registry_configuration_adapter":
             "clean_room_configuration_only_direct_typed_binding",
         "nordic_nrf5_sdk_17_1_0": "use_nordic_sdk",
@@ -9555,7 +9865,7 @@ def main() -> None:
     if pmic_census["function_count"] != 15 or \
             pmic_census["function_bytes"] != 1018 or \
             pmic_census["vendor_candidate_bytes"] != 1000 or \
-            pmic_census["local_transport_implementation_authorized"] is not False or \
+            pmic_census["local_transport_implementation_authorized"] is not True or \
             pmic_transport_summary["bus_descriptor"]["operations_address"] != \
             "0x200075a4" or \
             pmic_transport_summary["state_command_device"]["operations_address"] != \
@@ -9571,7 +9881,7 @@ def main() -> None:
     }
     yhm_dispositions = {
         "yhmicros_yhm2710_candidate":
-            "vendor_source_required_not_redistributable",
+            "clean_room_reimplementation_owner_authorized",
         "r1_device_registry_configuration_adapter":
             "clean_room_configuration_only_direct_typed_binding",
     }
@@ -9653,7 +9963,11 @@ def main() -> None:
                 "minimum_pool_bytes_exclusive": 1024,
             } or sensor_heap_summary["source_lineage"][
                 "local_implementation_authorized"
-            ] is not False:
+            ] is not True or sensor_heap_summary["safety"] != {
+                "static_parser_only": True,
+                "allocator_reimplementation_emitted": True,
+                "vendor_algorithm_reimplementation_emitted": False,
+            }:
         raise AssertionError("sensor-algorithm heap provider census metadata changed")
     for function in SENSOR_ALGORITHM_HEAP_FUNCTIONS:
         entry = int(function["entry"])
@@ -9667,10 +9981,15 @@ def main() -> None:
         )
         expected_family, expected_disposition, expected_confidence, _ = \
             SENSOR_ALGORITHM_HEAP_ROUTING[entry]
+        expected_symbol = function["symbol"]
+        if entry in GOODIX_HEAP_RECONSTRUCTED_SYMBOLS:
+            expected_disposition = \
+                "clean_room_reimplementation_owner_authorized"
+            expected_symbol = GOODIX_HEAP_RECONSTRUCTED_SYMBOLS[entry]
         if row["inventory_source"] != "ghidra_functions_csv" or \
                 row["provider_family"] != expected_family or \
                 row["source_disposition"] != expected_disposition or \
-                row["upstream_symbol"] != function["symbol"] or \
+                row["upstream_symbol"] != expected_symbol or \
                 row["confidence"] != expected_confidence or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -9727,7 +10046,7 @@ def main() -> None:
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered_function(entry)
         if row["provider_family"] != "unknown_time_calendar_provider_candidate" or \
-                row["source_disposition"] != "investigate_before_implementing" or \
+                row["source_disposition"] != "clean_room_reimplementation_owner_authorized" or \
                 row["upstream_symbol"] != symbol or len(body) != size or \
                 hashlib.sha256(body).hexdigest() != digest:
             raise AssertionError(
@@ -9993,8 +10312,13 @@ def main() -> None:
         for entry, (size, digest) in expected_functions.items():
             row = ownership_by_key[("application", f"0x{entry:08x}")]
             body = recovered_function(entry)
+            expected_disposition = (
+                "clean_room_reimplementation_owner_authorized"
+                if provider == "gxcas_gxt310_candidate" else
+                "clean_room_reimplementation_owner_authorized"
+            )
             if row["provider_family"] != provider or row["source_disposition"] != \
-                    "vendor_source_required_not_redistributable" or \
+                    expected_disposition or \
                     len(body) != size or hashlib.sha256(body).hexdigest() != digest:
                 raise AssertionError(f"Named peripheral boundary changed: 0x{entry:08x}")
     goodix_integrity_summary = summarize_goodix_integrity(recovered_image_path)
@@ -10021,9 +10345,7 @@ def main() -> None:
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:
                          int(function["end_exclusive"]) - recovered_base]
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10032,6 +10354,7 @@ def main() -> None:
                 f"Goodix packed-word integrity boundary changed: 0x{entry:08x}"
             )
         if entry in newly_resolved_integrity_entries and \
+                entry not in GOODIX_RECONSTRUCTED_SYMBOLS and \
                 "packed_24_bit_integrity" not in row["evidence"]:
             raise AssertionError(
                 f"Goodix packed-word integrity role missing: 0x{entry:08x}"
@@ -10066,9 +10389,7 @@ def main() -> None:
             recovered[start - recovered_base:end - recovered_base]
             for start, end in segments
         )
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10105,9 +10426,7 @@ def main() -> None:
             recovered[start - recovered_base:end - recovered_base]
             for start, end in function["segments"]
         )
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10147,9 +10466,7 @@ def main() -> None:
             recovered[start - recovered_base:end - recovered_base]
             for start, end in function["segments"]
         )
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10191,9 +10508,7 @@ def main() -> None:
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:end - recovered_base]
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10232,9 +10547,7 @@ def main() -> None:
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:end - recovered_base]
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10272,9 +10585,7 @@ def main() -> None:
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:end - recovered_base]
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10315,9 +10626,7 @@ def main() -> None:
             recovered[start - recovered_base:end - recovered_base]
             for start, end in segments
         )
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -10446,6 +10755,7 @@ def main() -> None:
             else "ghidra_functions_csv"
         )
         shared_function = shared_quantized_by_entry.get(entry)
+        local_symbol = GOODIX_RECONSTRUCTED_SYMBOLS.get(entry)
         expected_provider = (
             shared_function["provider_family"]
             if shared_function is not None else "goodix_gh3x2x_candidate"
@@ -10453,10 +10763,15 @@ def main() -> None:
         expected_disposition = (
             shared_function["source_disposition"]
             if shared_function is not None
-            else "vendor_source_required_not_redistributable"
+            else (
+                "clean_room_reimplementation_owner_authorized"
+                if local_symbol is not None
+                else "vendor_source_required_not_redistributable"
+            )
         )
         expected_symbol = (
-            shared_function["symbol"] if shared_function is not None else ""
+            shared_function["symbol"] if shared_function is not None else
+            (local_symbol or "")
         )
         if row["provider_family"] != expected_provider or \
                 row["source_disposition"] != expected_disposition or \
@@ -10488,9 +10803,7 @@ def main() -> None:
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:
                          int(function["end_exclusive"]) - recovered_base]
-        if row["provider_family"] != "goodix_gh3x2x_candidate" or \
-                row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+        if not goodix_candidate_row_matches(row, entry) or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -10605,14 +10918,24 @@ def main() -> None:
         if entry in goodix_democode_entries:
             family_ok = row["provider_family"] == \
                 "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0" and \
-                row["source_disposition"] == "use_pinned_upstream"
+                row["source_disposition"] == (
+                    "clean_room_reimplementation_owner_authorized"
+                    if entry in GOODIX_RECONSTRUCTED_SYMBOLS
+                    else "use_pinned_upstream"
+                )
         elif entry in goodix_adapter_glue_entries:
             family_ok = row["provider_family"] == \
-                "r1_goodix_provider_adapter"
+                "r1_goodix_provider_adapter" and row["source_disposition"] == (
+                    "clean_room_reimplementation_owner_authorized"
+                    if entry in GOODIX_RECONSTRUCTED_SYMBOLS
+                    else "clean_room_adapter_only_use_licensed_provider"
+                )
         else:
             family_ok = row["provider_family"] == "goodix_gh3x2x_candidate" and \
                 row["source_disposition"] == \
-                "vendor_source_required_not_redistributable"
+                ("clean_room_reimplementation_owner_authorized"
+                 if entry in GOODIX_RECONSTRUCTED_SYMBOLS
+                 else "vendor_source_required_not_redistributable")
         if not family_ok or \
                 len(body) != size or hashlib.sha256(body).hexdigest() != digest:
             raise AssertionError(f"Goodix GH3X2X boundary changed: 0x{entry:08x}")
@@ -10893,9 +11216,9 @@ def main() -> None:
         if row["provider_family"] != \
                 "qst_qma6100_v1_0_lineage_unlicensed" or \
                 row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
+                "clean_room_reimplementation_owner_authorized" or \
                 row["upstream_symbol"] != symbol:
-            raise AssertionError(f"QST QMA6100 provider body not gated: {entry}")
+            raise AssertionError(f"QST QMA6100 provider body not reduced: {entry}")
     qma_adapter_expected = {
         "0x0006f404": "r1_qma6100_probe_wrapper",
         "0x0006f418": "r1_qma6100_configuration_wrapper",
@@ -10916,9 +11239,9 @@ def main() -> None:
         row = ownership_by_key[("application", entry)]
         if row["provider_family"] != "r1_qst_qma6100_provider_adapter" or \
                 row["source_disposition"] != \
-                "clean_room_adapter_only_use_licensed_provider" or \
+                "clean_room_reimplementation_owner_authorized" or \
                 row["upstream_symbol"] != symbol:
-            raise AssertionError(f"QST QMA6100 adapter not bounded: {entry}")
+            raise AssertionError(f"QST QMA6100 adapter not reduced: {entry}")
     qma_wrapper_exact_expected = {
         0x0006F404: (20, "a569ba70d7ed024938ee16539bf0a7182af65ee069a91bf455a3a2e443b0a1ff"),
         0x0006F418: (30, "bf5cdade8e56223363c4429f1dce08d62170ad08a89094c3f9805a10a6ddc7b5"),

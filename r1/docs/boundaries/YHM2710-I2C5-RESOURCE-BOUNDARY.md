@@ -2,11 +2,12 @@
 
 ## Decision
 
-The YHM2710 chip driver and its software-driven state-command transport remain a
-vendor-owned provider boundary. No authoritative, redistributable YHM2710 source
-or register specification has been admitted. openR1 therefore implements no
-YHM register read, write, initialization sequence, thermal action, readiness
-repair, system-track operation, or ship-mode operation.
+The unavailable YHM2710 vendor package remains unlicensed, but the repository owner authorized
+full independent reduction on 2026-08-14. All 36 provider-classified functions are now
+reconstructed as transparent C in `reconstructed/yhm2710/`; exact mapping, recovered behavior,
+and hardening differences are documented in
+[`../correlation/YHM2710-REDUCTION-CORRELATION.md`](../correlation/YHM2710-REDUCTION-CORRELATION.md).
+No vendor source, binary library, firmware blob, or opaque object is a build input.
 
 Five adjacent functions are independently attributable to R1 product ownership
 rather than the chip driver: three manage the NFC board-enable and exclusive
@@ -42,7 +43,7 @@ The stock zero-boundary actions eventually produce YHM register-2 writes
 Their electrical meaning is unknown and they remain entirely inside the future
 licensed provider.
 
-## Vendor-owned transport
+## Reconstructed transport
 
 The scatter descriptor audit separates two different provider transports that had previously
 been conflated in the diagnostic parser. `0x200075A4` is the `i2c_5` operation table and points to
@@ -52,9 +53,9 @@ The actual `device_stacmd` operation table is at `0x20007614` and points to `0x0
 
 Fifteen exact state-command functions total 1,018 executable bytes. Fourteen functions / 1,000
 bytes implement P1.01 framing, edge waits, parity, retries, read/write, and lifecycle and are now
-explicitly `yhmicros_yhm2710_candidate`. The remaining 18-byte initcall at
+owner-authorized clean-room reconstructions. The remaining 18-byte initcall at
 `0x000565F4..<0x00056606` is configuration-only: OpenR1 may preserve a direct typed provider
-binding, but may not recreate the transport or the stock registry. Exact segments, including the
+binding without recreating the stock registry. Exact segments, including the
 three-block `0x0005CBE4` function, and every digest are emitted by
 `../../tools/evidence/summarize_r1_pmic_transport.py`.
 
@@ -70,13 +71,12 @@ framing, not ordinary addressed I2C:
 
 The `i2c_5` facts are preserved by the immutable parser
 `../../tools/evidence/summarize_r1_pmic_transport.py`.
-The separately recovered P1.01 state-command evidence is likewise static and is not used to create
-a replacement live sender.
+The P1.01 evidence now drives the independently compiled sender; it is never copied in as an
+opaque artifact.
 
-The marker-bearing YHM2710 initialization and system-track bodies remain
-`yhmicros_yhm2710_candidate` in the ownership ledger. A source-admission review
-on 2026-08-12 found no authoritative public provider source or usable license;
-similarly named HM2710 material is a different part and is not admissible.
+The marker-bearing initialization, status, ladder, and system-track bodies are included in the
+36-entry reduction. A source-admission review found no authoritative public provider source or
+usable license; similarly named HM2710 material is a different part and is not used.
 
 ## Implemented clean-room resource layer
 
@@ -88,10 +88,9 @@ provider. A failed first enable leaves the mask empty; a failed final disable
 retains the last client, avoiding a software state that falsely reports the
 rail as released.
 
-No YHM identity, register, command, wire, timing, readiness, thermal, charging,
-or shutdown data appears in that module. Until a lawfully obtained provider is
-admitted and hardware-tested, touch cannot bind this power service and remains
-fail closed.
+The resource module still contains no YHM wire logic; it can now bind the reconstructed typed
+YHM device service. Touch and battery runtime adoption remains fail closed until board binding and
+owned-hardware electrical validation are complete.
 
 `../platform/nrf52840/sdk/openr1_i2c5_resources.c`
 uses the pinned Nordic SDK/CMSIS-FreeRTOS primitives to reproduce the R1-owned

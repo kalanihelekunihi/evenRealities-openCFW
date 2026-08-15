@@ -56,3 +56,30 @@ The seconds→broken-down converter is a byte-table, static-fallback variant of 
 Admission path therefore stays as recorded in `TIME-CALENDAR-PROVIDER-BOUNDARY.md`: either an exact attributable source appears (none found as of 2026-08), or an explicit clean provider replacement is selected independently. If route (2) is ever taken for the converter pair, old newlib's `_mktm_r`/`gmtime_r` (BSD-licensed) is a behaviorally verified functional equivalent for the seconds→tm direction — but adopting it would be a *replacement*, not an attribution of the stock code, and the mktime-direction validation policy (2029 bound, −1 contract) would still be vendor-specific behavior to be preserved deliberately, not cloned.
 
 This report makes no change to admission state and authorizes no implementation.
+
+## Acquisition route (2026-08-14 re-check)
+
+With the public-source hypothesis space exhausted, route (c) — commercial acquisition — is
+the only remaining attribution path, with a named counterparty. Request the platform
+SDK/source (or a license statement) from Wuxi Bravechip Technologies (public business
+contact per the `BravechipSpace/ChipletRing-APPSDK` README: xiaojian.cui@bravechip.com) or
+through the ring ODM, covering the `platform\` tree including the calendar converters.
+Forensic fallback: analyze the Bravechip ring OTA images shipped in the APPSDK
+(`2.4.4.81.hex16`-style files, apparently obfuscated/encrypted) for shared platform code.
+
+Public-source exhaustion evidence (2026-08-14), complementing the code-search results above:
+
+- `BravechipSpace/ChipletRing-APPSDK` (fetched to `~/vendor-cache/chiplet-ring-appsdk`,
+  default-branch HEAD) is phone-side only: `IOS/library`, `IOS/example`, `Android`, `Doc`.
+  Grep of all `*.h`/`*.m`/`*.c`/`*.java`/`*.md`/`*.txt` for `sensor_stream`, `soft_twi`,
+  `sw_i2c`, `rtc_device`, `BCL603`, `603M`: zero hits. No firmware-side source exists in
+  Bravechip's public footprint.
+- The BravechipSpace GitHub org contains only that repository plus a react fork.
+- A second Bravechip-based ring product (`thuhci/OpenRing`, Tsinghua τ-Ring, depending on
+  `ChipletRing1.0.81.aar`) also ships no firmware source.
+- Bravechip's official site download list (bravechip.com) offers app SDKs, app notes, and
+  datasheets only; the ring firmware is pre-loaded and closed.
+- Gitee code search remains login-walled (the same blocker recorded in the
+  generic-device-registry report).
+- `Mentra-Community/MentraOS` `R1.kt` independently carries the same BAE8 UUIDs —
+  corroboration of the platform identification, not a source route.

@@ -175,7 +175,7 @@ def summarize(image_path: Path) -> dict[str, Any]:
             "toolchain_runtime_reimplemented": False,
             "rtos_critical_section_reimplemented": False,
             "clock_calendar_provider_reimplemented": False,
-            "generic_device_registry_reimplemented": False,
+            "generic_device_registry_reimplemented": True,
             "log_bin_writer_or_export_sender_emitted": False,
         },
         "safety": {

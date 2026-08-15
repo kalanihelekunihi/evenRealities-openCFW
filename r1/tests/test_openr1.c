@@ -2,6 +2,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+
+#include "rtc_device/rtc_device.h"
+#include "generic_device_registry/generic_device_registry.h"
+#include "sensor_stream/sensor_stream.h"
+
+/* Reconstructed Bravechip middleware families (owner-authorized full
+ * reduction 2026-08-14, docs/SOURCE-ADMISSION.md); each lives in its own
+ * translation unit under tests/test_reconstructed_*.c. */
+void test_reconstructed_generic_device_registry(void);
+void test_reconstructed_software_twi(void);
+void test_reconstructed_sensor_stream(void);
+void test_reconstructed_time_calendar(void);
+void test_reconstructed_quantized_runtime(void);
+void test_reconstructed_gxt310(void);
+void test_reconstructed_qma6100(void);
+void test_reconstructed_yhm2710(void);
+void test_reconstructed_goodix_primitives(void);
+void test_reconstructed_goodix_heap(void);
+void test_reconstructed_gomore_primitives(void);
+void test_reconstructed_gomore_tensor_runtime(void);
 
 #include "openr1/r1_crc.h"
 #include "openr1/r1_battery.h"
@@ -304,6 +325,777 @@ static void test_clock_production(void) {
     assert(!r1_clock_now(NULL, 0u, &value));
     assert(!r1_clock_now(&clock, 0u, NULL));
     assert(!r1_clock_local_now(&clock, 0u, NULL));
+}
+
+/* Reconstructed `sys rtc` layer (family unknown_rtc_device_provider_candidate,
+ * owner-authorized reduction; see
+ * docs/correlation/RTC-DEVICE-REDUCTION-CORRELATION.md).  Expected values are
+ * civil-time constants; the epoch->calendar contract is additionally
+ * cross-checked against the host C library gmtime, which is exactly the
+ * toolchain dependency the stock adapter delegated to. */
+
+typedef struct {
+    size_t calls;
+    bool fail;
+} rtc_breakdown_trace;
+
+typedef struct {
+    size_t init_calls;
+    size_t tick_enable_calls;
+    size_t enable_calls;
+    size_t fault_calls;
+    uint16_t prescaler;
+    uint8_t irq_priority;
+    void *instance;
+    bool tick_enable_value;
+    uint32_t init_result;
+    int init_order;
+    int tick_enable_order;
+    int enable_order;
+} rtc_nrfx_trace;
+
+static rtc_breakdown_trace rtc_breakdown_log;
+static rtc_nrfx_trace rtc_nrfx_log;
+static int rtc_order_counter;
+static size_t rtc_alarm_calls;
+static uint8_t rtc_alarm_last_hour;
+static size_t rtc_registry_control_calls;
+static size_t rtc_registry_set_time_calls;
+static void *rtc_registry_device_seen;
+static uint32_t rtc_registry_operation_seen;
+static void *rtc_registry_argument_seen;
+static uint32_t rtc_registry_epoch_seen;
+static int16_t rtc_registry_offset_seen;
+
+static bool rtc_test_breakdown(uint32_t epoch_seconds,
+                               rtc_device_broken_down *out) {
+    time_t when = (time_t)epoch_seconds;
+    const struct tm *broken = gmtime(&when);
+    ++rtc_breakdown_log.calls;
+    if (rtc_breakdown_log.fail || broken == NULL) {
+        return false;
+    }
+    out->second = (int32_t)broken->tm_sec;
+    out->minute = (int32_t)broken->tm_min;
+    out->hour = (int32_t)broken->tm_hour;
+    out->day = (int32_t)broken->tm_mday;
+    out->month = (int32_t)broken->tm_mon;
+    out->year = (int32_t)broken->tm_year;
+    out->weekday = (int32_t)broken->tm_wday;
+    out->year_day = (int32_t)broken->tm_yday;
+    return true;
+}
+
+static uint32_t rtc_test_nrfx_init(void *instance, uint16_t prescaler,
+                                   uint8_t irq_priority) {
+    ++rtc_nrfx_log.init_calls;
+    rtc_nrfx_log.instance = instance;
+    rtc_nrfx_log.prescaler = prescaler;
+    rtc_nrfx_log.irq_priority = irq_priority;
+    rtc_nrfx_log.init_order = ++rtc_order_counter;
+    return rtc_nrfx_log.init_result;
+}
+
+static void rtc_test_nrfx_tick_enable(void *instance, bool enable) {
+    assert(instance == rtc_nrfx_log.instance);
+    ++rtc_nrfx_log.tick_enable_calls;
+    rtc_nrfx_log.tick_enable_value = enable;
+    rtc_nrfx_log.tick_enable_order = ++rtc_order_counter;
+}
+
+static void rtc_test_nrfx_enable(void *instance) {
+    assert(instance == rtc_nrfx_log.instance);
+    ++rtc_nrfx_log.enable_calls;
+    rtc_nrfx_log.enable_order = ++rtc_order_counter;
+}
+
+static void rtc_test_fault(void) {
+    ++rtc_nrfx_log.fault_calls;
+}
+
+static void rtc_test_alarm(uint8_t hour) {
+    ++rtc_alarm_calls;
+    rtc_alarm_last_hour = hour;
+}
+
+static uint32_t rtc_test_registry_control(void *device, uint32_t operation,
+                                          void *argument) {
+    ++rtc_registry_control_calls;
+    rtc_registry_device_seen = device;
+    rtc_registry_operation_seen = operation;
+    rtc_registry_argument_seen = argument;
+    return 0u;
+}
+
+static uint32_t rtc_test_registry_set_time(void *device, uint32_t epoch_seconds,
+                                           int16_t utc_offset_minutes) {
+    ++rtc_registry_set_time_calls;
+    rtc_registry_device_seen = device;
+    rtc_registry_epoch_seen = epoch_seconds;
+    rtc_registry_offset_seen = utc_offset_minutes;
+    return 0u;
+}
+
+static void rtc_test_reset(rtc_device *device) {
+    memset(&rtc_breakdown_log, 0, sizeof(rtc_breakdown_log));
+    memset(&rtc_nrfx_log, 0, sizeof(rtc_nrfx_log));
+    rtc_order_counter = 0;
+    rtc_alarm_calls = 0u;
+    rtc_alarm_last_hour = 0u;
+    rtc_registry_control_calls = 0u;
+    rtc_registry_set_time_calls = 0u;
+    rtc_registry_device_seen = NULL;
+    rtc_registry_operation_seen = 0u;
+    rtc_registry_argument_seen = NULL;
+    rtc_registry_epoch_seen = 0u;
+    rtc_registry_offset_seen = 0;
+    rtc_device_providers providers = {
+        .breakdown = rtc_test_breakdown,
+        .nrfx_init = rtc_test_nrfx_init,
+        .nrfx_tick_enable = rtc_test_nrfx_tick_enable,
+        .nrfx_enable = rtc_test_nrfx_enable,
+        .fault = rtc_test_fault,
+    };
+    rtc_device_initialize(device, &providers);
+}
+
+static void rtc_test_expect_calendar(const rtc_device_calendar *calendar,
+                                     uint32_t second, uint32_t minute,
+                                     uint32_t hour, uint32_t day,
+                                     uint32_t month, uint32_t year,
+                                     uint32_t weekday, uint32_t year_day) {
+    assert(calendar->second == second);
+    assert(calendar->minute == minute);
+    assert(calendar->hour == hour);
+    assert(calendar->day == day);
+    assert(calendar->month == month);
+    assert(calendar->year == year);
+    assert(calendar->weekday == weekday);
+    assert(calendar->year_day == year_day);
+}
+
+static void test_rtc_device_epoch_to_calendar(void) {
+    rtc_device device;
+    rtc_test_reset(&device);
+    rtc_device_calendar calendar;
+
+    /* Civil-time reference vectors (weekday: Sunday = 0). */
+    assert(rtc_device_epoch_to_calendar(&device, 0u, &calendar) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_expect_calendar(&calendar, 0u, 0u, 0u, 1u, 1u, 1970u, 4u, 1u);
+    /* 2000 is a leap year: 2000-02-29 00:00:00 UTC. */
+    assert(rtc_device_epoch_to_calendar(&device, 951782400u, &calendar) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_expect_calendar(&calendar, 0u, 0u, 0u, 29u, 2u, 2000u, 2u, 60u);
+    /* 2016-02-29 23:59:59 UTC. */
+    assert(rtc_device_epoch_to_calendar(&device, 1456790399u, &calendar) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_expect_calendar(&calendar, 59u, 59u, 23u, 29u, 2u, 2016u, 1u, 60u);
+    /* 2100 is not a leap year: 2100-02-28 23:59:59 UTC. */
+    assert(rtc_device_epoch_to_calendar(&device, 4107542399u, &calendar) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_expect_calendar(&calendar, 59u, 59u, 23u, 28u, 2u, 2100u, 0u, 59u);
+    /* April has 30 days: 2023-04-30 23:59:59 UTC. */
+    assert(rtc_device_epoch_to_calendar(&device, 1682899199u, &calendar) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_expect_calendar(&calendar, 59u, 59u, 23u, 30u, 4u, 2023u, 0u, 120u);
+    /* Year rollover: 2023-12-31 23:59:59 UTC. */
+    assert(rtc_device_epoch_to_calendar(&device, 1704067199u, &calendar) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_expect_calendar(&calendar, 59u, 59u, 23u, 31u, 12u, 2023u, 0u, 365u);
+    /* uint32 wraparound frontier: 2106-02-07 06:28:15 UTC. */
+    assert(rtc_device_epoch_to_calendar(&device, 4294967295u, &calendar) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_expect_calendar(&calendar, 15u, 28u, 6u, 7u, 2u, 2106u, 0u, 38u);
+    /* Field mapping cross-check against host gmtime across a wide sweep. */
+    for (uint32_t epoch = 0u; epoch < 4000000000u; epoch += 63115200u) {
+        time_t when = (time_t)epoch;
+        const struct tm *broken = gmtime(&when);
+        assert(broken != NULL);
+        assert(rtc_device_epoch_to_calendar(&device, epoch, &calendar) ==
+               RTC_DEVICE_STATUS_OK);
+        rtc_test_expect_calendar(&calendar,
+                                 (uint32_t)broken->tm_sec,
+                                 (uint32_t)broken->tm_min,
+                                 (uint32_t)broken->tm_hour,
+                                 (uint32_t)broken->tm_mday,
+                                 (uint32_t)broken->tm_mon + 1u,
+                                 (uint32_t)broken->tm_year + 1900u,
+                                 (uint32_t)broken->tm_wday,
+                                 (uint32_t)broken->tm_yday + 1u);
+    }
+
+    /* Bad arguments and provider failures are explicit. */
+    assert(rtc_device_epoch_to_calendar(NULL, 0u, &calendar) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    assert(rtc_device_epoch_to_calendar(&device, 0u, NULL) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    rtc_breakdown_log.fail = true;
+    assert(rtc_device_epoch_to_calendar(&device, 0u, &calendar) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    rtc_device unbound;
+    rtc_device_initialize(&unbound, NULL);
+    assert(rtc_device_epoch_to_calendar(&unbound, 0u, &calendar) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+}
+
+static void rtc_test_open_and_set_epoch(rtc_device *device, uint32_t epoch,
+                                        int16_t utc_offset_minutes) {
+    static const char *const device_name = "sys rtc";
+    rtc_device_time_block block;
+    memset(&block, 0, sizeof(block));
+    block.epoch_seconds = epoch;
+    block.utc_offset_minutes = utc_offset_minutes;
+    assert(rtc_device_open(device, &device_name) == RTC_DEVICE_STATUS_OK);
+    assert(rtc_device_epoch_initialize(device, &device_name, &block) ==
+           RTC_DEVICE_STATUS_OK);
+}
+
+static void test_rtc_device_open_and_epoch_initialize(void) {
+    rtc_device device;
+    rtc_test_reset(&device);
+    static const char *const device_name = "sys rtc";
+    static const char *const unknown_name = "watchdog";
+
+    /* Lookup failure and bad arguments. */
+    assert(rtc_device_open(&device, &unknown_name) ==
+           RTC_DEVICE_STATUS_LOOKUP_FAILED);
+    assert(rtc_device_open(&device, NULL) == RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    assert(rtc_device_open(NULL, &device_name) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+
+    /* First open initializes the Nordic RTC with the recovered configuration
+     * (prescaler 4095 -> 8 Hz, interrupt priority 6) in recovered order. */
+    assert(rtc_device_open(&device, &device_name) == RTC_DEVICE_STATUS_OK);
+    assert(rtc_nrfx_log.init_calls == 1u);
+    assert(rtc_nrfx_log.instance ==
+           (void *)device.state.records[0].rtc_instance);
+    assert(rtc_nrfx_log.prescaler == 4095u);
+    assert(rtc_nrfx_log.irq_priority == 6u);
+    assert(rtc_nrfx_log.tick_enable_calls == 1u);
+    assert(rtc_nrfx_log.tick_enable_value);
+    assert(rtc_nrfx_log.enable_calls == 1u);
+    assert(rtc_nrfx_log.init_order < rtc_nrfx_log.tick_enable_order);
+    assert(rtc_nrfx_log.tick_enable_order < rtc_nrfx_log.enable_order);
+    assert(device.state.records[0].opened == 1u);
+
+    /* A second open is a no-op success. */
+    assert(rtc_device_open(&device, &device_name) == RTC_DEVICE_STATUS_OK);
+    assert(rtc_nrfx_log.init_calls == 1u);
+
+    /* Nordic init failure calls the fault hook and still follows the
+     * recovered start sequence. */
+    rtc_test_reset(&device);
+    rtc_nrfx_log.init_result = 1u;
+    assert(rtc_device_open(&device, &device_name) == RTC_DEVICE_STATUS_OK);
+    assert(rtc_nrfx_log.fault_calls == 1u);
+    assert(rtc_nrfx_log.tick_enable_calls == 1u);
+    assert(rtc_nrfx_log.enable_calls == 1u);
+    assert(device.state.records[0].opened == 1u);
+
+    /* Unbound Nordic providers fail explicitly instead of faulting. */
+    rtc_device unbound;
+    rtc_device_initialize(&unbound, NULL);
+    assert(rtc_device_open(&unbound, &device_name) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    assert(unbound.state.records[0].opened == 0u);
+
+    /* The reconstruction scans the whole 256-record table (see the
+     * correlation doc for the recovered stock loop-condition quirk). */
+    rtc_test_reset(&device);
+    static const char *const aux_name = "aux rtc";
+    device.state.records[5].name = aux_name;
+    assert(rtc_device_open(&device, &aux_name) == RTC_DEVICE_STATUS_OK);
+    assert(device.state.records[5].opened == 1u);
+    assert(rtc_nrfx_log.instance ==
+           (void *)device.state.records[5].rtc_instance);
+
+    /* Epoch initialization requires an opened record; the recovered order
+     * applies the signed UTC offset even on the failure paths. */
+    rtc_test_reset(&device);
+    rtc_device_time_block block;
+    memset(&block, 0, sizeof(block));
+    block.epoch_seconds = 1786708800u;
+    block.utc_offset_minutes = 45;
+    assert(rtc_device_epoch_initialize(&device, &device_name, &block) ==
+           RTC_DEVICE_STATUS_LOOKUP_FAILED);
+    assert(device.state.utc_offset_minutes == 45);
+    assert(device.state.epoch_seconds == 0u);
+    assert(rtc_device_epoch_initialize(&device, &unknown_name, &block) ==
+           RTC_DEVICE_STATUS_LOOKUP_FAILED);
+    assert(rtc_device_epoch_initialize(&device, &device_name, NULL) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+
+    rtc_test_open_and_set_epoch(&device, 1786708800u, 60);
+    assert(device.state.epoch_seconds == 1786708800u);
+    assert(device.state.utc_offset_minutes == 60);
+    /* The recovered validation conversion runs on success. */
+    assert(rtc_breakdown_log.calls != 0u);
+}
+
+static void test_rtc_device_tick_and_callback_dispatch(void) {
+    rtc_device device;
+    rtc_test_reset(&device);
+    static const char *const device_name = "sys rtc";
+
+    /* Eight 8 Hz ticks advance the epoch exactly once. */
+    rtc_test_open_and_set_epoch(&device, 1786708799u, 0);
+    for (size_t tick = 0; tick < 7u; ++tick) {
+        rtc_device_tick(&device);
+        assert(device.state.epoch_seconds == 1786708799u);
+    }
+    assert(device.state.tick_divider == 7u);
+    rtc_device_tick(&device);
+    assert(device.state.epoch_seconds == 1786708800u);
+    assert(device.state.tick_divider == 0u);
+
+    /* Alarm dispatch: matching second/minute invokes the callback with the
+     * current local hour (the next 8-tick boundary is 2026-08-14 12:00:01
+     * UTC). */
+    assert(rtc_device_callback_bind(&device, &device_name, rtc_test_alarm) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_device_calendar alarm;
+    memset(&alarm, 0, sizeof(alarm));
+    alarm.second = 1u;
+    alarm.minute = 0u;
+    assert(rtc_device_calendar_write(&device, &device_name, &alarm) ==
+           RTC_DEVICE_STATUS_OK);
+    for (size_t tick = 0; tick < 8u; ++tick) {
+        rtc_device_tick(&device);
+    }
+    assert(rtc_alarm_calls == 1u);
+    assert(rtc_alarm_last_hour == 12u);
+    /* 12:00:02 no longer matches. */
+    for (size_t tick = 0; tick < 8u; ++tick) {
+        rtc_device_tick(&device);
+    }
+    assert(rtc_alarm_calls == 1u);
+
+    /* UTC offset +60 minutes: 23:30:00 UTC converts to 00:30 local. */
+    rtc_test_open_and_set_epoch(&device, 1786750199u, 60);
+    alarm.second = 0u;
+    alarm.minute = 30u;
+    assert(rtc_device_calendar_write(&device, &device_name, &alarm) ==
+           RTC_DEVICE_STATUS_OK);
+    for (size_t tick = 0; tick < 8u; ++tick) {
+        rtc_device_tick(&device);
+    }
+    assert(rtc_alarm_calls == 2u);
+    assert(rtc_alarm_last_hour == 0u);
+
+    /* UTC offset -300 minutes: the same UTC instant is 18:30 local. */
+    rtc_test_open_and_set_epoch(&device, 1786750199u, -300);
+    for (size_t tick = 0; tick < 8u; ++tick) {
+        rtc_device_tick(&device);
+    }
+    assert(rtc_alarm_calls == 3u);
+    assert(rtc_alarm_last_hour == 18u);
+
+    /* Epoch wraparound: 0xFFFFFFFF converts to 2106-02-07 06:28:15 UTC. */
+    rtc_test_open_and_set_epoch(&device, 0xFFFFFFFEu, 0);
+    alarm.second = 15u;
+    alarm.minute = 28u;
+    assert(rtc_device_calendar_write(&device, &device_name, &alarm) ==
+           RTC_DEVICE_STATUS_OK);
+    for (size_t tick = 0; tick < 8u; ++tick) {
+        rtc_device_tick(&device);
+    }
+    assert(device.state.epoch_seconds == 0xFFFFFFFFu);
+    assert(rtc_alarm_calls == 4u);
+    assert(rtc_alarm_last_hour == 6u);
+
+    /* Local-time wraparound: epoch 0xFFFFFFFF with +60 minutes wraps to
+     * 1970-01-01 00:59:59 local. */
+    alarm.second = 59u;
+    alarm.minute = 59u;
+    assert(rtc_device_calendar_write(&device, &device_name, &alarm) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_open_and_set_epoch(&device, 0xFFFFFFFEu, 60);
+    for (size_t tick = 0; tick < 8u; ++tick) {
+        rtc_device_tick(&device);
+    }
+    assert(rtc_alarm_calls == 5u);
+    assert(rtc_alarm_last_hour == 0u);
+
+    /* Clearing the binding stops dispatch. */
+    assert(rtc_device_callback_bind(&device, &device_name, NULL) ==
+           RTC_DEVICE_STATUS_OK);
+    rtc_test_open_and_set_epoch(&device, 1786708799u, 0);
+    alarm.second = 0u;
+    alarm.minute = 0u;
+    assert(rtc_device_calendar_write(&device, &device_name, &alarm) ==
+           RTC_DEVICE_STATUS_OK);
+    for (size_t tick = 0; tick < 8u; ++tick) {
+        rtc_device_tick(&device);
+    }
+    assert(rtc_alarm_calls == 5u);
+
+    /* NULL device is an explicit no-op. */
+    rtc_device_tick(NULL);
+}
+
+static void test_rtc_device_named_records(void) {
+    rtc_device device;
+    rtc_test_reset(&device);
+    static const char *const device_name = "sys rtc";
+    static const char *const unknown_name = "watchdog";
+
+    /* The fixed recovered record name is installed at slot 0. */
+    assert(device.state.records[0].name != NULL);
+
+    /* Calendar write: verbatim 44-byte copy including the recovered padding
+     * words; name mismatch and bad arguments are explicit. */
+    rtc_device_calendar calendar;
+    for (size_t index = 0u; index < RTC_DEVICE_CALENDAR_WORDS; ++index) {
+        ((uint32_t *)&calendar)[index] = 0xA5000000u + (uint32_t)index;
+    }
+    assert(rtc_device_calendar_write(&device, &unknown_name, &calendar) ==
+           RTC_DEVICE_STATUS_NAME_MISMATCH);
+    assert(rtc_device_calendar_write(&device, NULL, &calendar) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    assert(rtc_device_calendar_write(&device, &device_name, NULL) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    assert(rtc_device_calendar_write(&device, &device_name, &calendar) ==
+           RTC_DEVICE_STATUS_OK);
+    for (size_t index = 0u; index < RTC_DEVICE_CALENDAR_WORDS; ++index) {
+        assert(((const uint32_t *)&device.state.records[0].calendar)[index] ==
+               0xA5000000u + (uint32_t)index);
+    }
+
+    /* Callback binding: name mismatch, bad arguments, store and clear. */
+    assert(rtc_device_callback_bind(&device, &unknown_name, rtc_test_alarm) ==
+           RTC_DEVICE_STATUS_NAME_MISMATCH);
+    assert(rtc_device_callback_bind(&device, NULL, rtc_test_alarm) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    assert(rtc_device_callback_bind(&device, &device_name, rtc_test_alarm) ==
+           RTC_DEVICE_STATUS_OK);
+    assert(device.state.records[0].callback == rtc_test_alarm);
+    assert(rtc_device_callback_bind(&device, &device_name, NULL) ==
+           RTC_DEVICE_STATUS_OK);
+    assert(device.state.records[0].callback == NULL);
+}
+
+static void test_rtc_device_snapshot(void) {
+    rtc_device device;
+    rtc_test_reset(&device);
+    rtc_device_time_block out;
+
+    assert(rtc_device_snapshot(&device, NULL) ==
+           RTC_DEVICE_STATUS_BAD_ARGUMENT);
+    assert(rtc_device_snapshot(NULL, &out) == RTC_DEVICE_STATUS_BAD_ARGUMENT);
+
+    rtc_test_open_and_set_epoch(&device, 1786708800u, 60);
+    device.state.tick_divider = 3u;
+    memset(&out, 0, sizeof(out));
+    assert(rtc_device_snapshot(&device, &out) == RTC_DEVICE_STATUS_OK);
+    /* The snapshot reports the raw epoch (UTC offset not applied) and the
+     * recovered millisecond composition epoch*1000 + divider. */
+    assert(out.epoch_seconds == 1786708800u);
+    assert(out.millisecond_value == 1786708800u * 1000u + 3u);
+
+    /* The recovered 32-bit wrap of epoch*1000 is preserved. */
+    rtc_test_open_and_set_epoch(&device, 5000000u, 0);
+    device.state.tick_divider = 7u;
+    assert(rtc_device_snapshot(&device, &out) == RTC_DEVICE_STATUS_OK);
+    assert(out.millisecond_value == 705032704u + 7u);
+}
+
+static void test_rtc_device_ops_veneers(void) {
+    rtc_device device;
+    rtc_test_reset(&device);
+    static int registry_token;
+    int argument = 0x1234;
+
+    /* Unbound registry seams fail explicitly (registry family still
+     * blocked); stock returned 1 after dispatching. */
+    assert(rtc_device_ops_control(&device, &argument) ==
+           RTC_DEVICE_STATUS_LOOKUP_FAILED);
+    assert(rtc_device_ops_set_time(&device, 1786708800u, 90) ==
+           RTC_DEVICE_STATUS_LOOKUP_FAILED);
+    assert(rtc_device_ops_control(NULL, &argument) ==
+           RTC_DEVICE_STATUS_LOOKUP_FAILED);
+
+    rtc_device_bind_registry(&device, &registry_token,
+                             rtc_test_registry_control,
+                             rtc_test_registry_set_time);
+    assert(rtc_device_ops_control(&device, &argument) == 1u);
+    assert(rtc_registry_control_calls == 1u);
+    assert(rtc_registry_device_seen == &registry_token);
+    assert(rtc_registry_operation_seen == 0u);
+    assert(rtc_registry_argument_seen == &argument);
+
+    assert(rtc_device_ops_set_time(&device, 1786708800u, 90) == 1u);
+    assert(rtc_registry_set_time_calls == 1u);
+    assert(rtc_registry_device_seen == &registry_token);
+    assert(rtc_registry_epoch_seen == 1786708800u);
+    assert(rtc_registry_offset_seen == 90);
+}
+
+static void test_rtc_device_reconstruction(void) {
+    test_rtc_device_epoch_to_calendar();
+    test_rtc_device_open_and_epoch_initialize();
+    test_rtc_device_tick_and_callback_dispatch();
+    test_rtc_device_named_records();
+    test_rtc_device_snapshot();
+    test_rtc_device_ops_veneers();
+}
+
+/* -------------------------------------------------------------------------
+ * Cross-family bindings (2026-08 owner-authorized reduction wave).
+ *
+ * With both families reconstructed, the provider seams stop being test
+ * doubles: sensor_stream's list-walker slots bind the generic_device_registry
+ * offset-list walkers (stock 0x0005D8E6/0x0005D8EE/0x0005D998/0x0005D94A),
+ * and rtc_device's ops-table veneers bind the registry dispatchers (slot
+ * 0x20 control, slot 0x14 time request) through rtc_device_bind_registry.
+ * Unbound seams keep failing explicitly.  quantized_runtime's GoMore seams
+ * stay unbound until the GoMore wave runs.
+ * ------------------------------------------------------------------------- */
+
+static void *cross_node_allocate(size_t size) {
+    return malloc(size);
+}
+
+static void *cross_stream_allocate(uint32_t size) {
+    return malloc(size);
+}
+
+static void cross_stream_free(void *pointer) {
+    free(pointer);
+}
+
+static uint32_t cross_stream_tick;
+
+static uint32_t cross_stream_tick_fallback(void) {
+    return cross_stream_tick;
+}
+
+/* The sensor_stream and registry descriptors share the recovered
+ * {offset, head, tail} layout, but the registry side stores the offset as
+ * uintptr_t; marshal through a local copy instead of type-punning. */
+static generic_device_registry_link_list cross_list_view(
+    const sensor_stream_list_descriptor *descriptor) {
+    generic_device_registry_link_list list;
+    list.link_offset = descriptor->stride;
+    list.head = descriptor->head;
+    list.tail = descriptor->tail;
+    return list;
+}
+
+static void cross_list_store(sensor_stream_list_descriptor *descriptor,
+                             const generic_device_registry_link_list *list) {
+    descriptor->head = list->head;
+    descriptor->tail = list->tail;
+}
+
+static void *cross_list_first(sensor_stream_list_descriptor *descriptor) {
+    generic_device_registry_link_list list = cross_list_view(descriptor);
+    return generic_device_registry_list_head(&list);
+}
+
+static void *cross_list_next(sensor_stream_list_descriptor *descriptor,
+                             void *node) {
+    generic_device_registry_link_list list = cross_list_view(descriptor);
+    return generic_device_registry_list_next(&list, node);
+}
+
+static void cross_list_remove(sensor_stream_list_descriptor *descriptor,
+                              void *node) {
+    generic_device_registry_link_list list = cross_list_view(descriptor);
+    generic_device_registry_list_remove(&list, node);
+    cross_list_store(descriptor, &list);
+}
+
+static void *cross_list_push_back_allocate(
+    sensor_stream_list_descriptor *descriptor) {
+    generic_device_registry_link_list list = cross_list_view(descriptor);
+    void *node = generic_device_registry_list_append_alloc(
+        &list, cross_node_allocate);
+    cross_list_store(descriptor, &list);
+    return node;
+}
+
+static unsigned int cross_read_calls;
+
+static uint32_t cross_provider_read(uint8_t *destination, uint32_t length,
+                                    void *context) {
+    (void)context;
+    ++cross_read_calls;
+    memset(destination, 0x5A, length);
+    return length;
+}
+
+static const sensor_stream_provider_ops cross_provider = {
+    NULL, NULL, cross_provider_read
+};
+
+static unsigned int cross_listener_calls;
+static uint32_t cross_listener_length_seen;
+
+static void cross_listener_callback(sensor_stream_listener *listener,
+                                    const uint8_t *data, uint32_t length) {
+    (void)listener;
+    (void)data;
+    ++cross_listener_calls;
+    cross_listener_length_seen = length;
+}
+
+static unsigned int cross_slot_20_calls;
+static unsigned int cross_slot_14_calls;
+static generic_device_registry_device *cross_slot_device_seen;
+static uintptr_t cross_slot_20_arg1_seen;
+static uintptr_t cross_slot_20_arg2_seen;
+static uint32_t cross_time_epoch_seen;
+static uint16_t cross_time_offset_seen;
+
+static uint32_t cross_registry_slot_20_op(
+    generic_device_registry_device *device, uintptr_t arg1, uintptr_t arg2,
+    uintptr_t arg3) {
+    (void)arg3;
+    ++cross_slot_20_calls;
+    cross_slot_device_seen = device;
+    cross_slot_20_arg1_seen = arg1;
+    cross_slot_20_arg2_seen = arg2;
+    return 0u;
+}
+
+static uint32_t cross_registry_slot_14_op(
+    generic_device_registry_device *device, uintptr_t arg1, uintptr_t arg2,
+    uintptr_t arg3) {
+    (void)arg1;
+    (void)arg3;
+    ++cross_slot_14_calls;
+    cross_slot_device_seen = device;
+    const generic_device_registry_time_block *block =
+        (const generic_device_registry_time_block *)(const void *)arg2;
+    cross_time_epoch_seen = block->epoch_seconds;
+    cross_time_offset_seen = block->utc_offset_minutes;
+    return 0u;
+}
+
+/* rtc_device registry seams forwarded into the reconstructed dispatchers,
+ * matching the registry family's own call convention (device, operation,
+ * payload, 0). */
+static uint32_t cross_rtc_registry_control(void *device, uint32_t operation,
+                                           void *argument) {
+    return generic_device_registry_dispatch_slot_20(
+        (generic_device_registry_device *)device, (uintptr_t)operation,
+        (uintptr_t)argument, 0u);
+}
+
+static uint32_t cross_rtc_registry_set_time(void *device,
+                                            uint32_t epoch_seconds,
+                                            int16_t utc_offset_minutes) {
+    generic_device_registry_time_block block;
+    memset(&block, 0, sizeof(block));
+    block.epoch_seconds = epoch_seconds;
+    block.utc_offset_minutes = (uint16_t)utc_offset_minutes;
+    return generic_device_registry_dispatch_slot_14(
+        (generic_device_registry_device *)device, 0u, (uintptr_t)&block, 0u);
+}
+
+static void test_reconstructed_cross_family_bindings(void) {
+    /* sensor_stream driven entirely through the registry offset-list
+     * walkers: create/lookup (walk), register (push back), dispatch
+     * (first/next), unregister (remove). */
+    sensor_stream framework;
+    sensor_stream_providers providers;
+    memset(&providers, 0, sizeof(providers));
+    providers.allocate = cross_stream_allocate;
+    providers.free = cross_stream_free;
+    providers.list_first = cross_list_first;
+    providers.list_next = cross_list_next;
+    providers.list_remove = cross_list_remove;
+    providers.list_push_back_allocate = cross_list_push_back_allocate;
+    providers.tick_fallback = cross_stream_tick_fallback;
+    cross_stream_tick = 0u;
+    cross_read_calls = 0u;
+    cross_listener_calls = 0u;
+    cross_listener_length_seen = 0u;
+    assert(sensor_stream_initialize(&framework, &providers) ==
+           SENSOR_STREAM_STATUS_OK);
+    /* Drop the keep-alive timer so the poll list starts empty. */
+    sensor_stream_timer_release(
+        &framework, (sensor_stream_timer *)framework.housekeeping.timers.head);
+
+    sensor_stream_object *object = sensor_stream_object_create(
+        &framework, "raw_hr", 4u, &cross_provider, NULL);
+    assert(object != NULL);
+    assert(sensor_stream_object_lookup(&framework, "raw_hr") == object);
+    assert(sensor_stream_object_lookup(&framework, "nosuch") == NULL);
+
+    sensor_stream_listener *listener = sensor_stream_listener_register(
+        &framework, object, "gomore", cross_listener_callback, 1u,
+        SENSOR_STREAM_MODE_PER_SAMPLE);
+    assert(listener != NULL);
+    cross_stream_tick = 100u;
+    sensor_stream_timer_dispatch(&framework, object->timer);
+    assert(cross_read_calls == 1u);
+    assert(cross_listener_calls == 1u);
+    assert(cross_listener_length_seen == 4u);
+
+    sensor_stream_listener_unregister(&framework, "raw_hr", listener);
+    assert(sensor_stream_list_idle(&object->listeners));
+
+    /* Unbound walker slots still fail explicitly. */
+    sensor_stream unbound_stream = framework;
+    unbound_stream.providers.list_first = NULL;
+    assert(sensor_stream_object_lookup(&unbound_stream, "raw_hr") == NULL);
+    unbound_stream = framework;
+    unbound_stream.providers.list_push_back_allocate = NULL;
+    assert(!sensor_stream_object_insert(&unbound_stream, object));
+
+    /* rtc_device ops veneers dispatched through the reconstructed registry:
+     * the "sys rtc" record is registered and found by name (stock: cached
+     * find result at 0x20007690), then slot 0x20 carries control and slot
+     * 0x14 carries the recovered 0x40-byte time block. */
+    generic_device_registry registry;
+    generic_device_registry_initialize(&registry, NULL);
+    static const generic_device_registry_ops sys_rtc_ops = {
+        .slot = {
+            [GENERIC_DEVICE_REGISTRY_SLOT_14] = cross_registry_slot_14_op,
+            [GENERIC_DEVICE_REGISTRY_SLOT_20] = cross_registry_slot_20_op,
+        },
+    };
+    static generic_device_registry_device sys_rtc_record = {
+        .name = "sys rtc",
+        .ops = &sys_rtc_ops,
+    };
+    assert(generic_device_registry_register(&registry, &sys_rtc_record) == 1u);
+    generic_device_registry_device *found =
+        generic_device_registry_find(&registry, "sys rtc");
+    assert(found == &sys_rtc_record);
+    assert(generic_device_registry_find(&registry, "watchdog") == NULL);
+
+    rtc_device device;
+    rtc_test_reset(&device);
+    cross_slot_20_calls = 0u;
+    cross_slot_14_calls = 0u;
+    cross_slot_device_seen = NULL;
+    cross_slot_20_arg1_seen = 0u;
+    cross_slot_20_arg2_seen = 0u;
+    cross_time_epoch_seen = 0u;
+    cross_time_offset_seen = 0u;
+    rtc_device_bind_registry(&device, found, cross_rtc_registry_control,
+                             cross_rtc_registry_set_time);
+    int argument = 0x5A;
+    assert(rtc_device_ops_control(&device, &argument) == 1u);
+    assert(cross_slot_20_calls == 1u);
+    assert(cross_slot_device_seen == &sys_rtc_record);
+    assert(cross_slot_20_arg1_seen == 0u);
+    assert(cross_slot_20_arg2_seen == (uintptr_t)&argument);
+    assert(rtc_device_ops_set_time(&device, 1786708800u, 90) == 1u);
+    assert(cross_slot_14_calls == 1u);
+    assert(cross_time_epoch_seen == 1786708800u);
+    assert(cross_time_offset_seen == 90u);
+
+    /* Unbound registry seams still fail explicitly. */
+    rtc_device unbound_rtc;
+    rtc_device_initialize(&unbound_rtc, NULL);
+    assert(rtc_device_ops_control(&unbound_rtc, &argument) ==
+           RTC_DEVICE_STATUS_LOOKUP_FAILED);
+    assert(rtc_device_ops_set_time(&unbound_rtc, 1786708800u, 90) ==
+           RTC_DEVICE_STATUS_LOOKUP_FAILED);
 }
 
 static void test_battery_provider_boundary(void) {
@@ -5863,16 +6655,20 @@ static void test_motion_provider_boundary(void) {
 
     motion_trace lis = {.chip_id = R1_MOTION_LIS2DW12_CHIP_ID};
     motion_trace bma = {.chip_id = R1_MOTION_BMA456W_CHIP_ID};
+    motion_trace qma = {.chip_id = R1_MOTION_QMA6100_CHIP_ID};
     assert(r1_motion_adapter_bind(
                &adapter, R1_MOTION_VARIANT_LIS2DW12, &provider, &lis) == R1_OK);
     assert(r1_motion_adapter_bind(
                &adapter, R1_MOTION_VARIANT_BMA456W, &provider, &bma) == R1_OK);
+    assert(r1_motion_adapter_bind(
+               &adapter, R1_MOTION_VARIANT_QMA6100, &provider, &qma) == R1_OK);
     assert(r1_motion_adapter_configure(
                &adapter, R1_MOTION_POLICY_AUTO_LICENSED, 100u) == R1_OK);
     assert(r1_motion_adapter_selected(&adapter) ==
            R1_MOTION_VARIANT_LIS2DW12);
     assert(lis.probe_calls == 1u && lis.configure_calls == 1u);
     assert(lis.configured_rate_hz == 100u && bma.probe_calls == 0u);
+    assert(qma.probe_calls == 0u);
     assert(r1_motion_adapter_disable_double_tap(&adapter) == R1_OK);
     assert(lis.double_tap_calls == 1u);
 
@@ -5908,6 +6704,31 @@ static void test_motion_provider_boundary(void) {
     assert(lis.probe_calls == 1u && bma.probe_calls == 1u);
     assert(r1_motion_adapter_selected(&adapter) ==
            R1_MOTION_VARIANT_BMA456W);
+
+    r1_motion_adapter_initialize(&adapter);
+    lis = (motion_trace){.chip_id = 0u};
+    bma = (motion_trace){.chip_id = 0u};
+    qma = (motion_trace){.chip_id = UINT8_C(0x9D)};
+    assert(r1_motion_adapter_bind(
+               &adapter, R1_MOTION_VARIANT_LIS2DW12, &provider, &lis) == R1_OK);
+    assert(r1_motion_adapter_bind(
+               &adapter, R1_MOTION_VARIANT_BMA456W, &provider, &bma) == R1_OK);
+    assert(r1_motion_adapter_bind(
+               &adapter, R1_MOTION_VARIANT_QMA6100, &provider, &qma) == R1_OK);
+    assert(r1_motion_adapter_configure(
+               &adapter, R1_MOTION_POLICY_AUTO_LICENSED, 25u) == R1_OK);
+    assert(lis.probe_calls == 1u && bma.probe_calls == 1u &&
+           qma.probe_calls == 1u);
+    assert(r1_motion_adapter_selected(&adapter) ==
+           R1_MOTION_VARIANT_QMA6100);
+
+    r1_motion_adapter_initialize(&adapter);
+    qma = (motion_trace){.chip_id = R1_MOTION_QMA6100_CHIP_ID};
+    assert(r1_motion_adapter_bind(
+               &adapter, R1_MOTION_VARIANT_QMA6100, &provider, &qma) == R1_OK);
+    assert(r1_motion_adapter_configure(
+               &adapter, R1_MOTION_POLICY_FORCE_QMA6100, 50u) == R1_OK);
+    assert(qma.configured_rate_hz == 50u);
 
     r1_motion_adapter_initialize(&adapter);
     lis = (motion_trace){.chip_id = 0u};
@@ -7470,6 +8291,20 @@ int main(void) {
     test_retained_reset_trace();
     test_reset_reason_decode();
     test_clock_production();
+    test_rtc_device_reconstruction();
+    test_reconstructed_generic_device_registry();
+    test_reconstructed_software_twi();
+    test_reconstructed_sensor_stream();
+    test_reconstructed_time_calendar();
+    test_reconstructed_quantized_runtime();
+    test_reconstructed_cross_family_bindings();
+    test_reconstructed_gxt310();
+    test_reconstructed_qma6100();
+    test_reconstructed_yhm2710();
+    test_reconstructed_goodix_primitives();
+    test_reconstructed_goodix_heap();
+    test_reconstructed_gomore_primitives();
+    test_reconstructed_gomore_tensor_runtime();
     test_battery_provider_boundary();
     test_battery_controller();
     test_pmic_charge_event_policy();

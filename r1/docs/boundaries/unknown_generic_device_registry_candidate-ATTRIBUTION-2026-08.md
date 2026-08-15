@@ -174,8 +174,20 @@ proprietary platform layer inside the B210 product tree and share one provenance
 
 1. Authenticated Gitee code search for `device_stacmd`, `sys rtc`, `register not find
    obj`, `sync_store_one_class` (requires a Gitee login; not executable from here).
-2. Acquisition of the ODM's platform SDK (the `platform\` tree with `services\eAT`) via
-   Even Realities or the ring ODM.
+2. Acquisition of the platform SDK (the `platform\` tree with `services\eAT`) from the
+   now-named vendor, Wuxi Bravechip Technologies (public business contact per the
+   `BravechipSpace/ChipletRing-APPSDK` README: xiaojian.cui@bravechip.com), or via Even
+   Realities / the ring ODM. Forensic fallback: analysis of the Bravechip ring OTA hex
+   files shipped in the APPSDK (`2.4.4.81.hex16` etc.) for shared platform code.
+   Public-route exhaustion, checked 2026-08-14: the APPSDK itself is phone-side only
+   (`IOS/library`, `IOS/example`, `Android`, `Doc`; grep of all
+   `*.h`/`*.m`/`*.c`/`*.java`/`*.md`/`*.txt` for `sensor_stream`, `soft_twi`, `sw_i2c`,
+   `rtc_device`, `BCL603`, `603M` — zero hits); the BravechipSpace org contains only that
+   repo plus a react fork; the second Bravechip-based ring product (`thuhci/OpenRing`,
+   Tsinghua τ-Ring, `ChipletRing1.0.81.aar`) also ships no firmware source; bravechip.com's
+   download list offers app SDKs/notes/datasheets only (ring firmware pre-loaded, closed);
+   `Mentra-Community/MentraOS` `R1.kt` independently carries the same BAE8 UUIDs
+   (corroboration of the platform identification, not a source route).
 3. Any future third-party firmware dump reusing the same platform (the cross-firmware
    blob scan of 2026-08-13 was negative for all Even Realities images on hand).
 

@@ -1,12 +1,37 @@
 CC ?= cc
 CLANG ?= clang
-CPPFLAGS := -Iinclude
+CPPFLAGS := -Iinclude -Ireconstructed
 CFLAGS := -std=c11 -Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -O2
 SOURCES := src/r1_crc.c src/r1_protocol.c src/r1_health.c src/r1_health_db.c src/r1_twi_sync.c src/r1_retained_log.c src/r1_reset_trace.c src/r1_reset_reason.c src/r1_state.c src/r1_storage.c src/r1_kv_store.c src/r1_nv_recovery.c src/r1_sleep_db.c src/r1_persistence.c src/r1_connection_params.c src/r1_peer_target.c \
 	src/r1_event.c src/r1_event_bus.c src/r1_dispatch.c src/r1_runtime.c src/r1_goodix.c src/r1_iqs7211e.c \
 	src/r1_st25dvxxkc.c src/r1_power_lease.c src/r1_motion.c src/r1_wear.c src/r1_battery.c \
-	src/r1_clock.c port/goodix_gh3x2x/r1_gh3x2x_port.c
-TEST_SOURCES := tests/test_openr1.c
+	src/r1_clock.c port/goodix_gh3x2x/r1_gh3x2x_port.c \
+	reconstructed/rtc_device/rtc_device.c \
+	reconstructed/generic_device_registry/generic_device_registry.c \
+	reconstructed/software_twi/software_twi.c \
+	reconstructed/sensor_stream/sensor_stream.c \
+	reconstructed/time_calendar/time_calendar.c \
+	reconstructed/quantized_runtime/quantized_runtime.c \
+	reconstructed/gxt310/gxt310.c \
+	reconstructed/qma6100/qma6100.c \
+	reconstructed/yhm2710/yhm2710.c \
+	reconstructed/goodix_primitives/goodix_primitives.c \
+	reconstructed/goodix_heap/goodix_heap.c \
+	reconstructed/gomore_primitives/gomore_primitives.c \
+	reconstructed/gomore_tensor_runtime/gomore_tensor_runtime.c
+TEST_SOURCES := tests/test_openr1.c \
+	tests/test_reconstructed_generic_device_registry.c \
+	tests/test_reconstructed_software_twi.c \
+	tests/test_reconstructed_sensor_stream.c \
+	tests/test_reconstructed_time_calendar.c \
+	tests/test_reconstructed_quantized_runtime.c \
+	tests/test_reconstructed_gxt310.c \
+	tests/test_reconstructed_qma6100.c \
+	tests/test_reconstructed_yhm2710.c \
+	tests/test_reconstructed_goodix_primitives.c \
+	tests/test_reconstructed_goodix_heap.c \
+	tests/test_reconstructed_gomore_primitives.c \
+	tests/test_reconstructed_gomore_tensor_runtime.c
 BUILD := build
 HOST_TEST := $(BUILD)/test_openr1
 SAN_TEST := $(BUILD)/test_openr1_sanitize
@@ -15,7 +40,7 @@ ARM_BUILD := $(BUILD)/nrf52840
 ARM_FLAGS := --target=armv7em-none-eabi -mcpu=cortex-m4 -mthumb \
 	-mfpu=fpv4-sp-d16 -mfloat-abi=hard -fno-math-errno \
 	-std=c11 -ffreestanding -fno-builtin -fdata-sections -ffunction-sections \
-	-Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -Os -Iinclude
+	-Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -Os -Iinclude -Ireconstructed
 ARM_SOURCES := $(SOURCES) platform/nrf52840/r1_nrf52840.c
 ARM_OBJECTS := $(patsubst %.c,$(ARM_BUILD)/%.o,$(ARM_SOURCES))
 

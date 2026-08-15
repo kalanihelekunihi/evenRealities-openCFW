@@ -60,6 +60,19 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/src/r1_wear.c \
   $(PROJ_DIR)/src/r1_clock.c \
   $(PROJ_DIR)/src/r1_runtime.c \
+  $(PROJ_DIR)/reconstructed/rtc_device/rtc_device.c \
+  $(PROJ_DIR)/reconstructed/generic_device_registry/generic_device_registry.c \
+  $(PROJ_DIR)/reconstructed/software_twi/software_twi.c \
+  $(PROJ_DIR)/reconstructed/sensor_stream/sensor_stream.c \
+  $(PROJ_DIR)/reconstructed/time_calendar/time_calendar.c \
+  $(PROJ_DIR)/reconstructed/quantized_runtime/quantized_runtime.c \
+  $(PROJ_DIR)/reconstructed/gxt310/gxt310.c \
+  $(PROJ_DIR)/reconstructed/qma6100/qma6100.c \
+  $(PROJ_DIR)/reconstructed/yhm2710/yhm2710.c \
+  $(PROJ_DIR)/reconstructed/goodix_primitives/goodix_primitives.c \
+  $(PROJ_DIR)/reconstructed/goodix_heap/goodix_heap.c \
+  $(PROJ_DIR)/reconstructed/gomore_primitives/gomore_primitives.c \
+  $(PROJ_DIR)/reconstructed/gomore_tensor_runtime/gomore_tensor_runtime.c \
   $(PROJ_DIR)/platform/nrf52840/r1_nrf52840.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_advertising.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_analog.c \
@@ -190,6 +203,7 @@ SRC_FILES += \
 
 INC_FOLDERS += \
   $(PROJ_DIR)/include \
+  $(PROJ_DIR)/reconstructed \
   $(PROJ_DIR)/platform/nrf52840/sdk \
   $(PROJ_DIR)/platform/nrf52840/sdk/config \
   $(CMSIS_FREERTOS_ROOT)/CMSIS-FreeRTOS/CMSIS/RTOS2/FreeRTOS/Include \

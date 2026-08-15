@@ -26,8 +26,9 @@ these dispositions:
   semaphore implementations;
 - `version_correlation_required`, `installed_variant_and_version_required`, or
   `official_source_required_before_implementation`: keep the boundary
-  stubbed until the exact upstream source can be selected; and
-- `clean_room_allowed`: evidence establishes R1-specific code or no attributable provider.
+  stubbed until the exact upstream source can be selected;
+- `clean_room_allowed`: evidence establishes R1-specific code or no attributable provider; and
+- `clean_room_reimplementation_owner_authorized`: see the next section.
 
 Component-level admission is refined by the one-row-per-entry
 [`FUNCTION-OWNERSHIP.csv`](reference/FUNCTION-OWNERSHIP.csv). Its generator covers the 2,972 Ghidra function
@@ -46,16 +47,16 @@ that code is eligible for rewriting.
 | Armink | FlashDB 2.0.0 commit `4e567740...` | `health.db` TSDB implementation only; not `kv.bin` |
 | Armink | authenticated CmBacktrace 1.4.2-compatible commit `73714489...` | unwind, stack scan, register capture, and fault diagnosis; R1 supplies only configuration and ports |
 | Armink/RT-Thread ecosystem | FAL 0.5.99 nested in the FlashDB tag | Apache-2.0 flash-device and partition framework |
-| Goodix | `gh3x2x-v2.23_7ecd2a` | optical sensor/algorithm implementation, once the matching licensed SDK is available |
-| GoMore | exact embedded health-algorithm SDK/version unresolved | hard-gated; obtain and authenticate a licensed provider package before enabling health-index/sleep algorithm paths |
+| Goodix | `gh3x2x-v2.23_7ecd2a` | optical sensor/algorithm implementation; public democode driver layer is pinned upstream, algorithm interiors under owner-authorized reduction (see above) |
+| GoMore | exact embedded health-algorithm SDK/version unresolved | no public or licensed source route; under owner-authorized reduction (see above) |
 | Flipper FZCO / Azoteq | Flipper One IQS7211E driver commit `0a88e26b...` under its MIT REUSE map; Azoteq-authored settings header at `436d3c42...` with an in-file MIT grant | admitted compatible provider/settings references; only R1 values, nRF5 transport/board port, communication glue, and recovery policy are local; exact stock checkout is not claimed |
-| GXCAS | GXT310 part and public datasheet identified; official catalog now lists a 2025 STM32 driver V1.0 archive, but its bytes/license and relationship to the older R1 image remain unauthenticated | hard-gated; retrieve, hash, license-review, and compare the official package or prove a clean product-port boundary before enabling dual temperature sensors |
-| YHMICROS | YHM2710 part family identified; exact R1 driver source/version/license unresolved | chip/register/transport path hard-gated; the separate R1 three-client ownership policy may call only a semantic provider, with no raw YHM constants or sender |
+| GXCAS | GXT310 part and public datasheet identified; official catalog now lists a 2025 STM32 driver V1.0 archive, but its bytes/license and relationship to the older R1 image remain unauthenticated | owner-authorized five-entry reduction landed in `reconstructed/gxt310/`; the official archive remains documentation evidence only |
+| YHMICROS | YHM2710 part family identified; exact R1 driver source/version/license unresolved | under owner-authorized reduction (see above); the R1 three-client ownership policy keeps its semantic-provider seam |
 | Bosch Sensortec | BMA456 SensorAPI v2.29.0 commit `3266db2c...` | BMA456W register, configuration-stream, FIFO, and feature driver; R1 adapters only outside it |
 | STMicroelectronics | LIS2DW12 v2.1.0 commit `8d4bd522...`, selected as newest release in the proven compatible interval | LIS2DW12 register/FIFO/tap driver; `LIS2DOC` is the R1 diagnostic label |
 | STMicroelectronics | ST25DVxxKC component from fp-sns-stbox1 commit `e9a35449...`, authenticated compatible BSD-3-Clause snapshot | NFC dynamic-tag register, security-session, GPO, energy-harvesting, and FTM mailbox driver; seven R1 board/policy adapters remain local |
 | kokke / tiny-AES-c contributors | tiny-AES-c v1.0.0 commit `e72b6eff...`, selected compatible snapshot | AES-128 block implementation; local code owns only the recovered R1 two-pass chaining adapter |
-| QST | QMA6100 V1.0 lineage proven from unlicensed correlation evidence; exact checkout unresolved | hard-gated; licensed official source required, no local driver reconstruction |
+| QST | QMA6100 V1.0 lineage proven from unlicensed correlation evidence; exact checkout unresolved | owner-authorized complete 17-entry provider/adapter reduction landed in `reconstructed/qma6100/`; no QST source is linked |
 
 The SDK archive is not copied into the repository. Nordic's own license inventory must remain with
 it. The authenticated Arm wrapper/header and Armink CmBacktrace snapshots are shared with the
@@ -75,6 +76,62 @@ python3 openR1/vendor/verify_vendor.py \
   --st25dvxxkc-root /absolute/cache/openr1-vendor/fp-sns-stbox1-e9a35449b777699b5e1dd0f1466de0ead554893a/Drivers/BSP/Components/st25dvxxkc \
   --tiny-aes-root /absolute/cache/openr1-vendor/tiny-AES-c-e72b6eff0884673997d0ca6385169bbd9b31936d
 ```
+
+## Owner-authorized full reduction (2026-08-14)
+
+By explicit decision of the project owner, the reconstruction goal is a firmware image built
+entirely from compilable source, including the third-party interiors that earlier revisions of
+this policy kept hard-gated. The following named families are therefore re-routed from
+`vendor_source_required_not_redistributable` / `investigate_before_implementing` to the new
+disposition `clean_room_reimplementation_owner_authorized` as their reductions land:
+
+- the six Bravechip BCL603M middleware families (generic device registry, software-TWI engines,
+  sensor-stream framework, RTC-device framework, time/calendar provider, shared quantized neural
+  runtime — 164 entries),
+- the gated Goodix GH3X2X entries (319: closed algorithm-library closures, the `goodix_mem`
+  apparatus, and the documented residue, including neural weight/constant tables),
+- the GoMore health/sleep algorithm families (362),
+- YHMICROS YHM2710 (36), GXCAS GXT310 (5), and QST QMA6100 (3).
+
+Progress at this snapshot: 160 Goodix and 49 GoMore functions now compile from the reconstructed
+Goodix primitive/heap and quantized-runtime modules and the two reconstructed GoMore modules. This moves 141
+previously opaque Goodix entries and 49 opaque GoMore entries into the owner-authorized
+disposition; 178 Goodix and 313 GoMore entries remain. Seventeen of the 160 Goodix functions
+also replace already-admitted public-democode source, and two replace R1 product entries, so
+those nineteen do not reduce the opaque count. The complete Goodix heap boundary now has local
+C for its twelve allocator bodies, all twenty provider call-site helpers, and the R1 byte-fill.
+The first four heap-dependent descriptor lifecycle bodies are local as well.
+The six-descriptor channel state and enclosing two-channel session state now have paired,
+failure-clean constructor/destructor implementations.
+Twenty-four Goodix generated-model/runtime routines are also local: the owner wrapper, model instance initializer, both graph builders, generated layer-block builder, both complete generated graph executors, complete quantized layer executor, recurrent layer, complete recurrent executor and helper closure (including both exact range-adjust instantiations), four typed stage-pipeline helpers, aligned arena descriptor,
+packed pooling descriptor, external executor accessor, and cursor-pair int8-add descriptor.
+Their enclosing preprocessing session constructor/destructor is also local and releases all 34
+owned allocations on complete teardown.
+The GH_HR integrity-bit encoder and validator are local as well, with all four recovered parity
+masks expressed as transparent constants and their selector/parity behavior covered by tests.
+The paired packed-float converters and their explicit-callback vector adapter are also local,
+including the recovered shared-tail extents and exact subnormal bit adjustments.
+
+Method and limits:
+
+- Implementations are written from the recovered decompilation evidence in `r1/research/` as
+  independently compiled C, with per-function provenance (image, address, size, evidence hash)
+  recorded in the ownership ledger and the family correlation docs. They are not vendor source
+  and must never be presented as such; every reconstructed file carries a provenance banner.
+- Constant and weight tables that exist only as data in the stock image are embedded as C arrays
+  generated from the recovered bytes, with the extraction tool and source range documented; they
+  are evidence-derived data, not authored content.
+- Reconstructed providers live under `r1/reconstructed/<family>/`, separate from R1-owned product
+  code (`r1/src/`), platform glue (`r1/platform/`), and R1-authored ports (`r1/port/`).
+- Security invariants are preserved: pointer+length discipline, explicit failure, bounded queues,
+  and the documented security non-goals (withheld dispatch commands, fail-closed authorization)
+  remain excluded behavior, not opacity to be reduced.
+- Reconstructed modules carry host tests where portable and are compiled into the SDK image as
+  they land; fail-closed stubs are retired only when their replacement is built and tested.
+
+This section supersedes the hard-gate language for the named families elsewhere in this document
+and in `boundaries/` docs; those docs remain the provenance record of why upstream source was
+unavailable or unusable.
 
 ## R1-owned boundaries
 
@@ -109,11 +166,13 @@ from SDK 17.1.0, and one fixed initcall record wrapper is admitted only as direc
 configuration. Seven generic epoch/calendar/named-record/callback bodies have no exact attributable
 source and remain disabled behind an abstract provider; see
 [`RTC-DEVICE-PROVIDER-BOUNDARY.md`](boundaries/RTC-DEVICE-PROVIDER-BOUNDARY.md).
-The following `device_stacmd` initcall is configuration-only; all fourteen P1.01 framing, parity,
-edge-wait, retry, and read/write bodies remain in the YHMICROS licensed-provider gate. The adjacent
+The following `device_stacmd` initcall is configuration-only. All fourteen P1.01 framing, parity,
+edge-wait, retry, and read/write bodies and the 22 coupled YHM device/register bodies are now
+independently reconstructed under the owner-authorized full reduction. The adjacent
 watchdog uses SDK 17.1.0 `nrfx_wdt.c`; OpenR1 owns only the recovered 10-second, priority-6,
 single-channel configuration and scheduler feed seam. See
-[`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md) and
+[`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md),
+[`YHM2710-REDUCTION-CORRELATION.md`](correlation/YHM2710-REDUCTION-CORRELATION.md), and
 [`WATCHDOG-DEVICE-CORRELATION.md`](correlation/WATCHDOG-DEVICE-CORRELATION.md).
 The sensor-algorithm path uses a separate thirteen-function private heap initialized directly by
 the Goodix-candidate boundary. Its two-bin tagged-block implementation is neither Nordic's
@@ -127,9 +186,10 @@ image does not contain `osDelayUntil`; the incompatible unused v10.5.1 wrapper s
 garbage-collected instead of recreating a newer FreeRTOS kernel function locally.
 The Nordic target compiles and retains the authenticated Bosch and ST motion-provider translation
 units behind a clean R1 selector and Nordic port. Recovered evidence supplies TWIM1 at 400 kHz,
-P0.11/P0.14, address `0x18`, P0.15 interrupt input, LIS2DW12-before-BMA456W probe order, fixed
-provider configuration, and six-byte FIFO normalization. QMA6100 is omitted pending licensed
-source; interrupt-driven consumption and owned-ring validation remain explicit gaps.
+P0.11/P0.14, address `0x18`, P0.15 interrupt input, the LIS2DW12/BMA456W/QMA6100 stock probe order,
+fixed provider configuration, and six-byte FIFO normalization. The owner-authorized QMA6100 source
+reduction is compiled and selectable through the portable motion boundary; Nordic board binding and
+owned-ring validation of that fallback remain explicit hardware-adoption gaps.
 In particular, static evidence labels `health.db` as FlashDB TSDB, `kv.bin` as an R1-specific
 fixed-class snapshot store, and `sleep.db` as a separate ring-specific journal. Consequently,
 upstream FlashDB supplies only `health.db`; the two product formats are appropriate clean-room
@@ -146,8 +206,11 @@ is not recreated. Exact UICR/FDS/linker separation is documented in
 CmBacktrace is source-admitted through the compatible interval and adapter split documented in
 [`CMBACKTRACE-CORRELATION.md`](correlation/CMBACKTRACE-CORRELATION.md). Bosch BMA456 and ST LIS2DW12 are now
 source-admitted through the exact provider/adapter split in
-[`MOTION-PROVIDER-CORRELATION.md`](correlation/MOTION-PROVIDER-CORRELATION.md); QST QMA6100 V1.0 lineage is
-proven, but production remains gated on licensed official source and installed-part confirmation.
+[`MOTION-PROVIDER-CORRELATION.md`](correlation/MOTION-PROVIDER-CORRELATION.md). The complete QMA6100
+reduction and its intentional fail-closed divergences are recorded in
+[`QMA6100-REDUCTION-CORRELATION.md`](correlation/QMA6100-REDUCTION-CORRELATION.md); installed-part
+confirmation and Nordic board adoption remain hardware-validation tasks rather than opaque-source
+dependencies.
 ST25DVxxKC is independently source-admitted through the 27-provider/seven-adapter split in
 [`ST25DVXXKC-CORRELATION.md`](correlation/ST25DVXXKC-CORRELATION.md). In particular, the local mailbox
 receive adapter must enforce the recovered destination's 20-byte capacity before it calls ST's
@@ -157,11 +220,13 @@ byte-pinned graph-closure candidates, and 16 R1 adapter seams are documented in
 [`GOODIX-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-PROVIDER-BOUNDARY.md),
 with the repeated integrity convention independently pinned in
 [`GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md`](boundaries/GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md),
-but source availability and redistribution rights are not; openR1 will not recreate the Goodix
-biometric algorithms from disassembly. The local adapter preserves only power/lifecycle ordering,
-delays, and opaque recovered mask values, requires an explicit provider binding, and fails closed
-when none is present. Behavioral models may remain in host tests as black-box compatibility
-oracles, but they are not promoted as production replacements for vendor libraries.
+but source availability and redistribution rights are not. Under the owner-authorized full-reduction
+policy (above), the Goodix biometric interiors are being reduced to reconstructed source with
+per-function provenance; the reconstructed code is not vendor source and is never presented as
+such. The local adapter preserves only power/lifecycle ordering,
+delays, and opaque recovered mask values, and fails closed
+when no provider binding is present. Behavioral models may remain in host tests as black-box compatibility
+oracles.
 Nordic application ownership is refined further in
 [`NORDIC-SDK-CORRELATION.md`](correlation/NORDIC-SDK-CORRELATION.md). Five hundred seventeen application entries
 now route to Nordic source, thirteen to SDK-bundled SEGGER source, and the R1-modified clock prefix,

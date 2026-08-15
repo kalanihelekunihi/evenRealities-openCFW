@@ -85,7 +85,7 @@ or logging code in
 The separate R1-owned calibration, slider timing, gesture, and event-routing path is documented in
 [`TOUCH-SLIDER-CORRELATION.md`](correlation/TOUCH-SLIDER-CORRELATION.md); it consumes normalized samples and
 does not reproduce controller/register semantics.
-GXCAS GXT310 and YHMICROS YHM2710 marker-bearing functions are gated in
+GXCAS GXT310 and YHMICROS YHM2710 marker-bearing functions are provenance-pinned in
 [`NAMED-PERIPHERAL-BOUNDARIES.md`](boundaries/NAMED-PERIPHERAL-BOUNDARIES.md).
 The expanded Goodix provider/demo gate and clean-room R1 adapter split are documented in
 [`GOODIX-PROVIDER-BOUNDARY.md`](boundaries/GOODIX-PROVIDER-BOUNDARY.md); the exact 58-function GH_NADT
@@ -103,14 +103,14 @@ orchestration, hardened 20-byte receive boundary, and bounded dock heartbeat/fie
 planner; see [`ST25DVXXKC-CORRELATION.md`](correlation/ST25DVXXKC-CORRELATION.md) and
 [`NFC-DOCK-POLICY-CORRELATION.md`](correlation/NFC-DOCK-POLICY-CORRELATION.md).
 Five additional byte-pinned R1 resource functions now own the P1.10 NFC board lifecycle,
-exclusive shared-bus arbitration, and the three-client battery/optical/touch lease. YHM register
-and wire operations remain provider-gated; see
+exclusive shared-bus arbitration, and the three-client battery/optical/touch lease. All YHM
+register and wire operations are reconstructed behind typed board callbacks; see
 [`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md).
 The Nordic image also compiles the exact `nrfx_saadc` provider and recovered AIN5/AIN3/AIN2
 configuration. Four R1 analog adapters and seven product battery routines supply only routes,
 filtering, conversion, curves, and charge-state policy. The linked controller can synchronize
 provider measurements into protocol-visible runtime state, while live sampling remains fail-closed
-until licensed YHM power and PMIC-state providers are bound; see
+until the reconstructed YHM service is bound and validated on owned hardware; see
 [`ANALOG-BATTERY-CORRELATION.md`](correlation/ANALOG-BATTERY-CORRELATION.md).
 The R1-owned three-hour automatic health-history gate is also implemented as a portable controller
 and retained Nordic integration seam. It reproduces the authenticated-phone condition, shared
@@ -164,7 +164,8 @@ The implementation is pinned to these repository-owned evidence sets:
   [`FRONTIER-204-210-CORRELATION.md`](correlation/FRONTIER-204-210-CORRELATION.md).
 - The 402-byte PMIC charge-event boundary is implemented as a pure status-template and thermal
   action planner in [`PMIC-CHARGE-EVENT-CORRELATION.md`](correlation/PMIC-CHARGE-EVENT-CORRELATION.md);
-  YHM2710, ST25DVxxKC, timers/events, logging, and live transport remain provider-owned.
+  ST25DVxxKC, timers/events, logging, and live transport retain their typed provider seams;
+  the YHM2710 closure itself is reconstructed.
 - The composite 374-byte PMIC-charged notification boundary is implemented as a pure retry and
   completion planner in
   [`PMIC-CHARGED-NOTIFICATION-CORRELATION.md`](correlation/PMIC-CHARGED-NOTIFICATION-CORRELATION.md);
@@ -311,10 +312,18 @@ The implementation is pinned to these repository-owned evidence sets:
 - The 1,736-byte R1 BLE event consumer, `pairAuth` security scheduling, two-target `advStart`
   policy, and strict Nordic/RTOS provider split are documented in
   [`CONNECTION-CONTROL-CORRELATION.md`](correlation/CONNECTION-CONTROL-CORRELATION.md).
-- The corrected YHM2710 `device_stacmd` table and complete 1,000-byte vendor transport gate are in
-  [`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md); the adjacent watchdog
+- The corrected YHM2710 `device_stacmd` table and complete 36-entry transparent reduction are in
+  [`YHM2710-REDUCTION-CORRELATION.md`](correlation/YHM2710-REDUCTION-CORRELATION.md); the adjacent watchdog
   now compiles Nordic `nrfx_wdt.c` with only an R1 configuration/feed adapter, documented in
   [`WATCHDOG-DEVICE-CORRELATION.md`](correlation/WATCHDOG-DEVICE-CORRELATION.md).
+- The first source-owned algorithm batches—160 Goodix functions and 49 GoMore primitives/tensor executors—are
+  correlated in [`GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md)
+  and [`GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md).
+  The tensor subset has its descriptor/allocation seam documented in
+  [`GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md`](correlation/GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md).
+- The complete twelve-function Goodix `goodix_mem`/`GdMem` core, its twenty Goodix call-site
+  helpers, and the R1 byte-fill are reconstructed in
+  [`GOODIX-HEAP-REDUCTION-CORRELATION.md`](correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md).
 - The thirteen-function / 1,202-byte sensor-algorithm private heap, including its five
   scatter-loaded bodies and `sensor_algo_mem_fatal` path, is separately source-gated in
   [`SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md`](boundaries/SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md).
@@ -496,7 +505,7 @@ unclassified entries are not
 eligible for local implementation. IQS7211E's admitted adapters are compiled and linked, but cannot
 energize hardware until its explicit identity and shared-power boundaries are provisioned. The
 ST25DVxxKC path is likewise linked and starts disabled. Nordic startup binds its exact P1.10 board
-lifecycle and exclusive `i2c_5` mutex; a future YHM provider must take that same mutex.
+lifecycle and exclusive `i2c_5` mutex; the reconstructed YHM board binding must take that same mutex.
 
 ## Implemented compatibility spine
 
@@ -560,7 +569,7 @@ lifecycle and exclusive `i2c_5` mutex; a future YHM provider must take that same
   battery AIN5/P0.29, PMIC current AIN3/P0.05, and NFC rectifier AIN2/P0.04 with the recovered
   gains and acquisition times. Portable R1 code implements only the exact filters, conversions,
   four battery curves, charging cadence/full gate, stalled-charge recovery, and runtime state
-  transitions. Battery acquisition is unavailable until licensed YHM power and charge-state
+  transitions. Battery acquisition is unavailable until reconstructed YHM power and charge-state
   bindings exist; see
   [`ANALOG-BATTERY-CORRELATION.md`](correlation/ANALOG-BATTERY-CORRELATION.md).
 - Seven contiguous 4-KiB-aligned partition descriptors spanning 36 pages: `kv.bin`, `health.db`,

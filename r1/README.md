@@ -21,8 +21,9 @@ Official Bosch BMA456 SensorAPI v2.29.0 and ST LIS2DW12 v2.1.0-compatible source
 the two resolved accelerometer variants; openR1 may provide only R1-specific board/configuration
 adapters around them. Both provider translation units and the clean-room selector/configuration/
 FIFO adapters compile and remain retained in the Nordic target. Startup probes the recovered
-TWIM1 P0.11/P0.14 address-`0x18` bus in LIS2DW12-then-BMA456W order; QST QMA6100 remains disabled
-until official licensed source is authenticated. The P0.15 interrupt worker, downstream motion
+TWIM1 P0.11/P0.14 address-`0x18` bus in LIS2DW12-then-BMA456W order. The owner-authorized
+QMA6100/QMA6100P source reduction now supplies the third stock-order fallback without an opaque
+provider; its Nordic board binding still requires installed-part confirmation. The P0.15 interrupt worker, downstream motion
 consumer, NFC/TWIM1 coexistence, and owned-ring validation remain explicit gaps.
 The authenticated ST25DVxxKC BSP component supplies the recovered NFC dynamic-tag driver. Its
 translation units compile and remain linked through the Nordic target; openR1 supplies only the
@@ -41,9 +42,9 @@ generic stock device-registry rewrite is used.
 The Nordic target also links Nordic's unmodified `nrfx_saadc.c` and retains a clean R1 adapter for
 the recovered battery AIN5/P0.29, PMIC-current AIN3/P0.05, and NFC-rectifier AIN2/P0.04 routes.
 Portable code implements the byte-pinned five-sample conversion, battery curves, charging cadence,
-full-state gate, and stalled-charge recovery. Battery acquisition returns unsupported until a
-licensed YHM power provider binds the semantic power interface; no YHM wire/register body or raw
-ADC BLE surface is implemented.
+full-state gate, and stalled-charge recovery. The complete YHM2710 transport/register closure is
+now reconstructed as transparent C; battery acquisition remains unsupported until the Nordic
+board binds it and owned-ring electrical behavior is validated. No raw ADC BLE surface exists.
 Portable health code also implements the recovered R1-owned automatic synchronization gate: an
 active phone-role link triggers HR, SpO2, HRV, activity, and unsynchronized-sleep history in exact
 order at initial time, clock rewind, or a 10,800-second boundary. Explicit history queries share
@@ -93,23 +94,51 @@ See [`docs/README.md`](docs/README.md) for evidence
 provenance, coverage, safety differences, and remaining hardware work. The function-level motion
 split is in
 [`docs/MOTION-PROVIDER-CORRELATION.md`](docs/correlation/MOTION-PROVIDER-CORRELATION.md).
-The GoMore health/sleep algorithm boundary remains disabled until a matching licensed provider is
-authenticated; see
+The first 49 GoMore functions—including 43 primitives and six tensor executors—are reconstructed in transparent C;
+the remaining 313 health/sleep algorithm entries stay disabled while their source reductions
+continue. See
 [`docs/GOMORE-PROVIDER-BOUNDARY.md`](docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md).
 The IQS7211E path uses pinned MIT provider/settings references and the R1-only adapter in
 `src/r1_iqs7211e.c`; its Nordic TWIM0/GPIOTE board binding is recorded in
 [`docs/IQS7211E-PROVIDER-BOUNDARY.md`](docs/boundaries/IQS7211E-PROVIDER-BOUNDARY.md)
 and remains unavailable until identity, shared-power, and wear/factory lease gates are provisioned.
-The GXCAS GXT310 and YHMICROS YHM2710 boundaries are documented in
+The GXCAS GXT310 and YHMICROS YHM2710 provenance boundaries are documented in
 [`docs/NAMED-PERIPHERAL-BOUNDARIES.md`](docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md).
+The five GXT310 mode/one-shot bodies are now reduced to transparent C; temperature register reads
+remain in the already admitted R1 product adapters. See
+[`docs/GXT310-REDUCTION-CORRELATION.md`](docs/correlation/GXT310-REDUCTION-CORRELATION.md).
+All 36 YHM2710 transport, device, register, status, and policy bodies are likewise reconstructed;
+see [`docs/YHM2710-REDUCTION-CORRELATION.md`](docs/correlation/YHM2710-REDUCTION-CORRELATION.md).
 The R1-owned three-client power lease and shared NFC/YHM conductor arbitration are implemented
 separately in `src/r1_power_lease.c` and `platform/nrf52840/sdk/openr1_i2c5_resources.c`; see
 [`docs/YHM2710-I2C5-RESOURCE-BOUNDARY.md`](docs/boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md).
-The lease calls only a semantic provider and contains no YHM register/framing data. Without a
-licensed YHM provider, touch power remains fail closed. NFC receives the recovered P1.10 lifecycle
+The lease calls only a semantic provider and contains no YHM register/framing data. Touch power
+remains fail closed pending board binding and hardware validation. NFC receives the recovered P1.10 lifecycle
 and an exclusive CMSIS mutex but still starts disabled and exposes no raw transfer surface.
-The Goodix GH3X2X demo/config/event boundary remains licensed-provider-only; see
+The first 160 Goodix functions now compile from transparent C with hidden table and executor
+addresses replaced by typed bindings; 141 came from the opaque closure, seventeen replace
+public-democode source, and two replace R1 product entries. The remaining 178 closed Goodix functions are still being
+reduced; see
 [`docs/GOODIX-PROVIDER-BOUNDARY.md`](docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md).
+The complete twelve-function `goodix_mem`/`GdMem` core is reconstructed without the vendor binary;
+all twenty Goodix heap call-site helpers, the R1 pool byte-fill, and the first four descriptor
+lifecycle bodies are also compiled locally. The paired channel/session constructor-destructor
+layer is compiled locally as well. Four Goodix generated-model descriptor helpers now build their
+records from typed parameters and bind reconstructed pooling/add executors directly. The adjacent
+recurrent-layer constructor now allocates its state transparently and partitions the model arena
+with checked arithmetic. Its full quantized recurrent executor and five-helper closure are now
+local, including checked caller-supplied model-region/workspace APIs and a target-ABI adapter;
+the first complete generated-model graph builder emits a typed
+352-byte schema from an explicit 439-word model input. Its enclosing `0x344`-byte model instance
+is now typed, failure-clean, and built from an explicit 3,924-word model input; its recovered
+owner configuration wrapper is local as well. Its complete three-mode `0x742E4` executor retains
+the recovered 99→49→24→12 graph, scratch banks, head/tail branches, and final copy while replacing
+the stock callback table with explicit typed stage plans. The complete `0x617F8` sibling likewise
+retains its four 180-sample branches, five quantized layers, overlapping arena move, and concatenated
+960-byte output through explicit plans and caller-owned scratch. The enclosing `0xD4` preprocessing session now has
+a failure-clean 34-allocation constructor/destructor pair. The full SpO2 version report and its
+DSP component string are also built locally from explicit text inputs;
+see [`docs/GOODIX-HEAP-REDUCTION-CORRELATION.md`](docs/correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md).
 `src/r1_goodix.c` implements only the recovered R1 power/lifecycle/profile adapter. It requires an
 explicit provider binding and returns `R1_ERROR_UNSUPPORTED` instead of fabricating biometric data
 when that provider is absent.

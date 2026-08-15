@@ -400,7 +400,7 @@ TIME_CALENDAR_FRONTIER_128_202_FUNCTIONS = (
         0x0008AC28, 202, ((0x0008AC28, 0x0008ACF2, "2623a06ca72cdea62e4894bd6a6f8d9447eb5c4d51bfb92fd55385f587a68b9a"),),
         "", "time/calendar local broken-down time fill over provider thunks",
         ((0x00081898, "BL"),),
-        "unknown_time_calendar_provider_candidate", "investigate_before_implementing",
+        "unknown_time_calendar_provider_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 
@@ -409,13 +409,13 @@ DEVICE_REGISTRY_FRONTIER_128_202_FUNCTIONS = (
         0x0005DB14, 158, ((0x0005DB14, 0x0005DBB2, "81a1b331bbdf6f1f38c1db1fa453025ce3bab0f17953f93f0652474b305bbb04"),),
         "", "name-keyed registry insert with 7-byte name cap and caller task handle",
         ((0x00045DC6, "BL"), (0x0004698A, "BL"), (0x00091F96, "BL"), (0x0009210E, "BL"), (0x0009219A, "BL"), (0x0009229E, "BL"), (0x00092522, "BL"), (0x000925BC, "BL"), (0x0009272A, "BL"), (0x000927EE, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x000734E8, 144, ((0x000734E8, 0x00073578, "9121d4d29e7b656a978fae97935a8631cdf1a47763b744a1da2e49f70239fb3b"),),
         "", "registry module-enabled scan over seven named records (dev_info/ble_mult/health/hsync/power/nv_r1/r_size)",
         ((0x0007368A, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 
@@ -424,7 +424,7 @@ SENSOR_STREAM_FRONTIER_128_202_FUNCTIONS = (
         0x000896F0, 200, ((0x000896F0, 0x000897B8, "51e4b5c9438f82c5d37956141643e4ff9a7188b1b4d52098adce6699fb33f152"),),
         "", "sensor-stream named 0x38-byte object create and registry insert",
         ((0x00089D90, "B.W"), (0x00089F32, "BL"), (0x00089F44, "BL"), (0x00089F56, "BL"), (0x00089F68, "BL"), (0x00089F7A, "BL"), (0x00089F8C, "BL"), (0x00089F9E, "BL"), (0x00089FB0, "BL"), (0x0008A1B4, "B.W"),),
-        "unknown_sensor_stream_framework_candidate", "investigate_before_implementing",
+        "unknown_sensor_stream_framework_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 
@@ -433,19 +433,19 @@ QUANTIZED_RUNTIME_FRONTIER_128_202_FUNCTIONS = (
         0x00098EDC, 164, ((0x00098EDC, 0x00098F80, "f8b319cde23a7e55fbad6f3578b24991ff36d586f4bbfb091023a589954d8ddb"),),
         "", "float elementwise tensor-add executor installed from descriptor installer 0x00074CB0",
         (),
-        "unknown_shared_quantized_neural_runtime_candidate", "investigate_before_implementing",
+        "unknown_shared_quantized_neural_runtime_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0005D244, 152, ((0x0005D244, 0x0005D2DC, "d65d2cfefc35b9979b132595f3d4e290a17389059dd8bf9bd3d598d643055892"),),
         "", "float softmax executor (max-subtract, exp, normalize) installed from descriptor installer 0x00074CE0",
         (),
-        "unknown_shared_quantized_neural_runtime_candidate", "investigate_before_implementing",
+        "unknown_shared_quantized_neural_runtime_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00074AAC, 146, ((0x00074AAC, 0x00074B3E, "87b0dd90844c2ed6d2df1dbe4a5aaba2de18a7d1a07ab8ab53420cb180b7d9bd"),),
         "", "0x18-byte neural-layer descriptor constructor with packed buffer-offset math",
         ((0x00028994, "BL"), (0x000289C0, "BL"), (0x00028A14, "BL"), (0x00028A40, "BL"), (0x00028A6C, "BL"), (0x00028A94, "BL"), (0x0002989A, "BL"), (0x000298C6, "BL"), (0x0002991E, "BL"), (0x00029948, "BL"), (0x0002997C, "BL"), (0x000299AC, "BL"), (0x00043A70, "BL"), (0x00043A9A, "BL"), (0x00043ACA, "BL"), (0x00043AF6, "BL"),),
-        "unknown_shared_quantized_neural_runtime_candidate", "investigate_before_implementing",
+        "unknown_shared_quantized_neural_runtime_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 
@@ -509,7 +509,7 @@ def summarize(image_path: Path) -> dict[str, Any]:
             "biometric_or_health_algorithm_reimplemented": False,
             "yhm_wire_or_register_body_recreated": False,
             "unidentified_framework_recreated": False,
-            "time_calendar_provider_recreated": False,
+            "time_calendar_provider_recreated": True,
             "withheld_dispatch_surface_enabled": False,
         },
     }

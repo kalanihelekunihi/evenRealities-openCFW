@@ -130,3 +130,31 @@ sensor-stream families (shared 0..12 status enum, runtime vtable installation,
 vendor SDKs) matches at the function-behavior, constants, or structure level; there is no
 "compatible-interval" candidate. The existing clean-room routing decision (Nordic TWIM/TWI
 providers, or a separately attributable licensed soft-I2C provider) stands unchanged.
+
+## Acquisition route (2026-08-14 re-check)
+
+With every public-source hypothesis eliminated, route (c) — commercial acquisition — is the
+only remaining attribution path, and it now has a named counterparty. Request the platform
+SDK/source (or a license statement) from Wuxi Bravechip Technologies (public business
+contact per the `BravechipSpace/ChipletRing-APPSDK` README: xiaojian.cui@bravechip.com) or
+through the ring ODM, covering the `platform\` tree including the software-TWI engine.
+Forensic fallback: analyze the Bravechip ring OTA images shipped in the APPSDK
+(`2.4.4.81.hex16`, `2.3.7.511S.hex16`, `2.4.8.6Z3K.hex16` — apparently obfuscated/encrypted)
+for shared platform code with richer `__FILE__` strings.
+
+Public-source exhaustion evidence (2026-08-14):
+
+- `BravechipSpace/ChipletRing-APPSDK` (fetched to `~/vendor-cache/chiplet-ring-appsdk`,
+  default-branch HEAD) is phone-side only: `IOS/library`, `IOS/example`, `Android`, `Doc`.
+  Grep of all `*.h`/`*.m`/`*.c`/`*.java`/`*.md`/`*.txt` for `sensor_stream`, `soft_twi`,
+  `sw_i2c`, `rtc_device`, `BCL603`, `603M`: zero hits. No firmware-side source exists in
+  Bravechip's public footprint.
+- The BravechipSpace GitHub org contains only that repository plus a react fork.
+- A second Bravechip-based ring product (`thuhci/OpenRing`, Tsinghua τ-Ring, depending on
+  `ChipletRing1.0.81.aar`) also ships no firmware source.
+- Bravechip's official site download list (bravechip.com) offers app SDKs, app notes, and
+  datasheets only; the ring firmware is pre-loaded and closed.
+- Gitee code search remains login-walled (the same blocker recorded in the
+  generic-device-registry report); that route is still open for anyone with a Gitee login.
+- `Mentra-Community/MentraOS` `R1.kt` independently carries the same BAE8 UUIDs —
+  corroboration of the platform identification, not a source route.

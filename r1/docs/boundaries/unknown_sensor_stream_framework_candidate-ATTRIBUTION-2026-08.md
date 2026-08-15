@@ -165,7 +165,18 @@ namespace token (`raw_hr`, `wearled`) exists in no public codebase other than th
 project and its mirror.
 
 The family remains `unknown_sensor_stream_framework_candidate` /
-`investigate_before_implementing`. Remaining attribution routes, unchanged from the
-boundary doc: acquisition of the ODM platform SDK, or future appearance of the platform
-in a public leak/release. Do not clone this architecture; the admitted replacement path
-(typed sensor-provider + Nordic/CMSIS primitives) stands.
+`investigate_before_implementing`. Remaining attribution routes: acquisition of the
+platform SDK from the now-named vendor, Wuxi Bravechip Technologies (public business
+contact per the `BravechipSpace/ChipletRing-APPSDK` README: xiaojian.cui@bravechip.com) or
+via the ring ODM; forensic fallback via the Bravechip ring OTA hex files shipped in the
+APPSDK; or future appearance of the platform in a public leak/release. Public-route
+exhaustion, checked 2026-08-14: the APPSDK is phone-side only (`IOS/library`,
+`IOS/example`, `Android`, `Doc`; grep of all `*.h`/`*.m`/`*.c`/`*.java`/`*.md`/`*.txt` for
+`sensor_stream`, `soft_twi`, `sw_i2c`, `rtc_device`, `BCL603`, `603M` — zero hits); the
+BravechipSpace org contains only that repo plus a react fork; the second Bravechip-based
+ring product (`thuhci/OpenRing`, Tsinghua τ-Ring, `ChipletRing1.0.81.aar`) also ships no
+firmware source; bravechip.com's download list offers app SDKs/notes/datasheets only;
+`Mentra-Community/MentraOS` `R1.kt` independently carries the same BAE8 UUIDs
+(corroboration of the platform identification, not a source route). Do not clone this
+architecture; the admitted replacement path (typed sensor-provider + Nordic/CMSIS
+primitives) stands.

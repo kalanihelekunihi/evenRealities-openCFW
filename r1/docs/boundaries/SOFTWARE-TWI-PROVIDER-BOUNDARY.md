@@ -131,3 +131,18 @@ B210 platform middleware tree, identified as Wuxi Bravechip "ChipletRing" / BCL6
 quantized-runtime sibling report). Verdict: NO ATTRIBUTION — family remains
 `investigate_before_implementing`. Full evidence:
 [`unknown_software_twi_provider_candidate-ATTRIBUTION-2026-08.md`](unknown_software_twi_provider_candidate-ATTRIBUTION-2026-08.md).
+
+## Reduction 2026-08
+
+Under the owner-authorized full reduction (2026-08-14, see
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the forty ledger entries of
+`unknown_software_twi_provider_candidate` (all four compiler-instantiated GPIO bit-bang buses and their shared helpers) are reconstructed
+from the recovered decompilation evidence as independently compiled C in
+[`../../reconstructed/software_twi/`](../../reconstructed/software_twi/).  The
+reconstruction is not vendor source; it carries per-function provenance
+banners, and its contract, reconstruction decisions, divergences, and
+host-test mapping are documented in
+[`../correlation/SOFTWARE-TWI-REDUCTION-CORRELATION.md`](../correlation/SOFTWARE-TWI-REDUCTION-CORRELATION.md).
+The ledger disposition for the forty entries is now
+`clean_room_reimplementation_owner_authorized`.  This document remains the
+provenance record of why no upstream source was admitted.

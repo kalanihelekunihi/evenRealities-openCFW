@@ -94,7 +94,7 @@ def summarize(image_path: Path) -> dict[str, Any]:
             "source_disposition": "clean_room_behavior_only",
             "third_party_implementation_identified": False,
             "freertos_allocator_reimplemented": False,
-            "time_calendar_provider_reimplemented": False,
+            "time_calendar_provider_reimplemented": True,
             "topic_or_transport_sender_reimplemented": False,
             "structured_logging_reimplemented": False,
             "sensor_or_biometric_algorithm_included": False,

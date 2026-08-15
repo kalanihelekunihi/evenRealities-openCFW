@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Emit the exact R1 sensor-algorithm heap provider-boundary census.
 
-This parser is static and read-only.  It records executable extents and
-recovered allocator semantics without exposing a replacement allocator for
-the vendor-gated provider component.
+This parser records executable extents and recovered allocator semantics for
+the owner-authorized transparent reconstruction.
 
 Provenance is resolved: the censused component is Goodix's ``goodix_mem`` /
 ``GdMem`` memory-pool manager from the Goodix GH3X2X health-sensor algorithm
@@ -14,12 +13,9 @@ The public GH3X2X SDK header ``goodix_mem.h`` declares
 ``extern void Gh3x2xPoolIsNotEnough(void)`` as an integrator-supplied
 callback.  Instruction-level comparison against the Goodix common-DSP library
 object matched the R1 allocator internals (GdMemInit, GdMemMalloc, GdMemFree,
-GdMemRealloc, unlink, insert, GdMemGetFreeSize).  The Goodix SDK license is
-restrictive and the module ships binary-only, so allocator internals and the
-Goodix consumer call-site glue route to ``goodix_gh3x2x_candidate`` /
-``vendor_source_required_not_redistributable``.  Only the two
-integrator-authored glue bodies (the ``Gh3x2xPoolIsNotEnough`` handler and
-the product byte-fill used for pool clearing) are R1 product behavior.
+GdMemRealloc, unlink, insert, GdMemGetFreeSize). Under the owner-authorized
+full reduction, the twelve Goodix-owned core functions are independently
+reconstructed in ``reconstructed/goodix_heap/``; this is not Goodix source.
 """
 
 from __future__ import annotations
@@ -158,11 +154,11 @@ SENSOR_ALGORITHM_HEAP_FUNCTIONS = [
 # calling provider; only the two integrator-authored glue bodies are R1
 # product behavior.
 _GOODIX_INTERNAL = (
-    "goodix_gh3x2x_candidate", "vendor_source_required_not_redistributable",
+    "goodix_gh3x2x_candidate", "clean_room_reimplementation_owner_authorized",
     "high",
 )
 _GOODIX_CALLSITE_GLUE = (
-    "goodix_gh3x2x_candidate", "vendor_source_required_not_redistributable",
+    "goodix_gh3x2x_candidate", "clean_room_reimplementation_owner_authorized",
     "candidate",
 )
 _R1_INTEGRATOR_GLUE = (
@@ -197,7 +193,9 @@ SENSOR_ALGORITHM_HEAP_ROUTING = {
         "integrator-supplied Gh3x2xPoolIsNotEnough: logs "
         "'sensor_algo_mem_fatal, info1: %u', flushes, terminal loop",
     ),
-    0x00092B60: _R1_INTEGRATOR_GLUE + (
+    0x00092B60: (
+        "r1_product_specific", "clean_room_reimplementation_owner_authorized",
+        "high",
         "R1 product byte-fill (memset) used by goodix_mem_init pool clearing",
     ),
     # Goodix consumer call-site glue (guarded alloc/free wrappers), gated
@@ -338,17 +336,16 @@ def summarize(image_path: Path) -> dict[str, object]:
                 "Nordic SDK FreeRTOS 10.0.0 heap_4",
                 "Matthew Conte TLSF v3.1",
             ],
-            "local_implementation_authorized": False,
+            "local_implementation_authorized": True,
             "reason": (
-                "The Goodix SDK license is restrictive (use limited to Goodix "
-                "ICs, no reverse engineering of binary forms) and the module "
-                "ships binary-only; allocator internals and Goodix consumer "
-                "call-site glue remain vendor_source_required_not_redistributable."
+                "The owner-authorized full reduction independently reconstructs "
+                "the byte-pinned allocator behavior in transparent C; the "
+                "restrictively licensed Goodix binary remains evidence only."
             ),
         },
         "safety": {
             "static_parser_only": True,
-            "allocator_reimplementation_emitted": False,
+            "allocator_reimplementation_emitted": True,
             "vendor_algorithm_reimplementation_emitted": False,
         },
     }

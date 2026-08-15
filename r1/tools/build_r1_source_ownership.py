@@ -268,6 +268,8 @@ class _DocsDir:
 DOCS = _DocsDir(ROOT / "docs")
 OUTPUT = DOCS / "FUNCTION-OWNERSHIP.csv"
 SUMMARY = DOCS / "FUNCTION-OWNERSHIP-SUMMARY.json"
+REFERENCE_OUTPUT = ROOT / "docs/reference/FUNCTION-OWNERSHIP.csv"
+REFERENCE_SUMMARY = ROOT / "docs/reference/FUNCTION-OWNERSHIP-SUMMARY.json"
 
 FIELDS = [
     "image", "inventory_source", "entry", "end", "size", "recovered_name", "provider_family",
@@ -1292,9 +1294,10 @@ APP_UNKNOWN_SOFTWARE_TWI_CANDIDATES = {
 
 
 # The adjacent RTC-device layer is not Nordic driver code: only its direct
-# nrfx_rtc_init dependency is attributable. Seven generic named-record,
-# calendar, epoch, and callback bodies remain gated pending exact source,
-# version, and license identification.
+# nrfx_rtc_init dependency is attributable. The ten generic named-record,
+# calendar, epoch, callback, and ops-veneer bodies are reduced to compilable C
+# under the owner-authorized full reduction (2026-08-14); see
+# docs/correlation/RTC-DEVICE-REDUCTION-CORRELATION.md.
 APP_UNKNOWN_RTC_DEVICE_CANDIDATES = {
     int(item["entry"]): str(item["symbol"])
     for item in RTC_DEVICE_FUNCTIONS
@@ -1317,8 +1320,8 @@ APP_SENSOR_ALGORITHM_HEAP_BOUNDARY = {
 
 # The complete device_stacmd executable closure is tied by its scatter-loaded
 # operation table and P1.01 callback record to the YHM2710 power path. Exact
-# wire behavior is evidence only; no local sender may replace the unresolved
-# vendor provider.
+# wire behavior is independently reconstructed under the owner-authorized
+# full-reduction policy; the original vendor package remains unlicensed.
 APP_YHM2710_STACMD_CANDIDATES = {
     int(item["entry"]): str(item["symbol"])
     for item in YHM2710_STACMD_FUNCTIONS
@@ -1328,7 +1331,7 @@ APP_YHM2710_STACMD_CANDIDATES = {
 # The 128...202-byte frontier adds the chip-ID 0xA0 verification body called
 # from the pinned YHM2710 diagnostic at 0x0003510C and the 8-step float-ladder
 # register-field update over the same single-wire transport. Both remain
-# provider-gated evidence; no wire or register body is recreated locally.
+# owner-authorized reconstructed behavior in reconstructed/yhm2710/.
 APP_YHM2710_FRONTIER_CANDIDATES = {
     0x0003530C: "yhm2710_chip_id_verify",
     0x00035508: "yhm2710_ladder_field_update",
@@ -2873,6 +2876,240 @@ APP_QMA6100_PROVIDER_SYMBOLS = {
 }
 
 
+# Owner-authorized full reductions of the two small named sensor families.
+# These retain their attribution-family labels while routing their recovered
+# bodies to independently compiled C under r1/reconstructed/.
+APP_GXT310_RECONSTRUCTED_SYMBOLS = {
+    0x00050F9C: "gxt310_enable_pair",
+    0x0006F804: "gxt310_channel_0_switch_mode",
+    0x0006F818: "gxt310_channel_0_trigger_one_shot",
+    0x0006F81E: "gxt310_channel_2_switch_mode",
+    0x0006F832: "gxt310_channel_2_trigger_one_shot",
+}
+
+
+# Owner-authorized first algorithm reductions: small, fully recovered Goodix
+# and GoMore primitives.  Opaque static-table addresses are explicit typed
+# bindings in the reconstruction, never copied absolute firmware pointers.
+APP_GOODIX_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
+    0x0006EB00: "goodix_primitives_copy_preprocess_version",
+    0x0006CC34: "goodix_primitives_copy_process_version",
+    0x00029C74: "goodix_primitives_dispatch_state",
+    0x0002ACF4: "goodix_primitives_record_initialize_once",
+    0x0002D16C: "goodix_primitives_initialize_device",
+    0x00029D34: "goodix_primitives_select_fixed_pair",
+    0x00029F88: "goodix_primitives_record_initialize",
+    0x0002A474: "goodix_primitives_reset_state_record",
+    0x0006F9D4: "goodix_primitives_call_hook",
+    0x0002ABEC: "goodix_primitives_clear_state_flags",
+    0x0006A140: "goodix_primitives_library_code",
+    0x0006A130: "goodix_primitives_table_9d640",
+    0x0006A138: "goodix_primitives_table_a04cc",
+    0x0006A148: "goodix_primitives_table_a50b0",
+    0x0006A150: "goodix_primitives_table_a692c",
+    0x0006A018: "goodix_primitives_table_ad1ac",
+    0x0006CC2C: "goodix_primitives_table_ad13c",
+    0x0006EAF8: "goodix_primitives_table_ad160",
+    0x0002E8C8: "goodix_primitives_constant_one_a",
+    0x0002E8C4: "goodix_primitives_constant_four",
+    0x0002AE00: "goodix_primitives_constant_one_b",
+    0x0002963A: "goodix_primitives_buffer_record_initialize",
+    0x00096A20: "goodix_primitives_buffer_record_create",
+    0x0007CBA0: "goodix_primitives_buffer_record_destroy",
+    0x000929B6: "goodix_primitives_integer_max_index",
+    0x000667E4: "goodix_primitives_copy_dlcom_version",
+    0x000664F4: "goodix_primitives_word_window_push",
+    0x0003EFD8: "goodix_primitives_logistic_score",
+    0x0002A9D2: "goodix_primitives_noop_a",
+    0x0002E950: "goodix_primitives_noop_b",
+    0x0002A54C: "goodix_primitives_zero_a",
+    0x0002A610: "goodix_primitives_zero_b",
+    0x0002D458: "goodix_primitives_second_word",
+    0x000294F8: "goodix_primitives_transformed_differs",
+    0x0002950C: "goodix_primitives_transform_in_place",
+    0x0002CAC6: "goodix_primitives_initialize_status",
+    0x00034A66: "goodix_primitives_is_evenly_divisible",
+    0x00036718: "goodix_primitives_unsigned_power",
+    0x00037710: "goodix_primitives_float_buffer_full",
+    0x00037720: "goodix_primitives_float_buffer_get",
+    0x00037B68: "goodix_primitives_centered_i8",
+    0x00038030: "goodix_primitives_float_sum",
+    0x00056828: "goodix_primitives_decrement_counter",
+    0x0005D5D0: "goodix_primitives_tensor_descriptor_initialize",
+    0x00061EF2: "goodix_primitives_filter_code",
+    0x00061FB4: "goodix_primitives_float_sum",
+    0x00066394: "goodix_primitives_word_window_last",
+    0x00066490: "goodix_primitives_word_window_count",
+    0x00066890: "goodix_primitives_store_version_qualifier",
+    0x0006DAA4: "goodix_primitives_copy_process_version_v1_1",
+    0x0006E548: "goodix_primitives_copy_process_version_v1_0",
+    0x00085CA4: "goodix_primitives_reverse_low_bits",
+    0x00087A78: "goodix_primitives_float_mean",
+    0x000928E0: "goodix_primitives_sum_squares",
+    0x00092900: "goodix_primitives_dot_product",
+    0x00028E5C: "goodix_primitives_transformed_differs",
+    0x00029090: "goodix_primitives_copy_indexed_record",
+    0x000290DC: "goodix_primitives_round_nearest",
+    0x0002A168: "goodix_primitives_transform_packed24_lsb",
+    0x0002A1CC: "goodix_primitives_visit_packed24",
+    0x0002ADD0: "goodix_primitives_swap_u16_bytes",
+    0x000357A2: "goodix_primitives_i32_range",
+    0x00036BD4: "goodix_primitives_processing_record_initialize",
+    0x00036C32: "goodix_primitives_update_transition",
+    0x00037574: "goodix_primitives_sort_floats",
+    0x0004304C: "goodix_primitives_sorted_insert",
+    0x00061F94: "goodix_primitives_float_mean_or_zero",
+    0x000662DA: "goodix_primitives_word_window_full",
+    0x00066458: "goodix_primitives_i16_mean",
+    0x000668DC: "goodix_primitives_i16_min_index",
+    0x00092988: "goodix_primitives_float_min_index",
+    0x000929D6: "goodix_primitives_float_max_index",
+    0x00092B68: "goodix_primitives_float_mean_or_zero",
+    0x00028EAC: "goodix_primitives_release_and_clear",
+    0x00036230: "goodix_primitives_release_if_present",
+    0x0003757C: "goodix_primitives_release_if_present",
+    0x00034A3C: "goodix_primitives_allocate_record_pair",
+    0x00036C60: "goodix_primitives_release_context_pair",
+    0x000662EA: "goodix_primitives_buffer_descriptor_initialize",
+    0x00066304: "goodix_primitives_buffer_descriptor_initialize",
+    0x0006631E: "goodix_primitives_extended_descriptor_initialize",
+    0x0006633A: "goodix_primitives_extended_descriptor_initialize",
+    0x0006635C: "goodix_primitives_float_descriptor_initialize",
+    0x00028EC0: "goodix_primitives_release_context_pair",
+    0x00056860: "goodix_primitives_release_and_clear",
+    0x00066276: "goodix_primitives_release_and_clear",
+    0x0006628A: "goodix_primitives_release_and_clear",
+    0x0006629E: "goodix_primitives_release_and_clear",
+    0x000662B2: "goodix_primitives_release_and_clear",
+    0x000662C6: "goodix_primitives_release_and_clear",
+    0x000667C0: "goodix_primitives_release_if_present",
+    0x00073154: "goodix_primitives_release_two_and_clear",
+    0x00092B58: "goodix_primitives_byte_fill",
+    0x00092B60: "goodix_primitives_byte_fill",
+    0x00098FFC: "goodix_primitives_release_two",
+    0x0005683C: "goodix_primitives_dual_buffer_descriptor_initialize",
+    0x00056874: "goodix_primitives_float_storage_initialize",
+    0x000667C6: "goodix_primitives_pair_buffer_initialize",
+    0x00093E3A: "goodix_primitives_release_two_and_clear",
+    0x0003DF18: "goodix_primitives_channel_state_initialize",
+    0x000304A0: "goodix_primitives_channel_state_release",
+    0x0005CD90: "goodix_primitives_session_state_initialize",
+    0x00091890: "goodix_primitives_session_state_release",
+    0x000362B6: "goodix_primitives_owned_float_record_create",
+    0x00033800: "goodix_primitives_owned_float_record_destroy",
+    0x00034AA0: "goodix_primitives_channel_record_array_create",
+    0x000305D8: "goodix_primitives_channel_record_array_destroy",
+    0x00031914: "goodix_primitives_dual_i16_storage_initialize",
+    0x0003727C: "goodix_primitives_session_aggregate_create",
+    0x00037E8A: "goodix_primitives_session_aggregate_destroy",
+    0x0002F624: "quantized_runtime_goodix_model_owner_initialize",
+    0x00030800: "quantized_runtime_goodix_layer_block_build",
+    0x0002951A: "quantized_runtime_goodix_five_stage_32_execute",
+    0x0006EB30: "goodix_primitives_outer_session_destroy",
+    0x0006EB94: "goodix_primitives_outer_session_create",
+    0x00066840: "goodix_primitives_copy_dsp_version",
+    0x0006EC90: "goodix_primitives_build_spo2_version",
+    0x00036C26: "quantized_runtime_goodix_model_instance_create",
+    0x00036408: "quantized_runtime_recurrent_range_adjust",
+    0x00036590: "quantized_runtime_recurrent_range_adjust",
+    0x000617F8: "quantized_runtime_goodix_second_executor_execute",
+    0x00035D6E: "quantized_runtime_goodix_five_stage_27_execute",
+    0x0003F7F8: "quantized_runtime_goodix_f32_three_stage_execute",
+    0x00042024: "quantized_runtime_goodix_u8_three_stage_execute",
+    0x0004387C: "quantized_runtime_goodix_graph_build",
+    0x0005D01C: "quantized_runtime_goodix_second_graph_build",
+    0x0006FDE0: "quantized_runtime_recurrent_zero_point",
+    0x000739A8: "quantized_runtime_recurrent_execute",
+    0x0007400C: "quantized_runtime_float_min_max",
+    0x0007405C: "quantized_runtime_u8_matrix_vector",
+    0x0007412C: "goodix_primitives_quartic_evaluate",
+    0x00074190: "goodix_primitives_peak_select",
+    0x0005A5EC: "goodix_primitives_integrity_encode",
+    0x000759F4: "goodix_primitives_integrity_invalid",
+    0x00028E14: "goodix_primitives_integrity_invalid",
+    0x00028E70: "goodix_primitives_integrity_encode",
+    0x000294BC: "goodix_primitives_integrity_encode",
+    0x00028DE0: "goodix_primitives_packed_5_10_to_f32_bits",
+    0x00028DE6: "goodix_primitives_packed_6_9_to_f32_bits",
+    0x00028DEC: "goodix_primitives_u32_to_u16_transform",
+    0x000742E4: "quantized_runtime_goodix_executor_execute",
+    0x000876C8: "quantized_runtime_goodix_layer_execute",
+    0x00074A20: "quantized_runtime_recurrent_layer_descriptor_construct",
+    0x00074AA4: "goodix_primitives_release_context_pair_vector",
+    0x00074B44: "quantized_runtime_aligned_descriptor_construct",
+    0x00074C6C: "quantized_runtime_packed_pool_descriptor_initialize",
+    0x00074C90: "quantized_runtime_executor_vector_30534",
+    0x00074CB4: "quantized_runtime_cursor_pair_add_descriptor_construct",
+}
+
+APP_GOODIX_HEAP_RECONSTRUCTED_SYMBOLS = {
+    0x0002D460: "goodix_heap_free",
+    0x0002D54C: "goodix_heap_zero_allocate",
+    0x0002D5C0: "goodix_heap_reallocate",
+    0x00042D1C: "goodix_heap_control",
+    0x0006DFC8: "goodix_heap_free",
+    0x0006DFCC: "goodix_heap_available_bytes",
+    0x0006DFD6: "goodix_heap_initialize",
+    0x0006E004: "goodix_heap_zero_allocate",
+    0x00076A44: "goodix_heap_unlink_free_block",
+    0x00093E14: "goodix_heap_size_to_bin",
+    0x00093E5E: "goodix_heap_insert_free_block",
+    0x000982C2: "goodix_heap_allocate_core",
+}
+
+APP_GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
+    0x0006AD04: "gomore_primitives_records_all_clear",
+    0x000715B8: "gomore_primitives_record5_initialize",
+    0x000883D4: "gomore_primitives_clear_two_records",
+    0x00071B2A: "gomore_primitives_fill_missing_pair",
+    0x00068FBC: "gomore_primitives_prepare_and_score",
+    0x00072AD4: "gomore_primitives_float_in_encoded_range",
+    0x000928DA: "gomore_primitives_scale",
+    0x00094A4C: "gomore_primitives_callback_record_initialize",
+    0x00071A20: "gomore_primitives_span_initialize",
+    0x00087600: "gomore_primitives_sort_float_subrange",
+    0x00091A56: "gomore_primitives_max_index",
+    0x00068720: "gomore_primitives_size_736",
+    0x0006841A: "gomore_primitives_size_14816",
+    0x00071704: "gomore_primitives_clear_90",
+    0x00064770: "gomore_primitives_set_second_word",
+    0x0005A442: "gomore_primitives_return_zero",
+    0x00076500: "gomore_primitives_noop_76500",
+    0x000578C8: "gomore_primitives_noop_578c8",
+    0x00049E58: "gomore_primitives_noop_49e58",
+    0x00072B34: "gomore_primitives_state_window_predicate",
+    0x0006AB88: "gomore_primitives_key_or_cached_copy",
+    0x0008ECD8: "gomore_primitives_slot_state_transition",
+    0x0006AD28: "gomore_primitives_copy_key_blob",
+    0x000726C4: "gomore_primitives_stage_32_and_consume",
+    0x00062000: "gomore_primitives_mean",
+    0x000760EC: "gomore_primitives_argmax_from_zero",
+    0x0004C37C: "gomore_primitives_reset_provider_state",
+    0x0006C640: "gomore_primitives_sample_plausible",
+    0x0006ACD8: "gomore_primitives_stamp_time_record",
+    0x00068570: "gomore_primitives_clamp_hysteresis",
+    0x000726FA: "gomore_primitives_parameter_commit",
+    0x0006AB60: "gomore_primitives_records_any_bit2",
+    0x0006AB38: "gomore_primitives_records_any_bit4",
+    0x0006AB10: "gomore_primitives_records_any_bit3",
+    0x0006AAE8: "gomore_primitives_records_any_bit1",
+    0x0004EC9C: "gomore_primitives_quantized_argmin",
+    0x00064774: "gomore_primitives_max_difference_index",
+    0x00062034: "gomore_primitives_median",
+    0x0006208C: "gomore_primitives_standard_deviation",
+    0x000728D4: "gomore_primitives_logistic_score",
+    0x00094938: "gomore_primitives_modulo5_record",
+    0x0008EEBA: "gomore_primitives_compact_25_windows",
+    0x00094300: "gomore_primitives_decimated_ring_write",
+    0x00091A0E: "gomore_tensor_map",
+    0x00091C80: "gomore_tensor_multiply",
+    0x00091CCC: "gomore_tensor_leaky_relu",
+    0x00091EDC: "gomore_tensor_softmax",
+    0x000919BA: "gomore_tensor_dequant_bias_add",
+    0x00091D30: "gomore_tensor_int8_float_dot",
+}
+
+
 # These retain the QST routine skeleton but add R1 identity acceptance,
 # configuration values, I2C/delay callbacks, logging, bounds, or event policy.
 # Only those bounded product seams may be local, and they remain disabled until
@@ -3532,8 +3769,8 @@ APP_VENDOR_MARKERS = [
      "vendor_source_required_not_redistributable",
      "Function references GXCAS GXT310-specific temperature-sensor variants, addresses, configuration, or diagnostics; exact provider-source lineage and license are unresolved."),
     ("yhmicros_yhm2710_candidate", re.compile(r"YHM2710", re.I),
-     "vendor_source_required_not_redistributable",
-     "Function references YHMICROS YHM2710-specific identification, configuration, or diagnostics; exact provider-source lineage and license are unresolved."),
+     "clean_room_reimplementation_owner_authorized",
+     "Function references YHMICROS YHM2710-specific identification, configuration, or diagnostics. The exact vendor source remains unlicensed; the complete 36-entry closure is independently reconstructed in reconstructed/yhm2710 under the owner-authorized full-reduction policy."),
     ("bosch_bma456_candidate", re.compile(r"BMA456", re.I),
      "resolve_provider_before_implementation",
      "Function references BMA456-specific data or diagnostics; distinguish Bosch driver from R1 adapter before implementation."),
@@ -3633,29 +3870,111 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
             ),
         )
         return row
+    if entry in APP_GXT310_RECONSTRUCTED_SYMBOLS:
+        row.update(
+            provider_family="gxcas_gxt310_candidate",
+            source_disposition="clean_room_reimplementation_owner_authorized",
+            upstream_symbol=APP_GXT310_RECONSTRUCTED_SYMBOLS[entry],
+            confidence="high",
+            evidence=(
+                "Owner-authorized full reduction of the five-function GXT310 "
+                "closure from SHA-pinned decompilation evidence; independently "
+                "compiled C in reconstructed/gxt310/, not vendor source."
+            ),
+        )
+        return row
     if entry in APP_QMA6100_PROVIDER_SYMBOLS:
         row.update(
             provider_family="qst_qma6100_v1_0_lineage_unlicensed",
-            source_disposition="vendor_source_required_not_redistributable",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_QMA6100_PROVIDER_SYMBOLS[entry],
             confidence="high",
             evidence=(
                 "Function control flow matches the public QST-authored QMA6100 "
-                "V1.0 lineage; the evidence snapshot has no redistribution "
-                "license and cannot be used as production source."
+                "V1.0 lineage. Under the owner-authorized full reduction the "
+                "body is reconstructed from the stock-image evidence in "
+                "reconstructed/qma6100/; this is not QST source."
             ),
         )
         return row
     if entry in APP_QMA6100_ADAPTERS:
         row.update(
             provider_family="r1_qst_qma6100_provider_adapter",
-            source_disposition="clean_room_adapter_only_use_licensed_provider",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_QMA6100_ADAPTERS[entry],
             confidence="high",
             evidence=(
                 "QST QMA6100 V1.0-lineage skeleton with an R1 identity, "
-                "configuration, transport, logging, bounds, or event seam; "
-                "only the bounded seam may be local after licensed provider admission."
+                "configuration, transport, bounds, or event seam; reduced with "
+                "the complete owner-authorized 17-entry QMA source module in "
+                "reconstructed/qma6100/."
+            ),
+        )
+        return row
+    if entry in APP_GOODIX_HEAP_RECONSTRUCTED_SYMBOLS:
+        row.update(
+            provider_family="goodix_gh3x2x_candidate",
+            source_disposition="clean_room_reimplementation_owner_authorized",
+            upstream_symbol=APP_GOODIX_HEAP_RECONSTRUCTED_SYMBOLS[entry],
+            confidence="high",
+            evidence=(
+                "Owner-authorized clean-room reconstruction of the complete "
+                "Goodix goodix_mem/GdMem heap core from SHA-pinned Ghidra and "
+                "Thumb-2 evidence in reconstructed/goodix_heap/. The C pool "
+                "uses checked relative offsets and contains no Goodix source "
+                "or opaque firmware bytes."
+            ),
+        )
+        return row
+    if entry in APP_GOODIX_PRIMITIVES_RECONSTRUCTED_SYMBOLS:
+        reconstructed_symbol = APP_GOODIX_PRIMITIVES_RECONSTRUCTED_SYMBOLS[entry]
+        if reconstructed_symbol.startswith("quantized_runtime_"):
+            reconstructed_evidence = (
+                "Owner-authorized clean-room reconstruction of the complete "
+                "Goodix graph/runtime behavior from SHA-pinned Ghidra and "
+                "Thumb-2 evidence in reconstructed/quantized_runtime/. "
+                "Foreign executor addresses are local bindings or explicit "
+                "provider tokens; no Goodix source or opaque firmware bytes "
+                "are incorporated."
+            )
+        else:
+            reconstructed_evidence = (
+                "Owner-authorized clean-room reconstruction of the complete "
+                "small-function behavior from SHA-pinned Ghidra and Thumb-2 "
+                "evidence in reconstructed/goodix_primitives/. Absolute stock "
+                "table pointers are explicit typed bindings; no Goodix source "
+                "or opaque firmware bytes are incorporated."
+            )
+        if entry == 0x00092B60:
+            primitive_family = "r1_product_specific"
+        elif entry in APP_GOODIX_PUBLIC_DEMOCODE or \
+                entry in APP_GOODIX_PUBLIC_DEMOCODE_MODERATE:
+            primitive_family = \
+                "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
+        elif entry in APP_GOODIX_ADAPTERS:
+            primitive_family = "r1_goodix_provider_adapter"
+        else:
+            primitive_family = "goodix_gh3x2x_candidate"
+        row.update(
+            provider_family=primitive_family,
+            source_disposition="clean_room_reimplementation_owner_authorized",
+            upstream_symbol=reconstructed_symbol,
+            confidence="high",
+            evidence=reconstructed_evidence,
+        )
+        return row
+    if entry in APP_GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS:
+        row.update(
+            provider_family="gomore_health_algorithm_candidate",
+            source_disposition="clean_room_reimplementation_owner_authorized",
+            upstream_symbol=APP_GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS[entry],
+            confidence="high",
+            evidence=(
+                "Owner-authorized clean-room reconstruction of the complete "
+                "small-function behavior from SHA-pinned Ghidra and Thumb-2 "
+                "evidence in reconstructed/gomore_primitives/. Provider calls "
+                "are typed bindings; no GoMore source, model data, or opaque "
+                "firmware bytes are incorporated."
             ),
         )
         return row
@@ -3702,9 +4021,9 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
             evidence=(
                 "SHA-pinned R1-only board-enable, exclusive i2c_5 ownership, "
                 "or battery/optical/touch client-mask policy. ST25DVxxKC "
-                "operations come from the pinned ST provider; YHM2710 "
-                "electrical/register operations remain an abstract licensed "
-                "provider boundary."
+                "operations come from the pinned ST provider; reconstructed "
+                "YHM2710 electrical/register operations remain behind the "
+                "abstract shared-resource seam."
             ),
         )
         return row
@@ -3766,20 +4085,23 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
     if entry in APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES:
         row.update(
             provider_family="unknown_shared_quantized_neural_runtime_candidate",
-            source_disposition="investigate_before_implementing",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES[entry],
             confidence="high",
             evidence=(
                 "SHA-pinned indirect quantized tensor runtime or descriptor "
                 "reached through constructors shared by separately gated GoMore "
                 "and Goodix model graphs. No attributable source, version, or "
-                "license is identified; generic neural-library similarity does "
-                "not authorize a substitute. The 2026-08 re-examination "
-                "(boundaries/unknown_shared_quantized_neural_runtime_candidate"
-                "-ATTRIBUTION-2026-08.md) eliminated CMSIS-NN, TFLM, NNoM, "
-                "uTensor, tinyMaix, and X-CUBE-AI with quoted comparisons and "
-                "identifies the closed Bravechip ChipletRing/BCL603M platform "
-                "as the vendor; licensed acquisition is the unblock route."
+                "license exists (2026-08 re-examination: boundaries/unknown_"
+                "shared_quantized_neural_runtime_candidate-ATTRIBUTION-2026-08.md; "
+                "the closed Bravechip ChipletRing/BCL603M platform is the "
+                "supported origin). Under the owner-authorized full reduction "
+                "(SOURCE-ADMISSION.md, 2026-08-14) the twenty-six-entry family "
+                "is reconstructed from the decompilation evidence as "
+                "independently compiled C in reconstructed/quantized_runtime/ "
+                "with per-function provenance; the reconstruction is not vendor "
+                "source. Contract, divergences, and test mapping: "
+                "correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md."
             ),
         )
         return row
@@ -3974,8 +4296,8 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
         elif entry == 0x000565F4:
             registry_configuration_evidence = (
                 "Exact-extent R1 fixed device_stacmd record/operation-table binding. "
-                "Preserve only the direct typed provider binding; the YHM2710 "
-                "single-wire transport and stock registry remain implementation-blocked."
+                "Preserve the direct typed provider binding; the reconstructed "
+                "YHM2710 transport is bound without recreating the stock registry."
             )
         elif entry == 0x00056694:
             registry_configuration_evidence = (
@@ -4001,39 +4323,43 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
     elif entry in APP_UNKNOWN_SOFTWARE_TWI_CANDIDATES:
         row.update(
             provider_family="unknown_software_twi_provider_candidate",
-            source_disposition="investigate_before_implementing",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_UNKNOWN_SOFTWARE_TWI_CANDIDATES[entry],
             confidence="high",
             evidence=(
                 "Exact executable extent, GPIO-driven wire semantics, and four-bus "
-                "compiler-instantiated family structure are recovered and SHA-pinned, "
-                "but no attributable source, provider version, or license has been "
-                "established. Do not recreate these bodies; bind an attributable "
-                "licensed provider or Nordic hardware TWIM where electrically valid. "
-                "The 2026-08 re-examination (boundaries/unknown_software_twi_provider"
-                "_candidate-ATTRIBUTION-2026-08.md) disassembled all forty bodies, "
-                "exhaustively scanned flash references, and rejected RT-Thread, "
-                "Nordic, Linux/Zephyr, and vendor-SDK origins with quoted evidence; "
-                "the engine is B210/Bravechip ChipletRing platform middleware."
+                "compiler-instantiated family structure are recovered and SHA-pinned; "
+                "no attributable source, provider version, or license exists "
+                "(2026-08 re-examination: boundaries/unknown_software_twi_provider"
+                "_candidate-ATTRIBUTION-2026-08.md; the engine is B210/Bravechip "
+                "ChipletRing platform middleware). Under the owner-authorized "
+                "full reduction (SOURCE-ADMISSION.md, 2026-08-14) the "
+                "forty-entry family is reconstructed from the decompilation "
+                "evidence as independently compiled C in "
+                "reconstructed/software_twi/ with per-function provenance; the "
+                "reconstruction is not vendor source. Contract, divergences, "
+                "and test mapping: "
+                "correlation/SOFTWARE-TWI-REDUCTION-CORRELATION.md."
             ),
         )
     elif entry in APP_UNKNOWN_RTC_DEVICE_CANDIDATES:
         row.update(
             provider_family="unknown_rtc_device_provider_candidate",
-            source_disposition="investigate_before_implementing",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_UNKNOWN_RTC_DEVICE_CANDIDATES[entry],
             confidence="high",
             evidence=(
                 "Exact executable extent and RTC-device semantics are recovered "
-                "and SHA-pinned, but no attributable source, provider version, "
-                "or license has been established. Nordic supplies nrfx_rtc only; "
-                "do not recreate this named-record/calendar/callback layer until "
-                "its implementation ownership is resolved. The 2026-08 "
-                "re-examination (boundaries/unknown_rtc_device_provider_candidate"
-                "-ATTRIBUTION-2026-08.md) recovered the ops table and nrfx config "
-                "and rejected RT-Thread, mr-library, BabyOS, armink, and vendor "
-                "SDKs with quoted evidence; first-party B210/Bravechip "
-                "ChipletRing authorship is the supported origin."
+                "and SHA-pinned; no attributable source, provider version, or "
+                "license exists (2026-08 re-examination: boundaries/unknown_rtc_"
+                "device_provider_candidate-ATTRIBUTION-2026-08.md; first-party "
+                "B210/Bravechip ChipletRing authorship is the supported origin). "
+                "Under the owner-authorized full reduction (SOURCE-ADMISSION.md, "
+                "2026-08-14) the ten-entry family is reconstructed from the "
+                "decompilation evidence as independently compiled C in "
+                "reconstructed/rtc_device/ with per-function provenance; the "
+                "reconstruction is not vendor source. Contract, divergences, "
+                "and test mapping: correlation/RTC-DEVICE-REDUCTION-CORRELATION.md."
             ),
         )
     elif entry in APP_SENSOR_ALGORITHM_HEAP_BOUNDARY:
@@ -4074,30 +4400,29 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
     elif entry in APP_YHM2710_FRONTIER_CANDIDATES:
         row.update(
             provider_family="yhmicros_yhm2710_candidate",
-            source_disposition="vendor_source_required_not_redistributable",
-            upstream_symbol="",
+            source_disposition="clean_room_reimplementation_owner_authorized",
+            upstream_symbol=APP_YHM2710_FRONTIER_CANDIDATES[entry],
             confidence="high",
             evidence=(
-                "SHA-pinned YHM2710 chip-ID verification or float-ladder "
-                "register-field update reached through the pinned single-wire "
-                "transport used by the 0x0003510C diagnostic closure. Behavior "
-                "is evidence only; exact provider source, version, and license "
-                "remain unresolved, so no local wire or register body is "
-                "authorized."
+                "SHA-pinned YHM2710 transport/register behavior. Under the "
+                "owner-authorized full reduction (SOURCE-ADMISSION.md, "
+                "2026-08-14), the complete closure is independently "
+                "reconstructed in reconstructed/yhm2710; the reconstruction "
+                "is not YHMICROS or Even Realities source."
             ),
         )
     elif entry in APP_YHM2710_STACMD_CANDIDATES:
         row.update(
             provider_family="yhmicros_yhm2710_candidate",
-            source_disposition="vendor_source_required_not_redistributable",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_YHM2710_STACMD_CANDIDATES[entry],
             confidence="high",
             evidence=(
                 "Exact executable closure of the scatter-loaded device_stacmd "
-                "operation table and P1.01 wire callback record used by the YHM2710 "
-                "power path. Behavior is SHA-pinned evidence only; exact provider "
-                "source, version, and license remain unresolved, so no local sender "
-                "or register implementation is authorized."
+                "operation table and P1.01 wire callback record used by the "
+                "YHM2710 power path. The exact vendor source remains unlicensed; "
+                "the owner-authorized independent reconstruction is compiled "
+                "from reconstructed/yhm2710."
             ),
         )
     elif entry in APP_NORDIC_WDT_ADAPTERS:
@@ -4165,38 +4490,47 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
     elif entry in APP_UNKNOWN_DEVICE_REGISTRY_CANDIDATES:
         row.update(
             provider_family="unknown_generic_device_registry_candidate",
-            source_disposition="investigate_before_implementing",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_UNKNOWN_DEVICE_REGISTRY_CANDIDATES[entry],
-            confidence="candidate",
+            confidence="high",
             evidence=(
                 "Complete function-local name-list or operation-table dispatch semantics "
-                "identify the stock generic device registry, but no attributable source, "
-                "provider version, or license has been established. The framework remains "
-                "blocked and is not recreated by openR1. The 2026-08 re-examination "
-                "(boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION"
-                "-2026-08.md) found every fingerprint globally unique to this firmware "
-                "and rejected Goodix demo SDK, BabyOS, and Bouffalo candidates; the "
-                "registry is B210/Bravechip ChipletRing platform middleware."
+                "identify the stock generic device registry; no attributable source, "
+                "provider version, or license exists (2026-08 re-examination: "
+                "boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION"
+                "-2026-08.md; every fingerprint is globally unique to this firmware "
+                "and the registry is B210/Bravechip ChipletRing platform "
+                "middleware). Under the owner-authorized full reduction "
+                "(SOURCE-ADMISSION.md, 2026-08-14) the forty-entry family is "
+                "reconstructed from the decompilation evidence as independently "
+                "compiled C in reconstructed/generic_device_registry/ with "
+                "per-function provenance; the reconstruction is not vendor "
+                "source. Contract, divergences, and test mapping: "
+                "correlation/GENERIC-DEVICE-REGISTRY-REDUCTION-CORRELATION.md."
             ),
         )
     elif entry in APP_UNKNOWN_TIME_CALENDAR_CANDIDATES:
         row.update(
             provider_family="unknown_time_calendar_provider_candidate",
-            source_disposition="investigate_before_implementing",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_UNKNOWN_TIME_CALENDAR_CANDIDATES[entry],
-            confidence="candidate",
+            confidence="high",
             evidence=(
                 "Complete clock-backend, Unix/Gregorian conversion, timezone, "
-                "or local-hour/bucket semantics are recovered and byte-pinned, "
-                "but no attributable provider source, version, or license has "
-                "been established. Nordic SDK 17.1.0 does not supply this body; "
-                "openR1 keeps the provider abstract and does not recreate it. "
-                "The 2026-08 re-examination (boundaries/unknown_time_calendar"
-                "_provider_candidate-ATTRIBUTION-2026-08.md) matched the "
-                "seconds-to-tm converter behaviorally to the old-newlib "
-                "_mktm_r idiom but found no exact public body, and the "
-                "1970-2029 validating inverse converter is unique to this "
-                "firmware."
+                "or local-hour/bucket semantics are recovered and byte-pinned; "
+                "no attributable provider source, version, or license exists "
+                "(2026-08 re-examination: boundaries/unknown_time_calendar"
+                "_provider_candidate-ATTRIBUTION-2026-08.md; the seconds-to-tm "
+                "converter matches the old-newlib _mktm_r idiom behaviorally "
+                "with no exact public body, and the 1970-2029 validating "
+                "inverse converter is unique to this firmware). Under the "
+                "owner-authorized full reduction (SOURCE-ADMISSION.md, "
+                "2026-08-14) the sixteen-entry family is reconstructed from "
+                "the decompilation evidence as independently compiled C in "
+                "reconstructed/time_calendar/ with per-function provenance; "
+                "the reconstruction is not vendor source. Contract, "
+                "divergences, and test mapping: "
+                "correlation/TIME-CALENDAR-REDUCTION-CORRELATION.md."
             ),
         )
     elif entry in APP_NORDIC_SYMBOLS:
@@ -4295,20 +4629,26 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
     elif entry in APP_UNKNOWN_SENSOR_STREAM_CANDIDATES:
         row.update(
             provider_family="unknown_sensor_stream_framework_candidate",
-            source_disposition="investigate_before_implementing",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_UNKNOWN_SENSOR_STREAM_CANDIDATES[entry],
-            confidence="candidate",
+            confidence="high",
             evidence=(
                 "SHA-pinned generic named sensor-stream listener registration, "
                 "timer dispatch, unregistration, buffer-resize, and rate-retiming "
                 "behavior used across product and "
-                "provider callers. No attributable source, version, or license is "
-                "identified, so neither this framework nor its dependencies may be "
-                "implemented locally. The 2026-08 re-examination "
-                "(boundaries/unknown_sensor_stream_framework_candidate-ATTRIBUTION"
-                "-2026-08.md) rejected the MultiTimer library (both generations) "
-                "line-by-line and found every distinctive string globally unique; "
-                "B210/Bravechip ChipletRing platform authorship stands."
+                "provider callers. No attributable source, version, or license "
+                "exists (2026-08 re-examination: "
+                "boundaries/unknown_sensor_stream_framework_candidate-ATTRIBUTION"
+                "-2026-08.md; the MultiTimer library (both generations) is "
+                "rejected line-by-line, every distinctive string is globally "
+                "unique, and B210/Bravechip ChipletRing platform authorship "
+                "stands). Under the owner-authorized full reduction "
+                "(SOURCE-ADMISSION.md, 2026-08-14) the thirty-two-entry family "
+                "is reconstructed from the decompilation evidence as "
+                "independently compiled C in reconstructed/sensor_stream/ "
+                "with per-function provenance; the reconstruction is not "
+                "vendor source. Contract, divergences, and test mapping: "
+                "correlation/SENSOR-STREAM-REDUCTION-CORRELATION.md."
             ),
         )
         return row
@@ -4726,13 +5066,17 @@ def main() -> None:
     expected_csv = render_csv(rows)
     expected_summary = (json.dumps(summary, indent=2, sort_keys=True) + "\n").encode()
     if args.check:
-        if not OUTPUT.exists() or OUTPUT.read_bytes() != expected_csv:
+        if any(not path.exists() or path.read_bytes() != expected_csv
+               for path in (OUTPUT, REFERENCE_OUTPUT)):
             raise SystemExit("FUNCTION-OWNERSHIP.csv is stale; run this script without --check")
-        if not SUMMARY.exists() or SUMMARY.read_bytes() != expected_summary:
+        if any(not path.exists() or path.read_bytes() != expected_summary
+               for path in (SUMMARY, REFERENCE_SUMMARY)):
             raise SystemExit("FUNCTION-OWNERSHIP-SUMMARY.json is stale; run this script without --check")
     else:
-        OUTPUT.write_bytes(expected_csv)
-        SUMMARY.write_bytes(expected_summary)
+        for path in (OUTPUT, REFERENCE_OUTPUT):
+            path.write_bytes(expected_csv)
+        for path in (SUMMARY, REFERENCE_SUMMARY):
+            path.write_bytes(expected_summary)
     print(f"verified {len(rows)} functions; {summary['unclassified_count']} remain unclassified")
 
 

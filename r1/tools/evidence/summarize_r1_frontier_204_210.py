@@ -92,7 +92,7 @@ SHARED_TENSOR_FRONTIER_204_210_FUNCTIONS = (
         "unattributed twelve-descriptor tensor arena compaction and allocation",
         ((0x00091DAC, "BL"), (0x00091DD6, "BL")),
         "unknown_shared_quantized_neural_runtime_candidate",
-        "investigate_before_implementing",
+        "clean_room_reimplementation_owner_authorized",
     ),
 )
 

@@ -1,5 +1,13 @@
 # Goodix GH3X2X biometric provider boundary
 
+> Current reduction note (2026-08-14): under the later owner-authorized
+> source-admission policy, 141 formerly opaque Goodix-candidate functions are
+> now independently reconstructed, including the `0x739A8` recurrent closure
+> and complete `0x617F8` / three-mode `0x742E4` generated graph executors.
+> This report remains the provenance census for the 178 still-gated entries;
+> current totals and local contracts are in `../SOURCE-ADMISSION.md` and the
+> `../correlation/GOODIX-*-REDUCTION-CORRELATION.md` reports.
+
 ## Decision
 
 The application embeds `gh3x2x-v2.23_7ecd2a`, `Gh3x2x*` names, Goodix demo initialization and

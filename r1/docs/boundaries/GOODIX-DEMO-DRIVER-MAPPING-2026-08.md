@@ -856,3 +856,37 @@ Re-audit notes:
   legitimate state, and the stale cluster comment corrected (64→110 attributed members; the
   116-entry cluster set and both cluster digests are unchanged — the three cluster-member
   flips keep their cluster membership, exactly as the previously attributed members do).
+
+## Third-party source census 2026-08-14
+
+A fourth, read-only pass over every public GH3x2x distribution reachable in August 2026.
+Nothing below changes any entry verdict; the 23 documented-unprovable entries stay gated.
+
+- **Architecture blocker strengthened from "unlinkable" to instruction level.** All seven
+  `.a` archives in the pinned snapshot (`algo_lib/{NADT,SPO2,COMMON_DL,HRV,COMMON_DSP,HR}`
+  plus `drv_lib` `gh_common`) are Armv8-M.mainline "star-mc1" FPv5 softfp builds that
+  actually use FPv5-only instructions (`vselgt`/`vseleq`/`vselge`, `vmaxnm`/`vminnm`,
+  `vrintm`/`vrintp`). These cannot execute on the R1's Cortex-M4F (Armv7E-M, FPv4-SP) at
+  all — verified with `readelf`/disassembly, reproducible via
+  `~/vendor-cache/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-readelf`. Even a
+  licensed copy of these exact archives would not run on the R1; only a Cortex-M4 rebuild
+  of the same source could.
+- **Second independent public drop found; unblocks nothing.**
+  `github.com/linhui200699/ats3089` carries
+  `zephyr/framework/sensor/sensor_algo/SensorAlgoHR_GH3x2x_V4200/` — democode v1.6, DrvLib
+  v4.2.0.1, HBA interface `pv_v1.0.0` (R1: `pv_v1.1.0`). Notably it includes public
+  Cortex-M4 hard-float Goodix algorithm `.a` builds, proving that M4-compatible Goodix
+  builds exist — but they are a different (older) algorithm revision, ship under the same
+  Goodix clause-5 license, and match no additional R1 bodies.
+- **HRNet NET_SIZE census.** Across five public drops spanning three HRNet revisions
+  (1033/1567/1861/2599/2979/5951/6660/1269; 1033/1861/3785/2979/2599/5951/1269/660;
+  3785/1861/2979/2599/3214), the R1's 4857-word net appears in none of them. The R1 HRNet
+  is a fourth, still-private revision; 0x6A138/0x6A140 stay unprovable.
+- **Specific residue re-checks against v4.2.0.1.** 0x2A1CC (`GH3X2X_CheckRawdataBuf`) is
+  also a `return 0` stub in v4.2.0.1 (unchanged from v4.3.0.0); the 0x2A168 FIFO
+  validate-patch loop and the 0x2E8CC WriteReg-0x502 pair have no v4.2.0.1 counterpart.
+  All 23 residues remain documented-unprovable.
+- **Official channels.** The official Goodix org (`github.com/goodix-ble`, 21 repos)
+  contains zero GH-series content; official GH3x2x driver distribution is account-gated on
+  goodix.com. The acquisition route is unchanged: a licensed Goodix SDK matching the R1
+  revision, in a Cortex-M4-compatible build.

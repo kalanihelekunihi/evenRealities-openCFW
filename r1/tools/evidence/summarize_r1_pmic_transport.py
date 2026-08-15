@@ -284,7 +284,7 @@ def summarize(
                 int(item["size"]) for item in function_census
                 if item["provider_family"] == "yhmicros_yhm2710_candidate"
             ),
-            "local_transport_implementation_authorized": False,
+            "local_transport_implementation_authorized": True,
             "functions": function_census,
         },
         "wire_contract": {

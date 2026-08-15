@@ -185,7 +185,7 @@ SHARED_QUANTIZED_FRONTIER_230_248_FUNCTIONS = (
         "unattributed quantization-scale and zero-point derivation",
         ((0x0002942C, "BL"),),
         "unknown_shared_quantized_neural_runtime_candidate",
-        "investigate_before_implementing",
+        "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x000293FC, 186,
@@ -193,7 +193,7 @@ SHARED_QUANTIZED_FRONTIER_230_248_FUNCTIONS = (
         "shared_float_to_signed_int8_quantizer_candidate",
         "indirect float-to-signed-int8 tensor quantizer", (),
         "unknown_shared_quantized_neural_runtime_candidate",
-        "investigate_before_implementing", (0x00074D04,),
+        "clean_room_reimplementation_owner_authorized", (0x00074D04,),
     ),
     _function(
         0x00074CE4, 30,
@@ -204,7 +204,7 @@ SHARED_QUANTIZED_FRONTIER_230_248_FUNCTIONS = (
          (0x0003087A, "BL"), (0x00036B7A, "BL"),
          (0x0004388E, "BL"), (0x0005D046, "BL")),
         "unknown_shared_quantized_neural_runtime_candidate",
-        "investigate_before_implementing",
+        "clean_room_reimplementation_owner_authorized",
     ),
 )
 

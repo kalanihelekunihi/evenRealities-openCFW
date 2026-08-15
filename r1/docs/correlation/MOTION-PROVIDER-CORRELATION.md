@@ -101,7 +101,7 @@ supplements.
 
 | Address | Clean-room role |
 | --- | --- |
-| `0x00050208` | probe and select LIS2DW12, then BMA456W, then the unavailable QMA6100 fallback |
+| `0x00050208` | probe and select LIS2DW12, then BMA456W, then the QMA6100 fallback |
 | `0x0005025C` | refresh the selected-provider state |
 | `0x00050270` | initialize/configure the selected provider |
 | `0x00050128`–`0x000501C8` | interrupt/bus lookup, acquire/release, and bounded read/write request glue |
@@ -118,9 +118,10 @@ supplements.
 Both normalization wrappers decode little-endian signed 16-bit X/Y/Z values and apply a Cortex-M
 arithmetic right shift by two to each axis. `src/r1_motion.c` implements that behavior without
 depending on implementation-defined signed shifts, limits every read to 31 six-byte samples, and
-rejects provider over-reporting. Its policy can disable motion, auto-select the two admitted
-providers in stock order, or force either licensed variant. QMA6100 is deliberately absent from
-the implementation rather than emulated.
+rejects provider over-reporting. Its policy can disable motion, auto-select all three providers in
+stock order, or force any one variant. QMA6100 is supplied by the owner-authorized reduction in
+[`QMA6100-REDUCTION-CORRELATION.md`](QMA6100-REDUCTION-CORRELATION.md), not by the unlicensed
+correlation snapshot.
 
 The recovered board mapping is now concrete: Nordic TWIM1 at 400 kHz, SCL P0.11, SDA P0.14,
 seven-bit address `0x18`, and rising interrupt input P0.15 with no pull. The clean Nordic port is
@@ -154,8 +155,9 @@ interrupt/configuration structure establish QST V1.0 lineage for the recovered c
 correlation pins commit `3903bd7d...` and the source/header hashes in the vendor manifest.
 
 The available snapshot is not an official QST distribution channel, has no license, and is
-correlation evidence only. Three provider bodies are therefore gated as
-`vendor_source_required_not_redistributable`:
+correlation evidence only. Three provider bodies were formerly gated as
+`vendor_source_required_not_redistributable`; owner authorization now routes them to independently
+compiled reconstructed C:
 
 | Address | Provider role |
 | --- | --- |
@@ -180,10 +182,11 @@ the QST skeleton but add R1 configuration or integration seams:
 | `0x000872E4` | tap configuration and thresholds |
 | `0x000873F4` | five-retry R1 I2C write transport |
 
-Those seams are `clean_room_adapter_only_use_licensed_provider`, not authorization to recreate the
-underlying routines. The entire QMA6100 path remains disabled and
-`official_source_required_before_implementation`. A lawfully obtained QST package must be pinned,
-licensed, hashed, and correlated before the boundary can be enabled.
+Those seams and the three provider interiors now share the complete 17-entry source reduction in
+`reconstructed/qma6100/`. The ledger disposition is
+`clean_room_reimplementation_owner_authorized`; the code is not QST source, and the public
+unlicensed snapshot is not a build dependency. Nordic board adoption remains disabled until an
+installed QMA part is confirmed, but source availability is no longer the gate.
 
 ## Build consequence
 
@@ -203,5 +206,5 @@ an owned R1 ring. TWIM1 contention between motion and NFC is resolved: the R1-ow
 `platform/nrf52840/sdk/openr1_twim1_arbiter.c` serializes the substituted hardware instance
 between the worn motion client and the dock NFC client with a documented dock-preempts-worn
 handoff. NFC remains disabled at startup for separate reasons — the identity, shared-power, and
-dock gates — not because of bus ownership. QMA6100 hardware remains unsupported until licensed
-official provider source is admitted.
+dock gates — not because of bus ownership. QMA6100 remains unselected in Nordic startup until an
+installed QMA part is confirmed and the reconstructed fallback is tested on owned hardware.

@@ -159,3 +159,18 @@ smart-ring platform — firmware identity string `603MV1.9.3` and a byte-exact 1
 base-UUID match to Bravechip's public `BravechipSpace/ChipletRing-APPSDK`. The platform is
 closed-source; this names the commercial acquisition route that would unblock the family.
 See `unknown_shared_quantized_neural_runtime_candidate-ATTRIBUTION-2026-08.md`.
+
+## Reduction 2026-08
+
+Under the owner-authorized full reduction (2026-08-14, see
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the thirty-two ledger entries of
+`unknown_sensor_stream_framework_candidate` (listener registration/unregistration, timer dispatch, buffer resize, and rate retiming) are reconstructed
+from the recovered decompilation evidence as independently compiled C in
+[`../../reconstructed/sensor_stream/`](../../reconstructed/sensor_stream/).  The
+reconstruction is not vendor source; it carries per-function provenance
+banners, and its contract, reconstruction decisions, divergences, and
+host-test mapping are documented in
+[`../correlation/SENSOR-STREAM-REDUCTION-CORRELATION.md`](../correlation/SENSOR-STREAM-REDUCTION-CORRELATION.md).
+The ledger disposition for the thirty-two entries is now
+`clean_room_reimplementation_owner_authorized`.  This document remains the
+provenance record of why no upstream source was admitted.

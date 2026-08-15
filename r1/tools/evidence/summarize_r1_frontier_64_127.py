@@ -799,7 +799,7 @@ GOMORE_FRONTIER_64_127_FUNCTIONS = (
     ),
     _function(
         0x0004EC9C, 66, ((0x0004EC9C, 0x0004ECDE, "cb6c99c90b1a934e9cdcc14f03554b6857aef425b1fbfcab5b09fa494e8415cb"),),
-        "", "GoMore float argmax scan over descriptor tensor range",
+        "", "GoMore quantized argmin scan: truncate running threshold to int32, compare float values over [begin,end)",
         ((0x0006465C, "BL"),),
         "gomore_health_algorithm_candidate", "vendor_source_required_not_redistributable",
     ),
@@ -900,13 +900,13 @@ DEVICE_REGISTRY_FRONTIER_64_127_FUNCTIONS = (
         0x0005D998, 104, ((0x0005D998, 0x0005DA00, "2e8cffcb32af1849cda9afd9fcc116913698d85b098921beb97d77405b21a9fa"),),
         "", "Intrusive offset-list remove shared by the named-registry and sensor-stream frameworks (0x5D8xx machinery)",
         ((0x00089BD2, "BL"), (0x00089CC6, "BL"), (0x0008A3CA, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0005D21E, 68, ((0x0005D21E, 0x0005D242, "039fad051b5fccab86cff3c9432cf50188e21a464a82ada00468a4b701320b4f"),),
         "", "0xAE request-record fill and registry slot-0x14 dispatch",
         ((0x0005D218, "BL"),),
-        "unknown_generic_device_registry_candidate", "investigate_before_implementing",
+        "unknown_generic_device_registry_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 
@@ -915,37 +915,37 @@ SENSOR_STREAM_FRONTIER_64_127_FUNCTIONS = (
         0x0007D0D8, 122, ((0x0007D0D8, 0x0007D12A, "c20bf5d3324457c8d20d3f43911a1c641f107bd7d040a2b7e1cad7ec09737865"), (0x0007D12C, 0x0007D154, "bfdbcb70a0462b64ed894acd2a8fe706ab32dec80c1fc321f8909548ea8494ca"),),
         "", "Sensor-stream sample-buffer rate resize/copy helper named in the framework boundary doc",
         ((0x000899F4, "BL"), (0x0008A0BA, "BL"), (0x0008A2A8, "BL"),),
-        "unknown_sensor_stream_framework_candidate", "investigate_before_implementing",
+        "unknown_sensor_stream_framework_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x000897E8, 100, ((0x000897E8, 0x0008984C, "b4680d6548180440c685f0a4f61b496aa5e95214f6ae12795c4d920cbc4a9f92"),),
         "", "Sensor-stream register-by-name front end; register_not_find_obj diagnostic matches the framework's unregister_not_find_obj family",
         ((0x0003D110, "BL"), (0x0003D17E, "BL"), (0x0003D49E, "BL"), (0x00048C26, "BL"), (0x00048C3C, "BL"), (0x000493DE, "BL"), (0x0004948C, "BL"), (0x000494AC, "BL"), (0x000494CC, "BL"), (0x000494EC, "BL"), (0x000497EA, "BL"), (0x000497FA, "BL"), (0x00049B0C, "BL"), (0x00049FD0, "BL"), (0x0004AB10, "BL"), (0x0004AFBA, "BL"), (0x0004B6E8, "BL"), (0x0004BB70, "BL"), (0x0004BC1E, "BL"), (0x0004C5DE, "BL"), (0x0004ED48, "BL"), (0x0004F2F0, "BL"), (0x0004F35C, "BL"), (0x0004F8F4, "BL"), (0x0004F960, "BL"), (0x00062A02, "BL"), (0x00062CAE, "BL"), (0x0006A630, "BL"), (0x00090FCA, "BL"),),
-        "unknown_sensor_stream_framework_candidate", "investigate_before_implementing",
+        "unknown_sensor_stream_framework_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00089D9C, 92, ((0x00089D9C, 0x00089DF8, "9663abc8ebec524a3683abe2f7b3134822e7299698bb7004ca4fde95efe633be"),),
         "", "Sensor-stream object list insert with pool init; list_insert_fail diagnostic",
         ((0x00089752, "BL"),),
-        "unknown_sensor_stream_framework_candidate", "investigate_before_implementing",
+        "unknown_sensor_stream_framework_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0008A404, 84, ((0x0008A404, 0x0008A458, "adf7fe540692e1131f7085fc9f0f056a61e26f72bb2518fd65a29976c63edc1b"),),
         "", "Sensor-stream timer expiry processing: tick stamp, callback, deferred cleanup routing",
         ((0x0008A4B2, "BL"),),
-        "unknown_sensor_stream_framework_candidate", "investigate_before_implementing",
+        "unknown_sensor_stream_framework_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0008A368, 84, ((0x0008A368, 0x0008A3BC, "f755358f92315b2c7068bdf98877ec14f203a84917c28c3595d3c50b6f77115f"),),
         "", "Sensor-stream object allocation from pool 0x5D94A with field init and timer kick",
         ((0x000495A4, "BL"), (0x000899B4, "BL"),),
-        "unknown_sensor_stream_framework_candidate", "investigate_before_implementing",
+        "unknown_sensor_stream_framework_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x0008A310, 84, ((0x0008A310, 0x0008A364, "e827de79bcd3ff880e0245fd3dcd2399aa6eece7318db2485635424114d164f8"),),
         "", "Sensor-stream timer object allocation from pool 0x5D90E with field init and timer kick",
         ((0x0003D12A, "BL"), (0x0003D192, "BL"), (0x00048C12, "BL"), (0x000498DA, "BL"), (0x00049B20, "BL"), (0x00049FB4, "BL"), (0x0004A51A, "BL"), (0x0004A8EC, "BL"), (0x0004AFD0, "BL"), (0x0004B3B0, "BL"), (0x0004B7D4, "BL"), (0x0004C55A, "BL"), (0x000899C4, "BL"), (0x0008A578, "B.W"),),
-        "unknown_sensor_stream_framework_candidate", "investigate_before_implementing",
+        "unknown_sensor_stream_framework_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 
@@ -954,19 +954,19 @@ QUANTIZED_RUNTIME_FRONTIER_64_127_FUNCTIONS = (
         0x00074BE0, 98, ((0x00074BE0, 0x00074C42, "bc8763c1dd397b66d83d391525f2d765ecfc76c9117e095b92901763ce320537"),),
         "", "Shared 0x18-byte descriptor-record serializer with embedded executor pointer 0x85B9D; mixed GoMore (0x340A0) and Goodix (0x36C26) callers",
         ((0x0003413E, "BL"), (0x00034160, "BL"), (0x0009905A, "BL"), (0x0009907E, "BL"), (0x000990CE, "BL"), (0x000990EE, "BL"),),
-        "unknown_shared_quantized_neural_runtime_candidate", "investigate_before_implementing",
+        "unknown_shared_quantized_neural_runtime_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00091E6C, 78, ((0x00091E6C, 0x00091EBA, "b87f45f4b27f518baeeb736ff0902540cf69f3a7c7e142572070ee0954dd8373"),),
         "", "Shared tensor-descriptor constructor (0x14-byte header, dims, element count) used by the pinned arena path 0x91D9C",
         ((0x00090F72, "BL"), (0x00091DA2, "BL"), (0x00091DCC, "BL"), (0x00091E3C, "BL"),),
-        "unknown_shared_quantized_neural_runtime_candidate", "investigate_before_implementing",
+        "unknown_shared_quantized_neural_runtime_candidate", "clean_room_reimplementation_owner_authorized",
     ),
     _function(
         0x00091DBE, 68, ((0x00091DBE, 0x00091E02, "5014b37fd01e3022d673fbe6c0e79b87f1bf4b6f1156625bd7d9ac0700191e8d"),),
         "", "Shared tensor create-and-fill via descriptor constructor plus pinned arena allocator 0x93628",
         ((0x00071664, "BL"),),
-        "unknown_shared_quantized_neural_runtime_candidate", "investigate_before_implementing",
+        "unknown_shared_quantized_neural_runtime_candidate", "clean_room_reimplementation_owner_authorized",
     ),
 )
 

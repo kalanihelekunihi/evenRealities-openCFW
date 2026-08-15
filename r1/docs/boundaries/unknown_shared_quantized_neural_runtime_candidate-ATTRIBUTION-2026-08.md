@@ -82,8 +82,24 @@ level. The prior boundary doc's rejection stands, now with quoted upstream evide
 
 ## Hypothesis H2: other public NN runtimes — REJECTED (confirmation of prior rejections)
 
-- TFLM: reference int8 kernels requantize with integer `ArithmeticParams` multipliers/shifts;
-  C++ flatbuffer interpreter ABI. No float requantization path of this shape. No match.
+- TFLM (tflite-micro): **eliminated at four independent levels** against the actual
+  decompiled bodies in `decompiler-output.c`.
+  1. Language/ABI: TFLM is a C++ flatbuffer interpreter whose kernels take
+     `RuntimeShape`-driven `reference_ops` calls; the firmware runtime is plain C with
+     3-byte layer descriptors and 24-byte layer records — no C++ ABI, no flatbuffer
+     schema anywhere in the runtime path.
+  2. Quantization regime: TFLM's quantized add is integer fixed-point
+     (`ArithmeticParams` multipliers/shifts); the firmware int8-add dequantizes to
+     float, adds, and requantizes through the round-half-away-from-zero helper
+     (`FUN_000290fe`) — opposite arithmetic regimes, as with CMSIS-NN above.
+  3. Kernel behavior: TFLM's float softmax has no exponent cap (the firmware caps the
+     `expf` input at `88.0f`, `DAT_0005d2e4 = 0x42B00000`); TFLM average-pool rounds
+     unsigned half-up while the firmware pooling rounding is sign-aware; and the
+     firmware pooling executor supports only window-2/4 max plus window-3 average —
+     nothing like TFLM's general pooling kernels.
+  4. Memory model: TFLM's `MicroAllocator` is an offline-planned bump arena; the
+     firmware has a 12-slot tensor pool with `0x14` stride and a qsort+memmove
+     compacting arena (`FUN_00093628`). No match at any level.
 - tinyMaix (Sipeed, 2022): its int8 path does use float scales, but it is *symmetric*
   (`scale = max(|min|,|max|) / 127`); the firmware uses asymmetric min/max over a 0..255 quant
   domain with a −128 storage bias and endpoint-preserving range nudging. No match.
@@ -211,7 +227,7 @@ platform layer rather than an anonymous codebase. Blocked pending vendor source.
 
 | Family | Verdict |
 | --- | --- |
-| `unknown_shared_quantized_neural_runtime_candidate` | **(c) NO ATTRIBUTION.** CMSIS-NN eliminated with quoted evidence (integer-only library vs float-requantizing descriptor runtime); TFLM/NNoM/tinyMaix/uTensor/etc. re-confirmed incompatible; `dlCom` toolchain private with zero public footprint. Probable owner: ring platform vendor (Bravechip) or Goodix. Remains proprietary/blocked. |
+| `unknown_shared_quantized_neural_runtime_candidate` | **(c) NO ATTRIBUTION.** CMSIS-NN eliminated with quoted evidence (integer-only library vs float-requantizing descriptor runtime); TFLM eliminated at four independent levels (language/ABI, quantization regime, kernel behavior, memory model); NNoM/tinyMaix/uTensor/etc. re-confirmed incompatible; `dlCom` toolchain private with zero public footprint. Probable owner: ring platform vendor (Bravechip) or Goodix. Remains proprietary/blocked. |
 | `unknown_time_calendar_provider_candidate` | **(c) NO ATTRIBUTION.** Old newlib additionally eliminated; [70,129] validation bound unique (zero code-search hits). Part of the Bravechip platform layer. Blocked. |
 | `unknown_software_twi_provider_candidate` | **(c) NO ATTRIBUTION.** Structure independently re-verified by disassembly; no public bit-bang library matches the six-op vtable. Bravechip platform middleware. Blocked. |
 | `unknown_generic_device_registry_candidate` | **(c) NO ATTRIBUTION.** Owner identified as the Bravechip BCL603M/ChipletRing platform (byte-exact BAE8 UUID base at `0x000991A0`; `603MV1.9.3`; GoMore + ST25 SDK bundling). Blocked. |

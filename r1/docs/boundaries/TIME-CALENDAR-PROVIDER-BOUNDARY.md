@@ -152,3 +152,18 @@ independently of the stock implementation:
 
 The family itself remains `investigate_before_implementing`; this decision replaces openR1's
 *need* for it, not its ownership status.
+
+## Reduction 2026-08
+
+Under the owner-authorized full reduction (2026-08-14, see
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the sixteen ledger entries of
+`unknown_time_calendar_provider_candidate` (the Unix/Gregorian converters, clock-backend wrappers, and local-hour/bucket helpers) are reconstructed
+from the recovered decompilation evidence as independently compiled C in
+[`../../reconstructed/time_calendar/`](../../reconstructed/time_calendar/).  The
+reconstruction is not vendor source; it carries per-function provenance
+banners, and its contract, reconstruction decisions, divergences, and
+host-test mapping are documented in
+[`../correlation/TIME-CALENDAR-REDUCTION-CORRELATION.md`](../correlation/TIME-CALENDAR-REDUCTION-CORRELATION.md).
+The ledger disposition for the sixteen entries is now
+`clean_room_reimplementation_owner_authorized`.  This document remains the
+provenance record of why no upstream source was admitted.

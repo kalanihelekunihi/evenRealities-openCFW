@@ -17,6 +17,9 @@
  */
 #define R1_MOTION_BMA456W_CHIP_ID UINT8_C(0x16)
 #define R1_MOTION_LIS2DW12_CHIP_ID UINT8_C(0x44)
+#define R1_MOTION_QMA6100_CHIP_ID UINT8_C(0xFA)
+#define R1_MOTION_QMA6100P_ID_MASK UINT8_C(0xF0)
+#define R1_MOTION_QMA6100P_ID_VALUE UINT8_C(0x90)
 #define R1_MOTION_SAMPLE_BYTES 6u
 #define R1_MOTION_FIFO_SAMPLE_LIMIT 31u
 #define R1_RING_STABILITY_WINDOW 8u
@@ -25,14 +28,16 @@
 typedef enum {
     R1_MOTION_VARIANT_NONE = 0,
     R1_MOTION_VARIANT_LIS2DW12,
-    R1_MOTION_VARIANT_BMA456W
+    R1_MOTION_VARIANT_BMA456W,
+    R1_MOTION_VARIANT_QMA6100
 } r1_motion_variant;
 
 typedef enum {
     R1_MOTION_POLICY_DISABLED = 0,
     R1_MOTION_POLICY_AUTO_LICENSED,
     R1_MOTION_POLICY_FORCE_LIS2DW12,
-    R1_MOTION_POLICY_FORCE_BMA456W
+    R1_MOTION_POLICY_FORCE_BMA456W,
+    R1_MOTION_POLICY_FORCE_QMA6100
 } r1_motion_policy;
 
 typedef struct {
@@ -57,6 +62,7 @@ typedef struct {
 typedef struct {
     r1_motion_provider lis2dw12;
     r1_motion_provider bma456w;
+    r1_motion_provider qma6100;
     r1_motion_variant selected;
     uint16_t configured_rate_hz;
     bool configured;

@@ -122,9 +122,9 @@ def summarize(image_path: Path) -> dict[str, Any]:
         },
         "boundary": {
             "provider_family": "unknown_sensor_stream_framework_candidate",
-            "source_disposition": "investigate_before_implementing",
+            "source_disposition": "clean_room_reimplementation_owner_authorized",
             "attributable_source_identified": False,
-            "local_framework_reimplementation_authorized": False,
+            "local_framework_reimplementation_authorized": True,
             "dependent_list_allocator_timer_code_admitted": False,
             "provider_close_hook_admitted": False,
         },

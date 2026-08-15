@@ -1,5 +1,12 @@
 # Goodix GH_SPO2 and dlCom processing provider boundary
 
+> Current reduction note (2026-08-14): the owner-authorized source-admission
+> policy now supersedes this report's earlier implementation prohibition for
+> the seven-function recurrent closure. Entries `0x36408`, `0x6FDE0`,
+> `0x739A8`, `0x7400C`, `0x7405C`, `0x74A20`, and `0x74AA4` compile from
+> transparent C; see `../correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md`.
+> Remaining provider/model entries and private weights stay gated.
+
 ## Decision
 
 The recovered boundary contains 85 functions / 19,568 executable bytes: 82 formerly unclassified
@@ -59,12 +66,14 @@ Two additional generated-model bodies are present but unregistered in the shippe
 builder at `0x000742E4`; the inner executor also calls the admitted Goodix callback selector
 `0x00074C90` at `0x000878B2`. Five executable calls from the outer body reach the inner body.
 This establishes provider ownership without inventing private symbols or recreating the model.
+Both executors are now separately source-admitted under the owner-authorized reduction policy;
+their typed plans and caller-owned scratch preserve topology without making this a live route.
 
 No executable caller or raw function pointer to `0x000617F8`/`0x000617F9` exists in the application
 image. A raw Thumb decoder does find apparent callsite `0x0003007A`, but those six bytes are a
 literal pool immediately before the real table-selected wrapper at `0x0003007E`; the wrapper begins
 after the coincidental instruction encoding and calls `0x000742E4`, not `0x000617F8`. The two newly
-admitted bodies are therefore provider-owned dormant residue, not evidence of a production path.
+source-admitted bodies remain dormant in the shipped image and are not evidence of a production path.
 
 The 984-byte formatter at `0x0006CCC0` is another provider-owned sibling. The already gated
 Goodix input wrapper `0x0002C944` is its sole direct caller, at `0x0002CA2C`, immediately after

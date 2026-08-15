@@ -142,7 +142,7 @@ SHARED_QUANTIZED_FRONTIER_224_230_FUNCTIONS = (
         "shared_quantized_int8_add_candidate",
         "unattributed scale/zero-point int8 elementwise add executor",
         (), "unknown_shared_quantized_neural_runtime_candidate",
-        "investigate_before_implementing", (0x00074CD8,),
+        "clean_room_reimplementation_owner_authorized", (0x00074CD8,),
     ),
 )
 

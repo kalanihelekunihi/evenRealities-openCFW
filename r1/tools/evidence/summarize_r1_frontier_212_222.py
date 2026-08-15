@@ -111,7 +111,7 @@ UNKNOWN_SENSOR_STREAM_FRONTIER_212_222_FUNCTIONS = (
         "unattributed sensor-stream timer sweep and minimum-delay selection",
         ((0x00092344, "BL"), (0x000925D8, "BL")),
         "unknown_sensor_stream_framework_candidate",
-        "investigate_before_implementing",
+        "clean_room_reimplementation_owner_authorized",
     ),
 )
 

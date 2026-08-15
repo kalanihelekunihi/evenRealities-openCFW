@@ -79,6 +79,7 @@ of the evidence record, not free-form prose. One consequence is that
 | `src/` | portable, platform-independent implementation |
 | `platform/nrf52840/` | platform layer, linker script, and the Nordic SDK application under `sdk/` |
 | `port/` | R1-owned FlashDB/FAL port and its configuration headers |
+| `reconstructed/` | owner-authorized clean-room reductions of blocked third-party families (per-family provenance banners; not vendor source) — see [`../r1/docs/SOURCE-ADMISSION.md`](../r1/docs/SOURCE-ADMISSION.md) |
 | `tests/` | host protocol tests plus vendor storage and crypto tests |
 | `research/` | the decompilation corpus, bootloader reconstruction, and BSim runs — see [`../r1/research/README.md`](../r1/research/README.md) |
 | `tools/` | entry-point verifiers, plus `evidence/` (197 pinning scripts), `probes/` (on-device assembly), and `ghidra_scripts/` — see [`../r1/tools/README.md`](../r1/tools/README.md) |

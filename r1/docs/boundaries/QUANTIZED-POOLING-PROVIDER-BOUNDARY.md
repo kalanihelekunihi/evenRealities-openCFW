@@ -129,3 +129,18 @@ unattributed and blocked; the same report identifies the surrounding platform la
 (Wuxi Bravechip BCL603M/ChipletRing, byte-exact BAE8 GATT base UUID at `0x000991A0`, firmware
 string `603MV1.9.3`), which narrows the probable owner of the shared runtime and provides a
 commercial source-acquisition route.
+
+## Reduction 2026-08
+
+Under the owner-authorized full reduction (2026-08-14, see
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the twenty-six ledger entries of
+`unknown_shared_quantized_neural_runtime_candidate` (the shared quantized tensor executors and descriptor constructors, including the pooling body above) are reconstructed
+from the recovered decompilation evidence as independently compiled C in
+[`../../reconstructed/quantized_runtime/`](../../reconstructed/quantized_runtime/).  The
+reconstruction is not vendor source; it carries per-function provenance
+banners, and its contract, reconstruction decisions, divergences, and
+host-test mapping are documented in
+[`../correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md`](../correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md).
+The ledger disposition for the twenty-six entries is now
+`clean_room_reimplementation_owner_authorized`.  This document remains the
+provenance record of why no upstream source was admitted.

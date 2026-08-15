@@ -141,3 +141,25 @@ repository and its mirror. The evidence converges on first-party B210 platform a
 closed as first-party). Verdict: NO ATTRIBUTION — the family remains
 `investigate_before_implementing`. Full report:
 [`unknown_rtc_device_provider_candidate-ATTRIBUTION-2026-08.md`](unknown_rtc_device_provider_candidate-ATTRIBUTION-2026-08.md).
+
+## Reduction 2026-08
+
+Under the owner-authorized full reduction (2026-08-14, see
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the ten ledger entries of
+`unknown_rtc_device_provider_candidate` (the seven generic bodies above plus
+the three ops-table veneers at `0x00050DAA..<0x00050DEB`) are reconstructed
+from the recovered decompilation evidence as independently compiled C in
+[`../../reconstructed/rtc_device/`](../../reconstructed/rtc_device/).  The
+reconstruction is not vendor source; it carries per-function provenance
+banners, and its contract, reconstruction decisions, divergences (including
+the recovered slot-0-only loop-condition quirk), and host-test mapping are
+documented in
+[`../correlation/RTC-DEVICE-REDUCTION-CORRELATION.md`](../correlation/RTC-DEVICE-REDUCTION-CORRELATION.md).
+The ledger disposition for the ten entries is now
+`clean_room_reimplementation_owner_authorized`.  This document remains the
+provenance record of why no upstream source was admitted; the Nordic
+`nrfx_rtc_init` body and the R1 registration wrapper keep their existing
+routes.  The generic-registry dependency of the ops veneers was fail-closed
+when this section was written; the 2026-08 registry reduction has since
+landed, and the host tests now bind the veneers to the reconstructed
+registry dispatchers (slots `0x20`/`0x14`) through `rtc_device_bind_registry`.

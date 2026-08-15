@@ -48,14 +48,21 @@ python3 tools/build_r1_source_ownership.py
 - `investigate_before_implementing` is the default. An unknown function is **not** presumed to be
   Even Realities code and is not eligible for clean-room implementation merely because it lacks a
   recognizable symbol.
+- `clean_room_reimplementation_owner_authorized` marks the six Bravechip-attributed middleware
+  families, the GXT310 closure, the complete QMA6100 provider/adapter closure, and the complete
+  YHM2710 closure plus the 160 Goodix and 49 GoMore reductions (431 entries)
+  reconstructed from decompilation evidence under the owner-authorized
+  full reduction (2026-08-14, [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)). The
+  reconstruction is independently compiled C with per-function provenance; it is not vendor
+  source, and on-target runtime adoption remains a separate gate.
 
 Provider references inside an R1 wrapper do not prove that the wrapper came from that provider.
 For this reason, marker matches alone remain candidates. Bosch BMA456 and the R1-labelled
 `LIS2DOC` path have now crossed the gate through function-local correlation: 18 Bosch and 26 ST
 functions route to official sources, while eight Bosch and seven ST functions are explicitly
 bounded as R1 adapters. The ST part is LIS2DW12 (WHO_AM_I `0x44`). QMA6100 now has three
-QST-lineage provider bodies and fourteen bounded R1 adapters, while QST, Goodix, and the isolated
-GoMore health-algorithm boundaries remain hard-gated. IQS7211E has crossed the source gate through
+QST-lineage provider bodies and fourteen adapters reconstructed together under the owner-authorized
+reduction; 178 Goodix-candidate and 313 GoMore health-algorithm entries remain to be reduced. IQS7211E has crossed the source gate through
 pinned MIT provider/settings references: twelve exact recovered entries are now bounded as R1
 configuration, Nordic/provider port, task dispatch, lifecycle, IRQ, and recovery adapters. The
 GoMore gate now covers 244 exact entries: ten direct marker functions and 234 functions whose
@@ -83,7 +90,8 @@ BSD-3-Clause component and seven product/board wrappers are bounded as R1 adapte
 ST-specific BSim corpus includes exact `ReadReg` and `WriteReg` anchors; the remaining mappings
 require matching register constants and complete function semantics, not address proximity.
 Five adjacent R1 resource functions separately cover the P1.10 NFC lifecycle, exclusive `i2c_5`
-ownership, and three-client battery/optical/touch lease without admitting any YHM register sender.
+ownership, and three-client battery/optical/touch lease. The YHM register sender is independently
+reconstructed behind that typed resource boundary.
 CmBacktrace likewise has five exact core functions and fifteen bounded adapters. Five hundred seventeen
 application entries now route directly to Nordic SDK 17.1.0, thirteen route to SDK-bundled SEGGER
 sources, and the mixed log-prefix and BAE8 write functions are bounded as R1/Nordic adapters. The
@@ -164,11 +172,13 @@ The 514-byte GH3X2X register-profile decoder is also provider-owned; see
 The MAC-keyed compiled-default restore at `0x0007C52C` is R1-owned but security-preserving: its
 identity table is not redistributed and live persistence remains disabled; see
 [`NV-COMPILED-RESTORE-CORRELATION.md`](../correlation/NV-COMPILED-RESTORE-CORRELATION.md).
-The next initcall pair is also split without recreating provider code. The `device_stacmd` table
-routes fourteen exact functions / 1,000 bytes to the unresolved YHM2710 vendor gate and admits
-only its 18-byte direct binding as configuration. The adjacent watchdog routes four exact bodies
+The next initcall pair is also split. The `device_stacmd` table routes fourteen exact functions /
+1,000 bytes to the owner-authorized YHM2710 reconstruction and admits its 18-byte direct binding
+as configuration. The other 22 coupled device/register bodies are reconstructed in the same
+module. The adjacent watchdog routes four exact bodies
 to Nordic `nrfx_wdt.c` and admits only two R1 lifecycle/feed adapters plus the fixed binding; see
-[`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](../boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md) and
+[`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](../boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md),
+[`YHM2710-REDUCTION-CORRELATION.md`](../correlation/YHM2710-REDUCTION-CORRELATION.md), and
 [`WATCHDOG-DEVICE-CORRELATION.md`](../correlation/WATCHDOG-DEVICE-CORRELATION.md).
 The linked sensor-algorithm private heap is now independently closed as thirteen exact functions
 and 1,202 executable bytes. Its two-bin structure, tagged headers, coalescing, split policy,
@@ -249,13 +259,10 @@ adapters around Nordic and CMSIS providers. They own only framing/bounds, event/
 the kernel-state semaphore gate, timeout conversion, recovered polling policy, bus configuration,
 hardware shutdown power-cycle policy, and four Nordic-default software-bus pin-release paths. The
 GPIO-driven bit engines are not admitted.
-A total of 685 application entries / 36,288 bytes remain unclassified and blocked; nine additional generic device-registry and
-fourteen time/calendar-provider candidates plus forty software-TWI-provider candidates remain
-separately implementation-blocked, as do seven RTC-device-provider candidates and thirteen
-sensor-algorithm heap-provider candidates. Fourteen exact
-YHM2710 state-command bodies are separately vendor-gated; four exact Nordic watchdog bodies and
-two R1/Nordic watchdog adapters are source-routed. No bootloader
-provider entry remains unclassified.
+Zero entries remain unclassified. The former generic registry, time/calendar, software-TWI,
+RTC-device, sensor-stream, quantized-runtime, GXT310, QMA6100, and YHM2710 families are
+owner-authorized reconstructions. Four exact Nordic watchdog bodies and two R1/Nordic watchdog
+adapters are source-routed. No bootloader provider entry remains unclassified.
 
 Eight branch-only thunks / 32 bytes now inherit the already accepted ownership and disposition of
 their exact destinations. One remains Goodix-gated, one aliases an R1 Goodix board adapter, and six
@@ -333,6 +340,22 @@ Four further local-GATT, Service Changed, event-policy, and CAR-persistence func
 Nordic Peer Manager provider routes; see
 [`NORDIC-GATT-CACHE-CLOSURE.md`](../closures/NORDIC-GATT-CACHE-CLOSURE.md).
 
+Under the owner-authorized full reduction (2026-08-14,
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the six Bravechip-attributed
+`unknown_*_candidate` families — 164 entries: generic device registry (40), GPIO-driven
+software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (26),
+time/calendar provider (16), and RTC-device layer (10) — are reconstructed from the recovered
+decompilation evidence as independently compiled C under `r1/reconstructed/` with per-function
+provenance banners and host tests. Their disposition is now
+`clean_room_reimplementation_owner_authorized`; the family names are unchanged, no entry remains
+`investigate_before_implementing`, and the reconstructions are not vendor source. The boundary
+docs keep the attribution record; contract, divergences, and test mapping live in the
+`../correlation/*-REDUCTION-CORRELATION.md` documents. On-target runtime adoption is a separate
+wave; the SDK image stays byte-identical because the modules are unreferenced under
+`--gc-sections`. The five GXT310 functions and all 17 QMA6100 provider/adapter functions are
+separately reconstructed and host-tested under the same disposition; see the GXT310 and QMA6100
+reduction correlation documents.
+
 ## Evidence quality
 
 The bootloader ledger consumes the existing manually reviewed `function-names.csv`. Recovered
@@ -347,8 +370,8 @@ The application ledger accepts twenty-six kinds of evidence:
 2. function-local FlashDB/FAL control flow and release discriminators matched to pinned FlashDB
    2.0.0 with bundled FAL 0.5.99;
 3. function-local vendor markers that create a candidate gate, the 203-entry SHA-pinned GoMore
-   algorithm audit boundary, plus QST-authored QMA6100 V1.0 lineage evidence used only to separate
-   provider bodies from bounded R1 adapters;
+   algorithm audit boundary, plus QST-authored QMA6100 V1.0 lineage evidence used to separate and
+   validate the owner-authorized provider bodies and R1 adapters;
 4. exact and function-local semantic correlation against ST's authenticated ST25DVxxKC component,
    including two BSim `1.0` anchors plus register, IO-table, chunking, and mailbox discriminators;
 5. exact recovered R1 configuration wrappers whose underlying operation is delegated to a pinned

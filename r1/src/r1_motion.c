@@ -80,6 +80,8 @@ void r1_motion_adapter_initialize(r1_motion_adapter *adapter) {
     adapter->lis2dw12.context = NULL;
     adapter->bma456w.ops = NULL;
     adapter->bma456w.context = NULL;
+    adapter->qma6100.ops = NULL;
+    adapter->qma6100.context = NULL;
     adapter->selected = R1_MOTION_VARIANT_NONE;
     adapter->configured_rate_hz = 0u;
     adapter->configured = false;
@@ -100,6 +102,8 @@ r1_error r1_motion_adapter_bind(r1_motion_adapter *adapter,
         binding = &adapter->lis2dw12;
     } else if (variant == R1_MOTION_VARIANT_BMA456W) {
         binding = &adapter->bma456w;
+    } else if (variant == R1_MOTION_VARIANT_QMA6100) {
+        binding = &adapter->qma6100;
     } else {
         return R1_ERROR_ARGUMENT;
     }
@@ -121,7 +125,12 @@ static r1_error select_provider(r1_motion_adapter *adapter,
     uint8_t chip_id = 0u;
     const r1_error probe_error =
         provider->ops->probe(provider->context, &chip_id);
-    if (probe_error != R1_OK || chip_id != expected_chip_id) {
+    const bool identity_matches = variant == R1_MOTION_VARIANT_QMA6100
+        ? (chip_id == R1_MOTION_QMA6100_CHIP_ID ||
+           (chip_id & R1_MOTION_QMA6100P_ID_MASK) ==
+               R1_MOTION_QMA6100P_ID_VALUE)
+        : chip_id == expected_chip_id;
+    if (probe_error != R1_OK || !identity_matches) {
         return continue_on_probe_failure ? R1_ERROR_UNSUPPORTED
                                          : (probe_error == R1_OK
                                                 ? R1_ERROR_UNSUPPORTED
@@ -162,12 +171,17 @@ r1_error r1_motion_adapter_configure(r1_motion_adapter *adapter,
                                R1_MOTION_BMA456W_CHIP_ID,
                                requested_rate_hz, false);
     }
+    if (policy == R1_MOTION_POLICY_FORCE_QMA6100) {
+        return select_provider(adapter, &adapter->qma6100,
+                               R1_MOTION_VARIANT_QMA6100,
+                               R1_MOTION_QMA6100_CHIP_ID,
+                               requested_rate_hz, false);
+    }
     if (policy != R1_MOTION_POLICY_AUTO_LICENSED) {
         return R1_ERROR_ARGUMENT;
     }
 
-    /* Exact stock priority: LIS2DW12, BMA456W, then QMA6100.  The QMA
-     * branch is deliberately absent until licensed provider source exists. */
+    /* Exact stock priority: LIS2DW12, BMA456W, then QMA6100. */
     r1_error error = select_provider(adapter, &adapter->lis2dw12,
                                      R1_MOTION_VARIANT_LIS2DW12,
                                      R1_MOTION_LIS2DW12_CHIP_ID,
@@ -182,7 +196,16 @@ r1_error r1_motion_adapter_configure(r1_motion_adapter *adapter,
                             R1_MOTION_VARIANT_BMA456W,
                             R1_MOTION_BMA456W_CHIP_ID,
                             requested_rate_hz, true);
-    return error;
+    if (error == R1_OK) {
+        return R1_OK;
+    }
+    if (error != R1_ERROR_UNSUPPORTED) {
+        return error;
+    }
+    return select_provider(adapter, &adapter->qma6100,
+                           R1_MOTION_VARIANT_QMA6100,
+                           R1_MOTION_QMA6100_CHIP_ID,
+                           requested_rate_hz, true);
 }
 
 int16_t r1_motion_normalize_axis(int16_t raw_axis) {
@@ -201,6 +224,9 @@ static r1_motion_provider *selected_provider(r1_motion_adapter *adapter) {
     }
     if (adapter->selected == R1_MOTION_VARIANT_BMA456W) {
         return &adapter->bma456w;
+    }
+    if (adapter->selected == R1_MOTION_VARIANT_QMA6100) {
+        return &adapter->qma6100;
     }
     return NULL;
 }

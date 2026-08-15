@@ -679,22 +679,24 @@ preserves `allow_repairing = true` while keeping bond state separate from produc
 performs no whitelist promotion, and excludes the recovered LTK-printing helper. See
 [`PEER-MANAGER-EVENT-POLICY-CORRELATION.md`](../correlation/PEER-MANAGER-EVENT-POLICY-CORRELATION.md).
 
-The former largest unknown at `0x000617F8` is now closed with its sole 932-byte neural-layer
-callee at `0x000876C8` under the Goodix GH_SPO2/dlCom provider boundary. Both bodies use the same
-generated-model configuration object at `0x000BD668` as admitted builder `0x000742E4`, and the
-inner executor calls admitted Goodix callback selector `0x00074C90`. No executable caller or raw
-entry pointer reaches the outer executor in the shipped image; the apparent raw branch at
-`0x0003007A` is pinned literal-pool data before the real wrapper at `0x0003007E`. The two bodies /
-2,032 bytes are therefore provider-owned dormant residue and are not a local model implementation
-target. See [`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
+The former largest unknown at `0x000617F8` and its sole 932-byte neural-layer callee at
+`0x000876C8` now compile as owner-authorized transparent C. Both bodies use the same generated-model
+configuration object at `0x000BD668` as builder `0x000742E4`; the local APIs replace embedded
+callbacks and the former heap temporary with typed plans and bounded caller-owned storage. No
+executable caller or raw entry pointer reaches the outer executor in the shipped image; the
+apparent raw branch at `0x0003007A` is pinned literal-pool data before the real wrapper at
+`0x0003007E`. This preserves the dormant topology without asserting a live product route or
+fabricating model outputs. See
+[`QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md`](../correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md).
 
-The former largest unknown at `0x000739A8` is now closed with five related functions under the
-Goodix GH_SPO2/dlCom provider boundary. The exact Goodix-rooted initializer chain reaches
-constructor `0x00074A20`; word `0x00074A98` supplies Thumb callback `0x000739A9` to the generated
-layer descriptor. The seven functions / 2,264 bytes implement quantized recurrent gates, matrix
-products, sigmoid/`tanhf`, and state updates. Their bodies, direct callsites, pointer word, and
-provider path are pinned. No local recurrent runtime or model implementation is admitted. See
-[`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
+The former largest unknown at `0x000739A8` and its complete six-function helper/constructor
+closure are now owner-authorized transparent C. The exact Goodix-rooted initializer chain reaches
+constructor `0x00074A20`; stock word `0x00074A98` supplied Thumb callback `0x000739A9`, while the
+generated descriptor now binds the local target adapter. The seven functions / 2,264 bytes
+implement quantized recurrent gates, matrix products, sigmoid/`tanhf`, state updates, checked
+model-region resolution, and exact target scratch layout. The model weights remain explicit
+caller-supplied build input rather than copied opaque firmware data. See
+[`QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md`](../correlation/QUANTIZED-RUNTIME-REDUCTION-CORRELATION.md).
 
 The former largest unknown at `0x00035850` is now closed with its sole direct caller
 `0x000766AC` under the existing Goodix GH_NADT provider boundary. The exact direct chain is
@@ -736,15 +738,17 @@ wrappers referenced by the table at `0x000BCF58` are added as manual provenance 
 already gated Goodix entry `0x0002C944` directly calls processing root `0x0006C6A8` at
 `0x0002CA24`. Exact `dlCom_pre2exc_pv_v1.3.0_c00c91c9`, GH_SPO2 v2.1.10.0 / `277e89de`, and
 network `1f1cf98b` markers match Goodix primary-source diagnostics. The indirect recurrent
-executor at `0x000739A8` and five constructor/runtime helpers are also pointer- and callgraph-pinned.
-The dormant graph executor at `0x000617F8` and neural-layer executor at `0x000876C8` are admitted
-through their shared model configuration and provider callback edge, with non-reachability pinned.
+executor at `0x000739A8` and its complete helper/constructor closure are now source-admitted in
+the quantized-runtime reconstruction after pointer- and callgraph pinning.
+The dormant graph executor at `0x000617F8` and neural-layer executor at `0x000876C8` are now
+source-admitted through explicit stage plans, recovered shape records, and caller-owned scratch,
+with their shipped-image non-reachability still pinned.
 The sole-caller diagnostic formatter at `0x0006CCC0` is likewise body-, callsite-, and
 field-string-pinned as provider support rather than product telemetry.
 Every executable segment,
 function hash, direct-caller map, marker, and dispatcher word is pinned. Shared runtime helpers are
-not claimed by outside-caller exclusivity. No SpO2 algorithm, dlCom graph, model topology, or
-weight is admitted locally. See
+not claimed by outside-caller exclusivity. The recurrent runtime and first graph topology are
+local, but no opaque SpO2/dlCom weight table or remaining algorithm closure is admitted. See
 [`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
 
 The Goodix GH_HR processing component is now extended by 31 formerly unclassified functions /
