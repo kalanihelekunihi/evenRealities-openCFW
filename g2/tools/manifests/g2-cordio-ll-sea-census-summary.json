@@ -1,0 +1,100 @@
+{
+  "analysis_mode": "read-only; no signing, flashing, erase, or hardware operation",
+  "inputs": {
+    "cordio_snapshot": "third_party/cordio (r20.05c; headers only for this census)",
+    "ghidra_sha256sums_sha256": "87d0befa001f042918bd6af83b0f50e13dd95aab160b0e520f2cb0bc55c6404e",
+    "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "lvgl_census_manifest": "g2-lvgl-vendor-fork-census.tsv",
+    "parent_census_manifest": "g2-apollo-unanchored-census-functions.tsv"
+  },
+  "limitations": [
+    "bucket membership is call-topology triage for queue ordering, not per-function source ownership or behavioral reconstruction",
+    "the cordio-ll-island bucket is a vendor link-layer cluster hypothesis anchored on the dm_conn.c path-string island; the vendored r20.05c snapshot contains no controller/LL sources, so public-Packetcraft per-module attribution (lhci/lmgr/ctrl/sec) is not defensible offline",
+    "hop-N closure labels are low-confidence structural inferences and never feed further propagation",
+    "call targets are recovered from address tokens in decompiled bodies; data references that alias function entries are indistinguishable from calls",
+    "the HCI opcode cross-check rejects HCI dispatch in the sea only for the vendored public opcode inventory; vendor-specific opcodes (OGF 0x3F) are not enumerable from the snapshot"
+  ],
+  "reconciliation": {
+    "attributed_functions": 102,
+    "attributed_official_bytes": 19222,
+    "component_adjacent": [
+      "0x005D188A",
+      "0x005D18C8",
+      "0x005D18EE",
+      "0x005D1958",
+      "0x005D2F22"
+    ],
+    "evidence_classes": {
+      "cordio-anchor-callee": {
+        "functions": 8,
+        "official_opaque_bytes": 1492
+      },
+      "cordio-closure-hop-2": {
+        "functions": 59,
+        "official_opaque_bytes": 5006
+      },
+      "cordio-closure-hop-3": {
+        "functions": 22,
+        "official_opaque_bytes": 3400
+      },
+      "cordio-closure-hop-4": {
+        "functions": 8,
+        "official_opaque_bytes": 948
+      },
+      "cordio-island-caller": {
+        "functions": 1,
+        "official_opaque_bytes": 448
+      },
+      "cordio-medium-callee": {
+        "functions": 4,
+        "official_opaque_bytes": 7928
+      },
+      "none": {
+        "functions": 198,
+        "official_opaque_bytes": 33644
+      }
+    },
+    "hci_opcode_comparison_hits": 0,
+    "hci_opcodes_parsed": 140,
+    "hop_census": {
+      "1": 13,
+      "2": 59,
+      "3": 22,
+      "4": 8
+    },
+    "investigation_functions": 198,
+    "investigation_official_bytes": 33644,
+    "opcode_alias_rows": [
+      "0x005DD584",
+      "0x005DD780",
+      "0x005DD832"
+    ],
+    "sea_external_callers": [
+      "0x005CF9E8",
+      "0x005D2BAE",
+      "0x005D2E0C",
+      "0x005E0002",
+      "0x005E12C8",
+      "0x005F9FE8"
+    ],
+    "sea_first_party_callees": [
+      "0x0044A43C",
+      "0x0046CACC",
+      "0x004751C8",
+      "0x005BF004"
+    ],
+    "sea_functions": 300,
+    "sea_largest_entry": "0x005D4ED0",
+    "sea_largest_envelope_bytes": 7880,
+    "sea_official_bytes": 52866
+  },
+  "schema_version": 1,
+  "seeds": {
+    "anchor_entry": "0x005D2BAE",
+    "anchor_evidence": "string",
+    "anchor_path": "third_party\\cordio\\ble-host\\sources\\stack\\dm\\dm_conn.c",
+    "medium_entry": "0x005D2E0C",
+    "medium_parent_evidence": "call-topology-single-family"
+  },
+  "target": "official G2 s200_v2.2.6.10 Apollo main"
+}

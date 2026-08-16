@@ -142,8 +142,16 @@ def main() -> None:
         raise AssertionError("Bosch BMA456 SensorAPI pin changed")
     if sha256(bma456 / "bma4.c") != bosch["core_source_sha256"]:
         raise AssertionError("Bosch BMA456 core source hash mismatch")
+    if sha256(bma456 / "bma4.h") != bosch["core_header_sha256"]:
+        raise AssertionError("Bosch BMA456 core header hash mismatch")
+    if sha256(bma456 / "bma4_defs.h") != bosch["defs_header_sha256"]:
+        raise AssertionError("Bosch BMA456 definitions header hash mismatch")
     if sha256(bma456 / "bma456w.c") != bosch["variant_source_sha256"]:
         raise AssertionError("Bosch BMA456W variant source hash mismatch")
+    if sha256(bma456 / "bma456w.h") != bosch["variant_header_sha256"]:
+        raise AssertionError("Bosch BMA456W variant header hash mismatch")
+    if sha256(bma456 / "LICENSE") != bosch["license_sha256"]:
+        raise AssertionError("Bosch BMA456 license hash mismatch")
     require_text(bma456 / "bma4.c", "@version    V2.29.0")
     require_text(bma456 / "bma4.c", "dev->delay_us == NULL")
     require_text(bma456 / "LICENSE", "BSD-3-Clause")
@@ -155,6 +163,8 @@ def main() -> None:
         raise AssertionError("ST LIS2DW12 source hash mismatch")
     if sha256(lis2dw12 / "lis2dw12_reg.h") != st["header_sha256"]:
         raise AssertionError("ST LIS2DW12 header hash mismatch")
+    if sha256(lis2dw12 / "LICENSE") != st["license_sha256"]:
+        raise AssertionError("ST LIS2DW12 license hash mismatch")
     require_text(lis2dw12 / "lis2dw12_reg.h", "stmdev_mdelay_ptr   mdelay")
     require_text(lis2dw12 / "lis2dw12_reg.h", "void *priv_data")
     require_text(lis2dw12 / "lis2dw12_reg.c", "lis2dw12_pin_int1_route_set")

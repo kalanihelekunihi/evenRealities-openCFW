@@ -15,6 +15,10 @@ The Goodix candidate `0x00032788` is also source-admitted as
 `goodix_primitives_nadt_default_initialize`; it transparently builds the exact
 default configuration and process-version contract before entering the now
 reconstructed context initializer.
+The GoMore tensor wrappers at `0x00065304` and `0x00065376` are now likewise
+source-admitted as the typed half-convolution/bias composition and sequential
+stage handoff; graph parameters and the composite stage body remain explicit
+caller bindings.
 
 | Family | Functions |
 | --- | ---: |

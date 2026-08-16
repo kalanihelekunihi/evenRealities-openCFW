@@ -1,10 +1,9 @@
 # Withheld-provider re-attribution audit — GoMore / YHM2710 / GXT310 / QMA6100 (2026-08)
 
-> Historical attribution audit. Its GXT310 and QMA6100 implementation gates were superseded on
-> 2026-08-14 by the owner-authorized reductions documented in
-> `../correlation/GXT310-REDUCTION-CORRELATION.md` and
-> `../correlation/QMA6100-REDUCTION-CORRELATION.md`. The source-lineage and license findings below
-> remain evidence; neither unlicensed package is used as production source.
+> Historical attribution audit. All four implementation gates were superseded by owner-authorized
+> transparent-C reductions: all 362 GoMore entries, all 36 YHM2710 entries, all five GXT310
+> entries, and all 17 QMA6100 provider/adapter entries now compile locally. The source-lineage and
+> license findings below remain evidence; no unlicensed package is used as production source.
 
 ## Scope and rule
 

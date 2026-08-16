@@ -1762,8 +1762,8 @@ streaks, and pre-mutation extent rejection.
 The discontiguous 340-byte stock body is admitted as
 `goodix_primitives_spo2_report_state_update`. It clears the 36-byte analysis
 record and invokes the now-local `0x00034500` analyzer through its typed provider seam,
-and conditionally performs the exact 512-byte overlapping history shift when
-both source-history flags are set. That condition also selects the secondary
+and conditionally performs the exact 512-byte channel-4-to-channel-0 spectrum
+copy when both source-history flags are set. That condition also selects the secondary
 rather than primary candidate byte.
 
 When no result was already accepted, the wrapper combines the recovered
@@ -1772,8 +1772,8 @@ distance below six. Acceptance clamps the selected value upward to the state
 minimum, writes its low byte, latches acceptance, and clears the transient
 event. The fallback state machine preserves phases `0 -> 1 -> 2 -> 0`, the
 score-below-2 activation gate, hold conditions, event output, and sticky
-event-seen byte. Tests cover both candidate sources, overlapping shift,
-minimum clamp, acceptance, activation/hold/release/reset sequence, and typed
+event-seen byte. Tests cover both candidate sources, distinct source/destination
+copy spans, minimum clamp, acceptance, activation/hold/release/reset sequence, and typed
 analyzer invocation and the independently tested local analyzer body.
 
 ### SpO2 packed-channel deviations (`0x00034B54`)
@@ -2320,7 +2320,124 @@ Tests pin the nine initial records, timestamp gate, full dynamic order and value
 routes, separate heap queries, three-channel/two-enable rounding, exact triple formats, pre-output
 extent rejection, and the no-sink/no-query path.
 
-The complete Goodix reconstruction now has 331 compiled mappings: 312 formerly
+### NADT window classifier (`0x000856EC`)
+
+The 1,154-byte compiler-scattered body now compiles as
+`goodix_primitives_nadt_window_classify`; its executable-segment SHA-256 is
+`29e04962b88b0993700f603717f98229bd217e959192d045ee3cd3fbda7f82e1`.
+The reconstruction replaces the absolute configuration, runtime state, diagnostic pointer, and
+two history globals with bounded typed records. Its three algorithm dependencies are explicit
+primary, auxiliary, and alternate classifier callbacks, and the double square root is a typed
+toolchain-math binding.
+
+The implementation retains four-lane max/min accumulation, rounded
+`64 * sqrt(mean(metric) / 24)`, the exact unsigned Float32-bit interval test, the final-50 nonzero
+gate at sample 100, high-variation reset, classifier precedence, elapsed-window result-three
+transition, alternate result-two promotion, the cursor-relative 25-sample signed range, both
+mode-specific evidence rules, near-zero-axis latch reset, ratio-streak result one, and
+profile-specific result-two thresholds. Tests pin those paths, wrapping counters, diagnostics,
+callback ordering, the no-mutation current-result contract, and malformed lane/history extents.
+
+### NADT primary-signal classifier (`0x00047240`)
+
+The 3,240-byte compiler-scattered body now compiles as
+`goodix_primitives_nadt_primary_signal_classify`; its executable-segment SHA-256 is
+`01e21104d3d962a09b4c9087eb0e3a49b56b70ee7ebc1eb4d7aa09236f3ab1ac`.
+The reconstruction exposes paired Int32 sample windows, the four-lane activity extrema,
+configuration thresholds, shared NADT state, boundary-filter coefficients, autocorrelation tie
+state, and diagnostics as bounded types. Its stock heap temporaries are replaced by a fixed
+100-sample caller workspace.
+
+The implementation preserves adaptive transition counting, the exact reflected uniform 23-tap
+filter path, signed residual construction, modular autocorrelation, strict local extrema and peak
+quality, near-zero total/run tracking, four 25-sample ranges, residual turning-point amplitude and
+phase analysis, 1500-unit periodic rate, mode-specific evidence counters, quality adjustment,
+profile-dependent result-three thresholds, periodic result-one hold, and the strong-periodic bit
+two signal. Tests cover disabled passthrough, near-zero classification, the 100-sample quarter
+path, diagnostics, and rejection before state mutation.
+
+### NADT harmonic-candidate selector (`0x00035850`)
+
+The 1,162-byte compiler-scattered body now compiles as
+`goodix_primitives_nadt_harmonic_candidates_select`; its executable-segment SHA-256 is
+`c9fbb161215e9026649909ed8ef04b628221d7d51cbd4affb3c04f0a4c6a6c7a`.
+The reconstruction converts six stock allocations into one fixed three-lane workspace and binds
+square root explicitly. It retains nearest-peak matching, the 60-unit frequency-error scale,
+harmonic-dependent 10/square-root/15 admission gates, amplitude tie breaking, weighted
+fundamental fitting, normalized error rejection, and best-family selection. Tests pin a perfect
+three-harmonic family, empty input, and rejection without output mutation.
+
+### GH_HR processing root (`0x0006D51C`)
+
+The 1,382-byte root now compiles as `goodix_primitives_hr_process`; its body SHA-256 is
+`0f1b8fa8d247ca839a59cfffccb4f70e9cb1a689cd2f736c8514474c02358c9d`.
+The stock global context becomes typed input, plan, state, and workspace records. The local path
+retains invalid-input handling, motion and signal histories, weighted/extrema stage ordering,
+periodic candidate selection, rate conversion, tag-derived quality, quality median, previous
+result fallback, and reference-rate recovery. The former decision-stage binding now resolves to `goodix_primitives_hr_decision_update`.
+
+### SpO2/dlCom stream accumulator (`0x0003113C`)
+
+The 1,240-byte compiler-scattered body now compiles as
+`goodix_primitives_spo2_stream_accumulate`; its executable-segment SHA-256 is
+`96f4fe901ef2933d58e73b36d5532d8bc3623246beee03d37969cc472b695935`.
+The stock runtime record becomes typed filter, scale, packed-history, motion-history, percentile,
+and anchor state, and its temporary allocation becomes caller scratch. The implementation retains
+four optical filter lanes, decimal-residual axis correction, RMS motion magnitude, exact-window
+median cleanup and replay, subsequent rolling-percentile selection, and the every-third magnitude
+lane. Tests cover the initial fill/replay, rolling continuation, and no-mutation rejection.
+
+### Complete SpO2/dlCom processing root (`0x0006C6A8`)
+
+The final 1,370-byte Goodix root now compiles as
+`goodix_primitives_spo2_process`; its exact executable SHA-256 is
+`400fd57d9c750bef559ccbc41301602007192f79f8cc13cebadd528795011d2c`.
+The reconstruction exposes configuration, sample input, five-word output, persistent stream/report
+state, packed-bank and spectral bindings, generated-model dispatch records, quantized runtime, and
+math providers as bounded types. A fixed caller workspace replaces the stock 7,740-byte working
+allocation, 16-byte report allocation, and 99-Float temporary.
+
+The implementation preserves first-group transform validation and all-channel clearing, elapsed
+quotient and cadence, MSB-first three-group assembly, valid-channel rejection, the fixed mode-zero
+stream call, `stream_count > 50`, `sample_count > 150`, modulo-25 gating, seven packed banks,
+four deviations, conditional triplicate expansion, seven-row range normalization, five normalized
+spectra, report analysis, inclusive bins 15...113, four 99-value normalized model rows, configured
+in-place Int8 quantization, filtered timed dispatch, transient-history logistic score, exact
+half-away rounding, 70-point score flag, score scaling, and delayed publication. Tests pin cadence,
+sanitation, the complete four-plus-four-plus-four sample layout, counter/error asymmetry, bounded
+input rejection, and one full downstream pass.
+
+### NADT streaming process (`0x0006E008`)
+
+The 1,294-byte compiler-scattered root now compiles as
+`goodix_primitives_nadt_stream_process`; its executable-segment SHA-256 is
+`1b8a57e2d23467bbcd143115751d867207f56b1f12de3bada3efb8439795b5ea`.
+The reconstruction exposes the runtime/configuration globals as typed records and uses fixed
+caller storage for the 100-sample raw, filtered, and configuration-marker histories plus the
+200-sample half-rate history. It retains the 25-Hz cadence, ratio triggers, sample preparation,
+optical filter, rolling activity statistics, classifier dispatch, history compaction, and packed
+result flag. Tests exercise cadence, a classified window, history extents, initialization, and
+preflight rejection.
+
+## GH_HR feature/event decision core (`0x00032808`)
+
+The final 2,814-byte GH_HR child now compiles as
+`goodix_primitives_hr_decision_update`; its four executable segments hash to
+`d2723d09bfc22aef66fafa55623c2d86fb275a1a85b31b96759df0e0a8028a6f`.
+The reconstruction exposes the complete 32-byte decision record, pending event
+source, 20-record history, three 10-value diagnostic histories, sample-rate
+interval limits, mode/latch/stale state, and capped three-value running
+baseline. The stock mask and Float32 allocations become fixed caller workspace.
+It retains periodic position shifts, pending-event clearing, primary/auxiliary
+and interval geometry, MAD inlier selection, coefficient-of-variation
+diagnostics, exact 0.05/0.8/0.6/0.3/0.2 thresholds, event tagging, six-float
+merge semantics, baseline-qualified pair rebalancing, promotion to tracking
+mode, latch recovery, stale-count handling, and fresh diagnostic baseline
+replacement. Tests cover the periodic no-event path, first-event append,
+mode promotion, all three histories, MAD diagnostics, source clearing, and
+preflight no-mutation.
+
+The complete Goodix reconstruction now has 339 compiled mappings: 320 formerly
 opaque candidates, seventeen public-democode replacements, and two product
-entries. The remaining Goodix candidate gate is 8 functions / 13,656 bytes;
-locally reconstructed candidate bodies cover 52,392 declared stock bytes.
+entries. No Goodix candidate function remains opaque; locally reconstructed
+candidate bodies cover 66,048 declared stock bytes.

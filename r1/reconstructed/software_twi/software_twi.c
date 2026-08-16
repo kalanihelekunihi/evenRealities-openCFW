@@ -171,14 +171,14 @@ void software_twi_initialize(const software_twi_providers *providers) {
 }
 
 software_twi_engine *software_twi_bus_engine(software_twi_bus_id bus) {
-    if (bus < 0 || bus >= SOFTWARE_TWI_BUS_COUNT) {
+    if (bus >= SOFTWARE_TWI_BUS_COUNT) {
         return NULL;
     }
     return &bus_records[bus].engine;
 }
 
 software_twi_record *software_twi_bus_record(software_twi_bus_id bus) {
-    if (bus < 0 || bus >= SOFTWARE_TWI_BUS_COUNT) {
+    if (bus >= SOFTWARE_TWI_BUS_COUNT) {
         return NULL;
     }
     return &bus_records[bus];

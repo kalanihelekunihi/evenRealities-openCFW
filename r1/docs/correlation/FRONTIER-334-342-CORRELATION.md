@@ -8,8 +8,8 @@ hashes and complete direct/tail-caller scans:
 | `0x00033AF8..<0x00033C4E` | 342 | `0d66762846139eee2e58bad4c4cec3c95ce4d5aee990ac7a12342c3c901bb263` | R1 factory-test thread envelope |
 | `0x0004D024..<0x0004D176` | 338 | `292da396faeaf54280bcc662ab6de7265b32096dcaddfa10e7e12f83fe939ec2` | R1 peripheral-link/advertising watchdog |
 | `0x000653E6..<0x00065536` | 336 | `c8ac5c9174bab8d9d5b7dd9089b08e6ae8625342011ea998a559d0a6f777ba6e` | GoMore licensed-provider boundary |
-| `0x00090ACC..<0x00090C1A` | 334 | `070fb3bf75ac9151085d8cbecd6d2baa778096ca615b7a207292d7757d227bd5` | GoMore licensed-provider boundary |
-| `0x00074190..<0x000742DE` | 334 | `4cc0c4d0e74a60a2a41d29ede8715f8aa4bcdabdc1dc63c2add307622f165068` | Goodix GH_SPO2/dlCom provider boundary |
+| `0x00090ACC..<0x00090C1A` | 334 | `070fb3bf75ac9151085d8cbecd6d2baa778096ca615b7a207292d7757d227bd5` | source-admitted as `gomore_primitives_energy_mode_rate` |
+| `0x00074190..<0x000742DE` | 334 | `4cc0c4d0e74a60a2a41d29ede8715f8aa4bcdabdc1dc63c2add307622f165068` | source-admitted in the completed Goodix reduction |
 
 `0x00033AF8` is called only at `0x0005D662` by the BAE8 BC receiver. It is the
 factory-test sibling of `0x00033DBC`: both allocate `(payload + 15) & ~3` bytes, clear the
@@ -30,14 +30,16 @@ their respective provider seams.
 `0x000653E6` is called only at `0x000653AC` inside the already byte-pinned GoMore sleep-model
 range. It constructs and releases multiple private tensor branches through the recovered GoMore
 floating-point graph runtime. `0x00090ACC` is called at `0x0005F8C8` and `0x0005FB44` from the
-already gated GoMore energy output producer and updates private activity-mode estimator state.
-Neither function, its constants, its tensor descriptors, nor its formulas are reconstructed.
-Both are licensed-provider-only boundaries.
+still-gated GoMore energy output producer and updates its activity-mode estimator state. The latter
+body, constants, counters, clamps, running-state update, mode branches, and output scaling are now
+reconstructed as `gomore_primitives_energy_mode_rate`. The three-stage slice, dual/gated
+activation, blend, and temporary-release orchestration at `0x000653E6` is now reconstructed as
+`gomore_tensor_cell_run`; tensor data and model parameters remain explicit caller inputs.
 
 `0x00074190` is called only at `0x00076832` in the Goodix dlCom signal path and invokes the
-already gated Goodix helper at `0x000929D6`. It selects bounded local peaks, applies a private
-threshold factor, maintains a ranked peak-index set, and returns selected values. The thresholds,
-selection implementation, and dlCom state remain in the matching licensed Goodix provider.
+Goodix helper at `0x000929D6`. Its bounded local-peak selection now belongs to the completed
+owner-authorized Goodix transparent-C reduction; the exact hash and caller statement remain the
+original frontier evidence.
 
 Reproduce with:
 

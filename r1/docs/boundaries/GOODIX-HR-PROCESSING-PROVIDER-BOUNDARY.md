@@ -11,12 +11,12 @@ Every direct caller of every newly routed entry is either already Goodix-gated o
 this same closed set; there are zero outside direct callers. This proves a linked-component
 ownership boundary without inventing private Goodix symbol names.
 
-All entries remain attributed to `goodix_gh3x2x_candidate`. The sample-variance,
-sample-standard-deviation, conditional descriptor wrapper leaves, and complete extrema tracker are owner-authorized local C;
-the remaining detector, filter, feature-extractor, and decision bodies retain disposition
-`vendor_source_required_not_redistributable`. OpenR1 must bind a lawfully obtained, authenticated
-Goodix provider matching the recovered ABI and exact
-`GH_HR_exc_pv_v2.0.3.0_CONF_nc_21d2063d_002271a1` identity.
+All entries remain attributed to `goodix_gh3x2x_candidate`, while all 31 now have
+owner-authorized clean-room C. The historical evidence summarizer retains the original
+`vendor_source_required_not_redistributable` boundary metadata so the attribution decision is
+not rewritten after source admission; the generated ownership ledger overrides every admitted
+entry individually. No GH_HR provider binary is required by this closure. The recovered identity
+remains `GH_HR_exc_pv_v2.0.3.0_CONF_nc_21d2063d_002271a1`.
 
 The adjacent 406-byte primary/private-context constructor at `0x0006D204` has
 since left this gate. `goodix_primitives_hr_primary_context_create` makes its
@@ -35,6 +35,28 @@ the exact `0/1/2` direction latch, and mode-one four-sample cardinal-spline refi
 82-float stack area is a bounded caller-owned 41-point workspace; its two four-word coordinate
 tables are explicit curve bindings.
 
+The 1,382-byte GH_HR processing root at `0x0006D51C`, SHA-256
+`0f1b8fa8d247ca839a59cfffccb4f70e9cb1a689cd2f736c8514474c02358c9d`, now compiles as
+`goodix_primitives_hr_process`. Input channel/presence geometry, three counted histories, the
+weighted-feature and extrema states, candidate selector, quality thresholds, previous result,
+reference recovery, and scratch are explicit typed records. The local root preserves input
+invalidity clearing, motion-magnitude accumulation, periodic signal means, feature/extrema stage
+ordering, five-second cadence gate, four-candidate rate conversion, tag-derived quality bands,
+quality-history median, previous-result fallback, invalid-input quality 25, and reference-rate
+recovery. Its sole former private child `0x00032808` now binds directly to the typed local decision
+state machine described below.
+
+The 2,814-byte compiler-scattered feature/event decision core at `0x00032808`, SHA-256
+`d2723d09bfc22aef66fafa55623c2d86fb275a1a85b31b96759df0e0a8028a6f`, now compiles as
+`goodix_primitives_hr_decision_update`. Its 32-byte event record exposes position, paired primary
+and auxiliary spans, center, tag, and flag fields. The caller-owned state holds the 20-record
+window, three 10-value counted histories, sample-rate-derived interval limits, mode/latch/stale
+state, diagnostic means, and capped running baseline. Fixed caller scratch replaces the stock
+10-byte mask and 10-float allocation. The implementation preserves periodic position adjustment,
+pending-event consumption and clearing, MAD inlier diagnostics, the exact 0.05/0.8/0.6/0.3/0.2
+threshold family, pair merge/rebalance decisions, mode promotion, latch recovery, stale handling,
+and running-baseline refresh.
+
 ## Exact census
 
 | Entry | Bytes | Ownership label |
@@ -48,7 +70,7 @@ tables are explicit curve bindings.
 | `0x00030090` | 128 | GH_HR capped running triplet; source-admitted |
 | `0x00030368` | 286 | five-history GH_HR mean/center/weighted-feature pipeline with local periodic resampling and explicit coefficient providers; source-admitted |
 | `0x00030E1C` | 72 | wrapping-age/strict-gate triplet snapshot copier; source-admitted |
-| `0x00032808` | 2,814 | GH_HR feature/event decision core |
+| `0x00032808` | 2,814 | typed GH_HR feature/event decision state machine with fixed caller scratch; source-admitted |
 | `0x00034490` | 106 | grouped row-wise weighted-sum kernel; source-admitted |
 | `0x00034A58` | 14 | GH_HR sample standard deviation; source-admitted |
 | `0x00034A66` | 22 | GH_HR closed-callgraph helper |
@@ -92,5 +114,6 @@ python3 tools/evidence/summarize_r1_goodix_hr_boundary.py
 ```
 
 The census deliberately excludes attributable compiler/runtime functions, the separately gated
-sensor-algorithm heap, and any non-reachable neighboring math body. It emits no algorithm source,
-uses no sensor, and does not authorize local provider reimplementation.
+sensor-algorithm heap, and any non-reachable neighboring math body. It emits no algorithm source
+and uses no sensor; owner authorization and the independent C implementation are tracked by the
+source-ownership ledger rather than inferred from this attribution-only summarizer.

@@ -30,10 +30,10 @@ GOMORE_NEURAL_RUNTIME_FUNCTIONS = ({
     "entry": 0x00076BDC,
     "end_exclusive": 0x000770AE,
     "size": 1234,
-    "symbol": "gomore_float_neural_layer_executor_candidate",
+    "symbol": "quantized_runtime_float_conv1d_execute",
     "sha256": "61c6cdae7f85eb4096726de5fe67c5c7f85ce4bc6991ef4d45a19825779875ea",
     "provider_family": "gomore_health_algorithm_candidate",
-    "source_disposition": "vendor_source_required_not_redistributable",
+    "source_disposition": "clean_room_reimplementation_owner_authorized",
 },)
 
 
@@ -100,10 +100,10 @@ def summarize(path: Path) -> dict[str, object]:
         },
         "ownership": {
             "provider_family": "gomore_health_algorithm_candidate",
-            "source_disposition": "vendor_source_required_not_redistributable",
+            "source_disposition": "clean_room_reimplementation_owner_authorized",
             "exact_private_symbol_proven": False,
             "exact_sdk_version_proven": False,
-            "local_reimplementation_permitted": False,
+            "local_reimplementation_permitted": True,
         },
     }
 

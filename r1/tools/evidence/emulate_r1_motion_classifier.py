@@ -13,7 +13,12 @@ import struct
 from pathlib import Path
 from typing import Any
 
-from unicorn.arm_const import UC_ARM_REG_S0, UC_ARM_REG_S1, UC_ARM_REG_S2
+from unicorn.arm_const import (
+    UC_ARM_REG_S0,
+    UC_ARM_REG_S1,
+    UC_ARM_REG_S2,
+    UC_ARM_REG_S3,
+)
 
 from emulate_r1_locomotion_window import (
     DIRECT_OUTPUT,
@@ -27,10 +32,19 @@ INITIALIZER = 0x00071188
 CLASSIFIER = 0x0005F4B6
 STATE_1_ESTIMATOR = 0x00058060
 STATE_2_ESTIMATOR = 0x00057F8C
+LOCOMOTION_TRANSITION = 0x000761F8
+LOCOMOTION_CONTROL_EXTRACT = 0x00056DC0
 STATE = RAM_BASE + 0x4000
 SOURCE = RAM_BASE + 0x4100
 FEATURES = RAM_BASE + 0x4200
 OUTPUT = RAM_BASE + 0x4300
+CONTROL_STATE = RAM_BASE + 0x5000
+CONTROL_EXPANDED = RAM_BASE + 0x5800
+CONTROL_FIRST_INDICES = RAM_BASE + 0x5C00
+CONTROL_SECOND_INDICES = RAM_BASE + 0x5C20
+CONTROL_VALUES = RAM_BASE + 0x5D00
+CONTROL_PRIMARY = RAM_BASE + 0x5E00
+CONTROL_SECONDARY = RAM_BASE + 0x5E04
 
 
 def float_bits(value: float) -> int:
@@ -110,6 +124,101 @@ class MotionClassifierFirmwareFixture:
             "consensus": self.machine.uc.mem_read(DIRECT_OUTPUT, 1)[0],
         }
 
+    def transition(
+        self,
+        total: int,
+        initialized: bool,
+        estimate: float,
+        target: float,
+        pair: tuple[int, int],
+        shape: tuple[float, float],
+    ) -> dict[str, Any]:
+        self.machine.uc.mem_write(DIRECT_OUTPUT, struct.pack("<I", total))
+        self.machine.uc.mem_write(DIRECT_OUTPUT + 8, bytes(pair))
+        self.machine.uc.mem_write(DIRECT_OUTPUT + 16, bytes([initialized]))
+        self.machine.uc.mem_write(DIRECT_OUTPUT + 20, struct.pack("<f", estimate))
+        for register, value in (
+            (UC_ARM_REG_S0, target),
+            (UC_ARM_REG_S2, shape[0]),
+            (UC_ARM_REG_S3, shape[1]),
+        ):
+            self.machine.uc.reg_write(register, float_bits(value))
+        self.machine.call(
+            LOCOMOTION_TRANSITION,
+            DIRECT_OUTPUT,
+            DIRECT_OUTPUT + 8,
+            DIRECT_OUTPUT + 16,
+            DIRECT_OUTPUT + 20,
+        )
+        return {
+            "input": {
+                "total": total,
+                "initialized": initialized,
+                "estimate": estimate,
+                "target": target,
+                "pair": list(pair),
+                "shape": list(shape),
+            },
+            "total": struct.unpack(
+                "<I", self.machine.uc.mem_read(DIRECT_OUTPUT, 4)
+            )[0],
+            "initialized": bool(
+                self.machine.uc.mem_read(DIRECT_OUTPUT + 16, 1)[0]
+            ),
+            "estimate": struct.unpack(
+                "<f", self.machine.uc.mem_read(DIRECT_OUTPUT + 20, 4)
+            )[0],
+        }
+
+    def control_filter(
+        self,
+        sample_period: float,
+        difference_scale: float,
+        mode: int,
+        samples: tuple[tuple[int, float, float], ...],
+    ) -> dict[str, Any]:
+        self.machine.uc.mem_write(CONTROL_STATE, b"\x00" * 0x6C8)
+        self.machine.uc.mem_write(CONTROL_STATE + 0x51, bytes([len(samples)]))
+        self.machine.uc.mem_write(
+            CONTROL_STATE + 0x6C0,
+            struct.pack("<2f", sample_period, difference_scale),
+        )
+        for index, (position, first, second) in enumerate(samples):
+            record = CONTROL_STATE + 0x5C + index * 16
+            self.machine.uc.mem_write(record, struct.pack("<H2x2f", position, first, second))
+        self.machine.uc.mem_write(CONTROL_EXPANDED, b"\x00" * 1000)
+        self.machine.uc.mem_write(CONTROL_FIRST_INDICES, b"\x00" * 20)
+        self.machine.uc.mem_write(CONTROL_SECOND_INDICES, b"\x00" * 20)
+        self.machine.uc.mem_write(CONTROL_VALUES, b"\x00" * 160)
+        self.machine.uc.mem_write(CONTROL_PRIMARY, struct.pack("<f", -9.0))
+        self.machine.uc.mem_write(CONTROL_SECONDARY, struct.pack("<f", -9.0))
+        status = self.machine.call(
+            LOCOMOTION_CONTROL_EXTRACT,
+            CONTROL_STATE,
+            CONTROL_EXPANDED,
+            CONTROL_FIRST_INDICES,
+            CONTROL_SECOND_INDICES,
+            CONTROL_VALUES,
+            CONTROL_PRIMARY,
+            CONTROL_SECONDARY,
+            mode,
+        )
+        return {
+            "sample_period": sample_period,
+            "difference_scale": difference_scale,
+            "mode": mode,
+            "status": status,
+            "controls": list(struct.unpack(
+                "<2f", self.machine.uc.mem_read(CONTROL_VALUES, 8)
+            )),
+            "primary": struct.unpack(
+                "<f", self.machine.uc.mem_read(CONTROL_PRIMARY, 4)
+            )[0],
+            "secondary": struct.unpack(
+                "<f", self.machine.uc.mem_read(CONTROL_SECONDARY, 4)
+            )[0],
+        }
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -168,11 +277,38 @@ def main() -> None:
         (60.0, 70.0, 80.0),
         (80.0, 70.0, 60.0),
         (130.0, 70.0, 130.0),
+        (60.0, 69.0, 78.0),
+        (60.0, 60.0, 120.0),
+        (120.0, 60.0, 132.0),
+        (100.0, 60.0, 132.0),
+        (102.0, 50.0, 51.0),
+        (108.0, 50.0, 51.0),
+        (50.0, 50.0, 50.0),
     ]
     estimators = {
         "state_1": [fixture.estimator(STATE_1_ESTIMATOR, item) for item in estimator_inputs],
         "state_2": [fixture.estimator(STATE_2_ESTIMATOR, item) for item in estimator_inputs],
     }
+    transitions = [
+        fixture.transition(*item)
+        for item in (
+            (10, False, 0.0, 20.0, (10, 10), (1.0, 1.0)),
+            (20, True, 20.0, 20.0, (20, 1), (0.0, 0.0)),
+            (21, True, 20.25, 20.0, (21, 2), (0.0, 0.0)),
+            (10, False, 0.0, 20.0, (7, 10), (1.0, 1.0)),
+            (5, False, 0.0, 20.0, (5, 10), (1.0, 0.5)),
+            (10, False, 0.0, 5.0, (10, 10), (1.0, 1.0)),
+        )
+    ]
+    control_samples = (
+        (0, 30.0, 20.0),
+        (100, 21.0, 20.0),
+        (200, 0.0, 0.0),
+    )
+    control_filters = [
+        fixture.control_filter(100.0, 10.0, mode, control_samples)
+        for mode in (1, 2)
+    ]
 
     print(json.dumps({
         "image_sha256": IMAGE_SHA256,
@@ -184,6 +320,8 @@ def main() -> None:
         "state_1_crossing_and_prior": state_1_crossing_and_prior,
         "state_1_double_prior": state_1_double_prior,
         "estimators": estimators,
+        "locomotion_transitions": transitions,
+        "locomotion_control_filters": control_filters,
     }, indent=2))
 
 

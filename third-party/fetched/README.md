@@ -40,8 +40,10 @@ layout, so the cache can live anywhere:
 | `TINY_AES_ROOT` | `tiny-aes-c` | AES-128 inverse core |
 | `IQS7211E_ROOT` | `flipperone-iqs7211e` | touch controller reference; audit only |
 | `AZOTEQ_SETTINGS_ROOT` | `azoteq-iqs7211e-settings` | touch settings reference; audit only |
-| `GOODIX_DEMOCODE_ROOT` | `goodix-gh3x2x-democode` | GH3X2X demo/driver attribution reference (point at `.../gh3x2x`); audit only, not linked |
+| `GOODIX_DEMOCODE_ROOT` | `goodix-gh3x2x-democode` | GH3X2X source-only demo/driver provider (point at `.../gh3x2x`); compiled by the R1 SDK/Zephyr targets after subset authentication |
 | `GNU_INSTALL_ROOT` | — | Arm GNU toolchain prefix, for `sdk-image` |
+| `ZEPHYR_WORKSPACE` | `zephyr-rtos`, `zephyr-hal-nordic`, `zephyr-cmsis`, `zephyr-tinycrypt`, `mcuboot` | west workspace at the manifest-pinned revisions, for the source-built full-flash target |
+| `ZEPHYR_TOOLCHAIN` | — | GNU Arm Embedded 9.3.1 installation root, for the Zephyr target |
 
 Example:
 
@@ -60,18 +62,24 @@ make -C r1 vendor-audit SDK_ROOT=$CACHE/nRF5_SDK_17.1.0_ddde560 \
 Some manifest entries are pinned but deliberately not downloaded by `fetch.sh`:
 
 - `nordic-s140` is a vendor SoftDevice binary distributed with the SDK.
-- `goodix-gh3x2x` — the biometric algorithm provider stays disabled until a licensed
-  provider is supplied; the algorithm libraries (HR/HRV/NADT/SpO2/dlCom) and the
-  `goodix_mem` allocator are binary-only even in the public tree. The demo-kernel/driver
-  source layer, however, is public under Goodix's 5-clause license and is now fetched as
-  the separate audit-only `goodix-gh3x2x-democode` component above (democode v1.6 /
-  DrvLib v4.3.0.0, exact version-marker match to the R1 image). See
+- `goodix-gh3x2x` — the matching public tree still exposes its algorithm libraries only
+  as binaries, so those artifacts are attribution evidence and never production inputs.
+  Under the owner-authorized source-admission policy, openR1 instead compiles independently
+  reconstructed transparent C for the complete algorithm/allocator census. The public
+  demo-kernel/driver/AGC subset and exact SpO2 configuration table are authenticated and compiled
+  from source under Goodix's 5-clause license (democode v1.6 / DrvLib v4.3.0.0, exact
+  version-marker match). All vendor `.a` files, PC-tool protocol bodies, and neural weights remain
+  excluded. See
   [`../../r1/docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md`](../../r1/docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md)
   and [`../../r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md`](../../r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md).
-- `qst-qma6100` awaits official licensed source; the third accelerometer variant
-  is disabled.
+- `qst-qma6100` remains an unfetched attribution reference; the complete provider/adapter
+  family now compiles from owner-authorized transparent C, while the unlicensed evidence
+  is excluded from production inputs.
 - `r1-sleep-journal` is not an upstream at all — it marks the R1-specific
   behavior where clean-room implementation is permitted.
+- the five Zephyr/MCUboot stack entries are materialized by west rather than
+  `fetch.sh`. `r1/tools/package_zephyr_bundle.py` checks each repository's exact
+  commit and tree and rejects modified or untracked files before packaging.
 
 An absent optional provider makes the corresponding feature return
 `R1_ERROR_UNSUPPORTED`. It never causes fabricated data.

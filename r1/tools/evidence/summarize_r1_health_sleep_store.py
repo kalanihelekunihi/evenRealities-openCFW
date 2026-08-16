@@ -207,7 +207,7 @@ def summarize(image_path: Path, base: int) -> dict[str, Any]:
             ],
             "body": [
                 "signed UTC offset minutes Int16LE @0", "reserved UInt16LE @2",
-                "local-day start timestamp UInt32LE @4",
+                "recorded UTC timestamp UInt32LE @4",
                 "HR avg/max/min UInt8 @8", "SpO2 avg/max/min UInt8 @11",
                 "temperature offset-from-250 avg/max/min UInt8 @14",
                 "stress avg/max/min UInt8 @17",

@@ -2,24 +2,27 @@
 
 ## Decision
 
-Six formerly unclassified functions / 2,188 executable bytes construct and allocate the paired
-sleep-classifier graphs used by the already gated GoMore sleep algorithm. They are now routed to
-`gomore_health_algorithm_candidate` with disposition
-`vendor_source_required_not_redistributable`. OpenR1 does not recreate their graph topology,
-descriptors, model parameters, or allocation behavior.
+Six pinned functions / 2,188 executable bytes construct and allocate the paired sleep-classifier
+graphs used by the GoMore sleep algorithm. All six functions are now owner-authorized transparent
+C with disposition `clean_room_reimplementation_owner_authorized`. In particular, the former
+892-byte and 884-byte provider gates are reconstructed as
+`quantized_runtime_gomore_sleep_graph_family_zero_build` and
+`quantized_runtime_gomore_sleep_graph_family_nonzero_build`. Their model arenas are explicit
+caller-owned word arrays and target base addresses; no absolute stock model pointer or executable
+firmware byte is incorporated by either builder.
 
 | Entry | Bytes | Boundary role |
 | --- | ---: | --- |
-| `0x0002874C` | 892 | graph family used for selector value zero |
-| `0x00028B8A` | 36 | mode-two graph allocator |
-| `0x0002966C` | 884 | graph family used for nonzero selector values |
-| `0x000340A0` | 236 | graph-family selector and output-stack builder |
-| `0x00048D22` | 36 | mode-one graph allocator |
-| `0x00072BE0` | 104 | mode-zero graph allocator and descriptor remapper |
+| `0x0002874C` | 892 | source-admitted graph family used for selector value zero |
+| `0x00028B8A` | 36 | source-admitted mode-two graph allocator |
+| `0x0002966C` | 884 | source-admitted graph family used for nonzero selector values |
+| `0x000340A0` | 236 | source-admitted graph-family selector and output-stack builder |
+| `0x00048D22` | 36 | source-admitted mode-one graph allocator |
+| `0x00072BE0` | 104 | source-admitted mode-zero graph allocator and descriptor remapper |
 
 ## Exact topology
 
-`0x000340A0` is the only direct caller of both large builders: it calls `0x0002966C` at
+The source-admitted `0x000340A0` dispatcher is the only direct caller of both large builders: it calls `0x0002966C` at
 `0x000340BA` for nonzero graph families and `0x0002874C` at `0x00034186` for family zero. Its
 three direct callers are the allocator wrappers at `0x00028B8A`, `0x00048D22`, and `0x00072BE0`.
 Those wrappers are reached through the exact Thumb-pointer table at `0x000BCF40`:
@@ -28,11 +31,15 @@ Those wrappers are reached through the exact Thumb-pointer table at `0x000BCF40`
 0x00072BE1, 0x00048D23, 0x00028B8B
 ```
 
-The two graph builders create convolution, shape, pooling, recurrent/state, activation, and output
-descriptors. Six calls from each builder enter the already gated floating-point neural-layer
-constructor at `0x00074AAC`, whose descriptor callback is the pinned indirect executor
-`0x00076BDD`. The exact bodies, direct caller map, constructor table, and aggregate digests are
-verified.
+The dispatcher consumes its recovered three-by-eight dimension table and executor tokens as
+explicit inputs and emits the exact five 24-byte descriptor slots. The two source-admitted graph
+builders create the fixed quantizer, convolution, shape, pooling, activation, and output prefix:
+family zero consumes 1,714 model words, family one 952, and family two 1,092. Six calls from each
+builder enter the source-admitted generic neural-layer descriptor constructor at `0x00074AAC`;
+its execution callback `0x00076BDC` is now the local checked Float32 convolution executor, and the
+constructor stores its target adapter instead of an absolute firmware token. Production
+Thumb emulation asserts the exact complete graph hashes for all three families, while host tests
+assert typed topology, cursor consumption, local executor bindings, and invalid-input behavior.
 
 ## Model identity and mixed-provider boundary
 
@@ -49,10 +56,16 @@ The separate builder at `0x0004387C` is intentionally excluded. It is reached th
 some model-runtime constructors. Shared mechanics do not justify sweeping a Goodix graph into the
 GoMore ownership set.
 
-These graph details establish the provider boundary and enable future licensed-source comparison;
-they are not a clean-room model specification. A matching licensed GoMore provider remains
-required.
+The topology is no longer a provider boundary. The two 21,824-byte classifier parameter regions
+are now checked-in transparent C data, exposed as bounded views over one deduplicated 11,581-word
+initializer. They remain provenance-pinned recovered product parameters and are not claimed as an
+independent derivation of the trained weights. Normal builds do not read or package the research
+firmware image; see
+[`MODEL-DATA-ADMISSION.md`](../correlation/MODEL-DATA-ADMISSION.md).
 
 ```sh
 python3 tools/evidence/summarize_r1_gomore_sleep_graphs.py
+python3 tools/generate_r1_model_data.py --check
+PYTHONPATH=/tmp/openr1-unicorn python3 tools/evidence/emulate_r1_gomore_sleep_graphs.py \
+  research/decompilation/rebuild/rebuilt-application.bin
 ```

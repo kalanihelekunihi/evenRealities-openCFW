@@ -1,160 +1,171 @@
-# G2 FreeType 2.9.1 engine census
+# G2 FreeType engine census — 0x51xxxx/0x52xxxx frontier
 
-Status: authenticated module-attribution triage map for the 0x51/0x52xxxx
-FreeType frontier of official G2 `2.2.6.10`
+Status: authenticated module-attribution triage for official G2 `2.2.6.10`
 Analysis mode: read-only; no signing, flashing, erase, or hardware operation
 
 ## Result
 
-The [Apollo unanchored-function provenance census](g2-apollo-unanchored-census.md)
-names the 342 no-evidence functions in the `0x51xxxx`/`0x52xxxx` ranges
-(75,016 official opaque bytes) as its #1 follow-up frontier — the
-hypothesized FreeType 2.9.1 engine around the byte-exact `FT_Done_Face`
-anchor.  This census takes those 342 functions plus the 2 functions the
-parent census already buckets `freetype` (the `FT_Done_Face` envelope
-`0x00526814` and the `FT_Open_Face` envelope `0x005264A6`, 946 bytes) — a
-**344-function, 75,962-official-byte census set** — and attributes each
-function to a FreeType 2.9.1 module where distinctive evidence supports it:
+This census closes follow-up frontier 1 of the
+[unanchored-function provenance census](g2-apollo-unanchored-census.md): the
+342 no-evidence functions (75,016 official opaque bytes) in the
+`0x51xxxx`/`0x52xxxx` regions hypothesized as the FreeType 2.9.1 engine,
+plus the 2 functions (946 bytes) the parent census already bucketed as
+FreeType — the byte-exact `FT_Done_Face` envelope at `0x00526814` and its
+call-topology neighbour.  Scope is exactly **344 functions / 75,962 official
+bytes**.
 
-- **128 functions (16,570 official bytes)** are attributed to the FreeType
-  **base** module (`src/base`): 12 at high, 3 at medium, and 113 at low
-  confidence.
-- **216 functions (59,392 official bytes)** remain `investigation-required`:
-  all 87 `0x51xxxx` functions (36,812 bytes) and 129 `0x52xxxx` functions
-  (22,580 bytes).
+- **83 functions (7,874 official bytes)** attribute to the FreeType 2.9.1
+  **base** module (`src/base`: ftobjs.c / ftinit.c / ftutil.c / ftpsprop.c
+  code): 10 at high, 17 at medium, 56 at low confidence.
+- **261 functions (68,088 official bytes)** remain `investigation-required`
+  with deterministic per-function hypotheses.  No in-scope function carries
+  evidence for any other FreeType module: the evidenced FreeType code in
+  this frontier is exactly the base-module cluster at
+  `0x005242FC`–`0x005293C2`; **no `0x51xxxx` function attributes at all**.
 
-No census function is attributed to any other module.  This is not evidence
-that the frontier contains only base-layer code — it reflects where the
-proven seeds sit (see [Limitations](#limitations)).  Everything is re-derived
-from the authenticated official image (`36c5b0e4…78a27863`), the
-authenticated 64-shard corpus, the authenticated FreeType 2.9.1 snapshot
-(`PROVENANCE.json` `2be87176…794bf`), the recovered G2 module header
-(`522c1d35…f05d74`), and the checked-in parent census manifest
-(`a36c51c0…f7b96`) on every run; any drift raises `CensusError`.
+The analyzer re-runs the parent census from the authenticated image
+(`36c5b0e4…78a27863`), the 64-shard Lorelei corpus
+(`3ff8aa90…a0aa832f`), the canonical flash plan, the checked-in manifests,
+and the hash-verified VER-2-9-1 snapshot on every run, and fails closed on
+any drift in the 342/75,016 frontier, the 2/946 bucket, the anchor set, the
+string/table censuses, the closure inputs, or the pinned 83-row attribution
+map.
 
 ## Method
 
-The G2 module set is re-derived from the recovered
-`third_party/freetype/g2-config/freetype/config/ftmodule.h` and validated
-against the image: the ten `ft_default_modules[]` pointers at `0x0073EEF8`,
-the NULL terminator, and each class struct's `module_name` string must match
-the pins exactly.  Nine source modules are linked: `autofit`, `truetype`,
-`cff`, `psaux`, `psnames`, `pshinter`, `sfnt`, `smooth` (three renderer
-classes), plus `base`, which is not a registered module — it is linked
-unconditionally and its presence is proven by the `FT_New_Library` anchor.
-
-Seeds are built over the whole image in four tiers; the 344 census functions
-are then classified by seed membership, call topology, and link-order
-sandwich, in strict priority order.  Every function gets exactly one bucket,
-one evidence class, and one confidence level.
+Evidence tiers in strict priority order; every in-scope function gets
+exactly one status, module, evidence class, and confidence level.
 
 | Tier | Evidence class | Confidence | Basis |
 |---|---|---|---|
-| 1 | `recovery-audit-anchor` | high | exact code pin from the [FreeType recovery audit](freetype-recovery-audit.md): `FT_Add_Default_Modules` `0x005242FC`, `FT_Init_FreeType` `0x0052431C`, `destroy_face` `0x005258A8`, `FT_Open_Face` `0x005264A6`, `FT_Done_Face` `0x00526814`, `FT_Add_Module` `0x0052729C`, `FT_New_Library` `0x005274B2` (all base), smooth three-pass LCD fallback body `0x005E22E0` (smooth) |
-| 2 | `module-string-signature` | high | references, via a code-region literal-pool cell, a string literal of ≥6 characters appearing in exactly one G2-linked module's snapshot sources; literals used only inside `FT_TRACE*`/`FT_ERROR`/`FT_ASSERT` are excluded (dead in release builds) |
-| 3 | `module-class-callback` / `raster-funcs-callback` | high | entry stored as a callback pointer in one of the ten pinned module class structs (9-word `FT_Module_Class`, 22-word `FT_Driver_ClassRec`, 15-word `FT_Renderer_Class`) or the smooth `FT_Raster_Funcs` table |
-| 4 | `service-record-callback` | medium | entry stored in a service record behind a service-description table whose service-id list uniquely matches one module's `FT_DEFINE_SERVICEDESCRECn` variant in the snapshot |
-| 5 | `call-topology-single-module` | medium | every closed-world call target collapses to one module |
-| 6 | `call-topology-multi-module` | low | call targets span several modules (module unresolved; none occurred) |
-| 7 | `link-order-sandwich` | low | nearest seed-labelled functions on both sides in address order share one module |
-| 8 | `none` | none | no corroborating evidence |
+| 1 | `documented-api-anchor` | high | entry named by address in the reviewed [recovery audit](freetype-recovery-audit.md); re-verified structurally (exact body span for `FT_Done_Face`, pinned interior sites for `FT_Open_Face`/`FT_New_Library`, exact callee sets for `FT_Init_FreeType`/`FT_Add_Default_Modules`, caller pins for `FT_Add_Module`/`destroy_face`) |
+| 2 | `documented-interior-pin` | high | `open_face` (static, ftobjs.c): body contains the audit-pinned face-internal `0x44`-byte allocation at `0x00525A0C` and references the `incr` tag literal cell `0x005262A8`, whose image word is re-read as `0x696E6372` |
+| 3 | `ps-property-string-signature` | high | function references the pointer cells of exactly the property-name set parsed from the hash-verified snapshot `ftpsprop.c`: four names for `ps_property_set`, three for `ps_property_get` |
+| 4 | `base-call-graph-direct` | medium | member of the closed static call-graph community grown from the tier-1/2/3 anchors, with a direct static edge to an anchor and all outbound targets inside the community or the 14-entry external allowlist |
+| 5 | `base-call-graph-indirect` | low | remaining community members, reachable only through other members or neutral leaf/runtime-passthrough helpers |
+| 6 | `none` | none | no admissible FreeType evidence; deterministic hypothesis recorded |
 
-Tier conflicts on seeds resolve to the higher tier and are reported; a
-same-tier cross-module conflict fails closed.  Two conflicts occurred and
-both resolve to **base**: the cff service table's `properties` record points
-at `0x00527F0A`/`0x00527FF2`, which are `ps_property_set`/`ps_property_get` —
-their implementation lives in `src/base/ftpsprop.c`, which is exactly what
-the tier-2 string evidence (`hinting-engine`, `random-seed` literals) says.
+The community closure (tiers 4/5) admits an outbound static call target only
+when it is already in the community, is one of **14 curated externals** (the
+three documented vendor ftsystem functions `FT_Stream_Open`/`FT_New_Memory`/
+`FT_Done_Memory`, plus eleven body-verified C runtime routines:
+memcpy/memmove/memset/strlen/strcmp/strncpy/strstr/memcmp/strchr and two
+tails), or bottoms out in allowlisted/leaf functions within one further hop
+(neutral passthrough).  The rule is deliberately conservative: the
+vendor-grafted fallback loader called directly by `FT_Open_Face`
+(`0x00526452` subtree) does **not** satisfy it, because its callees reach
+non-community, non-runtime code (the vendor resource-container reader).
 
-### Derived seed map (50 seeds)
+Corroborating, non-attributing pins:
 
-| Module | Seeds | In census set | Evidence |
-|---|---:|---:|---|
-| base | 12 | 12 | 7 anchors; 5 string (`Type 1`, `hinting-engine`/`random-seed`, `/..namedfork/rsrc`, `resource.frk/` — ftobjs/ftpsprop/ftrfork) |
-| truetype | 11 | 0 | 1 string (`OpticalSize`); 2 class callbacks; 8 service callbacks (`multi-masters`, `metrics-variations`, `tt-glyf`) |
-| cff | 10 | 0 | 4 class callbacks; 6 service callbacks (`glyph-dict`, `cff-load`, `multi-masters`) |
-| autofit | 5 | 0 | 4 string (property names, digits table); 1 class callback |
-| psnames | 4 | 0 | 4 service callbacks (`postscript-cmaps`) |
-| smooth | 4 | 0 | 1 anchor; 3 raster-funcs callbacks |
-| sfnt | 3 | 0 | 1 string (`missing`); 2 service callbacks (`sfnt-table`, `postscript-font-name`) |
-| psaux | 1 | 0 | 1 string (`StartFontMetrics`, afmparse) |
-| pshinter | 0 | 0 | no distinctive evidence recovered |
+- Eight flat constant tables parse from the hash-verified snapshot sources
+  `cffload.c`, `t1decode.c`, `psmodule.c`; exactly seven byte-match
+  uniquely in the official image (`cff_expert_encoding` 0x006C0150,
+  `cff_isoadobe_charset` 0x006C1C60, `cff_expert_charset` 0x006C93B0,
+  `cff_expertsubset_charset` 0x006D22FC, `t1_args_count` 0x006D7C60,
+  `ft_extra_glyph_unicodes` 0x0074D214, `ft_extra_glyph_name_offsets`
+  0x0074D23C), and **no in-scope function references any of them**.  The
+  CFF/psaux/psnames constant data is linked but its code lives outside this
+  frontier — consistent with the config audit's CFF initializer at
+  `0x005B004A`, smooth renderer at `0x005E22E0`, and `tt_driver_init` at
+  `0x005F903C`.  The authenticated ten-entry `ft_default_modules[]` table
+  already proves those modules are in the build; this census only bounds
+  *where*.
 
-The five image service-description tables each matched exactly one snapshot
-module variant: cff `0x006E2750` (10 ids — the
-`TT_CONFIG_OPTION_GX_VAR_SUPPORT`-on, glyph-names-on variant, consistent with
-the recovered configuration), truetype `0x00725060` (6 ids), sfnt
-`0x00738B04` (5 ids — the `TT_CONFIG_OPTION_BDF`-on variant), autofit
-`0x00785370` and psnames `0x00788430` (1 id each).
+## Bucket table
 
-## Bucket census (census set)
+| Status / evidence | Module | Functions | Official bytes | Meaning |
+|---|---|---:|---:|---|
+| `documented-api-anchor` | base | 7 | 1,518 | `FT_Init_FreeType`, `FT_Add_Default_Modules`, `FT_Add_Module`, `FT_New_Library`, `destroy_face`, `FT_Open_Face`, `FT_Done_Face` |
+| `documented-interior-pin` | base | 1 | 288 | `open_face` (static, ftobjs.c) |
+| `ps-property-string-signature` | base | 2 | 346 | `ps_property_set`, `ps_property_get` (ftpsprop.c) |
+| `base-call-graph-direct` | base | 17 | 1,294 | direct anchor neighbours; includes the `FT_List_Find`/`Add`/`Remove`/`Finalize` and `ft_mem_alloc`/`ft_mem_free` body-shape hypotheses |
+| `base-call-graph-indirect` | base | 56 | 4,428 | wider ftobjs/ftutil community |
+| `investigation-required` | — | 261 | 68,088 | no admissible FreeType evidence |
+| **Total attributed** | base | **83** | **7,874** | |
 
-| Bucket | Functions | Official bytes | Evidence (functions) |
-|---|---:|---:|---|
-| base (src/base) | 128 | 16,570 | anchor 7; string 5; topology 3; sandwich 113 |
-| investigation-required | 216 | 59,392 | none 216 |
-| **Total** | **344** | **75,962** | |
+## Reconciliation against the parent census
 
-Attributed functions span `0x005242FC`–`0x0052862C`, the exact bracket
-covered by the in-sea base anchors.  The three topology members are
-`0x00524412` (targets the `Type 1` driver-check function `0x00525574`) and
-`0x00525ADE`/`0x00525B6E` (both target only `FT_Open_Face`).
-
-## Reconciliation with the parent census
-
-| Figure | Parent census | This census |
+| Quantity | Parent figure | This census |
 |---|---:|---:|
-| `0x51xxxx` no-evidence functions / bytes | 87 / 36,812 | 87 / 36,812 (all unattributed) |
-| `0x52xxxx` no-evidence functions / bytes | 255 / 38,204 | 255 / 38,204 (126 attributed base / 15,624 B) |
-| frontier total | 342 / 75,016 | 342 / 75,016 |
-| parent `freetype` bucket | 2 / 946 | 2 / 946 (both now base, high) |
-| census set | — | 344 / 75,962 |
+| `0x51xxxx` no-evidence | 87 / 36,812 B | 87 / 36,812 B (0 attributed) |
+| `0x52xxxx` no-evidence | 255 / 38,204 B | 255 / 38,204 B (81 attributed) |
+| freetype bucket | 2 / 946 B | 2 / 946 B (both re-attributed at high) |
+| **Scope** | **344 / 75,962 B** | 344 / 75,962 B |
+| Attributed | — | 83 / 7,874 B |
+| Investigation-required | — | 261 / 68,088 B |
 
-The parent manifest's identity is pinned by SHA-256 and its per-function
-body ranges are re-validated against the corpus; the frontier figures match
-with zero drift.  The 2 parent `freetype` members keep their family and gain
-a module: `FT_Done_Face` and `FT_Open_Face` are both `src/base/ftobjs.c`.
+Attributed + investigation-required = 75,016 + 946 = 75,962 official bytes,
+zero drift.  The parent's freetype-bucket member `0x005264A6` is confirmed
+by an independent tier: its body contains both audit-pinned `FT_Open_Face`
+cleanup call sites (`0x0052659C`, `0x005267D0`).
 
-## Rejected evidence classes (considered and dropped)
+**Oversized-envelope reconciliation.** The two rejected envelopes whose
+entries sit in these regions (`0x00513E2E`, `0x00514F3C`) are never in
+scope — the parent census rejects them by the 16,384-byte trust cap, and
+this analyzer fails closed if either leaks in.  The
+[boundary-envelopes audit](g2-boundary-envelopes-audit.md) found the
+`0x00513E2E` span to be 98.7% accepted-envelope code with only 774
+interstitial bytes (small rodata tables and gaps).  That is consistent with
+this census: the accepted code inside the span *is* this frontier's
+discovered functions (the span covers most of the `0x51xxxx` region), and
+the 774 interstitial bytes are data the per-function corpus never claimed.
+Nothing in either rejected envelope is attributed here.
 
-- **Four-byte tag constants** (`'incr'`, `'OTTO'`, `'fvar'`, …): the Ghidra
-  decompilation corpus never renders them as address tokens, and the audited
-  compare sites (e.g. the `'incr'` compare at `0x005262A8`) are covered only
-  by the rejected oversized analyzer envelopes, not by trustworthy functions.
-- **String literals shorter than 6 characters**: generic words collide with
-  non-FreeType providers (the psaux literal `"true"` occurs at three image
-  addresses, two referenced by non-FreeType functions at `0x004D7F98` and
-  `0x005001D2`).  The ≥6 rule plus the single-module rule and the pinned
-  derived set keep the string tier exact.
+## Notable findings
 
-## Limitations
+1. **Only the base module is evidenced in this frontier.**  All 83
+   attributions are `src/base` code.  The driver/renderer modules the G2
+   build links (autofit, truetype, cff, psaux, psnames, pshinter, sfnt,
+   smooth ×3 — per the authenticated module table) live outside the
+   `0x51`/`0x52xxxx` regions; the seven byte-matched snapshot tables pin
+   CFF/psaux/psnames *data* in the image with zero in-scope references.
+2. **The `ps_property` get/set asymmetry matches 2.9.1 to the name.**
+   `0x00527F0A` references all four `ps_property_set` names
+   (`darkening-parameters`, `hinting-engine`, `no-stem-darkening`,
+   `random-seed`); `0x00527FF2` references exactly the three
+   `ps_property_get` names — `random-seed` is set-only in the vendored
+   `ftpsprop.c`.  Both sets are re-parsed from the hash-verified snapshot
+   on every run.
+3. **The vendor graft is visible and deliberately unattributed.**
+   `FT_Open_Face` statically calls `0x00526452`, a 9-slot font-fallback
+   loader that parses `0x80`-aligned resource-container headers — an Even
+   extension of the stock open path.  It and its subtree (`0x005262AC`,
+   `0x005261AC`, `0x00526356`, `0x00525E16`, `0x005260A4`, …) fail the
+   closed community rule and stay investigation-required.  `FT_Stream_New`
+   at `0x00524F96` (body dispatches `FT_OPEN_MEMORY`/`FT_OPEN_PATHNAME`/
+   `FT_OPEN_STREAM`) was bucketed `lvgl` by the parent's topology tier; it
+   is recorded here as an out-of-scope observation (medium), never
+   re-bucketed.
+4. **The `0x51xxxx` region is not FreeType.**  Its 87 functions are
+   dominated by LVGL-adjacent draw helpers (11 call the lvgl-bucketed
+   `0x004B127C` cluster) and the 8,374-byte peripheral-register function
+   `0x005202EC`, which calls the rejected `0x00513E2E` envelope — a
+   display/graphics-driver candidate, consistent with the parent census's
+   hardware-hint list.
+5. **A FreeType glyph-API cluster is visible but unprovable.**
+   `0x00524606`, `0x005246F8`, `0x00524754`, `0x00525574` are heavily
+   called from the LVGL wrapper (`lv_freetype_font_create` at `0x004B1C9C`)
+   and the `0x56`/`0x5A`/`0x5D`/`0x5E`/`0x5F` driver regions — the expected
+   signature of `FT_Set_Pixel_Sizes`/`FT_Load_Glyph`-family APIs — but they
+   carry no distinctive constant, string, or table evidence, so they stay
+   investigation-required rather than being named.
 
-- Attribution is **base-only** because every in-sea seed is a base seed.
-  `truetype`, `cff`, `autofit`, `smooth`, `sfnt`, `psnames`, and `psaux`
-  seeds all link outside the census ranges (`0x00577D7C`–`0x005F919C`), and
-  large parts of the truetype/cff/smooth bodies (including the proven
-  `tt_driver_init` `0x005F903C`, `tt_property_set` `0x005EF0B0`, and the CFF
-  module initializer `0x005B004A`) are covered only by the rejected oversized
-  envelope `0x005FA120`, so they cannot seed function-level topology.
-- The 87 `0x51xxxx` functions (36,812 bytes) sit below the lowest in-sea
-  seed (`0x005242FC`) and therefore cannot even sandwich; they remain
-  unattributed wholesale.  Leading hypotheses: the sfnt module body
-  (`ttcmap`/`ttload`/`ttmtx`/`sfobjs`/`ttsbit`), the remaining base objects
-  (`ftgloadr`, `ftoutln`, `ftglyph`, `ftbitmap`, `ftstroke`, `ftcalc`,
-  `fttrigon`, `ftmm`), and possibly `pshinter`/`psaux` internals.  Note the
-  parent census flags the largest of them, `0x005202EC` (8,374 bytes), as a
-  peripheral-register function — an Ambiq HAL/driver candidate that is
-  probably *not* FreeType at all; this census correctly leaves it
-  unattributed.
-- The 82 unattributed functions above the last in-sea seed
-  (`0x0052862C`–`0x0052FFFF`, 6,682 bytes) bracket against out-of-range
-  seeds of different modules and stay unattributed.
-- The 113 `link-order-sandwich` base labels are low-confidence adjacency
-  hypotheses for queue ordering, never proof of ownership; the bracket spans
-  several translation units (`ftobjs.c`, `ftinit.c`, `ftpsprop.c`,
-  `ftrfork.c`, and whatever links between them).
-- Module buckets are evidence triage, not per-function source ownership,
-  behavioral reconstruction, or production-candidate readiness.
+## Investigation-required remainder (261 functions / 68,088 bytes)
+
+Leading hypotheses, all recorded per function in the manifest:
+
+- `0x51xxxx` LVGL/first-party draw pipeline (87 / 36,812 B; largest
+  `0x005202EC`, 8,374 B, peripheral-register + rejected-envelope caller).
+- `0x52A63C`–`0x52B97C` first-party UI/widget clusters (called from dozens
+  of `0x4B`/`0x53`/`0x56` first-party functions).
+- `0x52DC24`–`0x52F38C` first-party cluster adjacent to nanopb-labelled
+  functions.
+- FreeType-adjacent internals lacking distinctive evidence: the glyph-API
+  cluster above, the `0x00528DB8`–`0x0052910E` utility cluster (ftcalc-like;
+  called from the `0x568xxx` region), and the `0x005295A8`/`0x00529936`/
+  `0x00529F8E` pointer-dispatched functions that call into the base
+  community from above (candidate class-record service routines).
 
 ## Reproduction
 
@@ -167,15 +178,35 @@ python3 tools/analyze_g2_freetype_engine_census.py \
 Machine-readable output:
 
 - `tools/manifests/g2-freetype-engine-census.tsv` — all 344 per-function
-  assignments (entry, body range, envelope and official bytes, module bucket,
-  evidence, confidence, detail).
-- `tools/manifests/g2-freetype-engine-census-summary.json` — reconciliation,
-  module order, seed map, service tables, and resolved seed conflicts.
+  rows (entry, body range, envelope and official bytes, scope, parent
+  bucket, status, module, attribution, evidence, confidence, detail).
+- `tools/manifests/g2-freetype-engine-census-summary.json` — inputs,
+  reconciliation, module summary, external observations, limitations.
 
 The fail-closed guard is
 [`../../tests/test_analyze_g2_freetype_engine_census.py`](../../tests/test_analyze_g2_freetype_engine_census.py):
-rule-totality and pin well-formedness checks that run without the corpus,
-plus corpus-backed checks (gated on `OPENCFW_APOLLO_GHIDRA_CORPUS`, default
-`/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth`) covering the exact
-bucket census, the per-function pins, mutation rejection, and byte-for-byte
-manifest regeneration.
+28 tests covering rule totality, anchor/allowlist/table pin well-formedness,
+closure-rule behaviour on synthetic graphs, parser behaviour on synthetic
+sources, exact census counts, the pinned 83-row attribution, mutation
+rejection (attribution map, anchors, property sets, located tables,
+allowlist), and byte-for-byte manifest regeneration.
+
+## Limitations
+
+- Attribution is evidence-tiered triage, not per-function source ownership,
+  behavioral reconstruction, or production-candidate readiness; the
+  `base-call-graph-indirect` tier in particular is community-topology
+  membership only.
+- Community members include shared utility functions also called by other
+  modules' code outside this frontier (the linker hoists ftutil-style
+  helpers); low-confidence rows are hypotheses for queue ordering.
+- The vendor-modified face-open path means even high-confidence anchors
+  (e.g. `FT_Open_Face`) may contain non-stock bodies; the tiers prove
+  identity evidence, not pristine upstream bytes.
+- The neutral-passthrough rule is a deliberate one-hop concession through
+  leaf/runtime-only helpers; relaxing it further admits the vendor
+  fallback-loader subtree, which is why it is pinned exactly.
+- Hardware hints reuse the parent census's coarse `0x40000000`-range token
+  heuristic and may false-positive on large numeric constants.
+- Ghidra envelope boundaries are analyzer artifacts inherited from the
+  corpus; official-byte attribution follows the parent's mask semantics.

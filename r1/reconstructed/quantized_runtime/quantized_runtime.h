@@ -46,6 +46,7 @@
  *   0x0005D244..<0x0005D2DC   152  float softmax executor (88.0f cap)
  *   0x00065680..<0x000656AA   42   scaled-mul call + conditional release
  *   0x0006FE20..<0x0006FE56   54   zero-point / requantization compute
+ *   0x00076BDC..<0x000770AE   1234 GoMore Float32 convolution executor
  *   0x00074A9C..<0x00074AA0   4    executor-vector accessor -> 0x00095B21
  *   0x00074AAC..<0x00074B3E   146  24-byte descriptor constructor (conv-like)
  *   0x00074BD8..<0x00074BDC   4    executor-vector accessor -> 0x00036DCD
@@ -144,6 +145,10 @@ typedef struct {
 #define QUANTIZED_RUNTIME_GOODIX_GRAPH_BYTES 0x160u
 #define QUANTIZED_RUNTIME_GOODIX_GRAPH_MODEL_WORDS 439u
 #define QUANTIZED_RUNTIME_GOODIX_MODEL_INSTANCE_MODEL_WORDS 3924u
+#define QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_BYTES 0x1B8u
+#define QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS 1714u
+#define QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY1_MODEL_WORDS 952u
+#define QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY2_MODEL_WORDS 1092u
 #define QUANTIZED_RUNTIME_RECURRENT_RANGE_ERROR UINT32_C(0xF000000E)
 
 /* Recovered shared tensor pool state root: 12 descriptors at 0x14 stride,
@@ -194,8 +199,17 @@ typedef struct {
      * constructors store 0. */
     uintptr_t vector_95b20;
     uintptr_t vector_36dcc;
+    /* Legacy compatibility token for stock 0x00076BDD.  Constructor
+     * 0x00074AAC now installs the local transparent executor regardless of
+     * this value; no runtime path depends on the token. */
     uintptr_t run_76bdc;
     uintptr_t vector_30534; /* stock 0x00030535 */
+    /* Source-owned GoMore tensor operators stored by the paired sleep-graph
+     * builders.  They remain explicit tokens here because the graph record
+     * uses the stock 32-bit target ABI, while the checked C implementations
+     * have native host signatures. */
+    uintptr_t vector_35d12; /* gomore_tensor_strided_copy_2d */
+    uintptr_t vector_7ca94; /* gomore_tensor_pool_1d */
 } quantized_runtime_providers;
 
 typedef struct {
@@ -304,6 +318,39 @@ typedef struct {
     size_t workspace_size;
 } quantized_runtime_float_dense_io;
 
+/* Transparent form of the convolution-like descriptor installed by
+ * constructor 0x00074AAC for the recovered executor at 0x00076BDC. */
+typedef struct {
+    uint8_t kernel_width;   /* target +0x00: supported values 1, 3, and 5 */
+    uint8_t stride;         /* target +0x01 */
+    uint8_t left_padding;   /* target +0x02 */
+    uint8_t right_padding;  /* target +0x03 */
+    uint8_t input_channels; /* target +0x04 */
+    uint8_t output_channels;/* target +0x05 */
+    uint8_t groups;         /* target +0x06 */
+    uint8_t activation;     /* target +0x07: 0 none, 1 leaky ReLU, 2 sigmoid */
+    float alpha;            /* target +0x08: negative slope for mode 1 */
+} quantized_runtime_float_conv1d_descriptor;
+
+typedef struct {
+    const float *weights; /* recovered channel-major kernel coefficients */
+    size_t weight_count;
+    const float *biases;
+    size_t bias_count;
+} quantized_runtime_float_conv1d_model;
+
+/* The checked form never pads or otherwise mutates input storage.  workspace
+ * is required only when output storage overlaps the logical input span. */
+typedef struct {
+    quantized_runtime_exec_tensor *input;
+    quantized_runtime_exec_tensor *output;
+    size_t input_capacity;
+    size_t output_capacity;
+    void *workspace;
+    size_t workspace_size;
+    quantized_runtime_f32_unary_fn expf_fn;
+} quantized_runtime_float_conv1d_io;
+
 typedef uint32_t (*quantized_runtime_stage_execute_fn)(
     const void *descriptor,
     quantized_runtime_exec_tensor *const *inputs,
@@ -331,6 +378,13 @@ typedef struct {
 typedef struct {
     uint8_t bytes[QUANTIZED_RUNTIME_GOODIX_GRAPH_BYTES];
 } quantized_runtime_goodix_graph;
+
+/* Target-ABI descriptor block emitted by the paired GoMore sleep-classifier
+ * builders at 0x0002874C and 0x0002966C.  The three unused stock padding
+ * words are initialized to zero by the checked clean-room builders. */
+typedef struct {
+    uint8_t bytes[QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_BYTES];
+} quantized_runtime_gomore_sleep_graph;
 
 /* Typed representation of stock's 0x344-byte generated-model instance.
  * Target offsets are asserted in the implementation; native-pointer hosts
@@ -472,6 +526,20 @@ uint32_t quantized_runtime_float_dense_execute(
     quantized_runtime_float_dense_io *io);
 
 uint32_t quantized_runtime_float_dense_execute_target(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs);
+
+/* 0x00076BDC: checked channel-major Float32 1-D convolution.  Stock graph
+ * descriptors use groups=1; the recovered depthwise kernel-3 form is also
+ * supported when input_channels/groups == 1.  Padding is virtual in the
+ * checked API, preserving output arithmetic without stock's in-place moves. */
+uint32_t quantized_runtime_float_conv1d_execute(
+    const quantized_runtime_float_conv1d_descriptor *descriptor,
+    const quantized_runtime_float_conv1d_model *model,
+    quantized_runtime_float_conv1d_io *io);
+
+uint32_t quantized_runtime_float_conv1d_execute_target(
     const void *descriptor,
     quantized_runtime_exec_tensor *const *inputs,
     quantized_runtime_exec_tensor *const *outputs);
@@ -822,6 +890,24 @@ void quantized_runtime_cursor_pair_add_descriptor_construct(
  * absolute pointer.  Exactly 439 words are consumed. */
 bool quantized_runtime_goodix_graph_build(
     const quantized_runtime *rt, quantized_runtime_goodix_graph *graph,
+    const uint32_t *model_words, size_t model_word_count,
+    uint32_t model_base_address, size_t *consumed_words,
+    uint32_t *model_end_address);
+
+/* 0x0002874C / 0x0002966C: build the fixed GoMore sleep-classifier graph
+ * prefix from caller-owned model words.  family-zero uses the recovered
+ * default quantizer range {0,1}; family-one/two consume their first two model
+ * words as the range.  Absolute model addresses and executor pointers are
+ * explicit inputs/bindings, so neither API imports stock firmware bytes. */
+bool quantized_runtime_gomore_sleep_graph_family_zero_build(
+    const quantized_runtime *rt,
+    quantized_runtime_gomore_sleep_graph *graph,
+    const uint32_t *model_words, size_t model_word_count,
+    uint32_t model_base_address, size_t *consumed_words,
+    uint32_t *model_end_address);
+bool quantized_runtime_gomore_sleep_graph_family_nonzero_build(
+    const quantized_runtime *rt, uint32_t family,
+    quantized_runtime_gomore_sleep_graph *graph,
     const uint32_t *model_words, size_t model_word_count,
     uint32_t model_base_address, size_t *consumed_words,
     uint32_t *model_end_address);

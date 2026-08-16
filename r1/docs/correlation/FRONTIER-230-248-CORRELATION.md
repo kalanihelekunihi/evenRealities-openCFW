@@ -7,7 +7,7 @@ close the relevant record, provider, and constructor paths.
 
 | Recovered function | Executable bytes | SHA-256 | Disposition |
 | --- | ---: | --- | --- |
-| `0x000947DE..<0x000948D6` | 248 | `d8a0776a8e0c82ef262d2b0f639bd8a68fe13aa3cb3a1e5b0cbe7a6b0b7dabff` | GoMore licensed-provider-only accumulator |
+| `0x000947DE..<0x000948D6` | 248 | `d8a0776a8e0c82ef262d2b0f639bd8a68fe13aa3cb3a1e5b0cbe7a6b0b7dabff` | owner-authorized transparent minute accumulator |
 | `0x00095168..<0x00095260` | 248 | `ed98b97d47a79e50052c11f335e86cc96d8bbb63d0036d6ef578256d86ee2ac3` | R1 `kv.bin` newest-slot reader |
 | `0x00035E34..<0x00035F26` | 242 | `f2ecfeb5f11b06acbacf5c0c99c263c724dbdd591208bcf640742140a123a440` | unidentified shared quantized-neural runtime |
 | `0x0005E228..<0x0005E314` | 236 | `73c551c618987b0704727618c69a9896b90a535830d159bf49ef337f3631a5c6` | R1 `ep.bin` readiness policy over FAL |
@@ -67,10 +67,12 @@ The seven fixed-record accessors at `0x0007B9C8`, `0x0007B9EC`, `0x0007BA08`, `0
 
 ## Provider boundaries
 
-`0x000947DE` is called only by `0x00094070`, which is reached only from the already gated GoMore
-sleep path at `0x00060B80`. It updates a private fifteen-slot per-minute accumulator and uses the
-six-byte reset helper at `0x00071B24`. The orchestrator, accumulator, and helper remain
-licensed-provider-only; no private GoMore state layout or algorithm is reconstructed.
+`0x000947DE` is called only by `0x00094070`, which is reached only from the still-gated GoMore
+sleep path at `0x00060B80`. It updates a fifteen-slot per-minute accumulator and uses the
+six-byte reset helper at `0x00071B24`. The accumulator and helper are now independently compiled
+transparent C with an exact typed 72-byte state. The `0x00094070` orchestration root is now local
+as `gomore_primitives_sleep_step_update`, with the ring, civil-time, activity-latch, and countdown
+composition represented by a typed 184-byte state. Its outer sleep caller remains gated.
 
 `0x00035E34` derives quantization parameters for indirect executor `0x000293FC`. Thumb pointer
 `0x000293FD` is stored at `0x00074D04` by descriptor constructor `0x00074CE4`. That constructor is

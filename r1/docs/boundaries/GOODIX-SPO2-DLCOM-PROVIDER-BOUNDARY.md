@@ -12,6 +12,8 @@
 > as well.
 > Numerical post-processing leaves `0x35F44`, `0x36EB4`, `0x37DB4`,
 > `0x668A4`, and `0x66C18` are also source-admitted.
+> The compiler-scattered `0x3113C` stream accumulator is now source-admitted
+> with typed filter/window state and caller scratch.
 > The strict spectral-peak/local-energy concentration helper at `0x2FF10`
 > is source-admitted with its `log10` dependency as an explicit typed provider.
 > The discontiguous report/candidate/event-latch wrapper at `0x29AD8` is also
@@ -21,14 +23,20 @@
 > The seven-way model-graph dispatcher at `0x28AD4` is now local as well;
 > its stock ROM table is an explicit typed caller binding with checked index
 > and operation slots.
-> Remaining provider/model entries and private weights stay gated.
+> The final processing root at `0x6C6A8` is now local as well. All executable
+> entries in this census are source-admitted. The exact 3,924-word generated
+> model is checked-in transparent C data exposed through a typed bounded view;
+> no production build reads or retains stock firmware bytes. See
+> `../correlation/MODEL-DATA-ADMISSION.md`.
 
 ## Decision
 
 The recovered boundary contains 85 functions / 19,568 executable bytes: 82 formerly unclassified
 Ghidra functions / 19,520 executable bytes and three manual provenance supplements / 48 bytes.
-All are routed to `goodix_gh3x2x_candidate` with disposition
-`vendor_source_required_not_redistributable`.
+All remain attributed to `goodix_gh3x2x_candidate`; under the owner-authorized reduction each now
+has an independently compiled transparent-C implementation or typed executor veneer.
+The original provider census disposition was `vendor_source_required_not_redistributable`; it is
+retained as attribution history, while the current ownership ledger records the local sources.
 
 The existing Goodix-gated entry at `0x0002C944` directly invokes the 1,370-byte processing root
 `0x0006C6A8` at callsite `0x0002CA24`. A direct-call traversal from that root reaches 56 formerly
@@ -114,6 +122,33 @@ per-channel PPG loop, `ceil(3 * channel_count / 8)` enable-byte loop, and separa
 query for each active output route. Bounded typed sinks replace the private variadic formatter and
 128-byte scratch ABI, and no telemetry route is enabled by this admission.
 
+The compiler-scattered 1,240-byte stream accumulator at `0x0003113C`, executable-segment SHA-256
+`96f4fe901ef2933d58e73b36d5532d8bc3623246beee03d37969cc472b695935`, now compiles as
+`goodix_primitives_spo2_stream_accumulate`. Its four optical filters, adaptive discontinuity
+limits, packed output histories, decimal-residual filter, four motion histories, percentile
+state, and downstream packed histories are explicit typed state. The implementation preserves
+warm-up finalization, mode-zero fixed limits, mode-one 60-sample smoothed scales, axis residual
+correction, RMS motion magnitude, first-window median cleanup and complete replay, subsequent
+rolling-percentile selection, and the every-third magnitude output lane. Caller scratch replaces
+the sole stock allocation; no private RAM pointer remains.
+
+The final 1,370-byte processing root at `0x0006C6A8` now compiles as
+`goodix_primitives_spo2_process`; its exact executable SHA-256 is
+`400fd57d9c750bef559ccbc41301602007192f79f8cc13cebadd528795011d2c`.
+It retains first-group integrity sanitation, sampling-frequency quotient and processing cadence,
+MSB-first assembly of three four-channel groups, stream accumulation, the `>50` stream and
+`>150`/modulo-25 spectral gates, seven-bank expansion and normalization, five-channel spectrum
+preparation, report analysis, bins 15 through 113, four-row reciprocal-maximum normalization,
+configured in-place quantization, filtered timed dispatch, logistic scoring, exact Float32
+rounding, score-70 flag, scaled score, and delayed result publication.
+
+The stock 7,740-byte and 16-byte transient allocations are replaced by one fixed caller workspace.
+Configuration, packed banks, spectral sources, report histories, model dispatch records, math
+providers, quantized runtime, and all persistent counters are typed bindings. Tests cover cadence,
+integrity clearing, exact three-group assembly, mismatch/no-mutation behavior, malformed extents,
+and a complete downstream execution. The adjacent report wrapper now models its exact 512-byte
+channel-4-to-channel-0 copy with distinct source and destination spans.
+
 ## Exact census
 
 | Entry | Bytes | Boundary role |
@@ -131,7 +166,7 @@ query for each active output route. Bounded typed sinks replace the private vari
 | `0x0002FF10` | 338 | strict spectral-peak and local/harmonic energy concentration in dB; source-admitted |
 | `0x0003007E` | 16 | manual dlCom graph-builder table wrapper; source-admitted executor veneer |
 | `0x00030800` | 364 | GH_SPO2/dlCom closed-callgraph helper |
-| `0x0003113C` | 1,240 | GH_SPO2/dlCom closed-callgraph helper |
+| `0x0003113C` | 1,240 | four-channel optical/motion stream accumulator with typed histories and caller scratch; source-admitted |
 | `0x00031774` | 82 | strict positive local-peak maximum selector; source-admitted |
 | `0x00034500` | 1,102 | GH_SPO2/dlCom report analyzer; source-admitted |
 | `0x00034B54` | 348 | packed-6/9 four-channel population deviations with stride-three selection; source-admitted |
@@ -177,7 +212,7 @@ query for each active output route. Bounded typed sinks replace the private vari
 | `0x0006671C` | 266 | cascaded biquad sample processor with discontinuity correction; source-admitted |
 | `0x000668A4` | 50 | reciprocal-maximum normalization; source-admitted |
 | `0x00066C18` | 48 | percentile lookup; source-admitted |
-| `0x0006C6A8` | 1,370 | GH_SPO2/dlCom processing root |
+| `0x0006C6A8` | 1,370 | complete GH_SPO2/dlCom processing root with fixed caller workspace; source-admitted |
 | `0x0006CCC0` | 984 | GH_SPO2/dlCom typed input diagnostic emitter; source-admitted |
 | `0x0006EB94` | 128 | GH_SPO2/dlCom generated-model initialization bridge |
 | `0x0006FDE0` | 54 | dlCom quantized recurrent-runtime helper |

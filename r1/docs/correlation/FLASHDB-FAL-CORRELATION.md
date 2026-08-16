@@ -80,6 +80,10 @@ partition configuration required by `fal_cfg.h`; none of the functions above is 
 The Nordic target binds those callbacks to the recovered 36-page **internal** flash region through
 Nordic `nrf_fstorage_sd`. See
 [`INTERNAL-FLASH-CORRELATION.md`](INTERNAL-FLASH-CORRELATION.md).
+The alternate Zephyr target compiles the same six authenticated FlashDB/FAL translation units and
+binds the same port to its serialized source flash-map adapter. Its bundle gate individually
+hash-checks the consumed headers, licenses, and sources and requires nonempty loadable spans for
+all six provider objects.
 
 ## Integrity and licensing
 

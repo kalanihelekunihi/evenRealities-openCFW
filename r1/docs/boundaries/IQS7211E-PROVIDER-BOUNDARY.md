@@ -18,9 +18,10 @@ references are pinned:
 The provider references supply device/register/state-machine semantics. Nordic SDK bus and GPIO
 primitives now supply the nRF52840 transport. openR1 owns only the R1 register values,
 ring-size/electrode data, board lifecycle, communication-window glue, IRQ routing, and bounded ATI
-recovery policy. The portable implementation is in `r1/src/r1_iqs7211e.c`; the SDK binding is
-in `r1/platform/nrf52840/sdk/openr1_touch.c`. It fails closed until both a valid device identity
-and the unresolved shared-power provider are bound.
+recovery policy. The portable implementation is in `r1/src/r1_iqs7211e.c`; source board bindings
+exist for both Nordic SDK and Zephyr. The Zephyr target binds reconstructed YHM2710 shared power,
+but still fails closed until a valid device identity and wear/factory request are supplied. The
+legacy Nordic target retains the abstract power seam.
 
 ## Pinned source inputs
 

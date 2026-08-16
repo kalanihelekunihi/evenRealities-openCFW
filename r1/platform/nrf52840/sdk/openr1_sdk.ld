@@ -28,6 +28,35 @@ SECTIONS
 
 SECTIONS
 {
+  /* Every recovered module is a deliberate firmware-bundle payload.  The SDK
+   * build uses -ffunction-sections plus --gc-sections, so merely compiling an
+   * implementation is not enough: consume its text/constant sections here
+   * before nrf_common.ld's generic .text rule can discard an unbound API. */
+  .openr1_reconstructed_code :
+  {
+    /* nrf_common.ld normally places this first inside .text.  Because this
+     * retained section must precede its catch-all .text rule, consume the
+     * vector table here first so the application still begins with MSP/reset. */
+    KEEP(*(.isr_vector))
+    KEEP(*rtc_device.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*generic_device_registry.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*software_twi.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*sensor_stream.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*time_calendar.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*r1_model_data.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*quantized_runtime.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*gxt310.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*qma6100.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*yhm2710.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*goodix_primitives.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*goodix_heap.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*gomore_primitives.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*gomore_tensor_runtime.c.o(.text .text.* .rodata .rodata.*))
+  } > FLASH
+} INSERT BEFORE .text;
+
+SECTIONS
+{
   .sdh_req_observers :
   {
     PROVIDE(__start_sdh_req_observers = .);

@@ -1,0 +1,64 @@
+{
+  "analysis_mode": "read-only; no signing, flashing, erase, or hardware operation",
+  "inputs": {
+    "ghidra_sha256sums_sha256": "87d0befa001f042918bd6af83b0f50e13dd95aab160b0e520f2cb0bc55c6404e",
+    "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "snapshot": "third_party/liblc3 (SNAPSHOT.sha256-verified sources)"
+  },
+  "island_composition": {
+    "cluster_scope_corpus": 24,
+    "parent_buckets": {
+      "easylogger": 7,
+      "first-party": 5,
+      "investigation-required-no-evidence": 68,
+      "lvgl": 79
+    },
+    "path_anchored": 38
+  },
+  "limitations": [
+    "module attribution is evidence-tiered triage, not per-function source ownership or behavioral reconstruction",
+    "dispatch-graph-direct positions match the fixed v1.1.3 lc3.c analyze()/encode() source order; indirect names are candidates, not proofs",
+    "upstream-table-match proves the stock function reads a byte-identical snapshot table; it does not prove the whole body is pristine upstream code",
+    "0x00438400 and 0x00438604 are byte-verified resample_12k8[] entries that Ghidra never emitted as functions; they carry no envelope or byte attribution",
+    "the ltpf.c h4 float table parse truncates at implicit trailing initializers, so the strict unique byte-match fails closed and 0x00438EF0 stays a low-confidence candidate despite its pointer landing on h4 row 0 at 0x006D54D8",
+    "several bits.c and shared-runtime envelopes report zero official opaque bytes (already production source-owned in the parent census accounting)",
+    "Ghidra envelope boundaries and partial MVE/Helium decoding are analyzer artifacts inherited from the corpus"
+  ],
+  "module_summary": [
+    {
+      "corpus_functions": 11,
+      "module": "ltpf",
+      "official_opaque_bytes": 4094,
+      "rows": 13
+    },
+    {
+      "corpus_functions": 9,
+      "module": "bits",
+      "official_opaque_bytes": 1014,
+      "rows": 9
+    }
+  ],
+  "reconciliation": {
+    "attributed_official_bytes": 5108,
+    "attributed_rows": 22,
+    "investigation_official_bytes": 10,
+    "investigation_rows": 1,
+    "island_frontier_remainder": 44,
+    "island_functions": 197,
+    "island_parent_rows": 159,
+    "island_path_anchored": 38,
+    "resample_table_address": "0x00439680",
+    "resample_table_non_corpus": [
+      "0x00438400",
+      "0x00438604"
+    ],
+    "scope_corpus_rows": 24,
+    "scope_rows": 26,
+    "shared_runtime_official_bytes": 0,
+    "shared_runtime_rows": 3,
+    "snapshot_tables_located": 84,
+    "snapshot_tables_parsed": 88
+  },
+  "schema_version": 1,
+  "target": "official G2 s200_v2.2.6.10 Apollo main"
+}

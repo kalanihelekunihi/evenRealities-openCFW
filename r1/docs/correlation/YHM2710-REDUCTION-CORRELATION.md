@@ -27,7 +27,7 @@ The recovered closure is split into the following observable roles:
 | `0x0003540C`, `0x00035412`, `0x00035760`, `0x00035766` | 4 | typed register read/write and one-byte wrappers |
 | `0x0003541C`, `0x00050608`, `0x000507A0`, `0x000507AC` | 4 | status-line readiness, lock/release, and completion seams |
 | `0x00035508` | 1 | eight-code minimum-distance float ladder with strict-less tie behavior and register-1 upper-field update |
-| `0x000355A8`, `0x000355BC`, `0x00035684` | 3 | register-2 `0xA8`, register-1 bit-1, and register-2 `0xF8` updates |
+| `0x00035594`, `0x000355A8`, `0x000355BC`, `0x00035684` | 4 | register-2 `0x28`/`0xA8`, register-1 bit-1, and register-2 `0xF8` updates |
 | `0x0005C0FA` | 1 | bounded 209-iteration transport delay |
 | `0x0004E9E8`, `0x00050618`, `0x00050750`, `0x0005079C`, `0x00050848` | 5 | pure thunks folded into their typed target functions |
 
@@ -47,8 +47,10 @@ ownership ledger assigns all 36 entries
 - seven header bits followed by a read (`1`) or write (`0`) selector pulse;
 - eight data bits MSB first and XOR parity over each byte;
 - read responses drive parity after every byte except the final byte;
-- bit one and zero use the same edges with recovered delay counts 52 and 13;
-- recovery/idle use the recovered 209-count delay primitive;
+- bit one and zero use the same edges with recovered 52 and 13 us delays;
+- recovery/idle use the recovered 209 us delay primitive; the stock GPIO
+  callback is the Nordic `nrf_delay_us` veneer that scales its argument by 64
+  core cycles;
 - falling and rising edges are each bounded to 1,000 samples;
 - adapter retries number 1 through 9 (the prior “ten attempt” prose was corrected);
 - chip ID is register 8 and must equal `0xA0`;

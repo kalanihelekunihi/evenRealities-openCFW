@@ -1,0 +1,17 @@
+# Even Realities R1 board configuration
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_OPENR1_NRF52840
+	select SOC_NRF52840_QIAA
+
+if BOARD_OPENR1_NRF52840
+
+config BOARD_OPENR1_ENABLE_DCDC
+	bool "R1 main DC/DC converter"
+	default y
+	select SOC_DCDC_NRF52X
+	help
+	  Match the recovered stock startup action by enabling the nRF52840 main
+	  DC/DC converter. Product settings may change POWER.DCDCEN after startup.
+
+endif

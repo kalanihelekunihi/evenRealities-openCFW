@@ -3,7 +3,42 @@
 #include <stdint.h>
 #include <string.h>
 
+#if defined(R1_USE_TINYCRYPT)
+#include <tinycrypt/aes.h>
+#else
 #include "aes.h"
+#endif
+
+static void secure_clear(void *storage, size_t length);
+
+#if defined(R1_USE_TINYCRYPT)
+typedef struct tc_aes_key_sched_struct r1_aes_context;
+
+static void r1_aes_initialize(r1_aes_context *context,
+                              const uint8_t key[R1_AES_BLOCK_BYTES]) {
+    (void)tc_aes128_set_decrypt_key(context, key);
+}
+
+static void r1_aes_decrypt(r1_aes_context *context,
+                           uint8_t block[R1_AES_BLOCK_BYTES]) {
+    uint8_t plaintext[R1_AES_BLOCK_BYTES];
+    (void)tc_aes_decrypt(plaintext, block, context);
+    memcpy(block, plaintext, sizeof plaintext);
+    secure_clear(plaintext, sizeof plaintext);
+}
+#else
+typedef struct AES_ctx r1_aes_context;
+
+static void r1_aes_initialize(r1_aes_context *context,
+                              const uint8_t key[R1_AES_BLOCK_BYTES]) {
+    AES_init_ctx(context, key);
+}
+
+static void r1_aes_decrypt(r1_aes_context *context,
+                           uint8_t block[R1_AES_BLOCK_BYTES]) {
+    AES_ECB_decrypt(context, block);
+}
+#endif
 
 static void xor_block(uint8_t block[R1_AES_BLOCK_BYTES], const uint8_t *chain) {
     for (size_t index = 0u; index < R1_AES_BLOCK_BYTES; ++index) {
@@ -53,26 +88,26 @@ r1_error r1_dual_aes128_decrypt(const uint8_t *input, size_t length,
 
     memcpy(output, input, length);
 
-    struct AES_ctx context;
-    AES_init_ctx(&context, key + R1_AES_BLOCK_BYTES);
+    r1_aes_context context;
+    r1_aes_initialize(&context, key + R1_AES_BLOCK_BYTES);
     const uint8_t *chain = key;
     size_t block = length / R1_AES_BLOCK_BYTES;
     while (block != 0u) {
         --block;
         uint8_t *current = output + block * R1_AES_BLOCK_BYTES;
-        AES_ECB_decrypt(&context, current);
+        r1_aes_decrypt(&context, current);
         xor_block(current, chain);
         chain = input + block * R1_AES_BLOCK_BYTES;
     }
 
-    AES_init_ctx(&context, key);
+    r1_aes_initialize(&context, key);
     uint8_t chain_block[R1_AES_BLOCK_BYTES];
     memcpy(chain_block, key + R1_AES_BLOCK_BYTES, sizeof chain_block);
     uint8_t previous[R1_AES_BLOCK_BYTES];
     for (block = 0u; block < length / R1_AES_BLOCK_BYTES; ++block) {
         uint8_t *current = output + block * R1_AES_BLOCK_BYTES;
         memcpy(previous, current, sizeof previous);
-        AES_ECB_decrypt(&context, current);
+        r1_aes_decrypt(&context, current);
         xor_block(current, chain_block);
         memcpy(chain_block, previous, sizeof chain_block);
     }

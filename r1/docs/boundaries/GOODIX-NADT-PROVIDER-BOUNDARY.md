@@ -14,7 +14,9 @@ Int16/Int32 autocorrelation pair, the `0x00066900` multiscale maximum mask,
 its `0x00036734` peak-index caller, and the `0x00092A04` / `0x000666A4`
 centered-correlation/normalized-autocorrelation pair, plus the complete `0x00029144`
 dual-window feature/correlation extractor, `0x00037B80` auxiliary state classifier, and
-`0x0007DD58` alternate-state classifier are owner-authorized local C; the preprocessing root is also owner-authorized local C
+`0x0007DD58` alternate-state classifier, `0x00047240` primary-signal classifier,
+`0x000856EC` window classifier, and `0x0006E008` streaming process are
+owner-authorized local C; the preprocessing root is also owner-authorized local C
 with typed stage bindings and caller-owned scratch. The remaining liveness, signal-processing,
 and classifier implementations retain disposition
 `vendor_source_required_not_redistributable`. A matching lawfully obtained Goodix provider is
@@ -51,6 +53,17 @@ return. All five transient stock allocations are explicit caller-owned spans. It
 callees are already source-admitted typed C entries; no recovered address or private allocation is
 retained in the executable path.
 
+The compiler-scattered 1,294-byte streaming process at `0x0006E008`, executable-segment
+SHA-256 `1b8a57e2d23467bbcd143115751d867207f56b1f12de3bada3efb8439795b5ea`, now compiles as
+`goodix_primitives_nadt_stream_process`. Its fixed runtime/configuration globals are expressed as
+typed plan, state, input, output, and caller workspace records. The local entry retains the
+sample-rate-to-25-Hz cadence gate, three-lane sample preparation, four axis-ratio trigger counts,
+two-stage optical transform, online batch means and activity statistics, delayed 100-sample
+primary histories, half-rate 200-sample range history, configuration-marker history, 25-sample
+window dispatch, alternating 12/13-sample range compaction, result-flag emission, and failure
+quality. All algorithm dependencies are existing typed local bindings; no absolute RAM address
+or private allocation remains in the compiled body.
+
 The 874-byte alternate-state classifier at `0x0007DD58`, body SHA-256
 `46240b4aebd8a3f9d4b26e2f109215ddb0793c7005de78f85826dc9ab7711775`, now compiles as
 `goodix_primitives_nadt_alternate_state_classify`. Its fixed 200-sample range and sample gates,
@@ -59,18 +72,48 @@ interval statistics, and consecutive-match transition are typed explicitly. The 
 two extrema banks, and interval bank replace five stock heap allocations with caller-owned
 workspace. The stock processing spin is a checked rejection.
 
+The compiler-scattered 1,154-byte window classifier at `0x000856EC`, executable-segment
+SHA-256 `29e04962b88b0993700f603717f98229bd217e959192d045ee3cd3fbda7f82e1`, now compiles as
+`goodix_primitives_nadt_window_classify`. Its four rolling metric/max/min lanes, two sample
+histories, axis triple, configuration thresholds, persistent counters, result state, and
+diagnostics are explicit bounded records. The local function preserves the exact rounded
+`64 * sqrt(mean / 24)` energy metric, raw-bit axis-ratio band, 100-sample nonzero reset,
+primary/auxiliary precedence, elapsed transition, alternate-classifier promotion, 25-sample
+range evidence, mode/profile thresholds, and wrapping streak counters. The now-local primary,
+auxiliary, and alternate classifiers are typed plan bindings;
+no stock RAM address remains in the compiled body.
+
+The compiler-scattered 3,240-byte primary-signal classifier at `0x00047240`, executable-segment
+SHA-256 `01e21104d3d962a09b4c9087eb0e3a49b56b70ee7ebc1eb4d7aa09236f3ab1ac`, now compiles as
+`goodix_primitives_nadt_primary_signal_classify`. Its paired Int32 windows, activity histories,
+configuration thresholds, shared runtime state, diagnostics, and filter-boundary matrix are
+explicit typed inputs. A fixed caller workspace replaces the stock filtered/residual,
+autocorrelation, extrema, amplitude, and phase-gap allocations. The implementation retains the
+adaptive transition threshold, 23-tap window filter, residual autocorrelation quality, four
+quarter ranges, periodic-rate evidence, both classification-mode counter families, quality
+adjustment, result-three transition, periodic hold, and result bit-two diagnostic signal. Its
+sole caller is the now-local `0x000856EC` window classifier; no absolute RAM or private firmware
+object remains in this path.
+
 The previously unresolved spectral pair is now directly closed by the preprocessing entry:
 
 ```text
 0x0006E838 -> 0x000766AC -> 0x00035850
 ```
 
-`0x000766AC` prepares a resampled spectral window, extracts candidate peaks, and calls
-`0x00035850`; `0x00035850` scores harmonic consistency and selects bounded candidates. The first
-body is now reconstructed as `goodix_primitives_nadt_spectral_peak_prepare`: its private channel
-offset and scale vector/factor are bounded typed inputs, its nine heap temporaries are caller
-workspace, and `0x00035850` is an explicit harmonic-selector binding. The downstream selector
-retains its independent provider gate.
+`0x000766AC` prepares a resampled spectral window, extracts candidate peaks, and calls the
+now-local `0x00035850` harmonic selector. The first body is reconstructed as
+`goodix_primitives_nadt_spectral_peak_prepare`: its private channel offset and scale vector/factor
+are bounded typed inputs and its nine heap temporaries are caller workspace.
+
+The 1,162-byte compiler-scattered selector,
+SHA-256 `c9fbb161215e9026649909ed8ef04b628221d7d51cbd4affb3c04f0a4c6a6c7a`, compiles as
+`goodix_primitives_nadt_harmonic_candidates_select`. Its three harmonic lanes, nearest-peak
+indices/values, admission flags, fit normalization, and selected family live in a fixed caller
+workspace replacing six stock allocations. The exact 60-unit bin scaling, harmonic-dependent
+distance gates, tie-by-peak-value rule, weighted fundamental estimate, normalized fit limit,
+amplitude preference, and bounded duplicate rejection are explicit; square root is a typed
+dependency. It is an explicit harmonic-selector binding in the spectral preparation plan.
 
 The preprocessing core also has one direct child that the earlier census missed:
 
@@ -176,7 +219,7 @@ belongs to Goodix.
 | `0x00034194` | 630 | nineteen-operator generated-model subgraph with explicit range words and fixed workspace; source-admitted |
 | `0x0003497C` | 180 | NADT peak-quality helper |
 | `0x000357A2` | 44 | NADT sample statistic helper |
-| `0x00035850` | 1,162 | NADT harmonic-candidate selector |
+| `0x00035850` | 1,162 | bounded three-lane NADT harmonic-candidate selector with caller workspace; source-admitted |
 | `0x00035F70` | 192 | NADT signal normalization helper |
 | `0x00036034` | 394 | three-lane direct/calibrated NADT sample preparation with caller-owned previous-configuration state; source-admitted |
 | `0x000361D8` | 88 | capped squared-deviation statistic; source-admitted |
@@ -191,7 +234,7 @@ belongs to Goodix.
 | `0x00037B80` | 554 | final-50 range/deviation/extrema auxiliary state classifier with explicit state and caller workspace; source-admitted |
 | `0x0003E6C8` | 216 | NADT Gaussian interval-probability helper; source-admitted |
 | `0x00042BD0` | 316 | NADT periodic-peak rate estimator with caller-owned selection/difference scratch; source-admitted |
-| `0x00047240` | 3,240 | NADT primary signal classifier |
+| `0x00047240` | 3,240 | NADT primary signal classifier with fixed caller workspace and typed state/configuration; source-admitted |
 | `0x0005144C` | 66 | signed-32 vector mean; source-admitted |
 | `0x0005CED4` | 158 | signed min/max and Float32 online-statistics update; source-admitted |
 | `0x00061F94` | 30 | NADT sample-mean wrapper |
@@ -203,7 +246,7 @@ belongs to Goodix.
 | `0x000668DC` | 36 | NADT minimum-index helper |
 | `0x00066900` | 434 | NADT local-maximum mask helper; source-admitted |
 | `0x00066B30` | 222 | NADT reflected-boundary signed-int FIR helper; source-admitted |
-| `0x0006E008` | 1,294 | GH_NADT streaming process |
+| `0x0006E008` | 1,294 | GH_NADT 25-Hz streaming process with typed plan/state and fixed caller workspace; source-admitted |
 | `0x0006E540` | 4 | GH_NADT result accessor; source-admitted as explicit binding |
 | `0x0006E548` | 30 | GH_NADT public-version copier |
 | `0x0006E574` | 210 | GH_NADT state reset; source-admitted with typed workspace and release binding |
@@ -214,7 +257,7 @@ belongs to Goodix.
 | `0x000766AC` | 478 | fixed-125 NADT spectral peak-preparation pipeline with caller workspace and explicit harmonic-selector binding; source-admitted |
 | `0x0007DCD8` | 60 | NADT sample-variance helper; source-admitted |
 | `0x0007DD58` | 874 | fixed-200 NADT alternate-state classifier with typed state and caller-owned workspace; source-admitted |
-| `0x000856EC` | 1,154 | NADT window classifier |
+| `0x000856EC` | 1,154 | NADT window classifier with bounded histories, typed state, and explicit classifier plan; source-admitted |
 | `0x00087618` | 176 | NADT turning-point index extractor; source-admitted |
 | `0x000928E0` | 26 | NADT sum-of-squares helper |
 | `0x00092A04` | 336 | NADT correlation/convolution helper; source-admitted |
@@ -240,13 +283,19 @@ The historically paired bodies are independently hash-pinned as
 executable bytes of `0x00035850` and
 `adf8c54c2b2af59806f5a940cb1470aa71c010e3918ce4725559063151b25c33` for the 478-byte
 `0x000766AC` body; the latter now maps to the source-admitted typed pipeline
-while `0x00035850` remains provider-gated.
+and now maps to `goodix_primitives_nadt_harmonic_candidates_select`.
 The later 744-byte `0x00036F88` closure is pinned as
 `1c454b3b53453c7d2e53dc9c04a6ed66c3d82d85b1e3dc7d389085d1cc59f3f3`.
 The 682-byte preprocessing root `0x0006E838` is pinned as
 `d0e8d34ddfaf97ba47f66e94aa6a104b3efac71452ecb02f4f5a25379f04f656`.
 The 874-byte alternate-state classifier `0x0007DD58` is pinned as
 `46240b4aebd8a3f9d4b26e2f109215ddb0793c7005de78f85826dc9ab7711775`.
+The 1,154-byte window classifier `0x000856EC` is pinned as
+`29e04962b88b0993700f603717f98229bd217e959192d045ee3cd3fbda7f82e1`.
+The 3,240-byte primary-signal classifier `0x00047240` is pinned as
+`01e21104d3d962a09b4c9087eb0e3a49b56b70ee7ebc1eb4d7aa09236f3ab1ac`.
+The 1,294-byte streaming process `0x0006E008` is pinned as
+`1b8a57e2d23467bbcd143115751d867207f56b1f12de3bada3efb8439795b5ea`.
 The nineteen-function signal-confidence graph is pinned as 3,246 executable bytes; its entry is
 `0x00095828`, whose 674-byte body SHA-256 is
 `509a3440ed4c47ba3c10db0911eb66bff2fbe1bf804e294ad5fe024dad5b98eb`.

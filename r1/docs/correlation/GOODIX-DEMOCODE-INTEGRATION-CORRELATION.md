@@ -1,7 +1,7 @@
 # Goodix GH3X2X democode integration correlation
 
-This note documents how the pinned Goodix GH3X2X democode is compiled into the openR1 builds and
-the Nordic SDK image, which parts of the vendor tree are admitted, and how every external symbol
+This note documents how the pinned Goodix GH3X2X democode is compiled into the openR1 host,
+Nordic SDK, and source-built Zephyr images, which parts of the vendor tree are admitted, and how every external symbol
 the admitted subset needs is satisfied. Evidence: the per-entry mapping
 [`../boundaries/GOODIX-DEMO-DRIVER-MAPPING-2026-08.md`](../boundaries/GOODIX-DEMO-DRIVER-MAPPING-2026-08.md)
 (97 ledger entries mapped function-level onto this tree) and the `goodix-gh3x2x-democode` pin in
@@ -13,7 +13,8 @@ linked).
 
 ## Admitted subset (compiled from the pinned tree, unmodified)
 
-Consumed via `GOODIX_DEMOCODE_ROOT`; the tree itself is never edited.
+Consumed via `GOODIX_DEMOCODE_ROOT` (and passed to Zephyr as
+`OPENR1_GOODIX_DEMOCODE_ROOT`); the tree itself is never edited.
 
 - `demo_code/demo_kernel_code/driver/src/gh_drv_config.c`
 - `demo_code/demo_kernel_code/driver/src/gh_drv_control.c`
@@ -34,8 +35,9 @@ Deliberately excluded:
 
 - `algo_lib/*/*.a`, `drv_lib/*.a` — Armv8-M.mainline (STAR-MC1, FPv5) objects; cannot execute on
   the Cortex-M4F and are license-blocked from analysis.
-- `demo_code/demo_algo_code/` — the algorithm-call layer; C source, but every entry point depends
-  on the absent algorithm archives and the binary-only `goodix_mem` pool manager.
+- `demo_code/demo_algo_code/` — the algorithm-call layer; C source, but its global frame/result ABI
+  depends on the absent algorithm archives. The corresponding recovered typed algorithm and
+  `goodix_mem` bodies remain transparent local C rather than being replaced by those archives.
 - `demo_code/demo_kernel_code/kernel/gh_demo_protocol.c` and `module/gh_protocol/` — the Goodix
   PC-tool upload protocol parser; excluded so the driver gains no external command surface.
 - `module/gh_ecg/` — ECG front-end; the R1 ring has no ECG and the configuration disables it.
@@ -55,9 +57,9 @@ archive. The R1 firmware contains these bodies compiled from `gh_drv_control.c` 
 `gh_demo_config.h`, so the include-path overlay is sufficient and the vendor file stays untouched.
 The interface stays on I2C at device base `0x28` (`GH3X2X_I2C_ID_SEL_1L0L`), exactly as recovered.
 
-The democode version strings embed `__DATE__`/`__TIME__`; the SDK Makefile pins them
+The democode version strings embed `__DATE__`/`__TIME__`; both target builds pin them
 (`-D__DATE__="Aug 14 2026" -D__TIME__="00:00:00"` with `-Wno-builtin-macro-redefined`) so the
-image remains bit-reproducible for `tools/verify_sdk_image.py`.
+unsigned target code remains deterministic.
 
 ## External-symbol classification
 
@@ -95,19 +97,24 @@ fabricated data. `r1_gh3x2x_bind.c` adapts the kernel entry points to the existi
 negative democode codes); `Gh3x2xDemoStartSampling`/`Gh3x2xDemoStopSampling` return `void`
 upstream, and driver-level failures already surface through `Gh3x2xDemoInit`.
 
-### (c) Absent algorithm/protocol symbols — fail-closed R1 stubs
+### (c) Unbound democode algorithm/protocol ABI — fail-closed R1 bridge
 
 Implemented in `r1/port/goodix_gh3x2x/r1_gh3x2x_stubs.c` with vendor headers included so the
-signatures are checked against the real prototypes. No stub fabricates sensor or biometric data.
+signatures are checked against the real prototypes. All inventoried Goodix executable bodies and
+their generated-model data now compile from transparent local source and are retained in the
+Nordic image. The table below describes the still-unbound *democode global ABI bridge*, not absent
+source: a checked adapter must map its function-ID/frame/result globals onto the recovered
+routines' narrow typed contracts before live calculation can be enabled. No bridge function
+fabricates sensor or biometric data.
 
 | Stub | Behavior | Why absent |
 | --- | --- | --- |
-| `GH3X2X_AlgoInit` / `GH3X2X_AlgoDeinit` / `GH3X2X_AlgoCalculate` | return `GH3X2X_RET_RESOURCE_ERROR` (-5) | binary-only algorithm archives (HR/HRV/NADT/SPO2+dlCom), unusable on Cortex-M4F |
+| `GH3X2X_AlgoInit` / `GH3X2X_AlgoDeinit` / `GH3X2X_AlgoCalculate` | return `GH3X2X_RET_RESOURCE_ERROR` (-5) | typed reconstructed algorithms are retained, but the global democode frame/lifecycle/result adapter is not yet admitted |
 | `GH3X2X_AlgoSensorEnable` | no-op | same |
-| `GH3X2X_AlgoVersion` / `GH3X2X_GetVersion` | write the democode's own `no_ver` absent-version marker | same / protocol version getter from the excluded PC-tool protocol |
-| `GH3X2X_AlgoCallConfigInit` / `GH3X2X_WriteAlgConfigWithVirtualReg` | no-op; algorithm virtual-reg window writes are dropped while hardware register windows below `0x3000` are still applied by the compiled driver | algorithm-call layer depends on the archives and `goodix_mem` |
-| `GH3X2X_TimestampSync{AccInit,PpgInit,SetPpgIntFlag,FillAccSyncBuffer,FillPpgSyncBuffer}` | no-op | ACC/PPG sync lives in the absent algorithm-call layer |
-| `GH3X2X_TimestampSyncGetFrameDataFlag` | returns 0 (no synchronized frame data) | same |
+| `GH3X2X_AlgoVersion` / `GH3X2X_GetVersion` | write the democode's own `no_ver` unavailable-binding marker | typed version builders exist; the aggregate democode query bridge is not yet bound / protocol version getter belongs to the excluded PC-tool protocol |
+| `GH3X2X_AlgoCallConfigInit` / `GH3X2X_WriteAlgConfigWithVirtualReg` | no-op; algorithm virtual-reg window writes are dropped while hardware register windows below `0x3000` are still applied by the compiled driver | typed configuration/model bindings exist, but the democode-global translation is not yet checked |
+| `GH3X2X_TimestampSync{AccInit,PpgInit,SetPpgIntFlag,FillAccSyncBuffer,FillPpgSyncBuffer}` | no-op | ACC/PPG synchronization has not yet been adapted to the typed reconstructed stream state |
+| `GH3X2X_TimestampSyncGetFrameDataFlag` | returns 1 | exact matched public-democode and recovered `0x0002AE00` behavior |
 | `GH3X2X_UprotocolPacketFormat` | returns 0 (zero-length packet) | PC-tool upload protocol excluded — no external command surface |
 | `Gh2x2xUploadDataToMaster` / `Gh3x2xDemoSendProtocolData` | drop payloads | same |
 
@@ -119,12 +126,23 @@ calls.
 
 ## Reachability and boot behavior
 
-The provider is compiled and linked but intentionally not live-wired: `main.c` retains
-`r1_gh3x2x_bind_provider_ops`, the `Gh3x2xPoolIsNotEnough` surface, and the SPO2 config table in
-the existing `.openr1_frontier_api` section so `--gc-sections` keeps them, matching the project's
-provider-boundary retention idiom. No board ops exist yet, so no command path — BLE or otherwise —
-can reach the driver, and startup, signing, and DFU behavior are unchanged. Live binding (TWIM1
-arbiter bus ops, INT/reset pins, delay source) is a separate, auditable step.
+The legacy Nordic SDK target still retains the provider without board operations or a command
+route. The source-built Zephyr target now binds the acquisition transport and lifecycle from
+transparent source. It uses the recovered software `i2c_4` engine on SCL P1.09 and SDA P0.31,
+keeps the Goodix eight-bit device ID `0x28`, converts the two command bytes to a big-endian
+16-bit register for reads, and forwards writes exactly as the democode supplied them. P0.21 is
+the falling-edge interrupt, P0.10 controls the emitter, and P1.04 controls reset. The interrupt
+handler schedules a worker that calls `Gh3x2xDemoInterruptProcess`; motion FIFO samples can feed
+the public democode alignment callback. Board preparation acquires YHM2710 optical client bit 1,
+and shutdown disables the interrupt, releases the software bus pins, deasserts emitter/reset,
+and releases the lease.
+
+Zephyr startup only installs those source bindings and configures emitter/reset inactive. It does
+not acquire the rail, initialize the chip, or start sampling. Start/switch/stop remain retained
+typed platform APIs with no BLE or other wire command route. Raw-frame notifications increment a
+diagnostic count; they are not interpreted as HR, SpO2, HRV, or any other biometric result. The
+democode global algorithm ABI remains fail-closed as described above, so hardware-register and
+raw-acquisition work cannot silently fabricate health output.
 
 ## Verification
 
@@ -144,3 +162,8 @@ arbiter bus ops, INT/reset pins, delay source) is a separate, auditable step.
   and requires the democode objects and key symbols (`GH3X2X_Init`,
   `GH3X2X_RegisterI2cOperationFunc`, `GH3X2X_ReadFifodata`, `Gh3x2xDemoStartSampling`,
   `Gh3x2xPoolIsNotEnough`, the stub names, …) in the map.
+- `make -C r1 zephyr-bundle ... GOODIX_DEMOCODE_ROOT=...` hash-gates the 57-file admitted
+  source/header/license set, compiles the same 13 upstream translation units plus the three local
+  port/bind/fail-closed units, and requires nonempty loadable spans for all 16 objects. The offline
+  source-boundary verifier also pins the software-`i2c_4` pins, device ID, devicetree GPIOs,
+  YHM client, interrupt worker, startup order, no-boot-sampling rule, and fail-closed algorithm ABI.

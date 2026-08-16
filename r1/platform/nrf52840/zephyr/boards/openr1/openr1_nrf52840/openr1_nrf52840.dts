@@ -1,0 +1,148 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+
+/dts-v1/;
+#include <nordic/nrf52840_qiaa.dtsi>
+#include <zephyr/dt-bindings/adc/adc.h>
+#include <zephyr/dt-bindings/adc/nrf-adc.h>
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/i2c/i2c.h>
+#include "openr1_nrf52840-pinctrl.dtsi"
+
+/ {
+	model = "Even Realities R1 Smart Ring";
+	compatible = "openr1,r1-nrf52840";
+
+	chosen {
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+		zephyr,code-partition = &slot0_partition;
+		zephyr,settings-partition = &settings_partition;
+	};
+
+	aliases {
+		watchdog0 = &wdt0;
+	};
+
+	openr1_analog: openr1_motion: openr1_touch: openr1_nfc: openr1_power: openr1_optical: zephyr,user {
+		io-channels = <&adc 0>, <&adc 1>, <&adc 2>;
+		io-channel-names = "battery", "pmic-current", "nfc-rectifier";
+		motion-bus = <&i2c1>;
+		motion-interrupt-gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
+		touch-bus = <&i2c0>;
+		touch-ldo-gpios = <&gpio0 30 GPIO_ACTIVE_HIGH>;
+		touch-rdy-gpios = <&gpio0 17 GPIO_ACTIVE_HIGH>;
+		nfc-bus = <&i2c1>;
+		nfc-gpo-gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
+		nfc-enable-gpios = <&gpio1 10 GPIO_ACTIVE_HIGH>;
+		pmic-stacmd-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
+		optical-interrupt-gpios = <&gpio0 21 GPIO_ACTIVE_LOW>;
+		optical-emitter-gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;
+		optical-reset-gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+	};
+};
+&uicr {
+	gpio-as-nreset;
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&wdt0 {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&gpio1 {
+	status = "okay";
+};
+
+&adc {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	channel@0 {
+		reg = <0>;
+		zephyr,gain = "ADC_GAIN_1_2";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)>;
+		zephyr,input-positive = <NRF_SAADC_AIN5>; /* P0.29: battery */
+		zephyr,resolution = <12>;
+		zephyr,oversampling = <0>;
+	};
+
+	channel@1 {
+		reg = <1>;
+		zephyr,gain = "ADC_GAIN_1_2";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)>;
+		zephyr,input-positive = <NRF_SAADC_AIN3>; /* P0.05: PMIC current */
+		zephyr,resolution = <12>;
+		zephyr,oversampling = <0>;
+	};
+
+	channel@2 {
+		reg = <2>;
+		zephyr,gain = "ADC_GAIN_1_6";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 10)>;
+		zephyr,input-positive = <NRF_SAADC_AIN2>; /* P0.04: NFC rectifier */
+		zephyr,resolution = <12>;
+		zephyr,oversampling = <0>;
+	};
+};
+
+&i2c1 {
+	compatible = "nordic,nrf-twim";
+	status = "okay";
+	clock-frequency = <I2C_BITRATE_FAST>;
+	pinctrl-0 = <&i2c1_default>;
+	pinctrl-1 = <&i2c1_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&i2c0 {
+	compatible = "nordic,nrf-twim";
+	status = "okay";
+	clock-frequency = <I2C_BITRATE_FAST>;
+	pinctrl-0 = <&i2c0_default>;
+	pinctrl-1 = <&i2c0_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&flash0 {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		boot_partition: partition@0 {
+			label = "mcuboot";
+			reg = <0x00000000 0x0000c000>;
+		};
+
+		slot0_partition: partition@c000 {
+			label = "image-0";
+			reg = <0x0000c000 0x000c5000>;
+		};
+
+		settings_partition: partition@d1000 {
+			label = "openr1-settings";
+			reg = <0x000d1000 0x00003000>;
+		};
+
+		openr1_data_partition: partition@d4000 {
+			label = "openr1-data";
+			reg = <0x000d4000 0x00024000>;
+		};
+
+		migration_reserve_partition: partition@f8000 {
+			label = "retail-boot-migration-reserve";
+			reg = <0x000f8000 0x00008000>;
+		};
+	};
+};

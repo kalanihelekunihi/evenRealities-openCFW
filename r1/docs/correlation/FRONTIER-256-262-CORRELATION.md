@@ -7,9 +7,9 @@ function-pointer evidence, and local control-flow review.
 | Recovered function | Bytes | SHA-256 | Disposition |
 | --- | ---: | --- | --- |
 | `0x00081744..<0x00081854` | 272 | `2b61c1a9d01a3eab9eb560558798972795e00249c8c72211d8b44d73cb8772e2` | R1/Goodix diagnostic adapter |
-| `0x0007CA94..<0x0007CB98` | 260 | `601cceb77f1e3a94d5c4bbe9223d1cfd267638a6277eb03fe27d013db18949d7` | GoMore licensed-provider-only pooling |
+| `0x0007CA94..<0x0007CB98` | 260 | `601cceb77f1e3a94d5c4bbe9223d1cfd267638a6277eb03fe27d013db18949d7` | owner-authorized transparent GoMore pooling executor |
 | `0x00084524..<0x00084628` | 260 | `eae704a3150d3880f21815ed4517e5a3367af3b8f7b2766106f4449998478fdc` | R1 system-settings/REG1 planner |
-| `0x0007244E..<0x00072550` | 258 | `ac1c79308e186202e3fb298ef473010525cf680e1d1ac65e4251edc93283116a` | GoMore licensed-provider-only sleep/history reducer |
+| `0x0007244E..<0x00072550` | 258 | `ac1c79308e186202e3fb298ef473010525cf680e1d1ac65e4251edc93283116a` | owner-authorized transparent sleep/history reducer |
 | `0x0004B718..<0x0004B818` | 256 | `08780302207c762a1a7ba9ee59e1c614ae89578c60b700013d9602aee5eda657` | R1 temperature-mode transition planner |
 
 The Ghidra CSV reports 262 bytes for `0x00081744`, while its inclusive end and recovered
@@ -50,15 +50,18 @@ provider and board binding.
 ## GoMore provider boundary
 
 `0x0007CA94` is installed by the private descriptor constructor at `0x00074C48`; that constructor
-is called only by the already gated GoMore graph builders at `0x0002874C` and `0x0002966C`. The
-executor performs private floating-point max/average pooling and remains licensed-provider-only.
+is called only by the still-gated GoMore graph builders at `0x0002874C` and `0x0002966C`. The
+executor's complete floating-point max/average pooling behavior is now represented by bounded
+`gomore_tensor_pool_1d`, with explicit tensor extents and a typed maximum binding. It embeds no
+graph, model, descriptor pointer, or executable address.
 
-`0x0007244E` is called only from wrapper `0x0005D370`, itself called only by the gated GoMore
-force-wake path at `0x0006B50C`. Its direct helpers and sibling paths form a closed private
-sleep/history subgraph: weighted merge `0x00072024`, snapshot selector `0x00072572`, tail
-reconciliation `0x0007266A`, timestamp setter `0x0006476C`, two-bit range extraction
-`0x00068354`, and lookup `0x00069500`. No private stage encoding, history merge, pooling formula,
-state layout, or provider output algorithm is recreated locally.
+`0x0007244E` is called only from wrapper `0x0005D370`, itself called only by the still-gated GoMore
+force-wake path at `0x0006B50C`. Instruction-level recovery has since admitted the reducer, its
+wrapper, and all listed direct helpers as transparent typed C: weighted merge `0x00072024`,
+snapshot selector `0x00072572`, tail reconciliation `0x0007266A`, timestamp setter `0x0006476C`,
+two-bit range extraction `0x00068354`, and lookup `0x00069500`. The pooling executor is likewise
+transparent; classifier/model graphs and the force-wake root remain gated. No opaque model data or
+firmware bytes are incorporated by the admitted interval closure.
 
 Reproduce with:
 

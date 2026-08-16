@@ -1,428 +1,77 @@
 {
   "analysis_mode": "read-only; no signing, flashing, erase, or hardware operation",
-  "buckets": [
+  "external_observations": [
     {
-      "bucket": "base",
-      "functions": 128,
-      "official_opaque_bytes": 16570
+      "attribution": "FT_Stream_Open (vendor ftsystem; docs/research/freetype-recovery-audit.md stream support)",
+      "confidence": "high",
+      "entry": 5666280,
+      "evidence": "documented-external",
+      "module": "base",
+      "parent_bucket": "path-anchored"
     },
     {
-      "bucket": "investigation-required",
-      "functions": 216,
-      "official_opaque_bytes": 59392
+      "attribution": "FT_New_Memory (am_ftsystem.c; docs/research/freetype-recovery-audit.md section 5)",
+      "confidence": "high",
+      "entry": 5666464,
+      "evidence": "documented-external",
+      "module": "base",
+      "parent_bucket": "investigation-required-no-evidence"
+    },
+    {
+      "attribution": "FT_Done_Memory (am_ftsystem.c; docs/research/freetype-recovery-audit.md section 5)",
+      "confidence": "high",
+      "entry": 5666502,
+      "evidence": "documented-external",
+      "module": "base",
+      "parent_bucket": "investigation-required-no-evidence"
+    },
+    {
+      "attribution": "FT_Stream_New candidate (static, ftobjs.c); body dispatches FT_OPEN_MEMORY/FT_OPEN_PATHNAME/FT_OPEN_STREAM",
+      "confidence": "medium",
+      "entry": 5394326,
+      "evidence": "anchor-callee-external",
+      "module": "base",
+      "parent_bucket": "lvgl"
     }
-  ],
-  "evidence_counts": {
-    "call-topology-single-module": 3,
-    "link-order-sandwich": 113,
-    "module-string-signature": 5,
-    "none": 216,
-    "recovery-audit-anchor": 7
-  },
-  "g2_modules_in_link_order": [
-    "autofit",
-    "truetype",
-    "cff",
-    "psaux",
-    "psnames",
-    "pshinter",
-    "sfnt",
-    "smooth"
   ],
   "inputs": {
-    "freetype_provenance_sha256": "2be8717625bceddee3aa95663186c0629247304c951c4790bc26cd372e3794bf",
-    "g2_ftmodule_sha256": "522c1d358dce8a141b2f8afec7020f66bf800d3d829a1ad22f3418ebf3f05d74",
+    "ghidra_sha256sums_sha256": "87d0befa001f042918bd6af83b0f50e13dd95aab160b0e520f2cb0bc55c6404e",
     "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
-    "parent_manifest_sha256": "a36c51c0084e51b6e64fc902ab58be16fa76f2c3b361c3ae543f378a8c1f7b96"
+    "provenance": "PROVENANCE.json",
+    "snapshot": "third_party/freetype (PROVENANCE.json-verified sources)"
   },
   "limitations": [
-    "module buckets are evidence triage, not per-function source ownership or behavioral reconstruction",
-    "link-order-sandwich labels are low-confidence hypotheses for queue ordering, never proof of ownership",
-    "only the base module has seed anchors inside the 0x51/0x52xxxx ranges; everything below the first base anchor (0x005242FC) cannot sandwich and mostly stays investigation-required",
-    "identical string literals merged by the linker across providers could in principle mislabel a string-signature seed; every derived seed is pinned and re-validated on every run",
-    "functions whose code Ghidra covered only inside the eight rejected oversized envelopes cannot seed function-level topology"
+    "module attribution is evidence-tiered triage, not per-function source ownership or behavioral reconstruction",
+    "the face-open path is vendor-extended (the 9-slot font fallback loader below FT_Open_Face); cluster membership does not imply stock 2.9.1 bodies",
+    "base-call-graph-indirect members rest on community topology alone; shared utility functions also called by other modules are included at low confidence",
+    "upstream-table-match located seven snapshot constant tables in the image, all referenced only outside this frontier; the CFF/TrueType/sfnt/smooth/autofit driver bodies are therefore bounded outside the 0x51/0x52xxxx regions",
+    "Ghidra envelope boundaries are analyzer artifacts inherited from the corpus"
+  ],
+  "module_summary": [
+    {
+      "functions": 83,
+      "module": "base",
+      "official_opaque_bytes": 7874
+    }
   ],
   "reconciliation": {
-    "census_functions": 344,
-    "census_official_bytes": 75962,
-    "parent_freetype_bucket_functions": 2,
-    "parent_freetype_bucket_official_bytes": 946,
-    "parent_frontier_functions": 342,
-    "parent_frontier_official_bytes": 75016
+    "attributed_functions": 83,
+    "attributed_official_bytes": 7874,
+    "external_observations": 4,
+    "freetype_bucket_functions": 2,
+    "freetype_bucket_official_bytes": 946,
+    "frontier_51_functions": 87,
+    "frontier_51_official_bytes": 36812,
+    "frontier_52_functions": 255,
+    "frontier_52_official_bytes": 38204,
+    "frontier_functions": 342,
+    "frontier_official_bytes": 75016,
+    "investigation_functions": 261,
+    "investigation_official_bytes": 68088,
+    "scope_functions": 344,
+    "snapshot_tables_located": 7,
+    "snapshot_tables_parsed": 8
   },
-  "resolved_seed_conflicts": [
-    {
-      "entry": "0x00527F0A",
-      "kept_evidence": "module-string-signature",
-      "kept_module": "base",
-      "service_id": "properties",
-      "service_table_module": "cff"
-    },
-    {
-      "entry": "0x00527FF2",
-      "kept_evidence": "module-string-signature",
-      "kept_module": "base",
-      "service_id": "properties",
-      "service_table_module": "cff"
-    }
-  ],
   "schema_version": 1,
-  "seeds": [
-    {
-      "entry": 5391100,
-      "evidence": "recovery-audit-anchor",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5391132,
-      "evidence": "recovery-audit-anchor",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5395828,
-      "evidence": "module-string-signature",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5396648,
-      "evidence": "recovery-audit-anchor",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5399718,
-      "evidence": "recovery-audit-anchor",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5400596,
-      "evidence": "recovery-audit-anchor",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5403292,
-      "evidence": "recovery-audit-anchor",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5403826,
-      "evidence": "recovery-audit-anchor",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5406474,
-      "evidence": "module-string-signature",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5406706,
-      "evidence": "module-string-signature",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5408212,
-      "evidence": "module-string-signature",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5408300,
-      "evidence": "module-string-signature",
-      "in_census_set": true,
-      "module": "base"
-    },
-    {
-      "entry": 5733756,
-      "evidence": "module-string-signature",
-      "in_census_set": false,
-      "module": "sfnt"
-    },
-    {
-      "entry": 5924950,
-      "evidence": "module-string-signature",
-      "in_census_set": false,
-      "module": "autofit"
-    },
-    {
-      "entry": 5936680,
-      "evidence": "module-string-signature",
-      "in_census_set": false,
-      "module": "autofit"
-    },
-    {
-      "entry": 5945176,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "autofit"
-    },
-    {
-      "entry": 5945494,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "autofit"
-    },
-    {
-      "entry": 5945740,
-      "evidence": "module-class-callback",
-      "in_census_set": false,
-      "module": "autofit"
-    },
-    {
-      "entry": 5947378,
-      "evidence": "module-class-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5947434,
-      "evidence": "module-class-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5947712,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5947836,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5955000,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5957104,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5957626,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5958288,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5961078,
-      "evidence": "module-class-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 5961868,
-      "evidence": "module-class-callback",
-      "in_census_set": false,
-      "module": "cff"
-    },
-    {
-      "entry": 6094586,
-      "evidence": "module-string-signature",
-      "in_census_set": false,
-      "module": "psaux"
-    },
-    {
-      "entry": 6133120,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "psnames"
-    },
-    {
-      "entry": 6133526,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "psnames"
-    },
-    {
-      "entry": 6133824,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "psnames"
-    },
-    {
-      "entry": 6133904,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "psnames"
-    },
-    {
-      "entry": 6135524,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6135746,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6138524,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "sfnt"
-    },
-    {
-      "entry": 6157444,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "sfnt"
-    },
-    {
-      "entry": 6168658,
-      "evidence": "raster-funcs-callback",
-      "in_census_set": false,
-      "module": "smooth"
-    },
-    {
-      "entry": 6169124,
-      "evidence": "raster-funcs-callback",
-      "in_census_set": false,
-      "module": "smooth"
-    },
-    {
-      "entry": 6169160,
-      "evidence": "raster-funcs-callback",
-      "in_census_set": false,
-      "module": "smooth"
-    },
-    {
-      "entry": 6169312,
-      "evidence": "recovery-audit-anchor",
-      "in_census_set": false,
-      "module": "smooth"
-    },
-    {
-      "entry": 6234718,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6236318,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6238366,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6238924,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6242288,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6242518,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6260764,
-      "evidence": "module-class-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6261180,
-      "evidence": "module-class-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    },
-    {
-      "entry": 6263196,
-      "evidence": "service-record-callback",
-      "in_census_set": false,
-      "module": "truetype"
-    }
-  ],
-  "service_tables": [
-    {
-      "address": "0x006E2750",
-      "module": "cff",
-      "service_ids": [
-        "font-format",
-        "multi-masters",
-        "metrics-variations",
-        "postscript-info",
-        "postscript-font-name",
-        "glyph-dict",
-        "tt-cmaps",
-        "CID",
-        "properties",
-        "cff-load"
-      ]
-    },
-    {
-      "address": "0x00725060",
-      "module": "truetype",
-      "service_ids": [
-        "font-format",
-        "multi-masters",
-        "metrics-variations",
-        "truetype-engine",
-        "tt-glyf",
-        "properties"
-      ]
-    },
-    {
-      "address": "0x00738B04",
-      "module": "sfnt",
-      "service_ids": [
-        "sfnt-table",
-        "postscript-font-name",
-        "glyph-dict",
-        "bdf",
-        "tt-cmaps"
-      ]
-    },
-    {
-      "address": "0x00785370",
-      "module": "autofit",
-      "service_ids": [
-        "properties"
-      ]
-    },
-    {
-      "address": "0x00788430",
-      "module": "psnames",
-      "service_ids": [
-        "postscript-cmaps"
-      ]
-    }
-  ],
-  "target": "official G2 s200_v2.2.6.10 Apollo main FreeType 2.9.1 engine"
+  "target": "official G2 s200_v2.2.6.10 Apollo main"
 }

@@ -15,6 +15,7 @@ void test_reconstructed_generic_device_registry(void);
 void test_reconstructed_software_twi(void);
 void test_reconstructed_sensor_stream(void);
 void test_reconstructed_time_calendar(void);
+void test_reconstructed_model_data(void);
 void test_reconstructed_quantized_runtime(void);
 void test_reconstructed_gxt310(void);
 void test_reconstructed_qma6100(void);
@@ -3516,6 +3517,252 @@ static void assert_health_db_events(
     for (size_t index = 0u; index < expected_count; ++index) {
         assert(trace->events[index] == expected[index]);
     }
+}
+
+static uint32_t health_db_test_pack_activity(
+    uint16_t steps, uint16_t active_kilocalories,
+    uint16_t all_kilocalories) {
+    return ((uint32_t)steps & UINT32_C(0x0fff))
+        | (((uint32_t)active_kilocalories & UINT32_C(0x03ff)) << 12u)
+        | (((uint32_t)all_kilocalories & UINT32_C(0x03ff)) << 22u);
+}
+
+static void test_health_database_record_codec_and_restore(void) {
+    uint8_t body[R1_HEALTH_DB_RECORD_BYTES] = {0};
+    body[0] = UINT8_C(0xd4);
+    body[1] = UINT8_C(0xfe); /* -300 minutes */
+    body[2] = UINT8_C(0x5a);
+    body[3] = UINT8_C(0xa5);
+    body[4] = UINT8_C(0x78);
+    body[5] = UINT8_C(0x56);
+    body[6] = UINT8_C(0x34);
+    body[7] = UINT8_C(0x12);
+    for (size_t index = 8u; index < 20u; ++index) {
+        body[index] = (uint8_t)(index + 30u);
+    }
+    const uint32_t activity_words[R1_HEALTH_DB_ACTIVITY_BUCKETS] = {
+        UINT32_C(0x00000001), UINT32_C(0x12345678),
+        UINT32_C(0xffffffff), UINT32_C(0x80000000),
+        UINT32_C(0x00abcdef), UINT32_C(0x01020304),
+    };
+    for (size_t index = 0u; index < R1_HEALTH_DB_ACTIVITY_BUCKETS;
+         ++index) {
+        const uint32_t word = activity_words[index];
+        const size_t offset = 20u + index * 4u;
+        body[offset] = (uint8_t)word;
+        body[offset + 1u] = (uint8_t)(word >> 8u);
+        body[offset + 2u] = (uint8_t)(word >> 16u);
+        body[offset + 3u] = (uint8_t)(word >> 24u);
+    }
+    body[44] = UINT8_C(0x22);
+    body[45] = UINT8_C(0x11);
+    body[46] = UINT8_C(0x44);
+    body[47] = UINT8_C(0x33);
+    body[48] = UINT8_C(0x66);
+    body[49] = UINT8_C(0x55);
+    for (size_t index = R1_HEALTH_DB_POPULATED_BYTES;
+         index < sizeof body; ++index) {
+        body[index] = (uint8_t)(index ^ UINT8_C(0xa7));
+    }
+
+    r1_health_db_record decoded;
+    memset(&decoded, 0x5c, sizeof decoded);
+    assert(r1_health_db_decode_record(NULL, sizeof body, &decoded) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_health_db_decode_record(body, sizeof body, NULL) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_health_db_decode_record(body, sizeof body - 1u, &decoded) ==
+           R1_ERROR_LENGTH);
+    assert(r1_health_db_decode_record(body, sizeof body + 1u, &decoded) ==
+           R1_ERROR_LENGTH);
+    assert(((const uint8_t *)&decoded)[0] == UINT8_C(0x5c));
+    assert(r1_health_db_decode_record(body, sizeof body, &decoded) == R1_OK);
+    assert(decoded.utc_offset_minutes == -300);
+    assert(decoded.reserved == UINT16_C(0xa55a));
+    assert(decoded.recorded_timestamp == UINT32_C(0x12345678));
+    assert(decoded.heart_rate.average == 38u);
+    assert(decoded.heart_rate.maximum == 39u);
+    assert(decoded.heart_rate.minimum == 40u);
+    assert(decoded.spo2.average == 41u);
+    assert(decoded.temperature.maximum == 45u);
+    assert(decoded.stress.minimum == 49u);
+    for (size_t index = 0u; index < R1_HEALTH_DB_ACTIVITY_BUCKETS;
+         ++index) {
+        assert(decoded.activity_packed[index] == activity_words[index]);
+    }
+    assert(decoded.hrv.average == UINT16_C(0x1122));
+    assert(decoded.hrv.maximum == UINT16_C(0x3344));
+    assert(decoded.hrv.minimum == UINT16_C(0x5566));
+    for (size_t index = 0u; index < R1_HEALTH_DB_RESERVED_TAIL_BYTES;
+         ++index) {
+        assert(decoded.reserved_tail[index] ==
+               body[R1_HEALTH_DB_POPULATED_BYTES + index]);
+    }
+
+    uint8_t encoded[R1_HEALTH_DB_RECORD_BYTES];
+    memset(encoded, 0, sizeof encoded);
+    assert(r1_health_db_encode_record(NULL, encoded) == R1_ERROR_ARGUMENT);
+    assert(r1_health_db_encode_record(&decoded, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_health_db_encode_record(&decoded, encoded) == R1_OK);
+    assert(memcmp(encoded, body, sizeof body) == 0);
+
+    r1_activity_history build_activity = {0};
+    const size_t build_start = 23u * R1_ACTIVITY_BUCKETS_PER_HOUR;
+    build_activity.buckets[build_start] =
+        (r1_activity_bucket){12u, 34u, 56u, true};
+    build_activity.buckets[build_start + 1u] =
+        (r1_activity_bucket){99u, 88u, 77u, false};
+    r1_health_u8_history build_hr = {0};
+    r1_health_u8_history build_spo2 = {0};
+    r1_health_u8_history build_temperature = {0};
+    r1_health_u8_history build_stress = {0};
+    r1_health_u16_history build_hrv = {0};
+    build_hr.slots[23] = (r1_health_u8_slot){70u, 95u, 48u, 9u, 600u};
+    build_spo2.slots[23] =
+        (r1_health_u8_slot){97u, 100u, 91u, 8u, 776u};
+    build_temperature.slots[23] =
+        (r1_health_u8_slot){20u, 26u, 14u, 7u, 140u};
+    build_stress.slots[23] =
+        (r1_health_u8_slot){42u, 88u, 7u, 6u, 252u};
+    build_hrv.slots[23] =
+        (r1_health_u16_slot){55u, 120u, 17u, 5u, 275u};
+    r1_health_db_record built;
+    memset(&built, 0xa5, sizeof built);
+    assert(r1_health_db_build_record(
+               0u, UINT32_C(169200), 60, &build_activity, &build_hr,
+               &build_spo2, &build_temperature, &build_stress, &build_hrv,
+               NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_health_db_build_record(
+               24u, UINT32_C(169200), 60, &build_activity, &build_hr,
+               &build_spo2, &build_temperature, &build_stress, &build_hrv,
+               &built) == R1_ERROR_LENGTH);
+    assert(((const uint8_t *)&built)[0] == UINT8_C(0xa5));
+    assert(r1_health_db_build_record(
+               0u, UINT32_C(169200), 60, &build_activity, &build_hr,
+               &build_spo2, &build_temperature, &build_stress, &build_hrv,
+               &built) == R1_OK);
+    assert(built.utc_offset_minutes == 60);
+    assert(built.reserved == 0u);
+    assert(built.recorded_timestamp == UINT32_C(169200));
+    assert(built.heart_rate.average == 70u);
+    assert(built.spo2.maximum == 100u);
+    assert(built.temperature.minimum == 14u);
+    assert(built.stress.average == 42u);
+    assert(built.activity_packed[0] ==
+           health_db_test_pack_activity(12u, 34u, 56u));
+    assert(built.activity_packed[1] == 0u);
+    assert(built.hrv.maximum == UINT16_C(120));
+    for (size_t index = 0u; index < sizeof built.reserved_tail; ++index) {
+        assert(built.reserved_tail[index] == 0u);
+    }
+    assert(r1_health_db_build_record(
+               1u, UINT32_C(21600), -300, NULL, NULL, NULL,
+               NULL, NULL, NULL, &built) == R1_OK);
+    assert(built.recorded_timestamp == UINT32_C(21600));
+    assert(built.heart_rate.average == 0u);
+    assert(built.activity_packed[0] == 0u);
+
+    r1_health_db_record record = {
+        .utc_offset_minutes = -300,
+        .reserved = UINT16_C(0xbeef),
+        .recorded_timestamp = UINT32_C(21600),
+        .heart_rate = {70u, 95u, 48u},
+        .spo2 = {97u, 100u, 91u},
+        .temperature = {20u, 26u, 14u},
+        .stress = {42u, 88u, 7u},
+        .activity_packed = {
+            0u,
+            UINT32_C(0xffffffff),
+            health_db_test_pack_activity(1u, 2u, 3u),
+            health_db_test_pack_activity(4u, 5u, 6u),
+            0u,
+            health_db_test_pack_activity(7u, 8u, 9u),
+        },
+        .hrv = {55u, 120u, 17u},
+    };
+    r1_activity_history activity = {
+        .utc_offset_minutes = 60,
+        .local_day_start = UINT32_C(999),
+        .latest_timestamp = UINT32_C(777),
+    };
+    activity.buckets[12] = (r1_activity_bucket){3u, 2u, 1u, true};
+    r1_health_u8_history heart_rate = {
+        .utc_offset_minutes = 60,
+        .local_day_start = UINT32_C(999),
+        .latest_timestamp = UINT32_C(800),
+        .latest_value = 64u,
+        .has_latest = true,
+    };
+    r1_health_u8_history spo2 = heart_rate;
+    r1_health_u16_history hrv = {
+        .utc_offset_minutes = 60,
+        .local_day_start = UINT32_C(999),
+        .latest_timestamp = UINT32_C(801),
+        .latest_value = UINT16_C(44),
+        .has_latest = true,
+    };
+    r1_health_db_restore_result restored;
+    assert(r1_health_db_restore_record(
+               NULL, &activity, &heart_rate, &spo2,
+               NULL, NULL, &hrv, &restored) == R1_ERROR_ARGUMENT);
+    assert(r1_health_db_restore_record(
+               &record, &activity, &heart_rate, &spo2,
+               NULL, NULL, &hrv, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_health_db_restore_record(
+               &record, &activity, &heart_rate, &spo2,
+               NULL, NULL, &hrv, &restored) == R1_OK);
+    assert(restored.applied && restored.appended_hour == 0u);
+    assert(restored.local_day_start == UINT32_C(18000));
+    assert(restored.activity_bucket_count == R1_HEALTH_DB_ACTIVITY_BUCKETS);
+    assert(restored.metric_slot_count == 3u);
+    assert(activity.local_day_start == restored.local_day_start);
+    assert(activity.utc_offset_minutes == record.utc_offset_minutes);
+    assert(activity.latest_timestamp == 0u);
+    assert(!activity.buckets[0].valid);
+    assert(activity.buckets[1].valid);
+    assert(activity.buckets[1].steps == UINT16_C(0x0fff));
+    assert(activity.buckets[1].active_kilocalories == UINT16_C(0x03ff));
+    assert(activity.buckets[1].all_kilocalories == UINT16_C(0x03ff));
+    assert(activity.buckets[2].steps == 1u);
+    assert(activity.buckets[3].active_kilocalories == 5u);
+    assert(!activity.buckets[4].valid);
+    assert(activity.buckets[5].all_kilocalories == 9u);
+    assert(activity.total_steps == 4107);
+    assert(activity.total_kilocalories == 1041);
+    assert(heart_rate.local_day_start == restored.local_day_start);
+    assert(heart_rate.latest_timestamp == UINT32_C(800));
+    assert(heart_rate.latest_value == 64u && heart_rate.has_latest);
+    assert(heart_rate.slots[0].average == 70u);
+    assert(heart_rate.slots[0].maximum == 95u);
+    assert(heart_rate.slots[0].minimum == 48u);
+    assert(heart_rate.slots[0].sample_count == 0u);
+    assert(spo2.slots[0].average == 97u);
+    assert(hrv.latest_timestamp == UINT32_C(801));
+    assert(hrv.latest_value == UINT16_C(44) && hrv.has_latest);
+    assert(hrv.slots[0].average == UINT16_C(55));
+    assert(hrv.slots[0].sample_count == 0u);
+
+    record.utc_offset_minutes = 60;
+    record.recorded_timestamp = UINT32_C(169200);
+    assert(r1_health_db_restore_record(
+               &record, NULL, NULL, NULL,
+               NULL, NULL, NULL, &restored) == R1_OK);
+    assert(!restored.applied && restored.appended_hour == 23u);
+    assert(restored.local_day_start == UINT32_C(82800));
+    assert(restored.activity_bucket_count == 0u);
+    assert(restored.metric_slot_count == 0u);
+
+    record.utc_offset_minutes = -1;
+    record.recorded_timestamp = 0u;
+    heart_rate.slots[9].average = 33u;
+    memset(&restored, 0xa5, sizeof restored);
+    assert(r1_health_db_restore_record(
+               &record, NULL, &heart_rate, NULL,
+               NULL, NULL, NULL, &restored) == R1_ERROR_STATE);
+    assert(!restored.applied && restored.appended_hour == 0u);
+    assert(restored.activity_bucket_count == 0u);
+    assert(restored.metric_slot_count == 0u);
+    assert(heart_rate.slots[9].average == 33u);
 }
 
 static void test_health_database_startup(void) {
@@ -8296,6 +8543,7 @@ int main(void) {
     test_reconstructed_software_twi();
     test_reconstructed_sensor_stream();
     test_reconstructed_time_calendar();
+    test_reconstructed_model_data();
     test_reconstructed_quantized_runtime();
     test_reconstructed_cross_family_bindings();
     test_reconstructed_gxt310();
@@ -8330,6 +8578,7 @@ int main(void) {
     test_temperature_and_stress_daily_cache_callbacks();
     test_scalar_health_sample_consumers();
     test_health_crash_snapshot();
+    test_health_database_record_codec_and_restore();
     test_health_database_startup();
     test_twi_synchronization_adapter();
     test_scalar_health_ram_cache_merge();

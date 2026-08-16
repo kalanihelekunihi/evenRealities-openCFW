@@ -1,5 +1,9 @@
 # 128...202-byte frontier correlation
 
+> Historical frontier snapshot. Every provider/middleware row in the table below has since moved
+> to an owner-authorized transparent-C implementation; the original dispositions are preserved to
+> show the classification state at the time of this pass.
+
 Every remaining unclassified application function at 128 bytes or larger — 63 functions,
 10,126 declared body bytes — is now source-routed from function-local evidence: exact body
 bytes, direct and registered callers, shared RAM/literal structures, vector-table registration,

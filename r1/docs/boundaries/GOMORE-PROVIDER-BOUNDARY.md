@@ -1,7 +1,7 @@
 # GoMore health-algorithm provider boundary
 
-> Current owner-authorized reduction note: 198 of the 362 candidate entries now compile from
-> transparent C (185 primitives and thirteen tensor-runtime routines); 164 remain gated. The attribution and
+> Current owner-authorized reduction note: all 362 candidate entries now compile from
+> transparent C (343 primitives/shared-runtime routines and nineteen tensor-runtime routines); no executable body remains gated. The attribution and
 > callgraph census below remains valid, while source-admitted entries are tracked in the two
 > `GOMORE-*-REDUCTION-CORRELATION.md` reports.
 
@@ -26,11 +26,10 @@ a hard investigation gate, not a claim that every instruction in the function be
 | --- | ---: | --- |
 | `0x00049410` | 506 | GoMore idle-timer creation/deletion diagnostics |
 | `0x0004BD98` | 768 | `gomore_setAuthParameters`, `gomore_setAuth`, health-index initialization, and initialization-failure diagnostics |
-| `0x0006AD80` | 282 | GoMore pKey flash, presence, and CRC diagnostics |
-| `0x0006AFB0` | 180 | GoMore previous-data restoration diagnostics |
-| `0x0006B27C` | 374 | GoMore pKey and authorization-parameter diagnostics |
+| `0x0006AD80` | 282 | GoMore pKey flash, presence, and CRC diagnostics; now source-admitted as `gomore_primitives_pkey_load` with explicit storage bindings |
+| `0x0006AFB0` | 180 | GoMore previous-data restoration diagnostics; now source-admitted as `gomore_primitives_previous_state_restore` |
+| `0x0006B27C` | 374 | GoMore pKey and authorization-parameter orchestration; now source-admitted as `gomore_primitives_auth_parameters_setup` with explicit key, UUID, time, and authorization bindings |
 | `0x0006B50C` | 318 | GoMore sensor/sleep allocation and forced-wake diagnostics |
-| `0x0006BBB0` | 824 | GoMore persistence length, erase, read, allocation, and write diagnostics |
 | `0x0006C1C0` | 114 | GoMore index-update diagnostics |
 | `0x0006C294` | 456 | GoMore sensor-allocation diagnostics |
 | `0x000823D8` | 106 | retained `GoMoRe` product/provider label |
@@ -64,36 +63,48 @@ expected because an output producer can also participate in the sleep or energy 
 | sleep-stage statistics closure | 3 |
 | unique additional entries | 259 |
 
-Together with the ten direct diagnostic-marker functions, the current ownership ledger contains
-269 GoMore-gated functions. The newest three additions are private sleep-step orchestrator
+Together with the ten direct diagnostic-marker functions, the original attribution ledger contained
+269 GoMore-gated functions. Current per-entry admission is recorded in the generated ownership
+ledger and the reduction note above. The newest three additions at that audit stage were private sleep-step orchestrator
 `0x00094070`, rolling accumulator `0x000947DE`, and reset helper `0x00071B24`, documented in
-[`FRONTIER-230-248-CORRELATION.md`](../correlation/FRONTIER-230-248-CORRELATION.md). The preceding ten additions
+[`FRONTIER-230-248-CORRELATION.md`](../correlation/FRONTIER-230-248-CORRELATION.md). The accumulator and reset
+helper and orchestration root now have transparent typed reconstructions. The preceding ten additions
 are the floating-point pooling executor and
 constructor plus the private sleep/history force-wake reducer, wrappers, weighted merge, snapshot
 selector, tail reconciliation, timestamp setter, and two-bit extraction/lookup helpers documented
-in [`FRONTIER-256-262-CORRELATION.md`](../correlation/FRONTIER-256-262-CORRELATION.md). The preceding three additions are the 274-byte private timestamp-to-sample
+in [`FRONTIER-256-262-CORRELATION.md`](../correlation/FRONTIER-256-262-CORRELATION.md); all ten now have transparent typed reconstructions. The preceding three additions are the 274-byte private timestamp-to-sample
 segment expansion at `0x00067C30`, its exclusive 44-byte fill helper at `0x000641C4`, and the
-264-byte fixed-coefficient IIR filter at `0x00064274`. All remain licensed-provider-only; see
+264-byte fixed-coefficient IIR filter at `0x00064274`. The fill helper and IIR filter are source-admitted while the segment expansion remains gated; see
 [`FRONTIER-264-274-CORRELATION.md`](../correlation/FRONTIER-264-274-CORRELATION.md). The preceding two additions are the 314-byte private convolution tensor
 operator at `0x00091B08` and the 314-byte private batch-normalization tensor operator at
-`0x000651CA`; both remain licensed-provider-only. The preceding additions were the 336-byte
+`0x000651CA`. The batch-normalization operator is now transparent as
+`gomore_tensor_batch_normalize_half`; the convolution operator is now transparent as
+`gomore_tensor_conv1d_half`. The preceding additions were the 336-byte
 generated sleep-model tensor graph at `0x000653E6` and the 334-byte energy-estimator state update
-at `0x00090ACC`. The supplemental 350-byte sensor-update orchestrator at
-`0x00094384` is reached only from already gated GoMore paths and retains its private state,
-timestamp, PPG/accelerometer processing, and output calls behind the licensed-provider gate. The
+at `0x00090ACC`; both are now source-admitted as `gomore_tensor_cell_run` and
+`gomore_primitives_energy_mode_rate`. The supplemental 350-byte sensor-update orchestrator at
+`0x00094384` is now source-admitted as `gomore_primitives_sensor_update_orchestrate`; its
+diagnostics, input application, and snapshot steps are explicit typed providers, while validation,
+timestamp normalization, stale rejection, state commit, and update-counter behavior are local. The
+352-byte motion-gate accumulator at `0x0005F264` is now source-admitted as
+`gomore_primitives_motion_gate_accumulate`; its 30-second circular buckets, short-gap fill,
+540-second reset, weighted score, and exact bias predicate are transparent. The
 newest three-function / 796-byte closure pins both final
 sleep-statistics blocks and their exclusive stage lookup helper; see
 [`GOMORE-SLEEP-STAGE-STATISTICS-PROVIDER-BOUNDARY.md`](GOMORE-SLEEP-STAGE-STATISTICS-PROVIDER-BOUNDARY.md).
 The earlier one-function / 528-byte closure pins the SDK authorization parser and dispatcher at
 `0x0008EA0C`; see
-[`GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md`](GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md). The earlier
-nine-function / 2,360-byte closure pins the energy-model
-dispatcher and its three estimator families; see
+[`GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md`](GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md). It is now
+source-admitted with caller-supplied decrypt keys and typed dispatch callbacks. The earlier
+nine-function / 2,360-byte closure pins the energy-model dispatcher and its three estimator
+families; all nine are now transparent C, including the 81 table values; see
 [`GOMORE-ENERGY-MODEL-PROVIDER-BOUNDARY.md`](GOMORE-ENERGY-MODEL-PROVIDER-BOUNDARY.md).
 The prior six-function / 1,890-byte closure pins the activity-state
 window classifier, its five private helpers, three embedded dispatch tables, and literal pool;
 see
 [`GOMORE-ACTIVITY-STATE-PROVIDER-BOUNDARY.md`](GOMORE-ACTIVITY-STATE-PROVIDER-BOUNDARY.md).
+All six entries are now source-admitted, including the complete seven-state top-level routine as
+`gomore_primitives_activity_window_update`.
 The prior six-function / 2,188-byte closure pins the paired sleep-classifier graph builders,
 family selector, allocator table, and both model regions; see
 [`GOMORE-SLEEP-GRAPH-PROVIDER-BOUNDARY.md`](GOMORE-SLEEP-GRAPH-PROVIDER-BOUNDARY.md). Every exact address and its applicable audit scopes are recorded in
@@ -101,15 +112,26 @@ family selector, allocator table, and both model regions; see
 corresponding `summarize_r1_*` audit scripts. This expansion routes already-proven vendor-algorithm
 work away from local implementation without inventing private symbol names.
 
-The newest eight-entry boundary contains the composite initializer at `0x00071A32` and seven
+The newest eight-entry initializer boundary contains the composite initializer at `0x00071A32` and seven
 private or already-vendor-rooted helpers. The root is called only at `0x0006FFAE` from the
 SHA-pinned GoMore sleep body at `0x0006FEA0`; it initializes ten already gated GoMore substates
 plus the newly bounded helpers. The 8-byte reset at `0x00071D96` is byte-identical to the already
 gated reset at `0x0007170A`, but the classification relies on this exclusive call context rather
 than on generic bytes alone. The complete 586-byte census and caller sets are pinned by
 `../../tools/evidence/summarize_r1_gomore_initializer_boundary.py`.
-Both reset leaves are now owner-authorized local C; the surrounding private initializer remains
-gated. This changes source disposition without erasing the callgraph attribution evidence.
+All eight entries in this boundary are now owner-authorized local C. The composite root is
+`gomore_primitives_composite_engine_initialize`; it composes the locally reconstructed child
+initializers through typed callbacks and explicit configuration/binding inputs without retaining
+an absolute firmware address. This changes source disposition without erasing the callgraph
+attribution evidence.
+
+The calling sleep body at `0x0006FEA0` has now crossed the same owner-authorized source gate as
+`gomore_primitives_sleep_algorithm_initialize`. Its authorization configuration, random providers,
+previous-state storage and 32-bit target binding, user profile, time configuration, and initializer
+callbacks are all explicit. The local body preserves the exact 736-byte previous-state gate,
+status/random/binding offsets, scattered nested profile fields, composite initializer chain, and
+default profile-state transition without retaining the stock global pointer table or any firmware
+payload.
 
 The earlier audit treated `GH_HRV_pre_pv_v1.0.1.0_ed953ff3` as a GoMore version marker. Goodix's
 primary-source developer trace reproduces that exact string and identifies it as a GH3X2X
@@ -121,8 +143,8 @@ provenance supplements:
 
 | Entry | Size | SHA-256 | Ownership |
 | --- | ---: | --- | --- |
-| `0x00067488` | 196 | `b351faf207bd93a95557dd695eb7e034dfb92bb02be730ae6e118d8372602991` | GoMore dormant-estimator candidate |
-| `0x0006825C` | 232 | `346de4b3b4a920d11fd3aaf7dd930854b7ce8eb02fc26568f9016c9febe1cf84` | GoMore dormant-estimator candidate |
+| `0x00067488` | 196 | `b351faf207bd93a95557dd695eb7e034dfb92bb02be730ae6e118d8372602991` | GoMore dormant-estimator candidate; now source-admitted as `gomore_primitives_dormant_speed_mode1_target_update` |
+| `0x0006825C` | 232 | `346de4b3b4a920d11fd3aaf7dd930854b7ce8eb02fc26568f9016c9febe1cf84` | GoMore dormant-estimator candidate; now source-admitted as `gomore_primitives_dormant_speed_mode0_target_update` |
 | `0x0007D09C` | 12 | `90e8db1c4218cea4a6d0b8bfb3599ff589e62348c9b0160696c2decc158a8687` | GoMore sleep-score helper candidate |
 | `0x0008F49C` | 24 | `4a6d354d9870c5323d26f51a42612488eccd79558d670938dae0574926e17aa2` | GoMore logistic helper candidate |
 | `0x0006B114` | 164 | `12d48128ccaab3563434e1020cafeae53af5c37848aa5e7df228776cfd3139e4` | R1 accelerometer-topic adapter |
@@ -153,5 +175,6 @@ app-side wrappers over the closed `LmAPI` AAR, and the only located embedded GoM
 (an unlicensed Jieli BR28 watch-SDK dump with `GoMoreLib.h` and a DWARF-carrying
 `libgomore.a`) is binary-only and unlicensed — retained as ABI/correlation evidence only
 (R1 strings `[sdkAuth]=%d`, `gomore healthIndexInitUser failed:%d`,
-`gomore updateIndex failed:%d` match verbatim). All 362 entries remain blocked.
+`gomore updateIndex failed:%d` match verbatim). At that attribution-audit stage all 362 entries
+were blocked; the current owner-authorized reductions are tracked in the note above.
 Full evidence: [`withheld-providers-ATTRIBUTION-2026-08.md`](withheld-providers-ATTRIBUTION-2026-08.md).

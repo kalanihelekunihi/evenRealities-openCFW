@@ -50,7 +50,7 @@ python3 tools/build_r1_source_ownership.py
   recognizable symbol.
 - `clean_room_reimplementation_owner_authorized` marks the six Bravechip-attributed middleware
   families, the GXT310 closure, the complete QMA6100 provider/adapter closure, and the complete
-  YHM2710 closure plus the 331 Goodix and 198 GoMore reductions (752 entries)
+  YHM2710 closure plus the 339 Goodix and 362 GoMore reductions (924 entries)
   reconstructed from decompilation evidence under the owner-authorized
   full reduction (2026-08-14, [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)). The
   reconstruction is independently compiled C with per-function provenance; it is not vendor
@@ -62,31 +62,53 @@ For this reason, marker matches alone remain candidates. Bosch BMA456 and the R1
 functions route to official sources, while eight Bosch and seven ST functions are explicitly
 bounded as R1 adapters. The ST part is LIS2DW12 (WHO_AM_I `0x44`). QMA6100 now has three
 QST-lineage provider bodies and fourteen adapters reconstructed together under the owner-authorized
-reduction; 10 Goodix-candidate and 164 GoMore health-algorithm entries remain to be reduced. IQS7211E has crossed the source gate through
+reduction; no Goodix-candidate and 77 GoMore health-algorithm entries remain to be reduced. IQS7211E has crossed the source gate through
 pinned MIT provider/settings references: twelve exact recovered entries are now bounded as R1
 configuration, Nordic/provider port, task dispatch, lifecycle, IRQ, and recovery adapters. The
-remaining GoMore gate covers 164 exact entries whose code-only ranges, constants, and call
+remaining GoMore gate covers 77 exact entries whose code-only ranges, constants, and call
 topology are already pinned by the algorithm audit. Three additional byte-pinned R1 adapters are
 separately eligible for clean-room adapter work
 only after a licensed GoMore provider is admitted.
-The newest nine entries are the 2,360-byte energy-model dispatcher/estimator closure rooted at
-`0x0002F488`. Three exclusive calls from already gated producer `0x0005F56C`, the complete private
-descendant graph, exact bodies, and all caller sets are pinned without admitting private formulas,
-tables, interpolation, or state logic.
+The 2,360-byte energy-model dispatcher/estimator closure rooted at `0x0002F488` is now fully
+source-admitted. Its complete private descendant graph, exact bodies, all caller sets, formulas,
+three 27-float mode tables, interpolation, and state logic are represented in transparent C.
+The 2,102-byte top-level producer at `0x0005F56C` is also source-admitted as a typed 92-byte
+state transition producing all eleven energy floats without the stock internal reference pointer.
+The adjacent 272-byte daily activity accumulator at `0x00061274` is source-admitted with typed
+52-byte state and 44-byte output records, exact local-day reset, truncation, and distance behavior.
+The 436-byte profile converter at `0x00071E34` is source-admitted with all seven validation/default
+paths, status precedence, duplicated output fields, and the two-value persistent-cache behavior.
+The 430-byte sleep-stage statistics block at `0x00069128` is source-admitted over the existing
+bounded modulo stage lookup, producing all twelve recovered fractions, ratios, and durations.
+The adjacent 326-byte interval-statistics block at `0x00068FD4` is also source-admitted, producing
+the seven recovered interval, leading/middle/trailing-awake, sleep, and efficiency fields.
+Its sole-caller score leaf at `0x0006778C` is source-admitted with the exact duration bands,
+double-tanh shape, `powf(1.1, ...)` wake penalty, REM/deep weights, clamp, and 540-minute branch hole.
+The 444-byte peak-rate interpolator at `0x00074D60` is source-admitted with bounded peak/output
+spans, invalid-anchor skipping, exact 60-BPM defaults, spacing rates, and grid interpolation.
+Its 280-byte caller at `0x00088AAC` is source-admitted with exact spacing invalidation, mode cadence,
+90-float rotation, tail normalization, and an explicit wrapping update counter.
+The 110-byte peak carryover leaf at `0x00076502` is source-admitted with bounded suffix compaction,
+the exact above-749 retention rule, 750-position rebasing, and invalid-marker preservation.
+The 112-byte valley extractor at `0x00064A28` is source-admitted with exact asymmetric local-minimum,
+positive-curvature, twelve-candidate, and zero-filled output behavior.
+The 128-byte history advance at `0x0008EE3A` is source-admitted over a typed 396-byte state, with
+exact 25-sample shifts, position rebasing/compaction, and the greater-than-two full-reset path.
 The latest supplemental entry is the 602-byte private IIR coefficient designer at `0x000717AC`.
 Its only caller is the already gated sleep-filter initializer `0x00071D62`; Arm toolchain
 trigonometric/power routines remain separately source-routed, and no GoMore formula or generated
 coefficients are admitted locally.
 The prior six entries are the 1,890-byte activity-state window classifier at `0x0006138C` and
 five private statistical/decision helpers. Their sole-provider caller chain, noncontiguous body,
-three inline dispatch tables, literal pool, and exact callsites are pinned without admitting a
-local reconstruction of their private rules.
-The newest eight entries are a 586-byte composite initializer boundary rooted at `0x00071A32`.
-Its sole caller is an already-gated GoMore sleep body, ten direct child initializers were already
-GoMore-gated, and each new helper has a pinned body and caller set. This context—not an 8-byte
-collision by itself—supports gating `0x00071D96` with its duplicate at `0x0007170A`.
-That sentence records the attribution decision; both reset twins have since crossed the
-owner-authorized source gate through `gomore_primitives_clear_first_byte`.
+three inline dispatch tables, literal pool, and exact callsites remain pinned; all six now have
+typed local reconstructions, including the complete seven-state top-level state machine.
+The newest eight-entry audit scope is a 586-byte composite initializer boundary rooted at
+`0x00071A32`. Its sole caller is an already-gated GoMore sleep body, ten direct child initializers
+were already GoMore-attributed, and each helper has a pinned body and caller set. This context—not
+an 8-byte collision by itself—supports the attribution of `0x00071D96` with its duplicate at
+`0x0007170A`. All eight entries have now crossed the owner-authorized source gate; the root maps to
+`gomore_primitives_composite_engine_initialize` and both reset twins map to
+`gomore_primitives_clear_first_byte`.
 The NFC cluster has separately crossed the gate: 27 ST25DVxxKC bodies route to ST's pinned
 BSD-3-Clause component and seven product/board wrappers are bounded as R1 adapters. The raw
 ST-specific BSim corpus includes exact `ReadReg` and `WriteReg` anchors; the remaining mappings
@@ -209,9 +231,10 @@ orchestrators; private operator/model contents remain explicit bindings. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
 The GH_HR processing callgraph now routes another 31 functions / 7,144 executable bytes to that
-same provider gate. The former largest unknown at `0x00032808` is called only by the already
+same provider attribution. The former largest unknown at `0x00032808` is called only by the already
 byte-pinned GH_HR core, and the recursive four-level descendant set has no outside direct callers.
-All 31 functions remain non-redistributable provider code; see
+All 31 functions now have owner-authorized clean-room C while retaining their pinned attribution;
+see
 [`GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md).
 
 Seven R1-owned automatic
@@ -268,7 +291,7 @@ owner-authorized reconstructions. Four exact Nordic watchdog bodies and two R1/N
 adapters are source-routed. No bootloader provider entry remains unclassified.
 
 Eight branch-only thunks / 32 bytes now inherit the already accepted ownership and disposition of
-their exact destinations. One remains Goodix-gated, one aliases an R1 Goodix board adapter, and six
+their exact destinations. One maps to reconstructed Goodix code, one aliases an R1 Goodix board adapter, and six
 alias product-owned daily-cache metadata operations. See
 [`RESOLVED-THUNK-CLOSURE.md`](../closures/RESOLVED-THUNK-CLOSURE.md).
 

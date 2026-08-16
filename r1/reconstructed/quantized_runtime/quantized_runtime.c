@@ -40,6 +40,8 @@
  *   0x00041816..<0x000419C8   434 -> quantized_runtime_pooling_execute
  *   0x0003F7F8..<0x0003F89C   164 -> quantized_runtime_goodix_f32_three_stage_execute
  *   0x00042024..<0x00042108   228 -> quantized_runtime_goodix_u8_three_stage_execute
+ *   0x0002874C..<0x00028AC8   892 -> quantized_runtime_gomore_sleep_graph_family_zero_build
+ *   0x0002966C..<0x000299E0   884 -> quantized_runtime_gomore_sleep_graph_family_nonzero_build
  *   0x0004387C..<0x00043B2A   686 -> quantized_runtime_goodix_graph_build
  *   0x0005D01C..<0x0005D1AC   400 -> quantized_runtime_goodix_second_graph_build
  *   0x000617F8..<0x00061C44   1100 -> quantized_runtime_goodix_second_executor_execute
@@ -54,6 +56,7 @@
  *   0x0003007E / 0x00038050 / 0x000417F0  16 each
  *                               -> quantized_runtime_goodix_executor_execute
  *   0x000742E4..<0x0007487E   1426 -> quantized_runtime_goodix_executor_execute
+ *   0x00076BDC..<0x000770AE   1234 -> quantized_runtime_float_conv1d_execute
  *   0x00085B9C..<0x00085C98   252  -> quantized_runtime_float_dense_execute
  *   0x00085DC4..<0x00086BAC   3560 -> quantized_runtime_i8_conv1d_execute
  *   0x000876C8..<0x00087A6C   932 -> quantized_runtime_goodix_layer_execute
@@ -2693,6 +2696,205 @@ uint32_t quantized_runtime_float_dense_execute_target(
     return quantized_runtime_float_dense_execute(&descriptor, &model, &io);
 }
 
+uint32_t quantized_runtime_float_conv1d_execute(
+    const quantized_runtime_float_conv1d_descriptor *descriptor,
+    const quantized_runtime_float_conv1d_model *model,
+    quantized_runtime_float_conv1d_io *io) {
+    if (descriptor == NULL || model == NULL || io == NULL ||
+            io->input == NULL || io->output == NULL ||
+            io->input->data == NULL || io->output->data == NULL ||
+            model->weights == NULL || model->biases == NULL ||
+            io->input->type_flag != sizeof(float) ||
+            io->output->type_flag != sizeof(float) ||
+            io->input->dims[0] != 1u || io->output->dims[0] != 1u ||
+            descriptor->stride == 0u || descriptor->groups == 0u ||
+            descriptor->input_channels == 0u ||
+            descriptor->output_channels == 0u ||
+            descriptor->input_channels % descriptor->groups != 0u ||
+            descriptor->output_channels % descriptor->groups != 0u ||
+            io->input->dims[1] != descriptor->input_channels ||
+            io->output->dims[1] != descriptor->output_channels ||
+            descriptor->activation > 2u ||
+            (descriptor->activation == 2u && io->expf_fn == NULL) ||
+            (descriptor->kernel_width != 1u &&
+             descriptor->kernel_width != 3u &&
+             descriptor->kernel_width != 5u) ||
+            (descriptor->groups != 1u &&
+             (descriptor->kernel_width != 3u ||
+              descriptor->input_channels / descriptor->groups != 1u))) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    size_t padded_width = 0u;
+    size_t logical_input_count = 0u;
+    size_t output_count = 0u;
+    size_t weights_per_output = 0u;
+    size_t required_weights = 0u;
+    size_t input_bytes = 0u;
+    size_t output_bytes = 0u;
+    if (!add_size_checked(io->input->dims[2], descriptor->left_padding,
+                          &padded_width) ||
+            !add_size_checked(padded_width, descriptor->right_padding,
+                              &padded_width) ||
+            padded_width < descriptor->kernel_width ||
+            io->output->dims[2] !=
+                (padded_width - descriptor->kernel_width) /
+                    descriptor->stride + 1u ||
+            !multiply_size_checked(descriptor->input_channels,
+                                   io->input->dims[2],
+                                   &logical_input_count) ||
+            !multiply_size_checked(descriptor->output_channels,
+                                   io->output->dims[2], &output_count) ||
+            !multiply_size_checked(
+                descriptor->input_channels / descriptor->groups,
+                descriptor->kernel_width, &weights_per_output) ||
+            !multiply_size_checked(descriptor->output_channels,
+                                   weights_per_output, &required_weights) ||
+            !multiply_size_checked(logical_input_count, sizeof(float),
+                                   &input_bytes) ||
+            !multiply_size_checked(output_count, sizeof(float),
+                                   &output_bytes) ||
+            io->input_capacity < input_bytes ||
+            io->output_capacity < output_bytes ||
+            model->weight_count < required_weights ||
+            model->bias_count < descriptor->output_channels) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+
+    uint8_t *destination_bytes = (uint8_t *)io->output->data;
+    const bool overlaps = byte_ranges_overlap(
+        io->input->data, input_bytes, io->output->data, output_bytes);
+    if (overlaps) {
+        if (io->workspace == NULL || io->workspace_size < output_bytes ||
+                byte_ranges_overlap(io->workspace, output_bytes,
+                                    io->input->data, input_bytes)) {
+            return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+        }
+        destination_bytes = (uint8_t *)io->workspace;
+    }
+
+    const float *input = (const float *)io->input->data;
+    float *destination = (float *)(void *)destination_bytes;
+    const size_t input_width = io->input->dims[2];
+    const size_t output_width = io->output->dims[2];
+    const size_t input_per_group =
+        descriptor->input_channels / descriptor->groups;
+    const size_t output_per_group =
+        descriptor->output_channels / descriptor->groups;
+    for (size_t group = 0u; group < descriptor->groups; ++group) {
+        for (size_t output_in_group = 0u;
+                output_in_group < output_per_group; ++output_in_group) {
+            const size_t output_channel =
+                group * output_per_group + output_in_group;
+            const size_t weight_base = descriptor->groups == 1u
+                ? output_channel * weights_per_output
+                : group * output_per_group * descriptor->kernel_width +
+                      output_in_group * weights_per_output;
+            for (size_t position = 0u; position < output_width; ++position) {
+                float accumulator = 0.0f;
+                for (size_t input_in_group = 0u;
+                        input_in_group < input_per_group; ++input_in_group) {
+                    const size_t input_channel =
+                        group * input_per_group + input_in_group;
+                    for (size_t tap = 0u; tap < descriptor->kernel_width;
+                         ++tap) {
+                        const size_t padded_position =
+                            position * descriptor->stride + tap;
+                        float value = 0.0f;
+                        if (padded_position >= descriptor->left_padding) {
+                            const size_t input_position =
+                                padded_position - descriptor->left_padding;
+                            if (input_position < input_width) {
+                                value = input[input_channel * input_width +
+                                              input_position];
+                            }
+                        }
+                        accumulator += value * model->weights[
+                            weight_base +
+                            input_in_group * descriptor->kernel_width + tap];
+                    }
+                }
+                destination[output_channel * output_width + position] =
+                    accumulator + model->biases[output_channel];
+            }
+        }
+    }
+
+    if (descriptor->activation == 1u) {
+        for (size_t index = 0u; index < output_count; ++index) {
+            if (destination[index] < 0.0f) {
+                destination[index] = descriptor->alpha == 0.0f
+                    ? 0.0f : destination[index] * descriptor->alpha;
+            }
+        }
+    } else if (descriptor->activation == 2u) {
+        for (size_t index = 0u; index < output_count; ++index) {
+            float exponent = -destination[index];
+            if (u32_bits_to_i32(f32_to_bits(exponent)) >=
+                    INT32_C(0x42B00000)) {
+                exponent = QUANTIZED_RUNTIME_SOFTMAX_CAP;
+            }
+            destination[index] =
+                1.0f / (io->expf_fn(exponent) + 1.0f);
+        }
+    }
+    if (overlaps) {
+        move_bytes_local((uint8_t *)io->output->data, destination_bytes,
+                         output_bytes);
+    }
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+uint32_t quantized_runtime_float_conv1d_execute_target(
+    const void *descriptor_record,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    if (descriptor_record == NULL || inputs == NULL || outputs == NULL ||
+            inputs[0] == NULL || outputs[0] == NULL) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const uint8_t *record = (const uint8_t *)descriptor_record;
+    const quantized_runtime_float_conv1d_descriptor descriptor = {
+        record[0], record[1], record[2], record[3], record[4], record[5],
+        record[6], record[7], load_f32_le(record + 8u),
+    };
+    size_t input_count = 0u;
+    size_t output_count = 0u;
+    size_t weight_count = 0u;
+    size_t padded_width = 0u;
+    if (descriptor.groups == 0u ||
+            !multiply_size_checked(inputs[0]->dims[1], inputs[0]->dims[2],
+                                   &input_count) ||
+            !multiply_size_checked(outputs[0]->dims[1], outputs[0]->dims[2],
+                                   &output_count) ||
+            !multiply_size_checked(
+                descriptor.input_channels / descriptor.groups,
+                descriptor.kernel_width, &weight_count) ||
+            !multiply_size_checked(weight_count, descriptor.output_channels,
+                                   &weight_count) ||
+            !add_size_checked(inputs[0]->dims[2], descriptor.left_padding,
+                              &padded_width) ||
+            !add_size_checked(padded_width, descriptor.right_padding,
+                              &padded_width) ||
+            !multiply_size_checked(padded_width, inputs[0]->dims[1],
+                                   &padded_width)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const quantized_runtime_float_conv1d_model model = {
+        (const float *)(uintptr_t)load_u32_le(record + 0x0Cu), weight_count,
+        (const float *)(uintptr_t)load_u32_le(record + 0x10u),
+        descriptor.output_channels,
+    };
+    const size_t input_bytes = input_count * sizeof(float);
+    const size_t output_bytes = output_count * sizeof(float);
+    quantized_runtime_float_conv1d_io io = {
+        inputs[0], outputs[0], input_bytes, output_bytes,
+        (uint8_t *)inputs[0]->data + padded_width * sizeof(float),
+        output_bytes, expf,
+    };
+    return quantized_runtime_float_conv1d_execute(&descriptor, &model, &io);
+}
+
 uint32_t quantized_runtime_float_softmax_execute(
     const quantized_runtime *rt, const void *descriptor,
     quantized_runtime_exec_tensor *const *inputs,
@@ -2863,9 +3065,9 @@ void quantized_runtime_descriptor_construct(
     const uint32_t weights = *arena_cursor;
     store_u32_le(record + 0x0C, weights);
     store_u32_le(record + 0x10, weights + span);
-    const uintptr_t run =
-        (rt != NULL) ? rt->providers.run_76bdc : (uintptr_t)0;
-    store_u32_le(record + 0x14, (uint32_t)run);
+    (void)rt;
+    store_u32_le(record + 0x14,
+                 (uint32_t)(uintptr_t)&quantized_runtime_float_conv1d_execute_target);
     *arena_cursor = weights + (uint32_t)byte5 * 4u + span;
 }
 
@@ -3016,7 +3218,7 @@ typedef struct {
     uint8_t byte7;
 } quantized_runtime_graph_record_spec;
 
-static void goodix_graph_build_aligned_record(
+static void graph_build_aligned_record(
     const quantized_runtime *rt, uint8_t *graph_bytes,
     const quantized_runtime_graph_record_spec *spec, uint32_t *target_cursor,
     size_t *consumed_words) {
@@ -3028,7 +3230,7 @@ static void goodix_graph_build_aligned_record(
     *consumed_words += (size_t)(*target_cursor - before) / 4u;
 }
 
-static void goodix_graph_build_descriptor_record(
+static void graph_build_descriptor_record(
     const quantized_runtime *rt, uint8_t *graph_bytes,
     const quantized_runtime_graph_record_spec *spec, uint32_t *target_cursor,
     size_t *consumed_words) {
@@ -3038,6 +3240,205 @@ static void goodix_graph_build_descriptor_record(
         spec->byte2, spec->byte3, spec->byte4, spec->byte5, spec->byte6, 1u,
         spec->byte7, target_cursor, 0.0f);
     *consumed_words += (size_t)(*target_cursor - before) / 4u;
+}
+
+static void gomore_sleep_graph_store_binding(uint8_t *destination,
+                                             uint32_t packed,
+                                             uintptr_t binding) {
+    store_u32_le(destination, packed);
+    store_u32_le(destination + 4u, (uint32_t)binding);
+}
+
+static void gomore_sleep_graph_build_common_prefix(
+    const quantized_runtime *rt, uint8_t *graph_bytes,
+    const quantized_runtime_graph_record_spec aligned_specs[7],
+    const uint32_t *model_words, uint32_t *target_cursor,
+    size_t *consumed_words) {
+    graph_build_aligned_record(rt, graph_bytes, &aligned_specs[0],
+                               target_cursor, consumed_words);
+    quantized_runtime_packed_pool_descriptor_initialize(
+        graph_bytes + 0x024u, 0u, 2u, 0u, 0u);
+    for (size_t index = 1u; index < 4u; ++index) {
+        graph_build_aligned_record(rt, graph_bytes, &aligned_specs[index],
+                                   target_cursor, consumed_words);
+    }
+    const uint32_t *host_cursor = model_words + *consumed_words;
+    quantized_runtime_cursor_pair_add_descriptor_construct(
+        graph_bytes + 0x078u, &host_cursor);
+    *consumed_words += 2u;
+    *target_cursor += 8u;
+    quantized_runtime_packed_pool_descriptor_initialize(
+        graph_bytes + 0x088u, 0u, 2u, 0u, 0u);
+
+    for (size_t index = 4u; index < 7u; ++index) {
+        graph_build_aligned_record(rt, graph_bytes, &aligned_specs[index],
+                                   target_cursor, consumed_words);
+    }
+    host_cursor = model_words + *consumed_words;
+    quantized_runtime_cursor_pair_add_descriptor_construct(
+        graph_bytes + 0x0E0u, &host_cursor);
+    *consumed_words += 2u;
+    *target_cursor += 8u;
+    quantized_runtime_packed_pool_descriptor_initialize(
+        graph_bytes + 0x0F0u, 0u, 2u, 0u, 0u);
+    store_u32_le(graph_bytes + 0x090u,
+                 (uint32_t)quantized_runtime_executor_vector_30534(rt));
+}
+
+static void gomore_sleep_graph_build_common_tail(
+    const quantized_runtime *rt, uint8_t *graph_bytes,
+    const quantized_runtime_graph_record_spec descriptor_specs[6],
+    uint32_t *target_cursor, size_t *consumed_words) {
+    const uintptr_t vector_35d12 =
+        rt != NULL ? rt->providers.vector_35d12 : (uintptr_t)0;
+    const uintptr_t vector_7ca94 =
+        rt != NULL ? rt->providers.vector_7ca94 : (uintptr_t)0;
+    gomore_sleep_graph_store_binding(graph_bytes + 0x0F8u,
+                                     UINT32_C(0x00010200), vector_35d12);
+    gomore_sleep_graph_store_binding(graph_bytes + 0x100u,
+                                     UINT32_C(0x00000001), vector_7ca94);
+
+    graph_build_descriptor_record(rt, graph_bytes, &descriptor_specs[0],
+                                  target_cursor, consumed_words);
+    graph_build_descriptor_record(rt, graph_bytes, &descriptor_specs[1],
+                                  target_cursor, consumed_words);
+    gomore_sleep_graph_store_binding(graph_bytes + 0x138u,
+                                     UINT32_C(0x00020100), vector_35d12);
+    store_u32_le(graph_bytes + 0x140u,
+                 (uint32_t)quantized_runtime_executor_vector_95b20(rt));
+    for (size_t index = 2u; index < 6u; ++index) {
+        graph_build_descriptor_record(rt, graph_bytes,
+                                      &descriptor_specs[index],
+                                      target_cursor, consumed_words);
+    }
+
+    uintptr_t operator_descriptor[4];
+    quantized_runtime_operator_descriptor_init(operator_descriptor, 1u, 0.0f);
+    store_native_words_as_u32(graph_bytes + 0x1A8u,
+                              operator_descriptor, 4u);
+}
+
+bool quantized_runtime_gomore_sleep_graph_family_zero_build(
+    const quantized_runtime *rt,
+    quantized_runtime_gomore_sleep_graph *graph,
+    const uint32_t *model_words, size_t model_word_count,
+    uint32_t model_base_address, size_t *consumed_words,
+    uint32_t *model_end_address) {
+    if (graph == NULL || model_words == NULL ||
+            model_word_count <
+                QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS ||
+            (model_base_address & 3u) != 0u ||
+            model_base_address > UINT32_MAX -
+                QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS * 4u) {
+        return false;
+    }
+
+    static const quantized_runtime_graph_record_spec aligned_specs[7] = {
+        {0x00Cu, 5u, 1u, 2u, 2u, 4u, 27u, 1u, 0u},
+        {0x02Cu, 1u, 1u, 0u, 0u, 27u, 14u, 1u, 1u},
+        {0x044u, 3u, 1u, 1u, 1u, 14u, 14u, 14u, 1u},
+        {0x05Cu, 1u, 1u, 0u, 0u, 14u, 27u, 1u, 0u},
+        {0x094u, 1u, 1u, 0u, 0u, 27u, 7u, 1u, 1u},
+        {0x0ACu, 3u, 1u, 1u, 1u, 7u, 7u, 7u, 1u},
+        {0x0C4u, 1u, 1u, 0u, 0u, 7u, 27u, 1u, 0u},
+    };
+    static const quantized_runtime_graph_record_spec descriptor_specs[6] = {
+        {0x108u, 1u, 1u, 0u, 0u, 12u, 12u, 1u, 1u},
+        {0x120u, 1u, 1u, 0u, 0u, 12u, 12u, 1u, 2u},
+        {0x15Cu, 1u, 1u, 0u, 0u, 27u, 11u, 1u, 1u},
+        {0x174u, 3u, 1u, 1u, 1u, 11u, 11u, 11u, 1u},
+        {0x18Cu, 1u, 1u, 0u, 0u, 11u, 8u, 1u, 0u},
+        {0x144u, 1u, 1u, 0u, 0u, 27u, 8u, 1u, 0u},
+    };
+
+    zero_bytes(graph->bytes, sizeof(graph->bytes));
+    uintptr_t quantizer[3];
+    quantized_runtime_quantizer_descriptor_construct(quantizer, NULL);
+    store_native_words_as_u32(graph->bytes, quantizer, 3u);
+    uint32_t target_cursor = model_base_address;
+    size_t consumed = 0u;
+    gomore_sleep_graph_build_common_prefix(
+        rt, graph->bytes, aligned_specs, model_words,
+        &target_cursor, &consumed);
+    gomore_sleep_graph_build_common_tail(
+        rt, graph->bytes, descriptor_specs, &target_cursor, &consumed);
+
+    if (consumed != QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS ||
+            target_cursor != model_base_address + consumed * 4u) {
+        zero_bytes(graph->bytes, sizeof(graph->bytes));
+        return false;
+    }
+    if (consumed_words != NULL) {
+        *consumed_words = consumed;
+    }
+    if (model_end_address != NULL) {
+        *model_end_address = target_cursor;
+    }
+    return true;
+}
+
+bool quantized_runtime_gomore_sleep_graph_family_nonzero_build(
+    const quantized_runtime *rt, uint32_t family,
+    quantized_runtime_gomore_sleep_graph *graph,
+    const uint32_t *model_words, size_t model_word_count,
+    uint32_t model_base_address, size_t *consumed_words,
+    uint32_t *model_end_address) {
+    const size_t expected_words = family == 1u
+        ? QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY1_MODEL_WORDS
+        : QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY2_MODEL_WORDS;
+    if (graph == NULL || model_words == NULL || family < 1u || family > 2u ||
+            model_word_count < expected_words ||
+            (model_base_address & 3u) != 0u ||
+            model_base_address > UINT32_MAX - expected_words * 4u) {
+        return false;
+    }
+
+    static const quantized_runtime_graph_record_spec aligned_specs[7] = {
+        {0x00Cu, 5u, 1u, 2u, 2u, 4u, 32u, 1u, 0u},
+        {0x02Cu, 1u, 1u, 0u, 0u, 32u, 1u, 1u, 1u},
+        {0x044u, 3u, 1u, 1u, 1u, 1u, 1u, 1u, 1u},
+        {0x05Cu, 1u, 1u, 0u, 0u, 1u, 32u, 1u, 0u},
+        {0x094u, 1u, 1u, 0u, 0u, 32u, 2u, 1u, 1u},
+        {0x0ACu, 3u, 1u, 1u, 1u, 2u, 2u, 2u, 1u},
+        {0x0C4u, 1u, 1u, 0u, 0u, 2u, 32u, 1u, 0u},
+    };
+    quantized_runtime_graph_record_spec descriptor_specs[6] = {
+        {0x108u, 1u, 1u, 0u, 0u, 12u, 12u, 1u, 1u},
+        {0x120u, 1u, 1u, 0u, 0u, 12u, 12u, 1u, 2u},
+        {0x15Cu, 1u, 1u, 0u, 0u, 32u, 1u, 1u, 1u},
+        {0x174u, 3u, 1u, 1u, 1u, 1u, 1u, 1u, 1u},
+        {0x18Cu, 1u, 1u, 0u, 0u, 1u, 0u, 1u, 0u},
+        {0x144u, 1u, 1u, 0u, 0u, 32u, 0u, 1u, 0u},
+    };
+    const uint8_t output_channels = family == 1u ? 4u : 8u;
+    descriptor_specs[4].byte5 = output_channels;
+    descriptor_specs[5].byte5 = output_channels;
+
+    zero_bytes(graph->bytes, sizeof(graph->bytes));
+    const uint32_t *host_cursor = model_words;
+    uintptr_t quantizer[3];
+    quantized_runtime_quantizer_descriptor_construct(quantizer, &host_cursor);
+    store_native_words_as_u32(graph->bytes, quantizer, 3u);
+    uint32_t target_cursor = model_base_address + 8u;
+    size_t consumed = 2u;
+    gomore_sleep_graph_build_common_prefix(
+        rt, graph->bytes, aligned_specs, model_words,
+        &target_cursor, &consumed);
+    gomore_sleep_graph_build_common_tail(
+        rt, graph->bytes, descriptor_specs, &target_cursor, &consumed);
+
+    if (consumed != expected_words ||
+            target_cursor != model_base_address + consumed * 4u) {
+        zero_bytes(graph->bytes, sizeof(graph->bytes));
+        return false;
+    }
+    if (consumed_words != NULL) {
+        *consumed_words = consumed;
+    }
+    if (model_end_address != NULL) {
+        *model_end_address = target_cursor;
+    }
+    return true;
 }
 
 bool quantized_runtime_goodix_graph_build(
@@ -3081,14 +3482,13 @@ bool quantized_runtime_goodix_graph_build(
     consumed += 2u;
     target_cursor += 8u;
 
-    goodix_graph_build_aligned_record(rt, graph->bytes, &aligned_specs[0],
-                                      &target_cursor, &consumed);
+    graph_build_aligned_record(rt, graph->bytes, &aligned_specs[0],
+                               &target_cursor, &consumed);
     quantized_runtime_packed_pool_descriptor_initialize(
         graph->bytes + 0x024u, 0u, 2u, 2u, 0u);
     for (size_t index = 1u; index < 4u; ++index) {
-        goodix_graph_build_aligned_record(rt, graph->bytes,
-                                          &aligned_specs[index],
-                                          &target_cursor, &consumed);
+        graph_build_aligned_record(rt, graph->bytes, &aligned_specs[index],
+                                   &target_cursor, &consumed);
     }
     host_cursor = model_words + consumed;
     quantized_runtime_cursor_pair_add_descriptor_construct(
@@ -3099,9 +3499,8 @@ bool quantized_runtime_goodix_graph_build(
         graph->bytes + 0x084u, 0u, 2u, 2u, 0u);
 
     for (size_t index = 4u; index < 7u; ++index) {
-        goodix_graph_build_aligned_record(rt, graph->bytes,
-                                          &aligned_specs[index],
-                                          &target_cursor, &consumed);
+        graph_build_aligned_record(rt, graph->bytes, &aligned_specs[index],
+                                   &target_cursor, &consumed);
     }
     host_cursor = model_words + consumed;
     quantized_runtime_cursor_pair_add_descriptor_construct(
@@ -3114,9 +3513,9 @@ bool quantized_runtime_goodix_graph_build(
                  (uint32_t)quantized_runtime_executor_vector_30534(rt));
 
     for (size_t index = 0u; index < 4u; ++index) {
-        goodix_graph_build_descriptor_record(rt, graph->bytes,
-                                             &descriptor_specs[index],
-                                             &target_cursor, &consumed);
+        graph_build_descriptor_record(rt, graph->bytes,
+                                      &descriptor_specs[index],
+                                      &target_cursor, &consumed);
     }
 
     uintptr_t operator_descriptor[4];

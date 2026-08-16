@@ -24,17 +24,21 @@ from emulate_r1_locomotion_window import LocomotionFirmwareFixture, RAM_BASE
 VALIDATE_FINAL_SLEEP = 0x0004A3E8
 LOW_POWER_HANDLER = 0x0004A5BC
 PUBLISH_FINAL_SLEEP = 0x0004A704
+BUILD_FINAL_SLEEP = 0x00069644
 GOMORE_OUTPUT_CONSUMER = 0x0006C294
 
 MEMSET = 0x000277AA
 GOMORE_AUTHORIZATION = 0x00049410
 GOMORE_FINAL_CONVERTER = 0x00067BBC
+TABLE_RECORD = 0x000684B4
+STAGE_REFINER = 0x00081040
 GOMORE_OUTPUT_READY = 0x0006C1C0
 GOMORE_OUTPUT_SYNC_BEGIN = 0x0006ACD8
 GOMORE_OUTPUT_SYNC_END = 0x0006ACC8
 ALLOCATE = 0x000855A0
 SYSTEM_EVENT = 0x0008D8FC
 FINAL_RECORD_LOOKUP = 0x0008FA3C
+STABLE_SLEEP_TEMPERATURE = 0x0004B5B0
 LOG_FLAGS = 0x000914EC
 ENGINE_LOCK = 0x00094384
 FREE = 0x00095D48
@@ -47,12 +51,22 @@ GOMORE_OUTPUT_STATE = 0x20006DC4
 GOMORE_ENGINE = 0x2001A56C
 RECORD = RAM_BASE + 0x43000
 WORKSPACE = RAM_BASE + 0x45000
+FINAL_REPORT = RAM_BASE + 0x54000
+FINAL_STAGES = RAM_BASE + 0x54100
+FINAL_ENGINE = RAM_BASE + 0x58000
+FINAL_INTERVAL = RAM_BASE + 0x5A200
+FINAL_BUILD_REPORT = RAM_BASE + 0x5A300
+FINAL_BUILD_STAGES = RAM_BASE + 0x5A400
+FINAL_BUILD_CONTEXT = RAM_BASE + 0x5A500
 
 
 class SleepFinalFixture:
     def __init__(self, image: bytes) -> None:
         self.machine = LocomotionFirmwareFixture(image)
         self.record_lookup_pointer = RECORD
+        self.intercept_record_lookup = True
+        self.body_temperature = 37
+        self.allocation_pointer = WORKSPACE
         self.intercept_status_publisher = False
         self.intercept_final_publisher = False
         self.system_events: list[tuple[int, bytes]] = []
@@ -62,6 +76,8 @@ class SleepFinalFixture:
         self.freed_pointers: list[int] = []
         self.sleep_shutdowns = 0
         self.forced_finalizations = 0
+        self.allocation_lengths: list[int] = []
+        self.stage_refine_calls = 0
         self.machine.uc.mem_write(WEAR_RUNTIME, b"\x00" * 32)
         self.machine.uc.mem_write(SLEEP_BRIDGE, b"\x00" * 12)
         self.machine.uc.mem_write(GOMORE_OUTPUT_STATE, b"\x00" * 0x80)
@@ -79,8 +95,16 @@ class SleepFinalFixture:
         del size, user_data
         if address == LOG_FLAGS:
             self._return(uc, 0)
-        elif address == FINAL_RECORD_LOOKUP:
+        elif address == FINAL_RECORD_LOOKUP and self.intercept_record_lookup:
             self._return(uc, self.record_lookup_pointer)
+        elif address == STABLE_SLEEP_TEMPERATURE:
+            self._return(uc, self.body_temperature)
+        elif address == TABLE_RECORD:
+            uc.mem_write(uc.reg_read(UC_ARM_REG_R0), b"\x00" * 11)
+            self._return(uc)
+        elif address == STAGE_REFINER:
+            self.stage_refine_calls += 1
+            self._return(uc)
         elif address == SYSTEM_EVENT:
             event_id = uc.reg_read(UC_ARM_REG_R0)
             pointer = uc.reg_read(UC_ARM_REG_R1)
@@ -106,7 +130,8 @@ class SleepFinalFixture:
         elif address == GOMORE_OUTPUT_READY:
             self._return(uc, 1)
         elif address == ALLOCATE:
-            self._return(uc, WORKSPACE)
+            self.allocation_lengths.append(uc.reg_read(UC_ARM_REG_R0))
+            self._return(uc, self.allocation_pointer)
         elif address == MEMSET:
             pointer = uc.reg_read(UC_ARM_REG_R0)
             length = uc.reg_read(UC_ARM_REG_R1)
@@ -150,6 +175,8 @@ class SleepFinalFixture:
         self.freed_pointers.clear()
         self.sleep_shutdowns = 0
         self.forced_finalizations = 0
+        self.allocation_lengths.clear()
+        self.stage_refine_calls = 0
 
     def write_record(self, raw_type: int, compact_count: int, body: bytes = b"") -> None:
         header = bytearray(32)
@@ -159,6 +186,78 @@ class SleepFinalFixture:
 
     def set_living_confirmation(self, raw: int) -> None:
         self.machine.uc.mem_write(WEAR_RUNTIME + 2, bytes([raw & 0xFF]))
+
+    def serialize_final_record(self, wire_type: int) -> tuple[bytes, list[int]]:
+        stages = bytes([1] * 64 + [2, 2])
+        report = bytearray(88)
+        struct.pack_into("<iiI", report, 0, -5, 0x12345678, FINAL_STAGES)
+        struct.pack_into("<H", report, 0x10, len(stages))
+        struct.pack_into("<f", report, 0x1C, 6.5)
+        struct.pack_into("<f", report, 0x28, 0.876)
+        struct.pack_into("<f", report, 0x34, 0.20)
+        struct.pack_into("<f", report, 0x38, 0.50)
+        struct.pack_into("<f", report, 0x3C, 0.15)
+        struct.pack_into("<f", report, 0x40, 1.25)
+        struct.pack_into("<f", report, 0x44, 2.5)
+        struct.pack_into("<f", report, 0x48, 1.5)
+        struct.pack_into("<f", report, 0x4C, 1.25)
+        struct.pack_into("<f", report, 0x50, 93.9)
+        report[0x54] = wire_type & 0xFF
+        self.machine.uc.mem_write(FINAL_REPORT, bytes(report))
+        self.machine.uc.mem_write(FINAL_STAGES, stages)
+        self.machine.uc.mem_write(WORKSPACE, b"\xA5" * 64)
+        self.reset_observations()
+        self.intercept_record_lookup = False
+        pointer = self.machine.call(FINAL_RECORD_LOOKUP, FINAL_REPORT)
+        self.intercept_record_lookup = True
+        if pointer != WORKSPACE:
+            raise AssertionError(f"unexpected serialized pointer 0x{pointer:08x}")
+        compact_count = struct.unpack(
+            "<H", bytes(self.machine.uc.mem_read(WORKSPACE + 0x1E, 2))
+        )[0]
+        length = 0x20 + compact_count
+        return bytes(self.machine.uc.mem_read(WORKSPACE, length)), list(self.allocation_lengths)
+
+    def build_final_report(self) -> dict[str, Any]:
+        engine = bytearray(0x2200)
+        for epoch in range(30, 60):
+            byte_index = epoch >> 2
+            shift = (epoch & 3) << 1
+            engine[byte_index] |= 2 << shift
+        struct.pack_into("<I", engine, 0x2D0, 1800)
+        interval = bytearray(32)
+        struct.pack_into("<II", interval, 0, 900, 1800)
+        interval[0x1A] = 0x18
+        report = bytearray(88)
+        struct.pack_into("<I", report, 8, FINAL_BUILD_STAGES)
+        self.machine.uc.mem_write(FINAL_ENGINE, bytes(engine))
+        self.machine.uc.mem_write(FINAL_INTERVAL, bytes(interval))
+        self.machine.uc.mem_write(FINAL_BUILD_REPORT, bytes(report))
+        self.machine.uc.mem_write(FINAL_BUILD_STAGES, b"\xA5" * 64)
+        self.machine.uc.mem_write(FINAL_BUILD_CONTEXT, b"\x00" * 16)
+        self.reset_observations()
+        status = self.machine.call(
+            BUILD_FINAL_SLEEP,
+            FINAL_ENGINE,
+            FINAL_BUILD_CONTEXT,
+            FINAL_INTERVAL,
+            0,
+            FINAL_BUILD_REPORT,
+        )
+        output = bytes(self.machine.uc.mem_read(FINAL_BUILD_REPORT, 88))
+        stage_count = struct.unpack_from("<I", output, 0x10)[0]
+        stages = bytes(self.machine.uc.mem_read(FINAL_BUILD_STAGES, stage_count))
+        return {
+            "status": status,
+            "wire_type": output[0x54],
+            "start": struct.unpack_from("<I", output, 0)[0],
+            "end": struct.unpack_from("<I", output, 4)[0],
+            "stage_count": stage_count,
+            "stages": list(stages),
+            "report_float_fields": list(struct.unpack_from("<13f", output, 0x1C)),
+            "score": struct.unpack_from("<f", output, 0x50)[0],
+            "refine_calls": self.stage_refine_calls,
+        }
 
     def lifecycle(
         self,
@@ -193,6 +292,10 @@ class SleepFinalFixture:
 
 def run(image: bytes) -> dict[str, Any]:
     fixture = SleepFinalFixture(image)
+
+    built_report = fixture.build_final_report()
+    serialized_long, serialized_long_allocations = fixture.serialize_final_record(1)
+    serialized_short, serialized_short_allocations = fixture.serialize_final_record(2)
 
     fixture.write_record(2, 1, b"\x08")
     fixture.set_living_confirmation(0)
@@ -241,7 +344,33 @@ def run(image: bytes) -> dict[str, Any]:
     lifecycle_off_final = fixture.lifecycle(0x0C, 1, 0)
     lifecycle_on_precedence = fixture.lifecycle(0x0E, 0, 1)
     lifecycle_no_change = fixture.lifecycle(0x00, 1, 3)
+    fixture.allocation_pointer = 0
+    lifecycle_allocation_failure = fixture.lifecycle(0x0C, 1, 0)
+    fixture.allocation_pointer = WORKSPACE
 
+    expected_long = bytes.fromhex(
+        "01575d000f14320f25000000000000007856341286014b0096005a004b000300fd050a"
+    )
+    expected_short = bytes.fromhex(
+        "0200000000000000000000000000000078563412000000000000000000000000"
+    )
+
+    assert serialized_long == expected_long
+    assert serialized_short == expected_short
+    assert serialized_long_allocations == [35]
+    assert serialized_short_allocations == [35]
+    assert built_report["status"] == 0
+    assert built_report["wire_type"] == 1
+    assert built_report["start"] == 900
+    assert built_report["end"] == 1800
+    assert built_report["stage_count"] == 30
+    assert built_report["stages"] == [2] * 30
+    assert built_report["report_float_fields"][0] == 15.0
+    assert built_report["report_float_fields"][4] == 15.0
+    assert built_report["report_float_fields"][5] == 0.0
+    assert built_report["report_float_fields"][7] == 1.0
+    assert built_report["report_float_fields"][11] == 15.0
+    assert built_report["refine_calls"] == 1
     assert no_living == 0
     assert accepted_short == 1
     assert empty_long == 0
@@ -272,9 +401,20 @@ def run(image: bytes) -> dict[str, Any]:
         "final_publication_requests": 0,
         "gomore_requests": [],
     }
+    assert lifecycle_allocation_failure == {
+        "status_publications": [0],
+        "final_publication_requests": 0,
+        "gomore_requests": [],
+    }
 
     return {
-        "fixture_groups": 8,
+        "fixture_groups": 9,
+        "builder": built_report,
+        "serializer": {
+            "long_hex": serialized_long.hex(),
+            "short_hex": serialized_short.hex(),
+            "stock_allocation_bytes": serialized_long_allocations[0],
+        },
         "validation": {
             "no_living": no_living,
             "accepted_short": accepted_short,
@@ -298,6 +438,7 @@ def run(image: bytes) -> dict[str, Any]:
             "off_final": lifecycle_off_final,
             "on_precedence": lifecycle_on_precedence,
             "no_change": lifecycle_no_change,
+            "allocation_failure": lifecycle_allocation_failure,
         },
         "safety": {
             "physical_device_access": False,

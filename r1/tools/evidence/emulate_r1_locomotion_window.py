@@ -222,6 +222,27 @@ def main() -> None:
     gap_updates.append(gaps.update(None, 1))
     gap_updates.append(gaps.update(fixture_axes(5), 9))
 
+    assert [item["return_code"] for item in steady_updates] == [0] * 5
+    assert [item["missing_magnitude_mean_slots"] for item in steady_updates] == [
+        7, 6, 5, 4, 3
+    ]
+    assert [item["circular_index"] for item in steady_updates] == [1, 2, 3, 4, 5]
+    assert steady_updates[0]["magnitude_history_tail"] == [
+        1135, 1140, 1146, 1152, 1158, 1164,
+        1170, 1175, 1181, 1187, 1193, 1199,
+    ]
+    assert steady_updates[0]["output_flags"] == [255] * 6
+    assert steady_updates[3]["output_flags"] == [1, 255, 1, 255, 255, 255]
+    assert [item["return_code"] for item in gap_updates[-3:]] == [0, 1, 1]
+    assert gap_updates[-2]["circular_index"] == 7
+    assert gap_updates[-2]["magnitude_history_tail"] == [
+        1495, 1488, 1482, 1476, 1469, 1463,
+        1457, 1451, 1444, 1438, 1432, 1426,
+    ]
+    assert gap_updates[-1]["missing_magnitude_mean_slots"] == 8
+    assert gap_updates[-1]["circular_index"] == 0
+    assert gap_updates[-1]["magnitude_history_tail"] == [0] * 12
+
     direct = LocomotionFirmwareFixture(image)
     autocorrelation = {}
     for period in (12, 15, 20, 25, 30, 35):

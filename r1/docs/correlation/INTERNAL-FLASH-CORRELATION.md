@@ -75,9 +75,15 @@ the SoftDevice event thread are rejected instead of deadlocking it; a production
 consumer must call the synchronous seam from a separate worker. The port binds the already tested generic `r1_flash` interface to
 unmodified upstream FAL and requires all seven recovered partitions to initialize.
 
-The linked image retains the storage API, Nordic fstorage calls, FAL initializer/device lookup, and
+The linked Nordic image retains the storage API, Nordic fstorage calls, FAL initializer/device lookup, and
 the local binding. FlashDB 2.0.0 remains the provider for `health.db`; `kv.bin` and `sleep.db` use
 their separately documented R1 formats.
+
+The alternate Zephyr image exposes the identical `0x000D4000..<0x000F8000`
+window through `flash_area_read/write/erase`, serializes it with a kernel mutex,
+and binds the same R1 FAL port and seven-entry table. It compiles pinned
+FlashDB/FAL for `health.db` while continuing to use the R1 formats directly for
+`kv.bin` and `sleep.db`. Neither target exposes a raw host flash command.
 
 ## Safety and remaining validation
 

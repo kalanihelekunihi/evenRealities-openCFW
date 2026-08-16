@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guard the FreeType 2.9.1 engine census."""
+"""Guard the FreeType engine census of the 0x51/0x52xxxx frontier."""
 
 from __future__ import annotations
 
@@ -19,11 +19,20 @@ CORPUS = Path(
         "/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth",
     )
 )
+PLAN = ROOT / "build/source/flash-plan.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFESTS = ROOT / "tools/manifests"
-CENSUS_TSV = MANIFESTS / "g2-freetype-engine-census.tsv"
-SUMMARY_JSON = MANIFESTS / "g2-freetype-engine-census-summary.json"
-G2_FTMODULE = ROOT / "third_party/freetype/g2-config/freetype/config/ftmodule.h"
-PROVENANCE = ROOT / "third_party/freetype/PROVENANCE.json"
+SNAPSHOT = ROOT / "third_party/freetype"
+
+EXPECTED_TIER_COUNTS = {
+    # evidence: (functions, official_opaque_bytes)
+    "documented-api-anchor": (7, 1_518),
+    "documented-interior-pin": (1, 288),
+    "ps-property-string-signature": (2, 346),
+    "base-call-graph-direct": (17, 1_294),
+    "base-call-graph-indirect": (56, 4_428),
+    "none": (261, 68_088),
+}
 
 
 def load_analyzer():
@@ -37,289 +46,410 @@ def load_analyzer():
     return module
 
 
-class FreetypeCensusUnitTests(unittest.TestCase):
-    """Corpus-independent checks of the census rule tables and loaders."""
+def synthetic_functions() -> dict[int, dict]:
+    """Small closed call-graph world for closure-rule unit tests."""
+
+    def row(calls):
+        return {
+            "calls": set(calls),
+            "dat_refs": set(),
+            "tokens": set(),
+            "body_start": 0,
+            "body_end_exclusive": 0,
+        }
+
+    return {
+        0x1000: row([0x2000]),  # seed anchor
+        0x2000: row([0x3000, 0x9000]),  # direct callee; 0x9000 allowlisted
+        0x3000: row([0x4000]),  # pure community internal
+        0x4000: row([]),  # leaf called by community
+        0x5000: row([0x4000]),  # caller of a community leaf -> joins indirect
+        0x6000: row([0x7000]),  # blocked: 0x7000 calls a stranger
+        0x7000: row([0xAAAA]),
+        0x8000: row([0xBBBB]),  # neutral passthrough target (runtime-only)
+        0x8100: row([0x8000, 0x2000]),  # joins through the neutral 0x8000
+        0xBBBB: row([]),
+    }
+
+
+class FreeTypeCensusUnitTests(unittest.TestCase):
+    """Corpus-independent checks of the census rule tables and algorithms."""
 
     @classmethod
     def setUpClass(cls) -> None:
         cls.analyzer = load_analyzer()
 
-    def test_module_rules_are_total(self) -> None:
+    def test_evidence_classes_are_closed_and_cover_attribution(self) -> None:
         analyzer = self.analyzer
-        # Every ftmodule.h class has a module rule, and every rule names a
-        # known FreeType source module.
+        for entry, (status, module, evidence, confidence) in (
+            analyzer.EXPECTED_ATTRIBUTION.items()
+        ):
+            self.assertIn(status, analyzer.STATUSES)
+            self.assertIn(module, analyzer.MODULES)
+            self.assertIn(evidence, analyzer.EVIDENCE_CLASSES)
+            self.assertIn(confidence, analyzer.CONFIDENCE_ORDER)
+        covered = {row[2] for row in analyzer.EXPECTED_ATTRIBUTION.values()}
         self.assertEqual(
-            tuple(analyzer.FTMODULE_CLASS_MODULE), analyzer.EXPECTED_FTMODULE_CLASSES
+            covered, set(analyzer.EVIDENCE_CLASSES) - {"none"}
         )
-        for name in analyzer.EXPECTED_FTMODULE_CLASSES:
-            self.assertIn(analyzer.FTMODULE_CLASS_MODULE[name], analyzer.MODULES)
-        for module, meta in analyzer.MODULES.items():
-            self.assertTrue(meta["label"])
-            self.assertTrue(
-                (analyzer.FREETYPE_SNAPSHOT / "src" / module).is_dir(),
-                f"missing snapshot module directory: {module}",
+
+    def test_attribution_census_is_pinned(self) -> None:
+        analyzer = self.analyzer
+        self.assertEqual(
+            len(analyzer.EXPECTED_ATTRIBUTION),
+            analyzer.EXPECTED_ATTRIBUTED_FUNCTIONS,
+        )
+        by_evidence = {}
+        for _status, _module, evidence, _confidence in (
+            analyzer.EXPECTED_ATTRIBUTION.values()
+        ):
+            by_evidence[evidence] = by_evidence.get(evidence, 0) + 1
+        self.assertEqual(by_evidence["documented-api-anchor"], 7)
+        self.assertEqual(by_evidence["documented-interior-pin"], 1)
+        self.assertEqual(by_evidence["ps-property-string-signature"], 2)
+        self.assertEqual(by_evidence["base-call-graph-direct"], 17)
+        self.assertEqual(by_evidence["base-call-graph-indirect"], 56)
+
+    def test_documented_anchors_are_well_formed(self) -> None:
+        analyzer = self.analyzer
+        self.assertEqual(len(analyzer.DOCUMENTED_ANCHORS), 7)
+        for entry, anchor in analyzer.DOCUMENTED_ANCHORS.items():
+            self.assertGreaterEqual(entry, analyzer.FRONTIER_BASE)
+            self.assertLess(entry, analyzer.FRONTIER_END)
+            self.assertTrue(anchor["name"])
+            self.assertTrue(anchor["source"].startswith("docs/research/"))
+            checks = (
+                "body" in anchor,
+                "contains" in anchor,
+                "calls" in anchor,
+                "called_by" in anchor,
+                "refs_word" in anchor,
             )
-        for bucket in analyzer.CENSUS_BUCKETS:
-            self.assertTrue(bucket)
-
-    def test_g2_module_order_is_pinned(self) -> None:
-        modules = self.analyzer.load_g2_modules()
+            self.assertTrue(any(checks), anchor["name"])
+        # The byte-exact FT_Done_Face envelope is pinned by span.
         self.assertEqual(
-            modules,
-            (
-                "autofit",
-                "truetype",
-                "cff",
-                "psaux",
-                "psnames",
-                "pshinter",
-                "sfnt",
-                "smooth",
-            ),
+            analyzer.DOCUMENTED_ANCHORS[0x00526814]["body"],
+            (0x00526814, 0x0052687E),
         )
 
-    def test_g2_ftmodule_mutation_fails_closed(self) -> None:
+    def test_ps_property_sets_pin_the_2_9_1_asymmetry(self) -> None:
         analyzer = self.analyzer
-        with tempfile.TemporaryDirectory() as directory:
-            mutated = Path(directory) / "ftmodule.h"
-            mutated.write_bytes(
-                G2_FTMODULE.read_bytes().replace(b"psaux_module_class", b"psaxu_module_class")
+        set_names = set(analyzer.EXPECTED_PS_PROPERTY_SET_NAMES)
+        get_names = set(analyzer.EXPECTED_PS_PROPERTY_GET_NAMES)
+        self.assertEqual(len(analyzer.EXPECTED_PS_PROPERTY_SET_NAMES), 4)
+        self.assertEqual(len(analyzer.EXPECTED_PS_PROPERTY_GET_NAMES), 3)
+        self.assertEqual(set_names - get_names, {"random-seed"})
+        self.assertLess(get_names, set_names)
+
+    def test_external_allowlist_is_outside_scope_and_documented(self) -> None:
+        analyzer = self.analyzer
+        self.assertEqual(len(analyzer.EXTERNAL_ALLOWLIST), 14)
+        for entry, identity in analyzer.EXTERNAL_ALLOWLIST.items():
+            self.assertTrue(identity)
+            in_region = analyzer.FRONTIER_BASE <= entry < analyzer.FRONTIER_END
+            self.assertFalse(
+                in_region and entry not in analyzer.EXPECTED_ATTRIBUTION,
+                f"allowlist entry 0x{entry:08X} collides with the frontier",
             )
-            with self.assertRaises(analyzer.CensusError):
-                analyzer.load_g2_modules(mutated)
+        # The three documented ftsystem externals are all present.
+        for entry in analyzer.EXTERNAL_FTSYSTEM:
+            self.assertIn(entry, analyzer.EXTERNAL_ALLOWLIST)
 
-    def test_recovery_audit_anchors_are_well_formed(self) -> None:
+    def test_rejected_envelopes_stay_out_of_scope(self) -> None:
         analyzer = self.analyzer
-        entries = [row[0] for row in analyzer.RECOVERY_AUDIT_ANCHORS]
-        self.assertEqual(len(entries), len(set(entries)))
-        for entry, module, label, citation in analyzer.RECOVERY_AUDIT_ANCHORS:
-            self.assertIn(module, analyzer.MODULES)
-            self.assertTrue(label)
-            self.assertTrue(citation.startswith("freetype-recovery-audit.md"))
-        by_entry = dict((row[0], row) for row in analyzer.RECOVERY_AUDIT_ANCHORS)
-        self.assertEqual(by_entry[0x00526814][1:3], ("base", "FT_Done_Face"))
-        self.assertEqual(by_entry[0x005264A6][1:3], ("base", "FT_Open_Face"))
+        for entry in analyzer.REGION_REJECTED_ENVELOPES:
+            self.assertNotIn(entry, analyzer.EXPECTED_ATTRIBUTION)
+            self.assertGreaterEqual(entry, analyzer.FRONTIER_BASE)
+            self.assertLess(entry, analyzer.FRONTIER_END)
 
-    def test_string_signature_pins_are_well_formed(self) -> None:
+    def test_located_tables_cover_three_driver_modules(self) -> None:
         analyzer = self.analyzer
-        entries = [row[0] for row in analyzer.EXPECTED_STRING_SIGNATURES]
-        self.assertEqual(len(entries), len(set(entries)))
-        for entry, module, literals in analyzer.EXPECTED_STRING_SIGNATURES:
-            self.assertIn(module, analyzer.MODULES)
-            self.assertTrue(literals)
-            self.assertEqual(tuple(sorted(literals)), tuple(literals))
-            for literal in literals:
-                self.assertGreaterEqual(
-                    len(literal), analyzer.MIN_SIGNATURE_LITERAL
-                )
+        self.assertEqual(len(analyzer.EXPECTED_LOCATED_TABLES), 7)
+        modules = {
+            key.split(":")[0].split("/")[1]
+            for key in analyzer.EXPECTED_LOCATED_TABLES
+        }
+        self.assertEqual(modules, {"cff", "psaux", "psnames"})
+        for address in analyzer.EXPECTED_LOCATED_TABLES.values():
+            self.assertGreaterEqual(address, 0x00530000)
 
-    def test_service_pins_are_well_formed(self) -> None:
+    def test_member_hypotheses_reference_real_attributions(self) -> None:
         analyzer = self.analyzer
-        for _address, module, ids in analyzer.EXPECTED_SERVICE_TABLES:
-            self.assertIn(module, analyzer.MODULES)
-            self.assertTrue(ids)
-        for entry, module, service_id in analyzer.EXPECTED_SERVICE_CALLBACKS:
-            self.assertIn(module, analyzer.MODULES)
-            table_ids = {
-                id_
-                for _address, table_module, ids in analyzer.EXPECTED_SERVICE_TABLES
-                if table_module == module
-                for id_ in ids
-            }
-            self.assertIn(service_id, table_ids)
-        # The pinned callback set must be unique per entry.
-        entries = [row[0] for row in analyzer.EXPECTED_SERVICE_CALLBACKS]
-        self.assertEqual(len(entries), len(set(entries)))
+        for entry, hypothesis in analyzer.MEMBER_HYPOTHESES.items():
+            self.assertIn(entry, analyzer.EXPECTED_ATTRIBUTION)
+            self.assertTrue(hypothesis.endswith(")") or "candidate" in hypothesis)
+            status = analyzer.EXPECTED_ATTRIBUTION[entry][0]
+            self.assertEqual(status, "cluster")
 
-    def test_census_pins_reconcile(self) -> None:
+    def test_ps_property_name_parser_on_synthetic_source(self) -> None:
         analyzer = self.analyzer
-        self.assertEqual(
-            analyzer.EXPECTED_FRONTIER_OFFICIAL_BYTES
-            + analyzer.EXPECTED_PARENT_FREETYPE_BYTES,
-            analyzer.EXPECTED_CENSUS_OFFICIAL_BYTES,
+        source = (
+            "  ps_property_set( FT_Module module, const char* property_name )"
+            " { if ( !ft_strcmp( property_name, \"alpha\" ) ) return 0;"
+            "   else if ( !ft_strcmp( property_name, \"beta\" ) ) return 0; }"
+            "  ps_property_get( FT_Module module, const char* property_name )"
+            " { if ( !ft_strcmp( property_name, \"alpha\" ) ) return 0; }"
         )
-        self.assertEqual(
-            analyzer.EXPECTED_FRONTIER_FUNCTIONS
-            + len(analyzer.EXPECTED_PARENT_FREETYPE_ENTRIES),
-            analyzer.EXPECTED_CENSUS_FUNCTIONS,
-        )
-        self.assertEqual(
-            sum(row[0] for row in analyzer.EXPECTED_BUCKET_CENSUS.values()),
-            analyzer.EXPECTED_CENSUS_FUNCTIONS,
-        )
-        self.assertEqual(
-            sum(row[1] for row in analyzer.EXPECTED_BUCKET_CENSUS.values()),
-            analyzer.EXPECTED_CENSUS_OFFICIAL_BYTES,
-        )
-        self.assertEqual(
-            sum(analyzer.EXPECTED_EVIDENCE_COUNTS.values()),
-            analyzer.EXPECTED_CENSUS_FUNCTIONS,
-        )
-        self.assertEqual(len(analyzer.EXPECTED_OVERSIZED_ENTRIES), 8)
+        names = analyzer.PS_PROPERTY_NAME_RE.findall(source)
+        self.assertEqual(names, ["alpha", "beta", "alpha"])
 
-    def test_snapshot_provenance_mutation_fails_closed(self) -> None:
+    def test_table_parser_rejects_non_scalar_arrays(self) -> None:
         analyzer = self.analyzer
-        with tempfile.TemporaryDirectory() as directory:
-            mutated = Path(directory) / "PROVENANCE.json"
-            mutated.write_bytes(
-                PROVENANCE.read_bytes().replace(b'"sha256"', b'"sha255"', 1)
-            )
-            with self.assertRaises(analyzer.CensusError):
-                analyzer.Snapshot(analyzer.FREETYPE_SNAPSHOT, mutated)
+        self.assertIsNone(analyzer._parse_array_body("FT_UShort", " 1, FOO, 3 "))
+        self.assertIsNone(analyzer._parse_array_body("FT_UShort", " "))
+        data = analyzer._parse_array_body("FT_UShort", " 1, 0x2, 3u ")
+        self.assertEqual(data, b"\x01\x00\x02\x00\x03\x00")
 
-    def test_snapshot_read_requires_provenance_record(self) -> None:
+    def test_string_cell_targets_find_bodies_and_cells(self) -> None:
         analyzer = self.analyzer
-        snapshot = analyzer.Snapshot()
-        with self.assertRaises(analyzer.CensusError):
-            snapshot.read_text("src/base/not-a-file.c")
-        # A recorded file verifies and reads.
-        self.assertIn("FT_Done_Face", snapshot.read_text("include/freetype/freetype.h"))
+        blob = bytearray(256)
+        blob[0x40:0x46] = b"warp\x00"
+        import struct as _struct
+
+        _struct.pack_into("<I", blob, 0x80, 0x1000 + 0x40)
+        targets = analyzer.string_cell_targets(bytes(blob), 0x1000, ("warp",))
+        self.assertEqual(targets[0x1040], "warp")
+        self.assertEqual(targets[0x1080], "warp")
+
+    def test_community_closure_on_synthetic_graph(self) -> None:
+        analyzer = self.analyzer
+        functions = synthetic_functions()
+        callers = analyzer.caller_map(functions)
+        scope = {0x2000, 0x3000, 0x4000, 0x5000, 0x6000, 0x8100}
+        community = analyzer.grow_community(
+            {0x1000}, scope, functions, callers, {0x9000}
+        )
+        # 0x1000 is a seed outside the scope; in-scope members join only
+        # through admissible edges.
+        self.assertEqual(
+            community, {0x1000, 0x2000, 0x3000, 0x4000, 0x5000, 0x8100}
+        )
+        # 0x6000 stays out: its callee 0x7000 reaches a stranger.
+
+    def test_community_closure_rejects_stranger_chains(self) -> None:
+        analyzer = self.analyzer
+        functions = synthetic_functions()
+        functions[0x7000] = {
+            "calls": {0x1000},  # now 0x7000 reaches the seed: chain unblocks
+            "dat_refs": set(),
+            "tokens": set(),
+            "body_start": 0,
+            "body_end_exclusive": 0,
+        }
+        callers = analyzer.caller_map(functions)
+        scope = {0x2000, 0x3000, 0x4000, 0x5000, 0x6000, 0x7000}
+        community = analyzer.grow_community(
+            {0x1000}, scope, functions, callers, {0x9000}
+        )
+        self.assertIn(0x6000, community)
+        self.assertIn(0x7000, community)
+
+    def test_table_module_pin_uses_provenance_count(self) -> None:
+        analyzer = self.analyzer
+        provenance = SNAPSHOT / "PROVENANCE.json"
+        if not provenance.is_file():
+            self.skipTest("snapshot provenance unavailable")
+        import json
+
+        files = json.loads(provenance.read_text(encoding="utf-8"))["files"]
+        self.assertEqual(len(files), 297)
+        for name in analyzer.TABLE_SOURCES + (analyzer.PSPROP_SOURCE,):
+            self.assertIn(name, {row["local_path"] for row in files})
 
 
 @unittest.skipUnless(
-    CORPUS.is_dir() and CENSUS_TSV.is_file() and SUMMARY_JSON.is_file(),
-    "authenticated corpus/census manifests unavailable",
+    CORPUS.is_dir() and PLAN.is_file() and REPORT.is_file(),
+    "authenticated corpus/current build unavailable",
 )
-class FreetypeCensusAuthenticatedTests(unittest.TestCase):
+class FreeTypeCensusAuthenticatedTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.analyzer = load_analyzer()
         cls.report = cls.analyzer.analyze(CORPUS)
 
-    def test_frontier_reconciliation_is_exact(self) -> None:
+    def test_scope_reconciles_with_parent_census(self) -> None:
         reconciliation = self.report["reconciliation"]
-        self.assertEqual(reconciliation["parent_frontier_functions"], 342)
-        self.assertEqual(reconciliation["parent_frontier_official_bytes"], 75_016)
-        self.assertEqual(reconciliation["parent_freetype_bucket_functions"], 2)
-        self.assertEqual(reconciliation["parent_freetype_bucket_official_bytes"], 946)
-        self.assertEqual(reconciliation["census_functions"], 344)
-        self.assertEqual(reconciliation["census_official_bytes"], 75_962)
-        total = sum(bucket["functions"] for bucket in self.report["buckets"])
-        self.assertEqual(total, 344)
-        total_bytes = sum(bucket["official_opaque_bytes"] for bucket in self.report["buckets"])
-        self.assertEqual(total_bytes, 75_962)
+        self.assertEqual(reconciliation["frontier_functions"], 342)
+        self.assertEqual(reconciliation["frontier_official_bytes"], 75_016)
+        self.assertEqual(reconciliation["frontier_51_functions"], 87)
+        self.assertEqual(reconciliation["frontier_51_official_bytes"], 36_812)
+        self.assertEqual(reconciliation["frontier_52_functions"], 255)
+        self.assertEqual(reconciliation["frontier_52_official_bytes"], 38_204)
+        self.assertEqual(reconciliation["freetype_bucket_functions"], 2)
+        self.assertEqual(reconciliation["freetype_bucket_official_bytes"], 946)
+        self.assertEqual(reconciliation["scope_functions"], 344)
 
-    def test_bucket_census_is_pinned(self) -> None:
-        actual = {
-            bucket["bucket"]: (bucket["functions"], bucket["official_opaque_bytes"])
-            for bucket in self.report["buckets"]
-        }
-        self.assertEqual(actual, self.analyzer.EXPECTED_BUCKET_CENSUS)
+    def test_attribution_and_investigation_reconcile(self) -> None:
+        reconciliation = self.report["reconciliation"]
+        self.assertEqual(reconciliation["attributed_functions"], 83)
+        self.assertEqual(reconciliation["attributed_official_bytes"], 7_874)
+        self.assertEqual(reconciliation["investigation_functions"], 261)
+        self.assertEqual(reconciliation["investigation_official_bytes"], 68_088)
+        self.assertEqual(7_874 + 68_088, 75_016 + 946)
+        rows = self.report["functions"]
+        self.assertEqual(len(rows), 344)
         self.assertEqual(
-            self.report["evidence_counts"], self.analyzer.EXPECTED_EVIDENCE_COUNTS
+            sum(row["official_opaque_bytes"] for row in rows), 75_962
         )
 
-    def test_evidence_and_confidence_classes_are_closed(self) -> None:
-        valid_evidence = {
-            "recovery-audit-anchor",
-            "module-string-signature",
-            "module-class-callback",
-            "raster-funcs-callback",
-            "service-record-callback",
-            "call-topology-single-module",
-            "call-topology-multi-module",
-            "link-order-sandwich",
-            "none",
-        }
-        valid_confidence = {"high", "medium", "low", "none"}
-        valid_buckets = set(self.analyzer.CENSUS_BUCKETS)
-        for record in self.report["functions"]:
-            self.assertIn(record["bucket"], valid_buckets)
-            self.assertIn(record["evidence"], valid_evidence)
-            self.assertIn(record["confidence"], valid_confidence)
+    def test_tier_census_is_pinned(self) -> None:
+        actual = {}
+        for row in self.report["functions"]:
+            functions, official = actual.get(row["evidence"], (0, 0))
+            actual[row["evidence"]] = (
+                functions + 1,
+                official + row["official_opaque_bytes"],
+            )
+        self.assertEqual(actual, EXPECTED_TIER_COUNTS)
 
-    def test_anchor_functions_are_pinned(self) -> None:
-        by_entry = {record["entry"]: record for record in self.report["functions"]}
+    def test_module_summary_is_pinned(self) -> None:
+        self.assertEqual(
+            self.report["module_summary"],
+            [{"module": "base", "functions": 83, "official_opaque_bytes": 7_874}],
+        )
+
+    def test_anchor_rows_are_pinned(self) -> None:
+        by_entry = {row["entry"]: row for row in self.report["functions"]}
         record = by_entry[0x00526814]
-        self.assertEqual(record["bucket"], "base")
-        self.assertEqual(record["evidence"], "recovery-audit-anchor")
+        self.assertEqual(record["status"], "module")
+        self.assertEqual(record["module"], "base")
+        self.assertEqual(record["attribution"], "FT_Done_Face")
+        self.assertEqual(record["evidence"], "documented-api-anchor")
         self.assertEqual(record["confidence"], "high")
+        self.assertEqual(record["scope"], "freetype-bucket")
         self.assertEqual(
             (record["body_start"], record["body_end_exclusive"]),
             (0x00526814, 0x0052687E),
         )
-        record = by_entry[0x005264A6]
-        self.assertEqual(record["bucket"], "base")
-        self.assertEqual(record["evidence"], "recovery-audit-anchor")
-        # String-signature members: ps_property_set/ps_property_get stay base
-        # even though the cff properties service record points at them.
-        for entry in (0x00527F0A, 0x00527FF2):
-            self.assertEqual(by_entry[entry]["bucket"], "base")
-            self.assertEqual(
-                by_entry[entry]["evidence"], "module-string-signature"
-            )
-        # The two resolved seed conflicts are exactly those two functions.
-        conflicts = self.report["resolved_seed_conflicts"]
+        open_face = by_entry[0x005264A6]
+        self.assertEqual(open_face["attribution"], "FT_Open_Face")
+        self.assertEqual(open_face["scope"], "freetype-bucket")
+        static_open = by_entry[0x005259BE]
+        self.assertEqual(static_open["evidence"], "documented-interior-pin")
         self.assertEqual(
-            sorted(row["entry"] for row in conflicts),
-            ["0x00527F0A", "0x00527FF2"],
+            by_entry[0x00527F0A]["attribution"], "ps_property_set (ftpsprop.c)"
         )
-        self.assertTrue(all(row["kept_module"] == "base" for row in conflicts))
+        self.assertEqual(
+            by_entry[0x00527FF2]["attribution"], "ps_property_get (ftpsprop.c)"
+        )
 
-    def test_unattributed_frontier_is_explicit(self) -> None:
-        records = self.report["functions"]
-        un = [record for record in records if record["bucket"] == "investigation-required"]
-        self.assertEqual(len(un), 216)
-        self.assertEqual(sum(record["official_opaque_bytes"] for record in un), 59_392)
-        # Every 0x51xxxx function stays investigation-required.
-        low = [record for record in un if record["entry"] < 0x00520000]
-        self.assertEqual(len(low), 87)
-        self.assertEqual(sum(record["official_opaque_bytes"] for record in low), 36_812)
-        # The peripheral-register candidate is not FreeType-claimed.
-        by_entry = {record["entry"]: record for record in records}
-        self.assertEqual(
-            by_entry[0x005202EC]["bucket"], "investigation-required"
-        )
+    def test_every_row_has_closed_enums_and_total_coverage(self) -> None:
+        analyzer = self.analyzer
+        for row in self.report["functions"]:
+            self.assertIn(row["status"], analyzer.STATUSES)
+            self.assertIn(row["evidence"], analyzer.EVIDENCE_CLASSES)
+            self.assertIn(row["confidence"], analyzer.CONFIDENCE_ORDER)
+            self.assertIn(row["scope"], ("frontier", "freetype-bucket"))
+            if row["status"] == "investigation-required":
+                self.assertEqual(row["module"], "")
+                self.assertEqual(row["evidence"], "none")
+            else:
+                self.assertEqual(row["module"], "base")
+
+    def test_snapshot_table_census_is_pinned(self) -> None:
+        reconciliation = self.report["reconciliation"]
+        self.assertEqual(reconciliation["snapshot_tables_parsed"], 8)
+        self.assertEqual(reconciliation["snapshot_tables_located"], 7)
+
+    def test_external_observations_are_pinned(self) -> None:
+        observations = self.report["external_observations"]
+        self.assertEqual(len(observations), 4)
+        by_entry = {row["entry"]: row for row in observations}
+        stream_new = by_entry[0x00524F96]
+        self.assertEqual(stream_new["parent_bucket"], "lvgl")
+        self.assertEqual(stream_new["evidence"], "anchor-callee-external")
+        # FT_Stream_Open is path-anchored (am_ftsystem.c retains __FILE__);
+        # FT_New_Memory/FT_Done_Memory are unanchored no-evidence functions.
+        self.assertEqual(by_entry[0x005675E8]["parent_bucket"], "path-anchored")
+        for entry in (0x005676A0, 0x005676C6):
+            self.assertEqual(by_entry[entry]["confidence"], "high")
+            self.assertEqual(
+                by_entry[entry]["parent_bucket"],
+                "investigation-required-no-evidence",
+            )
+        self.assertEqual(by_entry[0x005675E8]["confidence"], "high")
 
     def test_checked_in_manifests_match_regeneration(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / CENSUS_TSV.name).write_text(
-                self.analyzer.functions_tsv(self.report), encoding="utf-8"
+            (root / "g2-freetype-engine-census.tsv").write_text(
+                self.analyzer.map_tsv(self.report), encoding="utf-8"
             )
-            (root / SUMMARY_JSON.name).write_text(
+            (root / "g2-freetype-engine-census-summary.json").write_text(
                 self.analyzer.summary_json(self.report), encoding="utf-8"
             )
-            for path in (CENSUS_TSV, SUMMARY_JSON):
+            for name in (
+                "g2-freetype-engine-census.tsv",
+                "g2-freetype-engine-census-summary.json",
+            ):
                 self.assertEqual(
-                    (root / path.name).read_bytes(),
-                    path.read_bytes(),
-                    f"checked-in manifest drifted: {path.name}",
+                    (root / name).read_bytes(),
+                    (MANIFESTS / name).read_bytes(),
+                    f"checked-in manifest drifted: {name}",
                 )
+
+    def test_attribution_mutation_fails_closed(self) -> None:
+        analyzer = self.analyzer
+        original = analyzer.EXPECTED_ATTRIBUTION
+        mutated = dict(original)
+        entry = sorted(mutated)[0]
+        status, module, evidence, _confidence = mutated[entry]
+        mutated[entry] = (status, module, evidence, "low")
+        analyzer.EXPECTED_ATTRIBUTION = mutated
+        try:
+            with self.assertRaises(analyzer.CensusError):
+                analyzer.analyze(CORPUS)
+        finally:
+            analyzer.EXPECTED_ATTRIBUTION = original
 
     def test_anchor_mutation_fails_closed(self) -> None:
         analyzer = self.analyzer
-        original = analyzer.RECOVERY_AUDIT_ANCHORS
-        mutated = tuple(
-            (0x005242FE, module, label, citation) if entry == 0x005242FC else (entry, module, label, citation)
-            for entry, module, label, citation in original
-        )
-        analyzer.RECOVERY_AUDIT_ANCHORS = mutated
+        original = analyzer.DOCUMENTED_ANCHORS
+        mutated = dict(original)
+        anchor = dict(mutated[0x00526814])
+        anchor["body"] = (0x00526814, 0x00526880)
+        mutated[0x00526814] = anchor
+        analyzer.DOCUMENTED_ANCHORS = mutated
         try:
             with self.assertRaises(analyzer.CensusError):
                 analyzer.analyze(CORPUS)
         finally:
-            analyzer.RECOVERY_AUDIT_ANCHORS = original
+            analyzer.DOCUMENTED_ANCHORS = original
 
-    def test_string_signature_mutation_fails_closed(self) -> None:
+    def test_ps_property_set_mutation_fails_closed(self) -> None:
         analyzer = self.analyzer
-        original = analyzer.EXPECTED_STRING_SIGNATURES
-        analyzer.EXPECTED_STRING_SIGNATURES = original[1:]
+        original = analyzer.EXPECTED_PS_PROPERTY_SET_NAMES
+        analyzer.EXPECTED_PS_PROPERTY_SET_NAMES = original + ("bogus",)
         try:
             with self.assertRaises(analyzer.CensusError):
                 analyzer.analyze(CORPUS)
         finally:
-            analyzer.EXPECTED_STRING_SIGNATURES = original
+            analyzer.EXPECTED_PS_PROPERTY_SET_NAMES = original
 
-    def test_bucket_census_mutation_fails_closed(self) -> None:
+    def test_located_table_mutation_fails_closed(self) -> None:
         analyzer = self.analyzer
-        original = analyzer.EXPECTED_BUCKET_CENSUS
-        analyzer.EXPECTED_BUCKET_CENSUS = dict(original, base=(129, 16_570))
+        original = analyzer.EXPECTED_LOCATED_TABLES
+        mutated = dict(original)
+        key = sorted(mutated)[0]
+        mutated[key] = mutated[key] + 4
+        analyzer.EXPECTED_LOCATED_TABLES = mutated
         try:
             with self.assertRaises(analyzer.CensusError):
                 analyzer.analyze(CORPUS)
         finally:
-            analyzer.EXPECTED_BUCKET_CENSUS = original
+            analyzer.EXPECTED_LOCATED_TABLES = original
+
+    def test_allowlist_mutation_fails_closed(self) -> None:
+        analyzer = self.analyzer
+        original = analyzer.EXTERNAL_ALLOWLIST
+        mutated = dict(original)
+        mutated[0x00439712] = mutated.pop(0x00439710)
+        analyzer.EXTERNAL_ALLOWLIST = mutated
+        try:
+            with self.assertRaises(analyzer.CensusError):
+                analyzer.analyze(CORPUS)
+        finally:
+            analyzer.EXTERNAL_ALLOWLIST = original
 
 
 if __name__ == "__main__":

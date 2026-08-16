@@ -38,7 +38,7 @@ def _function(
         "sha256": sha256,
         "callsites": callsites,
         "provider_family": "gomore_health_algorithm_candidate",
-        "source_disposition": "vendor_source_required_not_redistributable",
+        "source_disposition": "clean_room_reimplementation_owner_authorized",
     }
 
 
@@ -156,8 +156,9 @@ def summarize(image_path: Path) -> dict[str, Any]:
         "classifier_models": model_output,
         "boundary": {
             "provider_family": "gomore_health_algorithm_candidate",
-            "source_disposition": "vendor_source_required_not_redistributable",
-            "local_graph_or_model_reimplementation_authorized": False,
+            "source_disposition": "clean_room_reimplementation_owner_authorized",
+            "local_graph_reconstruction_authorized": True,
+            "local_model_reimplementation_authorized": False,
             "licensed_provider_required": True,
             "goodix_graph_0x0004387c_included": False,
         },

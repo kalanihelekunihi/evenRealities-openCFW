@@ -2,10 +2,12 @@
 
 ## Outcome
 
-OpenR1 now implements the deterministic planning and synchronization-cursor portion of the
-recovered clock-transition and local-hour pipeline. The implementation reports which external
-provider actions are required; it does not publish private events, format a database, invoke a
-GoMore binary, fabricate metric samples, or duplicate FlashDB allocation/TSDB code.
+OpenR1 implements the deterministic planning and synchronization-cursor portion of the
+recovered clock-transition and local-hour pipeline. The portable implementation reports which
+external provider actions are required; it does not publish private events, format a database,
+invoke a GoMore binary, fabricate metric samples, or duplicate FlashDB allocation/TSDB code.
+The source-built Zephyr composition separately binds the admitted slot-1 hour event and
+non-destructive FlashDB append route described below.
 
 | Recovered extent | Size | Ownership boundary |
 | --- | ---: | --- |
@@ -79,3 +81,27 @@ text, 236 bytes data, and 132,544 bytes BSS. Its HEX and BIN SHA-256 values are
 FlashDB 2.0.0/FAL remains the storage provider; the GoMore path remains disabled until its exact
 licensed SDK is authenticated. No internal-event sender, live clock setter, private SRAM reader,
 database formatter, BLE command, signing bypass, or deployment mechanism is added.
+
+## Source-built Zephyr composition
+
+The Zephyr clock worker samples the valid local hour at the recovered 1,024-tick cadence,
+suppresses the first valid observation, and multicasts slot 1 only when the hour changes.
+The health listener serializes the previous hour from the six live/module-owned cache families
+with `r1_health_db_build_record`, encodes the exact 128-byte body, and calls pinned FlashDB
+`fdb_tsl_append`. At midnight the append attempt precedes all six cache resets and the empty
+slot-2 multicast. Append failures remain observable counters.
+
+This source binding does not invent samples: the activity, HR, SpO2, and HRV fields reflect
+only existing runtime caches, while temperature and stress remain zero until producers are
+bound. Slot 0 now receives the exact little-endian 12-byte tuple (old offset, new offset,
+old timestamp, new timestamp). An invalid-to-valid transition reruns the bounded current-day
+FlashDB iterator, and a valid local-day change resets all six caches to the new day metadata.
+Day-start conversion and workspace failures are counted and skip recovery rather than widening
+the iterator interval.
+The clock suppresses a local-hour append for the same material correction by establishing a
+new baseline after slot-0 delivery.
+
+The source binding does not expose the stock error-3 database format-and-retry branch or invoke
+GoMore. Those requests, plus unresolved sync-cursor reset/clamp requests, increment explicit
+suppressed-action counters. Binding them still requires separate provider/persistence policy and,
+for destructive formatting, an owned-hardware recovery decision.

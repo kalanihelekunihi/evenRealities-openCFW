@@ -1,11 +1,11 @@
 # Goodix GH3X2X biometric provider boundary
 
 > Current reduction note (2026-08-14): under the later owner-authorized
-> source-admission policy, 312 formerly opaque Goodix-candidate functions are
+> source-admission policy, all 320 formerly opaque Goodix-candidate functions are
 > now independently reconstructed, including the `0x739A8` recurrent closure
 > and complete `0x617F8` / three-mode `0x742E4` generated graph executors.
-> This report remains the provenance census for the 8 still-gated entries;
-> current totals and local contracts are in `../SOURCE-ADMISSION.md` and the
+> This report remains the provenance census; no executable Goodix entry remains opaque.
+> Current totals and local contracts are in `../SOURCE-ADMISSION.md` and the
 > `../correlation/GOODIX-*-REDUCTION-CORRELATION.md` reports.
 
 ## Decision
@@ -21,8 +21,8 @@ The ownership ledger separates the provider/demo functions across the individual
 direct-call-graph closures, the exact branch-only thunk, GH_NADT, GH_HR, GH_HRV,
 GH_SPO2/dlCom, private-context, packed-channel, quality, peak-mask, accumulation, and
 register-profile closures, plus distinct R1 product adapters. The current
-owner-authorized reduction has moved 312 opaque `goodix_gh3x2x_candidate`
-bodies to `clean_room_reimplementation_owner_authorized`; 8 remain
+owner-authorized reduction has moved 319 opaque `goodix_gh3x2x_candidate`
+bodies to `clean_room_reimplementation_owner_authorized`; one remains
 `vendor_source_required_not_redistributable`. Power, transport, lifecycle,
 recovered profile-mask, reference-count, and command-routing bodies remain
 separately classified R1 adapters. Live biometric paths continue to fail closed
@@ -39,8 +39,8 @@ newly routed processing functions, is independently segment-, hash-, and callsit
 clean-room implementation target.
 
 The separate GH_HR processing closure routes 31 additional functions / 7,144 bytes, including the
-2,814-byte feature/event decision core at `0x00032808`. Every direct caller is within the closed
-Goodix component. See
+now source-admitted 2,814-byte feature/event decision core at `0x00032808`. Every direct caller is
+within the closed Goodix component. See
 [`GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md`](GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md).
 
 The GH_HR private-context closure also includes the 372-byte initializer at

@@ -84,13 +84,64 @@ keeps its hardened block-7 commit record and alternating-sector rollover (block 
 programmed last as the visibility marker), and the sleep journal keeps its
 body-before-header commit. See [`../SECURITY.md`](../SECURITY.md).
 
+## Alternate Zephyr source binding (2026-08-16)
+
+The source-built `openr1_nrf52840` target now consumes the same authenticated
+FlashDB 2.0.0/FAL 0.5.99 sources rather than substituting a Zephyr-native TSDB.
+Its CMake boundary requires the pinned root and compiles `fdb.c`, `fdb_tsdb.c`,
+`fdb_utils.c`, `fal.c`, `fal_flash.c`, and `fal_partition.c` together with the
+existing R1 `fdb_cfg.h`, `fal_cfg.h`, and `r1_fal_port.c`. The package gate
+checks the archive pin, every consumed header/license/source hash, and a
+nonempty loadable linker-map span for all six provider objects.
+
+Zephyr initializes the source wall clock first, binds the recovered `0x24000`-
+byte flash window to FAL, requires the seven-entry table and exact `health.db`
+offset/length (`0x2000`/`0x6000`), then performs health startup before the
+portable `sleep.db` bind. FlashDB's 32-bit write granularity is preserved over
+the serialized flash-map adapter; no alternate journal format is introduced.
+The startup callbacks use a Zephyr mutex and heap, the source clock and
+`gmtime_r` day-start adapter, a no-init 966-byte crash record, and R1 event-bus
+slots 1 then 0. Crash restoration targets the live runtime activity, heart-rate,
+SpO2, and HRV histories. The recovered standalone HR averaging accumulator has
+no runtime field and therefore remains explicit module-owned state.
+
+The iterator performs a bounded decode/restore pass over the recovered local-day
+interval. It requires exactly 128 bytes, preserves the reserved word and 78-byte
+tail, decodes the signed offset/recorded-timestamp metadata and exact metric
+widths, and derives both the prior local hour (hour 23 at midnight) and its
+local-day start from those body fields. The TSL timestamp remains the bounded
+query/index key. Six activity words are unpacked as 12/10/10-bit fields; a zero word
+remains an invalid/empty bucket. Matching cache writers restore activity, HR,
+SpO2, and HRV without fabricating sample counts, sums, latest measurements, or
+temperature/stress runtime fields. Separate visited, decoded, restored, and
+rejected counters make short or invalid-time records observable without making
+startup destructive.
+
+The same Zephyr composition now binds the non-destructive hourly production
+route. After suppressing the first valid local-hour observation, the source clock
+multicasts each actual hour change on slot 1. The subscribed health listener builds
+the exact zero-initialized 128-byte body from the previous activity/HR/SpO2/
+temperature/stress/HRV cache slot, writes the current recorded UTC timestamp and
+signed offset, and appends through `fdb_tsl_append`. At hour zero it performs the
+append attempt before resetting all six caches, then attempts the recovered empty
+slot-2 follow-up. Temperature and stress are explicit module-owned zero histories
+until typed producers are bound. This route never generates biometric samples.
+
+Append failures are counted rather than invoking the stock error-3 whole-database
+format-and-retry branch. Slot 0 now decodes the exact 12-byte old/new signed-offset
+and timestamp tuple and applies the admitted branches: an invalid-to-valid transition
+runs the same bounded current-day iterator, while a valid local-day change resets all
+six caches to the new day metadata. Invalid day-start conversion or workspace allocation
+increments a recovery-failure counter and never widens the query to timestamp zero.
+Destructive formatting, GoMore reinitialization,
+and the unresolved persistent sync-cursor provider are counted as suppressed actions.
+Retail-data migration, power-loss testing, and physical validation remain separate gates.
+
 ## Tests and gates
 
 The portable formats and the startup controller remain covered by `test_openr1.c` and
-`test_vendor_storage.c`; the new glue is platform-only (it needs the Nordic SDK, CMSIS,
-and FlashDB) and is verified by the linked-image build, which must compile and link
-`openr1_databases.c`, `fdb.c`, `fdb_tsdb.c`, and `fdb_utils.c` cleanly. No portable code
-was added, so no host tests changed; the gmtime day-start adapter is exercised on target
-only. Owned-ring validation — real partition contents, migration, power-loss behavior,
-SoftDevice queue coexistence, and clock-sync interaction — remains an explicit hardware
-gate.
+`test_vendor_storage.c`. The Nordic glue is verified by its linked-image build; the Zephyr
+glue is verified by a clean sysbuild, source-boundary gate, final linker-map inspection,
+artifact signature check, and bundle source lock. Owned-ring validation — real partition
+contents, migration, power-loss behavior, SoftDevice/Zephyr radio coexistence, and clock-sync
+interaction — remains an explicit hardware gate.

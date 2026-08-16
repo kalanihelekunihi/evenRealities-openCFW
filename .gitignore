@@ -99,6 +99,14 @@ env/
 /firmware_blobs
 /sdks
 
+# ---------------------------------------------------------------------------
+# Local R1 firmware signing secrets
+# ---------------------------------------------------------------------------
+# The OpenR1 DFU packager uses this encrypted P-256 owner key.  The matching
+# public key, raw bootloader representation, manifest, and custody notes are
+# reviewable build inputs; the private key must remain local.
+/r1/config/r1-owner-signing/r1-owner-private.key
+
 # Fetched vendor cache, if it is ever placed inside the tree.
 /vendor-cache/
 

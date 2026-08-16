@@ -42,6 +42,7 @@
 #include "openr1/r1_peer_target.h"
 #include "openr1/r1_storage.h"
 #include "openr1/r1_state.h"
+#include "model_data/r1_model_data.h"
 
 void openr1_platform_initialize(void);
 r1_runtime *openr1_platform_runtime(void);
@@ -248,6 +249,15 @@ static const openr1_gh3x2x_spo2_config_instance_fn
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_gh3x2x_spo2_config_version_fn
     retained_gh3x2x_spo2_config_version = goodix_spo2_config_get_version;
+/* Retain the source-admitted generated-model parameters in the application
+ * image.  These typed views replace the former implicit reads from stock
+ * flash addresses; algorithm runtime adoption remains separately gated. */
+__attribute__((used, section(".openr1_frontier_api")))
+static const r1_model_data_view *const retained_model_data[] = {
+    &r1_goodix_generated_model,
+    &r1_gomore_sleep_model_below_100,
+    &r1_gomore_sleep_model_100_and_above,
+};
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_sleep_sync_ack_plan_fn retained_sleep_sync_ack_plan =
     r1_sleep_sync_plan_acknowledgement;

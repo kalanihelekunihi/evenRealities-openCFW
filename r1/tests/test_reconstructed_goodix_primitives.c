@@ -383,6 +383,42 @@ static int32_t timed_indexed_operation(void *record, uintptr_t first,
     return result;
 }
 
+static int32_t spo2_process_indexed_operation(
+    void *record, uintptr_t first, uintptr_t second, uintptr_t third,
+    uintptr_t fourth, uintptr_t fifth) {
+    (void)first;
+    (void)second;
+    (void)third;
+    (void)fifth;
+    assert(record != NULL && ((uint32_t *)record)[0] < 2u &&
+           fourth != (uintptr_t)0);
+    float **const output = (float **)fourth;
+    assert(*output != NULL);
+    **output = 0.0f;
+    return 0;
+}
+
+static int32_t spo2_process_workspace_fixture(
+    void *context, float *workspace, size_t workspace_count) {
+    size_t *const calls = context;
+    assert(calls != NULL && workspace != NULL &&
+           workspace_count == GOODIX_PRIMITIVES_SPO2_PACKED_WORKSPACE_VALUES);
+    ++*calls;
+    return 0;
+}
+
+static float minimum_f32(float left, float right) {
+    return left < right ? left : right;
+}
+
+static float maximum_f32(float left, float right) {
+    return left > right ? left : right;
+}
+
+static float floor_nonnegative_f32(float value) {
+    return (float)(int32_t)value;
+}
+
 static int32_t seven_word_operation(
     uintptr_t first, uintptr_t second, uintptr_t third, uintptr_t fourth,
     uintptr_t fifth, uintptr_t sixth, uintptr_t seventh) {
@@ -637,6 +673,78 @@ static float square_root_fixture(float value) {
     return estimate;
 }
 
+static double square_root_double_fixture(double value) {
+    return (double)square_root_fixture((float)value);
+}
+
+typedef struct {
+    size_t primary_calls;
+    size_t auxiliary_calls;
+    size_t alternate_calls;
+    int32_t observed_sample_count;
+    uint16_t observed_counter;
+    uint8_t primary_result;
+    int32_t auxiliary_result;
+    int32_t alternate_result;
+    const void *expected_primary_source;
+    const void *expected_secondary_source;
+} nadt_window_classifier_fixture;
+
+typedef struct {
+    size_t invalid_calls;
+    size_t decision_calls;
+    bool invalid;
+} hr_process_fixture;
+
+static bool hr_process_sample_invalid(void *context, int32_t sample) {
+    hr_process_fixture *fixture = context;
+    assert(fixture != NULL && sample == 100);
+    ++fixture->invalid_calls;
+    return fixture->invalid;
+}
+
+static bool hr_process_decision(void *context) {
+    hr_process_fixture *fixture = context;
+    assert(fixture != NULL);
+    ++fixture->decision_calls;
+    return true;
+}
+
+static uint8_t nadt_window_primary_classifier(
+    void *context, const void *primary_source,
+    const void *secondary_source, int32_t sample_count) {
+    nadt_window_classifier_fixture *fixture = context;
+    assert(fixture != NULL);
+    const void *const expected_primary =
+        fixture->expected_primary_source != NULL
+        ? fixture->expected_primary_source : (const void *)fixture;
+    const void *const expected_secondary =
+        fixture->expected_secondary_source != NULL
+        ? fixture->expected_secondary_source
+        : (const void *)&fixture->primary_result;
+    assert(primary_source == expected_primary &&
+           secondary_source == expected_secondary);
+    ++fixture->primary_calls;
+    fixture->observed_sample_count = sample_count;
+    return fixture->primary_result;
+}
+
+static int32_t nadt_window_auxiliary_classifier(
+    void *context, uint16_t counter) {
+    nadt_window_classifier_fixture *fixture = context;
+    assert(fixture != NULL);
+    ++fixture->auxiliary_calls;
+    fixture->observed_counter = counter;
+    return fixture->auxiliary_result;
+}
+
+static int32_t nadt_window_alternate_classifier(void *context) {
+    nadt_window_classifier_fixture *fixture = context;
+    assert(fixture != NULL);
+    ++fixture->alternate_calls;
+    return fixture->alternate_result;
+}
+
 static size_t channel_power_calls;
 static double channel_power_bases[2];
 static double channel_power_exponents[2];
@@ -766,6 +874,10 @@ static float round_fixture(float value) {
 
 static int32_t add_one(int32_t value) {
     return value + 1;
+}
+
+static int32_t identity_i32(int32_t value) {
+    return value;
 }
 
 typedef struct {
@@ -1188,6 +1300,309 @@ void test_reconstructed_goodix_primitives(void) {
         &hr_candidate_state, &suppressed_candidate, 1u, 20, 120,
         0, 5, 50.0f, &hr_selection));
     assert(hr_selection.count == 0u);
+
+    uint32_t hr_process_signal_values[125] = {0u};
+    uint32_t hr_process_motion_values[1] = {0u};
+    uint32_t hr_process_quality_values[2] = {0u, 0u};
+    uint32_t hr_process_raw_values[1] = {0u};
+    uint32_t hr_process_periodic_values[1] = {0u};
+    uint32_t hr_process_mean_values[1] = {0u};
+    uint32_t hr_process_centered_values[1] = {0u};
+    uint32_t hr_process_weighted_values[1] = {0u};
+    float hr_process_signal_scratch[125] = {0.0f};
+    float hr_process_quality_scratch[2] = {0.0f, 0.0f};
+    goodix_primitives_hr_candidate_record hr_process_candidate = {
+        .tag = 1u,
+        .position = 75.0f,
+        .value = 2.0f,
+        .alternate_tag = 1u,
+        .suppressed = 0u,
+    };
+    hr_process_fixture process_fixture = {0};
+    int32_t hr_process_channels[1] = {100};
+    const uint8_t hr_process_presence[1] = {UINT8_C(0x80)};
+    goodix_primitives_hr_process_input hr_process_input = {
+        .channel_values = hr_process_channels,
+        .channel_value_count = 1u,
+        .presence_bytes = hr_process_presence,
+        .presence_byte_count = 1u,
+        .channel_count = 1u,
+        .axis_x = 3,
+        .axis_y = 4,
+        .axis_z = 0,
+    };
+    const goodix_primitives_hr_process_plan hr_process_plan = {
+        .sample_invalid = hr_process_sample_invalid,
+        .sample_invalid_context = &process_fixture,
+        .decision_core = hr_process_decision,
+        .decision_context = &process_fixture,
+        .square_root = square_root_fixture,
+        .outlier_maximum_threshold = 10.0f,
+        .outlier_minimum_threshold = 1.0f,
+        .outlier_deviation_multiplier = 1.0f,
+        .candidate_records = &hr_process_candidate,
+        .candidate_record_count = 1u,
+        .candidate_lower_bound = 1,
+        .candidate_upper_bound = 10,
+        .candidate_warmup_limit = 5,
+        .candidate_scale = 2.0f,
+    };
+    goodix_primitives_hr_process_state hr_process_state = {
+        .sample_rate = 25u,
+        .process_count = 149u,
+        .signal_history = {
+            hr_process_signal_values, 125u, 125u, 125u,
+        },
+        .motion_history = {
+            hr_process_motion_values, 1u, 1u, 149u,
+        },
+        .quality_history = {
+            hr_process_quality_values, 0u, 2u, 0u,
+        },
+        .weighted_feature = {
+            .input_rate = 25,
+            .mode = 4u,
+            .midpoint_window = 1,
+            .raw_history = {hr_process_raw_values, 0u, 1u, 0u},
+            .periodic_history = {
+                hr_process_periodic_values, 0u, 1u, 0u,
+            },
+            .mean_history = {hr_process_mean_values, 0u, 1u, 0u},
+            .centered_history = {
+                hr_process_centered_values, 0u, 1u, 0u,
+            },
+            .weighted_history = {
+                hr_process_weighted_values, 0u, 1u, 0u,
+            },
+        },
+        .extrema_tracker = {.direction_state = 2},
+        .extrema_signal_mode = 0,
+        .extrema_period = 25,
+        .candidate_selector = {
+            .position_origin = 100,
+            .position_step = 10,
+        },
+        .quality_reference = 0.0f,
+        .quality_threshold_first = 0,
+        .quality_threshold_second = 0,
+    };
+    goodix_primitives_hr_process_workspace hr_process_workspace = {
+        .quality_sort_scratch = hr_process_quality_scratch,
+        .quality_sort_capacity = 2u,
+        .signal_scratch = hr_process_signal_scratch,
+        .signal_scratch_capacity = 125u,
+    };
+    int32_t hr_process_output[6] = {0, 0, 0, 0, 0, 0};
+    assert(goodix_primitives_hr_process(
+        &hr_process_input, &hr_process_plan, &hr_process_state,
+        &hr_process_workspace, hr_process_output));
+    assert(hr_process_state.process_count == 150u &&
+           hr_process_state.window_index == 6u &&
+           hr_process_output[0] == 80 && hr_process_output[1] == 0 &&
+           hr_process_output[4] == 80 && hr_process_output[5] == 1 &&
+           hr_process_state.latest_rates[0] == 80 &&
+           hr_process_state.previous_rate == 80 &&
+           process_fixture.invalid_calls == 1u &&
+           process_fixture.decision_calls == 1u);
+    process_fixture.invalid = true;
+    hr_process_channels[0] = 100;
+    hr_process_state.process_count = 174u;
+    assert(goodix_primitives_hr_process(
+        &hr_process_input, &hr_process_plan, &hr_process_state,
+        &hr_process_workspace, hr_process_output));
+    assert(hr_process_channels[0] == 0 && hr_process_output[4] == 25 &&
+           process_fixture.invalid_calls == 2u &&
+           process_fixture.decision_calls == 2u);
+    goodix_primitives_hr_process_state invalid_hr_process_state =
+        hr_process_state;
+    invalid_hr_process_state.sample_rate = 0u;
+    const int32_t invalid_hr_process_output[6] = {
+        91, 92, 93, 94, 95, 96,
+    };
+    int32_t rejected_hr_process_output[6];
+    memcpy(rejected_hr_process_output, invalid_hr_process_output,
+           sizeof(rejected_hr_process_output));
+    assert(!goodix_primitives_hr_process(
+        &hr_process_input, &hr_process_plan, &invalid_hr_process_state,
+        &hr_process_workspace, rejected_hr_process_output));
+    assert(memcmp(rejected_hr_process_output, invalid_hr_process_output,
+                  sizeof(rejected_hr_process_output)) == 0);
+
+    /* 0x32808: typed GH_HR feature/event decision state machine. */
+    goodix_primitives_hr_decision_record hr_decision_records[20] = {
+        {
+            .position = 0.0f,
+            .primary_first = 10.0f,
+            .primary_second = 10.0f,
+            .auxiliary_first = 5.0f,
+            .auxiliary_second = 5.0f,
+            .center = 10.0f,
+            .tag = 2,
+        },
+        {
+            .position = 10.0f,
+            .primary_first = 10.0f,
+            .primary_second = 10.0f,
+            .auxiliary_first = 5.0f,
+            .auxiliary_second = 5.0f,
+            .center = 10.0f,
+            .tag = 2,
+        },
+    };
+    uint32_t hr_decision_primary_values[10] = {0u};
+    uint32_t hr_decision_auxiliary_values[10] = {0u};
+    uint32_t hr_decision_interval_values[10] = {0u};
+    goodix_primitives_hr_decision_workspace hr_decision_workspace = {0};
+    goodix_primitives_hr_decision_state hr_decision_state = {
+        .records = hr_decision_records,
+        .record_count = 2u,
+        .record_capacity = 20u,
+        .minimum_interval = 2,
+        .maximum_interval = 40,
+        .baseline = {
+            .count = 0,
+            .capacity = 16,
+            .mean = {0.0f, 1.0f, 1.0f},
+        },
+        .primary_history = {
+            hr_decision_primary_values, 0u, 10u, 0u,
+        },
+        .auxiliary_history = {
+            hr_decision_auxiliary_values, 0u, 10u, 0u,
+        },
+        .interval_history = {
+            hr_decision_interval_values, 0u, 10u, 0u,
+        },
+        .sample_rate = 25u,
+        .timestamp = 100u,
+    };
+    goodix_primitives_hr_decision_context hr_decision_context = {
+        .state = &hr_decision_state,
+        .workspace = &hr_decision_workspace,
+        .square_root = square_root_fixture,
+    };
+    assert(goodix_primitives_hr_decision_update(&hr_decision_context));
+    assert(hr_decision_state.source.update_count == 1u &&
+           hr_decision_state.record_count == 2u &&
+           hr_decision_records[0].primary_second == -15.0f &&
+           hr_decision_records[1].primary_second == -15.0f);
+
+    hr_decision_records[0] = (goodix_primitives_hr_decision_record) {
+        .position = 0.0f,
+        .primary_first = 10.0f,
+        .primary_second = 10.0f,
+        .auxiliary_first = 5.0f,
+        .auxiliary_second = 5.0f,
+        .center = 10.0f,
+        .tag = 2,
+    };
+    hr_decision_state.record_count = 1u;
+    hr_decision_state.source = (goodix_primitives_hr_decision_source) {
+        .position = 10.0f,
+        .primary_first = 10.0f,
+        .primary_second = 10.0f,
+        .auxiliary_first = 5.0f,
+        .auxiliary_second = 5.0f,
+        .ready = 1u,
+        .update_count = 1u,
+    };
+    assert(goodix_primitives_hr_decision_update(&hr_decision_context));
+    assert(hr_decision_state.record_count == 2u &&
+           hr_decision_records[1].position == 10.0f &&
+           hr_decision_records[1].center == 10.0f &&
+           hr_decision_records[1].tag == 2 &&
+           hr_decision_state.source.ready == 0u &&
+           hr_decision_state.source.position == 0.0f);
+
+    hr_decision_records[0] = (goodix_primitives_hr_decision_record) {
+        .position = 0.0f,
+        .primary_first = 10.0f,
+        .primary_second = 10.0f,
+        .auxiliary_first = 5.0f,
+        .auxiliary_second = 5.0f,
+        .center = 10.0f,
+        .tag = 2,
+    };
+    hr_decision_records[1] = (goodix_primitives_hr_decision_record) {
+        .position = 10.0f,
+        .primary_first = 10.0f,
+        .primary_second = 10.0f,
+        .auxiliary_first = 5.0f,
+        .auxiliary_second = 5.0f,
+        .center = 10.0f,
+        .tag = 2,
+    };
+    hr_decision_state.record_count = 2u;
+    hr_decision_state.mode = 0;
+    hr_decision_state.latch = 0;
+    hr_decision_state.stale_count = 0;
+    hr_decision_state.baseline.count = 0;
+    hr_decision_state.baseline.mean[0] = 0.0f;
+    hr_decision_state.baseline.mean[1] = 1.0f;
+    hr_decision_state.baseline.mean[2] = 1.0f;
+    hr_decision_state.primary_history.count = 0u;
+    hr_decision_state.auxiliary_history.count = 0u;
+    hr_decision_state.interval_history.count = 0u;
+    hr_decision_state.source = (goodix_primitives_hr_decision_source) {
+        .position = 20.0f,
+        .primary_first = 10.0f,
+        .primary_second = 10.0f,
+        .auxiliary_first = 5.0f,
+        .auxiliary_second = 5.0f,
+        .ready = 1u,
+        .update_count = 1u,
+    };
+    assert(goodix_primitives_hr_decision_update(&hr_decision_context));
+    assert(hr_decision_state.mode == 1 &&
+           hr_decision_state.baseline.count == 1 &&
+           hr_decision_state.baseline.mean[0] == 20.0f &&
+           hr_decision_state.baseline.mean[1] == 10.0f &&
+           hr_decision_state.baseline.mean[2] == 10.0f &&
+           hr_decision_state.primary_history.count == 1u &&
+           hr_decision_state.auxiliary_history.count == 1u &&
+           hr_decision_state.interval_history.count == 1u &&
+           hr_decision_state.latch == 1);
+
+    for (size_t index = 0u; index < 9u; ++index) {
+        hr_decision_primary_values[index] = UINT32_C(0x41a00000);
+        hr_decision_auxiliary_values[index] = UINT32_C(0x41200000);
+        hr_decision_interval_values[index] = UINT32_C(0x41200000);
+    }
+    hr_decision_state.primary_history.count = 9u;
+    hr_decision_state.auxiliary_history.count = 9u;
+    hr_decision_state.interval_history.count = 9u;
+    hr_decision_state.record_count = 2u;
+    hr_decision_state.mode = 0;
+    hr_decision_state.latch = 0;
+    hr_decision_state.source = (goodix_primitives_hr_decision_source) {
+        .position = 20.0f,
+        .primary_first = 10.0f,
+        .primary_second = 10.0f,
+        .auxiliary_first = 5.0f,
+        .auxiliary_second = 5.0f,
+        .ready = 1u,
+        .update_count = 1u,
+    };
+    assert(goodix_primitives_hr_decision_update(&hr_decision_context));
+    assert(hr_decision_state.diagnostic_variation_percent == 0.0f &&
+           hr_decision_state.diagnostic_primary_mean == 20.0f &&
+           hr_decision_state.diagnostic_auxiliary_mean == 10.0f &&
+           hr_decision_state.diagnostic_interval_mean == 10.0f);
+
+    goodix_primitives_hr_decision_state invalid_hr_decision_state =
+        hr_decision_state;
+    invalid_hr_decision_state.primary_history.capacity = 9u;
+    goodix_primitives_hr_decision_context invalid_hr_decision_context = {
+        .state = &invalid_hr_decision_state,
+        .workspace = &hr_decision_workspace,
+        .square_root = square_root_fixture,
+    };
+    const uint32_t invalid_decision_update_count =
+        invalid_hr_decision_state.source.update_count;
+    assert(!goodix_primitives_hr_decision_update(
+        &invalid_hr_decision_context));
+    assert(invalid_hr_decision_state.source.update_count ==
+           invalid_decision_update_count);
 
     /* 0x30090: three capped running means and explicit timestamp binding. */
     goodix_primitives_running_triplet running_triplet = {
@@ -1795,9 +2210,12 @@ void test_reconstructed_goodix_primitives(void) {
     assert(memcmp(&report_analysis, &saved_report_analysis,
                   sizeof(report_analysis)) == 0);
 
-    uint8_t report_history[532];
-    for (size_t index = 0u; index < sizeof(report_history); ++index) {
-        report_history[index] = (uint8_t)index;
+    uint8_t report_history_destination[512];
+    uint8_t report_history_source[512];
+    for (size_t index = 0u;
+            index < sizeof(report_history_destination); ++index) {
+        report_history_destination[index] = UINT8_C(0xEE);
+        report_history_source[index] = (uint8_t)(index + 20u);
     }
     goodix_primitives_spo2_report_state report_state = {
         .history_shift_a = true,
@@ -1808,8 +2226,10 @@ void test_reconstructed_goodix_primitives(void) {
         .event = 7u,
         .phase = 0u,
         .event_seen = 0u,
-        .history = report_history,
-        .history_capacity = sizeof(report_history),
+        .history_destination = report_history_destination,
+        .history_destination_capacity = sizeof(report_history_destination),
+        .history_source = report_history_source,
+        .history_source_capacity = sizeof(report_history_source),
     };
     report_analyze_fixture report_analyzer = {
         .result = {
@@ -1827,7 +2247,8 @@ void test_reconstructed_goodix_primitives(void) {
     assert(report_analyzer.call_count == 1u && report_state.accepted &&
            report_state.use_secondary_candidate && report_state.event == 0u &&
            report_output.selected_value == 12u &&
-           report_history[0] == 20u && report_history[511] == 19u);
+           report_history_destination[0] == 20u &&
+           report_history_destination[511] == 19u);
 
     report_state.history_shift_a = false;
     report_state.history_shift_b = false;
@@ -2243,6 +2664,363 @@ void test_reconstructed_goodix_primitives(void) {
     assert(!goodix_primitives_spo2_smoothed_scale(
         75u, 1.0f, 10000u, NULL, &smoothed_result));
 
+    const goodix_primitives_biquad_coefficients stream_identity_filter[1] = {
+        {1.0f, 0.0f, 0.0f, 0.0f, 0.0f},
+    };
+    goodix_primitives_biquad_state stream_channel_filter_states[4] = {0};
+    goodix_primitives_biquad_state stream_motion_filter_states[4] = {0};
+    goodix_primitives_biquad_state stream_residual_filter_state[1] = {0};
+    int16_t stream_channel_packed_values[4][8] = {{0}};
+    int16_t stream_motion_packed_values[4][8] = {{0}};
+    int16_t stream_residual_packed_values[8] = {0};
+    float stream_motion_history_values[4][3] = {{0.0f}};
+    float stream_motion_sorted_values[3][3] = {{0.0f}};
+    float stream_sort_scratch[3] = {0.0f, 0.0f, 0.0f};
+    goodix_primitives_spo2_stream_state spo2_stream_state = {0};
+    for (size_t lane = 0u; lane < 4u; ++lane) {
+        spo2_stream_state.channel_filters[lane] =
+            (goodix_primitives_biquad_cascade){
+                .stage_count = 1u,
+                .states = &stream_channel_filter_states[lane],
+                .state_count = 1u,
+                .coefficients = stream_identity_filter,
+                .coefficient_count = 1u,
+            };
+        spo2_stream_state.channel_packed[lane] =
+            (goodix_primitives_i16_window){
+                .values = stream_channel_packed_values[lane],
+                .capacity = 8u,
+            };
+        spo2_stream_state.motion_history[lane] =
+            (goodix_primitives_decimated_float_window){
+                .values = stream_motion_history_values[lane],
+                .capacity = 3u,
+                .period = 1u,
+            };
+        spo2_stream_state.motion_filters[lane] =
+            (goodix_primitives_biquad_cascade){
+                .stage_count = 1u,
+                .states = &stream_motion_filter_states[lane],
+                .state_count = 1u,
+                .coefficients = stream_identity_filter,
+                .coefficient_count = 1u,
+            };
+        spo2_stream_state.motion_packed[lane] =
+            (goodix_primitives_i16_window){
+                .values = stream_motion_packed_values[lane],
+                .capacity = 8u,
+            };
+        if (lane < 3u) {
+            spo2_stream_state.motion_sorted[lane] =
+                stream_motion_sorted_values[lane];
+            spo2_stream_state.motion_sorted_capacity[lane] = 3u;
+        }
+    }
+    spo2_stream_state.residual_filter =
+        (goodix_primitives_biquad_cascade){
+            .stage_count = 1u,
+            .states = stream_residual_filter_state,
+            .state_count = 1u,
+            .coefficients = stream_identity_filter,
+            .coefficient_count = 1u,
+        };
+    spo2_stream_state.residual_packed =
+        (goodix_primitives_i16_window){
+            .values = stream_residual_packed_values,
+            .capacity = 8u,
+        };
+    const goodix_primitives_spo2_stream_plan spo2_stream_plan = {
+        .scale_rate = 10000u,
+        .minimum_scale = 112500,
+        .residual_axis_scale = 0.0f,
+        .motion_window_size = 3u,
+        .motion_spread_factor = 8,
+        .logarithm_base_10 = log10_zero_fixture,
+        .square_root = square_root_fixture,
+    };
+    goodix_primitives_spo2_stream_workspace spo2_stream_workspace = {
+        .sort_scratch = stream_sort_scratch,
+        .sort_scratch_capacity = 3u,
+    };
+    goodix_primitives_warmup_average_state spo2_stream_sample = {
+        .first = 10,
+        .second = 20,
+        .third = 30,
+        .average = 40,
+        .phase = 4u,
+    };
+    spo2_stream_sample.reserved[8] = 3u;
+    spo2_stream_sample.reserved[9] = 4u;
+    spo2_stream_sample.reserved[10] = 0u;
+    for (size_t sample_index = 0u; sample_index < 3u; ++sample_index) {
+        assert(goodix_primitives_spo2_stream_accumulate(
+            &spo2_stream_sample, 0u, &spo2_stream_plan,
+            &spo2_stream_state, &spo2_stream_workspace));
+    }
+    assert(spo2_stream_state.sample_count == 3u &&
+           spo2_stream_state.channel_discontinuity_limits[0] ==
+               INT32_C(0x800) &&
+           spo2_stream_state.channel_packed[0].count == 3u &&
+           spo2_stream_state.residual_packed.count == 3u &&
+           spo2_stream_state.motion_history[0].count == 3u &&
+           spo2_stream_state.motion_sorted_count[0] == 3u &&
+           spo2_stream_state.motion_sorted_count[1] == 3u &&
+           spo2_stream_state.motion_sorted_count[2] == 3u &&
+           spo2_stream_state.motion_packed[0].count == 3u &&
+           spo2_stream_state.motion_packed[1].count == 3u &&
+           spo2_stream_state.motion_packed[2].count == 3u &&
+           spo2_stream_state.motion_packed[3].count == 1u);
+    spo2_stream_sample.reserved[8] = 6u;
+    spo2_stream_sample.reserved[9] = 8u;
+    assert(goodix_primitives_spo2_stream_accumulate(
+        &spo2_stream_sample, 0u, &spo2_stream_plan,
+        &spo2_stream_state, &spo2_stream_workspace));
+    assert(spo2_stream_state.sample_count == 4u &&
+           spo2_stream_state.motion_history[0].values[2] == 6.0f &&
+           spo2_stream_state.motion_history[1].values[2] == 8.0f &&
+           spo2_stream_state.motion_packed[0].count == 4u &&
+           spo2_stream_state.motion_packed[3].count == 2u);
+    const uint32_t stream_count_before_rejection =
+        spo2_stream_state.sample_count;
+    goodix_primitives_spo2_stream_plan invalid_spo2_stream_plan =
+        spo2_stream_plan;
+    invalid_spo2_stream_plan.motion_window_size = 0u;
+    assert(!goodix_primitives_spo2_stream_accumulate(
+        &spo2_stream_sample, 0u, &invalid_spo2_stream_plan,
+        &spo2_stream_state, &spo2_stream_workspace));
+    assert(!goodix_primitives_spo2_stream_accumulate(
+        &spo2_stream_sample, 2u, &spo2_stream_plan,
+        &spo2_stream_state, &spo2_stream_workspace));
+    assert(spo2_stream_state.sample_count ==
+           stream_count_before_rejection);
+
+    int32_t spo2_process_values[12] = {
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+    };
+    const uint8_t spo2_process_flags[2] = {UINT8_C(0xFF), UINT8_C(0xF0)};
+    const uint8_t spo2_process_filter_code[1] = {UINT8_C(5)};
+    const goodix_primitives_spo2_process_input spo2_process_input = {
+        .channel_values = spo2_process_values,
+        .channel_value_count = 12u,
+        .enable_flags = spo2_process_flags,
+        .enable_flag_count = sizeof(spo2_process_flags),
+        .channel_count = 4u,
+        .accelerometer = {13, 14, 15},
+        .mode = 7u,
+        .filter_code = spo2_process_filter_code,
+        .filter_code_count = sizeof(spo2_process_filter_code),
+    };
+    goodix_primitives_spo2_process_configuration spo2_process_configuration = {
+        .sample_frequency = 1u,
+        .processing_cadence = 1u,
+        .expected_valid_channels = 4u,
+        .report_selected_value = 30u,
+        .maximum_selection = 5,
+        .selection_delay = 2,
+        .score_scale = 100u,
+    };
+    goodix_primitives_spo2_process_plan spo2_process_plan = {
+        .integrity_transform = identity_i32,
+        .stream_plan = &spo2_stream_plan,
+    };
+    goodix_primitives_spo2_process_state spo2_process_state = {
+        .stream = &spo2_stream_state,
+    };
+    goodix_primitives_spo2_process_workspace spo2_process_workspace = {0};
+    goodix_primitives_spo2_process_output spo2_process_output = {
+        .valid = 9u, .selected = 77u, .reserved = 88u,
+        .score_at_least_70 = 6u, .scaled_score = 55u,
+    };
+    assert(goodix_primitives_spo2_process(
+               &spo2_process_configuration, &spo2_process_input,
+               &spo2_process_output, &spo2_process_plan,
+               &spo2_process_state, &spo2_stream_workspace,
+               &spo2_process_workspace) == 0u);
+    assert(spo2_process_state.invocation_count == 1u &&
+           spo2_process_state.sample_count == 1u &&
+           spo2_process_state.elapsed_seconds == 1u &&
+           spo2_stream_state.sample_count ==
+               stream_count_before_rejection + 1u &&
+           spo2_process_workspace.stream_sample.first == 1 &&
+           spo2_process_workspace.stream_sample.second == 2 &&
+           spo2_process_workspace.stream_sample.third == 3 &&
+           spo2_process_workspace.stream_sample.average == 4 &&
+           spo2_process_workspace.stream_sample.reserved[0] == 5u &&
+           spo2_process_workspace.stream_sample.reserved[3] == 8u &&
+           spo2_process_workspace.stream_sample.reserved[4] == 9u &&
+           spo2_process_workspace.stream_sample.reserved[7] == 12u &&
+           spo2_process_workspace.stream_sample.reserved[8] == 13u &&
+           spo2_process_workspace.stream_sample.reserved[10] == 15u &&
+           spo2_process_workspace.stream_sample.phase == 4u &&
+           spo2_process_workspace.stream_mode == 7u &&
+           spo2_process_output.valid == 9u &&
+           spo2_process_output.selected == 77u &&
+           spo2_process_output.reserved == 88u &&
+           spo2_process_output.score_at_least_70 == 6u &&
+           spo2_process_output.scaled_score == 55u);
+
+    goodix_primitives_spo2_process_state spo2_process_mismatch = {
+        .stream = &spo2_stream_state,
+    };
+    spo2_process_configuration.expected_valid_channels = 3u;
+    const uint32_t process_stream_count_before_mismatch =
+        spo2_stream_state.sample_count;
+    assert(goodix_primitives_spo2_process(
+               &spo2_process_configuration, &spo2_process_input,
+               &spo2_process_output, &spo2_process_plan,
+               &spo2_process_mismatch, &spo2_stream_workspace,
+               &spo2_process_workspace) == 1u);
+    assert(spo2_process_mismatch.invocation_count == 0u &&
+           spo2_stream_state.sample_count ==
+               process_stream_count_before_mismatch);
+
+    int32_t spo2_process_invalid_values[12] = {
+        21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+    };
+    goodix_primitives_spo2_process_input spo2_process_invalid_input =
+        spo2_process_input;
+    spo2_process_invalid_input.channel_values = spo2_process_invalid_values;
+    spo2_process_configuration.expected_valid_channels = 4u;
+    spo2_process_configuration.processing_cadence = 2u;
+    goodix_primitives_spo2_process_plan spo2_process_skip_plan = {
+        .integrity_transform = add_one,
+    };
+    goodix_primitives_spo2_process_state spo2_process_skip_state = {0};
+    assert(goodix_primitives_spo2_process(
+               &spo2_process_configuration, &spo2_process_invalid_input,
+               &spo2_process_output, &spo2_process_skip_plan,
+               &spo2_process_skip_state, NULL,
+               &spo2_process_workspace) == 0u);
+    assert(spo2_process_skip_state.invocation_count == 1u &&
+           spo2_process_skip_state.sample_count == 0u &&
+           spo2_process_skip_state.elapsed_seconds == 1u &&
+           spo2_process_invalid_values[0] == 0 &&
+           spo2_process_invalid_values[3] == 0 &&
+           spo2_process_invalid_values[4] == 25);
+    spo2_process_invalid_input.enable_flag_count = 1u;
+    spo2_process_skip_state.invocation_count = 0u;
+    spo2_process_invalid_values[0] = 41;
+    assert(goodix_primitives_spo2_process(
+               &spo2_process_configuration, &spo2_process_invalid_input,
+               &spo2_process_output, &spo2_process_skip_plan,
+               &spo2_process_skip_state, NULL,
+               &spo2_process_workspace) == 1u);
+    assert(spo2_process_skip_state.invocation_count == 0u &&
+           spo2_process_invalid_values[0] == 41);
+
+    uint16_t spo2_process_packed[GOODIX_PRIMITIVES_SPO2_PACKED_BANK_VALUES] =
+        {0};
+    uint8_t process_primary_candidates[3] = {0};
+    uint8_t process_reference_candidates[3] = {0};
+    float process_concentrations[3] = {0.0f};
+    float process_metrics[3] = {0.0f};
+    uint32_t process_timed_record[1] = {0u};
+    uint32_t process_score_record[1] = {1u};
+    uint32_t process_timestamps[6] = {
+        100u, 100u, 100u, 100u, 100u, 100u,
+    };
+    goodix_primitives_elapsed_state process_elapsed = {
+        .baseline = 100u,
+        .elapsed_a = 100u,
+        .elapsed_b = 100u,
+        .slot_timestamps = process_timestamps,
+        .slot_count = 6u,
+    };
+    const goodix_primitives_timed_dispatch_context process_timed = {
+        .elapsed_state = &process_elapsed,
+        .mode = 0u,
+        .dispatch_record = process_timed_record,
+    };
+    float process_score_workspace[198] = {0.0f};
+    uint32_t process_recent_inputs[4] = {0u};
+    const goodix_primitives_spo2_score_context process_score = {
+        .workspace = process_score_workspace,
+        .workspace_count = 198u,
+        .recent_inputs = process_recent_inputs,
+        .recent_input_count = 4u,
+        .dispatch = {
+            .dispatch_record = process_score_record,
+        },
+    };
+    goodix_primitives_indexed_operation_fn process_operations[
+        GOODIX_PRIMITIVES_STATE_COUNT] = {0};
+    process_operations[0] = spo2_process_indexed_operation;
+    process_operations[1] = spo2_process_indexed_operation;
+    const quantized_runtime_providers process_quantized_providers = {
+        .fminf_fn = minimum_f32,
+        .fmaxf_fn = maximum_f32,
+        .floorf_fn = floor_nonnegative_f32,
+    };
+    quantized_runtime process_quantized;
+    quantized_runtime_initialize(
+        &process_quantized, &process_quantized_providers);
+    size_t process_workspace_calls = 0u;
+    spo2_process_plan = (goodix_primitives_spo2_process_plan) {
+        .integrity_transform = identity_i32,
+        .stream_plan = &spo2_stream_plan,
+        .packed_banks = {
+            spo2_process_packed, spo2_process_packed,
+            spo2_process_packed, spo2_process_packed,
+            spo2_process_packed, spo2_process_packed,
+            spo2_process_packed,
+        },
+        .triplicate_disabled = 1u,
+        .spectral_packed_channels = {
+            spo2_process_packed, spo2_process_packed,
+            spo2_process_packed, spo2_process_packed,
+        },
+        .spectral_packed_channel_counts = {180u, 180u, 180u, 180u},
+        .workspace_process = spo2_process_workspace_fixture,
+        .workspace_process_context = &process_workspace_calls,
+        .quantized = &process_quantized,
+        .timed_dispatch = &process_timed,
+        .score_dispatch = &process_score,
+        .operations = process_operations,
+        .exponential = score_exponential,
+        .logarithm_base_10 = log10_zero_fixture,
+    };
+    spo2_process_configuration.processing_cadence = 1u;
+    spo2_process_configuration.expected_valid_channels = 4u;
+    spo2_process_configuration.score_scale = 100u;
+    spo2_process_state = (goodix_primitives_spo2_process_state) {
+        .sample_count = 174u,
+        .stream = &spo2_stream_state,
+        .analyzer = {
+            .primary_candidates = {
+                .values = process_primary_candidates, .capacity = 3u,
+            },
+            .concentrations = {
+                .values = process_concentrations, .capacity = 3u,
+                .period = 1u,
+            },
+            .reference_candidates = {
+                .values = process_reference_candidates, .capacity = 3u,
+            },
+            .metric_history = {
+                .values = process_metrics, .capacity = 3u, .period = 1u,
+            },
+            .reference_limit = 50u,
+        },
+    };
+    spo2_stream_state.sample_count = 51u;
+    memset(&spo2_process_workspace, 0, sizeof(spo2_process_workspace));
+    memset(&spo2_process_output, 0, sizeof(spo2_process_output));
+    assert(goodix_primitives_spo2_process(
+               &spo2_process_configuration, &spo2_process_input,
+               &spo2_process_output, &spo2_process_plan,
+               &spo2_process_state, &spo2_stream_workspace,
+               &spo2_process_workspace) == 0u);
+    assert(process_workspace_calls == 1u &&
+           spo2_process_state.invocation_count == 1u &&
+           spo2_process_state.sample_count == 175u &&
+           spo2_process_state.latest_result == 29 &&
+           spo2_process_state.report_selected_candidate == 0u &&
+           spo2_process_state.analyzer.primary_candidates.count == 1u &&
+           spo2_process_output.valid == 0u &&
+           spo2_process_output.selected == 0u &&
+           spo2_process_output.score_at_least_70 == 0u &&
+           spo2_process_output.scaled_score == 5000u);
+
     const float percentile_values[8] = {
         0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f,
     };
@@ -2454,6 +3232,44 @@ void test_reconstructed_goodix_primitives(void) {
         &nadt_spectral_source, select_nadt_harmonics_fixture,
         &nadt_harmonics, square_root_fixture, floor_positive_fixture,
         &nadt_spectral_workspace, &nadt_spectral_result));
+
+    goodix_primitives_nadt_harmonic_workspace harmonic_workspace = {0};
+    goodix_primitives_nadt_harmonic_selector_context harmonic_selector = {
+        .workspace = &harmonic_workspace,
+        .square_root = square_root_fixture,
+    };
+    const int32_t harmonic_peaks[3] = {10, 20, 30};
+    const float harmonic_values[3] = {5.0f, 4.0f, 3.0f};
+    int32_t harmonic_indices[3] = {-1, -1, -1};
+    uint8_t harmonic_flags[3] = {UINT8_C(0xFF), UINT8_C(0xFF),
+                                 UINT8_C(0xFF)};
+    assert(goodix_primitives_nadt_harmonic_candidates_select(
+        &harmonic_selector, 1.0f / 60.0f,
+        harmonic_peaks, harmonic_values, 3u,
+        harmonic_indices, harmonic_flags, 3u));
+    assert(harmonic_indices[0] == 10 && harmonic_indices[1] == 20 &&
+           harmonic_indices[2] == 30 && harmonic_flags[0] == 1u &&
+           harmonic_flags[1] == 1u && harmonic_flags[2] == 1u);
+
+    harmonic_indices[0] = 7;
+    harmonic_indices[1] = 8;
+    harmonic_indices[2] = 9;
+    harmonic_flags[0] = 7u;
+    harmonic_flags[1] = 8u;
+    harmonic_flags[2] = 9u;
+    assert(!goodix_primitives_nadt_harmonic_candidates_select(
+        &harmonic_selector, 1.0f / 60.0f,
+        harmonic_peaks, harmonic_values, 3u,
+        harmonic_indices, harmonic_flags, 4u));
+    assert(harmonic_indices[0] == 7 && harmonic_indices[1] == 8 &&
+           harmonic_indices[2] == 9 && harmonic_flags[0] == 7u &&
+           harmonic_flags[1] == 8u && harmonic_flags[2] == 9u);
+    assert(goodix_primitives_nadt_harmonic_candidates_select(
+        &harmonic_selector, 1.0f / 60.0f, NULL, NULL, 0u,
+        harmonic_indices, harmonic_flags, 3u));
+    assert(harmonic_indices[0] == 0 && harmonic_indices[1] == 0 &&
+           harmonic_indices[2] == 0 && harmonic_flags[0] == 0u &&
+           harmonic_flags[1] == 0u && harmonic_flags[2] == 0u);
 
     const float quantile_values[8] = {
         -100.0f, 0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 100.0f,
@@ -5006,6 +5822,299 @@ void test_reconstructed_goodix_primitives(void) {
     assert(alternate_result == 1 &&
            alternate_state.consecutive_matches == 0u);
 
+    goodix_primitives_nadt_window_configuration window_configuration = {
+        .window_metrics = {24.0f, 24.0f, 24.0f, 24.0f},
+        .window_maxima = {100, 120, 110, 115},
+        .window_minima = {20, 10, 15, 18},
+        .window_count = 4u,
+        .alternate_classifier_level = 3u,
+        .elapsed_window_limit = 5u,
+        .minimum_nonzero_tail_samples = 25u,
+        .base_transition_windows = 2u,
+        .axis_ratio_streak_limit = 3u,
+        .metric_threshold = 1000,
+        .spread_threshold = 1000,
+    };
+    int16_t window_tail_samples[100] = {0};
+    int16_t window_range_samples[50] = {0};
+    for (size_t index = 25u; index < 50u; ++index) {
+        window_range_samples[index] = (index & 1u) != 0u ? 40 : 0;
+    }
+    nadt_window_classifier_fixture window_fixture = {
+        .primary_result = 3u,
+        .auxiliary_result = 2,
+    };
+    const goodix_primitives_nadt_window_plan window_plan = {
+        .classify_primary = nadt_window_primary_classifier,
+        .primary_context = &window_fixture,
+        .classify_auxiliary = nadt_window_auxiliary_classifier,
+        .auxiliary_context = &window_fixture,
+        .classify_alternate = nadt_window_alternate_classifier,
+        .alternate_context = &window_fixture,
+        .square_root = square_root_double_fixture,
+    };
+    goodix_primitives_nadt_window_input nadt_classifier_input = {
+        .primary_source = &window_fixture,
+        .secondary_source = &window_fixture.primary_result,
+        .tail_samples = window_tail_samples,
+        .tail_sample_count = 100u,
+        .range_samples = window_range_samples,
+        .range_sample_count = 50u,
+        .sample_count = 25,
+        .axis_x = 1,
+        .axis_y = 0,
+        .axis_z = 1,
+    };
+    goodix_primitives_nadt_window_state window_state = {
+        .current_result = 0,
+        .inactive_windows = 4,
+    };
+    goodix_primitives_nadt_window_diagnostics window_diagnostics = {
+        .alternate_classification = UINT8_C(0xA5),
+        .energy_metric = -1,
+    };
+    int32_t window_result = -1;
+    assert(goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        &window_diagnostics, &window_result));
+    assert(window_result == 3 && window_state.current_result == 0 &&
+           window_state.energy_metric == 64 &&
+           window_state.inactive_windows == 5 &&
+           window_state.elapsed_windows == 1u &&
+           window_state.axis_ratio_outside_band_windows == 0u &&
+           window_diagnostics.energy_metric == 64 &&
+           !window_diagnostics.high_variation &&
+           window_diagnostics.primary_classification == 3u &&
+           window_diagnostics.auxiliary_classification == 2u &&
+           window_diagnostics.alternate_classification == UINT8_C(0xA5) &&
+           window_fixture.primary_calls == 1u &&
+           window_fixture.auxiliary_calls == 1u &&
+           window_fixture.alternate_calls == 0u &&
+           window_fixture.observed_sample_count == 25 &&
+           window_fixture.observed_counter == 0u);
+
+    window_configuration.metric_threshold = 10;
+    window_configuration.spread_threshold = 50;
+    window_fixture.primary_result = 1u;
+    window_state = (goodix_primitives_nadt_window_state) {
+        .current_result = 7,
+        .transient_counters = {1u, 2u, 3u, 4u},
+        .inactive_windows = 9,
+    };
+    window_diagnostics = (goodix_primitives_nadt_window_diagnostics) {
+        .primary_classification = UINT8_C(0xFF),
+        .auxiliary_classification = UINT8_C(0xFF),
+        .alternate_classification = UINT8_C(0xFF),
+    };
+    const size_t auxiliary_calls_before_high = window_fixture.auxiliary_calls;
+    assert(goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        &window_diagnostics, &window_result));
+    assert(window_result == 7 && window_state.inactive_windows == 0 &&
+           window_state.transient_counters[0] == 0u &&
+           window_state.transient_counters[1] == 0u &&
+           window_state.transient_counters[2] == 0u &&
+           window_state.transient_counters[3] == 0u &&
+           window_diagnostics.high_variation &&
+           window_diagnostics.primary_classification == 0u &&
+           window_diagnostics.auxiliary_classification == 0u &&
+           window_diagnostics.alternate_classification == 0u &&
+           window_fixture.auxiliary_calls == auxiliary_calls_before_high);
+
+    window_configuration.metric_threshold = 1000;
+    window_configuration.spread_threshold = 1000;
+    window_fixture.primary_result = 0u;
+    window_fixture.auxiliary_result = 0;
+    window_fixture.alternate_result = 0;
+    window_state = (goodix_primitives_nadt_window_state) {
+        .current_result = 0,
+        .transient_counters = {9u, 8u, 7u, 2u},
+        .elapsed_windows = 6u,
+    };
+    assert(goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        NULL, &window_result));
+    assert(window_result == 3 && window_state.elapsed_windows == 6u &&
+           window_state.transient_counters[0] == 0u &&
+           window_state.transient_counters[1] == 0u &&
+           window_state.transient_counters[2] == 0u &&
+           window_state.transient_counters[3] == 0u);
+
+    for (size_t index = 50u; index < 75u; ++index) {
+        window_tail_samples[index] = 1;
+    }
+    nadt_classifier_input.sample_count = 100;
+    window_state = (goodix_primitives_nadt_window_state) {
+        .current_result = 3,
+        .elapsed_windows = 99u,
+    };
+    assert(goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        NULL, &window_result));
+    assert(window_result == 3 && window_state.elapsed_windows == 1u);
+
+    nadt_classifier_input.sample_count = 25;
+    window_fixture.alternate_result = 2;
+    window_state = (goodix_primitives_nadt_window_state) {.current_result = 0};
+    const size_t alternate_calls_before = window_fixture.alternate_calls;
+    assert(goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        NULL, &window_result));
+    assert(window_result == 2 &&
+           window_fixture.alternate_calls == alternate_calls_before + 1u);
+
+    window_configuration.alternate_classifier_level = 0u;
+    window_fixture.alternate_result = 0;
+    nadt_classifier_input.sample_count = 26;
+    window_state = (goodix_primitives_nadt_window_state) {
+        .current_result = 0,
+        .stationary_latch = 9u,
+        .classification_mode = 0u,
+        .rate = 10u,
+        .evidence_streak = 3u,
+        .trigger_windows = {25u, 0u, 0u, 0u},
+        .range_cursor = 50,
+        .long_window_score = 70,
+    };
+    assert(goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        NULL, &window_result));
+    assert(window_result == 2 && window_state.evidence_streak == 0u &&
+           window_state.fallback_streak == 0u &&
+           window_state.stationary_latch == 0u);
+
+    window_configuration.axis_ratio_streak_limit = 1u;
+    window_state = (goodix_primitives_nadt_window_state) {
+        .current_result = 0,
+        .classification_mode = 1u,
+        .rate = 90u,
+        .range_cursor = 50,
+    };
+    assert(goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        NULL, &window_result));
+    assert(window_result == 1 && window_state.axis_ratio_streak == 0u);
+
+    window_configuration.window_count = 5u;
+    window_result = INT32_C(0x12345678);
+    assert(!goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        NULL, &window_result));
+    assert(window_result == INT32_C(0x12345678));
+    window_configuration.window_count = 4u;
+    nadt_classifier_input.range_sample_count = 49u;
+    assert(!goodix_primitives_nadt_window_classify(
+        &window_configuration, &nadt_classifier_input, &window_plan, &window_state,
+        NULL, &window_result));
+    nadt_classifier_input.range_sample_count = 50u;
+
+    float primary_boundary_coefficients[
+        GOODIX_PRIMITIVES_NADT_PRIMARY_BOUNDARY_COEFFICIENTS] = {0.0f};
+    int32_t primary_signal[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES] = {0};
+    int32_t secondary_signal[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES] = {0};
+    goodix_primitives_nadt_primary_configuration primary_configuration = {
+        .activity_maxima = {512, 768, 640, 700},
+        .activity_minima = {256, 300, 280, 270},
+        .enabled = false,
+        .classifier_level = 2u,
+        .base_transition_windows = 1u,
+        .stable_hold_windows = 8u,
+        .trigger_energy_threshold = 1000,
+        .activity_span_threshold = 10,
+        .cadence_scale = 100,
+        .residual_near_zero_threshold = 1,
+        .minimum_near_zero_samples = 10u,
+        .minimum_near_zero_run = 10u,
+        .minimum_extrema_amplitude = 20,
+        .minimum_periodic_rate = 30u,
+        .maximum_periodic_rate = 180u,
+        .maximum_interval_variation = 10,
+        .strong_periodic_variation = 8,
+        .quality_gate = 50u,
+        .mode_zero_activity_threshold = 20u,
+        .mode_one_residual_threshold = 1000u,
+        .quiet_quarter_range_threshold = 4u,
+        .alternate_residual_threshold = 30u,
+        .trend_gate_enabled = false,
+        .trend_count_threshold = 2u,
+        .trend_percent_threshold = 60u,
+        .filtered_range_lower_threshold = 5,
+        .filtered_range_upper_threshold = 1000,
+        .residual_range_threshold = 1000u,
+        .mode_zero_residual_threshold = 1000u,
+        .raw_residual_threshold = 100u,
+        .deviation_ratio_threshold = 2u,
+        .filter_boundary_flags = 3u,
+        .filter_boundary_coefficients = primary_boundary_coefficients,
+        .filter_boundary_coefficient_count =
+            GOODIX_PRIMITIVES_NADT_PRIMARY_BOUNDARY_COEFFICIENTS,
+    };
+    goodix_primitives_nadt_primary_workspace primary_workspace = {0};
+    goodix_primitives_autocorrelation_state primary_autocorrelation = {0};
+    goodix_primitives_nadt_window_state primary_state = {
+        .current_result = 2,
+        .quality = 80u,
+    };
+    goodix_primitives_nadt_primary_diagnostics primary_diagnostics = {0};
+    uint8_t primary_result = UINT8_C(0xA5);
+    assert(goodix_primitives_nadt_primary_signal_classify(
+        primary_signal, secondary_signal, 25u, &primary_configuration,
+        &primary_state, &primary_workspace, &primary_autocorrelation,
+        round_fixture, &primary_diagnostics, &primary_result));
+    assert(primary_result == 2u && primary_state.current_result == 2 &&
+           primary_state.quality == 80u);
+
+    primary_configuration.enabled = true;
+    primary_state = (goodix_primitives_nadt_window_state) {
+        .current_result = 0,
+        .quality = 80u,
+    };
+    assert(goodix_primitives_nadt_primary_signal_classify(
+        primary_signal, secondary_signal, 25u, &primary_configuration,
+        &primary_state, &primary_workspace, &primary_autocorrelation,
+        round_fixture, &primary_diagnostics, &primary_result));
+    assert(primary_result == 3u && primary_state.current_result == 3 &&
+           primary_state.classification_latched &&
+           primary_state.quality == 0u &&
+           primary_state.transient_counters[1] == 0u &&
+           primary_state.transient_counters[3] == 1u &&
+           primary_diagnostics.transition_count == 0u &&
+           primary_diagnostics.filtered_range == 0 &&
+           primary_diagnostics.near_zero_samples == 25u &&
+           primary_diagnostics.longest_near_zero_run == 25u &&
+           primary_diagnostics.input_quality == 80u &&
+           primary_diagnostics.output_quality == 0u);
+
+    primary_state = (goodix_primitives_nadt_window_state) {
+        .current_result = 0,
+        .quality = 60u,
+        .classifier_suppressed = true,
+    };
+    assert(goodix_primitives_nadt_primary_signal_classify(
+        primary_signal, secondary_signal,
+        GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES,
+        &primary_configuration, &primary_state, &primary_workspace,
+        &primary_autocorrelation, round_fixture, &primary_diagnostics,
+        &primary_result));
+    assert(primary_result == 0u &&
+           primary_diagnostics.near_zero_samples == 100u &&
+           primary_diagnostics.longest_near_zero_run == 100u &&
+           primary_diagnostics.quarter_ranges[0] == 0 &&
+           primary_diagnostics.quarter_ranges[1] == 0 &&
+           primary_diagnostics.quarter_ranges[2] == 0 &&
+           primary_diagnostics.quarter_ranges[3] == 0);
+
+    const goodix_primitives_nadt_window_state primary_state_before =
+        primary_state;
+    primary_result = UINT8_C(0x5A);
+    assert(!goodix_primitives_nadt_primary_signal_classify(
+        primary_signal, secondary_signal, 22u, &primary_configuration,
+        &primary_state, &primary_workspace, &primary_autocorrelation,
+        round_fixture, &primary_diagnostics, &primary_result));
+    assert(primary_result == UINT8_C(0x5A) &&
+           memcmp(&primary_state, &primary_state_before,
+                  sizeof(primary_state)) == 0);
+
     uint16_t signal_intervals[
         GOODIX_PRIMITIVES_NADT_SIGNAL_INTERVAL_VALUES];
     for (size_t index = 0u;
@@ -5576,6 +6685,139 @@ void test_reconstructed_goodix_primitives(void) {
     assert(!goodix_primitives_nadt_optical_sample_transform(
         &optical_transform, 4.0f, round_double_away, &optical_output));
     optical_transform.numerator_count = 6u;
+
+    memset(optical_input_histories, 0, sizeof(optical_input_histories));
+    memset(optical_output_histories, 0, sizeof(optical_output_histories));
+    optical_transform.correction_threshold = 10.0f;
+    int32_t nadt_stream_direct[3] = {
+        128, INT32_C(0x800000) + 500, INT32_C(0x800000) + 1000,
+    };
+    uint8_t nadt_stream_scales[3] = {0u, 0u, 0u};
+    goodix_primitives_nadt_sample_preparation_input nadt_stream_sample = {
+        .direct_values = nadt_stream_direct,
+        .direct_value_count = 3u,
+        .scale_codes = nadt_stream_scales,
+        .scale_code_count = 3u,
+        .sequence = 1u,
+        .lane_stride = 1u,
+        .conversion_mode = 2u,
+        .calibrated = false,
+    };
+    const goodix_primitives_nadt_stream_input nadt_stream_input = {
+        .sample = &nadt_stream_sample,
+        .axis_x = 32,
+        .axis_y = 64,
+        .axis_z = 96,
+        .profile = 2u,
+        .classifier_suppressed = false,
+    };
+    goodix_primitives_nadt_stream_workspace nadt_stream_workspace = {0};
+    nadt_window_classifier_fixture stream_window_fixture = {
+        .primary_result = 3u,
+        .auxiliary_result = 0,
+        .alternate_result = 0,
+        .expected_primary_source = nadt_stream_workspace.primary_raw,
+        .expected_secondary_source = nadt_stream_workspace.primary_filtered,
+    };
+    const goodix_primitives_nadt_window_plan stream_window_plan = {
+        .classify_primary = nadt_window_primary_classifier,
+        .primary_context = &stream_window_fixture,
+        .classify_auxiliary = nadt_window_auxiliary_classifier,
+        .auxiliary_context = &stream_window_fixture,
+        .classify_alternate = nadt_window_alternate_classifier,
+        .alternate_context = &stream_window_fixture,
+        .square_root = square_root_double_fixture,
+    };
+    goodix_primitives_nadt_window_configuration stream_window_configuration = {
+        .window_count = 4u,
+        .alternate_classifier_level = 0u,
+        .minimum_nonzero_tail_samples = 25u,
+        .metric_threshold = 1000,
+        .spread_threshold = 1000,
+    };
+    goodix_primitives_nadt_sample_preparation_state stream_prepare_state = {
+        .previous_scale_code = UINT32_C(0xFF),
+    };
+    const goodix_primitives_nadt_stream_plan nadt_stream_plan = {
+        .sample_rate = 50u,
+        .primary_baseline = INT32_C(0x800000),
+        .low_primary_threshold = 100,
+        .ratio_threshold = 1.0f,
+        .strong_ratio_threshold = 2.0f,
+        .window_configuration = &stream_window_configuration,
+        .window_plan = &stream_window_plan,
+        .preparation_state = &stream_prepare_state,
+        .optical_transform = &optical_transform,
+        .round_provider = round_double_away,
+        .square_root = square_root_double_fixture,
+    };
+    goodix_primitives_nadt_stream_state nadt_stream_state = {
+        .initialized = true,
+        .batch_count = 50u,
+        .result_flag = true,
+    };
+    goodix_primitives_nadt_stream_output nadt_stream_output = {0};
+    assert(goodix_primitives_nadt_stream_process(
+        &nadt_stream_input, &nadt_stream_plan, &nadt_stream_state,
+        &nadt_stream_workspace, NULL, &nadt_stream_output));
+    assert(!nadt_stream_output.window_ready &&
+           nadt_stream_output.classification == 4u &&
+           nadt_stream_state.cadence_counter == 1u &&
+           nadt_stream_state.batch_count == 50u);
+    assert(goodix_primitives_nadt_stream_process(
+        &nadt_stream_input, &nadt_stream_plan, &nadt_stream_state,
+        &nadt_stream_workspace, NULL, &nadt_stream_output));
+    assert(!nadt_stream_output.window_ready &&
+           nadt_stream_state.cadence_counter == 0u &&
+           nadt_stream_state.batch_count == 51u &&
+           nadt_stream_state.primary_history_count == 1u &&
+           nadt_stream_workspace.primary_raw[0] == 1 &&
+           nadt_stream_workspace.primary_filtered[0] == 1 &&
+           nadt_stream_workspace.configuration_markers[0] == 0);
+    for (size_t index = 2u; index < 50u; ++index) {
+        assert(goodix_primitives_nadt_stream_process(
+            &nadt_stream_input, &nadt_stream_plan, &nadt_stream_state,
+            &nadt_stream_workspace, NULL, &nadt_stream_output));
+        assert(nadt_stream_output.window_ready == (index == 49u));
+    }
+    assert(nadt_stream_output.classification == 7u &&
+           nadt_stream_state.batch_count == 75u &&
+           nadt_stream_state.batch_sample_count == 0u &&
+           nadt_stream_state.primary_history_count == 25u &&
+           nadt_stream_state.secondary_history_count == 12u &&
+           nadt_stream_state.classifier.range_cursor == 12 &&
+           nadt_stream_state.activity_lane == 1u &&
+           stream_window_fixture.primary_calls == 1u &&
+           stream_window_fixture.auxiliary_calls == 1u &&
+           stream_window_fixture.observed_sample_count == 25);
+
+    goodix_primitives_nadt_stream_state uninitialized_stream_state = {0};
+    goodix_primitives_nadt_stream_workspace uninitialized_workspace = {0};
+    uninitialized_workspace.primary_raw[0] = 1234;
+    nadt_stream_output = (goodix_primitives_nadt_stream_output){0};
+    assert(goodix_primitives_nadt_stream_process(
+        &nadt_stream_input, &nadt_stream_plan, &uninitialized_stream_state,
+        &uninitialized_workspace, NULL, &nadt_stream_output));
+    assert(nadt_stream_output.status == 2u &&
+           uninitialized_stream_state.status == 2u &&
+           uninitialized_workspace.primary_raw[0] == 1234);
+    goodix_primitives_nadt_stream_plan invalid_stream_plan = nadt_stream_plan;
+    invalid_stream_plan.sample_rate = 24u;
+    nadt_stream_output = (goodix_primitives_nadt_stream_output){
+        .window_ready = true,
+        .classification = 99u,
+        .quality = 98u,
+        .status = 97u,
+        .configuration_changed = 96u,
+    };
+    assert(!goodix_primitives_nadt_stream_process(
+        &nadt_stream_input, &invalid_stream_plan, &nadt_stream_state,
+        &nadt_stream_workspace, NULL, &nadt_stream_output));
+    assert(nadt_stream_output.window_ready &&
+           nadt_stream_output.classification == 99u &&
+           nadt_stream_output.quality == 98u &&
+           nadt_stream_output.status == 97u &&
+           nadt_stream_output.configuration_changed == 96u);
 
     command_poll_fixture command_fixture = {
         7, 1, UINT32_MAX - UINT32_C(10), 200u, 0u, 0u,

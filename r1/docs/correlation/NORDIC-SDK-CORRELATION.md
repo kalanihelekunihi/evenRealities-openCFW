@@ -868,8 +868,9 @@ The local `openr1_analog.c` adapter is limited to the recovered 12-bit/no-oversa
 configuration, AIN5/AIN3/AIN2 routes, gains/acquisition times, startup settling, serialization, and
 calls into Nordic. Conversion, curve, and charge-state behavior is separately R1-owned. Exact
 extents and hashes are in `ANALOG-BATTERY-CORRELATION.md`. The linked-image verifier requires the
-Nordic object and retained analog API. Battery sampling remains unavailable until the licensed YHM
-power boundary is bound; no raw ADC BLE surface is added.
+Nordic object and retained analog API. The legacy Nordic image still leaves battery power abstract;
+the alternate Zephyr image binds the reconstructed YHM service. Neither target adds a raw ADC BLE
+surface.
 
 ## Linked watchdog provider
 

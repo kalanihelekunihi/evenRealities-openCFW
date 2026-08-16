@@ -413,7 +413,7 @@ static void test_algorithm_stubs_fail_closed(void) {
     GH3X2X_TimestampSyncSetPpgIntFlag(1u);
     GH3X2X_TimestampSyncFillAccSyncBuffer(0u, 1, 2, 3);
     GH3X2X_TimestampSyncFillPpgSyncBuffer(0u, g_pstGh3x2xFrameInfo[0]);
-    assert(GH3X2X_TimestampSyncGetFrameDataFlag() == 0u);
+    assert(GH3X2X_TimestampSyncGetFrameDataFlag() == 1u);
 
     GU8 packet[16];
     GU8 payload[4] = {1u, 2u, 3u, 4u};

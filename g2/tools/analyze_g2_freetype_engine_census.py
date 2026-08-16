@@ -1,58 +1,76 @@
 #!/usr/bin/env python3
-"""FreeType 2.9.1 engine census of the 0x51/0x52xxxx Apollo-main frontier.
+"""FreeType engine census of the 0x51xxxx/0x52xxxx no-evidence frontier.
 
 The Apollo unanchored-function provenance census
-(``analyze_g2_apollo_unanchored_census.py``) leaves 342 no-evidence Ghidra
-functions (75,016 official opaque bytes) in the ``0x51xxxx``/``0x52xxxx``
-ranges, hypothesized to be the FreeType 2.9.1 engine, plus 2 functions already
-bucketed ``freetype`` (the byte-exact ``FT_Done_Face`` envelope and the
-``FT_Open_Face`` envelope that calls it).  This analyzer attributes those 344
-functions to FreeType 2.9.1 modules where distinctive evidence supports it.
+(``analyze_g2_apollo_unanchored_census.py``) buckets exactly 2 functions (946
+official bytes) as FreeType 2.9.1 — the byte-exact ``FT_Done_Face`` envelope
+at 0x00526814 and one call-topology neighbour — and leaves 342 no-evidence
+functions (75,016 official bytes) in the ``0x51xxxx``/``0x52xxxx`` regions
+hypothesized as the FreeType engine frontier.  This analyzer attributes that
+frontier to FreeType 2.9.1 modules where distinctive evidence supports it,
+against the authenticated VER-2-9-1 snapshot vendored under
+``third_party/freetype``.
 
-Evidence tiers, applied in strict priority order:
+Scope is exactly 344 functions: the 342-function ``0x51xxxx``/``0x52xxxx``
+no-evidence frontier plus the 2-function parent-census freetype bucket.  The
+two rejected oversized envelopes whose entries sit in these regions
+(``0x00513E2E``, ``0x00514F3C``) stay rejected and are never in scope; the
+boundary-envelopes audit's finding that the ``0x00513E2E`` span is 98.7%
+accepted-envelope code with 774 interstitial rodata bytes is consistent with
+this census, because that accepted code *is* the frontier's discovered
+functions.
 
-1. ``recovery-audit-anchor`` (high) -- the function entry is an exact code
-   anchor proven by ``docs/research/freetype-recovery-audit.md`` and pinned by
-   the fail-closed configuration audit (``FT_Done_Face``, ``FT_Open_Face``,
-   ``destroy_face``, ``FT_Init_FreeType``, ``FT_Add_Default_Modules``,
-   ``FT_Add_Module``, ``FT_New_Library``, and the smooth three-pass LCD
-   fallback renderer body).
-2. ``module-string-signature`` (high) -- the function references, through a
-   code-region literal-pool cell, a string literal of at least six characters
-   that appears in exactly one G2-linked module's sources in the
-   authenticated FreeType 2.9.1 snapshot (string literals used only inside
-   ``FT_TRACE*``/``FT_ERROR``/``FT_ASSERT`` macros are excluded -- they
-   compile to nothing in a release build; shorter literals are excluded
-   because generic words such as ``"true"`` collide with non-FreeType
-   providers in the image).
-3. ``module-class-callback`` / ``raster-funcs-callback`` (high) -- the
-   function entry is stored as a callback pointer inside one of the ten
-   module class structs of the authenticated ``ft_default_modules[]`` table,
-   or inside the smooth renderer's ``FT_Raster_Funcs`` table.
-4. ``service-record-callback`` (medium) -- the function entry is stored
-   inside a FreeType service record reachable from a service-description
-   table whose service-id list uniquely matches one module's
-   ``FT_DEFINE_SERVICEDESCRECn`` variant in the snapshot.
-5. ``call-topology-single-module`` (medium) -- every closed-world call target
-   (token equal to a seed-labelled corpus function entry) collapses to one
-   FreeType module.
-6. ``call-topology-multi-module`` (low) -- call targets span several FreeType
-   modules; the function is FreeType but its module stays unresolved.
-7. ``link-order-sandwich`` (low) -- the nearest seed-labelled functions on
-   both sides in address order share one module.  Link order groups
-   translation units, so this is a low-confidence triage signal only.
-8. ``investigation-required`` (none) -- no corroborating evidence.
+Evidence tiers, applied in strict priority order; every in-scope function
+gets exactly one status, module, evidence class, and confidence level:
 
-Seeds are the union of tiers 1-4 over the whole image (most FreeType modules
-link outside the census ranges; they still serve as topology and sandwich
-references).  Only the 344 census functions receive census rows.  When tiers
-disagree on a seed's module, the higher tier wins and the conflict is
-reported; a same-tier cross-module conflict raises ``CensusError``.
+1. ``documented-api-anchor`` (high) -- the seven function entries named by
+   address in the reviewed FreeType recovery/config audits
+   (``FT_Init_FreeType``, ``FT_Add_Default_Modules``, ``FT_Add_Module``,
+   ``FT_New_Library``, ``destroy_face``, ``FT_Done_Face``, ``FT_Open_Face``).
+   Each anchor is re-verified structurally on every run (exact body span,
+   pinned interior instruction addresses, or exact static callee sets).
+2. ``documented-interior-pin`` (high) -- ``open_face`` (static, ftobjs.c):
+   its body contains the audit-pinned face-internal allocation at 0x00525A0C
+   and references the ``incr`` tag literal cell at 0x005262A8, whose image
+   word must be 0x696E6372.
+3. ``ps-property-string-signature`` (high) -- ``ps_property_set`` /
+   ``ps_property_get`` (base/ftpsprop.c): the function references the pointer
+   cells of exactly the property-name set parsed from the hash-verified
+   snapshot ``ftpsprop.c`` source (four names for set, three for get; the
+   get/set asymmetry — ``random-seed`` is set-only — is itself verified
+   against the snapshot).
+4. ``base-call-graph-direct`` (medium) -- a member of the closed static
+   call-graph community grown from the high-confidence anchors that has a
+   direct static call edge to a tier-1/2/3 function and whose outbound
+   static targets are all community members or allowlisted externals.
+5. ``base-call-graph-indirect`` (low) -- remaining community members:
+   reachable only through other community functions or through neutral
+   leaf/runtime-passthrough helpers.
+6. ``investigation-required`` (none) -- no admissible FreeType evidence; a
+   deterministic hypothesis is recorded from the external caller families
+   and hardware hints.
 
-The analyzer is read-only and deterministic.  It re-derives every seed from
-the authenticated official image, the authenticated 64-shard corpus, the
-authenticated FreeType 2.9.1 snapshot, and the checked-in parent census
-manifest on every run; any drift in the pinned sets raises ``CensusError``.
+The call-graph community closure is fail-closed: an outbound static target
+is admissible only if it is already in the community, is one of fourteen
+curated external identities (the three documented ``am_ftsystem.c``/vendor
+ftsystem functions plus eleven body-verified C runtime routines), or bottoms
+out in such functions within one further hop (neutral passthrough).  The
+derived 83-function attribution is pinned entry-for-entry; any drift raises
+``CensusError``.
+
+Corroborating, non-attributing pins: eight flat constant tables parsed from
+the hash-verified snapshot sources ``cffload.c``/``t1decode.c``/``psmodule.c``
+must yield exactly seven unique byte matches in the official image at pinned
+addresses, and no in-scope function may reference any of them — evidence
+that the CFF/psaux/psnames driver bodies linked outside this frontier, not
+absence of those modules from the build (the authenticated ten-entry
+``ft_default_modules[]`` table already proves they are linked).
+
+The analyzer is read-only and deterministic.  It re-derives the frontier
+from the parent census (authenticated image, corpus, and manifests) on
+every run; any drift in the 342/75,016 frontier, the 2/946 bucket, the
+anchor set, the string/table censuses, the closure rule inputs, or the
+pinned attribution map raises ``CensusError``.
 """
 
 from __future__ import annotations
@@ -65,248 +83,290 @@ import json
 import re
 import struct
 import sys
-from collections import Counter
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PATH_ANALYZER = ROOT / "tools/analyze_apollo_embedded_source_paths.py"
+PARENT_ANALYZER = ROOT / "tools/analyze_g2_apollo_unanchored_census.py"
 MANIFESTS = ROOT / "tools/manifests"
-PARENT_MANIFEST = MANIFESTS / "g2-apollo-unanchored-census-functions.tsv"
-FREETYPE_SNAPSHOT = ROOT / "third_party/freetype"
-PROVENANCE = FREETYPE_SNAPSHOT / "PROVENANCE.json"
-G2_FTMODULE = FREETYPE_SNAPSHOT / "g2-config/freetype/config/ftmodule.h"
-SERVICE_HEADERS = FREETYPE_SNAPSHOT / "include/freetype/internal/services"
+SNAPSHOT = ROOT / "third_party/freetype"
+PROVENANCE = SNAPSHOT / "PROVENANCE.json"
 
-PARENT_MANIFEST_SHA256 = "a36c51c0084e51b6e64fc902ab58be16fa76f2c3b361c3ae543f378a8c1f7b96"
-PROVENANCE_SHA256 = "2be8717625bceddee3aa95663186c0629247304c951c4790bc26cd372e3794bf"
-G2_FTMODULE_SHA256 = "522c1d358dce8a141b2f8afec7020f66bf800d3d829a1ad22f3418ebf3f05d74"
-EXPECTED_IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
-EXPECTED_IMAGE_SIZE = 3_523_396
-
-EXPECTED_CORPUS_FUNCTIONS = 7_370
-EXPECTED_OVERSIZED_ENTRIES = (
-    0x0047CC60,
-    0x0048949C,
-    0x00509708,
-    0x00513E2E,
-    0x00514F3C,
-    0x00541B74,
-    0x0055F994,
-    0x005FA120,
-)
-MAX_TRUSTWORTHY_FUNCTION_ENVELOPE = 16_384
-
-# Census ranges: the parent census's FreeType frontier.
-SEA_START = 0x00510000
-SEA_END_EXCLUSIVE = 0x00530000
+FRONTIER_BASE = 0x00510000
+FRONTIER_END = 0x00530000
 EXPECTED_FRONTIER_FUNCTIONS = 342
 EXPECTED_FRONTIER_OFFICIAL_BYTES = 75_016
-EXPECTED_PARENT_FREETYPE_ENTRIES = (0x005264A6, 0x00526814)
-EXPECTED_PARENT_FREETYPE_BYTES = 946
-EXPECTED_CENSUS_FUNCTIONS = 344
-EXPECTED_CENSUS_OFFICIAL_BYTES = 75_962
+EXPECTED_FRONTIER_51_FUNCTIONS = 87
+EXPECTED_FRONTIER_51_OFFICIAL_BYTES = 36_812
+EXPECTED_FRONTIER_52_FUNCTIONS = 255
+EXPECTED_FRONTIER_52_OFFICIAL_BYTES = 38_204
+EXPECTED_FREETYPE_BUCKET_FUNCTIONS = 2
+EXPECTED_FREETYPE_BUCKET_OFFICIAL_BYTES = 946
+EXPECTED_SCOPE_FUNCTIONS = 344
 
-# Code region (functions and embedded literal pools) versus static rodata.
-# The lowest module class struct (cff, 0x006DCB74) sits below 0x006D0000;
-# nothing at or above 0x006D0000 is a literal-pool cell.
-CODE_REGION = (0x00438000, 0x006D0000)
-DATA_REGION = (0x006D0000, 0x007A0000)
+# Rejected oversized envelopes whose entries sit inside the frontier regions.
+# They are never in scope (parent bucket ``rejected-oversized-envelope``);
+# pinned here so a scope leak fails closed.
+REGION_REJECTED_ENVELOPES = (0x00513E2E, 0x00514F3C)
 
-# G2-linked FreeType modules, in the compiled ft_default_modules[] order
-# proven by the recovery audit; recovered from g2-config ftmodule.h on every
-# run and checked against this pinned class-name list.
-EXPECTED_FTMODULE_CLASSES = (
-    "autofit_module_class",
-    "tt_driver_class",
-    "cff_driver_class",
-    "psaux_module_class",
-    "psnames_module_class",
-    "pshinter_module_class",
-    "sfnt_module_class",
-    "ft_smooth_renderer_class",
-    "ft_smooth_lcd_renderer_class",
-    "ft_smooth_lcdv_renderer_class",
-)
-FTMODULE_CLASS_MODULE = {
-    "autofit_module_class": "autofit",
-    "tt_driver_class": "truetype",
-    "cff_driver_class": "cff",
-    "psaux_module_class": "psaux",
-    "psnames_module_class": "psnames",
-    "pshinter_module_class": "pshinter",
-    "sfnt_module_class": "sfnt",
-    "ft_smooth_renderer_class": "smooth",
-    "ft_smooth_lcd_renderer_class": "smooth",
-    "ft_smooth_lcdv_renderer_class": "smooth",
+# Tier 1: documented API anchors.  Each check is re-derived from the corpus
+# and image on every run:
+#   body      -- exact [body_start, body_end_exclusive) span
+#   contains  -- audit-pinned instruction addresses inside the body
+#   calls     -- exact static callee set
+#   called_by -- required static callers
+#   refs_word -- a DAT-referenced cell whose stored word is this value
+RECOVERY_AUDIT = "docs/research/freetype-recovery-audit.md"
+FT_DEFAULT_MODULES = 0x0073EEF8
+INCR_TAG_LITERAL_CELL = 0x005262A8
+INCR_TAG_VALUE = 0x696E6372  # 'incr'
+FACE_INTERNAL_ALLOC_SITE = 0x00525A0C
+DOCUMENTED_ANCHORS = {
+    0x00526814: {
+        "name": "FT_Done_Face",
+        "source": RECOVERY_AUDIT + ": exact FT_Done_Face at [0x00526814,0x0052687E)",
+        "body": (0x00526814, 0x0052687E),
+        "calls": (0x005292E6, 0x00529324, 0x00529256, 0x005258A8),
+    },
+    0x005264A6: {
+        "name": "FT_Open_Face",
+        "source": RECOVERY_AUDIT + ": FT_Open_Face cleanup calls at "
+        "0x0052659C and 0x005267D0",
+        "contains": (0x0052659C, 0x005267D0),
+        "calls_include": (0x00526814,),
+    },
+    0x0052431C: {
+        "name": "FT_Init_FreeType",
+        "source": RECOVERY_AUDIT + ": FT_Init_FreeType at 0x0052431C",
+        "calls": (0x005676A0, 0x005676C6, 0x005274B2, 0x005242FC),
+    },
+    0x005242FC: {
+        "name": "FT_Add_Default_Modules",
+        "source": RECOVERY_AUDIT + ": FT_Add_Default_Modules at 0x005242FC "
+        "walking ft_default_modules[] at 0x0073EEF8",
+        "calls": (0x0052729C,),
+        "refs_word": FT_DEFAULT_MODULES,
+    },
+    0x0052729C: {
+        "name": "FT_Add_Module",
+        "source": RECOVERY_AUDIT + ": FT_Add_Module at 0x0052729C",
+        "called_by": (0x005242FC,),
+    },
+    0x005274B2: {
+        "name": "FT_New_Library",
+        "source": RECOVERY_AUDIT + ": FT_New_Library writes version 2/9/1 at "
+        "0x005274DA/0x005274DE/0x005274E2",
+        "contains": (0x005274DA, 0x005274DE, 0x005274E2),
+    },
+    0x005258A8: {
+        "name": "destroy_face",
+        "source": RECOVERY_AUDIT + ": private destroy_face body at 0x005258A8",
+        "called_by": (0x00526814,),
+    },
 }
 
-MODULES: dict[str, dict[str, str]] = {
-    "autofit": {"label": "FreeType 2.9.1 auto-fitter (src/autofit)"},
-    "base": {"label": "FreeType 2.9.1 base layer (src/base)"},
-    "cff": {"label": "FreeType 2.9.1 CFF driver (src/cff)"},
-    "psaux": {"label": "FreeType 2.9.1 PostScript aux module (src/psaux)"},
-    "pshinter": {"label": "FreeType 2.9.1 PostScript hinter (src/pshinter)"},
-    "psnames": {"label": "FreeType 2.9.1 PostScript glyph names (src/psnames)"},
-    "sfnt": {"label": "FreeType 2.9.1 SFNT wrapper (src/sfnt)"},
-    "smooth": {"label": "FreeType 2.9.1 smooth rasterizer/renderers (src/smooth)"},
-    "truetype": {"label": "FreeType 2.9.1 TrueType driver (src/truetype)"},
+# Tier 2: open_face, pinned by two interior audit addresses.
+EXPECTED_OPEN_FACE = 0x005259BE
+
+# Tier 3: ps_property_set/ps_property_get from base/ftpsprop.c.  The property
+# name sets are parsed from the hash-verified snapshot source on every run
+# and must equal these pinned sets exactly.
+PSPROP_SOURCE = "src/base/ftpsprop.c"
+EXPECTED_PS_PROPERTY_SET_NAMES = (
+    "darkening-parameters",
+    "hinting-engine",
+    "no-stem-darkening",
+    "random-seed",
+)
+EXPECTED_PS_PROPERTY_GET_NAMES = (
+    "darkening-parameters",
+    "hinting-engine",
+    "no-stem-darkening",
+)
+EXPECTED_PS_PROPERTY_SET_ENTRY = 0x00527F0A
+EXPECTED_PS_PROPERTY_GET_ENTRY = 0x00527FF2
+
+# External allowlist for the call-graph community closure.  Every entry is a
+# corpus function outside the scope with a curated, cited identity:
+# the vendor ftsystem functions documented in the recovery audit, and C
+# runtime routines identified by their decompiled bodies (word-parallel
+# zero-detection idioms, byte loops, and image-wide fan-in).
+EXTERNAL_ALLOWLIST = {
+    0x005675E8: "FT_Stream_Open (vendor ftsystem; " + RECOVERY_AUDIT + " stream support)",
+    0x005676A0: "FT_New_Memory (am_ftsystem.c; " + RECOVERY_AUDIT + " section 5)",
+    0x005676C6: "FT_Done_Memory (am_ftsystem.c; " + RECOVERY_AUDIT + " section 5)",
+    0x00439710: "memmove (C runtime; overlapping-copy body)",
+    0x00439BE4: "memcpy variant (C runtime; word-parallel copy body)",
+    0x00439C04: "memcpy (C runtime; word-parallel copy body)",
+    0x0043C0E4: "memset (C runtime; splatted-byte fill body)",
+    0x0043C0EC: "memset tail (C runtime; called only from 0x0043C0E4)",
+    0x0044A43C: "strlen (C runtime; 0xFEFEFEFF zero-detection idiom)",
+    0x0044B5A0: "strncpy (C runtime; 0xFEFEFEFF zero-detection idiom)",
+    0x0046CACC: "strcmp (C runtime; byte-wise compare loop)",
+    0x0044B63A: "strstr (C runtime; strchr-driven scan loop)",
+    0x004751C8: "memcmp (C runtime; word-wise compare with byte-swap order)",
+    0x00481818: "strchr (C runtime; byte scan loop)",
 }
-CENSUS_BUCKETS = tuple(MODULES) + ("freetype-multi-module", "investigation-required")
 
-# FT_Module_Class has 9 words (include/freetype/ftmodapi.h);
-# FT_Driver_ClassRec adds 13 (include/freetype/internal/ftdriver.h);
-# FT_Renderer_Class adds 6 (include/freetype/internal/ftrend1.h);
-# FT_Raster_Funcs has 6 words (include/freetype/ftimage.h).
-MODULE_CLASS_WORDS = 9
-DRIVER_CLASS_WORDS = MODULE_CLASS_WORDS + 13
-RENDERER_CLASS_WORDS = MODULE_CLASS_WORDS + 6
-RASTER_FUNCS_WORDS = 6
-RASTER_CLASS_OFFSET = (MODULE_CLASS_WORDS + 5) * 4  # FT_Renderer_Class.raster_class
-
-# Module class struct addresses, proven by the recovery audit's decode of
-# ft_default_modules[] at 0x0073EEF8 and pinned by the fail-closed
-# configuration audit.  Validated against the image on every run: the table
-# pointers, the NULL terminator, and each class's module_name string.
-FT_DEFAULT_MODULES_TABLE = 0x0073EEF8
-MODULE_CLASS_STRUCTS = (
-    ("autofitter", 0x00752520, MODULE_CLASS_WORDS * 4, "autofit"),
-    ("truetype", 0x006DED34, DRIVER_CLASS_WORDS * 4, "truetype"),
-    ("cff", 0x006DCB74, DRIVER_CLASS_WORDS * 4, "cff"),
-    ("psaux", 0x00758A18, MODULE_CLASS_WORDS * 4, "psaux"),
-    ("psnames", 0x00758A60, MODULE_CLASS_WORDS * 4, "psnames"),
-    ("pshinter", 0x00758A3C, MODULE_CLASS_WORDS * 4, "pshinter"),
-    ("sfnt", 0x0075A3F8, MODULE_CLASS_WORDS * 4, "sfnt"),
-    ("smooth", 0x00718D9C, RENDERER_CLASS_WORDS * 4, "smooth"),
-    ("smooth-lcd", 0x00718DD8, RENDERER_CLASS_WORDS * 4, "smooth"),
-    ("smooth-lcdv", 0x00718E14, RENDERER_CLASS_WORDS * 4, "smooth"),
+# Snapshot sources parsed for flat scalar constant tables; every file is
+# hash-verified against the authenticated PROVENANCE.json before parsing.
+TABLE_SOURCES = (
+    "src/cff/cffload.c",
+    "src/psaux/t1decode.c",
+    "src/psnames/psmodule.c",
 )
-
-# Tier-1 anchors: exact code pins from docs/research/freetype-recovery-audit.md.
-# Every entry must be a corpus function whose body_start equals the anchor;
-# the pinned body span is validated against the corpus on every run.
-RECOVERY_AUDIT_ANCHORS = (
-    # (entry, module, api label, audit citation)
-    (0x005242FC, "base", "FT_Add_Default_Modules",
-     "freetype-recovery-audit.md section 1: FT_Add_Default_Modules at 0x5242FC"),
-    (0x0052431C, "base", "FT_Init_FreeType",
-     "freetype-recovery-audit.md section 1: FT_Init_FreeType at 0x52431C"),
-    (0x005258A8, "base", "destroy_face",
-     "freetype-recovery-audit.md section 4: private destroy_face body at 0x005258A8"),
-    (0x005264A6, "base", "FT_Open_Face",
-     "freetype-recovery-audit.md section 4: FT_Done_Face cleanup calls at "
-     "0x0052659C and 0x005267D0 sit inside this envelope"),
-    (0x00526814, "base", "FT_Done_Face",
-     "freetype-recovery-audit.md section 4: exact FT_Done_Face at [0x00526814,0x0052687E)"),
-    (0x0052729C, "base", "FT_Add_Module",
-     "freetype-recovery-audit.md section 1: FT_Add_Module at 0x52729C"),
-    (0x005274B2, "base", "FT_New_Library",
-     "freetype-recovery-audit.md section 1: FT_New_Library version stores at 0x5274DA-0x5274E2"),
-    (0x005E22E0, "smooth", "ft_smooth_render_generic (three-pass LCD fallback)",
-     "freetype-recovery-audit.md section 3: smooth renderer 0x005E22E0..0x005E2636 is "
-     "the authenticated 2.9.1 fallback body"),
-)
-
-# Tier-2 pins: (entry, module, matched single-module literals).  Re-derived
-# from the snapshot and the image on every run; any drift raises CensusError.
-EXPECTED_STRING_SIGNATURES = (
-    (0x00525574, "base", ("Type 1",)),
-    (0x00527F0A, "base", ("hinting-engine", "random-seed")),
-    (0x00527FF2, "base", ("hinting-engine",)),
-    (0x005285D4, "base", ("/..namedfork/rsrc",)),
-    (0x0052862C, "base", ("resource.frk/",)),
-    (0x00577D7C, "sfnt", ("missing",)),
-    (0x005A6856, "autofit", ("0 1 2 3 4 5 6 7 8 9",)),
-    (0x005A9628, "autofit", ("0 1 2 3 4 5 6 7 8 9",)),
-    (0x005AB758, "autofit",
-     ("default-script", "fallback-script", "increase-x-height", "warping")),
-    (0x005AB896, "autofit",
-     ("default-script", "fallback-script", "glyph-to-script-map",
-      "increase-x-height", "warping")),
-    (0x005CFEFA, "psaux", ("StartFontMetrics",)),
-    (0x005F289E, "truetype", ("OpticalSize",)),
-)
-
-# Tier-3 pins: callbacks decoded from the ten module class structs and from
-# the smooth FT_Raster_Funcs table.  Re-derived from the image on every run.
-EXPECTED_CLASS_CALLBACKS = (
-    (0x005AB98C, "autofit"),
-    (0x005F881C, "truetype"),
-    (0x005F89BC, "truetype"),
-    (0x005AF576, "cff"),
-    (0x005AF88C, "cff"),
-    (0x005ABFF2, "cff"),
-    (0x005AC02A, "cff"),
-)
-EXPECTED_RASTER_CALLBACKS = (
-    (0x005E2052, "smooth"),
-    (0x005E2224, "smooth"),
-    (0x005E2248, "smooth"),
-)
-
-# Tier-4 pins: the five service-description tables decoded from the image,
-# each uniquely matched to one module's FT_DEFINE_SERVICEDESCRECn variant.
-EXPECTED_SERVICE_TABLES = (
-    (0x006E2750, "cff",
-     ("font-format", "multi-masters", "metrics-variations", "postscript-info",
-      "postscript-font-name", "glyph-dict", "tt-cmaps", "CID", "properties",
-      "cff-load")),
-    (0x00725060, "truetype",
-     ("font-format", "multi-masters", "metrics-variations", "truetype-engine",
-      "tt-glyf", "properties")),
-    (0x00738B04, "sfnt",
-     ("sfnt-table", "postscript-font-name", "glyph-dict", "bdf", "tt-cmaps")),
-    (0x00785370, "autofit", ("properties",)),
-    (0x00788430, "psnames", ("postscript-cmaps",)),
-)
-# (callback entry, table-owning module, service id).  The cff ``properties``
-# record points at ps_property_set/ps_property_get, which live in
-# src/base/ftpsprop.c; the higher-priority string tier already labels those
-# two functions ``base`` and wins the conflict (reported in the summary).
-EXPECTED_SERVICE_CALLBACKS = (
-    (0x00527F0A, "cff", "properties"),
-    (0x00527FF2, "cff", "properties"),
-    (0x005AB758, "autofit", "properties"),
-    (0x005AB896, "autofit", "properties"),
-    (0x005AC140, "cff", "glyph-dict"),
-    (0x005AC1BC, "cff", "glyph-dict"),
-    (0x005ADDB8, "cff", "cff-load"),
-    (0x005AE5F0, "cff", "cff-load"),
-    (0x005AE7FA, "cff", "multi-masters"),
-    (0x005AEA90, "cff", "cff-load"),
-    (0x005D9580, "psnames", "postscript-cmaps"),
-    (0x005D9716, "psnames", "postscript-cmaps"),
-    (0x005D9840, "psnames", "postscript-cmaps"),
-    (0x005D9890, "psnames", "postscript-cmaps"),
-    (0x005D9EE4, "truetype", "tt-glyf"),
-    (0x005D9FC2, "truetype", "tt-glyf"),
-    (0x005DAA9C, "sfnt", "postscript-font-name"),
-    (0x005DF484, "sfnt", "sfnt-table"),
-    (0x005F225E, "truetype", "metrics-variations"),
-    (0x005F289E, "truetype", "multi-masters"),
-    (0x005F309E, "truetype", "multi-masters"),
-    (0x005F32CC, "truetype", "multi-masters"),
-    (0x005F3FF0, "truetype", "multi-masters"),
-    (0x005F40D6, "truetype", "multi-masters"),
-    (0x005F919C, "truetype", "tt-glyf"),
-)
-SERVICE_RECORD_MAX_BYTES = 0x40
-
-# Final census pins (re-derived on every run).
-EXPECTED_SEED_COUNT = 50
-EXPECTED_BUCKET_CENSUS = {
-    # bucket: (functions, official_opaque_bytes)
-    "base": (128, 16_570),
-    "investigation-required": (216, 59_392),
+MIN_TABLE_BYTES = 16
+EXPECTED_TABLES_PARSED = 8
+# The seven uniquely byte-matched tables, at pinned image addresses.  These
+# tables prove the CFF/psaux/psnames constant data linked into the image;
+# no in-scope function references them, which bounds those drivers' code
+# outside this frontier.
+EXPECTED_LOCATED_TABLES = {
+    "src/cff/cffload.c:cff_expert_encoding": 0x006C0150,
+    "src/cff/cffload.c:cff_isoadobe_charset": 0x006C1C60,
+    "src/cff/cffload.c:cff_expert_charset": 0x006C93B0,
+    "src/cff/cffload.c:cff_expertsubset_charset": 0x006D22FC,
+    "src/psaux/t1decode.c:t1_args_count": 0x006D7C60,
+    "src/psnames/psmodule.c:ft_extra_glyph_unicodes": 0x0074D214,
+    "src/psnames/psmodule.c:ft_extra_glyph_name_offsets": 0x0074D23C,
 }
-EXPECTED_EVIDENCE_COUNTS = {
-    "recovery-audit-anchor": 7,
-    "module-string-signature": 5,
-    "call-topology-single-module": 3,
-    "link-order-sandwich": 113,
-    "none": 216,
+
+# Out-of-scope documented/derived observations, never re-bucketed here.
+EXPECTED_EXTERNAL_OBSERVATIONS = 4
+EXTERNAL_FTSYSTEM = (0x005675E8, 0x005676A0, 0x005676C6)
+# FT_Stream_New (static, ftobjs.c): direct static callee of the FT_Open_Face
+# anchor that the parent census bucketed ``lvgl`` by call topology.  Its
+# decompiled body dispatches FT_OPEN_MEMORY -> 0x005288B8 (FT_Stream_OpenMemory),
+# FT_OPEN_PATHNAME -> 0x005675E8 (FT_Stream_Open), FT_OPEN_STREAM -> reuse.
+EXPECTED_FT_STREAM_NEW = 0x00524F96
+EXPECTED_FT_STREAM_NEW_CALLS = (0x00529148, 0x005288B8, 0x005675E8, 0x00529256)
+
+# The whole 83-row attribution result, pinned.  Any derived drift raises.
+# entry -> (status, module, evidence, confidence)
+EXPECTED_ATTRIBUTION = {
+    0x00526814: ("module", "base", "documented-api-anchor", "high"),
+    0x005264A6: ("module", "base", "documented-api-anchor", "high"),
+    0x0052431C: ("module", "base", "documented-api-anchor", "high"),
+    0x005242FC: ("module", "base", "documented-api-anchor", "high"),
+    0x0052729C: ("module", "base", "documented-api-anchor", "high"),
+    0x005274B2: ("module", "base", "documented-api-anchor", "high"),
+    0x005258A8: ("module", "base", "documented-api-anchor", "high"),
+    0x005259BE: ("module", "base", "documented-interior-pin", "high"),
+    0x00527F0A: ("module", "base", "ps-property-string-signature", "high"),
+    0x00527FF2: ("module", "base", "ps-property-string-signature", "high"),
+    0x0052502A: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00525386: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x005253F4: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x0052586E: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x0052594A: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00525ADE: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00525B6E: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x0052687E: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x005270D2: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00527466: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x005288E0: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00529148: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00529256: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x005292E6: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00529304: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00529324: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00529378: ("cluster", "base", "base-call-graph-direct", "medium"),
+    0x00524B88: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524BA8: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524BC4: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524C1E: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524C3A: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524C88: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524CC4: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524CD6: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524E08: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524E58: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00524E7A: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x0052504C: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005250A2: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x0052525C: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x0052526C: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005252BC: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00525334: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00525832: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00525936: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00525B02: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00525B20: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00525C08: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00526DA2: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00526E38: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00526E5A: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x0052705A: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00527096: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005270BC: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x0052716C: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005271C0: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00527228: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x0052724C: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005273B8: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005273F2: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528470: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528508: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528524: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005285D4: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x0052862C: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528720: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528842: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005288B8: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005288CE: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528914: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528992: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005289B0: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005289D0: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528A66: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528B4A: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528BA8: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00528C14: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00529176: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x0052919C: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x005291E4: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00529262: ("cluster", "base", "base-call-graph-indirect", "low"),
+    0x00529296: ("cluster", "base", "base-call-graph-indirect", "low"),
 }
+
+EXPECTED_ATTRIBUTED_FUNCTIONS = 83
+EXPECTED_ATTRIBUTED_OFFICIAL_BYTES = 7_874
+EXPECTED_INVESTIGATION_FUNCTIONS = 261
+EXPECTED_INVESTIGATION_OFFICIAL_BYTES = 68_088
+
+# Per-module roll-up over the 344-function scope (attributed rows only).
+# module -> (functions, official_opaque_bytes)
+EXPECTED_MODULE_SUMMARY = {
+    "base": (83, 7_874),
+}
+
+# Body-shape hypotheses for community members whose decompiled bodies match
+# textbook ftutil.c/ftobjs.c internals; used in the manifest attribution
+# column.  Everything else carries a structural detail string only.
+MEMBER_HYPOTHESES = {
+    0x005292E6: "FT_List_Find candidate (ftutil.c list search)",
+    0x00529324: "FT_List_Remove candidate (ftutil.c list unlink)",
+    0x00529304: "FT_List_Add candidate (ftutil.c list append)",
+    0x00529378: "FT_List_Finalize candidate (ftutil.c list destroy)",
+    0x00529256: "ft_mem_free candidate (FT_FREE wrapper through memory->free)",
+    0x00529148: "ft_mem_alloc candidate (zeroing allocation wrapper)",
+    0x00529176: "ft_mem_qalloc candidate (allocation through memory->alloc)",
+    0x0052687E: "faces_list insertion helper candidate (FT_Open_Face outlined block)",
+}
+
+MODULES = ("base",)
+EVIDENCE_CLASSES = (
+    "documented-api-anchor",
+    "documented-interior-pin",
+    "ps-property-string-signature",
+    "base-call-graph-direct",
+    "base-call-graph-indirect",
+    "none",
+)
+STATUSES = ("module", "cluster", "investigation-required")
+CONFIDENCE_ORDER = ("high", "medium", "low", "none")
 
 FUNCTION_BEGIN_RE = re.compile(
     r"OPENCFW_FUNCTION_BEGIN entry=([0-9a-f]+) "
@@ -315,25 +375,42 @@ FUNCTION_BEGIN_RE = re.compile(
 )
 FUNCTION_END_RE = re.compile(r"OPENCFW_FUNCTION_END entry=([0-9a-f]+)", re.IGNORECASE)
 ADDRESS_TOKEN_RE = re.compile(r"(?<![0-9a-fA-F])([0-9a-f]{8})(?![0-9a-fA-F])")
-STRING_LITERAL_RE = re.compile(r'"((?:[^"\\]|\\.)*)"')
-BLOCK_COMMENT_RE = re.compile(r"/\*.*?\*/", re.DOTALL)
-LINE_COMMENT_RE = re.compile(r"//[^\n]*")
-SERVICE_ID_RE = re.compile(r'#define\s+(FT_SERVICE_ID_\w+)\s+"([^"]+)"')
-SERVICEDESC_RE = re.compile(
-    r"FT_DEFINE_SERVICEDESCREC(\d+)\s*\(\s*(\w+)\s*,(.*?)\)", re.DOTALL
-)
-SERVICEDESC_PAIR_RE = re.compile(r"(FT_SERVICE_ID_\w+)\s*,\s*(&?\w+)")
-FT_USE_MODULE_RE = re.compile(r"FT_USE_MODULE\(\s*\w+\s*,\s*(\w+)\s*\)")
-TRACE_ONLY_MARKERS = ("FT_TRACE", "FT_ERROR", "FT_ASSERT")
-MIN_SIGNATURE_LITERAL = 6
+CALL_RE = re.compile(r"\bFUN_([0-9a-f]{8})\s*\(")
+DAT_RE = re.compile(r"\bDAT_([0-9a-f]{8})")
 
-TIER_PRIORITY = {
-    "recovery-audit-anchor": 0,
-    "module-string-signature": 1,
-    "module-class-callback": 2,
-    "raster-funcs-callback": 2,
-    "service-record-callback": 3,
+C_COMMENT_RE = re.compile(r"/\*.*?\*/", re.DOTALL)
+LINE_COMMENT_RE = re.compile(r"//[^\n]*")
+PS_PROPERTY_NAME_RE = re.compile(r'ft_strcmp\(\s*property_name,\s*"([^"]+)"\s*\)')
+
+TABLE_DECL_RE = re.compile(
+    r"(?:static\s+)?const\s+"
+    r"(FT_UShort|FT_Short|FT_UInt16|FT_Int16|FT_Byte|FT_UByte|"
+    r"FT_UInt32|FT_Int32|FT_UInt|FT_Int|FT_ULong|FT_Long|FT_Pos|FT_Fixed)\s+"
+    r"(\w+)((?:\s*\[[^\]]*\])+)\s*=\s*\{"
+)
+INT_TOKEN_RE = re.compile(r"[+-]?(0x[0-9a-fA-F]+|\d+)[uUlL]*")
+TABLE_TYPE_FORMAT = {
+    "FT_UShort": "H",
+    "FT_Short": "h",
+    "FT_UInt16": "H",
+    "FT_Int16": "h",
+    "FT_Byte": "B",
+    "FT_UByte": "B",
+    "FT_UInt32": "I",
+    "FT_Int32": "i",
+    "FT_UInt": "I",
+    "FT_Int": "i",
+    "FT_ULong": "I",
+    "FT_Long": "i",
+    "FT_Pos": "i",
+    "FT_Fixed": "i",
 }
+
+MAP_TSV_HEADER = (
+    "entry\tbody_start\tbody_end_exclusive\tenvelope_bytes\t"
+    "official_opaque_bytes\tscope\tparent_bucket\tstatus\tmodule\t"
+    "attribution\tevidence\tconfidence\tdetail"
+)
 
 
 class CensusError(RuntimeError):
@@ -344,737 +421,754 @@ def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
-def _load_path_analyzer():
+def _load_parent():
     spec = importlib.util.spec_from_file_location(
-        "apollo_paths_for_freetype_census", PATH_ANALYZER
+        "apollo_unanchored_census_for_freetype", PARENT_ANALYZER
     )
     if spec is None or spec.loader is None:
-        raise CensusError(f"cannot load {PATH_ANALYZER}")
+        raise CensusError(f"cannot load {PARENT_ANALYZER}")
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
 
-def _strip_comments(text: str) -> str:
-    return LINE_COMMENT_RE.sub(" ", BLOCK_COMMENT_RE.sub(" ", text))
+def parse_corpus(logs: list[Path]) -> dict[int, dict[str, Any]]:
+    """Per-function body spans, static call sets, DAT refs, address tokens."""
 
-
-class Snapshot:
-    """Authenticated read access to the vendored FreeType 2.9.1 snapshot."""
-
-    def __init__(self, root: Path = FREETYPE_SNAPSHOT, provenance_path: Path = PROVENANCE):
-        provenance_bytes = provenance_path.read_bytes()
-        if _sha256_bytes(provenance_bytes) != PROVENANCE_SHA256:
-            raise CensusError("FreeType PROVENANCE.json identity changed")
-        records = json.loads(provenance_bytes.decode("utf-8"))["files"]
-        self._by_local_path = {record["local_path"]: record for record in records}
-        if len(self._by_local_path) != 297:
-            raise CensusError("FreeType snapshot file census changed")
-        self._root = root
-
-    def read_text(self, local_path: str) -> str:
-        record = self._by_local_path.get(local_path)
-        if record is None:
-            raise CensusError(f"snapshot file not in PROVENANCE.json: {local_path}")
-        raw = (self._root / local_path).read_bytes()
-        if len(raw) != record["size"] or _sha256_bytes(raw) != record["sha256"]:
-            raise CensusError(f"snapshot file drifted: {local_path}")
-        return raw.decode("latin-1")
-
-    def module_sources(self, module: str) -> dict[str, str]:
-        prefix = f"src/{module}/"
-        out = {}
-        for local_path in sorted(self._by_local_path):
-            if local_path.startswith(prefix) and local_path.endswith((".c", ".h")):
-                out[local_path] = self.read_text(local_path)
-        if not out:
-            raise CensusError(f"no snapshot sources for module {module}")
-        return out
-
-    def service_headers(self) -> dict[str, str]:
-        prefix = "include/freetype/internal/services/"
-        out = {}
-        for local_path in sorted(self._by_local_path):
-            if local_path.startswith(prefix) and local_path.endswith(".h"):
-                out[local_path] = self.read_text(local_path)
-        if not out:
-            raise CensusError("no FreeType service headers in snapshot")
-        return out
-
-
-def load_g2_modules(ftmodule_path: Path = G2_FTMODULE) -> tuple[str, ...]:
-    """G2-linked module directories in compiled ft_default_modules[] order."""
-
-    raw = ftmodule_path.read_bytes()
-    if _sha256_bytes(raw) != G2_FTMODULE_SHA256:
-        raise CensusError("recovered g2-config ftmodule.h identity changed")
-    classes = tuple(FT_USE_MODULE_RE.findall(raw.decode("latin-1")))
-    if classes != EXPECTED_FTMODULE_CLASSES:
-        raise CensusError(f"G2 ftmodule.h class list changed: {classes!r}")
-    modules: list[str] = []
-    for name in classes:
-        module = FTMODULE_CLASS_MODULE.get(name)
-        if module is None:
-            raise CensusError(f"ftmodule.h class has no module rule: {name}")
-        modules.append(module)
-    return tuple(dict.fromkeys(modules))
-
-
-def parse_corpus_functions(logs: list[Path]) -> dict[int, dict[str, Any]]:
     functions: dict[int, dict[str, Any]] = {}
     current: dict[str, Any] | None = None
     for log in logs:
         for line in log.read_text(encoding="utf-8", errors="strict").splitlines():
             begin = FUNCTION_BEGIN_RE.search(line)
             if begin:
-                entry, body_start, body_end = (int(value, 16) for value in begin.groups()[:3])
-                if entry in functions:
-                    raise CensusError(f"duplicate Ghidra function entry 0x{entry:08x}")
                 current = {
-                    "entry": entry,
-                    "body_start": body_start,
-                    "body_end_inclusive": body_end,
-                    "name": begin.group(4),
+                    "entry": int(begin.group(1), 16),
+                    "body_start": int(begin.group(2), 16),
+                    "body_end_exclusive": int(begin.group(3), 16) + 1,
+                    "calls": set(),
+                    "dat_refs": set(),
                     "tokens": set(),
                 }
-                functions[entry] = current
+                functions[current["entry"]] = current
                 continue
-            end = FUNCTION_END_RE.search(line)
-            if end:
-                entry = int(end.group(1), 16)
-                if current is None or current["entry"] != entry:
-                    raise CensusError(f"unbalanced Ghidra function marker 0x{entry:08x}")
+            if FUNCTION_END_RE.search(line):
                 current = None
                 continue
             if current is not None:
+                current["calls"].update(
+                    int(token, 16) for token in CALL_RE.findall(line)
+                )
+                current["dat_refs"].update(
+                    int(token, 16) for token in DAT_RE.findall(line)
+                )
                 current["tokens"].update(
                     int(token, 16) for token in ADDRESS_TOKEN_RE.findall(line)
                 )
-    if current is not None:
-        raise CensusError("unterminated Ghidra function at end of corpus")
-    if len(functions) != EXPECTED_CORPUS_FUNCTIONS:
-        raise CensusError(
-            f"expected {EXPECTED_CORPUS_FUNCTIONS} Ghidra functions, "
-            f"found {len(functions)}"
-        )
     return functions
 
 
-def load_census_set(manifest_path: Path = PARENT_MANIFEST) -> dict[int, dict[str, Any]]:
-    """The 344 census functions from the parent provenance census manifest."""
+def caller_map(functions: dict[int, dict[str, Any]]) -> dict[int, set[int]]:
+    callers: dict[int, set[int]] = defaultdict(set)
+    for entry, row in functions.items():
+        for target in row["calls"]:
+            if target != entry:
+                callers[target].add(entry)
+    return callers
 
-    raw = manifest_path.read_bytes()
-    if _sha256_bytes(raw) != PARENT_MANIFEST_SHA256:
-        raise CensusError("parent unanchored-census functions manifest identity changed")
-    lines = [
-        line
-        for line in raw.decode("utf-8").splitlines()
-        if line.strip() and not line.startswith("#")
+
+def verify_snapshot_files(snapshot: Path, names: tuple[str, ...]) -> None:
+    """Every parsed snapshot source must hash to the authenticated manifest."""
+
+    if not PROVENANCE.is_file():
+        raise CensusError("missing freetype PROVENANCE.json")
+    provenance = json.loads(PROVENANCE.read_text(encoding="utf-8"))
+    recorded = {
+        row["local_path"]: row["sha256"] for row in provenance.get("files", [])
+    }
+    if len(recorded) != 297:
+        raise CensusError(
+            f"provenance file census changed: {len(recorded)} != 297"
+        )
+    for name in names:
+        path = snapshot / name
+        if name not in recorded:
+            raise CensusError(f"snapshot manifest lacks {name}")
+        if not path.is_file():
+            raise CensusError(f"missing snapshot source {name}")
+        if _sha256_bytes(path.read_bytes()) != recorded[name]:
+            raise CensusError(f"snapshot source drifted: {name}")
+
+
+def _clean_source(text: str) -> str:
+    return LINE_COMMENT_RE.sub(" ", C_COMMENT_RE.sub(" ", text))
+
+
+def parse_ps_property_names(snapshot: Path) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Property-name sets of ps_property_set/ps_property_get from ftpsprop.c.
+
+    The 2.9.1 source defines ps_property_set before ps_property_get; the
+    split point is the ps_property_get definition.
+    """
+
+    verify_snapshot_files(snapshot, (PSPROP_SOURCE,))
+    text = _clean_source((snapshot / PSPROP_SOURCE).read_text(encoding="utf-8"))
+    set_marker = text.find("ps_property_set")
+    get_marker = text.find("ps_property_get", set_marker)
+    if set_marker < 0 or get_marker < 0:
+        raise CensusError("ftpsprop.c no longer defines ps_property_set/get")
+    set_names = tuple(PS_PROPERTY_NAME_RE.findall(text[set_marker:get_marker]))
+    get_names = tuple(PS_PROPERTY_NAME_RE.findall(text[get_marker:]))
+    if set_names != EXPECTED_PS_PROPERTY_SET_NAMES:
+        raise CensusError(f"ps_property_set property census changed: {set_names!r}")
+    if get_names != EXPECTED_PS_PROPERTY_GET_NAMES:
+        raise CensusError(f"ps_property_get property census changed: {get_names!r}")
+    return set_names, get_names
+
+
+def _parse_array_body(element_type: str, body: str) -> bytes | None:
+    tokens = [
+        token.strip()
+        for token in re.sub(r"[{}]", " ", body).split(",")
+        if token.strip()
     ]
-    reader = csv.DictReader(lines, delimiter="\t")
-    census: dict[int, dict[str, Any]] = {}
-    frontier_functions = 0
-    frontier_bytes = 0
-    freetype_entries: list[int] = []
-    freetype_bytes = 0
-    for row in reader:
-        entry = int(row["entry"], 16)
-        bucket = row["bucket"]
-        in_sea = SEA_START <= entry < SEA_END_EXCLUSIVE
-        if bucket == "investigation-required-no-evidence" and in_sea:
-            frontier_functions += 1
-            frontier_bytes += int(row["official_opaque_bytes"])
-        elif bucket == "freetype":
-            freetype_entries.append(entry)
-            freetype_bytes += int(row["official_opaque_bytes"])
-        else:
-            continue
-        census[entry] = {
-            "entry": entry,
-            "body_start": int(row["body_start"], 16),
-            "body_end_exclusive": int(row["body_end_exclusive"], 16),
-            "envelope_bytes": int(row["envelope_bytes"]),
-            "official_opaque_bytes": int(row["official_opaque_bytes"]),
-            "parent_bucket": bucket,
-        }
-    if frontier_functions != EXPECTED_FRONTIER_FUNCTIONS:
-        raise CensusError(
-            f"FreeType frontier census changed: {frontier_functions} != "
-            f"{EXPECTED_FRONTIER_FUNCTIONS}"
-        )
-    if frontier_bytes != EXPECTED_FRONTIER_OFFICIAL_BYTES:
-        raise CensusError(
-            f"FreeType frontier bytes changed: {frontier_bytes} != "
-            f"{EXPECTED_FRONTIER_OFFICIAL_BYTES}"
-        )
-    if tuple(sorted(freetype_entries)) != EXPECTED_PARENT_FREETYPE_ENTRIES:
-        raise CensusError("parent freetype-bucket membership changed")
-    if freetype_bytes != EXPECTED_PARENT_FREETYPE_BYTES:
-        raise CensusError("parent freetype-bucket bytes changed")
-    if len(census) != EXPECTED_CENSUS_FUNCTIONS:
-        raise CensusError(
-            f"census set changed: {len(census)} != {EXPECTED_CENSUS_FUNCTIONS}"
-        )
-    return census
+    if not tokens:
+        return None
+    values = []
+    for token in tokens:
+        if not INT_TOKEN_RE.fullmatch(token):
+            return None
+        values.append(int(token.rstrip("uUlL"), 0))
+    fmt = "<" + TABLE_TYPE_FORMAT[element_type] * len(values)
+    try:
+        return struct.pack(fmt, *values)
+    except struct.error:
+        return None
 
 
-class Image:
-    def __init__(self, blob: bytes, load_base: int):
-        if len(blob) != EXPECTED_IMAGE_SIZE:
-            raise CensusError("official image size changed")
-        if _sha256_bytes(blob) != EXPECTED_IMAGE_SHA256:
-            raise CensusError("official image identity changed")
-        self.blob = blob
-        self.load_base = load_base
+def parse_snapshot_tables(snapshot: Path) -> dict[str, bytes]:
+    """Parse flat scalar C arrays from the hash-verified snapshot sources."""
 
-    def rd32(self, address: int) -> int:
-        return struct.unpack_from("<I", self.blob, address - self.load_base)[0]
+    verify_snapshot_files(snapshot, TABLE_SOURCES)
+    tables: dict[str, bytes] = {}
+    for name in TABLE_SOURCES:
+        text = _clean_source((snapshot / name).read_text(encoding="utf-8"))
+        for match in TABLE_DECL_RE.finditer(text):
+            element_type, table_name = match.group(1), match.group(2)
+            depth = 1
+            cursor = match.end()
+            start = cursor
+            while cursor < len(text) and depth:
+                char = text[cursor]
+                if char == "{":
+                    depth += 1
+                elif char == "}":
+                    depth -= 1
+                cursor += 1
+            data = _parse_array_body(element_type, text[start : cursor - 1])
+            if data is not None and len(data) >= MIN_TABLE_BYTES:
+                key = f"{name}:{table_name}"
+                if key in tables:
+                    raise CensusError(f"duplicate parsed table {key}")
+                tables[key] = data
+    if not tables:
+        raise CensusError("no snapshot tables parsed")
+    return tables
 
-    def cstr(self, address: int) -> str:
-        offset = address - self.load_base
-        end = self.blob.index(b"\x00", offset)
-        return self.blob[offset:end].decode("ascii")
 
-    def find_nul_string(self, text: str) -> list[int]:
+def locate_tables(blob: bytes, load_base: int, tables: dict[str, bytes]) -> dict[str, int]:
+    """Uniquely byte-matched snapshot tables in the official image."""
+
+    located: dict[str, int] = {}
+    for key, data in sorted(tables.items()):
+        if blob.count(data) == 1:
+            located[key] = load_base + blob.find(data)
+    return located
+
+
+def _word(blob: bytes, load_base: int, address: int) -> int | None:
+    offset = address - load_base
+    if 0 <= offset <= len(blob) - 4:
+        return struct.unpack_from("<I", blob, offset)[0]
+    return None
+
+
+def string_cell_targets(blob: bytes, load_base: int, strings: tuple[str, ...]) -> dict[int, str]:
+    """Map image addresses (string bodies and pointer cells) to name."""
+
+    targets: dict[int, str] = {}
+    for text in strings:
         needle = text.encode("ascii") + b"\x00"
-        out = []
         cursor = 0
         while True:
-            offset = self.blob.find(needle, cursor)
+            offset = blob.find(needle, cursor)
             if offset < 0:
-                return out
-            out.append(self.load_base + offset)
+                break
+            string_address = load_base + offset
+            targets[string_address] = text
+            cell_needle = struct.pack("<I", string_address)
+            cell_cursor = 0
+            while True:
+                cell_offset = blob.find(cell_needle, cell_cursor)
+                if cell_offset < 0:
+                    break
+                targets[load_base + cell_offset] = text
+                cell_cursor = cell_offset + 1
             cursor = offset + 1
-
-    def find_pointer_cells(self, target: int, region: tuple[int, int]) -> list[int]:
-        needle = struct.pack("<I", target)
-        out = []
-        cursor = 0
-        while True:
-            offset = self.blob.find(needle, cursor)
-            if offset < 0:
-                return out
-            address = self.load_base + offset
-            if region[0] <= address < region[1]:
-                out.append(address)
-            cursor = offset + 1
+    return targets
 
 
-def validate_module_table(image: Image) -> None:
-    """Re-derive ft_default_modules[] and every class module_name string."""
+def grow_community(
+    seeds: set[int],
+    scope: set[int],
+    functions: dict[int, dict[str, Any]],
+    callers: dict[int, set[int]],
+    allowlist: set[int],
+) -> set[int]:
+    """Closed static call-graph community grown from the seeds.
 
-    for index, (name, class_address, _size, _module) in enumerate(MODULE_CLASS_STRUCTS):
-        pointer = image.rd32(FT_DEFAULT_MODULES_TABLE + index * 4)
-        if pointer != class_address:
-            raise CensusError(
-                f"ft_default_modules[{index}] changed: 0x{pointer:08X} != "
-                f"0x{class_address:08X}"
-            )
-        if image.cstr(image.rd32(class_address + 8)) != name:
-            raise CensusError(f"module class 0x{class_address:08X} name changed")
-    terminator = image.rd32(FT_DEFAULT_MODULES_TABLE + len(MODULE_CLASS_STRUCTS) * 4)
-    if terminator != 0:
-        raise CensusError("ft_default_modules[] NULL terminator changed")
+    An outbound static target is admissible only when it is already in the
+    community, is allowlisted, or is neutral: every one of its own outbound
+    targets is allowlisted or a leaf (zero outbound static calls).  A scope
+    function joins when all of its outbound targets are admissible and it
+    has at least one static edge to the community.
+    """
 
+    def outbound(entry: int) -> set[int]:
+        return functions[entry]["calls"] - {entry}
 
-def derive_string_signatures(
-    snapshot: Snapshot, image: Image, functions: dict[int, dict[str, Any]]
-) -> dict[int, tuple[str, tuple[str, ...]]]:
-    """Functions referencing a single-module, image-unique string literal."""
-
-    literal_modules: dict[str, set[str]] = {}
-    for module in MODULES:
-        for text in snapshot.module_sources(module).values():
-            for line in _strip_comments(text).splitlines():
-                if any(marker in line for marker in TRACE_ONLY_MARKERS):
-                    continue
-                for match in STRING_LITERAL_RE.finditer(line):
-                    literal = match.group(1)
-                    if (
-                        len(literal) < MIN_SIGNATURE_LITERAL
-                        or "\\" in literal
-                        or not literal.isprintable()
-                        or not literal.isascii()
-                    ):
-                        continue
-                    literal_modules.setdefault(literal, set()).add(module)
-    hits: dict[int, dict[str, set[str]]] = {}
-    for literal, modules in sorted(literal_modules.items()):
-        if len(modules) != 1:
-            continue
-        module = next(iter(modules))
-        for address in image.find_nul_string(literal):
-            for cell in image.find_pointer_cells(address, CODE_REGION):
-                for entry, row in functions.items():
-                    if cell in row["tokens"]:
-                        hits.setdefault(entry, {}).setdefault(module, set()).add(literal)
-    result: dict[int, tuple[str, tuple[str, ...]]] = {}
-    for entry, by_module in hits.items():
-        if len(by_module) != 1:
-            raise CensusError(
-                f"string-signature conflict at 0x{entry:08X}: {sorted(by_module)}"
-            )
-        module = next(iter(by_module))
-        result[entry] = (module, tuple(sorted(by_module[module])))
-    expected = {
-        entry: (module, tuple(strings))
-        for entry, module, strings in EXPECTED_STRING_SIGNATURES
-    }
-    if result != expected:
-        raise CensusError(
-            "module string-signature census changed: "
-            f"derived {sorted((f'0x{e:08X}', v[0]) for e, v in result.items())}"
+    def neutral(target: int) -> bool:
+        if target not in functions:
+            return False
+        return all(
+            follow in allowlist
+            or (follow in functions and not outbound(follow))
+            for follow in outbound(target)
         )
-    return result
 
-
-def derive_class_callbacks(
-    image: Image, functions: dict[int, dict[str, Any]]
-) -> tuple[dict[int, str], dict[int, str]]:
-    class_callbacks: dict[int, str] = {}
-    raster_callbacks: dict[int, str] = {}
-    raster_tables: set[int] = set()
-    for _name, class_address, size, module in MODULE_CLASS_STRUCTS:
-        for offset in range(0, size, 4):
-            word = image.rd32(class_address + offset)
-            if (word & 1) and (word & ~1) in functions:
-                entry = word & ~1
-                if class_callbacks.setdefault(entry, module) != module:
-                    raise CensusError(f"class-callback conflict at 0x{entry:08X}")
-            if size == RENDERER_CLASS_WORDS * 4 and offset == RASTER_CLASS_OFFSET:
-                raster_tables.add(word)
-    for table in sorted(raster_tables):
-        if not (DATA_REGION[0] <= table < DATA_REGION[1]):
-            raise CensusError(f"raster-funcs table outside rodata: 0x{table:08X}")
-        for offset in range(4, RASTER_FUNCS_WORDS * 4, 4):
-            word = image.rd32(table + offset)
-            if (word & 1) and (word & ~1) in functions:
-                entry = word & ~1
-                if raster_callbacks.setdefault(entry, "smooth") != "smooth":
-                    raise CensusError(f"raster-callback conflict at 0x{entry:08X}")
-    expected_class = {entry: module for entry, module in EXPECTED_CLASS_CALLBACKS}
-    if class_callbacks != expected_class:
-        raise CensusError("module class callback census changed")
-    expected_raster = {entry: module for entry, module in EXPECTED_RASTER_CALLBACKS}
-    if raster_callbacks != expected_raster:
-        raise CensusError("raster-funcs callback census changed")
-    return class_callbacks, raster_callbacks
-
-
-def derive_service_callbacks(
-    snapshot: Snapshot, image: Image, functions: dict[int, dict[str, Any]]
-) -> tuple[dict[int, tuple[str, str]], list[dict[str, Any]]]:
-    """Service-record callbacks behind snapshot-matched service tables."""
-
-    macro_to_id: dict[str, str] = {}
-    for text in snapshot.service_headers().values():
-        for match in SERVICE_ID_RE.finditer(text):
-            macro_to_id[match.group(1)] = match.group(2)
-    if len(macro_to_id) != 21:
-        raise CensusError("FT_SERVICE_ID census changed")
-
-    variants: list[tuple[str, tuple[str, ...]]] = []
-    for module in MODULES:
-        for local_path, text in snapshot.module_sources(module).items():
-            if not local_path.endswith(".c"):
+    community = set(seeds)
+    changed = True
+    while changed:
+        changed = False
+        for entry in sorted(scope - community):
+            out = outbound(entry)
+            if not all(
+                target in community or target in allowlist or neutral(target)
+                for target in out
+            ):
                 continue
-            for match in SERVICEDESC_RE.finditer(_strip_comments(text)):
-                count = int(match.group(1))
-                pairs = SERVICEDESC_PAIR_RE.findall(match.group(3))
-                if len(pairs) != count:
-                    raise CensusError(
-                        f"servicedesc pair drift in {local_path}: {match.group(2)}"
-                    )
-                ids = tuple(macro_to_id.get(pair[0]) for pair in pairs)
-                if any(service_id is None for service_id in ids):
-                    raise CensusError(f"unknown FT_SERVICE_ID in {local_path}")
-                variants.append((module, ids))
-
-    # Image service-description tables: rodata cells holding a service-id
-    # string pointer, grouped into contiguous 8-byte entries.
-    slots: dict[int, str] = {}
-    for service_id in sorted(macro_to_id.values()):
-        for address in image.find_nul_string(service_id):
-            for cell in image.find_pointer_cells(address, DATA_REGION):
-                slots[cell] = service_id
-    tables: list[list[int]] = []
-    consumed: set[int] = set()
-    for cell in sorted(slots):
-        if cell in consumed:
-            continue
-        start = cell
-        while start - 8 in slots:
-            start -= 8
-        run = []
-        cursor = start
-        while cursor in slots:
-            run.append(cursor)
-            consumed.add(cursor)
-            cursor += 8
-        tables.append(run)
-
-    boundaries = set(slots)
-    table_reports: list[dict[str, Any]] = []
-    callbacks: dict[int, tuple[str, str]] = {}
-    for run in tables:
-        ids = tuple(slots[cell] for cell in run)
-        owners = {module for module, variant_ids in variants if variant_ids == ids}
-        if len(owners) != 1:
-            raise CensusError(
-                f"service table at 0x{run[0]:08X} matches {sorted(owners)} modules"
-            )
-        module = next(iter(owners))
-        table_reports.append(
-            {"address": run[0], "module": module, "service_ids": list(ids)}
-        )
-        for cell in run:
-            record = image.rd32(cell + 4)
-            boundaries.add(record)
-        for cell in run:
-            service_id = slots[cell]
-            record = image.rd32(cell + 4)
-            end = record + SERVICE_RECORD_MAX_BYTES
-            for boundary in boundaries:
-                if record < boundary < end:
-                    end = boundary
-            for offset in range(0, max(0, end - record), 4):
-                word = image.rd32(record + offset)
-                if (word & 1) and (word & ~1) in functions:
-                    entry = word & ~1
-                    previous = callbacks.setdefault(entry, (module, service_id))
-                    if previous != (module, service_id):
-                        raise CensusError(f"service-callback conflict at 0x{entry:08X}")
-
-    expected_tables = sorted(
-        (address, module, tuple(ids)) for address, module, ids in EXPECTED_SERVICE_TABLES
-    )
-    derived_tables = sorted(
-        (row["address"], row["module"], tuple(row["service_ids"]))
-        for row in table_reports
-    )
-    if derived_tables != expected_tables:
-        raise CensusError("service-description table census changed")
-    expected_callbacks = {
-        entry: (module, service_id)
-        for entry, module, service_id in EXPECTED_SERVICE_CALLBACKS
-    }
-    if callbacks != expected_callbacks:
-        raise CensusError("service-record callback census changed")
-    return callbacks, sorted(table_reports, key=lambda row: row["address"])
+            if (out & community) or (callers.get(entry, set()) & community):
+                community.add(entry)
+                changed = True
+    return community
 
 
 def analyze(
     corpus_root: Path,
     manifests_dir: Path = MANIFESTS,
-    snapshot_root: Path = FREETYPE_SNAPSHOT,
+    snapshot_dir: Path = SNAPSHOT,
 ) -> dict[str, Any]:
-    path_module = _load_path_analyzer()
-    logs = path_module.verify_corpus(corpus_root)
-    functions = parse_corpus_functions(logs)
+    parent = _load_parent()
+    parent_report = parent.analyze(corpus_root=corpus_root, manifests_dir=manifests_dir)
+    path_module = parent._load_path_analyzer()
+    load_base = path_module.LOAD_BASE
     blob = path_module.DEFAULT_IMAGE.read_bytes()
-    image = Image(blob, path_module.LOAD_BASE)
-    validate_module_table(image)
-    modules = load_g2_modules()
-    # ``base`` is not a registered module: it is linked unconditionally, and
-    # its presence is proven by the recovery-audit anchors (FT_New_Library
-    # etc.); the registered table names the other eight source modules.
-    if set(modules) != set(MODULES) - {"base"}:
-        raise CensusError("G2 module set drifted from the census module table")
-    snapshot = Snapshot(
-        snapshot_root, provenance_path=snapshot_root / PROVENANCE.name
-    )
 
-    census = load_census_set(manifests_dir / PARENT_MANIFEST.name)
-    for entry, row in census.items():
-        corpus_row = functions.get(entry)
-        if corpus_row is None:
-            raise CensusError(f"census function 0x{entry:08X} missing from corpus")
-        if (
-            corpus_row["body_start"] != row["body_start"]
-            or corpus_row["body_end_inclusive"] + 1 != row["body_end_exclusive"]
-        ):
-            raise CensusError(f"census function 0x{entry:08X} body range changed")
+    parent_records = {row["entry"]: row for row in parent_report["functions"]}
 
-    oversized = sorted(
-        entry
-        for entry, row in functions.items()
-        if row["body_end_inclusive"] - row["body_start"] + 1
-        > MAX_TRUSTWORTHY_FUNCTION_ENVELOPE
-    )
-    if tuple(oversized) != EXPECTED_OVERSIZED_ENTRIES:
-        raise CensusError("oversized envelope census changed")
-    oversized_set = set(oversized)
-
-    # Tier 1: recovery-audit anchors.
-    seeds: dict[int, tuple[str, str]] = {}
-    anchor_details: dict[int, str] = {}
-    for entry, module, label, citation in RECOVERY_AUDIT_ANCHORS:
-        corpus_row = functions.get(entry)
-        if corpus_row is None or corpus_row["body_start"] != entry:
-            raise CensusError(f"recovery-audit anchor 0x{entry:08X} is not a corpus function")
-        seeds[entry] = (module, "recovery-audit-anchor")
-        anchor_details[entry] = f"{label}; docs/research/{citation}"
-
-    # Tier 2: module string signatures.
-    string_signatures = derive_string_signatures(snapshot, image, functions)
-    for entry, (module, literals) in string_signatures.items():
-        seeds[entry] = (module, "module-string-signature")
-
-    # Tier 3: module class and raster-funcs callbacks.
-    class_callbacks, raster_callbacks = derive_class_callbacks(image, functions)
-    for entry, module in class_callbacks.items():
-        seeds[entry] = (module, "module-class-callback")
-    for entry, module in raster_callbacks.items():
-        seeds[entry] = (module, "raster-funcs-callback")
-
-    # Tier 4: service-record callbacks.  Lower priority: on a cross-module
-    # conflict with an existing higher-tier seed the earlier label wins and
-    # the conflict is reported; a same-tier conflict fails closed.
-    service_callbacks, service_tables = derive_service_callbacks(
-        snapshot, image, functions
-    )
-    conflicts: list[dict[str, Any]] = []
-    for entry, (module, service_id) in sorted(service_callbacks.items()):
-        existing = seeds.get(entry)
-        if existing is not None and existing[0] != module:
-            existing_module, existing_tier = existing
-            if TIER_PRIORITY[existing_tier] < TIER_PRIORITY["service-record-callback"]:
-                conflicts.append(
-                    {
-                        "entry": entry,
-                        "service_table_module": module,
-                        "service_id": service_id,
-                        "kept_module": existing_module,
-                        "kept_evidence": existing_tier,
-                    }
-                )
-                continue
-            raise CensusError(
-                f"seed conflict at 0x{entry:08X}: {existing_module}/{existing_tier} "
-                f"vs {module}/service-record-callback"
-            )
-        seeds[entry] = (module, "service-record-callback")
-    if len(seeds) != EXPECTED_SEED_COUNT:
-        raise CensusError(f"seed census changed: {len(seeds)} != {EXPECTED_SEED_COUNT}")
-
-    # Address-ordered accepted envelopes for the sandwich tier.
-    accepted_order = sorted(
-        (entry for entry in functions if entry not in oversized_set),
-        key=lambda entry: functions[entry]["body_start"],
-    )
-    position = {entry: index for index, entry in enumerate(accepted_order)}
-
-    records: list[dict[str, Any]] = []
-    for entry in sorted(census, key=lambda value: census[value]["body_start"]):
-        row = census[entry]
-        record: dict[str, Any] = {
-            "entry": entry,
-            "body_start": row["body_start"],
-            "body_end_exclusive": row["body_end_exclusive"],
-            "envelope_bytes": row["envelope_bytes"],
-            "official_opaque_bytes": row["official_opaque_bytes"],
-            "bucket": None,
-            "evidence": None,
-            "confidence": None,
-            "detail": "",
-        }
-        seed = seeds.get(entry)
-        if seed is not None:
-            module, tier = seed
-            record["bucket"] = module
-            record["evidence"] = tier
-            if tier == "recovery-audit-anchor":
-                record["confidence"] = "high"
-                record["detail"] = anchor_details[entry]
-            elif tier == "module-string-signature":
-                record["confidence"] = "high"
-                literals = ", ".join(repr(value) for value in string_signatures[entry][1])
-                record["detail"] = f"references single-module literal(s) {literals}"
-            elif tier in ("module-class-callback", "raster-funcs-callback"):
-                record["confidence"] = "high"
-                record["detail"] = f"callback pointer in the {module} module data structures"
-            else:
-                service_id = service_callbacks[entry][1]
-                record["confidence"] = "medium"
-                record["detail"] = (
-                    f"callback in the {module} service record for '{service_id}'"
-                )
-            records.append(record)
-            continue
-        target_modules = {
-            seeds[token][0] for token in functions[entry]["tokens"] if token in seeds
-        }
-        if len(target_modules) == 1:
-            module = next(iter(target_modules))
-            record.update(
-                bucket=module,
-                evidence="call-topology-single-module",
-                confidence="medium",
-                detail="every closed-world call target is " + module,
-            )
-            records.append(record)
-            continue
-        if len(target_modules) > 1:
-            record.update(
-                bucket="freetype-multi-module",
-                evidence="call-topology-multi-module",
-                confidence="low",
-                detail="call targets span " + "|".join(sorted(target_modules)),
-            )
-            records.append(record)
-            continue
-        index = position[entry]
-        previous_module = next_module = None
-        cursor = index - 1
-        while cursor >= 0:
-            candidate = accepted_order[cursor]
-            if candidate in seeds:
-                previous_module = seeds[candidate][0]
-                break
-            cursor -= 1
-        cursor = index + 1
-        while cursor < len(accepted_order):
-            candidate = accepted_order[cursor]
-            if candidate in seeds:
-                next_module = seeds[candidate][0]
-                break
-            cursor += 1
-        if previous_module is not None and previous_module == next_module:
-            record.update(
-                bucket=previous_module,
-                evidence="link-order-sandwich",
-                confidence="low",
-                detail="bracketed in link order by " + previous_module,
-            )
-            records.append(record)
-            continue
-        record.update(
-            bucket="investigation-required",
-            evidence="none",
-            confidence="none",
-            detail="no FreeType module evidence",
-        )
-        records.append(record)
-
-    buckets: dict[str, dict[str, Any]] = {}
-    evidence_counts: Counter[str] = Counter()
-    for record in records:
-        bucket = buckets.setdefault(
-            record["bucket"], {"functions": 0, "official_opaque_bytes": 0}
-        )
-        bucket["functions"] += 1
-        bucket["official_opaque_bytes"] += record["official_opaque_bytes"]
-        evidence_counts[record["evidence"]] += 1
-    bucket_census = {
-        name: (row["functions"], row["official_opaque_bytes"])
-        for name, row in buckets.items()
+    # --- Scope derivation: the 0x51/0x52xxxx no-evidence frontier + bucket.
+    frontier = {
+        entry: row
+        for entry, row in parent_records.items()
+        if row["bucket"] == "investigation-required-no-evidence"
+        and FRONTIER_BASE <= entry < FRONTIER_END
     }
-    if bucket_census != EXPECTED_BUCKET_CENSUS:
-        raise CensusError(f"FreeType engine bucket census changed: {bucket_census}")
-    if dict(evidence_counts) != EXPECTED_EVIDENCE_COUNTS:
-        raise CensusError(f"FreeType engine evidence census changed: {dict(evidence_counts)}")
+    if len(frontier) != EXPECTED_FRONTIER_FUNCTIONS:
+        raise CensusError(
+            f"0x51/0x52xxxx no-evidence frontier changed: {len(frontier)} != "
+            f"{EXPECTED_FRONTIER_FUNCTIONS}"
+        )
+    frontier_bytes = sum(row["official_opaque_bytes"] for row in frontier.values())
+    if frontier_bytes != EXPECTED_FRONTIER_OFFICIAL_BYTES:
+        raise CensusError(
+            f"frontier official bytes changed: {frontier_bytes} != "
+            f"{EXPECTED_FRONTIER_OFFICIAL_BYTES}"
+        )
+    frontier_51 = {e: r for e, r in frontier.items() if e < 0x00520000}
+    frontier_52 = {e: r for e, r in frontier.items() if e >= 0x00520000}
+    if len(frontier_51) != EXPECTED_FRONTIER_51_FUNCTIONS or sum(
+        row["official_opaque_bytes"] for row in frontier_51.values()
+    ) != EXPECTED_FRONTIER_51_OFFICIAL_BYTES:
+        raise CensusError("0x51xxxx frontier split changed")
+    if len(frontier_52) != EXPECTED_FRONTIER_52_FUNCTIONS or sum(
+        row["official_opaque_bytes"] for row in frontier_52.values()
+    ) != EXPECTED_FRONTIER_52_OFFICIAL_BYTES:
+        raise CensusError("0x52xxxx frontier split changed")
+    bucket = {
+        entry: row
+        for entry, row in parent_records.items()
+        if row["bucket"] == "freetype"
+    }
+    if len(bucket) != EXPECTED_FREETYPE_BUCKET_FUNCTIONS:
+        raise CensusError(
+            f"freetype bucket changed: {len(bucket)} != "
+            f"{EXPECTED_FREETYPE_BUCKET_FUNCTIONS}"
+        )
+    bucket_bytes = sum(row["official_opaque_bytes"] for row in bucket.values())
+    if bucket_bytes != EXPECTED_FREETYPE_BUCKET_OFFICIAL_BYTES:
+        raise CensusError(
+            f"freetype bucket official bytes changed: {bucket_bytes} != "
+            f"{EXPECTED_FREETYPE_BUCKET_OFFICIAL_BYTES}"
+        )
+    scope = {**frontier, **bucket}
+    if len(scope) != EXPECTED_SCOPE_FUNCTIONS:
+        raise CensusError("frontier and freetype bucket overlap; scope changed")
+    for entry in REGION_REJECTED_ENVELOPES:
+        if entry in scope:
+            raise CensusError(
+                f"rejected envelope 0x{entry:08X} leaked into the census scope"
+            )
+        if parent_records[entry]["bucket"] != "rejected-oversized-envelope":
+            raise CensusError(
+                f"0x{entry:08X} is no longer a rejected oversized envelope"
+            )
 
-    total_bytes = sum(record["official_opaque_bytes"] for record in records)
-    if total_bytes != EXPECTED_CENSUS_OFFICIAL_BYTES:
-        raise CensusError("census official-byte reconciliation changed")
+    # --- Corpus call graph.
+    logs = path_module.verify_corpus(corpus_root)
+    functions = parse_corpus(logs)
+    callers = caller_map(functions)
+    for entry in scope:
+        if entry not in functions:
+            raise CensusError(f"scope function 0x{entry:08X} missing from corpus")
 
-    seed_summary = []
-    for entry in sorted(seeds, key=lambda value: functions[value]["body_start"]):
-        module, tier = seeds[entry]
-        seed_summary.append(
+    # --- Tier 1: documented API anchors, structurally re-verified.
+    for entry, anchor in DOCUMENTED_ANCHORS.items():
+        if entry not in scope:
+            raise CensusError(f"documented anchor 0x{entry:08X} left the scope")
+        row = functions[entry]
+        if "body" in anchor:
+            start, end = anchor["body"]
+            if (row["body_start"], row["body_end_exclusive"]) != (start, end):
+                raise CensusError(
+                    f"anchor {anchor['name']} body span changed: "
+                    f"[0x{row['body_start']:08X},0x{row['body_end_exclusive']:08X})"
+                )
+        for site in anchor.get("contains", ()):
+            if not row["body_start"] <= site < row["body_end_exclusive"]:
+                raise CensusError(
+                    f"anchor {anchor['name']} lost pinned interior site "
+                    f"0x{site:08X}"
+                )
+        callees = row["calls"] - {entry}
+        if "calls" in anchor and set(anchor["calls"]) != callees:
+            raise CensusError(
+                f"anchor {anchor['name']} callee set changed: "
+                + ", ".join(f"0x{c:08x}" for c in sorted(callees))
+            )
+        for required in anchor.get("calls_include", ()):
+            if required not in callees:
+                raise CensusError(
+                    f"anchor {anchor['name']} no longer calls 0x{required:08X}"
+                )
+        for required in anchor.get("called_by", ()):
+            if entry not in functions[required]["calls"]:
+                raise CensusError(
+                    f"anchor {anchor['name']} lost caller 0x{required:08X}"
+                )
+        if "refs_word" in anchor:
+            if not any(
+                _word(blob, load_base, ref) == anchor["refs_word"]
+                for ref in row["dat_refs"]
+            ):
+                raise CensusError(
+                    f"anchor {anchor['name']} no longer references "
+                    f"0x{anchor['refs_word']:08X}"
+                )
+
+    # --- Tier 2: open_face interior pins.
+    open_face = EXPECTED_OPEN_FACE
+    if open_face not in scope:
+        raise CensusError("open_face left the census scope")
+    row = functions[open_face]
+    if not row["body_start"] <= FACE_INTERNAL_ALLOC_SITE < row["body_end_exclusive"]:
+        raise CensusError("open_face lost the face-internal allocation site")
+    if INCR_TAG_LITERAL_CELL not in row["dat_refs"]:
+        raise CensusError("open_face no longer references the incr tag literal cell")
+    if _word(blob, load_base, INCR_TAG_LITERAL_CELL) != INCR_TAG_VALUE:
+        raise CensusError("incr tag literal cell no longer holds 0x696E6372")
+
+    # --- Tier 3: ps_property_set/get string signatures.
+    set_names, get_names = parse_ps_property_names(snapshot_dir)
+    targets = string_cell_targets(blob, load_base, set_names)
+    string_hits: dict[int, set[str]] = {}
+    for entry in scope:
+        names = {targets[ref] for ref in functions[entry]["dat_refs"] if ref in targets}
+        if names:
+            string_hits[entry] = names
+    if set(string_hits) != {EXPECTED_PS_PROPERTY_SET_ENTRY, EXPECTED_PS_PROPERTY_GET_ENTRY}:
+        raise CensusError(
+            "ps-property string evidence set changed: "
+            + ", ".join(f"0x{e:08x}" for e in sorted(string_hits))
+        )
+    if string_hits[EXPECTED_PS_PROPERTY_SET_ENTRY] != set(set_names):
+        raise CensusError("ps_property_set candidate references changed")
+    if string_hits[EXPECTED_PS_PROPERTY_GET_ENTRY] != set(get_names):
+        raise CensusError("ps_property_get candidate references changed")
+
+    # --- Corroborating snapshot table census (never attributing).
+    parsed_tables = parse_snapshot_tables(snapshot_dir)
+    if len(parsed_tables) != EXPECTED_TABLES_PARSED:
+        raise CensusError(
+            f"snapshot table census changed: {len(parsed_tables)} != "
+            f"{EXPECTED_TABLES_PARSED}"
+        )
+    located = locate_tables(blob, load_base, parsed_tables)
+    if located != EXPECTED_LOCATED_TABLES:
+        raise CensusError(
+            "located table census changed: "
+            + ", ".join(
+                f"{key}@0x{address:08X}" for key, address in sorted(located.items())
+            )
+        )
+    for entry in scope:
+        for ref in functions[entry]["dat_refs"]:
+            candidates = [ref]
+            value = _word(blob, load_base, ref)
+            if value is not None:
+                candidates.append(value)
+            for key, address in located.items():
+                end = address + len(parsed_tables[key])
+                if any(address <= candidate < end for candidate in candidates):
+                    raise CensusError(
+                        f"scope function 0x{entry:08X} now references located "
+                        f"table {key}; the out-of-frontier driver bound changed"
+                    )
+
+    # --- Tiers 4/5: closed static call-graph community from the anchors.
+    high = (
+        set(DOCUMENTED_ANCHORS)
+        | {open_face}
+        | {EXPECTED_PS_PROPERTY_SET_ENTRY, EXPECTED_PS_PROPERTY_GET_ENTRY}
+    )
+    for entry in EXTERNAL_ALLOWLIST:
+        if entry not in functions:
+            raise CensusError(
+                f"allowlisted external 0x{entry:08X} is no longer a corpus function"
+            )
+        if entry in scope:
+            raise CensusError(
+                f"allowlisted external 0x{entry:08X} entered the census scope"
+            )
+    community = grow_community(
+        set(high), set(scope), functions, callers, set(EXTERNAL_ALLOWLIST)
+    )
+    if not high <= community:
+        raise CensusError("anchor set is not a subset of its own community")
+
+    rows: dict[int, dict[str, Any]] = {}
+
+    def put(entry: int, status, module, evidence, confidence, attribution, detail):
+        if entry in rows:
+            raise CensusError(f"duplicate attribution for 0x{entry:08x}")
+        rows[entry] = {
+            "entry": entry,
+            "status": status,
+            "module": module,
+            "evidence": evidence,
+            "confidence": confidence,
+            "attribution": attribution,
+            "detail": detail,
+        }
+
+    for entry, anchor in sorted(DOCUMENTED_ANCHORS.items()):
+        put(entry, "module", "base", "documented-api-anchor", "high",
+            anchor["name"], anchor["source"])
+    put(open_face, "module", "base", "documented-interior-pin", "high",
+        "open_face (static, ftobjs.c)",
+        RECOVERY_AUDIT + ": face-internal 0x44-byte allocation at 0x00525A0C "
+        "and incr tag literal 0x696E6372 at 0x005262A8")
+    put(EXPECTED_PS_PROPERTY_SET_ENTRY, "module", "base",
+        "ps-property-string-signature", "high", "ps_property_set (ftpsprop.c)",
+        "references the pointer cells of all four 2.9.1 ps_property_set "
+        "property names: " + "|".join(set_names))
+    put(EXPECTED_PS_PROPERTY_GET_ENTRY, "module", "base",
+        "ps-property-string-signature", "high", "ps_property_get (ftpsprop.c)",
+        "references the pointer cells of exactly the three 2.9.1 "
+        "ps_property_get property names (random-seed is set-only): "
+        + "|".join(get_names))
+    for entry in sorted(community - high):
+        out = functions[entry]["calls"] - {entry}
+        direct = bool((out & high) or (callers.get(entry, set()) & high))
+        pure = all(
+            target in community or target in EXTERNAL_ALLOWLIST for target in out
+        )
+        hypothesis = MEMBER_HYPOTHESES.get(entry, "")
+        if direct and pure:
+            neighbours = sorted((out | callers.get(entry, set())) & high)
+            extra_names = {
+                open_face: "open_face",
+                EXPECTED_PS_PROPERTY_SET_ENTRY: "ps_property_set",
+                EXPECTED_PS_PROPERTY_GET_ENTRY: "ps_property_get",
+            }
+            name_list = ",".join(
+                DOCUMENTED_ANCHORS[n]["name"] if n in DOCUMENTED_ANCHORS
+                else extra_names[n]
+                for n in neighbours
+            )
+            put(entry, "cluster", "base", "base-call-graph-direct", "medium",
+                hypothesis,
+                "direct static call edge to " + name_list
+                + "; every outbound static target is community or allowlisted runtime")
+        else:
+            put(entry, "cluster", "base", "base-call-graph-indirect", "low",
+                hypothesis,
+                "reachable from the anchor community only through other "
+                "community members or neutral leaf/runtime helpers")
+
+    # --- Fail-closed comparison against the pinned attribution map.
+    derived = {
+        entry: (row["status"], row["module"], row["evidence"], row["confidence"])
+        for entry, row in rows.items()
+    }
+    if derived != EXPECTED_ATTRIBUTION:
+        only_derived = sorted(set(derived) - set(EXPECTED_ATTRIBUTION))
+        only_expected = sorted(set(EXPECTED_ATTRIBUTION) - set(derived))
+        changed = sorted(
+            entry
+            for entry in set(derived) & set(EXPECTED_ATTRIBUTION)
+            if derived[entry] != EXPECTED_ATTRIBUTION[entry]
+        )
+        raise CensusError(
+            "attribution map changed: only-derived "
+            + ",".join(f"0x{e:08X}" for e in only_derived)
+            + " only-expected "
+            + ",".join(f"0x{e:08X}" for e in only_expected)
+            + " changed "
+            + ",".join(f"0x{e:08X}" for e in changed)
+        )
+
+    # --- Investigation-required remainder with deterministic hypotheses.
+    for entry in sorted(scope):
+        if entry in rows:
+            continue
+        row = scope[entry]
+        external = sorted(callers.get(entry, set()) - {entry})
+        families = sorted(
+            {
+                parent_records[caller]["bucket"]
+                if caller in parent_records
+                else "path-anchored"
+                for caller in external
+            }
+        )
+        hints = []
+        if external:
+            hints.append(
+                "called only from "
+                + ("|".join(families))
+                + " functions ("
+                + ",".join(f"0x{caller:08X}" for caller in external[:8])
+                + ("..." if len(external) > 8 else "")
+                + ")"
+            )
+        else:
+            hints.append(
+                "no static caller in the corpus; candidate "
+                "class/interface-record-referenced internal or dead-stripped envelope"
+            )
+        rejected_calls = sorted(
+            target
+            for target in functions[entry]["calls"]
+            if target in REGION_REJECTED_ENVELOPES
+        )
+        if rejected_calls:
+            hints.append(
+                "calls rejected oversized envelope "
+                + "|".join(f"0x{target:08X}" for target in rejected_calls)
+            )
+        tokens = functions[entry]["tokens"]
+        if any(0x4000_0000 <= token < 0x6000_0000 for token in tokens):
+            hints.append("references peripheral registers")
+        if any(0x2000_0000 <= token < 0x2008_0000 for token in tokens):
+            hints.append("references SRAM globals")
+        hints.append("no FreeType anchor, string, or call-community evidence")
+        put(entry, "investigation-required", None, "none", "none", "",
+            "; ".join(hints))
+
+    # --- Reconciliation.
+    def official(entry: int) -> int:
+        return scope[entry]["official_opaque_bytes"]
+
+    attributed = sorted(EXPECTED_ATTRIBUTION)
+    attributed_bytes = sum(official(entry) for entry in attributed)
+    investigation = sorted(set(scope) - set(EXPECTED_ATTRIBUTION))
+    investigation_bytes = sum(official(entry) for entry in investigation)
+    if len(attributed) != EXPECTED_ATTRIBUTED_FUNCTIONS:
+        raise CensusError("attributed function count changed")
+    if attributed_bytes != EXPECTED_ATTRIBUTED_OFFICIAL_BYTES:
+        raise CensusError(
+            f"attributed official bytes changed: {attributed_bytes} != "
+            f"{EXPECTED_ATTRIBUTED_OFFICIAL_BYTES}"
+        )
+    if len(investigation) != EXPECTED_INVESTIGATION_FUNCTIONS:
+        raise CensusError("investigation-required function count changed")
+    if investigation_bytes != EXPECTED_INVESTIGATION_OFFICIAL_BYTES:
+        raise CensusError(
+            f"investigation-required official bytes changed: {investigation_bytes} != "
+            f"{EXPECTED_INVESTIGATION_OFFICIAL_BYTES}"
+        )
+    if attributed_bytes + investigation_bytes != (
+        EXPECTED_FRONTIER_OFFICIAL_BYTES + EXPECTED_FREETYPE_BUCKET_OFFICIAL_BYTES
+    ):
+        raise CensusError("official-byte reconciliation failed")
+
+    module_summary: dict[str, dict[str, int]] = {}
+    for entry in attributed:
+        module = EXPECTED_ATTRIBUTION[entry][1]
+        if module is None:
+            continue
+        summary = module_summary.setdefault(module, {"functions": 0, "official_bytes": 0})
+        summary["functions"] += 1
+        summary["official_bytes"] += official(entry)
+    observed_summary = {
+        module: (summary["functions"], summary["official_bytes"])
+        for module, summary in sorted(module_summary.items())
+    }
+    if observed_summary != EXPECTED_MODULE_SUMMARY:
+        raise CensusError(f"module summary changed: {observed_summary!r}")
+
+    # --- Out-of-scope observations (never re-bucketed here).
+    stream_new = EXPECTED_FT_STREAM_NEW
+    if stream_new in scope:
+        raise CensusError("FT_Stream_New candidate entered the census scope")
+    if (functions[stream_new]["calls"] - {stream_new}) != set(EXPECTED_FT_STREAM_NEW_CALLS):
+        raise CensusError("FT_Stream_New candidate callee set changed")
+    observations = []
+    for entry in EXTERNAL_FTSYSTEM:
+        observations.append(
             {
                 "entry": entry,
-                "module": module,
-                "evidence": tier,
-                "in_census_set": entry in census,
+                "module": "base",
+                "attribution": EXTERNAL_ALLOWLIST[entry],
+                "evidence": "documented-external",
+                "confidence": "high",
+                "parent_bucket": parent_records.get(entry, {}).get("bucket")
+                if entry in parent_records
+                else "path-anchored",
+            }
+        )
+    observations.append(
+        {
+            "entry": stream_new,
+            "module": "base",
+            "attribution": "FT_Stream_New candidate (static, ftobjs.c); body "
+            "dispatches FT_OPEN_MEMORY/FT_OPEN_PATHNAME/FT_OPEN_STREAM",
+            "evidence": "anchor-callee-external",
+            "confidence": "medium",
+            "parent_bucket": parent_records[stream_new]["bucket"],
+        }
+    )
+    if len(observations) != EXPECTED_EXTERNAL_OBSERVATIONS:
+        raise CensusError("external observation census changed")
+
+    # --- Output rows in address order.
+    map_rows = []
+    for entry in sorted(scope, key=lambda value: scope[value]["body_start"]):
+        row = rows[entry]
+        parent_row = scope[entry]
+        map_rows.append(
+            {
+                "entry": entry,
+                "body_start": parent_row["body_start"],
+                "body_end_exclusive": parent_row["body_end_exclusive"],
+                "envelope_bytes": parent_row["envelope_bytes"],
+                "official_opaque_bytes": parent_row["official_opaque_bytes"],
+                "scope": "frontier" if entry in frontier else "freetype-bucket",
+                "parent_bucket": parent_row["bucket"],
+                "status": row["status"],
+                "module": row["module"] or "",
+                "attribution": row["attribution"],
+                "evidence": row["evidence"],
+                "confidence": row["confidence"],
+                "detail": row["detail"],
             }
         )
 
     return {
         "schema_version": 1,
         "analysis_mode": "read-only; no signing, flashing, erase, or hardware operation",
-        "target": "official G2 s200_v2.2.6.10 Apollo main FreeType 2.9.1 engine",
+        "target": "official G2 s200_v2.2.6.10 Apollo main",
         "inputs": {
-            "image_sha256": EXPECTED_IMAGE_SHA256,
-            "parent_manifest_sha256": PARENT_MANIFEST_SHA256,
-            "freetype_provenance_sha256": PROVENANCE_SHA256,
-            "g2_ftmodule_sha256": G2_FTMODULE_SHA256,
+            "image_sha256": parent_report["inputs"]["image_sha256"],
+            "ghidra_sha256sums_sha256": parent_report["inputs"]["ghidra_sha256sums_sha256"],
+            "snapshot": "third_party/freetype (PROVENANCE.json-verified sources)",
+            "provenance": PROVENANCE.name,
         },
         "reconciliation": {
-            "parent_frontier_functions": EXPECTED_FRONTIER_FUNCTIONS,
-            "parent_frontier_official_bytes": EXPECTED_FRONTIER_OFFICIAL_BYTES,
-            "parent_freetype_bucket_functions": len(EXPECTED_PARENT_FREETYPE_ENTRIES),
-            "parent_freetype_bucket_official_bytes": EXPECTED_PARENT_FREETYPE_BYTES,
-            "census_functions": len(records),
-            "census_official_bytes": total_bytes,
+            "frontier_functions": len(frontier),
+            "frontier_official_bytes": frontier_bytes,
+            "frontier_51_functions": len(frontier_51),
+            "frontier_51_official_bytes": sum(
+                row["official_opaque_bytes"] for row in frontier_51.values()
+            ),
+            "frontier_52_functions": len(frontier_52),
+            "frontier_52_official_bytes": sum(
+                row["official_opaque_bytes"] for row in frontier_52.values()
+            ),
+            "freetype_bucket_functions": len(bucket),
+            "freetype_bucket_official_bytes": bucket_bytes,
+            "scope_functions": len(scope),
+            "attributed_functions": len(attributed),
+            "attributed_official_bytes": attributed_bytes,
+            "investigation_functions": len(investigation),
+            "investigation_official_bytes": investigation_bytes,
+            "external_observations": len(observations),
+            "snapshot_tables_parsed": len(parsed_tables),
+            "snapshot_tables_located": len(located),
         },
-        "g2_modules_in_link_order": list(modules),
-        "seeds": seed_summary,
-        "service_tables": [
+        "module_summary": [
             {
-                "address": f"0x{row['address']:08X}",
-                "module": row["module"],
-                "service_ids": row["service_ids"],
+                "module": module,
+                "functions": summary[0],
+                "official_opaque_bytes": summary[1],
             }
-            for row in service_tables
+            for module, summary in EXPECTED_MODULE_SUMMARY.items()
         ],
-        "resolved_seed_conflicts": [
-            {
-                "entry": f"0x{row['entry']:08X}",
-                "service_table_module": row["service_table_module"],
-                "service_id": row["service_id"],
-                "kept_module": row["kept_module"],
-                "kept_evidence": row["kept_evidence"],
-            }
-            for row in conflicts
-        ],
-        "buckets": [
-            {
-                "bucket": name,
-                "functions": buckets[name]["functions"],
-                "official_opaque_bytes": buckets[name]["official_opaque_bytes"],
-            }
-            for name in CENSUS_BUCKETS
-            if name in buckets
-        ],
-        "evidence_counts": dict(sorted(evidence_counts.items())),
+        "external_observations": observations,
         "limitations": [
-            "module buckets are evidence triage, not per-function source ownership or behavioral reconstruction",
-            "link-order-sandwich labels are low-confidence hypotheses for queue ordering, never proof of ownership",
-            "only the base module has seed anchors inside the 0x51/0x52xxxx ranges; everything below the first base anchor (0x005242FC) cannot sandwich and mostly stays investigation-required",
-            "identical string literals merged by the linker across providers could in principle mislabel a string-signature seed; every derived seed is pinned and re-validated on every run",
-            "functions whose code Ghidra covered only inside the eight rejected oversized envelopes cannot seed function-level topology",
+            "module attribution is evidence-tiered triage, not per-function source ownership or behavioral reconstruction",
+            "the face-open path is vendor-extended (the 9-slot font fallback loader below FT_Open_Face); cluster membership does not imply stock 2.9.1 bodies",
+            "base-call-graph-indirect members rest on community topology alone; shared utility functions also called by other modules are included at low confidence",
+            "upstream-table-match located seven snapshot constant tables in the image, all referenced only outside this frontier; the CFF/TrueType/sfnt/smooth/autofit driver bodies are therefore bounded outside the 0x51/0x52xxxx regions",
+            "Ghidra envelope boundaries are analyzer artifacts inherited from the corpus",
         ],
-        "functions": records,
+        "functions": map_rows,
     }
 
 
-FUNCTIONS_TSV_HEADER = (
-    "entry\tbody_start\tbody_end_exclusive\tenvelope_bytes\t"
-    "official_opaque_bytes\tbucket\tevidence\tconfidence\tdetail"
-)
-
-
-def functions_tsv(report: dict[str, Any]) -> str:
+def map_tsv(report: dict[str, Any]) -> str:
     lines = [
-        "# G2 FreeType 2.9.1 engine census; regenerated by "
+        "# G2 FreeType engine census; regenerated by "
         "tools/analyze_g2_freetype_engine_census.py",
-        FUNCTIONS_TSV_HEADER,
+        MAP_TSV_HEADER,
     ]
-    for record in report["functions"]:
+    for row in report["functions"]:
         lines.append(
             "\t".join(
                 (
-                    f"0x{record['entry']:08X}",
-                    f"0x{record['body_start']:08X}",
-                    f"0x{record['body_end_exclusive']:08X}",
-                    str(record["envelope_bytes"]),
-                    str(record["official_opaque_bytes"]),
-                    record["bucket"],
-                    record["evidence"],
-                    record["confidence"],
-                    record["detail"],
+                    f"0x{row['entry']:08X}",
+                    f"0x{row['body_start']:08X}",
+                    f"0x{row['body_end_exclusive']:08X}",
+                    str(row["envelope_bytes"]),
+                    str(row["official_opaque_bytes"]),
+                    row["scope"],
+                    row["parent_bucket"],
+                    row["status"],
+                    row["module"],
+                    row["attribution"],
+                    row["evidence"],
+                    row["confidence"],
+                    row["detail"],
                 )
             )
         )
@@ -1082,26 +1176,50 @@ def functions_tsv(report: dict[str, Any]) -> str:
 
 
 def summary_json(report: dict[str, Any]) -> str:
-    summary = {key: value for key, value in report.items() if key != "functions"}
+    summary = {
+        key: report[key]
+        for key in (
+            "schema_version",
+            "analysis_mode",
+            "target",
+            "inputs",
+            "reconciliation",
+            "module_summary",
+            "external_observations",
+            "limitations",
+        )
+    }
     return json.dumps(summary, indent=2, sort_keys=True) + "\n"
 
 
 def _text(report: dict[str, Any]) -> str:
     reconciliation = report["reconciliation"]
     lines = [
-        "G2 FreeType 2.9.1 engine census: PASS",
-        f"  parent frontier: {reconciliation['parent_frontier_functions']} functions, "
-        f"{reconciliation['parent_frontier_official_bytes']} official bytes",
-        f"  census set: {reconciliation['census_functions']} functions, "
-        f"{reconciliation['census_official_bytes']} official bytes",
-        f"  seeds: {len(report['seeds'])}",
-        "  buckets:",
+        "G2 FreeType engine census: PASS",
+        f"  frontier: {reconciliation['frontier_functions']} functions, "
+        f"{reconciliation['frontier_official_bytes']} official bytes "
+        f"(0x51xxxx {reconciliation['frontier_51_functions']}/"
+        f"{reconciliation['frontier_51_official_bytes']}, 0x52xxxx "
+        f"{reconciliation['frontier_52_functions']}/"
+        f"{reconciliation['frontier_52_official_bytes']})",
+        f"  freetype bucket: {reconciliation['freetype_bucket_functions']} functions, "
+        f"{reconciliation['freetype_bucket_official_bytes']} official bytes",
+        f"  attributed: {reconciliation['attributed_functions']} functions, "
+        f"{reconciliation['attributed_official_bytes']} official bytes",
+        f"  investigation-required: {reconciliation['investigation_functions']} "
+        f"functions, {reconciliation['investigation_official_bytes']} official bytes",
+        f"  snapshot tables: {reconciliation['snapshot_tables_parsed']} parsed, "
+        f"{reconciliation['snapshot_tables_located']} uniquely located",
+        "  modules:",
     ]
-    for bucket in report["buckets"]:
+    for module in report["module_summary"]:
         lines.append(
-            f"    {bucket['bucket']}: {bucket['functions']} functions, "
-            f"{bucket['official_opaque_bytes']} official bytes"
+            f"    {module['module']}: {module['functions']} functions, "
+            f"{module['official_opaque_bytes']} official bytes"
         )
+    lines.append(
+        f"  external observations: {reconciliation['external_observations']}"
+    )
     lines.append("hardware/flash operations: none")
     return "\n".join(lines)
 
@@ -1110,26 +1228,23 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ghidra-corpus", type=Path, required=True)
     parser.add_argument("--manifests", type=Path, default=MANIFESTS)
-    parser.add_argument("--snapshot", type=Path, default=FREETYPE_SNAPSHOT)
+    parser.add_argument("--snapshot", type=Path, default=SNAPSHOT)
     parser.add_argument("--json", action="store_true")
     parser.add_argument(
         "--write-manifests",
         type=Path,
         metavar="DIRECTORY",
-        help="write g2-freetype-engine-census.tsv and "
-        "g2-freetype-engine-census-summary.json into DIRECTORY",
+        help="write g2-freetype-engine-census.tsv and -summary.json into DIRECTORY",
     )
     args = parser.parse_args()
     report = analyze(
-        args.ghidra_corpus,
-        manifests_dir=args.manifests,
-        snapshot_root=args.snapshot,
+        args.ghidra_corpus, manifests_dir=args.manifests, snapshot_dir=args.snapshot
     )
     if args.write_manifests is not None:
         directory = args.write_manifests
         directory.mkdir(parents=True, exist_ok=True)
         (directory / "g2-freetype-engine-census.tsv").write_text(
-            functions_tsv(report), encoding="utf-8"
+            map_tsv(report), encoding="utf-8"
         )
         (directory / "g2-freetype-engine-census-summary.json").write_text(
             summary_json(report), encoding="utf-8"

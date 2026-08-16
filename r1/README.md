@@ -8,9 +8,30 @@ the stock image.
 The first milestone implements the normal EUS transport, both direction-specific inner checksum
 schemes, bounded reassembly, safe system-command dispatch, device state, the recovered flash
 partition map, and the two recovered notification queues. Hardware access is behind a platform
-interface. The vendor-backed target additionally links Nordic S140 integration, BAE8 service,
-Peer Manager/FDS bond storage, `nrf_ble_gatt`, and Nordic advertising sources. The host build and
-tests remain the portable reference implementation. Scheduling in the device image comes from the
+interface. The legacy vendor-backed target additionally links Nordic S140 integration, BAE8 service,
+Peer Manager/FDS bond storage, `nrf_ble_gatt`, and Nordic advertising sources. A second nRF52840
+target replaces S140 and the retail boot dependency with pinned, source-built Zephyr 3.7.2
+Bluetooth host/controller and ECDSA-P256 MCUboot, producing a self-contained full-flash bundle.
+It currently binds BAE8, persistent Zephyr SMP settings, the portable runtime, source-backed
+KV/sleep flash storage, the pinned FlashDB/FAL `health.db` TSDB, the exact three-channel SAADC geometry, phone-synchronized wall time,
+reset-reason capture, the recovered watchdog, the Bosch/ST motion bus, the IQS7211E TWIM0/GPIO
+lifecycle, and the reconstructed YHM2710 shared-power service. Touch remains deliberately unpowered
+until ring identity and a wear/factory lease are provisioned. The pinned ST25DVxxKC provider,
+bounded mailbox adapter, P0.03 GPO worker, exact P1.10 dock-enable lifecycle, and
+dock-preempts-motion TWIM1 handoff are source-bound; NFC remains disabled until an explicit product
+policy requests it. The health startup uses the recovered six-schema contract, retained crash-time
+handoff, exact 128-byte hourly-body codec, and live startup recovery into the runtime
+activity/HR/SpO2/HRV caches. Valid local-hour changes now flow from the source clock through
+event slot 1 to exact non-destructive FlashDB appends, with previous-hour selection and six-cache
+midnight reset. The exact slot-0 old/new time tuple now drives initial-valid current-day recovery
+and cross-day resets; destructive format/retry, GoMore reinitialization, and unresolved sync-cursor
+persistence remain suppressed diagnostics. Motion production ingestion, biometric calculation,
+and owned-hardware validation remain open. The source-built target now hash-gates the transparent Goodix demo/driver subset and
+binds the recovered software-`i2c_4` optical pins, interrupt worker, reset/emitter lifecycle, and
+YHM client bit 1. It does not start sampling at boot or expose a BLE control route, and its global
+algorithm ABI remains fail-closed rather than fabricating health results.
+The host build and tests remain the
+portable reference implementation. Scheduling in the legacy Nordic device image comes from the
 authenticated upstream FreeRTOS-Kernel 10.5.1 core, Nordic SDK 17.1.0's nRF52 Cortex-M port, and
 Arm's authenticated CMSIS-FreeRTOS v10.5.1 wrapper; openR1 contributes only the recovered
 configuration and R1 task/wake glue.
@@ -49,7 +70,8 @@ Portable health code also implements the recovered R1-owned automatic synchroniz
 active phone-role link triggers HR, SpO2, HRV, activity, and unsynchronized-sleep history in exact
 order at initial time, clock rewind, or a 10,800-second boundary. Explicit history queries share
 and reset the same cooldown timestamp. The Nordic image retains the integration API, while the
-periodic wall-clock producer remains pending and all GoMore/Goodix algorithms stay provider-gated.
+periodic wall-clock producer remains pending. The Goodix and GoMore algorithm bodies and model
+constants are transparent C; their remaining gap is typed live-runtime adoption on hardware.
 The activity path additionally owns the recovered 144-record offline FIFO, including exact packed
 records, time rejection, oldest overwrite, acknowledgement-prefix consumption, consecutive
 day/offset packet merging, duplicate-bucket replacement, and hardened index/state checks.
@@ -77,31 +99,55 @@ primary and secondary initializers, four software-bus pin-release paths, the com
 the 80-byte write bound, status mapping, recovered timeout policy, GPIO/bus configuration, and
 shutdown power-cycle policy; Nordic GPIO/TWI/TWIM/delay/fatal handling and authenticated
 CMSIS-FreeRTOS kernel/tick/semaphore operations remain their upstream implementations.
-The software-bus close paths call Nordic `nrf_gpio_cfg_default`; their bit-level open/read/write
-engines remain source-gated and are not recreated locally.
+The software-bus close paths call Nordic `nrf_gpio_cfg_default`. Their bit-level open/read/write
+engines are reconstructed transparent C; the Zephyr target now binds exact software `i2c_4` to
+the Goodix optical provider while the other software-bus roles remain without live consumers.
 
 ```sh
 make -C r1 test
 make -C r1 sanitize
 make -C r1 arm-objects
 make -C r1 sim
+make -C r1 zephyr-source-verify
 ```
 
 For example, `r1/build/openr1_sim 01 get` prints a synthetic `deviceStatus` response as an EUS
 BLE value. Mutating requests require the final `authorized` argument.
 
+The source-built full-flash bundle is reproduced with a Zephyr 3.7.2 west
+workspace and GNU Arm Embedded 9.3.1 toolchain:
+
+```sh
+make -C r1 zephyr-bundle \
+  WEST=/absolute/zephyr-venv/bin/west \
+  ZEPHYR_WORKSPACE=/absolute/zephyr-workspace \
+  ZEPHYR_TOOLCHAIN=/absolute/gcc-arm-none-eabi-9-2020-q2-update \
+  BMA456_ROOT=/absolute/BMA456_SensorAPI-3266db2c \
+  LIS2DW12_ROOT=/absolute/lis2dw12-pid-8d4bd52 \
+  ST25DVXXKC_ROOT=/absolute/fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc \
+  FLASHDB_ROOT=/absolute/FlashDB-4e5677408256f82d47cd56a6b04605dcee35ed9a \
+  GOODIX_DEMOCODE_ROOT=/absolute/pebbleos-nonfree-2c0034a23b675a5f9a29e4a47e8b504c7a88e321/gh3x2x
+make -C r1 zephyr-verify
+```
+
+The default transparent MCUboot development key is not a deployment key. Set
+`ZEPHYR_SIGNING_KEY=/secure/owner-mcuboot-ec-p256.pem` for an owner-controlled
+trust anchor. The full closure and exact preserved flash ranges are documented
+in [`docs/closures/SOURCE-BUILT-ZEPHYR-BUNDLE.md`](docs/closures/SOURCE-BUILT-ZEPHYR-BUNDLE.md).
+
 See [`docs/README.md`](docs/README.md) for evidence
 provenance, coverage, safety differences, and remaining hardware work. The function-level motion
 split is in
 [`docs/MOTION-PROVIDER-CORRELATION.md`](docs/correlation/MOTION-PROVIDER-CORRELATION.md).
-The first 198 GoMore functions—including 185 primitives and thirteen tensor-runtime routines—are reconstructed in transparent C;
-the remaining 164 health/sleep algorithm entries stay disabled while their source reductions
-continue. See
+All 362 GoMore functions—including 343 primitives/shared-runtime graph, persistence, activity,
+locomotion-crossing, optical-period, respiratory, sleep, and output-orchestration routines plus
+nineteen tensor-runtime routines—are reconstructed in transparent C. See
 [`docs/GOMORE-PROVIDER-BOUNDARY.md`](docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md).
 The IQS7211E path uses pinned MIT provider/settings references and the R1-only adapter in
 `src/r1_iqs7211e.c`; its Nordic TWIM0/GPIOTE board binding is recorded in
 [`docs/IQS7211E-PROVIDER-BOUNDARY.md`](docs/boundaries/IQS7211E-PROVIDER-BOUNDARY.md)
-and remains unavailable until identity, shared-power, and wear/factory lease gates are provisioned.
+and remains unavailable until identity and wear/factory lease gates are provisioned; Zephyr now
+binds its shared-power client to the reconstructed YHM2710 service.
 The GXCAS GXT310 and YHMICROS YHM2710 provenance boundaries are documented in
 [`docs/NAMED-PERIPHERAL-BOUNDARIES.md`](docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md).
 The five GXT310 mode/one-shot bodies are now reduced to transparent C; temperature register reads
@@ -110,15 +156,16 @@ remain in the already admitted R1 product adapters. See
 All 36 YHM2710 transport, device, register, status, and policy bodies are likewise reconstructed;
 see [`docs/YHM2710-REDUCTION-CORRELATION.md`](docs/correlation/YHM2710-REDUCTION-CORRELATION.md).
 The R1-owned three-client power lease and shared NFC/YHM conductor arbitration are implemented
-separately in `src/r1_power_lease.c` and `platform/nrf52840/sdk/openr1_i2c5_resources.c`; see
+separately in `src/r1_power_lease.c`, the Nordic resource adapter, and the Zephyr YHM/dock adapters; see
 [`docs/YHM2710-I2C5-RESOURCE-BOUNDARY.md`](docs/boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md).
-The lease calls only a semantic provider and contains no YHM register/framing data. Touch power
-remains fail closed pending board binding and hardware validation. NFC receives the recovered P1.10 lifecycle
-and an exclusive CMSIS mutex but still starts disabled and exposes no raw transfer surface.
-The first 331 Goodix functions now compile from transparent C with hidden table and executor
-addresses replaced by typed bindings; 312 came from the opaque closure, seventeen replace
-public-democode source, and two replace R1 product entries. The remaining 8 closed Goodix functions are still being
-reduced; see
+The portable lease calls only a semantic provider and contains no YHM register/framing data. On
+Zephyr it is bound to reconstructed P1.01 transport and exact `0xA8`/`0x28` boundary actions;
+optical lifecycle now adopts client bit 1 on demand, while touch remains identity/wear gated. NFC
+receives the recovered P1.10 lifecycle and an exclusive
+session mutex but still starts disabled and exposes no raw transfer surface.
+All 339 Goodix mappings now compile from transparent C with hidden table and executor
+addresses replaced by typed bindings; 320 came from the opaque closure, seventeen replace
+public-democode source, and two replace R1 product entries. No Goodix function remains opaque; see
 [`docs/GOODIX-PROVIDER-BOUNDARY.md`](docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md).
 The complete twelve-function `goodix_mem`/`GdMem` core is reconstructed without the vendor binary;
 all twenty Goodix heap call-site helpers, the R1 pool byte-fill, and the first four descriptor

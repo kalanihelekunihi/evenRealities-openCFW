@@ -35,6 +35,12 @@
 #define GOODIX_PRIMITIVES_SPO2_SPECTRAL_PACKED_STRIDE 3u
 #define GOODIX_PRIMITIVES_SPO2_SPECTRAL_PACKED_VALUES 178u
 #define GOODIX_PRIMITIVES_SPO2_SPECTRAL_OUTPUT_VALUES 128u
+#define GOODIX_PRIMITIVES_SPO2_PROCESS_CHANNEL_GROUPS 3u
+#define GOODIX_PRIMITIVES_SPO2_PROCESS_MAX_CHANNELS 4u
+#define GOODIX_PRIMITIVES_SPO2_PROCESS_MODEL_ROWS 4u
+#define GOODIX_PRIMITIVES_SPO2_PROCESS_MODEL_COLUMNS 99u
+#define GOODIX_PRIMITIVES_SPO2_PROCESS_MODEL_VALUES 396u
+#define GOODIX_PRIMITIVES_SPO2_PROCESS_OUTPUT_WORDS 5u
 #define GOODIX_PRIMITIVES_FFT_COMPLEX_VALUES 256u
 #define GOODIX_PRIMITIVES_FFT_REAL_VALUES 256u
 #define GOODIX_PRIMITIVES_FFT_MAGNITUDE_VALUES 129u
@@ -43,6 +49,7 @@
 #define GOODIX_PRIMITIVES_NADT_SPECTRAL_BIN_VALUES 53u
 #define GOODIX_PRIMITIVES_NADT_SPECTRAL_PEAK_CAPACITY 5u
 #define GOODIX_PRIMITIVES_NADT_SPECTRAL_OUTPUT_CAPACITY 3u
+#define GOODIX_PRIMITIVES_NADT_HARMONIC_CAPACITY 3u
 #define GOODIX_PRIMITIVES_NADT_DUAL_WINDOW_VALUES 125u
 #define GOODIX_PRIMITIVES_NADT_DUAL_WINDOW_ROWS 62u
 #define GOODIX_PRIMITIVES_NADT_DUAL_WINDOW_PEAK_CAPACITY 62u
@@ -51,6 +58,11 @@
 #define GOODIX_PRIMITIVES_NADT_DUAL_WINDOW_MASK_BYTES 969u
 #define GOODIX_PRIMITIVES_NADT_AUXILIARY_WINDOW_VALUES 50u
 #define GOODIX_PRIMITIVES_NADT_AUXILIARY_EXTREMA_CAPACITY 25u
+#define GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT 4u
+#define GOODIX_PRIMITIVES_NADT_WINDOW_RANGE_VALUES 25u
+#define GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES 100u
+#define GOODIX_PRIMITIVES_NADT_PRIMARY_FIR_SCRATCH_VALUES 122u
+#define GOODIX_PRIMITIVES_NADT_PRIMARY_BOUNDARY_COEFFICIENTS 253u
 #define GOODIX_PRIMITIVES_NADT_SIGNAL_INTERVAL_VALUES 125u
 #define GOODIX_PRIMITIVES_NADT_SIGNAL_DIFFERENCE_VALUES 124u
 #define GOODIX_PRIMITIVES_NADT_PREPROCESS_RECORD_BYTES 24u
@@ -108,6 +120,19 @@ typedef bool (*goodix_primitives_nadt_harmonic_candidate_fn)(
     const float *peak_values, size_t peak_count,
     int32_t *candidate_indices, uint8_t *candidate_flags,
     size_t candidate_capacity);
+
+typedef struct {
+    int32_t selected_indices[GOODIX_PRIMITIVES_NADT_HARMONIC_CAPACITY];
+    uint8_t selected_flags[GOODIX_PRIMITIVES_NADT_HARMONIC_CAPACITY];
+    int32_t candidate_indices[GOODIX_PRIMITIVES_NADT_HARMONIC_CAPACITY];
+    float candidate_values[GOODIX_PRIMITIVES_NADT_HARMONIC_CAPACITY];
+    uint8_t candidate_flags[GOODIX_PRIMITIVES_NADT_HARMONIC_CAPACITY];
+} goodix_primitives_nadt_harmonic_workspace;
+
+typedef struct {
+    goodix_primitives_nadt_harmonic_workspace *workspace;
+    goodix_primitives_float_unary_fn square_root;
+} goodix_primitives_nadt_harmonic_selector_context;
 typedef void (*goodix_primitives_payload_send_fn)(
     uint8_t selector, const uint8_t *payload, uint32_t payload_length,
     uint32_t first, uint32_t second, void *context);
@@ -284,6 +309,149 @@ typedef struct {
     int16_t minimum_indices[
         GOODIX_PRIMITIVES_NADT_AUXILIARY_EXTREMA_CAPACITY];
 } goodix_primitives_nadt_auxiliary_workspace;
+
+typedef struct {
+    float window_metrics[GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT];
+    int32_t window_maxima[GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT];
+    int32_t window_minima[GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT];
+    uint8_t window_count;
+    uint8_t alternate_classifier_level;
+    uint16_t elapsed_window_limit;
+    uint8_t minimum_nonzero_tail_samples;
+    uint8_t base_transition_windows;
+    uint8_t axis_ratio_streak_limit;
+    int32_t metric_threshold;
+    int32_t spread_threshold;
+} goodix_primitives_nadt_window_configuration;
+
+typedef struct {
+    const void *primary_source;
+    const void *secondary_source;
+    const int16_t *tail_samples;
+    size_t tail_sample_count;
+    const int16_t *range_samples;
+    size_t range_sample_count;
+    int32_t sample_count;
+    int32_t axis_x;
+    int32_t axis_y;
+    int32_t axis_z;
+} goodix_primitives_nadt_window_input;
+
+typedef struct {
+    int32_t current_result;
+    bool classification_latched;
+    bool alternate_probe_enabled;
+    uint8_t stationary_latch;
+    uint8_t transient_counters[4];
+    uint8_t quality;
+    uint8_t classification_mode;
+    uint8_t rate;
+    uint8_t axis_ratio_streak;
+    uint8_t evidence_streak;
+    uint8_t fallback_streak;
+    uint8_t trigger_windows[4];
+    uint8_t profile_release_streak;
+    uint8_t profile;
+    bool classifier_suppressed;
+    uint16_t elapsed_windows;
+    int16_t range_cursor;
+    uint16_t axis_ratio_outside_band_windows;
+    int32_t inactive_windows;
+    int32_t long_window_score;
+    int32_t energy_metric;
+    int32_t profile_counter;
+} goodix_primitives_nadt_window_state;
+
+typedef struct {
+    bool high_variation;
+    uint8_t primary_classification;
+    uint8_t auxiliary_classification;
+    uint8_t alternate_classification;
+    int32_t energy_metric;
+} goodix_primitives_nadt_window_diagnostics;
+
+typedef uint8_t (*goodix_primitives_nadt_primary_window_classifier_fn)(
+    void *context, const void *primary_source,
+    const void *secondary_source, int32_t sample_count);
+typedef int32_t (*goodix_primitives_nadt_counter_classifier_fn)(
+    void *context, uint16_t counter);
+typedef int32_t (*goodix_primitives_nadt_alternate_classifier_fn)(
+    void *context);
+
+typedef struct {
+    goodix_primitives_nadt_primary_window_classifier_fn classify_primary;
+    void *primary_context;
+    goodix_primitives_nadt_counter_classifier_fn classify_auxiliary;
+    void *auxiliary_context;
+    goodix_primitives_nadt_alternate_classifier_fn classify_alternate;
+    void *alternate_context;
+    goodix_primitives_double_unary_fn square_root;
+} goodix_primitives_nadt_window_plan;
+
+typedef struct {
+    int32_t activity_maxima[GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT];
+    int32_t activity_minima[GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT];
+    bool enabled;
+    uint8_t classifier_level;
+    uint8_t base_transition_windows;
+    uint8_t stable_hold_windows;
+    int32_t trigger_energy_threshold;
+    int32_t activity_span_threshold;
+    int32_t cadence_scale;
+    int32_t residual_near_zero_threshold;
+    uint16_t minimum_near_zero_samples;
+    uint16_t minimum_near_zero_run;
+    int32_t minimum_extrema_amplitude;
+    uint16_t minimum_periodic_rate;
+    uint16_t maximum_periodic_rate;
+    int32_t maximum_interval_variation;
+    int32_t strong_periodic_variation;
+    uint8_t quality_gate;
+    uint16_t mode_zero_activity_threshold;
+    uint16_t mode_one_residual_threshold;
+    uint16_t quiet_quarter_range_threshold;
+    uint16_t alternate_residual_threshold;
+    bool trend_gate_enabled;
+    uint16_t trend_count_threshold;
+    uint16_t trend_percent_threshold;
+    int32_t filtered_range_lower_threshold;
+    int32_t filtered_range_upper_threshold;
+    uint16_t residual_range_threshold;
+    uint16_t mode_zero_residual_threshold;
+    uint16_t raw_residual_threshold;
+    uint8_t deviation_ratio_threshold;
+    uint32_t filter_boundary_flags;
+    const float *filter_boundary_coefficients;
+    size_t filter_boundary_coefficient_count;
+} goodix_primitives_nadt_primary_configuration;
+
+typedef struct {
+    int32_t filtered[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES];
+    int32_t filter_scratch[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES];
+    int32_t fir_scratch[GOODIX_PRIMITIVES_NADT_PRIMARY_FIR_SCRATCH_VALUES];
+    int32_t residual[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES];
+    int16_t autocorrelation[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES];
+    int16_t extrema_indices[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES];
+    int16_t transition_indices[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES / 2u];
+    int32_t extrema_amplitudes[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES - 1u];
+    int32_t phase_gaps[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES - 1u];
+} goodix_primitives_nadt_primary_workspace;
+
+typedef struct {
+    uint32_t transition_count;
+    int32_t normalized_residual_range;
+    int16_t positive_difference_percent;
+    int32_t filtered_range;
+    int32_t periodic_rate;
+    int32_t interval_variation;
+    bool periodic_candidate;
+    bool strong_periodic;
+    uint8_t input_quality;
+    uint8_t output_quality;
+    uint16_t near_zero_samples;
+    uint16_t longest_near_zero_run;
+    int32_t quarter_ranges[GOODIX_PRIMITIVES_NADT_WINDOW_METRIC_COUNT];
+} goodix_primitives_nadt_primary_diagnostics;
 
 typedef struct {
     float x;
@@ -715,8 +883,10 @@ typedef struct {
     uint8_t event;
     uint8_t phase;
     uint8_t event_seen;
-    uint8_t *history;
-    size_t history_capacity;
+    uint8_t *history_destination;
+    size_t history_destination_capacity;
+    const uint8_t *history_source;
+    size_t history_source_capacity;
 } goodix_primitives_spo2_report_state;
 
 typedef void (*goodix_primitives_spo2_report_analyze_fn)(
@@ -745,6 +915,51 @@ typedef struct {
     bool calibrated;
 } goodix_primitives_nadt_sample_preparation_input;
 
+typedef struct {
+    const goodix_primitives_nadt_sample_preparation_input *sample;
+    int32_t axis_x;
+    int32_t axis_y;
+    int32_t axis_z;
+    uint8_t profile;
+    bool classifier_suppressed;
+} goodix_primitives_nadt_stream_input;
+
+typedef struct {
+    bool initialized;
+    uint8_t status;
+    uint16_t cadence_counter;
+    uint32_t batch_count;
+    uint8_t batch_sample_count;
+    uint8_t low_primary_count;
+    uint8_t activity_lane;
+    int32_t primary_average;
+    int32_t secondary_average;
+    size_t primary_history_count;
+    size_t secondary_history_count;
+    float activity_mean[4];
+    float activity_squared_deviation_sum[4];
+    int32_t activity_maximum[4];
+    int32_t activity_minimum[4];
+    bool result_flag;
+    goodix_primitives_nadt_window_state classifier;
+} goodix_primitives_nadt_stream_state;
+
+typedef struct {
+    int32_t primary_raw[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES];
+    int32_t primary_filtered[GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES];
+    int16_t configuration_markers[
+        GOODIX_PRIMITIVES_NADT_PRIMARY_MAX_SAMPLES];
+    int16_t secondary_history[200];
+} goodix_primitives_nadt_stream_workspace;
+
+typedef struct {
+    bool window_ready;
+    uint8_t classification;
+    uint8_t quality;
+    uint8_t status;
+    uint16_t configuration_changed;
+} goodix_primitives_nadt_stream_output;
+
 /* Transparent binding for the fixed two-stage optical transform recovered at
  * 0x000373A4. Each coefficient bank contains two consecutive three-float
  * sections, and each history bank contains two consecutive two-float pairs. */
@@ -759,6 +974,20 @@ typedef struct {
     size_t output_history_count;
     float correction_threshold;
 } goodix_primitives_nadt_optical_transform;
+
+typedef struct {
+    uint16_t sample_rate;
+    int32_t primary_baseline;
+    int32_t low_primary_threshold;
+    float ratio_threshold;
+    float strong_ratio_threshold;
+    goodix_primitives_nadt_window_configuration *window_configuration;
+    const goodix_primitives_nadt_window_plan *window_plan;
+    goodix_primitives_nadt_sample_preparation_state *preparation_state;
+    goodix_primitives_nadt_optical_transform *optical_transform;
+    goodix_primitives_double_unary_fn round_provider;
+    goodix_primitives_double_unary_fn square_root;
+} goodix_primitives_nadt_stream_plan;
 
 /* Exact 60-byte public GH_NADT configuration consumed by 0x0006E664. Field
  * names retain offsets where the recovered private meaning is not proven. */
@@ -1160,12 +1389,139 @@ typedef struct {
     uint32_t tags[4];
 } goodix_primitives_hr_candidate_selection;
 
+typedef bool (*goodix_primitives_hr_sample_invalid_fn)(
+    void *context, int32_t sample);
+typedef bool (*goodix_primitives_hr_decision_core_fn)(void *context);
+
+typedef struct {
+    int32_t *channel_values;
+    size_t channel_value_count;
+    const uint8_t *presence_bytes;
+    size_t presence_byte_count;
+    uint8_t channel_count;
+    int32_t axis_x;
+    int32_t axis_y;
+    int32_t axis_z;
+} goodix_primitives_hr_process_input;
+
+typedef struct {
+    goodix_primitives_hr_sample_invalid_fn sample_invalid;
+    void *sample_invalid_context;
+    goodix_primitives_hr_decision_core_fn decision_core;
+    void *decision_context;
+    goodix_primitives_float_unary_fn square_root;
+    float outlier_maximum_threshold;
+    float outlier_minimum_threshold;
+    float outlier_deviation_multiplier;
+    const goodix_primitives_hr_candidate_record *candidate_records;
+    size_t candidate_record_count;
+    int32_t candidate_lower_bound;
+    int32_t candidate_upper_bound;
+    int32_t candidate_warmup_limit;
+    float candidate_scale;
+} goodix_primitives_hr_process_plan;
+
+typedef struct {
+    uint32_t sample_rate;
+    uint32_t process_count;
+    uint32_t window_index;
+    goodix_primitives_counted_word_history signal_history;
+    goodix_primitives_counted_word_history motion_history;
+    goodix_primitives_counted_word_history quality_history;
+    goodix_primitives_hr_weighted_feature_state weighted_feature;
+    goodix_primitives_hr_extrema_tracker extrema_tracker;
+    const goodix_primitives_hr_extrema_curve *trough_curve;
+    const goodix_primitives_hr_extrema_curve *peak_curve;
+    goodix_primitives_hr_extrema_workspace *extrema_workspace;
+    int32_t extrema_signal_mode;
+    uint32_t extrema_interpolation_mode;
+    int32_t extrema_position_base;
+    int32_t extrema_period;
+    goodix_primitives_hr_candidate_selection_state candidate_selector;
+    float quality_reference;
+    int32_t quality_threshold_first;
+    int32_t quality_threshold_second;
+    int32_t previous_output[6];
+    uint32_t adjustment_age;
+    int32_t previous_rate;
+    float decision_reference_position;
+    int32_t decision_reference_mode;
+    int32_t latest_rates[4];
+    uint32_t outlier_count;
+    uint32_t tail_outlier_count;
+} goodix_primitives_hr_process_state;
+
+typedef struct {
+    float *quality_sort_scratch;
+    size_t quality_sort_capacity;
+    float *signal_scratch;
+    size_t signal_scratch_capacity;
+} goodix_primitives_hr_process_workspace;
+
 typedef struct {
     int32_t count;
     int32_t capacity;
     float mean[3];
     uint32_t timestamp;
 } goodix_primitives_running_triplet;
+
+#define GOODIX_PRIMITIVES_HR_DECISION_HISTORY_VALUES 10u
+
+typedef struct {
+    float position;
+    float primary_first;
+    float primary_second;
+    float auxiliary_first;
+    float auxiliary_second;
+    float center;
+    int32_t tag;
+    uint8_t flag;
+    uint8_t reserved[3];
+} goodix_primitives_hr_decision_record;
+
+typedef struct {
+    float position;
+    float primary_first;
+    float primary_second;
+    float auxiliary_first;
+    float auxiliary_second;
+    uint8_t ready;
+    uint32_t update_count;
+} goodix_primitives_hr_decision_source;
+
+typedef struct {
+    goodix_primitives_hr_decision_record *records;
+    uint32_t record_count;
+    uint32_t record_capacity;
+    int32_t mode;
+    int32_t latch;
+    int32_t minimum_interval;
+    int32_t maximum_interval;
+    int32_t stale_count;
+    goodix_primitives_running_triplet baseline;
+    goodix_primitives_hr_decision_source source;
+    goodix_primitives_counted_word_history primary_history;
+    goodix_primitives_counted_word_history auxiliary_history;
+    goodix_primitives_counted_word_history interval_history;
+    uint32_t sample_rate;
+    uint32_t timestamp;
+    float diagnostic_variation_percent;
+    float diagnostic_primary_mean;
+    float diagnostic_auxiliary_mean;
+    float diagnostic_interval_mean;
+} goodix_primitives_hr_decision_state;
+
+typedef struct {
+    float mad_scratch[GOODIX_PRIMITIVES_HR_DECISION_HISTORY_VALUES];
+    float compacted[GOODIX_PRIMITIVES_HR_DECISION_HISTORY_VALUES];
+    uint8_t inlier_mask[GOODIX_PRIMITIVES_HR_DECISION_HISTORY_VALUES];
+} goodix_primitives_hr_decision_workspace;
+
+typedef struct {
+    goodix_primitives_hr_decision_state *state;
+    goodix_primitives_hr_decision_workspace *workspace;
+    goodix_primitives_float_unary_fn square_root;
+} goodix_primitives_hr_decision_context;
 
 typedef struct {
     float mean;
@@ -1485,6 +1841,124 @@ typedef struct {
 } goodix_primitives_warmup_average_state;
 
 typedef struct {
+    uint32_t scale_rate;
+    int32_t minimum_scale;
+    float residual_axis_scale;
+    uint16_t motion_window_size;
+    int32_t motion_spread_factor;
+    goodix_primitives_float_unary_fn logarithm_base_10;
+    goodix_primitives_float_unary_fn square_root;
+} goodix_primitives_spo2_stream_plan;
+
+typedef struct {
+    uint32_t sample_count;
+    double scale_accumulators[4];
+    int32_t channel_discontinuity_limits[4];
+    goodix_primitives_biquad_cascade channel_filters[4];
+    goodix_primitives_i16_window channel_packed[4];
+    goodix_primitives_biquad_cascade residual_filter;
+    goodix_primitives_i16_window residual_packed;
+    goodix_primitives_decimated_float_window motion_history[4];
+    goodix_primitives_biquad_cascade motion_filters[4];
+    goodix_primitives_i16_window motion_packed[4];
+    float *motion_sorted[3];
+    size_t motion_sorted_count[3];
+    size_t motion_sorted_capacity[3];
+    float motion_anchor[3];
+} goodix_primitives_spo2_stream_state;
+
+typedef struct {
+    float *sort_scratch;
+    size_t sort_scratch_capacity;
+} goodix_primitives_spo2_stream_workspace;
+
+typedef int32_t (*goodix_primitives_spo2_process_workspace_fn)(
+    void *context, float *workspace, size_t workspace_count);
+
+typedef struct {
+    int32_t *channel_values;
+    size_t channel_value_count;
+    const uint8_t *enable_flags;
+    size_t enable_flag_count;
+    uint8_t channel_count;
+    int32_t accelerometer[3];
+    uint8_t mode;
+    const uint8_t *filter_code;
+    size_t filter_code_count;
+} goodix_primitives_spo2_process_input;
+
+typedef struct {
+    uint32_t valid;
+    uint32_t selected;
+    uint32_t reserved;
+    uint32_t score_at_least_70;
+    uint32_t scaled_score;
+} goodix_primitives_spo2_process_output;
+
+typedef struct {
+    uint16_t sample_frequency;
+    uint16_t processing_cadence;
+    uint8_t expected_valid_channels;
+    uint8_t reserved_05[3];
+    uint32_t report_selected_value;
+    int32_t maximum_selection;
+    int32_t selection_delay;
+    uint32_t score_scale;
+} goodix_primitives_spo2_process_configuration;
+
+typedef struct {
+    goodix_primitives_i32_unary_fn integrity_transform;
+    const goodix_primitives_spo2_stream_plan *stream_plan;
+    const uint16_t *packed_banks[
+        GOODIX_PRIMITIVES_SPO2_PACKED_TOTAL_BANK_COUNT];
+    goodix_primitives_packed_u16_span deviation_channels[4];
+    uint8_t triplicate_disabled;
+    uint8_t triplicate_ready;
+    const uint16_t *triplicate_values;
+    size_t triplicate_value_count;
+    const uint16_t *spectral_packed_channels[
+        GOODIX_PRIMITIVES_SPO2_SPECTRAL_PACKED_CHANNELS];
+    size_t spectral_packed_channel_counts[
+        GOODIX_PRIMITIVES_SPO2_SPECTRAL_PACKED_CHANNELS];
+    goodix_primitives_spo2_process_workspace_fn workspace_process;
+    void *workspace_process_context;
+    const quantized_runtime *quantized;
+    const goodix_primitives_timed_dispatch_context *timed_dispatch;
+    const goodix_primitives_spo2_score_context *score_dispatch;
+    const goodix_primitives_indexed_operation_fn *operations;
+    goodix_primitives_float_unary_fn exponential;
+    goodix_primitives_float_unary_fn logarithm_base_10;
+} goodix_primitives_spo2_process_plan;
+
+typedef struct {
+    uint32_t invocation_count;
+    uint32_t sample_count;
+    uint32_t elapsed_seconds;
+    int32_t latest_result;
+    int16_t last_selected;
+    uint8_t report_selected_candidate;
+    uint8_t reserved_17;
+    goodix_primitives_spo2_stream_state *stream;
+    goodix_primitives_spo2_report_state report;
+    goodix_primitives_spo2_report_analyzer_state analyzer;
+} goodix_primitives_spo2_process_state;
+
+typedef struct {
+    goodix_primitives_warmup_average_state stream_sample;
+    uint8_t stream_mode;
+    uint8_t reserved_41[3];
+    float packed[GOODIX_PRIMITIVES_SPO2_PACKED_WORKSPACE_VALUES];
+    float deviation_scratch[GOODIX_PRIMITIVES_SPO2_SPECTRAL_INPUT_VALUES];
+    float deviations[4];
+    goodix_primitives_spo2_spectral_workspace spectral_workspace;
+    goodix_primitives_spo2_spectral_result spectra;
+    float model_values[GOODIX_PRIMITIVES_SPO2_PROCESS_MODEL_VALUES];
+    float saved_model_row[GOODIX_PRIMITIVES_SPO2_PROCESS_MODEL_COLUMNS];
+    uint32_t score_history_scratch[4];
+    goodix_primitives_spo2_report_output report_output;
+} goodix_primitives_spo2_process_workspace;
+
+typedef struct {
     uint8_t descending;
     uint8_t reserved[3];
     int32_t extremum;
@@ -1654,11 +2128,24 @@ bool goodix_primitives_hr_candidate_window_select(
     int32_t raw_upper_bound, int32_t warmup_count,
     int32_t warmup_limit, float scale,
     goodix_primitives_hr_candidate_selection *selection);
+/* 0x0006D51C: GH_HR sample orchestration, periodic candidate extraction,
+ * quality classification, history fallback, and reference-rate recovery. */
+bool goodix_primitives_hr_process(
+    const goodix_primitives_hr_process_input *input,
+    const goodix_primitives_hr_process_plan *plan,
+    goodix_primitives_hr_process_state *state,
+    goodix_primitives_hr_process_workspace *workspace,
+    int32_t output[6]);
 /* 0x00030090: update three capped running means and bind the caller-supplied
  * current timestamp. Once full, the fixed capacity remains the divisor. */
 bool goodix_primitives_running_triplet_update(
     goodix_primitives_running_triplet *state, float first, float second,
     float third, uint32_t timestamp);
+/* 0x00032808: consume the pending GH_HR feature event, maintain the fixed
+ * record/history windows, update diagnostics and running baselines, and run
+ * the recovered feature/event decision state machine. The context signature
+ * permits direct use as goodix_primitives_hr_process_plan.decision_core. */
+bool goodix_primitives_hr_decision_update(void *context);
 bool goodix_primitives_float_window_mean(
     const goodix_primitives_decimated_float_window *window, float *result);
 bool goodix_primitives_float_window_remove(
@@ -1788,6 +2275,28 @@ bool goodix_primitives_nadt_alternate_state_classify(
     goodix_primitives_nadt_alternate_workspace *workspace,
     goodix_primitives_nadt_alternate_diagnostics *diagnostics,
     int32_t *result);
+/* 0x00047240: classify paired NADT Int32 windows from activity, residual,
+ * periodicity, and quality evidence. All stock heap allocations and absolute
+ * configuration/state bindings are explicit caller-owned objects. */
+bool goodix_primitives_nadt_primary_signal_classify(
+    const int32_t *primary, const int32_t *secondary, size_t count,
+    const goodix_primitives_nadt_primary_configuration *configuration,
+    goodix_primitives_nadt_window_state *state,
+    goodix_primitives_nadt_primary_workspace *workspace,
+    goodix_primitives_autocorrelation_state *autocorrelation_state,
+    goodix_primitives_float_unary_fn round_provider,
+    goodix_primitives_nadt_primary_diagnostics *diagnostics,
+    uint8_t *result);
+/* 0x000856EC: fuse the four-window NADT energy/range history with the
+ * primary, auxiliary, and alternate classifiers. Stock absolute globals are
+ * explicit bounded inputs, state, diagnostics, and typed dependencies. */
+bool goodix_primitives_nadt_window_classify(
+    const goodix_primitives_nadt_window_configuration *configuration,
+    const goodix_primitives_nadt_window_input *input,
+    const goodix_primitives_nadt_window_plan *plan,
+    goodix_primitives_nadt_window_state *state,
+    goodix_primitives_nadt_window_diagnostics *diagnostics,
+    int32_t *result);
 /* 0x00037B80: classify the final 50 signed samples from their range,
  * rounded sample deviation, strict extrema, and extrema clustering. The
  * stock spin-wait is represented by a checked processing-state rejection. */
@@ -1864,6 +2373,26 @@ bool goodix_primitives_spo2_rolling_percentile_select(
 bool goodix_primitives_spo2_smoothed_scale(
     uint32_t sample_count, float sample, uint32_t rate,
     double *accumulator, int32_t *result);
+/* 0x0003113C + 0x00031564: update the four optical-filter lanes and
+ * motion histories, then initialize/advance the percentile-filtered motion
+ * output banks without retaining stock RAM pointers or its temporary heap. */
+bool goodix_primitives_spo2_stream_accumulate(
+    goodix_primitives_warmup_average_state *sample,
+    uint8_t filtering_mode,
+    const goodix_primitives_spo2_stream_plan *plan,
+    goodix_primitives_spo2_stream_state *state,
+    goodix_primitives_spo2_stream_workspace *workspace);
+/* 0x0006C6A8: complete GH_SPO2/dlCom per-sample processing root. The stock
+ * global owner, two transient allocations, packed/spectral bindings, model
+ * dispatch records, and report state are explicit typed caller bindings. */
+uint32_t goodix_primitives_spo2_process(
+    const goodix_primitives_spo2_process_configuration *configuration,
+    const goodix_primitives_spo2_process_input *input,
+    goodix_primitives_spo2_process_output *output,
+    const goodix_primitives_spo2_process_plan *plan,
+    goodix_primitives_spo2_process_state *state,
+    goodix_primitives_spo2_stream_workspace *stream_workspace,
+    goodix_primitives_spo2_process_workspace *workspace);
 bool goodix_primitives_percentile_lookup(
     const float *values, size_t count, uint32_t percentage, float *result);
 bool goodix_primitives_i32_mean(const int32_t *values, size_t count,
@@ -1916,6 +2445,13 @@ bool goodix_primitives_nadt_spectral_peak_prepare(
     goodix_primitives_float_unary_fn floor_provider,
     goodix_primitives_nadt_spectral_workspace *workspace,
     goodix_primitives_nadt_spectral_result *result);
+/* 0x00035850: select a three-lane harmonic family from ranked spectral
+ * peaks. The stock six allocations are one explicit fixed caller workspace. */
+bool goodix_primitives_nadt_harmonic_candidates_select(
+    void *context, float bin_width, const int32_t *peak_indices,
+    const float *peak_values, size_t peak_count,
+    int32_t *candidate_indices, uint8_t *candidate_flags,
+    size_t candidate_capacity);
 /* 0x00030CD8: type-5 interpolated quantile over caller-owned sort scratch. */
 bool goodix_primitives_float_quantile_interpolated(
     const float *values, size_t count, float fraction,
@@ -2328,6 +2864,16 @@ bool goodix_primitives_nadt_sample_prepare(
     goodix_primitives_nadt_sample_preparation_state *state,
     const goodix_primitives_nadt_sample_preparation_input *input,
     int32_t output[3], uint16_t *configuration_changed);
+/* 0x0006E008: run the recovered 25-sample NADT streaming cadence over typed
+ * sample preparation, optical transform, histories, activity lanes, and the
+ * now-local window classifier. All stock RAM banks are caller workspace. */
+bool goodix_primitives_nadt_stream_process(
+    const goodix_primitives_nadt_stream_input *input,
+    const goodix_primitives_nadt_stream_plan *plan,
+    goodix_primitives_nadt_stream_state *state,
+    goodix_primitives_nadt_stream_workspace *workspace,
+    goodix_primitives_nadt_window_diagnostics *window_diagnostics,
+    goodix_primitives_nadt_stream_output *output);
 /* 0x00034B08: issue command 0xA6 for flag bit 13, otherwise issue 0xAE and
  * poll register 0xAE until clear or the wrapping 320-tick timeout. */
 bool goodix_primitives_command_status_poll(

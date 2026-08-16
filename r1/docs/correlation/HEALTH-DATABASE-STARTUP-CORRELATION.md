@@ -80,8 +80,30 @@ rejection, explicit singleton provider binding, controls 2 then 3, fatal initial
 then 0, separate set-clock and conditional mark-valid calls, retained-time
 clear with valid CRC, current-clock/day-start propagation, allocation failure,
 zeroed 128-byte recovery workspace, exact recovery interval, release ordering,
-and one-shot crash snapshot restore. Strict C11, ASAN/UBSAN, and freestanding
+exact record-body decode/re-encode, signed-offset prior-hour selection, packed
+activity restoration, exact previous-hour record construction, midnight selection,
+reserved-tail preservation, corrupt-record rejection,
+latest-point preservation, and one-shot crash snapshot restore. Strict C11,
+ASAN/UBSAN, and freestanding
 Cortex-M4 builds pass.
+
+The source-built Zephyr composition supplies the admitted recovery callback. It
+accepts only 128-byte FlashDB blobs, decodes the recovered 50-byte populated
+layout while preserving the 78-byte reserved tail, and uses each body's recorded
+UTC timestamp plus its signed offset to restore the prior local hour into live activity, HR,
+SpO2, and HRV histories. Temperature and stress remain decoded typed fields but
+are not applied because `r1_runtime` has no corresponding caches. Records with
+short bodies, out-of-query body timestamps, or invalid local time are counted and skipped; startup does not
+format or erase the database in response.
+
+The same source composition binds event slot 1 to the portable record builder and
+pinned `fdb_tsl_append`. It serializes only existing previous-hour caches, counts
+append failures, resets all six caches after the midnight append attempt, and leaves
+the stock destructive format-and-retry branch disabled. The slot-0 listener decodes the
+exact 12-byte old/new time tuple, reruns bounded current-day recovery when the clock first
+becomes valid, and applies cross-day cache reset. Destructive formatting, GoMore
+reinitialization, unresolved cursor persistence, and temperature/stress producers remain
+separate suppressed or open gates.
 
 The ownership verifier pins both stock extents, lengths, hashes, and their
 bounded product/FlashDB dispositions. The linked controller is 464 bytes at

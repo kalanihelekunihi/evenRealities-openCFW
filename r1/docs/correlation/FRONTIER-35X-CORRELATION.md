@@ -8,7 +8,7 @@ body hashes and complete direct/tail-caller scans:
 | `0x00033DBC..<0x00033F1E` | 354 | `52c100f23a936a8344170aed0c63d53b3f3ede79b9e7c2aee01e59f21b6a5176` | R1 BLE-to-thread envelope policy |
 | `0x0008216C..<0x000822CC` | 352 | `a858402f6e9667b3cce7992510f8497101c7560a09a3c3ba87d08a22c1c01368` | R1 Peer Manager diagnostic, LTK output redacted |
 | `0x000425B0..<0x00042710` | 352 | `dc30b28db92809ab9c15f66cc5e01ad9d59e0b8e84dd73d8c569f5df0602fc39` | R1 user-profile transition policy |
-| `0x00094384..<0x000944E2` | 350 | `bd4728f0616cfce144cbe113dc5c4583fbe7481fd3cdf036146edad24176c214` | GoMore licensed-provider boundary |
+| `0x00094384..<0x000944E2` | 350 | `bd4728f0616cfce144cbe113dc5c4583fbe7481fd3cdf036146edad24176c214` | owner-authorized transparent GoMore sensor-update orchestration |
 | `0x0006A714..<0x0006A870` | 348 | `eb3d69ee62b4c1d8d73a8d8da8d4b1d82d80c5c9a77cbc89fee1cf1b5c4fa6fe` | R1 glasses-status lifecycle policy |
 
 `0x00033DBC` is called only by the already product-routed BAE8 callback at `0x0005D650`. It
@@ -31,11 +31,13 @@ persistence, significance thresholds, and optional GoMore reinitialization. The 
 GoMore engine stay external. The public command remains hardened: it validates before success and
 does not reproduce the stock uninitialized tail, truncation, gender-map mismatch, or premature ACK.
 
-`0x00094384` has two direct callers, `0x0006ACAE` and `0x0006C2A2`, both within already gated
-GoMore processing paths. It calls gated GoMore output producers at `0x00094590` and `0x00059D9C`,
-updates private provider state, and enforces a provider timestamp progression rule. Its input
-diagnostics, PPG/accelerometer loops, state layout, and algorithm calls remain licensed-provider
-code and are not reconstructed locally.
+`0x00094384` has two direct callers, `0x0006ACAE` and `0x0006C2A2`, both within GoMore processing
+paths. Its complete orchestration is now reconstructed as
+`gomore_primitives_sensor_update_orchestrate`: diagnostics, input application, and snapshot
+production are typed providers, while runtime/version validation, nearby timestamp substitution,
+stale rejection, commit order, and the high-bit-preserving update counter are transparent C. Its
+formerly opaque descendants at `0x00094590` and `0x00059D9C` are already local as the typed host
+input adapter and output-snapshot copier.
 
 `0x0006A714` is reached by the legacy command dispatcher at `0x0004E368` and tail-call
 `0x0006267E`. Status bits 7 and 6 independently drive wear and secondary-mode transitions. The

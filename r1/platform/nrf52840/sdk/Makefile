@@ -65,6 +65,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/reconstructed/software_twi/software_twi.c \
   $(PROJ_DIR)/reconstructed/sensor_stream/sensor_stream.c \
   $(PROJ_DIR)/reconstructed/time_calendar/time_calendar.c \
+  $(PROJ_DIR)/reconstructed/model_data/r1_model_data.c \
   $(PROJ_DIR)/reconstructed/quantized_runtime/quantized_runtime.c \
   $(PROJ_DIR)/reconstructed/gxt310/gxt310.c \
   $(PROJ_DIR)/reconstructed/qma6100/qma6100.c \
@@ -309,3 +310,9 @@ default: openr1_nrf52840_s140
 TEMPLATE_PATH := $(SDK_ROOT)/components/toolchain/gcc
 include $(TEMPLATE_PATH)/Makefile.common
 $(foreach target,$(TARGETS),$(call define_target,$(target)))
+
+# Nordic's generic template passes every direct ELF prerequisite to the linker,
+# so make the main object depend on the script instead. A layout/retention edit
+# recompiles that object and consequently relinks without passing the script
+# twice (it is already selected by LDFLAGS -T).
+$(OUTPUT_DIRECTORY)/openr1_nrf52840_s140/main.c.o: $(LINKER_SCRIPT)

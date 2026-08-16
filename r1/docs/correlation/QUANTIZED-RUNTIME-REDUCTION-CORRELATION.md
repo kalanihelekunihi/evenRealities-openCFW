@@ -171,15 +171,16 @@ Stock image: application, load base `0x00027000`, SHA-256
    multiply (`0x00091CCC`) retain explicit bindings at the shared-runtime
    boundary even though both exact bodies are now owner-authorized in the GoMore
    reduction. Unbound cross-family dispatch still fails explicitly.
-3. **Out-of-family pointer tokens.**  The four remaining absolute Thumb constants
-   `0x00095B21`, `0x00036DCD`, `0x00076BDD` (GoMore candidate
-   `FUN_00076BDC`), and `0x00030535`
+3. **Out-of-family pointer tokens.**  The three remaining absolute Thumb constants
+   `0x00095B21`, `0x00036DCD`, and `0x00030535`
    target bodies outside this family.  The
    reconstruction returns/stores integrator-bound tokens (0 when unbound)
-   instead of fabricating addresses.  The seven locally reconstructed vectors
-   (softmax, quantizer, float-add, float-dense, pooling, int8-add, signed-int8 convolution) return/store the reconstructed
+   instead of fabricating addresses.  The eight locally reconstructed vectors
+   (softmax, quantizer, float-add, float-dense, Float32 convolution, pooling, int8-add, signed-int8 convolution) return/store the reconstructed
    functions' real addresses. The former `0x000739A9` recurrent token now binds
-   the reconstructed target adapter; the stock Thumb bit is an image ABI detail.
+   the reconstructed target adapter, and constructor `0x00074AAC` similarly replaces stock
+   `0x00076BDD` with `quantized_runtime_float_conv1d_execute_target`; stock Thumb bits are image
+   ABI details.
 4. **Bad-argument handling.**  Stock dereferences every argument unchecked;
    the reconstruction validates and returns
    `QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT` (code 4 follows the sibling B210

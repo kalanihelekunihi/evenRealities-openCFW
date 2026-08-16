@@ -32,11 +32,11 @@ CMSIS-RTOS2, authenticated FreeRTOS critical sections, the adjacent event queue,
 and Nordic logging remain independently owned providers. No provider source is
 copied into this policy model.
 
-The pure step is retained in the unsigned Nordic SDK image at `0x0003B84C`.
-That image contains 127,124 bytes of text, 276 bytes of data, and 150,100 bytes
-of BSS; its standalone BIN is 127,400 bytes. The HEX and BIN SHA-256 values are
-`b93d632817043161e138e97987d4f595520f87b3849e7126922b4e8d4c1eacbb` and
-`4bb7ad7cc81ab6030d027c495327719612ea7a32139ba757c06a6c8d3d2d0c36`.
+The pure step is retained in the current GCC-9.3.1 Nordic SDK image at `0x0007038C`.
+That image contains 347,114 bytes of text, 280 bytes of data, and 150,608 bytes
+of BSS; its standalone BIN is 347,408 bytes. The HEX and BIN SHA-256 values are
+`f24a06fd32fda2bec45738619d188a55f313fb03dffc73c903a5200df10071d7` and
+`262d60f28facf57bf5bf6c0daf2b8a7434a6b1865913d69ceafa5a1979233d95`.
 Since 2026-08-14 the SDK connection-control composition also drives the step
 from a CMSIS one-shot timer and fires the due disconnect through Nordic
 `sd_ble_gap_disconnect` (see `CONNECTION-CONTROL-CORRELATION.md`); the platform

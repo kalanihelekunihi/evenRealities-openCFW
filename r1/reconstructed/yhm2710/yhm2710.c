@@ -490,6 +490,16 @@ bool yhm2710_set_shared_power_active(yhm2710_device *device) {
     return yhm2710_register_write_byte(device, UINT8_C(2), UINT8_C(0xA8));
 }
 
+bool yhm2710_set_shared_power_inactive(yhm2710_device *device) {
+    return yhm2710_register_write_byte(device, UINT8_C(2), UINT8_C(0x28));
+}
+
+bool yhm2710_set_shared_power_enabled(yhm2710_device *device,
+                                      bool enabled) {
+    return enabled ? yhm2710_set_shared_power_active(device)
+                   : yhm2710_set_shared_power_inactive(device);
+}
+
 bool yhm2710_set_high_temperature(yhm2710_device *device) {
     return yhm2710_register_write_byte(device, UINT8_C(2), UINT8_C(0xF8));
 }

@@ -5,14 +5,15 @@
 The open firmware now compiles Nordic nRF5 SDK 17.1.0's unmodified `nrfx_saadc.c` as the
 physical ADC provider and keeps only the recovered R1 channel configuration, filtering,
 conversion, percentage, and charging-state behavior in local code. It does not recreate Nordic's
-driver, the stock generic device registry, or YHM2710 register/wire behavior.
+driver or the stock generic device registry. YHM2710 register/wire behavior is separately
+reconstructed and source-bound on the alternate Zephyr target.
 
 The portable behavior is implemented in `r1/src/r1_battery.c`. The nRF52840 adapter is
 `r1/platform/nrf52840/sdk/openr1_analog.c`. Its retained runtime bridge samples voltage and
 updates protocol-visible battery state only when an admitted caller supplies charge state and
-elapsed time. Sampling fails closed with `NRF_ERROR_NOT_SUPPORTED` until a licensed YHM power
-provider binds the semantic acquire/release interface. No raw ADC or PMIC diagnostic is exposed
-over BLE.
+elapsed time. The legacy Nordic adapter remains fail-closed without a power provider; the Zephyr
+adapter binds the same semantic acquire/release interface to reconstructed YHM client bit 0. No raw
+ADC or PMIC diagnostic is exposed over BLE.
 
 ## Recovered SAADC configuration
 
@@ -129,13 +130,14 @@ Its standalone HEX and BIN SHA-256 values are
 
 ## Remaining gates
 
-- Admit licensed YHM2710 provider source and bind only the semantic battery-power lease. The local
-  analog code must not gain a reconstructed YHM register or software-transport implementation.
+- Preserve the completed Zephyr YHM2710 semantic lease binding and keep raw register/transport
+  operations outside the analog module; decide separately whether the legacy Nordic target should
+  adopt the reconstructed provider.
 - Confirm which battery type is installed and restore its persisted type/compensation safely.
 - Validate divider/amplifier gain, offsets, noise, temperature behavior, and sample timing against
   calibrated equipment on an owned ring.
-- Bind a periodic producer to the retained runtime bridge only after licensed PMIC charge-state
-  and power providers plus physical validation are available. Current/rectifier functions remain
+- Bind a periodic producer to the retained runtime bridge only after typed PMIC charge-state input
+  and physical validation are available. Current/rectifier functions remain
   internal retained APIs.
 - Preserve the absence of raw ADC, PMIC write, ship-mode, and unrestricted diagnostic BLE routes.
 

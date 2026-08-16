@@ -79,9 +79,9 @@ def summarize(image_path: Path) -> dict[str, Any]:
         },
         "boundary": {
             "provider_family": "gomore_health_algorithm_candidate",
-            "source_disposition": "vendor_source_required_not_redistributable",
+            "source_disposition": "clean_room_reimplementation_owner_authorized",
             "private_symbol_or_sdk_version_resolved": False,
-            "local_algorithm_reimplementation_authorized": False,
+            "local_algorithm_reimplementation_authorized": True,
             "toolchain_math_reimplementation_authorized": False,
         },
         "safety": {

@@ -1,29 +1,30 @@
 /*
- * openR1 fail-closed stubs for the absent Goodix GH3X2X algorithm layer.
+ * openR1 fail-closed GH3X2X democode ABI bridge.
  *
- * The pinned democode tree ships the algorithm entry points only as
- * Armv8-M.mainline (STAR-MC1) binary archives plus the demo algorithm-call
- * C layer that depends on them and on the binary-only goodix_mem pool
- * manager.  None of that can execute on the Cortex-M4F target, and the
- * license (clause 5) forbids reverse-engineering the archives, so the
- * algorithm layer is absent by construction.
+ * The executable Goodix algorithm census and goodix_mem implementation now
+ * compile from owner-authorized transparent C and are retained in the target
+ * image. Those recovered routines expose narrow typed contracts, however,
+ * while the public democode drives a large global frame/result ABI. Until a
+ * checked adapter maps every enabled function ID, frame layout, lifetime, and
+ * result sink onto those typed contracts, this compatibility surface remains
+ * deliberately unavailable. No vendor algorithm archive is linked.
  *
  * Every stub below fails closed using the democode's own error codes and
  * never fabricates sensor or biometric data:
  *   - GS8-returning algorithm entry points return GH3X2X_RET_RESOURCE_ERROR
  *     ("resource full or not available"), the democode's own code for an
  *     unavailable resource.
- *   - Version getters write the democode's own "no_ver" marker used for an
- *     absent algorithm version.
+ *   - Version getters write the democode's own "no_ver" marker to report that
+ *     this live ABI binding is unavailable (not that the source bodies are
+ *     absent).
  *   - The frame/transport hooks of the excluded PC-tool upload protocol
  *     drop their payloads; GH3X2X_UprotocolPacketFormat reports a
  *     zero-length packet.
- *   - The ACC/PPG timestamp-sync helpers of the absent algorithm-call
- *     layer become no-ops; GH3X2X_TimestampSyncGetFrameDataFlag reports
- *     "no synchronized frame data".
+ *   - The ACC/PPG timestamp-sync helpers retain the matched public democode
+ *     behavior: empty hooks and a constant-one frame-data flag.
  *
  * This file is compiled only where the pinned vendor tree is available
- * (host vendor-goodix-test and the Nordic SDK image); it includes vendor
+ * (host vendor-goodix-test and the Nordic SDK/Zephyr images); it includes vendor
  * headers so the stub signatures are checked against the real prototypes.
  */
 
@@ -45,7 +46,7 @@ static void gh3x2x_stub_write_no_ver(GCHAR version[150]) {
     version[index] = '\0';
 }
 
-/* --- Algorithm library entry points (binary-only upstream, absent) --- */
+/* --- Algorithm-call ABI entry points (typed live binding not yet admitted) --- */
 
 GS8 GH3X2X_AlgoInit(GU32 unFunctionID) {
     UNUSED_VAR(unFunctionID);
@@ -118,7 +119,8 @@ void GH3X2X_TimestampSyncFillPpgSyncBuffer(
 }
 
 GU8 GH3X2X_TimestampSyncGetFrameDataFlag(void) {
-    return 0u; /* no synchronized frame data is ever available */
+    /* Exact public-democode/recovered body at 0x0002AE00. */
+    return 1u;
 }
 
 /* --- PC-tool upload protocol (module/gh_protocol, kernel/gh_demo_protocol;

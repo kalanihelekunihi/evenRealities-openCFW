@@ -298,7 +298,7 @@ def main() -> None:
         direct.direct_model(STATE_2_SECONDARY_MODEL, (175.0, 150.0, 1_000.0)),
     ]
 
-    print(json.dumps({
+    result = {
         "image_sha256": IMAGE_SHA256,
         "stock_initializer": SPSAccelerometerFirmwareFixture.describe_state(
             bytes(SPSAccelerometerFirmwareFixture(image).machine.uc.mem_read(STATE, 88))
@@ -320,7 +320,43 @@ def main() -> None:
         "rejection_cases": rejection_cases,
         "elapsed_and_missing_bookkeeping": gap_sequence,
         "direct_models": direct_models,
-    }, indent=2))
+    }
+
+    assert result["stock_initializer"]["startup_cooldown"] == 8
+    assert result["stock_initializer"]["state_2_model"]["model_type"] == 0
+    assert result["stock_initializer"]["state_1_model"]["model_type"] == 1
+    assert [item["output_candidate"]["bits"]
+            for item in result["stock_state_1"]] == ["0x40800000"] * 3
+    assert [item["output_candidate"]["bits"]
+            for item in result["stock_state_2"]] == ["0x40f26628"] * 3
+    assert result["varying_state_1_smoothing"][1][
+        "output_candidate"
+    ]["bits"] == "0x4082efa6"
+    assert result["varying_state_2_smoothing"][1][
+        "output_candidate"
+    ]["bits"] == "0x40f5f560"
+    assert result["calibrated_state_1"][0]["output_candidate"]["bits"] == \
+        "0x40e00000"
+    assert result["calibrated_state_1"][0]["output_status"] == 3
+    assert result["calibrated_state_2"][0]["output_candidate"]["bits"] == \
+        "0x4181fe62"
+    assert result["calibrated_state_2"][0]["output_status"] == 3
+    assert {
+        name: (item["output_candidate"]["bits"], item["output_status"])
+        for name, item in result["rejection_cases"].items()
+    } == {
+        "state_mismatch": ("0xbf800000", 1),
+        "relative_difference_exactly_point_2": ("0xbf800000", 1),
+        "rejected_state_ff": ("0xbf800000", 1),
+        "state_zero": ("0x00000000", 1),
+    }
+    assert [item["state"]["missing_update_count"]
+            for item in result["elapsed_and_missing_bookkeeping"]] == [0, 2, 2]
+    assert [item["result"]["bits"] for item in result["direct_models"]] == [
+        "0x405b7980", "0x407de7f4", "0x40f3fcc4", "0x40f26628",
+        "0x40d30d59",
+    ]
+    print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":

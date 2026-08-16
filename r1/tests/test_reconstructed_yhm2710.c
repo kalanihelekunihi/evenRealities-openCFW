@@ -215,6 +215,12 @@ void test_reconstructed_yhm2710(void) {
     assert((trace.registers[1] & UINT8_C(2)) != 0u);
     assert(yhm2710_set_shared_power_active(&chip));
     assert(trace.registers[2] == UINT8_C(0xA8));
+    assert(yhm2710_set_shared_power_inactive(&chip));
+    assert(trace.registers[2] == UINT8_C(0x28));
+    assert(yhm2710_set_shared_power_enabled(&chip, true));
+    assert(trace.registers[2] == UINT8_C(0xA8));
+    assert(yhm2710_set_shared_power_enabled(&chip, false));
+    assert(trace.registers[2] == UINT8_C(0x28));
     assert(yhm2710_set_high_temperature(&chip));
     assert(trace.registers[2] == UINT8_C(0xF8));
 }

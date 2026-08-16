@@ -13,9 +13,9 @@ BUILD = ROOT / "platform" / "nrf52840" / "sdk" / "_build"
 HEX = BUILD / "openr1_nrf52840_s140.hex"
 BIN = BUILD / "openr1_nrf52840_s140.bin"
 MAP = BUILD / "openr1_nrf52840_s140.map"
-EXPECTED_HEX_SHA256 = "b93d632817043161e138e97987d4f595520f87b3849e7126922b4e8d4c1eacbb"
-EXPECTED_BIN_SHA256 = "4bb7ad7cc81ab6030d027c495327719612ea7a32139ba757c06a6c8d3d2d0c36"
-EXPECTED_BIN_BYTES = 127400
+EXPECTED_HEX_SHA256 = "f24a06fd32fda2bec45738619d188a55f313fb03dffc73c903a5200df10071d7"
+EXPECTED_BIN_SHA256 = "262d60f28facf57bf5bf6c0daf2b8a7434a6b1865913d69ceafa5a1979233d95"
+EXPECTED_BIN_BYTES = 347408
 REQUIRED_OBJECTS = (
     BUILD / "openr1_nrf52840_s140" / "bma4.c.o",
     BUILD / "openr1_nrf52840_s140" / "bma456w.c.o",
@@ -84,6 +84,7 @@ REQUIRED_OBJECTS = (
     BUILD / "openr1_nrf52840_s140" / "software_twi.c.o",
     BUILD / "openr1_nrf52840_s140" / "sensor_stream.c.o",
     BUILD / "openr1_nrf52840_s140" / "time_calendar.c.o",
+    BUILD / "openr1_nrf52840_s140" / "r1_model_data.c.o",
     BUILD / "openr1_nrf52840_s140" / "quantized_runtime.c.o",
     BUILD / "openr1_nrf52840_s140" / "gxt310.c.o",
     BUILD / "openr1_nrf52840_s140" / "qma6100.c.o",
@@ -277,6 +278,23 @@ REQUIRED_LINKED_SYMBOLS = (
     "r1_runtime_set_settings_handler",
     "r1_system_settings_reg1_enabled",
     "r1_system_settings_store_reg1",
+    "r1_model_data_words",
+    "r1_goodix_generated_model",
+    "r1_gomore_sleep_model_below_100",
+    "r1_gomore_sleep_model_100_and_above",
+    "rtc_device_bind_registry",
+    "generic_device_registry_bind_wiring",
+    "software_twi_bus_engine",
+    "sensor_stream_acc_object_create",
+    "time_calendar_activity_bucket",
+    "quantized_runtime_aligned_descriptor_construct",
+    "gxt310_channel_0_switch_mode",
+    "qma6100_any_motion_configure",
+    "yhm2710_charge_state",
+    "goodix_primitives_accumulate_threshold_crossings",
+    "goodix_heap_allocate",
+    "gomore_primitives_accelerometer_resample25",
+    "gomore_tensor_add",
 )
 
 REQUIRED_LOCAL_LINKED_SECTIONS = (
@@ -286,6 +304,44 @@ REQUIRED_LOCAL_LINKED_SECTIONS = (
     ("delayed_event_timeout", "openr1_connection_control.c.o"),
     ("delayed_event_fire_disconnect", "openr1_connection_control.c.o"),
 )
+
+REQUIRED_RECONSTRUCTED_OBJECTS = (
+    "rtc_device.c.o",
+    "generic_device_registry.c.o",
+    "software_twi.c.o",
+    "sensor_stream.c.o",
+    "time_calendar.c.o",
+    "r1_model_data.c.o",
+    "quantized_runtime.c.o",
+    "gxt310.c.o",
+    "qma6100.c.o",
+    "yhm2710.c.o",
+    "goodix_primitives.c.o",
+    "goodix_heap.c.o",
+    "gomore_primitives.c.o",
+    "gomore_tensor_runtime.c.o",
+)
+
+# Number of non-empty .text/.rodata input sections emitted by the pinned GCC
+# 9.3.1 build and retained for each reconstructed translation unit.  This
+# prevents a future linker edit from satisfying the object-name check with
+# only one live function while silently garbage-collecting the rest.
+REQUIRED_RECONSTRUCTED_SECTION_COUNTS = {
+    "rtc_device.c.o": 13,
+    "generic_device_registry.c.o": 47,
+    "software_twi.c.o": 32,
+    "sensor_stream.c.o": 47,
+    "time_calendar.c.o": 21,
+    "r1_model_data.c.o": 4,
+    "quantized_runtime.c.o": 98,
+    "gxt310.c.o": 10,
+    "qma6100.c.o": 24,
+    "yhm2710.c.o": 41,
+    "goodix_primitives.c.o": 348,
+    "goodix_heap.c.o": 18,
+    "gomore_primitives.c.o": 386,
+    "gomore_tensor_runtime.c.o": 20,
+}
 
 
 def load_ihex(path: Path) -> dict[int, int]:
@@ -353,6 +409,43 @@ def main() -> None:
         raise AssertionError("application overlaps the recovered FDS range at 0x000d1000")
 
     map_text = MAP.read_text()
+    retained_match = re.search(
+        r"^\.openr1_reconstructed_code(?:\s+0x[0-9a-fA-F]+"
+        r"\s+0x[0-9a-fA-F]+)?\s*$"
+        r"(?P<body>.*?)(?=^\.[A-Za-z_])",
+        map_text,
+        re.MULTILINE | re.DOTALL,
+    )
+    if retained_match is None:
+        raise AssertionError("missing retained reconstructed-code output section")
+    retained_body = retained_match.group("body")
+    for object_name in REQUIRED_RECONSTRUCTED_OBJECTS:
+        if object_name not in retained_body:
+            raise AssertionError(
+                f"reconstructed object was not retained in application: {object_name}"
+            )
+    retained_lines = retained_body.splitlines()
+    retained_counts = {name: 0 for name in REQUIRED_RECONSTRUCTED_OBJECTS}
+    for index, line in enumerate(retained_lines):
+        if re.match(r"\s+\.(?:text|rodata)(?:\.|\s)", line) is None:
+            continue
+        extent_line = line if "0x" in line else (
+            retained_lines[index + 1] if index + 1 < len(retained_lines) else ""
+        )
+        extent_match = re.search(
+            r"0x[0-9a-fA-F]+\s+0x([0-9a-fA-F]+)", extent_line
+        )
+        if extent_match is None or int(extent_match.group(1), 16) == 0:
+            continue
+        for object_name in REQUIRED_RECONSTRUCTED_OBJECTS:
+            if object_name in extent_line:
+                retained_counts[object_name] += 1
+                break
+    if retained_counts != REQUIRED_RECONSTRUCTED_SECTION_COUNTS:
+        raise AssertionError(
+            "reconstructed retained-section census changed: "
+            f"{retained_counts}"
+        )
     for symbol in REQUIRED_LINKED_SYMBOLS:
         match = re.search(
             rf"^\s*0x([0-9a-fA-F]+)\s+{re.escape(symbol)}\s*$",
@@ -374,6 +467,7 @@ def main() -> None:
         "FLASH            0x0000000000027000",
         "RAM              0x00000000200064a8",
         "FLASH            0x0000000000027000 0x00000000000aa000",
+        ".openr1_reconstructed_code",
         "nrf_sdh_enable_request",
         "nrf_sdh_ble_default_cfg_set",
         "characteristic_add",

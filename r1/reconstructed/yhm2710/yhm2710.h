@@ -147,6 +147,9 @@ uint8_t yhm2710_status(yhm2710_device *device);                 /* 0x3529A */
 uint8_t yhm2710_charge_state(yhm2710_device *device);           /* 0x35272 */
 uint8_t yhm2710_set_ladder(yhm2710_device *device, float target); /* 0x35508 */
 bool yhm2710_set_shared_power_active(yhm2710_device *device);   /* 0x355A8 */
+bool yhm2710_set_shared_power_inactive(yhm2710_device *device); /* 0x35594 */
+bool yhm2710_set_shared_power_enabled(yhm2710_device *device,
+                                      bool enabled);
 bool yhm2710_set_high_temperature(yhm2710_device *device);      /* 0x35684 */
 bool yhm2710_set_system_track(yhm2710_device *device);          /* 0x355BC */
 void yhm2710_delay_209(void);                                  /* 0x5C0FA */

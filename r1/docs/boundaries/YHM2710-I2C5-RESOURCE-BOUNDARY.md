@@ -39,9 +39,9 @@ The client indices are product-level roles recovered from their callers:
 | 2 | touch |
 
 The stock zero-boundary actions eventually produce YHM register-2 writes
-`0xA8` and `0x28`. Those bytes are evidence, not locally implemented constants.
-Their electrical meaning is unknown and they remain entirely inside the future
-licensed provider.
+`0xA8` and `0x28`. Both bytes are implemented in the owner-authorized transparent
+YHM reconstruction and selected only through the typed three-client lease. Their
+electrical meaning remains unknown and is not surfaced as a raw register API.
 
 ## Reconstructed transport
 
@@ -88,9 +88,14 @@ provider. A failed first enable leaves the mask empty; a failed final disable
 retains the last client, avoiding a software state that falsely reports the
 rail as released.
 
-The resource module still contains no YHM wire logic; it can now bind the reconstructed typed
-YHM device service. Touch and battery runtime adoption remains fail closed until board binding and
-owned-hardware electrical validation are complete.
+The resource module still contains no YHM wire logic. The Zephyr adapter now binds it to the
+reconstructed typed YHM device service: P1.01 uses the exact pull-up GPIO callbacks, 13/52/209 us
+wire delays, separate 64-MHz post-configuration cycle delay, chip-ID probe, and five-register
+initialization. Battery client 0 and touch client 2 are bound. The Zephyr optical board lifecycle
+now acquires client 1 before asserting the emitter and releases it after disabling the interrupt,
+reset, emitter, and software bus. Sampling is not started at boot and has no wire-facing command
+route. Touch remains identity/wear gated, and all electrical behavior remains hardware-validation
+work.
 
 `../platform/nrf52840/sdk/openr1_i2c5_resources.c`
 uses the pinned Nordic SDK/CMSIS-FreeRTOS primitives to reproduce the R1-owned
@@ -103,7 +108,9 @@ NFC board lifecycle and serialize the shared conductors:
   P1.10 low; and
 - the interface exposes ownership only, never a generic transfer primitive.
 
-The resource layer is bound to the ST25DVxxKC adapter during Nordic startup.
+The resource layer is bound to the ST25DVxxKC adapter during Nordic startup. The Zephyr adapter
+provides the same exact P1.10 sequence and a typed dock-session mutex in addition to its TWIM1
+motion/NFC arbiter.
 NFC still starts disabled and has no BLE/raw-register/mailbox-write control
 surface. Any future YHM provider must use the same mutex before reconfiguring or
 driving P1.11/P1.14.
@@ -116,7 +123,7 @@ tests and freestanding Cortex-M4 compilation pass. The Nordic SDK image compiles
 the resource objects and retains the static CMSIS mutex, exact GPIO setup, NFC
 binding, and ownership functions.
 
-This is static and host verification. P1.10 electrical behavior, physical
+This is static, host, and clean Zephyr build verification. P1.10 electrical behavior, physical
 `i2c_5` coexistence, YHM state transitions, touch power, dock behavior, and
 recovery after interrupted transitions still require owned-hardware validation.
 

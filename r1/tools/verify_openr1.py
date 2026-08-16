@@ -642,7 +642,15 @@ GOODIX_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
     0x0002F224: "goodix_primitives_sample_variance",
     0x00034A58: "goodix_primitives_sample_standard_deviation",
     0x00034CBC: "goodix_primitives_hr_extrema_tracker_update",
+    0x0003113C: "goodix_primitives_spo2_stream_accumulate",
+    0x0006C6A8: "goodix_primitives_spo2_process",
     0x00034500: "goodix_primitives_spo2_report_analyze",
+    0x00035850: "goodix_primitives_nadt_harmonic_candidates_select",
+    0x00047240: "goodix_primitives_nadt_primary_signal_classify",
+    0x00032808: "goodix_primitives_hr_decision_update",
+    0x0006D51C: "goodix_primitives_hr_process",
+    0x0006E008: "goodix_primitives_nadt_stream_process",
+    0x000856EC: "goodix_primitives_nadt_window_classify",
     0x0003738C: "goodix_primitives_float_buffer_standard_deviation",
     0x0007DCD8: "goodix_primitives_sample_variance_or_zero",
     0x0007DD18: "goodix_primitives_population_variance_or_zero",
@@ -982,17 +990,149 @@ def goodix_candidate_row_matches(row, entry):
         "vendor_source_required_not_redistributable"
 
 GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
+    0x0004A704: "gomore_primitives_final_sleep_record_publish",
+    0x00094270: "gomore_primitives_dormant_heart_rate_ratio_wrapper",
+    0x00068D18: "gomore_primitives_dormant_speed_root_build",
+    0x00069DC8: "gomore_primitives_dormant_alternate_root_solve",
+    0x00067488: "gomore_primitives_dormant_speed_mode1_target_update",
+    0x0002938A: "gomore_primitives_dormant_speed_mode1_target_veneer",
+    0x0006825C: "gomore_primitives_dormant_speed_mode0_target_update",
+    0x00029382: "gomore_primitives_dormant_speed_mode0_target_veneer",
+    0x000340A0: "gomore_primitives_sleep_graph_family_dispatch",
+    0x00094590: "gomore_primitives_host_input_adapter_update",
+    0x0005F4B6: "gomore_primitives_motion_classifier_update",
+    0x00058060: "gomore_primitives_state1_cadence_estimate",
+    0x00056DC0: "gomore_primitives_locomotion_control_extract",
+    0x000761F8: "gomore_primitives_locomotion_transition_accumulate",
+    0x0009413C: "gomore_primitives_motion_classifier_finalize",
+    0x00096E74: "gomore_primitives_activity_state_classify250",
+    0x000721B4: "gomore_primitives_dormant_estimator_cycle",
+    0x0006B50C: "gomore_primitives_sleep_force_wake",
+    0x0008141C: "gomore_primitives_dormant_root_resolve",
+    0x000484FC: "gomore_primitives_circular_feature_slot_advance",
+    0x00056C54: "gomore_primitives_bounded_linear_complement",
+    0x00056D78: "gomore_primitives_locomotion_autocorrelation_wrapper",
+    0x00056BA8: "gomore_primitives_circular_i16_mean3",
+    0x00058AEE: "gomore_primitives_circular_positive_fill_mean",
+    0x00056CF4: "gomore_primitives_locomotion_crossing_wrapper",
+    0x00057B38: "gomore_primitives_validate_identifier_status",
+    0x00057F8C: "gomore_primitives_state2_cadence_estimate",
+    0x000582C4: "gomore_primitives_three_axis_window_gate",
+    0x00074914: "gomore_primitives_motion_iir4_filter",
+    0x00094698: "gomore_primitives_weighted_histogram6_accumulate",
+    0x0004C6DC: "gomore_primitives_speed_smoother_update",
+    0x000908E0: "gomore_primitives_speed_gate",
+    0x00090C54: "gomore_primitives_speed_dynamics_baseline",
+    0x00072BE0: "gomore_primitives_allocate_mode0_state_remap",
+    0x0005FEB8: "gomore_primitives_dormant_estimator_update",
+    0x0005F3D8: "gomore_primitives_sleep_motion_feature",
+    0x0005ED14: "gomore_primitives_locomotion_window_preprocess",
+    0x00067E4C: "gomore_primitives_locomotion_window_classify",
+    0x0008EA0C: "gomore_primitives_sdk_auth_parse",
+    0x000947DE: "gomore_primitives_minute_accumulator_update",
+    0x00071618: "gomore_primitives_tensor_bank_initialize",
+    0x00064274: "gomore_primitives_sleep_iir2_filter",
+    0x000711B4: "gomore_primitives_iir_bandpass_coefficients",
+    0x000717AC: "gomore_primitives_iir_low_high_coefficients",
+    0x0002874C: "quantized_runtime_gomore_sleep_graph_family_zero_build",
+    0x0002966C: "quantized_runtime_gomore_sleep_graph_family_nonzero_build",
+    0x00094070: "gomore_primitives_sleep_step_update",
+    0x0005C19C: "gomore_primitives_sleep_stage_decide",
+    0x00060B80: "gomore_primitives_sleep_cycle_update",
+    0x0005EF1C: "gomore_primitives_sps_accelerometer_candidate_update",
+    0x0004BD98: "gomore_primitives_health_lifecycle_initialize",
+    0x0006BBB0: "gomore_primitives_previous_state_append",
+    0x00081040: "gomore_primitives_sleep_stage_refine",
+    0x0006138C: "gomore_primitives_activity_window_update",
+    0x00060680: "gomore_primitives_respiratory_rate_update",
+    0x0004857C: "gomore_primitives_optical_interval_merge",
+    0x00060DC4: "gomore_primitives_sleep_stage_stream_update",
+    0x00064380: "gomore_primitives_peak_candidate_match",
+    0x00088450: "gomore_primitives_sleep_stage_classify",
+    0x00071A32: "gomore_primitives_composite_engine_initialize",
+    0x000675DC: "gomore_primitives_cardano_candidates",
+    0x00068E5C: "gomore_primitives_sps_secondary_model",
+    0x00067C30: "gomore_primitives_expand_half_positions",
+    0x0006AD80: "gomore_primitives_pkey_load",
+    0x0006AFB0: "gomore_primitives_previous_state_restore",
+    0x0006808C: "gomore_primitives_cubic_candidates",
+    0x0006FEA0: "gomore_primitives_sleep_algorithm_initialize",
+    0x0008F0F0: "gomore_primitives_smooth_target_run_edges",
+    0x000583C8: "gomore_primitives_shift_i16_trend_gate5",
+    0x00058B70: "gomore_primitives_sleep_interval_refine",
+    0x0005C064: "gomore_primitives_base64_decode_blocks",
+    0x0005D370: "gomore_primitives_sleep_interval_update",
+    0x000605DC: "gomore_primitives_select_heart_rate",
+    0x000610C8: "gomore_primitives_sps_select_available",
+    0x00061198: "gomore_primitives_step_accumulate",
+    0x00067B24: "gomore_primitives_dominant_quantized_u8_mean5",
+    0x00067A40: "gomore_primitives_dual_dominant_u8_select",
+    0x00067BBC: "gomore_primitives_sleep_interval_dispatch",
+    0x00067558: "gomore_primitives_sleep_interval_compose",
+    0x0006818C: "gomore_primitives_positive_quadratic_roots",
+    0x00068354: "gomore_primitives_packed_timeline_extract",
+    0x00068420: "gomore_primitives_nearest_nonzero3",
+    0x000684FC: "gomore_primitives_sps_model_dispatch",
+    0x000695A8: "gomore_primitives_activity_scaled_quadratic_difference",
+    0x000692E4: "gomore_primitives_sleep_interval_build",
+    0x00069644: "gomore_primitives_final_sleep_build",
+    0x00069E94: "gomore_primitives_affine_reciprocal_model4_evaluate",
+    0x0006C1C0: "gomore_primitives_update_failure_counter",
+    0x0006C294: "gomore_primitives_output_lifecycle_dispatch",
+    0x00070F44: "gomore_primitives_sps_refresh_affine_pairs",
+    0x00071714: "gomore_primitives_sps_state_initialize",
+    0x00071B74: "gomore_primitives_sleep_descriptor_initialize",
+    0x00072024: "gomore_primitives_interval_descriptor_merge",
+    0x0007244E: "gomore_primitives_sleep_interval_run",
+    0x00072572: "gomore_primitives_sleep_interval_select",
+    0x0007ED30: "gomore_primitives_sorted_percentile",
+    0x00090A50: "gomore_primitives_rolling_mean5_update",
+    0x000916C8: "gomore_primitives_profile_state_apply",
+    0x00091A60: "gomore_primitives_sliding_window_mean",
+    0x00093FAC: "gomore_primitives_activity_score_variability_adjust",
+    0x000949A8: "gomore_primitives_statistics_accumulate",
+    0x00058C7A: "gomore_primitives_complex_power",
+    0x00059CB0: "gomore_primitives_epoch_to_civil_time",
+    0x00059D9C: "gomore_primitives_copy_algorithm_output_snapshot",
+    0x00059E60: "gomore_primitives_sleep_quantized_magnitude10",
+    0x00064A98: "gomore_primitives_range_center_span",
+    0x00068DE0: "gomore_primitives_linear_model3_evaluate",
+    0x000881F4: "gomore_primitives_sleep_repair_deep_awake_transition",
     0x000948D8: "gomore_primitives_shift_negated_filter_history",
     0x000823D8: "gomore_primitives_log_u32",
     0x00060990: "gomore_primitives_accelerometer_resample25",
+    0x00060A14: "gomore_primitives_ppg_resample25",
     0x00090F44: "gomore_primitives_sleep_engine_open",
     0x0005D560: "gomore_primitives_csv4_prefix_compare",
     0x00091E02: "quantized_runtime_tensor_slice",
     0x00065538: "gomore_tensor_dual_affine_activate",
     0x000655A8: "gomore_tensor_gated_dual_affine_activate",
+    0x000651CA: "gomore_tensor_batch_normalize_half",
+    0x00065304: "gomore_tensor_conv1d_half_bias",
+    0x00065376: "gomore_tensor_chain_run",
+    0x000653E6: "gomore_tensor_cell_run",
+    0x00096634: "gomore_primitives_dormant_ratio_accumulator",
+    0x0004834A: "gomore_primitives_locomotion_summary_update",
+    0x00094384: "gomore_primitives_sensor_update_orchestrate",
+    0x0005F264: "gomore_primitives_motion_gate_accumulate",
+    0x0006B27C: "gomore_primitives_auth_parameters_setup",
+    0x00049410: "gomore_primitives_authorization_dispatch",
+    0x0006859C: "gomore_primitives_peak_statistics",
+    0x0008F4E8: "gomore_primitives_direction_change_statistics",
+    0x00070498: "gomore_primitives_dormant_heart_rate_filter_update",
+    0x00056A0C: "gomore_primitives_six_channel_ring_score",
+    0x00091B08: "gomore_tensor_conv1d_half",
     0x00096E0C: "gomore_primitives_sequence_replay",
+    0x000647C4: "gomore_primitives_moving_average_extrema_indices",
+    0x00068840: "gomore_primitives_locomotion_feature_reduce",
+    0x00069834: "gomore_primitives_optical_period_estimate",
+    0x00076BDC: "quantized_runtime_float_conv1d_execute",
+    0x0005C5F0: "gomore_primitives_locomotion_autocorrelation_analyze",
+    0x00056F94: "gomore_primitives_locomotion_crossing_period_estimate",
+    0x0005FF94: "gomore_primitives_output_orchestrate",
     0x000649BC: "gomore_primitives_interval_nonzero_argmax",
     0x00080F88: "gomore_primitives_round_decimal_places",
+    0x000888A0: "gomore_primitives_dormant_root_reduce",
     0x00071CD8: "gomore_primitives_time_engine_initialize",
     0x00058256: "gomore_primitives_circular_signal_predicate",
     0x00069FA8: "gomore_primitives_average_sign_crossing_spacing",
@@ -1004,6 +1144,7 @@ GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
     0x0006562C: "gomore_tensor_blend",
     0x000656AA: "gomore_tensor_int8_float_affine",
     0x00035D12: "gomore_tensor_strided_copy_2d",
+    0x0007CA94: "gomore_tensor_pool_1d",
     0x0007D09C: "gomore_primitives_one_minus",
     0x0008F49C: "gomore_primitives_logistic",
     0x000304D8: "gomore_primitives_scaled_product",
@@ -1017,27 +1158,35 @@ GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
     0x0008EC7C: "gomore_primitives_state_mode_dispatch",
     0x0008ED10: "gomore_primitives_commit_valid_time_record_adapter",
     0x000641F0: "gomore_primitives_iir_filter_apply",
+    0x0008F3C8: "gomore_primitives_integer_iir4_update",
     0x00076120: "gomore_primitives_thresholded_mean5",
     0x0008F688: "gomore_primitives_magnitude_score10",
     0x000569BC: "gomore_primitives_circular_count_predicate",
     0x0008F728: "gomore_primitives_run_length_encode_2bit",
+    0x0008FA3C: "gomore_primitives_final_sleep_record_serialize",
     0x0007266A: "gomore_primitives_propagate_packed_status",
     0x00071C38: "gomore_primitives_filter_bank_initialize",
     0x00069546: "gomore_primitives_target_runs",
+    0x00064CC8: "gomore_primitives_sleep_stage_proportion_adjust",
     0x000748D4: "gomore_primitives_shift_marked_history",
     0x00071D62: "gomore_primitives_mode_state_configure",
     0x00071DD8: "gomore_primitives_large_filter_state_initialize",
     0x00071DB6: "gomore_primitives_engine_state_initialize",
     0x0008245C: "gomore_primitives_resample25_and_filter",
     0x0008247E: "gomore_primitives_resample25_and_filter_tail",
+    0x000882EC: "gomore_primitives_linear_resample",
     0x00058AB8: "gomore_primitives_prepare_filter_input",
+    0x00060AF4: "gomore_primitives_sleep_optical_peak_update",
     0x0007260C: "gomore_primitives_commit_valid_time_record",
     0x00077E48: "gomore_primitives_signed_power_third",
     0x00088264: "gomore_primitives_trim_below_reference_tail",
     0x00080FF4: "gomore_primitives_selector_transition",
     0x00064174: "gomore_primitives_fill_packed_time_gap",
     0x00074880: "gomore_primitives_centered_ratio",
+    0x0004B4B0: "gomore_primitives_scaled_sample_publish",
+    0x0004B5B0: "gomore_primitives_stable_trimmed_median",
     0x0006AAC0: "gomore_primitives_seeded_random_offset",
+    0x0006ABF8: "gomore_primitives_health_sample_features",
     0x00028B8A: "gomore_primitives_allocate_mode2_state",
     0x00048D22: "gomore_primitives_allocate_mode1_state",
     0x0004FB44: "gomore_primitives_decimal_parse",
@@ -1052,6 +1201,29 @@ GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
     0x000723B6: "gomore_primitives_i16_standard_deviation",
     0x00069D20: "gomore_primitives_energy_core",
     0x00069D80: "gomore_primitives_energy_scaled",
+    0x00068728: "gomore_primitives_daily_resting_kcal",
+    0x00067D48: "gomore_primitives_substrate_fat_fraction",
+    0x0002F108: "gomore_primitives_energy_zone_thresholds",
+    0x000763D8: "gomore_primitives_energy_zone_accumulate",
+    0x0005D3F8: "gomore_primitives_energy_projection",
+    0x00075D88: "gomore_primitives_energy_nonlinear_scale",
+    0x00090ACC: "gomore_primitives_energy_mode_rate",
+    0x00088DB4: "gomore_primitives_energy_interpolate_pair",
+    0x00088BD0: "gomore_primitives_energy_estimator_family_a",
+    0x0005A448: "gomore_primitives_energy_estimator_family_b",
+    0x0002F488: "gomore_primitives_energy_dispatch",
+    0x0007DA30: "gomore_primitives_energy_table_estimator",
+    0x0005F56C: "gomore_primitives_energy_update",
+    0x00061274: "gomore_primitives_activity_accumulate",
+    0x00071E34: "gomore_primitives_profile_convert",
+    0x00068FD4: "gomore_primitives_sleep_interval_statistics",
+    0x00069128: "gomore_primitives_sleep_stage_statistics",
+    0x0006778C: "gomore_primitives_sleep_score",
+    0x00074D60: "gomore_primitives_sleep_peak_rate_interpolate",
+    0x00088AAC: "gomore_primitives_sleep_peak_window_update",
+    0x00076502: "gomore_primitives_sleep_peak_tail_rebase",
+    0x00064A28: "gomore_primitives_sleep_valley_candidates",
+    0x0008EE3A: "gomore_primitives_sleep_optical_history_advance",
     0x00069F3C: "gomore_primitives_state_word_24",
     0x00090EFC: "gomore_primitives_split_signed_root",
     0x000676E0: "gomore_primitives_clamped_rational",
@@ -1920,7 +2092,9 @@ def main() -> None:
         "2-year/9-cm/9-kg",
         "0x96000",
         "0x7800",
-        "licensed-provider",
+        "owner-authorized transparent GoMore sensor-update orchestration",
+        "gomore_primitives_sensor_update_orchestrate",
+        "high-bit-preserving update counter",
     ):
         require(frontier_35x, marker)
     frontier_334_342 = DOCS / "FRONTIER-334-342-CORRELATION.md"
@@ -1933,7 +2107,8 @@ def main() -> None:
         "every 60 invocations",
         "0x2800",
         "mode 3",
-        "licensed-provider-only",
+        "gomore_tensor_cell_run",
+        "tensor data and model parameters remain explicit caller inputs",
     ):
         require(frontier_334_342, marker)
     frontier_314_328 = DOCS / "FRONTIER-314-328-CORRELATION.md"
@@ -1945,7 +2120,8 @@ def main() -> None:
         "0x000651CA..<0x00065304",
         "discards one minimum and one maximum",
         "nrfx_saadc_irq_handler",
-        "licensed-provider-only",
+        "gomore_tensor_conv1d_half",
+        "gomore_tensor_batch_normalize_half",
         "no persistent database mutation",
     ):
         require(frontier_314_328, marker)
@@ -1986,7 +2162,7 @@ def main() -> None:
         "1,306 executable bytes",
         "every 500 ticks",
         "period 600",
-        "licensed-provider-only",
+        "gomore_tensor_pool_1d",
         "perform no live",
     ):
         require(frontier_256_262, marker)
@@ -2000,7 +2176,7 @@ def main() -> None:
         "1,208 bytes",
         "length 13",
         "shared by GoMore and Goodix",
-        "licensed-provider-only",
+        "gomore_primitives_sleep_step_update",
         "no live flash",
     ):
         require(frontier_230_248, marker)
@@ -2242,7 +2418,8 @@ def main() -> None:
         "two-function / 616-byte R1 HRV synchronization-flush boundary",
         "two-function / 578-byte R1 heart-rate synchronization-flush boundary",
         "two-function / 578-byte R1 SpO2 synchronization-flush boundary",
-        "one-function / 528-byte GoMore SDK",
+        "former largest unknown at `0x0008EA0C` now compiles",
+        "gomore_primitives_sdk_auth_parse",
         "two-function / 856-byte packed-channel",
         "goodix_primitives_spo2_channel_scale_decode",
         "554-byte NADT auxiliary",
@@ -2448,7 +2625,7 @@ def main() -> None:
         require(gomore_neural_runtime_doc, marker)
     gomore_sleep_graph_doc = DOCS / "GOMORE-SLEEP-GRAPH-PROVIDER-BOUNDARY.md"
     for marker in (
-        "Six formerly unclassified functions / 2,188 executable bytes",
+        "Six pinned functions / 2,188 executable bytes",
         "0x0002874C",
         "0x00028B8A",
         "0x0002966C",
@@ -2459,7 +2636,9 @@ def main() -> None:
         "0x00072BE1, 0x00048D23, 0x00028B8B",
         "21,824",
         "0x0004387C",
-        "vendor_source_required_not_redistributable",
+        "clean_room_reimplementation_owner_authorized",
+        "1,714 model words",
+        "emulate_r1_gomore_sleep_graphs.py",
         "python3 tools/evidence/summarize_r1_gomore_sleep_graphs.py",
     ):
         require(gomore_sleep_graph_doc, marker)
@@ -2474,9 +2653,11 @@ def main() -> None:
         "0x00096E74",
         "three eight-byte `TBB` data tables",
         "25-sample",
-        "250 samples",
-        "seven internal states",
-        "vendor_source_required_not_redistributable",
+        "250 accumulated samples",
+        "maintains seven",
+        "gomore_primitives_activity_window_update",
+        "1,028-byte state object",
+        "emulate_r1_activity_window.py",
         "python3 tools/evidence/summarize_r1_gomore_activity_state_classifier.py",
     ):
         require(gomore_activity_state_doc, marker)
@@ -2502,8 +2683,9 @@ def main() -> None:
         "0x00038A5C",
         "0x0003AE04",
         "0x0003A620",
-        "248 exact functions",
-        "vendor_source_required_not_redistributable",
+        "gomore_primitives_iir_low_high_coefficients",
+        "clean_room_reimplementation_owner_authorized",
+        "orders one through four",
         "emits no algorithm or generated coefficients",
         "python3 tools/evidence/summarize_r1_gomore_iir_designer.py",
     ):
@@ -2518,8 +2700,9 @@ def main() -> None:
         "89c30133f274cf13ec81bdd160439e31ea792bd70e19e157451895aeb4d851d7",
         "0x000891A4",
         "0x00027854",
-        "vendor_source_required_not_redistributable",
-        "exposes no live authentication operation",
+        "gomore_primitives_sdk_auth_parse",
+        "caller-supplied 32-byte decrypt keys",
+        "emulate_r1_sdk_auth_parser.py",
         "python3 tools/evidence/summarize_r1_gomore_auth_parser.py",
     ):
         require(gomore_auth_parser_doc, marker)
@@ -2888,6 +3071,14 @@ def main() -> None:
         "d0e8d34ddfaf97ba47f66e94aa6a104b3efac71452ecb02f4f5a25379f04f656",
         "goodix_primitives_nadt_alternate_state_classify",
         "46240b4aebd8a3f9d4b26e2f109215ddb0793c7005de78f85826dc9ab7711775",
+        "goodix_primitives_nadt_harmonic_candidates_select",
+        "c9fbb161215e9026649909ed8ef04b628221d7d51cbd4affb3c04f0a4c6a6c7a",
+        "goodix_primitives_nadt_stream_process",
+        "1b8a57e2d23467bbcd143115751d867207f56b1f12de3bada3efb8439795b5ea",
+        "goodix_primitives_nadt_primary_signal_classify",
+        "01e21104d3d962a09b4c9087eb0e3a49b56b70ee7ebc1eb4d7aa09236f3ab1ac",
+        "goodix_primitives_nadt_window_classify",
+        "29e04962b88b0993700f603717f98229bd217e959192d045ee3cd3fbda7f82e1",
         "goodix_primitives_nadt_output_state_select",
         "0x0006E838 -> 0x00095828 -> 0x00029144",
         "goodix_primitives_nadt_dual_window_features_extract",
@@ -2918,6 +3109,8 @@ def main() -> None:
         "0x00032808` / 2,814 bytes",
         "0x0006D51C",
         "0x0006D5FA",
+        "goodix_primitives_hr_process",
+        "0f1b8fa8d247ca839a59cfffccb4f70e9cb1a689cd2f736c8514474c02358c9d",
         "goodix_primitives_hr_extrema_tracker_update",
         "41bf9766adb1e05d96397c6e20463f9f7b51fc184319261670451cc4fa50dce0",
         "at most four levels",
@@ -3033,6 +3226,8 @@ def main() -> None:
         "0x000876C8",
         "0x000BD668",
         "source-admitted bodies remain dormant",
+        "goodix_primitives_spo2_stream_accumulate",
+        "96f4fe901ef2933d58e73b36d5532d8bc3623246beee03d37969cc472b695935",
         "goodix_primitives_spo2_input_diagnostics_emit",
         "bab60e2e6fdbd5958cac9cd00efc6f13ec921e6af437ea9af500a9a84cd95d7c",
         "goodix_primitives_spo2_report_analyze",
@@ -3116,9 +3311,19 @@ def main() -> None:
         require(health_database_startup, marker)
     require(PROJECT / "include" / "openr1" / "r1_health_db.h",
             "r1_health_db_startup_ops")
+    require(PROJECT / "include" / "openr1" / "r1_health_db.h",
+            "r1_health_db_record")
     require(PROJECT / "src" / "r1_health_db.c", "r1_health_db_startup")
+    require(PROJECT / "src" / "r1_health_db.c",
+            "r1_health_db_decode_record")
+    require(PROJECT / "src" / "r1_health_db.c",
+            "r1_health_db_build_record")
+    require(PROJECT / "src" / "r1_health_db.c",
+            "r1_health_db_restore_record")
     require(PROJECT / "tests" / "test_openr1.c",
             "test_health_database_startup")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_health_database_record_codec_and_restore")
     twi_sync = DOCS / "TWI-SYNCHRONIZATION-CORRELATION.md"
     for marker in (
         "0x00054FF8..<0x00055058",
@@ -3607,9 +3812,12 @@ def main() -> None:
             cmbacktrace["disposition"] != \
             "pinned_upstream_snapshot_adapter_required":
         raise AssertionError("CmBacktrace provider correlation gate changed")
-    if components["goodix-gh3x2x"]["disposition"] != \
-            "vendor_source_required_not_redistributable":
-        raise AssertionError("Goodix vendor boundary missing")
+    goodix_component = components["goodix-gh3x2x"]
+    if goodix_component["disposition"] != \
+            "clean_room_reimplementation_owner_authorized" or \
+            "no Goodix binary is a production input" not in \
+            goodix_component["production_role"]:
+        raise AssertionError("Goodix owner-authorized source boundary changed")
     iqs = components["flipperone-iqs7211e"]
     if iqs["commit"] != "0a88e26bb8fd5b6afcdcc607fd748d7bc3d2b067" or \
             iqs["archive_sha256"] != \
@@ -6266,7 +6474,7 @@ def main() -> None:
             ] != [1, 3, 5] or \
             gomore_neural_runtime_summary["ownership"][
                 "local_reimplementation_permitted"
-            ] is not False:
+            ] is not True:
         raise AssertionError("GoMore neural runtime metadata changed")
     for function in GOMORE_NEURAL_RUNTIME_FUNCTIONS:
         entry = int(function["entry"])
@@ -6275,8 +6483,10 @@ def main() -> None:
         body = recovered[entry - recovered_base:end - recovered_base]
         if row["provider_family"] != "gomore_health_algorithm_candidate" or \
                 row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
-                row["confidence"] != "candidate" or \
+                "clean_room_reimplementation_owner_authorized" or \
+                row["upstream_symbol"] != \
+                "quantized_runtime_float_conv1d_execute" or \
+                row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -6300,9 +6510,12 @@ def main() -> None:
             gomore_sleep_graph_summary["boundary"]["provider_family"] != \
             "gomore_health_algorithm_candidate" or \
             gomore_sleep_graph_summary["boundary"]["source_disposition"] != \
-            "vendor_source_required_not_redistributable" or \
+            "clean_room_reimplementation_owner_authorized" or \
             gomore_sleep_graph_summary["boundary"][
-                "local_graph_or_model_reimplementation_authorized"
+                "local_graph_reconstruction_authorized"
+            ] is not True or \
+            gomore_sleep_graph_summary["boundary"][
+                "local_model_reimplementation_authorized"
             ] is not False or \
             gomore_sleep_graph_summary["boundary"][
                 "goodix_graph_0x0004387c_included"
@@ -6446,9 +6659,9 @@ def main() -> None:
             gomore_iir_summary["boundary"]["provider_family"] != \
             "gomore_health_algorithm_candidate" or \
             gomore_iir_summary["boundary"]["source_disposition"] != \
-            "vendor_source_required_not_redistributable" or \
+            "clean_room_reimplementation_owner_authorized" or \
             gomore_iir_summary["boundary"][
-                "local_algorithm_reimplementation_authorized"] is not False or \
+                "local_algorithm_reimplementation_authorized"] is not True or \
             gomore_iir_summary["boundary"][
                 "toolchain_math_reimplementation_authorized"] is not False or \
             gomore_iir_summary["safety"] != {
@@ -6464,8 +6677,10 @@ def main() -> None:
         body = recovered[entry - recovered_base:end - recovered_base]
         if row["provider_family"] != "gomore_health_algorithm_candidate" or \
                 row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
-                row["confidence"] != "candidate" or \
+                "clean_room_reimplementation_owner_authorized" or \
+                row["upstream_symbol"] != \
+                "gomore_primitives_iir_low_high_coefficients" or \
+                row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -6511,8 +6726,9 @@ def main() -> None:
         )
         if row["provider_family"] != "gomore_health_algorithm_candidate" or \
                 row["source_disposition"] != \
-                "vendor_source_required_not_redistributable" or \
-                row["confidence"] != "candidate" or \
+                "clean_room_reimplementation_owner_authorized" or \
+                row["upstream_symbol"] != "gomore_primitives_sdk_auth_parse" or \
+                row["confidence"] != "high" or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -7422,14 +7638,18 @@ def main() -> None:
             if is_gomore else "r1_product_specific"
         )
         expected_disposition = (
-            "vendor_source_required_not_redistributable"
+            "clean_room_reimplementation_owner_authorized"
             if is_gomore else "clean_room_behavior_only"
         )
-        expected_confidence = "candidate" if is_gomore else "high"
+        expected_symbol = (
+            "gomore_primitives_sensor_update_orchestrate"
+            if is_gomore else function["symbol"]
+        )
+        expected_confidence = "high"
         if row["inventory_source"] != function["inventory"] or \
                 row["provider_family"] != expected_provider or \
                 row["source_disposition"] != expected_disposition or \
-                row["upstream_symbol"] != function["symbol"] or \
+                row["upstream_symbol"] != expected_symbol or \
                 row["confidence"] != expected_confidence or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
@@ -7466,6 +7686,11 @@ def main() -> None:
         else:
             expected_disposition = function["source_disposition"]
             expected_symbol = function["symbol"]
+        if entry in GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS:
+            expected_disposition = \
+                "clean_room_reimplementation_owner_authorized"
+            expected_symbol = GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS[entry]
+            expected_confidence = "high"
         if row["inventory_source"] != function["inventory"] or \
                 row["provider_family"] != function["provider_family"] or \
                 row["source_disposition"] != expected_disposition or \
@@ -7822,7 +8047,8 @@ def main() -> None:
     for function in R1_FRONTIER_128_202_FUNCTIONS:
         entry = int(function["entry"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
-        if entry in GOODIX_RECONSTRUCTED_SYMBOLS:
+        if entry in GOODIX_RECONSTRUCTED_SYMBOLS or \
+                entry in GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS:
             expected_function = dict(function)
             expected_function["source_disposition"] = \
                 "clean_room_reimplementation_owner_authorized"
@@ -7843,6 +8069,8 @@ def main() -> None:
             entry, expected_function["symbol"])
         if entry in GOODIX_RECONSTRUCTED_SYMBOLS:
             expected_symbol = GOODIX_RECONSTRUCTED_SYMBOLS[entry]
+        elif entry in GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS:
+            expected_symbol = GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS[entry]
         elif entry in goodix_democode_symbols:
             expected_symbol = goodix_democode_symbols[entry][0]
         elif expected_function["provider_family"] == \
@@ -7852,7 +8080,10 @@ def main() -> None:
                 row["provider_family"] != expected_function["provider_family"] or \
                 row["source_disposition"] != expected_function["source_disposition"] or \
                 row["upstream_symbol"] != expected_symbol or \
-                row["confidence"] != (goodix_democode_symbols[entry][1]
+                row["confidence"] != ("high"
+                    if entry in GOODIX_RECONSTRUCTED_SYMBOLS or
+                    entry in GOMORE_PRIMITIVES_RECONSTRUCTED_SYMBOLS else
+                    goodix_democode_symbols[entry][1]
                     if entry in goodix_democode_symbols else
                     frontier_128_202_confidence[
                         expected_function["provider_family"]]) or \
@@ -10681,6 +10912,7 @@ def main() -> None:
         0x0004BD98: (768, "e7c30f46d5d286ac2caaf99aee96458c233d9b690376e947e693da62a30c3665"),
         0x0006AD80: (282, "538ef0577e0848c8ee0f4a53c0e5b743e6a0b35dcbaa7044536441f588f529ad"),
         0x0006AFB0: (180, "8e27cb74b1de910c0a6358e97a1f011762df1e624ed42a271a1b40c8e2605fc8"),
+        0x0006FEA0: (302, "482c62c9526c4a26994f6d69906e68b5186edbac94e1b5b5e62ba523b6e6b7c6"),
         0x0006B27C: (374, "2b593ce1c6b887e64f8016434c9f92e2aad3e3d5da5fa7f4c9f138393dac9a69"),
         0x0006B50C: (318, "a4becd15f14171d74d4321de59447ba8aae9e480e79d0f39bd0ebdaf1b8b5dfd"),
         0x0006BBB0: (824, "8bad5c89f7ef2cae30d6bfcae6157ae5c68b2310a70bde6dcd8e5242d99d5b3e"),
@@ -11730,6 +11962,16 @@ def main() -> None:
     missing_recent = required_recent - referenced_ids
     if missing_recent:
         raise AssertionError(f"recent audit findings not reconciled: {sorted(missing_recent)}")
+
+    subprocess.run([
+        "python3", str(PROJECT / "tools/generate_r1_model_data.py"), "--check"
+    ], check=True)
+    subprocess.run([
+        "python3", str(PROJECT / "tools/verify_application_bundle_boundary.py")
+    ], check=True)
+    subprocess.run([
+        "python3", str(PROJECT / "tools/verify_zephyr_source_boundary.py")
+    ], check=True)
 
     for target in ("test", "sanitize", "arm-objects", "sim"):
         subprocess.run(["make", "-C", str(PROJECT), target], check=True)

@@ -8,8 +8,8 @@ body hashes, full direct-call scans, and function-local control-flow review:
 | `0x0008B184..<0x0008B2CC` | 328 | `7332ae1847cc0f7137e3d1b464c315dfa0b8b8e80b4d9af5d4ed41a5d5d5c76c` | R1 health clear-all orchestration |
 | `0x00051108..<0x00051250` | 328 | `3f7836df81f8fb76d15d03120be74c32734bf62e7f42cd3d9b68286e72738cde` | R1 dual-temperature reducer/adapter |
 | `0x000317CC..<0x0003190C` | 320 | `e8a945402151326dbbba0c4e5c8660b42bc21c7e3b3a5da8d0ab02647d32e5ac` | Nordic SDK 17.1.0 `nrfx_saadc_irq_handler` |
-| `0x00091B08..<0x00091C42` | 314 | `6048b5e7b5b94000f3143c5918f323df480ea0de6959a19083826ec509f06cb9` | GoMore licensed-provider boundary |
-| `0x000651CA..<0x00065304` | 314 | `1d346c3a4978ae586e3e784bb5430d94040c6a40cbac5593600e6e633aac5ea0` | GoMore licensed-provider boundary |
+| `0x00091B08..<0x00091C42` | 314 | `6048b5e7b5b94000f3143c5918f323df480ea0de6959a19083826ec509f06cb9` | owner-authorized GoMore tensor reduction |
+| `0x000651CA..<0x00065304` | 314 | `1d346c3a4978ae586e3e784bb5430d94040c6a40cbac5593600e6e633aac5ea0` | owner-authorized GoMore tensor reduction |
 
 The Ghidra CSV reports 318 bytes for `0x000317CC` while also reporting the inclusive end
 `0x0003190B`. The recovered instruction stream is continuous through the two-byte back-edge at
@@ -44,8 +44,12 @@ reconstructed.
 private tensors, converts private half-precision weights, performs a floating-point convolution,
 and releases provider storage. `0x000651CA` has seven callers at `0x000884EA`, `0x00088546`,
 `0x0008859E`, `0x000885F6`, `0x00088670`, `0x000886C8`, and `0x00088720` in the gated GoMore sleep
-graph and applies private batch-normalization tensors. Both remain licensed-provider-only; no
-weights, tensor ABI, formulas, or substitute neural runtime are implemented.
+graph and applies private batch-normalization tensors. The latter is now transparent as
+`gomore_tensor_batch_normalize_half`: all half-precision parameters and tensor dimensions are
+explicit inputs, allocation/release are replaced by a bounded caller-owned destination, and no
+weights or model bytes are embedded. `0x00091B08` is now likewise transparent as
+`gomore_tensor_conv1d_half`, with explicit half weights, Float32 conversion scratch, output,
+stride, padding, and dimensions.
 
 Reproduce with:
 

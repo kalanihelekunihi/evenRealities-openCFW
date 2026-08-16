@@ -11,8 +11,8 @@ one, [`SECURITY.md`](SECURITY.md), [`PROVENANCE.md`](PROVENANCE.md), and
 | Directory | What it holds |
 | --- | --- |
 | [`correlation/`](correlation) | one record per subsystem, pinning recovered behavior to the stock image -- exact addresses, byte counts, record layouts, and how this implementation corresponds to them |
-| [`boundaries/`](boundaries) | one record per licensed-provider seam -- what the R1-owned adapter implements, and what stays disabled until that provider is supplied |
-| [`closures/`](closures) | Nordic SDK closure proofs |
+| [`boundaries/`](boundaries) | provider-seam records preserving attribution history, source-admission decisions, and any runtime integration that remains fail-closed |
+| [`closures/`](closures) | Nordic SDK closure proofs and the source-built Zephyr/MCUboot bundle boundary |
 | [`reference/`](reference) | function ownership, coverage, the capability ledger, the remaining frontier, the residual provider and production-readiness audit, and the BSim run summaries under `reference/bsim/` |
 
 To understand what the firmware *does*, read `correlation/`. To understand what
@@ -31,7 +31,9 @@ make -C r1 verify                                  # the whole evidence gate at 
 
 The reconstruction needs the vendor byte arrays, which are supplied locally --
 see [`../research/decompilation/rebuild/PROVENANCE.md`](../research/decompilation/rebuild/PROVENANCE.md).
-The firmware itself builds and passes its full test suite without them.
+The firmware itself builds and passes its full test suite without them. Recovered generated-model
+words are checked-in as explicit C constants; the research images remain verification evidence,
+not production build or bundle inputs.
 
 ## Outcome
 
@@ -43,8 +45,11 @@ limited to R1-specific application behavior, configuration, ports, safety correc
 unattributable gaps. It does **not** emit the stock firmware image.
 
 The host build remains an executable protocol/device simulator, and every core translation unit
-compiles freestanding for Cortex-M4. A second target links an actual nRF52840 application from
-Nordic nRF5 SDK 17.1.0 sources against the S140 7.2.0 ABI. It registers the recovered BAE8 service
+compiles freestanding for Cortex-M4. The legacy target links an actual nRF52840 application from
+Nordic nRF5 SDK 17.1.0 sources against the S140 7.2.0 ABI. Its application-only DFU archive has no
+opaque image member, but it still requires preinstalled proprietary S140 and bootloader firmware;
+see [`APPLICATION-BUNDLE-BOUNDARY.md`](closures/APPLICATION-BUNDLE-BOUNDARY.md). It registers the
+recovered BAE8 service
 and four characteristics through Nordic's service helper and connects channel 2 to the bounded EUS
 runtime. Nordic Peer Manager, FDS, fstorage, connection-state, GATT-cache, ATT-MTU/data-length,
 timer, and sorted-list providers are linked with the recovered parameters. The authenticated
@@ -60,9 +65,35 @@ parser remains deliberately unwired, so the both-occupied stop path awaits that 
 identity authorization is resolved as a documented fail-closed policy: stock performs no
 cryptographic product challenge, so `authorized` remains false and sensitive mutations stay
 withheld until an evidence-backed product identity verifier is a deliberate product decision.
-Remaining board pins,
-optical/PMIC devices,
-and boot/update integration remain HAL work. Official Bosch BMA456 SensorAPI v2.29.0 and
+An alternate `openr1_nrf52840` target now replaces both opaque dependencies with
+pinned Zephyr 3.7.2 Bluetooth host/controller source and source-built MCUboot.
+It emits a signed, canonical full-flash bundle and retains every reconstructed
+module; see [`SOURCE-BUILT-ZEPHYR-BUNDLE.md`](closures/SOURCE-BUILT-ZEPHYR-BUNDLE.md).
+Its source NVMC/flash-map adapter now binds the recovered product-data region,
+`kv.bin`, REG1 persistence, and `sleep.db`; pinned FlashDB 2.0.0/FAL 0.5.99 bind
+`health.db` with the exact startup, retained crash-time, reversible 128-byte body codec,
+local-day recovery into live activity/HR/SpO2/HRV runtime caches, and clock-driven
+non-destructive hourly appends of the prior slot. NVS persists
+Bluetooth security state. The same target
+now binds the source-HAL REG1 startup/settings action, recovered SAADC routes,
+phone-synchronized wall clock, reset-reason/no-init trace, and 10-second scheduler watchdog.
+It also hash-gates and links the exact Bosch/ST motion providers, TWIM1 pin route,
+stock probe order, and bounded FIFO API. Its IQS7211E adapter binds the recovered TWIM0 pins,
+LDO/RDY lifecycle, falling-edge worker, restart timer, and `touchSwitch` hook; controller power-up
+remains fail-closed until ring identity and a wear/factory lease are provisioned. The reconstructed
+YHM2710 P1.01 provider now supplies the exact three-client `0xA8`/`0x28` shared-power transitions. The
+same bundle now hash-gates ST's ST25DVxxKC source, retains its bounded mailbox path and P0.03 GPO
+worker, and serializes the P0.11/P0.14 motion and P1.11/P1.14 dock routes with a dock-preempts-motion
+TWIM1 handoff. Its exact P1.10 dock-enable and typed dock-session lease are bound, while NFC starts
+disabled pending an explicit product policy. The wear-driven REG1 automation, motion production consumer,
+destructive slot-0 health format/retry, GoMore reinitialization, unresolved cursor persistence,
+optical algorithm/result composition,
+remaining PMIC devices, retail-layout migration, and owned-ring validation remain HAL work. The
+source-built target now hash-gates and links the source-only Goodix demo/driver subset and binds
+the recovered software-`i2c_4` optical pins, interrupt worker, reset/emitter lifecycle, and YHM
+client bit 1. Startup does not power or sample the device, and the global algorithm ABI remains
+fail-closed.
+Official Bosch BMA456 SensorAPI v2.29.0 and
 ST LIS2DW12 v2.1.0-compatible sources are pinned for the recovered motion variants; only their R1
 configuration/bus/event adapters are implemented locally. The Nordic target now probes the exact
 TWIM1 P0.11/P0.14 address-`0x18` bus in stock LIS2DW12-then-BMA456W order, applies the recovered
@@ -70,14 +101,18 @@ provider configuration, and retains a bounded normalized FIFO API. The target al
 Nordic's exact SPIM2 provider/IRQ path while leaving the proprietary sensor provider behind that
 transport unbound. Its P0.15 interrupt worker,
 higher-level consumer, NFC/TWIM1 coexistence, and owned-ring validation remain open. QST QMA6100
-V1.0 lineage is proven for three provider bodies and ten R1 seams, but stays disabled until
-licensed official source and installed-part evidence are available. The GoMore health-algorithm cluster is likewise
-hard-gated pending an authenticated licensed SDK; see
-[`GOMORE-PROVIDER-BOUNDARY.md`](boundaries/GOMORE-PROVIDER-BOUNDARY.md).
+V1.0 lineage is proven and its complete 17-entry provider/adapter closure now compiles from
+owner-authorized transparent C pending hardware validation. All 362 GoMore executable entries
+likewise compile from transparent C, including their tensor runtime and sleep classifiers; the
+exact sleep-model parameters are checked-in source data rather than stock-image build inputs. See
+[`GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md)
+and [`MODEL-DATA-ADMISSION.md`](correlation/MODEL-DATA-ADMISSION.md).
 The IQS7211E path now uses pinned MIT provider/settings references, a compiled R1-only
-configuration/lifecycle/recovery adapter, and Nordic's TWIM0/GPIOTE drivers for the recovered board
-binding. It remains fail-closed pending the shared-power provider, device identity, and hardware
-validation:
+configuration/lifecycle/recovery adapter, and Nordic's or Zephyr's source TWIM0/GPIOTE drivers for
+the recovered board binding. The alternate full-flash target routes SDA P0.01, SCL P0.12, LDO
+P0.30, and falling-edge RDY P0.17, retaining the recovered delays and 33-byte write bound. It
+binds shared power through reconstructed YHM2710 client bit 2, but remains fail-closed pending
+device identity, wear/factory lease, and hardware validation:
 [`IQS7211E-PROVIDER-BOUNDARY.md`](boundaries/IQS7211E-PROVIDER-BOUNDARY.md).
 The R1-owned ATI-error audit cadence and channel summary are separately reconstructed without bus
 or logging code in
@@ -108,9 +143,9 @@ register and wire operations are reconstructed behind typed board callbacks; see
 [`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md).
 The Nordic image also compiles the exact `nrfx_saadc` provider and recovered AIN5/AIN3/AIN2
 configuration. Four R1 analog adapters and seven product battery routines supply only routes,
-filtering, conversion, curves, and charge-state policy. The linked controller can synchronize
-provider measurements into protocol-visible runtime state, while live sampling remains fail-closed
-until the reconstructed YHM service is bound and validated on owned hardware; see
+filtering, conversion, curves, and charge-state policy. The alternate Zephyr target now binds
+battery sampling to reconstructed YHM client bit 0; periodic runtime production and physical
+validation remain open; see
 [`ANALOG-BATTERY-CORRELATION.md`](correlation/ANALOG-BATTERY-CORRELATION.md).
 The R1-owned three-hour automatic health-history gate is also implemented as a portable controller
 and retained Nordic integration seam. It reproduces the authenticated-phone condition, shared
@@ -253,10 +288,10 @@ The implementation is pinned to these repository-owned evidence sets:
   initializer is retained behind the licensed-provider boundary in
   [`GOMORE-IIR-DESIGNER-PROVIDER-BOUNDARY.md`](boundaries/GOMORE-IIR-DESIGNER-PROVIDER-BOUNDARY.md); no private
   formula or coefficients are reconstructed locally.
-- The 528-byte `sdkAuth` authorization parser at `0x0008EA0C` is retained behind the licensed
-  GoMore boundary in
-  [`GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md`](boundaries/GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md); its private
-  format, tables, validation behavior, and authorization material are not reconstructed.
+- The 528-byte `sdkAuth` authorization parser at `0x0008EA0C` now compiles as bounded
+  `gomore_primitives_sdk_auth_parse`; its decrypt keys and four-parser/three-validator dispatch are
+  explicit typed inputs and no stock authorization material is copied. See
+  [`GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md`](boundaries/GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md).
 - The two-function / 616-byte R1 HRV day-packet reset and synchronization-flush behavior is
   documented in [`HRV-SYNC-FLUSH-CORRELATION.md`](correlation/HRV-SYNC-FLUSH-CORRELATION.md); allocation,
   time/calendar, topic selection, transport, and biometric providers remain external.
@@ -286,8 +321,8 @@ The implementation is pinned to these repository-owned evidence sets:
   external.
 - The seven-function / 1,506-byte R1 wear-fusion closure is implemented as a pure policy over
   normalized observations in [`WEAR-FUSION-CORRELATION.md`](correlation/WEAR-FUSION-CORRELATION.md). Motion,
-  Goodix optical/living algorithms, CMSIS time, and the unresolved sensor-stream framework remain
-  external.
+  Goodix optical/living result composition, CMSIS time, and a live consumer for the reconstructed
+  sensor-stream framework remain external.
 - The four-function / 498-byte R1 BLE connection-parameter observer, role-handle accessors, strict
   fast/slow classifier, and asymmetric retry plan are implemented without BLE or timer side
   effects in
@@ -317,11 +352,14 @@ The implementation is pinned to these repository-owned evidence sets:
   [`YHM2710-REDUCTION-CORRELATION.md`](correlation/YHM2710-REDUCTION-CORRELATION.md); the adjacent watchdog
   now compiles Nordic `nrfx_wdt.c` with only an R1 configuration/feed adapter, documented in
   [`WATCHDOG-DEVICE-CORRELATION.md`](correlation/WATCHDOG-DEVICE-CORRELATION.md).
-- The first source-owned algorithm batches—331 Goodix functions and 198 GoMore primitives/tensor-runtime routines—are
+- The source-owned algorithm batches—339 Goodix functions and all 362 GoMore primitive/shared-runtime/tensor routines—are
   correlated in [`GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOODIX-PRIMITIVES-REDUCTION-CORRELATION.md)
   and [`GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md).
   The tensor subset has its descriptor/allocation seam documented in
   [`GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md`](correlation/GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md).
+- The overlapping Goodix and GoMore generated-model region is stored as one deduplicated
+  11,581-word transparent C initializer with three typed views and independent SHA-pinned checks;
+  see [`MODEL-DATA-ADMISSION.md`](correlation/MODEL-DATA-ADMISSION.md).
 - The complete twelve-function Goodix `goodix_mem`/`GdMem` core, its twenty Goodix call-site
   helpers, and the R1 byte-fill are reconstructed in
   [`GOODIX-HEAP-REDUCTION-CORRELATION.md`](correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md).
@@ -342,12 +380,12 @@ The implementation is pinned to these repository-owned evidence sets:
 - The dormant 1,344-byte R1 health-daily synthetic fixture is byte-pinned and excluded from the
   production image in
   [`HEALTH-DAILY-TEST-CORRELATION.md`](correlation/HEALTH-DAILY-TEST-CORRELATION.md).
-- The indirect 1,234-byte GoMore floating-point neural-layer executor is source-gated, not locally
-  reimplemented, in
+- The indirect 1,234-byte GoMore floating-point neural-layer executor is source-admitted as a
+  checked local implementation in
   [`GOMORE-NEURAL-RUNTIME-BOUNDARY.md`](boundaries/GOMORE-NEURAL-RUNTIME-BOUNDARY.md).
-- The six-function / 2,188-byte paired GoMore sleep-classifier graph closure is source-gated in
+- The six-function / 2,188-byte paired GoMore sleep-classifier graph closure is source-admitted in
   [`GOMORE-SLEEP-GRAPH-PROVIDER-BOUNDARY.md`](boundaries/GOMORE-SLEEP-GRAPH-PROVIDER-BOUNDARY.md).
-- The six-function / 1,890-byte GoMore activity-state window-classifier closure is source-gated in
+- The six-function / 1,890-byte GoMore activity-state window-classifier closure is source-admitted in
   [`GOMORE-ACTIVITY-STATE-PROVIDER-BOUNDARY.md`](boundaries/GOMORE-ACTIVITY-STATE-PROVIDER-BOUNDARY.md).
 - The seven-function Goodix packed-word integrity census, including five newly classified helpers,
   all direct callers, and three identical constant-table copies, is source-gated in
@@ -480,31 +518,16 @@ documented in [`FUNCTION-OWNERSHIP.md`](reference/FUNCTION-OWNERSHIP.md). The ex
 log-prefix adapter boundary, are documented in
 [`NORDIC-SDK-CORRELATION.md`](correlation/NORDIC-SDK-CORRELATION.md). The standard-C/EABI provider subset is
 documented in [`TOOLCHAIN-RUNTIME-CORRELATION.md`](correlation/TOOLCHAIN-RUNTIME-CORRELATION.md).
-The current ledger has 269 GoMore-gated entries, three bounded R1/GoMore adapters, three bounded
-R1 health-storage provider adapters, fifteen R1 TWI provider adapters, nine R1 direct
-record-binding configuration adapters, 394
-Goodix-gated provider/demo/closure entries, 18 clean-room R1/Goodix adapters, 12 clean-room
-R1/IQS7211E configuration/port/policy adapters, 23 clean-room common motion adapters, 27
-ST25DVxxKC provider bodies, eleven R1/ST25DVxxKC adapters, five R1 `i2c_5`/power resource adapters,
-ten R1 internal-flash adapters, four R1 analog adapters, nine blocked generic device-registry
-functions, fourteen blocked time/calendar-provider functions, forty blocked software-TWI-provider
-functions, seven blocked RTC-device-provider functions, thirteen blocked sensor-algorithm
-heap-provider functions, seven R1 automatic health-sync
-functions, five R1 activity offline-sync functions, and
-fifteen R1 scalar-health offline-sync functions, fifteen scalar-health sample-storage functions,
-five R1 activity daily-cache lifecycle functions, five
-R1 activity day-merge/flush functions, five R1 activity accumulator/storage functions, eleven R1
-health crash-record lifecycle functions, one R1/FlashDB handle accessor, one R1 health-database
-startup orchestrator, and nine
-scalar-health daily-cache callbacks. The ledger
-also admits fifteen temperature/stress storage-cache functions while keeping GXCAS and GoMore
-providers gated. It now leaves 685 unclassified
-application entries. The gated provider bodies and
-unclassified entries are not
-eligible for local implementation. IQS7211E's admitted adapters are compiled and linked, but cannot
-energize hardware until its explicit identity and shared-power boundaries are provisioned. The
-ST25DVxxKC path is likewise linked and starts disabled. Nordic startup binds its exact P1.10 board
-lifecycle and exclusive `i2c_5` mutex; the reconstructed YHM board binding must take that same mutex.
+The current 3,167-function ledger has zero unclassified entries, 924 owner-authorized clean-room
+reimplementations, and zero vendor-source-blocked executable entries.
+All 320 formerly opaque Goodix candidates, the six Bravechip middleware families, GXT310,
+QMA6100, and YHM2710 are transparent C. IQS7211E's admitted adapters are compiled and linked; the
+Zephyr target binds YHM shared power but cannot energize touch until identity and wear/factory
+leases are provisioned. The ST25DVxxKC path is likewise linked and starts disabled. Both source
+targets bind the exact P1.10 board lifecycle and exclusive dock ownership; Zephyr additionally
+arbitrates its shared TWIM1 instance against motion. Zephyr also compiles and retains the admitted
+Goodix source-only provider, binds the optical software bus/GPIO/YHM lifecycle, and keeps sampling
+off at boot with biometric calculation fail-closed.
 
 ## Implemented compatibility spine
 
@@ -745,6 +768,7 @@ make -C openR1 test
 make -C openR1 sanitize
 make -C openR1 arm-objects
 make -C openR1 sim
+make -C openR1 zephyr-source-verify
 python3 tools/verify_openr1.py
 ```
 
@@ -753,6 +777,25 @@ UndefinedBehaviorSanitizer. The third compiles every core source as freestanding
 code. The fourth builds a request/response simulator; for example,
 `r1/build/openr1_sim 01 get` emits a synthetic `deviceStatus` response EUS value. The verifier
 reruns all build checks and checks the recovered constants and documented coverage.
+
+The source-built nRF52840 boot/Bluetooth bundle additionally requires the
+pinned Zephyr west workspace and GNU Arm Embedded 9.3.1 toolchain:
+
+```sh
+make -C openR1 zephyr-bundle \
+  WEST=/absolute/zephyr-venv/bin/west \
+  ZEPHYR_WORKSPACE=/absolute/zephyr-workspace \
+  ZEPHYR_TOOLCHAIN=/absolute/gcc-arm-none-eabi-9-2020-q2-update \
+  BMA456_ROOT=/absolute/BMA456_SensorAPI-3266db2c \
+  LIS2DW12_ROOT=/absolute/lis2dw12-pid-8d4bd52 \
+  ST25DVXXKC_ROOT=/absolute/fp-sns-stbox1/Drivers/BSP/Components/st25dvxxkc \
+  FLASHDB_ROOT=/absolute/FlashDB-4e5677408256f82d47cd56a6b04605dcee35ed9a \
+  GOODIX_DEMOCODE_ROOT=/absolute/pebbleos-nonfree-2c0034a23b675a5f9a29e4a47e8b504c7a88e321/gh3x2x
+make -C openR1 zephyr-verify
+```
+
+Use `ZEPHYR_SIGNING_KEY=/secure/owner-mcuboot-ec-p256.pem` to replace the
+transparent MCUboot development key with an owner-controlled P-256 key.
 
 With the pinned external sources and Arm GNU 9.3.1 toolchain:
 
@@ -800,13 +843,14 @@ Bosch/ST driver bodies are assigned to pinned official sources. Their translatio
 R1 TWIM1 selector/configuration/FIFO adapters are compiled and retained; startup probes the
 recovered P0.11/P0.14 address-`0x18` bus in stock LIS2DW12-then-BMA456W order. The two ST25DVxxKC translation units are hash-verified, compiled, and
 retained through the R1 bus/pin/interrupt adapter. NFC remains disabled at startup, while the exact
-P1.10 lifecycle and exclusive `i2c_5` mutex are provisioned. The former TWIM1 instance conflict with
+P1.10 lifecycle and exclusive dock mutex are provisioned. The former TWIM1 instance conflict with
 motion is resolved by the R1-owned arbiter in `openr1_twim1_arbiter.c`: the dock (NFC) context takes
 the bus through a documented handoff, motion never preempts it, and every transfer by a non-owner
-fails explicitly. Shared-power dock coexistence and owned-hardware validation remain gates.
-QST remains provider-gated. The IQS7211E Nordic transport, GPIO lifecycle, active-low IRQ worker,
-restart timer, and `touchSwitch` policy hook are retained in the image, but live touch remains gated
-on the unresolved shared-power provider, identity provisioning, wear lease, and physical validation.
+fails explicitly. Physical dock coexistence and owned-hardware validation remain gates.
+The reconstructed QST-lineage QMA6100 closure remains unbound pending installed-part confirmation.
+The IQS7211E Nordic transport, GPIO lifecycle, active-low IRQ worker,
+restart timer, and `touchSwitch` policy hook are retained in the image. Zephyr binds reconstructed
+shared power; live touch remains gated on identity provisioning, wear lease, and physical validation.
 Code signing, image combination, and device installation remain separate from this source
 reconstruction.
 

@@ -1,5 +1,9 @@
 # Attribution re-examination — goodix_gh3x2x_candidate (2026-08)
 
+> Historical attribution audit. Its binary-library findings remain provenance evidence and the
+> vendor archives remain excluded from production. The implementation gate was later superseded
+> by the owner-authorized transparent-C Goodix reduction and source-admitted model data.
+
 ## Family
 
 499 functions / 79,948 bytes, all `vendor_source_required_not_redistributable`. Embedded version

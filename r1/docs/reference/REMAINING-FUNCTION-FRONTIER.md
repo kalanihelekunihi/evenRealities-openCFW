@@ -94,9 +94,9 @@ The 602-byte private IIR coefficient designer at `0x000717AC` is now routed to t
 gate through its sole caller in the already gated sleep initializer, bringing the GoMore boundary
 to 244 exact functions.
 The noncontiguous 528-byte `sdkAuth` parser at `0x0008EA0C` is now routed through its sole caller
-in the already gated `gomore_setAuthParameters` path, bringing the GoMore boundary to 245 exact
-functions. Its private parser, dispatch tables, validation behavior, and authorization material
-remain provider-only.
+in the `gomore_setAuthParameters` path, bringing the historical GoMore boundary to 245 exact
+functions. It is now source-admitted with explicit decrypt keys and typed dispatch callbacks; no
+stock authorization material is copied.
 Three sleep-stage statistics functions / 796 bytes are now routed through their exclusive
 callgraph into the same licensed-provider gate, bringing the GoMore boundary to 248 exact
 functions. The two statistics blocks and their shared timestamp-indexed stage lookup helper remain
@@ -170,8 +170,8 @@ A FreeRTOS stack-overflow callback / 72 bytes is now source-routed as R1 provide
 the upstream four-word sentinel check remains FreeRTOS-Kernel provider code.
 FreeRTOS 10.5.1 `prvReloadTimer` / 40 bytes is source-routed to the authenticated upstream core;
 its absence from Nordic's bundled 10.0.0 core establishes the core-version/provider split.
-Eight resolved branch-only thunks / 32 bytes now inherit their exact target ownership: one remains
-Goodix-gated, one aliases an R1 Goodix adapter, and six alias R1 daily-cache metadata operations.
+Eight resolved branch-only thunks / 32 bytes now inherit their exact target ownership: one maps to
+reconstructed Goodix code, one aliases an R1 Goodix adapter, and six alias R1 daily-cache metadata operations.
 Application `SystemInit` and `nvmc_config` / 544 bytes are now exact Nordic source routes; the
 recovered NFCT-as-GPIO and GPIO pin-reset switches are build configuration only.
 Nordic `xfer_completeness_check` / 98 bytes is now routed to `nrfx_twim.c`.
@@ -240,16 +240,16 @@ families and performs only the deterministic dual-channel trimmed/calibrated red
 sleep, GoMore, GXCAS sensor I/O, timing, logging, and persistence remain provider seams. See
 [`FRONTIER-314-328-CORRELATION.md`](../correlation/FRONTIER-314-328-CORRELATION.md).
 
-The former 334...342-byte tier is closed as two bounded R1 policies, two GoMore provider
-functions, and one Goodix dlCom provider function. The local APIs encode only the factory-test
-thread envelope and plan periodic peripheral-link/advertising watchdog actions. Private GoMore
-tensor/energy behavior and Goodix peak selection remain licensed-provider-only. See
+The former 334...342-byte tier is closed as two bounded R1 policies, two transparent GoMore
+functions, and one transparent Goodix dlCom function. The local APIs encode the factory-test
+thread envelope, periodic peripheral-link/advertising watchdog actions, recurrent tensor cell,
+energy estimator update, and Goodix peak selection. See
 [`FRONTIER-334-342-CORRELATION.md`](../correlation/FRONTIER-334-342-CORRELATION.md).
 
-The former 348...354-byte tier is closed as four bounded R1 policies and one GoMore provider
-function. The local APIs encode only a BLE thread envelope, redact the LTK diagnostic, plan safe
-user-profile persistence/reinitialization, and plan glasses-status lifecycle actions. The GoMore
-sensor-update orchestrator remains licensed-provider-only. See
+The former 348...354-byte tier is closed as four bounded R1 policies and one transparent GoMore
+function. The local APIs encode a BLE thread envelope, redact the LTK diagnostic, plan safe
+user-profile persistence/reinitialization, plan glasses-status lifecycle actions, and perform the
+typed GoMore sensor-update orchestration without opaque code or state. See
 [`FRONTIER-35X-CORRELATION.md`](../correlation/FRONTIER-35X-CORRELATION.md).
 
 The former five-way 364-byte tier is closed without admitting vendor code. The twin heart-rate
@@ -371,9 +371,24 @@ rejecting stock duplicate/discontinuous/repeated-checksum ambiguities. See
 The former 430-byte leader at `0x00069128`, the adjacent 326-byte first statistics block, and their
 exclusive 40-byte stage lookup helper are now a three-function / 796-byte GoMore sleep-stage
 statistics closure. Exact bodies, finalizer calls, helper caller census, 0.5-minute epoch scale,
-output-block widths, and denominator behavior are pinned. No local statistics algorithm is
-admitted; an authenticated licensed GoMore provider is required. See
+output-block widths, and denominator behavior are pinned. All three functions are now source-admitted
+as bounded transparent C; the interval block preserves leading/middle/trailing awake accounting,
+unknown-nonzero sleep behavior, efficiency arithmetic, and the seven-field invalid sentinel. See
 [`GOMORE-SLEEP-STAGE-STATISTICS-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-SLEEP-STAGE-STATISTICS-PROVIDER-BOUNDARY.md).
+The finalizer's 580-byte score consumer at `0x0006778C` is now source-admitted as well, with typed
+19-float input, exact raw-bit band boundaries, double-tanh duration shaping, wake penalty,
+REM/deep weights, final clamp, and the stock exact-540-minute zero-parameter defect.
+The 444-byte sleep peak-rate interpolator at `0x00074D60` is likewise source-admitted: its only
+algorithm dependency is the already-local valid-anchor finder, and its exact 60-BPM defaults,
+invalid-marker handling, spacing rates, and grid interpolation use bounded caller spans.
+The 280-byte caller at `0x00088AAC` is now source-admitted too, closing spacing invalidation,
+mode-specific 6/9/12-update cadence, 90-float rotation, normalized tail generation, and counter state.
+The adjacent 110-byte carryover leaf at `0x00076502` is source-admitted with bounded suffix
+compaction, exact above-749 retention, subtraction by 750, and high-bit invalid-marker preservation.
+The 112-byte valley-candidate leaf at `0x00064A28` is source-admitted with bounded 256-value input,
+zero-filled twelve-index output, asymmetric local-minimum comparison, and strict positive curvature.
+The 128-byte history-advance leaf at `0x0008EE3A` is source-admitted over a typed 396-byte state,
+closing the one/two-block 25-sample shift and the greater-than-two full-reset lifecycle.
 
 The former tied 430-byte leaders at `0x0004D654` and `0x0004DA28` are now a symmetric
 two-function / 860-byte R1 phone/glasses connection-role assignment closure. Both bodies, caller
@@ -502,12 +517,57 @@ extrema banks, and square-root dependency are explicit. Tests pin the exact
 range/deviation/extrema clustering and consecutive-window transition. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x0008EA0C` is a one-function / 528-byte GoMore SDK
-authorization-parser boundary. Its two exact executable ranges, sole callsite `0x0006B38A`,
-`sdkAuth` diagnostics, private dispatch-table use, R1 dual-AES seam, and toolchain `strtok`
-dependency are pinned. The sole caller at `0x0006B27C` is already GoMore-gated and identifies the
-operation as `gomore_setAuthParameters`; no outside caller exists. No private parser, table,
-validation routine, key/authorization material, or live authentication is admitted. See
+The former largest unknown at `0x000856EC` is the 1,154-byte compiler-scattered NADT window
+classifier. It now compiles as `goodix_primitives_nadt_window_classify` with four bounded metric
+lanes, separate tail/range histories, explicit persistent state and diagnostics, the exact
+rounded square-root energy and raw-bit ratio gates, and typed primary/auxiliary/alternate
+classifier bindings. Tests cover every transition family and extent rejection. See
+[`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
+
+The former largest Goodix residual at `0x00047240` is the 3,240-byte compiler-scattered NADT
+primary-signal classifier and sole algorithm dependency of the now-local window classifier. It
+now compiles as `goodix_primitives_nadt_primary_signal_classify` with paired bounded Int32 spans,
+typed configuration/state/diagnostics, and a fixed workspace replacing every stock allocation.
+Tests pin its disabled, near-zero transition, 100-sample quarter-range, and malformed-input paths.
+See [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
+
+The former 1,162-byte NADT harmonic-candidate selector at `0x00035850` now compiles as
+`goodix_primitives_nadt_harmonic_candidates_select`. Its exact three-lane harmonic search uses a
+fixed caller workspace in place of six transient allocations and supplies the final local
+dependency of `goodix_primitives_nadt_spectral_peak_prepare`. See
+[`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
+
+The former 1,294-byte GH_NADT streaming root at `0x0006E008` now compiles as
+`goodix_primitives_nadt_stream_process`. Typed plan/state records replace the private runtime and
+configuration globals, fixed caller histories replace the stock RAM banks, and the complete
+sample-preparation, optical-transform, rolling-statistics, window-dispatch, compaction, and result
+path reaches already-local dependencies. Tests pin cadence, first-window dispatch, history
+geometry, result flags, uninitialized state, and malformed-input behavior. See
+[`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
+
+The former 1,240-byte GH_SPO2/dlCom stream helper at `0x0003113C` now compiles as
+`goodix_primitives_spo2_stream_accumulate`. It exposes four optical filter lanes, adaptive scale
+state, packed histories, decimal-residual/motion processing, percentile histories, and caller
+scratch while retaining the first-window cleanup/replay and rolling update paths. Tests cover the
+fill boundary, replay geometry, subsequent percentile update, packed lane cadence, and preflight
+rejection. See
+[`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
+
+The former 1,382-byte GH_HR root at `0x0006D51C` now compiles as
+`goodix_primitives_hr_process`. It exposes channel geometry, counted signal/motion/quality
+histories, feature/extrema state, candidate and quality policy, fallback state, and reference-rate
+recovery; `0x00032808` now compiles as the typed `goodix_primitives_hr_decision_update` state machine. Tests cover a full
+periodic candidate window, exact rate/quality emission, invalid-input clearing and quality 25,
+history updates, and preflight no-mutation. See
+[`GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md).
+
+The former largest unknown at `0x0008EA0C` now compiles as the bounded
+`gomore_primitives_sdk_auth_parse`. Its two exact executable ranges, sole callsite `0x0006B38A`,
+`sdkAuth` diagnostics, dispatch-table use, R1 dual-AES seam, and toolchain `strtok` dependency are
+pinned. The sole caller at `0x0006B27C` compiles as typed
+`gomore_primitives_auth_parameters_setup`; no outside caller exists. Both 32-byte decrypt keys,
+message matching, four field parsers, and three validators are explicit caller bindings, so no
+stock key or authorization material is admitted. See
 [`GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-AUTH-PARSER-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x000442F4` is closed with its 32-byte builder-reset helper as a
@@ -611,13 +671,15 @@ branch handoff explicit; only the operator/model contents remain typed
 bindings. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x0007DA30` is now closed with eight recursive descendants as a
+The former largest unknown at `0x0007DA30` was closed with eight recursive descendants as a
 nine-function / 2,360-byte GoMore energy-model boundary. Dispatcher `0x0002F488` is called at
-exactly three sites by already gated energy output producer `0x0005F56C` and has no other caller.
+exactly three sites by now source-admitted energy output producer `0x0005F56C` and has no other caller.
 Its private mode families, table-driven estimator, interpolation, projection, scaling, and state
 helper are all body- and caller-pinned. Existing GoMore helpers and Arm runtime math remain
-excluded from the supplemental census. The complete GoMore gate was 243 entries at that stage; no private
-energy formula or table is recreated locally. See
+excluded from the supplemental census. The complete GoMore gate was 243 entries at that stage.
+Under the later owner-authorized reduction, all nine bodies, formulas, and 81 table values plus
+the complete 2,102-byte producer are now transparent C; the paragraph above records the historical
+frontier classification. See
 [`GOMORE-ENERGY-MODEL-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-ENERGY-MODEL-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x00095828` is now source-admitted as
@@ -672,12 +734,13 @@ four-sample cardinal-spline refinement. Static curve coordinates are explicit bi
 41-point interpolation bank is caller-owned. See
 [`GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x0006138C` is now closed with five private helpers as a
+The former largest unknown at `0x0006138C` is now source-admitted with five private helpers as a
 six-function / 1,890-byte GoMore activity-state window classifier. Its only direct caller is the
-already gated GoMore output orchestrator at `0x0005FF94`; every newly classified helper is private
-to the closure. Four executable segments, three embedded eight-byte `TBB` tables, the adjacent
-literal pool, and all exact caller sets are pinned. OpenR1 does not recreate the seven-state
-classifier, 25/250-sample decision process, statistics, thresholds, or transitions. See
+now-source-admitted GoMore output orchestrator at `0x0005FF94`; every helper is private to the closure.
+Four executable segments, three embedded eight-byte `TBB` tables, the adjacent literal pool, and
+all exact caller sets remain pinned. The transparent reconstruction includes the 1,028-byte state,
+25/250-sample decision process, statistics, thresholds, transitions, adaptive holds, outputs, and
+bounded representation of the stock 26/27-sample metadata overwrite. See
 [`GOMORE-ACTIVITY-STATE-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-ACTIVITY-STATE-PROVIDER-BOUNDARY.md).
 
 The former largest unknown at `0x0002874C` is now closed with paired 892-byte and 884-byte GoMore
@@ -748,8 +811,8 @@ The former largest unknown at `0x00035850` is pinned with its sole direct caller
 `0x000766AC` under the existing Goodix GH_NADT provider boundary. The exact direct chain is
 `0x0006E838 -> 0x000766AC -> 0x00035850`: the already pinned GH_NADT preprocessing core calls a
 478-byte spectral peak-preparation pipeline, which calls the 1,162-byte harmonic-candidate
-selector. The 478-byte stage is now transparent C with caller workspace, explicit scale bindings,
-and a typed downstream callback. The larger harmonic selector retains its provider gate. Both
+selector. Both stages are now transparent C with caller workspaces and explicit math/scale
+bindings; the larger maps to `goodix_primitives_nadt_harmonic_candidates_select`. Both
 body hashes, the selector's split executable extent, and both callsites remain pinned. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
@@ -758,8 +821,9 @@ floating-point neural-layer executor. The exact pointer `0x00076BDD` at `0x00074
 24-byte layer constructor, all sixteen constructor callsites, specialized 1/3/5-wide convolution
 paths, activation behavior, constants, and body hash are pinned. Two callers build the already
 hash-pinned paired GoMore sleep classifier graphs and the third builds another health-model graph.
-No local neural runtime or model implementation is admitted; a matching licensed provider is
-required. See
+It now compiles as `quantized_runtime_float_conv1d_execute`: virtual padding replaces the stock
+in-place move, overlap uses caller workspace, and the layer constructor stores the local target
+adapter. Model weights and biases remain explicit bounded inputs. See
 [`GOMORE-NEURAL-RUNTIME-BOUNDARY.md`](../boundaries/GOMORE-NEURAL-RUNTIME-BOUNDARY.md).
 
 The former largest unknown at `0x0008B378` is now closed as a dormant R1 health-daily synthetic
@@ -793,10 +857,13 @@ with their shipped-image non-reachability still pinned.
 The sole-caller diagnostic formatter at `0x0006CCC0` is likewise body-, callsite-, and
 field-string-pinned and source-admitted through bounded typed sinks as provider support rather
 than product telemetry.
-Every executable segment,
+The final root `0x0006C6A8` is source-admitted as
+`goodix_primitives_spo2_process`, with fixed caller workspace replacing all three transient
+allocations and typed bindings for packed banks, spectra, report state, quantized runtime, and
+model dispatch. Every executable segment,
 function hash, direct-caller map, marker, and dispatcher word is pinned. Shared runtime helpers are
-not claimed by outside-caller exclusivity. The recurrent runtime and first graph topology are
-local, but no opaque SpO2/dlCom weight table or remaining algorithm closure is admitted. See
+not claimed by outside-caller exclusivity. The recurrent runtime and graph topology are local;
+no executable Goodix closure remains opaque and model inputs are explicit data bindings. See
 [`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
 
 The Goodix GH_HR processing component is now extended by 31 formerly unclassified functions /
@@ -804,20 +871,21 @@ The Goodix GH_HR processing component is now extended by 31 formerly unclassifie
 `0x0006D51C` as its sole direct caller. Recursive direct-call traversal from that provider core
 closes all 31 functions within four levels, with no outside direct callers. Exact executable
 segments, hashes, and callsites are pinned, including the four-segment `0x00032808` body. All 31
-remain licensed-provider code and no heart-rate algorithm is admitted locally. See
+are now source-admitted owner-authorized clean-room C; the original provider attribution and exact
+callgraph remain pinned. See
 [`GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-HR-PROCESSING-PROVIDER-BOUNDARY.md).
 
 The Goodix GH_NADT component is now closed as 58 functions / 19,274 executable bytes. Its exact
 `GH_NADT_pre_pv_v1.0.2.0_nc_548d894d` version builder was already provider-gated; 57 additional
 functions / 19,148 bytes now leave the unclassified frontier. Direct edges close the chain from
 existing Goodix candidate `0x0002CDD4` through streaming process `0x0006E008`, window classifier
-`0x000856EC`, primary classifier `0x00047240`, the preprocessing spectral/harmonic pair, and the
+`0x000856EC`, the now-local primary classifier `0x00047240`, the preprocessing spectral/harmonic pair, and the
 now source-admitted state/output selector `0x00036F88`, the source-admitted signal-confidence tracker
 at `0x00095828`, and the generated-model inference graph rooted at `0x000968C4`, with processing
 every 25 samples. The signal-confidence graph's `0x00029144` dual-window feature/correlation
 extractor is now source-admitted with fixed caller workspace, exact packed-5/10 conversion, and
 typed tail-window spans. All segments, hashes, and direct callsites are pinned. The remaining
-classifier, state-selection, harmonic-selection, and generated-subgraph bodies retain the
+generated-subgraph bodies retain the
 non-redistributable provider gate. See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
@@ -937,14 +1005,18 @@ rests on the callgraph contexts; the identical 54-byte bodies and constants corr
 private symbol or local implementation is admitted. See
 [`GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md`](../boundaries/GOODIX-PACKED-WORD-INTEGRITY-BOUNDARY.md).
 
-The composite sensor-algorithm initializer at `0x00071A32` is now vendor-gated with seven helper
-functions as an exact 586-byte GoMore candidate boundary. Its only caller is the already-pinned
-GoMore sleep body at `0x0006FEA0`; it initializes ten existing GoMore-gated substates plus the
-newly bounded helpers. The 8-byte reset at `0x00071D96` exactly duplicates the gated body at
-`0x0007170A`, but the promotion rests on exclusive callgraph context, not generic byte identity.
-No private symbol is asserted; both reset leaves were subsequently source-admitted as one checked
-C body, while the composite initializer remains gated. See
+The composite sensor-algorithm initializer at `0x00071A32` and its seven audited helpers form an
+exact 586-byte GoMore candidate boundary. Its only caller is the byte-pinned GoMore sleep body
+at `0x0006FEA0`; it initializes ten GoMore-attributed substates plus the newly bounded helpers.
+The 8-byte reset at `0x00071D96` exactly duplicates the body at `0x0007170A`, but the attribution
+rests on exclusive callgraph context, not generic byte identity. All eight entries have since
+crossed the owner-authorized source gate: the composite root is transparent C with typed callback
+and configuration inputs, and both reset leaves share one checked C body. See
 [`GOMORE-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-PROVIDER-BOUNDARY.md).
+The caller at `0x0006FEA0` is now transparent as
+`gomore_primitives_sleep_algorithm_initialize`; its authorization, previous-state validation,
+profile conversion, and complete child-initializer sequence use explicit typed providers and no
+absolute firmware state.
 
 The linked sensor-algorithm heap is now closed as thirteen exact functions and 1,202 executable
 bytes. Its 44-byte control prefix, two bitmap-selected size-ordered bins, tagged eight-byte block
@@ -1093,5 +1165,5 @@ followed by 220 bytes at `0x0008F780`, 218 bytes at `0x0008EF28`, and 216 bytes 
 `0x0003E7A8`. Each must receive the same
 function-local evidence, provider screening, behavioral implementation, and exact body pinning
 before ownership changes. Nordic- or third-party-looking clusters remain source-correlation tasks,
-not clean-room implementation tasks. QMA6100, YHM2710, Goodix, and GoMore stay gated exactly as
-documented elsewhere.
+not clean-room implementation tasks. QMA6100, YHM2710, and Goodix have crossed the owner-authorized
+source gate; the remaining GoMore functions stay gated as documented elsewhere.

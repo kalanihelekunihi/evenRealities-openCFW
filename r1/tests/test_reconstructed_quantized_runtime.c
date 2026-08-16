@@ -49,6 +49,8 @@ static const quantized_runtime_providers test_providers = {
     0u,
     0u,
     0u,
+    0u,
+    0u,
 };
 
 static void test_rt_reset(quantized_runtime *rt) {
@@ -807,6 +809,124 @@ static void test_goodix_layer_block_builder(void) {
         shape, &consumed, &end));
 }
 
+static void test_gomore_sleep_graph_builders(void) {
+    quantized_runtime rt;
+    test_rt_reset(&rt);
+    rt.providers.vector_30534 = (uintptr_t)UINT32_C(0x00030535);
+    rt.providers.vector_95b20 = (uintptr_t)UINT32_C(0x00095B21);
+    rt.providers.run_76bdc = (uintptr_t)UINT32_C(0x00076BDD);
+    rt.providers.vector_35d12 = (uintptr_t)UINT32_C(0x00035D13);
+    rt.providers.vector_7ca94 = (uintptr_t)UINT32_C(0x0007CA95);
+
+    uint32_t model_words[
+        QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS];
+    for (size_t index = 0u;
+            index < QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS;
+            ++index) {
+        model_words[index] = UINT32_C(0x31000000) + (uint32_t)index;
+    }
+    quantized_runtime_gomore_sleep_graph graph;
+    size_t consumed = 0u;
+    uint32_t end = 0u;
+    const uint32_t base = UINT32_C(0x20010000);
+
+    assert(sizeof(graph.bytes) ==
+           QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_BYTES);
+    assert(quantized_runtime_gomore_sleep_graph_family_zero_build(
+        &rt, &graph, model_words,
+        QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS,
+        base, &consumed, &end));
+    assert(consumed ==
+           QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS);
+    assert(end == base +
+           QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS * 4u);
+    assert(test_load_u32(graph.bytes + 0x000u) == 0u);
+    assert(test_load_u32(graph.bytes + 0x004u) == UINT32_C(0x3F800000));
+    assert(test_load_u32(graph.bytes + 0x008u) ==
+           (uint32_t)(uintptr_t)&quantized_runtime_float_to_int8_quantize);
+    static const uint8_t zero_first_header[8] = {
+        5u, 1u, 2u, 2u, 4u, 27u, 1u, 0u,
+    };
+    assert(memcmp(graph.bytes + 0x00Cu, zero_first_header,
+                  sizeof(zero_first_header)) == 0);
+    assert(test_load_u32(graph.bytes + 0x018u) == base);
+    assert(test_load_u32(graph.bytes + 0x07Cu) == model_words[524]);
+    assert(test_load_u32(graph.bytes + 0x080u) == model_words[525]);
+    assert(test_load_u32(graph.bytes + 0x0E4u) == model_words[728]);
+    assert(test_load_u32(graph.bytes + 0x0E8u) == model_words[729]);
+    assert(test_load_u32(graph.bytes + 0x090u) == UINT32_C(0x00030535));
+    assert(test_load_u32(graph.bytes + 0x0F8u) == UINT32_C(0x00010200));
+    assert(test_load_u32(graph.bytes + 0x0FCu) == UINT32_C(0x00035D13));
+    assert(test_load_u32(graph.bytes + 0x100u) == 1u);
+    assert(test_load_u32(graph.bytes + 0x104u) == UINT32_C(0x0007CA95));
+    assert(test_load_u32(graph.bytes + 0x138u) == UINT32_C(0x00020100));
+    assert(test_load_u32(graph.bytes + 0x13Cu) == UINT32_C(0x00035D13));
+    assert(test_load_u32(graph.bytes + 0x140u) == UINT32_C(0x00095B21));
+    assert(graph.bytes[0x149u] == 8u && graph.bytes[0x191u] == 8u);
+    assert(test_load_u32(graph.bytes + 0x1A8u) == 1u);
+    assert(test_load_u32(graph.bytes + 0x1ACu) == 0u);
+    assert(test_load_u32(graph.bytes + 0x1B0u) == 0u);
+    assert(test_load_u32(graph.bytes + 0x1B4u) ==
+           (uint32_t)(uintptr_t)&quantized_runtime_float_add_execute);
+    assert(test_load_u32(graph.bytes + 0x074u) == 0u &&
+           test_load_u32(graph.bytes + 0x0DCu) == 0u &&
+           test_load_u32(graph.bytes + 0x1A4u) == 0u);
+
+    model_words[0] = UINT32_C(0xBF000000);
+    model_words[1] = UINT32_C(0x3FC00000);
+    assert(quantized_runtime_gomore_sleep_graph_family_nonzero_build(
+        &rt, 1u, &graph, model_words,
+        QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY1_MODEL_WORDS,
+        base, &consumed, &end));
+    assert(consumed ==
+           QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY1_MODEL_WORDS);
+    assert(end == base +
+           QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY1_MODEL_WORDS * 4u);
+    assert(test_load_u32(graph.bytes + 0x000u) == UINT32_C(0xBF000000));
+    assert(test_load_u32(graph.bytes + 0x004u) == UINT32_C(0x3FC00000));
+    static const uint8_t nonzero_first_header[8] = {
+        5u, 1u, 2u, 2u, 4u, 32u, 1u, 0u,
+    };
+    assert(memcmp(graph.bytes + 0x00Cu, nonzero_first_header,
+                  sizeof(nonzero_first_header)) == 0);
+    assert(test_load_u32(graph.bytes + 0x018u) == base + 8u);
+    assert(test_load_u32(graph.bytes + 0x07Cu) == model_words[335]);
+    assert(test_load_u32(graph.bytes + 0x080u) == model_words[336]);
+    assert(test_load_u32(graph.bytes + 0x0E4u) == model_words[461]);
+    assert(test_load_u32(graph.bytes + 0x0E8u) == model_words[462]);
+    assert(graph.bytes[0x149u] == 4u && graph.bytes[0x191u] == 4u);
+
+    assert(quantized_runtime_gomore_sleep_graph_family_nonzero_build(
+        &rt, 2u, &graph, model_words,
+        QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY2_MODEL_WORDS,
+        base, &consumed, &end));
+    assert(consumed ==
+           QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY2_MODEL_WORDS);
+    assert(end == base +
+           QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY2_MODEL_WORDS * 4u);
+    assert(graph.bytes[0x149u] == 8u && graph.bytes[0x191u] == 8u);
+
+    memset(&graph, 0xA5, sizeof(graph));
+    consumed = 123u;
+    end = UINT32_C(0x12345678);
+    assert(!quantized_runtime_gomore_sleep_graph_family_nonzero_build(
+        &rt, 3u, &graph, model_words,
+        QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY2_MODEL_WORDS,
+        base, &consumed, &end));
+    assert(consumed == 123u && end == UINT32_C(0x12345678));
+    for (size_t index = 0u; index < sizeof(graph.bytes); ++index) {
+        assert(graph.bytes[index] == UINT8_C(0xA5));
+    }
+    assert(!quantized_runtime_gomore_sleep_graph_family_zero_build(
+        &rt, &graph, model_words,
+        QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS - 1u,
+        base, &consumed, &end));
+    assert(!quantized_runtime_gomore_sleep_graph_family_zero_build(
+        &rt, &graph, model_words,
+        QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS,
+        base + 1u, &consumed, &end));
+}
+
 static void test_goodix_second_graph_builder(void) {
     quantized_runtime rt;
     test_rt_reset(&rt);
@@ -1522,6 +1642,154 @@ static void test_float_dense_executor(void) {
            QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT);
 }
 
+static void test_float_conv1d_executor(void) {
+    float input_values[8] = {
+        1.0f, 2.0f, 3.0f, 4.0f,
+        10.0f, 20.0f, 30.0f, 40.0f,
+    };
+    float output_values[8] = {0.0f};
+    quantized_runtime_exec_tensor input = {
+        4u, {1u, 2u, 4u}, input_values,
+    };
+    quantized_runtime_exec_tensor output = {
+        4u, {1u, 2u, 4u}, output_values,
+    };
+    const float weights[12] = {
+        1.0f, 0.0f, -1.0f, 0.1f, 0.0f, -0.1f,
+        0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 0.0f,
+    };
+    const float biases[2] = {0.5f, -1.0f};
+    quantized_runtime_float_conv1d_descriptor descriptor = {
+        3u, 1u, 1u, 1u, 2u, 2u, 1u, 0u, 0.0f,
+    };
+    const quantized_runtime_float_conv1d_model model = {
+        weights, 12u, biases, 2u,
+    };
+    float workspace[8] = {0.0f};
+    quantized_runtime_float_conv1d_io io = {
+        &input, &output, sizeof(input_values), sizeof(output_values),
+        workspace, sizeof(workspace), test_expf,
+    };
+    assert(quantized_runtime_float_conv1d_execute(
+               &descriptor, &model, &io) == QUANTIZED_RUNTIME_STATUS_OK);
+    const float expected[8] = {
+        -3.5f, -3.5f, -3.5f, 6.5f,
+        0.5f, 2.0f, 3.5f, 2.5f,
+    };
+    assert(memcmp(output_values, expected, sizeof(expected)) == 0);
+
+    descriptor.activation = 1u;
+    descriptor.alpha = 0.25f;
+    assert(quantized_runtime_float_conv1d_execute(
+               &descriptor, &model, &io) == QUANTIZED_RUNTIME_STATUS_OK);
+    assert(output_values[0] == -0.875f && output_values[3] == 6.5f);
+
+    /* Overlapping output uses caller workspace and leaves the as-yet unread
+     * input stable while accumulating. */
+    descriptor.activation = 0u;
+    output.data = input_values;
+    assert(quantized_runtime_float_conv1d_execute(
+               &descriptor, &model, &io) == QUANTIZED_RUNTIME_STATUS_OK);
+    assert(memcmp(input_values, expected, sizeof(expected)) == 0);
+
+    const float depthwise_input_values[6] = {
+        1.0f, 2.0f, 3.0f, 10.0f, 20.0f, 30.0f,
+    };
+    float depthwise_output_values[6] = {0.0f};
+    const float depthwise_weights[6] = {
+        0.0f, 1.0f, 0.0f, 0.0f, 2.0f, 0.0f,
+    };
+    const float depthwise_biases[2] = {0.0f, 1.0f};
+    input = (quantized_runtime_exec_tensor){
+        4u, {1u, 2u, 3u}, (void *)depthwise_input_values,
+    };
+    output = (quantized_runtime_exec_tensor){
+        4u, {1u, 2u, 3u}, depthwise_output_values,
+    };
+    descriptor = (quantized_runtime_float_conv1d_descriptor){
+        3u, 1u, 1u, 1u, 2u, 2u, 2u, 0u, 0.0f,
+    };
+    const quantized_runtime_float_conv1d_model depthwise_model = {
+        depthwise_weights, 6u, depthwise_biases, 2u,
+    };
+    io = (quantized_runtime_float_conv1d_io){
+        &input, &output, sizeof(depthwise_input_values),
+        sizeof(depthwise_output_values), workspace, sizeof(workspace),
+        test_expf,
+    };
+    assert(quantized_runtime_float_conv1d_execute(
+               &descriptor, &depthwise_model, &io) ==
+           QUANTIZED_RUNTIME_STATUS_OK);
+    const float depthwise_expected[6] = {
+        1.0f, 2.0f, 3.0f, 21.0f, 41.0f, 61.0f,
+    };
+    assert(memcmp(depthwise_output_values, depthwise_expected,
+                  sizeof(depthwise_expected)) == 0);
+
+    const float kernel5_input_values[5] = {-1.0f, -2.0f, -3.0f, 4.0f, 5.0f};
+    float kernel5_output_values[5] = {0.0f};
+    const float kernel5_weights[5] = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
+    const float kernel5_bias = 0.0f;
+    input = (quantized_runtime_exec_tensor){
+        4u, {1u, 1u, 5u}, (void *)kernel5_input_values,
+    };
+    output = (quantized_runtime_exec_tensor){
+        4u, {1u, 1u, 5u}, kernel5_output_values,
+    };
+    descriptor = (quantized_runtime_float_conv1d_descriptor){
+        5u, 1u, 2u, 2u, 1u, 1u, 1u, 1u, 0.25f,
+    };
+    const quantized_runtime_float_conv1d_model kernel5_model = {
+        kernel5_weights, 5u, &kernel5_bias, 1u,
+    };
+    io = (quantized_runtime_float_conv1d_io){
+        &input, &output, sizeof(kernel5_input_values),
+        sizeof(kernel5_output_values), workspace, sizeof(workspace),
+        test_expf,
+    };
+    assert(quantized_runtime_float_conv1d_execute(
+               &descriptor, &kernel5_model, &io) ==
+           QUANTIZED_RUNTIME_STATUS_OK);
+    const float kernel5_expected[5] = {-1.5f, -0.5f, 3.0f, 4.0f, 6.0f};
+    assert(memcmp(kernel5_output_values, kernel5_expected,
+                  sizeof(kernel5_expected)) == 0);
+
+    const float sigmoid_input_values[3] = {-100.0f, 0.0f, 100.0f};
+    float sigmoid_output_values[3] = {0.0f};
+    const float unit_weight = 1.0f;
+    const float zero_bias = 0.0f;
+    input = (quantized_runtime_exec_tensor){
+        4u, {1u, 1u, 3u}, (void *)sigmoid_input_values,
+    };
+    output = (quantized_runtime_exec_tensor){
+        4u, {1u, 1u, 3u}, sigmoid_output_values,
+    };
+    descriptor = (quantized_runtime_float_conv1d_descriptor){
+        1u, 1u, 0u, 0u, 1u, 1u, 1u, 2u, 0.0f,
+    };
+    const quantized_runtime_float_conv1d_model sigmoid_model = {
+        &unit_weight, 1u, &zero_bias, 1u,
+    };
+    io = (quantized_runtime_float_conv1d_io){
+        &input, &output, sizeof(sigmoid_input_values),
+        sizeof(sigmoid_output_values), workspace, sizeof(workspace),
+        test_expf,
+    };
+    assert(quantized_runtime_float_conv1d_execute(
+               &descriptor, &sigmoid_model, &io) ==
+           QUANTIZED_RUNTIME_STATUS_OK);
+    assert(test_f32_bits(sigmoid_output_values[0]) == UINT32_C(0x0041EDC4));
+    assert(sigmoid_output_values[1] == 0.5f);
+    assert(sigmoid_output_values[2] == 1.0f);
+
+    descriptor.stride = 0u;
+    sigmoid_output_values[0] = 9.0f;
+    assert(quantized_runtime_float_conv1d_execute(
+               &descriptor, &sigmoid_model, &io) ==
+           QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT);
+    assert(sigmoid_output_values[0] == 9.0f);
+}
+
 static void test_pooling_executor(void) {
     /* window-2 maximum, two rows, signed values */
     int8_t input_data[] = {1, 5, 3, 2, 7, 4, 6, 0, -5, -2, -9, -1, 0, 0, -3, -4};
@@ -1780,7 +2048,8 @@ static void test_descriptor_constructors(void) {
     memcpy(&word, record + 0x10, sizeof(word));
     assert(word == 0x10C0u); /* 0x1000 + 6*2*(8/2)*4 */
     memcpy(&word, record + 0x14, sizeof(word));
-    assert(word == 0u); /* unbound run token */
+    assert(word ==
+           (uint32_t)(uintptr_t)&quantized_runtime_float_conv1d_execute_target);
     assert(arena_cursor == 0x10D8u); /* 0x1000 + 6*4 + 192 */
 
     /* recovered udiv-by-zero quirk: byte6 == 0 yields ratio 0 */
@@ -1792,13 +2061,14 @@ static void test_descriptor_constructors(void) {
     assert(word == 0x1000u);
     assert(arena_cursor == 0x1000u + 24u);
 
-    /* bound run token lands at +0x14 */
+    /* The local executor is stored even when a legacy provider token exists. */
     arena_cursor = 0x1000u;
     quantized_runtime_descriptor_construct(&bound, record, 2u, 1u, 3u, 4u,
                                            8u, 6u, 2u, 0u, 7u, &arena_cursor,
                                            2.5f);
     memcpy(&word, record + 0x14, sizeof(word));
-    assert(word == 0x00076BDDu);
+    assert(word ==
+           (uint32_t)(uintptr_t)&quantized_runtime_float_conv1d_execute_target);
     quantized_runtime_descriptor_construct(&rt, NULL, 2u, 1u, 3u, 4u, 8u, 6u,
                                            2u, 0u, 7u, &arena_cursor, 2.5f);
 
@@ -2489,6 +2759,7 @@ void test_reconstructed_quantized_runtime(void) {
     test_recurrent_executor();
     test_goodix_stage_pipelines();
     test_goodix_layer_block_builder();
+    test_gomore_sleep_graph_builders();
     test_goodix_second_graph_builder();
     test_goodix_layer_executor();
     test_goodix_second_executor();
@@ -2498,6 +2769,7 @@ void test_reconstructed_quantized_runtime(void) {
     test_int8_add_executor();
     test_i8_conv1d_executor();
     test_float_dense_executor();
+    test_float_conv1d_executor();
     test_pooling_executor();
     test_softmax_executor();
     test_float_add_executor();

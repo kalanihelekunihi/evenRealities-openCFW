@@ -10,7 +10,7 @@ and function-local control-flow review:
 | `0x00032408..<0x00032518` | 272 | `83301191875e916b0ab3e015539b271619b3a21d73be2ef98c6a6716ce8ed9a9` | R1 five-byte EUS fragmenter |
 | `0x0003D9B8..<0x0003DAC4` | 268 | `47429c4059d0ff96affac47defecc12d455f1cff4673df2de03aa81ce8bd1d6a` | R1 battery diagnostic cadence |
 | `0x0003EE34..<0x0003EF3C` | 264 | `818b5c79dbb504b629dab1974cb8290f5fab659848e852101c06429815e0680f` | R1 payload-redacting `ep.bin` scan |
-| `0x00064274..<0x0006437C` | 264 | `91525fb97e34b1faf918a5895aa06acb208b030ea6dde49d0a8a21d2d1486e04` | GoMore licensed-provider-only IIR filter |
+| `0x00064274..<0x0006437C` | 264 | `91525fb97e34b1faf918a5895aa06acb208b030ea6dde49d0a8a21d2d1486e04` | owner-authorized transparent fixed IIR filter |
 | `0x000641C4..<0x000641F0` | 44 | `1cf6848b2f7eba15d09cf9ce3df20aa0bca3d07db4b4a3d686ea7f08bbe04f0e` | GoMore licensed-provider-only segment-fill helper |
 
 The five frontier functions total 1,342 bytes. Including the helper, this closure source-routes
@@ -43,9 +43,9 @@ metadata: no raw ep.bin payload is exposed, and no flash mutation, logging, or t
 `0x00067C30` is reached only from the already gated GoMore body containing callsite `0x00056F42`.
 Its three calls to `0x000641C4` at `0x00067C92`, `0x00067D0C`, and `0x00067D2E` establish the
 44-byte helper as private to the timestamp-to-sample segment expansion. `0x00064274` is reached
-only at `0x000688A2` inside a gated GoMore caller and applies private floating-point IIR state and
-coefficients. These three functions remain licensed-provider-only. OpenR1 does not reconstruct
-their private ABI, coefficients, resampling, filtering, or signal-processing behavior.
+only at `0x000688A2` inside a gated GoMore caller. Its exact five coefficient words and
+Float32-product/double-accumulation recurrence are now transparent local C. The segment expansion
+remains licensed-provider-only; OpenR1 does not yet reconstruct its private resampling behavior.
 
 Reproduce with:
 

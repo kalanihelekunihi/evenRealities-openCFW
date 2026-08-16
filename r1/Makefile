@@ -11,6 +11,7 @@ SOURCES := src/r1_crc.c src/r1_protocol.c src/r1_health.c src/r1_health_db.c src
 	reconstructed/software_twi/software_twi.c \
 	reconstructed/sensor_stream/sensor_stream.c \
 	reconstructed/time_calendar/time_calendar.c \
+	reconstructed/model_data/r1_model_data.c \
 	reconstructed/quantized_runtime/quantized_runtime.c \
 	reconstructed/gxt310/gxt310.c \
 	reconstructed/qma6100/qma6100.c \
@@ -24,6 +25,7 @@ TEST_SOURCES := tests/test_openr1.c \
 	tests/test_reconstructed_software_twi.c \
 	tests/test_reconstructed_sensor_stream.c \
 	tests/test_reconstructed_time_calendar.c \
+	tests/test_reconstructed_model_data.c \
 	tests/test_reconstructed_quantized_runtime.c \
 	tests/test_reconstructed_gxt310.c \
 	tests/test_reconstructed_qma6100.c \
@@ -37,6 +39,17 @@ HOST_TEST := $(BUILD)/test_openr1
 SAN_TEST := $(BUILD)/test_openr1_sanitize
 HOST_SIM := $(BUILD)/openr1_sim
 ARM_BUILD := $(BUILD)/nrf52840
+OWNER_SIGNING_DIR ?= config/r1-owner-signing
+OWNER_DFU_OUTPUT ?= $(BUILD)/owner-dfu
+OWNER_DFU_APPLICATION_VERSION ?= 3
+OWNER_DFU_HARDWARE_VERSION ?= 52
+OWNER_DFU_SD_REQ ?= 0x0100
+WEST ?= west
+ZEPHYR_WORKSPACE ?=
+ZEPHYR_TOOLCHAIN ?=
+ZEPHYR_BUILD ?= $(BUILD)/zephyr-sysbuild
+ZEPHYR_BUNDLE ?= $(BUILD)/openr1-zephyr/openr1-source-built.zip
+ZEPHYR_SIGNING_KEY ?=
 ARM_FLAGS := --target=armv7em-none-eabi -mcpu=cortex-m4 -mthumb \
 	-mfpu=fpv4-sp-d16 -mfloat-abi=hard -fno-math-errno \
 	-std=c11 -ffreestanding -fno-builtin -fdata-sections -ffunction-sections \
@@ -44,7 +57,7 @@ ARM_FLAGS := --target=armv7em-none-eabi -mcpu=cortex-m4 -mthumb \
 ARM_SOURCES := $(SOURCES) platform/nrf52840/r1_nrf52840.c
 ARM_OBJECTS := $(patsubst %.c,$(ARM_BUILD)/%.o,$(ARM_SOURCES))
 
-.PHONY: all test sim sanitize verify arm-objects sdk-image sdk-verify vendor-audit vendor-storage-test vendor-crypto-test vendor-goodix-test clean
+.PHONY: all test sim sanitize verify arm-objects sdk-image sdk-verify bundle-boundary zephyr-source-verify zephyr-image zephyr-package zephyr-bundle zephyr-verify owner-dfu sdk-owner-dfu signing-test vendor-audit vendor-storage-test vendor-crypto-test vendor-goodix-test clean
 
 all: test
 
@@ -81,6 +94,7 @@ sdk-image:
 	@test -n "$(BMA456_ROOT)" || (echo "BMA456_ROOT is required" >&2; exit 2)
 	@test -n "$(LIS2DW12_ROOT)" || (echo "LIS2DW12_ROOT is required" >&2; exit 2)
 	@test -n "$(ST25DVXXKC_ROOT)" || (echo "ST25DVXXKC_ROOT is required" >&2; exit 2)
+	@test -n "$(ST25DVXXKC_ROOT)" || (echo "ST25DVXXKC_ROOT is required" >&2; exit 2)
 	@test -n "$(TINY_AES_ROOT)" || (echo "TINY_AES_ROOT is required" >&2; exit 2)
 	@test -n "$(FLASHDB_ROOT)" || (echo "FLASHDB_ROOT is required" >&2; exit 2)
 	@test -n "$(GOODIX_DEMOCODE_ROOT)" || (echo "GOODIX_DEMOCODE_ROOT is required" >&2; exit 2)
@@ -94,6 +108,80 @@ sdk-image:
 
 sdk-verify: sdk-image
 	python3 tools/verify_sdk_image.py
+
+bundle-boundary:
+	python3 tools/verify_application_bundle_boundary.py
+
+zephyr-source-verify:
+	python3 tools/verify_zephyr_source_boundary.py
+
+zephyr-image:
+	@test -n "$(ZEPHYR_WORKSPACE)" || (echo "ZEPHYR_WORKSPACE is required" >&2; exit 2)
+	@test -n "$(ZEPHYR_TOOLCHAIN)" || (echo "ZEPHYR_TOOLCHAIN is required" >&2; exit 2)
+	@test -n "$(BMA456_ROOT)" || (echo "BMA456_ROOT is required" >&2; exit 2)
+	@test -n "$(LIS2DW12_ROOT)" || (echo "LIS2DW12_ROOT is required" >&2; exit 2)
+	@test -n "$(ST25DVXXKC_ROOT)" || (echo "ST25DVXXKC_ROOT is required" >&2; exit 2)
+	@test -n "$(FLASHDB_ROOT)" || (echo "FLASHDB_ROOT is required" >&2; exit 2)
+	@test -n "$(GOODIX_DEMOCODE_ROOT)" || (echo "GOODIX_DEMOCODE_ROOT is required" >&2; exit 2)
+	python3 tools/build_zephyr_bundle.py --workspace "$(ZEPHYR_WORKSPACE)" \
+		--toolchain "$(ZEPHYR_TOOLCHAIN)" --west "$(WEST)" \
+		--bma456-root "$(BMA456_ROOT)" --lis2dw12-root "$(LIS2DW12_ROOT)" \
+		--st25dvxxkc-root "$(ST25DVXXKC_ROOT)" \
+		--flashdb-root "$(FLASHDB_ROOT)" \
+		--goodix-democode-root "$(GOODIX_DEMOCODE_ROOT)" \
+		--build-dir "$(ZEPHYR_BUILD)" --build-only $(if $(ZEPHYR_SIGNING_KEY),--signing-key "$(ZEPHYR_SIGNING_KEY)")
+
+zephyr-package:
+	@test -n "$(ZEPHYR_WORKSPACE)" || (echo "ZEPHYR_WORKSPACE is required" >&2; exit 2)
+	@test -n "$(BMA456_ROOT)" || (echo "BMA456_ROOT is required" >&2; exit 2)
+	@test -n "$(LIS2DW12_ROOT)" || (echo "LIS2DW12_ROOT is required" >&2; exit 2)
+	@test -n "$(ST25DVXXKC_ROOT)" || (echo "ST25DVXXKC_ROOT is required" >&2; exit 2)
+	@test -n "$(FLASHDB_ROOT)" || (echo "FLASHDB_ROOT is required" >&2; exit 2)
+	@test -n "$(GOODIX_DEMOCODE_ROOT)" || (echo "GOODIX_DEMOCODE_ROOT is required" >&2; exit 2)
+	python3 tools/package_zephyr_bundle.py --build-dir "$(ZEPHYR_BUILD)" \
+		--zephyr-workspace "$(ZEPHYR_WORKSPACE)" \
+		--bma456-root "$(BMA456_ROOT)" --lis2dw12-root "$(LIS2DW12_ROOT)" \
+		--st25dvxxkc-root "$(ST25DVXXKC_ROOT)" \
+		--flashdb-root "$(FLASHDB_ROOT)" \
+		--goodix-democode-root "$(GOODIX_DEMOCODE_ROOT)" \
+		--output "$(ZEPHYR_BUNDLE)"
+
+zephyr-bundle:
+	@test -n "$(ZEPHYR_WORKSPACE)" || (echo "ZEPHYR_WORKSPACE is required" >&2; exit 2)
+	@test -n "$(ZEPHYR_TOOLCHAIN)" || (echo "ZEPHYR_TOOLCHAIN is required" >&2; exit 2)
+	@test -n "$(BMA456_ROOT)" || (echo "BMA456_ROOT is required" >&2; exit 2)
+	@test -n "$(LIS2DW12_ROOT)" || (echo "LIS2DW12_ROOT is required" >&2; exit 2)
+	@test -n "$(ST25DVXXKC_ROOT)" || (echo "ST25DVXXKC_ROOT is required" >&2; exit 2)
+	@test -n "$(FLASHDB_ROOT)" || (echo "FLASHDB_ROOT is required" >&2; exit 2)
+	@test -n "$(GOODIX_DEMOCODE_ROOT)" || (echo "GOODIX_DEMOCODE_ROOT is required" >&2; exit 2)
+	python3 tools/build_zephyr_bundle.py --workspace "$(ZEPHYR_WORKSPACE)" \
+		--toolchain "$(ZEPHYR_TOOLCHAIN)" --west "$(WEST)" \
+		--bma456-root "$(BMA456_ROOT)" --lis2dw12-root "$(LIS2DW12_ROOT)" \
+		--st25dvxxkc-root "$(ST25DVXXKC_ROOT)" \
+		--flashdb-root "$(FLASHDB_ROOT)" \
+		--goodix-democode-root "$(GOODIX_DEMOCODE_ROOT)" \
+		--build-dir "$(ZEPHYR_BUILD)" --output "$(ZEPHYR_BUNDLE)" $(if $(ZEPHYR_SIGNING_KEY),--signing-key "$(ZEPHYR_SIGNING_KEY)")
+
+zephyr-verify: zephyr-source-verify
+	python3 tools/verify_zephyr_bundle.py "$(ZEPHYR_BUNDLE)"
+
+# Package the linked OpenR1 application for the owner-keyed Nordic Secure DFU
+# bootloader. The encrypted private key is local/ignored; its passphrase is
+# loaded directly from macOS Keychain and is never placed in make variables.
+owner-dfu:
+	python3 tools/sign_r1_firmware.py \
+		--source platform/nrf52840/sdk/_build/openr1_nrf52840_s140.bin \
+		--key-directory "$(OWNER_SIGNING_DIR)" \
+		--output "$(OWNER_DFU_OUTPUT)" \
+		--application-version "$(OWNER_DFU_APPLICATION_VERSION)" \
+		--hardware-version "$(OWNER_DFU_HARDWARE_VERSION)" \
+		--sd-req "$(OWNER_DFU_SD_REQ)"
+
+sdk-owner-dfu: sdk-image
+	$(MAKE) owner-dfu
+
+signing-test:
+	python3 -m unittest discover -s tests -p 'test_sign_r1_firmware.py'
 
 vendor-audit:
 	@test -n "$(SDK_ROOT)" || (echo "SDK_ROOT is required" >&2; exit 2)

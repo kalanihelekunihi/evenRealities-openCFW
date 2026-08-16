@@ -14,7 +14,7 @@ these dispositions:
 - `pinned_upstream`, `pinned_upstream_bundled`, `pinned_upstream_snapshot`,
   `pinned_upstream_snapshot_adapter_required`, `pinned_upstream_license_review`, or
   `pinned_upstream_adapter_required`, `pinned_upstream_compatible_adapter_required`, or
-  `pinned_vendor_binary`: selected input,
+  `pinned_upstream_source_stack`, or `pinned_vendor_binary`: selected input,
   hash/version checked; the license-review variant cannot ship until its inconsistent notices are
   resolved;
 - `vendor_source_required_not_redistributable`: integrate a lawfully obtained matching vendor SDK,
@@ -41,6 +41,8 @@ that code is eligible for rewriting.
 | Provider | Evidence-selected input | Production ownership |
 | --- | --- | --- |
 | Nordic | nRF5 SDK 17.1.0 (`ddde560`) and S140 7.2.0 | CMSIS/nrfx including SAADC, TWIM0/TWIM1, SPIM2, SoftDevice integration, BLE stack/services, Peer Manager, clocks, timers, and platform utilities |
+| Zephyr Project / Nordic | Zephyr 3.7.2 plus pinned hal_nordic and CMSIS west revisions | alternate source-built nRF52840 kernel, Bluetooth host/controller, GATT/SMP, radio HAL, startup, and architecture support; no S140 input |
+| MCUboot / TinyCrypt | pinned MCUboot `6127fc06...` and TinyCrypt `1012a3eb...` | alternate source-built ECDSA-P256 boot validation and the Zephyr target's AES/ECDSA primitives |
 | SEGGER | RTT 6.18a and 6.14d-derived printf formatter bundled in Nordic SDK 17.1.0 | RTT debug transport and formatter engine; R1 may only supply its bounded clock-prefix hook |
 | FreeRTOS | Kernel 10.0.0 bundled unmodified in Nordic's pinned SDK | scheduler, queues, semaphores, task notifications, timers, `heap_4`, and Nordic Cortex-M4F RTOS port |
 | Arm | CMSIS-FreeRTOS v10.5.1 commit `d213f261...` with CMSIS 5.9.0 headers | CMSIS-RTOS2 adapter over FreeRTOS; authenticated repository snapshot, source hash checked |
@@ -62,6 +64,10 @@ The SDK archive is not copied into the repository. Nordic's own license inventor
 it. The authenticated Arm wrapper/header and Armink CmBacktrace snapshots are shared with the
 existing openCFW research at `g2/third_party`; openR1 verifies their commits, exact source
 hashes, and offline snapshot proofs before use.
+The alternate full-flash target obtains its Zephyr modules through west. Its packager rejects any
+commit/tree mismatch or tracked source modification before asserting the source lock recorded in
+the bundle. These modules replace, rather than wrap or redistribute, the S140 and retail
+bootloader runtime boundary for that target.
 `../third-party/fetched/fetch.sh` downloads the other pinned
 archives into an explicit external/cache directory and rejects hash mismatches. The audit command
 checks the source markers and exact S140 artifact:
@@ -88,18 +94,22 @@ disposition `clean_room_reimplementation_owner_authorized` as their reductions l
 - the six Bravechip BCL603M middleware families (generic device registry, software-TWI engines,
   sensor-stream framework, RTC-device framework, time/calendar provider, shared quantized neural
   runtime — 165 entries),
-- the gated Goodix GH3X2X entries (320: closed algorithm-library closures, the `goodix_mem`
-  apparatus, and the documented residue, including neural weight/constant tables),
+- the Goodix GH3X2X provider-attributed entries (320: algorithm-library closures and the
+  `goodix_mem` apparatus, with model data represented as explicit typed inputs),
 - the GoMore health/sleep algorithm families (362),
 - YHMICROS YHM2710 (36), GXCAS GXT310 (5), and QST QMA6100 (3).
 
-Progress at this snapshot: 331 Goodix and 198 GoMore functions now compile from the reconstructed
-Goodix primitive/heap and quantized-runtime modules and the two reconstructed GoMore modules. This moves 312
-previously opaque Goodix entries and 198 opaque GoMore entries into the owner-authorized
-disposition; 8 Goodix and 164 GoMore entries remain. Seventeen of the 331 Goodix functions
+Progress at this snapshot: 339 Goodix and all 362 GoMore functions now compile from the reconstructed
+Goodix primitive/heap and quantized-runtime modules and the two reconstructed GoMore modules. This moves 320
+previously opaque Goodix entries and 355 opaque GoMore entries into the owner-authorized
+disposition; no Goodix or GoMore executable provider entries remain opaque. Seventeen of the 339 Goodix functions
 also replace already-admitted public-democode source, and two replace R1 product entries, so
 those nineteen do not reduce the opaque count. The complete Goodix heap boundary now has local
 C for its twelve allocator bodies, all twenty provider call-site helpers, and the R1 byte-fill.
+The overlapping Goodix and GoMore generated-model parameters are also source-admitted as one
+deduplicated 11,581-word C initializer with three bounded views. The production build consumes only
+those checked-in constants; the SHA-pinned research image is used solely by the drift verifier.
+See [`MODEL-DATA-ADMISSION.md`](correlation/MODEL-DATA-ADMISSION.md).
 The first four heap-dependent descriptor lifecycle bodies are local as well.
 The six-descriptor channel state and enclosing two-channel session state now have paired,
 failure-clean constructor/destructor implementations.
