@@ -776,6 +776,59 @@ APP_MANUAL_SUPPLEMENT_EXTENTS = {
     0x0005C464: 24,
     0x0005C480: 62,
     0x0005DC08: 86,
+    0x00089E30: 28,
+    0x0008A01C: 28,
+    0x0008A054: 14,
+    0x00042D28: 6,
+    0x00042D2E: 16,
+    0x00042EE8: 306,
+    0x00046F88: 6,
+    0x0004E008: 82,
+    # Exact temperature listener entries omitted from Ghidra's function CSV.
+    # The two start paths share the recovered state-reset core; the two
+    # callbacks share the same bounded sample reducer and differ only in
+    # listener identity/logging at the framework boundary.
+    0x0004B6C0: 62,
+    0x0004B920: 208,
+    0x0004BBF0: 54,
+    0x0004BC40: 150,
+    # qsort comparator used exclusively by the transparent tensor-arena
+    # compactor; Ghidra exposed only the odd Thumb label.
+    0x00058D4A: 8,
+    # GoMore topic-input bookkeeping/callback entries omitted from the CSV.
+    0x0006ACC8: 10,
+    # FlashDB's health timestamp callback is a four-byte tail veneer to the
+    # already reconstructed clock backend.
+    0x0006A230: 4,
+    # Six recovered connection-control paths install this delayed callback.
+    # Ghidra exposed only its odd Thumb label, not a function row.
+    0x000882AC: 64,
+    # Complete channel-1 transmit worker/task entry. Ghidra exposed only
+    # LAB_000920ec+1 even though the body has independent task startup and
+    # terminal suspension control flow.
+    0x000920EC: 128,
+    # Complete BAE8 input worker/task entry. Ghidra exposed only
+    # LAB_00092178+1 before the aligned literal pool.
+    0x00092178: 198,
+    # Complete shared EUS/explicit transmit worker/task entry. Ghidra exposed
+    # only LAB_0009227c+1 before its literal pool.
+    0x0009227C: 128,
+    # Complete factory-marker channel-1 input/sensor-scheduler task. Ghidra
+    # exposed only LAB_0009230c+1 before the next helper.
+    0x0009230C: 128,
+    # Complete storage worker/task entry. Ghidra exposed only LAB_000926dc+1.
+    0x000926DC: 222,
+    0x0006B0D4: 58,
+    0x0006A600: 18,
+    0x0006A61C: 28,
+    0x0006A648: 22,
+    0x0006B1B8: 60,
+    0x0006B1F4: 52,
+    0x00075CCC: 18,
+    0x0007F17C: 12,
+    0x0007F188: 12,
+    0x00093EE4: 14,
+    0x00096A60: 26,
     0x0005BCEC: 220,
     0x0005BE7C: 248,
     0x0005BB2C: 224,
@@ -849,6 +902,24 @@ APP_MANUAL_SUPPLEMENT_EXTENTS.update({
 # does not claim original authorship: it records that no third-party implementation
 # has been identified and that only behavior may inform an independent implementation.
 APP_PRODUCT_FUNCTIONS = {
+    0x00089E30: "r1_goodix_adt_append",
+    0x0008A01C: "r1_goodix_raw_hr_append",
+    0x0008A054: "r1_goodix_wear_living_object_update",
+    0x00042D28: "r1_pmic_post_timer_callback_plan",
+    0x00042D2E: "r1_pmic_post_device_callback_plan",
+    0x00042EE8: "r1_connection_control_plan_adv_start",
+    0x00046F88: "delayed_touch_release",
+    0x0004E008: "r1_connection_control_role_sync_thread_flags",
+    0x0004B6C0: "gomore_primitives_temperature_measurement_begin",
+    0x0004B920: "gomore_primitives_temperature_measurement_step",
+    0x0004BBF0: "gomore_primitives_temperature_measurement_begin",
+    0x0004BC40: "gomore_primitives_temperature_measurement_step",
+    0x000920EC: "r1_channel1_task_plan_startup",
+    0x00092178: "r1_bae8_input_task_plan_startup",
+    0x0009227C: "r1_shared_tx_task_plan_startup",
+    0x0009230C: "r1_factory_input_task_plan_startup",
+    0x000926DC: "r1_storage_task_plan_startup",
+    0x00096A60: "r1_pmic_retry_callback_plan",
     0x00031FCC: "r1_battery_runtime_service",
     0x0003DB70: "r1_battery_stuck_charge_recovery",
     0x0003DD0C: "r1_battery_charged_state_refresh",
@@ -1244,7 +1315,10 @@ APP_PROVIDER_GLUE_FUNCTIONS = {
 APP_HEALTH_STORAGE_ADAPTERS = {
     0x0005DCE8: "r1_health_hour_boundary_storage_orchestrator",
     0x0005E698: "r1_health_time_transition_storage_orchestrator",
+    0x0006A230: "health_get_time",
     0x00070028: "r1_health_database_provider_handle_accessor",
+    0x00075CCC: "health_lock",
+    0x00093EE4: "health_unlock",
 }
 
 
@@ -1455,6 +1529,7 @@ APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES = {
     )
 }
 APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES.update({
+    0x00058D4A: "compare_live_entries",
     0x0005D244: "quantized_runtime_float_softmax_executor",
     0x00074AAC: "quantized_runtime_descriptor_constructor",
     0x00085B9C: "quantized_runtime_float_dense_execute",
@@ -2795,6 +2870,11 @@ APP_MOTION_ADAPTERS = {
     0x0005017C: "r1_motion_bus_acquire",
     0x00050188: "r1_motion_bus_read_request",
     0x000501C8: "r1_motion_bus_write_request",
+    0x0006A600: "accelerometer_read",
+    0x0006A61C: "accelerometer_open",
+    0x0006A648: "accelerometer_close",
+    0x0007F17C: "motion_bus_read",
+    0x0007F188: "motion_bus_write",
     0x00050208: "r1_motion_probe_and_select_provider",
     0x0005025C: "r1_motion_refresh_selection",
     0x00050270: "r1_motion_selected_provider_initialize",
@@ -3758,14 +3838,20 @@ for _group, _entries in APP_GOMORE_AUDIT_GROUPS.items():
         )
 
 
-# The audit also exposes two complete R1 topic callbacks immediately outside
-# the provider algorithm bodies. They perform bounded input conversion and
-# readiness bookkeeping before handing data to the GoMore integration path.
-# Only this product-owned adapter behavior may be implemented locally, and the
-# path remains disabled until a licensed GoMore provider is admitted.
+# The audit also exposes the complete R1 topic callbacks and readiness/count
+# bookkeeping immediately outside the provider algorithm bodies. They perform
+# bounded input conversion and readiness bookkeeping before handing data to
+# the GoMore integration path.
+# These product-owned adapter bodies are included in the owner-authorized
+# transparent-C reduction. Runtime engine composition and hardware validation
+# remain separate gates; they are not source-licensing gates.
 APP_GOMORE_ADAPTERS = {
     0x0005DC08: "r1_gomore_time_transition_adapter",
+    0x0006ACC8: "gomore_primitives_topic_update_complete",
+    0x0006B0D4: "gomore_primitives_topic_update_take_ready",
     0x0006B114: "r1_gomore_acc_topic_adapter",
+    0x0006B1B8: "gomore_primitives_topic_heart_rate_ingest",
+    0x0006B1F4: "gomore_primitives_topic_hrv_ingest",
     0x0006B228: "r1_gomore_raw_hr_topic_adapter",
 }
 
@@ -4540,15 +4626,15 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
     if entry in APP_GOMORE_ADAPTERS:
         row.update(
             provider_family="r1_gomore_provider_adapter",
-            source_disposition="clean_room_adapter_only_use_licensed_provider",
+            source_disposition="clean_room_reimplementation_owner_authorized",
             upstream_symbol=APP_GOMORE_ADAPTERS[entry],
             confidence="high",
             evidence=(
                 "SHA-pinned R1 topic-input or time-transition adapter with "
                 "bounded sample-count, numeric-conversion, axis-layout, "
-                "readiness-bit, or backward-clock threshold behavior. "
-                "Only this adapter seam may be local after licensed GoMore "
-                "provider admission."
+                "readiness-bit, or backward-clock threshold behavior, now "
+                "represented by independently compiled owner-authorized C. "
+                "On-target engine composition remains separately gated."
             ),
         )
         return row
@@ -4606,7 +4692,7 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
                 "shared_quantized_neural_runtime_candidate-ATTRIBUTION-2026-08.md; "
                 "the closed Bravechip ChipletRing/BCL603M platform is the "
                 "supported origin). Under the owner-authorized full reduction "
-                "(SOURCE-ADMISSION.md, 2026-08-14) the twenty-seven-entry family "
+                "(SOURCE-ADMISSION.md, 2026-08-14) the twenty-eight-entry family "
                 "is reconstructed from the decompilation evidence as "
                 "independently compiled C in reconstructed/quantized_runtime/ "
                 "with per-function provenance; the reconstruction is not vendor "
@@ -5493,6 +5579,7 @@ def build() -> tuple[list[dict[str, str]], dict[str, object]]:
             for entry, groups in APP_GOMORE_AUDIT_FUNCTIONS.items()
         },
         **APP_GOMORE_ADAPTERS,
+        **APP_HEALTH_STORAGE_ADAPTERS,
         **APP_MOTION_ADAPTERS,
         **APP_QMA6100_ADAPTERS,
         **APP_INTERNAL_FLASH_ADAPTERS,

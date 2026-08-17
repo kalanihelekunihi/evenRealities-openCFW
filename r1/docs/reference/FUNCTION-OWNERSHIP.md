@@ -50,7 +50,8 @@ python3 tools/build_r1_source_ownership.py
   recognizable symbol.
 - `clean_room_reimplementation_owner_authorized` marks the six Bravechip-attributed middleware
   families, the GXT310 closure, the complete QMA6100 provider/adapter closure, and the complete
-  YHM2710 closure plus the 339 Goodix and 362 GoMore reductions (924 entries)
+  YHM2710 closure plus the 339 Goodix, 362 GoMore algorithm reductions, and seven
+  owner-authorized R1 GoMore adapters (932 entries)
   reconstructed from decompilation evidence under the owner-authorized
   full reduction (2026-08-14, [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)). The
   reconstruction is independently compiled C with per-function provenance; it is not vendor
@@ -62,13 +63,13 @@ For this reason, marker matches alone remain candidates. Bosch BMA456 and the R1
 functions route to official sources, while eight Bosch and seven ST functions are explicitly
 bounded as R1 adapters. The ST part is LIS2DW12 (WHO_AM_I `0x44`). QMA6100 now has three
 QST-lineage provider bodies and fourteen adapters reconstructed together under the owner-authorized
-reduction; no Goodix-candidate and 77 GoMore health-algorithm entries remain to be reduced. IQS7211E has crossed the source gate through
+reduction; no Goodix-candidate or GoMore health-algorithm entries remain to be reduced. IQS7211E has crossed the source gate through
 pinned MIT provider/settings references: twelve exact recovered entries are now bounded as R1
 configuration, Nordic/provider port, task dispatch, lifecycle, IRQ, and recovery adapters. The
-remaining GoMore gate covers 77 exact entries whose code-only ranges, constants, and call
-topology are already pinned by the algorithm audit. Three additional byte-pinned R1 adapters are
-separately eligible for clean-room adapter work
-only after a licensed GoMore provider is admitted.
+former GoMore algorithm gate is closed by all 362 transparent reductions. Three additional
+byte-pinned R1 adapters are also reconstructed: the four topic inputs, their readiness and
+successful-update bookkeeping, and the backward-clock reset dispatcher. Live engine composition
+remains a separate typed-input and owned-hardware validation task.
 The 2,360-byte energy-model dispatcher/estimator closure rooted at `0x0002F488` is now fully
 source-admitted. Its complete private descendant graph, exact bodies, all caller sets, formulas,
 three 27-float mode tables, interpolation, and state logic are represented in transparent C.
@@ -253,7 +254,8 @@ RAM/decoded-flash merge, and packet-flush functions are separately admitted with
 storage, allocation, calendar, or transport providers. Nine scalar-health daily-cache callbacks
 now cover bounded HR, SpO2, and HRV slot reset/read/write plus the recovered invalid-clock path.
 Two time/hour storage orchestrators are admitted only as adapters around pinned FlashDB and metric
-providers, while one manually recovered backward-clock adapter remains gated on licensed GoMore.
+providers, while the manually recovered backward-clock adapter now compiles and is source-bound to
+the transparent GoMore reset seam with on-target execution intentionally suppressed.
 Fifteen product-owned temperature/stress storage functions now cover bounded event acceptance,
 replacement timestamps, one-byte temperature offsets, shared hourly averaging, and daily-cache
 callbacks without admitting GXCAS acquisition or GoMore stress generation. Five of these functions
@@ -369,7 +371,7 @@ Nordic Peer Manager provider routes; see
 Under the owner-authorized full reduction (2026-08-14,
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the six Bravechip-attributed
 `unknown_*_candidate` families — 165 entries: generic device registry (40), GPIO-driven
-software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (27),
+software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (28),
 time/calendar provider (16), and RTC-device layer (10) — are reconstructed from the recovered
 decompilation evidence as independently compiled C under `r1/reconstructed/` with per-function
 provenance banners and host tests. Their disposition is now

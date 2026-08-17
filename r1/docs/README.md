@@ -76,17 +76,21 @@ local-day recovery into live activity/HR/SpO2/HRV runtime caches, and clock-driv
 non-destructive hourly appends of the prior slot. NVS persists
 Bluetooth security state. The same target
 now binds the source-HAL REG1 startup/settings action, recovered SAADC routes,
-phone-synchronized wall clock, reset-reason/no-init trace, and 10-second scheduler watchdog.
+phone-synchronized wall clock with reconstructed exact calendar query/day-boundary conversion,
+reset-reason/no-init trace, and 10-second scheduler watchdog.
 It also hash-gates and links the exact Bosch/ST motion providers, TWIM1 pin route,
-stock probe order, and bounded FIFO API. Its IQS7211E adapter binds the recovered TWIM0 pins,
+stock probe order, bounded FIFO API, reconstructed 1,024-Hz sensor-stream runtime, exact
+`"acc"`/188-byte batch provider with persisted axis calibration, exact `"temp"`/two-byte
+one-pair provider with persisted temperature calibration, and dormant exact one-shot
+listener/event-9/hourly-cache composition. Its IQS7211E adapter binds the recovered TWIM0 pins,
 LDO/RDY lifecycle, falling-edge worker, restart timer, and `touchSwitch` hook; controller power-up
 remains fail-closed until ring identity and a wear/factory lease are provisioned. The reconstructed
 YHM2710 P1.01 provider now supplies the exact three-client `0xA8`/`0x28` shared-power transitions. The
 same bundle now hash-gates ST's ST25DVxxKC source, retains its bounded mailbox path and P0.03 GPO
 worker, and serializes the P0.11/P0.14 motion and P1.11/P1.14 dock routes with a dock-preempts-motion
 TWIM1 handoff. Its exact P1.10 dock-enable and typed dock-session lease are bound, while NFC starts
-disabled pending an explicit product policy. The wear-driven REG1 automation, motion production consumer,
-destructive slot-0 health format/retry, GoMore reinitialization, unresolved cursor persistence,
+disabled pending an explicit product policy. The wear-driven REG1 automation, motion algorithm consumer,
+destructive slot-0 health format/retry, GoMore reinitialization,
 optical algorithm/result composition,
 remaining PMIC devices, retail-layout migration, and owned-ring validation remain HAL work. The
 source-built target now hash-gates and links the source-only Goodix demo/driver subset and binds
@@ -106,6 +110,10 @@ owner-authorized transparent C pending hardware validation. All 362 GoMore execu
 likewise compile from transparent C, including their tensor runtime and sleep classifiers; the
 exact sleep-model parameters are checked-in source data rather than stock-image build inputs. See
 [`GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md)
+and [`GOMORE-TOPIC-INPUT-CORRELATION.md`](correlation/GOMORE-TOPIC-INPUT-CORRELATION.md)
+and [`GOODIX-INTERNAL-TOPIC-PRODUCERS-CORRELATION.md`](correlation/GOODIX-INTERNAL-TOPIC-PRODUCERS-CORRELATION.md)
+and [`THUMB-CALLBACK-ENTRY-CORRELATION.md`](correlation/THUMB-CALLBACK-ENTRY-CORRELATION.md)
+and [`TIME-HEALTH-ROLLOVER-CORRELATION.md`](correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md)
 and [`MODEL-DATA-ADMISSION.md`](correlation/MODEL-DATA-ADMISSION.md).
 The IQS7211E path now uses pinned MIT provider/settings references, a compiled R1-only
 configuration/lifecycle/recovery adapter, and Nordic's or Zephyr's source TWIM0/GPIOTE drivers for
@@ -163,12 +171,8 @@ The implementation is pinned to these repository-owned evidence sets:
 - The recovered cross-peripheral name registry and nine operation/list functions remain an
   unidentified, non-reimplemented framework boundary; see
   [`GENERIC-DEVICE-REGISTRY-BOUNDARY.md`](boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md).
-- The current 685-function / 36,288-byte unclassified frontier, plus nine separately blocked
-  generic device-registry candidates, fourteen blocked time/calendar-provider candidates, forty
-  software-TWI-provider candidates, seven RTC-device-provider candidates, and thirteen
-  sensor-algorithm heap-provider candidates, plus four sensor-stream framework candidates, and
-  the next evidence-ranked closure
-  are recorded in
+- The former 685-function / 36,288-byte unclassified frontier and the subsequent provider-family
+  reductions are recorded in
   [`REMAINING-FUNCTION-FRONTIER.md`](reference/REMAINING-FUNCTION-FRONTIER.md).
 - The five-function 280...308-byte frontier is closed as four bounded R1 behaviors and one
   Goodix provider body. The local APIs add six-byte `pb_tran` framing, delayed-event admission,
@@ -368,7 +372,7 @@ The implementation is pinned to these repository-owned evidence sets:
   [`SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md`](boundaries/SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md).
 - The 2026-08 attribution re-examination tested all six `investigate_before_implementing`
   platform families (device registry, software TWI, sensor stream, quantized-neural runtime,
-  time/calendar, RTC device — 165 functions) against fetched upstream sources and identified
+  time/calendar, RTC device — 166 functions) against fetched upstream sources and identified
   the interlocked "B210 platform" middleware as Wuxi Bravechip's closed ChipletRing / BCL603M
   platform (firmware string `603MV1.9.3`, byte-exact BAE8 GATT base-UUID match to the public
   `BravechipSpace/ChipletRing-APPSDK`). All six remain NO ATTRIBUTION and implementation-blocked,
@@ -473,6 +477,19 @@ The implementation is pinned to these repository-owned evidence sets:
 - The product-owned temperature/stress range gates, offset representation, hourly aggregation,
   and daily-cache callbacks—separate from GXCAS and GoMore providers—are documented in
   [`TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md`](correlation/TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md).
+- The exact `"temp"` one-shot listener, shared 120-byte state, five-value reducer, event 9,
+  and dormant Zephyr cache composition are documented in
+  [`TEMPERATURE-ONE-SHOT-CORRELATION.md`](correlation/TEMPERATURE-ONE-SHOT-CORRELATION.md).
+- The four exact GoMore topic callbacks, acc/raw readiness barrier, successful-update cleanup,
+  and dormant on-target `"gomore"` accelerometer staging seam are documented in
+  [`GOMORE-TOPIC-INPUT-CORRELATION.md`](correlation/GOMORE-TOPIC-INPUT-CORRELATION.md).
+- The exact internal `raw_hr`/`adt` counted-word producers and two-byte Goodix living-object
+  producer omitted by Ghidra's function inventory are documented in
+  [`GOODIX-INTERNAL-TOPIC-PRODUCERS-CORRELATION.md`](correlation/GOODIX-INTERNAL-TOPIC-PRODUCERS-CORRELATION.md).
+- Twenty-three callback/helper entries that Ghidra omitted from its function CSV are now separately
+  byte-pinned and source-routed across PMIC, BLE connection, temperature, touch power,
+  accelerometer, GoMore topic input, tensor compaction, LIS2DW12, and FlashDB glue in
+  [`THUMB-CALLBACK-ENTRY-CORRELATION.md`](correlation/THUMB-CALLBACK-ENTRY-CORRELATION.md).
 - The five activity daily-cache lifecycle functions and their legacy-clock redaction policy are documented
   in [`ACTIVITY-DAILY-CACHE-CORRELATION.md`](correlation/ACTIVITY-DAILY-CACHE-CORRELATION.md).
 - Activity RAM/decoded-flash day merge, context-preserving builder reset, timestamp clamp, and
@@ -518,7 +535,7 @@ documented in [`FUNCTION-OWNERSHIP.md`](reference/FUNCTION-OWNERSHIP.md). The ex
 log-prefix adapter boundary, are documented in
 [`NORDIC-SDK-CORRELATION.md`](correlation/NORDIC-SDK-CORRELATION.md). The standard-C/EABI provider subset is
 documented in [`TOOLCHAIN-RUNTIME-CORRELATION.md`](correlation/TOOLCHAIN-RUNTIME-CORRELATION.md).
-The current 3,167-function ledger has zero unclassified entries, 924 owner-authorized clean-room
+The current 3,199-function ledger has zero unclassified entries, 932 owner-authorized clean-room
 reimplementations, and zero vendor-source-blocked executable entries.
 All 320 formerly opaque Goodix candidates, the six Bravechip middleware families, GXT310,
 QMA6100, and YHM2710 are transparent C. IQS7211E's admitted adapters are compiled and linked; the

@@ -40,3 +40,34 @@ side effects without changing the transport result.
 operation number, non-short-circuit pair behavior, callback failure reporting,
 and invalid-address rejection. The module is built by the host, sanitizer,
 Cortex-M object, and Nordic SDK-image source lists.
+
+## Source-built Zephyr adoption
+
+The alternate Zephyr target now installs the reconstructed software-TWI GPIO provider once and
+binds `i2c_2` to its recovered SCL P1.13/SDA P0.28 pair. The GXT310 adapter translates each exact
+two-byte mode command into the registry ABI's register byte plus one data byte, probes register
+`0x03` at raw addresses `0x90` and `0x94` for ID `0x50`, and always disables both channels before
+releasing the bus. A failed probe is retained as diagnostics and leaves the provider unavailable
+without preventing BLE recovery.
+
+The admitted R1 register-0 conversion is exposed as a pure tested function: two signed
+big-endian bytes are multiplied by the exact `0.0078125 C/LSB` scale and truncated to integer
+milli-units, equivalently `raw * 125 / 16`. The typed target API preserves both the immediate
+paired read and the recovered 80-ms startup plus ten paired samples separated by 5 ms before the
+existing extrema-trim/calibration reducer. Target startup reads the exact six-byte calibration at
+persisted `nv_r1` offset `0x3E`; all-`0xFF` is absent, direction `0` subtracts, direction `1` adds,
+and other direction bytes are disabled. This is a read-only consumer and the acquisition API does
+not accept caller-supplied calibration.
+
+The adjacent R1 product body `0x00050E4C..<0x00050EC8` and fixed stream vtable
+`0x0009A5A8` are now adopted on target. A `"temp"` read enables both channels,
+waits 80 ms, samples each register once, disables both channels, applies each
+calibration magnitude as unsigned UInt16 under direction 0/1 with 32-bit
+wrapping, adds the adjusted channels, adds the sum sign bit, and extracts bits
+1...16. This preserves signed division by two toward zero and the exact
+two-byte result. Its open/close hooks (`0x000918F8`/`0x000918FC`) remain no-op
+success stubs and its read hook (`0x00091900`) rejects every length except two.
+The target creates the singleton without registering a listener at startup. A separately
+evidenced dormant one-shot API registers the exact `"once"` listener and composes event 9 with
+the hourly cache. Neither channel is labelled skin/ambient and no clinical unit or public trigger
+is inferred; those remain explicit owned-hardware gates.

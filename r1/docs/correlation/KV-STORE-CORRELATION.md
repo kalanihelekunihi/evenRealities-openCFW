@@ -49,6 +49,15 @@ for the `nv_r1`, `power`, and `r_size` classes. Its pure implementation never co
 the live BLE command remains refused; see
 [`NV-RECOVERY-CORRELATION.md`](NV-RECOVERY-CORRELATION.md).
 
+The source-built Zephyr database owner also reads the exact 124-byte `nv_r1` class at startup and
+decodes its six-byte temperature calibration at offset `0x3E` for the GXT310 adapter. This is a
+read-only runtime consumer: erased calibration remains absent and no recovery write is enabled.
+The same startup path strictly decodes the exact four-byte `power` class, adopts only a valid
+battery type into the runtime controller, and retains signed voltage compensation behind a typed
+read-only accessor. The exact one-byte `r_size` class is likewise decoded and exposed only when it
+is 6...15; it does not imply touch-layout identity. No KV mutation is performed by these
+sensor-configuration consumers.
+
 ## Intentional security hardening
 
 The stock scanner accepts a slot from block 0 magic alone, restores later classes independently,
@@ -77,3 +86,9 @@ either the complete previous value or the complete replacement. The same source 
 ASan/UBSan and freestanding Cortex-M4 compilation. The physical internal-flash transport is now
 linked through Nordic fstorage/FAL; migration, power-loss, and
 owned-device timing capture remain required.
+
+The source-built Zephyr composition now consumes the exact 24-byte `hsync` class at startup.
+Its strict little-endian codec exposes the four named health cursors and preserves the two
+unresolved words. Material time transitions reset or clamp the named fields and persist the
+complete record through this hardened snapshot writer. The hsync and REG1 internal writers share
+a Zephyr mutex; no raw KV mutation command is exposed.

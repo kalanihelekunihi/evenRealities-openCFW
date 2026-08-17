@@ -27,6 +27,9 @@
 #define R1_PMIC_CHARGED_RECOVERY_PULSE_MS UINT16_C(200)
 #define R1_PMIC_CHARGED_POST_DELAY_MS UINT16_C(5120)
 #define R1_PMIC_CHARGED_THREAD_FLAG UINT32_C(0x10)
+#define R1_PMIC_RETRY_CALLBACK_THREAD_FLAG UINT32_C(0x04)
+#define R1_PMIC_POST_TIMER_THREAD_FLAG UINT32_C(0x08)
+#define R1_PMIC_POST_DEVICE_THREAD_FLAG UINT32_C(0x01)
 #define R1_PMIC_CHARGED_IT_TOUCH_CLOSE_MASK UINT8_C(0x08)
 #define R1_BATTERY_DIAGNOSTIC_STATUS_PERIOD UINT8_C(5)
 #define R1_BATTERY_DIAGNOSTIC_FULL_PERIOD UINT8_C(30)
@@ -149,6 +152,16 @@ typedef struct {
     bool invoke_post_charge_device_callback;
 } r1_pmic_charged_plan;
 
+/* Exact action-only contracts of the three PMIC delayed callbacks that
+ * Ghidra identified as Thumb labels rather than function entries.  The
+ * executor owns timer, device-registry, and thread-flag provider calls. */
+typedef struct {
+    bool reschedule_self;
+    uint16_t delay_argument;
+    bool invoke_device_slot_0c;
+    uint32_t thread_flags_to_set;
+} r1_pmic_delayed_callback_plan;
+
 typedef struct {
     uint8_t next_counter;
     bool status_log_requested;
@@ -202,6 +215,9 @@ bool r1_pmic_plan_charge_event(
 bool r1_pmic_plan_charged_notification(
     const r1_pmic_charged_observation *observation,
     r1_pmic_charged_plan *plan);
+r1_pmic_delayed_callback_plan r1_pmic_retry_callback_plan(void);
+r1_pmic_delayed_callback_plan r1_pmic_post_timer_callback_plan(void);
+r1_pmic_delayed_callback_plan r1_pmic_post_device_callback_plan(void);
 r1_battery_diagnostic_cadence r1_battery_diagnostic_cadence_step(
     uint8_t previous_counter);
 

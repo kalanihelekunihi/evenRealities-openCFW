@@ -2,12 +2,15 @@
 
 ## Outcome
 
-OpenR1 implements the product-owned storage edge for temperature and stress without implementing
-either measurement provider. Temperature acquisition, channel calibration, and register I/O remain
-behind the unresolved GXCAS GXT310 source boundary. Stress generation and mode control remain
-behind the licensed GoMore provider boundary. The admitted code accepts already-produced values,
-replaces their timestamps with the caller-supplied firmware time, maintains hourly aggregates, and
-serves the recovered daily-cache callbacks.
+OpenR1 implements the product-owned storage edge for temperature and stress. The source-built
+Zephyr target binds the reconstructed GXCAS GXT310 register transport, exact raw conversion,
+two-address probe, bounded paired acquisition/calibration path, exact `"temp"` stream, and dormant
+one-shot listener. When explicitly started, that listener composes the recovered five-sample
+reducer and event 9 consumer into the temperature daily cache. It does not assign physical channel
+roles or clinical units. Stress generation and mode control remain behind the
+transparent-but-uncomposed GoMore boundary. The portable storage code replaces accepted values'
+timestamps with firmware time, maintains hourly aggregates, and serves the recovered daily-cache
+callbacks.
 
 The recovered bodies are exact-size and SHA-256 pinned:
 
@@ -77,6 +80,10 @@ and write operations serve both caches. The accumulator rejects the stock wrap-t
 fault at `UINT16_MAX`; cache indexes are restricted to `0...23` even though the stock callbacks do
 not check them.
 
+The source-built one-shot composition and its exact listener/callback/state evidence are documented
+separately in `TEMPERATURE-ONE-SHOT-CORRELATION.md`. No listener starts at boot and no public BLE
+measurement route is inferred.
+
 Tests cover both range endpoints and rejections, published-to-offset conversion, replacement
 timestamps, distinct aggregate/average hours, average/minimum/maximum updates, zero stress and
 temperature offsets, reset-preserved latest points, valid/plausible/early clocks, zero-average
@@ -88,6 +95,7 @@ The average helper, temperature store, stress store, temperature read, and stres
 `0x0003B274`. The verified unsigned application is 94,804 bytes text, 236 bytes data, and 132,544 bytes BSS. Its HEX and BIN SHA-256 values are
 `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
 `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
-It adds no GXT310 register constants or transport, no GoMore stress algorithm, no raw sensor or
-private SRAM access, no internal-event injection, no BLE command, no signing bypass, and no
-deployment path.
+This portable cache component adds no GXT310 register constants or transport, no GoMore stress
+algorithm, no raw sensor or private SRAM access, no internal-event injection, no BLE command, no
+signing bypass, and no deployment path. The separate Zephyr GXT310 adapter owns those exact
+register constants and transport while keeping production cache injection absent.

@@ -12,8 +12,8 @@ Per-family reports: `../boundaries/unknown_*_candidate-ATTRIBUTION-2026-08.md` (
 
 ## Current inventory
 
-The generated ownership ledger contains 3,165 application/bootloader functions. All 304
-bootloader entries are source-routed. Of 2,861 application entries, including 174 exact manual
+The generated ownership ledger contains 3,170 application/bootloader functions. All 304
+bootloader entries are source-routed. Of 2,866 application entries, including 179 exact manual
 provenance supplements, **zero remain `unclassified`**: every recovered function now carries an
 ownership disposition. The final 53-entry residue (1,548 declared bytes) is closed by
 [`FRONTIER-FINAL53-CORRELATION.md`](../correlation/FRONTIER-FINAL53-CORRELATION.md); earlier
@@ -39,7 +39,7 @@ Thirty-two generic sensor-stream functions are separately
 blocked under `unknown_sensor_stream_framework_candidate`; their adjacent registry, list,
 allocator, buffer, and timer implementations are not admitted by that function-local
 classification.
-Twenty-seven shared quantized-neural runtime functions are reconstructed under the
+Twenty-eight shared quantized-neural runtime functions are reconstructed under the
 owner-authorized `unknown_shared_quantized_neural_runtime_candidate` reduction, including the
 indirect 434-byte signed-int8 pooling executor, float quantizer, parameter helper, descriptor
 constructors, int8-add, float tensor-add, softmax and float dense executors, and the

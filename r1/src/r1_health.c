@@ -7,8 +7,15 @@ _Static_assert(sizeof(r1_health_u8_offline_entry) == 16u,
                "HR/SpO2 offline record layout must remain 16 bytes");
 _Static_assert(sizeof(r1_health_u16_offline_entry) == 20u,
                "HRV offline record layout must remain 20 bytes");
-_Static_assert(sizeof(r1_health_sync_cursor_state) == 24u,
+_Static_assert(sizeof(r1_health_sync_cursor_state) ==
+                   R1_HEALTH_SYNC_CURSOR_BYTES,
                "health sync cursor record must remain 24 bytes");
+_Static_assert(sizeof(r1_health_time_transition) == 12u,
+               "time transition record must remain 12 bytes");
+_Static_assert(offsetof(r1_health_time_transition, old_timestamp_seconds) == 4u,
+               "old timestamp must remain at transition offset 4");
+_Static_assert(offsetof(r1_health_time_transition, new_timestamp_seconds) == 8u,
+               "new timestamp must remain at transition offset 8");
 _Static_assert(sizeof(r1_health_u8_accumulator) == 8u,
                "health hourly-average accumulator must remain 8 bytes");
 _Static_assert(sizeof(r1_health_u16_accumulator) == 8u,
@@ -137,6 +144,21 @@ static int64_t health_local_day_index(
     return local_seconds / (int64_t)R1_HEALTH_SECONDS_PER_DAY;
 }
 
+bool r1_gomore_time_transition_adapter(
+    const r1_health_time_transition *transition,
+    r1_gomore_reinitialize_fn reinitialize, void *context) {
+    if (transition == NULL ||
+        transition->new_timestamp_seconds >= transition->old_timestamp_seconds ||
+        transition->old_timestamp_seconds - transition->new_timestamp_seconds <
+            R1_HEALTH_GOMORE_REINITIALIZE_SECONDS) {
+        return false;
+    }
+    if (reinitialize != NULL) {
+        reinitialize(context);
+    }
+    return true;
+}
+
 r1_error r1_health_plan_time_transition(
     const r1_health_time_transition *transition,
     r1_health_time_transition_result *result) {
@@ -172,8 +194,7 @@ r1_error r1_health_plan_time_transition(
     }
 
     result->gomore_reinitialization_requested =
-        result->backward_delta_seconds
-            >= R1_HEALTH_GOMORE_REINITIALIZE_SECONDS;
+        r1_gomore_time_transition_adapter(transition, NULL, NULL);
     result->health_database_format_requested =
         result->backward_delta_seconds >= R1_HEALTH_DATABASE_FORMAT_SECONDS;
     result->known_cursor_reset_requested =
@@ -187,6 +208,39 @@ r1_error r1_health_plan_time_transition(
     }
     result->known_cursor_clamp_pass_requested = result->old_timestamp_valid
         && transition->new_timestamp_seconds > R1_HEALTH_LEGACY_CLOCK_CUTOFF;
+    return R1_OK;
+}
+
+r1_error r1_health_sync_cursor_decode(
+    const uint8_t *input, size_t length,
+    r1_health_sync_cursor_state *cursors) {
+    if (input == NULL || cursors == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length != R1_HEALTH_SYNC_CURSOR_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    cursors->heart_rate_timestamp = read_u32(input);
+    cursors->blood_oxygen_timestamp = read_u32(input + 4u);
+    cursors->unresolved_offset_8 = read_u32(input + 8u);
+    cursors->heart_rate_variability_timestamp = read_u32(input + 12u);
+    cursors->activity_timestamp = read_u32(input + 16u);
+    cursors->unresolved_offset_20 = read_u32(input + 20u);
+    return R1_OK;
+}
+
+r1_error r1_health_sync_cursor_encode(
+    const r1_health_sync_cursor_state *cursors,
+    uint8_t output[R1_HEALTH_SYNC_CURSOR_BYTES]) {
+    if (cursors == NULL || output == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    write_u32(output, cursors->heart_rate_timestamp);
+    write_u32(output + 4u, cursors->blood_oxygen_timestamp);
+    write_u32(output + 8u, cursors->unresolved_offset_8);
+    write_u32(output + 12u, cursors->heart_rate_variability_timestamp);
+    write_u32(output + 16u, cursors->activity_timestamp);
+    write_u32(output + 20u, cursors->unresolved_offset_20);
     return R1_OK;
 }
 
@@ -1519,6 +1573,80 @@ static int16_t health_wrap_i16(int64_t value) {
         return (int16_t)bits;
     }
     return (int16_t)(-((int32_t)UINT16_MAX - (int32_t)bits) - 1);
+}
+
+int32_t r1_temperature_gxt310_decode_milliunits(const uint8_t input[2]) {
+    if (input == NULL) {
+        return 0;
+    }
+    const uint16_t bits = (uint16_t)(
+        ((uint16_t)input[0] << 8u) | (uint16_t)input[1]);
+    const int32_t raw = bits <= (uint16_t)INT16_MAX
+        ? (int32_t)bits
+        : (int32_t)bits - INT32_C(65536);
+    /* 0.0078125 C/LSB * 1000 = 125/16 milli-units. C99 signed division
+     * truncates toward zero, matching the recovered Float32-to-int result. */
+    return raw * INT32_C(125) / INT32_C(16);
+}
+
+r1_error r1_temperature_pair_calibration_decode(
+    const uint8_t *input, size_t length,
+    r1_temperature_pair_calibration *calibration, bool *present) {
+    if (input == NULL || calibration == NULL || present == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length != R1_TEMPERATURE_PAIR_CALIBRATION_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    *present = false;
+    for (size_t index = 0u; index < length; ++index) {
+        if (input[index] != UINT8_MAX) {
+            *present = true;
+        }
+    }
+    for (size_t channel = 0u;
+         channel < R1_TEMPERATURE_PAIR_SENSOR_COUNT; ++channel) {
+        const size_t offset = channel * 3u;
+        const uint8_t direction = input[offset];
+        calibration->channels[channel].direction = direction <= 1u
+            ? (r1_temperature_calibration_direction)direction
+            : R1_TEMPERATURE_CALIBRATION_DISABLED;
+        const uint16_t raw = (uint16_t)(
+            (uint16_t)input[offset + 1u] |
+            (uint16_t)((uint16_t)input[offset + 2u] << 8u));
+        calibration->channels[channel].offset = raw <= (uint16_t)INT16_MAX
+            ? (int16_t)raw
+            : (int16_t)((int32_t)raw - INT32_C(65536));
+    }
+    return R1_OK;
+}
+
+r1_error r1_temperature_pair_stream_value(
+    const int32_t channels[R1_TEMPERATURE_PAIR_SENSOR_COUNT],
+    const r1_temperature_pair_calibration *calibration, uint16_t *value) {
+    if (channels == NULL || value == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    uint32_t adjusted[R1_TEMPERATURE_PAIR_SENSOR_COUNT];
+    for (size_t channel = 0u;
+         channel < R1_TEMPERATURE_PAIR_SENSOR_COUNT; ++channel) {
+        adjusted[channel] = (uint32_t)channels[channel];
+        if (calibration == NULL) {
+            continue;
+        }
+        const r1_temperature_channel_calibration *entry =
+            &calibration->channels[channel];
+        const uint32_t magnitude = (uint16_t)entry->offset;
+        if (entry->direction == R1_TEMPERATURE_CALIBRATION_SUBTRACT) {
+            adjusted[channel] -= magnitude;
+        } else if (entry->direction == R1_TEMPERATURE_CALIBRATION_ADD) {
+            adjusted[channel] += magnitude;
+        }
+    }
+    const uint32_t sum = adjusted[0] + adjusted[1];
+    const uint32_t toward_zero = sum + (sum >> 31u);
+    *value = (uint16_t)(toward_zero >> 1u);
+    return R1_OK;
 }
 
 static int16_t temperature_trimmed_mean(

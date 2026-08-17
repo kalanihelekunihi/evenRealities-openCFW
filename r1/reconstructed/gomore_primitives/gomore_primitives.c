@@ -31,6 +31,23 @@ _Static_assert(offsetof(gomore_primitives_sps_candidate_state,
                "SPS cooldown offset must remain exact");
 _Static_assert(sizeof(gomore_primitives_health_lifecycle_state) == 32u,
                "health lifecycle state layout must remain exact");
+_Static_assert(sizeof(gomore_primitives_scaled_sample_state) == 120u,
+               "temperature sample state layout must remain exact");
+_Static_assert(offsetof(gomore_primitives_scaled_sample_state,
+                        attempt_count) == 11u,
+               "temperature attempt-count offset must remain exact");
+_Static_assert(offsetof(gomore_primitives_scaled_sample_state,
+                        measurement_active) == 12u,
+               "temperature measurement flag offset must remain exact");
+_Static_assert(offsetof(gomore_primitives_scaled_sample_state,
+                        capture_enabled) == 14u,
+               "temperature capture flag offset must remain exact");
+_Static_assert(offsetof(gomore_primitives_scaled_sample_state,
+                        capture_count) == 16u,
+               "temperature capture-count offset must remain exact");
+_Static_assert(offsetof(gomore_primitives_scaled_sample_state,
+                        captured) == 18u,
+               "temperature capture-array offset must remain exact");
 _Static_assert(offsetof(gomore_primitives_health_lifecycle_state,
                         output_record) == 28u,
                "health lifecycle output offset must remain exact");
@@ -5316,6 +5333,128 @@ bool gomore_primitives_sleep_graph_family_dispatch(
         store_u32_le(&bytes[0x238u], softmax_executor);
     }
     return true;
+}
+
+static int32_t topic_signed_u16(uint16_t value) {
+    return value < UINT16_C(0x8000)
+        ? (int32_t)value
+        : (int32_t)value - INT32_C(0x10000);
+}
+
+bool gomore_primitives_topic_accelerometer_ingest(
+    gomore_primitives_topic_input_state *state,
+    const uint8_t *batch, size_t batch_length) {
+    if (state == NULL || batch == NULL ||
+            batch_length != GOMORE_PRIMITIVES_TOPIC_ACC_BATCH_BYTES) {
+        return false;
+    }
+    uint8_t count = batch[GOMORE_PRIMITIVES_TOPIC_ACC_COUNT_OFFSET];
+    if (count > GOMORE_PRIMITIVES_TOPIC_SAMPLE_LIMIT) {
+        count = GOMORE_PRIMITIVES_TOPIC_SAMPLE_LIMIT;
+    }
+    state->accelerometer_sample_count = count;
+    const float scale = bits_float(UINT32_C(0x3F7A0000));
+    for (size_t index = 0u; index < count; ++index) {
+        const uint8_t *sample = &batch[index * 6u];
+        const int32_t source_x = topic_signed_u16(
+            load_u16_le_early(&sample[0]));
+        const int32_t source_y = topic_signed_u16(
+            load_u16_le_early(&sample[2]));
+        const int32_t source_z = topic_signed_u16(
+            load_u16_le_early(&sample[4]));
+        state->accelerometer_axes[0][index] = -(float)source_y * scale;
+        state->accelerometer_axes[1][index] = (float)source_x * scale;
+        state->accelerometer_axes[2][index] = (float)source_z * scale;
+    }
+    state->ready_flags |= GOMORE_PRIMITIVES_TOPIC_READY_ACCELEROMETER;
+    return true;
+}
+
+bool gomore_primitives_topic_raw_optical_ingest(
+    gomore_primitives_topic_input_state *state,
+    const uint8_t *packet, size_t packet_length) {
+    if (state == NULL || packet == NULL || packet_length < 1u) {
+        return false;
+    }
+    uint8_t count = packet[0];
+    if (count > GOMORE_PRIMITIVES_TOPIC_SAMPLE_LIMIT) {
+        count = GOMORE_PRIMITIVES_TOPIC_SAMPLE_LIMIT;
+    }
+    const size_t required = 4u + (size_t)count * 4u;
+    if (packet_length < required) {
+        return false;
+    }
+    state->raw_optical_sample_count = count;
+    for (size_t index = 0u; index < count; ++index) {
+        state->raw_optical[index] = (float)load_u32_le(
+            &packet[4u + index * 4u]);
+    }
+    state->ready_flags |= GOMORE_PRIMITIVES_TOPIC_READY_RAW_OPTICAL;
+    return true;
+}
+
+bool gomore_primitives_topic_heart_rate_ingest(
+    gomore_primitives_topic_input_state *state,
+    const uint8_t *packet, size_t packet_length) {
+    if (state == NULL || packet == NULL || packet_length < 1u) {
+        return false;
+    }
+    state->direct_heart_rate = (float)packet[0];
+    state->ready_flags |= GOMORE_PRIMITIVES_TOPIC_READY_HEART_RATE;
+    return true;
+}
+
+bool gomore_primitives_topic_hrv_ingest(
+    gomore_primitives_topic_input_state *state,
+    const uint8_t *packet, size_t packet_length) {
+    if (state == NULL || packet == NULL ||
+            packet_length <= GOMORE_PRIMITIVES_TOPIC_HRV_COUNT_OFFSET) {
+        return false;
+    }
+    uint8_t count = packet[GOMORE_PRIMITIVES_TOPIC_HRV_COUNT_OFFSET];
+    if (count > GOMORE_PRIMITIVES_TOPIC_HRV_LIMIT) {
+        count = GOMORE_PRIMITIVES_TOPIC_HRV_LIMIT;
+    }
+    if (packet_length < (size_t)count * 2u) {
+        return false;
+    }
+    clear_bytes((uint8_t *)state->hrv_auxiliary,
+                sizeof(state->hrv_auxiliary));
+    for (size_t index = 0u; index < count; ++index) {
+        state->hrv_auxiliary[index] = load_u16_le_early(
+            &packet[index * 2u]);
+    }
+    state->hrv_auxiliary_count = count;
+    return true;
+}
+
+bool gomore_primitives_topic_update_take_ready(
+    gomore_primitives_topic_input_state *state,
+    bool accelerometer_required, bool raw_optical_required) {
+    if (state == NULL ||
+            (!accelerometer_required && !raw_optical_required)) {
+        return false;
+    }
+    uint8_t required = 0u;
+    if (accelerometer_required) {
+        required |= GOMORE_PRIMITIVES_TOPIC_READY_ACCELEROMETER;
+    }
+    if (raw_optical_required) {
+        required |= GOMORE_PRIMITIVES_TOPIC_READY_RAW_OPTICAL;
+    }
+    if ((state->ready_flags & required) != required) {
+        return false;
+    }
+    state->ready_flags = 0u;
+    return true;
+}
+
+void gomore_primitives_topic_update_complete(
+    gomore_primitives_topic_input_state *state, bool succeeded) {
+    if (state != NULL && succeeded) {
+        state->accelerometer_sample_count = 0u;
+        state->raw_optical_sample_count = 0u;
+    }
 }
 
 bool gomore_primitives_host_input_adapter_update(
@@ -13541,6 +13680,47 @@ bool gomore_primitives_scaled_sample_publish(
         publish(9u, payload, sizeof(payload));
     }
     return true;
+}
+
+bool gomore_primitives_temperature_measurement_begin(
+    gomore_primitives_scaled_sample_state *state) {
+    if (state == NULL) {
+        return false;
+    }
+    /* Stock 0x0004B6C0 clears exactly the first 14 bytes, preserving the
+     * independent capture-mode block beginning at +0x0E. */
+    clear_bytes((uint8_t *)state, 14u);
+    state->measurement_active = true;
+    return true;
+}
+
+gomore_primitives_temperature_measurement_result
+gomore_primitives_temperature_measurement_step(
+    gomore_primitives_scaled_sample_state *state, uint16_t sample) {
+    if (state == NULL || state->recent_count > 5u) {
+        return GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_INVALID;
+    }
+
+    state->attempt_count = (uint8_t)(state->attempt_count + 1u);
+    if (state->attempt_count > 30u) {
+        return GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_TIMEOUT;
+    }
+    if (!gomore_primitives_u16_in_30000_50000(sample)) {
+        return GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE;
+    }
+    if (!gomore_primitives_u16_all_within_300(
+            state->recent, state->recent_count, sample)) {
+        state->recent_count = 0u;
+        return GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE;
+    }
+    if (state->recent_count == 5u) {
+        return GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_COMPLETE;
+    }
+    state->recent[state->recent_count] = sample;
+    state->recent_count = (uint8_t)(state->recent_count + 1u);
+    return state->recent_count >= 5u
+        ? GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_COMPLETE
+        : GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE;
 }
 
 uint16_t gomore_primitives_stable_trimmed_median(

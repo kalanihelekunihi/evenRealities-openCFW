@@ -167,3 +167,13 @@ host-test mapping are documented in
 The ledger disposition for the sixteen entries is now
 `clean_room_reimplementation_owner_authorized`.  This document remains the
 provenance record of why no upstream source was admitted.
+
+## Source-built target adoption 2026-08-16
+
+The alternate Zephyr target now calls the reconstructed exact
+`time_calendar_unix_to_broken_down` converter for live local-calendar queries
+and health local-day boundaries. It deliberately retains the R1-owned
+phone-synchronized monotonic epoch source instead of enabling the recovered
+generic-registry/RTC-device backend. The Nordic SDK target continues to use its
+authenticated toolchain-calendar replacement. This target-specific adoption
+does not change the no-attribution finding or expose a raw clock setter.

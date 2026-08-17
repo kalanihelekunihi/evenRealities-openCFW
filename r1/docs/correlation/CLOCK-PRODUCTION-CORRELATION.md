@@ -24,9 +24,10 @@ bucketing.
 - The BLE time-set command (`0x05`) carries Unix epoch seconds plus a signed timezone-minutes
   field (`src/r1_dispatch.c`), so the phone performs the calendar→epoch conversion.
 
-## OpenR1 replacement
+## OpenR1 replacement and source-built adoption
 
-No code from either blocked family is used. The route decision is recorded in
+The product-owned monotonic clock remains independent of the RTC-device
+hardware/backend family. The original route decision is recorded in
 [`../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md`](../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md):
 
 - `r1/include/openr1/r1_clock.h` / `r1/src/r1_clock.c` — portable, R1-owned epoch clock:
@@ -37,8 +38,13 @@ No code from either blocked family is used. The route decision is recorded in
   portable device state within one 1024-tick cadence, advances the epoch from the RTC-backed
   (tickless-idle-correct) FreeRTOS kernel tick, and exposes epoch, UTC-offset, and
   local-calendar access via toolchain `gmtime_r`.
-- The vendor-specific validating inverse converter is deliberately not reproduced: no openR1
-  consumer exists, because time arrives as epoch seconds.
+- `r1/platform/nrf52840/zephyr/src/openr1_clock_zephyr.c` — the source-built
+  target now uses the owner-authorized reconstructed
+  `time_calendar_unix_to_broken_down` body for local-calendar queries. The
+  health-database adapter uses the same exact converter to calculate local-day
+  boundaries. Neither path binds the reconstructed hardware RTC/backend or
+  exposes the validating inverse converter, because time arrives as epoch
+  seconds from the phone.
 
 ## Tests
 

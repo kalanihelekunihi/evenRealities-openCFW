@@ -31,6 +31,20 @@ this record covers only the production startup binding added on top of them.
   `nrf_sdh_evts_poll()`; `fdb_tsdb_init` may format an empty `health.db` partition, so the
   health/sleep startup must run on a separate worker.
 
+The complete Ghidra-omitted task entry is now byte-pinned as
+`0x000926DC..<0x000927BA` (222 bytes, SHA-256
+`b13c5bc01f09f51f5b4dc9a79566d9b5dcaff74cdf6e8447b12e3d8affa8a179`). Beyond the
+health-before-sleep ordering, it creates a 50-record queue of 16-byte event records, runs ten
+startup actions in the recovered order, signals task group 7, registers the name `"storage"`
+with a 10,000-tick watchdog interval, and waits on the low 24 thread-flag bits. Bit 22 drains and
+dispatches queued event records; bit 23 signals suspension and enters the recovered indefinite
+wait. Queue creation failure enters the stock fail-stop boundary.
+
+`r1_storage_task_plan_startup` and `r1_storage_task_plan_flags` preserve this deterministic
+orchestration as typed actions. They do not create a queue, manipulate interrupt priority, enter
+an infinite loop, or invoke any database/cache/provider body. Those effects remain in CMSIS-
+FreeRTOS and the separately source-gated product/provider functions named by the action list.
+
 ## OpenR1 wiring
 
 New glue: `r1/platform/nrf52840/sdk/openr1_databases.c` / `openr1_databases.h`, called from
@@ -52,6 +66,12 @@ Startup order:
    resident and applies deferred REG1 persist requests (`openr1_databases_persist_reg1`)
    so writers on the SoftDevice event thread never mutate flash directly.
 
+The portable startup plan additionally retains the full stock action order: hardware-resource
+initialization; health database; heart-rate, SpO2, temperature, stress, and activity cache
+metadata refresh; sleep database; HRV cache refresh; and protocol-port state reset. The production
+ports may bind only the actions for which they own typed runtime state; omitted live actions remain
+explicit rather than being silently fabricated.
+
 Health startup op bindings:
 
 | Op | Production binding |
@@ -64,7 +84,7 @@ Health startup op bindings:
 | `set_clock` | `openr1_clock_adopt_phone_time` (crash-time handoff) |
 | `mark_clock_valid` | no-op: adoption validates the offset and marks the clock synchronized atomically; `r1_clock` has no separate validity flag |
 | `current_clock` | `openr1_clock_epoch` plus the new `openr1_clock_utc_offset` getter; fail closed as 0/0 when unsynchronized |
-| `local_day_start` | toolchain-`gmtime_r` adapter (shift to local, clear hour/minute/second, shift back to UTC) per the route decision in [`../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md`](../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md); no code from the blocked time/calendar family |
+| `local_day_start` | shift to local, convert through the owner-authorized reconstructed `time_calendar_unix_to_broken_down`, subtract hour/minute/second, then shift back to UTC; the hardware RTC/backend remains unbound |
 | `allocate` / `release` | FreeRTOS `pvPortMalloc` / `vPortFree` (heap_4) |
 | `recover` | `fdb_tsl_iter_by_time` over the recovered `[local_day_start, now]` interval with the controller's zeroed 128-byte workspace; each record is bounds-read into that workspace and counted. Decoding bodies into the RAM caches remains a separate health-storage consumer and is not fabricated here |
 
@@ -100,7 +120,7 @@ offset/length (`0x2000`/`0x6000`), then performs health startup before the
 portable `sleep.db` bind. FlashDB's 32-bit write granularity is preserved over
 the serialized flash-map adapter; no alternate journal format is introduced.
 The startup callbacks use a Zephyr mutex and heap, the source clock and
-`gmtime_r` day-start adapter, a no-init 966-byte crash record, and R1 event-bus
+reconstructed exact calendar day-start adapter, a no-init 966-byte crash record, and R1 event-bus
 slots 1 then 0. Crash restoration targets the live runtime activity, heart-rate,
 SpO2, and HRV histories. The recovered standalone HR averaging accumulator has
 no runtime field and therefore remains explicit module-owned state.
@@ -133,8 +153,10 @@ and timestamp tuple and applies the admitted branches: an invalid-to-valid trans
 runs the same bounded current-day iterator, while a valid local-day change resets all
 six caches to the new day metadata. Invalid day-start conversion or workspace allocation
 increments a recovery-failure counter and never widens the query to timestamp zero.
-Destructive formatting, GoMore reinitialization,
-and the unresolved persistent sync-cursor provider are counted as suppressed actions.
+The fixed `hsync` class is decoded as six UInt32LE words at startup. Reset/clamp actions
+persist only the four named cursors through the hardened `kv.bin` snapshot writer while
+preserving both unresolved words; commit success/failure is observable. Destructive formatting
+and GoMore reinitialization are counted as suppressed actions.
 Retail-data migration, power-loss testing, and physical validation remain separate gates.
 
 ## Tests and gates

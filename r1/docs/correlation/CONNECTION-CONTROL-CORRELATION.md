@@ -22,6 +22,16 @@ FreeRTOS `vPortFree`.
 | event `0x00000200` | compare a connected glasses peer with either supplied six-byte target, disconnect a mismatch, store both targets, then choose fast advertising or stop advertising from role occupancy |
 | event `0x00004000` | replace the two persisted target addresses |
 
+The Ghidra-omitted delayed callback at `0x000882AC..<0x000882EC` is also admitted as R1 product
+orchestration (64 bytes, SHA-256
+`28d8568d7f96013e7c9255881ce0b659f1ed3071d7bd35492f99de6ad18027ab`). Its argument packs a
+16-bit connection/context above an eight-bit selector. A `0xFFFF` context returns without an
+effect; selectors `0`, `1`, and `2` enqueue the empty connection-lifecycle events `0x40`, `0x10`,
+and `0x20`; other selectors enter the fatal-error boundary. The transparent
+`r1_connection_control_delayed_event_plan` in `../../src/r1_peer_target.c` reproduces only that
+deterministic route as `IGNORE`, `ENQUEUE`, or `FATAL`. Six recovered callback-pointer literals
+are byte-pinned; live BLE-thread queueing and fatal/log implementations remain external.
+
 The event consumer is therefore recorded as `r1_product_specific` with disposition
 `clean_room_behavior_only` and clean symbol `r1_ble_connection_control_event_consumer`. This is an
 ownership/admission result, not a claim that recovered C syntax, private helper bodies, or linked

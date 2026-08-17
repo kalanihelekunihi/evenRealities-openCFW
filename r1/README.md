@@ -13,7 +13,7 @@ Peer Manager/FDS bond storage, `nrf_ble_gatt`, and Nordic advertising sources. A
 target replaces S140 and the retail boot dependency with pinned, source-built Zephyr 3.7.2
 Bluetooth host/controller and ECDSA-P256 MCUboot, producing a self-contained full-flash bundle.
 It currently binds BAE8, persistent Zephyr SMP settings, the portable runtime, source-backed
-KV/sleep flash storage, the pinned FlashDB/FAL `health.db` TSDB, the exact three-channel SAADC geometry, phone-synchronized wall time,
+KV/sleep flash storage, the pinned FlashDB/FAL `health.db` TSDB, the exact three-channel SAADC geometry, phone-synchronized wall time with reconstructed exact calendar conversion,
 reset-reason capture, the recovered watchdog, the Bosch/ST motion bus, the IQS7211E TWIM0/GPIO
 lifecycle, and the reconstructed YHM2710 shared-power service. Touch remains deliberately unpowered
 until ring identity and a wear/factory lease are provisioned. The pinned ST25DVxxKC provider,
@@ -24,9 +24,25 @@ handoff, exact 128-byte hourly-body codec, and live startup recovery into the ru
 activity/HR/SpO2/HRV caches. Valid local-hour changes now flow from the source clock through
 event slot 1 to exact non-destructive FlashDB appends, with previous-hour selection and six-cache
 midnight reset. The exact slot-0 old/new time tuple now drives initial-valid current-day recovery
-and cross-day resets; destructive format/retry, GoMore reinitialization, and unresolved sync-cursor
-persistence remain suppressed diagnostics. Motion production ingestion, biometric calculation,
-and owned-hardware validation remain open. The source-built target now hash-gates the transparent Goodix demo/driver subset and
+and cross-day resets; destructive format/retry and GoMore reinitialization remain suppressed
+diagnostics. The exact 24-byte `hsync` class is loaded and persisted through hardened `kv.bin`
+snapshots: only HR/SpO2/HRV/activity cursors reset or clamp, while both unresolved words round-trip
+unchanged. Startup also decodes the exact four-byte persisted `power` record and adopts battery
+types 1...4 into the runtime controller without enabling an unproven periodic sampler. The exact
+one-byte `r_size` class is decoded read-only but cannot select touch calibration without the
+independent physical layout identity. The reconstructed 1,024-Hz sensor-stream runtime is now
+polled on target; its exact `"acc"`/188-byte provider applies the persisted three-axis
+calibration, and its exact `"temp"`/two-byte provider performs one calibrated GXT310 pair read
+with the recovered wrapping arithmetic. Its dormant typed one-shot control now binds the exact
+rate-1/per-sample listener, 30-attempt/five-consistent-value reducer, event 9 payload, and hourly
+temperature cache without starting at boot or assigning physical/clinical semantics. The public
+measurement route and owned-hardware validation remain open. The exact GoMore `acc`, `raw_hr`,
+`hr`, and `hrv` topic callbacks, 25/4-sample bounds, axis transform, readiness barrier, and
+successful-update cleanup now compile as transparent C. A dormant `"gomore"` batch listener can
+stage the existing `"acc"` stream on target, but startup does not register it and no health engine
+or biometric publisher is activated. The exact product-side `raw_hr`/`adt` bounded accumulators
+and two-byte Goodix living-object update also compile from their callback-table extents without
+assigning waveform or physical-channel semantics. The source-built target now hash-gates the transparent Goodix demo/driver subset and
 binds the recovered software-`i2c_4` optical pins, interrupt worker, reset/emitter lifecycle, and
 YHM client bit 1. It does not start sampling at boot or expose a BLE control route, and its global
 algorithm ABI remains fail-closed rather than fabricating health results.
@@ -100,8 +116,10 @@ the 80-byte write bound, status mapping, recovered timeout policy, GPIO/bus conf
 shutdown power-cycle policy; Nordic GPIO/TWI/TWIM/delay/fatal handling and authenticated
 CMSIS-FreeRTOS kernel/tick/semaphore operations remain their upstream implementations.
 The software-bus close paths call Nordic `nrf_gpio_cfg_default`. Their bit-level open/read/write
-engines are reconstructed transparent C; the Zephyr target now binds exact software `i2c_4` to
-the Goodix optical provider while the other software-bus roles remain without live consumers.
+engines are reconstructed transparent C; the Zephyr target binds exact software `i2c_4` to
+the Goodix optical provider and exact software `i2c_2` to the fail-closed dual-GXT310
+temperature adapter. The dormant `i2c_3` and shared-rail `i2c_5` software roles remain without
+live consumers because their active target paths use separately typed Nordic/YHM providers.
 
 ```sh
 make -C r1 test
@@ -143,6 +161,9 @@ All 362 GoMore functions—including 343 primitives/shared-runtime graph, persis
 locomotion-crossing, optical-period, respiratory, sleep, and output-orchestration routines plus
 nineteen tensor-runtime routines—are reconstructed in transparent C. See
 [`docs/GOMORE-PROVIDER-BOUNDARY.md`](docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md).
+The three byte-pinned R1 GoMore adapters are transparent too: exact accelerometer/raw-optical topic
+input plus the backward-clock reset dispatcher. The latter is source-bound on Zephyr to an explicit
+suppressed action until live engine state and result composition are hardware-validated.
 The IQS7211E path uses pinned MIT provider/settings references and the R1-only adapter in
 `src/r1_iqs7211e.c`; its Nordic TWIM0/GPIOTE board binding is recorded in
 [`docs/IQS7211E-PROVIDER-BOUNDARY.md`](docs/boundaries/IQS7211E-PROVIDER-BOUNDARY.md)
@@ -150,8 +171,11 @@ and remains unavailable until identity and wear/factory lease gates are provisio
 binds its shared-power client to the reconstructed YHM2710 service.
 The GXCAS GXT310 and YHMICROS YHM2710 provenance boundaries are documented in
 [`docs/NAMED-PERIPHERAL-BOUNDARIES.md`](docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md).
-The five GXT310 mode/one-shot bodies are now reduced to transparent C; temperature register reads
-remain in the already admitted R1 product adapters. See
+The five GXT310 mode/one-shot bodies are transparent C. The source-built Zephyr target now probes
+both exact addresses over P1.13/P0.28, decodes signed big-endian register-0 values, and exposes the
+recovered immediate and ten-sample acquisition paths. The latter reads the exact six-byte
+calibration at `nv_r1` offset `0x3E`, treats an erased record as absent, and applies only recovered
+subtract/add direction values. It does not assign skin/ambient semantics or feed the daily cache. See
 [`docs/GXT310-REDUCTION-CORRELATION.md`](docs/correlation/GXT310-REDUCTION-CORRELATION.md).
 All 36 YHM2710 transport, device, register, status, and policy bodies are likewise reconstructed;
 see [`docs/YHM2710-REDUCTION-CORRELATION.md`](docs/correlation/YHM2710-REDUCTION-CORRELATION.md).
@@ -186,6 +210,10 @@ retains its four 180-sample branches, five quantized layers, overlapping arena m
 a failure-clean 34-allocation constructor/destructor pair. The full SpO2 version report and its
 DSP component string are also built locally from explicit text inputs;
 see [`docs/GOODIX-HEAP-REDUCTION-CORRELATION.md`](docs/correlation/GOODIX-HEAP-REDUCTION-CORRELATION.md).
+Twenty-three callback/helper entries that Ghidra omitted from its function CSV are independently
+byte-pinned and routed to the existing transparent PMIC, connection, temperature, touch-power,
+motion, GoMore topic, tensor-runtime, LIS2DW12, and FlashDB source seams; see
+[`docs/THUMB-CALLBACK-ENTRY-CORRELATION.md`](docs/correlation/THUMB-CALLBACK-ENTRY-CORRELATION.md).
 `src/r1_goodix.c` implements only the recovered R1 power/lifecycle/profile adapter. It requires an
 explicit provider binding and returns `R1_ERROR_UNSUPPORTED` instead of fabricating biometric data
 when that provider is absent.

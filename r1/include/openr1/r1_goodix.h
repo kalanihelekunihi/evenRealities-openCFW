@@ -26,6 +26,11 @@
 #define R1_SENSOR_STREAM_REGISTRATION_COUNT 8u
 #define R1_SENSOR_STREAM_CALLBACK_COUNT 8u
 #define R1_SENSOR_STREAM_STATE_BYTES 240u
+#define R1_GOODIX_RAW_HR_RECORD_BYTES 124u
+#define R1_GOODIX_RAW_HR_VALUE_CAPACITY 30u
+#define R1_GOODIX_ADT_RECORD_BYTES 24u
+#define R1_GOODIX_ADT_VALUE_CAPACITY 5u
+#define R1_GOODIX_WEAR_RECORD_BYTES 2u
 
 typedef enum {
     R1_GOODIX_STOCK_PROFILE_2000 = 0,
@@ -97,6 +102,19 @@ r1_error r1_goodix_diagnostic_select(
     uint8_t *output, size_t output_capacity, size_t *written);
 r1_error r1_sensor_stream_registration_plan(
     r1_sensor_stream_registration_plan_result *plan);
+/* Exact internal raw_hr producer at 0x0008A01C. The 124-byte record is a
+ * count byte, three preserved reserved bytes, and up to thirty UInt32LE
+ * values. Values intentionally remain unlabeled pending hardware capture. */
+bool r1_goodix_raw_hr_append(
+    uint8_t record[R1_GOODIX_RAW_HR_RECORD_BYTES], uint32_t value);
+/* Exact internal adt producer at 0x00089E30. Its record uses the same
+ * count/reserved/UInt32LE shape as raw_hr with a five-value capacity. */
+bool r1_goodix_adt_append(
+    uint8_t record[R1_GOODIX_ADT_RECORD_BYTES], uint32_t value);
+/* Exact internal wear producer at 0x0008A054. Byte 0 is the pending flag and
+ * byte 1 is the Goodix living-object value; this is not the fused wear state. */
+void r1_goodix_wear_living_object_update(
+    uint8_t record[R1_GOODIX_WEAR_RECORD_BYTES], uint8_t value);
 
 /*
  * Integrator glue around the Goodix goodix_mem/GdMem pool manager.

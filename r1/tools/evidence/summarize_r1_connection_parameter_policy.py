@@ -20,7 +20,8 @@ EXPECTED_IMAGE_SHA256 = "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5
 
 
 def _function(entry: int, size: int, symbol: str, role: str, sha256: str,
-              callers: tuple[tuple[int, str], ...]) -> dict[str, Any]:
+              callers: tuple[tuple[int, str], ...],
+              inventory: str = "ghidra_functions_csv") -> dict[str, Any]:
     return {
         "entry": entry,
         "end_exclusive": entry + size,
@@ -29,7 +30,7 @@ def _function(entry: int, size: int, symbol: str, role: str, sha256: str,
         "role": role,
         "sha256": sha256,
         "callers": callers,
-        "inventory": "ghidra_functions_csv",
+        "inventory": inventory,
         "provider_family": "r1_product_specific",
         "source_disposition": "clean_room_behavior_only",
     }
@@ -80,10 +81,21 @@ R1_CONNECTION_PARAMETER_FUNCTIONS = (
         "b8482c5ec8f9a3e6f9028fb6ed2712777bce3a192c280b5f9b796a3767b4fe1b",
         ((0x00051ADA, "BL"), (0x00051AFC, "BL")),
     ),
+    _function(
+        0x000882AC, 64, "r1_connection_control_delayed_event_plan",
+        "delayed connection-control event selector and BLE-thread route",
+        "28d8568d7f96013e7c9255881ce0b659f1ed3071d7bd35492f99de6ad18027ab",
+        (), "manual_provenance_supplement",
+    ),
 )
 
 
 EXPECTED_LITERALS = {
+    0x0004CAE0: 0x000882AD,
+    0x0004D650: 0x000882AD,
+    0x0004DE40: 0x000882AD,
+    0x0004DF10: 0x000882AD,
+    0x0004E14C: 0x000882AD,
     0x00051C84: 0x200064B2,
     0x00051C88: 0x200064F6,
     0x00051CE0: 0x000882AD,

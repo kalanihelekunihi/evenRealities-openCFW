@@ -20,6 +20,11 @@
  * matches neither target.  The delayed-event runtime treats the value as
  * raw 1024 Hz ticks, not milliseconds. */
 #define R1_CONNECTION_CONTROL_DISCONNECT_DELAY UINT32_C(0x5000)
+#define R1_CONNECTION_CONTROL_ROLE_SYNC_THREAD_FLAG UINT32_C(0x100)
+#define R1_CONNECTION_CONTROL_EVENT_SELECTOR_MASK UINT32_C(0xff)
+#define R1_CONNECTION_CONTROL_EVENT_TYPE_ZERO UINT32_C(0x40)
+#define R1_CONNECTION_CONTROL_EVENT_TYPE_ONE UINT32_C(0x10)
+#define R1_CONNECTION_CONTROL_EVENT_TYPE_TWO UINT32_C(0x20)
 
 /* Composition of the recovered advStart event-0x200 consumer policy.  The
  * externally callable advStart command stays refused in the normal
@@ -40,6 +45,18 @@ typedef struct {
     bool start_fast_advertising;
     bool stop_advertising;
 } r1_connection_control_plan;
+
+typedef enum {
+    R1_CONNECTION_CONTROL_DELAYED_IGNORE = 0,
+    R1_CONNECTION_CONTROL_DELAYED_ENQUEUE,
+    R1_CONNECTION_CONTROL_DELAYED_FATAL
+} r1_connection_control_delayed_action;
+
+typedef struct {
+    r1_connection_control_delayed_action action;
+    uint16_t connection_context;
+    uint32_t event_type;
+} r1_connection_control_delayed_plan;
 
 typedef enum {
     R1_BOND_DIAGNOSTIC_INVALID_PEER = 0,
@@ -69,6 +86,14 @@ r1_error r1_connection_control_plan_adv_start(
     const uint8_t second_target[R1_PEER_ADDRESS_SIZE],
     bool phone_occupied, bool glasses_occupied,
     r1_connection_control_plan *plan);
+/* Delayed role-sync callback 0x0004E008 logs both role handles and sets this
+ * one worker flag.  Logging is deliberately outside the pure contract. */
+uint32_t r1_connection_control_role_sync_thread_flags(void);
+/* Pure form of recovered delayed callback 0x000882AC. The callback argument
+ * packs a 16-bit connection/context in the high half and an 8-bit selector in
+ * the low byte. A 0xFFFF context is a cancelled/no-link sentinel. */
+r1_connection_control_delayed_plan r1_connection_control_delayed_event_plan(
+    uint32_t callback_argument);
 /* Writes both targets into a kv.bin `dev_info` payload image at the
  * recovered offsets 8 and 14 without touching any other byte. */
 r1_error r1_peer_target_persist(

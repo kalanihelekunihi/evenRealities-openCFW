@@ -102,8 +102,9 @@ append failures, resets all six caches after the midnight append attempt, and le
 the stock destructive format-and-retry branch disabled. The slot-0 listener decodes the
 exact 12-byte old/new time tuple, reruns bounded current-day recovery when the clock first
 becomes valid, and applies cross-day cache reset. Destructive formatting, GoMore
-reinitialization, unresolved cursor persistence, and temperature/stress producers remain
-separate suppressed or open gates.
+reinitialization, and temperature/stress producers remain separate suppressed or open gates.
+The exact six-word `hsync` payload is now decoded from `kv.bin`; named cursor reset/clamp
+updates use the lossless codec and hardened snapshot commit while preserving offsets 8 and 20.
 
 The ownership verifier pins both stock extents, lengths, hashes, and their
 bounded product/FlashDB dispositions. The linked controller is 464 bytes at

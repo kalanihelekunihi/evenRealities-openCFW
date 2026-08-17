@@ -13,6 +13,32 @@
 #define R1_TX_ENQUEUE_WAIT_TICKS 100u
 #define R1_EUS_CREDIT_WAIT_TICKS 200u
 #define R1_EUS_RESOURCE_RETRY_TICKS 1000u
+#define R1_CHANNEL1_TASK_QUEUE_RECORD_BYTES 4u
+#define R1_CHANNEL1_TASK_SYNC_GROUP 10u
+#define R1_CHANNEL1_TASK_WATCHDOG_TICKS UINT32_C(10000)
+#define R1_CHANNEL1_TASK_WAIT_FLAGS UINT32_C(0x00ffffff)
+#define R1_CHANNEL1_TASK_DISPATCH_FLAG UINT32_C(1u << 0)
+#define R1_CHANNEL1_TASK_SUSPEND_FLAG UINT32_C(1u << 23)
+#define R1_BAE8_INPUT_TASK_QUEUE_CAPACITY 50u
+#define R1_BAE8_INPUT_TASK_QUEUE_RECORD_BYTES 4u
+#define R1_BAE8_INPUT_TASK_SYNC_GROUP 2u
+#define R1_BAE8_INPUT_TASK_WATCHDOG_TICKS UINT32_C(10000)
+#define R1_BAE8_INPUT_TASK_WAIT_FLAGS UINT32_C(0x00ffffff)
+#define R1_BAE8_INPUT_TASK_DISPATCH_FLAG UINT32_C(1u << 22)
+#define R1_BAE8_INPUT_TASK_SUSPEND_FLAG UINT32_C(1u << 23)
+#define R1_SHARED_TX_TASK_QUEUE_RECORD_BYTES 4u
+#define R1_SHARED_TX_TASK_SYNC_GROUP 3u
+#define R1_SHARED_TX_TASK_WATCHDOG_TICKS UINT32_C(10000)
+#define R1_SHARED_TX_TASK_WAIT_FLAGS UINT32_C(0x00ffffff)
+#define R1_SHARED_TX_TASK_DISPATCH_FLAG UINT32_C(1u << 0)
+#define R1_SHARED_TX_TASK_SUSPEND_FLAG UINT32_C(1u << 23)
+#define R1_FACTORY_INPUT_TASK_QUEUE_CAPACITY 8u
+#define R1_FACTORY_INPUT_TASK_QUEUE_RECORD_BYTES 4u
+#define R1_FACTORY_INPUT_TASK_SYNC_GROUP 6u
+#define R1_FACTORY_INPUT_TASK_WAIT_FLAGS UINT32_C(0x00ffffff)
+#define R1_FACTORY_INPUT_TASK_DISPATCH_FLAG UINT32_C(1u << 22)
+#define R1_FACTORY_INPUT_TASK_SUSPEND_FLAG UINT32_C(1u << 23)
+#define R1_FACTORY_INPUT_TASK_STARTUP_ACTION_COUNT 5u
 #define R1_DELAYED_EVENT_CAPACITY 64u
 #define R1_DELAYED_EVENT_ELAPSED_TAG UINT32_C(0xff000000)
 #define R1_DELAYED_EVENT_ELAPSED_MASK UINT32_C(0x00ffffff)
@@ -40,6 +66,92 @@ typedef struct {
     r1_event_queue eus;
     uint8_t hvn_credits;
 } r1_event_plane;
+
+typedef struct {
+    bool queue_create_failed;
+    bool enter_fail_stop;
+    uint32_t queue_capacity;
+    uint32_t queue_record_bytes;
+    uint8_t sync_group;
+    const char *registry_name;
+    uint32_t watchdog_ticks;
+} r1_channel1_task_startup_plan;
+
+typedef struct {
+    uint32_t observed_flags;
+    bool provider_wait_error;
+    bool drain_queue;
+    bool signal_suspend;
+    bool enter_suspend_wait;
+    bool wait_again;
+} r1_channel1_task_flag_plan;
+
+typedef struct {
+    bool queue_create_failed;
+    bool enter_fail_stop;
+    uint32_t queue_capacity;
+    uint32_t queue_record_bytes;
+    uint8_t sync_group;
+    const char *registry_name;
+    uint32_t watchdog_ticks;
+} r1_bae8_input_task_startup_plan;
+
+typedef struct {
+    uint32_t observed_flags;
+    bool provider_wait_error;
+    bool drain_queue;
+    bool signal_suspend;
+    bool enter_suspend_wait;
+    bool wait_again;
+} r1_bae8_input_task_flag_plan;
+
+typedef struct {
+    bool queue_create_failed;
+    bool enter_fail_stop;
+    uint32_t queue_capacity;
+    uint32_t queue_record_bytes;
+    uint8_t sync_group;
+    const char *registry_name;
+    uint32_t watchdog_ticks;
+} r1_shared_tx_task_startup_plan;
+
+typedef struct {
+    uint32_t observed_flags;
+    bool provider_wait_error;
+    bool drain_queue;
+    bool signal_suspend;
+    bool enter_suspend_wait;
+    bool wait_again;
+} r1_shared_tx_task_flag_plan;
+
+typedef enum {
+    R1_FACTORY_INPUT_WEAR_BUFFER_FILL = 0,
+    R1_FACTORY_INPUT_SENSOR_STREAM_INITIALIZE,
+    R1_FACTORY_INPUT_ACCELEROMETER_STREAM_CREATE,
+    R1_FACTORY_INPUT_STREAM_NAMESPACE_REGISTER,
+    R1_FACTORY_INPUT_TEMPERATURE_STREAM_CREATE
+} r1_factory_input_task_startup_action;
+
+typedef struct {
+    bool queue_create_failed;
+    bool enter_fail_stop;
+    uint32_t queue_capacity;
+    uint32_t queue_record_bytes;
+    uint8_t sync_group;
+    r1_factory_input_task_startup_action
+        actions[R1_FACTORY_INPUT_TASK_STARTUP_ACTION_COUNT];
+    size_t action_count;
+} r1_factory_input_task_startup_plan;
+
+typedef struct {
+    uint32_t observed_flags;
+    bool provider_wait_error;
+    bool drain_queue;
+    bool signal_suspend;
+    bool enter_suspend_wait;
+    bool run_periodic_operation;
+    bool wait_again;
+} r1_factory_input_task_flag_plan;
 
 typedef struct {
     uint32_t event;
@@ -101,6 +213,22 @@ void r1_event_remove_connection(r1_event_plane *plane, uint16_t connection);
 bool r1_event_consume_credit(r1_event_plane *plane);
 void r1_event_complete(r1_event_plane *plane, uint8_t completed);
 void r1_event_disconnect(r1_event_plane *plane);
+r1_error r1_channel1_task_plan_startup(
+    bool queue_created, r1_channel1_task_startup_plan *plan);
+r1_error r1_channel1_task_plan_flags(
+    uint32_t flags, r1_channel1_task_flag_plan *plan);
+r1_error r1_bae8_input_task_plan_startup(
+    bool queue_created, r1_bae8_input_task_startup_plan *plan);
+r1_error r1_bae8_input_task_plan_flags(
+    uint32_t flags, r1_bae8_input_task_flag_plan *plan);
+r1_error r1_shared_tx_task_plan_startup(
+    bool queue_created, r1_shared_tx_task_startup_plan *plan);
+r1_error r1_shared_tx_task_plan_flags(
+    uint32_t flags, r1_shared_tx_task_flag_plan *plan);
+r1_error r1_factory_input_task_plan_startup(
+    bool queue_created, r1_factory_input_task_startup_plan *plan);
+r1_error r1_factory_input_task_plan_flags(
+    uint32_t flags, r1_factory_input_task_flag_plan *plan);
 r1_error r1_delayed_event_timer_step(
     r1_delayed_event_state *state, uint32_t callback_argument,
     uint32_t kernel_tick, r1_delayed_event_step_result *result);

@@ -742,6 +742,32 @@ typedef struct {
     uint32_t raw_optical_binding;
 } gomore_primitives_host_input;
 
+/*
+ * Exact host-side topic staging reconstructed from the four callbacks at
+ * 0x0006B114, 0x0006B1B8, 0x0006B1F4, and 0x0006B228.  Stock stores the
+ * arrays behind pointers in its 264-byte I/O record; the transparent form
+ * owns the bounded storage directly and retains the same readiness bits.
+ */
+#define GOMORE_PRIMITIVES_TOPIC_SAMPLE_LIMIT 25u
+#define GOMORE_PRIMITIVES_TOPIC_HRV_LIMIT 4u
+#define GOMORE_PRIMITIVES_TOPIC_ACC_BATCH_BYTES 188u
+#define GOMORE_PRIMITIVES_TOPIC_ACC_COUNT_OFFSET 180u
+#define GOMORE_PRIMITIVES_TOPIC_HRV_COUNT_OFFSET 9u
+#define GOMORE_PRIMITIVES_TOPIC_READY_ACCELEROMETER UINT8_C(0x01)
+#define GOMORE_PRIMITIVES_TOPIC_READY_RAW_OPTICAL UINT8_C(0x02)
+#define GOMORE_PRIMITIVES_TOPIC_READY_HEART_RATE UINT8_C(0x04)
+
+typedef struct {
+    float accelerometer_axes[3][GOMORE_PRIMITIVES_TOPIC_SAMPLE_LIMIT];
+    float raw_optical[GOMORE_PRIMITIVES_TOPIC_SAMPLE_LIMIT];
+    uint16_t hrv_auxiliary[GOMORE_PRIMITIVES_TOPIC_HRV_LIMIT];
+    float direct_heart_rate;
+    uint8_t accelerometer_sample_count;
+    uint8_t raw_optical_sample_count;
+    uint8_t hrv_auxiliary_count;
+    uint8_t ready_flags;
+} gomore_primitives_topic_input_state;
+
 typedef struct {
     uint32_t raw_optical_output_binding;
     uint32_t accelerometer_output_bindings[3];
@@ -1131,10 +1157,23 @@ typedef struct {
 typedef struct {
     uint16_t recent[5];
     uint8_t recent_count;
+    uint8_t attempt_count;
+    bool measurement_active;
+    uint8_t reserved_0d;
     bool capture_enabled;
+    uint8_t reserved_0f;
     uint8_t capture_count;
+    uint8_t reserved_11;
     uint16_t captured[50];
+    uint8_t reserved_76[2];
 } gomore_primitives_scaled_sample_state;
+
+typedef enum {
+    GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE = 0,
+    GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_COMPLETE,
+    GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_TIMEOUT,
+    GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_INVALID
+} gomore_primitives_temperature_measurement_result;
 
 typedef struct {
     uint32_t start;
@@ -1982,6 +2021,29 @@ bool gomore_primitives_host_input_adapter_update(
     gomore_primitives_filter_apply_fn apply_filter,
     const gomore_primitives_log_config *logger,
     gomore_primitives_input_adapter_core_fn update_core);
+/* 0x6B114: decode the exact 188-byte acc batch into the GoMore axis order. */
+bool gomore_primitives_topic_accelerometer_ingest(
+    gomore_primitives_topic_input_state *state,
+    const uint8_t *batch, size_t batch_length);
+/* 0x6B228: decode count + UInt32LE raw optical samples. */
+bool gomore_primitives_topic_raw_optical_ingest(
+    gomore_primitives_topic_input_state *state,
+    const uint8_t *packet, size_t packet_length);
+/* 0x6B1B8: stage one UInt8 direct-heart-rate observation. */
+bool gomore_primitives_topic_heart_rate_ingest(
+    gomore_primitives_topic_input_state *state,
+    const uint8_t *packet, size_t packet_length);
+/* 0x6B1F4: clear and copy at most four UInt16LE HRV auxiliary values. */
+bool gomore_primitives_topic_hrv_ingest(
+    gomore_primitives_topic_input_state *state,
+    const uint8_t *packet, size_t packet_length);
+/* 0x6B0D4: consume the acc/raw readiness barrier and clear all ready bits. */
+bool gomore_primitives_topic_update_take_ready(
+    gomore_primitives_topic_input_state *state,
+    bool accelerometer_required, bool raw_optical_required);
+/* 0x6ACC8: successful engine updates consume only acc/raw sample counts. */
+void gomore_primitives_topic_update_complete(
+    gomore_primitives_topic_input_state *state, bool succeeded);
 /* 0x94384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bool gomore_primitives_sensor_update_orchestrate(
     const void *context,
@@ -2711,6 +2773,11 @@ uint32_t gomore_primitives_health_sample_features(
 bool gomore_primitives_scaled_sample_publish(
     gomore_primitives_scaled_sample_state *state,
     bool publish_enabled, gomore_primitives_event_publish_fn publish);
+bool gomore_primitives_temperature_measurement_begin(
+    gomore_primitives_scaled_sample_state *state);
+gomore_primitives_temperature_measurement_result
+gomore_primitives_temperature_measurement_step(
+    gomore_primitives_scaled_sample_state *state, uint16_t sample);
 uint16_t gomore_primitives_stable_trimmed_median(
     const uint16_t *values, size_t count, uint16_t *unscaled);
 bool gomore_primitives_stamp_time_record(

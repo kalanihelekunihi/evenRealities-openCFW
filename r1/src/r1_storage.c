@@ -416,3 +416,63 @@ r1_error r1_fds_plan_event(
     }
     return R1_OK;
 }
+
+r1_error r1_storage_task_plan_startup(
+    bool queue_created, r1_storage_task_startup_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_storage_task_startup_plan){
+        .queue_create_failed = !queue_created,
+        .enter_fail_stop = !queue_created,
+        .queue_capacity = R1_STORAGE_TASK_QUEUE_CAPACITY,
+        .queue_record_bytes = R1_STORAGE_TASK_RECORD_BYTES,
+        .sync_group = R1_STORAGE_TASK_SYNC_GROUP,
+        .registry_name = "storage",
+        .watchdog_ticks = R1_STORAGE_TASK_WATCHDOG_TICKS,
+    };
+    if (!queue_created) {
+        return R1_OK;
+    }
+    static const r1_storage_task_startup_action actions[] = {
+        R1_STORAGE_TASK_HARDWARE_INITIALIZE,
+        R1_STORAGE_TASK_HEALTH_DATABASE_START,
+        R1_STORAGE_TASK_HEART_RATE_CACHE_REFRESH,
+        R1_STORAGE_TASK_SPO2_CACHE_REFRESH,
+        R1_STORAGE_TASK_TEMPERATURE_CACHE_REFRESH,
+        R1_STORAGE_TASK_STRESS_CACHE_REFRESH,
+        R1_STORAGE_TASK_ACTIVITY_CACHE_REFRESH,
+        R1_STORAGE_TASK_SLEEP_DATABASE_START,
+        R1_STORAGE_TASK_HRV_CACHE_REFRESH,
+        R1_STORAGE_TASK_PROTOCOL_STATE_RESET,
+    };
+    for (size_t index = 0u;
+         index < R1_STORAGE_TASK_STARTUP_ACTION_COUNT; ++index) {
+        plan->actions[index] = actions[index];
+    }
+    plan->action_count = R1_STORAGE_TASK_STARTUP_ACTION_COUNT;
+    return R1_OK;
+}
+
+r1_error r1_storage_task_plan_flags(
+    uint32_t flags, r1_storage_task_flag_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_storage_task_flag_plan){
+        .observed_flags = flags,
+        .provider_wait_error = flags == 0u || (flags & UINT32_C(0x80000000)) != 0u,
+        .dispatch_event_record =
+            (flags & R1_STORAGE_TASK_DISPATCH_FLAG) != 0u,
+        .signal_suspend = (flags & R1_STORAGE_TASK_SUSPEND_FLAG) != 0u,
+        .enter_suspend_wait = (flags & R1_STORAGE_TASK_SUSPEND_FLAG) != 0u,
+        .wait_again = (flags & R1_STORAGE_TASK_SUSPEND_FLAG) == 0u,
+    };
+    if (plan->provider_wait_error) {
+        plan->dispatch_event_record = false;
+        plan->signal_suspend = false;
+        plan->enter_suspend_wait = false;
+        plan->wait_again = true;
+    }
+    return R1_OK;
+}

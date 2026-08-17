@@ -26,6 +26,7 @@
 #define R1_HEALTH_AUTO_SYNC_INTERVAL_SECONDS UINT32_C(10800)
 #define R1_HEALTH_AUTO_SYNC_SERIAL UINT8_C(0)
 #define R1_HEALTH_LEGACY_CLOCK_CUTOFF UINT32_C(946080000)
+#define R1_HEALTH_SYNC_CURSOR_BYTES 24u
 #define R1_ACTIVITY_LEGACY_CLOCK_CUTOFF R1_HEALTH_LEGACY_CLOCK_CUTOFF
 #define R1_ACTIVITY_BUCKETS_PER_HOUR 6u
 #define R1_HEALTH_TIME_MATERIAL_CHANGE_SECONDS UINT32_C(31)
@@ -35,6 +36,7 @@
 #define R1_HEALTH_DAILY_CACHE_FAMILY_COUNT 6u
 #define R1_TEMPERATURE_PAIR_SAMPLE_COUNT 10u
 #define R1_TEMPERATURE_PAIR_SENSOR_COUNT 2u
+#define R1_TEMPERATURE_PAIR_CALIBRATION_BYTES 6u
 #define R1_TEMPERATURE_PUBLISHED_MIN UINT16_C(250)
 #define R1_TEMPERATURE_PUBLISHED_MAX UINT16_C(500)
 #define R1_TEMPERATURE_STORAGE_BASE UINT16_C(250)
@@ -194,6 +196,20 @@ typedef struct {
     uint8_t sensor_count;
     int16_t channels[R1_TEMPERATURE_PAIR_SENSOR_COUNT];
 } r1_temperature_pair_result;
+
+/* Exact GXT310 register-0 conversion: signed big-endian raw * 0.0078125 C,
+ * represented as the stock truncated integer milli-unit result. */
+int32_t r1_temperature_gxt310_decode_milliunits(const uint8_t input[2]);
+r1_error r1_temperature_pair_calibration_decode(
+    const uint8_t *input, size_t length,
+    r1_temperature_pair_calibration *calibration, bool *present);
+/* Exact one-pair reduction used by the fixed two-byte "temp" sensor stream.
+ * Calibration magnitudes are interpreted as raw UInt16 values and all
+ * channel/sum arithmetic wraps at 32 bits before the signed divide-by-two
+ * result is returned as its low 16 bits. */
+r1_error r1_temperature_pair_stream_value(
+    const int32_t channels[R1_TEMPERATURE_PAIR_SENSOR_COUNT],
+    const r1_temperature_pair_calibration *calibration, uint16_t *value);
 
 /* Provider-facing actions are returned to the platform instead of invoking
  * FlashDB, sleep, or licensed health-algorithm code from the clean model. */
@@ -773,6 +789,12 @@ typedef struct {
     uint32_t new_timestamp_seconds;
 } r1_health_time_transition;
 
+/* Product-owned slot-0 adapter action. The recovered callback tail-calls the
+ * GoMore reset path only for an unsigned backward correction of at least 180
+ * seconds. A NULL action keeps the exact decision available to pure planners;
+ * a bound action receives the caller-owned context exactly once. */
+typedef void (*r1_gomore_reinitialize_fn)(void *context);
+
 /* Exact six-word hsync record. Only four fields have recovered metric owners;
  * the two unresolved words are deliberately preserved by reconciliation. */
 typedef struct {
@@ -1176,9 +1198,18 @@ void r1_health_note_explicit_history_query(
 r1_health_auto_sync_result r1_health_run_automatic_sync(
     r1_health_state *state, bool phone_connected, uint32_t now_seconds,
     r1_health_auto_sync_emit_fn emit, void *emit_context);
+bool r1_gomore_time_transition_adapter(
+    const r1_health_time_transition *transition,
+    r1_gomore_reinitialize_fn reinitialize, void *context);
 r1_error r1_health_plan_time_transition(
     const r1_health_time_transition *transition,
     r1_health_time_transition_result *result);
+r1_error r1_health_sync_cursor_decode(
+    const uint8_t *input, size_t length,
+    r1_health_sync_cursor_state *cursors);
+r1_error r1_health_sync_cursor_encode(
+    const r1_health_sync_cursor_state *cursors,
+    uint8_t output[R1_HEALTH_SYNC_CURSOR_BYTES]);
 r1_error r1_health_reconcile_sync_cursors(
     r1_health_sync_cursor_state *cursors,
     const r1_health_time_transition *transition,

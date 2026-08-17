@@ -22,6 +22,13 @@
 #define R1_MOTION_QMA6100P_ID_VALUE UINT8_C(0x90)
 #define R1_MOTION_SAMPLE_BYTES 6u
 #define R1_MOTION_FIFO_SAMPLE_LIMIT 31u
+#define R1_MOTION_BATCH_SAMPLE_LIMIT 30u
+#define R1_MOTION_BATCH_SAMPLES_BYTES \
+    (R1_MOTION_BATCH_SAMPLE_LIMIT * R1_MOTION_SAMPLE_BYTES)
+#define R1_MOTION_BATCH_COUNT_OFFSET R1_MOTION_BATCH_SAMPLES_BYTES
+#define R1_MOTION_BATCH_RESERVED_OFFSET 182u
+#define R1_MOTION_BATCH_TIMESTAMP_OFFSET 184u
+#define R1_MOTION_BATCH_BYTES 188u
 #define R1_RING_STABILITY_WINDOW 8u
 #define R1_RING_STABILITY_DETECT_COUNT 600u
 
@@ -45,6 +52,12 @@ typedef struct {
     int16_t y;
     int16_t z;
 } r1_motion_sample;
+
+typedef struct {
+    int16_t x;
+    int16_t y;
+    int16_t z;
+} r1_motion_axis_calibration;
 
 typedef struct {
     r1_error (*probe)(void *context, uint8_t *chip_id);
@@ -100,6 +113,11 @@ r1_error r1_motion_adapter_read_fifo(r1_motion_adapter *adapter,
 r1_error r1_motion_adapter_disable_double_tap(r1_motion_adapter *adapter);
 r1_motion_variant r1_motion_adapter_selected(const r1_motion_adapter *adapter);
 int16_t r1_motion_normalize_axis(int16_t raw_axis);
+r1_error r1_motion_batch_encode(
+    const r1_motion_sample *samples, size_t sample_count,
+    const r1_motion_axis_calibration *calibration,
+    bool calibration_in_progress, uint32_t timestamp_ticks,
+    uint8_t *destination, size_t destination_length);
 void r1_ring_stability_initialize(r1_ring_stability_state *state);
 r1_error r1_ring_stability_observe(
     r1_ring_stability_state *state, float smoothed_deviation,

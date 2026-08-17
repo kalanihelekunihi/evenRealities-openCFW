@@ -8,15 +8,18 @@ no ledger, generator, or source files were modified.
 
 ## Family under test (primary)
 
-`unknown_shared_quantized_neural_runtime_candidate`: 27 functions / 2,738 executable bytes,
+`unknown_shared_quantized_neural_runtime_candidate`: 28 functions / 2,746 executable bytes,
 spanning `0x000290FE..0x000294B6`, `0x00035E34..0x00035F26`, `0x00036C7C..0x00036D60`,
-`0x00041816..0x000419C8`, `0x0005A3D4..0x0005A40E`, `0x0005D244..0x0005D2DC`,
+`0x00041816..0x000419C8`, `0x00058D4A..0x00058D52`, `0x0005A3D4..0x0005A40E`, `0x0005D244..0x0005D2DC`,
 `0x00065680..0x000656AA`, `0x0006FE20..0x0006FE56`, `0x00074A9C..0x00074D02`,
 `0x00085B9C..0x00085C98`, `0x00091C48..0x00093744`, and
 `0x00098EDC..0x00098F80`. The `0x00085B9C` float dense executor is a later
 manual-provenance supplement: Ghidra missed the function, but constructor
 `0x00074BE0` installs its `0x00085B9D` Thumb entry and disassembly pins the
 complete body before its literal pool.
+The later callback-entry reconciliation adds the eight-byte qsort comparator at `0x00058D4A`:
+the arena compactor installs its odd Thumb pointer and the local static `compare_live_entries`
+reproduces its three loads/subtract/return instructions.
 
 ## Methods
 

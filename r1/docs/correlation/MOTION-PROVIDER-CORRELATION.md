@@ -123,6 +123,15 @@ stock order, or force any one variant. QMA6100 is supplied by the owner-authoriz
 [`QMA6100-REDUCTION-CORRELATION.md`](QMA6100-REDUCTION-CORRELATION.md), not by the unlicensed
 correlation snapshot.
 
+The same portable unit now implements the complete `0x0006F4A0` batch ABI:
+30 six-byte normalized samples at offsets `0..179`, UInt16LE count at `180`,
+the stock-untouched padding at `182..183`, and a UInt32LE 1,024-Hz timestamp
+at `184`. Persisted signed Int16LE axis offsets from `nv_r1` bytes `68..73`
+are added with 16-bit wrap unless all three are `-1` or the recovered factory
+calibration-in-progress byte is set. The Zephyr `"acc"` sensor-stream provider
+uses this encoder and the reconstructed framework; startup creates the stream
+but deliberately registers no unevidenced algorithm listener.
+
 The recovered board mapping is now concrete: Nordic TWIM1 at 400 kHz, SCL P0.11, SDA P0.14,
 seven-bit address `0x18`, and rising interrupt input P0.15 with no pull. The clean Nordic port is
 `platform/nrf52840/sdk/openr1_motion.c`; startup binds both official providers and selects the

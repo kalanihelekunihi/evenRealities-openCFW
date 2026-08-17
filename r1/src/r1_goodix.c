@@ -59,6 +59,53 @@ static uint32_t diagnostic_u32(const uint8_t *bytes) {
         ((uint32_t)bytes[2] << 16u) | ((uint32_t)bytes[3] << 24u);
 }
 
+static void diagnostic_write_u32(uint8_t *bytes, uint32_t value) {
+    bytes[0] = (uint8_t)value;
+    bytes[1] = (uint8_t)(value >> 8u);
+    bytes[2] = (uint8_t)(value >> 16u);
+    bytes[3] = (uint8_t)(value >> 24u);
+}
+
+_Static_assert(R1_GOODIX_RAW_HR_RECORD_BYTES ==
+                   4u + R1_GOODIX_RAW_HR_VALUE_CAPACITY * 4u,
+               "raw_hr record layout changed");
+_Static_assert(R1_GOODIX_ADT_RECORD_BYTES ==
+                   4u + R1_GOODIX_ADT_VALUE_CAPACITY * 4u,
+               "adt record layout changed");
+_Static_assert(R1_GOODIX_WEAR_RECORD_BYTES == 2u,
+               "wear record layout changed");
+
+static bool append_bounded_u32(uint8_t *record, uint8_t capacity,
+                               uint32_t value) {
+    if (record == NULL || record[0] >= capacity) {
+        return false;
+    }
+    const uint8_t count = record[0];
+    diagnostic_write_u32(&record[4u + (size_t)count * 4u], value);
+    record[0] = (uint8_t)(count + 1u);
+    return true;
+}
+
+bool r1_goodix_raw_hr_append(
+    uint8_t record[R1_GOODIX_RAW_HR_RECORD_BYTES], uint32_t value) {
+    return append_bounded_u32(record, R1_GOODIX_RAW_HR_VALUE_CAPACITY,
+                              value);
+}
+
+bool r1_goodix_adt_append(uint8_t record[R1_GOODIX_ADT_RECORD_BYTES],
+                          uint32_t value) {
+    return append_bounded_u32(record, R1_GOODIX_ADT_VALUE_CAPACITY, value);
+}
+
+void r1_goodix_wear_living_object_update(
+    uint8_t record[R1_GOODIX_WEAR_RECORD_BYTES], uint8_t value) {
+    if (record == NULL) {
+        return;
+    }
+    record[1] = value;
+    record[0] = 1u;
+}
+
 static r1_error diagnostic_copy(
     const uint8_t *source, size_t length, uint8_t *output,
     size_t output_capacity, size_t *written) {

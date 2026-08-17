@@ -196,11 +196,13 @@ wires the binding.  The host harness compiles the unit with the strict r1
 flags and with ASan/UBSan, and the freestanding Cortex-M4 object gate
 (`clang --target=armv7em-none-eabi -mcpu=cortex-m4 -ffreestanding
 -fno-builtin`, exact r1 Makefile flags) builds it cleanly; the 32-bit
-layout static asserts engage under that target.  Runtime adoption policy
-(toolchain `gmtime` route versus this reconstructed provider) is the
-integrator's decision per the boundary doc's route decision; nothing here
-exposes a raw clock setter, a dispatch command, or any security-relevant
-behavior.
+layout static asserts engage under that target. The source-built Zephyr target
+now adopts `time_calendar_unix_to_broken_down` for its local `struct tm` query
+and health local-day boundary calculation. Its epoch source remains the
+product-owned phone-synchronized monotonic clock; the generic-registry and
+RTC-device backends are not activated. Nothing here exposes a raw clock setter,
+a dispatch command, or any security-relevant behavior. The legacy Nordic SDK
+target retains its independently admitted toolchain-`gmtime` replacement.
 
 The immutable byte pins in `tools/verify_openr1.py`
 (`time_calendar_boundary_expected`, the sixteen-entry provider count, and

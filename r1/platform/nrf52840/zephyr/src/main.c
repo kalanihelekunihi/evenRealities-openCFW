@@ -14,7 +14,9 @@
 #include "openr1_optical_zephyr.h"
 #include "openr1_power_zephyr.h"
 #include "openr1_reset_zephyr.h"
+#include "openr1_sensor_stream_zephyr.h"
 #include "openr1_storage_zephyr.h"
+#include "openr1_temperature_zephyr.h"
 #include "openr1_touch_zephyr.h"
 #include "openr1_watchdog_zephyr.h"
 #include "openr1_yhm2710_zephyr.h"
@@ -65,6 +67,12 @@ int main(void) {
         error = openr1_yhm2710_zephyr_initialize();
     }
     if (error == 0) {
+        error = openr1_temperature_zephyr_initialize();
+    }
+    if (error == 0) {
+        error = openr1_sensor_stream_zephyr_initialize();
+    }
+    if (error == 0) {
         error = openr1_optical_zephyr_initialize();
     }
     if (error == 0) {
@@ -87,8 +95,15 @@ int main(void) {
     }
 
     for (;;) {
-        const uint32_t wait = openr1_platform_poll(k_uptime_get_32());
-        k_sleep(wait == UINT32_MAX ? K_MSEC(100) : K_MSEC(wait));
+        uint32_t wait = openr1_platform_poll(k_uptime_get_32());
+        const uint32_t stream_wait = openr1_sensor_stream_zephyr_poll();
+        if (wait == UINT32_MAX) {
+            wait = 100u;
+        }
+        if (stream_wait < wait) {
+            wait = stream_wait;
+        }
+        k_sleep(K_MSEC(wait));
     }
     return 0;
 }

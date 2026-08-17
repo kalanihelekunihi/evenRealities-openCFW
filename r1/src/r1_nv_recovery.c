@@ -9,15 +9,9 @@ enum {
     PRODUCT_SN_OFFSET = 31,
     PRODUCT_SN_BYTES = 30,
     PRODUCT_SN_LENGTH_OFFSET = 61,
-    TEMPERATURE_CALIBRATION_OFFSET = 62,
-    TEMPERATURE_CALIBRATION_BYTES = 6,
-    ACCELEROMETER_CALIBRATION_OFFSET = 68,
-    ACCELEROMETER_CALIBRATION_BYTES = 6,
     BODY_BATTERY_TYPE_OFFSET = 92,
     BODY_VOLTAGE_COMPENSATION_OFFSET = 94,
-    BODY_RING_SIZE_OFFSET = 96,
-    POWER_BATTERY_TYPE_OFFSET = 0,
-    POWER_VOLTAGE_COMPENSATION_OFFSET = 2
+    BODY_RING_SIZE_OFFSET = 96
 };
 
 static void copy_bytes(uint8_t *destination, const uint8_t *source, size_t length) {
@@ -69,17 +63,19 @@ bool r1_nv_recovery_build_body(
                PRODUCT_BSN_BYTES + 1u);
     copy_bytes(body + PRODUCT_SN_OFFSET, state->config + PRODUCT_SN_OFFSET,
                PRODUCT_SN_BYTES + 1u);
-    copy_bytes(body + TEMPERATURE_CALIBRATION_OFFSET,
-               state->config + TEMPERATURE_CALIBRATION_OFFSET,
-               TEMPERATURE_CALIBRATION_BYTES);
-    copy_bytes(body + ACCELEROMETER_CALIBRATION_OFFSET,
-               state->config + ACCELEROMETER_CALIBRATION_OFFSET,
-               ACCELEROMETER_CALIBRATION_BYTES);
-    body[BODY_BATTERY_TYPE_OFFSET] = state->power[POWER_BATTERY_TYPE_OFFSET];
+    copy_bytes(body + R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET,
+               state->config + R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET,
+               R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_BYTES);
+    copy_bytes(body + R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET,
+               state->config +
+                   R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET,
+               R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_BYTES);
+    body[BODY_BATTERY_TYPE_OFFSET] =
+        state->power[R1_NV_RECOVERY_POWER_BATTERY_TYPE_OFFSET];
     body[BODY_VOLTAGE_COMPENSATION_OFFSET] =
-        state->power[POWER_VOLTAGE_COMPENSATION_OFFSET];
+        state->power[R1_NV_RECOVERY_POWER_VOLTAGE_COMPENSATION_OFFSET];
     body[BODY_VOLTAGE_COMPENSATION_OFFSET + 1u] =
-        state->power[POWER_VOLTAGE_COMPENSATION_OFFSET + 1u];
+        state->power[R1_NV_RECOVERY_POWER_VOLTAGE_COMPENSATION_OFFSET + 1u];
     body[BODY_RING_SIZE_OFFSET] = state->ring_size;
 
     return battery_type_valid(body[BODY_BATTERY_TYPE_OFFSET]) &&
@@ -108,21 +104,26 @@ r1_error r1_nv_recovery_merge(
     result->changed_records = 0u;
 
     const uint8_t incoming_battery = body[BODY_BATTERY_TYPE_OFFSET];
-    if (!battery_type_valid(result->state.power[POWER_BATTERY_TYPE_OFFSET]) &&
+    if (!battery_type_valid(result->state.power[
+            R1_NV_RECOVERY_POWER_BATTERY_TYPE_OFFSET]) &&
         battery_type_valid(incoming_battery)) {
-        result->state.power[POWER_BATTERY_TYPE_OFFSET] = incoming_battery;
+        result->state.power[R1_NV_RECOVERY_POWER_BATTERY_TYPE_OFFSET] =
+            incoming_battery;
         result->changed_records |= R1_NV_RECOVERY_CHANGED_POWER;
     }
 
     const int16_t local_voltage =
-        read_i16(result->state.power + POWER_VOLTAGE_COMPENSATION_OFFSET);
+        read_i16(result->state.power +
+                 R1_NV_RECOVERY_POWER_VOLTAGE_COMPENSATION_OFFSET);
     const int16_t incoming_voltage =
         read_i16(body + BODY_VOLTAGE_COMPENSATION_OFFSET);
     if (!voltage_recovery_valid(local_voltage) &&
         voltage_recovery_valid(incoming_voltage)) {
-        result->state.power[POWER_VOLTAGE_COMPENSATION_OFFSET] =
+        result->state.power[
+            R1_NV_RECOVERY_POWER_VOLTAGE_COMPENSATION_OFFSET] =
             body[BODY_VOLTAGE_COMPENSATION_OFFSET];
-        result->state.power[POWER_VOLTAGE_COMPENSATION_OFFSET + 1u] =
+        result->state.power[
+            R1_NV_RECOVERY_POWER_VOLTAGE_COMPENSATION_OFFSET + 1u] =
             body[BODY_VOLTAGE_COMPENSATION_OFFSET + 1u];
         result->changed_records |= R1_NV_RECOVERY_CHANGED_POWER;
     }
@@ -146,20 +147,87 @@ r1_error r1_nv_recovery_merge(
                    body + PRODUCT_SN_OFFSET, PRODUCT_SN_BYTES + 1u);
         result->changed_records |= R1_NV_RECOVERY_CHANGED_CONFIG;
     }
-    if (result->state.config[TEMPERATURE_CALIBRATION_OFFSET] == UINT8_MAX &&
-        body[TEMPERATURE_CALIBRATION_OFFSET] != UINT8_MAX) {
-        copy_bytes(result->state.config + TEMPERATURE_CALIBRATION_OFFSET,
-                   body + TEMPERATURE_CALIBRATION_OFFSET,
-                   TEMPERATURE_CALIBRATION_BYTES);
+    if (result->state.config[
+            R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET] == UINT8_MAX &&
+        body[R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET] != UINT8_MAX) {
+        copy_bytes(
+            result->state.config +
+                R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET,
+            body + R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET,
+            R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_BYTES);
         result->changed_records |= R1_NV_RECOVERY_CHANGED_CONFIG;
     }
-    if (read_i16(result->state.config + ACCELEROMETER_CALIBRATION_OFFSET) == -1 &&
-        read_i16(body + ACCELEROMETER_CALIBRATION_OFFSET) != -1) {
-        copy_bytes(result->state.config + ACCELEROMETER_CALIBRATION_OFFSET,
-                   body + ACCELEROMETER_CALIBRATION_OFFSET,
-                   ACCELEROMETER_CALIBRATION_BYTES);
+    if (read_i16(result->state.config +
+                 R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET) == -1 &&
+        read_i16(body +
+                 R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET) != -1) {
+        copy_bytes(
+            result->state.config +
+                R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET,
+            body + R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET,
+            R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_BYTES);
         result->changed_records |= R1_NV_RECOVERY_CHANGED_CONFIG;
     }
 
+    return R1_OK;
+}
+
+r1_error r1_nv_battery_configuration_decode(
+    const uint8_t *input, size_t length,
+    r1_nv_battery_configuration *configuration) {
+    if (input == NULL || configuration == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length != R1_NV_RECOVERY_POWER_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    const uint16_t raw = (uint16_t)(
+        (uint16_t)input[
+            R1_NV_RECOVERY_POWER_VOLTAGE_COMPENSATION_OFFSET] |
+        (uint16_t)((uint16_t)input[
+            R1_NV_RECOVERY_POWER_VOLTAGE_COMPENSATION_OFFSET + 1u] << 8u));
+    const int16_t compensation = raw <= (uint16_t)INT16_MAX
+        ? (int16_t)raw
+        : (int16_t)((int32_t)raw - INT32_C(65536));
+    const uint8_t battery_type =
+        input[R1_NV_RECOVERY_POWER_BATTERY_TYPE_OFFSET];
+    *configuration = (r1_nv_battery_configuration){
+        .battery_type = battery_type,
+        .voltage_compensation_millivolts = compensation,
+        .battery_type_valid = battery_type_valid(battery_type),
+        .voltage_compensation_valid = voltage_report_valid(compensation),
+    };
+    return R1_OK;
+}
+
+r1_error r1_nv_accelerometer_calibration_decode(
+    const uint8_t *input, size_t length,
+    r1_motion_axis_calibration *calibration, bool *present) {
+    if (input == NULL || calibration == NULL || present == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length != R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    *calibration = (r1_motion_axis_calibration){
+        .x = read_i16(input),
+        .y = read_i16(input + 2u),
+        .z = read_i16(input + 4u),
+    };
+    *present = !(calibration->x == -1 && calibration->y == -1 &&
+                 calibration->z == -1);
+    return R1_OK;
+}
+
+r1_error r1_nv_ring_size_decode(
+    const uint8_t *input, size_t length, uint8_t *ring_size, bool *valid) {
+    if (input == NULL || ring_size == NULL || valid == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length != R1_NV_RECOVERY_RING_SIZE_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    *ring_size = input[0];
+    *valid = ring_size_valid(input[0]);
     return R1_OK;
 }

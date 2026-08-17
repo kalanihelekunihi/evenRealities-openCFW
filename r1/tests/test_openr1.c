@@ -1449,6 +1449,27 @@ static void test_pmic_charged_notification_policy(void) {
     assert(!r1_pmic_plan_charged_notification(NULL, &plan));
     assert(memcmp(&plan, &unchanged, sizeof plan) == 0);
     assert(!r1_pmic_plan_charged_notification(&observation, NULL));
+
+    const r1_pmic_delayed_callback_plan retry =
+        r1_pmic_retry_callback_plan();
+    assert(retry.reschedule_self);
+    assert(retry.delay_argument == R1_PMIC_CHARGED_RETRY_DELAY_MS);
+    assert(!retry.invoke_device_slot_0c);
+    assert(retry.thread_flags_to_set ==
+           R1_PMIC_RETRY_CALLBACK_THREAD_FLAG);
+    const r1_pmic_delayed_callback_plan post_timer =
+        r1_pmic_post_timer_callback_plan();
+    assert(!post_timer.reschedule_self &&
+           !post_timer.invoke_device_slot_0c);
+    assert(post_timer.delay_argument == 0u);
+    assert(post_timer.thread_flags_to_set ==
+           R1_PMIC_POST_TIMER_THREAD_FLAG);
+    const r1_pmic_delayed_callback_plan post_device =
+        r1_pmic_post_device_callback_plan();
+    assert(!post_device.reschedule_self && post_device.invoke_device_slot_0c);
+    assert(post_device.delay_argument == 0u);
+    assert(post_device.thread_flags_to_set ==
+           R1_PMIC_POST_DEVICE_THREAD_FLAG);
 }
 
 typedef struct {
@@ -2381,7 +2402,46 @@ static void test_automatic_health_sync(void) {
     assert(result.action == R1_HEALTH_AUTO_SYNC_INVALID);
 }
 
+static void count_gomore_reinitialize(void *context) {
+    size_t *calls = context;
+    *calls += 1u;
+}
+
 static void test_health_time_and_hour_orchestration(void) {
+    const uint8_t cursor_fixture[R1_HEALTH_SYNC_CURSOR_BYTES] = {
+        0x04u, 0x03u, 0x02u, 0x01u,
+        0x14u, 0x13u, 0x12u, 0x11u,
+        0x24u, 0x23u, 0x22u, 0x21u,
+        0x34u, 0x33u, 0x32u, 0x31u,
+        0x44u, 0x43u, 0x42u, 0x41u,
+        0x54u, 0x53u, 0x52u, 0x51u,
+    };
+    r1_health_sync_cursor_state decoded_cursors;
+    assert(r1_health_sync_cursor_decode(
+               cursor_fixture, sizeof cursor_fixture,
+               &decoded_cursors) == R1_OK);
+    assert(decoded_cursors.heart_rate_timestamp == UINT32_C(0x01020304));
+    assert(decoded_cursors.blood_oxygen_timestamp == UINT32_C(0x11121314));
+    assert(decoded_cursors.unresolved_offset_8 == UINT32_C(0x21222324));
+    assert(decoded_cursors.heart_rate_variability_timestamp ==
+           UINT32_C(0x31323334));
+    assert(decoded_cursors.activity_timestamp == UINT32_C(0x41424344));
+    assert(decoded_cursors.unresolved_offset_20 == UINT32_C(0x51525354));
+    uint8_t cursor_roundtrip[R1_HEALTH_SYNC_CURSOR_BYTES];
+    assert(r1_health_sync_cursor_encode(
+               &decoded_cursors, cursor_roundtrip) == R1_OK);
+    assert(memcmp(
+               cursor_fixture, cursor_roundtrip,
+               sizeof cursor_fixture) == 0);
+    assert(r1_health_sync_cursor_decode(
+               cursor_fixture, sizeof cursor_fixture - 1u,
+               &decoded_cursors) == R1_ERROR_LENGTH);
+    assert(r1_health_sync_cursor_decode(
+               cursor_fixture, sizeof cursor_fixture,
+               NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_health_sync_cursor_encode(
+               NULL, cursor_roundtrip) == R1_ERROR_ARGUMENT);
+
     r1_health_time_transition transition = {
         -300, -300, UINT32_C(1700000000), UINT32_C(1700000030),
     };
@@ -2391,6 +2451,23 @@ static void test_health_time_and_hour_orchestration(void) {
     assert(result.absolute_delta_seconds == 30u);
     assert(!result.subscriber_broadcast_requested);
     assert(!result.known_cursor_clamp_pass_requested);
+
+    size_t gomore_reinitialize_calls = 0u;
+    assert(!r1_gomore_time_transition_adapter(
+        NULL, count_gomore_reinitialize, &gomore_reinitialize_calls));
+    assert(!r1_gomore_time_transition_adapter(
+        &transition, count_gomore_reinitialize, &gomore_reinitialize_calls));
+    transition.new_timestamp_seconds = transition.old_timestamp_seconds - 179u;
+    assert(!r1_gomore_time_transition_adapter(
+        &transition, count_gomore_reinitialize, &gomore_reinitialize_calls));
+    transition.new_timestamp_seconds = transition.old_timestamp_seconds - 180u;
+    assert(r1_gomore_time_transition_adapter(
+        &transition, count_gomore_reinitialize, &gomore_reinitialize_calls));
+    assert(gomore_reinitialize_calls == 1u);
+    transition.old_timestamp_seconds = UINT32_MAX;
+    transition.new_timestamp_seconds = 0u;
+    assert(r1_gomore_time_transition_adapter(&transition, NULL, NULL));
+    assert(gomore_reinitialize_calls == 1u);
 
     transition = (r1_health_time_transition){
         0, 0, UINT32_C(1700000000), UINT32_C(1700000031),
@@ -5441,6 +5518,140 @@ static void test_bae8_event_route(void) {
     assert(plan.route == R1_BAE8_EVENT_IGNORE);
 }
 
+static void test_channel1_task_plans(void) {
+    r1_channel1_task_startup_plan startup;
+    assert(r1_channel1_task_plan_startup(false, &startup) == R1_OK);
+    assert(startup.queue_create_failed && startup.enter_fail_stop);
+    assert(startup.queue_capacity == R1_NORMAL_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_CHANNEL1_TASK_QUEUE_RECORD_BYTES);
+    assert(startup.sync_group == R1_CHANNEL1_TASK_SYNC_GROUP);
+    assert(strcmp(startup.registry_name, "ble_gtx") == 0);
+    assert(startup.watchdog_ticks == R1_CHANNEL1_TASK_WATCHDOG_TICKS);
+    assert(r1_channel1_task_plan_startup(true, &startup) == R1_OK);
+    assert(!startup.queue_create_failed && !startup.enter_fail_stop);
+
+    r1_channel1_task_flag_plan flags;
+    assert(r1_channel1_task_plan_flags(0u, &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.drain_queue && !flags.signal_suspend);
+    assert(r1_channel1_task_plan_flags(
+               R1_CHANNEL1_TASK_DISPATCH_FLAG, &flags) == R1_OK);
+    assert(!flags.provider_wait_error && flags.drain_queue);
+    assert(!flags.signal_suspend && flags.wait_again);
+    assert(r1_channel1_task_plan_flags(
+               R1_CHANNEL1_TASK_DISPATCH_FLAG |
+                   R1_CHANNEL1_TASK_SUSPEND_FLAG,
+               &flags) == R1_OK);
+    assert(flags.drain_queue && flags.signal_suspend);
+    assert(flags.enter_suspend_wait && !flags.wait_again);
+    assert(r1_channel1_task_plan_flags(
+               UINT32_C(0x80000001), &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.drain_queue && !flags.signal_suspend);
+}
+
+static void test_bae8_input_task_plans(void) {
+    r1_bae8_input_task_startup_plan startup;
+    assert(r1_bae8_input_task_plan_startup(false, &startup) == R1_OK);
+    assert(startup.queue_create_failed && startup.enter_fail_stop);
+    assert(startup.queue_capacity == R1_BAE8_INPUT_TASK_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_BAE8_INPUT_TASK_QUEUE_RECORD_BYTES);
+    assert(startup.sync_group == R1_BAE8_INPUT_TASK_SYNC_GROUP);
+    assert(strcmp(startup.registry_name, "ble_msgrx") == 0);
+    assert(startup.watchdog_ticks == R1_BAE8_INPUT_TASK_WATCHDOG_TICKS);
+    assert(r1_bae8_input_task_plan_startup(true, &startup) == R1_OK);
+    assert(!startup.queue_create_failed && !startup.enter_fail_stop);
+
+    r1_bae8_input_task_flag_plan flags;
+    assert(r1_bae8_input_task_plan_flags(0u, &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.drain_queue && !flags.signal_suspend);
+    assert(r1_bae8_input_task_plan_flags(
+               R1_BAE8_INPUT_TASK_DISPATCH_FLAG, &flags) == R1_OK);
+    assert(!flags.provider_wait_error && flags.drain_queue);
+    assert(!flags.signal_suspend && flags.wait_again);
+    assert(r1_bae8_input_task_plan_flags(
+               R1_BAE8_INPUT_TASK_DISPATCH_FLAG |
+                   R1_BAE8_INPUT_TASK_SUSPEND_FLAG,
+               &flags) == R1_OK);
+    assert(flags.drain_queue && flags.signal_suspend);
+    assert(flags.enter_suspend_wait && !flags.wait_again);
+    assert(r1_bae8_input_task_plan_flags(
+               UINT32_C(0x80400000), &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.drain_queue && !flags.signal_suspend);
+}
+
+static void test_shared_tx_task_plans(void) {
+    r1_shared_tx_task_startup_plan startup;
+    assert(r1_shared_tx_task_plan_startup(false, &startup) == R1_OK);
+    assert(startup.queue_create_failed && startup.enter_fail_stop);
+    assert(startup.queue_capacity == R1_EUS_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_SHARED_TX_TASK_QUEUE_RECORD_BYTES);
+    assert(startup.sync_group == R1_SHARED_TX_TASK_SYNC_GROUP);
+    assert(strcmp(startup.registry_name, "ble_msgtx") == 0);
+    assert(startup.watchdog_ticks == R1_SHARED_TX_TASK_WATCHDOG_TICKS);
+    assert(r1_shared_tx_task_plan_startup(true, &startup) == R1_OK);
+    assert(!startup.queue_create_failed && !startup.enter_fail_stop);
+
+    r1_shared_tx_task_flag_plan flags;
+    assert(r1_shared_tx_task_plan_flags(0u, &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.drain_queue && !flags.signal_suspend);
+    assert(r1_shared_tx_task_plan_flags(
+               R1_SHARED_TX_TASK_DISPATCH_FLAG, &flags) == R1_OK);
+    assert(!flags.provider_wait_error && flags.drain_queue);
+    assert(!flags.signal_suspend && flags.wait_again);
+    assert(r1_shared_tx_task_plan_flags(
+               R1_SHARED_TX_TASK_DISPATCH_FLAG |
+                   R1_SHARED_TX_TASK_SUSPEND_FLAG,
+               &flags) == R1_OK);
+    assert(flags.drain_queue && flags.signal_suspend);
+    assert(flags.enter_suspend_wait && !flags.wait_again);
+    assert(r1_shared_tx_task_plan_flags(
+               UINT32_C(0x80800001), &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.drain_queue && !flags.signal_suspend);
+}
+
+static void test_factory_input_task_plans(void) {
+    r1_factory_input_task_startup_plan startup;
+    assert(r1_factory_input_task_plan_startup(false, &startup) == R1_OK);
+    assert(startup.queue_create_failed && startup.enter_fail_stop);
+    assert(startup.action_count == 0u);
+    assert(r1_factory_input_task_plan_startup(true, &startup) == R1_OK);
+    assert(!startup.queue_create_failed && !startup.enter_fail_stop);
+    assert(startup.queue_capacity == R1_FACTORY_INPUT_TASK_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_FACTORY_INPUT_TASK_QUEUE_RECORD_BYTES);
+    assert(startup.sync_group == R1_FACTORY_INPUT_TASK_SYNC_GROUP);
+    assert(startup.action_count == R1_FACTORY_INPUT_TASK_STARTUP_ACTION_COUNT);
+    assert(startup.actions[0] == R1_FACTORY_INPUT_WEAR_BUFFER_FILL);
+    assert(startup.actions[1] == R1_FACTORY_INPUT_SENSOR_STREAM_INITIALIZE);
+    assert(startup.actions[2] == R1_FACTORY_INPUT_ACCELEROMETER_STREAM_CREATE);
+    assert(startup.actions[3] == R1_FACTORY_INPUT_STREAM_NAMESPACE_REGISTER);
+    assert(startup.actions[4] == R1_FACTORY_INPUT_TEMPERATURE_STREAM_CREATE);
+
+    r1_factory_input_task_flag_plan flags;
+    assert(r1_factory_input_task_plan_flags(0u, &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.run_periodic_operation);
+    assert(flags.wait_again && !flags.drain_queue && !flags.signal_suspend);
+    assert(r1_factory_input_task_plan_flags(
+               R1_FACTORY_INPUT_TASK_DISPATCH_FLAG, &flags) == R1_OK);
+    assert(!flags.provider_wait_error && flags.drain_queue);
+    assert(flags.run_periodic_operation && flags.wait_again);
+    assert(r1_factory_input_task_plan_flags(
+               R1_FACTORY_INPUT_TASK_DISPATCH_FLAG |
+                   R1_FACTORY_INPUT_TASK_SUSPEND_FLAG,
+               &flags) == R1_OK);
+    assert(flags.drain_queue && flags.signal_suspend);
+    assert(flags.enter_suspend_wait && !flags.run_periodic_operation);
+    assert(!flags.wait_again);
+    assert(r1_factory_input_task_plan_flags(
+               UINT32_C(0x80400000), &flags) == R1_OK);
+    assert(flags.provider_wait_error && !flags.drain_queue);
+    assert(flags.run_periodic_operation && flags.wait_again);
+}
+
 static void test_storage(void) {
     const r1_partition *log = r1_storage_partition("log.bin");
     assert(log != NULL);
@@ -5451,6 +5662,39 @@ static void test_storage(void) {
         const r1_partition *current = &r1_storage_partitions[index];
         assert(previous->offset + previous->length == current->offset);
     }
+
+    r1_storage_task_startup_plan startup;
+    assert(r1_storage_task_plan_startup(false, &startup) == R1_OK);
+    assert(startup.queue_create_failed && startup.enter_fail_stop);
+    assert(startup.action_count == 0u);
+    assert(r1_storage_task_plan_startup(true, &startup) == R1_OK);
+    assert(!startup.queue_create_failed && !startup.enter_fail_stop);
+    assert(startup.queue_capacity == R1_STORAGE_TASK_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_STORAGE_TASK_RECORD_BYTES);
+    assert(startup.sync_group == R1_STORAGE_TASK_SYNC_GROUP);
+    assert(strcmp(startup.registry_name, "storage") == 0);
+    assert(startup.watchdog_ticks == R1_STORAGE_TASK_WATCHDOG_TICKS);
+    assert(startup.action_count == R1_STORAGE_TASK_STARTUP_ACTION_COUNT);
+    assert(startup.actions[0] == R1_STORAGE_TASK_HARDWARE_INITIALIZE);
+    assert(startup.actions[1] == R1_STORAGE_TASK_HEALTH_DATABASE_START);
+    assert(startup.actions[7] == R1_STORAGE_TASK_SLEEP_DATABASE_START);
+    assert(startup.actions[9] == R1_STORAGE_TASK_PROTOCOL_STATE_RESET);
+
+    r1_storage_task_flag_plan flags;
+    assert(r1_storage_task_plan_flags(0u, &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.dispatch_event_record && !flags.signal_suspend);
+    assert(r1_storage_task_plan_flags(
+               R1_STORAGE_TASK_DISPATCH_FLAG, &flags) == R1_OK);
+    assert(!flags.provider_wait_error && flags.dispatch_event_record);
+    assert(!flags.signal_suspend && flags.wait_again);
+    assert(r1_storage_task_plan_flags(
+               R1_STORAGE_TASK_DISPATCH_FLAG | R1_STORAGE_TASK_SUSPEND_FLAG,
+               &flags) == R1_OK);
+    assert(flags.dispatch_event_record && flags.signal_suspend);
+    assert(flags.enter_suspend_wait && !flags.wait_again);
+    assert(r1_storage_task_plan_flags(UINT32_C(0x80000000), &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
 }
 
 static void test_export_planner(void) {
@@ -5511,6 +5755,7 @@ static void test_kv_snapshot_store(void) {
     static uint8_t legacy_bytes[R1_KV_PARTITION_BYTES];
     static uint8_t snapshot[R1_KV_PARTITION_BYTES];
     static uint8_t attempt_bytes[R1_KV_PARTITION_BYTES];
+    static uint8_t hsync_bytes[R1_KV_PARTITION_BYTES];
     uint8_t health[12u];
     uint8_t actual[R1_KV_CLASS_PAYLOAD_MAX];
     size_t actual_length = 0u;
@@ -5600,6 +5845,59 @@ static void test_kv_snapshot_store(void) {
         }
     }
     assert(observed_old && observed_new);
+
+    r1_memory_flash hsync_memory;
+    r1_memory_flash_initialize(
+        &hsync_memory, hsync_bytes, sizeof hsync_bytes);
+    assert(r1_kv_store_initialize(
+               &store, r1_memory_flash_interface(&hsync_memory)) == R1_OK);
+    r1_health_sync_cursor_state hsync = {
+        UINT32_C(1700000200), UINT32_C(1699999000),
+        UINT32_C(0x11223344), UINT32_MAX, 0u,
+        UINT32_C(0x55667788),
+    };
+    uint8_t hsync_payload[R1_HEALTH_SYNC_CURSOR_BYTES];
+    assert(r1_health_sync_cursor_encode(&hsync, hsync_payload) == R1_OK);
+    assert(r1_kv_store_set(
+               &store, R1_KV_HSYNC, hsync_payload,
+               sizeof hsync_payload) == R1_OK);
+    assert(r1_kv_store_commit(&store) == R1_OK);
+    assert(r1_kv_store_initialize(
+               &store, r1_memory_flash_interface(&hsync_memory)) == R1_OK);
+    assert(r1_kv_store_get(
+               &store, R1_KV_HSYNC, hsync_payload,
+               sizeof hsync_payload, &actual_length) == R1_OK);
+    assert(actual_length == R1_HEALTH_SYNC_CURSOR_BYTES);
+    assert(r1_health_sync_cursor_decode(
+               hsync_payload, actual_length, &hsync) == R1_OK);
+    const r1_health_time_transition hsync_transition = {
+        0, 0, UINT32_C(1700000000), UINT32_C(1699999000),
+    };
+    r1_health_time_transition_result hsync_result;
+    assert(r1_health_reconcile_sync_cursors(
+               &hsync, &hsync_transition, &hsync_result) == R1_OK);
+    assert(hsync_result.known_cursor_clamped_count == 2u);
+    assert(hsync.unresolved_offset_8 == UINT32_C(0x11223344));
+    assert(hsync.unresolved_offset_20 == UINT32_C(0x55667788));
+    assert(r1_health_sync_cursor_encode(&hsync, hsync_payload) == R1_OK);
+    assert(r1_kv_store_set(
+               &store, R1_KV_HSYNC, hsync_payload,
+               sizeof hsync_payload) == R1_OK);
+    assert(r1_kv_store_commit(&store) == R1_OK);
+    memset(hsync_payload, 0u, sizeof hsync_payload);
+    assert(r1_kv_store_initialize(
+               &store, r1_memory_flash_interface(&hsync_memory)) == R1_OK);
+    assert(r1_kv_store_get(
+               &store, R1_KV_HSYNC, hsync_payload,
+               sizeof hsync_payload, &actual_length) == R1_OK);
+    r1_health_sync_cursor_state reopened_hsync;
+    assert(r1_health_sync_cursor_decode(
+               hsync_payload, actual_length, &reopened_hsync) == R1_OK);
+    assert(reopened_hsync.heart_rate_timestamp == UINT32_C(1699999000));
+    assert(reopened_hsync.heart_rate_variability_timestamp ==
+           UINT32_C(1699999000));
+    assert(reopened_hsync.unresolved_offset_8 == UINT32_C(0x11223344));
+    assert(reopened_hsync.unresolved_offset_20 == UINT32_C(0x55667788));
 }
 
 static void put_i16(uint8_t *bytes, int16_t value) {
@@ -6939,6 +7237,54 @@ static void test_motion_provider_boundary(void) {
                &adapter, samples, 2u, &count) == R1_ERROR_CAPACITY);
     assert(count == 0u);
 
+    uint8_t batch[R1_MOTION_BATCH_BYTES];
+    memset(batch, 0xa5, sizeof batch);
+    const r1_motion_axis_calibration calibration = {10, -20, 30};
+    assert(r1_motion_batch_encode(
+               samples, 2u, &calibration, false,
+               UINT32_C(0x78563412), batch, sizeof batch) == R1_OK);
+    assert(batch[0] == 11u && batch[1] == 0u);
+    assert(batch[2] == 0xeau && batch[3] == 0xffu);
+    assert(batch[4] == 0x1eu && batch[5] == 0x04u);
+    assert(batch[6] == 9u && batch[7] == 0u);
+    assert(batch[8] == 0xec && batch[9] == 0xffu);
+    assert(batch[10] == 0x1eu && batch[11] == 0xfcu);
+    assert(batch[R1_MOTION_BATCH_COUNT_OFFSET] == 2u);
+    assert(batch[R1_MOTION_BATCH_COUNT_OFFSET + 1u] == 0u);
+    assert(batch[R1_MOTION_BATCH_RESERVED_OFFSET] == 0xa5u);
+    assert(batch[R1_MOTION_BATCH_RESERVED_OFFSET + 1u] == 0xa5u);
+    assert(batch[R1_MOTION_BATCH_TIMESTAMP_OFFSET] == 0x12u);
+    assert(batch[R1_MOTION_BATCH_TIMESTAMP_OFFSET + 1u] == 0x34u);
+    assert(batch[R1_MOTION_BATCH_TIMESTAMP_OFFSET + 2u] == 0x56u);
+    assert(batch[R1_MOTION_BATCH_TIMESTAMP_OFFSET + 3u] == 0x78u);
+
+    memset(batch, 0xa5, sizeof batch);
+    assert(r1_motion_batch_encode(
+               samples, 1u, &calibration, true, 0u,
+               batch, sizeof batch) == R1_OK);
+    assert(batch[0] == 1u && batch[1] == 0u);
+    assert(batch[2] == 0xfeu && batch[3] == 0xffu);
+    assert(batch[4] == 0u && batch[5] == 4u);
+    const r1_motion_axis_calibration erased = {-1, -1, -1};
+    assert(r1_motion_batch_encode(
+               samples, 1u, &erased, false, 0u,
+               batch, sizeof batch) == R1_OK);
+    assert(batch[0] == 1u && batch[1] == 0u);
+    assert(r1_motion_batch_encode(
+               NULL, 0u, NULL, false, 0u,
+               batch, sizeof batch) == R1_OK);
+    assert(batch[R1_MOTION_BATCH_COUNT_OFFSET] == 0u);
+    assert(r1_motion_batch_encode(
+               NULL, 1u, NULL, false, 0u,
+               batch, sizeof batch) == R1_ERROR_ARGUMENT);
+    assert(r1_motion_batch_encode(
+               samples, R1_MOTION_BATCH_SAMPLE_LIMIT + 1u,
+               NULL, false, 0u, batch, sizeof batch) ==
+           R1_ERROR_CAPACITY);
+    assert(r1_motion_batch_encode(
+               samples, 1u, NULL, false, 0u,
+               batch, sizeof batch - 1u) == R1_ERROR_LENGTH);
+
     r1_motion_adapter_initialize(&adapter);
     lis = (motion_trace){.chip_id = 0u};
     bma = (motion_trace){.chip_id = R1_MOTION_BMA456W_CHIP_ID};
@@ -7284,6 +7630,30 @@ static void test_connection_control_composition(void) {
     const uint8_t other[R1_PEER_ADDRESS_SIZE] = {9u, 9u, 9u, 9u, 9u, 9u};
     const uint8_t zero[R1_PEER_ADDRESS_SIZE] = {0};
     r1_connection_control_plan plan;
+    assert(r1_connection_control_role_sync_thread_flags() ==
+           R1_CONNECTION_CONTROL_ROLE_SYNC_THREAD_FLAG);
+
+    r1_connection_control_delayed_plan delayed_plan =
+        r1_connection_control_delayed_event_plan(UINT32_C(0xffff0002));
+    assert(delayed_plan.action == R1_CONNECTION_CONTROL_DELAYED_IGNORE);
+    assert(delayed_plan.connection_context == R1_CONNECTION_HANDLE_INVALID);
+    delayed_plan = r1_connection_control_delayed_event_plan(
+        UINT32_C(0x1234ab00));
+    assert(delayed_plan.action == R1_CONNECTION_CONTROL_DELAYED_ENQUEUE);
+    assert(delayed_plan.connection_context == UINT16_C(0x1234));
+    assert(delayed_plan.event_type == R1_CONNECTION_CONTROL_EVENT_TYPE_ZERO);
+    delayed_plan = r1_connection_control_delayed_event_plan(
+        UINT32_C(0x12340001));
+    assert(delayed_plan.action == R1_CONNECTION_CONTROL_DELAYED_ENQUEUE);
+    assert(delayed_plan.event_type == R1_CONNECTION_CONTROL_EVENT_TYPE_ONE);
+    delayed_plan = r1_connection_control_delayed_event_plan(
+        UINT32_C(0x12340002));
+    assert(delayed_plan.action == R1_CONNECTION_CONTROL_DELAYED_ENQUEUE);
+    assert(delayed_plan.event_type == R1_CONNECTION_CONTROL_EVENT_TYPE_TWO);
+    delayed_plan = r1_connection_control_delayed_event_plan(
+        UINT32_C(0x12340003));
+    assert(delayed_plan.action == R1_CONNECTION_CONTROL_DELAYED_FATAL);
+    assert(delayed_plan.connection_context == UINT16_C(0x1234));
 
     assert(r1_connection_control_plan_adv_start(
                false, 0u, false, NULL, NULL, second, false, false, &plan)
@@ -7560,6 +7930,193 @@ static void test_next_frontier_334_342_policies(void) {
 }
 
 static void test_next_frontier_314_328_policies(void) {
+    static const uint8_t gxt_positive[] = {0x12u, 0x34u};
+    static const uint8_t gxt_negative[] = {0xffu, 0xf0u};
+    static const uint8_t gxt_maximum[] = {0x7fu, 0xffu};
+    static const uint8_t gxt_minimum[] = {0x80u, 0x00u};
+    assert(r1_temperature_gxt310_decode_milliunits(gxt_positive) == 36406);
+    assert(r1_temperature_gxt310_decode_milliunits(gxt_negative) == -125);
+    assert(r1_temperature_gxt310_decode_milliunits(gxt_maximum) == 255992);
+    assert(r1_temperature_gxt310_decode_milliunits(gxt_minimum) == -256000);
+    assert(r1_temperature_gxt310_decode_milliunits(NULL) == 0);
+
+    static const uint8_t calibration_bytes[] = {
+        0u, 25u, 0u, 1u, 0xceu, 0xffu,
+    };
+    r1_temperature_pair_calibration decoded_calibration;
+    bool calibration_present = false;
+    assert(r1_temperature_pair_calibration_decode(
+               calibration_bytes, sizeof calibration_bytes,
+               &decoded_calibration, &calibration_present) == R1_OK);
+    assert(calibration_present);
+    assert(decoded_calibration.channels[0].direction ==
+           R1_TEMPERATURE_CALIBRATION_SUBTRACT);
+    assert(decoded_calibration.channels[0].offset == 25);
+    assert(decoded_calibration.channels[1].direction ==
+           R1_TEMPERATURE_CALIBRATION_ADD);
+    assert(decoded_calibration.channels[1].offset == -50);
+
+    static const uint8_t erased_calibration[] = {
+        0xffu, 0xffu, 0xffu, 0xffu, 0xffu, 0xffu,
+    };
+    assert(r1_temperature_pair_calibration_decode(
+               erased_calibration, sizeof erased_calibration,
+               &decoded_calibration, &calibration_present) == R1_OK);
+    assert(!calibration_present);
+    assert(decoded_calibration.channels[0].direction ==
+           R1_TEMPERATURE_CALIBRATION_DISABLED);
+    assert(decoded_calibration.channels[0].offset == -1);
+    assert(decoded_calibration.channels[1].direction ==
+           R1_TEMPERATURE_CALIBRATION_DISABLED);
+    assert(decoded_calibration.channels[1].offset == -1);
+
+    static const uint8_t unknown_direction[] = {
+        2u, 1u, 0u, 0xffu, 0xffu, 0xffu,
+    };
+    assert(r1_temperature_pair_calibration_decode(
+               unknown_direction, sizeof unknown_direction,
+               &decoded_calibration, &calibration_present) == R1_OK);
+    assert(calibration_present);
+    assert(decoded_calibration.channels[0].direction ==
+           R1_TEMPERATURE_CALIBRATION_DISABLED);
+    assert(r1_temperature_pair_calibration_decode(
+               NULL, sizeof calibration_bytes,
+               &decoded_calibration, &calibration_present) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_temperature_pair_calibration_decode(
+               calibration_bytes, sizeof calibration_bytes - 1u,
+               &decoded_calibration, &calibration_present) ==
+           R1_ERROR_LENGTH);
+
+    const int32_t stream_pair[] = {1000, 2000};
+    uint16_t stream_value = 0u;
+    assert(r1_temperature_pair_stream_value(
+               stream_pair, NULL, &stream_value) == R1_OK);
+    assert(stream_value == 1500u);
+    const r1_temperature_pair_calibration stream_calibration = {
+        .channels = {
+            {R1_TEMPERATURE_CALIBRATION_SUBTRACT, 25},
+            {R1_TEMPERATURE_CALIBRATION_ADD, 50},
+        },
+    };
+    assert(r1_temperature_pair_stream_value(
+               stream_pair, &stream_calibration, &stream_value) == R1_OK);
+    assert(stream_value == 1512u);
+
+    /* The stock add-sign-bit/extract sequence implements signed division by
+     * two toward zero while retaining only the low 16 result bits. */
+    const int32_t negative_stream_pair[] = {-5, -4};
+    assert(r1_temperature_pair_stream_value(
+               negative_stream_pair, NULL, &stream_value) == R1_OK);
+    assert(stream_value == UINT16_C(0xfffc));
+
+    /* Calibration bytes are loaded with LDRH, so an encoded 0xffff is an
+     * unsigned magnitude even though the public decoded field is int16_t. */
+    const r1_temperature_pair_calibration raw_u16_calibration = {
+        .channels = {
+            {R1_TEMPERATURE_CALIBRATION_SUBTRACT, -1},
+            {R1_TEMPERATURE_CALIBRATION_DISABLED, 0},
+        },
+    };
+    const int32_t zero_stream_pair[] = {0, 0};
+    assert(r1_temperature_pair_stream_value(
+               zero_stream_pair, &raw_u16_calibration,
+               &stream_value) == R1_OK);
+    assert(stream_value == UINT16_C(0x8001));
+
+    const int32_t wrapping_stream_pair[] = {INT32_MAX, 1};
+    assert(r1_temperature_pair_stream_value(
+               wrapping_stream_pair, NULL, &stream_value) == R1_OK);
+    assert(stream_value == 0u);
+    assert(r1_temperature_pair_stream_value(
+               NULL, NULL, &stream_value) == R1_ERROR_ARGUMENT);
+    assert(r1_temperature_pair_stream_value(
+               stream_pair, NULL, NULL) == R1_ERROR_ARGUMENT);
+
+    static const uint8_t battery_config_bytes[] = {
+        3u, 0xa5u, 0x06u, 0xffu,
+    };
+    r1_nv_battery_configuration battery_configuration;
+    assert(r1_nv_battery_configuration_decode(
+               battery_config_bytes, sizeof battery_config_bytes,
+               &battery_configuration) == R1_OK);
+    assert(battery_configuration.battery_type == 3u);
+    assert(battery_configuration.battery_type_valid);
+    assert(battery_configuration.voltage_compensation_millivolts == -250);
+    assert(battery_configuration.voltage_compensation_valid);
+
+    static const uint8_t erased_battery_config[] = {
+        0xffu, 0xffu, 0xffu, 0xffu,
+    };
+    assert(r1_nv_battery_configuration_decode(
+               erased_battery_config, sizeof erased_battery_config,
+               &battery_configuration) == R1_OK);
+    assert(battery_configuration.battery_type == UINT8_MAX);
+    assert(!battery_configuration.battery_type_valid);
+    assert(battery_configuration.voltage_compensation_millivolts == -1);
+    assert(!battery_configuration.voltage_compensation_valid);
+    assert(r1_nv_battery_configuration_decode(
+               NULL, sizeof battery_config_bytes,
+               &battery_configuration) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_battery_configuration_decode(
+               battery_config_bytes, sizeof battery_config_bytes - 1u,
+               &battery_configuration) == R1_ERROR_LENGTH);
+
+    static const uint8_t accelerometer_calibration_bytes[] = {
+        0x0au, 0x00u, 0xecu, 0xffu, 0x1eu, 0x00u,
+    };
+    r1_motion_axis_calibration accelerometer_calibration;
+    bool accelerometer_calibration_present = false;
+    assert(r1_nv_accelerometer_calibration_decode(
+               accelerometer_calibration_bytes,
+               sizeof accelerometer_calibration_bytes,
+               &accelerometer_calibration,
+               &accelerometer_calibration_present) == R1_OK);
+    assert(accelerometer_calibration_present);
+    assert(accelerometer_calibration.x == 10);
+    assert(accelerometer_calibration.y == -20);
+    assert(accelerometer_calibration.z == 30);
+    static const uint8_t erased_accelerometer_calibration[] = {
+        0xffu, 0xffu, 0xffu, 0xffu, 0xffu, 0xffu,
+    };
+    assert(r1_nv_accelerometer_calibration_decode(
+               erased_accelerometer_calibration,
+               sizeof erased_accelerometer_calibration,
+               &accelerometer_calibration,
+               &accelerometer_calibration_present) == R1_OK);
+    assert(!accelerometer_calibration_present);
+    assert(accelerometer_calibration.x == -1 &&
+           accelerometer_calibration.y == -1 &&
+           accelerometer_calibration.z == -1);
+    assert(r1_nv_accelerometer_calibration_decode(
+               NULL, sizeof accelerometer_calibration_bytes,
+               &accelerometer_calibration,
+               &accelerometer_calibration_present) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_accelerometer_calibration_decode(
+               accelerometer_calibration_bytes,
+               sizeof accelerometer_calibration_bytes - 1u,
+               &accelerometer_calibration,
+               &accelerometer_calibration_present) == R1_ERROR_LENGTH);
+
+    static const uint8_t ring_size_bytes[] = {12u};
+    uint8_t decoded_ring_size = 0u;
+    bool ring_size_valid = false;
+    assert(r1_nv_ring_size_decode(
+               ring_size_bytes, sizeof ring_size_bytes,
+               &decoded_ring_size, &ring_size_valid) == R1_OK);
+    assert(decoded_ring_size == 12u && ring_size_valid);
+    static const uint8_t invalid_ring_size_bytes[] = {UINT8_MAX};
+    assert(r1_nv_ring_size_decode(
+               invalid_ring_size_bytes, sizeof invalid_ring_size_bytes,
+               &decoded_ring_size, &ring_size_valid) == R1_OK);
+    assert(decoded_ring_size == UINT8_MAX && !ring_size_valid);
+    assert(r1_nv_ring_size_decode(
+               NULL, sizeof ring_size_bytes,
+               &decoded_ring_size, &ring_size_valid) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_ring_size_decode(
+               ring_size_bytes, 0u,
+               &decoded_ring_size, &ring_size_valid) == R1_ERROR_LENGTH);
+
     static const int32_t samples[R1_TEMPERATURE_PAIR_SENSOR_COUNT]
                                 [R1_TEMPERATURE_PAIR_SAMPLE_COUNT] = {
         {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000},
@@ -8072,6 +8629,53 @@ static void test_next_frontier_204_210_policies(void) {
         assert(streams.registrations[index].enabled);
     }
     assert(r1_sensor_stream_registration_plan(NULL) == R1_ERROR_ARGUMENT);
+
+    uint8_t raw_hr[R1_GOODIX_RAW_HR_RECORD_BYTES];
+    memset(raw_hr, UINT8_C(0xa5), sizeof raw_hr);
+    raw_hr[0] = 0u;
+    assert(r1_goodix_raw_hr_append(raw_hr, UINT32_C(0x12345678)));
+    assert(raw_hr[0] == 1u && raw_hr[1] == UINT8_C(0xa5) &&
+           raw_hr[2] == UINT8_C(0xa5) && raw_hr[3] == UINT8_C(0xa5));
+    assert(raw_hr[4] == UINT8_C(0x78) && raw_hr[5] == UINT8_C(0x56) &&
+           raw_hr[6] == UINT8_C(0x34) && raw_hr[7] == UINT8_C(0x12));
+    for (uint32_t index = 1u; index < R1_GOODIX_RAW_HR_VALUE_CAPACITY;
+         ++index) {
+        assert(r1_goodix_raw_hr_append(raw_hr, index));
+    }
+    assert(raw_hr[0] == R1_GOODIX_RAW_HR_VALUE_CAPACITY);
+    uint8_t full_snapshot[R1_GOODIX_RAW_HR_RECORD_BYTES];
+    memcpy(full_snapshot, raw_hr, sizeof raw_hr);
+    assert(!r1_goodix_raw_hr_append(raw_hr, UINT32_MAX));
+    assert(memcmp(full_snapshot, raw_hr, sizeof raw_hr) == 0);
+    assert(!r1_goodix_raw_hr_append(NULL, 1u));
+
+    uint8_t adt[R1_GOODIX_ADT_RECORD_BYTES];
+    memset(adt, UINT8_C(0x5a), sizeof adt);
+    adt[0] = 0u;
+    assert(r1_goodix_adt_append(adt, UINT32_C(0x89abcdef)));
+    assert(adt[0] == 1u && adt[1] == UINT8_C(0x5a) &&
+           adt[2] == UINT8_C(0x5a) && adt[3] == UINT8_C(0x5a));
+    assert(adt[4] == UINT8_C(0xef) && adt[5] == UINT8_C(0xcd) &&
+           adt[6] == UINT8_C(0xab) && adt[7] == UINT8_C(0x89));
+    for (uint32_t index = 1u; index < R1_GOODIX_ADT_VALUE_CAPACITY;
+         ++index) {
+        assert(r1_goodix_adt_append(adt, index));
+    }
+    assert(adt[0] == R1_GOODIX_ADT_VALUE_CAPACITY);
+    uint8_t adt_full_snapshot[R1_GOODIX_ADT_RECORD_BYTES];
+    memcpy(adt_full_snapshot, adt, sizeof adt);
+    assert(!r1_goodix_adt_append(adt, UINT32_MAX));
+    assert(memcmp(adt_full_snapshot, adt, sizeof adt) == 0);
+    assert(!r1_goodix_adt_append(NULL, 1u));
+
+    uint8_t wear[R1_GOODIX_WEAR_RECORD_BYTES] = {
+        UINT8_C(0xa5), UINT8_C(0x5a),
+    };
+    r1_goodix_wear_living_object_update(wear, UINT8_C(0x7e));
+    assert(wear[0] == 1u && wear[1] == UINT8_C(0x7e));
+    r1_goodix_wear_living_object_update(wear, 0u);
+    assert(wear[0] == 1u && wear[1] == 0u);
+    r1_goodix_wear_living_object_update(NULL, 1u);
 
     r1_activity_offline_queue queue;
     r1_activity_offline_initialize(&queue);
@@ -8599,6 +9203,10 @@ int main(void) {
     test_runtime_touch_effect();
     test_runtime_eus_bridge();
     test_bae8_event_route();
+    test_channel1_task_plans();
+    test_bae8_input_task_plans();
+    test_shared_tx_task_plans();
+    test_factory_input_task_plans();
     test_storage();
     test_export_planner();
     test_kv_snapshot_store();

@@ -1533,6 +1533,14 @@ tests additionally pin callback order and provider preflight.
 |---|---|---|
 | `0x00049410` | `gomore_primitives_authorization_dispatch` | change one authorization slot, reconcile its four shared sensor streams, run slot callbacks, reset released HR/HRV state, and maintain the all-idle timer |
 
+The manager's four exact topic callbacks and readiness barrier are now reduced through the typed
+`gomore_primitives_topic_*` state/API. This adds the recovered `-Y/X/Z` accelerometer transform,
+raw-optical UInt32 conversion, direct-HR Float32 staging, four-value HRV lane, acc/raw barrier, and
+successful-update cleanup without embedding stock pointers. The available Zephyr `"acc"` stream
+can feed a dormant exact `"gomore"` batch listener; the other three producers and engine execution
+remain fail-closed. Full byte hashes, packet layouts, safety divergences, and tests are in
+[`GOMORE-TOPIC-INPUT-CORRELATION.md`](GOMORE-TOPIC-INPUT-CORRELATION.md).
+
 The 25-sample locomotion window preprocessor `0x0005ED14` adds 518 declared bytes, bringing the
 primitive module to 318 functions / 43,474 declared bytes and the combined local total to 337
 entries, with 25 remaining gated. Three Float32 axis pointers and the unavailable flag become

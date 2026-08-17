@@ -154,7 +154,13 @@ The accelerometer adapter clamps the sample count to 25, converts packed signed 
 the provider input layout, sets its readiness bit, and enters the common update path. The raw-HR
 adapter applies the same 25-sample bound, converts unsigned readings to the provider numeric form,
 sets its readiness bit, and enters that path. These bounded input seams may be implemented locally,
-but they must remain disabled until a licensed GoMore provider supplies the underlying algorithm.
+but live result production remains disabled until the owner-authorized transparent engine is fully
+composed with typed inputs, persistence, and validated hardware providers.
+Those two R1 adapters, the adjacent direct-HR/HRV staging callbacks, and their shared readiness
+barrier now compile as bounded transparent C; the Zephyr target retains only a dormant exact
+`"gomore"` accelerometer staging listener. See
+[`../correlation/GOMORE-TOPIC-INPUT-CORRELATION.md`](../correlation/GOMORE-TOPIC-INPUT-CORRELATION.md).
+No engine execution or result publication is enabled by that staging seam.
 Nine other audit-range starts omitted by Ghidra are data/table addresses or an instruction inside
 an existing function, so they are intentionally not fabricated as functions.
 

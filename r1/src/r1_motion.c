@@ -218,6 +218,65 @@ int16_t r1_motion_normalize_axis(int16_t raw_axis) {
     return (int16_t)(-(((-value) + 3) / 4));
 }
 
+static int16_t add_axis_calibration(int16_t sample, int16_t calibration) {
+    /* The stock producer adds in a 16-bit register and stores the low half. */
+    return (int16_t)((uint16_t)sample + (uint16_t)calibration);
+}
+
+static void store_u16_le(uint8_t *destination, uint16_t value) {
+    destination[0] = (uint8_t)value;
+    destination[1] = (uint8_t)(value >> 8u);
+}
+
+static void store_u32_le(uint8_t *destination, uint32_t value) {
+    destination[0] = (uint8_t)value;
+    destination[1] = (uint8_t)(value >> 8u);
+    destination[2] = (uint8_t)(value >> 16u);
+    destination[3] = (uint8_t)(value >> 24u);
+}
+
+r1_error r1_motion_batch_encode(
+    const r1_motion_sample *samples, size_t sample_count,
+    const r1_motion_axis_calibration *calibration,
+    bool calibration_in_progress, uint32_t timestamp_ticks,
+    uint8_t *destination, size_t destination_length) {
+    if (destination == NULL ||
+        (sample_count != 0u && samples == NULL)) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (destination_length != R1_MOTION_BATCH_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    if (sample_count > R1_MOTION_BATCH_SAMPLE_LIMIT) {
+        return R1_ERROR_CAPACITY;
+    }
+
+    r1_motion_axis_calibration effective = {0, 0, 0};
+    if (calibration != NULL && !calibration_in_progress &&
+        !(calibration->x == -1 && calibration->y == -1 &&
+          calibration->z == -1)) {
+        effective = *calibration;
+    }
+    for (size_t index = 0u; index < sample_count; ++index) {
+        const size_t offset = index * R1_MOTION_SAMPLE_BYTES;
+        store_u16_le(destination + offset,
+                     (uint16_t)add_axis_calibration(
+                         samples[index].x, effective.x));
+        store_u16_le(destination + offset + 2u,
+                     (uint16_t)add_axis_calibration(
+                         samples[index].y, effective.y));
+        store_u16_le(destination + offset + 4u,
+                     (uint16_t)add_axis_calibration(
+                         samples[index].z, effective.z));
+    }
+    store_u16_le(destination + R1_MOTION_BATCH_COUNT_OFFSET,
+                 (uint16_t)sample_count);
+    /* Stock 0x0006F4A0 leaves bytes 182..183 untouched. */
+    store_u32_le(destination + R1_MOTION_BATCH_TIMESTAMP_OFFSET,
+                 timestamp_ticks);
+    return R1_OK;
+}
+
 static r1_motion_provider *selected_provider(r1_motion_adapter *adapter) {
     if (adapter->selected == R1_MOTION_VARIANT_LIS2DW12) {
         return &adapter->lis2dw12;

@@ -9,6 +9,7 @@
 #include "openr1/r1_clock.h"
 #include "openr1/r1_runtime.h"
 #include "openr1_databases_zephyr.h"
+#include "time_calendar/time_calendar.h"
 
 #define OPENR1_CLOCK_CADENCE_TICKS 1024u
 /* The hour transition is delivered in this thread and may synchronously run
@@ -173,8 +174,22 @@ bool openr1_clock_zephyr_local_tm(struct tm *out) {
         &platform_clock, current_ticks(), &local_seconds);
     bool converted = false;
     if (available) {
-        const time_t moment = (time_t)local_seconds;
-        converted = gmtime_r(&moment, out) != NULL;
+        time_calendar_broken_down broken;
+        if (time_calendar_unix_to_broken_down(
+                local_seconds, &broken) == &broken) {
+            *out = (struct tm){
+                .tm_sec = (int)broken.second,
+                .tm_min = (int)broken.minute,
+                .tm_hour = (int)broken.hour,
+                .tm_mday = (int)broken.day,
+                .tm_mon = (int)broken.month,
+                .tm_year = (int)broken.year,
+                .tm_wday = (int)broken.weekday,
+                .tm_yday = (int)broken.year_day,
+                .tm_isdst = 0,
+            };
+            converted = true;
+        }
     }
     (void)k_mutex_unlock(&clock_mutex);
     return available && converted;

@@ -3,7 +3,7 @@
 ## Decision
 
 Under the "Owner-authorized full reduction (2026-08-14)" section of
-[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the 27-function family
+[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), the 28-function family
 `unknown_shared_quantized_neural_runtime_candidate` is reduced from the
 recovered decompilation evidence to compilable C at
 [`../../reconstructed/quantized_runtime/`](../../reconstructed/quantized_runtime/).
@@ -126,6 +126,7 @@ Stock image: application, load base `0x00027000`, SHA-256
 | `0x00074CB4..<0x00074CD6` | 34 | `quantized_runtime_cursor_pair_add_descriptor_construct` | Goodix extension: consume two cursor words and emit {0, word0, word1, reconstructed int8-add executor} |
 | `0x00074CDC..<0x00074CE0` | 4 | `quantized_runtime_softmax_executor_vector` | in-family: returns the reconstructed softmax executor address (stock `0x0005D245`) |
 | `0x00074CE4..<0x00074D02` | 30 | `quantized_runtime_quantizer_descriptor_construct` | cursor: read {min,max} word pair and advance by 2 words; NULL cursor: {0.0f, 1.0f}; install in-family quantizer vector (stock `0x000293FD`) |
+| `0x00058D4A..<0x00058D52` | 8 | `compare_live_entries` | qsort comparator used by tensor-arena compaction; subtract ascending first-word offsets |
 | `0x00091C48..<0x00091C56` + `0x000936FC..<0x0009371C` | 46 | `quantized_runtime_tensor_release` | discontiguous body: 14-byte head tail-branches into the shared 32-byte slot-scan tail (this is why the ledger lists the entry end as `0x0009371B`); clear data pointer when flag bit 2 is clear, then free the matching pool slot |
 | `0x00091C56..<0x00091C80` | 42 | `quantized_runtime_tensor_release_many` | for i in [0,count): release non-NULL entries, zero every array slot; signed count bound |
 | `0x00091D9C..<0x00091DBE` | 34 | `quantized_runtime_tensor_allocate` | construct + arena allocate + clear bufferless flag |

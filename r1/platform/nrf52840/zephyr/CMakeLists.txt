@@ -135,7 +135,10 @@ target_sources(app PRIVATE
   src/openr1_optical_zephyr.c
   src/openr1_power_zephyr.c
   src/openr1_reset_zephyr.c
+  src/openr1_sensor_stream_zephyr.c
   src/openr1_storage_zephyr.c
+  src/openr1_software_twi_zephyr.c
+  src/openr1_temperature_zephyr.c
   src/openr1_touch_zephyr.c
   src/openr1_twim1_zephyr.c
   src/openr1_databases_zephyr.c

@@ -240,6 +240,11 @@ static void store_u32_fixture(uint8_t destination[4], uint32_t value) {
     destination[3] = (uint8_t)(value >> 24u);
 }
 
+static void store_u16_fixture(uint8_t destination[2], uint16_t value) {
+    destination[0] = (uint8_t)value;
+    destination[1] = (uint8_t)(value >> 8u);
+}
+
 static uint32_t load_u32_fixture(const uint8_t source[4]) {
     return (uint32_t)source[0] |
            (uint32_t)source[1] << 8u |
@@ -4678,6 +4683,98 @@ void test_reconstructed_gomore_primitives(void) {
         sleep_graph_construct_recurrent, sleep_graph_construct_dense));
     assert(g_sleep_graph_dispatch_trace.zero_build_calls ==
            graph_zero_calls_before);
+    gomore_primitives_topic_input_state topic_input;
+    memset(&topic_input, 0, sizeof(topic_input));
+    uint8_t topic_acc_batch[GOMORE_PRIMITIVES_TOPIC_ACC_BATCH_BYTES];
+    memset(topic_acc_batch, 0, sizeof(topic_acc_batch));
+    store_u16_fixture(&topic_acc_batch[0], UINT16_C(1024));
+    store_u16_fixture(&topic_acc_batch[2], (uint16_t)(int16_t)-1024);
+    store_u16_fixture(&topic_acc_batch[4], UINT16_C(512));
+    topic_acc_batch[GOMORE_PRIMITIVES_TOPIC_ACC_COUNT_OFFSET] = 30u;
+    assert(gomore_primitives_topic_accelerometer_ingest(
+        &topic_input, topic_acc_batch, sizeof(topic_acc_batch)));
+    assert(topic_input.accelerometer_sample_count == 25u &&
+           topic_input.accelerometer_axes[0][0] == 1000.0f &&
+           topic_input.accelerometer_axes[1][0] == 1000.0f &&
+           topic_input.accelerometer_axes[2][0] == 500.0f &&
+           topic_input.ready_flags ==
+               GOMORE_PRIMITIVES_TOPIC_READY_ACCELEROMETER);
+    const gomore_primitives_topic_input_state topic_before_bad = topic_input;
+    assert(!gomore_primitives_topic_accelerometer_ingest(
+        &topic_input, topic_acc_batch, sizeof(topic_acc_batch) - 1u));
+    assert(memcmp(&topic_input, &topic_before_bad, sizeof(topic_input)) == 0);
+
+    uint8_t topic_raw_packet[104];
+    memset(topic_raw_packet, 0, sizeof(topic_raw_packet));
+    topic_raw_packet[0] = 26u;
+    store_u32_fixture(&topic_raw_packet[4], UINT32_C(123456));
+    store_u32_fixture(&topic_raw_packet[100], UINT32_C(654321));
+    assert(gomore_primitives_topic_raw_optical_ingest(
+        &topic_input, topic_raw_packet, sizeof(topic_raw_packet)));
+    assert(topic_input.raw_optical_sample_count == 25u &&
+           topic_input.raw_optical[0] == 123456.0f &&
+           topic_input.raw_optical[24] == 654321.0f &&
+           topic_input.ready_flags ==
+               (GOMORE_PRIMITIVES_TOPIC_READY_ACCELEROMETER |
+                GOMORE_PRIMITIVES_TOPIC_READY_RAW_OPTICAL));
+
+    const uint8_t topic_hr_packet[] = {72u};
+    assert(gomore_primitives_topic_heart_rate_ingest(
+        &topic_input, topic_hr_packet, sizeof(topic_hr_packet)));
+    assert(topic_input.direct_heart_rate == 72.0f &&
+           topic_input.ready_flags ==
+               (GOMORE_PRIMITIVES_TOPIC_READY_ACCELEROMETER |
+                GOMORE_PRIMITIVES_TOPIC_READY_RAW_OPTICAL |
+                GOMORE_PRIMITIVES_TOPIC_READY_HEART_RATE));
+
+    uint8_t topic_hrv_packet[10];
+    memset(topic_hrv_packet, 0, sizeof(topic_hrv_packet));
+    store_u16_fixture(&topic_hrv_packet[0], UINT16_C(800));
+    store_u16_fixture(&topic_hrv_packet[2], UINT16_C(810));
+    store_u16_fixture(&topic_hrv_packet[4], UINT16_C(820));
+    store_u16_fixture(&topic_hrv_packet[6], UINT16_C(830));
+    topic_hrv_packet[GOMORE_PRIMITIVES_TOPIC_HRV_COUNT_OFFSET] = 5u;
+    assert(gomore_primitives_topic_hrv_ingest(
+        &topic_input, topic_hrv_packet, sizeof(topic_hrv_packet)));
+    assert(topic_input.hrv_auxiliary_count == 4u &&
+           topic_input.hrv_auxiliary[0] == 800u &&
+           topic_input.hrv_auxiliary[3] == 830u &&
+           topic_hrv_packet[GOMORE_PRIMITIVES_TOPIC_HRV_COUNT_OFFSET] == 5u);
+    topic_hrv_packet[GOMORE_PRIMITIVES_TOPIC_HRV_COUNT_OFFSET] = 2u;
+    assert(gomore_primitives_topic_hrv_ingest(
+        &topic_input, topic_hrv_packet, sizeof(topic_hrv_packet)));
+    assert(topic_input.hrv_auxiliary_count == 2u &&
+           topic_input.hrv_auxiliary[0] == 800u &&
+           topic_input.hrv_auxiliary[1] == 810u &&
+           topic_input.hrv_auxiliary[2] == 0u &&
+           topic_input.hrv_auxiliary[3] == 0u);
+    assert(gomore_primitives_topic_update_take_ready(
+        &topic_input, true, true));
+    assert(topic_input.ready_flags == 0u);
+    gomore_primitives_topic_update_complete(&topic_input, false);
+    assert(topic_input.accelerometer_sample_count == 25u &&
+           topic_input.raw_optical_sample_count == 25u);
+    gomore_primitives_topic_update_complete(&topic_input, true);
+    assert(topic_input.accelerometer_sample_count == 0u &&
+           topic_input.raw_optical_sample_count == 0u &&
+           topic_input.hrv_auxiliary_count == 2u &&
+           topic_input.direct_heart_rate == 72.0f);
+    topic_input.ready_flags =
+        GOMORE_PRIMITIVES_TOPIC_READY_ACCELEROMETER;
+    assert(!gomore_primitives_topic_update_take_ready(
+        &topic_input, true, true));
+    assert(gomore_primitives_topic_update_take_ready(
+        &topic_input, true, false));
+    assert(!gomore_primitives_topic_update_take_ready(
+        &topic_input, false, false));
+    assert(!gomore_primitives_topic_raw_optical_ingest(
+        &topic_input, topic_raw_packet, sizeof(topic_raw_packet) - 1u));
+    assert(!gomore_primitives_topic_heart_rate_ingest(
+        &topic_input, NULL, 0u));
+    assert(!gomore_primitives_topic_hrv_ingest(
+        &topic_input, topic_hrv_packet,
+        GOMORE_PRIMITIVES_TOPIC_HRV_COUNT_OFFSET));
+
     uint8_t host_input_engine[0x39D8];
     memset(host_input_engine, UINT8_C(0xA5), sizeof(host_input_engine));
     store_u32_fixture(&host_input_engine[0x39D4u], 2u);
@@ -10222,6 +10319,69 @@ void test_reconstructed_gomore_primitives(void) {
         &scaled_sample_state, false, NULL));
     assert(scaled_sample_state.capture_count == 1u &&
            scaled_sample_publish_calls == 1u);
+
+    memset(&scaled_sample_state, UINT8_C(0xA5),
+           sizeof(scaled_sample_state));
+    scaled_sample_state.capture_enabled = true;
+    scaled_sample_state.capture_count = 7u;
+    scaled_sample_state.captured[0] = UINT16_C(1234);
+    assert(gomore_primitives_temperature_measurement_begin(
+        &scaled_sample_state));
+    assert(scaled_sample_state.recent_count == 0u &&
+           scaled_sample_state.attempt_count == 0u &&
+           scaled_sample_state.measurement_active &&
+           scaled_sample_state.capture_enabled &&
+           scaled_sample_state.capture_count == 7u &&
+           scaled_sample_state.captured[0] == UINT16_C(1234));
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(29999)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    assert(scaled_sample_state.attempt_count == 1u &&
+           scaled_sample_state.recent_count == 0u);
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(30000)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(30300)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    assert(scaled_sample_state.recent_count == 2u);
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(30301)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    assert(scaled_sample_state.recent_count == 0u);
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(50000)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(49900)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(49800)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(49750)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(49700)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_COMPLETE);
+    assert(scaled_sample_state.recent_count == 5u &&
+           scaled_sample_state.attempt_count == 9u);
+
+    assert(gomore_primitives_temperature_measurement_begin(
+        &scaled_sample_state));
+    for (uint8_t attempt = 0u; attempt < 30u; ++attempt) {
+        assert(gomore_primitives_temperature_measurement_step(
+                   &scaled_sample_state, UINT16_C(1000)) ==
+               GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_CONTINUE);
+    }
+    assert(gomore_primitives_temperature_measurement_step(
+               &scaled_sample_state, UINT16_C(40000)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_TIMEOUT);
+    assert(scaled_sample_state.attempt_count == 31u &&
+           scaled_sample_state.recent_count == 0u);
+    assert(gomore_primitives_temperature_measurement_step(
+               NULL, UINT16_C(40000)) ==
+           GOMORE_PRIMITIVES_TEMPERATURE_MEASUREMENT_INVALID);
     const uint16_t stable_samples[12] = {
         1110u, 1000u, 1100u, 1010u, 1090u, 1020u,
         1080u, 1030u, 1070u, 1040u, 1060u, 1050u};

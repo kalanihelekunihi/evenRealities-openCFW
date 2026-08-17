@@ -616,3 +616,24 @@ bool r1_pmic_plan_charged_notification(
     plan_pmic_charged_completion(observation, plan);
     return true;
 }
+
+r1_pmic_delayed_callback_plan r1_pmic_retry_callback_plan(void) {
+    return (r1_pmic_delayed_callback_plan){
+        .reschedule_self = true,
+        .delay_argument = R1_PMIC_CHARGED_RETRY_DELAY_MS,
+        .thread_flags_to_set = R1_PMIC_RETRY_CALLBACK_THREAD_FLAG,
+    };
+}
+
+r1_pmic_delayed_callback_plan r1_pmic_post_timer_callback_plan(void) {
+    return (r1_pmic_delayed_callback_plan){
+        .thread_flags_to_set = R1_PMIC_POST_TIMER_THREAD_FLAG,
+    };
+}
+
+r1_pmic_delayed_callback_plan r1_pmic_post_device_callback_plan(void) {
+    return (r1_pmic_delayed_callback_plan){
+        .invoke_device_slot_0c = true,
+        .thread_flags_to_set = R1_PMIC_POST_DEVICE_THREAD_FLAG,
+    };
+}

@@ -1,6 +1,6 @@
 # R1 BLE connection-parameter policy correlation
 
-Status: four R1 product functions / 498 bytes byte-pinned; pure policy implemented.
+Status: five R1 product functions / 562 bytes byte-pinned; pure policy and delayed route implemented.
 
 ## Outcome
 
@@ -25,6 +25,7 @@ application and pins:
 | `0x0004CBA4..<0x0004CBAA` | 6 | `4af57962177981e766a33cad6cdf80f1a7892884aebd51a147f6bf4fdd7af566` | phone connection-handle accessor |
 | `0x00051AA0..<0x00051C78` | 472 | `3b73ea67fb15c04cb02fcebeaeff9bcb04b32b574f3798079f74f84512237cbc` | GAP observer and retry policy |
 | `0x00072B80..<0x00072B8E` | 14 | `b8482c5ec8f9a3e6f9028fb6ed2712777bce3a192c280b5f9b796a3767b4fe1b` | speed classifier |
+| `0x000882AC..<0x000882EC` | 64 | `28d8568d7f96013e7c9255881ce0b659f1ed3071d7bd35492f99de6ad18027ab` | delayed connection-control event selector and BLE-thread route |
 
 All direct branch callsites are frozen. The observer is indirectly registered, while the
 classifier has exactly two calls, both inside the observer. The observer literals also pin its
@@ -44,6 +45,11 @@ Thumb pointer `0x000882AD`.
   handle matches; otherwise it updates the phone status when that handle matches.
 - A mismatch schedules the requested speed again. Actual slow uses a 4 ms delay; actual fast uses
   2,000 ms. These asymmetric values and the strict threshold are intentional compatibility rules.
+- The delayed callback interprets bits 31...16 as the connection/context and the low byte as a
+  selector. Context `0xFFFF` is ignored. Selectors `0`, `1`, and `2` enqueue empty BLE-thread
+  events `0x40`, `0x10`, and `0x20`; any other selector takes the recovered fatal boundary.
+  `r1_connection_control_delayed_event_plan` returns these effects as typed actions without
+  queueing, logging, or terminating the process.
 
 Tests cover the `49/50` boundary, peripheral-role gate, both accepted pairs, preservation of an
 existing marker, role-specific updates, both mismatch delays, and disconnect cancellation.
@@ -51,9 +57,11 @@ existing marker, role-specific updates, both mismatch delays, and disconnect can
 ## Provider boundary
 
 Nordic SDK 17.1.0 owns BLE event layouts, role lookup, connection-parameter structures, GAP update
-requests, and SoftDevice operations. The recovered generic delayed-event loop and logging facade
-remain outside this closure. The delayed callback at `0x000882AC` is pinned only as a referenced
-boundary here; it is not admitted or recreated until its broader event-routing ownership is closed.
+requests, and SoftDevice operations. The recovered generic delayed-event loop, live BLE-thread
+queue, logging facade, and fatal-error implementation remain separate. The formerly deferred
+callback at `0x000882AC` is now admitted only as the pure selector/context route above; all six
+installed Thumb pointers (`0x0004CAE0`, `0x0004D650`, `0x0004DE40`, `0x0004DF10`, `0x0004E14C`,
+and `0x00051CE0`) are image-pinned.
 
 ## Reproduction
 

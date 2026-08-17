@@ -19,6 +19,14 @@
 #define R1_EP_RECORD_MAGIC UINT8_C(0x0a)
 #define R1_SLEEP_SYNC_MARK_EVENT UINT16_C(0x2001)
 #define R1_SLEEP_SYNC_ACK_CONTEXT_BYTES 12u
+#define R1_STORAGE_TASK_QUEUE_CAPACITY 50u
+#define R1_STORAGE_TASK_RECORD_BYTES 16u
+#define R1_STORAGE_TASK_SYNC_GROUP 7u
+#define R1_STORAGE_TASK_WATCHDOG_TICKS UINT32_C(10000)
+#define R1_STORAGE_TASK_WAIT_FLAGS UINT32_C(0x00ffffff)
+#define R1_STORAGE_TASK_DISPATCH_FLAG UINT32_C(1u << 22)
+#define R1_STORAGE_TASK_SUSPEND_FLAG UINT32_C(1u << 23)
+#define R1_STORAGE_TASK_STARTUP_ACTION_COUNT 10u
 
 typedef struct {
     const char *name;
@@ -159,6 +167,41 @@ typedef struct {
     uint32_t provider_result;
 } r1_fds_event_plan;
 
+typedef enum {
+    R1_STORAGE_TASK_HARDWARE_INITIALIZE = 0,
+    R1_STORAGE_TASK_HEALTH_DATABASE_START,
+    R1_STORAGE_TASK_HEART_RATE_CACHE_REFRESH,
+    R1_STORAGE_TASK_SPO2_CACHE_REFRESH,
+    R1_STORAGE_TASK_TEMPERATURE_CACHE_REFRESH,
+    R1_STORAGE_TASK_STRESS_CACHE_REFRESH,
+    R1_STORAGE_TASK_ACTIVITY_CACHE_REFRESH,
+    R1_STORAGE_TASK_SLEEP_DATABASE_START,
+    R1_STORAGE_TASK_HRV_CACHE_REFRESH,
+    R1_STORAGE_TASK_PROTOCOL_STATE_RESET
+} r1_storage_task_startup_action;
+
+typedef struct {
+    bool queue_create_failed;
+    bool enter_fail_stop;
+    uint32_t queue_capacity;
+    uint32_t queue_record_bytes;
+    uint8_t sync_group;
+    const char *registry_name;
+    uint32_t watchdog_ticks;
+    r1_storage_task_startup_action
+        actions[R1_STORAGE_TASK_STARTUP_ACTION_COUNT];
+    size_t action_count;
+} r1_storage_task_startup_plan;
+
+typedef struct {
+    uint32_t observed_flags;
+    bool provider_wait_error;
+    bool dispatch_event_record;
+    bool signal_suspend;
+    bool enter_suspend_wait;
+    bool wait_again;
+} r1_storage_task_flag_plan;
+
 r1_error r1_export_plan_command(
     r1_export_state *state, const r1_export_observation *observation,
     r1_export_plan *plan);
@@ -174,5 +217,9 @@ r1_error r1_fds_plan_event(
     uint8_t provider_event_id, uint32_t provider_result,
     uint16_t record_key, uint32_t record_id, bool metadata_validated,
     bool retry_already_pending, r1_fds_event_plan *plan);
+r1_error r1_storage_task_plan_startup(
+    bool queue_created, r1_storage_task_startup_plan *plan);
+r1_error r1_storage_task_plan_flags(
+    uint32_t flags, r1_storage_task_flag_plan *plan);
 
 #endif

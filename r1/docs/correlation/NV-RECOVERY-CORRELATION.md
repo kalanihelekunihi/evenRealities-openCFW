@@ -71,6 +71,27 @@ allocation, logging, or device access. Tests cover null/length/CRC rejection, al
 valid-local preservation, invalid-incoming rejection, reserved-byte behavior, and the zero-voltage
 asymmetry.
 
+The same portable module exposes a strict decoder for the six calibration bytes at `nv_r1` offset
+`0x3E`: direction `0` subtracts, direction `1` adds, other values disable that channel, and an
+all-`0xFF` record is reported absent. The source-built Zephyr GXT310 adapter consumes this value
+read-only after KV startup. It does not invoke the destructive recovery merge or mutate `nv_r1`.
+
+The adjacent six accelerometer bytes at offset `0x44` have a separate strict
+three-Int16LE decoder. All three `-1` values mean absent, matching the stock
+batch producer's erased-record check; other tuples are retained exactly. The
+source-built Zephyr `"acc"` stream adds present offsets to normalized XYZ with
+the recovered 16-bit wrap behavior and exposes no calibration writer.
+
+A second strict decoder covers the exact four-byte `power` class: battery type is byte 0 and
+signed Int16LE voltage compensation is at bytes 2...3. It reports the recovered type-1...4 and
+compensation-range validity separately from the raw decoded values. Zephyr uses a valid type to
+configure its runtime controller and exposes the complete decoded record read-only; it does not
+enable the recovery merge or a periodic sampler.
+
+The one-byte `r_size` class has its own strict decoder and is valid only for 6...15. Zephyr exposes
+a valid value read-only, but does not infer the separate IQS7211E physical layout from ring size or
+use this field to energize touch hardware.
+
 The normal dispatcher continues to refuse live `nvRecover`. This is intentional hardening from the
 firmware security audit: the body carries two identifiers plus sensor and battery calibration, and
 a valid merge can mutate persistent device identity/configuration. The report sender and live

@@ -4,7 +4,6 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <time.h>
 
 #include <fal.h>
 #include <flashdb.h>
@@ -12,10 +11,12 @@
 #include <zephyr/linker/section_tags.h>
 
 #include "openr1/r1_fal_port.h"
+#include "openr1/r1_nv_recovery.h"
 #include "openr1/r1_state.h"
 #include "openr1_clock_zephyr.h"
 #include "openr1_power_zephyr.h"
 #include "openr1_storage_zephyr.h"
+#include "time_calendar/time_calendar.h"
 
 /* Byte 1 from each recovered 16-byte schema descriptor at 0x00099BF4. */
 static const uint8_t health_schema_bytes[R1_HEALTH_DB_SCHEMA_COUNT] = {
@@ -28,9 +29,19 @@ static struct fdb_tsdb health_database;
 static r1_health_db_startup_result health_startup_result;
 static r1_event_bus health_event_bus;
 static struct k_mutex health_mutex;
+K_MUTEX_DEFINE(kv_mutex);
 static r1_health_u8_accumulator heart_rate_accumulator;
+static r1_health_u8_accumulator temperature_accumulator;
 static r1_health_u8_history temperature_history;
 static r1_health_u8_history stress_history;
+static r1_health_sync_cursor_state health_sync_cursors;
+static r1_temperature_pair_calibration temperature_calibration;
+static bool temperature_calibration_present;
+static r1_motion_axis_calibration accelerometer_calibration;
+static bool accelerometer_calibration_present;
+static r1_nv_battery_configuration battery_configuration;
+static uint8_t configured_ring_size;
+static bool configured_ring_size_valid;
 static r1_health_crash_record retained_health_crash_record __noinit;
 static bool health_mutex_ready;
 static bool kv_ready;
@@ -49,7 +60,8 @@ static uint32_t health_time_recovery_failures;
 static uint32_t health_time_daily_resets;
 static uint32_t health_destructive_actions_suppressed;
 static uint32_t health_gomore_actions_suppressed;
-static uint32_t health_cursor_actions_suppressed;
+static uint32_t health_cursor_updates_persisted;
+static uint32_t health_cursor_update_failures;
 static const uint8_t health_listener_indices[R1_HEALTH_DB_TIME_EVENT_COUNT] = {
     0u, 1u,
 };
@@ -79,10 +91,18 @@ typedef struct {
     uint32_t (*time_daily_reset_count)(void);
     uint32_t (*destructive_action_suppressed_count)(void);
     uint32_t (*gomore_action_suppressed_count)(void);
-    uint32_t (*cursor_action_suppressed_count)(void);
+    uint32_t (*cursor_update_persisted_count)(void);
+    uint32_t (*cursor_update_failure_count)(void);
+    const r1_health_sync_cursor_state *(*health_sync_cursor_state)(void);
+    bool (*read_temperature_calibration)(
+        r1_temperature_pair_calibration *);
+    bool (*read_accelerometer_calibration)(r1_motion_axis_calibration *);
+    bool (*read_battery_configuration)(r1_nv_battery_configuration *);
+    bool (*read_ring_size)(uint8_t *);
     r1_error (*multicast_time_transition)(
         const r1_health_time_transition *);
     r1_error (*multicast_hour)(uint8_t);
+    r1_error (*consume_temperature_event)(const void *, size_t);
     r1_sleep_db *(*sleep)(void);
 } openr1_databases_zephyr_api;
 
@@ -93,26 +113,28 @@ static void health_handle_time_transition(
 static void settings_changed(
     void *context, const uint8_t system_settings[R1_SYSTEM_SETTINGS_BYTES]) {
     (void)context;
-    if (!kv_ready ||
+    if (!kv_ready || k_is_in_isr() ||
         system_settings[4] != R1_SYSTEM_SETTINGS_SWITCH_TYPE_REG1) {
         return;
     }
     const bool enabled = system_settings[5] != 0u;
     uint8_t dev_info[R1_KV_CLASS_PAYLOAD_MAX];
     size_t length = 0u;
-    if (r1_kv_store_get(
+    if (k_mutex_lock(&kv_mutex, K_FOREVER) != 0) {
+        return;
+    }
+    const bool persist_failed = r1_kv_store_get(
             &kv_store, R1_KV_DEV_INFO, dev_info, sizeof dev_info,
             &length) != R1_OK ||
         r1_system_settings_store_reg1(
             dev_info, length, enabled) != R1_OK ||
         r1_kv_store_set(
-            &kv_store, R1_KV_DEV_INFO, dev_info, length) != R1_OK) {
-        return;
+            &kv_store, R1_KV_DEV_INFO, dev_info, length) != R1_OK ||
+        r1_kv_store_commit(&kv_store) != R1_OK;
+    (void)k_mutex_unlock(&kv_mutex);
+    if (!persist_failed) {
+        (void)openr1_power_zephyr_set_reg1(enabled);
     }
-    if (r1_kv_store_commit(&kv_store) != R1_OK) {
-        return;
-    }
-    (void)openr1_power_zephyr_set_reg1(enabled);
 }
 
 static void health_lock(fdb_db_t database) {
@@ -238,15 +260,14 @@ static uint32_t health_local_day_start(
     if (local <= 0 || local > UINT32_MAX) {
         return 0u;
     }
-    const time_t moment = (time_t)(uint32_t)local;
-    struct tm broken;
-    if (gmtime_r(&moment, &broken) == NULL) {
+    time_calendar_broken_down broken;
+    if (time_calendar_unix_to_broken_down(
+            (uint32_t)local, &broken) != &broken) {
         return 0u;
     }
     const uint32_t within_day =
-        (uint32_t)broken.tm_hour * UINT32_C(3600) +
-        (uint32_t)broken.tm_min * UINT32_C(60) +
-        (uint32_t)broken.tm_sec;
+        broken.hour * UINT32_C(3600) +
+        broken.minute * UINT32_C(60) + broken.second;
     const int64_t utc_start = local - (int64_t)within_day -
         (int64_t)utc_offset_minutes * INT64_C(60);
     return utc_start <= 0 || utc_start > UINT32_MAX
@@ -406,26 +427,46 @@ static void health_recover(
         (fdb_time_t)to_timestamp, health_recover_record, &recovery);
 }
 
+static bool health_persist_sync_cursors(
+    const r1_health_sync_cursor_state *cursors) {
+    uint8_t payload[R1_HEALTH_SYNC_CURSOR_BYTES];
+    if (!kv_ready || cursors == NULL || k_is_in_isr() ||
+        r1_health_sync_cursor_encode(cursors, payload) != R1_OK ||
+        k_mutex_lock(&kv_mutex, K_FOREVER) != 0) {
+        return false;
+    }
+    const bool stored = r1_kv_store_set(
+        &kv_store, R1_KV_HSYNC, payload, sizeof payload) == R1_OK;
+    if (stored) {
+        health_sync_cursors = *cursors;
+    }
+    const bool committed = stored && r1_kv_store_commit(&kv_store) == R1_OK;
+    (void)k_mutex_unlock(&kv_mutex);
+    return committed;
+}
+
+static void health_suppress_gomore_reinitialization(void *context) {
+    (void)context;
+    health_gomore_actions_suppressed += 1u;
+}
+
 static void health_handle_time_transition(
     const r1_health_time_transition *transition) {
     if (!health_ready || health_context.runtime == NULL ||
         transition == NULL) {
         return;
     }
+    r1_health_sync_cursor_state updated_cursors = health_sync_cursors;
     r1_health_time_transition_result plan;
-    if (r1_health_plan_time_transition(transition, &plan) != R1_OK ||
+    if (r1_health_reconcile_sync_cursors(
+            &updated_cursors, transition, &plan) != R1_OK ||
         !plan.subscriber_broadcast_requested) {
         return;
     }
-    if (plan.gomore_reinitialization_requested) {
-        health_gomore_actions_suppressed += 1u;
-    }
+    (void)r1_gomore_time_transition_adapter(
+        transition, health_suppress_gomore_reinitialization, NULL);
     if (plan.health_database_format_requested) {
         health_destructive_actions_suppressed += 1u;
-    }
-    if (plan.known_cursor_reset_requested ||
-        plan.known_cursor_clamp_pass_requested) {
-        health_cursor_actions_suppressed += 1u;
     }
     if (plan.current_day_recovery_requested) {
         const uint32_t day_start = health_local_day_start(
@@ -453,6 +494,14 @@ static void health_handle_time_transition(
             transition->new_timestamp_seconds,
             transition->new_utc_offset_minutes);
         health_time_daily_resets += 1u;
+    }
+    if (plan.known_cursor_reset_requested ||
+        plan.known_cursor_clamped_count != 0u) {
+        if (health_persist_sync_cursors(&updated_cursors)) {
+            health_cursor_updates_persisted += 1u;
+        } else {
+            health_cursor_update_failures += 1u;
+        }
     }
 }
 
@@ -487,7 +536,8 @@ static int health_database_startup(r1_runtime *runtime) {
     health_time_daily_resets = 0u;
     health_destructive_actions_suppressed = 0u;
     health_gomore_actions_suppressed = 0u;
-    health_cursor_actions_suppressed = 0u;
+    health_cursor_updates_persisted = 0u;
+    health_cursor_update_failures = 0u;
     const r1_error error = r1_health_db_startup(
         health_schema_bytes, &health_startup_ops,
         &retained_health_crash_record,
@@ -533,14 +583,57 @@ int openr1_databases_zephyr_initialize(r1_runtime *runtime) {
 
     uint8_t dev_info[R1_KV_CLASS_PAYLOAD_MAX];
     size_t dev_info_length = 0u;
+    uint8_t hsync_payload[R1_HEALTH_SYNC_CURSOR_BYTES];
+    size_t hsync_length = 0u;
+    uint8_t nv_config[R1_NV_RECOVERY_CONFIG_BYTES];
+    size_t nv_config_length = 0u;
+    uint8_t power_config[R1_NV_RECOVERY_POWER_BYTES];
+    size_t power_config_length = 0u;
+    uint8_t ring_size_config[R1_NV_RECOVERY_RING_SIZE_BYTES];
+    size_t ring_size_config_length = 0u;
     if (r1_kv_store_get(
             &kv_store, R1_KV_DEV_INFO, dev_info, sizeof dev_info,
-            &dev_info_length) != R1_OK) {
+            &dev_info_length) != R1_OK ||
+        r1_kv_store_get(
+            &kv_store, R1_KV_HSYNC, hsync_payload,
+            sizeof hsync_payload, &hsync_length) != R1_OK ||
+        r1_health_sync_cursor_decode(
+            hsync_payload, hsync_length, &health_sync_cursors) != R1_OK ||
+        r1_kv_store_get(
+            &kv_store, R1_KV_NV_R1, nv_config, sizeof nv_config,
+            &nv_config_length) != R1_OK ||
+        nv_config_length != R1_NV_RECOVERY_CONFIG_BYTES ||
+        r1_temperature_pair_calibration_decode(
+            nv_config + R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET,
+            R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_BYTES,
+            &temperature_calibration,
+            &temperature_calibration_present) != R1_OK ||
+        r1_nv_accelerometer_calibration_decode(
+            nv_config + R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET,
+            R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_BYTES,
+            &accelerometer_calibration,
+            &accelerometer_calibration_present) != R1_OK ||
+        r1_kv_store_get(
+            &kv_store, R1_KV_POWER, power_config, sizeof power_config,
+            &power_config_length) != R1_OK ||
+        r1_nv_battery_configuration_decode(
+            power_config, power_config_length,
+            &battery_configuration) != R1_OK ||
+        r1_kv_store_get(
+            &kv_store, R1_KV_RING_SIZE, ring_size_config,
+            sizeof ring_size_config, &ring_size_config_length) != R1_OK ||
+        r1_nv_ring_size_decode(
+            ring_size_config, ring_size_config_length,
+            &configured_ring_size, &configured_ring_size_valid) != R1_OK) {
         kv_ready = false;
         return -EIO;
     }
     runtime->device.system_settings[5] =
         r1_system_settings_reg1_enabled(dev_info, dev_info_length) ? 1u : 0u;
+    if (battery_configuration.battery_type_valid) {
+        r1_runtime_configure_battery(
+            runtime, battery_configuration.battery_type);
+    }
     r1_runtime_set_settings_handler(runtime, settings_changed, NULL);
 
     /* The recovered startup task initializes health.db before sleep.db. */
@@ -629,8 +722,54 @@ uint32_t openr1_databases_zephyr_gomore_actions_suppressed(void) {
     return health_gomore_actions_suppressed;
 }
 
-uint32_t openr1_databases_zephyr_cursor_actions_suppressed(void) {
-    return health_cursor_actions_suppressed;
+uint32_t openr1_databases_zephyr_cursor_updates_persisted(void) {
+    return health_cursor_updates_persisted;
+}
+
+uint32_t openr1_databases_zephyr_cursor_update_failures(void) {
+    return health_cursor_update_failures;
+}
+
+const r1_health_sync_cursor_state *
+openr1_databases_zephyr_health_sync_cursors(void) {
+    return kv_ready ? &health_sync_cursors : NULL;
+}
+
+bool openr1_databases_zephyr_temperature_calibration(
+    r1_temperature_pair_calibration *calibration) {
+    if (!kv_ready || !temperature_calibration_present ||
+        calibration == NULL) {
+        return false;
+    }
+    *calibration = temperature_calibration;
+    return true;
+}
+
+bool openr1_databases_zephyr_accelerometer_calibration(
+    r1_motion_axis_calibration *calibration) {
+    if (!kv_ready || !accelerometer_calibration_present ||
+        calibration == NULL) {
+        return false;
+    }
+    *calibration = accelerometer_calibration;
+    return true;
+}
+
+bool openr1_databases_zephyr_battery_configuration(
+    r1_nv_battery_configuration *configuration) {
+    if (!kv_ready || configuration == NULL) {
+        return false;
+    }
+    *configuration = battery_configuration;
+    return true;
+}
+
+bool openr1_databases_zephyr_ring_size(uint8_t *ring_size) {
+    if (!kv_ready || !configured_ring_size_valid || ring_size == NULL) {
+        return false;
+    }
+    *ring_size = configured_ring_size;
+    return true;
 }
 
 r1_error openr1_databases_zephyr_multicast_time_transition(
@@ -677,6 +816,39 @@ r1_error openr1_databases_zephyr_multicast_hour(uint8_t current_local_hour) {
     return error;
 }
 
+r1_error openr1_databases_zephyr_consume_temperature_event(
+    const void *payload, size_t length) {
+    if (payload == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length != 8u) {
+        return R1_ERROR_LENGTH;
+    }
+    if (!health_ready || k_is_in_isr()) {
+        return R1_ERROR_STATE;
+    }
+    const uint8_t *bytes = payload;
+    const uint16_t published_value = (uint16_t)(
+        (uint16_t)bytes[0] | (uint16_t)((uint16_t)bytes[1] << 8u));
+    /* Stock consumer 0x0008A8FC silently ignores out-of-range events before
+     * sampling either the firmware clock or local-hour provider. */
+    if (published_value < R1_TEMPERATURE_PUBLISHED_MIN ||
+        published_value > R1_TEMPERATURE_PUBLISHED_MAX) {
+        return R1_OK;
+    }
+    uint32_t timestamp = 0u;
+    struct tm local;
+    if (!openr1_clock_zephyr_epoch(&timestamp) ||
+        !openr1_clock_zephyr_local_tm(&local) ||
+        local.tm_hour < 0 || local.tm_hour >= 24) {
+        return R1_ERROR_STATE;
+    }
+    r1_health_u8_sample_result result;
+    return r1_temperature_store_sample(
+        &temperature_history, &temperature_accumulator, published_value,
+        timestamp, (uint8_t)local.tm_hour, (uint8_t)local.tm_hour, &result);
+}
+
 r1_sleep_db *openr1_databases_zephyr_sleep_db(void) {
     return sleep_ready ? &sleep_database : NULL;
 }
@@ -701,8 +873,15 @@ static const openr1_databases_zephyr_api databases_zephyr_api = {
     openr1_databases_zephyr_time_daily_resets,
     openr1_databases_zephyr_destructive_actions_suppressed,
     openr1_databases_zephyr_gomore_actions_suppressed,
-    openr1_databases_zephyr_cursor_actions_suppressed,
+    openr1_databases_zephyr_cursor_updates_persisted,
+    openr1_databases_zephyr_cursor_update_failures,
+    openr1_databases_zephyr_health_sync_cursors,
+    openr1_databases_zephyr_temperature_calibration,
+    openr1_databases_zephyr_accelerometer_calibration,
+    openr1_databases_zephyr_battery_configuration,
+    openr1_databases_zephyr_ring_size,
     openr1_databases_zephyr_multicast_time_transition,
     openr1_databases_zephyr_multicast_hour,
+    openr1_databases_zephyr_consume_temperature_event,
     openr1_databases_zephyr_sleep_db,
 };

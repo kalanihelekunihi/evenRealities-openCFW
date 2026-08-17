@@ -198,10 +198,16 @@ def main() -> None:
     require(main_source, "openr1_clock_zephyr_initialize(", "Zephyr wall-clock startup")
     require(main_source, "openr1_power_zephyr_initialize()", "Zephyr REG1 startup")
     require(main_source, "openr1_motion_zephyr_initialize()", "Zephyr motion startup")
+    require(main_source, "openr1_sensor_stream_zephyr_initialize()",
+            "Zephyr sensor-stream startup")
+    require(main_source, "openr1_sensor_stream_zephyr_poll()",
+            "Zephyr sensor-stream polling")
     require(main_source, "openr1_touch_zephyr_initialize()", "Zephyr touch startup")
     require(main_source, "openr1_nfc_zephyr_initialize()", "Zephyr NFC startup")
     require(main_source, "openr1_yhm2710_zephyr_initialize()",
             "Zephyr YHM2710 shared-power startup")
+    require(main_source, "openr1_temperature_zephyr_initialize()",
+            "Zephyr GXT310 temperature startup")
     require(main_source, "openr1_optical_zephyr_initialize()",
             "Zephyr optical-provider startup")
     require(main_source, "openr1_nfc_resources_zephyr_initialize()",
@@ -212,6 +218,17 @@ def main() -> None:
     database_startup = main_source.find("openr1_databases_zephyr_initialize(")
     if clock_startup < 0 or database_startup < clock_startup:
         raise AssertionError("Zephyr clock must initialize before health database recovery")
+    temperature_startup = main_source.find("openr1_temperature_zephyr_initialize()")
+    stream_startup = main_source.find("openr1_sensor_stream_zephyr_initialize()")
+    if temperature_startup < 0 or stream_startup < temperature_startup:
+        raise AssertionError(
+            "Zephyr temperature provider must initialize before sensor streams")
+    if "openr1_sensor_stream_zephyr_temperature_once_set(" in main_source:
+        raise AssertionError(
+            "Zephyr startup must not start the dormant temperature one-shot")
+    if "openr1_sensor_stream_zephyr_gomore_accelerometer_stage_set(" in main_source:
+        raise AssertionError(
+            "Zephyr startup must not start dormant GoMore input staging")
     yhm_startup = main_source.find("openr1_yhm2710_zephyr_initialize(")
     optical_startup = main_source.find("openr1_optical_zephyr_initialize(")
     if yhm_startup < 0 or optical_startup < yhm_startup:
@@ -298,7 +315,8 @@ def main() -> None:
     require(clock_source, "OPENR1_CLOCK_CADENCE_TICKS 1024u",
             "Zephyr recovered wall-clock cadence")
     require(clock_source, "r1_clock_synchronize(", "Zephyr wall-clock adoption")
-    require(clock_source, "gmtime_r(", "Zephyr source calendar provider")
+    require(clock_source, "time_calendar_unix_to_broken_down(",
+            "Zephyr reconstructed calendar provider")
     require(cmake, "openr1_power_zephyr.c", "Zephyr REG1 source binding")
     power_source = (BACKEND / "src" / "openr1_power_zephyr.c").read_text()
     require(power_source, "nrf_power_dcdcen_set(NRF_POWER, enabled)",
@@ -307,6 +325,8 @@ def main() -> None:
             "Zephyr REG1 write verification")
     databases_source = (
         BACKEND / "src" / "openr1_databases_zephyr.c").read_text()
+    require(databases_source, "time_calendar_unix_to_broken_down(",
+            "Zephyr reconstructed local-day calendar provider")
     require(databases_source,
             "system_settings[4] != R1_SYSTEM_SETTINGS_SWITCH_TYPE_REG1",
             "Zephyr REG1 command-type gate")
@@ -332,13 +352,18 @@ def main() -> None:
         "r1_health_db_build_record(",
         "r1_health_db_encode_record(",
         "fdb_tsl_append(",
-        "r1_health_plan_time_transition(",
         "plan.current_day_recovery_requested",
         "plan.daily_cache_reset_requested",
         "health_time_recovery_failures",
         "health_destructive_actions_suppressed",
         "health_gomore_actions_suppressed",
-        "health_cursor_actions_suppressed",
+        "R1_KV_HSYNC",
+        "r1_health_sync_cursor_decode(",
+        "r1_health_reconcile_sync_cursors(",
+        "r1_health_sync_cursor_encode(",
+        "health_cursor_updates_persisted",
+        "health_cursor_update_failures",
+        "K_MUTEX_DEFINE(kv_mutex)",
         "openr1_databases_zephyr_multicast_time_transition",
         "r1_activity_cache_reset(",
         "r1_health_u8_cache_reset(",
@@ -398,6 +423,12 @@ def main() -> None:
     ):
         require(clock_source, needle, "Zephyr recovered hour producer")
     for needle in (
+        "r1_gomore_time_transition_adapter(",
+        "health_suppress_gomore_reinitialization",
+        "health_gomore_actions_suppressed += 1u",
+    ):
+        require(databases_source, needle, "Zephyr GoMore time adapter binding")
+    for needle in (
         "OPENR1_FLASHDB_ROOT",
         "zephyr_get(OPENR1_FLASHDB_ROOT SYSBUILD GLOBAL)",
         "${OPENR1_ROOT}/port/r1_fal_port.c",
@@ -428,6 +459,7 @@ def main() -> None:
         "${OPENR1_BMA456_ROOT}/bma456w.c",
         "${OPENR1_LIS2DW12_ROOT}/lis2dw12_reg.c",
         "openr1_motion_zephyr.c",
+        "openr1_sensor_stream_zephyr.c",
     ):
         require(cmake, needle, "Zephyr pinned motion source binding")
     motion_source = (BACKEND / "src" / "openr1_motion_zephyr.c").read_text()
@@ -440,6 +472,88 @@ def main() -> None:
         "r1_motion_adapter_read_fifo(",
     ):
         require(motion_source, needle, "Zephyr source motion provider")
+    sensor_stream_source = (
+        BACKEND / "src" / "openr1_sensor_stream_zephyr.c").read_text()
+    for needle in (
+        "sensor_stream_initialize(",
+        "sensor_stream_bind_singleton_providers(",
+        "sensor_stream_acc_object_create(",
+        "sensor_stream_temp_object_create(",
+        "generic_device_registry_list_append_alloc(",
+        "openr1_motion_zephyr_read_fifo(",
+        "R1_MOTION_BATCH_SAMPLE_LIMIT",
+        "r1_motion_batch_encode(",
+        "openr1_databases_zephyr_accelerometer_calibration(",
+        "openr1_temperature_zephyr_read_stream(",
+        "temperature_provider",
+        '"temp"',
+        '"once"',
+        "gomore_primitives_temperature_measurement_begin(",
+        "gomore_primitives_temperature_measurement_step(",
+        "gomore_primitives_scaled_sample_publish(",
+        "SENSOR_STREAM_MODE_PER_SAMPLE",
+        "openr1_databases_zephyr_consume_temperature_event(",
+        '"gomore"',
+        "gomore_primitives_topic_accelerometer_ingest(",
+        "openr1_sensor_stream_zephyr_gomore_accelerometer_stage_set(",
+        "SENSOR_STREAM_MODE_BATCH",
+        "k_uptime_ticks()",
+        "sensor_stream_timer_poll(",
+    ):
+        require(sensor_stream_source, needle,
+                "Zephyr accelerometer sensor-stream binding")
+    motion_model = (PROJECT / "src" / "r1_motion.c").read_text()
+    for needle in (
+        "r1_motion_batch_encode(",
+        "R1_MOTION_BATCH_COUNT_OFFSET",
+        "R1_MOTION_BATCH_TIMESTAMP_OFFSET",
+        "calibration_in_progress",
+    ):
+        require(motion_model, needle, "R1 motion batch contract")
+    health_model = (PROJECT / "src" / "r1_health.c").read_text()
+    for needle in (
+        "r1_temperature_pair_stream_value(",
+        "const uint32_t magnitude = (uint16_t)entry->offset",
+        "const uint32_t toward_zero = sum + (sum >> 31u)",
+    ):
+        require(health_model, needle, "R1 temperature stream contract")
+    gomore_model = (
+        PROJECT / "reconstructed" / "gomore_primitives" /
+        "gomore_primitives.c").read_text()
+    for needle in (
+        "sizeof(gomore_primitives_scaled_sample_state) == 120u",
+        "attempt_count) == 11u",
+        "measurement_active) == 12u",
+        "capture_enabled) == 14u",
+        "capture_count) == 16u",
+        "captured) == 18u",
+        "clear_bytes((uint8_t *)state, 14u)",
+        "state->attempt_count > 30u",
+        "state->recent_count = 0u",
+        "gomore_primitives_topic_accelerometer_ingest(",
+        "gomore_primitives_topic_raw_optical_ingest(",
+        "gomore_primitives_topic_heart_rate_ingest(",
+        "gomore_primitives_topic_hrv_ingest(",
+        "gomore_primitives_topic_update_take_ready(",
+        "gomore_primitives_topic_update_complete(",
+        "bits_float(UINT32_C(0x3F7A0000))",
+        "state->ready_flags = 0u",
+    ):
+        require(gomore_model, needle,
+                "R1 temperature one-shot reducer contract")
+    database_source = (
+        BACKEND / "src" / "openr1_databases_zephyr.c").read_text()
+    for needle in (
+        "openr1_databases_zephyr_consume_temperature_event(",
+        "length != 8u",
+        "R1_TEMPERATURE_PUBLISHED_MIN",
+        "R1_TEMPERATURE_PUBLISHED_MAX",
+        "openr1_clock_zephyr_epoch(",
+        "openr1_clock_zephyr_local_tm(",
+        "r1_temperature_store_sample(",
+    ):
+        require(database_source, needle,
+                "Zephyr temperature event/cache consumer")
     pinctrl = (BACKEND / "boards" / "openr1" / "openr1_nrf52840" /
                "openr1_nrf52840-pinctrl.dtsi").read_text()
     for needle in (
@@ -562,16 +676,75 @@ def main() -> None:
         raise AssertionError("Zephyr Goodix linker corpus is not exactly 16 entries")
     if re.search(r"(?:^|[/(])[^\s)]*\.a(?:[/(]|$)", goodix_linker):
         raise AssertionError("Zephyr Goodix linker retention names an archive")
+    software_twi_source = (
+        BACKEND / "src" / "openr1_software_twi_zephyr.c").read_text()
+    for needle in (
+        "NRF_GPIO_PIN_MAP(1, 13)",
+        "NRF_GPIO_PIN_MAP(0, 28)",
+        "NRF_GPIO_PIN_MAP(1, 9)",
+        "NRF_GPIO_PIN_MAP(0, 31)",
+        "software_twi_i2c_2_open()",
+        "software_twi_i2c_4_open()",
+        "software_twi_i2c_2_read(0u, 0u, request)",
+        "software_twi_i2c_2_write(0u, 0u, request)",
+        "software_twi_i2c_4_read(0u, 0u, request)",
+        "software_twi_i2c_4_write(0u, 0u, request)",
+        ".input_pull = NRF_GPIO_PIN_NOPULL",
+        "K_MUTEX_DEFINE(software_twi_mutex)",
+    ):
+        require(software_twi_source, needle, "Zephyr software-TWI owner")
+    temperature_source = (
+        BACKEND / "src" / "openr1_temperature_zephyr.c").read_text()
+    databases_source = (
+        BACKEND / "src" / "openr1_databases_zephyr.c").read_text()
+    for needle in (
+        "R1_KV_NV_R1",
+        "R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET",
+        "R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_BYTES",
+        "r1_temperature_pair_calibration_decode(",
+        "openr1_databases_zephyr_temperature_calibration(",
+        "R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET",
+        "R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_BYTES",
+        "r1_nv_accelerometer_calibration_decode(",
+        "openr1_databases_zephyr_accelerometer_calibration(",
+        "R1_KV_POWER",
+        "r1_nv_battery_configuration_decode(",
+        "r1_runtime_configure_battery(",
+        "openr1_databases_zephyr_battery_configuration(",
+        "R1_KV_RING_SIZE",
+        "r1_nv_ring_size_decode(",
+        "openr1_databases_zephyr_ring_size(",
+    ):
+        require(databases_source, needle,
+                "Zephyr persisted temperature calibration")
+    for needle in (
+        "OPENR1_GXT310_REGISTER_TEMPERATURE UINT8_C(0x00)",
+        "OPENR1_GXT310_REGISTER_ID UINT8_C(0x03)",
+        "OPENR1_GXT310_EXPECTED_ID UINT8_C(0x50)",
+        "OPENR1_GXT310_STARTUP_MS UINT32_C(80)",
+        "OPENR1_GXT310_SAMPLE_INTERVAL_MS UINT32_C(5)",
+        "SOFTWARE_TWI_BUS_I2C_2",
+        "gxt310_enable_pair(&temperature_provider)",
+        "r1_temperature_gxt310_decode_milliunits(bytes)",
+        "r1_temperature_pair_reduce(",
+        "r1_temperature_pair_stream_value(",
+        "openr1_temperature_zephyr_read_stream(",
+        "openr1_databases_zephyr_temperature_calibration(",
+        "persisted_calibration_present ? &persisted_calibration : NULL",
+        "provider_ready = true",
+    ):
+        require(temperature_source, needle, "Zephyr GXT310 temperature provider")
+    for source in ("openr1_software_twi_zephyr.c",
+                   "openr1_temperature_zephyr.c"):
+        require(cmake, source, "Zephyr temperature source binding")
     optical_source = (BACKEND / "src" / "openr1_optical_zephyr.c").read_text()
     for needle in (
-        "OPENR1_OPTICAL_SCL_PIN NRF_GPIO_PIN_MAP(1, 9)",
-        "OPENR1_OPTICAL_SDA_PIN NRF_GPIO_PIN_MAP(0, 31)",
         "OPENR1_GOODIX_DEVICE_ID UINT8_C(0x28)",
-        "software_twi_i2c_4_open()",
-        "software_twi_i2c_4_write(0u, 0u, &request)",
-        "software_twi_i2c_4_read(0u, 0u, &request)",
+        "openr1_software_twi_zephyr_open(",
+        "openr1_software_twi_zephyr_write(",
+        "openr1_software_twi_zephyr_read(",
+        "openr1_software_twi_zephyr_close(",
         "(uint16_t)(((uint16_t)command[0] << 8u) | command[1])",
-        ".input_pull = NRF_GPIO_PIN_NOPULL",
         "hal_gh3x2x_int_handler_call_back();",
         "k_work_submit(&optical_interrupt_work)",
         "Gh3x2xDemoInterruptProcess();",

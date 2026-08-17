@@ -22,8 +22,12 @@ AIN5/P0.29 and PMIC current on AIN3/P0.05 use gain 1/2 and 40-us acquisition;
 the NFC rectifier on AIN2/P0.04 uses gain 1/6 and 10-us acquisition. All are
 12-bit without oversampling. The PMIC-current and rectifier diagnostic APIs are
 live. Battery conversion now takes client bit 0 from the reconstructed YHM2710
-shared-power lease before sampling and releases it afterward; periodic battery
-production and physical calibration remain open.
+shared-power lease before sampling and releases it afterward. Startup decodes the exact
+four-byte persisted `power` record and adopts battery types 1...4 into the runtime controller;
+signed voltage compensation remains available through a typed read-only accessor. Periodic
+battery production, live charge-state input, and physical calibration remain open.
+The one-byte `r_size` class is also strictly decoded and exposed only for values 6...15. It does
+not provision IQS7211E because ring size alone cannot prove the independent physical layout.
 Reset causes are decoded directly from the nRF POWER register into the portable
 reset model, with a CRC-protected no-init trace record. The source nRF watchdog
 driver is configured for one 10-second reset channel, runs while the CPU sleeps,
@@ -34,15 +38,24 @@ then resets through CMSIS; the complete fault/reset route remains hardware-test
 gated.
 The portable wall clock is also active: a lowest-priority 1,024-tick worker
 adopts phone-supplied Unix time and signed UTC offset from command `0x05`, then
-uses Zephyr's monotonic tick source and newlib `gmtime_r` for query APIs. It
+uses Zephyr's monotonic tick source and the reconstructed exact Unix/Gregorian
+converter for query APIs and health local-day boundaries. It
 reports time unavailable until a valid phone synchronization is received.
 The motion adapter binds Zephyr's source TWIM1 driver at 400 kHz on recovered
 P0.11/P0.14, address `0x18`, with P0.15 rising-edge accounting. It compiles
 hash-pinned Bosch BMA456 SensorAPI 2.29.0 and ST LIS2DW12 2.1-compatible C,
 probes in stock LIS-first/BMA-second order, configures 25 Hz operation, and
 exposes the portable bounded, normalized FIFO API. The provider interrupt hooks
-are recovered no-ops; production sensor-stream ingestion and axis calibration
-remain hardware-validation work.
+are recovered no-ops. The target initializes and polls the reconstructed
+1,024-Hz sensor-stream framework, creates its exact `"acc"`/188-byte and
+`"temp"`/two-byte singletons, and binds them to the normalized FIFO plus signed
+Int16LE `nv_r1` axis offsets and calibrated one-pair GXT310 read respectively.
+No algorithm listener is registered at startup. A retained typed control can register the exact
+`"gomore"` rate-1 batch listener and stage the recovered 25-sample axis transform without running
+the health engine or publishing results. The retained typed one-shot control can also register
+the exact `"once"` listener at rate 1/per-sample mode, enforce the recovered 30-attempt and
+five-consistent-value policy, then store its event-9 result in the hourly temperature cache.
+Physical-axis/channel labels, a public BLE trigger, and owned-ring behavior remain validation work.
 The touch adapter binds Zephyr's source TWIM0 driver at 400 kHz on recovered
 SDA P0.01/SCL P0.12 and the IQS7211E address `0x56`. P0.30 owns the LDO and
 P0.17 supplies the falling-edge RDY interrupt. A lowest-priority worker retains
@@ -62,6 +75,20 @@ are bound at startup. NFC nevertheless starts disabled and has no automatic or
 wire-facing enable policy.
 None of those physical behaviors is claimed hardware-validated.
 
+The dual GXT310 acquisition boundary is source-bound through the same reconstructed software-TWI
+engine. A shared Zephyr owner installs the recovered GPIO operations once, serializes complete
+bit-level transfers, and assigns `i2c_2` to SCL P1.13/SDA P0.28 while retaining the existing
+Goodix `i2c_4` mapping. Startup performs the recovered fail-closed two-address ID check at raw
+addresses `0x90`/`0x94`; absent or mismatched hardware leaves the provider unavailable without
+blocking BLE recovery. Typed reads preserve register `0x00`, signed big-endian conversion by
+`125/16` to integer milli-units, 80-ms startup, ten paired samples at 5-ms intervals, extrema
+trimming, and read-only application of the persisted six-byte `nv_r1` calibration at offset
+`0x3E` when it is not erased. The target does not expose caller-supplied calibration. Its exact
+two-byte stream vtable performs the recovered one-pair calibrated average with 32-bit wrapping
+and signed truncation toward zero. The exact one-shot listener/event-9/daily-cache path is now
+bound behind an explicit dormant API; no boot activation, BLE control, channel role, or clinical
+unit is inferred.
+
 The optical acquisition boundary is source-bound without enabling biometrics by
 implication. The target hash-gates and compiles the admitted Goodix GH3X2X demo/
 driver sources and exact SpO2 configuration table; no `.a` archive is consumed.
@@ -72,7 +99,9 @@ Board preparation acquires YHM2710 client bit 1 and shutdown releases it after
 the pins are made inactive. Startup only binds this lifecycle; it does not power
 the sensor or start sampling, and no BLE route invokes the retained start/switch/
 stop APIs. Raw frames are counted only. The Goodix global algorithm ABI remains
-fail-closed, so HR, SpO2, and HRV values are never synthesized.
+fail-closed, so HR, SpO2, and HRV values are never synthesized. The exact product-side
+`raw_hr`/`adt` bounded containers and living-object pending record compile, but physical channel
+selection remains unbound.
 
 Health storage starts after the source wall clock and before `sleep.db`, matching
 the recovered task order. Its exact `{3,3,3,3,24,6}` schema, control values 2/3,
@@ -85,21 +114,25 @@ four UInt8 aggregate families, six packed activity buckets, HRV aggregates, and 
 preserved reserved tail. The body timestamp and signed offset select the recovered
 prior-hour slot, including hour 23 of the previous local day at midnight; the FlashDB
 timestamp remains the bounded query/index key. Startup restores only activity, HR,
-SpO2, and HRV because temperature and stress have no live runtime cache fields;
+SpO2, and HRV; temperature and stress use separate module-owned live caches but are not restored
+by the recovered crash record;
 short, invalid-time, or otherwise rejected records are counted and skipped.
 After the first valid clock sample, each actual local-hour change multicasts the
 new hour on recovered event slot 1. The listener builds the exact zero-initialized
 128-byte body from the previous runtime cache slot and appends it through FlashDB;
 hour zero then resets all six cache families and attempts the recovered empty slot-2
-follow-up. Temperature and stress currently contribute their module-owned zero
-histories because no producers are bound. Append failures are counted, and the stock
+follow-up. Temperature remains zero unless the dormant one-shot API completes successfully, and
+stress remains zero because no producer is bound. Append failures are counted, and the stock
 destructive format-and-retry behavior is deliberately not exposed. Slot 0 consumes the
 exact 12-byte old/new offset/timestamp tuple. Its admitted actions recover the current day
 when the clock first becomes valid and reset all six caches on a local-day transition.
 Failed day-start conversion or recovery-workspace allocation is counted without running an
 unbounded query.
-Requests for destructive formatting, GoMore reinitialization, and unresolved sync-cursor
-reset/clamping are counted as suppressed diagnostics.
+The exact 24-byte `hsync` class is decoded at startup. Slot-0 reset/clamp reconciles only
+the four named cursors, preserves both unresolved words byte-for-byte, and commits the result
+through the hardened `kv.bin` snapshot writer. REG1 and hsync mutations share one Zephyr mutex;
+successful cursor commits and failures are counted separately. Requests for destructive
+formatting and GoMore reinitialization remain suppressed diagnostics.
 
 The custom `openr1_nrf52840` board deliberately exposes only SoC resources
 whose package-level presence is established. The recovered motion, touch, and

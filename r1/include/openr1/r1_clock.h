@@ -13,14 +13,13 @@
  * `sys rtc` named-record layer and its private validating calendar converters
  * (family `unknown_rtc_device_provider_candidate` /
  * `unknown_time_calendar_provider_candidate`, both
- * `investigate_before_implementing`).  OpenR1 replaces the *need* for that
- * layer with this small product-owned clock: the phone synchronizes Unix epoch
+ * `clean_room_reimplementation_owner_authorized`).  OpenR1 replaces the
+ * hardware/backend portion of that layer with this small product-owned clock:
+ * the phone synchronizes Unix epoch
  * seconds plus a signed UTC offset over BLE (command 0x05), and the platform
  * supplies a monotonic tick so the epoch keeps advancing between
- * synchronizations.  Broken-down calendar conversion on target is delegated to
- * the toolchain C library `gmtime` by the platform glue, per the route
- * decision recorded in
- * docs/boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md.
+ * synchronizations.  The source-built target delegates broken-down calendar
+ * conversion to the separately reconstructed exact calendar family.
  *
  * The module is pure: no hardware access, no hidden globals, and wrap-safe
  * tick arithmetic.  A clock that has never been synchronized reports no time

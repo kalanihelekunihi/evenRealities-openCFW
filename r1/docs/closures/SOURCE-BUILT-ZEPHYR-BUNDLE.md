@@ -61,8 +61,12 @@ channel is 12-bit with oversampling disabled. The adapter retains the recovered
 sample counts and portable voltage conversion models. Battery acquisition is
 now bracketed by client bit 0 of the reconstructed YHM2710 shared-power lease.
 The provider probes chip ID `0xA0`, runs the exact five-register initialization,
-and fails closed without binding clients if the device is absent. Periodic
-battery production and physical calibration remain open.
+and fails closed without binding clients if the device is absent. Database startup decodes the
+exact four-byte persisted `power` class, adopts a valid battery type into the runtime controller,
+and retains signed voltage compensation through a typed read-only accessor. Periodic battery
+production, live charge-state input, and physical calibration remain open.
+The adjacent one-byte `r_size` class is decoded with its exact 6...15 validity gate and retained
+read-only; it is not treated as sufficient IQS7211E layout identity.
 
 Motion acquisition is now source-bound too. The custom board routes Zephyr's
 TWIM1 driver at 400 kHz over P0.11/P0.14 to address `0x18`, with P0.15 as the
@@ -72,8 +76,18 @@ repository manifest before packaging. Bosch BMA456 SensorAPI 2.29.0 and ST
 LIS2DW12 2.1-compatible C feed the portable stock-order selector, exact 25 Hz
 configuration, 31-sample bound, FIFO normalization, and LIS double-tap-disable
 surface. All three provider objects must have nonempty loadable linker-map
-spans. Higher-level sensor-stream ingestion and physical-axis calibration remain
-explicit owned-ring gates.
+spans. The target now initializes and polls the reconstructed sensor-stream
+framework at 1,024 Hz, composes its lists with the reconstructed generic-registry
+family, creates the exact `"acc"`/188-byte and `"temp"`/two-byte streams, and binds the motion FIFO
+reader. Each batch carries at most 30 normalized XYZ samples, the recovered
+count/padding/timestamp layout, and read-only signed axis offsets decoded from
+`nv_r1` bytes 68...73. No production algorithm listener is invented at boot;
+the exact dormant `"gomore"` rate-1 batch listener can stage the reconstructed 25-sample GoMore
+axis transform. The companion `raw_hr`, `hr`, and `hrv` reducers and acc/raw readiness barrier
+compile from transparent C. The exact product-side `raw_hr`/`adt` counted-word containers and
+two-byte Goodix living-object producer compile without assigning waveform semantics, but no
+physical-channel selection, engine execution, or health result is fabricated.
+Live consumer composition and physical-axis validation remain explicit gates.
 
 Touch transport and lifecycle are source-bound without pretending the product
 identity is known. Zephyr TWIM0 runs at 400 kHz on recovered
@@ -108,6 +122,23 @@ optical adapter now adopts client bit 1 around its on-demand board lifecycle;
 startup does not acquire the rail or start sampling. Every physical rail meaning
 remains owned-hardware validation.
 
+The source-built target also adopts the recovered software `i2c_2` GXT310 path. A single Zephyr
+software-TWI owner installs all recovered board-pin operations and serializes bit-level transfers;
+GXT310 uses SCL P1.13/SDA P0.28 while Goodix keeps its separate `i2c_4` pins. Startup performs the
+exact two-address (`0x90`/`0x94`) register-`0x03` ID check and fails closed without preventing BLE
+recovery when either device is absent. The typed acquisition surface implements register-`0x00`
+signed big-endian conversion (`raw * 125 / 16` integer milli-units), 80-ms startup, ten paired
+samples separated by 5 ms, extrema trimming, and read-only application of the exact six-byte
+calibration at persisted `nv_r1` offset `0x3E` when that record is not erased. It does not accept
+caller-supplied calibration. The exact `"temp"` stream provider now performs one paired read,
+applies the two unsigned 16-bit calibration magnitudes with recovered 32-bit wrapping semantics,
+averages with signed truncation toward zero, and returns the low two bytes. The exact dormant
+`"once"` listener is retained at rate 1/per-sample mode; when explicitly started it applies the
+30-attempt/five-consistent-value reducer, publishes the exact event-9 payload, and feeds the
+product-owned hourly temperature cache. It is not registered at startup and assigns neither
+physical channel labels nor clinical units. The separate sleep/timing path and stress producer
+remain uncomposed.
+
 The Goodix raw-acquisition boundary is now source-bound. The target compiles and
 retains the public Goodix demo kernel, register driver, AGC/motion/soft-ADT modules,
 and exact SpO2 configuration table, plus the transparent R1 port and adapter. The
@@ -133,7 +164,8 @@ validation items.
 The R1-owned clock is live on the same recovered 1,024-Hz cadence. It adopts
 the Unix epoch and signed UTC offset written by phone command `0x05`, advances
 that epoch from Zephyr's monotonic ticks, and supplies UTC-offset and local
-`struct tm` queries through newlib. It remains explicitly unsynchronized until
+`struct tm` queries plus health local-day boundaries through the reconstructed
+exact Unix/Gregorian converter. It remains explicitly unsynchronized until
 the phone provides a valid timestamp rather than fabricating wall time.
 
 ## Bundle proof
@@ -172,9 +204,9 @@ direct NVMC access to the recovered 36-page product region, `kv.bin`, pinned
 FlashDB/FAL `health.db`, `sleep.db`, REG1 control, exact SAADC acquisition, the Bosch/ST motion bus,
 fail-closed IQS7211E transport/lifecycle, and fail-closed ST25DVxxKC mailbox/
 TWIM1 handoff, reconstructed YHM2710 shared-power binding, and P1.10 dock lifecycle;
-its motion production consumer, touch identity/wear provisioning, explicit NFC
+its motion algorithm consumer, touch identity/wear provisioning, explicit NFC
 activation policy, Goodix global algorithm/frame/result composition, destructive slot-0
-format/retry and GoMore actions, unresolved cursor persistence, and biometric/sleep production paths still need
+format/retry and GoMore actions, and biometric/sleep production paths still need
 typed Zephyr adapters and owned-ring validation. The former retail bootloader
 window remains reserved until a recoverable migration procedure is tested.
 Zephyr NVS is not asserted to decode the retail Nordic FDS settings format, so

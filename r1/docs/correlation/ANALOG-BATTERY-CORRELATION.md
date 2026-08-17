@@ -15,6 +15,12 @@ elapsed time. The legacy Nordic adapter remains fail-closed without a power prov
 adapter binds the same semantic acquire/release interface to reconstructed YHM client bit 0. No raw
 ADC or PMIC diagnostic is exposed over BLE.
 
+The source-built database owner now strictly decodes the exact four-byte persisted `power` class:
+battery type is byte 0 and signed Int16LE voltage compensation is at bytes 2...3. Types 1...4 are
+adopted into the runtime battery controller; the decoded compensation and its recovered report
+validity remain available through a typed read-only accessor. This path neither samples the ADC
+nor changes persistent state.
+
 ## Recovered SAADC configuration
 
 The decompressed registry contains three 40-byte records. Nordic's driver configuration is
@@ -133,7 +139,8 @@ Its standalone HEX and BIN SHA-256 values are
 - Preserve the completed Zephyr YHM2710 semantic lease binding and keep raw register/transport
   operations outside the analog module; decide separately whether the legacy Nordic target should
   adopt the reconstructed provider.
-- Confirm which battery type is installed and restore its persisted type/compensation safely.
+- Confirm the decoded installed battery type and compensation against an owned ring; startup
+  adoption is source-bound and read-only, but physical calibration remains unverified.
 - Validate divider/amplifier gain, offsets, noise, temperature behavior, and sample timing against
   calibrated equipment on an owned ring.
 - Bind a periodic producer to the retained runtime bridge only after typed PMIC charge-state input

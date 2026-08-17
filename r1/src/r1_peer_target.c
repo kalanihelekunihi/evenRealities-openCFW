@@ -82,6 +82,39 @@ r1_error r1_connection_control_plan_adv_start(
     return R1_OK;
 }
 
+uint32_t r1_connection_control_role_sync_thread_flags(void) {
+    return R1_CONNECTION_CONTROL_ROLE_SYNC_THREAD_FLAG;
+}
+
+r1_connection_control_delayed_plan r1_connection_control_delayed_event_plan(
+    uint32_t callback_argument) {
+    r1_connection_control_delayed_plan plan = {
+        .action = R1_CONNECTION_CONTROL_DELAYED_IGNORE,
+        .connection_context = (uint16_t)(callback_argument >> 16u),
+        .event_type = 0u,
+    };
+    if (plan.connection_context == UINT16_MAX) {
+        return plan;
+    }
+
+    plan.action = R1_CONNECTION_CONTROL_DELAYED_ENQUEUE;
+    switch (callback_argument & R1_CONNECTION_CONTROL_EVENT_SELECTOR_MASK) {
+        case 0u:
+            plan.event_type = R1_CONNECTION_CONTROL_EVENT_TYPE_ZERO;
+            break;
+        case 1u:
+            plan.event_type = R1_CONNECTION_CONTROL_EVENT_TYPE_ONE;
+            break;
+        case 2u:
+            plan.event_type = R1_CONNECTION_CONTROL_EVENT_TYPE_TWO;
+            break;
+        default:
+            plan.action = R1_CONNECTION_CONTROL_DELAYED_FATAL;
+            break;
+    }
+    return plan;
+}
+
 r1_error r1_peer_target_persist(
     uint8_t *dev_info, size_t length,
     const uint8_t first_target[R1_PEER_ADDRESS_SIZE],

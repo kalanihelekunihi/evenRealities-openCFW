@@ -51,7 +51,7 @@ that sixth body and brings the boundary to six functions / 1,328 bytes.
 
 The provenance investigation added the following structural detail. None of it changes the
 admission state; the family remains `investigate_before_implementing`. The ownership-ledger
-candidate family now totals 27 functions / 2,738 executable bytes, of which this boundary pins
+candidate family now totals 28 functions / 2,746 executable bytes, of which this boundary pins
 the six-function / 1,328-byte core documented above.
 
 - AOT-compiled static-graph ABI: 24-byte layer records hold eight packed parameter bytes, the

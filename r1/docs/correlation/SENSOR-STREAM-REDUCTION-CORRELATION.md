@@ -216,17 +216,17 @@ the 1000-tick no-op keep-alive timer created at initialization.
 ## Integration state
 
 The module carries host tests and compiles under the strict host flags and
-the freestanding Cortex-M4 object flags; the integrator wave wires it into
-`r1/Makefile` `SOURCES`, calls `test_reconstructed_sensor_stream()` from
-`tests/test_openr1.c`, re-pins the ledger rows to
-`clean_room_reimplementation_owner_authorized`, and updates the verifier
-pins that currently assert `investigate_before_implementing` for this
-family (`tools/verify_openr1.py`: the family count gate at the 32-entry
-check, the three summarizer metadata blocks, and the per-function
-disposition/sha loops; the boundary-doc marker list keeps the provenance
-record).  On target the module is not yet referenced: its stock consumers
-(R1 motion adapter, GoMore-gated callers, factory/timing callers) arrive
-through families still in flight, and the provider bindings (FreeRTOS heap,
-registry-family list walkers, CMSIS tick) must be bound to their admitted
-implementations when those land.  No registration or unregistration API is
-exposed beyond the recovered contracts; no live sensor data path is added.
+the freestanding Cortex-M4 object flags. The source-built Zephyr target now
+initializes and polls the framework on the recovered 1,024-Hz timebase, binds
+its heap to Zephyr, composes its list seams with the reconstructed generic
+device-registry list family, and creates the fixed `"acc"`/`0xBC` and
+`"temp"`/two-byte singletons. The accelerometer vtable reads the installed Bosch/ST FIFO through the typed
+motion adapter, builds the exact 188-byte batch, applies persisted `nv_r1`
+axis offsets, and exposes typed listener registration/unregistration. The
+temperature vtable binds the exact no-op open/close hooks at `0x000918F8` and
+`0x000918FC` and the `0x00091900` two-byte read hook to one calibrated GXT310
+pair. It validates the exact length, stores UInt16LE, and exposes the same typed
+listener lifecycle. No listener is invented at startup. The separately evidenced
+temperature one-shot control now registers `"once"` only on an explicit call and composes the
+five-sample event/cache path; other GoMore/activity consumers still require separately admitted
+bindings.

@@ -4,17 +4,16 @@
 #include <stddef.h>
 #include <string.h>
 
-#include <hal/nrf_gpio.h>
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include <zephyr/sys/atomic.h>
 
 #include "openr1_motion_zephyr.h"
+#include "openr1_software_twi_zephyr.h"
 #include "openr1_yhm2710_zephyr.h"
 #include "r1_gh3x2x_bind.h"
 #include "r1_gh3x2x_port.h"
-#include "software_twi/software_twi.h"
 
 /* Public, source-built Goodix democode entry points. The binary algorithm
  * archives are deliberately not linked; r1_gh3x2x_stubs.c keeps their global
@@ -25,8 +24,6 @@ void hal_gh3x2x_int_handler_call_back(void);
 const void *goodix_spo2_config_get_instance(void);
 
 #define OPENR1_OPTICAL_NODE DT_NODELABEL(openr1_optical)
-#define OPENR1_OPTICAL_SCL_PIN NRF_GPIO_PIN_MAP(1, 9)
-#define OPENR1_OPTICAL_SDA_PIN NRF_GPIO_PIN_MAP(0, 31)
 #define OPENR1_GOODIX_DEVICE_ID UINT8_C(0x28)
 #define OPENR1_GOODIX_COMMAND_BYTES 2u
 #define OPENR1_GOODIX_GSENSOR_LIMIT 31u
@@ -51,7 +48,6 @@ static const struct gpio_dt_spec optical_emitter =
 static const struct gpio_dt_spec optical_reset =
     GPIO_DT_SPEC_GET(OPENR1_OPTICAL_NODE, optical_reset_gpios);
 
-K_MUTEX_DEFINE(optical_bus_mutex);
 K_MUTEX_DEFINE(optical_provider_mutex);
 
 static struct gpio_callback optical_interrupt_callback;
@@ -66,10 +62,6 @@ static atomic_t board_prepared;
 static bool interrupt_callback_installed;
 static bool module_initialized;
 
-static bool optical_bus_pin(uint32_t pin) {
-    return pin == OPENR1_OPTICAL_SCL_PIN || pin == OPENR1_OPTICAL_SDA_PIN;
-}
-
 static void record_error(int error) {
     if (error != 0) {
         atomic_set(&last_error, (atomic_val_t)error);
@@ -82,61 +74,14 @@ static void zero_bytes(uint8_t *bytes, uint16_t length) {
     }
 }
 
-static void twi_drive_low(uint32_t pin) {
-    if (optical_bus_pin(pin)) {
-        nrf_gpio_pin_clear(pin);
-    }
-}
-
-static void twi_release_high(uint32_t pin) {
-    if (optical_bus_pin(pin)) {
-        nrf_gpio_pin_set(pin);
-    }
-}
-
-static void twi_set_output(uint32_t pin) {
-    if (optical_bus_pin(pin)) {
-        nrf_gpio_cfg_output(pin);
-    }
-}
-
-static void twi_set_input(uint32_t pin, uint32_t pull) {
-    if (optical_bus_pin(pin) && pull <= NRF_GPIO_PIN_PULLUP) {
-        nrf_gpio_cfg_input(pin, (nrf_gpio_pin_pull_t)pull);
-    }
-}
-
-static void twi_delay(uint32_t microseconds) {
-    k_busy_wait(microseconds);
-}
-
-static uint32_t twi_read_pin(uint32_t pin) {
-    return optical_bus_pin(pin) ? nrf_gpio_pin_read(pin) : 0u;
-}
-
-static void twi_gpio_configure(uint32_t pin, uint32_t direction,
-                               uint32_t input, uint32_t pull,
-                               uint32_t drive, uint32_t sense) {
-    if (!optical_bus_pin(pin)) {
-        return;
-    }
-    nrf_gpio_cfg(pin, (nrf_gpio_pin_dir_t)direction,
-                 (nrf_gpio_pin_input_t)input,
-                 (nrf_gpio_pin_pull_t)pull,
-                 (nrf_gpio_pin_drive_t)drive,
-                 (nrf_gpio_pin_sense_t)sense);
-}
-
 static uint32_t optical_bus_open(void) {
-    uint32_t status = SOFTWARE_TWI_STATUS_BAD_ARGUMENT;
-    if (k_mutex_lock(&optical_bus_mutex, K_FOREVER) == 0) {
-        status = software_twi_i2c_4_open();
-        (void)k_mutex_unlock(&optical_bus_mutex);
-    }
-    if (status != SOFTWARE_TWI_STATUS_OK) {
+    const int error = openr1_software_twi_zephyr_open(
+        SOFTWARE_TWI_BUS_I2C_4);
+    if (error != 0) {
         record_error(-EIO);
     }
-    return status;
+    return error == 0 ? SOFTWARE_TWI_STATUS_OK
+                      : SOFTWARE_TWI_STATUS_BAD_ARGUMENT;
 }
 
 static void optical_i2c_init(void *context) {
@@ -157,12 +102,8 @@ static void optical_i2c_write(void *context, uint8_t device_id,
         .buffer = data,
         .length = length,
     };
-    uint32_t status = SOFTWARE_TWI_STATUS_BAD_ARGUMENT;
-    if (k_mutex_lock(&optical_bus_mutex, K_FOREVER) == 0) {
-        status = software_twi_i2c_4_write(0u, 0u, &request);
-        (void)k_mutex_unlock(&optical_bus_mutex);
-    }
-    if (status != SOFTWARE_TWI_STATUS_OK) {
+    if (openr1_software_twi_zephyr_write(
+            SOFTWARE_TWI_BUS_I2C_4, &request) != 0) {
         record_error(-EIO);
     }
 }
@@ -186,12 +127,8 @@ static void optical_i2c_read(void *context, uint8_t device_id,
         .buffer = data,
         .length = data_length,
     };
-    uint32_t status = SOFTWARE_TWI_STATUS_BAD_ARGUMENT;
-    if (k_mutex_lock(&optical_bus_mutex, K_FOREVER) == 0) {
-        status = software_twi_i2c_4_read(0u, 0u, &request);
-        (void)k_mutex_unlock(&optical_bus_mutex);
-    }
-    if (status != SOFTWARE_TWI_STATUS_OK) {
+    if (openr1_software_twi_zephyr_read(
+            SOFTWARE_TWI_BUS_I2C_4, &request) != 0) {
         zero_bytes(data, data_length);
         record_error(-EIO);
     }
@@ -334,16 +271,7 @@ static void optical_board_shutdown(void *context) {
     }
     record_error(gpio_pin_set_dt(&optical_reset, 0));
     record_error(gpio_pin_set_dt(&optical_emitter, 0));
-    if (k_mutex_lock(&optical_bus_mutex, K_FOREVER) == 0) {
-        software_twi_record *record =
-            software_twi_bus_record(SOFTWARE_TWI_BUS_I2C_4);
-        if (record != NULL) {
-            record->opened = 0u;
-        }
-        nrf_gpio_cfg_input(OPENR1_OPTICAL_SCL_PIN, NRF_GPIO_PIN_NOPULL);
-        nrf_gpio_cfg_input(OPENR1_OPTICAL_SDA_PIN, NRF_GPIO_PIN_NOPULL);
-        (void)k_mutex_unlock(&optical_bus_mutex);
-    }
+    openr1_software_twi_zephyr_close(SOFTWARE_TWI_BUS_I2C_4);
     if (atomic_get(&board_prepared) != 0 &&
         !openr1_yhm2710_zephyr_optical_release()) {
         record_error(-EIO);
@@ -370,18 +298,6 @@ static int map_error(r1_error error) {
 }
 
 int openr1_optical_zephyr_initialize(void) {
-    static const software_twi_providers twi_providers = {
-        .drive_low = twi_drive_low,
-        .release_high = twi_release_high,
-        .set_output = twi_set_output,
-        .set_input = twi_set_input,
-        .udelay = twi_delay,
-        .read_pin = twi_read_pin,
-        .gpio_configure = twi_gpio_configure,
-        /* The recovered i2c_4 open explicitly configures no internal pull;
-         * the R1 board supplies the bus pull-up. */
-        .input_pull = NRF_GPIO_PIN_NOPULL,
-    };
     static const r1_gh3x2x_hal goodix_hal = {
         .context = NULL,
         .i2c_init = optical_i2c_init,
@@ -426,7 +342,10 @@ int openr1_optical_zephyr_initialize(void) {
     atomic_clear(&last_error);
     atomic_clear(&worn_state);
     k_work_init(&optical_interrupt_work, optical_interrupt_process);
-    software_twi_initialize(&twi_providers);
+    error = openr1_software_twi_zephyr_initialize();
+    if (error != 0 && error != -EALREADY) {
+        return error;
+    }
     r1_gh3x2x_port_bind_hal(&goodix_hal);
     r1_goodix_adapter_initialize(&optical_adapter);
     error = map_error(r1_goodix_adapter_bind(

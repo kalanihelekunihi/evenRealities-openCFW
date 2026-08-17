@@ -128,6 +128,175 @@ void r1_event_disconnect(r1_event_plane *plane) {
     r1_event_plane_initialize(plane);
 }
 
+r1_error r1_channel1_task_plan_startup(
+    bool queue_created, r1_channel1_task_startup_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_channel1_task_startup_plan){
+        .queue_create_failed = !queue_created,
+        .enter_fail_stop = !queue_created,
+        .queue_capacity = R1_NORMAL_QUEUE_CAPACITY,
+        .queue_record_bytes = R1_CHANNEL1_TASK_QUEUE_RECORD_BYTES,
+        .sync_group = R1_CHANNEL1_TASK_SYNC_GROUP,
+        .registry_name = "ble_gtx",
+        .watchdog_ticks = R1_CHANNEL1_TASK_WATCHDOG_TICKS,
+    };
+    return R1_OK;
+}
+
+r1_error r1_channel1_task_plan_flags(
+    uint32_t flags, r1_channel1_task_flag_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    const bool provider_wait_error =
+        flags == 0u || (flags & UINT32_C(0x80000000)) != 0u;
+    *plan = (r1_channel1_task_flag_plan){
+        .observed_flags = flags,
+        .provider_wait_error = provider_wait_error,
+        .drain_queue = !provider_wait_error &&
+            (flags & R1_CHANNEL1_TASK_DISPATCH_FLAG) != 0u,
+        .signal_suspend = !provider_wait_error &&
+            (flags & R1_CHANNEL1_TASK_SUSPEND_FLAG) != 0u,
+        .enter_suspend_wait = !provider_wait_error &&
+            (flags & R1_CHANNEL1_TASK_SUSPEND_FLAG) != 0u,
+        .wait_again = provider_wait_error ||
+            (flags & R1_CHANNEL1_TASK_SUSPEND_FLAG) == 0u,
+    };
+    return R1_OK;
+}
+
+r1_error r1_bae8_input_task_plan_startup(
+    bool queue_created, r1_bae8_input_task_startup_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_bae8_input_task_startup_plan){
+        .queue_create_failed = !queue_created,
+        .enter_fail_stop = !queue_created,
+        .queue_capacity = R1_BAE8_INPUT_TASK_QUEUE_CAPACITY,
+        .queue_record_bytes = R1_BAE8_INPUT_TASK_QUEUE_RECORD_BYTES,
+        .sync_group = R1_BAE8_INPUT_TASK_SYNC_GROUP,
+        .registry_name = "ble_msgrx",
+        .watchdog_ticks = R1_BAE8_INPUT_TASK_WATCHDOG_TICKS,
+    };
+    return R1_OK;
+}
+
+r1_error r1_bae8_input_task_plan_flags(
+    uint32_t flags, r1_bae8_input_task_flag_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    const bool provider_wait_error =
+        flags == 0u || (flags & UINT32_C(0x80000000)) != 0u;
+    *plan = (r1_bae8_input_task_flag_plan){
+        .observed_flags = flags,
+        .provider_wait_error = provider_wait_error,
+        .drain_queue = !provider_wait_error &&
+            (flags & R1_BAE8_INPUT_TASK_DISPATCH_FLAG) != 0u,
+        .signal_suspend = !provider_wait_error &&
+            (flags & R1_BAE8_INPUT_TASK_SUSPEND_FLAG) != 0u,
+        .enter_suspend_wait = !provider_wait_error &&
+            (flags & R1_BAE8_INPUT_TASK_SUSPEND_FLAG) != 0u,
+        .wait_again = provider_wait_error ||
+            (flags & R1_BAE8_INPUT_TASK_SUSPEND_FLAG) == 0u,
+    };
+    return R1_OK;
+}
+
+r1_error r1_shared_tx_task_plan_startup(
+    bool queue_created, r1_shared_tx_task_startup_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_shared_tx_task_startup_plan){
+        .queue_create_failed = !queue_created,
+        .enter_fail_stop = !queue_created,
+        .queue_capacity = R1_EUS_QUEUE_CAPACITY,
+        .queue_record_bytes = R1_SHARED_TX_TASK_QUEUE_RECORD_BYTES,
+        .sync_group = R1_SHARED_TX_TASK_SYNC_GROUP,
+        .registry_name = "ble_msgtx",
+        .watchdog_ticks = R1_SHARED_TX_TASK_WATCHDOG_TICKS,
+    };
+    return R1_OK;
+}
+
+r1_error r1_shared_tx_task_plan_flags(
+    uint32_t flags, r1_shared_tx_task_flag_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    const bool provider_wait_error =
+        flags == 0u || (flags & UINT32_C(0x80000000)) != 0u;
+    *plan = (r1_shared_tx_task_flag_plan){
+        .observed_flags = flags,
+        .provider_wait_error = provider_wait_error,
+        .drain_queue = !provider_wait_error &&
+            (flags & R1_SHARED_TX_TASK_DISPATCH_FLAG) != 0u,
+        .signal_suspend = !provider_wait_error &&
+            (flags & R1_SHARED_TX_TASK_SUSPEND_FLAG) != 0u,
+        .enter_suspend_wait = !provider_wait_error &&
+            (flags & R1_SHARED_TX_TASK_SUSPEND_FLAG) != 0u,
+        .wait_again = provider_wait_error ||
+            (flags & R1_SHARED_TX_TASK_SUSPEND_FLAG) == 0u,
+    };
+    return R1_OK;
+}
+
+r1_error r1_factory_input_task_plan_startup(
+    bool queue_created, r1_factory_input_task_startup_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_factory_input_task_startup_plan){
+        .queue_create_failed = !queue_created,
+        .enter_fail_stop = !queue_created,
+        .queue_capacity = R1_FACTORY_INPUT_TASK_QUEUE_CAPACITY,
+        .queue_record_bytes = R1_FACTORY_INPUT_TASK_QUEUE_RECORD_BYTES,
+        .sync_group = R1_FACTORY_INPUT_TASK_SYNC_GROUP,
+    };
+    if (!queue_created) {
+        return R1_OK;
+    }
+    static const r1_factory_input_task_startup_action actions[] = {
+        R1_FACTORY_INPUT_WEAR_BUFFER_FILL,
+        R1_FACTORY_INPUT_SENSOR_STREAM_INITIALIZE,
+        R1_FACTORY_INPUT_ACCELEROMETER_STREAM_CREATE,
+        R1_FACTORY_INPUT_STREAM_NAMESPACE_REGISTER,
+        R1_FACTORY_INPUT_TEMPERATURE_STREAM_CREATE,
+    };
+    for (size_t index = 0u;
+         index < R1_FACTORY_INPUT_TASK_STARTUP_ACTION_COUNT; ++index) {
+        plan->actions[index] = actions[index];
+    }
+    plan->action_count = R1_FACTORY_INPUT_TASK_STARTUP_ACTION_COUNT;
+    return R1_OK;
+}
+
+r1_error r1_factory_input_task_plan_flags(
+    uint32_t flags, r1_factory_input_task_flag_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    const bool provider_wait_error =
+        flags == 0u || (flags & UINT32_C(0x80000000)) != 0u;
+    const bool suspend = !provider_wait_error &&
+        (flags & R1_FACTORY_INPUT_TASK_SUSPEND_FLAG) != 0u;
+    *plan = (r1_factory_input_task_flag_plan){
+        .observed_flags = flags,
+        .provider_wait_error = provider_wait_error,
+        .drain_queue = !provider_wait_error &&
+            (flags & R1_FACTORY_INPUT_TASK_DISPATCH_FLAG) != 0u,
+        .signal_suspend = suspend,
+        .enter_suspend_wait = suspend,
+        .run_periodic_operation = !suspend,
+        .wait_again = !suspend,
+    };
+    return R1_OK;
+}
+
 r1_error r1_delayed_event_timer_step(
     r1_delayed_event_state *state, uint32_t callback_argument,
     uint32_t kernel_tick, r1_delayed_event_step_result *result) {

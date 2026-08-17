@@ -2320,6 +2320,8 @@ def main() -> None:
     time_health_rollover = DOCS / "TIME-HEALTH-ROLLOVER-CORRELATION.md"
     for marker in (
         "0x0005DC08..<0x0005DC5E",
+        "fc72eda6d9921b4c09e94214ac0d1b66bc3afdfa40fbdda80a213e76e1999d85",
+        "r1_gomore_time_transition_adapter",
         "0x0005DCE8..<0x0005DE98",
         "0x0005E698..<0x0005E956",
         "30/31-second boundary",
@@ -2347,6 +2349,92 @@ def main() -> None:
         "GoMore",
     ):
         require(temperature_stress_cache, marker)
+    temperature_one_shot = DOCS / "TEMPERATURE-ONE-SHOT-CORRELATION.md"
+    for marker in (
+        "0x00042514..<0x0004256A",
+        "0x0004B6C0..<0x0004B6FE",
+        "0x0004B920..<0x0004B9F0",
+        "0x0004BBF0..<0x0004BC26",
+        "0x0004BC40..<0x0004BCD6",
+        "0x0008A8FC..<0x0008A928",
+        "0x2001E3DC",
+        "120-byte state",
+        "Attempt 31",
+        'listener `"once"`',
+        "rate 1, mode 1",
+        "openr1_sensor_stream_zephyr_temperature_once_set",
+        "openr1_databases_zephyr_consume_temperature_event",
+        "no startup call or public BLE route",
+    ):
+        require(temperature_one_shot, marker)
+    gomore_topic_input = DOCS / "GOMORE-TOPIC-INPUT-CORRELATION.md"
+    for marker in (
+        "0x00049410..<0x0004960A",
+        "0x0006ACC8..<0x0006ACD2",
+        "0x0006B0D4..<0x0006B10E",
+        "0x0006B114..<0x0006B1B8",
+        "0x0006B1B8..<0x0006B1F4",
+        "0x0006B1F4..<0x0006B228",
+        "0x0006B228..<0x0006B272",
+        "0x0008A01C..<0x0008A038",
+        "6d8e91f9572f177c80454d8fdad3aecc847c74495e9636859a28825b330de651",
+        "0.9765625",
+        "required acc/raw input",
+        "startup does not register it",
+        "does not run the health engine",
+    ):
+        require(gomore_topic_input, marker)
+    goodix_internal_topics = \
+        DOCS / "GOODIX-INTERNAL-TOPIC-PRODUCERS-CORRELATION.md"
+    for marker in (
+        "0x00089E30..<0x00089E4C",
+        "c72f6f01113c2db81a12f28a57e02b3910b9d62c447ea4d144c0d555ad03f12a",
+        "0x0008A01C..<0x0008A038",
+        "0x0008A054..<0x0008A062",
+        "646e81e180a4077043c8541c31378b9be0b0a495cf4aafff2dc8c8dd4d39231b",
+        "five UInt32LE",
+        "thirty UInt32LE",
+        "living-object input",
+        "physical channel selection remains",
+    ):
+        require(goodix_internal_topics, marker)
+    thumb_callbacks = DOCS / "THUMB-CALLBACK-ENTRY-CORRELATION.md"
+    for marker in (
+        "0x00042D28..<0x00042D2E",
+        "0x00042EE8..<0x0004301A",
+        "0x0004B6C0..<0x0004B6FE",
+        "0x0004B920..<0x0004B9F0",
+        "0x0004BBF0..<0x0004BC26",
+        "0x0004BC40..<0x0004BCD6",
+        "0x0004E008..<0x0004E05A",
+        "0x00058D4A..<0x00058D52",
+        "0x0006A600..<0x0006A612",
+        "0x0006A230..<0x0006A234",
+        "0x0006ACC8..<0x0006ACD2",
+        "0x0006B0D4..<0x0006B10E",
+        "0x0006B1B8..<0x0006B1F4",
+        "0x0006B1F4..<0x0006B228",
+        "0x00075CCC..<0x00075CDE",
+        "0x0007F17C..<0x0007F188",
+        "0x0007F188..<0x0007F194",
+        "0x00093EE4..<0x00093EF2",
+        "0x00096A60..<0x00096A7A",
+        "7fa0d4b5da336d725c3fda8749821b3248350985ff0eb34c335d570bd42030af",
+        "856dec2d21da309fc9de8a9d2bb79f9fb73ce6fd300d7b3cceb5bf5f6b8d392e",
+        "r1_pmic_retry_callback_plan",
+        "r1_connection_control_role_sync_thread_flags",
+        "r1_connection_control_delayed_event_plan",
+        "gomore_primitives_topic_update_take_ready",
+        "twenty-nine executable callback/helper/task entries",
+        "0x000882AC..<0x000882EC",
+        "0x000920EC..<0x0009216C",
+        "0x00092178..<0x0009223E",
+        "0x0009227C..<0x000922FC",
+        "0x0009230C..<0x0009238C",
+        "0x000926DC..<0x000927BA",
+        "No callback enables a new public command",
+    ):
+        require(thumb_callbacks, marker)
     activity_day_merge = DOCS / "ACTIVITY-DAY-MERGE-CORRELATION.md"
     for marker in (
         "0x0003BCF8..<0x0003BD4C",
@@ -2878,8 +2966,11 @@ def main() -> None:
         require(wear_fusion_doc, marker)
     connection_parameter_doc = DOCS / "CONNECTION-PARAMETER-POLICY-CORRELATION.md"
     for marker in (
-        "four R1 product functions / 498 bytes byte-pinned",
+        "five R1 product functions / 562 bytes byte-pinned",
         "0x00051AA0..<0x00051C78",
+        "0x000882AC..<0x000882EC",
+        "28d8568d7f96013e7c9255881ce0b659f1ed3071d7bd35492f99de6ad18027ab",
+        "r1_connection_control_delayed_event_plan",
         "strictly below `50`",
         "4 ms delay",
         "2,000 ms",
@@ -3320,6 +3411,10 @@ def main() -> None:
             "r1_health_db_build_record")
     require(PROJECT / "src" / "r1_health_db.c",
             "r1_health_db_restore_record")
+    require(PROJECT / "src" / "r1_health.c",
+            "r1_health_sync_cursor_decode")
+    require(PROJECT / "src" / "r1_health.c",
+            "r1_health_sync_cursor_encode")
     require(PROJECT / "tests" / "test_openr1.c",
             "test_health_database_startup")
     require(PROJECT / "tests" / "test_openr1.c",
@@ -3523,6 +3618,8 @@ def main() -> None:
             "test_st25dvxxkc_dock_policy")
     require(PROJECT / "src" / "r1_peer_target.c",
             "r1_peer_is_target_glasses")
+    require(PROJECT / "src" / "r1_peer_target.c",
+            "r1_connection_control_delayed_event_plan")
     require(PROJECT / "include" / "openr1" / "r1_peer_target.h",
             "R1_PEER_SLOT_COUNT")
     require(PROJECT / "tests" / "test_openr1.c", "test_peer_target_policy")
@@ -3564,6 +3661,34 @@ def main() -> None:
             "test_protocol_response_orchestration")
     require(PROJECT / "src" / "r1_storage.c",
             "r1_export_plan_command")
+    require(PROJECT / "src" / "r1_storage.c",
+            "r1_storage_task_plan_startup")
+    require(PROJECT / "src" / "r1_storage.c",
+            "r1_storage_task_plan_flags")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_channel1_task_plan_startup")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_channel1_task_plan_flags")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_channel1_task_plans")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_bae8_input_task_plan_startup")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_bae8_input_task_plan_flags")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_bae8_input_task_plans")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_shared_tx_task_plan_startup")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_shared_tx_task_plan_flags")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_shared_tx_task_plans")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_factory_input_task_plan_startup")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_factory_input_task_plan_flags")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_factory_input_task_plans")
     require(PROJECT / "tests" / "test_openr1.c", "test_export_planner")
     require(PROJECT / "src" / "r1_runtime.c",
             "r1_ble_thread_message_encode")
@@ -3645,6 +3770,10 @@ def main() -> None:
             "test_next_frontier_212_222_policies")
     require(PROJECT / "src" / "r1_goodix.c",
             "r1_sensor_stream_registration_plan")
+    require(PROJECT / "src" / "r1_goodix.c", "r1_goodix_raw_hr_append")
+    require(PROJECT / "src" / "r1_goodix.c", "r1_goodix_adt_append")
+    require(PROJECT / "src" / "r1_goodix.c",
+            "r1_goodix_wear_living_object_update")
     require(PROJECT / "src" / "r1_health.c",
             "r1_activity_flash_record_enqueue_plan")
     require(PROJECT / "src" / "r1_connection_params.c",
@@ -4078,7 +4207,7 @@ def main() -> None:
         raise AssertionError("application unclassified-function count changed")
     if application_provider_counts["nordic_nrf5_sdk_17_1_0"] != 547:
         raise AssertionError("application Nordic provider count changed")
-    if application_provider_counts["r1_product_specific"] != 671:
+    if application_provider_counts["r1_product_specific"] != 690:
         raise AssertionError("R1 product-function count changed")
     if application_provider_counts["unknown_generic_device_registry_candidate"] != 40:
         raise AssertionError("unknown generic device-registry boundary count changed")
@@ -4095,13 +4224,24 @@ def main() -> None:
             "unknown_sensor_stream_framework_candidate"] != 32:
         raise AssertionError("unknown sensor-stream framework boundary count changed")
     if application_provider_counts[
-            "unknown_shared_quantized_neural_runtime_candidate"] != 27:
+            "unknown_shared_quantized_neural_runtime_candidate"] != 28:
         raise AssertionError("unknown quantized-neural runtime boundary count changed")
     if application_provider_counts["gomore_health_algorithm_candidate"] != 362:
         raise AssertionError("GoMore provider-boundary count changed")
-    if application_provider_counts["r1_gomore_provider_adapter"] != 3:
+    if application_provider_counts["r1_gomore_provider_adapter"] != 7:
         raise AssertionError("R1 GoMore adapter count changed")
-    if application_provider_counts["r1_health_storage_provider_adapter"] != 3:
+    gomore_adapter_rows = [
+        row for row in ownership_rows
+        if row["image"] == "application" and
+        row["provider_family"] == "r1_gomore_provider_adapter"
+    ]
+    gomore_adapter_entry_digest = hashlib.sha256("".join(
+        f"{row['entry']}\n" for row in gomore_adapter_rows
+    ).encode()).hexdigest()
+    if gomore_adapter_entry_digest != \
+            "093ec7a32746ef6d94a63b2e54a3cc6b1f8e727df81a07e6d09234b6ca3cc6b9":
+        raise AssertionError("R1 GoMore exact adapter-entry set changed")
+    if application_provider_counts["r1_health_storage_provider_adapter"] != 6:
         raise AssertionError("R1 health-storage adapter count changed")
     if application_provider_counts["r1_nordic_cmsis_provider_adapter"] != 12:
         raise AssertionError("R1 Nordic/CMSIS synchronization adapter count changed")
@@ -4127,7 +4267,7 @@ def main() -> None:
         raise AssertionError("R1 ST25DVxxKC adapter count changed")
     if application_provider_counts["r1_i2c5_resource_adapter"] != 5:
         raise AssertionError("R1 i2c_5 resource-adapter count changed")
-    if application_provider_counts["r1_motion_provider_adapter"] != 23:
+    if application_provider_counts["r1_motion_provider_adapter"] != 28:
         raise AssertionError("R1 common motion-adapter count changed")
     if application_provider_counts["r1_qst_qma6100_provider_adapter"] != 14:
         raise AssertionError("R1 QMA6100 adapter count changed")
@@ -4216,6 +4356,7 @@ def main() -> None:
         raise AssertionError("R1 wear-fusion exact entry set changed")
     connection_parameter_entries = {
         "0x0004cb34", "0x0004cba4", "0x00051aa0", "0x00072b80",
+        "0x000882ac",
     }
     connection_parameter_rows = [
         ownership_by_key[("application", entry)]
@@ -4229,8 +4370,17 @@ def main() -> None:
         f"{entry}\n" for entry in sorted(connection_parameter_entries)
     ).encode()).hexdigest()
     if connection_parameter_digest != \
-            "410d423ac199ae2d7d17a8d6e7400fbafa2112acf6587844d55fff8706808c21":
+            "26f25bd35520d3173d948cd0b6dd9bfbda4c1317821b3ff738f2eddb7f147781":
         raise AssertionError("R1 connection-parameter exact entry set changed")
+    connection_callback_row = ownership_by_key[
+        ("application", "0x000882ac")
+    ]
+    if connection_callback_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            connection_callback_row["upstream_symbol"] != \
+            "r1_connection_control_delayed_event_plan" or \
+            connection_callback_row["size"] != "64":
+        raise AssertionError("R1 delayed connection callback ownership changed")
     sleep_sync_packet_row = ownership_by_key[("application", "0x0008da24")]
     if sleep_sync_packet_row["provider_family"] != "r1_product_specific" or \
             sleep_sync_packet_row["source_disposition"] != "clean_room_behavior_only":
@@ -4307,7 +4457,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in motion_adapter_rows
     ).encode()).hexdigest()
     if motion_adapter_entry_digest != \
-            "574928e2d2a3c2a4be1022a1ce7ab8ade28307bffd30698baf7d4f09a2606060":
+            "4d1494f18c5f2de24add8e2973788d5010a0ef0e8ac238c109c79a13d1e278af":
         raise AssertionError("R1 common motion exact adapter-entry set changed")
     qma_adapter_rows = [
         row for row in ownership_rows
@@ -4425,6 +4575,189 @@ def main() -> None:
     recovered_base = 0x00027000
     if len(recovered) != 646408:
         raise AssertionError("recovered application evidence length changed")
+    connection_callback = recovered[
+        0x000882AC - recovered_base:0x000882EC - recovered_base
+    ]
+    if len(connection_callback) != 64 or hashlib.sha256(
+            connection_callback).hexdigest() != \
+            "28d8568d7f96013e7c9255881ce0b659f1ed3071d7bd35492f99de6ad18027ab":
+        raise AssertionError("R1 delayed connection callback body changed")
+    channel1_task = recovered[
+        0x000920EC - recovered_base:0x0009216C - recovered_base
+    ]
+    if len(channel1_task) != 128 or hashlib.sha256(channel1_task).hexdigest() != \
+            "a5c8694c233c107da3df11c43b95747523afd8c1d9fbfb41531dd964096fcecb":
+        raise AssertionError("R1 channel-1 task body changed")
+    channel1_task_row = ownership_by_key[("application", "0x000920ec")]
+    if channel1_task_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            channel1_task_row["provider_family"] != "r1_product_specific" or \
+            channel1_task_row["source_disposition"] != \
+            "clean_room_behavior_only" or \
+            channel1_task_row["upstream_symbol"] != \
+            "r1_channel1_task_plan_startup" or \
+            channel1_task_row["size"] != "128":
+        raise AssertionError("R1 channel-1 task ownership changed")
+    bae8_input_task = recovered[
+        0x00092178 - recovered_base:0x0009223E - recovered_base
+    ]
+    if len(bae8_input_task) != 198 or hashlib.sha256(
+            bae8_input_task).hexdigest() != \
+            "75497f7603d5c266081039ff61cb0821fccef22bc7c4aaeb80aedda9809d934b":
+        raise AssertionError("R1 BAE8 input task body changed")
+    bae8_input_task_row = ownership_by_key[("application", "0x00092178")]
+    if bae8_input_task_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            bae8_input_task_row["provider_family"] != "r1_product_specific" or \
+            bae8_input_task_row["source_disposition"] != \
+            "clean_room_behavior_only" or \
+            bae8_input_task_row["upstream_symbol"] != \
+            "r1_bae8_input_task_plan_startup" or \
+            bae8_input_task_row["size"] != "198":
+        raise AssertionError("R1 BAE8 input task ownership changed")
+    shared_tx_task = recovered[
+        0x0009227C - recovered_base:0x000922FC - recovered_base
+    ]
+    if len(shared_tx_task) != 128 or hashlib.sha256(
+            shared_tx_task).hexdigest() != \
+            "c7aa95dfd7e4c12af796c706385ec6f28cb3de700daae8146fa3548f59d2f025":
+        raise AssertionError("R1 shared transmit task body changed")
+    shared_tx_task_row = ownership_by_key[("application", "0x0009227c")]
+    if shared_tx_task_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            shared_tx_task_row["provider_family"] != "r1_product_specific" or \
+            shared_tx_task_row["source_disposition"] != \
+            "clean_room_behavior_only" or \
+            shared_tx_task_row["upstream_symbol"] != \
+            "r1_shared_tx_task_plan_startup" or \
+            shared_tx_task_row["size"] != "128":
+        raise AssertionError("R1 shared transmit task ownership changed")
+    factory_input_task = recovered[
+        0x0009230C - recovered_base:0x0009238C - recovered_base
+    ]
+    if len(factory_input_task) != 128 or hashlib.sha256(
+            factory_input_task).hexdigest() != \
+            "65da7625dd83c8f74a802a46676632679fc978ef5268b4981207facb30d45a45":
+        raise AssertionError("R1 factory input task body changed")
+    factory_input_task_row = ownership_by_key[("application", "0x0009230c")]
+    if factory_input_task_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            factory_input_task_row["provider_family"] != "r1_product_specific" or \
+            factory_input_task_row["source_disposition"] != \
+            "clean_room_behavior_only" or \
+            factory_input_task_row["upstream_symbol"] != \
+            "r1_factory_input_task_plan_startup" or \
+            factory_input_task_row["size"] != "128":
+        raise AssertionError("R1 factory input task ownership changed")
+    storage_task = recovered[
+        0x000926DC - recovered_base:0x000927BA - recovered_base
+    ]
+    if len(storage_task) != 222 or hashlib.sha256(storage_task).hexdigest() != \
+            "b13c5bc01f09f51f5b4dc9a79566d9b5dcaff74cdf6e8447b12e3d8affa8a179":
+        raise AssertionError("R1 storage task body changed")
+    storage_task_row = ownership_by_key[("application", "0x000926dc")]
+    if storage_task_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            storage_task_row["provider_family"] != "r1_product_specific" or \
+            storage_task_row["source_disposition"] != \
+            "clean_room_behavior_only" or \
+            storage_task_row["upstream_symbol"] != \
+            "r1_storage_task_plan_startup" or \
+            storage_task_row["size"] != "222":
+        raise AssertionError("R1 storage task ownership changed")
+    temperature_one_shot_extents = {
+        (0x00042514, 0x0004256A):
+            "39c338cf4d422187d4c608a8b7fe3e6ac2609d4be0d0054147ab343d3e5e2014",
+        (0x0004B4B0, 0x0004B54A):
+            "2d22610c4505c81f9f9989114ac1570c366b32948aa82ac58853c48f04a741b9",
+        (0x0004B560, 0x0004B594):
+            "4df29f0bb268fad32e19e61746fd77ccc94d0726d8e321c0e7b0c552e5e5472a",
+        (0x0004B598, 0x0004B5B0):
+            "b97051e2ce6772c8127e0b6efa5fa4a45600a3bc42d81e917e06fc24d2a9c3de",
+        (0x0004B6C0, 0x0004B6FE):
+            "01529383d9556740deb853204cb9d84bd4d04c68b2cbf462f02bd9a35a509195",
+        (0x0004B920, 0x0004B9F0):
+            "9a796f9f908343c06334fa122a9f41771468e57d28d37ccff2573fef5cc8b8bb",
+        (0x0004BBF0, 0x0004BC26):
+            "f515e0da5298838c50d396626160eea844f8f9cc30a9d6f9ab4e306603f90f61",
+        (0x0004BC40, 0x0004BCD6):
+            "8ffdb4962894501a85292a14defa42932f2a3fdea2d2e349168b99d7798c7296",
+        (0x0008A8FC, 0x0008A928):
+            "9b7722026f3f79e3ddfc03fab438f004fd4b51f1aa0cc9a4ba272914ff2f4cf7",
+    }
+    for (start, end), digest in temperature_one_shot_extents.items():
+        body = recovered[start - recovered_base:end - recovered_base]
+        if len(body) != end - start or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"temperature one-shot extent changed at 0x{start:08x}")
+    temperature_listener_supplement_expected = {
+        0x0004B6C0: (
+            62, "gomore_primitives_temperature_measurement_begin",
+            "01529383d9556740deb853204cb9d84bd4d04c68b2cbf462f02bd9a35a509195",
+        ),
+        0x0004B920: (
+            208, "gomore_primitives_temperature_measurement_step",
+            "9a796f9f908343c06334fa122a9f41771468e57d28d37ccff2573fef5cc8b8bb",
+        ),
+        0x0004BBF0: (
+            54, "gomore_primitives_temperature_measurement_begin",
+            "f515e0da5298838c50d396626160eea844f8f9cc30a9d6f9ab4e306603f90f61",
+        ),
+        0x0004BC40: (
+            150, "gomore_primitives_temperature_measurement_step",
+            "8ffdb4962894501a85292a14defa42932f2a3fdea2d2e349168b99d7798c7296",
+        ),
+    }
+    for entry, (size, symbol, digest) in \
+            temperature_listener_supplement_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:entry - recovered_base + size]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or row["size"] != str(size) or \
+                len(body) != size or hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"temperature listener supplement changed: 0x{entry:08x}"
+            )
+    gomore_topic_input_extents = {
+        (0x00049410, 0x0004960A):
+            "a5898f09a8c50776e5f37aa43887223d989544b89ad9c5408489a73c5456407b",
+        (0x0006ACC8, 0x0006ACD2):
+            "3badaeb80fceb23c967ef58d3c3da3c18870fba79034fd608da8659c586a927f",
+        (0x0006B0D4, 0x0006B10E):
+            "8f159dceef23f9d294812d1b330e4b31335d6965de6393f3e06d908dfd9f1db2",
+        (0x0006B114, 0x0006B1B8):
+            "12d48128ccaab3563434e1020cafeae53af5c37848aa5e7df228776cfd3139e4",
+        (0x0006B1B8, 0x0006B1F4):
+            "74acdce104fa24422fcb4b7101bb6a70c143d3442bb4fe23f8fe94ad21687eed",
+        (0x0006B1F4, 0x0006B228):
+            "bf19893965dc98b713fe3c861943ce8505cfe4434b2cacfa44a6c69133770e8f",
+        (0x0006B228, 0x0006B272):
+            "ab337651b4344af149b261e8c0e733690a02df92bffcb5b79ee4370e7b8b3134",
+    }
+    for (start, end), digest in gomore_topic_input_extents.items():
+        body = recovered[start - recovered_base:end - recovered_base]
+        if len(body) != end - start or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"GoMore topic-input extent changed at 0x{start:08x}")
+    goodix_internal_topic_extents = {
+        (0x00089E30, 0x00089E4C):
+            "c72f6f01113c2db81a12f28a57e02b3910b9d62c447ea4d144c0d555ad03f12a",
+        (0x0008A01C, 0x0008A038):
+            "6d8e91f9572f177c80454d8fdad3aecc847c74495e9636859a28825b330de651",
+        (0x0008A054, 0x0008A062):
+            "646e81e180a4077043c8541c31378b9be0b0a495cf4aafff2dc8c8dd4d39231b",
+    }
+    for (start, end), digest in goodix_internal_topic_extents.items():
+        body = recovered[start - recovered_base:end - recovered_base]
+        if len(body) != end - start or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"Goodix internal-topic extent changed at 0x{start:08x}"
+            )
     gomore_supplement_expected = {
         0x00067488: (
             196, "gomore_health_algorithm_candidate",
@@ -4436,15 +4769,39 @@ def main() -> None:
             "vendor_source_required_not_redistributable", "",
             "346de4b3b4a920d11fd3aaf7dd930854b7ce8eb02fc26568f9016c9febe1cf84",
         ),
+        0x0006ACC8: (
+            10, "r1_gomore_provider_adapter",
+            "clean_room_reimplementation_owner_authorized",
+            "gomore_primitives_topic_update_complete",
+            "3badaeb80fceb23c967ef58d3c3da3c18870fba79034fd608da8659c586a927f",
+        ),
+        0x0006B0D4: (
+            58, "r1_gomore_provider_adapter",
+            "clean_room_reimplementation_owner_authorized",
+            "gomore_primitives_topic_update_take_ready",
+            "8f159dceef23f9d294812d1b330e4b31335d6965de6393f3e06d908dfd9f1db2",
+        ),
         0x0006B114: (
             164, "r1_gomore_provider_adapter",
-            "clean_room_adapter_only_use_licensed_provider",
+            "clean_room_reimplementation_owner_authorized",
             "r1_gomore_acc_topic_adapter",
             "12d48128ccaab3563434e1020cafeae53af5c37848aa5e7df228776cfd3139e4",
         ),
+        0x0006B1B8: (
+            60, "r1_gomore_provider_adapter",
+            "clean_room_reimplementation_owner_authorized",
+            "gomore_primitives_topic_heart_rate_ingest",
+            "74acdce104fa24422fcb4b7101bb6a70c143d3442bb4fe23f8fe94ad21687eed",
+        ),
+        0x0006B1F4: (
+            52, "r1_gomore_provider_adapter",
+            "clean_room_reimplementation_owner_authorized",
+            "gomore_primitives_topic_hrv_ingest",
+            "bf19893965dc98b713fe3c861943ce8505cfe4434b2cacfa44a6c69133770e8f",
+        ),
         0x0006B228: (
             74, "r1_gomore_provider_adapter",
-            "clean_room_adapter_only_use_licensed_provider",
+            "clean_room_reimplementation_owner_authorized",
             "r1_gomore_raw_hr_topic_adapter",
             "ab337651b4344af149b261e8c0e733690a02df92bffcb5b79ee4370e7b8b3134",
         ),
@@ -10781,18 +11138,135 @@ def main() -> None:
             raise AssertionError(
                 f"R1 health time/hour adapter changed: 0x{entry:08x}"
             )
+    health_time_callback = ownership_by_key[("application", "0x0006a230")]
+    health_time_callback_body = recovered_function(0x0006A230)
+    if health_time_callback["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            health_time_callback["provider_family"] != \
+            "r1_health_storage_provider_adapter" or \
+            health_time_callback["source_disposition"] != \
+            "clean_room_adapter_only_use_pinned_provider" or \
+            health_time_callback["upstream_symbol"] != "health_get_time" or \
+            len(health_time_callback_body) != 4 or \
+            hashlib.sha256(health_time_callback_body).hexdigest() != \
+            "737ab2b8b75c34dcd62999cfda6d5ef469cd4f3f49960ca53158d6b8e306134c":
+        raise AssertionError("R1 health FlashDB time callback changed")
+    tensor_comparator = ownership_by_key[("application", "0x00058d4a")]
+    tensor_comparator_body = recovered_function(0x00058D4A)
+    if tensor_comparator["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            tensor_comparator["provider_family"] != \
+            "unknown_shared_quantized_neural_runtime_candidate" or \
+            tensor_comparator["source_disposition"] != \
+            "clean_room_reimplementation_owner_authorized" or \
+            tensor_comparator["upstream_symbol"] != "compare_live_entries" or \
+            len(tensor_comparator_body) != 8 or \
+            hashlib.sha256(tensor_comparator_body).hexdigest() != \
+            "2467e717b3f3559c4a73231c3d00bf66d382a6d43845761a699c20f26973c1d9":
+        raise AssertionError("quantized tensor-compaction comparator changed")
     gomore_time_adapter = ownership_by_key[("application", "0x0005dc08")]
     gomore_time_body = recovered_function(0x0005DC08)
     if gomore_time_adapter["inventory_source"] != "manual_provenance_supplement" or \
             gomore_time_adapter["provider_family"] != "r1_gomore_provider_adapter" or \
             gomore_time_adapter["source_disposition"] != \
-            "clean_room_adapter_only_use_licensed_provider" or \
+            "clean_room_reimplementation_owner_authorized" or \
             gomore_time_adapter["upstream_symbol"] != \
             "r1_gomore_time_transition_adapter" or \
             len(gomore_time_body) != 86 or \
             hashlib.sha256(gomore_time_body).hexdigest() != \
             "fc72eda6d9921b4c09e94214ac0d1b66bc3afdfa40fbdda80a213e76e1999d85":
         raise AssertionError("R1 GoMore time-transition adapter changed")
+    raw_hr_producer = ownership_by_key[("application", "0x0008a01c")]
+    raw_hr_body = recovered_function(0x0008A01C)
+    if raw_hr_producer["inventory_source"] != "manual_provenance_supplement" or \
+            raw_hr_producer["provider_family"] != "r1_product_specific" or \
+            raw_hr_producer["source_disposition"] != "clean_room_behavior_only" or \
+            raw_hr_producer["upstream_symbol"] != "r1_goodix_raw_hr_append" or \
+            len(raw_hr_body) != 28 or \
+            hashlib.sha256(raw_hr_body).hexdigest() != \
+            "6d8e91f9572f177c80454d8fdad3aecc847c74495e9636859a28825b330de651":
+        raise AssertionError("R1 raw_hr scalar producer changed")
+    goodix_topic_producer_expected = {
+        0x00089E30: (
+            "r1_goodix_adt_append", 28,
+            "c72f6f01113c2db81a12f28a57e02b3910b9d62c447ea4d144c0d555ad03f12a",
+        ),
+        0x0008A054: (
+            "r1_goodix_wear_living_object_update", 14,
+            "646e81e180a4077043c8541c31378b9be0b0a495cf4aafff2dc8c8dd4d39231b",
+        ),
+    }
+    for entry, (symbol, size, digest) in goodix_topic_producer_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 Goodix topic producer changed: 0x{entry:08x}"
+            )
+    thumb_callback_expected = {
+        0x00042D28: ("r1_product_specific", "clean_room_behavior_only",
+                     "r1_pmic_post_timer_callback_plan", 6,
+                     "46ce7a3526ac961a61ffc8aa365a532374d31a64e5dc370ffbd0076019594aaf"),
+        0x00042D2E: ("r1_product_specific", "clean_room_behavior_only",
+                     "r1_pmic_post_device_callback_plan", 16,
+                     "afcc5ed6008cfba661948e736b4f83763b8ebb33bdd1d0ef365c3c0aa3f7b16d"),
+        0x00042EE8: ("r1_product_specific", "clean_room_behavior_only",
+                     "r1_connection_control_plan_adv_start", 306,
+                     "7fa0d4b5da336d725c3fda8749821b3248350985ff0eb34c335d570bd42030af"),
+        0x00046F88: ("r1_product_specific", "clean_room_behavior_only",
+                     "delayed_touch_release", 6,
+                     "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d"),
+        0x0004E008: ("r1_product_specific", "clean_room_behavior_only",
+                     "r1_connection_control_role_sync_thread_flags", 82,
+                     "09faf2697afaaa3ccdc2ce5c7b882246693646820df7c8e05d78f108c0ef5921"),
+        0x0006A600: ("r1_motion_provider_adapter",
+                     "clean_room_adapter_only_use_licensed_providers",
+                     "accelerometer_read", 18,
+                     "533f977264f4879dd87b28676cd5d535bbc148abad73bc70311f3e90b5bb2828"),
+        0x0006A61C: ("r1_motion_provider_adapter",
+                     "clean_room_adapter_only_use_licensed_providers",
+                     "accelerometer_open", 28,
+                     "f509ddc6020e95e31b38ba95ee419b575ea33367ab4477fcd13db0db30d0e2a9"),
+        0x0006A648: ("r1_motion_provider_adapter",
+                     "clean_room_adapter_only_use_licensed_providers",
+                     "accelerometer_close", 22,
+                     "b73a06d0cafe595c39bf96d8f8ccdd65b9060c59481bf3410da11ee789d1bddc"),
+        0x00075CCC: ("r1_health_storage_provider_adapter",
+                     "clean_room_adapter_only_use_pinned_provider",
+                     "health_lock", 18,
+                     "527b41112c9686559b46008cea21a67ecaa8ef7ab7bea1f74fea9a953a42e7e1"),
+        0x0007F17C: ("r1_motion_provider_adapter",
+                     "clean_room_adapter_only_use_licensed_providers",
+                     "motion_bus_read", 12,
+                     "ae5ea793492667852747e0c14d33a68a2296f625f20922a731083639b4846b9f"),
+        0x0007F188: ("r1_motion_provider_adapter",
+                     "clean_room_adapter_only_use_licensed_providers",
+                     "motion_bus_write", 12,
+                     "b3885f000d7970d0322dce0e7ede723a6a005499ff5db40cb71f0a7bf1157c12"),
+        0x00093EE4: ("r1_health_storage_provider_adapter",
+                     "clean_room_adapter_only_use_pinned_provider",
+                     "health_unlock", 14,
+                     "856dec2d21da309fc9de8a9d2bb79f9fb73ce6fd300d7b3cceb5bf5f6b8d392e"),
+        0x00096A60: ("r1_product_specific", "clean_room_behavior_only",
+                     "r1_pmic_retry_callback_plan", 26,
+                     "4c74110b82ab232183d7aa09415da2327258ecaa7e51efb1a3eaf54f307e2553"),
+    }
+    for entry, (provider, disposition, symbol, size, digest) in \
+            thumb_callback_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != provider or \
+                row["source_disposition"] != disposition or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"Thumb callback entry changed: 0x{entry:08x}"
+            )
     activity_day_merge_expected = {
         0x0003BCF8: ("r1_activity_acknowledgement_timestamp_clamp", 84,
                      "960f99f03806a862815a3c7956ad23fa6020069ebe3d6fceb29ba5d1cdd12fe1"),
