@@ -1,8 +1,8 @@
 # Residual provider and production-readiness audit
 
-Snapshot: 2026-08-16, after the source-built Goodix optical-transport/YHM lifecycle binding, the platform-driver
-increments, the six Bravechip-attributed middleware reductions, the five-entry GXT310 reduction,
-the complete 17-entry QMA6100 provider/adapter reduction, the complete 36-entry YHM2710
+Snapshot: 2026-08-17, after the source-built Goodix optical-transport/YHM lifecycle binding, the platform-driver
+increments, the six Bravechip-attributed middleware reductions, the eight-entry GXT310 reduction,
+the complete 17-entry QMA6100 provider/adapter reduction, the complete 44-entry YHM2710
 reduction, and the complete 320-entry opaque-Goodix / 360-entry GoMore reductions. This audit tracks what remains outside the R1-owned clean-room
 boundary, why it remains there, and what the project does and does not claim today.
 
@@ -10,31 +10,43 @@ boundary, why it remains there, and what the project does and does not claim tod
 
 The generated ownership ledger
 ([`FUNCTION-OWNERSHIP.csv`](FUNCTION-OWNERSHIP.csv), summary in
-[`FUNCTION-OWNERSHIP-SUMMARY.json`](FUNCTION-OWNERSHIP-SUMMARY.json)) covers **3,199
-functions**: 2,895 application and 304 bootloader entries, comprising 2,991 Ghidra inventory
-records plus 208 exact manual provenance supplements. **Zero entries remain unclassified**;
-every recovered function carries an ownership disposition.
+[`FUNCTION-OWNERSHIP-SUMMARY.json`](FUNCTION-OWNERSHIP-SUMMARY.json)) covers **3,326
+functions**: 3,022 application and 304 bootloader entries, comprising 2,991 Ghidra inventory
+records plus 335 exact manual provenance supplements. **Zero entries remain unclassified**;
+every recovered function carries an ownership disposition. The separate generated
+[`GHIDRA-EXPLICIT-ENTRY-CENSUS.json`](GHIDRA-EXPLICIT-ENTRY-CENSUS.json) closes the omission
+boundary: across 28 curated function-entry arrays, it records 666 version-qualified unique
+entries. For application 2.2.6.0009, 598 are exact ledger starts and five are interior addresses
+within genuinely contiguous ledger extents. Seven are conclusively adjudicated literal/data
+operands and explicitly retained as `adjudicated_non_function_data` rather than being turned into
+invented functions. One further seed, `0x00042974`, is the second halfword of a 32-bit Thumb
+branch and is retained as `adjudicated_non_function_instruction_interior`; one seed is a proven
+secondary executable segment. No application seed remains unproven. All 41
+bootloader entries are exact. Thirteen additional entries belong to application 2.2.7.0005 and
+are explicitly marked `analysis_only_no_ownership_inventory` because that analyzed image and its
+function inventory are not preserved in this workspace. They are a real remaining provenance
+gap, not treated as covered by same-address 2.2.6 functions.
 
 Disposition totals:
 
 | Disposition | Entries |
 | --- | ---: |
-| `use_nordic_sdk` | 765 |
-| `clean_room_behavior_only` (+ 9 `clean_room_behavior_only_security_preserving`) | 685 |
+| `use_nordic_sdk` | 782 |
+| `clean_room_behavior_only` (+ 12 `clean_room_behavior_only_security_preserving`) | 757 |
 | `use_pinned_upstream` | 252 |
 | `use_toolchain_runtime` | 129 |
-| `use_authenticated_upstream_snapshot_and_nordic_port` | 110 |
-| `use_authenticated_upstream_snapshot` | 63 |
+| `use_authenticated_upstream_snapshot_and_nordic_port` | 111 |
+| `use_authenticated_upstream_snapshot` | 65 |
 | `use_nordic_sdk_bundled_upstream` | 43 |
 | `use_nordic_supplied_provider` | 41 |
-| `clean_room_adapter_only_*` / `clean_room_configuration_only_*` / `clean_room_data_model_only` (all variants) | 179 |
+| `clean_room_adapter_only_*` / `clean_room_configuration_only_*` / `clean_room_data_model_only` (all variants) | 200 |
 | `vendor_source_required_not_redistributable` | 0 |
-| `clean_room_reimplementation_owner_authorized` | 932 |
+| `clean_room_reimplementation_owner_authorized` | 946 |
 
-No `vendor_source_required_not_redistributable` executable entry remains. The 932
+No `vendor_source_required_not_redistributable` executable entry remains. The 946
 `clean_room_reimplementation_owner_authorized`
-entries comprise the 166 functions in six Wuxi Bravechip ChipletRing/BCL603M middleware families,
-five GXT310 entries, all 17 QMA6100 provider/adapter entries, all 36 YHM2710 entries,
+entries comprise the 169 functions in six Wuxi Bravechip ChipletRing/BCL603M middleware families,
+eight GXT310 entries, all 17 QMA6100 provider/adapter entries, all 44 YHM2710 entries,
 339 Goodix functions, all 362 GoMore primitives/tensor-runtime routines, and seven R1 GoMore input/time adapters. Under the owner-authorized full reduction
 ([`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md), 2026-08-14) these are reconstructed
 from the decompilation evidence as independently compiled C under `r1/reconstructed/` with
@@ -46,7 +58,7 @@ runtime adoption and hardware validation remain open.
 | Provider family | Entries | Disposition | Boundary documentation | What would unblock it | Fail-closed behavior today |
 | --- | ---: | --- | --- | --- | --- |
 | GoMore health/sleep algorithms (`gomore_health_algorithm_candidate`) | 0 remaining + 362 reconstructed + 7 reconstructed R1 adapters | `clean_room_reimplementation_owner_authorized` | [`../boundaries/GOMORE-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-PROVIDER-BOUNDARY.md), the neural-runtime/sleep family boundary docs, [`../correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](../correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md), [`../correlation/GOMORE-TOPIC-INPUT-CORRELATION.md`](../correlation/GOMORE-TOPIC-INPUT-CORRELATION.md), [`../correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md`](../correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md), and [`../correlation/GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md`](../correlation/GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md) | The executable reduction is complete: 343 primitive/shared-runtime routines, nineteen tensor-runtime routines, and seven R1 adapter extents are transparent C. The exact four topic-input callbacks, readiness barrier, and successful-update cleanup compile, the available acc path has dormant on-target staging, and the exact backward-clock adapter is source-bound to a suppressed reset action. Continue only the explicit remaining data-input and on-target engine integration audit. | Health-index, sleep-classification, and stress paths remain disabled until their explicit model/data inputs and source bindings are provisioned and hardware-validated. Storage and wire layers do not synthesize values. |
-| Wuxi Bravechip ChipletRing / BCL603M closed middleware — six `unknown_*_candidate` families | 166 | `clean_room_reimplementation_owner_authorized` | [`../boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION-2026-08.md`](../boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION-2026-08.md) and the five sibling `unknown_*-ATTRIBUTION-2026-08.md` reports; per-family boundary docs [`../boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md`](../boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md), [`../boundaries/SOFTWARE-TWI-PROVIDER-BOUNDARY.md`](../boundaries/SOFTWARE-TWI-PROVIDER-BOUNDARY.md), [`../boundaries/SENSOR-STREAM-FRAMEWORK-BOUNDARY.md`](../boundaries/SENSOR-STREAM-FRAMEWORK-BOUNDARY.md), [`../boundaries/QUANTIZED-POOLING-PROVIDER-BOUNDARY.md`](../boundaries/QUANTIZED-POOLING-PROVIDER-BOUNDARY.md), [`../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md`](../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md), [`../boundaries/RTC-DEVICE-PROVIDER-BOUNDARY.md`](../boundaries/RTC-DEVICE-PROVIDER-BOUNDARY.md) | Licensed acquisition from Bravechip (named commercial route via the byte-exact GATT base-UUID match to the public `BravechipSpace/ChipletRing-APPSDK` and the `603MV1.9.3` module string; contact xiaojian.cui@bravechip.com per the APPSDK README) or the ring ODM, with OTA-hex analysis as forensic fallback; or new attribution evidence for an individual family. All six were re-tested against fetched upstream sources in 2026-08 and remain NO ATTRIBUTION. A 2026-08-14 public-route re-check found Bravechip's only public repository to be phone-side-only (zero firmware identifiers), its official download list to offer app SDKs/datasheets only, and a second Bravechip-based ring product (`thuhci/OpenRing`) shipping no firmware source either — no public firmware-side source exists; see the updated `unknown_*-ATTRIBUTION-2026-08.md` reports. | All 166 functions are reconstructed host-side under the owner-authorized 2026-08 reduction: generic device registry (40), GPIO-driven software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (28), time/calendar provider (16), RTC-device layer (10). The Zephyr target now adopts exact software `i2c_4` for Goodix optical transport and exact software `i2c_2` for the typed dual-GXT310 probe/acquisition adapter; dormant roles remain retained source awaiting typed consumers. OpenR1 continues to substitute typed admitted providers (Nordic TWIM, `nrfx_rtc`, R1-owned clock production) on the other hardware paths. |
+| Wuxi Bravechip ChipletRing / BCL603M closed middleware — six `unknown_*_candidate` families | 169 | `clean_room_reimplementation_owner_authorized` | [`../boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION-2026-08.md`](../boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION-2026-08.md) and the five sibling `unknown_*-ATTRIBUTION-2026-08.md` reports; per-family boundary docs [`../boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md`](../boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md), [`../boundaries/SOFTWARE-TWI-PROVIDER-BOUNDARY.md`](../boundaries/SOFTWARE-TWI-PROVIDER-BOUNDARY.md), [`../boundaries/SENSOR-STREAM-FRAMEWORK-BOUNDARY.md`](../boundaries/SENSOR-STREAM-FRAMEWORK-BOUNDARY.md), [`../boundaries/QUANTIZED-POOLING-PROVIDER-BOUNDARY.md`](../boundaries/QUANTIZED-POOLING-PROVIDER-BOUNDARY.md), [`../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md`](../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md), [`../boundaries/RTC-DEVICE-PROVIDER-BOUNDARY.md`](../boundaries/RTC-DEVICE-PROVIDER-BOUNDARY.md) | Licensed acquisition from Bravechip (named commercial route via the byte-exact GATT base-UUID match to the public `BravechipSpace/ChipletRing-APPSDK` and the `603MV1.9.3` module string; contact xiaojian.cui@bravechip.com per the APPSDK README) or the ring ODM, with OTA-hex analysis as forensic fallback; or new attribution evidence for an individual family. All six were re-tested against fetched upstream sources in 2026-08 and remain NO ATTRIBUTION. A 2026-08-14 public-route re-check found Bravechip's only public repository to be phone-side-only (zero firmware identifiers), its official download list to offer app SDKs/datasheets only, and a second Bravechip-based ring product (`thuhci/OpenRing`) shipping no firmware source either — no public firmware-side source exists; see the updated `unknown_*-ATTRIBUTION-2026-08.md` reports. | All 169 functions are reconstructed host-side under the owner-authorized 2026-08 reduction: generic device registry (43), GPIO-driven software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (28), time/calendar provider (16), RTC-device layer (10). The Zephyr target now adopts exact software `i2c_4` for Goodix optical transport and exact software `i2c_2` for the typed dual-GXT310 probe/acquisition adapter; dormant roles remain retained source awaiting typed consumers. OpenR1 continues to substitute typed admitted providers (Nordic TWIM, `nrfx_rtc`, R1-owned clock production) on the other hardware paths. |
 
 Goodix has left the residual table: all 320 formerly opaque provider-candidate entries now map to
 owner-authorized transparent C, alongside seventeen public-democode replacements and two R1
@@ -196,8 +208,8 @@ Buildable and verified today, from a clean tree:
   verified as documented in
   [`SOURCE-BUILT-ZEPHYR-BUNDLE.md`](../closures/SOURCE-BUILT-ZEPHYR-BUNDLE.md);
 - the full evidence gate (`python3 tools/verify_openr1.py`), which reconciles the ownership
-  ledger, the coverage ledger, the per-subsystem correlation summaries, and the Goodix
-  democode mapping against the recovered images.
+  ledger, the explicit Ghidra-script entry census, the coverage ledger, the per-subsystem
+  correlation summaries, and the Goodix democode mapping against the recovered images.
 
 Explicitly **not** claimed:
 
@@ -272,6 +284,7 @@ cd r1/platform/nrf52840/sdk && make clean && make SDK_ROOT=... default   # see d
 make -C r1 sdk-verify SDK_ROOT=...                                       # pinned-hash check
 python3 r1/tools/verify_openr1.py
 cd r1 && python3 tools/build_r1_source_ownership.py --check
+cd r1 && python3 tools/audit_r1_ghidra_explicit_entries.py --check
 ```
 
 The SDK image verification must pass against the existing pins without re-pinning; a hash

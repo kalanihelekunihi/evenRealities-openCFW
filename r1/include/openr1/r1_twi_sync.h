@@ -147,5 +147,6 @@ uint32_t r1_twi_lifecycle_shutdown(
 uint32_t r1_twi_software_lifecycle_shutdown(
     r1_twi_software_lifecycle_state *state,
     const r1_twi_software_lifecycle_ops *ops);
+void r1_twi_i2c5_delay_noop(uint32_t delay_units);
 
 #endif

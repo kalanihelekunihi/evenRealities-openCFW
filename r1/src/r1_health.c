@@ -1,5 +1,6 @@
 #include "openr1/r1_health.h"
 #include "openr1/r1_crc.h"
+#include "gomore_primitives/gomore_primitives.h"
 
 _Static_assert(sizeof(r1_activity_offline_entry) == 16u,
                "activity offline record layout must remain 16 bytes");
@@ -894,6 +895,119 @@ r1_error r1_heart_rate_store_sample(
         R1_HEALTH_NOTIFICATION_HEART_RATE, result);
 }
 
+bool r1_hr_value_plausible(uint8_t heart_rate) {
+    return heart_rate >= R1_HEART_RATE_VALUE_MIN &&
+           heart_rate <= R1_HEART_RATE_VALUE_MAX;
+}
+
+static r1_error hr_result_plan_build(
+    r1_hr_result_kind kind, const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, uint32_t firmware_clock,
+    r1_hr_result_plan *plan) {
+    if (record == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (record_length != R1_HEART_RATE_RESULT_RECORD_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+
+    clear_bytes((uint8_t *)plan, sizeof *plan);
+    plan->kind = kind;
+    plan->heart_rate = record[0];
+    plan->confidence = record[1];
+    plan->signal = record[2];
+    plan->value_plausible = r1_hr_value_plausible(plan->heart_rate);
+    plan->health_publication_enabled = health_publication_enabled;
+    plan->unregister_hr_stream = true;
+    plan->clear_stream_handle = true;
+    plan->release_timing_timer = kind == R1_HR_RESULT_TIMING;
+    plan->clear_timing_timer_handle = kind == R1_HR_RESULT_TIMING;
+
+    if (plan->value_plausible && health_publication_enabled) {
+        plan->publish_event = true;
+        plan->event_id = R1_HEART_RATE_PUBLICATION_EVENT;
+        plan->event_payload[0] = plan->heart_rate;
+        write_u32(plan->event_payload + 4u, firmware_clock);
+        plan->event_payload_length = R1_HEART_RATE_PUBLICATION_BYTES;
+    }
+    return R1_OK;
+}
+
+r1_error r1_hr_once_result_plan(
+    const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, uint32_t firmware_clock,
+    r1_hr_result_plan *plan) {
+    return hr_result_plan_build(
+        R1_HR_RESULT_ONCE, record, record_length,
+        health_publication_enabled, firmware_clock, plan);
+}
+
+r1_error r1_hr_timing_result_plan(
+    const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, uint32_t firmware_clock,
+    r1_hr_result_plan *plan) {
+    return hr_result_plan_build(
+        R1_HR_RESULT_TIMING, record, record_length,
+        health_publication_enabled, firmware_clock, plan);
+}
+
+static r1_error spo2_result_plan_build(
+    r1_spo2_result_kind kind, const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, r1_spo2_result_plan *plan) {
+    if (record == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (record_length != R1_SPO2_RESULT_RECORD_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+
+    clear_bytes((uint8_t *)plan, sizeof *plan);
+    plan->kind = kind;
+    plan->raw_spo2 = record[0];
+    plan->r_value = record[1];
+    plan->confidence = record[2];
+    plan->level = (int8_t)record[3];
+    plan->heart_rate = record[4];
+    plan->mark = record[5];
+    plan->value_plausible =
+        gomore_primitives_byte_in_70_100(plan->raw_spo2);
+    plan->health_publication_enabled = health_publication_enabled;
+    plan->unregister_spo2_stream = true;
+    plan->clear_stream_handle = true;
+    plan->release_timing_timer = kind == R1_SPO2_RESULT_TIMING;
+    plan->clear_timing_timer_handle = kind == R1_SPO2_RESULT_TIMING;
+    if (kind == R1_SPO2_RESULT_TIMING) {
+        plan->mark_valid_result_seen = plan->value_plausible;
+        plan->mark_invalid_result_seen = !plan->value_plausible;
+    }
+
+    if (plan->value_plausible && health_publication_enabled) {
+        plan->adjusted_spo2 =
+            gomore_primitives_piecewise_clamp_70_100(plan->raw_spo2);
+        plan->publish_event = true;
+        plan->event_id = R1_SPO2_PUBLICATION_EVENT;
+        plan->event_payload[0] = plan->adjusted_spo2;
+        plan->event_payload_length = R1_SPO2_PUBLICATION_BYTES;
+    }
+    return R1_OK;
+}
+
+r1_error r1_spo2_once_result_plan(
+    const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, r1_spo2_result_plan *plan) {
+    return spo2_result_plan_build(
+        R1_SPO2_RESULT_ONCE, record, record_length,
+        health_publication_enabled, plan);
+}
+
+r1_error r1_spo2_timing_result_plan(
+    const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, r1_spo2_result_plan *plan) {
+    return spo2_result_plan_build(
+        R1_SPO2_RESULT_TIMING, record, record_length,
+        health_publication_enabled, plan);
+}
+
 r1_error r1_spo2_store_sample(
     r1_health_u8_history *history, r1_health_u8_accumulator *accumulator,
     uint8_t value, uint32_t event_timestamp, uint32_t firmware_timestamp,
@@ -973,6 +1087,385 @@ static const health_history_registration health_history_registrations[] = {
     {UINT16_C(0x0602), 11u, false, R1_HEALTH_HISTORY_SLEEP_DAILY, 6u, 0u},
     {UINT16_C(0x7f01), 13u, false, R1_HEALTH_HISTORY_SLEEP_DAILY, 0u, 0u},
 };
+
+void r1_health_history_noop_handler(void) {
+}
+
+bool r1_health_daily_test_event_valid(const uint8_t *payload, size_t length) {
+    return payload != NULL && length == 9u;
+}
+
+bool r1_health_history_event_valid(const uint8_t *payload, size_t length) {
+    return payload != NULL && length == R1_HEALTH_HISTORY_EVENT_BYTES;
+}
+
+static bool health_auxiliary_request_accepted(uint8_t request_flags) {
+    /* The recovered handlers require bit 1 and reject bit 0. */
+    return (request_flags & UINT8_C(0x02)) != 0u
+        && (request_flags & UINT8_C(0x01)) == 0u;
+}
+
+static r1_error health_auxiliary_plan_initialize(
+    r1_health_auxiliary_plan *plan, r1_health_auxiliary_action action,
+    uint8_t request_flags) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    clear_bytes((uint8_t *)plan, sizeof *plan);
+    plan->action = action;
+    plan->accepted = health_auxiliary_request_accepted(request_flags);
+    return R1_OK;
+}
+
+r1_error r1_sleep_detail_plan(
+    uint8_t request_flags, r1_health_auxiliary_plan *plan) {
+    const r1_error error = health_auxiliary_plan_initialize(
+        plan, R1_HEALTH_AUXILIARY_SLEEP_DETAIL, request_flags);
+    if (error != R1_OK || !plan->accepted) {
+        return error;
+    }
+    plan->private_event_requested = true;
+    plan->private_event = UINT16_C(0x100e);
+    return R1_OK;
+}
+
+static r1_error health_measurement_plan(
+    uint8_t request_flags, uint16_t request_serial,
+    r1_health_auxiliary_action action, uint16_t provider_command,
+    uint16_t private_event, r1_health_auxiliary_plan *plan) {
+    const r1_error error = health_auxiliary_plan_initialize(
+        plan, action, request_flags);
+    if (error != R1_OK || !plan->accepted) {
+        return error;
+    }
+    plan->provider_command_requested = true;
+    plan->provider_command = provider_command;
+    plan->provider_mode = 2u;
+    plan->request_serial = request_serial;
+    plan->private_event_requested = true;
+    plan->private_event = private_event;
+    plan->private_event_payload_length = 1u;
+    plan->private_event_payload = 1u;
+    return R1_OK;
+}
+
+r1_error r1_heart_rate_measurement_plan(
+    uint8_t request_flags, uint16_t request_serial,
+    r1_health_auxiliary_plan *plan) {
+    return health_measurement_plan(
+        request_flags, request_serial,
+        R1_HEALTH_AUXILIARY_HEART_RATE_MEASUREMENT,
+        UINT16_C(0x0103), UINT16_C(0x1002), plan);
+}
+
+r1_error r1_spo2_measurement_plan(
+    uint8_t request_flags, uint16_t request_serial,
+    r1_health_auxiliary_plan *plan) {
+    return health_measurement_plan(
+        request_flags, request_serial, R1_HEALTH_AUXILIARY_SPO2_MEASUREMENT,
+        UINT16_C(0x0203), UINT16_C(0x1004), plan);
+}
+
+r1_error r1_health_report_setting_plan(
+    bool payload_present, uint8_t payload_value,
+    r1_health_auxiliary_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    clear_bytes((uint8_t *)plan, sizeof *plan);
+    plan->action = R1_HEALTH_AUXILIARY_REPORT_SETTING;
+    plan->accepted = true;
+    plan->report_setting_update_requested = true;
+    /* The stock zero-payload path obtains a false byte from address zero.
+     * Model that result directly instead of reproducing a null flash read. */
+    plan->report_enabled = payload_present && payload_value != 0u;
+    return R1_OK;
+}
+
+static r1_error stress_control_plan_initialize(
+    r1_stress_control_plan *plan, r1_stress_control_action action,
+    uint8_t payload_value, size_t payload_length) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    clear_bytes((uint8_t *)plan, sizeof *plan);
+    plan->action = action;
+    plan->raw_value = payload_value;
+    plan->accepted = payload_length == 1u;
+    return R1_OK;
+}
+
+r1_error r1_stress_mode_control_plan(
+    uint8_t payload_value, size_t payload_length,
+    r1_stress_control_plan *plan) {
+    const r1_error error = stress_control_plan_initialize(
+        plan, R1_STRESS_CONTROL_MODE, payload_value, payload_length);
+    if (error != R1_OK || !plan->accepted) {
+        return error;
+    }
+    /* The wrapper forwards every one-byte value. The downstream stock setter
+     * performs no transition unless the unsigned value is below two. */
+    plan->mode_update_requested = payload_value < 2u;
+    plan->mode = payload_value;
+    return R1_OK;
+}
+
+r1_error r1_stress_measurement_control_plan(
+    uint8_t payload_value, size_t payload_length,
+    r1_stress_control_plan *plan) {
+    const r1_error error = stress_control_plan_initialize(
+        plan, R1_STRESS_CONTROL_MEASUREMENT, payload_value, payload_length);
+    if (error != R1_OK || !plan->accepted) {
+        return error;
+    }
+    plan->measurement_update_requested = true;
+    plan->measurement_enabled = payload_value != 0u;
+    return R1_OK;
+}
+
+static r1_error factory_optical_plan_initialize(
+    const uint8_t *record, size_t record_length, size_t expected_length,
+    r1_factory_optical_metric metric,
+    r1_factory_optical_diagnostic_plan *plan) {
+    if (record == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (record_length != expected_length) {
+        return R1_ERROR_LENGTH;
+    }
+    clear_bytes((uint8_t *)plan, sizeof *plan);
+    plan->metric = metric;
+    return R1_OK;
+}
+
+r1_error r1_factory_heart_rate_diagnostic_plan(
+    const uint8_t *record, size_t record_length,
+    r1_factory_optical_diagnostic_plan *plan) {
+    const r1_error error = factory_optical_plan_initialize(
+        record, record_length, 3u, R1_FACTORY_OPTICAL_HEART_RATE, plan);
+    if (error != R1_OK) {
+        return error;
+    }
+    /* The stock callback loads all three bytes into variadic argument
+     * registers even though its format string consumes only the first. */
+    plan->raw_value = record[0];
+    plan->normalized_value = record[0];
+    plan->text_values[0] = record[0];
+    plan->text_values[1] = record[1];
+    plan->text_values[2] = record[2];
+    plan->text_value_count = 3u;
+    return R1_OK;
+}
+
+r1_error r1_factory_spo2_diagnostic_plan(
+    const uint8_t *record, size_t record_length,
+    r1_factory_optical_diagnostic_plan *plan) {
+    const r1_error error = factory_optical_plan_initialize(
+        record, record_length, 1u, R1_FACTORY_OPTICAL_SPO2, plan);
+    if (error != R1_OK) {
+        return error;
+    }
+    plan->raw_value = record[0];
+    plan->normalized_value = record[0];
+    plan->text_values[0] = record[0];
+    plan->text_value_count = 1u;
+    return R1_OK;
+}
+
+r1_error r1_factory_hrv_diagnostic_plan(
+    const uint8_t *record, size_t record_length,
+    r1_factory_optical_diagnostic_plan *plan) {
+    const r1_error error = factory_optical_plan_initialize(
+        record, record_length, 8u, R1_FACTORY_OPTICAL_HRV, plan);
+    if (error != R1_OK) {
+        return error;
+    }
+    plan->raw_value = read_u16(record);
+    plan->normalized_value = plan->raw_value;
+    for (size_t index = 0u; index < 4u; ++index) {
+        plan->text_values[index] = read_u16(record + (index * 2u));
+    }
+    plan->text_value_count = 4u;
+    return R1_OK;
+}
+
+r1_error r1_factory_temperature_diagnostic_plan(
+    const uint8_t *record, size_t record_length,
+    r1_factory_optical_diagnostic_plan *plan) {
+    const r1_error error = factory_optical_plan_initialize(
+        record, record_length, 2u, R1_FACTORY_OPTICAL_TEMPERATURE, plan);
+    if (error != R1_OK) {
+        return error;
+    }
+    plan->raw_value = read_u16(record);
+    plan->normalized_value = (uint16_t)(plan->raw_value / 100u);
+    plan->text_values[0] = (uint8_t)(plan->normalized_value / 10u);
+    plan->text_values[1] = (uint8_t)(plan->normalized_value % 10u);
+    plan->text_value_count = 2u;
+    plan->record_update_requested = true;
+    return R1_OK;
+}
+
+static r1_error factory_stream_control_plan(
+    r1_factory_stream_metric metric, bool register_stream,
+    bool handle_present, r1_factory_stream_control_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_factory_stream_control_plan){
+        .metric = metric,
+        .action = R1_FACTORY_STREAM_NO_ACTION,
+        .handle_was_present = handle_present,
+    };
+    if (register_stream) {
+        if (!handle_present) {
+            plan->action = R1_FACTORY_STREAM_REGISTER;
+        }
+    } else if (handle_present) {
+        plan->action = R1_FACTORY_STREAM_UNREGISTER;
+    }
+    return R1_OK;
+}
+
+r1_error r1_factory_acc_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan) {
+    return factory_stream_control_plan(
+        R1_FACTORY_STREAM_ACC, true, handle_present, plan);
+}
+
+r1_error r1_factory_heart_rate_stream_unregister_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan) {
+    return factory_stream_control_plan(
+        R1_FACTORY_STREAM_HEART_RATE, false, handle_present, plan);
+}
+
+r1_error r1_factory_heart_rate_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan) {
+    return factory_stream_control_plan(
+        R1_FACTORY_STREAM_HEART_RATE, true, handle_present, plan);
+}
+
+r1_error r1_factory_hrv_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan) {
+    return factory_stream_control_plan(
+        R1_FACTORY_STREAM_HRV, true, handle_present, plan);
+}
+
+r1_error r1_factory_spo2_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan) {
+    return factory_stream_control_plan(
+        R1_FACTORY_STREAM_SPO2, true, handle_present, plan);
+}
+
+r1_error r1_factory_temperature_stream_unregister_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan) {
+    return factory_stream_control_plan(
+        R1_FACTORY_STREAM_TEMPERATURE, false, handle_present, plan);
+}
+
+r1_error r1_factory_temperature_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan) {
+    return factory_stream_control_plan(
+        R1_FACTORY_STREAM_TEMPERATURE, true, handle_present, plan);
+}
+
+r1_error r1_factory_acc_diagnostic_plan_decode(
+    const uint8_t *record, size_t record_length,
+    r1_factory_acc_diagnostic_plan *plan) {
+    if (record == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (record_length != R1_FACTORY_ACC_RESULT_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    clear_bytes((uint8_t *)plan, sizeof *plan);
+    const uint16_t record_count = read_u16(
+        record + (R1_FACTORY_ACC_RECORD_COUNT * R1_FACTORY_ACC_RECORD_STRIDE));
+    if (record_count > R1_FACTORY_ACC_RECORD_COUNT) {
+        return R1_ERROR_LENGTH;
+    }
+    plan->record_count = record_count;
+    plan->terminator_requested = true;
+    for (uint16_t record_index = 0u; record_index < record_count;
+         record_index += R1_FACTORY_ACC_DIAGNOSTIC_DECIMATION) {
+        const size_t offset =
+            (size_t)record_index * R1_FACTORY_ACC_RECORD_STRIDE;
+        r1_factory_acc_diagnostic_sample *sample =
+            &plan->samples[plan->sample_count++];
+        *sample = (r1_factory_acc_diagnostic_sample){
+            .record_index = (uint8_t)record_index,
+            .x = (int16_t)read_u16(record + offset),
+            .y = (int16_t)read_u16(record + offset + 2u),
+            .z = (int16_t)read_u16(record + offset + 4u),
+        };
+    }
+    return R1_OK;
+}
+
+r1_error r1_factory_battery_diagnostic_plan_build(
+    uint16_t battery_millivolts, uint8_t battery_percent,
+    uint8_t battery_type, r1_factory_battery_diagnostic_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_factory_battery_diagnostic_plan){
+        .battery_millivolts = battery_millivolts,
+        .battery_percent = battery_percent,
+        .battery_type = battery_type,
+        .handler_return_value = 1u,
+    };
+    return R1_OK;
+}
+
+r1_error r1_factory_activity_diagnostic_plan_decode(
+    const uint8_t *record, size_t record_length,
+    r1_factory_activity_diagnostic_plan *plan) {
+    if (record == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (record_length != 8u) {
+        return R1_ERROR_LENGTH;
+    }
+    *plan = (r1_factory_activity_diagnostic_plan){
+        .all_kilocalories = read_u32(record),
+        .steps = read_u16(record + 4u),
+        .active_kilocalories = read_u16(record + 6u),
+    };
+    return R1_OK;
+}
+
+r1_error r1_factory_temperature_pair_diagnostic_plan_decode(
+    const uint8_t *record, size_t record_length,
+    r1_factory_temperature_pair_diagnostic_plan *plan) {
+    if (record == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (record_length != 5u) {
+        return R1_ERROR_LENGTH;
+    }
+    const int16_t temperature_0 = (int16_t)read_u16(record + 1u);
+    const int16_t temperature_2 = (int16_t)read_u16(record + 3u);
+    const int32_t sum = (int32_t)temperature_0 + (int32_t)temperature_2;
+    *plan = (r1_factory_temperature_pair_diagnostic_plan){
+        .sensor_count = record[0],
+        .temperature_0_millicelsius = temperature_0,
+        .temperature_2_millicelsius = temperature_2,
+        .average_millicelsius = (int16_t)(sum / 2),
+    };
+    return R1_OK;
+}
+
+r1_error r1_factory_periodic_timer_restart_plan_build(
+    r1_factory_periodic_timer_restart_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_factory_periodic_timer_restart_plan){
+        .system_task_event_requested = true,
+        .system_task_event = 4u,
+    };
+    return R1_OK;
+}
 
 r1_error r1_health_history_route_command(
     uint8_t command, uint8_t subcommand, uint16_t request_serial,

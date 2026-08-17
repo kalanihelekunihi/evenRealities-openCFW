@@ -78,6 +78,24 @@ EXACT_RANGES = (
         "9f70c796bdc8f65813c32e84196afdad27e2db4fec870653315ccb63ad40a941",
     ),
     (
+        "sleep_detail",
+        0x0008_2D9E,
+        0x0008_2DBE,
+        "d9436a5fe0839de1a46a377d5c04f25aa2b91a2b7a65045b38ab0e1ba5bba1e5",
+    ),
+    (
+        "heart_rate_measurement",
+        0x0008_2DBE,
+        0x0008_2DF8,
+        "64233f6cd02acbf9ab2cd1a94d71ac1f74240343b8c9285c00fc6eea2234849c",
+    ),
+    (
+        "blood_oxygen_measurement",
+        0x0008_2DFA,
+        0x0008_2E34,
+        "6d5461de17864780d5186a975d439a1085baa7476a6b4807ef4eb20ed8e0ae6a",
+    ),
+    (
         "heart_rate_point",
         0x0008_2E34,
         0x0008_2E66,
@@ -94,6 +112,12 @@ EXACT_RANGES = (
         0x0008_2E9A,
         0x0008_2ECE,
         "0c84ec05328aa8a87b8132094fa6dfa5cf8dc6fb5d80e9445c9bf293196416cc",
+    ),
+    (
+        "health_report_setting",
+        0x0008_2ECE,
+        0x0008_2EE8,
+        "91e2e670a1f9b87a78c1ffe7e48be87efc0fe32a9a59dfef275d263c1b8bc5dc",
     ),
     (
         "event_14_consumer",

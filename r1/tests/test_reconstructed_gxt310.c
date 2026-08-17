@@ -16,6 +16,8 @@ typedef struct {
     size_t failures;
     gxt310_failure_operation last_failure;
     uint8_t last_failure_address;
+    uint8_t read_bytes[GXT310_COMMAND_BYTES];
+    bool read_result;
 } gxt310_trace;
 
 static bool trace_write(void *context, uint8_t address, uint16_t operation,
@@ -40,11 +42,45 @@ static void trace_failure(void *context, gxt310_failure_operation operation,
     trace->last_failure_address = address;
 }
 
+static bool trace_read(void *context, uint8_t address, uint16_t operation,
+                       uint8_t *bytes, size_t length) {
+    gxt310_trace *trace = context;
+    assert(address == GXT310_CHANNEL_0_ADDRESS ||
+           address == GXT310_CHANNEL_2_ADDRESS);
+    assert(operation == 0u && bytes != NULL && length == 2u);
+    if (!trace->read_result) {
+        return false;
+    }
+    memcpy(bytes, trace->read_bytes, length);
+    return true;
+}
+
 void test_reconstructed_gxt310(void) {
     gxt310_trace trace = {0};
     gxt310_provider provider;
     gxt310_provider_initialize(&provider, trace_write, &trace,
                                trace_failure, &trace);
+    gxt310_provider_bind_read(&provider, trace_read, &trace);
+
+    int32_t milliunits = INT32_C(1);
+    trace.read_result = true;
+    trace.read_bytes[0] = UINT8_C(0x12);
+    trace.read_bytes[1] = UINT8_C(0x34);
+    assert(gxt310_read_temperature_milliunits(
+               &provider, GXT310_CHANNEL_0_ADDRESS, &milliunits) ==
+           GXT310_STATUS_SUCCESS);
+    assert(milliunits == INT32_C(36406));
+    trace.read_bytes[0] = UINT8_C(0xFF);
+    trace.read_bytes[1] = UINT8_C(0xF0);
+    assert(gxt310_read_temperature_milliunits(
+               &provider, GXT310_CHANNEL_2_ADDRESS, &milliunits) ==
+           GXT310_STATUS_SUCCESS);
+    assert(milliunits == INT32_C(-125));
+    trace.read_result = false;
+    assert(gxt310_read_temperature_milliunits(
+               &provider, GXT310_CHANNEL_0_ADDRESS, &milliunits) ==
+           GXT310_STATUS_FAILURE);
+    assert(milliunits == 0);
 
     assert(gxt310_channel_0_switch_mode(&provider, true) ==
            GXT310_STATUS_SUCCESS);

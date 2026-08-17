@@ -54,6 +54,66 @@ r1_error r1_sensor_stream_registration_plan(
     return R1_OK;
 }
 
+r1_error r1_goodix_open_mode_plan_build(
+    uint32_t requested_mode, r1_goodix_open_mode_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_goodix_open_mode_plan){0};
+    if (requested_mode == 0u) {
+        return R1_OK;
+    }
+
+    const uint8_t mode = (uint8_t)requested_mode;
+    plan->provider_open_requested = true;
+    plan->provider_open_mode = mode;
+    plan->log_open_type = mode <= 4u;
+    switch (mode) {
+        case 1u:
+            plan->state_clear_requested = true;
+            plan->state_clear_bytes = 16u;
+            break;
+        case 2u:
+            plan->state_clear_requested = true;
+            plan->state_clear_offset = 40u;
+            plan->state_clear_bytes = 24u;
+            break;
+        case 3u:
+            plan->state_clear_requested = true;
+            plan->state_clear_offset = 188u;
+            plan->state_clear_bytes = 2u;
+            break;
+        case 4u:
+            plan->state_clear_requested = true;
+            plan->state_clear_offset = 16u;
+            plan->state_clear_bytes = 24u;
+            break;
+        case 5u:
+            plan->state_clear_requested = true;
+            plan->state_clear_offset = 64u;
+            plan->state_clear_bytes = 124u;
+            break;
+        case 7u:
+            plan->state_clear_requested = true;
+            plan->state_clear_offset = 216u;
+            plan->state_clear_bytes = 24u;
+            break;
+        case 8u:
+            plan->state_clear_requested = true;
+            plan->state_clear_offset = 192u;
+            plan->state_clear_bytes = 12u;
+            break;
+        case 9u:
+            plan->state_clear_requested = true;
+            plan->state_clear_offset = 204u;
+            plan->state_clear_bytes = 12u;
+            break;
+        default:
+            break;
+    }
+    return R1_OK;
+}
+
 static uint32_t diagnostic_u32(const uint8_t *bytes) {
     return (uint32_t)bytes[0] | ((uint32_t)bytes[1] << 8u) |
         ((uint32_t)bytes[2] << 16u) | ((uint32_t)bytes[3] << 24u);

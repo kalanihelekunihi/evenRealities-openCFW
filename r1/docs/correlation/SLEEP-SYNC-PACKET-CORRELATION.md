@@ -9,6 +9,10 @@ release. Its exact body SHA-256 is
 `0x0008F9C2`. `tools/evidence/summarize_r1_sleep_sync_packet.py` authenticates all three facts and
 the embedded `946080000` legacy-clock cutoff.
 
+Its registered iterator callback at `0x0008F954..<0x0008F9CA` is independently closed in
+`STORED-SLEEP-REPORT-CALLBACK-CORRELATION.md`; that closure preserves the synchronization skip and
+private report context without exposing live transport.
+
 The first 32 bytes are the sleep header. Each compact input stage uses its low two bits as type and
 high six bits as duration in half-minutes. Adjacent equal types are merged into one three-byte
 `type, UInt16LE duration` output run. The output count at offset 30 is therefore the merged run

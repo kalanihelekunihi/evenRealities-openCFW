@@ -51,7 +51,7 @@ python3 tools/build_r1_source_ownership.py
 - `clean_room_reimplementation_owner_authorized` marks the six Bravechip-attributed middleware
   families, the GXT310 closure, the complete QMA6100 provider/adapter closure, and the complete
   YHM2710 closure plus the 339 Goodix, 362 GoMore algorithm reductions, and seven
-  owner-authorized R1 GoMore adapters (932 entries)
+  owner-authorized R1 GoMore adapters (939 entries)
   reconstructed from decompilation evidence under the owner-authorized
   full reduction (2026-08-14, [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)). The
   reconstruction is independently compiled C with per-function provenance; it is not vendor
@@ -64,7 +64,7 @@ functions route to official sources, while eight Bosch and seven ST functions ar
 bounded as R1 adapters. The ST part is LIS2DW12 (WHO_AM_I `0x44`). QMA6100 now has three
 QST-lineage provider bodies and fourteen adapters reconstructed together under the owner-authorized
 reduction; no Goodix-candidate or GoMore health-algorithm entries remain to be reduced. IQS7211E has crossed the source gate through
-pinned MIT provider/settings references: twelve exact recovered entries are now bounded as R1
+pinned MIT provider/settings references: eighteen exact recovered entries are now bounded as R1
 configuration, Nordic/provider port, task dispatch, lifecycle, IRQ, and recovery adapters. The
 former GoMore algorithm gate is closed by all 362 transparent reductions. Three additional
 byte-pinned R1 adapters are also reconstructed: the four topic inputs, their readiness and
@@ -168,8 +168,10 @@ separate providers; see
 The corresponding two-function / 578-byte SpO2 flush has the same ownership split and separately
 pinned metric-specific callgraph and sender seam; see
 [`SPO2-SYNC-FLUSH-CORRELATION.md`](../correlation/SPO2-SYNC-FLUSH-CORRELATION.md).
-Seven complete R1 wear-fusion functions / 1,506 bytes are now admitted as clean-room behavior:
-the motion/living callbacks, statistics/range helpers, teardown, and wear-on/off decisions. Their
+Eleven complete R1 wear-fusion entries / 1,756 executable bytes are now admitted as clean-room
+behavior: seven Ghidra functions plus four manually recovered callback extents covering bounded
+history ingestion, raw-HR/ADT lifecycle planning, and the sleep edge, alongside the motion/living
+callbacks, statistics/range helpers, teardown, and wear-on/off decisions. Their
 sensor-stream, Goodix, motion-provider, timer, logging, and transport dependencies remain external;
 see [`WEAR-FUSION-CORRELATION.md`](../correlation/WEAR-FUSION-CORRELATION.md).
 Four R1 BLE connection-parameter functions / 498 bytes are likewise admitted for the product's
@@ -194,8 +196,10 @@ caller and is likewise provider-owned; see
 [`GOODIX-NADT-ACCUMULATION-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-ACCUMULATION-PROVIDER-BOUNDARY.md).
 The 514-byte GH3X2X register-profile decoder is also provider-owned; see
 [`GOODIX-REGISTER-PROFILE-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-REGISTER-PROFILE-PROVIDER-BOUNDARY.md).
-The MAC-keyed compiled-default restore at `0x0007C52C` is R1-owned but security-preserving: its
-identity table is not redistributed and live persistence remains disabled; see
+The two-entry / 498-byte MAC-keyed compiled-default restore closure at `0x0007C52C` includes the
+exact four-byte storage-event veneer at `0x00042BBE`. It is R1-owned but security-preserving: the
+typed C planner accepts only caller-owned records, its identity table is not redistributed, and
+live persistence remains disabled; see
 [`NV-COMPILED-RESTORE-CORRELATION.md`](../correlation/NV-COMPILED-RESTORE-CORRELATION.md).
 The next initcall pair is also split. The `device_stacmd` table routes fourteen exact functions /
 1,000 bytes to the owner-authorized YHM2710 reconstruction and admits its 18-byte direct binding
@@ -370,7 +374,7 @@ Nordic Peer Manager provider routes; see
 
 Under the owner-authorized full reduction (2026-08-14,
 [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the six Bravechip-attributed
-`unknown_*_candidate` families — 165 entries: generic device registry (40), GPIO-driven
+`unknown_*_candidate` families — 169 entries: generic device registry (43), GPIO-driven
 software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (28),
 time/calendar provider (16), and RTC-device layer (10) — are reconstructed from the recovered
 decompilation evidence as independently compiled C under `r1/reconstructed/` with per-function

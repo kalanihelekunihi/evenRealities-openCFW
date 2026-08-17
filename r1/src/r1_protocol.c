@@ -128,6 +128,93 @@ r1_error r1_model_decode(const uint8_t *bytes, size_t length, r1_checksum_scheme
     return R1_OK;
 }
 
+/* Exact sorted identifiers from the 20-entry production system table at
+ * 0x0009a4cc.  Handler addresses deliberately do not cross this boundary. */
+static const uint16_t eus_system_commands[] = {
+    UINT16_C(0x0001), UINT16_C(0x0002), UINT16_C(0x0003),
+    UINT16_C(0x0004), UINT16_C(0x0005), UINT16_C(0x0007),
+    UINT16_C(0x0008), UINT16_C(0x0009), UINT16_C(0x000a),
+    UINT16_C(0x000b), UINT16_C(0x000c), UINT16_C(0x000e),
+    UINT16_C(0x000f), UINT16_C(0x0010), UINT16_C(0x0011),
+    UINT16_C(0x0012), UINT16_C(0x007e), UINT16_C(0x007f),
+    UINT16_C(0x0082), UINT16_C(0x0083),
+};
+
+r1_error r1_eus_ingress_plan_decode(uint16_t session, const uint8_t *packet,
+                                    size_t length, r1_eus_ingress_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_eus_ingress_plan){
+        .action = R1_EUS_INGRESS_REJECT_NULL_PACKET,
+        .session = session,
+    };
+    if (packet == NULL) {
+        return R1_OK;
+    }
+    if (length < R1_MODEL_HEADER_LENGTH) {
+        plan->action = R1_EUS_INGRESS_REJECT_SHORT_PACKET;
+        return R1_OK;
+    }
+
+    plan->module = packet[1];
+    plan->module_version = packet[2];
+    plan->serial = read_u16(packet + 3u);
+    plan->status = packet[5];
+    plan->command = packet[6];
+    plan->subcommand = packet[7];
+    plan->composite_key = ((uint32_t)plan->module << 16u)
+        | ((uint32_t)plan->command << 8u) | plan->subcommand;
+
+    if (packet[0] != R1_PROTOCOL_VERSION) {
+        plan->action = R1_EUS_INGRESS_REJECT_PROTOCOL_VERSION;
+    } else if (plan->module_version < R1_MODULE_VERSION) {
+        plan->action = R1_EUS_INGRESS_REJECT_MODULE_VERSION;
+    } else if (plan->module >= 4u && plan->module != UINT8_C(0x7f)) {
+        plan->action = R1_EUS_INGRESS_REJECT_MODULE;
+    } else if (plan->module == 1u) {
+        plan->action = R1_EUS_INGRESS_DISPATCH_SYSTEM;
+    } else if (plan->module == 2u) {
+        plan->action = R1_EUS_INGRESS_DISPATCH_HEALTH;
+    } else if (plan->module == UINT8_C(0x7f)) {
+        plan->action = R1_EUS_INGRESS_DISPATCH_TESTABLE;
+    } else {
+        /* Production module-table slots zero and three are null. */
+        plan->action = R1_EUS_INGRESS_REJECT_UNREGISTERED_MODULE;
+    }
+    return R1_OK;
+}
+
+r1_error r1_eus_system_dispatch_plan_build(
+    uint8_t command, uint8_t subcommand, r1_eus_system_dispatch_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    const uint16_t key = (uint16_t)(((uint16_t)command << 8u) | subcommand);
+    *plan = (r1_eus_system_dispatch_plan){
+        .registered = false,
+        .packed_command = key,
+        .registration_index = UINT8_MAX,
+    };
+
+    size_t lower = 0u;
+    size_t upper = sizeof eus_system_commands / sizeof eus_system_commands[0];
+    while (lower < upper) {
+        const size_t middle = lower + (upper - lower) / 2u;
+        if (eus_system_commands[middle] < key) {
+            lower = middle + 1u;
+        } else {
+            upper = middle;
+        }
+    }
+    if (lower < sizeof eus_system_commands / sizeof eus_system_commands[0]
+            && eus_system_commands[lower] == key) {
+        plan->registered = true;
+        plan->registration_index = (uint8_t)lower;
+    }
+    return R1_OK;
+}
+
 r1_error r1_fragment_message(const uint8_t *logical, size_t length, r1_fragment_set *output) {
     if (output == NULL || (length > 0u && logical == NULL)) {
         return R1_ERROR_ARGUMENT;

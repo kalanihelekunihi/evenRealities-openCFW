@@ -18,6 +18,10 @@
 #define R1_LEGACY_PRODUCT_SN_BYTES 30u
 #define R1_ATI_CALIBRATION_RESPONSE_STATUS_DEFAULT 5u
 #define R1_ATI_CALIBRATION_RESPONSE_STATUS_QUERY 6u
+#define R1_TOUCH_SWITCH_PAYLOAD_SIZE 2u
+#define R1_TOUCH_SWITCH_SELECTOR_PHONE 1u
+#define R1_TOUCH_SWITCH_SELECTOR_GLASSES 2u
+#define R1_TOUCH_SWITCH_SOURCE_GLASSES 0u
 
 typedef enum {
     R1_LEGACY_COMMAND_ROUTE_NONE = 0,
@@ -43,7 +47,9 @@ typedef enum {
     R1_LEGACY_COMMAND_ROUTE_0X91,
     R1_LEGACY_COMMAND_ROUTE_0X94,
     R1_LEGACY_COMMAND_ROUTE_0X95,
-    R1_LEGACY_COMMAND_ROUTE_0XF2
+    R1_LEGACY_COMMAND_ROUTE_0XF2,
+    R1_LEGACY_COMMAND_ROUTE_FACTORY_NOOP_0X10,
+    R1_LEGACY_COMMAND_ROUTE_FACTORY_STATUS_0X8B
 } r1_legacy_command_route;
 
 typedef enum {
@@ -74,6 +80,24 @@ typedef struct {
     uint8_t response_update_length;
     uint8_t response_update[2];
 } r1_ati_calibration_plan;
+
+typedef enum {
+    R1_TOUCH_SWITCH_ACTION_NONE = 0,
+    R1_TOUCH_SWITCH_ACTION_PHONE_DIAGNOSTIC,
+    R1_TOUCH_SWITCH_ACTION_OPEN_GLASSES_SOURCE,
+    R1_TOUCH_SWITCH_ACTION_CLOSE_GLASSES_SOURCE
+} r1_touch_switch_action;
+
+/* Side-effect-free, hardened form of the recovered system touchSwitch
+ * handler at 0x00084874.  The response intent precedes the optional source-0
+ * touch action; phone and unknown selectors do not change touch state. */
+typedef struct {
+    bool send_empty_success_response;
+    r1_touch_switch_action action;
+    uint8_t selector;
+    uint8_t switch_value;
+    uint8_t touch_source;
+} r1_touch_switch_handler_plan;
 
 typedef enum {
     R1_ROLE_UNASSIGNED = 0,
@@ -117,6 +141,9 @@ r1_error r1_dispatch(r1_device_state *state, r1_session *session,
 r1_error r1_legacy_command_route_frame(
     const uint8_t *frame, size_t frame_length, uint8_t *workspace,
     size_t workspace_length, r1_legacy_command_route *route);
+r1_error r1_factory_legacy_command_route_frame(
+    const uint8_t *frame, size_t frame_length, uint8_t *workspace,
+    size_t workspace_length, r1_legacy_command_route *route);
 r1_error r1_legacy_device_info_build(
     const uint8_t request_prefix[R1_LEGACY_DEVICE_INFO_PREFIX_BYTES],
     const r1_legacy_device_info_sources *sources,
@@ -125,5 +152,8 @@ r1_error r1_ati_calibration_plan_command(
     uint8_t subcommand, uint8_t argument_0, uint8_t argument_1,
     const r1_ati_calibration_observation *observation,
     r1_ati_calibration_plan *plan);
+r1_error r1_touch_switch_handler_plan_decode(
+    const uint8_t *payload, size_t payload_length,
+    r1_touch_switch_handler_plan *plan);
 
 #endif

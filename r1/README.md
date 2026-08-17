@@ -12,6 +12,10 @@ interface. The legacy vendor-backed target additionally links Nordic S140 integr
 Peer Manager/FDS bond storage, `nrf_ble_gatt`, and Nordic advertising sources. A second nRF52840
 target replaces S140 and the retail boot dependency with pinned, source-built Zephyr 3.7.2
 Bluetooth host/controller and ECDSA-P256 MCUboot, producing a self-contained full-flash bundle.
+The recovered advStart and touchSwitch handlers now also have strict pure-C boundary plans:
+advStart preserves its two six-byte targets and split response/event sessions, while touchSwitch
+preserves the phone/glasses selector and source-0 open/close distinction instead of treating its
+first byte as a boolean. Neither plan embeds a stock pointer or performs a transport/hardware effect.
 It currently binds BAE8, persistent Zephyr SMP settings, the portable runtime, source-backed
 KV/sleep flash storage, the pinned FlashDB/FAL `health.db` TSDB, the exact three-channel SAADC geometry, phone-synchronized wall time with reconstructed exact calendar conversion,
 reset-reason capture, the recovered watchdog, the Bosch/ST motion bus, the IQS7211E TWIM0/GPIO
@@ -171,14 +175,15 @@ and remains unavailable until identity and wear/factory lease gates are provisio
 binds its shared-power client to the reconstructed YHM2710 service.
 The GXCAS GXT310 and YHMICROS YHM2710 provenance boundaries are documented in
 [`docs/NAMED-PERIPHERAL-BOUNDARIES.md`](docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md).
-The five GXT310 mode/one-shot bodies are transparent C. The source-built Zephyr target now probes
+All eight GXT310 shared-read, mode, one-shot, veneer, and pair-enable bodies are transparent C. The source-built Zephyr target now probes
 both exact addresses over P1.13/P0.28, decodes signed big-endian register-0 values, and exposes the
 recovered immediate and ten-sample acquisition paths. The latter reads the exact six-byte
 calibration at `nv_r1` offset `0x3E`, treats an erased record as absent, and applies only recovered
 subtract/add direction values. It does not assign skin/ambient semantics or feed the daily cache. See
 [`docs/GXT310-REDUCTION-CORRELATION.md`](docs/correlation/GXT310-REDUCTION-CORRELATION.md).
-All 36 YHM2710 transport, device, register, status, and policy bodies are likewise reconstructed;
-see [`docs/YHM2710-REDUCTION-CORRELATION.md`](docs/correlation/YHM2710-REDUCTION-CORRELATION.md).
+All 44 YHM2710 transport, device, register, status, and policy bodies are likewise reconstructed;
+the latest closure adds the two complete register-dispatch bodies and register-3 charging-event
+policy/thunk. See [`docs/YHM2710-REDUCTION-CORRELATION.md`](docs/correlation/YHM2710-REDUCTION-CORRELATION.md).
 The R1-owned three-client power lease and shared NFC/YHM conductor arbitration are implemented
 separately in `src/r1_power_lease.c`, the Nordic resource adapter, and the Zephyr YHM/dock adapters; see
 [`docs/YHM2710-I2C5-RESOURCE-BOUNDARY.md`](docs/boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md).

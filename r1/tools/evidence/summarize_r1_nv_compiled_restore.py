@@ -22,16 +22,29 @@ RESTORE_RECORD_BYTES = 14
 RESTORE_TABLE_SHA256 = "4f0fe353d4a0b2d5ecdfc49a1a6d8c73f790d693c12ca3462ecbacb0bee5cf5c"
 
 
-R1_NV_COMPILED_RESTORE_FUNCTIONS: tuple[dict[str, Any], ...] = ({
-    "entry": 0x0007C52C,
-    "end_exclusive": 0x0007C71A,
-    "size": 494,
-    "role": "R1 MAC-keyed compiled-default NV restore",
-    "symbol": "r1_nv_compiled_default_restore",
-    "sha256": "433819b86093c162fa3a677ddec6ff52f19d7d378b714bf9e2c682457d382ae0",
-    "provider_family": "r1_product_specific",
-    "source_disposition": "clean_room_behavior_only_security_preserving",
-},)
+R1_NV_COMPILED_RESTORE_FUNCTIONS: tuple[dict[str, Any], ...] = (
+    {
+        "entry": 0x0007C52C,
+        "end_exclusive": 0x0007C71A,
+        "size": 494,
+        "role": "R1 MAC-keyed compiled-default NV restore",
+        "symbol": "r1_nv_compiled_default_restore",
+        "sha256": "433819b86093c162fa3a677ddec6ff52f19d7d378b714bf9e2c682457d382ae0",
+        "provider_family": "r1_product_specific",
+        "source_disposition": "clean_room_behavior_only_security_preserving",
+    },
+    {
+        "entry": 0x00042BBE,
+        "end_exclusive": 0x00042BC2,
+        "size": 4,
+        "role": "internal storage-event compiled-default restore tail veneer",
+        "symbol": "r1_nv_compiled_default_restore_event_veneer",
+        "sha256": "9135c4f873ba2ac12fb266a466936ed75d7755338ae4c825811f7e846b5e86b6",
+        "provider_family": "r1_product_specific",
+        "source_disposition": "clean_room_behavior_only_security_preserving",
+        "inventory": "manual_provenance_supplement",
+    },
+)
 
 
 def summarize(image_path: Path) -> dict[str, Any]:
@@ -54,6 +67,17 @@ def summarize(image_path: Path) -> dict[str, Any]:
     caller_digest = hashlib.sha256("".join(
         f"{address:08x}:{kind}\n" for address, kind in callers
     ).encode()).hexdigest()
+
+    veneer = R1_NV_COMPILED_RESTORE_FUNCTIONS[1]
+    veneer_entry = int(veneer["entry"])
+    veneer_end = int(veneer["end_exclusive"])
+    veneer_body = image[
+        veneer_entry - LOAD_BASE:veneer_end - LOAD_BASE
+    ]
+    if len(veneer_body) != int(veneer["size"]) or \
+            hashlib.sha256(veneer_body).hexdigest() != veneer["sha256"] or \
+            tuple(direct_thumb_branches_to(image, LOAD_BASE, veneer_entry)) != ():
+        raise ValueError("R1 compiled-default restore event veneer changed")
 
     table_size = RESTORE_RECORD_COUNT * RESTORE_RECORD_BYTES
     table = image[
@@ -92,18 +116,30 @@ def summarize(image_path: Path) -> dict[str, Any]:
         "analysis": "R1 MAC-keyed compiled-default nonvolatile restore boundary",
         "image": str(image_path),
         "image_sha256": digest,
-        "function_count": 1,
-        "function_bytes": 494,
-        "functions": [{
-            **function,
-            "entry": f"0x{entry:08x}",
-            "end_exclusive": f"0x{end:08x}",
-            "callers": [
-                {"callsite": f"0x{address:08x}", "kind": kind}
-                for address, kind in callers
-            ],
-            "caller_digest": caller_digest,
-        }],
+        "function_count": 2,
+        "function_bytes": 498,
+        "ghidra_function_count": 1,
+        "manual_supplement_count": 1,
+        "functions": [
+            {
+                **function,
+                "entry": f"0x{entry:08x}",
+                "end_exclusive": f"0x{end:08x}",
+                "callers": [
+                    {"callsite": f"0x{address:08x}", "kind": kind}
+                    for address, kind in callers
+                ],
+                "caller_digest": caller_digest,
+            },
+            {
+                **veneer,
+                "entry": f"0x{veneer_entry:08x}",
+                "end_exclusive": f"0x{veneer_end:08x}",
+                "callers": [],
+                "registered_storage_event": "0x2005",
+                "tail_target": f"0x{entry:08x}",
+            },
+        ],
         "event_route": {
             "internal_storage_event": "0x2005",
             "handler_tail_branch": "0x00042bbe",

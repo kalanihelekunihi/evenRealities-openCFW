@@ -3,10 +3,10 @@
 ## Decision
 
 The recovered `nvRecover` path is R1 product behavior, not Nordic SDK or third-party library code.
-Four functions / 1,740 executable bytes are closed as `r1_product_specific` with disposition
+Six functions / 1,954 executable bytes are closed as `r1_product_specific` with disposition
 `clean_room_behavior_only_security_preserving`. Two functions / 1,458 bytes are in Ghidra's
-inventory; two valid functions / 282 bytes were omitted because inline diagnostic strings
-interrupted automatic discovery.
+inventory; four valid functions / 496 bytes were omitted because inline diagnostic strings or
+table-only registration interrupted automatic discovery.
 
 | Entry | Bytes | Role |
 | --- | ---: | --- |
@@ -14,11 +14,18 @@ interrupted automatic discovery.
 | `0x0007BBE8` | 174 | allocate, checksum, and send the identity-bearing report |
 | `0x0007BD68` | 984 | CRC-check and fill-only merge into three KV records |
 | `0x0007C450` | 108 | command/length/CRC dispatcher |
+| `0x000839B4` | 38 | current-phone-session outbound response wrapper |
+| `0x00084150` | 176 | registered system-`0x11` envelope handler |
 
-The exact direct route is `0x000841FA -> 0x0007C450`. Commands 0 and 1 return without effect.
+The system table record at `0x0009A53C` is raw `1100000051410800`, registering Thumb handler
+`0x00084151` for subcommand `0x11`. That handler extracts command UInt8, body-length UInt16LE,
+body-CRC UInt16LE, and the body pointer, then takes the exact direct route
+`0x000841FA -> 0x0007C450`. Commands 0 and 1 return without effect.
 Command 2 tail-calls `0x0007BD68` at `0x0007C46E` only for an exact 116-byte body and nonzero CRC;
 otherwise it calls the local report sender at `0x0007C4B6`. The sender invokes report builder
-`0x0007B634` at `0x0007BC02`, computes CRC-16/MODBUS, and uses the existing system response path.
+`0x0007B634` at `0x0007BC02`, computes CRC-16/MODBUS, and calls the outbound wrapper at
+`0x0007BC22`. The wrapper reads the current phone session and passes identifier `0x11`, response
+type 1, serial 0, and envelope length `body_length + 5` to the existing system response path.
 
 ## Recovery body and records
 
@@ -71,6 +78,20 @@ allocation, logging, or device access. Tests cover null/length/CRC rejection, al
 valid-local preservation, invalid-incoming rejection, reserved-byte behavior, and the zero-voltage
 asymmetry.
 
+`r1_nv_recovery_command_handler_plan_decode` additionally provides the strict clean form of the
+registered handler and command dispatcher. It requires a complete five-byte envelope plus exactly
+the declared backing body, ignores commands other than 2, reports the withheld local-report intent
+for command 2 with a non-116-byte body or zero CRC, and reports merge-dispatch intent only for the
+116-byte/nonzero-CRC route. It copies the bounded body for composition with the existing
+CRC-validating merge planner but invokes neither report nor merge itself. The stock short-backing
+read is not reproduced.
+
+`r1_nv_recovery_outbound_response_plan_build` binds the 38-byte wrapper without exposing its
+transport. It requires a self-consistent five-byte envelope and bounded body, preserves identifier
+`0x11`, response type 1, serial 0, and the current phone session, and records no-send when that
+session is `0xFFFF`. It neither returns the identity payload nor invokes a sender. Tests cover
+short, trailing, oversized-body, valid-session, and no-active-session cases.
+
 The same portable module exposes a strict decoder for the six calibration bytes at `nv_r1` offset
 `0x3E`: direction `0` subtracts, direction `1` adds, other values disable that channel, and an
 all-`0xFF` record is reported absent. The source-built Zephyr GXT310 adapter consumes this value
@@ -97,7 +118,7 @@ firmware security audit: the body carries two identifiers plus sensor and batter
 a valid merge can mutate persistent device identity/configuration. The report sender and live
 persistence surface are documented and byte-pinned but not exposed by OpenR1.
 
-The static verifier pins all four bodies, the two manual function extents, complete direct-caller
+The static verifier pins all six bodies, the four manual function extents, complete direct-caller
 maps, dispatcher/report-builder edges, and exact diagnostics:
 
 ```sh

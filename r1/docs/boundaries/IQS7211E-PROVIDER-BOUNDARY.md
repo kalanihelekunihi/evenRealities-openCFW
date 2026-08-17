@@ -50,7 +50,7 @@ compiled.
 ## Function ownership split
 
 The exact adapter-entry digest is
-`81b2e89b28cbd6ca0b88a3db4f60c7f2ec01ee75beb2125495c1e0f5d1ffd266`.
+`808c06b619bb559e35810cdfb5ca3a32ec476a832e59be3c4586ed2319b43312`.
 Every body is independently pinned by size and SHA-256 in the verifier.
 
 | Recovered entry | Size | openR1 role | Ownership |
@@ -64,6 +64,12 @@ Every body is independently pinned by size and SHA-256 in the verifier.
 | `0x0002FEAC` | 52 | bounded register-write port | Nordic/provider transport adapter |
 | `0x00030E6C` | 434 | normal IRQ worker | R1 status/event policy |
 | `0x00046650` | 578 | touch-task event dispatcher | R1 lifecycle/event/factory glue |
+| `0x0004FA8C` | 24 | factory marker 1 transaction | internal R1 factory-record glue |
+| `0x0004FAA8` | 24 | factory marker 2 transaction | internal R1 factory-record glue |
+| `0x0004FAC4` | 26 | factory marker 3 and byte result | internal R1 factory-record glue |
+| `0x0004FAE4` | 26 | factory marker 4 and halfword result | internal R1 factory-record glue |
+| `0x0004FB04` | 26 | factory marker 5 and byte result | internal R1 factory-record glue |
+| `0x0004FB24` | 26 | factory marker 6 and word result | internal R1 factory-record glue |
 | `0x0006F9E4` | 300 | ATI retry and hardware-restart policy | R1 recovery policy |
 | `0x0006FCE8` | 120 | reset-triggered reconfiguration | R1 event adapter |
 | `0x00087BA4` | 24 | one-word register read | provider adapter |
@@ -161,6 +167,12 @@ sensor: disabling closes an active leased controller, while enabling only permit
 factory lease to open it. The stock wear transition and its `0x96000`-tick delayed removal close are
 still awaiting an admitted wear-provider board adapter. While the factory lease is present, IRQ
 processing supplies the recovered `0x55` factory marker that suppresses normal ATI-error recovery.
+
+The exact omitted command handler at `0x00084874..<0x0008492C` is now separately hash-pinned and
+modeled by `r1_touch_switch_handler_plan_decode`. Its payload is selector plus value: selector 1 is
+phone diagnostic-only, selector 2 opens/closes glasses source 0, and other selectors are acknowledged
+no-ops. The portable dispatcher requires exactly those two bytes and only selector 2 changes policy;
+the former ambiguous one-byte boolean interpretation has been removed.
 
 ## Verification and remaining work
 

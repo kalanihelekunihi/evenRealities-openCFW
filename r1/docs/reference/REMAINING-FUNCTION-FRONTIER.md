@@ -2,6 +2,33 @@
 
 Snapshot: 2026-08-13, after the final-53 residue closure.
 
+Terminal explicit-entry update 2026-08-17: every executable entry named by the preserved Ghidra
+analysis is now either an exact ledger start or contained in a proven contiguous ledger extent.
+The last six functions / 666 bytes are independently compiled C; the audit has 639 exact starts
+and zero `within_noncontiguous_bounding_range_unproven` rows. See
+[`FINAL-EXPLICIT-ENTRY-CLOSURE.md`](../correlation/FINAL-EXPLICIT-ENTRY-CLOSURE.md). The older
+tier narrative below is retained as closure history, not as a list of opaque executable gaps.
+
+Explicit-entry follow-up 2026-08-17: the 364-byte product callback at
+`0x0005232C` is now byte-pinned and compiled as a pure buttonless-DFU event
+policy. Its event-0 advertising/disconnect intent is separated from Nordic
+providers and bootloader/reset effects; see
+[`BUTTONLESS-DFU-EVENT-POLICY-CORRELATION.md`](../correlation/BUTTONLESS-DFU-EVENT-POLICY-CORRELATION.md).
+The adjacent touch audit now also pins the 72-byte recovery-timer callback at
+`0x00046EAC` as a pure clear-latch/event-bit plan and adjudicates the off-by-four
+`0x00046908` seed as data; see
+[`TOUCH-RECOVERY-TIMER-CORRELATION.md`](../correlation/TOUCH-RECOVERY-TIMER-CORRELATION.md).
+The scatter-installed 12-byte `i2c_5` delay callback at `0x00054AF0` is also
+closed as an exact argument-ignoring no-op without enabling a live bus; see
+[`I2C5-DELAY-CALLBACK-CORRELATION.md`](../correlation/I2C5-DELAY-CALLBACK-CORRELATION.md).
+Three additional script seeds at `0x0007902C`, `0x000791E4`, and `0x00079E10`
+are now exact manual supplements routed to Nordic SDK 17.1.0 GPIO/SAADC header
+inlines; see
+[`NORDIC-OMITTED-HAL-INLINES-CORRELATION.md`](../correlation/NORDIC-OMITTED-HAL-INLINES-CORRELATION.md).
+The `0x0007A6FC` seed is now part of a complete six-wrapper/six-target Nordic
+microsecond-delay closure, including ten exact bodies omitted by Ghidra; see
+[`NORDIC-OMITTED-DELAY-CLUSTER-CORRELATION.md`](../correlation/NORDIC-OMITTED-DELAY-CLUSTER-CORRELATION.md).
+
 Attribution re-examination 2026-08-14: all six `investigate_before_implementing` families were
 re-tested against fetched upstream sources (CMSIS-NN, RT-Thread, MultiTimer, old newlib, Pebble,
 BabyOS, mr-library, μC/Clk, vendor SDKs) and all remain NO ATTRIBUTION; the interlocked "B210
@@ -12,8 +39,8 @@ Per-family reports: `../boundaries/unknown_*_candidate-ATTRIBUTION-2026-08.md` (
 
 ## Current inventory
 
-The generated ownership ledger contains 3,170 application/bootloader functions. All 304
-bootloader entries are source-routed. Of 2,866 application entries, including 179 exact manual
+The generated ownership ledger contains 3,326 application/bootloader functions. All 304
+bootloader entries are source-routed. Of 3,022 application entries, including 335 exact manual
 provenance supplements, **zero remain `unclassified`**: every recovered function now carries an
 ownership disposition. The final 53-entry residue (1,548 declared bytes) is closed by
 [`FRONTIER-FINAL53-CORRELATION.md`](../correlation/FRONTIER-FINAL53-CORRELATION.md); earlier
@@ -26,43 +53,41 @@ closures are the 128...202-byte tier
 sub-32-byte tier
 ([`FRONTIER-SUB32-CORRELATION.md`](../correlation/FRONTIER-SUB32-CORRELATION.md)).
 
-The remaining frontier is therefore provider-boundary work, not inventory: forty
-generic device-registry, sixteen time/calendar-provider, forty software-TWI-provider, and ten
-RTC-device-provider candidates remain separately blocked under their distinct provider families.
-Thirty-four sensor-algorithm heap functions are now provenance-resolved as Goodix's
-`goodix_mem`/`GdMem` memory-pool manager from the GH3X2X SDK common DSP support library:
-twelve allocator internals and twenty Goodix consumer call-site glue bodies join
-`goodix_gh3x2x_candidate` under `vendor_source_required_not_redistributable`, while the two
-integrator-authored glue bodies (the `Gh3x2xPoolIsNotEnough` fatal handler at `0x0002E952`
-and the product byte-fill at `0x00092B60`) are R1 product behavior.
-Thirty-two generic sensor-stream functions are separately
-blocked under `unknown_sensor_stream_framework_candidate`; their adjacent registry, list,
-allocator, buffer, and timer implementations are not admitted by that function-local
-classification.
+The former provider-boundary frontier is no longer opaque executable work: all forty-three
+generic device-registry, sixteen time/calendar-provider, forty software-TWI-provider, ten
+RTC-device-provider, thirty-two sensor-stream, and twenty-eight shared quantized-runtime entries
+have owner-authorized transparent-C reductions under their distinct provenance families.
+Thirty-four sensor-algorithm heap functions are provenance-resolved as Goodix's
+`goodix_mem`/`GdMem` memory-pool manager from the GH3X2X SDK common DSP support library and now
+compile from owner-authorized transparent C; the two integrator-authored glue bodies (the
+`Gh3x2xPoolIsNotEnough` fatal handler at `0x0002E952` and the product byte-fill at `0x00092B60`)
+remain R1 product behavior. Thirty-two generic sensor-stream functions likewise compile from
+their independently reconstructed registry, list, allocator, buffer, and timer implementation.
 Twenty-eight shared quantized-neural runtime functions are reconstructed under the
 owner-authorized `unknown_shared_quantized_neural_runtime_candidate` reduction, including the
 indirect 434-byte signed-int8 pooling executor, float quantizer, parameter helper, descriptor
 constructors, int8-add, float tensor-add, softmax and float dense executors, and the
 twelve-descriptor tensor-arena alloc/free pair; no exact provider source was authenticated, so
 the attribution label remains while the implementation is transparent C.
-The completed 264...274-byte tier routes three R1 product functions and three GoMore-private
+The completed 264...274-byte tier routes three R1 product functions and three formerly GoMore-private
 functions / 1,386 bytes. The existing EUS producer now has its exact 272-byte body pinned; clean
 metadata-only policies add the five/30-cycle battery diagnostic cadence and `ep.bin` recovery
 cursor. GoMore timestamp expansion, its exclusive fill helper, and fixed-coefficient IIR filtering
-remain licensed-provider-only. See
+were subsequently included in the complete owner-authorized GoMore reduction. See
 [`FRONTIER-264-274-CORRELATION.md`](../correlation/FRONTIER-264-274-CORRELATION.md).
 The completed 256...262-byte inventory tier routes thirteen more entries / 2,090 ledger bytes.
 One Ghidra extent is corrected from 262 to 272 executable bytes, making the immutable executable
 census 2,100 bytes. The clean-room side is limited to the system-settings/REG1 action plan,
 temperature timed-mode transition plan, and bounded selector over a caller-supplied Goodix
-snapshot. Ten pooling and sleep/history functions remain GoMore licensed-provider-only. See
+snapshot. Ten pooling and sleep/history functions were subsequently included in the complete
+owner-authorized GoMore reduction. See
 [`FRONTIER-256-262-CORRELATION.md`](../correlation/FRONTIER-256-262-CORRELATION.md).
 The completed 230...248-byte inventory tier routes seventeen entries / 1,928 ledger bytes. One
 Ghidra extent is corrected from 234 to 240 executable bytes, making the immutable executable
 census 1,934 bytes. The clean-room side reuses the R1 `kv.bin` store and adds only an `ep.bin`
 readiness plan, a bounded legacy device-info formatter, and fixed-record data fields. Three
-GoMore functions remain licensed-provider-only, while three shared quantized-runtime functions
-remain blocked pending attribution. See
+GoMore functions and three shared quantized-runtime functions were subsequently reconstructed
+under the owner-authorized transparent-C policy. See
 [`FRONTIER-230-248-CORRELATION.md`](../correlation/FRONTIER-230-248-CORRELATION.md).
 The completed 224...230-byte tier routes eight entries / 1,458 bytes. Four frontier functions and
 two helpers are R1 product behavior: delayed-event cancellation, heart-rate mode transitions,
@@ -156,9 +181,10 @@ The 562-byte noncontiguous named sensor-stream unregister routine at `0x00089B08
 under `unknown_sensor_stream_framework_candidate`. Its source, version, and license remain
 unresolved, so neither it nor its list/allocation/timer dependencies are eligible for local
 implementation.
-Two formerly unclassified functions / 560 bytes now close the R1 BLE transmit-queue producer:
-type-0 and type-2 veneers, a bounded envelope, 90-percent warning, 100-tick put timeout, worker
-signal, and failure cleanup around separately owned FreeRTOS/CMSIS/toolchain/transport services.
+Three functions / 572 bytes now close the R1 BLE transmit-queue producer: type-0 and type-2
+inventory veneers plus the independently bounded dormant type-1 supplement, a bounded envelope,
+90-percent warning, 100-tick put timeout, worker signal, and failure cleanup around separately
+owned FreeRTOS/CMSIS/toolchain/transport services.
 The R1 touch-slider closure adds twelve formerly unclassified Ghidra functions / 2,776 bytes and
 one exact eight-byte IRQ callback omitted by Ghidra. These are product calibration, gesture,
 timing, callback, and event-routing behaviors around the separately owned IQS7211E provider.
@@ -170,8 +196,10 @@ A FreeRTOS stack-overflow callback / 72 bytes is now source-routed as R1 provide
 the upstream four-word sentinel check remains FreeRTOS-Kernel provider code.
 FreeRTOS 10.5.1 `prvReloadTimer` / 40 bytes is source-routed to the authenticated upstream core;
 its absence from Nordic's bundled 10.0.0 core establishes the core-version/provider split.
-Eight resolved branch-only thunks / 32 bytes now inherit their exact target ownership: one maps to
+Nine resolved branch-only thunks / 36 bytes now inherit their exact target ownership: one maps to
 reconstructed Goodix code, one aliases an R1 Goodix adapter, and six alias R1 daily-cache metadata operations.
+The ninth is the revision-confused `0x0007D2A0` script seed, which is a direct
+alias to authenticated FreeRTOS `xTaskGetTickCount` in the preserved image.
 Application `SystemInit` and `nvmc_config` / 544 bytes are now exact Nordic source routes; the
 recovered NFCT-as-GPIO and GPIO pin-reset switches are build configuration only.
 Nordic `xfer_completeness_check` / 98 bytes is now routed to `nrfx_twim.c`.
@@ -361,6 +389,84 @@ reassembly handoff, and role/link-context planning are pinned. A pure local plan
 Nordic, BC, factory-accessor, logging, or unresolved event-helper implementation. See
 [`BAE8-EVENT-ROUTER-CORRELATION.md`](../correlation/BAE8-EVENT-ROUTER-CORRELATION.md).
 
+The former explicit seed `0x0007CCB4` is now closed as the 276-byte BAE8
+connection-event handler through the next function at `0x0007CDC8`. Its sole
+raw-observer event-`0x10` tail call, two CCCD value reads, conditional
+notification flags, missing-context continuation, and 24-byte callback record
+are pinned. The local planner performs no Nordic link-context operation,
+SoftDevice SVC, CCCD helper call, log emission, or live callback dispatch. See
+[`BAE8-CONNECTION-EVENT-CORRELATION.md`](../correlation/BAE8-CONNECTION-EVENT-CORRELATION.md).
+
+The former explicit seed `0x00052B9C` is now closed as the noncontiguous R1
+GAP observer registered at `0x000C45C0`. Its 3,184-byte envelope contains
+1,728 executable bytes in two independently hashed segments plus the handler's
+literal/diagnostic islands. The pure local plan covers all six recognized
+connected, disconnected, PHY, and GATT-timeout events while leaving Nordic,
+SoftDevice, advertising, timer, logging, and live dispatch operations external.
+See [`GAP-EVENT-POLICY-CORRELATION.md`](../correlation/GAP-EVENT-POLICY-CORRELATION.md).
+
+The former explicit seed `0x000461CC` is now closed as the R1 NFC charge-task
+event policy. Its 1,156-byte envelope through `0x00046650` contains 662
+executable bytes followed by exact literal and diagnostic data, and has one
+system-task caller at `0x00092556`. The pure planner preserves all nine flag
+routes, ST register values, fixed delays, three-attempt temperature-ID reset
+decision, battery refresh cadence, and terminal intent without implementing
+ST25, touch, battery, RTOS, watchdog, task, or logging providers. See
+[`NFC-CHARGE-TASK-POLICY-CORRELATION.md`](../correlation/NFC-CHARGE-TASK-POLICY-CORRELATION.md).
+
+The former explicit seed `0x00046B20` is now closed as the 140-byte R1
+task-topology startup envelope, containing 100 executable bytes and ten
+state-block literals. Its sole product-startup caller, nine indirect creator
+calls, normal/factory group order, and raw priorities `8`/`0x35` are pinned.
+The clean plan exposes only logical group intent; CMSIS-FreeRTOS, recovered
+creator pointers, state blocks, and live task creation remain external. See
+[`TASK-TOPOLOGY-STARTUP-CORRELATION.md`](../correlation/TASK-TOPOLOGY-STARTUP-CORRELATION.md).
+
+The former explicit seed `0x00049B60` is now closed as the 142-byte R1 timing
+heart-rate result callback. Its indirect Thumb registration pointer, inclusive
+40...220 validity gate, health-gated eight-byte event-6 record, unconditional
+`"hr"` stream cleanup, and timing-timer release tail are pinned. The compiled
+pure plan accepts provider values, gate state, and firmware clock as bounded
+inputs and performs no sampling, live event dispatch, timer operation, or
+optical control. The same source also makes the previously classified adjacent
+validity and one-shot callback contracts concrete. See
+[`HR-TIMING-RESULT-CALLBACK-CORRELATION.md`](../correlation/HR-TIMING-RESULT-CALLBACK-CORRELATION.md).
+
+The former explicit seeds `0x0004ABEC` and `0x0004ADA0` are now closed as the
+230-byte one-shot and 252-byte timing SpO2 callbacks. Their indirect Thumb
+registrations, lossless six-byte input record, inclusive 70...100 gate,
+piecewise adjustment through the already transparent GoMore primitive,
+zero-padded event-8 publication, unconditional stream cleanup, and timing-only
+timer/completion flags are pinned. The planners perform no sampling, live
+event dispatch, timer operation, or optical control. See
+[`SPO2-RESULT-CALLBACKS-CORRELATION.md`](../correlation/SPO2-RESULT-CALLBACKS-CORRELATION.md).
+
+The former explicit seeds `0x0004ED64` and `0x0004EE18` are now closed as the
+72-byte factory accelerometer result callback and 32-byte `AT^BAT_ADC` handler.
+Their indirect callback/command-table Thumb pointers, exact result and format
+strings, every local callsite, fixed 30-triplet accelerometer layout, fivefold
+decimation, battery accessor order, and fixed return value are pinned. The
+compiled plans perform no stream registration, sensor or battery read, text
+emission, or live factory command routing. See
+[`FACTORY-ACC-BATTERY-DIAGNOSTICS-CORRELATION.md`](../correlation/FACTORY-ACC-BATTERY-DIAGNOSTICS-CORRELATION.md).
+
+The former explicit seeds `0x0004F4A4`, `0x0004F4D4`, and `0x0004F524` are
+now closed as the three `AT^PMIC_ISNS`, `AT^PMIC_OFF`, and `AT^PMIC_READ`
+factory handlers. Their 162 executable bytes, 244-byte complete envelopes,
+fixed command-table pointers, provider call order, power-recovery packing,
+and handler returns are pinned. The corrected `PMIC_READ` contract reads only
+register 9 and formats it followed by nine zeros. `PMIC_OFF` remains an inert
+plan with no persistence/thread executor or live destructive route. See
+[`FACTORY-PMIC-HANDLERS-CORRELATION.md`](../correlation/FACTORY-PMIC-HANDLERS-CORRELATION.md).
+
+The former explicit seeds `0x00050614`, `0x000507CC`, and `0x00050804` are
+now closed together with the real `0x000350E0` target behind the first seed.
+The four manual supplements total 138 executable bytes and pin the register-3
+charging-event mask policy, its branch-only veneer, and the complete read/write
+dispatch bodies behind the existing public veneers. All are independently
+compiled in `reconstructed/yhm2710/`; no opaque transport is admitted. See
+[`YHM2710-OMITTED-TRANSPORT-ENTRIES-CORRELATION.md`](../correlation/YHM2710-OMITTED-TRANSPORT-ENTRIES-CORRELATION.md).
+
 The former 424-byte leader at `0x00032198` is now closed as the R1 EUS receive fragment
 reassembler and outer Castagnoli-CRC gate. The exact body, sole channel-2 event caller, five-byte
 header, 239-byte payload, sequence and logical-size bounds, allocator split, and terminal behavior
@@ -460,12 +566,19 @@ actions; Nordic GAP/SoftDevice behavior, the generic timer loop, logging, and th
 remain external. See
 [`CONNECTION-PARAMETER-POLICY-CORRELATION.md`](../correlation/CONNECTION-PARAMETER-POLICY-CORRELATION.md).
 
-The former 480-byte frontier leader at `0x0003D45C` is now part of a seven-function / 1,506-byte
-R1 wear-fusion closure. Exact body hashes, direct callsites, callback literals, the three internal
-states, motion/IR/living thresholds, strict boundary behavior, counter windows, sleep preservation,
-and distinct public mappings are pinned. `r1` implements only a pure observation-to-state/action
-policy; Goodix, motion acquisition, CMSIS time, and the unresolved sensor-stream framework remain
-external. See [`WEAR-FUSION-CORRELATION.md`](../correlation/WEAR-FUSION-CORRELATION.md).
+The former 480-byte frontier leader at `0x0003D45C` is now part of an eleven-function / 1,756-byte
+R1 wear-fusion closure. Four formerly unproven callback seeds (`0x0003CE1C`, `0x0003D0FC`,
+`0x0003D150`, and `0x0003D1B8`) are exact manual supplements. Body hashes, direct callsites,
+callback pointers, bounded five-slot history, 3,000/7,000-tick plans, the three internal states,
+motion/IR/living thresholds, strict boundaries, counter windows, sleep preservation, and distinct
+public mappings are pinned. `r1` implements only bounded observation-to-state/action policy;
+Goodix, motion acquisition, CMSIS time, and the unresolved sensor-stream framework remain external.
+See [`WEAR-FUSION-CORRELATION.md`](../correlation/WEAR-FUSION-CORRELATION.md).
+
+The former unproven ten-byte callback at `0x0003E00E` is now an exact manual supplement. Its
+registered pointer at `0x0003D7C4` and tail call to SDK-bundled `SEGGER_RTT_Write` are pinned;
+transparent C returns a channel-0 write plan without performing RTT I/O. See
+[`FRONTIER-SUB32-CORRELATION.md`](../correlation/FRONTIER-SUB32-CORRELATION.md).
 
 The former largest unknown at `0x00072DCC` is now included in a 30-function / 5,126-byte Goodix GH_NADT accumulation/decision
 closure. Eight remaining direct descendants of provider root `0x0006E838` and all of their
@@ -481,10 +594,12 @@ five-entry / 918-byte final batch replaces transient allocations with caller-own
 preserving packed extrema, plateau, row-selection, newest-index, and threshold-history behavior. See
 [`GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PEAK-MASK-PROVIDER-BOUNDARY.md).
 
-The other tied 494-byte unknown at `0x0007C52C` is a one-function / 494-byte R1 compiled-default restore
-closure, reached only through internal storage event `0x2005`. Its 59-record table at
+The other tied 494-byte unknown at `0x0007C52C` is part of a two-entry / 498-byte R1 compiled-default
+restore closure. The formerly unproven four-byte veneer `0x00042BBE` is now an exact manual
+supplement and is reached only through internal storage event `0x2005`. Its 59-record table at
 `0x0009A0F8..<0x0009A432` contains identity match keys, so the table is hash-pinned but not
-redistributed and the live persistent restore remains disabled. See
+redistributed; transparent C accepts caller-owned typed records and returns a plan, while the live
+persistent restore remains disabled. See
 [`NV-COMPILED-RESTORE-CORRELATION.md`](../correlation/NV-COMPILED-RESTORE-CORRELATION.md).
 
 ## Prior completed closures
@@ -761,13 +876,44 @@ dispatcher wrappers, configuration/version helpers, and exact identity
 provider-gated; OpenR1 does not recreate the private state, buffer allocator, or calibration
 logic. See [`GOODIX-HRV-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-HRV-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x0007BD68` is now closed with the 474-byte report builder and two
-manual functions omitted by Ghidra as a four-function / 1,740-byte R1 product closure. The exact
-route `0x000841FA -> 0x0007C450 -> 0x0007BD68` enforces command 2, 116 bytes, and nonzero CRC before
-the fill-only merge. The local implementation is a bounded pure report builder and merge planner;
+The former largest unknown at `0x0007BD68` is now closed with the 474-byte report builder and four
+manual functions omitted by Ghidra as a six-function / 1,954-byte R1 product closure. The exact
+system-`0x11` handler at `0x00084150` and route
+`0x000841FA -> 0x0007C450 -> 0x0007BD68` enforce command 2, 116 bytes, and nonzero CRC before
+the fill-only merge; report sender `0x0007BBE8` reaches outbound wrapper `0x000839B4` at
+`0x0007BC22`. The local implementation is a bounded pure report, outbound-response, envelope-route,
+and merge planner;
 it performs no BLE send or persistent commit, and the normal dispatcher continues to refuse the
 identity-bearing `nvRecover` command. See
 [`NV-RECOVERY-CORRELATION.md`](../correlation/NV-RECOVERY-CORRELATION.md).
+
+The formerly unproven curated sleep seed at `0x0008F954` is now closed as an independent 118-byte
+stored-sleep report callback manually omitted by Ghidra's function inventory. Exact Thumb pointer
+`0x0008F955` at `0x0008B830` registers it with iterator `0x0005B39C`; the callback rejects a null
+private context, skips synchronization flag `1`, and otherwise forwards the context UInt8 report
+type and UInt16 stage count to packet builder `0x0008DA24`. The local implementation is a pure
+typed intent and exposes no live flash, allocation, packet, marker, or BLE operation. See
+[`STORED-SLEEP-REPORT-CALLBACK-CORRELATION.md`](../correlation/STORED-SLEEP-REPORT-CALLBACK-CORRELATION.md).
+
+The formerly unproven GATT-cache seeds `0x0008A93C` and `0x0008AA08` are now exact manual
+supplements for Nordic SDK 17.1.0 `service_changed_pending_set` and
+`service_changed_send_in_evt`. Ghidra had folded each independent body into a noncontiguous
+caller; `0x000890CC` is corrected to the distinct `sc_send_pending_handle` callback whose tail
+call enters the latter body. OpenR1 already compiles the pinned `gatt_cache_manager.c` and
+`gatts_cache_manager.c`; no local Peer Manager implementation is introduced. See
+[`NORDIC-GATT-CACHE-CLOSURE.md`](../closures/NORDIC-GATT-CACHE-CLOSURE.md).
+
+The formerly unproven DFU seed `0x00052050` is now the exact 40-byte Nordic
+`ble_dfu_buttonless_bootloader_start_finalize` function from `ble_dfu.c`. Ghidra folded it into
+the noncontiguous prepare wrapper even though `0x0005207C` tail-calls the independent prologue at
+`0x00052050`. The source is already part of the pinned unbonded buttonless-DFU build; see
+[`NORDIC-BUTTONLESS-DFU-CLOSURE.md`](../closures/NORDIC-BUTTONLESS-DFU-CLOSURE.md).
+
+The formerly unproven GATT-cache seed `0x000578F4` is now the exact 54-byte Nordic
+`car_update_pending_handle` callback. It is registered through Thumb pointer `0x000578F5` at
+`0x00094ADC`, which explains the absence of a direct branch caller. The pinned Peer Manager source
+already supplies the implementation; see
+[`NORDIC-GATT-CACHE-CLOSURE.md`](../closures/NORDIC-GATT-CACHE-CLOSURE.md).
 
 The former largest unknown at `0x0006CCC0` is now closed as a 984-byte Goodix
 GH_SPO2/dlCom input diagnostic formatter. Its sole direct caller is the already gated Goodix

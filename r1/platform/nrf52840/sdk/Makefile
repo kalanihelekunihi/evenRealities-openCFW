@@ -59,6 +59,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/src/r1_motion.c \
   $(PROJ_DIR)/src/r1_wear.c \
   $(PROJ_DIR)/src/r1_clock.c \
+  $(PROJ_DIR)/src/r1_gpio_registry.c \
   $(PROJ_DIR)/src/r1_runtime.c \
   $(PROJ_DIR)/reconstructed/rtc_device/rtc_device.c \
   $(PROJ_DIR)/reconstructed/generic_device_registry/generic_device_registry.c \

@@ -56,9 +56,20 @@ static r1_legacy_command_route legacy_route(uint8_t opcode) {
     }
 }
 
-r1_error r1_legacy_command_route_frame(
+static r1_legacy_command_route factory_legacy_route(uint8_t opcode) {
+    if (opcode == 0x10u) {
+        return R1_LEGACY_COMMAND_ROUTE_FACTORY_NOOP_0X10;
+    }
+    if (opcode == 0x8bu) {
+        return R1_LEGACY_COMMAND_ROUTE_FACTORY_STATUS_0X8B;
+    }
+    return legacy_route(opcode);
+}
+
+static r1_error legacy_command_route_frame_with(
     const uint8_t *frame, size_t frame_length, uint8_t *workspace,
-    size_t workspace_length, r1_legacy_command_route *route) {
+    size_t workspace_length, r1_legacy_command_route *route,
+    bool factory) {
     if (frame == NULL || workspace == NULL || route == NULL) {
         return R1_ERROR_ARGUMENT;
     }
@@ -73,9 +84,25 @@ r1_error r1_legacy_command_route_frame(
         workspace[index] = 0u;
     }
     copy_bytes(workspace, frame, frame_length);
-    *route = legacy_route(workspace[R1_LEGACY_COMMAND_OPCODE_OFFSET]);
+    *route = factory
+        ? factory_legacy_route(workspace[R1_LEGACY_COMMAND_OPCODE_OFFSET])
+        : legacy_route(workspace[R1_LEGACY_COMMAND_OPCODE_OFFSET]);
     return *route == R1_LEGACY_COMMAND_ROUTE_NONE
         ? R1_ERROR_UNSUPPORTED : R1_OK;
+}
+
+r1_error r1_legacy_command_route_frame(
+    const uint8_t *frame, size_t frame_length, uint8_t *workspace,
+    size_t workspace_length, r1_legacy_command_route *route) {
+    return legacy_command_route_frame_with(
+        frame, frame_length, workspace, workspace_length, route, false);
+}
+
+r1_error r1_factory_legacy_command_route_frame(
+    const uint8_t *frame, size_t frame_length, uint8_t *workspace,
+    size_t workspace_length, r1_legacy_command_route *route) {
+    return legacy_command_route_frame_with(
+        frame, frame_length, workspace, workspace_length, route, true);
 }
 
 static void fill_bytes(uint8_t *output, uint8_t value, size_t length) {
@@ -447,6 +474,33 @@ static bool valid_profile(const uint8_t *payload) {
         height >= 101u && height <= 219u && weight >= 31u && weight <= 149u;
 }
 
+r1_error r1_touch_switch_handler_plan_decode(
+    const uint8_t *payload, size_t payload_length,
+    r1_touch_switch_handler_plan *plan) {
+    if (payload == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (payload_length != R1_TOUCH_SWITCH_PAYLOAD_SIZE) {
+        return R1_ERROR_LENGTH;
+    }
+
+    *plan = (r1_touch_switch_handler_plan){
+        .send_empty_success_response = true,
+        .action = R1_TOUCH_SWITCH_ACTION_NONE,
+        .selector = payload[0],
+        .switch_value = payload[1],
+        .touch_source = R1_TOUCH_SWITCH_SOURCE_GLASSES,
+    };
+    if (plan->selector == R1_TOUCH_SWITCH_SELECTOR_PHONE) {
+        plan->action = R1_TOUCH_SWITCH_ACTION_PHONE_DIAGNOSTIC;
+    } else if (plan->selector == R1_TOUCH_SWITCH_SELECTOR_GLASSES) {
+        plan->action = plan->switch_value == 0u
+            ? R1_TOUCH_SWITCH_ACTION_CLOSE_GLASSES_SOURCE
+            : R1_TOUCH_SWITCH_ACTION_OPEN_GLASSES_SOURCE;
+    }
+    return R1_OK;
+}
+
 r1_error r1_dispatch(r1_device_state *state, r1_session *session,
                      const r1_model *request, r1_dispatch_result *result) {
     if (state == NULL || session == NULL || request == NULL || result == NULL) {
@@ -501,16 +555,29 @@ r1_error r1_dispatch(r1_device_state *state, r1_session *session,
             state->timezone_minutes_raw = read_u16(request->payload);
             state->unix_seconds = read_u32(request->payload + 2u);
             return add_response(request, RESULT_SUCCESS, NULL, 0u, result);
-        case 0x07u:
-            if (!is_set(request) || request->payload_length < 1u) {
+        case 0x07u: {
+            if (!is_set(request) ||
+                request->payload_length != R1_TOUCH_SWITCH_PAYLOAD_SIZE) {
                 return add_response(request, RESULT_ERROR, NULL, 0u, result);
             }
             if (!authorized_mutation(session)) {
                 (void)add_response(request, RESULT_REFUSE, NULL, 0u, result);
                 return R1_ERROR_UNAUTHORIZED;
             }
-            state->touch_enabled = request->payload[0] != 0u;
+            r1_touch_switch_handler_plan touch_plan;
+            const r1_error touch_error = r1_touch_switch_handler_plan_decode(
+                request->payload, request->payload_length, &touch_plan);
+            if (touch_error != R1_OK) {
+                return add_response(request, RESULT_ERROR, NULL, 0u, result);
+            }
+            if (touch_plan.action == R1_TOUCH_SWITCH_ACTION_OPEN_GLASSES_SOURCE) {
+                state->touch_enabled = true;
+            } else if (touch_plan.action ==
+                       R1_TOUCH_SWITCH_ACTION_CLOSE_GLASSES_SOURCE) {
+                state->touch_enabled = false;
+            }
             return add_response(request, RESULT_SUCCESS, NULL, 0u, result);
+        }
         case 0x08u:
             /* Pair-role selection is not an authorization primitive in openR1. */
             if (request->payload_length < 1u) {

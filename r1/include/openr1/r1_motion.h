@@ -60,6 +60,17 @@ typedef struct {
 } r1_motion_axis_calibration;
 
 typedef struct {
+    uint8_t axis_enabled[3];
+    uint8_t threshold[3];
+    uint8_t duration;
+    uint8_t quiet;
+    uint8_t shock;
+    uint8_t tap_mode;
+    uint8_t int1_route_set_mask;
+    uint8_t return_value;
+} r1_lis2dw12_double_tap_enable_plan;
+
+typedef struct {
     r1_error (*probe)(void *context, uint8_t *chip_id);
     r1_error (*configure)(void *context, uint16_t requested_rate_hz);
     r1_error (*read_fifo)(void *context, uint8_t *raw_samples,
@@ -111,6 +122,8 @@ r1_error r1_motion_adapter_read_fifo(r1_motion_adapter *adapter,
                                       size_t capacity,
                                       size_t *sample_count);
 r1_error r1_motion_adapter_disable_double_tap(r1_motion_adapter *adapter);
+r1_lis2dw12_double_tap_enable_plan
+r1_lis2dw12_double_tap_enable_plan_build(void);
 r1_motion_variant r1_motion_adapter_selected(const r1_motion_adapter *adapter);
 int16_t r1_motion_normalize_axis(int16_t raw_axis);
 r1_error r1_motion_batch_encode(

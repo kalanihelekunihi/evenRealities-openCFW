@@ -21,9 +21,27 @@ the platform's responsibility.
 | `0x0005DCD4..<0x0005DCE2` | 14 | `db6d8ef83d808f6310f95ef190f16e778b9b3f3c9c723ee9a5a42b4363f0831b` | `r1_event_bus_unlock` |
 | `0x000924C0..<0x000924F2` | 50 | `cca20557110adcc080e287f2ab267b486e2f2dd5782de8e82e43bd269f48d23f` | `r1_event_bus_enqueue`: RTOS queue send of the event record |
 | `0x0008D888..<0x0008D8EE` | 102 | `2f3e64601f0b0cc9c0724c0ded69b869370d2c45e35f8b985046456580ca0f60` | `r1_event_dispatch_by_id`: consumer-side dispatch over the three id-range tables |
+| `0x00092580..<0x00092662` | 226 | `0ac741e032d68ca7006c9a30e3b230852ab11e0fd4ca5b51ffe28c95051c1ef3` | sensor/event consumer-task orchestration omitted from Ghidra's function inventory |
 
 The lock/unlock pair, the queue enqueue, and the dispatcher remain provider-side seams in the
 portable module; only the three ledger-pinned bus functions are implemented locally.
+
+## Sensor/event consumer task
+
+The independently byte-pinned task entry waits on synchronization group 5, creates 50 records of
+16 bytes, and enters the stock fail-stop when queue creation fails. On success it initializes the
+sensor-stream framework, creates the accelerometer singleton, registers the R1 stream namespace,
+creates the temperature singleton, and initializes health services, in that order. It then signals
+group 5, registers `"sensor"` with raw watchdog interval `10000`, and publishes empty private event
+5 before entering the loop.
+
+Each iteration obtains its wait timeout from `sensor_stream_timer_poll`. A successful low-24-bit
+wait drains 16-byte event records through `r1_event_dispatch_by_id` on bit 22, invokes the selected
+motion-interrupt dispatcher on bit 1, and uses the group-5 signal/indefinite-delay path on bit 23.
+Zero and high-bit error returns perform none of those actions and wait again. The transparent
+`r1_sensor_task_plan_startup` and `r1_sensor_task_plan_flags` functions preserve this orchestration;
+sensor acquisition, RTOS operations, watchdog service, event dispatch, motion handling, and health
+initialization keep their separately admitted typed boundaries.
 
 ## Recovered contract
 

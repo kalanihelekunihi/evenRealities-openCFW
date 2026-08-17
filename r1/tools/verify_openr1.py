@@ -215,6 +215,90 @@ from summarize_r1_touch_task_dispatcher import (
     R1_TOUCH_TASK_DISPATCHER_FUNCTIONS,
     summarize as summarize_r1_touch_task_dispatcher,
 )
+from summarize_r1_touch_recovery_timer import (
+    R1_TOUCH_RECOVERY_TIMER_FUNCTIONS,
+    summarize as summarize_r1_touch_recovery_timer,
+)
+from summarize_r1_i2c5_delay_callback import (
+    R1_I2C5_DELAY_FUNCTIONS,
+    summarize as summarize_r1_i2c5_delay_callback,
+)
+from summarize_r1_nordic_omitted_hal_inlines import (
+    R1_NORDIC_OMITTED_HAL_FUNCTIONS,
+    summarize as summarize_r1_nordic_omitted_hal_inlines,
+)
+from summarize_r1_nordic_omitted_delay_cluster import (
+    R1_NORDIC_OMITTED_DELAY_FUNCTIONS,
+    summarize as summarize_r1_nordic_omitted_delay_cluster,
+)
+from summarize_r1_gpio_input_irq_dispatch import (
+    R1_GPIO_INPUT_IRQ_DISPATCH_FUNCTIONS,
+    summarize as summarize_r1_gpio_input_irq_dispatch,
+)
+from summarize_r1_advertising_event_policy import (
+    R1_ADVERTISING_EVENT_POLICY_FUNCTIONS,
+    summarize as summarize_r1_advertising_event_policy,
+)
+from summarize_r1_goodix_open_mode_policy import (
+    R1_GOODIX_OPEN_MODE_POLICY_FUNCTIONS,
+    summarize as summarize_r1_goodix_open_mode_policy,
+)
+from summarize_r1_pmic_late_init_policy import (
+    R1_PMIC_LATE_INIT_POLICY_FUNCTIONS,
+    summarize as summarize_r1_pmic_late_init_policy,
+)
+from summarize_r1_task_suspend_policy import (
+    R1_TASK_SUSPEND_POLICY_FUNCTIONS,
+    summarize as summarize_r1_task_suspend_policy,
+)
+from summarize_r1_storage_task_policy import (
+    R1_STORAGE_TASK_POLICY_FUNCTIONS,
+    summarize as summarize_r1_storage_task_policy,
+)
+from summarize_r1_factory_thread_creator import (
+    R1_FACTORY_THREAD_CREATOR_FUNCTIONS,
+    summarize as summarize_r1_factory_thread_creator,
+)
+from summarize_r1_bae8_connection_event import (
+    R1_BAE8_CONNECTION_EVENT_FUNCTIONS,
+    summarize as summarize_r1_bae8_connection_event,
+)
+from summarize_r1_gap_event_policy import (
+    R1_GAP_EVENT_POLICY_FUNCTIONS,
+    summarize as summarize_r1_gap_event_policy,
+)
+from summarize_r1_nfc_charge_task_policy import (
+    R1_NFC_CHARGE_TASK_POLICY_FUNCTIONS,
+    summarize as summarize_r1_nfc_charge_task_policy,
+)
+from summarize_r1_task_topology_startup import (
+    R1_TASK_TOPOLOGY_STARTUP_FUNCTIONS,
+    summarize as summarize_r1_task_topology_startup,
+)
+from summarize_r1_hr_timing_result import (
+    R1_HR_TIMING_RESULT_FUNCTIONS,
+    summarize as summarize_r1_hr_timing_result,
+)
+from summarize_r1_spo2_result_callbacks import (
+    R1_SPO2_RESULT_CALLBACK_FUNCTIONS,
+    summarize as summarize_r1_spo2_result_callbacks,
+)
+from summarize_r1_factory_acc_battery_diagnostics import (
+    R1_FACTORY_ACC_BATTERY_DIAGNOSTIC_FUNCTIONS,
+    summarize as summarize_r1_factory_acc_battery_diagnostics,
+)
+from summarize_r1_factory_pmic_handlers import (
+    R1_FACTORY_PMIC_HANDLER_FUNCTIONS,
+    summarize as summarize_r1_factory_pmic_handlers,
+)
+from summarize_r1_yhm_transport_entries import (
+    R1_YHM2710_TRANSPORT_ENTRY_FUNCTIONS,
+    summarize as summarize_r1_yhm_transport_entries,
+)
+from summarize_r1_remaining_explicit_entries import (
+    R1_REMAINING_EXPLICIT_ENTRY_FUNCTIONS,
+    summarize as summarize_r1_remaining_explicit_entries,
+)
 from summarize_r1_sensor_stream_unregister import (
     SENSOR_STREAM_UNREGISTER_FUNCTIONS,
     summarize as summarize_r1_sensor_stream_unregister,
@@ -236,6 +320,10 @@ from summarize_r1_validated_sleep_delivery import (
     R1_VALIDATED_SLEEP_DELIVERY_FUNCTIONS,
     summarize as summarize_r1_validated_sleep_delivery,
 )
+from summarize_r1_sleep_sync import (
+    R1_SLEEP_SYNC_REPORT_FUNCTIONS,
+    summarize as summarize_r1_sleep_sync,
+)
 from summarize_r1_quantized_pooling_boundary import (
     QUANTIZED_POOLING_RUNTIME_FUNCTIONS,
     summarize as summarize_r1_quantized_pooling_boundary,
@@ -251,6 +339,10 @@ from summarize_r1_eus_rx_reassembly import (
 from summarize_r1_bae8_event_router import (
     R1_BAE8_EVENT_ROUTER_FUNCTIONS,
     summarize as summarize_r1_bae8_event_router,
+)
+from summarize_r1_buttonless_dfu_event_policy import (
+    R1_BUTTONLESS_DFU_EVENT_FUNCTIONS,
+    summarize as summarize_r1_buttonless_dfu_event_policy,
 )
 from summarize_r1_ati_calibration_command import (
     R1_ATI_CALIBRATION_COMMAND_FUNCTIONS,
@@ -1711,11 +1803,15 @@ def main() -> None:
     ):
         require(nordic_twim_completeness, marker)
     nordic_gatt_cache = DOCS / "NORDIC-GATT-CACHE-CLOSURE.md"
-    for marker in ("Ten exact functions / 784 executable bytes", "0x0006EDCC..<0x0006EDE2",
+    for marker in ("Thirteen exact functions / 1,340 executable bytes", "0x0006EDCC..<0x0006EDE2",
                    "0x0006EDE8..<0x0006EDF8", "0x0006EDFC..<0x0006EEA4",
                    "0x0006F0F8..<0x0006F116", "0x0006F118..<0x0006F194",
                    "0x00075A08..<0x00075AF2", "0x00075B10..<0x00075B1A",
+                   "0x000578F4..<0x0005792A", "car_update_pending_handle",
                    "0x0008A928..<0x0008A934",
+                   "0x0008A93C..<0x0008A9EE", "service_changed_pending_set",
+                   "0x0008AA08..<0x0008AB4C", "service_changed_send_in_evt",
+                   "sc_send_pending_handle",
                    "0x00091084..<0x0009110A", "0x00094AB0..<0x00094AD2",
                    "No Peer Manager or GATT-cache body"):
         require(nordic_gatt_cache, marker)
@@ -2273,7 +2369,11 @@ def main() -> None:
         require(frontier_32_63, marker)
     frontier_sub32 = DOCS / "FRONTIER-SUB32-CORRELATION.md"
     for marker in (
-        "268 functions",
+        "269 entries",
+        "one exact manual callback supplement",
+        "0x0003E00E..<0x0003E018",
+        "b582eaabcb0251b809c850fe8eeb29230ef19c077c46ab7f7e628941bcad384a",
+        "r1_rtt_channel0_write_plan_build",
         "nrfx_pwm_0_irq_handler",
         "0x4001C000",
         "fabsf",
@@ -2281,6 +2381,12 @@ def main() -> None:
         "investigate_before_implementing",
     ):
         require(frontier_sub32, marker)
+    for path in (
+        PROJECT / "include" / "openr1" / "r1_retained_log.h",
+        PROJECT / "src" / "r1_retained_log.c",
+        PROJECT / "tests" / "test_openr1.c",
+    ):
+        require(path, "r1_rtt_channel0_write_plan_build")
     frontier_final53 = DOCS / "FRONTIER-FINAL53-CORRELATION.md"
     for marker in (
         "53 functions",
@@ -2308,15 +2414,41 @@ def main() -> None:
     health_history_routing = DOCS / "HEALTH-HISTORY-ROUTING-CORRELATION.md"
     for marker in (
         "0x00082BE8..<0x00082C0C",
+        "0x0004286E..<0x0004287C",
         "0x00083298..<0x000832D2",
         "0x0008B8E8..<0x0008BA80",
         "0/1/0/3/3/5/0/7/7/9/7/11/11/13",
         "exactly eight bytes",
         "temperature and stress",
         "259,200 seconds",
+        "0x00082D9E..<0x00082DBE",
+        "0x00082DBE..<0x00082DF8",
+        "0x00082DF8..<0x00082DFA",
+        "0x00082DFA..<0x00082E34",
+        "0x00082ECE..<0x00082EE8",
+        "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "r1_sleep_detail_plan",
+        "r1_heart_rate_measurement_plan",
+        "r1_spo2_measurement_plan",
+        "r1_health_report_setting_plan",
+        "r1_health_history_event_valid",
+        "r1_health_history_noop_handler",
         "does not expose an internal-event sender",
     ):
         require(health_history_routing, marker)
+    require(PROJECT / "src" / "r1_health.c",
+            "r1_health_history_noop_handler")
+    for marker in (
+        "r1_sleep_detail_plan",
+        "r1_heart_rate_measurement_plan",
+        "r1_spo2_measurement_plan",
+        "r1_health_report_setting_plan",
+        "r1_health_history_event_valid",
+    ):
+        require(PROJECT / "src" / "r1_health.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    require(PROJECT / "tests" / "test_openr1.c",
+            "r1_health_history_noop_handler")
     time_health_rollover = DOCS / "TIME-HEALTH-ROLLOVER-CORRELATION.md"
     for marker in (
         "0x0005DC08..<0x0005DC5E",
@@ -2336,6 +2468,8 @@ def main() -> None:
     temperature_stress_cache = \
         DOCS / "TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md"
     for marker in (
+        "0x000422C8..<0x00042318",
+        "0x00042474..<0x000424CA",
         "0x0005ABA0..<0x0005AC38",
         "0x0005BCEC..<0x0005BDC8",
         "0x0005BE7C..<0x0005BF74",
@@ -2345,10 +2479,185 @@ def main() -> None:
         "0x00091918..<0x00091950",
         "250...500",
         "published minus 250",
+        "r1_stress_mode_control_plan",
+        "r1_stress_measurement_control_plan",
+        "do not invoke",
         "GXCAS",
         "GoMore",
     ):
         require(temperature_stress_cache, marker)
+    for marker in (
+        "r1_stress_mode_control_plan",
+        "r1_stress_measurement_control_plan",
+    ):
+        require(PROJECT / "src" / "r1_health.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    factory_optical_diagnostic = \
+        DOCS / "FACTORY-OPTICAL-DIAGNOSTIC-CORRELATION.md"
+    for marker in (
+        "0x0004F30C..<0x0004F318",
+        "0x0004F378..<0x0004F38C",
+        "0x0004F914..<0x0004F91C",
+        "0x0004F980..<0x0004F9A0",
+        "0259e93eb88c7b1d9f0176253dbc7b2a3ff8cda374a3f00d8e9d5fcaa6fbbb25",
+        "767dda28f5c3c94973e906431fee73c1422172792767e15c855b5e2436e3d97e",
+        "6a6347282d4680a2eb2ba0733ae4c105fa3286d91a2808aec2bb6297760a8f73",
+        "c6a9fffa7708f030ec5e0d14b35998fe6efcec519bccf386713c30eb3a220b4a",
+        "r1_factory_heart_rate_diagnostic_plan",
+        "r1_factory_hrv_diagnostic_plan",
+        "r1_factory_spo2_diagnostic_plan",
+        "r1_factory_temperature_diagnostic_plan",
+        "does not reproduce the stock variadic logger",
+    ):
+        require(factory_optical_diagnostic, marker)
+    for marker in (
+        "r1_factory_heart_rate_diagnostic_plan",
+        "r1_factory_hrv_diagnostic_plan",
+        "r1_factory_spo2_diagnostic_plan",
+        "r1_factory_temperature_diagnostic_plan",
+    ):
+        require(PROJECT / "src" / "r1_health.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    factory_stream_control = \
+        DOCS / "FACTORY-SENSOR-STREAM-CONTROL-CORRELATION.md"
+    for marker in (
+        "0x0004ED34..<0x0004ED52",
+        "0x0004F2BC..<0x0004F2D2",
+        "0x0004F2DC..<0x0004F2FA",
+        "0x0004F348..<0x0004F366",
+        "0x0004F8E0..<0x0004F8FE",
+        "0x0004F928..<0x0004F93E",
+        "0x0004F94C..<0x0004F96A",
+        "0x2000673C",
+        "r1_factory_stream_control_plan",
+        "do not call the sensor-stream framework",
+    ):
+        require(factory_stream_control, marker)
+    for marker in (
+        "r1_factory_acc_stream_register_plan",
+        "r1_factory_heart_rate_stream_unregister_plan",
+        "r1_factory_heart_rate_stream_register_plan",
+        "r1_factory_hrv_stream_register_plan",
+        "r1_factory_spo2_stream_register_plan",
+        "r1_factory_temperature_stream_unregister_plan",
+        "r1_factory_temperature_stream_register_plan",
+    ):
+        require(PROJECT / "src" / "r1_health.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    factory_service_diagnostic = \
+        DOCS / "FACTORY-SERVICE-DIAGNOSTIC-CORRELATION.md"
+    for marker in (
+        "0x0004EDDC..<0x0004EDF8",
+        "0x0004F040..<0x0004F04C",
+        "0x0004F1C4..<0x0004F1F4",
+        "4fdaec6c5dea91d292fb47b10e5c3770dd7762128fbcfec819374c504301bd89",
+        "adf55bcf1f3b579e6a6b1757fab7e176681320b0dee8f76b23d26c459b3f66c2",
+        "c3e254d90368580d139606af0e0b2ae53c30608bfdfbf0ee806447be31e3404e",
+        "r1_factory_activity_diagnostic_plan_decode",
+        "r1_factory_temperature_pair_diagnostic_plan_decode",
+        "r1_factory_periodic_timer_restart_plan_build",
+        "without posting it",
+    ):
+        require(factory_service_diagnostic, marker)
+    for marker in (
+        "r1_factory_activity_diagnostic_plan_decode",
+        "r1_factory_temperature_pair_diagnostic_plan_decode",
+        "r1_factory_periodic_timer_restart_plan_build",
+    ):
+        require(PROJECT / "src" / "r1_health.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    factory_f2_high_risk = DOCS / "FACTORY-F2-HIGH-RISK-CORRELATION.md"
+    for marker in (
+        "0x00062D6A..<0x00062D84",
+        "0x00062D84..<0x00062DB0",
+        "0x00062DB0..<0x00062DD4",
+        "0x00062DD4..<0x00062DF2",
+        "d1403d57eb8a6b26738f4f0a8eab8b5ef3d8fc479dc619f9e896b9ad9c5b5b26",
+        "6927962e2dd3d3764a1ccd72bbd891166fdecccdf1e7349495db9abe8daf7650",
+        "1932fd3bacf30cb7da4b813606a83bff9c48bd7543908804e6bf874bbb1b3750",
+        "7e5a9beda85c1fb8047ded58f8c46833f254858ad096fc902416d8e30dedc1b9",
+        "r1_factory_f2_delayed_reset_plan",
+        "r1_factory_f2_ppg_mode_plan",
+        "r1_factory_f2_marked_ship_mode_plan",
+        "r1_factory_f2_ship_mode_plan",
+        "No function sends the response",
+    ):
+        require(factory_f2_high_risk, marker)
+    for marker in (
+        "r1_factory_f2_delayed_reset_plan",
+        "r1_factory_f2_ppg_mode_plan",
+        "r1_factory_f2_marked_ship_mode_plan",
+        "r1_factory_f2_ship_mode_plan",
+    ):
+        require(PROJECT / "src" / "r1_event.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    eus_module_dispatch = DOCS / "EUS-MODULE-DISPATCH-CORRELATION.md"
+    for marker in (
+        "0x0008316C..<0x0008321C",
+        "0x00083CA8..<0x00083CCC",
+        "ceb1700eb786b7fca329fd99a1ff6a322c857958e2cce5525fa1251aef185618",
+        "73d1743ef3107d165e196cedff2cec7dce192930e4ba425ac803c9db67b388d7",
+        "0x0009A4CC",
+        "r1_eus_ingress_plan_decode",
+        "r1_eus_system_dispatch_plan_build",
+        "never invokes a module handler",
+    ):
+        require(eus_module_dispatch, marker)
+    for marker in (
+        "r1_eus_ingress_plan_decode",
+        "r1_eus_system_dispatch_plan_build",
+    ):
+        require(PROJECT / "include" / "openr1" / "r1_protocol.h", marker)
+        require(PROJECT / "src" / "r1_protocol.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    factory_legacy_dispatch = \
+        DOCS / "FACTORY-LEGACY-COMMAND-DISPATCH-CORRELATION.md"
+    for marker in (
+        "0x000625C0..<0x000627CE",
+        "900beb3e3b665c01332df2c6ae3f901c301a0510a24acf25f447a74e71dbc51b",
+        "0x00045F84",
+        "0x2001A174",
+        "r1_factory_legacy_command_route_frame",
+        "R1_LEGACY_COMMAND_ROUTE_FACTORY_NOOP_0X10",
+        "R1_LEGACY_COMMAND_ROUTE_FACTORY_STATUS_0X8B",
+        "never invokes any recovered handler",
+    ):
+        require(factory_legacy_dispatch, marker)
+    for path in (
+        PROJECT / "include" / "openr1" / "r1_dispatch.h",
+        PROJECT / "src" / "r1_dispatch.c",
+        PROJECT / "tests" / "test_openr1.c",
+    ):
+        require(path, "r1_factory_legacy_command_route_frame")
+    protocol_handler_boundaries = \
+        DOCS / "ADV-START-TOUCH-SWITCH-HANDLERS-CORRELATION.md"
+    for marker in (
+        "0x00083D04..<0x00083D5A",
+        "0x00084874..<0x0008492C",
+        "435f50237fe6a1501c14ba62cab220e522d4820e706a6302b721ffcdb3dbfb95",
+        "48de556b7d5d748c313316c773fd93f6ae51ac9075ed8d33079c390c8fbc02df",
+        "0a000000053d0800",
+        "0700000075480800",
+        "r1_connection_control_adv_start_handler_plan_decode",
+        "r1_touch_switch_handler_plan_decode",
+        "no longer interprets a one-byte selector as an enable boolean",
+    ):
+        require(protocol_handler_boundaries, marker)
+    for path, marker in (
+        (PROJECT / "include" / "openr1" / "r1_peer_target.h",
+         "r1_connection_control_adv_start_handler_plan_decode"),
+        (PROJECT / "src" / "r1_peer_target.c",
+         "r1_connection_control_adv_start_handler_plan_decode"),
+        (PROJECT / "include" / "openr1" / "r1_dispatch.h",
+         "r1_touch_switch_handler_plan_decode"),
+        (PROJECT / "src" / "r1_dispatch.c",
+         "r1_touch_switch_handler_plan_decode"),
+        (PROJECT / "tests" / "test_openr1.c",
+         "R1_CONNECTION_CONTROL_ADV_START_EVENT_TYPE"),
+        (PROJECT / "tests" / "test_openr1.c",
+         "R1_TOUCH_SWITCH_ACTION_PHONE_DIAGNOSTIC"),
+    ):
+        require(path, marker)
     temperature_one_shot = DOCS / "TEMPERATURE-ONE-SHOT-CORRELATION.md"
     for marker in (
         "0x00042514..<0x0004256A",
@@ -2400,8 +2709,14 @@ def main() -> None:
         require(goodix_internal_topics, marker)
     thumb_callbacks = DOCS / "THUMB-CALLBACK-ENTRY-CORRELATION.md"
     for marker in (
+        "0x0003407C..<0x00034088",
+        "a92c0d0743114a1354d18c5b9db682c06ea1ecc1eae9e3528ec178501b944077",
         "0x00042D28..<0x00042D2E",
+        "0x00042ED8..<0x00042EE8",
+        "0f60b3c715f651d3206800bbd33658e142ca94eff277509d3b9eb06d6ba4c0c7",
         "0x00042EE8..<0x0004301A",
+        "0x00045F3C..<0x00045FB0",
+        "9298cf72c25a75bacd23e7a94304495fd904b00ac66131020a9de33346cd516f",
         "0x0004B6C0..<0x0004B6FE",
         "0x0004B920..<0x0004B9F0",
         "0x0004BBF0..<0x0004BC26",
@@ -2422,15 +2737,19 @@ def main() -> None:
         "7fa0d4b5da336d725c3fda8749821b3248350985ff0eb34c335d570bd42030af",
         "856dec2d21da309fc9de8a9d2bb79f9fb73ce6fd300d7b3cceb5bf5f6b8d392e",
         "r1_pmic_retry_callback_plan",
+        "r1_pmic_charge_i2c_callback_plan",
         "r1_connection_control_role_sync_thread_flags",
         "r1_connection_control_delayed_event_plan",
         "gomore_primitives_topic_update_take_ready",
-        "twenty-nine executable callback/helper/task entries",
+        "thirty-five executable callback/helper/task entries",
         "0x000882AC..<0x000882EC",
+        "0x00091F54..<0x0009208C",
         "0x000920EC..<0x0009216C",
         "0x00092178..<0x0009223E",
         "0x0009227C..<0x000922FC",
         "0x0009230C..<0x0009238C",
+        "0x000924F4..<0x00092570",
+        "0x00092580..<0x00092662",
         "0x000926DC..<0x000927BA",
         "No callback enables a new public command",
     ):
@@ -2451,7 +2770,7 @@ def main() -> None:
     remaining_frontier = DOCS / "REMAINING-FUNCTION-FRONTIER.md"
     for marker in (
         "zero remain `unclassified`",
-        "Thirty-four sensor-algorithm heap functions are now provenance-resolved",
+        "Thirty-four sensor-algorithm heap functions are provenance-resolved",
         "FRONTIER-FINAL53-CORRELATION.md",
         "Eight composite-initializer functions / 586 bytes",
         "Six paired sleep-classifier graph-builder/allocator functions / 2,188 bytes",
@@ -2467,7 +2786,7 @@ def main() -> None:
         "82 formerly unclassified Ghidra functions / 19,520 executable bytes",
         "twelve formerly unclassified Ghidra functions / 2,776 bytes",
         "health-daily synthetic test fixture / 1,344 bytes",
-        "four-function / 1,740-byte R1 product closure",
+        "six-function / 1,954-byte R1 product closure",
         "six-function / 1,890-byte GoMore activity-state window classifier",
         "four-function / 1,128-byte extension of the Goodix GH_SPO2/dlCom boundary",
         "58 functions / 19,274 bytes",
@@ -2515,7 +2834,7 @@ def main() -> None:
         "one-function / 518-byte Goodix GH_NADT",
         "one-function / 514-byte Goodix register-profile",
         "seven-function / 1,098-byte Goodix GH_NADT peak-mask",
-        "one-function / 494-byte R1 compiled-default restore",
+        "two-entry / 498-byte R1 compiled-default",
         "30-function / 5,126-byte Goodix GH_NADT accumulation",
         "Two FreeRTOS static-memory callbacks / 36 bytes",
         "A FreeRTOS stack-overflow callback / 72 bytes",
@@ -2524,7 +2843,7 @@ def main() -> None:
         "Ten Nordic Peer Manager GATT-cache functions / 784 bytes",
         "Five Nordic BLE/Peer Manager static helpers / 158 bytes",
         "FreeRTOS 10.5.1 `prvReloadTimer` / 40 bytes",
-        "Eight resolved branch-only thunks / 32 bytes",
+        "Nine resolved branch-only thunks / 36 bytes",
         "Eight Nordic BLE advertising functions / 992 bytes",
         "Eight newly routed Nordic buttonless-DFU functions / 668 Ghidra bytes",
         "Two Nordic power-management shutdown functions / 332 bytes",
@@ -2547,9 +2866,10 @@ def main() -> None:
         require(remaining_frontier, marker)
     resolved_thunks_doc = DOCS / "RESOLVED-THUNK-CLOSURE.md"
     for marker in (
-        "Eight formerly unclassified application entries",
+        "Nine resolved application entries",
         "0x00029D58..<0x00029D5C",
         "0x0006F8F6..<0x0006F8FA",
+        "0x0007D2A0..<0x0007D2A4",
         "0x0008E69C..<0x0008E6A0",
         "python3 tools/evidence/summarize_r1_resolved_thunks.py",
         "aliases of already implemented product-owned metadata operations",
@@ -2572,9 +2892,10 @@ def main() -> None:
         require(nordic_advertising_doc, marker)
     nordic_buttonless_dfu_doc = DOCS / "NORDIC-BUTTONLESS-DFU-CLOSURE.md"
     for marker in (
-        "Ten recovered application functions",
+        "Eleven recovered application functions",
         "NRF_DFU_BLE_BUTTONLESS_SUPPORTS_BONDS=0",
         "0x0005203C..<0x0005204A",
+        "0x00052050..<0x00052078",
         "0x0005207C..<0x00052090",
         "0x00052154..<0x000521D4",
         "0x000522D8..<0x00052326",
@@ -2646,31 +2967,46 @@ def main() -> None:
         require(peer_manager_event_doc, marker)
     nv_recovery_doc = DOCS / "NV-RECOVERY-CORRELATION.md"
     for marker in (
-        "Four functions / 1,740 executable bytes",
+        "Six functions / 1,954 executable bytes",
         "Two functions / 1,458 bytes",
-        "two valid functions / 282 bytes",
+        "four valid functions / 496 bytes",
         "0x0007B634",
         "0x0007BBE8",
         "0x0007BD68",
         "0x0007C450",
+        "0x000839B4",
+        "0x00084150",
+        "1100000051410800",
         "CRC-16/MODBUS",
         "fill-only merge planner",
+        "r1_nv_recovery_command_handler_plan_decode",
+        "r1_nv_recovery_outbound_response_plan_build",
         "normal dispatcher continues to refuse live `nvRecover`",
         "python3 tools/evidence/summarize_r1_nv_recovery_closure.py",
     ):
         require(nv_recovery_doc, marker)
     nv_compiled_restore_doc = DOCS / "NV-COMPILED-RESTORE-CORRELATION.md"
     for marker in (
-        "0x0007C52C` / 494 executable bytes",
-        "0x00042BBE",
+        "two R1 product entries / 498 executable bytes",
+        "0x00042BBE..<0x00042BC2",
+        "9135c4f873ba2ac12fb266a466936ed75d7755338ae4c825811f7e846b5e86b6",
         "internal storage event `0x2005`",
         "0x0009A0F8..<0x0009A432",
         "4f0fe353d4a0b2d5ecdfc49a1a6d8c73f790d693c12ca3462ecbacb0bee5cf5c",
         "raw 59 identity rows are intentionally neither rendered",
         "live restore path remains disabled",
+        "r1_nv_compiled_default_restore_plan_build",
+        "r1_nv_compiled_default_restore_event_plan",
         "python3 tools/evidence/summarize_r1_nv_compiled_restore.py",
     ):
         require(nv_compiled_restore_doc, marker)
+    for marker in (
+        "r1_nv_compiled_default_restore_plan_build",
+        "r1_nv_compiled_default_restore_event_plan",
+    ):
+        require(PROJECT / "include" / "openr1" / "r1_nv_recovery.h", marker)
+        require(PROJECT / "src" / "r1_nv_recovery.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
     touch_slider_doc = DOCS / "TOUCH-SLIDER-CORRELATION.md"
     for marker in (
         "Thirteen functions / 2,784 executable bytes",
@@ -2689,14 +3025,21 @@ def main() -> None:
     health_daily_test_doc = DOCS / "HEALTH-DAILY-TEST-CORRELATION.md"
     for marker in (
         "0x0008B378",
-        "1,344-byte dormant R1 product test fixture",
-        "No direct caller",
+        "1,344-byte R1 product test fixture",
+        "0x00042860..<0x0004286E",
+        "6b65c9e2c9e103d6d16da41f0d7d0d5eb9c1c249ae4aca2d1a44af826a133fcc",
+        "r1_health_daily_test_event_valid",
+        "Internal reachability is therefore proven",
         "0x0008D40C..<0x0008D4C2",
         "0x0008E560..<0x0008E626",
         "75cfeeac1565b8d44e251089066133f06e946af53ed3a849f230787c436ee255",
         "python3 tools/evidence/summarize_r1_health_daily_test.py",
     ):
         require(health_daily_test_doc, marker)
+    require(PROJECT / "src" / "r1_health.c",
+            "r1_health_daily_test_event_valid")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "r1_health_daily_test_event_valid")
     gomore_neural_runtime_doc = DOCS / "GOMORE-NEURAL-RUNTIME-BOUNDARY.md"
     for marker in (
         "0x00076BDC..<0x000770AE",
@@ -2902,17 +3245,222 @@ def main() -> None:
         "0x00046650` / 578 executable bytes",
         "0x00046650..<0x000467FA",
         "0x0004FB24..<0x0004FB3E",
+        "0x00050304..<0x00050338",
+        "0x00050338..<0x0005036C",
+        "8e00eee36d082b3292c05cc5d56b08a255fe15049d9e009cd546e84300c4fc86",
+        "7e574c6aad94c1e6af24277e385a0a999b49c78c021c75492fb8971845b2eea6",
         "3019299c9c23cbed488c51229722b18cf0166ccae126bef2cdc3a49b615fab00",
         "0x00092822",
         "0x000040...0x000800",
         "0x00046F60",
         "0x0002F866",
         "0x00046F54",
+        "55d4fdd20707269b2b817d69bbd7c2638d974e8112b03e368f0d0ee8806c02e0",
+        "3453a55e55a8ead4030b1f2b1ab8b482662803542786731c8bb6b74e85e034b9",
+        "r1_iqs7211e_factory_marker_1",
+        "r1_iqs7211e_factory_marker_6",
+        "r1_touch_lifecycle_disable_plan",
+        "r1_touch_lifecycle_enable_plan",
+        "r1_iqs7211e_factory_record",
         "clean_room_adapter_only_use_pinned_provider",
         "performs no live GPIO or I2C operation",
         "python3 tools/evidence/summarize_r1_touch_task_dispatcher.py",
     ):
         require(touch_task_dispatcher_doc, marker)
+    for marker in (
+        "r1_touch_lifecycle_disable_plan",
+        "r1_touch_lifecycle_enable_plan",
+    ):
+        require(PROJECT / "src" / "r1_iqs7211e.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    touch_recovery_timer_doc = DOCS / \
+        "TOUCH-RECOVERY-TIMER-CORRELATION.md"
+    for marker in (
+        "0x00046EAC..<0x00046EF4",
+        "72",
+        "9d328097ca50117b08d6ca156979e387453ea6d873a1d6922252359a6d07afbd",
+        "0x00046EAD",
+        "0x00046898",
+        "0x00046908",
+        "0x0004690C",
+        "R1_TOUCH_RECOVERY_OPEN_EVENT_FLAG",
+        "r1_touch_recovery_timer_plan_build",
+        "python3 tools/evidence/summarize_r1_touch_recovery_timer.py",
+    ):
+        require(touch_recovery_timer_doc, marker)
+    require(PROJECT / "src" / "r1_iqs7211e.c",
+            "r1_touch_recovery_timer_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_touch_recovery_timer_plan")
+    i2c5_delay_doc = DOCS / "I2C5-DELAY-CALLBACK-CORRELATION.md"
+    for marker in (
+        "0x00054AF0..<0x00054AFC",
+        "12",
+        "33ff9323be43957254a5dbd6680b5e2103e8484374493bdfcf56d6e35c48256a",
+        "0x00054AF1",
+        "0x20007550",
+        "0x28",
+        "five Thumb NOP",
+        "r1_twi_i2c5_delay_noop",
+        "python3 tools/evidence/summarize_r1_i2c5_delay_callback.py",
+    ):
+        require(i2c5_delay_doc, marker)
+    require(PROJECT / "src" / "r1_twi_sync.c", "r1_twi_i2c5_delay_noop")
+    require(PROJECT / "tests" / "test_openr1.c", "test_i2c5_delay_noop")
+    nordic_omitted_hal_doc = DOCS / \
+        "NORDIC-OMITTED-HAL-INLINES-CORRELATION.md"
+    for marker in (
+        "Three explicit `R1PowerEvidence.java` entries",
+        "0x0007902C..<0x0007903E",
+        "0225ea03c5a9447c82d7a50a869c409e1415b8b56d6aca2da81ec9037d99e1a4",
+        "0x000791E4..<0x000791F8",
+        "5d9088f1d1399da831f929bd6c63b824486fbbefaca6605772b6bb1f9d428b3e",
+        "0x00079E10..<0x00079E20",
+        "89cc89d1dc3ea948787e9ab258dded01450b8bdf17c6408f6983c0ba4493015a",
+        "0x40007000",
+        "python3 tools/evidence/summarize_r1_nordic_omitted_hal_inlines.py",
+    ):
+        require(nordic_omitted_hal_doc, marker)
+    nordic_omitted_delay_doc = DOCS / \
+        "NORDIC-OMITTED-DELAY-CLUSTER-CORRELATION.md"
+    for marker in (
+        "six `nrfx_coredep_delay_us` wrappers",
+        "0x0007A6FC..<0x0007A708",
+        "0x0009A660..<0x0009A666",
+        "365d45f07ec7fae67922708c6a9ba072af22db02bb8419756150378123dcbf7d",
+        "583d680532875ef2b855cbedbdfcdbdd74329d19ba88d3e52c36b6b634a75165",
+        "12 functions / 108 executable bytes",
+        "ten manual supplements / 84 bytes",
+        "python3 tools/evidence/summarize_r1_nordic_omitted_delay_cluster.py",
+    ):
+        require(nordic_omitted_delay_doc, marker)
+    gpio_input_irq_doc = DOCS / "GPIO-INPUT-IRQ-DISPATCH-CORRELATION.md"
+    for marker in (
+        "0x0006ED94..<0x0006EDC8",
+        "cce6c3331bbeeb45f432ebab1e540905c2b218d10db5ae0a655641d844a82692",
+        "0x00054C20",
+        "0x200070C0",
+        "seven 44-byte records",
+        "both records for linear pin 33",
+        "Nordic GPIOTE",
+        "python3 tools/evidence/summarize_r1_gpio_input_irq_dispatch.py",
+    ):
+        require(gpio_input_irq_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_gpio_registry.h",
+            "R1_GPIO_INPUT_REGISTRY_COUNT 7u")
+    require(PROJECT / "src" / "r1_gpio_registry.c",
+            "r1_gpio_input_irq_dispatch")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_gpio_input_irq_dispatch")
+    advertising_event_doc = DOCS / \
+        "ADVERTISING-EVENT-POLICY-CORRELATION.md"
+    for marker in (
+        "0x0007CBC8..<0x0007CC54",
+        "623c35b360ba9ee09bb2077d2c5adc11a57cd3152c68763071bf66d935562d81",
+        "0x00048AC4",
+        "0x0007CC48",
+        "Fast advertising.",
+        "Slow advertising.",
+        "r1_advertising_event_plan_build",
+        "python3 tools/evidence/summarize_r1_advertising_event_policy.py",
+    ):
+        require(advertising_event_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_event.h",
+            "r1_advertising_event_plan")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_advertising_event_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_advertising_event_plan")
+    goodix_open_mode_doc = DOCS / "GOODIX-OPEN-MODE-POLICY-CORRELATION.md"
+    for marker in (
+        "0x0008165C..<0x0008170A",
+        "eecd6ba14ea56d621ef0731e0c3e7166b68eba67bee08576c5635a37531e0b0e",
+        "0x0009A59C",
+        "0x000816B0",
+        "shares mode 2's provider path",
+        "r1_goodix_open_mode_plan_build",
+        "python3 tools/evidence/summarize_r1_goodix_open_mode_policy.py",
+    ):
+        require(goodix_open_mode_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_goodix.h",
+            "r1_goodix_open_mode_plan")
+    require(PROJECT / "src" / "r1_goodix.c",
+            "r1_goodix_open_mode_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_goodix_open_mode_plan")
+    pmic_late_init_doc = DOCS / "PMIC-LATE-INIT-POLICY-CORRELATION.md"
+    for marker in (
+        "0x00096A7C..<0x00096AD0",
+        "c3244e2b6c136ada745280e2d792ef78f315e56612988ea17e920e4b8afd443f",
+        "0x00092512",
+        "0x20006870",
+        "0x00042EC5",
+        "0x00042D2F",
+        "0x00042ED9",
+        "r1_pmic_late_init_plan_build",
+        "python3 tools/evidence/summarize_r1_pmic_late_init_policy.py",
+    ):
+        require(pmic_late_init_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_battery.h",
+            "r1_pmic_late_init_plan")
+    require(PROJECT / "src" / "r1_battery.c",
+            "r1_pmic_late_init_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "R1_PMIC_LATE_INIT_SCHEDULE_FACTORY_CALLBACK")
+    task_suspend_doc = DOCS / "TASK-SUSPEND-POLICY-CORRELATION.md"
+    for marker in (
+        "0x00046D10..<0x00046DCC",
+        "0x00046DCC..<0x00046E64",
+        "27aaed8b4c2f758025abee09a50088b081b72de1e49188f0385f398683f845b1",
+        "9147a124d72ca9559e39ce1df6ef9dbbb964486f1487c83fc3a57d0126709cc6",
+        "0x00800000",
+        "0x06BF",
+        "0x06DF",
+        "0x5000",
+        "r1_task_suspend_broadcast_plan_build",
+        "r1_task_suspend_barrier_plan_build",
+        "python3 tools/evidence/summarize_r1_task_suspend_policy.py",
+    ):
+        require(task_suspend_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_event.h",
+            "r1_task_suspend_broadcast_plan")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_task_suspend_barrier_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_task_suspend_plans")
+    storage_task_doc = DOCS / "STORAGE-TASK-POLICY-CORRELATION.md"
+    for marker in (
+        "0x00046954..<0x00046A2C",
+        "61783b8da754a2b95093818781cc1328f25b6143d9dcd983b285bb119f979e33",
+        "0x00046A6C",
+        "0x00046955",
+        "0x0007CA71",
+        "0x2005",
+        "r1_storage_task_plan_startup",
+        "r1_service_task_plan_startup",
+        "python3 tools/evidence/summarize_r1_storage_task_policy.py",
+    ):
+        require(storage_task_doc, marker)
+    require(PROJECT / "src" / "r1_storage.c",
+            "r1_service_task_plan_startup")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "R1_STORAGE_TASK_SCHEDULE_DELAYED_EVENT")
+    factory_thread_doc = DOCS / "FACTORY-THREAD-CREATOR-CORRELATION.md"
+    for marker in (
+        "0x00045C54..<0x00045C84",
+        "d85c228dacba440caeda739336298761c7a52619589196c7801535254c8255dc",
+        "0x000992D0",
+        "0x0009230D",
+        "0x200066B0",
+        "factory_test",
+        "r1_factory_input_thread_creation_plan_build",
+        "python3 tools/evidence/summarize_r1_factory_thread_creator.py",
+    ):
+        require(factory_thread_doc, marker)
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_factory_input_thread_creation_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_factory_input_thread_creation_plan")
     sensor_stream_framework_doc = DOCS / "SENSOR-STREAM-FRAMEWORK-BOUNDARY.md"
     for marker in (
         "three-function / 1,448-byte",
@@ -2939,9 +3487,11 @@ def main() -> None:
         require(sensor_stream_framework_doc, marker)
     ble_tx_queue_doc = DOCS / "BLE-TX-QUEUE-DISPATCH-CORRELATION.md"
     for marker in (
-        "Two formerly unclassified functions / 560 executable bytes",
+        "Three functions / 572 executable bytes",
         "0x00034064",
         "0x00034070",
+        "0x0003407C",
+        "a92c0d0743114a1354d18c5b9db682c06ea1ecc1eae9e3528ec178501b944077",
         "0x0003E274..<0x0003E48C",
         "align4(payload_length + 15)",
         "at least 90 percent",
@@ -2955,8 +3505,15 @@ def main() -> None:
         require(ble_tx_queue_doc, marker)
     wear_fusion_doc = DOCS / "WEAR-FUSION-CORRELATION.md"
     for marker in (
-        "seven R1 product functions byte-pinned",
-        "seven Ghidra functions total 1,506 bytes",
+        "eleven R1 product functions byte-pinned",
+        "eleven entries total 1,756 executable bytes",
+        "four manual supplements / 250 bytes",
+        "0x0003CE1C..<0x0003CE40",
+        "0x0003D0FC..<0x0003D132",
+        "0x0003D150..<0x0003D19A",
+        "0x0003D1B8..<0x0003D20E",
+        "3,000-tick timeout",
+        "7,000-tick timeout",
         "0x0003D45C..<0x0003D63C",
         "9,050,000",
         "strictly between `972.0` and `1076.0`",
@@ -2964,6 +3521,21 @@ def main() -> None:
         "tools/evidence/summarize_r1_wear_fusion_closure.py",
     ):
         require(wear_fusion_doc, marker)
+    for marker in (
+        "r1_wear_optical_history_update",
+        "r1_wear_raw_hr_probe_plan",
+        "r1_wear_adt_status_plan",
+        "r1_wear_sleep_status_update",
+    ):
+        require(PROJECT / "include" / "openr1" / "r1_wear.h", marker)
+        require(PROJECT / "src" / "r1_wear.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    for marker in (
+        "R1_WEAR_RAW_HR_TIMEOUT_TICKS",
+        "R1_WEAR_ADT_TIMEOUT_TICKS",
+    ):
+        require(PROJECT / "include" / "openr1" / "r1_wear.h", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
     connection_parameter_doc = DOCS / "CONNECTION-PARAMETER-POLICY-CORRELATION.md"
     for marker in (
         "five R1 product functions / 562 bytes byte-pinned",
@@ -2987,6 +3559,17 @@ def main() -> None:
         "tools/evidence/summarize_r1_sleep_sync_packet.py",
     ):
         require(sleep_sync_packet_doc, marker)
+    sleep_sync_report_doc = DOCS / "STORED-SLEEP-REPORT-CALLBACK-CORRELATION.md"
+    for marker in (
+        "118-byte callback byte-pinned",
+        "0x0008F954..<0x0008F9CA",
+        "32061a5ba2b5791a49e9f0590a8c4b41dcc597f4494ef2264374be6c71ad3edb",
+        "0x0008B830",
+        "r1_sleep_sync_plan_report_callback",
+        "no pointer dereference",
+        "python3 tools/evidence/summarize_r1_sleep_sync.py",
+    ):
+        require(sleep_sync_report_doc, marker)
     nfc_dock_policy_doc = DOCS / "NFC-DOCK-POLICY-CORRELATION.md"
     for marker in (
         "Four R1 adapter functions / 620 executable bytes",
@@ -3089,6 +3672,190 @@ def main() -> None:
         "python3 tools/evidence/summarize_r1_bae8_event_router.py",
     ):
         require(bae8_router_doc, marker)
+    bae8_connection_doc = DOCS / "BAE8-CONNECTION-EVENT-CORRELATION.md"
+    for marker in (
+        "0x0007CCB4..<0x0007CDC8",
+        "e72b8ea7bb55915ba8783ea67e76a3d0d747eb32f808f66e48da2a0a2ba3385a",
+        "0x00052B58",
+        "0x0010",
+        "0x000514E0",
+        "SVC `0xAD`",
+        "ble_srv_is_notification_enabled",
+        "24-byte event record",
+        "r1_bae8_connection_event_plan_build",
+        "python3 tools/evidence/summarize_r1_bae8_connection_event.py",
+    ):
+        require(bae8_connection_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_runtime.h",
+            "r1_bae8_connection_event_plan")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_bae8_connection_event_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_bae8_connection_event_plan")
+    gap_event_doc = DOCS / "GAP-EVENT-POLICY-CORRELATION.md"
+    for marker in (
+        "0x00052B9C..<0x00052F9E",
+        "0x00053278..<0x00053536",
+        "1fe5a29f37f52ee7f0d7ea75ffb52dd65da44e37b3b64b2daffdc4efd6f62eac",
+        "47e481cd2ccaf7721e760d015e4d9c503f819ba74ab1afcad277642647e4a282",
+        "0x000C45C0",
+        "0x00052B9D",
+        "`0x10`",
+        "`0x56`",
+        "r1_gap_event_plan_build",
+        "python3 tools/evidence/summarize_r1_gap_event_policy.py",
+    ):
+        require(gap_event_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_runtime.h",
+            "r1_gap_event_observation")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_gap_event_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c", "test_gap_event_plan")
+    nfc_charge_task_doc = DOCS / "NFC-CHARGE-TASK-POLICY-CORRELATION.md"
+    for marker in (
+        "0x000461CC..<0x00046462",
+        "0x000461CC..<0x00046650",
+        "ed5a9b82902f050e4940ea199d8de22031802f7d7abc4cd3041e98a6590f19fc",
+        "632f49d7a293f0826bc7d52e62ec21d06b1e35054424e80b5a79d054ff643a6f",
+        "0x00092556",
+        "`0x00400000`",
+        "`50 50`",
+        "r1_nfc_charge_task_plan_build",
+        "python3 tools/evidence/summarize_r1_nfc_charge_task_policy.py",
+    ):
+        require(nfc_charge_task_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_runtime.h",
+            "r1_nfc_charge_task_observation")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_nfc_charge_task_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_nfc_charge_task_plan")
+    task_topology_doc = DOCS / "TASK-TOPOLOGY-STARTUP-CORRELATION.md"
+    for marker in (
+        "0x00046B20..<0x00046B84",
+        "0x00046B20..<0x00046BAC",
+        "32c34c30488b792c3e6af4b4d411adb9fba635857e81fcf2ee0354304b455f82",
+        "f6c8b8a76aa9208b6a16d0437a6a01f27fdfed719a160d196af39b2a33403be4",
+        "0x00045DA0",
+        "`0x55`",
+        "priority to raw CMSIS value\n`8`",
+        "r1_task_topology_startup_plan_build",
+        "python3 tools/evidence/summarize_r1_task_topology_startup.py",
+    ):
+        require(task_topology_doc, marker)
+    require(PROJECT / "include" / "openr1" / "r1_event.h",
+            "r1_task_topology_startup_plan")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_task_topology_startup_plan_build")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_task_topology_startup_plan")
+    hr_timing_result_doc = DOCS / \
+        "HR-TIMING-RESULT-CALLBACK-CORRELATION.md"
+    for marker in (
+        "0x00049B60..<0x00049BEE",
+        "0x00049B60..<0x00049C64",
+        "7f67cff79576a5a37f457e0e79ba43c092cc2db09afea26f56e2a7cee70717a5",
+        "fdbe3e53648384a8845fe85d6b17ebdcd2e0f0b95550c5e6eb2b741d773804c1",
+        "0x00049B61",
+        "event `6`",
+        "r1_hr_value_plausible",
+        "r1_hr_once_result_plan",
+        "r1_hr_timing_result_plan",
+        "python3 tools/evidence/summarize_r1_hr_timing_result.py",
+    ):
+        require(hr_timing_result_doc, marker)
+    for marker in (
+        "r1_hr_value_plausible",
+        "r1_hr_once_result_plan",
+        "r1_hr_timing_result_plan",
+    ):
+        require(PROJECT / "include" / "openr1" / "r1_health.h", marker)
+        require(PROJECT / "src" / "r1_health.c", marker)
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_heart_rate_result_plans")
+    spo2_result_doc = DOCS / "SPO2-RESULT-CALLBACKS-CORRELATION.md"
+    for marker in (
+        "0x0004ABEC..<0x0004ACD2",
+        "0x0004ADA0..<0x0004AE9C",
+        "9013c99396899353c4aac5a7154920955f6de3ac906731b23c6cc4e408c1fea3",
+        "f37ead6711312c1dc90ea1db45c89b0bd16016667a5e9752e66ee73b69485fc8",
+        "0x0004ABED",
+        "0x0004ADA1",
+        "event `8`",
+        "r1_spo2_once_result_plan",
+        "r1_spo2_timing_result_plan",
+        "python3 tools/evidence/summarize_r1_spo2_result_callbacks.py",
+    ):
+        require(spo2_result_doc, marker)
+    for marker in (
+        "r1_spo2_once_result_plan",
+        "r1_spo2_timing_result_plan",
+    ):
+        require(PROJECT / "include" / "openr1" / "r1_health.h", marker)
+        require(PROJECT / "src" / "r1_health.c", marker)
+    require(PROJECT / "tests" / "test_openr1.c", "test_spo2_result_plans")
+    factory_acc_battery_doc = DOCS / \
+        "FACTORY-ACC-BATTERY-DIAGNOSTICS-CORRELATION.md"
+    for marker in (
+        "0x0004ED64..<0x0004EDAC",
+        "0x0004EE18..<0x0004EE38",
+        "c2ee443870c8d5c7e1426d03d974cb57f49984144cec1e066203fe15a62ecbdf",
+        "9e5e60affb55774064cbe965e53c75d58cc6cac278660b2a70ad6df47b52446a",
+        "0x0004ED65",
+        "0x0004EE19",
+        "AT^BAT_ADC",
+        "r1_factory_acc_diagnostic_plan_decode",
+        "r1_factory_battery_diagnostic_plan_build",
+        "python3 tools/evidence/summarize_r1_factory_acc_battery_diagnostics.py",
+    ):
+        require(factory_acc_battery_doc, marker)
+    for marker in (
+        "r1_factory_acc_diagnostic_plan_decode",
+        "r1_factory_battery_diagnostic_plan_build",
+    ):
+        require(PROJECT / "include" / "openr1" / "r1_health.h", marker)
+        require(PROJECT / "src" / "r1_health.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    factory_pmic_doc = DOCS / "FACTORY-PMIC-HANDLERS-CORRELATION.md"
+    for marker in (
+        "0x0004F4A4..<0x0004F4B6",
+        "0x0004F4D4..<0x0004F50C",
+        "0x0004F524..<0x0004F57C",
+        "63368b0d8baa9f979c34e43d8fcb22d62d9b3d406e628a5909a45434405e986b",
+        "2eb10962b78d9955ba18e7e248c54634961c3c0ed1c5a56b39559deca79076dc",
+        "0c99a9668a257b387077589dcbc77e87c608c80e7dfaf5fea540bc463c03455c",
+        "AT^PMIC_ISNS",
+        "AT^PMIC_OFF",
+        "AT^PMIC_READ",
+        "r1_factory_pmic_current_diagnostic_plan_build",
+        "r1_factory_pmic_power_off_plan_build",
+        "r1_factory_pmic_register_diagnostic_plan_build",
+        "python3 tools/evidence/summarize_r1_factory_pmic_handlers.py",
+    ):
+        require(factory_pmic_doc, marker)
+    for marker in (
+        "r1_factory_pmic_current_diagnostic_plan_build",
+        "r1_factory_pmic_power_off_plan_build",
+        "r1_factory_pmic_register_diagnostic_plan_build",
+    ):
+        require(PROJECT / "include" / "openr1" / "r1_battery.h", marker)
+        require(PROJECT / "src" / "r1_battery.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    buttonless_dfu_policy_doc = DOCS / \
+        "BUTTONLESS-DFU-EVENT-POLICY-CORRELATION.md"
+    for marker in (
+        "0x0005232C..<0x00052498",
+        "364",
+        "0e16e5502df7200684ef2bd4aa90bdca0aeb726f7938f8e4374d487273e39357",
+        "0x0005232D",
+        "0x0004C944",
+        "0x0004C92C",
+        "disable advertising-on-disconnect",
+        "disconnect every connected link",
+        "r1_runtime_plan_buttonless_dfu_event",
+        "python3 tools/evidence/summarize_r1_buttonless_dfu_event_policy.py",
+    ):
+        require(buttonless_dfu_policy_doc, marker)
     ati_calibration_doc = DOCS / "ATI-CALIBRATION-COMMAND-CORRELATION.md"
     for marker in (
         "0x0006210C",
@@ -3528,6 +4295,74 @@ def main() -> None:
         "YHM2710-REDUCTION-CORRELATION.md",
     ):
         require(yhm2710_boundary, marker)
+    yhm2710_reduction = DOCS / "YHM2710-REDUCTION-CORRELATION.md"
+    for marker in (
+        "All 44 functions",
+        "0x00035268..<0x00035272",
+        "0x0003543C..<0x000354A6",
+        "0x000350E0",
+        "0x000507CC",
+        "YHM2710-OMITTED-TRANSPORT-ENTRIES-CORRELATION.md",
+        "a642dcfe0dd3a0884d462a09171a1b5ca23c92bc8a304dbae98b2241aef81b7f",
+        "aa85adc0508a08b2c558b27437b8d4c357a79494d8df700e071b1c84855777e6",
+    ):
+        require(yhm2710_reduction, marker)
+    yhm2710_transport_entries = \
+        DOCS / "YHM2710-OMITTED-TRANSPORT-ENTRIES-CORRELATION.md"
+    for marker in (
+        "four functions / 138 executable bytes",
+        "0x000350E0..<0x0003510A",
+        "0x00050614..<0x00050618",
+        "0x000507CC..<0x000507FA",
+        "0x00050804..<0x00050832",
+        "14f761cd6c8124fd2847335f8d6a9073ae753cdbf2ffbe5eae3b064eedb4bde9",
+        "a8bfd276bfa23466703d61cbf43a24db694d6ddedc550c096108ee92ea94b553",
+        "yhm2710_set_charging_event",
+        "python3 tools/evidence/summarize_r1_yhm_transport_entries.py",
+    ):
+        require(yhm2710_transport_entries, marker)
+    final_explicit_entry_closure = \
+        DOCS / "FINAL-EXPLICIT-ENTRY-CLOSURE.md"
+    for marker in (
+        "final six application addresses",
+        "666 executable bytes",
+        "no remaining `within_noncontiguous_bounding_range_unproven`",
+        "0x000547F4..<0x00054860",
+        "0x00054B90..<0x00054C16",
+        "0x0006F600..<0x0006F638",
+        "0x0006F648..<0x0006F6B2",
+        "0x0006F738..<0x0006F794",
+        "0x00075290..<0x0007533A",
+        "f7255c4ceb866f64a4489c915448ac6c4f1f02ffc4fdf7f1be5022648f1d0482",
+        "python3 tools/evidence/summarize_r1_remaining_explicit_entries.py",
+    ):
+        require(final_explicit_entry_closure, marker)
+    for path, marker in (
+        (PROJECT / "include" / "openr1" / "r1_battery.h",
+         "r1_analog_close_plan_build"),
+        (PROJECT / "src" / "r1_battery.c", "r1_analog_close_plan_build"),
+        (PROJECT / "include" / "openr1" / "r1_gpio_registry.h",
+         "r1_gpio_input_open_plan_build"),
+        (PROJECT / "src" / "r1_gpio_registry.c",
+         "r1_gpio_input_open_plan_build"),
+        (PROJECT / "include" / "openr1" / "r1_motion.h",
+         "r1_lis2dw12_double_tap_enable_plan_build"),
+        (PROJECT / "src" / "r1_motion.c",
+         "r1_lis2dw12_double_tap_enable_plan_build"),
+        (PROJECT / "reconstructed" / "gxt310" / "gxt310.h",
+         "gxt310_read_temperature_milliunits"),
+        (PROJECT / "reconstructed" / "gxt310" / "gxt310.c",
+         "gxt310_read_temperature_milliunits"),
+        (PROJECT / "tests" / "test_openr1.c",
+         "r1_analog_close_plan_build"),
+        (PROJECT / "tests" / "test_openr1.c",
+         "r1_gpio_input_open_plan_build"),
+        (PROJECT / "tests" / "test_openr1.c",
+         "r1_lis2dw12_double_tap_enable_plan_build"),
+        (PROJECT / "tests" / "test_reconstructed_gxt310.c",
+         "gxt310_read_temperature_milliunits"),
+    ):
+        require(path, marker)
     watchdog_boundary = DOCS / "WATCHDOG-DEVICE-CORRELATION.md"
     for marker in (
         "seven exact functions",
@@ -3600,12 +4435,59 @@ def main() -> None:
     require(PROJECT / "tests" / "test_openr1.c", "test_iqs7211e_ati_audit_policy")
     require(PROJECT / "src" / "r1_iqs7211e.c", "r1_iqs7211e_ati_audit_begin")
     require(PROJECT / "src" / "r1_iqs7211e.c", "r1_iqs7211e_ati_audit_summarize")
+    for marker in (
+        "r1_iqs7211e_factory_marker_1",
+        "r1_iqs7211e_factory_marker_2",
+        "r1_iqs7211e_factory_marker_3",
+        "r1_iqs7211e_factory_marker_4",
+        "r1_iqs7211e_factory_marker_5",
+        "r1_iqs7211e_factory_marker_6",
+    ):
+        require(PROJECT / "src" / "r1_iqs7211e.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
+    require(PROJECT / "include" / "openr1" / "r1_iqs7211e.h",
+            "r1_iqs7211e_factory_record")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_iqs7211e_factory_markers")
+    require(PROJECT / "reconstructed" / "yhm2710" / "yhm2710.h",
+            "yhm2710_read_register_9")
+    require(PROJECT / "reconstructed" / "yhm2710" / "yhm2710.c",
+            "yhm2710_clear_system_track")
+    require(PROJECT / "reconstructed" / "yhm2710" / "yhm2710.h",
+            "yhm2710_set_charging_event")
+    require(PROJECT / "reconstructed" / "yhm2710" / "yhm2710.c",
+            "yhm2710_set_charging_event")
+    require(PROJECT / "tests" / "test_reconstructed_yhm2710.c",
+            "yhm2710_read_register_9")
+    require(PROJECT / "tests" / "test_reconstructed_yhm2710.c",
+            "yhm2710_clear_system_track")
+    require(PROJECT / "tests" / "test_reconstructed_yhm2710.c",
+            "yhm2710_set_charging_event")
     require(PROJECT / "src" / "r1_st25dvxxkc.c",
             "r1_st25dvxxkc_mailbox_length_allowed")
     require(PROJECT / "src" / "r1_st25dvxxkc.c",
             "R1_ST25DVXXKC_SESSION_CLOSE_MSB")
     require(PROJECT / "src" / "r1_st25dvxxkc.c",
             "r1_st25dvxxkc_plan_dock_frame")
+    for marker in (
+        "r1_st25dvxxkc_bus_tick_get",
+        "r1_st25dvxxkc_bus_initialize",
+        "r1_st25dvxxkc_bus_deinitialize",
+        "r1_st25dvxxkc_bus_is_ready",
+        "r1_st25dvxxkc_bus_read",
+        "r1_st25dvxxkc_bus_write",
+    ):
+        require(PROJECT / "src" / "r1_st25dvxxkc.c", marker)
+    for marker in (
+        "r1_st25dvxxkc_dock_hardware_clear",
+        "r1_st25dvxxkc_dock_hardware_get",
+        "r1_st25dvxxkc_dock_version_clear",
+        "r1_st25dvxxkc_dock_version_get",
+        "r1_st25dvxxkc_charge_temperature_set",
+        "r1_st25dvxxkc_dock_advertising_set",
+    ):
+        require(PROJECT / "src" / "r1_st25dvxxkc.c", marker)
+        require(PROJECT / "tests" / "test_openr1.c", marker)
     require(PROJECT / "include" / "openr1" / "r1_st25dvxxkc.h",
             "R1_ST25DVXXKC_DOCK_CONTROL_PACKET_SIZE")
     require(PROJECT / "platform" / "nrf52840" / "sdk" / "openr1_nfc.c",
@@ -3616,6 +4498,17 @@ def main() -> None:
             "test_st25dvxxkc_provider_boundary")
     require(PROJECT / "tests" / "test_openr1.c",
             "test_st25dvxxkc_dock_policy")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_st25dvxxkc_bus_io_table")
+    for marker in (
+        "generic_device_registry_bus_read_command_ae",
+        "generic_device_registry_bus_control_dispatch",
+        "generic_device_registry_bus_transfer_dispatch",
+    ):
+        require(PROJECT / "reconstructed" / "generic_device_registry" /
+                "generic_device_registry.c", marker)
+        require(PROJECT / "tests" /
+                "test_reconstructed_generic_device_registry.c", marker)
     require(PROJECT / "src" / "r1_peer_target.c",
             "r1_peer_is_target_glasses")
     require(PROJECT / "src" / "r1_peer_target.c",
@@ -3641,8 +4534,12 @@ def main() -> None:
             "r1_pmic_plan_charge_event")
     require(PROJECT / "src" / "r1_battery.c",
             "r1_pmic_plan_charged_notification")
+    require(PROJECT / "src" / "r1_battery.c",
+            "r1_pmic_charge_i2c_callback_plan")
     require(PROJECT / "include" / "openr1" / "r1_battery.h",
             "R1_PMIC_THERMAL_LOW_TARGET_WORD")
+    require(PROJECT / "include" / "openr1" / "r1_battery.h",
+            "R1_PMIC_CHARGE_I2C_THREAD_FLAG")
     require(PROJECT / "tests" / "test_openr1.c",
             "test_pmic_charge_event_policy")
     require(PROJECT / "tests" / "test_openr1.c",
@@ -3689,9 +4586,45 @@ def main() -> None:
             "r1_factory_input_task_plan_flags")
     require(PROJECT / "tests" / "test_openr1.c",
             "test_factory_input_task_plans")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_factory_input_record_plan_dispatch")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_factory_input_record_plan")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_sensor_task_plan_startup")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_sensor_task_plan_flags")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_sensor_task_plans")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_system_task_plan_startup")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_system_task_plan_flags")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_system_task_plans")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_ble_task_plan_startup")
+    require(PROJECT / "src" / "r1_event.c",
+            "r1_ble_task_plan_flags")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_ble_task_plans")
     require(PROJECT / "tests" / "test_openr1.c", "test_export_planner")
     require(PROJECT / "src" / "r1_runtime.c",
             "r1_ble_thread_message_encode")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_ble_tx_queue_dispatch_type0")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_ble_tx_queue_dispatch_type1")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_ble_tx_queue_dispatch_type2")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_runtime_plan_buttonless_dfu_event")
+    require(PROJECT / "include" / "openr1" / "r1_runtime.h",
+            "R1_BUTTONLESS_DFU_RESPONSE_SEND_ERROR")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_buttonless_dfu_event_policy")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "test_ble_tx_queue_dispatch_veneers")
     require(PROJECT / "src" / "r1_runtime.c",
             "r1_glasses_status_plan_command")
     require(PROJECT / "src" / "r1_state.c",
@@ -3756,6 +4689,10 @@ def main() -> None:
             "test_next_frontier_224_230_policies")
     require(PROJECT / "src" / "r1_storage.c",
             "r1_sleep_sync_plan_acknowledgement")
+    require(PROJECT / "src" / "r1_storage.c",
+            "r1_sleep_sync_plan_report_callback")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "r1_sleep_sync_plan_report_callback")
     require(PROJECT / "src" / "r1_state.c",
             "r1_system_control_command_37_plan")
     require(PROJECT / "src" / "r1_runtime.c",
@@ -3891,7 +4828,21 @@ def main() -> None:
     require(DOCS / "MOTION-PROVIDER-CORRELATION.md", "BMA456 SensorAPI v2.29.0")
     require(DOCS / "MOTION-PROVIDER-CORRELATION.md", "LIS2DW12")
     require(DOCS / "ST25DVXXKC-CORRELATION.md", "ST25DVxxKC_ReadReg")
+    require(DOCS / "ST25DVXXKC-CORRELATION.md",
+            "ST25DVxxKC_PresentI2CPassword")
+    require(DOCS / "ST25DVXXKC-CORRELATION.md",
+            "584479be5f22628424ca82235f167069063d134e057e37ebf3737b099156886e")
+    require(DOCS / "ST25DVXXKC-CORRELATION.md",
+            "9da42db6e851a04174232c5df737888b813f01b4e341fc558e9c08c8c59f8c6b")
     require(DOCS / "ST25DVXXKC-CORRELATION.md", "20-byte")
+    require(DOCS / "ST25DVXXKC-CORRELATION.md",
+            "0x00044C58..<0x00044C5E")
+    require(DOCS / "ST25DVXXKC-CORRELATION.md",
+            "ST25DVxxKC_IO_t")
+    require(DOCS / "GENERIC-DEVICE-REGISTRY-REDUCTION-CORRELATION.md",
+            "0x00044BE0..<0x00044BEC")
+    require(DOCS / "GENERIC-DEVICE-REGISTRY-REDUCTION-CORRELATION.md",
+            "0x00050534..<0x00050554")
     require(DOCS / "TINY-AES-CORRELATION.md", "tiny-AES-c v1.0.0")
     crypto = PROJECT / "src" / "r1_crypto.c"
     for marker in (
@@ -4022,6 +4973,11 @@ def main() -> None:
         "--check",
     ], check=True)
     subprocess.run([
+        "python3", str(ROOT / "tools" /
+                       "audit_r1_ghidra_explicit_entries.py"),
+        "--check",
+    ], check=True)
+    subprocess.run([
         "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_wear_fusion_closure.py"),
     ], check=True, stdout=subprocess.DEVNULL)
@@ -4032,6 +4988,10 @@ def main() -> None:
     subprocess.run([
         "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_sleep_sync_packet.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_sleep_sync.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
         "python3", str(ROOT / "tools" / "evidence" /
@@ -4064,6 +5024,50 @@ def main() -> None:
     subprocess.run([
         "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_bae8_event_router.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_bae8_connection_event.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_gap_event_policy.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_nfc_charge_task_policy.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_task_topology_startup.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_hr_timing_result.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_spo2_result_callbacks.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_factory_acc_battery_diagnostics.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_factory_pmic_handlers.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_yhm_transport_entries.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_remaining_explicit_entries.py"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_buttonless_dfu_event_policy.py"),
     ], check=True, stdout=subprocess.DEVNULL)
     subprocess.run([
         "python3", str(ROOT / "tools" / "evidence" /
@@ -4205,11 +5209,89 @@ def main() -> None:
     )
     if application_provider_counts["unclassified"] != 0:
         raise AssertionError("application unclassified-function count changed")
-    if application_provider_counts["nordic_nrf5_sdk_17_1_0"] != 547:
+    if application_provider_counts["nordic_nrf5_sdk_17_1_0"] != 564:
         raise AssertionError("application Nordic provider count changed")
-    if application_provider_counts["r1_product_specific"] != 690:
+    if application_provider_counts["r1_product_specific"] != 762:
         raise AssertionError("R1 product-function count changed")
-    if application_provider_counts["unknown_generic_device_registry_candidate"] != 40:
+
+    explicit_entry_census = json.loads(
+        (ROOT / "docs" / "reference" /
+         "GHIDRA-EXPLICIT-ENTRY-CENSUS.json").read_text()
+    )
+    if explicit_entry_census["schema_version"] != 2 or \
+            explicit_entry_census["source_count"] != 28 or \
+            explicit_entry_census["entry_reference_count"] != 831 or \
+            explicit_entry_census["unique_entry_count"] != 666 or \
+            explicit_entry_census["status_counts"] != {
+                "adjudicated_non_function_data": 7,
+                "adjudicated_non_function_instruction_interior": 1,
+                "adjudicated_non_function_secondary_segment": 1,
+                "analysis_only_no_ownership_inventory": 13,
+                "contained_in_contiguous_ledger_extent": 5,
+                "exact_ledger_entry": 639,
+            } or explicit_entry_census["image_counts"] != {
+                "application": {
+                    "adjudicated_non_function_data": 7,
+                    "adjudicated_non_function_instruction_interior": 1,
+                    "adjudicated_non_function_secondary_segment": 1,
+                    "contained_in_contiguous_ledger_extent": 5,
+                    "exact_ledger_entry": 598,
+                    "unique_entry_count": 612,
+                },
+                "application_2.2.7.0005": {
+                    "analysis_only_no_ownership_inventory": 13,
+                    "unique_entry_count": 13,
+                },
+                "bootloader": {
+                    "exact_ledger_entry": 41,
+                    "unique_entry_count": 41,
+                },
+            }:
+        raise AssertionError("Ghidra explicit-entry census closure changed")
+    if explicit_entry_census["image_inventory"] != {
+        "application": {
+            "revision": "2.2.6.0009",
+            "ownership_inventory_available": True,
+        },
+        "application_2.2.7.0005": {
+            "revision": "2.2.7.0005",
+            "ownership_inventory_available": False,
+        },
+        "bootloader": {
+            "revision": "retail_bootloader_from_2.2.6_evidence_set",
+            "ownership_inventory_available": True,
+        },
+    }:
+        raise AssertionError("Ghidra explicit-entry image versions changed")
+    adjudicated_non_functions = {
+        item["entry"]: item["classification_basis"]
+        for item in explicit_entry_census["entries"]
+        if item["status"] == "adjudicated_non_function_data"
+    }
+    if set(adjudicated_non_functions) != {
+            "0x00042D26", "0x00045078", "0x00045C78", "0x00046908",
+            "0x00046920", "0x0004EFF8",
+            "0x00052090"} or not all(adjudicated_non_functions.values()):
+        raise AssertionError("Ghidra non-function adjudications changed")
+    adjudicated_instruction_interiors = {
+        item["entry"]: item["classification_basis"]
+        for item in explicit_entry_census["entries"]
+        if item["status"] ==
+            "adjudicated_non_function_instruction_interior"
+    }
+    if set(adjudicated_instruction_interiors) != {"0x00042974"} or \
+            not all(adjudicated_instruction_interiors.values()):
+        raise AssertionError("Ghidra instruction-interior adjudications changed")
+    adjudicated_secondary_segments = {
+        item["entry"]: item["classification_basis"]
+        for item in explicit_entry_census["entries"]
+        if item["status"] ==
+            "adjudicated_non_function_secondary_segment"
+    }
+    if set(adjudicated_secondary_segments) != {"0x00047F10"} or \
+            not all(adjudicated_secondary_segments.values()):
+        raise AssertionError("Ghidra secondary-segment adjudications changed")
+    if application_provider_counts["unknown_generic_device_registry_candidate"] != 43:
         raise AssertionError("unknown generic device-registry boundary count changed")
     if application_provider_counts["unknown_time_calendar_provider_candidate"] != 16:
         raise AssertionError("unknown time/calendar provider boundary count changed")
@@ -4245,10 +5327,23 @@ def main() -> None:
         raise AssertionError("R1 health-storage adapter count changed")
     if application_provider_counts["r1_nordic_cmsis_provider_adapter"] != 12:
         raise AssertionError("R1 Nordic/CMSIS synchronization adapter count changed")
+    if application_provider_counts["r1_nordic_sdk_provider_adapter"] != 11:
+        raise AssertionError("R1 Nordic SDK adapter count changed")
     if application_provider_counts["r1_device_registry_configuration_adapter"] != 9:
         raise AssertionError("R1 device-registry configuration adapter count changed")
-    if application_provider_counts["yhmicros_yhm2710_candidate"] != 36:
+    if application_provider_counts["yhmicros_yhm2710_candidate"] != 44:
         raise AssertionError("YHM2710 provider-boundary count changed")
+    yhm2710_rows = [
+        row for row in ownership_rows
+        if row["image"] == "application" and
+        row["provider_family"] == "yhmicros_yhm2710_candidate"
+    ]
+    yhm2710_entry_digest = hashlib.sha256("".join(
+        f"{row['entry']}\n" for row in yhm2710_rows
+    ).encode()).hexdigest()
+    if yhm2710_entry_digest != \
+            "d5f4aa426feb386ee9df029c32d8dc5324e0b8e15a3c2b24d718f2c4e7cebfd4":
+        raise AssertionError("YHM2710 exact function-entry set changed")
     if application_provider_counts["r1_nordic_wdt_provider_adapter"] != 2:
         raise AssertionError("R1 Nordic-WDT adapter count changed")
     if application_provider_counts["r1_provider_configuration_glue"] != 10:
@@ -4259,11 +5354,11 @@ def main() -> None:
         raise AssertionError("Goodix GH3X2X public-democode attribution count changed")
     if application_provider_counts["r1_goodix_provider_adapter"] != 24:
         raise AssertionError("R1 Goodix adapter count changed")
-    if application_provider_counts["r1_iqs7211e_provider_adapter"] != 12:
+    if application_provider_counts["r1_iqs7211e_provider_adapter"] != 18:
         raise AssertionError("R1 IQS7211E adapter count changed")
-    if application_provider_counts["stmicro_st25dvxxkc_bsd_compatible"] != 27:
+    if application_provider_counts["stmicro_st25dvxxkc_bsd_compatible"] != 29:
         raise AssertionError("ST25DVxxKC provider-boundary count changed")
-    if application_provider_counts["r1_st25dvxxkc_provider_adapter"] != 11:
+    if application_provider_counts["r1_st25dvxxkc_provider_adapter"] != 23:
         raise AssertionError("R1 ST25DVxxKC adapter count changed")
     if application_provider_counts["r1_i2c5_resource_adapter"] != 5:
         raise AssertionError("R1 i2c_5 resource-adapter count changed")
@@ -4273,8 +5368,33 @@ def main() -> None:
         raise AssertionError("R1 QMA6100 adapter count changed")
     if application_provider_counts["r1_internal_flash_provider_adapter"] != 11:
         raise AssertionError("R1 internal-flash adapter count changed")
-    if application_provider_counts["r1_analog_provider_adapter"] != 4:
+    if application_provider_counts["r1_analog_provider_adapter"] != 5:
         raise AssertionError("R1 analog adapter count changed")
+    if application_provider_counts["gxcas_gxt310_candidate"] != 8:
+        raise AssertionError("GXT310 provider-boundary count changed")
+    if application_provider_counts["r1_st_lis2dw12_provider_adapter"] != 7:
+        raise AssertionError("R1 LIS2DW12 adapter count changed")
+    changed_provider_entry_digests = {
+        "r1_analog_provider_adapter":
+            "eef5a36973ce98129d6371633c39383fb52a21c9e50fbbc98ee11669d9c929e4",
+        "r1_nordic_sdk_provider_adapter":
+            "f10c2f5df9584255ca7443c476aff63cdb6f977b0318e815aa6c0064d7642062",
+        "gxcas_gxt310_candidate":
+            "ff5782af4af86d058521fbe83e4f1d0ae941e11e11fd3e323ae6cf2cc7ef50d3",
+        "r1_st_lis2dw12_provider_adapter":
+            "6cda3450dfe3a39e98b22c9b70f3c3de3e2ba0fcb17f59a6640ebc9798c81d97",
+    }
+    for provider, expected_digest in changed_provider_entry_digests.items():
+        provider_rows = [
+            row for row in ownership_rows
+            if row["image"] == "application" and
+            row["provider_family"] == provider
+        ]
+        digest = hashlib.sha256("".join(
+            f"{row['entry']}\n" for row in provider_rows
+        ).encode()).hexdigest()
+        if digest != expected_digest:
+            raise AssertionError(f"{provider} exact function-entry set changed")
     gomore_rows = [
         row for row in ownership_rows
         if row["image"] == "application" and
@@ -4338,8 +5458,9 @@ def main() -> None:
             "f75970812258a0fd17f204d80c682442669cb066aa46b15188112f2a55c36d7c":
         raise AssertionError("R1 Goodix exact adapter-entry set changed")
     wear_entries = {
-        "0x0003cd80", "0x0003ce44", "0x0003ceec", "0x0003d06c",
-        "0x0003d0c0", "0x0003d268", "0x0003d45c",
+        "0x0003cd80", "0x0003ce1c", "0x0003ce44", "0x0003ceec",
+        "0x0003d06c", "0x0003d0c0", "0x0003d0fc", "0x0003d150",
+        "0x0003d1b8", "0x0003d268", "0x0003d45c",
     }
     wear_rows = [
         ownership_by_key[("application", entry)] for entry in wear_entries
@@ -4352,7 +5473,7 @@ def main() -> None:
         f"{entry}\n" for entry in sorted(wear_entries)
     ).encode()).hexdigest()
     if wear_entry_digest != \
-            "6242a1ca265b4447dce86b3ef9d4779684668782827dbf92214b2f4f1d5c1a97":
+            "ac120c7b025a541b5c7272d757a3a2ec614a04b1cd3ca19a78d14bb78836e2a9":
         raise AssertionError("R1 wear-fusion exact entry set changed")
     connection_parameter_entries = {
         "0x0004cb34", "0x0004cba4", "0x00051aa0", "0x00072b80",
@@ -4385,6 +5506,33 @@ def main() -> None:
     if sleep_sync_packet_row["provider_family"] != "r1_product_specific" or \
             sleep_sync_packet_row["source_disposition"] != "clean_room_behavior_only":
         raise AssertionError("R1 sleep-sync packet ownership gate changed")
+    sleep_sync_report_summary = summarize_r1_sleep_sync(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin",
+        0x00027000, 0x000C4610, 0x200064A8, 0x0000195C,
+    )
+    report_function = R1_SLEEP_SYNC_REPORT_FUNCTIONS[0]
+    report_entry = int(report_function["entry"])
+    report_row = ownership_by_key[("application", f"0x{report_entry:08x}")]
+    report_image = (
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    ).read_bytes()
+    report_body = report_image[
+        report_entry - 0x00027000:
+        int(report_function["end_exclusive"]) - 0x00027000
+    ]
+    if sleep_sync_report_summary["report_callback"]["size"] != 118 or \
+            sleep_sync_report_summary["report_callback"][
+                "registered_thumb_value"
+            ] != "0x0008f955" or \
+            report_row["inventory_source"] != "manual_provenance_supplement" or \
+            report_row["provider_family"] != "r1_product_specific" or \
+            report_row["source_disposition"] != "clean_room_behavior_only" or \
+            report_row["upstream_symbol"] != \
+            "r1_sleep_sync_plan_report_callback" or \
+            int(report_row["size"]) != 118 or \
+            hashlib.sha256(report_body).hexdigest() != \
+            report_function["sha256"]:
+        raise AssertionError("R1 sleep-sync report callback closure changed")
     peer_target_entries = {
         "0x0003d724", "0x0004cae4", "0x0004cccc",
     }
@@ -4490,7 +5638,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in analog_rows
     ).encode()).hexdigest()
     if analog_entry_digest != \
-            "ab6f7f1bf56bfced376fd6a4ab37c35c6b36c60404f9991b92a3b4b42611ad83":
+            "eef5a36973ce98129d6371633c39383fb52a21c9e50fbbc98ee11669d9c929e4":
         raise AssertionError("R1 analog exact adapter-entry set changed")
     iqs7211e_adapter_rows = [
         row for row in ownership_rows
@@ -4501,7 +5649,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in iqs7211e_adapter_rows
     ).encode()).hexdigest()
     if iqs7211e_adapter_entry_digest != \
-            "81b2e89b28cbd6ca0b88a3db4f60c7f2ec01ee75beb2125495c1e0f5d1ffd266":
+            "808c06b619bb559e35810cdfb5ca3a32ec476a832e59be3c4586ed2319b43312":
         raise AssertionError("R1 IQS7211E exact adapter-entry set changed")
     st25_rows = [
         row for row in ownership_rows
@@ -4512,7 +5660,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in st25_rows
     ).encode()).hexdigest()
     if st25_entry_digest != \
-            "9e0c33cc69749d60cd5095d0b75dbf4a05ea28856122be6271e0f5a57be83898":
+            "31874b906440e59d117327fb7aaf75240dc4a2a5570b0aef3577c4cf4b3b3553":
         raise AssertionError("ST25DVxxKC exact function-entry set changed")
     st25_adapter_rows = [
         row for row in ownership_rows
@@ -4523,7 +5671,7 @@ def main() -> None:
         f"{row['entry']}\n" for row in st25_adapter_rows
     ).encode()).hexdigest()
     if st25_adapter_entry_digest != \
-            "bc429e369fe2677c6c0b0bf0a730ccb5f8fd1d77f1ec0b920e93f6d7c3d11098":
+            "b9e44382c0b4cec3fcfec53173b0a45b63019514ed42e5cdb99251c6a81536de":
         raise AssertionError("R1 ST25DVxxKC exact adapter-entry set changed")
 
     application_correlation = (
@@ -4582,6 +5730,22 @@ def main() -> None:
             connection_callback).hexdigest() != \
             "28d8568d7f96013e7c9255881ce0b659f1ed3071d7bd35492f99de6ad18027ab":
         raise AssertionError("R1 delayed connection callback body changed")
+    ble_task = recovered[
+        0x00091F54 - recovered_base:0x0009208C - recovered_base
+    ]
+    if len(ble_task) != 312 or hashlib.sha256(ble_task).hexdigest() != \
+            "01659a473563e3f5d469f43efb036354a8f9fac857d2b9399b135d244c6051e6":
+        raise AssertionError("R1 BLE task body changed")
+    ble_task_row = ownership_by_key[("application", "0x00091f54")]
+    if ble_task_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            ble_task_row["provider_family"] != "r1_product_specific" or \
+            ble_task_row["source_disposition"] != \
+            "clean_room_behavior_only" or \
+            ble_task_row["upstream_symbol"] != \
+            "r1_ble_task_plan_startup" or \
+            ble_task_row["size"] != "312":
+        raise AssertionError("R1 BLE task ownership changed")
     channel1_task = recovered[
         0x000920EC - recovered_base:0x0009216C - recovered_base
     ]
@@ -4649,22 +5813,56 @@ def main() -> None:
             "r1_factory_input_task_plan_startup" or \
             factory_input_task_row["size"] != "128":
         raise AssertionError("R1 factory input task ownership changed")
-    storage_task = recovered[
+    system_task = recovered[
+        0x000924F4 - recovered_base:0x00092570 - recovered_base
+    ]
+    if len(system_task) != 124 or hashlib.sha256(
+            system_task).hexdigest() != \
+            "0ebdfed9d4ba119789c4f76ffcb234c191c9fdd211bc668ccc5654bb3e7834c3":
+        raise AssertionError("R1 system task body changed")
+    system_task_row = ownership_by_key[("application", "0x000924f4")]
+    if system_task_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            system_task_row["provider_family"] != "r1_product_specific" or \
+            system_task_row["source_disposition"] != \
+            "clean_room_behavior_only" or \
+            system_task_row["upstream_symbol"] != \
+            "r1_system_task_plan_startup" or \
+            system_task_row["size"] != "124":
+        raise AssertionError("R1 system task ownership changed")
+    sensor_task = recovered[
+        0x00092580 - recovered_base:0x00092662 - recovered_base
+    ]
+    if len(sensor_task) != 226 or hashlib.sha256(
+            sensor_task).hexdigest() != \
+            "0ac741e032d68ca7006c9a30e3b230852ab11e0fd4ca5b51ffe28c95051c1ef3":
+        raise AssertionError("R1 sensor task body changed")
+    sensor_task_row = ownership_by_key[("application", "0x00092580")]
+    if sensor_task_row["inventory_source"] != \
+            "manual_provenance_supplement" or \
+            sensor_task_row["provider_family"] != "r1_product_specific" or \
+            sensor_task_row["source_disposition"] != \
+            "clean_room_behavior_only" or \
+            sensor_task_row["upstream_symbol"] != \
+            "r1_sensor_task_plan_startup" or \
+            sensor_task_row["size"] != "226":
+        raise AssertionError("R1 sensor task ownership changed")
+    service_task = recovered[
         0x000926DC - recovered_base:0x000927BA - recovered_base
     ]
-    if len(storage_task) != 222 or hashlib.sha256(storage_task).hexdigest() != \
+    if len(service_task) != 222 or hashlib.sha256(service_task).hexdigest() != \
             "b13c5bc01f09f51f5b4dc9a79566d9b5dcaff74cdf6e8447b12e3d8affa8a179":
-        raise AssertionError("R1 storage task body changed")
-    storage_task_row = ownership_by_key[("application", "0x000926dc")]
-    if storage_task_row["inventory_source"] != \
+        raise AssertionError("R1 service task body changed")
+    service_task_row = ownership_by_key[("application", "0x000926dc")]
+    if service_task_row["inventory_source"] != \
             "manual_provenance_supplement" or \
-            storage_task_row["provider_family"] != "r1_product_specific" or \
-            storage_task_row["source_disposition"] != \
+            service_task_row["provider_family"] != "r1_product_specific" or \
+            service_task_row["source_disposition"] != \
             "clean_room_behavior_only" or \
-            storage_task_row["upstream_symbol"] != \
-            "r1_storage_task_plan_startup" or \
-            storage_task_row["size"] != "222":
-        raise AssertionError("R1 storage task ownership changed")
+            service_task_row["upstream_symbol"] != \
+            "r1_service_task_plan_startup" or \
+            service_task_row["size"] != "222":
+        raise AssertionError("R1 service task ownership changed")
     temperature_one_shot_extents = {
         (0x00042514, 0x0004256A):
             "39c338cf4d422187d4c608a8b7fe3e6ac2609d4be0d0054147ab343d3e5e2014",
@@ -5614,7 +6812,7 @@ def main() -> None:
             0x00078DEA, 0x00078E1C, 0x00078E82, 0x00078EB4, 0x00078EE6,
             0x00078F18, 0x00078F4A, 0x00078F7C, 0x00078FB0,
         ),
-        "nrf_gpio_cfg_default": (0x0007903E, 0x00079050),
+        "nrf_gpio_cfg_default": (0x0007902C, 0x0007903E, 0x00079050),
         "nrf_gpio_cfg_input": (
             0x00079062, 0x00079074, 0x00079086, 0x00079098, 0x000790AA,
         ),
@@ -5623,7 +6821,7 @@ def main() -> None:
         ),
         "nrf_gpio_cfg_sense_set": (0x00079120,),
         "nrf_gpio_latches_read_and_clear": (0x00079150,),
-        "nrf_gpio_pin_clear": (0x0007920C, 0x00079220),
+        "nrf_gpio_pin_clear": (0x000791E4, 0x0007920C, 0x00079220),
         "nrf_gpio_pin_port_decode": (
             0x00079234, 0x00079250, 0x00079288, 0x000792A4, 0x000792C0,
             0x000792DC, 0x000792F8, 0x00079314, 0x00079330, 0x0007934C,
@@ -5641,7 +6839,7 @@ def main() -> None:
     gpio_entries = {
         entry for entries in gpio_groups.values() for entry in entries
     }
-    if len(gpio_entries) != 52:
+    if len(gpio_entries) != 54:
         raise AssertionError("Nordic GPIO correlation inventory changed")
     for symbol, entries in gpio_groups.items():
         for entry in entries:
@@ -5722,6 +6920,8 @@ def main() -> None:
                      "08b5002242504058009008bd"),
         0x00079E00: ("nrf_saadc_buffer_init", "nrf_saadc.h",
                      "024a1060101d01607047"),
+        0x00079E10: ("nrf_saadc_channel_input_set", "nrf_saadc.h",
+                     "030103481844c0f81425c0f810157047"),
         0x00079E24: ("nrf_saadc_event_check", "nrf_saadc.h",
                      "02494058002800d001207047"),
         0x00079E34: ("nrf_saadc_event_clear", "nrf_saadc.h",
@@ -5825,6 +7025,22 @@ def main() -> None:
             "nrf_power_event_clear", "modules/nrfx/hal/nrf_power.h",
             "08b500f18040002101600068009008bd",
         ),
+        0x0007A6DC: (
+            "nrfx_coredep_delay_us", "modules/nrfx/soc/nrfx_coredep.h",
+            "002802d00149800108477047",
+        ),
+        0x0007A6EC: (
+            "nrfx_coredep_delay_us", "modules/nrfx/soc/nrfx_coredep.h",
+            "002802d00149800108477047",
+        ),
+        0x0007A6FC: (
+            "nrfx_coredep_delay_us", "modules/nrfx/soc/nrfx_coredep.h",
+            "002802d00149800108477047",
+        ),
+        0x0007A70C: (
+            "nrfx_coredep_delay_us", "modules/nrfx/soc/nrfx_coredep.h",
+            "002802d00149800108477047",
+        ),
         0x0007A71C: (
             "nrfx_coredep_delay_us", "modules/nrfx/soc/nrfx_coredep.h",
             "002802d00149800108477047",
@@ -5856,6 +7072,8 @@ def main() -> None:
         0x00099340, 0x00099CB0, 0x00099CC0, 0x00099CD0, 0x00099CE0,
         0x00099CF0, 0x00099D00, 0x00099D10, 0x0009A5F0, 0x0009A610,
         0x0009A670, 0x0009A6A0, 0x0009A710, 0x0009BB10, 0x0009C9E0,
+        0x0009A640, 0x0009A650, 0x0009A660, 0x0009C790, 0x0009C7A0,
+        0x0009D3D0,
     )
     for entry in delay_machine_code_entries:
         delay_twi_expected[entry] = (
@@ -6383,7 +7601,7 @@ def main() -> None:
             )
     gatt_cache_summary = summarize_nordic_gatt_cache_closure(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin")
-    if gatt_cache_summary["function_count"] != 10 or gatt_cache_summary["function_bytes"] != 784:
+    if gatt_cache_summary["function_count"] != 13 or gatt_cache_summary["function_bytes"] != 1340:
         raise AssertionError("Nordic GATT-cache closure census changed")
     for function in NORDIC_GATT_CACHE_CLOSURE_FUNCTIONS:
         entry = int(function["entry"])
@@ -6400,8 +7618,8 @@ def main() -> None:
         raise AssertionError("FreeRTOS version-discriminator census changed")
     resolved_thunk_summary = summarize_resolved_thunks(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin")
-    if resolved_thunk_summary["function_count"] != 8 or \
-            resolved_thunk_summary["function_bytes"] != 32 or \
+    if resolved_thunk_summary["function_count"] != 9 or \
+            resolved_thunk_summary["function_bytes"] != 36 or \
             resolved_thunk_summary["local_reimplementation_required"] is not False:
         raise AssertionError("resolved branch-thunk census changed")
     for function in RESOLVED_THUNKS:
@@ -6413,6 +7631,8 @@ def main() -> None:
             expected_thunk_family = "goodix_gh3x2x_democode_v1_6_drvlib_v4_3_0_0"
         if row["provider_family"] != expected_thunk_family or \
                 row["confidence"] != "high" or \
+                row["inventory_source"] != function.get(
+                    "inventory", "ghidra_functions_csv") or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
             raise AssertionError(f"resolved branch thunk changed: 0x{entry:08x}")
     advertising_summary = summarize_nordic_advertising_closure(
@@ -6456,11 +7676,11 @@ def main() -> None:
             )
     buttonless_dfu_summary = summarize_nordic_buttonless_dfu_closure(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin")
-    if buttonless_dfu_summary["function_count"] != 10 or \
-            buttonless_dfu_summary["function_bytes"] != 958 or \
+    if buttonless_dfu_summary["function_count"] != 11 or \
+            buttonless_dfu_summary["function_bytes"] != 998 or \
             buttonless_dfu_summary["ghidra_function_count"] != 9 or \
             buttonless_dfu_summary["ghidra_function_bytes"] != 830 or \
-            buttonless_dfu_summary["manual_supplement_count"] != 1 or \
+            buttonless_dfu_summary["manual_supplement_count"] != 2 or \
             buttonless_dfu_summary["provider"]["variant"] != \
             "NRF_DFU_BLE_BUTTONLESS_SUPPORTS_BONDS=0" or \
             buttonless_dfu_summary["provider"][
@@ -6669,12 +7889,15 @@ def main() -> None:
     nv_recovery_summary = summarize_r1_nv_recovery_closure(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
     )
-    if nv_recovery_summary["function_count"] != 4 or \
-            nv_recovery_summary["function_bytes"] != 1740 or \
+    if nv_recovery_summary["function_count"] != 6 or \
+            nv_recovery_summary["function_bytes"] != 1954 or \
             nv_recovery_summary["ghidra_function_count"] != 2 or \
             nv_recovery_summary["ghidra_function_bytes"] != 1458 or \
-            nv_recovery_summary["manual_supplement_count"] != 2 or \
-            nv_recovery_summary["manual_supplement_bytes"] != 282 or \
+            nv_recovery_summary["manual_supplement_count"] != 4 or \
+            nv_recovery_summary["manual_supplement_bytes"] != 496 or \
+            nv_recovery_summary["protocol"]["system_subcommand"] != "0x11" or \
+            nv_recovery_summary["protocol"]["handler_registration"] != \
+            "1100000051410800" or \
             nv_recovery_summary["protocol"]["command"] != 2 or \
             nv_recovery_summary["protocol"]["body_bytes"] != 116 or \
             nv_recovery_summary["protocol"]["checksum"] != "CRC-16/MODBUS" or \
@@ -6688,6 +7911,13 @@ def main() -> None:
             nv_recovery_summary["security"]["identity_logging_allowed"] \
             is not False:
         raise AssertionError("R1 NV-recovery closure metadata changed")
+    for path in (
+        PROJECT / "include" / "openr1" / "r1_nv_recovery.h",
+        PROJECT / "src" / "r1_nv_recovery.c",
+        PROJECT / "tests" / "test_openr1.c",
+    ):
+        require(path, "r1_nv_recovery_command_handler_plan_decode")
+        require(path, "r1_nv_recovery_outbound_response_plan_build")
     for function in R1_NV_RECOVERY_FUNCTIONS:
         entry = int(function["entry"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
@@ -6715,8 +7945,10 @@ def main() -> None:
     nv_compiled_restore_summary = summarize_r1_nv_compiled_restore(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
     )
-    if nv_compiled_restore_summary["function_count"] != 1 or \
-            nv_compiled_restore_summary["function_bytes"] != 494 or \
+    if nv_compiled_restore_summary["function_count"] != 2 or \
+            nv_compiled_restore_summary["function_bytes"] != 498 or \
+            nv_compiled_restore_summary["ghidra_function_count"] != 1 or \
+            nv_compiled_restore_summary["manual_supplement_count"] != 1 or \
             nv_compiled_restore_summary["event_route"]["internal_storage_event"] != \
             "0x2005" or \
             nv_compiled_restore_summary["event_route"]["ble_command"] is not False or \
@@ -6736,11 +7968,13 @@ def main() -> None:
         end = int(function["end_exclusive"])
         row = ownership_by_key[("application", f"0x{entry:08x}")]
         body = recovered[entry - recovered_base:end - recovered_base]
+        expected_inventory = function.get("inventory", "ghidra_functions_csv")
         if row["provider_family"] != "r1_product_specific" or \
                 row["source_disposition"] != \
                 "clean_room_behavior_only_security_preserving" or \
                 row["upstream_symbol"] != function["symbol"] or \
                 row["confidence"] != "high" or \
+                row["inventory_source"] != expected_inventory or \
                 int(row["size"]) != function["size"] or \
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
@@ -6794,12 +8028,14 @@ def main() -> None:
     health_daily_test_summary = summarize_r1_health_daily_test(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
     )
-    if health_daily_test_summary["function_count"] != 1 or \
-            health_daily_test_summary["function_bytes"] != 1344 or \
-            health_daily_test_summary["direct_callers"] != [] or \
+    if health_daily_test_summary["function_count"] != 2 or \
+            health_daily_test_summary["function_bytes"] != 1358 or \
+            health_daily_test_summary["direct_callers"] != ["0x00042860"] or \
             health_daily_test_summary["behavior"]["maximum_hours"] != 24 or \
             health_daily_test_summary["behavior"][
-                "production_reachability_proven"
+                "internal_event_reachability_proven"
+            ] is not True or health_daily_test_summary["behavior"][
+                "openr1_live_execution_available"
             ] is not False:
         raise AssertionError("R1 health-daily test fixture metadata changed")
     for function in R1_HEALTH_DAILY_TEST_FUNCTIONS:
@@ -6815,6 +8051,18 @@ def main() -> None:
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
             raise AssertionError("R1 health-daily test fixture changed")
+    daily_test_gate_row = ownership_by_key[("application", "0x00042860")]
+    daily_test_gate_body = recovered_function(0x00042860)
+    if daily_test_gate_row["provider_family"] != "r1_product_specific" or \
+            daily_test_gate_row["source_disposition"] != \
+                "clean_room_behavior_only" or \
+            daily_test_gate_row["upstream_symbol"] != \
+                "r1_health_daily_test_event_valid" or \
+            len(daily_test_gate_body) != 14 or hashlib.sha256(
+                daily_test_gate_body
+            ).hexdigest() != \
+                "6b65c9e2c9e103d6d16da41f0d7d0d5eb9c1c249ae4aca2d1a44af826a133fcc":
+        raise AssertionError("R1 health-daily event-15 gate changed")
     gomore_neural_runtime_summary = summarize_r1_gomore_neural_runtime(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
     )
@@ -7468,6 +8716,494 @@ def main() -> None:
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
             raise AssertionError(
                 f"R1 touch-task dispatcher closure changed: 0x{entry:08x}"
+            )
+    touch_recovery_summary = summarize_r1_touch_recovery_timer(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if touch_recovery_summary["function_count"] != 1 or \
+            touch_recovery_summary["function_bytes"] != 72 or \
+            touch_recovery_summary["ghidra_function_count"] != 0 or \
+            touch_recovery_summary["manual_supplement_count"] != 1 or \
+            touch_recovery_summary["registration"][
+                "dispatcher_pointer_address"] != "0x00046898" or \
+            touch_recovery_summary["registration"][
+                "callback_thumb_pointer"] != "0x00046ead" or \
+            touch_recovery_summary["behavior"] != {
+                "clear_recovery_pending_latch": True,
+                "post_touch_task_event_flags": "0x00000002",
+                "logging_only_between_actions": True,
+            } or touch_recovery_summary["clean_room"][
+                "latch_or_rtos_operation_executed"] is not False or \
+            touch_recovery_summary["boundary"][
+                "provider_family"] != "r1_product_specific":
+        raise AssertionError("R1 touch recovery-timer metadata changed")
+    for function in R1_TOUCH_RECOVERY_TIMER_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 touch recovery timer changed: 0x{entry:08x}"
+            )
+    i2c5_delay_summary = summarize_r1_i2c5_delay_callback(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if i2c5_delay_summary["function_count"] != 1 or \
+            i2c5_delay_summary["function_bytes"] != 12 or \
+            i2c5_delay_summary["ghidra_function_count"] != 0 or \
+            i2c5_delay_summary["manual_supplement_count"] != 1 or \
+            i2c5_delay_summary["registration"][
+                "descriptor_address"] != "0x20007550" or \
+            i2c5_delay_summary["registration"][
+                "callback_thumb_pointer"] != "0x00054af1" or \
+            i2c5_delay_summary["behavior"] != {
+                "input_argument_ignored": True,
+                "nop_instruction_count": 5,
+                "returns_without_side_effect": True,
+            } or i2c5_delay_summary["boundary"][
+                "live_bus_timing_enabled"] is not False:
+        raise AssertionError("R1 i2c_5 delay-callback metadata changed")
+    for function in R1_I2C5_DELAY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 i2c_5 delay callback changed: 0x{entry:08x}"
+            )
+    nordic_omitted_hal_summary = summarize_r1_nordic_omitted_hal_inlines(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if nordic_omitted_hal_summary["function_count"] != 3 or \
+            nordic_omitted_hal_summary["function_bytes"] != 54 or \
+            nordic_omitted_hal_summary["ghidra_function_count"] != 0 or \
+            nordic_omitted_hal_summary["manual_supplement_count"] != 3 or \
+            nordic_omitted_hal_summary["saadc"] != {
+                "base_literal_address": "0x00079e20",
+                "base_literal": "0x40007000",
+                "literal_is_outside_executable_extent": True,
+                "direct_callers": 5,
+            } or nordic_omitted_hal_summary["scatter"][
+                "gpio_thumb_pointer_count"] != 2 or \
+            nordic_omitted_hal_summary["boundary"] != {
+                "provider_family": "nordic_nrf5_sdk_17_1_0",
+                "source_disposition": "use_nordic_sdk",
+                "local_reimplementation_required": False,
+            }:
+        raise AssertionError("Nordic omitted HAL inline metadata changed")
+    for function in R1_NORDIC_OMITTED_HAL_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "nordic_nrf5_sdk_17_1_0" or \
+                row["source_disposition"] != "use_nordic_sdk" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                function["source"] not in row["evidence"] or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"Nordic omitted HAL inline changed: 0x{entry:08x}"
+            )
+    nordic_omitted_delay_summary = summarize_r1_nordic_omitted_delay_cluster(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if nordic_omitted_delay_summary["wrapper_count"] != 6 or \
+            nordic_omitted_delay_summary["machine_code_count"] != 6 or \
+            nordic_omitted_delay_summary["function_count"] != 12 or \
+            nordic_omitted_delay_summary["function_bytes"] != 108 or \
+            nordic_omitted_delay_summary["ghidra_function_count"] != 2 or \
+            nordic_omitted_delay_summary["manual_supplement_count"] != 10 or \
+            nordic_omitted_delay_summary["manual_supplement_bytes"] != 84 or \
+            nordic_omitted_delay_summary["scatter"][
+                "registered_wrapper_count"] != 3 or \
+            nordic_omitted_delay_summary["behavior"] != {
+                "zero_returns_without_delay": True,
+                "cycles_per_microsecond": 64,
+                "delay_loop_instruction_sequence": "SUBS #3; BHI; BX LR",
+            } or nordic_omitted_delay_summary["boundary"] != {
+                "provider_family": "nordic_nrf5_sdk_17_1_0",
+                "source_disposition": "use_nordic_sdk",
+                "source": "modules/nrfx/soc/nrfx_coredep.h",
+                "local_reimplementation_required": False,
+            }:
+        raise AssertionError("Nordic omitted delay-cluster metadata changed")
+    for function in R1_NORDIC_OMITTED_DELAY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "nordic_nrf5_sdk_17_1_0" or \
+                row["source_disposition"] != "use_nordic_sdk" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                function["source"] not in row["evidence"] or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"Nordic omitted delay body changed: 0x{entry:08x}"
+            )
+    gpio_input_irq_summary = summarize_r1_gpio_input_irq_dispatch(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if gpio_input_irq_summary["function_count"] != 1 or \
+            gpio_input_irq_summary["function_bytes"] != 52 or \
+            gpio_input_irq_summary["ghidra_function_count"] != 0 or \
+            gpio_input_irq_summary["manual_supplement_count"] != 1 or \
+            gpio_input_irq_summary["registration"] != {
+                "callback_pointer_address": "0x00054c20",
+                "callback_thumb_pointer": "0x0006ed95",
+                "direct_callers_expected": 0,
+            } or gpio_input_irq_summary["registry"] != {
+                "base": "0x200070c0",
+                "record_count": 7,
+                "record_size": 44,
+                "pin_offset": 8,
+                "callback_offset": 40,
+                "linear_pins": [15, 21, 17, 18, 33, 3, 33],
+                "duplicate_linear_pin": 33,
+            } or gpio_input_irq_summary["behavior"] != {
+                "dispatch_all_matching_records": True,
+                "null_callbacks_skipped": True,
+                "callback_pin_truncated_to_uint8": True,
+                "provider_action_forwarded_unchanged": True,
+            } or gpio_input_irq_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "gpio_access_performed": False,
+                "nordic_gpiote_reimplemented": False,
+            }:
+        raise AssertionError("R1 GPIO input IRQ dispatcher metadata changed")
+    for function in R1_GPIO_INPUT_IRQ_DISPATCH_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 GPIO input IRQ dispatcher changed: 0x{entry:08x}"
+            )
+    advertising_event_summary = summarize_r1_advertising_event_policy(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if advertising_event_summary["function_count"] != 1 or \
+            advertising_event_summary["function_bytes"] != 140 or \
+            advertising_event_summary["ghidra_function_count"] != 0 or \
+            advertising_event_summary["manual_supplement_count"] != 1 or \
+            advertising_event_summary["registration"] != {
+                "callback_pointer_address": "0x00048ac4",
+                "callback_thumb_pointer": "0x0007cbc9",
+                "direct_callers_expected": 0,
+            } or advertising_event_summary["status_publish"] != {
+                "tail_callsite": "0x0007cc48",
+                "target": "0x0005e1cc",
+            } or advertising_event_summary["behavior"] != {
+                "event_0": {"publish": True, "active": False, "mode": 0},
+                "event_3": {"publish": True, "active": True, "mode": 1,
+                            "log": "Fast advertising."},
+                "event_4": {"publish": True, "active": True, "mode": 2,
+                            "log": "Slow advertising."},
+                "other_events": {"publish": False, "log": False},
+            } or advertising_event_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "nordic_advertising_reimplemented": False,
+                "logging_reimplemented": False,
+                "status_transport_reimplemented": False,
+            }:
+        raise AssertionError("R1 advertising-event policy metadata changed")
+    for function in R1_ADVERTISING_EVENT_POLICY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 advertising-event policy changed: 0x{entry:08x}"
+            )
+    goodix_open_mode_summary = summarize_r1_goodix_open_mode_policy(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if goodix_open_mode_summary["function_count"] != 1 or \
+            goodix_open_mode_summary["function_bytes"] != 174 or \
+            goodix_open_mode_summary["ghidra_function_count"] != 0 or \
+            goodix_open_mode_summary["manual_supplement_count"] != 1 or \
+            goodix_open_mode_summary["registration"] != {
+                "callback_pointer_address": "0x0009a59c",
+                "callback_thumb_pointer": "0x0008165d",
+                "direct_callers_expected": 0,
+            } or goodix_open_mode_summary["dispatch"]["clear_map"] != {
+                "1": (0, 16),
+                "2": (40, 24),
+                "3": (188, 2),
+                "4": (16, 24),
+                "5": (64, 124),
+                "6": None,
+                "7": (216, 24),
+                "8": (192, 12),
+                "9": (204, 12),
+            } or goodix_open_mode_summary["dispatch"]["state_base"] != \
+            "0x2001a23c" or \
+            goodix_open_mode_summary["dispatch"]["provider_target"] != \
+            "0x00050b00" or \
+            goodix_open_mode_summary["behavior"] != {
+                "zero_input_returns_without_provider": True,
+                "nonzero_input_narrows_to_uint8": True,
+                "all_nonzero_inputs_request_provider_open": True,
+                "diagnostic_only_for_narrowed_modes_0_through_4": True,
+                "mode_6_shares_mode_2_provider_path_without_state_clear": True,
+            } or goodix_open_mode_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "goodix_provider_reimplemented": False,
+                "logging_reimplemented": False,
+                "live_optical_control_exposed": False,
+            }:
+        raise AssertionError("R1 Goodix open-mode policy metadata changed")
+    for function in R1_GOODIX_OPEN_MODE_POLICY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 Goodix open-mode policy changed: 0x{entry:08x}"
+            )
+    pmic_late_init_summary = summarize_r1_pmic_late_init_policy(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if pmic_late_init_summary["function_count"] != 1 or \
+            pmic_late_init_summary["function_bytes"] != 84 or \
+            pmic_late_init_summary["ghidra_function_count"] != 0 or \
+            pmic_late_init_summary["manual_supplement_count"] != 1 or \
+            pmic_late_init_summary["function"]["callers"] != [{
+                "address": "0x00092512", "kind": "BL",
+            }] or pmic_late_init_summary["call_order"] != [
+                "acquire_nfc_i2c5_resource",
+                "delay_50_milliseconds",
+                "configure_st25dvxxkc",
+                "release_nfc_i2c5_resource",
+                "run_charge_i2c_event_zero",
+                "install_yhm_callback_0x00042ec5",
+                "install_device_callback_0x00042d2f",
+                "read_configuration_byte_0x70",
+            ] or pmic_late_init_summary["state"] != {
+                "ready_flag": "0x20006870",
+                "ready_flag_cleared_before_calls": True,
+            } or pmic_late_init_summary["factory_branch"] != {
+                "configuration_marker": 0x55,
+                "callback": "0x00042ed9",
+                "delay_ticks": 1024,
+                "context": 0,
+            } or pmic_late_init_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "nfc_provider_reimplemented": False,
+                "shared_resource_reimplemented": False,
+                "timer_reimplemented": False,
+                "live_initialization_exposed": False,
+            }:
+        raise AssertionError("R1 PMIC late-initialization metadata changed")
+    for function in R1_PMIC_LATE_INIT_POLICY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 PMIC late-initialization policy changed: 0x{entry:08x}"
+            )
+    task_suspend_summary = summarize_r1_task_suspend_policy(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if task_suspend_summary["function_count"] != 2 or \
+            task_suspend_summary["function_bytes"] != 340 or \
+            task_suspend_summary["ghidra_function_count"] != 0 or \
+            task_suspend_summary["manual_supplement_count"] != 2 or \
+            task_suspend_summary["configuration_marker"] != 0x55 or \
+            task_suspend_summary["thread_suspend_flag"] != "0x00800000" or \
+            task_suspend_summary["broadcast"] != {
+                "normal_groups": (5, 0, 7, 1, 9, 2, 3, 10, 4),
+                "factory_groups": (6, 0, 7, 1, 9, 2, 3, 10, 4),
+                "normal_acknowledgment_mask": "0x000006bf",
+                "factory_acknowledgment_mask": "0x000006df",
+                "wait_performed_by_function": False,
+            } or task_suspend_summary["barrier"] != {
+                "normal_groups": (0, 1, 2, 3, 10, 7, 5, 9, 4),
+                "factory_groups": (0, 1, 2, 3, 10, 7, 6, 9, 4),
+                "per_group_wait_ticks": 0x5000,
+                "helper": "0x00046a74",
+            } or task_suspend_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "cmsis_provider_reimplemented": False,
+                "thread_handles_exposed": False,
+                "live_suspend_exposed": False,
+            }:
+        raise AssertionError("R1 task suspend policy metadata changed")
+    for function in R1_TASK_SUSPEND_POLICY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 task suspend policy changed: 0x{entry:08x}"
+            )
+    storage_task_summary = summarize_r1_storage_task_policy(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if storage_task_summary["function_count"] != 1 or \
+            storage_task_summary["function_bytes"] != 216 or \
+            storage_task_summary["ghidra_function_count"] != 0 or \
+            storage_task_summary["manual_supplement_count"] != 1 or \
+            storage_task_summary["registration"] != {
+                "creator_pointer_address": "0x00046a6c",
+                "task_thumb_pointer": "0x00046955",
+                "registry_name": "storage",
+            } or storage_task_summary["startup"] != {
+                "sync_group": 0,
+                "queue_capacity": 10,
+                "queue_record_bytes": 16,
+                "delayed_callback": "0x0007ca71",
+                "delayed_event": "0x2005",
+                "delay_ticks": 3072,
+                "watchdog_ticks": 10000,
+            } or storage_task_summary["flags"] != {
+                "wait_mask": "0x00ffffff",
+                "dispatch_flag": "0x00400000",
+                "suspend_flag": "0x00800000",
+                "queue_drain_nonblocking": True,
+            } or storage_task_summary["corrected_distinction"] != {
+                "service_task": "0x000926dc..<0x000927ba",
+                "service_sync_group": 7,
+                "service_queue_capacity": 50,
+                "service_registry_name": "service",
+            } or storage_task_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "cmsis_provider_reimplemented": False,
+                "event_dispatch_reimplemented": False,
+                "live_storage_task_exposed": False,
+            }:
+        raise AssertionError("R1 storage task policy metadata changed")
+    for function in R1_STORAGE_TASK_POLICY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 storage task policy changed: 0x{entry:08x}"
+            )
+    factory_thread_summary = summarize_r1_factory_thread_creator(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if factory_thread_summary["function_count"] != 1 or \
+            factory_thread_summary["function_bytes"] != 48 or \
+            factory_thread_summary["ghidra_function_count"] != 0 or \
+            factory_thread_summary["manual_supplement_count"] != 1 or \
+            factory_thread_summary["registration"] != {
+                "state_block": "0x200066b0",
+                "scatter_create_pointer": "0x00045c55",
+                "scatter_stop_pointer": "0x00045c3d",
+                "thread_entry_pointer": "0x0009230d",
+            } or factory_thread_summary["attributes"] != {
+                "name": "factory_test",
+                "stack_bytes": 8192,
+                "priority_raw": 39,
+                "trustzone_module": 1,
+                "attribute_bits": 0,
+                "control_block_memory": 0,
+                "stack_memory": 0,
+            } or factory_thread_summary["result_policy"] != {
+                "handle_stored_at_state_offset": 8,
+                "null_handle_enters_fail_stop": True,
+            } or factory_thread_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "cmsis_provider_reimplemented": False,
+                "live_thread_creation_exposed": False,
+            }:
+        raise AssertionError("R1 factory-input thread creator metadata changed")
+    for function in R1_FACTORY_THREAD_CREATOR_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 factory-input thread creator changed: 0x{entry:08x}"
             )
     sensor_stream_unregister_summary = summarize_r1_sensor_stream_unregister(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
@@ -8472,9 +10208,10 @@ def main() -> None:
           "sensor_stream_function_count": 6,
           "quantized_runtime_function_count": 9}),
         ("sub-32", summarize_r1_frontier_sub32, R1_FRONTIER_LT32_FUNCTIONS,
-         {"function_count": 268, "function_bytes": 4326,
-          "pinned_bytes": 4282, "omitted_bytes": 44,
-          "r1_function_count": 165, "nordic_function_count": 3,
+         {"function_count": 269, "function_bytes": 4336,
+          "pinned_bytes": 4292, "omitted_bytes": 44,
+          "r1_function_count": 166, "manual_supplement_count": 1,
+          "nordic_function_count": 3,
           "toolchain_function_count": 2, "gomore_function_count": 19,
           "goodix_function_count": 21, "yhm_function_count": 14,
           "device_registry_function_count": 4,
@@ -8871,18 +10608,666 @@ def main() -> None:
                 len(body) != function["size"] or \
                 hashlib.sha256(body).hexdigest() != function["sha256"]:
             raise AssertionError(f"R1 BAE8 event router changed: 0x{entry:08x}")
+    bae8_connection_summary = summarize_r1_bae8_connection_event(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if bae8_connection_summary["function_count"] != 1 or \
+            bae8_connection_summary["function_bytes"] != 276 or \
+            bae8_connection_summary["executable_bytes"] != 198 or \
+            bae8_connection_summary["ghidra_function_count"] != 0 or \
+            bae8_connection_summary["manual_supplement_count"] != 1 or \
+            bae8_connection_summary["route"] != {
+                "observer": "r1_bae8_raw_observer",
+                "observer_event_id": "0x0010",
+                "tail_callsite": "0x00052b58",
+            } or bae8_connection_summary["provider_calls"] != {
+                "link_context_lookup": "0x000514e0",
+                "cccd_value_get_svc": "0xad",
+                "cccd_value_get_sites": ("0x0007cd1e", "0x0007cd3a"),
+                "notification_helper": "ble_srv_is_notification_enabled",
+                "notification_helper_sites": ("0x0007cd28", "0x0007cd46"),
+            } or bae8_connection_summary["service_layout"] != {
+                "link_context_manager_offset": 0x28,
+                "channel1_cccd_handle_offset": 0x0A,
+                "channel2_cccd_handle_offset": 0x1A,
+                "callback_offset": 0x2C,
+                "link_context_channel1_flag_offset": 0,
+                "link_context_channel2_flag_offset": 1,
+            } or bae8_connection_summary["behavior"] != {
+                "log_lookup_failure": True,
+                "read_both_cccds_after_lookup_failure": True,
+                "cccd_length": 2,
+                "cccd_offset": 0,
+                "set_flags_only_on_success_callback_and_context": True,
+                "clear_disabled_flags": False,
+                "callback_event_type": 0,
+                "callback_record_bytes": 24,
+                "callback_allows_null_link_context": True,
+            } or bae8_connection_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "nordic_link_context_reimplemented": False,
+                "softdevice_value_get_reimplemented": False,
+                "nordic_cccd_helper_reimplemented": False,
+                "live_callback_dispatch_exposed": False,
+            }:
+        raise AssertionError("R1 BAE8 connection-event metadata changed")
+    for function in R1_BAE8_CONNECTION_EVENT_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 BAE8 connection event changed: 0x{entry:08x}"
+            )
+    gap_event_summary = summarize_r1_gap_event_policy(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if gap_event_summary["function_count"] != 1 or \
+            gap_event_summary["function_bytes"] != 3184 or \
+            gap_event_summary["executable_bytes"] != 1728 or \
+            gap_event_summary["ghidra_function_count"] != 0 or \
+            gap_event_summary["manual_supplement_count"] != 1 or \
+            gap_event_summary["registration"] != {
+                "observer_pointer_address": "0x000c45c0",
+                "observer_thumb_pointer": "0x00052b9d",
+                "direct_callers_expected": 0,
+            } or gap_event_summary["event_routes"] != {
+                "0x10": "connected",
+                "0x11": "disconnected",
+                "0x21": "PHY update request",
+                "0x22": "PHY update complete",
+                "0x3b": "GATT client timeout diagnostic",
+                "0x56": "GATT server timeout diagnostic",
+                "other": "ignore",
+            } or gap_event_summary["connected_policy"] != {
+                "connection_timeout_ticks": 0xF000,
+                "peer_cache_connection_limit": 3,
+                "factory_marker": 0x5A,
+                "factory_role_delay_ticks": 0x7800,
+                "link_slot_count": 3,
+                "fail_stop_on_link_context_initialization_error": True,
+            } or gap_event_summary["disconnected_policy"] != {
+                "glasses_role_precedes_phone_role": True,
+                "unassigned_role_code": 0,
+                "phone_role_code": 1,
+                "glasses_role_code": 2,
+                "advertising_mode": 3,
+                "advertising_retry_ticks": 0x66,
+                "accepted_tx_power_statuses": (0, 8),
+            } or gap_event_summary["phy_policy"] != {
+                "non_glasses_local_phys": (1, 1),
+                "glasses_swaps_peer_rx_tx_into_local_tx_rx": True,
+                "coded_phy_bit_value": 4,
+                "completion_status_offset": 8,
+                "completion_tx_phy_offset": 9,
+                "completion_rx_phy_offset": 10,
+            } or gap_event_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "softdevice_reimplemented": False,
+                "nordic_connection_state_reimplemented": False,
+                "advertising_provider_reimplemented": False,
+                "logging_reimplemented": False,
+                "live_gap_dispatch_exposed": False,
+            }:
+        raise AssertionError("R1 GAP event policy metadata changed")
+    for function in R1_GAP_EVENT_POLICY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 GAP event policy changed: 0x{entry:08x}"
+            )
+    nfc_charge_task_summary = summarize_r1_nfc_charge_task_policy(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if nfc_charge_task_summary["function_count"] != 1 or \
+            nfc_charge_task_summary["function_bytes"] != 1156 or \
+            nfc_charge_task_summary["executable_bytes"] != 662 or \
+            nfc_charge_task_summary["ghidra_function_count"] != 0 or \
+            nfc_charge_task_summary["manual_supplement_count"] != 1 or \
+            nfc_charge_task_summary["event_masks"] != {
+                "charged_notification": 0x00000001,
+                "standard_command_irq": 0x00000002,
+                "charged_notification_clear": 0x00000004,
+                "pmic_charge_event": 0x00000008,
+                "not_charging": 0x00000010,
+                "battery_update": 0x00000020,
+                "charging_battery_update": 0x00000040,
+                "message_pending": 0x00400000,
+                "terminate": 0x00800000,
+            } or nfc_charge_task_summary["fixed_policy"] != {
+                "message_bytes": 44,
+                "st25_dynamic_register": 0x100B,
+                "standard_command_register_value": 1,
+                "not_charging_register_value": 0,
+                "standard_command_delay_ticks": 0x800,
+                "not_charging_delay_ticks": 0x1000,
+                "temperature_id_expected": (0x50, 0x50),
+                "temperature_id_attempts": 3,
+                "temperature_retry_delay_ticks": 100,
+                "zero_battery_update_count": 8,
+                "zero_battery_update_delay_ticks": 10,
+                "pmic_charge_event_value": 0x5A,
+                "terminal_delay_ticks": 0xFFFFFFFF,
+            } or nfc_charge_task_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "st25_transport_reimplemented": False,
+                "touch_provider_reimplemented": False,
+                "battery_provider_reimplemented": False,
+                "rtos_queue_timer_task_reimplemented": False,
+                "logging_reimplemented": False,
+                "live_event_dispatch_exposed": False,
+            }:
+        raise AssertionError("R1 NFC charge-task policy metadata changed")
+    for function in R1_NFC_CHARGE_TASK_POLICY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 NFC charge-task policy changed: 0x{entry:08x}"
+            )
+    task_topology_summary = summarize_r1_task_topology_startup(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if task_topology_summary["function_count"] != 1 or \
+            task_topology_summary["function_bytes"] != 140 or \
+            task_topology_summary["executable_bytes"] != 100 or \
+            task_topology_summary["ghidra_function_count"] != 0 or \
+            task_topology_summary["manual_supplement_count"] != 1 or \
+            task_topology_summary["startup_policy"] != {
+                "preinitializers": (
+                    "firmware_event_loop", "watchdog_registry"),
+                "normal_groups": (0, 1, 2, 3, 10, 4, 7, 5, 9),
+                "factory_groups": (0, 1, 2, 3, 10, 4, 7, 6, 9),
+                "configuration_marker": 0x55,
+                "initial_thread_priority": 8,
+                "final_thread_priority": 0x35,
+                "indirect_task_creators": 9,
+            } or task_topology_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "cmsis_freertos_reimplemented": False,
+                "task_creator_pointers_exposed": False,
+                "state_block_addresses_exposed": False,
+                "live_task_creation_exposed": False,
+            }:
+        raise AssertionError("R1 task-topology startup metadata changed")
+    for function in R1_TASK_TOPOLOGY_STARTUP_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 task-topology startup changed: 0x{entry:08x}"
+            )
+    hr_timing_result_summary = summarize_r1_hr_timing_result(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if hr_timing_result_summary["function_count"] != 1 or \
+            hr_timing_result_summary["function_bytes"] != 142 or \
+            hr_timing_result_summary["envelope_bytes"] != 260 or \
+            hr_timing_result_summary["ghidra_function_count"] != 0 or \
+            hr_timing_result_summary["manual_supplement_count"] != 1 or \
+            hr_timing_result_summary["registration"] != {
+                "callback_pointer_address": "0x00049b44",
+                "callback_thumb_pointer": "0x00049b61",
+                "topic": "hr",
+                "direct_callers": 0,
+            } or hr_timing_result_summary["record_contract"] != {
+                "input_bytes": 3,
+                "fields": ("heart_rate", "confidence", "signal"),
+                "heart_rate_minimum": 40,
+                "heart_rate_maximum": 220,
+                "health_publication_gate": True,
+                "event_id": 6,
+                "event_bytes": 8,
+                "event_layout":
+                    "heart_rate_u8,zero_u8[3],firmware_clock_u32le",
+            } or hr_timing_result_summary["lifecycle"] != {
+                "unregister_topic": "hr",
+                "clear_timing_stream_handle": True,
+                "release_timing_timer_if_present": True,
+                "clear_timing_timer_handle": True,
+                "runs_after_invalid_or_suppressed_result": True,
+            } or hr_timing_result_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "sensor_stream_reimplemented_here": False,
+                "clock_reimplemented_here": False,
+                "event_bus_reimplemented_here": False,
+                "logging_reimplemented": False,
+                "live_optical_control_exposed": False,
+            }:
+        raise AssertionError("R1 timing heart-rate result metadata changed")
+    for function in R1_HR_TIMING_RESULT_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 timing heart-rate result changed: 0x{entry:08x}"
+            )
+    spo2_result_summary = summarize_r1_spo2_result_callbacks(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if spo2_result_summary["function_count"] != 2 or \
+            spo2_result_summary["function_bytes"] != 482 or \
+            spo2_result_summary["envelope_bytes"] != 708 or \
+            spo2_result_summary["ghidra_function_count"] != 0 or \
+            spo2_result_summary["manual_supplement_count"] != 2 or \
+            spo2_result_summary["registrations"] != (
+                {
+                    "kind": "once",
+                    "callback_pointer_address": "0x0004ab2c",
+                    "callback_thumb_pointer": "0x0004abed",
+                    "topic": "spo2",
+                    "direct_callers": 0,
+                },
+                {
+                    "kind": "timing",
+                    "callback_pointer_address": "0x0004b0f8",
+                    "callback_thumb_pointer": "0x0004ada1",
+                    "topic": "spo2",
+                    "direct_callers": 0,
+                },
+            ) or spo2_result_summary["record_contract"] != {
+                "input_bytes": 6,
+                "fields": (
+                    "spo2", "r_value", "confidence", "signed_level",
+                    "heart_rate", "mark"),
+                "valid_minimum": 70,
+                "valid_maximum": 100,
+                "transform_center": 96,
+                "below_center_numerator": 5,
+                "at_or_above_center_numerator": 8,
+                "transform_denominator": 10,
+                "signed_division": "truncate_toward_zero",
+                "output_minimum": 70,
+                "output_maximum": 100,
+                "health_publication_gate": True,
+                "event_id": 8,
+                "event_bytes": 8,
+                "event_layout": "adjusted_spo2_u8,zero_u8[7]",
+                "timestamp_present": False,
+            } or spo2_result_summary["lifecycle"] != {
+                "both_unregister_topic": "spo2",
+                "both_clear_stream_handle": True,
+                "timing_releases_timer_if_present": True,
+                "timing_clears_timer_handle": True,
+                "timing_marks_valid_result": True,
+                "timing_marks_invalid_result": True,
+                "cleanup_runs_after_invalid_or_suppressed_result": True,
+            } or spo2_result_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "gomore_transform_reimplemented_here": False,
+                "sensor_stream_reimplemented_here": False,
+                "health_gate_reimplemented_here": False,
+                "event_bus_reimplemented_here": False,
+                "timer_reimplemented_here": False,
+                "logging_reimplemented": False,
+                "live_optical_control_exposed": False,
+            }:
+        raise AssertionError("R1 SpO2 result callback metadata changed")
+    for function in R1_SPO2_RESULT_CALLBACK_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 SpO2 result callback changed: 0x{entry:08x}"
+            )
+    factory_acc_battery_summary = summarize_r1_factory_acc_battery_diagnostics(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if factory_acc_battery_summary["function_count"] != 2 or \
+            factory_acc_battery_summary["function_bytes"] != 104 or \
+            factory_acc_battery_summary["envelope_bytes"] != 196 or \
+            factory_acc_battery_summary["ghidra_function_count"] != 0 or \
+            factory_acc_battery_summary["manual_supplement_count"] != 2 or \
+            factory_acc_battery_summary["registrations"] != (
+                {
+                    "kind": "sensor_stream_callback",
+                    "pointer_address": "0x0004ed58",
+                    "thumb_pointer": "0x0004ed65",
+                    "listener": "at",
+                    "topic": "acc",
+                    "direct_callers": 0,
+                },
+                {
+                    "kind": "factory_command",
+                    "table_record_address": "0x000c4230",
+                    "command_name_pointer": "0x0009944d",
+                    "command": "AT^BAT_ADC",
+                    "thumb_pointer": "0x0004ee19",
+                    "direct_callers": 0,
+                },
+            ) or factory_acc_battery_summary["accelerometer_contract"] != {
+                "record_bytes": 182,
+                "triplet_capacity": 30,
+                "triplet_stride": 6,
+                "count_offset": 180,
+                "axis_encoding": "signed_int16_little_endian",
+                "decimation": 5,
+                "maximum_emitted_samples": 6,
+                "emitted_indices": (0, 5, 10, 15, 20, 25),
+                "terminator_always_emitted": True,
+            } or factory_acc_battery_summary["battery_contract"] != {
+                "accessor_order": (
+                    "battery_millivolts", "battery_percent", "battery_type"),
+                "format_order": (
+                    "battery_millivolts", "battery_percent", "battery_type"),
+                "handler_return_value": 1,
+            } or factory_acc_battery_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "sensor_stream_reimplemented_here": False,
+                "battery_accessors_reimplemented_here": False,
+                "factory_command_router_reimplemented_here": False,
+                "logging_reimplemented": False,
+                "live_sensor_control_exposed": False,
+                "live_factory_command_exposed": False,
+            }:
+        raise AssertionError("R1 factory accelerometer/battery metadata changed")
+    for function in R1_FACTORY_ACC_BATTERY_DIAGNOSTIC_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 factory diagnostic changed: 0x{entry:08x}"
+            )
+    factory_pmic_summary = summarize_r1_factory_pmic_handlers(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if factory_pmic_summary["function_count"] != 3 or \
+            factory_pmic_summary["function_bytes"] != 162 or \
+            factory_pmic_summary["envelope_bytes"] != 244 or \
+            factory_pmic_summary["ghidra_function_count"] != 0 or \
+            factory_pmic_summary["manual_supplement_count"] != 3 or \
+            factory_pmic_summary["registrations"] != (
+                {
+                    "table_record_address": "0x000c4210",
+                    "command_name_pointer": "0x00099431",
+                    "command": "AT^PMIC_READ",
+                    "handler_thumb_pointer": "0x0004f525",
+                    "direct_callers": 0,
+                },
+                {
+                    "table_record_address": "0x000c4240",
+                    "command_name_pointer": "0x00099458",
+                    "command": "AT^PMIC_OFF",
+                    "handler_thumb_pointer": "0x0004f4d5",
+                    "direct_callers": 0,
+                },
+                {
+                    "table_record_address": "0x000c4250",
+                    "command_name_pointer": "0x00099464",
+                    "command": "AT^PMIC_ISNS",
+                    "handler_thumb_pointer": "0x0004f4a5",
+                    "direct_callers": 0,
+                },
+            ) or factory_pmic_summary["current_sense_contract"] != {
+                "provider_result_preserved": True,
+                "handler_return_value": 1,
+            } or factory_pmic_summary["power_off_contract"] != {
+                "persistent_power_state": 2,
+                "battery_millivolt_bits": 14,
+                "packed_word": "((battery_mv & 0x3fff) << 2) | 2",
+                "timestamp_preserved": True,
+                "power_thread_flag": 1,
+                "handler_return_value": 1,
+            } or factory_pmic_summary["register_diagnostic_contract"] != {
+                "provider_register": 9,
+                "provider_read_bytes": 1,
+                "formatted_bytes": 10,
+                "formatted_layout": "register_9,zero[9]",
+                "handler_return_value": 1,
+            } or factory_pmic_summary["boundary"] != {
+                "provider_family": "r1_product_specific",
+                "source_disposition": "clean_room_behavior_only",
+                "yhm2710_transport_reimplemented_here": False,
+                "adc_sampling_reimplemented_here": False,
+                "time_provider_reimplemented_here": False,
+                "kv_persistence_reimplemented_here": False,
+                "thread_signal_reimplemented_here": False,
+                "logging_reimplemented": False,
+                "live_power_off_exposed": False,
+                "live_factory_command_exposed": False,
+            }:
+        raise AssertionError("R1 factory PMIC handler metadata changed")
+    for function in R1_FACTORY_PMIC_HANDLER_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 factory PMIC handler changed: 0x{entry:08x}"
+            )
+    yhm_transport_entry_summary = summarize_r1_yhm_transport_entries(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if yhm_transport_entry_summary["function_count"] != 4 or \
+            yhm_transport_entry_summary["function_bytes"] != 138 or \
+            yhm_transport_entry_summary["ghidra_function_count"] != 0 or \
+            yhm_transport_entry_summary["manual_supplement_count"] != 4 or \
+            yhm_transport_entry_summary["charging_event_contract"] != {
+                "register": 3,
+                "set_mask": 8,
+                "preserve_other_bits": True,
+                "thunk_entry": "0x00050614",
+                "target_entry": "0x000350e0",
+            } or yhm_transport_entry_summary["transport_contract"] != {
+                "read_entry": "0x000507cc",
+                "read_public_veneer": "0x0003540c",
+                "read_operation": "device_slot_04",
+                "write_entry": "0x00050804",
+                "write_public_veneer": "0x00035760",
+                "write_operation": "device_slot_04_write",
+                "common_release_tail": "0x00050558",
+                "completion_callback_optional": True,
+            } or yhm_transport_entry_summary["boundary"] != {
+                "provider_family": "yhmicros_yhm2710_candidate",
+                "source_disposition":
+                    "clean_room_reimplementation_owner_authorized",
+                "opaque_yhm2710_binary_used": False,
+                "live_transport_exposed_by_evidence_tool": False,
+            }:
+        raise AssertionError("R1 YHM2710 omitted-entry metadata changed")
+    for function in R1_YHM2710_TRANSPORT_ENTRY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != \
+                "yhmicros_yhm2710_candidate" or \
+                row["source_disposition"] != \
+                "clean_room_reimplementation_owner_authorized" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 YHM2710 omitted entry changed: 0x{entry:08x}"
+            )
+    remaining_explicit_summary = summarize_r1_remaining_explicit_entries(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if remaining_explicit_summary["function_count"] != 6 or \
+            remaining_explicit_summary["function_bytes"] != 666 or \
+            remaining_explicit_summary["ghidra_function_count"] != 0 or \
+            remaining_explicit_summary["manual_supplement_count"] != 6 or \
+            remaining_explicit_summary["registrations"] != {
+                "analog_close_thumb_pointer": "0x000547f5",
+                "gpio_input_open_thumb_pointer": "0x00054b91",
+                "lis2dw12_double_tap_thumb_pointer": "0x00075291",
+            } or remaining_explicit_summary["analog_close_contract"] != {
+                "record_count": 3,
+                "record_size": 40,
+                "nrfx_channels": (6, 4, 3),
+                "uninitialize_driver_after_last_close": True,
+                "not_found_status": 1,
+            } or remaining_explicit_summary["gpio_open_contract"] != {
+                "record_count": 7,
+                "record_size": 44,
+                "pin_cnf_raw": 2,
+                "initialize_gpiote_on_demand": True,
+                "enable_port_event": True,
+                "not_found_status": 2,
+            } or remaining_explicit_summary["gxt310_contract"] != {
+                "read_scale": "signed_be16 * (1/128) * 1000",
+                "mode_command_enabled": "00c2",
+                "mode_command_disabled": "01c2",
+                "one_shot_command": "01c1",
+            } or remaining_explicit_summary[
+                "lis2dw12_double_tap_contract"] != {
+                    "axis_enables": (1, 1, 1),
+                    "thresholds": (3, 3, 3),
+                    "duration_quiet_shock": (0, 0, 0),
+                    "tap_mode": 1,
+                    "int1_route_or_mask": 8,
+                    "return_value": 1,
+                } or remaining_explicit_summary["boundary"] != {
+                    "opaque_firmware_used": False,
+                    "hardware_operations_executed": False,
+                    "nordic_and_st_provider_calls_remain_external": True,
+                }:
+        raise AssertionError("R1 final explicit-entry closure metadata changed")
+    for function in R1_REMAINING_EXPLICIT_ENTRY_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != function["provider_family"] or \
+                row["source_disposition"] != function["source_disposition"] or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 final explicit entry changed: 0x{entry:08x}"
+            )
+    buttonless_dfu_policy_summary = summarize_r1_buttonless_dfu_event_policy(
+        ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
+    )
+    if buttonless_dfu_policy_summary["function_count"] != 1 or \
+            buttonless_dfu_policy_summary["function_bytes"] != 364 or \
+            buttonless_dfu_policy_summary["ghidra_function_count"] != 0 or \
+            buttonless_dfu_policy_summary["manual_supplement_count"] != 1 or \
+            buttonless_dfu_policy_summary["registration"][
+                "callback_pointer_address"] != "0x0004c944" or \
+            buttonless_dfu_policy_summary["registration"][
+                "callback_thumb_pointer"] != "0x0005232d" or \
+            buttonless_dfu_policy_summary["event_policy"]["0_prepare"] != {
+                "disable_advertising_on_disconnect": True,
+                "disconnect_all_connected_links": True,
+                "report_disconnected_link_count": True,
+            } or buttonless_dfu_policy_summary["dependencies"][
+                "nordic_operations_executed_by_clean_planner"] is not False or \
+            buttonless_dfu_policy_summary["boundary"][
+                "nordic_buttonless_dfu_remains_upstream"] is not True:
+        raise AssertionError("R1 buttonless-DFU event-policy metadata changed")
+    for function in R1_BUTTONLESS_DFU_EVENT_FUNCTIONS:
+        entry = int(function["entry"])
+        end = int(function["end_exclusive"])
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered[entry - recovered_base:end - recovered_base]
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != function["symbol"] or \
+                row["confidence"] != "high" or \
+                int(row["size"]) != function["size"] or \
+                len(body) != function["size"] or \
+                hashlib.sha256(body).hexdigest() != function["sha256"]:
+            raise AssertionError(
+                f"R1 buttonless-DFU event policy changed: 0x{entry:08x}"
+            )
     ble_tx_queue_summary = summarize_r1_ble_tx_queue_dispatch(
         ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
     )
-    if ble_tx_queue_summary["function_count"] != 2 or \
-            ble_tx_queue_summary["function_bytes"] != 560 or \
+    if ble_tx_queue_summary["function_count"] != 3 or \
+            ble_tx_queue_summary["function_bytes"] != 572 or \
             ble_tx_queue_summary["message_envelope"] != {
                 "message_id_offset": 0,
                 "dispatch_type_offset": 4,
                 "payload_length_offset": 8,
                 "payload_offset": 12,
                 "allocation_size_formula": "align4(payload_length + 15)",
-                "known_veneer_dispatch_types": [0, 2],
+                "known_veneer_dispatch_types": [0, 1, 2],
             } or \
             ble_tx_queue_summary["queue_policy"] != {
                 "near_full_threshold_percent": 90,
@@ -9243,7 +11628,7 @@ def main() -> None:
         "0x000880e8": "records_stat",
         "0x000883f8": "rmap",
         "0x000881e4": "release",
-        "0x000890cc": "service_changed_send_in_evt",
+        "0x000890cc": "sc_send_pending_handle",
         "0x00089148": "sdh_request_observer_notify",
         "0x00089178": "sdh_state_observer_notify",
         "0x000892f4": "sec_keyset_fill",
@@ -9357,6 +11742,9 @@ def main() -> None:
     for function in NORDIC_ADVERTISING_FUNCTIONS:
         nordic_expected[f"0x{int(function['entry']):08x}"] = \
             str(function["symbol"])
+    for function in NORDIC_GATT_CACHE_CLOSURE_FUNCTIONS:
+        nordic_expected[f"0x{int(function['entry']):08x}"] = \
+            str(function["symbol"])
     for function in NORDIC_BUTTONLESS_DFU_FUNCTIONS:
         nordic_expected[f"0x{int(function['entry']):08x}"] = \
             str(function["symbol"])
@@ -9457,6 +11845,7 @@ def main() -> None:
         "0x00077e98": "r1_reset_reason_nordic_adapter",
         "0x0003e7a8": "r1_bae8_hvx_serialized_send_adapter",
         "0x0004d4ac": "r1_connection_parameter_mode_adapter",
+        "0x00054b90": "r1_gpio_input_open_plan_build",
         "0x00063d50": "r1_fds_event_adapter",
     }
     for entry, symbol in nordic_adapter_expected.items():
@@ -9855,6 +12244,10 @@ def main() -> None:
                 row["upstream_symbol"] != symbol:
             raise AssertionError(f"CMSIS-FreeRTOS function not source-routed: {entry}")
     freertos_exact_expected = {
+        0x0007D2A0: (
+            "xTaskGetTickCount", "external/freertos/source/tasks.c",
+            4, "2e747c4b74eed771e0d3c7c91da71d5bf94b6dc460a9a4ed5ef5a33812362886",
+        ),
         0x0009566C: (
             "uxTaskGetNumberOfTasks", "external/freertos/source/tasks.c",
             6, "f9e9ed7deab97ba770020418c839a3824257d2e29c2f736e873b7a50a3efaeb8",
@@ -10538,6 +12931,8 @@ def main() -> None:
                 f"R1 scalar health sample-storage behavior changed: 0x{entry:08x}"
             )
     health_history_routing_expected = {
+        0x0004286E: ("r1_health_history_event_valid", 14,
+                     "a580de22c995b27e18796b1f7aa27af073dc7e73cb2d8464def6d346f1a4b550"),
         0x00082BE8: ("r1_health_registration_dispatcher", 36,
                      "ff5e7848057eb0dea0cb0c7ab34611f8078e872058ed98ec2caed34c464c41c3"),
         0x00083298: ("r1_health_registration_binary_search", 58,
@@ -10554,12 +12949,22 @@ def main() -> None:
                      "469a8cab4688bd659871bbeda25950bc45453c4a8327d6367cfa5f56b02f1e43"),
         0x00082D5A: ("r1_spo2_daily_handler", 68,
                      "9f70c796bdc8f65813c32e84196afdad27e2db4fec870653315ccb63ad40a941"),
+        0x00082D9E: ("r1_sleep_detail_plan", 32,
+                     "d9436a5fe0839de1a46a377d5c04f25aa2b91a2b7a65045b38ab0e1ba5bba1e5"),
+        0x00082DBE: ("r1_heart_rate_measurement_plan", 58,
+                     "64233f6cd02acbf9ab2cd1a94d71ac1f74240343b8c9285c00fc6eea2234849c"),
+        0x00082DF8: ("r1_health_history_noop_handler", 2,
+                     "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
+        0x00082DFA: ("r1_spo2_measurement_plan", 58,
+                     "6d5461de17864780d5186a975d439a1085baa7476a6b4807ef4eb20ed8e0ae6a"),
         0x00082E34: ("r1_heart_rate_point_handler", 50,
                      "32ed4a2778d06affc3ebd1c2bf348c2fb3739a2d407fd2014e1375bf460228cc"),
         0x00082E66: ("r1_hrv_point_handler", 52,
                      "0315d7ca6369eb120efd44ec981a4291a073f30b1a7ad7a3124aa6717bdf2bae"),
         0x00082E9A: ("r1_spo2_point_handler", 52,
                      "0c84ec05328aa8a87b8132094fa6dfa5cf8dc6fb5d80e9445c9bf293196416cc"),
+        0x00082ECE: ("r1_health_report_setting_plan", 26,
+                     "91e2e670a1f9b87a78c1ffe7e48be87efc0fe32a9a59dfef275d263c1b8bc5dc"),
         0x0008B8E8: ("r1_health_event14_consumer", 408,
                      "2cc0295c20559ba8ea45db9c9a344edbb245d065daf4fa92871a7642c94329a4"),
     }
@@ -11071,7 +13476,161 @@ def main() -> None:
             raise AssertionError(
                 f"time/calendar provider boundary changed: 0x{entry:08x}"
             )
+    factory_optical_diagnostic_expected = {
+        0x0004F30C: ("r1_factory_heart_rate_diagnostic_plan", 12,
+                     "0259e93eb88c7b1d9f0176253dbc7b2a3ff8cda374a3f00d8e9d5fcaa6fbbb25"),
+        0x0004F378: ("r1_factory_hrv_diagnostic_plan", 20,
+                     "767dda28f5c3c94973e906431fee73c1422172792767e15c855b5e2436e3d97e"),
+        0x0004F914: ("r1_factory_spo2_diagnostic_plan", 8,
+                     "6a6347282d4680a2eb2ba0733ae4c105fa3286d91a2808aec2bb6297760a8f73"),
+        0x0004F980: ("r1_factory_temperature_diagnostic_plan", 32,
+                     "c6a9fffa7708f030ec5e0d14b35998fe6efcec519bccf386713c30eb3a220b4a"),
+    }
+    for entry, (symbol, size, digest) in factory_optical_diagnostic_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 factory optical diagnostic behavior changed: 0x{entry:08x}"
+            )
+    factory_stream_control_expected = {
+        0x0004ED34: ("r1_factory_acc_stream_register_plan", 30,
+                     "299e47e0d51fd6fedaee2a7c5e0c2e6b4d7262eddb10a5e0635511f1a603a01f"),
+        0x0004F2BC: ("r1_factory_heart_rate_stream_unregister_plan", 22,
+                     "605dfe1b1560a6ca231124ae45cd27e13a31d25be8a85af0d641a1b05b8ee362"),
+        0x0004F2DC: ("r1_factory_heart_rate_stream_register_plan", 30,
+                     "05ec36260c1d669678c30bc6d60eceaf43a0e73ed7d7dde85b46b08d6e1cbcbf"),
+        0x0004F348: ("r1_factory_hrv_stream_register_plan", 30,
+                     "c60af061e20e5c01eb22278b0c19439e58e092968be37842ec835f986dd3e3e5"),
+        0x0004F8E0: ("r1_factory_spo2_stream_register_plan", 30,
+                     "bc1dadbf6af4c5dd3fde256d110bbc981b234e0f9a0f919e9f4549b1f7fcdf43"),
+        0x0004F928: ("r1_factory_temperature_stream_unregister_plan", 22,
+                     "c422ede99f7e52be7ac38be805a2f34b7a1035c35cdad092dcee1d6bfafa1b99"),
+        0x0004F94C: ("r1_factory_temperature_stream_register_plan", 30,
+                     "358847d2abac0e7f86ec0a828ab1b770dd9dd3b55c1a4e404b47742bec85cac8"),
+    }
+    for entry, (symbol, size, digest) in factory_stream_control_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 factory stream-control behavior changed: 0x{entry:08x}"
+            )
+    factory_service_diagnostic_expected = {
+        0x0004EDDC: ("r1_factory_activity_diagnostic_plan_decode", 28,
+                     "4fdaec6c5dea91d292fb47b10e5c3770dd7762128fbcfec819374c504301bd89"),
+        0x0004F040: ("r1_factory_periodic_timer_restart_plan_build", 12,
+                     "adf55bcf1f3b579e6a6b1757fab7e176681320b0dee8f76b23d26c459b3f66c2"),
+        0x0004F1C4: ("r1_factory_temperature_pair_diagnostic_plan_decode", 48,
+                     "c3e254d90368580d139606af0e0b2ae53c30608bfdfbf0ee806447be31e3404e"),
+    }
+    for entry, (symbol, size, digest) in factory_service_diagnostic_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 factory service diagnostic behavior changed: 0x{entry:08x}"
+            )
+    factory_f2_high_risk_expected = {
+        0x00062D6A: ("r1_factory_f2_delayed_reset_plan", 26,
+                     "d1403d57eb8a6b26738f4f0a8eab8b5ef3d8fc479dc619f9e896b9ad9c5b5b26"),
+        0x00062D84: ("r1_factory_f2_ppg_mode_plan", 44,
+                     "6927962e2dd3d3764a1ccd72bbd891166fdecccdf1e7349495db9abe8daf7650"),
+        0x00062DB0: ("r1_factory_f2_marked_ship_mode_plan", 36,
+                     "1932fd3bacf30cb7da4b813606a83bff9c48bd7543908804e6bf874bbb1b3750"),
+        0x00062DD4: ("r1_factory_f2_ship_mode_plan", 30,
+                     "7e5a9beda85c1fb8047ded58f8c46833f254858ad096fc902416d8e30dedc1b9"),
+    }
+    for entry, (symbol, size, digest) in factory_f2_high_risk_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 factory command-F2 behavior changed: 0x{entry:08x}"
+            )
+    eus_module_dispatch_expected = {
+        0x0008316C: ("r1_eus_ingress_plan_decode", 176,
+                     "ceb1700eb786b7fca329fd99a1ff6a322c857958e2cce5525fa1251aef185618"),
+        0x00083CA8: ("r1_eus_system_dispatch_plan_build", 36,
+                     "73d1743ef3107d165e196cedff2cec7dce192930e4ba425ac803c9db67b388d7"),
+    }
+    for entry, (symbol, size, digest) in eus_module_dispatch_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 EUS module-dispatch behavior changed: 0x{entry:08x}"
+            )
+    system_table_offset = 0x0009A4CC - recovered_base
+    system_table = recovered[system_table_offset:system_table_offset + 20 * 8]
+    system_identifiers = [
+        int.from_bytes(system_table[index * 8:index * 8 + 2], "little")
+        for index in range(20)
+    ]
+    if system_identifiers != [
+        0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0007, 0x0008,
+        0x0009, 0x000A, 0x000B, 0x000C, 0x000E, 0x000F, 0x0010,
+        0x0011, 0x0012, 0x007E, 0x007F, 0x0082, 0x0083,
+    ]:
+        raise AssertionError("R1 EUS system registration table changed")
+    factory_legacy_dispatch_expected = {
+        0x000625C0: ("r1_factory_legacy_command_route_frame", 526,
+                     "900beb3e3b665c01332df2c6ae3f901c301a0510a24acf25f447a74e71dbc51b"),
+    }
+    for entry, (symbol, size, digest) in factory_legacy_dispatch_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 factory legacy dispatcher changed: 0x{entry:08x}"
+            )
+    protocol_handler_boundaries_expected = {
+        0x00083D04: (
+            "r1_connection_control_adv_start_handler_plan_decode", 86,
+            "435f50237fe6a1501c14ba62cab220e522d4820e706a6302b721ffcdb3dbfb95",
+        ),
+        0x00084874: (
+            "r1_touch_switch_handler_plan_decode", 184,
+            "48de556b7d5d748c313316c773fd93f6ae51ac9075ed8d33079c390c8fbc02df",
+        ),
+    }
+    for entry, (symbol, size, digest) in \
+            protocol_handler_boundaries_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 protocol-handler boundary changed: 0x{entry:08x}"
+            )
     temperature_stress_cache_expected = {
+        0x000422C8: ("r1_stress_mode_control_plan", 80,
+                     "bd57edd03fcbccbeb6577dc1ce638b692f9c6c8371cb71d49624490e3d0d8876"),
+        0x00042474: ("r1_stress_measurement_control_plan", 86,
+                     "319ff304273a60cabeb3744370ff943dffdad2ec38ef58e53b64c890b3ad9f90"),
         0x0005AB6C: ("r1_shared_hourly_accumulator_snapshot", 48,
                      "b74c5922f418626358ebc50a329da3a21491332e4a71f37d51177f8d79d7cc6c"),
         0x0005ABA0: ("r1_shared_u8_hourly_average", 152,
@@ -11208,18 +13767,27 @@ def main() -> None:
                 f"R1 Goodix topic producer changed: 0x{entry:08x}"
             )
     thumb_callback_expected = {
+        0x0003407C: ("r1_product_specific", "clean_room_behavior_only",
+                     "r1_ble_tx_queue_dispatch_type1", 12,
+                     "a92c0d0743114a1354d18c5b9db682c06ea1ecc1eae9e3528ec178501b944077"),
         0x00042D28: ("r1_product_specific", "clean_room_behavior_only",
                      "r1_pmic_post_timer_callback_plan", 6,
                      "46ce7a3526ac961a61ffc8aa365a532374d31a64e5dc370ffbd0076019594aaf"),
         0x00042D2E: ("r1_product_specific", "clean_room_behavior_only",
                      "r1_pmic_post_device_callback_plan", 16,
                      "afcc5ed6008cfba661948e736b4f83763b8ebb33bdd1d0ef365c3c0aa3f7b16d"),
+        0x00042ED8: ("r1_product_specific", "clean_room_behavior_only",
+                     "r1_pmic_charge_i2c_callback_plan", 16,
+                     "0f60b3c715f651d3206800bbd33658e142ca94eff277509d3b9eb06d6ba4c0c7"),
         0x00042EE8: ("r1_product_specific", "clean_room_behavior_only",
                      "r1_connection_control_plan_adv_start", 306,
                      "7fa0d4b5da336d725c3fda8749821b3248350985ff0eb34c335d570bd42030af"),
         0x00046F88: ("r1_product_specific", "clean_room_behavior_only",
                      "delayed_touch_release", 6,
                      "972ff6f355a5b431c393c6dfaf0f12173dcf4a44a787a81bb9684b5157d3f18d"),
+        0x00045F3C: ("r1_product_specific", "clean_room_behavior_only",
+                     "r1_factory_input_record_plan_dispatch", 116,
+                     "9298cf72c25a75bacd23e7a94304495fd904b00ac66131020a9de33346cd516f"),
         0x0004E008: ("r1_product_specific", "clean_room_behavior_only",
                      "r1_connection_control_role_sync_thread_flags", 82,
                      "09faf2697afaaa3ccdc2ce5c7b882246693646820df7c8e05d78f108c0ef5921"),
@@ -11420,6 +13988,12 @@ def main() -> None:
         0x0002FEAC: ("r1_iqs7211e_register_write_port", 52, "19fbbdad063a3d748cca926317d83bca4b2da03bf244358dc332e7aaf3092061"),
         0x00030E6C: ("r1_iqs7211e_irq_worker", 434, "eb01bdaf164f4abc29b72af4c94cdc69ba5df688796aec8828326592264af37f"),
         0x00046650: ("r1_iqs7211e_touch_task_dispatcher", 578, "3019299c9c23cbed488c51229722b18cf0166ccae126bef2cdc3a49b615fab00"),
+        0x0004FA8C: ("r1_iqs7211e_factory_marker_1", 24, "55d4fdd20707269b2b817d69bbd7c2638d974e8112b03e368f0d0ee8806c02e0"),
+        0x0004FAA8: ("r1_iqs7211e_factory_marker_2", 24, "2fea003d0e94afb223365c2091177c68a227795756c76891b220756238cbe53a"),
+        0x0004FAC4: ("r1_iqs7211e_factory_marker_3", 26, "97f954019770ae2aed8bc4b741003667505ac33e3b4c6536f7fd9b7effd5deec"),
+        0x0004FAE4: ("r1_iqs7211e_factory_marker_4", 26, "c449f36740ef6af253a88b29a37e1137573bf1c0dbfcf78151dc796c102e497f"),
+        0x0004FB04: ("r1_iqs7211e_factory_marker_5", 26, "967654e9b8fe0390e2073837afb92d4b28304c9f934d8cb34ccd5220e10fd786"),
+        0x0004FB24: ("r1_iqs7211e_factory_marker_6", 26, "3453a55e55a8ead4030b1f2b1ab8b482662803542786731c8bb6b74e85e034b9"),
         0x0006F9E4: ("r1_iqs7211e_ati_recovery_policy", 300, "1b508f0430a596d1b61b5a4e8bc92e4b1b0f2a86b0174b897c04809af50c3dcd"),
         0x0006FCE8: ("r1_iqs7211e_reset_reconfigure", 120, "2e373b0fca801d54c48d56616f8ebc356cff664741ec912c04982853c251f1d2"),
         0x00087BA4: ("r1_iqs7211e_read_word_adapter", 24, "6a33d9dd3c91afb15a8a6d3b8ae7bec62d3b91630877a7f5e15ce292bfcc9444"),
@@ -11438,9 +14012,28 @@ def main() -> None:
                 row["upstream_symbol"] != symbol or \
                 len(body) != size or hashlib.sha256(body).hexdigest() != digest:
             raise AssertionError(f"R1 IQS7211E adapter boundary changed: 0x{entry:08x}")
+    touch_lifecycle_expected = {
+        0x00050304: ("r1_touch_lifecycle_disable_plan", 52,
+                     "8e00eee36d082b3292c05cc5d56b08a255fe15049d9e009cd546e84300c4fc86"),
+        0x00050338: ("r1_touch_lifecycle_enable_plan", 52,
+                     "7e574c6aad94c1e6af24277e385a0a999b49c78c021c75492fb8971845b2eea6"),
+    }
+    for entry, (symbol, size, digest) in touch_lifecycle_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["provider_family"] != "r1_product_specific" or \
+                row["source_disposition"] != "clean_room_behavior_only" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"R1 touch lifecycle behavior changed: 0x{entry:08x}"
+            )
     named_peripheral_candidates = {
         "gxcas_gxt310_candidate": {
             0x00050F9C: (138, "e85aa5da2c0263ec52b56abad76046a18eca7a341efe9f9b8a1ebead6ce6276d"),
+            0x0006F600: (56, "f8e7e7060dc42cc772ec9e0c75bb0cd0210f4160c792f73398df0557e24dc87e"),
+            0x0006F648: (106, "c2dd528f1696a7dec0fff2859d0940930d8f75de84d7d582a962e4fc9f9190fa"),
+            0x0006F738: (92, "996e62bb9f1dfdb48ae224674b0771b1e6783d32fe4d8c81a003a1b21824e7b1"),
             0x0006F804: (8, "0a099318ad9c76b025b0aa229e8de6332ef6956114081adf0972d7ab88684700"),
             0x0006F818: (98, "4820600616f6417670ae3535521aa4e72c9759af8070d999489955bc1d26fd4e"),
             0x0006F81E: (8, "4811461d8532e3b7b0f3a00ac062c333edd814247df6d0f610af4887153ded1f"),
@@ -11448,8 +14041,12 @@ def main() -> None:
         },
         "yhmicros_yhm2710_candidate": {
             0x0003510C: (224, "abec91957c0fa9eb17711fe536959bc508912b6625d683e220882717889e3181"),
+            0x00035268: (10, "a642dcfe0dd3a0884d462a09171a1b5ca23c92bc8a304dbae98b2241aef81b7f"),
+            0x0003543C: (106, "aa85adc0508a08b2c558b27437b8d4c357a79494d8df700e071b1c84855777e6"),
             0x000355BC: (106, "460a383a2a811399bdcc6b424e0de7b4316228996121cac373000d3853cb05ca"),
             0x0004E9E8: (4, "f3e11bb0100d0c9e35506027d631a68d15b6969aa0c140d73164a86f1f1b2e27"),
+            0x00050748: (4, "f84e786095a70e3d5a0a9663f8aaee5f065bbae0dea2a0de2de68f171b3d67ee"),
+            0x0005074C: (4, "051ec761f5abafb4d2b8b922c11c2a6ba681a1de4b861649692f2de6ed2b4ad1"),
             0x0005079C: (4, "b1322d2a50626c62b1d53606d9839bbd54b123ab62b7fe729766d35540450a2c"),
         },
     }
@@ -12172,6 +14769,33 @@ def main() -> None:
                 "clean_room_adapter_only_use_licensed_provider" or \
                 len(body) != size or hashlib.sha256(body).hexdigest() != digest:
             raise AssertionError(f"R1 Goodix adapter changed: 0x{entry:08x}")
+    generic_registry_manual_expected = {
+        0x00044BE0: (
+            "generic_device_registry_bus_read_command_ae", 12,
+            "5e4edc2fca69da99b162d41128627cda165f45f78267f04f5f2e8caf527f6e54",
+        ),
+        0x00050510: (
+            "generic_device_registry_bus_control_dispatch", 30,
+            "99bb18f9fcefbc73284399ad5ea7ea7e5d0864e851c3c2f9440782ed9d7d0f71",
+        ),
+        0x00050534: (
+            "generic_device_registry_bus_transfer_dispatch", 32,
+            "89ed9795968b67d7d060065fb20b1c03b8c632fa5a44d9165e7ed697af1fd650",
+        ),
+    }
+    for entry, (symbol, size, digest) in generic_registry_manual_expected.items():
+        row = ownership_by_key[("application", f"0x{entry:08x}")]
+        body = recovered_function(entry)
+        if row["inventory_source"] != "manual_provenance_supplement" or \
+                row["provider_family"] != \
+                "unknown_generic_device_registry_candidate" or \
+                row["source_disposition"] != \
+                "clean_room_reimplementation_owner_authorized" or \
+                row["upstream_symbol"] != symbol or len(body) != size or \
+                hashlib.sha256(body).hexdigest() != digest:
+            raise AssertionError(
+                f"generic registry manual helper changed: 0x{entry:08x}"
+            )
     st25_provider_expected = {
         0x00031B32: ("ST25DVxxKC_GetGPO1_ALL", 20, "17494acea6ec5faab251068f1301decfbd8c03369a5149ab057e87b2c3dbbd86"),
         0x00031B46: ("ST25DVxxKC_GetGPO2_ALL", 28, "8c2c82131c86a777f576f00c4f5612713d4749f617b7cc868189134b1abd919d"),
@@ -12180,10 +14804,12 @@ def main() -> None:
         0x00031BF4: ("ST25DVxxKC_GetMB_CTRL_DYN_ALL", 22, "0db7cb36335b0893211dd2548faf0902419b3ffa493aa6b08b421c0b44c56d3d"),
         0x00031C0A: ("ST25DVxxKC_GetFTM_MBMODE", 28, "30a7a638bb48a6b103765f91d6cba1e8177d5d33ea827a335c9f434c5b0e1a2f"),
         0x00031C26: ("ST25DVxxKC_Init", 42, "8e35360e141725fe0b3f8c307d3c319aff6b4253451bfbee3bd488eebd9b966e"),
+        0x00031C56: ("ST25DVxxKC_PresentI2CPassword", 78, "584479be5f22628424ca82235f167069063d134e057e37ebf3737b099156886e"),
         0x00031CA4: ("ST25DVxxKC_IsDeviceReady", 18, "8ade5ad4e1cd67b4c9c6852a199382869536bfec0edfbb953d48a4aaae0010b9"),
         0x00031CB6: ("ST25DVxxKC_ReadI2CSecuritySession_Dyn", 28, "a388f8857079b62b4049811491f79305904404bb00288e0b7fea9174a14a6c07"),
         0x00031CD2: ("ST25DVxxKC_ReadID", 26, "842c5de6e9651811b23be403f8a344cf72d1722d476e9ad3b6798a87e072e85c"),
         0x00031D36: ("ST25DVxxKC_ReadMBMode", 28, "00aeec5aaebc2839119efff5e3cc6fe0ffc62572c07f67c2f688b162935b87c3"),
+        0x00031D52: ("ST25DVxxKC_ReadMailboxData", 38, "9da42db6e851a04174232c5df737888b813f01b4e341fc558e9c08c8c59f8c6b"),
         0x00031D78: ("ST25DVxxKC_ReadReg", 14, "42313322cbe3a025e50da4c7de6bf12ceaa3275e1de377e6405a5b2fcc2b765b"),
         0x00031D88: ("ST25DVxxKC_RegisterBusIO", 54, "c8bf5525d4b5cfa7d2496b0fbf5d1bb78c3a8c6e04c52df20a27bbe699a62555"),
         0x00031DC8: ("ST25DVxxKC_ResetEHENMode_Dyn", 18, "e1e0dcb3ba7d1a1545836a4ebf99f09f1ebeaa130237ff5c63b7e1219b097d32"),
@@ -12211,10 +14837,22 @@ def main() -> None:
                 hashlib.sha256(body).hexdigest() != digest:
             raise AssertionError(f"ST25DVxxKC provider body changed: 0x{entry:08x}")
     st25_adapter_expected = {
+        0x00044C58: ("r1_st25dvxxkc_bus_tick_get", 6, "579f66b93cd2bbcb53693929db18e36025cdc6e5d94aa3e7590989e1d8a117b1"),
+        0x00044C64: ("r1_st25dvxxkc_bus_deinitialize", 10, "8b7848ac566af13545e7c0ca052a08264dc3a9288942aa275f34e827fc2cab7c"),
+        0x00044C6E: ("r1_st25dvxxkc_bus_initialize", 10, "378533c2312d3aa997953218f921e56e6d82c563759485194f425adfa90c695e"),
+        0x00044C78: ("r1_st25dvxxkc_bus_is_ready", 12, "7c8d31605621bc9f7adc17e70c7b5f74f8b1f5d27bcb0442c513fb7f12c5604c"),
+        0x00044C84: ("r1_st25dvxxkc_bus_read", 6, "030026b653096676e0a1e42ef849033b09a3312468389e5824d859449eb37404"),
+        0x00044C8A: ("r1_st25dvxxkc_bus_write", 6, "3bbff11ae7fbd405ae5aaf1d4b32ea5cc2eaa8c23b34e3434c0c935076b3c1f0"),
         0x00044BEC: ("r1_st25dvxxkc_bus_registration", 72, "0e60bffb20b67f4b0411d0537529f39206b6686633214fd7873c4a9d6ec30455"),
         0x00044C90: ("r1_st25dvxxkc_password_present", 84, "a0944f76f5367421800deec4fdbe9640ba9ad03e517e55ca02f22b832d5ce2e1"),
         0x00044C9C: ("r1_st25dvxxkc_security_session", 64, "2ed77b5d3f910dccb19835cddf96d1fa2d65836b9ee9a446ff95c034e2664c75"),
         0x00044CE8: ("r1_st25dvxxkc_gpo_configuration", 230, "bbd0ac4278321eaf957967a966d6e130bb185ad949416f2ca976f33dbde17f5f"),
+        0x00077250: ("r1_st25dvxxkc_dock_hardware_clear", 8, "b1f2be62466b2e568a7b60fa3e04186116d2e80759e8dfd862045d14c8d4c0ca"),
+        0x0007725C: ("r1_st25dvxxkc_dock_version_clear", 8, "167416acc38887c21d902ff6d88f6e27317bfc38bfe9eae44df370934d033188"),
+        0x00077268: ("r1_st25dvxxkc_dock_hardware_get", 6, "3c0a2c335e8fcf80c4100a66f61a44a70183c0c30be0a8749f802571f9a6902e"),
+        0x00077274: ("r1_st25dvxxkc_dock_version_get", 22, "2aea8b96b3cc9a764ebc460e79864f0dd8e1b481984679d25b5b8a9ba67ba2c0"),
+        0x00077290: ("r1_st25dvxxkc_charge_temperature_set", 6, "2e9cd305fe6b02a0dab2e3f8d223d6c3eb0961e10d18c0f961bb0dd9a567f4a5"),
+        0x0007729C: ("r1_st25dvxxkc_dock_advertising_set", 6, "0594a3e6604c4c62a70819ee5094ceab26fb2eb8fbb5280fd4b92fff602100ce"),
         0x000772A8: ("r1_st25dvxxkc_dock_advertisement_send", 142, "831d81b9484b6ed2e7551144aa1a831fb9cea0bec4afe5535e0cc7e1cd74ffa3"),
         0x00077430: ("r1_st25dvxxkc_dock_frame_policy", 466, "ae5760b9a6ac03ac46642f7e19b90b11b0e630c406e443902ce1cb31c99a30e1"),
         0x00077764: ("r1_st25dvxxkc_initialize_configuration", 590, "1158c4ef104e18bc79eee7e54f5d8bbb932211406077bfaa73a9eacbe74df002"),
@@ -12294,7 +14932,7 @@ def main() -> None:
             raise AssertionError(f"ST provider function not routed: {entry}")
     for entry in (
         "0x000750a0", "0x000750e8", "0x0007518a", "0x000751b8",
-        "0x000754dc", "0x00075510",
+        "0x00075290", "0x000754dc", "0x00075510",
     ):
         row = ownership_by_key[("application", entry)]
         if row["provider_family"] != "r1_st_lis2dw12_provider_adapter" or \

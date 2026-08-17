@@ -123,9 +123,12 @@ word `+0x34`; the erase operation sits at ops `+0x30` and is called as
 | `0x00050DF0..<0x00050E17` | 40 | `generic_device_registry_time_request` | zeroed 0x40 block, epoch at +0x2C, offset at +0x30; slot 0x14 on the time device |
 | `0x00050F34..<0x00050F57` | 36 | `generic_device_registry_request_a_control` | request block A `{cmd, code, data, len2}`; slot 0x10; returns 1 when the operation returned 0, else 0 (recovered inversion) |
 | `0x00050F5C..<0x00050F81` | 38 | `generic_device_registry_request_a_transfer` | request block A `{cmd, code, buf (only when nonzero), len}`; slot 0x14; same inversion |
-| `0x0005D1EA..<0x0005D1F3` | 52* | `generic_device_registry_bus_read` | zero length -> 0; else shared bus block `{cmd=0xAE, code, data=buf, len2}` and slot 0x10 on the bus device, status pass-through |
+| `0x00044BE0..<0x00044BEC` | 12 | `generic_device_registry_bus_read_command_ae` | reorders the read wrapper's three payload arguments, selects command `0xAE`, and tail-calls the shared control dispatcher |
+| `0x00050510..<0x0005052E` | 30 | `generic_device_registry_bus_control_dispatch` | fills shared bus block `{cmd, code, data, len2}` and invokes slot 0x10 on the bus device |
+| `0x00050534..<0x00050554` | 32 | `generic_device_registry_bus_transfer_dispatch` | fills shared bus block `{cmd, code, buf (only when nonzero), len}` and invokes slot 0x14 on the bus device |
+| `0x0005D1EA..<0x0005D1F3` | 52* | `generic_device_registry_bus_read` | zero length -> 0; else calls the explicit command-`0xAE` veneer and returns its status |
 | `0x0005D1F4..<0x0005D21D` | 42 | `generic_device_registry_bus_update_bit` | seeds a local with arg4, reads register 0x0D into it, and on status 0 writes back with low bit replaced by `arg1 & 1` (stock `bfi`) |
-| `0x0005D21E..<0x0005D241` | 68* | `generic_device_registry_bus_write` | zero length -> 0; else Nordic delay(5), shared bus block `{cmd=0xAE, code, buf (only when nonzero), len}`, slot 0x14, status pass-through |
+| `0x0005D21E..<0x0005D241` | 68* | `generic_device_registry_bus_write` | zero length -> 0; else Nordic delay(5), then the explicit command-`0xAE` transfer dispatcher, status pass-through |
 | `0x00077214..<0x0007721B` | 8 | `generic_device_registry_slot_0c_entry` | pure thunk: slot 0x0C on the bound device |
 | `0x00087AF8..<0x00087B15` | 30 | `generic_device_registry_message_control` | packs message B `{arg2, arg1, arg3}`, slot 0x10, returns arg3 |
 | `0x0009338C..<0x000933AF` | 36 | `generic_device_registry_request_b_control` | request block B `{code, data, len2}` — the command byte is NOT written; slot 0x10; inverted return |
@@ -134,12 +137,12 @@ word `+0x34`; the erase operation sits at ops `+0x30` and is called as
 | `0x0005E1FC..<0x0005E221` | 38 | `generic_device_registry_flash_erase_sector` | when ready and sector < 2: erase one 0x1000 sector, return 1; else 0 |
 | `0x000734E8..<0x00073577` | 144 | `generic_device_registry_sync_modules` | enabled-gated module scan: `sync_one_class(record, index16)` per entry, gated R1/Nordic logging of nonzero statuses, then flush `(1, 0)`; returns 1 |
 
-\* The ledger sizes for `0x0005D1EA` (52) and `0x0005D21E` (68) fold in the
-shared tail-called helpers `0x00044BE0` (argument reorder + command 0xAE),
-`0x00050510` (bus-block fill + slot 0x10 dispatch), and `0x00050534`
-(bus-block fill + slot 0x14 dispatch), which are not separate ledger
-entries; the raw wrapper extents are 9 and 35 bytes.  The reconstruction
-implements the folded observable behavior and says so at each callsite.
+\* Ghidra assigned the callers at `0x0005D1EA` and `0x0005D21E` legacy
+noncontiguous extents of 52 and 68 bytes. Independent Thumb disassembly of the
+rebuilt image authenticated the three tail-called helpers at `0x00044BE0`,
+`0x00050510`, and `0x00050534`; they are now separate exact manual ledger
+supplements and separate C functions. The script seed at `0x00044BE4` is an
+interior instruction of the contiguous `0x00044BE0..<0x00044BEC` veneer.
 
 ## Divergences from the stock binary (all deliberate)
 

@@ -401,6 +401,10 @@ bool yhm2710_register_write_byte(yhm2710_device *device, uint8_t reg,
     return yhm2710_register_write(device, reg, &value, 1u);
 }
 
+bool yhm2710_read_register_9(yhm2710_device *device, uint8_t *value) {
+    return yhm2710_register_read_byte(device, UINT8_C(9), value);
+}
+
 bool yhm2710_ready(yhm2710_device *device) {
     if (device == NULL || device->transport == NULL ||
             !yhm2710_stacmd_operational(device->transport)) {
@@ -511,6 +515,24 @@ bool yhm2710_set_system_track(yhm2710_device *device) {
     }
     value = (uint8_t)(value | UINT8_C(2));
     return yhm2710_register_write_byte(device, UINT8_C(1), value);
+}
+
+bool yhm2710_clear_system_track(yhm2710_device *device) {
+    uint8_t value = 0u;
+    if (!yhm2710_register_read_byte(device, UINT8_C(1), &value)) {
+        return false;
+    }
+    value = (uint8_t)(value & (uint8_t)~UINT8_C(2));
+    return yhm2710_register_write_byte(device, UINT8_C(1), value);
+}
+
+bool yhm2710_set_charging_event(yhm2710_device *device) {
+    uint8_t value = 0u;
+    if (!yhm2710_register_read_byte(device, UINT8_C(3), &value)) {
+        return false;
+    }
+    value = (uint8_t)(value | UINT8_C(0x08));
+    return yhm2710_register_write_byte(device, UINT8_C(3), value);
 }
 
 void yhm2710_delay_209(void) {

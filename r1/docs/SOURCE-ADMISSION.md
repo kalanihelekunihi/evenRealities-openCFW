@@ -52,7 +52,7 @@ that code is eligible for rewriting.
 | Goodix | `gh3x2x-v2.23_7ecd2a` | optical sensor/algorithm implementation; public democode driver layer is pinned upstream, algorithm interiors under owner-authorized reduction (see above) |
 | GoMore | exact embedded health-algorithm SDK/version unresolved | no public or licensed source route; under owner-authorized reduction (see above) |
 | Flipper FZCO / Azoteq | Flipper One IQS7211E driver commit `0a88e26b...` under its MIT REUSE map; Azoteq-authored settings header at `436d3c42...` with an in-file MIT grant | admitted compatible provider/settings references; only R1 values, nRF5 transport/board port, communication glue, and recovery policy are local; exact stock checkout is not claimed |
-| GXCAS | GXT310 part and public datasheet identified; official catalog now lists a 2025 STM32 driver V1.0 archive, but its bytes/license and relationship to the older R1 image remain unauthenticated | owner-authorized five-entry reduction landed in `reconstructed/gxt310/`; the official archive remains documentation evidence only |
+| GXCAS | GXT310 part and public datasheet identified; official catalog now lists a 2025 STM32 driver V1.0 archive, but its bytes/license and relationship to the older R1 image remain unauthenticated | owner-authorized eight-entry reduction landed in `reconstructed/gxt310/`; the official archive remains documentation evidence only |
 | YHMICROS | YHM2710 part family identified; exact R1 driver source/version/license unresolved | under owner-authorized reduction (see above); the R1 three-client ownership policy keeps its semantic-provider seam |
 | Bosch Sensortec | BMA456 SensorAPI v2.29.0 commit `3266db2c...` | BMA456W register, configuration-stream, FIFO, and feature driver; R1 adapters only outside it |
 | STMicroelectronics | LIS2DW12 v2.1.0 commit `8d4bd522...`, selected as newest release in the proven compatible interval | LIS2DW12 register/FIFO/tap driver; `LIS2DOC` is the R1 diagnostic label |
@@ -97,10 +97,11 @@ disposition `clean_room_reimplementation_owner_authorized` as their reductions l
 - the Goodix GH3X2X provider-attributed entries (320: algorithm-library closures and the
   `goodix_mem` apparatus, with model data represented as explicit typed inputs),
 - the GoMore health/sleep algorithm families (362),
-- YHMICROS YHM2710 (36), GXCAS GXT310 (5), and QST QMA6100 (3).
+- YHMICROS YHM2710 (44 exact entries after tail-target and omitted-transport closure), GXCAS GXT310 (8), and QST QMA6100 (3).
 
-Progress at this snapshot: 339 Goodix and all 362 GoMore functions now compile from the reconstructed
-Goodix primitive/heap and quantized-runtime modules and the two reconstructed GoMore modules. This moves 320
+Progress at this snapshot: 339 Goodix, all 362 GoMore, and all 44 YHM2710 functions now compile
+from the reconstructed Goodix primitive/heap and quantized-runtime modules, the two reconstructed
+GoMore modules, and the reconstructed YHM2710 module. This moves 320
 previously opaque Goodix entries and 355 opaque GoMore entries into the owner-authorized
 disposition; no Goodix or GoMore executable provider entries remain opaque. Seventeen of the 339 Goodix functions
 also replace already-admitted public-democode source, and two replace R1 product entries, so

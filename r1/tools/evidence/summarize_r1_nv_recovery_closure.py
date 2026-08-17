@@ -16,9 +16,9 @@ from summarize_r1_gomore_input_abi import IMAGE_SHA256
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_IMAGE = ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
 LOAD_BASE = 0x00027000
-EXPECTED_ENTRY_SHA256 = "8bd9e43e86aefb51394aa641311dc15eb4add92eb8b9bcd9996c1145472f8f69"
-EXPECTED_BODY_SHA256 = "e02a1e3a725492dc0847c40422cdad1dbda32008ba7d6eaeb09575ea059a1357"
-EXPECTED_CALLMAP_SHA256 = "004db3a5f8c868b6d8561bb36cf189a7e033e5b7ab946066d3841bac8eb77a4f"
+EXPECTED_ENTRY_SHA256 = "52135f5277d6eae40edf55ee4c7723115874bff3c06bb4013320978e00754ba0"
+EXPECTED_BODY_SHA256 = "110cf9406bc84b0c0cee795cfe422ec935993889bceb0b5af152574dfaa610df"
+EXPECTED_CALLMAP_SHA256 = "eb63080c2199b0d119a952191f23b3285c994301a2cca71a7ad2b151b55bb542"
 
 
 def _function(
@@ -58,6 +58,18 @@ R1_NV_RECOVERY_FUNCTIONS = (
     _function(
         0x0007C450, 0x0007C4BC, "r1_nv_recovery_command_dispatch",
         "5b5f75179f6420c7951024f2b5c215cec131b9591db56bd77a698fe8524786dd",
+        "manual_provenance_supplement",
+    ),
+    _function(
+        0x000839B4, 0x000839DA,
+        "r1_nv_recovery_outbound_response_plan_build",
+        "a1e70b7c86f5462f65b7de79fde5352d318615bb12d5d6d6e9c2ce0e36b8d719",
+        "manual_provenance_supplement",
+    ),
+    _function(
+        0x00084150, 0x00084200,
+        "r1_nv_recovery_command_handler_plan_decode",
+        "59bac05616e59d2c635bcd3d0963c68b6e3bef716bd0c06bf7fe67e20eeeceed",
         "manual_provenance_supplement",
     ),
 )
@@ -114,6 +126,8 @@ def summarize(image_path: Path) -> dict[str, Any]:
         0x0007BBE8: (0x0007C4B6, 0x0008478A),
         0x0007BD68: (0x0007C46E,),
         0x0007C450: (0x000841FA,),
+        0x000839B4: (0x0007BC22,),
+        0x00084150: (),
     }
     for item in output:
         entry = int(item["entry"], 16)
@@ -159,6 +173,8 @@ def summarize(image_path: Path) -> dict[str, Any]:
         ),
         "functions": output,
         "protocol": {
+            "system_subcommand": "0x11",
+            "handler_registration": "1100000051410800",
             "command": 2,
             "body_bytes": 116,
             "checksum": "CRC-16/MODBUS",
@@ -172,7 +188,7 @@ def summarize(image_path: Path) -> dict[str, Any]:
         },
         "security": {
             "normal_ble_command_enabled": False,
-            "local_implementation": "bounded pure report builder and fill-only merge planner",
+            "local_implementation": "bounded pure report, outbound-response, envelope-route, and fill-only merge plans",
             "transport_sender_implemented": False,
             "persistent_commit_implemented_by_planner": False,
             "identity_logging_allowed": False,

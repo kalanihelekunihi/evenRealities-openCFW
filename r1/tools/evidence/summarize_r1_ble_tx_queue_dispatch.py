@@ -46,6 +46,18 @@ R1_BLE_TX_QUEUE_FUNCTIONS: tuple[dict[str, Any], ...] = (
             (0x0003E274, 0x0003E48C),
         ),
     },
+    {
+        "entry": 0x0003407C,
+        "end_exclusive": 0x00034088,
+        "size": 12,
+        "role": "BLE transmit-queue type-1 EUS/phone dispatch veneer",
+        "symbol": "r1_ble_tx_queue_dispatch_type1",
+        "sha256": "a92c0d0743114a1354d18c5b9db682c06ea1ecc1eae9e3528ec178501b944077",
+        "caller_count": 0,
+        "caller_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "inventory": "manual_provenance_supplement",
+        "segments": ((0x0003407C, 0x00034088),),
+    },
 )
 
 
@@ -97,8 +109,8 @@ def summarize(image_path: Path) -> dict[str, Any]:
         "analysis": "R1 BLE transmit-queue producer closure",
         "image": str(image_path),
         "image_sha256": EXPECTED_IMAGE_SHA256,
-        "function_count": 2,
-        "function_bytes": 560,
+        "function_count": 3,
+        "function_bytes": 572,
         "functions": functions,
         "message_envelope": {
             "message_id_offset": 0,
@@ -106,7 +118,7 @@ def summarize(image_path: Path) -> dict[str, Any]:
             "payload_length_offset": 8,
             "payload_offset": 12,
             "allocation_size_formula": "align4(payload_length + 15)",
-            "known_veneer_dispatch_types": [0, 2],
+            "known_veneer_dispatch_types": [0, 1, 2],
         },
         "queue_policy": {
             "near_full_threshold_percent": 90,

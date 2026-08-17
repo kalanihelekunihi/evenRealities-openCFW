@@ -2,15 +2,18 @@
 
 ## Decision
 
-The former largest unknown at `0x0008B378` is a 1,344-byte dormant R1 product test fixture, not a
+The former largest unknown at `0x0008B378` is a 1,344-byte R1 product test fixture, not a
 health algorithm or third-party provider body. Its exact diagnostics name `health_daily_test`,
 `hr_daily`, `spo2_daily`, and `temp_daily`; it accepts type 0/1/2, fills selected hourly daily-cache
 slots with pseudorandom synthetic values, stamps the first generated slot, and prints all 24 hours.
 
-No direct caller and no code/data pointer to the entry exists in the recovered image. Production
-reachability is therefore unproven, and openR1 does not need this fixture in a production image.
-The behavior may be independently recreated only as an explicit test utility; it must never feed
-synthetic health measurements into a production path.
+The exact 14-byte internal event-15 gate at `0x00042860..<0x0004286E` requires a non-null nine-byte
+record and then tail-calls the fixture. Its SHA-256 is
+`6b65c9e2c9e103d6d16da41f0d7d0d5eb9c1c249ae4aca2d1a44af826a133fcc`.
+Internal reachability is therefore proven, correcting the earlier callerless/dormant conclusion.
+OpenR1 implements only `r1_health_daily_test_event_valid`, the pure null/length decision; it does
+not compile the fixture into the source-built target and exposes no event sender, payload encoder,
+command registration, UI action, or synthetic health-data injector.
 
 ## Exact scattered body
 

@@ -36,6 +36,257 @@ r1_bae8_event_plan r1_runtime_plan_bae8_event(uint8_t event_type) {
     return plan;
 }
 
+r1_error r1_bae8_connection_event_plan_build(
+    bool link_context_lookup_succeeded, bool callback_installed,
+    bool channel1_cccd_read_succeeded, uint16_t channel1_cccd,
+    bool channel2_cccd_read_succeeded, uint16_t channel2_cccd,
+    r1_bae8_connection_event_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_bae8_connection_event_plan){
+        .log_link_context_lookup_failure =
+            !link_context_lookup_succeeded,
+        .request_channel1_cccd_read = true,
+        .request_channel2_cccd_read = true,
+        .mark_channel1_notifications_enabled =
+            link_context_lookup_succeeded && callback_installed &&
+            channel1_cccd_read_succeeded &&
+            (channel1_cccd & R1_BAE8_CCCD_NOTIFICATION_BIT) != 0u,
+        .mark_channel2_notifications_enabled =
+            link_context_lookup_succeeded && callback_installed &&
+            channel2_cccd_read_succeeded &&
+            (channel2_cccd & R1_BAE8_CCCD_NOTIFICATION_BIT) != 0u,
+        .dispatch_connection_event = callback_installed,
+        .callback_event_type = R1_BAE8_CONNECTION_EVENT_TYPE,
+        .callback_event_record_bytes =
+            R1_BAE8_CONNECTION_EVENT_RECORD_BYTES,
+    };
+    return R1_OK;
+}
+
+r1_error r1_gap_event_plan_build(
+    const r1_gap_event_observation *observation, r1_gap_event_plan *plan) {
+    if (observation == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_gap_event_plan){0};
+    switch (observation->event_id) {
+        case R1_GAP_EVT_CONNECTED:
+            plan->route = R1_GAP_EVENT_CONNECTED;
+            plan->cancel_connection_timeout = true;
+            plan->schedule_connection_timeout = true;
+            plan->connection_timeout_ticks =
+                R1_GAP_CONNECTION_TIMEOUT_TICKS;
+            plan->cache_peer_record = observation->connection < 3u;
+            plan->cancel_role_timers = true;
+            plan->factory_role_delay_ticks =
+                R1_GAP_FACTORY_ROLE_DELAY_TICKS;
+            if (observation->factory_marker == UINT8_C(0x5a)) {
+                plan->schedule_factory_role_timer_a = true;
+                if (observation->phone_connection == R1_INVALID_CONNECTION) {
+                    plan->request_no_phone_advertising_policy = true;
+                } else {
+                    plan->schedule_factory_role_timer_b = true;
+                }
+            }
+            plan->store_latest_connection = true;
+            plan->register_link_context =
+                observation->free_link_slot_available;
+            plan->enter_fail_stop_on_link_context_error =
+                observation->free_link_slot_available &&
+                !observation->link_context_initialization_succeeded;
+            break;
+
+        case R1_GAP_EVT_DISCONNECTED:
+            plan->route = R1_GAP_EVENT_DISCONNECTED;
+            plan->cancel_connection_timeout = true;
+            plan->cancel_role_timers = true;
+            plan->clear_connection_latch = true;
+            plan->release_link_context = true;
+            plan->clear_peer_record = observation->connection < 3u;
+            plan->query_peripheral_link_count = true;
+            plan->disconnect_reason = observation->event_byte8;
+            plan->publish_disconnect_status = true;
+            if (observation->connection == observation->glasses_connection) {
+                plan->disconnected_role = R1_GAP_DISCONNECTED_GLASSES;
+                plan->reset_glasses_transport = true;
+                plan->clear_glasses_connection = true;
+            } else if (observation->connection ==
+                       observation->phone_connection) {
+                plan->disconnected_role = R1_GAP_DISCONNECTED_PHONE;
+                plan->apply_phone_disconnect_policy = true;
+                plan->clear_phone_connection = true;
+            } else {
+                plan->disconnected_role = R1_GAP_DISCONNECTED_UNASSIGNED;
+            }
+            plan->inspect_advertising_tx_power =
+                observation->advertising_tx_power_configured;
+            plan->enter_fail_stop_on_tx_power_error =
+                observation->advertising_tx_power_configured &&
+                observation->advertising_tx_power_status != 0u &&
+                observation->advertising_tx_power_status != 8u;
+            plan->start_advertising = true;
+            plan->advertising_mode = R1_ADVERTISING_MODE_DIRECTED_OR_FAST;
+            plan->schedule_advertising_retry =
+                observation->advertising_start_status != 0u;
+            plan->advertising_retry_ticks = plan->schedule_advertising_retry
+                ? R1_GAP_ADVERTISING_RETRY_TICKS : 0u;
+            plan->clear_latest_connection = true;
+            break;
+
+        case R1_GAP_EVT_PHY_UPDATE_REQUEST:
+            plan->route = R1_GAP_EVENT_PHY_UPDATE_REQUEST;
+            plan->request_phy_update = true;
+            plan->use_glasses_local_phy_preference =
+                observation->connection == observation->glasses_connection;
+            if (plan->use_glasses_local_phy_preference) {
+                plan->transmit_phy = observation->event_byte9;
+                plan->receive_phy = observation->event_byte8;
+            } else {
+                plan->transmit_phy = 1u;
+                plan->receive_phy = 1u;
+            }
+            break;
+
+        case R1_GAP_EVT_PHY_UPDATE:
+            plan->route = R1_GAP_EVENT_PHY_UPDATE_COMPLETE;
+            if (observation->event_byte8 != 0u) {
+                plan->phy_result = R1_GAP_PHY_RESULT_FAILED;
+            } else if (observation->event_byte9 == 4u ||
+                       observation->event_byte10 == 4u) {
+                plan->phy_result = R1_GAP_PHY_RESULT_CODED;
+            } else {
+                plan->phy_result = R1_GAP_PHY_RESULT_NON_CODED;
+            }
+            break;
+
+        case R1_GATTC_EVT_TIMEOUT:
+            plan->route = R1_GAP_EVENT_GATTC_TIMEOUT;
+            plan->log_gatt_timeout = true;
+            break;
+
+        case R1_GATTS_EVT_TIMEOUT:
+            plan->route = R1_GAP_EVENT_GATTS_TIMEOUT;
+            plan->log_gatt_timeout = true;
+            break;
+
+        default:
+            plan->route = R1_GAP_EVENT_IGNORE;
+            break;
+    }
+    return R1_OK;
+}
+
+r1_error r1_nfc_charge_task_plan_build(
+    const r1_nfc_charge_task_observation *observation,
+    r1_nfc_charge_task_plan *plan) {
+    if (observation == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_nfc_charge_task_plan){0};
+    const uint32_t flags = observation->event_flags;
+
+    plan->wait_for_message =
+        (flags & R1_NFC_CHARGE_EVENT_MESSAGE_PENDING) != 0u;
+    plan->message_bytes = plan->wait_for_message
+        ? R1_NFC_CHARGE_MESSAGE_BYTES : 0u;
+
+    plan->set_charged_notification =
+        (flags & R1_NFC_CHARGE_EVENT_CHARGED_NOTIFICATION) != 0u;
+    plan->run_standard_command_irq_sequence =
+        (flags & R1_NFC_CHARGE_EVENT_STANDARD_COMMAND_IRQ) != 0u;
+    plan->open_touch = plan->set_charged_notification ||
+        plan->run_standard_command_irq_sequence;
+    if (plan->run_standard_command_irq_sequence) {
+        plan->clear_nfc_field_seen = true;
+        plan->st25_dynamic_register =
+            R1_NFC_CHARGE_ST25_DYNAMIC_REGISTER;
+        plan->standard_command_register_value = 1u;
+        plan->standard_command_delay_ticks =
+            R1_NFC_CHARGE_STANDARD_DELAY_TICKS;
+    }
+
+    plan->run_not_charging_sequence =
+        (flags & R1_NFC_CHARGE_EVENT_NOT_CHARGING) != 0u;
+    if (plan->run_not_charging_sequence) {
+        plan->close_touch = true;
+        plan->reset_battery_charge_latches = true;
+        plan->st25_dynamic_register =
+            R1_NFC_CHARGE_ST25_DYNAMIC_REGISTER;
+        plan->not_charging_register_value = 0u;
+        plan->not_charging_delay_ticks =
+            R1_NFC_CHARGE_NOT_CHARGING_DELAY_TICKS;
+        plan->temperature_retry_delay_ticks =
+            R1_NFC_CHARGE_TEMPERATURE_RETRY_TICKS;
+        for (uint8_t index = 0u;
+             index < R1_NFC_CHARGE_TEMPERATURE_ATTEMPTS; ++index) {
+            ++plan->temperature_id_read_count;
+            if (observation->temperature_ids[index][0] == UINT8_C(0x50) &&
+                observation->temperature_ids[index][1] == UINT8_C(0x50)) {
+                plan->temperature_ids_valid = true;
+                plan->temperature_successful_attempt = index;
+                break;
+            }
+            ++plan->temperature_retry_delay_count;
+        }
+        plan->enable_watchdog_reset = !plan->temperature_ids_valid;
+    }
+
+    plan->clear_charged_notification =
+        (flags & R1_NFC_CHARGE_EVENT_CHARGED_NOTIFICATION_CLEAR) != 0u;
+    plan->dispatch_pmic_charge_event =
+        (flags & R1_NFC_CHARGE_EVENT_PMIC_CHARGE) != 0u;
+    plan->pmic_charge_event = plan->dispatch_pmic_charge_event
+        ? UINT8_C(0x5a) : 0u;
+    plan->report_charging_battery_percent =
+        (flags & R1_NFC_CHARGE_EVENT_CHARGING_BATTERY_UPDATE) != 0u;
+    if (plan->report_charging_battery_percent &&
+        observation->battery_percent == 0u) {
+        plan->charging_zero_battery_update_calls =
+            R1_NFC_CHARGE_ZERO_BATTERY_UPDATE_COUNT;
+        plan->charging_zero_battery_update_delay_ticks =
+            R1_NFC_CHARGE_ZERO_BATTERY_UPDATE_TICKS;
+    }
+    plan->periodic_battery_update_calls =
+        (flags & R1_NFC_CHARGE_EVENT_BATTERY_UPDATE) != 0u ? 1u : 0u;
+
+    plan->terminate_task =
+        (flags & R1_NFC_CHARGE_EVENT_TERMINATE) != 0u;
+    plan->release_task_synchronization = plan->terminate_task;
+    plan->deregister_watchdog = plan->terminate_task;
+    plan->terminal_delay_ticks = plan->terminate_task
+        ? R1_RUNTIME_WAIT_FOREVER : 0u;
+    return R1_OK;
+}
+
+r1_buttonless_dfu_event_plan r1_runtime_plan_buttonless_dfu_event(
+    uint32_t event_type) {
+    r1_buttonless_dfu_event_plan plan = {
+        R1_BUTTONLESS_DFU_UNKNOWN, false, false, false
+    };
+    switch (event_type) {
+        case 0u:
+            plan.diagnostic = R1_BUTTONLESS_DFU_PREPARE;
+            plan.disable_advertising_on_disconnect = true;
+            plan.disconnect_all_connected_links = true;
+            plan.report_disconnected_link_count = true;
+            break;
+        case 1u:
+            plan.diagnostic = R1_BUTTONLESS_DFU_ENTER;
+            break;
+        case 2u:
+            plan.diagnostic = R1_BUTTONLESS_DFU_ENTER_FAILED;
+            break;
+        case 3u:
+            plan.diagnostic = R1_BUTTONLESS_DFU_RESPONSE_SEND_ERROR;
+            break;
+        default:
+            break;
+    }
+    return plan;
+}
+
 r1_error r1_bae8_plan_hvx_result(
     bool serialized_path, bool credit_acquired, r1_tx_status status,
     uint8_t completed_retries, r1_bae8_hvx_retry_plan *plan) {
@@ -92,6 +343,39 @@ r1_error r1_ble_thread_message_encode(
     size_t *allocation_bytes) {
     return runtime_thread_message_encode(
         message_type, context, payload, payload_length, output,
+        output_capacity, allocation_bytes);
+}
+
+static r1_error runtime_ble_tx_queue_dispatch_encode(
+    uint32_t dispatch_type, uint32_t message_identifier,
+    const uint8_t *payload, size_t payload_length, uint8_t *output,
+    size_t output_capacity, size_t *allocation_bytes) {
+    return r1_ble_thread_message_encode(
+        message_identifier, dispatch_type, payload, payload_length, output,
+        output_capacity, allocation_bytes);
+}
+
+r1_error r1_ble_tx_queue_dispatch_type0(
+    uint32_t message_identifier, const uint8_t *payload, size_t payload_length,
+    uint8_t *output, size_t output_capacity, size_t *allocation_bytes) {
+    return runtime_ble_tx_queue_dispatch_encode(
+        0u, message_identifier, payload, payload_length, output,
+        output_capacity, allocation_bytes);
+}
+
+r1_error r1_ble_tx_queue_dispatch_type1(
+    uint32_t message_identifier, const uint8_t *payload, size_t payload_length,
+    uint8_t *output, size_t output_capacity, size_t *allocation_bytes) {
+    return runtime_ble_tx_queue_dispatch_encode(
+        1u, message_identifier, payload, payload_length, output,
+        output_capacity, allocation_bytes);
+}
+
+r1_error r1_ble_tx_queue_dispatch_type2(
+    uint32_t message_identifier, const uint8_t *payload, size_t payload_length,
+    uint8_t *output, size_t output_capacity, size_t *allocation_bytes) {
+    return runtime_ble_tx_queue_dispatch_encode(
+        2u, message_identifier, payload, payload_length, output,
         output_capacity, allocation_bytes);
 }
 

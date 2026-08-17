@@ -233,6 +233,14 @@ The implementation is pinned to these repository-owned evidence sets:
   [`PROTOCOL-RESPONSE-CORRELATION.md`](correlation/PROTOCOL-RESPONSE-CORRELATION.md); its clean-room API reuses
   the bounded packet encoder, full-model CRC-16/MODBUS, and generated-serial policy, while
   injecting FreeRTOS allocation plus Nordic BLE transport as external seams.
+- The 212-byte EUS module-ingress/system-dispatch closure is implemented as non-invoking typed
+  plans in [`EUS-MODULE-DISPATCH-CORRELATION.md`](correlation/EUS-MODULE-DISPATCH-CORRELATION.md):
+  exact module/version gating, null module slots, special module `7F`, and all 20 system keys are
+  local, while recovered handler pointers and private dispatch remain excluded.
+- The 526-byte factory-input duplicate of the legacy command router is independently admitted in
+  [`FACTORY-LEGACY-COMMAND-DISPATCH-CORRELATION.md`](correlation/FACTORY-LEGACY-COMMAND-DISPATCH-CORRELATION.md),
+  preserving its shared 23 routes and factory-only `10`/`8B` branches as inert typed results; no
+  factory handler, hardware query, or response sender is exposed.
 - The 364-byte generic virtual-file export state machine is product-routed in
   [`EXPORT-STATE-MACHINE-CORRELATION.md`](correlation/EXPORT-STATE-MACHINE-CORRELATION.md); only its pure
   control/chunk planner is local, while the composite private-log reader and live sender remain
@@ -263,10 +271,12 @@ The implementation is pinned to these repository-owned evidence sets:
   fail-closed policy in
   [`CONNECTION-ROLE-ASSIGNMENT-CORRELATION.md`](correlation/CONNECTION-ROLE-ASSIGNMENT-CORRELATION.md);
   Nordic connection state and role-event delivery remain external.
-- The four-function / 1,740-byte R1 nonvolatile-recovery closure, exact 116-byte body, fill-only
+- The six-function / 1,954-byte R1 nonvolatile-recovery closure, registered system-`0x11`
+  envelope, exact 116-byte body, fill-only
   merge rules, and withheld identity-bearing transport are documented in
   [`NV-RECOVERY-CORRELATION.md`](correlation/NV-RECOVERY-CORRELATION.md).
-- The 494-byte R1 MAC-keyed compiled-default restore and its 59-record identity-table extent are
+- The two-entry / 498-byte R1 MAC-keyed compiled-default restore, exact storage-event veneer, and
+  59-record identity-table extent are
   pinned in [`NV-COMPILED-RESTORE-CORRELATION.md`](correlation/NV-COMPILED-RESTORE-CORRELATION.md); only an
   abstract deployer-owned policy is eligible locally, and live persistence remains disabled.
 - Eight exact Nordic BLE advertising functions, including initialization, event handling, and the
@@ -275,6 +285,11 @@ The implementation is pinned to these repository-owned evidence sets:
 - Ten exact Nordic unbonded buttonless-DFU functions, including one function Ghidra omitted and
   two non-contiguous SDK functions, are source/hash-routed in
   [`NORDIC-BUTTONLESS-DFU-CLOSURE.md`](closures/NORDIC-BUTTONLESS-DFU-CLOSURE.md).
+- The adjacent 364-byte R1 buttonless-DFU event callback is independently
+  byte-pinned in
+  [`BUTTONLESS-DFU-EVENT-POLICY-CORRELATION.md`](correlation/BUTTONLESS-DFU-EVENT-POLICY-CORRELATION.md);
+  local C exposes only its advertising/disconnect plan and does not execute a
+  Nordic operation, reset, or bootloader handoff.
 - Nordic's exact shutdown request and static shutdown processor are source-routed in
   [`NORDIC-POWER-MANAGEMENT-CLOSURE.md`](closures/NORDIC-POWER-MANAGEMENT-CLOSURE.md).
 - The twelve-function retained reset-trace closure, exact 16-byte CRC record, fault-vector path,
@@ -314,6 +329,44 @@ The implementation is pinned to these repository-owned evidence sets:
   [`TOUCH-TASK-DISPATCHER-CORRELATION.md`](correlation/TOUCH-TASK-DISPATCHER-CORRELATION.md); its event routing
   may be clean-room implemented only around the pinned IQS7211E, Nordic/CMSIS, and shared-power
   provider seams.
+- Its registered 72-byte recovery-timer callback is separately modeled as a
+  pure clear-latch/event-bit plan in
+  [`TOUCH-RECOVERY-TIMER-CORRELATION.md`](correlation/TOUCH-RECOVERY-TIMER-CORRELATION.md), while the
+  off-by-four `0x46908` analysis seed is retained as a non-function adjudication.
+- The scatter-installed 12-byte no-effect `i2c_5` delay callback is pinned in
+  [`I2C5-DELAY-CALLBACK-CORRELATION.md`](correlation/I2C5-DELAY-CALLBACK-CORRELATION.md); this does not
+  enable live software-I2C timing or GPIO traffic.
+- Three Ghidra-omitted Nordic GPIO/SAADC header inlines are independently byte- and topology-pinned
+  in [`NORDIC-OMITTED-HAL-INLINES-CORRELATION.md`](correlation/NORDIC-OMITTED-HAL-INLINES-CORRELATION.md)
+  and compile from the authenticated SDK rather than local replacement code.
+- The complete six-wrapper/six-target Nordic microsecond-delay cluster is closed in
+  [`NORDIC-OMITTED-DELAY-CLUSTER-CORRELATION.md`](correlation/NORDIC-OMITTED-DELAY-CLUSTER-CORRELATION.md),
+  including ten exact bodies omitted by Ghidra.
+- The Ghidra-omitted 52-byte GPIO-input registry callback is reconstructed as bounded product
+  dispatch policy in
+  [`GPIO-INPUT-IRQ-DISPATCH-CORRELATION.md`](correlation/GPIO-INPUT-IRQ-DISPATCH-CORRELATION.md): it
+  preserves the seven-record scan and duplicate-pin fan-out while Nordic GPIOTE remains the
+  hardware provider.
+- The registered 140-byte advertising callback is reduced to its exact idle/fast/slow status plan
+  in [`ADVERTISING-EVENT-POLICY-CORRELATION.md`](correlation/ADVERTISING-EVENT-POLICY-CORRELATION.md),
+  while Nordic advertising, logging, and status transport remain provider boundaries.
+- The Ghidra-omitted 174-byte optical open-mode callback is reduced to an exact bounded state-clear
+  plan in [`GOODIX-OPEN-MODE-POLICY-CORRELATION.md`](correlation/GOODIX-OPEN-MODE-POLICY-CORRELATION.md);
+  no live Goodix control, logging, or state mutation is exposed.
+- The 84-byte PMIC/NFC late initializer is captured as a fixed ordered, non-actuating product plan
+  in [`PMIC-LATE-INIT-POLICY-CORRELATION.md`](correlation/PMIC-LATE-INIT-POLICY-CORRELATION.md),
+  retaining the factory-only 1,024-tick callback while every hardware provider remains separate.
+- The paired 188-byte broadcast and 152-byte acknowledgment-barrier routines are captured as
+  non-actuating normal/factory task-group plans in
+  [`TASK-SUSPEND-POLICY-CORRELATION.md`](correlation/TASK-SUSPEND-POLICY-CORRELATION.md); CMSIS
+  thread handles, event objects, and live suspension remain outside the clean-room API.
+- The omitted group-0 `"storage"` task and the formerly mislabeled group-7 `"service"` task are
+  now distinct, tested queue/startup plans in
+  [`STORAGE-TASK-POLICY-CORRELATION.md`](correlation/STORAGE-TASK-POLICY-CORRELATION.md).
+  CMSIS queues, private event dispatch, watchdogs, and live suspension remain external.
+- The 48-byte `"factory_test"` thread creator is captured as an immutable creation plan in
+  [`FACTORY-THREAD-CREATOR-CORRELATION.md`](correlation/FACTORY-THREAD-CREATOR-CORRELATION.md),
+  retaining its stack/priority/TrustZone and fail-stop contract without invoking CMSIS.
 - The 464-byte registration, noncontiguous 422-byte timer dispatch, and noncontiguous 562-byte
   unregistration bodies are isolated as a three-function / 1,448-byte named sensor-stream
   framework boundary in
@@ -323,7 +376,8 @@ The implementation is pinned to these repository-owned evidence sets:
   [`BLE-TX-QUEUE-DISPATCH-CORRELATION.md`](correlation/BLE-TX-QUEUE-DISPATCH-CORRELATION.md); the envelope and
   bounded queue policy are local while FreeRTOS/CMSIS, toolchain, logging, and BLE worker code stay
   external.
-- The seven-function / 1,506-byte R1 wear-fusion closure is implemented as a pure policy over
+- The eleven-function / 1,756-byte R1 wear-fusion closure is implemented as bounded history and
+  provider-neutral lifecycle/state policy over
   normalized observations in [`WEAR-FUSION-CORRELATION.md`](correlation/WEAR-FUSION-CORRELATION.md). Motion,
   Goodix optical/living result composition, CMSIS time, and a live consumer for the reconstructed
   sensor-stream framework remain external.
@@ -352,7 +406,7 @@ The implementation is pinned to these repository-owned evidence sets:
 - The 1,736-byte R1 BLE event consumer, `pairAuth` security scheduling, two-target `advStart`
   policy, and strict Nordic/RTOS provider split are documented in
   [`CONNECTION-CONTROL-CORRELATION.md`](correlation/CONNECTION-CONTROL-CORRELATION.md).
-- The corrected YHM2710 `device_stacmd` table and complete 36-entry transparent reduction are in
+- The corrected YHM2710 `device_stacmd` table and complete 44-entry transparent reduction are in
   [`YHM2710-REDUCTION-CORRELATION.md`](correlation/YHM2710-REDUCTION-CORRELATION.md); the adjacent watchdog
   now compiles Nordic `nrfx_wdt.c` with only an R1 configuration/feed adapter, documented in
   [`WATCHDOG-DEVICE-CORRELATION.md`](correlation/WATCHDOG-DEVICE-CORRELATION.md).
@@ -372,7 +426,7 @@ The implementation is pinned to these repository-owned evidence sets:
   [`SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md`](boundaries/SENSOR-ALGORITHM-HEAP-PROVIDER-BOUNDARY.md).
 - The 2026-08 attribution re-examination tested all six `investigate_before_implementing`
   platform families (device registry, software TWI, sensor stream, quantized-neural runtime,
-  time/calendar, RTC device — 166 functions) against fetched upstream sources and identified
+  time/calendar, RTC device — 169 functions) against fetched upstream sources and identified
   the interlocked "B210 platform" middleware as Wuxi Bravechip's closed ChipletRing / BCL603M
   platform (firmware string `603MV1.9.3`, byte-exact BAE8 GATT base-UUID match to the public
   `BravechipSpace/ChipletRing-APPSDK`). All six remain NO ATTRIBUTION and implementation-blocked,
@@ -438,7 +492,7 @@ The implementation is pinned to these repository-owned evidence sets:
   [`NORDIC-GATT-CACHE-CLOSURE.md`](closures/NORDIC-GATT-CACHE-CLOSURE.md).
 - Five exact Nordic BLE/Peer Manager static helpers are source-routed in
   [`NORDIC-BLE-STATIC-HELPERS-CORRELATION.md`](correlation/NORDIC-BLE-STATIC-HELPERS-CORRELATION.md).
-- Eight branch-only aliases inherit their already accepted target ownership in
+- Nine branch-only aliases inherit their already accepted target ownership in
   [`RESOLVED-THUNK-CLOSURE.md`](closures/RESOLVED-THUNK-CLOSURE.md).
 - The completed HR, SpO2, and HRV 24-record offline queues, exact 16/20-byte retained layouts,
   merge rules, and acknowledgement policies are documented in
@@ -475,20 +529,34 @@ The implementation is pinned to these repository-owned evidence sets:
   and the FlashDB/GoMore provider boundary are documented in
   [`TIME-HEALTH-ROLLOVER-CORRELATION.md`](correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md).
 - The product-owned temperature/stress range gates, offset representation, hourly aggregation,
-  and daily-cache callbacks—separate from GXCAS and GoMore providers—are documented in
+  daily-cache callbacks, and pure internal stress mode/measurement control plans—separate from
+  GXCAS and GoMore provider execution—are documented in
   [`TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md`](correlation/TEMPERATURE-STRESS-DAILY-CACHE-CORRELATION.md).
 - The exact `"temp"` one-shot listener, shared 120-byte state, five-value reducer, event 9,
   and dormant Zephyr cache composition are documented in
   [`TEMPERATURE-ONE-SHOT-CORRELATION.md`](correlation/TEMPERATURE-ONE-SHOT-CORRELATION.md).
+- The four factory HR/HRV/SpO2/temperature text callbacks and their non-logging typed diagnostic
+  plans are documented in
+  [`FACTORY-OPTICAL-DIAGNOSTIC-CORRELATION.md`](correlation/FACTORY-OPTICAL-DIAGNOSTIC-CORRELATION.md).
+- The complete five-handle factory `"at"` listener lifecycle and seven newly recovered pure
+  register/unregister plans are documented in
+  [`FACTORY-SENSOR-STREAM-CONTROL-CORRELATION.md`](correlation/FACTORY-SENSOR-STREAM-CONTROL-CORRELATION.md).
+- The factory activity summary, signed two-channel temperature diagnostic, and fixed event-4 timer
+  restart plan are documented in
+  [`FACTORY-SERVICE-DIAGNOSTIC-CORRELATION.md`](correlation/FACTORY-SERVICE-DIAGNOSTIC-CORRELATION.md).
+- The four high-risk command-`0xF2` reset, PPG-profile, and ship-mode handlers are preserved as
+  inert plans in
+  [`FACTORY-F2-HIGH-RISK-CORRELATION.md`](correlation/FACTORY-F2-HIGH-RISK-CORRELATION.md).
 - The four exact GoMore topic callbacks, acc/raw readiness barrier, successful-update cleanup,
   and dormant on-target `"gomore"` accelerometer staging seam are documented in
   [`GOMORE-TOPIC-INPUT-CORRELATION.md`](correlation/GOMORE-TOPIC-INPUT-CORRELATION.md).
 - The exact internal `raw_hr`/`adt` counted-word producers and two-byte Goodix living-object
   producer omitted by Ghidra's function inventory are documented in
   [`GOODIX-INTERNAL-TOPIC-PRODUCERS-CORRELATION.md`](correlation/GOODIX-INTERNAL-TOPIC-PRODUCERS-CORRELATION.md).
-- Twenty-three callback/helper entries that Ghidra omitted from its function CSV are now separately
+- Thirty-four callback/helper/task entries that Ghidra omitted from its function CSV are now separately
   byte-pinned and source-routed across PMIC, BLE connection, temperature, touch power,
-  accelerometer, GoMore topic input, tensor compaction, LIS2DW12, and FlashDB glue in
+  accelerometer, GoMore topic input, tensor compaction, LIS2DW12, FlashDB glue, factory-input
+  record routing, and eight worker tasks in
   [`THUMB-CALLBACK-ENTRY-CORRELATION.md`](correlation/THUMB-CALLBACK-ENTRY-CORRELATION.md).
 - The five activity daily-cache lifecycle functions and their legacy-clock redaction policy are documented
   in [`ACTIVITY-DAILY-CACHE-CORRELATION.md`](correlation/ACTIVITY-DAILY-CACHE-CORRELATION.md).
@@ -530,12 +598,24 @@ separate vendor-source policy and exact dependency inventory are in
 Source admission is also enforced for every recovered function by
 [`FUNCTION-OWNERSHIP.csv`](reference/FUNCTION-OWNERSHIP.csv). Unclassified functions are blocked for
 ownership research rather than presumed eligible for rewriting; methodology and dispositions are
-documented in [`FUNCTION-OWNERSHIP.md`](reference/FUNCTION-OWNERSHIP.md). The exact 756-entry Nordic mapping
-(538 application and 218 bootloader entries) and thirteen-entry SDK-bundled SEGGER mapping, plus the R1
+documented in [`FUNCTION-OWNERSHIP.md`](reference/FUNCTION-OWNERSHIP.md). The generated
+[`GHIDRA-EXPLICIT-ENTRY-CENSUS.json`](reference/GHIDRA-EXPLICIT-ENTRY-CENSUS.json) also audits the
+function-entry arrays embedded in the analysis scripts with firmware-version separation. Of 666
+unique version-qualified entries, application 2.2.6.0009 has 598 exact ledger starts, five
+addresses inside genuinely contiguous ledger extents, seven conclusively adjudicated literal/data
+addresses that must not become invented C functions, one seed adjudicated as the interior
+halfword of a 32-bit Thumb branch, and one secondary-segment seed. No application seed remains
+unproven; the final six exact functions are documented in
+[`FINAL-EXPLICIT-ENTRY-CLOSURE.md`](correlation/FINAL-EXPLICIT-ENTRY-CLOSURE.md). The
+bootloader has 41 exact entries, and thirteen application 2.2.7.0005 entries remain analysis-only
+because that image/inventory is not present. Neither analysis-script seeding, noncontiguous
+bounding-range coincidence, nor cross-version address coincidence is accepted as ownership
+evidence. The exact 782-entry Nordic mapping
+(564 application and 218 bootloader entries) and thirteen-entry SDK-bundled SEGGER mapping, plus the R1
 log-prefix adapter boundary, are documented in
 [`NORDIC-SDK-CORRELATION.md`](correlation/NORDIC-SDK-CORRELATION.md). The standard-C/EABI provider subset is
 documented in [`TOOLCHAIN-RUNTIME-CORRELATION.md`](correlation/TOOLCHAIN-RUNTIME-CORRELATION.md).
-The current 3,199-function ledger has zero unclassified entries, 932 owner-authorized clean-room
+The current 3,326-function ledger has zero unclassified entries, 946 owner-authorized clean-room
 reimplementations, and zero vendor-source-blocked executable entries.
 All 320 formerly opaque Goodix candidates, the six Bravechip middleware families, GXT310,
 QMA6100, and YHM2710 are transparent C. IQS7211E's admitted adapters are compiled and linked; the
@@ -578,7 +658,8 @@ off at boot with biometric calculation fail-closed.
   device-state model.
 - `systemTime` (`01/00/05`): signed-timezone raw bits plus Unix time from the first six payload
   bytes.
-- `touchSwitch` (`01/00/07`), pre-security `pairAuth` phone-role selection (`01/00/08`), 12-byte
+- `touchSwitch` (`01/00/07`) with exact two-byte selector/value planning (phone is diagnostic-only;
+  glasses opens/closes source 0), pre-security `pairAuth` phone-role selection (`01/00/08`), 12-byte
   health settings (`0E`), 12-byte system settings (`0F`), authorized 15-byte device serial (`10`),
   and heartbeat-family acknowledgements.
 - Unsupported or withheld routes receive explicit error/refuse/not-supported results.

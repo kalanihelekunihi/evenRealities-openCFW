@@ -12,7 +12,8 @@
  * Stock image:    application image, load base 0x00027000, sha256
  *                 0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a.
  * Evidence:       r1/research/decompilation/application/decompiler-output.c
- *                 (Ghidra bodies for all 40 entries) cross-checked against
+ *                 (Ghidra bodies for the original 40 inventory entries)
+ *                 cross-checked against
  *                 fresh Capstone/GNU objdump Thumb disassembly of the
  *                 byte-exact rebuilt image
  *                 r1/research/decompilation/rebuild/rebuilt-application.bin
@@ -28,17 +29,18 @@
  *
  * Reduced stock functions (application image extents, end-exclusive):
  *
+ *   0x00044BE0..<0x00044BEC  12   arg reorder + command-0xAE read veneer
  *   0x000509BC..<0x000509DB  32   static request fill + slot 0x14 dispatch
  *   0x00050ABC..<0x00050AD9  30   record-B slot 0x08 + gated slot 0x20 cycle
  *   0x00050DF0..<0x00050E17  40   zeroed 0x40 time block + slot 0x14 dispatch
  *   0x00050F34..<0x00050F57  36   request block A slot 0x10, inverted return
  *   0x00050F5C..<0x00050F81  38   request block A slot 0x14, inverted return
+ *   0x00050510..<0x0005052E  30   bus block fill + slot 0x10 dispatch
+ *   0x00050534..<0x00050554  32   bus block fill + slot 0x14 dispatch
  *   0x0005B2F8..<0x0005B327  48   flash sector-erase loop (8-bit counter)
- *   0x0005D1EA..<0x0005D1F3  52*  0xAE bus read (incl. folded helpers
- *                                 0x00044BE0 + 0x00050510, shared block)
+ *   0x0005D1EA..<0x0005D1F3  52*  bus-read caller composition
  *   0x0005D1F4..<0x0005D21D  42   bus read-modify-write of register bit 0
- *   0x0005D21E..<0x0005D241  68*  0xAE bus write (incl. folded helper
- *                                 0x00050534; Nordic delay(5) first)
+ *   0x0005D21E..<0x0005D241  68*  bus-write caller composition; delay(5)
  *   0x0005D8CC..<0x0005D8E5  26   BKDR-style byte hash (multiplier 0x83)
  *   0x0005D8E6..<0x0005D8ED  8    guarded list-head getter
  *   0x0005D8EE..<0x0005D8F5  8    unguarded offset-list next getter
@@ -71,10 +73,10 @@
  *   0x00097730..<0x00097741  18   registry mutex acquire (0xFFFFFFFF wait)
  *   0x00097748..<0x00097755  14   registry mutex release
  *
- *   * Ledger sizes for 0x0005D1EA/0x0005D21E fold in the shared static
- *     request-block helpers they tail-call (0x00044BE0, 0x00050510,
- *     0x00050534), which are not separate ledger entries; the wrappers are
- *     8/35 raw bytes at the ledger extents.
+ *   * The legacy Ghidra inventory assigned noncontiguous 52/68-byte extents
+ *     to 0x0005D1EA/0x0005D21E.  The three tail-called helpers at
+ *     0x00044BE0, 0x00050510, and 0x00050534 are now authenticated as exact
+ *     manual supplements and implemented as separate C functions.
  *
  * Correlation doc: docs/correlation/GENERIC-DEVICE-REGISTRY-REDUCTION-CORRELATION.md.
  */
@@ -480,7 +482,18 @@ uint32_t generic_device_registry_request_a_transfer(
     generic_device_registry *registry, uint8_t command, uint16_t code,
     uintptr_t buffer, uint16_t length);
 
-/* 0x0005D1EA (+ folded 0x00044BE0/0x00050510): when length is nonzero, fill
+/* 0x00050510: fill the shared bus block and dispatch slot 0x10. */
+uint32_t generic_device_registry_bus_control_dispatch(
+    generic_device_registry *registry, uint8_t command, uint16_t code,
+    uintptr_t data, uint16_t length2);
+
+/* 0x00044BE0: select command 0xAE and forward the reordered arguments to
+ * the 0x00050510 control helper. */
+uint32_t generic_device_registry_bus_read_command_ae(
+    generic_device_registry *registry, uint16_t code, uintptr_t data,
+    uint16_t length2);
+
+/* 0x0005D1EA: when length is nonzero, fill
  * the shared bus_block {command 0xAE, code, data = buffer, length2} and
  * dispatch slot 0x10 on bus_device, returning its status; zero length
  * returns 0. */
@@ -493,7 +506,12 @@ uint32_t generic_device_registry_bus_read(generic_device_registry *registry,
 void generic_device_registry_bus_update_bit(generic_device_registry *registry,
                                             uint8_t bit, uint32_t seed);
 
-/* 0x0005D21E (+ folded 0x00050534): when length is nonzero, run the Nordic
+/* 0x00050534: fill the shared bus block and dispatch slot 0x14. */
+uint32_t generic_device_registry_bus_transfer_dispatch(
+    generic_device_registry *registry, uint8_t command, uint16_t code,
+    uintptr_t buffer, uint16_t length);
+
+/* 0x0005D21E: when length is nonzero, run the Nordic
  * delay (5), fill the shared bus_block {command 0xAE, code, buffer (only
  * when nonzero), length} and dispatch slot 0x14 on bus_device, returning
  * its status; zero length returns 0. */

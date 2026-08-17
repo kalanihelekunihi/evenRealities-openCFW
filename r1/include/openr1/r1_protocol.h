@@ -90,6 +90,39 @@ typedef struct {
     uint16_t serial;
 } r1_response_header;
 
+/* Pure, non-invoking representation of the production EUS module boundary.
+ * The stock ingress accepts module-version values at or above 100 and routes
+ * only system (1), health (2), or the special testable module (0x7f). */
+typedef enum {
+    R1_EUS_INGRESS_REJECT_NULL_PACKET = 0,
+    R1_EUS_INGRESS_REJECT_SHORT_PACKET,
+    R1_EUS_INGRESS_REJECT_PROTOCOL_VERSION,
+    R1_EUS_INGRESS_REJECT_MODULE_VERSION,
+    R1_EUS_INGRESS_REJECT_MODULE,
+    R1_EUS_INGRESS_REJECT_UNREGISTERED_MODULE,
+    R1_EUS_INGRESS_DISPATCH_SYSTEM,
+    R1_EUS_INGRESS_DISPATCH_HEALTH,
+    R1_EUS_INGRESS_DISPATCH_TESTABLE
+} r1_eus_ingress_action;
+
+typedef struct {
+    r1_eus_ingress_action action;
+    uint16_t session;
+    uint16_t serial;
+    uint8_t module;
+    uint8_t module_version;
+    uint8_t status;
+    uint8_t command;
+    uint8_t subcommand;
+    uint32_t composite_key;
+} r1_eus_ingress_plan;
+
+typedef struct {
+    bool registered;
+    uint16_t packed_command;
+    uint8_t registration_index;
+} r1_eus_system_dispatch_plan;
+
 typedef enum {
     R1_RESPONSE_SENT = 0,
     R1_RESPONSE_ENCODE_FAILED = 1,
@@ -108,6 +141,10 @@ r1_error r1_model_encode(const r1_model *model, r1_checksum_scheme scheme,
                          uint8_t *output, size_t capacity, size_t *written);
 r1_error r1_model_decode(const uint8_t *bytes, size_t length, r1_checksum_scheme scheme,
                          r1_model *model);
+r1_error r1_eus_ingress_plan_decode(uint16_t session, const uint8_t *packet,
+                                    size_t length, r1_eus_ingress_plan *plan);
+r1_error r1_eus_system_dispatch_plan_build(
+    uint8_t command, uint8_t subcommand, r1_eus_system_dispatch_plan *plan);
 r1_error r1_fragment_message(const uint8_t *logical, size_t length, r1_fragment_set *output);
 r1_error r1_pb_fragment_message(uint8_t channel, const uint8_t *logical,
                                 size_t length, r1_pb_fragment_set *output);

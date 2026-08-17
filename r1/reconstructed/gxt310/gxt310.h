@@ -16,6 +16,9 @@
  * Reduced stock functions (application extents, end-exclusive):
  *
  *   0x00050F9C..<0x00051026  138  enable both recovered GXT310 channels
+ *   0x0006F600..<0x0006F638   56  signed big-endian temperature conversion
+ *   0x0006F648..<0x0006F6B2  106  shared continuous/shutdown mode writer
+ *   0x0006F738..<0x0006F794   92  shared one-shot trigger writer
  *   0x0006F804                   8  channel 0x90 mode folded inventory body
  *   0x0006F818                  98  channel 0x90 one-shot folded inventory body
  *   0x0006F81E                   8  channel 0x94 mode folded inventory body
@@ -43,6 +46,9 @@ enum {
 typedef bool (*gxt310_write_fn)(void *context, uint8_t address,
                                 uint16_t operation, const uint8_t *bytes,
                                 size_t length);
+typedef bool (*gxt310_read_fn)(void *context, uint8_t address,
+                               uint16_t operation, uint8_t *bytes,
+                               size_t length);
 
 typedef enum {
     GXT310_FAILURE_SWITCH_MODE = 0,
@@ -58,6 +64,8 @@ typedef struct {
     void *write_context;
     gxt310_failure_fn failure;
     void *failure_context;
+    gxt310_read_fn read;
+    void *read_context;
 } gxt310_provider;
 
 void gxt310_provider_initialize(gxt310_provider *provider,
@@ -65,11 +73,17 @@ void gxt310_provider_initialize(gxt310_provider *provider,
                                 void *write_context,
                                 gxt310_failure_fn failure,
                                 void *failure_context);
+void gxt310_provider_bind_read(gxt310_provider *provider,
+                               gxt310_read_fn read,
+                               void *read_context);
 
 /* Shared typed forms of the two compiler-folded channel implementations. */
 uint32_t gxt310_switch_mode(gxt310_provider *provider, uint8_t address,
                             bool enabled);
 uint32_t gxt310_trigger_one_shot(gxt310_provider *provider, uint8_t address);
+uint32_t gxt310_read_temperature_milliunits(gxt310_provider *provider,
+                                            uint8_t address,
+                                            int32_t *milliunits);
 
 /* Exact stock entry-point roles. */
 uint32_t gxt310_channel_0_switch_mode(gxt310_provider *provider, bool enabled);

@@ -32,6 +32,7 @@
 #define R1_ST25DVXXKC_DOCK_DELAY_SHORT UINT8_C(4)
 #define R1_ST25DVXXKC_DOCK_DELAY_LONG UINT8_C(60)
 #define R1_ST25DVXXKC_CHARGE_FIELD_DELAY_TICKS UINT32_C(0x800)
+#define R1_ST25DVXXKC_BUS_READY_DELAY_TICKS UINT32_C(10)
 
 /* Recovered values deliberately fail password authentication to close SSO. */
 #define R1_ST25DVXXKC_SESSION_CLOSE_MSB UINT32_C(0x12345678)
@@ -73,6 +74,20 @@ typedef struct {
     void (*delay)(void *context, uint32_t ticks);
 } r1_st25dvxxkc_provider_ops;
 
+/* Transparent form of the six callbacks installed in the stock
+ * ST25DVxxKC_IO_t at 0x00044C34. The generic device-registry transport and
+ * board resource lease remain explicit caller-supplied providers. */
+typedef struct {
+    void (*acquire)(void *context);
+    void (*release)(void *context);
+    void (*delay)(void *context, uint32_t ticks);
+    uint32_t (*tick_get)(void *context);
+    int32_t (*read)(void *context, uint8_t device_address, uint16_t register_address,
+                    uint8_t *bytes, uint16_t length);
+    int32_t (*write)(void *context, uint8_t device_address, uint16_t register_address,
+                     const uint8_t *bytes, uint16_t length);
+} r1_st25dvxxkc_bus_io_ops;
+
 typedef void (*r1_st25dvxxkc_frame_callback)(void *context,
                                              const uint8_t *bytes,
                                              size_t length);
@@ -99,6 +114,9 @@ typedef struct {
     uint8_t dock_accessory;
     uint8_t heartbeat_count;
     uint8_t cached_field_delay;
+    uint8_t charge_temperature;
+    uint8_t dock_advertising_enabled;
+    uint8_t dock_hardware_revision;
     bool field_seen;
     char dock_version[R1_ST25DVXXKC_DOCK_VERSION_SIZE];
 } r1_st25dvxxkc_dock_state;
@@ -120,8 +138,35 @@ r1_error r1_st25dvxxkc_activate(r1_st25dvxxkc_adapter *adapter);
 void r1_st25dvxxkc_deactivate(r1_st25dvxxkc_adapter *adapter);
 r1_error r1_st25dvxxkc_poll(r1_st25dvxxkc_adapter *adapter, bool *received);
 bool r1_st25dvxxkc_provider_available(const r1_st25dvxxkc_adapter *adapter);
+uint32_t r1_st25dvxxkc_bus_tick_get(const r1_st25dvxxkc_bus_io_ops *ops,
+                                    void *context);
+int32_t r1_st25dvxxkc_bus_initialize(const r1_st25dvxxkc_bus_io_ops *ops,
+                                     void *context);
+int32_t r1_st25dvxxkc_bus_deinitialize(const r1_st25dvxxkc_bus_io_ops *ops,
+                                       void *context);
+int32_t r1_st25dvxxkc_bus_is_ready(const r1_st25dvxxkc_bus_io_ops *ops,
+                                   void *context, uint16_t device_address,
+                                   uint32_t trials);
+int32_t r1_st25dvxxkc_bus_read(const r1_st25dvxxkc_bus_io_ops *ops,
+                               void *context, uint16_t device_address,
+                               uint16_t register_address, uint8_t *bytes,
+                               uint16_t length);
+int32_t r1_st25dvxxkc_bus_write(const r1_st25dvxxkc_bus_io_ops *ops,
+                                void *context, uint16_t device_address,
+                                uint16_t register_address,
+                                const uint8_t *bytes, uint16_t length);
 bool r1_st25dvxxkc_mailbox_length_allowed(size_t length);
 void r1_st25dvxxkc_dock_state_initialize(r1_st25dvxxkc_dock_state *state);
+void r1_st25dvxxkc_dock_hardware_clear(r1_st25dvxxkc_dock_state *state);
+uint8_t r1_st25dvxxkc_dock_hardware_get(
+    const r1_st25dvxxkc_dock_state *state);
+void r1_st25dvxxkc_dock_version_clear(r1_st25dvxxkc_dock_state *state);
+const char *r1_st25dvxxkc_dock_version_get(
+    const r1_st25dvxxkc_dock_state *state, uint8_t *length);
+void r1_st25dvxxkc_charge_temperature_set(
+    r1_st25dvxxkc_dock_state *state, uint8_t temperature);
+void r1_st25dvxxkc_dock_advertising_set(
+    r1_st25dvxxkc_dock_state *state, uint8_t enabled);
 bool r1_st25dvxxkc_is_dock_identity_frame(const uint8_t *frame,
                                            size_t length);
 r1_error r1_st25dvxxkc_plan_dock_frame(

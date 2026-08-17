@@ -82,6 +82,31 @@ r1_error r1_connection_control_plan_adv_start(
     return R1_OK;
 }
 
+r1_error r1_connection_control_adv_start_handler_plan_decode(
+    uint16_t incoming_session, uint16_t current_eus_session,
+    const uint8_t *payload, size_t payload_length,
+    r1_connection_control_adv_start_handler_plan *plan) {
+    if (payload == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (payload_length != R1_CONNECTION_CONTROL_ADV_START_PAYLOAD_SIZE) {
+        return R1_ERROR_LENGTH;
+    }
+
+    *plan = (r1_connection_control_adv_start_handler_plan){
+        .send_empty_success_response = true,
+        .enqueue_event = true,
+        .response_session = incoming_session,
+        .event_session = current_eus_session,
+        .event_type = R1_CONNECTION_CONTROL_ADV_START_EVENT_TYPE,
+    };
+    for (size_t index = 0u; index < R1_PEER_ADDRESS_SIZE; ++index) {
+        plan->first_target[index] = payload[index];
+        plan->second_target[index] = payload[R1_PEER_ADDRESS_SIZE + index];
+    }
+    return R1_OK;
+}
+
 uint32_t r1_connection_control_role_sync_thread_flags(void) {
     return R1_CONNECTION_CONTROL_ROLE_SYNC_THREAD_FLAG;
 }

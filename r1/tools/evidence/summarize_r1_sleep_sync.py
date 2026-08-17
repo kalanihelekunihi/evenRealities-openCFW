@@ -14,6 +14,7 @@ import struct
 from pathlib import Path
 from typing import Any
 
+from summarize_r1_gomore_call_graph import direct_thumb_branches_to
 from summarize_r1_adc_registry import (
     DEFAULT_BASE,
     DEFAULT_SCATTER_LENGTH,
@@ -22,6 +23,11 @@ from summarize_r1_adc_registry import (
     decompress_scatter,
     mapped_offset,
 )
+from summarize_r1_gomore_input_abi import IMAGE_SHA256
+
+
+ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_IMAGE = ROOT / "research/decompilation/rebuild/rebuilt-application.bin"
 
 
 STORAGE_EVENT_DISPATCH_BASE = 0x200066FC
@@ -30,6 +36,20 @@ SLEEP_MARKER_EVENT = 0x2001
 SLEEP_CRC_ERROR_EVENT = 0x2002
 ACK_CONTEXT_BYTES = 12
 SYNCHRONIZED_MARKER = 0x11223344
+
+R1_SLEEP_SYNC_REPORT_FUNCTIONS = ({
+    "entry": 0x0008F954,
+    "end_exclusive": 0x0008F9CA,
+    "size": 118,
+    "symbol": "r1_sleep_sync_plan_report_callback",
+    "role": "stored-record synchronization skip and packet-builder dispatch policy",
+    "sha256": "32061a5ba2b5791a49e9f0590a8c4b41dcc597f4494ef2264374be6c71ad3edb",
+    "callers": (),
+    "registered_pointer": 0x0008B830,
+    "inventory": "manual_provenance_supplement",
+    "provider_family": "r1_product_specific",
+    "source_disposition": "clean_room_behavior_only",
+},)
 
 FUNCTION_SIGNATURES = {
     0x0005B39C: "2de9f74f754a764894b0101ac0080122",  # skip-synchronized iterator
@@ -88,6 +108,9 @@ def summarize(
     scatter_length: int,
 ) -> dict[str, Any]:
     image = image_path.read_bytes()
+    image_digest = hashlib.sha256(image).hexdigest()
+    if image_digest != IMAGE_SHA256:
+        raise ValueError(f"unexpected recovered application image: {image_digest}")
     for address, prefix in FUNCTION_SIGNATURES.items():
         require_prefix(image, base, address, prefix)
     for diagnostic in REQUIRED_DIAGNOSTICS:
@@ -113,10 +136,23 @@ def summarize(
     if flash_word(image, base, 0x0008DC08) != 0x0008F781:
         raise ValueError("unexpected stored-sleep ACK callback pointer")
 
+    report_function = R1_SLEEP_SYNC_REPORT_FUNCTIONS[0]
+    report_entry = int(report_function["entry"])
+    report_body = flash_bytes(
+        image, base, report_entry, int(report_function["size"])
+    )
+    report_callers = tuple(direct_thumb_branches_to(image, base, report_entry))
+    registered_pointer = int(report_function["registered_pointer"])
+    if len(report_body) != int(report_function["size"]) or \
+            hashlib.sha256(report_body).hexdigest() != report_function["sha256"] or \
+            report_callers != report_function["callers"] or \
+            flash_word(image, base, registered_pointer) != report_entry + 1:
+        raise ValueError("stored-sleep report callback closure changed")
+
     return {
         "image": str(image_path),
         "image_bytes": len(image),
-        "image_sha256": hashlib.sha256(image).hexdigest(),
+        "image_sha256": image_digest,
         "load_base": f"0x{base:08x}",
         "scatter_source": f"0x{scatter_source:08x}",
         "scatter_compressed_end": f"0x{scatter_source + consumed:08x}",
@@ -130,6 +166,24 @@ def summarize(
             "protocol_model_identifier": "0x0601",
             "send_with_registered_callback": "0x00083704",
             "registered_callback_thumb": "0x0008f781",
+        },
+        "report_callback": {
+            "entry": "0x0008f954",
+            "end_exclusive": "0x0008f9ca",
+            "size": report_function["size"],
+            "sha256": report_function["sha256"],
+            "symbol": report_function["symbol"],
+            "direct_callers": [],
+            "registered_pointer": "0x0008b830",
+            "registered_thumb_value": "0x0008f955",
+            "null_context_returns_false": True,
+            "synchronization_flag_1_skips_send": True,
+            "other_flags_invoke_packet_builder": True,
+            "context_layout": [
+                "report type UInt8 @0",
+                "alignment/reserved UInt8 @1",
+                "stage count UInt16LE @2",
+            ],
         },
         "acknowledgement": {
             "callback": "0x0008f780",
@@ -182,7 +236,7 @@ def parse_integer(value: str) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("image", type=Path)
+    parser.add_argument("image", nargs="?", type=Path, default=DEFAULT_IMAGE)
     parser.add_argument("--base", type=parse_integer, default=DEFAULT_BASE)
     parser.add_argument("--scatter-source", type=parse_integer, default=DEFAULT_SCATTER_SOURCE)
     parser.add_argument("--scatter-runtime", type=parse_integer, default=DEFAULT_SCATTER_RUNTIME)

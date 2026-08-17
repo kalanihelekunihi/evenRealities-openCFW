@@ -15,6 +15,20 @@ void r1_retained_log_reset(r1_retained_log *log) {
     clear_bytes(log->bytes, sizeof(log->bytes));
 }
 
+r1_error r1_rtt_channel0_write_plan_build(
+    const uint8_t *bytes, size_t length, r1_rtt_write_plan *plan) {
+    if (plan == NULL || (length != 0u && bytes == NULL)) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_rtt_write_plan){
+        .write = length != 0u,
+        .channel = 0u,
+        .bytes = bytes,
+        .length = length,
+    };
+    return R1_OK;
+}
+
 r1_error r1_retained_log_append_rendered(
     r1_retained_log *log, const uint8_t *rendered, size_t rendered_length,
     r1_retained_log_first_use_fn first_use, void *first_use_context,

@@ -49,7 +49,7 @@ shipping-mode family used in wearables. Exact driver source and licensing remain
 | `0x0005079C` | 4 | exact thunk to `0x000355BC` |
 
 These functions retain the attribution label `yhmicros_yhm2710_candidate`, but the complete
-36-entry closure is now independently reconstructed as transparent C. Production enablement
+44-entry closure is now independently reconstructed as transparent C. Production enablement
 requires Nordic board binding and owned-ring electrical validation, not an opaque provider.
 
 The adjacent R1-owned three-client lease and NFC/`i2c_5` resource lifecycle are now split from

@@ -79,6 +79,10 @@ product authorization remains fail-closed and unrefusing requires the bound comp
 pass end-to-end authorization and owned-hardware validation. As of 2026-08-14 the
 composition itself is bound and host-tested behind that refusal:
 
+- `r1_connection_control_adv_start_handler_plan_decode` now binds the exact omitted handler
+  extent `0x00083D04..<0x00083D5A` as a strict pure plan. It accepts only the legitimate 12-byte
+  target pair, preserves the incoming response session separately from the current-EUS event
+  session, and records response-before-event-`0x200` intent without sending or queueing anything.
 - `r1_connection_control_plan_adv_start` (in `../../src/r1_peer_target.c`) composes the
   recovered consumer policy over the existing target-validity and match helpers: store both
   targets unconditionally, schedule the raw `0x5000` delayed disconnect for a mismatching

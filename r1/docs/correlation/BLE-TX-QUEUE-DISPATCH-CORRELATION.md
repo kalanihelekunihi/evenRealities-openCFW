@@ -2,8 +2,9 @@
 
 ## Disposition
 
-Two formerly unclassified functions / 560 executable bytes are admitted as R1 product-specific
-message-envelope and BLE transmit-queue producer behavior. They are `r1_product_specific` /
+Three functions / 572 executable bytes are admitted as R1 product-specific message-envelope and
+BLE transmit-queue producer behavior. Two are Ghidra inventory rows; the independently bounded
+type-1 veneer is a manual provenance supplement. They are `r1_product_specific` /
 `clean_room_behavior_only`.
 
 The closure does not admit FreeRTOS heap code, CMSIS-FreeRTOS queue/thread operations, Arm
@@ -16,13 +17,16 @@ Those implementations remain separately source-routed or blocked.
 | --- | ---: | --- |
 | `0x00034064` | 12 | rearrange arguments, select dispatch type 0, and tail-call the common producer |
 | `0x00034070` | 548 | select dispatch type 2 and own the noncontiguous common producer at `0x0003E274..<0x0003E48C` |
+| `0x0003407C` | 12 | rearrange arguments, select dispatch type 1, and tail-call the common producer |
 
 The type-2 function consists of `0x00034070..<0x0003407C` plus
 `0x0003E274..<0x0003E48C`; its concatenated body SHA-256 is
 `3b6bf6bff7c54cec4699a678cfe67eb59980abdf8864d2b38407d04fa3bf56f0`. The type-0
 veneer has SHA-256 `87384ba4fcae559338b8fda5ebfc680ea269ac253c14573d9a2be3e0898c4183`.
 Three callsites target type 0 and five target type 2, including the pinned IQS7211E IRQ worker and
-R1 structured-log cache.
+R1 structured-log cache. The type-1 veneer is exactly `0x0003407C..<0x00034088`, SHA-256
+`a92c0d0743114a1354d18c5b9db682c06ea1ecc1eae9e3528ec178501b944077`; the exported call graph
+has no direct caller, so it remains compiled but dormant rather than being attached to a new route.
 
 ## Envelope and queue behavior
 
@@ -41,7 +45,10 @@ at least 90 percent. It calls the abstract queue with priority zero and raw time
 sets worker thread flag 1 and returns zero. Failure logs, frees the envelope, and returns minus one.
 
 The common body contains type-0/type-1 connection-handle guards. The accessors at `0x0004CB34`
-and `0x0004CBA4` are not promoted by this closure, and type 1 has no separately admitted veneer.
+and `0x0004CBA4` are not promoted by this closure. The three transparent veneers
+`r1_ble_tx_queue_dispatch_type0`, `r1_ble_tx_queue_dispatch_type1`, and
+`r1_ble_tx_queue_dispatch_type2` preserve the forced dispatch word and bounded envelope encoding;
+they expose no live BLE sender or queue implementation.
 
 ## Channel-1 task-entry supplement
 
@@ -107,6 +114,36 @@ the periodic watchdog operation at `0x000500FC`. Queue failure enters the stock 
 `r1_factory_input_task_plan_flags` preserves dispatch, provider-error, suspension, periodic-action,
 and repeat decisions. The referenced wear, sensor-stream, registration, and watchdog functions are
 already separately source-routed and remain independent typed callees.
+
+The bit-22 drain target is independently pinned at `0x00045F3C..<0x00045FB0` / 116 executable
+bytes, SHA-256
+`9298cf72c25a75bacd23e7a94304495fd904b00ac66131020a9de33346cd516f`; the two words beginning at
+`0x00045FB0` are literals, not part of the body. Each non-null queue record carries a 16-bit type
+at offset 0, a 32-bit payload length at offset 8, and payload bytes at offset 12. Lengths greater
+than three with exact `AT^` prefix are terminated at `payload[length]` and routed to the AT parser;
+other records call the standard dispatcher with the type and the low 16 bits of the length. Every
+non-null record is then released. `r1_factory_input_record_plan_dispatch` preserves the routing,
+length truncation, and release decision while adding an explicit payload-capacity requirement
+before the terminator write; the queue, parser, dispatcher, and allocator remain external typed
+bindings.
+
+## Main BLE task-entry supplement
+
+The separately authenticated main BLE task is `0x00091F54..<0x0009208C` / 312 bytes, SHA-256
+`01659a473563e3f5d469f43efb036354a8f9fac857d2b9399b135d244c6051e6`. Its creator at
+`0x00044F48` stores the exact odd Thumb pointer `0x00091F55`. The task waits on sync group 4,
+creates eight four-byte records, fail-stops on allocation failure, commits peer state, configures
+the Nordic BLE bootstrap, signals group 4, starts callback timers at raw intervals `3072` and
+`10240`, and registers `"ble"` with watchdog interval `10000`.
+
+The valid low-24-bit flag loop polls the SoftDevice before and after dispatch. It routes bit 22 to
+the connection-control consumer; bit 7 takes precedence over bits 8 and 10 for advertising stop
+versus restart modes 3/4; bits 13, 2, 11, and 12 select the peripheral watchdog, buttonless-DFU
+preparation, and low/high TX-power actions. Bit 23 feeds, signals group 4, and waits indefinitely.
+Zero/high-bit provider errors skip dispatch and perform the ordinary watchdog feed/re-wait. These
+decisions are explicit in `r1_ble_task_plan_startup` and `r1_ble_task_plan_flags`; Nordic SDK,
+peer persistence, BLE control, DFU, TX-power, timer, and watchdog operations retain their existing
+typed source boundaries.
 
 ## Clean-room implementation rule
 

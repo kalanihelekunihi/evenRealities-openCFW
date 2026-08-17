@@ -1,5 +1,129 @@
 #include "openr1/r1_iqs7211e.h"
 
+#if UINTPTR_MAX == UINT32_MAX
+_Static_assert(offsetof(r1_iqs7211e_factory_record, marker_4_value) == 6u,
+               "factory marker-4 value offset");
+_Static_assert(offsetof(r1_iqs7211e_factory_record, marker_6_value) == 8u,
+               "factory marker-6 value offset");
+_Static_assert(sizeof(r1_iqs7211e_factory_record) == 12u,
+               "factory record size");
+#endif
+
+static uint32_t factory_record_transaction(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context,
+    uint8_t marker) {
+    if (record == NULL || ops == NULL || ops->record_begin == NULL ||
+        ops->communication_end == NULL || ops->record_commit == NULL) {
+        return 0u;
+    }
+    record->marker = marker;
+    (void)ops->record_begin(context);
+    (void)ops->communication_end(context);
+    return ops->record_commit(context);
+}
+
+uint32_t r1_iqs7211e_factory_marker_1(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context) {
+    return factory_record_transaction(record, ops, context, UINT8_C(1));
+}
+
+uint32_t r1_iqs7211e_factory_marker_2(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context) {
+    return factory_record_transaction(record, ops, context, UINT8_C(2));
+}
+
+uint32_t r1_iqs7211e_factory_marker_3(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context, uint8_t value) {
+    const uint32_t status =
+        factory_record_transaction(record, ops, context, UINT8_C(3));
+    if (record != NULL && ops != NULL && ops->record_begin != NULL &&
+        ops->communication_end != NULL && ops->record_commit != NULL) {
+        record->marker_3_value = value;
+    }
+    return status;
+}
+
+uint32_t r1_iqs7211e_factory_marker_4(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context, uint16_t value) {
+    const uint32_t status =
+        factory_record_transaction(record, ops, context, UINT8_C(4));
+    if (record != NULL && ops != NULL && ops->record_begin != NULL &&
+        ops->communication_end != NULL && ops->record_commit != NULL) {
+        record->marker_4_value = value;
+    }
+    return status;
+}
+
+uint32_t r1_iqs7211e_factory_marker_5(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context, uint8_t value) {
+    const uint32_t status =
+        factory_record_transaction(record, ops, context, UINT8_C(5));
+    if (record != NULL && ops != NULL && ops->record_begin != NULL &&
+        ops->communication_end != NULL && ops->record_commit != NULL) {
+        record->marker_5_value = value;
+    }
+    return status;
+}
+
+uint32_t r1_iqs7211e_factory_marker_6(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context, uint32_t value) {
+    const uint32_t status =
+        factory_record_transaction(record, ops, context, UINT8_C(6));
+    if (record != NULL && ops != NULL && ops->record_begin != NULL &&
+        ops->communication_end != NULL && ops->record_commit != NULL) {
+        record->marker_6_value = value;
+    }
+    return status;
+}
+
+static r1_error touch_lifecycle_plan_initialize(
+    uint8_t client_index, r1_touch_lifecycle_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_touch_lifecycle_plan){0};
+    if (client_index > 1u) {
+        return R1_ERROR_UNSUPPORTED;
+    }
+    plan->accepted = true;
+    plan->client_index = client_index;
+    plan->operation_count = 2u;
+    return R1_OK;
+}
+
+r1_error r1_touch_lifecycle_disable_plan(
+    uint8_t client_index, r1_touch_lifecycle_plan *plan) {
+    const r1_error error = touch_lifecycle_plan_initialize(client_index, plan);
+    if (error != R1_OK) {
+        return error;
+    }
+    plan->operations[0].slot = R1_TOUCH_LIFECYCLE_SLOT_18;
+    plan->operations[0].argument_0 = 0u;
+    plan->operations[0].argument_1 = 0u;
+    plan->operations[1].slot = R1_TOUCH_LIFECYCLE_SLOT_0C;
+    return R1_OK;
+}
+
+r1_error r1_touch_lifecycle_enable_plan(
+    uint8_t client_index, r1_touch_lifecycle_plan *plan) {
+    const r1_error error = touch_lifecycle_plan_initialize(client_index, plan);
+    if (error != R1_OK) {
+        return error;
+    }
+    plan->operations[0].slot = R1_TOUCH_LIFECYCLE_SLOT_08;
+    plan->operations[1].slot = R1_TOUCH_LIFECYCLE_SLOT_18;
+    plan->operations[1].argument_0 = 1u;
+    plan->operations[1].argument_1 = 0u;
+    return R1_OK;
+}
+
 #include <limits.h>
 
 #define IQS_CAL(divider, fine, minimum, maximum, ...) \
@@ -425,4 +549,16 @@ r1_error r1_iqs7211e_resume_scheduled_restart(r1_iqs7211e_adapter *adapter) {
     }
     adapter->restart_pending = false;
     return r1_iqs7211e_configure(adapter, adapter->layout, adapter->ring_size);
+}
+
+r1_error r1_touch_recovery_timer_plan_build(
+    r1_touch_recovery_timer_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_touch_recovery_timer_plan){
+        .clear_recovery_pending_latch = true,
+        .task_event_flags = R1_TOUCH_RECOVERY_OPEN_EVENT_FLAG,
+    };
+    return R1_OK;
 }

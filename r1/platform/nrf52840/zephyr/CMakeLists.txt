@@ -101,6 +101,7 @@ set(OPENR1_PORTABLE_SOURCES
   ${OPENR1_ROOT}/src/r1_motion.c
   ${OPENR1_ROOT}/src/r1_wear.c
   ${OPENR1_ROOT}/src/r1_clock.c
+  ${OPENR1_ROOT}/src/r1_gpio_registry.c
   ${OPENR1_ROOT}/src/r1_runtime.c
   ${OPENR1_ROOT}/platform/nrf52840/r1_nrf52840.c
   ${OPENR1_ROOT}/port/r1_fal_port.c

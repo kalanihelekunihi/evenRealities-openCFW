@@ -1,7 +1,7 @@
 # GXCAS GXT310 reduction correlation
 
 Snapshot: 2026-08-14. This document records the owner-authorized reduction of
-the five `gxcas_gxt310_candidate` entries into independently compiled C under
+the eight `gxcas_gxt310_candidate` entries into independently compiled C under
 `reconstructed/gxt310/`. The result is not GXCAS, Even Realities, or
 Bravechip source.
 
@@ -19,6 +19,9 @@ does not short-circuit after a failure, and returns the bitwise AND of the two
 | Stock entry | Inventory bytes | SHA-256 | Reconstructed role |
 | --- | ---: | --- | --- |
 | `0x00050F9C` | 138 | `e85aa5da2c0263ec52b56abad76046a18eca7a341efe9f9b8a1ebead6ce6276d` | `gxt310_enable_pair` |
+| `0x0006F600` | 56 | `f8e7e7060dc42cc772ec9e0c75bb0cd0210f4160c792f73398df0557e24dc87e` | shared signed big-endian temperature read/scale |
+| `0x0006F648` | 106 | `c2dd528f1696a7dec0fff2859d0940930d8f75de84d7d582a962e4fc9f9190fa` | shared mode writer |
+| `0x0006F738` | 92 | `996e62bb9f1dfdb48ae224674b0771b1e6783d32fe4d8c81a003a1b21824e7b1` | shared one-shot writer |
 | `0x0006F804` | 8 | `0a099318ad9c76b025b0aa229e8de6332ef6956114081adf0972d7ab88684700` | channel-`0x90` mode veneer |
 | `0x0006F818` | 98 | `4820600616f6417670ae3535521aa4e72c9759af8070d999489955bc1d26fd4e` | channel-`0x90` one-shot folded body |
 | `0x0006F81E` | 8 | `4811461d8532e3b7b0f3a00ac062c333edd814247df6d0f610af4887153ded1f` | channel-`0x94` mode veneer |
@@ -37,7 +40,7 @@ fails explicitly. The optional failure callback replaces stock diagnostic-log
 side effects without changing the transport result.
 
 `tests/test_reconstructed_gxt310.c` pins both command byte pairs, addresses,
-operation number, non-short-circuit pair behavior, callback failure reporting,
+operation number, signed read conversion, non-short-circuit pair behavior, callback failure reporting,
 and invalid-address rejection. The module is built by the host, sanitizer,
 Cortex-M object, and Nordic SDK-image source lists.
 

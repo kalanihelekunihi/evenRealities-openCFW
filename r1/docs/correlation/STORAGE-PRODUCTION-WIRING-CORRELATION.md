@@ -35,12 +35,12 @@ The complete Ghidra-omitted task entry is now byte-pinned as
 `0x000926DC..<0x000927BA` (222 bytes, SHA-256
 `b13c5bc01f09f51f5b4dc9a79566d9b5dcaff74cdf6e8447b12e3d8affa8a179`). Beyond the
 health-before-sleep ordering, it creates a 50-record queue of 16-byte event records, runs ten
-startup actions in the recovered order, signals task group 7, registers the name `"storage"`
+startup actions in the recovered order, signals task group 7, registers the name `"service"`
 with a 10,000-tick watchdog interval, and waits on the low 24 thread-flag bits. Bit 22 drains and
 dispatches queued event records; bit 23 signals suspension and enters the recovered indefinite
 wait. Queue creation failure enters the stock fail-stop boundary.
 
-`r1_storage_task_plan_startup` and `r1_storage_task_plan_flags` preserve this deterministic
+`r1_service_task_plan_startup` and `r1_service_task_plan_flags` preserve this deterministic
 orchestration as typed actions. They do not create a queue, manipulate interrupt priority, enter
 an infinite loop, or invoke any database/cache/provider body. Those effects remain in CMSIS-
 FreeRTOS and the separately source-gated product/provider functions named by the action list.

@@ -1,6 +1,6 @@
 # R1 wear-fusion correlation
 
-Status: seven R1 product functions byte-pinned; clean-room pure policy implemented.
+Status: eleven R1 product functions byte-pinned; clean-room pure policy implemented.
 
 ## Outcome
 
@@ -14,6 +14,12 @@ and optical observations, and receive `START_LIVING_PROBE` / `STOP_LIVING_PROBE`
 The Nordic integration layer remains responsible for using admitted SDK/provider APIs to perform
 those actions.
 
+The closure also includes the four callback entries that Ghidra exposed only as labels inside
+noncontiguous bounding ranges. Their true executable extents, direct calls or registered Thumb
+pointers, and hashes are now manual provenance supplements. Local code provides a five-slot
+bounded history update, provider-neutral raw-HR/ADT lifecycle plans, and the sleep-status edge
+update; it does not retain stock topic handles or invoke the topic/timer framework.
+
 ## Exact function closure
 
 `tools/evidence/summarize_r1_wear_fusion_closure.py` verifies the rebuilt application SHA-256
@@ -23,16 +29,23 @@ all direct branch callsites, and both indirect callback literals.
 | Function | Bytes | SHA-256 | Recovered role |
 |---|---:|---|---|
 | `0x0003CD80..<0x0003CE12` | 146 | `f116ced7cb0afb9e407c46d6303a75599c9777d518a574cea49e6e4195f121be` | motion callback and fusion dispatch |
+| `0x0003CE1C..<0x0003CE40` | 36 | `d18576349aeb0054258b21a50509c1750ba53bb0d99b24067db248e848fc0e11` | bounded five-slot optical-history ingestion |
 | `0x0003CE44..<0x0003CEA2` | 94 | `d6c2c908e569d860d2cb8f8ddef5d451725261bbef9861e1f2e1e81c1c6ad84a` | living-object callback/timestamp |
 | `0x0003CEEC..<0x0003D066` | 378 | `80b734b5c2cb4c64f422ebd7c2ca9473160fef4224879a04a1b85658dac77f7e` | three-axis mean/population variance |
 | `0x0003D06C..<0x0003D0B4` | 72 | `57d87392bb9452ec09f0fcb09a403ca8588c64ba5768ca6336c47157408995d1` | five-slot optical-history range |
 | `0x0003D0C0..<0x0003D0EA` | 42 | `d6ae14c1275550283ca9072f6e55ac7beb5e1e42596aa632b9da832fbd6dbe25` | probe teardown |
+| `0x0003D0FC..<0x0003D132` | 54 | `e187ba8f33090625a1d65bcc11071ec97abf2be57f11e2f79853045c3c86a4db` | raw-HR subscription and 3,000-tick timeout plan |
+| `0x0003D150..<0x0003D19A` | 74 | `8b80b47e0392b33c91571cea03a14a645a8783fe179c9118e1031e121730e6e9` | ADT status/charge gate and 7,000-tick timeout plan |
+| `0x0003D1B8..<0x0003D20E` | 86 | `7e74a0b8b339e52d84c1a55b4c8e3485157ceec66466fe4a44c7ab289799e2b4` | sleep-status edge and pending-decision update |
 | `0x0003D268..<0x0003D38E` | 294 | `57cc089fca628777de825cb9c557c0657bc6b7f7f224e26a7740a0153866dae2` | suspected-wear transition |
 | `0x0003D45C..<0x0003D63C` | 480 | `8511cd323737b80efcc86f314395b7f4a89f0b29710947b9b1276243e40efac9` | living/IR/stationary wear-off transition |
 
-The seven Ghidra functions total 1,506 bytes. The callback entry points have no direct branch
-callers: exact Thumb literals bind motion callback `0x0003CD81` at `0x0004C614` and living callback
-`0x0003CE45` at `0x0003D644`.
+The eleven entries total 1,756 executable bytes: seven Ghidra inventory functions / 1,506 bytes
+plus four manual supplements / 250 bytes. Exact Thumb words bind motion callback `0x0003CD81` at
+`0x0004C614`, living callback `0x0003CE45` at `0x0003D644`, optical-history callback
+`0x0003CE1D` at `0x0003D1A4`, ADT-status callback `0x0003D151` at `0x0004C60C`, and sleep-status
+callback `0x0003D1B9` at `0x0004C630`. The raw-HR planner has exact callers at `0x0004C534`
+(`BL`) and `0x0004C606` (`B.W`).
 
 The earlier full-service audit in `tools/evidence/summarize_r1_wear_fusion_service.py` separately
 pins 20 executable ranges and public/lifecycle neighbors. This narrower ownership closure admits
@@ -59,6 +72,19 @@ Wear-on policy:
   must be at least `100,000`; the latest IR value must be strictly greater than `9,050,000`.
 - Without optical history, any axis variance strictly greater than `2,000.0` enters suspected-worn.
 
+Callback/lifecycle policy:
+
+- A history update first retains the prior list's last sample, then replaces the declared count
+  and values. The clean implementation rejects counts above five before mutation, closing the
+  stock callback's producer-controlled copy overflow.
+- Starting the `wearled/raw_hr` probe subscribes only when no subscription exists, starts a
+  3,000-tick timeout when absent, and otherwise requests a timeout restart.
+- ADT status `1` or charge status `1` requests probe teardown. Status `0` with no ADT subscription
+  requests `algo/adt` subscription and starts its 7,000-tick timeout only when absent. Other
+  nonzero ADT statuses do not create or tear down the probe.
+- A sleep-status `0` to `1` edge clears the pending sleep decision before storing the new status;
+  every other edge only stores the status.
+
 Wear-off policy for suspected-worn:
 
 - A living callback no more than `0x800` ticks old maps status `1` to confirmed and status `0` to
@@ -69,9 +95,10 @@ Wear-off policy for suspected-worn:
   `40.0`, clears wear after 60 decisions under the same sleep preservation rule.
 - Boundary values are not accepted: the comparisons above are intentionally strict.
 
-`r1/tests/test_openr1.c` covers the sample minimum, statistics, optical range, every strict
-threshold, the inclusive living window, five/60-decision counters, sleep preservation, negative
-gravity orientation, and both public mappings.
+`r1/tests/test_openr1.c` covers bounded/transactional history ingestion, both raw-HR timeout
+paths, ADT status/charge/handle combinations, the sleep edge, the sample minimum, statistics,
+optical range, every strict threshold, the inclusive living window, five/60-decision counters,
+sleep preservation, negative gravity orientation, and both public mappings.
 
 ## Source and provider boundary
 

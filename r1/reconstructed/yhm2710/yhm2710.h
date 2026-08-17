@@ -140,6 +140,8 @@ bool yhm2710_register_read_byte(yhm2710_device *device, uint8_t reg,
                                 uint8_t *value);                /* 0x35412 */
 bool yhm2710_register_write_byte(yhm2710_device *device, uint8_t reg,
                                  uint8_t value);                /* 0x35766 */
+bool yhm2710_read_register_9(yhm2710_device *device,
+                             uint8_t *value);                   /* 0x35268 */
 bool yhm2710_ready(yhm2710_device *device);                     /* 0x3541C */
 uint8_t yhm2710_chip_id(yhm2710_device *device);                /* 0x3530C */
 uint32_t yhm2710_configure(yhm2710_device *device);             /* 0x3510C */
@@ -152,6 +154,8 @@ bool yhm2710_set_shared_power_enabled(yhm2710_device *device,
                                       bool enabled);
 bool yhm2710_set_high_temperature(yhm2710_device *device);      /* 0x35684 */
 bool yhm2710_set_system_track(yhm2710_device *device);          /* 0x355BC */
+bool yhm2710_clear_system_track(yhm2710_device *device);        /* 0x3543C */
+bool yhm2710_set_charging_event(yhm2710_device *device);        /* 0x350E0/0x50614 */
 void yhm2710_delay_209(void);                                  /* 0x5C0FA */
 void yhm2710_dispatch_completion(yhm2710_device *device,
                                  uint32_t value);               /* 0x507AC */

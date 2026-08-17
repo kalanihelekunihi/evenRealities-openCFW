@@ -1,6 +1,6 @@
 # Nordic Peer Manager GATT-cache closure
 
-Ten exact functions / 784 executable bytes now route to Nordic SDK 17.1.0:
+Thirteen exact functions / 1,340 executable bytes now route to Nordic SDK 17.1.0:
 
 | Extent | Bytes | Symbol | Source |
 |---|---:|---|---|
@@ -11,7 +11,10 @@ Ten exact functions / 784 executable bytes now route to Nordic SDK 17.1.0:
 | `0x0006F118..<0x0006F194` | 124 | `gscm_service_changed_ind_send` | `gatts_cache_manager.c` |
 | `0x00075A08..<0x00075AF2` | 234 | `local_db_apply_in_evt` | `gatt_cache_manager.c` |
 | `0x00075B10..<0x00075B1A` | 10 | `local_db_update` | `gatt_cache_manager.c` |
+| `0x000578F4..<0x0005792A` | 54 | `car_update_pending_handle` | `gatt_cache_manager.c` |
 | `0x0008A928..<0x0008A934` | 12 | `service_changed_pending_flags_check` | `gatt_cache_manager.c` |
+| `0x0008A93C..<0x0008A9EE` | 178 | `service_changed_pending_set` | `gatts_cache_manager.c` |
+| `0x0008AA08..<0x0008AB4C` | 324 | `service_changed_send_in_evt` | `gatt_cache_manager.c` |
 | `0x00091084..<0x0009110A` | 134 | `store_car_value` | `gatt_cache_manager.c` |
 | `0x00094AB0..<0x00094AD2` | 34 | `update_pending_flags_check` | `gatt_cache_manager.c` |
 
@@ -21,6 +24,13 @@ the indication sender retries
 Service Changed on `BLE_ERROR_INVALID_ATTR_HANDLE`. The event wrapper maps success, busy, storage
 full, invalid connection/data, and unexpected errors into the exact Peer Manager events/flags.
 The CAR helper persists the one-word Central Address Resolution value through Peer Data Storage.
+The last two bodies were explicit Ghidra analysis seeds but were folded into noncontiguous
+caller ranges. Their independent prologues, returns/tail entry, exact source identities, complete
+bodies, hashes, and sole branch callers establish manual function supplements. The original
+`0x000890CC` inventory row is the separate `sc_send_pending_handle` callback whose tail call enters
+`service_changed_send_in_evt` at `0x0008AA08`.
+The independently bounded `car_update_pending_handle` body at `0x000578F4` is likewise registered
+indirectly through exact Thumb pointer `0x000578F5` at `0x00094ADC`; it has no direct branch caller.
 All complete bodies, hashes, and direct caller sets are checked by:
 
 ```sh

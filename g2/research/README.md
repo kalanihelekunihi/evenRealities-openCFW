@@ -56,6 +56,7 @@ Decompilation output, SDK comparisons, and lane transcripts, filed by subject:
 | Subject | Contents |
 | --- | --- |
 | `apollo-main/ghidra/` | the Apollo application 64-chunk Ghidra corpora, including the audit-hardened 64-log / 7,370-function result |
+| `apollo-main/ghidra/decomp/` | the decompilation itself — 7,449 functions as C, with bounds, prototypes, callees and per-body hashes; the input to the [transparent-source pipeline](../docs/transparent-source.md) |
 | `em9305/ghidra/` | EM9305 Ghidra shard rounds — five `round16-*` passes and three `residual-round*` passes |
 | `em9305/sdk-comparison/` | EM9305 SDK function comparison reports across five configurations |
 | `em9305/nop-aware/`, `em9305/size-delta/` | link-order and size-delta analyses |

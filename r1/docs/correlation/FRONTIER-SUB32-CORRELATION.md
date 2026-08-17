@@ -1,7 +1,8 @@
 # Sub-32-byte frontier correlation
 
-The sub-32-byte inventory tier is now source-routed: 268 functions, 4,326 declared body bytes
-(4,282 range-pinned; 44 remote continuation bytes recorded as omitted). Thirty functions in the
+The sub-32-byte inventory tier is now source-routed: 269 entries, 4,336 declared body bytes
+(4,292 range-pinned; 44 remote continuation bytes recorded as omitted). This is 268 Ghidra
+functions plus one exact manual callback supplement. Thirty functions in the
 tier stayed unclassified: shared intrusive-list/hash helpers used by both the registry and
 sensor-stream candidates, one unidentifiable FreeRTOS-global getter called from queue-FromISR
 functions (`0x0009566C`), registry operation wrappers on orphaned record blocks with no callers,
@@ -9,7 +10,7 @@ and callerless validators/stubs with no topology.
 
 | Family | Functions |
 | --- | ---: |
-| R1 product-specific | 165 |
+| R1 product-specific | 166 |
 | Goodix GH3X2X candidate | 21 |
 | Sensor-algorithm heap candidate | 21 |
 | GoMore licensed-provider candidate | 19 |
@@ -39,11 +40,19 @@ inside provider regions; the clean-room build links the selected toolchain runti
 
 ## R1 product anchors
 
-165 small product closures: event-loop and queue helpers, connection/ble state accessors, the
+166 small product closures: event-loop and queue helpers, connection/ble state accessors, the
 `vApplicationMallocFailedHook` body (privileged BASEPRI halt loop, sole caller the FreeRTOS
 pvPortMalloc failure path) as the R1 malloc-failed hook, a SysTick/scheduler guard at
 `0x00033350`, ack/event record plumbing, and product configuration accessors — anchored by
 RING-tagged diagnostics, pinned R1 state structures, and product call topology.
+
+The manual callback supplement at `0x0003E00E..<0x0003E018` is the ten-byte slot-1 adapter to
+SDK-bundled `SEGGER_RTT_Write`: it moves `(bytes, length)` to `(0, bytes, length)` and tail-branches
+to `0x000319E0`. SHA-256
+`b582eaabcb0251b809c850fe8eeb29230ef19c077c46ab7f7e628941bcad384a` pins the complete body,
+and the registered Thumb pointer `0x0003E00F` is pinned at `0x0003D7C4`. Local C exposes only
+`r1_rtt_channel0_write_plan_build`; actual RTT access remains attributable to the bundled SEGGER
+provider.
 
 ## Provider and framework boundaries
 

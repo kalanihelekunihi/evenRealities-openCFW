@@ -318,7 +318,7 @@ entry and upstream function identity, not an unreliable recovered extent.
 | `0x000880E8` | `records_stat` | `components/libraries/fds/fds.c` |
 | `0x000881E4` | `release` | `components/ble/peer_manager/peer_id.c` |
 | `0x000883F8` | `rmap` | `components/libraries/fstorage/nrf_fstorage_sd.c` |
-| `0x000890CC` | `service_changed_send_in_evt` | `components/ble/peer_manager/gatt_cache_manager.c` |
+| `0x000890CC` | `sc_send_pending_handle` | `components/ble/peer_manager/gatt_cache_manager.c` |
 | `0x00089148` | `sdh_request_observer_notify` | `components/softdevice/common/nrf_sdh.c` |
 | `0x00089178` | `sdh_state_observer_notify` | `components/softdevice/common/nrf_sdh.c` |
 | `0x000891B8` | `sec_info_request_process` | `components/ble/peer_manager/security_dispatcher.c` |
@@ -503,7 +503,7 @@ entry and upstream function identity, not an unreliable recovered extent.
 
 ## GPIO HAL inline provider cluster
 
-Fifty-four application entries in `0x00078DEA...0x00079510` are compiler-emitted instances of
+Fifty-six application entries in `0x00078DEA...0x00079510` are compiler-emitted instances of
 Nordic `modules/nrfx/hal/nrf_gpio.h` or adjacent `nrf_gpiote.h` helpers, not independent product drivers. The same inline helper is
 retained more than once because multiple translation units emitted their own out-of-line copy.
 The source gate records every instance rather than collapsing distinct executable addresses:
@@ -511,12 +511,12 @@ The source gate records every instance rather than collapsing distinct executabl
 | Helper | Recovered entries | Function-local discriminator |
 | --- | ---: | --- |
 | `nrf_gpio_cfg` | 9 | exact six-field `PIN_CNF` packing at offset `0x700`, including P0/P1 decode variants |
-| `nrf_gpio_cfg_default` | 2 | input + disconnected + no-pull + S0S1 + no-sense constants |
+| `nrf_gpio_cfg_default` | 3 | input + disconnected + no-pull + S0S1 + no-sense constants |
 | `nrf_gpio_cfg_input` | 5 | input + connected + caller pull + S0S1 + no-sense constants |
 | `nrf_gpio_cfg_output` | 5 | output + disconnected + no-pull + S0S1 + no-sense constants |
 | `nrf_gpio_cfg_sense_set` | 1 | clears mask `0x00030000`, then inserts the new sense field |
 | `nrf_gpio_latches_read_and_clear` | 1 | reads each port `LATCH` at `0x520` and writes the same mask back |
-| `nrf_gpio_pin_clear` | 2 | decoded pin bit written to `OUTCLR` at `0x50C` |
+| `nrf_gpio_pin_clear` | 3 | decoded pin bit written to `OUTCLR` at `0x50C` |
 | `nrf_gpio_pin_port_decode` | 11 | byte-identical 22-byte P0/P1 split at pin 32 and `pin &= 0x1F` |
 | `nrf_gpio_pin_read` | 6 | decoded pin bit read from `IN` at `0x510` |
 | `nrf_gpio_pin_set` | 10 | decoded pin bit written to `OUTSET` at `0x508` |
@@ -528,7 +528,7 @@ the other groups. Production code must include the SDK header; these generic HAL
 not clean-room R1 functions. Nearby entries without a complete header or nrfx-driver identity
 remain unclassified.
 
-The adjacent `0x00079CDC...0x00079E34` block adds 12 source-routed header helpers across NFCT,
+The adjacent `0x00079CDC...0x00079E34` block adds 13 source-routed header helpers across NFCT,
 PDM, PWM, RTC, and SAADC. All match the current headers exactly. The three first bodies use the
 literal base `0x40005000` and are `nrf_nfct_event_check`, `nrf_nfct_event_clear`, and
 `nrf_nfct_int_enable_check`; NFCT's current SDK event clear intentionally uses DSB. The remaining
@@ -584,20 +584,23 @@ remain gated until their complete upstream identity is established.
 
 ## Delay and legacy TWI recovery provider cluster
 
-Two emitted `nrfx_coredep_delay_us` copies at `0x0007A71C` and `0x0007A72C` multiply a nonzero
-microsecond count by the recovered 64 MHz CPU frequency and branch to Nordic's aligned
-`SUBS #3; BHI; BX LR` delay loop at `0x0009C7A0` or `0x0009D3D0`. The wrapper at `0x0002EB34`
+Six emitted `nrfx_coredep_delay_us` copies at `0x0007A6DC...0x0007A72C` multiply a nonzero
+microsecond count by the recovered 64 MHz CPU frequency and branch to their translation-unit-local
+Nordic aligned `SUBS #3; BHI; BX LR` delay loops. Four wrappers and all six literal targets were
+omitted by Ghidra and are independently pinned in
+[`NORDIC-OMITTED-DELAY-CLUSTER-CORRELATION.md`](NORDIC-OMITTED-DELAY-CLUSTER-CORRELATION.md).
+The wrapper at `0x0002EB34`
 is the SDK `nrf_delay_ms`: it invokes the microsecond helper with 1000 until the millisecond count
 reaches zero.
 
 Eight more byte-identical `nrf_delay_ms` copies survive at `0x000784B0`, `0x000784D0`,
 `0x000784F0`, `0x00078510`, `0x00078530`, `0x00078550`, `0x00078570`, and `0x0007F15C`.
 Each 28-byte body invokes its translation-unit-local delay array with the recovered 64,000 cycles
-per millisecond. Ghidra also promoted 15 such aligned arrays into its function inventory:
+per millisecond. Ghidra also promoted 15 other aligned arrays into its function inventory:
 `0x00099340`, `0x00099CB0`, `0x00099CC0`, `0x00099CD0`, `0x00099CE0`, `0x00099CF0`,
 `0x00099D00`, `0x00099D10`, `0x0009A5F0`, `0x0009A610`, `0x0009A670`, `0x0009A6A0`,
 `0x0009A710`, `0x0009BB10`, and `0x0009C9E0`. They are executable data emitted from
-`nrfx_coredep_delay_us`, not separately authored application functions; every six-byte
+`nrfx_coredep_delay_us`, not separately authored application functions; all 21 six-byte
 `03 38 FD D8 70 47` body is pinned explicitly.
 
 The adjacent `0x00078490` and `0x0007849E` bodies are the SDK's `nrf_power_event_check` and
@@ -922,8 +925,8 @@ OpenR1 uses the pinned Nordic translation unit when validated PDM hardware requi
 recreate or enable the peripheral driver locally. See
 [`FRONTIER-224-230-CORRELATION.md`](FRONTIER-224-230-CORRELATION.md).
 
-The function ownership generator and verifier encode 756 Nordic source-routed entries in total:
-538 application entries documented here and 218 bootloader entries, plus thirteen SDK-bundled SEGGER
+The function ownership generator and verifier encode 782 Nordic source-routed entries in total:
+564 application entries documented here and 218 bootloader entries, plus thirteen SDK-bundled SEGGER
 entries and six bounded R1/Nordic adapters. Any new match must
 meet the same function-local standard before its disposition changes from
 `investigate_before_implementing` to `use_nordic_sdk`.
@@ -933,7 +936,7 @@ The application startup pair and recovered `CONFIG_NFCT_PINS_AS_GPIOS` /
 [`NORDIC-SYSTEM-INIT-CORRELATION.md`](NORDIC-SYSTEM-INIT-CORRELATION.md).
 The exact static transfer-completeness helper is separately pinned in
 [`NORDIC-TWIM-COMPLETENESS-CORRELATION.md`](NORDIC-TWIM-COMPLETENESS-CORRELATION.md).
-Ten exact Peer Manager GATT-cache functions are separately pinned in
+Thirteen exact Peer Manager GATT-cache functions are separately pinned in
 [`NORDIC-GATT-CACHE-CLOSURE.md`](../closures/NORDIC-GATT-CACHE-CLOSURE.md).
 Five exact BLE/Peer Manager static helpers are separately pinned in
 [`NORDIC-BLE-STATIC-HELPERS-CORRELATION.md`](NORDIC-BLE-STATIC-HELPERS-CORRELATION.md).
@@ -944,10 +947,11 @@ Eight exact BLE advertising functions are separately pinned in
 `ble_advertising_start` at `0x00051870`, `flags_set` at `0x00064F1A`, `phy_is_valid` at
 `0x0007F0C8`, and `use_whitelist` at `0x00094DD8`, all from
 `components/ble/ble_advertising/ble_advertising.c`.
-Ten exact unbonded buttonless Secure DFU functions are separately pinned in
-[`NORDIC-BUTTONLESS-DFU-CLOSURE.md`](../closures/NORDIC-BUTTONLESS-DFU-CLOSURE.md). Nine are Ghidra inventory
-entries; `ble_dfu_buttonless_on_ble_evt` at `0x00052154` is an independently bounded manual
-supplement. They come from `components/ble/ble_services/ble_dfu/ble_dfu.c` and
+Ten exact unbonded buttonless Secure DFU provider functions are separately pinned in
+[`NORDIC-BUTTONLESS-DFU-CLOSURE.md`](../closures/NORDIC-BUTTONLESS-DFU-CLOSURE.md). Eight are Ghidra inventory
+entries; `ble_dfu_buttonless_bootloader_start_finalize` at `0x00052050` and
+`ble_dfu_buttonless_on_ble_evt` at `0x00052154` are independently bounded manual supplements.
+They come from `components/ble/ble_services/ble_dfu/ble_dfu.c` and
 `ble_dfu_unbonded.c` with `NRF_DFU_BLE_BUTTONLESS_SUPPORTS_BONDS=0`.
 Nordic's exact `nrf_pwr_mgmt_shutdown` at `0x00079D50` and static `shutdown_process` at
 `0x0008F234` are separately pinned in

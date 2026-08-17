@@ -75,6 +75,13 @@ typedef struct {
     bool (*schedule_open)(void *context, uint32_t delay_ticks);
 } r1_iqs7211e_board_ops;
 
+#define R1_TOUCH_RECOVERY_OPEN_EVENT_FLAG UINT32_C(0x00000002)
+
+typedef struct {
+    bool clear_recovery_pending_latch;
+    uint32_t task_event_flags;
+} r1_touch_recovery_timer_plan;
+
 typedef void (*r1_iqs7211e_sample_callback)(void *context,
                                             const r1_iqs7211e_irq_sample *sample);
 
@@ -114,6 +121,43 @@ typedef struct {
     uint16_t active_values[R1_IQS7211E_ATI_AUDIT_MAX_CHANNELS];
 } r1_iqs7211e_ati_audit_summary;
 
+/* Transparent product record used by the six factory-marker tail targets at
+ * 0x0004FA8C...0x0004FB24. The reserved bytes preserve the recovered target
+ * offsets without exposing a controller-register command surface. */
+typedef struct {
+    uint8_t marker;
+    uint8_t marker_3_value;
+    uint8_t marker_5_value;
+    uint8_t reserved_03_05[3];
+    uint16_t marker_4_value;
+    uint32_t marker_6_value;
+} r1_iqs7211e_factory_record;
+
+typedef struct {
+    uint32_t (*record_begin)(void *context);
+    int32_t (*communication_end)(void *context);
+    uint32_t (*record_commit)(void *context);
+} r1_iqs7211e_factory_record_ops;
+
+typedef enum {
+    R1_TOUCH_LIFECYCLE_SLOT_08 = 0x08,
+    R1_TOUCH_LIFECYCLE_SLOT_0C = 0x0c,
+    R1_TOUCH_LIFECYCLE_SLOT_18 = 0x18
+} r1_touch_lifecycle_slot;
+
+typedef struct {
+    r1_touch_lifecycle_slot slot;
+    uint8_t argument_0;
+    uint8_t argument_1;
+} r1_touch_lifecycle_operation;
+
+typedef struct {
+    bool accepted;
+    uint8_t client_index;
+    uint8_t operation_count;
+    r1_touch_lifecycle_operation operations[2];
+} r1_touch_lifecycle_plan;
+
 void r1_iqs7211e_adapter_initialize(r1_iqs7211e_adapter *adapter);
 r1_error r1_iqs7211e_adapter_bind(r1_iqs7211e_adapter *adapter,
                                   const r1_iqs7211e_provider_ops *provider,
@@ -132,6 +176,8 @@ r1_error r1_iqs7211e_deactivate(r1_iqs7211e_adapter *adapter);
 r1_error r1_iqs7211e_process_irq(r1_iqs7211e_adapter *adapter,
                                  uint8_t factory_marker);
 r1_error r1_iqs7211e_resume_scheduled_restart(r1_iqs7211e_adapter *adapter);
+r1_error r1_touch_recovery_timer_plan_build(
+    r1_touch_recovery_timer_plan *plan);
 bool r1_iqs7211e_provider_available(const r1_iqs7211e_adapter *adapter);
 bool r1_iqs7211e_ati_audit_begin(
     r1_iqs7211e_ati_audit_state state, uint32_t now_tick,
@@ -139,5 +185,27 @@ bool r1_iqs7211e_ati_audit_begin(
 bool r1_iqs7211e_ati_audit_summarize(
     const uint16_t *samples, size_t sample_count,
     const uint8_t *channel_map, r1_iqs7211e_ati_audit_summary *summary);
+uint32_t r1_iqs7211e_factory_marker_1(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context);
+uint32_t r1_iqs7211e_factory_marker_2(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context);
+uint32_t r1_iqs7211e_factory_marker_3(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context, uint8_t value);
+uint32_t r1_iqs7211e_factory_marker_4(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context, uint16_t value);
+uint32_t r1_iqs7211e_factory_marker_5(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context, uint8_t value);
+uint32_t r1_iqs7211e_factory_marker_6(
+    r1_iqs7211e_factory_record *record,
+    const r1_iqs7211e_factory_record_ops *ops, void *context, uint32_t value);
+r1_error r1_touch_lifecycle_disable_plan(
+    uint8_t client_index, r1_touch_lifecycle_plan *plan);
+r1_error r1_touch_lifecycle_enable_plan(
+    uint8_t client_index, r1_touch_lifecycle_plan *plan);
 
 #endif

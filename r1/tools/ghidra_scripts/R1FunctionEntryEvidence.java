@@ -8,6 +8,8 @@ import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
 
 public class R1FunctionEntryEvidence extends GhidraScript {
     @Override
@@ -34,9 +36,15 @@ public class R1FunctionEntryEvidence extends GhidraScript {
             }
             println("\n--- " + (function == null ? "<none>" :
                 function.getName() + "@" + function.getEntryPoint()) + " ---");
+            printReferences(functions, address, "REF");
+            printReferences(functions, address.add(1), "THUMB_REF");
             if (function == null) {
                 continue;
             }
+            println("BODY min=" + function.getBody().getMinAddress()
+                + " max=" + function.getBody().getMaxAddress()
+                + " bytes=" + function.getBody().getNumAddresses()
+                + " ranges=" + function.getBody().getNumAddressRanges());
             DecompileResults results = decompiler.decompileFunction(function, 90, monitor);
             if (results.decompileCompleted() && results.getDecompiledFunction() != null) {
                 println(results.getDecompiledFunction().getC());
@@ -45,5 +53,16 @@ public class R1FunctionEntryEvidence extends GhidraScript {
             }
         }
         decompiler.dispose();
+    }
+
+    private void printReferences(FunctionManager functions, Address address, String label) {
+        ReferenceIterator references = currentProgram.getReferenceManager().getReferencesTo(address);
+        while (references.hasNext()) {
+            Reference reference = references.next();
+            Function caller = functions.getFunctionContaining(reference.getFromAddress());
+            println(label + " " + reference.getFromAddress() + " "
+                + reference.getReferenceType() + " CALLER="
+                + (caller == null ? "<none>" : caller.getName() + "@" + caller.getEntryPoint()));
+        }
     }
 }

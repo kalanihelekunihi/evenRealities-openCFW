@@ -90,12 +90,16 @@ class ResearchCorpusIntegrityTests(unittest.TestCase):
         cls.module = load_verifier()
 
     def test_embedded_manifests_verify_in_place(self) -> None:
+        # 45 = the 44 delivered manifests plus the locally produced
+        # apollo-main/ghidra/decomp/SHA256SUMS, which authenticates the
+        # harvested decompilation the transparent-source pipeline consumes.
         manifests, checked = self.module.verify_embedded()
-        self.assertEqual(manifests, 44)
-        self.assertEqual(checked, 1894)
+        self.assertEqual(manifests, 45)
+        self.assertEqual(checked, 1912)
 
     def test_index_covers_the_corpus_exactly(self) -> None:
-        self.assertEqual(self.module.verify_index(), 1950)
+        # 1950 delivered files plus the 19-file decompilation harvest.
+        self.assertEqual(self.module.verify_index(), 1969)
 
     def test_every_exclusion_is_justified(self) -> None:
         """Nothing may drop out of a delivered manifest without a stated reason."""

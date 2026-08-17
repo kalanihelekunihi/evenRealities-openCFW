@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import struct
 from pathlib import Path
 from typing import Any
 
@@ -29,17 +30,20 @@ def _function(
     entry: int, size: int, ranges: tuple[tuple[int, int, str], ...],
     symbol: str, role: str, callers: tuple[tuple[int, str], ...],
     provider_family: str, source_disposition: str,
+    inventory: str = "ghidra_functions_csv",
+    pointer_refs: tuple[int, ...] = (),
 ) -> dict[str, Any]:
     return {
         "entry": entry,
         "size": size,
-        "inventory": "ghidra_functions_csv",
+        "inventory": inventory,
         "ranges": ranges,
         "symbol": symbol,
         "role": role,
         "callers": callers,
         "provider_family": provider_family,
         "source_disposition": source_disposition,
+        "pointer_refs": pointer_refs,
     }
 
 
@@ -331,6 +335,12 @@ R1_FRONTIER_LT32_FUNCTIONS = (
         "r1_ble_tx_type2_send", "r1_glasses_connection_handle_get + r1_ble_tx_queue_dispatch_type2",
         (),
         "r1_product_specific", "clean_room_behavior_only",
+    ),
+    _function(
+        0x0003E00E, 10, ((0x0003E00E, 0x0003E018, "b582eaabcb0251b809c850fe8eeb29230ef19c077c46ab7f7e628941bcad384a"),),
+        "r1_rtt_channel0_write_callback", "registered slot-1 adapter to SEGGER_RTT_Write(0, bytes, length)",
+        (), "r1_product_specific", "clean_room_behavior_only",
+        "manual_provenance_supplement", (0x0003D7C4,),
     ),
     _function(
         0x0003D7AC, 22, ((0x0003D7AC, 0x0003D7C2, "cb6aa598a11abf5e38053888027372832882d2bff3a4866d12bd376adb5854ea"),),
@@ -1711,6 +1721,14 @@ def summarize(image_path: Path) -> dict[str, Any]:
         callers = tuple(direct_thumb_branches_to(image, LOAD_BASE, entry))
         if callers != function["callers"]:
             raise ValueError(f"frontier callers changed: 0x{entry:08x}")
+        for pointer_address in function["pointer_refs"]:
+            pointer = struct.unpack_from(
+                "<I", image, pointer_address - LOAD_BASE
+            )[0]
+            if pointer != entry + 1:
+                raise ValueError(
+                    f"frontier callback pointer changed: 0x{pointer_address:08x}"
+                )
         rows.append({
             **{k: v for k, v in function.items() if k != "ranges"},
             "entry": f"0x{entry:08x}",
@@ -1719,6 +1737,9 @@ def summarize(image_path: Path) -> dict[str, Any]:
             "callers": [
                 {"callsite": f"0x{callsite:08x}", "kind": kind}
                 for callsite, kind in callers
+            ],
+            "pointer_refs": [
+                f"0x{address:08x}" for address in function["pointer_refs"]
             ],
         })
     return {
@@ -1729,6 +1750,10 @@ def summarize(image_path: Path) -> dict[str, Any]:
         "pinned_bytes": sum(int(row["pinned_bytes"]) for row in rows),
         "omitted_bytes": sum(int(row["omitted_bytes"]) for row in rows),
         "r1_function_count": len(R1_FRONTIER_LT32_FUNCTIONS),
+        "manual_supplement_count": sum(
+            row["inventory"] == "manual_provenance_supplement"
+            for row in rows
+        ),
         "nordic_function_count": len(NORDIC_FRONTIER_LT32_FUNCTIONS),
         "toolchain_function_count": len(TOOLCHAIN_FRONTIER_LT32_FUNCTIONS),
         "gomore_function_count": len(GOMORE_FRONTIER_LT32_FUNCTIONS),

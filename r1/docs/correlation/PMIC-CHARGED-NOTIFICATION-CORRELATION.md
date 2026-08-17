@@ -9,6 +9,9 @@ order gives SHA-256
 `a00d2417c36d598e48d0372052fabccf0444ea0ced5a0252ba33983ad912a34f`.
 The two direct callers are `0x00046218` and `0x000463D4`; the main range enters
 the scattered completion block through the `B.W` at `0x00096D66`.
+Consequently, the curated Ghidra seed at `0x00047F10` is adjudicated as the
+secondary executable segment of this already-owned function, not as a second
+function or a missing C implementation.
 
 The routine is R1 product orchestration rather than Nordic, CMSIS, ST, or
 another vendor implementation. It is admitted as `r1_product_specific` /

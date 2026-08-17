@@ -20,6 +20,35 @@
 #define R1_PERIPHERAL_WATCHDOG_DELAY_TICKS UINT32_C(0x2800)
 #define R1_PERIPHERAL_WATCHDOG_LOG_PERIOD 60u
 #define R1_ADVERTISING_MODE_DIRECTED_OR_FAST 3u
+#define R1_BAE8_CCCD_NOTIFICATION_BIT UINT16_C(0x0001)
+#define R1_BAE8_CONNECTION_EVENT_TYPE 0u
+#define R1_BAE8_CONNECTION_EVENT_RECORD_BYTES 24u
+#define R1_GAP_EVT_CONNECTED UINT16_C(0x0010)
+#define R1_GAP_EVT_DISCONNECTED UINT16_C(0x0011)
+#define R1_GAP_EVT_PHY_UPDATE_REQUEST UINT16_C(0x0021)
+#define R1_GAP_EVT_PHY_UPDATE UINT16_C(0x0022)
+#define R1_GATTC_EVT_TIMEOUT UINT16_C(0x003b)
+#define R1_GATTS_EVT_TIMEOUT UINT16_C(0x0056)
+#define R1_GAP_CONNECTION_TIMEOUT_TICKS UINT32_C(0x0000f000)
+#define R1_GAP_FACTORY_ROLE_DELAY_TICKS UINT32_C(0x00007800)
+#define R1_GAP_ADVERTISING_RETRY_TICKS UINT32_C(0x00000066)
+#define R1_NFC_CHARGE_EVENT_CHARGED_NOTIFICATION UINT32_C(0x00000001)
+#define R1_NFC_CHARGE_EVENT_STANDARD_COMMAND_IRQ UINT32_C(0x00000002)
+#define R1_NFC_CHARGE_EVENT_CHARGED_NOTIFICATION_CLEAR UINT32_C(0x00000004)
+#define R1_NFC_CHARGE_EVENT_PMIC_CHARGE UINT32_C(0x00000008)
+#define R1_NFC_CHARGE_EVENT_NOT_CHARGING UINT32_C(0x00000010)
+#define R1_NFC_CHARGE_EVENT_BATTERY_UPDATE UINT32_C(0x00000020)
+#define R1_NFC_CHARGE_EVENT_CHARGING_BATTERY_UPDATE UINT32_C(0x00000040)
+#define R1_NFC_CHARGE_EVENT_MESSAGE_PENDING UINT32_C(0x00400000)
+#define R1_NFC_CHARGE_EVENT_TERMINATE UINT32_C(0x00800000)
+#define R1_NFC_CHARGE_MESSAGE_BYTES 44u
+#define R1_NFC_CHARGE_TEMPERATURE_ATTEMPTS 3u
+#define R1_NFC_CHARGE_ST25_DYNAMIC_REGISTER UINT16_C(0x100b)
+#define R1_NFC_CHARGE_STANDARD_DELAY_TICKS UINT32_C(0x00000800)
+#define R1_NFC_CHARGE_NOT_CHARGING_DELAY_TICKS UINT32_C(0x00001000)
+#define R1_NFC_CHARGE_TEMPERATURE_RETRY_TICKS UINT32_C(100)
+#define R1_NFC_CHARGE_ZERO_BATTERY_UPDATE_COUNT 8u
+#define R1_NFC_CHARGE_ZERO_BATTERY_UPDATE_TICKS UINT32_C(10)
 
 typedef enum {
     R1_TX_SENT = 0,
@@ -40,6 +69,160 @@ typedef struct {
     bool assign_glasses_role;
     bool requires_link_context;
 } r1_bae8_event_plan;
+
+/* Pure plan for the custom-service BLE_GAP_EVT_CONNECTED handler. Provider
+ * calls, live link-context writes, logging, and callback dispatch stay in the
+ * platform binding. */
+typedef struct {
+    bool log_link_context_lookup_failure;
+    bool request_channel1_cccd_read;
+    bool request_channel2_cccd_read;
+    bool mark_channel1_notifications_enabled;
+    bool mark_channel2_notifications_enabled;
+    bool dispatch_connection_event;
+    uint8_t callback_event_type;
+    size_t callback_event_record_bytes;
+} r1_bae8_connection_event_plan;
+
+typedef enum {
+    R1_GAP_EVENT_IGNORE = 0,
+    R1_GAP_EVENT_CONNECTED,
+    R1_GAP_EVENT_DISCONNECTED,
+    R1_GAP_EVENT_PHY_UPDATE_REQUEST,
+    R1_GAP_EVENT_PHY_UPDATE_COMPLETE,
+    R1_GAP_EVENT_GATTC_TIMEOUT,
+    R1_GAP_EVENT_GATTS_TIMEOUT
+} r1_gap_event_route;
+
+typedef enum {
+    R1_GAP_DISCONNECTED_UNASSIGNED = 0,
+    R1_GAP_DISCONNECTED_PHONE = 1,
+    R1_GAP_DISCONNECTED_GLASSES = 2
+} r1_gap_disconnected_role;
+
+typedef enum {
+    R1_GAP_PHY_RESULT_NONE = 0,
+    R1_GAP_PHY_RESULT_CODED,
+    R1_GAP_PHY_RESULT_NON_CODED,
+    R1_GAP_PHY_RESULT_FAILED
+} r1_gap_phy_result;
+
+/* Provider observations used by the pure GAP event planner. event_byte8..10
+ * retain the stock BLE-event byte layout: request RX/TX for event 0x21,
+ * status/TX/RX for event 0x22, and disconnect reason for event 0x11. */
+typedef struct {
+    uint16_t event_id;
+    uint16_t connection;
+    uint8_t event_byte8;
+    uint8_t event_byte9;
+    uint8_t event_byte10;
+    uint16_t phone_connection;
+    uint16_t glasses_connection;
+    uint8_t factory_marker;
+    bool free_link_slot_available;
+    bool link_context_initialization_succeeded;
+    bool advertising_tx_power_configured;
+    uint32_t advertising_tx_power_status;
+    uint32_t advertising_start_status;
+} r1_gap_event_observation;
+
+typedef struct {
+    r1_gap_event_route route;
+    bool cancel_connection_timeout;
+    bool schedule_connection_timeout;
+    uint32_t connection_timeout_ticks;
+    bool cache_peer_record;
+    bool cancel_role_timers;
+    bool schedule_factory_role_timer_a;
+    bool schedule_factory_role_timer_b;
+    bool request_no_phone_advertising_policy;
+    uint32_t factory_role_delay_ticks;
+    bool store_latest_connection;
+    bool register_link_context;
+    bool enter_fail_stop_on_link_context_error;
+    bool clear_connection_latch;
+    bool release_link_context;
+    bool clear_peer_record;
+    bool query_peripheral_link_count;
+    r1_gap_disconnected_role disconnected_role;
+    uint8_t disconnect_reason;
+    bool publish_disconnect_status;
+    bool reset_glasses_transport;
+    bool apply_phone_disconnect_policy;
+    bool clear_phone_connection;
+    bool clear_glasses_connection;
+    bool inspect_advertising_tx_power;
+    bool enter_fail_stop_on_tx_power_error;
+    bool start_advertising;
+    uint8_t advertising_mode;
+    bool schedule_advertising_retry;
+    uint32_t advertising_retry_ticks;
+    bool clear_latest_connection;
+    bool request_phy_update;
+    bool use_glasses_local_phy_preference;
+    uint8_t transmit_phy;
+    uint8_t receive_phy;
+    r1_gap_phy_result phy_result;
+    bool log_gatt_timeout;
+} r1_gap_event_plan;
+
+/* Pure observation/intent form of the stock NFC charge-task flag handler.
+ * The three temperature-ID pairs are provider observations in attempt order;
+ * no ST25, touch, battery, RTOS, watchdog, or task operation is performed. */
+typedef struct {
+    uint32_t event_flags;
+    uint8_t battery_percent;
+    uint8_t temperature_ids[R1_NFC_CHARGE_TEMPERATURE_ATTEMPTS][2];
+} r1_nfc_charge_task_observation;
+
+typedef struct {
+    bool wait_for_message;
+    size_t message_bytes;
+    bool set_charged_notification;
+    bool clear_charged_notification;
+    bool open_touch;
+    bool close_touch;
+    bool run_standard_command_irq_sequence;
+    bool run_not_charging_sequence;
+    bool clear_nfc_field_seen;
+    bool reset_battery_charge_latches;
+    uint16_t st25_dynamic_register;
+    uint8_t standard_command_register_value;
+    uint8_t not_charging_register_value;
+    uint32_t standard_command_delay_ticks;
+    uint32_t not_charging_delay_ticks;
+    uint8_t temperature_id_read_count;
+    uint8_t temperature_retry_delay_count;
+    uint32_t temperature_retry_delay_ticks;
+    bool temperature_ids_valid;
+    uint8_t temperature_successful_attempt;
+    bool enable_watchdog_reset;
+    bool dispatch_pmic_charge_event;
+    uint8_t pmic_charge_event;
+    bool report_charging_battery_percent;
+    uint8_t charging_zero_battery_update_calls;
+    uint32_t charging_zero_battery_update_delay_ticks;
+    uint8_t periodic_battery_update_calls;
+    bool terminate_task;
+    bool release_task_synchronization;
+    bool deregister_watchdog;
+    uint32_t terminal_delay_ticks;
+} r1_nfc_charge_task_plan;
+
+typedef enum {
+    R1_BUTTONLESS_DFU_PREPARE = 0,
+    R1_BUTTONLESS_DFU_ENTER = 1,
+    R1_BUTTONLESS_DFU_ENTER_FAILED = 2,
+    R1_BUTTONLESS_DFU_RESPONSE_SEND_ERROR = 3,
+    R1_BUTTONLESS_DFU_UNKNOWN
+} r1_buttonless_dfu_diagnostic;
+
+typedef struct {
+    r1_buttonless_dfu_diagnostic diagnostic;
+    bool disable_advertising_on_disconnect;
+    bool disconnect_all_connected_links;
+    bool report_disconnected_link_count;
+} r1_buttonless_dfu_event_plan;
 
 typedef struct {
     bool release_credit;
@@ -148,6 +331,18 @@ r1_peer_role r1_runtime_connection_role(const r1_runtime *runtime,
 void r1_runtime_role_occupancy(const r1_runtime *runtime,
                                bool *phone_occupied, bool *glasses_occupied);
 r1_bae8_event_plan r1_runtime_plan_bae8_event(uint8_t event_type);
+r1_error r1_bae8_connection_event_plan_build(
+    bool link_context_lookup_succeeded, bool callback_installed,
+    bool channel1_cccd_read_succeeded, uint16_t channel1_cccd,
+    bool channel2_cccd_read_succeeded, uint16_t channel2_cccd,
+    r1_bae8_connection_event_plan *plan);
+r1_error r1_gap_event_plan_build(
+    const r1_gap_event_observation *observation, r1_gap_event_plan *plan);
+r1_error r1_nfc_charge_task_plan_build(
+    const r1_nfc_charge_task_observation *observation,
+    r1_nfc_charge_task_plan *plan);
+r1_buttonless_dfu_event_plan r1_runtime_plan_buttonless_dfu_event(
+    uint32_t event_type);
 r1_error r1_bae8_plan_hvx_result(
     bool serialized_path, bool credit_acquired, r1_tx_status status,
     uint8_t completed_retries, r1_bae8_hvx_retry_plan *plan);
@@ -155,6 +350,15 @@ r1_error r1_ble_thread_message_encode(
     uint32_t message_type, uint32_t context, const uint8_t *payload,
     size_t payload_length, uint8_t *output, size_t output_capacity,
     size_t *allocation_bytes);
+r1_error r1_ble_tx_queue_dispatch_type0(
+    uint32_t message_identifier, const uint8_t *payload, size_t payload_length,
+    uint8_t *output, size_t output_capacity, size_t *allocation_bytes);
+r1_error r1_ble_tx_queue_dispatch_type1(
+    uint32_t message_identifier, const uint8_t *payload, size_t payload_length,
+    uint8_t *output, size_t output_capacity, size_t *allocation_bytes);
+r1_error r1_ble_tx_queue_dispatch_type2(
+    uint32_t message_identifier, const uint8_t *payload, size_t payload_length,
+    uint8_t *output, size_t output_capacity, size_t *allocation_bytes);
 r1_error r1_factory_thread_message_encode(
     uint32_t message_type, uint32_t context, const uint8_t *payload,
     size_t payload_length, uint8_t *output, size_t output_capacity,

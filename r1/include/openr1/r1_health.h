@@ -27,6 +27,11 @@
 #define R1_HEALTH_AUTO_SYNC_SERIAL UINT8_C(0)
 #define R1_HEALTH_LEGACY_CLOCK_CUTOFF UINT32_C(946080000)
 #define R1_HEALTH_SYNC_CURSOR_BYTES 24u
+#define R1_FACTORY_ACC_RECORD_COUNT 30u
+#define R1_FACTORY_ACC_RECORD_STRIDE 6u
+#define R1_FACTORY_ACC_RESULT_BYTES 182u
+#define R1_FACTORY_ACC_DIAGNOSTIC_DECIMATION 5u
+#define R1_FACTORY_ACC_DIAGNOSTIC_SAMPLE_COUNT 6u
 #define R1_ACTIVITY_LEGACY_CLOCK_CUTOFF R1_HEALTH_LEGACY_CLOCK_CUTOFF
 #define R1_ACTIVITY_BUCKETS_PER_HOUR 6u
 #define R1_HEALTH_TIME_MATERIAL_CHANGE_SECONDS UINT32_C(31)
@@ -43,6 +48,12 @@
 #define R1_STRESS_VALUE_MAX UINT8_C(100)
 #define R1_HEART_RATE_VALUE_MIN UINT8_C(40)
 #define R1_HEART_RATE_VALUE_MAX UINT8_C(220)
+#define R1_HEART_RATE_RESULT_RECORD_BYTES 3u
+#define R1_HEART_RATE_PUBLICATION_EVENT UINT16_C(6)
+#define R1_HEART_RATE_PUBLICATION_BYTES 8u
+#define R1_SPO2_RESULT_RECORD_BYTES 6u
+#define R1_SPO2_PUBLICATION_EVENT UINT16_C(8)
+#define R1_SPO2_PUBLICATION_BYTES 8u
 #define R1_SPO2_VALUE_MIN UINT8_C(70)
 #define R1_HEALTH_NOTIFICATION_HEART_RATE UINT8_C(0)
 #define R1_HEALTH_NOTIFICATION_SPO2 UINT8_C(1)
@@ -128,6 +139,62 @@ typedef struct {
     uint8_t notification_metric;
 } r1_health_u8_sample_result;
 
+typedef enum {
+    R1_HR_RESULT_ONCE = 0,
+    R1_HR_RESULT_TIMING
+} r1_hr_result_kind;
+
+/* Pure replacement for the one-shot and timing "hr" stream callbacks. The
+ * caller supplies the firmware clock and health-publication gate; execution
+ * of the event, stream, and timer actions remains outside this clean core. */
+typedef struct {
+    r1_hr_result_kind kind;
+    uint8_t heart_rate;
+    uint8_t confidence;
+    uint8_t signal;
+    bool value_plausible;
+    bool health_publication_enabled;
+    bool publish_event;
+    uint16_t event_id;
+    uint8_t event_payload[R1_HEART_RATE_PUBLICATION_BYTES];
+    size_t event_payload_length;
+    bool unregister_hr_stream;
+    bool clear_stream_handle;
+    bool release_timing_timer;
+    bool clear_timing_timer_handle;
+} r1_hr_result_plan;
+
+typedef enum {
+    R1_SPO2_RESULT_ONCE = 0,
+    R1_SPO2_RESULT_TIMING
+} r1_spo2_result_kind;
+
+/* Pure replacement for the one-shot and timing "spo2" stream callbacks.
+ * The six provider bytes remain lossless; publication and lifecycle effects
+ * are returned as intent rather than executed by this module. */
+typedef struct {
+    r1_spo2_result_kind kind;
+    uint8_t raw_spo2;
+    uint8_t r_value;
+    uint8_t confidence;
+    int8_t level;
+    uint8_t heart_rate;
+    uint8_t mark;
+    bool value_plausible;
+    bool health_publication_enabled;
+    uint8_t adjusted_spo2;
+    bool publish_event;
+    uint16_t event_id;
+    uint8_t event_payload[R1_SPO2_PUBLICATION_BYTES];
+    size_t event_payload_length;
+    bool unregister_spo2_stream;
+    bool clear_stream_handle;
+    bool release_timing_timer;
+    bool clear_timing_timer_handle;
+    bool mark_valid_result_seen;
+    bool mark_invalid_result_seen;
+} r1_spo2_result_plan;
+
 typedef struct {
     r1_health_u8_sample_action action;
     uint16_t stored_value;
@@ -159,6 +226,135 @@ typedef struct {
     uint32_t dispatcher_residue;
     bool immediate_empty_response;
 } r1_health_history_route;
+
+typedef enum {
+    R1_HEALTH_AUXILIARY_NONE = 0,
+    R1_HEALTH_AUXILIARY_SLEEP_DETAIL,
+    R1_HEALTH_AUXILIARY_HEART_RATE_MEASUREMENT,
+    R1_HEALTH_AUXILIARY_SPO2_MEASUREMENT,
+    R1_HEALTH_AUXILIARY_REPORT_SETTING
+} r1_health_auxiliary_action;
+
+/* Pure action plan for the five registered health commands that do not use
+ * the public event-14 history path. The clean core reports the stock provider
+ * command/private-event intent but never invokes either boundary itself. */
+typedef struct {
+    r1_health_auxiliary_action action;
+    bool accepted;
+    bool provider_command_requested;
+    uint16_t provider_command;
+    uint8_t provider_mode;
+    uint16_t request_serial;
+    bool private_event_requested;
+    uint16_t private_event;
+    uint8_t private_event_payload_length;
+    uint8_t private_event_payload;
+    bool report_setting_update_requested;
+    bool report_enabled;
+} r1_health_auxiliary_plan;
+
+typedef enum {
+    R1_STRESS_CONTROL_MODE = 0,
+    R1_STRESS_CONTROL_MEASUREMENT
+} r1_stress_control_action;
+
+/* Pure result of the two internal stress-control event consumers. The
+ * wrappers accept exactly one byte. Mode values 2...255 reach the stock mode
+ * setter but are ignored there; measurement values are canonicalized to a
+ * Boolean. This type never publishes an event or invokes the provider. */
+typedef struct {
+    r1_stress_control_action action;
+    bool accepted;
+    uint8_t raw_value;
+    bool mode_update_requested;
+    uint8_t mode;
+    bool measurement_update_requested;
+    bool measurement_enabled;
+} r1_stress_control_plan;
+
+typedef enum {
+    R1_FACTORY_OPTICAL_HEART_RATE = 0,
+    R1_FACTORY_OPTICAL_HRV,
+    R1_FACTORY_OPTICAL_SPO2,
+    R1_FACTORY_OPTICAL_TEMPERATURE
+} r1_factory_optical_metric;
+
+/* Typed replacement for the four factory text callbacks. The plan preserves
+ * values consumed by the stock variadic logger and the temperature record
+ * rewrite, but performs neither logging nor mutation itself. */
+typedef struct {
+    r1_factory_optical_metric metric;
+    uint16_t raw_value;
+    uint16_t normalized_value;
+    uint16_t text_values[4];
+    uint8_t text_value_count;
+    bool record_update_requested;
+} r1_factory_optical_diagnostic_plan;
+
+typedef enum {
+    R1_FACTORY_STREAM_ACC = 0,
+    R1_FACTORY_STREAM_HEART_RATE,
+    R1_FACTORY_STREAM_HRV,
+    R1_FACTORY_STREAM_SPO2,
+    R1_FACTORY_STREAM_TEMPERATURE
+} r1_factory_stream_metric;
+
+typedef enum {
+    R1_FACTORY_STREAM_NO_ACTION = 0,
+    R1_FACTORY_STREAM_REGISTER,
+    R1_FACTORY_STREAM_UNREGISTER
+} r1_factory_stream_action;
+
+/* Pure lifecycle result for the hard-coded factory listener name "at". */
+typedef struct {
+    r1_factory_stream_metric metric;
+    r1_factory_stream_action action;
+    bool handle_was_present;
+} r1_factory_stream_control_plan;
+
+typedef struct {
+    uint8_t record_index;
+    int16_t x;
+    int16_t y;
+    int16_t z;
+} r1_factory_acc_diagnostic_sample;
+
+/* Typed replacement for the factory accelerometer text callback. The stock
+ * result record holds 30 packed XYZ triplets followed by a UInt16 count; only
+ * every fifth triplet is consumed. */
+typedef struct {
+    uint16_t record_count;
+    uint8_t sample_count;
+    r1_factory_acc_diagnostic_sample
+        samples[R1_FACTORY_ACC_DIAGNOSTIC_SAMPLE_COUNT];
+    bool terminator_requested;
+} r1_factory_acc_diagnostic_plan;
+
+/* Snapshot consumed by the AT^BAT_ADC text-only factory handler. */
+typedef struct {
+    uint16_t battery_millivolts;
+    uint8_t battery_percent;
+    uint8_t battery_type;
+    uint8_t handler_return_value;
+} r1_factory_battery_diagnostic_plan;
+
+typedef struct {
+    uint32_t all_kilocalories;
+    uint16_t steps;
+    uint16_t active_kilocalories;
+} r1_factory_activity_diagnostic_plan;
+
+typedef struct {
+    uint8_t sensor_count;
+    int16_t temperature_0_millicelsius;
+    int16_t temperature_2_millicelsius;
+    int16_t average_millicelsius;
+} r1_factory_temperature_pair_diagnostic_plan;
+
+typedef struct {
+    bool system_task_event_requested;
+    uint8_t system_task_event;
+} r1_factory_periodic_timer_restart_plan;
 
 typedef struct {
     uint16_t steps;
@@ -928,6 +1124,21 @@ r1_error r1_heart_rate_store_sample(
     uint8_t value, uint32_t event_timestamp, uint32_t firmware_timestamp,
     uint8_t aggregate_hour, uint8_t average_hour,
     r1_health_u8_sample_result *result);
+bool r1_hr_value_plausible(uint8_t heart_rate);
+r1_error r1_hr_once_result_plan(
+    const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, uint32_t firmware_clock,
+    r1_hr_result_plan *plan);
+r1_error r1_hr_timing_result_plan(
+    const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, uint32_t firmware_clock,
+    r1_hr_result_plan *plan);
+r1_error r1_spo2_once_result_plan(
+    const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, r1_spo2_result_plan *plan);
+r1_error r1_spo2_timing_result_plan(
+    const uint8_t *record, size_t record_length,
+    bool health_publication_enabled, r1_spo2_result_plan *plan);
 r1_error r1_spo2_store_sample(
     r1_health_u8_history *history, r1_health_u8_accumulator *accumulator,
     uint8_t value, uint32_t event_timestamp, uint32_t firmware_timestamp,
@@ -941,6 +1152,66 @@ r1_error r1_hrv_store_sample(
 r1_error r1_health_history_route_command(
     uint8_t command, uint8_t subcommand, uint16_t request_serial,
     r1_health_history_route *route);
+void r1_health_history_noop_handler(void);
+bool r1_health_daily_test_event_valid(const uint8_t *payload, size_t length);
+bool r1_health_history_event_valid(const uint8_t *payload, size_t length);
+r1_error r1_sleep_detail_plan(
+    uint8_t request_flags, r1_health_auxiliary_plan *plan);
+r1_error r1_heart_rate_measurement_plan(
+    uint8_t request_flags, uint16_t request_serial,
+    r1_health_auxiliary_plan *plan);
+r1_error r1_spo2_measurement_plan(
+    uint8_t request_flags, uint16_t request_serial,
+    r1_health_auxiliary_plan *plan);
+r1_error r1_health_report_setting_plan(
+    bool payload_present, uint8_t payload_value,
+    r1_health_auxiliary_plan *plan);
+r1_error r1_stress_mode_control_plan(
+    uint8_t payload_value, size_t payload_length,
+    r1_stress_control_plan *plan);
+r1_error r1_stress_measurement_control_plan(
+    uint8_t payload_value, size_t payload_length,
+    r1_stress_control_plan *plan);
+r1_error r1_factory_heart_rate_diagnostic_plan(
+    const uint8_t *record, size_t record_length,
+    r1_factory_optical_diagnostic_plan *plan);
+r1_error r1_factory_spo2_diagnostic_plan(
+    const uint8_t *record, size_t record_length,
+    r1_factory_optical_diagnostic_plan *plan);
+r1_error r1_factory_hrv_diagnostic_plan(
+    const uint8_t *record, size_t record_length,
+    r1_factory_optical_diagnostic_plan *plan);
+r1_error r1_factory_temperature_diagnostic_plan(
+    const uint8_t *record, size_t record_length,
+    r1_factory_optical_diagnostic_plan *plan);
+r1_error r1_factory_acc_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan);
+r1_error r1_factory_heart_rate_stream_unregister_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan);
+r1_error r1_factory_heart_rate_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan);
+r1_error r1_factory_hrv_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan);
+r1_error r1_factory_spo2_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan);
+r1_error r1_factory_temperature_stream_unregister_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan);
+r1_error r1_factory_temperature_stream_register_plan(
+    bool handle_present, r1_factory_stream_control_plan *plan);
+r1_error r1_factory_acc_diagnostic_plan_decode(
+    const uint8_t *record, size_t record_length,
+    r1_factory_acc_diagnostic_plan *plan);
+r1_error r1_factory_battery_diagnostic_plan_build(
+    uint16_t battery_millivolts, uint8_t battery_percent,
+    uint8_t battery_type, r1_factory_battery_diagnostic_plan *plan);
+r1_error r1_factory_activity_diagnostic_plan_decode(
+    const uint8_t *record, size_t record_length,
+    r1_factory_activity_diagnostic_plan *plan);
+r1_error r1_factory_temperature_pair_diagnostic_plan_decode(
+    const uint8_t *record, size_t record_length,
+    r1_factory_temperature_pair_diagnostic_plan *plan);
+r1_error r1_factory_periodic_timer_restart_plan_build(
+    r1_factory_periodic_timer_restart_plan *plan);
 r1_error r1_health_history_encode_event14(
     const r1_health_history_route *route,
     uint8_t output[R1_HEALTH_HISTORY_EVENT_BYTES]);

@@ -30,11 +30,21 @@ typedef struct {
     r1_error transport_error;
 } r1_retained_log_result;
 
+/* Provider-neutral form of the registered channel-0 RTT transmit callback. */
+typedef struct {
+    bool write;
+    unsigned channel;
+    const uint8_t *bytes;
+    size_t length;
+} r1_rtt_write_plan;
+
 void r1_retained_log_reset(r1_retained_log *log);
 r1_error r1_retained_log_append_rendered(
     r1_retained_log *log, const uint8_t *rendered, size_t rendered_length,
     r1_retained_log_first_use_fn first_use, void *first_use_context,
     r1_retained_log_write_fn write, void *write_context,
     r1_retained_log_result *result);
+r1_error r1_rtt_channel0_write_plan_build(
+    const uint8_t *bytes, size_t length, r1_rtt_write_plan *plan);
 
 #endif

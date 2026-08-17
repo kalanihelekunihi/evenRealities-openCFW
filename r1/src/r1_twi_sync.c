@@ -1,5 +1,9 @@
 #include "openr1/r1_twi_sync.h"
 
+void r1_twi_i2c5_delay_noop(uint32_t delay_units) {
+    (void)delay_units;
+}
+
 static bool operations_valid(const r1_twi_sync_ops *ops) {
     return ops != NULL && ops->kernel_state != NULL &&
         ops->tick_frequency != NULL && ops->semaphore_acquire != NULL &&

@@ -253,7 +253,7 @@ STAGED_CONSUMER_PINS = {
     MANIFEST: "1e8fd0b48bab1540e541bc8c87f72c2fbf9f8a31a4f55f2b2de1ce3bebd0d0fd",
     PROVENANCE: "4193c3987cdef108f320fd35c3b351d5ee56cba7d01b3940bcffb1e0ce7180f2",
     AUDIT: "b483e5b1915f54e99e8aefd047ece54153aadc6df4af51cdc4ef1cf81cc983d0",
-    ROOT / "README.md": "a64e0af804fd79fe4f63d1146134dd97d9876d3d070d8b7d389649c59a466752",
+    ROOT / "README.md": "1bd085012e049e8ffc0617db08c8809d0cde7082be9d37a712ef38d699558b6f",
     ROOT / "components/README.md": "377dab7fc580499112bceba87f9602c57550c8f438af1b5c4d1324e5003e2989",
     ROOT / "components/apollo_main/core_overlay/NOTICE.md": "8291aeb9e1a95b4b3b75fced4bfd1fde84fe4a45b1761b306aed21e7337f2b85",
     ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "c4a70bb1b3a7c513256e52736cca8fef7c34b3881b9aa51c66f7810695a33a4f",

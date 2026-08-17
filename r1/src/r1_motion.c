@@ -349,6 +349,20 @@ r1_error r1_motion_adapter_disable_double_tap(r1_motion_adapter *adapter) {
     return provider->ops->disable_double_tap(provider->context);
 }
 
+r1_lis2dw12_double_tap_enable_plan
+r1_lis2dw12_double_tap_enable_plan_build(void) {
+    return (r1_lis2dw12_double_tap_enable_plan){
+        .axis_enabled = {1u, 1u, 1u},
+        .threshold = {3u, 3u, 3u},
+        .duration = 0u,
+        .quiet = 0u,
+        .shock = 0u,
+        .tap_mode = 1u,
+        .int1_route_set_mask = UINT8_C(0x08),
+        .return_value = 1u,
+    };
+}
+
 r1_motion_variant r1_motion_adapter_selected(const r1_motion_adapter *adapter) {
     return adapter == NULL ? R1_MOTION_VARIANT_NONE : adapter->selected;
 }

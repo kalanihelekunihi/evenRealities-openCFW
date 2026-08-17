@@ -19,6 +19,12 @@ EXPECTED_IMAGE_SHA256 = "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5
 
 RESOLVED_THUNKS = (
     {
+        "entry": 0x7D2A0, "target": 0x987C4, "size": 4,
+        "symbol": "xTaskGetTickCount", "provider": "freertos_10_5_1_nordic_nrf52_port",
+        "sha256": "2e747c4b74eed771e0d3c7c91da71d5bf94b6dc460a9a4ed5ef5a33812362886",
+        "callsites": (), "inventory": "manual_provenance_supplement",
+    },
+    {
         "entry": 0x29D58, "target": 0x2B91C, "size": 4,
         "symbol": "goodix_provider_entry_thunk", "provider": "goodix_gh3x2x_candidate",
         "sha256": "5369da3475924b136084c9ea7d7ffb227e82b82fa688514febeb529840b738cf",

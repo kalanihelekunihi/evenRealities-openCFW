@@ -33,6 +33,7 @@ void test_reconstructed_gomore_tensor_runtime(void);
 #include "openr1/r1_event.h"
 #include "openr1/r1_event_bus.h"
 #include "openr1/r1_goodix.h"
+#include "openr1/r1_gpio_registry.h"
 #include "openr1/r1_health.h"
 #include "openr1/r1_health_db.h"
 #include "openr1/r1_iqs7211e.h"
@@ -88,6 +89,18 @@ static r1_error retained_log_write(
 }
 
 static void test_retained_crash_log(void) {
+    r1_rtt_write_plan rtt_plan;
+    static const uint8_t rtt_bytes[] = {0x11u, 0x22u, 0x33u};
+    assert(r1_rtt_channel0_write_plan_build(
+               rtt_bytes, sizeof rtt_bytes, &rtt_plan) == R1_OK);
+    assert(rtt_plan.write && rtt_plan.channel == 0u);
+    assert(rtt_plan.bytes == rtt_bytes && rtt_plan.length == sizeof rtt_bytes);
+    assert(r1_rtt_channel0_write_plan_build(
+               NULL, 0u, &rtt_plan) == R1_OK);
+    assert(!rtt_plan.write && rtt_plan.channel == 0u && rtt_plan.length == 0u);
+    assert(r1_rtt_channel0_write_plan_build(
+               NULL, 1u, &rtt_plan) == R1_ERROR_ARGUMENT);
+
     r1_retained_log log;
     memset(&log, 0xa5, sizeof(log));
     r1_retained_log_reset(&log);
@@ -1100,6 +1113,37 @@ static void test_reconstructed_cross_family_bindings(void) {
 }
 
 static void test_battery_provider_boundary(void) {
+    r1_analog_close_state analog_state = {
+        .channel_open = {true, true, false},
+        .driver_initialized = true,
+    };
+    r1_analog_close_plan analog_close;
+    assert(r1_analog_close_plan_build(
+               R1_ANALOG_CHANNEL_BATTERY, &analog_state, &analog_close) ==
+           R1_OK);
+    assert(analog_close.provider_status == R1_ANALOG_PROVIDER_STATUS_OK &&
+           analog_close.uninitialize_channel &&
+           analog_close.nrfx_channel == 6u &&
+           analog_close.clear_channel_open &&
+           !analog_close.uninitialize_driver &&
+           !analog_close.clear_driver_initialized);
+    analog_state.channel_open[0] = false;
+    assert(r1_analog_close_plan_build(
+               R1_ANALOG_CHANNEL_PMIC_CURRENT, &analog_state,
+               &analog_close) == R1_OK);
+    assert(analog_close.nrfx_channel == 4u &&
+           analog_close.uninitialize_driver &&
+           analog_close.clear_driver_initialized);
+    assert(r1_analog_close_plan_build(
+               R1_ANALOG_CHANNEL_INVALID, &analog_state, &analog_close) ==
+           R1_OK);
+    assert(analog_close.provider_status ==
+               R1_ANALOG_PROVIDER_STATUS_NOT_FOUND &&
+           !analog_close.uninitialize_channel);
+    assert(r1_analog_close_plan_build(
+               R1_ANALOG_CHANNEL_BATTERY, NULL, &analog_close) ==
+           R1_ERROR_ARGUMENT);
+
     static const uint16_t battery_samples[] = {4095u, 4000u, 3000u, 2000u, 1000u};
     uint16_t millivolts = 0u;
     assert(r1_battery_base_millivolts(
@@ -1131,6 +1175,48 @@ static void test_battery_provider_boundary(void) {
     assert(r1_pmic_current_sense_millivolts(
         current_samples, R1_PMIC_CURRENT_SAMPLE_COUNT, &millivolts));
     assert(millivolts == 600u);
+
+    r1_factory_pmic_current_diagnostic_plan current_diagnostic;
+    assert(r1_factory_pmic_current_diagnostic_plan_build(
+               UINT32_C(600), &current_diagnostic) == R1_OK);
+    assert(current_diagnostic.current_sense_millivolts == UINT32_C(600) &&
+           current_diagnostic.handler_return_value == 1u);
+    assert(r1_factory_pmic_current_diagnostic_plan_build(
+               UINT32_MAX, &current_diagnostic) == R1_OK);
+    assert(current_diagnostic.current_sense_millivolts == UINT32_MAX);
+    assert(r1_factory_pmic_current_diagnostic_plan_build(0u, NULL) ==
+           R1_ERROR_ARGUMENT);
+
+    r1_factory_pmic_power_off_plan power_off;
+    assert(r1_factory_pmic_power_off_plan_build(
+               UINT32_C(0x12345678), UINT16_C(4217), &power_off) == R1_OK);
+    assert(power_off.timestamp == UINT32_C(0x12345678) &&
+           power_off.raw_battery_millivolts == UINT16_C(4217) &&
+           power_off.stored_battery_millivolts == UINT16_C(4217) &&
+           power_off.packed_dev_info_word ==
+               (uint16_t)((UINT16_C(4217) << 2u) | UINT16_C(2)) &&
+           power_off.persist_dev_info_requested &&
+           power_off.signal_power_thread_requested &&
+           power_off.power_thread_flags == UINT32_C(1) &&
+           power_off.handler_return_value == 1u);
+    assert(r1_factory_pmic_power_off_plan_build(
+               0u, UINT16_MAX, &power_off) == R1_OK);
+    assert(power_off.stored_battery_millivolts == UINT16_C(0x3fff) &&
+           power_off.packed_dev_info_word == UINT16_C(0xfffe));
+    assert(r1_factory_pmic_power_off_plan_build(0u, 0u, NULL) ==
+           R1_ERROR_ARGUMENT);
+
+    r1_factory_pmic_register_diagnostic_plan register_diagnostic;
+    assert(r1_factory_pmic_register_diagnostic_plan_build(
+               UINT8_C(0xa5), &register_diagnostic) == R1_OK);
+    assert(register_diagnostic.formatted_registers[0] == UINT8_C(0xa5) &&
+           register_diagnostic.handler_return_value == 1u);
+    for (size_t index = 1u;
+         index < R1_FACTORY_PMIC_REGISTER_DIAGNOSTIC_BYTES; ++index) {
+        assert(register_diagnostic.formatted_registers[index] == 0u);
+    }
+    assert(r1_factory_pmic_register_diagnostic_plan_build(0u, NULL) ==
+           R1_ERROR_ARGUMENT);
 
     assert(r1_battery_discharge_percent(3350u, 1u, 0u) == 0u);
     assert(r1_battery_discharge_percent(3622u, 1u, 0u) == 5u);
@@ -1470,6 +1556,40 @@ static void test_pmic_charged_notification_policy(void) {
     assert(post_device.delay_argument == 0u);
     assert(post_device.thread_flags_to_set ==
            R1_PMIC_POST_DEVICE_THREAD_FLAG);
+    const r1_pmic_delayed_callback_plan charge_i2c =
+        r1_pmic_charge_i2c_callback_plan();
+    assert(!charge_i2c.reschedule_self &&
+           charge_i2c.invoke_device_slot_0c);
+    assert(charge_i2c.delay_argument == 0u);
+    assert(charge_i2c.thread_flags_to_set ==
+           R1_PMIC_CHARGE_I2C_THREAD_FLAG);
+
+    r1_pmic_late_init_plan late;
+    assert(r1_pmic_late_init_plan_build(0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_pmic_late_init_plan_build(0u, &late) == R1_OK);
+    assert(late.action_count == R1_PMIC_LATE_INIT_ACTION_COUNT - 1u);
+    assert(late.settle_milliseconds == R1_PMIC_LATE_INIT_SETTLE_MS);
+    assert(late.factory_callback_delay_ticks ==
+           R1_PMIC_LATE_INIT_FACTORY_DELAY_TICKS);
+    static const r1_pmic_late_init_action expected[] = {
+        R1_PMIC_LATE_INIT_CLEAR_READY_FLAG,
+        R1_PMIC_LATE_INIT_ACQUIRE_NFC_RESOURCE,
+        R1_PMIC_LATE_INIT_DELAY,
+        R1_PMIC_LATE_INIT_CONFIGURE_ST25DVXXKC,
+        R1_PMIC_LATE_INIT_RELEASE_NFC_RESOURCE,
+        R1_PMIC_LATE_INIT_RUN_CHARGE_I2C_EVENT_ZERO,
+        R1_PMIC_LATE_INIT_INSTALL_YHM_CALLBACK,
+        R1_PMIC_LATE_INIT_INSTALL_DEVICE_CALLBACK,
+    };
+    for (size_t index = 0u; index < sizeof expected / sizeof expected[0];
+         ++index) {
+        assert(late.actions[index] == expected[index]);
+    }
+    assert(r1_pmic_late_init_plan_build(UINT8_C(0x55), &late) == R1_OK);
+    assert(late.action_count == R1_PMIC_LATE_INIT_ACTION_COUNT);
+    assert(late.actions[8] == R1_PMIC_LATE_INIT_SCHEDULE_FACTORY_CALLBACK);
+    assert(r1_pmic_late_init_plan_build(UINT8_C(0x5a), &late) == R1_OK);
+    assert(late.action_count == R1_PMIC_LATE_INIT_ACTION_COUNT - 1u);
 }
 
 typedef struct {
@@ -1592,6 +1712,98 @@ static void test_model_round_trip(void) {
     encoded[13] ^= 1u;
     assert(r1_model_decode(encoded, written, R1_CHECKSUM_PHONE_COMPACT_CCITT,
                            &decoded) == R1_ERROR_CHECKSUM);
+}
+
+static void test_eus_module_ingress_and_system_dispatch(void) {
+    uint8_t packet[R1_MODEL_HEADER_LENGTH] = {
+        R1_PROTOCOL_VERSION, 1u, R1_MODULE_VERSION,
+        0x34u, 0x12u, 2u, 0u, 0x0eu,
+        0xffu, 0xffu, 0u, 0u,
+    };
+    r1_eus_ingress_plan ingress;
+    assert(r1_eus_ingress_plan_decode(
+               UINT16_C(0x0042), packet, sizeof packet, &ingress) == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_DISPATCH_SYSTEM);
+    assert(ingress.session == UINT16_C(0x0042));
+    assert(ingress.serial == UINT16_C(0x1234));
+    assert(ingress.module == 1u && ingress.module_version == 100u);
+    assert(ingress.status == 2u && ingress.command == 0u &&
+           ingress.subcommand == 0x0eu);
+    assert(ingress.composite_key == UINT32_C(0x0001000e));
+
+    /* This boundary does not validate the embedded declared length or CRC;
+     * those belong to the preceding reassembly/model layer. */
+    packet[2] = UINT8_MAX;
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_DISPATCH_SYSTEM);
+
+    packet[1] = 2u;
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_DISPATCH_HEALTH);
+    packet[1] = UINT8_C(0x7f);
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_DISPATCH_TESTABLE);
+
+    packet[1] = 0u;
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_REJECT_UNREGISTERED_MODULE);
+    packet[1] = 3u;
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_REJECT_UNREGISTERED_MODULE);
+    packet[1] = 4u;
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_REJECT_MODULE);
+
+    packet[1] = 1u;
+    packet[2] = R1_MODULE_VERSION - 1u;
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_REJECT_MODULE_VERSION);
+    packet[2] = R1_MODULE_VERSION;
+    packet[0] = R1_PROTOCOL_VERSION - 1u;
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_REJECT_PROTOCOL_VERSION);
+    packet[0] = R1_PROTOCOL_VERSION;
+    assert(r1_eus_ingress_plan_decode(1u, packet,
+                                      R1_MODEL_HEADER_LENGTH - 1u, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_REJECT_SHORT_PACKET);
+    assert(r1_eus_ingress_plan_decode(1u, NULL, sizeof packet, &ingress)
+           == R1_OK);
+    assert(ingress.action == R1_EUS_INGRESS_REJECT_NULL_PACKET);
+    assert(r1_eus_ingress_plan_decode(1u, packet, sizeof packet, NULL)
+           == R1_ERROR_ARGUMENT);
+
+    static const uint8_t registered_subcommands[] = {
+        0x01u, 0x02u, 0x03u, 0x04u, 0x05u, 0x07u, 0x08u,
+        0x09u, 0x0au, 0x0bu, 0x0cu, 0x0eu, 0x0fu, 0x10u,
+        0x11u, 0x12u, 0x7eu, 0x7fu, 0x82u, 0x83u,
+    };
+    r1_eus_system_dispatch_plan system;
+    for (size_t index = 0u;
+         index < sizeof registered_subcommands / sizeof registered_subcommands[0];
+         ++index) {
+        assert(r1_eus_system_dispatch_plan_build(
+                   0u, registered_subcommands[index], &system) == R1_OK);
+        assert(system.registered);
+        assert(system.registration_index == index);
+        assert(system.packed_command == registered_subcommands[index]);
+    }
+    assert(r1_eus_system_dispatch_plan_build(0u, 0u, &system) == R1_OK);
+    assert(!system.registered && system.registration_index == UINT8_MAX);
+    assert(r1_eus_system_dispatch_plan_build(0u, 0x06u, &system) == R1_OK);
+    assert(!system.registered);
+    assert(r1_eus_system_dispatch_plan_build(1u, 1u, &system) == R1_OK);
+    assert(!system.registered && system.packed_command == UINT16_C(0x0101));
+    assert(r1_eus_system_dispatch_plan_build(0u, 1u, NULL)
+           == R1_ERROR_ARGUMENT);
 }
 
 static void test_physical_wire_vectors(void) {
@@ -1840,6 +2052,33 @@ static void test_legacy_command_routing(void) {
         }
     }
 
+    /* The factory-input duplicate has the same 23 routes plus an inert 0x10
+     * branch and an inline status-response branch at 0x8b. */
+    for (size_t index = 0u; index < sizeof routes / sizeof routes[0]; ++index) {
+        frame[R1_LEGACY_COMMAND_OPCODE_OFFSET] = routes[index].opcode;
+        assert(r1_factory_legacy_command_route_frame(
+                   frame, 3u, workspace, sizeof workspace, &route) == R1_OK);
+        assert(route == routes[index].route);
+    }
+    frame[R1_LEGACY_COMMAND_OPCODE_OFFSET] = 0x10u;
+    assert(r1_factory_legacy_command_route_frame(
+               frame, 3u, workspace, sizeof workspace, &route) == R1_OK);
+    assert(route == R1_LEGACY_COMMAND_ROUTE_FACTORY_NOOP_0X10);
+    assert(r1_legacy_command_route_frame(
+               frame, 3u, workspace, sizeof workspace, &route) ==
+           R1_ERROR_UNSUPPORTED);
+    frame[R1_LEGACY_COMMAND_OPCODE_OFFSET] = 0x8bu;
+    assert(r1_factory_legacy_command_route_frame(
+               frame, 3u, workspace, sizeof workspace, &route) == R1_OK);
+    assert(route == R1_LEGACY_COMMAND_ROUTE_FACTORY_STATUS_0X8B);
+    assert(r1_legacy_command_route_frame(
+               frame, 3u, workspace, sizeof workspace, &route) ==
+           R1_ERROR_UNSUPPORTED);
+    frame[R1_LEGACY_COMMAND_OPCODE_OFFSET] = 0x00u;
+    assert(r1_factory_legacy_command_route_frame(
+               frame, 3u, workspace, sizeof workspace, &route) ==
+           R1_ERROR_UNSUPPORTED);
+
     frame[R1_LEGACY_COMMAND_OPCODE_OFFSET] = 0x00u;
     route = R1_LEGACY_COMMAND_ROUTE_0X11;
     assert(r1_legacy_command_route_frame(
@@ -2004,6 +2243,19 @@ static void test_ati_calibration_command(void) {
 }
 
 static void test_health_history_routing(void) {
+    static const uint8_t event_gate_payload[9] = {0};
+    assert(r1_health_daily_test_event_valid(
+        event_gate_payload, sizeof event_gate_payload));
+    assert(!r1_health_daily_test_event_valid(
+        event_gate_payload, sizeof event_gate_payload - 1u));
+    assert(!r1_health_daily_test_event_valid(NULL, 9u));
+    assert(r1_health_history_event_valid(
+        event_gate_payload, R1_HEALTH_HISTORY_EVENT_BYTES));
+    assert(!r1_health_history_event_valid(
+        event_gate_payload, R1_HEALTH_HISTORY_EVENT_BYTES - 1u));
+    assert(!r1_health_history_event_valid(
+        NULL, R1_HEALTH_HISTORY_EVENT_BYTES));
+
     typedef struct {
         uint8_t command;
         uint8_t subcommand;
@@ -2051,6 +2303,7 @@ static void test_health_history_routing(void) {
         UINT16_C(0x0103), UINT16_C(0x0203), UINT16_C(0x0403),
         UINT16_C(0x0602), UINT16_C(0x7f01), UINT16_C(0x0301),
     };
+    r1_health_history_noop_handler();
     r1_health_history_route route;
     for (size_t index = 0u;
          index < sizeof non_event_keys / sizeof non_event_keys[0]; ++index) {
@@ -2059,6 +2312,281 @@ static void test_health_history_routing(void) {
                    (uint8_t)non_event_keys[index], 0u, &route) ==
                R1_ERROR_UNSUPPORTED);
     }
+
+    r1_health_auxiliary_plan auxiliary;
+    assert(r1_sleep_detail_plan(2u, &auxiliary) == R1_OK);
+    assert(auxiliary.accepted && auxiliary.private_event_requested &&
+           auxiliary.private_event == UINT16_C(0x100e) &&
+           auxiliary.private_event_payload_length == 0u);
+    assert(r1_sleep_detail_plan(0u, &auxiliary) == R1_OK);
+    assert(!auxiliary.accepted && !auxiliary.private_event_requested);
+    assert(r1_sleep_detail_plan(3u, &auxiliary) == R1_OK);
+    assert(!auxiliary.accepted);
+
+    assert(r1_heart_rate_measurement_plan(
+               2u, UINT16_C(0x1234), &auxiliary) == R1_OK);
+    assert(auxiliary.accepted && auxiliary.provider_command_requested &&
+           auxiliary.provider_command == UINT16_C(0x0103) &&
+           auxiliary.provider_mode == 2u &&
+           auxiliary.request_serial == UINT16_C(0x1234) &&
+           auxiliary.private_event == UINT16_C(0x1002) &&
+           auxiliary.private_event_payload_length == 1u &&
+           auxiliary.private_event_payload == 1u);
+    assert(r1_spo2_measurement_plan(
+               2u, UINT16_C(0xabcd), &auxiliary) == R1_OK);
+    assert(auxiliary.accepted && auxiliary.provider_command_requested &&
+           auxiliary.provider_command == UINT16_C(0x0203) &&
+           auxiliary.provider_mode == 2u &&
+           auxiliary.request_serial == UINT16_C(0xabcd) &&
+           auxiliary.private_event == UINT16_C(0x1004) &&
+           auxiliary.private_event_payload_length == 1u &&
+           auxiliary.private_event_payload == 1u);
+    assert(r1_spo2_measurement_plan(1u, 0u, &auxiliary) == R1_OK);
+    assert(!auxiliary.accepted && !auxiliary.provider_command_requested &&
+           !auxiliary.private_event_requested);
+
+    assert(r1_health_report_setting_plan(false, UINT8_MAX, &auxiliary) == R1_OK);
+    assert(auxiliary.accepted && auxiliary.report_setting_update_requested &&
+           !auxiliary.report_enabled);
+    assert(r1_health_report_setting_plan(true, 7u, &auxiliary) == R1_OK);
+    assert(auxiliary.report_enabled);
+    assert(r1_health_report_setting_plan(true, 0u, &auxiliary) == R1_OK);
+    assert(!auxiliary.report_enabled);
+
+    r1_stress_control_plan stress_control;
+    assert(r1_stress_mode_control_plan(0u, 1u, &stress_control) == R1_OK);
+    assert(stress_control.action == R1_STRESS_CONTROL_MODE &&
+           stress_control.accepted && stress_control.mode_update_requested &&
+           stress_control.mode == 0u &&
+           !stress_control.measurement_update_requested);
+    assert(r1_stress_mode_control_plan(1u, 1u, &stress_control) == R1_OK);
+    assert(stress_control.accepted && stress_control.mode_update_requested &&
+           stress_control.mode == 1u);
+    assert(r1_stress_mode_control_plan(2u, 1u, &stress_control) == R1_OK);
+    assert(stress_control.accepted && !stress_control.mode_update_requested &&
+           stress_control.raw_value == 2u);
+    assert(r1_stress_mode_control_plan(UINT8_MAX, 0u, &stress_control) == R1_OK);
+    assert(!stress_control.accepted && !stress_control.mode_update_requested);
+    assert(r1_stress_measurement_control_plan(
+               0u, 1u, &stress_control) == R1_OK);
+    assert(stress_control.action == R1_STRESS_CONTROL_MEASUREMENT &&
+           stress_control.accepted &&
+           stress_control.measurement_update_requested &&
+           !stress_control.measurement_enabled);
+    assert(r1_stress_measurement_control_plan(
+               7u, 1u, &stress_control) == R1_OK);
+    assert(stress_control.measurement_enabled &&
+           stress_control.raw_value == 7u);
+    assert(r1_stress_measurement_control_plan(
+               1u, 2u, &stress_control) == R1_OK);
+    assert(!stress_control.accepted &&
+           !stress_control.measurement_update_requested);
+
+    r1_factory_optical_diagnostic_plan optical_diagnostic;
+    static const uint8_t factory_hr[] = {72u, 11u, 22u};
+    assert(r1_factory_heart_rate_diagnostic_plan(
+               factory_hr, sizeof factory_hr, &optical_diagnostic) == R1_OK);
+    assert(optical_diagnostic.metric == R1_FACTORY_OPTICAL_HEART_RATE &&
+           optical_diagnostic.raw_value == 72u &&
+           optical_diagnostic.normalized_value == 72u &&
+           optical_diagnostic.text_value_count == 3u &&
+           optical_diagnostic.text_values[0] == 72u &&
+           optical_diagnostic.text_values[1] == 11u &&
+           optical_diagnostic.text_values[2] == 22u &&
+           !optical_diagnostic.record_update_requested);
+    static const uint8_t factory_spo2[] = {98u};
+    assert(r1_factory_spo2_diagnostic_plan(
+               factory_spo2, sizeof factory_spo2,
+               &optical_diagnostic) == R1_OK);
+    assert(optical_diagnostic.metric == R1_FACTORY_OPTICAL_SPO2 &&
+           optical_diagnostic.text_values[0] == 98u &&
+           optical_diagnostic.text_value_count == 1u);
+    static const uint8_t factory_hrv[] = {
+        0x34u, 0x12u, 0x78u, 0x56u, 0xbcu, 0x9au, 0xf0u, 0xdeu,
+    };
+    assert(r1_factory_hrv_diagnostic_plan(
+               factory_hrv, sizeof factory_hrv, &optical_diagnostic) == R1_OK);
+    assert(optical_diagnostic.metric == R1_FACTORY_OPTICAL_HRV &&
+           optical_diagnostic.raw_value == UINT16_C(0x1234) &&
+           optical_diagnostic.text_value_count == 4u &&
+           optical_diagnostic.text_values[0] == UINT16_C(0x1234) &&
+           optical_diagnostic.text_values[1] == UINT16_C(0x5678) &&
+           optical_diagnostic.text_values[2] == UINT16_C(0x9abc) &&
+           optical_diagnostic.text_values[3] == UINT16_C(0xdef0));
+    static const uint8_t factory_temperature[] = {0x9cu, 0x16u};
+    assert(r1_factory_temperature_diagnostic_plan(
+               factory_temperature, sizeof factory_temperature,
+               &optical_diagnostic) == R1_OK);
+    assert(optical_diagnostic.metric == R1_FACTORY_OPTICAL_TEMPERATURE &&
+           optical_diagnostic.raw_value == UINT16_C(5788) &&
+           optical_diagnostic.normalized_value == UINT16_C(57) &&
+           optical_diagnostic.text_values[0] == 5u &&
+           optical_diagnostic.text_values[1] == 7u &&
+           optical_diagnostic.record_update_requested);
+    assert(r1_factory_heart_rate_diagnostic_plan(
+               factory_hr, 2u, &optical_diagnostic) == R1_ERROR_LENGTH);
+    assert(r1_factory_spo2_diagnostic_plan(
+               NULL, 1u, &optical_diagnostic) == R1_ERROR_ARGUMENT);
+    assert(r1_factory_hrv_diagnostic_plan(
+               factory_hrv, 6u, &optical_diagnostic) == R1_ERROR_LENGTH);
+    assert(r1_factory_temperature_diagnostic_plan(
+               factory_temperature, sizeof factory_temperature, NULL) ==
+           R1_ERROR_ARGUMENT);
+
+    r1_factory_stream_control_plan factory_stream;
+    assert(r1_factory_acc_stream_register_plan(false, &factory_stream) == R1_OK);
+    assert(factory_stream.metric == R1_FACTORY_STREAM_ACC &&
+           factory_stream.action == R1_FACTORY_STREAM_REGISTER &&
+           !factory_stream.handle_was_present);
+    assert(r1_factory_acc_stream_register_plan(true, &factory_stream) == R1_OK);
+    assert(factory_stream.action == R1_FACTORY_STREAM_NO_ACTION &&
+           factory_stream.handle_was_present);
+    assert(r1_factory_heart_rate_stream_unregister_plan(
+               true, &factory_stream) == R1_OK);
+    assert(factory_stream.metric == R1_FACTORY_STREAM_HEART_RATE &&
+           factory_stream.action == R1_FACTORY_STREAM_UNREGISTER);
+    assert(r1_factory_heart_rate_stream_unregister_plan(
+               false, &factory_stream) == R1_OK);
+    assert(factory_stream.action == R1_FACTORY_STREAM_NO_ACTION);
+    assert(r1_factory_heart_rate_stream_register_plan(
+               false, &factory_stream) == R1_OK);
+    assert(factory_stream.metric == R1_FACTORY_STREAM_HEART_RATE &&
+           factory_stream.action == R1_FACTORY_STREAM_REGISTER);
+    assert(r1_factory_hrv_stream_register_plan(
+               false, &factory_stream) == R1_OK);
+    assert(factory_stream.metric == R1_FACTORY_STREAM_HRV &&
+           factory_stream.action == R1_FACTORY_STREAM_REGISTER);
+    assert(r1_factory_spo2_stream_register_plan(
+               false, &factory_stream) == R1_OK);
+    assert(factory_stream.metric == R1_FACTORY_STREAM_SPO2 &&
+           factory_stream.action == R1_FACTORY_STREAM_REGISTER);
+    assert(r1_factory_temperature_stream_unregister_plan(
+               true, &factory_stream) == R1_OK);
+    assert(factory_stream.metric == R1_FACTORY_STREAM_TEMPERATURE &&
+           factory_stream.action == R1_FACTORY_STREAM_UNREGISTER);
+    assert(r1_factory_temperature_stream_register_plan(
+               false, &factory_stream) == R1_OK);
+    assert(factory_stream.action == R1_FACTORY_STREAM_REGISTER);
+    assert(r1_factory_temperature_stream_register_plan(false, NULL) ==
+           R1_ERROR_ARGUMENT);
+
+    uint8_t factory_acc[R1_FACTORY_ACC_RESULT_BYTES] = {0};
+    for (uint8_t index = 0u; index < R1_FACTORY_ACC_RECORD_COUNT; ++index) {
+        const size_t offset = (size_t)index * R1_FACTORY_ACC_RECORD_STRIDE;
+        const int16_t x = (int16_t)(100 + index);
+        const int16_t y = (int16_t)(-200 - index);
+        const int16_t z = (int16_t)(300 + index);
+        factory_acc[offset] = (uint8_t)x;
+        factory_acc[offset + 1u] = (uint8_t)((uint16_t)x >> 8u);
+        factory_acc[offset + 2u] = (uint8_t)y;
+        factory_acc[offset + 3u] = (uint8_t)((uint16_t)y >> 8u);
+        factory_acc[offset + 4u] = (uint8_t)z;
+        factory_acc[offset + 5u] = (uint8_t)((uint16_t)z >> 8u);
+    }
+    factory_acc[180] = R1_FACTORY_ACC_RECORD_COUNT;
+    r1_factory_acc_diagnostic_plan factory_acc_plan;
+    assert(r1_factory_acc_diagnostic_plan_decode(
+               factory_acc, sizeof factory_acc, &factory_acc_plan) == R1_OK);
+    assert(factory_acc_plan.record_count == R1_FACTORY_ACC_RECORD_COUNT &&
+           factory_acc_plan.sample_count ==
+               R1_FACTORY_ACC_DIAGNOSTIC_SAMPLE_COUNT &&
+           factory_acc_plan.terminator_requested);
+    for (uint8_t sample_index = 0u;
+         sample_index < R1_FACTORY_ACC_DIAGNOSTIC_SAMPLE_COUNT;
+         ++sample_index) {
+        const uint8_t record_index = (uint8_t)(sample_index * 5u);
+        assert(factory_acc_plan.samples[sample_index].record_index ==
+                   record_index &&
+               factory_acc_plan.samples[sample_index].x ==
+                   (int16_t)(100 + record_index) &&
+               factory_acc_plan.samples[sample_index].y ==
+                   (int16_t)(-200 - record_index) &&
+               factory_acc_plan.samples[sample_index].z ==
+                   (int16_t)(300 + record_index));
+    }
+    factory_acc[180] = 0u;
+    assert(r1_factory_acc_diagnostic_plan_decode(
+               factory_acc, sizeof factory_acc, &factory_acc_plan) == R1_OK);
+    assert(factory_acc_plan.record_count == 0u &&
+           factory_acc_plan.sample_count == 0u &&
+           factory_acc_plan.terminator_requested);
+    factory_acc[180] = 31u;
+    assert(r1_factory_acc_diagnostic_plan_decode(
+               factory_acc, sizeof factory_acc, &factory_acc_plan) ==
+           R1_ERROR_LENGTH);
+    assert(r1_factory_acc_diagnostic_plan_decode(
+               factory_acc, sizeof factory_acc - 1u, &factory_acc_plan) ==
+           R1_ERROR_LENGTH);
+    assert(r1_factory_acc_diagnostic_plan_decode(
+               NULL, sizeof factory_acc, &factory_acc_plan) ==
+           R1_ERROR_ARGUMENT);
+
+    r1_factory_battery_diagnostic_plan factory_battery_plan;
+    assert(r1_factory_battery_diagnostic_plan_build(
+               UINT16_C(4217), 87u, 3u, &factory_battery_plan) == R1_OK);
+    assert(factory_battery_plan.battery_millivolts == UINT16_C(4217) &&
+           factory_battery_plan.battery_percent == 87u &&
+           factory_battery_plan.battery_type == 3u &&
+           factory_battery_plan.handler_return_value == 1u);
+    assert(r1_factory_battery_diagnostic_plan_build(
+               UINT16_MAX, UINT8_MAX, UINT8_MAX, &factory_battery_plan) ==
+           R1_OK);
+    assert(factory_battery_plan.battery_millivolts == UINT16_MAX &&
+           factory_battery_plan.battery_percent == UINT8_MAX &&
+           factory_battery_plan.battery_type == UINT8_MAX);
+    assert(r1_factory_battery_diagnostic_plan_build(
+               0u, 0u, 0u, NULL) == R1_ERROR_ARGUMENT);
+
+    static const uint8_t factory_activity[] = {
+        0x78u, 0x56u, 0x34u, 0x12u, 0xbcu, 0x9au, 0xf0u, 0xdeu,
+    };
+    r1_factory_activity_diagnostic_plan factory_activity_plan;
+    assert(r1_factory_activity_diagnostic_plan_decode(
+               factory_activity, sizeof factory_activity,
+               &factory_activity_plan) == R1_OK);
+    assert(factory_activity_plan.all_kilocalories == UINT32_C(0x12345678) &&
+           factory_activity_plan.steps == UINT16_C(0x9abc) &&
+           factory_activity_plan.active_kilocalories == UINT16_C(0xdef0));
+    assert(r1_factory_activity_diagnostic_plan_decode(
+               factory_activity, 7u, &factory_activity_plan) == R1_ERROR_LENGTH);
+
+    static const uint8_t factory_temperature_pair[] = {
+        2u, 0x39u, 0x30u, 0xc7u, 0xcfu,
+    };
+    r1_factory_temperature_pair_diagnostic_plan factory_pair_plan;
+    assert(r1_factory_temperature_pair_diagnostic_plan_decode(
+               factory_temperature_pair, sizeof factory_temperature_pair,
+               &factory_pair_plan) == R1_OK);
+    assert(factory_pair_plan.sensor_count == 2u &&
+           factory_pair_plan.temperature_0_millicelsius == INT16_C(12345) &&
+           factory_pair_plan.temperature_2_millicelsius == INT16_C(-12345) &&
+           factory_pair_plan.average_millicelsius == 0);
+    static const uint8_t factory_negative_pair[] = {
+        2u, 0xffu, 0xffu, 0xfeu, 0xffu,
+    };
+    assert(r1_factory_temperature_pair_diagnostic_plan_decode(
+               factory_negative_pair, sizeof factory_negative_pair,
+               &factory_pair_plan) == R1_OK);
+    assert(factory_pair_plan.average_millicelsius == INT16_C(-1));
+
+    r1_factory_periodic_timer_restart_plan factory_timer;
+    assert(r1_factory_periodic_timer_restart_plan_build(&factory_timer) == R1_OK);
+    assert(factory_timer.system_task_event_requested &&
+           factory_timer.system_task_event == 4u);
+    assert(r1_factory_activity_diagnostic_plan_decode(
+               NULL, 8u, &factory_activity_plan) == R1_ERROR_ARGUMENT);
+    assert(r1_factory_temperature_pair_diagnostic_plan_decode(
+               factory_temperature_pair, 5u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_factory_periodic_timer_restart_plan_build(NULL) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_sleep_detail_plan(2u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_heart_rate_measurement_plan(2u, 0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_spo2_measurement_plan(2u, 0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_health_report_setting_plan(false, 0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_stress_mode_control_plan(0u, 1u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_stress_measurement_control_plan(
+               0u, 1u, NULL) == R1_ERROR_ARGUMENT);
+
     static const uint8_t temperature_event[] = {2u, 1u, 1u, 0u, 0u, 0u, 0u, 0u};
     static const uint8_t stress_event[] = {3u, 0u, 1u, 0u, 0u, 0u, 0u, 0u};
     assert(r1_health_history_decode_event14(
@@ -3208,6 +3736,121 @@ static void test_scalar_health_sample_consumers(void) {
     assert(r1_hrv_store_sample(
                &hrv, &saturated, 1u, 1u, 2u,
                R1_HEALTH_HOURLY_SLOTS, 0u, &u16_result) == R1_ERROR_LENGTH);
+}
+
+static void test_heart_rate_result_plans(void) {
+    static const uint8_t valid[] = {72u, 91u, 37u};
+    r1_hr_result_plan plan;
+
+    assert(r1_hr_value_plausible(40u));
+    assert(r1_hr_value_plausible(220u));
+    assert(!r1_hr_value_plausible(39u));
+    assert(!r1_hr_value_plausible(221u));
+
+    assert(r1_hr_once_result_plan(
+               valid, sizeof valid, true, UINT32_C(0x12345678), &plan) ==
+           R1_OK);
+    assert(plan.kind == R1_HR_RESULT_ONCE && plan.heart_rate == 72u &&
+           plan.confidence == 91u && plan.signal == 37u &&
+           plan.value_plausible && plan.health_publication_enabled &&
+           plan.publish_event &&
+           plan.event_id == R1_HEART_RATE_PUBLICATION_EVENT &&
+           plan.event_payload_length == R1_HEART_RATE_PUBLICATION_BYTES);
+    static const uint8_t expected_payload[] = {
+        72u, 0u, 0u, 0u, 0x78u, 0x56u, 0x34u, 0x12u,
+    };
+    assert(memcmp(plan.event_payload, expected_payload,
+                  sizeof expected_payload) == 0);
+    assert(plan.unregister_hr_stream && plan.clear_stream_handle &&
+           !plan.release_timing_timer && !plan.clear_timing_timer_handle);
+
+    assert(r1_hr_timing_result_plan(
+               valid, sizeof valid, true, UINT32_C(0x01020304), &plan) ==
+           R1_OK);
+    assert(plan.kind == R1_HR_RESULT_TIMING && plan.publish_event &&
+           plan.event_payload[4] == 0x04u && plan.event_payload[5] == 0x03u &&
+           plan.event_payload[6] == 0x02u && plan.event_payload[7] == 0x01u &&
+           plan.unregister_hr_stream && plan.clear_stream_handle &&
+           plan.release_timing_timer && plan.clear_timing_timer_handle);
+
+    static const uint8_t too_low[] = {39u, 1u, 2u};
+    assert(r1_hr_timing_result_plan(
+               too_low, sizeof too_low, true, UINT32_MAX, &plan) == R1_OK);
+    assert(!plan.value_plausible && !plan.publish_event &&
+           plan.event_id == 0u && plan.event_payload_length == 0u &&
+           plan.unregister_hr_stream && plan.release_timing_timer);
+    assert(r1_hr_timing_result_plan(
+               valid, sizeof valid, false, UINT32_MAX, &plan) == R1_OK);
+    assert(plan.value_plausible && !plan.health_publication_enabled &&
+           !plan.publish_event && plan.unregister_hr_stream &&
+           plan.release_timing_timer);
+
+    assert(r1_hr_once_result_plan(
+               NULL, sizeof valid, true, 0u, &plan) == R1_ERROR_ARGUMENT);
+    assert(r1_hr_once_result_plan(
+               valid, sizeof valid, true, 0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_hr_once_result_plan(
+               valid, sizeof valid - 1u, true, 0u, &plan) == R1_ERROR_LENGTH);
+    assert(r1_hr_once_result_plan(
+               valid, sizeof valid + 1u, true, 0u, &plan) == R1_ERROR_LENGTH);
+}
+
+static void test_spo2_result_plans(void) {
+    static const uint8_t low_valid[] = {
+        70u, 12u, 88u, UINT8_C(0xfd), 73u, 1u,
+    };
+    r1_spo2_result_plan plan;
+    assert(r1_spo2_once_result_plan(
+               low_valid, sizeof low_valid, true, &plan) == R1_OK);
+    assert(plan.kind == R1_SPO2_RESULT_ONCE && plan.raw_spo2 == 70u &&
+           plan.r_value == 12u && plan.confidence == 88u &&
+           plan.level == -3 && plan.heart_rate == 73u && plan.mark == 1u &&
+           plan.value_plausible && plan.health_publication_enabled &&
+           plan.adjusted_spo2 == 83u && plan.publish_event &&
+           plan.event_id == R1_SPO2_PUBLICATION_EVENT &&
+           plan.event_payload_length == R1_SPO2_PUBLICATION_BYTES);
+    static const uint8_t expected_payload[] = {
+        83u, 0u, 0u, 0u, 0u, 0u, 0u, 0u,
+    };
+    assert(memcmp(plan.event_payload, expected_payload,
+                  sizeof expected_payload) == 0);
+    assert(plan.unregister_spo2_stream && plan.clear_stream_handle &&
+           !plan.release_timing_timer && !plan.clear_timing_timer_handle &&
+           !plan.mark_valid_result_seen && !plan.mark_invalid_result_seen);
+
+    static const uint8_t high_valid[] = {100u, 2u, 3u, 4u, 5u, 6u};
+    assert(r1_spo2_timing_result_plan(
+               high_valid, sizeof high_valid, true, &plan) == R1_OK);
+    assert(plan.kind == R1_SPO2_RESULT_TIMING && plan.value_plausible &&
+           plan.adjusted_spo2 == 99u && plan.event_payload[0] == 99u &&
+           plan.publish_event && plan.unregister_spo2_stream &&
+           plan.clear_stream_handle && plan.release_timing_timer &&
+           plan.clear_timing_timer_handle && plan.mark_valid_result_seen &&
+           !plan.mark_invalid_result_seen);
+
+    static const uint8_t invalid[] = {69u, 2u, 3u, 4u, 5u, 6u};
+    assert(r1_spo2_timing_result_plan(
+               invalid, sizeof invalid, true, &plan) == R1_OK);
+    assert(!plan.value_plausible && plan.adjusted_spo2 == 0u &&
+           !plan.publish_event && !plan.mark_valid_result_seen &&
+           plan.mark_invalid_result_seen && plan.release_timing_timer);
+    assert(r1_spo2_timing_result_plan(
+               high_valid, sizeof high_valid, false, &plan) == R1_OK);
+    assert(plan.value_plausible && !plan.health_publication_enabled &&
+           plan.adjusted_spo2 == 0u && !plan.publish_event &&
+           plan.mark_valid_result_seen && !plan.mark_invalid_result_seen);
+
+    assert(r1_spo2_once_result_plan(
+               NULL, sizeof high_valid, true, &plan) == R1_ERROR_ARGUMENT);
+    assert(r1_spo2_once_result_plan(
+               high_valid, sizeof high_valid, true, NULL) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_spo2_once_result_plan(
+               high_valid, sizeof high_valid - 1u, true, &plan) ==
+           R1_ERROR_LENGTH);
+    assert(r1_spo2_once_result_plan(
+               high_valid, sizeof high_valid + 1u, true, &plan) ==
+           R1_ERROR_LENGTH);
 }
 
 static void test_health_crash_snapshot(void) {
@@ -5360,15 +6003,61 @@ static void test_runtime_touch_effect(void) {
     r1_runtime_set_touch_handler(&runtime, capture_runtime_touch, &capture);
     assert(r1_runtime_connect(&runtime, 3u) == R1_OK);
     assert(r1_runtime_set_security(&runtime, 3u, true, true, true) == R1_OK);
-    static const uint8_t disabled[] = {0u};
+    r1_touch_switch_handler_plan plan;
+    static const uint8_t disabled[] = {
+        R1_TOUCH_SWITCH_SELECTOR_GLASSES, 0u,
+    };
+    assert(r1_touch_switch_handler_plan_decode(
+               NULL, sizeof disabled, &plan) == R1_ERROR_ARGUMENT);
+    assert(r1_touch_switch_handler_plan_decode(
+               disabled, sizeof disabled, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_touch_switch_handler_plan_decode(
+               disabled, sizeof disabled - 1u, &plan) == R1_ERROR_LENGTH);
+    assert(r1_touch_switch_handler_plan_decode(
+               disabled, sizeof disabled, &plan) == R1_OK);
+    assert(plan.send_empty_success_response);
+    assert(plan.action == R1_TOUCH_SWITCH_ACTION_CLOSE_GLASSES_SOURCE);
+    assert(plan.selector == R1_TOUCH_SWITCH_SELECTOR_GLASSES);
+    assert(plan.switch_value == 0u);
+    assert(plan.touch_source == R1_TOUCH_SWITCH_SOURCE_GLASSES);
     const r1_model set_disabled = request(2u, 0x07u, disabled, sizeof disabled);
     assert(runtime_feed_model(&runtime, 3u, &set_disabled) == R1_OK);
     assert(capture.calls == 1u && !capture.enabled);
     assert(runtime_feed_model(&runtime, 3u, &set_disabled) == R1_OK);
     assert(capture.calls == 1u);
-    static const uint8_t enabled[] = {1u};
+    static const uint8_t enabled[] = {
+        R1_TOUCH_SWITCH_SELECTOR_GLASSES, 1u,
+    };
+    assert(r1_touch_switch_handler_plan_decode(
+               enabled, sizeof enabled, &plan) == R1_OK);
+    assert(plan.action == R1_TOUCH_SWITCH_ACTION_OPEN_GLASSES_SOURCE);
     const r1_model set_enabled = request(2u, 0x07u, enabled, sizeof enabled);
     assert(runtime_feed_model(&runtime, 3u, &set_enabled) == R1_OK);
+    assert(capture.calls == 2u && capture.enabled);
+
+    /* Selector 1 is diagnostic-only in stock firmware and unknown selectors
+     * are acknowledged no-ops; neither changes the glasses touch policy. */
+    static const uint8_t phone[] = {
+        R1_TOUCH_SWITCH_SELECTOR_PHONE, 0u,
+    };
+    assert(r1_touch_switch_handler_plan_decode(
+               phone, sizeof phone, &plan) == R1_OK);
+    assert(plan.action == R1_TOUCH_SWITCH_ACTION_PHONE_DIAGNOSTIC);
+    const r1_model set_phone = request(2u, 0x07u, phone, sizeof phone);
+    assert(runtime_feed_model(&runtime, 3u, &set_phone) == R1_OK);
+    assert(capture.calls == 2u && capture.enabled);
+    static const uint8_t unknown[] = {3u, 0u};
+    assert(r1_touch_switch_handler_plan_decode(
+               unknown, sizeof unknown, &plan) == R1_OK);
+    assert(plan.action == R1_TOUCH_SWITCH_ACTION_NONE);
+    const r1_model set_unknown = request(2u, 0x07u, unknown, sizeof unknown);
+    assert(runtime_feed_model(&runtime, 3u, &set_unknown) == R1_OK);
+    assert(capture.calls == 2u && capture.enabled);
+
+    static const uint8_t old_ambiguous_shape[] = {1u};
+    const r1_model old_request = request(
+        2u, 0x07u, old_ambiguous_shape, sizeof old_ambiguous_shape);
+    assert(runtime_feed_model(&runtime, 3u, &old_request) == R1_OK);
     assert(capture.calls == 2u && capture.enabled);
 }
 
@@ -5518,6 +6207,282 @@ static void test_bae8_event_route(void) {
     assert(plan.route == R1_BAE8_EVENT_IGNORE);
 }
 
+static void test_bae8_connection_event_plan(void) {
+    r1_bae8_connection_event_plan plan;
+    assert(r1_bae8_connection_event_plan_build(
+               true, true, true, 1u, true, 1u, NULL) ==
+           R1_ERROR_ARGUMENT);
+
+    assert(r1_bae8_connection_event_plan_build(
+               true, true, true, 1u, true, 3u, &plan) == R1_OK);
+    assert(!plan.log_link_context_lookup_failure);
+    assert(plan.request_channel1_cccd_read);
+    assert(plan.request_channel2_cccd_read);
+    assert(plan.mark_channel1_notifications_enabled);
+    assert(plan.mark_channel2_notifications_enabled);
+    assert(plan.dispatch_connection_event);
+    assert(plan.callback_event_type == R1_BAE8_CONNECTION_EVENT_TYPE);
+    assert(plan.callback_event_record_bytes ==
+           R1_BAE8_CONNECTION_EVENT_RECORD_BYTES);
+
+    /* The indication-only bit does not enable notifications, and a failed
+       value read cannot update either link-context flag. */
+    assert(r1_bae8_connection_event_plan_build(
+               true, true, true, 2u, false, 1u, &plan) == R1_OK);
+    assert(!plan.mark_channel1_notifications_enabled);
+    assert(!plan.mark_channel2_notifications_enabled);
+    assert(plan.dispatch_connection_event);
+
+    /* Stock behavior still reads both CCCDs and dispatches the connection
+       event after link-context lookup failure; its context pointer is null. */
+    assert(r1_bae8_connection_event_plan_build(
+               false, true, true, 1u, true, 1u, &plan) == R1_OK);
+    assert(plan.log_link_context_lookup_failure);
+    assert(plan.request_channel1_cccd_read);
+    assert(plan.request_channel2_cccd_read);
+    assert(!plan.mark_channel1_notifications_enabled);
+    assert(!plan.mark_channel2_notifications_enabled);
+    assert(plan.dispatch_connection_event);
+
+    /* Without the installed service callback, neither context byte is set
+       and no event record is delivered, but both provider reads remain. */
+    assert(r1_bae8_connection_event_plan_build(
+               true, false, true, 1u, true, 1u, &plan) == R1_OK);
+    assert(plan.request_channel1_cccd_read);
+    assert(plan.request_channel2_cccd_read);
+    assert(!plan.mark_channel1_notifications_enabled);
+    assert(!plan.mark_channel2_notifications_enabled);
+    assert(!plan.dispatch_connection_event);
+}
+
+static void test_gap_event_plan(void) {
+    r1_gap_event_observation observation = {
+        .event_id = R1_GAP_EVT_CONNECTED,
+        .connection = 2u,
+        .phone_connection = R1_INVALID_CONNECTION,
+        .glasses_connection = R1_INVALID_CONNECTION,
+        .factory_marker = UINT8_C(0x5a),
+        .free_link_slot_available = true,
+        .link_context_initialization_succeeded = true,
+    };
+    r1_gap_event_plan plan;
+    assert(r1_gap_event_plan_build(NULL, &plan) == R1_ERROR_ARGUMENT);
+    assert(r1_gap_event_plan_build(&observation, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.route == R1_GAP_EVENT_CONNECTED);
+    assert(plan.cancel_connection_timeout && plan.schedule_connection_timeout);
+    assert(plan.connection_timeout_ticks == R1_GAP_CONNECTION_TIMEOUT_TICKS);
+    assert(plan.cache_peer_record && plan.cancel_role_timers);
+    assert(plan.schedule_factory_role_timer_a);
+    assert(!plan.schedule_factory_role_timer_b);
+    assert(plan.request_no_phone_advertising_policy);
+    assert(plan.factory_role_delay_ticks == R1_GAP_FACTORY_ROLE_DELAY_TICKS);
+    assert(plan.store_latest_connection && plan.register_link_context);
+    assert(!plan.enter_fail_stop_on_link_context_error);
+
+    observation.phone_connection = 1u;
+    observation.link_context_initialization_succeeded = false;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.schedule_factory_role_timer_a);
+    assert(plan.schedule_factory_role_timer_b);
+    assert(!plan.request_no_phone_advertising_policy);
+    assert(plan.enter_fail_stop_on_link_context_error);
+    observation.free_link_slot_available = false;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(!plan.register_link_context);
+    assert(!plan.enter_fail_stop_on_link_context_error);
+
+    observation = (r1_gap_event_observation){
+        .event_id = R1_GAP_EVT_DISCONNECTED,
+        .connection = 2u,
+        .event_byte8 = 0x13u,
+        .phone_connection = 1u,
+        .glasses_connection = 2u,
+        .advertising_tx_power_configured = true,
+        .advertising_tx_power_status = 8u,
+        .advertising_start_status = 1u,
+    };
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.route == R1_GAP_EVENT_DISCONNECTED);
+    assert(plan.cancel_connection_timeout && plan.cancel_role_timers);
+    assert(plan.clear_connection_latch && plan.release_link_context);
+    assert(plan.clear_peer_record && plan.query_peripheral_link_count);
+    assert(plan.disconnected_role == R1_GAP_DISCONNECTED_GLASSES);
+    assert(plan.disconnect_reason == 0x13u);
+    assert(plan.publish_disconnect_status && plan.reset_glasses_transport);
+    assert(plan.clear_glasses_connection && !plan.clear_phone_connection);
+    assert(plan.inspect_advertising_tx_power);
+    assert(!plan.enter_fail_stop_on_tx_power_error);
+    assert(plan.start_advertising);
+    assert(plan.advertising_mode == R1_ADVERTISING_MODE_DIRECTED_OR_FAST);
+    assert(plan.schedule_advertising_retry);
+    assert(plan.advertising_retry_ticks == R1_GAP_ADVERTISING_RETRY_TICKS);
+    assert(plan.clear_latest_connection);
+
+    observation.connection = 1u;
+    observation.advertising_tx_power_status = 7u;
+    observation.advertising_start_status = 0u;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.disconnected_role == R1_GAP_DISCONNECTED_PHONE);
+    assert(plan.apply_phone_disconnect_policy && plan.clear_phone_connection);
+    assert(!plan.reset_glasses_transport && !plan.clear_glasses_connection);
+    assert(plan.enter_fail_stop_on_tx_power_error);
+    assert(!plan.schedule_advertising_retry);
+    assert(plan.advertising_retry_ticks == 0u);
+
+    observation.event_id = R1_GAP_EVT_PHY_UPDATE_REQUEST;
+    observation.connection = 2u;
+    observation.event_byte8 = 4u;
+    observation.event_byte9 = 1u;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.route == R1_GAP_EVENT_PHY_UPDATE_REQUEST);
+    assert(plan.request_phy_update && plan.use_glasses_local_phy_preference);
+    assert(plan.transmit_phy == 1u && plan.receive_phy == 4u);
+    observation.connection = 1u;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(!plan.use_glasses_local_phy_preference);
+    assert(plan.transmit_phy == 1u && plan.receive_phy == 1u);
+
+    observation.event_id = R1_GAP_EVT_PHY_UPDATE;
+    observation.event_byte8 = 0u;
+    observation.event_byte9 = 4u;
+    observation.event_byte10 = 1u;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.route == R1_GAP_EVENT_PHY_UPDATE_COMPLETE);
+    assert(plan.phy_result == R1_GAP_PHY_RESULT_CODED);
+    observation.event_byte9 = 2u;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.phy_result == R1_GAP_PHY_RESULT_NON_CODED);
+    observation.event_byte8 = 3u;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.phy_result == R1_GAP_PHY_RESULT_FAILED);
+
+    observation.event_id = R1_GATTC_EVT_TIMEOUT;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.route == R1_GAP_EVENT_GATTC_TIMEOUT && plan.log_gatt_timeout);
+    observation.event_id = R1_GATTS_EVT_TIMEOUT;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.route == R1_GAP_EVENT_GATTS_TIMEOUT && plan.log_gatt_timeout);
+    observation.event_id = 0xffffu;
+    assert(r1_gap_event_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.route == R1_GAP_EVENT_IGNORE && !plan.log_gatt_timeout);
+}
+
+static void test_nfc_charge_task_plan(void) {
+    r1_nfc_charge_task_observation observation = {
+        .event_flags = R1_NFC_CHARGE_EVENT_MESSAGE_PENDING |
+            R1_NFC_CHARGE_EVENT_CHARGED_NOTIFICATION |
+            R1_NFC_CHARGE_EVENT_STANDARD_COMMAND_IRQ |
+            R1_NFC_CHARGE_EVENT_CHARGED_NOTIFICATION_CLEAR |
+            R1_NFC_CHARGE_EVENT_PMIC_CHARGE |
+            R1_NFC_CHARGE_EVENT_BATTERY_UPDATE |
+            R1_NFC_CHARGE_EVENT_CHARGING_BATTERY_UPDATE |
+            R1_NFC_CHARGE_EVENT_TERMINATE,
+        .battery_percent = 0u,
+    };
+    r1_nfc_charge_task_plan plan;
+    assert(r1_nfc_charge_task_plan_build(NULL, &plan) == R1_ERROR_ARGUMENT);
+    assert(r1_nfc_charge_task_plan_build(&observation, NULL) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_nfc_charge_task_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.wait_for_message &&
+           plan.message_bytes == R1_NFC_CHARGE_MESSAGE_BYTES);
+    assert(plan.set_charged_notification &&
+           plan.clear_charged_notification && plan.open_touch);
+    assert(!plan.close_touch && plan.run_standard_command_irq_sequence);
+    assert(!plan.run_not_charging_sequence && plan.clear_nfc_field_seen);
+    assert(plan.st25_dynamic_register ==
+           R1_NFC_CHARGE_ST25_DYNAMIC_REGISTER);
+    assert(plan.standard_command_register_value == 1u);
+    assert(plan.standard_command_delay_ticks ==
+           R1_NFC_CHARGE_STANDARD_DELAY_TICKS);
+    assert(plan.dispatch_pmic_charge_event &&
+           plan.pmic_charge_event == UINT8_C(0x5a));
+    assert(plan.report_charging_battery_percent);
+    assert(plan.charging_zero_battery_update_calls == 8u);
+    assert(plan.charging_zero_battery_update_delay_ticks == 10u);
+    assert(plan.periodic_battery_update_calls == 1u);
+    assert(plan.terminate_task && plan.release_task_synchronization &&
+           plan.deregister_watchdog);
+    assert(plan.terminal_delay_ticks == R1_RUNTIME_WAIT_FOREVER);
+
+    observation = (r1_nfc_charge_task_observation){
+        .event_flags = R1_NFC_CHARGE_EVENT_NOT_CHARGING,
+        .temperature_ids = {{0x01u, 0x50u}, {0x50u, 0x50u}, {0u, 0u}},
+    };
+    assert(r1_nfc_charge_task_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.run_not_charging_sequence && plan.close_touch);
+    assert(plan.reset_battery_charge_latches);
+    assert(plan.not_charging_register_value == 0u);
+    assert(plan.not_charging_delay_ticks ==
+           R1_NFC_CHARGE_NOT_CHARGING_DELAY_TICKS);
+    assert(plan.temperature_id_read_count == 2u);
+    assert(plan.temperature_retry_delay_count == 1u);
+    assert(plan.temperature_retry_delay_ticks == 100u);
+    assert(plan.temperature_ids_valid &&
+           plan.temperature_successful_attempt == 1u);
+    assert(!plan.enable_watchdog_reset);
+
+    observation.temperature_ids[1][0] = 0x4fu;
+    assert(r1_nfc_charge_task_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.temperature_id_read_count == 3u);
+    assert(plan.temperature_retry_delay_count == 3u);
+    assert(!plan.temperature_ids_valid && plan.enable_watchdog_reset);
+
+    observation = (r1_nfc_charge_task_observation){
+        .event_flags = R1_NFC_CHARGE_EVENT_CHARGING_BATTERY_UPDATE,
+        .battery_percent = 1u,
+    };
+    assert(r1_nfc_charge_task_plan_build(&observation, &plan) == R1_OK);
+    assert(plan.report_charging_battery_percent);
+    assert(plan.charging_zero_battery_update_calls == 0u);
+    assert(plan.charging_zero_battery_update_delay_ticks == 0u);
+    assert(!plan.wait_for_message && !plan.terminate_task);
+}
+
+static void test_buttonless_dfu_event_policy(void) {
+    r1_buttonless_dfu_event_plan plan =
+        r1_runtime_plan_buttonless_dfu_event(0u);
+    assert(plan.diagnostic == R1_BUTTONLESS_DFU_PREPARE);
+    assert(plan.disable_advertising_on_disconnect);
+    assert(plan.disconnect_all_connected_links);
+    assert(plan.report_disconnected_link_count);
+
+    const r1_buttonless_dfu_diagnostic diagnostics[] = {
+        R1_BUTTONLESS_DFU_ENTER,
+        R1_BUTTONLESS_DFU_ENTER_FAILED,
+        R1_BUTTONLESS_DFU_RESPONSE_SEND_ERROR,
+    };
+    for (uint32_t event = 1u; event <= 3u; ++event) {
+        plan = r1_runtime_plan_buttonless_dfu_event(event);
+        assert(plan.diagnostic == diagnostics[event - 1u]);
+        assert(!plan.disable_advertising_on_disconnect);
+        assert(!plan.disconnect_all_connected_links);
+        assert(!plan.report_disconnected_link_count);
+    }
+
+    plan = r1_runtime_plan_buttonless_dfu_event(4u);
+    assert(plan.diagnostic == R1_BUTTONLESS_DFU_UNKNOWN);
+    assert(!plan.disable_advertising_on_disconnect);
+    assert(!plan.disconnect_all_connected_links);
+    assert(!plan.report_disconnected_link_count);
+    plan = r1_runtime_plan_buttonless_dfu_event(UINT32_MAX);
+    assert(plan.diagnostic == R1_BUTTONLESS_DFU_UNKNOWN);
+}
+
+static void test_touch_recovery_timer_plan(void) {
+    r1_touch_recovery_timer_plan plan;
+    assert(r1_touch_recovery_timer_plan_build(&plan) == R1_OK);
+    assert(plan.clear_recovery_pending_latch);
+    assert(plan.task_event_flags == R1_TOUCH_RECOVERY_OPEN_EVENT_FLAG);
+    assert(r1_touch_recovery_timer_plan_build(NULL) == R1_ERROR_ARGUMENT);
+}
+
+static void test_i2c5_delay_noop(void) {
+    r1_twi_i2c5_delay_noop(0u);
+    r1_twi_i2c5_delay_noop(UINT32_MAX);
+}
+
 static void test_channel1_task_plans(void) {
     r1_channel1_task_startup_plan startup;
     assert(r1_channel1_task_plan_startup(false, &startup) == R1_OK);
@@ -5652,6 +6617,316 @@ static void test_factory_input_task_plans(void) {
     assert(flags.run_periodic_operation && flags.wait_again);
 }
 
+static void test_factory_input_thread_creation_plan(void) {
+    r1_factory_input_thread_creation_plan plan;
+    assert(r1_factory_input_thread_creation_plan_build(NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_factory_input_thread_creation_plan_build(&plan) == R1_OK);
+    assert(strcmp(plan.name, "factory_test") == 0);
+    assert(plan.stack_bytes == R1_FACTORY_INPUT_THREAD_STACK_BYTES);
+    assert(plan.priority_raw == R1_FACTORY_INPUT_THREAD_PRIORITY_RAW);
+    assert(plan.trustzone_module == R1_FACTORY_INPUT_THREAD_TRUSTZONE_MODULE);
+    assert(plan.request_thread_create && plan.store_returned_handle);
+    assert(plan.null_handle_enters_fail_stop);
+}
+
+static void test_factory_input_record_plan(void) {
+    const uint8_t exact_prefix[] = {'A', 'T', '^'};
+    const uint8_t command[] = {'A', 'T', '^', 'X', 0u};
+    const uint8_t ordinary[] = {'A', 'B', '^', 'X'};
+    r1_factory_input_record_plan plan;
+
+    assert(r1_factory_input_record_plan_dispatch(
+               7u, NULL, 0u, 0u, &plan) == R1_OK);
+    assert(plan.route == R1_FACTORY_INPUT_RECORD_STANDARD);
+    assert(plan.message_type == 7u && plan.dispatch_length == 0u);
+    assert(!plan.append_terminator && plan.release_record);
+    assert(r1_factory_input_record_plan_dispatch(
+               8u, exact_prefix, sizeof(exact_prefix), sizeof(exact_prefix),
+               &plan) == R1_OK);
+    assert(plan.route == R1_FACTORY_INPUT_RECORD_STANDARD);
+    assert(plan.dispatch_length == 3u && !plan.append_terminator);
+    assert(r1_factory_input_record_plan_dispatch(
+               9u, command, 4u, sizeof(command), &plan) == R1_OK);
+    assert(plan.route == R1_FACTORY_INPUT_RECORD_AT_COMMAND);
+    assert(plan.append_terminator && plan.terminator_index == 4u);
+    assert(plan.release_record && plan.observed_length == 4u);
+    assert(r1_factory_input_record_plan_dispatch(
+               9u, command, 4u, 4u, &plan) == R1_ERROR_LENGTH);
+    assert(r1_factory_input_record_plan_dispatch(
+               10u, ordinary, UINT32_C(0x10001), sizeof(ordinary),
+               &plan) == R1_OK);
+    assert(plan.route == R1_FACTORY_INPUT_RECORD_STANDARD);
+    assert(plan.dispatch_length == 1u);
+    assert(r1_factory_input_record_plan_dispatch(
+               0u, NULL, 1u, 1u, &plan) == R1_ERROR_ARGUMENT);
+
+    r1_factory_f2_action_plan f2_plan;
+    assert(r1_factory_f2_delayed_reset_plan(&f2_plan) == R1_OK);
+    assert(f2_plan.action == R1_FACTORY_F2_DELAYED_RESET &&
+           f2_plan.response_requested && f2_plan.response_length == 4u &&
+           f2_plan.delay_before_action_ms == UINT16_C(2000) &&
+           f2_plan.reset_reason_write_requested && f2_plan.reset_reason == 3u &&
+           f2_plan.system_reset_requested);
+    uint8_t f2_payload[6] = {0};
+    assert(r1_factory_f2_ppg_mode_plan(
+               f2_payload, sizeof f2_payload, &f2_plan) == R1_OK);
+    assert(f2_plan.action == R1_FACTORY_F2_PPG_STOP);
+    f2_payload[4] = 1u;
+    f2_payload[5] = 1u;
+    assert(r1_factory_f2_ppg_mode_plan(
+               f2_payload, sizeof f2_payload, &f2_plan) == R1_OK);
+    assert(f2_plan.action == R1_FACTORY_F2_PPG_PROFILE_4000);
+    f2_payload[4] = 0u;
+    assert(r1_factory_f2_ppg_mode_plan(
+               f2_payload, sizeof f2_payload, &f2_plan) == R1_OK);
+    assert(f2_plan.action == R1_FACTORY_F2_PPG_PROFILE_2000);
+    assert(r1_factory_f2_ppg_mode_plan(
+               f2_payload, 5u, &f2_plan) == R1_ERROR_LENGTH);
+    assert(r1_factory_f2_marked_ship_mode_plan(&f2_plan) == R1_OK);
+    assert(f2_plan.action == R1_FACTORY_F2_SHIP_MODE_MARKED &&
+           f2_plan.device_marker_write_requested &&
+           f2_plan.device_marker == UINT8_C(0x5a) &&
+           f2_plan.ship_mode_sequence_requested &&
+           f2_plan.delay_before_action_ms == 100u &&
+           f2_plan.delay_after_action_ms == 100u);
+    assert(r1_factory_f2_ship_mode_plan(&f2_plan) == R1_OK);
+    assert(f2_plan.action == R1_FACTORY_F2_SHIP_MODE &&
+           !f2_plan.device_marker_write_requested &&
+           f2_plan.ship_mode_sequence_requested);
+    assert(r1_factory_f2_delayed_reset_plan(NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_factory_f2_ppg_mode_plan(NULL, 6u, &f2_plan) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_factory_f2_ship_mode_plan(NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_factory_input_record_plan_dispatch(
+               0u, ordinary, sizeof(ordinary), sizeof(ordinary), NULL) ==
+           R1_ERROR_ARGUMENT);
+}
+
+static void test_sensor_task_plans(void) {
+    r1_sensor_task_startup_plan startup;
+    assert(r1_sensor_task_plan_startup(false, &startup) == R1_OK);
+    assert(startup.queue_create_failed && startup.enter_fail_stop);
+    assert(startup.action_count == 0u && !startup.publish_startup_event);
+    assert(r1_sensor_task_plan_startup(true, &startup) == R1_OK);
+    assert(!startup.queue_create_failed && !startup.enter_fail_stop);
+    assert(startup.queue_capacity == R1_SENSOR_TASK_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_SENSOR_TASK_QUEUE_RECORD_BYTES);
+    assert(startup.sync_group == R1_SENSOR_TASK_SYNC_GROUP);
+    assert(startup.action_count == R1_SENSOR_TASK_STARTUP_ACTION_COUNT);
+    assert(startup.actions[0] == R1_SENSOR_TASK_STREAM_INITIALIZE);
+    assert(startup.actions[1] == R1_SENSOR_TASK_ACCELEROMETER_STREAM_CREATE);
+    assert(startup.actions[2] == R1_SENSOR_TASK_STREAM_NAMESPACE_REGISTER);
+    assert(startup.actions[3] == R1_SENSOR_TASK_TEMPERATURE_STREAM_CREATE);
+    assert(startup.actions[4] == R1_SENSOR_TASK_HEALTH_SERVICES_INITIALIZE);
+    assert(strcmp(startup.registry_name, "sensor") == 0);
+    assert(startup.watchdog_ticks == R1_SENSOR_TASK_WATCHDOG_TICKS);
+    assert(startup.publish_startup_event);
+    assert(startup.startup_event_id == R1_SENSOR_TASK_STARTUP_EVENT_ID);
+    assert(startup.startup_event_payload_bytes == 0u);
+    assert(startup.use_sensor_stream_timeout);
+
+    r1_sensor_task_flag_plan flags;
+    assert(r1_sensor_task_plan_flags(0u, &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.drain_event_records && !flags.dispatch_motion_interrupt);
+    assert(r1_sensor_task_plan_flags(
+               R1_SENSOR_TASK_DISPATCH_FLAG |
+                   R1_SENSOR_TASK_MOTION_INTERRUPT_FLAG,
+               &flags) == R1_OK);
+    assert(!flags.provider_wait_error && flags.drain_event_records);
+    assert(flags.dispatch_motion_interrupt && flags.wait_again);
+    assert(r1_sensor_task_plan_flags(
+               R1_SENSOR_TASK_DISPATCH_FLAG |
+                   R1_SENSOR_TASK_MOTION_INTERRUPT_FLAG |
+                   R1_SENSOR_TASK_SUSPEND_FLAG,
+               &flags) == R1_OK);
+    assert(flags.drain_event_records && flags.dispatch_motion_interrupt);
+    assert(flags.signal_suspend && flags.enter_suspend_wait);
+    assert(!flags.wait_again);
+    assert(r1_sensor_task_plan_flags(
+               UINT32_C(0x80400002), &flags) == R1_OK);
+    assert(flags.provider_wait_error && flags.wait_again);
+    assert(!flags.drain_event_records && !flags.dispatch_motion_interrupt);
+    assert(!flags.signal_suspend && !flags.enter_suspend_wait);
+}
+
+static void test_system_task_plans(void) {
+    r1_system_task_startup_plan startup;
+    assert(r1_system_task_plan_startup(false, &startup) == R1_OK);
+    assert(startup.queue_create_failed && startup.enter_fail_stop);
+    assert(startup.action_count == 0u);
+    assert(r1_system_task_plan_startup(true, &startup) == R1_OK);
+    assert(!startup.queue_create_failed && !startup.enter_fail_stop);
+    assert(startup.queue_capacity == R1_SYSTEM_TASK_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_SYSTEM_TASK_QUEUE_RECORD_BYTES);
+    assert(startup.sync_group == R1_SYSTEM_TASK_SYNC_GROUP);
+    assert(startup.action_count == R1_SYSTEM_TASK_STARTUP_ACTION_COUNT);
+    assert(startup.actions[0] == R1_SYSTEM_TASK_PRODUCT_SERVICES_INITIALIZE);
+    assert(startup.actions[1] == R1_SYSTEM_TASK_WORKSPACE_CLEAR);
+    assert(startup.actions[2] == R1_SYSTEM_TASK_NFC_LATE_INITIALIZE);
+    assert(startup.workspace_clear_bytes ==
+           R1_SYSTEM_TASK_WORKSPACE_CLEAR_BYTES);
+    assert(strcmp(startup.registry_name, "system") == 0);
+    assert(startup.watchdog_ticks == R1_SYSTEM_TASK_WATCHDOG_TICKS);
+
+    r1_system_task_flag_plan flags;
+    assert(r1_system_task_plan_flags(0u, &flags) == R1_OK);
+    assert(flags.provider_wait_error && !flags.dispatch_system_flags);
+    assert(flags.feed_watchdog && flags.wait_again);
+    assert(r1_system_task_plan_flags(UINT32_C(0x00400002), &flags) == R1_OK);
+    assert(!flags.provider_wait_error && flags.dispatch_system_flags);
+    assert(flags.feed_watchdog && flags.wait_again);
+    assert(r1_system_task_plan_flags(UINT32_C(0x80400002), &flags) == R1_OK);
+    assert(flags.provider_wait_error && !flags.dispatch_system_flags);
+    assert(flags.feed_watchdog && flags.wait_again);
+}
+
+static void test_ble_task_plans(void) {
+    r1_ble_task_startup_plan startup;
+    assert(r1_ble_task_plan_startup(false, &startup) == R1_OK);
+    assert(startup.queue_create_failed && startup.enter_fail_stop);
+    assert(startup.action_count == 0u);
+    assert(r1_ble_task_plan_startup(true, &startup) == R1_OK);
+    assert(!startup.queue_create_failed && !startup.enter_fail_stop);
+    assert(startup.queue_capacity == R1_BLE_TASK_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_BLE_TASK_QUEUE_RECORD_BYTES);
+    assert(startup.sync_group == R1_BLE_TASK_SYNC_GROUP);
+    assert(startup.actions[0] == R1_BLE_TASK_PEER_RECORD_COMMIT);
+    assert(startup.actions[1] == R1_BLE_TASK_NORDIC_BOOTSTRAP_CONFIGURE);
+    assert(startup.action_count == R1_BLE_TASK_STARTUP_ACTION_COUNT);
+    assert(startup.role_sync_delay_ticks == R1_BLE_TASK_ROLE_SYNC_DELAY_TICKS);
+    assert(startup.slow_policy_delay_ticks ==
+           R1_BLE_TASK_SLOW_POLICY_DELAY_TICKS);
+    assert(strcmp(startup.registry_name, "ble") == 0);
+    assert(startup.watchdog_ticks == R1_BLE_TASK_WATCHDOG_TICKS);
+
+    r1_ble_task_flag_plan flags;
+    assert(r1_ble_task_plan_flags(0u, &flags) == R1_OK);
+    assert(flags.provider_wait_error && !flags.poll_softdevice_before);
+    assert(!flags.dispatch_connection_control && flags.feed_watchdog);
+    assert(flags.wait_again && !flags.signal_suspend);
+    assert(r1_ble_task_plan_flags(
+               R1_BLE_TASK_CONNECTION_CONTROL_FLAG |
+                   R1_BLE_TASK_ADVERTISING_RESTART_4_FLAG |
+                   R1_BLE_TASK_PERIPHERAL_WATCHDOG_FLAG |
+                   R1_BLE_TASK_DFU_PREPARE_FLAG |
+                   R1_BLE_TASK_TX_POWER_LOW_FLAG |
+                   R1_BLE_TASK_TX_POWER_HIGH_FLAG,
+               &flags) == R1_OK);
+    assert(!flags.provider_wait_error && flags.poll_softdevice_before);
+    assert(flags.dispatch_connection_control);
+    assert(flags.advertising_action ==
+           R1_BLE_TASK_ADVERTISING_RESTART_MODE_4);
+    assert(flags.run_peripheral_watchdog && flags.prepare_buttonless_dfu);
+    assert(flags.request_low_tx_power && flags.request_high_tx_power);
+    assert(flags.poll_softdevice_after && flags.feed_watchdog);
+    assert(r1_ble_task_plan_flags(
+               R1_BLE_TASK_ADVERTISING_STOP_FLAG |
+                   R1_BLE_TASK_ADVERTISING_RESTART_3_FLAG |
+                   R1_BLE_TASK_ADVERTISING_RESTART_4_FLAG |
+                   R1_BLE_TASK_SUSPEND_FLAG,
+               &flags) == R1_OK);
+    assert(flags.advertising_action == R1_BLE_TASK_ADVERTISING_STOP);
+    assert(flags.feed_before_suspend && flags.signal_suspend);
+    assert(flags.enter_suspend_wait);
+    assert(!flags.feed_watchdog && !flags.wait_again);
+    assert(r1_ble_task_plan_flags(UINT32_C(0x80400004), &flags) == R1_OK);
+    assert(flags.provider_wait_error && !flags.poll_softdevice_before);
+    assert(!flags.dispatch_connection_control && flags.feed_watchdog);
+}
+
+static void test_advertising_event_plan(void) {
+    r1_advertising_event_plan plan;
+    assert(r1_advertising_event_plan_build(0u, NULL) == R1_ERROR_ARGUMENT);
+
+    assert(r1_advertising_event_plan_build(0u, &plan) == R1_OK);
+    assert(plan.publish_status && !plan.advertising_active);
+    assert(plan.advertising_mode == 0u);
+    assert(plan.log == R1_ADVERTISING_EVENT_LOG_NONE);
+
+    assert(r1_advertising_event_plan_build(3u, &plan) == R1_OK);
+    assert(plan.publish_status && plan.advertising_active);
+    assert(plan.advertising_mode == 1u);
+    assert(plan.log == R1_ADVERTISING_EVENT_LOG_FAST);
+
+    assert(r1_advertising_event_plan_build(4u, &plan) == R1_OK);
+    assert(plan.publish_status && plan.advertising_active);
+    assert(plan.advertising_mode == 2u);
+    assert(plan.log == R1_ADVERTISING_EVENT_LOG_SLOW);
+
+    assert(r1_advertising_event_plan_build(1u, &plan) == R1_OK);
+    assert(!plan.publish_status && !plan.advertising_active);
+    assert(plan.advertising_mode == 0u);
+    assert(plan.log == R1_ADVERTISING_EVENT_LOG_NONE);
+}
+
+static void test_task_suspend_plans(void) {
+    static const uint8_t broadcast_normal[] = {5u, 0u, 7u, 1u, 9u, 2u, 3u, 10u, 4u};
+    static const uint8_t broadcast_factory[] = {6u, 0u, 7u, 1u, 9u, 2u, 3u, 10u, 4u};
+    static const uint8_t barrier_normal[] = {0u, 1u, 2u, 3u, 10u, 7u, 5u, 9u, 4u};
+    static const uint8_t barrier_factory[] = {0u, 1u, 2u, 3u, 10u, 7u, 6u, 9u, 4u};
+    r1_task_suspend_broadcast_plan broadcast;
+    r1_task_suspend_barrier_plan barrier;
+
+    assert(r1_task_suspend_broadcast_plan_build(0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_task_suspend_barrier_plan_build(0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_task_suspend_broadcast_plan_build(0u, &broadcast) == R1_OK);
+    assert(broadcast.target_count == R1_TASK_SUSPEND_TARGET_COUNT);
+    assert(broadcast.thread_flag == R1_TASK_SUSPEND_THREAD_FLAG);
+    assert(broadcast.acknowledgment_mask == UINT32_C(0x06bf));
+    for (size_t index = 0u; index < R1_TASK_SUSPEND_TARGET_COUNT; ++index) {
+        assert(broadcast.targets[index].sync_group == broadcast_normal[index]);
+        assert(broadcast.targets[index].acknowledgment_flag ==
+            (UINT32_C(1) << broadcast_normal[index]));
+    }
+    assert(r1_task_suspend_broadcast_plan_build(UINT8_C(0x55), &broadcast) == R1_OK);
+    assert(broadcast.acknowledgment_mask == UINT32_C(0x06df));
+    for (size_t index = 0u; index < R1_TASK_SUSPEND_TARGET_COUNT; ++index) {
+        assert(broadcast.targets[index].sync_group == broadcast_factory[index]);
+    }
+
+    assert(r1_task_suspend_barrier_plan_build(0u, &barrier) == R1_OK);
+    assert(barrier.target_count == R1_TASK_SUSPEND_TARGET_COUNT);
+    assert(barrier.thread_flag == R1_TASK_SUSPEND_THREAD_FLAG);
+    assert(barrier.per_target_wait_ticks == R1_TASK_SUSPEND_BARRIER_WAIT_TICKS);
+    for (size_t index = 0u; index < R1_TASK_SUSPEND_TARGET_COUNT; ++index) {
+        assert(barrier.targets[index].sync_group == barrier_normal[index]);
+        assert(barrier.targets[index].acknowledgment_flag ==
+            (UINT32_C(1) << barrier_normal[index]));
+    }
+    assert(r1_task_suspend_barrier_plan_build(UINT8_C(0x55), &barrier) == R1_OK);
+    for (size_t index = 0u; index < R1_TASK_SUSPEND_TARGET_COUNT; ++index) {
+        assert(barrier.targets[index].sync_group == barrier_factory[index]);
+    }
+}
+
+static void test_task_topology_startup_plan(void) {
+    static const uint8_t normal[] = {0u, 1u, 2u, 3u, 10u, 4u, 7u, 5u, 9u};
+    static const uint8_t factory[] = {0u, 1u, 2u, 3u, 10u, 4u, 7u, 6u, 9u};
+    r1_task_topology_startup_plan plan;
+
+    assert(r1_task_topology_startup_plan_build(0u, NULL) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_task_topology_startup_plan_build(0u, &plan) == R1_OK);
+    assert(plan.initialize_firmware_event_loop);
+    assert(plan.initialize_watchdog_registry);
+    assert(plan.target_count == R1_TASK_TOPOLOGY_TARGET_COUNT);
+    assert(plan.initial_thread_priority ==
+           R1_TASK_TOPOLOGY_INITIAL_PRIORITY);
+    assert(plan.final_thread_priority == R1_TASK_TOPOLOGY_FINAL_PRIORITY);
+    assert(!plan.factory_group_selected);
+    for (size_t index = 0u; index < R1_TASK_TOPOLOGY_TARGET_COUNT; ++index) {
+        assert(plan.sync_groups[index] == normal[index]);
+    }
+
+    assert(r1_task_topology_startup_plan_build(
+               R1_TASK_TOPOLOGY_FACTORY_MARKER, &plan) == R1_OK);
+    assert(plan.factory_group_selected);
+    for (size_t index = 0u; index < R1_TASK_TOPOLOGY_TARGET_COUNT; ++index) {
+        assert(plan.sync_groups[index] == factory[index]);
+    }
+}
+
 static void test_storage(void) {
     const r1_partition *log = r1_storage_partition("log.bin");
     assert(log != NULL);
@@ -5663,22 +6938,37 @@ static void test_storage(void) {
         assert(previous->offset + previous->length == current->offset);
     }
 
-    r1_storage_task_startup_plan startup;
-    assert(r1_storage_task_plan_startup(false, &startup) == R1_OK);
+    r1_storage_task_startup_plan storage_startup;
+    assert(r1_storage_task_plan_startup(false, &storage_startup) == R1_OK);
+    assert(storage_startup.queue_create_failed && storage_startup.enter_fail_stop);
+    assert(storage_startup.action_count == 0u);
+    assert(r1_storage_task_plan_startup(true, &storage_startup) == R1_OK);
+    assert(!storage_startup.queue_create_failed && !storage_startup.enter_fail_stop);
+    assert(storage_startup.queue_capacity == R1_STORAGE_TASK_QUEUE_CAPACITY);
+    assert(storage_startup.queue_record_bytes == R1_STORAGE_TASK_RECORD_BYTES);
+    assert(storage_startup.sync_group == R1_STORAGE_TASK_SYNC_GROUP);
+    assert(strcmp(storage_startup.registry_name, "storage") == 0);
+    assert(storage_startup.watchdog_ticks == R1_STORAGE_TASK_WATCHDOG_TICKS);
+    assert(storage_startup.action_count == R1_STORAGE_TASK_STARTUP_ACTION_COUNT);
+    assert(storage_startup.actions[0] == R1_STORAGE_TASK_BACKEND_INITIALIZE);
+    assert(storage_startup.actions[1] == R1_STORAGE_TASK_SCHEDULE_DELAYED_EVENT);
+
+    r1_service_task_startup_plan startup;
+    assert(r1_service_task_plan_startup(false, &startup) == R1_OK);
     assert(startup.queue_create_failed && startup.enter_fail_stop);
     assert(startup.action_count == 0u);
-    assert(r1_storage_task_plan_startup(true, &startup) == R1_OK);
+    assert(r1_service_task_plan_startup(true, &startup) == R1_OK);
     assert(!startup.queue_create_failed && !startup.enter_fail_stop);
-    assert(startup.queue_capacity == R1_STORAGE_TASK_QUEUE_CAPACITY);
-    assert(startup.queue_record_bytes == R1_STORAGE_TASK_RECORD_BYTES);
-    assert(startup.sync_group == R1_STORAGE_TASK_SYNC_GROUP);
-    assert(strcmp(startup.registry_name, "storage") == 0);
-    assert(startup.watchdog_ticks == R1_STORAGE_TASK_WATCHDOG_TICKS);
-    assert(startup.action_count == R1_STORAGE_TASK_STARTUP_ACTION_COUNT);
-    assert(startup.actions[0] == R1_STORAGE_TASK_HARDWARE_INITIALIZE);
-    assert(startup.actions[1] == R1_STORAGE_TASK_HEALTH_DATABASE_START);
-    assert(startup.actions[7] == R1_STORAGE_TASK_SLEEP_DATABASE_START);
-    assert(startup.actions[9] == R1_STORAGE_TASK_PROTOCOL_STATE_RESET);
+    assert(startup.queue_capacity == R1_SERVICE_TASK_QUEUE_CAPACITY);
+    assert(startup.queue_record_bytes == R1_SERVICE_TASK_RECORD_BYTES);
+    assert(startup.sync_group == R1_SERVICE_TASK_SYNC_GROUP);
+    assert(strcmp(startup.registry_name, "service") == 0);
+    assert(startup.watchdog_ticks == R1_SERVICE_TASK_WATCHDOG_TICKS);
+    assert(startup.action_count == R1_SERVICE_TASK_STARTUP_ACTION_COUNT);
+    assert(startup.actions[0] == R1_SERVICE_TASK_HARDWARE_INITIALIZE);
+    assert(startup.actions[1] == R1_SERVICE_TASK_HEALTH_DATABASE_START);
+    assert(startup.actions[7] == R1_SERVICE_TASK_SLEEP_DATABASE_START);
+    assert(startup.actions[9] == R1_SERVICE_TASK_PROTOCOL_STATE_RESET);
 
     r1_storage_task_flag_plan flags;
     assert(r1_storage_task_plan_flags(0u, &flags) == R1_OK);
@@ -5695,6 +6985,15 @@ static void test_storage(void) {
     assert(flags.enter_suspend_wait && !flags.wait_again);
     assert(r1_storage_task_plan_flags(UINT32_C(0x80000000), &flags) == R1_OK);
     assert(flags.provider_wait_error && flags.wait_again);
+
+    r1_service_task_flag_plan service_flags;
+    assert(r1_service_task_plan_flags(0u, &service_flags) == R1_OK);
+    assert(service_flags.provider_wait_error && service_flags.wait_again);
+    assert(r1_service_task_plan_flags(
+               R1_SERVICE_TASK_DISPATCH_FLAG | R1_SERVICE_TASK_SUSPEND_FLAG,
+               &service_flags) == R1_OK);
+    assert(service_flags.dispatch_event_record && service_flags.signal_suspend);
+    assert(service_flags.enter_suspend_wait && !service_flags.wait_again);
 }
 
 static void test_export_planner(void) {
@@ -5928,6 +7227,87 @@ static void test_nv_recovery_merge(void) {
     body[96] = 12u;
     const uint16_t crc = r1_crc16_modbus(body, sizeof body);
 
+    r1_nv_recovery_handler_plan handler_plan;
+    uint8_t envelope[
+        R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES + R1_NV_RECOVERY_BODY_BYTES];
+    memset(envelope, 0, sizeof envelope);
+    assert(r1_nv_recovery_command_handler_plan_decode(
+               NULL, sizeof envelope, &handler_plan) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_recovery_command_handler_plan_decode(
+               envelope, sizeof envelope, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_recovery_command_handler_plan_decode(
+               envelope, R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES - 1u,
+               &handler_plan) == R1_ERROR_LENGTH);
+
+    /* Commands 0, 1, and unknown values are inert in the recovered command
+     * dispatcher when their strict envelope is self-consistent. */
+    for (uint8_t command = 0u; command <= 3u; ++command) {
+        if (command == 2u) {
+            continue;
+        }
+        memset(envelope, 0, R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES);
+        envelope[0] = command;
+        assert(r1_nv_recovery_command_handler_plan_decode(
+                   envelope, R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES,
+                   &handler_plan) == R1_OK);
+        assert(handler_plan.action == R1_NV_RECOVERY_HANDLER_IGNORE);
+        assert(handler_plan.command == command);
+    }
+
+    /* Command 2 requests the local report unless both the recovered 116-byte
+     * length and a nonzero declared CRC are present. */
+    memset(envelope, 0, sizeof envelope);
+    envelope[0] = 2u;
+    assert(r1_nv_recovery_command_handler_plan_decode(
+               envelope, R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES,
+               &handler_plan) == R1_OK);
+    assert(handler_plan.action ==
+           R1_NV_RECOVERY_HANDLER_REQUEST_LOCAL_REPORT);
+    envelope[1] = (uint8_t)R1_NV_RECOVERY_BODY_BYTES;
+    assert(r1_nv_recovery_command_handler_plan_decode(
+               envelope, R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES,
+               &handler_plan) == R1_ERROR_LENGTH);
+    memcpy(envelope + R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES,
+           body, sizeof body);
+    assert(r1_nv_recovery_command_handler_plan_decode(
+               envelope, sizeof envelope, &handler_plan) == R1_OK);
+    assert(handler_plan.action ==
+           R1_NV_RECOVERY_HANDLER_REQUEST_LOCAL_REPORT);
+    envelope[3] = (uint8_t)crc;
+    envelope[4] = (uint8_t)(crc >> 8u);
+    assert(r1_nv_recovery_command_handler_plan_decode(
+               envelope, sizeof envelope, &handler_plan) == R1_OK);
+    assert(handler_plan.action == R1_NV_RECOVERY_HANDLER_DISPATCH_MERGE);
+    assert(handler_plan.command == 2u);
+    assert(handler_plan.declared_body_length == R1_NV_RECOVERY_BODY_BYTES);
+    assert(handler_plan.declared_body_crc == crc);
+    assert(memcmp(handler_plan.body, body, sizeof body) == 0);
+
+    r1_nv_recovery_outbound_response_plan outbound;
+    assert(r1_nv_recovery_outbound_response_plan_build(
+               4u, NULL, sizeof envelope, &outbound) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_recovery_outbound_response_plan_build(
+               4u, envelope, sizeof envelope, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_recovery_outbound_response_plan_build(
+               4u, envelope, R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES - 1u,
+               &outbound) == R1_ERROR_LENGTH);
+    assert(r1_nv_recovery_outbound_response_plan_build(
+               4u, envelope, sizeof envelope - 1u, &outbound)
+           == R1_ERROR_LENGTH);
+    assert(r1_nv_recovery_outbound_response_plan_build(
+               4u, envelope, sizeof envelope, &outbound) == R1_OK);
+    assert(outbound.send_response && outbound.session == 4u);
+    assert(outbound.identifier == R1_NV_RECOVERY_SYSTEM_IDENTIFIER);
+    assert(outbound.response_type == R1_NV_RECOVERY_OUTBOUND_RESPONSE_TYPE);
+    assert(outbound.serial == 0u && outbound.payload_length == sizeof envelope);
+    assert(r1_nv_recovery_outbound_response_plan_build(
+               UINT16_MAX, envelope, sizeof envelope, &outbound) == R1_OK);
+    assert(!outbound.send_response && outbound.session == UINT16_MAX);
+    envelope[1] = (uint8_t)(R1_NV_RECOVERY_BODY_BYTES + 1u);
+    assert(r1_nv_recovery_outbound_response_plan_build(
+               4u, envelope, sizeof envelope, &outbound) == R1_ERROR_CAPACITY);
+    envelope[1] = (uint8_t)R1_NV_RECOVERY_BODY_BYTES;
+
     assert(r1_nv_recovery_merge(NULL, body, sizeof body, crc, &result) ==
            R1_ERROR_ARGUMENT);
     assert(r1_nv_recovery_merge(&current, body, sizeof body - 1u, crc, &result) ==
@@ -5990,6 +7370,49 @@ static void test_nv_recovery_merge(void) {
     assert(body[74] == 0u && body[115] == 0u);
     current.config[30] = 0u;
     assert(!r1_nv_recovery_build_body(&current, body));
+
+    static const uint8_t restore_key[R1_NV_COMPILED_RESTORE_KEY_BYTES] =
+        {'A', '1', 'B', '2', 'C', '3', 'D', '4', 'E', '5', 'F', '6'};
+    r1_nv_compiled_restore_record restore_records[3] = {0};
+    memcpy(restore_records[0].match_key, "000000000000",
+           R1_NV_COMPILED_RESTORE_KEY_BYTES);
+    restore_records[0].packed_ring_size_battery_type = UINT8_C(0x16);
+    memcpy(restore_records[1].match_key, restore_key, sizeof restore_key);
+    restore_records[1].packed_ring_size_battery_type = UINT8_C(0x3c);
+    restore_records[1].voltage_compensation_millivolts = -42;
+    memcpy(restore_records[2].match_key, restore_key, sizeof restore_key);
+    restore_records[2].packed_ring_size_battery_type = UINT8_C(0x4d);
+    restore_records[2].voltage_compensation_millivolts = 17;
+    r1_nv_compiled_restore_plan restore_plan;
+    assert(r1_nv_compiled_default_restore_plan_build(
+               2u, NULL, NULL, 0u, &restore_plan) == R1_OK);
+    assert(restore_plan.status ==
+           R1_NV_COMPILED_RESTORE_CONFIGURATION_EXISTS);
+    assert(!restore_plan.write_records);
+    assert(r1_nv_compiled_default_restore_plan_build(
+               0u, restore_key, restore_records, 3u, &restore_plan) == R1_OK);
+    assert(restore_plan.status == R1_NV_COMPILED_RESTORE_APPLY);
+    assert(restore_plan.write_records && restore_plan.matched_record == 1u);
+    assert(restore_plan.ring_size == 12u && restore_plan.battery_type == 3u);
+    assert(restore_plan.voltage_compensation_millivolts == -42);
+    assert(r1_nv_compiled_default_restore_event_plan(
+               UINT8_MAX, restore_key, restore_records, 3u,
+               &restore_plan) == R1_OK);
+    assert(restore_plan.status == R1_NV_COMPILED_RESTORE_APPLY);
+    assert(restore_plan.matched_record == 1u);
+    assert(r1_nv_compiled_default_restore_plan_build(
+               0u, (const uint8_t *)"FFFFFFFFFFFF", restore_records, 3u,
+               &restore_plan) == R1_OK);
+    assert(restore_plan.status == R1_NV_COMPILED_RESTORE_NO_MATCH);
+    assert(!restore_plan.write_records && restore_plan.matched_record == SIZE_MAX);
+    assert(r1_nv_compiled_default_restore_plan_build(
+               0u, restore_key, restore_records,
+               R1_NV_COMPILED_RESTORE_MAX_RECORDS + 1u,
+               &restore_plan) == R1_ERROR_CAPACITY);
+    restore_records[1].packed_ring_size_battery_type = UINT8_C(0x05);
+    assert(r1_nv_compiled_default_restore_plan_build(
+               0u, restore_key, restore_records, 3u,
+               &restore_plan) == R1_ERROR_STATE);
 }
 
 typedef struct {
@@ -6428,6 +7851,38 @@ static void test_goodix_mem_integrator_glue(void) {
     assert(trace.halt_after_record);
 }
 
+static void test_goodix_open_mode_plan(void) {
+    r1_goodix_open_mode_plan plan;
+    assert(r1_goodix_open_mode_plan_build(0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_goodix_open_mode_plan_build(0u, &plan) == R1_OK);
+    assert(!plan.provider_open_requested && !plan.state_clear_requested);
+
+    static const size_t offsets[10] = {
+        0u, 0u, 40u, 188u, 16u, 64u, 0u, 216u, 192u, 204u,
+    };
+    static const size_t lengths[10] = {
+        0u, 16u, 24u, 2u, 24u, 124u, 0u, 24u, 12u, 12u,
+    };
+    for (uint32_t mode = 1u; mode <= 9u; ++mode) {
+        assert(r1_goodix_open_mode_plan_build(mode, &plan) == R1_OK);
+        assert(plan.provider_open_requested);
+        assert(plan.provider_open_mode == (uint8_t)mode);
+        assert(plan.state_clear_requested == (lengths[mode] != 0u));
+        assert(plan.state_clear_offset == offsets[mode]);
+        assert(plan.state_clear_bytes == lengths[mode]);
+        assert(plan.log_open_type == (mode <= 4u));
+    }
+
+    assert(r1_goodix_open_mode_plan_build(10u, &plan) == R1_OK);
+    assert(plan.provider_open_requested && plan.provider_open_mode == 10u);
+    assert(!plan.state_clear_requested && !plan.log_open_type);
+
+    /* The stock null test precedes its UInt8 narrowing. */
+    assert(r1_goodix_open_mode_plan_build(256u, &plan) == R1_OK);
+    assert(plan.provider_open_requested && plan.provider_open_mode == 0u);
+    assert(!plan.state_clear_requested && plan.log_open_type);
+}
+
 typedef struct {
     bool read;
     uint8_t reg;
@@ -6505,6 +7960,98 @@ static bool iqs_schedule(void *context, uint32_t delay_ticks) {
     ++trace->schedule_count;
     trace->scheduled_ticks = delay_ticks;
     return true;
+}
+
+typedef struct {
+    uint8_t calls[18u];
+    size_t call_count;
+    uint32_t commit_status;
+} iqs_factory_trace;
+
+static uint32_t iqs_factory_begin(void *context) {
+    iqs_factory_trace *trace = context;
+    trace->calls[trace->call_count++] = UINT8_C(1);
+    return UINT32_C(0x11);
+}
+
+static int32_t iqs_factory_end(void *context) {
+    iqs_factory_trace *trace = context;
+    trace->calls[trace->call_count++] = UINT8_C(2);
+    return 0;
+}
+
+static uint32_t iqs_factory_commit(void *context) {
+    iqs_factory_trace *trace = context;
+    trace->calls[trace->call_count++] = UINT8_C(3);
+    return trace->commit_status;
+}
+
+static void test_iqs7211e_factory_markers(void) {
+    static const r1_iqs7211e_factory_record_ops ops = {
+        iqs_factory_begin, iqs_factory_end, iqs_factory_commit,
+    };
+    r1_iqs7211e_factory_record record = {0};
+    iqs_factory_trace trace = {.commit_status = UINT32_C(0x12345678)};
+
+    assert(r1_iqs7211e_factory_marker_1(&record, &ops, &trace) ==
+           trace.commit_status);
+    assert(record.marker == UINT8_C(1));
+    assert(r1_iqs7211e_factory_marker_2(&record, &ops, &trace) ==
+           trace.commit_status);
+    assert(record.marker == UINT8_C(2));
+    assert(r1_iqs7211e_factory_marker_3(
+               &record, &ops, &trace, UINT8_C(0x33)) == trace.commit_status);
+    assert(record.marker == UINT8_C(3) &&
+           record.marker_3_value == UINT8_C(0x33));
+    assert(r1_iqs7211e_factory_marker_4(
+               &record, &ops, &trace, UINT16_C(0x4455)) ==
+           trace.commit_status);
+    assert(record.marker == UINT8_C(4) &&
+           record.marker_4_value == UINT16_C(0x4455));
+    assert(r1_iqs7211e_factory_marker_5(
+               &record, &ops, &trace, UINT8_C(0x66)) == trace.commit_status);
+    assert(record.marker == UINT8_C(5) &&
+           record.marker_5_value == UINT8_C(0x66));
+    assert(r1_iqs7211e_factory_marker_6(
+               &record, &ops, &trace, UINT32_C(0x778899aa)) ==
+           trace.commit_status);
+    assert(record.marker == UINT8_C(6) &&
+           record.marker_6_value == UINT32_C(0x778899aa));
+    assert(trace.call_count == sizeof trace.calls);
+    for (size_t index = 0u; index < trace.call_count; ++index) {
+        assert(trace.calls[index] == (uint8_t)(index % 3u + 1u));
+    }
+
+    const r1_iqs7211e_factory_record unchanged = record;
+    assert(r1_iqs7211e_factory_marker_1(NULL, &ops, &trace) == 0u);
+    assert(r1_iqs7211e_factory_marker_2(&record, NULL, &trace) == 0u);
+    assert(memcmp(&record, &unchanged, sizeof record) == 0);
+
+    r1_touch_lifecycle_plan lifecycle;
+    for (uint8_t client = 0u; client <= 1u; ++client) {
+        assert(r1_touch_lifecycle_disable_plan(client, &lifecycle) == R1_OK);
+        assert(lifecycle.accepted && lifecycle.client_index == client &&
+               lifecycle.operation_count == 2u);
+        assert(lifecycle.operations[0].slot == R1_TOUCH_LIFECYCLE_SLOT_18 &&
+               lifecycle.operations[0].argument_0 == 0u &&
+               lifecycle.operations[0].argument_1 == 0u &&
+               lifecycle.operations[1].slot == R1_TOUCH_LIFECYCLE_SLOT_0C);
+
+        assert(r1_touch_lifecycle_enable_plan(client, &lifecycle) == R1_OK);
+        assert(lifecycle.accepted && lifecycle.client_index == client &&
+               lifecycle.operation_count == 2u);
+        assert(lifecycle.operations[0].slot == R1_TOUCH_LIFECYCLE_SLOT_08 &&
+               lifecycle.operations[1].slot == R1_TOUCH_LIFECYCLE_SLOT_18 &&
+               lifecycle.operations[1].argument_0 == 1u &&
+               lifecycle.operations[1].argument_1 == 0u);
+    }
+    assert(r1_touch_lifecycle_disable_plan(2u, &lifecycle) ==
+           R1_ERROR_UNSUPPORTED);
+    assert(!lifecycle.accepted && lifecycle.operation_count == 0u);
+    assert(r1_touch_lifecycle_enable_plan(UINT8_MAX, &lifecycle) ==
+           R1_ERROR_UNSUPPORTED);
+    assert(r1_touch_lifecycle_disable_plan(0u, NULL) == R1_ERROR_ARGUMENT);
+    assert(r1_touch_lifecycle_enable_plan(0u, NULL) == R1_ERROR_ARGUMENT);
 }
 
 static void test_iqs7211e_provider_boundary(void) {
@@ -6710,10 +8257,18 @@ typedef struct {
     size_t set_gpo2_count;
     size_t mailbox_read_count;
     size_t delay_count;
+    size_t bus_acquire_count;
+    size_t bus_release_count;
+    size_t bus_read_count;
+    size_t bus_write_count;
     size_t mailbox_read_length;
     uint32_t password_msb;
     uint32_t password_lsb;
     uint32_t delayed_ticks;
+    uint32_t bus_tick;
+    uint16_t bus_register;
+    uint16_t bus_length;
+    uint8_t bus_address;
     uint8_t ic_reference;
     uint8_t gpo1;
     uint8_t gpo2;
@@ -6729,6 +8284,44 @@ typedef struct {
     size_t length;
     uint8_t bytes[R1_ST25DVXXKC_MAILBOX_CAPACITY];
 } st25_frame_capture;
+
+static void st25_bus_acquire(void *context) {
+    ++((st25_trace *)context)->bus_acquire_count;
+}
+
+static void st25_bus_release(void *context) {
+    ++((st25_trace *)context)->bus_release_count;
+}
+
+static uint32_t st25_bus_tick_get(void *context) {
+    return ((st25_trace *)context)->bus_tick;
+}
+
+static int32_t st25_bus_read(void *context, uint8_t address,
+                             uint16_t register_address, uint8_t *bytes,
+                             uint16_t length) {
+    st25_trace *trace = context;
+    ++trace->bus_read_count;
+    trace->bus_address = address;
+    trace->bus_register = register_address;
+    trace->bus_length = length;
+    if (bytes != NULL && length != 0u) {
+        bytes[0] = UINT8_C(0x5a);
+    }
+    return 7;
+}
+
+static int32_t st25_bus_write(void *context, uint8_t address,
+                              uint16_t register_address,
+                              const uint8_t *bytes, uint16_t length) {
+    st25_trace *trace = context;
+    ++trace->bus_write_count;
+    trace->bus_address = address;
+    trace->bus_register = register_address;
+    trace->bus_length = length;
+    assert(bytes != NULL || length == 0u);
+    return 9;
+}
 
 static int32_t st25_initialize(void *context) {
     st25_trace *trace = context;
@@ -6854,6 +8447,49 @@ static void capture_st25_frame(void *context, const uint8_t *bytes,
     memcpy(capture->bytes, bytes, length);
 }
 
+static void test_st25dvxxkc_bus_io_table(void) {
+    static const r1_st25dvxxkc_bus_io_ops ops = {
+        st25_bus_acquire,
+        st25_bus_release,
+        st25_delay,
+        st25_bus_tick_get,
+        st25_bus_read,
+        st25_bus_write,
+    };
+    st25_trace trace = {0};
+    trace.bus_tick = UINT32_C(0x12345678);
+    assert(r1_st25dvxxkc_bus_tick_get(&ops, &trace) == trace.bus_tick);
+    assert(r1_st25dvxxkc_bus_initialize(&ops, &trace) == 0);
+    assert(r1_st25dvxxkc_bus_deinitialize(&ops, &trace) == 0);
+    assert(trace.bus_acquire_count == 1u && trace.bus_release_count == 1u);
+    assert(r1_st25dvxxkc_bus_is_ready(
+               &ops, &trace, UINT16_C(0xA653), UINT32_C(3)) == 0);
+    assert(trace.delay_count == 1u);
+    assert(trace.delayed_ticks == R1_ST25DVXXKC_BUS_READY_DELAY_TICKS);
+
+    uint8_t byte = 0u;
+    assert(r1_st25dvxxkc_bus_read(
+               &ops, &trace, UINT16_C(0x01A6), UINT16_C(0x2008), &byte,
+               UINT16_C(1)) == 7);
+    assert(byte == UINT8_C(0x5a));
+    assert(trace.bus_address == UINT8_C(0xA6));
+    assert(trace.bus_register == UINT16_C(0x2008));
+    assert(trace.bus_length == UINT16_C(1));
+    assert(r1_st25dvxxkc_bus_write(
+               &ops, &trace, UINT16_C(0x0053), UINT16_C(0x000D), &byte,
+               UINT16_C(1)) == 9);
+    assert(trace.bus_address == UINT8_C(0x53));
+    assert(trace.bus_register == UINT16_C(0x000D));
+    assert(trace.bus_length == UINT16_C(1));
+
+    assert(r1_st25dvxxkc_bus_tick_get(NULL, &trace) == 0u);
+    assert(r1_st25dvxxkc_bus_initialize(NULL, &trace) == -1);
+    assert(r1_st25dvxxkc_bus_deinitialize(NULL, &trace) == -1);
+    assert(r1_st25dvxxkc_bus_is_ready(NULL, &trace, 0u, 0u) == -1);
+    assert(r1_st25dvxxkc_bus_read(NULL, &trace, 0u, 0u, &byte, 1u) == -1);
+    assert(r1_st25dvxxkc_bus_write(NULL, &trace, 0u, 0u, &byte, 1u) == -1);
+}
+
 static void test_st25dvxxkc_provider_boundary(void) {
     static const r1_st25dvxxkc_provider_ops provider = {
         st25_initialize,
@@ -6948,6 +8584,38 @@ static void test_st25dvxxkc_dock_policy(void) {
     assert(!state.field_seen && state.heartbeat_count == 0u);
     assert(state.dock_version[0] == '\0');
     r1_st25dvxxkc_dock_state_initialize(NULL);
+
+    state.dock_hardware_revision = UINT8_C(7);
+    assert(r1_st25dvxxkc_dock_hardware_get(&state) == UINT8_C(7));
+    r1_st25dvxxkc_dock_hardware_clear(&state);
+    assert(r1_st25dvxxkc_dock_hardware_get(&state) == 0u);
+    assert(r1_st25dvxxkc_dock_hardware_get(NULL) == 0u);
+    r1_st25dvxxkc_dock_hardware_clear(NULL);
+
+    memcpy(state.dock_version, "2.2.6.0009",
+           R1_ST25DVXXKC_DOCK_VERSION_SIZE);
+    uint8_t dock_version_length = UINT8_MAX;
+    assert(r1_st25dvxxkc_dock_version_get(
+               &state, &dock_version_length) == state.dock_version);
+    assert(dock_version_length == UINT8_C(10));
+    assert(r1_st25dvxxkc_dock_version_get(&state, NULL) == NULL);
+    assert(r1_st25dvxxkc_dock_version_get(
+               NULL, &dock_version_length) == NULL);
+    memset(state.dock_version, 'X', sizeof state.dock_version);
+    assert(r1_st25dvxxkc_dock_version_get(
+               &state, &dock_version_length) == state.dock_version);
+    assert(dock_version_length == R1_ST25DVXXKC_DOCK_VERSION_SIZE);
+    r1_st25dvxxkc_dock_version_clear(&state);
+    assert(state.dock_version[0] == '\0' &&
+           state.dock_version[R1_ST25DVXXKC_DOCK_VERSION_SIZE - 1u] == '\0');
+    r1_st25dvxxkc_dock_version_clear(NULL);
+
+    r1_st25dvxxkc_charge_temperature_set(&state, UINT8_C(60));
+    r1_st25dvxxkc_dock_advertising_set(&state, UINT8_C(1));
+    assert(state.charge_temperature == UINT8_C(60));
+    assert(state.dock_advertising_enabled == UINT8_C(1));
+    r1_st25dvxxkc_charge_temperature_set(NULL, 0u);
+    r1_st25dvxxkc_dock_advertising_set(NULL, 0u);
 
     const uint8_t short_identity[] = {1u, 2u, 3u, 4u, 0u, 226u, 0u, 9u};
     const uint8_t identity[] = {1u, 2u, 3u, 4u, 0u, 226u, 0u, 9u, 7u};
@@ -7182,6 +8850,19 @@ static r1_error motion_disable_double_tap(void *context) {
 }
 
 static void test_motion_provider_boundary(void) {
+    const r1_lis2dw12_double_tap_enable_plan tap_enable =
+        r1_lis2dw12_double_tap_enable_plan_build();
+    assert(tap_enable.axis_enabled[0] == 1u &&
+           tap_enable.axis_enabled[1] == 1u &&
+           tap_enable.axis_enabled[2] == 1u &&
+           tap_enable.threshold[0] == 3u &&
+           tap_enable.threshold[1] == 3u &&
+           tap_enable.threshold[2] == 3u &&
+           tap_enable.duration == 0u && tap_enable.quiet == 0u &&
+           tap_enable.shock == 0u && tap_enable.tap_mode == 1u &&
+           tap_enable.int1_route_set_mask == UINT8_C(0x08) &&
+           tap_enable.return_value == 1u);
+
     static const r1_motion_provider_ops provider = {
         motion_probe,
         motion_configure,
@@ -7367,6 +9048,78 @@ static void test_wear_fusion(void) {
     assert(optical_range == UINT32_C(300000));
     assert(r1_wear_optical_range(NULL, 0u, false, 0u,
                                  &optical_range) == R1_ERROR_ARGUMENT);
+
+    r1_wear_optical_history optical_history = {0};
+    const uint32_t first_history[] = {
+        UINT32_C(9000000), UINT32_C(9050000), UINT32_C(9100000),
+    };
+    assert(r1_wear_optical_history_update(
+               &optical_history, first_history, 3u) == R1_OK);
+    assert(optical_history.count == 3u);
+    assert(!optical_history.previous_available);
+    const uint32_t next_history[] = {
+        UINT32_C(9200000), UINT32_C(9300000),
+    };
+    assert(r1_wear_optical_history_update(
+               &optical_history, next_history, 2u) == R1_OK);
+    assert(optical_history.previous == UINT32_C(9100000));
+    assert(optical_history.previous_available);
+    assert(optical_history.count == 2u);
+    assert(optical_history.values[0] == UINT32_C(9200000));
+    assert(optical_history.values[1] == UINT32_C(9300000));
+    const r1_wear_optical_history preserved_history = optical_history;
+    assert(r1_wear_optical_history_update(
+               &optical_history, first_history,
+               R1_WEAR_IR_HISTORY_CAPACITY + 1u) == R1_ERROR_ARGUMENT);
+    assert(memcmp(&optical_history, &preserved_history,
+                  sizeof optical_history) == 0);
+    assert(r1_wear_optical_history_update(
+               &optical_history, NULL, 1u) == R1_ERROR_ARGUMENT);
+
+    r1_wear_probe_plan probe_plan;
+    r1_wear_raw_hr_probe_plan(false, false, &probe_plan);
+    assert(probe_plan.subscribe_raw_hr);
+    assert(probe_plan.raw_hr_timeout == R1_WEAR_TIMEOUT_START);
+    assert(!probe_plan.subscribe_adt);
+    assert(!probe_plan.teardown_probe);
+    r1_wear_raw_hr_probe_plan(true, true, &probe_plan);
+    assert(!probe_plan.subscribe_raw_hr);
+    assert(probe_plan.raw_hr_timeout == R1_WEAR_TIMEOUT_RESTART);
+    assert(R1_WEAR_RAW_HR_TIMEOUT_TICKS == UINT32_C(3000));
+
+    r1_wear_adt_status_plan(0u, false, false, false, &probe_plan);
+    assert(probe_plan.subscribe_adt);
+    assert(probe_plan.start_adt_timeout);
+    assert(!probe_plan.teardown_probe);
+    r1_wear_adt_status_plan(0u, false, true, false, &probe_plan);
+    assert(!probe_plan.subscribe_adt);
+    assert(!probe_plan.start_adt_timeout);
+    r1_wear_adt_status_plan(0u, false, false, true, &probe_plan);
+    assert(probe_plan.subscribe_adt);
+    assert(!probe_plan.start_adt_timeout);
+    r1_wear_adt_status_plan(1u, false, false, false, &probe_plan);
+    assert(probe_plan.teardown_probe);
+    r1_wear_adt_status_plan(2u, true, false, false, &probe_plan);
+    assert(probe_plan.teardown_probe);
+    r1_wear_adt_status_plan(2u, false, false, false, &probe_plan);
+    assert(!probe_plan.subscribe_adt);
+    assert(!probe_plan.teardown_probe);
+    assert(R1_WEAR_ADT_TIMEOUT_TICKS == UINT32_C(7000));
+
+    uint8_t sleep_status = 0u;
+    uint8_t pending_decision = 7u;
+    assert(r1_wear_sleep_status_update(
+        &sleep_status, 1u, &pending_decision));
+    assert(sleep_status == 1u);
+    assert(pending_decision == 0u);
+    pending_decision = 9u;
+    assert(!r1_wear_sleep_status_update(
+        &sleep_status, 1u, &pending_decision));
+    assert(pending_decision == 9u);
+    assert(!r1_wear_sleep_status_update(
+        &sleep_status, 0u, &pending_decision));
+    assert(sleep_status == 0u);
+    assert(pending_decision == 9u);
 
     r1_wear_fusion fusion;
     r1_wear_fusion_initialize(&fusion);
@@ -7630,6 +9383,7 @@ static void test_connection_control_composition(void) {
     const uint8_t other[R1_PEER_ADDRESS_SIZE] = {9u, 9u, 9u, 9u, 9u, 9u};
     const uint8_t zero[R1_PEER_ADDRESS_SIZE] = {0};
     r1_connection_control_plan plan;
+    r1_connection_control_adv_start_handler_plan handler_plan;
     assert(r1_connection_control_role_sync_thread_flags() ==
            R1_CONNECTION_CONTROL_ROLE_SYNC_THREAD_FLAG);
 
@@ -7654,6 +9408,38 @@ static void test_connection_control_composition(void) {
         UINT32_C(0x12340003));
     assert(delayed_plan.action == R1_CONNECTION_CONTROL_DELAYED_FATAL);
     assert(delayed_plan.connection_context == UINT16_C(0x1234));
+
+    /* The clean handler boundary accepts only the legitimate two-address
+     * payload, replies on the incoming session, and plans event 0x200 on the
+     * independently supplied current EUS session. */
+    uint8_t adv_payload[R1_CONNECTION_CONTROL_ADV_START_PAYLOAD_SIZE];
+    memcpy(adv_payload, first, R1_PEER_ADDRESS_SIZE);
+    memcpy(adv_payload + R1_PEER_ADDRESS_SIZE, second,
+           R1_PEER_ADDRESS_SIZE);
+    assert(r1_connection_control_adv_start_handler_plan_decode(
+               7u, 9u, NULL, sizeof adv_payload, &handler_plan)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_connection_control_adv_start_handler_plan_decode(
+               7u, 9u, adv_payload, sizeof adv_payload, NULL)
+           == R1_ERROR_ARGUMENT);
+    assert(r1_connection_control_adv_start_handler_plan_decode(
+               7u, 9u, adv_payload, sizeof adv_payload - 1u, &handler_plan)
+           == R1_ERROR_LENGTH);
+    assert(r1_connection_control_adv_start_handler_plan_decode(
+               7u, 9u, adv_payload, sizeof adv_payload + 1u, &handler_plan)
+           == R1_ERROR_LENGTH);
+    assert(r1_connection_control_adv_start_handler_plan_decode(
+               7u, 9u, adv_payload, sizeof adv_payload, &handler_plan)
+           == R1_OK);
+    assert(handler_plan.send_empty_success_response);
+    assert(handler_plan.enqueue_event);
+    assert(handler_plan.response_session == 7u);
+    assert(handler_plan.event_session == 9u);
+    assert(handler_plan.event_type == R1_CONNECTION_CONTROL_ADV_START_EVENT_TYPE);
+    assert(memcmp(handler_plan.first_target, first,
+                  R1_PEER_ADDRESS_SIZE) == 0);
+    assert(memcmp(handler_plan.second_target, second,
+                  R1_PEER_ADDRESS_SIZE) == 0);
 
     assert(r1_connection_control_plan_adv_start(
                false, 0u, false, NULL, NULL, second, false, false, &plan)
@@ -7820,6 +9606,36 @@ static void test_system_settings_reg1_persistence(void) {
     const r1_model set_disable = request(2u, 0x0fu, disable, sizeof disable);
     assert(runtime_feed_model(&runtime, 3u, &set_disable) == R1_OK);
     assert(capture.calls == 2u && capture.settings[5] == 0u);
+}
+
+static void test_ble_tx_queue_dispatch_veneers(void) {
+    static const uint8_t payload[] = {0xa1u, 0xb2u, 0xc3u};
+    uint8_t envelope[16u];
+    size_t allocation_bytes = 0u;
+
+    assert(r1_ble_tx_queue_dispatch_type0(
+               UINT32_C(0x44332211), payload, sizeof payload, envelope,
+               sizeof envelope, &allocation_bytes) == R1_OK);
+    assert(allocation_bytes == sizeof envelope);
+    assert(envelope[0] == 0x11u && envelope[1] == 0x22u &&
+           envelope[2] == 0x33u && envelope[3] == 0x44u);
+    assert(envelope[4] == 0u && envelope[8] == sizeof payload);
+
+    assert(r1_ble_tx_queue_dispatch_type1(
+               UINT32_C(0x44332211), payload, sizeof payload, envelope,
+               sizeof envelope, &allocation_bytes) == R1_OK);
+    assert(envelope[4] == 1u && envelope[5] == 0u && envelope[6] == 0u &&
+           envelope[7] == 0u);
+    assert(memcmp(envelope + R1_BLE_THREAD_MESSAGE_HEADER_BYTES,
+                  payload, sizeof payload) == 0);
+
+    assert(r1_ble_tx_queue_dispatch_type2(
+               UINT32_C(0x44332211), payload, sizeof payload, envelope,
+               sizeof envelope, &allocation_bytes) == R1_OK);
+    assert(envelope[4] == 2u);
+    assert(r1_ble_tx_queue_dispatch_type1(
+               0u, payload, sizeof payload, envelope, sizeof envelope - 1u,
+               &allocation_bytes) == R1_ERROR_CAPACITY);
 }
 
 static void test_next_frontier_product_policies(void) {
@@ -8574,6 +10390,34 @@ static void test_next_frontier_212_222_policies(void) {
     assert(acknowledgement.publish_failed &&
            acknowledgement.release_context);
 
+    r1_sleep_sync_report_plan report;
+    assert(r1_sleep_sync_plan_report_callback(
+               true, 0u, 2u, UINT16_C(0x1234), NULL) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_sleep_sync_plan_report_callback(
+               false, 0u, 2u, UINT16_C(0x1234), &report) == R1_OK);
+    assert(!report.callback_result && !report.invoke_packet_builder &&
+           !report.skip_synchronized_record && !report.context_present);
+    assert(r1_sleep_sync_plan_report_callback(
+               true, 1u, 2u, UINT16_C(0x1234), &report) == R1_OK);
+    assert(report.callback_result && report.skip_synchronized_record &&
+           !report.invoke_packet_builder && report.context_present);
+    assert(report.report_type == 0u && report.stage_count == 0u &&
+           report.model_identifier == 0u);
+    assert(r1_sleep_sync_plan_report_callback(
+               true, 0u, 2u, UINT16_C(0x1234), &report) == R1_OK);
+    assert(report.callback_result && report.invoke_packet_builder &&
+           !report.skip_synchronized_record);
+    assert(report.report_type == 2u &&
+           report.stage_count == UINT16_C(0x1234));
+    assert(report.model_identifier == R1_SLEEP_SYNC_MODEL_IDENTIFIER);
+    assert(r1_sleep_sync_plan_report_callback(
+               true, 2u, UINT8_C(0xa5), UINT16_MAX, &report) == R1_OK);
+    assert(report.callback_result && report.invoke_packet_builder &&
+           !report.skip_synchronized_record);
+    assert(report.report_type == UINT8_C(0xa5) &&
+           report.stage_count == UINT16_MAX);
+
     r1_system_control_command_37_result control;
     assert(r1_system_control_command_37_plan(
                0u, 59u, 0u, 0u, &control) == R1_OK);
@@ -9136,6 +10980,78 @@ static void test_event_bus(void) {
     assert(r1_event_bus_subscriber_count(&bus, 4u) == 1u);
 }
 
+static size_t gpio_irq_callback_a_calls;
+static size_t gpio_irq_callback_b_calls;
+static uint8_t gpio_irq_last_pin;
+static uint32_t gpio_irq_last_action;
+
+static void gpio_irq_callback_a(uint8_t pin, uint32_t action) {
+    ++gpio_irq_callback_a_calls;
+    gpio_irq_last_pin = pin;
+    gpio_irq_last_action = action;
+}
+
+static void gpio_irq_callback_b(uint8_t pin, uint32_t action) {
+    ++gpio_irq_callback_b_calls;
+    gpio_irq_last_pin = pin;
+    gpio_irq_last_action = action;
+}
+
+static void test_gpio_input_irq_dispatch(void) {
+    const r1_gpio_input_open_record open_records[
+        R1_GPIO_INPUT_REGISTRY_COUNT] = {
+        {"acc_int_1", 15u, 0u, 1u, false},
+        {"ppg_int", 21u, 0u, 2u, false},
+        {"touch_rdy_in", 17u, 0u, 2u, false},
+        {"mcu_reset_irq", 18u, 0u, 2u, false},
+        {"pmic_irq", 33u, 0u, 2u, false},
+        {"nfc_gpo_irq", 3u, 0u, 1u, false},
+        {"device_stacmd_irq", 33u, 0u, 2u, true},
+    };
+    r1_gpio_input_open_plan open_plan = r1_gpio_input_open_plan_build(
+        open_records, "touch_rdy_in", false);
+    assert(open_plan.provider_status == 0u &&
+           open_plan.record_index == 2u &&
+           open_plan.linear_pin == 17u &&
+           open_plan.pin_cnf_raw == UINT32_C(2) &&
+           open_plan.pull_raw == 0u &&
+           open_plan.polarity_raw == 2u &&
+           open_plan.initialize_gpiote &&
+           open_plan.configure_port_event && open_plan.enable_event &&
+           open_plan.mark_open);
+    open_plan = r1_gpio_input_open_plan_build(
+        open_records, "device_stacmd_irq", true);
+    assert(open_plan.provider_status == 0u &&
+           open_plan.record_index == 6u && !open_plan.mark_open &&
+           !open_plan.configure_port_event);
+    open_plan = r1_gpio_input_open_plan_build(
+        open_records, "missing", true);
+    assert(open_plan.provider_status == 2u && !open_plan.mark_open);
+    open_plan = r1_gpio_input_open_plan_build(NULL, "pmic_irq", false);
+    assert(open_plan.provider_status == 2u);
+
+    const r1_gpio_input_irq_record records[R1_GPIO_INPUT_REGISTRY_COUNT] = {
+        {15u, gpio_irq_callback_a},
+        {21u, NULL},
+        {17u, gpio_irq_callback_b},
+        {18u, NULL},
+        {33u, gpio_irq_callback_a},
+        {3u, gpio_irq_callback_b},
+        {33u, gpio_irq_callback_b},
+    };
+
+    gpio_irq_callback_a_calls = 0u;
+    gpio_irq_callback_b_calls = 0u;
+    assert(r1_gpio_input_irq_dispatch(records, 33u, UINT32_C(0x200)) == 2u);
+    assert(gpio_irq_callback_a_calls == 1u);
+    assert(gpio_irq_callback_b_calls == 1u);
+    assert(gpio_irq_last_pin == 33u);
+    assert(gpio_irq_last_action == UINT32_C(0x200));
+    assert(r1_gpio_input_irq_dispatch(records, 21u, 1u) == 0u);
+    assert(r1_gpio_input_irq_dispatch(records, 99u, 1u) == 0u);
+    assert(r1_gpio_input_irq_dispatch(NULL, 33u, 1u) == 0u);
+}
+
 int main(void) {
     test_checksums();
     test_retained_crash_log();
@@ -9162,6 +11078,7 @@ int main(void) {
     test_pmic_charge_event_policy();
     test_pmic_charged_notification_policy();
     test_model_round_trip();
+    test_eus_module_ingress_and_system_dispatch();
     test_protocol_response_orchestration();
     test_physical_wire_vectors();
     test_fragments();
@@ -9181,6 +11098,8 @@ int main(void) {
     test_scalar_health_daily_cache_callbacks();
     test_temperature_and_stress_daily_cache_callbacks();
     test_scalar_health_sample_consumers();
+    test_heart_rate_result_plans();
+    test_spo2_result_plans();
     test_health_crash_snapshot();
     test_health_database_record_codec_and_restore();
     test_health_database_startup();
@@ -9203,10 +11122,26 @@ int main(void) {
     test_runtime_touch_effect();
     test_runtime_eus_bridge();
     test_bae8_event_route();
+    test_bae8_connection_event_plan();
+    test_gap_event_plan();
+    test_nfc_charge_task_plan();
+    test_buttonless_dfu_event_policy();
+    test_touch_recovery_timer_plan();
+    test_i2c5_delay_noop();
+    test_gpio_input_irq_dispatch();
+    test_ble_tx_queue_dispatch_veneers();
     test_channel1_task_plans();
     test_bae8_input_task_plans();
     test_shared_tx_task_plans();
     test_factory_input_task_plans();
+    test_factory_input_thread_creation_plan();
+    test_factory_input_record_plan();
+    test_sensor_task_plans();
+    test_system_task_plans();
+    test_ble_task_plans();
+    test_advertising_event_plan();
+    test_task_suspend_plans();
+    test_task_topology_startup_plan();
     test_storage();
     test_export_planner();
     test_kv_snapshot_store();
@@ -9216,8 +11151,11 @@ int main(void) {
     test_validated_sleep_delivery_plans();
     test_goodix_provider_boundary();
     test_goodix_mem_integrator_glue();
+    test_goodix_open_mode_plan();
     test_iqs7211e_provider_boundary();
+    test_iqs7211e_factory_markers();
     test_iqs7211e_ati_audit_policy();
+    test_st25dvxxkc_bus_io_table();
     test_st25dvxxkc_provider_boundary();
     test_st25dvxxkc_dock_policy();
     test_shared_power_lease();

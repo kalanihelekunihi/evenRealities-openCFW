@@ -84,7 +84,8 @@ Provider-routed entries are:
 
 The R1-only boundary is `0x000750A0` burst acquisition, `0x000750E8` bounded FIFO read,
 `0x0007518A` product register-`0x17` setup, `0x000751B8` double-tap disable policy,
-`0x000754DC` identity probe, and `0x00075510` fixed product configuration/reset loop. These six
+`0x00075290` double-tap enable configuration,
+`0x000754DC` identity probe, and `0x00075510` fixed product configuration/reset loop. These seven
 functions may be independently implemented only as adapters around the pinned ST driver.
 
 An earlier ledger revision incorrectly included `0x000759F4` as a seventh LIS identity helper.

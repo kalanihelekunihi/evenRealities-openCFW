@@ -40,6 +40,16 @@ NORDIC_BUTTONLESS_DFU_FUNCTIONS = (
         "callsites": (0x52112,),
     },
     {
+        "entry": 0x52050,
+        "size": 40,
+        "symbol": "ble_dfu_buttonless_bootloader_start_finalize",
+        "source": BLE_DFU_SOURCE,
+        "segments": ((0x52050, 0x52078),),
+        "sha256": "4664b0bf23c87e88eaa0e743cecc8fef14a88241a3148941443eff0726560b5b",
+        "callsites": (0x5208C,),
+        "inventory": "manual_provenance_supplement",
+    },
+    {
         "entry": 0x5207C,
         "size": 60,
         "symbol": "ble_dfu_buttonless_bootloader_start_prepare",

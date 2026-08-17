@@ -3,7 +3,7 @@
 ## Decision
 
 The unavailable YHM2710 vendor package remains unlicensed, but the repository owner authorized
-full independent reduction on 2026-08-14. All 36 provider-classified functions are now
+full independent reduction on 2026-08-14. All 44 provider-classified functions are now
 reconstructed as transparent C in `reconstructed/yhm2710/`; exact mapping, recovered behavior,
 and hardening differences are documented in
 [`../correlation/YHM2710-REDUCTION-CORRELATION.md`](../correlation/YHM2710-REDUCTION-CORRELATION.md).
@@ -75,7 +75,7 @@ The P1.01 evidence now drives the independently compiled sender; it is never cop
 opaque artifact.
 
 The marker-bearing initialization, status, ladder, and system-track bodies are included in the
-36-entry reduction. A source-admission review found no authoritative public provider source or
+44-entry reduction. A source-admission review found no authoritative public provider source or
 usable license; similarly named HM2710 material is a different part and is not used.
 
 ## Implemented clean-room resource layer
@@ -136,5 +136,6 @@ and `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
 
 Exhaustive GitHub/Gitee/web searches found zero public YHM2710 driver code and no downloadable
 datasheet; the single-wire stacmd protocol and chip-ID `0xA0` appear in no public document.
-All 36 entries remain blocked with no provider pointer. Full evidence:
+All 44 entries retain the attribution label and have no provider pointer, but are source-admitted
+as owner-authorized transparent reconstructions. Full attribution evidence:
 [`withheld-providers-ATTRIBUTION-2026-08.md`](withheld-providers-ATTRIBUTION-2026-08.md).

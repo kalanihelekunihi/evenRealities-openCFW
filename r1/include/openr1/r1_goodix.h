@@ -83,6 +83,15 @@ typedef struct {
         registrations[R1_SENSOR_STREAM_REGISTRATION_COUNT];
 } r1_sensor_stream_registration_plan_result;
 
+typedef struct {
+    bool provider_open_requested;
+    uint8_t provider_open_mode;
+    bool state_clear_requested;
+    size_t state_clear_offset;
+    size_t state_clear_bytes;
+    bool log_open_type;
+} r1_goodix_open_mode_plan;
+
 void r1_goodix_adapter_initialize(r1_goodix_adapter *adapter);
 r1_error r1_goodix_adapter_bind(r1_goodix_adapter *adapter,
                                 const r1_goodix_provider_ops *provider,
@@ -102,6 +111,8 @@ r1_error r1_goodix_diagnostic_select(
     uint8_t *output, size_t output_capacity, size_t *written);
 r1_error r1_sensor_stream_registration_plan(
     r1_sensor_stream_registration_plan_result *plan);
+r1_error r1_goodix_open_mode_plan_build(
+    uint32_t requested_mode, r1_goodix_open_mode_plan *plan);
 /* Exact internal raw_hr producer at 0x0008A01C. The 124-byte record is a
  * count byte, three preserved reserved bytes, and up to thirty UInt32LE
  * values. Values intentionally remain unlabeled pending hardware capture. */

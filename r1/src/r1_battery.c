@@ -74,6 +74,87 @@ r1_battery_diagnostic_cadence r1_battery_diagnostic_cadence_step(
     return result;
 }
 
+r1_error r1_analog_close_plan_build(
+    r1_analog_channel channel, const r1_analog_close_state *state,
+    r1_analog_close_plan *plan) {
+    if (state == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_analog_close_plan){0};
+    if (channel < R1_ANALOG_CHANNEL_BATTERY ||
+        channel > R1_ANALOG_CHANNEL_NFC_RECTIFIER) {
+        plan->provider_status = R1_ANALOG_PROVIDER_STATUS_NOT_FOUND;
+        return R1_OK;
+    }
+    plan->provider_status = R1_ANALOG_PROVIDER_STATUS_OK;
+    const size_t selected = (size_t)channel;
+    if (!state->channel_open[selected]) {
+        return R1_OK;
+    }
+    /* The stock records select nrfx channels with their AIN selectors. */
+    static const uint8_t nrfx_channels[R1_ANALOG_CHANNEL_COUNT] = {6u, 4u, 3u};
+    plan->uninitialize_channel = true;
+    plan->nrfx_channel = nrfx_channels[selected];
+    plan->clear_channel_open = true;
+    bool another_open = false;
+    for (size_t index = 0u; index < R1_ANALOG_CHANNEL_COUNT; ++index) {
+        if (index != selected && state->channel_open[index]) {
+            another_open = true;
+        }
+    }
+    plan->uninitialize_driver = state->driver_initialized && !another_open;
+    plan->clear_driver_initialized = plan->uninitialize_driver;
+    return R1_OK;
+}
+
+r1_error r1_factory_pmic_current_diagnostic_plan_build(
+    uint32_t current_sense_millivolts,
+    r1_factory_pmic_current_diagnostic_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_factory_pmic_current_diagnostic_plan){
+        .current_sense_millivolts = current_sense_millivolts,
+        .handler_return_value = 1u,
+    };
+    return R1_OK;
+}
+
+r1_error r1_factory_pmic_power_off_plan_build(
+    uint32_t timestamp, uint16_t battery_millivolts,
+    r1_factory_pmic_power_off_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    const uint16_t stored_millivolts = (uint16_t)(
+        battery_millivolts & R1_FACTORY_PMIC_BATTERY_MILLIVOLT_MASK);
+    *plan = (r1_factory_pmic_power_off_plan){
+        .timestamp = timestamp,
+        .raw_battery_millivolts = battery_millivolts,
+        .stored_battery_millivolts = stored_millivolts,
+        .packed_dev_info_word = (uint16_t)(
+            (uint16_t)(stored_millivolts << 2u) |
+            R1_FACTORY_PMIC_POWER_STATE_OFF),
+        .persist_dev_info_requested = true,
+        .signal_power_thread_requested = true,
+        .power_thread_flags = R1_FACTORY_PMIC_POWER_THREAD_FLAG,
+        .handler_return_value = 1u,
+    };
+    return R1_OK;
+}
+
+r1_error r1_factory_pmic_register_diagnostic_plan_build(
+    uint8_t register_9, r1_factory_pmic_register_diagnostic_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_factory_pmic_register_diagnostic_plan){
+        .formatted_registers = {register_9},
+        .handler_return_value = 1u,
+    };
+    return R1_OK;
+}
+
 static size_t curve_profile(uint8_t battery_type) {
     return battery_type >= 1u && battery_type <= R1_BATTERY_PROFILE_COUNT
         ? (size_t)(battery_type - 1u) : R1_BATTERY_PROFILE_COUNT - 1u;
@@ -636,4 +717,39 @@ r1_pmic_delayed_callback_plan r1_pmic_post_device_callback_plan(void) {
         .invoke_device_slot_0c = true,
         .thread_flags_to_set = R1_PMIC_POST_DEVICE_THREAD_FLAG,
     };
+}
+
+r1_pmic_delayed_callback_plan r1_pmic_charge_i2c_callback_plan(void) {
+    return (r1_pmic_delayed_callback_plan){
+        .invoke_device_slot_0c = true,
+        .thread_flags_to_set = R1_PMIC_CHARGE_I2C_THREAD_FLAG,
+    };
+}
+
+r1_error r1_pmic_late_init_plan_build(
+    uint8_t configuration_byte, r1_pmic_late_init_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_pmic_late_init_plan){
+        .actions = {
+            R1_PMIC_LATE_INIT_CLEAR_READY_FLAG,
+            R1_PMIC_LATE_INIT_ACQUIRE_NFC_RESOURCE,
+            R1_PMIC_LATE_INIT_DELAY,
+            R1_PMIC_LATE_INIT_CONFIGURE_ST25DVXXKC,
+            R1_PMIC_LATE_INIT_RELEASE_NFC_RESOURCE,
+            R1_PMIC_LATE_INIT_RUN_CHARGE_I2C_EVENT_ZERO,
+            R1_PMIC_LATE_INIT_INSTALL_YHM_CALLBACK,
+            R1_PMIC_LATE_INIT_INSTALL_DEVICE_CALLBACK,
+        },
+        .action_count = R1_PMIC_LATE_INIT_ACTION_COUNT - 1u,
+        .settle_milliseconds = R1_PMIC_LATE_INIT_SETTLE_MS,
+        .factory_callback_delay_ticks =
+            R1_PMIC_LATE_INIT_FACTORY_DELAY_TICKS,
+    };
+    if (configuration_byte == UINT8_C(0x55)) {
+        plan->actions[plan->action_count++] =
+            R1_PMIC_LATE_INIT_SCHEDULE_FACTORY_CALLBACK;
+    }
+    return R1_OK;
 }

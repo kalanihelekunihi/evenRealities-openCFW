@@ -93,6 +93,72 @@ r1_error r1_wear_optical_range(
     return R1_OK;
 }
 
+r1_error r1_wear_optical_history_update(
+    r1_wear_optical_history *history,
+    const uint32_t *values, size_t value_count) {
+    if (history == NULL ||
+        history->count > R1_WEAR_IR_HISTORY_CAPACITY ||
+        value_count > R1_WEAR_IR_HISTORY_CAPACITY ||
+        (value_count != 0u && values == NULL)) {
+        return R1_ERROR_ARGUMENT;
+    }
+
+    if (history->count != 0u) {
+        history->previous = history->values[history->count - 1u];
+        /* The recovered range helper treats a zero previous sample as absent. */
+        history->previous_available = history->previous != 0u;
+    }
+    history->count = (uint8_t)value_count;
+    for (size_t index = 0u; index < value_count; ++index) {
+        history->values[index] = values[index];
+    }
+    return R1_OK;
+}
+
+void r1_wear_raw_hr_probe_plan(
+    bool subscription_active, bool timeout_active,
+    r1_wear_probe_plan *plan) {
+    if (plan == NULL) {
+        return;
+    }
+    *plan = (r1_wear_probe_plan){
+        .subscribe_raw_hr = !subscription_active,
+        .raw_hr_timeout = timeout_active
+            ? R1_WEAR_TIMEOUT_RESTART : R1_WEAR_TIMEOUT_START,
+    };
+}
+
+void r1_wear_adt_status_plan(
+    uint8_t status, bool charging, bool subscription_active,
+    bool timeout_active, r1_wear_probe_plan *plan) {
+    if (plan == NULL) {
+        return;
+    }
+    *plan = (r1_wear_probe_plan){0};
+    if (charging || status == 1u) {
+        plan->teardown_probe = true;
+        return;
+    }
+    if (status == 0u && !subscription_active) {
+        plan->subscribe_adt = true;
+        plan->start_adt_timeout = !timeout_active;
+    }
+}
+
+bool r1_wear_sleep_status_update(
+    uint8_t *current_status, uint8_t new_status,
+    uint8_t *pending_decision) {
+    if (current_status == NULL || pending_decision == NULL) {
+        return false;
+    }
+    const bool cleared = new_status == 1u && *current_status == 0u;
+    if (cleared) {
+        *pending_decision = 0u;
+    }
+    *current_status = new_status;
+    return cleared;
+}
+
 static bool motion_exceeds_wear_on_threshold(
     const r1_wear_motion_statistics *motion) {
     return motion != NULL &&

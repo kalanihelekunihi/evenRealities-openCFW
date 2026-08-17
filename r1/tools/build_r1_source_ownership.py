@@ -83,6 +83,63 @@ from summarize_r1_hrv_sync_flush import R1_HRV_SYNC_FLUSH_FUNCTIONS
 from summarize_r1_hr_sync_flush import R1_HR_SYNC_FLUSH_FUNCTIONS
 from summarize_r1_spo2_sync_flush import R1_SPO2_SYNC_FLUSH_FUNCTIONS
 from summarize_r1_touch_task_dispatcher import R1_TOUCH_TASK_DISPATCHER_FUNCTIONS
+from summarize_r1_touch_recovery_timer import R1_TOUCH_RECOVERY_TIMER_FUNCTIONS
+from summarize_r1_i2c5_delay_callback import R1_I2C5_DELAY_FUNCTIONS
+from summarize_r1_nordic_omitted_hal_inlines import (
+    R1_NORDIC_OMITTED_HAL_FUNCTIONS,
+)
+from summarize_r1_nordic_omitted_delay_cluster import (
+    R1_NORDIC_OMITTED_DELAY_FUNCTIONS,
+)
+from summarize_r1_gpio_input_irq_dispatch import (
+    R1_GPIO_INPUT_IRQ_DISPATCH_FUNCTIONS,
+)
+from summarize_r1_advertising_event_policy import (
+    R1_ADVERTISING_EVENT_POLICY_FUNCTIONS,
+)
+from summarize_r1_goodix_open_mode_policy import (
+    R1_GOODIX_OPEN_MODE_POLICY_FUNCTIONS,
+)
+from summarize_r1_pmic_late_init_policy import (
+    R1_PMIC_LATE_INIT_POLICY_FUNCTIONS,
+)
+from summarize_r1_task_suspend_policy import (
+    R1_TASK_SUSPEND_POLICY_FUNCTIONS,
+)
+from summarize_r1_storage_task_policy import (
+    R1_STORAGE_TASK_POLICY_FUNCTIONS,
+)
+from summarize_r1_factory_thread_creator import (
+    R1_FACTORY_THREAD_CREATOR_FUNCTIONS,
+)
+from summarize_r1_bae8_connection_event import (
+    R1_BAE8_CONNECTION_EVENT_FUNCTIONS,
+)
+from summarize_r1_gap_event_policy import R1_GAP_EVENT_POLICY_FUNCTIONS
+from summarize_r1_nfc_charge_task_policy import (
+    R1_NFC_CHARGE_TASK_POLICY_FUNCTIONS,
+)
+from summarize_r1_task_topology_startup import (
+    R1_TASK_TOPOLOGY_STARTUP_FUNCTIONS,
+)
+from summarize_r1_hr_timing_result import (
+    R1_HR_TIMING_RESULT_FUNCTIONS,
+)
+from summarize_r1_spo2_result_callbacks import (
+    R1_SPO2_RESULT_CALLBACK_FUNCTIONS,
+)
+from summarize_r1_factory_acc_battery_diagnostics import (
+    R1_FACTORY_ACC_BATTERY_DIAGNOSTIC_FUNCTIONS,
+)
+from summarize_r1_factory_pmic_handlers import (
+    R1_FACTORY_PMIC_HANDLER_FUNCTIONS,
+)
+from summarize_r1_yhm_transport_entries import (
+    R1_YHM2710_TRANSPORT_ENTRY_FUNCTIONS,
+)
+from summarize_r1_remaining_explicit_entries import (
+    R1_REMAINING_EXPLICIT_ENTRY_FUNCTIONS,
+)
 from summarize_r1_sensor_stream_unregister import SENSOR_STREAM_UNREGISTER_FUNCTIONS
 from summarize_r1_sensor_stream_register import SENSOR_STREAM_REGISTER_FUNCTIONS
 from summarize_r1_sensor_stream_dispatch import SENSOR_STREAM_DISPATCH_FUNCTIONS
@@ -90,6 +147,7 @@ from summarize_r1_ble_tx_queue_dispatch import R1_BLE_TX_QUEUE_FUNCTIONS
 from summarize_r1_wear_fusion_closure import R1_WEAR_FUSION_FUNCTIONS
 from summarize_r1_connection_parameter_policy import R1_CONNECTION_PARAMETER_FUNCTIONS
 from summarize_r1_sleep_sync_packet import R1_SLEEP_SYNC_PACKET_FUNCTIONS
+from summarize_r1_sleep_sync import R1_SLEEP_SYNC_REPORT_FUNCTIONS
 from summarize_r1_nfc_dock_policy import R1_NFC_DOCK_POLICY_FUNCTIONS
 from summarize_r1_peer_target_policy import R1_PEER_TARGET_FUNCTIONS
 from summarize_r1_legacy_command_dispatch import (
@@ -106,6 +164,9 @@ from summarize_r1_connection_role_assignment import (
 )
 from summarize_r1_eus_rx_reassembly import R1_EUS_RX_REASSEMBLY_FUNCTIONS
 from summarize_r1_bae8_event_router import R1_BAE8_EVENT_ROUTER_FUNCTIONS
+from summarize_r1_buttonless_dfu_event_policy import (
+    R1_BUTTONLESS_DFU_EVENT_FUNCTIONS,
+)
 from summarize_r1_ati_calibration_command import R1_ATI_CALIBRATION_COMMAND_FUNCTIONS
 from summarize_r1_battery_runtime_service import R1_BATTERY_RUNTIME_SERVICE_FUNCTIONS
 from summarize_r1_goodix_hr_init_boundary import GOODIX_HR_INIT_FUNCTIONS
@@ -720,6 +781,114 @@ APP_INVENTORY_EXTENT_OVERRIDES = {
 # unambiguous return/tail-call or callback boundaries, so their full bodies can
 # be byte-pinned.
 APP_MANUAL_SUPPLEMENT_EXTENTS = {
+    # ST's password presenter and mailbox reader are independent provider
+    # bodies reached through tiny R1/global-object veneers. Ghidra folded each
+    # tail target into its distant veneer instead of emitting a function row.
+    0x00031C56: 78,
+    0x00031D52: 38,
+    # YHM2710 register-9 read and system-track clear targets plus their two
+    # independent branch-only public veneers.
+    0x00035268: 10,
+    0x0003543C: 106,
+    0x00050748: 4,
+    0x0005074C: 4,
+    # Explicit mode-1 EUS/phone BLE transmit veneer. Ghidra merged this
+    # independent tail-call entry into the preceding noncontiguous type-2 row.
+    0x0003407C: 12,
+    # Independent PMIC/YHM completion callback. The body has its own prologue,
+    # invokes device slot 0x0c, and tail-calls the worker flag setter with 2.
+    0x00042ED8: 16,
+    # Shared generic-device bus helpers and all six ST25DVxxKC_IO_t callbacks
+    # stored by 0x44BEC. Ghidra retained their Thumb labels or folded their
+    # bodies into noncontiguous callers instead of emitting function rows.
+    0x00044BE0: 12,
+    0x00044C58: 6,
+    0x00044C64: 10,
+    0x00044C6E: 10,
+    0x00044C78: 12,
+    0x00044C84: 6,
+    0x00044C8A: 6,
+    0x00050510: 30,
+    0x00050534: 32,
+    # The touch dispatcher restores its frame and tail-branches to six
+    # independent factory-marker functions. Ghidra folded those targets into
+    # one noncontiguous dispatcher row despite each target returning itself.
+    0x0004FA8C: 24,
+    0x0004FAA8: 24,
+    0x0004FAC4: 26,
+    0x0004FAE4: 26,
+    0x0004FB04: 26,
+    0x0004FB24: 26,
+    # Symmetric two-client touch/PPG lifecycle dispatchers. Each accepts only
+    # client index 0/1 and has a complete return before its literal word.
+    0x00050304: 52,
+    0x00050338: 52,
+    # Two exact internal-event length gates omitted from the main Ghidra CSV.
+    0x00042860: 14,
+    0x0004286E: 14,
+    # Stress mode and one-shot measurement event consumers. Each has an
+    # independent prologue, exact one-byte length gate, and complete return or
+    # tail-call boundary before its diagnostic literal pool.
+    0x000422C8: 80,
+    0x00042474: 86,
+    # Factory optical text callbacks. These leaf/tail-call bodies consume
+    # fixed HR, SpO2, and temperature records and end before their diagnostic
+    # format strings.
+    0x0004F30C: 12,
+    0x0004F378: 20,
+    0x0004F914: 8,
+    0x0004F980: 32,
+    # Hard-coded factory sensor-stream listener lifecycle functions. Each
+    # checks one handle slot in the shared factory state, then registers or
+    # unregisters listener "at" for the fixed metric name.
+    0x0004ED34: 30,
+    0x0004F2BC: 22,
+    0x0004F2DC: 30,
+    0x0004F348: 30,
+    0x0004F8E0: 30,
+    0x0004F928: 22,
+    0x0004F94C: 30,
+    # Factory log-only activity/temperature adapters and the fixed event-4
+    # periodic-timer restart handler.
+    0x0004EDDC: 28,
+    0x0004F040: 12,
+    0x0004F1C4: 48,
+    # Four command-0xF2 factory handlers: delayed reset, PPG profile select,
+    # marked ship-mode pulse, and unmarked ship-mode pulse.
+    0x00062D6A: 26,
+    0x00062D84: 44,
+    0x00062DB0: 36,
+    0x00062DD4: 30,
+    # Independent factory-input duplicate of the legacy command router. It
+    # ends with a tail branch at 0x627ca before alignment and literal data.
+    0x000625C0: 526,
+    # Top-level EUS ingress and the 20-entry system-module dispatcher. Both
+    # have independent prologue/return boundaries but were explicit Ghidra
+    # seeds omitted from the canonical function CSV.
+    0x0008316C: 176,
+    0x00083CA8: 36,
+    # System-table advStart and touchSwitch handlers. The clean plans retain
+    # only strict payload decoding, ordering/session intent, and selector
+    # policy; response, queue, BLE, and touch-source effects stay external.
+    0x00083D04: 86,
+    0x00084874: 184,
+    # Six independent charging-dock factory/state helpers. Each has a complete
+    # return/tail-call boundary followed by alignment or a literal pool; the
+    # NFC evidence script creates these entries after Ghidra omitted them.
+    0x00077250: 8,
+    0x0007725C: 8,
+    0x00077268: 6,
+    0x00077274: 22,
+    0x00077290: 6,
+    0x0007729C: 6,
+    # Complete auxiliary health-history handlers omitted from Ghidra's main
+    # function inventory. Their adjacent prologue/return boundaries and fixed
+    # command/event constants establish four independent product functions.
+    0x00082D9E: 32,
+    0x00082DBE: 58,
+    0x00082DF8: 2,
+    0x00082DFA: 58,
+    0x00082ECE: 26,
     # Installed by descriptor constructor 0x74BE0 as Thumb token 0x85B9D;
     # Ghidra missed the complete float dense executor before its literal pool.
     0x00085B9C: 252,
@@ -803,10 +972,17 @@ APP_MANUAL_SUPPLEMENT_EXTENTS = {
     # Six recovered connection-control paths install this delayed callback.
     # Ghidra exposed only its odd Thumb label, not a function row.
     0x000882AC: 64,
+    # Complete factory-input queue drain and AT^-prefix splitter. Multiple
+    # analysis scripts created this function explicitly after auto-analysis
+    # omitted it from the function CSV.
+    0x00045F3C: 116,
     # Complete channel-1 transmit worker/task entry. Ghidra exposed only
     # LAB_000920ec+1 even though the body has independent task startup and
     # terminal suspension control flow.
     0x000920EC: 128,
+    # Complete BLE worker/task entry. The creator at 0x44f48 stores the odd
+    # Thumb entry 0x91f55; Ghidra omitted the body before its literal pool.
+    0x00091F54: 312,
     # Complete BAE8 input worker/task entry. Ghidra exposed only
     # LAB_00092178+1 before the aligned literal pool.
     0x00092178: 198,
@@ -816,6 +992,12 @@ APP_MANUAL_SUPPLEMENT_EXTENTS = {
     # Complete factory-marker channel-1 input/sensor-scheduler task. Ghidra
     # exposed only LAB_0009230c+1 before the next helper.
     0x0009230C: 128,
+    # Complete system-event consumer task referenced by the creator at
+    # 0x45fd4. Ghidra omitted the entry before its literal pool.
+    0x000924F4: 124,
+    # Complete sensor/event consumer task. Ghidra exposed only
+    # LAB_00092580+1; the two zero bytes before the literal pool are alignment.
+    0x00092580: 226,
     # Complete storage worker/task entry. Ghidra exposed only LAB_000926dc+1.
     0x000926DC: 222,
     0x0006B0D4: 58,
@@ -867,6 +1049,21 @@ APP_MANUAL_SUPPLEMENT_EXTENTS.update({
 })
 APP_MANUAL_SUPPLEMENT_EXTENTS.update({
     int(item["entry"]): int(item["size"])
+    for item in R1_NV_COMPILED_RESTORE_FUNCTIONS
+    if item.get("inventory") == "manual_provenance_supplement"
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_SLEEP_SYNC_REPORT_FUNCTIONS
+    if item["inventory"] == "manual_provenance_supplement"
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in NORDIC_GATT_CACHE_CLOSURE_FUNCTIONS
+    if item.get("inventory") == "manual_provenance_supplement"
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
     for item in RTC_DEVICE_FUNCTIONS
 })
 APP_MANUAL_SUPPLEMENT_EXTENTS.update({
@@ -896,6 +1093,104 @@ APP_MANUAL_SUPPLEMENT_EXTENTS.update({
     for item in R1_STRUCTURED_LOG_FUNCTIONS
     if item["inventory"] == "manual_provenance_supplement"
 })
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_FRONTIER_LT32_FUNCTIONS
+    if item.get("inventory") == "manual_provenance_supplement"
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_BUTTONLESS_DFU_EVENT_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_TOUCH_RECOVERY_TIMER_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_I2C5_DELAY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_NORDIC_OMITTED_HAL_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_NORDIC_OMITTED_DELAY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_GPIO_INPUT_IRQ_DISPATCH_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_ADVERTISING_EVENT_POLICY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_GOODIX_OPEN_MODE_POLICY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_PMIC_LATE_INIT_POLICY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_TASK_SUSPEND_POLICY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_STORAGE_TASK_POLICY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_FACTORY_THREAD_CREATOR_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_BAE8_CONNECTION_EVENT_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_GAP_EVENT_POLICY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_NFC_CHARGE_TASK_POLICY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_TASK_TOPOLOGY_STARTUP_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_HR_TIMING_RESULT_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_SPO2_RESULT_CALLBACK_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_FACTORY_ACC_BATTERY_DIAGNOSTIC_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_FACTORY_PMIC_HANDLER_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_YHM2710_TRANSPORT_ENTRY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in R1_REMAINING_EXPLICIT_ENTRY_FUNCTIONS
+})
+APP_MANUAL_SUPPLEMENT_EXTENTS.update({
+    int(item["entry"]): int(item["size"])
+    for item in RESOLVED_THUNKS
+    if item.get("inventory") == "manual_provenance_supplement"
+})
 
 
 # Product behavior already established by the decompilation/audit corpus. This
@@ -907,7 +1202,9 @@ APP_PRODUCT_FUNCTIONS = {
     0x0008A054: "r1_goodix_wear_living_object_update",
     0x00042D28: "r1_pmic_post_timer_callback_plan",
     0x00042D2E: "r1_pmic_post_device_callback_plan",
+    0x00042ED8: "r1_pmic_charge_i2c_callback_plan",
     0x00042EE8: "r1_connection_control_plan_adv_start",
+    0x00045F3C: "r1_factory_input_record_plan_dispatch",
     0x00046F88: "delayed_touch_release",
     0x0004E008: "r1_connection_control_role_sync_thread_flags",
     0x0004B6C0: "gomore_primitives_temperature_measurement_begin",
@@ -915,10 +1212,13 @@ APP_PRODUCT_FUNCTIONS = {
     0x0004BBF0: "gomore_primitives_temperature_measurement_begin",
     0x0004BC40: "gomore_primitives_temperature_measurement_step",
     0x000920EC: "r1_channel1_task_plan_startup",
+    0x00091F54: "r1_ble_task_plan_startup",
     0x00092178: "r1_bae8_input_task_plan_startup",
     0x0009227C: "r1_shared_tx_task_plan_startup",
     0x0009230C: "r1_factory_input_task_plan_startup",
-    0x000926DC: "r1_storage_task_plan_startup",
+    0x000924F4: "r1_system_task_plan_startup",
+    0x00092580: "r1_sensor_task_plan_startup",
+    0x000926DC: "r1_service_task_plan_startup",
     0x00096A60: "r1_pmic_retry_callback_plan",
     0x00031FCC: "r1_battery_runtime_service",
     0x0003DB70: "r1_battery_stuck_charge_recovery",
@@ -1037,9 +1337,43 @@ APP_PRODUCT_FUNCTIONS = {
     0x00082CCE: "r1_hrv_daily_handler",
     0x00082D14: "r1_sleep_daily_handler",
     0x00082D5A: "r1_spo2_daily_handler",
+    0x00082D9E: "r1_sleep_detail_plan",
+    0x00082DBE: "r1_heart_rate_measurement_plan",
+    0x00082DF8: "r1_health_history_noop_handler",
+    0x00082DFA: "r1_spo2_measurement_plan",
     0x00082E34: "r1_heart_rate_point_handler",
     0x00082E66: "r1_hrv_point_handler",
     0x00082E9A: "r1_spo2_point_handler",
+    0x00082ECE: "r1_health_report_setting_plan",
+    0x00050304: "r1_touch_lifecycle_disable_plan",
+    0x00050338: "r1_touch_lifecycle_enable_plan",
+    0x00042860: "r1_health_daily_test_event_valid",
+    0x0004286E: "r1_health_history_event_valid",
+    0x000422C8: "r1_stress_mode_control_plan",
+    0x00042474: "r1_stress_measurement_control_plan",
+    0x0004F30C: "r1_factory_heart_rate_diagnostic_plan",
+    0x0004F378: "r1_factory_hrv_diagnostic_plan",
+    0x0004F914: "r1_factory_spo2_diagnostic_plan",
+    0x0004F980: "r1_factory_temperature_diagnostic_plan",
+    0x0004ED34: "r1_factory_acc_stream_register_plan",
+    0x0004F2BC: "r1_factory_heart_rate_stream_unregister_plan",
+    0x0004F2DC: "r1_factory_heart_rate_stream_register_plan",
+    0x0004F348: "r1_factory_hrv_stream_register_plan",
+    0x0004F8E0: "r1_factory_spo2_stream_register_plan",
+    0x0004F928: "r1_factory_temperature_stream_unregister_plan",
+    0x0004F94C: "r1_factory_temperature_stream_register_plan",
+    0x0004EDDC: "r1_factory_activity_diagnostic_plan_decode",
+    0x0004F040: "r1_factory_periodic_timer_restart_plan_build",
+    0x0004F1C4: "r1_factory_temperature_pair_diagnostic_plan_decode",
+    0x00062D6A: "r1_factory_f2_delayed_reset_plan",
+    0x00062D84: "r1_factory_f2_ppg_mode_plan",
+    0x00062DB0: "r1_factory_f2_marked_ship_mode_plan",
+    0x00062DD4: "r1_factory_f2_ship_mode_plan",
+    0x000625C0: "r1_factory_legacy_command_route_frame",
+    0x0008316C: "r1_eus_ingress_plan_decode",
+    0x00083CA8: "r1_eus_system_dispatch_plan_build",
+    0x00083D04: "r1_connection_control_adv_start_handler_plan_decode",
+    0x00084874: "r1_touch_switch_handler_plan_decode",
     0x00083930: "r1_heart_rate_point_response_wrapper",
     0x00083972: "r1_hrv_point_response_wrapper",
     0x00083028: "r1_ack_resolver",
@@ -1072,6 +1406,10 @@ APP_PRODUCT_FUNCTIONS.update({
 APP_PRODUCT_FUNCTIONS.update({
     int(item["entry"]): str(item["symbol"])
     for item in R1_NV_RECOVERY_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_SLEEP_SYNC_REPORT_FUNCTIONS
 })
 
 APP_PRODUCT_SECURITY_PRESERVING = {
@@ -1162,6 +1500,18 @@ APP_PRODUCT_FUNCTIONS.update({
 APP_PRODUCT_FUNCTIONS.update({
     int(item["entry"]): str(item["symbol"])
     for item in R1_BAE8_EVENT_ROUTER_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_BUTTONLESS_DFU_EVENT_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_TOUCH_RECOVERY_TIMER_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_I2C5_DELAY_FUNCTIONS
 })
 APP_PRODUCT_FUNCTIONS.update({
     int(item["entry"]): str(item["symbol"])
@@ -1283,6 +1633,66 @@ APP_PRODUCT_DATA_MODEL_FUNCTIONS = {
 APP_PRODUCT_FUNCTIONS.update({
     int(item["entry"]): str(item["symbol"])
     for item in R1_BLE_TX_QUEUE_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_GPIO_INPUT_IRQ_DISPATCH_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_ADVERTISING_EVENT_POLICY_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_GOODIX_OPEN_MODE_POLICY_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_PMIC_LATE_INIT_POLICY_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_TASK_SUSPEND_POLICY_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_STORAGE_TASK_POLICY_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_FACTORY_THREAD_CREATOR_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_BAE8_CONNECTION_EVENT_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_GAP_EVENT_POLICY_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_NFC_CHARGE_TASK_POLICY_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_TASK_TOPOLOGY_STARTUP_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_HR_TIMING_RESULT_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_SPO2_RESULT_CALLBACK_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_FACTORY_ACC_BATTERY_DIAGNOSTIC_FUNCTIONS
+})
+APP_PRODUCT_FUNCTIONS.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_FACTORY_PMIC_HANDLER_FUNCTIONS
 })
 
 
@@ -1414,12 +1824,20 @@ APP_YHM2710_STACMD_CANDIDATES = {
 # register-field update over the same single-wire transport. Both remain
 # owner-authorized reconstructed behavior in reconstructed/yhm2710/.
 APP_YHM2710_FRONTIER_CANDIDATES = {
+    0x00035268: "yhm2710_read_register_9",
     0x0003530C: "yhm2710_chip_id_verify",
+    0x0003543C: "yhm2710_clear_system_track",
     0x00035508: "yhm2710_ladder_field_update",
+    0x00050748: "yhm2710_read_register_9",
+    0x0005074C: "yhm2710_clear_system_track",
 }
 APP_YHM2710_FRONTIER_CANDIDATES.update({
     int(item["entry"]): str(item["symbol"]) or _candidate_label(item)
     for item in YHM_FRONTIER_64_127_FUNCTIONS + YHM_FRONTIER_LT32_FUNCTIONS
+})
+APP_YHM2710_FRONTIER_CANDIDATES.update({
+    int(item["entry"]): str(item["symbol"])
+    for item in R1_YHM2710_TRANSPORT_ENTRY_FUNCTIONS
 })
 
 
@@ -1436,6 +1854,7 @@ APP_NORDIC_WDT_ADAPTERS = {
 # SDK formatter remains the provider; only this product-specific prefix seam may
 # be implemented locally.
 APP_NORDIC_ADAPTERS = {
+    0x00054B90: "r1_gpio_input_open_plan_build",
     0x000551E8: "r1_software_twi_i2c_2_shutdown_adapter",
     0x0005520C: "r1_software_twi_i2c_3_shutdown_adapter",
     0x00055230: "r1_software_twi_i2c_4_shutdown_adapter",
@@ -1479,6 +1898,7 @@ APP_INTERNAL_FLASH_ADAPTERS.update({
 # around Nordic's unmodified nrfx_saadc provider. No generic stock registry or
 # Nordic driver body is recreated locally.
 APP_ANALOG_ADAPTERS = {
+    0x000547F4: "r1_analog_close_plan_build",
     0x00054864: "r1_saadc_device_lookup_and_channel_configuration",
     0x000548F0: "r1_saadc_named_sample_adapter",
     0x0005493C: "r1_saadc_record_registration",
@@ -1502,6 +1922,9 @@ APP_UNKNOWN_DEVICE_REGISTRY_CANDIDATES = {
     0x00085DA8: "device_operation_dispatch_slot_14",
 }
 APP_UNKNOWN_DEVICE_REGISTRY_CANDIDATES.update({
+    0x00044BE0: "generic_device_registry_bus_read_command_ae",
+    0x00050510: "generic_device_registry_bus_control_dispatch",
+    0x00050534: "generic_device_registry_bus_transfer_dispatch",
     0x0005DB14: "device_registry_name_task_insert",
     0x000734E8: "device_registry_module_enabled_scan",
 })
@@ -1622,6 +2045,14 @@ APP_NORDIC_SYMBOLS = {
     **APP_NORDIC_BUTTONLESS_DFU_SYMBOLS,
     **APP_NORDIC_POWER_MANAGEMENT_SYMBOLS,
     **APP_NORDIC_SAADC_DRIVER_SYMBOLS,
+    **{
+        int(function["entry"]): str(function["symbol"])
+        for function in R1_NORDIC_OMITTED_HAL_FUNCTIONS
+    },
+    **{
+        int(function["entry"]): str(function["symbol"])
+        for function in R1_NORDIC_OMITTED_DELAY_FUNCTIONS
+    },
     **{
         int(function["entry"]): str(function["symbol"])
         for function in NORDIC_SYSTEM_INIT_FUNCTIONS
@@ -1900,7 +2331,7 @@ APP_NORDIC_SYMBOLS = {
     0x000880AC: "record_header_flag_dirty",
     0x000880E8: "records_stat",
     0x000883F8: "rmap",
-    0x000890CC: "service_changed_send_in_evt",
+    0x000890CC: "sc_send_pending_handle",
     0x00089148: "sdh_request_observer_notify",
     0x00089178: "sdh_state_observer_notify",
     0x000892F4: "sec_keyset_fill",
@@ -1966,6 +2397,14 @@ APP_NORDIC_SOURCES = {
     **APP_NORDIC_BUTTONLESS_DFU_SOURCES,
     **APP_NORDIC_POWER_MANAGEMENT_SOURCES,
     **APP_NORDIC_SAADC_DRIVER_SOURCES,
+    **{
+        int(function["entry"]): str(function["source"])
+        for function in R1_NORDIC_OMITTED_HAL_FUNCTIONS
+    },
+    **{
+        int(function["entry"]): str(function["source"])
+        for function in R1_NORDIC_OMITTED_DELAY_FUNCTIONS
+    },
     **{
         int(function["entry"]): str(function["source"])
         for function in NORDIC_SYSTEM_INIT_FUNCTIONS
@@ -2488,6 +2927,7 @@ APP_CMSIS_FREERTOS_SYMBOLS = {
 # contains product algorithms, Nordic storage, Bosch, FlashDB, and other code;
 # range membership is therefore never accepted as provider evidence.
 APP_FREERTOS_EXACT_SYMBOLS = {
+    0x0007D2A0: "xTaskGetTickCount",
     0x00027218: "vPortSVCHandler",
     0x00027238: "vPortStartFirstTask",
     0x0002725C: "xPortPendSVHandler",
@@ -2601,6 +3041,7 @@ APP_FREERTOS_EXACT_SYMBOLS = {
 }
 
 APP_FREERTOS_EXACT_SOURCES = {
+    0x0007D2A0: "external/freertos/source/tasks.c",
     0x00027218: "external/freertos/portable/GCC/nrf52/port.c",
     0x00027238: "external/freertos/portable/GCC/nrf52/port.c",
     0x0002725C: "external/freertos/portable/GCC/nrf52/port.c",
@@ -2851,6 +3292,7 @@ APP_LIS2DW12_SYMBOLS = {
 
 
 APP_LIS2DW12_ADAPTERS = {
+    0x00075290: "r1_lis2dw12_double_tap_enable_plan_build",
     0x000750A0: "r1_lis2dw12_accel_burst_read",
     0x000750E8: "r1_lis2dw12_fifo_read",
     0x0007518A: "r1_lis2dw12_register_0x17_setup",
@@ -2969,6 +3411,9 @@ APP_QMA6100_PROVIDER_SYMBOLS = {
 # bodies to independently compiled C under r1/reconstructed/.
 APP_GXT310_RECONSTRUCTED_SYMBOLS = {
     0x00050F9C: "gxt310_enable_pair",
+    0x0006F600: "gxt310_read_temperature_milliunits",
+    0x0006F648: "gxt310_switch_mode",
+    0x0006F738: "gxt310_trigger_one_shot",
     0x0006F804: "gxt310_channel_0_switch_mode",
     0x0006F818: "gxt310_channel_0_trigger_one_shot",
     0x0006F81E: "gxt310_channel_2_switch_mode",
@@ -4257,6 +4702,12 @@ APP_IQS7211E_ADAPTERS = {
     0x0002FE9C: "r1_iqs7211e_register_read_port",
     0x0002FEAC: "r1_iqs7211e_register_write_port",
     0x00030E6C: "r1_iqs7211e_irq_worker",
+    0x0004FA8C: "r1_iqs7211e_factory_marker_1",
+    0x0004FAA8: "r1_iqs7211e_factory_marker_2",
+    0x0004FAC4: "r1_iqs7211e_factory_marker_3",
+    0x0004FAE4: "r1_iqs7211e_factory_marker_4",
+    0x0004FB04: "r1_iqs7211e_factory_marker_5",
+    0x0004FB24: "r1_iqs7211e_factory_marker_6",
     **{
         int(item["entry"]): str(item["symbol"])
         for item in R1_TOUCH_TASK_DISPATCHER_FUNCTIONS
@@ -4281,10 +4732,12 @@ APP_ST25DVXXKC_SYMBOLS = {
     0x00031BF4: "ST25DVxxKC_GetMB_CTRL_DYN_ALL",
     0x00031C0A: "ST25DVxxKC_GetFTM_MBMODE",
     0x00031C26: "ST25DVxxKC_Init",
+    0x00031C56: "ST25DVxxKC_PresentI2CPassword",
     0x00031CA4: "ST25DVxxKC_IsDeviceReady",
     0x00031CB6: "ST25DVxxKC_ReadI2CSecuritySession_Dyn",
     0x00031CD2: "ST25DVxxKC_ReadID",
     0x00031D36: "ST25DVxxKC_ReadMBMode",
+    0x00031D52: "ST25DVxxKC_ReadMailboxData",
     0x00031D78: "ST25DVxxKC_ReadReg",
     0x00031D88: "ST25DVxxKC_RegisterBusIO",
     0x00031DC8: "ST25DVxxKC_ResetEHENMode_Dyn",
@@ -4310,9 +4763,21 @@ APP_ST25DVXXKC_SYMBOLS = {
 # length above the 20-byte product buffer before calling the upstream driver.
 APP_ST25DVXXKC_ADAPTERS = {
     0x00044BEC: "r1_st25dvxxkc_bus_registration",
+    0x00044C58: "r1_st25dvxxkc_bus_tick_get",
+    0x00044C64: "r1_st25dvxxkc_bus_deinitialize",
+    0x00044C6E: "r1_st25dvxxkc_bus_initialize",
+    0x00044C78: "r1_st25dvxxkc_bus_is_ready",
+    0x00044C84: "r1_st25dvxxkc_bus_read",
+    0x00044C8A: "r1_st25dvxxkc_bus_write",
     0x00044C90: "r1_st25dvxxkc_password_present",
     0x00044C9C: "r1_st25dvxxkc_security_session",
     0x00044CE8: "r1_st25dvxxkc_gpo_configuration",
+    0x00077250: "r1_st25dvxxkc_dock_hardware_clear",
+    0x0007725C: "r1_st25dvxxkc_dock_version_clear",
+    0x00077268: "r1_st25dvxxkc_dock_hardware_get",
+    0x00077274: "r1_st25dvxxkc_dock_version_get",
+    0x00077290: "r1_st25dvxxkc_charge_temperature_set",
+    0x0007729C: "r1_st25dvxxkc_dock_advertising_set",
     0x00077764: "r1_st25dvxxkc_initialize_configuration",
     0x00077BE0: "r1_st25dvxxkc_bounded_mailbox_receive",
     0x00077C50: "r1_st25dvxxkc_identity_log_adapter",
@@ -4355,7 +4820,7 @@ APP_VENDOR_MARKERS = [
      "Function references GXCAS GXT310-specific temperature-sensor variants, addresses, configuration, or diagnostics; exact provider-source lineage and license are unresolved."),
     ("yhmicros_yhm2710_candidate", re.compile(r"YHM2710", re.I),
      "clean_room_reimplementation_owner_authorized",
-     "Function references YHMICROS YHM2710-specific identification, configuration, or diagnostics. The exact vendor source remains unlicensed; the complete 36-entry closure is independently reconstructed in reconstructed/yhm2710 under the owner-authorized full-reduction policy."),
+     "Function references YHMICROS YHM2710-specific identification, configuration, or diagnostics. The exact vendor source remains unlicensed; the complete 44-entry closure is independently reconstructed in reconstructed/yhm2710 under the owner-authorized full-reduction policy."),
     ("bosch_bma456_candidate", re.compile(r"BMA456", re.I),
      "resolve_provider_before_implementation",
      "Function references BMA456-specific data or diagnostics; distinguish Bosch driver from R1 adapter before implementation."),
@@ -4462,7 +4927,7 @@ def classify_application(raw: dict[str, str], block: str) -> dict[str, str]:
             upstream_symbol=APP_GXT310_RECONSTRUCTED_SYMBOLS[entry],
             confidence="high",
             evidence=(
-                "Owner-authorized full reduction of the five-function GXT310 "
+                "Owner-authorized full reduction of the eight-function GXT310 "
                 "closure from SHA-pinned decompilation evidence; independently "
                 "compiled C in reconstructed/gxt310/, not vendor source."
             ),
@@ -5568,12 +6033,14 @@ def build() -> tuple[list[dict[str, str]], dict[str, object]]:
     app_entries = {int(raw["entry"], 16) for raw in app_raw}
     supplement_symbols = {
         **APP_PRODUCT_FUNCTIONS,
+        **APP_PRODUCT_SECURITY_PRESERVING,
         **APP_NORDIC_SYMBOLS,
         **FLASHDB_SYMBOLS,
         **APP_SEGGER_RTT_SYMBOLS,
         **APP_SEGGER_FPRINTF_SYMBOLS,
         **APP_TOOLCHAIN_RUNTIME_SYMBOLS,
         **APP_TOOLCHAIN_RUNTIME_INTERNALS,
+        **APP_FREERTOS_EXACT_SYMBOLS,
         **{
             entry: "gomore_audit_" + "_".join(groups)
             for entry, groups in APP_GOMORE_AUDIT_FUNCTIONS.items()
@@ -5584,14 +6051,22 @@ def build() -> tuple[list[dict[str, str]], dict[str, object]]:
         **APP_QMA6100_ADAPTERS,
         **APP_INTERNAL_FLASH_ADAPTERS,
         **APP_ANALOG_ADAPTERS,
+        **APP_NORDIC_ADAPTERS,
         **APP_NORDIC_SAADC_DRIVER_SYMBOLS,
         **APP_NORDIC_CMSIS_ADAPTERS,
         **APP_DEVICE_REGISTRY_CONFIGURATION_ADAPTERS,
+        **APP_IQS7211E_ADAPTERS,
+        **APP_LIS2DW12_ADAPTERS,
+        **APP_ST25DVXXKC_SYMBOLS,
+        **APP_ST25DVXXKC_ADAPTERS,
+        **APP_UNKNOWN_DEVICE_REGISTRY_CANDIDATES,
         **APP_UNKNOWN_SOFTWARE_TWI_CANDIDATES,
         **APP_UNKNOWN_RTC_DEVICE_CANDIDATES,
         **APP_UNKNOWN_QUANTIZED_NEURAL_RUNTIME_CANDIDATES,
         **APP_SENSOR_ALGORITHM_HEAP_BOUNDARY,
         **APP_YHM2710_STACMD_CANDIDATES,
+        **APP_YHM2710_FRONTIER_CANDIDATES,
+        **APP_GXT310_RECONSTRUCTED_SYMBOLS,
         **APP_NORDIC_WDT_ADAPTERS,
         **APP_GOODIX_EXACT_CANDIDATES,
     }

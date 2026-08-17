@@ -1,9 +1,9 @@
 # G2 documentation
 
-Five reference documents and 502 per-closure audits. This file says which to
+Seven reference documents and 502 per-closure audits. This file says which to
 read for what.
 
-## The five reference documents
+## The reference documents
 
 | Document | Answers |
 | --- | --- |
@@ -11,6 +11,8 @@ read for what.
 | [`memory-map.md`](memory-map.md) | *where does everything live?* — recovered flash and RAM layout |
 | [`upstream-inventory.md`](upstream-inventory.md) | *what is attributable to an upstream, and what is still open?* — the attribution queue and configuration gaps |
 | [`linux-reproducible-build.md`](linux-reproducible-build.md) | *how do I reproduce the pinned builds off macOS?* |
+| [`transparent-source.md`](transparent-source.md) | *what is every byte of the image made of?* — the Ghidra-to-source pipeline, and what it deliberately does not establish |
+| [`transparent-source-ledger.md`](transparent-source-ledger.md) | the measured result of the above, regenerated from the build |
 | [`progress.md`](progress.md) | *how did we get here?* — running narrative of the reconstruction |
 
 The first four are **SHA-256 pinned** by

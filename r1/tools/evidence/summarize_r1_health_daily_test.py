@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pin the dormant R1 health-daily synthetic-data test fixture."""
+"""Pin the R1 health-daily synthetic-data test fixture and event-15 gate."""
 
 from __future__ import annotations
 
@@ -26,6 +26,14 @@ R1_HEALTH_DAILY_TEST_FUNCTIONS = ({
     "source_disposition": "clean_room_behavior_only",
 },)
 
+R1_HEALTH_DAILY_TEST_GATE = {
+    "entry": 0x00042860,
+    "end_exclusive": 0x0004286E,
+    "size": 14,
+    "symbol": "r1_health_daily_test_event_valid",
+    "sha256": "6b65c9e2c9e103d6d16da41f0d7d0d5eb9c1c249ae4aca2d1a44af826a133fcc",
+}
+
 
 def summarize(path: Path) -> dict[str, object]:
     image = path.read_bytes()
@@ -40,25 +48,41 @@ def summarize(path: Path) -> dict[str, object]:
     if len(body) != function["size"] or \
             hashlib.sha256(body).hexdigest() != function["sha256"]:
         raise ValueError("R1 health-daily test fixture changed")
+    gate = image[
+        R1_HEALTH_DAILY_TEST_GATE["entry"] - LOAD_BASE:
+        R1_HEALTH_DAILY_TEST_GATE["end_exclusive"] - LOAD_BASE
+    ]
+    if len(gate) != R1_HEALTH_DAILY_TEST_GATE["size"] or \
+            hashlib.sha256(gate).hexdigest() != R1_HEALTH_DAILY_TEST_GATE["sha256"]:
+        raise ValueError("R1 health-daily event-15 gate changed")
     return {
-        "analysis": "R1 health-daily synthetic-data test fixture",
+        "analysis": "R1 health-daily synthetic-data test fixture and event-15 gate",
         "image_sha256": digest,
-        "function_count": 1,
-        "function_bytes": len(body),
+        "function_count": 2,
+        "function_bytes": len(body) + len(gate),
         "entry": "0x0008b378",
+        "event_gate": {
+            "entry": "0x00042860",
+            "end_exclusive": "0x0004286e",
+            "size": len(gate),
+            "sha256": hashlib.sha256(gate).hexdigest(),
+            "required_payload_length": 9,
+            "requires_non_null_payload": True,
+        },
         "segments": [
             {"start": f"0x{start:08x}", "end_exclusive": f"0x{end:08x}",
              "size": end - start}
             for start, end in function["segments"]
         ],
-        "direct_callers": [],
+        "direct_callers": ["0x00042860"],
         "behavior": {
             "input_types": {"0": "heart rate", "1": "SpO2", "2": "temperature"},
             "maximum_hours": 24,
             "hour_seconds": 3600,
             "writes_random_synthetic_samples": True,
             "prints_complete_24_hour_record": True,
-            "production_reachability_proven": False,
+            "internal_event_reachability_proven": True,
+            "openr1_live_execution_available": False,
         },
         "ownership": {
             "provider_family": "r1_product_specific",

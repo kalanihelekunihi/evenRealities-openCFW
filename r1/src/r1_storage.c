@@ -364,6 +364,36 @@ r1_error r1_sleep_sync_plan_acknowledgement(
     return R1_OK;
 }
 
+/* Recovered stored-sleep iterator/report callback policy. Header inspection,
+ * compact-packet expansion, logging, allocation, BLE transport, and ACK
+ * registration remain external. */
+r1_error r1_sleep_sync_plan_report_callback(
+    bool context_present, uint8_t synchronization_flag,
+    uint8_t report_type, uint16_t stage_count,
+    r1_sleep_sync_report_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_sleep_sync_report_plan){
+        .context_present = context_present,
+    };
+    if (!context_present) {
+        return R1_OK;
+    }
+
+    plan->callback_result = true;
+    if (synchronization_flag == 1u) {
+        plan->skip_synchronized_record = true;
+        return R1_OK;
+    }
+
+    plan->invoke_packet_builder = true;
+    plan->report_type = report_type;
+    plan->stage_count = stage_count;
+    plan->model_identifier = R1_SLEEP_SYNC_MODEL_IDENTIFIER;
+    return R1_OK;
+}
+
 r1_error r1_fds_plan_event(
     uint8_t provider_event_id, uint32_t provider_result,
     uint16_t record_key, uint32_t record_id, bool metadata_validated,
@@ -435,22 +465,74 @@ r1_error r1_storage_task_plan_startup(
         return R1_OK;
     }
     static const r1_storage_task_startup_action actions[] = {
-        R1_STORAGE_TASK_HARDWARE_INITIALIZE,
-        R1_STORAGE_TASK_HEALTH_DATABASE_START,
-        R1_STORAGE_TASK_HEART_RATE_CACHE_REFRESH,
-        R1_STORAGE_TASK_SPO2_CACHE_REFRESH,
-        R1_STORAGE_TASK_TEMPERATURE_CACHE_REFRESH,
-        R1_STORAGE_TASK_STRESS_CACHE_REFRESH,
-        R1_STORAGE_TASK_ACTIVITY_CACHE_REFRESH,
-        R1_STORAGE_TASK_SLEEP_DATABASE_START,
-        R1_STORAGE_TASK_HRV_CACHE_REFRESH,
-        R1_STORAGE_TASK_PROTOCOL_STATE_RESET,
+        R1_STORAGE_TASK_BACKEND_INITIALIZE,
+        R1_STORAGE_TASK_SCHEDULE_DELAYED_EVENT,
     };
     for (size_t index = 0u;
          index < R1_STORAGE_TASK_STARTUP_ACTION_COUNT; ++index) {
         plan->actions[index] = actions[index];
     }
     plan->action_count = R1_STORAGE_TASK_STARTUP_ACTION_COUNT;
+    return R1_OK;
+}
+
+r1_error r1_service_task_plan_startup(
+    bool queue_created, r1_service_task_startup_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_service_task_startup_plan){
+        .queue_create_failed = !queue_created,
+        .enter_fail_stop = !queue_created,
+        .queue_capacity = R1_SERVICE_TASK_QUEUE_CAPACITY,
+        .queue_record_bytes = R1_SERVICE_TASK_RECORD_BYTES,
+        .sync_group = R1_SERVICE_TASK_SYNC_GROUP,
+        .registry_name = "service",
+        .watchdog_ticks = R1_SERVICE_TASK_WATCHDOG_TICKS,
+    };
+    if (!queue_created) {
+        return R1_OK;
+    }
+    static const r1_service_task_startup_action actions[] = {
+        R1_SERVICE_TASK_HARDWARE_INITIALIZE,
+        R1_SERVICE_TASK_HEALTH_DATABASE_START,
+        R1_SERVICE_TASK_HEART_RATE_CACHE_REFRESH,
+        R1_SERVICE_TASK_SPO2_CACHE_REFRESH,
+        R1_SERVICE_TASK_TEMPERATURE_CACHE_REFRESH,
+        R1_SERVICE_TASK_STRESS_CACHE_REFRESH,
+        R1_SERVICE_TASK_ACTIVITY_CACHE_REFRESH,
+        R1_SERVICE_TASK_SLEEP_DATABASE_START,
+        R1_SERVICE_TASK_HRV_CACHE_REFRESH,
+        R1_SERVICE_TASK_PROTOCOL_STATE_RESET,
+    };
+    for (size_t index = 0u;
+         index < R1_SERVICE_TASK_STARTUP_ACTION_COUNT; ++index) {
+        plan->actions[index] = actions[index];
+    }
+    plan->action_count = R1_SERVICE_TASK_STARTUP_ACTION_COUNT;
+    return R1_OK;
+}
+
+r1_error r1_service_task_plan_flags(
+    uint32_t flags, r1_service_task_flag_plan *plan) {
+    if (plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *plan = (r1_service_task_flag_plan){
+        .observed_flags = flags,
+        .provider_wait_error = flags == 0u || (flags & UINT32_C(0x80000000)) != 0u,
+        .dispatch_event_record =
+            (flags & R1_SERVICE_TASK_DISPATCH_FLAG) != 0u,
+        .signal_suspend = (flags & R1_SERVICE_TASK_SUSPEND_FLAG) != 0u,
+        .enter_suspend_wait = (flags & R1_SERVICE_TASK_SUSPEND_FLAG) != 0u,
+        .wait_again = (flags & R1_SERVICE_TASK_SUSPEND_FLAG) == 0u,
+    };
+    if (plan->provider_wait_error) {
+        plan->dispatch_event_record = false;
+        plan->signal_suspend = false;
+        plan->enter_suspend_wait = false;
+        plan->wait_again = true;
+    }
     return R1_OK;
 }
 

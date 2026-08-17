@@ -1,6 +1,6 @@
 # G2 tools
 
-378 Python scripts sit in this directory. Four of them are things you run; the
+383 Python scripts sit in this directory. Nine of them are things you run; the
 rest are evidence producers named by what they analyze. This file is the map.
 
 ## Entry points
@@ -13,6 +13,16 @@ These are the ones you invoke directly.
 | [`apollo_overlay.py`](apollo_overlay.py) | compile an Apollo source overlay from a component's `overlay.json` and place it byte-exactly |
 | [`detect_toolchain.py`](detect_toolchain.py) | resolve the reviewed compiler profile for this host (`make toolchain` prints the result) |
 | [`verify_research_corpus.py`](verify_research_corpus.py) | authenticate [`../research/`](../research) against its delivered manifests |
+| [`harvest_ghidra_decomp.py`](harvest_ghidra_decomp.py) | export every function's decompilation from an analyzed Ghidra project (`make transparent-harvest`) |
+| [`build_transparent_function_db.py`](build_transparent_function_db.py) | reconcile the harvest, the census, the function maps and the overlay into one address-keyed database (`make transparent-db`) |
+| [`generate_transparent_source.py`](generate_transparent_source.py) | turn that database into a compilable C codebase (`make transparent-source`) |
+| [`build_transparent_image.py`](build_transparent_image.py) | link the generated codebase into an Apollo image with no opaque spans (`make transparent-image`) |
+| [`report_transparent_coverage.py`](report_transparent_coverage.py) | write the coverage ledger that separates recovered from declared from trapped (`make transparent-ledger`) |
+
+The last five are the transparent-source pipeline; they are the only scripts
+here that *write* source rather than read evidence. What they establish, and
+what they deliberately do not, is in
+[`../docs/transparent-source.md`](../docs/transparent-source.md).
 
 `open_cfw.py` and `apollo_overlay.py` are pinned **by path** in the vendored
 snapshots' production-exclusion gates. They cannot move.

@@ -34,6 +34,41 @@ void gxt310_provider_initialize(gxt310_provider *provider,
     provider->write_context = write_context;
     provider->failure = failure;
     provider->failure_context = failure_context;
+    provider->read = NULL;
+    provider->read_context = NULL;
+}
+
+void gxt310_provider_bind_read(gxt310_provider *provider,
+                               gxt310_read_fn read,
+                               void *read_context) {
+    if (provider != NULL) {
+        provider->read = read;
+        provider->read_context = read_context;
+    }
+}
+
+uint32_t gxt310_read_temperature_milliunits(gxt310_provider *provider,
+                                            uint8_t address,
+                                            int32_t *milliunits) {
+    if (milliunits == NULL) {
+        return GXT310_STATUS_FAILURE;
+    }
+    *milliunits = 0;
+    if (provider == NULL || provider->read == NULL ||
+        !address_valid(address)) {
+        return GXT310_STATUS_FAILURE;
+    }
+    uint8_t bytes[GXT310_COMMAND_BYTES] = {0u, 0u};
+    if (!provider->read(provider->read_context, address, UINT16_C(0),
+                        bytes, sizeof(bytes))) {
+        return GXT310_STATUS_FAILURE;
+    }
+    const uint16_t packed = (uint16_t)((uint16_t)bytes[0] << 8u) |
+                            (uint16_t)bytes[1];
+    const int16_t sample = (int16_t)packed;
+    /* Exact stock scale: sample * (1/128) * 1000, truncated toward zero. */
+    *milliunits = ((int32_t)sample * INT32_C(1000)) / INT32_C(128);
+    return GXT310_STATUS_SUCCESS;
 }
 
 uint32_t gxt310_switch_mode(gxt310_provider *provider, uint8_t address,

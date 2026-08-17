@@ -127,6 +127,23 @@ Useful targets:
 ./make.sh clean
 ```
 
+There is also a second, independent profile:
+
+```sh
+make -C g2 transparent
+```
+
+`transparent` does not extend the byte-exact reconstruction above. It builds an
+Apollo main image in which every byte has a source unit behind it — recovered
+code compiled from the Ghidra corpus, declared data arrays, or an explicit trap
+where nothing was established — and reports what it did and did not establish.
+The resulting image is **not known to run**: decompiler output is recovered
+structure, not reviewed behavior. Read
+[`docs/transparent-source.md`](docs/transparent-source.md) before drawing any
+conclusion from it, and
+[`docs/transparent-source-ledger.md`](docs/transparent-source-ledger.md) for the
+measured result.
+
 `vendor-snapshots` verifies the pinned TLSF, EasyLogger, littlefs,
 FreeRTOS-Kernel, AmbiqSuite Apollo510, Arm CMSIS Core, CMSIS-FreeRTOS, LZ4,
 FreeType, FlashDB, CmBacktrace, nanopb, Packetcraft Cordio,

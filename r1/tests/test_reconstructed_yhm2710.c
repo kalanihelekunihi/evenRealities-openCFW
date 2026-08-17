@@ -207,12 +207,21 @@ void test_reconstructed_yhm2710(void) {
     assert(yhm2710_charge_state(&chip) == 1u);
 
     trace.registers[1] = UINT8_C(0x1F);
+    trace.registers[9] = UINT8_C(0x5A);
+    uint8_t register_9 = 0u;
+    assert(yhm2710_read_register_9(&chip, &register_9));
+    assert(register_9 == UINT8_C(0x5A));
     assert(yhm2710_set_ladder(&chip, 4.016f) == 1u);
     assert(trace.registers[1] == UINT8_C(0x3F));
     assert(yhm2710_set_ladder(&chip, 14.06f) == 2u);
     assert(trace.registers[1] == UINT8_C(0x5F));
     assert(yhm2710_set_system_track(&chip));
     assert((trace.registers[1] & UINT8_C(2)) != 0u);
+    assert(yhm2710_clear_system_track(&chip));
+    assert((trace.registers[1] & UINT8_C(2)) == 0u);
+    trace.registers[3] = UINT8_C(0x42);
+    assert(yhm2710_set_charging_event(&chip));
+    assert(trace.registers[3] == UINT8_C(0x4a));
     assert(yhm2710_set_shared_power_active(&chip));
     assert(trace.registers[2] == UINT8_C(0xA8));
     assert(yhm2710_set_shared_power_inactive(&chip));

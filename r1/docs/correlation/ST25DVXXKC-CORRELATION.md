@@ -3,8 +3,8 @@
 ## Decision
 
 R1 firmware `2.2.6.0009` contains an STMicroelectronics ST25DVxxKC dynamic-NFC-tag
-driver. Twenty-seven recovered functions belong to ST's provider boundary and must be
-compiled from the pinned BSD-3-Clause upstream component. Eleven adjacent functions are
+driver. Twenty-nine recovered functions belong to ST's provider boundary and must be
+compiled from the pinned BSD-3-Clause upstream component. Twenty-three adjacent functions are
 R1-specific board or policy adapters and are the only NFC functions in this reviewed
 cluster eligible for local clean-room implementation.
 
@@ -24,10 +24,12 @@ the exact checkout originally used by R1 has not been uniquely proven.
 | `0x00031BF4` | `ST25DVxxKC_GetMB_CTRL_DYN_ALL` | dynamic mailbox-control byte |
 | `0x00031C0A` | `ST25DVxxKC_GetFTM_MBMODE` | mailbox-mode bit extraction |
 | `0x00031C26` | `ST25DVxxKC_Init` | IC reference `0x50/0x51` and init state |
+| `0x00031C56` | `ST25DVxxKC_PresentI2CPassword` | exact 17-byte password/validation-code frame and register `0x0900` |
 | `0x00031CA4` | `ST25DVxxKC_IsDeviceReady` | IO readiness callback and tag address |
 | `0x00031CB6` | `ST25DVxxKC_ReadI2CSecuritySession_Dyn` | dynamic security-session read |
 | `0x00031CD2` | `ST25DVxxKC_ReadID` | object wrapper over IC-reference register `0x17` |
 | `0x00031D36` | `ST25DVxxKC_ReadMBMode` | mailbox-mode register read |
+| `0x00031D52` | `ST25DVxxKC_ReadMailboxData` | maximum offset 256 and mailbox base `0x2008` |
 | `0x00031D78` | `ST25DVxxKC_ReadReg` | exact BSim similarity `1.0` |
 | `0x00031D88` | `ST25DVxxKC_RegisterBusIO` | complete IO callback-table assignment |
 | `0x00031DC8` | `ST25DVxxKC_ResetEHENMode_Dyn` | dynamic energy-harvesting reset |
@@ -50,14 +52,78 @@ Every entry, size, and recovered body SHA-256 is enforced by
 The raw 31,776-row comparison and its independent hashes are in
 [`generated/st25dvxxkc-source-correlation/README.md`](../README.md).
 
+The two new exact starts are independently bounded tail targets. The `0x00044C90` legacy row
+loads the fixed R1 object and tail-branches to the 78-byte password presenter at `0x00031C56`;
+the `0x00077CF0` legacy row does the same for the 38-byte mailbox reader at `0x00031D52`.
+Both targets have their own prologue and return and reproduce the pinned BSD provider functions,
+so the ledger now owns them separately instead of accepting the legacy noncontiguous span.
+Their body SHA-256 values are respectively
+`584479be5f22628424ca82235f167069063d134e057e37ebf3737b099156886e` and
+`9da42db6e851a04174232c5df737888b813f01b4e341fc558e9c08c8c59f8c6b`.
+
+## Authenticated R1 bus-IO callback table
+
+The literal table at `0x00044C34` contains the six odd Thumb pointers in the exact
+`ST25DVxxKC_IO_t` field order from the pinned upstream header: `Init`, `DeInit`,
+`IsReady`, `Read`, `Write`, and `GetTick`. The registration function at
+`0x00044BEC` installs that complete table. Independent disassembly of the rebuilt
+application authenticates each callback as a contiguous function:
+
+| IO field | Stock extent | Bytes | Body SHA-256 | Transparent C symbol |
+| --- | --- | ---: | --- | --- |
+| `Init` | `0x00044C6E..<0x00044C78` | 10 | `378533c2312d3aa997953218f921e56e6d82c563759485194f425adfa90c695e` | `r1_st25dvxxkc_bus_initialize` |
+| `DeInit` | `0x00044C64..<0x00044C6E` | 10 | `8b7848ac566af13545e7c0ca052a08264dc3a9288942aa275f34e827fc2cab7c` | `r1_st25dvxxkc_bus_deinitialize` |
+| `IsReady` | `0x00044C78..<0x00044C84` | 12 | `7c8d31605621bc9f7adc17e70c7b5f74f8b1f5d27bcb0442c513fb7f12c5604c` | `r1_st25dvxxkc_bus_is_ready` |
+| `Read` | `0x00044C84..<0x00044C8A` | 6 | `030026b653096676e0a1e42ef849033b09a3312468389e5824d859449eb37404` | `r1_st25dvxxkc_bus_read` |
+| `Write` | `0x00044C8A..<0x00044C90` | 6 | `3bbff11ae7fbd405ae5aaf1d4b32ea5cc2eaa8c23b34e3434c0c935076b3c1f0` | `r1_st25dvxxkc_bus_write` |
+| `GetTick` | `0x00044C58..<0x00044C5E` | 6 | `579f66b93cd2bbcb53693929db18e36025cdc6e5d94aa3e7590989e1d8a117b1` | `r1_st25dvxxkc_bus_tick_get` |
+
+The read/write veneers truncate the device address to eight bits, as the stock
+`uxtb` instructions do. `IsReady` delays for ten ticks and returns success; init
+and deinit acquire/release the recovered `i2c_5` resource. The clean-room API
+fails closed when one of those typed providers is absent rather than dereferencing
+an unbound stock callback.
+
+## Authenticated charging-dock state helpers
+
+Six further script-created entries form a compact R1 product-state API used by
+the recovered factory commands. They operate on the byte fields rooted at stock
+address `0x20006858` and the 11-byte dock-version buffer at `0x20006864`; the
+clean-room implementation moves that state into `r1_st25dvxxkc_dock_state`.
+
+| Stock extent | Bytes | Body SHA-256 | Transparent behavior |
+| --- | ---: | --- | --- |
+| `0x00077250..<0x00077258` | 8 | `b1f2be62466b2e568a7b60fa3e04186116d2e80759e8dfd862045d14c8d4c0ca` | clear dock-hardware byte |
+| `0x0007725C..<0x00077264` | 8 | `167416acc38887c21d902ff6d88f6e27317bfc38bfe9eae44df370934d033188` | clear all 11 dock-version bytes |
+| `0x00077268..<0x0007726E` | 6 | `3c0a2c335e8fcf80c4100a66f61a44a70183c0c30be0a8749f802571f9a6902e` | read dock-hardware byte |
+| `0x00077274..<0x0007728A` | 22 | `2aea8b96b3cc9a764ebc460e79864f0dd8e1b481984679d25b5b8a9ba67ba2c0` | return version pointer and byte length |
+| `0x00077290..<0x00077296` | 6 | `2e9cd305fe6b02a0dab2e3f8d223d6c3eb0961e10d18c0f961bb0dd9a567f4a5` | store factory charge-temperature byte |
+| `0x0007729C..<0x000772A2` | 6 | `0594a3e6604c4c62a70819ee5094ceab26fb2eb8fbb5280fd4b92fff602100ce` | store dock-advertising enable byte |
+
+The stock version getter calls unbounded `strlen` and truncates the result to a
+byte. OpenR1 bounds the scan to the proven 11-byte buffer and returns NULL for
+invalid state/length pointers; this is deliberate memory-safety hardening.
+
 ## R1-owned adapters
 
 | R1 entry | Clean-room boundary |
 | --- | --- |
+| `0x00044C58` | `ST25DVxxKC_IO_t.GetTick` board tick callback |
+| `0x00044C64` | `ST25DVxxKC_IO_t.DeInit` / `i2c_5` resource release |
+| `0x00044C6E` | `ST25DVxxKC_IO_t.Init` / `i2c_5` resource acquire |
+| `0x00044C78` | `ST25DVxxKC_IO_t.IsReady` ten-tick readiness delay |
+| `0x00044C84` | `ST25DVxxKC_IO_t.Read` address-truncating bus veneer |
+| `0x00044C8A` | `ST25DVxxKC_IO_t.Write` address-truncating bus veneer |
 | `0x00044BEC` | nRF52 bus registration and provider initialization |
 | `0x00044C90` | product password presentation/write policy |
 | `0x00044C9C` | security-session state management |
 | `0x00044CE8` | product GPO configuration, retry, and logging |
+| `0x00077250` | charging-dock hardware-state clear |
+| `0x0007725C` | 11-byte charging-dock version clear |
+| `0x00077268` | charging-dock hardware-state getter |
+| `0x00077274` | bounded charging-dock version getter |
+| `0x00077290` | factory charge-temperature state setter |
+| `0x0007729C` | dock-advertising state setter |
 | `0x00077764` | NFC initialization and recovered product configuration orchestration |
 | `0x00077BE0` | bounded mailbox receive and product message dispatch |
 | `0x00077C50` | product identity read/log adapter |
@@ -120,16 +186,12 @@ raw register API, mailbox writer, or custom NFC action surface is exposed.
 
 ## Verification status
 
-Verified through 2026-08-13:
+Verified through 2026-08-16:
 
 - strict host tests, AddressSanitizer/UndefinedBehaviorSanitizer, and freestanding Cortex-M4
   compilation pass;
-- the complete verifier reconciles the coverage ledger with 202 audit rows and source-gates
-  3,165 recovered functions, with 795 still unclassified, nine isolated in the blocked generic
-  device-registry family, fourteen in the blocked time/calendar-provider family, and forty in the
-  blocked software-TWI-provider family, seven in the blocked RTC-device-provider family, and
-  thirteen in the blocked sensor-algorithm heap-provider family, plus one in the blocked
-  sensor-stream framework family;
+- the complete verifier source-gates all 3,233 ledger functions with zero
+  unclassified entries; the six callback targets above are exact manual supplements;
 - FlashDB/FAL, tiny-AES-c, vendor provenance, and the Nordic SDK linked-image checks pass;
 - the map retains the required ST component and R1 adapter symbols; and
 - the unsigned standalone application artifacts have SHA-256
@@ -155,7 +217,7 @@ message compatibility remain open hardware gates.
 
 The component license is BSD-3-Clause. Preserve the license and attribution when the
 provider is fetched or distributed. Do not reconstruct these 27 bodies from decompiler
-output; compile the pinned ST files and keep the eleven product seams in separate local
+output; compile the pinned ST files and keep the twenty-three product seams in separate local
 translation units.
 
 ## Update (2026-08-13)

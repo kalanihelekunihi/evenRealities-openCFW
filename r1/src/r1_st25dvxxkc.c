@@ -7,6 +7,63 @@ static void clear_bytes(void *memory, size_t length) {
     }
 }
 
+uint32_t r1_st25dvxxkc_bus_tick_get(const r1_st25dvxxkc_bus_io_ops *ops,
+                                    void *context) {
+    return ops != NULL && ops->tick_get != NULL ? ops->tick_get(context) : 0u;
+}
+
+int32_t r1_st25dvxxkc_bus_initialize(const r1_st25dvxxkc_bus_io_ops *ops,
+                                     void *context) {
+    if (ops == NULL || ops->acquire == NULL) {
+        return -1;
+    }
+    ops->acquire(context);
+    return 0;
+}
+
+int32_t r1_st25dvxxkc_bus_deinitialize(const r1_st25dvxxkc_bus_io_ops *ops,
+                                       void *context) {
+    if (ops == NULL || ops->release == NULL) {
+        return -1;
+    }
+    ops->release(context);
+    return 0;
+}
+
+int32_t r1_st25dvxxkc_bus_is_ready(const r1_st25dvxxkc_bus_io_ops *ops,
+                                   void *context, uint16_t device_address,
+                                   uint32_t trials) {
+    (void)device_address;
+    (void)trials;
+    if (ops == NULL || ops->delay == NULL) {
+        return -1;
+    }
+    ops->delay(context, R1_ST25DVXXKC_BUS_READY_DELAY_TICKS);
+    return 0;
+}
+
+int32_t r1_st25dvxxkc_bus_read(const r1_st25dvxxkc_bus_io_ops *ops,
+                               void *context, uint16_t device_address,
+                               uint16_t register_address, uint8_t *bytes,
+                               uint16_t length) {
+    if (ops == NULL || ops->read == NULL) {
+        return -1;
+    }
+    return ops->read(context, (uint8_t)device_address, register_address, bytes,
+                     length);
+}
+
+int32_t r1_st25dvxxkc_bus_write(const r1_st25dvxxkc_bus_io_ops *ops,
+                                void *context, uint16_t device_address,
+                                uint16_t register_address,
+                                const uint8_t *bytes, uint16_t length) {
+    if (ops == NULL || ops->write == NULL) {
+        return -1;
+    }
+    return ops->write(context, (uint8_t)device_address, register_address,
+                      bytes, length);
+}
+
 static uint16_t read_big_endian_u16(const uint8_t *bytes) {
     return (uint16_t)(((uint16_t)bytes[0] << 8u) | (uint16_t)bytes[1]);
 }
@@ -151,6 +208,51 @@ bool r1_st25dvxxkc_mailbox_length_allowed(size_t length) {
 void r1_st25dvxxkc_dock_state_initialize(r1_st25dvxxkc_dock_state *state) {
     if (state != NULL) {
         clear_bytes(state, sizeof *state);
+    }
+}
+
+void r1_st25dvxxkc_dock_hardware_clear(r1_st25dvxxkc_dock_state *state) {
+    if (state != NULL) {
+        state->dock_hardware_revision = 0u;
+    }
+}
+
+uint8_t r1_st25dvxxkc_dock_hardware_get(
+    const r1_st25dvxxkc_dock_state *state) {
+    return state != NULL ? state->dock_hardware_revision : 0u;
+}
+
+void r1_st25dvxxkc_dock_version_clear(r1_st25dvxxkc_dock_state *state) {
+    if (state != NULL) {
+        clear_bytes(state->dock_version, sizeof state->dock_version);
+    }
+}
+
+const char *r1_st25dvxxkc_dock_version_get(
+    const r1_st25dvxxkc_dock_state *state, uint8_t *length) {
+    if (state == NULL || length == NULL) {
+        return NULL;
+    }
+    size_t measured = 0u;
+    while (measured < sizeof state->dock_version &&
+           state->dock_version[measured] != '\0') {
+        ++measured;
+    }
+    *length = (uint8_t)measured;
+    return state->dock_version;
+}
+
+void r1_st25dvxxkc_charge_temperature_set(
+    r1_st25dvxxkc_dock_state *state, uint8_t temperature) {
+    if (state != NULL) {
+        state->charge_temperature = temperature;
+    }
+}
+
+void r1_st25dvxxkc_dock_advertising_set(
+    r1_st25dvxxkc_dock_state *state, uint8_t enabled) {
+    if (state != NULL) {
+        state->dock_advertising_enabled = enabled;
     }
 }
 

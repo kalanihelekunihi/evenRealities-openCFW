@@ -1,7 +1,7 @@
 # Withheld-provider re-attribution audit — GoMore / YHM2710 / GXT310 / QMA6100 (2026-08)
 
 > Historical attribution audit. All four implementation gates were superseded by owner-authorized
-> transparent-C reductions: all 362 GoMore entries, all 36 YHM2710 entries, all five GXT310
+> transparent-C reductions: all 362 GoMore entries, all 44 YHM2710 entries, all eight GXT310
 > entries, and all 17 QMA6100 provider/adapter entries now compile locally. The source-lineage and
 > license findings below remain evidence; no unlicensed package is used as production source.
 
@@ -128,7 +128,7 @@ reference. The conservative gate and the clean-room R1 resource split
 
 ---
 
-## 3. GXCAS GXT310 (5 functions)
+## 3. GXCAS GXT310 (5 functions in the original audit; 8 in the completed closure)
 
 ### What changed since the 2026-08-11 review
 
@@ -152,23 +152,24 @@ and `GET_GXT310_TEMP()` reading register `0x00` and scaling by `0.0078125`
 `GXT310X0 (0x90)` channel (the second R1 channel `GXT310X2 (0x94)` is not in
 the demo). There is no mode-switch or one-shot logic in the demo at all.
 
-The five gated R1 bodies (`0x00050F9C` enable orchestration with `[RING] TEMP`
+The five originally gated R1 bodies (`0x00050F9C` enable orchestration with `[RING] TEMP`
 logging and the sensor registry; `0x0006F804/0x0006F81E` mode-switch thunks;
-`0x0006F818/0x0006F832` one-shot bodies) are built on the R1 runtime-vtable
+`0x0006F818/0x0006F832` one-shot bodies), plus the subsequently recovered shared read,
+mode, and one-shot bodies at `0x0006F600`, `0x0006F648`, and `0x0006F738`, are built on the R1 runtime-vtable
 software-TWI framework — a completely different structure, platform HAL, and
 abstraction level from the StdPeriph demo. **No code-level identity exists.**
 The archive also postdates the R1 image (2025-06/2025-10 vs. the older stock
 firmware), so even compatibility would not prove it was the stock source.
 
-### Verdict — GXT310: PARTIAL DOCUMENTATION POINTER; code REMAINS BLOCKED
+### Historical verdict — GXT310: PARTIAL DOCUMENTATION POINTER
 
 The vendor's own demo publicly documents the wire behavior: 7-bit address
 `0x48` (`0x90` write / `0x91` read), pointer-register read/write protocol,
 16-bit big-endian temperature at register `0x00`, scale `0.0078125 °C/LSB`.
 That is a register-behavior pointer, not a source admission: the archive has
 no license, does not match the R1 bodies, and does not cover the R1
-mode-switch/one-shot operations. The five functions stay
-`gxcas_gxt310_candidate`.
+mode-switch/one-shot operations. This attribution finding does not admit the vendor archive;
+the later owner-authorized clean-room policy independently reconstructed all eight functions.
 
 ---
 
@@ -252,8 +253,8 @@ policy decision outside this audit; the ledger gate stands.
 | Family | Functions | Public source found | Licensed | Code-level match | Verdict |
 | --- | ---: | --- | --- | --- | --- |
 | GoMore `gomore_health_algorithm_candidate` | 362 | umeox JL701N SDK dump: `GoMoreLib.h`/`GoMoreLibStruct.h` + `libgomore.a` (`HermesGM_Edge`, pi32v2) | No | ABI/strings only (wrong ISA, binary-only) | REMAINS BLOCKED; unlicensed provider-ABI pointer recorded |
-| YHMICROS `yhmicros_yhm2710_candidate` | 36 | None (no code, no datasheet) | — | — | REMAINS BLOCKED |
-| GXCAS `gxcas_gxt310_candidate` | 5 | Official `GXT310_STM32驱动程序V1.0` zip, SHA-256 `cdd4e53a…3da05` (retrieved 2026-08-14) | No (no license in archive) | No (STM32 StdPeriph demo ≠ R1 framework bodies; postdates R1) | PARTIAL DOCUMENTATION POINTER (addr `0x90`, reg `0x00`, ×0.0078125); code REMAINS BLOCKED |
+| YHMICROS `yhmicros_yhm2710_candidate` | 36 audited / 44 final | None (no code, no datasheet) | — | — | Historical gate superseded by owner-authorized transparent-C closure |
+| GXCAS `gxcas_gxt310_candidate` | 5 audited / 8 final | Official `GXT310_STM32驱动程序V1.0` zip, SHA-256 `cdd4e53a…3da05` (retrieved 2026-08-14) | No (no license in archive) | No (STM32 StdPeriph demo ≠ R1 framework bodies; postdates R1) | Documentation pointer only; owner-authorized transparent-C closure uses no archive code |
 | QST `qst_qma6100_v1_0_lineage_unlicensed` | 3 | QST V1.0 snapshot re-verified @ `3903bd7d`; licensed QMA6100P drivers (RIOT LGPL-2.1, Espressif Apache-2.0) | Snapshot: no; RIOT/Espressif: yes | Snapshot: yes (constants/structure/strings); licensed drivers: no | REMAINS BLOCKED; licensed register-map documentation pointers recorded |
 
 Audit performed 2026-08-14. No project files other than this report were created

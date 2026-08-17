@@ -25,6 +25,22 @@
 #define R1_CONNECTION_CONTROL_EVENT_TYPE_ZERO UINT32_C(0x40)
 #define R1_CONNECTION_CONTROL_EVENT_TYPE_ONE UINT32_C(0x10)
 #define R1_CONNECTION_CONTROL_EVENT_TYPE_TWO UINT32_C(0x20)
+#define R1_CONNECTION_CONTROL_ADV_START_EVENT_TYPE UINT32_C(0x200)
+#define R1_CONNECTION_CONTROL_ADV_START_PAYLOAD_SIZE \
+    (2u * R1_PEER_ADDRESS_SIZE)
+
+/* Side-effect-free, hardened form of the recovered advStart handler at
+ * 0x00083D04.  The stock handler replies on the incoming session before it
+ * attempts to enqueue event 0x200 on the current EUS session. */
+typedef struct {
+    bool send_empty_success_response;
+    bool enqueue_event;
+    uint16_t response_session;
+    uint16_t event_session;
+    uint32_t event_type;
+    uint8_t first_target[R1_PEER_ADDRESS_SIZE];
+    uint8_t second_target[R1_PEER_ADDRESS_SIZE];
+} r1_connection_control_adv_start_handler_plan;
 
 /* Composition of the recovered advStart event-0x200 consumer policy.  The
  * externally callable advStart command stays refused in the normal
@@ -86,6 +102,13 @@ r1_error r1_connection_control_plan_adv_start(
     const uint8_t second_target[R1_PEER_ADDRESS_SIZE],
     bool phone_occupied, bool glasses_occupied,
     r1_connection_control_plan *plan);
+/* Accepts exactly the legitimate 12-byte payload.  It deliberately rejects
+ * the stock unsigned-wrap malformed declarations and trailing ambiguity;
+ * no response, allocation, queue, BLE, or persistence effect is performed. */
+r1_error r1_connection_control_adv_start_handler_plan_decode(
+    uint16_t incoming_session, uint16_t current_eus_session,
+    const uint8_t *payload, size_t payload_length,
+    r1_connection_control_adv_start_handler_plan *plan);
 /* Delayed role-sync callback 0x0004E008 logs both role handles and sets this
  * one worker flag.  Logging is deliberately outside the pure contract. */
 uint32_t r1_connection_control_role_sync_thread_flags(void);

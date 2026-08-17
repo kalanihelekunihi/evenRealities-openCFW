@@ -800,6 +800,22 @@ static void test_bus_read_write(void) {
     /* Read: command 0xAE, code, data = buffer, length2; slot 0x10 status
      * passes through. */
     test_op_return = 0u;
+    assert(generic_device_registry_bus_control_dispatch(
+               &registry, 0xA5u, 0x0Cu, 0x1010u, 4u) == 0u);
+    assert(registry.bus_block.command == 0xA5u);
+    assert(registry.bus_block.code == 0x0Cu);
+    assert(registry.bus_block.data == 0x1010u);
+    assert(registry.bus_block.length2 == 4u);
+    assert(generic_device_registry_bus_control_dispatch(
+               NULL, 0u, 0u, 0u, 0u) == 0u);
+    assert(generic_device_registry_bus_read_command_ae(
+               &registry, 0x0Du, 0x1111u, 3u) == 0u);
+    assert(registry.bus_block.command == 0xAEu);
+    assert(registry.bus_block.code == 0x0Du);
+    assert(registry.bus_block.data == 0x1111u);
+    assert(registry.bus_block.length2 == 3u);
+    assert(generic_device_registry_bus_read_command_ae(
+               NULL, 0u, 0u, 0u) == 0u);
     assert(generic_device_registry_bus_read(&registry, 0x0Du, 0x1111u, 3u) ==
            0u);
     assert(registry.bus_block.command == 0xAEu);
@@ -814,6 +830,15 @@ static void test_bus_read_write(void) {
     /* Write: Nordic delay(5) runs first, then command 0xAE, code, buffer,
      * length; slot 0x14 status passes through. */
     test_op_return = 0u;
+    test_op_calls = 0u;
+    assert(generic_device_registry_bus_transfer_dispatch(
+               &registry, 0xA6u, 0x20u, 0x2121u, 5u) == 0u);
+    assert(registry.bus_block.command == 0xA6u);
+    assert(registry.bus_block.code == 0x20u);
+    assert(registry.bus_block.buffer == 0x2121u);
+    assert(registry.bus_block.length == 5u);
+    assert(generic_device_registry_bus_transfer_dispatch(
+               NULL, 0u, 0u, 0u, 0u) == 0u);
     test_op_calls = 0u;
     assert(generic_device_registry_bus_write(&registry, 0x21u, 0x2222u, 2u) ==
            0u);

@@ -20,17 +20,18 @@
  *
  * Per-function mapping (stock extent, end-exclusive / size -> symbol here):
  *
+ *   0x00044BE0..<0x00044BEC  12  -> generic_device_registry_bus_read_command_ae
  *   0x000509BC..<0x000509DB  32  -> generic_device_registry_ctrl_request
  *   0x00050ABC..<0x00050AD9  30  -> generic_device_registry_ctrl_cycle
  *   0x00050DF0..<0x00050E17  40  -> generic_device_registry_time_request
  *   0x00050F34..<0x00050F57  36  -> generic_device_registry_request_a_control
  *   0x00050F5C..<0x00050F81  38  -> generic_device_registry_request_a_transfer
+ *   0x00050510..<0x0005052E  30  -> generic_device_registry_bus_control_dispatch
+ *   0x00050534..<0x00050554  32  -> generic_device_registry_bus_transfer_dispatch
  *   0x0005B2F8..<0x0005B327  48  -> generic_device_registry_flash_erase_all
  *   0x0005D1EA..<0x0005D1F3  52  -> generic_device_registry_bus_read
- *                                  (folds shared helpers 0x00044BE0/0x00050510)
  *   0x0005D1F4..<0x0005D21D  42  -> generic_device_registry_bus_update_bit
  *   0x0005D21E..<0x0005D241  68  -> generic_device_registry_bus_write
- *                                  (folds shared helper 0x00050534)
  *   0x0005D8CC..<0x0005D8E5  26  -> generic_device_registry_hash
  *   0x0005D8E6..<0x0005D8ED  8   -> generic_device_registry_list_head
  *   0x0005D8EE..<0x0005D8F5  8   -> generic_device_registry_list_next
@@ -680,21 +681,36 @@ uint32_t generic_device_registry_request_a_transfer(
     return 1u;
 }
 
+uint32_t generic_device_registry_bus_control_dispatch(
+    generic_device_registry *registry, uint8_t command, uint16_t code,
+    uintptr_t data, uint16_t length2) {
+    if (registry == NULL) {
+        return 0u;
+    }
+    generic_device_registry_request_block *block = &registry->bus_block;
+    block->code = code;
+    block->command = command;
+    block->length2 = length2;
+    block->data = data;
+    return generic_device_registry_dispatch_slot_10(
+        registry->wiring.bus_device, 0u, (uintptr_t)block, 0u);
+}
+
+uint32_t generic_device_registry_bus_read_command_ae(
+    generic_device_registry *registry, uint16_t code, uintptr_t data,
+    uint16_t length2) {
+    return generic_device_registry_bus_control_dispatch(
+        registry, GENERIC_DEVICE_REGISTRY_BUS_COMMAND, code, data, length2);
+}
+
 uint32_t generic_device_registry_bus_read(generic_device_registry *registry,
                                           uint16_t code, uintptr_t buffer,
                                           uint16_t length) {
     if (registry == NULL || length == 0u) {
         return 0u;
     }
-    /* Folded helpers 0x00044BE0 (argument reorder, command 0xAE) and
-     * 0x00050510 (block fill + slot 0x10 dispatch on the shared bus block). */
-    generic_device_registry_request_block *block = &registry->bus_block;
-    block->code = code;
-    block->command = GENERIC_DEVICE_REGISTRY_BUS_COMMAND;
-    block->length2 = length;
-    block->data = buffer;
-    return generic_device_registry_dispatch_slot_10(
-        registry->wiring.bus_device, 0u, (uintptr_t)block, 0u);
+    return generic_device_registry_bus_read_command_ae(
+        registry, code, buffer, length);
 }
 
 void generic_device_registry_bus_update_bit(generic_device_registry *registry,
@@ -714,6 +730,23 @@ void generic_device_registry_bus_update_bit(generic_device_registry *registry,
     }
 }
 
+uint32_t generic_device_registry_bus_transfer_dispatch(
+    generic_device_registry *registry, uint8_t command, uint16_t code,
+    uintptr_t buffer, uint16_t length) {
+    if (registry == NULL) {
+        return 0u;
+    }
+    generic_device_registry_request_block *block = &registry->bus_block;
+    block->code = code;
+    block->command = command;
+    if (buffer != 0u) {
+        block->buffer = buffer;
+    }
+    block->length = length;
+    return generic_device_registry_dispatch_slot_14(
+        registry->wiring.bus_device, 0u, (uintptr_t)block, 0u);
+}
+
 uint32_t generic_device_registry_bus_write(generic_device_registry *registry,
                                            uint16_t code, uintptr_t buffer,
                                            uint16_t length) {
@@ -724,17 +757,8 @@ uint32_t generic_device_registry_bus_write(generic_device_registry *registry,
         return 0u;
     }
     registry->providers.delay_ms(GENERIC_DEVICE_REGISTRY_BUS_DELAY_MS);
-    /* Folded helper 0x00050534 (block fill + slot 0x14 dispatch on the
-     * shared bus block). */
-    generic_device_registry_request_block *block = &registry->bus_block;
-    block->code = code;
-    block->command = GENERIC_DEVICE_REGISTRY_BUS_COMMAND;
-    if (buffer != 0u) {
-        block->buffer = buffer;
-    }
-    block->length = length;
-    return generic_device_registry_dispatch_slot_14(
-        registry->wiring.bus_device, 0u, (uintptr_t)block, 0u);
+    return generic_device_registry_bus_transfer_dispatch(
+        registry, GENERIC_DEVICE_REGISTRY_BUS_COMMAND, code, buffer, length);
 }
 
 uint32_t generic_device_registry_slot_0c_entry(generic_device_registry *registry) {
