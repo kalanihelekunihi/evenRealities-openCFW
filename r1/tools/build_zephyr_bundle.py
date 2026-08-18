@@ -4,11 +4,15 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
+import hashlib
 import os
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
+from typing import Iterator
 
 
 PROJECT = Path(__file__).resolve().parents[1]
@@ -49,6 +53,50 @@ def build_environment(west: Path, workspace: Path, toolchain: Path) -> dict[str,
     if (virtual_environment / "pyvenv.cfg").is_file():
         environment["VIRTUAL_ENV"] = os.fspath(virtual_environment)
     return environment
+
+
+@contextmanager
+def compatible_gdb_probe(toolchain: Path) -> Iterator[None]:
+    """Avoid a configure-only hang in the pinned 2020 macOS gdb-py.
+
+    Zephyr probes ``arm-none-eabi-gdb-py --configuration`` while locating GNU
+    binutils.  That x86_64 executable can enter an uninterruptible wait under
+    current Apple Silicon/Rosetta, although GCC, ld, objcopy, and every tool
+    used to build the image work normally.  GDB is not a firmware build input.
+
+    Temporarily hiding only gdb-py makes Zephyr select the non-Python GDB
+    fallback without executing it.  The exact file is restored in ``finally``;
+    the advisory lock serializes concurrent OpenR1 builds, and an interrupted
+    prior run is recovered when only the backup remains.
+    """
+    gdb_py = toolchain / "bin" / "arm-none-eabi-gdb-py"
+    if sys.platform != "darwin" or not gdb_py.parent.is_dir():
+        yield
+        return
+
+    import fcntl
+
+    identity = hashlib.sha256(os.fspath(gdb_py).encode()).hexdigest()[:16]
+    lock_path = Path(tempfile.gettempdir()) / f"openr1-gdb-probe-{identity}.lock"
+    backup = gdb_py.with_name(gdb_py.name + ".openr1-disabled")
+    with lock_path.open("a+b") as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        if backup.exists() and not gdb_py.exists():
+            backup.rename(gdb_py)
+        if backup.exists():
+            raise RuntimeError(
+                f"refusing to overwrite existing GDB probe backup: {backup}")
+        if not gdb_py.is_file():
+            yield
+            return
+        gdb_py.rename(backup)
+        try:
+            yield
+        finally:
+            if gdb_py.exists():
+                raise RuntimeError(
+                    f"GDB probe path unexpectedly recreated during build: {gdb_py}")
+            backup.rename(gdb_py)
 
 
 def main() -> None:
@@ -112,7 +160,8 @@ def main() -> None:
         # This sysbuild setting is a Kconfig string. The quote characters must
         # reach CMake (subprocess has no shell layer to add them for us).
         command.append(f'-DSB_CONFIG_BOOT_SIGNATURE_KEY_FILE="{signing_key}"')
-    subprocess.run(command, check=True, env=environment)
+    with compatible_gdb_probe(toolchain):
+        subprocess.run(command, check=True, env=environment)
     if args.build_only:
         print(f"openR1 source-built Zephyr images: {build}")
         return

@@ -97,22 +97,80 @@ fabricated data. `r1_gh3x2x_bind.c` adapts the kernel entry points to the existi
 negative democode codes); `Gh3x2xDemoStartSampling`/`Gh3x2xDemoStopSampling` return `void`
 upstream, and driver-level failures already surface through `Gh3x2xDemoInit`.
 
-### (c) Unbound democode algorithm/protocol ABI — fail-closed R1 bridge
+### (c) Checked democode algorithm ABI and excluded protocol ABI
 
 Implemented in `r1/port/goodix_gh3x2x/r1_gh3x2x_stubs.c` with vendor headers included so the
-signatures are checked against the real prototypes. All inventoried Goodix executable bodies and
-their generated-model data now compile from transparent local source and are retained in the
-Nordic image. The table below describes the still-unbound *democode global ABI bridge*, not absent
-source: a checked adapter must map its function-ID/frame/result globals onto the recovered
-routines' narrow typed contracts before live calculation can be enabled. No bridge function
-fabricates sensor or biometric data.
+signatures are checked against the real prototypes. The R1-owned, vendor-header-free provider
+contract lives in `r1_gh3x2x_algo_bridge.h`. It normalizes the 20 function IDs, channel/sample
+metadata, raw/AGC/flag pointers, three motion axes, and frame counter into a bounded frame view.
+The pinned headers are now compile-time checked against the provider-independent offsets
+`HR=1`, `HRV=2`, and `SpO2=6`; this closes an earlier bridge defect that labeled HR as row zero.
+Provider output is admitted only when the update flag, 16-bit result mask, population count, and
+fixed 16-word payload agree. An unbound, unsupported, malformed, or uninitialized provider still
+fails closed with the democode's own error family. Init rollback, repeated init, per-function
+deinit, version, sensor-enable, and algorithm virtual-register writes route through the copy-bound
+provider table. A separately bound observer runs only after an updated result has passed all of
+those checks and has been copied into the vendor result record; rejected and non-updated results
+are never observed. No bridge function fabricates sensor or biometric data.
 
-| Stub | Behavior | Why absent |
+The same checked layer reproduces all three recovered outer-input ABIs before algorithm state is
+invoked. `0x0002C944` is HR/HBA and applies its 12-slot map. `0x0002CAD8` is HRV and copies the
+first four raw/AGC words plus the last accepted HR. `0x0002CFE8` is SpO2 and applies its separate
+12-slot map while deriving gain and drive-current values from each mapped AGC word. All three
+preserve the low frame-counter byte, four-channel marker, sleep flag, 24-bit marker, chip/data
+constants, signed raw-word bit patterns, and three motion axes; failure leaves the destination
+unchanged. `r1_gh3x2x_primitive_adapter.h` exposes borrowed bounded views as
+`goodix_primitives_hba_process_input`, `goodix_primitives_hrv_process_input`, and
+`goodix_primitives_spo2_calc_input`. Retail roots are correspondingly identified as HBA
+`0x0006C6A8`, HRV `0x0006D51C`, and SpO2 `0x0006E838`.
+The default SpO2 lane map is also local and exact: recovered initializer `0x0002ACF4` first fills
+all 32 private lanes with `0xFF`, then writes source `1` at private map index 8 and source `0` at
+index 16. Flattened into the three four-lane groups consumed by `0x0002CFE8`, that is
+`{FF,FF,FF,FF, 1,FF,FF,FF, 0,FF,FF,FF}`. The bridge exposes a checked copy of this map and does
+not depend on the former RAM object at `0x20030227`. The HBA initializer `0x0002A630` separately
+produces `{0,1,2,3, FF,FF,FF,FF, FF,FF,FF,FF}` at `0x20030204`.
+
+Two previously source-routed but unlinked initializer inputs are now retained too. Retail ROM
+`0x000AD13C..<0x000AD160` is the exact 36-byte public Exclusive HR configuration:
+mode 0, 25 Hz, four valid channels, output limits 9/20, sigma 1, raw scale 202, delay 5, and score
+scale 1. Retail ROM `0x0009D5EC..<0x0009D604` is the exact 24-byte public HRV configuration:
+interpolation enabled, 100 Hz, and acceleration thresholds 200000/100000/30000/30000. The pinned
+`goodix_hba_config.c` and `goodix_hrv_config.c` now compile into both targets, their objects have
+nonempty retained spans, and the host integration test checks every field. This admits transparent
+configuration data only.
+
+`r1_gh3x2x_provider_composer.c` now owns the exact recovered outer-wrapper composition shared by
+both targets. It admits only complete HBA, HRV, and SpO2 root bindings; constructs each root's
+distinct normalized input; publishes HR with mask `0x003F`/six words and HRV with mask
+`0x007F`/six written words plus a zero seventh slot; and preserves the HR wrapper's
+accepted-heart-rate carry into HRV after the HRV initializer resets it. For SpO2 it deliberately
+follows the retail R1 divergence at `0x0002D14A`, not the public democode: mask `0x00FF`, six
+distinct written words, word 0 mirrored into slot 6, and the cleared slot 7 retained as zero.
+Repeated init, process-before-init, malformed row masks, incomplete roots, and unsupported rows all
+fail closed. `r1_gh3x2x_reconstructed_roots.c` supplies complete composer bindings for the three
+canonical recovered roots. It converts the normalized records into the existing bounded primitive
+inputs, invokes HBA `0x0006C6A8`, HRV `0x0006D51C`, and SpO2 `0x0006E838`, routes their exact
+recovered version identities, and implements the private-to-public HBA and SpO2 result layouts.
+The SpO2 executor accepts only retail statuses 0, 3, and 4, gates publication on private word 12,
+applies the recovered `/10000` epsilon-aware rounding to word 0, and selects private words
+`{0,11,2,1,4,6}`. Each executor requires caller-owned plan, state, workspace, and lifecycle
+bindings. Zephyr now owns and binds those initializer-derived persistent objects for HBA, HRV, and
+SpO2; incomplete compositions remain rejected by the shared composer.
+
+All inventoried Goodix executable bodies and generated-model data compile from transparent local
+source and are retained in the Nordic image. On Zephyr, the independent observer now narrows the
+public HR words `{hba_out, valid_score, valid_level}` and the six public SpO2 words into the exact
+recovered R1 result records. It runs the bounded one-shot planners and their exact scalar storage
+consumers only while the `dev_info` global-health bit is enabled. The exact seven-slot authorization
+union opens HR, HRV, and the observer-only HSM raw source only for slots whose recovered dependency
+masks request them. HSM forwards the checked first raw frame word and never fabricates a result.
+
+| ABI surface | Behavior | Remaining boundary |
 | --- | --- | --- |
-| `GH3X2X_AlgoInit` / `GH3X2X_AlgoDeinit` / `GH3X2X_AlgoCalculate` | return `GH3X2X_RET_RESOURCE_ERROR` (-5) | typed reconstructed algorithms are retained, but the global democode frame/lifecycle/result adapter is not yet admitted |
-| `GH3X2X_AlgoSensorEnable` | no-op | same |
-| `GH3X2X_AlgoVersion` / `GH3X2X_GetVersion` | write the democode's own `no_ver` unavailable-binding marker | typed version builders exist; the aggregate democode query bridge is not yet bound / protocol version getter belongs to the excluded PC-tool protocol |
-| `GH3X2X_AlgoCallConfigInit` / `GH3X2X_WriteAlgConfigWithVirtualReg` | no-op; algorithm virtual-reg window writes are dropped while hardware register windows below `0x3000` are still applied by the compiled driver | typed configuration/model bindings exist, but the democode-global translation is not yet checked |
+| `GH3X2X_AlgoInit` / `GH3X2X_AlgoDeinit` / `GH3X2X_AlgoCalculate` | validate the function bitmap and frame globals, then dispatch through the normalized provider; the retained composer and target-bound reconstructed-root executors reproduce all three outer-wrapper and root-call contracts; mixed-mask initialization rolls back earlier roots on a later failure; HSM is observer-only | physical equivalence and long-run state behavior require owned-hardware validation |
+| `GH3X2X_AlgoSensorEnable` | routes the three boolean sensor dependencies to the bound provider | no effect while unbound |
+| `GH3X2X_AlgoVersion` / `GH3X2X_GetVersion` | algorithm versions route per function and fall back to `no_ver`; protocol aggregate getter stays `no_ver` | the protocol version getter belongs to the excluded PC-tool protocol |
+| `GH3X2X_AlgoCallConfigInit` / `GH3X2X_WriteAlgConfigWithVirtualReg` | captures the real 20-row frame table and routes virtual-register writes to the provider; hardware register windows below `0x3000` remain applied by the compiled driver | provider decides which algorithm registers it proves and accepts |
 | `GH3X2X_TimestampSync{AccInit,PpgInit,SetPpgIntFlag,FillAccSyncBuffer,FillPpgSyncBuffer}` | no-op | ACC/PPG synchronization has not yet been adapted to the typed reconstructed stream state |
 | `GH3X2X_TimestampSyncGetFrameDataFlag` | returns 1 | exact matched public-democode and recovered `0x0002AE00` behavior |
 | `GH3X2X_UprotocolPacketFormat` | returns 0 (zero-length packet) | PC-tool upload protocol excluded — no external command surface |
@@ -141,8 +199,12 @@ Zephyr startup only installs those source bindings and configures emitter/reset 
 not acquire the rail, initialize the chip, or start sampling. Start/switch/stop remain retained
 typed platform APIs with no BLE or other wire command route. Raw-frame notifications increment a
 diagnostic count; they are not interpreted as HR, SpO2, HRV, or any other biometric result. The
-democode global algorithm ABI remains fail-closed as described above, so hardware-register and
-raw-acquisition work cannot silently fabricate health output.
+democode global ABI itself is normalized and checked, but no target biometric provider is bound
+yet, so those function rows remain resource-unavailable and hardware-register/raw-acquisition
+work cannot silently fabricate health output. The target nevertheless binds the result observer
+after the optical adapter, restores the persisted health-enable bit and timestamp, and has complete
+HR/SpO2 result-plan-to-hourly-cache plumbing ready for a future admitted provider. The HRV scalar
+consumer is retained but deliberately has no live producer.
 
 ## Verification
 
@@ -150,20 +212,26 @@ raw-acquisition work cannot silently fabricate health output.
   host and runs `tests/test_vendor_goodix.c`: port bind/unbind and fail-closed paths, HAL
   translation through the compiled driver (device id `0x28`, big-endian register wire format,
   read-modify-write bit fields, communicate-confirm magic and restore), democode-to-R1 error
-  mapping, every fail-closed stub, the pool glue, and an end-to-end `Gh3x2xDemoInit` +
+  mapping, unbound failure behavior, normalized frame/lifecycle/version/register dispatch,
+  exact function-offset agreement, all three recovered input constructors, direct transparent-
+  primitive views, exact composer lifecycle/masks/publication/HR carry, validated-result observer
+  ordering, malformed-result non-observation, excluded protocol hooks,
+  the pool glue, and an end-to-end `Gh3x2xDemoInit` +
   start/stop-sampling run against a fake I2C register file. No hardware required. The port is
   additionally covered under ASan/UBSan by the strict `sanitize` build; the vendor subset itself
   carries two pre-existing UBSan findings (`1 << 31` shifts at `gh_drv_control.c:3696` and
   `:3789`) that ship in the upstream source and are not introduced by this port.
-- `make -C r1 arm-objects` compiles `r1_gh3x2x_port.c` freestanding for Cortex-M4F with clang
-  under the project's strict flags.
+- `make -C r1 arm-objects` compiles `r1_gh3x2x_port.c` and the provider composer freestanding for
+  Cortex-M4F with clang under the project's strict flags; `provider-composer-check` also applies the
+  strict host warning set before the vendor-democode integration test.
 - `make -C r1 sdk-image ... GOODIX_DEMOCODE_ROOT=...` links the subset into
   `openr1_nrf52840_s140`; `tools/verify_sdk_image.py` pins the resulting size and SHA-256 digests
   and requires the democode objects and key symbols (`GH3X2X_Init`,
   `GH3X2X_RegisterI2cOperationFunc`, `GH3X2X_ReadFifodata`, `Gh3x2xDemoStartSampling`,
   `Gh3x2xPoolIsNotEnough`, the stub names, …) in the map.
-- `make -C r1 zephyr-bundle ... GOODIX_DEMOCODE_ROOT=...` hash-gates the 57-file admitted
-  source/header/license set, compiles the same 13 upstream translation units plus the three local
-  port/bind/fail-closed units, and requires nonempty loadable spans for all 16 objects. The offline
+- `make -C r1 zephyr-bundle ... GOODIX_DEMOCODE_ROOT=...` hash-gates the 59-file admitted
+  source/header/license set, compiles 15 upstream translation units (including byte-matched HR,
+  HRV, and SpO2 configuration inputs) plus the four local port/bind/composer/checked-bridge units,
+  and requires nonempty loadable spans for all 19 objects. The offline
   source-boundary verifier also pins the software-`i2c_4` pins, device ID, devicetree GPIOs,
-  YHM client, interrupt worker, startup order, no-boot-sampling rule, and fail-closed algorithm ABI.
+  YHM client, interrupt worker, startup order, no-boot-sampling rule, and bounded normalized algorithm ABI.

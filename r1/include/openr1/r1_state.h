@@ -54,6 +54,8 @@ typedef struct {
  * FRONTIER-256-262-CORRELATION.md). */
 #define R1_DEV_INFO_REG1_FLAG_OFFSET 24u
 #define R1_DEV_INFO_REG1_FLAG_MASK UINT8_C(0x02)
+#define R1_DEV_INFO_HEALTH_FLAG_MASK UINT8_C(0x01)
+#define R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET 32u
 #define R1_TEMPERATURE_TIMED_MODE_PERIOD 600u
 #define R1_HEART_RATE_TIMED_MODE_PERIOD 600u
 #define R1_SYSTEM_CONTROL_MAX_REPLY_BYTES 64u
@@ -144,6 +146,9 @@ bool r1_system_settings_reg1_enabled(const uint8_t *dev_info, size_t length);
  * without touching any other byte. */
 r1_error r1_system_settings_store_reg1(
     uint8_t *dev_info, size_t length, bool enabled);
+r1_error r1_health_settings_store_dev_info(
+    uint8_t *dev_info, size_t length,
+    const r1_health_settings_record *settings);
 r1_error r1_temperature_mode_plan_transition(
     uint8_t previous_mode, uint8_t next_mode,
     bool previous_stream_registered, bool timed_mode_registered,

@@ -35,16 +35,16 @@ hardware/backend family. The original route decision is recorded in
   arithmetic, saturation instead of epoch wrap, zero-clamped local time, and no reported time
   before first synchronization (never fabricated).
 - `r1/platform/nrf52840/sdk/openr1_clock.c` — platform glue: adopts phone time-sets from the
-  portable device state within one 1024-tick cadence, advances the epoch from the RTC-backed
-  (tickless-idle-correct) FreeRTOS kernel tick, and exposes epoch, UTC-offset, and
-  local-calendar access via toolchain `gmtime_r`.
+  portable device state within one 1024-tick cadence and into the live reconstructed `sys rtc`
+  service. The product clock advances from the RTC-backed (tickless-idle-correct) FreeRTOS
+  kernel tick while the reconstructed service independently owns Nordic RTC2 at 8 Hz.
 - `r1/platform/nrf52840/zephyr/src/openr1_clock_zephyr.c` — the source-built
   target now uses the owner-authorized reconstructed
   `time_calendar_unix_to_broken_down` body for local-calendar queries. The
   health-database adapter uses the same exact converter to calculate local-day
-  boundaries. Neither path binds the reconstructed hardware RTC/backend or
-  exposes the validating inverse converter, because time arrives as epoch
-  seconds from the phone.
+  boundaries. The target also binds the reconstructed service and registry to
+  source-backed RTC2 through Zephyr's counter driver; time still arrives as
+  epoch seconds from the authenticated phone command.
 
 ## Tests
 

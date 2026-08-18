@@ -6,14 +6,18 @@
 
 #include "openr1_bae8_zephyr.h"
 #include "openr1_analog_zephyr.h"
+#include "openr1_battery_zephyr.h"
 #include "openr1_clock_zephyr.h"
 #include "openr1_databases_zephyr.h"
+#include "openr1_health_results_zephyr.h"
+#include "openr1_gomore_zephyr.h"
 #include "openr1_motion_zephyr.h"
 #include "openr1_nfc_zephyr.h"
 #include "openr1_nfc_resources_zephyr.h"
 #include "openr1_optical_zephyr.h"
 #include "openr1_power_zephyr.h"
 #include "openr1_reset_zephyr.h"
+#include "openr1_rtc_zephyr.h"
 #include "openr1_sensor_stream_zephyr.h"
 #include "openr1_storage_zephyr.h"
 #include "openr1_temperature_zephyr.h"
@@ -36,6 +40,9 @@ int main(void) {
     int error = openr1_watchdog_zephyr_initialize();
     if (error == 0) {
         error = openr1_storage_zephyr_initialize();
+    }
+    if (error == 0) {
+        error = openr1_rtc_zephyr_initialize();
     }
     if (error == 0) {
         error = openr1_clock_zephyr_initialize(openr1_platform_runtime());
@@ -67,6 +74,9 @@ int main(void) {
         error = openr1_yhm2710_zephyr_initialize();
     }
     if (error == 0) {
+        error = openr1_battery_zephyr_initialize(openr1_platform_runtime());
+    }
+    if (error == 0) {
         error = openr1_temperature_zephyr_initialize();
     }
     if (error == 0) {
@@ -74,6 +84,14 @@ int main(void) {
     }
     if (error == 0) {
         error = openr1_optical_zephyr_initialize();
+    }
+    if (error == 0) {
+        error = openr1_health_results_zephyr_initialize(
+            openr1_platform_runtime());
+    }
+    if (error == 0) {
+        openr1_sensor_stream_zephyr_health_policy_request(
+            openr1_platform_runtime()->device.health_settings[4] != 0u);
     }
     if (error == 0) {
         error = openr1_nfc_resources_zephyr_initialize();
@@ -95,8 +113,19 @@ int main(void) {
     }
 
     for (;;) {
+        uint32_t epoch_seconds = 0u;
+        if (openr1_clock_zephyr_epoch(&epoch_seconds)) {
+            (void)r1_runtime_schedule_automatic_health_sync(
+                openr1_platform_runtime(), epoch_seconds);
+            /* Service is intentionally drain-aware: R1_ERROR_STATE means a
+             * prior leg is still occupying the recovered shared BLE queue. */
+            (void)r1_runtime_service_automatic_health_sync(
+                openr1_platform_runtime());
+        }
+        (void)openr1_gomore_zephyr_sync(openr1_platform_runtime());
         uint32_t wait = openr1_platform_poll(k_uptime_get_32());
         const uint32_t stream_wait = openr1_sensor_stream_zephyr_poll();
+        (void)openr1_gomore_zephyr_poll(openr1_platform_runtime());
         if (wait == UINT32_MAX) {
             wait = 100u;
         }

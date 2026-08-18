@@ -1,5 +1,13 @@
 # Goodix GH_SPO2 and dlCom processing provider boundary
 
+> Identity correction (2026-08-17): the matched `GH3x2xHrAlgoExe` wrapper at
+> `0x0002C944` calls `0x0006C6A8`, proving that this root is
+> `goodix_hba_calc`. It now compiles as `goodix_primitives_hba_process`; the
+> old `goodix_primitives_spo2_process` spelling is compatibility-only. The
+> retail SpO2 wrapper at `0x0002CFE8` instead calls `0x0006E838`. This report's
+> filename and shared SpO2/dlCom helper census are retained as historical
+> provenance, not as the public identity of `0x0006C6A8`.
+
 > Current reduction note (2026-08-14): the owner-authorized source-admission
 > policy now supersedes this report's earlier implementation prohibition for
 > the seven-function recurrent closure. Entries `0x36408`, `0x6FDE0`,

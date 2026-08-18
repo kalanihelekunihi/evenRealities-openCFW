@@ -24,6 +24,7 @@ static osMessageQueueId_t channel1_queue;
 static osMessageQueueId_t shared_queue;
 static osSemaphoreId_t glasses_credits;
 static osSemaphoreId_t phone_credits;
+static osMutexId_t runtime_mutex;
 static openr1_startup_fn platform_startup;
 
 static StaticTask_t channel1_control_block;
@@ -113,6 +114,26 @@ static r1_error enqueue_tx(void *context, bool use_shared_queue,
         ? R1_OK : R1_ERROR_CAPACITY;
 }
 
+static bool tx_queue_idle(void *context, bool use_shared_queue) {
+    (void)context;
+    const osMessageQueueId_t queue = use_shared_queue
+        ? shared_queue : channel1_queue;
+    return queue != NULL && osMessageQueueGetCount(queue) == 0u;
+}
+
+static bool runtime_lock_provider(void *context) {
+    (void)context;
+    return runtime_mutex != NULL &&
+        osMutexAcquire(runtime_mutex, osWaitForever) == osOK;
+}
+
+static void runtime_unlock_provider(void *context) {
+    (void)context;
+    if (runtime_mutex != NULL) {
+        (void)osMutexRelease(runtime_mutex);
+    }
+}
+
 static void softdevice_worker(void *context) {
     (void)context;
     platform_startup();
@@ -164,11 +185,18 @@ uint32_t openr1_scheduler_initialize(openr1_startup_fn startup) {
         R1_HVN_CREDIT_MAX, R1_HVN_CREDIT_MAX, NULL);
     phone_credits = osSemaphoreNew(
         R1_HVN_CREDIT_MAX, R1_HVN_CREDIT_MAX, NULL);
+    runtime_mutex = osMutexNew(NULL);
     if (channel1_queue == NULL || shared_queue == NULL ||
-        glasses_credits == NULL || phone_credits == NULL) {
+        glasses_credits == NULL || phone_credits == NULL ||
+        runtime_mutex == NULL) {
         return NRF_ERROR_NO_MEM;
     }
     r1_runtime_set_enqueue(openr1_platform_runtime(), enqueue_tx, NULL);
+    r1_runtime_set_queue_idle(
+        openr1_platform_runtime(), tx_queue_idle, NULL);
+    r1_runtime_set_lock(
+        openr1_platform_runtime(), runtime_lock_provider,
+        runtime_unlock_provider, NULL);
     channel1_thread = osThreadNew(
         channel1_worker, NULL, &channel1_attributes);
     runtime_thread = osThreadNew(runtime_worker, NULL, &runtime_attributes);

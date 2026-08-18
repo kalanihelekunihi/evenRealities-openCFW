@@ -28,10 +28,20 @@ handoff, exact 128-byte hourly-body codec, and live startup recovery into the ru
 activity/HR/SpO2/HRV caches. Valid local-hour changes now flow from the source clock through
 event slot 1 to exact non-destructive FlashDB appends, with previous-hour selection and six-cache
 midnight reset. The exact slot-0 old/new time tuple now drives initial-valid current-day recovery
-and cross-day resets; destructive format/retry and GoMore reinitialization remain suppressed
-diagnostics. The exact 24-byte `hsync` class is loaded and persisted through hardened `kv.bin`
+and cross-day resets; destructive format/retry remains suppressed. Backward-time GoMore
+reinitialization is still diagnostic-only, while normal enable/profile reconciliation now owns a
+source-built engine instance. The exact 24-byte `hsync` class is loaded and persisted through hardened `kv.bin`
 snapshots: only HR/SpO2/HRV/activity cursors reset or clamp, while both unresolved words round-trip
-unchanged. Startup also decodes the exact four-byte persisted `power` record and adopts battery
+unchanged. Public health-settings reads/writes now use the recovered canonical planner end to end:
+success is queued before effects, real normalized transitions atomically commit the timestamp and
+`dev_info` health bit, and the live biometric storage gate changes immediately. Raw-only event
+`0x100D` transitions now reconcile the exact seven-slot GoMore authorization model: global health
+requests slots 0 and 3, whose recovered dependency union is accelerometer-only. Authenticated HR and SpO2 daily queries now bind the recovered three-day FlashDB
+callbacks: prior-day records are normalized through the exact merge policy, current RAM follows,
+with the invalid-clock FIFO merged between them. Mode-0/2 notification ACKs durably advance only
+their named `hsync` cursors, while mode-1 ACKs consume only the acknowledged FIFO prefix. Startup
+also decodes the
+exact four-byte persisted `power` record and adopts battery
 types 1...4 into the runtime controller without enabling an unproven periodic sampler. The exact
 one-byte `r_size` class is decoded read-only but cannot select touch calibration without the
 independent physical layout identity. The reconstructed 1,024-Hz sensor-stream runtime is now
@@ -42,14 +52,34 @@ rate-1/per-sample listener, 30-attempt/five-consistent-value reducer, event 9 pa
 temperature cache without starting at boot or assigning physical/clinical semantics. The public
 measurement route and owned-hardware validation remain open. The exact GoMore `acc`, `raw_hr`,
 `hr`, and `hrv` topic callbacks, 25/4-sample bounds, axis transform, readiness barrier, and
-successful-update cleanup now compile as transparent C. A dormant `"gomore"` batch listener can
-stage the existing `"acc"` stream on target, but startup does not register it and no health engine
-or biometric publisher is activated. The exact product-side `raw_hr`/`adt` bounded accumulators
+successful-update cleanup now compile as transparent C. The target composes the exact seven-slot
+authorization masks and reference-counted `"gomore"` listeners. Enabling global health activates
+only the recovered slots 0/3 accelerometer dependency; raw-HR, HR, and HRV open only for their
+separate requesting slots. A source-built 0x39E0-byte engine and 0x2E0-byte previous-state record
+are allocated while health is enabled and initialized with the reconstructed filter designers and
+the current user profile (or the exact retail default). The exact `pKey.bin` prior-state slots are
+live: an existing valid key prefix is preserved, an erased openR1 page receives a transparent
+all-zero non-authorization prefix, and the 736-byte state is restored and appended through the
+reconstructed compaction contract. Topic batches remain stable across one update attempt and
+their sample counts clear only after success. The 16-stage execution/result schedule is
+not yet target-composed, so no GoMore biometric publisher is claimed. The exact product-side `raw_hr`/`adt` bounded accumulators
 and two-byte Goodix living-object update also compile from their callback-table extents without
 assigning waveform or physical-channel semantics. The source-built target now hash-gates the transparent Goodix demo/driver subset and
 binds the recovered software-`i2c_4` optical pins, interrupt worker, reset/emitter lifecycle, and
-YHM client bit 1. It does not start sampling at boot or expose a BLE control route, and its global
-algorithm ABI remains fail-closed rather than fabricating health results.
+YHM client bit 1. It does not start sampling at boot or expose a BLE control route. Its global
+algorithm ABI is normalized into a checked vendor-free provider contract. The target binds the
+transparent HBA, HRV, and SpO2 reconstructed roots with caller-owned plan/state/workspace objects. The retained
+source composer implements the exact HR/HBA, HRV, and SpO2 wrapper inputs, lifecycle, update masks,
+and HR-to-HRV carry, including R1's `0x00FF` SpO2 result with its word-0 mirror and zero tail, so
+the retained reconstructed-root layer now invokes all three canonical roots and performs their
+exact public-result transformations. The normal-function acquisition path starts only the recovered
+HR/HRV/HSM/SpO2 bits requested by the authorization union and never substitutes the factory
+`0x2000`/`0x4000` profiles. A separate checked result observer now converts only validated HR,
+SpO2, and HRV provider records through
+the recovered one-shot publication plans into the live hourly caches. It restores the persisted
+global-health bit and timestamp from `dev_info`. The HSM row is an observer-only checked raw-frame
+source: it forwards the first validated frame word into the exact bounded `raw_hr` container and
+does not fabricate an algorithm result.
 The host build and tests remain the
 portable reference implementation. Scheduling in the legacy Nordic device image comes from the
 authenticated upstream FreeRTOS-Kernel 10.5.1 core, Nordic SDK 17.1.0's nRF52 Cortex-M port, and
@@ -84,18 +114,30 @@ The Nordic target also links Nordic's unmodified `nrfx_saadc.c` and retains a cl
 the recovered battery AIN5/P0.29, PMIC-current AIN3/P0.05, and NFC-rectifier AIN2/P0.04 routes.
 Portable code implements the byte-pinned five-sample conversion, battery curves, charging cadence,
 full-state gate, and stalled-charge recovery. The complete YHM2710 transport/register closure is
-now reconstructed as transparent C; battery acquisition remains unsupported until the Nordic
-board binds it and owned-ring electrical behavior is validated. No raw ADC BLE surface exists.
+transparent C. On the source-built Zephyr target, boot and each read-only device-status access now
+sample battery voltage through YHM client bit 0 and read the live register-6 charge state before
+dispatch. The legacy Nordic board still lacks that provider composition, and neither target claims
+owned-ring electrical validation. No raw ADC BLE surface exists.
 Portable health code also implements the recovered R1-owned automatic synchronization gate: an
-active phone-role link triggers HR, SpO2, HRV, activity, and unsynchronized-sleep history in exact
-order at initial time, clock rewind, or a 10,800-second boundary. Explicit history queries share
-and reset the same cooldown timestamp. The Nordic image retains the integration API, while the
-periodic wall-clock producer remains pending. The Goodix and GoMore algorithm bodies and model
+encrypted, bonded, authorized phone-role link triggers HR, SpO2, HRV, activity, and
+unsynchronized-sleep history in exact order at initial time, clock rewind, or a 10,800-second
+boundary. Explicit history queries share and reset the same cooldown timestamp. Both target
+wall-clock cadences now drive the gate; a bounded drain-aware service admits one serial-zero leg
+at a time so even the 49-fragment maximum sleep batch respects the exact 50-record shared queue.
+Dispatch composition also accounts for encoded fragment cost before admitting each model. An
+activity query whose 144-entry offline FIFO spans unusually many day/time-zone groups therefore
+ends as an ACK-resumable page instead of producing a result the shared queue cannot admit.
+Accepted HR, SpO2, and HRV storage consumers now execute their recovered call to that same common
+automatic-sync gate and opportunistically service its first leg; the wall-clock cadence remains
+the retry path when the queue is occupied.
+The Goodix and GoMore algorithm bodies and model
 constants are transparent C; their remaining gap is typed live-runtime adoption on hardware.
 The activity path additionally owns the recovered 144-record offline FIFO, including exact packed
 records, time rejection, oldest overwrite, acknowledgement-prefix consumption, consecutive
 day/offset packet merging, duplicate-bucket replacement, and hardened index/state checks.
-Heart rate, SpO2, and HRV own separate recovered 24-record offline FIFOs. HR/SpO2 use exact
+Heart rate, SpO2, HRV, and activity own recovered offline FIFOs. All four use exact
+three-day FlashDB/FIFO/current-RAM daily synchronization on Zephyr with metric-specific durable
+cursor ACKs; HR/SpO2 use exact
 16-byte UInt8 aggregate records and HRV uses exact 20-byte UInt16 aggregate records; the portable
 implementation preserves retained bytes, FIFO-prefix consumption, consecutive day/offset
 grouping, repeated-hour replacement, and the HRV callback's distinct ACK clock policy.
@@ -166,8 +208,9 @@ locomotion-crossing, optical-period, respiratory, sleep, and output-orchestratio
 nineteen tensor-runtime routines—are reconstructed in transparent C. See
 [`docs/GOMORE-PROVIDER-BOUNDARY.md`](docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md).
 The three byte-pinned R1 GoMore adapters are transparent too: exact accelerometer/raw-optical topic
-input plus the backward-clock reset dispatcher. The latter is source-bound on Zephyr to an explicit
-suppressed action until live engine state and result composition are hardware-validated.
+input plus the backward-clock reset dispatcher. Normal enable/profile changes now initialize a live
+source-built engine; backward-clock reset and the 16-stage result composition remain withheld until
+their target ownership and hardware behavior are validated.
 The IQS7211E path uses pinned MIT provider/settings references and the R1-only adapter in
 `src/r1_iqs7211e.c`; its Nordic TWIM0/GPIOTE board binding is recorded in
 [`docs/IQS7211E-PROVIDER-BOUNDARY.md`](docs/boundaries/IQS7211E-PROVIDER-BOUNDARY.md)

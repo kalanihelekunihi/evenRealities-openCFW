@@ -721,7 +721,7 @@ GOODIX_ADAPTER_GLUE_SYMBOLS = {
 GOODIX_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
     0x000928CA: "gomore_primitives_scale",
     0x0006E540: "goodix_primitives_nadt_result_binding",
-    0x0006E838: "goodix_primitives_nadt_preprocess_execute",
+    0x0006E838: "goodix_primitives_spo2_calc",
     0x0007DD58: "goodix_primitives_nadt_alternate_state_classify",
     0x00029656: "goodix_primitives_float_buffer_mean",
     0x0006DA9C: "goodix_primitives_hrv_configuration_binding",
@@ -735,12 +735,12 @@ GOODIX_PRIMITIVES_RECONSTRUCTED_SYMBOLS = {
     0x00034A58: "goodix_primitives_sample_standard_deviation",
     0x00034CBC: "goodix_primitives_hr_extrema_tracker_update",
     0x0003113C: "goodix_primitives_spo2_stream_accumulate",
-    0x0006C6A8: "goodix_primitives_spo2_process",
+    0x0006C6A8: "goodix_primitives_hba_process",
     0x00034500: "goodix_primitives_spo2_report_analyze",
     0x00035850: "goodix_primitives_nadt_harmonic_candidates_select",
     0x00047240: "goodix_primitives_nadt_primary_signal_classify",
     0x00032808: "goodix_primitives_hr_decision_update",
-    0x0006D51C: "goodix_primitives_hr_process",
+    0x0006D51C: "goodix_primitives_hrv_process",
     0x0006E008: "goodix_primitives_nadt_stream_process",
     0x000856EC: "goodix_primitives_nadt_window_classify",
     0x0003738C: "goodix_primitives_float_buffer_standard_deviation",
@@ -1979,6 +1979,18 @@ def main() -> None:
     require(PROJECT / "tests" / "test_openr1.c", "test_battery_controller")
     require(PROJECT / "tests" / "test_openr1.c", "test_automatic_health_sync")
     require(PROJECT / "tests" / "test_openr1.c", "test_activity_offline_sync")
+    require(PROJECT / "tests" / "test_openr1.c", "test_hrv_flash_record_merge")
+    require(PROJECT / "src" / "r1_health.c", "r1_health_u16_flash_record_merge")
+    require(PROJECT / "src" / "r1_dispatch.c", "add_hrv_history_notification")
+    require(PROJECT / "src" / "r1_dispatch.c", "add_activity_history_notification")
+    require(PROJECT / "include" / "openr1" / "r1_dispatch.h",
+            "R1_DISPATCH_FRAGMENT_MAX 50u")
+    require(PROJECT / "src" / "r1_dispatch.c",
+            "dispatch_fragment_capacity_available")
+    require(PROJECT / "platform" / "nrf52840" / "zephyr" / "src" /
+            "openr1_databases_zephyr.c", "health_query_activity_history")
+    require(PROJECT / "platform" / "nrf52840" / "zephyr" / "src" /
+            "openr1_databases_zephyr.c", "health_execute_storage_notification")
     require(PROJECT / "src" / "r1_battery.c", "BATTERY_SCALE_NUMERATOR")
     require(PROJECT / "src" / "r1_battery.c", "BATTERY_CHARGING_DIVIDER")
     require(PROJECT / "src" / "r1_battery.c", "r1_battery_controller_update")
@@ -1989,6 +2001,14 @@ def main() -> None:
     require(PROJECT / "src" / "r1_health.c", "r1_health_run_automatic_sync")
     require(PROJECT / "src" / "r1_runtime.c",
             "r1_runtime_run_automatic_health_sync")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_runtime_schedule_automatic_health_sync")
+    require(PROJECT / "src" / "r1_runtime.c",
+            "r1_runtime_service_automatic_health_sync")
+    require(PROJECT / "platform" / "nrf52840" / "sdk" / "openr1_clock.c",
+            "r1_runtime_schedule_automatic_health_sync")
+    require(PROJECT / "platform" / "nrf52840" / "sdk" / "openr1_clock.c",
+            "r1_runtime_service_automatic_health_sync")
     require(PROJECT / "platform" / "nrf52840" / "sdk" / "openr1_health.c",
             ".openr1_health_api")
     for marker in (
@@ -2689,8 +2709,9 @@ def main() -> None:
         "6d8e91f9572f177c80454d8fdad3aecc847c74495e9636859a28825b330de651",
         "0.9765625",
         "required acc/raw input",
-        "startup does not register it",
-        "does not run the health engine",
+        "Zephyr composes the recovered seven masks",
+        "initializes the transparent engine and exact",
+        "completed 16-stage target executor",
     ):
         require(gomore_topic_input, marker)
     goodix_internal_topics = \
@@ -2780,7 +2801,7 @@ def main() -> None:
         "57 formerly unclassified processing functions / 19,148 bytes",
         "0x0006E838 -> 0x000766AC -> 0x00035850",
         "former largest unknown at `0x0006E838` is now source-admitted",
-        "goodix_primitives_nadt_preprocess_execute",
+        "goodix_primitives_spo2_calc",
         "31 formerly unclassified functions / 7,144 executable bytes",
         "seven formerly unclassified functions / 1,154 executable bytes",
         "82 formerly unclassified Ghidra functions / 19,520 executable bytes",

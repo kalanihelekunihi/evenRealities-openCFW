@@ -9,6 +9,11 @@ recovered 36-page product-data region, `kv.bin`, and `sleep.db` through the
 source nRF NVMC driver; REG1 settings persistence uses the portable KV store.
 Pinned Apache-2.0 FlashDB 2.0.0 and bundled FAL 0.5.99 bind the six-page
 `health.db` TSDB at offset `0x2000` with the recovered 32-bit write granularity.
+The one-page `pKey.bin` region at offset `0xA000` now binds the recovered
+736-byte GoMore prior-state restore/append/compaction format. Existing valid
+64-byte key prefixes are preserved; an entirely erased page receives an explicit
+all-zero openR1 prefix used only as the state-layout anchor, never as an
+authorization credential.
 The separate three-page settings partition uses Zephyr NVS to persist SMP bond,
 identity, and CCC state before advertising starts.
 The source nRF POWER HAL enables the main DC/DC converter before Bluetooth,
@@ -23,9 +28,12 @@ the NFC rectifier on AIN2/P0.04 uses gain 1/6 and 10-us acquisition. All are
 12-bit without oversampling. The PMIC-current and rectifier diagnostic APIs are
 live. Battery conversion now takes client bit 0 from the reconstructed YHM2710
 shared-power lease before sampling and releases it afterward. Startup decodes the exact
-four-byte persisted `power` record and adopts battery types 1...4 into the runtime controller;
-signed voltage compensation remains available through a typed read-only accessor. Periodic
-battery production, live charge-state input, and physical calibration remain open.
+four-byte persisted `power` record and adopts battery types 1...4 plus valid signed voltage
+compensation into the runtime controller. A boot seed and each read-only device-status access now
+take five live samples and read YHM2710 register 6 before dispatch snapshots the response. Status
+0xA...0xC maps to charging and 0xD to full; transport failures leave the previous state intact.
+No autonomous cadence is claimed because none is yet proven by the recovered call graph. PMIC
+event-driven refresh, physical calibration, and owned-ring validation remain open.
 The one-byte `r_size` class is also strictly decoded and exposed only for values 6...15. It does
 not provision IQS7211E because ring size alone cannot prove the independent physical layout.
 Reset causes are decoded directly from the nRF POWER register into the portable
@@ -40,7 +48,12 @@ The portable wall clock is also active: a lowest-priority 1,024-tick worker
 adopts phone-supplied Unix time and signed UTC offset from command `0x05`, then
 uses Zephyr's monotonic tick source and the reconstructed exact Unix/Gregorian
 converter for query APIs and health local-day boundaries. It
-reports time unavailable until a valid phone synchronization is received.
+reports time unavailable until a valid phone synchronization is received. In
+parallel, the reconstructed `sys rtc` object and generic registry are live:
+RTC2 is source-bound through Zephyr's counter driver at prescaler 4095 and IRQ
+priority 6, its eight hardware ticks advance the recovered epoch service, and
+phone time is routed through the recovered slot-0x14 request path. RTC0 remains
+with Bluetooth and RTC1 remains the Zephyr system clock.
 The motion adapter binds Zephyr's source TWIM1 driver at 400 kHz on recovered
 P0.11/P0.14, address `0x18`, with P0.15 rising-edge accounting. It compiles
 hash-pinned Bosch BMA456 SensorAPI 2.29.0 and ST LIS2DW12 2.1-compatible C,
@@ -98,10 +111,19 @@ falling-edge interrupt, P0.10 controls the emitter, and P1.04 controls reset.
 Board preparation acquires YHM2710 client bit 1 and shutdown releases it after
 the pins are made inactive. Startup only binds this lifecycle; it does not power
 the sensor or start sampling, and no BLE route invokes the retained start/switch/
-stop APIs. Raw frames are counted only. The Goodix global algorithm ABI remains
-fail-closed, so HR, SpO2, and HRV values are never synthesized. The exact product-side
-`raw_hr`/`adt` bounded containers and living-object pending record compile, but physical channel
-selection remains unbound.
+stop APIs. Raw frames are counted only. The Goodix 20-row global frame table now
+passes through a vendor-free checked provider ABI, including lifecycle, versions,
+virtual registers, and mask/count-validated 16-word results. A retained source composer reproduces
+the exact separate HR/HBA, HRV, and SpO2 input construction, lifecycle, public update masks and
+HR-to-HRV carry, including R1's `0x00FF` SpO2 mask, word-0 mirror, and cleared zero tail. The
+persistent biometric root executors are target-bound with explicit HBA/HRV/SpO2
+plan/state/workspace ownership. Normal acquisition starts only requested HR/HRV/HSM/SpO2 bits;
+factory masks are not used as a substitute. An independent observer accepts only bridge-validated updated
+records. The public Goodix HR and SpO2 layouts are narrowed into the recovered R1 one-shot result
+plans and stored through the exact scalar cache consumers only while the persisted `dev_info`
+health bit is enabled. The exact product-side `raw_hr` backing is live: HSM mask `0x08` observes
+the first checked Goodix frame word, appends it once to the 30-word container, and never produces a
+fake biometric result. Physical wavelength, scale, and clinical meaning remain unproven.
 
 Health storage starts after the source wall clock and before `sleep.db`, matching
 the recovered task order. Its exact `{3,3,3,3,24,6}` schema, control values 2/3,
@@ -117,6 +139,9 @@ timestamp remains the bounded query/index key. Startup restores only activity, H
 SpO2, and HRV; temperature and stress use separate module-owned live caches but are not restored
 by the recovered crash record;
 short, invalid-time, or otherwise rejected records are counted and skipped.
+The same storage owner now exposes exact eight-byte HR, SpO2, and HRV event consumers with
+firmware-clock/local-hour sampling and independent rolling accumulators. HR and SpO2 are fed by
+the checked Goodix result observer, which also routes validated HRV results to the HRV consumer.
 After the first valid clock sample, each actual local-hour change multicasts the
 new hour on recovered event slot 1. The listener builds the exact zero-initialized
 128-byte body from the previous runtime cache slot and appends it through FlashDB;
@@ -130,9 +155,37 @@ Failed day-start conversion or recovery-workspace allocation is counted without 
 unbounded query.
 The exact 24-byte `hsync` class is decoded at startup. Slot-0 reset/clamp reconciles only
 the four named cursors, preserves both unresolved words byte-for-byte, and commits the result
-through the hardened `kv.bin` snapshot writer. REG1 and hsync mutations share one Zephyr mutex;
-successful cursor commits and failures are counted separately. Requests for destructive
-formatting and GoMore reinitialization remain suppressed diagnostics.
+through the hardened `kv.bin` snapshot writer. REG1, public health-settings, and hsync mutations
+share one Zephyr mutex. The exact health-settings planner queues its ACK before persisting only a
+normalized enable transition at `dev_info` byte 24 bit 0 and timestamp offset 32; raw-only private
+event `0x100D` transitions reconcile the exact seven-slot GoMore authorization state. Global health
+selects slots 0 and 3 and therefore opens only their shared accelerometer dependency; optical
+listeners are opened only by slots whose recovered masks require them. Successful cursor commits
+and failures are counted separately. Destructive health-database formatting remains deliberately
+suppressed, but the recovered backward-time and failure-60 GoMore reinitializations are live: they
+disable dynamic slot 4, discard resume state, clear staged topics, and initialize a fresh engine.
+Normal health-enable/profile reconciliation allocates and initializes the transparent sleep engine.
+Live topics execute all 16 recovered stages, copy the exact output snapshot, dynamically reconcile
+sleep optical authorization, aggregate cumulative activity, and persist validated final sleep.
+
+Public HR, SpO2, HRV, and activity daily-history requests use the recovered 259,200-second FlashDB window. Exact
+128-byte records are decoded and calendar-normalized, prior local days flow through the pinned
+oldest-first scalar merge callbacks, current RAM is appended last, and every emitted packet carries
+an ACK context. HRV uses its independent seven-byte UInt16 slot merge and six-byte current-latest
+prefix; activity uses its independent 144-bucket packed-word merge. The invalid-clock FIFO is
+merged between flash and RAM; mode-1 ACKs consume its
+matching prefix, while only mode-0/2 ACKs commit the corresponding named `hsync` word.
+Encoded activity pages are capped by the same 50-fragment EUS queue boundary. Reaching that
+boundary completes the current page successfully; per-packet ACKs consume the exact offline FIFO
+prefix or advance the durable cursor, so a later query resumes without an atomic enqueue failure.
+Accepted HR, SpO2, and HRV storage events also execute their recovered common `0x8B138`
+post-storage action: they re-evaluate the same authenticated three-hour gate and opportunistically
+start its first drain-aware leg. No separate unsolicited sample wire format is invented.
+The main wall-clock cadence also drives the recovered 10,800-second automatic history gate.
+Only an encrypted, bonded, authorized phone-role link can schedule its exact HR, SpO2, HRV,
+activity, and unsynchronized-sleep order. A five-bit pending set and empty-queue admission service
+publish one serial-zero leg at a time, preserving the recovered 50-record BLE queue at maximum
+history sizes and discarding unfinished work on phone disconnect.
 
 The custom `openr1_nrf52840` board deliberately exposes only SoC resources
 whose package-level presence is established. The recovered motion, touch, and
@@ -140,14 +193,16 @@ analog pins are in devicetree; additional sensor pins will move there only with 
 Zephyr adapters and hardware validation. The image currently provides the BAE8 transport, core
 protocol runtime, KV/health/sleep storage, wall-clock, REG1, reset/watchdog lifecycle,
 motion, fail-closed touch transport/lifecycle, the recovered analog acquisition seam, and
-on-demand fail-closed optical transport/lifecycle. Biometric calculation and destructive/
-unresolved slot-0 actions are not silently claimed as live; the bounded hourly health
+on-demand optical transport/lifecycle. Transparent HBA, HRV, SpO2, and GoMore biometric/activity/
+sleep calculation is live; destructive or unresolved slot-0 actions are not silently enabled. The bounded hourly health
 writer uses only existing caches and never fabricates measurements. Touch remains
 identity/wear gated and NFC remains policy-disabled.
 
 The repository wrapper preserves west's Python environment across sysbuild,
 pins the board root, checks every source checkout before packaging, and verifies
-the final signature and member union. Build and package with:
+the final signature and member union. On macOS it also serializes and temporarily
+hides only the pinned 2020 `gdb-py` configure probe, which can hang under current
+Rosetta, and restores it on exit; GDB is not a firmware input. Build and package with:
 
 ```sh
 make zephyr-bundle \

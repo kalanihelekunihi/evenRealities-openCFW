@@ -51,15 +51,23 @@ not automatic batch legs. These details are independently captured in the first-
 `r1_health_run_automatic_sync` owns the portable gate, exact leg order, serial-zero behavior, clock
 rewind handling, and timestamp update. `r1_health_note_explicit_history_query` implements the
 shared query timestamp rule. `r1_runtime_run_automatic_health_sync` derives the phone-connected
-condition from an active `R1_ROLE_PHONE` link and delegates to the portable controller. Existing
+condition from an encrypted, bonded, authorized `R1_ROLE_PHONE` link and delegates to the portable
+controller. Existing
 typed health encoders, output queues, acknowledgement tracking, and storage adapters remain the
 only data paths; no generic registry or raw vendor transport was added.
 
-The Nordic image retains `.openr1_health_api` as the explicit scheduler/wall-clock integration
-seam. There is deliberately no fabricated periodic producer yet: the seam must be called by the
-admitted wall-clock/task provider once that runtime integration is complete. Host tests cover the
-disconnected, initial, cooldown, exact boundary, clock-rewind, explicit-query, call-order,
-serial-zero, and runtime-role cases.
+Both product targets now call the controller from their admitted once-per-second wall-clock
+cadence. `r1_runtime_schedule_automatic_health_sync` records the exact five-leg order in a bounded
+bitset, and `r1_runtime_service_automatic_health_sync` admits one leg only after the recovered
+50-record shared BLE queue drains. This matters at the exact boundary: sixteen maximum-size sleep
+sessions plus their response require 49 fragments, while a worst-case scalar history query can
+produce 29 models. The Nordic CMSIS queue publishes an explicit idle predicate; Zephyr uses the
+portable event-plane count. Disconnecting the phone discards an unfinished batch. Host tests
+cover the disconnected, authentication, initial, cooldown, exact boundary, clock-rewind,
+explicit-query, call-order, serial-zero, drain-aware five-leg service, and shared cooldown
+timestamp cases.
+The Nordic `.openr1_health_api` retention table remains as a linker-auditable view of the same
+controller even though its live caller is now composed.
 
 ## Security and provider limits
 

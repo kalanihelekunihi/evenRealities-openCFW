@@ -81,8 +81,7 @@ r1_error r1_analog_close_plan_build(
         return R1_ERROR_ARGUMENT;
     }
     *plan = (r1_analog_close_plan){0};
-    if (channel < R1_ANALOG_CHANNEL_BATTERY ||
-        channel > R1_ANALOG_CHANNEL_NFC_RECTIFIER) {
+    if (channel > R1_ANALOG_CHANNEL_NFC_RECTIFIER) {
         plan->provider_status = R1_ANALOG_PROVIDER_STATUS_NOT_FOUND;
         return R1_OK;
     }

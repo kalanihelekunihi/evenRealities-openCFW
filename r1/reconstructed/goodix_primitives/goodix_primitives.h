@@ -27,7 +27,7 @@
 #define GOODIX_PRIMITIVES_SPO2_PACKED_BANK_COUNT 3u
 #define GOODIX_PRIMITIVES_SPO2_PACKED_TOTAL_BANK_COUNT 7u
 #define GOODIX_PRIMITIVES_SPO2_PACKED_PREFIX_VALUES 720u
-#define GOODIX_PRIMITIVES_SPO2_PACKED_WORKSPACE_VALUES 1260u
+#define GOODIX_PRIMITIVES_SPO2_PACKED_WORKSPACE_VALUES 1935u
 #define GOODIX_PRIMITIVES_SPO2_SPECTRAL_FLOAT_CHANNELS 4u
 #define GOODIX_PRIMITIVES_SPO2_SPECTRAL_PACKED_CHANNELS 4u
 #define GOODIX_PRIMITIVES_SPO2_SPECTRAL_CHANNELS 5u
@@ -50,6 +50,7 @@
 #define GOODIX_PRIMITIVES_NADT_SPECTRAL_PEAK_CAPACITY 5u
 #define GOODIX_PRIMITIVES_NADT_SPECTRAL_OUTPUT_CAPACITY 3u
 #define GOODIX_PRIMITIVES_NADT_HARMONIC_CAPACITY 3u
+#define GOODIX_PRIMITIVES_NADT_PRIMARY_PEAK_PACKED_BYTES 563u
 #define GOODIX_PRIMITIVES_NADT_DUAL_WINDOW_VALUES 125u
 #define GOODIX_PRIMITIVES_NADT_DUAL_WINDOW_ROWS 62u
 #define GOODIX_PRIMITIVES_NADT_DUAL_WINDOW_PEAK_CAPACITY 62u
@@ -496,23 +497,34 @@ typedef struct {
     int32_t calibration[4];
 } goodix_primitives_hrv_configuration;
 
-typedef struct {
-    uint32_t mode;
-    uint8_t scratch[44];
-} goodix_primitives_hrv_work_a;
+typedef goodix_primitives_hr_extrema_tracker goodix_primitives_hrv_work_a;
 
 typedef struct {
-    uint32_t channels;
+    float position;
+    float primary_first;
+    float primary_second;
+    float auxiliary_first;
+    float auxiliary_second;
+    float center;
+    int32_t tag;
+    uint8_t flag;
+    uint8_t reserved[3];
+} goodix_primitives_hr_decision_record;
+
+typedef struct {
+    uint32_t record_capacity;
     uint32_t factor;
-    uint8_t scratch_008[0x28Cu];
-    int32_t quarter_sample_count;
-    uint32_t double_sample_count;
-    uint8_t scratch_29c[8];
-    uint32_t block_size;
-    uint32_t reserved_2a8;
-    float scale_a;
-    float scale_b;
-    uint32_t reserved_2b4;
+    goodix_primitives_hr_decision_record records[20];
+    uint32_t record_count;
+    int32_t mode;
+    int32_t latch;
+    int32_t minimum_interval;
+    int32_t maximum_interval;
+    int32_t stale_count;
+    int32_t baseline_count;
+    int32_t baseline_capacity;
+    float baseline_mean[3];
+    uint32_t baseline_timestamp;
 } goodix_primitives_hrv_work_b;
 
 typedef struct {
@@ -525,10 +537,19 @@ typedef struct {
     uint32_t group_count;
     uint32_t scaled_sample_bytes;
     uint32_t sample_count_copy;
+    uint32_t process_count;
+    uint32_t window_index;
     float calibration_e8;
     float calibration_ec;
     float calibration_f0;
     float calibration_f4;
+    uint32_t outlier_count;
+    uint32_t tail_outlier_count;
+    float diagnostic_variation_percent;
+    float diagnostic_primary_mean;
+    float diagnostic_auxiliary_mean;
+    float diagnostic_interval_mean;
+    int32_t previous_output[6];
     void *subobjects[GOODIX_PRIMITIVES_HRV_SUBOBJECT_COUNT];
     size_t subobject_capacities[GOODIX_PRIMITIVES_HRV_SUBOBJECT_COUNT];
     goodix_primitives_hrv_work_a *owned_6c;
@@ -764,6 +785,12 @@ typedef struct {
     size_t encoded_value_count;
     uint32_t metadata[3];
     void *decode_context;
+    /* Retail aliases one pointer across a byte-per-value integrity pass and
+     * an MSB-first packed selection pass.  The typed reconstruction can bind
+     * the expanded integrity view separately; NULL derives it safely from
+     * the packed selection bits. */
+    const uint8_t *integrity_presence;
+    size_t integrity_presence_count;
 } goodix_primitives_spo2_channel_source;
 
 typedef struct {
@@ -1317,6 +1344,88 @@ typedef struct {
     goodix_primitives_channel_record *channel_records;
 } goodix_primitives_outer_session;
 
+/* Initializer-derived owner for retail goodix_spo2_calc. The generated model,
+ * exact 76-byte configuration, outer session, five former heap temporaries,
+ * counters, and quartic coefficient binding are retained in ordinary C.
+ * The stage callback receives the typed session instead of a stock global. */
+typedef int32_t (*goodix_primitives_spo2_runtime_stage_fn)(
+    void *context, goodix_primitives_outer_session *session,
+    goodix_primitives_nadt_preprocess_stage stage,
+    goodix_primitives_nadt_preprocess_frame *frame);
+
+typedef struct {
+    goodix_primitives_spo2_runtime_stage_fn execute;
+    void *context;
+    const quantized_runtime *quantized;
+    goodix_primitives_double_binary_fn power;
+    goodix_primitives_float_unary_fn square_root;
+    goodix_primitives_float_unary_fn floor;
+    goodix_primitives_float_unary_fn exponential;
+    goodix_primitives_double_unary_fn arc_tangent;
+    goodix_primitives_double_unary_fn double_exponential;
+    goodix_primitives_allocate_fn allocate;
+    goodix_primitives_release_fn release;
+    void *provider_context;
+} goodix_primitives_spo2_runtime_bindings;
+
+typedef struct {
+    uint8_t packed[GOODIX_PRIMITIVES_NADT_PRIMARY_PEAK_PACKED_BYTES];
+    uint8_t columns[GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES];
+    int32_t indices[20];
+} goodix_primitives_spo2_peak_workspace;
+
+typedef struct {
+    int32_t primary_indices[20];
+    int32_t secondary_indices[20];
+    float sort[GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES];
+    int8_t mask[GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES];
+} goodix_primitives_spo2_analysis_workspace;
+
+typedef union {
+    float model[GOODIX_PRIMITIVES_NADT_INFERENCE_WORKSPACE_FLOATS];
+    goodix_primitives_nadt_spectral_workspace spectral;
+    goodix_primitives_spo2_peak_workspace peak;
+    goodix_primitives_spo2_analysis_workspace analysis;
+    goodix_primitives_nadt_dual_window_workspace dual_window;
+    goodix_primitives_nadt_signal_confidence_workspace signal_confidence;
+} goodix_primitives_spo2_transient_workspace;
+
+typedef struct {
+    quantized_runtime_stage stage;
+    uint32_t last_status;
+} goodix_primitives_spo2_model_stage;
+
+typedef struct goodix_primitives_spo2_source_state
+    goodix_primitives_spo2_source_state;
+
+typedef struct {
+    goodix_primitives_spo2_runtime_bindings bindings;
+    goodix_primitives_outer_session *session;
+    goodix_primitives_nadt_preprocess_plan plan;
+    int32_t quartic_coefficients[7];
+    goodix_primitives_nadt_preprocess_state state;
+    goodix_primitives_nadt_preprocess_workspace workspace;
+    uint8_t assembled_records[GOODIX_PRIMITIVES_NADT_PREPROCESS_RECORD_BYTES];
+    uint8_t summaries[GOODIX_PRIMITIVES_NADT_PREPROCESS_SUMMARY_BYTES];
+    float inference_value;
+    float adjusted_value;
+    float selected_rate;
+    uint8_t selected_kind;
+    goodix_primitives_spo2_channel_scaling channel_scaling;
+    goodix_primitives_spo2_source_state *source_state;
+    goodix_primitives_nadt_generated_subgraph model_subgraphs[
+        GOODIX_PRIMITIVES_NADT_GRAPH_SUBGRAPH_COUNT];
+    goodix_primitives_spo2_model_stage model_subgraph_stages[
+        GOODIX_PRIMITIVES_NADT_GRAPH_SUBGRAPH_COUNT]
+        [GOODIX_PRIMITIVES_NADT_SUBGRAPH_OPERATOR_COUNT];
+    goodix_primitives_nadt_generated_graph model_graph;
+    goodix_primitives_spo2_model_stage model_graph_stages[
+        GOODIX_PRIMITIVES_NADT_GRAPH_STAGE_COUNT];
+    goodix_primitives_spo2_transient_workspace transient;
+    float spectral_scales[GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES];
+    bool bound;
+} goodix_primitives_spo2_runtime;
+
 typedef struct {
     uint32_t *values;
     uint16_t count;
@@ -1366,6 +1475,7 @@ typedef struct {
     int32_t interpolation_phase;
     float previous_interpolation_sample;
     const float *mode_coefficients[4];
+    const uint32_t *mode_coefficient_words[4];
     size_t mode_coefficient_counts[4];
 } goodix_primitives_hr_weighted_feature_state;
 
@@ -1398,7 +1508,12 @@ typedef struct {
     size_t channel_value_count;
     const uint8_t *presence_bytes;
     size_t presence_byte_count;
+    const uint8_t *gain_codes;
+    size_t gain_code_count;
+    const uint16_t *drive_currents;
+    size_t drive_current_count;
     uint8_t channel_count;
+    uint8_t last_hr;
     int32_t axis_x;
     int32_t axis_y;
     int32_t axis_z;
@@ -1442,13 +1557,13 @@ typedef struct {
     int32_t quality_threshold_first;
     int32_t quality_threshold_second;
     int32_t previous_output[6];
-    uint32_t adjustment_age;
     int32_t previous_rate;
     float decision_reference_position;
     int32_t decision_reference_mode;
     int32_t latest_rates[4];
     uint32_t outlier_count;
     uint32_t tail_outlier_count;
+    uint32_t candidate_warmup_count;
 } goodix_primitives_hr_process_state;
 
 typedef struct {
@@ -1458,6 +1573,18 @@ typedef struct {
     size_t signal_scratch_capacity;
 } goodix_primitives_hr_process_workspace;
 
+/* Retail 0x0006D51C is goodix_hrv_calc, not the HBA/HR root. Keep the
+ * historical hr_process spellings as source-compatible aliases, but expose
+ * the public identity used by the matched 0x0002CAD8 HRV wrapper. */
+typedef goodix_primitives_hr_process_input
+    goodix_primitives_hrv_process_input;
+typedef goodix_primitives_hr_process_plan
+    goodix_primitives_hrv_process_plan;
+typedef goodix_primitives_hr_process_state
+    goodix_primitives_hrv_process_state;
+typedef goodix_primitives_hr_process_workspace
+    goodix_primitives_hrv_process_workspace;
+
 typedef struct {
     int32_t count;
     int32_t capacity;
@@ -1466,18 +1593,6 @@ typedef struct {
 } goodix_primitives_running_triplet;
 
 #define GOODIX_PRIMITIVES_HR_DECISION_HISTORY_VALUES 10u
-
-typedef struct {
-    float position;
-    float primary_first;
-    float primary_second;
-    float auxiliary_first;
-    float auxiliary_second;
-    float center;
-    int32_t tag;
-    uint8_t flag;
-    uint8_t reserved[3];
-} goodix_primitives_hr_decision_record;
 
 typedef struct {
     float position;
@@ -1522,6 +1637,27 @@ typedef struct {
     goodix_primitives_hr_decision_workspace *workspace;
     goodix_primitives_float_unary_fn square_root;
 } goodix_primitives_hr_decision_context;
+
+/* Complete caller-owned execution mirror for the retail GH_HRV root.  It
+ * binds the exact 0x6DB5C allocation graph to the typed 0x6D51C process,
+ * including the shared +0x6C extrema/event record and +0x70 decision window.
+ * No firmware-resident table or opaque provider is retained. */
+typedef struct {
+    goodix_primitives_hrv_context *context;
+    goodix_primitives_hrv_process_plan plan;
+    goodix_primitives_hrv_process_state state;
+    goodix_primitives_hrv_process_workspace workspace;
+    goodix_primitives_hr_decision_state decision_state;
+    goodix_primitives_hr_decision_workspace decision_workspace;
+    goodix_primitives_hr_decision_context decision_context;
+    goodix_primitives_hr_candidate_record candidate_records[20];
+    float quality_sort_scratch[11];
+    float signal_scratch[125];
+    goodix_primitives_hr_extrema_workspace extrema_workspace;
+    goodix_primitives_hr_extrema_curve trough_curve;
+    goodix_primitives_hr_extrema_curve peak_curve;
+    bool bound;
+} goodix_primitives_hrv_runtime;
 
 typedef struct {
     float mean;
@@ -1624,6 +1760,16 @@ typedef struct {
     size_t recent_input_count;
     goodix_primitives_word_dispatch_context dispatch;
 } goodix_primitives_spo2_score_context;
+
+/* Native checked projection of the two-pointer record passed to generated
+ * graph executors by retail HBA.  The first two members preserve the exact
+ * target ABI; byte extents follow for source-side validation. */
+typedef struct {
+    float *workspace;
+    const void *tail_input;
+    size_t workspace_count;
+    size_t tail_input_count;
+} goodix_primitives_graph_executor_input;
 
 typedef struct {
     goodix_primitives_elapsed_state *elapsed_state;
@@ -1826,6 +1972,29 @@ typedef struct {
     uint8_t cosine_percent;
 } goodix_primitives_nadt_channel_analysis;
 
+struct goodix_primitives_spo2_source_state {
+    goodix_primitives_spo2_channel_output assembled_output;
+    goodix_primitives_nadt_batch_state batch_state;
+    goodix_primitives_nadt_channel_state channel_state;
+    goodix_primitives_nadt_geometry_state geometry_state;
+    goodix_primitives_nadt_output_record output_record;
+    float output_history[25];
+    goodix_primitives_nadt_spectral_result spectral_result;
+    goodix_primitives_nadt_harmonic_workspace harmonic_workspace;
+    goodix_primitives_nadt_harmonic_selector_context harmonic_selector;
+    goodix_primitives_threshold_history peak_histories[2];
+    uint32_t peak_history_values[2][20];
+    goodix_primitives_nadt_sample_summary sample_summary;
+    goodix_primitives_nadt_channel_analysis channel_analysis;
+    goodix_primitives_nadt_channel_quality_record quality_record;
+    uint8_t transition_record[8];
+    goodix_primitives_nadt_output_selection_state output_selection;
+    goodix_primitives_nadt_dual_window_result signal_features;
+    goodix_primitives_nadt_signal_confidence_state signal_confidence;
+    goodix_primitives_nadt_signal_confidence_diagnostics signal_diagnostics;
+    float signal_rate_history[25];
+};
+
 typedef struct {
     uint32_t first;
     uint32_t second;
@@ -1880,6 +2049,10 @@ typedef struct {
     size_t channel_value_count;
     const uint8_t *enable_flags;
     size_t enable_flag_count;
+    const uint8_t *gain_codes;
+    size_t gain_code_count;
+    const uint16_t *drive_currents;
+    size_t drive_current_count;
     uint8_t channel_count;
     int32_t accelerometer[3];
     uint8_t mode;
@@ -1957,6 +2130,79 @@ typedef struct {
     uint32_t score_history_scratch[4];
     goodix_primitives_spo2_report_output report_output;
 } goodix_primitives_spo2_process_workspace;
+
+/* Retail 0x0006C6A8 is goodix_hba_calc. These aliases correct the public
+ * identity without breaking callers of the earlier provisional names. */
+typedef goodix_primitives_spo2_process_input
+    goodix_primitives_hba_process_input;
+typedef goodix_primitives_spo2_process_output
+    goodix_primitives_hba_process_output;
+typedef goodix_primitives_spo2_process_configuration
+    goodix_primitives_hba_process_configuration;
+typedef goodix_primitives_spo2_process_plan
+    goodix_primitives_hba_process_plan;
+typedef goodix_primitives_spo2_process_state
+    goodix_primitives_hba_process_state;
+typedef goodix_primitives_spo2_stream_workspace
+    goodix_primitives_hba_stream_workspace;
+typedef goodix_primitives_spo2_process_workspace
+    goodix_primitives_hba_process_workspace;
+
+/* Non-owning execution bindings for the three generated graphs and the
+ * ordinary math/integrity providers used by retail goodix_hba_calc.  The
+ * persistent initializer-owned buffers themselves are reconstructed by
+ * goodix_primitives_hba_runtime_bind below. */
+typedef struct {
+    goodix_primitives_i32_unary_fn integrity_transform;
+    const quantized_runtime *quantized;
+    const goodix_primitives_indexed_operation_fn *operations;
+    goodix_primitives_elapsed_state *elapsed_state;
+    const goodix_primitives_float_span *mode_buffers;
+    goodix_primitives_float_unary_fn exponential;
+    goodix_primitives_float_unary_fn logarithm_base_10;
+    goodix_primitives_float_unary_fn square_root;
+} goodix_primitives_hba_runtime_bindings;
+
+/* Complete typed projection of the persistent objects initialized by stock
+ * 0x0006D204/0x00072C48.  It aliases only caller-owned allocations in
+ * context_owner, while retaining all state that stock hid in globals. */
+typedef struct {
+    goodix_primitives_hr_context_owner *context_owner;
+    goodix_primitives_biquad_coefficients filter_coefficients[4];
+    goodix_primitives_hba_process_configuration configuration;
+    goodix_primitives_spo2_stream_plan stream_plan;
+    goodix_primitives_spo2_stream_state stream_state;
+    goodix_primitives_hba_stream_workspace stream_workspace;
+    float sort_scratch[20];
+    goodix_primitives_timed_dispatch_context timed_dispatch;
+    goodix_primitives_spo2_score_context score_dispatch;
+    uint32_t recent_score_inputs[4];
+    goodix_primitives_hba_process_plan plan;
+    goodix_primitives_hba_process_state state;
+    goodix_primitives_hba_process_workspace workspace;
+    bool bound;
+} goodix_primitives_hba_runtime;
+
+/* Complete public input geometry passed by GH3x2xSpo2AlgoExe to the retail
+ * goodix_spo2_calc root at 0x0006E838. Persistent algorithm state remains in
+ * the explicit plan/state/workspace objects below. */
+typedef struct {
+    uint32_t frame_id;
+    uint8_t total_channel_count;
+    const uint8_t *enable_flags;
+    size_t enable_flag_count;
+    int32_t *channel_values;
+    size_t channel_value_count;
+    const uint8_t *gain_codes;
+    size_t gain_code_count;
+    const uint16_t *drive_currents;
+    size_t drive_current_count;
+    int32_t acceleration[3];
+    uint8_t sleep_flag;
+    uint8_t bit_count;
+    uint8_t chip_type;
+    uint8_t data_type;
+} goodix_primitives_spo2_calc_input;
 
 typedef struct {
     uint8_t descending;
@@ -2130,6 +2376,13 @@ bool goodix_primitives_hr_candidate_window_select(
     goodix_primitives_hr_candidate_selection *selection);
 /* 0x0006D51C: GH_HR sample orchestration, periodic candidate extraction,
  * quality classification, history fallback, and reference-rate recovery. */
+bool goodix_primitives_hrv_process(
+    const goodix_primitives_hr_process_input *input,
+    const goodix_primitives_hr_process_plan *plan,
+    goodix_primitives_hr_process_state *state,
+    goodix_primitives_hr_process_workspace *workspace,
+    int32_t output[6]);
+/* Compatibility spelling retained for existing source users. */
 bool goodix_primitives_hr_process(
     const goodix_primitives_hr_process_input *input,
     const goodix_primitives_hr_process_plan *plan,
@@ -2257,9 +2510,15 @@ bool goodix_primitives_nadt_output_state_select(
     uint32_t sample_index,
     goodix_primitives_nadt_output_selection_state *state,
     float *output_rate, uint8_t *output_kind);
-/* 0x0006E838: compose the exact GH_NADT preprocessing stage order with
- * caller-owned replacements for its five heap temporaries. The enum-backed
- * plan binds the already reconstructed leaf APIs without private pointers. */
+/* 0x0006E838: retail goodix_spo2_calc. It composes the embedded GH_NADT_pre
+ * stages with caller-owned replacements for five heap temporaries. */
+int32_t goodix_primitives_spo2_calc(
+    const goodix_primitives_nadt_preprocess_plan *plan,
+    const goodix_primitives_spo2_calc_input *source,
+    goodix_primitives_nadt_preprocess_state *state,
+    goodix_primitives_nadt_preprocess_workspace *workspace,
+    uint32_t *output_words, size_t output_word_count);
+/* Compatibility spelling retained for the internal preprocessing graph. */
 int32_t goodix_primitives_nadt_preprocess_execute(
     const goodix_primitives_nadt_preprocess_plan *plan,
     const void *source, goodix_primitives_nadt_preprocess_state *state,
@@ -2382,9 +2641,31 @@ bool goodix_primitives_spo2_stream_accumulate(
     const goodix_primitives_spo2_stream_plan *plan,
     goodix_primitives_spo2_stream_state *state,
     goodix_primitives_spo2_stream_workspace *workspace);
-/* 0x0006C6A8: complete GH_SPO2/dlCom per-sample processing root. The stock
+/* Initializer-derived GH_HBA composition. The four filter records are loaded
+ * from the SHA-pinned transparent model-data source, and the non-linear
+ * secondary-context ordering is projected exactly from 0x0003113C. */
+bool goodix_primitives_hba_runtime_bind(
+    goodix_primitives_hr_context_owner *context_owner,
+    const goodix_primitives_hba_runtime_bindings *bindings,
+    goodix_primitives_hba_runtime *runtime);
+uint32_t goodix_primitives_hba_runtime_process(
+    goodix_primitives_hba_runtime *runtime,
+    const goodix_primitives_hba_process_input *input,
+    goodix_primitives_hba_process_output *output);
+bool goodix_primitives_hba_runtime_unbind(
+    goodix_primitives_hba_runtime *runtime);
+/* 0x0006C6A8: complete goodix_hba_calc per-sample processing root. The stock
  * global owner, two transient allocations, packed/spectral bindings, model
  * dispatch records, and report state are explicit typed caller bindings. */
+uint32_t goodix_primitives_hba_process(
+    const goodix_primitives_spo2_process_configuration *configuration,
+    const goodix_primitives_spo2_process_input *input,
+    goodix_primitives_spo2_process_output *output,
+    const goodix_primitives_spo2_process_plan *plan,
+    goodix_primitives_spo2_process_state *state,
+    goodix_primitives_spo2_stream_workspace *stream_workspace,
+    goodix_primitives_spo2_process_workspace *workspace);
+/* Compatibility spelling retained for existing source users. */
 uint32_t goodix_primitives_spo2_process(
     const goodix_primitives_spo2_process_configuration *configuration,
     const goodix_primitives_spo2_process_input *input,
@@ -3125,6 +3406,17 @@ uint32_t goodix_primitives_hrv_context_create(
     const goodix_primitives_hrv_configuration *configuration,
     const char *abi_tag, goodix_primitives_allocate_fn allocate,
     goodix_primitives_release_fn release, void *provider_context);
+/* Bind and execute the complete initializer-derived 0x6D51C runtime.  The
+ * supplied context must have been created by goodix_primitives_hrv_context_create;
+ * runtime is caller-owned and contains all former stack/global workspace. */
+bool goodix_primitives_hrv_runtime_bind(
+    goodix_primitives_hrv_context *context,
+    goodix_primitives_float_unary_fn square_root,
+    goodix_primitives_hrv_runtime *runtime);
+bool goodix_primitives_hrv_runtime_process(
+    goodix_primitives_hrv_runtime *runtime,
+    const goodix_primitives_hrv_process_input *input,
+    int32_t output[6]);
 /* 0x0006DF14: copy the bound configuration, replace its sample count, and
  * invoke the complete initializer with the recovered private ABI tag. */
 uint32_t goodix_primitives_hrv_initialize_for_sample_count(
@@ -3153,6 +3445,9 @@ int32_t goodix_primitives_release_context_pair(
 
 /* 0x00074AA4: destructor-vector accessor.  Stock returned absolute Thumb
  * address 0x00028EC9; the reconstruction returns the local function. */
+/* 0x00074AA4: return the 0x00028EC8 quantized multi-input concatenate
+ * executor.  The former release-context name is retained as an ABI alias. */
+uintptr_t goodix_primitives_quantized_concatenate_vector(void);
 uintptr_t goodix_primitives_release_context_pair_vector(void);
 
 /* 0x0007412C: evaluate the recovered signed-coefficient quartic record.
@@ -3285,5 +3580,15 @@ bool goodix_primitives_outer_session_create(
 bool goodix_primitives_outer_session_destroy(
     goodix_primitives_outer_session **session,
     goodix_primitives_release_fn release, void *release_context);
+/* Complete 0x6EB94 -> 0x6E838 lifecycle over the SHA-pinned source data. */
+bool goodix_primitives_spo2_runtime_bind(
+    const goodix_primitives_spo2_runtime_bindings *bindings,
+    goodix_primitives_spo2_runtime *runtime);
+int32_t goodix_primitives_spo2_runtime_process(
+    goodix_primitives_spo2_runtime *runtime,
+    const goodix_primitives_spo2_calc_input *source,
+    uint32_t *output_words, size_t output_word_count);
+bool goodix_primitives_spo2_runtime_unbind(
+    goodix_primitives_spo2_runtime *runtime);
 
 #endif

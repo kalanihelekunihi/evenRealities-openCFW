@@ -24,6 +24,7 @@ typedef struct {
     bool (*optical_acquire)(void);
     bool (*optical_release)(void);
     uint8_t (*active_clients)(void);
+    int (*charge_state)(r1_charge_state *);
     int (*last_error)(void);
 } openr1_yhm2710_zephyr_api;
 
@@ -236,6 +237,39 @@ uint8_t openr1_yhm2710_zephyr_active_clients(void) {
     return r1_power_lease_active_mask(&power_lease);
 }
 
+int openr1_yhm2710_zephyr_charge_state(r1_charge_state *charge) {
+    if (charge == NULL) {
+        return -EINVAL;
+    }
+    if (!provider_ready) {
+        return -ENODEV;
+    }
+    if (k_is_in_isr()) {
+        return -EWOULDBLOCK;
+    }
+    int error = k_mutex_lock(&shared_power_mutex, K_SECONDS(5));
+    if (error != 0) {
+        return error;
+    }
+    uint8_t status_register = 0u;
+    const bool read_ok = yhm2710_register_read_byte(
+        &pmic, UINT8_C(6), &status_register);
+    (void)k_mutex_unlock(&shared_power_mutex);
+    if (!read_ok) {
+        record_error(-EIO);
+        return -EIO;
+    }
+    const uint8_t status = (uint8_t)(status_register >> 4u);
+    if (status >= UINT8_C(0x0a) && status <= UINT8_C(0x0c)) {
+        *charge = R1_CHARGE_CHARGING;
+    } else if (status == UINT8_C(0x0d)) {
+        *charge = R1_CHARGE_FULL;
+    } else {
+        *charge = R1_CHARGE_NOT_CHARGING;
+    }
+    return 0;
+}
+
 int openr1_yhm2710_zephyr_last_error(void) {
     return (int)atomic_get(&last_error);
 }
@@ -247,5 +281,6 @@ static const openr1_yhm2710_zephyr_api yhm2710_zephyr_api = {
     openr1_yhm2710_zephyr_optical_acquire,
     openr1_yhm2710_zephyr_optical_release,
     openr1_yhm2710_zephyr_active_clients,
+    openr1_yhm2710_zephyr_charge_state,
     openr1_yhm2710_zephyr_last_error,
 };

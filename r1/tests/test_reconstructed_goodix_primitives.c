@@ -5,6 +5,12 @@
 
 #include "goodix_primitives/goodix_primitives.h"
 
+static uint32_t test_float_bits(float value) {
+    uint32_t bits = 0u;
+    memcpy(&bits, &value, sizeof(bits));
+    return bits;
+}
+
 static unsigned dispatch_calls;
 static unsigned hook_calls;
 static unsigned release_calls;
@@ -352,17 +358,19 @@ static int32_t indexed_operation(void *record, uintptr_t first,
 static int32_t score_operation(void *record, uintptr_t first,
                                uintptr_t second, uintptr_t third,
                                uintptr_t fourth, uintptr_t fifth) {
-    goodix_primitives_spo2_score_context *context =
-        (goodix_primitives_spo2_score_context *)second;
+    const goodix_primitives_graph_executor_input *input =
+        (const goodix_primitives_graph_executor_input *)second;
     assert(record != NULL && ((uint32_t *)record)[0] == 0u &&
            first == UINT32_C(0x64) && third == UINT32_C(0x68) &&
            fourth != (uintptr_t)0 && fifth == (uintptr_t)0 &&
-           context != NULL && context->recent_inputs[0] == UINT32_C(0x40F00000) &&
-           context->recent_inputs[1] == UINT32_C(0x3F800000) &&
-           context->recent_inputs[2] == UINT32_C(22) &&
-           context->recent_inputs[3] == UINT32_C(33) &&
-           context->workspace[99] == context->workspace[0] &&
-           context->workspace[197] == context->workspace[98]);
+           input != NULL && input->workspace_count == 198u &&
+           input->tail_input_count == 4u &&
+           ((const uint32_t *)input->tail_input)[0] == UINT32_C(0x40F00000) &&
+           ((const uint32_t *)input->tail_input)[1] == UINT32_C(0x3F800000) &&
+           ((const uint32_t *)input->tail_input)[2] == UINT32_C(22) &&
+           ((const uint32_t *)input->tail_input)[3] == UINT32_C(33) &&
+           input->workspace[99] == input->workspace[0] &&
+           input->workspace[197] == input->workspace[98]);
     float **const output_binding = (float **)fourth;
     assert(*output_binding != NULL);
     **output_binding = score_operation_output;
@@ -398,12 +406,51 @@ static int32_t spo2_process_indexed_operation(
     return 0;
 }
 
+static int32_t hba_workspace_indexed_operation(
+    void *record, uintptr_t first, uintptr_t second, uintptr_t third,
+    uintptr_t fourth, uintptr_t fifth) {
+    (void)first;
+    (void)third;
+    (void)fifth;
+    assert(record != NULL && ((uint32_t *)record)[0] == 6u &&
+           second != (uintptr_t)0 && fourth == second);
+    float *const workspace = (float *)second;
+    workspace[0] = 6.0f;
+    return 0;
+}
+
 static int32_t spo2_process_workspace_fixture(
     void *context, float *workspace, size_t workspace_count) {
     size_t *const calls = context;
     assert(calls != NULL && workspace != NULL &&
            workspace_count == GOODIX_PRIMITIVES_SPO2_PACKED_WORKSPACE_VALUES);
     ++*calls;
+    return 0;
+}
+
+typedef struct {
+    size_t calls;
+    goodix_primitives_nadt_preprocess_stage stages[
+        GOODIX_PRIMITIVES_NADT_PREPROCESS_STAGE_COUNT];
+    goodix_primitives_outer_session *expected_session;
+} spo2_runtime_stage_trace;
+
+static int32_t spo2_runtime_stage_fixture(
+    void *context, goodix_primitives_outer_session *session,
+    goodix_primitives_nadt_preprocess_stage stage,
+    goodix_primitives_nadt_preprocess_frame *frame) {
+    spo2_runtime_stage_trace *trace = context;
+    assert(trace != NULL && session != NULL && frame != NULL &&
+           stage < GOODIX_PRIMITIVES_NADT_PREPROCESS_STAGE_COUNT &&
+           (trace->expected_session == NULL ||
+            trace->expected_session == session) &&
+           trace->calls < GOODIX_PRIMITIVES_NADT_PREPROCESS_STAGE_COUNT);
+    trace->stages[trace->calls++] = stage;
+    if (stage == GOODIX_PRIMITIVES_NADT_PREPROCESS_INFERENCE) {
+        frame->workspace->inference_values[0] = 1.0f;
+    } else if (stage == GOODIX_PRIMITIVES_NADT_PREPROCESS_OUTPUT_BUILD) {
+        frame->output_words[12] = 1u;
+    }
     return 0;
 }
 
@@ -633,16 +680,18 @@ static void assert_hrv_geometry(uint32_t sample_count,
             index < GOODIX_PRIMITIVES_HRV_SUBOBJECT_COUNT; ++index) {
         assert(context->subobjects[index] != NULL);
     }
-    assert(context->owned_6c != NULL && context->owned_6c->mode == 2u);
+    assert(context->owned_6c != NULL &&
+           context->owned_6c->direction_state == 2);
     assert(context->owned_70 != NULL);
-    assert(context->owned_70->channels == 20u);
+    assert(context->owned_70->record_capacity == 20u);
     assert(context->owned_70->factor == 7u);
-    assert(context->owned_70->quarter_sample_count ==
+    assert(context->owned_70->minimum_interval ==
            (int32_t)(sample_count / 4u));
-    assert(context->owned_70->double_sample_count == sample_count * 2u);
-    assert(context->owned_70->block_size == 16u);
-    assert(context->owned_70->scale_a == 1.0f);
-    assert(context->owned_70->scale_b == 1.0f);
+    assert(context->owned_70->maximum_interval ==
+           (int32_t)(sample_count * 2u));
+    assert(context->owned_70->baseline_capacity == 16);
+    assert(context->owned_70->baseline_mean[1] == 1.0f);
+    assert(context->owned_70->baseline_mean[2] == 1.0f);
     const unsigned releases_before = release_calls;
     assert(goodix_primitives_hrv_context_destroy(
         &context, release_to_trace, &trace));
@@ -1393,7 +1442,7 @@ void test_reconstructed_goodix_primitives(void) {
         .signal_scratch_capacity = 125u,
     };
     int32_t hr_process_output[6] = {0, 0, 0, 0, 0, 0};
-    assert(goodix_primitives_hr_process(
+    assert(goodix_primitives_hrv_process(
         &hr_process_input, &hr_process_plan, &hr_process_state,
         &hr_process_workspace, hr_process_output));
     assert(hr_process_state.process_count == 150u &&
@@ -2461,6 +2510,8 @@ void test_reconstructed_goodix_primitives(void) {
         .encoded_value_count = 6u,
         .metadata = {11u, 12u, 13u},
         .decode_context = &channel_decoder,
+        .integrity_presence = channel_presence,
+        .integrity_presence_count = 6u,
     };
     goodix_primitives_spo2_channel_output assembled_channel_output = {
         .sequence = -1,
@@ -2505,7 +2556,7 @@ void test_reconstructed_goodix_primitives(void) {
            channel_decoder.call_count == 3u);
     goodix_primitives_spo2_channel_source short_channel_source =
         assembled_channel_source;
-    short_channel_source.presence_byte_count = 5u;
+    short_channel_source.presence_byte_count = 0u;
     assert(!goodix_primitives_spo2_channel_records_assemble(
         &short_channel_source, 1, 1u, &assembled_channel_output, add_one,
         decode_channel_fixture, &channel_count_mismatch));
@@ -2831,7 +2882,7 @@ void test_reconstructed_goodix_primitives(void) {
         .valid = 9u, .selected = 77u, .reserved = 88u,
         .score_at_least_70 = 6u, .scaled_score = 55u,
     };
-    assert(goodix_primitives_spo2_process(
+    assert(goodix_primitives_hba_process(
                &spo2_process_configuration, &spo2_process_input,
                &spo2_process_output, &spo2_process_plan,
                &spo2_process_state, &spo2_stream_workspace,
@@ -6363,7 +6414,9 @@ void test_reconstructed_goodix_primitives(void) {
         &selected_output, &selected_kind));
     assert(selected_output == -5.0f && selected_kind == UINT8_MAX);
 
-    int nadt_preprocess_source = 123;
+    const goodix_primitives_spo2_calc_input spo2_calc_source = {
+        .frame_id = 123u,
+    };
     uint32_t nadt_preprocess_output[16] = {0u};
     uint8_t nadt_preprocess_records[
         GOODIX_PRIMITIVES_NADT_PREPROCESS_RECORD_BYTES * 2u] = {0u};
@@ -6400,7 +6453,7 @@ void test_reconstructed_goodix_primitives(void) {
     nadt_preprocess_fixture nadt_preprocess = {
         .summary_metric = 8.0f,
         .inference_value = 3.0f,
-        .expected_source = &nadt_preprocess_source,
+        .expected_source = &spo2_calc_source,
         .expected_output = nadt_preprocess_output,
     };
     nadt_preprocess.statuses[
@@ -6413,8 +6466,8 @@ void test_reconstructed_goodix_primitives(void) {
         .quartic_coefficients = nadt_preprocess_quartic,
         .quartic_coefficient_count = 7u,
     };
-    assert(goodix_primitives_nadt_preprocess_execute(
-        &nadt_preprocess_plan, &nadt_preprocess_source,
+    assert(goodix_primitives_spo2_calc(
+        &nadt_preprocess_plan, &spo2_calc_source,
         &nadt_preprocess_state, &nadt_preprocess_workspace,
         nadt_preprocess_output, 16u) == 23);
     static const goodix_primitives_nadt_preprocess_stage
@@ -6449,7 +6502,7 @@ void test_reconstructed_goodix_primitives(void) {
     nadt_preprocess.statuses[
         GOODIX_PRIMITIVES_NADT_PREPROCESS_INFERENCE] = 0;
     assert(goodix_primitives_nadt_preprocess_execute(
-        &nadt_preprocess_plan, &nadt_preprocess_source,
+        &nadt_preprocess_plan, &spo2_calc_source,
         &nadt_preprocess_state, &nadt_preprocess_workspace,
         nadt_preprocess_output, 16u) == 0);
     assert(nadt_preprocess_adjusted[0] == 95.0f &&
@@ -6467,7 +6520,7 @@ void test_reconstructed_goodix_primitives(void) {
     }
     nadt_preprocess.statuses[GOODIX_PRIMITIVES_NADT_PREPROCESS_ASSEMBLE] = 9;
     assert(goodix_primitives_nadt_preprocess_execute(
-        &nadt_preprocess_plan, &nadt_preprocess_source,
+        &nadt_preprocess_plan, &spo2_calc_source,
         &nadt_preprocess_failure_state, &nadt_preprocess_workspace,
         nadt_preprocess_output, 16u) == 9);
     assert(nadt_preprocess.call_count == 2u &&
@@ -6483,7 +6536,7 @@ void test_reconstructed_goodix_primitives(void) {
     nadt_preprocess.statuses[
         GOODIX_PRIMITIVES_NADT_PREPROCESS_BATCH_ACCUMULATE] = 3;
     assert(goodix_primitives_nadt_preprocess_execute(
-        &nadt_preprocess_plan, &nadt_preprocess_source,
+        &nadt_preprocess_plan, &spo2_calc_source,
         &nadt_preprocess_failure_state, &nadt_preprocess_workspace,
         nadt_preprocess_output, 16u) == 3);
     assert(nadt_preprocess.call_count == 3u &&
@@ -6496,7 +6549,7 @@ void test_reconstructed_goodix_primitives(void) {
         GOODIX_PRIMITIVES_NADT_PREPROCESS_BATCH_ACCUMULATE] = 0;
     nadt_preprocess.statuses[GOODIX_PRIMITIVES_NADT_PREPROCESS_ACCUMULATE] = 4;
     assert(goodix_primitives_nadt_preprocess_execute(
-        &nadt_preprocess_plan, &nadt_preprocess_source,
+        &nadt_preprocess_plan, &spo2_calc_source,
         &nadt_preprocess_failure_state, &nadt_preprocess_workspace,
         nadt_preprocess_output, 16u) == 4);
     assert(nadt_preprocess.call_count == 3u &&
@@ -6509,7 +6562,7 @@ void test_reconstructed_goodix_primitives(void) {
     };
     nadt_preprocess.call_count = 0u;
     assert(goodix_primitives_nadt_preprocess_execute(
-        &nadt_preprocess_plan, &nadt_preprocess_source,
+        &nadt_preprocess_plan, &spo2_calc_source,
         &uninitialized_preprocess, &nadt_preprocess_workspace,
         nadt_preprocess_output, 16u) == 7 &&
            nadt_preprocess.call_count == 0u);
@@ -6518,7 +6571,7 @@ void test_reconstructed_goodix_primitives(void) {
     const uint32_t process_before_rejection =
         nadt_preprocess_failure_state.process_count;
     assert(goodix_primitives_nadt_preprocess_execute(
-        &nadt_preprocess_plan, &nadt_preprocess_source,
+        &nadt_preprocess_plan, &spo2_calc_source,
         &nadt_preprocess_failure_state, &nadt_preprocess_workspace,
         nadt_preprocess_output, 16u) == 5 &&
            nadt_preprocess_failure_state.process_count ==
@@ -7418,6 +7471,65 @@ void test_reconstructed_goodix_primitives(void) {
     assert_hrv_geometry(800u, 3u, 4u, 251u, 129u, 1u);
     assert_hrv_geometry(123u, 0u, 1u, 151u, 65u, 4u);
 
+    allocation_trace hrv_runtime_trace = {0};
+    const goodix_primitives_hrv_configuration hrv_runtime_configuration = {
+        0u, 25u, {100000, 10000, 0, 10000},
+    };
+    goodix_primitives_hrv_context *hrv_runtime_context = NULL;
+    assert(goodix_primitives_hrv_context_create(
+               &hrv_runtime_context, &hrv_runtime_configuration,
+               "pv_v1.1.0", allocate_from_trace, release_to_trace,
+               &hrv_runtime_trace) == GOODIX_PRIMITIVES_HRV_OK);
+    goodix_primitives_hrv_runtime hrv_runtime = {0};
+    assert(goodix_primitives_hrv_runtime_bind(
+        hrv_runtime_context, square_root_fixture, &hrv_runtime));
+    assert(hrv_runtime.bound && hrv_runtime.context == hrv_runtime_context);
+    assert(hrv_runtime.state.sample_rate == 25u);
+    assert(hrv_runtime.state.signal_history.values ==
+           hrv_runtime_context->subobjects[9]);
+    assert(hrv_runtime.state.motion_history.values ==
+           hrv_runtime_context->subobjects[10]);
+    assert(hrv_runtime.state.weighted_feature.mode_coefficient_words[0] !=
+           NULL);
+    assert(hrv_runtime.state.weighted_feature.mode_coefficient_counts[0] ==
+           65u);
+    assert(hrv_runtime.state.weighted_feature.mode_coefficient_counts[3] ==
+           129u);
+    assert(hrv_runtime.trough_curve.x[0] == 1.0f &&
+           hrv_runtime.trough_curve.x[3] == 4.0f &&
+           hrv_runtime.peak_curve.x[0] == 1.0f &&
+           hrv_runtime.peak_curve.x[3] == 4.0f);
+    assert(hrv_runtime.decision_state.records ==
+           hrv_runtime_context->owned_70->records);
+    assert(hrv_runtime.decision_state.record_capacity == 20u);
+    assert(hrv_runtime.plan.candidate_lower_bound == 6);
+    assert(hrv_runtime.plan.candidate_upper_bound == 50);
+    assert(hrv_runtime.plan.candidate_warmup_limit == 16);
+    assert(!goodix_primitives_hrv_runtime_bind(
+        hrv_runtime_context, square_root_fixture, &hrv_runtime));
+    int32_t hrv_runtime_channel = 0;
+    const uint8_t hrv_runtime_presence = UINT8_C(0x80);
+    const goodix_primitives_hrv_process_input hrv_runtime_input = {
+        .channel_values = &hrv_runtime_channel,
+        .channel_value_count = 1u,
+        .presence_bytes = &hrv_runtime_presence,
+        .presence_byte_count = 1u,
+        .channel_count = 1u,
+        .axis_x = 3,
+        .axis_y = 4,
+        .axis_z = 0,
+    };
+    int32_t hrv_runtime_output[6] = {1, 2, 3, 4, 5, 6};
+    assert(goodix_primitives_hrv_runtime_process(
+        &hrv_runtime, &hrv_runtime_input, hrv_runtime_output));
+    assert(hrv_runtime_context->process_count == 1u);
+    assert(hrv_runtime_context->owned_6c->sample_index == 1);
+    for (size_t index = 0u; index < 6u; ++index) {
+        assert(hrv_runtime_output[index] == 0);
+    }
+    assert(goodix_primitives_hrv_context_destroy(
+        &hrv_runtime_context, release_to_trace, &hrv_runtime_trace));
+
     const goodix_primitives_hrv_configuration hrv_create_configuration = {
         UINT32_C(0x01020304), 25u, {100, 200, 300, 400},
     };
@@ -7474,8 +7586,10 @@ void test_reconstructed_goodix_primitives(void) {
         2u, &records_allocation, &scratch_allocation,
         allocate_from_trace, &heap));
     assert(records_allocation != NULL && scratch_allocation != NULL);
+    assert(goodix_primitives_quantized_concatenate_vector() ==
+           (uintptr_t)&quantized_runtime_int8_concatenate_execute);
     assert(goodix_primitives_release_context_pair_vector() ==
-           (uintptr_t)&goodix_primitives_release_context_pair);
+           goodix_primitives_quantized_concatenate_vector());
 
     const int32_t quartic_record[] = {0, 0, 1, 2, 3, 4, 5};
     const float quartic_value =
@@ -7934,23 +8048,26 @@ void test_reconstructed_goodix_primitives(void) {
         .table_a50b0 = &hr_table_a50b0,
         .table_a692c = &hr_table_a692c,
     };
+    uint32_t hr_graph_record_0[1] = {0u};
+    uint32_t hr_graph_record_1[1] = {1u};
+    uint32_t hr_graph_record_6[1] = {6u};
     hr_graph_fixture hr_graph_0 = {
         .expected_primary = &hr_table_a692c,
         .expected_size = UINT32_C(0x4BE4),
         .expected_secondary = &hr_table_a04cc,
-        .result = UINT32_C(0x1000),
+        .result = (uintptr_t)hr_graph_record_0,
     };
     hr_graph_fixture hr_graph_1 = {
         .expected_primary = &hr_table_9d640,
         .expected_size = 0u,
         .expected_secondary = NULL,
-        .result = UINT32_C(0x2000),
+        .result = (uintptr_t)hr_graph_record_1,
     };
     hr_graph_fixture hr_graph_6 = {
         .expected_primary = &hr_table_a50b0,
         .expected_size = 0u,
         .expected_secondary = NULL,
-        .result = UINT32_C(0x6000),
+        .result = (uintptr_t)hr_graph_record_6,
     };
     const goodix_primitives_hr_graph_bindings hr_graph_bindings = {
         .selector_0 = {build_hr_graph, release_hr_graph, &hr_graph_0},
@@ -7999,9 +8116,9 @@ void test_reconstructed_goodix_primitives(void) {
            hr_primary->graph_span == UINT32_C(0x164) &&
            hr_primary->graph_mode == 2u &&
            hr_primary->graph_enabled == 1u &&
-           hr_primary->graph_selector_0 == UINT32_C(0x1000) &&
-           hr_primary->graph_selector_1 == UINT32_C(0x2000) &&
-           hr_primary->graph_selector_6 == UINT32_C(0x6000));
+           hr_primary->graph_selector_0 == (uintptr_t)hr_graph_record_0 &&
+           hr_primary->graph_selector_1 == (uintptr_t)hr_graph_record_1 &&
+           hr_primary->graph_selector_6 == (uintptr_t)hr_graph_record_6);
     assert(hr_graph_0.build_calls == 1u && hr_graph_1.build_calls == 1u &&
            hr_graph_6.build_calls == 1u);
     assert(hr_primary->short_history_a.count == 0u &&
@@ -8018,6 +8135,104 @@ void test_reconstructed_goodix_primitives(void) {
         assert(hr_primary->initial_accumulators[index] == 262144.0f &&
                hr_primary->initial_baselines[index] == 0.0);
     }
+
+    uint32_t hba_elapsed_slots[1] = {0u};
+    goodix_primitives_elapsed_state hba_elapsed = {
+        .slot_timestamps = hba_elapsed_slots,
+        .slot_count = 1u,
+    };
+    goodix_primitives_float_span hba_mode_buffers[3] = {{0}};
+    goodix_primitives_indexed_operation_fn hba_operations[
+        GOODIX_PRIMITIVES_STATE_COUNT] = {0};
+    hba_operations[0] = spo2_process_indexed_operation;
+    hba_operations[1] = spo2_process_indexed_operation;
+    hba_operations[6] = hba_workspace_indexed_operation;
+    const quantized_runtime_providers hba_quantized_providers = {
+        .fminf_fn = minimum_f32,
+        .fmaxf_fn = maximum_f32,
+        .floorf_fn = floor_nonnegative_f32,
+    };
+    quantized_runtime hba_quantized;
+    quantized_runtime_initialize(&hba_quantized, &hba_quantized_providers);
+    const goodix_primitives_hba_runtime_bindings hba_bindings = {
+        .integrity_transform = identity_i32,
+        .quantized = &hba_quantized,
+        .operations = hba_operations,
+        .elapsed_state = &hba_elapsed,
+        .mode_buffers = hba_mode_buffers,
+        .exponential = score_exponential,
+        .logarithm_base_10 = log10_zero_fixture,
+        .square_root = square_root_fixture,
+    };
+    goodix_primitives_hba_runtime hba_runtime = {0};
+    assert(goodix_primitives_hba_runtime_bind(
+        &hr_owner, &hba_bindings, &hba_runtime));
+    assert(hba_runtime.bound &&
+           hba_runtime.configuration.sample_frequency == 128u &&
+           hba_runtime.configuration.processing_cadence == 5u &&
+           hba_runtime.configuration.expected_valid_channels == 1u &&
+           hba_runtime.configuration.report_selected_value == 9u &&
+           hba_runtime.configuration.maximum_selection == 15 &&
+           hba_runtime.configuration.selection_delay == 20 &&
+           hba_runtime.configuration.score_scale ==
+               UINT32_C(0x12345678) &&
+           hba_runtime.stream_plan.scale_rate == 202u &&
+           hba_runtime.stream_plan.minimum_scale == 112500 &&
+           hba_runtime.stream_plan.motion_window_size == 20u &&
+           hba_runtime.stream_plan.motion_spread_factor == 8 &&
+           test_float_bits(hba_runtime.stream_plan.residual_axis_scale) ==
+               UINT32_C(0x38D1B717));
+    assert(test_float_bits(hba_runtime.filter_coefficients[0].input) ==
+               UINT32_C(0x3EC74BD4) &&
+           test_float_bits(
+               hba_runtime.filter_coefficients[0].second_feedback) ==
+               UINT32_C(0xBF105C2E) &&
+           test_float_bits(
+               hba_runtime.filter_coefficients[3].second_feedback) ==
+               UINT32_C(0xBE3909B5));
+    assert(hba_runtime.stream_state.channel_filters[0].states ==
+               hr_owner.secondary->pair_buffers[0].records &&
+           hba_runtime.stream_state.motion_filters[0].states ==
+               hr_owner.secondary->pair_buffers[4].records &&
+           hba_runtime.stream_state.residual_filter.states ==
+               hr_owner.secondary->pair_buffers[7].records &&
+           hba_runtime.stream_state.motion_filters[3].states ==
+               hr_owner.secondary->pair_buffers[8].records &&
+           hba_runtime.stream_state.residual_packed.values ==
+               hr_owner.secondary->i16_buffers[8].data &&
+           hba_runtime.stream_state.motion_packed[3].values ==
+               hr_owner.secondary->i16_buffers[7].data &&
+           hba_runtime.plan.packed_banks[6] ==
+               hr_owner.secondary->i16_buffers[6].data &&
+           hba_runtime.plan.spectral_packed_channels[3] ==
+               hr_owner.secondary->i16_buffers[3].data);
+    assert(hba_runtime.state.analyzer.primary_candidates.values ==
+               hr_owner.primary->short_history_a.data &&
+           hba_runtime.state.analyzer.concentrations.values ==
+               hr_owner.primary->float_history_a.data &&
+           hba_runtime.state.analyzer.reference_candidates.values ==
+               hr_owner.primary->short_history_b.data &&
+           hba_runtime.state.analyzer.metric_history.values ==
+               hr_owner.primary->float_history_b.data &&
+           hba_runtime.state.analyzer.reference_limit == 50u);
+    assert(hba_runtime.timed_dispatch.dispatch_record == hr_graph_record_0 &&
+           hba_runtime.timed_dispatch.field_64 == hr_primary->graph_mode &&
+           hba_runtime.timed_dispatch.field_68 == hr_primary->graph_enabled &&
+           hba_runtime.score_dispatch.dispatch.dispatch_record ==
+               hr_graph_record_1 &&
+           hba_runtime.score_dispatch.recent_inputs ==
+               hba_runtime.recent_score_inputs &&
+           hba_runtime.plan.workspace_process_context == &hba_runtime);
+    float hba_workspace_probe[2] = {1.0f, 2.0f};
+    assert(hba_runtime.plan.workspace_process(
+               hba_runtime.plan.workspace_process_context,
+               hba_workspace_probe, 2u) == 0 &&
+           hba_workspace_probe[0] == 6.0f);
+    assert(!goodix_primitives_hba_runtime_bind(
+        &hr_owner, &hba_bindings, &hba_runtime));
+    assert(goodix_primitives_hba_runtime_unbind(&hba_runtime) &&
+           !hba_runtime.bound &&
+           !goodix_primitives_hba_runtime_unbind(&hba_runtime));
     const unsigned releases_before_hr_primary = release_calls;
     assert(goodix_primitives_hr_primary_context_release(
         &hr_owner, release_to_trace, &hr_primary_trace));
@@ -8233,6 +8448,121 @@ void test_reconstructed_goodix_primitives(void) {
         &outer, release_to_trace, &outer_trace));
     assert(outer == NULL);
     assert(release_calls == releases_before_outer + 34u);
+
+    /* The source-owned runtime consumes the exact 0xAD160 configuration and
+     * the transparent 3,924-word model without a vendor configuration
+     * accessor or caller-assembled preprocess plan. */
+    allocation_trace spo2_runtime_trace = {0};
+    spo2_runtime_stage_trace spo2_stage_trace = {0};
+    const goodix_primitives_spo2_runtime_bindings spo2_runtime_bindings = {
+        .execute = spo2_runtime_stage_fixture,
+        .context = &spo2_stage_trace,
+        .quantized = &outer_runtime,
+        .allocate = allocate_from_trace,
+        .release = release_to_trace,
+        .provider_context = &spo2_runtime_trace,
+    };
+    goodix_primitives_spo2_runtime spo2_runtime = {0};
+    const unsigned releases_before_spo2_runtime = release_calls;
+    assert(goodix_primitives_spo2_runtime_bind(
+        &spo2_runtime_bindings, &spo2_runtime));
+    spo2_stage_trace.expected_session = spo2_runtime.session;
+    assert(spo2_runtime.bound && spo2_runtime.session != NULL &&
+           spo2_runtime.state.initialized &&
+           spo2_runtime.state.lane_count == 1u &&
+           !spo2_runtime.state.adjustment_enabled &&
+           spo2_runtime.state.summary_metric_threshold == 160u &&
+           spo2_runtime.plan.context == &spo2_runtime &&
+           spo2_runtime.plan.quartic_coefficients ==
+               spo2_runtime.quartic_coefficients &&
+           spo2_runtime.plan.quartic_coefficient_count == 7u &&
+           spo2_runtime.quartic_coefficients[0] == INT32_C(1) &&
+           spo2_runtime.quartic_coefficients[1] == INT32_C(25) &&
+           spo2_runtime.quartic_coefficients[4] == -INT32_C(156022) &&
+           spo2_runtime.quartic_coefficients[5] == -INT32_C(42041) &&
+           spo2_runtime.quartic_coefficients[6] == INT32_C(1066184) &&
+           spo2_runtime.session->processing_record[0] == UINT8_C(0x01) &&
+           spo2_runtime.session->processing_record[4] == UINT8_C(0x19));
+    const goodix_primitives_spo2_calc_input spo2_runtime_input = {
+        .frame_id = 1u,
+    };
+    uint32_t spo2_runtime_output[16] = {0u};
+    assert(goodix_primitives_spo2_runtime_process(
+               &spo2_runtime, &spo2_runtime_input,
+               spo2_runtime_output, 16u) == 0 &&
+           spo2_stage_trace.calls == 13u &&
+           spo2_runtime.state.process_count == 1u &&
+           spo2_runtime.state.frame_count == 1u &&
+           spo2_runtime_output[12] == 1u);
+    assert(!goodix_primitives_spo2_runtime_bind(
+        &spo2_runtime_bindings, &spo2_runtime));
+    assert(goodix_primitives_spo2_runtime_unbind(&spo2_runtime) &&
+           !spo2_runtime.bound && spo2_runtime.session == NULL &&
+           release_calls == releases_before_spo2_runtime + 33u &&
+           !goodix_primitives_spo2_runtime_unbind(&spo2_runtime));
+
+    /* A NULL stage callback selects the complete source-owned production
+     * composition.  Its first valid frame traverses exact assembly, the
+     * initializer-derived batch owner, and the 125-sample warm-up gate. */
+    allocation_trace spo2_source_trace = {0};
+    quantized_runtime_providers spo2_source_providers = outer_providers;
+    spo2_source_providers.vector_36dcc =
+        (uintptr_t)&quantized_runtime_float_concatenate_two_execute;
+    spo2_source_providers.vector_30534 =
+        (uintptr_t)&quantized_runtime_int8_to_float_execute;
+    quantized_runtime spo2_source_quantized;
+    quantized_runtime_initialize(
+        &spo2_source_quantized, &spo2_source_providers);
+    const goodix_primitives_spo2_runtime_bindings spo2_source_bindings = {
+        .quantized = &spo2_source_quantized,
+        .power = channel_power_fixture,
+        .square_root = square_root_fixture,
+        .floor = floor_positive_fixture,
+        .exponential = quality_exp_fixture,
+        .arc_tangent = arc_tangent_fixture,
+        .double_exponential = signal_confidence_exp_fixture,
+        .allocate = allocate_from_trace,
+        .release = release_to_trace,
+        .provider_context = &spo2_source_trace,
+    };
+    const unsigned releases_before_spo2_source = release_calls;
+    assert(goodix_primitives_spo2_runtime_bind(
+        &spo2_source_bindings, &spo2_runtime));
+    uint8_t spo2_source_presence[2] = {UINT8_C(0x88), UINT8_C(0x80)};
+    int32_t spo2_source_values[12] = {1000, 0, 0, 0,
+                                     2000, 0, 0, 0,
+                                     3000, 0, 0, 0};
+    uint8_t spo2_source_gains[12] = {0};
+    uint16_t spo2_source_currents[12];
+    for (size_t index = 0u; index < 12u; ++index) {
+        spo2_source_currents[index] = 1u;
+    }
+    const goodix_primitives_spo2_calc_input spo2_source_input = {
+        .frame_id = 1u,
+        .total_channel_count = 4u,
+        .enable_flags = spo2_source_presence,
+        .enable_flag_count = sizeof(spo2_source_presence),
+        .channel_values = spo2_source_values,
+        .channel_value_count = 12u,
+        .gain_codes = spo2_source_gains,
+        .gain_code_count = 12u,
+        .drive_currents = spo2_source_currents,
+        .drive_current_count = 12u,
+        .acceleration = {0, 0, 1},
+        .bit_count = 24u,
+        .data_type = 1u,
+    };
+    memset(spo2_runtime_output, 0, sizeof(spo2_runtime_output));
+    assert(goodix_primitives_spo2_runtime_process(
+               &spo2_runtime, &spo2_source_input,
+               spo2_runtime_output, 16u) == 4 &&
+           spo2_runtime.state.process_count == 1u &&
+           spo2_runtime.state.frame_count == 1u &&
+           spo2_runtime.source_state != NULL &&
+           spo2_runtime.source_state->batch_state.batch_index == 0u &&
+           spo2_runtime_output[12] == 0u);
+    assert(goodix_primitives_spo2_runtime_unbind(&spo2_runtime) &&
+           release_calls == releases_before_spo2_source + 34u);
 
     allocation_trace rejected_outer = {0};
     assert(!goodix_primitives_outer_session_create(

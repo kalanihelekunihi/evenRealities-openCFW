@@ -1,5 +1,12 @@
 # Goodix GH_NADT provider boundary
 
+> Identity correction (2026-08-17): `0x0006E838` is the public
+> `goodix_spo2_calc` root called by the retail SpO2 wrapper at `0x0002CFE8`.
+> It embeds the GH_NADT preprocessing graph catalogued here and now compiles as
+> `goodix_primitives_spo2_calc`; the older
+> `goodix_primitives_nadt_preprocess_execute` name remains a compatibility
+> spelling for that internal stage graph.
+
 ## Decision
 
 58 functions / 19,274 executable bytes form a byte-pinned Goodix GH_NADT
@@ -44,9 +51,9 @@ reset, initialization, and preprocessing entry points at `0x0006E540`, `0x0006E5
 wrapper/demo component. The direct branch to `0x0006E574` occurs at `0x0002CDBE`; it is
 pinned from the executable bytes even though the Ghidra callgraph export omitted that edge.
 
-The 682-byte preprocessing root at `0x0006E838`, body SHA-256
+The 682-byte SpO2 root with embedded preprocessing at `0x0006E838`, body SHA-256
 `d0e8d34ddfaf97ba47f66e94aa6a104b3efac71452ecb02f4f5a25379f04f656`, now compiles as
-`goodix_primitives_nadt_preprocess_execute`. It preserves the recovered process/frame counters,
+`goodix_primitives_spo2_calc`. It preserves the recovered process/frame counters,
 two failure-encode paths, accumulation-readiness return, 25-frame batch index, exact fourteen-stage
 ordering, quartic output transform, threshold-gated bit-range adjustment, and inference-status
 return. All five transient stock allocations are explicit caller-owned spans. Its direct stage

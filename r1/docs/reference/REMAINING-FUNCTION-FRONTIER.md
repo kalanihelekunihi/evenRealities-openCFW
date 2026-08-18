@@ -668,8 +668,8 @@ fill boundary, replay geometry, subsequent percentile update, packed lane cadenc
 rejection. See
 [`GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-SPO2-DLCOM-PROVIDER-BOUNDARY.md).
 
-The former 1,382-byte GH_HR root at `0x0006D51C` now compiles as
-`goodix_primitives_hr_process`. It exposes channel geometry, counted signal/motion/quality
+The former 1,382-byte HRV root at `0x0006D51C` now compiles as
+`goodix_primitives_hrv_process`. It exposes channel geometry, counted signal/motion/quality
 histories, feature/extrema state, candidate and quality policy, fallback state, and reference-rate
 recovery; `0x00032808` now compiles as the typed `goodix_primitives_hr_decision_update` state machine. Tests cover a full
 periodic candidate window, exact rate/quality emission, invalid-input clearing and quality 25,
@@ -824,9 +824,9 @@ the exact `0/1/2/12/21` state latch while preserving the 65..100 output clamp an
 See
 [`GOODIX-NADT-PROVIDER-BOUNDARY.md`](../boundaries/GOODIX-NADT-PROVIDER-BOUNDARY.md).
 
-The former largest unknown at `0x0006E838` is now source-admitted as
-`goodix_primitives_nadt_preprocess_execute`. The typed root composes its already reconstructed
-NADT channel assembly, accumulation, spectral, feature, quality, inference, selection,
+The former largest unknown at `0x0006E838` is now source-admitted as the retail SpO2 root
+`goodix_primitives_spo2_calc`. The typed root composes its embedded, already reconstructed NADT
+channel assembly, accumulation, spectral, feature, quality, inference, selection,
 confidence, and result stages in the exact recovered order. It preserves both failure encoders,
 the accumulation-readiness return, the 25-frame cadence, quartic transform, three bit-range
 adjustment rules, and inference return status. Five stock heap temporaries are replaced by bounded
@@ -1003,8 +1003,8 @@ with their shipped-image non-reachability still pinned.
 The sole-caller diagnostic formatter at `0x0006CCC0` is likewise body-, callsite-, and
 field-string-pinned and source-admitted through bounded typed sinks as provider support rather
 than product telemetry.
-The final root `0x0006C6A8` is source-admitted as
-`goodix_primitives_spo2_process`, with fixed caller workspace replacing all three transient
+The final HR/HBA root `0x0006C6A8` is source-admitted as
+`goodix_primitives_hba_process`, with fixed caller workspace replacing all three transient
 allocations and typed bindings for packed banks, spectra, report state, quantized runtime, and
 model dispatch. Every executable segment,
 function hash, direct-caller map, marker, and dispatcher word is pinned. Shared runtime helpers are

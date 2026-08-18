@@ -12,7 +12,7 @@ one, [`SECURITY.md`](SECURITY.md), [`PROVENANCE.md`](PROVENANCE.md), and
 | --- | --- |
 | [`correlation/`](correlation) | one record per subsystem, pinning recovered behavior to the stock image -- exact addresses, byte counts, record layouts, and how this implementation corresponds to them |
 | [`boundaries/`](boundaries) | provider-seam records preserving attribution history, source-admission decisions, and any runtime integration that remains fail-closed |
-| [`closures/`](closures) | Nordic SDK closure proofs and the source-built Zephyr/MCUboot bundle boundary |
+| [`closures/`](closures) | Nordic SDK closure proofs, the source-built Zephyr/MCUboot bundle boundary, and the [August 17 functional-gap re-audit](closures/AUGUST-17-FUNCTIONAL-GAP-REAUDIT.md) |
 | [`reference/`](reference) | function ownership, coverage, the capability ledger, the remaining frontier, the residual provider and production-readiness audit, and the BSim run summaries under `reference/bsim/` |
 
 To understand what the firmware *does*, read `correlation/`. To understand what
@@ -89,14 +89,18 @@ YHM2710 P1.01 provider now supplies the exact three-client `0xA8`/`0x28` shared-
 same bundle now hash-gates ST's ST25DVxxKC source, retains its bounded mailbox path and P0.03 GPO
 worker, and serializes the P0.11/P0.14 motion and P1.11/P1.14 dock routes with a dock-preempts-motion
 TWIM1 handoff. Its exact P1.10 dock-enable and typed dock-session lease are bound, while NFC starts
-disabled pending an explicit product policy. The wear-driven REG1 automation, motion algorithm consumer,
-destructive slot-0 health format/retry, GoMore reinitialization,
-optical algorithm/result composition,
-remaining PMIC devices, retail-layout migration, and owned-ring validation remain HAL work. The
+disabled pending an explicit product policy. The wear-driven REG1 automation, destructive slot-0
+health format/retry, remaining PMIC devices, retail-layout migration, and owned-ring validation
+remain HAL work. Motion feeds the live GoMore topic path; backward-clock/failure-60 reinitialization,
+optical persistent plan/state composition, and HRV result routing are target-bound. The
 source-built target now hash-gates and links the source-only Goodix demo/driver subset and binds
 the recovered software-`i2c_4` optical pins, interrupt worker, reset/emitter lifecycle, and YHM
-client bit 1. Startup does not power or sample the device, and the global algorithm ABI remains
-fail-closed.
+client bit 1. Startup does not power or sample the device. The global algorithm ABI is now a
+bounded vendor-free provider contract, and a retained source composer owns the exact HR/HBA, HRV,
+and SpO2 wrapper input/lifecycle/result contracts. A retained executor layer invokes the three
+reconstructed roots and reproduces their public result layouts, while target-owned persistent
+plans, state, workspaces, and initializer bindings are target-owned and live behind the recovered
+health authorization gate.
 Official Bosch BMA456 SensorAPI v2.29.0 and
 ST LIS2DW12 v2.1.0-compatible sources are pinned for the recovered motion variants; only their R1
 configuration/bus/event adapters are implemented locally. The Nordic target now probes the exact
@@ -151,9 +155,10 @@ register and wire operations are reconstructed behind typed board callbacks; see
 [`YHM2710-I2C5-RESOURCE-BOUNDARY.md`](boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md).
 The Nordic image also compiles the exact `nrfx_saadc` provider and recovered AIN5/AIN3/AIN2
 configuration. Four R1 analog adapters and seven product battery routines supply only routes,
-filtering, conversion, curves, and charge-state policy. The alternate Zephyr target now binds
-battery sampling to reconstructed YHM client bit 0; periodic runtime production and physical
-validation remain open; see
+filtering, conversion, curves, and charge-state policy. The alternate Zephyr target binds battery
+sampling to reconstructed YHM client bit 0 and refreshes live voltage and register-6 charge state
+at boot and immediately before read-only device-status dispatch. No unsupported periodic cadence
+is invented; PMIC event integration, physical calibration, and owned-ring validation remain; see
 [`ANALOG-BATTERY-CORRELATION.md`](correlation/ANALOG-BATTERY-CORRELATION.md).
 The R1-owned three-hour automatic health-history gate is also implemented as a portable controller
 and retained Nordic integration seam. It reproduces the authenticated-phone condition, shared
@@ -689,8 +694,8 @@ off at boot with biometric calculation fail-closed.
   battery AIN5/P0.29, PMIC current AIN3/P0.05, and NFC rectifier AIN2/P0.04 with the recovered
   gains and acquisition times. Portable R1 code implements only the exact filters, conversions,
   four battery curves, charging cadence/full gate, stalled-charge recovery, and runtime state
-  transitions. Battery acquisition is unavailable until reconstructed YHM power and charge-state
-  bindings exist; see
+  transitions. The source-built Zephyr target composes reconstructed YHM power and charge-state
+  bindings for boot/status-access refresh; the legacy Nordic target remains unbound; see
   [`ANALOG-BATTERY-CORRELATION.md`](correlation/ANALOG-BATTERY-CORRELATION.md).
 - Seven contiguous 4-KiB-aligned partition descriptors spanning 36 pages: `kv.bin`, `health.db`,
   `sleep.db`, `pKey.bin`, `reserve`, `ep.bin`, and `log.bin`.

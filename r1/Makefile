@@ -1,6 +1,6 @@
 CC ?= cc
 CLANG ?= clang
-CPPFLAGS := -Iinclude -Ireconstructed
+CPPFLAGS := -Iinclude -Ireconstructed -Iplatform/nrf52840
 CFLAGS := -std=c11 -Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -O2
 SOURCES := src/r1_crc.c src/r1_protocol.c src/r1_health.c src/r1_health_db.c src/r1_twi_sync.c src/r1_retained_log.c src/r1_reset_trace.c src/r1_reset_reason.c src/r1_state.c src/r1_storage.c src/r1_kv_store.c src/r1_nv_recovery.c src/r1_sleep_db.c src/r1_persistence.c src/r1_connection_params.c src/r1_peer_target.c \
 	src/r1_event.c src/r1_event_bus.c src/r1_dispatch.c src/r1_runtime.c src/r1_goodix.c src/r1_iqs7211e.c \
@@ -19,7 +19,8 @@ SOURCES := src/r1_crc.c src/r1_protocol.c src/r1_health.c src/r1_health_db.c src
 	reconstructed/goodix_primitives/goodix_primitives.c \
 	reconstructed/goodix_heap/goodix_heap.c \
 	reconstructed/gomore_primitives/gomore_primitives.c \
-	reconstructed/gomore_tensor_runtime/gomore_tensor_runtime.c
+	reconstructed/gomore_tensor_runtime/gomore_tensor_runtime.c \
+	platform/nrf52840/openr1_rtc_service.c
 TEST_SOURCES := tests/test_openr1.c \
 	tests/test_reconstructed_generic_device_registry.c \
 	tests/test_reconstructed_software_twi.c \
@@ -33,7 +34,8 @@ TEST_SOURCES := tests/test_openr1.c \
 	tests/test_reconstructed_goodix_primitives.c \
 	tests/test_reconstructed_goodix_heap.c \
 	tests/test_reconstructed_gomore_primitives.c \
-	tests/test_reconstructed_gomore_tensor_runtime.c
+	tests/test_reconstructed_gomore_tensor_runtime.c \
+	tests/test_openr1_rtc_service.c
 BUILD := build
 HOST_TEST := $(BUILD)/test_openr1
 SAN_TEST := $(BUILD)/test_openr1_sanitize
@@ -53,11 +55,14 @@ ZEPHYR_SIGNING_KEY ?=
 ARM_FLAGS := --target=armv7em-none-eabi -mcpu=cortex-m4 -mthumb \
 	-mfpu=fpv4-sp-d16 -mfloat-abi=hard -fno-math-errno \
 	-std=c11 -ffreestanding -fno-builtin -fdata-sections -ffunction-sections \
-	-Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -Os -Iinclude -Ireconstructed
-ARM_SOURCES := $(SOURCES) platform/nrf52840/r1_nrf52840.c
+	-Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -Os -Iinclude -Ireconstructed -Iplatform/nrf52840
+GOODIX_COMPOSER_SOURCE := port/goodix_gh3x2x/r1_gh3x2x_provider_composer.c
+GOODIX_ROOT_SOURCE := port/goodix_gh3x2x/r1_gh3x2x_reconstructed_roots.c
+ARM_SOURCES := $(SOURCES) $(GOODIX_COMPOSER_SOURCE) $(GOODIX_ROOT_SOURCE) \
+	platform/nrf52840/r1_nrf52840.c
 ARM_OBJECTS := $(patsubst %.c,$(ARM_BUILD)/%.o,$(ARM_SOURCES))
 
-.PHONY: all test sim sanitize verify arm-objects sdk-image sdk-verify bundle-boundary zephyr-source-verify zephyr-image zephyr-package zephyr-bundle zephyr-verify owner-dfu sdk-owner-dfu signing-test vendor-audit vendor-storage-test vendor-crypto-test vendor-goodix-test clean
+.PHONY: all test sim sanitize verify arm-objects provider-composer-check sdk-image sdk-verify bundle-boundary zephyr-source-verify zephyr-image zephyr-package zephyr-bundle zephyr-verify owner-dfu sdk-owner-dfu signing-test vendor-audit vendor-storage-test vendor-crypto-test vendor-goodix-test clean
 
 all: test
 
@@ -248,6 +253,8 @@ GOODIX_SUBSET := \
 	$(GOODIX_MODULE_DIR)/gh_other/gh_changeinttime.c \
 	$(GOODIX_MODULE_DIR)/gh_other/gh_movedetect.c \
 	$(GOODIX_MODULE_DIR)/gh_soft_adt/gh_multi_sen_pro.c \
+	$(GOODIX_DEMOCODE_ROOT)/algo_lib/algo_params/HR/04_EXCLUSIVE/goodix_hba_config.c \
+	$(GOODIX_DEMOCODE_ROOT)/algo_lib/algo_params/goodix_hrv_config.c \
 	$(GOODIX_DEMOCODE_ROOT)/algo_lib/algo_params/SPO2/goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c
 GOODIX_INCLUDES := \
 	-Iport/goodix_gh3x2x/config \
@@ -265,13 +272,26 @@ GOODIX_INCLUDES := \
 GOODIX_PORT_SOURCES := \
 	port/goodix_gh3x2x/r1_gh3x2x_port.c \
 	port/goodix_gh3x2x/r1_gh3x2x_bind.c \
+	port/goodix_gh3x2x/r1_gh3x2x_provider_composer.c \
+	port/goodix_gh3x2x/r1_gh3x2x_reconstructed_roots.c \
 	port/goodix_gh3x2x/r1_gh3x2x_stubs.c
+GOODIX_RECONSTRUCTED_SOURCES := \
+	reconstructed/model_data/r1_model_data.c \
+	reconstructed/quantized_runtime/quantized_runtime.c \
+	reconstructed/goodix_primitives/goodix_primitives.c
 
-vendor-goodix-test: | $(BUILD)
+provider-composer-check: | $(BUILD)
+	$(CC) $(CPPFLAGS) -Iport/goodix_gh3x2x $(CFLAGS) -c \
+		$(GOODIX_COMPOSER_SOURCE) -o $(BUILD)/r1_gh3x2x_provider_composer.strict.o
+	$(CC) $(CPPFLAGS) -Iport/goodix_gh3x2x $(CFLAGS) -c \
+		$(GOODIX_ROOT_SOURCE) -o $(BUILD)/r1_gh3x2x_reconstructed_roots.strict.o
+
+vendor-goodix-test: provider-composer-check | $(BUILD)
 	@test -n "$(GOODIX_DEMOCODE_ROOT)" || (echo "GOODIX_DEMOCODE_ROOT is required" >&2; exit 2)
 	$(CC) $(CPPFLAGS) -Iport/goodix_gh3x2x $(GOODIX_INCLUDES) \
 		-std=c11 -O2 -Wall -Wextra -Wno-unused-parameter \
-		src/r1_goodix.c $(GOODIX_SUBSET) $(GOODIX_PORT_SOURCES) \
+		src/r1_goodix.c $(GOODIX_SUBSET) $(GOODIX_RECONSTRUCTED_SOURCES) \
+		$(GOODIX_PORT_SOURCES) \
 		tests/test_vendor_goodix.c -lm -o $(BUILD)/test_vendor_goodix
 	./$(BUILD)/test_vendor_goodix
 

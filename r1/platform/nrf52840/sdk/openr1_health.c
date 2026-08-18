@@ -145,6 +145,10 @@ typedef struct {
         const r1_health_u16_offline_queue *, uint32_t,
         r1_health_u16_offline_packet *, r1_health_u16_offline_emit_fn,
         void *, r1_health_offline_merge_result *);
+    r1_error (*health_u16_flash_record_merge)(
+        r1_health_u16_offline_packet *, const r1_health_u16_flash_record *,
+        uint32_t, bool, uint32_t, r1_health_u16_offline_emit_fn, void *,
+        r1_health_u16_day_flush_result *);
     r1_error (*health_u16_ram_cache_merge)(
         r1_health_u16_offline_packet *, r1_health_u16_history *, uint32_t,
         uint32_t, uint32_t, int16_t, r1_health_u16_offline_emit_fn, void *,
@@ -250,6 +254,7 @@ static const openr1_health_api retained_health_api = {
     r1_health_u16_offline_enqueue,
     r1_health_u16_offline_consume_through,
     r1_health_u16_offline_merge,
+    r1_health_u16_flash_record_merge,
     r1_health_u16_ram_cache_merge,
     r1_health_u16_offline_acknowledge,
     r1_health_u8_cache_reset,

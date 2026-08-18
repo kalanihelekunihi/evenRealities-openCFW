@@ -1,7 +1,9 @@
 #include "openr1_optical_zephyr.h"
 
 #include <errno.h>
+#include <math.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <zephyr/devicetree.h>
@@ -12,13 +14,17 @@
 #include "openr1_motion_zephyr.h"
 #include "openr1_software_twi_zephyr.h"
 #include "openr1_yhm2710_zephyr.h"
+#include "model_data/r1_model_data.h"
+#include "quantized_runtime/quantized_runtime.h"
 #include "r1_gh3x2x_bind.h"
 #include "r1_gh3x2x_port.h"
+#include "r1_gh3x2x_provider_composer.h"
+#include "r1_gh3x2x_reconstructed_roots.h"
 
 /* Public, source-built Goodix democode entry points. The binary algorithm
- * archives are deliberately not linked; r1_gh3x2x_stubs.c keeps their global
- * ABI fail-closed until the recovered typed algorithms have a checked frame
- * adapter. */
+ * archives are deliberately not linked. Reconstructed roots are admitted
+ * only after their complete source-owned state and execution providers have
+ * been bound below; any absent row remains fail-closed. */
 void Gh3x2xDemoInterruptProcess(void);
 void hal_gh3x2x_int_handler_call_back(void);
 const void *goodix_spo2_config_get_instance(void);
@@ -33,6 +39,8 @@ typedef struct {
     int (*start)(r1_goodix_stock_profile);
     int (*switch_profile)(r1_goodix_switch_selection);
     int (*stop)(void);
+    int (*start_functions)(uint32_t);
+    int (*stop_functions)(uint32_t);
     bool (*provider_available)(void);
     bool (*prepared)(void);
     uint32_t (*interrupt_count)(void);
@@ -61,6 +69,177 @@ static atomic_t interrupt_armed;
 static atomic_t board_prepared;
 static bool interrupt_callback_installed;
 static bool module_initialized;
+static r1_gh3x2x_provider_composer algorithm_composer;
+static r1_gh3x2x_algo_provider algorithm_provider;
+static r1_gh3x2x_hba_root_context hba_root;
+static r1_gh3x2x_hba_reconstructed_state hba_reconstructed_state;
+static r1_gh3x2x_hrv_root_context hrv_root;
+static r1_gh3x2x_hrv_reconstructed_state hrv_reconstructed_state;
+static r1_gh3x2x_spo2_root_context spo2_root;
+static r1_gh3x2x_spo2_reconstructed_state spo2_reconstructed_state;
+static goodix_primitives_hr_configuration hba_configuration;
+static quantized_runtime hba_quantized_runtime;
+static goodix_primitives_hba_runtime_bindings hba_runtime_bindings;
+static uint32_t hba_elapsed_slots[1] = {1u};
+static goodix_primitives_elapsed_state hba_elapsed_state = {
+    .slot_timestamps = hba_elapsed_slots,
+    .slot_count = 1u,
+};
+static goodix_primitives_float_span hba_mode_buffers[3];
+static const uint8_t hba_filter_code[1] = {0u};
+
+/* Exact six words returned by retail 0x0006DA9C from 0x0009D5EC. */
+static const goodix_primitives_hrv_configuration r1_hrv_configuration = {
+    .identity = 1u,
+    .sample_count = 100u,
+    .calibration = {200000, 100000, 30000, 30000},
+};
+
+static void *optical_algorithm_allocate(void *context, size_t bytes) {
+    (void)context;
+    return k_malloc(bytes);
+}
+
+static void optical_algorithm_release(void *context, void *allocation) {
+    (void)context;
+    k_free(allocation);
+}
+
+static float optical_algorithm_square_root(float value) {
+    if (value <= 0.0f) {
+        return 0.0f;
+    }
+    float estimate = value > 1.0f ? value : 1.0f;
+    for (size_t index = 0u; index < 12u; ++index) {
+        estimate = 0.5f * (estimate + value / estimate);
+    }
+    return estimate;
+}
+
+static double optical_algorithm_power(double base, double exponent) {
+    return pow(base, exponent);
+}
+
+static int32_t optical_algorithm_integrity_encode(int32_t value) {
+    union {
+        uint32_t unsigned_value;
+        int32_t signed_value;
+    } converted = {.signed_value = value};
+    converted.unsigned_value =
+        goodix_primitives_integrity_encode(converted.unsigned_value);
+    return converted.signed_value;
+}
+
+static void optical_algorithm_qsort(
+    void *base, size_t count, size_t size,
+    quantized_runtime_compare_fn compare) {
+    qsort(base, count, size, compare);
+}
+
+static bool optical_prepare_hba_runtime(void) {
+    const uint32_t *const words = r1_goodix_hba_configuration_words;
+    hba_configuration = (goodix_primitives_hr_configuration){
+        .algorithm_mode = (uint8_t)words[0],
+        .sample_rate = words[1],
+        .minimum_batch = (int32_t)words[2],
+        .secondary_window_override = words[3],
+        .primary_window_override = words[4],
+        .feature_stride = (int32_t)words[5],
+        .terminal_default = (int32_t)words[6],
+        .candidate_limit = words[7],
+        .owner_word = words[8],
+    };
+    const quantized_runtime_providers providers = {
+        .fminf_fn = fminf,
+        .fmaxf_fn = fmaxf,
+        .floorf_fn = floorf,
+        .expf_fn = expf,
+        .qsort_fn = optical_algorithm_qsort,
+        .vector_95b20 =
+            (uintptr_t)&quantized_runtime_float_multiply_execute,
+        .vector_36dcc =
+            (uintptr_t)&quantized_runtime_float_concatenate_two_execute,
+        .vector_30534 =
+            (uintptr_t)&quantized_runtime_int8_to_float_execute,
+        .vector_35d12 =
+            (uintptr_t)&quantized_runtime_float_strided_copy_2d_execute,
+        .vector_7ca94 =
+            (uintptr_t)&quantized_runtime_float_pool_1d_execute,
+    };
+    quantized_runtime_initialize(&hba_quantized_runtime, &providers);
+    hba_runtime_bindings = (goodix_primitives_hba_runtime_bindings){
+        .integrity_transform = optical_algorithm_integrity_encode,
+        .quantized = &hba_quantized_runtime,
+        .elapsed_state = &hba_elapsed_state,
+        .mode_buffers = hba_mode_buffers,
+        .exponential = expf,
+        .logarithm_base_10 = log10f,
+        .square_root = optical_algorithm_square_root,
+    };
+    return hba_configuration.algorithm_mode == 0u &&
+        hba_configuration.sample_rate == 25u &&
+        hba_configuration.minimum_batch == 4;
+}
+
+static bool optical_bind_reconstructed_algorithms(void) {
+    r1_gh3x2x_algo_unbind_provider();
+    r1_gh3x2x_provider_composer_initialize(&algorithm_composer);
+    hba_root = (r1_gh3x2x_hba_root_context){
+        .filter_code = hba_filter_code,
+        .filter_code_count = sizeof(hba_filter_code),
+    };
+    hba_reconstructed_state = (r1_gh3x2x_hba_reconstructed_state){
+        .configuration = &hba_configuration,
+        .runtime_bindings = &hba_runtime_bindings,
+        .allocate = optical_algorithm_allocate,
+        .release = optical_algorithm_release,
+    };
+    hrv_root = (r1_gh3x2x_hrv_root_context){0};
+    hrv_reconstructed_state = (r1_gh3x2x_hrv_reconstructed_state){
+        .configuration = &r1_hrv_configuration,
+        .allocate = optical_algorithm_allocate,
+        .release = optical_algorithm_release,
+        .square_root = optical_algorithm_square_root,
+    };
+    spo2_root = (r1_gh3x2x_spo2_root_context){0};
+    spo2_reconstructed_state = (r1_gh3x2x_spo2_reconstructed_state){
+        .bindings = {
+            .quantized = &hba_quantized_runtime,
+            .power = optical_algorithm_power,
+            .square_root = optical_algorithm_square_root,
+            .floor = floorf,
+            .exponential = expf,
+            .arc_tangent = atan,
+            .double_exponential = exp,
+            .allocate = optical_algorithm_allocate,
+            .release = optical_algorithm_release,
+        },
+        .weights_version = "gh3x2x-v2.23_7ecd2a",
+    };
+    r1_gh3x2x_root_binding binding;
+    if (!optical_prepare_hba_runtime() ||
+            !r1_gh3x2x_make_reconstructed_hba_root_binding(
+                &hba_root, &hba_reconstructed_state, &binding) ||
+            !r1_gh3x2x_provider_composer_bind_root(
+                &algorithm_composer, R1_GH3X2X_ALGO_FUNCTION_HR,
+                &binding) ||
+            !r1_gh3x2x_make_reconstructed_hrv_root_binding(
+            &hrv_root, &hrv_reconstructed_state, &binding) ||
+            !r1_gh3x2x_provider_composer_bind_root(
+                &algorithm_composer, R1_GH3X2X_ALGO_FUNCTION_HRV,
+                &binding) ||
+            !r1_gh3x2x_make_reconstructed_spo2_root_binding(
+                &spo2_root, &spo2_reconstructed_state, &binding) ||
+            !r1_gh3x2x_provider_composer_bind_root(
+                &algorithm_composer, R1_GH3X2X_ALGO_FUNCTION_SPO2,
+                &binding) ||
+            !r1_gh3x2x_provider_composer_build(
+                &algorithm_composer, &algorithm_provider)) {
+        return false;
+    }
+    r1_gh3x2x_algo_bind_provider(&algorithm_provider);
+    return r1_gh3x2x_algo_provider_bound();
+}
 
 static void record_error(int error) {
     if (error != 0) {
@@ -347,11 +526,17 @@ int openr1_optical_zephyr_initialize(void) {
         return error;
     }
     r1_gh3x2x_port_bind_hal(&goodix_hal);
+    if (!optical_bind_reconstructed_algorithms()) {
+        r1_gh3x2x_port_unbind_hal();
+        record_error(-EIO);
+        return -EIO;
+    }
     r1_goodix_adapter_initialize(&optical_adapter);
     error = map_error(r1_goodix_adapter_bind(
         &optical_adapter, r1_gh3x2x_bind_provider_ops(), NULL,
         &board_ops, NULL));
     if (error != 0) {
+        r1_gh3x2x_algo_unbind_provider();
         r1_gh3x2x_port_unbind_hal();
         record_error(error);
     } else {
@@ -403,6 +588,35 @@ int openr1_optical_zephyr_stop(void) {
     return error;
 }
 
+int openr1_optical_zephyr_start_functions(uint32_t function_mask) {
+    if (!module_initialized ||
+        !openr1_yhm2710_zephyr_provider_available()) {
+        return -EACCES;
+    }
+    if (k_mutex_lock(&optical_provider_mutex, K_FOREVER) != 0) {
+        return -EAGAIN;
+    }
+    const int error = map_error(r1_goodix_start_functions(
+        &optical_adapter, function_mask));
+    (void)k_mutex_unlock(&optical_provider_mutex);
+    record_error(error);
+    return error;
+}
+
+int openr1_optical_zephyr_stop_functions(uint32_t function_mask) {
+    if (!module_initialized) {
+        return -EACCES;
+    }
+    if (k_mutex_lock(&optical_provider_mutex, K_FOREVER) != 0) {
+        return -EAGAIN;
+    }
+    const int error = map_error(r1_goodix_stop_functions(
+        &optical_adapter, function_mask));
+    (void)k_mutex_unlock(&optical_provider_mutex);
+    record_error(error);
+    return error;
+}
+
 bool openr1_optical_zephyr_provider_available(void) {
     return module_initialized &&
         openr1_yhm2710_zephyr_provider_available() &&
@@ -431,6 +645,8 @@ static const openr1_optical_zephyr_api optical_zephyr_api = {
     openr1_optical_zephyr_start,
     openr1_optical_zephyr_switch,
     openr1_optical_zephyr_stop,
+    openr1_optical_zephyr_start_functions,
+    openr1_optical_zephyr_stop_functions,
     openr1_optical_zephyr_provider_available,
     openr1_optical_zephyr_prepared,
     openr1_optical_zephyr_interrupt_count,

@@ -41,9 +41,13 @@ GOODIX_PROVIDER_OBJECTS = (
     "gh_changeinttime.c",
     "gh_movedetect.c",
     "gh_multi_sen_pro.c",
+    "goodix_hba_config.c",
+    "goodix_hrv_config.c",
     "goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c",
     "r1_gh3x2x_port.c",
     "r1_gh3x2x_bind.c",
+    "r1_gh3x2x_provider_composer.c",
+    "r1_gh3x2x_reconstructed_roots.c",
     "r1_gh3x2x_stubs.c",
 )
 SOURCE_IDS = {
@@ -175,6 +179,7 @@ def main() -> None:
     require(configuration, "CONFIG_SETTINGS_NVS_SECTOR_COUNT=3",
             "Zephyr settings partition geometry")
     require(configuration, "CONFIG_ADC=y", "Zephyr SAADC configuration")
+    require(configuration, "CONFIG_COUNTER=y", "Zephyr RTC2 configuration")
     require(configuration, "CONFIG_I2C=y", "Zephyr motion-bus configuration")
     require(configuration, "CONFIG_EVENTS=y", "Zephyr touch-worker configuration")
     require(configuration, "CONFIG_SYS_CLOCK_TICKS_PER_SEC=1024",
@@ -196,6 +201,7 @@ def main() -> None:
     require(main_source, "openr1_reset_zephyr_initialize()", "Zephyr reset-reason startup")
     require(main_source, "openr1_watchdog_zephyr_initialize()", "Zephyr watchdog startup")
     require(main_source, "openr1_clock_zephyr_initialize(", "Zephyr wall-clock startup")
+    require(main_source, "openr1_rtc_zephyr_initialize()", "Zephyr RTC2 startup")
     require(main_source, "openr1_power_zephyr_initialize()", "Zephyr REG1 startup")
     require(main_source, "openr1_motion_zephyr_initialize()", "Zephyr motion startup")
     require(main_source, "openr1_sensor_stream_zephyr_initialize()",
@@ -206,17 +212,31 @@ def main() -> None:
     require(main_source, "openr1_nfc_zephyr_initialize()", "Zephyr NFC startup")
     require(main_source, "openr1_yhm2710_zephyr_initialize()",
             "Zephyr YHM2710 shared-power startup")
+    require(main_source, "openr1_battery_zephyr_initialize(",
+            "Zephyr live battery startup")
     require(main_source, "openr1_temperature_zephyr_initialize()",
             "Zephyr GXT310 temperature startup")
     require(main_source, "openr1_optical_zephyr_initialize()",
             "Zephyr optical-provider startup")
+    require(main_source, "openr1_health_results_zephyr_initialize(",
+            "Zephyr checked optical-result health route startup")
+    require(main_source, "openr1_gomore_zephyr_sync(",
+            "Zephyr source-built GoMore engine reconciliation")
+    require(main_source, "openr1_gomore_zephyr_poll(",
+            "Zephyr source-built GoMore live topic consumption")
     require(main_source, "openr1_nfc_resources_zephyr_initialize()",
             "Zephyr NFC dock-resource startup")
+    require(main_source, "r1_runtime_schedule_automatic_health_sync(",
+            "Zephyr automatic health-sync scheduling")
+    require(main_source, "r1_runtime_service_automatic_health_sync(",
+            "Zephyr automatic health-sync service")
     require(main_source, "r1_runtime_set_touch_handler(",
             "Zephyr runtime touch-enable binding")
     clock_startup = main_source.find("openr1_clock_zephyr_initialize(")
+    rtc_startup = main_source.find("openr1_rtc_zephyr_initialize()")
     database_startup = main_source.find("openr1_databases_zephyr_initialize(")
-    if clock_startup < 0 or database_startup < clock_startup:
+    if rtc_startup < 0 or clock_startup < rtc_startup or \
+            database_startup < clock_startup:
         raise AssertionError("Zephyr clock must initialize before health database recovery")
     temperature_startup = main_source.find("openr1_temperature_zephyr_initialize()")
     stream_startup = main_source.find("openr1_sensor_stream_zephyr_initialize()")
@@ -230,15 +250,66 @@ def main() -> None:
         raise AssertionError(
             "Zephyr startup must not start dormant GoMore input staging")
     yhm_startup = main_source.find("openr1_yhm2710_zephyr_initialize(")
+    battery_startup = main_source.find("openr1_battery_zephyr_initialize(")
     optical_startup = main_source.find("openr1_optical_zephyr_initialize(")
-    if yhm_startup < 0 or optical_startup < yhm_startup:
-        raise AssertionError("Zephyr YHM2710 must initialize before the optical provider")
+    health_results_startup = main_source.find(
+        "openr1_health_results_zephyr_initialize(")
+    if yhm_startup < 0 or battery_startup < yhm_startup or \
+            optical_startup < battery_startup:
+        raise AssertionError(
+            "Zephyr YHM2710 must initialize before battery and optical providers")
+    if health_results_startup < optical_startup:
+        raise AssertionError(
+            "Zephyr optical provider must initialize before its health result route")
     if "openr1_optical_zephyr_start(" in main_source:
         raise AssertionError("Zephyr startup must not start optical sampling")
     storage_source = (BACKEND / "src" / "openr1_storage_zephyr.c").read_text()
     require(storage_source, "FIXED_PARTITION_ID(openr1_data_partition)",
             "Zephyr product-storage partition binding")
     require(storage_source, "flash_area_write", "Zephyr source flash provider")
+
+    require(cmake, "src/openr1_battery_zephyr.c",
+            "Zephyr live battery source binding")
+    battery_source = (BACKEND / "src" / "openr1_battery_zephyr.c").read_text()
+    require(battery_source, "openr1_databases_zephyr_battery_configuration(",
+            "Zephyr persisted battery compensation input")
+    require(battery_source, "openr1_yhm2710_zephyr_charge_state(",
+            "Zephyr live charge-state input")
+    require(battery_source, "openr1_analog_zephyr_update_runtime_battery(",
+            "Zephyr live battery runtime update")
+    require(battery_source, "R1_SYSTEM_SUBCOMMAND_DEVICE_STATUS",
+            "Zephyr recovered status-access refresh")
+    require(battery_source, "(request->status & UINT8_C(0x02)) == 0u",
+            "Zephyr read-only status-access gate")
+    require(battery_source, "r1_runtime_set_request_observer(",
+            "Zephyr pre-dispatch battery observer binding")
+    require(battery_source, "(void)openr1_battery_zephyr_refresh();",
+            "Zephyr boot battery seed")
+    yhm_source = (BACKEND / "src" / "openr1_yhm2710_zephyr.c").read_text()
+    require(yhm_source, "yhm2710_register_read_byte(",
+            "Zephyr YHM2710 live status read")
+    require(yhm_source, "UINT8_C(6)", "Zephyr YHM2710 charge register")
+    require(yhm_source, "return -EIO;", "Zephyr YHM2710 fail-closed read")
+    runtime_source = (PROJECT / "src" / "r1_runtime.c").read_text()
+    dispatch_header = (PROJECT / "include" / "openr1" / "r1_dispatch.h").read_text()
+    require(dispatch_header, "R1_DISPATCH_RESPONSE_MAX 32u",
+            "worst-case scalar-history dispatch capacity")
+    require(dispatch_header, "R1_DISPATCH_FRAGMENT_MAX 50u",
+            "atomic shared-EUS fragment capacity")
+    observer_position = runtime_source.find("runtime->request_observer(")
+    dispatch_position = runtime_source.find(
+        "const r1_error dispatch_error = r1_dispatch(", observer_position)
+    if observer_position < 0 or dispatch_position < observer_position:
+        raise AssertionError(
+            "runtime request observer must execute before dispatch snapshots state")
+    health_settings_callback = runtime_source.find(
+        "runtime->health_settings_handler(")
+    acknowledgement_enqueue = runtime_source.find(
+        "error = enqueue_dispatch(runtime, connection);")
+    if acknowledgement_enqueue < 0 or \
+            health_settings_callback < acknowledgement_enqueue:
+        raise AssertionError(
+            "health-settings platform effects must follow acknowledgement enqueue")
 
     dts = (BACKEND / "boards" / "openr1" / "openr1_nrf52840" /
            "openr1_nrf52840.dts").read_text()
@@ -280,6 +351,9 @@ def main() -> None:
         "optical-reset-gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;",
         'compatible = "nordic,nrf-twim";',
         "clock-frequency = <I2C_BITRATE_FAST>;",
+        "&rtc2 {",
+        "prescaler = <4095>;",
+        "interrupts = <36 6>;",
     ):
         require(dts, needle, "Zephyr recovered SAADC geometry")
     require(cmake, "openr1_analog_zephyr.c", "Zephyr SAADC source binding")
@@ -311,12 +385,28 @@ def main() -> None:
     require(reset_source, "esf->basic.pc", "Zephyr fatal program-counter capture")
     require(reset_source, "esf->basic.lr", "Zephyr fatal return-address capture")
     require(cmake, "openr1_clock_zephyr.c", "Zephyr wall-clock source binding")
+    require(cmake, "openr1_rtc_zephyr.c", "Zephyr RTC2 source binding")
+    require(cmake, "openr1_rtc_service.c", "Zephyr RTC/registry composition binding")
     clock_source = (BACKEND / "src" / "openr1_clock_zephyr.c").read_text()
     require(clock_source, "OPENR1_CLOCK_CADENCE_TICKS 1024u",
             "Zephyr recovered wall-clock cadence")
     require(clock_source, "r1_clock_synchronize(", "Zephyr wall-clock adoption")
     require(clock_source, "time_calendar_unix_to_broken_down(",
             "Zephyr reconstructed calendar provider")
+    require(clock_source, "openr1_rtc_zephyr_adopt_phone_time(",
+            "Zephyr reconstructed RTC phone-time adoption")
+    rtc_source = (BACKEND / "src" / "openr1_rtc_zephyr.c").read_text()
+    for needle in (
+        "DEVICE_DT_GET(DT_NODELABEL(rtc2))",
+        "OPENR1_RTC_PRESCALER 4095u",
+        "OPENR1_RTC_IRQ_PRIORITY 6u",
+        "counter_set_channel_alarm(",
+        "counter_start(",
+        "openr1_rtc_service_initialize(",
+        "openr1_rtc_service_set_time(",
+        "openr1_rtc_service_snapshot(",
+    ):
+        require(rtc_source, needle, "Zephyr reconstructed RTC2 service")
     require(cmake, "openr1_power_zephyr.c", "Zephyr REG1 source binding")
     power_source = (BACKEND / "src" / "openr1_power_zephyr.c").read_text()
     require(power_source, "nrf_power_dcdcen_set(NRF_POWER, enabled)",
@@ -356,11 +446,42 @@ def main() -> None:
         "plan.daily_cache_reset_requested",
         "health_time_recovery_failures",
         "health_destructive_actions_suppressed",
-        "health_gomore_actions_suppressed",
+        "health_gomore_reinitializations",
+        "health_gomore_reinitialization_failures",
+        "r1_runtime_set_health_settings_handler(",
+        "r1_health_settings_store_dev_info(",
+        "plan->persistent_update_requested",
+        "plan->private_event_publish_requested",
+        "health_settings_updates_persisted",
+        "health_settings_update_failures",
         "R1_KV_HSYNC",
         "r1_health_sync_cursor_decode(",
         "r1_health_reconcile_sync_cursors(",
         "r1_health_sync_cursor_encode(",
+        "r1_health_bind_scalar_history_query(",
+        "r1_health_bind_hrv_history_query(",
+        "r1_health_bind_activity_history_query(",
+        "r1_health_bind_sync_cursor_commit(",
+        "r1_health_u8_flash_record_merge(",
+        "r1_health_u8_offline_merge(",
+        "r1_health_u8_ram_cache_merge(",
+        "r1_health_u16_flash_record_merge(",
+        "r1_health_u16_offline_merge(",
+        "r1_health_u16_ram_cache_merge(",
+        "r1_activity_flash_record_merge(",
+        "r1_activity_offline_merge(",
+        "r1_activity_ram_cache_merge(",
+        "R1_HEALTH_HISTORY_FLASH_WINDOW_SECONDS",
+        "R1_HEALTH_ACK_FLASH_HISTORY",
+        "R1_HEALTH_ACK_CURRENT_RAM",
+        "scalar_history_flash_record",
+        "hrv_history_flash_record",
+        "activity_history_flash_record",
+        "query.error == R1_ERROR_CAPACITY",
+        "health_execute_storage_notification(",
+        "r1_runtime_schedule_automatic_health_sync(",
+        "r1_runtime_service_automatic_health_sync(runtime)",
+        "health_commit_scalar_sync_cursor",
         "health_cursor_updates_persisted",
         "health_cursor_update_failures",
         "K_MUTEX_DEFINE(kv_mutex)",
@@ -424,8 +545,8 @@ def main() -> None:
         require(clock_source, needle, "Zephyr recovered hour producer")
     for needle in (
         "r1_gomore_time_transition_adapter(",
-        "health_suppress_gomore_reinitialization",
-        "health_gomore_actions_suppressed += 1u",
+        "health_reinitialize_gomore",
+        "openr1_gomore_zephyr_reinitialize(health_context.runtime)",
     ):
         require(databases_source, needle, "Zephyr GoMore time adapter binding")
     for needle in (
@@ -460,6 +581,7 @@ def main() -> None:
         "${OPENR1_LIS2DW12_ROOT}/lis2dw12_reg.c",
         "openr1_motion_zephyr.c",
         "openr1_sensor_stream_zephyr.c",
+        "openr1_gomore_zephyr.c",
     ):
         require(cmake, needle, "Zephyr pinned motion source binding")
     motion_source = (BACKEND / "src" / "openr1_motion_zephyr.c").read_text()
@@ -495,6 +617,21 @@ def main() -> None:
         "openr1_databases_zephyr_consume_temperature_event(",
         '"gomore"',
         "gomore_primitives_topic_accelerometer_ingest(",
+        "gomore_primitives_topic_raw_optical_ingest(",
+        "gomore_primitives_topic_heart_rate_ingest(",
+        "gomore_primitives_topic_hrv_ingest(",
+        "K_MUTEX_DEFINE(gomore_topic_mutex)",
+        "openr1_sensor_stream_zephyr_gomore_consume_ready(",
+        "gomore_primitives_topic_update_take_ready(",
+        "gomore_primitives_topic_update_complete(",
+        "gomore_primitives_authorization_dispatch(",
+        "openr1_sensor_stream_zephyr_gomore_active_slot_mask(",
+        "dependency_masks[GOMORE_PRIMITIVES_RECORD_COUNT]",
+        "UINT8_C(0x02), UINT8_C(0x1e), UINT8_C(0x1e), UINT8_C(0x02)",
+        "UINT8_C(0x04), UINT8_C(0x0c), UINT8_C(0x00)",
+        "const uint32_t slots[2] = {0u, 3u}",
+        "openr1_sensor_stream_zephyr_goodix_raw_hr_append(",
+        "openr1_optical_zephyr_start_functions(",
         "openr1_sensor_stream_zephyr_gomore_accelerometer_stage_set(",
         "SENSOR_STREAM_MODE_BATCH",
         "k_uptime_ticks()",
@@ -662,18 +799,27 @@ def main() -> None:
         "${OPENR1_GOODIX_DRIVER_DIR}/src/gh_drv_control.c",
         "${OPENR1_GOODIX_KERNEL_DIR}/gh_demo.c",
         "${OPENR1_GOODIX_MODULE_DIR}/gh_agc/gh_agc.c",
+        "algo_params/HR/04_EXCLUSIVE/goodix_hba_config.c",
+        "algo_params/goodix_hrv_config.c",
         "goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c",
         "r1_gh3x2x_bind.c",
+        "r1_gh3x2x_provider_composer.c",
+        "r1_gh3x2x_reconstructed_roots.c",
         "r1_gh3x2x_stubs.c",
         "openr1_optical_zephyr.c",
+        "openr1_health_results_zephyr.c",
+        "openr1_gomore_zephyr.c",
         "openr1_goodix.ld",
     ):
         require(cmake, needle, "Zephyr pinned Goodix source binding")
     goodix_linker = (BACKEND / "openr1_goodix.ld").read_text()
     for source in GOODIX_PROVIDER_OBJECTS:
         require(goodix_linker, f"*{source}.obj", "Zephyr Goodix linker retention corpus")
+    require(goodix_linker,
+            "r1_gh3x2x_stubs.c.obj(.text .text.* .rodata .rodata.* .openr1_goodix_api)",
+            "Zephyr named Goodix API retention")
     if goodix_linker.count("KEEP(*") != len(GOODIX_PROVIDER_OBJECTS):
-        raise AssertionError("Zephyr Goodix linker corpus is not exactly 16 entries")
+        raise AssertionError("Zephyr Goodix linker corpus size differs from its source inventory")
     if re.search(r"(?:^|[/(])[^\s)]*\.a(?:[/(]|$)", goodix_linker):
         raise AssertionError("Zephyr Goodix linker retention names an archive")
     software_twi_source = (
@@ -760,14 +906,212 @@ def main() -> None:
         require(optical_source, needle, "Zephyr source optical provider")
     goodix_stubs = (
         PROJECT / "port" / "goodix_gh3x2x" / "r1_gh3x2x_stubs.c").read_text()
-    for function in ("GH3X2X_AlgoInit", "GH3X2X_AlgoDeinit",
-                     "GH3X2X_AlgoCalculate"):
-        match = re.search(
-            rf"GS8\s+{function}\([^)]*\)\s*\{{.*?"
-            r"return\s+GH3X2X_RET_RESOURCE_ERROR\s*;.*?\}",
-            goodix_stubs, re.DOTALL)
-        if match is None:
-            raise AssertionError(f"Goodix global algorithm ABI is not fail-closed: {function}")
+    goodix_bridge = (
+        PROJECT / "port" / "goodix_gh3x2x" /
+        "r1_gh3x2x_algo_bridge.h").read_text()
+    goodix_primitive_adapter = (
+        PROJECT / "port" / "goodix_gh3x2x" /
+        "r1_gh3x2x_primitive_adapter.h").read_text()
+    goodix_composer = (
+        PROJECT / "port" / "goodix_gh3x2x" /
+        "r1_gh3x2x_provider_composer.c").read_text()
+    goodix_roots = (
+        PROJECT / "port" / "goodix_gh3x2x" /
+        "r1_gh3x2x_reconstructed_roots.c").read_text()
+    for needle in (
+        "R1_GH3X2X_ALGO_FUNCTION_COUNT 20u",
+        "R1_GH3X2X_ALGO_RESULT_COUNT 16u",
+        "R1_GH3X2X_ALGO_FUNCTION_HR 1u",
+        "R1_GH3X2X_ALGO_FUNCTION_HRV 2u",
+        "R1_GH3X2X_ALGO_FUNCTION_HSM 3u",
+        "R1_GH3X2X_ALGO_FUNCTION_SPO2 6u",
+        "r1_gh3x2x_algo_frame",
+        "r1_gh3x2x_algo_result",
+        "r1_gh3x2x_algo_input",
+        "R1_GH3X2X_ALGO_INPUT_CHANNELS 12u",
+        "r1_gh3x2x_algo_prepare_hr_input",
+        "r1_gh3x2x_algo_prepare_hr_mapped_input",
+        "r1_gh3x2x_algo_prepare_hrv_input",
+        "r1_gh3x2x_algo_prepare_spo2_input",
+        "r1_gh3x2x_algo_hr_default_channel_map",
+        "r1_gh3x2x_algo_spo2_default_channel_map",
+        "supported_functions",
+        "r1_gh3x2x_algo_bind_provider",
+        "r1_gh3x2x_algo_bind_result_observer",
+        "r1_gh3x2x_algo_bind_frame_observer",
+    ):
+        require(goodix_bridge, needle, "Goodix normalized algorithm ABI")
+    for needle in (
+        "_Static_assert(GH3X2X_FUNC_OFFSET_MAX",
+        "_Static_assert(GH3X2X_ALGO_RESULT_MAX_NUM",
+        "_Static_assert(GH3X2X_FUNC_OFFSET_HR",
+        "_Static_assert(GH3X2X_FUNC_OFFSET_HRV",
+        "_Static_assert(GH3X2X_FUNC_OFFSET_HSM",
+        "_Static_assert(GH3X2X_FUNC_OFFSET_SPO2",
+        "gh3x2x_bridge_frame(",
+        "gh3x2x_bridge_input_base(",
+        "source == UINT8_MAX",
+        "source >= frame->channel_count",
+        "static const uint8_t recovered[R1_GH3X2X_ALGO_INPUT_CHANNELS]",
+        "result.value_count !=",
+        "gh3x2x_bridge_population(result.value_mask)",
+        "GH3X2X_RET_RESOURCE_ERROR",
+        "GH3X2X_RET_PARAMETER_ERROR",
+        "g_algo_provider.write_virtual_register",
+        "g_result_observer(",
+        "g_frame_observer(",
+    ):
+        require(goodix_stubs, needle, "Goodix checked global algorithm bridge")
+    for needle in (
+        "goodix_primitives_hba_process_input",
+        "goodix_primitives_hrv_process_input",
+        "goodix_primitives_spo2_calc_input",
+        "r1_gh3x2x_algo_bind_hr_primitive_input",
+        "r1_gh3x2x_algo_bind_hrv_primitive_input",
+        "r1_gh3x2x_algo_bind_spo2_primitive_input",
+    ):
+        require(goodix_primitive_adapter, needle,
+                "Goodix reconstructed primitive input adapter")
+    for needle in (
+        "R1_GH3X2X_HR_RESULT_MASK",
+        "R1_GH3X2X_HRV_RESULT_MASK",
+        "R1_GH3X2X_SPO2_RESULT_MASK",
+        "r1_gh3x2x_algo_hr_default_channel_map(",
+        "r1_gh3x2x_algo_prepare_hr_mapped_input(",
+        "r1_gh3x2x_algo_prepare_hrv_input(",
+        "r1_gh3x2x_algo_spo2_default_channel_map(",
+        "r1_gh3x2x_algo_prepare_spo2_input(",
+        "composer->last_hr = (uint8_t)public_output[0]",
+        "result->values[6] = result->values[0]",
+        "result->values[7] = 0",
+        "r1_gh3x2x_provider_composer_build(",
+    ):
+        require(goodix_composer, needle,
+                "Goodix recovered wrapper provider composer")
+    for needle in (
+        "goodix_primitives_hba_process(",
+        "goodix_primitives_hrv_process(",
+        "goodix_primitives_spo2_calc(",
+        "root_words[12] != 1u",
+        "output[1] = signed_word(root_words[11])",
+        "output[2] = diagnostic * 100",
+        "goodix_primitives_build_hr_version(",
+        "goodix_primitives_build_hrv_version(",
+        "goodix_primitives_build_spo2_version(",
+        "r1_gh3x2x_make_hba_root_binding(",
+        "r1_gh3x2x_make_hrv_root_binding(",
+        "r1_gh3x2x_make_spo2_root_binding(",
+    ):
+        require(goodix_roots, needle,
+                "Goodix reconstructed root executor")
+
+    health_results_source = (
+        BACKEND / "src" / "openr1_health_results_zephyr.c").read_text()
+    for needle in (
+        "R1_GH3X2X_ALGO_FUNCTION_HR",
+        "R1_GH3X2X_ALGO_FUNCTION_SPO2",
+        "result_has_fields(",
+        "UINT16_C(0x000b)",
+        "UINT16_C(0x003f)",
+        "r1_hr_once_result_plan(",
+        "r1_spo2_once_result_plan(",
+        "openr1_databases_zephyr_consume_heart_rate_event(",
+        "openr1_databases_zephyr_consume_spo2_event(",
+        "openr1_databases_zephyr_consume_hrv_event(",
+        "openr1_sensor_stream_zephyr_goodix_hrv_update(",
+        "R1_GH3X2X_ALGO_FUNCTION_HSM",
+        "frame->raw_values[0]",
+        "r1_gh3x2x_algo_bind_result_observer(",
+        "r1_gh3x2x_algo_bind_frame_observer(",
+    ):
+        require(health_results_source, needle,
+                "Zephyr checked Goodix health result route")
+
+    gomore_source = (
+        BACKEND / "src" / "openr1_gomore_zephyr.c").read_text()
+    for needle in (
+        "OPENR1_GOMORE_ENGINE_BYTES 0x39E0u",
+        "OPENR1_GOMORE_PREVIOUS_BYTES 0x2E0u",
+        "OPENR1_GOMORE_PKEY_OFFSET 0xA000u",
+        "OPENR1_GOMORE_RETRY_MILLISECONDS 5000u",
+        "gomore_primitives_iir_low_high_coefficients(",
+        "gomore_primitives_iir_bandpass_coefficients(",
+        ".age_years = 28.0f",
+        ".height_centimeters = 175.0f",
+        ".weight_kilograms = 75.0f",
+        ".seed_random = srand",
+        ".random_value = rand",
+        "gomore_primitives_sleep_algorithm_initialize(",
+        "gomore_primitives_previous_state_restore(",
+        "gomore_primitives_previous_state_append(",
+        "r1_crc32_castagnoli(&header[8], 64u)",
+        "header[index] != UINT8_MAX",
+        "engine authorization does",
+        "runtime->device.health_settings[4] != 0u",
+        "profile_matches(",
+        "gomore_release(false);",
+        "k_calloc(1u, OPENR1_GOMORE_ENGINE_BYTES)",
+        "OPENR1_GOMORE_SLEEP_BELOW_DESCRIPTOR_ADDRESS",
+        "OPENR1_GOMORE_SLEEP_UPPER_DESCRIPTOR_ADDRESS",
+        "gomore_sleep_model_bind(",
+        "gomore_primitives_output_orchestrate(",
+        "gomore_primitives_host_input_adapter_update(",
+        "gomore_primitives_sensor_update_orchestrate(",
+        "gomore_primitives_copy_algorithm_output_snapshot(",
+        "openr1_sensor_stream_zephyr_gomore_consume_ready(",
+        "gomore_primitives_output_lifecycle_dispatch(",
+        "openr1_sensor_stream_zephyr_gomore_active_slot_mask(",
+        "openr1_sensor_stream_zephyr_gomore_authorization_set(",
+        "openr1_databases_zephyr_consume_activity_cumulative(",
+        "gomore_primitives_final_sleep_build(",
+        "gomore_primitives_final_sleep_record_serialize(",
+        "openr1_databases_zephyr_consume_sleep_record(",
+        "gomore_primitives_update_failure_counter(",
+        "openr1_gomore_zephyr_reinitialize(",
+        "gomore_state.force_fresh_previous = true",
+    ):
+        require(gomore_source, needle,
+                "Zephyr transparent GoMore engine initialization")
+    for stage in (
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_RESPIRATORY_RATE",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_LOCOMOTION_PREPROCESS",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_MOTION_CLASSIFIER",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_SPS_CANDIDATE",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_SPS_SELECT",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_SLEEP_MOTION",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_HEART_RATE_SELECT",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_ENERGY",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_DORMANT_ESTIMATOR",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_MOTION_GATE",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_SLEEP_CYCLE",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_SLEEP_OPTICAL_PEAK",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_SLEEP_STREAM",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_ACTIVITY_WINDOW",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_STEP_ACCUMULATE",
+        "GOMORE_PRIMITIVES_OUTPUT_STAGE_ACTIVITY_ACCUMULATE",
+    ):
+        require(gomore_source, stage,
+                "Zephyr complete GoMore output-stage binding")
+    for needle in (
+        "R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET",
+        "R1_DEV_INFO_HEALTH_FLAG_MASK",
+        "openr1_databases_zephyr_consume_heart_rate_event(",
+        "openr1_databases_zephyr_consume_spo2_event(",
+        "openr1_databases_zephyr_consume_hrv_event(",
+        "r1_heart_rate_store_sample(",
+        "r1_spo2_store_sample(",
+        "r1_hrv_store_sample(",
+        "r1_activity_accumulator_periodic(",
+        "r1_activity_consume_delta_event(",
+        "r1_sleep_decode_compact(",
+        "r1_sleep_plan_validated_delivery(",
+        "r1_sleep_persist_tracked(",
+        "r1_sleep_store(",
+        "r1_sleep_restore(",
+        "r1_health_bind_sleep_sync_commit(",
+    ):
+        require(databases_source, needle,
+                "Zephyr persisted health gate and scalar storage edges")
 
     bae8 = (BACKEND / "src" / "openr1_bae8_zephyr.c").read_text()
     for uuid in ("0xbae80001", "0xbae80010", "0xbae80011", "0xbae80012", "0xbae80013"):
@@ -810,7 +1154,7 @@ def main() -> None:
         "migration procedure",
     ):
         require(readme, phrase, "Zephyr limitations")
-    print("openR1 Zephyr source boundary verified: 14 recovered modules, source BLE/boot/health-storage/optical-transport stack, no opaque input")
+    print("openR1 Zephyr source boundary verified: 14 recovered families plus live target composition, source BLE/boot/health-storage/optical stack, no opaque input")
 
 
 if __name__ == "__main__":

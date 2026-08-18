@@ -19,6 +19,62 @@ const uint32_t r1_model_data_words[R1_MODEL_DATA_WORD_COUNT] = {
 #include "model_data/r1_model_data_generated.inc"
 };
 
+const uint32_t r1_goodix_hrv_weighted_words[
+    R1_GOODIX_HRV_WEIGHTED_WORD_COUNT] = {
+#include "model_data/r1_goodix_hrv_weighted_generated.inc"
+};
+
+const uint32_t r1_goodix_hrv_extrema_curve_words[
+    R1_GOODIX_HRV_EXTREMA_CURVE_WORD_COUNT] = {
+    UINT32_C(0x3F800000), UINT32_C(0x40000000),
+    UINT32_C(0x40400000), UINT32_C(0x40800000),
+    UINT32_C(0x3F800000), UINT32_C(0x40000000),
+    UINT32_C(0x40400000), UINT32_C(0x40800000),
+};
+
+const uint32_t r1_goodix_hba_words[R1_GOODIX_HBA_WORD_COUNT] = {
+#include "model_data/r1_goodix_hba_generated.inc"
+};
+
+const uint32_t r1_goodix_hba_configuration_words[
+    R1_GOODIX_HBA_CONFIGURATION_WORD_COUNT] = {
+#include "model_data/r1_goodix_hba_configuration_generated.inc"
+};
+
+const uint8_t r1_goodix_hba_tail_schema[
+    R1_GOODIX_HBA_TAIL_SCHEMA_BYTE_COUNT] = {
+#include "model_data/r1_goodix_hba_schema_generated.inc"
+};
+
+const uint8_t r1_goodix_spo2_configuration[
+    R1_GOODIX_SPO2_CONFIGURATION_BYTE_COUNT] = {
+#include "model_data/r1_goodix_spo2_configuration_generated.inc"
+};
+
+const int32_t r1_goodix_spo2_scale_words[
+    R1_GOODIX_SPO2_SCALE_WORD_COUNT] = {
+#include "model_data/r1_goodix_spo2_scale_generated.inc"
+};
+
+const uint32_t r1_goodix_spo2_spectral_words[
+    R1_GOODIX_SPO2_SPECTRAL_WORD_COUNT] = {
+#include "model_data/r1_goodix_spo2_spectral_generated.inc"
+};
+
+#define R1_HBA_VIEW(name, prefix)                                         \
+    const r1_model_data_view name = {                                    \
+        r1_goodix_hba_words + prefix##_WORD_OFFSET,                      \
+        prefix##_WORD_COUNT, prefix##_STOCK_BASE,                        \
+    }
+
+R1_HBA_VIEW(r1_goodix_hba_family_1_graph, R1_GOODIX_HBA_FAMILY_1);
+R1_HBA_VIEW(r1_goodix_hba_mode_0_descriptors, R1_GOODIX_HBA_MODE_0);
+R1_HBA_VIEW(r1_goodix_hba_second_graph, R1_GOODIX_HBA_SECOND);
+R1_HBA_VIEW(r1_goodix_hba_family_0_graph, R1_GOODIX_HBA_FAMILY_0);
+R1_HBA_VIEW(r1_goodix_hba_filter_coefficients, R1_GOODIX_HBA_FILTER);
+
+#undef R1_HBA_VIEW
+
 const r1_model_data_view r1_goodix_generated_model = {
     r1_model_data_words + R1_GOODIX_MODEL_WORD_OFFSET,
     R1_GOODIX_MODEL_WORD_COUNT,

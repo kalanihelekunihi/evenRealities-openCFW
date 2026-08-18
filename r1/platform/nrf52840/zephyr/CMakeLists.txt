@@ -69,6 +69,8 @@ set(OPENR1_GOODIX_SOURCES
   ${OPENR1_GOODIX_MODULE_DIR}/gh_other/gh_changeinttime.c
   ${OPENR1_GOODIX_MODULE_DIR}/gh_other/gh_movedetect.c
   ${OPENR1_GOODIX_MODULE_DIR}/gh_soft_adt/gh_multi_sen_pro.c
+  ${OPENR1_GOODIX_DEMOCODE_ROOT}/algo_lib/algo_params/HR/04_EXCLUSIVE/goodix_hba_config.c
+  ${OPENR1_GOODIX_DEMOCODE_ROOT}/algo_lib/algo_params/goodix_hrv_config.c
   ${OPENR1_GOODIX_DEMOCODE_ROOT}/algo_lib/algo_params/SPO2/goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c
 )
 
@@ -104,8 +106,11 @@ set(OPENR1_PORTABLE_SOURCES
   ${OPENR1_ROOT}/src/r1_gpio_registry.c
   ${OPENR1_ROOT}/src/r1_runtime.c
   ${OPENR1_ROOT}/platform/nrf52840/r1_nrf52840.c
+  ${OPENR1_ROOT}/platform/nrf52840/openr1_rtc_service.c
   ${OPENR1_ROOT}/port/r1_fal_port.c
   ${OPENR1_ROOT}/port/goodix_gh3x2x/r1_gh3x2x_port.c
+  ${OPENR1_ROOT}/port/goodix_gh3x2x/r1_gh3x2x_provider_composer.c
+  ${OPENR1_ROOT}/port/goodix_gh3x2x/r1_gh3x2x_reconstructed_roots.c
 )
 
 set(OPENR1_RECONSTRUCTED_SOURCES
@@ -129,13 +134,17 @@ target_sources(app PRIVATE
   src/main.c
   src/openr1_bae8_zephyr.c
   src/openr1_analog_zephyr.c
+  src/openr1_battery_zephyr.c
   src/openr1_clock_zephyr.c
+  src/openr1_health_results_zephyr.c
+  src/openr1_gomore_zephyr.c
   src/openr1_motion_zephyr.c
   src/openr1_nfc_zephyr.c
   src/openr1_nfc_resources_zephyr.c
   src/openr1_optical_zephyr.c
   src/openr1_power_zephyr.c
   src/openr1_reset_zephyr.c
+  src/openr1_rtc_zephyr.c
   src/openr1_sensor_stream_zephyr.c
   src/openr1_storage_zephyr.c
   src/openr1_software_twi_zephyr.c
@@ -166,6 +175,7 @@ target_sources(app PRIVATE
 target_include_directories(app PRIVATE
   ${OPENR1_ROOT}/include
   ${OPENR1_ROOT}/reconstructed
+  ${OPENR1_ROOT}/platform/nrf52840
   ${OPENR1_ROOT}/port
   ${OPENR1_ROOT}/port/goodix_gh3x2x
   ${OPENR1_BMA456_ROOT}

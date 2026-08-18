@@ -9,6 +9,7 @@
 #include "openr1/r1_clock.h"
 #include "openr1/r1_runtime.h"
 #include "openr1_databases_zephyr.h"
+#include "openr1_rtc_zephyr.h"
 #include "time_calendar/time_calendar.h"
 
 #define OPENR1_CLOCK_CADENCE_TICKS 1024u
@@ -50,8 +51,9 @@ bool openr1_clock_zephyr_adopt_phone_time(uint32_t epoch_seconds,
                              utc_offset_minutes, current_ticks()) == R1_OK) {
         adopted_epoch = epoch_seconds;
         adopted_offset_minutes = utc_offset_minutes;
-        adoption_valid = true;
-        adopted = true;
+        adopted = openr1_rtc_zephyr_adopt_phone_time(
+            epoch_seconds, utc_offset_minutes);
+        adoption_valid = adopted;
     }
     (void)k_mutex_unlock(&clock_mutex);
     return adopted;

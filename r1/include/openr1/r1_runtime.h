@@ -263,6 +263,9 @@ typedef r1_tx_status (*r1_runtime_transmit_fn)(void *context,
 typedef r1_error (*r1_runtime_enqueue_fn)(void *context, bool shared_queue,
                                          const r1_tx_event *event,
                                          uint32_t wait_ticks);
+typedef bool (*r1_runtime_queue_idle_fn)(void *context, bool shared_queue);
+typedef bool (*r1_runtime_lock_fn)(void *context);
+typedef void (*r1_runtime_unlock_fn)(void *context);
 typedef r1_error (*r1_runtime_role_fn)(void *context, uint16_t connection,
                                       r1_peer_role role);
 typedef void (*r1_runtime_touch_fn)(void *context, bool enabled);
@@ -270,6 +273,18 @@ typedef void (*r1_runtime_touch_fn)(void *context, bool enabled);
  * the platform owns any persistence or hardware effect. */
 typedef void (*r1_runtime_settings_fn)(
     void *context, const uint8_t system_settings[R1_SYSTEM_SETTINGS_BYTES]);
+/* Invoked only after an accepted health-settings write has had its protocol
+ * acknowledgement queued. The plan preserves the recovered distinction
+ * between raw private-event transitions and normalized durable changes. */
+typedef void (*r1_runtime_health_settings_fn)(
+    void *context, const r1_health_settings_command_plan *plan);
+
+/* Called after a complete authenticated wire model is decoded and before
+ * dispatch snapshots protocol-visible state. Platform services may refresh
+ * already-admitted live inputs (for example battery/charge state); they may
+ * not rewrite the request. */
+typedef void (*r1_runtime_request_observer_fn)(
+    void *context, const r1_model *request);
 
 typedef struct {
     bool active;
@@ -289,12 +304,30 @@ typedef struct r1_runtime {
     void *transmit_context;
     r1_runtime_enqueue_fn enqueue;
     void *enqueue_context;
+    r1_runtime_queue_idle_fn queue_idle;
+    void *queue_idle_context;
+    r1_runtime_lock_fn lock;
+    r1_runtime_unlock_fn unlock;
+    void *lock_context;
     r1_runtime_role_fn role_handler;
     void *role_context;
     r1_runtime_touch_fn touch_handler;
     void *touch_context;
     r1_runtime_settings_fn settings_handler;
     void *settings_context;
+    r1_runtime_health_settings_fn health_settings_handler;
+    void *health_settings_context;
+    r1_runtime_request_observer_fn request_observer;
+    void *request_observer_context;
+    /* The recovered automatic publisher calls five legs synchronously, but
+     * the BLE worker owns an exact 50-record queue.  Keep the observed order
+     * as a bitset and compose one leg only when that queue has drained. */
+    uint8_t automatic_health_pending_mask;
+    uint8_t automatic_health_next_leg;
+    uint32_t automatic_health_batch_timestamp;
+    uint32_t automatic_health_legs_scheduled;
+    uint32_t automatic_health_legs_enqueued;
+    uint32_t automatic_health_leg_failures;
 } r1_runtime;
 
 void r1_runtime_initialize(r1_runtime *runtime,
@@ -306,6 +339,11 @@ void r1_runtime_set_transmit(r1_runtime *runtime,
 void r1_runtime_set_enqueue(r1_runtime *runtime,
                             r1_runtime_enqueue_fn enqueue,
                             void *enqueue_context);
+void r1_runtime_set_queue_idle(r1_runtime *runtime,
+                               r1_runtime_queue_idle_fn queue_idle,
+                               void *queue_idle_context);
+void r1_runtime_set_lock(r1_runtime *runtime, r1_runtime_lock_fn lock,
+                         r1_runtime_unlock_fn unlock, void *lock_context);
 void r1_runtime_set_role_handler(r1_runtime *runtime,
                                  r1_runtime_role_fn role_handler,
                                  void *role_context);
@@ -315,6 +353,13 @@ void r1_runtime_set_touch_handler(r1_runtime *runtime,
 void r1_runtime_set_settings_handler(r1_runtime *runtime,
                                      r1_runtime_settings_fn settings_handler,
                                      void *settings_context);
+void r1_runtime_set_health_settings_handler(
+    r1_runtime *runtime,
+    r1_runtime_health_settings_fn health_settings_handler,
+    void *health_settings_context);
+void r1_runtime_set_request_observer(
+    r1_runtime *runtime, r1_runtime_request_observer_fn observer,
+    void *observer_context);
 void r1_runtime_configure_battery(r1_runtime *runtime, uint8_t battery_type);
 bool r1_runtime_update_battery(
     r1_runtime *runtime, r1_charge_state charge,
@@ -322,6 +367,14 @@ bool r1_runtime_update_battery(
 r1_health_auto_sync_result r1_runtime_run_automatic_health_sync(
     r1_runtime *runtime, uint32_t now_seconds,
     r1_health_auto_sync_emit_fn emit, void *emit_context);
+/* Live target composition for the retained automatic-sync controller.  The
+ * schedule call applies the exact authenticated-phone/three-hour gate and
+ * records all five serial-zero legs.  Service emits at most one leg and only
+ * when the exact shared BLE queue is empty, so the historical 50-record bound
+ * is never bypassed. */
+r1_health_auto_sync_result r1_runtime_schedule_automatic_health_sync(
+    r1_runtime *runtime, uint32_t now_seconds);
+r1_error r1_runtime_service_automatic_health_sync(r1_runtime *runtime);
 r1_error r1_runtime_connect(r1_runtime *runtime, uint16_t connection);
 void r1_runtime_disconnect(r1_runtime *runtime, uint16_t connection);
 r1_error r1_runtime_set_security(r1_runtime *runtime, uint16_t connection,

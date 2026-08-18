@@ -8,8 +8,16 @@
 #include "openr1/r1_protocol.h"
 #include "openr1/r1_state.h"
 
-#define R1_DISPATCH_RESPONSE_MAX 17u
+#define R1_MODULE_SYSTEM UINT8_C(0x01)
+#define R1_COMMAND_SYSTEM UINT8_C(0x00)
+#define R1_SYSTEM_SUBCOMMAND_DEVICE_STATUS UINT8_C(0x01)
+
+#define R1_DISPATCH_RESPONSE_MAX 32u
 #define R1_DISPATCH_MODEL_MAX 1100u
+/* The recovered EUS worker owns a 50-record shared queue.  Dispatch results
+ * must fit atomically because the runtime preflights the complete result
+ * before admitting any fragment. */
+#define R1_DISPATCH_FRAGMENT_MAX 50u
 #define R1_LEGACY_COMMAND_WORKSPACE_SIZE 36u
 #define R1_LEGACY_COMMAND_OPCODE_OFFSET 2u
 #define R1_LEGACY_DEVICE_INFO_PREFIX_BYTES 4u

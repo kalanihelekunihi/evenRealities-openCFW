@@ -1,5 +1,8 @@
 #include "openr1/r1_runtime.h"
 
+static bool runtime_lock(r1_runtime *runtime);
+static void runtime_unlock(r1_runtime *runtime);
+
 static r1_runtime_link *find_link(r1_runtime *runtime, uint16_t connection) {
     for (size_t index = 0u; index < R1_RUNTIME_LINK_MAX; ++index) {
         if (runtime->links[index].active &&
@@ -478,12 +481,27 @@ void r1_runtime_initialize(r1_runtime *runtime,
     runtime->transmit_context = transmit_context;
     runtime->enqueue = NULL;
     runtime->enqueue_context = NULL;
+    runtime->queue_idle = NULL;
+    runtime->queue_idle_context = NULL;
+    runtime->lock = NULL;
+    runtime->unlock = NULL;
+    runtime->lock_context = NULL;
     runtime->role_handler = NULL;
     runtime->role_context = NULL;
     runtime->touch_handler = NULL;
     runtime->touch_context = NULL;
     runtime->settings_handler = NULL;
     runtime->settings_context = NULL;
+    runtime->health_settings_handler = NULL;
+    runtime->health_settings_context = NULL;
+    runtime->request_observer = NULL;
+    runtime->request_observer_context = NULL;
+    runtime->automatic_health_pending_mask = 0u;
+    runtime->automatic_health_next_leg = 0u;
+    runtime->automatic_health_batch_timestamp = 0u;
+    runtime->automatic_health_legs_scheduled = 0u;
+    runtime->automatic_health_legs_enqueued = 0u;
+    runtime->automatic_health_leg_failures = 0u;
     for (size_t index = 0u; index < R1_RUNTIME_LINK_MAX; ++index) {
         runtime->links[index].active = false;
         runtime->links[index].connection = R1_INVALID_CONNECTION;
@@ -513,24 +531,63 @@ bool r1_runtime_update_battery(
     return true;
 }
 
+static r1_runtime_link *authenticated_phone_link(r1_runtime *runtime) {
+    if (runtime == NULL) {
+        return NULL;
+    }
+    for (size_t index = 0u; index < R1_RUNTIME_LINK_MAX; ++index) {
+        r1_runtime_link *link = &runtime->links[index];
+        if (link->active && link->session.role == R1_ROLE_PHONE &&
+            link->session.encrypted && link->session.bonded &&
+            link->session.authorized) {
+            return link;
+        }
+    }
+    return NULL;
+}
+
 r1_health_auto_sync_result r1_runtime_run_automatic_health_sync(
     r1_runtime *runtime, uint32_t now_seconds,
     r1_health_auto_sync_emit_fn emit, void *emit_context) {
-    bool phone_connected = false;
     if (runtime != NULL) {
-        for (size_t index = 0u; index < R1_RUNTIME_LINK_MAX; ++index) {
-            if (runtime->links[index].active &&
-                runtime->links[index].session.role == R1_ROLE_PHONE) {
-                phone_connected = true;
-                break;
-            }
-        }
         return r1_health_run_automatic_sync(
-            &runtime->device.health, phone_connected, now_seconds,
+            &runtime->device.health,
+            authenticated_phone_link(runtime) != NULL, now_seconds,
             emit, emit_context);
     }
     return r1_health_run_automatic_sync(
         NULL, false, now_seconds, emit, emit_context);
+}
+
+static void schedule_automatic_health_leg(
+    void *context, r1_health_auto_sync_leg leg, uint8_t serial) {
+    r1_runtime *runtime = context;
+    if (runtime == NULL || serial != R1_HEALTH_AUTO_SYNC_SERIAL ||
+        leg > R1_HEALTH_SYNC_UNSYNCHRONIZED_SLEEP) {
+        return;
+    }
+    const uint8_t bit = (uint8_t)(1u << (uint8_t)leg);
+    if ((runtime->automatic_health_pending_mask & bit) == 0u) {
+        runtime->automatic_health_pending_mask |= bit;
+        ++runtime->automatic_health_legs_scheduled;
+    }
+}
+
+r1_health_auto_sync_result r1_runtime_schedule_automatic_health_sync(
+    r1_runtime *runtime, uint32_t now_seconds) {
+    if (!runtime_lock(runtime)) {
+        return (r1_health_auto_sync_result){
+            R1_HEALTH_AUTO_SYNC_INVALID, false, false, 0u,
+        };
+    }
+    const r1_health_auto_sync_result result =
+        r1_runtime_run_automatic_health_sync(
+        runtime, now_seconds, schedule_automatic_health_leg, runtime);
+    if (runtime != NULL && result.batch_started) {
+        runtime->automatic_health_batch_timestamp = now_seconds;
+    }
+    runtime_unlock(runtime);
+    return result;
 }
 
 void r1_runtime_set_role_handler(r1_runtime *runtime,
@@ -560,6 +617,25 @@ void r1_runtime_set_settings_handler(r1_runtime *runtime,
     }
 }
 
+void r1_runtime_set_health_settings_handler(
+    r1_runtime *runtime,
+    r1_runtime_health_settings_fn health_settings_handler,
+    void *health_settings_context) {
+    if (runtime != NULL) {
+        runtime->health_settings_handler = health_settings_handler;
+        runtime->health_settings_context = health_settings_context;
+    }
+}
+
+void r1_runtime_set_request_observer(
+    r1_runtime *runtime, r1_runtime_request_observer_fn observer,
+    void *observer_context) {
+    if (runtime != NULL) {
+        runtime->request_observer = observer;
+        runtime->request_observer_context = observer_context;
+    }
+}
+
 void r1_runtime_set_transmit(r1_runtime *runtime,
                              r1_runtime_transmit_fn transmit,
                              void *transmit_context) {
@@ -578,7 +654,36 @@ void r1_runtime_set_enqueue(r1_runtime *runtime,
     }
 }
 
-r1_error r1_runtime_connect(r1_runtime *runtime, uint16_t connection) {
+void r1_runtime_set_queue_idle(r1_runtime *runtime,
+                               r1_runtime_queue_idle_fn queue_idle,
+                               void *queue_idle_context) {
+    if (runtime != NULL) {
+        runtime->queue_idle = queue_idle;
+        runtime->queue_idle_context = queue_idle_context;
+    }
+}
+
+void r1_runtime_set_lock(r1_runtime *runtime, r1_runtime_lock_fn lock,
+                         r1_runtime_unlock_fn unlock, void *lock_context) {
+    if (runtime != NULL && ((lock == NULL) == (unlock == NULL))) {
+        runtime->lock = lock;
+        runtime->unlock = unlock;
+        runtime->lock_context = lock_context;
+    }
+}
+
+static bool runtime_lock(r1_runtime *runtime) {
+    return runtime != NULL && (runtime->lock == NULL ||
+        runtime->lock(runtime->lock_context));
+}
+
+static void runtime_unlock(r1_runtime *runtime) {
+    if (runtime != NULL && runtime->unlock != NULL) {
+        runtime->unlock(runtime->lock_context);
+    }
+}
+
+static r1_error connect_unlocked(r1_runtime *runtime, uint16_t connection) {
     if (runtime == NULL || connection == R1_INVALID_CONNECTION) {
         return R1_ERROR_ARGUMENT;
     }
@@ -601,12 +706,13 @@ r1_error r1_runtime_connect(r1_runtime *runtime, uint16_t connection) {
     return R1_ERROR_CAPACITY;
 }
 
-void r1_runtime_disconnect(r1_runtime *runtime, uint16_t connection) {
+static void disconnect_unlocked(r1_runtime *runtime, uint16_t connection) {
     if (runtime == NULL) {
         return;
     }
     r1_runtime_link *link = find_link(runtime, connection);
     if (link != NULL) {
+        const bool was_phone = link->session.role == R1_ROLE_PHONE;
         link->active = false;
         link->connection = R1_INVALID_CONNECTION;
         link->session.encrypted = false;
@@ -614,12 +720,18 @@ void r1_runtime_disconnect(r1_runtime *runtime, uint16_t connection) {
         link->session.authorized = false;
         link->session.role = R1_ROLE_UNASSIGNED;
         r1_reassembler_reset(&link->reassembler);
+        if (was_phone) {
+            runtime->automatic_health_pending_mask = 0u;
+            runtime->automatic_health_next_leg = 0u;
+            runtime->automatic_health_batch_timestamp = 0u;
+        }
     }
     r1_event_remove_connection(&runtime->events, connection);
 }
 
-r1_error r1_runtime_set_security(r1_runtime *runtime, uint16_t connection,
-                                 bool encrypted, bool bonded, bool authorized) {
+static r1_error set_security_unlocked(
+    r1_runtime *runtime, uint16_t connection,
+    bool encrypted, bool bonded, bool authorized) {
     if (runtime == NULL || (authorized && (!encrypted || !bonded))) {
         return R1_ERROR_ARGUMENT;
     }
@@ -631,6 +743,40 @@ r1_error r1_runtime_set_security(r1_runtime *runtime, uint16_t connection,
     link->session.bonded = bonded;
     link->session.authorized = authorized;
     return R1_OK;
+}
+
+r1_error r1_runtime_connect(r1_runtime *runtime, uint16_t connection) {
+    if (runtime == NULL || connection == R1_INVALID_CONNECTION) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (!runtime_lock(runtime)) {
+        return R1_ERROR_STATE;
+    }
+    const r1_error error = connect_unlocked(runtime, connection);
+    runtime_unlock(runtime);
+    return error;
+}
+
+void r1_runtime_disconnect(r1_runtime *runtime, uint16_t connection) {
+    if (!runtime_lock(runtime)) {
+        return;
+    }
+    disconnect_unlocked(runtime, connection);
+    runtime_unlock(runtime);
+}
+
+r1_error r1_runtime_set_security(r1_runtime *runtime, uint16_t connection,
+                                 bool encrypted, bool bonded, bool authorized) {
+    if (runtime == NULL || (authorized && (!encrypted || !bonded))) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (!runtime_lock(runtime)) {
+        return R1_ERROR_STATE;
+    }
+    const r1_error error = set_security_unlocked(
+        runtime, connection, encrypted, bonded, authorized);
+    runtime_unlock(runtime);
+    return error;
 }
 
 r1_peer_role r1_runtime_connection_role(const r1_runtime *runtime,
@@ -742,8 +888,97 @@ static r1_error enqueue_dispatch(r1_runtime *runtime, uint16_t connection) {
     return R1_OK;
 }
 
-r1_error r1_runtime_receive_eus(r1_runtime *runtime, uint16_t connection,
-                                const uint8_t *value, size_t length) {
+static r1_error service_automatic_health_sync_unlocked(r1_runtime *runtime) {
+    if (runtime == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (runtime->automatic_health_pending_mask == 0u) {
+        return R1_OK;
+    }
+    /* A complete daily leg can consume almost the entire recovered 50-record
+     * shared queue (sixteen 632-byte sleep sessions need 49 fragments with
+     * their response).  Starting only from an empty queue preserves that
+     * bound and makes each leg atomic at queue admission. */
+    const bool shared_queue_idle = runtime->enqueue == NULL
+        ? runtime->events.eus.count == 0u
+        : runtime->queue_idle != NULL && runtime->queue_idle(
+            runtime->queue_idle_context, true);
+    if (!shared_queue_idle) {
+        return R1_ERROR_STATE;
+    }
+    r1_runtime_link *link = authenticated_phone_link(runtime);
+    if (link == NULL) {
+        return R1_ERROR_UNAUTHORIZED;
+    }
+
+    uint8_t selected = runtime->automatic_health_next_leg;
+    for (uint8_t checked = 0u; checked <= R1_HEALTH_SYNC_UNSYNCHRONIZED_SLEEP;
+         ++checked) {
+        if (selected > R1_HEALTH_SYNC_UNSYNCHRONIZED_SLEEP) {
+            selected = 0u;
+        }
+        if ((runtime->automatic_health_pending_mask &
+             (uint8_t)(1u << selected)) != 0u) {
+            break;
+        }
+        ++selected;
+    }
+    if (selected > R1_HEALTH_SYNC_UNSYNCHRONIZED_SLEEP ||
+        (runtime->automatic_health_pending_mask &
+         (uint8_t)(1u << selected)) == 0u) {
+        ++runtime->automatic_health_leg_failures;
+        runtime->automatic_health_pending_mask = 0u;
+        runtime->automatic_health_next_leg = 0u;
+        return R1_ERROR_STATE;
+    }
+
+    static const uint8_t commands[] = {1u, 2u, 4u, 5u, 6u};
+    const r1_model request = {
+        R1_PROTOCOL_VERSION, 2u, R1_MODULE_VERSION,
+        R1_HEALTH_AUTO_SYNC_SERIAL, 0u, commands[selected], 1u,
+        NULL, 0u,
+    };
+    const r1_error dispatch_error = r1_dispatch(
+        &runtime->device, &link->session, &request,
+        &runtime->dispatch_scratch);
+    /* dispatch_health shares the public query path and therefore applies the
+     * explicit-query cooldown reset.  Automatic legs are not queries: retain
+     * the batch timestamp written by the recovered common gate. */
+    runtime->device.health.last_auto_sync_or_query_seconds =
+        runtime->automatic_health_batch_timestamp;
+    const r1_error enqueue_error = enqueue_dispatch(runtime, link->connection);
+    if (enqueue_error != R1_OK) {
+        ++runtime->automatic_health_leg_failures;
+        return enqueue_error;
+    }
+
+    runtime->automatic_health_pending_mask &=
+        (uint8_t)~(uint8_t)(1u << selected);
+    runtime->automatic_health_next_leg = (uint8_t)(selected + 1u);
+    if (runtime->automatic_health_pending_mask == 0u) {
+        runtime->automatic_health_next_leg = 0u;
+    }
+    ++runtime->automatic_health_legs_enqueued;
+    if (dispatch_error != R1_OK) {
+        ++runtime->automatic_health_leg_failures;
+    }
+    return dispatch_error;
+}
+
+r1_error r1_runtime_service_automatic_health_sync(r1_runtime *runtime) {
+    if (runtime == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (!runtime_lock(runtime)) {
+        return R1_ERROR_STATE;
+    }
+    const r1_error error = service_automatic_health_sync_unlocked(runtime);
+    runtime_unlock(runtime);
+    return error;
+}
+
+static r1_error receive_eus_unlocked(r1_runtime *runtime, uint16_t connection,
+                                     const uint8_t *value, size_t length) {
     if (runtime == NULL || value == NULL) {
         return R1_ERROR_ARGUMENT;
     }
@@ -767,12 +1002,24 @@ r1_error r1_runtime_receive_eus(r1_runtime *runtime, uint16_t connection,
     if (error != R1_OK) {
         return error;
     }
+    if (runtime->request_observer != NULL) {
+        runtime->request_observer(
+            runtime->request_observer_context, &request);
+    }
     const r1_peer_role previous_role = link->session.role;
     const bool previous_touch_enabled = runtime->device.touch_enabled;
     uint8_t previous_settings[R1_SYSTEM_SETTINGS_BYTES];
     for (size_t index = 0u; index < R1_SYSTEM_SETTINGS_BYTES; ++index) {
         previous_settings[index] = runtime->device.system_settings[index];
     }
+    r1_health_settings_record previous_health_settings = {
+        .timestamp_seconds = (uint32_t)runtime->device.health_settings[0]
+            | ((uint32_t)runtime->device.health_settings[1] << 8u)
+            | ((uint32_t)runtime->device.health_settings[2] << 16u)
+            | ((uint32_t)runtime->device.health_settings[3] << 24u),
+        .enabled = (uint8_t)(runtime->device.health_settings[4] != 0u),
+        .reserved = {0u},
+    };
     const r1_error dispatch_error = r1_dispatch(
         &runtime->device, &link->session, &request, &runtime->dispatch_scratch);
     const r1_error role_error = commit_role_change(runtime, link, previous_role);
@@ -797,12 +1044,39 @@ r1_error r1_runtime_receive_eus(r1_runtime *runtime, uint16_t connection,
     if (error != R1_OK) {
         return error;
     }
+    if (dispatch_error == R1_OK && runtime->health_settings_handler != NULL &&
+        request.module == R1_MODULE_SYSTEM &&
+        request.command == R1_COMMAND_SYSTEM &&
+        request.subcommand == 0x0eu && (request.status & 0x02u) != 0u) {
+        r1_health_settings_command_plan health_settings_plan;
+        if (r1_health_settings_plan_command(
+                true, &previous_health_settings, request.payload,
+                request.payload_length, &health_settings_plan) == R1_OK) {
+            runtime->health_settings_handler(
+                runtime->health_settings_context, &health_settings_plan);
+        }
+    }
     return role_error != R1_OK ? role_error : dispatch_error;
 }
 
+r1_error r1_runtime_receive_eus(r1_runtime *runtime, uint16_t connection,
+                                const uint8_t *value, size_t length) {
+    if (runtime == NULL || value == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (!runtime_lock(runtime)) {
+        return R1_ERROR_STATE;
+    }
+    const r1_error error = receive_eus_unlocked(
+        runtime, connection, value, length);
+    runtime_unlock(runtime);
+    return error;
+}
+
 void r1_runtime_hvn_complete(r1_runtime *runtime, uint8_t completed) {
-    if (runtime != NULL) {
+    if (runtime_lock(runtime)) {
         r1_event_complete(&runtime->events, completed);
+        runtime_unlock(runtime);
     }
 }
 
@@ -814,7 +1088,8 @@ static uint32_t ticks_until(uint32_t now_tick, uint32_t deadline_tick) {
     return tick_reached(now_tick, deadline_tick) ? 0u : deadline_tick - now_tick;
 }
 
-uint32_t r1_runtime_poll(r1_runtime *runtime, uint32_t now_tick) {
+static uint32_t runtime_poll_unlocked(
+    r1_runtime *runtime, uint32_t now_tick) {
     if (runtime == NULL || runtime->transmit == NULL) {
         return R1_RUNTIME_WAIT_FOREVER;
     }
@@ -857,4 +1132,14 @@ uint32_t r1_runtime_poll(r1_runtime *runtime, uint32_t now_tick) {
         }
     }
     return R1_RUNTIME_WAIT_FOREVER;
+}
+
+uint32_t r1_runtime_poll(r1_runtime *runtime, uint32_t now_tick) {
+    if (runtime == NULL || runtime->transmit == NULL ||
+        !runtime_lock(runtime)) {
+        return R1_RUNTIME_WAIT_FOREVER;
+    }
+    const uint32_t wait = runtime_poll_unlocked(runtime, now_tick);
+    runtime_unlock(runtime);
+    return wait;
 }

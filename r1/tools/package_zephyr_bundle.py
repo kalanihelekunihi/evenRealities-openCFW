@@ -124,8 +124,8 @@ SOURCE_LOCK = {
         "archive_sha256": "48564d724f1de0004dd19ed3d8b156841400b7e652714f46dcb64d0397c76d29",
         "license": "Goodix 5-clause; use restricted to Goodix ICs",
         "license_sha256": "dfb94b7725971b1696299c6d9fd36b8a447c40c1a9c9e89a8a392377f9823226",
-        "admitted_source_file_count": 57,
-        "admitted_source_aggregate_sha256": "cbf4a8668ae5d7e908214fb509fc428f3a3a9d5493f756ba134faa27f82b1f4f",
+        "admitted_source_file_count": 59,
+        "admitted_source_aggregate_sha256": "b0c421df96de26abd6c4af04de46023f7148c05bafb17da8aaa8de6a9830ec77",
     },
 }
 
@@ -160,8 +160,11 @@ GOODIX_PROVIDER_OBJECTS = (
     "gh_drv_interface.c", "gh_demo.c", "gh_demo_hook.c",
     "gh_demo_reg_array.c", "gh_demo_user.c", "gh_agc.c",
     "gh_changeinttime.c", "gh_movedetect.c", "gh_multi_sen_pro.c",
+    "goodix_hba_config.c", "goodix_hrv_config.c",
     "goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c",
-    "r1_gh3x2x_port.c", "r1_gh3x2x_bind.c", "r1_gh3x2x_stubs.c",
+    "r1_gh3x2x_port.c", "r1_gh3x2x_bind.c",
+    "r1_gh3x2x_provider_composer.c",
+    "r1_gh3x2x_reconstructed_roots.c", "r1_gh3x2x_stubs.c",
 )
 
 GOODIX_COMPILED_SOURCES = (
@@ -177,6 +180,8 @@ GOODIX_COMPILED_SOURCES = (
     "demo_code/demo_kernel_code/module/gh_other/gh_changeinttime.c",
     "demo_code/demo_kernel_code/module/gh_other/gh_movedetect.c",
     "demo_code/demo_kernel_code/module/gh_soft_adt/gh_multi_sen_pro.c",
+    "algo_lib/algo_params/HR/04_EXCLUSIVE/goodix_hba_config.c",
+    "algo_lib/algo_params/goodix_hrv_config.c",
     "algo_lib/algo_params/SPO2/goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c",
     "LICENSE",
 )
@@ -725,17 +730,17 @@ def main() -> None:
         "limitations": [
             "The development key must be replaced by an owner-controlled key before deployment.",
             "Pinned MCUboot imgtool uses randomized ECDSA nonces; signed-image and ZIP bytes are not claimed reproducible, although every generated signature and artifact hash is independently verified.",
-            "The exact SAADC routes and conversions are source-bound; battery sampling uses YHM2710 shared-power client bit 0 and startup adopts a valid type from the exact persisted power record, while periodic production, live charge-state input, and physical calibration remain open.",
+            "The exact SAADC routes and conversions are source-bound; battery sampling uses YHM2710 shared-power client bit 0, startup adopts valid persisted type/voltage compensation, and boot plus exact device-status access refresh protocol-visible voltage and the live register-6 charge state. No unsupported autonomous cadence is invented; PMIC event-driven refresh, physical calibration, and owned-hardware validation remain open.",
             "Reset-reason capture, fatal PC/LR retention, and the recovered 10-second scheduler watchdog are source-bound but require owned-hardware fault/reset validation.",
-            "The monotonic/phone-synchronized wall clock and reconstructed exact Unix/Gregorian query/day-boundary conversion are source-bound but remain unavailable until command 0x05 supplies a valid epoch and UTC offset; the hardware RTC/backend is not activated.",
+            "The monotonic/phone-synchronized wall clock, RTC2 8-Hz backend, and reconstructed exact Unix/Gregorian query/day-boundary conversion are source-bound; wall time remains unavailable until command 0x05 supplies a valid epoch and UTC offset, and physical drift/day-boundary behavior remains an owned-hardware validation gate.",
             "REG1 startup and settings writes use the source nRF POWER HAL; wear-driven automation and physical power behavior remain hardware-validation gates.",
-            "The pinned Bosch/ST motion providers, exact TWIM1 route, variant probe, reconstructed 1024-Hz sensor-stream runtime, exact 188-byte acc batch with read-only persisted axis offsets, and dormant exact GoMore acc topic staging listener are source-bound; the raw-optical producer, live engine composition, physical-axis confirmation, and owned-ring validation remain open.",
-            "The reconstructed software-i2c_2 GXT310 path, P1.13/P0.28 pins, two-address ID probe, signed register-0 conversion, bounded paired acquisition, read-only persisted nv_r1 calibration, exact temp/two-byte one-pair stream provider, and dormant once-listener/event-9/daily-cache path are source-bound; boot activation, public control, sleep/timing scheduling, channel semantics, and hardware validation remain open.",
+            "The pinned Bosch/ST motion providers, exact TWIM1 route, variant probe, reconstructed 1024-Hz sensor-stream runtime, exact 188-byte acc batch with read-only persisted axis offsets, and live GoMore acc topic listener are source-bound. Accelerometer, raw-optical, direct-HR, and HRV topics cross the exact readiness barrier and execute the complete transparent 16-stage engine plus output lifecycle; physical-axis confirmation and owned-ring validation remain open.",
+            "The reconstructed software-i2c_2 GXT310 path, P1.13/P0.28 pins, two-address ID probe, signed register-0 conversion, bounded paired acquisition, read-only persisted nv_r1 calibration, exact temp/two-byte one-pair stream provider, and dormant once-listener/event-9/daily-cache path are source-bound. Final-sleep timing, construction, validation, serialization, sleep.db persistence, and synchronized commit are live; the retail physical-temperature binding remains zero until its channel semantics are proven on hardware.",
             "The IQS7211E TWIM0 transport, GPIO lifecycle, IRQ worker, restart timer, touchSwitch hook, and YHM2710 client-bit-2 lease are source-bound; ring identity and wear/factory provisioning remain fail-closed, and physical touch behavior is not hardware-validated.",
             "The exact one-byte r_size class is decoded read-only with its 6...15 gate, but ring size alone is not used to infer the independent IQS7211E physical layout.",
             "The pinned ST25DVxxKC provider, bounded mailbox adapter, P0.03 GPO worker, P1.10 dock lifecycle, dock-session mutex, and motion/NFC TWIM1 handoff are source-bound; NFC starts disabled pending an explicit product activation policy.",
-            "Pinned FlashDB 2.0.0/FAL 0.5.99 binds the recovered six-page health.db TSDB, exact startup/cache restore, exact 128-byte codec, local-day recovery, non-destructive slot-1 hourly appends, and the exact slot-0 tuple for recovery/reset. The 24-byte hsync class is losslessly loaded and persisted through hardened kv.bin snapshots; only the four named cursors mutate and both unresolved words are preserved. The owner-authorized GoMore backward-clock adapter is source-bound to the slot-0 path, with its reset action counted but suppressed until live engine state/result composition is validated. Temperature serializes only after an explicitly started one-shot completes, stress remains zero without a producer, and neither module-owned cache is restored by the crash record; destructive format/retry, migration, and owned-hardware power-loss behavior remain suppressed or open.",
-            "The pinned source-only Goodix demo/driver subset, recovered i2c_4 transport, P0.21/P0.10/P1.04 board resources, interrupt worker, and YHM2710 client bit 1 are bound; the exact product-side raw_hr/adt/living-object record producers compile from transparent source. Binary archives are excluded and the unadapted biometric global ABI fails closed; raw-frame channel semantics and all optical electrical behavior remain hardware-validation gates.",
+            "Pinned FlashDB 2.0.0/FAL 0.5.99 binds the recovered six-page health.db TSDB, exact startup/cache restore, exact 128-byte codec, local-day recovery, non-destructive slot-1 hourly appends, and the exact slot-0 tuple for recovery/reset. The 24-byte hsync class is losslessly loaded and persisted through hardened kv.bin snapshots; only the four named cursors mutate and both unresolved words are preserved. Authenticated HR/SpO2/HRV/activity daily queries bind their exact oldest-first UInt8/UInt16/packed-activity merge callbacks over the recovered 259200-second FlashDB window, merge each invalid-clock FIFO, append current RAM, advance the named hsync cursor only after matching mode-0/2 packet ACKs, and consume only the acknowledged FIFO prefix for mode 1. Dispatch composition accounts for encoded fragment cost before model admission; an activity traversal that reaches the recovered 50-record shared-queue boundary completes as an ACK-resumable page. The admitted wall-clock cadence drives the exact 10800-second automatic HR/SpO2/HRV/activity/unsynchronized-sleep order through a bounded one-leg-at-a-time service that requires an encrypted, bonded, authorized phone role and preserves the recovered 50-record queue. Public health-settings use their exact canonical planner, queue ACK before effects, persist normalized timestamp/enable transitions into dev_info while preserving REG1, and reconcile the exact seven-slot GoMore gate. The backward-clock and failure-60 reset paths now perform a typed fresh-engine reinitialization without resume state. Cumulative activity enters the exact ten-minute/daily accumulator and final sleep enters sleep.db. Temperature serializes only after an explicitly started one-shot completes, stress remains zero without a stock-live producer, and neither module-owned cache is restored by the crash record; destructive format/retry, migration, and owned-hardware power-loss behavior remain intentionally suppressed or open.",
+            "The pinned source-only Goodix demo/driver subset, recovered i2c_4 transport, P0.21/P0.10/P1.04 board resources, interrupt worker, and YHM2710 client bit 1 are bound; the exact product-side raw_hr/adt/living-object record producers compile from transparent source. Binary archives are excluded and the 20-row global frame/result ABI is normalized through a bounded vendor-free provider contract. Checked constructors reproduce the independent HR/HBA mapped input, HRV direct raw/AGC/last-HR input, and SpO2 mapped raw/AGC input; the retained source composer owns their exact lifecycle and publication records: HR mask 0x003F/six words, HRV mask 0x007F/seven slots with slot 6 zero, and the retail-R1 SpO2 divergence mask 0x00FF/eight slots with slot 6 mirroring slot 0 and slot 7 zero. It also preserves the HR-to-HRV carry. Canonical retail roots are HBA 0x6C6A8, HRV 0x6D51C, and SpO2 0x6E838. All three transparent persistent root executors are target-bound; validated HR, SpO2, and HRV publications route through recovered planners into scalar storage and GoMore topics behind the persisted health gate. Optical wavelength, electrical calibration, and biometric equivalence remain owned-hardware validation gates.",
             "The reconstructed YHM2710 P1.01 transport, initialization, and three-client shared-power lease are source-bound; battery, optical, and touch clients are adopted, while all physical power behavior remains hardware-validation work; kv.bin, health.db, and sleep.db are source-bound.",
             "Zephyr NVS does not claim compatibility with retail Nordic FDS settings; migration or clearing behavior requires owned-hardware validation.",
             "The former retail bootloader window is reserved until a migration procedure is hardware-tested.",

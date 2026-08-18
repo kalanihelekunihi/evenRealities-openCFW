@@ -9,14 +9,17 @@
 
 #include "openr1/r1_clock.h"
 #include "openr1/r1_runtime.h"
+#include "openr1_rtc.h"
 
 extern r1_runtime *openr1_platform_runtime(void);
 
 #define OPENR1_CLOCK_CADENCE_TICKS 1024u
+#define OPENR1_CLOCK_STACK_BYTES 2048u
 
 static r1_clock platform_clock;
 static StaticTask_t clock_control_block;
-static StackType_t clock_stack[configMINIMAL_STACK_SIZE];
+static StackType_t clock_stack[
+    OPENR1_CLOCK_STACK_BYTES / sizeof(StackType_t)];
 static uint32_t adopted_epoch;
 static int16_t adopted_offset_minutes;
 static bool adoption_valid;
@@ -31,6 +34,7 @@ void openr1_clock_adopt_phone_time(uint32_t epoch_seconds,
     adopted_epoch = epoch_seconds;
     adopted_offset_minutes = utc_offset_minutes;
     adoption_valid = true;
+    (void)openr1_rtc_adopt_phone_time(epoch_seconds, utc_offset_minutes);
 }
 
 static void clock_worker(void *context) {
@@ -45,6 +49,12 @@ static void clock_worker(void *context) {
             (!adoption_valid || state_epoch != adopted_epoch ||
              state_offset != adopted_offset_minutes)) {
             openr1_clock_adopt_phone_time(state_epoch, state_offset);
+        }
+        uint32_t epoch_seconds = 0u;
+        if (openr1_clock_epoch(&epoch_seconds)) {
+            (void)r1_runtime_schedule_automatic_health_sync(
+                runtime, epoch_seconds);
+            (void)r1_runtime_service_automatic_health_sync(runtime);
         }
         (void)osDelay(OPENR1_CLOCK_CADENCE_TICKS);
     }

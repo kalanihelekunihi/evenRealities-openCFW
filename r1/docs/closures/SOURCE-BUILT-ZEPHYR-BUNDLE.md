@@ -9,7 +9,7 @@ members are built from openR1 C plus pinned Zephyr 3.7.2, hal_nordic, CMSIS,
 TinyCrypt, and MCUboot source revisions recorded in
 `third-party/fetched/manifest.json`. The same gate now covers FlashDB 2.0.0
 and its bundled FAL 0.5.99; their consumed headers, licenses, and six translation
-units are individually hash-pinned. It also covers the admitted 57-file Goodix
+units are individually hash-pinned. It also covers the admitted 59-file Goodix
 GH3X2X source/header/license subset; no vendor algorithm or driver archive enters
 the build.
 
@@ -63,8 +63,9 @@ now bracketed by client bit 0 of the reconstructed YHM2710 shared-power lease.
 The provider probes chip ID `0xA0`, runs the exact five-register initialization,
 and fails closed without binding clients if the device is absent. Database startup decodes the
 exact four-byte persisted `power` class, adopts a valid battery type into the runtime controller,
-and retains signed voltage compensation through a typed read-only accessor. Periodic battery
-production, live charge-state input, and physical calibration remain open.
+and applies valid signed voltage compensation. A boot seed and each read-only device-status access
+take five live samples plus a fail-closed YHM register-6 charge-state read before dispatch. PMIC
+event-driven refresh, physical calibration, and owned-ring validation remain open.
 The adjacent one-byte `r_size` class is decoded with its exact 6...15 validity gate and retained
 read-only; it is not treated as sufficient IQS7211E layout identity.
 
@@ -81,13 +82,27 @@ framework at 1,024 Hz, composes its lists with the reconstructed generic-registr
 family, creates the exact `"acc"`/188-byte and `"temp"`/two-byte streams, and binds the motion FIFO
 reader. Each batch carries at most 30 normalized XYZ samples, the recovered
 count/padding/timestamp layout, and read-only signed axis offsets decoded from
-`nv_r1` bytes 68...73. No production algorithm listener is invented at boot;
-the exact dormant `"gomore"` rate-1 batch listener can stage the reconstructed 25-sample GoMore
-axis transform. The companion `raw_hr`, `hr`, and `hrv` reducers and acc/raw readiness barrier
-compile from transparent C. The exact product-side `raw_hr`/`adt` counted-word containers and
-two-byte Goodix living-object producer compile without assigning waveform semantics, but no
-physical-channel selection, engine execution, or health result is fabricated.
-Live consumer composition and physical-axis validation remain explicit gates.
+`nv_r1` bytes 68...73. The exact seven-slot GoMore authorization state owns reference-counted
+`acc`, `raw_hr`, `hr`, and `hrv` listeners with masks `02/1E/1E/02/04/0C/00`; global health requests
+slots 0/3 and therefore starts only `acc`. The reducers and readiness barrier compile from
+transparent C. The staged record is serialized across one engine attempt; readiness clears before
+the attempt and acc/raw counts clear only after success. The target initializes a dynamic
+source-built 0x39E0-byte engine with its exact filter designers and profile while health is enabled.
+Its 0x2E0-byte prior state restores from and appends to the recovered `pKey.bin` slots. Existing
+valid key prefixes remain untouched; a wholly erased page receives a source-visible all-zero
+layout anchor that the engine never consumes for authorization. HSM mask `0x08` supplies checked frame word0
+to the exact `raw_hr` container without assigning waveform semantics. The 16-stage engine executor
+is target-composed from transparent C. Live `acc`, `raw_hr`, `hr`, and `hrv` topic batches enter the
+exact host adapter, cross the recovered readiness barrier, execute every recovered stage in stock
+order, copy the 264-byte host result snapshot, and enter the recovered output lifecycle. That
+lifecycle dynamically reconciles slot-4 optical authorization, feeds the exact packed cumulative
+activity words into the ten-minute/daily accumulator, and constructs, validates, serializes, and
+persists final sleep records through `sleep.db`. No dormant output field is relabeled or published
+without a proven stock consumer.
+Validated updated HR, SpO2, and HRV results from the target-bound admitted provider traverse a
+separate observer, recovered result planner, and exact scalar storage consumer. The persisted
+global-health bit/timestamp is restored before that route is bound. Physical-axis, wavelength,
+biometric-equivalence, and owned-hardware validation remain explicit gates.
 
 Touch transport and lifecycle are source-bound without pretending the product
 identity is known. Zephyr TWIM0 runs at 400 kHz on recovered
@@ -136,8 +151,10 @@ averages with signed truncation toward zero, and returns the low two bytes. The 
 `"once"` listener is retained at rate 1/per-sample mode; when explicitly started it applies the
 30-attempt/five-consistent-value reducer, publishes the exact event-9 payload, and feeds the
 product-owned hourly temperature cache. It is not registered at startup and assigns neither
-physical channel labels nor clinical units. The separate sleep/timing path and stress producer
-remain uncomposed.
+physical channel labels nor clinical units. The final-sleep timing and record path is composed, but
+the retail physical-temperature source used by its body-temperature field is not yet semantically
+resolved; the source implementation therefore records zero rather than inventing a channel or
+unit. The separate dormant stress producer remains uncomposed.
 
 The Goodix raw-acquisition boundary is now source-bound. The target compiles and
 retains the public Goodix demo kernel, register driver, AGC/motion/soft-ADT modules,
@@ -147,9 +164,12 @@ recovered software `i2c_4` engine drives SCL P1.09 and SDA P0.31 with device ID
 P1.04 is reset. Interrupt work reaches `Gh3x2xDemoInterruptProcess`, and the
 bounded motion FIFO can supply the democode accelerometer callback. Start, profile
 switch, and stop are retained typed APIs only; no BLE route invokes them. Raw
-frames are counted without being relabeled as biometric results. The still-unmapped
-democode global algorithm ABI returns its own resource-unavailable error, so no
-HR, SpO2, or HRV result is fabricated.
+frames are counted without being relabeled as biometric results. The democode's
+20-row global frame table now crosses a checked vendor-free provider ABI with
+bounded lifecycle, version/register routing, and mask/count-validated 16-word
+results. Transparent HBA, HRV, and SpO2 roots are target-bound with caller-owned persistent
+plan/state/workspace objects. Normal acquisition starts only requested HR/HRV/HSM/SpO2 bits and
+never substitutes factory profiles; malformed mixed-mask initialization rolls back earlier roots.
 
 The reset/watchdog lifecycle is source-bound as well. Startup decodes and
 clears the nRF RESETREAS register through the portable reset model, preserving
@@ -204,10 +224,28 @@ direct NVMC access to the recovered 36-page product region, `kv.bin`, pinned
 FlashDB/FAL `health.db`, `sleep.db`, REG1 control, exact SAADC acquisition, the Bosch/ST motion bus,
 fail-closed IQS7211E transport/lifecycle, and fail-closed ST25DVxxKC mailbox/
 TWIM1 handoff, reconstructed YHM2710 shared-power binding, and P1.10 dock lifecycle;
-its motion algorithm consumer, touch identity/wear provisioning, explicit NFC
-activation policy, Goodix global algorithm/frame/result composition, destructive slot-0
-format/retry and GoMore actions, and biometric/sleep production paths still need
-typed Zephyr adapters and owned-ring validation. The former retail bootloader
+public health-settings are canonicalized, ACK-ordered, and durably update the live global
+health gate, exact seven-slot authorization state, and transparent engine ownership. Live sensor
+topics now drive all 16 recovered GoMore stages, dynamic sleep optical authorization, cumulative
+activity aggregation, final-sleep construction, `sleep.db` persistence, and the synchronized sleep
+commit hook. HR, SpO2, HRV, and activity daily
+queries now use the exact three-day FlashDB merge callbacks and persist named `hsync` cursors only
+after matching notification ACKs; HRV uses the independent recovered UInt16 FlashDB/FIFO/RAM
+merge and named cursor, while activity uses its independent recovered packed-word merge and
+cursor. The admitted wall-clock cadence drives the exact 10,800-second
+five-leg automatic history order, and a bounded empty-queue service emits one serial-zero leg at a
+time without exceeding the recovered 50-record BLE queue. Encoded fragment cost is also checked
+before each response/notification is admitted; a maximally fragmented activity FIFO therefore
+returns an ACK-resumable page rather than failing the complete atomic enqueue. Accepted HR, SpO2,
+and HRV storage events also execute their recovered call to the common automatic-sync gate and
+attempt the first drain-aware leg immediately. Touch identity/wear provisioning, an explicit NFC
+activation policy, the destructive slot-0 format/retry actions, the dormant stock-unreachable
+stress producer, and the unresolved physical-temperature binding remain intentionally fail-closed
+or evidence-constrained boundaries, not opaque inputs. Backward-time and failure-60 GoMore resets
+now perform the recovered fresh-engine lifecycle without resume state. The composed motion,
+Goodix, GoMore, biometric, activity, and sleep paths still require calibration, equivalence testing,
+fault injection, and owned-ring validation before their outputs can be treated as product- or
+clinically equivalent. The former retail bootloader
 window remains reserved until a recoverable migration procedure is tested.
 Zephyr NVS is not asserted to decode the retail Nordic FDS settings format, so
 settings migration or clearing also remains an owned-hardware validation item.
@@ -228,3 +266,8 @@ make zephyr-bundle \
   GOODIX_DEMOCODE_ROOT=/absolute/pebbleos-nonfree-2c0034a23b675a5f9a29e4a47e8b504c7a88e321/gh3x2x
 make zephyr-verify
 ```
+
+On macOS, the wrapper temporarily hides the pinned toolchain's configure-only
+`arm-none-eabi-gdb-py` probe under an advisory lock because that 2020 x86_64
+debugger can hang under current Rosetta. It restores the executable on every
+exit. GCC, binutils, source inputs, signatures, and bundle members are unchanged.

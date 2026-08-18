@@ -3,17 +3,17 @@
 ## Result
 
 The four recovered GoMore sensor callbacks and their shared readiness barrier are now explicit,
-bounded C in `reconstructed/gomore_primitives/`. The source-built Zephyr target can register the
-exact `"gomore"` rate-1 batch listener on the existing `"acc"` stream and stage its normalized
-25-sample input. That listener is dormant: startup does not register it, no BLE command enables
-it, and it does not run the health engine or publish biometric output.
+bounded C in `reconstructed/gomore_primitives/`. The source-built Zephyr target composes the exact
+seven-slot dependency masks and reference-counted `"gomore"` listeners for `acc`, `raw_hr`, `hr`,
+and `hrv`. Global health requests slots 0 and 3, whose union activates only `acc`; other slots open
+the optical listeners only when their recovered masks require them.
 
 The `"raw_hr"`, `"hr"`, and `"hrv"` callback reducers also compile and are host-tested. The exact
 stock `raw_hr` scalar accumulator now compiles too, preserving its 124-byte count/reserved/value
-record without assigning waveform semantics. The Goodix demo callback supplies an array of physical
-channels, while the stock callback receives one already-selected UInt32 per call; evidence does not
-yet prove that selection. The target therefore does not connect those callbacks or fabricate the
-remaining stream sources.
+record without assigning waveform semantics. Recovered dispatcher control flow proves that HSM
+mask `0x08` passes the first word of its checked Goodix frame to the `raw_hr` callback. The target
+connects that exact producer boundary, HR, and HRV backing updates; it does not infer wavelength,
+scale, or clinical meaning, and the HSM row never fabricates an algorithm result.
 
 ## Pinned image evidence
 
@@ -79,10 +79,16 @@ hazards without changing accepted-input results.
 
 Host tests cover the exact axis order/scale, 25/4 clamps, packet offsets, UInt32/UInt16 conversion,
 all three readiness bits, single- and dual-required barriers, successful versus failed cleanup,
-and malformed-input immutability. The Zephyr source-boundary verifier requires the exact `gomore`
-batch registration and rejects any startup call that would activate it.
+and malformed-input immutability. Zephyr composes the recovered seven masks
+`02/1E/1E/02/04/0C/00`, reconciles slots 0/3 from the persisted global-health bit, and uses normal
+Goodix function masks instead of factory profiles. Its mutex-backed consume boundary preserves a
+stable staged record across one engine attempt, clears the recovered readiness byte before the
+call, and invokes the recovered count cleanup only after success. The target also restores and
+appends the exact 736-byte prior-state record through the recovered `pKey.bin` slot/compaction
+contract without depending on a retail authorization key.
 
 This closes the transparent topic-input reduction, scalar `raw_hr` accumulator, and the available accelerometer staging seam.
-It does not claim GoMore result quality, physical-axis correctness, a live Goodix raw-optical
-producer, or a validated health-engine configuration. Those remain separate composition and
-owned-hardware gates.
+It does not claim GoMore result quality, physical-axis correctness, wavelength/scale identity, or
+a completed 16-stage target executor. The target now initializes the transparent engine and exact
+filter bank while health is enabled; sensor-update/output composition and owned-hardware validation
+remain separate gates.

@@ -1,8 +1,5 @@
 #include "openr1/r1_dispatch.h"
 
-#define R1_MODULE_SYSTEM 0x01u
-#define R1_COMMAND_SYSTEM 0x00u
-
 typedef enum {
     RESULT_SUCCESS = 0,
     RESULT_ERROR = 1,
@@ -24,6 +21,28 @@ static uint32_t read_u32(const uint8_t *input) {
 static void copy_bytes(uint8_t *output, const uint8_t *input, size_t length) {
     for (size_t index = 0u; index < length; ++index) {
         output[index] = input[index];
+    }
+}
+
+static r1_health_settings_record health_settings_record(
+    const uint8_t bytes[12]) {
+    const r1_health_settings_record record = {
+        .timestamp_seconds = read_u32(bytes),
+        .enabled = (uint8_t)(bytes[4] != 0u),
+        .reserved = {0u},
+    };
+    return record;
+}
+
+static void health_settings_bytes(
+    const r1_health_settings_record *record, uint8_t bytes[12]) {
+    bytes[0] = (uint8_t)record->timestamp_seconds;
+    bytes[1] = (uint8_t)(record->timestamp_seconds >> 8u);
+    bytes[2] = (uint8_t)(record->timestamp_seconds >> 16u);
+    bytes[3] = (uint8_t)(record->timestamp_seconds >> 24u);
+    bytes[4] = (uint8_t)(record->enabled != 0u);
+    for (size_t index = 5u; index < 12u; ++index) {
+        bytes[index] = 0u;
     }
 }
 
@@ -254,6 +273,21 @@ static void clear_result(r1_dispatch_result *result) {
     }
 }
 
+static size_t dispatch_fragment_count(size_t model_length) {
+    /* r1_fragment_message always emits a terminal fragment, including for an
+     * exact multiple of the 239-byte payload width. */
+    return model_length / R1_FRAGMENT_PAYLOAD_MAX + 1u;
+}
+
+static bool dispatch_fragment_capacity_available(
+    const r1_dispatch_result *result, size_t next_model_length) {
+    size_t fragments = dispatch_fragment_count(next_model_length);
+    for (size_t index = 0u; index < result->count; ++index) {
+        fragments += dispatch_fragment_count(result->lengths[index]);
+    }
+    return fragments <= R1_DISPATCH_FRAGMENT_MAX;
+}
+
 static r1_error add_response(const r1_model *request, result_code code,
                              const uint8_t *payload, size_t payload_length,
                              r1_dispatch_result *result) {
@@ -269,6 +303,10 @@ static r1_error add_response(const r1_model *request, result_code code,
     const r1_error error = r1_model_encode(
         &response, R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
         result->models[result->count], R1_DISPATCH_MODEL_MAX, &written);
+    if (error == R1_OK &&
+        !dispatch_fragment_capacity_available(result, written)) {
+        return R1_ERROR_CAPACITY;
+    }
     if (error == R1_OK) {
         result->lengths[result->count] = written;
         result->count += 1u;
@@ -290,6 +328,10 @@ static r1_error add_notification(const r1_model *request, uint16_t serial,
     const r1_error error = r1_model_encode(
         &notification, R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
         result->models[result->count], R1_DISPATCH_MODEL_MAX, &written);
+    if (error == R1_OK &&
+        !dispatch_fragment_capacity_available(result, written)) {
+        return R1_ERROR_CAPACITY;
+    }
     if (error == R1_OK) {
         result->lengths[result->count] = written;
         result->count += 1u;
@@ -313,6 +355,126 @@ static r1_error add_tracked_notification(r1_device_state *state,
     if (error != R1_OK) {
         result->count -= 1u;
         result->lengths[result->count] = 0u;
+    }
+    return error;
+}
+
+typedef struct {
+    r1_device_state *state;
+    const r1_model *request;
+    r1_dispatch_result *result;
+    uint8_t metric;
+    uint32_t latest_timestamp;
+    uint8_t latest_value;
+} scalar_history_emit_context;
+
+static r1_error add_scalar_history_notification(
+    void *opaque, const r1_health_u8_history *history,
+    uint32_t maximum_recorded_timestamp, uint8_t acknowledgement_mode) {
+    scalar_history_emit_context *context = opaque;
+    if (context == NULL || history == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    r1_health_u8_history encoded_history = *history;
+    /* The recovered HR/SpO2 sync flush always reserves the five-byte latest
+     * prefix; an unavailable accessor contributes five zero bytes. */
+    encoded_history.has_latest = true;
+    encoded_history.latest_timestamp = context->latest_timestamp;
+    encoded_history.latest_value = context->latest_value;
+    uint8_t payload[R1_HEALTH_DAILY_U8_MAX_BYTES];
+    size_t payload_length = 0u;
+    r1_error error = r1_health_encode_daily_u8(
+        &encoded_history, payload, sizeof payload, &payload_length);
+    if (error != R1_OK) {
+        return error;
+    }
+    const uint16_t serial = r1_health_next_serial(&context->state->health);
+    error = add_notification(
+        context->request, serial, payload, payload_length, context->result);
+    if (error != R1_OK) {
+        return error;
+    }
+    error = r1_health_register_scalar_history_pending(
+        &context->state->health, context->request->module,
+        context->request->command, context->request->subcommand, serial,
+        context->metric, acknowledgement_mode, maximum_recorded_timestamp);
+    if (error != R1_OK) {
+        context->result->count -= 1u;
+        context->result->lengths[context->result->count] = 0u;
+    }
+    return error;
+}
+
+typedef struct {
+    r1_device_state *state;
+    const r1_model *request;
+    r1_dispatch_result *result;
+} hrv_history_emit_context;
+
+static r1_error add_hrv_history_notification(
+    void *opaque, const r1_health_u16_history *history,
+    uint32_t maximum_recorded_timestamp, uint8_t acknowledgement_mode) {
+    hrv_history_emit_context *context = opaque;
+    if (context == NULL || history == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    uint8_t payload[R1_HEALTH_DAILY_U16_MAX_BYTES];
+    size_t payload_length = 0u;
+    r1_error error = r1_health_encode_daily_u16(
+        history, payload, sizeof payload, &payload_length);
+    if (error != R1_OK) {
+        return error;
+    }
+    const uint16_t serial = r1_health_next_serial(&context->state->health);
+    error = add_notification(
+        context->request, serial, payload, payload_length, context->result);
+    if (error != R1_OK) {
+        return error;
+    }
+    error = r1_health_register_scalar_history_pending(
+        &context->state->health, context->request->module,
+        context->request->command, context->request->subcommand, serial,
+        2u, acknowledgement_mode, maximum_recorded_timestamp);
+    if (error != R1_OK) {
+        context->result->count -= 1u;
+        context->result->lengths[context->result->count] = 0u;
+    }
+    return error;
+}
+
+typedef struct {
+    r1_device_state *state;
+    const r1_model *request;
+    r1_dispatch_result *result;
+} activity_history_emit_context;
+
+static r1_error add_activity_history_notification(
+    void *opaque, const r1_activity_history *history,
+    uint32_t maximum_recorded_timestamp, uint8_t acknowledgement_mode) {
+    activity_history_emit_context *context = opaque;
+    if (context == NULL || history == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    uint8_t payload[R1_ACTIVITY_DAILY_MAX_BYTES];
+    size_t payload_length = 0u;
+    r1_error error = r1_activity_encode_daily(
+        history, payload, sizeof payload, &payload_length);
+    if (error != R1_OK) {
+        return error;
+    }
+    const uint16_t serial = r1_health_next_serial(&context->state->health);
+    error = add_notification(
+        context->request, serial, payload, payload_length, context->result);
+    if (error != R1_OK) {
+        return error;
+    }
+    error = r1_health_register_scalar_history_pending(
+        &context->state->health, context->request->module,
+        context->request->command, context->request->subcommand, serial,
+        3u, acknowledgement_mode, maximum_recorded_timestamp);
+    if (error != R1_OK) {
+        context->result->count -= 1u;
+        context->result->lengths[context->result->count] = 0u;
     }
     return error;
 }
@@ -368,17 +530,33 @@ static r1_error dispatch_health(r1_device_state *state, const r1_session *sessio
         r1_health_u8_history *history = route.metric == 0u
             ? &state->health.heart_rate : &state->health.blood_oxygen;
         if (route.query_kind == 1u) {
-            error = r1_health_encode_daily_u8(
-                history, payload, sizeof payload, &payload_length);
+            error = add_response(request, RESULT_SUCCESS, NULL, 0u, result);
             if (error != R1_OK) {
                 return error;
             }
-            error = add_response(request, RESULT_SUCCESS, NULL, 0u, result);
-            if (error == R1_OK) {
-                error = add_tracked_notification(state, request, payload, payload_length,
-                                                 R1_PENDING_GENERIC, 0u, result);
+            if (state->health.scalar_history_query != NULL) {
+                scalar_history_emit_context emit_context = {
+                    .state = state,
+                    .request = request,
+                    .result = result,
+                    .metric = route.metric,
+                    .latest_timestamp = history->has_latest
+                        ? history->latest_timestamp : 0u,
+                    .latest_value = history->has_latest
+                        ? history->latest_value : 0u,
+                };
+                return state->health.scalar_history_query(
+                    state->health.scalar_history_query_context,
+                    route.metric, state->unix_seconds, history,
+                    add_scalar_history_notification, &emit_context);
             }
-            return error;
+            error = r1_health_encode_daily_u8(
+                history, payload, sizeof payload, &payload_length);
+            return error == R1_OK
+                ? add_tracked_notification(
+                    state, request, payload, payload_length,
+                    R1_PENDING_GENERIC, 0u, result)
+                : error;
         }
         uint8_t latest_value = 0u;
         uint32_t latest_timestamp = 0u;
@@ -396,17 +574,29 @@ static r1_error dispatch_health(r1_device_state *state, const r1_session *sessio
                route.action == R1_HEALTH_HISTORY_HRV_POINT) {
         r1_health_u16_history *history = &state->health.heart_rate_variability;
         if (route.query_kind == 1u) {
+            error = add_response(request, RESULT_SUCCESS, NULL, 0u, result);
+            if (error != R1_OK) {
+                return error;
+            }
+            if (state->health.hrv_history_query != NULL) {
+                hrv_history_emit_context emit_context = {
+                    .state = state,
+                    .request = request,
+                    .result = result,
+                };
+                return state->health.hrv_history_query(
+                    state->health.hrv_history_query_context,
+                    state->unix_seconds, history,
+                    add_hrv_history_notification, &emit_context);
+            }
             error = r1_health_encode_daily_u16(
                 history, payload, sizeof payload, &payload_length);
             if (error != R1_OK) {
                 return error;
             }
-            error = add_response(request, RESULT_SUCCESS, NULL, 0u, result);
-            if (error == R1_OK) {
-                error = add_tracked_notification(state, request, payload, payload_length,
-                                                 R1_PENDING_GENERIC, 0u, result);
-            }
-            return error;
+            return add_tracked_notification(
+                state, request, payload, payload_length,
+                R1_PENDING_GENERIC, 0u, result);
         }
         uint16_t latest_value = 0u;
         uint32_t latest_timestamp = 0u;
@@ -423,17 +613,29 @@ static r1_error dispatch_health(r1_device_state *state, const r1_session *sessio
     } else if (route.action == R1_HEALTH_HISTORY_ACTIVITY_DAILY ||
                route.action == R1_HEALTH_HISTORY_ACTIVITY_REFRESH) {
         if (route.action == R1_HEALTH_HISTORY_ACTIVITY_DAILY) {
-            error = r1_activity_encode_daily(
-                &state->health.activity, payload, sizeof payload, &payload_length);
+            error = add_response(request, RESULT_SUCCESS, NULL, 0u, result);
             if (error != R1_OK) {
                 return error;
             }
-            error = add_response(request, RESULT_SUCCESS, NULL, 0u, result);
-            if (error == R1_OK) {
-                error = add_tracked_notification(state, request, payload, payload_length,
-                                                 R1_PENDING_GENERIC, 0u, result);
+            if (state->health.activity_history_query != NULL) {
+                activity_history_emit_context emit_context = {
+                    .state = state,
+                    .request = request,
+                    .result = result,
+                };
+                return state->health.activity_history_query(
+                    state->health.activity_history_query_context,
+                    state->unix_seconds, &state->health.activity,
+                    add_activity_history_notification, &emit_context);
             }
-            return error;
+            error = r1_activity_encode_daily(
+                &state->health.activity, payload, sizeof payload,
+                &payload_length);
+            return error == R1_OK
+                ? add_tracked_notification(
+                    state, request, payload, payload_length,
+                    R1_PENDING_GENERIC, 0u, result)
+                : error;
         }
         /* Exact 2.2.6.0009 behavior: refresh the accumulator without a direct response. */
         return R1_OK;
@@ -516,7 +718,7 @@ r1_error r1_dispatch(r1_device_state *state, r1_session *session,
     }
 
     switch (request->subcommand) {
-        case 0x01u:
+        case R1_SYSTEM_SUBCOMMAND_DEVICE_STATUS:
             return is_set(request) ? add_response(request, RESULT_REFUSE, NULL, 0u, result)
                                    : get_device_status(state, request, result);
         case 0x02u:
@@ -590,20 +792,31 @@ r1_error r1_dispatch(r1_device_state *state, r1_session *session,
                 static const uint8_t pair_result = 0u;
                 return add_response(request, RESULT_SUCCESS, &pair_result, 1u, result);
             }
-        case 0x0eu:
-            if (!is_set(request)) {
-                return add_response(request, RESULT_SUCCESS, state->health_settings,
-                                    sizeof state->health_settings, result);
-            }
-            if (request->payload_length != sizeof state->health_settings) {
+        case 0x0eu: {
+            const r1_health_settings_record stored =
+                health_settings_record(state->health_settings);
+            r1_health_settings_command_plan health_settings_plan;
+            const r1_error plan_error = r1_health_settings_plan_command(
+                is_set(request), &stored, request->payload,
+                request->payload_length, &health_settings_plan);
+            if (plan_error != R1_OK) {
                 return add_response(request, RESULT_ERROR, NULL, 0u, result);
+            }
+            if (!is_set(request)) {
+                uint8_t response[12];
+                health_settings_bytes(&health_settings_plan.response, response);
+                return add_response(request, RESULT_SUCCESS, response,
+                                    sizeof response, result);
             }
             if (!authorized_mutation(session)) {
                 (void)add_response(request, RESULT_REFUSE, NULL, 0u, result);
                 return R1_ERROR_UNAUTHORIZED;
             }
-            copy_bytes(state->health_settings, request->payload, sizeof state->health_settings);
+            health_settings_bytes(
+                &health_settings_plan.persistent_record,
+                state->health_settings);
             return add_response(request, RESULT_SUCCESS, NULL, 0u, result);
+        }
         case 0x0fu:
             if (!is_set(request)) {
                 return add_response(request, RESULT_SUCCESS, state->system_settings,

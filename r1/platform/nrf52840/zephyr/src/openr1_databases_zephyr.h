@@ -29,7 +29,10 @@ uint32_t openr1_databases_zephyr_time_recoveries(void);
 uint32_t openr1_databases_zephyr_time_recovery_failures(void);
 uint32_t openr1_databases_zephyr_time_daily_resets(void);
 uint32_t openr1_databases_zephyr_destructive_actions_suppressed(void);
-uint32_t openr1_databases_zephyr_gomore_actions_suppressed(void);
+uint32_t openr1_databases_zephyr_gomore_reinitializations(void);
+uint32_t openr1_databases_zephyr_gomore_reinitialization_failures(void);
+uint32_t openr1_databases_zephyr_health_settings_updates_persisted(void);
+uint32_t openr1_databases_zephyr_health_settings_update_failures(void);
 uint32_t openr1_databases_zephyr_cursor_updates_persisted(void);
 uint32_t openr1_databases_zephyr_cursor_update_failures(void);
 const r1_health_sync_cursor_state *
@@ -46,6 +49,16 @@ r1_error openr1_databases_zephyr_multicast_time_transition(
 r1_error openr1_databases_zephyr_multicast_hour(uint8_t current_local_hour);
 r1_error openr1_databases_zephyr_consume_temperature_event(
     const void *payload, size_t length);
+r1_error openr1_databases_zephyr_consume_heart_rate_event(
+    const void *payload, size_t length);
+r1_error openr1_databases_zephyr_consume_spo2_event(
+    const void *payload, size_t length);
+r1_error openr1_databases_zephyr_consume_hrv_event(
+    const void *payload, size_t length);
+r1_error openr1_databases_zephyr_consume_activity_cumulative(
+    const uint32_t activity[2], uint8_t sleep_result_status);
+r1_error openr1_databases_zephyr_consume_sleep_record(
+    const uint8_t *payload, size_t length);
 r1_sleep_db *openr1_databases_zephyr_sleep_db(void);
 
 #endif

@@ -24,6 +24,7 @@
 #define R1_PENDING_ACK_CAPACITY 32u
 #define R1_HRV_RR_INTERVAL_MAX 100u
 #define R1_HEALTH_AUTO_SYNC_INTERVAL_SECONDS UINT32_C(10800)
+#define R1_HEALTH_HISTORY_FLASH_WINDOW_SECONDS UINT32_C(259200)
 #define R1_HEALTH_AUTO_SYNC_SERIAL UINT8_C(0)
 #define R1_HEALTH_LEGACY_CLOCK_CUTOFF UINT32_C(946080000)
 #define R1_HEALTH_SYNC_CURSOR_BYTES 24u
@@ -758,6 +759,18 @@ typedef struct {
     uint8_t minimum;
 } r1_health_u8_flash_record;
 
+/* Normalized HRV variant of the recovered 128-byte FlashDB callback seam. */
+typedef struct {
+    int16_t utc_offset_minutes;
+    uint32_t recorded_timestamp;
+    uint8_t local_hour;
+    uint8_t local_minute;
+    uint8_t local_second;
+    uint16_t average;
+    uint16_t maximum;
+    uint16_t minimum;
+} r1_health_u16_flash_record;
+
 typedef struct {
     bool emitted;
     bool dropped_future_acknowledgement;
@@ -858,7 +871,8 @@ typedef struct {
 
 typedef enum {
     R1_PENDING_GENERIC = 0,
-    R1_PENDING_SLEEP_SESSION = 1
+    R1_PENDING_SLEEP_SESSION = 1,
+    R1_PENDING_SCALAR_HISTORY = 2
 } r1_pending_kind;
 
 typedef struct {
@@ -869,6 +883,9 @@ typedef struct {
     uint16_t serial;
     r1_pending_kind kind;
     uint8_t record_index;
+    uint8_t health_metric;
+    uint8_t health_ack_mode;
+    uint32_t acknowledged_timestamp;
 } r1_pending_ack;
 
 typedef struct {
@@ -978,6 +995,30 @@ typedef struct {
     uint32_t elapsed_seconds;
 } r1_health_auto_sync_result;
 
+typedef r1_error (*r1_health_scalar_history_emit_fn)(
+    void *context, const r1_health_u8_history *history,
+    uint32_t maximum_recorded_timestamp, uint8_t acknowledgement_mode);
+typedef r1_error (*r1_health_scalar_history_query_fn)(
+    void *context, uint8_t metric, uint32_t firmware_timestamp,
+    const r1_health_u8_history *current_history,
+    r1_health_scalar_history_emit_fn emit, void *emit_context);
+typedef r1_error (*r1_health_hrv_history_emit_fn)(
+    void *context, const r1_health_u16_history *history,
+    uint32_t maximum_recorded_timestamp, uint8_t acknowledgement_mode);
+typedef r1_error (*r1_health_hrv_history_query_fn)(
+    void *context, uint32_t firmware_timestamp,
+    const r1_health_u16_history *current_history,
+    r1_health_hrv_history_emit_fn emit, void *emit_context);
+typedef r1_error (*r1_health_activity_history_emit_fn)(
+    void *context, const r1_activity_history *history,
+    uint32_t maximum_recorded_timestamp, uint8_t acknowledgement_mode);
+typedef r1_error (*r1_health_activity_history_query_fn)(
+    void *context, uint32_t firmware_timestamp,
+    const r1_activity_history *current_history,
+    r1_health_activity_history_emit_fn emit, void *emit_context);
+typedef r1_error (*r1_health_sync_cursor_commit_fn)(
+    void *context, uint8_t metric, uint32_t acknowledged_timestamp);
+
 typedef struct {
     int16_t old_utc_offset_minutes;
     int16_t new_utc_offset_minutes;
@@ -1054,6 +1095,14 @@ typedef struct {
     r1_pending_ack pending[R1_PENDING_ACK_CAPACITY];
     r1_sleep_sync_commit_fn sleep_sync_commit;
     void *sleep_sync_context;
+    r1_health_scalar_history_query_fn scalar_history_query;
+    void *scalar_history_query_context;
+    r1_health_hrv_history_query_fn hrv_history_query;
+    void *hrv_history_query_context;
+    r1_health_activity_history_query_fn activity_history_query;
+    void *activity_history_query_context;
+    r1_health_sync_cursor_commit_fn sync_cursor_commit;
+    void *sync_cursor_context;
 } r1_health_state;
 
 void r1_health_initialize(r1_health_state *state);
@@ -1420,6 +1469,17 @@ r1_error r1_health_u16_offline_merge(
     const r1_health_u16_offline_queue *queue, uint32_t firmware_timestamp,
     r1_health_u16_offline_packet *workspace, r1_health_u16_offline_emit_fn emit,
     void *emit_context, r1_health_offline_merge_result *result);
+void r1_health_u16_day_builder_reset(r1_health_u16_offline_packet *builder);
+r1_error r1_health_u16_day_builder_flush(
+    r1_health_u16_offline_packet *builder, uint32_t firmware_timestamp,
+    r1_health_u16_offline_emit_fn emit, void *emit_context,
+    r1_health_u16_day_flush_result *result);
+r1_error r1_health_u16_flash_record_merge(
+    r1_health_u16_offline_packet *builder,
+    const r1_health_u16_flash_record *record, uint32_t firmware_timestamp,
+    bool apply_window_filter, uint32_t window_start,
+    r1_health_u16_offline_emit_fn emit, void *emit_context,
+    r1_health_u16_day_flush_result *flush_result);
 r1_error r1_health_u16_ram_cache_merge(
     r1_health_u16_offline_packet *builder, r1_health_u16_history *cache,
     uint32_t requested_day_start, uint32_t window_start,
@@ -1457,12 +1517,28 @@ r1_error r1_health_register_pending(r1_health_state *state,
                                     uint8_t module, uint8_t command, uint8_t subcommand,
                                     uint16_t serial, r1_pending_kind kind,
                                     uint8_t record_index);
+r1_error r1_health_register_scalar_history_pending(
+    r1_health_state *state, uint8_t module, uint8_t command,
+    uint8_t subcommand, uint16_t serial, uint8_t metric,
+    uint8_t acknowledgement_mode, uint32_t acknowledged_timestamp);
 bool r1_health_acknowledge(r1_health_state *state,
                            uint8_t module, uint8_t command, uint8_t subcommand,
                            uint16_t serial);
 void r1_health_bind_sleep_sync_commit(r1_health_state *state,
                                       r1_sleep_sync_commit_fn commit,
                                       void *context);
+void r1_health_bind_scalar_history_query(
+    r1_health_state *state, r1_health_scalar_history_query_fn query,
+    void *context);
+void r1_health_bind_hrv_history_query(
+    r1_health_state *state, r1_health_hrv_history_query_fn query,
+    void *context);
+void r1_health_bind_activity_history_query(
+    r1_health_state *state, r1_health_activity_history_query_fn query,
+    void *context);
+void r1_health_bind_sync_cursor_commit(
+    r1_health_state *state, r1_health_sync_cursor_commit_fn commit,
+    void *context);
 void r1_health_clear_pending(r1_health_state *state);
 void r1_health_note_explicit_history_query(
     r1_health_state *state, uint32_t now_seconds);

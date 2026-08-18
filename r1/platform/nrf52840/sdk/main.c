@@ -24,6 +24,7 @@
 #include "openr1_nfc.h"
 #include "openr1_peer.h"
 #include "openr1_reset_reason.h"
+#include "openr1_rtc.h"
 #include "openr1_scheduler.h"
 #include "openr1_storage.h"
 #include "openr1_touch.h"
@@ -133,6 +134,8 @@ typedef const void *(*openr1_gh3x2x_spo2_config_instance_fn)(void);
 typedef void (*openr1_gh3x2x_spo2_config_version_fn)(char *, uint8_t);
 typedef r1_error (*openr1_sleep_sync_ack_plan_fn)(
     bool, bool, r1_sleep_sync_ack_plan *);
+typedef r1_error (*openr1_sleep_sync_report_plan_fn)(
+    bool, uint8_t, uint8_t, uint16_t, r1_sleep_sync_report_plan *);
 typedef r1_error (*openr1_system_control_37_plan_fn)(
     uint8_t, uint32_t, uint8_t, uint8_t,
     r1_system_control_command_37_result *);
@@ -261,6 +264,9 @@ static const r1_model_data_view *const retained_model_data[] = {
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_sleep_sync_ack_plan_fn retained_sleep_sync_ack_plan =
     r1_sleep_sync_plan_acknowledgement;
+__attribute__((used, section(".openr1_frontier_api")))
+static const openr1_sleep_sync_report_plan_fn retained_sleep_sync_report_plan =
+    r1_sleep_sync_plan_report_callback;
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_system_control_37_plan_fn retained_system_control_37_plan =
     r1_system_control_command_37_plan;
@@ -404,6 +410,10 @@ static void softdevice_initialize(void) {
         fail(error);
     }
     error = openr1_motion_initialize();
+    if (error != NRF_SUCCESS) {
+        fail(error);
+    }
+    error = openr1_rtc_initialize();
     if (error != NRF_SUCCESS) {
         fail(error);
     }

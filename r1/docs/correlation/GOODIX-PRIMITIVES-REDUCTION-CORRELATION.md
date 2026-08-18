@@ -2248,10 +2248,12 @@ rolling insertion and mean/probability updates, the ten-window central-rate
 recovery gate, wrapping hold counter, invalid-rate preservation, and rejection
 of malformed interval extents before history mutation.
 
-### GH_NADT preprocessing orchestrator (`0x0006E838`)
+### SpO2 calculation root with embedded GH_NADT preprocessing (`0x0006E838`)
 
-The 682-byte GH_NADT preprocessing root now compiles as
-`goodix_primitives_nadt_preprocess_execute`. Its stock body SHA-256 is
+The 682-byte retail `goodix_spo2_calc` root now compiles as
+`goodix_primitives_spo2_calc`. Its internal graph is the embedded GH_NADT
+preprocessing pipeline; the compatibility spelling
+`goodix_primitives_nadt_preprocess_execute` remains available. Its stock body SHA-256 is
 `d0e8d34ddfaf97ba47f66e94aa6a104b3efac71452ecb02f4f5a25379f04f656`.
 The local plan exposes every direct algorithm stage as a typed enum callback while retaining the
 recovered assembly, batch accumulation, readiness, spectral, peak, summary, quality, transition,
@@ -2367,9 +2369,11 @@ harmonic-dependent 10/square-root/15 admission gates, amplitude tie breaking, we
 fundamental fitting, normalized error rejection, and best-family selection. Tests pin a perfect
 three-harmonic family, empty input, and rejection without output mutation.
 
-### GH_HR processing root (`0x0006D51C`)
+### HRV processing root (`0x0006D51C`)
 
-The 1,382-byte root now compiles as `goodix_primitives_hr_process`; its body SHA-256 is
+The 1,382-byte `goodix_hrv_calc` root now compiles as
+`goodix_primitives_hrv_process`; the historical `goodix_primitives_hr_process`
+spelling remains as a compatibility wrapper. Its body SHA-256 is
 `0f1b8fa8d247ca839a59cfffccb4f70e9cb1a689cd2f736c8514474c02358c9d`.
 The stock global context becomes typed input, plan, state, and workspace records. The local path
 retains invalid-input handling, motion and signal histories, weighted/extrema stage ordering,
@@ -2387,10 +2391,11 @@ four optical filter lanes, decimal-residual axis correction, RMS motion magnitud
 median cleanup and replay, subsequent rolling-percentile selection, and the every-third magnitude
 lane. Tests cover the initial fill/replay, rolling continuation, and no-mutation rejection.
 
-### Complete SpO2/dlCom processing root (`0x0006C6A8`)
+### Complete HR/HBA processing root (`0x0006C6A8`)
 
-The final 1,370-byte Goodix root now compiles as
-`goodix_primitives_spo2_process`; its exact executable SHA-256 is
+The final 1,370-byte `goodix_hba_calc` root now compiles as
+`goodix_primitives_hba_process`; the historical `goodix_primitives_spo2_process`
+spelling remains as a compatibility wrapper. Its exact executable SHA-256 is
 `400fd57d9c750bef559ccbc41301602007192f79f8cc13cebadd528795011d2c`.
 The reconstruction exposes configuration, sample input, five-word output, persistent stream/report
 state, packed-bank and spectral bindings, generated-model dispatch records, quantized runtime, and

@@ -57,7 +57,7 @@ runtime adoption and hardware validation remain open.
 
 | Provider family | Entries | Disposition | Boundary documentation | What would unblock it | Fail-closed behavior today |
 | --- | ---: | --- | --- | --- | --- |
-| GoMore health/sleep algorithms (`gomore_health_algorithm_candidate`) | 0 remaining + 362 reconstructed + 7 reconstructed R1 adapters | `clean_room_reimplementation_owner_authorized` | [`../boundaries/GOMORE-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-PROVIDER-BOUNDARY.md), the neural-runtime/sleep family boundary docs, [`../correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](../correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md), [`../correlation/GOMORE-TOPIC-INPUT-CORRELATION.md`](../correlation/GOMORE-TOPIC-INPUT-CORRELATION.md), [`../correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md`](../correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md), and [`../correlation/GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md`](../correlation/GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md) | The executable reduction is complete: 343 primitive/shared-runtime routines, nineteen tensor-runtime routines, and seven R1 adapter extents are transparent C. The exact four topic-input callbacks, readiness barrier, and successful-update cleanup compile, the available acc path has dormant on-target staging, and the exact backward-clock adapter is source-bound to a suppressed reset action. Continue only the explicit remaining data-input and on-target engine integration audit. | Health-index, sleep-classification, and stress paths remain disabled until their explicit model/data inputs and source bindings are provisioned and hardware-validated. Storage and wire layers do not synthesize values. |
+| GoMore health/sleep algorithms (`gomore_health_algorithm_candidate`) | 0 remaining + 362 reconstructed + 7 reconstructed R1 adapters | `clean_room_reimplementation_owner_authorized` | [`../boundaries/GOMORE-PROVIDER-BOUNDARY.md`](../boundaries/GOMORE-PROVIDER-BOUNDARY.md), the neural-runtime/sleep family boundary docs, [`../correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](../correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md), [`../correlation/GOMORE-TOPIC-INPUT-CORRELATION.md`](../correlation/GOMORE-TOPIC-INPUT-CORRELATION.md), [`../correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md`](../correlation/TIME-HEALTH-ROLLOVER-CORRELATION.md), and [`../correlation/GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md`](../correlation/GOMORE-TENSOR-RUNTIME-REDUCTION-CORRELATION.md) | The executable reduction is complete: 343 primitive/shared-runtime routines, nineteen tensor-runtime routines, and seven R1 adapter extents are transparent C. The exact four topic callbacks, readiness barrier, all 16 stages, output copy/lifecycle, activity accumulator, final-sleep builder/persistence, dynamic optical slot, and fresh-engine reset paths are target-composed. Continue only physical input semantics and owned-hardware equivalence work. | Live health/activity/sleep execution remains fail-closed behind the persisted health gate and exact seven-slot authorization. Dormant stock-unreachable stress output is not synthesized. Public activity history independently enforces the shared 50-fragment transport bound and resumes through per-packet ACK state. |
 | Wuxi Bravechip ChipletRing / BCL603M closed middleware — six `unknown_*_candidate` families | 169 | `clean_room_reimplementation_owner_authorized` | [`../boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION-2026-08.md`](../boundaries/unknown_generic_device_registry_candidate-ATTRIBUTION-2026-08.md) and the five sibling `unknown_*-ATTRIBUTION-2026-08.md` reports; per-family boundary docs [`../boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md`](../boundaries/GENERIC-DEVICE-REGISTRY-BOUNDARY.md), [`../boundaries/SOFTWARE-TWI-PROVIDER-BOUNDARY.md`](../boundaries/SOFTWARE-TWI-PROVIDER-BOUNDARY.md), [`../boundaries/SENSOR-STREAM-FRAMEWORK-BOUNDARY.md`](../boundaries/SENSOR-STREAM-FRAMEWORK-BOUNDARY.md), [`../boundaries/QUANTIZED-POOLING-PROVIDER-BOUNDARY.md`](../boundaries/QUANTIZED-POOLING-PROVIDER-BOUNDARY.md), [`../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md`](../boundaries/TIME-CALENDAR-PROVIDER-BOUNDARY.md), [`../boundaries/RTC-DEVICE-PROVIDER-BOUNDARY.md`](../boundaries/RTC-DEVICE-PROVIDER-BOUNDARY.md) | Licensed acquisition from Bravechip (named commercial route via the byte-exact GATT base-UUID match to the public `BravechipSpace/ChipletRing-APPSDK` and the `603MV1.9.3` module string; contact xiaojian.cui@bravechip.com per the APPSDK README) or the ring ODM, with OTA-hex analysis as forensic fallback; or new attribution evidence for an individual family. All six were re-tested against fetched upstream sources in 2026-08 and remain NO ATTRIBUTION. A 2026-08-14 public-route re-check found Bravechip's only public repository to be phone-side-only (zero firmware identifiers), its official download list to offer app SDKs/datasheets only, and a second Bravechip-based ring product (`thuhci/OpenRing`) shipping no firmware source either — no public firmware-side source exists; see the updated `unknown_*-ATTRIBUTION-2026-08.md` reports. | All 169 functions are reconstructed host-side under the owner-authorized 2026-08 reduction: generic device registry (43), GPIO-driven software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (28), time/calendar provider (16), RTC-device layer (10). The Zephyr target now adopts exact software `i2c_4` for Goodix optical transport and exact software `i2c_2` for the typed dual-GXT310 probe/acquisition adapter; dormant roles remain retained source awaiting typed consumers. OpenR1 continues to substitute typed admitted providers (Nordic TWIM, `nrfx_rtc`, R1-owned clock production) on the other hardware paths. |
 
 Goodix has left the residual table: all 320 formerly opaque provider-candidate entries now map to
@@ -81,7 +81,7 @@ symbol is never treated as proof that code is eligible for rewriting
 
 ## Coverage-row residual summary
 
-[`COVERAGE.csv`](COVERAGE.csv) holds 92 rows: **41 implemented, 43 partial, 5 withheld,
+[`COVERAGE.csv`](COVERAGE.csv) holds 92 rows: **46 implemented, 40 partial, 3 withheld,
 2 separate, 1 excluded**.
 
 ### Partial rows grouped by remaining gate
@@ -114,7 +114,23 @@ composition with sensor, persistence, and hardware providers.
 
 - sensors: GH3X2X raw acquisition now has source Goodix demo/driver, recovered software-`i2c_4`,
   GPIO/interrupt, motion-feed, and YHM-client lifecycle bindings; the global algorithm frame/result
-  ABI and hardware validation remain fail-closed.
+  ABI is checked and normalized through a provider contract, and validated updated HR/SpO2 records
+  now reach recovered planners and scalar storage consumers behind the persisted health gate. The
+  provider-independent function IDs are compile-time checked against the pinned democode ABI
+  (`HR=1`, `HRV=2`, `SpO2=6`), preventing HR output from being misclassified as an unsupported
+  function. Checked adapters reproduce the recovered four-channel HR record and SpO2's mapped
+  three-by-four-channel record, including the exact MSB-first enable flags, 24-bit marker, frame
+  byte, motion axes, and fail-without-mutation bounds behavior. A retained source composer now
+  owns all three outer-wrapper lifecycles, exact HR `0x003F`, HRV `0x007F`, and retail-R1 SpO2
+  `0x00FF` masks, their six distinct public words, the zero HRV slot 6, the SpO2 word-0 mirror in
+  slot 6 plus zero slot 7, and HR-to-HRV carry;
+  a retained reconstructed-root executor now invokes HBA `0x0006C6A8`, HRV `0x0006D51C`, and
+  SpO2 `0x0006E838`, routes the exact recovered version builders, and reproduces the HBA and
+  noncontiguous SpO2 private-to-public result transformations;
+  the public 36-byte HR and 24-byte HRV configuration sources are byte-matched to retail ROM and
+  retained beside the existing exact SpO2 configuration;
+  persistent HBA/HRV/SpO2 plan/state/workspace initialization, HRV session composition, and hardware
+  validation remain fail-closed.
 - health: heart-rate, SpO2, and HRV sample storage (Goodix result and typed GoMore integration);
   heart-rate and SpO2 pipelines (Goodix democode-ABI composition over the bound raw acquisition);
   temperature and stress storage edge (GXT310 transport/acquisition, exact two-byte temperature
@@ -123,8 +139,8 @@ composition with sensor, persistence, and hardware providers.
   crash snapshot (typed Goodix state lookup); activity/steps and sleep classification (transparent
   algorithms and models are retained, with live sensor/state/result bindings still required).
 - sensors: nRF52840 SAADC acquisition and battery voltage/percentage behavior (YHM client-bit-0
-  binding plus persisted battery-type adoption are live; periodic production, live charge-state
-  input, and hardware calibration remain); IQS7211E transport,
+  binding, persisted battery type/compensation, live register-6 charge state, and boot/status-access
+  production are bound; PMIC event-driven refresh and hardware calibration remain); IQS7211E transport,
   lifecycle, and YHM client-bit-2 binding are linked, with wear-lease identity and hardware
   validation still required for live sampling.
 - sensors: BMA456W and LIS2DW12 feed the reconstructed `"acc"` stream
@@ -186,7 +202,8 @@ product-owned test body with no recovered caller, intentionally excluded from pr
 
 ## Production-readiness statement
 
-Buildable and verified today, from a clean tree:
+Current buildable and verified deliverables (the Zephyr manifest records this working tree as
+dirty and hashes all 160 included source files):
 
 - the host protocol/device test suite (`make -C r1 test`);
 - the AddressSanitizer/UndefinedBehaviorSanitizer build (`make -C r1 sanitize`);
@@ -195,38 +212,48 @@ Buildable and verified today, from a clean tree:
 - the host executable protocol/device simulator (`make -C r1 sim`);
 - the linked nRF52840 application built from Nordic nRF5 SDK 17.1.0 sources against the
   S140 7.2.0 ABI, verified by `tools/verify_sdk_image.py` against pinned artifacts:
-  BIN 347,408 bytes, BIN SHA-256
-  `262d60f28facf57bf5bf6c0daf2b8a7434a6b1865913d69ceafa5a1979233d95`, HEX SHA-256
-  `f24a06fd32fda2bec45738619d188a55f313fb03dffc73c903a5200df10071d7`;
+  BIN 356,568 bytes, BIN SHA-256
+  `2d186b914b334f3db27efd609144dfcc07a58c0d2503aec0f97a8f9f4bdcb195`, HEX SHA-256
+  `95bb9e87896765464a8e77c830f93b117074d90d9147e1168da4094059317a60`;
 - an application-only owner DFU package whose three-member boundary excludes stock application,
   SoftDevice, bootloader, and vendor algorithm blobs; it still declares and requires the
   preinstalled S140 ABI `0x0100`, as documented in
-  [`APPLICATION-BUNDLE-BOUNDARY.md`](../closures/APPLICATION-BUNDLE-BOUNDARY.md);
+  [`APPLICATION-BUNDLE-BOUNDARY.md`](../closures/APPLICATION-BUNDLE-BOUNDARY.md); the current
+  owner-signed ZIP SHA-256 is
+  `7cbbc390a039d87a573f0f09b9bc5587a9e2e6789d875aa17d564426bc1bce4c`;
 - an alternate source-built Zephyr/MCUboot full-flash bundle whose executable members require no
   S140 or retail bootloader, whose signed application retains all 14 reconstructed modules, and
   whose source revisions, flash ranges, canonical member union, and ECDSA-P256 signature are
   verified as documented in
-  [`SOURCE-BUILT-ZEPHYR-BUNDLE.md`](../closures/SOURCE-BUILT-ZEPHYR-BUNDLE.md);
+  [`SOURCE-BUILT-ZEPHYR-BUNDLE.md`](../closures/SOURCE-BUILT-ZEPHYR-BUNDLE.md); the current
+  bundle contains a 514,454-byte signed application, full-flash HEX SHA-256
+  `136549fad7e36ade18dc659add331405bd9e0321a9775c06f91ac9e7efabcb7b`, and ZIP SHA-256
+  `826f998c85121986d34cd16f67edb7b592a66ae41d979ad092bac4dbac1e3515`;
 - the full evidence gate (`python3 tools/verify_openr1.py`), which reconciles the ownership
   ledger, the explicit Ghidra-script entry census, the coverage ledger, the per-subsystem
   correlation summaries, and the Goodix democode mapping against the recovered images.
 
 Explicitly **not** claimed:
 
-- live runtime adoption of the retained Goodix/GoMore biometric and health algorithms and several
-  reconstructed YHMICROS, GXCAS, QST, and Bravechip-attributed closures; their executable bodies
-  and generated-model parameters compile from transparent source, but the current Goodix democode
-  ABI bridge remains fail-closed and multiple board/provider paths still need typed integration;
+- owned-hardware validation of the live Goodix/GoMore biometric and health algorithms and several
+  reconstructed YHMICROS, GXCAS, QST, and Bravechip-attributed closures; their executable bodies,
+  generated-model parameters, checked Goodix ABI, persistent roots, live topic path, and complete
+  GoMore output lifecycle compile from transparent source;
 - complete sensor/health-record/power/product integration on the alternate source-built BLE/boot target;
   its BAE8/core runtime, persistent SMP settings, KV/health/sleep storage, exact SAADC routes,
   phone-synchronized clock with reconstructed exact calendar query/day-boundary conversion,
   reset-reason trace, scheduler watchdog, pinned Bosch/ST motion
   acquisition, fail-closed IQS7211E transport/lifecycle, reconstructed YHM shared power, and
-  ST25DVxxKC mailbox/P1.10/TWIM1 handoff are linked, but motion production ingestion, touch
+  ST25DVxxKC mailbox/P1.10/TWIM1 handoff are linked. Motion production ingestion is live; touch
   identity/wear provisioning, explicit NFC activation policy, destructive health slot-0
-  format/retry and GoMore actions, Goodix global algorithm frame/result composition,
-  fatal-trace validation, and
-  retail-layout migration still require owned-ring work;
+  format/retry,
+  fatal-trace validation, and retail-layout migration still require owned-ring work. Public
+  health-settings are now canonicalized, ACK-ordered, and persisted into the live global gate;
+  private event `0x100D` reconciles the exact seven-slot gate, and backward-clock/failure-60 resets
+  initialize a fresh engine. HR, SpO2, HRV, and activity
+  daily routes now bind their exact three-day FlashDB merges and ACK-driven named-cursor persistence;
+  both target clocks drive the exact automatic five-leg gate through a bounded drain-aware
+  service that preserves the recovered 50-record queue;
 - hardware-validated behavior of any kind. No owned-ring validation has been performed;
   physical timing units, negotiated BLE values, sensor calibration, and analog transfer
   functions remain capture gates, and host-tested raw-tick constants are not relabeled as
@@ -287,5 +314,6 @@ cd r1 && python3 tools/build_r1_source_ownership.py --check
 cd r1 && python3 tools/audit_r1_ghidra_explicit_entries.py --check
 ```
 
-The SDK image verification must pass against the existing pins without re-pinning; a hash
-mismatch is a build anomaly to investigate, not an invitation to update the pin.
+The SDK image verification must pass against the pins corresponding to the current reviewed
+source. A future hash mismatch is a build anomaly to investigate; pins change only alongside an
+intentional, reviewed source change and a fresh deterministic build.

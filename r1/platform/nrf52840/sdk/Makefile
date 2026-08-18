@@ -75,6 +75,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/reconstructed/goodix_heap/goodix_heap.c \
   $(PROJ_DIR)/reconstructed/gomore_primitives/gomore_primitives.c \
   $(PROJ_DIR)/reconstructed/gomore_tensor_runtime/gomore_tensor_runtime.c \
+  $(PROJ_DIR)/platform/nrf52840/openr1_rtc_service.c \
   $(PROJ_DIR)/platform/nrf52840/r1_nrf52840.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_advertising.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_analog.c \
@@ -92,6 +93,7 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_retained_log.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_reset_trace_port.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_reset_reason.c \
+  $(PROJ_DIR)/platform/nrf52840/sdk/openr1_rtc.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_i2c5_resources.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_twim1_arbiter.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/openr1_motion.c \
@@ -105,6 +107,8 @@ OPENR1_SOURCES := \
   $(PROJ_DIR)/port/r1_fal_port.c \
   $(PROJ_DIR)/port/goodix_gh3x2x/r1_gh3x2x_port.c \
   $(PROJ_DIR)/port/goodix_gh3x2x/r1_gh3x2x_bind.c \
+  $(PROJ_DIR)/port/goodix_gh3x2x/r1_gh3x2x_provider_composer.c \
+  $(PROJ_DIR)/port/goodix_gh3x2x/r1_gh3x2x_reconstructed_roots.c \
   $(PROJ_DIR)/port/goodix_gh3x2x/r1_gh3x2x_stubs.c \
   $(PROJ_DIR)/platform/nrf52840/sdk/main.c
 
@@ -127,6 +131,8 @@ GOODIX_SUBSET_SOURCES := \
   $(GOODIX_MODULE_DIR)/gh_other/gh_changeinttime.c \
   $(GOODIX_MODULE_DIR)/gh_other/gh_movedetect.c \
   $(GOODIX_MODULE_DIR)/gh_soft_adt/gh_multi_sen_pro.c \
+  $(GOODIX_DEMOCODE_ROOT)/algo_lib/algo_params/HR/04_EXCLUSIVE/goodix_hba_config.c \
+  $(GOODIX_DEMOCODE_ROOT)/algo_lib/algo_params/goodix_hrv_config.c \
   $(GOODIX_DEMOCODE_ROOT)/algo_lib/algo_params/SPO2/goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c
 
 SRC_FILES += \
@@ -182,6 +188,7 @@ SRC_FILES += \
   $(SDK_ROOT)/integration/nrfx/legacy/nrf_drv_twi.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_clock.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_gpiote.c \
+  $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_rtc.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_saadc.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_spim.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_twim.c \
@@ -206,6 +213,7 @@ SRC_FILES += \
 INC_FOLDERS += \
   $(PROJ_DIR)/include \
   $(PROJ_DIR)/reconstructed \
+  $(PROJ_DIR)/platform/nrf52840 \
   $(PROJ_DIR)/platform/nrf52840/sdk \
   $(PROJ_DIR)/platform/nrf52840/sdk/config \
   $(CMSIS_FREERTOS_ROOT)/CMSIS-FreeRTOS/CMSIS/RTOS2/FreeRTOS/Include \

@@ -24,6 +24,7 @@ void test_reconstructed_goodix_primitives(void);
 void test_reconstructed_goodix_heap(void);
 void test_reconstructed_gomore_primitives(void);
 void test_reconstructed_gomore_tensor_runtime(void);
+void test_openr1_rtc_service(void);
 
 #include "openr1/r1_crc.h"
 #include "openr1/r1_battery.h"
@@ -1952,6 +1953,123 @@ static r1_model request(uint8_t status, uint8_t subcommand,
     return value;
 }
 
+typedef struct {
+    size_t queries;
+    size_t commits;
+    uint8_t committed_metric;
+    uint32_t committed_timestamp;
+} scalar_history_provider_capture;
+
+static r1_error provide_scalar_history(
+    void *context, uint8_t metric, uint32_t firmware_timestamp,
+    const r1_health_u8_history *current_history,
+    r1_health_scalar_history_emit_fn emit, void *emit_context) {
+    scalar_history_provider_capture *capture = context;
+    assert(metric == 0u && firmware_timestamp == 200000u);
+    assert(current_history != NULL && emit != NULL);
+    capture->queries += 1u;
+    r1_health_u8_history flash = {0};
+    flash.local_day_start = 86400u;
+    flash.slots[0] = (r1_health_u8_slot){70u, 90u, 60u, 1u, 70u};
+    assert(emit(
+               emit_context, &flash, 90000u,
+               R1_HEALTH_ACK_FLASH_HISTORY) == R1_OK);
+    r1_health_u8_history ram = *current_history;
+    return emit(
+        emit_context, &ram, 199800u, R1_HEALTH_ACK_CURRENT_RAM);
+}
+
+static r1_error provide_hrv_history(
+    void *context, uint32_t firmware_timestamp,
+    const r1_health_u16_history *current_history,
+    r1_health_hrv_history_emit_fn emit, void *emit_context) {
+    scalar_history_provider_capture *capture = context;
+    assert(firmware_timestamp == 200000u);
+    assert(current_history != NULL && emit != NULL);
+    capture->queries += 1u;
+    r1_health_u16_history flash = {0};
+    flash.local_day_start = 86400u;
+    flash.slots[0] = (r1_health_u16_slot){45u, 60u, 30u, 1u, 0u};
+    assert(emit(
+               emit_context, &flash, 91000u,
+               R1_HEALTH_ACK_FLASH_HISTORY) == R1_OK);
+    r1_health_u16_history ram = *current_history;
+    return emit(
+        emit_context, &ram, 199700u, R1_HEALTH_ACK_CURRENT_RAM);
+}
+
+static r1_error provide_activity_history(
+    void *context, uint32_t firmware_timestamp,
+    const r1_activity_history *current_history,
+    r1_health_activity_history_emit_fn emit, void *emit_context) {
+    scalar_history_provider_capture *capture = context;
+    assert(firmware_timestamp == 200000u);
+    assert(current_history != NULL && emit != NULL);
+    capture->queries += 1u;
+    r1_activity_history flash = {0};
+    flash.local_day_start = 86400u;
+    flash.buckets[0] = (r1_activity_bucket){
+        .steps = 123u,
+        .active_kilocalories = 4u,
+        .all_kilocalories = 5u,
+        .valid = true,
+    };
+    assert(emit(
+               emit_context, &flash, 92000u,
+               R1_ACTIVITY_ACK_FLASH_HISTORY) == R1_OK);
+    r1_activity_history ram = *current_history;
+    return emit(
+        emit_context, &ram, 199600u, R1_ACTIVITY_ACK_CURRENT_RAM);
+}
+
+typedef struct {
+    size_t attempted;
+    bool page_full;
+} activity_history_stress_capture;
+
+static r1_error provide_activity_history_stress(
+    void *context, uint32_t firmware_timestamp,
+    const r1_activity_history *current_history,
+    r1_health_activity_history_emit_fn emit, void *emit_context) {
+    activity_history_stress_capture *capture = context;
+    assert(firmware_timestamp == 200000u);
+    assert(current_history != NULL && emit != NULL);
+    r1_activity_history day = {0};
+    for (size_t bucket = 0u; bucket < R1_ACTIVITY_BUCKETS; ++bucket) {
+        day.buckets[bucket] = (r1_activity_bucket){
+            .steps = (uint16_t)(bucket + 1u),
+            .active_kilocalories = 1u,
+            .all_kilocalories = 2u,
+            .valid = true,
+        };
+    }
+    for (size_t packet = 0u; packet < R1_ACTIVITY_OFFLINE_CAPACITY;
+         ++packet) {
+        day.local_day_start = (uint32_t)(packet * 86400u);
+        capture->attempted += 1u;
+        const r1_error error = emit(
+            emit_context, &day, (uint32_t)(packet + 1u),
+            R1_ACTIVITY_ACK_OFFLINE_QUEUE);
+        if (error == R1_ERROR_CAPACITY) {
+            capture->page_full = true;
+            return R1_OK;
+        }
+        if (error != R1_OK) {
+            return error;
+        }
+    }
+    return R1_OK;
+}
+
+static r1_error commit_scalar_history_cursor(
+    void *context, uint8_t metric, uint32_t acknowledged_timestamp) {
+    scalar_history_provider_capture *capture = context;
+    capture->commits += 1u;
+    capture->committed_metric = metric;
+    capture->committed_timestamp = acknowledged_timestamp;
+    return R1_OK;
+}
+
 static void test_dispatch(void) {
     r1_device_state state;
     r1_state_initialize(&state);
@@ -2004,6 +2122,164 @@ static void test_dispatch(void) {
     assert(r1_model_decode(result.models[0], result.lengths[0],
                            R1_CHECKSUM_FIRMWARE_FULL_MODBUS, &response) == R1_OK);
     assert(response.payload_length == 1u && response.payload[0] == 0u);
+
+    scalar_history_provider_capture history_capture = {0};
+    state.unix_seconds = 200000u;
+    state.health.heart_rate.local_day_start = 172800u;
+    state.health.heart_rate.slots[7] =
+        (r1_health_u8_slot){80u, 88u, 72u, 1u, 80u};
+    state.health.heart_rate.has_latest = true;
+    state.health.heart_rate.latest_timestamp = 199900u;
+    state.health.heart_rate.latest_value = 81u;
+    r1_health_bind_scalar_history_query(
+        &state.health, provide_scalar_history, &history_capture);
+    r1_health_bind_sync_cursor_commit(
+        &state.health, commit_scalar_history_cursor, &history_capture);
+    session = (r1_session){true, true, true, R1_ROLE_PHONE};
+    input = request(0u, 0x01u, NULL, 0u);
+    input.module = 0x02u;
+    input.command = 0x01u;
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(history_capture.queries == 1u && result.count == 3u);
+    assert(r1_model_decode(result.models[1], result.lengths[1],
+                           R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+                           &response) == R1_OK);
+    const uint16_t flash_serial = response.serial;
+    assert(response.payload_length == 16u &&
+           response.payload[7] == 0xdcu &&
+           response.payload[11] == 81u &&
+           response.payload[12] == 0u && response.payload[13] == 70u);
+    uint8_t acknowledgement[6] = {
+        0x02u, 0x01u, 0x01u, 0u,
+        (uint8_t)flash_serial, (uint8_t)(flash_serial >> 8u),
+    };
+    input = request(
+        2u, 0x7eu, acknowledgement, sizeof acknowledgement);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(history_capture.commits == 1u &&
+           history_capture.committed_metric == 0u &&
+           history_capture.committed_timestamp == 90000u);
+    assert(state.health.heart_rate_last_sync_seconds == 90000u);
+
+    r1_health_offline_enqueue_result enqueued;
+    assert(r1_health_u8_offline_enqueue(
+               &state.health.heart_rate_offline, 75u, 90u, 60u,
+               86400u, 100000u, 0, 3u, 200000u, &enqueued) == R1_OK);
+    assert(state.health.heart_rate_offline.count == 1u);
+    assert(r1_health_register_scalar_history_pending(
+               &state.health, 0x02u, 0x01u, 0x01u,
+               UINT16_C(0x2222), 0u, R1_HEALTH_ACK_OFFLINE_QUEUE,
+               100000u) == R1_OK);
+    assert(r1_health_acknowledge(
+        &state.health, 0x02u, 0x01u, 0x01u, UINT16_C(0x2222)));
+    assert(state.health.heart_rate_offline.count == 0u);
+
+    history_capture = (scalar_history_provider_capture){0};
+    state.health.heart_rate_variability.local_day_start = 172800u;
+    state.health.heart_rate_variability.slots[7] =
+        (r1_health_u16_slot){52u, 70u, 40u, 1u, 0u};
+    state.health.heart_rate_variability.has_latest = true;
+    state.health.heart_rate_variability.latest_timestamp = 199950u;
+    state.health.heart_rate_variability.latest_value = 53u;
+    r1_health_bind_hrv_history_query(
+        &state.health, provide_hrv_history, &history_capture);
+    input = request(0u, 0x01u, NULL, 0u);
+    input.module = 0x02u;
+    input.command = 0x04u;
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(history_capture.queries == 1u && result.count == 3u);
+    assert(r1_model_decode(result.models[1], result.lengths[1],
+                           R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+                           &response) == R1_OK);
+    const uint16_t hrv_flash_serial = response.serial;
+    assert(response.payload_length == 14u &&
+           response.payload[7] == 0u &&
+           response.payload[8] == 45u && response.payload[9] == 0u);
+    acknowledgement[1] = 0x04u;
+    acknowledgement[4] = (uint8_t)hrv_flash_serial;
+    acknowledgement[5] = (uint8_t)(hrv_flash_serial >> 8u);
+    input = request(2u, 0x7eu, acknowledgement, sizeof acknowledgement);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(history_capture.commits == 1u &&
+           history_capture.committed_metric == 2u &&
+           history_capture.committed_timestamp == 91000u);
+    assert(state.health.heart_rate_variability_last_sync_seconds == 91000u);
+
+    assert(r1_health_u16_offline_enqueue(
+               &state.health.heart_rate_variability_offline,
+               50u, 65u, 35u, 86400u, 101000u, 0, 3u,
+               200000u, &enqueued) == R1_OK);
+    assert(r1_health_register_scalar_history_pending(
+               &state.health, 0x02u, 0x04u, 0x01u,
+               UINT16_C(0x3333), 2u, R1_HEALTH_ACK_OFFLINE_QUEUE,
+               101000u) == R1_OK);
+    assert(r1_health_acknowledge(
+        &state.health, 0x02u, 0x04u, 0x01u, UINT16_C(0x3333)));
+    assert(state.health.heart_rate_variability_offline.count == 0u);
+
+    history_capture = (scalar_history_provider_capture){0};
+    state.health.activity.local_day_start = 172800u;
+    state.health.activity.buckets[7] = (r1_activity_bucket){
+        .steps = 321u,
+        .active_kilocalories = 6u,
+        .all_kilocalories = 8u,
+        .valid = true,
+    };
+    r1_health_bind_activity_history_query(
+        &state.health, provide_activity_history, &history_capture);
+    input = request(0u, 0x01u, NULL, 0u);
+    input.module = 0x02u;
+    input.command = 0x05u;
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(history_capture.queries == 1u && result.count == 3u);
+    assert(r1_model_decode(result.models[1], result.lengths[1],
+                           R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+                           &response) == R1_OK);
+    const uint16_t activity_flash_serial = response.serial;
+    assert(response.payload_length == 14u &&
+           response.payload[7] == 0u &&
+           response.payload[8] == 123u && response.payload[9] == 0u);
+    acknowledgement[1] = 0x05u;
+    acknowledgement[4] = (uint8_t)activity_flash_serial;
+    acknowledgement[5] = (uint8_t)(activity_flash_serial >> 8u);
+    input = request(2u, 0x7eu, acknowledgement, sizeof acknowledgement);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(history_capture.commits == 1u &&
+           history_capture.committed_metric == 3u &&
+           history_capture.committed_timestamp == 92000u);
+    assert(state.health.activity_last_sync_seconds == 92000u);
+
+    r1_activity_offline_enqueue_result activity_enqueued;
+    const uint32_t packed_activity = (UINT32_C(7) << 22u) |
+        (UINT32_C(6) << 12u) | UINT32_C(345);
+    assert(r1_activity_offline_enqueue(
+               &state.health.activity_offline, packed_activity,
+               86400u, 102000u, 0, 4u, 200000u,
+               &activity_enqueued) == R1_OK);
+    assert(r1_health_register_scalar_history_pending(
+               &state.health, 0x02u, 0x05u, 0x01u,
+               UINT16_C(0x4444), 3u, R1_ACTIVITY_ACK_OFFLINE_QUEUE,
+               102000u) == R1_OK);
+    assert(r1_health_acknowledge(
+        &state.health, 0x02u, 0x05u, 0x01u, UINT16_C(0x4444)));
+    assert(state.health.activity_offline.count == 0u);
+
+    activity_history_stress_capture activity_stress = {0};
+    r1_health_bind_activity_history_query(
+        &state.health, provide_activity_history_stress, &activity_stress);
+    input = request(0u, 0x01u, NULL, 0u);
+    input.module = 0x02u;
+    input.command = 0x05u;
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(activity_stress.page_full && activity_stress.attempted == 10u);
+    assert(result.count == 10u);
+    size_t activity_fragments = 0u;
+    for (size_t index = 0u; index < result.count; ++index) {
+        activity_fragments +=
+            result.lengths[index] / R1_FRAGMENT_PAYLOAD_MAX + 1u;
+    }
+    assert(activity_fragments == 46u &&
+           activity_fragments <= R1_DISPATCH_FRAGMENT_MAX);
 }
 
 static void test_legacy_command_routing(void) {
@@ -2919,8 +3195,39 @@ static void test_automatic_health_sync(void) {
     runtime.links[0].session.role = R1_ROLE_PHONE;
     result = r1_runtime_run_automatic_health_sync(
         &runtime, 10u, capture_health_auto_sync, &capture);
+    assert(result.action == R1_HEALTH_AUTO_SYNC_PHONE_DISCONNECTED);
+    runtime.links[0].session.encrypted = true;
+    runtime.links[0].session.bonded = true;
+    runtime.links[0].session.authorized = true;
+    result = r1_runtime_run_automatic_health_sync(
+        &runtime, 10u, capture_health_auto_sync, &capture);
     assert(result.action == R1_HEALTH_AUTO_SYNC_INITIAL);
     assert(result.batch_started && capture.count == 5u);
+
+    result = r1_runtime_schedule_automatic_health_sync(
+        &runtime, UINT32_C(10810));
+    assert(result.action == R1_HEALTH_AUTO_SYNC_COOLDOWN_ELAPSED);
+    assert(result.batch_started);
+    assert(runtime.automatic_health_pending_mask == UINT8_C(0x1f));
+    assert(runtime.automatic_health_legs_scheduled == 5u);
+    assert(runtime.automatic_health_batch_timestamp == UINT32_C(10810));
+    for (uint8_t leg = 0u;
+         leg <= R1_HEALTH_SYNC_UNSYNCHRONIZED_SLEEP; ++leg) {
+        assert(r1_runtime_service_automatic_health_sync(&runtime) == R1_OK);
+        assert(runtime.automatic_health_legs_enqueued == (uint32_t)leg + 1u);
+        assert(runtime.device.health.last_auto_sync_or_query_seconds ==
+               UINT32_C(10810));
+        if (leg != R1_HEALTH_SYNC_UNSYNCHRONIZED_SLEEP) {
+            assert(r1_runtime_service_automatic_health_sync(&runtime) ==
+                   R1_ERROR_STATE);
+        }
+        while (r1_event_front(&runtime.events, true) != NULL) {
+            assert(r1_event_drop(&runtime.events, true));
+        }
+    }
+    assert(runtime.automatic_health_pending_mask == 0u);
+    assert(runtime.automatic_health_next_leg == 0u);
+    assert(runtime.automatic_health_leg_failures == 0u);
 
     result = r1_health_run_automatic_sync(
         NULL, true, 0u, capture_health_auto_sync, &capture);
@@ -5417,6 +5724,68 @@ static void test_scalar_health_flash_record_merge(void) {
     assert(builder.history.slots[1].average == 0u);
 }
 
+static void test_hrv_flash_record_merge(void) {
+    r1_health_u16_offline_packet builder = {0};
+    health_offline_capture capture = {0};
+    r1_health_u16_day_flush_result flush;
+    r1_health_u16_flash_record record = {
+        .utc_offset_minutes = 0,
+        .recorded_timestamp = 90000u,
+        .local_hour = 1u,
+        .local_minute = 0u,
+        .local_second = 0u,
+        .average = 45u,
+        .maximum = 60u,
+        .minimum = 30u,
+    };
+    assert(r1_health_u16_flash_record_merge(
+               &builder, &record, 200000u, true, 80000u,
+               capture_health_u16_offline, &capture, &flush) == R1_OK);
+    assert(builder.history.local_day_start == 86400u);
+    assert(builder.history.slots[0].average == 45u);
+    assert(builder.maximum_recorded_timestamp == 90000u);
+
+    record.recorded_timestamp = 90100u;
+    record.local_minute = 1u;
+    record.local_second = 40u;
+    record.average = 55u;
+    assert(r1_health_u16_flash_record_merge(
+               &builder, &record, 200000u, true, 80000u,
+               capture_health_u16_offline, &capture, &flush) == R1_OK);
+    assert(builder.history.slots[0].average == 45u);
+    assert(builder.maximum_recorded_timestamp == 90100u);
+
+    const r1_health_u16_offline_packet before_window = builder;
+    record.recorded_timestamp = 70000u;
+    assert(r1_health_u16_flash_record_merge(
+               &builder, &record, 200000u, true, 80000u,
+               capture_health_u16_offline, &capture, &flush) == R1_OK);
+    assert(memcmp(&builder, &before_window, sizeof builder) == 0);
+
+    record.recorded_timestamp = 180000u;
+    record.local_hour = 2u;
+    record.local_minute = 0u;
+    record.local_second = 0u;
+    record.average = 50u;
+    assert(r1_health_u16_flash_record_merge(
+               &builder, &record, 250000u, true, 80000u,
+               capture_health_u16_offline, &capture, &flush) == R1_OK);
+    assert(flush.emitted && flush.encoded_length == 14u);
+    assert(capture.count == 1u && capture.lengths[0] == 14u);
+    assert(builder.history.local_day_start == 172800u);
+    assert(builder.history.slots[1].average == 50u);
+
+    record.local_hour = 24u;
+    assert(r1_health_u16_flash_record_merge(
+               &builder, &record, 250000u, false, 0u,
+               capture_health_u16_offline, &capture, &flush) ==
+           R1_ERROR_LENGTH);
+    assert(r1_health_u16_day_builder_flush(
+               &builder, 250000u, capture_health_u16_offline,
+               &capture, &flush) == R1_OK);
+    assert(flush.emitted && flush.encoded_length == 14u);
+}
+
 static void test_scalar_health_offline_sync(void) {
     assert(sizeof(r1_health_u8_offline_entry) == 16u);
     assert(sizeof(r1_health_u16_offline_entry) == 20u);
@@ -5635,7 +6004,7 @@ static void test_maximum_health_payloads(void) {
     }
     const r1_model sleep_query = {100u, 2u, 100u, 21u, 0u, 6u, 1u, NULL, 0u};
     assert(r1_dispatch(&state, &peer, &sleep_query, &result) == R1_OK);
-    assert(result.count == R1_DISPATCH_RESPONSE_MAX);
+    assert(result.count == R1_SLEEP_SESSION_MAX + 1u);
     r1_health_clear_pending(&state.health);
     for (size_t index = 0u; index < R1_PENDING_ACK_CAPACITY; ++index) {
         assert(!state.health.pending[index].active);
@@ -5912,10 +6281,29 @@ typedef struct {
     bool enabled;
 } runtime_touch_capture;
 
+typedef struct {
+    r1_runtime *runtime;
+    size_t calls;
+    uint8_t module;
+    uint8_t command;
+    uint8_t subcommand;
+} runtime_request_capture;
+
 static void capture_runtime_touch(void *context, bool enabled) {
     runtime_touch_capture *capture = context;
     capture->calls += 1u;
     capture->enabled = enabled;
+}
+
+static void capture_runtime_request(void *context, const r1_model *request) {
+    runtime_request_capture *capture = context;
+    assert(capture != NULL && capture->runtime != NULL && request != NULL);
+    capture->calls += 1u;
+    capture->module = request->module;
+    capture->command = request->command;
+    capture->subcommand = request->subcommand;
+    capture->runtime->device.battery_percent = 77u;
+    capture->runtime->device.charge = R1_CHARGE_CHARGING;
 }
 
 static r1_error runtime_feed_model(r1_runtime *runtime, uint16_t connection,
@@ -6077,6 +6465,11 @@ static void test_runtime_eus_bridge(void) {
     runtime_enqueue_capture enqueue_capture = {0};
     r1_runtime provider_runtime;
     r1_runtime_initialize(&provider_runtime, NULL, NULL);
+    runtime_request_capture request_capture = {
+        .runtime = &provider_runtime,
+    };
+    r1_runtime_set_request_observer(
+        &provider_runtime, capture_runtime_request, &request_capture);
     r1_runtime_set_enqueue(
         &provider_runtime, capture_runtime_enqueue, &enqueue_capture);
     assert(r1_runtime_connect(&provider_runtime, UINT16_C(0x0043)) == R1_OK);
@@ -6085,6 +6478,23 @@ static void test_runtime_eus_bridge(void) {
     assert(enqueue_capture.wait_ticks == R1_TX_ENQUEUE_WAIT_TICKS);
     assert(enqueue_capture.captured.channel == 2u);
     assert(provider_runtime.events.eus.count == 0u);
+    assert(request_capture.calls == 1u);
+    assert(request_capture.module == R1_MODULE_SYSTEM);
+    assert(request_capture.command == R1_COMMAND_SYSTEM);
+    assert(request_capture.subcommand == R1_SYSTEM_SUBCOMMAND_DEVICE_STATUS);
+    r1_reassembler provider_outbound;
+    r1_reassembler_reset(&provider_outbound);
+    assert(r1_reassembler_feed(
+               &provider_outbound, enqueue_capture.captured.bytes,
+               enqueue_capture.captured.length, NULL) == R1_REASSEMBLY_COMPLETE);
+    r1_model provider_response;
+    assert(r1_model_decode(
+               provider_outbound.bytes, provider_outbound.length,
+               R1_CHECKSUM_FIRMWARE_FULL_MODBUS, &provider_response) == R1_OK);
+    assert(provider_response.payload_length == 7u);
+    assert(provider_response.payload[0] == 77u);
+    assert(provider_response.payload[1] == (uint8_t)R1_CHARGE_CHARGING);
+    r1_runtime_set_request_observer(&provider_runtime, NULL, NULL);
 
     uint8_t logical[32u];
     size_t logical_length = 0u;
@@ -7786,6 +8196,36 @@ static void test_goodix_provider_boundary(void) {
     assert(trace.calls[1] == (UINT32_C(0x70000000) | R1_GOODIX_MASK_STOCK_4000));
     assert(trace.calls[2] == UINT32_C(0x20000000));
     assert(!adapter.initialized && !adapter.prepared && adapter.active_mask == 0u);
+
+    trace.count = 0u;
+    assert(r1_goodix_start_functions(
+               &adapter, R1_GOODIX_MASK_SWITCH_2 |
+                             R1_GOODIX_MASK_HRV |
+                             R1_GOODIX_MASK_HSM) == R1_OK);
+    assert(adapter.active_mask == UINT32_C(0x0e));
+    assert(trace.count == 4u);
+    assert(trace.calls[0] == UINT32_C(0x10000000));
+    assert(trace.calls[1] == UINT32_C(0x3000000a));
+    assert(trace.calls[2] == UINT32_C(0x40000000));
+    assert(trace.calls[3] == UINT32_C(0x6000000e));
+    trace.count = 0u;
+    assert(r1_goodix_start_functions(
+               &adapter, R1_GOODIX_MASK_HSM) == R1_OK);
+    assert(trace.count == 1u && trace.calls[0] == UINT32_C(0x3000000a));
+    assert(r1_goodix_stop_functions(
+               &adapter, R1_GOODIX_MASK_HRV) == R1_OK);
+    assert(adapter.active_mask == UINT32_C(0x0a));
+    assert(trace.calls[1] == UINT32_C(0x70000004));
+    assert(r1_goodix_stop_functions(
+               &adapter, R1_GOODIX_MASK_SWITCH_2 |
+                             R1_GOODIX_MASK_HSM) == R1_OK);
+    assert(!adapter.initialized && !adapter.prepared &&
+           adapter.active_mask == 0u);
+    assert(trace.calls[2] == UINT32_C(0x7000000a));
+    assert(trace.calls[3] == UINT32_C(0x20000000));
+    assert(r1_goodix_start_functions(&adapter, 0u) == R1_ERROR_ARGUMENT);
+    assert(r1_goodix_start_functions(
+               &adapter, R1_GOODIX_MASK_STOCK_2000) == R1_ERROR_ARGUMENT);
 
     r1_goodix_adapter_initialize(&adapter);
     trace = (goodix_trace){0};
@@ -9556,11 +9996,27 @@ typedef struct {
     uint8_t settings[R1_SYSTEM_SETTINGS_BYTES];
 } runtime_settings_capture;
 
+typedef struct {
+    r1_runtime *runtime;
+    size_t calls;
+    bool acknowledgement_queued;
+    r1_health_settings_command_plan plan;
+} runtime_health_settings_capture;
+
 static void capture_runtime_settings(
     void *context, const uint8_t system_settings[R1_SYSTEM_SETTINGS_BYTES]) {
     runtime_settings_capture *capture = context;
     capture->calls += 1u;
     memcpy(capture->settings, system_settings, R1_SYSTEM_SETTINGS_BYTES);
+}
+
+static void capture_runtime_health_settings(
+    void *context, const r1_health_settings_command_plan *plan) {
+    runtime_health_settings_capture *capture = context;
+    capture->calls += 1u;
+    capture->acknowledgement_queued =
+        capture->runtime->events.eus.count != 0u;
+    capture->plan = *plan;
 }
 
 static void test_system_settings_reg1_persistence(void) {
@@ -9569,6 +10025,35 @@ static void test_system_settings_reg1_persistence(void) {
     assert(!r1_system_settings_reg1_enabled(
         dev_info, R1_DEV_INFO_REG1_FLAG_OFFSET));
     assert(!r1_system_settings_reg1_enabled(dev_info, sizeof dev_info));
+
+    const r1_health_settings_record health_enabled = {
+        .timestamp_seconds = UINT32_C(0x44332211),
+        .enabled = 1u,
+        .reserved = {0u},
+    };
+    assert(r1_health_settings_store_dev_info(
+               NULL, sizeof dev_info, &health_enabled) == R1_ERROR_ARGUMENT);
+    assert(r1_health_settings_store_dev_info(
+               dev_info, R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET + 3u,
+               &health_enabled) == R1_ERROR_ARGUMENT);
+    dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] = R1_DEV_INFO_REG1_FLAG_MASK;
+    assert(r1_health_settings_store_dev_info(
+               dev_info, sizeof dev_info, &health_enabled) == R1_OK);
+    assert(dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] ==
+           (R1_DEV_INFO_REG1_FLAG_MASK | R1_DEV_INFO_HEALTH_FLAG_MASK));
+    assert(dev_info[R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET] == 0x11u &&
+           dev_info[R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET + 1u] == 0x22u &&
+           dev_info[R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET + 2u] == 0x33u &&
+           dev_info[R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET + 3u] == 0x44u);
+    const r1_health_settings_record health_disabled = {
+        .timestamp_seconds = UINT32_C(0x88776655),
+        .enabled = 0u,
+        .reserved = {0u},
+    };
+    assert(r1_health_settings_store_dev_info(
+               dev_info, sizeof dev_info, &health_disabled) == R1_OK);
+    assert(dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] ==
+           R1_DEV_INFO_REG1_FLAG_MASK);
     assert(r1_system_settings_store_reg1(NULL, sizeof dev_info, true)
            == R1_ERROR_ARGUMENT);
     assert(r1_system_settings_store_reg1(
@@ -9606,6 +10091,47 @@ static void test_system_settings_reg1_persistence(void) {
     const r1_model set_disable = request(2u, 0x0fu, disable, sizeof disable);
     assert(runtime_feed_model(&runtime, 3u, &set_disable) == R1_OK);
     assert(capture.calls == 2u && capture.settings[5] == 0u);
+
+    /* Health settings use their recovered planner and run platform effects
+     * only after the success acknowledgement has entered the EUS queue. */
+    runtime_health_settings_capture health_capture = {
+        .runtime = &runtime,
+    };
+    r1_runtime_set_health_settings_handler(
+        &runtime, capture_runtime_health_settings, &health_capture);
+    static const uint8_t health_enable[12] = {
+        0xc8u, 0u, 0u, 0u, 1u, 9u, 8u, 7u, 6u, 5u, 4u, 3u,
+    };
+    const r1_model set_health_enable = request(
+        2u, 0x0eu, health_enable, sizeof health_enable);
+    assert(runtime_feed_model(&runtime, 3u, &set_health_enable) == R1_OK);
+    assert(health_capture.calls == 1u &&
+           health_capture.acknowledgement_queued);
+    assert(health_capture.plan.persistent_update_requested &&
+           health_capture.plan.private_event_publish_requested);
+    assert(runtime.device.health_settings[0] == 0xc8u &&
+           runtime.device.health_settings[4] == 1u);
+    for (size_t index = 5u; index < sizeof runtime.device.health_settings;
+         ++index) {
+        assert(runtime.device.health_settings[index] == 0u);
+    }
+
+    static const uint8_t health_raw_two[12] = {
+        0x2cu, 1u, 0u, 0u, 2u,
+    };
+    const r1_model set_health_raw_two = request(
+        2u, 0x0eu, health_raw_two, sizeof health_raw_two);
+    assert(runtime_feed_model(&runtime, 3u, &set_health_raw_two) == R1_OK);
+    assert(health_capture.calls == 2u);
+    assert(!health_capture.plan.persistent_update_requested &&
+           health_capture.plan.private_event_publish_requested &&
+           health_capture.plan.private_event_value == 2u);
+    assert(runtime.device.health_settings[0] == 0xc8u &&
+           runtime.device.health_settings[4] == 1u);
+
+    const r1_model get_health = request(0u, 0x0eu, NULL, 0u);
+    assert(runtime_feed_model(&runtime, 3u, &get_health) == R1_OK);
+    assert(health_capture.calls == 2u);
 }
 
 static void test_ble_tx_queue_dispatch_veneers(void) {
@@ -11059,6 +11585,7 @@ int main(void) {
     test_reset_reason_decode();
     test_clock_production();
     test_rtc_device_reconstruction();
+    test_openr1_rtc_service();
     test_reconstructed_generic_device_registry();
     test_reconstructed_software_twi();
     test_reconstructed_sensor_stream();
@@ -11106,6 +11633,7 @@ int main(void) {
     test_twi_synchronization_adapter();
     test_scalar_health_ram_cache_merge();
     test_scalar_health_flash_record_merge();
+    test_hrv_flash_record_merge();
     test_scalar_health_offline_sync();
     test_hrv_ram_cache_merge();
     test_sleep_history_and_dispatch();

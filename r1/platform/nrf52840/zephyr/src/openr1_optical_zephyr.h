@@ -10,6 +10,8 @@ int openr1_optical_zephyr_initialize(void);
 int openr1_optical_zephyr_start(r1_goodix_stock_profile profile);
 int openr1_optical_zephyr_switch(r1_goodix_switch_selection profile);
 int openr1_optical_zephyr_stop(void);
+int openr1_optical_zephyr_start_functions(uint32_t function_mask);
+int openr1_optical_zephyr_stop_functions(uint32_t function_mask);
 bool openr1_optical_zephyr_provider_available(void);
 bool openr1_optical_zephyr_prepared(void);
 uint32_t openr1_optical_zephyr_interrupt_count(void);

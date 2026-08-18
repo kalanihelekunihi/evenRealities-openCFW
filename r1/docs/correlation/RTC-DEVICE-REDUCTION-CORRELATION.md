@@ -127,14 +127,19 @@ and the unconditional offset write in epoch-initialize.
 ## Integration state
 
 The module is compiled by the r1 host/sanitizer/sim builds, the freestanding
-Cortex-M4 object gate, and the Nordic SDK image build.  On target it is not
-yet referenced: OpenR1 time production stays with the R1-owned `r1_clock`
-(phone-synchronized epoch over the RTC-backed kernel tick), and the stock
-consumers of `sys rtc` arrive through the still-blocked generic registry.
-Runtime adoption and the Nordic `nrfx_rtc` binding are therefore deferred to
-the registry-family reduction wave; the fail-closed ops veneers are retired
-only when that lands.  No raw clock setter, internal callback-registration
-command, rollback bypass, signing bypass, or deployment action is exposed.
+Cortex-M4 object gate, and both target images.  The shared transparent
+composition in `platform/nrf52840/openr1_rtc_service.c` registers a live
+`sys rtc` record in the reconstructed generic registry, binds the slot-0x14
+time request and slot-0x20 snapshot routes, opens the recovered record, and
+copies the source-defined target instance descriptor into its recovered
+field.  The Nordic/S140 target links Nordic SDK `nrfx_rtc.c` and owns RTC2;
+the Zephyr target exposes RTC2 through its source counter driver.  Both use
+prescaler 4095, IRQ priority 6, and deliver eight hardware ticks per second.
+Phone time command `0x05` is adopted into both the product-owned `r1_clock`
+and this recovered service.  A host composition test covers registration,
+time set, veneers, snapshots, and tick advancement.  No raw BLE clock setter,
+internal callback-registration command, rollback bypass, signing bypass, or
+deployment action is exposed; physical drift remains a hardware gate.
 
 The immutable boundary census
 [`../../tools/evidence/summarize_r1_rtc_device_boundary.py`](../../tools/evidence/summarize_r1_rtc_device_boundary.py)

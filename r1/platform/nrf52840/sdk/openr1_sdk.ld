@@ -52,6 +52,12 @@ SECTIONS
     KEEP(*goodix_heap.c.o(.text .text.* .rodata .rodata.*))
     KEEP(*gomore_primitives.c.o(.text .text.* .rodata .rodata.*))
     KEEP(*gomore_tensor_runtime.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*goodix_hba_config.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*goodix_hrv_config.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*r1_gh3x2x_provider_composer.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*r1_gh3x2x_reconstructed_roots.c.o(.text .text.* .rodata .rodata.*))
+    KEEP(*(.openr1_goodix_api))
   } > FLASH
 } INSERT BEFORE .text;
 
@@ -106,6 +112,7 @@ SECTIONS
     KEEP(*(.openr1_reset_trace_api))
     KEEP(*(.openr1_reset_reason_api))
     KEEP(*(.openr1_clock_api))
+    KEEP(*(.openr1_rtc_api))
   } > FLASH
 } INSERT AFTER .text;
 

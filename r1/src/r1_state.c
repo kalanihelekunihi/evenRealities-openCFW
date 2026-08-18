@@ -116,6 +116,32 @@ r1_error r1_system_settings_store_reg1(
     return R1_OK;
 }
 
+r1_error r1_health_settings_store_dev_info(
+    uint8_t *dev_info, size_t length,
+    const r1_health_settings_record *settings) {
+    if (dev_info == NULL || settings == NULL ||
+        length <= R1_DEV_INFO_REG1_FLAG_OFFSET ||
+        length < R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET + sizeof(uint32_t)) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (settings->enabled != 0u) {
+        dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] |=
+            R1_DEV_INFO_HEALTH_FLAG_MASK;
+    } else {
+        dev_info[R1_DEV_INFO_REG1_FLAG_OFFSET] &=
+            (uint8_t)~R1_DEV_INFO_HEALTH_FLAG_MASK;
+    }
+    const uint32_t timestamp = settings->timestamp_seconds;
+    dev_info[R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET] = (uint8_t)timestamp;
+    dev_info[R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET + 1u] =
+        (uint8_t)(timestamp >> 8u);
+    dev_info[R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET + 2u] =
+        (uint8_t)(timestamp >> 16u);
+    dev_info[R1_DEV_INFO_HEALTH_TIMESTAMP_OFFSET + 3u] =
+        (uint8_t)(timestamp >> 24u);
+    return R1_OK;
+}
+
 r1_error r1_temperature_mode_plan_transition(
     uint8_t previous_mode, uint8_t next_mode,
     bool previous_stream_registered, bool timed_mode_registered,

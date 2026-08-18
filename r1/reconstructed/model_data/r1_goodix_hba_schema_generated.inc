@@ -1,0 +1,4 @@
+/* Generated from the SHA-pinned Ghidra GH_HBA initialized-RAM tail schema region
+ * 0x20007D98..<0x20007DB0.  Do not edit by hand. */
+    UINT8_C(0x17), UINT8_C(0x68), UINT8_C(0x20), UINT8_C(0x17), UINT8_C(0x20), UINT8_C(0x15), UINT8_C(0x15), UINT8_C(0x01), UINT8_C(0x10), UINT8_C(0x38), UINT8_C(0x10), UINT8_C(0x10),
+    UINT8_C(0x10), UINT8_C(0x10), UINT8_C(0x10), UINT8_C(0x01), UINT8_C(0x08), UINT8_C(0x68), UINT8_C(0x08), UINT8_C(0x08), UINT8_C(0x08), UINT8_C(0x15), UINT8_C(0x15), UINT8_C(0x0A),

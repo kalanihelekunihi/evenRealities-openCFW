@@ -84,6 +84,14 @@ void r1_health_initialize(r1_health_state *state) {
     state->activity_last_sync_seconds = 0u;
     state->sleep_sync_commit = NULL;
     state->sleep_sync_context = NULL;
+    state->scalar_history_query = NULL;
+    state->scalar_history_query_context = NULL;
+    state->hrv_history_query = NULL;
+    state->hrv_history_query_context = NULL;
+    state->activity_history_query = NULL;
+    state->activity_history_query_context = NULL;
+    state->sync_cursor_commit = NULL;
+    state->sync_cursor_context = NULL;
 }
 
 void r1_health_note_explicit_history_query(
@@ -3411,6 +3419,92 @@ static void health_u16_offline_packet_reset(
     packet->history.utc_offset_minutes = utc_offset_minutes;
 }
 
+void r1_health_u16_day_builder_reset(r1_health_u16_offline_packet *builder) {
+    if (builder != NULL) {
+        health_u16_offline_packet_reset(builder, 0u, 0);
+    }
+}
+
+r1_error r1_health_u16_day_builder_flush(
+    r1_health_u16_offline_packet *builder, uint32_t firmware_timestamp,
+    r1_health_u16_offline_emit_fn emit, void *emit_context,
+    r1_health_u16_day_flush_result *result) {
+    if (builder == NULL || emit == NULL || result == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *result = (r1_health_u16_day_flush_result){false, false, 0u};
+    const size_t count = count_u16(&builder->history);
+    if (count == 0u) {
+        return R1_OK;
+    }
+    if (builder->maximum_recorded_timestamp > firmware_timestamp) {
+        result->dropped_future_acknowledgement = true;
+        r1_health_u16_day_builder_reset(builder);
+        return R1_OK;
+    }
+    result->encoded_length = 7u + count * 7u;
+    const r1_error error = emit(emit_context, builder);
+    result->emitted = error == R1_OK;
+    r1_health_u16_day_builder_reset(builder);
+    return error;
+}
+
+r1_error r1_health_u16_flash_record_merge(
+    r1_health_u16_offline_packet *builder,
+    const r1_health_u16_flash_record *record, uint32_t firmware_timestamp,
+    bool apply_window_filter, uint32_t window_start,
+    r1_health_u16_offline_emit_fn emit, void *emit_context,
+    r1_health_u16_day_flush_result *flush_result) {
+    if (builder == NULL || record == NULL || emit == NULL ||
+        flush_result == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *flush_result = (r1_health_u16_day_flush_result){false, false, 0u};
+    if (record->local_hour >= R1_HEALTH_HOURLY_SLOTS ||
+        record->local_minute >= 60u || record->local_second >= 60u) {
+        return R1_ERROR_LENGTH;
+    }
+    if (record->recorded_timestamp > firmware_timestamp ||
+        (apply_window_filter && record->recorded_timestamp < window_start) ||
+        record->average == 0u) {
+        return R1_OK;
+    }
+    const uint8_t slot = record->local_hour == 0u
+        ? 23u : (uint8_t)(record->local_hour - 1u);
+    const uint32_t seconds_into_day =
+        (uint32_t)record->local_hour * UINT32_C(3600) +
+        (uint32_t)record->local_minute * UINT32_C(60) +
+        record->local_second;
+    uint32_t record_day_start = record->recorded_timestamp - seconds_into_day;
+    if (record->local_hour == 0u) {
+        record_day_start -= R1_HEALTH_SECONDS_PER_DAY;
+    }
+    if (count_u16(&builder->history) != 0u &&
+        (builder->history.local_day_start != record_day_start ||
+         builder->history.utc_offset_minutes != record->utc_offset_minutes)) {
+        const r1_error error = r1_health_u16_day_builder_flush(
+            builder, firmware_timestamp, emit, emit_context, flush_result);
+        if (error != R1_OK) {
+            return error;
+        }
+    }
+    if (count_u16(&builder->history) == 0u) {
+        r1_health_u16_day_builder_reset(builder);
+        builder->history.local_day_start = record_day_start;
+        builder->history.utc_offset_minutes = record->utc_offset_minutes;
+    }
+    r1_health_u16_slot *destination = &builder->history.slots[slot];
+    if (destination->average == 0u) {
+        destination->average = record->average;
+        destination->maximum = record->maximum;
+        destination->minimum = record->minimum;
+    }
+    if (builder->maximum_recorded_timestamp < record->recorded_timestamp) {
+        builder->maximum_recorded_timestamp = record->recorded_timestamp;
+    }
+    return R1_OK;
+}
+
 r1_error r1_health_u8_offline_merge(
     const r1_health_u8_offline_queue *queue, uint32_t firmware_timestamp,
     r1_health_u8_offline_packet *workspace, r1_health_u8_offline_emit_fn emit,
@@ -4125,6 +4219,42 @@ r1_error r1_health_register_pending(r1_health_state *state,
             pending->serial = serial;
             pending->kind = kind;
             pending->record_index = record_index;
+            pending->health_metric = 0u;
+            pending->health_ack_mode = 0u;
+            pending->acknowledged_timestamp = 0u;
+            return R1_OK;
+        }
+    }
+    return R1_ERROR_CAPACITY;
+}
+
+r1_error r1_health_register_scalar_history_pending(
+    r1_health_state *state, uint8_t module, uint8_t command,
+    uint8_t subcommand, uint16_t serial, uint8_t metric,
+    uint8_t acknowledgement_mode, uint32_t acknowledged_timestamp) {
+    if (metric > 3u ||
+        (acknowledgement_mode != R1_HEALTH_ACK_FLASH_HISTORY &&
+         acknowledgement_mode != R1_HEALTH_ACK_OFFLINE_QUEUE &&
+         acknowledgement_mode != R1_HEALTH_ACK_CURRENT_RAM)) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (state == NULL || serial == 0u) {
+        return R1_ERROR_ARGUMENT;
+    }
+    for (size_t index = 0u; index < R1_PENDING_ACK_CAPACITY; ++index) {
+        r1_pending_ack *pending = &state->pending[index];
+        if (!pending->active) {
+            *pending = (r1_pending_ack){
+                .active = true,
+                .module = module,
+                .command = command,
+                .subcommand = subcommand,
+                .serial = serial,
+                .kind = R1_PENDING_SCALAR_HISTORY,
+                .health_metric = metric,
+                .health_ack_mode = acknowledgement_mode,
+                .acknowledged_timestamp = acknowledged_timestamp,
+            };
             return R1_OK;
         }
     }
@@ -4152,6 +4282,44 @@ bool r1_health_acknowledge(r1_health_state *state,
                 return false;
             }
             session->synchronized = true;
+        } else if (pending->kind == R1_PENDING_SCALAR_HISTORY) {
+            if (pending->health_ack_mode == R1_HEALTH_ACK_OFFLINE_QUEUE) {
+                size_t consumed_count = 0u;
+                const r1_error consume_error = pending->health_metric == 3u
+                    ? r1_activity_offline_consume_through(
+                        &state->activity_offline,
+                        pending->acknowledged_timestamp, &consumed_count)
+                    : pending->health_metric == 2u
+                    ? r1_health_u16_offline_consume_through(
+                        &state->heart_rate_variability_offline,
+                        pending->acknowledged_timestamp, &consumed_count)
+                    : r1_health_u8_offline_consume_through(
+                        pending->health_metric == 0u
+                            ? &state->heart_rate_offline
+                            : &state->blood_oxygen_offline,
+                        pending->acknowledged_timestamp, &consumed_count);
+                if (consume_error != R1_OK) {
+                    return false;
+                }
+            } else {
+                uint32_t *last_sync = pending->health_metric == 0u
+                    ? &state->heart_rate_last_sync_seconds
+                    : pending->health_metric == 1u
+                        ? &state->blood_oxygen_last_sync_seconds
+                        : pending->health_metric == 2u
+                            ? &state->heart_rate_variability_last_sync_seconds
+                            : &state->activity_last_sync_seconds;
+                if (pending->acknowledged_timestamp > *last_sync) {
+                    if (state->sync_cursor_commit != NULL &&
+                        state->sync_cursor_commit(
+                            state->sync_cursor_context,
+                            pending->health_metric,
+                            pending->acknowledged_timestamp) != R1_OK) {
+                        return false;
+                    }
+                    *last_sync = pending->acknowledged_timestamp;
+                }
+            }
         }
         pending->active = false;
         return true;
@@ -4165,6 +4333,42 @@ void r1_health_bind_sleep_sync_commit(r1_health_state *state,
     if (state != NULL) {
         state->sleep_sync_commit = commit;
         state->sleep_sync_context = context;
+    }
+}
+
+void r1_health_bind_scalar_history_query(
+    r1_health_state *state, r1_health_scalar_history_query_fn query,
+    void *context) {
+    if (state != NULL) {
+        state->scalar_history_query = query;
+        state->scalar_history_query_context = context;
+    }
+}
+
+void r1_health_bind_hrv_history_query(
+    r1_health_state *state, r1_health_hrv_history_query_fn query,
+    void *context) {
+    if (state != NULL) {
+        state->hrv_history_query = query;
+        state->hrv_history_query_context = context;
+    }
+}
+
+void r1_health_bind_activity_history_query(
+    r1_health_state *state, r1_health_activity_history_query_fn query,
+    void *context) {
+    if (state != NULL) {
+        state->activity_history_query = query;
+        state->activity_history_query_context = context;
+    }
+}
+
+void r1_health_bind_sync_cursor_commit(
+    r1_health_state *state, r1_health_sync_cursor_commit_fn commit,
+    void *context) {
+    if (state != NULL) {
+        state->sync_cursor_commit = commit;
+        state->sync_cursor_context = context;
     }
 }
 

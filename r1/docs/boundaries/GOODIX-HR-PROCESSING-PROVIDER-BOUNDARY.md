@@ -1,5 +1,13 @@
 # Goodix GH_HR processing provider boundary
 
+> Identity correction (2026-08-17): matched public wrapper source and the
+> retail direct call at `0x0002CAD8` prove that `0x0006D51C` is
+> `goodix_hrv_calc`, not the HR/HBA root. This historical closure report keeps
+> its filename and internal helper labels for traceability; the compiled root
+> is now `goodix_primitives_hrv_process` and the old
+> `goodix_primitives_hr_process` spelling is compatibility-only. HR/HBA is
+> rooted at `0x0006C6A8`.
+
 ## Decision
 
 31 formerly unclassified functions / 7,144 executable bytes are now routed to the existing Goodix
@@ -35,9 +43,9 @@ the exact `0/1/2` direction latch, and mode-one four-sample cardinal-spline refi
 82-float stack area is a bounded caller-owned 41-point workspace; its two four-word coordinate
 tables are explicit curve bindings.
 
-The 1,382-byte GH_HR processing root at `0x0006D51C`, SHA-256
+The 1,382-byte HRV processing root at `0x0006D51C`, SHA-256
 `0f1b8fa8d247ca839a59cfffccb4f70e9cb1a689cd2f736c8514474c02358c9d`, now compiles as
-`goodix_primitives_hr_process`. Input channel/presence geometry, three counted histories, the
+`goodix_primitives_hrv_process`. Input channel/presence geometry, three counted histories, the
 weighted-feature and extrema states, candidate selector, quality thresholds, previous result,
 reference recovery, and scratch are explicit typed records. The local root preserves input
 invalidity clearing, motion-magnitude accumulation, periodic signal means, feature/extrema stage

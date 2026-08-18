@@ -295,10 +295,10 @@
       "license": "Goodix 5-clause (clause 4: use only with a Goodix integrated circuit; clause 5: binary forms must not be reverse engineered)",
       "license_path": "gh3x2x/LICENSE",
       "license_sha256": "dfb94b7725971b1696299c6d9fd36b8a447c40c1a9c9e89a8a392377f9823226",
-      "admitted_source_file_count": 57,
-      "admitted_source_aggregate_sha256": "cbf4a8668ae5d7e908214fb509fc428f3a3a9d5493f756ba134faa27f82b1f4f",
+      "admitted_source_file_count": 59,
+      "admitted_source_aggregate_sha256": "b0c421df96de26abd6c4af04de46023f7148c05bafb17da8aaa8de6a9830ec77",
       "evidence": "R1 firmware strings GH(M)3X2X_DEMO_v1.6_AC_v0.5, v4.3.0.0, Gh3x2x_Virtual_Reg_v3.4, and gh3x2x-v2.23_7ecd2a match this tree exactly; eight function-level matches proven in r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md",
-      "production_role": "source-only GH3X2X demo-kernel, register driver, soft-AGC/move/soft-ADT modules, and exact SpO2 configuration table; every binary archive, PC-tool protocol body, and binary algorithm-call implementation is excluded, while the still-unadapted global algorithm ABI fails closed"
+      "production_role": "source-only GH3X2X demo-kernel, register driver, soft-AGC/move/soft-ADT modules, and byte-matched HR, HRV, and SpO2 configuration inputs; every binary archive, PC-tool protocol body, and binary algorithm-call implementation is excluded, while uncomposed persistent algorithm state remains fail-closed"
     },
     {
       "id": "zephyr-rtos",

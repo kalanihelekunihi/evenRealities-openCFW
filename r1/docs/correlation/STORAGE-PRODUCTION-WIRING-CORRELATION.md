@@ -156,7 +156,8 @@ increments a recovery-failure counter and never widens the query to timestamp ze
 The fixed `hsync` class is decoded as six UInt32LE words at startup. Reset/clamp actions
 persist only the four named cursors through the hardened `kv.bin` snapshot writer while
 preserving both unresolved words; commit success/failure is observable. Destructive formatting
-and GoMore reinitialization are counted as suppressed actions.
+remains suppressed. Backward-clock GoMore reinitialization is live and its success/failure is
+counted separately.
 Retail-data migration, power-loss testing, and physical validation remain separate gates.
 
 ## Tests and gates

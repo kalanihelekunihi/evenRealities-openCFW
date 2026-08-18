@@ -258,8 +258,8 @@ RAM/decoded-flash merge, and packet-flush functions are separately admitted with
 storage, allocation, calendar, or transport providers. Nine scalar-health daily-cache callbacks
 now cover bounded HR, SpO2, and HRV slot reset/read/write plus the recovered invalid-clock path.
 Two time/hour storage orchestrators are admitted only as adapters around pinned FlashDB and metric
-providers, while the manually recovered backward-clock adapter now compiles and is source-bound to
-the transparent GoMore reset seam with on-target execution intentionally suppressed.
+providers, while the manually recovered backward-clock adapter now compiles and invokes the live
+transparent GoMore fresh-engine reset seam on target.
 Fifteen product-owned temperature/stress storage functions now cover bounded event acceptance,
 replacement timestamps, one-byte temperature offsets, shared hourly averaging, and daily-cache
 callbacks without admitting GXCAS acquisition or GoMore stress generation. Five of these functions

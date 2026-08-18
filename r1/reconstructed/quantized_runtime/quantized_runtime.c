@@ -29,12 +29,16 @@
  *   0x00030800..<0x0003096C   364 -> quantized_runtime_goodix_layer_block_build
  *   0x00029120..<0x00029142   34  -> quantized_runtime_round_half_away_from_zero_29120
  *   0x000293FC..<0x000294B6   186 -> quantized_runtime_float_to_int8_quantize
+ *   0x00028EC8..<0x00029068   416 -> quantized_runtime_int8_concatenate_execute
+ *   0x00030534..<0x000305D0   156 -> quantized_runtime_int8_to_float_execute
  *   0x0002951A..<0x000295DE   196 -> quantized_runtime_goodix_five_stage_32_execute
  *   0x00035E34..<0x00035F26   242 -> quantized_runtime_quantization_params_derive
  *   0x00035D6E..<0x00035E32   196 -> quantized_runtime_goodix_five_stage_27_execute
  *   0x00036408..<0x00036574   364 -> quantized_runtime_recurrent_range_adjust
  *   0x00036590..<0x000366FC   364 -> quantized_runtime_recurrent_range_adjust (exact twin)
  *   0x00036C7C..<0x00036D60   228 -> quantized_runtime_int8_add_execute
+ *   0x00036DCC..<0x00036DD4 + 0x0003F6B4..<0x0003F740  148
+ *                               -> quantized_runtime_float_concatenate_two_execute
  *   0x00036C26 head + 0x00099014..<0x00099110 tail   262
  *                               -> quantized_runtime_goodix_model_instance_create
  *   0x00041816..<0x000419C8   434 -> quantized_runtime_pooling_execute
@@ -83,6 +87,7 @@
  *   0x00093628..<0x000936F8   208 -> quantized_runtime_arena_allocate
  *   0x0009371C..<0x00093744   40  -> quantized_runtime_pool_slot_claim
  *   0x00098EDC..<0x00098F80   164 -> quantized_runtime_float_add_execute
+ *   0x00095B20..<0x00095BB8   152 -> quantized_runtime_float_multiply_execute
  *
  * Observable behavior is preserved; restructuring is limited to explicit
  * provider bindings (toolchain fminf/fmaxf/floorf/expf/qsort, the
@@ -665,6 +670,48 @@ static void exec_tensor_initialize(quantized_runtime_exec_tensor *tensor,
     tensor->data = data;
 }
 
+static bool stage_callable(const quantized_runtime_stage *stage) {
+    if (stage == NULL) {
+        return false;
+    }
+    if (stage->adapter == QUANTIZED_RUNTIME_STAGE_DIRECT) {
+        return stage->execute != NULL;
+    }
+    return stage->runtime != NULL &&
+        (stage->adapter == QUANTIZED_RUNTIME_STAGE_QUANTIZE_WITH_RUNTIME ||
+         stage->adapter == QUANTIZED_RUNTIME_STAGE_INT8_ADD_WITH_RUNTIME ||
+         stage->adapter == QUANTIZED_RUNTIME_STAGE_SOFTMAX_WITH_RUNTIME);
+}
+
+static uint32_t stage_invoke(
+    const quantized_runtime_stage *stage,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    if (!stage_callable(stage)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    if (stage->adapter == QUANTIZED_RUNTIME_STAGE_QUANTIZE_WITH_RUNTIME) {
+        return quantized_runtime_float_to_int8_quantize(
+            stage->runtime, stage->descriptor, inputs, outputs);
+    }
+    if (stage->adapter == QUANTIZED_RUNTIME_STAGE_INT8_ADD_WITH_RUNTIME) {
+        return quantized_runtime_int8_add_execute(
+            stage->runtime, stage->descriptor, inputs, outputs);
+    }
+    if (stage->adapter == QUANTIZED_RUNTIME_STAGE_SOFTMAX_WITH_RUNTIME) {
+        return quantized_runtime_float_softmax_execute(
+            stage->runtime, stage->descriptor, inputs, outputs);
+    }
+    return stage->execute(stage->descriptor, inputs, outputs);
+}
+
+uint32_t quantized_runtime_stage_invoke(
+    const quantized_runtime_stage *stage,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    return stage_invoke(stage, inputs, outputs);
+}
+
 static bool five_stage_execute(
     const quantized_runtime_five_stage_plan *plan,
     quantized_runtime_exec_tensor *input,
@@ -678,7 +725,7 @@ static bool five_stage_execute(
         return false;
     }
     for (size_t index = 0u; index < 5u; ++index) {
-        if (plan->stages[index].execute == NULL) {
+        if (!stage_callable(&plan->stages[index])) {
             return false;
         }
     }
@@ -695,13 +742,11 @@ static bool five_stage_execute(
 
     quantized_runtime_exec_tensor *stage_input[1] = {input};
     quantized_runtime_exec_tensor *stage_output[1] = {&tensors[0]};
-    (void)plan->stages[0].execute(plan->stages[0].descriptor, stage_input,
-                                  stage_output);
+    (void)stage_invoke(&plan->stages[0], stage_input, stage_output);
     for (size_t index = 1u; index < 5u; ++index) {
         stage_input[0] = &tensors[index - 1u];
         stage_output[0] = &tensors[index];
-        (void)plan->stages[index].execute(plan->stages[index].descriptor,
-                                          stage_input, stage_output);
+        (void)stage_invoke(&plan->stages[index], stage_input, stage_output);
     }
     *output = tensors[4];
     return true;
@@ -733,7 +778,7 @@ static bool three_stage_validate(
         return false;
     }
     for (size_t index = 0u; index < 3u; ++index) {
-        if (plan->stages[index].execute == NULL) {
+        if (!stage_callable(&plan->stages[index])) {
             return false;
         }
     }
@@ -791,17 +836,14 @@ bool quantized_runtime_goodix_u8_three_stage_execute(
 
     quantized_runtime_exec_tensor *stage_inputs[2] = {inputs[0], inputs[1]};
     quantized_runtime_exec_tensor *stage_outputs[2] = {&tensors[0], outputs[1]};
-    (void)plan->stages[0].execute(plan->stages[0].descriptor, stage_inputs,
-                                  stage_outputs);
+    (void)stage_invoke(&plan->stages[0], stage_inputs, stage_outputs);
     stage_inputs[0] = &tensors[0];
     stage_inputs[1] = outputs[1];
     stage_outputs[0] = &tensors[1];
-    (void)plan->stages[1].execute(plan->stages[1].descriptor, stage_inputs,
-                                  stage_outputs);
+    (void)stage_invoke(&plan->stages[1], stage_inputs, stage_outputs);
     stage_inputs[0] = &tensors[1];
     stage_outputs[0] = &tensors[2];
-    (void)plan->stages[2].execute(plan->stages[2].descriptor, stage_inputs,
-                                  stage_outputs);
+    (void)stage_invoke(&plan->stages[2], stage_inputs, stage_outputs);
     *outputs[0] = tensors[2];
     return true;
 }
@@ -826,13 +868,11 @@ bool quantized_runtime_goodix_f32_three_stage_execute(
     exec_tensor_initialize(&tensors[2], 1u, shape[4], shape[5], 4u, bytes);
     quantized_runtime_exec_tensor *stage_inputs[1] = {input};
     quantized_runtime_exec_tensor *stage_outputs[1] = {&tensors[0]};
-    (void)plan->stages[0].execute(plan->stages[0].descriptor, stage_inputs,
-                                  stage_outputs);
+    (void)stage_invoke(&plan->stages[0], stage_inputs, stage_outputs);
     for (size_t index = 1u; index < 3u; ++index) {
         stage_inputs[0] = &tensors[index - 1u];
         stage_outputs[0] = &tensors[index];
-        (void)plan->stages[index].execute(plan->stages[index].descriptor,
-                                          stage_inputs, stage_outputs);
+        (void)stage_invoke(&plan->stages[index], stage_inputs, stage_outputs);
     }
     *output = tensors[2];
     return true;
@@ -905,13 +945,17 @@ static bool goodix_stage_call(
     quantized_runtime_exec_tensor *input1,
     quantized_runtime_exec_tensor *output0,
     quantized_runtime_exec_tensor *output1) {
-    if (stage == NULL || stage->execute == NULL || input0 == NULL ||
+    if (!stage_callable(stage) || input0 == NULL ||
             output0 == NULL) {
         return false;
     }
-    quantized_runtime_exec_tensor *inputs[2] = {input0, input1};
+    /* Stock lays the two {data,range} pairs contiguously before invoking an
+     * int8-add record.  Unary/binary stages ignore the unused trailing pair. */
+    quantized_runtime_exec_tensor *inputs[4] = {
+        input0, input1, output0, output1,
+    };
     quantized_runtime_exec_tensor *outputs[2] = {output0, output1};
-    (void)stage->execute(stage->descriptor, inputs, outputs);
+    (void)stage_invoke(stage, inputs, outputs);
     return true;
 }
 
@@ -946,11 +990,11 @@ static bool layer_stage_call(
     const quantized_runtime_stage *stage,
     quantized_runtime_exec_tensor *const *inputs,
     quantized_runtime_exec_tensor *const *outputs) {
-    if (stage == NULL || stage->execute == NULL || inputs == NULL ||
+    if (!stage_callable(stage) || inputs == NULL ||
             outputs == NULL) {
         return false;
     }
-    (void)stage->execute(stage->descriptor, inputs, outputs);
+    (void)stage_invoke(stage, inputs, outputs);
     return true;
 }
 
@@ -982,12 +1026,12 @@ bool quantized_runtime_goodix_layer_execute(
     }
     for (size_t index = GOODIX_LAYER_MEAN_STAGE;
             index < QUANTIZED_RUNTIME_GOODIX_LAYER_STAGE_COUNT; ++index) {
-        if (plan->stages[index].execute == NULL) {
+        if (!stage_callable(&plan->stages[index])) {
             return false;
         }
     }
     if (plan->optional_preprocess &&
-            plan->stages[GOODIX_LAYER_OPTIONAL].execute == NULL) {
+            !stage_callable(&plan->stages[GOODIX_LAYER_OPTIONAL])) {
         return false;
     }
 
@@ -1451,6 +1495,125 @@ bool quantized_runtime_goodix_second_graph_build(
     return true;
 }
 
+static bool goodix_second_plan_stage(
+    const quantized_runtime *rt,
+    const quantized_runtime_goodix_second_graph *graph,
+    quantized_runtime_stage *stage, size_t descriptor_offset,
+    size_t token_offset, quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context, bool required) {
+    if (descriptor_offset >= sizeof(graph->bytes) ||
+            token_offset + 4u > sizeof(graph->bytes)) {
+        return false;
+    }
+    const uint32_t token = load_u32_le(graph->bytes + token_offset);
+    stage->descriptor = graph->bytes + descriptor_offset;
+    stage->execute = token != 0u ? resolve(resolve_context, token) : NULL;
+    if (stage->execute != NULL) {
+        /* Explicit resolvers may replace even source-local target adapters;
+         * host fixture plans use this to avoid dereferencing target records. */
+    } else if (token == (uint32_t)(uintptr_t)
+            &quantized_runtime_float_to_int8_quantize) {
+        stage->runtime = rt;
+        stage->adapter = QUANTIZED_RUNTIME_STAGE_QUANTIZE_WITH_RUNTIME;
+    } else if (token == (uint32_t)(uintptr_t)
+                   &quantized_runtime_int8_add_execute) {
+        stage->runtime = rt;
+        stage->adapter = QUANTIZED_RUNTIME_STAGE_INT8_ADD_WITH_RUNTIME;
+    } else if (token == (uint32_t)(uintptr_t)
+                   &quantized_runtime_float_softmax_execute) {
+        stage->runtime = rt;
+        stage->adapter = QUANTIZED_RUNTIME_STAGE_SOFTMAX_WITH_RUNTIME;
+    }
+    return !required || stage_callable(stage);
+}
+
+bool quantized_runtime_goodix_second_executor_plan_build(
+    const quantized_runtime *rt,
+    const quantized_runtime_goodix_second_graph *graph,
+    quantized_runtime_goodix_second_executor_plan *plan,
+    quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context,
+    quantized_runtime_multi_stage_token_resolver_fn resolve_multi,
+    void *resolve_multi_context) {
+    if (rt == NULL || graph == NULL || plan == NULL || resolve == NULL ||
+            resolve_multi == NULL || load_u32_le(graph->bytes) != 6u ||
+            rt->providers.expf_fn == NULL) {
+        return false;
+    }
+    zero_bytes((uint8_t *)plan, sizeof(*plan));
+    static const uint16_t direct_descriptors[
+        QUANTIZED_RUNTIME_GOODIX_SECOND_EXECUTOR_STAGE_COUNT] = {
+        0x004u, 0x010u, 0x0D8u, 0x1A4u, 0x3CCu, 0x3D4u,
+    };
+    static const uint16_t direct_tokens[
+        QUANTIZED_RUNTIME_GOODIX_SECOND_EXECUTOR_STAGE_COUNT] = {
+        0x00Cu, 0x024u, 0x0ECu, 0x1B8u, 0x3D0u, 0x3D4u,
+    };
+    for (size_t index = 0u;
+            index < QUANTIZED_RUNTIME_GOODIX_SECOND_EXECUTOR_STAGE_COUNT;
+            ++index) {
+        if (!goodix_second_plan_stage(
+                rt, graph, &plan->stages[index], direct_descriptors[index],
+                direct_tokens[index], resolve, resolve_context, true)) {
+            zero_bytes((uint8_t *)plan, sizeof(*plan));
+            return false;
+        }
+    }
+
+    const uint32_t merge_token = load_u32_le(graph->bytes + 0x1A0u);
+    plan->merge_four.descriptor = graph->bytes + 0x1A0u;
+    plan->merge_four.execute = merge_token != 0u
+        ? resolve_multi(resolve_multi_context, merge_token) : NULL;
+    if (plan->merge_four.execute == NULL) {
+        zero_bytes((uint8_t *)plan, sizeof(*plan));
+        return false;
+    }
+
+    static const uint16_t block_offsets[
+        QUANTIZED_RUNTIME_GOODIX_SECOND_EXECUTOR_LAYER_COUNT] = {
+        0x028u, 0x0F0u, 0x1BCu, 0x26Cu, 0x31Cu,
+    };
+    static const uint8_t descriptor_offsets[
+        QUANTIZED_RUNTIME_GOODIX_LAYER_STAGE_COUNT] = {
+        0x88u, 0x00u, 0x18u, 0x30u, 0x3Cu, 0x54u, 0x6Cu, 0xA0u,
+    };
+    static const uint8_t token_offsets[
+        QUANTIZED_RUNTIME_GOODIX_LAYER_STAGE_COUNT] = {
+        0x9Cu, 0x14u, 0x2Cu, 0x38u, 0x50u, 0x68u, 0x80u, 0xACu,
+    };
+    for (size_t layer = 0u;
+            layer < QUANTIZED_RUNTIME_GOODIX_SECOND_EXECUTOR_LAYER_COUNT;
+            ++layer) {
+        quantized_runtime_goodix_layer_plan *layer_plan =
+            &plan->layers[layer];
+        const size_t block = block_offsets[layer];
+        layer_plan->optional_preprocess =
+            load_u32_le(graph->bytes + block + 0x84u) != 0u;
+        layer_plan->output_min = load_f32_le(graph->bytes + block + 0x30u);
+        layer_plan->output_max = load_f32_le(graph->bytes + block + 0x34u);
+        layer_plan->expf_fn = rt->providers.expf_fn;
+        if (!(layer_plan->output_max > layer_plan->output_min)) {
+            zero_bytes((uint8_t *)plan, sizeof(*plan));
+            return false;
+        }
+        for (size_t stage = 0u;
+                stage < QUANTIZED_RUNTIME_GOODIX_LAYER_STAGE_COUNT;
+                ++stage) {
+            const bool required = stage != 0u ||
+                layer_plan->optional_preprocess;
+            if (!goodix_second_plan_stage(
+                    rt, graph, &layer_plan->stages[stage],
+                    block + descriptor_offsets[stage],
+                    block + token_offsets[stage], resolve, resolve_context,
+                    required)) {
+                zero_bytes((uint8_t *)plan, sizeof(*plan));
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 enum {
     GOODIX_SECOND_INITIAL_CONVERT = 0,
     GOODIX_SECOND_EXPAND_10,
@@ -1483,7 +1646,7 @@ static bool second_layer_plan_valid(
     }
     for (size_t index = 1u;
             index < QUANTIZED_RUNTIME_GOODIX_LAYER_STAGE_COUNT; ++index) {
-        if (plan->stages[index].execute == NULL) {
+        if (!stage_callable(&plan->stages[index])) {
             return false;
         }
     }
@@ -1511,7 +1674,7 @@ bool quantized_runtime_goodix_second_executor_execute(
     for (size_t index = 0u;
             index < QUANTIZED_RUNTIME_GOODIX_SECOND_EXECUTOR_STAGE_COUNT;
             ++index) {
-        if (plan->stages[index].execute == NULL) {
+        if (!stage_callable(&plan->stages[index])) {
             return false;
         }
     }
@@ -1710,14 +1873,14 @@ bool quantized_runtime_goodix_executor_execute(
     for (size_t index = 1u;
             index < QUANTIZED_RUNTIME_GOODIX_EXECUTOR_STAGE_COUNT - 1u;
             ++index) {
-        if (plan->stages[index].execute == NULL) {
+        if (!stage_callable(&plan->stages[index])) {
             return false;
         }
     }
     if ((plan->mode == 0u &&
-         plan->stages[GOODIX_EXEC_BOOTSTRAP].execute == NULL) ||
+         !stage_callable(&plan->stages[GOODIX_EXEC_BOOTSTRAP])) ||
             (plan->mode == 2u &&
-             plan->stages[GOODIX_EXEC_TAIL_OPTIONAL].execute == NULL)) {
+             !stage_callable(&plan->stages[GOODIX_EXEC_TAIL_OPTIONAL]))) {
         return false;
     }
 
@@ -2973,6 +3136,343 @@ uint32_t quantized_runtime_float_add_execute(
     return QUANTIZED_RUNTIME_STATUS_OK;
 }
 
+uint32_t quantized_runtime_int8_to_float_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    (void)descriptor;
+    if (inputs == NULL || outputs == NULL || inputs[0] == NULL ||
+            inputs[1] == NULL || outputs[0] == NULL ||
+            inputs[0]->data == NULL || inputs[1]->data == NULL ||
+            outputs[0]->data == NULL) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    size_t count = 0u;
+    if (!multiply_size_checked(inputs[0]->dims[1], inputs[0]->dims[2],
+                               &count) ||
+            outputs[0]->dims[1] > SIZE_MAX / outputs[0]->dims[2] ||
+            (size_t)outputs[0]->dims[1] * outputs[0]->dims[2] < count) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const float *const range = (const float *)inputs[1]->data;
+    float span = range[1] - range[0];
+    if (span < 0x1.a36e2ep-14f) { /* exact stock Float32 1e-4 */
+        span = 0x1.a36e2ep-14f;
+    }
+    const float step = span / 255.0f;
+    if (!(step > 0.0f)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    int32_t zero = quantized_runtime_round_half_away_from_zero_290fe(
+        -range[0] / step);
+    if (zero < 0) {
+        zero = 0;
+    } else if (zero > 255) {
+        zero = 255;
+    }
+    zero -= 128;
+    const int8_t *const source = (const int8_t *)inputs[0]->data;
+    float *const destination = (float *)outputs[0]->data;
+    for (size_t index = 0u; index < count; ++index) {
+        destination[index] = (float)((int32_t)source[index] - zero) * step;
+    }
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+uint32_t quantized_runtime_float_multiply_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    (void)descriptor;
+    if (inputs == NULL || outputs == NULL || inputs[0] == NULL ||
+            inputs[1] == NULL || outputs[0] == NULL ||
+            inputs[0]->data == NULL || inputs[1]->data == NULL ||
+            outputs[0]->data == NULL) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    size_t count = 0u;
+    size_t output_count = 0u;
+    if (!multiply_size_checked(inputs[0]->dims[1], inputs[0]->dims[2],
+                               &count) ||
+            !multiply_size_checked(outputs[0]->dims[1], outputs[0]->dims[2],
+                                   &output_count) || output_count < count) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const float *const left = (const float *)inputs[0]->data;
+    const float *const right = (const float *)inputs[1]->data;
+    float *const destination = (float *)outputs[0]->data;
+    if (inputs[1]->dims[1] + inputs[1]->dims[2] == 3u) {
+        for (size_t index = 0u; index < count; ++index) {
+            destination[index] = left[index] * right[0];
+        }
+        return QUANTIZED_RUNTIME_STATUS_OK;
+    }
+    if (inputs[1]->dims[1] != 1u ||
+            inputs[1]->dims[2] < inputs[0]->dims[2]) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const size_t columns = inputs[0]->dims[2];
+    for (size_t row = 0u; row < inputs[0]->dims[1]; ++row) {
+        for (size_t column = 0u; column < columns; ++column) {
+            const size_t index = row * columns + column;
+            destination[index] = left[index] * right[column];
+        }
+    }
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+uint32_t quantized_runtime_float_concatenate_two_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    (void)descriptor;
+    if (inputs == NULL || outputs == NULL || inputs[0] == NULL ||
+            inputs[1] == NULL || outputs[0] == NULL ||
+            inputs[0]->data == NULL || inputs[1]->data == NULL ||
+            outputs[0]->data == NULL ||
+            inputs[0]->dims[0] != inputs[1]->dims[0] ||
+            inputs[0]->dims[0] != outputs[0]->dims[0] ||
+            inputs[0]->dims[2] != inputs[1]->dims[2] ||
+            inputs[0]->dims[2] != outputs[0]->dims[2] ||
+            inputs[0]->dims[1] > UINT32_MAX - inputs[1]->dims[1] ||
+            outputs[0]->dims[1] <
+                inputs[0]->dims[1] + inputs[1]->dims[1]) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    float *destination = (float *)outputs[0]->data;
+    quantized_runtime_exec_tensor *const source_tensors[2] = {
+        inputs[0], inputs[1],
+    };
+    for (size_t outer = 0u; outer < outputs[0]->dims[0]; ++outer) {
+        for (size_t source_index = 0u; source_index < 2u; ++source_index) {
+            const quantized_runtime_exec_tensor *const source_tensor =
+                source_tensors[source_index];
+            size_t slice = 0u;
+            if (!multiply_size_checked(source_tensor->dims[1],
+                                       source_tensor->dims[2], &slice)) {
+                return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+            }
+            const float *const source =
+                (const float *)source_tensor->data + outer * slice;
+            move_bytes_local((uint8_t *)destination,
+                             (const uint8_t *)source,
+                             slice * sizeof(float));
+            destination += slice;
+        }
+    }
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+uint32_t quantized_runtime_int8_concatenate_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *input_pairs,
+    quantized_runtime_exec_tensor *const *outputs,
+    uint32_t input_count) {
+    (void)descriptor;
+    if (input_pairs == NULL || outputs == NULL || outputs[0] == NULL ||
+            outputs[1] == NULL || outputs[0]->data == NULL ||
+            outputs[1]->data == NULL || input_count == 0u) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const uint32_t outer_count = outputs[0]->dims[0];
+    const uint32_t tail_count = outputs[0]->dims[2];
+    uint32_t concatenated_rows = 0u;
+    float minimum = 0.0f;
+    float maximum = 0.0f;
+    for (uint32_t index = 0u; index < input_count; ++index) {
+        quantized_runtime_exec_tensor *const tensor = input_pairs[index * 2u];
+        quantized_runtime_exec_tensor *const range_tensor =
+            input_pairs[index * 2u + 1u];
+        if (tensor == NULL || range_tensor == NULL || tensor->data == NULL ||
+                range_tensor->data == NULL || tensor->dims[0] != outer_count ||
+                tensor->dims[2] != tail_count ||
+                concatenated_rows > UINT32_MAX - tensor->dims[1]) {
+            return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+        }
+        concatenated_rows += tensor->dims[1];
+        const float *const range = (const float *)range_tensor->data;
+        if (index == 0u) {
+            minimum = range[0];
+            maximum = range[1];
+        } else {
+            if (range[0] < minimum) {
+                minimum = range[0];
+            }
+            if (range[1] > maximum) {
+                maximum = range[1];
+            }
+        }
+    }
+    if (outputs[0]->dims[1] < concatenated_rows || !(maximum > minimum)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const float output_step = (maximum - minimum) / 255.0f;
+    if (!(output_step > 0.0f)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    int8_t *destination = (int8_t *)outputs[0]->data;
+    for (uint32_t outer = 0u; outer < outer_count; ++outer) {
+        for (uint32_t index = 0u; index < input_count; ++index) {
+            const quantized_runtime_exec_tensor *const tensor =
+                input_pairs[index * 2u];
+            const float *const range =
+                (const float *)input_pairs[index * 2u + 1u]->data;
+            size_t slice = 0u;
+            if (!multiply_size_checked(tensor->dims[1], tail_count, &slice)) {
+                return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+            }
+            const int8_t *const source =
+                (const int8_t *)tensor->data + (size_t)outer * slice;
+            const float low_delta = range[0] - minimum;
+            const float high_delta = range[1] - maximum;
+            const float low_abs = low_delta < 0.0f ? -low_delta : low_delta;
+            const float high_abs = high_delta < 0.0f ? -high_delta : high_delta;
+            if (low_abs < 0x1.0c6f7ap-20f &&
+                    high_abs < 0x1.0c6f7ap-20f) {
+                move_bytes_local((uint8_t *)destination,
+                                 (const uint8_t *)source, slice);
+                destination += slice;
+                continue;
+            }
+            const float input_step = (range[1] - range[0]) / 255.0f;
+            const float slope = input_step / output_step;
+            const float intercept =
+                (range[0] - minimum) / output_step + slope * 128.0f;
+            for (size_t value = 0u; value < slice; ++value) {
+                int32_t converted =
+                    quantized_runtime_round_half_away_from_zero_290fe(
+                        (float)source[value] * slope + intercept);
+                if (converted < 0) {
+                    converted = -128;
+                } else if (converted > 255) {
+                    converted = 127;
+                } else {
+                    converted -= 128;
+                }
+                *destination++ = (int8_t)converted;
+            }
+        }
+    }
+    float *const output_range = (float *)outputs[1]->data;
+    output_range[0] = minimum;
+    output_range[1] = maximum;
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+uint32_t quantized_runtime_float_strided_copy_2d_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    if (descriptor == NULL || inputs == NULL || outputs == NULL ||
+            inputs[0] == NULL || outputs[0] == NULL ||
+            inputs[0]->data == NULL || outputs[0]->data == NULL) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const uint8_t *const record = (const uint8_t *)descriptor;
+    if (record[1] > 2u || record[2] > 2u) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    size_t source_count = 0u;
+    size_t destination_count = 0u;
+    if (!multiply_size_checked(inputs[0]->dims[1], inputs[0]->dims[2],
+                               &source_count) ||
+            !multiply_size_checked(outputs[0]->dims[1], outputs[0]->dims[2],
+                                   &destination_count)) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const size_t strides[3] = {
+        source_count, inputs[0]->dims[2], 1u,
+    };
+    const size_t row_stride = strides[record[1]];
+    const size_t column_stride = strides[record[2]];
+    const float *const source = (const float *)inputs[0]->data;
+    float *const destination = (float *)outputs[0]->data;
+    for (size_t row = 0u; row < outputs[0]->dims[1]; ++row) {
+        for (size_t column = 0u; column < outputs[0]->dims[2]; ++column) {
+            if ((row != 0u && row_stride > SIZE_MAX / row) ||
+                    (column != 0u && column_stride > SIZE_MAX / column)) {
+                return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+            }
+            const size_t row_offset = row * row_stride;
+            const size_t column_offset = column * column_stride;
+            if (row_offset > SIZE_MAX - column_offset ||
+                    row_offset + column_offset >= source_count) {
+                return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+            }
+            destination[row * outputs[0]->dims[2] + column] =
+                source[row_offset + column_offset];
+        }
+    }
+    (void)destination_count;
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+uint32_t quantized_runtime_float_pool_1d_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    if (descriptor == NULL || inputs == NULL || outputs == NULL ||
+            inputs[0] == NULL || outputs[0] == NULL ||
+            inputs[0]->data == NULL || outputs[0]->data == NULL ||
+            outputs[0]->dims[1] > inputs[0]->dims[1]) {
+        return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const uint8_t *const record = (const uint8_t *)descriptor;
+    const uint8_t mode = record[0];
+    const uint8_t window = record[1];
+    const uint8_t stride = record[2];
+    const uint8_t padding = record[3];
+    if (mode > 1u || window == 0u) {
+        return mode > 1u ? QUANTIZED_RUNTIME_STATUS_OK
+                         : QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+    }
+    const float *const source = (const float *)inputs[0]->data;
+    float *const destination = (float *)outputs[0]->data;
+    const size_t source_columns = inputs[0]->dims[2];
+    const size_t destination_columns = outputs[0]->dims[2];
+    for (size_t output_column = 0u;
+            output_column < destination_columns; ++output_column) {
+        if (output_column != 0u && stride > SIZE_MAX / output_column) {
+            return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+        }
+        const size_t unpadded = output_column * stride;
+        const size_t start = unpadded < padding ? 0u : unpadded - padding;
+        size_t end = unpadded > SIZE_MAX - window
+            ? source_columns : unpadded + window;
+        if (end > padding) {
+            end -= padding;
+        } else {
+            end = 0u;
+        }
+        if (end > source_columns) {
+            end = source_columns;
+        }
+        for (size_t row = 0u; row < outputs[0]->dims[1]; ++row) {
+            float value = mode == 0u ? -3.4028234663852886e38f : 0.0f;
+            size_t count = 0u;
+            for (size_t column = start; column < end; ++column) {
+                const float sample = source[row * source_columns + column];
+                if (mode == 0u) {
+                    if (value < sample) {
+                        value = sample;
+                    }
+                } else {
+                    value += sample;
+                }
+                ++count;
+            }
+            if (mode == 1u) {
+                if (count == 0u) {
+                    return QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+                }
+                value /= (float)count;
+            }
+            destination[row * destination_columns + output_column] = value;
+        }
+    }
+    return QUANTIZED_RUNTIME_STATUS_OK;
+}
+
 uint32_t quantized_runtime_two_output_thirds_slice(
     const quantized_runtime *rt, quantized_runtime_pool *pool,
     const quantized_runtime_tensor *input_a,
@@ -3032,6 +3532,59 @@ uintptr_t quantized_runtime_executor_vector_30534(const quantized_runtime *rt) {
         return (uintptr_t)0;
     }
     return rt->providers.vector_30534;
+}
+
+static uint32_t quantized_runtime_recurrent_stage_adapter(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs) {
+    return quantized_runtime_recurrent_execute_target(
+        (const quantized_runtime_recurrent_descriptor *)descriptor,
+        inputs, outputs);
+}
+
+quantized_runtime_stage_execute_fn
+quantized_runtime_source_stage_token_resolve(
+    void *context, uint32_t target_token) {
+    (void)context;
+#define QUANTIZED_RUNTIME_RESOLVE_STAGE(function_)                         \
+    do {                                                                  \
+        if (target_token == (uint32_t)(uintptr_t)&(function_)) {          \
+            return &(function_);                                          \
+        }                                                                 \
+    } while (false)
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(quantized_runtime_pooling_execute);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(
+        quantized_runtime_i8_conv1d_execute_target);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(
+        quantized_runtime_float_dense_execute_target);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(
+        quantized_runtime_float_conv1d_execute_target);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(quantized_runtime_float_add_execute);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(quantized_runtime_int8_to_float_execute);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(quantized_runtime_float_multiply_execute);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(
+        quantized_runtime_float_concatenate_two_execute);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(
+        quantized_runtime_float_strided_copy_2d_execute);
+    QUANTIZED_RUNTIME_RESOLVE_STAGE(quantized_runtime_float_pool_1d_execute);
+    if (target_token == (uint32_t)(uintptr_t)
+            &quantized_runtime_recurrent_execute_target) {
+        return quantized_runtime_recurrent_stage_adapter;
+    }
+#undef QUANTIZED_RUNTIME_RESOLVE_STAGE
+    /* These three checked implementations require a runtime argument and
+     * are selected by the plan builder's explicit adapter cases. */
+    return NULL;
+}
+
+quantized_runtime_multi_stage_execute_fn
+quantized_runtime_source_multi_stage_token_resolve(
+    void *context, uint32_t target_token) {
+    (void)context;
+    return target_token == (uint32_t)(uintptr_t)
+               &quantized_runtime_int8_concatenate_execute
+        ? quantized_runtime_int8_concatenate_execute : NULL;
 }
 
 uintptr_t quantized_runtime_softmax_executor_vector(void) {
@@ -3438,6 +3991,312 @@ bool quantized_runtime_gomore_sleep_graph_family_nonzero_build(
     if (model_end_address != NULL) {
         *model_end_address = target_cursor;
     }
+    return true;
+}
+
+static void gomore_executor_pack_recurrent(
+    uint8_t *destination,
+    const quantized_runtime_recurrent_descriptor *descriptor) {
+    zero_bytes(destination, 0x18u);
+    store_u32_le(destination + 0x00u, descriptor->units);
+    store_u32_le(destination + 0x04u,
+                 (uint32_t)(uintptr_t)descriptor->state);
+    store_u32_le(destination + 0x08u,
+                 descriptor->input_weights_offset);
+    store_u32_le(destination + 0x0Cu,
+                 descriptor->recurrent_weights_offset);
+    store_u32_le(destination + 0x10u, descriptor->bias_offset);
+    store_u32_le(destination + 0x14u, (uint32_t)descriptor->execute);
+}
+
+void quantized_runtime_gomore_executor_graph_destroy(
+    quantized_runtime_gomore_executor_graph *graph,
+    quantized_runtime_release_fn release, void *release_context) {
+    if (graph == NULL) {
+        return;
+    }
+    if (release != NULL) {
+        for (size_t index = 0u; index < 3u; ++index) {
+            if (graph->recurrent[index].state != NULL) {
+                release(release_context, graph->recurrent[index].state);
+            }
+        }
+    }
+    zero_bytes((uint8_t *)graph, sizeof(*graph));
+}
+
+bool quantized_runtime_gomore_executor_graph_build(
+    const quantized_runtime *rt,
+    quantized_runtime_gomore_executor_graph *graph, uint32_t mode,
+    const uint32_t *model_words, size_t model_word_count,
+    uint32_t model_base_address, const uint32_t *mode0_remap_words,
+    size_t mode0_remap_word_count, uint32_t mode0_remap_base_address,
+    const uint8_t tail_schema[8], quantized_runtime_allocate_fn allocate,
+    quantized_runtime_release_fn release, void *allocator_context,
+    size_t *consumed_words, uint32_t *model_end_address) {
+    if (consumed_words != NULL) {
+        *consumed_words = 0u;
+    }
+    if (model_end_address != NULL) {
+        *model_end_address = model_base_address;
+    }
+    if (graph == NULL || model_words == NULL || tail_schema == NULL ||
+            allocate == NULL || release == NULL || mode > 1u) {
+        return false;
+    }
+    const size_t expected_words = mode == 0u
+        ? QUANTIZED_RUNTIME_GOMORE_EXECUTOR_MODE0_MODEL_WORDS
+        : QUANTIZED_RUNTIME_GOMORE_EXECUTOR_MODE1_MODEL_WORDS;
+    if (model_word_count < expected_words ||
+            (model_base_address & 3u) != 0u ||
+            model_base_address > UINT32_MAX - expected_words * 4u ||
+            (mode == 0u &&
+             (mode0_remap_words == NULL || mode0_remap_word_count < 2u ||
+              (mode0_remap_base_address & 3u) != 0u))) {
+        return false;
+    }
+
+    zero_bytes((uint8_t *)graph, sizeof(*graph));
+    graph->mode = mode;
+    graph->runtime = rt;
+    graph->byte_count = mode == 0u
+        ? QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MODE0_BYTES
+        : QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MODE1_BYTES;
+    store_u32_le(graph->bytes, mode);
+
+    quantized_runtime_gomore_sleep_graph prefix;
+    size_t prefix_words = 0u;
+    uint32_t target_cursor = model_base_address;
+    const bool prefix_ok = mode == 0u
+        ? quantized_runtime_gomore_sleep_graph_family_zero_build(
+              rt, &prefix, model_words, model_word_count,
+              model_base_address, &prefix_words, &target_cursor)
+        : quantized_runtime_gomore_sleep_graph_family_nonzero_build(
+              rt, mode, &prefix, model_words, model_word_count,
+              model_base_address, &prefix_words, &target_cursor);
+    if (!prefix_ok) {
+        quantized_runtime_gomore_executor_graph_destroy(
+            graph, release, allocator_context);
+        return false;
+    }
+    move_bytes_local(graph->bytes + 4u, prefix.bytes, sizeof(prefix.bytes));
+    size_t consumed = prefix_words;
+
+    const uint32_t recurrent_units[3] = {
+        8u, tail_schema[0], tail_schema[2],
+    };
+    const uint32_t recurrent_inputs[3] = {
+        4u, tail_schema[1], tail_schema[3],
+    };
+    const size_t recurrent_offsets[3] = {0x1BCu, 0x1D8u, 0x1F0u};
+    for (size_t index = 0u; index < 3u; ++index) {
+        const uint32_t before = target_cursor;
+        if (!quantized_runtime_recurrent_layer_descriptor_construct(
+                rt, &graph->recurrent[index], recurrent_units[index],
+                recurrent_inputs[index], &target_cursor, allocate,
+                allocator_context)) {
+            quantized_runtime_gomore_executor_graph_destroy(
+                graph, release, allocator_context);
+            return false;
+        }
+        consumed += (size_t)(target_cursor - before) / 4u;
+        gomore_executor_pack_recurrent(
+            graph->bytes + recurrent_offsets[index],
+            &graph->recurrent[index]);
+    }
+    store_u32_le(graph->bytes + 0x1D4u,
+                 (uint32_t)quantized_runtime_executor_vector_36dcc(rt));
+
+    const uint32_t dense_a[2] = {tail_schema[4], tail_schema[6]};
+    const uint32_t dense_b[2] = {tail_schema[5], tail_schema[7]};
+    const uint8_t dense_flag_b[2] = {1u, 0u};
+    const size_t dense_offsets[2] = {0x208u, 0x220u};
+    for (size_t index = 0u; index < 2u; ++index) {
+        const uint32_t before = target_cursor;
+        quantized_runtime_descriptor_record_construct(
+            rt, graph->bytes + dense_offsets[index], dense_a[index],
+            dense_b[index], 1u, dense_flag_b[index], &target_cursor, 0.0f);
+        consumed += (size_t)(target_cursor - before) / 4u;
+    }
+
+    if (consumed != expected_words ||
+            target_cursor != model_base_address + expected_words * 4u) {
+        quantized_runtime_gomore_executor_graph_destroy(
+            graph, release, allocator_context);
+        return false;
+    }
+
+    if (mode == 0u) {
+        const uint32_t count = mode0_remap_words[0];
+        if (count == 0u || mode0_remap_word_count <= count ||
+                mode0_remap_base_address > UINT32_MAX -
+                    mode0_remap_word_count * 4u) {
+            quantized_runtime_gomore_executor_graph_destroy(
+                graph, release, allocator_context);
+            return false;
+        }
+        const size_t stride = (mode0_remap_word_count - 1u) / count;
+        if (stride == 0u) {
+            quantized_runtime_gomore_executor_graph_destroy(
+                graph, release, allocator_context);
+            return false;
+        }
+        for (size_t index = 0u; index < count; ++index) {
+            const size_t entry = index * stride;
+            if (entry + 1u >= mode0_remap_word_count) {
+                quantized_runtime_gomore_executor_graph_destroy(
+                    graph, release, allocator_context);
+                return false;
+            }
+            const size_t destination_word =
+                (size_t)mode0_remap_words[entry + 1u] + 0x8Eu;
+            const uint64_t destination_offset = destination_word * 4u;
+            const uint64_t source_address =
+                (uint64_t)mode0_remap_base_address + (entry + 2u) * 4u;
+            if (destination_offset + 4u > graph->byte_count ||
+                    source_address > UINT32_MAX) {
+                quantized_runtime_gomore_executor_graph_destroy(
+                    graph, release, allocator_context);
+                return false;
+            }
+            store_u32_le(graph->bytes + destination_offset,
+                         (uint32_t)source_address);
+        }
+    }
+
+    if (consumed_words != NULL) {
+        *consumed_words = consumed;
+    }
+    if (model_end_address != NULL) {
+        *model_end_address = target_cursor;
+    }
+    return true;
+}
+
+static bool gomore_executor_plan_stage(
+    const quantized_runtime_gomore_executor_graph *graph,
+    quantized_runtime_stage *stage, size_t descriptor_offset,
+    size_t token_offset, quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context, bool required) {
+    if (descriptor_offset + 1u > graph->byte_count ||
+            token_offset + 4u > graph->byte_count) {
+        return false;
+    }
+    const uint32_t token = load_u32_le(graph->bytes + token_offset);
+    stage->descriptor = graph->bytes + descriptor_offset;
+    stage->execute = token != 0u ? resolve(resolve_context, token) : NULL;
+    if (stage->execute != NULL) {
+        /* See the complete-owner resolver path above. */
+    } else if (token == (uint32_t)(uintptr_t)
+            &quantized_runtime_float_to_int8_quantize) {
+        stage->runtime = graph->runtime;
+        stage->adapter = QUANTIZED_RUNTIME_STAGE_QUANTIZE_WITH_RUNTIME;
+    } else if (token == (uint32_t)(uintptr_t)
+                   &quantized_runtime_int8_add_execute) {
+        stage->runtime = graph->runtime;
+        stage->adapter = QUANTIZED_RUNTIME_STAGE_INT8_ADD_WITH_RUNTIME;
+    } else if (token == (uint32_t)(uintptr_t)
+                   &quantized_runtime_float_softmax_execute) {
+        stage->runtime = graph->runtime;
+        stage->adapter = QUANTIZED_RUNTIME_STAGE_SOFTMAX_WITH_RUNTIME;
+    }
+    return !required || stage_callable(stage);
+}
+
+bool quantized_runtime_gomore_executor_plan_build(
+    const quantized_runtime_gomore_executor_graph *graph,
+    quantized_runtime_goodix_executor_plan *plan,
+    quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context) {
+    if (graph == NULL || plan == NULL || resolve == NULL || graph->mode > 1u ||
+            graph->byte_count != (graph->mode == 0u
+                ? QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MODE0_BYTES
+                : QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MODE1_BYTES) ||
+            load_u32_le(graph->bytes) != graph->mode) {
+        return false;
+    }
+    zero_bytes((uint8_t *)plan, sizeof(*plan));
+    plan->mode = graph->mode;
+
+    static const uint16_t descriptor_offsets[
+        QUANTIZED_RUNTIME_GOODIX_EXECUTOR_STAGE_COUNT] = {
+        0x004u, 0x010u, 0x028u, 0x07Cu, 0x08Cu, 0x0E4u,
+        0x0F4u, 0x094u, 0x144u, 0x148u, 0x1ACu, 0x1BCu,
+        0x1D4u, 0x1D8u, 0x1F0u, 0x208u, 0x220u, 0x238u,
+    };
+    static const uint16_t token_offsets[
+        QUANTIZED_RUNTIME_GOODIX_EXECUTOR_STAGE_COUNT] = {
+        0x00Cu, 0x024u, 0x02Cu, 0x088u, 0x090u, 0x0F0u,
+        0x0F8u, 0x094u, 0x144u, 0x15Cu, 0x1B8u, 0x1D0u,
+        0x1D4u, 0x1ECu, 0x204u, 0x21Cu, 0x234u, 0x238u,
+    };
+    for (size_t index = 0u;
+            index < QUANTIZED_RUNTIME_GOODIX_EXECUTOR_STAGE_COUNT; ++index) {
+        if (index == 17u && graph->mode != 2u) {
+            continue;
+        }
+        const bool required = index != 17u &&
+            (index != 0u || graph->mode == 0u);
+        if (!gomore_executor_plan_stage(
+                graph, &plan->stages[index], descriptor_offsets[index],
+                token_offsets[index], resolve, resolve_context, required)) {
+            zero_bytes((uint8_t *)plan, sizeof(*plan));
+            return false;
+        }
+    }
+    plan->stages[11].descriptor = &graph->recurrent[0];
+    plan->stages[13].descriptor = &graph->recurrent[1];
+    plan->stages[14].descriptor = &graph->recurrent[2];
+
+    static const uint16_t three_descriptors[3][3] = {
+        {0x030u, 0x048u, 0x060u},
+        {0x098u, 0x0B0u, 0x0C8u},
+        {0x160u, 0x178u, 0x190u},
+    };
+    static const uint16_t three_tokens[3][3] = {
+        {0x044u, 0x05Cu, 0x074u},
+        {0x0ACu, 0x0C4u, 0x0DCu},
+        {0x174u, 0x18Cu, 0x1A4u},
+    };
+    quantized_runtime_three_stage_plan *three_plans[3] = {
+        &plan->quantized_49, &plan->quantized_24, &plan->float_12,
+    };
+    for (size_t group = 0u; group < 3u; ++group) {
+        for (size_t index = 0u; index < 3u; ++index) {
+            if (!gomore_executor_plan_stage(
+                    graph, &three_plans[group]->stages[index],
+                    three_descriptors[group][index],
+                    three_tokens[group][index], resolve, resolve_context,
+                    true)) {
+                zero_bytes((uint8_t *)plan, sizeof(*plan));
+                return false;
+            }
+        }
+    }
+
+    static const uint16_t five_descriptors[5] = {
+        0x0FCu, 0x104u, 0x10Cu, 0x124u, 0x13Cu,
+    };
+    static const uint16_t five_tokens[5] = {
+        0x100u, 0x108u, 0x120u, 0x138u, 0x140u,
+    };
+    quantized_runtime_five_stage_plan *five = graph->mode == 0u
+        ? &plan->five_stage_27 : &plan->five_stage_32;
+    for (size_t index = 0u; index < 5u; ++index) {
+        if (!gomore_executor_plan_stage(
+                graph, &five->stages[index], five_descriptors[index],
+                five_tokens[index], resolve, resolve_context, true)) {
+            zero_bytes((uint8_t *)plan, sizeof(*plan));
+            return false;
+        }
+    }
+
+    plan->head_width_mode0 = graph->recurrent[0].units;
+    plan->head_width_other = graph->recurrent[0].units;
+    plan->tail_widths[0] = graph->recurrent[1].units;
+    plan->tail_widths[1] = graph->recurrent[2].units;
+    plan->tail_widths[2] = load_u32_le(graph->bytes + 0x208u);
+    plan->tail_widths[3] = load_u32_le(graph->bytes + 0x220u);
     return true;
 }
 

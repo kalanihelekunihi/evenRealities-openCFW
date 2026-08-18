@@ -6,6 +6,7 @@
  */
 
 #include "goodix_primitives/goodix_primitives.h"
+#include "model_data/r1_model_data.h"
 
 static uint32_t goodix_primitives_float_bits(float value);
 static float goodix_primitives_float_from_bits(uint32_t bits);
@@ -27,6 +28,16 @@ _Static_assert(sizeof(goodix_primitives_nadt_channel_accumulator) == 24u,
                "NADT channel accumulator must retain its 24-byte ABI");
 _Static_assert(sizeof(goodix_primitives_hr_extrema_tracker) == 48u,
                "GH_HR extrema tracker must retain its 48-byte ABI");
+_Static_assert(sizeof(goodix_primitives_hrv_work_a) == 0x30u,
+               "GH_HRV +0x6C work record must remain 0x30 bytes");
+_Static_assert(sizeof(goodix_primitives_hrv_work_b) == 0x2B8u,
+               "GH_HRV +0x70 work record must remain 0x2B8 bytes");
+_Static_assert(offsetof(goodix_primitives_hrv_work_b, records) == 0x08u,
+               "GH_HRV decision records begin at +0x08");
+_Static_assert(offsetof(goodix_primitives_hrv_work_b, record_count) == 0x288u,
+               "GH_HRV decision count remains at +0x288");
+_Static_assert(offsetof(goodix_primitives_hrv_work_b, baseline_count) == 0x2A0u,
+               "GH_HRV baseline count remains at +0x2A0");
 _Static_assert(sizeof(goodix_primitives_spo2_report_analysis) == 36u,
                "GH_SPO2 report analysis must retain its 36-byte ABI");
 _Static_assert(offsetof(goodix_primitives_spo2_report_analysis, score) == 12u,
@@ -970,9 +981,11 @@ bool goodix_primitives_hr_weighted_feature_update(
             !goodix_primitives_counted_history_valid(
                 &state->weighted_history) ||
             (state->mode < UINT32_C(4) &&
-             (state->mode_coefficients[state->mode] == NULL ||
+             (state->mode_coefficients[state->mode] == NULL &&
+              state->mode_coefficient_words[state->mode] == NULL)) ||
+            (state->mode < UINT32_C(4) &&
               state->mode_coefficient_counts[state->mode] <
-                  state->centered_history.capacity))) {
+                  state->centered_history.capacity)) {
         return false;
     }
     *emitted = false;
@@ -1048,12 +1061,18 @@ bool goodix_primitives_hr_weighted_feature_update(
     if (state->mode < UINT32_C(4)) {
         const float *const coefficients =
             state->mode_coefficients[state->mode];
+        const uint32_t *const coefficient_words =
+            state->mode_coefficient_words[state->mode];
         const uint32_t count = state->centered_history.count;
         for (uint32_t offset = 0u; offset < count; ++offset) {
             const uint32_t value_index = count - UINT32_C(1) - offset;
+            const float coefficient = coefficients != NULL
+                ? coefficients[offset]
+                : goodix_primitives_float_from_bits(
+                    coefficient_words[offset]);
             weighted += goodix_primitives_float_from_bits(
                 state->centered_history.values[value_index]) *
-                coefficients[offset];
+                coefficient;
         }
     }
     if (!goodix_primitives_counted_word_history_push(
@@ -1245,7 +1264,7 @@ static bool goodix_primitives_hr_process_quality_median(
     return true;
 }
 
-bool goodix_primitives_hr_process(
+bool goodix_primitives_hrv_process(
     const goodix_primitives_hr_process_input *input,
     const goodix_primitives_hr_process_plan *plan,
     goodix_primitives_hr_process_state *state,
@@ -1353,7 +1372,8 @@ bool goodix_primitives_hr_process(
     if (!goodix_primitives_hr_candidate_window_select(
             &state->candidate_selector, plan->candidate_records,
             plan->candidate_record_count, plan->candidate_lower_bound,
-            plan->candidate_upper_bound, (int32_t)state->adjustment_age,
+            plan->candidate_upper_bound,
+            (int32_t)state->candidate_warmup_count,
             plan->candidate_warmup_limit, plan->candidate_scale,
             &selection)) {
         return false;
@@ -1401,7 +1421,7 @@ bool goodix_primitives_hr_process(
     const float reference =
         state->decision_reference_position * 1000.0f /
         (float)state->sample_rate;
-    if (reference != 0.0f && state->adjustment_age > 5u &&
+    if (reference != 0.0f && state->candidate_selector.call_count > 5u &&
             state->decision_reference_mode == 1) {
         const float first_ratio = (float)output[0] / reference - 1.0f;
         const float first_difference =
@@ -1431,6 +1451,16 @@ bool goodix_primitives_hr_process(
     }
     (void)selected_sample;
     return true;
+}
+
+bool goodix_primitives_hr_process(
+    const goodix_primitives_hr_process_input *input,
+    const goodix_primitives_hr_process_plan *plan,
+    goodix_primitives_hr_process_state *state,
+    goodix_primitives_hr_process_workspace *workspace,
+    int32_t output[6]) {
+    return goodix_primitives_hrv_process(
+        input, plan, state, workspace, output);
 }
 
 bool goodix_primitives_running_triplet_update(
@@ -6736,9 +6766,10 @@ static float goodix_primitives_nadt_preprocess_adjust(
     return value;
 }
 
-int32_t goodix_primitives_nadt_preprocess_execute(
+int32_t goodix_primitives_spo2_calc(
     const goodix_primitives_nadt_preprocess_plan *plan,
-    const void *source, goodix_primitives_nadt_preprocess_state *state,
+    const goodix_primitives_spo2_calc_input *source,
+    goodix_primitives_nadt_preprocess_state *state,
     goodix_primitives_nadt_preprocess_workspace *workspace,
     uint32_t *output_words, size_t output_word_count) {
     if (state == NULL || !state->initialized) {
@@ -6833,6 +6864,16 @@ int32_t goodix_primitives_nadt_preprocess_execute(
     (void)goodix_primitives_nadt_preprocess_call(
         plan, GOODIX_PRIMITIVES_NADT_PREPROCESS_OUTPUT_BUILD, &frame);
     return status;
+}
+
+int32_t goodix_primitives_nadt_preprocess_execute(
+    const goodix_primitives_nadt_preprocess_plan *plan,
+    const void *source, goodix_primitives_nadt_preprocess_state *state,
+    goodix_primitives_nadt_preprocess_workspace *workspace,
+    uint32_t *output_words, size_t output_word_count) {
+    return goodix_primitives_spo2_calc(
+        plan, (const goodix_primitives_spo2_calc_input *)source, state,
+        workspace, output_words, output_word_count);
 }
 
 bool goodix_primitives_nadt_alternate_state_classify(
@@ -8477,16 +8518,23 @@ bool goodix_primitives_spo2_channel_records_assemble(
     }
 
     const size_t value_count = (size_t)source->channel_count * 3u;
+    const size_t presence_bytes = (value_count + 7u) / 8u;
     if ((value_count != 0u && (source->presence_bytes == NULL ||
                               source->encoded_values == NULL)) ||
-            source->presence_byte_count < value_count ||
-            source->encoded_value_count < value_count) {
+            source->presence_byte_count < presence_bytes ||
+            source->encoded_value_count < value_count ||
+            (source->integrity_presence != NULL &&
+             source->integrity_presence_count < value_count)) {
         return false;
     }
 
     uint8_t differing_count = 0u;
     for (size_t index = 0u; index < value_count; ++index) {
-        if (source->presence_bytes[index] != 0u) {
+        const bool integrity_enabled = source->integrity_presence != NULL
+            ? source->integrity_presence[index] != 0u
+            : goodix_primitives_msb_first_bit(
+                  source->presence_bytes, index);
+        if (integrity_enabled) {
             const bool differs = goodix_primitives_transformed_differs(
                 source->encoded_values[index], integrity_transform);
             differing_count = (uint8_t)(differing_count + (uint8_t)differs);
@@ -8967,6 +9015,307 @@ static bool goodix_primitives_spo2_process_flag(
     return (input->enable_flags[index / 8u] >> (7u - index % 8u) & 1u) != 0u;
 }
 
+static void goodix_primitives_hba_cascade_bind(
+    goodix_primitives_biquad_cascade *cascade,
+    const goodix_primitives_pair_buffer *buffer,
+    const goodix_primitives_biquad_coefficients coefficients[4]) {
+    *cascade = (goodix_primitives_biquad_cascade){
+        .stage_count = buffer->count,
+        .states = (goodix_primitives_biquad_state *)buffer->records,
+        .state_count = buffer->count,
+        .coefficients = coefficients,
+        .coefficient_count = 4u,
+    };
+}
+
+static void goodix_primitives_hba_i16_window_bind(
+    goodix_primitives_i16_window *window,
+    const goodix_primitives_buffer_descriptor *descriptor) {
+    *window = (goodix_primitives_i16_window){
+        .values = descriptor->data,
+        .count = descriptor->count,
+        .capacity = descriptor->capacity,
+    };
+}
+
+static void goodix_primitives_hba_float_window_bind(
+    goodix_primitives_decimated_float_window *window,
+    const goodix_primitives_float_descriptor *descriptor) {
+    *window = (goodix_primitives_decimated_float_window){
+        .values = descriptor->data,
+        .count = descriptor->count,
+        .capacity = descriptor->capacity,
+        .period = 1u,
+    };
+}
+
+static void goodix_primitives_hba_byte_window_bind(
+    goodix_primitives_byte_window *window,
+    const goodix_primitives_extended_descriptor *descriptor) {
+    *window = (goodix_primitives_byte_window){
+        .values = descriptor->data,
+        .count = descriptor->count,
+        .capacity = descriptor->capacity,
+    };
+}
+
+static void goodix_primitives_hba_runtime_sync_plan(
+    goodix_primitives_hba_runtime *runtime) {
+    for (size_t lane = 0u; lane < 3u; ++lane) {
+        runtime->plan.deviation_channels[lane].count =
+            runtime->stream_state.motion_packed[lane].count;
+    }
+    runtime->plan.deviation_channels[3].count =
+        runtime->stream_state.motion_packed[3].count;
+}
+
+/* 0x0005CEA8: the selector-six graph is an in-place workspace transform.
+ * Stock copied the input word to the output word before dispatch; the HBA
+ * caller aliases both buffers, so the native reconstruction dispatches the
+ * same source-owned workspace for both arguments. */
+static int32_t goodix_primitives_hba_workspace_process(
+    void *context, float *workspace, size_t workspace_count) {
+    goodix_primitives_hba_runtime *runtime = context;
+    if (runtime == NULL || workspace == NULL || workspace_count == 0u ||
+            runtime->context_owner == NULL ||
+            runtime->context_owner->primary == NULL ||
+            runtime->plan.operations == NULL) {
+        return 1;
+    }
+    goodix_primitives_hr_primary_context *const primary =
+        runtime->context_owner->primary;
+    int32_t result = 0;
+    if (!goodix_primitives_dispatch_indexed_operation(
+            (uint32_t *)primary->graph_selector_6,
+            runtime->plan.operations, primary->graph_mode,
+            (uintptr_t)workspace, primary->graph_enabled,
+            (uintptr_t)workspace, (uintptr_t)0, &result)) {
+        return 1;
+    }
+    return result;
+}
+
+bool goodix_primitives_hba_runtime_bind(
+    goodix_primitives_hr_context_owner *context_owner,
+    const goodix_primitives_hba_runtime_bindings *bindings,
+    goodix_primitives_hba_runtime *runtime) {
+    if (context_owner == NULL || context_owner->primary == NULL ||
+            context_owner->secondary == NULL || bindings == NULL ||
+            bindings->integrity_transform == NULL ||
+            bindings->quantized == NULL || bindings->operations == NULL ||
+            bindings->elapsed_state == NULL ||
+            bindings->exponential == NULL ||
+            bindings->logarithm_base_10 == NULL ||
+            bindings->square_root == NULL || runtime == NULL ||
+            runtime->bound) {
+        return false;
+    }
+    *runtime = (goodix_primitives_hba_runtime){0};
+    runtime->context_owner = context_owner;
+    for (size_t stage = 0u; stage < 4u; ++stage) {
+        const size_t word = R1_GOODIX_HBA_FILTER_WORD_OFFSET + stage * 5u;
+        runtime->filter_coefficients[stage] =
+            (goodix_primitives_biquad_coefficients){
+                .input = goodix_primitives_float_from_bits(
+                    r1_goodix_hba_words[word]),
+                .delayed_input = goodix_primitives_float_from_bits(
+                    r1_goodix_hba_words[word + 1u]),
+                .second_delayed_input = goodix_primitives_float_from_bits(
+                    r1_goodix_hba_words[word + 2u]),
+                .feedback = goodix_primitives_float_from_bits(
+                    r1_goodix_hba_words[word + 3u]),
+                .second_feedback = goodix_primitives_float_from_bits(
+                    r1_goodix_hba_words[word + 4u]),
+            };
+    }
+
+    goodix_primitives_hr_primary_context *const primary =
+        context_owner->primary;
+    goodix_primitives_hr_secondary_context *const secondary =
+        context_owner->secondary;
+    for (size_t lane = 0u; lane < 4u; ++lane) {
+        goodix_primitives_hba_cascade_bind(
+            &runtime->stream_state.channel_filters[lane],
+            &secondary->pair_buffers[lane], runtime->filter_coefficients);
+        goodix_primitives_hba_i16_window_bind(
+            &runtime->stream_state.channel_packed[lane],
+            &secondary->i16_buffers[lane]);
+    }
+    /* Stock 0x3113C order: filters 4..6 are XYZ, 7 is the decimal
+     * residual, and 8 is the decimated magnitude. */
+    for (size_t lane = 0u; lane < 3u; ++lane) {
+        goodix_primitives_hba_cascade_bind(
+            &runtime->stream_state.motion_filters[lane],
+            &secondary->pair_buffers[4u + lane],
+            runtime->filter_coefficients);
+        goodix_primitives_hba_i16_window_bind(
+            &runtime->stream_state.motion_packed[lane],
+            &secondary->i16_buffers[4u + lane]);
+    }
+    goodix_primitives_hba_cascade_bind(
+        &runtime->stream_state.residual_filter,
+        &secondary->pair_buffers[7], runtime->filter_coefficients);
+    goodix_primitives_hba_i16_window_bind(
+        &runtime->stream_state.residual_packed,
+        &secondary->i16_buffers[8]);
+    goodix_primitives_hba_cascade_bind(
+        &runtime->stream_state.motion_filters[3],
+        &secondary->pair_buffers[8], runtime->filter_coefficients);
+    goodix_primitives_hba_i16_window_bind(
+        &runtime->stream_state.motion_packed[3],
+        &secondary->i16_buffers[7]);
+
+    for (size_t lane = 0u; lane < 4u; ++lane) {
+        goodix_primitives_hba_float_window_bind(
+            &runtime->stream_state.motion_history[lane],
+            &secondary->float_histories[lane]);
+    }
+    for (size_t lane = 0u; lane < 3u; ++lane) {
+        const goodix_primitives_float_descriptor *const descriptor =
+            &secondary->float_histories[4u + lane];
+        runtime->stream_state.motion_sorted[lane] = descriptor->data;
+        runtime->stream_state.motion_sorted_count[lane] = descriptor->count;
+        runtime->stream_state.motion_sorted_capacity[lane] =
+            descriptor->capacity;
+    }
+    for (size_t lane = 0u; lane < 4u; ++lane) {
+        runtime->stream_state.scale_accumulators[lane] =
+            primary->initial_baselines[lane];
+        runtime->stream_state.channel_discontinuity_limits[lane] =
+            (int32_t)primary->initial_accumulators[lane];
+    }
+    runtime->stream_workspace = (goodix_primitives_hba_stream_workspace){
+        .sort_scratch = runtime->sort_scratch,
+        .sort_scratch_capacity = 20u,
+    };
+    runtime->stream_plan = (goodix_primitives_spo2_stream_plan){
+        .scale_rate = (uint32_t)primary->terminal_default,
+        .minimum_scale = INT32_C(112500),
+        .residual_axis_scale = 0.0001f,
+        .motion_window_size = secondary->float_histories[0].capacity,
+        .motion_spread_factor = 8,
+        .logarithm_base_10 = bindings->logarithm_base_10,
+        .square_root = bindings->square_root,
+    };
+    runtime->configuration = (goodix_primitives_hba_process_configuration){
+        .sample_frequency = primary->sample_rate,
+        .processing_cadence = primary->samples_per_25hz_phase,
+        .expected_valid_channels = primary->minimum_batch,
+        .report_selected_value = primary->secondary_window,
+        .maximum_selection = (int32_t)primary->primary_window,
+        .selection_delay = (int32_t)primary->candidate_limit,
+        .score_scale = primary->owner_word,
+    };
+    if (runtime->configuration.processing_cadence == 0u ||
+            runtime->stream_plan.motion_window_size == 0u ||
+            primary->graph_selector_0 == (uintptr_t)0 ||
+            primary->graph_selector_1 == (uintptr_t)0 ||
+            primary->graph_selector_6 == (uintptr_t)0) {
+        *runtime = (goodix_primitives_hba_runtime){0};
+        return false;
+    }
+
+    runtime->timed_dispatch = (goodix_primitives_timed_dispatch_context){
+        .elapsed_state = bindings->elapsed_state,
+        .mode_buffers = bindings->mode_buffers,
+        .mode = primary->terminal_flags[0],
+        .dispatch_record = (uint32_t *)primary->graph_selector_0,
+        .field_64 = primary->graph_mode,
+        .field_68 = primary->graph_enabled,
+    };
+    runtime->score_dispatch = (goodix_primitives_spo2_score_context){
+        .recent_inputs = runtime->recent_score_inputs,
+        .recent_input_count = 4u,
+        .dispatch = {
+            .dispatch_record = (uint32_t *)primary->graph_selector_1,
+            .field_64 = primary->graph_mode,
+            .field_68 = primary->graph_enabled,
+        },
+    };
+
+    runtime->plan = (goodix_primitives_hba_process_plan){
+        .integrity_transform = bindings->integrity_transform,
+        .stream_plan = &runtime->stream_plan,
+        .triplicate_disabled = 1u,
+        .workspace_process = goodix_primitives_hba_workspace_process,
+        .workspace_process_context = runtime,
+        .quantized = bindings->quantized,
+        .timed_dispatch = &runtime->timed_dispatch,
+        .score_dispatch = &runtime->score_dispatch,
+        .operations = bindings->operations,
+        .exponential = bindings->exponential,
+        .logarithm_base_10 = bindings->logarithm_base_10,
+    };
+    for (size_t bank = 0u; bank < 7u; ++bank) {
+        const goodix_primitives_i16_window *const packed = bank < 4u
+            ? &runtime->stream_state.channel_packed[bank]
+            : &runtime->stream_state.motion_packed[bank - 4u];
+        runtime->plan.packed_banks[bank] =
+            (const uint16_t *)packed->values;
+    }
+    for (size_t lane = 0u; lane < 4u; ++lane) {
+        runtime->plan.deviation_channels[lane].values =
+            (const uint16_t *)runtime->stream_state.motion_packed[lane].values;
+        runtime->plan.spectral_packed_channels[lane] =
+            (const uint16_t *)runtime->stream_state.channel_packed[lane].values;
+        runtime->plan.spectral_packed_channel_counts[lane] =
+            runtime->stream_state.channel_packed[lane].capacity;
+    }
+
+    runtime->state.invocation_count = primary->periodic_interval;
+    runtime->state.sample_count = primary->processed_count;
+    runtime->state.elapsed_seconds = primary->pending_count;
+    runtime->state.report_selected_candidate =
+        primary->primary_window_low_byte;
+    runtime->state.stream = &runtime->stream_state;
+    goodix_primitives_hba_byte_window_bind(
+        &runtime->state.analyzer.primary_candidates,
+        &primary->short_history_a);
+    goodix_primitives_hba_float_window_bind(
+        &runtime->state.analyzer.concentrations,
+        &primary->float_history_a);
+    goodix_primitives_hba_byte_window_bind(
+        &runtime->state.analyzer.reference_candidates,
+        &primary->short_history_b);
+    goodix_primitives_hba_float_window_bind(
+        &runtime->state.analyzer.metric_history,
+        &primary->float_history_b);
+    runtime->state.analyzer.reference_limit = 50u;
+    goodix_primitives_hba_runtime_sync_plan(runtime);
+    runtime->bound = true;
+    return true;
+}
+
+uint32_t goodix_primitives_hba_runtime_process(
+    goodix_primitives_hba_runtime *runtime,
+    const goodix_primitives_hba_process_input *input,
+    goodix_primitives_hba_process_output *output) {
+    if (runtime == NULL || !runtime->bound || input == NULL ||
+            output == NULL || runtime->context_owner == NULL ||
+            runtime->context_owner->primary == NULL) {
+        return UINT32_C(1);
+    }
+    goodix_primitives_hba_runtime_sync_plan(runtime);
+    const uint32_t status = goodix_primitives_hba_process(
+        &runtime->configuration, input, output, &runtime->plan,
+        &runtime->state, &runtime->stream_workspace, &runtime->workspace);
+    goodix_primitives_hr_primary_context *const primary =
+        runtime->context_owner->primary;
+    primary->periodic_interval = runtime->state.invocation_count;
+    primary->processed_count = runtime->state.sample_count;
+    primary->pending_count = runtime->state.elapsed_seconds;
+    return status;
+}
+
+bool goodix_primitives_hba_runtime_unbind(
+    goodix_primitives_hba_runtime *runtime) {
+    if (runtime == NULL || !runtime->bound) {
+        return false;
+    }
+    *runtime = (goodix_primitives_hba_runtime){0};
+    return true;
+}
+
 static bool goodix_primitives_spo2_process_dispatch_valid(
     const uint32_t *record,
     const goodix_primitives_indexed_operation_fn *operations) {
@@ -9024,7 +9373,7 @@ static void goodix_primitives_spo2_process_assemble_sample(
     workspace->stream_mode = input->mode;
 }
 
-uint32_t goodix_primitives_spo2_process(
+uint32_t goodix_primitives_hba_process(
     const goodix_primitives_spo2_process_configuration *configuration,
     const goodix_primitives_spo2_process_input *input,
     goodix_primitives_spo2_process_output *output,
@@ -9244,12 +9593,17 @@ uint32_t goodix_primitives_spo2_process(
         workspace->saved_model_row[index] = workspace->model_values[index];
     }
 
-    float *packed_binding = workspace->packed;
+    const goodix_primitives_graph_executor_input graph_input = {
+        .workspace = workspace->packed,
+        .tail_input = workspace->deviations,
+        .workspace_count = GOODIX_PRIMITIVES_SPO2_PACKED_WORKSPACE_VALUES,
+        .tail_input_count = 4u,
+    };
     float scaled_result = 0.0f;
     const size_t dispatch_slot =
         (size_t)goodix_primitives_filter_code(input->filter_code[0]);
     if (goodix_primitives_timed_dispatch_scaled_output(
-            (uintptr_t)&packed_binding, dispatch_slot, &scaled_result,
+            (uintptr_t)&graph_input, dispatch_slot, &scaled_result,
             plan->timed_dispatch, plan->operations) != UINT32_C(0)) {
         return UINT32_C(1);
     }
@@ -9305,6 +9659,19 @@ uint32_t goodix_primitives_spo2_process(
     ++state->invocation_count;
     ++state->sample_count;
     return UINT32_C(0);
+}
+
+uint32_t goodix_primitives_spo2_process(
+    const goodix_primitives_spo2_process_configuration *configuration,
+    const goodix_primitives_spo2_process_input *input,
+    goodix_primitives_spo2_process_output *output,
+    const goodix_primitives_spo2_process_plan *plan,
+    goodix_primitives_spo2_process_state *state,
+    goodix_primitives_spo2_stream_workspace *stream_workspace,
+    goodix_primitives_spo2_process_workspace *workspace) {
+    return goodix_primitives_hba_process(
+        configuration, input, output, plan, state, stream_workspace,
+        workspace);
 }
 
 bool goodix_primitives_strict_local_peak_max(
@@ -10278,11 +10645,17 @@ bool goodix_primitives_spo2_dispatch_logistic_score(
             context->workspace[index];
     }
 
+    const goodix_primitives_graph_executor_input graph_input = {
+        .workspace = context->workspace,
+        .tail_input = context->recent_inputs,
+        .workspace_count = context->workspace_count,
+        .tail_input_count = context->recent_input_count,
+    };
     float *output_pointer = output;
     int32_t result = 0;
     const bool dispatched = goodix_primitives_dispatch_indexed_operation(
         context->dispatch.dispatch_record, operations,
-        context->dispatch.field_64, (uintptr_t)context,
+        context->dispatch.field_64, (uintptr_t)&graph_input,
         context->dispatch.field_68, (uintptr_t)&output_pointer,
         (uintptr_t)0, &result);
     for (size_t index = 0u; index < HISTORY_COUNT; ++index) {
@@ -11841,7 +12214,7 @@ uint32_t goodix_primitives_hrv_context_create(
     if (created->owned_6c != NULL) {
         (void)goodix_primitives_byte_fill(
             0u, (uint8_t *)created->owned_6c, sizeof(*created->owned_6c));
-        created->owned_6c->mode = 2u;
+        created->owned_6c->direction_state = 2;
     }
     if (created->owned_6c != NULL) {
         created->owned_70 = allocate(provider_context,
@@ -11854,14 +12227,15 @@ uint32_t goodix_primitives_hrv_context_create(
     }
     (void)goodix_primitives_byte_fill(
         0u, (uint8_t *)created->owned_70, sizeof(*created->owned_70));
-    created->owned_70->channels = 20u;
+    created->owned_70->record_capacity = 20u;
     created->owned_70->factor = 7u;
-    created->owned_70->quarter_sample_count =
+    created->owned_70->minimum_interval =
         (int32_t)(created->sample_count / 4u);
-    created->owned_70->double_sample_count = created->sample_count << 1;
-    created->owned_70->block_size = 16u;
-    created->owned_70->scale_a = 1.0f;
-    created->owned_70->scale_b = 1.0f;
+    created->owned_70->maximum_interval =
+        (int32_t)(created->sample_count << 1);
+    created->owned_70->baseline_capacity = 16;
+    created->owned_70->baseline_mean[1] = 1.0f;
+    created->owned_70->baseline_mean[2] = 1.0f;
     created->scaled_sample_bytes = created->sample_count << 2;
     created->sample_count_copy = created->sample_count;
     created->calibration_e8 = (float)configuration->calibration[0] / 10000.0f;
@@ -11869,6 +12243,306 @@ uint32_t goodix_primitives_hrv_context_create(
     created->calibration_f4 = (float)configuration->calibration[2] / 10000.0f;
     created->calibration_f0 = (float)configuration->calibration[3] / 10000.0f;
     return GOODIX_PRIMITIVES_HRV_OK;
+}
+
+static bool goodix_primitives_hrv_runtime_sample_invalid(
+    void *context, int32_t sample) {
+    (void)context;
+    return goodix_primitives_integrity_invalid((uint32_t)sample);
+}
+
+static void goodix_primitives_hrv_runtime_copy_event_to_decision(
+    goodix_primitives_hrv_runtime *runtime) {
+    const goodix_primitives_hr_extrema_tracker *const tracker =
+        &runtime->state.extrema_tracker;
+    runtime->decision_state.source.position = tracker->peak_position;
+    runtime->decision_state.source.primary_first = tracker->rise_amplitude;
+    runtime->decision_state.source.primary_second = tracker->fall_amplitude;
+    runtime->decision_state.source.auxiliary_first = tracker->rise_span;
+    runtime->decision_state.source.auxiliary_second = tracker->fall_span;
+    runtime->decision_state.source.ready = (uint8_t)tracker->fall_complete;
+    runtime->decision_state.source.update_count =
+        (uint32_t)tracker->sample_index;
+}
+
+static void goodix_primitives_hrv_runtime_copy_event_from_decision(
+    goodix_primitives_hrv_runtime *runtime) {
+    goodix_primitives_hr_extrema_tracker *const tracker =
+        &runtime->state.extrema_tracker;
+    tracker->peak_position = runtime->decision_state.source.position;
+    tracker->rise_amplitude = runtime->decision_state.source.primary_first;
+    tracker->fall_amplitude = runtime->decision_state.source.primary_second;
+    tracker->rise_span = runtime->decision_state.source.auxiliary_first;
+    tracker->fall_span = runtime->decision_state.source.auxiliary_second;
+    tracker->fall_complete = runtime->decision_state.source.ready;
+    tracker->sample_index =
+        (int32_t)runtime->decision_state.source.update_count;
+}
+
+static void goodix_primitives_hrv_runtime_refresh_candidates(
+    goodix_primitives_hrv_runtime *runtime) {
+    const uint32_t count = runtime->decision_state.record_count;
+    for (uint32_t index = 0u; index < count; ++index) {
+        const goodix_primitives_hr_decision_record *const current =
+            &runtime->decision_state.records[index];
+        goodix_primitives_hr_candidate_record *const candidate =
+            &runtime->candidate_records[index];
+        candidate->tag = index == 0u ? 0u :
+            (uint32_t)runtime->decision_state.records[index - 1u].tag;
+        candidate->position = current->position;
+        candidate->value = current->center;
+        candidate->alternate_tag = (uint32_t)current->tag;
+        candidate->suppressed = current->flag;
+    }
+    for (uint32_t index = count; index < 20u; ++index) {
+        runtime->candidate_records[index] =
+            (goodix_primitives_hr_candidate_record){0};
+    }
+    runtime->plan.candidate_record_count = count;
+    runtime->state.candidate_warmup_count =
+        runtime->decision_state.baseline.count < 0 ? 0u :
+        (uint32_t)runtime->decision_state.baseline.count;
+    runtime->plan.candidate_scale = runtime->decision_state.baseline.mean[2];
+    runtime->state.decision_reference_position =
+        runtime->decision_state.baseline.mean[2];
+    runtime->state.decision_reference_mode = runtime->decision_state.mode;
+}
+
+static bool goodix_primitives_hrv_runtime_decision(void *context) {
+    goodix_primitives_hrv_runtime *runtime = context;
+    if (runtime == NULL || !runtime->bound) {
+        return false;
+    }
+    goodix_primitives_hrv_runtime_copy_event_to_decision(runtime);
+    runtime->decision_state.timestamp = runtime->state.window_index;
+    if (!goodix_primitives_hr_decision_update(
+            &runtime->decision_context)) {
+        return false;
+    }
+    goodix_primitives_hrv_runtime_copy_event_from_decision(runtime);
+    goodix_primitives_hrv_runtime_refresh_candidates(runtime);
+    return true;
+}
+
+static void goodix_primitives_hrv_runtime_commit(
+    goodix_primitives_hrv_runtime *runtime) {
+    goodix_primitives_hrv_context *const context = runtime->context;
+    goodix_primitives_hrv_work_b *const work = context->owned_70;
+    *context->owned_6c = runtime->state.extrema_tracker;
+    for (uint32_t index = 0u; index < work->record_capacity; ++index) {
+        work->records[index] = runtime->decision_state.records[index];
+    }
+    work->record_count = runtime->decision_state.record_count;
+    work->mode = runtime->decision_state.mode;
+    work->latch = runtime->decision_state.latch;
+    work->minimum_interval = runtime->decision_state.minimum_interval;
+    work->maximum_interval = runtime->decision_state.maximum_interval;
+    work->stale_count = runtime->decision_state.stale_count;
+    work->baseline_count = runtime->decision_state.baseline.count;
+    work->baseline_capacity = runtime->decision_state.baseline.capacity;
+    for (size_t index = 0u; index < 3u; ++index) {
+        work->baseline_mean[index] = runtime->decision_state.baseline.mean[index];
+    }
+    work->baseline_timestamp = runtime->decision_state.baseline.timestamp;
+    context->process_count = runtime->state.process_count;
+    context->window_index = runtime->state.window_index;
+    context->outlier_count = runtime->state.outlier_count;
+    context->tail_outlier_count = runtime->state.tail_outlier_count;
+    context->diagnostic_variation_percent =
+        runtime->decision_state.diagnostic_variation_percent;
+    context->diagnostic_primary_mean =
+        runtime->decision_state.diagnostic_primary_mean;
+    context->diagnostic_auxiliary_mean =
+        runtime->decision_state.diagnostic_auxiliary_mean;
+    context->diagnostic_interval_mean =
+        runtime->decision_state.diagnostic_interval_mean;
+    for (size_t index = 0u; index < 6u; ++index) {
+        context->previous_output[index] = runtime->state.previous_output[index];
+    }
+}
+
+bool goodix_primitives_hrv_runtime_bind(
+    goodix_primitives_hrv_context *context,
+    goodix_primitives_float_unary_fn square_root,
+    goodix_primitives_hrv_runtime *runtime) {
+    if (context == NULL || context->sample_count < 25u ||
+            context->sample_count > INT32_MAX || context->owned_6c == NULL ||
+            context->owned_70 == NULL || square_root == NULL ||
+            runtime == NULL || runtime->bound ||
+            context->owned_70->record_capacity != 20u ||
+            context->owned_70->record_count > 20u) {
+        return false;
+    }
+    for (size_t index = 0u;
+            index < GOODIX_PRIMITIVES_HRV_SUBOBJECT_COUNT; ++index) {
+        if (context->subobjects[index] == NULL ||
+                context->subobject_capacities[index] == 0u) {
+            return false;
+        }
+    }
+    (void)goodix_primitives_byte_fill(
+        0u, (uint8_t *)runtime, sizeof(*runtime));
+    runtime->context = context;
+    runtime->state.sample_rate = context->sample_count;
+    runtime->state.process_count = context->process_count;
+    runtime->state.window_index = context->window_index;
+    runtime->state.signal_history = (goodix_primitives_counted_word_history){
+        context->subobjects[GOODIX_HRV_SUB_74], 0u,
+        (uint32_t)context->subobject_capacities[GOODIX_HRV_SUB_74], 0u,
+    };
+    runtime->state.motion_history = (goodix_primitives_counted_word_history){
+        context->subobjects[GOODIX_HRV_SUB_84], 0u,
+        (uint32_t)context->subobject_capacities[GOODIX_HRV_SUB_84], 0u,
+    };
+    runtime->state.quality_history = (goodix_primitives_counted_word_history){
+        context->subobjects[GOODIX_HRV_SUB_94], 0u,
+        (uint32_t)context->subobject_capacities[GOODIX_HRV_SUB_94], 0u,
+    };
+    goodix_primitives_hr_weighted_feature_state *const weighted =
+        &runtime->state.weighted_feature;
+    weighted->input_rate = (int32_t)context->sample_count;
+    weighted->mode = context->mode;
+    weighted->midpoint_window = (int32_t)context->window_a;
+    weighted->raw_history = (goodix_primitives_counted_word_history){
+        context->subobjects[GOODIX_HRV_SUB_1C], 0u,
+        (uint32_t)context->subobject_capacities[GOODIX_HRV_SUB_1C], 0u,
+    };
+    weighted->periodic_history = (goodix_primitives_counted_word_history){
+        context->subobjects[GOODIX_HRV_SUB_2C], 0u,
+        (uint32_t)context->subobject_capacities[GOODIX_HRV_SUB_2C], 0u,
+    };
+    weighted->mean_history = (goodix_primitives_counted_word_history){
+        context->subobjects[GOODIX_HRV_SUB_3C], 0u,
+        (uint32_t)context->subobject_capacities[GOODIX_HRV_SUB_3C], 0u,
+    };
+    weighted->centered_history = (goodix_primitives_counted_word_history){
+        context->subobjects[GOODIX_HRV_SUB_4C], 0u,
+        (uint32_t)context->subobject_capacities[GOODIX_HRV_SUB_4C], 0u,
+    };
+    weighted->weighted_history = (goodix_primitives_counted_word_history){
+        context->subobjects[GOODIX_HRV_SUB_5C], 0u,
+        (uint32_t)context->subobject_capacities[GOODIX_HRV_SUB_5C], 0u,
+    };
+    static const size_t coefficient_offsets[4] = {
+        R1_GOODIX_HRV_MODE_0_WORD_OFFSET,
+        R1_GOODIX_HRV_MODE_1_WORD_OFFSET,
+        R1_GOODIX_HRV_MODE_2_WORD_OFFSET,
+        R1_GOODIX_HRV_MODE_3_WORD_OFFSET,
+    };
+    static const size_t coefficient_counts[4] = {
+        R1_GOODIX_HRV_MODE_0_WORD_COUNT,
+        R1_GOODIX_HRV_MODE_1_WORD_COUNT,
+        R1_GOODIX_HRV_MODE_2_WORD_COUNT,
+        R1_GOODIX_HRV_MODE_3_WORD_COUNT,
+    };
+    for (size_t index = 0u; index < 4u; ++index) {
+        weighted->mode_coefficient_words[index] =
+            &r1_goodix_hrv_weighted_words[coefficient_offsets[index]];
+        weighted->mode_coefficient_counts[index] = coefficient_counts[index];
+    }
+    runtime->state.extrema_tracker = *context->owned_6c;
+    runtime->state.extrema_signal_mode = (int32_t)context->identity;
+    runtime->state.extrema_interpolation_mode = context->mode;
+    runtime->state.extrema_position_base = (int32_t)context->scaled_sample_bytes;
+    runtime->state.extrema_period = (int32_t)context->sample_count_copy;
+    runtime->state.extrema_workspace = &runtime->extrema_workspace;
+    for (size_t index = 0u; index < 4u; ++index) {
+        runtime->trough_curve.x[index] = goodix_primitives_float_from_bits(
+            r1_goodix_hrv_extrema_curve_words[index]);
+        runtime->peak_curve.x[index] = goodix_primitives_float_from_bits(
+            r1_goodix_hrv_extrema_curve_words[index + 4u]);
+    }
+    runtime->state.trough_curve = &runtime->trough_curve;
+    runtime->state.peak_curve = &runtime->peak_curve;
+    runtime->state.candidate_selector.position_origin =
+        (int32_t)context->scaled_sample_bytes;
+    runtime->state.candidate_selector.position_step =
+        (int32_t)context->sample_count_copy;
+    runtime->state.quality_reference = context->calibration_f4;
+    runtime->state.quality_threshold_first = (int32_t)context->outlier_count;
+    runtime->state.quality_threshold_second =
+        (int32_t)context->tail_outlier_count;
+    runtime->state.outlier_count = context->outlier_count;
+    runtime->state.tail_outlier_count = context->tail_outlier_count;
+    for (size_t index = 0u; index < 6u; ++index) {
+        runtime->state.previous_output[index] = context->previous_output[index];
+    }
+
+    goodix_primitives_hrv_work_b *const work = context->owned_70;
+    runtime->decision_state.records = work->records;
+    runtime->decision_state.record_count = work->record_count;
+    runtime->decision_state.record_capacity = work->record_capacity;
+    runtime->decision_state.mode = work->mode;
+    runtime->decision_state.latch = work->latch;
+    runtime->decision_state.minimum_interval = work->minimum_interval;
+    runtime->decision_state.maximum_interval = work->maximum_interval;
+    runtime->decision_state.stale_count = work->stale_count;
+    runtime->decision_state.baseline.count = work->baseline_count;
+    runtime->decision_state.baseline.capacity = work->baseline_capacity;
+    for (size_t index = 0u; index < 3u; ++index) {
+        runtime->decision_state.baseline.mean[index] = work->baseline_mean[index];
+    }
+    runtime->decision_state.baseline.timestamp = work->baseline_timestamp;
+    runtime->decision_state.primary_history =
+        (goodix_primitives_counted_word_history){
+            context->subobjects[GOODIX_HRV_SUB_A8], 0u, 10u, 0u,
+        };
+    runtime->decision_state.auxiliary_history =
+        (goodix_primitives_counted_word_history){
+            context->subobjects[GOODIX_HRV_SUB_B8], 0u, 10u, 0u,
+        };
+    runtime->decision_state.interval_history =
+        (goodix_primitives_counted_word_history){
+            context->subobjects[GOODIX_HRV_SUB_C8], 0u, 10u, 0u,
+        };
+    runtime->decision_state.sample_rate = context->sample_count_copy;
+    runtime->decision_state.diagnostic_variation_percent =
+        context->diagnostic_variation_percent;
+    runtime->decision_state.diagnostic_primary_mean =
+        context->diagnostic_primary_mean;
+    runtime->decision_state.diagnostic_auxiliary_mean =
+        context->diagnostic_auxiliary_mean;
+    runtime->decision_state.diagnostic_interval_mean =
+        context->diagnostic_interval_mean;
+    runtime->decision_context = (goodix_primitives_hr_decision_context){
+        &runtime->decision_state, &runtime->decision_workspace, square_root,
+    };
+    runtime->workspace.quality_sort_scratch = runtime->quality_sort_scratch;
+    runtime->workspace.quality_sort_capacity = 11u;
+    runtime->workspace.signal_scratch = runtime->signal_scratch;
+    runtime->workspace.signal_scratch_capacity = 125u;
+    runtime->plan.sample_invalid =
+        goodix_primitives_hrv_runtime_sample_invalid;
+    runtime->plan.decision_core = goodix_primitives_hrv_runtime_decision;
+    runtime->plan.decision_context = runtime;
+    runtime->plan.square_root = square_root;
+    runtime->plan.outlier_maximum_threshold = context->calibration_e8;
+    runtime->plan.outlier_minimum_threshold = context->calibration_ec;
+    runtime->plan.outlier_deviation_multiplier = context->calibration_f0;
+    runtime->plan.candidate_records = runtime->candidate_records;
+    runtime->plan.candidate_lower_bound = work->minimum_interval;
+    runtime->plan.candidate_upper_bound = work->maximum_interval;
+    runtime->plan.candidate_warmup_limit = work->baseline_capacity;
+    runtime->bound = true;
+    goodix_primitives_hrv_runtime_copy_event_to_decision(runtime);
+    goodix_primitives_hrv_runtime_refresh_candidates(runtime);
+    return true;
+}
+
+bool goodix_primitives_hrv_runtime_process(
+    goodix_primitives_hrv_runtime *runtime,
+    const goodix_primitives_hrv_process_input *input,
+    int32_t output[6]) {
+    if (runtime == NULL || !runtime->bound || input == NULL ||
+            output == NULL || runtime->context == NULL) {
+        return false;
+    }
+    const bool result = goodix_primitives_hrv_process(
+        input, &runtime->plan, &runtime->state, &runtime->workspace, output);
+    if (result) {
+        goodix_primitives_hrv_runtime_commit(runtime);
+    }
+    return result;
 }
 
 uint32_t goodix_primitives_hrv_initialize_for_sample_count(
@@ -11942,8 +12616,12 @@ int32_t goodix_primitives_release_context_pair(
     return 0;
 }
 
+uintptr_t goodix_primitives_quantized_concatenate_vector(void) {
+    return (uintptr_t)&quantized_runtime_int8_concatenate_execute;
+}
+
 uintptr_t goodix_primitives_release_context_pair_vector(void) {
-    return (uintptr_t)&goodix_primitives_release_context_pair;
+    return goodix_primitives_quantized_concatenate_vector();
 }
 
 float goodix_primitives_quartic_evaluate(
@@ -12921,5 +13599,959 @@ bool goodix_primitives_outer_session_create(
             session, release, provider_context);
         return false;
     }
+    return true;
+}
+
+static bool goodix_primitives_spo2_model_stage_configure(
+    goodix_primitives_spo2_model_stage *stage,
+    const quantized_runtime *quantized, const void *descriptor,
+    uint32_t token) {
+    if (stage == NULL || quantized == NULL || descriptor == NULL ||
+            token == 0u) {
+        return false;
+    }
+    *stage = (goodix_primitives_spo2_model_stage){0};
+    stage->stage.descriptor = descriptor;
+    stage->stage.execute = quantized_runtime_source_stage_token_resolve(
+        NULL, token);
+    if (stage->stage.execute != NULL) {
+        return true;
+    }
+    stage->stage.runtime = quantized;
+    if (token == (uint32_t)(uintptr_t)
+            &quantized_runtime_float_to_int8_quantize) {
+        stage->stage.adapter =
+            QUANTIZED_RUNTIME_STAGE_QUANTIZE_WITH_RUNTIME;
+    } else if (token == (uint32_t)(uintptr_t)
+                   &quantized_runtime_int8_add_execute) {
+        stage->stage.adapter =
+            QUANTIZED_RUNTIME_STAGE_INT8_ADD_WITH_RUNTIME;
+    } else if (token == (uint32_t)(uintptr_t)
+                   &quantized_runtime_float_softmax_execute) {
+        stage->stage.adapter =
+            QUANTIZED_RUNTIME_STAGE_SOFTMAX_WITH_RUNTIME;
+    } else {
+        return false;
+    }
+    return true;
+}
+
+static quantized_runtime_exec_tensor goodix_primitives_spo2_model_tensor(
+    const goodix_primitives_tensor_descriptor *source) {
+    return (quantized_runtime_exec_tensor){
+        .type_flag = source != NULL ? source->element_bytes : 0u,
+        .dims = {
+            source != NULL ? source->batches : 0u,
+            source != NULL ? source->rows : 0u,
+            source != NULL ? source->columns : 0u,
+        },
+        .data = source != NULL ? source->data : NULL,
+    };
+}
+
+static void goodix_primitives_spo2_model_operator(
+    void *context, goodix_primitives_tensor_binding inputs[2],
+    goodix_primitives_tensor_binding *output) {
+    goodix_primitives_spo2_model_stage *stage = context;
+    if (stage == NULL || inputs == NULL || output == NULL ||
+            inputs[0].descriptor == NULL || output->descriptor == NULL) {
+        if (stage != NULL) {
+            stage->last_status = QUANTIZED_RUNTIME_STATUS_BAD_ARGUMENT;
+        }
+        return;
+    }
+    quantized_runtime_exec_tensor input_tensors[4];
+    quantized_runtime_exec_tensor output_tensors[2];
+    quantized_runtime_exec_tensor *input_pointers[4] = {NULL};
+    quantized_runtime_exec_tensor *output_pointers[2] = {NULL};
+    size_t input_count = 0u;
+    for (size_t index = 0u; index < 2u; ++index) {
+        if (inputs[index].descriptor != NULL) {
+            input_tensors[input_count] =
+                goodix_primitives_spo2_model_tensor(inputs[index].descriptor);
+            input_pointers[input_count] = &input_tensors[input_count];
+            ++input_count;
+        }
+        if (inputs[index].auxiliary != (uintptr_t)0) {
+            input_tensors[input_count] = goodix_primitives_spo2_model_tensor(
+                (const goodix_primitives_tensor_descriptor *)
+                    inputs[index].auxiliary);
+            input_pointers[input_count] = &input_tensors[input_count];
+            ++input_count;
+        }
+    }
+    output_tensors[0] =
+        goodix_primitives_spo2_model_tensor(output->descriptor);
+    output_pointers[0] = &output_tensors[0];
+    if (output->auxiliary != (uintptr_t)0) {
+        output_tensors[1] = goodix_primitives_spo2_model_tensor(
+            (const goodix_primitives_tensor_descriptor *)output->auxiliary);
+        output_pointers[1] = &output_tensors[1];
+    }
+    stage->last_status = quantized_runtime_stage_invoke(
+        &stage->stage, input_pointers, output_pointers);
+}
+
+static bool goodix_primitives_spo2_model_node(
+    void *context,
+    const goodix_primitives_tensor_descriptor *const *inputs,
+    size_t input_count, goodix_primitives_tensor_descriptor *const *outputs,
+    size_t output_count) {
+    goodix_primitives_spo2_model_stage *stage = context;
+    if (stage == NULL || inputs == NULL || outputs == NULL ||
+            input_count == 0u || input_count > 2u || output_count != 1u ||
+            outputs[0] == NULL) {
+        return false;
+    }
+    quantized_runtime_exec_tensor input_tensors[2];
+    quantized_runtime_exec_tensor output_tensor =
+        goodix_primitives_spo2_model_tensor(outputs[0]);
+    quantized_runtime_exec_tensor *input_pointers[3] = {NULL};
+    quantized_runtime_exec_tensor *output_pointers[2] = {
+        &output_tensor, NULL,
+    };
+    for (size_t index = 0u; index < input_count; ++index) {
+        if (inputs[index] == NULL) {
+            return false;
+        }
+        input_tensors[index] =
+            goodix_primitives_spo2_model_tensor(inputs[index]);
+        input_pointers[index] = &input_tensors[index];
+    }
+    stage->last_status = quantized_runtime_stage_invoke(
+        &stage->stage, input_pointers, output_pointers);
+    return stage->last_status == QUANTIZED_RUNTIME_STATUS_OK;
+}
+
+static bool goodix_primitives_spo2_model_subgraph(
+    void *context, float *workspace, size_t workspace_count) {
+    goodix_primitives_nadt_generated_subgraph *subgraph = context;
+    if (subgraph == NULL) {
+        return false;
+    }
+    for (size_t index = 0u;
+            index < GOODIX_PRIMITIVES_NADT_SUBGRAPH_OPERATOR_COUNT; ++index) {
+        goodix_primitives_spo2_model_stage *stage =
+            subgraph->operator_contexts[index];
+        if (stage == NULL) {
+            return false;
+        }
+        stage->last_status = QUANTIZED_RUNTIME_STATUS_OK;
+    }
+    if (!goodix_primitives_nadt_generated_subgraph_execute(
+            subgraph, workspace, workspace_count)) {
+        return false;
+    }
+    for (size_t index = 0u;
+            index < GOODIX_PRIMITIVES_NADT_SUBGRAPH_OPERATOR_COUNT; ++index) {
+        const goodix_primitives_spo2_model_stage *stage =
+            subgraph->operator_contexts[index];
+        if (stage->last_status != QUANTIZED_RUNTIME_STATUS_OK) {
+            return false;
+        }
+    }
+    return true;
+}
+
+static bool goodix_primitives_spo2_model_plan_bind(
+    goodix_primitives_spo2_runtime *runtime) {
+    if (runtime == NULL || runtime->bindings.quantized == NULL ||
+            runtime->session == NULL || runtime->session->model.instance == NULL) {
+        return false;
+    }
+    quantized_runtime_goodix_model_instance *const instance =
+        runtime->session->model.instance;
+    static const uint16_t descriptor_offsets[
+        GOODIX_PRIMITIVES_NADT_SUBGRAPH_OPERATOR_COUNT] = {
+        0x000u, 0x00Cu, 0x024u, 0x02Cu, 0x044u, 0x05Cu, 0x074u,
+        0x084u, 0x08Cu, 0x0A4u, 0x0BCu, 0x0D4u, 0x0E4u, 0x0ECu,
+        0x0F0u, 0x108u, 0x120u, 0x138u, 0x150u,
+    };
+    static const uint16_t token_offsets[
+        GOODIX_PRIMITIVES_NADT_SUBGRAPH_OPERATOR_COUNT] = {
+        0x008u, 0x020u, 0x028u, 0x040u, 0x058u, 0x070u, 0x080u,
+        0x088u, 0x0A0u, 0x0B8u, 0x0D0u, 0x0E0u, 0x0E8u, 0x0ECu,
+        0x104u, 0x11Cu, 0x134u, 0x14Cu, 0x15Cu,
+    };
+    quantized_runtime_goodix_graph *graphs[2] = {
+        &instance->graph_b, &instance->graph_a,
+    };
+    for (size_t graph_index = 0u;
+            graph_index < GOODIX_PRIMITIVES_NADT_GRAPH_SUBGRAPH_COUNT;
+            ++graph_index) {
+        goodix_primitives_nadt_generated_subgraph *subgraph =
+            &runtime->model_subgraphs[graph_index];
+        *subgraph = (goodix_primitives_nadt_generated_subgraph){
+            .quantization_minimum = 0.0f,
+            .quantization_maximum = 1.0f,
+        };
+        for (size_t stage_index = 0u;
+                stage_index < GOODIX_PRIMITIVES_NADT_SUBGRAPH_OPERATOR_COUNT;
+                ++stage_index) {
+            uint8_t *const bytes = graphs[graph_index]->bytes;
+            goodix_primitives_spo2_model_stage *const stage =
+                &runtime->model_subgraph_stages[graph_index][stage_index];
+            if (!goodix_primitives_spo2_model_stage_configure(
+                    stage, runtime->bindings.quantized,
+                    bytes + descriptor_offsets[stage_index],
+                    goodix_primitives_load_u32_le(
+                        bytes + token_offsets[stage_index]))) {
+                return false;
+            }
+            subgraph->operators[stage_index] =
+                goodix_primitives_spo2_model_operator;
+            subgraph->operator_contexts[stage_index] = stage;
+        }
+    }
+
+    const void *outer_descriptors[
+        GOODIX_PRIMITIVES_NADT_GRAPH_STAGE_COUNT] = {
+        instance->descriptor_a, instance->descriptor_b,
+        &instance->softmax_execute, &instance->vector_36dcc,
+        &instance->recurrent, instance->descriptor_c,
+        instance->descriptor_d,
+    };
+    const uint32_t outer_tokens[
+        GOODIX_PRIMITIVES_NADT_GRAPH_STAGE_COUNT] = {
+        goodix_primitives_load_u32_le(instance->descriptor_a + 0x14u),
+        goodix_primitives_load_u32_le(instance->descriptor_b + 0x14u),
+        (uint32_t)instance->softmax_execute,
+        (uint32_t)instance->vector_36dcc,
+        (uint32_t)instance->recurrent.execute,
+        goodix_primitives_load_u32_le(instance->descriptor_c + 0x14u),
+        goodix_primitives_load_u32_le(instance->descriptor_d + 0x14u),
+    };
+    runtime->model_graph = (goodix_primitives_nadt_generated_graph){
+        .first_stage_values = 8u,
+        .shared_stage_values = 3u,
+        .recurrent_values = 16u,
+        .recurrent_state = instance->recurrent.state,
+        .recurrent_state_capacity = 16u,
+        .penultimate_values = 12u,
+        .output_values = 1u,
+    };
+    for (size_t index = 0u;
+            index < GOODIX_PRIMITIVES_NADT_GRAPH_SUBGRAPH_COUNT; ++index) {
+        runtime->model_graph.subgraphs[index] =
+            goodix_primitives_spo2_model_subgraph;
+        runtime->model_graph.subgraph_contexts[index] =
+            &runtime->model_subgraphs[index];
+    }
+    for (size_t index = 0u;
+            index < GOODIX_PRIMITIVES_NADT_GRAPH_STAGE_COUNT; ++index) {
+        goodix_primitives_spo2_model_stage *const stage =
+            &runtime->model_graph_stages[index];
+        if (!goodix_primitives_spo2_model_stage_configure(
+                stage, runtime->bindings.quantized,
+                outer_descriptors[index], outer_tokens[index])) {
+            return false;
+        }
+        runtime->model_graph.stages[index] =
+            goodix_primitives_spo2_model_node;
+        runtime->model_graph.stage_contexts[index] = stage;
+    }
+    return true;
+}
+
+static goodix_primitives_decimated_float_window
+goodix_primitives_spo2_float_window(
+    goodix_primitives_float_descriptor *descriptor) {
+    return (goodix_primitives_decimated_float_window){
+        .values = descriptor != NULL ? descriptor->data : NULL,
+        .count = descriptor != NULL ? descriptor->count : 0u,
+        .capacity = descriptor != NULL ? descriptor->capacity : 0u,
+        .period = 1u,
+        .phase = 0u,
+        .cursor = descriptor != NULL && descriptor->capacity != 0u
+            ? (uint16_t)(descriptor->count % descriptor->capacity) : 0u,
+        .sum = 0.0f,
+    };
+}
+
+static bool goodix_primitives_spo2_source_state_bind(
+    goodix_primitives_spo2_runtime *runtime) {
+    if (runtime == NULL || runtime->source_state == NULL ||
+            runtime->session == NULL ||
+            runtime->session->aggregate.session == NULL ||
+            runtime->session->aggregate.pair == NULL ||
+            runtime->session->record_pair.records == NULL ||
+            runtime->session->record_pair.scratch == NULL) {
+        return false;
+    }
+    goodix_primitives_spo2_source_state *const source =
+        runtime->source_state;
+    *source = (goodix_primitives_spo2_source_state){0};
+    source->assembled_output = (goodix_primitives_spo2_channel_output){
+        .records = (goodix_primitives_spo2_channel_record *)
+            runtime->assembled_records,
+        .record_capacity = 1u,
+    };
+    source->batch_state = (goodix_primitives_nadt_batch_state){
+        .channels = (goodix_primitives_nadt_channel_accumulator *)
+            runtime->session->record_pair.records,
+        .channel_capacity = 1u,
+    };
+
+    goodix_primitives_session_state *const session_state =
+        runtime->session->aggregate.session;
+    goodix_primitives_channel_state *const primary =
+        &session_state->primary;
+    goodix_primitives_channel_state *const secondary =
+        &session_state->secondary;
+    source->channel_state = (goodix_primitives_nadt_channel_state){
+        .primary = {
+            .feature = {
+                .input = goodix_primitives_spo2_float_window(
+                    &primary->history),
+                .smoothed = goodix_primitives_spo2_float_window(
+                    &primary->window),
+                .residual = goodix_primitives_spo2_float_window(
+                    &primary->filtered),
+                .residual_smoothed = goodix_primitives_spo2_float_window(
+                    &primary->scalar),
+                .feature_average = goodix_primitives_spo2_float_window(
+                    &primary->primary_buckets),
+            },
+            .pair_average = goodix_primitives_spo2_float_window(
+                &primary->secondary_buckets),
+        },
+        .secondary = {
+            .feature = {
+                .input = goodix_primitives_spo2_float_window(
+                    &secondary->history),
+                .smoothed = goodix_primitives_spo2_float_window(
+                    &secondary->window),
+                .residual = goodix_primitives_spo2_float_window(
+                    &secondary->filtered),
+                .residual_smoothed = goodix_primitives_spo2_float_window(
+                    &secondary->scalar),
+                .feature_average = goodix_primitives_spo2_float_window(
+                    &secondary->primary_buckets),
+            },
+            .pair_average = goodix_primitives_spo2_float_window(
+                &secondary->secondary_buckets),
+        },
+        .combined_ratio = goodix_primitives_spo2_float_window(
+            &session_state->tail_a),
+        .primary_ratio = goodix_primitives_spo2_float_window(
+            &session_state->tail_b),
+        .secondary_ratio = goodix_primitives_spo2_float_window(
+            &session_state->tail_c),
+        .half_primary_input = {
+            .values = session_state->tail_d.data,
+            .count = session_state->tail_d.count,
+            .capacity = session_state->tail_d.capacity,
+            .cursor = session_state->tail_d.capacity != 0u
+                ? (uint16_t)(session_state->tail_d.count %
+                             session_state->tail_d.capacity) : 0u,
+            .phase = 0u,
+            .period = 1u,
+        },
+    };
+    source->geometry_state = (goodix_primitives_nadt_geometry_state){
+        .magnitude_delta = {
+            .values = runtime->session->aggregate.auxiliary.full_rate.data,
+            .count = runtime->session->aggregate.auxiliary.full_rate.count,
+            .capacity =
+                runtime->session->aggregate.auxiliary.full_rate.capacity,
+        },
+        .angle_average = {
+            .values = runtime->session->aggregate.auxiliary.reduced_rate.data,
+            .count = runtime->session->aggregate.auxiliary.reduced_rate.count,
+            .capacity =
+                runtime->session->aggregate.auxiliary.reduced_rate.capacity,
+        },
+    };
+    source->output_record.history =
+        (goodix_primitives_decimated_float_window){
+            .values = source->output_history,
+            .capacity = 25u,
+            .period = 1u,
+        };
+    source->harmonic_selector =
+        (goodix_primitives_nadt_harmonic_selector_context){
+            .workspace = &source->harmonic_workspace,
+            .square_root = runtime->bindings.square_root,
+        };
+    for (size_t index = 0u; index < 2u; ++index) {
+        source->peak_histories[index].window =
+            (goodix_primitives_word_window){
+                .values = source->peak_history_values[index],
+                .capacity = 20u,
+            };
+    }
+    source->output_selection.rate_history =
+        (goodix_primitives_float_buffer){
+            .values = source->output_history,
+            .capacity = 25u,
+        };
+    source->signal_confidence.rate_history =
+        (goodix_primitives_float_buffer){
+            .values = source->signal_rate_history,
+            .capacity = 25u,
+        };
+    for (size_t index = 0u;
+            index < GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES; ++index) {
+        runtime->spectral_scales[index] = goodix_primitives_float_from_bits(
+            r1_goodix_spo2_spectral_words[
+                R1_GOODIX_SPO2_SPECTRAL_SCALE_WORD_OFFSET + index]);
+    }
+    return true;
+}
+
+static int32_t goodix_primitives_spo2_integrity_transform(int32_t value) {
+    return (int32_t)goodix_primitives_integrity_encode((uint32_t)value);
+}
+
+static int32_t goodix_primitives_spo2_source_stage_execute(
+    goodix_primitives_spo2_runtime *runtime,
+    goodix_primitives_outer_session *session,
+    goodix_primitives_nadt_preprocess_stage stage,
+    goodix_primitives_nadt_preprocess_frame *frame) {
+    if (runtime == NULL || session == NULL || frame == NULL ||
+            frame->source == NULL || frame->workspace == NULL ||
+            runtime->source_state == NULL) {
+        return 5;
+    }
+    const goodix_primitives_spo2_calc_input *const input = frame->source;
+    goodix_primitives_spo2_source_state *const state =
+        runtime->source_state;
+    switch (stage) {
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_ASSEMBLE: {
+            const size_t channel_count = input->total_channel_count;
+            const size_t value_count = channel_count * 3u;
+            if (channel_count == 0u || channel_count > UINT8_MAX ||
+                    input->enable_flags == NULL ||
+                    input->enable_flag_count < (value_count + 7u) / 8u ||
+                    input->channel_values == NULL ||
+                    input->channel_value_count < value_count ||
+                    input->gain_codes == NULL ||
+                    input->gain_code_count < value_count ||
+                    input->drive_currents == NULL ||
+                    input->drive_current_count < value_count) {
+                return 5;
+            }
+            runtime->channel_scaling =
+                (goodix_primitives_spo2_channel_scaling){
+                    .channel_count = (uint8_t)channel_count,
+                    .encoded_values = input->channel_values,
+                    .encoded_value_count = input->channel_value_count,
+                    .scale_codes = input->gain_codes,
+                    .scale_code_count = input->gain_code_count,
+                    .divisors = (const int16_t *)(const void *)
+                        input->drive_currents,
+                    .divisor_count = input->drive_current_count,
+                    .bit_width = input->bit_count,
+                    .scale_mode = input->chip_type,
+                    .encoding_mode = input->data_type,
+                    .scale_tables = {
+                        r1_goodix_spo2_scale_words +
+                            R1_GOODIX_SPO2_SCALE_MODE_0_WORD_OFFSET,
+                        r1_goodix_spo2_scale_words +
+                            R1_GOODIX_SPO2_SCALE_MODE_1_WORD_OFFSET,
+                        r1_goodix_spo2_scale_words +
+                            R1_GOODIX_SPO2_SCALE_MODE_2_WORD_OFFSET,
+                    },
+                    .scale_table_counts = {
+                        R1_GOODIX_SPO2_SCALE_MODE_0_WORD_COUNT,
+                        R1_GOODIX_SPO2_SCALE_MODE_1_WORD_COUNT,
+                        R1_GOODIX_SPO2_SCALE_MODE_2_WORD_COUNT,
+                    },
+                    .power = runtime->bindings.power,
+                };
+            const goodix_primitives_spo2_channel_source source = {
+                .channel_count = (uint8_t)channel_count,
+                .presence_bytes = input->enable_flags,
+                .presence_byte_count = input->enable_flag_count,
+                .encoded_values = input->channel_values,
+                .encoded_value_count = input->channel_value_count,
+                .metadata = {
+                    (uint32_t)input->acceleration[0],
+                    (uint32_t)input->acceleration[1],
+                    (uint32_t)input->acceleration[2],
+                },
+                .decode_context = &runtime->channel_scaling,
+            };
+            state->assembled_output.record_count = 0u;
+            bool mismatch = false;
+            if (!goodix_primitives_spo2_channel_records_assemble(
+                    &source, (int32_t)frame->state->process_count,
+                    frame->state->lane_count, &state->assembled_output,
+                    goodix_primitives_spo2_integrity_transform,
+                    goodix_primitives_spo2_channel_scale_decode,
+                    &mismatch)) {
+                return 5;
+            }
+            return mismatch ? 1 : 0;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_BATCH_ACCUMULATE: {
+            const goodix_primitives_nadt_batch_input batch_input = {
+                .sample_index = (uint32_t)state->assembled_output.sequence,
+                .selector = state->assembled_output.record_count,
+                .channels = (const goodix_primitives_nadt_channel_accumulator *)
+                    state->assembled_output.records,
+                .vector = {
+                    (int32_t)state->assembled_output.metadata[0],
+                    (int32_t)state->assembled_output.metadata[1],
+                    (int32_t)state->assembled_output.metadata[2],
+                },
+            };
+            const goodix_primitives_nadt_batch_configuration configuration = {
+                .channel_count = frame->state->lane_count,
+                .period = goodix_primitives_load_u32_le(
+                    session->processing_record + 76u),
+            };
+            int32_t result = 5;
+            return goodix_primitives_nadt_batch_accumulate(
+                &batch_input, &configuration, &state->batch_state, &result)
+                ? result : 5;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_FAILURE_ENCODE:
+            return goodix_primitives_nadt_record_encode(
+                &state->output_record, frame->output_words) ? 0 : 5;
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_ACCUMULATE: {
+            const goodix_primitives_nadt_channel_input channel = {
+                .primary = {
+                    state->batch_state.aggregate.primary[0],
+                    state->batch_state.aggregate.primary[1],
+                },
+                .secondary = {
+                    state->batch_state.aggregate.secondary[0],
+                    state->batch_state.aggregate.secondary[1],
+                },
+            };
+            const goodix_primitives_nadt_cadence_configuration cadence = {
+                goodix_primitives_load_u32_le(
+                    session->processing_record + 80u),
+                goodix_primitives_load_u32_le(
+                    session->processing_record + 84u),
+                goodix_primitives_load_u32_le(
+                    session->processing_record + 88u),
+                goodix_primitives_load_u32_le(
+                    session->processing_record + 92u),
+            };
+            int32_t result = 5;
+            return goodix_primitives_nadt_accumulation_execute(
+                &channel, state->batch_state.vector,
+                state->batch_state.batch_index, &cadence,
+                &state->channel_state, &state->geometry_state,
+                runtime->bindings.square_root,
+                runtime->bindings.arc_tangent, &result) ? result : 5;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_SPECTRAL_PREPARE: {
+            const goodix_primitives_decimated_float_window *const spectrum =
+                &state->channel_state.combined_ratio;
+            if (spectrum->count <
+                    GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES) {
+                return 5;
+            }
+            const goodix_primitives_nadt_spectral_source source = {
+                .spectrum_values = spectrum->values + spectrum->count -
+                    GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES,
+                .spectrum_count =
+                    GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES,
+                .outlier_multiplier_tenths =
+                    session->processing_record[0x40u],
+                .mode_one_scales = runtime->spectral_scales,
+                .scale_count = GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES,
+                .mode_one_factor = goodix_primitives_float_from_bits(
+                    r1_goodix_spo2_spectral_words[
+                        R1_GOODIX_SPO2_SPECTRAL_FACTOR_WORD_OFFSET]),
+            };
+            return goodix_primitives_nadt_spectral_peak_prepare(
+                &source, goodix_primitives_nadt_harmonic_candidates_select,
+                &state->harmonic_selector, runtime->bindings.square_root,
+                runtime->bindings.floor, &runtime->transient.spectral,
+                &state->spectral_result) ? 0 : 5;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_PRIMARY_PEAK_UPDATE:
+            return goodix_primitives_nadt_primary_ratio_peak_update(
+                &state->channel_state, (int32_t)frame->state->batch_index,
+                runtime->transient.peak.packed,
+                sizeof(runtime->transient.peak.packed),
+                runtime->transient.peak.columns,
+                sizeof(runtime->transient.peak.columns),
+                runtime->transient.peak.indices,
+                sizeof(runtime->transient.peak.indices) /
+                    sizeof(runtime->transient.peak.indices[0]),
+                state->peak_histories) ? 0 : 5;
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_SUMMARY_DISPATCH: {
+            const goodix_primitives_nadt_threshold_configuration
+                configuration = {
+                    .maximum_threshold = goodix_primitives_load_u32_le(
+                        session->processing_record + 0x24u),
+                    .minimum_threshold = goodix_primitives_load_u32_le(
+                        session->processing_record + 0x28u),
+                    .deviation_factor = goodix_primitives_load_u32_le(
+                        session->processing_record + 0x2Cu),
+                };
+            const goodix_primitives_buffer_descriptor primary = {
+                .data = state->geometry_state.magnitude_delta.values,
+                .count = state->geometry_state.magnitude_delta.count,
+                .capacity = state->geometry_state.magnitude_delta.capacity,
+            };
+            const goodix_primitives_buffer_descriptor secondary = {
+                .data = state->geometry_state.angle_average.values,
+                .count = state->geometry_state.angle_average.count,
+                .capacity = state->geometry_state.angle_average.capacity,
+            };
+            const goodix_primitives_nadt_summary_context context = {
+                .configuration = &configuration,
+                .primary = &primary,
+                .secondary = &secondary,
+            };
+            int32_t summary_result = 5;
+            if (!goodix_primitives_nadt_sample_summary_build(
+                    &context, runtime->bindings.square_root,
+                    &state->sample_summary, &summary_result)) {
+                return 5;
+            }
+            const goodix_primitives_event_pair_source events = {
+                .primary = (const int32_t *)(const void *)
+                    state->peak_histories[0].window.values,
+                .primary_count = state->peak_histories[0].window.count,
+                .primary_start = state->peak_histories[0].cursor,
+                .secondary = (const int32_t *)(const void *)
+                    state->peak_histories[1].window.values,
+                .secondary_count = state->peak_histories[1].window.count,
+                .secondary_start = state->peak_histories[1].cursor,
+            };
+            goodix_primitives_spo2_analysis_workspace *const analysis =
+                &runtime->transient.analysis;
+            if (!goodix_primitives_nadt_channel_analysis_execute(
+                    &state->channel_state, &events,
+                    (int32_t)frame->state->batch_index,
+                    session->processing_record[0x40u],
+                    analysis->primary_indices, analysis->secondary_indices,
+                    20u, analysis->sort,
+                    GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES,
+                    analysis->mask,
+                    GOODIX_PRIMITIVES_NADT_SPECTRAL_INPUT_VALUES,
+                    runtime->bindings.square_root,
+                    &state->channel_analysis)) {
+                return 5;
+            }
+            frame->workspace->summary_metric =
+                state->channel_analysis.primary_average;
+            return summary_result;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_QUALITY_UPDATE: {
+            const goodix_primitives_nadt_channel_quality_configuration
+                configuration = {
+                    .primary_level_threshold =
+                        goodix_primitives_load_u32_le(
+                            session->processing_record + 0x30u),
+                    .secondary_level_threshold =
+                        goodix_primitives_load_u32_le(
+                            session->processing_record + 0x34u),
+                    .metric_limit_percent =
+                        session->processing_record[0x41u],
+                    .quality_threshold =
+                        session->processing_record[0x42u],
+                    .flag_mask = session->processing_record[0x43u],
+                };
+            const goodix_primitives_nadt_channel_quality_summary summary = {
+                .primary_level = state->sample_summary.outlier_count,
+                .secondary_level = state->sample_summary.secondary_mean,
+            };
+            state->quality_record.primary_activity =
+                state->channel_analysis.primary_difference.
+                    nonuniform_mask_count;
+            state->quality_record.secondary_activity =
+                state->channel_analysis.secondary_difference.
+                    nonuniform_mask_count;
+            state->quality_record.primary_metric =
+                state->channel_analysis.primary_difference.relative_variance;
+            state->quality_record.secondary_metric =
+                state->channel_analysis.secondary_difference.relative_variance;
+            state->quality_record.primary_valid =
+                state->channel_analysis.primary_difference.
+                    sufficient_coverage != 0u;
+            state->quality_record.secondary_valid =
+                state->channel_analysis.secondary_difference.
+                    sufficient_coverage != 0u;
+            state->quality_record.quality =
+                (int8_t)state->channel_analysis.cosine_percent;
+            return goodix_primitives_nadt_channel_quality_update(
+                &configuration, &summary, &state->quality_record,
+                runtime->bindings.exponential) ? 0 : 5;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_TRANSITION_UPDATE:
+            return goodix_primitives_update_transition(
+                state->transition_record, sizeof(state->transition_record),
+                state->output_selection.transition_state,
+                state->quality_record.flags) ? 0 : 5;
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_INFERENCE: {
+            const goodix_primitives_decimated_float_window *const primary =
+                &state->channel_state.primary_ratio;
+            const goodix_primitives_decimated_float_window *const secondary =
+                &state->channel_state.secondary_ratio;
+            if (primary->count < GOODIX_PRIMITIVES_NADT_GRAPH_INPUT_VALUES ||
+                    secondary->count <
+                        GOODIX_PRIMITIVES_NADT_GRAPH_INPUT_VALUES ||
+                    !goodix_primitives_nadt_clip_normalize(
+                        secondary->values + secondary->count -
+                            GOODIX_PRIMITIVES_NADT_GRAPH_INPUT_VALUES,
+                        GOODIX_PRIMITIVES_NADT_GRAPH_INPUT_VALUES,
+                        runtime->transient.model,
+                        GOODIX_PRIMITIVES_NADT_INFERENCE_WORKSPACE_FLOATS)) {
+                return 5;
+            }
+            const float *const primary_tail = primary->values +
+                primary->count - GOODIX_PRIMITIVES_NADT_GRAPH_INPUT_VALUES;
+            return goodix_primitives_nadt_generated_graph_execute(
+                &runtime->model_graph, primary_tail,
+                GOODIX_PRIMITIVES_NADT_GRAPH_INPUT_VALUES,
+                runtime->transient.model,
+                GOODIX_PRIMITIVES_NADT_INFERENCE_WORKSPACE_FLOATS,
+                session->buffer_record != NULL &&
+                    session->buffer_record->flag_05 == 1u,
+                frame->workspace->inference_values,
+                frame->workspace->inference_capacity) ? 0 : 5;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_OUTPUT_QUALITY: {
+            const goodix_primitives_nadt_quality_configuration
+                configuration = {
+                    .rounded_value_threshold =
+                        session->processing_record[0x44u],
+                    .alternate_history_length =
+                        (int8_t)session->processing_record[0x47u],
+                    .default_history_length =
+                        (int8_t)session->processing_record[0x48u],
+                    .alternate_tolerance =
+                        session->processing_record[0x49u],
+                    .default_tolerance =
+                        session->processing_record[0x4Au],
+                };
+            return goodix_primitives_nadt_output_record_quality_update(
+                &configuration, state->quality_record.flags,
+                frame->workspace->adjusted_values[0],
+                &state->output_record) ? 0 : 5;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_OUTPUT_SELECT: {
+            const goodix_primitives_nadt_output_selection_configuration
+                configuration = {
+                    .rate_threshold = session->processing_record[0x44u],
+                    .initial_sample = session->processing_record[0x45u],
+                    .override_sample = session->processing_record[0x46u],
+                    .flags = session->processing_record[0x4Bu],
+                };
+            state->output_selection.rate_history.count =
+                state->output_record.history.count;
+            state->output_selection.signal_present =
+                state->transition_record[5];
+            state->output_selection.persistence =
+                state->transition_record[6];
+            frame->workspace->selected_rates[0] = 0.0f;
+            frame->workspace->selected_kinds[0] = 0u;
+            return goodix_primitives_nadt_output_state_select(
+                &configuration, frame->state->batch_index,
+                &state->output_selection,
+                frame->workspace->selected_rates,
+                frame->workspace->selected_kinds) ? 0 : 5;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_SIGNAL_CONFIDENCE: {
+            const goodix_primitives_decimated_float_window *const primary =
+                &state->channel_state.primary_ratio;
+            const goodix_primitives_decimated_float_window *const secondary =
+                &state->channel_state.secondary_ratio;
+            const goodix_primitives_nadt_dual_window_source source = {
+                .primary_values = primary->values,
+                .primary_count = primary->count,
+                .secondary_values = secondary->values,
+                .secondary_count = secondary->count,
+            };
+            if (!goodix_primitives_nadt_dual_window_features_extract(
+                    &source, runtime->bindings.square_root,
+                    &runtime->transient.dual_window,
+                    &state->signal_features)) {
+                return 5;
+            }
+            return goodix_primitives_nadt_signal_confidence_update(
+                &state->signal_features,
+                (const uint16_t *)(const void *)
+                    state->channel_state.half_primary_input.values,
+                state->channel_state.half_primary_input.count,
+                goodix_primitives_load_u32_le(
+                    session->processing_record + 0x1Cu) != 0u,
+                &state->signal_confidence,
+                &runtime->transient.signal_confidence,
+                runtime->bindings.square_root,
+                runtime->bindings.double_exponential,
+                &state->signal_diagnostics) ? 0 : 5;
+        }
+        case GOODIX_PRIMITIVES_NADT_PREPROCESS_OUTPUT_BUILD: {
+            const goodix_primitives_nadt_source_metrics source_metrics = {
+                .second_score = state->quality_record.secondary_metric,
+                .fourth_score = state->quality_record.primary_metric,
+                .first_score = (float)state->quality_record.score,
+                .third_score =
+                    (float)state->channel_analysis.cosine_percent,
+                .source_flags = state->quality_record.flags,
+                .category = frame->workspace->selected_kinds[0],
+            };
+            const bool reference_enabled = goodix_primitives_load_u32_le(
+                session->processing_record + 0x1Cu) == 1u;
+            const goodix_primitives_nadt_reference_metrics reference = {
+                .reference = state->signal_confidence.rolling_mean,
+                .scaled_reference = state->signal_confidence.probability,
+            };
+            return goodix_primitives_nadt_output_record_build(
+                reference_enabled, frame->workspace->selected_rates[0], 0,
+                &source_metrics, reference_enabled ? &reference : NULL,
+                frame->workspace->inference_values[0],
+                &state->output_record, frame->output_words) ? 0 : 5;
+        }
+        default:
+            return 5;
+    }
+}
+
+static int32_t goodix_primitives_spo2_runtime_stage_adapter(
+    void *opaque, goodix_primitives_nadt_preprocess_stage stage,
+    goodix_primitives_nadt_preprocess_frame *frame) {
+    goodix_primitives_spo2_runtime *runtime = opaque;
+    if (runtime == NULL || !runtime->bound || runtime->session == NULL ||
+            frame == NULL) {
+        return 5;
+    }
+    if (runtime->bindings.execute == NULL) {
+        return goodix_primitives_spo2_source_stage_execute(
+            runtime, runtime->session, stage, frame);
+    }
+    return runtime->bindings.execute(
+        runtime->bindings.context, runtime->session, stage, frame);
+}
+
+bool goodix_primitives_spo2_runtime_bind(
+    const goodix_primitives_spo2_runtime_bindings *bindings,
+    goodix_primitives_spo2_runtime *runtime) {
+    if (bindings == NULL ||
+            (bindings->execute == NULL &&
+             (bindings->power == NULL || bindings->square_root == NULL ||
+              bindings->floor == NULL || bindings->exponential == NULL ||
+              bindings->arc_tangent == NULL ||
+              bindings->double_exponential == NULL)) ||
+            bindings->quantized == NULL || bindings->allocate == NULL ||
+            bindings->release == NULL || runtime == NULL || runtime->bound ||
+            runtime->session != NULL) {
+        return false;
+    }
+    *runtime = (goodix_primitives_spo2_runtime){0};
+    runtime->bindings = *bindings;
+    uint32_t model_base_address =
+        r1_goodix_generated_model.stock_base_address;
+#if UINTPTR_MAX <= UINT32_MAX
+    model_base_address =
+        (uint32_t)(uintptr_t)r1_goodix_generated_model.words;
+#endif
+    if (!goodix_primitives_outer_session_create(
+            &runtime->session, r1_goodix_spo2_configuration,
+            R1_GOODIX_SPO2_CONFIGURATION_BYTE_COUNT, "pre_pv_v1.1.0",
+            bindings->quantized, r1_goodix_generated_model.words,
+            r1_goodix_generated_model.word_count,
+            model_base_address,
+            bindings->allocate, bindings->release,
+            bindings->provider_context)) {
+        *runtime = (goodix_primitives_spo2_runtime){0};
+        return false;
+    }
+    if (bindings->execute == NULL) {
+        runtime->source_state = bindings->allocate(
+            bindings->provider_context, sizeof(*runtime->source_state));
+        if (runtime->source_state == NULL ||
+                !goodix_primitives_spo2_source_state_bind(runtime) ||
+                !goodix_primitives_spo2_model_plan_bind(runtime)) {
+            if (runtime->source_state != NULL) {
+                bindings->release(
+                    bindings->provider_context, runtime->source_state);
+                runtime->source_state = NULL;
+            }
+            (void)goodix_primitives_outer_session_destroy(
+                &runtime->session, bindings->release,
+                bindings->provider_context);
+            *runtime = (goodix_primitives_spo2_runtime){0};
+            return false;
+        }
+    }
+
+    /* Stock outer +0x0C is the copied 76-byte record. Root 0x6E838 reads
+     * word 0 as lane count, +0x38 as the adjustment flag, and +0x3C as the
+     * summary threshold; 0x7412C consumes signed words 2..6 in place. */
+    const uint32_t lane_count = goodix_primitives_load_u32_le(
+        runtime->session->processing_record);
+    if (lane_count != 1u) {
+        (void)goodix_primitives_outer_session_destroy(
+            &runtime->session, bindings->release,
+            bindings->provider_context);
+        *runtime = (goodix_primitives_spo2_runtime){0};
+        return false;
+    }
+    runtime->state = (goodix_primitives_nadt_preprocess_state){
+        .initialized = true,
+        .lane_count = lane_count,
+        .adjustment_enabled = goodix_primitives_load_u32_le(
+            runtime->session->processing_record + 0x38u) == 1u,
+        .summary_metric_threshold = goodix_primitives_load_u32_le(
+            runtime->session->processing_record + 0x3Cu),
+    };
+    runtime->workspace = (goodix_primitives_nadt_preprocess_workspace){
+        .assembled_records = runtime->assembled_records,
+        .assembled_record_bytes = sizeof(runtime->assembled_records),
+        .summaries = runtime->summaries,
+        .summary_bytes = sizeof(runtime->summaries),
+        .inference_values = &runtime->inference_value,
+        .inference_capacity = 1u,
+        .adjusted_values = &runtime->adjusted_value,
+        .adjusted_capacity = 1u,
+        .selected_rates = &runtime->selected_rate,
+        .selected_rate_capacity = 1u,
+        .selected_kinds = &runtime->selected_kind,
+        .selected_kind_capacity = 1u,
+    };
+    for (size_t index = 0u; index < 7u; ++index) {
+        runtime->quartic_coefficients[index] =
+            goodix_primitives_u32_as_i32(goodix_primitives_load_u32_le(
+                runtime->session->processing_record + index * 4u));
+    }
+    runtime->plan = (goodix_primitives_nadt_preprocess_plan){
+        .execute = goodix_primitives_spo2_runtime_stage_adapter,
+        .context = runtime,
+        .quartic_coefficients = runtime->quartic_coefficients,
+        .quartic_coefficient_count = 7u,
+    };
+    runtime->bound = true;
+    return true;
+}
+
+int32_t goodix_primitives_spo2_runtime_process(
+    goodix_primitives_spo2_runtime *runtime,
+    const goodix_primitives_spo2_calc_input *source,
+    uint32_t *output_words, size_t output_word_count) {
+    if (runtime == NULL || !runtime->bound || runtime->session == NULL) {
+        return 7;
+    }
+    return goodix_primitives_spo2_calc(
+        &runtime->plan, source, &runtime->state, &runtime->workspace,
+        output_words, output_word_count);
+}
+
+bool goodix_primitives_spo2_runtime_unbind(
+    goodix_primitives_spo2_runtime *runtime) {
+    if (runtime == NULL || !runtime->bound || runtime->session == NULL ||
+            runtime->bindings.release == NULL) {
+        return false;
+    }
+    goodix_primitives_release_fn const release = runtime->bindings.release;
+    void *const provider_context = runtime->bindings.provider_context;
+    if (runtime->source_state != NULL) {
+        release(provider_context, runtime->source_state);
+        runtime->source_state = NULL;
+    }
+    if (!goodix_primitives_outer_session_destroy(
+            &runtime->session, release, provider_context)) {
+        return false;
+    }
+    *runtime = (goodix_primitives_spo2_runtime){0};
     return true;
 }

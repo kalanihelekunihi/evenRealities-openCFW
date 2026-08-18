@@ -11,9 +11,10 @@ reconstructed and source-bound on the alternate Zephyr target.
 The portable behavior is implemented in `r1/src/r1_battery.c`. The nRF52840 adapter is
 `r1/platform/nrf52840/sdk/openr1_analog.c`. Its retained runtime bridge samples voltage and
 updates protocol-visible battery state only when an admitted caller supplies charge state and
-elapsed time. The legacy Nordic adapter remains fail-closed without a power provider; the Zephyr
-adapter binds the same semantic acquire/release interface to reconstructed YHM client bit 0. No raw
-ADC or PMIC diagnostic is exposed over BLE.
+elapsed time. The legacy Nordic adapter remains fail-closed without a power provider. The Zephyr
+adapter binds the same semantic acquire/release interface to reconstructed YHM client bit 0, reads
+register 6 for live charge state, and refreshes once at boot plus immediately before a read-only
+device-status request is dispatched. No raw ADC or PMIC diagnostic is exposed over BLE.
 
 The source-built database owner now strictly decodes the exact four-byte persisted `power` class:
 battery type is byte 0 and signed Int16LE voltage compensation is at bytes 2...3. Types 1...4 are
@@ -112,9 +113,11 @@ algorithm implementation. Reproduce this check with
 - Stalled-charge recovery is a one-shot per unchanged episode and requires an unchanged value at
   most 98 percent, both samples at least 2400 mV, a 35 mV rise, and 120 seconds.
 - A portable controller implements recovered charge-state entry/exit, cadence reset, refresh-count
-  saturation, recovery-latch timing, and synchronization into `r1_runtime.device`. The Nordic
-  adapter retains a voltage-to-controller bridge but has no autonomous producer until licensed
-  PMIC state and power operations are available.
+  saturation, recovery-latch timing, and synchronization into `r1_runtime.device`. The source-built
+  Zephyr service composes it with five SAADC samples, persisted valid voltage compensation, and a
+  fail-closed YHM register-6 read. The runtime request observer executes before dispatch snapshots
+  state, so the status response carries the refreshed values. The Nordic adapter retains the same
+  bridge but has no bound producer.
 - A pure PMIC charge-event planner builds the exact 24-byte dock working template, maps public
   charge state to the private two-bit encoding, and returns low/mid target or raw high-limit
   actions. It does not execute YHM, ST, timer/event, logging, or transport operations; see
@@ -136,16 +139,16 @@ Its standalone HEX and BIN SHA-256 values are
 
 ## Remaining gates
 
-- Preserve the completed Zephyr YHM2710 semantic lease binding and keep raw register/transport
-  operations outside the analog module; decide separately whether the legacy Nordic target should
-  adopt the reconstructed provider.
+- Preserve the completed Zephyr YHM2710 semantic lease/status binding and keep raw
+  register/transport operations outside the analog module; decide separately whether the legacy
+  Nordic target should adopt the reconstructed provider.
 - Confirm the decoded installed battery type and compensation against an owned ring; startup
   adoption is source-bound and read-only, but physical calibration remains unverified.
 - Validate divider/amplifier gain, offsets, noise, temperature behavior, and sample timing against
   calibrated equipment on an owned ring.
-- Bind a periodic producer to the retained runtime bridge only after typed PMIC charge-state input
-  and physical validation are available. Current/rectifier functions remain
-  internal retained APIs.
+- Bind PMIC event-driven refresh only when its recovered task/interrupt activation is composed and
+  physically validated. Do not invent an autonomous polling cadence absent call-graph evidence.
+  Current/rectifier functions remain internal retained APIs.
 - Preserve the absence of raw ADC, PMIC write, ship-mode, and unrestricted diagnostic BLE routes.
 
 This work does not alter signing, rollback, boot verification, or deployment policy.

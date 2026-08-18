@@ -363,6 +363,59 @@ r1_error r1_goodix_start_stock_profile(r1_goodix_adapter *adapter,
     return R1_OK;
 }
 
+r1_error r1_goodix_start_functions(r1_goodix_adapter *adapter,
+                                    uint32_t function_mask) {
+    if (function_mask == 0u ||
+        (function_mask & ~R1_GOODIX_MASK_NORMAL_ALLOWED) != 0u) {
+        return R1_ERROR_ARGUMENT;
+    }
+    r1_error error = prepare_adapter(adapter, 10u);
+    if (error != R1_OK) {
+        return error;
+    }
+    if (!adapter->initialized) {
+        if (adapter->provider->initialize(adapter->provider_context) != 0) {
+            shutdown_adapter(adapter);
+            return R1_ERROR_STATE;
+        }
+        adapter->initialized = true;
+    }
+    const uint32_t new_functions = function_mask & ~adapter->active_mask;
+    if (new_functions != 0u &&
+        adapter->provider->start_sampling(adapter->provider_context,
+                                           new_functions) != 0) {
+        shutdown_adapter(adapter);
+        return R1_ERROR_STATE;
+    }
+    adapter->active_mask |= function_mask;
+    return R1_OK;
+}
+
+r1_error r1_goodix_stop_functions(r1_goodix_adapter *adapter,
+                                   uint32_t function_mask) {
+    if (function_mask == 0u ||
+        (function_mask & ~R1_GOODIX_MASK_NORMAL_ALLOWED) != 0u) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (!r1_goodix_provider_available(adapter)) {
+        return R1_ERROR_UNSUPPORTED;
+    }
+    if (!adapter->initialized) {
+        return R1_ERROR_STATE;
+    }
+    const uint32_t stopping = function_mask & adapter->active_mask;
+    if (stopping != 0u &&
+        adapter->provider->stop_sampling(adapter->provider_context,
+                                          stopping) != 0) {
+        return R1_ERROR_STATE;
+    }
+    adapter->active_mask &= ~stopping;
+    if (adapter->active_mask == 0u) {
+        shutdown_adapter(adapter);
+    }
+    return R1_OK;
+}
+
 r1_error r1_goodix_switch_profile(r1_goodix_adapter *adapter,
                                   r1_goodix_switch_selection profile) {
     uint32_t mask = 0u;

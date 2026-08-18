@@ -52,6 +52,14 @@
 	status = "okay";
 };
 
+/* RTC0 is owned by the Bluetooth controller and RTC1 by the Zephyr system
+ * clock. The recovered `sys rtc` service uses the remaining RTC2 at 8 Hz. */
+&rtc2 {
+	status = "okay";
+	prescaler = <4095>;
+	interrupts = <36 6>;
+};
+
 &gpio0 {
 	status = "okay";
 };

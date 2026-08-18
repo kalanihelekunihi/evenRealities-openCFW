@@ -20,6 +20,9 @@
 #define R1_GOODIX_MASK_SWITCH_CLEAR UINT32_C(0x00000042)
 #define R1_GOODIX_MASK_SWITCH_2 UINT32_C(0x00000002)
 #define R1_GOODIX_MASK_SWITCH_40 UINT32_C(0x00000040)
+#define R1_GOODIX_MASK_HRV UINT32_C(0x00000004)
+#define R1_GOODIX_MASK_HSM UINT32_C(0x00000008)
+#define R1_GOODIX_MASK_NORMAL_ALLOWED UINT32_C(0x0000004e)
 #define R1_GOODIX_DIAGNOSTIC_SNAPSHOT_BYTES 240u
 #define R1_GOODIX_DIAGNOSTIC_REFRESH_TICKS UINT32_C(500)
 #define R1_GOODIX_DIAGNOSTIC_OUTPUT_MAX 124u
@@ -103,6 +106,14 @@ r1_error r1_goodix_start_stock_profile(r1_goodix_adapter *adapter,
 r1_error r1_goodix_switch_profile(r1_goodix_adapter *adapter,
                                   r1_goodix_switch_selection profile);
 r1_error r1_goodix_stop_stock_profiles(r1_goodix_adapter *adapter);
+/* Source-owned normal-runtime composition over the recovered Goodix provider
+ * seam. These calls accept only the observed HR/HRV/HSM/SpO2 bits, retain a
+ * union in active_mask, and never select the factory-only 0x2000/0x4000
+ * profiles. */
+r1_error r1_goodix_start_functions(r1_goodix_adapter *adapter,
+                                    uint32_t function_mask);
+r1_error r1_goodix_stop_functions(r1_goodix_adapter *adapter,
+                                   uint32_t function_mask);
 bool r1_goodix_provider_available(const r1_goodix_adapter *adapter);
 bool r1_goodix_diagnostic_refresh_due(uint32_t now_tick,
                                       uint32_t previous_refresh_tick);

@@ -48,6 +48,17 @@ typedef struct {
 
 static openr1_notification_slot notification_slots[OPENR1_NOTIFICATION_SLOTS];
 static struct k_work advertise_work;
+K_MUTEX_DEFINE(runtime_mutex);
+
+static bool runtime_lock_provider(void *context) {
+    (void)context;
+    return !k_is_in_isr() && k_mutex_lock(&runtime_mutex, K_FOREVER) == 0;
+}
+
+static void runtime_unlock_provider(void *context) {
+    (void)context;
+    (void)k_mutex_unlock(&runtime_mutex);
+}
 
 typedef struct {
     uint8_t index;
@@ -275,5 +286,8 @@ int openr1_bae8_zephyr_initialize(void) {
     memset(notification_slots, 0, sizeof notification_slots);
     k_work_init(&advertise_work, advertise_work_handler);
     r1_runtime_set_transmit(openr1_platform_runtime(), transmit, NULL);
+    r1_runtime_set_lock(
+        openr1_platform_runtime(), runtime_lock_provider,
+        runtime_unlock_provider, NULL);
     return 0;
 }

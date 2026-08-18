@@ -149,6 +149,11 @@ typedef struct {
 #define QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_ZERO_MODEL_WORDS 1714u
 #define QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY1_MODEL_WORDS 952u
 #define QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_FAMILY2_MODEL_WORDS 1092u
+#define QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MODE0_BYTES 0x2DCu
+#define QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MODE1_BYTES 0x238u
+#define QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MAX_BYTES 0x2DCu
+#define QUANTIZED_RUNTIME_GOMORE_EXECUTOR_MODE0_MODEL_WORDS 6660u
+#define QUANTIZED_RUNTIME_GOMORE_EXECUTOR_MODE1_MODEL_WORDS 2979u
 #define QUANTIZED_RUNTIME_RECURRENT_RANGE_ERROR UINT32_C(0xF000000E)
 
 /* Recovered shared tensor pool state root: 12 descriptors at 0x14 stride,
@@ -356,10 +361,27 @@ typedef uint32_t (*quantized_runtime_stage_execute_fn)(
     quantized_runtime_exec_tensor *const *inputs,
     quantized_runtime_exec_tensor *const *outputs);
 
+typedef enum {
+    QUANTIZED_RUNTIME_STAGE_DIRECT = 0,
+    QUANTIZED_RUNTIME_STAGE_QUANTIZE_WITH_RUNTIME,
+    QUANTIZED_RUNTIME_STAGE_INT8_ADD_WITH_RUNTIME,
+    QUANTIZED_RUNTIME_STAGE_SOFTMAX_WITH_RUNTIME,
+} quantized_runtime_stage_adapter;
+
 typedef struct {
     const void *descriptor;
     quantized_runtime_stage_execute_fn execute;
+    const quantized_runtime *runtime;
+    quantized_runtime_stage_adapter adapter;
 } quantized_runtime_stage;
+
+/* Invoke one source-resolved stage, including the three operators whose
+ * recovered ABI carries the quantized runtime out-of-band.  This is the
+ * public checked form used by reconstructed generated-graph composers. */
+uint32_t quantized_runtime_stage_invoke(
+    const quantized_runtime_stage *stage,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs);
 
 typedef struct {
     quantized_runtime_stage stages[5];
@@ -385,6 +407,20 @@ typedef struct {
 typedef struct {
     uint8_t bytes[QUANTIZED_RUNTIME_GOMORE_SLEEP_GRAPH_BYTES];
 } quantized_runtime_gomore_sleep_graph;
+
+/* Complete target-ABI owner built by retail 0x72BE0/0x48D22 through
+ * 0x340A0.  bytes starts with the selector word and contains the 0x1B8-byte
+ * prefix, all recurrent/dense tail records, and mode-0 remap bindings.
+ * Native recurrent records preserve state pointers on 64-bit verification
+ * hosts; on 32-bit targets the packed records in bytes are ABI-equivalent. */
+typedef struct {
+    uint8_t bytes[QUANTIZED_RUNTIME_GOMORE_EXECUTOR_GRAPH_MAX_BYTES];
+    size_t byte_count;
+    uint32_t mode;
+    quantized_runtime_recurrent_descriptor recurrent[3];
+    const quantized_runtime *runtime;
+    void *operation_context;
+} quantized_runtime_gomore_executor_graph;
 
 /* Typed representation of stock's 0x344-byte generated-model instance.
  * Target offsets are asserted in the implementation; native-pointer hosts
@@ -563,6 +599,46 @@ uint32_t quantized_runtime_float_add_execute(
     quantized_runtime_exec_tensor *const *inputs,
     quantized_runtime_exec_tensor *const *outputs);
 
+/* 0x00030534: convert one signed-int8 tensor and its {min,max} range to a
+ * Float32 tensor.  This is the direct executor returned by stock 0x74C90. */
+uint32_t quantized_runtime_int8_to_float_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs);
+
+/* 0x00095B20: Float32 elementwise/broadcast multiply returned by stock
+ * 0x74A9C.  A {1,1} right tensor is scalar; {1,N} broadcasts per row. */
+uint32_t quantized_runtime_float_multiply_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs);
+
+/* 0x00036DCC -> 0x0003F6B4: concatenate exactly two Float32 tensors along
+ * dimension one, retaining the target executor ABI. */
+uint32_t quantized_runtime_float_concatenate_two_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs);
+
+/* 0x00028EC8: concatenate input_count signed-int8 tensor/range pairs along
+ * dimension one, requantizing to the union range when ranges differ. */
+uint32_t quantized_runtime_int8_concatenate_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *input_pairs,
+    quantized_runtime_exec_tensor *const *outputs,
+    uint32_t input_count);
+
+/* Target-ABI adapters for the two source-owned GoMore tensor operators
+ * stored in recovered 8-byte graph records at 0x35D12 and 0x7CA94. */
+uint32_t quantized_runtime_float_strided_copy_2d_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs);
+uint32_t quantized_runtime_float_pool_1d_execute(
+    const void *descriptor,
+    quantized_runtime_exec_tensor *const *inputs,
+    quantized_runtime_exec_tensor *const *outputs);
+
 /* 0x0005A3D4: two-output thirds-slice compute.  third = input_a->dims[0]/3;
  * outputs[0] = slice(pool, a, third*index, third*(index+1)), outputs[1] the
  * same for input_b.  The slice itself is the bound GoMore-candidate seam
@@ -725,6 +801,7 @@ typedef struct {
 
 typedef struct {
     uint8_t bytes[QUANTIZED_RUNTIME_GOODIX_SECOND_GRAPH_BYTES];
+    void *operation_context;
 } quantized_runtime_goodix_second_graph;
 
 typedef struct {
@@ -834,6 +911,60 @@ typedef struct {
     uint8_t *output;
     size_t output_capacity;
 } quantized_runtime_goodix_executor_io;
+
+typedef quantized_runtime_stage_execute_fn
+    (*quantized_runtime_stage_token_resolver_fn)(
+        void *context, uint32_t target_token);
+typedef quantized_runtime_multi_stage_execute_fn
+    (*quantized_runtime_multi_stage_token_resolver_fn)(
+        void *context, uint32_t target_token);
+
+/* Resolve only linked transparent operators emitted by the reconstructed
+ * graph builders. Runtime-aware quantize/add/softmax records deliberately
+ * return NULL so the checked adapter path supplies the runtime argument. */
+quantized_runtime_stage_execute_fn
+quantized_runtime_source_stage_token_resolve(
+    void *context, uint32_t target_token);
+quantized_runtime_multi_stage_execute_fn
+quantized_runtime_source_multi_stage_token_resolve(
+    void *context, uint32_t target_token);
+
+/* Resolve every target-ABI record emitted by 0x5D01C into the typed plan for
+ * 0x617F8.  The distinct merge resolver preserves its four-input ABI. */
+bool quantized_runtime_goodix_second_executor_plan_build(
+    const quantized_runtime *rt,
+    const quantized_runtime_goodix_second_graph *graph,
+    quantized_runtime_goodix_second_executor_plan *plan,
+    quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context,
+    quantized_runtime_multi_stage_token_resolver_fn resolve_multi,
+    void *resolve_multi_context);
+
+/* Build/destroy the complete initializer-owned mode-0 or mode-1 executor
+ * graph.  The model and optional mode-0 remap are caller-owned transparent
+ * arrays; target base addresses are explicit so host tests never dereference
+ * stock addresses. */
+bool quantized_runtime_gomore_executor_graph_build(
+    const quantized_runtime *rt,
+    quantized_runtime_gomore_executor_graph *graph, uint32_t mode,
+    const uint32_t *model_words, size_t model_word_count,
+    uint32_t model_base_address, const uint32_t *mode0_remap_words,
+    size_t mode0_remap_word_count, uint32_t mode0_remap_base_address,
+    const uint8_t tail_schema[8], quantized_runtime_allocate_fn allocate,
+    quantized_runtime_release_fn release, void *allocator_context,
+    size_t *consumed_words, uint32_t *model_end_address);
+void quantized_runtime_gomore_executor_graph_destroy(
+    quantized_runtime_gomore_executor_graph *graph,
+    quantized_runtime_release_fn release, void *release_context);
+
+/* Resolve the target tokens embedded in a complete owner into a native
+ * checked executor plan.  An explicit resolver prevents 32-bit target
+ * tokens from becoming truncated host function pointers. */
+bool quantized_runtime_gomore_executor_plan_build(
+    const quantized_runtime_gomore_executor_graph *graph,
+    quantized_runtime_goodix_executor_plan *plan,
+    quantized_runtime_stage_token_resolver_fn resolve,
+    void *resolve_context);
 
 /* 0x0003007E, 0x00038050, and 0x000417F0 are identical ABI-preserving
  * veneers for 0x000742E4 and therefore map to this same typed body.

@@ -3,15 +3,25 @@
 #include <errno.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <string.h>
 
 #include <zephyr/kernel.h>
 #include <zephyr/sys/atomic.h>
 
 #include "generic_device_registry/generic_device_registry.h"
 #include "gomore_primitives/gomore_primitives.h"
+#include "openr1/r1_goodix.h"
 #include "openr1_databases_zephyr.h"
 #include "openr1_motion_zephyr.h"
+#include "openr1_optical_zephyr.h"
 #include "openr1_temperature_zephyr.h"
+
+#define OPENR1_GOODIX_TOPIC_STATE_BYTES 240u
+#define OPENR1_GOODIX_HR_OFFSET 0u
+#define OPENR1_GOODIX_HRV_OFFSET 16u
+#define OPENR1_GOODIX_RAW_HR_OFFSET 64u
+#define OPENR1_GOODIX_HR_RECORD_BYTES 4u
+#define OPENR1_GOODIX_HRV_RECORD_BYTES 10u
 
 typedef struct {
     int (*initialize)(void);
@@ -29,6 +39,14 @@ typedef struct {
     uint32_t (*temperature_once_successes)(void);
     uint32_t (*temperature_once_timeouts)(void);
     int (*gomore_accelerometer_stage_set)(bool);
+    int (*gomore_health_stage_set)(bool);
+    void (*health_policy_request)(bool);
+    int (*gomore_authorization_set)(uint32_t, bool);
+    bool (*gomore_health_stage_active)(void);
+    int (*gomore_consume_ready)(openr1_gomore_topic_consume_fn, void *);
+    bool (*goodix_raw_hr_append)(uint32_t);
+    bool (*goodix_heart_rate_update)(const int32_t[4]);
+    bool (*goodix_hrv_update)(const int32_t[6]);
     bool (*gomore_accelerometer_stage_active)(void);
     uint32_t (*gomore_accelerometer_stage_batches)(void);
     uint32_t (*gomore_accelerometer_stage_failures)(void);
@@ -41,7 +59,12 @@ typedef struct {
 static sensor_stream stream_framework;
 static sensor_stream_object *accelerometer_object;
 static sensor_stream_object *temperature_object;
+static sensor_stream_object *goodix_heart_rate_object;
+static sensor_stream_object *goodix_hrv_object;
+static sensor_stream_object *goodix_raw_hr_object;
 static k_tid_t owner_thread;
+K_MUTEX_DEFINE(goodix_topic_mutex);
+K_MUTEX_DEFINE(gomore_topic_mutex);
 static atomic_t motion_batches;
 static atomic_t motion_failures;
 static atomic_t temperature_samples;
@@ -51,11 +74,47 @@ static atomic_t temperature_once_timeouts;
 static atomic_t gomore_accelerometer_stage_batches;
 static atomic_t gomore_accelerometer_stage_failures;
 static atomic_t framework_faults;
+static atomic_t gomore_health_requested;
 static gomore_primitives_scaled_sample_state temperature_once_state;
 static sensor_stream_listener *temperature_once_listener;
 static gomore_primitives_topic_input_state gomore_topic_input;
+static gomore_primitives_authorization_state gomore_authorization;
 static sensor_stream_listener *gomore_accelerometer_stage_listener;
+static sensor_stream_listener *gomore_raw_hr_stage_listener;
+static sensor_stream_listener *gomore_heart_rate_stage_listener;
+static sensor_stream_listener *gomore_hrv_stage_listener;
+static uint8_t goodix_topic_state[OPENR1_GOODIX_TOPIC_STATE_BYTES];
 static bool stream_ready;
+
+typedef struct {
+    uint8_t mode;
+    uint32_t function_mask;
+} goodix_stream_context;
+
+static const goodix_stream_context goodix_heart_rate_context = {
+    .mode = 1u,
+    .function_mask = R1_GOODIX_MASK_SWITCH_2,
+};
+static const goodix_stream_context goodix_hrv_context = {
+    .mode = 4u,
+    .function_mask = R1_GOODIX_MASK_HRV,
+};
+static const goodix_stream_context goodix_raw_hr_context = {
+    .mode = 5u,
+    .function_mask = R1_GOODIX_MASK_HSM,
+};
+
+static uint32_t topic_load_u32(const uint8_t *bytes) {
+    return (uint32_t)bytes[0] | ((uint32_t)bytes[1] << 8u) |
+        ((uint32_t)bytes[2] << 16u) | ((uint32_t)bytes[3] << 24u);
+}
+
+static void topic_store_u32(uint8_t *bytes, uint32_t value) {
+    bytes[0] = (uint8_t)value;
+    bytes[1] = (uint8_t)(value >> 8u);
+    bytes[2] = (uint8_t)(value >> 16u);
+    bytes[3] = (uint8_t)(value >> 24u);
+}
 
 static void *stream_allocate(uint32_t size) {
     return size == 0u ? NULL : k_malloc((size_t)size);
@@ -225,6 +284,80 @@ static const sensor_stream_provider_ops temperature_provider = {
     temperature_read,
 };
 
+static void goodix_stream_open(void *context) {
+    const goodix_stream_context *stream = context;
+    if (stream == NULL ||
+        openr1_optical_zephyr_start_functions(stream->function_mask) != 0) {
+        (void)atomic_inc(&framework_faults);
+    }
+}
+
+static void goodix_stream_close(void *context) {
+    const goodix_stream_context *stream = context;
+    if (stream == NULL ||
+        openr1_optical_zephyr_stop_functions(stream->function_mask) != 0) {
+        (void)atomic_inc(&framework_faults);
+    }
+}
+
+static uint32_t goodix_stream_read(uint8_t *destination, uint32_t length,
+                                   void *context) {
+    const goodix_stream_context *stream = context;
+    if (destination == NULL || stream == NULL ||
+        k_mutex_lock(&goodix_topic_mutex, K_FOREVER) != 0) {
+        (void)atomic_inc(&framework_faults);
+        return 0u;
+    }
+    uint32_t written = 0u;
+    if (stream->mode == 1u && length == OPENR1_GOODIX_HR_RECORD_BYTES) {
+        const uint32_t heart_rate = topic_load_u32(
+            &goodix_topic_state[OPENR1_GOODIX_HR_OFFSET]);
+        if (heart_rate >= 41u && heart_rate <= 219u) {
+            for (size_t index = 0u; index < 4u; ++index) {
+                destination[index] = (uint8_t)topic_load_u32(
+                    &goodix_topic_state[OPENR1_GOODIX_HR_OFFSET +
+                                        index * 4u]);
+            }
+            written = OPENR1_GOODIX_HR_RECORD_BYTES;
+        }
+    } else if (stream->mode == 4u &&
+               length == OPENR1_GOODIX_HRV_RECORD_BYTES) {
+        if (topic_load_u32(
+                &goodix_topic_state[OPENR1_GOODIX_HRV_OFFSET]) != 0u) {
+            for (size_t index = 0u; index < 4u; ++index) {
+                const uint32_t value = topic_load_u32(
+                    &goodix_topic_state[OPENR1_GOODIX_HRV_OFFSET +
+                                        index * 4u]);
+                destination[index * 2u] = (uint8_t)value;
+                destination[index * 2u + 1u] = (uint8_t)(value >> 8u);
+            }
+            destination[8] = (uint8_t)topic_load_u32(
+                &goodix_topic_state[OPENR1_GOODIX_HRV_OFFSET + 16u]);
+            destination[9] = (uint8_t)topic_load_u32(
+                &goodix_topic_state[OPENR1_GOODIX_HRV_OFFSET + 20u]);
+            written = OPENR1_GOODIX_HRV_RECORD_BYTES;
+        }
+    } else if (stream->mode == 5u &&
+               length == R1_GOODIX_RAW_HR_RECORD_BYTES) {
+        memcpy(destination,
+               &goodix_topic_state[OPENR1_GOODIX_RAW_HR_OFFSET], length);
+        /* The recovered source record is periodically cleared by the common
+         * diagnostic refresh. A successful one-Hz delivery is the local
+         * ownership boundary, so clear it here to retain each HSM value once
+         * while preserving the exact count/reserved/value wire record. */
+        memset(&goodix_topic_state[OPENR1_GOODIX_RAW_HR_OFFSET], 0, length);
+        written = length;
+    }
+    (void)k_mutex_unlock(&goodix_topic_mutex);
+    return written;
+}
+
+static const sensor_stream_provider_ops goodix_stream_provider = {
+    goodix_stream_open,
+    goodix_stream_close,
+    goodix_stream_read,
+};
+
 static void temperature_once_publish(
     uint32_t topic, const void *payload, size_t payload_length) {
     if (topic == 9u &&
@@ -267,14 +400,147 @@ static void temperature_once_sample(
 
 static void gomore_accelerometer_stage_sample(
     sensor_stream_listener *listener, const uint8_t *data, uint32_t length) {
-    if (listener == NULL ||
-            !gomore_primitives_topic_accelerometer_ingest(
-                &gomore_topic_input, data, (size_t)length)) {
+    bool accepted = false;
+    if (listener != NULL) {
+        (void)k_mutex_lock(&gomore_topic_mutex, K_FOREVER);
+        accepted = gomore_primitives_topic_accelerometer_ingest(
+            &gomore_topic_input, data, (size_t)length);
+        (void)k_mutex_unlock(&gomore_topic_mutex);
+    }
+    if (!accepted) {
         (void)atomic_inc(&gomore_accelerometer_stage_failures);
         return;
     }
     (void)atomic_inc(&gomore_accelerometer_stage_batches);
 }
+
+static void gomore_raw_hr_stage_sample(
+    sensor_stream_listener *listener, const uint8_t *data, uint32_t length) {
+    bool accepted = false;
+    if (listener != NULL) {
+        (void)k_mutex_lock(&gomore_topic_mutex, K_FOREVER);
+        accepted = gomore_primitives_topic_raw_optical_ingest(
+            &gomore_topic_input, data, (size_t)length);
+        (void)k_mutex_unlock(&gomore_topic_mutex);
+    }
+    if (!accepted) {
+        (void)atomic_inc(&gomore_accelerometer_stage_failures);
+    }
+}
+
+static void gomore_heart_rate_stage_sample(
+    sensor_stream_listener *listener, const uint8_t *data, uint32_t length) {
+    bool accepted = false;
+    if (listener != NULL) {
+        (void)k_mutex_lock(&gomore_topic_mutex, K_FOREVER);
+        accepted = gomore_primitives_topic_heart_rate_ingest(
+            &gomore_topic_input, data, (size_t)length);
+        (void)k_mutex_unlock(&gomore_topic_mutex);
+    }
+    if (!accepted) {
+        (void)atomic_inc(&gomore_accelerometer_stage_failures);
+    }
+}
+
+static void gomore_hrv_stage_sample(
+    sensor_stream_listener *listener, const uint8_t *data, uint32_t length) {
+    bool accepted = false;
+    if (listener != NULL) {
+        (void)k_mutex_lock(&gomore_topic_mutex, K_FOREVER);
+        accepted = gomore_primitives_topic_hrv_ingest(
+            &gomore_topic_input, data, (size_t)length);
+        (void)k_mutex_unlock(&gomore_topic_mutex);
+    }
+    if (!accepted) {
+        (void)atomic_inc(&gomore_accelerometer_stage_failures);
+    }
+}
+
+static uintptr_t gomore_authorization_register_stream(
+    void *context, uint8_t stream_index) {
+    (void)context;
+    sensor_stream_listener **handle = NULL;
+    sensor_stream_object *object = NULL;
+    sensor_stream_listener_callback callback = NULL;
+    if (stream_index == 0u) {
+        handle = &gomore_accelerometer_stage_listener;
+        object = accelerometer_object;
+        callback = gomore_accelerometer_stage_sample;
+    } else if (stream_index == 1u) {
+        handle = &gomore_raw_hr_stage_listener;
+        object = goodix_raw_hr_object;
+        callback = gomore_raw_hr_stage_sample;
+    } else if (stream_index == 2u) {
+        handle = &gomore_heart_rate_stage_listener;
+        object = goodix_heart_rate_object;
+        callback = gomore_heart_rate_stage_sample;
+    } else if (stream_index == 3u) {
+        handle = &gomore_hrv_stage_listener;
+        object = goodix_hrv_object;
+        callback = gomore_hrv_stage_sample;
+    }
+    if (handle == NULL || object == NULL || callback == NULL) {
+        return (uintptr_t)0;
+    }
+    if (*handle == NULL) {
+        *handle = sensor_stream_listener_register(
+            &stream_framework, object, "gomore", callback, 1u,
+            SENSOR_STREAM_MODE_BATCH);
+    }
+    return (uintptr_t)*handle;
+}
+
+static void gomore_authorization_unregister_stream(
+    void *context, uint8_t stream_index, uintptr_t opaque_handle) {
+    (void)context;
+    sensor_stream_listener *const handle =
+        (sensor_stream_listener *)opaque_handle;
+    if (handle == NULL) {
+        return;
+    }
+    if (stream_index == 0u &&
+        handle == gomore_accelerometer_stage_listener) {
+        openr1_sensor_stream_zephyr_unregister_accelerometer(handle);
+        gomore_accelerometer_stage_listener = NULL;
+    } else if (stream_index == 1u &&
+               handle == gomore_raw_hr_stage_listener) {
+        sensor_stream_listener_unregister(
+            &stream_framework, "raw_hr", handle);
+        gomore_raw_hr_stage_listener = NULL;
+    } else if (stream_index == 2u &&
+               handle == gomore_heart_rate_stage_listener) {
+        sensor_stream_listener_unregister(&stream_framework, "hr", handle);
+        gomore_heart_rate_stage_listener = NULL;
+    } else if (stream_index == 3u &&
+               handle == gomore_hrv_stage_listener) {
+        sensor_stream_listener_unregister(&stream_framework, "hrv", handle);
+        gomore_hrv_stage_listener = NULL;
+    }
+}
+
+static uintptr_t gomore_authorization_create_timer(
+    void *context, uint32_t period_milliseconds) {
+    (void)context;
+    /* sensor_stream_initialize already owns the recovered common keepalive;
+     * this stable handle represents it in the authorization state. */
+    return period_milliseconds == UINT32_C(1000)
+        ? (uintptr_t)1 : (uintptr_t)0;
+}
+
+static void gomore_authorization_delete_timer(
+    void *context, uintptr_t handle) {
+    (void)context;
+    (void)handle;
+}
+
+static const gomore_primitives_authorization_providers
+    gomore_authorization_providers = {
+        .context = NULL,
+        .register_stream = gomore_authorization_register_stream,
+        .unregister_stream = gomore_authorization_unregister_stream,
+        .create_timer = gomore_authorization_create_timer,
+        .delete_timer = gomore_authorization_delete_timer,
+    };
 
 int openr1_sensor_stream_zephyr_initialize(void) {
     if (stream_ready) {
@@ -305,9 +571,28 @@ int openr1_sensor_stream_zephyr_initialize(void) {
     atomic_clear(&gomore_accelerometer_stage_batches);
     atomic_clear(&gomore_accelerometer_stage_failures);
     atomic_clear(&framework_faults);
+    atomic_clear(&gomore_health_requested);
     temperature_once_listener = NULL;
     gomore_accelerometer_stage_listener = NULL;
+    gomore_raw_hr_stage_listener = NULL;
+    gomore_heart_rate_stage_listener = NULL;
+    gomore_hrv_stage_listener = NULL;
+    (void)k_mutex_lock(&gomore_topic_mutex, K_FOREVER);
     gomore_topic_input = (gomore_primitives_topic_input_state){0};
+    (void)k_mutex_unlock(&gomore_topic_mutex);
+    gomore_authorization = (gomore_primitives_authorization_state){0};
+    gomore_authorization.initialized = true;
+    gomore_authorization.idle_timer_handle = (uintptr_t)1;
+    /* Exact seven 16-byte descriptor dependency masks at stock 0x49410.
+     * Bit zero is the active flag; bits 1..4 select acc/raw_hr/hr/hrv. */
+    static const uint8_t dependency_masks[GOMORE_PRIMITIVES_RECORD_COUNT] = {
+        UINT8_C(0x02), UINT8_C(0x1e), UINT8_C(0x1e), UINT8_C(0x02),
+        UINT8_C(0x04), UINT8_C(0x0c), UINT8_C(0x00),
+    };
+    for (size_t slot = 0u; slot < GOMORE_PRIMITIVES_RECORD_COUNT; ++slot) {
+        gomore_authorization.slots[slot].flags = dependency_masks[slot];
+    }
+    memset(goodix_topic_state, 0, sizeof(goodix_topic_state));
     if (sensor_stream_initialize(&stream_framework, &providers) !=
         SENSOR_STREAM_STATUS_OK) {
         owner_thread = NULL;
@@ -320,7 +605,18 @@ int openr1_sensor_stream_zephyr_initialize(void) {
         &stream_framework, &accelerometer_provider, &temperature_provider);
     accelerometer_object = sensor_stream_acc_object_create(&stream_framework);
     temperature_object = sensor_stream_temp_object_create(&stream_framework);
-    if (accelerometer_object == NULL || temperature_object == NULL) {
+    goodix_heart_rate_object = sensor_stream_object_create(
+        &stream_framework, "hr", OPENR1_GOODIX_HR_RECORD_BYTES,
+        &goodix_stream_provider, (void *)&goodix_heart_rate_context);
+    goodix_hrv_object = sensor_stream_object_create(
+        &stream_framework, "hrv", OPENR1_GOODIX_HRV_RECORD_BYTES,
+        &goodix_stream_provider, (void *)&goodix_hrv_context);
+    goodix_raw_hr_object = sensor_stream_object_create(
+        &stream_framework, "raw_hr", R1_GOODIX_RAW_HR_RECORD_BYTES,
+        &goodix_stream_provider, (void *)&goodix_raw_hr_context);
+    if (accelerometer_object == NULL || temperature_object == NULL ||
+        goodix_heart_rate_object == NULL || goodix_hrv_object == NULL ||
+        goodix_raw_hr_object == NULL) {
         owner_thread = NULL;
         return -ENOMEM;
     }
@@ -331,6 +627,12 @@ int openr1_sensor_stream_zephyr_initialize(void) {
 uint32_t openr1_sensor_stream_zephyr_poll(void) {
     if (!stream_ready) {
         return UINT32_MAX;
+    }
+    const bool requested = atomic_get(&gomore_health_requested) != 0;
+    if (requested !=
+            openr1_sensor_stream_zephyr_gomore_health_stage_active() &&
+        openr1_sensor_stream_zephyr_gomore_health_stage_set(requested) != 0) {
+        (void)atomic_inc(&framework_faults);
     }
     const uint32_t ticks = sensor_stream_timer_poll(&stream_framework);
     if (ticks == UINT32_MAX) {
@@ -423,6 +725,47 @@ bool openr1_sensor_stream_zephyr_temperature_once_active(void) {
     return temperature_once_listener != NULL;
 }
 
+bool openr1_sensor_stream_zephyr_goodix_raw_hr_append(uint32_t value) {
+    if (!stream_ready ||
+        k_mutex_lock(&goodix_topic_mutex, K_FOREVER) != 0) {
+        return false;
+    }
+    const bool appended = r1_goodix_raw_hr_append(
+        &goodix_topic_state[OPENR1_GOODIX_RAW_HR_OFFSET], value);
+    (void)k_mutex_unlock(&goodix_topic_mutex);
+    return appended;
+}
+
+bool openr1_sensor_stream_zephyr_goodix_heart_rate_update(
+    const int32_t values[4]) {
+    if (!stream_ready || values == NULL ||
+        k_mutex_lock(&goodix_topic_mutex, K_FOREVER) != 0) {
+        return false;
+    }
+    for (size_t index = 0u; index < 4u; ++index) {
+        topic_store_u32(
+            &goodix_topic_state[OPENR1_GOODIX_HR_OFFSET + index * 4u],
+            (uint32_t)values[index]);
+    }
+    (void)k_mutex_unlock(&goodix_topic_mutex);
+    return true;
+}
+
+bool openr1_sensor_stream_zephyr_goodix_hrv_update(
+    const int32_t values[6]) {
+    if (!stream_ready || values == NULL ||
+        k_mutex_lock(&goodix_topic_mutex, K_FOREVER) != 0) {
+        return false;
+    }
+    for (size_t index = 0u; index < 6u; ++index) {
+        topic_store_u32(
+            &goodix_topic_state[OPENR1_GOODIX_HRV_OFFSET + index * 4u],
+            (uint32_t)values[index]);
+    }
+    (void)k_mutex_unlock(&goodix_topic_mutex);
+    return true;
+}
+
 uint32_t openr1_sensor_stream_zephyr_temperature_once_successes(void) {
     return (uint32_t)atomic_get(&temperature_once_successes);
 }
@@ -432,26 +775,130 @@ uint32_t openr1_sensor_stream_zephyr_temperature_once_timeouts(void) {
 }
 
 int openr1_sensor_stream_zephyr_gomore_accelerometer_stage_set(bool enabled) {
+    return openr1_sensor_stream_zephyr_gomore_health_stage_set(enabled);
+}
+
+int openr1_sensor_stream_zephyr_gomore_health_stage_set(bool enabled) {
     if (!stream_ready) {
         return -EACCES;
     }
-    if (!enabled) {
-        if (gomore_accelerometer_stage_listener != NULL) {
-            openr1_sensor_stream_zephyr_unregister_accelerometer(
-                gomore_accelerometer_stage_listener);
-            gomore_accelerometer_stage_listener = NULL;
+    const uint8_t active = UINT8_C(0x01);
+    if (enabled) {
+        (void)k_mutex_lock(&gomore_topic_mutex, K_FOREVER);
+        gomore_topic_input = (gomore_primitives_topic_input_state){0};
+        (void)k_mutex_unlock(&gomore_topic_mutex);
+    }
+    const uint32_t slots[2] = {0u, 3u};
+    int status = 0;
+    for (size_t index = 0u; index < 2u; ++index) {
+        const uint32_t slot = slots[index];
+        const bool active_now =
+            (gomore_authorization.slots[slot].flags & active) != 0u;
+        if (active_now == enabled) {
+            continue;
         }
+        if (!gomore_primitives_authorization_dispatch(
+                &gomore_authorization, slot, enabled,
+                &gomore_authorization_providers)) {
+            status = -EIO;
+            break;
+        }
+    }
+    if (enabled && gomore_authorization.stream_handles[0] == (uintptr_t)0) {
+        status = -ENOMEM;
+    }
+    if (status != 0 && enabled) {
+        for (size_t index = 0u; index < 2u; ++index) {
+            const uint32_t slot = slots[index];
+            if ((gomore_authorization.slots[slot].flags & active) != 0u) {
+                (void)gomore_primitives_authorization_dispatch(
+                    &gomore_authorization, slot, false,
+                    &gomore_authorization_providers);
+            }
+        }
+    }
+    return status;
+}
+
+void openr1_sensor_stream_zephyr_health_policy_request(bool enabled) {
+    atomic_set(&gomore_health_requested, enabled ? 1 : 0);
+    stream_wake(NULL);
+}
+
+int openr1_sensor_stream_zephyr_gomore_authorization_set(
+    uint32_t slot, bool enabled) {
+    if (!stream_ready || slot >= GOMORE_PRIMITIVES_RECORD_COUNT) {
+        return -EINVAL;
+    }
+    const bool active =
+        (gomore_authorization.slots[slot].flags & UINT8_C(0x01)) != 0u;
+    if (active == enabled) {
         return 0;
     }
-    if (gomore_accelerometer_stage_listener != NULL) {
+    if (!gomore_primitives_authorization_dispatch(
+            &gomore_authorization, slot, enabled,
+            &gomore_authorization_providers)) {
+        return -EIO;
+    }
+    if (enabled) {
+        const uint8_t requirements =
+            gomore_authorization.slots[slot].flags & UINT8_C(0x1e);
+        for (uint8_t stream = 0u; stream < 4u; ++stream) {
+            const uint8_t mask =
+                (uint8_t)(UINT8_C(1) << (uint8_t)(stream + 1u));
+            if ((requirements & mask) != 0u &&
+                gomore_authorization.stream_handles[stream] ==
+                    (uintptr_t)0) {
+                (void)gomore_primitives_authorization_dispatch(
+                    &gomore_authorization, slot, false,
+                    &gomore_authorization_providers);
+                return -ENOMEM;
+            }
+        }
+    }
+    return 0;
+}
+
+uint8_t openr1_sensor_stream_zephyr_gomore_active_slot_mask(void) {
+    uint8_t mask = 0u;
+    if (!stream_ready) {
+        return mask;
+    }
+    for (uint8_t slot = 0u; slot < GOMORE_PRIMITIVES_RECORD_COUNT; ++slot) {
+        if ((gomore_authorization.slots[slot].flags & UINT8_C(0x01)) != 0u) {
+            mask |= (uint8_t)(UINT8_C(1) << slot);
+        }
+    }
+    return mask;
+}
+
+bool openr1_sensor_stream_zephyr_gomore_health_stage_active(void) {
+    return (gomore_authorization.slots[0].flags & UINT8_C(0x01)) != 0u &&
+        (gomore_authorization.slots[3].flags & UINT8_C(0x01)) != 0u;
+}
+
+int openr1_sensor_stream_zephyr_gomore_consume_ready(
+    openr1_gomore_topic_consume_fn consume, void *context) {
+    if (!stream_ready || consume == NULL) {
+        return -EINVAL;
+    }
+    const bool accelerometer_required =
+        gomore_authorization.stream_handles[0] != (uintptr_t)0;
+    const bool raw_optical_required =
+        gomore_authorization.stream_handles[1] != (uintptr_t)0;
+
+    (void)k_mutex_lock(&gomore_topic_mutex, K_FOREVER);
+    if (!gomore_primitives_topic_update_take_ready(
+            &gomore_topic_input, accelerometer_required,
+            raw_optical_required)) {
+        (void)k_mutex_unlock(&gomore_topic_mutex);
         return 0;
     }
-    gomore_topic_input = (gomore_primitives_topic_input_state){0};
-    gomore_accelerometer_stage_listener =
-        openr1_sensor_stream_zephyr_register_accelerometer(
-            "gomore", gomore_accelerometer_stage_sample,
-            SENSOR_STREAM_MODE_BATCH);
-    return gomore_accelerometer_stage_listener != NULL ? 0 : -ENOMEM;
+    const gomore_primitives_topic_input_state snapshot = gomore_topic_input;
+    const bool succeeded = consume(context, &snapshot);
+    gomore_primitives_topic_update_complete(&gomore_topic_input, succeeded);
+    (void)k_mutex_unlock(&gomore_topic_mutex);
+    return succeeded ? 1 : -EIO;
 }
 
 bool openr1_sensor_stream_zephyr_gomore_accelerometer_stage_active(void) {
@@ -498,6 +945,14 @@ static const openr1_sensor_stream_zephyr_api sensor_stream_zephyr_api = {
     openr1_sensor_stream_zephyr_temperature_once_successes,
     openr1_sensor_stream_zephyr_temperature_once_timeouts,
     openr1_sensor_stream_zephyr_gomore_accelerometer_stage_set,
+    openr1_sensor_stream_zephyr_gomore_health_stage_set,
+    openr1_sensor_stream_zephyr_health_policy_request,
+    openr1_sensor_stream_zephyr_gomore_authorization_set,
+    openr1_sensor_stream_zephyr_gomore_health_stage_active,
+    openr1_sensor_stream_zephyr_gomore_consume_ready,
+    openr1_sensor_stream_zephyr_goodix_raw_hr_append,
+    openr1_sensor_stream_zephyr_goodix_heart_rate_update,
+    openr1_sensor_stream_zephyr_goodix_hrv_update,
     openr1_sensor_stream_zephyr_gomore_accelerometer_stage_active,
     openr1_sensor_stream_zephyr_gomore_accelerometer_stage_batches,
     openr1_sensor_stream_zephyr_gomore_accelerometer_stage_failures,
