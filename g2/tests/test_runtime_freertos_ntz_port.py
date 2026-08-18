@@ -778,7 +778,7 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 142578,
+                "overlay_size": 142986,
                 "overlay_sha256": (
                     "9e5004af49fb14a22e7e7ed7357e4c10"
                     "f87dc8da3a7fb4d7b97fcffcde804c43"
@@ -908,7 +908,7 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 "patch_site_count": len(overlay["patched_sites"]),
             },
             {
-                "size": 142578,
+                "size": 142986,
                 "sha256": (
                     "9e5004af49fb14a22e7e7ed7357e4c10"
                     "f87dc8da3a7fb4d7b97fcffcde804c43"

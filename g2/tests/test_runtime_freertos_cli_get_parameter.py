@@ -113,8 +113,8 @@ PROFILE_PINS = {
         ),
         "production_offset": 123_200,
         "overlay": (
-            142_578,
-            "3d5c9fe87fd46cbc40bb5670653f45d3d61f9d777168aa47b70fb10712698ab4",
+            142_986,
+            "1b0fc521cc8964da6525b7f7dce99060d07f5671f0038f37bcd998a56422a49f",
         ),
         "component": (
             3_648_036,
@@ -122,7 +122,7 @@ PROFILE_PINS = {
         ),
         "package": (
             4_444_468,
-            "e6472064c2536c055fb9a47efe49c9d9b553ce15ed1bc308115730454e3b94bc",
+            "53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6",
         ),
         "replacement_sha256": (
             "725846b2fb35bfa360ede03e42d542262fbc7f74a4aea101e6d8a9d2e2bc9bf6"

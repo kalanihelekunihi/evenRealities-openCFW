@@ -166,17 +166,17 @@ class IARRuntimeMathErrnoCandidateTests(unittest.TestCase):
         self.assertEqual(
             overlay["expected"],
             {
-                "overlay_size": 142578,
-                "overlay_sha256": "3d5c9fe87fd46cbc40bb5670653f45d3d61f9d777168aa47b70fb10712698ab4",
-                "component_size": 3665974,
-                "component_sha256": "5cef32ba7350e7f6476336fa6a087010e6143e3e692205215c271430aa110d22",
+                "overlay_size": 142986,
+                "overlay_sha256": "1b0fc521cc8964da6525b7f7dce99060d07f5671f0038f37bcd998a56422a49f",
+                "component_size": 3666382,
+                "component_sha256": "a4552ff210b6af33b7826a6b9aaefa6e01c7e6e976c9a852498570ededcf058f",
             },
         )
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4444468, "e6472064c2536c055fb9a47efe49c9d9b553ce15ed1bc308115730454e3b94bc"),
+            (4444468, "53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6"),
         )
         self.assertEqual(
             (

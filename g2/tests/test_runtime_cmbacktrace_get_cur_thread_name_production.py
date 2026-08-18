@@ -77,16 +77,16 @@ PROFILE_PINS = {
             "0fd3ac0a8497cff70f6886c0901274ed0"
         ),
         "overlay": (
-            142_578,
-            "3d5c9fe87fd46cbc40bb5670653f45d3d61f9d777168aa47b70fb10712698ab4",
+            142_986,
+            "1b0fc521cc8964da6525b7f7dce99060d07f5671f0038f37bcd998a56422a49f",
         ),
         "component": (
-            3_665_974,
-            "5cef32ba7350e7f6476336fa6a087010e6143e3e692205215c271430aa110d22",
+            3_666_382,
+            "a4552ff210b6af33b7826a6b9aaefa6e01c7e6e976c9a852498570ededcf058f",
         ),
         "package": (
             4_444_468,
-            "e6472064c2536c055fb9a47efe49c9d9b553ce15ed1bc308115730454e3b94bc",
+            "53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6",
         ),
     },
     "linux-clang": {

@@ -122,8 +122,8 @@ class RuntimeCmsisTimerNewTests(unittest.TestCase):
                     ],
                     LINUX_LINKED[name],
                 )
-        self.assertEqual(config["expected"]["overlay_size"], 142_578)
-        self.assertEqual(config["expected"]["component_size"], 3_665_974)
+        self.assertEqual(config["expected"]["overlay_size"], 142_986)
+        self.assertEqual(config["expected"]["component_size"], 3_666_382)
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"][
                 "overlay_size"
@@ -133,7 +133,7 @@ class RuntimeCmsisTimerNewTests(unittest.TestCase):
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
-        self.assertEqual(main["provider"]["size"], 3_665_974)
+        self.assertEqual(main["provider"]["size"], 3_666_382)
         self.assertEqual(
             main["provider"]["profiles"]["linux-clang"]["size"], 3_667_662
         )

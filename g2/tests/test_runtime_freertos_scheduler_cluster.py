@@ -286,17 +286,17 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 142_578,
+        "overlay_size": 142_986,
         "overlay_sha256": (
-            "3d5c9fe87fd46cbc40bb5670653f45d3d61f9d777168aa47b70fb10712698ab4"
+            "1b0fc521cc8964da6525b7f7dce99060d07f5671f0038f37bcd998a56422a49f"
         ),
-        "component_size": 3_665_974,
+        "component_size": 3_666_382,
         "component_sha256": (
-            "5cef32ba7350e7f6476336fa6a087010e6143e3e692205215c271430aa110d22"
+            "a4552ff210b6af33b7826a6b9aaefa6e01c7e6e976c9a852498570ededcf058f"
         ),
         "package_size": 4_444_468,
         "package_sha256": (
-            "e6472064c2536c055fb9a47efe49c9d9b553ce15ed1bc308115730454e3b94bc"
+            "53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6"
         ),
         "package_accounting": (143_245, 98_824, 4_202_399),
         # Builder reports exclude isolated/non-emitted registry categories.
@@ -390,11 +390,11 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 142_760,
+            "source_owned_bytes": 143_168,
             "source_owned_in_place_bytes": 182,
             "generated_patch_site_bytes": 98_402,
             "replaced_stock_function_bytes": 98_580,
-            "opaque_base_bytes": 3_424_780,
+            "opaque_base_bytes": 3_424_328,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {

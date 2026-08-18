@@ -159,7 +159,7 @@ class RuntimeCmsisEventFlagsTests(unittest.TestCase):
                 self.assertEqual(item["source"]["upstream_commit"], "d213f261b5be6bb29a7cce8b84071706b72f4d53")
                 self.assertEqual(item["expected"]["sha256"], APPLE_LINKED[name])
                 self.assertEqual(item["toolchain_profiles"]["linux-clang"]["expected"]["sha256"], LINUX_LINKED[name])
-        self.assertEqual(config["expected"]["component_size"], 3_665_974)
+        self.assertEqual(config["expected"]["component_size"], 3_666_382)
         self.assertEqual(config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"], 3_667_662)
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
