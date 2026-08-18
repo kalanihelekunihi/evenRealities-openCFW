@@ -88,6 +88,7 @@ EXPECTED_PRODUCTION_SOURCE_PATHS = (
     "components/shared/littlefs/runtime_littlefs_tag_id.h",
     "components/shared/littlefs/runtime_littlefs_tag_size.c",
     "components/shared/littlefs/runtime_littlefs_tag_size.h",
+    "components/apollo_main/core_overlay/runtime_littlefs_file_size_public.c",
 )
 
 EXPECTED_PRODUCTION_SYMBOLS = (
@@ -122,6 +123,7 @@ EXPECTED_PRODUCTION_SYMBOLS = (
     "open_cfw_littlefs_tag_type3",
     "open_cfw_littlefs_tag_id",
     "open_cfw_littlefs_tag_size",
+    "open_cfw_littlefs_file_size_public",
 )
 
 EXPECTED_OVERLAY_PRODUCTION_PATHS = {
@@ -135,6 +137,7 @@ EXPECTED_OVERLAY_PRODUCTION_PATHS = {
         EXPECTED_PRODUCTION_SOURCE_PATHS[28],
         EXPECTED_PRODUCTION_SOURCE_PATHS[30],
         EXPECTED_PRODUCTION_SOURCE_PATHS[32],
+        EXPECTED_PRODUCTION_SOURCE_PATHS[34],
     },
     "components/bootloader/core_overlay/overlay.json": {
         *EXPECTED_PRODUCTION_SOURCE_PATHS[4:13],
@@ -865,8 +868,8 @@ EXPECTED_TAG_ID_MANIFEST_PROVIDERS = {
     "apollo_main": {
         "kind": "source_build",
         "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-        "size": 3665974,
-        "sha256": "5cef32ba7350e7f6476336fa6a087010e6143e3e692205215c271430aa110d22",
+        "size": 3666623,
+        "sha256": "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
         "profiles": {
             "linux-clang": {
                 "size": 3667662,
@@ -1970,10 +1973,10 @@ def verify_production_allowlist() -> None:
     aggregate_pins = {
         "components/apollo_main/core_overlay/overlay.json": {
             "apple-clang": {
-                "overlay_size": 142578,
-                "overlay_sha256": "3d5c9fe87fd46cbc40bb5670653f45d3d61f9d777168aa47b70fb10712698ab4",
-                "component_size": 3665974,
-                "component_sha256": "5cef32ba7350e7f6476336fa6a087010e6143e3e692205215c271430aa110d22",
+                "overlay_size": 143227,
+                "overlay_sha256": "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
+                "component_size": 3666623,
+                "component_sha256": "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
             },
             "linux-clang": {
                 "overlay_size": 144266,

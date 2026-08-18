@@ -68,7 +68,7 @@ LEGACY_CANDIDATE_TOKENS = (
     "open_cfw_nanopb_decode_varint32_candidate",
 )
 
-PRODUCTION_COUNTS = (684, 632, 115)
+PRODUCTION_COUNTS = (790, 731, 221)
 PRIVATE_PATCH_NAME = "replace_nanopb_decode_varint32_eof"
 PUBLIC_PATCH_NAME = "replace_nanopb_decode_varint32"
 PRIVATE_MANIFEST_NAME = "nanopb_decode_varint32_eof_source_replacement"
@@ -125,16 +125,16 @@ PROSPECTIVE_LINUX_PINS = {
     },
 }
 APPLE_AGGREGATE_PINS = {
-    "overlay": (128_264, "742e44dd839010c3c14ae59419fc06bcd50a7fe91e7ba06b4946f5c4154c870b"),
-    "component": (3_651_660, "ea39a91f574b464d9071e581f5104d870e1f7e484d52de9b86407f0a90ac5d2e"),
-    "package": (4_430_154, "aa71330ceed2775494fb7ff599a23701ef746a25452a8d335574a3bac12674a9"),
-    "build_report": (2_323, "e7d7e4b585b0881f7bdef40d4feac5b8d89e445c63f98121d765622b6dcddd6e"),
-    "flash_plan": (784_999, "bfb010d525451379189ebfd316051a6fb9fae0a755be6a41f9955d02455803f9"),
+    "overlay": (143_227, "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"),
+    "component": (3_666_623, "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"),
+    "package": (4_445_117, "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"),
+    "build_report": (2_323, "3ca9f629d5bf3fe55d98767145320f4db73b39e1ed1cb4b8ead1c0343fa9202b"),
+    "flash_plan": (959_001, "076aeee8be5b81b623ac94efac0607a47638b7a1fa465a1be5e94568a5454bb7"),
 }
 LINUX_AGGREGATE_PINS = {
-    "overlay": (132_888, "7036c0e07a36376e5d98700c922ffeec7a6826388b75060a2b98b4228a411c61"),
-    "component": (3_656_284, "d5daf89121f44a61b303fa953da78550edd31e9159cf9b0b397aeb1b5cfef54d"),
-    "package": (4_434_778, "63d5cd1d1cbab2c3ece4a48f96b58a0cb14a7487917831f4c6d370b40ed41d90"),
+    "overlay": (144_266, "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9"),
+    "component": (3_667_662, "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"),
+    "package": (4_446_156, "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"),
     "build_report": (2_322, "3d0f0968f5f26a550719240a12a0e6f4e083f2ea566940f215f84b2a5f382a9a"),
     "flash_plan": (640_188, "4480ca9a4a4f237a477ccccdc9cb039f071fb2f6547298595e98a91098302a20"),
 }
@@ -577,6 +577,11 @@ def prospective_leaf_configs(current_overlay: dict) -> list[dict]:
                 ),
                 "relocations": copy.deepcopy(private_relocations),
             },
+            "apple-terminate-record": {
+                "reviewed_version_prefix": (
+                    "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+                ),
+            },
         },
     }
     public = {
@@ -595,6 +600,11 @@ def prospective_leaf_configs(current_overlay: dict) -> list[dict]:
                     PROSPECTIVE_LINUX_PINS[PRODUCTION_PUBLIC_FUNCTION]
                 ),
                 "relocations": copy.deepcopy(public_relocations),
+            },
+            "apple-terminate-record": {
+                "reviewed_version_prefix": (
+                    "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+                ),
             },
         },
     }
@@ -767,8 +777,8 @@ def validate_atomic_production_topology(
     )
     if observed_counts != PRODUCTION_COUNTS:
         raise AssertionError(
-            "production overlay inventory must be exactly 683 functions, "
-            "631 patch sites, and 114 relocated leaves"
+            "production overlay inventory must be exactly 790 functions, "
+            "731 patch sites, and 221 relocated leaves"
         )
 
     functions = overlay["functions"]
@@ -1374,7 +1384,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
         manifest = json.loads(CORE_MANIFEST.read_text(encoding="utf-8"))
         apollo = manifest["component_overrides"]["apollo_main"]
         regions = apollo["regions"]
-        self.assertEqual(len(regions), 1022)
+        self.assertEqual(len(regions), 1274)
         self.assertEqual(
             (apollo["provider"]["size"], apollo["provider"]["sha256"]),
             APPLE_AGGREGATE_PINS["component"],
@@ -2067,7 +2077,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             builder(
                 "missing-rodata-closure",
                 missing_literal_closure,
-                rf"relocated leaf {PRODUCTION_PRIVATE_FUNCTION} relocation 2 has unsupported appended-leaf type 'R_ARM_THM_MOVW_PREL_NC'",
+                rf"relocated leaf {PRODUCTION_PRIVATE_FUNCTION} relocation 2 requires exactly one of target_function or target_address",
             )
 
             def mutated_literal_closure(config: dict) -> None:

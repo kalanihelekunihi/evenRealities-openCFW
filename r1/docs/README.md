@@ -1,6 +1,18 @@
 # R1 clean-room functional firmware
 
-Status: active implementation goal; compatibility-core milestone complete.
+Status: compatibility core and opaque-free bundle complete; initial owned-ring
+BLE validation complete; deployment and instrumented validation remain blocked.
+
+The first owned-ring results are recorded in
+[`AUGUST-18-R1-B56EE2-HARDWARE-VALIDATION.md`](closures/AUGUST-18-R1-B56EE2-HARDWARE-VALIDATION.md).
+The remaining external-state stop condition is recorded in
+[`AUGUST-18-PHYSICAL-VALIDATION-BLOCKER.md`](closures/AUGUST-18-PHYSICAL-VALIDATION-BLOCKER.md):
+all evidence-backed software and bundle gates pass, and discovery, pairing,
+GATT layout, read-only channel-2 timing, and bounded burst behavior are now
+physically observed on retail `2.2.8.0002`. The remaining capabilities require
+authorized debug readbacks, the analyzed/source-built application, physical
+instrumentation, licensing/key custody, or explicit product-policy decisions.
+It is not a functional-completeness declaration.
 
 ## How this documentation is arranged
 
@@ -12,7 +24,7 @@ one, [`SECURITY.md`](SECURITY.md), [`PROVENANCE.md`](PROVENANCE.md), and
 | --- | --- |
 | [`correlation/`](correlation) | one record per subsystem, pinning recovered behavior to the stock image -- exact addresses, byte counts, record layouts, and how this implementation corresponds to them |
 | [`boundaries/`](boundaries) | provider-seam records preserving attribution history, source-admission decisions, and any runtime integration that remains fail-closed |
-| [`closures/`](closures) | Nordic SDK closure proofs, the source-built Zephyr/MCUboot bundle boundary, and the [August 17 functional-gap re-audit](closures/AUGUST-17-FUNCTIONAL-GAP-REAUDIT.md) |
+| [`closures/`](closures) | Nordic SDK closure proofs, the source-built Zephyr/MCUboot bundle boundary, the [August 17 functional-gap re-audit](closures/AUGUST-17-FUNCTIONAL-GAP-REAUDIT.md), the [owned-R1 BLE validation](closures/AUGUST-18-R1-B56EE2-HARDWARE-VALIDATION.md), and the narrowed [physical-validation blocker](closures/AUGUST-18-PHYSICAL-VALIDATION-BLOCKER.md) |
 | [`reference/`](reference) | function ownership, coverage, the capability ledger, the remaining frontier, the residual provider and production-readiness audit, and the BSim run summaries under `reference/bsim/` |
 
 To understand what the firmware *does*, read `correlation/`. To understand what
@@ -89,8 +101,12 @@ YHM2710 P1.01 provider now supplies the exact three-client `0xA8`/`0x28` shared-
 same bundle now hash-gates ST's ST25DVxxKC source, retains its bounded mailbox path and P0.03 GPO
 worker, and serializes the P0.11/P0.14 motion and P1.11/P1.14 dock routes with a dock-preempts-motion
 TWIM1 handoff. Its exact P1.10 dock-enable and typed dock-session lease are bound, while NFC starts
-disabled pending an explicit product policy. The wear-driven REG1 automation, destructive slot-0
-health format/retry, remaining PMIC devices, retail-layout migration, and owned-ring validation
+disabled pending an explicit product policy. Authenticated glasses-status opcode `0x89` now binds
+the wear-driven immediate-disable/exact delayed-enable REG1 policy, touch lease, immediate
+`{16,16,2,600}` secondary-mode BLE profile, and exact `0x2800`-tick delayed
+`{72,84,4,600}` slow profile while all other channel-1 BC/eAT handlers remain fail-closed.
+Destructive slot-0 health format/retry, remaining
+PMIC devices, retail-layout migration, and owned-ring validation
 remain HAL work. Motion feeds the live GoMore topic path; backward-clock/failure-60 reinitialization,
 optical persistent plan/state composition, and HRV result routing are target-bound. The
 source-built target now hash-gates and links the source-only Goodix demo/driver subset and binds
@@ -103,14 +119,14 @@ plans, state, workspaces, and initializer bindings are target-owned and live beh
 health authorization gate.
 Official Bosch BMA456 SensorAPI v2.29.0 and
 ST LIS2DW12 v2.1.0-compatible sources are pinned for the recovered motion variants; only their R1
-configuration/bus/event adapters are implemented locally. The Nordic target now probes the exact
-TWIM1 P0.11/P0.14 address-`0x18` bus in stock LIS2DW12-then-BMA456W order, applies the recovered
-provider configuration, and retains a bounded normalized FIFO API. The target also compiles
+configuration/bus/event adapters are implemented locally. The Nordic SDK target probes the exact
+TWIM1 P0.11/P0.14 address-`0x18` bus in stock LIS2DW12-then-BMA456W order. The source-built Zephyr
+target additionally binds the transparent QMA6100 third fallback at `0x12`/`0x13`, including its
+recovered fixed-25-Hz setup, transport/delay/lock/IRQ/FIFO seams, and the common normalized FIFO API. The target also compiles
 Nordic's exact SPIM2 provider/IRQ path while leaving the proprietary sensor provider behind that
-transport unbound. Its P0.15 interrupt worker,
-higher-level consumer, NFC/TWIM1 coexistence, and owned-ring validation remain open. QST QMA6100
-V1.0 lineage is proven and its complete 17-entry provider/adapter closure now compiles from
-owner-authorized transparent C pending hardware validation. All 362 GoMore executable entries
+transport unbound. Physical axis confirmation, NFC/TWIM1 coexistence, and owned-ring validation
+remain open. QST QMA6100 V1.0 lineage is proven and its complete 17-entry provider/adapter closure
+now compiles and is adopted by the alternate target from owner-authorized transparent C. All 362 GoMore executable entries
 likewise compile from transparent C, including their tensor runtime and sleep classifiers; the
 exact sleep-model parameters are checked-in source data rather than stock-image build inputs. See
 [`GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md`](correlation/GOMORE-PRIMITIVES-REDUCTION-CORRELATION.md)
@@ -248,8 +264,10 @@ The implementation is pinned to these repository-owned evidence sets:
   factory handler, hardware query, or response sender is exposed.
 - The 364-byte generic virtual-file export state machine is product-routed in
   [`EXPORT-STATE-MACHINE-CORRELATION.md`](correlation/EXPORT-STATE-MACHINE-CORRELATION.md); only its pure
-  control/chunk planner is local, while the composite private-log reader and live sender remain
-  excluded.
+  control/chunk planner is local. The exact bounded EP/log/cache/crash virtual-file source is
+  target-bound behind independent owner authorization in
+  [`DIAGNOSTIC-EXPORT-CORRELATION.md`](correlation/DIAGNOSTIC-EXPORT-CORRELATION.md), while the
+  undocumented live BLE sender remains excluded.
 - The 376-byte firmware-event-loop timer callback is product-routed in
   [`DELAYED-EVENT-TIMER-CORRELATION.md`](correlation/DELAYED-EVENT-TIMER-CORRELATION.md); a pure 64-slot
   countdown/reschedule step exposes due events and both recovered sentinel quirks while CMSIS,
@@ -278,7 +296,8 @@ The implementation is pinned to these repository-owned evidence sets:
   Nordic connection state and role-event delivery remain external.
 - The six-function / 1,954-byte R1 nonvolatile-recovery closure, registered system-`0x11`
   envelope, exact 116-byte body, fill-only
-  merge rules, and withheld identity-bearing transport are documented in
+  merge rules, local-only atomic three-record KV transaction with commit readback and exhaustive
+  byte-cut recovery, and withheld identity-bearing transport are documented in
   [`NV-RECOVERY-CORRELATION.md`](correlation/NV-RECOVERY-CORRELATION.md).
 - The two-entry / 498-byte R1 MAC-keyed compiled-default restore, exact storage-event veneer, and
   59-record identity-table extent are
@@ -302,9 +321,10 @@ The implementation is pinned to these repository-owned evidence sets:
   [`RESET-TRACE-CORRELATION.md`](correlation/RESET-TRACE-CORRELATION.md).
 - The 16-function / 1,802-byte R1 structured-log record and live-cache closure, including four
   exact manual supplements, is documented in
-  [`STRUCTURED-LOG-CACHE-CORRELATION.md`](correlation/STRUCTURED-LOG-CACHE-CORRELATION.md); Nordic logging,
-  RTOS/toolchain services, time/device providers, and the `log.bin` writer/export path remain
-  separate provider boundaries.
+  [`STRUCTURED-LOG-CACHE-CORRELATION.md`](correlation/STRUCTURED-LOG-CACHE-CORRELATION.md); its bounded
+  cache, both encoders, configuration, and periodic `log.bin` persistence are compiled and live on
+  the source-built target, while Nordic logging, RTOS/toolchain services, abstract time/device
+  providers, and the withheld private BLE sender remain separate boundaries.
 - The adjacent three-function / 876-byte `log.bin` circular-page writer is documented in
   [`LOG-BIN-WRITER-CORRELATION.md`](correlation/LOG-BIN-WRITER-CORRELATION.md); pinned FAL supplies lookup,
   configured flash callbacks supply physical I/O, and private export/transport remains excluded.
@@ -688,8 +708,9 @@ off at boot with biometric calculation fail-closed.
   ST LIS2DW12 v2.1.0-compatible code own their driver bodies; local code may contain only the
   recovered product adapters. The Nordic image probes the recovered TWIM1 P0.11/P0.14 bus at
   address `0x18`, selects LIS2DW12 before BMA456W, and retains the fixed configuration and bounded
-  FIFO API. Interrupt-driven ingestion and owned-ring validation remain, and the unauthenticated
-  QST path is not implemented.
+  FIFO API. The source-built Zephyr target additionally composes the transparent reconstructed
+  QMA6100 as the third fallback at addresses `0x12`/`0x13`, with the recovered 25-Hz setup, IRQ
+  worker, and bounded FIFO normalization. Physical installed-part and axis validation remain.
 - Nordic `nrfx_saadc.c` supplies the physical ADC driver. The retained R1 adapter configures
   battery AIN5/P0.29, PMIC current AIN3/P0.05, and NFC rectifier AIN2/P0.04 with the recovered
   gains and acquisition times. Portable R1 code implements only the exact filters, conversions,
@@ -710,11 +731,15 @@ off at boot with biometric calculation fail-closed.
   openR1 uses recovered block 7 as a generation commit and alternates sectors so an interrupted
   rollover retains the prior complete snapshot; strict legacy import is supported. See
   [`KV-STORE-CORRELATION.md`](correlation/KV-STORE-CORRELATION.md).
-- The R1-specific two-sector `sleep.db` journal: exact headers, eight slots per sector, body-first
-  commits, four-byte alignment, MODBUS CRC, synchronization marker, close sequence, oldest-sector
-  rollover, 3,888-byte writer ceiling, and 232-byte synchronization-reader ceiling.
+- The R1-specific two-sector `sleep.db` journal: exact headers, eight slots per sector, four-byte
+  alignment, MODBUS CRC, synchronization marker, close sequence, oldest-sector rollover,
+  3,888-byte writer ceiling, and 232-byte synchronization-reader ceiling. New records use an
+  extension-compatible reservation/body/metadata/final-commit transition while legacy headers
+  remain readable.
 - Compact sleep persistence splits runs into six-bit half-minute chunks and merges adjacent types
-  during restart recovery. Power-loss tests prove an orphaned body is not counted as a record.
+  during restart recovery. Exhaustive byte-cut tests cover normal append, rollover erase, torn
+  headers, orphaned bodies, and a different subsequent append. The KV suite likewise exhausts
+  every erase/program byte during normal rollover and legacy-to-generation migration.
 - Restored and newly persisted sessions retain their exact journal-header offset. A matched sleep
   packet ACK writes the timestamp-checked `0x11223344` marker before consuming the pending ACK or
   changing RAM; a flash failure leaves both states retryable.
@@ -759,6 +784,10 @@ off at boot with biometric calculation fail-closed.
   then the platform callback asks Peer Manager to secure an unencrypted link. Duplicate phone-role
   assignment is rejected without replacing the existing owner. Neither role assignment nor a bond
   sets the independent product-authorization bit.
+- The source-built Zephyr target supplies that independent policy with a CRC-protected persisted
+  owner identity. Only a completed bonded pairing may enroll the first owner; encryption, restored
+  bond state, and `pairAuth` cannot create or replace it. Corrupt records fail closed, and the
+  local-only revocation API deletes the record, unpairs, clears authorization, and disconnects.
 - The registered R1 Peer Manager callback now delegates Nordic's standard event/error and flash
   recovery handling to SDK 17.1.0, preserves repairing and product connection policy, performs no
   whitelist promotion, and deliberately excludes the stock LTK-printing diagnostic helper; see
@@ -777,9 +806,12 @@ off at boot with biometric calculation fail-closed.
   optional 15-byte provisioned product serial. It intentionally advertises no service UUID or TX
   power element.
 - Normal mode runs at 100 ms for 60 seconds, then 1 second indefinitely. The admitted factory-mode
-  configuration runs at 100 ms indefinitely and disables slow mode. Startup currently selects
-  normal, unprovisioned mode; durable factory marker/serial restore and the two-role stop/restart
-  policy remain pending storage and role integration.
+  configuration runs at 100 ms indefinitely and disables slow mode. Both targets select normal
+  mode at startup. The source-built target restores the exact fixed-width product serial or `FF`
+  sentinel from `nv_r1`, includes a provisioned serial in manufacturer data, restarts connectable
+  advertising after the first link for the second product role, and stops when phone and glasses
+  roles are both occupied. It also adopts the recovered `nv_r1` byte-`0x70` marker `0x55` as
+  `_FAC` fast-indefinite mode. Physical timing and multi-device on-air validation remain pending.
 
 ### Health history and synchronization
 
@@ -844,21 +876,24 @@ The following stock behaviors are intentionally changed:
 
 - Every command has an actual backing-length check. The recovered short-frame over-reads are not
   reproduced.
-- State-changing ACKs are generated after validation and state update, not before an unchecked or
-  failed effect.
+- State-changing ACKs are generated only after strict request and authorization validation. Routes
+  whose recovered contract is ACK-before-effect use a bounded typed worker and explicit failure
+  telemetry rather than an unchecked synchronous mutation.
 - Pair role selection does not authenticate a peer. Mutations require encrypted, bonded, and
   separately authorized session state.
 - The channel-1/eAT parser that allowed a 244-byte value to overflow a 36-byte global buffer is not
   present. A future HAL must keep data length-carrying and bounded end to end.
-- OTA start, advertising target mutation, algorithm-key provisioning, NV restore, shutdown,
-  remove-ring, factory/test commands, and destructive storage operations are withheld from the
-  normal dispatcher.
+- Algorithm-key provisioning, power control, private diagnostic mutation, factory/test commands,
+  and generic destructive storage operations are withheld from the normal dispatcher. OTA start,
+  advertising target mutation, NV restore, and remove-ring metadata removal have narrow
+  owner-phone-authorized routes with exact lengths and bounded target actions.
 - Device serial reads require authorization. Key material and live restore payloads are never
   logged or exposed through a generic command surface.
 - Prepare/Execute writes, raw register buses, NFC mailbox writes, and generic flash writes are not
   exposed over BLE.
-- The BAE8 service observes and rejects queued-write authorization operations. Channel 1 remains a
-  bounded no-op until its BC/eAT parser and product authorization policy are independently complete.
+- The BAE8 service observes and rejects queued-write authorization operations. Channel 1 is bounded
+  and deny-by-default: only authenticated, bonded, independently authorized glasses-status opcode
+  `0x89` is live; every other BC/eAT destination remains unreachable.
 
 See [`SECURITY.md`](SECURITY.md) for the integration requirements these choices impose.
 
@@ -950,7 +985,8 @@ P1.10 lifecycle and exclusive dock mutex are provisioned. The former TWIM1 insta
 motion is resolved by the R1-owned arbiter in `openr1_twim1_arbiter.c`: the dock (NFC) context takes
 the bus through a documented handoff, motion never preempts it, and every transfer by a non-owner
 fails explicitly. Physical dock coexistence and owned-hardware validation remain gates.
-The reconstructed QST-lineage QMA6100 closure remains unbound pending installed-part confirmation.
+The reconstructed QST-lineage QMA6100 closure is bound as the alternate Zephyr target's third
+motion fallback; installed-part confirmation and physical-axis validation remain open.
 The IQS7211E Nordic transport, GPIO lifecycle, active-low IRQ worker,
 restart timer, and `touchSwitch` policy hook are retained in the image. Zephyr binds reconstructed
 shared power; live touch remains gated on identity provisioning, wear lease, and physical validation.

@@ -26,8 +26,8 @@ class RuntimeCmsisThreadSetPriorityTests(unittest.TestCase):
   manifest=json.loads(MANIFEST.read_text());main=manifest['component_overrides']['apollo_main'];regions={x['name']:x for x in main['regions']}
   self.assertEqual((regions['apollo_freertos_task_priority_set_source_leaf']['file_offset'],regions['apollo_freertos_task_priority_set_source_leaf']['size'],regions['apollo_freertos_task_priority_set_source_leaf']['target_address']),(3658792,208,8082440))
   self.assertEqual((regions['apollo_cmsis_thread_set_priority_source_leaf']['file_offset'],regions['apollo_cmsis_thread_set_priority_source_leaf']['size'],regions['apollo_cmsis_thread_set_priority_source_leaf']['target_address']),(3659000,50,8082648))
-  self.assertEqual((main['provider']['size'],main['provider']['profiles']['linux-clang']['size']),(3666382,3667662))
-  self.assertEqual((manifest['package']['expected_size'],manifest['package']['expected_sha256']),(4444468,'53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6'))
+  self.assertEqual((main['provider']['size'],main['provider']['profiles']['linux-clang']['size']),(3666623,3667662))
+  self.assertEqual((manifest['package']['expected_size'],manifest['package']['expected_sha256']),(4445117,'62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6'))
   self.assertEqual((manifest['package']['profiles']['linux-clang']['expected_size'],manifest['package']['profiles']['linux-clang']['expected_sha256']),(4446156,'2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3'))
  def test_raise_ready_task_moves_list_and_yields(self):
   self.lib.open_cfw_priority_host_reset(10,5,5,1);self.assertEqual(self.lib.open_cfw_priority_host_call(0,12),0);self.assertEqual(tuple(self.get(i) for i in range(7)),(12,12,44,1,12,1,1))

@@ -6,6 +6,7 @@
 #include <stdint.h>
 
 #include "openr1/r1_protocol.h"
+#include "openr1/r1_kv_store.h"
 #include "openr1/r1_motion.h"
 
 #define R1_NV_RECOVERY_BODY_BYTES 116u
@@ -21,6 +22,8 @@
 #define R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_BYTES 6u
 #define R1_NV_RECOVERY_POWER_BATTERY_TYPE_OFFSET 0u
 #define R1_NV_RECOVERY_POWER_VOLTAGE_COMPENSATION_OFFSET 2u
+#define R1_NV_PRODUCT_SERIAL_BYTES 15u
+#define R1_NV_FACTORY_MODE_MARKER UINT8_C(0x55)
 
 #define R1_NV_RECOVERY_CHANGED_CONFIG UINT8_C(0x01)
 #define R1_NV_RECOVERY_CHANGED_POWER UINT8_C(0x02)
@@ -53,8 +56,8 @@ typedef struct {
 
 /*
  * Product-owned state split across the recovered nv_r1, power, and r_size
- * records. This API plans bounded internal recovery only. The normal BLE
- * nvRecover command remains deliberately unavailable.
+ * records. This API plans bounded internal recovery only; the normal BLE
+ * route is a separate encrypted, bonded, owner-phone authorization boundary.
  */
 typedef struct {
     uint8_t config[R1_NV_RECOVERY_CONFIG_BYTES];
@@ -114,6 +117,21 @@ r1_error r1_nv_recovery_merge(
     uint16_t expected_crc,
     r1_nv_recovery_result *result);
 
+/* Loads the three recovered records from a live kv.bin snapshot. */
+r1_error r1_nv_recovery_store_load(
+    const r1_kv_store *store, r1_nv_recovery_state *state);
+
+/*
+ * Performs the fill-only recovery merge and commits every changed class in
+ * one generation-bearing kv.bin snapshot. A failed commit restores the
+ * caller-visible store state; after reboot, the KV commit marker admits only
+ * the complete old or complete new snapshot. This is an internal/local API,
+ * and does not itself grant BLE authorization.
+ */
+r1_error r1_nv_recovery_store_merge_commit(
+    r1_kv_store *store, const uint8_t *body, size_t body_length,
+    uint16_t expected_crc, r1_nv_recovery_result *result);
+
 r1_error r1_nv_recovery_command_handler_plan_decode(
     const uint8_t *payload, size_t payload_length,
     r1_nv_recovery_handler_plan *plan);
@@ -140,5 +158,10 @@ r1_error r1_nv_accelerometer_calibration_decode(
     r1_motion_axis_calibration *calibration, bool *present);
 r1_error r1_nv_ring_size_decode(
     const uint8_t *input, size_t length, uint8_t *ring_size, bool *valid);
+r1_error r1_nv_product_serial_decode(
+    const uint8_t *input, size_t length,
+    uint8_t serial[R1_NV_PRODUCT_SERIAL_BYTES], bool *provisioned);
+r1_error r1_nv_factory_mode_decode(
+    const uint8_t *input, size_t length, bool *factory_mode);
 
 #endif

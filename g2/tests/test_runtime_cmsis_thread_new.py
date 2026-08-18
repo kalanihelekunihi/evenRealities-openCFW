@@ -116,8 +116,8 @@ class RuntimeCmsisThreadNewTests(unittest.TestCase):
         self.assertEqual(
             (config["expected"]["overlay_size"], config["expected"]["overlay_sha256"],
              config["expected"]["component_size"], config["expected"]["component_sha256"]),
-            (142986, "1b0fc521cc8964da6525b7f7dce99060d07f5671f0038f37bcd998a56422a49f",
-             3666382, "a4552ff210b6af33b7826a6b9aaefa6e01c7e6e976c9a852498570ededcf058f"),
+            (143227, "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
+             3666623, "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"),
         )
         linux_config = config["toolchain_profiles"]["linux-clang"]["expected"]
         self.assertEqual(
@@ -143,12 +143,12 @@ class RuntimeCmsisThreadNewTests(unittest.TestCase):
         )
         main = manifest["component_overrides"]["apollo_main"]["provider"]
         self.assertEqual((main["size"], main["sha256"]),
-                         (3666382, "a4552ff210b6af33b7826a6b9aaefa6e01c7e6e976c9a852498570ededcf058f"))
+                         (3666623, "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"))
         self.assertEqual((main["profiles"]["linux-clang"]["size"],
                           main["profiles"]["linux-clang"]["sha256"]),
                          (3667662, "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"))
         self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-                         (4444468, "53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6"))
+                         (4445117, "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"))
         self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"],
                           manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]),
                          (4446156, "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"))

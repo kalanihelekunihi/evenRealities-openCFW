@@ -74,10 +74,12 @@ The official two-target store does not contain a phone address. The exact persis
 `0x000738A8` has only three direct callers: reset erases both slots at `0x00046052`, the store path
 writes both at `0x0004D9E2`, and `removeRingNotify` erases both at `0x000844E6`.
 
-OpenR1 keeps the externally callable `advStart` command refused in the normal dispatcher:
-product authorization remains fail-closed and unrefusing requires the bound composition to
-pass end-to-end authorization and owned-hardware validation. As of 2026-08-14 the
-composition itself is bound and host-tested behind that refusal:
+As of 2026-08-18 OpenR1 exposes `advStart` through the normal dispatcher only for an exact
+12-byte SET from the encrypted, bonded, independently owner-authorized phone role. Short,
+trailing, GET, unassigned, glasses-role, unbonded, unencrypted, and unauthorized requests
+cannot schedule an effect. The empty success response is admitted before the bounded target
+work item, preserving the recovered response-before-event/effect ordering. The complete route
+is source-bound and host-tested:
 
 - `r1_connection_control_adv_start_handler_plan_decode` now binds the exact omitted handler
   extent `0x00083D04..<0x00083D5A` as a strict pure plan. It accepts only the legitimate 12-byte
@@ -88,11 +90,14 @@ composition itself is bound and host-tested behind that refusal:
   targets unconditionally, schedule the raw `0x5000` delayed disconnect for a mismatching
   connected glasses peer, start fast advertising while either role is unoccupied, and stop
   advertising only when both roles are occupied and the peer matched.
-- `r1_peer_target_persist` writes both targets at device-info offsets 8 and 14; the SDK
-  `openr1_connection_control_adv_start` entry point drives it through the
+- `r1_peer_target_persist` writes both targets at device-info offsets 8 and 14. The SDK target
+  copies accepted targets into a four-entry CMSIS queue, then its worker drives the
   production-initialized `r1_kv_store` (`kv.bin`), reads the connected glasses peer address
   from the GAP connected-event cache in `openr1_bae8`, schedules the disconnect through
-  `r1_delayed_event_schedule`, and drives the Nordic `ble_advertising` start/stop hooks.
+  `r1_delayed_event_schedule`, and drives Nordic `ble_advertising` start/stop hooks. The
+  Zephyr target uses the same four-entry asynchronous boundary, mutex-serialized atomic KV
+  commit, live role/address snapshot, delayed disconnect work, and role-aware Zephyr
+  advertising provider.
 
 The delayed-event timer driver is now bound (update 2026-08-14): a CMSIS one-shot timer in
 `../../platform/nrf52840/sdk/openr1_connection_control.c` steps the portable
@@ -104,12 +109,39 @@ converted to kernel ticks with `osKernelGetTickFreq` (the recovered 1,024-Hz tic
 up and never arming a zero-tick timer; the stock empty-table `0xFFFFFFFF`-millisecond reload
 is suppressed because it carries no event. A mutex serializes the scheduler path against the
 timer-daemon callback. One binding stays deliberately unbound rather than inventing
-behavior: command/peer byte-order reconciliation with the first-party sender (an e2e
+behavior: command/peer byte-order reconciliation with the first-party sender (an owned-hardware
 validation concern). The durability commit is fail-closed: a kv persist failure blocks the
 disconnect and advertising actions, and a full delayed-event table or timer failure is
 recorded but tolerated, matching the stock response-before-effect ordering.
 Host tests cover the planner branches, the offset-8/14 persistence, a full kv commit/reopen
 cycle over memory flash, and the delayed-event schedule composition.
+
+## `removeRingNotify` metadata-removal contract
+
+The system handler at `0x000844B0..<0x000844EC` is independently pinned with
+SHA-256 `f8b2bef36bb1513d08526279dae8a2b188315db51169191dba3658094d4db9e3`.
+Its table entry at `0x0009A55C` is `82000000b1440800`. The recovered route
+emits an empty success response first, clears `dev_info` byte-24 flag `0x04`
+through setter `0x00073834`, commits a full snapshot, supplies the same six
+`FF` bytes to both target slots through setter `0x000738A8`, restores marker
+`CAMH`, and commits a second full snapshot. The complete direct-call sets for
+both setters and the payload helper are evidence-locked by
+`summarize_r1_remove_ring.py`; three isolated production-Thumb cases in
+`emulate_r1_remove_ring.py` prove the response/effect order and the stock
+malformed-length behavior without touching BLE or persistent storage.
+
+OpenR1 exposes only the legitimate exact one-byte SET form, and only from an
+encrypted, bonded, independently owner-authorized phone role. Header-only,
+trailing, GET, unassigned, glasses-role, unbonded, unencrypted, and
+unauthorized requests cannot schedule an effect. The empty response enters the
+runtime transmit queue before the bounded SDK or Zephyr storage worker is
+called. `r1_remove_ring_metadata_commit` then performs the exact two-generation
+sequence over the common transparent KV store: clear flag and commit; erase
+offsets 8/14, restore `CAMH` at offset 20, and commit again. Unlike stock, a
+provider failure is recorded. Exhaustive host fault injection at every flash
+byte boundary proves a reboot selects only the old, first-commit intermediate,
+or final generation; retry from all three states reaches the final state. This
+route is intentionally destructive and is not used as a discovery probe.
 
 Update (2026-08-13): the Nordic SDK application now binds the role-occupancy half of this
 contract. `openr1_advertising_set_role_occupancy` reads phone/glasses occupancy from the runtime

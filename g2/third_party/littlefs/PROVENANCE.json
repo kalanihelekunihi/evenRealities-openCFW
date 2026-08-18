@@ -146,7 +146,8 @@
       "components/shared/littlefs/runtime_littlefs_tag_id.c",
       "components/shared/littlefs/runtime_littlefs_tag_id.h",
       "components/shared/littlefs/runtime_littlefs_tag_size.c",
-      "components/shared/littlefs/runtime_littlefs_tag_size.h"
+      "components/shared/littlefs/runtime_littlefs_tag_size.h",
+      "components/apollo_main/core_overlay/runtime_littlefs_file_size_public.c"
     ],
     "allowed_production_symbols": [
       "open_cfw_littlefs_file_tell_private",
@@ -179,7 +180,8 @@
       "open_cfw_littlefs_tag_type1",
       "open_cfw_littlefs_tag_type3",
       "open_cfw_littlefs_tag_id",
-      "open_cfw_littlefs_tag_size"
+      "open_cfw_littlefs_tag_size",
+      "open_cfw_littlefs_file_size_public"
     ],
     "rewind_leaf": {
       "upstream_function": "lfs_file_rewind_",

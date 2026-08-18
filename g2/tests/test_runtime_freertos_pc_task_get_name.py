@@ -118,20 +118,17 @@ PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 142_986
+PRODUCTION_OVERLAY_SIZE = 143_227
 PRODUCTION_OVERLAY_SHA256 = (
-    "3d5c9fe87fd46cbc40bb5670653f45d3"
-            "d61f9d777168aa47b70fb10712698ab4"
+    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
 )
-PRODUCTION_COMPONENT_SIZE = 3_666_382
+PRODUCTION_COMPONENT_SIZE = 3_666_623
 PRODUCTION_COMPONENT_SHA256 = (
-    "a4552ff210b6af33b7826a6b9aaefa6e"
-            "01c7e6e976c9a852498570ededcf058f"
+    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
 )
-PACKAGE_SIZE = 4_444_468
+PACKAGE_SIZE = 4_445_117
 PACKAGE_SHA256 = (
-    "53b240df100153c5453697fb3ce8ac66"
-            "663ca82484a1d69f88345e1e7c3cd3c6"
+    "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"
 )
 
 
@@ -534,10 +531,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 84_654,
-                "opaque_base_bytes": 3_438_528,
-                "replaced_stock_function_bytes": 84_836,
-                "source_owned_bytes": 121_900,
+                "generated_patch_site_bytes": 99_192,
+                "opaque_base_bytes": 3_423_990,
+                "replaced_stock_function_bytes": 99_370,
+                "source_owned_bytes": 143_409,
             },
         )
 
@@ -688,8 +685,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         )
         self.assertEqual(
             sha256(bytes(historical_component)),
-            "f678547cfc5c3df691217d4c788a003c"
-            "2b9d0194ce2628d7d6b1a9d5b97a4d41",
+            "bfefdcb6b9022dd546aef816a5adab89d45f50911bcc7e6d9a0561cb16857f5e",
         )
         historical_payloads = dict(payloads)
         historical_payloads["apollo_main"] = bytes(historical_component)
@@ -697,11 +693,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
             manifest,
             historical_payloads,
         )
-        self.assertEqual(len(historical_image), 4_415_820)
+        self.assertEqual(len(historical_image), 4_415_860)
         self.assertEqual(
             sha256(historical_image),
-            "e1fb862e75e0a4f89c83296fb6a6c6b"
-            "2aa9107837b9e423d1baedc16f00a48cb",
+            "dc8884b3cc9427076744e11a455f08cafcc52fefba3f8a756f7647b077c8f84c",
         )
 
 

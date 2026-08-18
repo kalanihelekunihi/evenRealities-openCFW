@@ -1831,6 +1831,23 @@ bytes. The non-importing v0 migration policy is host-tested, and the candidate
 compiles as exactly three Thumb symbols. Production routing and ownership
 remain zero. See `docs/research/g2-kvdb-als-scale-recovery.md`.
 
+## Current G2 KVDB ALS-scale production routing
+
+The ALS-scale candidate above is now production-routed under the reviewed
+apple-clang profile: three relocated overlay leaves (28-byte default
+initializer, 90-byte migration callback, 96-byte whole-record writer, with an
+11-byte key-string read-only closure on each referencing leaf) plus three
+`B.W` entry redirects replace the 338 stock body bytes
+`[0x004AECA4,0x004AEDF6)`. Providers bind exactly to the retained CRC-16 at
+`0x0049ACD4` and the blob read/write adapters at `0x004D956C`/`0x004D957E`;
+the 50-byte literal tail and the fixed SRAM record at `0x200037BC` are
+untouched, and both stored roots plus all three direct entry calls reach the
+leaves through the redirects. Apple Clang 21 overlay/component/package pins
+are `143227/3666623/4445117` (SHA-256 `200b0b33…`, `ad895f78…`, `62569df0…`).
+The leaves and redirects are gated `apple-clang`; linux-clang leaf pins await
+Linux toolchain regeneration. Ownership: 338 replaced stock body bytes. See
+`docs/research/g2-kvdb-als-scale-recovery.md`.
+
 ## Current G2 KVDB terminal-mode increment
 
 The retained `service_kvdb_terminal_mode.c` object is completely bounded at

@@ -130,12 +130,12 @@
 
 		boot_partition: partition@0 {
 			label = "mcuboot";
-			reg = <0x00000000 0x0000c000>;
+			reg = <0x00000000 0x00027000>;
 		};
 
-		slot0_partition: partition@c000 {
+		slot0_partition: partition@27000 {
 			label = "image-0";
-			reg = <0x0000c000 0x000c5000>;
+			reg = <0x00027000 0x000aa000>;
 		};
 
 		settings_partition: partition@d1000 {

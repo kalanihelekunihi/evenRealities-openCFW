@@ -6,6 +6,7 @@
 #include "ble.h"
 #include "ble_hci.h"
 #include "cmsis_os2.h"
+#include "FreeRTOS.h"
 #include "nrf_error.h"
 
 #include "openr1/r1_event.h"
@@ -21,6 +22,7 @@
  * steps the portable state from a CMSIS one-shot timer and fires the due
  * disconnect through sd_ble_gap_disconnect. */
 #define OPENR1_CONNECTION_CONTROL_EVENT_DISCONNECT UINT32_C(0x01)
+#define OPENR1_CONNECTION_CONTROL_QUEUE_DEPTH 4u
 
 extern r1_runtime *openr1_platform_runtime(void);
 
@@ -28,6 +30,85 @@ static uint32_t last_error;
 static r1_delayed_event_state delayed_events;
 static osTimerId_t delayed_event_timer;
 static osMutexId_t delayed_event_mutex;
+static osMessageQueueId_t advertising_targets_queue;
+static osThreadId_t advertising_targets_thread;
+static StaticTask_t advertising_targets_control_block;
+static StackType_t advertising_targets_stack[configMINIMAL_STACK_SIZE * 4u];
+
+typedef struct {
+    uint8_t first[R1_PEER_ADDRESS_SIZE];
+    uint8_t second[R1_PEER_ADDRESS_SIZE];
+} openr1_advertising_targets_request;
+
+static r1_error queue_advertising_targets(
+    void *context,
+    const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
+    const uint8_t second_target[R1_PEER_ADDRESS_SIZE]) {
+    (void)context;
+    if (advertising_targets_queue == NULL || first_target == NULL ||
+        second_target == NULL) {
+        return R1_ERROR_STATE;
+    }
+    openr1_advertising_targets_request request;
+    for (size_t index = 0u; index < R1_PEER_ADDRESS_SIZE; ++index) {
+        request.first[index] = first_target[index];
+        request.second[index] = second_target[index];
+    }
+    return osMessageQueuePut(
+               advertising_targets_queue, &request, 0u, 0u) == osOK
+        ? R1_OK : R1_ERROR_CAPACITY;
+}
+
+static void advertising_targets_worker(void *argument) {
+    (void)argument;
+    for (;;) {
+        openr1_advertising_targets_request request;
+        if (osMessageQueueGet(
+                advertising_targets_queue, &request, NULL,
+                osWaitForever) != osOK) {
+            last_error = NRF_ERROR_INVALID_STATE;
+            continue;
+        }
+        const uint32_t error = openr1_connection_control_adv_start(
+            request.first, request.second);
+        if (error != NRF_SUCCESS) {
+            last_error = error;
+        }
+    }
+}
+
+uint32_t openr1_connection_control_initialize(void) {
+    static const osThreadAttr_t attributes = {
+        .name = "adv_targets",
+        .cb_mem = &advertising_targets_control_block,
+        .cb_size = sizeof advertising_targets_control_block,
+        .stack_mem = advertising_targets_stack,
+        .stack_size = sizeof advertising_targets_stack,
+        .priority = osPriorityLow,
+    };
+    if (advertising_targets_queue != NULL ||
+        advertising_targets_thread != NULL) {
+        return advertising_targets_queue != NULL &&
+                advertising_targets_thread != NULL
+            ? NRF_SUCCESS : NRF_ERROR_INVALID_STATE;
+    }
+    advertising_targets_queue = osMessageQueueNew(
+        OPENR1_CONNECTION_CONTROL_QUEUE_DEPTH,
+        sizeof(openr1_advertising_targets_request), NULL);
+    if (advertising_targets_queue == NULL) {
+        return NRF_ERROR_NO_MEM;
+    }
+    advertising_targets_thread = osThreadNew(
+        advertising_targets_worker, NULL, &attributes);
+    if (advertising_targets_thread == NULL) {
+        (void)osMessageQueueDelete(advertising_targets_queue);
+        advertising_targets_queue = NULL;
+        return NRF_ERROR_NO_MEM;
+    }
+    r1_runtime_set_advertising_targets_handler(
+        openr1_platform_runtime(), queue_advertising_targets, NULL);
+    return NRF_SUCCESS;
+}
 
 /* Milliseconds to kernel ticks at the recovered 1,024-Hz tick rate
  * (osKernelGetTickFreq), rounding up and never returning zero so a short

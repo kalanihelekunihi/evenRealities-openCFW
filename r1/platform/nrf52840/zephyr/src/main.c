@@ -41,6 +41,10 @@ int main(void) {
     if (error == 0) {
         error = openr1_storage_zephyr_initialize();
     }
+    if (error == 0 && !openr1_storage_zephyr_structured_log_typed(
+            1u, "openR1 storage ready", NULL, 0u)) {
+        error = -1;
+    }
     if (error == 0) {
         error = openr1_rtc_zephyr_initialize();
     }
@@ -126,6 +130,8 @@ int main(void) {
         uint32_t wait = openr1_platform_poll(k_uptime_get_32());
         const uint32_t stream_wait = openr1_sensor_stream_zephyr_poll();
         (void)openr1_gomore_zephyr_poll(openr1_platform_runtime());
+        (void)openr1_storage_zephyr_structured_log_service(
+            k_uptime_get_32());
         if (wait == UINT32_MAX) {
             wait = 100u;
         }

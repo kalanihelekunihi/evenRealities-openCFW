@@ -18,6 +18,8 @@
 #define R1_SLEEP_DB_CLOSE_WORD0 UINT32_C(0xccffaabb)
 #define R1_SLEEP_DB_CLOSE_WORD1 UINT32_C(0x66889977)
 #define R1_SLEEP_DB_SYNC_MARKER UINT32_C(0x11223344)
+#define R1_SLEEP_DB_RECORD_RESERVED UINT16_C(0xfffe)
+#define R1_SLEEP_DB_RECORD_COMMITTED UINT16_C(0xfffc)
 
 typedef struct {
     r1_flash flash;
@@ -32,6 +34,8 @@ typedef struct {
     uint32_t start_timestamp;
     uint32_t end_timestamp;
     uint16_t crc16;
+    bool allocated;
+    bool committed;
     bool synchronized;
 } r1_sleep_db_record;
 

@@ -137,15 +137,13 @@ RELOCATED_SHA256 = (
     "afbba4f9f08b2df17a4350d7a7e83d99"
     "b8439283ee40c1a1604bd879dff75f04"
 )
-PRODUCTION_OVERLAY_SIZE = 142_986
+PRODUCTION_OVERLAY_SIZE = 143_227
 PRODUCTION_OVERLAY_SHA256 = (
-    "3d5c9fe87fd46cbc40bb5670653f45d3"
-            "d61f9d777168aa47b70fb10712698ab4"
+    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
 )
-PRODUCTION_COMPONENT_SIZE = 3_666_382
+PRODUCTION_COMPONENT_SIZE = 3_666_623
 PRODUCTION_COMPONENT_SHA256 = (
-    "a4552ff210b6af33b7826a6b9aaefa6e"
-            "01c7e6e976c9a852498570ededcf058f"
+    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
 )
 PRODUCTION_OFFSET = 113_808
 PRODUCTION_ADDRESS = 0x007A_FFB4
@@ -825,16 +823,16 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 98_402,
+                "generated_patch_site_bytes": 99_192,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_424_328,
-                "replaced_stock_function_bytes": 98_580,
-                "source_owned_bytes": 143_168,
+                "opaque_base_bytes": 3_423_990,
+                "replaced_stock_function_bytes": 99_370,
+                "source_owned_bytes": 143_409,
                 "source_owned_in_place_bytes": 182,
             },
         )
-        self.assertEqual(len(report["overlay"]["functions"]), 779)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 720)
+        self.assertEqual(len(report["overlay"]["functions"]), 786)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 727)
 
         historical_overlay = self.production_overlay[:113_970]
         self.assertEqual(
@@ -926,8 +924,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             ),
             (
                 3_637_366,
-                "5db419e8140528d8b4922fd0393391eb"
-                "37c71958edbe25a67eb96692b5dc98fc",
+                "bfefdcb6b9022dd546aef816a5adab89d45f50911bcc7e6d9a0561cb16857f5e",
             ),
         )
 

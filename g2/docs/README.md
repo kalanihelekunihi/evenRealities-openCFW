@@ -14,6 +14,7 @@ read for what.
 | [`transparent-source.md`](transparent-source.md) | *what is every byte of the image made of?* — the Ghidra-to-source pipeline, and what it deliberately does not establish |
 | [`transparent-source-ledger.md`](transparent-source-ledger.md) | the measured result of the above, regenerated from the build |
 | [`progress.md`](progress.md) | *how did we get here?* — running narrative of the reconstruction |
+| [`functional-capability-ledger.md`](functional-capability-ledger.md) | *what functional gaps remain?* — domain-organized gap ledger (protocol, security, platform, health, system, storage, sensors, hardware services, deployment) with per-row status and acceptance gates |
 
 The first four are **SHA-256 pinned** by
 `tests/test_runtime_nanopb_decode_svarint_production.py` and

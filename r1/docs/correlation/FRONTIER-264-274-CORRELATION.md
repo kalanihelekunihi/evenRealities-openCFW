@@ -38,6 +38,13 @@ records have magic and all timestamps are zero, the stock cursor is one. The cle
 `r1_ep_scan_cursor` consumes only a caller-supplied offline buffer and returns cursor/latest-index
 metadata: no raw ep.bin payload is exposed, and no flash mutation, logging, or transport occurs.
 
+The source-built Zephyr target now also invokes the provider-backed
+`r1_ep_scan_flash_cursor` during storage startup. It reads the same 1,024 fixed
+eight-byte records from the exact `ep.bin` partition through the bounded product
+flash provider, retains only the recovered cursor/timestamp metadata, and makes
+an unreadable preserved partition a startup failure. It adds no raw-payload
+access, mutation, logging, or transport surface.
+
 ## Provider boundary
 
 `0x00067C30` is reached only from the already gated GoMore body containing callsite `0x00056F42`.

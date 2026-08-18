@@ -13,6 +13,14 @@ provider, the configured flash device continues to own physical read/write/erase
 Nordic SDK 17.1.0 continues to own logging. The structured-log encoder/live cache and the composite
 virtual-file exporter/transport are separate boundaries.
 
+The portable `r1_log_bin_*` API now implements this complete policy over the
+bounded `r1_flash` provider. The source-built Zephyr target binds the exact
+`log.bin` partition during storage startup, serializes an internal-only append
+wrapper, and retains the sector-count, initialization, writer, and wrapper
+symbols in the signed image. The packager records and the independent bundle
+verifier checks their load addresses. No read, export, BLE, or arbitrary erase
+surface is introduced.
+
 ## Exact closure
 
 | Entry | Bytes | Role |
@@ -53,11 +61,16 @@ must call rather than recreate:
 - pinned FAL 0.5.99 partition/device lookup;
 - the configured flash device's read, write, and erase callbacks;
 - Nordic SDK 17.1.0 logging; and
-- the separately admitted structured-log cache/periodic-persistence behavior.
+- the separately admitted structured-log record/cache behavior, whose compiled periodic worker
+  may call this writer only with one exact 4,096-byte page.
 
-This closure does not implement the composite private-log virtual file, BLE fragment sender, raw
-flash API, arbitrary erase control, or signing/security bypass. The summarizer is static, reads no
-private log content, and exposes no live sender or flash-mutation interface.
+This writer closure does not itself implement the composite diagnostic virtual file. That source
+is separately bounded and target-bound under `DIAGNOSTIC-EXPORT-CORRELATION.md`; the BLE fragment
+sender, raw flash API, arbitrary erase control, and signing/security bypass remain absent. The
+summarizer is static, reads no private log content, and exposes no live sender or flash-mutation interface.
+
+The historical composite private-log virtual file name refers to that separate source boundary,
+not to a read capability in this writer API.
 
 ## Reproduce
 

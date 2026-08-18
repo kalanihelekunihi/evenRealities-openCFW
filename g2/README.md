@@ -1332,6 +1332,22 @@ with the reviewed v1.9.4/v1.10.0 family evidence. Selected source revisions,
 license texts, evidence bounds, and local boundaries are documented in the
 component `NOTICE.md`.
 
+The latest increment production-routes the clean-room ALS-scale KVDB closure
+(`kvdb_als_scale.c`): the factory-record default initializer, the
+`_kvdbUpdataAlsScale` migration callback, and the `SVC_KvdbWriteAlsScale`
+whole-record writer replace the 338 stock body bytes at
+`[0x004AECA4,0x004AEDF6)` through three entry redirects, bound to the retained
+CRC-16 provider at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`, with the 50-byte literal tail and the fixed SRAM
+record at `0x200037BC` untouched. Under the reviewed Apple Clang 21 profile
+the overlay/component/package sizes are `143227/3666623/4445117` with SHA-256
+`200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10`,
+`ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b`, and
+`62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
 ## Prior dual-image endian-conversion release
 
 This historical source profile additionally replaced the byte-identical

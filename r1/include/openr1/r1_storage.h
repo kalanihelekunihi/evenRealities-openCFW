@@ -17,6 +17,22 @@
 #define R1_EP_RECORD_BYTES 8u
 #define R1_EP_RECORD_COUNT 1024u
 #define R1_EP_RECORD_MAGIC UINT8_C(0x0a)
+#define R1_LOG_BIN_PARTITION_BYTES UINT32_C(0x0000c000)
+#define R1_LOG_BIN_SECTOR_BYTES UINT32_C(0x00001000)
+#define R1_LOG_BIN_SECTOR_COUNT 12u
+#define R1_LOG_BIN_ERASED_PROBE_OFFSET UINT32_C(4)
+#define R1_LOG_BIN_MAX_WRITE_BYTES R1_LOG_BIN_SECTOR_BYTES
+#define R1_STRUCTURED_LOG_CACHE_BYTES UINT32_C(0x00002000)
+#define R1_STRUCTURED_LOG_PREFIX_BYTES 12u
+#define R1_STRUCTURED_LOG_ARGUMENT_BYTES 32u
+#define R1_STRUCTURED_LOG_RECORD_BYTES \
+    (R1_STRUCTURED_LOG_PREFIX_BYTES + R1_STRUCTURED_LOG_ARGUMENT_BYTES)
+#define R1_STRUCTURED_LOG_STRING_BYTES 16u
+#define R1_STRUCTURED_LOG_IMMEDIATE_BYTES 236u
+#define R1_STRUCTURED_LOG_PERSIST_BYTES R1_FLASH_PAGE_BYTES
+#define R1_STRUCTURED_LOG_PERSIST_GATE_TICKS UINT32_C(10000)
+#define R1_STRUCTURED_LOG_MODE_STORAGE UINT8_C(0x01)
+#define R1_STRUCTURED_LOG_MODE_IMMEDIATE UINT8_C(0x80)
 #define R1_SLEEP_SYNC_MARK_EVENT UINT16_C(0x2001)
 #define R1_SLEEP_SYNC_MODEL_IDENTIFIER UINT16_C(0x0601)
 #define R1_SLEEP_SYNC_ACK_CONTEXT_BYTES 12u
@@ -88,12 +104,20 @@ typedef struct {
     uint8_t *bytes;
     uint32_t size;
     uint32_t mutations_before_failure;
+    uint32_t bytes_before_failure;
     uint32_t program_operations;
     uint32_t erase_operations;
+    uint32_t byte_mutations;
+    bool byte_failure_enabled;
 } r1_memory_flash;
 
 void r1_memory_flash_initialize(r1_memory_flash *memory, uint8_t *bytes, uint32_t size);
 void r1_memory_flash_fail_after(r1_memory_flash *memory, uint32_t successful_mutations);
+/* Injects a conservative power cut within a program or erase operation after
+ * exactly `successful_bytes` byte mutations. UINT32_MAX disables the byte
+ * fault. This supplements, rather than replaces, whole-operation faults. */
+void r1_memory_flash_fail_after_bytes(
+    r1_memory_flash *memory, uint32_t successful_bytes);
 r1_flash r1_memory_flash_interface(r1_memory_flash *memory);
 
 typedef struct {
@@ -131,6 +155,78 @@ typedef struct {
     bool latest_nonzero_timestamp_found;
     bool all_records_have_magic;
 } r1_ep_scan_result;
+
+typedef struct {
+    const r1_flash *flash;
+    uint32_t partition_offset;
+    uint16_t current_sector;
+    uint16_t sector_offset;
+    bool bound;
+    bool initialized;
+} r1_log_bin_store;
+
+typedef struct {
+    uint8_t *bytes;
+    uint32_t capacity;
+    uint32_t read_index;
+    uint32_t write_index;
+    uint32_t last_persist_tick;
+    uint8_t mode;
+    uint8_t severity_threshold;
+    uint8_t sequence;
+    bool initialized;
+} r1_structured_log_cache;
+
+typedef enum {
+    R1_STRUCTURED_LOG_ACTION_NONE = 0,
+    R1_STRUCTURED_LOG_ACTION_IMMEDIATE_READY,
+    R1_STRUCTURED_LOG_ACTION_PERSIST_READY
+} r1_structured_log_action;
+
+typedef enum {
+    R1_STRUCTURED_LOG_ARGUMENT_U32 = 0,
+    R1_STRUCTURED_LOG_ARGUMENT_U64,
+    R1_STRUCTURED_LOG_ARGUMENT_FLOAT64,
+    R1_STRUCTURED_LOG_ARGUMENT_STRING
+} r1_structured_log_argument_type;
+
+typedef struct {
+    r1_structured_log_argument_type type;
+    union {
+        uint32_t u32;
+        uint64_t u64;
+        double floating;
+        const char *string;
+    } value;
+} r1_structured_log_argument;
+
+typedef struct {
+    bool appended;
+    bool filtered;
+    uint16_t record_bytes;
+    r1_structured_log_action action;
+} r1_structured_log_encode_result;
+
+typedef struct {
+    bool eligible;
+    bool ep_magic_present;
+    uint8_t log_sector_count;
+    uint16_t cache_bytes;
+    uint16_t crash_bytes;
+    uint32_t total_bytes;
+    uint32_t checksum;
+} r1_log_export_info;
+
+typedef struct {
+    const r1_flash *flash;
+    r1_structured_log_cache *cache;
+    const uint8_t *crash;
+    uint32_t ep_offset;
+    uint32_t log_offset;
+    uint8_t log_sector_order[R1_LOG_BIN_SECTOR_COUNT];
+    r1_log_export_info info;
+    bool active;
+} r1_log_export_snapshot;
 
 typedef enum {
     R1_EP_INITIALIZATION_READY = 0,
@@ -255,6 +351,79 @@ r1_error r1_export_plan_command(
     r1_export_plan *plan);
 r1_error r1_ep_scan_cursor(const uint8_t *records, size_t length,
                            r1_ep_scan_result *result);
+/* Provider-backed form of the recovered ep.bin recovery scan. It reads only
+ * fixed eight-byte records and returns cursor/timestamp metadata; record
+ * payload bytes are never returned to the caller. */
+r1_error r1_ep_scan_flash_cursor(
+    const r1_flash *flash, uint32_t partition_offset,
+    r1_ep_scan_result *result);
+
+/* Exact recovered log.bin circular-page writer. The API can append only to
+ * the fixed 12-page partition supplied at bind time and has no read/export or
+ * arbitrary erase surface. */
+r1_error r1_log_bin_bind(
+    r1_log_bin_store *store, const r1_flash *flash,
+    uint32_t partition_offset, uint32_t partition_bytes);
+uint16_t r1_log_bin_sector_count(const r1_log_bin_store *store);
+r1_error r1_log_bin_initialize(r1_log_bin_store *store);
+r1_error r1_log_bin_write(
+    r1_log_bin_store *store, const uint8_t *input, size_t length);
+
+/* Clean-room reconstruction of the product's private structured-log cache.
+ * The cache has no transport surface. Its read API is explicit about peek
+ * versus consume, and the bounded snapshot source may use offset peek only
+ * while a platform freezes producers. The periodic writer can target only a
+ * bound log.bin store. */
+r1_error r1_structured_log_cache_initialize(
+    r1_structured_log_cache *cache, uint8_t *bytes, size_t capacity);
+size_t r1_structured_log_cache_count(
+    const r1_structured_log_cache *cache);
+size_t r1_structured_log_cache_free(
+    const r1_structured_log_cache *cache);
+r1_error r1_structured_log_cache_read(
+    r1_structured_log_cache *cache, uint8_t *output, size_t length,
+    bool consume);
+r1_error r1_structured_log_cache_peek(
+    const r1_structured_log_cache *cache, size_t offset,
+    uint8_t *output, size_t length);
+r1_error r1_structured_log_cache_append(
+    r1_structured_log_cache *cache, const uint8_t *input, size_t length,
+    r1_structured_log_action *action);
+void r1_structured_log_threshold_set(
+    r1_structured_log_cache *cache, uint8_t threshold);
+uint8_t r1_structured_log_mode_get(
+    const r1_structured_log_cache *cache);
+void r1_structured_log_mode_set(
+    r1_structured_log_cache *cache, uint8_t mode);
+r1_error r1_structured_log_encode_typed(
+    r1_structured_log_cache *cache, uint32_t metadata,
+    uint32_t tick, uint32_t timestamp,
+    const r1_structured_log_argument *arguments, size_t argument_count,
+    r1_structured_log_encode_result *result);
+r1_error r1_structured_log_encode_format(
+    r1_structured_log_cache *cache, uint32_t metadata,
+    uint32_t tick, uint32_t timestamp, const char *format,
+    const r1_structured_log_argument *arguments, size_t argument_count,
+    r1_structured_log_encode_result *result);
+r1_error r1_structured_log_periodic_persist(
+    r1_structured_log_cache *cache, r1_log_bin_store *store,
+    uint32_t tick, bool export_active,
+    uint8_t scratch[R1_STRUCTURED_LOG_PERSIST_BYTES], bool *persisted);
+
+/* Bounded composite diagnostic virtual file recovered from the retail
+ * log.bin provider. This layer performs no transport and grants no flash
+ * mutation. A platform must freeze all three producers for snapshot life and
+ * apply owner authorization before exposing begin/read/finish. */
+r1_error r1_log_export_snapshot_prepare(
+    r1_log_export_snapshot *snapshot, const r1_flash *flash,
+    uint32_t ep_offset, uint32_t log_offset,
+    r1_structured_log_cache *cache,
+    const uint8_t *crash, size_t crash_length,
+    uint8_t scratch[R1_LOG_BIN_SECTOR_BYTES]);
+r1_error r1_log_export_snapshot_read(
+    const r1_log_export_snapshot *snapshot, uint32_t offset,
+    uint8_t *output, size_t length);
+void r1_log_export_snapshot_finish(r1_log_export_snapshot *snapshot);
 r1_error r1_ep_plan_initialization(
     bool already_initialized, bool partition_found, bool device_found,
     uint32_t partition_bytes, r1_ep_initialization_plan *plan);

@@ -125,28 +125,28 @@ TARGET_TEXT_PIN = (
 )
 
 APPLE_OVERLAY_PIN = (
-    125_258,
-    "1f71240bd75af28798d93eba217b99464156ee40ae353333c2fd0f449b9a8c76",
+    143_227,
+    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
 )
 APPLE_COMPONENT_PIN = (
-    3_648_654,
-    "36b7f32f9f5f1a4c2fbf800b8cda0f48aa521bfc87638d671932b80b49f7e991",
+    3_666_623,
+    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
 )
 LINUX_OVERLAY_PIN = (
-    132_888,
-    "7036c0e07a36376e5d98700c922ffeec7a6826388b75060a2b98b4228a411c61",
+    144_266,
+    "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
 )
 LINUX_COMPONENT_PIN = (
-    3_656_284,
-    "d5daf89121f44a61b303fa953da78550edd31e9159cf9b0b397aeb1b5cfef54d",
+    3_667_662,
+    "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
 )
 APPLE_PACKAGE_PIN = (
-    4_427_148,
-    "532743c6a1b96f198f0991c320bf3318eac88bc538a90a9e0b0267aaacef07b3",
+    4_445_117,
+    "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6",
 )
 LINUX_PACKAGE_PIN = (
-    4_434_778,
-    "63d5cd1d1cbab2c3ece4a48f96b58a0cb14a7487917831f4c6d370b40ed41d90",
+    4_446_156,
+    "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
 )
 APPLE_LEAF = (124_548, 0x007B_29A8)
 LINUX_LEAF = (126_368, 0x007B_30C4)
@@ -504,12 +504,12 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                 )
             },
             {
-                "source_owned_bytes": 125_440,
+                "source_owned_bytes": 143_409,
                 "source_owned_in_place_bytes": 182,
-                "generated_patch_site_bytes": 86_748,
+                "generated_patch_site_bytes": 99_192,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_436_434,
-                "replaced_stock_function_bytes": 86_930,
+                "opaque_base_bytes": 3_423_990,
+                "replaced_stock_function_bytes": 99_370,
             },
         )
 
@@ -581,6 +581,7 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                     - 10  # nanopb public varint32 source leaf
                     - 2  # nanopb skip-string alignment
                     - 34  # nanopb skip-string source leaf
+                    - 17_969  # all later admissions through the KVDB ALS-scale trio
                 ),
                 "size": TARGET_TEXT_PIN[0],
                 "target_address": APPLE_LEAF[1],

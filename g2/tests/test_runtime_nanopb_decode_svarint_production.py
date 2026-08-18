@@ -138,14 +138,12 @@ CONFIG_PIN = (
     "f3aab5cd3c29d8de65c4db301c62899db",
 )
 PROVENANCE_PIN = (
-    107_790,
-    "4193c3987cdef108f320fd35c3b351d5"
-    "ee56cba7d01b3940bcffb1e0ce7180f2",
+    125_493,
+    "c1bbb7d80e38a1ab18e7c71c03b89a891090509949e45a4db0f3224a927a1a99",
 )
 VERIFIER_PIN = (
-    209_808,
-    "59bd1152353271dd19cf7ad3166c1bef"
-    "239864457d45f93a41a6818dbf9d8e1e",
+    233_514,
+    "8f24bbf9f4c8cf7d0c0b75bca804284f81d4222fa9feebb966b4e7aea599596e",
 )
 
 TARGET_FLAGS = (
@@ -233,35 +231,32 @@ LINUX_PATCH_SHA256 = (
 )
 LINUX_AGGREGATE = {
     "overlay": (
-        132_888,
-        "7036c0e07a36376e5d98700c922ffeec"
-        "7a6826388b75060a2b98b4228a411c61",
+        144_266,
+        "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
     ),
     "component": (
-        3_656_284,
-        "d5daf89121f44a61b303fa953da78550"
-        "edd31e9159cf9b0b397aeb1b5cfef54d",
+        3_667_662,
+        "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
     ),
     "package": (
-        4_434_778,
-        "63d5cd1d1cbab2c3ece4a48f96b58a0"
-        "cb14a7487917831f4c6d370b40ed41d90",
+        4_446_156,
+        "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
     ),
 }
 
 STAGED_CONSUMER_PINS = {
-    MANIFEST: "1e8fd0b48bab1540e541bc8c87f72c2fbf9f8a31a4f55f2b2de1ce3bebd0d0fd",
-    PROVENANCE: "4193c3987cdef108f320fd35c3b351d5ee56cba7d01b3940bcffb1e0ce7180f2",
+    MANIFEST: "8c1b2344d06192c7dcb8bd078acba6813ee56a5304cf689fcbb5a88f97fe22f1",
+    PROVENANCE: "c1bbb7d80e38a1ab18e7c71c03b89a891090509949e45a4db0f3224a927a1a99",
     AUDIT: "b483e5b1915f54e99e8aefd047ece54153aadc6df4af51cdc4ef1cf81cc983d0",
-    ROOT / "README.md": "1bd085012e049e8ffc0617db08c8809d0cde7082be9d37a712ef38d699558b6f",
-    ROOT / "components/README.md": "377dab7fc580499112bceba87f9602c57550c8f438af1b5c4d1324e5003e2989",
-    ROOT / "components/apollo_main/core_overlay/NOTICE.md": "8291aeb9e1a95b4b3b75fced4bfd1fde84fe4a45b1761b306aed21e7337f2b85",
-    ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "c4a70bb1b3a7c513256e52736cca8fef7c34b3881b9aa51c66f7810695a33a4f",
-    ROOT / "third_party/nanopb/README.openCFW.md": "f5ec1ac4423566060a685b0ccf4eb923119f927c4013894a94f972cb74f4df3a",
-    ROOT / "docs/memory-map.md": "94a51987d887ac944b3ba83b738fc99100f7fc5c0d1a7f7a6c59f67468832552",
-    ROOT / "docs/source-coverage.md": "7e13a46a687a97c9d15cd002342c8ca5a65338d90036e4dabf559084ea81c7e6",
-    ROOT / "docs/upstream-inventory.md": "ffe9bd2c431db89bcf87421f26f3f054209fb0d67cfbaccfd0f1b2d2224cfeaa",
-    ROOT / "docs/linux-reproducible-build.md": "5a349c013c753cf1864dd188b3b38c4c0d5bc02481e98a705c75dab5af9f89b8",
+    ROOT / "README.md": "451b4e5e9bbf91872b6906301708291a00b60e94b3a7255efc8e8e092f9cfea6",
+    ROOT / "components/README.md": "a56e17276ef67bd063ba193a55d3c8ec7e524f09bde184b2b8f9420f0f3ebbf9",
+    ROOT / "components/apollo_main/core_overlay/NOTICE.md": "139b2e7eeabb002c771d075d980f02e6bb5dd948b6cb9db7f12b97e64daf383a",
+    ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "a93d7c70929196ffe1de4c15e3a8e543e4c259308c1323f9c76585d9508399cd",
+    ROOT / "third_party/nanopb/README.openCFW.md": "bd70ff8d92c38cad8bde2a4356f7d56f9b02994239ff09453f2f435b44fdb672",
+    ROOT / "docs/memory-map.md": "6087dd8bd48a764e15e623b56298c16e40992a6aa3cd445319bff308d078f859",
+    ROOT / "docs/source-coverage.md": "7a1030da3dc210cc19a688e60868c507a3e8cff04cdb028a040f48884400035a",
+    ROOT / "docs/upstream-inventory.md": "f9ad283c729e6ae136ab6846d9d6134ff16e4280d3019f6deb2c3b83921c73e9",
+    ROOT / "docs/linux-reproducible-build.md": "42a08943723dfb9c1a531601469a94dc15320286c44f0aa8c55d42c05c1156c3",
 }
 
 
@@ -862,7 +857,7 @@ class NanopbDecodeSvarintProductionTests(unittest.TestCase):
                 len(overlay["patch_sites"]),
                 len(overlay["relocated_leaves"]),
             ),
-            (684, 632, 115),
+            (790, 731, 221),
         )
 
         self.assertEqual(overlay["functions"].count(PRODUCTION_FUNCTION), 1)
@@ -1337,10 +1332,10 @@ class NanopbDecodeSvarintProductionTests(unittest.TestCase):
         production_boundary = nanopb_readme.split(
             "## Production boundary", 1
         )[1].split("## License", 1)[0]
-        self.assertIn("exactly thirty-three bounded altered", production_boundary)
+        self.assertIn("exactly thirty-five bounded altered", production_boundary)
         self.assertIn(SOURCE_PATH, production_boundary)
-        self.assertIn("All thirty-three", production_boundary)
-        self.assertIn("only those thirty-three", production_boundary)
+        self.assertIn("All are closed over source-owned", production_boundary)
+        self.assertIn("only those thirty-five", production_boundary)
         self.assertNotIn("nine bounded", production_boundary)
         self.assertNotIn(
             "The production allowlist now contains ten",

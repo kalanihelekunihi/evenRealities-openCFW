@@ -286,9 +286,8 @@ __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_latest_valid_flash_slot_scan_fn
     retained_latest_valid_flash_slot_scan =
         r1_latest_valid_flash_slot_scan_adapter;
-/* Retains the advStart two-target composition entry point: the dispatcher
- * command stays refused, so nothing calls it on target, but the bound
- * composition stays in the image for review and later authorized wiring. */
+/* Retains the advStart two-target worker entry point independently of its
+ * authorized dispatcher-to-queue binding. */
 __attribute__((used, section(".openr1_frontier_api")))
 static const openr1_connection_control_adv_start_fn
     retained_connection_control_adv_start =
@@ -312,6 +311,21 @@ static void touch_enabled_changed(void *context, bool enabled) {
     if (error != NRF_SUCCESS) {
         startup_error = error;
     }
+}
+
+static r1_error nv_recovery_requested(
+    void *context, const uint8_t body[R1_NV_RECOVERY_BODY_BYTES],
+    uint16_t expected_crc) {
+    (void)context;
+    const ret_code_t error = openr1_databases_queue_nv_recovery(
+        body, expected_crc);
+    return error == NRF_SUCCESS ? R1_OK : R1_ERROR_CAPACITY;
+}
+
+static r1_error remove_ring_requested(void *context) {
+    (void)context;
+    return openr1_databases_queue_remove_ring() == NRF_SUCCESS
+        ? R1_OK : R1_ERROR_CAPACITY;
 }
 
 /* Recovered REG1 persistence: a system-settings write for switch type zero
@@ -429,6 +443,14 @@ static void softdevice_initialize(void) {
     if (error != NRF_SUCCESS) {
         fail(error);
     }
+    error = openr1_connection_control_initialize();
+    if (error != NRF_SUCCESS) {
+        fail(error);
+    }
+    r1_runtime_set_nv_recovery_handler(
+        runtime, nv_recovery_requested, NULL);
+    r1_runtime_set_remove_ring_handler(
+        runtime, remove_ring_requested, NULL);
     /* Adopt the persisted normalized REG1 flag (kv dev_info byte 24 bit 1)
      * into the runtime system settings so reads reflect the stored state,
      * and route later settings writes to the deferred persist. */

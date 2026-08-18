@@ -6748,9 +6748,19 @@ the twelve-byte SRAM record at `0x200037BC`, key, factory bytes, and initialized
 checksum are pinned fail-closed.
 
 `kvdb_als_scale.c` recreates default initialization, the version-1 whole-record
-writer, and non-importing v0 migration. It passes host and freestanding Thumb
-tests but remains absent from `overlay.json`, so the stock package still
-executes the original code and no ownership bytes are added.
+writer, and non-importing v0 migration, and is now production-routed under the
+reviewed apple-clang profile: three relocated leaves (28-byte default
+initializer, 90-byte migration callback, and 96-byte whole-record writer, each
+binding the retained CRC-16 provider at `0x0049ACD4` and the blob read/write
+adapters at `0x004D956C`/`0x004D957E`, with an 11-byte key-string read-only
+closure on each of the two referencing leaves) are appended to the overlay, and
+three entry redirects replace the 338 stock body bytes. The 50-byte alignment,
+record, key, path, function, and diagnostic literal tail stays retained stock
+data, and both stored roots and all three direct entry sites now land on the
+redirects. Canonical component accounting is now 143,409 source-owned bytes,
+99,192 generated patch-site bytes, 32 wrapper bytes, 182 source-owned in-place
+bytes, and 3,423,990 opaque base bytes. The linux-clang profile pins await
+Linux toolchain regeneration.
 
 ## Current first-party KVDB terminal-mode increment
 

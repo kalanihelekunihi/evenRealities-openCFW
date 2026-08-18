@@ -204,12 +204,12 @@ class RuntimeFreeRTOSQueueSendFromISRTests(unittest.TestCase):
             "open_cfw_freertos_queue_copy_data_to_queue": 0x00441ED8,
             "open_cfw_freertos_queue_generic_send_from_isr": 0x00441952,
         })
-        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (142986, 3666382))
+        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (143227, 3666623))
         self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (144266, 3667662))
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
-        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3666382, 3667662))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4444468, "53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6"))
+        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3666623, 3667662))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4445117, "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"))
         self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4446156, "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"))
 
 

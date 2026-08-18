@@ -1,5 +1,7 @@
 #include "openr1/r1_dispatch.h"
 
+#include "openr1/r1_crc.h"
+
 typedef enum {
     RESULT_SUCCESS = 0,
     RESULT_ERROR = 1,
@@ -268,7 +270,21 @@ r1_error r1_ati_calibration_plan_command(
 
 static void clear_result(r1_dispatch_result *result) {
     result->count = 0u;
+    result->arena_used = 0u;
+    result->enter_recovery = false;
+    result->apply_advertising_targets = false;
+    result->apply_nv_recovery = false;
+    result->nv_recovery_crc = 0u;
+    result->remove_ring_metadata = false;
+    for (size_t index = 0u; index < R1_PEER_ADDRESS_SIZE; ++index) {
+        result->first_advertising_target[index] = 0u;
+        result->second_advertising_target[index] = 0u;
+    }
+    for (size_t index = 0u; index < R1_NV_RECOVERY_BODY_BYTES; ++index) {
+        result->nv_recovery_body[index] = 0u;
+    }
     for (size_t index = 0u; index < R1_DISPATCH_RESPONSE_MAX; ++index) {
+        result->models[index] = NULL;
         result->lengths[index] = 0u;
     }
 }
@@ -288,28 +304,71 @@ static bool dispatch_fragment_capacity_available(
     return fragments <= R1_DISPATCH_FRAGMENT_MAX;
 }
 
+static r1_error reserve_response_model(
+    r1_dispatch_result *result, size_t payload_length, uint8_t **model,
+    size_t *model_capacity) {
+    if (result == NULL || model == NULL || model_capacity == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (payload_length > UINT16_MAX - R1_MODEL_HEADER_LENGTH) {
+        return R1_ERROR_LENGTH;
+    }
+    const size_t model_length = R1_MODEL_HEADER_LENGTH + payload_length;
+    if (result->count >= R1_DISPATCH_RESPONSE_MAX ||
+        model_length > R1_DISPATCH_MODEL_MAX ||
+        model_length > R1_DISPATCH_ARENA_MAX - result->arena_used ||
+        !dispatch_fragment_capacity_available(result, model_length)) {
+        return R1_ERROR_CAPACITY;
+    }
+    *model = result->arena + result->arena_used;
+    *model_capacity = model_length;
+    return R1_OK;
+}
+
+static void commit_response_model(
+    r1_dispatch_result *result, uint8_t *model, size_t written) {
+    result->models[result->count] = model;
+    result->lengths[result->count] = written;
+    result->arena_used += written;
+    result->count += 1u;
+}
+
+static void remove_last_response(r1_dispatch_result *result) {
+    if (result == NULL || result->count == 0u) {
+        return;
+    }
+    result->count -= 1u;
+    const size_t removed = result->lengths[result->count];
+    if (removed <= result->arena_used) {
+        result->arena_used -= removed;
+    } else {
+        result->arena_used = 0u;
+    }
+    result->models[result->count] = NULL;
+    result->lengths[result->count] = 0u;
+}
+
 static r1_error add_response(const r1_model *request, result_code code,
                              const uint8_t *payload, size_t payload_length,
                              r1_dispatch_result *result) {
-    if (result->count >= R1_DISPATCH_RESPONSE_MAX) {
-        return R1_ERROR_CAPACITY;
-    }
     const r1_model response = {
         R1_PROTOCOL_VERSION, request->module, R1_MODULE_VERSION, request->serial,
         (uint8_t)(UINT8_C(0x03) | (uint8_t)((uint8_t)code << 2u)),
         request->command, request->subcommand, payload, payload_length
     };
-    size_t written = 0u;
-    const r1_error error = r1_model_encode(
-        &response, R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
-        result->models[result->count], R1_DISPATCH_MODEL_MAX, &written);
-    if (error == R1_OK &&
-        !dispatch_fragment_capacity_available(result, written)) {
-        return R1_ERROR_CAPACITY;
+    uint8_t *model = NULL;
+    size_t model_capacity = 0u;
+    r1_error error = reserve_response_model(
+        result, payload_length, &model, &model_capacity);
+    if (error != R1_OK) {
+        return error;
     }
+    size_t written = 0u;
+    error = r1_model_encode(
+        &response, R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+        model, model_capacity, &written);
     if (error == R1_OK) {
-        result->lengths[result->count] = written;
-        result->count += 1u;
+        commit_response_model(result, model, written);
     }
     return error;
 }
@@ -317,24 +376,23 @@ static r1_error add_response(const r1_model *request, result_code code,
 static r1_error add_notification(const r1_model *request, uint16_t serial,
                                  const uint8_t *payload, size_t payload_length,
                                  r1_dispatch_result *result) {
-    if (result->count >= R1_DISPATCH_RESPONSE_MAX) {
-        return R1_ERROR_CAPACITY;
-    }
     const r1_model notification = {
         R1_PROTOCOL_VERSION, request->module, R1_MODULE_VERSION, serial,
         0x02u, request->command, request->subcommand, payload, payload_length
     };
-    size_t written = 0u;
-    const r1_error error = r1_model_encode(
-        &notification, R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
-        result->models[result->count], R1_DISPATCH_MODEL_MAX, &written);
-    if (error == R1_OK &&
-        !dispatch_fragment_capacity_available(result, written)) {
-        return R1_ERROR_CAPACITY;
+    uint8_t *model = NULL;
+    size_t model_capacity = 0u;
+    r1_error error = reserve_response_model(
+        result, payload_length, &model, &model_capacity);
+    if (error != R1_OK) {
+        return error;
     }
+    size_t written = 0u;
+    error = r1_model_encode(
+        &notification, R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+        model, model_capacity, &written);
     if (error == R1_OK) {
-        result->lengths[result->count] = written;
-        result->count += 1u;
+        commit_response_model(result, model, written);
     }
     return error;
 }
@@ -353,8 +411,7 @@ static r1_error add_tracked_notification(r1_device_state *state,
                                        request->command, request->subcommand,
                                        serial, kind, record_index);
     if (error != R1_OK) {
-        result->count -= 1u;
-        result->lengths[result->count] = 0u;
+        remove_last_response(result);
     }
     return error;
 }
@@ -399,8 +456,7 @@ static r1_error add_scalar_history_notification(
         context->request->command, context->request->subcommand, serial,
         context->metric, acknowledgement_mode, maximum_recorded_timestamp);
     if (error != R1_OK) {
-        context->result->count -= 1u;
-        context->result->lengths[context->result->count] = 0u;
+        remove_last_response(context->result);
     }
     return error;
 }
@@ -436,8 +492,7 @@ static r1_error add_hrv_history_notification(
         context->request->command, context->request->subcommand, serial,
         2u, acknowledgement_mode, maximum_recorded_timestamp);
     if (error != R1_OK) {
-        context->result->count -= 1u;
-        context->result->lengths[context->result->count] = 0u;
+        remove_last_response(context->result);
     }
     return error;
 }
@@ -473,8 +528,7 @@ static r1_error add_activity_history_notification(
         context->request->command, context->request->subcommand, serial,
         3u, acknowledgement_mode, maximum_recorded_timestamp);
     if (error != R1_OK) {
-        context->result->count -= 1u;
-        context->result->lengths[context->result->count] = 0u;
+        remove_last_response(context->result);
     }
     return error;
 }
@@ -484,7 +538,8 @@ static bool is_set(const r1_model *request) {
 }
 
 static bool authorized_mutation(const r1_session *session) {
-    return session->encrypted && session->bonded && session->authorized;
+    return session->encrypted && session->bonded && session->authorized &&
+        session->role == R1_ROLE_PHONE;
 }
 
 static r1_error get_device_status(const r1_device_state *state, const r1_model *request,
@@ -853,14 +908,97 @@ r1_error r1_dispatch(r1_device_state *state, r1_session *session,
         case 0x80u:
         case 0x81u:
             return add_response(request, RESULT_SUCCESS, NULL, 0u, result);
-        case 0x09u: /* otaStart */
-        case 0x0au: /* advStart */
+        case 0x09u: { /* otaStart */
+            if (!is_set(request) || request->payload_length != 0u) {
+                return add_response(request, RESULT_ERROR, NULL, 0u, result);
+            }
+            if (!authorized_mutation(session)) {
+                (void)add_response(request, RESULT_REFUSE, NULL, 0u, result);
+                return R1_ERROR_UNAUTHORIZED;
+            }
+            const r1_error response_error = add_response(
+                request, RESULT_SUCCESS, NULL, 0u, result);
+            if (response_error == R1_OK) {
+                result->enter_recovery = true;
+            }
+            return response_error;
+        }
+        case 0x0au: { /* advStart */
+            if (!is_set(request) || request->payload_length !=
+                    R1_CONNECTION_CONTROL_ADV_START_PAYLOAD_SIZE) {
+                return add_response(request, RESULT_ERROR, NULL, 0u, result);
+            }
+            if (!authorized_mutation(session)) {
+                (void)add_response(request, RESULT_REFUSE, NULL, 0u, result);
+                return R1_ERROR_UNAUTHORIZED;
+            }
+            r1_connection_control_adv_start_handler_plan plan;
+            const r1_error plan_error =
+                r1_connection_control_adv_start_handler_plan_decode(
+                    request->serial, request->serial, request->payload,
+                    request->payload_length, &plan);
+            if (plan_error != R1_OK) {
+                return add_response(request, RESULT_ERROR, NULL, 0u, result);
+            }
+            const r1_error response_error = add_response(
+                request, RESULT_SUCCESS, NULL, 0u, result);
+            if (response_error == R1_OK && plan.enqueue_event) {
+                result->apply_advertising_targets = true;
+                copy_bytes(result->first_advertising_target,
+                           plan.first_target, R1_PEER_ADDRESS_SIZE);
+                copy_bytes(result->second_advertising_target,
+                           plan.second_target, R1_PEER_ADDRESS_SIZE);
+            }
+            return response_error;
+        }
         case 0x0cu: /* setAlgoKey */
-        case 0x11u: /* nvRecover */
         case 0x12u: /* powerControl */
-        case 0x82u: /* removeRingNotify */
             (void)add_response(request, RESULT_REFUSE, NULL, 0u, result);
             return R1_ERROR_UNAUTHORIZED;
+        case 0x11u: { /* nvRecover */
+            if (!is_set(request) || request->payload_length !=
+                    R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES +
+                        R1_NV_RECOVERY_BODY_BYTES) {
+                return add_response(request, RESULT_ERROR, NULL, 0u, result);
+            }
+            if (!authorized_mutation(session)) {
+                (void)add_response(request, RESULT_REFUSE, NULL, 0u, result);
+                return R1_ERROR_UNAUTHORIZED;
+            }
+            r1_nv_recovery_handler_plan plan;
+            if (r1_nv_recovery_command_handler_plan_decode(
+                    request->payload, request->payload_length, &plan) !=
+                    R1_OK ||
+                plan.action != R1_NV_RECOVERY_HANDLER_DISPATCH_MERGE ||
+                r1_crc16_modbus(plan.body, sizeof plan.body) !=
+                    plan.declared_body_crc) {
+                return add_response(
+                    request, RESULT_ERROR, NULL, 0u, result);
+            }
+            /* The recovered valid-merge route does not send a response. */
+            result->apply_nv_recovery = true;
+            result->nv_recovery_crc = plan.declared_body_crc;
+            copy_bytes(result->nv_recovery_body, plan.body,
+                       sizeof result->nv_recovery_body);
+            return R1_OK;
+        }
+        case 0x82u: { /* removeRingNotify */
+            /* Retail treats every nonempty raw frame as destructive. The
+             * strict source route accepts only the legitimate one-byte SET. */
+            if (!is_set(request) || request->payload_length != 1u) {
+                return add_response(request, RESULT_ERROR, NULL, 0u, result);
+            }
+            if (!authorized_mutation(session)) {
+                (void)add_response(request, RESULT_REFUSE, NULL, 0u, result);
+                return R1_ERROR_UNAUTHORIZED;
+            }
+            const r1_error response_error = add_response(
+                request, RESULT_SUCCESS, NULL, 0u, result);
+            if (response_error == R1_OK) {
+                result->remove_ring_metadata = true;
+            }
+            return response_error;
+        }
         default:
             (void)add_response(request, RESULT_NOT_SUPPORTED, NULL, 0u, result);
             return R1_ERROR_UNSUPPORTED;

@@ -22,7 +22,7 @@ PROVENANCE = ROOT / "tools/manifests/g2-kvdb-als-scale-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "4719f276bdd303c4b6629356297ad71fd770be041fc31622ba7b08d97e4d2417",
     CLOSURE: "1290538865f3c11cda17511a3702e66bd113feb1f3374e7e918bef650fe1bd6f",
-    PROVENANCE: "b697f48867c8a0d51ff736d299a8c61f87fd5a6b063b8b5cbecd9292d667f1d8",
+    PROVENANCE: "778770aab0dbd235e0e475498d9f98b0571b0663adb7cbf033f2c54b8566838a",
 }
 PHYSICAL = (0x004AECA4, 0x004AEE28)
 PHYSICAL_SHA256 = "441f205adb26893cd98b4edcc5802512ee42f427740f113bd037c07068a98800"
@@ -177,6 +177,55 @@ def analyze(image_path: Path = IMAGE) -> dict:
     offset = 0x200037BC - flashdb.IAR_SCATTER_DESTINATION
     if sram[offset : offset + 12] != FACTORY or crc16(FACTORY[:8]) != 0xAA2D:
         raise AuditError("factory record changed")
+
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/kvdb_als_scale.c"
+    expected_patches = {
+        "replace_kvdb_als_scale_default_initialize": (
+            PHYSICAL[0], 20, "e48145091ccb88dae5d4c5be82e5f82713ecd547dc4117c5a7bcaea241e8c1f8",
+            "open_cfw_kvdb_als_scale_default_initialize",
+        ),
+        "replace_kvdb_als_scale_load_and_migrate": (
+            0x004AECB8, 208, "13ea4e9b0fa20c2d99e330dedbc23590b6a5de7afbb93e7f1d79feec3a7ba6b5",
+            "open_cfw_kvdb_als_scale_load_and_migrate",
+        ),
+        "replace_kvdb_write_als_scale": (
+            0x004AED88, 110, "63ddae17be03306b8a8bb55744d14a5cdec6f3cc6b899b03c43666a26908f7c5",
+            "open_cfw_kvdb_write_als_scale",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"]
+            != "626119a5b2298aa233d22294cfd6121b6c5dad45a2bacacb84cb0124899649d4"
+            or leaf.get("profiles") != ["apple-clang"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production ALS-scale routing changed")
     return {
         "surface": {
             "linked_functions": 3,
@@ -205,8 +254,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
         },
         "production": {
             "candidate": "components/apollo_main/core_overlay/kvdb_als_scale.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "production_routed": True,
+            "ownership_bytes": 338,
+            "retained_stock_tail_bytes": 50,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

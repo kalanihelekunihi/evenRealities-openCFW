@@ -1985,8 +1985,16 @@ def main() -> None:
     require(PROJECT / "src" / "r1_dispatch.c", "add_activity_history_notification")
     require(PROJECT / "include" / "openr1" / "r1_dispatch.h",
             "R1_DISPATCH_FRAGMENT_MAX 50u")
+    require(PROJECT / "include" / "openr1" / "r1_dispatch.h",
+            "R1_DISPATCH_ARENA_MAX")
     require(PROJECT / "src" / "r1_dispatch.c",
             "dispatch_fragment_capacity_available")
+    require(PROJECT / "src" / "r1_dispatch.c",
+            "reserve_response_model")
+    require(PROJECT / "src" / "r1_dispatch.c",
+            "remove_last_response")
+    require(PROJECT / "tests" / "test_openr1.c",
+            "assert_dispatch_arena_packed")
     require(PROJECT / "platform" / "nrf52840" / "zephyr" / "src" /
             "openr1_databases_zephyr.c", "health_query_activity_history")
     require(PROJECT / "platform" / "nrf52840" / "zephyr" / "src" /
@@ -2676,6 +2684,18 @@ def main() -> None:
          "R1_CONNECTION_CONTROL_ADV_START_EVENT_TYPE"),
         (PROJECT / "tests" / "test_openr1.c",
          "R1_TOUCH_SWITCH_ACTION_PHONE_DIAGNOSTIC"),
+        (PROJECT / "src" / "r1_peer_target.c",
+         "r1_remove_ring_metadata_commit"),
+        (PROJECT / "src" / "r1_dispatch.c",
+         "remove_ring_metadata"),
+        (PROJECT / "src" / "r1_runtime.c",
+         "remove_ring_actions_queued"),
+        (PROJECT / "platform" / "nrf52840" / "sdk" /
+         "openr1_databases.c", "r1_remove_ring_metadata_commit"),
+        (PROJECT / "platform" / "nrf52840" / "zephyr" / "src" /
+         "openr1_databases_zephyr.c", "r1_remove_ring_metadata_commit"),
+        (PROJECT / "tests" / "test_openr1.c",
+         "observed_remove_ring_intermediate"),
     ):
         require(path, marker)
     temperature_one_shot = DOCS / "TEMPERATURE-ONE-SHOT-CORRELATION.md"
@@ -3002,7 +3022,7 @@ def main() -> None:
         "fill-only merge planner",
         "r1_nv_recovery_command_handler_plan_decode",
         "r1_nv_recovery_outbound_response_plan_build",
-        "normal dispatcher continues to refuse live `nvRecover`",
+        "independently owner-authorized phone role",
         "python3 tools/evidence/summarize_r1_nv_recovery_closure.py",
     ):
         require(nv_recovery_doc, marker)
@@ -4167,7 +4187,9 @@ def main() -> None:
         "896-byte opaque",
         "Modbus CRC16",
         "one-shot",
-        "`0x0006ABE4`, the recovered blob lookup",
+        "`0x0006ABE4` is the already",
+        "reports `0x2E0` bytes",
+        "exact `0x380` gate rejects it",
     ):
         require(health_crash_snapshot, marker)
     health_database_startup = \
@@ -5022,6 +5044,20 @@ def main() -> None:
         "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_peer_target_policy.py"),
     ], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([
+        "python3", str(ROOT / "tools" / "evidence" /
+                       "summarize_r1_remove_ring.py"),
+        str(ROOT / "research/decompilation/rebuild/rebuilt-application.bin"),
+    ], check=True, stdout=subprocess.DEVNULL)
+    remove_ring_emulator = (
+        ROOT / "tools" / "evidence" / "emulate_r1_remove_ring.py")
+    for marker in (
+        "exact_header_only_no_action",
+        "one_payload_byte_destructive_route",
+        "malformed_declared_zero_still_destructive",
+        "both_persistent_setters_intercepted",
+    ):
+        require(remove_ring_emulator, marker)
     subprocess.run([
         "python3", str(ROOT / "tools" / "evidence" /
                        "summarize_r1_legacy_command_dispatch.py"),
@@ -15076,6 +15112,57 @@ def main() -> None:
     statuses = {row["status"] for row in rows}
     if not {"implemented", "partial", "withheld", "separate"} <= statuses:
         raise AssertionError(f"missing coverage dispositions: {statuses}")
+    status_counts = Counter(row["status"] for row in rows)
+    expected_status_counts = Counter({
+        "implemented": 52,
+        "partial": 40,
+        "withheld": 2,
+        "separate": 2,
+        "excluded": 1,
+    })
+    if status_counts != expected_status_counts:
+        raise AssertionError(
+            "coverage disposition census changed without completion-audit "
+            f"reconciliation: {dict(status_counts)}")
+
+    blocker_text = (ROOT / "docs" / "closures" /
+                    "AUGUST-18-PHYSICAL-VALIDATION-BLOCKER.md").read_text()
+    partial_by_area = Counter(
+        row["area"] for row in rows if row["status"] == "partial")
+    blocker_area_labels = {
+        "platform": "Platform",
+        "protocol": "Protocol",
+        "security": "Security",
+        "system": "System",
+        "storage": "Storage",
+        "sensors": "Sensors",
+        "hardware": "Hardware services",
+        "health": "Health",
+    }
+    for area, label in blocker_area_labels.items():
+        marker = f"| {label} | {partial_by_area[area]} |"
+        if marker not in blocker_text:
+            raise AssertionError(
+                f"physical-blocker partial-row census is stale for {area}: "
+                f"expected {marker!r}")
+    partial_total_marker = f"These {status_counts['partial']} rows"
+    if partial_total_marker not in blocker_text:
+        raise AssertionError(
+            "physical-blocker total partial-row census is stale: expected "
+            f"{partial_total_marker!r}")
+
+    residual_text = (ROOT / "docs" / "reference" /
+                     "RESIDUAL-PROVIDER-AUDIT.md").read_text()
+    residual_markers = (
+        f"**{status_counts['implemented']} implemented, "
+        f"{status_counts['partial']} partial, {status_counts['withheld']} withheld,",
+        f"The {status_counts['withheld']} **withheld** rows",
+        f"hashes all 174 included firmware source files",
+    )
+    for marker in residual_markers:
+        if marker not in residual_text:
+            raise AssertionError(
+                f"residual-provider completion census is stale: {marker!r}")
 
     with (ROOT / "docs" / "reference" / "r1-capability-matrix.csv").open(newline="") as handle:
         audit_rows = list(csv.DictReader(handle))
@@ -15106,7 +15193,7 @@ def main() -> None:
         "python3", str(PROJECT / "tools/verify_zephyr_source_boundary.py")
     ], check=True)
 
-    for target in ("test", "sanitize", "arm-objects", "sim"):
+    for target in ("test", "sanitize", "arm-objects", "sim", "deployment-test"):
         subprocess.run(["make", "-C", str(PROJECT), target], check=True)
 
     sdk_root = os.environ.get("OPENR1_SDK_ROOT")

@@ -761,13 +761,12 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                142_986,
+                143_227,
                 (
-                    "3d5c9fe87fd46cbc40bb5670653f45d3"
-            "d61f9d777168aa47b70fb10712698ab4"
+                    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
                 ),
-                615,
-                578,
+                786,
+                727,
             ),
         )
         self.assertEqual(
@@ -784,15 +783,14 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                3_666_382,
+                3_666_623,
                 (
-                    "a4552ff210b6af33b7826a6b9aaefa6e"
-            "01c7e6e976c9a852498570ededcf058f"
+                    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
                 ),
-                84_654,
-                84_836,
-                121_900,
-                3_438_528,
+                99_192,
+                99_370,
+                143_409,
+                3_423_990,
             ),
         )
 
@@ -812,17 +810,15 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 )
             },
             {
-                "expected_size": 4_444_468,
+                "expected_size": 4_445_117,
                 "expected_sha256": (
-                    "53b240df100153c5453697fb3ce8ac66"
-            "663ca82484a1d69f88345e1e7c3cd3c6"
+                    "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_425_408,
+                        "expected_size": 4_446_156,
                         "expected_sha256": (
-                            "5598cb1f2a3b9a8b6101f61afcc5e24"
-            "de54b01c3d5aa45396bf161344b3618bb"
+                            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"
                         ),
                     },
                 },
@@ -832,7 +828,15 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
             "regions"
         ]
         selected_names = {
-            "opaque_between_freertos_scheduler_state_and_reset_event_item",
+            (
+                "opaque_between_freertos_scheduler_state_and_"
+                "task_priority_disinherit"
+            ),
+            "freertos_task_priority_disinherit_source_replacement",
+            (
+                "opaque_between_freertos_task_priority_disinherit_and_"
+                "reset_event_item"
+            ),
             "freertos_task_reset_event_item_value_source_replacement",
             (
                 "freertos_task_increment_mutex_held_count_"
@@ -840,6 +844,19 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
             ),
             (
                 "opaque_between_freertos_increment_mutex_held_count_"
+                "and_task_notify_wait"
+            ),
+            "freertos_task_notify_wait_source_replacement",
+            "freertos_task_notify_source_replacement",
+            "opaque_between_freertos_task_notify_variants",
+            "freertos_task_notify_from_isr_source_replacement",
+            (
+                "opaque_between_freertos_task_notify_from_isr_and_"
+                "add_current_to_delayed_list"
+            ),
+            "freertos_task_add_current_to_delayed_list_source_replacement",
+            (
+                "opaque_between_freertos_add_current_to_delayed_list_"
                 "and_list_initialise"
             ),
             (
@@ -870,9 +887,19 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
             selected,
             {
                 (
-                    "opaque_between_freertos_scheduler_state_"
+                    "opaque_between_freertos_scheduler_state_and_"
+                    "task_priority_disinherit"
+                ): (121_060, 170, 0x0045_58C4, "official_blob"),
+                "freertos_task_priority_disinherit_source_replacement": (
+                    121_230,
+                    164,
+                    0x0045_596E,
+                    "generated_source_entry_replacement",
+                ),
+                (
+                    "opaque_between_freertos_task_priority_disinherit_"
                     "and_reset_event_item"
-                ): (121_060, 518, 0x0045_58C4, "official_blob"),
+                ): (121_394, 184, 0x0045_5A12, "official_blob"),
                 (
                     "freertos_task_reset_event_item_value_"
                     "source_replacement"
@@ -893,8 +920,49 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 ),
                 (
                     "opaque_between_freertos_increment_mutex_held_count_"
-                    "and_list_initialise"
-                ): (121_622, 1_414, 0x0045_5AF6, "official_blob"),
+                    "and_task_notify_wait"
+                ): (121_622, 142, 0x0045_5AF6, "official_blob"),
+                "freertos_task_notify_wait_source_replacement": (
+                    121_764,
+                    196,
+                    0x0045_5B84,
+                    "generated_source_entry_replacement",
+                ),
+                "freertos_task_notify_source_replacement": (
+                    121_960,
+                    368,
+                    0x0045_5C48,
+                    "generated_source_entry_replacement",
+                ),
+                "opaque_between_freertos_task_notify_variants": (
+                    122_328,
+                    8,
+                    0x0045_5DB8,
+                    "official_blob",
+                ),
+                "freertos_task_notify_from_isr_source_replacement": (
+                    122_336,
+                    412,
+                    0x0045_5DC0,
+                    "generated_source_entry_replacement",
+                ),
+                (
+                    "opaque_between_freertos_task_notify_from_isr_and_"
+                    "add_current_to_delayed_list"
+                ): (122_748, 76, 0x0045_5F5C, "official_blob"),
+                (
+                    "freertos_task_add_current_to_delayed_list_"
+                    "source_replacement"
+                ): (
+                    122_824,
+                    118,
+                    0x0045_5FA8,
+                    "generated_source_entry_replacement",
+                ),
+                (
+                    "opaque_between_freertos_add_current_to_delayed_"
+                    "list_and_list_initialise"
+                ): (122_942, 94, 0x0045_601E, "official_blob"),
                 (
                     "apollo_freertos_task_reset_event_item_value_"
                     "source_leaf_alignment"

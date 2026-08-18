@@ -209,8 +209,10 @@ nineteen tensor-runtime routines—are reconstructed in transparent C. See
 [`docs/GOMORE-PROVIDER-BOUNDARY.md`](docs/boundaries/GOMORE-PROVIDER-BOUNDARY.md).
 The three byte-pinned R1 GoMore adapters are transparent too: exact accelerometer/raw-optical topic
 input plus the backward-clock reset dispatcher. Normal enable/profile changes now initialize a live
-source-built engine; backward-clock reset and the 16-stage result composition remain withheld until
-their target ownership and hardware behavior are validated.
+source-built engine. The source-built Zephyr target executes all 16 recovered stages, routes live
+motion/optical topics, persists validated sleep output, and performs fresh-engine lifecycle on
+backward-clock and failure-60 resets. Physical input semantics and biometric equivalence remain
+validation boundaries; the software composition is no longer withheld.
 The IQS7211E path uses pinned MIT provider/settings references and the R1-only adapter in
 `src/r1_iqs7211e.c`; its Nordic TWIM0/GPIOTE board binding is recorded in
 [`docs/IQS7211E-PROVIDER-BOUNDARY.md`](docs/boundaries/IQS7211E-PROVIDER-BOUNDARY.md)
@@ -222,7 +224,9 @@ All eight GXT310 shared-read, mode, one-shot, veneer, and pair-enable bodies are
 both exact addresses over P1.13/P0.28, decodes signed big-endian register-0 values, and exposes the
 recovered immediate and ten-sample acquisition paths. The latter reads the exact six-byte
 calibration at `nv_r1` offset `0x3E`, treats an erased record as absent, and applies only recovered
-subtract/add direction values. It does not assign skin/ambient semantics or feed the daily cache. See
+subtract/add direction values. The dormant recovered one-shot reducer, event-9 path, and daily-cache
+producer are source-bound, but public activation and final-sleep temperature remain gated because
+the physical channel identity and units are not established. See
 [`docs/GXT310-REDUCTION-CORRELATION.md`](docs/correlation/GXT310-REDUCTION-CORRELATION.md).
 All 44 YHM2710 transport, device, register, status, and policy bodies are likewise reconstructed;
 the latest closure adds the two complete register-dispatch bodies and register-3 charging-event

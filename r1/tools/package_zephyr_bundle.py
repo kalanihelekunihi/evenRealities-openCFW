@@ -18,12 +18,15 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 
 
-BOOT_LIMIT = 0x0000C000
+BOOT_LIMIT = 0x00027000
 APPLICATION_LIMIT = 0x000D1000
 SETTINGS_START = 0x000D1000
 DATA_START = 0x000D4000
 DATA_LIMIT = 0x000F8000
 FLASH_LIMIT = 0x00100000
+RAM_START = 0x20000000
+RAM_BYTES = 256 * 1024
+MINIMUM_RAM_HEADROOM = 16 * 1024
 
 SOURCE_LOCK = {
     "zephyr": {
@@ -154,6 +157,31 @@ NFC_PROVIDER_OBJECTS = (
 HEALTH_STORAGE_PROVIDER_OBJECTS = (
     "fdb.c", "fdb_tsdb.c", "fdb_utils.c", "fal.c", "fal_flash.c",
     "fal_partition.c",
+)
+
+PRODUCT_STORAGE_SYMBOLS = (
+    "r1_ep_scan_flash_cursor",
+    "r1_log_bin_sector_count",
+    "r1_log_bin_initialize",
+    "r1_log_bin_write",
+    "openr1_storage_zephyr_log_append",
+    "r1_structured_log_cache_append",
+    "r1_structured_log_encode_typed",
+    "r1_structured_log_encode_format",
+    "r1_structured_log_periodic_persist",
+    "r1_log_export_snapshot_prepare",
+    "r1_log_export_snapshot_read",
+    "r1_log_export_snapshot_finish",
+    "openr1_storage_zephyr_structured_log_typed",
+    "openr1_storage_zephyr_structured_log_format",
+    "openr1_storage_zephyr_structured_log_service",
+    "openr1_storage_zephyr_diagnostic_export_begin",
+    "openr1_storage_zephyr_diagnostic_export_read",
+    "openr1_storage_zephyr_diagnostic_export_finish",
+    "r1_runtime_connection_is_authorized_phone",
+    "openr1_bae8_zephyr_diagnostic_export_begin",
+    "openr1_bae8_zephyr_diagnostic_export_read",
+    "openr1_bae8_zephyr_diagnostic_export_finish",
 )
 GOODIX_PROVIDER_OBJECTS = (
     "gh_drv_config.c", "gh_drv_control.c", "gh_drv_dump.c",
@@ -550,6 +578,55 @@ def verify_goodix_provider_map(map_text: str) -> dict[str, dict[str, int]]:
     return retained
 
 
+def verify_product_storage_map(map_text: str) -> dict[str, dict[str, int]]:
+    retained: dict[str, dict[str, int]] = {}
+    loadable_text = map_text.split("\nopenr1_reconstructed", 1)[0]
+    for symbol in PRODUCT_STORAGE_SYMBOLS:
+        pattern = re.compile(
+            rf"^\s*0x([0-9a-fA-F]+)\s+{re.escape(symbol)}\s*$",
+            re.MULTILINE)
+        matches = [
+            int(match.group(1), 16)
+            for match in pattern.finditer(loadable_text)
+            if BOOT_LIMIT <= int(match.group(1), 16) < APPLICATION_LIMIT
+        ]
+        if len(matches) != 1:
+            raise ValueError(
+                f"product-storage symbol is not uniquely retained: {symbol}")
+        retained[symbol] = {"address": matches[0]}
+    return retained
+
+
+def linked_ram_usage(map_text: str) -> dict[str, int]:
+    def symbol(name: str) -> int:
+        matches = re.findall(
+            rf"^\s*0x([0-9a-fA-F]+)\s+{re.escape(name)} = \.\s*$",
+            map_text, re.MULTILINE)
+        if len(matches) != 1:
+            raise ValueError(f"linked RAM map symbol is not unique: {name}")
+        return int(matches[0], 16)
+
+    start = symbol("_image_ram_start")
+    end = symbol("_image_ram_end")
+    limit = RAM_START + RAM_BYTES
+    if start != RAM_START or end < start or end > limit:
+        raise ValueError(
+            f"linked RAM extent 0x{start:08x}..<0x{end:08x} is invalid")
+    used = end - start
+    headroom = RAM_BYTES - used
+    if headroom < MINIMUM_RAM_HEADROOM:
+        raise ValueError(
+            f"linked RAM headroom {headroom} is below the required "
+            f"{MINIMUM_RAM_HEADROOM} bytes")
+    return {
+        "origin": RAM_START,
+        "bytes": RAM_BYTES,
+        "used_bytes": used,
+        "headroom_bytes": headroom,
+        "minimum_headroom_bytes": MINIMUM_RAM_HEADROOM,
+    }
+
+
 def verify_mcuboot_signature(image: bytes, public_pem: bytes) -> None:
     """Validate an MCUboot ECDSA-P256 image without importing imgtool."""
     if len(image) < 32:
@@ -630,6 +707,7 @@ def main() -> None:
     boot_hex = (boot_dir / "zephyr.hex").read_bytes()
     app_hex = (app_dir / "zephyr.signed.hex").read_bytes()
     boot_config = (boot_dir / ".config").read_text()
+    boot_map = (boot_dir / "zephyr.map").read_text()
     app_config = (app_dir / ".config").read_text()
     app_map = (app_dir / "zephyr.map").read_text()
     retention = verify_reconstructed_map(app_map)
@@ -637,11 +715,30 @@ def main() -> None:
     nfc_retention = verify_nfc_provider_map(app_map)
     health_storage_retention = verify_health_storage_provider_map(app_map)
     goodix_retention = verify_goodix_provider_map(app_map)
+    product_storage_retention = verify_product_storage_map(app_map)
+    application_ram = linked_ram_usage(app_map)
 
     if "CONFIG_SINGLE_APPLICATION_SLOT=y" not in boot_config or \
        "CONFIG_BOOT_VALIDATE_SLOT0=y" not in boot_config or \
        "CONFIG_BOOT_SIGNATURE_TYPE_ECDSA_P256=y" not in boot_config:
         raise ValueError("MCUboot is not the required validated single-slot ECDSA build")
+    required_recovery_config = (
+        "CONFIG_MCUBOOT_ACTION_HOOKS=y",
+        "CONFIG_BT_CTLR=y",
+        "CONFIG_BT_PERIPHERAL=y",
+        "CONFIG_REBOOT=y",
+    )
+    if any(value not in boot_config for value in required_recovery_config):
+        raise ValueError("MCUboot does not contain the source BLE recovery configuration")
+    for symbol in (
+        "mcuboot_status_change",
+        "openr1_recovery_service",
+        "write_control",
+        "write_data",
+        "start_recovery_advertising",
+    ):
+        if symbol not in boot_map:
+            raise ValueError(f"MCUboot BLE recovery symbol is absent: {symbol}")
     required_app_config = (
         "CONFIG_BT_CTLR=y",
         "CONFIG_BT_HCI_HOST=y",
@@ -664,6 +761,17 @@ def main() -> None:
     )
     if any(value not in app_config for value in required_app_config):
         raise ValueError("application does not contain the source Bluetooth stack + MCUboot ABI")
+    for symbol in (
+        "r1_remove_ring_metadata_commit",
+        "openr1_databases_zephyr_remove_ring_metadata",
+        "remove_ring_work_handler",
+        "queue_remove_ring",
+        "r1_runtime_set_remove_ring_handler",
+        "openr1_bae8_zephyr_remove_ring_failures",
+    ):
+        if symbol not in app_map:
+            raise ValueError(
+                f"owner-authorized remove-ring symbol is absent: {symbol}")
 
     boot_memory = parse_ihex(boot_hex)
     app_memory = parse_ihex(app_hex)
@@ -711,6 +819,39 @@ def main() -> None:
             "openr1_data_preserved": [DATA_START, DATA_LIMIT],
             "migration_reserve": [DATA_LIMIT, FLASH_LIMIT],
         },
+        "deployment_contract": {
+            "install_artifact": "openr1-full.hex",
+            "write_address_limit": SETTINGS_START,
+            "preserved_by_install": [
+                [DATA_START, DATA_LIMIT],
+            ],
+            "fresh_settings_by_install": [SETTINGS_START, DATA_START],
+            "accepted_preinstall_settings": [
+                "retail-nordic-fds-2-data-1-swap",
+                "fully-erased",
+            ],
+            "retail_credentials_imported": False,
+            "owner_repairing_required_after_retail_install": True,
+            "required_preflash_backup": [0, FLASH_LIMIT],
+            "allowed_pinned_reconstruction": [0, 0x27000],
+            "allowed_source_proven_mbr_config": [0xFF8, 0x1000],
+            "required_live_page_readback": [0x27000, 0xFF000],
+            "allowed_source_proven_settings_mirror": [0xFF000, FLASH_LIMIT],
+            "required_preflash_uicr_backup": [0x10001000, 0x10001308],
+            "erase_policy": "sector-erase-install-and-classified-retail-settings",
+            "erase_ranges": [[0, DATA_START], [DATA_LIMIT, FLASH_LIMIT]],
+            "mass_erase_forbidden": True,
+            "readback_required": True,
+            "reset_held_until_readback_verified": True,
+            "uicr_must_remain_unchanged": True,
+            "uicr_readback_required": True,
+            "unaddressed_install_bytes_must_be_erased": True,
+            "on_device_rollback_available": False,
+            "recovery_requires_authorized_debug_access": True,
+            "on_device_application_recovery_available": True,
+            "application_recovery_transport": "BLE-GATT-openr1-signed-direct-upload",
+            "application_recovery_preserves_bootloader": True,
+        },
         "trust": {
             "algorithm": "ECDSA-P256-SHA256",
             "public_key_sha256": sha256(public_pem),
@@ -723,18 +864,28 @@ def main() -> None:
         "nfc_provider_retention": nfc_retention,
         "health_storage_provider_retention": health_storage_retention,
         "goodix_provider_retention": goodix_retention,
+        "product_storage_retention": product_storage_retention,
+        "linked_memory": {"application_ram": application_ram},
         "artifacts": {
             name: {"bytes": len(data), "sha256": sha256(data)}
             for name, data in artifacts.items()
         },
         "limitations": [
-            "The development key must be replaced by an owner-controlled key before deployment.",
+            *(["The development key must be replaced by an owner-controlled key before deployment."]
+              if key_path.name == "root-ec-p256.pem" else []),
+            "The source-built boot partition contains an always-retained BLE GATT recovery loader. Authenticated otaStart sets the one-shot GPREGRET request; an invalid or interrupted application also enters recovery automatically. Uploads are sequential, page-erased progressively, bounded to image-0, and boot only after MCUboot validates the owner ECDSA-P256 signature.",
+            "Installation requires the recorded offline preflight: capture an exact 1-MiB recovery basis plus the complete architected 0x308-byte nRF52840 UICR register extent at 0x10001000. If retail memory isolation blocks general reads below 0x27000, only that protected extent may use the pinned official S140 reconstruction; MBR words 0xFF8...0xFFF must be source-proven from the byte-exact owner bootloader and matching live UICR; every 4-KiB page at 0x27000...0xFEFFF must be live readback; and an ACL-protected 0xFF000 primary settings page may only mirror the CRC-valid live 0xFE000 backup under the pinned Nordic write-and-backup implementation plus prior same-device identity evidence. Forbid mass erase; recognize settings only as an exact two-data/one-swap retail Nordic FDS layout or as fully erased; sector-erase 0x00000000..0x000D4000 so no opaque retail executable bytes or FDS credentials survive; preserve only 0x000D4000..0x000F8000 product data; hold reset through an exact 1-MiB readback against the emitted erase/write model; and prove every architected UICR byte remained identical. Retail credentials are not imported and the owner must pair again. Separate canonical internal-flash and UICR recovery images retain the original FDS bytes but require authorized debug access; on-device rollback is unavailable.",
             "Pinned MCUboot imgtool uses randomized ECDSA nonces; signed-image and ZIP bytes are not claimed reproducible, although every generated signature and artifact hash is independently verified.",
+            "The source-built target persists product authorization independently from BLE encryption, bond state, and pairAuth: only the first completed bonded pairing may create the CRC-protected owner identity. The portable state loader reconstructs only the matching identity after reboot; all truncations and every single-bit record corruption fail closed; a malformed reload atomically evicts any prior RAM owner; and successful local revocation clears the state before unpair/disconnect. Physical NVS interruption/rollback replay, ATT, and revocation behavior remain owned-hardware validation gates.",
+            "NV identity/calibration recovery admits only the exact CRC-gated command-2 fill-only body from the independently owner-authorized phone role, exposes no identity report, refuses unrelated dirty state, and queues nv_r1/power/r_size for one generation-bearing kv.bin commit with complete readback. Exhaustive byte-cut tests prove old-or-new reboot state and clean retry; a changed durable generation reboots for provider adoption. Physical persistence/replay/reboot and ATT validation remain owned-hardware gates.",
+            "removeRingNotify is exposed only as an exact one-byte SET from the encrypted, bonded, independently owner-authorized phone role. Its empty response is queued before a bounded worker performs the recovered two-generation dev_info transition: clear flag 0x04 and commit, then erase both peer slots, restore CAMH, and commit. Exhaustive byte-cut tests prove only old, intermediate, or final generations reopen and every retry reaches final; malformed stock lengths are rejected. This is an explicitly destructive owner action and is never used as a discovery probe.",
+            "The exact composite EP/log/cache/optional-crash diagnostic virtual-file source is transparent and target-bound behind a single encrypted, bonded, independently owner-authorized phone-role session. Producers freeze only for snapshot life and disconnect, security loss, revocation, failure, or explicit finish releases the guard. No undocumented GATT command or BLE sender is enabled; physical ATT timing, retry/disconnect behavior, consent, redaction, and any valid crash-string provider remain owned-hardware/product-policy gates.",
             "The exact SAADC routes and conversions are source-bound; battery sampling uses YHM2710 shared-power client bit 0, startup adopts valid persisted type/voltage compensation, and boot plus exact device-status access refresh protocol-visible voltage and the live register-6 charge state. No unsupported autonomous cadence is invented; PMIC event-driven refresh, physical calibration, and owned-hardware validation remain open.",
             "Reset-reason capture, fatal PC/LR retention, and the recovered 10-second scheduler watchdog are source-bound but require owned-hardware fault/reset validation.",
             "The monotonic/phone-synchronized wall clock, RTC2 8-Hz backend, and reconstructed exact Unix/Gregorian query/day-boundary conversion are source-bound; wall time remains unavailable until command 0x05 supplies a valid epoch and UTC offset, and physical drift/day-boundary behavior remains an owned-hardware validation gate.",
-            "REG1 startup and settings writes use the source nRF POWER HAL; wear-driven automation and physical power behavior remain hardware-validation gates.",
-            "The pinned Bosch/ST motion providers, exact TWIM1 route, variant probe, reconstructed 1024-Hz sensor-stream runtime, exact 188-byte acc batch with read-only persisted axis offsets, and live GoMore acc topic listener are source-bound. Accelerometer, raw-optical, direct-HR, and HRV topics cross the exact readiness barrier and execute the complete transparent 16-stage engine plus output lifecycle; physical-axis confirmation and owned-ring validation remain open.",
+            "REG1 startup, settings writes, and authorized glasses-wear immediate-disable/delayed-enable automation use the source nRF POWER HAL; physical timing and power behavior remain hardware-validation gates.",
+            "Channel 1 is deny-by-default: only the bounded legacy glasses-status opcode 0x89 is composed, and only for an encrypted, bonded, independently authorized glasses-role link. Its seven-byte response, touch lease, immediate REG1 disable, exact delayed enable, immediate {16,16,2,600} secondary-mode BLE profile, and exact 0x2800-tick delayed {72,84,4,600} slow profile are source-bound. All other BC/eAT handlers remain unreachable; physical timing, regulator, radio, and coexistence behavior remains an owned-hardware gate.",
+            "The pinned Bosch/ST motion providers and reconstructed QMA6100 third fallback, exact TWIM1 route, stock-order 0x18/0x18/0x12-or-0x13 probe, QMA delay/lock/IRQ/FIFO seams, reconstructed 1024-Hz sensor-stream runtime, exact 188-byte acc batch with read-only persisted axis offsets, and live GoMore acc topic listener are source-bound. Accelerometer, raw-optical, direct-HR, and HRV topics cross the exact readiness barrier and execute the complete transparent 16-stage engine plus output lifecycle; physical-axis confirmation and owned-ring validation remain open.",
             "The reconstructed software-i2c_2 GXT310 path, P1.13/P0.28 pins, two-address ID probe, signed register-0 conversion, bounded paired acquisition, read-only persisted nv_r1 calibration, exact temp/two-byte one-pair stream provider, and dormant once-listener/event-9/daily-cache path are source-bound. Final-sleep timing, construction, validation, serialization, sleep.db persistence, and synchronized commit are live; the retail physical-temperature binding remains zero until its channel semantics are proven on hardware.",
             "The IQS7211E TWIM0 transport, GPIO lifecycle, IRQ worker, restart timer, touchSwitch hook, and YHM2710 client-bit-2 lease are source-bound; ring identity and wear/factory provisioning remain fail-closed, and physical touch behavior is not hardware-validated.",
             "The exact one-byte r_size class is decoded read-only with its 6...15 gate, but ring size alone is not used to infer the independent IQS7211E physical layout.",
@@ -742,8 +893,8 @@ def main() -> None:
             "Pinned FlashDB 2.0.0/FAL 0.5.99 binds the recovered six-page health.db TSDB, exact startup/cache restore, exact 128-byte codec, local-day recovery, non-destructive slot-1 hourly appends, and the exact slot-0 tuple for recovery/reset. The 24-byte hsync class is losslessly loaded and persisted through hardened kv.bin snapshots; only the four named cursors mutate and both unresolved words are preserved. Authenticated HR/SpO2/HRV/activity daily queries bind their exact oldest-first UInt8/UInt16/packed-activity merge callbacks over the recovered 259200-second FlashDB window, merge each invalid-clock FIFO, append current RAM, advance the named hsync cursor only after matching mode-0/2 packet ACKs, and consume only the acknowledged FIFO prefix for mode 1. Dispatch composition accounts for encoded fragment cost before model admission; an activity traversal that reaches the recovered 50-record shared-queue boundary completes as an ACK-resumable page. The admitted wall-clock cadence drives the exact 10800-second automatic HR/SpO2/HRV/activity/unsynchronized-sleep order through a bounded one-leg-at-a-time service that requires an encrypted, bonded, authorized phone role and preserves the recovered 50-record queue. Public health-settings use their exact canonical planner, queue ACK before effects, persist normalized timestamp/enable transitions into dev_info while preserving REG1, and reconcile the exact seven-slot GoMore gate. The backward-clock and failure-60 reset paths now perform a typed fresh-engine reinitialization without resume state. Cumulative activity enters the exact ten-minute/daily accumulator and final sleep enters sleep.db. Temperature serializes only after an explicitly started one-shot completes, stress remains zero without a stock-live producer, and neither module-owned cache is restored by the crash record; destructive format/retry, migration, and owned-hardware power-loss behavior remain intentionally suppressed or open.",
             "The pinned source-only Goodix demo/driver subset, recovered i2c_4 transport, P0.21/P0.10/P1.04 board resources, interrupt worker, and YHM2710 client bit 1 are bound; the exact product-side raw_hr/adt/living-object record producers compile from transparent source. Binary archives are excluded and the 20-row global frame/result ABI is normalized through a bounded vendor-free provider contract. Checked constructors reproduce the independent HR/HBA mapped input, HRV direct raw/AGC/last-HR input, and SpO2 mapped raw/AGC input; the retained source composer owns their exact lifecycle and publication records: HR mask 0x003F/six words, HRV mask 0x007F/seven slots with slot 6 zero, and the retail-R1 SpO2 divergence mask 0x00FF/eight slots with slot 6 mirroring slot 0 and slot 7 zero. It also preserves the HR-to-HRV carry. Canonical retail roots are HBA 0x6C6A8, HRV 0x6D51C, and SpO2 0x6E838. All three transparent persistent root executors are target-bound; validated HR, SpO2, and HRV publications route through recovered planners into scalar storage and GoMore topics behind the persisted health gate. Optical wavelength, electrical calibration, and biometric equivalence remain owned-hardware validation gates.",
             "The reconstructed YHM2710 P1.01 transport, initialization, and three-client shared-power lease are source-bound; battery, optical, and touch clients are adopted, while all physical power behavior remains hardware-validation work; kv.bin, health.db, and sleep.db are source-bound.",
-            "Zephyr NVS does not claim compatibility with retail Nordic FDS settings; migration or clearing behavior requires owned-hardware validation.",
-            "The former retail bootloader window is reserved until a migration procedure is hardware-tested.",
+            "Zephyr NVS does not decode retail Nordic FDS settings. The offline first-install preflight accepts only the exact two-data/one-swap FDS geometry seen on the recovery basis or a fully erased store, retains the original bytes in recovery artifacts, erases all three settings pages while reset is held, requires full readback, and requires fresh owner pairing. Physical erase/readback and first-boot behavior remain owned-hardware validation gates.",
+            "The former retail bootloader/settings window at 0xF8000..<0x100000 is an explicit erase region. The source recovery loader verifies it is erased (and erases it when necessary) before accepting an application upload, preventing opaque retail executable bytes from surviving the transition.",
         ],
     }
     manifest_bytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()

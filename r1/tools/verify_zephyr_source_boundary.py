@@ -169,6 +169,19 @@ def main() -> None:
     require(boot, "CONFIG_SINGLE_APPLICATION_SLOT=y", "MCUboot configuration")
     require(boot, "CONFIG_BOOT_VALIDATE_SLOT0=y", "MCUboot configuration")
     require(boot, "CONFIG_MCUBOOT_SERIAL=n", "MCUboot configuration")
+    require(boot, "CONFIG_MCUBOOT_ACTION_HOOKS=y", "MCUboot recovery configuration")
+    require(boot, "CONFIG_BT=y", "MCUboot recovery Bluetooth configuration")
+    require(boot, "CONFIG_BT_CTLR=y", "MCUboot recovery controller configuration")
+    recovery_source = (BACKEND / "recovery_module" / "openr1_recovery.c").read_text()
+    for needle in (
+        "void mcuboot_status_change(",
+        "MCUBOOT_STATUS_NO_BOOTABLE_IMAGE_FOUND",
+        "FIXED_PARTITION_ID(slot0_partition)",
+        "flash_area_erase(",
+        "flash_area_write(",
+        "OPENR1_RECOVERY_REQUEST",
+    ):
+        require(recovery_source, needle, "source BLE recovery loader")
     configuration = (BACKEND / "prj.conf").read_text()
     require(configuration, "CONFIG_FLASH=y", "Zephyr product-storage configuration")
     require(configuration, "CONFIG_FLASH_MAP=y", "Zephyr product-storage configuration")
@@ -195,6 +208,10 @@ def main() -> None:
         require(cmake, source, "Zephyr storage source binding")
     main_source = (BACKEND / "src" / "main.c").read_text()
     require(main_source, "openr1_storage_zephyr_initialize()", "Zephyr storage startup")
+    require(main_source, "openr1_storage_zephyr_structured_log_typed(",
+            "Zephyr structured-log producer startup")
+    require(main_source, "openr1_storage_zephyr_structured_log_service(",
+            "Zephyr structured-log persistence service")
     require(main_source, "openr1_databases_zephyr_initialize(", "Zephyr database startup")
     require(main_source, "settings_load()", "Zephyr Bluetooth settings startup")
     require(main_source, "openr1_analog_zephyr_initialize()", "Zephyr SAADC startup")
@@ -267,6 +284,29 @@ def main() -> None:
     require(storage_source, "FIXED_PARTITION_ID(openr1_data_partition)",
             "Zephyr product-storage partition binding")
     require(storage_source, "flash_area_write", "Zephyr source flash provider")
+    for needle in (
+        'r1_storage_partition("ep.bin")',
+        "r1_ep_plan_initialization(",
+        "r1_ep_scan_flash_cursor(",
+        "openr1_storage_zephyr_ep_scan(",
+        'r1_storage_partition("log.bin")',
+        "r1_log_bin_initialize(",
+        "openr1_storage_zephyr_log_append(",
+        "openr1_storage_zephyr_log_sector_count(",
+        "r1_structured_log_cache_initialize(",
+        "r1_structured_log_encode_typed(",
+        "r1_structured_log_encode_format(",
+        "r1_structured_log_periodic_persist(",
+        "openr1_storage_zephyr_structured_log_service(",
+        "r1_log_export_snapshot_prepare(",
+        "r1_log_export_snapshot_read(",
+        "r1_log_export_snapshot_finish(",
+        "openr1_storage_zephyr_diagnostic_export_begin(",
+        "openr1_storage_zephyr_diagnostic_export_read(",
+        "openr1_storage_zephyr_diagnostic_export_finish(",
+    ):
+        require(storage_source, needle,
+                "Zephyr product-storage and structured-log binding")
 
     require(cmake, "src/openr1_battery_zephyr.c",
             "Zephyr live battery source binding")
@@ -296,6 +336,15 @@ def main() -> None:
             "worst-case scalar-history dispatch capacity")
     require(dispatch_header, "R1_DISPATCH_FRAGMENT_MAX 50u",
             "atomic shared-EUS fragment capacity")
+    require(dispatch_header, "R1_DISPATCH_ARENA_MAX",
+            "fragment-bounded packed dispatch arena")
+    require(dispatch_header, "uint8_t arena[R1_DISPATCH_ARENA_MAX]",
+            "dispatch arena storage")
+    dispatch_source = (PROJECT / "src" / "r1_dispatch.c").read_text()
+    require(dispatch_source, "reserve_response_model(",
+            "bounded dispatch-arena reservation")
+    require(dispatch_source, "remove_last_response(",
+            "atomic dispatch-arena rollback")
     observer_position = runtime_source.find("runtime->request_observer(")
     dispatch_position = runtime_source.find(
         "const r1_error dispatch_error = r1_dispatch(", observer_position)
@@ -314,8 +363,8 @@ def main() -> None:
     dts = (BACKEND / "boards" / "openr1" / "openr1_nrf52840" /
            "openr1_nrf52840.dts").read_text()
     expected_partitions = {
-        "mcuboot": (0x00000000, 0x0000C000),
-        "image-0": (0x0000C000, 0x000C5000),
+        "mcuboot": (0x00000000, 0x00027000),
+        "image-0": (0x00027000, 0x000AA000),
         "openr1-settings": (0x000D1000, 0x00003000),
         "openr1-data": (0x000D4000, 0x00024000),
         "retail-boot-migration-reserve": (0x000F8000, 0x00008000),
@@ -424,6 +473,117 @@ def main() -> None:
     apply = databases_source.find("openr1_power_zephyr_set_reg1(enabled)")
     if commit < 0 or apply < commit:
         raise AssertionError("Zephyr REG1 action must follow successful persistence")
+    storage_core = (PROJECT / "src" / "r1_storage.c").read_text()
+    kv_core = (PROJECT / "src" / "r1_kv_store.c").read_text()
+    nv_recovery_core = (PROJECT / "src" / "r1_nv_recovery.c").read_text()
+    peer_target_core = (PROJECT / "src" / "r1_peer_target.c").read_text()
+    sleep_core = (PROJECT / "src" / "r1_sleep_db.c").read_text()
+    deployment_tool = (
+        PROJECT / "tools" / "prepare_zephyr_deployment.py").read_text()
+    deployment_verifier = (
+        PROJECT / "tools" / "verify_zephyr_deployment.py").read_text()
+    recovery_assembler = (
+        PROJECT / "tools" / "assemble_r1_ace_recovery.py").read_text()
+    for needle in (
+        "r1_memory_flash_fail_after_bytes(",
+        "byte_mutation_allowed(",
+    ):
+        require(storage_core, needle, "byte-granular flash fault injection")
+    for needle in (
+        "snapshot_valid(store, target, &verified)",
+        "verified_generation != generation",
+    ):
+        require(kv_core, needle, "kv.bin commit readback verification")
+    for needle in (
+        "r1_nv_recovery_store_load(",
+        "r1_nv_recovery_store_merge_commit(",
+        "store->dirty[R1_KV_NV_R1] = false",
+    ):
+        require(nv_recovery_core, needle,
+                "transactional local NV recovery")
+    for needle in (
+        "openr1_databases_zephyr_apply_local_nv_recovery(",
+        "r1_nv_recovery_store_merge_commit(",
+        "k_mutex_lock(&kv_mutex, K_FOREVER)",
+    ):
+        require(databases_source, needle,
+                "Zephyr local NV recovery binding")
+    for needle in (
+        "r1_remove_ring_clear_connected_flag(",
+        "r1_remove_ring_clear_peer_slots(",
+        "r1_remove_ring_metadata_commit(",
+        "r1_kv_store_commit(store)",
+    ):
+        require(peer_target_core, needle,
+                "transactional remove-ring metadata composition")
+    for needle in (
+        "openr1_databases_zephyr_remove_ring_metadata(",
+        "r1_remove_ring_metadata_commit(&kv_store)",
+        "k_mutex_lock(&kv_mutex, K_FOREVER)",
+    ):
+        require(databases_source, needle,
+                "Zephyr remove-ring metadata binding")
+    bae8_source = (BACKEND / "src" / "openr1_bae8_zephyr.c").read_text()
+    for needle in (
+        "remove_ring_work_handler(",
+        "queue_remove_ring(",
+        "r1_runtime_set_remove_ring_handler(",
+        "atomic_inc(&remove_ring_failures)",
+        "openr1_bae8_zephyr_remove_ring_failures(",
+    ):
+        require(bae8_source, needle,
+                "Zephyr bounded remove-ring worker")
+    for needle in (
+        "R1_SLEEP_DB_RECORD_RESERVED",
+        "R1_SLEEP_DB_RECORD_COMMITTED",
+        "discard_torn_sector(",
+        "db_range_erased(",
+    ):
+        require(sleep_core, needle, "failure-atomic sleep journal")
+    for needle in (
+        "openr1-offline-deployment-preflight",
+        "mass_erase_forbidden",
+        "openr1-internal-flash-recovery.hex",
+        "openr1-expected-internal-flash.bin",
+        "openr1-uicr-backup.bin",
+        "openr1-uicr-recovery.hex",
+        "post_install_readback_required",
+        "uicr_erase_before_restore_required",
+        "return [[0, DATA_START], [DATA_LIMIT, FLASH_LIMIT]]",
+        "classify_first_install_settings(",
+        "FDS_PAGE_MAGIC = 0xDEADC0DE",
+        "settings preflight found an interrupted retail FDS layout",
+        "reset_held_until_readback_verified",
+        '"retail_credentials_imported": False',
+        "unaddressed_install_bytes_must_be_erased",
+        "validate_backup_provenance(",
+        "live ACE page provenance differs at",
+        "verify_bundle(",
+    ):
+        require(deployment_tool, needle, "offline deployment preflight")
+    for needle in (
+        "source-proven-mbr-config",
+        "pinned-official-reconstruction",
+        "live-ace-page-readback",
+        "live_application != application",
+        "live_bootloader != bootloader",
+        "MBR_CONFIG_START = 0xFF8",
+    ):
+        require(recovery_assembler, needle,
+                "mixed-provenance ACE recovery assembly")
+    for needle in (
+        "build_expected_internal_flash(",
+        "recovery HEX is not the canonical backup encoding",
+        "UICR recovery HEX is not the canonical backup encoding",
+        "deployment plan differs from verified bundle and backup",
+        "post-install readback differs at",
+        "post-install UICR readback differs at",
+        "verify_recovery_readback(",
+        "post-recovery readback differs at",
+        "post-recovery UICR readback differs at",
+    ):
+        require(deployment_verifier, needle,
+                "offline deployment readback verification")
     for needle in (
         "r1_fal_bind(flash)",
         "fal_init() != 7",
@@ -490,11 +650,19 @@ def main() -> None:
         "r1_health_u8_cache_reset(",
         "r1_health_u16_cache_reset(",
         "openr1_databases_zephyr_multicast_hour",
+        "r1_nv_product_serial_decode(",
+        "r1_nv_factory_mode_decode(",
+        "openr1_databases_zephyr_product_serial(",
+        "openr1_databases_zephyr_factory_mode(",
+        "memcpy(runtime->device.serial_number, product_serial",
         "recovery_records_decoded",
         "recovery_records_restored",
         "recovery_records_rejected",
         "R1_HEALTH_DB_STARTUP_COMPLETED",
         "retained_health_crash_record __noinit",
+        "r1_health_crash_record_clear_provider_blob(",
+        "r1_health_crash_record_initialize(",
+        "provider_blob_copied) != R1_OK || provider_blob_copied",
         "&runtime->device.health.activity",
         "&runtime->device.health.heart_rate",
         "&runtime->device.health.blood_oxygen",
@@ -589,6 +757,11 @@ def main() -> None:
         "openr1_twim1_zephyr_write_read(",
         "openr1_twim1_zephyr_write(",
         "OPENR1_MOTION_I2C_ADDRESS UINT8_C(0x18)",
+        '"qma6100/qma6100.h"',
+        "QMA6100_ADDRESS_1, QMA6100_ADDRESS_2",
+        "qma6100_initialize(&qma_device, &qma_bindings)",
+        "R1_MOTION_VARIANT_QMA6100,",
+        "qma6100_interrupt_wrapper(&qma_device)",
         "R1_MOTION_POLICY_AUTO_LICENSED",
         "GPIO_INT_EDGE_TO_ACTIVE",
         "r1_motion_adapter_read_fifo(",
@@ -1117,8 +1290,58 @@ def main() -> None:
     for uuid in ("0xbae80001", "0xbae80010", "0xbae80011", "0xbae80012", "0xbae80013"):
         require(bae8, uuid, "BAE8 service")
     require(bae8, "r1_runtime_receive_eus(", "BAE8 channel-2 route")
-    require(bae8, "Channel 1 remains fail-closed", "BAE8 channel-1 policy")
+    for marker in (
+        "r1_legacy_command_route_frame(",
+        "route != R1_LEGACY_COMMAND_ROUTE_0X89",
+        "r1_runtime_receive_glasses_status(",
+        "openr1_power_zephyr_set_reg1(false)",
+        "openr1_power_zephyr_set_reg1(true)",
+        "OPENR1_TOUCH_ZEPHYR_SOURCE_WEAR",
+        "BT_LE_CONN_PARAM_INIT(16u, 16u, 2u, 600u)",
+        "BT_LE_CONN_PARAM_INIT(72u, 84u, 4u, 600u)",
+        "bt_conn_le_param_update(",
+        "K_TICKS(plan.ble_slow_delay_ticks)",
+        "glasses_connection_slow_work_handler",
+        "transmit_event(&response, false)",
+    ):
+        require(bae8, marker,
+                "BAE8 bounded authorized channel-1 glasses-status policy")
     require(bae8, "OPENR1_NOTIFICATION_SLOTS 4u", "completion-tracked notification pool")
+    require(bae8, "openr1_databases_zephyr_product_serial(",
+            "persisted product serial advertising binding")
+    require(bae8, "R1_NV_PRODUCT_SERIAL_BYTES : 0u",
+            "optional fixed-width product serial manufacturer data")
+    for marker in (
+        "SETTINGS_STATIC_HANDLER_DEFINE(",
+        "OPENR1_OWNER_SETTINGS_KEY",
+        "r1_owner_authorization_state_load(",
+        "r1_owner_authorization_state_matches(",
+        "r1_owner_authorization_state_reset(",
+        "settings_save_one(",
+        "bt_foreach_bond(",
+        "bt_conn_auth_info_cb_register(",
+        "openr1_bae8_zephyr_revoke_owner(",
+        "r1_runtime_connection_is_authorized_phone(",
+        "openr1_bae8_zephyr_diagnostic_export_begin(",
+        "openr1_bae8_zephyr_diagnostic_export_read(",
+        "openr1_bae8_zephyr_diagnostic_export_finish(",
+        "diagnostic_export_abort(",
+    ):
+        require(bae8, marker, "independent persisted owner authorization")
+    if "secure, secure, secure" in bae8:
+        raise AssertionError(
+            "BAE8 transport security must not grant product authorization")
+    for marker in (
+        "OPENR1_FAST_INTERVAL UINT16_C(0x00a0)",
+        "OPENR1_SLOW_INTERVAL UINT16_C(0x0640)",
+        "OPENR1_FAST_DURATION_SECONDS 60u",
+        "static const char suffix[] = \"_FAC\"",
+        "openr1_databases_zephyr_factory_mode()",
+        "k_work_init_delayable(",
+        "both_product_roles_occupied(",
+        "r1_runtime_connection_role(runtime, connection)",
+    ):
+        require(bae8, marker, "Zephyr recovered advertising lifecycle")
 
     source_lock = package_source_lock()
     manifest = json.loads(MANIFEST.read_text())
@@ -1151,7 +1374,8 @@ def main() -> None:
         "not a production trust anchor",
         "sensor",
         "hardware-validated",
-        "migration procedure",
+        "OPENR1-RECOVERY",
+        "former retail bootloader/settings window",
     ):
         require(readme, phrase, "Zephyr limitations")
     print("openR1 Zephyr source boundary verified: 14 recovered families plus live target composition, source BLE/boot/health-storage/optical stack, no opaque input")

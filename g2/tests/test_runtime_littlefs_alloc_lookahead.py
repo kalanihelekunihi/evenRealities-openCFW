@@ -180,15 +180,13 @@ PRODUCTION = {
         "config": MAIN_CONFIG,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 121_706,
+        "overlay_size": 143_227,
         "overlay_sha256": (
-            "9e5004af49fb14a22e7e7ed7357e4c10"
-            "f87dc8da3a7fb4d7b97fcffcde804c43"
+            "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
         ),
-        "component_size": 3_645_102,
+        "component_size": 3_666_623,
         "component_sha256": (
-            "8722e5565bf54dade66fb751155c11eb"
-            "d128d7a12853e3e4b8671c3c97807827"
+            "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
         ),
         "leaf_offset": 113_756,
         "leaf_address": 0x007A_FF80,
@@ -197,11 +195,11 @@ PRODUCTION = {
         "patch_offset_key": "payload_offset",
         "patch_offset": MAIN_START - MAIN_BASE + 32,
         "accounting": {
-            "generated_patch_site_bytes": 84_654,
+            "generated_patch_site_bytes": 99_192,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_438_528,
-            "replaced_stock_function_bytes": 84_836,
-            "source_owned_bytes": 121_900,
+            "opaque_base_bytes": 3_423_990,
+            "replaced_stock_function_bytes": 99_370,
+            "source_owned_bytes": 143_409,
             "source_owned_in_place_bytes": 182,
         },
     },
@@ -209,15 +207,13 @@ PRODUCTION = {
         "config": BOOT_CONFIG,
         "overlay_name": "bootloader_core_overlay.bin",
         "component_name": "ota_s200_bootloader.bin",
-        "overlay_size": 622,
+        "overlay_size": 662,
         "overlay_sha256": (
-            "fc02cf66854adace4d213e08764e435e2"
-            "7c8c2bc7cc4f7caac6ff286f3adf813"
+            "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b"
         ),
-        "component_size": 149_222,
+        "component_size": 149_262,
         "component_sha256": (
-            "b4a5b0f2028842a2d6fde9424fff05fa"
-            "c2db3bf0e26e7f01d16a990e67ed9052"
+            "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267"
         ),
         "leaf_offset": 302,
         "leaf_address": 0x0043_45A6,
@@ -228,11 +224,11 @@ PRODUCTION = {
         "accounting": {
             "generated_alignment_bytes": 3,
             "generated_isolated_alignment_bytes": 0,
-            "generated_patch_site_bytes": 814,
+            "generated_patch_site_bytes": 860,
             "generated_relocated_alignment_bytes": 2,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 147_785,
-            "source_owned_bytes": 620,
+            "opaque_base_bytes": 147_739,
+            "source_owned_bytes": 660,
         },
     },
 }

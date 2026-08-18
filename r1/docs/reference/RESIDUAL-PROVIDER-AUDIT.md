@@ -81,8 +81,12 @@ symbol is never treated as proof that code is eligible for rewriting
 
 ## Coverage-row residual summary
 
-[`COVERAGE.csv`](COVERAGE.csv) holds 92 rows: **46 implemented, 40 partial, 3 withheld,
-2 separate, 1 excluded**.
+[`COVERAGE.csv`](COVERAGE.csv) holds 97 rows: **52 implemented, 40 partial, 2 withheld,
+2 separate, 1 excluded**. The structured-log record/cache/persistence row is now compiled and
+target-bound. The exact composite virtual-file source is also compiled and owner-gated; its
+undocumented BLE sender is tracked separately as withheld. The recovered remove-ring metadata
+route is now a strict owner-phone-authorized two-generation transaction with exhaustive
+byte-interruption and retry coverage.
 
 ### Partial rows grouped by remaining gate
 
@@ -93,24 +97,27 @@ under its primary gate; mixed gates are noted inline.
 is capture or confirmation on a physical ring.
 
 - platform: S140 resource configuration (owned-hardware RAM negotiation); RTOS scheduler and
-  task wake topology (physical timing, complete stock task census); legacy GAP advertising
+  task wake topology (the stock nine-group startup census is pinned; physical wake/saturation timing remains); legacy GAP advertising
   (durable factory/serial restore, physical validation); ATT MTU and data-length negotiation
   (negotiated values to be captured).
 - protocol: BAE8 raw GATT event mapping (physical validation); 100/200/1000 scheduling and
   retry timing (physical saturation and timing-unit confirmation).
 - security: queued-write rejection (owned-hardware ATT validation); crash unwind and retained
   diagnostics (authenticated export, hardware fault validation).
-- storage: `kv.bin` four-snapshot class store, health database, sleep database (owned-ring
-  migration/power-loss/lifecycle validation in each case).
+- storage: `kv.bin` and `sleep.db` now exhaust every byte-level program/erase interruption through
+  rollover and legacy migration, including a different post-reboot append; FlashDB health storage
+  still needs its provider-specific physical power-loss campaign, and every store needs owned-ring
+  lifecycle validation.
 - sensors: PMIC current and NFC rectifier conversion (physical transfer functions
   capture-gated).
 - hardware: ST25DVxxKC source mailbox transport, P1.10 dock lifecycle, dock-session mutex, and
   TWIM1 handoff are linked on the alternate target; explicit activation policy and owned-hardware
   coexistence validation remain.
 
-**Source-admitted algorithm / live-provider adoption (14 rows).** The R1-owned portion and all
-inventoried Goodix/GoMore executable bodies are implemented; the remaining work is live typed
-composition with sensor, persistence, and hardware providers.
+**Source-admitted algorithm / physical-provider validation (14 rows).** The R1-owned portion and
+all inventoried Goodix/GoMore executable bodies are implemented and live target composition is
+complete. The remaining work is electrical, physical-semantic, reference, and owned-ring
+validation of the source-bound sensor providers.
 
 - sensors: GH3X2X raw acquisition now has source Goodix demo/driver, recovered software-`i2c_4`,
   GPIO/interrupt, motion-feed, and YHM-client lifecycle bindings; the global algorithm frame/result
@@ -128,69 +135,86 @@ composition with sensor, persistence, and hardware providers.
   SpO2 `0x0006E838`, routes the exact recovered version builders, and reproduces the HBA and
   noncontiguous SpO2 private-to-public result transformations;
   the public 36-byte HR and 24-byte HRV configuration sources are byte-matched to retail ROM and
-  retained beside the existing exact SpO2 configuration;
-  persistent HBA/HRV/SpO2 plan/state/workspace initialization, HRV session composition, and hardware
-  validation remain fail-closed.
+  retained beside the existing exact SpO2 configuration. Persistent HBA/HRV/SpO2
+  plan/state/workspace initialization, HRV session composition, observer routing, and scalar
+  storage are source-bound; electrical calibration, biometric equivalence, and owned-ring
+  validation remain.
 - health: heart-rate, SpO2, and HRV sample storage (Goodix result and typed GoMore integration);
   heart-rate and SpO2 pipelines (Goodix democode-ABI composition over the bound raw acquisition);
   temperature and stress storage edge (GXT310 transport/acquisition, exact two-byte temperature
   stream, dormant one-shot listener, event 9, and daily-cache producer are now source-bound, while
-  the sleep/timing activation policy and GoMore stress output composition remain open); health
-  crash snapshot (typed Goodix state lookup); activity/steps and sleep classification (transparent
-  algorithms and models are retained, with live sensor/state/result bindings still required).
+  the sleep/timing activation policy and stock-unreachable GoMore stress producer remain explicit
+  gates); health crash snapshot (the live GoMore exporter reports `0x2E0`, so the stock exact
+  `0x380` provider-blob gate is correctly not taken, while Zephyr creates the next retained
+  one-shot activity/HR/SpO2/HRV snapshot after recovery); activity/steps and sleep classification
+  (transparent algorithms, live sensor topics, all 16 stages, result consumers, and prior-state
+  lifecycle are target-composed; physical semantics and owned-ring validation remain).
 - sensors: nRF52840 SAADC acquisition and battery voltage/percentage behavior (YHM client-bit-0
   binding, persisted battery type/compensation, live register-6 charge state, and boot/status-access
   production are bound; PMIC event-driven refresh and hardware calibration remain); IQS7211E transport,
   lifecycle, and YHM client-bit-2 binding are linked, with wear-lease identity and hardware
   validation still required for live sampling.
-- sensors: BMA456W and LIS2DW12 feed the reconstructed `"acc"` stream
+- sensors: BMA456W, LIS2DW12, and the reconstructed QMA6100 third fallback feed the `"acc"` stream
   through the exact 188-byte batch ABI and persisted axis calibration; the exact dormant
-  `"gomore"` listener and 25-sample axis transform are source-bound, while the companion raw
-  optical producer, live engine composition, and physical-axis validation remain.
+  `"gomore"` listener and 25-sample axis transform are source-bound. The companion raw-optical
+  producer, exact topic barrier, all 16 GoMore stages, prior state, and proven output consumers are
+  live; physical-axis and optical-channel validation remain.
 - hardware: shared `i2c_5` and YHM2710 power ownership (battery, touch, and optical clients are
   adopted; hardware electrical validation remains).
 
-**Bravechip-middleware runtime adoption (3 rows).** The remaining consumer or engine
-belonged to a Bravechip-attributed family above; all six families are now reconstructed and
-host-tested under the owner-authorized 2026-08 reduction, so the remaining gates are
-on-target runtime adoption plus the secondarily named licensed providers.
+**Bravechip-middleware physical adoption (3 rows).** All six families are reconstructed,
+host-tested, and adopted where the recovered target has a live consumer. Remaining gates concern
+physical channel identity or stock-dormant paths rather than an absent runtime.
 
 - sensors: GXT310/PMIC temperature timing and event consumers (the exact GXT310 software-bus,
   two-address probe, raw conversion, bounded acquisition, read-only persisted `nv_r1`
   calibration, fixed `"temp"` stream vtable, and dormant one-shot event/cache path are adopted;
   sleep/timing scheduling, physical channel semantics, public activation, and owned-hardware
   validation remain).
-- health: HRV pipeline (sensor-stream topic transport reconstructed, adoption pending;
-  secondarily Goodix optical RR production).
+- health: HRV pipeline (sensor-stream topic transport, Goodix HRV root/result production, scalar
+  persistence, and live GoMore topic routing are adopted; electrical/reference validation remains).
 - platform: two-wire bus record bindings (software `i2c_2` and `i2c_4` are adopted by the Zephyr
   GXT310 and optical paths; reconstructed global-registry and dormant GPIO-driven software-I2C
   roles remain pending).
 
-**Authorization-policy (7 rows).** The seam stays closed by product/security policy until a
-deliberate, separately authorized decision, independent of source availability.
+**Authorization-policy.** The source-built target now has an independent persisted owner policy:
+only a completed bond may enroll the first CRC-protected identity, while encryption, restored bond
+state, and `pairAuth` cannot create or replace it. The remaining seams below stay closed where
+their destructive, identity-bearing, licensed, or diagnostic policy is still unresolved.
 
-- system: `advStart` two-target connection control (command refused pending end-to-end
-  authorization and owned-hardware validation). The alternate Zephyr target now replaces
-  the system-settings REG1 SVC with the pinned source nRF POWER HAL; its separate wear-driven
-  automatic policy still awaits typed wear/touch/shared-power integration.
-- security: Peer Manager bond and GATT-cache provider (product authorization; secondarily
-  hardware persistence/replay validation); NV recovery merge (identity-bearing BLE sender and
-  persistent mutation remain refused).
-- protocol: channel-2 EUS BLE runtime (product authorization; secondarily physical timing
-  validation).
+- system: `advStart` two-target connection control is now admitted only for an exact SET from
+  the independently owner-authorized phone role and is asynchronously composed through real
+  SDK and Zephyr persistence, disconnect, and advertising providers; target byte-order,
+  retention, timing, and radio behavior remain owned-hardware validation items. The alternate
+  Zephyr target now replaces the system-settings REG1 SVC with the pinned source nRF POWER HAL and binds the separately
+  authorized glasses-status channel to immediate-disable/delayed-enable wear automation plus
+  the touch lease, immediate `{16,16,2,600}` secondary-mode BLE profile, and exact
+  `0x2800`-tick delayed `{72,84,4,600}` slow profile; physical timing, regulator,
+  radio, and coexistence validation remains.
+- security: Peer Manager bond and GATT-cache provider (source authorization is complete;
+  owned-hardware persistence/replay, ATT, and revocation validation remain); NV recovery merge
+  (persistent mutation is local-only, atomic, and readback-verified; the identity-bearing BLE
+  sender remains refused pending physical service authorization and reboot validation).
+- protocol: channel-2 EUS BLE runtime (source authorization is complete; physical timing and
+  saturation validation remain).
 - storage: pKey and EP stores (sensitive pKey/algorithm state pending licensing and key
-  policy); log store (composite private reader and live sender excluded; no raw destructive
-  controls are exposed).
+  policy); log store (the owner-authorized composite source is internal-only and its live BLE
+  sender remains excluded; no raw destructive controls are exposed).
 
 ### Withheld, separate, and excluded rows
 
-The 5 **withheld** rows and their reasons: algorithm key provisioning (sensitive cloud/key
-lifecycle lacks safe durable verification); NV recovery (destructive identity/calibration
-restore lacks validated rollback); OTA and power controls (separated from the normal protocol
-and deployment lifecycle); GoMore floating-point neural runtime;
-GoMore sleep-stage statistics. The software-TWI, RTC-device, and shared quantized-neural
-runtime boundary rows left the withheld set under the owner-authorized 2026-08 reduction
-(reconstructed with host tests; on-target runtime adoption pending).
+The 2 **withheld** rows and their reasons: algorithm key provisioning (sensitive cloud/key
+lifecycle lacks safe durable verification), the private structured-log BLE sender (the exact
+source is implemented, but records can contain identity, health, bonding, and diagnostic material
+and physical ATT plus redaction policy remain unvalidated). OTA recovery and power controls are
+tracked as partial: the owner-authorized zero-length recovery transition and source loader are
+implemented, while advertising and power controls remain policy/physical gates. NV recovery is no
+longer withheld: its fill-only three-record
+mutation is a local-only readback-verified atomic KV transaction with exhaustive byte-cut rollback
+and retry tests. Its exact command-2 merge route is independently owner-authorized and bounded while the identity-bearing local-report sender remains unreachable. GoMore floating-point neural runtime and sleep-stage statistics are no
+longer withheld: both are reconstructed and target-composed. The software-TWI, RTC-device, and
+shared quantized-neural runtime boundary rows likewise left the withheld set under the
+owner-authorized 2026-08 reduction.
 
 The 2 **separate** rows: startup vectors and runtime (the linked Nordic/SDK application owns
 placement; a standalone non-SDK bootable image is not a product target) and secure boot
@@ -200,10 +224,17 @@ the deployment lifecycle stays separate per [`../SECURITY.md`](../SECURITY.md)).
 The 1 **excluded** row: the health-daily synthetic test fixture, a dormant 1,344-byte
 product-owned test body with no recovered caller, intentionally excluded from production.
 
+The initial owned-ring BLE evidence is recorded in
+[`../closures/AUGUST-18-R1-B56EE2-HARDWARE-VALIDATION.md`](../closures/AUGUST-18-R1-B56EE2-HARDWARE-VALIDATION.md).
+The remaining physical, debug-readback, instrumentation, and policy evidence
+required to advance the other rows is recorded explicitly in
+[`../closures/AUGUST-18-PHYSICAL-VALIDATION-BLOCKER.md`](../closures/AUGUST-18-PHYSICAL-VALIDATION-BLOCKER.md).
+That record is a stop condition, not a completeness claim.
+
 ## Production-readiness statement
 
-Current buildable and verified deliverables (the Zephyr manifest records this working tree as
-dirty and hashes all 160 included source files):
+Current buildable and verified deliverables (the Zephyr manifest records this working tree and
+hashes all 174 included firmware source files):
 
 - the host protocol/device test suite (`make -C r1 test`);
 - the AddressSanitizer/UndefinedBehaviorSanitizer build (`make -C r1 sanitize`);
@@ -212,23 +243,24 @@ dirty and hashes all 160 included source files):
 - the host executable protocol/device simulator (`make -C r1 sim`);
 - the linked nRF52840 application built from Nordic nRF5 SDK 17.1.0 sources against the
   S140 7.2.0 ABI, verified by `tools/verify_sdk_image.py` against pinned artifacts:
-  BIN 356,568 bytes, BIN SHA-256
-  `2d186b914b334f3db27efd609144dfcc07a58c0d2503aec0f97a8f9f4bdcb195`, HEX SHA-256
-  `95bb9e87896765464a8e77c830f93b117074d90d9147e1168da4094059317a60`;
+  BIN 436,648 bytes, BIN SHA-256
+  `47e502685da57c1df55aeee6d9d156210f22b427a9c36ac94d72401a4f859729`, HEX SHA-256
+  `b3bf1fd534bf588c2cf3186d1f48ac1aa07c1dfcf71e681095e6ae2770cc8b4a`;
 - an application-only owner DFU package whose three-member boundary excludes stock application,
   SoftDevice, bootloader, and vendor algorithm blobs; it still declares and requires the
   preinstalled S140 ABI `0x0100`, as documented in
   [`APPLICATION-BUNDLE-BOUNDARY.md`](../closures/APPLICATION-BUNDLE-BOUNDARY.md); the current
   owner-signed ZIP SHA-256 is
-  `7cbbc390a039d87a573f0f09b9bc5587a9e2e6789d875aa17d564426bc1bce4c`;
+  `f2394dd396396edbc5993755559836a1cba3b5e90e5d5ecdbe25ca3ce2797fa6`;
 - an alternate source-built Zephyr/MCUboot full-flash bundle whose executable members require no
   S140 or retail bootloader, whose signed application retains all 14 reconstructed modules, and
   whose source revisions, flash ranges, canonical member union, and ECDSA-P256 signature are
   verified as documented in
   [`SOURCE-BUILT-ZEPHYR-BUNDLE.md`](../closures/SOURCE-BUILT-ZEPHYR-BUNDLE.md); the current
-  bundle contains a 514,454-byte signed application, full-flash HEX SHA-256
-  `136549fad7e36ade18dc659add331405bd9e0321a9775c06f91ac9e7efabcb7b`, and ZIP SHA-256
-  `826f998c85121986d34cd16f67edb7b592a66ae41d979ad092bac4dbac1e3515`;
+  bundle contains a 642,871-byte signed application with SHA-256
+  `2e4727fde3817c1494a16bf0c9e93dc8417c513c9cf16fb0d40f830b4c6292e5`, full-flash HEX SHA-256
+  `56072380e98c12f2b13a1b44ec4005e49f5ab05165e0bc0291705d9ae6a92aff`, and ZIP SHA-256
+  `9d518d0a0a1f748796d591fd561638204e9ac75a59fc7fd98a2b226bd7ccae49`;
 - the full evidence gate (`python3 tools/verify_openr1.py`), which reconciles the ownership
   ledger, the explicit Ghidra-script entry census, the coverage ledger, the per-subsystem
   correlation summaries, and the Goodix democode mapping against the recovered images.
@@ -242,7 +274,7 @@ Explicitly **not** claimed:
 - complete sensor/health-record/power/product integration on the alternate source-built BLE/boot target;
   its BAE8/core runtime, persistent SMP settings, KV/health/sleep storage, exact SAADC routes,
   phone-synchronized clock with reconstructed exact calendar query/day-boundary conversion,
-  reset-reason trace, scheduler watchdog, pinned Bosch/ST motion
+  reset-reason trace, scheduler watchdog, pinned Bosch/ST plus reconstructed-QMA motion
   acquisition, fail-closed IQS7211E transport/lifecycle, reconstructed YHM shared power, and
   ST25DVxxKC mailbox/P1.10/TWIM1 handoff are linked. Motion production ingestion is live; touch
   identity/wear provisioning, explicit NFC activation policy, destructive health slot-0
@@ -254,16 +286,20 @@ Explicitly **not** claimed:
   daily routes now bind their exact three-day FlashDB merges and ACK-driven named-cursor persistence;
   both target clocks drive the exact automatic five-leg gate through a bounded drain-aware
   service that preserves the recovered 50-record queue;
-- hardware-validated behavior of any kind. No owned-ring validation has been performed;
-  physical timing units, negotiated BLE values, sensor calibration, and analog transfer
-  functions remain capture gates, and host-tested raw-tick constants are not relabeled as
-  physical time.
+- initial owned-ring BLE validation on later retail `2.2.8.0002`: exact BAE8
+  properties/CCCDs, pair-role response, retained macOS relationship, requested
+  and unsolicited status models, three sequential status timings, and a
+  twenty-request zero-drop burst are captured. Raw HCI/HVN values, exact
+  `2.2.6.0009` and source-built behavior, physical scheduler units, sensor
+  calibration, and analog transfer functions remain gates; host-tested raw-tick
+  constants are not relabeled as physical time.
 
 The project's exact current claim is: **"All inventoried application and bootloader executable
 entries are source-routed, all Goodix/GoMore algorithm bodies and model parameters are transparent
 source, and an alternate signed full-flash bundle builds its BLE/controller and boot path from
 pinned source without S140 or the retail bootloader; remaining gaps are hardware/provider
-integration and owned-ring validation."**
+integration, deployment, instrumented validation, and exact-version/source-built
+owned-ring equivalence."**
 
 ## Hardware-validation prerequisites
 
@@ -289,19 +325,16 @@ evidence; each is a documented divergence, not an oversight.
 - **Stock per-id consumer dispatch `0x0008D888`** — the id-to-slot mapping is not recovered,
   so the consumer delivers same-context to every populated slot in ascending slot order
   instead of republishing cross-context.
-- **Production event publishers** — none exist yet; a future publisher with class-specific
-  listeners must first recover the id-to-slot mapping above.
+- **Unrecovered cross-context event publishers** — target-owned sensor and platform production
+  uses typed stream topics and direct handlers rather than inventing the missing id-to-slot map;
+  any future generic cross-context publisher must first recover that mapping.
 - **Command/peer byte-order end-to-end reconciliation** — left unbound rather than inventing
   behavior; it is an end-to-end validation concern with the first-party sender
   ([`../correlation/CONNECTION-CONTROL-CORRELATION.md`](../correlation/CONNECTION-CONTROL-CORRELATION.md)).
-- **Wear-driven REG1 automation** — direct startup and authorized settings actions are
-  source-bound on the alternate Zephyr target, but automatic worn/removal transitions remain
-  disabled until the recovered wear and touch-lease lifecycle is integrated and hardware-validated.
-  The shared-power provider is bound, but the implementation does not infer CPU frequency or
-  physical regulator state.
-- **`advStart` dispatch refusal** — the normal command remains refused until end-to-end
-  authorization and owned-hardware validation, per the withheld-commands policy in
-  [`../SECURITY.md`](../SECURITY.md).
+- **`advStart` physical target semantics** — the source route is authorization-gated and live;
+  first-party address byte order, target retention, disconnect timing, and advertising behavior
+  still require recoverable owned-hardware validation
+  ([`../correlation/CONNECTION-CONTROL-CORRELATION.md`](../correlation/CONNECTION-CONTROL-CORRELATION.md)).
 
 ## Reproducing this audit
 

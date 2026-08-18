@@ -10,6 +10,7 @@
 #include "openr1/r1_health_db.h"
 #include "openr1/r1_event_bus.h"
 #include "openr1/r1_kv_store.h"
+#include "openr1/r1_nv_recovery.h"
 #include "openr1/r1_sleep_db.h"
 
 /*
@@ -69,5 +70,11 @@ bool openr1_databases_reg1_enabled(void);
  * rejects flash mutations on that thread.  The regulator SVC
  * (sd_power_dcdc_mode_set) stays deliberately scoped out. */
 ret_code_t openr1_databases_persist_reg1(bool enabled);
+/* Copies a CRC-validated fill-only recovery request into the bounded storage
+ * queue. The worker commits all affected KV classes atomically and resets
+ * only after a changed generation is durable. */
+ret_code_t openr1_databases_queue_nv_recovery(
+    const uint8_t body[R1_NV_RECOVERY_BODY_BYTES], uint16_t expected_crc);
+ret_code_t openr1_databases_queue_remove_ring(void);
 
 #endif

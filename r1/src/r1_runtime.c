@@ -462,6 +462,10 @@ r1_error r1_glasses_status_plan_command(
     if (plan->secondary_mode_changed) {
         plan->set_touch_fast_mode = secondary;
         plan->set_ble_slow_mode = !secondary;
+        if (!secondary) {
+            plan->ble_slow_delay_ticks =
+                R1_BLE_TASK_SLOW_POLICY_DELAY_TICKS;
+        }
     }
     return R1_OK;
 }
@@ -496,12 +500,27 @@ void r1_runtime_initialize(r1_runtime *runtime,
     runtime->health_settings_context = NULL;
     runtime->request_observer = NULL;
     runtime->request_observer_context = NULL;
+    runtime->advertising_targets_handler = NULL;
+    runtime->advertising_targets_context = NULL;
+    runtime->nv_recovery_handler = NULL;
+    runtime->nv_recovery_context = NULL;
+    runtime->remove_ring_handler = NULL;
+    runtime->remove_ring_context = NULL;
+    runtime->glasses_worn = false;
+    runtime->glasses_secondary_mode = false;
     runtime->automatic_health_pending_mask = 0u;
     runtime->automatic_health_next_leg = 0u;
     runtime->automatic_health_batch_timestamp = 0u;
     runtime->automatic_health_legs_scheduled = 0u;
     runtime->automatic_health_legs_enqueued = 0u;
     runtime->automatic_health_leg_failures = 0u;
+    runtime->advertising_target_actions_queued = 0u;
+    runtime->advertising_target_action_failures = 0u;
+    runtime->nv_recovery_actions_queued = 0u;
+    runtime->nv_recovery_action_failures = 0u;
+    runtime->remove_ring_actions_queued = 0u;
+    runtime->remove_ring_action_failures = 0u;
+    runtime->recovery_requested = false;
     for (size_t index = 0u; index < R1_RUNTIME_LINK_MAX; ++index) {
         runtime->links[index].active = false;
         runtime->links[index].connection = R1_INVALID_CONNECTION;
@@ -633,6 +652,34 @@ void r1_runtime_set_request_observer(
     if (runtime != NULL) {
         runtime->request_observer = observer;
         runtime->request_observer_context = observer_context;
+    }
+}
+
+void r1_runtime_set_advertising_targets_handler(
+    r1_runtime *runtime,
+    r1_runtime_advertising_targets_fn advertising_targets_handler,
+    void *advertising_targets_context) {
+    if (runtime != NULL) {
+        runtime->advertising_targets_handler = advertising_targets_handler;
+        runtime->advertising_targets_context = advertising_targets_context;
+    }
+}
+
+void r1_runtime_set_nv_recovery_handler(
+    r1_runtime *runtime, r1_runtime_nv_recovery_fn nv_recovery_handler,
+    void *nv_recovery_context) {
+    if (runtime != NULL) {
+        runtime->nv_recovery_handler = nv_recovery_handler;
+        runtime->nv_recovery_context = nv_recovery_context;
+    }
+}
+
+void r1_runtime_set_remove_ring_handler(
+    r1_runtime *runtime, r1_runtime_remove_ring_fn remove_ring_handler,
+    void *remove_ring_context) {
+    if (runtime != NULL) {
+        runtime->remove_ring_handler = remove_ring_handler;
+        runtime->remove_ring_context = remove_ring_context;
     }
 }
 
@@ -791,6 +838,65 @@ r1_peer_role r1_runtime_connection_role(const r1_runtime *runtime,
         }
     }
     return R1_ROLE_UNASSIGNED;
+}
+
+bool r1_runtime_connection_is_authorized_phone(
+    r1_runtime *runtime, uint16_t connection) {
+    if (runtime == NULL || !runtime_lock(runtime)) {
+        return false;
+    }
+    const r1_runtime_link *const link = find_link(runtime, connection);
+    const bool authorized = link != NULL && link->session.encrypted &&
+        link->session.bonded && link->session.authorized &&
+        link->session.role == R1_ROLE_PHONE;
+    runtime_unlock(runtime);
+    return authorized;
+}
+
+bool r1_runtime_take_recovery_request(
+    r1_runtime *runtime, uint16_t connection) {
+    if (runtime == NULL || !runtime_lock(runtime)) {
+        return false;
+    }
+    const r1_runtime_link *const link = find_link(runtime, connection);
+    const bool take = runtime->recovery_requested && link != NULL &&
+        link->session.encrypted && link->session.bonded &&
+        link->session.authorized && link->session.role == R1_ROLE_PHONE;
+    if (take) {
+        runtime->recovery_requested = false;
+    }
+    runtime_unlock(runtime);
+    return take;
+}
+
+r1_error r1_runtime_receive_glasses_status(
+    r1_runtime *runtime, uint16_t connection, bool command_valid,
+    uint8_t status_bits, r1_glasses_status_plan *plan) {
+    if (runtime == NULL || plan == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (!runtime_lock(runtime)) {
+        return R1_ERROR_STATE;
+    }
+    r1_runtime_link *link = find_link(runtime, connection);
+    if (link == NULL || !link->session.encrypted || !link->session.bonded ||
+        !link->session.authorized ||
+        link->session.role != R1_ROLE_GLASSES) {
+        runtime_unlock(runtime);
+        return R1_ERROR_UNAUTHORIZED;
+    }
+    const r1_error error = r1_glasses_status_plan_command(
+        command_valid, status_bits, runtime->glasses_worn,
+        runtime->glasses_secondary_mode,
+        runtime->device.system_settings[5] != 0u, plan);
+    if (error == R1_OK && command_valid) {
+        runtime->glasses_worn =
+            (status_bits & UINT8_C(0x80)) != 0u;
+        runtime->glasses_secondary_mode =
+            (status_bits & UINT8_C(0x40)) != 0u;
+    }
+    runtime_unlock(runtime);
+    return error;
 }
 
 void r1_runtime_role_occupancy(const r1_runtime *runtime,
@@ -1043,6 +1149,41 @@ static r1_error receive_eus_unlocked(r1_runtime *runtime, uint16_t connection,
     error = enqueue_dispatch(runtime, connection);
     if (error != R1_OK) {
         return error;
+    }
+    if (runtime->dispatch_scratch.enter_recovery) {
+        runtime->recovery_requested = true;
+    }
+    if (runtime->dispatch_scratch.apply_advertising_targets) {
+        if (runtime->advertising_targets_handler != NULL &&
+            runtime->advertising_targets_handler(
+                runtime->advertising_targets_context,
+                runtime->dispatch_scratch.first_advertising_target,
+                runtime->dispatch_scratch.second_advertising_target) ==
+                    R1_OK) {
+            ++runtime->advertising_target_actions_queued;
+        } else {
+            ++runtime->advertising_target_action_failures;
+        }
+    }
+    if (runtime->dispatch_scratch.apply_nv_recovery) {
+        if (runtime->nv_recovery_handler != NULL &&
+            runtime->nv_recovery_handler(
+                runtime->nv_recovery_context,
+                runtime->dispatch_scratch.nv_recovery_body,
+                runtime->dispatch_scratch.nv_recovery_crc) == R1_OK) {
+            ++runtime->nv_recovery_actions_queued;
+        } else {
+            ++runtime->nv_recovery_action_failures;
+        }
+    }
+    if (runtime->dispatch_scratch.remove_ring_metadata) {
+        if (runtime->remove_ring_handler != NULL &&
+            runtime->remove_ring_handler(runtime->remove_ring_context) ==
+                R1_OK) {
+            ++runtime->remove_ring_actions_queued;
+        } else {
+            ++runtime->remove_ring_action_failures;
+        }
     }
     if (dispatch_error == R1_OK && runtime->health_settings_handler != NULL &&
         request.module == R1_MODULE_SYSTEM &&

@@ -44,7 +44,13 @@ input adapter and output-snapshot copier.
 clean-room `r1_glasses_status_plan_command` preserves the recovered 7-byte response, cancellation,
 `0x96000` slow-event delay, `0x7800` DCDC delay, touch-open, DCDC, BLE-slow, and touch-fast
 decisions. CMSIS/FreeRTOS delayed events, SoftDevice connection changes, power control, touch,
-logging, and response transport remain provider seams.
+logging, and response transport are provider seams in the portable model. The source-built Zephyr
+target now binds the bounded opcode-`0x89` route only after encrypted, bonded, independently
+authorized glasses-role admission; its delayable work executes touch open/release and REG1
+immediate-disable/delayed-enable actions and emits the exact seven-byte channel-1 response.
+Secondary-mode entry requests the recovered `{16,16,2,600}` BLE profile immediately; exit applies
+the recovered `{72,84,4,600}` profile after exactly `0x2800` ticks, with disconnect cancellation
+and glasses-role revalidation. Physical radio timing and electrical behavior remain open.
 
 Reproduce with:
 

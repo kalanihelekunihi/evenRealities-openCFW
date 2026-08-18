@@ -61,6 +61,9 @@ static void test_checksums(void) {
     assert(r1_crc16_modbus(check, 9u) == UINT16_C(0x4b37));
     assert(r1_crc16_ccitt(check, 9u) == UINT16_C(0x29b1));
     assert(r1_crc32_castagnoli(check, 9u) == UINT32_C(0xc052a8c8));
+    uint32_t incremental = r1_crc32_castagnoli_update(0u, check, 4u);
+    incremental = r1_crc32_castagnoli_update(incremental, check + 4u, 5u);
+    assert(incremental == UINT32_C(0xc052a8c8));
     assert(r1_crc32_castagnoli(NULL, 0u) == 0u);
 }
 
@@ -2070,6 +2073,25 @@ static r1_error commit_scalar_history_cursor(
     return R1_OK;
 }
 
+static void assert_dispatch_arena_packed(
+    const r1_dispatch_result *result) {
+    assert(result != NULL);
+    size_t used = 0u;
+    for (size_t index = 0u; index < result->count; ++index) {
+        assert(result->models[index] == result->arena + used);
+        assert(result->lengths[index] <= R1_DISPATCH_MODEL_MAX);
+        assert(result->lengths[index] <= R1_DISPATCH_ARENA_MAX - used);
+        used += result->lengths[index];
+    }
+    assert(result->arena_used == used);
+    assert(result->arena_used <= R1_DISPATCH_ARENA_MAX);
+    for (size_t index = result->count;
+         index < R1_DISPATCH_RESPONSE_MAX; ++index) {
+        assert(result->models[index] == NULL);
+        assert(result->lengths[index] == 0u);
+    }
+}
+
 static void test_dispatch(void) {
     r1_device_state state;
     r1_state_initialize(&state);
@@ -2100,6 +2122,144 @@ static void test_dispatch(void) {
     assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
     assert(state.timezone_minutes_raw == UINT16_C(0xffc4));
     assert(state.unix_seconds == UINT32_C(0x12345678));
+
+    input = request(2u, 0x09u, NULL, 0u);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(result.count == 1u && result.enter_recovery);
+    assert(r1_model_decode(result.models[0], result.lengths[0],
+                           R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+                           &response) == R1_OK);
+    assert(((response.status >> 2u) & 3u) == 0u);
+    session.authorized = false;
+    assert(r1_dispatch(&state, &session, &input, &result)
+           == R1_ERROR_UNAUTHORIZED);
+    assert(!result.enter_recovery);
+    session = (r1_session){true, true, true, R1_ROLE_PHONE};
+
+    static const uint8_t advertising_targets[
+        R1_CONNECTION_CONTROL_ADV_START_PAYLOAD_SIZE] = {
+        0x10u, 0x11u, 0x12u, 0x13u, 0x14u, 0x15u,
+        0x20u, 0x21u, 0x22u, 0x23u, 0x24u, 0x25u,
+    };
+    input = request(2u, 0x0au, advertising_targets,
+                    sizeof advertising_targets);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(result.count == 1u && result.apply_advertising_targets);
+    assert(memcmp(result.first_advertising_target, advertising_targets,
+                  R1_PEER_ADDRESS_SIZE) == 0);
+    assert(memcmp(result.second_advertising_target,
+                  advertising_targets + R1_PEER_ADDRESS_SIZE,
+                  R1_PEER_ADDRESS_SIZE) == 0);
+    assert(r1_model_decode(result.models[0], result.lengths[0],
+                           R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+                           &response) == R1_OK);
+    assert(response.payload_length == 0u &&
+           ((response.status >> 2u) & 3u) == 0u);
+
+    input = request(0u, 0x0au, NULL, 0u);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(result.count == 1u && !result.apply_advertising_targets);
+    assert(r1_model_decode(result.models[0], result.lengths[0],
+                           R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+                           &response) == R1_OK);
+    assert(((response.status >> 2u) & 3u) == 1u);
+
+    input = request(2u, 0x0au, advertising_targets,
+                    sizeof advertising_targets - 1u);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(!result.apply_advertising_targets);
+    uint8_t trailing_targets[
+        R1_CONNECTION_CONTROL_ADV_START_PAYLOAD_SIZE + 1u];
+    memcpy(trailing_targets, advertising_targets, sizeof advertising_targets);
+    trailing_targets[sizeof trailing_targets - 1u] = 0xa5u;
+    input = request(2u, 0x0au, trailing_targets, sizeof trailing_targets);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(!result.apply_advertising_targets);
+
+    session.role = R1_ROLE_GLASSES;
+    input = request(2u, 0x0au, advertising_targets,
+                    sizeof advertising_targets);
+    assert(r1_dispatch(&state, &session, &input, &result) ==
+           R1_ERROR_UNAUTHORIZED);
+    assert(!result.apply_advertising_targets);
+    session = (r1_session){true, true, false, R1_ROLE_PHONE};
+    assert(r1_dispatch(&state, &session, &input, &result) ==
+           R1_ERROR_UNAUTHORIZED);
+    assert(!result.apply_advertising_targets);
+    session = (r1_session){true, true, true, R1_ROLE_PHONE};
+
+    uint8_t nv_recovery_body[R1_NV_RECOVERY_BODY_BYTES];
+    for (size_t index = 0u; index < sizeof nv_recovery_body; ++index) {
+        nv_recovery_body[index] = (uint8_t)(index + 1u);
+    }
+    const uint16_t nv_recovery_crc = r1_crc16_modbus(
+        nv_recovery_body, sizeof nv_recovery_body);
+    assert(nv_recovery_crc != 0u);
+    uint8_t nv_recovery_envelope[
+        R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES + R1_NV_RECOVERY_BODY_BYTES] = {
+        2u,
+        (uint8_t)R1_NV_RECOVERY_BODY_BYTES,
+        (uint8_t)(R1_NV_RECOVERY_BODY_BYTES >> 8u),
+        (uint8_t)nv_recovery_crc,
+        (uint8_t)(nv_recovery_crc >> 8u),
+    };
+    memcpy(nv_recovery_envelope + R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES,
+           nv_recovery_body, sizeof nv_recovery_body);
+    input = request(2u, 0x11u, nv_recovery_envelope,
+                    sizeof nv_recovery_envelope);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(result.count == 0u && result.apply_nv_recovery);
+    assert(result.nv_recovery_crc == nv_recovery_crc);
+    assert(memcmp(result.nv_recovery_body, nv_recovery_body,
+                  sizeof nv_recovery_body) == 0);
+
+    input = request(0u, 1u, NULL, 0u);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(!result.apply_nv_recovery);
+    nv_recovery_envelope[sizeof nv_recovery_envelope - 1u] ^= 1u;
+    input = request(2u, 0x11u, nv_recovery_envelope,
+                    sizeof nv_recovery_envelope);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(result.count == 1u && !result.apply_nv_recovery);
+    nv_recovery_envelope[sizeof nv_recovery_envelope - 1u] ^= 1u;
+    input = request(0u, 0x11u, nv_recovery_envelope,
+                    sizeof nv_recovery_envelope);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(result.count == 1u && !result.apply_nv_recovery);
+    input.status = 2u;
+    nv_recovery_envelope[0] = 1u;
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(!result.apply_nv_recovery);
+    nv_recovery_envelope[0] = 2u;
+    session.role = R1_ROLE_GLASSES;
+    assert(r1_dispatch(&state, &session, &input, &result) ==
+           R1_ERROR_UNAUTHORIZED);
+    assert(!result.apply_nv_recovery);
+    session = (r1_session){true, true, true, R1_ROLE_PHONE};
+
+    static const uint8_t remove_ring_payload[] = {0u};
+    input = request(2u, 0x82u, remove_ring_payload,
+                    sizeof remove_ring_payload);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(result.count == 1u && result.remove_ring_metadata);
+    assert(r1_model_decode(result.models[0], result.lengths[0],
+                           R1_CHECKSUM_FIRMWARE_FULL_MODBUS,
+                           &response) == R1_OK);
+    assert(response.payload_length == 0u &&
+           ((response.status >> 2u) & 3u) == 0u);
+    input = request(2u, 0x82u, NULL, 0u);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(result.count == 1u && !result.remove_ring_metadata);
+    input = request(0u, 0x82u, remove_ring_payload,
+                    sizeof remove_ring_payload);
+    assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
+    assert(!result.remove_ring_metadata);
+    session.role = R1_ROLE_GLASSES;
+    input.status = 2u;
+    assert(r1_dispatch(&state, &session, &input, &result) ==
+           R1_ERROR_UNAUTHORIZED);
+    assert(!result.remove_ring_metadata);
+    session = (r1_session){true, true, true, R1_ROLE_PHONE};
 
     session.authorized = false;
     input = request(0u, 0x10u, NULL, 0u);
@@ -2273,6 +2433,7 @@ static void test_dispatch(void) {
     assert(r1_dispatch(&state, &session, &input, &result) == R1_OK);
     assert(activity_stress.page_full && activity_stress.attempted == 10u);
     assert(result.count == 10u);
+    assert_dispatch_arena_packed(&result);
     size_t activity_fragments = 0u;
     for (size_t index = 0u; index < result.count; ++index) {
         activity_fragments +=
@@ -5985,6 +6146,7 @@ static void test_maximum_health_payloads(void) {
     r1_dispatch_result result;
     assert(r1_dispatch(&state, &peer, &activity_query, &result) == R1_OK);
     assert(result.count == 2u);
+    assert_dispatch_arena_packed(&result);
     assert(result.lengths[1] == R1_MODEL_HEADER_LENGTH + R1_ACTIVITY_DAILY_MAX_BYTES);
     r1_fragment_set fragments;
     assert(r1_fragment_message(result.models[1], result.lengths[1], &fragments) == R1_OK);
@@ -6005,6 +6167,7 @@ static void test_maximum_health_payloads(void) {
     const r1_model sleep_query = {100u, 2u, 100u, 21u, 0u, 6u, 1u, NULL, 0u};
     assert(r1_dispatch(&state, &peer, &sleep_query, &result) == R1_OK);
     assert(result.count == R1_SLEEP_SESSION_MAX + 1u);
+    assert_dispatch_arena_packed(&result);
     r1_health_clear_pending(&state.health);
     for (size_t index = 0u; index < R1_PENDING_ACK_CAPACITY; ++index) {
         assert(!state.health.pending[index].active);
@@ -6284,6 +6447,31 @@ typedef struct {
 typedef struct {
     r1_runtime *runtime;
     size_t calls;
+    bool acknowledgement_queued;
+    uint8_t first[R1_PEER_ADDRESS_SIZE];
+    uint8_t second[R1_PEER_ADDRESS_SIZE];
+    r1_error result;
+} runtime_advertising_targets_capture;
+
+typedef struct {
+    r1_runtime *runtime;
+    size_t calls;
+    bool no_response_queued;
+    uint16_t expected_crc;
+    uint8_t body[R1_NV_RECOVERY_BODY_BYTES];
+    r1_error result;
+} runtime_nv_recovery_capture;
+
+typedef struct {
+    r1_runtime *runtime;
+    size_t calls;
+    bool acknowledgement_queued;
+    r1_error result;
+} runtime_remove_ring_capture;
+
+typedef struct {
+    r1_runtime *runtime;
+    size_t calls;
     uint8_t module;
     uint8_t command;
     uint8_t subcommand;
@@ -6293,6 +6481,41 @@ static void capture_runtime_touch(void *context, bool enabled) {
     runtime_touch_capture *capture = context;
     capture->calls += 1u;
     capture->enabled = enabled;
+}
+
+static r1_error capture_runtime_advertising_targets(
+    void *context,
+    const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
+    const uint8_t second_target[R1_PEER_ADDRESS_SIZE]) {
+    runtime_advertising_targets_capture *capture = context;
+    assert(capture != NULL && capture->runtime != NULL);
+    capture->calls += 1u;
+    capture->acknowledgement_queued =
+        capture->runtime->events.eus.count != 0u;
+    memcpy(capture->first, first_target, sizeof capture->first);
+    memcpy(capture->second, second_target, sizeof capture->second);
+    return capture->result;
+}
+
+static r1_error capture_runtime_nv_recovery(
+    void *context, const uint8_t body[R1_NV_RECOVERY_BODY_BYTES],
+    uint16_t expected_crc) {
+    runtime_nv_recovery_capture *capture = context;
+    assert(capture != NULL && capture->runtime != NULL);
+    capture->calls += 1u;
+    capture->no_response_queued = capture->runtime->events.eus.count == 0u;
+    capture->expected_crc = expected_crc;
+    memcpy(capture->body, body, sizeof capture->body);
+    return capture->result;
+}
+
+static r1_error capture_runtime_remove_ring(void *context) {
+    runtime_remove_ring_capture *capture = context;
+    assert(capture != NULL && capture->runtime != NULL);
+    capture->calls += 1u;
+    capture->acknowledgement_queued =
+        capture->runtime->events.eus.count != 0u;
+    return capture->result;
 }
 
 static void capture_runtime_request(void *context, const r1_model *request) {
@@ -6308,7 +6531,7 @@ static void capture_runtime_request(void *context, const r1_model *request) {
 
 static r1_error runtime_feed_model(r1_runtime *runtime, uint16_t connection,
                                    const r1_model *model) {
-    uint8_t logical[64u];
+    uint8_t logical[R1_FRAGMENT_PAYLOAD_MAX];
     size_t logical_length = 0u;
     assert(r1_model_encode(model, R1_CHECKSUM_PHONE_COMPACT_CCITT,
                            logical, sizeof logical, &logical_length) == R1_OK);
@@ -6337,6 +6560,11 @@ static void test_runtime_roles(void) {
     assert(capture.calls == 1u && capture.connection == 1u &&
            capture.role == R1_ROLE_PHONE);
     assert(runtime.links[0].session.role == R1_ROLE_PHONE);
+    assert(!r1_runtime_connection_is_authorized_phone(&runtime, 1u));
+    assert(r1_runtime_set_security(&runtime, 1u, true, true, true) == R1_OK);
+    assert(r1_runtime_connection_is_authorized_phone(&runtime, 1u));
+    assert(!r1_runtime_connection_is_authorized_phone(&runtime, 2u));
+    assert(!r1_runtime_connection_is_authorized_phone(NULL, 1u));
 
     assert(runtime_feed_model(&runtime, 2u, &pair) == R1_ERROR_STATE);
     assert(capture.calls == 1u);
@@ -6390,6 +6618,10 @@ static void test_runtime_touch_effect(void) {
     runtime_touch_capture capture = {0};
     r1_runtime_set_touch_handler(&runtime, capture_runtime_touch, &capture);
     assert(r1_runtime_connect(&runtime, 3u) == R1_OK);
+    static const uint8_t phone_role[] = {1u};
+    const r1_model pair = request(
+        0u, 0x08u, phone_role, sizeof phone_role);
+    assert(runtime_feed_model(&runtime, 3u, &pair) == R1_OK);
     assert(r1_runtime_set_security(&runtime, 3u, true, true, true) == R1_OK);
     r1_touch_switch_handler_plan plan;
     static const uint8_t disabled[] = {
@@ -6447,6 +6679,156 @@ static void test_runtime_touch_effect(void) {
         2u, 0x07u, old_ambiguous_shape, sizeof old_ambiguous_shape);
     assert(runtime_feed_model(&runtime, 3u, &old_request) == R1_OK);
     assert(capture.calls == 2u && capture.enabled);
+}
+
+static void test_runtime_advertising_targets_effect(void) {
+    r1_runtime runtime;
+    r1_runtime_initialize(&runtime, NULL, NULL);
+    assert(r1_runtime_connect(&runtime, 3u) == R1_OK);
+    static const uint8_t phone_role[] = {1u};
+    const r1_model pair = request(
+        0u, 0x08u, phone_role, sizeof phone_role);
+    assert(runtime_feed_model(&runtime, 3u, &pair) == R1_OK);
+    assert(r1_event_drop(&runtime.events, true));
+    assert(r1_runtime_set_security(&runtime, 3u, true, true, true) == R1_OK);
+
+    runtime_advertising_targets_capture capture = {
+        .runtime = &runtime,
+        .result = R1_OK,
+    };
+    r1_runtime_set_advertising_targets_handler(
+        &runtime, capture_runtime_advertising_targets, &capture);
+    static const uint8_t targets[
+        R1_CONNECTION_CONTROL_ADV_START_PAYLOAD_SIZE] = {
+        0x31u, 0x32u, 0x33u, 0x34u, 0x35u, 0x36u,
+        0x41u, 0x42u, 0x43u, 0x44u, 0x45u, 0x46u,
+    };
+    const r1_model set_targets = request(
+        2u, 0x0au, targets, sizeof targets);
+    assert(runtime_feed_model(&runtime, 3u, &set_targets) == R1_OK);
+    assert(capture.calls == 1u && capture.acknowledgement_queued);
+    assert(memcmp(capture.first, targets, sizeof capture.first) == 0);
+    assert(memcmp(capture.second, targets + R1_PEER_ADDRESS_SIZE,
+                  sizeof capture.second) == 0);
+    assert(runtime.advertising_target_actions_queued == 1u);
+    assert(runtime.advertising_target_action_failures == 0u);
+    assert(r1_event_drop(&runtime.events, true));
+
+    capture.result = R1_ERROR_CAPACITY;
+    assert(runtime_feed_model(&runtime, 3u, &set_targets) == R1_OK);
+    assert(capture.calls == 2u && capture.acknowledgement_queued);
+    assert(runtime.advertising_target_actions_queued == 1u);
+    assert(runtime.advertising_target_action_failures == 1u);
+    assert(r1_event_drop(&runtime.events, true));
+
+    r1_runtime_set_advertising_targets_handler(&runtime, NULL, NULL);
+    assert(runtime_feed_model(&runtime, 3u, &set_targets) == R1_OK);
+    assert(capture.calls == 2u);
+    assert(runtime.advertising_target_action_failures == 2u);
+    assert(r1_event_drop(&runtime.events, true));
+
+    runtime.links[0].session.role = R1_ROLE_GLASSES;
+    assert(runtime_feed_model(&runtime, 3u, &set_targets) ==
+           R1_ERROR_UNAUTHORIZED);
+    assert(capture.calls == 2u &&
+           runtime.advertising_target_action_failures == 2u);
+}
+
+static void test_runtime_nv_recovery_effect(void) {
+    r1_runtime runtime;
+    r1_runtime_initialize(&runtime, NULL, NULL);
+    assert(r1_runtime_connect(&runtime, 4u) == R1_OK);
+    static const uint8_t phone_role[] = {1u};
+    const r1_model pair = request(
+        0u, 0x08u, phone_role, sizeof phone_role);
+    assert(runtime_feed_model(&runtime, 4u, &pair) == R1_OK);
+    assert(r1_event_drop(&runtime.events, true));
+    assert(r1_runtime_set_security(&runtime, 4u, true, true, true) == R1_OK);
+
+    runtime_nv_recovery_capture capture = {
+        .runtime = &runtime,
+        .result = R1_OK,
+    };
+    r1_runtime_set_nv_recovery_handler(
+        &runtime, capture_runtime_nv_recovery, &capture);
+    uint8_t body[R1_NV_RECOVERY_BODY_BYTES];
+    for (size_t index = 0u; index < sizeof body; ++index) {
+        body[index] = (uint8_t)(0xa5u ^ (uint8_t)index);
+    }
+    const uint16_t crc = r1_crc16_modbus(body, sizeof body);
+    assert(crc != 0u);
+    uint8_t envelope[
+        R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES + R1_NV_RECOVERY_BODY_BYTES] = {
+        2u,
+        (uint8_t)R1_NV_RECOVERY_BODY_BYTES,
+        (uint8_t)(R1_NV_RECOVERY_BODY_BYTES >> 8u),
+        (uint8_t)crc,
+        (uint8_t)(crc >> 8u),
+    };
+    memcpy(envelope + R1_NV_RECOVERY_COMMAND_ENVELOPE_BYTES,
+           body, sizeof body);
+    const r1_model recover = request(
+        2u, 0x11u, envelope, sizeof envelope);
+    assert(runtime_feed_model(&runtime, 4u, &recover) == R1_OK);
+    assert(capture.calls == 1u && capture.no_response_queued);
+    assert(capture.expected_crc == crc);
+    assert(memcmp(capture.body, body, sizeof body) == 0);
+    assert(runtime.nv_recovery_actions_queued == 1u &&
+           runtime.nv_recovery_action_failures == 0u);
+
+    capture.result = R1_ERROR_CAPACITY;
+    assert(runtime_feed_model(&runtime, 4u, &recover) == R1_OK);
+    assert(capture.calls == 2u && capture.no_response_queued);
+    assert(runtime.nv_recovery_actions_queued == 1u &&
+           runtime.nv_recovery_action_failures == 1u);
+
+    envelope[sizeof envelope - 1u] ^= 1u;
+    const r1_model corrupt = request(
+        2u, 0x11u, envelope, sizeof envelope);
+    assert(runtime_feed_model(&runtime, 4u, &corrupt) == R1_OK);
+    assert(capture.calls == 2u && runtime.events.eus.count == 1u);
+    assert(r1_event_drop(&runtime.events, true));
+
+    runtime.links[0].session.role = R1_ROLE_GLASSES;
+    envelope[sizeof envelope - 1u] ^= 1u;
+    assert(runtime_feed_model(&runtime, 4u, &recover) ==
+           R1_ERROR_UNAUTHORIZED);
+    assert(capture.calls == 2u);
+}
+
+static void test_runtime_remove_ring_effect(void) {
+    r1_runtime runtime;
+    r1_runtime_initialize(&runtime, NULL, NULL);
+    assert(r1_runtime_connect(&runtime, 5u) == R1_OK);
+    static const uint8_t phone_role[] = {1u};
+    const r1_model pair = request(
+        0u, 0x08u, phone_role, sizeof phone_role);
+    assert(runtime_feed_model(&runtime, 5u, &pair) == R1_OK);
+    assert(r1_event_drop(&runtime.events, true));
+    assert(r1_runtime_set_security(&runtime, 5u, true, true, true) == R1_OK);
+    runtime_remove_ring_capture capture = {
+        .runtime = &runtime,
+        .result = R1_OK,
+    };
+    r1_runtime_set_remove_ring_handler(
+        &runtime, capture_runtime_remove_ring, &capture);
+    static const uint8_t payload[] = {0u};
+    const r1_model remove = request(2u, 0x82u, payload, sizeof payload);
+    assert(runtime_feed_model(&runtime, 5u, &remove) == R1_OK);
+    assert(capture.calls == 1u && capture.acknowledgement_queued);
+    assert(runtime.remove_ring_actions_queued == 1u &&
+           runtime.remove_ring_action_failures == 0u);
+    assert(r1_event_drop(&runtime.events, true));
+    capture.result = R1_ERROR_CAPACITY;
+    assert(runtime_feed_model(&runtime, 5u, &remove) == R1_OK);
+    assert(capture.calls == 2u && capture.acknowledgement_queued);
+    assert(runtime.remove_ring_actions_queued == 1u &&
+           runtime.remove_ring_action_failures == 1u);
+    assert(r1_event_drop(&runtime.events, true));
+    runtime.links[0].session.role = R1_ROLE_GLASSES;
+    assert(runtime_feed_model(&runtime, 5u, &remove) ==
+           R1_ERROR_UNAUTHORIZED);
+    assert(capture.calls == 2u);
 }
 
 static void test_runtime_eus_bridge(void) {
@@ -7462,6 +7844,7 @@ static void test_export_planner(void) {
 static void test_kv_snapshot_store(void) {
     static uint8_t bytes[R1_KV_PARTITION_BYTES];
     static uint8_t legacy_bytes[R1_KV_PARTITION_BYTES];
+    static uint8_t legacy_snapshot[R1_KV_PARTITION_BYTES];
     static uint8_t snapshot[R1_KV_PARTITION_BYTES];
     static uint8_t attempt_bytes[R1_KV_PARTITION_BYTES];
     static uint8_t hsync_bytes[R1_KV_PARTITION_BYTES];
@@ -7502,6 +7885,7 @@ static void test_kv_snapshot_store(void) {
     memcpy(legacy_bytes, bytes, sizeof legacy_bytes);
     memset(legacy_bytes + 7u * R1_KV_CLASS_BLOCK_BYTES, UINT8_MAX,
            R1_KV_CLASS_BLOCK_BYTES);
+    memcpy(legacy_snapshot, legacy_bytes, sizeof legacy_snapshot);
     assert(r1_kv_store_initialize(&store,
                                   r1_memory_flash_interface(&legacy_memory)) == R1_OK);
     assert(r1_kv_store_get(&store, R1_KV_HEALTH, actual, sizeof actual,
@@ -7551,6 +7935,108 @@ static void test_kv_snapshot_store(void) {
         observed_new = observed_new || actual[0] == 25u;
         if (commit_result == R1_OK) {
             assert(actual[0] == 25u);
+        }
+    }
+    assert(observed_old && observed_new);
+
+    /* A power cut may occur between individual flash writes, not only between
+     * provider calls. Measure the complete rollover and exhaust every byte
+     * boundary, including every prefix of the target-sector erase. Reopen must
+     * select either the prior complete snapshot or the new complete snapshot,
+     * never defaults or a cross-generation mixture. */
+    r1_memory_flash probe;
+    r1_memory_flash_initialize(&probe, attempt_bytes, sizeof attempt_bytes);
+    memcpy(attempt_bytes, snapshot, sizeof snapshot);
+    assert(r1_kv_store_initialize(
+               &store, r1_memory_flash_interface(&probe)) == R1_OK);
+    assert(r1_kv_store_get(&store, R1_KV_HEALTH, health, sizeof health,
+                           &actual_length) == R1_OK);
+    assert(health[0] == 24u);
+    health[0] = 25u;
+    assert(r1_kv_store_set(
+               &store, R1_KV_HEALTH, health, sizeof health) == R1_OK);
+    assert(r1_kv_store_commit(&store) == R1_OK);
+    const uint32_t rollover_byte_mutations = probe.byte_mutations;
+    assert(rollover_byte_mutations > R1_KV_SECTOR_BYTES);
+
+    observed_old = false;
+    observed_new = false;
+    for (uint32_t cut = 0u; cut <= rollover_byte_mutations; ++cut) {
+        r1_memory_flash attempt;
+        r1_memory_flash_initialize(&attempt, attempt_bytes, sizeof attempt_bytes);
+        memcpy(attempt_bytes, snapshot, sizeof snapshot);
+        assert(r1_kv_store_initialize(
+                   &store, r1_memory_flash_interface(&attempt)) == R1_OK);
+        assert(r1_kv_store_get(&store, R1_KV_HEALTH, health, sizeof health,
+                               &actual_length) == R1_OK);
+        assert(health[0] == 24u);
+        health[0] = 25u;
+        assert(r1_kv_store_set(
+                   &store, R1_KV_HEALTH, health, sizeof health) == R1_OK);
+        r1_memory_flash_fail_after_bytes(&attempt, cut);
+        const r1_error commit_result = r1_kv_store_commit(&store);
+        assert(commit_result == R1_OK || commit_result == R1_ERROR_STATE);
+        r1_memory_flash_fail_after_bytes(&attempt, UINT32_MAX);
+        assert(r1_kv_store_initialize(
+                   &store, r1_memory_flash_interface(&attempt)) == R1_OK);
+        assert(r1_kv_store_get(&store, R1_KV_HEALTH, actual, sizeof actual,
+                               &actual_length) == R1_OK);
+        assert(actual[0] == 24u || actual[0] == 25u);
+        observed_old = observed_old || actual[0] == 24u;
+        observed_new = observed_new || actual[0] == 25u;
+        if (commit_result == R1_OK) {
+            assert(actual[0] == 25u);
+        }
+    }
+    assert(observed_old && observed_new);
+
+    /* Exhaust the legacy-with-erased-meta migration separately. The legacy
+     * snapshot remains a valid fallback until the final class-zero commit
+     * marker of the generation-bearing replacement is complete. */
+    r1_memory_flash migration_probe;
+    r1_memory_flash_initialize(
+        &migration_probe, attempt_bytes, sizeof attempt_bytes);
+    memcpy(attempt_bytes, legacy_snapshot, sizeof legacy_snapshot);
+    assert(r1_kv_store_initialize(
+               &store, r1_memory_flash_interface(&migration_probe)) == R1_OK);
+    assert(r1_kv_store_get(&store, R1_KV_HEALTH, health, sizeof health,
+                           &actual_length) == R1_OK);
+    assert(health[0] == 21u);
+    health[0] = 22u;
+    assert(r1_kv_store_set(
+               &store, R1_KV_HEALTH, health, sizeof health) == R1_OK);
+    assert(r1_kv_store_commit(&store) == R1_OK);
+    const uint32_t migration_byte_mutations = migration_probe.byte_mutations;
+    assert(migration_byte_mutations > 0u &&
+           migration_byte_mutations < R1_KV_SECTOR_BYTES);
+
+    observed_old = false;
+    observed_new = false;
+    for (uint32_t cut = 0u; cut <= migration_byte_mutations; ++cut) {
+        r1_memory_flash attempt;
+        r1_memory_flash_initialize(&attempt, attempt_bytes, sizeof attempt_bytes);
+        memcpy(attempt_bytes, legacy_snapshot, sizeof legacy_snapshot);
+        assert(r1_kv_store_initialize(
+                   &store, r1_memory_flash_interface(&attempt)) == R1_OK);
+        assert(r1_kv_store_get(&store, R1_KV_HEALTH, health, sizeof health,
+                               &actual_length) == R1_OK);
+        assert(health[0] == 21u);
+        health[0] = 22u;
+        assert(r1_kv_store_set(
+                   &store, R1_KV_HEALTH, health, sizeof health) == R1_OK);
+        r1_memory_flash_fail_after_bytes(&attempt, cut);
+        const r1_error commit_result = r1_kv_store_commit(&store);
+        assert(commit_result == R1_OK || commit_result == R1_ERROR_STATE);
+        r1_memory_flash_fail_after_bytes(&attempt, UINT32_MAX);
+        assert(r1_kv_store_initialize(
+                   &store, r1_memory_flash_interface(&attempt)) == R1_OK);
+        assert(r1_kv_store_get(&store, R1_KV_HEALTH, actual, sizeof actual,
+                               &actual_length) == R1_OK);
+        assert(actual[0] == 21u || actual[0] == 22u);
+        observed_old = observed_old || actual[0] == 21u;
+        observed_new = observed_new || actual[0] == 22u;
+        if (commit_result == R1_OK) {
+            assert(actual[0] == 22u);
         }
     }
     assert(observed_old && observed_new);
@@ -7825,11 +8311,145 @@ static void test_nv_recovery_merge(void) {
                &restore_plan) == R1_ERROR_STATE);
 }
 
+static bool nv_recovery_state_equal(
+    const r1_nv_recovery_state *left, const r1_nv_recovery_state *right) {
+    return memcmp(left->config, right->config, sizeof left->config) == 0 &&
+           memcmp(left->power, right->power, sizeof left->power) == 0 &&
+           left->ring_size == right->ring_size;
+}
+
+static void make_nv_recovery_body(
+    uint8_t body[R1_NV_RECOVERY_BODY_BYTES]) {
+    memset(body, 0, R1_NV_RECOVERY_BODY_BYTES);
+    for (uint8_t index = 0u; index < 30u; ++index) {
+        body[index] = (uint8_t)('A' + index % 26u);
+        body[31u + index] = (uint8_t)('a' + index % 26u);
+    }
+    body[30u] = 30u;
+    body[61u] = 15u;
+    for (uint8_t index = 0u; index < 6u; ++index) {
+        body[62u + index] = (uint8_t)(index + 1u);
+        body[68u + index] = (uint8_t)(index + 11u);
+    }
+    body[92u] = 3u;
+    put_i16(body + 94u, -250);
+    body[96u] = 12u;
+}
+
+static void test_nv_recovery_transaction(void) {
+    static uint8_t probe_bytes[R1_KV_PARTITION_BYTES];
+    static uint8_t attempt_bytes[R1_KV_PARTITION_BYTES];
+    uint8_t body[R1_NV_RECOVERY_BODY_BYTES];
+    make_nv_recovery_body(body);
+    const uint16_t crc = r1_crc16_modbus(body, sizeof body);
+
+    r1_memory_flash probe;
+    memset(probe_bytes, UINT8_MAX, sizeof probe_bytes);
+    r1_memory_flash_initialize(&probe, probe_bytes, sizeof probe_bytes);
+    r1_kv_store store;
+    assert(r1_kv_store_initialize(
+               &store, r1_memory_flash_interface(&probe)) == R1_OK);
+    r1_nv_recovery_state old_state;
+    assert(r1_nv_recovery_store_load(&store, &old_state) == R1_OK);
+    r1_nv_recovery_result result;
+    assert(r1_nv_recovery_store_merge_commit(
+               &store, body, sizeof body, crc, &result) == R1_OK);
+    assert(result.changed_records ==
+           (R1_NV_RECOVERY_CHANGED_CONFIG | R1_NV_RECOVERY_CHANGED_POWER |
+            R1_NV_RECOVERY_CHANGED_RING_SIZE));
+    const r1_nv_recovery_state new_state = result.state;
+    const uint32_t transaction_mutations = probe.byte_mutations;
+    assert(transaction_mutations > 0u &&
+           transaction_mutations < R1_KV_SLOT_BYTES);
+
+    r1_kv_store reopened;
+    assert(r1_kv_store_initialize(
+               &reopened, r1_memory_flash_interface(&probe)) == R1_OK);
+    r1_nv_recovery_state persisted;
+    assert(r1_nv_recovery_store_load(&reopened, &persisted) == R1_OK);
+    assert(nv_recovery_state_equal(&persisted, &new_state));
+    const uint32_t committed_generation = reopened.generation;
+    assert(r1_nv_recovery_store_merge_commit(
+               &reopened, body, sizeof body, crc, &result) == R1_OK);
+    assert(result.changed_records == 0u &&
+           reopened.generation == committed_generation);
+
+    assert(r1_nv_recovery_store_load(NULL, &persisted) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_recovery_store_merge_commit(
+               NULL, body, sizeof body, crc, &result) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_recovery_store_merge_commit(
+               &reopened, body, sizeof body - 1u, crc, &result) ==
+           R1_ERROR_LENGTH);
+
+    bool observed_old = false;
+    bool observed_new = false;
+    for (uint32_t cut = 0u; cut <= transaction_mutations; ++cut) {
+        memset(attempt_bytes, UINT8_MAX, sizeof attempt_bytes);
+        r1_memory_flash attempt;
+        r1_memory_flash_initialize(
+            &attempt, attempt_bytes, sizeof attempt_bytes);
+        assert(r1_kv_store_initialize(
+                   &store, r1_memory_flash_interface(&attempt)) == R1_OK);
+        r1_memory_flash_fail_after_bytes(&attempt, cut);
+        const r1_error commit = r1_nv_recovery_store_merge_commit(
+            &store, body, sizeof body, crc, &result);
+        assert(commit == R1_OK || commit == R1_ERROR_STATE);
+        r1_memory_flash_fail_after_bytes(&attempt, UINT32_MAX);
+
+        assert(r1_kv_store_initialize(
+                   &reopened, r1_memory_flash_interface(&attempt)) == R1_OK);
+        assert(r1_nv_recovery_store_load(&reopened, &persisted) == R1_OK);
+        const bool is_old = nv_recovery_state_equal(&persisted, &old_state);
+        const bool is_new = nv_recovery_state_equal(&persisted, &new_state);
+        assert(is_old != is_new);
+        observed_old = observed_old || is_old;
+        observed_new = observed_new || is_new;
+        if (commit == R1_OK) {
+            assert(is_new);
+        } else {
+            /* The caller-visible store was rolled back, and the dirty target
+             * can be bypassed or erased by an immediate safe retry. */
+            assert(r1_nv_recovery_store_load(&store, &persisted) == R1_OK);
+            assert(nv_recovery_state_equal(&persisted, &old_state));
+            assert(r1_nv_recovery_store_merge_commit(
+                       &store, body, sizeof body, crc, &result) == R1_OK);
+            assert(r1_kv_store_initialize(
+                       &reopened, r1_memory_flash_interface(&attempt)) == R1_OK);
+            assert(r1_nv_recovery_store_load(
+                       &reopened, &persisted) == R1_OK);
+            assert(nv_recovery_state_equal(&persisted, &new_state));
+        }
+    }
+    assert(observed_old && observed_new);
+
+    /* Recovery refuses to fold unrelated uncommitted state into its atomic
+     * snapshot. */
+    memset(attempt_bytes, UINT8_MAX, sizeof attempt_bytes);
+    r1_memory_flash dirty_memory;
+    r1_memory_flash_initialize(
+        &dirty_memory, attempt_bytes, sizeof attempt_bytes);
+    assert(r1_kv_store_initialize(
+               &store, r1_memory_flash_interface(&dirty_memory)) == R1_OK);
+    uint8_t health[R1_KV_CLASS_PAYLOAD_MAX];
+    size_t health_length = 0u;
+    assert(r1_kv_store_get(
+               &store, R1_KV_HEALTH, health, sizeof health,
+               &health_length) == R1_OK);
+    health[0] ^= 1u;
+    assert(r1_kv_store_set(
+               &store, R1_KV_HEALTH, health, health_length) == R1_OK);
+    assert(r1_nv_recovery_store_merge_commit(
+               &store, body, sizeof body, crc, &result) == R1_ERROR_STATE);
+    assert(store.dirty[R1_KV_HEALTH]);
+}
+
 typedef struct {
     size_t calls;
     r1_sleep_db_record record;
     uint8_t body[R1_SLEEP_DB_SYNC_READ_MAX];
     size_t length;
+    uint32_t sought_start_timestamp;
+    bool sought_record_found;
 } sleep_db_capture;
 
 static bool capture_sleep_record(void *context, const r1_sleep_db_record *record,
@@ -7837,6 +8457,9 @@ static bool capture_sleep_record(void *context, const r1_sleep_db_record *record
     sleep_db_capture *capture = context;
     capture->calls += 1u;
     capture->record = *record;
+    if (record->start_timestamp == capture->sought_start_timestamp) {
+        capture->sought_record_found = true;
+    }
     capture->length = length;
     for (size_t index = 0u; index < length; ++index) {
         capture->body[index] = body[index];
@@ -7864,6 +8487,9 @@ static void sleep_db_body(uint8_t *body, size_t length,
 
 static void test_sleep_database(void) {
     uint8_t bytes[R1_SLEEP_DB_BYTES];
+    static uint8_t power_cut_bytes[R1_SLEEP_DB_BYTES];
+    static uint8_t rollover_snapshot[R1_SLEEP_DB_BYTES];
+    static uint8_t rollover_cut_bytes[R1_SLEEP_DB_BYTES];
     r1_memory_flash memory;
     r1_memory_flash_initialize(&memory, bytes, sizeof bytes);
     r1_sleep_db database;
@@ -7872,7 +8498,7 @@ static void test_sleep_database(void) {
     uint8_t body[32u];
     sleep_db_body(body, sizeof body, 100u, 200u);
     assert(r1_sleep_db_append(&database, body, sizeof body) == R1_OK);
-    assert(memory.program_operations == 2u);
+    assert(memory.program_operations == 4u);
     assert(bytes[16] == sizeof body && bytes[17] == 0u);
     assert(bytes[18] == R1_SLEEP_DB_BODY_START && bytes[19] == 0u);
     assert(bytes[36] == UINT8_MAX && bytes[37] == UINT8_MAX &&
@@ -7911,6 +8537,53 @@ static void test_sleep_database(void) {
     assert(memory.program_operations == 1u);
     assert(r1_sleep_db_count(&database, &count) == R1_OK && count == 0u);
 
+    /* Exhaust every byte boundary across reservation, body, metadata, and
+     * final commit. After reboot, an interrupted record is ignored but keeps
+     * its reserved extent; a different subsequent record must append cleanly
+     * without colliding with orphaned programmed bytes. */
+    r1_memory_flash power_probe;
+    r1_memory_flash_initialize(
+        &power_probe, power_cut_bytes, sizeof power_cut_bytes);
+    assert(r1_sleep_db_initialize(
+               &database, r1_memory_flash_interface(&power_probe), 0u) == R1_OK);
+    sleep_db_body(body, sizeof body, 100u, 200u);
+    assert(r1_sleep_db_append(&database, body, sizeof body) == R1_OK);
+    const uint32_t append_byte_mutations = power_probe.byte_mutations;
+    assert(append_byte_mutations == 56u);
+    for (uint32_t cut = 0u; cut <= append_byte_mutations; ++cut) {
+        r1_memory_flash attempt;
+        r1_memory_flash_initialize(
+            &attempt, power_cut_bytes, sizeof power_cut_bytes);
+        assert(r1_sleep_db_initialize(
+                   &database, r1_memory_flash_interface(&attempt), 0u) == R1_OK);
+        sleep_db_body(body, sizeof body, 100u, 200u);
+        r1_memory_flash_fail_after_bytes(&attempt, cut);
+        const r1_error first_result = r1_sleep_db_append(
+            &database, body, sizeof body);
+        assert(first_result == R1_OK || first_result == R1_ERROR_STATE);
+        r1_memory_flash_fail_after_bytes(&attempt, UINT32_MAX);
+        assert(r1_sleep_db_count(&database, &count) == R1_OK);
+        assert(count <= 1u);
+        const size_t first_count = count;
+
+        sleep_db_body(body, sizeof body, 300u, 400u);
+        body[1] ^= UINT8_C(0x5a);
+        assert(r1_sleep_db_append(&database, body, sizeof body) == R1_OK);
+        assert(r1_sleep_db_count(&database, &count) == R1_OK);
+        assert(count == first_count + 1u);
+        sleep_db_capture recovered = {0};
+        size_t recovered_visited = 0u;
+        assert(r1_sleep_db_iterate(
+                   &database, false, capture_sleep_record, &recovered,
+                   &recovered_visited) == R1_OK);
+        assert(recovered_visited == count && recovered.calls == count);
+        assert(recovered.record.start_timestamp == 300u &&
+               recovered.record.end_timestamp == 400u);
+        if (first_result == R1_OK) {
+            assert(first_count == 1u);
+        }
+    }
+
     r1_memory_flash_initialize(&memory, bytes, sizeof bytes);
     r1_flash flash = r1_memory_flash_interface(&memory);
     static const uint8_t zero = 0u;
@@ -7925,12 +8598,63 @@ static void test_sleep_database(void) {
         assert(r1_sleep_db_append(&database, body, sizeof body) == R1_OK);
     }
     assert(r1_sleep_db_count(&database, &count) == R1_OK && count == 16u);
+    memcpy(rollover_snapshot, bytes, sizeof rollover_snapshot);
     sleep_db_body(body, sizeof body, 3000u, 4000u);
     assert(r1_sleep_db_append(&database, body, sizeof body) == R1_OK);
     assert(memory.erase_operations == 1u);
     assert(r1_sleep_db_count(&database, &count) == R1_OK && count == 9u);
     assert(r1_sleep_db_mark_synchronized(&database, R1_FLASH_PAGE_BYTES + 16u,
                                          1008u, 2008u) == R1_OK);
+
+    /* Rollover is the destructive edge: exhaust every prefix of the page
+     * erase and subsequent transactional append. After the simulated reboot,
+     * another distinct record must remain appendable and the entire surviving
+     * journal must still iterate without a torn-header or checksum failure. */
+    r1_memory_flash rollover_probe;
+    r1_memory_flash_initialize(
+        &rollover_probe, rollover_cut_bytes, sizeof rollover_cut_bytes);
+    memcpy(rollover_cut_bytes, rollover_snapshot, sizeof rollover_snapshot);
+    assert(r1_sleep_db_initialize(
+               &database, r1_memory_flash_interface(&rollover_probe), 0u) == R1_OK);
+    sleep_db_body(body, sizeof body, 3000u, 4000u);
+    assert(r1_sleep_db_append(&database, body, sizeof body) == R1_OK);
+    const uint32_t rollover_mutations = rollover_probe.byte_mutations;
+    assert(rollover_mutations == R1_FLASH_PAGE_BYTES + 56u);
+    for (uint32_t cut = 0u; cut <= rollover_mutations; ++cut) {
+        r1_memory_flash attempt;
+        r1_memory_flash_initialize(
+            &attempt, rollover_cut_bytes, sizeof rollover_cut_bytes);
+        memcpy(rollover_cut_bytes, rollover_snapshot, sizeof rollover_snapshot);
+        assert(r1_sleep_db_initialize(
+                   &database, r1_memory_flash_interface(&attempt), 0u) == R1_OK);
+        sleep_db_body(body, sizeof body, 3000u, 4000u);
+        r1_memory_flash_fail_after_bytes(&attempt, cut);
+        const r1_error rollover_result = r1_sleep_db_append(
+            &database, body, sizeof body);
+        assert(rollover_result == R1_OK || rollover_result == R1_ERROR_STATE);
+        r1_memory_flash_fail_after_bytes(&attempt, UINT32_MAX);
+
+        sleep_db_body(body, sizeof body, 5000u, 6000u);
+        body[1] ^= UINT8_C(0xa5);
+        const r1_error recovery_result = r1_sleep_db_append(
+            &database, body, sizeof body);
+        assert(recovery_result == R1_OK);
+        assert(r1_sleep_db_count(&database, &count) == R1_OK);
+        assert(count == 9u || count == 10u);
+        sleep_db_capture rollover_capture = {
+            .sought_start_timestamp = 5000u,
+        };
+        size_t rollover_visited = 0u;
+        assert(r1_sleep_db_iterate(
+                   &database, false, capture_sleep_record,
+                   &rollover_capture, &rollover_visited) == R1_OK);
+        assert(rollover_visited == count &&
+               rollover_capture.calls == count &&
+               rollover_capture.sought_record_found);
+        if (rollover_result == R1_OK) {
+            assert(count == 10u);
+        }
+    }
 
     uint8_t oversized[R1_SLEEP_DB_SYNC_READ_MAX + 4u];
     r1_memory_flash_initialize(&memory, bytes, sizeof bytes);
@@ -9815,6 +10539,106 @@ static void test_peer_target_policy(void) {
     assert(r1_peer_is_target_glasses(true, left, right, left));
     assert(!r1_peer_is_target_glasses(true, other, right, left));
     assert(!r1_peer_is_target_glasses(true, other, zero, left));
+
+    uint8_t owner_record[R1_OWNER_AUTH_RECORD_BYTES];
+    assert(r1_owner_authorization_encode(0u, right, owner_record) == R1_OK);
+    uint8_t owner_type = UINT8_MAX;
+    uint8_t owner_address[R1_PEER_ADDRESS_SIZE] = {0};
+    assert(r1_owner_authorization_decode(
+        owner_record, sizeof owner_record, &owner_type, owner_address));
+    assert(owner_type == 0u &&
+           memcmp(owner_address, right, sizeof owner_address) == 0);
+    assert(r1_owner_authorization_matches(
+        owner_record, sizeof owner_record, 0u, right));
+    assert(!r1_owner_authorization_matches(
+        owner_record, sizeof owner_record, 1u, right));
+    assert(!r1_owner_authorization_matches(
+        owner_record, sizeof owner_record, 0u, left));
+    owner_record[R1_OWNER_AUTH_CRC_OFFSET] ^= UINT8_C(1);
+    assert(!r1_owner_authorization_decode(
+        owner_record, sizeof owner_record, &owner_type, owner_address));
+    assert(!r1_owner_authorization_decode(
+        owner_record, sizeof owner_record - 1u, &owner_type, owner_address));
+    assert(!r1_owner_authorization_decode(
+        NULL, sizeof owner_record, &owner_type, owner_address));
+    assert(r1_owner_authorization_encode(2u, right, owner_record) ==
+           R1_ERROR_STATE);
+    assert(r1_owner_authorization_encode(0u, zero, owner_record) ==
+           R1_ERROR_STATE);
+    assert(r1_owner_authorization_encode(0u, NULL, owner_record) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_owner_authorization_encode(0u, right, NULL) ==
+           R1_ERROR_ARGUMENT);
+
+    uint8_t persisted_owner[R1_OWNER_AUTH_RECORD_BYTES];
+    assert(r1_owner_authorization_encode(
+               0u, right, persisted_owner) == R1_OK);
+    r1_owner_authorization_state owner_state;
+    r1_owner_authorization_state_reset(&owner_state);
+    assert(!owner_state.loaded && !owner_state.corrupt);
+    assert(!r1_owner_authorization_state_matches(
+        &owner_state, 0u, right));
+    assert(r1_owner_authorization_state_load(
+        &owner_state, persisted_owner, sizeof persisted_owner));
+    assert(owner_state.loaded && !owner_state.corrupt);
+    assert(r1_owner_authorization_state_matches(
+        &owner_state, 0u, right));
+    assert(!r1_owner_authorization_state_matches(
+        &owner_state, 0u, left));
+    assert(!r1_owner_authorization_state_matches(
+        &owner_state, 1u, right));
+
+    /* Reconstructing state solely from the persisted bytes models reboot:
+     * only the resolved bonded owner identity replays as authorized. */
+    r1_owner_authorization_state rebooted_state;
+    r1_owner_authorization_state_reset(&rebooted_state);
+    assert(r1_owner_authorization_state_load(
+        &rebooted_state, persisted_owner, sizeof persisted_owner));
+    assert(r1_owner_authorization_state_matches(
+        &rebooted_state, 0u, right));
+    assert(!r1_owner_authorization_state_matches(
+        &rebooted_state, 0u, other));
+
+    /* Every single-bit persistent corruption must both deny the record and
+     * evict an already-loaded RAM owner. This pins the stale-authorization
+     * regression fixed in the target settings callback. */
+    for (size_t index = 0u; index < sizeof persisted_owner; ++index) {
+        for (uint8_t bit = 0u; bit < 8u; ++bit) {
+            uint8_t corrupt[R1_OWNER_AUTH_RECORD_BYTES];
+            memcpy(corrupt, persisted_owner, sizeof corrupt);
+            corrupt[index] ^= (uint8_t)(UINT8_C(1) << bit);
+            assert(!r1_owner_authorization_state_load(
+                &rebooted_state, corrupt, sizeof corrupt));
+            assert(!rebooted_state.loaded && rebooted_state.corrupt);
+            assert(!r1_owner_authorization_state_matches(
+                &rebooted_state, 0u, right));
+            for (size_t byte = 0u; byte < sizeof rebooted_state.record;
+                 ++byte) {
+                assert(rebooted_state.record[byte] == 0u);
+            }
+            assert(r1_owner_authorization_state_load(
+                &rebooted_state, persisted_owner, sizeof persisted_owner));
+        }
+    }
+    for (size_t truncated = 0u; truncated < sizeof persisted_owner;
+         ++truncated) {
+        assert(!r1_owner_authorization_state_load(
+            &rebooted_state, persisted_owner, truncated));
+        assert(!rebooted_state.loaded && rebooted_state.corrupt);
+    }
+    assert(!r1_owner_authorization_state_load(
+        &rebooted_state, NULL, sizeof persisted_owner));
+    assert(!r1_owner_authorization_state_load(
+        NULL, persisted_owner, sizeof persisted_owner));
+    assert(!r1_owner_authorization_state_matches(NULL, 0u, right));
+
+    /* Successful local revocation returns the store to a confirmed-empty
+     * enrollment state; no address remains authorized in RAM. */
+    r1_owner_authorization_state_reset(&rebooted_state);
+    assert(!rebooted_state.loaded && !rebooted_state.corrupt);
+    assert(!r1_owner_authorization_state_matches(
+        &rebooted_state, 0u, right));
+    r1_owner_authorization_state_reset(NULL);
 }
 
 static void test_connection_control_composition(void) {
@@ -9951,11 +10775,36 @@ static void test_connection_control_composition(void) {
                   R1_PEER_ADDRESS_SIZE) == 0);
     assert(memcmp(dev_info + R1_DEV_INFO_TARGET_SECOND_OFFSET, second,
                   R1_PEER_ADDRESS_SIZE) == 0);
+    dev_info[R1_DEV_INFO_CONNECTION_FLAGS_OFFSET] = UINT8_C(0x07);
+    assert(r1_remove_ring_clear_connected_flag(NULL, sizeof dev_info) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_remove_ring_clear_connected_flag(
+               dev_info, sizeof dev_info - 1u) == R1_ERROR_LENGTH);
+    assert(r1_remove_ring_clear_connected_flag(
+               dev_info, sizeof dev_info) == R1_OK);
+    assert(dev_info[R1_DEV_INFO_CONNECTION_FLAGS_OFFSET] == UINT8_C(0x03));
+    assert(memcmp(dev_info + R1_DEV_INFO_TARGET_FIRST_OFFSET, first,
+                  R1_PEER_ADDRESS_SIZE) == 0);
+    assert(r1_remove_ring_clear_peer_slots(NULL, sizeof dev_info) ==
+           R1_ERROR_ARGUMENT);
+    assert(r1_remove_ring_clear_peer_slots(
+               dev_info, sizeof dev_info - 1u) == R1_ERROR_LENGTH);
+    assert(r1_remove_ring_clear_peer_slots(dev_info, sizeof dev_info) ==
+           R1_OK);
+    for (size_t index = R1_DEV_INFO_TARGET_FIRST_OFFSET;
+         index < R1_DEV_INFO_TARGET_SECOND_OFFSET + R1_PEER_ADDRESS_SIZE;
+         ++index) {
+        assert(dev_info[index] == UINT8_MAX);
+    }
+    assert(memcmp(dev_info + R1_DEV_INFO_PEER_MARKER_OFFSET,
+                  "CAMH", 4u) == 0);
 
     /* The durable composition survives a kv commit and reopen over memory
      * flash. */
     r1_memory_flash memory;
-    uint8_t bytes[R1_KV_PARTITION_BYTES];
+    static uint8_t bytes[R1_KV_PARTITION_BYTES];
+    static uint8_t remove_ring_snapshot[R1_KV_PARTITION_BYTES];
+    static uint8_t remove_ring_attempt_bytes[R1_KV_PARTITION_BYTES];
     r1_kv_store store;
     r1_memory_flash_initialize(&memory, bytes, sizeof bytes);
     assert(r1_kv_store_initialize(&store, r1_memory_flash_interface(&memory))
@@ -9977,6 +10826,115 @@ static void test_connection_control_composition(void) {
                   R1_PEER_ADDRESS_SIZE) == 0);
     assert(memcmp(persisted + R1_DEV_INFO_TARGET_SECOND_OFFSET, second,
                   R1_PEER_ADDRESS_SIZE) == 0);
+
+    /* The live remove-ring composition preserves the recovered two-commit
+     * sequence, and every byte-level power cut reopens to exactly the old,
+     * intermediate, or final generation. Retrying from any such generation
+     * reaches the final erased-pair state. */
+    persisted[R1_DEV_INFO_CONNECTION_FLAGS_OFFSET] = UINT8_C(0x07);
+    memcpy(persisted + R1_DEV_INFO_PEER_MARKER_OFFSET, "PAIR", 4u);
+    assert(r1_kv_store_set(
+               &store, R1_KV_DEV_INFO, persisted, length) == R1_OK);
+    assert(r1_kv_store_commit(&store) == R1_OK);
+    memcpy(remove_ring_snapshot, bytes, sizeof remove_ring_snapshot);
+    assert(r1_remove_ring_metadata_commit(NULL) == R1_ERROR_STATE);
+
+    r1_memory_flash remove_ring_probe;
+    r1_memory_flash_initialize(
+        &remove_ring_probe, remove_ring_attempt_bytes,
+        sizeof remove_ring_attempt_bytes);
+    memcpy(remove_ring_attempt_bytes, remove_ring_snapshot,
+           sizeof remove_ring_snapshot);
+    assert(r1_kv_store_initialize(
+               &store, r1_memory_flash_interface(&remove_ring_probe))
+           == R1_OK);
+    assert(r1_remove_ring_metadata_commit(&store) == R1_OK);
+    const uint32_t remove_ring_byte_mutations =
+        remove_ring_probe.byte_mutations;
+    assert(remove_ring_byte_mutations > 0u);
+
+    bool observed_remove_ring_old = false;
+    bool observed_remove_ring_intermediate = false;
+    bool observed_remove_ring_final = false;
+    for (uint32_t cut = 0u; cut <= remove_ring_byte_mutations; ++cut) {
+        r1_memory_flash attempt;
+        r1_kv_store reopened;
+        r1_memory_flash_initialize(
+            &attempt, remove_ring_attempt_bytes,
+            sizeof remove_ring_attempt_bytes);
+        memcpy(remove_ring_attempt_bytes, remove_ring_snapshot,
+               sizeof remove_ring_snapshot);
+        assert(r1_kv_store_initialize(
+                   &store, r1_memory_flash_interface(&attempt)) == R1_OK);
+        r1_memory_flash_fail_after_bytes(&attempt, cut);
+        const r1_error remove_result =
+            r1_remove_ring_metadata_commit(&store);
+        assert(remove_result == R1_OK || remove_result == R1_ERROR_STATE);
+        r1_memory_flash_fail_after_bytes(&attempt, UINT32_MAX);
+        assert(r1_kv_store_initialize(
+                   &reopened, r1_memory_flash_interface(&attempt)) == R1_OK);
+        assert(r1_kv_store_get(
+                   &reopened, R1_KV_DEV_INFO, persisted,
+                   sizeof persisted, &length) == R1_OK);
+        const bool original_targets =
+            memcmp(persisted + R1_DEV_INFO_TARGET_FIRST_OFFSET, first,
+                   R1_PEER_ADDRESS_SIZE) == 0 &&
+            memcmp(persisted + R1_DEV_INFO_TARGET_SECOND_OFFSET, second,
+                   R1_PEER_ADDRESS_SIZE) == 0;
+        bool erased_targets = true;
+        for (size_t index = R1_DEV_INFO_TARGET_FIRST_OFFSET;
+             index < R1_DEV_INFO_TARGET_SECOND_OFFSET +
+                         R1_PEER_ADDRESS_SIZE;
+             ++index) {
+            erased_targets = erased_targets &&
+                persisted[index] == UINT8_MAX;
+        }
+        const bool old_generation =
+            persisted[R1_DEV_INFO_CONNECTION_FLAGS_OFFSET] == UINT8_C(0x07) &&
+            original_targets &&
+            memcmp(persisted + R1_DEV_INFO_PEER_MARKER_OFFSET,
+                   "PAIR", 4u) == 0;
+        const bool intermediate_generation =
+            persisted[R1_DEV_INFO_CONNECTION_FLAGS_OFFSET] == UINT8_C(0x03) &&
+            original_targets &&
+            memcmp(persisted + R1_DEV_INFO_PEER_MARKER_OFFSET,
+                   "PAIR", 4u) == 0;
+        const bool final_generation =
+            persisted[R1_DEV_INFO_CONNECTION_FLAGS_OFFSET] == UINT8_C(0x03) &&
+            erased_targets &&
+            memcmp(persisted + R1_DEV_INFO_PEER_MARKER_OFFSET,
+                   "CAMH", 4u) == 0;
+        assert(old_generation || intermediate_generation || final_generation);
+        observed_remove_ring_old =
+            observed_remove_ring_old || old_generation;
+        observed_remove_ring_intermediate =
+            observed_remove_ring_intermediate || intermediate_generation;
+        observed_remove_ring_final =
+            observed_remove_ring_final || final_generation;
+        if (remove_result == R1_OK) {
+            assert(final_generation);
+        }
+
+        assert(r1_remove_ring_metadata_commit(&reopened) == R1_OK);
+        assert(r1_kv_store_initialize(
+                   &reopened, r1_memory_flash_interface(&attempt)) == R1_OK);
+        assert(r1_kv_store_get(
+                   &reopened, R1_KV_DEV_INFO, persisted,
+                   sizeof persisted, &length) == R1_OK);
+        assert(persisted[R1_DEV_INFO_CONNECTION_FLAGS_OFFSET] ==
+               UINT8_C(0x03));
+        for (size_t index = R1_DEV_INFO_TARGET_FIRST_OFFSET;
+             index < R1_DEV_INFO_TARGET_SECOND_OFFSET +
+                         R1_PEER_ADDRESS_SIZE;
+             ++index) {
+            assert(persisted[index] == UINT8_MAX);
+        }
+        assert(memcmp(persisted + R1_DEV_INFO_PEER_MARKER_OFFSET,
+                      "CAMH", 4u) == 0);
+    }
+    assert(observed_remove_ring_old);
+    assert(observed_remove_ring_intermediate);
+    assert(observed_remove_ring_final);
 
     /* The scheduled disconnect composes with the portable delayed-event
      * scheduler. */
@@ -10077,6 +11035,10 @@ static void test_system_settings_reg1_persistence(void) {
     r1_runtime_set_settings_handler(
         &runtime, capture_runtime_settings, &capture);
     assert(r1_runtime_connect(&runtime, 3u) == R1_OK);
+    static const uint8_t phone_role[] = {1u};
+    const r1_model pair = request(
+        0u, 0x08u, phone_role, sizeof phone_role);
+    assert(runtime_feed_model(&runtime, 3u, &pair) == R1_OK);
     assert(r1_runtime_set_security(&runtime, 3u, true, true, true) == R1_OK);
     static const uint8_t enable[R1_SYSTEM_SETTINGS_BYTES] = {
         0u, 0u, 0u, 0u, R1_SYSTEM_SETTINGS_SWITCH_TYPE_REG1, 1u,
@@ -10225,8 +11187,38 @@ static void test_next_frontier_product_policies(void) {
                true, 0u, true, true, false, &glasses_plan) == R1_OK);
     assert(glasses_plan.schedule_slow_event && glasses_plan.set_ble_slow_mode);
     assert(glasses_plan.slow_delay_ticks == R1_GLASSES_SLOW_DELAY_TICKS);
+    assert(glasses_plan.ble_slow_delay_ticks ==
+           R1_BLE_TASK_SLOW_POLICY_DELAY_TICKS);
     assert(glasses_plan.schedule_dcdc_enable &&
            glasses_plan.dcdc_delay_ticks == R1_GLASSES_DCDC_DELAY_TICKS);
+
+    r1_runtime glasses_runtime;
+    r1_runtime_initialize(&glasses_runtime, NULL, NULL);
+    assert(r1_runtime_connect(&glasses_runtime, 7u) == R1_OK);
+    assert(r1_runtime_set_security(
+               &glasses_runtime, 7u, true, true, true) == R1_OK);
+    assert(r1_runtime_receive_glasses_status(
+               &glasses_runtime, 7u, true, UINT8_C(0x80),
+               &glasses_plan) == R1_ERROR_UNAUTHORIZED);
+    glasses_runtime.links[0].session.role = R1_ROLE_GLASSES;
+    assert(r1_runtime_receive_glasses_status(
+               &glasses_runtime, 7u, true, UINT8_C(0x80),
+               &glasses_plan) == R1_OK);
+    assert(glasses_runtime.glasses_worn &&
+           !glasses_runtime.glasses_secondary_mode);
+    assert(glasses_plan.disable_dcdc_now && glasses_plan.open_touch);
+    assert(r1_runtime_receive_glasses_status(
+               &glasses_runtime, 7u, true, UINT8_C(0x80),
+               &glasses_plan) == R1_OK);
+    assert(!glasses_plan.wear_changed && !glasses_plan.disable_dcdc_now);
+    glasses_runtime.device.system_settings[5] = 1u;
+    assert(r1_runtime_receive_glasses_status(
+               &glasses_runtime, 7u, true, 0u, &glasses_plan) == R1_OK);
+    assert(!glasses_runtime.glasses_worn && glasses_plan.schedule_slow_event);
+    assert(!glasses_plan.schedule_dcdc_enable &&
+           !glasses_plan.disable_dcdc_now);
+    assert(r1_runtime_receive_glasses_status(
+               NULL, 7u, true, 0u, &glasses_plan) == R1_ERROR_ARGUMENT);
 }
 
 static void test_next_frontier_334_342_policies(void) {
@@ -10403,6 +11395,57 @@ static void test_next_frontier_314_328_policies(void) {
     assert(r1_nv_battery_configuration_decode(
                battery_config_bytes, sizeof battery_config_bytes - 1u,
                &battery_configuration) == R1_ERROR_LENGTH);
+
+    uint8_t identity_config[R1_NV_RECOVERY_CONFIG_BYTES];
+    memset(identity_config, UINT8_MAX, sizeof identity_config);
+    static const uint8_t expected_product_serial[R1_NV_PRODUCT_SERIAL_BYTES] = {
+        'R', '1', '-', 'T', 'E', 'S', 'T', '-', '0', '0', '0', '0', '0', '0', '1',
+    };
+    memcpy(identity_config + 31u, expected_product_serial,
+           sizeof expected_product_serial);
+    identity_config[61] = 30u;
+    uint8_t decoded_product_serial[R1_NV_PRODUCT_SERIAL_BYTES];
+    bool product_serial_provisioned = false;
+    assert(r1_nv_product_serial_decode(
+               identity_config, sizeof identity_config,
+               decoded_product_serial,
+               &product_serial_provisioned) == R1_OK);
+    assert(product_serial_provisioned);
+    assert(memcmp(decoded_product_serial, expected_product_serial,
+                  sizeof decoded_product_serial) == 0);
+    identity_config[61] = UINT8_MAX;
+    assert(r1_nv_product_serial_decode(
+               identity_config, sizeof identity_config,
+               decoded_product_serial,
+               &product_serial_provisioned) == R1_OK);
+    assert(!product_serial_provisioned);
+    for (size_t index = 0u; index < sizeof decoded_product_serial; ++index) {
+        assert(decoded_product_serial[index] == UINT8_MAX);
+    }
+    assert(r1_nv_product_serial_decode(
+               NULL, sizeof identity_config, decoded_product_serial,
+               &product_serial_provisioned) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_product_serial_decode(
+               identity_config, sizeof identity_config - 1u,
+               decoded_product_serial,
+               &product_serial_provisioned) == R1_ERROR_LENGTH);
+    bool factory_mode = false;
+    identity_config[112] = R1_NV_FACTORY_MODE_MARKER;
+    assert(r1_nv_factory_mode_decode(
+               identity_config, sizeof identity_config,
+               &factory_mode) == R1_OK);
+    assert(factory_mode);
+    identity_config[112] = 0u;
+    assert(r1_nv_factory_mode_decode(
+               identity_config, sizeof identity_config,
+               &factory_mode) == R1_OK);
+    assert(!factory_mode);
+    assert(r1_nv_factory_mode_decode(
+               NULL, sizeof identity_config,
+               &factory_mode) == R1_ERROR_ARGUMENT);
+    assert(r1_nv_factory_mode_decode(
+               identity_config, sizeof identity_config - 1u,
+               &factory_mode) == R1_ERROR_LENGTH);
 
     static const uint8_t accelerometer_calibration_bytes[] = {
         0x0au, 0x00u, 0xecu, 0xffu, 0x1eu, 0x00u,
@@ -10666,6 +11709,329 @@ static void test_next_frontier_264_274_policies(void) {
     assert(r1_ep_scan_cursor(records, sizeof records, &scan) == R1_OK);
     assert(scan.first_free_found && scan.first_free_index == 5u);
     assert(scan.write_cursor == 5u && !scan.all_records_have_magic);
+
+    uint8_t provider_records[R1_EP_PARTITION_BYTES];
+    r1_memory_flash ep_memory;
+    r1_memory_flash_initialize(
+        &ep_memory, provider_records, sizeof provider_records);
+    memcpy(provider_records, records, sizeof provider_records);
+    const r1_flash ep_flash = r1_memory_flash_interface(&ep_memory);
+    r1_ep_scan_result provider_scan;
+    assert(r1_ep_scan_flash_cursor(
+               &ep_flash, 0u, &provider_scan) == R1_OK);
+    assert(provider_scan.write_cursor == scan.write_cursor);
+    assert(provider_scan.first_free_index == scan.first_free_index);
+    assert(provider_scan.latest_timestamp_index ==
+           scan.latest_timestamp_index);
+    assert(provider_scan.latest_timestamp == scan.latest_timestamp);
+    assert(provider_scan.first_free_found == scan.first_free_found);
+    assert(provider_scan.latest_nonzero_timestamp_found ==
+           scan.latest_nonzero_timestamp_found);
+    assert(provider_scan.all_records_have_magic ==
+           scan.all_records_have_magic);
+    assert(r1_ep_scan_flash_cursor(
+               &ep_flash, 1u, &provider_scan) == R1_ERROR_LENGTH);
+    assert(r1_ep_scan_flash_cursor(
+               NULL, 0u, &provider_scan) == R1_ERROR_ARGUMENT);
+    assert(r1_ep_scan_flash_cursor(
+               &ep_flash, 0u, NULL) == R1_ERROR_ARGUMENT);
+
+    static uint8_t log_bytes[R1_LOG_BIN_PARTITION_BYTES];
+    r1_memory_flash log_memory;
+    r1_memory_flash_initialize(&log_memory, log_bytes, sizeof log_bytes);
+    memset(log_bytes + R1_LOG_BIN_SECTOR_BYTES, 0,
+           R1_LOG_BIN_SECTOR_BYTES);
+    const r1_flash log_flash = r1_memory_flash_interface(&log_memory);
+    r1_log_bin_store log_store;
+    assert(r1_log_bin_bind(
+               &log_store, &log_flash, 0u, sizeof log_bytes) == R1_OK);
+    assert(r1_log_bin_sector_count(&log_store) ==
+           R1_LOG_BIN_SECTOR_COUNT);
+    assert(r1_log_bin_initialize(&log_store) == R1_OK);
+    assert(log_store.current_sector == 0u && log_store.sector_offset == 0u);
+    const uint8_t log_record[8] = {1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u};
+    assert(r1_log_bin_write(
+               &log_store, log_record, sizeof log_record) == R1_OK);
+    assert(log_store.current_sector == 0u &&
+           log_store.sector_offset == sizeof log_record);
+    assert(memcmp(log_bytes, log_record, sizeof log_record) == 0);
+    assert(log_memory.erase_operations == 1u);
+    for (size_t index = R1_LOG_BIN_SECTOR_BYTES;
+         index < 2u * R1_LOG_BIN_SECTOR_BYTES; ++index) {
+        assert(log_bytes[index] == UINT8_MAX);
+    }
+
+    static uint8_t page_record[R1_LOG_BIN_SECTOR_BYTES];
+    memset(page_record, UINT8_C(0x5a), sizeof page_record);
+    assert(r1_log_bin_write(
+               &log_store, page_record,
+               R1_LOG_BIN_SECTOR_BYTES - sizeof log_record) == R1_OK);
+    assert(log_store.current_sector == 0u &&
+           log_store.sector_offset == R1_LOG_BIN_SECTOR_BYTES);
+    assert(r1_log_bin_write(
+               &log_store, log_record, sizeof log_record) == R1_OK);
+    assert(log_store.current_sector == 1u &&
+           log_store.sector_offset == sizeof log_record);
+    assert(memcmp(
+               log_bytes + R1_LOG_BIN_SECTOR_BYTES,
+               log_record, sizeof log_record) == 0);
+    assert(r1_log_bin_write(
+               &log_store, log_record, 0u) == R1_ERROR_LENGTH);
+    assert(r1_log_bin_write(
+               &log_store, page_record,
+               R1_LOG_BIN_SECTOR_BYTES + 1u) == R1_ERROR_LENGTH);
+
+    static uint8_t full_log_bytes[R1_LOG_BIN_PARTITION_BYTES];
+    r1_memory_flash full_log_memory;
+    r1_memory_flash_initialize(
+        &full_log_memory, full_log_bytes, sizeof full_log_bytes);
+    memset(full_log_bytes, 0, sizeof full_log_bytes);
+    const r1_flash full_log_flash =
+        r1_memory_flash_interface(&full_log_memory);
+    r1_log_bin_store full_log_store;
+    assert(r1_log_bin_bind(
+               &full_log_store, &full_log_flash, 0u,
+               sizeof full_log_bytes) == R1_OK);
+    assert(r1_log_bin_initialize(&full_log_store) == R1_OK);
+    assert(full_log_store.current_sector == 0u);
+    assert(r1_log_bin_write(
+               &full_log_store, log_record, sizeof log_record) == R1_OK);
+    assert(full_log_memory.erase_operations == 2u);
+    assert(memcmp(full_log_bytes, log_record, sizeof log_record) == 0);
+
+    static uint8_t structured_bytes[R1_STRUCTURED_LOG_CACHE_BYTES];
+    r1_structured_log_cache structured;
+    assert(r1_structured_log_cache_initialize(
+               &structured, structured_bytes,
+               sizeof structured_bytes) == R1_OK);
+    assert(r1_structured_log_cache_count(&structured) == 0u);
+    assert(r1_structured_log_cache_free(&structured) ==
+           R1_STRUCTURED_LOG_CACHE_BYTES);
+    assert(r1_structured_log_mode_get(&structured) ==
+           R1_STRUCTURED_LOG_MODE_STORAGE);
+    assert(structured.severity_threshold == 3u);
+
+    const r1_structured_log_argument typed_arguments[2] = {
+        {.type = R1_STRUCTURED_LOG_ARGUMENT_U32,
+         .value.u32 = UINT32_C(0x11223344)},
+        {.type = R1_STRUCTURED_LOG_ARGUMENT_U32,
+         .value.u32 = UINT32_C(0x55667788)},
+    };
+    const uint32_t typed_metadata = (UINT32_C(2) << 26u) |
+        (UINT32_C(2) << 22u) | UINT32_C(0x12345);
+    r1_structured_log_encode_result encoded;
+    assert(r1_structured_log_encode_typed(
+               &structured, typed_metadata, UINT32_C(1234),
+               UINT32_C(0xa1b2c3d4), typed_arguments, 2u,
+               &encoded) == R1_OK);
+    assert(encoded.appended && !encoded.filtered &&
+           encoded.record_bytes == 20u &&
+           encoded.action == R1_STRUCTURED_LOG_ACTION_NONE);
+    uint8_t encoded_record[R1_STRUCTURED_LOG_RECORD_BYTES] = {0};
+    assert(r1_structured_log_cache_read(
+               &structured, encoded_record, encoded.record_bytes,
+               false) == R1_OK);
+    const uint8_t expected_prefix[12] = {
+        0x7bu, 0x00u, 0xeau, 0xdcu,
+        0xd4u, 0xc3u, 0xb2u, 0xa1u,
+        (uint8_t)typed_metadata, (uint8_t)(typed_metadata >> 8u),
+        (uint8_t)(typed_metadata >> 16u),
+        (uint8_t)(typed_metadata >> 24u),
+    };
+    assert(memcmp(encoded_record, expected_prefix,
+                  sizeof expected_prefix) == 0);
+    assert(encoded_record[12] == 0x44u && encoded_record[15] == 0x11u &&
+           encoded_record[16] == 0x88u && encoded_record[19] == 0x55u);
+    assert(r1_structured_log_cache_count(&structured) == 20u);
+    assert(r1_structured_log_cache_read(
+               &structured, encoded_record, 20u, true) == R1_OK);
+    assert(r1_structured_log_cache_count(&structured) == 0u);
+
+    const r1_structured_log_argument string_argument = {
+        .type = R1_STRUCTURED_LOG_ARGUMENT_STRING,
+        .value.string = "0123456789abcdefghijkl",
+    };
+    assert(r1_structured_log_encode_typed(
+               &structured, (UINT32_C(4) << 29u) |
+                   (UINT32_C(1) << 22u), 0u, 0u,
+               &string_argument, 1u, &encoded) == R1_OK);
+    assert(encoded.record_bytes == 28u);
+    assert(r1_structured_log_cache_read(
+               &structured, encoded_record, encoded.record_bytes,
+               true) == R1_OK);
+    assert(memcmp(encoded_record + 12u, "0123456789abcdef", 16u) == 0);
+
+    const r1_structured_log_argument format_arguments[2] = {
+        string_argument,
+        {.type = R1_STRUCTURED_LOG_ARGUMENT_U64,
+         .value.u64 = UINT64_C(0x1122334455667788)},
+    };
+    assert(r1_structured_log_encode_format(
+               &structured, UINT32_C(2) << 22u, 9u, 10u,
+               "%s %lld", format_arguments, 2u, &encoded) == R1_OK);
+    assert(encoded.record_bytes == 32u);
+    assert(r1_structured_log_cache_read(
+               &structured, encoded_record, encoded.record_bytes,
+               true) == R1_OK);
+    assert(memcmp(encoded_record + 12u, "6789abcdefghijkl", 16u) == 0);
+    assert(encoded_record[28] == 0x88u && encoded_record[31] == 0x55u);
+
+    r1_structured_log_threshold_set(&structured, 3u);
+    assert(r1_structured_log_encode_typed(
+               &structured, UINT32_C(4) << 26u, 0u, 0u,
+               NULL, 0u, &encoded) == R1_OK);
+    assert(encoded.filtered && !encoded.appended &&
+           r1_structured_log_cache_count(&structured) == 0u);
+
+    uint8_t small_cache_bytes[10] = {0};
+    r1_structured_log_cache small_cache;
+    assert(r1_structured_log_cache_initialize(
+               &small_cache, small_cache_bytes,
+               sizeof small_cache_bytes) == R1_OK);
+    const uint8_t wrap_input[8] = {0u, 1u, 2u, 3u, 4u, 5u, 6u, 7u};
+    r1_structured_log_action action;
+    assert(r1_structured_log_cache_append(
+               &small_cache, wrap_input, sizeof wrap_input,
+               &action) == R1_OK);
+    assert(r1_structured_log_cache_append(
+               &small_cache, wrap_input, 1u,
+               &action) == R1_ERROR_CAPACITY);
+    assert(r1_structured_log_cache_read(
+               &small_cache, encoded_record, 6u, true) == R1_OK);
+    assert(r1_structured_log_cache_append(
+               &small_cache, wrap_input, 5u,
+               &action) == R1_OK);
+    assert(r1_structured_log_cache_read(
+               &small_cache, encoded_record, 7u, true) == R1_OK);
+    const uint8_t expected_wrap[7] = {6u, 7u, 0u, 1u, 2u, 3u, 4u};
+    assert(memcmp(encoded_record, expected_wrap, sizeof expected_wrap) == 0);
+
+    static uint8_t persist_page[R1_STRUCTURED_LOG_PERSIST_BYTES];
+    memset(persist_page, UINT8_C(0x39), sizeof persist_page);
+    assert(r1_structured_log_cache_append(
+               &structured, persist_page, sizeof persist_page,
+               &action) == R1_OK);
+    assert(action == R1_STRUCTURED_LOG_ACTION_PERSIST_READY);
+    bool persisted = true;
+    static uint8_t persist_scratch[R1_STRUCTURED_LOG_PERSIST_BYTES];
+    assert(r1_structured_log_periodic_persist(
+               &structured, &log_store,
+               R1_STRUCTURED_LOG_PERSIST_GATE_TICKS, false,
+               persist_scratch, &persisted) == R1_OK);
+    assert(!persisted && r1_structured_log_cache_count(&structured) == 0u);
+    assert(r1_structured_log_cache_append(
+               &structured, persist_page, sizeof persist_page,
+               &action) == R1_OK);
+    assert(r1_structured_log_periodic_persist(
+               &structured, &log_store,
+               R1_STRUCTURED_LOG_PERSIST_GATE_TICKS + 1u, true,
+               persist_scratch, &persisted) == R1_OK);
+    assert(!persisted && r1_structured_log_cache_count(&structured) ==
+           R1_STRUCTURED_LOG_PERSIST_BYTES);
+    assert(r1_structured_log_periodic_persist(
+               &structured, &log_store,
+               R1_STRUCTURED_LOG_PERSIST_GATE_TICKS + 1u, false,
+               persist_scratch, &persisted) == R1_OK);
+    assert(persisted && r1_structured_log_cache_count(&structured) == 0u);
+
+    static uint8_t export_flash_bytes[
+        R1_EP_PARTITION_BYTES + R1_LOG_BIN_PARTITION_BYTES];
+    r1_memory_flash export_memory;
+    r1_memory_flash_initialize(
+        &export_memory, export_flash_bytes, sizeof export_flash_bytes);
+    export_flash_bytes[0] = R1_EP_RECORD_MAGIC;
+    const uint32_t export_log_offset = R1_EP_PARTITION_BYTES;
+    memset(export_flash_bytes + export_log_offset, UINT8_C(0x10),
+           R1_LOG_BIN_SECTOR_BYTES);
+    memset(export_flash_bytes + export_log_offset +
+               R1_LOG_BIN_SECTOR_BYTES, UINT8_C(0x11),
+           R1_LOG_BIN_SECTOR_BYTES);
+    memset(export_flash_bytes + export_log_offset +
+               3u * R1_LOG_BIN_SECTOR_BYTES, UINT8_C(0x13),
+           R1_LOG_BIN_SECTOR_BYTES);
+    const r1_flash export_flash = r1_memory_flash_interface(&export_memory);
+    uint8_t export_cache_bytes[32] = {0};
+    r1_structured_log_cache export_cache;
+    assert(r1_structured_log_cache_initialize(
+               &export_cache, export_cache_bytes,
+               sizeof export_cache_bytes) == R1_OK);
+    const uint8_t cache_tail[] = "CACHE";
+    assert(r1_structured_log_cache_append(
+               &export_cache, cache_tail, sizeof cache_tail - 1u,
+               &action) == R1_OK);
+    const uint8_t crash_tail[] = "CRASH";
+    r1_log_export_snapshot export_snapshot;
+    assert(r1_log_export_snapshot_prepare(
+               &export_snapshot, &export_flash, 0u, export_log_offset,
+               &export_cache, crash_tail, sizeof crash_tail - 1u,
+               persist_scratch) == R1_OK);
+    assert(export_snapshot.active && export_snapshot.info.eligible &&
+           export_snapshot.info.ep_magic_present);
+    assert(export_snapshot.info.log_sector_count == 3u &&
+           export_snapshot.log_sector_order[0] == 3u &&
+           export_snapshot.log_sector_order[1] == 0u &&
+           export_snapshot.log_sector_order[2] == 1u);
+    assert(export_snapshot.info.cache_bytes == 5u &&
+           export_snapshot.info.crash_bytes == 5u &&
+           export_snapshot.info.total_bytes ==
+               R1_EP_PARTITION_BYTES + 3u * R1_LOG_BIN_SECTOR_BYTES + 10u);
+
+    static uint8_t expected_export[
+        R1_EP_PARTITION_BYTES + 3u * R1_LOG_BIN_SECTOR_BYTES + 10u];
+    memcpy(expected_export, export_flash_bytes, R1_EP_PARTITION_BYTES);
+    memcpy(expected_export + R1_EP_PARTITION_BYTES,
+           export_flash_bytes + export_log_offset +
+               3u * R1_LOG_BIN_SECTOR_BYTES,
+           R1_LOG_BIN_SECTOR_BYTES);
+    memcpy(expected_export + R1_EP_PARTITION_BYTES +
+               R1_LOG_BIN_SECTOR_BYTES,
+           export_flash_bytes + export_log_offset,
+           2u * R1_LOG_BIN_SECTOR_BYTES);
+    memcpy(expected_export + R1_EP_PARTITION_BYTES +
+               3u * R1_LOG_BIN_SECTOR_BYTES,
+           cache_tail, sizeof cache_tail - 1u);
+    memcpy(expected_export + R1_EP_PARTITION_BYTES +
+               3u * R1_LOG_BIN_SECTOR_BYTES + sizeof cache_tail - 1u,
+           crash_tail, sizeof crash_tail - 1u);
+    assert(export_snapshot.info.checksum == r1_crc32_castagnoli(
+               expected_export, sizeof expected_export));
+    uint8_t export_readback[24] = {0};
+    const uint32_t cross_ep = R1_EP_PARTITION_BYTES - 2u;
+    assert(r1_log_export_snapshot_read(
+               &export_snapshot, cross_ep, export_readback,
+               sizeof export_readback) == R1_OK);
+    assert(memcmp(export_readback, expected_export + cross_ep,
+                  sizeof export_readback) == 0);
+    const uint32_t cross_log = R1_EP_PARTITION_BYTES +
+        R1_LOG_BIN_SECTOR_BYTES - 4u;
+    assert(r1_log_export_snapshot_read(
+               &export_snapshot, cross_log, export_readback,
+               sizeof export_readback) == R1_OK);
+    assert(memcmp(export_readback, expected_export + cross_log,
+                  sizeof export_readback) == 0);
+    const uint32_t tail_offset = (uint32_t)sizeof expected_export - 10u;
+    assert(r1_log_export_snapshot_read(
+               &export_snapshot, tail_offset, export_readback, 10u) == R1_OK);
+    assert(memcmp(export_readback, "CACHECRASH", 10u) == 0);
+    assert(r1_log_export_snapshot_read(
+               &export_snapshot, (uint32_t)sizeof expected_export,
+               export_readback, 1u) == R1_ERROR_LENGTH);
+    r1_log_export_snapshot_finish(&export_snapshot);
+    assert(!export_snapshot.active);
+    assert(r1_log_export_snapshot_read(
+               &export_snapshot, 0u, export_readback, 1u) ==
+           R1_ERROR_ARGUMENT);
+
+    r1_memory_flash_initialize(
+        &export_memory, export_flash_bytes, sizeof export_flash_bytes);
+    assert(r1_structured_log_cache_initialize(
+               &export_cache, export_cache_bytes,
+               sizeof export_cache_bytes) == R1_OK);
+    assert(r1_log_export_snapshot_prepare(
+               &export_snapshot, &export_flash, 0u, export_log_offset,
+               &export_cache, NULL, 0u, persist_scratch) == R1_OK);
+    assert(!export_snapshot.active && !export_snapshot.info.eligible &&
+           export_snapshot.info.total_bytes == 0u);
     assert(r1_ep_scan_cursor(records, sizeof records - 1u, &scan)
            == R1_ERROR_LENGTH);
     assert(r1_ep_scan_cursor(NULL, sizeof records, &scan) == R1_ERROR_ARGUMENT);
@@ -11648,6 +13014,9 @@ int main(void) {
     test_runtime_roles();
     test_runtime_role_occupancy();
     test_runtime_touch_effect();
+    test_runtime_advertising_targets_effect();
+    test_runtime_nv_recovery_effect();
+    test_runtime_remove_ring_effect();
     test_runtime_eus_bridge();
     test_bae8_event_route();
     test_bae8_connection_event_plan();
@@ -11674,6 +13043,7 @@ int main(void) {
     test_export_planner();
     test_kv_snapshot_store();
     test_nv_recovery_merge();
+    test_nv_recovery_transaction();
     test_sleep_database();
     test_sleep_persistence_bridge();
     test_validated_sleep_delivery_plans();

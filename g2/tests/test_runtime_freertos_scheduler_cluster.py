@@ -286,22 +286,22 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 142_986,
+        "overlay_size": 143_227,
         "overlay_sha256": (
-            "1b0fc521cc8964da6525b7f7dce99060d07f5671f0038f37bcd998a56422a49f"
+            "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
         ),
-        "component_size": 3_666_382,
+        "component_size": 3_666_623,
         "component_sha256": (
-            "a4552ff210b6af33b7826a6b9aaefa6e01c7e6e976c9a852498570ededcf058f"
+            "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
         ),
-        "package_size": 4_444_468,
+        "package_size": 4_445_117,
         "package_sha256": (
-            "53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6"
+            "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"
         ),
-        "package_accounting": (143_245, 98_824, 4_202_399),
+        "package_accounting": (143_885, 99_171, 4_202_061),
         # Builder reports exclude isolated/non-emitted registry categories.
-        "function_count": 779,
-        "patch_count": 720,
+        "function_count": 786,
+        "patch_count": 727,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -328,22 +328,20 @@ PROFILES = {
         # absent from the rollback overlay and are therefore not deleted
         # here).
         "current_rollback_net_tail_growth": 16_360,
-        "later_tail_growth": 20_184,
+        "later_tail_growth": 20_833,
         "legacy_reset_unordered_tail_growth": 388,
         # Active rollback build from the current production registry.
         "legacy_semaphore_layout": {
-            "overlay_size": 138_106,
+            "overlay_size": 138_514,
             "overlay_sha256": (
-                "49aa7131b5f5c07c34441569beab22a5"
-                "2e98cca2376788b0a35ace6428afb6ae"
+                "d4ce634f265e51bd43be524a246a0d0aed5583fcee9a6e94246d1aa240a03e81"
             ),
-            "component_size": 3_661_502,
+            "component_size": 3_661_910,
             "component_sha256": (
-                "cb13440dd758eac612d5d55b1ce37cdf"
-                "bad251f656841975109dba475069e4b4"
+                "a97104e357a996b5c38d0c3d28901309215a505bf054c3209d591f2a843f1e58"
             ),
-            "function_count": 749,
-            "patch_count": 691,
+            "function_count": 753,
+            "patch_count": 695,
             "function_offset": 106_572,
             "function_size": 596,
             "patch_payload_offset": 40_036,
@@ -384,17 +382,17 @@ PROFILES = {
         # replacements.  The sha below authenticates the current fail-closed
         # reconstruction; the original recording was
         # 4e0a7f0604081d056f5e9c94142db2a4db5e3419f6e8a0cc98f82794eb37823c.
-        "prior_component_size": 3_639_438,
+        "prior_component_size": 3_639_846,
         "prior_component_sha256": (
-            "a2fa6903cf91b32ac843aab99c2dd5ba3bd4228f9d63d85c30504a88a09279c8"
+            "ed6ab911090f64dec9473c2a5e07ff7cde877e09f3f688a9d51b6cbac6af51ed"
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 143_168,
+            "source_owned_bytes": 143_409,
             "source_owned_in_place_bytes": 182,
-            "generated_patch_site_bytes": 98_402,
-            "replaced_stock_function_bytes": 98_580,
-            "opaque_base_bytes": 3_424_328,
+            "generated_patch_site_bytes": 99_192,
+            "replaced_stock_function_bytes": 99_370,
+            "opaque_base_bytes": 3_423_990,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -774,7 +772,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         )
         self.assertEqual(
             (len(self.config["functions"]), len(self.config["patch_sites"])),
-            (783, 724),
+            (790, 731),
         )
 
         for leaf in (
@@ -1141,7 +1139,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
     def test_manifest_is_gap_free_and_owns_each_stock_and_source_span(self) -> None:
         main = self.manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1256)
+        self.assertEqual(len(regions), 1274)
         self.assertEqual(main["source_appended_boundary"], OFFICIAL_SIZE)
         ordered = sorted(regions, key=lambda region: region["file_offset"])
         self.assertEqual(ordered[0]["file_offset"], 0)
@@ -1429,6 +1427,10 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             "replace_iar_frexpf_bits",
             "replace_iar_frexpf",
             "replace_iar_ldexpf",
+            # KVDB ALS-scale clean-room closure admitted after the milestone.
+            "replace_kvdb_als_scale_default_initialize",
+            "replace_kvdb_als_scale_load_and_migrate",
+            "replace_kvdb_write_als_scale",
         }
         self.assertEqual(
             set(current_patches),

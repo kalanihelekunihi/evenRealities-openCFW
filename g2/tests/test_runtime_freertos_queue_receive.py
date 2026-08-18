@@ -86,7 +86,7 @@ class RuntimeFreeRTOSQueueReceiveTests(unittest.TestCase):
             self.assertEqual((leaf["expected"]["size"], leaf["expected"]["offset"]), (size, apple_offset))
             self.assertEqual(leaf["toolchain_profiles"]["linux-clang"]["expected"]["offset"], linux_offset)
             self.assertTrue(leaf["strict_relocation_contract"])
-        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (142986, 3666382))
+        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (143227, 3666623))
         manifest = json.loads(MANIFEST.read_text())
         regions = manifest["component_overrides"]["apollo_main"]["regions"]
         receive = next(x for x in regions if x["name"] == "apollo_freertos_queue_receive_source_leaf")

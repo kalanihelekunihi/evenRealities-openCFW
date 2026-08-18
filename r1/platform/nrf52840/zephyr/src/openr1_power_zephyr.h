@@ -8,9 +8,9 @@
  * control or a measurement of physical regulator state. */
 int openr1_power_zephyr_initialize(void);
 
-/* Applies the normalized system-settings type-zero action. The glasses-wear
- * automatic policy remains unbound until its typed wear/power lifecycle is
- * available. */
+/* Applies the normalized system-settings type-zero action. The authenticated
+ * glasses-status channel binds the recovered immediate-disable and delayed-
+ * enable automatic policy through this same readback-checked provider. */
 int openr1_power_zephyr_set_reg1(bool enabled);
 int openr1_power_zephyr_get_reg1(bool *enabled);
 

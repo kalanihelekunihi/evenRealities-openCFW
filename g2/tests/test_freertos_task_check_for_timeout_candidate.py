@@ -169,15 +169,13 @@ PRODUCTION_PINS = {
 }
 
 PRODUCTION_APPLE_AGGREGATE = {
-    "overlay_size": 142_986,
+    "overlay_size": 143_227,
     "overlay_sha256": (
-        "3d5c9fe87fd46cbc40bb5670653f45d3"
-            "d61f9d777168aa47b70fb10712698ab4"
+        "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
     ),
-    "component_size": 3_666_382,
+    "component_size": 3_666_623,
     "component_sha256": (
-        "a4552ff210b6af33b7826a6b9aaefa6e"
-            "01c7e6e976c9a852498570ededcf058f"
+        "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
     ),
 }
 

@@ -11,6 +11,12 @@ also contains 69 focused module analyzers, 69 matching tests, 69 function maps,
 and 70 provenance manifests. No retained reusable Cordio path or focused
 third-party module remains unclassified.
 
+2026-08-18 note: the `analyze_g2_cordio_ll_sea_census` analyzer/test pair added
+by the 0x5Dxxxx link-layer-island census is a sea-attribution census, not a
+per-module source audit, so the closure verifier now excludes it from the
+69-module census glob (alongside the pre-existing closure/source-map/version
+exclusions). The module-audit count itself is unchanged.
+
 A copied-path follow-up closes an additional source-ownership blind spot outside
 that 36-path `third_party` census. The retained product path
 `platform\ble\profiles\gatt\profile_gatt.c` is Packetcraft's six-function

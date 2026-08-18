@@ -17,17 +17,38 @@ The custom board layout is:
 
 | Region | Address range | Policy |
 | --- | --- | --- |
-| source-built MCUboot | `0x00000000..<0x0000C000` | ECDSA-P256 validation on every boot |
-| signed openR1 application | `0x0000C000..<0x000D1000` | Zephyr host/controller and all retained reconstructed modules |
-| openR1 Bluetooth settings | `0x000D1000..<0x000D4000` | three-sector Zephyr NVS store for persistent SMP bond, identity, and CCC state |
+| source-built MCUboot + BLE recovery | `0x00000000..<0x00027000` | ECDSA-P256 validation plus retained source-built recovery transport |
+| signed openR1 application | `0x00027000..<0x000D1000` | Zephyr host/controller and all retained reconstructed modules |
+| openR1 Bluetooth settings | `0x000D1000..<0x000D4000` | first install accepts only exact retail FDS geometry or erased pages, backs it up, then clears it for a fresh three-sector Zephyr NVS store; owner re-pairing required |
 | recovered product data | `0x000D4000..<0x000F8000` | complete 36-page data extent, preserved |
-| migration reserve | `0x000F8000..<0x00100000` | held for a hardware-tested retail-layout migration |
+| erased legacy window | `0x000F8000..<0x00100000` | former retail bootloader/settings pages; must contain only `0xFF` after install |
 
-MCUboot is configured as a single-slot boot path and validates slot 0 at every
-boot. This makes the source-built bundle a bootable-image replacement rather
-than an application that calls into a preinstalled SoftDevice. The default
+MCUboot validates slot 0 at every boot. Its boot partition also contains the
+source-built `OPENR1-RECOVERY` GATT loader. An authenticated application
+`otaStart` request selects it through one-shot GPREGRET, and an invalid or
+interrupted application enters it automatically. The loader accepts only
+sequential writes within slot 0; MCUboot still verifies the owner signature
+before execution. It progressively erases pages so loss of power cannot damage
+the loader itself, and it erases/verifies the former retail executable window
+before accepting an upload. This makes the source-built bundle a bootable-image
+replacement rather than an application that calls into a preinstalled
+SoftDevice. The default
 MCUboot development key is transparent and suitable only for development;
 `ZEPHYR_SIGNING_KEY` supplies an owner-controlled P-256 trust anchor.
+
+The application dispatcher keeps the recovered 32-response and 1,100-byte
+per-model bounds, but stores admitted responses in one packed 11,950-byte
+arena derived from the exact 50-fragment shared EUS queue. This removes the
+unreachable 35,200-byte worst-case matrix without lowering any protocol
+limit. Maximum activity/sleep and fragment-saturation tests prove dense
+packing and rollback. In the owner build this reduced linked RAM from 256,690
+bytes (97.92%) to 233,586 bytes (89.11%), leaving 28,558 bytes for physical
+stack/high-water and saturation validation. Packaging derives this extent from
+the unique linker-map RAM boundary symbols, records it in `manifest.json`, and
+refuses less than 16 KiB of headroom. The independent bundle verifier enforces
+the same origin, total size, arithmetic, and minimum; unit tests cover the exact
+threshold, a one-byte violation, missing/duplicate symbols, and an invalid
+origin.
 
 ## Retained recovered corpus
 
@@ -39,11 +60,22 @@ the CMake source list and linker `KEEP` list to contain the same exact corpus.
 
 The BAE8 service is implemented over Zephyr's source-built Bluetooth host and
 controller. It exposes service `BAE80001` and characteristics `BAE80010` through
-`BAE80013`, routes channel 2 into `r1_runtime_receive_eus`, keeps channel 1
-fail-closed, and uses a completion-tracked four-slot notification pool. Zephyr
+`BAE80013`, routes channel 2 into `r1_runtime_receive_eus`, admits only the
+bounded independently authorized channel-1 glasses-status opcode `0x89`, and
+uses a completion-tracked four-slot notification pool. Zephyr
 settings are loaded after Bluetooth initialization and before advertising, so
 SMP bonds, local identity, and CCC state survive restart in the dedicated NVS
 partition.
+Product authorization is stored separately in that partition as a
+CRC-protected owner identity. The first completed bonded pairing may enroll it;
+transport encryption, a restored bond, and `pairAuth` cannot create or replace
+it. Identity resolution reapplies the allowlist on reconnect, malformed records
+fail closed, and a local-only revocation API deletes the record, removes the
+bond, and disconnects the owner. The portable state loader proves reboot
+reconstruction for only the exact identity, rejects every truncated record and
+all 96 single-bit mutations, and evicts an already-loaded RAM owner before
+marking a malformed settings replay corrupt. No BLE command exposes enrollment
+or revocation.
 
 The product power adapter also closes the recovered direct REG1 action without
 an S140 SVC. Zephyr's source SoC initialization and the explicit product startup
@@ -51,8 +83,16 @@ both enable the nRF52840 main DC/DC converter before Bluetooth starts. A changed
 authorized type-zero system setting first commits its normalized flag to
 `kv.bin`, then writes and reads back `POWER.DCDCEN` through the pinned Nordic
 source HAL. This is an enable control, not a CPU-frequency or physical-regulator
-measurement. The separate glasses-wear automatic policy remains unbound until
-its wear, touch-lease, and shared-power lifecycle is source-bound.
+measurement. The bounded channel-1 opcode-`0x89` binding requires an encrypted,
+bonded, independently authorized glasses-role link, then applies the recovered
+immediate REG1 disable and exact `0x7800`-tick delayed enable policy. It also
+opens the wear touch lease and releases it through the exact delayed work.
+Secondary-mode entry immediately requests the recovered `{16,16,2,600}` BLE
+connection profile; exit cancels that request and applies the recovered
+`{72,84,4,600}` profile after exactly `0x2800` ticks. Disconnect cancels pending
+work and execution revalidates the glasses role. Other channel-1 BC/eAT handlers
+remain fail-closed. Physical regulator, radio timing, and coexistence behavior
+remains an owned-hardware validation gate.
 
 The source nRF SAADC driver is configured with the recovered physical routing
 and conversion geometry: AIN5/P0.29 battery and AIN3/P0.05 PMIC current at
@@ -202,11 +242,46 @@ The ZIP contains only:
 provider files, address-range violations, mismatched build configurations, and
 invalid ECDSA signatures. It also parses the final linker map and rejects any
 reconstructed object without a nonempty loadable application span. It separately
-requires nonempty linker-map spans for all Bosch/ST motion, ST NFC, FlashDB/FAL
+requires nonempty linker-map spans for all Bosch/ST motion, reconstructed QMA motion, ST NFC, FlashDB/FAL
 health-storage, and 16 Goodix source-provider/port objects.
 `tools/verify_zephyr_bundle.py` independently checks
 every member hash, the BIN/HEX identity, canonical HEX union, MCUboot hash TLV,
-P-256 signature, and public-key fingerprint.
+P-256 signature, public-key fingerprint, and the exact machine-readable deployment
+contract. That contract forbids mass erase, limits installation writes below
+`0x000D1000`, requires sector erase of the complete
+`0x00000000..<0x000D4000` boot/application/settings extent so no retail
+executable bytes survive in sparse image gaps or the unused tail and no retail
+FDS bytes are mounted as Zephyr NVS, preserves only product data, holds reset
+through full readback, and requires a complete preflash internal-flash backup.
+It also requires a separate exact backup of the complete architected 0x308-byte
+nRF52840 UICR register extent, forbids installation from
+changing UICR, and requires a byte-identical post-install UICR readback.
+
+`tools/prepare_zephyr_deployment.py` consumes that verified bundle plus an exact
+1-MiB recovery basis and exact 0x308-byte architected UICR backup. An optional
+mixed-provenance record is independently checked page-by-page: only the retail
+memory-isolated `0x00000..<0x27000` extent may be pinned reconstruction, with
+the two source-proven MBR words overlaid from the matching live UICR. All 216
+readable pages through `0xFE000` must be live ACE reads; the ACL-protected
+primary settings page may only mirror the CRC-valid live backup under Nordic's
+pinned write-and-backup source plus prior same-device identity evidence. The
+complete retail application and owner bootloader must have byte-exact
+official-image matches. It classifies the three settings pages as either the
+exact two-data/one-swap Nordic FDS geometry or fully erased, rejects unknown or
+torn layouts, and records their page hashes and non-erased byte counts. It
+hashes all seven recovered product partitions and the legacy reserve; records
+the bytes before and expected after installation; and emits the original binary backup, a canonical full
+internal-flash recovery HEX, the original UICR backup, a separate canonical
+UICR recovery HEX, the exact expected 1-MiB post-install image, and
+`deployment-plan.json`. `tools/verify_zephyr_deployment.py` independently
+rebuilds the erase/write result from the verified bundle and original backup,
+rejects altered package artifacts, and byte-compares a supplied post-flash
+readback—including erased gaps and all preserved regions—while separately
+requiring UICR to remain byte-identical. When supplied post-recovery readbacks,
+it requires every internal-flash and UICR byte to match the original backups.
+Neither tool discovers, connects to, erases, or flashes hardware. The separate
+recovery artifacts still require an authorized debug path; UICR must be erased
+through that path before its recovery HEX is restored.
 
 The build inputs and unsigned application are deterministic for an identical
 pinned workspace, but the pinned MCUboot `imgtool` signer requests randomized
@@ -221,7 +296,15 @@ validated against its recorded hashes and bundled public key.
 This closes the opaque BLE/controller and bootloader dependency, not all device
 integration. The Zephyr target presently binds BAE8, the portable runtime,
 direct NVMC access to the recovered 36-page product region, `kv.bin`, pinned
-FlashDB/FAL `health.db`, `sleep.db`, REG1 control, exact SAADC acquisition, the Bosch/ST motion bus,
+FlashDB/FAL `health.db`, `sleep.db`, payload-redacting `ep.bin` startup
+recovery, the bounded twelve-page `log.bin` circular writer through an
+internal-only append seam, the complete bounded structured-log record/cache path, and the exact
+composite EP/log/cache/optional-crash diagnostic virtual-file source. The latter paths
+uses the recovered 8,192-byte cache and aligned 4,096-byte scratch geometry, emits a source-visible
+startup record, service the exact periodic persistence path, freeze producers for snapshot life,
+and admit reads only for one encrypted, bonded, independently authorized phone-role connection.
+Disconnect or authorization loss releases the guard. No undocumented GATT command, raw-flash
+surface, or BLE exporter is present. The target also binds REG1 control, exact SAADC acquisition, the Bosch/ST/QMA motion bus,
 fail-closed IQS7211E transport/lifecycle, and fail-closed ST25DVxxKC mailbox/
 TWIM1 handoff, reconstructed YHM2710 shared-power binding, and P1.10 dock lifecycle;
 public health-settings are canonicalized, ACK-ordered, and durably update the live global
@@ -245,11 +328,23 @@ or evidence-constrained boundaries, not opaque inputs. Backward-time and failure
 now perform the recovered fresh-engine lifecycle without resume state. The composed motion,
 Goodix, GoMore, biometric, activity, and sleep paths still require calibration, equivalence testing,
 fault injection, and owned-ring validation before their outputs can be treated as product- or
-clinically equivalent. The former retail bootloader
-window remains reserved until a recoverable migration procedure is tested.
-Zephyr NVS is not asserted to decode the retail Nordic FDS settings format, so
-settings migration or clearing also remains an owned-hardware validation item.
-No flash/install claim is made by this build closure.
+clinically equivalent. Local NV identity/calibration recovery is now mutex-serialized, fill-only,
+and atomically committed with full KV snapshot/generation readback. Its exact command-2 merge route
+is owner-phone authorized, bounded, and reboots after a changed durable generation; the identity
+report sender stays unreachable and physical persistence/replay/reboot validation remains. The former retail bootloader
+window is now an explicit erase region rather than executable reserve. Zephyr
+NVS does not decode the retail Nordic FDS settings format. The first-install
+preflight instead recognizes only the captured exact FDS page geometry (or a
+fully erased store), preserves its bytes in rollback artifacts, clears all
+three pages while reset is held, verifies them as erased in the full readback,
+and requires fresh owner pairing. Physical execution and first-boot NVS
+behavior remain owned-hardware validation items.
+No physical flash/install claim is made by this build closure. The offline
+preflight is now executable and signed-application recovery is available over
+BLE after installation. Exact retail rollback still requires authorized debug
+access. The one-time replacement of nRF52840 page zero has an irreducible
+power-loss brick window over BLE, so the first opaque-free installation remains
+blocked until an SWD/debug path can program and read back the full image safely.
 
 ## Reproduction
 
@@ -265,6 +360,28 @@ make zephyr-bundle \
   FLASHDB_ROOT=/absolute/FlashDB-4e5677408256f82d47cd56a6b04605dcee35ed9a \
   GOODIX_DEMOCODE_ROOT=/absolute/pebbleos-nonfree-2c0034a23b675a5f9a29e4a47e8b504c7a88e321/gh3x2x
 make zephyr-verify
+python3 tools/prepare_zephyr_deployment.py \
+  build/openr1-zephyr/openr1-source-built.zip \
+  --flash-backup /secure/r1-internal-flash-1MiB.bin \
+  --uicr-backup /secure/r1-uicr-0x308.bin \
+  --output build/r1-deployment-preflight
+python3 tools/verify_zephyr_deployment.py \
+  build/openr1-zephyr/openr1-source-built.zip \
+  --deployment build/r1-deployment-preflight \
+  --readback /secure/r1-post-install-readback-1MiB.bin \
+  --uicr-readback /secure/r1-post-install-uicr-0x308.bin \
+  --recovery-readback /secure/r1-post-recovery-readback-1MiB.bin \
+  --recovery-uicr-readback /secure/r1-post-recovery-uicr-0x308.bin
+```
+
+After the source boot partition is present, the bundle-aware recovery client
+independently verifies the ZIP, refuses a development trust anchor by default,
+and uploads only `openr1-application.signed.bin`. It resumes from the loader's
+reported offset after a disconnect:
+
+```sh
+python3 tools/upload_zephyr_recovery.py \
+  build/openr1-zephyr/openr1-source-built.zip --match OPENR1-RECOVERY
 ```
 
 On macOS, the wrapper temporarily hides the pinned toolchain's configure-only

@@ -1,7 +1,7 @@
 #include "openr1/r1_crc.h"
 
-uint32_t r1_crc32_castagnoli(const uint8_t *bytes, size_t length) {
-    uint32_t crc = 0u;
+uint32_t r1_crc32_castagnoli_update(
+    uint32_t crc, const uint8_t *bytes, size_t length) {
     for (size_t index = 0u; index < length; ++index) {
         crc ^= (uint32_t)bytes[index] << 24u;
         for (uint8_t bit = 0u; bit < 8u; ++bit) {
@@ -11,6 +11,10 @@ uint32_t r1_crc32_castagnoli(const uint8_t *bytes, size_t length) {
         }
     }
     return crc;
+}
+
+uint32_t r1_crc32_castagnoli(const uint8_t *bytes, size_t length) {
+    return r1_crc32_castagnoli_update(0u, bytes, length);
 }
 
 uint16_t r1_crc16_ccitt(const uint8_t *bytes, size_t length) {
@@ -37,4 +41,3 @@ uint16_t r1_crc16_modbus(const uint8_t *bytes, size_t length) {
     }
     return crc;
 }
-

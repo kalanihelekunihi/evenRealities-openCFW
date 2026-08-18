@@ -2,10 +2,11 @@
 
 ## Outcome
 
-OpenR1 now implements the product-owned composition of the retained health crash record without
-recreating either dependency that feeds it. Wall-clock status, timestamp, and UTC offset are
-caller-supplied values from the separately blocked time provider. The optional 896-byte opaque
-blob is accepted from a provider callback boundary and is never interpreted by OpenR1.
+OpenR1 implements the product-owned composition of the retained health crash record. Wall-clock
+status, timestamp, and UTC offset are caller-supplied values. The optional 896-byte opaque blob is
+accepted from a provider callback boundary and is never interpreted by OpenR1. The retail caller
+actually obtains a 736-byte (`0x2E0`) GoMore previous-state checkpoint from `0x0006ABE4`; because
+the initializer requires exactly 896 bytes, the retail path does not copy or mark that blob.
 
 Eleven recovered entries establish the record lifecycle:
 
@@ -68,10 +69,13 @@ restore clears the 52-byte snapshot and recomputes the CRC, making the snapshot 
 
 ## Source boundary and verification
 
-The crash-record APIs operate only on caller-owned typed caches and byte buffers. The
-initializer accepts the time-provider outputs and optional opaque blob explicitly. It does not
-implement `0x0006ABE4`, the recovered blob lookup, and does not call or recreate any function in
-the blocked time/calendar cluster.
+The crash-record APIs operate only on caller-owned typed caches and byte buffers. The initializer
+accepts time-provider outputs and an optional opaque blob explicitly. `0x0006ABE4` is the already
+reconstructed GoMore previous-state export: it reports `0x2E0` bytes and returns the live previous
+state, so the initializer's exact `0x380` gate rejects it. The source-built target therefore clears
+any old provider-blob marker, passes no provider blob, and creates the next retained one-shot
+activity/HR/SpO2/HRV snapshot immediately after database recovery. It does not mislabel the GoMore
+checkpoint as Goodix state or pad it to satisfy an unreachable stock branch.
 
 Tests cover exact structure sizes and offsets, offset clamping, all availability bits, activity
 packing and wrapped restore, accumulator hour mismatch/restore, HR extrema merge, SpO2/HRV

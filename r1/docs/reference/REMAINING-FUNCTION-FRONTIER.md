@@ -156,8 +156,9 @@ bytes now form a 16-function / 1,802-byte R1 structured-log cache closure. Nordi
 toolchain, RTOS, clock/calendar, device-registry, and `log.bin` writer/export implementations stay
 outside that product boundary.
 Three formerly unclassified functions / 876 bytes now form the adjacent R1 `log.bin` circular-page
-writer closure. Pinned FAL lookup, configured flash-device I/O, Nordic logging, and the composite
-private-log exporter/transport remain outside that product boundary.
+writer closure. Pinned FAL lookup, configured flash-device I/O, and Nordic logging remain outside
+that product boundary. The composite source was later implemented as a separate bounded,
+owner-authorized boundary; its undocumented BLE transport remains outside.
 Two formerly unclassified functions / 616 bytes now close the R1 HRV day-packet reset and flush
 path around external time, allocation, topic, and transport providers.
 The adjacent 380-byte HRV current-RAM merge at `0x00040DE0` is now product-routed. Its clean-room
@@ -283,8 +284,9 @@ typed GoMore sensor-update orchestration without opaque code or state. See
 The former five-way 364-byte tier is closed without admitting vendor code. The twin heart-rate
 and SpO2 RAM-cache merges share a clean-room scalar selection API; the final response orchestrator
 and its 136-byte packet constructor now pin full-model CRC-16/MODBUS and generated-serial policy;
-and the generic virtual-file handler is represented only by a pure export planner, with the
-private-log reader and live sender excluded. The remaining `0x00036590` body is a quantized
+and the generic virtual-file handler is represented by a pure export planner. The separately
+bounded composite source was later target-bound behind owner authorization, while its live BLE
+sender remains excluded. The remaining `0x00036590` body is a quantized
 recurrent-runtime helper reached solely inside the already gated Goodix dlCom graph and therefore
 joins that licensed-provider boundary. See
 [`SCALAR-HEALTH-RAM-CACHE-MERGE-CORRELATION.md`](../correlation/SCALAR-HEALTH-RAM-CACHE-MERGE-CORRELATION.md),
@@ -752,8 +754,9 @@ sole direct caller is periodic-persistence callsite `0x000914D2`. It accepts at 
 advances before a cross-page write, wraps over the twelve configured sectors, erases a selected
 nonempty page, and pre-erases the following nonempty page. Partition and device lookup remain in
 pinned FAL 0.5.99/FlashDB 2.0.0; physical flash operations remain configured-provider callbacks;
-Nordic logging, the structured-log encoder/cache, and the composite private-log exporter and
-transport remain separate. No raw mutation or private-log sender is exposed. See
+Nordic logging and the structured-log encoder/cache remain separate. The composite source is now
+implemented independently under `DIAGNOSTIC-EXPORT-CORRELATION.md`; its transport remains
+withheld. No raw mutation or private-log sender is exposed. See
 [`LOG-BIN-WRITER-CORRELATION.md`](../correlation/LOG-BIN-WRITER-CORRELATION.md).
 
 The former largest unknown at `0x00046FD4` is now closed with fifteen related functions as a
@@ -764,8 +767,9 @@ configuration, timestamp seam, and 4,096-byte persistence orchestration. The for
 has public facade `0x00091638` as its sole caller; sibling typed encoder `0x00041D30` has
 `0x000915A8` as its sole caller, and both converge on the same two-caller cache append routine.
 Nordic's separately source-routed logging frontend, Arm runtime, CMSIS-FreeRTOS/FreeRTOS,
-unresolved clock/calendar and device-registry providers, and the `log.bin` writer/export sender
-remain external. No raw private-log export is exposed. See
+unresolved clock/calendar and device-registry providers, and the `log.bin` writer remain external.
+The later composite source is owner-authorized and internal-only; no raw private-log BLE sender is
+exposed. See
 [`STRUCTURED-LOG-CACHE-CORRELATION.md`](../correlation/STRUCTURED-LOG-CACHE-CORRELATION.md).
 
 The former largest unknown at `0x00034194` is now closed with six recursive relatives as a

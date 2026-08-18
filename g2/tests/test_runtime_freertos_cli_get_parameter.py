@@ -109,29 +109,29 @@ PROFILE_PINS = {
         "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
         "production_object": (
             1_140,
-            "eb96bde116aacf0b7c86119b4b5339bbb0ec843ecc7102266bc7a5245a9a77a2",
+            "7aa0a8e045773df37ef2bb56666acc32c4a706ba5bebbe0dc736d7ff59dd1d05",
         ),
         "production_offset": 123_200,
         "overlay": (
-            142_986,
-            "1b0fc521cc8964da6525b7f7dce99060d07f5671f0038f37bcd998a56422a49f",
+            143_227,
+            "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
         ),
         "component": (
-            3_648_036,
-            "d334b5d063701af87691b2c946a315d481d2317f91293517fd16638b06182f07",
+            3_666_623,
+            "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
         ),
         "package": (
-            4_444_468,
-            "53b240df100153c5453697fb3ce8ac66663ca82484a1d69f88345e1e7c3cd3c6",
+            4_445_117,
+            "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6",
         ),
         "replacement_sha256": (
             "725846b2fb35bfa360ede03e42d542262fbc7f74a4aea101e6d8a9d2e2bc9bf6"
         ),
         "accounting": {
-            "generated_patch_site_bytes": 86_120,
-            "opaque_base_bytes": 3_437_062,
-            "replaced_stock_function_bytes": 86_302,
-            "source_owned_bytes": 124_822,
+            "generated_patch_site_bytes": 99_192,
+            "opaque_base_bytes": 3_423_990,
+            "replaced_stock_function_bytes": 99_370,
+            "source_owned_bytes": 143_409,
             "source_owned_in_place_bytes": 182,
         },
     },

@@ -126,24 +126,24 @@ PROFILE_PINS = {
             "576317c22dd5de6f527fb595c4668b52"
         ),
         "overlay": (
-            124_640,
-            "476843181113c88594d1a766a60b91a15a3ec76a4c898c46d3176f64ea21c867",
+            143_227,
+            "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
         ),
         "component": (
-            3_648_036,
-            "d334b5d063701af87691b2c946a315d481d2317f91293517fd16638b06182f07",
+            3_666_623,
+            "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 86_120,
+            "generated_patch_site_bytes": 99_192,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_437_062,
-            "replaced_stock_function_bytes": 86_302,
-            "source_owned_bytes": 124_822,
+            "opaque_base_bytes": 3_423_990,
+            "replaced_stock_function_bytes": 99_370,
+            "source_owned_bytes": 143_409,
             "source_owned_in_place_bytes": 182,
         },
         "package": (
-            4_426_530,
-            "a3d06dd732722859a7cd4da1582cea49464cbbfccdb90e329afa6ec9352195d4",
+            4_445_117,
+            "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6",
         ),
         "replacement_prefix": "5df32cb9",
         "replacement_sha256": (
@@ -159,12 +159,12 @@ PROFILE_PINS = {
             "9f443d31aad4e50858c5a64d95c04f6"
         ),
         "overlay": (
-            126_462,
-            "f5d4a4e441b1185001e031d1b9d319474ffd721c1280e1611e29f08169cb46cc",
+            144_266,
+            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
         ),
         "component": (
-            3_649_858,
-            "0d765ead02aa3d9981fe14b4aa8663bff57f12b307a2f9ce7e6d226225523a16",
+            3_667_662,
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
         ),
         "component_accounting": {
             "generated_patch_site_bytes": 86_286,
@@ -175,8 +175,8 @@ PROFILE_PINS = {
             "source_owned_in_place_bytes": 182,
         },
         "package": (
-            4_428_352,
-            "75af4c1facb8c663cff2a8d4469625261ffa04d9c9587dc0db9ecf2c2f401b6d",
+            4_446_156,
+            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
         ),
         "replacement_prefix": "5df3babc",
         "replacement_sha256": (
@@ -188,12 +188,12 @@ PROFILE_PINS = {
 
 MANIFEST_COVERAGE = {
     "container_only": (1, 32),
-    "generated_alignment": (51, 102),
-    "generated_source_entry_replacement": (591, 85_944),
+    "generated_alignment": (111, 220),
+    "generated_source_entry_replacement": (691, 96_972),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (183, 3_437_062),
-    "source_compiled": (106, 124_760),
+    "official_blob": (209, 3_426_034),
+    "source_compiled": (254, 143_225),
 }
 
 MAX_PRIORITIES = 56
@@ -1052,7 +1052,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
         ]
         self.assertEqual(len(leaves), 1)
         self.assertEqual(config["functions"].count(FUNCTION), 1)
-        self.assertEqual(config["functions"][-12], FUNCTION)
+        self.assertEqual(config["functions"].index(FUNCTION), 644)
         leaf = leaves[0]
         self.assertTrue(leaf["strict_relocation_contract"])
         self.assertEqual(
@@ -1341,7 +1341,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 938)
+        self.assertEqual(len(regions), 1274)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(
@@ -1393,7 +1393,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
             },
         )
         tail = by_name["apollo_freertos_task_lists_initialize_source_leaf"]
-        self.assertIs(tail, regions[-20])
+        self.assertIs(tail, regions[-230])
         self.assertEqual(
             tail,
             {

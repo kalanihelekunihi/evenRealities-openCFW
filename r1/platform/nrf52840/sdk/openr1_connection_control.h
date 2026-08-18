@@ -17,11 +17,11 @@
  * r1_delayed_event_schedule, and the role-aware advertising action drives
  * the Nordic ble_advertising provider.
  *
- * Fail-closed posture is unchanged: the externally callable advStart
- * command stays REFUSED in the normal dispatcher, so nothing calls this
- * entry point on target today.  It is retained in the image so the
- * composition is bound and reviewable; unrefusing requires end-to-end
- * product authorization and owned-hardware validation.
+ * The normal dispatcher admits only an exact 12-byte SET from the
+ * encrypted, bonded, owner-authorized phone role.  Its response is queued
+ * before this module's bounded worker receives the two targets, preserving
+ * the recovered response-before-event/effect ordering without attempting a
+ * flash mutation on the SoftDevice event thread.
  *
  * The caller must not be the SoftDevice event thread: the kv commit
  * mutates flash, which openr1_storage rejects there.  The delayed-event
@@ -29,8 +29,10 @@
  * r1_delayed_event_state and fires the scheduled disconnect through
  * sd_ble_gap_disconnect.  One binding stays deliberately unbound rather
  * than inventing behavior: command-to-composition byte order
- * reconciliation with the first-party sender (an e2e concern).
+ * reconciliation with the first-party sender (an owned-hardware concern).
  */
+
+uint32_t openr1_connection_control_initialize(void);
 
 uint32_t openr1_connection_control_adv_start(
     const uint8_t first_target[R1_PEER_ADDRESS_SIZE],

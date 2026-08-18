@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <string.h>
 
 #include <fal.h>
 #include <flashdb.h>
@@ -47,6 +48,9 @@ static bool accelerometer_calibration_present;
 static r1_nv_battery_configuration battery_configuration;
 static uint8_t configured_ring_size;
 static bool configured_ring_size_valid;
+static uint8_t product_serial[R1_NV_PRODUCT_SERIAL_BYTES];
+static bool product_serial_provisioned;
+static bool factory_mode;
 static r1_health_crash_record retained_health_crash_record __noinit;
 static bool health_mutex_ready;
 static bool kv_ready;
@@ -110,6 +114,10 @@ typedef struct {
     bool (*read_accelerometer_calibration)(r1_motion_axis_calibration *);
     bool (*read_battery_configuration)(r1_nv_battery_configuration *);
     bool (*read_ring_size)(uint8_t *);
+    bool (*read_product_serial)(uint8_t [R1_NV_PRODUCT_SERIAL_BYTES]);
+    bool (*read_factory_mode)(void);
+    r1_error (*apply_local_nv_recovery)(
+        const uint8_t *, size_t, uint16_t, uint8_t *);
     r1_error (*multicast_time_transition)(
         const r1_health_time_transition *);
     r1_error (*multicast_hour)(uint8_t);
@@ -133,22 +141,37 @@ static void settings_changed(
         system_settings[4] != R1_SYSTEM_SETTINGS_SWITCH_TYPE_REG1) {
         return;
     }
-    const bool enabled = system_settings[5] != 0u;
     uint8_t dev_info[R1_KV_CLASS_PAYLOAD_MAX];
     size_t length = 0u;
     if (k_mutex_lock(&kv_mutex, K_FOREVER) != 0) {
         return;
     }
-    const bool persist_failed = r1_kv_store_get(
-            &kv_store, R1_KV_DEV_INFO, dev_info, sizeof dev_info,
-            &length) != R1_OK ||
-        r1_system_settings_store_reg1(
-            dev_info, length, enabled) != R1_OK ||
-        r1_kv_store_set(
-            &kv_store, R1_KV_DEV_INFO, dev_info, length) != R1_OK ||
+    if (r1_kv_store_get(&kv_store, R1_KV_DEV_INFO, dev_info, sizeof dev_info,
+                        &length) != R1_OK) {
+        (void)k_mutex_unlock(&kv_mutex);
+        return;
+    }
+    /* Route the wired REG1 write through the recovered, host-tested planner: a
+     * value equal to the stored flag requests neither persistence nor a
+     * regulator action, exactly as the stock body suppresses no-op REG1
+     * transitions. This avoids a redundant kv.bin erase/commit (flash wear) and
+     * a redundant POWER.DCDCEN write on repeated same-value writes, matching
+     * r1_system_settings_plan_command instead of applying unconditionally. */
+    r1_system_settings_command_plan plan;
+    if (r1_system_settings_plan_command(
+            true, r1_system_settings_reg1_enabled(dev_info, length),
+            system_settings, R1_SYSTEM_SETTINGS_BYTES, &plan) != R1_OK ||
+        !plan.persistent_update_requested) {
+        (void)k_mutex_unlock(&kv_mutex);
+        return;
+    }
+    const bool enabled = plan.normalized_enabled;
+    const bool persist_failed =
+        r1_system_settings_store_reg1(dev_info, length, enabled) != R1_OK ||
+        r1_kv_store_set(&kv_store, R1_KV_DEV_INFO, dev_info, length) != R1_OK ||
         r1_kv_store_commit(&kv_store) != R1_OK;
     (void)k_mutex_unlock(&kv_mutex);
-    if (!persist_failed) {
+    if (!persist_failed && plan.regulator_update_requested) {
         (void)openr1_power_zephyr_set_reg1(enabled);
     }
 }
@@ -1103,6 +1126,37 @@ static int health_database_startup(r1_runtime *runtime) {
         health_startup_result.action != R1_HEALTH_DB_STARTUP_COMPLETED) {
         return -EIO;
     }
+
+    /* The retail retained-log initialization creates the next one-shot health
+     * snapshot after its previous record has been restored.  Its provider
+     * callback reports a 0x2e0-byte GoMore checkpoint, while the crash record
+     * accepts only an exact 0x380-byte blob, so the provider copy is
+     * deliberately absent.  Clear any prior blob marker before resealing the
+     * record; otherwise an old exact-length provider payload could survive a
+     * source-target restart even though this target supplied no such blob. */
+    if (r1_health_crash_record_clear_provider_blob(
+            &retained_health_crash_record) != R1_OK) {
+        return -EIO;
+    }
+    uint32_t current_timestamp = 0u;
+    int16_t utc_offset_minutes = 0;
+    const bool clock_valid =
+        openr1_clock_zephyr_epoch(&current_timestamp);
+    if (clock_valid) {
+        (void)openr1_clock_zephyr_utc_offset(&utc_offset_minutes);
+    }
+    bool provider_blob_copied = true;
+    if (r1_health_crash_record_initialize(
+            &retained_health_crash_record, 0u, clock_valid,
+            current_timestamp, utc_offset_minutes, NULL, 0u,
+            &runtime->device.health.activity,
+            &runtime->device.health.heart_rate,
+            &heart_rate_accumulator,
+            &runtime->device.health.blood_oxygen,
+            &runtime->device.health.heart_rate_variability,
+            &provider_blob_copied) != R1_OK || provider_blob_copied) {
+        return -EIO;
+    }
     health_ready = true;
     return 0;
 }
@@ -1160,6 +1214,11 @@ int openr1_databases_zephyr_initialize(r1_runtime *runtime) {
             R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_BYTES,
             &temperature_calibration,
             &temperature_calibration_present) != R1_OK ||
+        r1_nv_product_serial_decode(
+            nv_config, nv_config_length, product_serial,
+            &product_serial_provisioned) != R1_OK ||
+        r1_nv_factory_mode_decode(
+            nv_config, nv_config_length, &factory_mode) != R1_OK ||
         r1_nv_accelerometer_calibration_decode(
             nv_config + R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET,
             R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_BYTES,
@@ -1180,6 +1239,8 @@ int openr1_databases_zephyr_initialize(r1_runtime *runtime) {
         kv_ready = false;
         return -EIO;
     }
+    memcpy(runtime->device.serial_number, product_serial,
+           R1_NV_PRODUCT_SERIAL_BYTES);
     runtime->device.system_settings[5] =
         r1_system_settings_reg1_enabled(dev_info, dev_info_length) ? 1u : 0u;
     runtime->device.health.heart_rate_last_sync_seconds =
@@ -1372,6 +1433,114 @@ bool openr1_databases_zephyr_ring_size(uint8_t *ring_size) {
     }
     *ring_size = configured_ring_size;
     return true;
+}
+
+bool openr1_databases_zephyr_product_serial(
+    uint8_t serial[R1_NV_PRODUCT_SERIAL_BYTES]) {
+    if (serial == NULL || !kv_ready) {
+        return false;
+    }
+    memcpy(serial, product_serial, R1_NV_PRODUCT_SERIAL_BYTES);
+    return product_serial_provisioned;
+}
+
+bool openr1_databases_zephyr_factory_mode(void) {
+    return kv_ready && factory_mode;
+}
+
+r1_error openr1_databases_zephyr_persist_peer_targets(
+    const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
+    const uint8_t second_target[R1_PEER_ADDRESS_SIZE]) {
+    if (first_target == NULL || second_target == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (!kv_ready || k_is_in_isr()) {
+        return R1_ERROR_STATE;
+    }
+    if (k_mutex_lock(&kv_mutex, K_FOREVER) != 0) {
+        return R1_ERROR_STATE;
+    }
+    uint8_t dev_info[R1_KV_CLASS_PAYLOAD_MAX];
+    size_t length = 0u;
+    const bool failed = r1_kv_store_get(
+            &kv_store, R1_KV_DEV_INFO, dev_info, sizeof dev_info,
+            &length) != R1_OK ||
+        r1_peer_target_persist(
+            dev_info, length, first_target, second_target) != R1_OK ||
+        r1_kv_store_set(
+            &kv_store, R1_KV_DEV_INFO, dev_info, length) != R1_OK ||
+        r1_kv_store_commit(&kv_store) != R1_OK;
+    (void)k_mutex_unlock(&kv_mutex);
+    return failed ? R1_ERROR_STATE : R1_OK;
+}
+
+r1_error openr1_databases_zephyr_remove_ring_metadata(void) {
+    if (!kv_ready || k_is_in_isr()) {
+        return R1_ERROR_STATE;
+    }
+    if (k_mutex_lock(&kv_mutex, K_FOREVER) != 0) {
+        return R1_ERROR_STATE;
+    }
+    /* Preserve the recovered two-snapshot ordering. If this second stage
+     * fails, the first committed flag clear remains an explicit intermediate
+     * state and a retry safely completes the idempotent peer-slot clear. */
+    const r1_error error = r1_remove_ring_metadata_commit(&kv_store);
+    (void)k_mutex_unlock(&kv_mutex);
+    return error;
+}
+
+r1_error openr1_databases_zephyr_apply_local_nv_recovery(
+    const uint8_t *body, size_t length, uint16_t expected_crc,
+    uint8_t *changed_records) {
+    if (body == NULL || changed_records == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    *changed_records = 0u;
+    if (!kv_ready || k_is_in_isr()) {
+        return R1_ERROR_STATE;
+    }
+    if (k_mutex_lock(&kv_mutex, K_FOREVER) != 0) {
+        return R1_ERROR_STATE;
+    }
+    r1_nv_recovery_result result;
+    const r1_error error = r1_nv_recovery_store_merge_commit(
+        &kv_store, body, length, expected_crc, &result);
+    if (error == R1_OK) {
+        *changed_records = result.changed_records;
+        if (r1_temperature_pair_calibration_decode(
+                result.state.config +
+                    R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_OFFSET,
+                R1_NV_RECOVERY_TEMPERATURE_CALIBRATION_BYTES,
+                &temperature_calibration,
+                &temperature_calibration_present) != R1_OK ||
+            r1_nv_accelerometer_calibration_decode(
+                result.state.config +
+                    R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_OFFSET,
+                R1_NV_RECOVERY_ACCELEROMETER_CALIBRATION_BYTES,
+                &accelerometer_calibration,
+                &accelerometer_calibration_present) != R1_OK ||
+            r1_nv_battery_configuration_decode(
+                result.state.power, sizeof result.state.power,
+                &battery_configuration) != R1_OK ||
+            r1_nv_ring_size_decode(
+                &result.state.ring_size, sizeof result.state.ring_size,
+                &configured_ring_size, &configured_ring_size_valid) != R1_OK ||
+            r1_nv_product_serial_decode(
+                result.state.config, sizeof result.state.config,
+                product_serial, &product_serial_provisioned) != R1_OK ||
+            r1_nv_factory_mode_decode(
+                result.state.config, sizeof result.state.config,
+                &factory_mode) != R1_OK) {
+            (void)k_mutex_unlock(&kv_mutex);
+            return R1_ERROR_STATE;
+        }
+        if (health_context.runtime != NULL) {
+            memcpy(health_context.runtime->device.serial_number,
+                   product_serial, R1_NV_PRODUCT_SERIAL_BYTES);
+        }
+    }
+    (void)k_mutex_unlock(&kv_mutex);
+    return error;
 }
 
 r1_error openr1_databases_zephyr_multicast_time_transition(
@@ -1742,6 +1911,9 @@ static const openr1_databases_zephyr_api databases_zephyr_api = {
     openr1_databases_zephyr_accelerometer_calibration,
     openr1_databases_zephyr_battery_configuration,
     openr1_databases_zephyr_ring_size,
+    openr1_databases_zephyr_product_serial,
+    openr1_databases_zephyr_factory_mode,
+    openr1_databases_zephyr_apply_local_nv_recovery,
     openr1_databases_zephyr_multicast_time_transition,
     openr1_databases_zephyr_multicast_hour,
     openr1_databases_zephyr_consume_temperature_event,

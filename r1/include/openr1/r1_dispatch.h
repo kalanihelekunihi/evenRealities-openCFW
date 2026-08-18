@@ -6,6 +6,8 @@
 #include <stdint.h>
 
 #include "openr1/r1_protocol.h"
+#include "openr1/r1_nv_recovery.h"
+#include "openr1/r1_peer_target.h"
 #include "openr1/r1_state.h"
 
 #define R1_MODULE_SYSTEM UINT8_C(0x01)
@@ -18,6 +20,12 @@
  * must fit atomically because the runtime preflights the complete result
  * before admitting any fragment. */
 #define R1_DISPATCH_FRAGMENT_MAX 50u
+/* A dispatch result never needs the former 32 independent 1,100-byte model
+ * slots.  Any admitted result must fit in 50 fragment payloads, so one packed
+ * arena of that exact upper bound represents every result the live queue can
+ * accept without weakening the per-model or atomic fragment limits. */
+#define R1_DISPATCH_ARENA_MAX \
+    (R1_DISPATCH_FRAGMENT_MAX * R1_FRAGMENT_PAYLOAD_MAX)
 #define R1_LEGACY_COMMAND_WORKSPACE_SIZE 36u
 #define R1_LEGACY_COMMAND_OPCODE_OFFSET 2u
 #define R1_LEGACY_DEVICE_INFO_PREFIX_BYTES 4u
@@ -121,9 +129,19 @@ typedef struct {
 } r1_session;
 
 typedef struct {
-    uint8_t models[R1_DISPATCH_RESPONSE_MAX][R1_DISPATCH_MODEL_MAX];
+    uint8_t arena[R1_DISPATCH_ARENA_MAX];
+    uint8_t *models[R1_DISPATCH_RESPONSE_MAX];
     size_t lengths[R1_DISPATCH_RESPONSE_MAX];
     size_t count;
+    size_t arena_used;
+    bool enter_recovery;
+    bool apply_advertising_targets;
+    uint8_t first_advertising_target[R1_PEER_ADDRESS_SIZE];
+    uint8_t second_advertising_target[R1_PEER_ADDRESS_SIZE];
+    bool apply_nv_recovery;
+    uint16_t nv_recovery_crc;
+    uint8_t nv_recovery_body[R1_NV_RECOVERY_BODY_BYTES];
+    bool remove_ring_metadata;
 } r1_dispatch_result;
 
 typedef struct {

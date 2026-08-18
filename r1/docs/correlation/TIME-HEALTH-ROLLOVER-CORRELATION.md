@@ -90,9 +90,10 @@ and `0x00031F06`; the table is at `0x0003B274`. The verified unsigned applicatio
 text, 236 bytes data, and 132,544 bytes BSS. Its HEX and BIN SHA-256 values are
 `48e1b3fadfdb956fbdf5f637d48c9a5808db5394848fb4538450c0ff98be80cf` and
 `421a42cf37dad04dadcff5d3b1742efcba4ba50fd1d2e52f26bcf00e5df24d35`.
-FlashDB 2.0.0/FAL remains the storage provider. The transparent GoMore engine and reset routine
-compile, but live engine state/result composition remains disabled pending typed initialization,
-input, output, and owned-hardware validation. No internal-event sender, live clock setter, private SRAM reader,
+FlashDB 2.0.0/FAL remains the storage provider. The retained Nordic application does not compose
+the live GoMore graph. The separate source-built Zephyr target now owns typed engine state,
+initialization, all 16 recovered stages, input topics, result routing, and fresh-engine reset; its
+physical inputs and output equivalence still require owned-hardware validation. No private SRAM reader,
 database formatter, BLE command, signing bypass, or deployment mechanism is added.
 
 ## Source-built Zephyr composition

@@ -14,6 +14,7 @@
 #include "bma456w.h"
 #include "lis2dw12_reg.h"
 #include "openr1_twim1_zephyr.h"
+#include "qma6100/qma6100.h"
 
 #define OPENR1_MOTION_NODE DT_NODELABEL(openr1_motion)
 #define OPENR1_MOTION_BUS_NODE \
@@ -25,6 +26,7 @@
 #define OPENR1_MOTION_LIS_RESET_READS 12u
 #define OPENR1_MOTION_LIS_POST_CONFIG_MS UINT32_C(100)
 #define OPENR1_MOTION_INITIAL_RATE_HZ UINT16_C(25)
+#define OPENR1_MOTION_CORE_CYCLES_PER_US UINT32_C(64)
 
 typedef struct {
     int (*initialize)(void);
@@ -42,9 +44,12 @@ static struct gpio_callback motion_interrupt_callback;
 static atomic_t motion_interrupts;
 static r1_motion_adapter motion_adapter;
 static struct bma4_dev bma_device;
+static qma6100_device qma_device;
 static uint8_t bma_address = OPENR1_MOTION_I2C_ADDRESS;
 static bool bus_ready;
 static bool motion_ready;
+
+K_MUTEX_DEFINE(qma_provider_mutex);
 
 static bool valid_transfer(const uint8_t *bytes, size_t length) {
     return bus_ready && length <= UINT16_MAX &&
@@ -349,6 +354,100 @@ static r1_error lis_disable_double_tap(void *context) {
     return R1_OK;
 }
 
+static bool qma_bus_read(void *context, uint8_t device_address,
+                         uint8_t register_address, uint8_t *bytes,
+                         size_t length) {
+    (void)context;
+    return motion_bus_read(device_address, register_address, bytes, length) == 0;
+}
+
+static bool qma_bus_write(void *context, uint8_t device_address,
+                          uint8_t register_address, const uint8_t *bytes,
+                          size_t length) {
+    (void)context;
+    return motion_bus_write(device_address, register_address, bytes, length) == 0;
+}
+
+static void qma_delay_cycles(void *context, uint32_t cycles) {
+    (void)context;
+    const uint32_t microseconds =
+        cycles / OPENR1_MOTION_CORE_CYCLES_PER_US +
+        (cycles % OPENR1_MOTION_CORE_CYCLES_PER_US != 0u ? 1u : 0u);
+    k_busy_wait(microseconds);
+}
+
+static void qma_lock(void *context) {
+    (void)context;
+    (void)k_mutex_lock(&qma_provider_mutex, K_FOREVER);
+}
+
+static void qma_unlock(void *context) {
+    (void)context;
+    (void)k_mutex_unlock(&qma_provider_mutex);
+}
+
+static r1_error qma_probe(void *context, uint8_t *chip_id) {
+    qma6100_device *device = context;
+    if (device == NULL || chip_id == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    static const uint8_t addresses[] = {
+        QMA6100_ADDRESS_1, QMA6100_ADDRESS_2,
+    };
+    qma_lock(NULL);
+    *chip_id = 0u;
+    for (size_t index = 0u; index < sizeof addresses; ++index) {
+        device->address = addresses[index];
+        *chip_id = qma6100_chip_id(device);
+        if (qma6100_identity_accepted(*chip_id)) {
+            break;
+        }
+    }
+    qma_unlock(NULL);
+    return R1_OK;
+}
+
+static r1_error qma_configure(void *context, uint16_t requested_rate_hz) {
+    qma6100_device *device = context;
+    if (device == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    return qma6100_configure_wrapper(device, requested_rate_hz) != 0u
+        ? R1_OK : R1_ERROR_STATE;
+}
+
+static r1_error qma_read_fifo(void *context, uint8_t *raw_samples,
+                              size_t maximum_samples,
+                              size_t *sample_count) {
+    qma6100_device *device = context;
+    if (device == NULL || raw_samples == NULL || maximum_samples == 0u ||
+        sample_count == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    qma_lock(NULL);
+    const uint32_t count = qma6100_read_fifo(
+        device, raw_samples, maximum_samples);
+    qma_unlock(NULL);
+    if (count == QMA6100_FIFO_ERROR) {
+        *sample_count = 0u;
+        return R1_ERROR_STATE;
+    }
+    *sample_count = (size_t)count;
+    return R1_OK;
+}
+
+static r1_error qma_disable_double_tap(void *context) {
+    qma6100_device *device = context;
+    if (device == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    qma_lock(NULL);
+    const uint32_t status = qma6100_tap_configure(
+        device, UINT8_C(0x31), UINT8_C(0), false);
+    qma_unlock(NULL);
+    return status != 0u ? R1_OK : R1_ERROR_STATE;
+}
+
 static const r1_motion_provider_ops bma_provider = {
     bma_probe,
     bma_configure,
@@ -362,6 +461,24 @@ static const r1_motion_provider_ops lis_provider = {
     lis_read_fifo,
     lis_disable_double_tap,
 };
+
+static const r1_motion_provider_ops qma_provider = {
+    qma_probe,
+    qma_configure,
+    qma_read_fifo,
+    qma_disable_double_tap,
+};
+
+static void qma_interrupt_worker(struct k_work *work) {
+    (void)work;
+    if (motion_ready &&
+        r1_motion_adapter_selected(&motion_adapter) ==
+            R1_MOTION_VARIANT_QMA6100) {
+        qma6100_interrupt_wrapper(&qma_device);
+    }
+}
+
+K_WORK_DEFINE(qma_interrupt_work, qma_interrupt_worker);
 
 static int map_error(r1_error error) {
     if (error == R1_OK) {
@@ -386,6 +503,7 @@ static void motion_interrupt_handler(const struct device *port,
     (void)callback;
     (void)pins;
     (void)atomic_inc(&motion_interrupts);
+    (void)k_work_submit(&qma_interrupt_work);
 }
 
 static int initialize_interrupt(void) {
@@ -422,12 +540,27 @@ int openr1_motion_zephyr_initialize(void) {
         return error;
     }
     atomic_clear(&motion_interrupts);
+    static const qma6100_bindings qma_bindings = {
+        qma_bus_read,
+        qma_bus_write,
+        qma_delay_cycles,
+        NULL,
+        qma_lock,
+        qma_unlock,
+        NULL,
+    };
+    qma6100_initialize(&qma_device, &qma_bindings);
     r1_motion_adapter_initialize(&motion_adapter);
     r1_error motion_error = r1_motion_adapter_bind(
         &motion_adapter, R1_MOTION_VARIANT_LIS2DW12, &lis_provider, NULL);
     if (motion_error == R1_OK) {
         motion_error = r1_motion_adapter_bind(
             &motion_adapter, R1_MOTION_VARIANT_BMA456W, &bma_provider, NULL);
+    }
+    if (motion_error == R1_OK) {
+        motion_error = r1_motion_adapter_bind(
+            &motion_adapter, R1_MOTION_VARIANT_QMA6100,
+            &qma_provider, &qma_device);
     }
     if (motion_error == R1_OK) {
         motion_error = r1_motion_adapter_configure(

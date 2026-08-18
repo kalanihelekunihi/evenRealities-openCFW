@@ -243,6 +243,7 @@ typedef struct {
     bool set_touch_fast_mode;
     uint32_t slow_delay_ticks;
     uint32_t dcdc_delay_ticks;
+    uint32_t ble_slow_delay_ticks;
     size_t response_length;
 } r1_glasses_status_plan;
 
@@ -285,6 +286,19 @@ typedef void (*r1_runtime_health_settings_fn)(
  * not rewrite the request. */
 typedef void (*r1_runtime_request_observer_fn)(
     void *context, const r1_model *request);
+/* Queues the recovered advStart event after its response is admitted. The
+ * provider must copy both six-byte targets before returning. */
+typedef r1_error (*r1_runtime_advertising_targets_fn)(
+    void *context,
+    const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
+    const uint8_t second_target[R1_PEER_ADDRESS_SIZE]);
+/* Queues a CRC-validated, fill-only NV recovery after authorization. The
+ * provider must copy the fixed-size body before returning. */
+typedef r1_error (*r1_runtime_nv_recovery_fn)(
+    void *context,
+    const uint8_t body[R1_NV_RECOVERY_BODY_BYTES],
+    uint16_t expected_crc);
+typedef r1_error (*r1_runtime_remove_ring_fn)(void *context);
 
 typedef struct {
     bool active;
@@ -319,6 +333,14 @@ typedef struct r1_runtime {
     void *health_settings_context;
     r1_runtime_request_observer_fn request_observer;
     void *request_observer_context;
+    r1_runtime_advertising_targets_fn advertising_targets_handler;
+    void *advertising_targets_context;
+    r1_runtime_nv_recovery_fn nv_recovery_handler;
+    void *nv_recovery_context;
+    r1_runtime_remove_ring_fn remove_ring_handler;
+    void *remove_ring_context;
+    bool glasses_worn;
+    bool glasses_secondary_mode;
     /* The recovered automatic publisher calls five legs synchronously, but
      * the BLE worker owns an exact 50-record queue.  Keep the observed order
      * as a bitset and compose one leg only when that queue has drained. */
@@ -328,6 +350,13 @@ typedef struct r1_runtime {
     uint32_t automatic_health_legs_scheduled;
     uint32_t automatic_health_legs_enqueued;
     uint32_t automatic_health_leg_failures;
+    uint32_t advertising_target_actions_queued;
+    uint32_t advertising_target_action_failures;
+    uint32_t nv_recovery_actions_queued;
+    uint32_t nv_recovery_action_failures;
+    uint32_t remove_ring_actions_queued;
+    uint32_t remove_ring_action_failures;
+    bool recovery_requested;
 } r1_runtime;
 
 void r1_runtime_initialize(r1_runtime *runtime,
@@ -360,6 +389,16 @@ void r1_runtime_set_health_settings_handler(
 void r1_runtime_set_request_observer(
     r1_runtime *runtime, r1_runtime_request_observer_fn observer,
     void *observer_context);
+void r1_runtime_set_advertising_targets_handler(
+    r1_runtime *runtime,
+    r1_runtime_advertising_targets_fn advertising_targets_handler,
+    void *advertising_targets_context);
+void r1_runtime_set_nv_recovery_handler(
+    r1_runtime *runtime, r1_runtime_nv_recovery_fn nv_recovery_handler,
+    void *nv_recovery_context);
+void r1_runtime_set_remove_ring_handler(
+    r1_runtime *runtime, r1_runtime_remove_ring_fn remove_ring_handler,
+    void *remove_ring_context);
 void r1_runtime_configure_battery(r1_runtime *runtime, uint8_t battery_type);
 bool r1_runtime_update_battery(
     r1_runtime *runtime, r1_charge_state charge,
@@ -380,7 +419,14 @@ void r1_runtime_disconnect(r1_runtime *runtime, uint16_t connection);
 r1_error r1_runtime_set_security(r1_runtime *runtime, uint16_t connection,
                                  bool encrypted, bool bonded, bool authorized);
 r1_peer_role r1_runtime_connection_role(const r1_runtime *runtime,
-                                        uint16_t connection);
+                                         uint16_t connection);
+bool r1_runtime_connection_is_authorized_phone(
+    r1_runtime *runtime, uint16_t connection);
+bool r1_runtime_take_recovery_request(
+    r1_runtime *runtime, uint16_t connection);
+r1_error r1_runtime_receive_glasses_status(
+    r1_runtime *runtime, uint16_t connection, bool command_valid,
+    uint8_t status_bits, r1_glasses_status_plan *plan);
 void r1_runtime_role_occupancy(const r1_runtime *runtime,
                                bool *phone_occupied, bool *glasses_occupied);
 r1_bae8_event_plan r1_runtime_plan_bae8_event(uint8_t event_type);

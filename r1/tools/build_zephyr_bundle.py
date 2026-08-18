@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 from contextlib import contextmanager
+import getpass
 import hashlib
 import os
 import shutil
@@ -14,9 +15,13 @@ import tempfile
 from pathlib import Path
 from typing import Iterator
 
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import ec
+
 
 PROJECT = Path(__file__).resolve().parents[1]
 APPLICATION = PROJECT / "platform" / "nrf52840" / "zephyr"
+RECOVERY_MODULE = APPLICATION / "recovery_module"
 
 
 def executable_path(value: str) -> Path:
@@ -99,6 +104,56 @@ def compatible_gdb_probe(toolchain: Path) -> Iterator[None]:
             backup.rename(gdb_py)
 
 
+@contextmanager
+def resolved_signing_key(args: argparse.Namespace) -> Iterator[Path | None]:
+    if args.signing_key is not None:
+        signing_key = args.signing_key.expanduser().resolve()
+        if not signing_key.is_file():
+            raise ValueError(f"signing key not found: {signing_key}")
+        yield signing_key
+        return
+    if args.encrypted_signing_key is None:
+        yield None
+        return
+
+    encrypted = args.encrypted_signing_key.expanduser().resolve()
+    if not encrypted.is_file():
+        raise ValueError(f"encrypted signing key not found: {encrypted}")
+    completed = subprocess.run(
+        [
+            "security", "find-generic-password",
+            "-a", args.keychain_account,
+            "-s", args.keychain_service,
+            "-w",
+        ],
+        check=True,
+        capture_output=True,
+    )
+    password = completed.stdout.rstrip(b"\n")
+    private = serialization.load_pem_private_key(
+        encrypted.read_bytes(), password=password)
+    if not isinstance(private, ec.EllipticCurvePrivateKey) or not \
+       isinstance(private.curve, ec.SECP256R1):
+        raise ValueError("owner signing key is not ECDSA P-256")
+    temporary_path: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+                prefix="openr1-owner-mcuboot-", suffix=".pem",
+                delete=False) as temporary:
+            temporary_path = Path(temporary.name)
+            temporary.write(private.private_bytes(
+                serialization.Encoding.PEM,
+                serialization.PrivateFormat.PKCS8,
+                serialization.NoEncryption()))
+        temporary_path.chmod(0o600)
+        yield temporary_path
+    finally:
+        password = b""
+        private = None
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--workspace", type=Path, required=True)
@@ -111,7 +166,12 @@ def main() -> None:
     parser.add_argument("--west", default="west")
     parser.add_argument("--build-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path)
-    parser.add_argument("--signing-key", type=Path)
+    signing = parser.add_mutually_exclusive_group()
+    signing.add_argument("--signing-key", type=Path)
+    signing.add_argument("--encrypted-signing-key", type=Path)
+    parser.add_argument(
+        "--keychain-service", default="com.sybilsight.r1-owner-signing")
+    parser.add_argument("--keychain-account", default=getpass.getuser())
     parser.add_argument("--build-only", action="store_true")
     args = parser.parse_args()
     if args.build_only and args.output is not None:
@@ -152,35 +212,37 @@ def main() -> None:
         f"-DOPENR1_ST25DVXXKC_ROOT={st25dvxxkc}",
         f"-DOPENR1_FLASHDB_ROOT={flashdb}",
         f"-DOPENR1_GOODIX_DEMOCODE_ROOT={goodix_democode}",
+        f"-DEXTRA_ZEPHYR_MODULES={RECOVERY_MODULE}",
     ]
-    if args.signing_key is not None:
-        signing_key = args.signing_key.expanduser().resolve()
-        if not signing_key.is_file():
-            raise ValueError(f"signing key not found: {signing_key}")
-        # This sysbuild setting is a Kconfig string. The quote characters must
-        # reach CMake (subprocess has no shell layer to add them for us).
-        command.append(f'-DSB_CONFIG_BOOT_SIGNATURE_KEY_FILE="{signing_key}"')
-    with compatible_gdb_probe(toolchain):
+    with resolved_signing_key(args) as signing_key, \
+            compatible_gdb_probe(toolchain):
+        if signing_key is not None:
+            # This sysbuild setting is a Kconfig string. The quote characters
+            # must reach CMake (subprocess has no shell layer to add them).
+            command.append(
+                f'-DSB_CONFIG_BOOT_SIGNATURE_KEY_FILE="{signing_key}"')
         subprocess.run(command, check=True, env=environment)
-    if args.build_only:
-        print(f"openR1 source-built Zephyr images: {build}")
-        return
+        if args.build_only:
+            print(f"openR1 source-built Zephyr images: {build}")
+            return
 
-    subprocess.run([
-        sys.executable, os.fspath(PROJECT / "tools" / "package_zephyr_bundle.py"),
-        "--build-dir", os.fspath(build),
-        "--zephyr-workspace", os.fspath(workspace),
-        "--bma456-root", os.fspath(bma456),
-        "--lis2dw12-root", os.fspath(lis2dw12),
-        "--st25dvxxkc-root", os.fspath(st25dvxxkc),
-        "--flashdb-root", os.fspath(flashdb),
-        "--goodix-democode-root", os.fspath(goodix_democode),
-        "--output", os.fspath(args.output.expanduser().resolve()),
-    ], check=True, env=environment)
-    subprocess.run([
-        sys.executable, os.fspath(PROJECT / "tools" / "verify_zephyr_bundle.py"),
-        os.fspath(args.output.expanduser().resolve()),
-    ], check=True, env=environment)
+        subprocess.run([
+            sys.executable,
+            os.fspath(PROJECT / "tools" / "package_zephyr_bundle.py"),
+            "--build-dir", os.fspath(build),
+            "--zephyr-workspace", os.fspath(workspace),
+            "--bma456-root", os.fspath(bma456),
+            "--lis2dw12-root", os.fspath(lis2dw12),
+            "--st25dvxxkc-root", os.fspath(st25dvxxkc),
+            "--flashdb-root", os.fspath(flashdb),
+            "--goodix-democode-root", os.fspath(goodix_democode),
+            "--output", os.fspath(args.output.expanduser().resolve()),
+        ], check=True, env=environment)
+        subprocess.run([
+            sys.executable,
+            os.fspath(PROJECT / "tools" / "verify_zephyr_bundle.py"),
+            os.fspath(args.output.expanduser().resolve()),
+        ], check=True, env=environment)
 
 
 if __name__ == "__main__":

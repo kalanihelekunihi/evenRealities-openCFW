@@ -1,6 +1,7 @@
 #include "openr1_databases.h"
 
 #include <stddef.h>
+#include <string.h>
 #include <time.h>
 
 #include "cmsis_os2.h"
@@ -9,6 +10,7 @@
 #include "FreeRTOS.h"
 
 #include "openr1/r1_event_bus.h"
+#include "openr1/r1_peer_target.h"
 #include "openr1/r1_state.h"
 #include "openr1_clock.h"
 #include "openr1_event_bus.h"
@@ -48,6 +50,9 @@ static volatile uint32_t databases_error;
 static volatile uint32_t recovery_records_visited;
 
 #define OPENR1_DATABASES_PERSIST_REG1_FLAG UINT32_C(0x00000001)
+#define OPENR1_DATABASES_NV_RECOVERY_FLAG UINT32_C(0x00000002)
+#define OPENR1_DATABASES_REMOVE_RING_FLAG UINT32_C(0x00000004)
+#define OPENR1_DATABASES_NV_RECOVERY_QUEUE_DEPTH 2u
 
 static osThreadId_t databases_worker_thread;
 /* Deferred REG1 persist request: the EUS dispatch runs on the SoftDevice
@@ -57,9 +62,16 @@ static osThreadId_t databases_worker_thread;
 static volatile bool reg1_persist_pending;
 static volatile bool reg1_persist_enabled;
 static bool reg1_enabled;
+static osMessageQueueId_t nv_recovery_queue;
+static volatile bool remove_ring_pending;
+
+typedef struct {
+    uint16_t expected_crc;
+    uint8_t body[R1_NV_RECOVERY_BODY_BYTES];
+} openr1_nv_recovery_request;
 
 static StaticTask_t databases_control_block;
-static StackType_t databases_stack[configMINIMAL_STACK_SIZE * 2u];
+static StackType_t databases_stack[configMINIMAL_STACK_SIZE * 3u];
 
 /* Retained across a watchdog or software reset so the health startup
  * controller can perform the recovered crash-time handoff and one-shot
@@ -338,9 +350,36 @@ static void databases_worker(void *context) {
     sleep_database_bind(flash);
     for (;;) {
         (void)osThreadFlagsWait(
-            OPENR1_DATABASES_PERSIST_REG1_FLAG, osFlagsWaitAny, osWaitForever);
+            OPENR1_DATABASES_PERSIST_REG1_FLAG |
+                OPENR1_DATABASES_NV_RECOVERY_FLAG |
+                OPENR1_DATABASES_REMOVE_RING_FLAG,
+            osFlagsWaitAny, osWaitForever);
         if (reg1_persist_pending) {
             databases_apply_reg1_persist();
+        }
+        openr1_nv_recovery_request request;
+        while (nv_recovery_queue != NULL &&
+               osMessageQueueGet(
+                   nv_recovery_queue, &request, NULL, 0u) == osOK) {
+            r1_nv_recovery_result result;
+            const r1_error error = r1_nv_recovery_store_merge_commit(
+                &kv_store, request.body, sizeof request.body,
+                request.expected_crc, &result);
+            if (error != R1_OK) {
+                databases_record_error((uint32_t)NRF_ERROR_INTERNAL);
+            } else if (result.changed_records != 0u) {
+                /* All calibration/identity consumers restart from the new
+                 * committed generation. */
+                NVIC_SystemReset();
+            }
+        }
+        if (remove_ring_pending) {
+            const r1_error error =
+                r1_remove_ring_metadata_commit(&kv_store);
+            if (error != R1_OK) {
+                databases_record_error((uint32_t)NRF_ERROR_INTERNAL);
+            }
+            remove_ring_pending = false;
         }
     }
 }
@@ -408,6 +447,13 @@ ret_code_t openr1_databases_initialize(void) {
         kv_ready = false;
         return NRF_ERROR_NO_MEM;
     }
+    nv_recovery_queue = osMessageQueueNew(
+        OPENR1_DATABASES_NV_RECOVERY_QUEUE_DEPTH,
+        sizeof(openr1_nv_recovery_request), NULL);
+    if (nv_recovery_queue == NULL) {
+        kv_ready = false;
+        return NRF_ERROR_NO_MEM;
+    }
     databases_worker_thread = osThreadNew(databases_worker, NULL, &attributes);
     if (databases_worker_thread == NULL) {
         kv_ready = false;
@@ -434,6 +480,43 @@ ret_code_t openr1_databases_persist_reg1(bool enabled) {
         databases_worker_thread, OPENR1_DATABASES_PERSIST_REG1_FLAG);
     if ((flags & (uint32_t)osFlagsError) != 0u) {
         reg1_persist_pending = false;
+        return NRF_ERROR_INVALID_STATE;
+    }
+    return NRF_SUCCESS;
+}
+
+ret_code_t openr1_databases_queue_nv_recovery(
+    const uint8_t body[R1_NV_RECOVERY_BODY_BYTES], uint16_t expected_crc) {
+    if (body == NULL) {
+        return NRF_ERROR_NULL;
+    }
+    if (!kv_ready || databases_worker_thread == NULL ||
+        nv_recovery_queue == NULL || expected_crc == 0u) {
+        return NRF_ERROR_INVALID_STATE;
+    }
+    openr1_nv_recovery_request request = {
+        .expected_crc = expected_crc,
+    };
+    memcpy(request.body, body, sizeof request.body);
+    if (osMessageQueuePut(nv_recovery_queue, &request, 0u, 0u) != osOK) {
+        return NRF_ERROR_NO_MEM;
+    }
+    const uint32_t flags = osThreadFlagsSet(
+        databases_worker_thread, OPENR1_DATABASES_NV_RECOVERY_FLAG);
+    return (flags & (uint32_t)osFlagsError) == 0u
+        ? NRF_SUCCESS : NRF_ERROR_INVALID_STATE;
+}
+
+ret_code_t openr1_databases_queue_remove_ring(void) {
+    if (!kv_ready || databases_worker_thread == NULL ||
+        remove_ring_pending) {
+        return NRF_ERROR_INVALID_STATE;
+    }
+    remove_ring_pending = true;
+    const uint32_t flags = osThreadFlagsSet(
+        databases_worker_thread, OPENR1_DATABASES_REMOVE_RING_FLAG);
+    if ((flags & (uint32_t)osFlagsError) != 0u) {
+        remove_ring_pending = false;
         return NRF_ERROR_INVALID_STATE;
     }
     return NRF_SUCCESS;

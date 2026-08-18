@@ -25304,6 +25304,242 @@
           "reviewed_version_prefix": "Apple clang version 21.0.0 (clang-2100.3.30.1)"
         }
       }
+    },
+    {
+      "function": "open_cfw_kvdb_als_scale_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_als_scale.c",
+        "size": 3508,
+        "sha256": "626119a5b2298aa233d22294cfd6121b6c5dad45a2bacacb84cb0124899649d4",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_als_scale.c factory-record default initializer (stock run 0x004AECA4, 20 bytes), bound to the retained CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-kvdb-als-scale-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 28,
+        "sha256": "2e21f369c21b236b8eb1fd7b0139f1e7b12da72b0cb46b8d5caa51b2bfb8a358",
+        "alignment": 4,
+        "offset": 142988,
+        "unrelocated_sha256": "3f3deccbc58c8058d2ceea48988465abe7085b0c1934e0e284e2fe8fc305c32f"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_als_scale_crc16",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_als_scale_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_als_scale.c",
+        "size": 3508,
+        "sha256": "626119a5b2298aa233d22294cfd6121b6c5dad45a2bacacb84cb0124899649d4",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_als_scale.c _kvdbUpdataAlsScale migration callback (stock run 0x004AECB8, 208 bytes), bound to the retained blob read/write adapters at 0x004D956C/0x004D957E and the CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-kvdb-als-scale-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_als_scale_load_and_migrate",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 11,
+          "sha256": "4b34bab691e96fd66ab89311593b46c5a1c5846c574b5c92d7fee78d0b601b9a",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 11
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 90,
+        "sha256": "451554e33ebd40d51d1f02bea7e0d15d93f6cd3cce89748b68d9a5dc3f056618",
+        "alignment": 4,
+        "offset": 143016,
+        "unrelocated_sha256": "63c5ecdafe9740056cc3a894c91406d0d987d44a32f50607b7667f31e9da6432",
+        "closure_size": 101,
+        "closure_sha256": "92f4884c472a949abb359077af3b9ad74b8334abded537b41879d291221a53ae",
+        "rodata_offset": 90
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_als_scale_db_read",
+          "target_address": 5084524
+        },
+        {
+          "offset": 60,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_als_scale_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 66,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 70,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 80,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_als_scale_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_write_als_scale",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_als_scale.c",
+        "size": 3508,
+        "sha256": "626119a5b2298aa233d22294cfd6121b6c5dad45a2bacacb84cb0124899649d4",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_als_scale.c SVC_KvdbWriteAlsScale whole-record writer (stock run 0x004AED88, 110 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and blob write adapter at 0x004D957E",
+        "evidence": "docs/research/g2-kvdb-als-scale-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_write_als_scale",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 11,
+          "sha256": "4b34bab691e96fd66ab89311593b46c5a1c5846c574b5c92d7fee78d0b601b9a",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 11
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 96,
+        "sha256": "01a92f6920514a18f5de541405e1c2c877d9ba29a7c61d3c4b1b30ea82e54b1f",
+        "alignment": 4,
+        "offset": 143120,
+        "unrelocated_sha256": "9462e1667e25b63da69694be40b2a418c0d3a761ff4fccd1d29ad34744909bac",
+        "closure_size": 107,
+        "closure_sha256": "28976fbbe7ab12790dbde40b541b7f7b0aa6d05f2d671d423a375d9a0f93d6c0",
+        "rodata_offset": 96
+      },
+      "relocations": [
+        {
+          "offset": 68,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_als_scale_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 74,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 78,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 88,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_als_scale_db_write",
+          "target_address": 5084542
+        }
+      ]
     }
   ],
   "in_place_leaves": [
@@ -26432,7 +26668,10 @@
     "open_cfw_freertos_task_priority_inherit",
     "open_cfw_freertos_task_priority_disinherit_after_timeout",
     "open_cfw_iar_scanset_match",
-    "open_cfw_littlefs_file_size_public"
+    "open_cfw_littlefs_file_size_public",
+    "open_cfw_kvdb_als_scale_default_initialize",
+    "open_cfw_kvdb_als_scale_load_and_migrate",
+    "open_cfw_kvdb_write_als_scale"
   ],
   "patch_sites": [
     {
@@ -32235,14 +32474,47 @@
       "expected_sha256": "a1758f1321e8dce4b67a40f8ddaaf00ba3a258f00e05d1a04b3e5f2fa199114b",
       "branch": "b_w",
       "target_function": "open_cfw_littlefs_file_size_public"
+    },
+    {
+      "name": "replace_kvdb_als_scale_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4910244,
+      "expected_size": 20,
+      "expected_sha256": "e48145091ccb88dae5d4c5be82e5f82713ecd547dc4117c5a7bcaea241e8c1f8",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_als_scale_default_initialize"
+    },
+    {
+      "name": "replace_kvdb_als_scale_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4910264,
+      "expected_size": 208,
+      "expected_sha256": "13ea4e9b0fa20c2d99e330dedbc23590b6a5de7afbb93e7f1d79feec3a7ba6b5",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_als_scale_load_and_migrate"
+    },
+    {
+      "name": "replace_kvdb_write_als_scale",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4910472,
+      "expected_size": 110,
+      "expected_sha256": "63ddae17be03306b8a8bb55744d14a5cdec6f3cc6b899b03c43666a26908f7c5",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_write_als_scale"
     }
   ],
   "overlay_artifact": "apollo_core_overlay.bin",
   "expected": {
-    "overlay_size": 142986,
-    "overlay_sha256": "1b0fc521cc8964da6525b7f7dce99060d07f5671f0038f37bcd998a56422a49f",
-    "component_size": 3666382,
-    "component_sha256": "a4552ff210b6af33b7826a6b9aaefa6e01c7e6e976c9a852498570ededcf058f"
+    "overlay_size": 143227,
+    "overlay_sha256": "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
+    "component_size": 3666623,
+    "component_sha256": "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
   },
   "toolchain_profiles": {
     "linux-clang": {

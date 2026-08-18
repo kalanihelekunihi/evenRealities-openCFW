@@ -431,6 +431,16 @@ r1_error r1_kv_store_commit(r1_kv_store *store) {
                      store->flags[0], store->payloads[0], descriptors[0].length) != R1_OK) {
         return R1_ERROR_STATE;
     }
+    /* The class-zero record is the snapshot commit marker. Do not report a
+     * successful durable transition until the complete snapshot and its
+     * generation metadata can be read back through the actual provider. */
+    bool verified = false;
+    uint32_t verified_generation = 0u;
+    if (snapshot_valid(store, target, &verified) != R1_OK || !verified ||
+        meta_generation(store, target, &verified_generation, &verified) != R1_OK ||
+        !verified || verified_generation != generation) {
+        return R1_ERROR_STATE;
+    }
     store->generation = generation;
     store->latest_slot = target;
     store->has_snapshot = true;

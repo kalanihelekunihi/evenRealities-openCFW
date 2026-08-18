@@ -18,10 +18,13 @@ post-completion request can return status 3.
 
 The clean-room `r1_export_plan_command` exposes only this bounded state policy.
 It produces typed control/chunk/start/finalize decisions and never reads a
-virtual file, allocates a payload, delays a task, or sends bytes. The already
-audited composite `log.bin` provider, FreeRTOS allocator, queue, delay, logging,
-fragmenter, and Nordic BLE transport remain external. In particular, openR1
-still exposes no live raw private-log export sender.
+virtual file, allocates a payload, delays a task, or sends bytes. The separately
+audited `r1_log_export_snapshot_*` implementation supplies the exact bounded
+EP/log/cache/crash virtual-file source behind independent owner authorization;
+see `DIAGNOSTIC-EXPORT-CORRELATION.md`. FreeRTOS allocation, queueing, delay,
+logging, fragmentation, and the undocumented BLE sender remain external. In
+particular, openR1 still exposes no live raw private-log export sender or
+command.
 
 The Nordic SDK 17.1.0 image retains `r1_export_plan_command` at `0x00035E04`
 through the storage API table at `0x0003CADC`. The verified unsigned image

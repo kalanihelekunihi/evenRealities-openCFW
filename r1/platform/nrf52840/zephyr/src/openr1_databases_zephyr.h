@@ -44,6 +44,20 @@ bool openr1_databases_zephyr_accelerometer_calibration(
 bool openr1_databases_zephyr_battery_configuration(
     r1_nv_battery_configuration *configuration);
 bool openr1_databases_zephyr_ring_size(uint8_t *ring_size);
+bool openr1_databases_zephyr_product_serial(
+    uint8_t serial[R1_NV_PRODUCT_SERIAL_BYTES]);
+bool openr1_databases_zephyr_factory_mode(void);
+r1_error openr1_databases_zephyr_persist_peer_targets(
+    const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
+    const uint8_t second_target[R1_PEER_ADDRESS_SIZE]);
+r1_error openr1_databases_zephyr_remove_ring_metadata(void);
+/* Local/service-mode recovery only. The caller must establish physical
+ * authorization; this API is intentionally not registered with BLE dispatch.
+ * Changed calibration and power fields are cached immediately, while callers
+ * should reboot before relying on already-running sensor providers. */
+r1_error openr1_databases_zephyr_apply_local_nv_recovery(
+    const uint8_t *body, size_t length, uint16_t expected_crc,
+    uint8_t *changed_records);
 r1_error openr1_databases_zephyr_multicast_time_transition(
     const r1_health_time_transition *transition);
 r1_error openr1_databases_zephyr_multicast_hour(uint8_t current_local_hour);

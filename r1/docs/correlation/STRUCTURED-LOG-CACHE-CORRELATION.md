@@ -17,7 +17,9 @@ the product `log.bin` store, and supplies the cache tail to the R1 composite dia
 The functions are therefore `r1_product_specific` / `clean_room_behavior_only`. This permits an
 independent implementation of the documented record and cache contract. It does not permit local
 copies of Nordic, Arm/toolchain, FreeRTOS, the unidentified clock/calendar or device-registry
-providers, nor does it authorize a raw private-log export sender.
+providers, nor does it authorize a raw private-log BLE sender. The separately
+bounded composite virtual-file source is now implemented under
+`DIAGNOSTIC-EXPORT-CORRELATION.md`.
 
 ## Exact closure
 
@@ -71,9 +73,23 @@ The cache is a circular byte buffer described at runtime by `0x200068F4`. The co
 peek or consume across wrap, the count helper computes available bytes from the same read/write
 indices, and append refuses a record that cannot fit. Product mode selects either a 236-byte
 immediate product dispatch threshold or a 4,096-byte storage-event threshold. The periodic worker
-does not run during a composite log export, requires 4,096 cached bytes, applies the recovered raw
-10,000 timing gate, consumes exactly one page, calls the separately bounded `log.bin` page writer,
-and yields through authenticated CMSIS-FreeRTOS.
+does not run during a composite log export and requires 4,096 cached bytes. Direct Thumb-2
+disassembly of the four omitted functions further resolves the runtime descriptor as an exact
+8,192-byte cache with default mode `1` and threshold `3`. It also exposes a stock edge that must not
+be idealized away: `0x000914A0` consumes exactly one 4,096-byte page before applying the strict
+unsigned `tick > last + 10000` (the recovered raw 10,000 timing gate), so a too-early call discards
+that page. A passing call writes
+the page and yields for raw value 80 through authenticated CMSIS-FreeRTOS.
+
+The clean-room implementation in `r1_storage.c` now covers the complete local sixteen-function
+boundary: cache initialize/count/read/append, strict two-byte maximum-occupancy guard, mode and
+threshold configuration, severity filtering, both bounded record encoders, and the exact periodic
+persistence ordering. Host tests pin normal and special typed records, format-string tail capture,
+wrap, capacity, export blocking, and the consume-before-gate edge. The source-built Zephyr target
+allocates the exact 8,192-byte cache plus aligned 4,096-byte persistence scratch, emits a real
+startup record, calls the periodic service from its runtime loop, and retains all core and target
+entry points in the signed application. The diagnostic snapshot adapter freezes these producers
+while its authenticated virtual file is active; no undocumented transport was added.
 
 ## Provider exclusions
 
@@ -84,8 +100,10 @@ The local boundary may call but must not recreate:
 - Arm C/EABI `memcpy`, `memset`, `strlen`, and floating-conversion helpers;
 - the unresolved generic device operation used by `0x000514BC` to obtain its clock record;
 - the unresolved time/calendar provider selected when a synchronized local timestamp exists; and
-- the `log.bin` flash writer, composite private-log exporter, and transport sender, which remain
-  separate boundaries and are not implemented by this closure.
+- the undocumented private-log transport sender, which remains a separate withheld boundary.
+  The bounded composite source and `log.bin` flash writer are implemented and target-bound under
+  `DIAGNOSTIC-EXPORT-CORRELATION.md` and `LOG-BIN-WRITER-CORRELATION.md`; `log.bin` is the only
+  persistence destination admitted here.
 
 The cross-firmware string hit at G2 address `0x00346FD4` is an unrelated GX8002 power diagnostic;
 address coincidence is not attribution evidence for the R1 body at `0x00046FD4`.

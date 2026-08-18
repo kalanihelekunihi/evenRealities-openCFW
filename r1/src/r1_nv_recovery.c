@@ -9,6 +9,7 @@ enum {
     PRODUCT_SN_OFFSET = 31,
     PRODUCT_SN_BYTES = 30,
     PRODUCT_SN_LENGTH_OFFSET = 61,
+    PRODUCT_FACTORY_MODE_OFFSET = 112,
     BODY_BATTERY_TYPE_OFFSET = 92,
     BODY_VOLTAGE_COMPENSATION_OFFSET = 94,
     BODY_RING_SIZE_OFFSET = 96
@@ -311,6 +312,108 @@ r1_error r1_nv_recovery_merge(
     return R1_OK;
 }
 
+r1_error r1_nv_recovery_store_load(
+    const r1_kv_store *store, r1_nv_recovery_state *state) {
+    if (store == NULL || state == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    size_t length = 0u;
+    r1_error error = r1_kv_store_get(
+        store, R1_KV_NV_R1, state->config, sizeof state->config, &length);
+    if (error != R1_OK || length != sizeof state->config) {
+        return error == R1_OK ? R1_ERROR_STATE : error;
+    }
+    error = r1_kv_store_get(
+        store, R1_KV_POWER, state->power, sizeof state->power, &length);
+    if (error != R1_OK || length != sizeof state->power) {
+        return error == R1_OK ? R1_ERROR_STATE : error;
+    }
+    uint8_t ring_size[R1_NV_RECOVERY_RING_SIZE_BYTES];
+    error = r1_kv_store_get(
+        store, R1_KV_RING_SIZE, ring_size, sizeof ring_size, &length);
+    if (error != R1_OK || length != sizeof ring_size) {
+        return error == R1_OK ? R1_ERROR_STATE : error;
+    }
+    state->ring_size = ring_size[0];
+    return R1_OK;
+}
+
+r1_error r1_nv_recovery_store_merge_commit(
+    r1_kv_store *store, const uint8_t *body, size_t body_length,
+    uint16_t expected_crc, r1_nv_recovery_result *result) {
+    if (store == NULL || body == NULL || result == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    r1_nv_recovery_state current;
+    r1_error error = r1_nv_recovery_store_load(store, &current);
+    if (error != R1_OK) {
+        return error;
+    }
+    error = r1_nv_recovery_merge(
+        &current, body, body_length, expected_crc, result);
+    if (error != R1_OK || result->changed_records == 0u) {
+        return error;
+    }
+
+    /* A KV commit includes every dirty class. Recovery must remain one
+     * isolated, auditable old-or-new snapshot rather than accidentally
+     * committing unrelated caller state. */
+    for (size_t index = 0u; index < R1_KV_CLASS_COUNT; ++index) {
+        if (store->dirty[index]) {
+            return R1_ERROR_STATE;
+        }
+    }
+
+    if ((result->changed_records & R1_NV_RECOVERY_CHANGED_CONFIG) != 0u) {
+        error = r1_kv_store_set(
+            store, R1_KV_NV_R1, result->state.config,
+            sizeof result->state.config);
+    }
+    if (error == R1_OK &&
+        (result->changed_records & R1_NV_RECOVERY_CHANGED_POWER) != 0u) {
+        error = r1_kv_store_set(
+            store, R1_KV_POWER, result->state.power,
+            sizeof result->state.power);
+    }
+    if (error == R1_OK &&
+        (result->changed_records & R1_NV_RECOVERY_CHANGED_RING_SIZE) != 0u) {
+        const uint8_t ring_size[R1_NV_RECOVERY_RING_SIZE_BYTES] = {
+            result->state.ring_size,
+        };
+        error = r1_kv_store_set(
+            store, R1_KV_RING_SIZE, ring_size, sizeof ring_size);
+    }
+    if (error == R1_OK) {
+        error = r1_kv_store_commit(store);
+    }
+    if (error != R1_OK) {
+        /* r1_kv_store_commit changes generation/latest-slot only after its
+         * readback gate succeeds. Restore just the proposed payloads and
+         * dirty flags here, avoiding a full-store stack copy on small RTOS
+         * service stacks. Partially programmed flash remains uncommitted. */
+        if ((result->changed_records & R1_NV_RECOVERY_CHANGED_CONFIG) != 0u) {
+            (void)r1_kv_store_set(
+                store, R1_KV_NV_R1, current.config, sizeof current.config);
+            store->dirty[R1_KV_NV_R1] = false;
+        }
+        if ((result->changed_records & R1_NV_RECOVERY_CHANGED_POWER) != 0u) {
+            (void)r1_kv_store_set(
+                store, R1_KV_POWER, current.power, sizeof current.power);
+            store->dirty[R1_KV_POWER] = false;
+        }
+        if ((result->changed_records &
+             R1_NV_RECOVERY_CHANGED_RING_SIZE) != 0u) {
+            const uint8_t ring_size[R1_NV_RECOVERY_RING_SIZE_BYTES] = {
+                current.ring_size,
+            };
+            (void)r1_kv_store_set(
+                store, R1_KV_RING_SIZE, ring_size, sizeof ring_size);
+            store->dirty[R1_KV_RING_SIZE] = false;
+        }
+    }
+    return error;
+}
+
 r1_error r1_nv_battery_configuration_decode(
     const uint8_t *input, size_t length,
     r1_nv_battery_configuration *configuration) {
@@ -336,6 +439,36 @@ r1_error r1_nv_battery_configuration_decode(
         .battery_type_valid = battery_type_valid(battery_type),
         .voltage_compensation_valid = voltage_report_valid(compensation),
     };
+    return R1_OK;
+}
+
+r1_error r1_nv_product_serial_decode(
+    const uint8_t *input, size_t length,
+    uint8_t serial[R1_NV_PRODUCT_SERIAL_BYTES], bool *provisioned) {
+    if (input == NULL || serial == NULL || provisioned == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length != R1_NV_RECOVERY_CONFIG_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    *provisioned = input[PRODUCT_SN_LENGTH_OFFSET] != UINT8_MAX;
+    for (size_t index = 0u; index < R1_NV_PRODUCT_SERIAL_BYTES; ++index) {
+        serial[index] = *provisioned
+            ? input[PRODUCT_SN_OFFSET + index] : UINT8_MAX;
+    }
+    return R1_OK;
+}
+
+r1_error r1_nv_factory_mode_decode(
+    const uint8_t *input, size_t length, bool *factory_mode) {
+    if (input == NULL || factory_mode == NULL) {
+        return R1_ERROR_ARGUMENT;
+    }
+    if (length != R1_NV_RECOVERY_CONFIG_BYTES) {
+        return R1_ERROR_LENGTH;
+    }
+    *factory_mode =
+        input[PRODUCT_FACTORY_MODE_OFFSET] == R1_NV_FACTORY_MODE_MARKER;
     return R1_OK;
 }
 

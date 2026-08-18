@@ -73,10 +73,19 @@ restored. Configuration, power, and ring-size changes are tracked independently.
 ## Clean-room implementation and security boundary
 
 `r1_nv_recovery.c` implements a bounded pure report builder
-and fill-only merge planner over caller-owned state. It performs no flash write, commit, BLE send,
-allocation, logging, or device access. Tests cover null/length/CRC rejection, all-field recovery,
-valid-local preservation, invalid-incoming rejection, reserved-byte behavior, and the zero-voltage
-asymmetry.
+and fill-only merge planner over caller-owned state. The recovered planner itself performs no
+flash write, BLE send, allocation, logging, or device access. Tests cover null/length/CRC
+rejection, all-field recovery, valid-local preservation, invalid-incoming rejection,
+reserved-byte behavior, and the zero-voltage asymmetry.
+
+A separate security-preserving composition,
+`r1_nv_recovery_store_merge_commit`, loads the exact `nv_r1`, `power`, and `r_size` KV classes,
+runs the fill-only merge, refuses any unrelated dirty class, and commits all changed records in one
+generation-bearing snapshot. `r1_kv_store_commit` reads back the complete seven-class snapshot and
+matching generation before reporting success. If programming is interrupted, the caller-visible
+store is restored to its prior state and the incomplete target has no valid class-zero commit
+marker. An exhaustive test cuts power after every byte mutation, reopens only the complete old or
+complete new three-record state, and proves every failed prefix accepts a clean retry.
 
 `r1_nv_recovery_command_handler_plan_decode` additionally provides the strict clean form of the
 registered handler and command dispatcher. It requires a complete five-byte envelope plus exactly
@@ -95,7 +104,8 @@ short, trailing, oversized-body, valid-session, and no-active-session cases.
 The same portable module exposes a strict decoder for the six calibration bytes at `nv_r1` offset
 `0x3E`: direction `0` subtracts, direction `1` adds, other values disable that channel, and an
 all-`0xFF` record is reported absent. The source-built Zephyr GXT310 adapter consumes this value
-read-only after KV startup. It does not invoke the destructive recovery merge or mutate `nv_r1`.
+read-only after KV startup. The local service binding may refresh its decoded cache after an atomic
+recovery, but already-running sensor providers require controlled reboot adoption.
 
 The adjacent six accelerometer bytes at offset `0x44` have a separate strict
 three-Int16LE decoder. All three `-1` values mean absent, matching the stock
@@ -113,10 +123,17 @@ The one-byte `r_size` class has its own strict decoder and is valid only for 6..
 a valid value read-only, but does not infer the separate IQS7211E physical layout from ring size or
 use this field to energize touch hardware.
 
-The normal dispatcher continues to refuse live `nvRecover`. This is intentional hardening from the
-firmware security audit: the body carries two identifiers plus sensor and battery calibration, and
-a valid merge can mutate persistent device identity/configuration. The report sender and live
-persistence surface are documented and byte-pinned but not exposed by OpenR1.
+The Zephyr target exposes `openr1_databases_zephyr_apply_local_nv_recovery` behind its KV mutex and
+updates persistent state plus decoded calibration, battery, ring-size, serial, and factory caches.
+As of 2026-08-18 the normal dispatcher admits only an exact SET carrying recovered command 2,
+declared length 116, a nonzero matching CRC-16/MODBUS, and the complete backing body from the
+encrypted, bonded, independently owner-authorized phone role. Commands 0/1, report requests,
+short/trailing bodies, bad CRCs, other roles, and unauthorized links cannot schedule work. The
+valid merge follows the recovered no-response route; it never exposes the identity-bearing local
+report. Both targets copy the body into a bounded storage queue, atomically commit the fill-only
+generation, and cold-reboot only when records changed so all identity and calibration consumers
+restart from durable state. Host tests cover admission, CRC, no-response semantics, role denial,
+and queue failure; owned-hardware persistence/replay, reboot, and ATT behavior remain required.
 
 The static verifier pins all six bodies, the four manual function extents, complete direct-caller
 maps, dispatcher/report-builder edges, and exact diagnostics:

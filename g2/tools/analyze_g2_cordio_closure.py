@@ -199,7 +199,7 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
         for path in (ROOT / "tools").glob("analyze_g2_cordio_*.py")
         if path.stem not in {
             "analyze_g2_cordio_closure", "analyze_g2_cordio_source_map",
-            "analyze_g2_cordio_version",
+            "analyze_g2_cordio_version", "analyze_g2_cordio_ll_sea_census",
         }
     }
     tests = {
@@ -207,7 +207,7 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
         for path in (ROOT / "tests").glob("test_analyze_g2_cordio_*.py")
         if path.stem not in {
             "test_analyze_g2_cordio_closure", "test_analyze_g2_cordio_source_map",
-            "test_analyze_g2_cordio_version",
+            "test_analyze_g2_cordio_version", "test_analyze_g2_cordio_ll_sea_census",
         }
     }
     if len(analyzer_names) != EXPECTED_MODULE_AUDITS or tests != analyzer_names:

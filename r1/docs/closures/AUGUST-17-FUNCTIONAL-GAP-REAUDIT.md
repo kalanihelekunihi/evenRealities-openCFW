@@ -25,7 +25,18 @@ owned device and a controlled validation protocol.
 | Algorithm output was not connected to product behavior | Closed for stock-proven consumers: HR/SpO2/HRV storage, cumulative activity, dynamic sleep optical authorization, final-sleep construction, validation, `sleep.db` persistence, and synchronized commit are live | `platform/nrf52840/zephyr/src/openr1_health_results_zephyr.c`; `openr1_databases_zephyr.c` |
 | GoMore prior-state and reset behavior was incomplete | Closed: graceful shutdown checkpoints, profile/backward-clock resets discard stale resume state, and failure 60 triggers a fresh engine while transient failures remain retryable | `platform/nrf52840/zephyr/src/openr1_gomore_zephyr.c`; `openr1_databases_zephyr.c` |
 | Generated algorithm parameters could conceal binary dependencies | Closed: all consumed Goodix/GoMore/model words are checked-in typed C data and verified; no stock image or binary algorithm library enters the production build | `reconstructed/model_data/`; `tools/verify_openr1.py` |
+| QMA6100 existed only as retained reconstructed source | Closed on the source-built target: exact `0x12`/`0x13` probing, 25 Hz setup, typed TWIM/delay/lock/FIFO seams, P0.15 IRQ worker, and common normalized motion ingestion are live | `platform/nrf52840/zephyr/src/openr1_motion_zephyr.c`; `reconstructed/qma6100/` |
+| Encryption and bonding were conflated with product authorization | Closed on the source-built target: a completed bonded pairing may enroll the first CRC-protected owner identity; encryption, restored bond state, and `pairAuth` cannot create or replace it; portable reboot reconstruction admits only the exact identity; every truncated record and all 96 single-bit mutations fail closed; malformed reload evicts stale RAM authorization; and revocation is local-only | `platform/nrf52840/zephyr/src/openr1_bae8_zephyr.c`; `src/r1_peer_target.c`; `tests/test_openr1.c`; `docs/SECURITY.md` |
+| Battery/charge state was not continuously product-visible | Closed at the source boundary: startup adopts valid persisted compensation, SAADC acquisition owns the YHM battery lease, exact device-status access refreshes voltage, and live PMIC register 6 refreshes charge state | `platform/nrf52840/zephyr/src/openr1_battery_zephyr.c`; `src/r1_battery.c` |
+| Hardware RTC adoption was incomplete | Closed at the source boundary: RTC2 runs the recovered 1,024-Hz/8-Hz backend, the phone-synchronized monotonic clock is live, and exact Gregorian query/day-boundary conversion drives storage and health cadence | `platform/nrf52840/zephyr/src/openr1_rtc_zephyr.c`; `src/r1_clock.c`; `reconstructed/time_calendar/` |
+| Identity/calibration NV recovery was non-transactional | Closed as an owner-authorized recovery operation: the exact CRC-gated fill-only merge commits `nv_r1`, `power`, and `r_size` in one generation-bearing KV snapshot, verifies complete readback, exhaustively proves old-or-new reboot state at every byte cut, and exposes no identity report | `src/r1_nv_recovery.c`; `src/r1_kv_store.c`; `platform/nrf52840/zephyr/src/openr1_databases_zephyr.c`; `tests/test_openr1.c` |
+| Channel 1 had no safe production receiver | Closed narrowly: the 36-byte route admits only opcode `0x89` after encrypted, bonded, independently authorized glasses-role admission; it emits the exact seven-byte response and binds touch, REG1, immediate `{16,16,2,600}` secondary-mode, and exact `0x2800`-tick delayed `{72,84,4,600}` slow BLE actions; every other BC/eAT route remains fail-closed | `platform/nrf52840/zephyr/src/openr1_bae8_zephyr.c`; `src/r1_runtime.c`; `src/r1_protocol.c` |
+| Storage power-loss testing stopped at provider-call boundaries | Closed in the portable fault model: `kv.bin` exhausts every byte cut across erase/program and legacy migration; `sleep.db` uses reservation/body/metadata/commit ordering and exhausts normal plus rollover cuts while proving a different recovery append remains iterable | `src/r1_storage.c`; `src/r1_kv_store.c`; `src/r1_sleep_db.c`; `tests/test_openr1.c` |
+| The composite diagnostic source remained absent with its private BLE sender | Closed at the safe source boundary: exact EP/log/cache/optional-crash ordering, chronology, eligibility, checksum, and segmented reads are compiled and target-bound to one encrypted, bonded, independently authorized phone-role session; disconnect or security loss releases the writer freeze. The undocumented BLE command remains separately withheld | `src/r1_storage.c`; `platform/nrf52840/zephyr/src/openr1_storage_zephyr.c`; `openr1_bae8_zephyr.c`; `DIAGNOSTIC-EXPORT-CORRELATION.md` |
+| Deployment preservation and recovery existed only as prose | Closed offline: the bundle embeds a machine-checked no-mass-erase contract; the preflight requires exact 1-MiB internal-flash and complete 0x308-byte architected nRF52840 UICR backups, accepts only exact two-data/one-swap retail FDS settings or fully erased pages, erases the complete source-built boot/application/settings extent so no opaque retail bytes or incompatible credentials survive, preserves only product data, and emits separate canonical recovery HEX files plus the exact expected full readback; an independent verifier reconstructs the result, byte-compares observed internal-flash and unchanged-UICR install readbacks, and separately requires post-recovery readbacks to equal both original backups byte-for-byte | `tools/prepare_zephyr_deployment.py`; `tools/verify_zephyr_deployment.py`; `tools/verify_zephyr_bundle.py` |
 | The full-flash target might still rely on S140 or the retail bootloader | Closed: the alternate bundle contains source-built MCUboot, a source-built Zephyr Bluetooth host/controller, and the signed application only | `tools/verify_zephyr_bundle.py`; `SOURCE-BUILT-ZEPHYR-BUNDLE.md` |
+| The manifest could be internally consistent while stale versus the workspace | Closed: verification now rejects unsafe inventory paths and byte-compares every one of the 174 recorded firmware sources to the current source tree | `tools/verify_zephyr_bundle.py` |
+| Linked RAM left no credible runtime margin | Closed at the software-layout boundary: dispatch responses retain the exact 32-response, 1,100-byte-model, and 50-fragment limits but share an exact fragment-bounded arena; the owner build falls from 256,690 bytes (97.92%) to 233,586 bytes (89.11%) without removing a provider or protocol response | `include/openr1/r1_dispatch.h`; `src/r1_dispatch.c`; `tests/test_openr1.c`; `SOURCE-BUILT-ZEPHYR-BUNDLE.md` |
 
 ## Intentionally unclaimed behavior
 
@@ -44,14 +55,37 @@ guessing:
   omitted. The source target preserves data and reports failure instead.
 - The stock-unreachable stress producer and unlabeled GoMore output fields are
   not exposed or assigned invented semantics.
-- Product authorization, identity-bearing NV recovery, and raw diagnostic
-  mutation remain withheld where the evidence does not provide a safe trust
-  policy.
+- Identity-bearing NV recovery now has an owner-phone-gated, readback-verified
+  atomic KV transaction with exhaustive byte-cut rollback tests. The local
+  report sender and raw diagnostic mutation remain withheld; physical
+  persistence/replay, reboot adoption, and ATT behavior remain validation work.
 
 These constraints explain why rows in `reference/COVERAGE.csv` can remain
 `partial` even when their software implementation is complete: that ledger also
 tracks physical validation and deployment risk. A `partial` label is not, by
 itself, evidence of an opaque object or an uncompiled code path.
+
+## Fresh remaining-gap classification
+
+After the source-target and deployment closures above, the authoritative ledger
+contains 52 `implemented`, 40 `partial`, two `withheld`, two `separate`, and one
+`excluded` row. The 40 partial rows do not identify an opaque executable input.
+They retain a partial label because their last acceptance criterion needs an
+owned ring, debug probe, radio/electrical/reference instrumentation, retail-data
+migration evidence, or a product authorization/licensing decision. Raw EP/log
+payload access retains explicit privacy and destructive-control restrictions.
+The withheld rows are credential/algorithm-key provisioning and the private
+structured-log BLE sender; neither belongs in an unauthenticated general command
+surface. The source-built OTA recovery route is implemented while advertising
+authorization and power control remain explicit policy and physical-validation
+gates on a partial row.
+
+The offline portion of deployment is now executable and independently checked,
+including complete install-partition erasure, exact preserved-region modeling,
+separate internal-flash and UICR backups/recovery images, unchanged-UICR proof,
+and post-recovery comparison. The remaining deployment criteria—actual flash,
+boot, rollback, recovery, and power-loss validation—cannot be truthfully closed
+without owned hardware and an authorized debug path.
 
 ## Reproduction gates
 
@@ -67,14 +101,14 @@ python3 -m unittest discover -s r1/tests -p 'test_sign_r1_firmware.py'
 git diff --check
 ```
 
-The final source-integrity audit must also compare every entry under
-`openr1_source.files` in the bundle manifest with the current workspace. The
-current bundle records 171 source files; all 171 match byte-for-byte.
+The bundle verifier compares every entry under `openr1_source.files` with the
+current workspace. The current bundle records 174 source files; all 174 match
+byte-for-byte.
 
 Current verified artifacts:
 
-- `build/openr1-zephyr/openr1-source-built.zip`:
-  `9979d400c568607aeec56ff666cbb90a026f37d35f6f3a3590d9aabb9a4b3667`
+- `build/openr1-zephyr/openr1-source-built-ble-recovery-owner.zip`:
+  `9d518d0a0a1f748796d591fd561638204e9ac75a59fc7fd98a2b226bd7ccae49`
 - Nordic application BIN:
   `47e502685da57c1df55aeee6d9d156210f22b427a9c36ac94d72401a4f859729`
 - Nordic application HEX:

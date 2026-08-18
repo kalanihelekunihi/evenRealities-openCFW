@@ -337,6 +337,18 @@ PRODUCTION_IN_PLACE_RECORDS = [
                     "Homebrew clang version 22.1.8"
                 ),
             },
+            **{
+                record: {
+                    "reviewed_version_prefix": (
+                        "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+                    ),
+                }
+                for record in (
+                    "apple-send-isr-record",
+                    "apple-mq-put-record",
+                    "apple-terminate-record",
+                )
+            },
         },
     }
     for name in STOCK
@@ -778,15 +790,13 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 142986,
+                "overlay_size": 143227,
                 "overlay_sha256": (
-                    "9e5004af49fb14a22e7e7ed7357e4c10"
-                    "f87dc8da3a7fb4d7b97fcffcde804c43"
+                    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
                 ),
-                "component_size": 3646850,
+                "component_size": 3666623,
                 "component_sha256": (
-                    "8722e5565bf54dade66fb751155c11eb"
-                    "d128d7a12853e3e4b8671c3c97807827"
+                    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
                 ),
             },
         )
@@ -908,13 +918,12 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 "patch_site_count": len(overlay["patched_sites"]),
             },
             {
-                "size": 142986,
+                "size": 143227,
                 "sha256": (
-                    "9e5004af49fb14a22e7e7ed7357e4c10"
-                    "f87dc8da3a7fb4d7b97fcffcde804c43"
+                    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
                 ),
-                "function_count": 615,
-                "patch_site_count": 578,
+                "function_count": 786,
+                "patch_site_count": 727,
             },
         )
         self.assertTrue(set(STOCK).isdisjoint(overlay["functions"]))
@@ -929,17 +938,16 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                     Path(self.production_output)
                     / "ota_s200_firmware_ota.bin"
                 ).relative_to(ROOT).as_posix(),
-                "size": 3646850,
+                "size": 3666623,
                 "sha256": (
-                    "8722e5565bf54dade66fb751155c11eb"
-                    "d128d7a12853e3e4b8671c3c97807827"
+                    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
                 ),
-                "opaque_base_bytes": 3438528,
-                "source_owned_bytes": 121900,
+                "opaque_base_bytes": 3423990,
+                "source_owned_bytes": 143409,
                 "source_owned_in_place_bytes": 182,
                 "generated_wrapper_bytes": 32,
-                "generated_patch_site_bytes": 84654,
-                "replaced_stock_function_bytes": 84836,
+                "generated_patch_site_bytes": 99192,
+                "replaced_stock_function_bytes": 99370,
             },
         )
         self.assertEqual(
@@ -1015,7 +1023,7 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 if official != generated
             )
         self.assertEqual(actual_mutations, expected_mutations)
-        self.assertEqual(len(actual_mutations), 79964)
+        self.assertEqual(len(actual_mutations), 93395)
 
         vector_start = PACKAGE_PREAMBLE_SIZE
         self.assertEqual(

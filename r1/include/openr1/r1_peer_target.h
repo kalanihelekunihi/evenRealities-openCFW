@@ -5,17 +5,33 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "openr1/r1_kv_store.h"
 #include "openr1/r1_protocol.h"
 
 #define R1_PEER_ADDRESS_SIZE 6u
 #define R1_PEER_SLOT_SIZE 7u
 #define R1_PEER_SLOT_COUNT 3u
+#define R1_OWNER_AUTH_RECORD_BYTES 12u
+#define R1_OWNER_AUTH_ADDRESS_OFFSET 4u
+#define R1_OWNER_AUTH_CRC_OFFSET 10u
+#define R1_OWNER_AUTH_MAGIC UINT8_C(0xa1)
+#define R1_OWNER_AUTH_VERSION UINT8_C(1)
+
+typedef struct {
+    uint8_t record[R1_OWNER_AUTH_RECORD_BYTES];
+    bool loaded;
+    bool corrupt;
+} r1_owner_authorization_state;
 
 /* Recovered persistence site of the two advStart target addresses in the
  * kv.bin `dev_info` payload (R1-191, CONNECTION-CONTROL-CORRELATION.md):
  * the first target at offset 8 and the second at offset 14. */
 #define R1_DEV_INFO_TARGET_FIRST_OFFSET 8u
 #define R1_DEV_INFO_TARGET_SECOND_OFFSET 14u
+#define R1_DEV_INFO_PEER_MARKER_OFFSET 20u
+#define R1_DEV_INFO_CONNECTION_FLAGS_OFFSET 24u
+#define R1_DEV_INFO_GLASSES_CONNECTED_FLAG UINT8_C(0x04)
+#define R1_DEV_INFO_RECORD_BYTES 52u
 /* Recovered raw delayed-disconnect delay for a connected glasses peer that
  * matches neither target.  The delayed-event runtime treats the value as
  * raw 1024 Hz ticks, not milliseconds. */
@@ -43,9 +59,8 @@ typedef struct {
 } r1_connection_control_adv_start_handler_plan;
 
 /* Composition of the recovered advStart event-0x200 consumer policy.  The
- * externally callable advStart command stays refused in the normal
- * dispatcher; this plan exists so the composition behind that refusal is
- * bound and host-tested. */
+ * normal dispatcher exposes it only to an encrypted, bonded,
+ * owner-authorized phone role with an exact 12-byte SET payload. */
 typedef struct {
     /* Both targets are always stored, even after a peer mismatch. */
     bool store_targets;
@@ -123,7 +138,44 @@ r1_error r1_peer_target_persist(
     uint8_t *dev_info, size_t length,
     const uint8_t first_target[R1_PEER_ADDRESS_SIZE],
     const uint8_t second_target[R1_PEER_ADDRESS_SIZE]);
+/* Exact two-stage removeRingNotify state changes. The caller persists the
+ * first image before applying and persisting the second image. */
+r1_error r1_remove_ring_clear_connected_flag(
+    uint8_t *dev_info, size_t length);
+r1_error r1_remove_ring_clear_peer_slots(
+    uint8_t *dev_info, size_t length);
+/* Executes the recovered removeRingNotify persistence order against the
+ * transparent snapshot store: clear flag 0x04 and commit, then erase both
+ * peer slots, restore marker CAMH, and commit again. A failure after the
+ * first commit intentionally leaves that valid intermediate generation;
+ * retrying this idempotent operation completes the final generation. */
+r1_error r1_remove_ring_metadata_commit(r1_kv_store *store);
 r1_bond_diagnostic_result r1_peer_bond_diagnostic_plan(
     uint16_t peer_id, int provider_load_result);
+
+/* Transparent owner-authorization record used by source-built targets. The
+ * first successfully persisted bonded identity becomes the owner; pairAuth
+ * remains role metadata and cannot create or replace this record. */
+r1_error r1_owner_authorization_encode(
+    uint8_t address_type, const uint8_t address[R1_PEER_ADDRESS_SIZE],
+    uint8_t record[R1_OWNER_AUTH_RECORD_BYTES]);
+bool r1_owner_authorization_decode(
+    const uint8_t *record, size_t length, uint8_t *address_type,
+    uint8_t address[R1_PEER_ADDRESS_SIZE]);
+bool r1_owner_authorization_matches(
+    const uint8_t *record, size_t length, uint8_t address_type,
+    const uint8_t address[R1_PEER_ADDRESS_SIZE]);
+/* Stateful fail-closed wrapper used by persistent target settings. A malformed
+ * reload clears any previously active RAM identity before setting `corrupt`,
+ * so stale authorization cannot survive a failed settings replay. Reset is
+ * reserved for a confirmed-empty fresh store or successful local revocation. */
+void r1_owner_authorization_state_reset(
+    r1_owner_authorization_state *state);
+bool r1_owner_authorization_state_load(
+    r1_owner_authorization_state *state,
+    const uint8_t *record, size_t length);
+bool r1_owner_authorization_state_matches(
+    const r1_owner_authorization_state *state, uint8_t address_type,
+    const uint8_t address[R1_PEER_ADDRESS_SIZE]);
 
 #endif

@@ -13,9 +13,9 @@ BUILD = ROOT / "platform" / "nrf52840" / "sdk" / "_build"
 HEX = BUILD / "openr1_nrf52840_s140.hex"
 BIN = BUILD / "openr1_nrf52840_s140.bin"
 MAP = BUILD / "openr1_nrf52840_s140.map"
-EXPECTED_HEX_SHA256 = "b3bf1fd534bf588c2cf3186d1f48ac1aa07c1dfcf71e681095e6ae2770cc8b4a"
-EXPECTED_BIN_SHA256 = "47e502685da57c1df55aeee6d9d156210f22b427a9c36ac94d72401a4f859729"
-EXPECTED_BIN_BYTES = 436648
+EXPECTED_HEX_SHA256 = "c66253d4a054fa9ec473502c42ae3c6f240d9b45fc2f9c6c1cd0869a9e1d7789"
+EXPECTED_BIN_SHA256 = "c4a3346b0fa0e7c3d50b93899934534a573f9c4c3ad10d79665957a6eea87b22"
+EXPECTED_BIN_BYTES = 439144
 REQUIRED_OBJECTS = (
     BUILD / "openr1_nrf52840_s140" / "bma4.c.o",
     BUILD / "openr1_nrf52840_s140" / "bma456w.c.o",
@@ -314,11 +314,15 @@ REQUIRED_LINKED_SYMBOLS = (
     "openr1_databases_event_bus",
     "r1_connection_control_plan_adv_start",
     "r1_peer_target_persist",
+    "r1_remove_ring_clear_peer_slots",
+    "r1_remove_ring_metadata_commit",
     "openr1_connection_control_adv_start",
     "openr1_bae8_peer_address",
+    "openr1_databases_queue_remove_ring",
     "openr1_databases_persist_reg1",
     "openr1_databases_reg1_enabled",
     "r1_runtime_set_settings_handler",
+    "r1_runtime_set_remove_ring_handler",
     "r1_system_settings_reg1_enabled",
     "r1_system_settings_store_reg1",
     "r1_model_data_words",
