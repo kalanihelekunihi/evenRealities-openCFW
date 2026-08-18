@@ -645,6 +645,20 @@ is private `pb_decode_inner`; the successor literal island at
 No signing, flashing, erase, filesystem mutation, or physical device operation
 is authorized by these estimates.
 
+## Latest milestone: FreeRTOS priority-inheritance, IAR scanset, littlefs size leaf
+
+Apollo main now source-owns `xTaskPriorityInherit` (`[0x004558CC,0x0045596E)`,
+162 bytes), `vTaskPriorityDisinheritAfterTimeout` (`[0x00455A1C,0x00455ACA)`,
+174 bytes), the IAR DLIB scanset matcher `open_cfw_iar_scanset_match`
+(`[0x004D2112,0x004D2158)`, 70 bytes, byte-identical), and the littlefs
+`lfs_file_size` public wrapper (`[0x004CFC2E,0x004CFC5C)`, 46 bytes; recovered
+`lfs_t.mlist` at `0x28`).
+
+Current overlay/component/package sizes are `142986 / 3666382 / 4444876`. The
+apple-clang canonical build, byte-identical package, manifest verify, and Apollo
+origin accounting pass fail-closed; the linux-clang profile pins await a Linux
+toolchain regeneration.
+
 ## Latest milestone: nanopb private decoder loop
 
 Private `pb_decode_inner` at `[0x0048FE98,0x00490112)` is now

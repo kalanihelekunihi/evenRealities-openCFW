@@ -4435,6 +4435,26 @@ functions do not move. Outside Apollo,
 the codec segment destinations remain the most important unresolved addresses;
 the touch install base still needs updater-level confirmation.
 
+## FreeRTOS priority-inheritance, IAR scanset, and littlefs size-wrapper leaf increment
+
+Apollo main now source-owns four additional leaves: `xTaskPriorityInherit`
+(stock `[0x004558CC,0x0045596E)`, 162 bytes), `vTaskPriorityDisinheritAfterTimeout`
+(stock `[0x00455A1C,0x00455ACA)`, 174 bytes), the IAR DLIB scanf scanset matcher
+`open_cfw_iar_scanset_match` (stock `[0x004D2112,0x004D2158)`, 70 bytes,
+byte-identical in place), and the littlefs v2.10.1 `lfs_file_size` public wrapper
+(stock `[0x004CFC2E,0x004CFC5C)`, 46 bytes). The two FreeRTOS leaves are bounded
+adaptations over the recovered G2 TCB/ready-list ABI binding source-owned
+`open_cfw_freertos_list_remove`/`open_cfw_freertos_list_insert_end`/`ulSetInterruptMask`;
+the littlefs wrapper binds source-owned `open_cfw_littlefs_mlist_isopen` and
+`open_cfw_littlefs_file_size_private` with the recovered `lfs_t` `mlist` field at
+offset `0x28` (from the stock `ldr r0, [lfs, #0x28]`).
+
+The overlay/component/package sizes are `142986 / 3666382 / 4444876`. The
+apple-clang component build, byte-identical package, `open_cfw verify`, and Apollo
+origin accounting all pass fail-closed, and every patch-site stock SHA-256 is
+verified against the official image. The linux-clang profile pins await Linux
+toolchain regeneration.
+
 ## Prior FreeRTOS task-name source increment
 
 Apollo main now source-owns the complete 34-byte `pcTaskGetName` entry at
