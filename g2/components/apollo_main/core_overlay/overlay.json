@@ -25080,6 +25080,169 @@
           "target_function": "open_cfw_iar_range_error"
         }
       ]
+    },
+    {
+      "function": "open_cfw_freertos_task_priority_inherit",
+      "source": {
+        "path": "components/shared/freertos/runtime_freertos_task_priority_inherit.c",
+        "size": 5719,
+        "sha256": "34001d4658211fc9a717cd2987530a16cfd1d26759fe964e8f72b3df0bfa7106",
+        "license": "MIT",
+        "origin": "bounded source-equivalent adaptation of authenticated FreeRTOS-Kernel V10.5.1 xTaskPriorityInherit over the recovered G2 TCB and ready-list ABI",
+        "upstream": "https://github.com/FreeRTOS/FreeRTOS-Kernel/blob/def7d2df2b0506d3d249334974f51e427c17a41c/tasks.c",
+        "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+        "evidence": "docs/research/freertos-queue-send-from-isr-source-audit.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 130,
+        "sha256": "9ef6255997554e60219d17d9586178d166ce5a58f12d7e9f00c68e9197b03197",
+        "alignment": 4,
+        "offset": 142580,
+        "unrelocated_sha256": "53b7d42d835da8f852febb24f55dfaa84dfd686944b510894216ab4754f119b6"
+      },
+      "relocations": [
+        {
+          "offset": 96,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_list_remove",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_list_remove"
+        },
+        {
+          "offset": 120,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_list_insert_end",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_list_insert_end"
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_freertos_task_priority_disinherit_after_timeout",
+      "source": {
+        "path": "components/shared/freertos/runtime_freertos_task_priority_disinherit_after_timeout.c",
+        "size": 8103,
+        "sha256": "921a706041143aae3473d5026b0f79e6efd2c1965db3335caf97573350897a83",
+        "license": "MIT",
+        "origin": "bounded source-equivalent adaptation of authenticated FreeRTOS-Kernel V10.5.1 vTaskPriorityDisinheritAfterTimeout over the recovered G2 TCB and ready-list ABI",
+        "upstream": "https://github.com/FreeRTOS/FreeRTOS-Kernel/blob/def7d2df2b0506d3d249334974f51e427c17a41c/tasks.c",
+        "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+        "evidence": "docs/research/freertos-queue-send-from-isr-source-audit.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "relocations": [
+        {
+          "offset": 84,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "ulSetInterruptMask",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "ulSetInterruptMask"
+        },
+        {
+          "offset": 98,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "ulSetInterruptMask",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "ulSetInterruptMask"
+        },
+        {
+          "offset": 120,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_list_remove",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_list_remove"
+        }
+      ],
+      "expected": {
+        "size": 174,
+        "sha256": "8ef0312d5af9a1eb1cde5e6a5631aae2bea60777823923665ce860a961bf1a26",
+        "alignment": 4,
+        "offset": 142712,
+        "unrelocated_sha256": "802fd5488687bd894ae57fb13dc774812d0c1e96a6803707e445f781a25b00c7"
+      }
+    },
+    {
+      "function": "open_cfw_iar_scanset_match",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/candidates/iar_dlib_scanset_matcher.S",
+        "size": 3373,
+        "sha256": "2645fa16052452768fd90da9357d6073f45443ce1768a84f16fa8c0f7c8a92f7",
+        "license": "GPL-3.0-only",
+        "origin": "clean-room Thumb-2 source recreation of authenticated IAR DLIB scanf %[...] scanset membership-matcher semantics",
+        "evidence": "docs/research/g2-iar-dlib-format-io-recovery.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "relocations": [],
+      "expected": {
+        "size": 70,
+        "sha256": "154d24d2cf8f15fed12b16d091a734a70d216ceda6fabb0978cadb522139a2c2",
+        "alignment": 2,
+        "offset": 142886,
+        "unrelocated_sha256": "154d24d2cf8f15fed12b16d091a734a70d216ceda6fabb0978cadb522139a2c2"
+      }
     }
   ],
   "in_place_leaves": [
@@ -26204,7 +26367,10 @@
     "TF_Tick",
     "open_cfw_iar_frexpf_bits",
     "open_cfw_iar_frexpf",
-    "open_cfw_iar_ldexpf"
+    "open_cfw_iar_ldexpf",
+    "open_cfw_freertos_task_priority_inherit",
+    "open_cfw_freertos_task_priority_disinherit_after_timeout",
+    "open_cfw_iar_scanset_match"
   ],
   "patch_sites": [
     {
@@ -31975,14 +32141,38 @@
       "expected_sha256": "314f08b4ed19f0ad2b7afdcdec50da41f1ba983725a3198d813051b31fed93fb",
       "branch": "b_w",
       "target_function": "open_cfw_iar_ldexpf"
+    },
+    {
+      "name": "replace_freertos_task_priority_inherit",
+      "runtime_address": 4544716,
+      "expected_size": 162,
+      "expected_sha256": "7a03706199fa57820990f7cd15a4c9cc2a222b85e35697625af41eb7c4182806",
+      "branch": "b_w",
+      "target_function": "open_cfw_freertos_task_priority_inherit"
+    },
+    {
+      "name": "replace_freertos_task_priority_disinherit_after_timeout",
+      "runtime_address": 4545052,
+      "expected_size": 174,
+      "expected_sha256": "457932fc906a97ce86aa034cd06c428db6d4943538b18c58e22775f1acc6ee68",
+      "branch": "b_w",
+      "target_function": "open_cfw_freertos_task_priority_disinherit_after_timeout"
+    },
+    {
+      "name": "replace_iar_dlib_scanset_match",
+      "runtime_address": 5054738,
+      "expected_size": 70,
+      "expected_sha256": "154d24d2cf8f15fed12b16d091a734a70d216ceda6fabb0978cadb522139a2c2",
+      "branch": "b_w",
+      "target_function": "open_cfw_iar_scanset_match"
     }
   ],
   "overlay_artifact": "apollo_core_overlay.bin",
   "expected": {
-    "overlay_size": 142578,
-    "overlay_sha256": "3d5c9fe87fd46cbc40bb5670653f45d3d61f9d777168aa47b70fb10712698ab4",
-    "component_size": 3665974,
-    "component_sha256": "5cef32ba7350e7f6476336fa6a087010e6143e3e692205215c271430aa110d22"
+    "overlay_size": 142956,
+    "overlay_sha256": "1608ea30522ac11a816cd3367af8885b178204ee4e9d263f0f302971884e7676",
+    "component_size": 3666352,
+    "component_sha256": "57c99323f24159a0721a4e04712d48b55d4c9835d2650ecf214ad89800de1a84"
   },
   "toolchain_profiles": {
     "linux-clang": {
@@ -31995,5 +32185,11 @@
         "component_sha256": "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"
       }
     }
+  },
+  "_expected_backup": {
+    "overlay_size": 142710,
+    "overlay_sha256": "9e6ace5bf14013f6f2db8f3587e9c74422edf66ab9cc0391dc3bd3f0d7926470",
+    "component_size": 3666106,
+    "component_sha256": "a884e597e1e782918cc2ce26251a5ac22dcbf8b07139f255f5b557bfadfaf569"
   }
 }
