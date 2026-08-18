@@ -1,30 +1,30 @@
 {
-  "schema_version": 1,
-  "target": "official G2 s200_v2.2.6.10 Apollo main",
-  "classification_policy": "conservative lower bounds over builder-owned opaque base bytes",
-  "expected_counts": {
-    "component_opaque_base_bytes": 3424780,
-    "manifest_official_blob_bytes_before_reconciliation": 3426372,
-    "controlled_bytes_mislabeled_official_blob": 1592,
-    "origin_buckets": {
-      "third_party_path_anchored": 130000,
-      "first_party_or_project_path_anchored": 461468,
-      "unanchored_discovered_function": 675636,
-      "outside_trustworthy_function_envelopes": 2157676
-    },
-    "third_party_family_bytes": {
-      "EasyLogger-master": 70,
-      "TinyFrame": 1568,
-      "cordio": 44798,
-      "littlefs": 11746,
-      "lvgl_v9.3": 70362,
-      "ringBuffer": 0,
-      "tlsf": 1456
-    }
+ "schema_version": 1,
+ "target": "official G2 s200_v2.2.6.10 Apollo main",
+ "classification_policy": "conservative lower bounds over builder-owned opaque base bytes",
+ "expected_counts": {
+  "component_opaque_base_bytes": 3424328,
+  "manifest_official_blob_bytes_before_reconciliation": 3426372,
+  "controlled_bytes_mislabeled_official_blob": 2044,
+  "origin_buckets": {
+   "first_party_or_project_path_anchored": 461468,
+   "outside_trustworthy_function_envelopes": 2157676,
+   "third_party_path_anchored": 129954,
+   "unanchored_discovered_function": 675230
   },
-  "limitations": [
-    "retained paths are lower-bound ownership anchors, not proof of pristine upstream bodies",
-    "unanchored functions include both third-party and first-party code",
-    "bytes outside trustworthy function envelopes mix data, assets, alignment, missed code, and rejected analyzer artifacts"
-  ]
+  "third_party_family_bytes": {
+   "EasyLogger-master": 70,
+   "TinyFrame": 1568,
+   "cordio": 44798,
+   "littlefs": 11700,
+   "lvgl_v9.3": 70362,
+   "ringBuffer": 0,
+   "tlsf": 1456
+  }
+ },
+ "limitations": [
+  "retained paths are lower-bound ownership anchors, not proof of pristine upstream bodies",
+  "unanchored functions include both third-party and first-party code",
+  "bytes outside trustworthy function envelopes mix data, assets, alignment, missed code, and rejected analyzer artifacts"
+ ]
 }

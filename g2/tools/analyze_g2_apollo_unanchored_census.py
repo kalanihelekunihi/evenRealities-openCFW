@@ -60,7 +60,7 @@ PATH_ANALYZER = ROOT / "tools/analyze_apollo_embedded_source_paths.py"
 MANIFESTS = ROOT / "tools/manifests"
 DEFAULT_PLAN = ROOT / "build/source/flash-plan.json"
 DEFAULT_COMPONENT_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
-PLAN_SHA256 = "97230c89e27b9fea1db1d0cc9c2ca6bed5449ece6d35ea98cf101d7a219b1d9e"
+PLAN_SHA256 = "3638353f7456de2bc69e05b939bc46c866ea9243ffceca7b26864e7990ef13ea"
 
 MAX_TRUSTWORTHY_FUNCTION_ENVELOPE = 16_384
 EXPECTED_CORPUS_FUNCTIONS = 7_370
