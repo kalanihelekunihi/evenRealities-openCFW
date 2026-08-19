@@ -269,6 +269,75 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if any(address % 4 == 0 for address, _ in raw_interior_windows):
         raise AuditError("aligned sensor-caldata strict-interior pointer appeared")
 
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/nvdb_sensor_caldata.c"
+    expected_patches = {
+        "replace_nvdb_sensor_caldata_default_initialize": (
+            0x00509764, 24, "de5d7932c7206ec0b45983986f89465c9321c1af496c0a0d2b344d4ec5a04ac9",
+            "open_cfw_nvdb_sensor_caldata_default_initialize",
+        ),
+        "replace_nvdb_sensor_caldata_load_and_migrate": (
+            0x0050977C, 400, "1e7a393fea147d565878b038fc6f28da1909dd532e49d03754a1a97ec6182edc",
+            "open_cfw_nvdb_sensor_caldata_load_and_migrate",
+        ),
+        "replace_nvdb_sensor_caldata_update": (
+            0x0050990C, 120, "d150d259a93568b54fb4496e38ef99c74778961dad526f9bd4b822e0b2920393",
+            "open_cfw_nvdb_sensor_caldata_update",
+        ),
+        "replace_nvdb_sensor_caldata_ag_default_initialize": (
+            0x00509984, 22, "70a9ed13bd7b982380fd99a4bec78b1285e40d64d7b78858384130ea1f44d501",
+            "open_cfw_nvdb_sensor_caldata_ag_default_initialize",
+        ),
+        "replace_nvdb_sensor_caldata_ag_load_and_migrate": (
+            0x0050999A, 4, "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+            "open_cfw_nvdb_sensor_caldata_ag_load_and_migrate",
+        ),
+        "replace_nvdb_sensor_caldata_ag_update": (
+            0x0050999E, 90, "672d51e8e98d7e9709afbecbe606e63e7639a705912090028955869226bc9c92",
+            "open_cfw_nvdb_sensor_caldata_ag_update",
+        ),
+        "replace_nvdb_sensor_caldata_ag_read": (
+            0x005099F8, 70, "bb55d198e1e11e13c14b6931d4d4ce5a2a9eef7af481ebc3c718ac218912ba39",
+            "open_cfw_nvdb_sensor_caldata_ag_read",
+        ),
+        "replace_nvdb_sensor_caldata_check": (
+            0x00509A40, 170, "96115eaf104ea073d40f77085ec765f89844909e679bafbdcb16067975cc60b0",
+            "open_cfw_nvdb_sensor_caldata_check",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"]
+            != "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3"
+            or leaf.get("profiles") != ["apple-clang"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production sensor-caldata routing changed")
+
     if len(PRIMARY_BOOT_RECORD) != 92 or len(AG_BOOT_RECORD) != 68:
         raise AuditError("sensor-caldata factory ABI changed")
     if sha256(PRIMARY_BOOT_RECORD) != "9940a499daf357537c1794838645920b2f6ac0416f549d4536ba43f282868150":
@@ -306,6 +375,18 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "initialized_crc16": f"0x{crc16_ccitt_false(AG_BOOT_RECORD[:64]):04X}",
         },
         "default_matrix_sha256": DEFAULT_MATRIX_SHA256,
+        "production": {
+            "candidate": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+            "production_routed": True,
+            "ownership_bytes": BODY_BYTES,
+            "retained_stock_noncode_bytes": (
+                ALIGNMENT_SPAN[1] - ALIGNMENT_SPAN[0]
+                + LITERAL_SPAN[1] - LITERAL_SPAN[0]
+            ),
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
+        },
     }
 
 

@@ -77,16 +77,16 @@ PROFILE_PINS = {
             "0fd3ac0a8497cff70f6886c0901274ed0"
         ),
         "overlay": (
-            143_227,
-            "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
+            147_021,
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
         ),
         "component": (
-            3_666_623,
-            "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "package": (
-            4_445_117,
-            "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6",
+            4_448_911,
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
         ),
     },
     "linux-clang": {
@@ -496,9 +496,9 @@ const char *vTaskName(void);
 
     def test_registration_placement_patch_and_whole_component_ingress(self) -> None:
         config = json.loads(OVERLAY.read_text(encoding="utf-8"))
-        self.assertEqual(len(config["functions"]), 790)
-        self.assertEqual(len(config["patch_sites"]), 731)
-        self.assertEqual(len(config["relocated_leaves"]), 221)
+        self.assertEqual(len(config["functions"]), 825)
+        self.assertEqual(len(config["patch_sites"]), 766)
+        self.assertEqual(len(config["relocated_leaves"]), 256)
         self.assertEqual(config["functions"].count(ADAPTER_FUNCTION), 1)
         self.assertEqual(config["functions"].count(FUNCTION), 1)
 
@@ -726,7 +726,7 @@ const char *vTaskName(void);
             PROFILE_PINS["linux-clang"]["component"],
         )
         regions = component["regions"]
-        self.assertEqual(len(regions), 1274)
+        self.assertEqual(len(regions), 1400)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(left["file_offset"] + left["size"], right["file_offset"])
@@ -754,12 +754,12 @@ const char *vTaskName(void);
             accounting[status] = (len(selected), sum(item["size"] for item in selected))
         self.assertEqual(accounting, {
             "container_only": (1, 32),
-            "generated_alignment": (111, 220),
-            "generated_source_entry_replacement": (691, 96_972),
-            "generated_source_exact_load_image": (1, 6),
-            "generated_source_exact_replacement": (7, 134),
-            "official_blob": (209, 3_426_034),
-            "source_compiled": (254, 143_225),
+    "generated_alignment": (133, 265),
+    "generated_source_entry_replacement": (726, 101_138),
+    "generated_source_exact_load_image": (1, 6),
+    "generated_source_exact_replacement": (7, 134),
+    "official_blob": (225, 3_421_868),
+    "source_compiled": (307, 146_974),
         })
         package = manifest["package"]
         self.assertEqual(

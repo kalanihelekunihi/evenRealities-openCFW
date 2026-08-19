@@ -256,14 +256,13 @@ PRODUCTION_PROFILES = {
         "boot_leaf": (650, 0x0043_4702),
         "main_patch": "e7f292bd00bf00bf",
         "boot_patch": "23f0a3bd00bf00bf",
-        "main_overlay_size": 125_258,
+        "main_overlay_size": 147_021,
         "main_overlay_sha256": (
-            "1f71240bd75af28798d93eba217b99464156ee40ae353333c2fd0f449b9a8c76"
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
         ),
-        "main_component_size": 3_648_654,
+        "main_component_size": 3_670_417,
         "main_component_sha256": (
-            "36b7f32f9f5f1a4c2fbf800b8cda0f4"
-            "8aa521bfc87638d671932b80b49f7e991"
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
         ),
         "boot_overlay_size": 662,
         "boot_overlay_sha256": (
@@ -275,10 +274,9 @@ PRODUCTION_PROFILES = {
             "695688b7cc4d9583e9e5c854db44980a"
             "cab9a58d367bc7e02fa5e51eb00e3267"
         ),
-        "package_size": 4_427_148,
+        "package_size": 4_448_911,
         "package_sha256": (
-            "532743c6a1b96f198f0991c320bf3318"
-            "eac88bc538a90a9e0b0267aaacef07b3"
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"
         ),
     },
     "linux-clang": {
@@ -286,15 +284,13 @@ PRODUCTION_PROFILES = {
         "boot_leaf": (650, 0x0043_4702),
         "main_patch": "e8f220b900bf00bf",
         "boot_patch": "23f0a3bd00bf00bf",
-        "main_overlay_size": 132_888,
+        "main_overlay_size": 144_266,
         "main_overlay_sha256": (
-            "7036c0e07a36376e5d98700c922ffeec"
-            "7a6826388b75060a2b98b4228a411c61"
+            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9"
         ),
-        "main_component_size": 3_656_284,
+        "main_component_size": 3_667_662,
         "main_component_sha256": (
-            "d5daf89121f44a61b303fa953da78550"
-            "edd31e9159cf9b0b397aeb1b5cfef54d"
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"
         ),
         "boot_overlay_size": 662,
         "boot_overlay_sha256": (
@@ -306,10 +302,9 @@ PRODUCTION_PROFILES = {
             "fc3d07c8a59e1c33f26965cdb188811"
             "4412c3ca671d6137f7c3166acc81c8d74"
         ),
-        "package_size": 4_434_778,
+        "package_size": 4_446_156,
         "package_sha256": (
-            "63d5cd1d1cbab2c3ece4a48f96b58a0"
-            "cb14a7487917831f4c6d370b40ed41d90"
+            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"
         ),
     },
 }

@@ -74,6 +74,19 @@ identity-bearing local-report sender remains unreachable; physical
 persistence/replay, reboot, and ATT behavior must be established on owned
 hardware.
 
+Raw ATT evidence is accepted only through the strict
+`tools/analyze_r1_hci_capture.py` gate. It independently parses Apple
+PacketLogger records, HCI ACL fragmentation, L2CAP, and ATT while omitting peer
+addresses, keys, and value bytes from its report. Queued-write rejection is
+proven only by a captured ATT Error Response whose request opcode is Prepare
+Write (`0x16`) or Execute Write (`0x18`); a CoreBluetooth API error or absence
+of application response is insufficient. Synthetic tests cover that exact
+association plus malformed records, incomplete reassembly, note-only traces,
+digest mismatch, and every required evidence gate. The current macOS capture
+attempt remains invalid because `bluetoothd` requires an uninstalled Bluetooth
+diagnostic profile, so no live queued-write, encryption, or replay claim is
+made.
+
 ## Boot and signing boundary
 
 The portable sources do not disable, patch, bypass, or emulate the stock
@@ -90,9 +103,24 @@ all 1 MiB of internal flash and the complete architected nRF52840 UICR register
 extent (`0x10001000..<0x10001308`, matching Nordic's 776-byte
 `NRF_UICR_Type`). Installation must leave every architected UICR byte identical
 and prove that with a readback. Recovery uses separate, canonical internal-flash and UICR HEX files and is accepted only when both
-post-recovery readbacks equal their original backups. These tools do not unlock,
-erase, or program a device; authorized debug access and owned-hardware lifecycle
-validation remain external requirements.
+post-recovery readbacks equal their original backups. Those offline tools do not
+access a device. The separate dry-run-default `deploy_zephyr_swd.py` runner
+requires an exact bundle digest and unique probe, disables auto-unlock,
+chip/mass erase, configuration-file overrides, cached reads, and
+resume-on-disconnect, and uses only transparent host-driven NVMC page erase and
+word-write operations. The install and normal rollback modes never write UICR
+and no mode resets on any failed
+preflash or postflash comparison. Authorized physical debug access and
+owned-hardware lifecycle validation remain external requirements. Its normal
+`--recover` path additionally requires the entire current flash to equal the
+verified installed image and UICR to remain unchanged, then restores the exact
+one-MiB backup with sector erases and invokes the independent recovery verifier
+before optional reset. Any UICR drift aborts without attempting to erase it.
+Disaster recovery is separately selected by `--restore-uicr` and requires the
+exact UICR-backup SHA-256 in addition to the probe and bundle confirmations. It
+alone issues `NVMC.ERASEUICR`, requires the complete architected extent to read
+erased, restores only the exact backup words, and runs full readback before any
+optional reset. No mode invokes `ERASEALL` or auto-unlock.
 
 ## Restricted commands
 

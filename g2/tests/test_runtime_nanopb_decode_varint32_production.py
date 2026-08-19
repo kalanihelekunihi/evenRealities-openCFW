@@ -68,7 +68,7 @@ LEGACY_CANDIDATE_TOKENS = (
     "open_cfw_nanopb_decode_varint32_candidate",
 )
 
-PRODUCTION_COUNTS = (790, 731, 221)
+PRODUCTION_COUNTS = (825, 766, 256)
 PRIVATE_PATCH_NAME = "replace_nanopb_decode_varint32_eof"
 PUBLIC_PATCH_NAME = "replace_nanopb_decode_varint32"
 PRIVATE_MANIFEST_NAME = "nanopb_decode_varint32_eof_source_replacement"
@@ -125,11 +125,11 @@ PROSPECTIVE_LINUX_PINS = {
     },
 }
 APPLE_AGGREGATE_PINS = {
-    "overlay": (143_227, "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"),
-    "component": (3_666_623, "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"),
-    "package": (4_445_117, "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"),
-    "build_report": (2_323, "3ca9f629d5bf3fe55d98767145320f4db73b39e1ed1cb4b8ead1c0343fa9202b"),
-    "flash_plan": (959_001, "076aeee8be5b81b623ac94efac0607a47638b7a1fa465a1be5e94568a5454bb7"),
+    "overlay": (147_021, "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"),
+    "component": (3_670_417, "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"),
+    "package": (4_448_911, "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"),
+    "build_report": (2_323, "6d13f1eeacd93be4ed8009d49683225054d4113cfb77c85cc10be43d7f7d8f71"),
+    "flash_plan": (1_046_958, "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c"),
 }
 LINUX_AGGREGATE_PINS = {
     "overlay": (144_266, "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9"),
@@ -777,8 +777,8 @@ def validate_atomic_production_topology(
     )
     if observed_counts != PRODUCTION_COUNTS:
         raise AssertionError(
-            "production overlay inventory must be exactly 790 functions, "
-            "731 patch sites, and 221 relocated leaves"
+            "production overlay inventory must be exactly 825 functions, "
+            "766 patch sites, and 256 relocated leaves"
         )
 
     functions = overlay["functions"]
@@ -1384,7 +1384,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
         manifest = json.loads(CORE_MANIFEST.read_text(encoding="utf-8"))
         apollo = manifest["component_overrides"]["apollo_main"]
         regions = apollo["regions"]
-        self.assertEqual(len(regions), 1274)
+        self.assertEqual(len(regions), 1400)
         self.assertEqual(
             (apollo["provider"]["size"], apollo["provider"]["sha256"]),
             APPLE_AGGREGATE_PINS["component"],

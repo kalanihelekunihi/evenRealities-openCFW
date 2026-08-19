@@ -64,7 +64,9 @@ static uint32_t received_bytes;
 static uint32_t committed_bytes;
 static uint8_t block[OPENR1_RECOVERY_BLOCK_BYTES];
 static size_t block_length;
+static bool application_region_clean;
 static bool legacy_region_clean;
+static bool settings_region_clean;
 static struct k_work restart_advertising_work;
 static struct k_work_delayable reboot_work;
 K_MUTEX_DEFINE(recovery_mutex);
@@ -83,22 +85,21 @@ static void fail_locked(int error) {
     recovery_state = OPENR1_RECOVERY_FAILED;
 }
 
-static int clean_legacy_region(void) {
-    const struct flash_area *legacy = NULL;
-    int error = flash_area_open(
-        FIXED_PARTITION_ID(migration_reserve_partition), &legacy);
+static int clean_partition(int partition_id, bool *clean) {
+    const struct flash_area *area = NULL;
+    int error = flash_area_open(partition_id, &area);
     if (error != 0) {
         return error;
     }
     uint8_t probe[OPENR1_RECOVERY_BLOCK_BYTES];
     bool erased = true;
-    for (uint32_t offset = 0u; erased && offset < legacy->fa_size;
+    for (uint32_t offset = 0u; erased && offset < area->fa_size;
          offset += (uint32_t)sizeof probe) {
-        size_t length = legacy->fa_size - offset;
+        size_t length = area->fa_size - offset;
         if (length > sizeof probe) {
             length = sizeof probe;
         }
-        error = flash_area_read(legacy, offset, probe, length);
+        error = flash_area_read(area, offset, probe, length);
         if (error != 0) {
             break;
         }
@@ -110,10 +111,27 @@ static int clean_legacy_region(void) {
         }
     }
     if (error == 0 && !erased) {
-        error = flash_area_erase(legacy, 0u, legacy->fa_size);
+        error = flash_area_erase(area, 0u, area->fa_size);
     }
-    flash_area_close(legacy);
-    legacy_region_clean = error == 0;
+    flash_area_close(area);
+    *clean = error == 0;
+    return error;
+}
+
+static int clean_opaque_regions(void) {
+    int error = application_region_clean ? 0 : clean_partition(
+        FIXED_PARTITION_ID(slot0_partition),
+        &application_region_clean);
+    if (error == 0 && !legacy_region_clean) {
+        error = clean_partition(
+        FIXED_PARTITION_ID(migration_reserve_partition),
+        &legacy_region_clean);
+    }
+    if (error == 0 && !settings_region_clean) {
+        error = clean_partition(
+            FIXED_PARTITION_ID(settings_partition),
+            &settings_region_clean);
+    }
     return error;
 }
 
@@ -154,6 +172,7 @@ static int flush_block_locked(bool final) {
             image_area, committed_bytes, block, write_length);
     }
     if (error == 0) {
+        application_region_clean = false;
         committed_bytes += (uint32_t)write_length;
         block_length = 0u;
     }
@@ -199,14 +218,14 @@ static ssize_t write_control(
                 error = -EMSGSIZE;
                 break;
             }
-            error = legacy_region_clean ? 0 : clean_legacy_region();
-            if (error != 0) {
-                break;
-            }
             expected_bytes = sys_get_le32(&bytes[1]);
             if (expected_bytes == 0u || image_area == NULL ||
                 expected_bytes > image_area->fa_size) {
                 error = -EFBIG;
+                break;
+            }
+            error = clean_opaque_regions();
+            if (error != 0) {
                 break;
             }
             recovery_state = OPENR1_RECOVERY_RECEIVING;
@@ -357,7 +376,7 @@ static void recovery_run(void) {
         recovery_state = OPENR1_RECOVERY_FAILED;
     }
     if (recovery_error == 0) {
-        recovery_error = clean_legacy_region();
+        recovery_error = clean_opaque_regions();
         if (recovery_error != 0) {
             recovery_state = OPENR1_RECOVERY_FAILED;
         }

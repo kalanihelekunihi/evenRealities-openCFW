@@ -65,8 +65,7 @@ UPSTREAM_SHA256 = (
     "e7b484446a0f48d1050b95e60925088e"
 )
 PROVENANCE_SHA256 = (
-    "df230e25c30626c0a0fed937406bf0a7"
-    "19129e9b6c977aea563239b2b611fbbe"
+    "44c588de6dec4ed3397fa6f942cfef3dc0fdb707742be73a0c8a4d78fd0ca9d0"
 )
 UPSTREAM_COMMIT = "0494ce7169f06a734a7bd7585f49a9fa91fa7318"
 UPSTREAM_TREE = "06dd0162169d3cb550cd24a3e34d0e4d02983ad3"
@@ -619,14 +618,12 @@ class RuntimeLittlefsUtilBitopsTests(unittest.TestCase):
         expected = {
             "main": {
                 "overlay": (
-                    121_706,
-                    "9e5004af49fb14a22e7e7ed7357e4c10"
-            "f87dc8da3a7fb4d7b97fcffcde804c43",
+                    147_021,
+                    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
                 ),
                 "component": (
-                    3_645_102,
-                    "8722e5565bf54dade66fb751155c11eb"
-            "d128d7a12853e3e4b8671c3c97807827",
+                    3_670_417,
+                    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
                 ),
                 "functions": {
                     "npw2": (
@@ -651,14 +648,12 @@ class RuntimeLittlefsUtilBitopsTests(unittest.TestCase):
             },
             "boot": {
                 "overlay": (
-                    622,
-                    "fc02cf66854adace4d213e08764e435e2"
-                    "7c8c2bc7cc4f7caac6ff286f3adf813",
+                    662,
+                    "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b",
                 ),
                 "component": (
-                    149_222,
-                    "b4a5b0f2028842a2d6fde9424fff05fa"
-                    "c2db3bf0e26e7f01d16a990e67ed9052",
+                    149_262,
+                    "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
                 ),
                 "functions": {
                     "npw2": (

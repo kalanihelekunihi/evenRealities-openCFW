@@ -14,6 +14,7 @@ private struct Options {
     let statusBurst: Bool
     let deviceInfo: Bool
     let cccdCycle: Bool
+    let channel1ProbeCount: Int
     let disconnectAfter: TimeInterval?
     let advertisementSamples: Int
     let expectStatusSilence: TimeInterval?
@@ -29,6 +30,7 @@ private struct Options {
         var statusBurst = false
         var deviceInfo = false
         var cccdCycle = false
+        var channel1ProbeCount = 0
         var disconnectAfter: TimeInterval?
         var advertisementSamples = 0
         var expectStatusSilence: TimeInterval?
@@ -49,6 +51,15 @@ private struct Options {
                 deviceInfo = true
             case "--cccd-cycle":
                 cccdCycle = true
+            case "--channel1-probe-count":
+                index += 1
+                guard index < CommandLine.arguments.count,
+                      let parsed = Int(CommandLine.arguments[index]),
+                      parsed > 0, parsed <= 20 else {
+                    fputs("--channel1-probe-count must be between 1 and 20\n", stderr)
+                    exit(64)
+                }
+                channel1ProbeCount = parsed
             case "--disconnect-after-ms":
                 index += 1
                 guard index < CommandLine.arguments.count,
@@ -99,18 +110,19 @@ private struct Options {
                 guard index < CommandLine.arguments.count,
                       let parsed = TimeInterval(CommandLine.arguments[index]),
                       parsed > 0 else {
-                    fputs("usage: probe_r1_ble.swift [--timeout seconds] [--read] [--verbose-scan] [--pair-role-phone] [--device-info] [--cccd-cycle] [--status-count count] [--status-interval-ms ms] [--status-burst] [--disconnect-after-ms ms] [--advertisement-samples count] [--expect-status-silence-ms ms] [name-fragment]\n", stderr)
+                    fputs("usage: probe_r1_ble.swift [--timeout seconds] [--read] [--verbose-scan] [--pair-role-phone] [--device-info] [--cccd-cycle] [--channel1-probe-count count] [--status-count count] [--status-interval-ms ms] [--status-burst] [--disconnect-after-ms ms] [--advertisement-samples count] [--expect-status-silence-ms ms] [name-fragment]\n", stderr)
                     exit(64)
                 }
                 timeout = parsed
             case "--help", "-h":
-                print("usage: probe_r1_ble.swift [--timeout seconds] [--read] [--verbose-scan] [--pair-role-phone] [--device-info] [--cccd-cycle] [--status-count count] [--status-interval-ms ms] [--status-burst] [--disconnect-after-ms ms] [--advertisement-samples count] [--expect-status-silence-ms ms] [name-fragment]")
+                print("usage: probe_r1_ble.swift [--timeout seconds] [--read] [--verbose-scan] [--pair-role-phone] [--device-info] [--cccd-cycle] [--channel1-probe-count count] [--status-count count] [--status-interval-ms ms] [--status-burst] [--disconnect-after-ms ms] [--advertisement-samples count] [--expect-status-silence-ms ms] [name-fragment]")
                 print("  Discovery is read-only by default. --read requests values only from readable characteristics.")
                 print("  --status-count sends only the non-mutating system deviceStatus query on channel 2.")
                 print("  --pair-role-phone sends the recovered ephemeral pairAuth phone-role selector before status queries.")
                 print("  --device-info reads only the fixed firmware and hardware version slots.")
                 print("  --status-burst sends the bounded status set without waiting for each response.")
                 print("  --cccd-cycle disables and re-enables only the channel-2 notification CCCD before queries.")
+                print("  --channel1-probe-count interleaves bounded non-mutating opcode-0x89 frames with a channel-2 burst.")
                 print("  --disconnect-after-ms intentionally disconnects during a status burst.")
                 print("  --advertisement-samples measures target advertisements without connecting.")
                 print("  --expect-status-silence-ms verifies that a status query receives no reply without pairAuth.")
@@ -126,13 +138,20 @@ private struct Options {
             exit(64)
         }
         if advertisementSamples > 0 &&
-            (requestReads || pairRolePhone || deviceInfo || cccdCycle || statusCount > 0) {
+            (requestReads || pairRolePhone || deviceInfo || cccdCycle ||
+             channel1ProbeCount > 0 || statusCount > 0) {
             fputs("--advertisement-samples cannot be combined with connection operations\n", stderr)
             exit(64)
         }
         if expectStatusSilence != nil &&
             (statusCount != 1 || pairRolePhone || statusBurst || disconnectAfter != nil) {
             fputs("--expect-status-silence-ms requires exactly --status-count 1 without pair role or burst\n", stderr)
+            exit(64)
+        }
+        if channel1ProbeCount > 0 &&
+            (!pairRolePhone || !statusBurst || statusCount == 0 ||
+             disconnectAfter != nil || cccdCycle) {
+            fputs("--channel1-probe-count requires --pair-role-phone, --status-burst, and --status-count; it cannot be combined with disconnect or CCCD cycling\n", stderr)
             exit(64)
         }
 
@@ -147,6 +166,7 @@ private struct Options {
             statusBurst: statusBurst,
             deviceInfo: deviceInfo,
             cccdCycle: cccdCycle,
+            channel1ProbeCount: channel1ProbeCount,
             disconnectAfter: disconnectAfter,
             advertisementSamples: advertisementSamples,
             expectStatusSilence: expectStatusSilence)
@@ -247,6 +267,17 @@ private func deviceInfoRequest() -> Data {
     systemRequest(serial: 0x3f01, subcommand: 2, payload: [])
 }
 
+private func channel1NonmutatingRequest() -> Data {
+    /* Opcode 0x89 reads byte 3 as command-valid. Zero keeps every recovered
+     * wear/secondary/touch/regulator/radio transition disabled. */
+    Data([0, 0, 0x89, 0, 0, 0, 0])
+}
+
+private func channel1NonmutatingResponse() -> Data {
+    /* The bounded handler acknowledges by setting workspace byte 4 to one. */
+    Data([0, 0, 0x89, 0, 1, 0, 0])
+}
+
 private func propertyNames(_ properties: CBCharacteristicProperties) -> String {
     let known: [(CBCharacteristicProperties, String)] = [
         (.broadcast, "broadcast"),
@@ -272,11 +303,18 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
     private var pendingCharacteristics = Set<String>()
     private var pendingDescriptors = Set<String>()
     private var pendingReads = Set<String>()
+    private var channel1RX: CBCharacteristic?
+    private var channel1TX: CBCharacteristic?
     private var channel2RX: CBCharacteristic?
     private var channel2TX: CBCharacteristic?
     private var statusStarted = false
     private var statusSent = 0
     private var statusReceived = 0
+    private var channel1Sent = 0
+    private var channel1Received = 0
+    private var channel1RequestTimes: [TimeInterval] = []
+    private var channel1LatenciesMilliseconds: [Double] = []
+    private var interleavedCompletionScheduled = false
     private var requestTimes: [UInt16: TimeInterval] = [:]
     private var latenciesMilliseconds: [Double] = []
     private var pairRequestTime: TimeInterval?
@@ -303,6 +341,28 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
             if central.state == .unsupported || central.state == .unauthorized || central.state == .poweredOff {
                 finish(code: 3, reason: "Bluetooth unavailable: \(central.state.rawValue)")
             }
+            return
+        }
+
+        let connectedServices = [
+            CBUUID(string: "BAE80001-4F05-4503-8E65-3AF1F7329D1F"),
+            CBUUID(string: "FE59"),
+        ]
+        let connected = central.retrieveConnectedPeripherals(withServices: connectedServices)
+        for peripheral in connected {
+            print(
+                "CONNECTED-CANDIDATE id=\(peripheral.identifier.uuidString)" +
+                " name=\(peripheral.name ?? "-") state=\(peripheral.state.rawValue)")
+        }
+        if let peripheral = connected.first(where: {
+            $0.name?.localizedCaseInsensitiveContains(options.match) == true
+        }) {
+            target = peripheral
+            peripheral.delegate = self
+            print(
+                "MATCH id=\(peripheral.identifier.uuidString)" +
+                " name=\(peripheral.name ?? "-") alreadyConnected=true")
+            peripheral.discoverServices(nil)
             return
         }
 
@@ -382,6 +442,9 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("CONNECTED id=\(peripheral.identifier.uuidString) elapsedMs=\(elapsedMilliseconds())")
+        print(
+            "WRITE-LIMITS withResponse=\(peripheral.maximumWriteValueLength(for: .withResponse))" +
+            " withoutResponse=\(peripheral.maximumWriteValueLength(for: .withoutResponse))")
         peripheral.discoverServices(nil)
     }
 
@@ -435,6 +498,14 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
                 " properties=\(propertyNames(characteristic.properties))"
             )
             if characteristic.uuid.uuidString.caseInsensitiveCompare(
+                "BAE80010-4F05-4503-8E65-3AF1F7329D1F") == .orderedSame {
+                channel1RX = characteristic
+            }
+            if characteristic.uuid.uuidString.caseInsensitiveCompare(
+                "BAE80011-4F05-4503-8E65-3AF1F7329D1F") == .orderedSame {
+                channel1TX = characteristic
+            }
+            if characteristic.uuid.uuidString.caseInsensitiveCompare(
                 "BAE80012-4F05-4503-8E65-3AF1F7329D1F") == .orderedSame {
                 channel2RX = characteristic
             }
@@ -485,6 +556,12 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard let service = characteristic.service else { return }
+        if options.channel1ProbeCount > 0,
+           characteristic === channel1TX,
+           let value = characteristic.value {
+            handleChannel1Response(value, error: error)
+            return
+        }
         if (options.statusCount > 0 || options.pairRolePhone || options.deviceInfo),
            characteristic === channel2TX,
            let value = characteristic.value {
@@ -507,6 +584,19 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
         didUpdateNotificationStateFor characteristic: CBCharacteristic,
         error: Error?
     ) {
+        if characteristic === channel1TX {
+            if let error {
+                finish(code: 7, reason: "channel-1 notification setup failed: \(error.localizedDescription)")
+                return
+            }
+            print("CHANNEL1-NOTIFY enabled=\(characteristic.isNotifying) elapsedMs=\(elapsedMilliseconds())")
+            guard characteristic.isNotifying, let channel2TX else {
+                finish(code: 7, reason: "channel-1 notifications are disabled")
+                return
+            }
+            peripheral.setNotifyValue(true, for: channel2TX)
+            return
+        }
         guard characteristic === channel2TX else { return }
         if let error {
             finish(code: 7, reason: "channel-2 notification setup failed: \(error.localizedDescription)")
@@ -555,7 +645,8 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
               pendingDescriptors.isEmpty,
               pendingReads.isEmpty,
               target?.services != nil else { return }
-        if options.statusCount > 0 || options.pairRolePhone || options.deviceInfo {
+        if options.statusCount > 0 || options.pairRolePhone || options.deviceInfo ||
+           options.channel1ProbeCount > 0 {
             beginStatusQueries()
         } else {
             finish(code: 0, reason: "discovery complete")
@@ -574,15 +665,28 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
             finish(code: 7, reason: "channel-2 properties do not match the analyzed contract")
             return
         }
+        if options.channel1ProbeCount > 0 {
+            guard let channel1RX, let channel1TX,
+                  channel1RX.properties.contains(.writeWithoutResponse),
+                  channel1TX.properties.contains(.notify) else {
+                finish(code: 7, reason: "channel-1 properties do not match the analyzed contract")
+                return
+            }
+        }
         print(
             "CHANNEL2-PLAN pairRolePhone=\(options.pairRolePhone)" +
             " deviceInfo=\(options.deviceInfo)" +
             " statusCount=\(options.statusCount)" +
+            " channel1ProbeCount=\(options.channel1ProbeCount)" +
             " intervalMs=\(Int(options.statusInterval * 1000))" +
             " burst=\(options.statusBurst)" +
             " cccdCycle=\(options.cccdCycle)" +
             " disconnectAfterMs=\(options.disconnectAfter.map { Int($0 * 1000) } ?? 0)")
-        target?.setNotifyValue(true, for: channel2TX)
+        if options.channel1ProbeCount > 0, let channel1TX {
+            target?.setNotifyValue(true, for: channel1TX)
+        } else {
+            target?.setNotifyValue(true, for: channel2TX)
+        }
     }
 
     private func sendPairRolePhoneRequest() {
@@ -629,10 +733,26 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
         }
     }
 
+    private func sendNextChannel1Probe() {
+        guard let target, let channel1RX,
+              channel1Sent < options.channel1ProbeCount else { return }
+        let value = channel1NonmutatingRequest()
+        channel1RequestTimes.append(ProcessInfo.processInfo.systemUptime)
+        channel1Sent += 1
+        print("CHANNEL1-PROBE-REQUEST index=\(channel1Sent) bytes=\(value.count) commandValid=false")
+        target.writeValue(value, for: channel1RX, type: .withoutResponse)
+    }
+
     private func startStatusQueries() {
         if options.statusBurst {
-            while statusSent < options.statusCount {
-                sendNextStatusRequest()
+            while statusSent < options.statusCount ||
+                  channel1Sent < options.channel1ProbeCount {
+                if statusSent < options.statusCount {
+                    sendNextStatusRequest()
+                }
+                if channel1Sent < options.channel1ProbeCount {
+                    sendNextChannel1Probe()
+                }
             }
             if let disconnectAfter = options.disconnectAfter {
                 DispatchQueue.main.asyncAfter(deadline: .now() + disconnectAfter) { [weak self] in
@@ -646,10 +766,50 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
                 guard let self, !self.finished,
                       self.statusReceived < self.options.statusCount else { return }
                 self.printStatusSummary()
-                self.finish(code: 9, reason: "channel-2 burst responses incomplete")
+                self.printChannel1Summary()
+                self.finish(code: 9, reason: "interleaved channel-2 responses incomplete")
             }
         } else {
             sendNextStatusRequest()
+        }
+    }
+
+    private func handleChannel1Response(_ value: Data, error: Error?) {
+        if let error {
+            finish(code: 8, reason: "channel-1 response failed: \(error.localizedDescription)")
+            return
+        }
+        guard value == channel1NonmutatingResponse(),
+              !channel1RequestTimes.isEmpty else {
+            print("UNMATCHED-CHANNEL1-FRAME bytes=\(value.count) hex=\(hex(value))")
+            return
+        }
+        let requestTime = channel1RequestTimes.removeFirst()
+        let latency = (ProcessInfo.processInfo.systemUptime - requestTime) * 1_000
+        channel1LatenciesMilliseconds.append(latency)
+        channel1Received += 1
+        print(String(
+            format: "CHANNEL1-PROBE-RESPONSE index=%d bytes=%d latencyMs=%.3f",
+            channel1Received, value.count, latency))
+    }
+
+    private func checkInterleavedCompletion() {
+        guard statusReceived == options.statusCount else { return }
+        if options.channel1ProbeCount == 0 {
+            printStatusSummary()
+            finish(code: 0, reason: "channel-2 status queries complete")
+            return
+        }
+        guard !interleavedCompletionScheduled else { return }
+        interleavedCompletionScheduled = true
+        /* Phone-role sessions may not receive channel-1 replies, which stock
+         * routes toward the glasses role. Keep a bounded observation window
+         * without selecting the documented fatal-risk glasses-role path. */
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self, !self.finished else { return }
+            self.printStatusSummary()
+            self.printChannel1Summary()
+            self.finish(code: 0, reason: "interleaved BAE8 channel writes and status queries complete")
         }
     }
 
@@ -738,8 +898,7 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
             serial, resultCode, payloadLength, latency))
 
         if statusReceived == options.statusCount {
-            printStatusSummary()
-            finish(code: 0, reason: "channel-2 status queries complete")
+            checkInterleavedCompletion()
             return
         }
         if !options.statusBurst {
@@ -758,6 +917,20 @@ private final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
         print(String(
             format: "STATUS-SUMMARY sent=%d received=%d dropped=%d minMs=%.3f meanMs=%.3f maxMs=%.3f",
             statusSent, statusReceived, statusSent - statusReceived,
+            minimum, mean, maximum))
+    }
+
+    private func printChannel1Summary() {
+        guard options.channel1ProbeCount > 0 else { return }
+        let minimum = channel1LatenciesMilliseconds.min() ?? 0
+        let maximum = channel1LatenciesMilliseconds.max() ?? 0
+        let mean = channel1LatenciesMilliseconds.isEmpty
+            ? 0
+            : channel1LatenciesMilliseconds.reduce(0, +) /
+              Double(channel1LatenciesMilliseconds.count)
+        print(String(
+            format: "CHANNEL1-SUMMARY sent=%d observedResponses=%d noObservedResponse=%d minMs=%.3f meanMs=%.3f maxMs=%.3f",
+            channel1Sent, channel1Received, channel1Sent - channel1Received,
             minimum, mean, maximum))
     }
 
@@ -792,9 +965,11 @@ private let options = Options.parse()
 private let expectedPairRoleFrame = "001D47CA7B640164003F0000080D005EB901"
 private let expectedDeviceInfoFrame = "0073A36B7B640164013F0000020C001A27"
 private let expectedStatusFrame = "005C2C5C6364016400400000010C00EA3B"
+private let expectedChannel1NonmutatingFrame = "00008900000000"
 guard hex(pairRolePhoneRequest()) == expectedPairRoleFrame,
       hex(deviceInfoRequest()) == expectedDeviceInfoFrame,
-      hex(deviceStatusRequest(serial: 0x4000)) == expectedStatusFrame else {
+      hex(deviceStatusRequest(serial: 0x4000)) == expectedStatusFrame,
+      hex(channel1NonmutatingRequest()) == expectedChannel1NonmutatingFrame else {
     fputs("internal frame self-test disagrees with the C encoder\n", stderr)
     exit(70)
 }

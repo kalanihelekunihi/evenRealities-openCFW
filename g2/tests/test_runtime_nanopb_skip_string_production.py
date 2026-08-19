@@ -114,6 +114,28 @@ POINT_RELEASE_DEFINITIONS = {
     ),
 }
 PROMOTION_BASE = "7e78e38e4401bc095cca266e8708249f6da47780"
+
+
+def _promotion_history_available() -> bool:
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(ROOT), "rev-parse", "--verify",
+             f"{PROMOTION_BASE}^{{commit}}"],
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=10,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+    return completed.returncode == 0
+
+
+PROMOTION_HISTORY_AVAILABLE = _promotion_history_available()
+PROMOTION_HISTORY_SKIP_REASON = (
+    "promotion-base revision is unavailable from Git history in this checkout"
+)
+
 HISTORICAL_CANDIDATE_PINS = {
     CANDIDATE_SOURCE.relative_to(ROOT).as_posix(): {
         "blob": "c9113221c6f392f48d11e4079876cb5ecb4f2311",
@@ -158,9 +180,9 @@ PRODUCTION_SECTION = ".text." + PRODUCTION_FUNCTION
 PRODUCTION_EXIDX_SECTION = ".ARM.exidx" + PRODUCTION_SECTION
 PRODUCTION_EXIDX = bytes.fromhex("0000000001000000")
 OVERLAY_RUNTIME_ADDRESS = 0x0079_4324
-BASE_FUNCTION_COUNT = 707
-BASE_RELOCATED_COUNT = 138
-BASE_PATCH_COUNT = 655
+BASE_FUNCTION_COUNT = 824
+BASE_RELOCATED_COUNT = 255
+BASE_PATCH_COUNT = 765
 APPLE_CLANG = "/usr/bin/clang"
 COMPILER_PROFILES = {
     "apple-clang": {
@@ -243,25 +265,25 @@ PRODUCTION_BUILD_PROFILES = {
             "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
         ),
         "main_component": (
-            3_654_416,
-            "b33470eb200a9b79767deda15f89c1e4fc54609c7bb0e490bd312ddf0175351b",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
-                4_432_910,
-                "86ddab7c751690e16e73bb7d0deb23a5fbdfffac532803f5a836f76a6ac84ca9",
+                4_448_911,
+                "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
             ),
             "build-report.json": (
                 2_323,
-                "b097ce04581b9d143871ac71df4244b006c3c45f04bff3552ca4b63486f4c3fa",
+                "6d13f1eeacd93be4ed8009d49683225054d4113cfb77c85cc10be43d7f7d8f71",
             ),
             "flash-plan.json": (
-                829_634,
-                "31fe7653b1c405efff40cc15848123369848aede12980a1d6c3c817877ab497f",
+                1_046_958,
+                "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c",
             ),
         },
-        "census": (1_158, 2, 5),
-        "effective_ownership": (131_755, 93_424, 4_207_731),
+        "census": (1_406, 2, 5),
+        "effective_ownership": (147_634, 103_382, 4_197_895),
     },
     "linux-clang": {
         "boot_component": (
@@ -269,13 +291,13 @@ PRODUCTION_BUILD_PROFILES = {
             "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74",
         ),
         "main_component": (
-            3_656_284,
-            "d5daf89121f44a61b303fa953da78550edd31e9159cf9b0b397aeb1b5cfef54d",
+            3_667_662,
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
-                4_434_778,
-                "63d5cd1d1cbab2c3ece4a48f96b58a0cb14a7487917831f4c6d370b40ed41d90",
+                4_446_156,
+                "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
             ),
             "build-report.json": (
                 2_322,
@@ -846,6 +868,7 @@ class NanopbSkipStringCandidateTests(unittest.TestCase):
     def tearDownClass(cls) -> None:
         cls.temporary.cleanup()
 
+    @unittest.skipUnless(PROMOTION_HISTORY_AVAILABLE, PROMOTION_HISTORY_SKIP_REASON)
     def test_authenticated_upstream_and_local_files_are_exact(self) -> None:
         for path, expected in LOCAL_PINS.items():
             with self.subTest(path=path.relative_to(ROOT)):
@@ -1405,7 +1428,10 @@ class NanopbSkipStringProductionContractTests(StableUnittestIdentityCase):
     ) -> None:
         leaf, patch = production_overlay_records(config)
         self.assertEqual(config["functions"].count(PRODUCTION_FUNCTION), 1)
-        self.assertEqual(set(leaf["toolchain_profiles"]), {"linux-clang"})
+        self.assertEqual(
+            set(leaf["toolchain_profiles"]),
+            {"linux-clang", "apple-terminate-record"},
+        )
         self.assertEqual(len(config["functions"]), BASE_FUNCTION_COUNT + 1)
         self.assertEqual(
             len(config["relocated_leaves"]), BASE_RELOCATED_COUNT + 1
@@ -2137,6 +2163,7 @@ class NanopbSkipStringProductionMutationTests(StableUnittestIdentityCase):
 
 
 class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
+    @unittest.skipUnless(PROMOTION_HISTORY_AVAILABLE, PROMOTION_HISTORY_SKIP_REASON)
     def test_manifest_splits_stock_span_and_appends_leaf(self) -> None:
         clang = os.environ.get("OPENCFW_CLANG", APPLE_CLANG)
         version = subprocess.run(
@@ -2197,7 +2224,7 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
                 expected,
             )
 
-        self.assertEqual(len(regions), 1086)
+        self.assertEqual(len(regions), 1400)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(
@@ -2238,12 +2265,12 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
             ownership,
             {
                 "container_only": (1, 32),
-                "generated_alignment": (73, 143),
-                "generated_source_entry_replacement": (642, 91_302),
-                "generated_source_exact_load_image": (1, 6),
-                "generated_source_exact_replacement": (7, 134),
-                "official_blob": (195, 3_431_704),
-                "source_compiled": (167, 131_095),
+    "generated_alignment": (133, 265),
+    "generated_source_entry_replacement": (726, 101_138),
+    "generated_source_exact_load_image": (1, 6),
+    "generated_source_exact_replacement": (7, 134),
+    "official_blob": (225, 3_421_868),
+    "source_compiled": (307, 146_974),
             },
         )
 
@@ -2406,13 +2433,13 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
                     "confirmed_from_record_table": (4, 211_824),
                     "confirmed_from_vector_and_ota_code": (1, 55_752),
                     "container_only": (5, 268),
-                    "generated_alignment": (75, 146),
-                    "generated_source_entry_replacement": (674, 92_162),
+                    "generated_alignment": (122, 241),
+                    "generated_source_entry_replacement": (737, 99_566),
                     "generated_source_exact_load_image": (1, 6),
                     "generated_source_exact_replacement": (7, 134),
                     "inferred_from_vector_table": (1, 34_432),
-                    "official_blob": (206, 3_579_443),
-                    "source_compiled": (189, 131_755),
+                    "official_blob": (226, 3_572_039),
+                    "source_compiled": (295, 146_083),
                     "unknown": (2, 326_044),
                 },
             )

@@ -177,6 +177,9 @@ def main() -> None:
         "void mcuboot_status_change(",
         "MCUBOOT_STATUS_NO_BOOTABLE_IMAGE_FOUND",
         "FIXED_PARTITION_ID(slot0_partition)",
+        "FIXED_PARTITION_ID(settings_partition)",
+        "FIXED_PARTITION_ID(migration_reserve_partition)",
+        "clean_opaque_regions()",
         "flash_area_erase(",
         "flash_area_write(",
         "OPENR1_RECOVERY_REQUEST",
@@ -482,6 +485,8 @@ def main() -> None:
         PROJECT / "tools" / "prepare_zephyr_deployment.py").read_text()
     deployment_verifier = (
         PROJECT / "tools" / "verify_zephyr_deployment.py").read_text()
+    swd_deployer = (
+        PROJECT / "tools" / "deploy_zephyr_swd.py").read_text()
     recovery_assembler = (
         PROJECT / "tools" / "assemble_r1_ace_recovery.py").read_text()
     for needle in (
@@ -573,6 +578,7 @@ def main() -> None:
                 "mixed-provenance ACE recovery assembly")
     for needle in (
         "build_expected_internal_flash(",
+        "verify_deployment_package(",
         "recovery HEX is not the canonical backup encoding",
         "UICR recovery HEX is not the canonical backup encoding",
         "deployment plan differs from verified bundle and backup",
@@ -584,6 +590,34 @@ def main() -> None:
     ):
         require(deployment_verifier, needle,
                 "offline deployment readback verification")
+    for needle in (
+        '"auto_unlock": False',
+        '"chip_erase": "sector"',
+        '"resume_on_disconnect": False',
+        '"connect_mode": "under-reset"',
+        "FICR_PART_ADDRESS = 0x10000100",
+        "NVMC_ERASEPAGE = 0x4001E508",
+        "NVMC_ERASEUICR = 0x4001E514",
+        "nvmc_sector_erase(",
+        "nvmc_program(",
+        "execute_recovery_session(",
+        "validate_recovery_contract(",
+        "non_erased_chunks(",
+        "pre-install internal flash",
+        "post-install internal flash",
+        "post-install UICR",
+        "pre-recovery installed flash",
+        "post-recovery internal flash",
+        "verify_recovery_readback(",
+        "nvmc_restore_uicr(",
+        "validate_uicr_confirmation(",
+        "UICR did not read back erased before restoration",
+        "target.reset()",
+        "mass_erase_used\": False",
+        "uicr_written\": False",
+    ):
+        require(swd_deployer, needle,
+                "fail-closed sector-bounded SWD deployment")
     for needle in (
         "r1_fal_bind(flash)",
         "fal_init() != 7",

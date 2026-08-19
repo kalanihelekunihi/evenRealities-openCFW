@@ -73,7 +73,7 @@ PROFILE_PINS = {
         "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
         "object": (
             1_244,
-            "29cebc44eddfd9c79aceccf6da2bec1dd577c555619f3a2b9b0c74500daea7a7",
+            "a9ca66e33c070766fee3c3438dfcaf09efbaaca5daa40ffc53b1b7254f31407b",
         ),
         "text_size": 128,
         "text_sha256": (
@@ -95,12 +95,12 @@ PROFILE_PINS = {
             "b6ed59b005b5a023ad7be561ee5f1327"
         ),
         "overlay": (
-            128_264,
-            "742e44dd839010c3c14ae59419fc06bcd50a7fe91e7ba06b4946f5c4154c870b",
+            147_021,
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
         ),
         "component": (
-            3_651_660,
-            "ea39a91f574b464d9071e581f5104d870e1f7e484d52de9b86407f0a90ac5d2e",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "predecessor_target": 0x007B_2C40,
         "skip_string_target": 0x007B_2C4C,
@@ -132,12 +132,12 @@ PROFILE_PINS = {
             "7f4c375c3ef43524d6e2681036778083"
         ),
         "overlay": (
-            132_888,
-            "7036c0e07a36376e5d98700c922ffeec7a6826388b75060a2b98b4228a411c61",
+            144_266,
+            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
         ),
         "component": (
-            3_656_284,
-            "d5daf89121f44a61b303fa953da78550edd31e9159cf9b0b397aeb1b5cfef54d",
+            3_667_662,
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
         ),
         "predecessor_target": 0x007B_3360,
         "skip_string_target": 0x007B_336C,
@@ -422,9 +422,9 @@ class NanopbDecodeVarintProductionTests(unittest.TestCase):
 
     def test_registration_patch_neighbors_and_whole_component_ingress(self) -> None:
         config = json.loads(OVERLAY_CONFIG.read_text(encoding="utf-8"))
-        self.assertEqual(len(config["functions"]), 684)
-        self.assertEqual(len(config["patch_sites"]), 632)
-        self.assertEqual(len(config["relocated_leaves"]), 115)
+        self.assertEqual(len(config["functions"]), 825)
+        self.assertEqual(len(config["patch_sites"]), 766)
+        self.assertEqual(len(config["relocated_leaves"]), 256)
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaf = next(item for item in config["relocated_leaves"] if item["function"] == FUNCTION)
         self.assertTrue(leaf["strict_relocation_contract"])
@@ -632,7 +632,7 @@ class NanopbDecodeVarintProductionTests(unittest.TestCase):
             PROFILE_PINS["linux-clang"]["component"],
         )
         regions = component["regions"]
-        self.assertEqual(len(regions), 1022)
+        self.assertEqual(len(regions), 1400)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(left["file_offset"] + left["size"], right["file_offset"])
@@ -660,27 +660,27 @@ class NanopbDecodeVarintProductionTests(unittest.TestCase):
             {key: (ownership_counts[key], ownership[key]) for key in ownership},
             {
                 "container_only": (1, 32),
-                "generated_alignment": (65, 128),
-                "generated_source_entry_replacement": (618, 88_870),
-                "generated_source_exact_load_image": (1, 6),
-                "generated_source_exact_replacement": (7, 134),
-                "official_blob": (187, 3_434_136),
-                "source_compiled": (143, 128_354),
+    "generated_alignment": (133, 265),
+    "generated_source_entry_replacement": (726, 101_138),
+    "generated_source_exact_load_image": (1, 6),
+    "generated_source_exact_replacement": (7, 134),
+    "official_blob": (225, 3_421_868),
+    "source_compiled": (307, 146_974),
             },
         )
         package = manifest["package"]
         self.assertEqual(
             (package["expected_size"], package["expected_sha256"]),
             (
-                4_430_154,
-                "aa71330ceed2775494fb7ff599a23701ef746a25452a8d335574a3bac12674a9",
+                4_448_911,
+                "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
             ),
         )
         self.assertEqual(
             package["profiles"]["linux-clang"],
             {
-                "expected_size": 4_434_778,
-                "expected_sha256": "63d5cd1d1cbab2c3ece4a48f96b58a0cb14a7487917831f4c6d370b40ed41d90",
+                "expected_size": 4_446_156,
+                "expected_sha256": "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
             },
         )
         for path, tokens in {

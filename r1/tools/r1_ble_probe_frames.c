@@ -35,6 +35,18 @@ static int emit(const char *name, uint16_t serial, uint8_t subcommand,
     return 0;
 }
 
+static void emit_channel1_nonmutating(void) {
+    /* Legacy opcode 0x89 reads byte 3 as the command-valid flag. Keeping it
+     * zero exercises bounded routing and the seven-byte response path without
+     * changing wear, secondary-mode, touch, regulator, or radio policy. */
+    static const uint8_t frame[] = {0u, 0u, 0x89u, 0u, 0u, 0u, 0u};
+    (void)printf("channel1-nonmutating=");
+    for (size_t index = 0u; index < sizeof frame; ++index) {
+        (void)printf("%02X", frame[index]);
+    }
+    (void)putchar('\n');
+}
+
 int main(void) {
     static const uint8_t phone_role[] = {1u};
     if (emit("pair-role-phone", UINT16_C(0x3f00), 0x08u,
@@ -44,5 +56,9 @@ int main(void) {
     if (emit("device-info", UINT16_C(0x3f01), 0x02u, NULL, 0u) != 0) {
         return 1;
     }
-    return emit("device-status", UINT16_C(0x4000), 0x01u, NULL, 0u);
+    if (emit("device-status", UINT16_C(0x4000), 0x01u, NULL, 0u) != 0) {
+        return 1;
+    }
+    emit_channel1_nonmutating();
+    return 0;
 }

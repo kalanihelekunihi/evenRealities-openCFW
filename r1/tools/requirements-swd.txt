@@ -1,0 +1,4 @@
+# Host-only SWD transport. The deployment runner performs nRF52840 NVMC page
+# erase and word programming itself; it does not execute pyOCD flash-algorithm
+# blobs on the ring.
+pyocd==0.45.1

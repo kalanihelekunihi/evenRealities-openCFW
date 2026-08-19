@@ -33,9 +33,10 @@ def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def verify_deployment(
-    bundle: Path, deployment: Path, readback: Path, uicr_readback: Path,
-) -> dict[str, object]:
+def verify_deployment_package(
+    bundle: Path, deployment: Path,
+) -> tuple[dict[str, object], bytes, bytes]:
+    """Verify the immutable install package before any target is touched."""
     if not deployment.is_dir():
         raise ValueError(f"deployment package is not a directory: {deployment}")
     members, _ = verify_bundle(bundle)
@@ -88,6 +89,15 @@ def verify_deployment(
         independently_expected, backup_provenance)
     if plan != independently_planned:
         raise ValueError("deployment plan differs from verified bundle and backup")
+
+    return plan, independently_expected, uicr_backup
+
+
+def verify_deployment(
+    bundle: Path, deployment: Path, readback: Path, uicr_readback: Path,
+) -> dict[str, object]:
+    plan, independently_expected, uicr_backup = verify_deployment_package(
+        bundle, deployment)
 
     observed = readback.read_bytes()
     if len(observed) != FLASH_LIMIT:

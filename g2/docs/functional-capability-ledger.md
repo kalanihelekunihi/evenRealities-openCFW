@@ -75,7 +75,7 @@ with no proven autonomous rollback.
 | Health | 0 | 4 | 0 | 1 |
 | System | 1 | 5 | 1 | 0 |
 | Storage | 1 | 5 | 2 | 0 |
-| Sensors | 1 | 10 | 1 (touch validation) | 1 |
+| Sensors | 3 | 8 | 1 (touch validation) | 1 |
 | Hardware services | 3 | 8 | 5 | 2 |
 | Deployment | 3 | 0 | 2 | 1 |
 
@@ -195,12 +195,12 @@ update security rests on the protected Apollo bootloader.
 
 | Capability | Gap status | Size/bounds | Evidence | Acceptance gate |
 | --- | --- | --- | --- | --- |
-| littlefs v2.10.1 utility/private leaves (dual-image) | implemented-in-source | 30 Apollo-main + 26 bootloader functions | `g2/README.md`; `upstream-inventory.md`; `source-coverage.md`; `research/littlefs-next-closed-leaves-audit.md` | `make littlefs-snapshot` verifier + per-tranche tests; fail-closed hash pins both profiles |
+| littlefs v2.10.1 utility/private leaves (dual-image) | implemented-in-source | 30 Apollo-main + 26 bootloader functions; the public `lfs_file_size` wrapper joined them 2026-08-18 (recovered `lfs_t` mlist offset `0x28`) | `g2/README.md`; `upstream-inventory.md`; `source-coverage.md`; `research/littlefs-next-closed-leaves-audit.md` | `make littlefs-snapshot` verifier + per-tranche tests; fail-closed hash pins both profiles |
 | littlefs complete core + G2 block port / MSPI transport (MX25U25643G 32 MiB external flash) | hardware-dependent | block-port callback ABI bounded; read-only port design complete | `g2/README.md`; `research/littlefs-g2-block-port-audit.md`; `littlefs-g2-mspi-transport-audit.md` | golden 32 MiB external-flash capture; host mount comparison vs stock; blocked by unavailable physical evidence |
 | FlashDB 2.1.1 KVDB/FAL snapshot + read-only FAL port | hardware-dependent (admission) | 14-file KVDB/FAL closure byte-exact; `kvdb@0x01FC0000/0x38000`, `NVdb@0x01FF8000/0x8000` | `g2/README.md`; `research/flashdb-configuration-recovery-audit.md`; `flashdb-readonly-port-source-candidate-audit.md` | host differential tests green; promotion blocked on golden `kvdb`/`NVdb` capture + non-destructive mount policy — blocked by unavailable physical evidence |
-| G2 KVDB service objects (setting, time, time-format, temperature-unit, universal-setting, als-scale, terminal-mode, onboarding-config, ring, module-configure) | software-gap | 10+ objects each completely bounded; clean-room candidates in `components/apollo_main/core_overlay/kvdb_*.c`; zero package ownership | `progress.md`; `research/g2-kvdb-ring-recovery.md`; `g2-kvdb-module-configure-recovery.md`; `g2-kvdb-onboarding-config-recovery.md` | per-object host tests + freestanding compile green; remaining: provider binding, placement, redirects, package verification in `overlay.json` |
+| G2 KVDB service objects (ring, module-configure; als-scale, setting, time, time-format, temperature-unit, universal-setting, terminal-mode, onboarding-config now routed) | software-gap | 10+ objects each completely bounded; clean-room candidates in `components/apollo_main/core_overlay/kvdb_*.c`; 8 routed 2026-08-18/19 (apple component 3,670,041 B), the rest own zero package bytes | `progress.md`; `research/g2-kvdb-ring-recovery.md`; `g2-kvdb-module-configure-recovery.md`; `g2-kvdb-onboarding-config-recovery.md` | per-object host tests + freestanding compile green; remaining: provider binding, placement, redirects, package verification in `overlay.json` |
 | G2 KVDB system service (`service_kvdb.c`) incl. `kvbooCount` lifecycle + 11 migrations | software-gap | `kvMagic=0x5A000020`; lifecycle + migration callbacks bounded | `research/g2-service-kvdb-recovery.md`; `g2/README.md` | production mount blocked by golden-media validation, schema semantics, non-destructive reset policy |
-| G2 NVDB service objects (buzzer, product-mode, mac, adv-magic, sensor-caldata, sys-dt + `service_nvdb.c`) | software-gap | 7 objects bounded; `nvMagic=0x55550022` | `progress.md`; `research/g2-nvdb-sensor-caldata-recovery.md`; `g2-service-nvdb-recovery.md` | host tests per candidate; read-only golden `NVdb` capture + non-destructive mount policy + schema/serial reconciliation |
+| G2 NVDB service objects (buzzer, product-mode, mac, adv-magic, sys-dt + `service_nvdb.c`; sensor-caldata now routed) | software-gap | 7 objects bounded; `nvMagic=0x55550022`; sensor-caldata production-routed 2026-08-18, the rest own zero package bytes | `progress.md`; `research/g2-nvdb-sensor-caldata-recovery.md`; `g2-service-nvdb-recovery.md` | host tests per candidate; read-only golden `NVdb` capture + non-destructive mount policy + schema/serial reconciliation |
 | FreeRTOS-Plus-CLI filesystem commands (`prvCommand_filesystem.c`) | software-gap | 12 entries / ~2,026 B at `[0x57E826,0x57F550)`; proven first-party | `research/g2-freertos-plus-cli-filesystem-recovery.md` | analyzer test green; clean-room rewrite not yet production-routed |
 
 ## Sensors
@@ -211,8 +211,8 @@ update security rests on the protected Apollo bootloader.
 | Sensor-hub policy/message routing (`sensor_hub.c`) | software-gap | 31 functions / 4,026 body B; object `[0x004A6644,0x004A777C)` | `research/g2-sensor-hub-dependency-boundary.md` | `tools/analyze_g2_sensor_hub.py` + focused test; all 254 external calls terminate at closed/admitted seams; negative evidence: no sensor-fusion library body |
 | IMU driver (`imu_icm45608.c`: FIFO, sample ring, orientation, quaternion→Euler, AID/tilt/tap/head-up/compass) | software-gap | 53 functions / 11,674 body B; object `[0x004A35B0,0x004A6644)` | `research/g2-imu-icm45608-recovery.md` | analyzer + test green; byte ledger pinned; clean-room candidate absent |
 | ALS driver (`als.c` + private TI OPT3007 register adapter) | software-gap | 38 functions / 3,858 body B; `[0x004AD9B8,0x004AEA40)` | `research/g2-als-dependency-boundary.md` | `make als-closure`; production routing disabled |
-| NVDB sensor-calibration records (`service_nvdb_sensor_caldata.c`) | software-gap | 8 functions; object `[0x00509764,0x00509B48)`; host-tested candidate exists | `research/g2-nvdb-sensor-caldata-recovery.md`; `components/apollo_main/core_overlay/nvdb_sensor_caldata.c` | host tests green; production gate = fixed SRAM/key/provider seam binding + placement + guarded redirects + package validation |
-| KVDB ALS-scale record (`service_kvdb_als_scale.c`) | software-gap | 3 functions; `[0x004AECA4,0x004AEE28)`; host-tested candidate exists | `research/g2-kvdb-als-scale-recovery.md` | host tests green; production gate = placement + package verification |
+| NVDB sensor-calibration records (`service_nvdb_sensor_caldata.c`) | implemented-in-source | 8 functions; object `[0x00509764,0x00509B48)`; production-routed 2026-08-18 (8 relocated leaves, 8 guarded `b_w` redirects, package pins advanced) | `research/g2-nvdb-sensor-caldata-recovery.md`; `components/apollo_main/core_overlay/nvdb_sensor_caldata.c` | host tests + component/overlay/package verification green; device data validation remains a hardware tail |
+| KVDB ALS-scale record (`service_kvdb_als_scale.c`) | implemented-in-source | 3 functions; `[0x004AECA4,0x004AEE28)`; candidate production-routed 2026-08-18 under the reviewed apple-clang profile | `research/g2-kvdb-als-scale-recovery.md`; `components/apollo_main/core_overlay/kvdb_als_scale.c` | host tests + overlay/package pins green; device data validation remains a hardware tail |
 | eAT sensor command cluster (`AT^IMU_RAWDATA`, `AT^IMU_EULER`, `AT^ALS*`, `AT^BRIGHTNESS*`, `AT^SCRN_*`, `AT^INFO/RESET/PSN`) | software-gap | 12 handlers / 486 body B + 192 B command table | `research/g2-eat-core-sensor-recovery.md`; `g2-eat-registry-recovery.md` (21 records, zero unassigned) | cluster analyzer + SHA-256 pins; behavior fully specified incl. stock quirks |
 | eAT touch-panel command (`at_tp.c` / `AT^TP`) | software-gap | 2 bodies / 898 body B; `[0x005A5984,0x005A5D94)` | `research/g2-at-tp-recovery.md` | object analyzer pins all subcommands, bounds, ingress topology |
 | Gesture processor (`service_gesture_processor.c`) | software-gap | 5 blocks / 1,236 body B; `[0x00502D56,0x00503298)` | `research/g2-service-gesture-processor-recovery.md` | analyzer test green; closure manifests pinned |
@@ -299,3 +299,40 @@ connects, at minimum:
    path with no proven autonomous rollback.
 
 No mass erase or flash operation is authorized by this document.
+
+## Production-routing re-pin checklist (learned 2026-08-18)
+
+Routing one candidate into the Apollo overlay changes shared aggregates that
+are pinned across the whole test fleet, not just in the candidate's own
+focused tests. A closure is not done until ALL of these are advanced
+consistently (values below are the post-nvdb_sensor_caldata state):
+
+1. `components/apollo_main/core_overlay/overlay.json`: leaf entries,
+   `functions`, `patch_sites`, and `expected` (apple-clang overlay
+   144,966 / component 3,668,362; linux-clang profile where applicable).
+2. `manifests/g2-2.2.6.10-core-source.json`: region pins, provider
+   size/SHA-256, package size/SHA-256 (4,446,856 / `e709d945…`).
+3. `third_party/littlefs/verify_snapshot.py`: `aggregate_pins` and
+   `EXPECTED_TAG_ID_MANIFEST_PROVIDERS` (it pins the whole-overlay expected
+   block, not only littlefs leaves).
+4. Fleet-wide whole-overlay aggregate pins in ~65 `tests/test_*.py` modules:
+   overlay/component/package sizes and SHA-256 (watch BOTH `3_668_362`
+   underscore and `3668362` plain forms, and 64-hex hashes stored as full
+   strings or 32-char split halves).
+5. Overlay accounting dicts: `source_owned_bytes`, `generated_patch_site_bytes`,
+   `opaque_base_bytes`, `replaced_stock_function_bytes` move together
+   (source +N, patch-site/replaced +stock-bytes, opaque −stock-bytes).
+6. `current_layout_rollback_sha256` (test_runtime_littlefs_disk_version_parts).
+7. Tail-arithmetic comments of the form "all later admissions through …"
+   in accounting tests — extend the term, don't just change the number.
+8. `PROVENANCE_SHA256` pins when a `third_party/<family>/PROVENANCE.json`
+   changes; confirm direction against the live file hash before propagating
+   (a stale pin in one module is not evidence of the correct value).
+9. Pinned docs (`source-coverage.md` etc.) require matching updates to
+   `test_runtime_nanopb_decode_svarint_production.py` /
+   `test_runtime_nanopb_decode_varint32_production.py`.
+10. Docs: audit-doc append, `EVIDENCE.md` entry, README + progress narrative.
+
+Verification order: candidate + analyzer focused tests → the six
+littlefs-family modules (fastest aggregate-pin detectors) →
+`test_core_overlay` → full `./make.sh test` with NO concurrent tree edits.

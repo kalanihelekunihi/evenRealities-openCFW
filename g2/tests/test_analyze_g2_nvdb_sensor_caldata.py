@@ -32,6 +32,33 @@ class AnalyzeG2NvdbSensorCaldataTests(unittest.TestCase):
             MODULE.DEFAULT_MATRIX_SHA256,
         )
 
+    def test_production_routed(self) -> None:
+        production = MODULE.analyze()["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 900)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 96)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(production["relocated_leaves"], [
+            "open_cfw_nvdb_sensor_caldata_ag_default_initialize",
+            "open_cfw_nvdb_sensor_caldata_ag_load_and_migrate",
+            "open_cfw_nvdb_sensor_caldata_ag_read",
+            "open_cfw_nvdb_sensor_caldata_ag_update",
+            "open_cfw_nvdb_sensor_caldata_check",
+            "open_cfw_nvdb_sensor_caldata_default_initialize",
+            "open_cfw_nvdb_sensor_caldata_load_and_migrate",
+            "open_cfw_nvdb_sensor_caldata_update",
+        ])
+        self.assertEqual(production["patch_sites"], [
+            "replace_nvdb_sensor_caldata_ag_default_initialize",
+            "replace_nvdb_sensor_caldata_ag_load_and_migrate",
+            "replace_nvdb_sensor_caldata_ag_read",
+            "replace_nvdb_sensor_caldata_ag_update",
+            "replace_nvdb_sensor_caldata_check",
+            "replace_nvdb_sensor_caldata_default_initialize",
+            "replace_nvdb_sensor_caldata_load_and_migrate",
+            "replace_nvdb_sensor_caldata_update",
+        ])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -6,10 +6,25 @@ SDK_ROOT := $(PROJECT_ROOT)/vendor/nrf5-sdk
 PROFILE ?= captured
 GNU_INSTALL_ROOT ?=
 GNU_PREFIX ?= arm-none-eabi
+LIVE_IMAGE ?=
 export SOURCE_DATE_EPOCH := 1629676800
 
-ifeq ($(filter $(PROFILE),captured hardened),)
-$(error PROFILE must be captured or hardened)
+ifeq ($(filter $(PROFILE),captured hardened transition),)
+$(error PROFILE must be captured, hardened, or transition)
+endif
+
+ifeq ($(PROFILE),transition)
+ifeq ($(strip $(TRANSITION_IMAGE_BYTES)),)
+$(error TRANSITION_IMAGE_BYTES is required for PROFILE=transition)
+endif
+ifeq ($(strip $(TRANSITION_IMAGE_CRC32)),)
+$(error TRANSITION_IMAGE_CRC32 is required for PROFILE=transition)
+endif
+PROJECT_PUBLIC_KEY := $(PROJECT_ROOT)/src/r1_transition_public_key.c
+PROJECT_MAIN := $(PROJECT_ROOT)/src/r1_transition_main.c
+else
+PROJECT_PUBLIC_KEY := $(PROJECT_ROOT)/src/r1_dfu_public_key.c
+PROJECT_MAIN := $(SDK_ROOT)/examples/dfu/secure_bootloader/main.c
 endif
 
 OUTPUT_DIRECTORY := build/$(PROFILE)
@@ -57,8 +72,8 @@ SRC_FILES += \
   $(SDK_ROOT)/components/libraries/crypto/nrf_crypto_hash.c \
   $(SDK_ROOT)/components/libraries/crypto/nrf_crypto_init.c \
   $(SDK_ROOT)/components/libraries/crypto/nrf_crypto_shared.c \
-  $(PROJECT_ROOT)/src/r1_dfu_public_key.c \
-  $(SDK_ROOT)/examples/dfu/secure_bootloader/main.c \
+  $(PROJECT_PUBLIC_KEY) \
+  $(PROJECT_MAIN) \
   $(SDK_ROOT)/components/libraries/bootloader/dfu/nrf_dfu_svci.c \
   $(SDK_ROOT)/components/libraries/bootloader/dfu/nrf_dfu_svci_handler.c \
   $(SDK_ROOT)/components/libraries/svc/nrf_svc_handler.c \
@@ -161,6 +176,11 @@ CFLAGS += -DR1_BUILD_PROFILE_CAPTURED=1
 else
 CFLAGS += -DR1_BUILD_PROFILE_CAPTURED=0
 endif
+ifeq ($(PROFILE),transition)
+CFLAGS += -DR1_BUILD_PROFILE_TRANSITION=1
+CFLAGS += -DR1_TRANSITION_IMAGE_BYTES=$(TRANSITION_IMAGE_BYTES)
+CFLAGS += -DR1_TRANSITION_IMAGE_CRC32=$(TRANSITION_IMAGE_CRC32)
+endif
 CFLAGS += -mcpu=cortex-m4 -mthumb -mabi=aapcs
 CFLAGS += -Wall -Werror -mfloat-abi=hard -mfpu=fpv4-sp-d16
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
@@ -219,7 +239,7 @@ $(OUTPUT_DIRECTORY)/r1_bootloader.bin: $(OUTPUT_DIRECTORY)/r1_bootloader.out
 
 verify: r1_bootloader
 	python3 tools/verify_project.py --profile $(PROFILE) \
-	  --tool-prefix $(GNU_INSTALL_ROOT)$(GNU_PREFIX)-
+	  --tool-prefix $(GNU_INSTALL_ROOT)$(GNU_PREFIX)- $(if $(LIVE_IMAGE),--live-image $(LIVE_IMAGE))
 
 vendor-verify:
 	python3 tools/vendor_sdk_subset.py --verify-only

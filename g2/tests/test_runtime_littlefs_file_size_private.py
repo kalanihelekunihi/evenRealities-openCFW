@@ -101,37 +101,37 @@ PROFILE_PINS = {
             "2d37f47f32290852aa47efc460241a43"
         ),
         "overlay": (
-            124_896,
-            "341c1d641ae5ffa21ff2af55e1cbebae7353c3073595e9fe9170a647bcdcf543",
+            147_021,
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
         ),
         "component": (
-            3_648_292,
-            "355207d6be95cc718be02194ea432e779c6f23c7a448f080abba91aa85c01e8e",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 86_368,
+            "generated_patch_site_bytes": 103_358,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_436_814,
-            "replaced_stock_function_bytes": 86_550,
-            "source_owned_bytes": 125_078,
+            "opaque_base_bytes": 3_419_824,
+            "replaced_stock_function_bytes": 103_536,
+            "source_owned_bytes": 147_203,
             "source_owned_in_place_bytes": 182,
         },
         "package": (
-            4_426_786,
-            "4d57d8b103045434a12fc5e5a97e3ba2a3d93bc3b9590b2505bea1ea40fab309",
+            4_448_911,
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
         ),
         "patch": (
             "e4f22fba00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
             "f9766969393fd2ad67f0182de711d93054fb8eecb153e6d4a2618750c2bd2adb",
         ),
         "plan": (
-            731_571,
-            "c3d89db9e59ef6be6ca3a6805ab24f969be3b9d653d1a7ccce1897981f19cfaf",
-            (1019, 2, 5),
+            1_046_958,
+            "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c",
+            (1460, 2, 5),
         ),
-        "plan_ownership": (125_672, 88_273, 4_212_841),
-        "coarse_ownership": (125_672, 88_273, 4_212_841),
-        "manifest_ownership": (125_672, 88_273, 4_212_841),
+        "plan_ownership": (147_634, 103_382, 4_197_895),
+        "coarse_ownership": (147_634, 103_382, 4_197_895),
+        "manifest_ownership": (147_634, 103_382, 4_197_895),
     },
     "linux-clang": {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",
@@ -142,12 +142,12 @@ PROFILE_PINS = {
             "9270ff4fc25b056fd7dc743a7410fc72"
         ),
         "overlay": (
-            126_720,
-            "0d0acba33cfd65e5b250e741b8e7d23f3af1e5959f8139bc7e614eb903f93cb9",
+            144_266,
+            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
         ),
         "component": (
-            3_650_116,
-            "99735e753f0b58c8db469bc15e92a87b446e7af917e13284e05f8c4538a2c25c",
+            3_667_662,
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
         ),
         "component_accounting": {
             "generated_patch_site_bytes": 86_534,
@@ -158,8 +158,8 @@ PROFILE_PINS = {
             "source_owned_in_place_bytes": 182,
         },
         "package": (
-            4_428_610,
-            "ddf524c5c614be4ab627bfc17466df5bb99ae14efa98f38f0686192bb6a29ba0",
+            4_446_156,
+            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
         ),
         "patch": (
             "e4f2bdbd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
@@ -172,27 +172,27 @@ PROFILE_PINS = {
         ),
         "plan_ownership": (127_597, 88_172, 4_212_841),
         "coarse_ownership": (127_597, 88_172, 4_212_841),
-        "manifest_ownership": (127_601, 88_168, 4_212_841),
+        "manifest_ownership": (145_147, 102_032, 4_198_977),
     },
 }
 
 MANIFEST_PIN = (
-    947,
+    1400,
     {
         "container_only": (1, 32),
-        "generated_alignment": (51, 102),
-        "generated_source_entry_replacement": (594, 86_192),
+        "generated_alignment": (133, 265),
+        "generated_source_entry_replacement": (726, 101_138),
         "generated_source_exact_load_image": (1, 6),
         "generated_source_exact_replacement": (7, 134),
-        "official_blob": (184, 3_436_814),
-        "source_compiled": (109, 125_012),
+        "official_blob": (225, 3_421_868),
+        "source_compiled": (307, 146_974),
     },
 )
 
 # Exact byte ownership within the four retained non-main container wrappers.
 # Their 236 bytes refine into 17 authenticated source bytes, 135 generated
 # metadata/checksum bytes, and 84 opaque vendor bytes.
-CANONICAL_OWNERSHIP = (125_689, 88_408, 4_212_689)
+CANONICAL_OWNERSHIP = (147_080, 102_418, 4_198_825)
 CANONICAL_CONTAINER_REFINEMENT = (17, 135, 84)
 
 TARGET_FLAGS = [
@@ -1088,10 +1088,10 @@ class RuntimeLittlefsFileSizePrivateTests(unittest.TestCase):
             615_594,
         )
         source_tail = by_name["apollo_littlefs_file_size_private_source_leaf"]
-        self.assertIs(source_tail, regions[-26])
+        self.assertIs(source_tail, regions[-299])
         self.assertEqual(
             source_tail["file_offset"] + source_tail["size"],
-            regions[-25]["file_offset"],
+            regions[-298]["file_offset"],
         )
         self.assertEqual(
             source_tail,

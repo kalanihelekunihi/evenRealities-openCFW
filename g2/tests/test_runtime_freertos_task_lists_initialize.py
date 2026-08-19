@@ -126,24 +126,24 @@ PROFILE_PINS = {
             "576317c22dd5de6f527fb595c4668b52"
         ),
         "overlay": (
-            143_227,
-            "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
+            147_021,
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
         ),
         "component": (
-            3_666_623,
-            "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 99_192,
+            "generated_patch_site_bytes": 103_358,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_423_990,
-            "replaced_stock_function_bytes": 99_370,
-            "source_owned_bytes": 143_409,
+            "opaque_base_bytes": 3_419_824,
+            "replaced_stock_function_bytes": 103_536,
+            "source_owned_bytes": 147_203,
             "source_owned_in_place_bytes": 182,
         },
         "package": (
-            4_445_117,
-            "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6",
+            4_448_911,
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
         ),
         "replacement_prefix": "5df32cb9",
         "replacement_sha256": (
@@ -188,12 +188,12 @@ PROFILE_PINS = {
 
 MANIFEST_COVERAGE = {
     "container_only": (1, 32),
-    "generated_alignment": (111, 220),
-    "generated_source_entry_replacement": (691, 96_972),
+    "generated_alignment": (133, 265),
+    "generated_source_entry_replacement": (726, 101_138),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (209, 3_426_034),
-    "source_compiled": (254, 143_225),
+    "official_blob": (225, 3_421_868),
+    "source_compiled": (307, 146_974),
 }
 
 MAX_PRIORITIES = 56
@@ -1341,7 +1341,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1274)
+        self.assertEqual(len(regions), 1400)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(
@@ -1393,7 +1393,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
             },
         )
         tail = by_name["apollo_freertos_task_lists_initialize_source_leaf"]
-        self.assertIs(tail, regions[-230])
+        self.assertIs(tail, regions[-298])
         self.assertEqual(
             tail,
             {

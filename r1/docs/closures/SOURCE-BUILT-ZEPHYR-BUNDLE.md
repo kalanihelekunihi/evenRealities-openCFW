@@ -279,9 +279,28 @@ rejects altered package artifacts, and byte-compares a supplied post-flash
 readback—including erased gaps and all preserved regions—while separately
 requiring UICR to remain byte-identical. When supplied post-recovery readbacks,
 it requires every internal-flash and UICR byte to match the original backups.
-Neither tool discovers, connects to, erases, or flashes hardware. The separate
-recovery artifacts still require an authorized debug path; UICR must be erased
-through that path before its recovery HEX is restored.
+Those two offline tools never access hardware. `tools/deploy_zephyr_swd.py` is a
+separate dry-run-default execution boundary for the first install. It requires
+an explicit probe ID and exact bundle-digest confirmation, connects under reset
+with pyOCD auto-unlock/mass erase and resume-on-disconnect disabled, confirms
+`FICR.PART`, captures and compares the complete preflash flash/UICR state, and
+then performs only the plan's page erases and addressed word writes through a
+transparent host-driven nRF52840 NVMC sequence. It neither loads a target flash
+algorithm nor writes `ERASEALL`; install and normal rollback do not write
+`ERASEUICR` or UICR. It retains complete
+post-install readbacks and resets only after byte-exact verification when the
+operator also supplies `--release-after-verify`; every failure leaves the core
+halted. The separate recovery artifacts still require the same authorized debug
+path. Its `--recover` mode requires the current full flash to equal the exact
+verified source-installed image and UICR to equal the original backup, then
+sector-erases and restores the complete retail one-MiB backup, runs the existing
+independent recovery verifier, and applies the same release-after-verification
+rule. Normal rollback does not erase or write UICR; unexpected UICR drift fails
+closed. A separate `--recover --restore-uicr` disaster mode additionally
+requires the exact backup SHA-256 printed by dry-run. It follows the pinned
+Nordic `NVMC.ERASEUICR=1` sequence, proves the complete 0x308-byte extent erased,
+restores only the original non-erased words, and requires the same full recovery
+readback before optional reset.
 
 The build inputs and unsigned application are deterministic for an identical
 pinned workspace, but the pinned MCUboot `imgtool` signer requests randomized
@@ -372,6 +391,21 @@ python3 tools/verify_zephyr_deployment.py \
   --uicr-readback /secure/r1-post-install-uicr-0x308.bin \
   --recovery-readback /secure/r1-post-recovery-readback-1MiB.bin \
   --recovery-uicr-readback /secure/r1-post-recovery-uicr-0x308.bin
+python3 tools/deploy_zephyr_swd.py \
+  build/openr1-zephyr/openr1-source-built.zip \
+  --deployment build/r1-deployment-preflight
+# Only after attaching the selected probe and reviewing the dry-run digest:
+python3 tools/deploy_zephyr_swd.py \
+  build/openr1-zephyr/openr1-source-built.zip \
+  --deployment build/r1-deployment-preflight --execute \
+  --probe-id EXACT-PROBE-ID --confirm-bundle-sha256 EXACT-PRINTED-SHA256 \
+  --output /secure/new-r1-install-evidence
+# Exact normal rollback has an independent dry-run and explicit mode:
+python3 tools/deploy_zephyr_swd.py \
+  build/openr1-zephyr/openr1-source-built.zip \
+  --deployment build/r1-deployment-preflight --recover
+# UICR disaster recovery adds --restore-uicr in dry-run; execution also
+# requires --confirm-uicr-sha256 with the exact digest it prints.
 ```
 
 After the source boot partition is present, the bundle-aware recovery client

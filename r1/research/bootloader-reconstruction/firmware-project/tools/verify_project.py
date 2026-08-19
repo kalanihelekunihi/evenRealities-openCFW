@@ -125,6 +125,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--profile", choices=("captured", "hardened"), required=True)
     parser.add_argument("--tool-prefix", default="arm-none-eabi-")
+    parser.add_argument("--live-image", type=Path, default=LIVE_IMAGE)
     args = parser.parse_args()
 
     build = PROJECT / "build" / args.profile
@@ -140,7 +141,7 @@ def main() -> None:
         check=True,
     )
 
-    live = LIVE_IMAGE.read_bytes()
+    live = args.live_image.read_bytes()
     require(len(live) == 0x6000, "unexpected live bootloader dump length")
     require(
         hashlib.sha256(live).hexdigest()
@@ -237,6 +238,10 @@ def main() -> None:
         "NRF_DFU_SINGLE_BANK_APP_UPDATES": "0",
         "NRF_DFU_HW_VERSION": "52",
         "NRF_DFU_BLE_REQUIRES_BONDS": "0",
+        "NRF_SDH_CLOCK_LF_SRC": "0",
+        "NRF_SDH_CLOCK_LF_RC_CTIV": "16",
+        "NRF_SDH_CLOCK_LF_RC_TEMP_CTIV": "2",
+        "NRF_SDH_CLOCK_LF_ACCURACY": "1",
         "NRF_BL_DFU_ENTER_METHOD_BUTTON": "0",
         "NRF_BL_DFU_ENTER_METHOD_PINRESET": "0",
         "NRF_BL_DFU_ENTER_METHOD_GPREGRET": "1",

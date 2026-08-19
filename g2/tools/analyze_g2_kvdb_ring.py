@@ -213,6 +213,55 @@ def analyze(image_path: Path = IMAGE) -> dict:
     offset = 0x200037C8 - flashdb.IAR_SCATTER_DESTINATION
     if sram[offset : offset + 24] != FACTORY or crc16(FACTORY[:22]) != 0x06D4:
         raise AuditError("factory record changed")
+
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/kvdb_ring.c"
+    expected_patches = {
+        "replace_kvdb_ring_default_initialize": (
+            0x005D9B6C, 22, "ef35718875dd86b68dcb6ce403d801def07fb263ebce8e276f899e0aaf34c36d",
+            "open_cfw_kvdb_ring_default_initialize",
+        ),
+        "replace_kvdb_ring_load_and_migrate": (
+            0x005D9B82, 446, "8820609ec9c69ccca51e740e6c6e90c1482bb29b3d7688b13508a787a368dd9a",
+            "open_cfw_kvdb_ring_load_and_migrate",
+        ),
+        "replace_kvdb_write_ring": (
+            0x005D9D40, 328, "009e81ba8b01aef6489577a8241a55330e68791f2a6c8d6edea9c2223781f6f4",
+            "open_cfw_kvdb_write_ring",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"]
+            != "a18825d4061845a39b2cb5926a3b8100f9aba9aaf927e74f0c4d08a7db288a13"
+            or leaf.get("profiles") != ["apple-clang"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production ring routing changed")
     return {
         "surface": {
             "linked_functions": 3,
@@ -247,8 +296,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
         },
         "production": {
             "candidate": "components/apollo_main/core_overlay/kvdb_ring.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "production_routed": True,
+            "ownership_bytes": 796,
+            "retained_stock_noncode_bytes": 72,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

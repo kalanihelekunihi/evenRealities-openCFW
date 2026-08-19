@@ -174,12 +174,12 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            125_258,
-            "1f71240bd75af28798d93eba217b99464156ee40ae353333c2fd0f449b9a8c76",
+            147_021,
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
         ),
         "main_component": (
-            3_648_654,
-            "36b7f32f9f5f1a4c2fbf800b8cda0f48aa521bfc87638d671932b80b49f7e991",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "boot_overlay": (
             662,
@@ -190,20 +190,20 @@ PROFILE_PINS = {
             "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
         ),
         "package": (
-            4_427_148,
-            "532743c6a1b96f198f0991c320bf3318eac88bc538a90a9e0b0267aaacef07b3",
+            4_448_911,
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
         ),
         "flash_plan": (
-            740_977,
-            "b4b6e72d4ff7be47ca96a845a943320dfb65732c1de10d2bbb18051626cf2f95",
+            1_046_958,
+            "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c",
         ),
         "package_report": (
             2_323,
-            "19972d9794b3b6ac6272b2c5d5cd782e528378fcdce4133b9f0856caf6e36f4a",
+            "6d13f1eeacd93be4ed8009d49683225054d4113cfb77c85cc10be43d7f7d8f71",
         ),
         "canonical_main_report": (
-            1_525_514,
-            "03e75b0fba3a82b80b7227d33a4a3af656708608e876cd37d370293a408cb6d5",
+            2_671_480,
+            "50b25edcf6d1a80992044522d40d7ccc79036da5c09c108d6e9d855984866f2d",
         ),
         "boot_report": (
             128_347,
@@ -228,12 +228,12 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            132_888,
-            "7036c0e07a36376e5d98700c922ffeec7a6826388b75060a2b98b4228a411c61",
+            144_266,
+            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
         ),
         "main_component": (
-            3_656_284,
-            "d5daf89121f44a61b303fa953da78550edd31e9159cf9b0b397aeb1b5cfef54d",
+            3_667_662,
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
         ),
         "boot_overlay": (
             662,
@@ -244,8 +244,8 @@ PROFILE_PINS = {
             "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74",
         ),
         "package": (
-            4_434_778,
-            "63d5cd1d1cbab2c3ece4a48f96b58a0cb14a7487917831f4c6d370b40ed41d90",
+            4_446_156,
+            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
         ),
         "flash_plan": (
             640_188,
@@ -333,8 +333,14 @@ def require_real_directory(path: Path) -> None:
 def materialize_authenticated_open_cfw_snapshot(
     source_root: Path,
     destination: Path,
+    treeish: str = "HEAD:openCFW",
 ) -> None:
-    """Materialize exactly the committed ``HEAD:openCFW`` Git tree."""
+    """Materialize exactly the committed Git tree named by ``treeish``.
+
+    The default matches the historical single-project layout where the G2
+    project lived at ``openCFW/``; the current target-split repository keeps
+    it at ``g2/``, so the production snapshot passes ``HEAD:g2``.
+    """
 
     repository = source_root.parent
     object_format = subprocess.run(
@@ -350,7 +356,7 @@ def materialize_authenticated_open_cfw_snapshot(
             f"{object_format!r}"
         )
     tree = subprocess.run(
-        ["git", "ls-tree", "-rz", "HEAD:openCFW"],
+        ["git", "ls-tree", "-rz", treeish],
         cwd=repository,
         check=True,
         capture_output=True,
@@ -378,7 +384,7 @@ def materialize_authenticated_open_cfw_snapshot(
     assert_no_macos_path_aliases(set(expected) | expected_directories)
 
     archived = subprocess.run(
-        ["git", "archive", "--format=tar", "HEAD:openCFW"],
+        ["git", "archive", "--format=tar", treeish],
         cwd=repository,
         check=True,
         capture_output=True,
@@ -871,6 +877,23 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
         if version != APPLE_CLANG_VERSION:
             raise AssertionError(f"unreviewed compiler: {version!r}")
 
+        committed_payload = subprocess.run(
+            [
+                "git",
+                "cat-file",
+                "-e",
+                "HEAD:g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+            ],
+            cwd=ROOT.parent,
+            check=False,
+            capture_output=True,
+        )
+        if committed_payload.returncode != 0:
+            raise unittest.SkipTest(
+                "official OTA payloads are not in the committed tree; the "
+                "test-owned shadow build cannot run in this checkout"
+            )
+
         cls.temporary = tempfile.TemporaryDirectory(
             prefix="open-cfw-littlefs-tag-type1-production-",
         )
@@ -879,6 +902,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
         materialize_authenticated_open_cfw_snapshot(
             ROOT,
             cls.shadow_root,
+            treeish="HEAD:g2",
         )
         build_environment = os.environ.copy()
         build_environment["OPENCFW_CLANG"] = APPLE_CLANG
@@ -1372,7 +1396,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 package_report["unresolved_region_count"],
                 package_report["container_region_count"],
             ),
-            (1032, 2, 5),
+            (1460, 2, 5),
         )
         flash_plan = json.loads(artifacts["flash_plan"].read_text(encoding="utf-8"))
         self.assertEqual(flash_plan["package_sha256"], apple["package"][1])
@@ -1382,7 +1406,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 len(flash_plan["unresolved_flash_regions"]),
                 len(flash_plan["container_only_regions"]),
             ),
-            (1032, 2, 5),
+            (1460, 2, 5),
         )
 
     def test_dual_image_stock_callers_and_dependency_closure_are_exact(self) -> None:

@@ -2,6 +2,20 @@
 
 ## Continuation update: recovery evidence and source recovery are complete
 
+### Destructive continuation supersedes the original no-write blocker
+
+The owner subsequently authorized destructive use of B56EE2. The recovered
+ACE path entered Nordic Secure DFU and the owner-signed temporary transition
+bootloader completed its 0...100-percent transfer and activation. The ring did
+not advertise after reset, so the source-boot staging archive was not sent.
+The SHA-pinned retail bootloader then exposed the missed board configuration:
+its LF clock bytes at `0x000FDC68` are `00 10 02 01` (internal RC, 16/2
+calibration, 500 ppm), whereas the first reconstruction inherited the
+PCA10056 external-crystal default. The corrected source pins those bytes and
+removes an early mutating DFU-settings initialization. This closes a software
+defect, not the physical validation gate: B56EE2 is non-advertising and no SWD
+probe is attached, while the corrected image has not yet run on a second unit.
+
 This section supersedes the earlier backup/key statements retained below as a
 chronology of the first audit. Owner-authorized ACE reads subsequently captured
 all 216 exact live 4-KiB pages at `0x27000..<0xFF000` and the complete live
@@ -26,15 +40,27 @@ two Nordic FDS data pages and one swap page, retains their page-exact recovery
 copy, rejects unknown/torn layouts, and requires fresh owner pairing rather
 than importing retail credentials into Zephyr NVS.
 
-The remaining first-install blocker is narrower but fundamental: replacing
+The original first-install blocker was narrower but fundamental: replacing
 nRF52840 page zero over BLE requires erasing the only reset vector/MBR before
 the replacement can be made durable. Neither the SoC nor the retail Secure DFU
 bootloader provides immutable ROM recovery if power or radio is lost in that
 window. A staged copier can reduce the window but cannot make it recoverable.
-No SWD/debug probe is attached, so the first opaque-free installation has not
-been attempted. Attach an SWD/J-Link-class path for the initial program and
-exact readback; after that one transition, application recovery is available
-over the source-built BLE loader.
+No SWD/debug probe was attached at that point. The later authorized BLE attempt
+is recorded above; it installed only the temporary bootloader and did not reach
+the opaque-free source partition. Attach an SWD/J-Link-class path for recovery
+and exact readback, or explicitly identify another sacrificial R1 for the
+corrected BLE transition; after a successful source transition, application
+recovery is available over the source-built BLE loader.
+
+The paired-iPhone/nRF Connect continuation does not change this boundary. It
+independently identifies `EVEN R1_B56EE2` as an nRF5 SDK DFU target and reached
+the pairing/service-discovery path, but the retail DFU transport accepts an
+application package that starts at `0x27000` and preserves S140 plus the retail
+bootloader. The opaque-free bundle must replace that protected extent and is a
+full-flash archive rather than an nRF5 DFU ZIP. Applying the legacy package
+would not meet the requested source-only runtime boundary, and attempting to
+apply the full-flash archive through nRF Connect cannot provide page-zero
+atomicity or exact readback. Both firmware writes were therefore withheld.
 
 ## Decision
 
@@ -81,9 +107,11 @@ The owned ring physically confirmed:
 The probe and its C-generated fixed frame vectors are checked in under
 `tools/probe_r1_ble.swift` and `tools/r1_ble_probe_frames.c`.
 
-## Evidence still unavailable in this workspace
+## Original unavailable-evidence snapshot (superseded)
 
-The blocking audit on 2026-08-18 found:
+The initial blocking audit on 2026-08-18 found the items below. The continuation
+update above supersedes the backup, deployment-plan, tool, and signing-key
+statements; this list is retained only as chronology:
 
 - no R1 serial/debug endpoint; the BLE GATT surface has no flash/UICR read-back
   operation, and only macOS `/dev/cu.Bluetooth-Incoming-Port` and
@@ -112,24 +140,42 @@ The final audit still found:
 
 - no USB J-Link, Nordic debugger, CMSIS-DAP, DAPLink, Black Magic, or ST-Link
   interface in either `system_profiler` or the macOS IORegistry;
-- no `nrfjprog`, `JLinkExe`, `JLinkGDBServer`, `pyocd`, `openocd`, `probe-rs`,
-  `cargo-embed`, `nrfutil`, or `adafruit-nrfutil` executable;
+- the pinned pyOCD 0.45.1 runtime reports exactly
+  `No available debug probes are connected`; USB inventory and IORegistry also
+  contain no compatible probe interface;
 - no R1 serial endpoint beyond the generic macOS Bluetooth/debug-console
   devices; and
-- no owned-device one-MiB internal-flash or 4-KiB UICR backup artifact.
+- no post-install or post-recovery physical readback, because no SWD session can
+  begin without an attached probe.
 
-The standard `FE59` Secure DFU control point remains install-only and cannot
-replace either read-back. All safe CoreBluetooth validation available through
-the fixed, non-generic probe has been completed. Further progress now requires
-an external debug/read-back state change; entering DFU would not remove this
-blocker and was not attempted.
+The exact owned-device one-MiB internal-flash and 0x308-byte UICR backups,
+owner-keyed bundle, v11 deployment plan, pyOCD runtime, and fail-closed SWD
+executor are present. The standard `FE59` Secure DFU control point remains
+install-only and cannot replace SWD read-back or safely replace page zero. All
+safe CoreBluetooth validation available through the fixed, non-generic probe
+has been completed. Further progress now requires the external state change of
+attaching a compatible SWD probe; entering DFU would not remove this blocker
+and was not attempted.
+
+PacketLogger 26.0 is also present, but both its CLI and live GUI receive no
+controller packets. A bounded authorized ring run produced a 260-byte
+note-only trace (SHA-256
+`f0c2c2f96a0e1c67471032379e53ad265dc64af81933c505c59a05f119a419e4`),
+and `bluetoothd` logged `Bluetooth Profile Required` after authenticating the
+capture client. No diagnostic profile or security-sensitive system setting was
+changed. Apple's official Profiles and Logs route names the required download
+`Bluetooth_macOS.mobileconfig`, requires Apple Developer sign-in, and has not
+been installed. The new strict `tools/analyze_r1_hci_capture.py` independently gates
+real `.pklg` evidence for MTU, data length, PHY, encryption, controller
+completed-packet counts, channel-2 traffic, and queued-write rejection; it
+correctly rejects the current note-only artifact as evidence.
 
 ## Residual acceptance map
 
 | Ledger area | Rows still partial | External evidence required |
 | --- | ---: | --- |
 | Platform | 7 | boot/RAM negotiation, scheduler saturation, advertising/MTU captures, bus timing, and YHM/software-I2C electrical traces |
-| Protocol | 3 | later-revision BAE8/status timing, bounded burst, CCCD cycle, and intentional disconnect/reconnect are captured; exact-version/source-built HVN counts, channel-1/channel-2 interference, resource retry, and raw-tick timing remain |
+| Protocol | 3 | later-revision BAE8/status timing, bounded burst, CCCD cycle, intentional disconnect/reconnect, and twenty-channel-1/twenty-channel-2 host-issued interleaved load are captured; unacknowledged channel-1 delivery, exact-version/source-built HVN counts, channel-1 TX saturation, resource retry, and raw-tick timing remain |
 | Security | 3 | later-revision pairing, retained macOS bond, reconnect, and bond-versus-application-role separation are captured; raw HCI encryption, queued-write rejection, repair/replay, source-built owner revocation across reboot, and authorized NV-recovery adoption remain |
 | System | 4 | two-target advertising lifecycle, REG1/radio coexistence, owner-authorized OTA recovery versus withheld advertising/power controls, and retained fault/reset behavior |
 | Storage | 4 | the deterministic retail-FDS reset policy is software-closed; physical first-boot, power-cut, endurance, reboot, and rollback evidence for NVS, KV, FlashDB, sleep, and prior state remains |
@@ -163,8 +209,9 @@ Work may resume when the owner supplies or connects, at minimum:
 
 1. the owned R1 plus an authorized SWD probe/debug path capable of bounded
    internal-flash programming and exact flash/UICR read-back;
-2. BLE capture capability plus radio, logic, power, and sensor-reference
-   instrumentation appropriate to the row being validated; and
+2. an explicitly authorized macOS Bluetooth diagnostic profile or external HCI
+   sniffer, plus radio, logic, power, and sensor-reference instrumentation
+   appropriate to the row being validated; and
 3. explicit decisions for algorithm keys, NFC activation, private diagnostic
    export, and advertising/power controls before any corresponding live surface is
    enabled.
@@ -172,6 +219,27 @@ Work may resume when the owner supplies or connects, at minimum:
 The backup/preflight action is complete. The next hardware action must be an
 SWD-backed, sector-bounded first installation with exact full-flash and UICR
 readback; mass erase remains forbidden.
+
+The host side of that action is now executable rather than prose:
+`tools/deploy_zephyr_swd.py` verifies the package in dry-run mode, and execution
+requires an exact bundle digest plus a unique probe ID. It connects under reset,
+disables pyOCD auto-unlock/mass erase and resume-on-disconnect, requires the
+preflash one-MiB image and 0x308-byte UICR to match the recovery basis, uses only
+transparent NVMC page erase and word writes, and withholds reset until complete
+post-install flash/UICR comparison succeeds. No compatible probe is currently
+attached, so this closes the missing host workflow but not the physical gate.
+The same runner now has an exact `--recover` mode: it accepts only the verified
+source-installed one-MiB state with byte-identical UICR, restores the complete
+retail backup through sector erases, invokes the independent recovery readback
+verifier, and never erases or writes UICR during normal rollback. The temporary
+BLE bootloader-install leg has now executed and failed to advertise
+afterward; source first boot, exact rollback, and recovery remain unexecuted
+until B56EE2 is recovered through power/SWD or a separately identified
+sacrificial R1 runs the corrected transition.
+For a genuinely drifted UICR, the separately confirmed `--restore-uicr` disaster
+mode now implements the pinned Nordic erase sequence, exact three-word live
+backup restoration, and complete architected readback. This closes the missing
+host recovery operation, not its physical validation.
 
 ## Last verified artifact
 

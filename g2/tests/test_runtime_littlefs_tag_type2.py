@@ -125,12 +125,12 @@ TARGET_TEXT_PIN = (
 )
 
 APPLE_OVERLAY_PIN = (
-    143_227,
-    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
+    147_021,
+    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
 )
 APPLE_COMPONENT_PIN = (
-    3_666_623,
-    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
+    3_670_417,
+    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
 )
 LINUX_OVERLAY_PIN = (
     144_266,
@@ -141,8 +141,8 @@ LINUX_COMPONENT_PIN = (
     "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
 )
 APPLE_PACKAGE_PIN = (
-    4_445_117,
-    "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6",
+    4_448_911,
+    "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
 )
 LINUX_PACKAGE_PIN = (
     4_446_156,
@@ -504,12 +504,12 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                 )
             },
             {
-                "source_owned_bytes": 143_409,
+                "source_owned_bytes": 147_203,
                 "source_owned_in_place_bytes": 182,
-                "generated_patch_site_bytes": 99_192,
+                "generated_patch_site_bytes": 103_358,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_423_990,
-                "replaced_stock_function_bytes": 99_370,
+                "opaque_base_bytes": 3_419_824,
+                "replaced_stock_function_bytes": 103_536,
             },
         )
 
@@ -581,7 +581,10 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                     - 10  # nanopb public varint32 source leaf
                     - 2  # nanopb skip-string alignment
                     - 34  # nanopb skip-string source leaf
-                    - 17_969  # all later admissions through the KVDB ALS-scale trio
+                    - 20_969  # all later admissions through the universal-setting KVDB triplet
+                    - 206  # terminal-mode KVDB triplet (leaves, rodata, alignment)
+                    - 212  # onboarding-config KVDB sextet (leaves, rodata, alignment)
+                    - 376  # ring KVDB triplet (leaves, rodata, alignment)
                 ),
                 "size": TARGET_TEXT_PIN[0],
                 "target_address": APPLE_LEAF[1],

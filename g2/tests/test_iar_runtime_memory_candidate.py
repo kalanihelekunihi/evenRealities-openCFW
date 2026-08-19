@@ -121,17 +121,17 @@ class IARRuntimeMemoryCandidateTests(unittest.TestCase):
         self.assertEqual(
             overlay["expected"],
             {
-                "overlay_size": 143227,
-                "overlay_sha256": "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
-                "component_size": 3666623,
-                "component_sha256": "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
+                "overlay_size": 147021,
+                "overlay_sha256": "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+                "component_size": 3670417,
+                "component_sha256": "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
             },
         )
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4445117, "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"),
+            (4448911, "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"),
         )
 
     @unittest.skipUnless(

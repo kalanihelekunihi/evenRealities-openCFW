@@ -29,6 +29,8 @@ EXPECTED_PUBLIC_SHA256 = (
 DEFAULT_APPLICATION_VERSION = 3
 DEFAULT_HARDWARE_VERSION = 52
 DEFAULT_SD_REQ = 0x0100
+FIRMWARE_TYPE_APPLICATION = 0
+FIRMWARE_TYPE_BOOTLOADER = 2
 
 
 def sha256(data: bytes) -> str:
@@ -55,6 +57,45 @@ def blob(field: int, value: bytes) -> bytes:
     return varint((field << 3) | 2) + varint(len(value)) + value
 
 
+def build_firmware_init_command(
+    image: bytes,
+    application_version: int,
+    hardware_version: int,
+    sd_requirements: Iterable[int],
+    *,
+    is_debug: bool,
+    firmware_type: int,
+) -> bytes:
+    requirements = b"".join(varint(requirement) for requirement in sd_requirements)
+    if not requirements:
+        raise ValueError("at least one SoftDevice requirement is required")
+    firmware_hash = hashlib.sha256(image).digest()[::-1]
+    hash_message = scalar(1, 3) + blob(2, firmware_hash)  # SHA-256
+    if firmware_type == FIRMWARE_TYPE_APPLICATION:
+        sizes = (0, 0, len(image))
+        boot_validation_type = 1  # generated CRC
+    elif firmware_type == FIRMWARE_TYPE_BOOTLOADER:
+        sizes = (0, len(image), 0)
+        boot_validation_type = 0  # Nordic ignores BL boot validation
+    else:
+        raise ValueError(f"unsupported firmware type {firmware_type}")
+    boot_validation = scalar(1, boot_validation_type) + blob(2, b"")
+    return b"".join(
+        (
+            scalar(1, application_version),
+            scalar(2, hardware_version),
+            blob(3, requirements),
+            scalar(4, firmware_type),
+            scalar(5, sizes[0]),
+            scalar(6, sizes[1]),
+            scalar(7, sizes[2]),
+            blob(8, hash_message),
+            scalar(9, int(is_debug)),
+            blob(10, boot_validation),
+        )
+    )
+
+
 def build_application_init_command(
     image: bytes,
     application_version: int,
@@ -63,25 +104,13 @@ def build_application_init_command(
     *,
     is_debug: bool,
 ) -> bytes:
-    requirements = b"".join(varint(requirement) for requirement in sd_requirements)
-    if not requirements:
-        raise ValueError("at least one SoftDevice requirement is required")
-    firmware_hash = hashlib.sha256(image).digest()[::-1]
-    hash_message = scalar(1, 3) + blob(2, firmware_hash)  # SHA-256
-    boot_validation = scalar(1, 1) + blob(2, b"")  # generated CRC
-    return b"".join(
-        (
-            scalar(1, application_version),
-            scalar(2, hardware_version),
-            blob(3, requirements),
-            scalar(4, 0),  # APPLICATION
-            scalar(5, 0),
-            scalar(6, 0),
-            scalar(7, len(image)),
-            blob(8, hash_message),
-            scalar(9, int(is_debug)),
-            blob(10, boot_validation),
-        )
+    return build_firmware_init_command(
+        image,
+        application_version,
+        hardware_version,
+        sd_requirements,
+        is_debug=is_debug,
+        firmware_type=FIRMWARE_TYPE_APPLICATION,
     )
 
 
@@ -223,12 +252,18 @@ def keychain_passphrase(service: str, account: str) -> bytes:
     return completed.stdout.rstrip(b"\n")
 
 
-def write_package(path: Path, image: bytes, packet: bytes) -> None:
+def write_firmware_package(
+    path: Path, image: bytes, packet: bytes, firmware_kind: str
+) -> None:
+    if firmware_kind not in {"application", "bootloader"}:
+        raise ValueError(f"unsupported package kind {firmware_kind}")
+    binary_name = f"{firmware_kind}.bin"
+    packet_name = f"{firmware_kind}.dat"
     package_manifest = {
         "manifest": {
-            "application": {
-                "bin_file": "application.bin",
-                "dat_file": "application.dat",
+            firmware_kind: {
+                "bin_file": binary_name,
+                "dat_file": packet_name,
             }
         }
     }
@@ -241,14 +276,18 @@ def write_package(path: Path, image: bytes, packet: bytes) -> None:
         fixed_time = (2026, 8, 16, 0, 0, 0)
     with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for name, data in (
-            ("application.bin", image),
-            ("application.dat", packet),
+            (binary_name, image),
+            (packet_name, packet),
             ("manifest.json", (json.dumps(package_manifest, indent=2) + "\n").encode()),
         ):
             info = zipfile.ZipInfo(name, fixed_time)
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
             archive.writestr(info, data)
+
+
+def write_package(path: Path, image: bytes, packet: bytes) -> None:
+    write_firmware_package(path, image, packet, "application")
 
 
 def parse_int(value: str) -> int:

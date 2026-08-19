@@ -1,0 +1,32 @@
+name: R1PhoneDiagnostics
+options:
+  bundleIdPrefix: org.openr1
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    DEVELOPMENT_TEAM: K9TXNPJ26C
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.0"
+targets:
+  R1PhoneDiagnostics:
+    type: application
+    platform: iOS
+    sources:
+      - Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.openr1.phone-diagnostics
+        PRODUCT_NAME: R1 Diagnostics
+        TARGETED_DEVICE_FAMILY: "1"
+    info:
+      path: Sources/Info.plist
+      properties:
+        CFBundleDisplayName: R1 Diagnostics
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        NSBluetoothAlwaysUsageDescription: Connect to the owner's R1 Smart Ring for bounded, non-destructive firmware diagnostics.
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+

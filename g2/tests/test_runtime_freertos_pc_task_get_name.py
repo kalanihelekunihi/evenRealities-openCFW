@@ -118,17 +118,17 @@ PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 143_227
+PRODUCTION_OVERLAY_SIZE = 147_021
 PRODUCTION_OVERLAY_SHA256 = (
-    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
+    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_666_623
+PRODUCTION_COMPONENT_SIZE = 3_670_417
 PRODUCTION_COMPONENT_SHA256 = (
-    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
 )
-PACKAGE_SIZE = 4_445_117
+PACKAGE_SIZE = 4_448_911
 PACKAGE_SHA256 = (
-    "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"
+    "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"
 )
 
 
@@ -531,10 +531,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 99_192,
-                "opaque_base_bytes": 3_423_990,
-                "replaced_stock_function_bytes": 99_370,
-                "source_owned_bytes": 143_409,
+                "generated_patch_site_bytes": 103_358,
+                "opaque_base_bytes": 3_419_824,
+                "replaced_stock_function_bytes": 103_536,
+                "source_owned_bytes": 147_203,
             },
         )
 
@@ -685,7 +685,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         )
         self.assertEqual(
             sha256(bytes(historical_component)),
-            "bfefdcb6b9022dd546aef816a5adab89d45f50911bcc7e6d9a0561cb16857f5e",
+            "a6678d335406b58ba5ca79bcbd3a91b4c97e4d28650b6b6fda5ea547771266a6",
         )
         historical_payloads = dict(payloads)
         historical_payloads["apollo_main"] = bytes(historical_component)
@@ -696,7 +696,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         self.assertEqual(len(historical_image), 4_415_860)
         self.assertEqual(
             sha256(historical_image),
-            "dc8884b3cc9427076744e11a455f08cafcc52fefba3f8a756f7647b077c8f84c",
+            "0fc38979b071fa50d5c7a3c93dce789e93a169044de8de9dc478a6f0e90d3019",
         )
 
 

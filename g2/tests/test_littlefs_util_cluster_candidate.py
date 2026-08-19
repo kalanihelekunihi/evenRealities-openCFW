@@ -60,7 +60,7 @@ UPSTREAM_SOURCE_SHA256 = (
     "81a209e8551754d13b24fc0a2b6707fb3b2475e14feba00bf0df722b98a31398"
 )
 UPSTREAM_PROVENANCE_SHA256 = (
-    "b2f219401b588f5b2b60ba74d8b27a279fa9d30d85724a63e9ab48aca40b46f6"
+    "44c588de6dec4ed3397fa6f942cfef3dc0fdb707742be73a0c8a4d78fd0ca9d0"
 )
 REWIND_SOURCE_PATH = (
     "components/apollo_main/core_overlay/"

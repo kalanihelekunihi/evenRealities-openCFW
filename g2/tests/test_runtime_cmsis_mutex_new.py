@@ -233,16 +233,16 @@ PRODUCTION_FINAL_SHA256 = (
     "39e1e0772d76f5763881fe5e845fe3c4"
 )
 PRODUCTION_OVERLAY_SHA256 = (
-    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
+    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
 )
 PRODUCTION_COMPONENT_SHA256 = (
-    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
 )
 PRODUCTION_PACKAGE_SHA256 = (
-    "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"
+    "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"
 )
 PRODUCTION_FLASH_PLAN_SHA256 = (
-    "076aeee8be5b81b623ac94efac0607a47638b7a1fa465a1be5e94568a5454bb7"
+    "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c"
 )
 
 
@@ -825,9 +825,9 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 143_227,
+                "overlay_size": 147_021,
                 "overlay_sha256": PRODUCTION_OVERLAY_SHA256,
-                "component_size": 3_666_623,
+                "component_size": 3_670_417,
                 "component_sha256": PRODUCTION_COMPONENT_SHA256,
             },
         )
@@ -888,35 +888,35 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
             ],
         )
         component_report = report["component"]
-        self.assertEqual(component_report["size"], 3_666_623)
+        self.assertEqual(component_report["size"], 3_670_417)
         self.assertEqual(
             component_report["sha256"],
             PRODUCTION_COMPONENT_SHA256,
         )
         self.assertEqual(
             component_report["replaced_stock_function_bytes"],
-            99_370,
+            103_536,
         )
         self.assertEqual(
             component_report["generated_patch_site_bytes"],
-            99_192,
+            103_358,
         )
         self.assertEqual(component_report["generated_wrapper_bytes"], 32)
         self.assertEqual(
             component_report["source_owned_in_place_bytes"],
             182,
         )
-        self.assertEqual(component_report["source_owned_bytes"], 143_409)
-        self.assertEqual(component_report["opaque_base_bytes"], 3_423_990)
+        self.assertEqual(component_report["source_owned_bytes"], 147_203)
+        self.assertEqual(component_report["opaque_base_bytes"], 3_419_824)
 
         overlay = CURRENT_OVERLAY.read_bytes()
         component = CURRENT_COMPONENT.read_bytes()
         package = CURRENT_PACKAGE.read_bytes()
-        self.assertEqual(len(overlay), 143_227)
+        self.assertEqual(len(overlay), 147_021)
         self.assertEqual(sha256(overlay), PRODUCTION_OVERLAY_SHA256)
-        self.assertEqual(len(component), 3_666_623)
+        self.assertEqual(len(component), 3_670_417)
         self.assertEqual(sha256(component), PRODUCTION_COMPONENT_SHA256)
-        self.assertEqual(len(package), 4_445_117)
+        self.assertEqual(len(package), 4_448_911)
         self.assertEqual(sha256(package), PRODUCTION_PACKAGE_SHA256)
         self.assertEqual(
             overlay[PRODUCTION_OFFSET:PRODUCTION_OFFSET + 116],
@@ -955,7 +955,7 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                 "output_name": (
                     "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
                 ),
-                "expected_size": 4_445_117,
+                "expected_size": 4_448_911,
                 "expected_sha256": PRODUCTION_PACKAGE_SHA256,
                 "profiles": {
                     "linux-clang": {
@@ -977,7 +977,7 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                     "components/apollo_main/core_overlay/build/"
                     "ota_s200_firmware_ota.bin"
                 ),
-                "size": 3_666_623,
+                "size": 3_670_417,
                 "sha256": PRODUCTION_COMPONENT_SHA256,
                 "profiles": {
                     "linux-clang": {
@@ -1037,13 +1037,13 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
         )
 
         flash_plan = CURRENT_FLASH_PLAN.read_bytes()
-        self.assertEqual(len(flash_plan), 959_001)
+        self.assertEqual(len(flash_plan), 1_046_958)
         self.assertEqual(
             sha256(flash_plan),
             PRODUCTION_FLASH_PLAN_SHA256,
         )
         parsed_plan = json.loads(flash_plan)
-        self.assertEqual(len(parsed_plan["flash_regions"]), 1346)
+        self.assertEqual(len(parsed_plan["flash_regions"]), 1460)
         self.assertEqual(
             len(parsed_plan["unresolved_flash_regions"]),
             2,

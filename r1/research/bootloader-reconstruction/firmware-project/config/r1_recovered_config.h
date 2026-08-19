@@ -10,6 +10,17 @@
 #define NRF_DFU_HW_VERSION 52
 #define NRF_DFU_BLE_REQUIRES_BONDS 0
 
+/*
+ * Exact nrf_clock_lf_cfg_t bytes recovered from the live R1 bootloader at
+ * 0x000fdc68: 00 10 02 01.  The ring uses the internal LFRC; inheriting the
+ * PCA10056 example's LFXO setting prevents the SoftDevice from starting on
+ * production R1 hardware.
+ */
+#define NRF_SDH_CLOCK_LF_SRC 0
+#define NRF_SDH_CLOCK_LF_RC_CTIV 16
+#define NRF_SDH_CLOCK_LF_RC_TEMP_CTIV 2
+#define NRF_SDH_CLOCK_LF_ACCURACY 1
+
 #define NRF_BL_DFU_ENTER_METHOD_BUTTON 0
 #define NRF_BL_DFU_ENTER_METHOD_PINRESET 0
 #define NRF_BL_DFU_ENTER_METHOD_GPREGRET 1
@@ -37,4 +48,3 @@
 #endif
 
 #endif
-

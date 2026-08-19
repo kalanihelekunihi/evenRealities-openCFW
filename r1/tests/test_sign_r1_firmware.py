@@ -55,6 +55,34 @@ class R1FirmwareSigningTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "signature verification failed"):
             signing.verify_init_packet(bytes(packet), private.public_key())
 
+    def test_bootloader_init_and_archive(self) -> None:
+        image = bytes(range(256)) * 96
+        private = ec.generate_private_key(ec.SECP256R1())
+        command = signing.build_firmware_init_command(
+            image,
+            application_version=4,
+            hardware_version=52,
+            sd_requirements=[0x0100],
+            is_debug=True,
+            firmware_type=signing.FIRMWARE_TYPE_BOOTLOADER,
+        )
+        packet = signing.sign_init_command(command, private)
+        self.assertEqual(signing.verify_init_packet(packet, private.public_key()), command)
+        fields = {number: value for number, _, value in signing._fields(command)}
+        self.assertEqual(fields[4], signing.FIRMWARE_TYPE_BOOTLOADER)
+        self.assertEqual(fields[5], 0)
+        self.assertEqual(fields[6], len(image))
+        self.assertEqual(fields[7], 0)
+        with tempfile.TemporaryDirectory() as directory:
+            package = Path(directory) / "transition.zip"
+            signing.write_firmware_package(package, image, packet, "bootloader")
+            with zipfile.ZipFile(package) as archive:
+                self.assertEqual(
+                    set(archive.namelist()),
+                    {"bootloader.bin", "bootloader.dat", "manifest.json"},
+                )
+                self.assertEqual(archive.read("bootloader.bin"), image)
+
 
 if __name__ == "__main__":
     unittest.main()

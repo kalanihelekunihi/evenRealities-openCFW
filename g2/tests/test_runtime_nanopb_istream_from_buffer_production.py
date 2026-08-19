@@ -167,26 +167,26 @@ PROFILE_PATCH_PINS = {
 }
 APPLE_AGGREGATE = {
     "overlay": (
-        128_264,
-        "742e44dd839010c3c14ae59419fc06bcd50a7fe91e7ba06b4946f5c4154c870b",
+        147_021,
+        "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
     ),
     "component": (
-        3_651_660,
-        "ea39a91f574b464d9071e581f5104d870e1f7e484d52de9b86407f0a90ac5d2e",
+        3_670_417,
+        "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
     ),
 }
 LINUX_AGGREGATE = {
     "overlay": (
-        132_888,
-        "7036c0e07a36376e5d98700c922ffeec7a6826388b75060a2b98b4228a411c61",
+        144_266,
+        "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
     ),
     "component": (
-        3_656_284,
-        "d5daf89121f44a61b303fa953da78550edd31e9159cf9b0b397aeb1b5cfef54d",
+        3_667_662,
+        "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
     ),
     "package": (
-        4_434_778,
-        "63d5cd1d1cbab2c3ece4a48f96b58a0cb14a7487917831f4c6d370b40ed41d90",
+        4_446_156,
+        "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
     ),
 }
 TARGET_FLAGS = (
@@ -388,7 +388,7 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (684, 632, 115),
+            (825, 766, 256),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -780,7 +780,15 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
             )
             if target == CONSTRUCTOR[0]:
                 callers.append(address)
-        self.assertEqual(callers, list(CALLERS))
+        source_replaced_stock_sites = (0x0048_FBD0, 0x0048_FE1C)
+        self.assertEqual(
+            callers,
+            [
+                address
+                for address in CALLERS
+                if address not in source_replaced_stock_sites
+            ],
+        )
 
     def test_target_object_and_relocation_closure_are_exact(self) -> None:
         self.assertEqual(self.objects[0].read_bytes(), self.objects[1].read_bytes())

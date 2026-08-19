@@ -99,9 +99,13 @@ is capture or confirmation on a physical ring.
 - platform: S140 resource configuration (owned-hardware RAM negotiation); RTOS scheduler and
   task wake topology (the stock nine-group startup census is pinned; physical wake/saturation timing remains); legacy GAP advertising
   (durable factory/serial restore, physical validation); ATT MTU and data-length negotiation
-  (negotiated values to be captured).
+  (CoreBluetooth repeatedly reports a 20-byte write-without-response maximum on owned retail
+  2.2.8.0002; exact ATT MTU/data length/PHY still require raw HCI capture).
 - protocol: BAE8 raw GATT event mapping (physical validation); 100/200/1000 scheduling and
-  retry timing (physical saturation and timing-unit confirmation).
+  retry timing (a twenty-channel-1/twenty-channel-2 host-issued interleaved run preserved all
+  status replies while mean latency rose to 772.181 ms; unacknowledged channel-1 delivery,
+  channel-1 TX saturation, raw HVN/resource
+  events, exact timing units, and source-built validation remain).
 - security: queued-write rejection (owned-hardware ATT validation); crash unwind and retained
   diagnostics (authenticated export, hardware fault validation).
 - storage: `kv.bin` and `sleep.db` now exhaust every byte-level program/erase interruption through
@@ -196,7 +200,9 @@ their destructive, identity-bearing, licensed, or diagnostic policy is still unr
   (persistent mutation is local-only, atomic, and readback-verified; the identity-bearing BLE
   sender remains refused pending physical service authorization and reboot validation).
 - protocol: channel-2 EUS BLE runtime (source authorization is complete; physical timing and
-  saturation validation remain).
+  later-retail burst, CCCD, disconnect recovery, and cross-characteristic RX contention are
+  captured; channel-1 TX saturation, raw HVN/resource events, exact timing units, and
+  source-built validation remain).
 - storage: pKey and EP stores (sensitive pKey/algorithm state pending licensing and key
   policy); log store (the owner-authorized composite source is internal-only and its live BLE
   sender remains excluded; no raw destructive controls are exposed).

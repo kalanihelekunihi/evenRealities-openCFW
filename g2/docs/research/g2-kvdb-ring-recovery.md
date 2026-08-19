@@ -1,7 +1,7 @@
 # G2 ring KVDB recovery
 
 Status: complete binary census and host/Thumb-qualified clean-room candidate;
-not production-routed. Run addresses use
+production-routed under the reviewed apple-clang profile. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -72,3 +72,32 @@ The exact historical source revision is unresolved, and diagnostic formatting
 remains abstract. The candidate is absent from `overlay.json`; provider
 binding, placement, redirects, and package verification remain pending, so it
 claims zero package ownership bytes.
+
+## Production routing
+
+The candidate is now routed into the Apollo main overlay byte-identically
+(4,391 bytes, SHA-256
+`a18825d4061845a39b2cb5926a3b8100f9aba9aaf927e74f0c4d08a7db288a13`) under the
+reviewed apple-clang profile. Provider binding uses the retained CRC-16/CCITT
+provider at `0x0049ACD4` (null seed selects `0xFFFF`) and the database-zero
+KVDB blob read/write adapters at `0x004D956C` and `0x004D957E`, matching the
+recovered call ABI exactly. Placement appends three relocated leaves to the
+overlay: the 28-byte default initializer, the 262-byte whole-record writer
+carrying a 7-byte `kvRing` key-string read-only closure, and the 66-byte
+migration callback carrying the same key-string closure and calling the
+source-owned writer leaf. Three `B.W` entry redirects with NOP fill replace
+the 796 stock body bytes across `[0x005D9B6C,0x005D9E88)`; the 72-byte
+literal tail stays retained stock data, and the two stored roots at
+`0x006D1E44`/`0x00746D30` plus both direct entry calls reach the source
+leaves through the redirects. The fixed SRAM record at `0x200037C8` is
+untouched.
+
+Apple Clang 21 overlay/component/package sizes are `147021/3670417/4448911`
+with SHA-256 `02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd`,
+`eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c`, and
+`21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605`. The
+leaves and redirects are gated `apple-clang`; the linux-clang profile keeps
+its recorded pins, and linux-clang leaf pins await Linux toolchain
+regeneration. Ownership is 796 replaced stock body bytes. The component
+build, source package, `open_cfw verify`, and the fail-closed analyzer and
+manifest census all pass.

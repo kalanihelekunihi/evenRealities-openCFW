@@ -137,13 +137,13 @@ RELOCATED_SHA256 = (
     "afbba4f9f08b2df17a4350d7a7e83d99"
     "b8439283ee40c1a1604bd879dff75f04"
 )
-PRODUCTION_OVERLAY_SIZE = 143_227
+PRODUCTION_OVERLAY_SIZE = 147_021
 PRODUCTION_OVERLAY_SHA256 = (
-    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
+    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_666_623
+PRODUCTION_COMPONENT_SIZE = 3_670_417
 PRODUCTION_COMPONENT_SHA256 = (
-    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
 )
 PRODUCTION_OFFSET = 113_808
 PRODUCTION_ADDRESS = 0x007A_FFB4
@@ -823,16 +823,16 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 99_192,
+                "generated_patch_site_bytes": 103_358,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_423_990,
-                "replaced_stock_function_bytes": 99_370,
-                "source_owned_bytes": 143_409,
+                "opaque_base_bytes": 3_419_824,
+                "replaced_stock_function_bytes": 103_536,
+                "source_owned_bytes": 147_203,
                 "source_owned_in_place_bytes": 182,
             },
         )
-        self.assertEqual(len(report["overlay"]["functions"]), 786)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 727)
+        self.assertEqual(len(report["overlay"]["functions"]), 809)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 750)
 
         historical_overlay = self.production_overlay[:113_970]
         self.assertEqual(
@@ -924,7 +924,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             ),
             (
                 3_637_366,
-                "bfefdcb6b9022dd546aef816a5adab89d45f50911bcc7e6d9a0561cb16857f5e",
+                "563f09b0a7484c31d96a0605de534feebab042fa6d22c454aa07f90c26c1cf8c",
             ),
         )
 

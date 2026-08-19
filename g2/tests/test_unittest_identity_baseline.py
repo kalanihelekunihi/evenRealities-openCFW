@@ -39,6 +39,33 @@ FULL_LOG = (
     / "varint32-task0-4abb9c10-full-discovery.log"
 )
 
+def _pinned_history_available() -> bool:
+    try:
+        data = json.loads(SKIP_RESOLVER_MAP.read_text(encoding="utf-8"))
+        revisions = {
+            resolution["provenance"]["source_revision"]
+            for resolution in data.get("resolutions", [])
+        }
+    except (OSError, ValueError, KeyError):
+        return False
+    for revision in revisions:
+        completed = subprocess.run(
+            ["git", "rev-parse", "--verify", f"{revision}^{{commit}}"],
+            cwd=ROOT.parent,
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if completed.returncode != 0:
+            return False
+    return True
+
+
+PINNED_HISTORY_AVAILABLE = _pinned_history_available()
+PINNED_HISTORY_SKIP_REASON = (
+    "pinned evidence history is unavailable from Git history in this checkout"
+)
+
 SKIP_STRING_EVIDENCE = {
     "apple-clang": {
         "path": (
@@ -289,6 +316,7 @@ class NormalizedEvidenceTests(unittest.TestCase):
             json.loads(SKIP_RESOLVER_MAP.read_text(encoding="utf-8"))
         )
 
+    @unittest.skipUnless(PINNED_HISTORY_AVAILABLE, PINNED_HISTORY_SKIP_REASON)
     def test_comparison_rejects_synthetic_new_failure_and_error(self) -> None:
         evidence = identity_baseline.load_normalized_evidence(
             json.loads(NORMALIZED_EVIDENCE.read_text(encoding="utf-8")),
@@ -306,6 +334,7 @@ class NormalizedEvidenceTests(unittest.TestCase):
                 evidence, current
             )
 
+    @unittest.skipUnless(PINNED_HISTORY_AVAILABLE, PINNED_HISTORY_SKIP_REASON)
     def test_tracked_evidence_is_content_pinned_for_clean_checkouts(self) -> None:
         raw = NORMALIZED_EVIDENCE.read_bytes()
         self.assertEqual(
@@ -409,6 +438,7 @@ class NormalizedEvidenceTests(unittest.TestCase):
             ],
         )
 
+    @unittest.skipUnless(PINNED_HISTORY_AVAILABLE, PINNED_HISTORY_SKIP_REASON)
     def test_normalized_loader_rejects_schema_and_count_contradictions(self) -> None:
         good = {
             "format": "openCFW.unittest-regression-evidence",
@@ -497,6 +527,7 @@ class NormalizedEvidenceTests(unittest.TestCase):
                         data, self.resolver_map()
                     )
 
+    @unittest.skipUnless(PINNED_HISTORY_AVAILABLE, PINNED_HISTORY_SKIP_REASON)
     def test_resolver_map_rejects_mutated_source_provenance(self) -> None:
         good = json.loads(SKIP_RESOLVER_MAP.read_text(encoding="utf-8"))
         provenance = good["resolutions"][0]["provenance"]
@@ -610,6 +641,7 @@ class NormalizedEvidenceTests(unittest.TestCase):
                     good, source_root=non_repository_root
                 )
 
+    @unittest.skipUnless(PINNED_HISTORY_AVAILABLE, PINNED_HISTORY_SKIP_REASON)
     def test_resolver_uses_pinned_history_instead_of_mutable_head(self) -> None:
         data = json.loads(SKIP_RESOLVER_MAP.read_text(encoding="utf-8"))
         provenance = data["resolutions"][0]["provenance"]
@@ -622,6 +654,7 @@ class NormalizedEvidenceTests(unittest.TestCase):
         resolution = next(iter(resolver_map.resolutions.values()))
         self.assertEqual(resolution.provenance, provenance)
 
+    @unittest.skipUnless(PINNED_HISTORY_AVAILABLE, PINNED_HISTORY_SKIP_REASON)
     def test_resolver_rejects_reason_bound_to_different_class(self) -> None:
         data = json.loads(SKIP_RESOLVER_MAP.read_text(encoding="utf-8"))
         resolution = data["resolutions"][0]
@@ -878,6 +911,7 @@ class NanopbSkipStringRegressionEvidenceTests(unittest.TestCase):
             json.loads(SKIP_STRING_RESOLVER_MAP.read_text(encoding="utf-8"))
         )
 
+    @unittest.skipUnless(PINNED_HISTORY_AVAILABLE, PINNED_HISTORY_SKIP_REASON)
     def test_platform_evidence_is_content_pinned_and_closed(self) -> None:
         resolver_map = self.resolver_map()
         for profile, expected in SKIP_STRING_EVIDENCE.items():
@@ -920,6 +954,7 @@ class NanopbSkipStringRegressionEvidenceTests(unittest.TestCase):
                     result_identities,
                 )
 
+    @unittest.skipUnless(PINNED_HISTORY_AVAILABLE, PINNED_HISTORY_SKIP_REASON)
     def test_common_resolver_authenticates_the_frozen_source_hook(self) -> None:
         raw = SKIP_STRING_RESOLVER_MAP.read_bytes()
         self.assertEqual(

@@ -1,7 +1,7 @@
 # G2 KVDB temperature-unit recovery
 
 Status: complete binary census and host/Thumb-qualified clean-room candidate;
-not production-routed. Run addresses use
+production-routed under the reviewed apple-clang profile. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -64,3 +64,31 @@ The exact historical source revision remains unresolved. Retained diagnostic
 formatting is abstracted behind a hook. The candidate is absent from
 `overlay.json`; placement, provider/logger binding, redirects, and package
 validation remain pending, so it claims zero package ownership bytes.
+
+## Production routing
+
+The candidate is now routed into the Apollo main overlay byte-identically
+(4,260 bytes, SHA-256 `288f83e95b9526816845f197d0ca7c355a259a03348c0e2140346cb30a01e808`)
+under the reviewed apple-clang profile. Provider binding uses the retained
+CRC-16/CCITT provider at `0x0049ACD4` (null seed selects `0xFFFF`) and the
+database-zero KVDB blob read/write adapters at `0x004D956C` and `0x004D957E`,
+matching the recovered call ABI exactly. Placement appends three relocated
+leaves to the overlay: the 28-byte default initializer, the 96-byte
+whole-record writer carrying an 18-byte `kvTemperatureUnit` key-string
+read-only closure, and the 90-byte migration callback carrying the same
+key-string closure with the writer body inlined by the reviewed toolchain.
+Three `B.W` entry redirects with NOP fill replace the 338 stock body bytes
+across `[0x0049B014,0x0049B166)`; the 50-byte literal tail stays retained
+stock data, and the two stored roots at `0x006D1E54`/`0x00746D38` plus all
+three direct entry calls reach the source leaves through the redirects. The
+fixed SRAM record at `0x200037FC` is untouched.
+
+Apple Clang 21 overlay/component/package sizes are `145940/3669336/4447830`
+with SHA-256 `50e4865c2e6932f09e2aff2c039fe113d9121ef91cba6566f1008dc8a1794303`,
+`72f6225bfb3da8aecb5a1994186b39a60a4dc6f0cd56f30cd307c60c9dbdbdcc`, and
+`7b3301d8d934584d40a9bcb5a994fb2dc36f1ceae3bf15bae74d2378da0863be`. The
+leaves and redirects are gated `apple-clang`; the linux-clang profile keeps
+its recorded pins, and linux-clang leaf pins await Linux toolchain
+regeneration. Ownership is 338 replaced stock body bytes. The component
+build, source package, `open_cfw verify`, and the fail-closed analyzer and
+manifest census all pass.

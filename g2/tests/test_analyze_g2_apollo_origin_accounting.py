@@ -42,9 +42,9 @@ class ApolloOriginAccountingTests(unittest.TestCase):
     @unittest.skipUnless(CORPUS.is_dir() and PLAN.is_file() and REPORT.is_file(), "authenticated corpus/current build unavailable")
     def test_authenticated_origin_accounting(self):
         report = self.analyzer.analyze(PLAN, REPORT, CORPUS)
-        self.assertEqual(report["component_accounting"]["opaque_base_bytes"], 3423990)
+        self.assertEqual(report["component_accounting"]["opaque_base_bytes"], 3419824)
         self.assertEqual(report["flash_plan_metadata_gap"]["controlled_bytes_mislabeled_official_blob"], 2044)
-        self.assertEqual(sum(report["opaque_origin_lower_bounds"].values()), 3423990)
+        self.assertEqual(sum(report["opaque_origin_lower_bounds"].values()), 3419824)
         self.assertEqual(sum(report["third_party_path_anchored_bytes_by_family"].values()), 129954)
         self.assertEqual(len(report["ghidra_envelopes"]["rejected_oversized"]), 8)
 

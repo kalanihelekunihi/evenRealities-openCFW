@@ -222,13 +222,13 @@ SOURCE_SHA256 = (
     "d848b90a00da24db963c49dbff247231"
     "4b2a76c6cf269efef46e6cac56889986"
 )
-PRODUCTION_OVERLAY_SIZE = 143_227
+PRODUCTION_OVERLAY_SIZE = 147_021
 PRODUCTION_OVERLAY_SHA256 = (
-    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
+    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_666_623
+PRODUCTION_COMPONENT_SIZE = 3_670_417
 PRODUCTION_COMPONENT_SHA256 = (
-    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
 )
 PRODUCTION_FUNCTIONS = {
     "open_cfw_freertos_heap4_init": {
@@ -1242,12 +1242,12 @@ class RuntimeFreeRTOSHeap4Tests(unittest.TestCase):
             (len(self.current_component), sha256(self.current_component)),
             (PRODUCTION_COMPONENT_SIZE, PRODUCTION_COMPONENT_SHA256),
         )
-        self.assertEqual(component["replaced_stock_function_bytes"], 99_370)
-        self.assertEqual(component["generated_patch_site_bytes"], 99_192)
+        self.assertEqual(component["replaced_stock_function_bytes"], 103_536)
+        self.assertEqual(component["generated_patch_site_bytes"], 103_358)
         self.assertEqual(component["generated_wrapper_bytes"], 32)
         self.assertEqual(component["source_owned_in_place_bytes"], 182)
-        self.assertEqual(component["source_owned_bytes"], 143_409)
-        self.assertEqual(component["opaque_base_bytes"], 3_423_990)
+        self.assertEqual(component["source_owned_bytes"], 147_203)
+        self.assertEqual(component["opaque_base_bytes"], 3_419_824)
 
         patches = [
             next(

@@ -182,25 +182,25 @@ PROFILE_PINS = {
             "c89ad1f2e44b88da2ce0600e7b2f3751",
         ),
         "overlay": (
-            125_258,
-            "1f71240bd75af28798d93eba217b99464156ee40ae353333c2fd0f449b9a8c76",
+            147_021,
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
         ),
         "component": (
-            3_648_654,
-            "36b7f32f9f5f1a4c2fbf800b8cda0f48aa521bfc87638d671932b80b49f7e991",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "package": (
-            4_427_148,
-            "532743c6a1b96f198f0991c320bf3318eac88bc538a90a9e0b0267aaacef07b3",
+            4_448_911,
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
         ),
         "plan": (
-            740_977,
-            "b4b6e72d4ff7be47ca96a845a943320dfb65732c1de10d2bbb18051626cf2f95",
-            (1032, 2, 5),
-            1039,
+            1_046_958,
+            "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c",
+            (1460, 2, 5),
+            1467,
         ),
-        "coarse_ownership": (126_028, 88_659, 4_212_461),
-        "manifest_ownership": (126_028, 88_659, 4_212_461),
+        "coarse_ownership": (147_634, 103_382, 4_197_895),
+        "manifest_ownership": (147_634, 103_382, 4_197_895),
     },
     "linux-clang": {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",
@@ -217,16 +217,16 @@ PROFILE_PINS = {
             "5e0a8f15a9b47aa4cfd596cffb7d984b",
         ),
         "overlay": (
-            132_888,
-            "7036c0e07a36376e5d98700c922ffeec7a6826388b75060a2b98b4228a411c61",
+            144_266,
+            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
         ),
         "component": (
-            3_656_284,
-            "d5daf89121f44a61b303fa953da78550edd31e9159cf9b0b397aeb1b5cfef54d",
+            3_667_662,
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
         ),
         "package": (
-            4_434_778,
-            "63d5cd1d1cbab2c3ece4a48f96b58a0cb14a7487917831f4c6d370b40ed41d90",
+            4_446_156,
+            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
         ),
         "plan": (
             640_188,
@@ -234,22 +234,22 @@ PROFILE_PINS = {
             (896, 2, 5),
             855,
         ),
-        "coarse_ownership": (133_691, 93_206, 4_207_803),
-        "manifest_ownership": (133_691, 93_206, 4_207_803),
+        "coarse_ownership": (145_147, 101_698, 4_199_311),
+        "manifest_ownership": (145_147, 102_032, 4_198_977),
     },
 }
 
 MANIFEST_STATUS = {
     "container_only": (1, 32),
-    "generated_alignment": (54, 108),
-    "generated_source_entry_replacement": (599, 86_572),
+    "generated_alignment": (133, 265),
+    "generated_source_entry_replacement": (726, 101_138),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (183, 3_436_434),
-    "source_compiled": (115, 125_368),
+    "official_blob": (225, 3_421_868),
+    "source_compiled": (307, 146_974),
 }
 CANONICAL_CONTAINER_REFINEMENT = (17, 135, 84)
-CANONICAL_OWNERSHIP = (126_045, 88_794, 4_212_309)
+CANONICAL_OWNERSHIP = (147_080, 102_418, 4_198_825)
 
 CANDIDATE_HARNESS = r"""
 #include <stddef.h>
@@ -1044,7 +1044,7 @@ class RuntimeLittlefsFileRewindPrivateProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (664, 613, 95),
+            (825, 766, 256),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -1216,7 +1216,7 @@ class RuntimeLittlefsFileRewindPrivateProductionTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 960)
+        self.assertEqual(len(regions), 1400)
         self.assertEqual(main["source_appended_boundary"], PACKAGE_PIN[0])
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
@@ -1257,7 +1257,7 @@ class RuntimeLittlefsFileRewindPrivateProductionTests(unittest.TestCase):
             ),
         })
         tail = by_name["apollo_littlefs_file_rewind_private_source_leaf"]
-        self.assertIs(tail, regions[-32])
+        self.assertIs(tail, regions[-296])
         self.assertEqual(tail, {
             "name": "apollo_littlefs_file_rewind_private_source_leaf",
             "function": (

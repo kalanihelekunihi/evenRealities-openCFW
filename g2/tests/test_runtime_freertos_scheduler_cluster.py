@@ -286,22 +286,22 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 143_227,
+        "overlay_size": 147_021,
         "overlay_sha256": (
-            "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
         ),
-        "component_size": 3_666_623,
+        "component_size": 3_670_417,
         "component_sha256": (
-            "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
         ),
-        "package_size": 4_445_117,
+        "package_size": 4_448_911,
         "package_sha256": (
-            "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"
         ),
-        "package_accounting": (143_885, 99_171, 4_202_061),
+        "package_accounting": (147_634, 103_382, 4_197_895),
         # Builder reports exclude isolated/non-emitted registry categories.
-        "function_count": 786,
-        "patch_count": 727,
+        "function_count": 821,
+        "patch_count": 762,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -327,8 +327,8 @@ PROFILES = {
         # above (the nanopb decode wave and the iar float-exponent trio are
         # absent from the rollback overlay and are therefore not deleted
         # here).
-        "current_rollback_net_tail_growth": 16_360,
-        "later_tail_growth": 20_833,
+        "current_rollback_net_tail_growth": 16_948,
+        "later_tail_growth": 24_627,
         "legacy_reset_unordered_tail_growth": 388,
         # Active rollback build from the current production registry.
         "legacy_semaphore_layout": {
@@ -388,11 +388,11 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 143_409,
+            "source_owned_bytes": 147_203,
             "source_owned_in_place_bytes": 182,
-            "generated_patch_site_bytes": 99_192,
-            "replaced_stock_function_bytes": 99_370,
-            "opaque_base_bytes": 3_423_990,
+            "generated_patch_site_bytes": 103_358,
+            "replaced_stock_function_bytes": 103_536,
+            "opaque_base_bytes": 3_419_824,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -458,7 +458,7 @@ PROFILES = {
         "package_sha256": (
             "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"
         ),
-        "package_accounting": (145_147, 98_610, 4_202_399),
+        "package_accounting": (145_147, 100_188, 4_200_821),
         "function_count": 664,
         "patch_count": 613,
         "tail_growth": 778,
@@ -772,7 +772,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         )
         self.assertEqual(
             (len(self.config["functions"]), len(self.config["patch_sites"])),
-            (790, 731),
+            (825, 766),
         )
 
         for leaf in (
@@ -1139,7 +1139,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
     def test_manifest_is_gap_free_and_owns_each_stock_and_source_span(self) -> None:
         main = self.manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1274)
+        self.assertEqual(len(regions), 1400)
         self.assertEqual(main["source_appended_boundary"], OFFICIAL_SIZE)
         ordered = sorted(regions, key=lambda region: region["file_offset"])
         self.assertEqual(ordered[0]["file_offset"], 0)
@@ -1431,6 +1431,50 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             "replace_kvdb_als_scale_default_initialize",
             "replace_kvdb_als_scale_load_and_migrate",
             "replace_kvdb_write_als_scale",
+            # NVDB sensor-calibration clean-room closure admitted after the milestone.
+            "replace_nvdb_sensor_caldata_default_initialize",
+            "replace_nvdb_sensor_caldata_load_and_migrate",
+            "replace_nvdb_sensor_caldata_update",
+            "replace_nvdb_sensor_caldata_ag_default_initialize",
+            "replace_nvdb_sensor_caldata_ag_load_and_migrate",
+            "replace_nvdb_sensor_caldata_ag_update",
+            "replace_nvdb_sensor_caldata_ag_read",
+            "replace_nvdb_sensor_caldata_check",
+            # KVDB setting clean-room closure admitted after the milestone.
+            "replace_kvdb_setting_default_initialize",
+            "replace_kvdb_setting_load_and_migrate",
+            "replace_kvdb_write_setting",
+            # KVDB time clean-room closure admitted after the milestone.
+            "replace_kvdb_time_default_initialize",
+            "replace_kvdb_time_load_and_migrate",
+            "replace_kvdb_write_time",
+            # KVDB time-format clean-room closure admitted after the milestone.
+            "replace_kvdb_time_format_default_initialize",
+            "replace_kvdb_time_format_load_and_migrate",
+            "replace_kvdb_write_time_format",
+            # KVDB temperature-unit clean-room closure admitted after the milestone.
+            "replace_kvdb_temperature_unit_default_initialize",
+            "replace_kvdb_temperature_unit_load_and_migrate",
+            "replace_kvdb_write_temperature_unit",
+            # KVDB universal-setting clean-room closure admitted after the milestone.
+            "replace_kvdb_universal_setting_default_initialize",
+            "replace_kvdb_universal_setting_load_and_migrate",
+            "replace_kvdb_write_universal_setting",
+            # KVDB terminal-mode clean-room closure admitted after the milestone.
+            "replace_kvdb_terminal_mode_default_initialize",
+            "replace_kvdb_terminal_mode_load_and_migrate",
+            "replace_kvdb_write_terminal_mode",
+            # KVDB onboarding-config clean-room closure admitted after the milestone.
+            "replace_kvdb_onboarding_config_set_indexed",
+            "replace_kvdb_onboarding_config_persist",
+            "replace_kvdb_onboarding_config_update_and_persist",
+            "replace_kvdb_onboarding_config_get",
+            "replace_kvdb_onboarding_config_pointer",
+            "replace_kvdb_onboarding_config_read",
+            # KVDB ring clean-room closure admitted after the milestone.
+            "replace_kvdb_ring_default_initialize",
+            "replace_kvdb_ring_load_and_migrate",
+            "replace_kvdb_write_ring",
         }
         self.assertEqual(
             set(current_patches),

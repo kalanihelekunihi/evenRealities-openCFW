@@ -15,9 +15,11 @@ honest.
 | [`verify_sdk_image.py`](verify_sdk_image.py) | check a built nRF52840 image against the recovered layout |
 | [`prepare_zephyr_deployment.py`](prepare_zephyr_deployment.py) | verify the source-built bundle against a required 1-MiB internal-flash recovery basis and complete 0x308-byte architected nRF52840 UICR backup, validate optional mixed-provenance evidence page-by-page, hash every preserved product partition, and emit separate canonical recovery HEX files, an exact expected post-install image, and a deployment plan; it never accesses or flashes hardware |
 | [`verify_zephyr_deployment.py`](verify_zephyr_deployment.py) | independently reconstruct the install result and require exact internal-flash and UICR readbacks after installation and optional recovery |
+| [`deploy_zephyr_swd.py`](deploy_zephyr_swd.py) | dry-run by default; on an explicitly selected pyOCD probe, connect under reset with auto-unlock and resume-on-disconnect disabled, confirm nRF52840 identity and exact preflash flash/UICR, execute either the two-range source install or an exact one-MiB retail rollback through transparent host-driven NVMC page/word operations, invoke the independent readback verifier, and withhold reset unless every comparison succeeds and release was explicitly requested |
 | [`assemble_r1_ace_recovery.py`](assemble_r1_ace_recovery.py) | assemble a one-MiB recovery basis from exact-version live ACE page reads at `0x27000..<0xFF000`, source-proven MBR words at `0xFF8..<0x1000`, a source-proven mirror of the ACL-protected primary settings page from the CRC-valid live backup, and the pinned official S140 7.2.0 image for the remaining retail memory-isolated extent; verify the live application and owner bootloader byte-for-byte and emit explicit mixed-provenance JSON |
-| [`r1_ble_probe_frames.c`](r1_ble_probe_frames.c) | generate the three fixed, non-destructive channel-2 frames used by the macOS hardware probe through the production C encoder |
-| [`probe_r1_ble.swift`](probe_r1_ble.swift) | macOS CoreBluetooth discovery and bounded owned-hardware validation for GATT layout, advertisement host-observation cadence, CCCD cycling, `pairAuth`, application-route silence without `pairAuth`, `deviceInfo`, sequential/burst status timing, and intentional disconnect recovery; startup self-tests require byte identity with the C vectors |
+| [`r1_ble_probe_frames.c`](r1_ble_probe_frames.c) | generate the three fixed, non-destructive channel-2 frames plus the seven-byte command-invalid opcode-`0x89` channel-1 coexistence frame used by the macOS hardware probe |
+| [`probe_r1_ble.swift`](probe_r1_ble.swift) | macOS CoreBluetooth discovery and bounded owned-hardware validation for GATT layout, advertisement host-observation cadence, CCCD cycling, `pairAuth`, application-route silence without `pairAuth`, `deviceInfo`, sequential/burst status timing, intentional disconnect recovery, and non-mutating cross-characteristic receive contention; startup self-tests require byte identity with the C vectors |
+| [`analyze_r1_hci_capture.py`](analyze_r1_hci_capture.py) | strict privacy-preserving Apple PacketLogger `.pklg` parser and HCI/L2CAP/ATT evidence gate for connection intervals, ATT MTU, data length, PHY, encryption, controller completed-packet counts, channel-2 traffic, and Prepare/Execute Write rejection; malformed, truncated, note-only, incomplete-fragment, stale-hash, and missing-evidence captures fail closed |
 | [`upload_zephyr_recovery.py`](upload_zephyr_recovery.py) | verify a source-built bundle, refuse development trust by default, extract only its signed application to a mode-0600 temporary file, compile the bounded CoreBluetooth client, and upload/resume through `OPENR1-RECOVERY`; it cannot write the bootloader or product storage |
 | [`upload_openr1_recovery.swift`](upload_openr1_recovery.swift) | sequential offset-checked recovery transport used by the verified wrapper; reads the loader status to resume after disconnect and finishes only after all declared bytes are acknowledged |
 | [`r1_macos_ace_read.swift`](r1_macos_ace_read.swift) | exact-version, read-only macOS ACE client for one bounded prefix, one 4-KiB internal-flash page, or the complete architected 0x308-byte UICR extent on an owner-authorized R1; every mode is address-constrained and contains no NVMC write operation |
@@ -72,8 +74,13 @@ See [`../research/decompilation/rebuild/PROVENANCE.md`](../research/decompilatio
 The R1 firmware itself builds and passes its full test suite without them.
 
 The BLE probe is deliberately not a generic write console. Discovery is the
-default; its only transmitting modes are the recovered ephemeral phone-role
-selector and fixed read-only device-info/status requests. It redacts the
+default; its transmitting modes are the recovered ephemeral phone-role
+selector, fixed read-only device-info/status requests, and a separately
+bounded coexistence mode that interleaves at most twenty seven-byte
+opcode-`0x89` frames whose recovered command-valid byte is zero. That frame
+cannot select wear, touch, regulator, secondary-mode, or radio actions. The
+mode requires phone-role plus a status burst and cannot be combined with CCCD
+cycling or intentional disconnect. The probe redacts the
 manufacturer payload by default, validates both wire checksums on every model,
 and contains no DFU, power, advertising, storage, sensor-control, or raw-command
 operation. Advertisement callback gaps are labeled host observations because
@@ -86,7 +93,29 @@ xcrun swiftc -warnings-as-errors -framework CoreBluetooth -framework Foundation 
   r1/tools/probe_r1_ble.swift -o /tmp/openr1_ble_probe
 /tmp/openr1_ble_probe --timeout 180 --pair-role-phone --device-info \
   --status-count 20 --status-burst B56EE2
+/tmp/openr1_ble_probe --timeout 180 --pair-role-phone --status-count 20 \
+  --status-burst --channel1-probe-count 20 B56EE2
 ```
+
+PacketLogger captures are independently parsed rather than trusted by filename
+or GUI appearance. The record envelope and packet-type constants are checked
+against Wireshark's upstream `wiretap/packetlogger.c`; peer addresses, keys,
+and ATT values are never emitted. A capture can be required to prove all raw
+BLE gates in one command:
+
+```sh
+python3 r1/tools/analyze_r1_hci_capture.py trace.pklg \
+  --expect-sha256 EXACT_CAPTURE_SHA256 \
+  --channel2-write-handle 0x15 --channel2-notify-handle 0x17 \
+  --require hci --require mtu --require data-length --require phy \
+  --require encryption --require completed-packets \
+  --require queued-write-rejection --require channel2-traffic \
+  --output trace-analysis.json
+```
+
+`make -C r1 hci-capture-test` exercises valid complete evidence, fragmented
+L2CAP/ATT, note-only input, malformed records, truncated reassembly, digest
+pinning, all requirement gates, and privacy redaction.
 
 ## Scope
 
@@ -100,6 +129,25 @@ The read-only ACE evidence client is included here so physical recovery evidence
 does not depend on a separate checkout. Bootloader rekeying remains outside this
 firmware repository; it is unnecessary when the reviewed owner-optional
 bootloader is already installed.
+
+The initial SWD installer has a separate host-only dependency so normal builds
+do not need probe software. Create an isolated environment from
+`tools/requirements-swd.txt` (currently pyOCD 0.45.1), run the installer without
+`--execute`, and copy the printed bundle digest into the explicit execution
+command. The runner disables pyOCD auto-unlock and chip erase, bypasses target
+flash-algorithm blobs, and performs the nRF52840 NVMC `ERASEPAGE`/word sequence
+directly through SWD. It never writes `ERASEALL`, `ERASEUICR`, or any UICR byte.
+The `--recover` mode first requires the complete current flash to equal the
+verified source-installed image and UICR to remain byte-identical, then restores
+the exact original one-MiB backup using sector erases. UICR drift fails closed;
+normal rollback never erases or rewrites UICR.
+
+UICR disaster recovery is a distinct `--recover --restore-uicr` mode. Dry-run
+prints the exact backup SHA-256 that execution additionally requires through
+`--confirm-uicr-sha256`. Only that mode issues the pinned Nordic
+`NVMC.ERASEUICR=1` sequence, proves the complete 0x308-byte architected extent
+erased, restores only the backup's non-erased words, and verifies every byte
+before optional release. `ERASEALL` remains absent in every mode.
 
 Compile the ACE reader on macOS with `-parse-as-library` and always supply the
 reported firmware version plus the exact cached CoreBluetooth UUID:

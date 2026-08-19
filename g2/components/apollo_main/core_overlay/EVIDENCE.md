@@ -19584,9 +19584,10 @@ entry; its fifty-call closure has no accepted strict-interior ingress.
 `nvSCaldAG` records, CCITT-FALSE initialization/persistence, primary v0
 migration quirk, partial AG update semantics, direct AG import, and the exact
 predicate-gated abnormal-matrix fallback. Host tests cover all policy branches
-and target compilation exposes exactly eight global text symbols. It is not in
-`overlay.json`; provider/logger binding, placement, redirects, and package
-validation remain prerequisites for ownership.
+and target compilation exposes exactly eight global text symbols. It is
+production-routed under the reviewed apple-clang profile; the routing record
+is the NVDB sensor-calibration production routing section at the end of this
+file.
 
 ### NVDB system-data clean-room candidate
 
@@ -19629,9 +19630,9 @@ tail. Two stored callback roots and three direct calls root every entry; its
 `kvdb_time_format.c` preserves the twelve-byte record at `0x20003818`,
 version-1/CRC-at-eight layout, initialized checksum `0x76ED`, whole-record
 writer, and non-importing v0 migration policy. Host tests cover every branch
-and target compilation exposes exactly three global text symbols. It is not
-in `overlay.json`; diagnostics, provider binding, placement, redirects, and
-package validation remain prerequisites for ownership.
+and target compilation exposes exactly three global text symbols. It is
+production-routed under the reviewed apple-clang profile; the routing record
+is the KVDB time-format production routing section at the end of this file.
 
 ### KVDB universal-setting clean-room candidate
 
@@ -19643,9 +19644,10 @@ entry; its 22-call closure has no strict-interior ingress.
 `kvdb_universal_setting.c` preserves the twenty-byte record at `0x20003824`,
 version 3, CRC at offset 18, initialized checksum `0xA967`, whole-record writer,
 and non-importing pre-v3 migration policy. Host tests cover every branch and
-target compilation exposes exactly three global text symbols. It is not in
-`overlay.json`; diagnostics, provider binding, placement, redirects, and
-package validation remain prerequisites for ownership.
+target compilation exposes exactly three global text symbols. It is
+production-routed under the reviewed apple-clang profile; the routing record
+is the KVDB universal-setting production routing section at the end of this
+file.
 
 ### Primary KVDB setting clean-room candidate
 
@@ -19658,9 +19660,9 @@ tail. Two stored callback roots and three direct calls root every entry; its
 layout, factory version 1/checksum `0xA288`, version-4 upgrade/checksum
 `0x4987`, whole-record writer, and non-importing pre-v4 migration policy. Host
 tests cover every branch and target compilation exposes exactly three global
-text symbols. It is not in `overlay.json`; diagnostics, provider binding,
-placement, redirects, and package validation remain prerequisites for
-ownership.
+text symbols. It is production-routed under the reviewed apple-clang profile;
+the routing record is the KVDB setting production routing section at the end
+of this file.
 
 ### KVDB ALS-scale clean-room candidate
 
@@ -19704,9 +19706,9 @@ timestamp at offset four, signed timezone at offset eight, CRC at offset ten,
 and four reserved bytes. Its initialized checksum is `0x18F0`; rewriting the
 factory values under forced version 3 produces `0xC67A`. Host tests cover the
 writer and non-importing pre-v3 migration, and target compilation exposes
-exactly three global text symbols. It is not in `overlay.json`; diagnostics,
-provider binding, placement, redirects, and package validation remain
-prerequisites for ownership.
+exactly three global text symbols. It is production-routed under the reviewed
+apple-clang profile; the routing record is the KVDB time production routing
+section at the end of this file.
 
 ### KVDB onboarding-config clean-room candidate
 
@@ -20430,6 +20432,274 @@ Apple Clang 21 produces overlay/component/package sizes
 `200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10`,
 `ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b`,
 and `62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current NVDB sensor-calibration production routing
+
+The clean-room `nvdb_sensor_caldata.c` closure is production-routed under the
+reviewed apple-clang profile. Eight relocated leaves — the 30-byte primary and
+AG default initializers, the 530-byte primary whole-record updater, the
+88-byte `_nvdbUpdataSensorCaldata` migration callback, the 4-byte AG migration
+callback (compiled byte-identically to its stock body), the 370-byte AG
+selective updater, the 284-byte `_nvdbCheckSensorCaldata` suspicious-matrix
+checker carrying the 36-byte default-matrix read-only closure, and the
+358-byte AG reader — are appended to the overlay, and eight `B.W` entry
+redirects with NOP fill replace the 900 stock body bytes across
+`[0x00509764,0x00509A3E)` and `[0x00509A40,0x00509AEA)`. Provider binding is
+exact: the retained CRC-16/CCITT provider at `0x0049ACD4` (null-seed `0xFFFF`
+semantics), the database-one NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`, and the retained product predicate at `0x0045A568`.
+The two-byte alignment island and the 94-byte literal tail
+`[0x00509AEA,0x00509B48)` stay retained stock data, the fixed SRAM records at
+`0x200038F4` and `0x20003950` are untouched, and all four stored callback
+roots and all ten direct entry calls now execute the source leaves through
+the redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`144966/3668362/4446856`, with SHA-256 values
+`bf19ebb706376c96744eb032e2817e3cb10cb34c71a3a0de7c9e3113c3cc9c7a`,
+`7a4a32524eb19e046c961715ac024b325a16dc8c5c3d18cfa0e3fefdbc1e23f2`,
+and `e709d9459933668d2fb61a83ad8e755acaac1aacadd79ca6f5dcb0ecb6acb0c4`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current KVDB setting production routing
+
+The clean-room `kvdb_setting.c` closure is production-routed under the
+reviewed apple-clang profile. Three relocated leaves — the 28-byte default
+initializer, the 160-byte `SVC_KvdbWriteSetting` whole-record writer, and the
+64-byte `_kvdbUpdataSetting` migration callback, with a 10-byte `kvSetting`
+key-string read-only closure on each of the two referencing leaves — are
+appended to the overlay, and three `B.W` entry redirects with NOP fill
+replace the 340 stock body bytes at `[0x004AEB20,0x004AEC74)`. Provider
+binding is exact: the retained CRC-16/CCITT provider at `0x0049ACD4`
+(null-seed `0xFFFF` semantics) and the database-zero blob read/write adapters
+at `0x004D956C`/`0x004D957E`. The 48-byte
+record/key/path/function/diagnostic literal tail `[0x004AEC74,0x004AECA4)`
+stays retained stock data, the 28-byte SRAM record at `0x200037E0` is
+untouched, and both stored callback roots and all three direct entry calls
+now execute the source leaves through the redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`145242/3668638/4447132`, with SHA-256 values
+`8f891d528010c954f330e3cf1a05cf50af559147f502690e0854d15167cb838a`,
+`15ce61e3713f3f9ac0cd7a83e80001641ea57317e8e4d0b49c248cd9733aa48e`,
+and `203ecd4c6bfbf9458d94d80676bfb2edbc91b8bad783e7b42d1baa084befbcf8`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current KVDB time production routing
+
+The clean-room `kvdb_time.c` closure is production-routed under the reviewed
+apple-clang profile. Three relocated leaves — the 28-byte default
+initializer, the 54-byte `SVC_KvdbWriteTime` timestamp/timezone writer, and
+the 100-byte `_kvdbUpdataTime` migration callback, with a 7-byte `kvTime`
+key-string read-only closure on each of the two referencing leaves and the
+writer body inlined into the migration callback by the reviewed toolchain —
+are appended to the overlay, and three `B.W` entry redirects with NOP fill
+replace the 494 stock body bytes at `[0x00585618,0x00585806)`. Provider
+binding is exact: the retained CRC-16/CCITT provider at `0x0049ACD4`
+(null-seed `0xFFFF` semantics) and the database-zero blob read/write adapters
+at `0x004D956C`/`0x004D957E`. The 58-byte
+record/key/path/function/diagnostic literal tail `[0x00585806,0x00585840)`
+stays retained stock data, the twelve-byte SRAM record at `0x2000380C` is
+untouched, and both stored callback roots and all three direct entry calls
+now execute the source leaves through the redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`145443/3668839/4447333`, with SHA-256 values
+`9e790387bac8377eff483564ef771c6ee48607f372f335bc5aa8766843bb5cb7`,
+`ecfbc642e29bc7a43dc317850470b8c5bef9cf51ef65742a5ff16cebc65d7248`,
+and `e0f3dc6bd40c9d8744ed2592ae4e4403e80aa36016ee5f746c4e67a566f33964`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current KVDB time-format production routing
+
+The clean-room `kvdb_time_format.c` closure is production-routed under the
+reviewed apple-clang profile. Three relocated leaves — the 28-byte default
+initializer, the 96-byte `SVC_KvdbWriteTimeFormat` whole-record writer, and
+the 90-byte `_kvdbUpdataTimeFormat` migration callback, with a 13-byte
+`kvTimeFormat` key-string read-only closure on each of the two referencing
+leaves and the writer body inlined into the migration callback by the
+reviewed toolchain — are appended to the overlay, and three `B.W` entry
+redirects with NOP fill replace the 338 stock body bytes at
+`[0x0049AE90,0x0049AFE2)`. Provider binding is exact: the retained
+CRC-16/CCITT provider at `0x0049ACD4` (null-seed `0xFFFF` semantics) and the
+database-zero blob read/write adapters at `0x004D956C`/`0x004D957E`. The
+50-byte record/key/path/function/diagnostic literal tail
+`[0x0049AFE2,0x0049B014)` stays retained stock data, the twelve-byte SRAM
+record at `0x20003818` is untouched, and both stored callback roots and all
+three direct entry calls now execute the source leaves through the
+redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`145687/3669083/4447577`, with SHA-256 values
+`332daed353fcaed5d24e7d456bf3ace85f04a1814a0968ffc92f1028473e7ed0`,
+`f345bff784b400d51d05d10a4f1417fa1195953f0630f98a68b12ecfb6845b6c`,
+and `432e69e1414b73c25355b4f36d0ebd017782671d72bc4444ea83e056a5738547`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current KVDB temperature-unit production routing
+
+The clean-room `kvdb_temperature_unit.c` closure is production-routed under
+the reviewed apple-clang profile. Three relocated leaves — the 28-byte
+default initializer, the 96-byte `SVC_KvdbWriteTemperatureUnit` whole-record
+writer, and the 90-byte `_kvdbUpdataTemperatureUnit` migration callback,
+with an 18-byte `kvTemperatureUnit` key-string read-only closure on each of
+the two referencing leaves and the writer body inlined into the migration
+callback by the reviewed toolchain — are appended to the overlay, and three
+`B.W` entry redirects with NOP fill replace the 338 stock body bytes at
+`[0x0049B014,0x0049B166)`. Provider binding is exact: the retained
+CRC-16/CCITT provider at `0x0049ACD4` (null-seed `0xFFFF` semantics) and the
+database-zero blob read/write adapters at `0x004D956C`/`0x004D957E`. The
+50-byte record/key/path/function/diagnostic literal tail
+`[0x0049B166,0x0049B198)` stays retained stock data, the twelve-byte SRAM
+record at `0x200037FC` is untouched, and both stored callback roots and all
+three direct entry calls now execute the source leaves through the
+redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`145940/3669336/4447830`, with SHA-256 values
+`50e4865c2e6932f09e2aff2c039fe113d9121ef91cba6566f1008dc8a1794303`,
+`72f6225bfb3da8aecb5a1994186b39a60a4dc6f0cd56f30cd307c60c9dbdbdcc`,
+and `7b3301d8d934584d40a9bcb5a994fb2dc36f1ceae3bf15bae74d2378da0863be`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current KVDB universal-setting production routing
+
+The clean-room `kvdb_universal_setting.c` closure is production-routed under
+the reviewed apple-clang profile. Three relocated leaves — the 28-byte
+default initializer, the 128-byte `SVC_KvdbWriteUniversalSetting`
+whole-record writer, and the 92-byte `_kvdbUpdataUniversalSetting` migration
+callback, with a 19-byte `kvUniversalSetting` key-string read-only closure
+on each of the two referencing leaves and the writer body inlined into the
+migration callback by the reviewed toolchain — are appended to the overlay,
+and three `B.W` entry redirects with NOP fill replace the 340 stock body
+bytes at `[0x0049AD0C,0x0049AE60)`. Provider binding is exact: the retained
+CRC-16/CCITT provider at `0x0049ACD4` (null-seed `0xFFFF` semantics) and the
+database-zero blob read/write adapters at `0x004D956C`/`0x004D957E`. The
+48-byte record/key/path/function/diagnostic literal tail
+`[0x0049AE60,0x0049AE90)` stays retained stock data, the twenty-byte SRAM
+record at `0x20003824` is untouched, and both stored callback roots and all
+three direct entry calls now execute the source leaves through the
+redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`146227/3669623/4448117`, with SHA-256 values
+`1701d7ebe15fe0c0fc48c623132bb3779e04f96e1595bc11b69de771a4f3ff0c`,
+`2042c3ea001e95ba59a264fed06042b505c2f67627bfe19751e94fc1ffd2267b`,
+and `a65f379437f03a2719103623fc3c46abb69a5f01c5e074ff92609d7d11297fb4`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current KVDB terminal-mode production routing
+
+The clean-room `kvdb_terminal_mode.c` closure is production-routed under the
+reviewed apple-clang profile. Three relocated leaves — the 28-byte default
+initializer, the 52-byte `SVC_KvdbWriteTerminalMode` whole-record writer,
+and the 94-byte `_kvdbUpdataTerminalMode` migration callback, with a
+15-byte `kvTerminalMode` key-string read-only closure on each of the two
+referencing leaves and the writer body inlined into the migration callback
+by the reviewed toolchain — are appended to the overlay, and three `B.W`
+entry redirects with NOP fill replace the 334 stock body bytes at
+`[0x004B03E0,0x004B052E)`. Provider binding is exact: the retained
+CRC-16/CCITT provider at `0x0049ACD4` (null-seed `0xFFFF` semantics) and the
+database-zero blob read/write adapters at `0x004D956C`/`0x004D957E`. The
+50-byte record/key/path/function/diagnostic literal tail
+`[0x004B052E,0x004B0560)` stays retained stock data, the four-byte SRAM
+record at `0x20003808` is untouched, and both stored callback roots and all
+three direct entry calls now execute the source leaves through the
+redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`146433/3669829/4448323`, with SHA-256 values
+`bb69a3a64a302eda921189f8375bef6cbaf0be171ea4a3ecd32b9ba4a81df203`,
+`ab37d9c813e2ac79e2c1cd3a714708eaf8eef6b500a88c9a568d8391b9dcdb45`,
+and `6f226b2652ef85768f9f12607a3beab99f9381b6e611b1ea3d71965e60dec85a`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current KVDB onboarding-config production routing
+
+The clean-room `kvdb_onboarding_config.c` closure is production-routed under
+the reviewed apple-clang profile. Six relocated leaves — the 32-byte
+`SVC_SetKvdbOnboardingConfig` indexed live-byte setter, the 22-byte
+`SVC_KvdbBlobWriteOnboardingConfig` live-byte writer, the 42-byte
+update-and-persist wrapper, the 10-byte scalar live-byte getter, the 8-byte
+live-record pointer getter, and the 30-byte `SVC_KvdbReadOnboardingConfig`
+live-record loader, with a 19-byte `kvOnboardingConfig` key-string read-only
+closure on each of the three referencing leaves and the setter, writer, and
+pointer-getter bodies inlined into the composing leaves by the reviewed
+toolchain — are appended to the overlay, and six `B.W` entry redirects with
+NOP fill replace the 286 stock body bytes at `[0x004A777C,0x004A789A)`.
+Provider binding is exact: the database-zero blob read/write adapters at
+`0x004D956C`/`0x004D957E`. The 54-byte record/key/path/function/diagnostic
+literal tail `[0x004A789A,0x004A78D0)` stays retained stock data, the
+one-byte SRAM record at `0x20000040` is untouched, and all eighteen direct
+entry calls now execute the source leaves through the redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`146645/3670041/4448535`, with SHA-256 values
+`4df8082fef07195e41a826ae997059f0e0ce16f38576a07e7a5a7c21f32f080c`,
+`f464eb05a4b207f3e24958bf2687fa9a217b5601d9ebfa5fefeae2ff753bb94b`,
+and `4689b4809ae8521a0a5d5d8e13f54bc216f3991f6395e39a059f6da03be37173`.
+The leaves and redirects are gated `apple-clang`, so the linux-clang build
+stays byte-identical to its recorded profile; linux-clang leaf pins await
+Linux toolchain regeneration. The component build, source package, `open_cfw
+verify`, and the fail-closed analyzer/manifest census all pass. No package was
+signed or flashed and no hardware was accessed.
+
+## Current KVDB ring production routing
+
+The clean-room `kvdb_ring.c` closure is production-routed under the
+reviewed apple-clang profile. Three relocated leaves — the 28-byte default
+initializer, the 262-byte `SVC_KvdbWriteRing` whole-record writer, and the
+66-byte `_kvdbUpdataRing` migration callback, with a 7-byte `kvRing`
+key-string read-only closure on each of the two referencing leaves and the
+writer called by the migration callback as a source-owned leaf — are
+appended to the overlay, and three `B.W` entry redirects with NOP fill
+replace the 796 stock body bytes at `[0x005D9B6C,0x005D9E88)`. Provider
+binding is exact: the retained CRC-16/CCITT provider at `0x0049ACD4`
+(null-seed `0xFFFF` semantics) and the database-zero blob read/write
+adapters at `0x004D956C`/`0x004D957E`. The 72-byte
+record/key/path/function/diagnostic literal tail `[0x005D9E88,0x005D9ED0)`
+stays retained stock data, the 24-byte SRAM record at `0x200037C8` is
+untouched, and both stored callback roots and both direct entry calls now
+execute the source leaves through the redirects.
+
+Apple Clang 21 produces overlay/component/package sizes
+`147021/3670417/4448911`, with SHA-256 values
+`02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd`,
+`eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c`,
+and `21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605`.
 The leaves and redirects are gated `apple-clang`, so the linux-clang build
 stays byte-identical to its recorded profile; linux-clang leaf pins await
 Linux toolchain regeneration. The component build, source package, `open_cfw

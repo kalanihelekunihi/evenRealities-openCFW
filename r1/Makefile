@@ -63,7 +63,7 @@ ARM_SOURCES := $(SOURCES) $(GOODIX_COMPOSER_SOURCE) $(GOODIX_ROOT_SOURCE) \
 	platform/nrf52840/r1_nrf52840.c
 ARM_OBJECTS := $(patsubst %.c,$(ARM_BUILD)/%.o,$(ARM_SOURCES))
 
-.PHONY: all test sim sanitize verify arm-objects provider-composer-check sdk-image sdk-verify bundle-boundary zephyr-source-verify zephyr-image zephyr-package zephyr-bundle zephyr-verify owner-dfu sdk-owner-dfu signing-test deployment-test vendor-audit vendor-storage-test vendor-crypto-test vendor-goodix-test clean
+.PHONY: all test hci-capture-test sim sanitize verify arm-objects provider-composer-check sdk-image sdk-verify bundle-boundary zephyr-source-verify zephyr-image zephyr-package zephyr-bundle zephyr-verify owner-dfu sdk-owner-dfu signing-test deployment-test vendor-audit vendor-storage-test vendor-crypto-test vendor-goodix-test clean
 
 all: test
 
@@ -77,6 +77,10 @@ $(BLE_PROBE_FRAMES): tools/r1_ble_probe_frames.c src/r1_protocol.c src/r1_crc.c 
 test: $(HOST_TEST) $(BLE_PROBE_FRAMES)
 	./$(HOST_TEST)
 	./$(BLE_PROBE_FRAMES)
+	$(MAKE) hci-capture-test
+
+hci-capture-test:
+	python3 -m unittest tests/test_analyze_r1_hci_capture.py
 
 $(HOST_SIM): $(SOURCES) tools/openr1_sim.c | $(BUILD)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(SOURCES) tools/openr1_sim.c -o $@
@@ -198,6 +202,7 @@ deployment-test:
 	python3 -m unittest discover -s tests -p 'test_*zephyr_deployment.py'
 	python3 -m unittest tests/test_package_zephyr_bundle.py
 	python3 -m unittest tests/test_assemble_r1_ace_recovery.py
+	python3 -m unittest tests/test_deploy_zephyr_swd.py
 
 vendor-audit:
 	@test -n "$(SDK_ROOT)" || (echo "SDK_ROOT is required" >&2; exit 2)

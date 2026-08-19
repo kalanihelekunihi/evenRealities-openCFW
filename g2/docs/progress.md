@@ -1848,6 +1848,120 @@ The leaves and redirects are gated `apple-clang`; linux-clang leaf pins await
 Linux toolchain regeneration. Ownership: 338 replaced stock body bytes. See
 `docs/research/g2-kvdb-als-scale-recovery.md`.
 
+## Current G2 NVDB sensor-calibration production routing
+
+The sensor-calibration candidate is now production-routed under the reviewed
+apple-clang profile: eight relocated overlay leaves (30-byte primary and AG
+default initializers, 530-byte primary whole-record updater, 88-byte migration
+callback, 4-byte AG migration callback compiled byte-identically to its stock
+body, 370-byte AG selective updater, 284-byte suspicious-matrix checker
+carrying the 36-byte default-matrix read-only closure, and 358-byte AG
+reader) plus eight `B.W` entry redirects replace the 900 stock body bytes
+across `[0x00509764,0x00509A3E)` and `[0x00509A40,0x00509AEA)`. Providers bind
+exactly to the retained CRC-16 at `0x0049ACD4`, the NVDB blob read/write
+adapters at `0x005105F0`/`0x00510602`, and the product predicate at
+`0x0045A568`; the 96-byte alignment/literal island and the fixed SRAM records
+at `0x200038F4`/`0x20003950` are untouched, and all four stored roots plus
+all ten direct entry calls reach the leaves through the redirects. Apple
+Clang 21 overlay/component/package pins are `144966/3668362/4446856` (SHA-256
+`bf19ebb7…`, `7a4a3252…`, `e709d945…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 900 replaced stock body bytes. See
+`docs/research/g2-nvdb-sensor-caldata-recovery.md`.
+
+## Current G2 KVDB setting production routing
+
+The primary setting candidate is now production-routed under the reviewed
+apple-clang profile: three relocated overlay leaves (28-byte default
+initializer, 160-byte whole-record writer, and 64-byte migration callback,
+with a 10-byte key-string read-only closure on each of the two referencing
+leaves) plus three `B.W` entry redirects replace the 340 stock body bytes
+`[0x004AEB20,0x004AEC74)`. Providers bind exactly to the retained CRC-16 at
+`0x0049ACD4` and the blob read/write adapters at `0x004D956C`/`0x004D957E`;
+the 48-byte literal tail and the fixed SRAM record at `0x200037E0` are
+untouched, and both stored roots plus all three direct entry calls reach the
+leaves through the redirects. Apple Clang 21 overlay/component/package pins
+are `145242/3668638/4447132` (SHA-256 `8f891d52…`, `15ce61e3…`, `203ecd4c…`).
+The leaves and redirects are gated `apple-clang`; linux-clang leaf pins await
+Linux toolchain regeneration. Ownership: 340 replaced stock body bytes. See
+`docs/research/g2-kvdb-setting-recovery.md`.
+
+## Current G2 KVDB time production routing
+
+The time candidate is now production-routed under the reviewed apple-clang
+profile: three relocated overlay leaves (28-byte default initializer,
+54-byte timestamp/timezone writer, and 100-byte migration callback, with a
+7-byte `kvTime` key-string read-only closure on each of the two referencing
+leaves and the writer body inlined into the migration callback by the
+reviewed toolchain) plus three `B.W` entry redirects replace the 494 stock
+body bytes `[0x00585618,0x00585806)`. Providers bind exactly to the retained
+CRC-16 at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`; the 58-byte literal tail and the fixed SRAM
+record at `0x2000380C` are untouched, and both stored roots plus all three
+direct entry calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `145443/3668839/4447333` (SHA-256
+`9e790387…`, `ecfbc642…`, `e0f3dc6b…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 494 replaced stock body bytes. See
+`docs/research/g2-kvdb-time-recovery.md`.
+
+## Current G2 KVDB time-format production routing
+
+The time-format candidate is now production-routed under the reviewed
+apple-clang profile: three relocated overlay leaves (28-byte default
+initializer, 96-byte whole-record writer, and 90-byte migration callback,
+with a 13-byte `kvTimeFormat` key-string read-only closure on each of the
+two referencing leaves and the writer body inlined into the migration
+callback by the reviewed toolchain) plus three `B.W` entry redirects replace
+the 338 stock body bytes `[0x0049AE90,0x0049AFE2)`. Providers bind exactly
+to the retained CRC-16 at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`; the 50-byte literal tail and the fixed SRAM
+record at `0x20003818` are untouched, and both stored roots plus all three
+direct entry calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `145687/3669083/4447577` (SHA-256
+`332daed3…`, `f345bff7…`, `432e69e1…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 338 replaced stock body bytes. See
+`docs/research/g2-kvdb-time-format-recovery.md`.
+
+## Current G2 KVDB temperature-unit production routing
+
+The temperature-unit candidate is now production-routed under the reviewed
+apple-clang profile: three relocated overlay leaves (28-byte default
+initializer, 96-byte whole-record writer, and 90-byte migration callback,
+with an 18-byte `kvTemperatureUnit` key-string read-only closure on each of
+the two referencing leaves and the writer body inlined into the migration
+callback by the reviewed toolchain) plus three `B.W` entry redirects replace
+the 338 stock body bytes `[0x0049B014,0x0049B166)`. Providers bind exactly
+to the retained CRC-16 at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`; the 50-byte literal tail and the fixed SRAM
+record at `0x200037FC` are untouched, and both stored roots plus all three
+direct entry calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `145940/3669336/4447830` (SHA-256
+`50e4865c…`, `72f6225b…`, `7b3301d8…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 338 replaced stock body bytes. See
+`docs/research/g2-kvdb-temperature-unit-recovery.md`.
+
+## Current G2 KVDB universal-setting production routing
+
+The universal-setting candidate is now production-routed under the reviewed
+apple-clang profile: three relocated overlay leaves (28-byte default
+initializer, 128-byte whole-record writer, and 92-byte migration callback,
+with a 19-byte `kvUniversalSetting` key-string read-only closure on each of
+the two referencing leaves and the writer body inlined into the migration
+callback by the reviewed toolchain) plus three `B.W` entry redirects replace
+the 340 stock body bytes `[0x0049AD0C,0x0049AE60)`. Providers bind exactly
+to the retained CRC-16 at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`; the 48-byte literal tail and the fixed SRAM
+record at `0x20003824` are untouched, and both stored roots plus all three
+direct entry calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `146227/3669623/4448117` (SHA-256
+`1701d7eb…`, `2042c3ea…`, `a65f3794…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 340 replaced stock body bytes. See
+`docs/research/g2-kvdb-universal-setting-recovery.md`.
+
 ## Current G2 KVDB terminal-mode increment
 
 The retained `service_kvdb_terminal_mode.c` object is completely bounded at
@@ -1862,6 +1976,63 @@ The whole-record writer and non-importing v0 migration policy are host-tested,
 and the candidate compiles as exactly three Thumb symbols. Production routing
 and ownership remain zero. See
 `docs/research/g2-kvdb-terminal-mode-recovery.md`.
+
+## Current G2 KVDB terminal-mode production routing
+
+The terminal-mode candidate is now production-routed under the reviewed
+apple-clang profile: three relocated overlay leaves (28-byte default
+initializer, 52-byte whole-record writer, and 94-byte migration callback,
+with a 15-byte `kvTerminalMode` key-string read-only closure on each of
+the two referencing leaves and the writer body inlined into the migration
+callback by the reviewed toolchain) plus three `B.W` entry redirects replace
+the 334 stock body bytes `[0x004B03E0,0x004B052E)`. Providers bind exactly
+to the retained CRC-16 at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`; the 50-byte literal tail and the fixed SRAM
+record at `0x20003808` are untouched, and both stored roots plus all three
+direct entry calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `146433/3669829/4448323` (SHA-256
+`bb69a3a6…`, `ab37d9c8…`, `6f226b26…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 334 replaced stock body bytes. See
+`docs/research/g2-kvdb-terminal-mode-recovery.md`.
+
+## Current G2 KVDB onboarding-config production routing
+
+The onboarding-config candidate is now production-routed under the reviewed
+apple-clang profile: six relocated overlay leaves (32-byte indexed live-byte
+setter, 22-byte live-byte writer, 42-byte update-and-persist wrapper, 10-byte
+scalar getter, 8-byte pointer getter, and 30-byte live-record loader, with a
+19-byte `kvOnboardingConfig` key-string read-only closure on each of the
+three referencing leaves and the setter, writer, and pointer-getter bodies
+inlined into the composing leaves by the reviewed toolchain) plus six `B.W`
+entry redirects replace the 286 stock body bytes `[0x004A777C,0x004A789A)`.
+Providers bind exactly to the blob read/write adapters at
+`0x004D956C`/`0x004D957E`; the 54-byte literal tail and the fixed one-byte
+SRAM record at `0x20000040` are untouched, and all eighteen direct entry
+calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `146645/3670041/4448535` (SHA-256
+`4df8082f…`, `f464eb05…`, `4689b480…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 286 replaced stock body bytes. See
+`docs/research/g2-kvdb-onboarding-config-recovery.md`.
+
+## Current G2 KVDB ring production routing
+
+The ring candidate is now production-routed under the reviewed apple-clang
+profile: three relocated overlay leaves (28-byte default initializer,
+262-byte whole-record writer, and 66-byte migration callback, with a 7-byte
+`kvRing` key-string read-only closure on each of the two referencing leaves
+and the writer called by the migration callback as a source-owned leaf) plus
+three `B.W` entry redirects replace the 796 stock body bytes
+`[0x005D9B6C,0x005D9E88)`. Providers bind exactly to the retained CRC-16 at
+`0x0049ACD4` and the blob read/write adapters at `0x004D956C`/`0x004D957E`;
+the 72-byte literal tail and the fixed 24-byte SRAM record at `0x200037C8`
+are untouched, and both stored roots plus both direct entry calls reach the
+leaves through the redirects. Apple Clang 21 overlay/component/package pins
+are `147021/3670417/4448911` (SHA-256 `02c48ddc…`, `eee145e7…`, `21ba9d6c…`).
+The leaves and redirects are gated `apple-clang`; linux-clang leaf pins await
+Linux toolchain regeneration. Ownership: 796 replaced stock body bytes. See
+`docs/research/g2-kvdb-ring-recovery.md`.
 
 ## Current G2 KVDB time increment
 

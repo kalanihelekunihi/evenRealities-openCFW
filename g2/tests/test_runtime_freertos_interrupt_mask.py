@@ -79,10 +79,10 @@ OFFICIAL_APPLICATION_SHA256 = (
     "e13cc18928528d84d999b6bcc0ba9701"
 )
 GENERATED_COMPONENT_SHA256 = (
-    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
 )
 GENERATED_APPLICATION_SHA256 = (
-    "a9292a3e39581d421dcd78064165a2a27ea903ad8eefc3a39d5c4db15c6bb1c6"
+    "54dd9340c068f9a7d509eb8037e30c798ad672720d615caf5284203f8fc597e1"
 )
 
 SET_BYTES = bytes.fromhex(
@@ -722,13 +722,13 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
         self.assertEqual(
             self.config["expected"],
             {
-                "overlay_size": 143227,
+                "overlay_size": 147021,
                 "overlay_sha256": (
-                    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
+                    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
                 ),
-                "component_size": 3666623,
+                "component_size": 3670417,
                 "component_sha256": (
-                    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+                    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
                 ),
             },
         )
@@ -855,8 +855,8 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
             self.report["component"]["sha256"],
             GENERATED_COMPONENT_SHA256,
         )
-        self.assertEqual(self.report["component"]["size"], 3_666_623)
-        self.assertEqual(self.report["overlay"]["size"], 143_227)
+        self.assertEqual(self.report["component"]["size"], 3_670_417)
+        self.assertEqual(self.report["overlay"]["size"], 147_021)
         self.assertEqual(
             self.report["overlay"]["sha256"],
             self.config["expected"]["overlay_sha256"],

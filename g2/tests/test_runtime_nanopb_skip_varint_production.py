@@ -172,16 +172,16 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
             "ec17aa0a8e01050d8b30f737e7ca83d4b8842da1d7d33f6b3b74fa199a4f4519",
         ),
         "overlay": (
-            128_264,
-            "742e44dd839010c3c14ae59419fc06bcd50a7fe91e7ba06b4946f5c4154c870b",
+            147_021,
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
         ),
         "component": (
-            3_651_660,
-            "ea39a91f574b464d9071e581f5104d870e1f7e484d52de9b86407f0a90ac5d2e",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "package": (
-            4_430_154,
-            "aa71330ceed2775494fb7ff599a23701ef746a25452a8d335574a3bac12674a9",
+            4_448_911,
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
         ),
     },
     "linux-clang": {
@@ -204,31 +204,31 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
             "f54c433a31f74f74b34709901da696d850b4dd2d0fb743b8166d49256c287303",
         ),
         "overlay": (
-            132_888,
-            "7036c0e07a36376e5d98700c922ffeec7a6826388b75060a2b98b4228a411c61",
+            144_266,
+            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
         ),
         "component": (
-            3_656_284,
-            "d5daf89121f44a61b303fa953da78550edd31e9159cf9b0b397aeb1b5cfef54d",
+            3_667_662,
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
         ),
         "package": (
-            4_434_778,
-            "63d5cd1d1cbab2c3ece4a48f96b58a0cb14a7487917831f4c6d370b40ed41d90",
+            4_446_156,
+            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
         ),
     },
 }
 
 # (region_count, {address_status: (count, total_size)}).
 MANIFEST_PIN: tuple[int, dict[str, tuple[int, int]]] | None = (
-    1022,
+    1400,
     {
         "container_only": (1, 32),
-        "generated_alignment": (65, 128),
-        "generated_source_entry_replacement": (618, 88_870),
+        "generated_alignment": (133, 265),
+        "generated_source_entry_replacement": (726, 101_138),
         "generated_source_exact_load_image": (1, 6),
         "generated_source_exact_replacement": (7, 134),
-        "official_blob": (187, 3_434_136),
-        "source_compiled": (143, 128_354),
+        "official_blob": (225, 3_421_868),
+        "source_compiled": (307, 146_974),
     },
 )
 

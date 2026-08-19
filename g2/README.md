@@ -1348,6 +1348,159 @@ leaves and redirects are gated `apple-clang`, so the recorded linux-clang
 profile is byte-unaffected and its leaf pins await Linux toolchain
 regeneration.
 
+The latest increment production-routes the clean-room sensor-calibration NVDB
+closure (`nvdb_sensor_caldata.c`): both factory-record default initializers,
+the `_nvdbUpdataSensorCaldata` migration callback, the primary whole-record
+updater, the AG migration callback, the AG selective updater, the AG reader,
+and the `_nvdbCheckSensorCaldata` suspicious-matrix checker replace the 900
+stock body bytes across `[0x00509764,0x00509A3E)` and `[0x00509A40,0x00509AEA)`
+through eight entry redirects, bound to the retained CRC-16 provider at
+`0x0049ACD4`, the NVDB blob read/write adapters at `0x005105F0`/`0x00510602`,
+and the product predicate at `0x0045A568`, with the 96-byte alignment/literal
+island and the fixed SRAM records at `0x200038F4`/`0x20003950` untouched.
+Under the reviewed Apple Clang 21 profile the overlay/component/package sizes
+are `144966/3668362/4446856` with SHA-256
+`bf19ebb706376c96744eb032e2817e3cb10cb34c71a3a0de7c9e3113c3cc9c7a`,
+`7a4a32524eb19e046c961715ac024b325a16dc8c5c3d18cfa0e3fefdbc1e23f2`, and
+`e709d9459933668d2fb61a83ad8e755acaac1aacadd79ca6f5dcb0ecb6acb0c4`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room setting KVDB closure
+(`kvdb_setting.c`): the factory-record default initializer, the
+`_kvdbUpdataSetting` migration callback, and the `SVC_KvdbWriteSetting`
+whole-record writer replace the 340 stock body bytes at
+`[0x004AEB20,0x004AEC74)` through three entry redirects, bound to the
+retained CRC-16 provider at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`, with the 48-byte literal tail and the fixed SRAM
+record at `0x200037E0` untouched. Under the reviewed Apple Clang 21 profile
+the overlay/component/package sizes are `145242/3668638/4447132` with SHA-256
+`8f891d528010c954f330e3cf1a05cf50af559147f502690e0854d15167cb838a`,
+`15ce61e3713f3f9ac0cd7a83e80001641ea57317e8e4d0b49c248cd9733aa48e`, and
+`203ecd4c6bfbf9458d94d80676bfb2edbc91b8bad783e7b42d1baa084befbcf8`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room time KVDB closure
+(`kvdb_time.c`): the factory-record default initializer, the
+`_kvdbUpdataTime` migration callback, and the `SVC_KvdbWriteTime`
+timestamp/timezone writer replace the 494 stock body bytes at
+`[0x00585618,0x00585806)` through three entry redirects, bound to the
+retained CRC-16 provider at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`, with the 58-byte literal tail and the fixed SRAM
+record at `0x2000380C` untouched. Under the reviewed Apple Clang 21 profile
+the overlay/component/package sizes are `145443/3668839/4447333` with
+SHA-256 `9e790387bac8377eff483564ef771c6ee48607f372f335bc5aa8766843bb5cb7`,
+`ecfbc642e29bc7a43dc317850470b8c5bef9cf51ef65742a5ff16cebc65d7248`, and
+`e0f3dc6bd40c9d8744ed2592ae4e4403e80aa36016ee5f746c4e67a566f33964`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room time-format KVDB
+closure (`kvdb_time_format.c`): the factory-record default initializer, the
+`_kvdbUpdataTimeFormat` migration callback, and the `SVC_KvdbWriteTimeFormat`
+whole-record writer replace the 338 stock body bytes at
+`[0x0049AE90,0x0049AFE2)` through three entry redirects, bound to the
+retained CRC-16 provider at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`, with the 50-byte literal tail and the fixed SRAM
+record at `0x20003818` untouched. Under the reviewed Apple Clang 21 profile
+the overlay/component/package sizes are `145687/3669083/4447577` with
+SHA-256 `332daed353fcaed5d24e7d456bf3ace85f04a1814a0968ffc92f1028473e7ed0`,
+`f345bff784b400d51d05d10a4f1417fa1195953f0630f98a68b12ecfb6845b6c`, and
+`432e69e1414b73c25355b4f36d0ebd017782671d72bc4444ea83e056a5738547`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room temperature-unit KVDB
+closure (`kvdb_temperature_unit.c`): the factory-record default initializer,
+the `_kvdbUpdataTemperatureUnit` migration callback, and the
+`SVC_KvdbWriteTemperatureUnit` whole-record writer replace the 338 stock
+body bytes at `[0x0049B014,0x0049B166)` through three entry redirects, bound
+to the retained CRC-16 provider at `0x0049ACD4` and the blob read/write
+adapters at `0x004D956C`/`0x004D957E`, with the 50-byte literal tail and the
+fixed SRAM record at `0x200037FC` untouched. Under the reviewed Apple
+Clang 21 profile the overlay/component/package sizes are
+`145940/3669336/4447830` with SHA-256
+`50e4865c2e6932f09e2aff2c039fe113d9121ef91cba6566f1008dc8a1794303`,
+`72f6225bfb3da8aecb5a1994186b39a60a4dc6f0cd56f30cd307c60c9dbdbdcc`, and
+`7b3301d8d934584d40a9bcb5a994fb2dc36f1ceae3bf15bae74d2378da0863be`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room universal-setting KVDB
+closure (`kvdb_universal_setting.c`): the factory-record default initializer,
+the `_kvdbUpdataUniversalSetting` migration callback, and the
+`SVC_KvdbWriteUniversalSetting` whole-record writer replace the 340 stock
+body bytes at `[0x0049AD0C,0x0049AE60)` through three entry redirects, bound
+to the retained CRC-16 provider at `0x0049ACD4` and the blob read/write
+adapters at `0x004D956C`/`0x004D957E`, with the 48-byte literal tail and the
+fixed SRAM record at `0x20003824` untouched. Under the reviewed Apple
+Clang 21 profile the overlay/component/package sizes are
+`146227/3669623/4448117` with SHA-256
+`1701d7ebe15fe0c0fc48c623132bb3779e04f96e1595bc11b69de771a4f3ff0c`,
+`2042c3ea001e95ba59a264fed06042b505c2f67627bfe19751e94fc1ffd2267b`, and
+`a65f379437f03a2719103623fc3c46abb69a5f01c5e074ff92609d7d11297fb4`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room terminal-mode KVDB
+closure (`kvdb_terminal_mode.c`): the factory-record default initializer,
+the `_kvdbUpdataTerminalMode` migration callback, and the
+`SVC_KvdbWriteTerminalMode` whole-record writer replace the 334 stock
+body bytes at `[0x004B03E0,0x004B052E)` through three entry redirects, bound
+to the retained CRC-16 provider at `0x0049ACD4` and the blob read/write
+adapters at `0x004D956C`/`0x004D957E`, with the 50-byte literal tail and the
+fixed SRAM record at `0x20003808` untouched. Under the reviewed Apple
+Clang 21 profile the overlay/component/package sizes are
+`146433/3669829/4448323` with SHA-256
+`bb69a3a64a302eda921189f8375bef6cbaf0be171ea4a3ecd32b9ba4a81df203`,
+`ab37d9c813e2ac79e2c1cd3a714708eaf8eef6b500a88c9a568d8391b9dcdb45`, and
+`6f226b2652ef85768f9f12607a3beab99f9381b6e611b1ea3d71965e60dec85a`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room onboarding-config KVDB
+closure (`kvdb_onboarding_config.c`): the `SVC_SetKvdbOnboardingConfig`
+indexed live-byte setter, the `SVC_KvdbBlobWriteOnboardingConfig` live-byte
+writer, the update-and-persist wrapper, the scalar live-byte getter, the
+live-record pointer getter, and the `SVC_KvdbReadOnboardingConfig`
+live-record loader replace the 286 stock body bytes at
+`[0x004A777C,0x004A789A)` through six entry redirects, bound to the retained
+blob read/write adapters at `0x004D956C`/`0x004D957E`, with the 54-byte
+literal tail and the fixed one-byte SRAM record at `0x20000040` untouched.
+Under the reviewed Apple Clang 21 profile the overlay/component/package sizes
+are `146645/3670041/4448535` with SHA-256
+`4df8082fef07195e41a826ae997059f0e0ce16f38576a07e7a5a7c21f32f080c`,
+`f464eb05a4b207f3e24958bf2687fa9a217b5601d9ebfa5fefeae2ff753bb94b`, and
+`4689b4809ae8521a0a5d5d8e13f54bc216f3991f6395e39a059f6da03be37173`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room ring KVDB
+closure (`kvdb_ring.c`): the factory-record default initializer,
+the `_kvdbUpdataRing` migration callback, and the
+`SVC_KvdbWriteRing` whole-record writer replace the 796 stock
+body bytes at `[0x005D9B6C,0x005D9E88)` through three entry redirects, bound
+to the retained CRC-16 provider at `0x0049ACD4` and the blob read/write
+adapters at `0x004D956C`/`0x004D957E`, with the 72-byte literal tail and the
+fixed 24-byte SRAM record at `0x200037C8` untouched. Under the reviewed Apple
+Clang 21 profile the overlay/component/package sizes are
+`147021/3670417/4448911` with SHA-256
+`02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd`,
+`eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c`, and
+`21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
 ## Prior dual-image endian-conversion release
 
 This historical source profile additionally replaced the byte-identical

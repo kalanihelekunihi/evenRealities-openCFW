@@ -113,25 +113,25 @@ PROFILE_PINS = {
         ),
         "production_offset": 123_200,
         "overlay": (
-            143_227,
-            "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
+            147_021,
+            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
         ),
         "component": (
-            3_666_623,
-            "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b",
+            3_670_417,
+            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
         ),
         "package": (
-            4_445_117,
-            "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6",
+            4_448_911,
+            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
         ),
         "replacement_sha256": (
             "725846b2fb35bfa360ede03e42d542262fbc7f74a4aea101e6d8a9d2e2bc9bf6"
         ),
         "accounting": {
-            "generated_patch_site_bytes": 99_192,
-            "opaque_base_bytes": 3_423_990,
-            "replaced_stock_function_bytes": 99_370,
-            "source_owned_bytes": 143_409,
+            "generated_patch_site_bytes": 103_358,
+            "opaque_base_bytes": 3_419_824,
+            "replaced_stock_function_bytes": 103_536,
+            "source_owned_bytes": 147_203,
             "source_owned_in_place_bytes": 182,
         },
     },
@@ -144,16 +144,16 @@ PROFILE_PINS = {
         ),
         "production_offset": 125_024,
         "overlay": (
-            126_462,
-            "f5d4a4e441b1185001e031d1b9d319474ffd721c1280e1611e29f08169cb46cc",
+            144_266,
+            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
         ),
         "component": (
-            3_649_858,
-            "0d765ead02aa3d9981fe14b4aa8663bff57f12b307a2f9ce7e6d226225523a16",
+            3_667_662,
+            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
         ),
         "package": (
-            4_428_352,
-            "75af4c1facb8c663cff2a8d4469625261ffa04d9c9587dc0db9ecf2c2f401b6d",
+            4_446_156,
+            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
         ),
         "replacement_sha256": (
             "f5a86d3592c9b16fae073cfc5e9633dd5789985adb208cf02174be9aac6fc42e"

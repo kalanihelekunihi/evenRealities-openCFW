@@ -2,6 +2,43 @@
 
 ## Continuation status
 
+### Destructive BLE transition result
+
+The owner explicitly designated B56EE2 as a sacrificial development unit and
+authorized firmware writes. The iPhone debug probe re-established the direct
+phone role, sent the recovered 244-byte ACE DFU request, and independently
+observed the Secure DFU advertisement `B210_DFU_B56EE3`. Nordic Secure DFU
+then verified and installed the owner-signed 24,576-byte temporary transition
+bootloader: every progress callback from 0 through 100 percent completed and
+the terminal DFU state reported success.
+
+The device did not advertise after the activation reset. Neither a filtered
+iPhone CoreBluetooth inventory nor a broad macOS CoreBluetooth scan observed
+the application, Secure DFU, or transition advertisement for more than the
+expected reset interval. The second, source-boot staging archive was therefore
+not transmitted. B56EE2 is presently non-advertising and requires a physical
+power cycle or SWD recovery before it can provide further evidence.
+
+The ring had been paired to and connected through this Mac before the write,
+and the retail application permits only one host connection. That explains the
+earlier Mac/iPhone contention but not the post-activation silence: after the
+DFU reset, `system_profiler` listed no connected R1, and CoreBluetooth returned
+no already-connected peripheral for either the exact BAE8 service or Nordic
+`FE59`. The transition activation terminated the prior host connection and no
+new connection is currently suppressing its advertisements.
+
+Postmortem comparison against the SHA-pinned live bootloader found a concrete
+hardware configuration defect in the first transition build. The retail
+`nrf_sdh_enable_request` loads the exact `nrf_clock_lf_cfg_t` bytes
+`00 10 02 01` from `0x000FDC68`: internal LFRC, calibration interval 16,
+temperature interval 2, and 500-ppm accuracy. The source reconstruction had
+inherited the PCA10056 example's external LFXO selection. The corrected build
+pins all four recovered values, restores MBR-address population as the first
+boot operation, and changes the preflight settings load from mutating
+`nrf_dfu_settings_init(false)` to read-only `nrf_dfu_settings_reinit()`.
+Those corrections are source/build verified but are not yet physical proof;
+the failed unit cannot receive them over BLE while it is non-advertising.
+
 After the read-only campaign below, the owner-authorized ACE path captured all
 216 live flash pages at `0x27000..<0xFF000` plus the exact 0x308-byte UICR
 extent. Those records now pass the page-by-page mixed-provenance recovery-basis
@@ -9,11 +46,11 @@ and offline deployment verifiers. The owner-signed source build also now
 contains a source-built `OPENR1-RECOVERY` GATT loader below slot 0, so later
 application interruption is recoverable without the retail bootloader.
 
-The ring was observed advertising again on the same CoreBluetooth UUID after
-the build work. No firmware mutation has occurred. A BLE-only first install is
-still withheld because replacement of page zero has an unavoidable
-nonrecoverable power-loss window without SWD. This is distinct from the now
-closed backup, owner-key, and subsequent-update recovery gaps.
+Before the destructive continuation, the ring was observed advertising again
+on the same CoreBluetooth UUID after the build work. The paragraph above now
+supersedes the earlier no-mutation/withheld decision: the first transition
+write was attempted and completed, while the following reset failed before
+the page-zero source image was staged.
 
 A final post-build read-only preflight repeated the same authenticated route.
 The ring advertised at the same CoreBluetooth UUID, exposed exactly the BAE8
@@ -30,15 +67,23 @@ CMSIS-DAP, Nordic, or serial debug probe and no compatible programmer command.
 An owner-authorized R1 advertising as `EVEN R1_B56EE2` was exercised from
 macOS through CoreBluetooth. The probe was limited to advertisement and GATT
 discovery, notification-CCCD setup, the recovered ephemeral `pairAuth` phone
-role selector, and fixed read-only `deviceInfo` and `deviceStatus` requests.
-No arbitrary write interface exists in the probe. No DFU, advertising-control,
-power, storage, sensor-control, factory/eAT, NFC, or flash operation was sent.
+role selector, fixed read-only `deviceInfo` and `deviceStatus` requests, and a
+later bounded channel-coexistence test. That test used only the seven-byte
+legacy opcode-`0x89` frame with byte 3, its recovered command-valid flag, set
+to zero; consequently none of the wear, secondary-mode, touch, regulator, or
+radio-policy actions could be selected. No arbitrary write interface exists
+in the probe. No DFU, advertising-control, power, storage, sensor-control,
+factory/eAT, NFC, or flash operation was sent.
 
-The checked-in C utility generates the three allowed frames through
-`r1_model_encode` and `r1_fragment_message`. The Swift transport refuses to
-start unless its independently implemented framing is byte-identical to those
-C vectors. Every received model is accepted only after the non-reflected outer
-Castagnoli CRC, declared length, and direction-specific inner MODBUS CRC pass.
+The checked-in C utility generates the three allowed channel-2 frames through
+`r1_model_encode` and `r1_fragment_message` and emits the fixed non-mutating
+channel-1 frame. The Swift transport refuses to start unless its independently
+implemented framing is byte-identical to those C vectors. Every received
+channel-2 model is accepted only after the non-reflected outer Castagnoli CRC,
+declared length, and direction-specific inner MODBUS CRC pass. A channel-1
+reply is counted only if it exactly equals the recovered seven-byte
+acknowledgment; unrelated channel-1 notifications are reported but not
+misclassified.
 Manufacturer contents, the device address, the provisioned serial, protocol
 payload values, and bond keys are not retained in this record.
 
@@ -81,6 +126,72 @@ CoreBluetooth discovered exactly two primary services:
 This confirms the recovered four-lane BAE8 layout on `2.2.8.0002` and the
 Nordic Secure DFU control point. No readable flash, UICR, memory, or backup
 characteristic exists.
+
+CoreBluetooth reported maximum write-value lengths of 512 bytes with response
+and 20 bytes without response on every continuation connection. The latter is
+useful host-API evidence for the active link bound, but it is not promoted to
+an exact ATT-MTU or data-length claim without raw HCI capture.
+
+## Raw-HCI capture attempt and evidence gate
+
+Apple PacketLogger 26.0 is installed with both GUI and command-line capture
+paths. An authorized capture was started before a repeated bounded 20/20
+coexistence run. The live ring run itself again completed all twenty channel-2
+responses with zero loss, but PacketLogger produced only one note record:
+`Disconnected from OS X Device`. The `.pklg` is exactly 260 bytes with SHA-256
+`f0c2c2f96a0e1c67471032379e53ad265dc64af81933c505c59a05f119a419e4`.
+PacketLogger's live GUI likewise remained at zero HCI/ACL packets. The macOS
+unified log provides the decisive cause after successful PacketLogger
+authentication: `Bluetooth Profile Required`. No diagnostic configuration
+profile was installed or system security setting changed. Apple's official
+Profiles and Logs page identifies the required macOS download as
+`Bluetooth_macOS.mobileconfig` with separate logging instructions; both require
+an Apple Developer sign-in and installing the profile remains a separately
+confirmed system-security action.
+
+`tools/analyze_r1_hci_capture.py` now independently parses the Apple
+PacketLogger record envelope, HCI event/ACL records, fragmented L2CAP, and ATT.
+It omits addresses, keys, and ATT values and can require exact capture hash,
+connection interval, MTU exchange, data-length change, PHY, encryption,
+Number Of Completed Packets, channel-2 write/notification traffic, and ATT
+Prepare/Execute Write rejection. Six synthetic tests cover complete evidence
+and every relevant fail-closed boundary. The actual 260-byte capture is
+correctly reported as `note: 1`, with all eight evidence gates false; therefore
+it closes no raw-HCI capability row and records a precise external prerequisite
+instead of being mistaken for a valid trace.
+
+## Paired-iPhone continuation
+
+The paired iPhone 17 Pro Max running iOS 27.0 was also exercised through nRF
+Connect for Mobile. A name-filtered scan displayed `EVEN R1_B56EE2` as
+connectable, decoded company identifier `0x5245`, and independently classified
+the advertisement as `DFU: Yes (nRF5 SDK)`. One connection reached the iOS
+Bluetooth pairing prompt; owner approval briefly produced a connected state
+and CoreBluetooth service discovery. Later attempts disconnected during
+service discovery. At the end of the bounded run nRF Connect showed a cached
+last value of -94 dBm and no new packet after 18:21, so the later failures are
+recorded as stale/weak-radio evidence rather than a firmware rejection.
+
+iOS 27 did not expose the Bluetooth packet logger service through the prepared
+developer-device tunnel, so the phone added no raw ATT/HCI evidence. The
+source-only companion under `tools/ios/R1PhoneDiagnostics` nevertheless builds
+for generic iOS with signing disabled. It contains only exact-vector-checked
+phone-role, device-info, status, and command-invalid opcode-`0x89` operations;
+physical installation was unavailable because this Mac has no development
+provisioning profile for its bundle identifier.
+
+nRF Connect was not given either build artifact. The Nordic
+`openr1-owner-signed.zip` is an application-only package rooted at `0x27000`,
+declares SoftDevice requirement `0x0100`, and necessarily retains the opaque
+S140 and retail bootloader. The opaque-free source bundle instead installs
+source-built MCUboot/BLE at page zero and is an
+`openr1-transparent-full-flash` archive, not a Nordic Secure DFU ZIP. Treating
+the former as completion would violate the source boundary; feeding the latter
+to the retail DFU client would violate both its format and the verified
+first-install recovery contract. During this initial nRF Connect pass, no
+erase, DFU transition, or firmware write was attempted. The later dedicated,
+hash-pinned debug-probe write is the separately recorded destructive
+continuation at the top of this document.
 
 ## Role, bond, and reconnect evidence
 
@@ -126,8 +237,8 @@ waiting for replies. All twenty responses were checksum-valid and ordered:
 
 The monotonic latency growth is physical queue/backpressure evidence for the
 retail channel-2 plane. It does not validate source-built scheduler tick units,
-channel-1 interference, raw HVN completion counts, or the four-slot Zephyr
-notification pool because the source-built image was not installed.
+raw HVN completion counts, or the four-slot Zephyr notification pool because
+the source-built image was not installed.
 
 ## CCCD and disconnect recovery
 
@@ -158,13 +269,39 @@ This closes later-revision CCCD toggle and clean disconnect/reconnect behavior.
 It does not expose the stock raw HVN credit counter or prove the source-built
 runtime's disconnect cleanup until that image can be installed safely.
 
-## Channel-1 decision
+## Interleaved channel-1/channel-2 load
 
-No channel-1 diagnostic command was sent. The repository records a demonstrated
-244-to-36-byte channel-1 parser overwrite on retail `2.2.7.0005`; the available
-ring runs `2.2.8.0002`, for which no authenticated image or proof of repair is
-available. Exercising even an intended read-only command on a primary device
-without flash/UICR recovery would not meet the project's safety boundary.
+After the exact recovery basis and fail-closed SWD rollback tooling existed, a
+new fixed probe mode exercised cross-lane receive load without invoking a
+diagnostic or state-changing route. It subscribed to both notification lanes,
+completed the phone-role selector, and alternated each channel-2 status request
+with the seven-byte channel-1 opcode-`0x89` frame whose command-valid byte is
+zero. The probe caps this mode at twenty channel-1 writes, requires a bounded
+channel-2 burst, and forbids combining it with CCCD cycling or intentional
+disconnect.
+
+A one-channel-1/three-channel-2 preliminary run returned all three status
+responses with zero loss. The full run then alternated twenty writes on each
+receive characteristic. All twenty channel-2 responses were checksum-valid,
+ordered, and lossless:
+
+| Channel-1 writes | Channel-1 replies observed | Channel-2 sent | Channel-2 received | Drops | Minimum | Mean | Maximum |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 20 | 0 | 20 | 20 | 0 | 179.724 ms | 772.181 ms | 1,318.105 ms |
+
+The increased latency versus the channel-2-only burst is end-to-end
+cross-characteristic coexistence/contended-link evidence on retail
+`2.2.8.0002`; CoreBluetooth cannot separate host write queuing, radio
+scheduling, and firmware processing in that number.
+No channel-1 acknowledgment was observed on the phone-role connection; the
+probe did not select the documented fatal-risk glasses-role branch merely to
+force a reply. This run therefore proves that twenty host-issued bounded
+channel-1 writes did not prevent channel-2 response continuity, but not that
+every unacknowledged channel-1 write reached the firmware, nor channel-1 TX
+saturation, raw HVN counts, or source-built behavior. A clean reconnect
+immediately afterward completed three
+of three sequential status requests with zero loss at 44.877...102.975 ms
+(70.006-ms mean), confirming normal post-test recovery.
 
 ## Deployment decision
 
@@ -186,15 +323,15 @@ settings load is malformed. Mutation, truncation, revocation, and stale-state
 tests are source-host evidence only; power-cut and rollback replay behavior on
 the physical NVS backend remains unvalidated.
 
-The first-install gate nevertheless remains closed. No debug probe enumerates,
-and none of `nrfjprog`, `JLinkExe`, `pyocd`, `openocd`, or `probe-rs` is
-installed. ACE executes through the retail application and cannot remain alive
-after page zero is erased. Nordic Secure DFU can update its signed application
-slot but cannot atomically replace the MBR/retail boot chain with the
-source-built boot partition. A BLE-only page-zero transition therefore has an
-unavoidable nonrecoverable power/radio-loss interval. No flash or erase was
-attempted; the next permitted installation is sector-bounded SWD programming
-followed by exact one-MiB and UICR readback, with mass erase forbidden.
+The complete first-install gate remains open. The owner-authorized BLE
+transition did perform the temporary bootloader flash described above, but it
+did not reach the source-boot staging or page-zero copy. A pinned pyOCD 0.45.1
+runtime and the fail-closed SWD executor are available; no debug probe is
+currently enumerated. The next evidence-producing action is either recovery of
+B56EE2 through power/SWD or installation of the corrected transition on a
+separate explicitly identified sacrificial R1, followed by source recovery,
+application upload, and post-install functional validation. Mass erase remains
+forbidden because the exact recovery basis preserves product data and UICR.
 
 ## Reproduction
 
@@ -212,4 +349,12 @@ xcrun swiftc -warnings-as-errors -framework CoreBluetooth -framework Foundation 
   --status-burst --disconnect-after-ms 100 B56EE2
 /tmp/openr1_ble_probe --timeout 180 --status-count 1 \
   --expect-status-silence-ms 3000 B56EE2
+/tmp/openr1_ble_probe --timeout 180 --pair-role-phone --status-count 20 \
+  --status-burst --channel1-probe-count 20 B56EE2
+python3 r1/tools/analyze_r1_hci_capture.py trace.pklg \
+  --expect-sha256 EXACT_CAPTURE_SHA256 \
+  --channel2-write-handle 0x15 --channel2-notify-handle 0x17 \
+  --require hci --require mtu --require data-length --require phy \
+  --require encryption --require completed-packets \
+  --require queued-write-rejection --require channel2-traffic
 ```

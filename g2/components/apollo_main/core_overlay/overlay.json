@@ -25540,6 +25540,2438 @@
           "target_address": 5084542
         }
       ]
+    },
+    {
+      "function": "open_cfw_nvdb_sensor_caldata_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+        "size": 9482,
+        "sha256": "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_nvdb_sensor_caldata.c factory-record default initializer (stock run 0x00509764, 24 bytes), bound to the retained CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-nvdb-sensor-caldata-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 30,
+        "sha256": "09f3a0502362c7a43a50b0f6318a547787ddb7e526b235ab5046f597bcbff289",
+        "alignment": 4,
+        "offset": 143228,
+        "unrelocated_sha256": "09b2b9e5cf5bcd8e8f74345595c7032863af8c6577872cc71f56fadeafd4e30a"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_crc16_ccitt",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_nvdb_sensor_caldata_update",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+        "size": 9482,
+        "sha256": "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_nvdb_sensor_caldata.c primary whole-record updater (stock run 0x0050990C, 120 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and the NVDB blob write adapter at 0x00510602",
+        "evidence": "docs/research/g2-nvdb-sensor-caldata-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 530,
+        "sha256": "675cc8839ae89a216ad46d44da9fc87192c567aa65ad73cfd73095fd0e16173b",
+        "alignment": 4,
+        "offset": 143260,
+        "unrelocated_sha256": "9b48cbebd8350230b309304adf558aeed8a183645604d58681e4d51a4fedc7ef"
+      },
+      "relocations": [
+        {
+          "offset": 500,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_crc16_ccitt",
+          "target_address": 4828372
+        },
+        {
+          "offset": 526,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_nvdb_sensor_caldata_db_write",
+          "target_address": 5309954
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_nvdb_sensor_caldata_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+        "size": 9482,
+        "sha256": "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_nvdb_sensor_caldata.c _nvdbUpdataSensorCaldata migration callback (stock run 0x0050977C, 400 bytes), bound to the retained NVDB blob read adapter at 0x005105F0 and the source-owned primary updater leaf",
+        "evidence": "docs/research/g2-nvdb-sensor-caldata-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 88,
+        "sha256": "b5a6062c126dfdffc8d88911d1bb2e4cd4fd870eddd723a489867a7368ac9f70",
+        "alignment": 4,
+        "offset": 143792,
+        "unrelocated_sha256": "afda7706aab1c79cb59d97ec980543905a8ab645b53fb9b71f5f0266031fd603"
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_nvdb_sensor_caldata_db_read",
+          "target_address": 5309936
+        },
+        {
+          "offset": 78,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_nvdb_sensor_caldata_update",
+          "target_function": "open_cfw_nvdb_sensor_caldata_update"
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_nvdb_sensor_caldata_ag_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+        "size": 9482,
+        "sha256": "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_nvdb_sensor_caldata.c AG factory-record default initializer (stock run 0x00509984, 22 bytes), bound to the retained CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-nvdb-sensor-caldata-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 30,
+        "sha256": "9b63e9cf29c8457cf5d9e455c79819df676fd2d62449d8e3768a7b2bf3087df4",
+        "alignment": 4,
+        "offset": 143880,
+        "unrelocated_sha256": "50b77e41bc545bff7254179f93a87689bfdbe1e6b6b8599718ba7bb274d2c714"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_crc16_ccitt",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_nvdb_sensor_caldata_ag_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+        "size": 9482,
+        "sha256": "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_nvdb_sensor_caldata.c AG migration callback (stock run 0x0050999A, 4 bytes); compiles byte-identically to the stock body and calls no providers",
+        "evidence": "docs/research/g2-nvdb-sensor-caldata-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 4,
+        "sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+        "alignment": 4,
+        "offset": 143912,
+        "unrelocated_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4"
+      },
+      "relocations": []
+    },
+    {
+      "function": "open_cfw_nvdb_sensor_caldata_ag_update",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+        "size": 9482,
+        "sha256": "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_nvdb_sensor_caldata.c AG selective updater (stock run 0x0050999E, 90 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and the NVDB blob write adapter at 0x00510602",
+        "evidence": "docs/research/g2-nvdb-sensor-caldata-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 370,
+        "sha256": "1438593d32a4a55b9def369732c6f4c097e4c8d5c337712010cd4e7503db37b8",
+        "alignment": 4,
+        "offset": 143916,
+        "unrelocated_sha256": "2ff5bf72cffdef57b7b56f8e3c71958948507139be5199e4e9e106be4b7f42af"
+      },
+      "relocations": [
+        {
+          "offset": 340,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_crc16_ccitt",
+          "target_address": 4828372
+        },
+        {
+          "offset": 366,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_nvdb_sensor_caldata_db_write",
+          "target_address": 5309954
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_nvdb_sensor_caldata_check",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+        "size": 9482,
+        "sha256": "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_nvdb_sensor_caldata.c _nvdbCheckSensorCaldata suspicious-matrix checker (stock run 0x00509A40, 170 bytes), bound to the retained product predicate at 0x0045A568 and carrying the 36-byte default-matrix read-only closure",
+        "evidence": "docs/research/g2-nvdb-sensor-caldata-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_nvdb_sensor_caldata_check",
+        "rodata": {
+          "section": ".rodata.open_cfw_nvdb_sensor_caldata_default_matrix",
+          "size": 36,
+          "sha256": "07beb66d765a155d2367c308a22d9b7f039818d27bf8bdd8f8adab756001bfea",
+          "alignment": 4,
+          "symbols": [
+            {
+              "name": "open_cfw_nvdb_sensor_caldata_default_matrix",
+              "offset": 0,
+              "size": 36
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 284,
+        "sha256": "114a6e53885bd490abadaca76e5a1657f0e57cab77939dd492f802a63a91733f",
+        "alignment": 4,
+        "offset": 144288,
+        "unrelocated_sha256": "6f8845792192cec9fbc11e62a4bd3ab8a459617b14849f7bfb26c88ed1930716",
+        "closure_size": 320,
+        "closure_sha256": "b4ba9e4c35f0d04b7bd2299b69a7875db7ec30b1911fd89d8aec56d22e453ed6",
+        "rodata_offset": 284
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_nvdb_sensor_caldata_pattern_check_enabled",
+          "target_address": 4564328
+        },
+        {
+          "offset": 92,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": "open_cfw_nvdb_sensor_caldata_default_matrix"
+        },
+        {
+          "offset": 96,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": "open_cfw_nvdb_sensor_caldata_default_matrix"
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_nvdb_sensor_caldata_ag_read",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/nvdb_sensor_caldata.c",
+        "size": 9482,
+        "sha256": "3d321cdfffab322fede0d7e3cb6699ba27e49aee9cc14f779da6bac1aafd16a3",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_nvdb_sensor_caldata.c AG reader (stock run 0x005099F8, 70 bytes), bound to the retained NVDB blob read adapter at 0x005105F0 and the source-owned checker leaf",
+        "evidence": "docs/research/g2-nvdb-sensor-caldata-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 358,
+        "sha256": "96a53089b7c65bc4cb4015fedc509c71a3560d6571cb69155003d830f46a5e5a",
+        "alignment": 4,
+        "offset": 144608,
+        "unrelocated_sha256": "70b26164b95e33c8b531687d795859ece99c647904c21dd4b41cc85097b82fc0"
+      },
+      "relocations": [
+        {
+          "offset": 30,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_nvdb_sensor_caldata_db_read",
+          "target_address": 5309936
+        },
+        {
+          "offset": 36,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_nvdb_sensor_caldata_check",
+          "target_function": "open_cfw_nvdb_sensor_caldata_check"
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_setting_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_setting.c",
+        "size": 3628,
+        "sha256": "8205380cddd721ee7e74e08c1ea50618f07cd56158c34b3727bfe4364d240e58",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_setting.c factory-record default initializer (stock run 0x004AEB20, 20 bytes), bound to the retained CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-kvdb-setting-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 28,
+        "sha256": "c047db5caeab31345209aeee21a3604968571bd7b714544a3ef8f7d4cd161851",
+        "alignment": 4,
+        "offset": 144968,
+        "unrelocated_sha256": "dda306fe34d39fdc69641681884b1eb382fac9ad55d916b1e94a026198e2c48c"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_setting_crc16",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_write_setting",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_setting.c",
+        "size": 3628,
+        "sha256": "8205380cddd721ee7e74e08c1ea50618f07cd56158c34b3727bfe4364d240e58",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_setting.c SVC_KvdbWriteSetting whole-record writer (stock run 0x004AEC04, 112 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and blob write adapter at 0x004D957E",
+        "evidence": "docs/research/g2-kvdb-setting-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_write_setting",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 10,
+          "sha256": "19a552ed8748679e8e82cf235d4e0322ebbfcf338115e16818f5c8fe924a5f11",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 10
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 160,
+        "sha256": "5e036c7359720061def8b4d097bc1cb0c482e1ba9e384df4711f5662259e4286",
+        "alignment": 4,
+        "offset": 144996,
+        "unrelocated_sha256": "cd03457614528b5dbd8f9bffc337f9c6965e581ae245d4a9747f63f708089ce1",
+        "closure_size": 170,
+        "closure_sha256": "2e0752d6b98044ab8f13b9ab657316e929bff181bf016482336c758ff2c3a536",
+        "rodata_offset": 160
+      },
+      "relocations": [
+        {
+          "offset": 132,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_setting_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 138,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 142,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 152,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_setting_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_setting_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_setting.c",
+        "size": 3628,
+        "sha256": "8205380cddd721ee7e74e08c1ea50618f07cd56158c34b3727bfe4364d240e58",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_setting.c _kvdbUpdataSetting migration callback (stock run 0x004AEB34, 208 bytes), bound to the retained blob read adapter at 0x004D956C and the source-owned whole-record writer leaf",
+        "evidence": "docs/research/g2-kvdb-setting-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_setting_load_and_migrate",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 10,
+          "sha256": "19a552ed8748679e8e82cf235d4e0322ebbfcf338115e16818f5c8fe924a5f11",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 10
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 64,
+        "sha256": "bd8cc4ff73b35d64454f466a31709525beae3bfe8213fe660bccbebb2668d5d7",
+        "alignment": 4,
+        "offset": 145168,
+        "unrelocated_sha256": "30840bf34f8e865839c79c7d49897834ccfa67f98bf5a924467f15997c1a2bd4",
+        "closure_size": 74,
+        "closure_sha256": "aa72e7384db9eaeee9c78473bd8e3957530d3ffd0c1eecf08efca48105166927",
+        "rodata_offset": 64
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_setting_db_read",
+          "target_address": 5084524
+        },
+        {
+          "offset": 54,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_write_setting",
+          "target_function": "open_cfw_kvdb_write_setting"
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_time_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_time.c",
+        "size": 3329,
+        "sha256": "1643ea64328e021ae2176b55513df76d79ab7c6e0f7eabaecf982b42a211d13c",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_time.c factory-record default initializer (stock run 0x00585618, 20 bytes), bound to the retained CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-kvdb-time-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 28,
+        "sha256": "b0e44ff7f6a0ff63c19d6c96f0c832570b21a697d7ac0aefc2c86c9a2383a139",
+        "alignment": 4,
+        "offset": 145244,
+        "unrelocated_sha256": "0c833ddbc237c3e73365402d632519a5c8271a48ca3d92bced94f9db2792d3f4"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_crc16",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_write_time",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_time.c",
+        "size": 3329,
+        "sha256": "1643ea64328e021ae2176b55513df76d79ab7c6e0f7eabaecf982b42a211d13c",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_time.c SVC_KvdbWriteTime timestamp/timezone writer (stock run 0x00585758, 174 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and blob write adapter at 0x004D957E",
+        "evidence": "docs/research/g2-kvdb-time-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_write_time",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 7,
+          "sha256": "a650f27515200b1fc386c5a9579cf83a09d1df0fff42a0554736f31fe4b854c8",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 7
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 54,
+        "sha256": "ab340649579eed0a4f99da6a29f07782ceb16786f62762f05a613471ccd6fc18",
+        "alignment": 4,
+        "offset": 145272,
+        "unrelocated_sha256": "cee48f1160343958adff02d98f452809f0e5ba9676527e1db4ad6ec938ee2f97",
+        "closure_size": 61,
+        "closure_sha256": "6439fce778e3ca27717d2fb4aaf399e4cf23c77a95c5bd8dc92353269a1b1174",
+        "rodata_offset": 54
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 30,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 34,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 50,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_kvdb_time_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_time_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_time.c",
+        "size": 3329,
+        "sha256": "1643ea64328e021ae2176b55513df76d79ab7c6e0f7eabaecf982b42a211d13c",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_time.c _kvdbUpdataTime migration callback (stock run 0x0058562C, 300 bytes), bound to the retained blob read adapter at 0x004D956C, the CRC-16 provider at 0x0049ACD4, and the blob write adapter at 0x004D957E with the writer body inlined by the reviewed toolchain",
+        "evidence": "docs/research/g2-kvdb-time-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_time_load_and_migrate",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 7,
+          "sha256": "a650f27515200b1fc386c5a9579cf83a09d1df0fff42a0554736f31fe4b854c8",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 7
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 100,
+        "sha256": "b0c071e59617fb4234e7d7cf4bc3e73614ff1669e4c7192486b128ca28896cc5",
+        "alignment": 4,
+        "offset": 145336,
+        "unrelocated_sha256": "5f19ec9331faad3fcf332213393f514cb12bc3969f4069c47c7e7b22a751ce03",
+        "closure_size": 107,
+        "closure_sha256": "78535218808fbe06b1520fde4bdb17b8619223fda68537b4fcea2c20c824360a",
+        "rodata_offset": 100
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_db_read",
+          "target_address": 5084524
+        },
+        {
+          "offset": 70,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 76,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 80,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 90,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_time_format_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_time_format.c",
+        "size": 4014,
+        "sha256": "97c415e62c39745311e2110d38aeb7dab854f78f8dd12d5fdc391de8d37327c1",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_time_format.c factory-record default initializer (stock run 0x0049AE90, 20 bytes), bound to the retained CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-kvdb-time-format-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 28,
+        "sha256": "094edc6c61fd2991c10f407ae431ab159bbfe2f9a2421e8ffa02a37708161687",
+        "alignment": 4,
+        "offset": 145444,
+        "unrelocated_sha256": "aa701b8da886247b6dec6258bbd8378d9d9947b770f93fc126a40d10f5e32084"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_format_crc16",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_write_time_format",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_time_format.c",
+        "size": 4014,
+        "sha256": "97c415e62c39745311e2110d38aeb7dab854f78f8dd12d5fdc391de8d37327c1",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_time_format.c SVC_KvdbWriteTimeFormat whole-record writer (stock run 0x0049AF74, 110 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and blob write adapter at 0x004D957E",
+        "evidence": "docs/research/g2-kvdb-time-format-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_write_time_format",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 13,
+          "sha256": "783465431524147b27dca3738acccdcb0ec0b945394e22d5625da7ff3c6188ba",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 13
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 96,
+        "sha256": "51ec6cbddebe3c66890deae75056df93d2cd2d39958bc0abc183205878ba09ea",
+        "alignment": 4,
+        "offset": 145472,
+        "unrelocated_sha256": "324d087e57a3cd804208d8ab783e26dcdc4228e2790a50cb55f5713507c32726",
+        "closure_size": 109,
+        "closure_sha256": "dc5a1b8dfc4e3d86c6529d85840b2bb416acc094a15a1c6ac5250273fafd3f52",
+        "rodata_offset": 96
+      },
+      "relocations": [
+        {
+          "offset": 68,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_format_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 74,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 78,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 88,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_format_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_time_format_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_time_format.c",
+        "size": 4014,
+        "sha256": "97c415e62c39745311e2110d38aeb7dab854f78f8dd12d5fdc391de8d37327c1",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_time_format.c _kvdbUpdataTimeFormat migration callback (stock run 0x0049AEA4, 208 bytes), bound to the retained blob read adapter at 0x004D956C, the CRC-16 provider at 0x0049ACD4, and the blob write adapter at 0x004D957E with the writer body inlined by the reviewed toolchain",
+        "evidence": "docs/research/g2-kvdb-time-format-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_time_format_load_and_migrate",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 13,
+          "sha256": "783465431524147b27dca3738acccdcb0ec0b945394e22d5625da7ff3c6188ba",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 13
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 90,
+        "sha256": "25c9625e93699b63ddb2d75f920f9e251adea51a571a57b3114bee1afd4c1eba",
+        "alignment": 4,
+        "offset": 145584,
+        "unrelocated_sha256": "53db9d3ad9b8f5b22db10b0938023672329c1e2774f0c120d48db88cfc1cf57f",
+        "closure_size": 103,
+        "closure_sha256": "310435a6d7a37efb00f5101be02af3ceb88bc78b8c5256e4e05fdf15d7118b3a",
+        "rodata_offset": 90
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_format_db_read",
+          "target_address": 5084524
+        },
+        {
+          "offset": 60,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_format_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 66,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 70,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 80,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_time_format_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_temperature_unit_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_temperature_unit.c",
+        "size": 4260,
+        "sha256": "288f83e95b9526816845f197d0ca7c355a259a03348c0e2140346cb30a01e808",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_temperature_unit.c factory-record default initializer (stock run 0x0049B014, 20 bytes), bound to the retained CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-kvdb-temperature-unit-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 28,
+        "sha256": "2141837a6d4331ad4f43463d722e853f9b0b802fb756dbfbb499151be0a94c0e",
+        "alignment": 4,
+        "offset": 145688,
+        "unrelocated_sha256": "c214806c9f9e46a4e86df2200e4734a8e162ad52cdd49146628059d1eca525b8"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_temperature_unit_crc16",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_write_temperature_unit",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_temperature_unit.c",
+        "size": 4260,
+        "sha256": "288f83e95b9526816845f197d0ca7c355a259a03348c0e2140346cb30a01e808",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_temperature_unit.c SVC_KvdbWriteTemperatureUnit whole-record writer (stock run 0x0049B0F8, 110 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and blob write adapter at 0x004D957E",
+        "evidence": "docs/research/g2-kvdb-temperature-unit-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_write_temperature_unit",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 18,
+          "sha256": "8f745f480721e2fc9b155f7f4003231fa356b06e8783cd619aabefb62fefee4e",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 18
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 96,
+        "sha256": "1ec974612be362e177a144def2942618d8ee0544066ef1ac8c5e5f2d0ff4c10c",
+        "alignment": 4,
+        "offset": 145716,
+        "unrelocated_sha256": "54be886fbdc6f1ae594dc3b9d56371bc8a1a6006e35c97e4f1780ccb0f1d385a",
+        "closure_size": 114,
+        "closure_sha256": "c79e7597fa390201825ef0af042c811ee33b4852a804b80379d683b24ffcafaa",
+        "rodata_offset": 96
+      },
+      "relocations": [
+        {
+          "offset": 68,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_temperature_unit_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 74,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 78,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 88,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_temperature_unit_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_temperature_unit_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_temperature_unit.c",
+        "size": 4260,
+        "sha256": "288f83e95b9526816845f197d0ca7c355a259a03348c0e2140346cb30a01e808",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_temperature_unit.c _kvdbUpdataTemperatureUnit migration callback (stock run 0x0049B028, 208 bytes), bound to the retained blob read adapter at 0x004D956C, the CRC-16 provider at 0x0049ACD4, and the blob write adapter at 0x004D957E with the writer body inlined by the reviewed toolchain",
+        "evidence": "docs/research/g2-kvdb-temperature-unit-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_temperature_unit_load_and_migrate",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 18,
+          "sha256": "8f745f480721e2fc9b155f7f4003231fa356b06e8783cd619aabefb62fefee4e",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 18
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 90,
+        "sha256": "43d98b5b2b2d259525cf4d4f18c0937e700c6749cf9d6223dcc6be02d1006646",
+        "alignment": 4,
+        "offset": 145832,
+        "unrelocated_sha256": "055b202fb2584ee262b241af4ea01523a3b7124299e66cb21b657e9c6e92a377",
+        "closure_size": 108,
+        "closure_sha256": "f773fe2081f3443bb0ccf20648a4e3b55e1f4a821cb64fe1d94b746e161fe069",
+        "rodata_offset": 90
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_temperature_unit_db_read",
+          "target_address": 5084524
+        },
+        {
+          "offset": 60,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_temperature_unit_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 66,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 70,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 80,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_temperature_unit_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_universal_setting_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_universal_setting.c",
+        "size": 4291,
+        "sha256": "1399f2936a27bb0a3643c139b62b8fb77a4aca70d0d6802a7988e14b87a0f1a0",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-universal-setting-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_universal_setting.c factory-record default initializer (stock run 0x0049AD0C, 20 bytes), bound to the retained CRC-16 provider at 0x0049ACD4"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 28,
+        "sha256": "d2a18977564331b3f610ee47b0f7ad2361fc69414fc58982d05fc5c46f51679d",
+        "alignment": 4,
+        "offset": 145940,
+        "unrelocated_sha256": "f83103b3d859854ebc6f0e25d006d1500439d7bc8cf0f70d12b57baae571c25f"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_universal_setting_crc16",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_write_universal_setting",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_universal_setting.c",
+        "size": 4291,
+        "sha256": "1399f2936a27bb0a3643c139b62b8fb77a4aca70d0d6802a7988e14b87a0f1a0",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-universal-setting-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_universal_setting.c SVC_KvdbWriteUniversalSetting whole-record writer (stock run 0x0049ADF0, 112 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and blob write adapter at 0x004D957E"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_write_universal_setting",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 19,
+          "sha256": "05180684b8813af4a4cd4e7755e6623388a92988ab3108b0f107fe7ff6515829",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 19
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 128,
+        "sha256": "1a0a5ec5db3d5bda7f7ff353c02260a60694db9b0c210ad8bdb5f3abfee5be80",
+        "alignment": 4,
+        "offset": 145968,
+        "unrelocated_sha256": "24f9b942202cae714e2ce35c738dce1079ac1a847465a09c864d5d9a14469ff9",
+        "closure_size": 147,
+        "closure_sha256": "30a399b07d41ed9edfee2d3815d8a9c9a63407450e2d8d99de5e7abf270d536d",
+        "rodata_offset": 128
+      },
+      "relocations": [
+        {
+          "offset": 100,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_universal_setting_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 106,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 110,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 120,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_universal_setting_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_universal_setting_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_universal_setting.c",
+        "size": 4291,
+        "sha256": "1399f2936a27bb0a3643c139b62b8fb77a4aca70d0d6802a7988e14b87a0f1a0",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-universal-setting-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_universal_setting.c _kvdbUpdataUniversalSetting migration callback (stock run 0x0049AD20, 208 bytes), bound to the retained blob read adapter at 0x004D956C, the CRC-16 provider at 0x0049ACD4, and the blob write adapter at 0x004D957E with the writer body inlined by the reviewed toolchain"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_universal_setting_load_and_migrate",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 19,
+          "sha256": "05180684b8813af4a4cd4e7755e6623388a92988ab3108b0f107fe7ff6515829",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 19
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 92,
+        "sha256": "084986ec47cd44a32dd798f7a7efbcf081f1c839e1b01fb750cdddd1b1ca9a25",
+        "alignment": 4,
+        "offset": 146116,
+        "unrelocated_sha256": "156dcc05dc48fc39e5d93a044cf7f5cfd74e535db286a0e5c3d6816f6ab0bd4c",
+        "closure_size": 111,
+        "closure_sha256": "a7feb9f4287ef2d3a0bbe74cc002f3f4ca05b6ac785090c6a3d7d5d4fd57bc2f",
+        "rodata_offset": 92
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_universal_setting_db_read",
+          "target_address": 5084524
+        },
+        {
+          "offset": 62,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_universal_setting_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 68,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 72,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 82,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_universal_setting_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_terminal_mode_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_terminal_mode.c",
+        "size": 3705,
+        "sha256": "33caff3263530ce7e7db7c59caa9b470f019fdccd1fdd720e2b495f2a1e97bfb",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-terminal-mode-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_terminal_mode.c factory-record default initializer (stock run 0x004B03E0, 20 bytes), bound to the retained CRC-16 provider at 0x0049ACD4"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 28,
+        "sha256": "794b84eebaaf0037cad63348b4d0bff7beab904a524e9158f96302257c8f7b54",
+        "alignment": 4,
+        "offset": 146228,
+        "unrelocated_sha256": "0d060ea2ddd7c6c209b64be27512fc9c4eb288eafda08e24e5145ff0c886a72c"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_terminal_mode_crc16",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_write_terminal_mode",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_terminal_mode.c",
+        "size": 3705,
+        "sha256": "33caff3263530ce7e7db7c59caa9b470f019fdccd1fdd720e2b495f2a1e97bfb",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-terminal-mode-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_terminal_mode.c SVC_KvdbWriteTerminalMode whole-record writer (stock run 0x004B04C4, 106 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and blob write adapter at 0x004D957E"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_write_terminal_mode",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 15,
+          "sha256": "a5f39288a1c0e2536931920f6e03fdce8179b81fec25a5fe90b219c5d0e039fe",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 15
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 52,
+        "sha256": "bae2969c84bb3c6e9fd37340eb1f7af305820dae1e0edfccf669bbb4fd8bcdc0",
+        "alignment": 4,
+        "offset": 146256,
+        "unrelocated_sha256": "fa710706fd9c0fe3f749bc5f23a4fa0006569e4a3e656ebf384808afd9fe6aad",
+        "closure_size": 67,
+        "closure_sha256": "2170cb83aa2df9c82dc3337881a77a83e943d45f70b416aeeae87a5b8367b328",
+        "rodata_offset": 52
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_terminal_mode_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 30,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 34,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 44,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_terminal_mode_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_terminal_mode_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_terminal_mode.c",
+        "size": 3705,
+        "sha256": "33caff3263530ce7e7db7c59caa9b470f019fdccd1fdd720e2b495f2a1e97bfb",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-terminal-mode-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_terminal_mode.c _kvdbUpdataTerminalMode migration callback (stock run 0x004B03F4, 208 bytes), bound to the retained blob read adapter at 0x004D956C, the CRC-16 provider at 0x0049ACD4, and the blob write adapter at 0x004D957E with the writer body inlined by the reviewed toolchain"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_terminal_mode_load_and_migrate",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 15,
+          "sha256": "a5f39288a1c0e2536931920f6e03fdce8179b81fec25a5fe90b219c5d0e039fe",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 15
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 94,
+        "sha256": "e8f2f48f2e476fa977eb40e804b48100a0d5dd5609a66e7d9cf1272f9a01d482",
+        "alignment": 4,
+        "offset": 146324,
+        "unrelocated_sha256": "e85606c48798eea3a30c1ea16dd5f5ab89922389c618e745697b01e950ba5c7e",
+        "closure_size": 109,
+        "closure_sha256": "cf0009c78dc443913b7637df5b78fdd0fda0e84bf6727d49586b7b381b308b8d",
+        "rodata_offset": 94
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_terminal_mode_db_read",
+          "target_address": 5084524
+        },
+        {
+          "offset": 64,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_terminal_mode_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 70,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 74,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 84,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_terminal_mode_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_onboarding_config_set_indexed",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_onboarding_config.c",
+        "size": 3130,
+        "sha256": "f8c3154fe326878b2f89908555238ddc190a6cecc6c874aeed342624b24d561e",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-onboarding-config-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_onboarding_config.c SVC_SetKvdbOnboardingConfig indexed live-byte setter (stock run 0x004A777C, 86 bytes)"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 32,
+        "sha256": "6cd17896ece6ddcb1b5df0dee68bc32850b93783d8cd1d8a0e882537d7a067ce",
+        "alignment": 4,
+        "offset": 146436,
+        "unrelocated_sha256": "6cd17896ece6ddcb1b5df0dee68bc32850b93783d8cd1d8a0e882537d7a067ce"
+      },
+      "relocations": []
+    },
+    {
+      "function": "open_cfw_kvdb_onboarding_config_persist",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_onboarding_config.c",
+        "size": 3130,
+        "sha256": "f8c3154fe326878b2f89908555238ddc190a6cecc6c874aeed342624b24d561e",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-onboarding-config-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_onboarding_config.c SVC_KvdbBlobWriteOnboardingConfig live-byte writer (stock run 0x004A77D2, 78 bytes), bound to the retained blob write adapter at 0x004D957E"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_onboarding_config_persist",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 19,
+          "sha256": "f82dc4777cfb858710aec5bdf1d3369d96894e182463ed95d2f1831fce78c8a3",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 19
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 22,
+        "sha256": "0bf9b2b89fc2c445cee19b1dace00193c51c6c53be1486d9c4fbccab4c8eed79",
+        "alignment": 4,
+        "offset": 146468,
+        "unrelocated_sha256": "af245ee287651ea484a4baa4933dbb403377c0c19aebdfe79972c34606d09816",
+        "closure_size": 41,
+        "closure_sha256": "f90233d182e97178ae240e299f34c22d277b340ee6179d417056b5775b3434bd",
+        "rodata_offset": 22
+      },
+      "relocations": [
+        {
+          "offset": 0,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 18,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_kvdb_onboarding_config_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_onboarding_config_update_and_persist",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_onboarding_config.c",
+        "size": 3130,
+        "sha256": "f8c3154fe326878b2f89908555238ddc190a6cecc6c874aeed342624b24d561e",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-onboarding-config-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_onboarding_config.c update-and-persist wrapper (stock run 0x004A7820, 18 bytes), bound to the retained blob write adapter at 0x004D957E with the setter and writer bodies inlined by the reviewed toolchain"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_onboarding_config_update_and_persist",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 19,
+          "sha256": "f82dc4777cfb858710aec5bdf1d3369d96894e182463ed95d2f1831fce78c8a3",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 19
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 42,
+        "sha256": "52142e5afadff5fdbed758c472f4cff4b9ef2b3ff519c73525b3b4b95e1167e6",
+        "alignment": 4,
+        "offset": 146512,
+        "unrelocated_sha256": "7f6eef9d96b7f4e5cfaaf0b8792ec9ae803a4dab648446b68d6c5873b46de2d0",
+        "closure_size": 61,
+        "closure_sha256": "0b737fbb36d3ebfa4797092d5760ff987f7439a7f48503e1aeeff9b3b0ddf760",
+        "rodata_offset": 42
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 28,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 38,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_kvdb_onboarding_config_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_onboarding_config_get",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_onboarding_config.c",
+        "size": 3130,
+        "sha256": "f8c3154fe326878b2f89908555238ddc190a6cecc6c874aeed342624b24d561e",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-onboarding-config-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_onboarding_config.c scalar live-byte getter (stock run 0x004A7832, 6 bytes)"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 10,
+        "sha256": "4ff0bd48ba298b69682a12e98044e5a689d1e6c02c4d48f5fe858052d8eb351e",
+        "alignment": 4,
+        "offset": 146576,
+        "unrelocated_sha256": "4ff0bd48ba298b69682a12e98044e5a689d1e6c02c4d48f5fe858052d8eb351e"
+      },
+      "relocations": []
+    },
+    {
+      "function": "open_cfw_kvdb_onboarding_config_pointer",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_onboarding_config.c",
+        "size": 3130,
+        "sha256": "f8c3154fe326878b2f89908555238ddc190a6cecc6c874aeed342624b24d561e",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-onboarding-config-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_onboarding_config.c live-record pointer getter (stock run 0x004A7838, 14 bytes)"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 8,
+        "sha256": "7b592059455e488c0de90cbb0fb50995778576f12d6ffed949baeeaf9b1db31d",
+        "alignment": 4,
+        "offset": 146588,
+        "unrelocated_sha256": "7b592059455e488c0de90cbb0fb50995778576f12d6ffed949baeeaf9b1db31d"
+      },
+      "relocations": []
+    },
+    {
+      "function": "open_cfw_kvdb_onboarding_config_read",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_onboarding_config.c",
+        "size": 3130,
+        "sha256": "f8c3154fe326878b2f89908555238ddc190a6cecc6c874aeed342624b24d561e",
+        "license": "GPL-3.0-only",
+        "evidence": "docs/research/g2-kvdb-onboarding-config-recovery.md",
+        "origin": "production clean-room recovery of the stock service_kvdb_onboarding_config.c SVC_KvdbReadOnboardingConfig live-record loader (stock run 0x004A7846, 84 bytes), bound to the retained blob read adapter at 0x004D956C with the pointer getter inlined by the reviewed toolchain"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_onboarding_config_read",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 19,
+          "sha256": "f82dc4777cfb858710aec5bdf1d3369d96894e182463ed95d2f1831fce78c8a3",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 19
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 30,
+        "sha256": "d05b168a6ff6b6a5ec7c912f716c61e4f919c100e8a704b61dda186f7a387712",
+        "alignment": 4,
+        "offset": 146596,
+        "unrelocated_sha256": "d25dd0e65c5ee7450b30f163a4d09c8694dd1616e1c3a5e458ecef39027069aa",
+        "closure_size": 49,
+        "closure_sha256": "13fcac75ea83a109017bcaff94e9daa94eaa7afd82a9e0bd6af213f939abbbf8",
+        "rodata_offset": 30
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 22,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_onboarding_config_db_read",
+          "target_address": 5084524
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_ring_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_ring.c",
+        "size": 4391,
+        "sha256": "a18825d4061845a39b2cb5926a3b8100f9aba9aaf927e74f0c4d08a7db288a13",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_ring.c factory-record default initializer (stock run 0x005D9B6C, 22 bytes), bound to the retained CRC-16 provider at 0x0049ACD4",
+        "evidence": "docs/research/g2-kvdb-ring-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 28,
+        "sha256": "039ebd6463a0558c5f67b20977c0bc9c650431c25ebdf235215a9bf539de5111",
+        "alignment": 4,
+        "offset": 146648,
+        "unrelocated_sha256": "ad15f9b8e2e8fa7cb07cacc42117ff9547e1e0beb25a29aec6ce38f22472699c"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_ring_crc16",
+          "target_address": 4828372
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_write_ring",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_ring.c",
+        "size": 4391,
+        "sha256": "a18825d4061845a39b2cb5926a3b8100f9aba9aaf927e74f0c4d08a7db288a13",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_ring.c SVC_KvdbWriteRing whole-record writer (stock run 0x005D9D40, 328 bytes), bound to the retained CRC-16 provider at 0x0049ACD4 and the retained blob write adapter at 0x004D957E",
+        "evidence": "docs/research/g2-kvdb-ring-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_write_ring",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 7,
+          "sha256": "ee17f360f81e1018f04864b5d7bcc378d63d9c95f7328e0b0774113345c9b882",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 7
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 262,
+        "sha256": "5b534e24f0bd881194b78c29e20e6f79a7d8ce86e6747d9804d5949037759977",
+        "alignment": 4,
+        "offset": 146676,
+        "unrelocated_sha256": "973fd1d7fa92d07ae8251998f8b487818567a773110cd803bd34096035d5e3ca",
+        "closure_size": 269,
+        "closure_sha256": "bce844394ce61a1bdb081cf06dc7f025595746f24e1a8033ea1aa8b1881b51c3",
+        "rodata_offset": 262
+      },
+      "relocations": [
+        {
+          "offset": 232,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_ring_crc16",
+          "target_address": 4828372
+        },
+        {
+          "offset": 238,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 242,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 258,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_kvdb_ring_db_write",
+          "target_address": 5084542
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_kvdb_ring_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/kvdb_ring.c",
+        "size": 4391,
+        "sha256": "a18825d4061845a39b2cb5926a3b8100f9aba9aaf927e74f0c4d08a7db288a13",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the stock service_kvdb_ring.c _kvdbUpdataRing migration callback (stock run 0x005D9B82, 446 bytes), bound to the retained blob read adapter at 0x004D956C and the source-owned whole-record writer leaf",
+        "evidence": "docs/research/g2-kvdb-ring-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_kvdb_ring_load_and_migrate",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 7,
+          "sha256": "ee17f360f81e1018f04864b5d7bcc378d63d9c95f7328e0b0774113345c9b882",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 7
+            }
+          ]
+        }
+      },
+      "expected": {
+        "size": 66,
+        "sha256": "756135e5a305f917b02c6e788f4b30e550c0a893b08ea018ef9d51ca631ce2e8",
+        "alignment": 4,
+        "offset": 146948,
+        "unrelocated_sha256": "7919e3c1c6850d5c1388fd647f6f0251fd2d20558694ab17ec31734821a94485",
+        "closure_size": 73,
+        "closure_sha256": "0d84d94e249aa98f1e0c0006960b836c41720f8dd477777754939bd03d1f10bb",
+        "rodata_offset": 66
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_ring_db_read",
+          "target_address": 5084524
+        },
+        {
+          "offset": 56,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_kvdb_write_ring",
+          "target_function": "open_cfw_kvdb_write_ring"
+        }
+      ]
     }
   ],
   "in_place_leaves": [
@@ -26671,7 +29103,42 @@
     "open_cfw_littlefs_file_size_public",
     "open_cfw_kvdb_als_scale_default_initialize",
     "open_cfw_kvdb_als_scale_load_and_migrate",
-    "open_cfw_kvdb_write_als_scale"
+    "open_cfw_kvdb_write_als_scale",
+    "open_cfw_nvdb_sensor_caldata_default_initialize",
+    "open_cfw_nvdb_sensor_caldata_update",
+    "open_cfw_nvdb_sensor_caldata_load_and_migrate",
+    "open_cfw_nvdb_sensor_caldata_ag_default_initialize",
+    "open_cfw_nvdb_sensor_caldata_ag_load_and_migrate",
+    "open_cfw_nvdb_sensor_caldata_ag_update",
+    "open_cfw_nvdb_sensor_caldata_check",
+    "open_cfw_nvdb_sensor_caldata_ag_read",
+    "open_cfw_kvdb_setting_default_initialize",
+    "open_cfw_kvdb_write_setting",
+    "open_cfw_kvdb_setting_load_and_migrate",
+    "open_cfw_kvdb_time_default_initialize",
+    "open_cfw_kvdb_write_time",
+    "open_cfw_kvdb_time_load_and_migrate",
+    "open_cfw_kvdb_time_format_default_initialize",
+    "open_cfw_kvdb_write_time_format",
+    "open_cfw_kvdb_time_format_load_and_migrate",
+    "open_cfw_kvdb_temperature_unit_default_initialize",
+    "open_cfw_kvdb_write_temperature_unit",
+    "open_cfw_kvdb_temperature_unit_load_and_migrate",
+    "open_cfw_kvdb_universal_setting_default_initialize",
+    "open_cfw_kvdb_write_universal_setting",
+    "open_cfw_kvdb_universal_setting_load_and_migrate",
+    "open_cfw_kvdb_terminal_mode_default_initialize",
+    "open_cfw_kvdb_write_terminal_mode",
+    "open_cfw_kvdb_terminal_mode_load_and_migrate",
+    "open_cfw_kvdb_onboarding_config_set_indexed",
+    "open_cfw_kvdb_onboarding_config_persist",
+    "open_cfw_kvdb_onboarding_config_update_and_persist",
+    "open_cfw_kvdb_onboarding_config_get",
+    "open_cfw_kvdb_onboarding_config_pointer",
+    "open_cfw_kvdb_onboarding_config_read",
+    "open_cfw_kvdb_ring_default_initialize",
+    "open_cfw_kvdb_write_ring",
+    "open_cfw_kvdb_ring_load_and_migrate"
   ],
   "patch_sites": [
     {
@@ -32507,14 +34974,399 @@
       "expected_sha256": "63ddae17be03306b8a8bb55744d14a5cdec6f3cc6b899b03c43666a26908f7c5",
       "branch": "b_w",
       "target_function": "open_cfw_kvdb_write_als_scale"
+    },
+    {
+      "name": "replace_nvdb_sensor_caldata_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5281636,
+      "expected_size": 24,
+      "expected_sha256": "de5d7932c7206ec0b45983986f89465c9321c1af496c0a0d2b344d4ec5a04ac9",
+      "branch": "b_w",
+      "target_function": "open_cfw_nvdb_sensor_caldata_default_initialize"
+    },
+    {
+      "name": "replace_nvdb_sensor_caldata_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5281660,
+      "expected_size": 400,
+      "expected_sha256": "1e7a393fea147d565878b038fc6f28da1909dd532e49d03754a1a97ec6182edc",
+      "branch": "b_w",
+      "target_function": "open_cfw_nvdb_sensor_caldata_load_and_migrate"
+    },
+    {
+      "name": "replace_nvdb_sensor_caldata_update",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5282060,
+      "expected_size": 120,
+      "expected_sha256": "d150d259a93568b54fb4496e38ef99c74778961dad526f9bd4b822e0b2920393",
+      "branch": "b_w",
+      "target_function": "open_cfw_nvdb_sensor_caldata_update"
+    },
+    {
+      "name": "replace_nvdb_sensor_caldata_ag_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5282180,
+      "expected_size": 22,
+      "expected_sha256": "70a9ed13bd7b982380fd99a4bec78b1285e40d64d7b78858384130ea1f44d501",
+      "branch": "b_w",
+      "target_function": "open_cfw_nvdb_sensor_caldata_ag_default_initialize"
+    },
+    {
+      "name": "replace_nvdb_sensor_caldata_ag_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5282202,
+      "expected_size": 4,
+      "expected_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "branch": "b_w",
+      "target_function": "open_cfw_nvdb_sensor_caldata_ag_load_and_migrate"
+    },
+    {
+      "name": "replace_nvdb_sensor_caldata_ag_update",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5282206,
+      "expected_size": 90,
+      "expected_sha256": "672d51e8e98d7e9709afbecbe606e63e7639a705912090028955869226bc9c92",
+      "branch": "b_w",
+      "target_function": "open_cfw_nvdb_sensor_caldata_ag_update"
+    },
+    {
+      "name": "replace_nvdb_sensor_caldata_ag_read",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5282296,
+      "expected_size": 70,
+      "expected_sha256": "bb55d198e1e11e13c14b6931d4d4ce5a2a9eef7af481ebc3c718ac218912ba39",
+      "branch": "b_w",
+      "target_function": "open_cfw_nvdb_sensor_caldata_ag_read"
+    },
+    {
+      "name": "replace_nvdb_sensor_caldata_check",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5282368,
+      "expected_size": 170,
+      "expected_sha256": "96115eaf104ea073d40f77085ec765f89844909e679bafbdcb16067975cc60b0",
+      "branch": "b_w",
+      "target_function": "open_cfw_nvdb_sensor_caldata_check"
+    },
+    {
+      "name": "replace_kvdb_setting_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4909856,
+      "expected_size": 20,
+      "expected_sha256": "6a4e7922014f2807f0d7ec5b81db9070e3fce9b1ee7eaeedc5258308a767383a",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_setting_default_initialize"
+    },
+    {
+      "name": "replace_kvdb_setting_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4909876,
+      "expected_size": 208,
+      "expected_sha256": "50314234b7adca393a24180077f806b99d2c62774a502f27304ecf725c79c78f",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_setting_load_and_migrate"
+    },
+    {
+      "name": "replace_kvdb_write_setting",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4910084,
+      "expected_size": 112,
+      "expected_sha256": "509916161dca000057a04421b182ba3e0df746be3fa678d10c6a2dcab5fcd9e1",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_write_setting"
+    },
+    {
+      "name": "replace_kvdb_time_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5789208,
+      "expected_size": 20,
+      "expected_sha256": "862508208afbbb15ae5a9fcbf3d98a0e1c11667fcaf380c98df4d899593e24ee",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_time_default_initialize"
+    },
+    {
+      "name": "replace_kvdb_time_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5789228,
+      "expected_size": 300,
+      "expected_sha256": "5493134cbdf79ef2c10c30f677e8bde02a4d3f3ef0e67c098604e52208338645",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_time_load_and_migrate"
+    },
+    {
+      "name": "replace_kvdb_write_time",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5789528,
+      "expected_size": 174,
+      "expected_sha256": "fba27ada5805aad0ebe42a206549d84d62ba9dda85517e41fb8101adede3bb61",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_write_time"
+    },
+    {
+      "name": "replace_kvdb_time_format_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4828816,
+      "expected_size": 20,
+      "expected_sha256": "64e6bd66b34d16ecb86d27ee5833e580427a8d0af5e0acb31d885e21f74e7d51",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_time_format_default_initialize"
+    },
+    {
+      "name": "replace_kvdb_time_format_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4828836,
+      "expected_size": 208,
+      "expected_sha256": "ffba7fb1794d52598a924678baa6c989650a63d76a5ff19baa534540c64b8fc0",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_time_format_load_and_migrate"
+    },
+    {
+      "name": "replace_kvdb_write_time_format",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4829044,
+      "expected_size": 110,
+      "expected_sha256": "14e8f3c8292f2fcde76ad8edc84668e5cd3c571792fdc0f20e8973538f53e9c3",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_write_time_format"
+    },
+    {
+      "name": "replace_kvdb_temperature_unit_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4829204,
+      "expected_size": 20,
+      "expected_sha256": "06b1d8566f7f7686e7d0ae6c2ee8c46cc2f227183db1301de0638cfd868d5a5e",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_temperature_unit_default_initialize"
+    },
+    {
+      "name": "replace_kvdb_temperature_unit_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4829224,
+      "expected_size": 208,
+      "expected_sha256": "f1acbafb6f3571ebc7054ffacb90ff35d1bb69993d9ab4b715cbe5684222929a",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_temperature_unit_load_and_migrate"
+    },
+    {
+      "name": "replace_kvdb_write_temperature_unit",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4829432,
+      "expected_size": 110,
+      "expected_sha256": "b5fd4ef6d6f8da8e21ff45ff152a15cdb30868bfd4ee4fef72afa9848491be2c",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_write_temperature_unit"
+    },
+    {
+      "name": "replace_kvdb_universal_setting_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4828428,
+      "expected_size": 20,
+      "expected_sha256": "8d2f5adbb185b7369e3e63460df44a8199ace0c36148cb6e3fa2d6bad4126832",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_universal_setting_default_initialize"
+    },
+    {
+      "name": "replace_kvdb_universal_setting_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4828448,
+      "expected_size": 208,
+      "expected_sha256": "289664d43303d98ff6d6d292c197fb58b2a372156524aebaba11dcf628ba78c6",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_universal_setting_load_and_migrate"
+    },
+    {
+      "name": "replace_kvdb_write_universal_setting",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4828656,
+      "expected_size": 112,
+      "expected_sha256": "99c63f38cdcdf43567efbc6aa21ef766f63390b8ecb988b860a9346b730b36f9",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_write_universal_setting"
+    },
+    {
+      "name": "replace_kvdb_terminal_mode_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4916192,
+      "expected_size": 20,
+      "expected_sha256": "6cb0d83e6e4fa072ba40ddc3269fd0bfd70f59824fb91ae026a709a3c7752b87",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_terminal_mode_default_initialize"
+    },
+    {
+      "name": "replace_kvdb_terminal_mode_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4916212,
+      "expected_size": 208,
+      "expected_sha256": "fc807e1288da8fbc71e735a839db7993d78da99286f27245802f7f22960f2696",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_terminal_mode_load_and_migrate"
+    },
+    {
+      "name": "replace_kvdb_write_terminal_mode",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4916420,
+      "expected_size": 106,
+      "expected_sha256": "1543cd6e1ac29250f390502c77ab53ddd14d55609f4c350e4dd049ac3521c452",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_write_terminal_mode"
+    },
+    {
+      "name": "replace_kvdb_onboarding_config_set_indexed",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4880252,
+      "expected_size": 86,
+      "expected_sha256": "2d1f3385ca05b98fb342dc34c1ee8ad71aa60175f8af470026fa9be95851a661",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_onboarding_config_set_indexed"
+    },
+    {
+      "name": "replace_kvdb_onboarding_config_persist",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4880338,
+      "expected_size": 78,
+      "expected_sha256": "d67c09e4a97c6506e504143a0f7e196beda3799fa0f7ee8f00069d1a3c510091",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_onboarding_config_persist"
+    },
+    {
+      "name": "replace_kvdb_onboarding_config_update_and_persist",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4880416,
+      "expected_size": 18,
+      "expected_sha256": "bd671bcfd8e230bd4c5aa25927221bc9dea065e75177646d49d13f268930544f",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_onboarding_config_update_and_persist"
+    },
+    {
+      "name": "replace_kvdb_onboarding_config_get",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4880434,
+      "expected_size": 6,
+      "expected_sha256": "c45ce6f337503c4c006d32e9251a9eb2abdf9b50be847dee072a74bc580985e0",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_onboarding_config_get"
+    },
+    {
+      "name": "replace_kvdb_onboarding_config_pointer",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4880440,
+      "expected_size": 14,
+      "expected_sha256": "802bbbec5254cb9a652a5f29a6cae17d15b476cea2f0b7d5099c2ad830a323ed",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_onboarding_config_pointer"
+    },
+    {
+      "name": "replace_kvdb_onboarding_config_read",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4880454,
+      "expected_size": 84,
+      "expected_sha256": "e853e570c2f01ae9464b3d4e532c0e59bf54ab52de8de068545f75810231daa9",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_onboarding_config_read"
+    },
+    {
+      "name": "replace_kvdb_ring_default_initialize",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 6134636,
+      "expected_size": 22,
+      "expected_sha256": "ef35718875dd86b68dcb6ce403d801def07fb263ebce8e276f899e0aaf34c36d",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_ring_default_initialize"
+    },
+    {
+      "name": "replace_kvdb_ring_load_and_migrate",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 6134658,
+      "expected_size": 446,
+      "expected_sha256": "8820609ec9c69ccca51e740e6c6e90c1482bb29b3d7688b13508a787a368dd9a",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_ring_load_and_migrate"
+    },
+    {
+      "name": "replace_kvdb_write_ring",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 6135104,
+      "expected_size": 328,
+      "expected_sha256": "009e81ba8b01aef6489577a8241a55330e68791f2a6c8d6edea9c2223781f6f4",
+      "branch": "b_w",
+      "target_function": "open_cfw_kvdb_write_ring"
     }
   ],
   "overlay_artifact": "apollo_core_overlay.bin",
   "expected": {
-    "overlay_size": 143227,
-    "overlay_sha256": "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10",
-    "component_size": 3666623,
-    "component_sha256": "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+    "overlay_size": 147021,
+    "overlay_sha256": "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+    "component_size": 3670417,
+    "component_sha256": "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
   },
   "toolchain_profiles": {
     "linux-clang": {

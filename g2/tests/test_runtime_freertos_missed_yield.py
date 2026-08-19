@@ -751,18 +751,18 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                143_227,
+                147_021,
                 (
-                    "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"
+                    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
                 ),
-                786,
-                727,
-                3_666_623,
+                812,
+                753,
+                3_670_417,
                 (
-                    "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"
+                    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
                 ),
-                143_409,
-                3_423_990,
+                147_203,
+                3_419_824,
             ),
         )
 

@@ -6669,9 +6669,21 @@ outbound/internal calls, two fixed SRAM records, both keys, both default CRCs,
 and the compiled 3×3 fallback matrix are pinned fail-closed.
 
 `nvdb_sensor_caldata.c` recreates all eight behaviors and passes host and
-freestanding Thumb tests. The candidate is absent from `overlay.json`; the
-stock package still executes the original code, so no source/generated
-ownership bytes are added.
+freestanding Thumb tests. It is now production-routed under the reviewed
+apple-clang profile: eight relocated leaves (30-byte primary and AG default
+initializers, 530-byte primary whole-record updater, 88-byte migration
+callback, 4-byte AG migration callback, 370-byte AG selective updater,
+284-byte suspicious-matrix checker carrying the 36-byte default-matrix
+read-only closure, and 358-byte AG reader) are appended to the overlay, and
+eight entry redirects replace the 900 stock body bytes. Providers bind exactly
+to the retained CRC-16 at `0x0049ACD4`, the NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`, and the product predicate at `0x0045A568`. The
+96-byte alignment and literal island stays retained stock data, both fixed
+SRAM records are untouched, and all four stored roots plus all ten direct
+entry sites now land on the redirects. Canonical component accounting is now
+145,148 source-owned bytes, 100,092 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,423,090 opaque base bytes. The
+linux-clang profile pins await Linux toolchain regeneration.
 
 ## Current first-party NVDB system-data increment
 
@@ -6696,9 +6708,21 @@ the twelve-byte SRAM record, key, factory bytes, and initialized checksum are
 pinned fail-closed.
 
 `kvdb_temperature_unit.c` recreates the default, non-importing migration, and
-writer behaviors and passes host and freestanding Thumb tests. It is absent
-from `overlay.json`; the stock package still executes the original code, so
-no source/generated ownership bytes are added.
+writer behaviors and passes host and freestanding Thumb tests and is now
+production-routed under the reviewed apple-clang profile: three relocated
+leaves (28-byte default initializer, 96-byte whole-record writer, and 90-byte
+migration callback, each binding the retained CRC-16 provider at `0x0049ACD4`
+and the blob read/write adapters at `0x004D956C`/`0x004D957E`, with an
+18-byte key-string read-only closure on each of the two referencing leaves
+and the writer body inlined into the migration callback) are appended to the
+overlay, and three entry redirects replace the 338 stock body bytes. The
+50-byte record, key, path, function, and diagnostic literal tail stays
+retained stock data, the fixed SRAM record is untouched, and both stored
+roots plus all three direct entry sites now land on the redirects. Canonical
+component accounting is now 146,122 source-owned bytes, 101,602 generated
+patch-site bytes, 32 wrapper bytes, 182 source-owned in-place bytes, and
+3,421,580 opaque base bytes. The linux-clang profile pins await Linux
+toolchain regeneration.
 
 ## Current first-party KVDB time-format increment
 
@@ -6709,9 +6733,21 @@ the twelve-byte SRAM record at `0x20003818`, key, factory bytes, and initialized
 checksum are pinned fail-closed.
 
 `kvdb_time_format.c` recreates the default, non-importing migration, and writer
-behaviors and passes host and freestanding Thumb tests. It is absent from
-`overlay.json`; the stock package still executes the original code, so no
-source/generated ownership bytes are added.
+behaviors and passes host and freestanding Thumb tests and is now
+production-routed under the reviewed apple-clang profile: three relocated
+leaves (28-byte default initializer, 96-byte whole-record writer, and 90-byte
+migration callback, each binding the retained CRC-16 provider at `0x0049ACD4`
+and the blob read/write adapters at `0x004D956C`/`0x004D957E`, with a 13-byte
+key-string read-only closure on each of the two referencing leaves and the
+writer body inlined into the migration callback) are appended to the overlay,
+and three entry redirects replace the 338 stock body bytes. The 50-byte
+record, key, path, function, and diagnostic literal tail stays retained stock
+data, the fixed SRAM record is untouched, and both stored roots plus all
+three direct entry sites now land on the redirects. Canonical component
+accounting is now 145,869 source-owned bytes, 101,264 generated patch-site
+bytes, 32 wrapper bytes, 182 source-owned in-place bytes, and 3,421,918
+opaque base bytes. The linux-clang profile pins await Linux toolchain
+regeneration.
 
 ## Current first-party KVDB universal-setting increment
 
@@ -6722,9 +6758,21 @@ the twenty-byte SRAM record at `0x20003824`, key, factory bytes, and initialized
 checksum are pinned fail-closed.
 
 `kvdb_universal_setting.c` recreates the default, non-importing pre-v3
-migration, and writer behaviors and passes host and freestanding Thumb tests.
-It is absent from `overlay.json`; the stock package still executes the original
-code, so no source/generated ownership bytes are added.
+migration, and writer behaviors and passes host and freestanding Thumb tests
+and is now production-routed under the reviewed apple-clang profile: three
+relocated leaves (28-byte default initializer, 128-byte whole-record writer,
+and 92-byte migration callback, each binding the retained CRC-16 provider at
+`0x0049ACD4` and the blob read/write adapters at `0x004D956C`/`0x004D957E`,
+with a 19-byte key-string read-only closure on each of the two referencing
+leaves and the writer body inlined into the migration callback) are appended
+to the overlay, and three entry redirects replace the 340 stock body bytes.
+The 48-byte record, key, path, function, and diagnostic literal tail stays
+retained stock data, the fixed SRAM record is untouched, and both stored
+roots plus all three direct entry sites now land on the redirects. Canonical
+component accounting is now 146,409 source-owned bytes, 101,942 generated
+patch-site bytes, 32 wrapper bytes, 182 source-owned in-place bytes, and
+3,421,240 opaque base bytes. The linux-clang profile pins await Linux
+toolchain regeneration.
 
 ## Current first-party primary KVDB setting increment
 
@@ -6736,8 +6784,19 @@ and upgraded checksums are pinned fail-closed.
 
 `kvdb_setting.c` recreates default initialization, the version-4 whole-record
 writer, and non-importing pre-v4 migration. It passes host and freestanding
-Thumb tests but remains absent from `overlay.json`, so the stock package still
-executes the original code and no ownership bytes are added.
+Thumb tests and is now production-routed under the reviewed apple-clang
+profile: three relocated leaves (28-byte default initializer, 160-byte
+whole-record writer, and 64-byte migration callback, each binding the retained
+CRC-16 provider at `0x0049ACD4` and the blob read/write adapters at
+`0x004D956C`/`0x004D957E`, with a 10-byte key-string read-only closure on each
+of the two referencing leaves) are appended to the overlay, and three entry
+redirects replace the 340 stock body bytes. The 48-byte record, key, path,
+function, and diagnostic literal tail stays retained stock data, the fixed
+SRAM record is untouched, and both stored roots plus all three direct entry
+sites now land on the redirects. Canonical component accounting is now
+145,424 source-owned bytes, 100,432 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,422,750 opaque base bytes. The
+linux-clang profile pins await Linux toolchain regeneration.
 
 ## Current first-party KVDB ALS-scale increment
 
@@ -6772,8 +6831,20 @@ checksum are pinned fail-closed.
 
 `kvdb_terminal_mode.c` recreates default initialization, the version-1
 whole-record writer, and non-importing v0 migration. It passes host and
-freestanding Thumb tests but remains absent from `overlay.json`, so the stock
-package still executes the original code and no ownership bytes are added.
+freestanding Thumb tests and is now production-routed under the reviewed
+apple-clang profile: three relocated leaves (28-byte default initializer,
+52-byte whole-record writer, and 94-byte migration callback, each binding
+the retained CRC-16 provider at `0x0049ACD4` and the blob read/write
+adapters at `0x004D956C`/`0x004D957E`, with a 15-byte key-string read-only
+closure on each of the two referencing leaves and the writer body inlined
+into the migration callback) are appended to the overlay, and three entry
+redirects replace the 334 stock body bytes. The 50-byte record, key, path,
+function, and diagnostic literal tail stays retained stock data, the fixed
+SRAM record is untouched, and both stored roots plus all three direct entry
+sites now land on the redirects. Canonical component accounting is now
+146,615 source-owned bytes, 102,276 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,420,906 opaque base bytes. The
+linux-clang profile pins await Linux toolchain regeneration.
 
 ## Current first-party KVDB time increment
 
@@ -6786,9 +6857,21 @@ value is proven to overlap packed register-name text rather than pointer data.
 
 `kvdb_time.c` recreates default initialization, the version-3 timestamp/timezone
 writer, reserved-byte preservation, and non-importing pre-v3 migration. It
-passes host and freestanding Thumb tests but remains absent from `overlay.json`,
-so the stock package still executes the original code and no ownership bytes
-are added.
+passes host and freestanding Thumb tests and is now production-routed under
+the reviewed apple-clang profile: three relocated leaves (28-byte default
+initializer, 54-byte timestamp/timezone writer, and 100-byte migration
+callback, each binding the retained CRC-16 provider at `0x0049ACD4` and the
+blob read/write adapters at `0x004D956C`/`0x004D957E`, with a 7-byte
+key-string read-only closure on each of the two referencing leaves and the
+writer body inlined into the migration callback) are appended to the overlay,
+and three entry redirects replace the 494 stock body bytes. The 58-byte
+record, key, path, function, and diagnostic literal tail stays retained stock
+data, the fixed SRAM record is untouched, and both stored roots plus all
+three direct entry sites now land on the redirects. Canonical component
+accounting is now 145,625 source-owned bytes, 100,926 generated patch-site
+bytes, 32 wrapper bytes, 182 source-owned in-place bytes, and 3,422,256
+opaque base bytes. The linux-clang profile pins await Linux toolchain
+regeneration.
 
 ## Current first-party KVDB onboarding-config increment
 
@@ -6803,9 +6886,21 @@ strict-interior ingress.
 composed update, scalar and pointer getters, and direct read. It preserves the
 successful null update at index zero, rejects other indices, returns the same
 pointer for every index, and imports the stored byte on read. It passes host
-and freestanding Thumb tests but remains absent from `overlay.json`, so the
-stock package still executes the original code and no ownership bytes are
-added.
+and freestanding Thumb tests and is now production-routed under the reviewed
+apple-clang profile: six relocated leaves (32-byte indexed setter, 22-byte
+live-byte writer, 42-byte update-and-persist wrapper, 10-byte scalar getter,
+8-byte pointer getter, and 30-byte live-record loader, with the referencing
+leaves binding the retained blob read/write adapters at
+`0x004D956C`/`0x004D957E`, a 19-byte key-string read-only closure on each of
+the three referencing leaves, and the setter, writer, and pointer-getter
+bodies inlined into the composing leaves) are appended to the overlay, and
+six entry redirects replace the 286 stock body bytes. The 54-byte record,
+key, path, function, and diagnostic literal tail stays retained stock data,
+the fixed SRAM record is untouched, and all eighteen direct entry sites now
+land on the redirects. Canonical component accounting is now 146,827
+source-owned bytes, 102,562 generated patch-site bytes, 32 wrapper bytes, 182
+source-owned in-place bytes, and 3,420,620 opaque base bytes. The linux-clang
+profile pins await Linux toolchain regeneration.
 
 ## Current first-party KVDB ring increment
 
@@ -6817,8 +6912,20 @@ initialized checksum are pinned fail-closed with zero strict-interior ingress.
 
 `kvdb_ring.c` recreates default initialization, the version-1 MAC/name writer,
 reserved-byte preservation, and non-importing v0 migration. It passes host and
-freestanding Thumb tests but remains absent from `overlay.json`, so the stock
-package still executes the original code and no ownership bytes are added.
+freestanding Thumb tests and is now production-routed under the reviewed
+apple-clang profile: three relocated leaves (28-byte default initializer,
+262-byte whole-record writer, and 66-byte migration callback, each binding
+the retained CRC-16 provider at `0x0049ACD4` and the blob read/write
+adapters at `0x004D956C`/`0x004D957E`, with a 7-byte key-string read-only
+closure on each of the two referencing leaves and the writer called by the
+migration callback as a source-owned leaf) are appended to the overlay, and
+three entry redirects replace the 796 stock body bytes. The 72-byte record,
+key, path, function, and diagnostic literal tail stays retained stock data,
+the fixed SRAM record is untouched, and both stored roots plus both direct
+entry sites now land on the redirects. Canonical component accounting is now
+147,203 source-owned bytes, 103,358 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,419,824 opaque base bytes. The
+linux-clang profile pins await Linux toolchain regeneration.
 
 ## Current first-party KVDB module-configuration increment
 

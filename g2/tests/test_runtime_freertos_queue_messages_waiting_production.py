@@ -286,9 +286,9 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "bd3b32c736e57005c1cbe65a2725fb66ed5389227686ff7961793f699364e68c",
             ),
         },
-        "overlay": (143227, "200b0b3385c26dbe93cfab37503d21f45d3a6a32ee2dd32451c1ce8c63308b10"),
-        "component": (3666623, "ad895f785a66f249a9c4d45ea353b559acebf57ad8f82fedf43af2361e79e83b"),
-        "package": (4445117, "62569df0c68123922de03f482f0affae3975114186581dd30adce650d45f28f6"),
+        "overlay": (147021, "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"),
+        "component": (3670417, "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"),
+        "package": (4448911, "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"),
     },
     "linux-clang": {
         "placements": {
@@ -317,15 +317,15 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
 
 # RECORD-PIN GATE: (region_count, {address_status: (count, total_size)}).
 MANIFEST_PIN: tuple[int, dict[str, tuple[int, int]]] | None = (
-    1274,
+    1400,
     {
         "container_only": (1, 32),
-        "generated_alignment": (111, 220),
-        "generated_source_entry_replacement": (691, 96972),
-        "generated_source_exact_load_image": (1, 6),
-        "generated_source_exact_replacement": (7, 134),
-        "official_blob": (209, 3426034),
-        "source_compiled": (254, 143225),
+    "generated_alignment": (133, 265),
+    "generated_source_entry_replacement": (726, 101_138),
+    "generated_source_exact_load_image": (1, 6),
+    "generated_source_exact_replacement": (7, 134),
+    "official_blob": (225, 3_421_868),
+    "source_compiled": (307, 146_974),
     },
 )
 
