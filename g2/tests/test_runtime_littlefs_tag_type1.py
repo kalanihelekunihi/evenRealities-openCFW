@@ -174,12 +174,12 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            147_021,
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+            164_536,
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
         ),
         "main_component": (
-            3_670_417,
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
+            3_687_932,
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
         ),
         "boot_overlay": (
             662,
@@ -190,20 +190,20 @@ PROFILE_PINS = {
             "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
         ),
         "package": (
-            4_448_911,
-            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
+            4_466_426,
+            "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
         ),
         "flash_plan": (
-            1_046_958,
-            "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c",
+            1_276_602,
+            "cf9da351f2ff66b07c3efaf9543abdd23473c5dd557753854b25fbf5f79628c8",
         ),
         "package_report": (
             2_323,
-            "6d13f1eeacd93be4ed8009d49683225054d4113cfb77c85cc10be43d7f7d8f71",
+            "adb3102a9c28476e357e5fd134054434e200f46579bc5990f5836d2ed05e12d4",
         ),
         "canonical_main_report": (
-            2_671_480,
-            "50b25edcf6d1a80992044522d40d7ccc79036da5c09c108d6e9d855984866f2d",
+            2_694_051,
+            "0d3ed3033c36b4473e4444073fa29df21dd3dcbba1ce01d2eb13809d5610a1a6",
         ),
         "boot_report": (
             128_347,
@@ -1396,7 +1396,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 package_report["unresolved_region_count"],
                 package_report["container_region_count"],
             ),
-            (1460, 2, 5),
+            (1802, 2, 5),
         )
         flash_plan = json.loads(artifacts["flash_plan"].read_text(encoding="utf-8"))
         self.assertEqual(flash_plan["package_sha256"], apple["package"][1])
@@ -1406,7 +1406,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 len(flash_plan["unresolved_flash_regions"]),
                 len(flash_plan["container_only_regions"]),
             ),
-            (1460, 2, 5),
+            (1802, 2, 5),
         )
 
     def test_dual_image_stock_callers_and_dependency_closure_are_exact(self) -> None:

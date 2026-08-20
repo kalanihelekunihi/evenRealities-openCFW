@@ -23,8 +23,8 @@ CANDIDATE = ROOT / "components/apollo_main/core_overlay/charger_common.c"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 PINS = {
     FUNCTION_MAP: "bcf46ec7ffb64fc3146247490f94e83b8069885367e12945b9374d7954cde11b",
-    CLOSURE: "e6fa7a0a328193274d48e5e1707c3970d871a9ffbe0e201a80a509ae49d69e06",
-    PROVENANCE: "16bee4debd7a2047ba6549dacb87ede486a1862994cd81422a750da25a10b582",
+    CLOSURE: "66ef12042a120285653cf24625c5538ee53bfeb92809fe5f3b932c907cec104e",
+    PROVENANCE: "61fcd58f3727a1a287c7030a26c1292fa85ae7aa4265d49a0070e6e4c9eff349",
     CANDIDATE: "1c3b2d7fa0da4e3e4aed565c1e8585638c5dcb0e3ba7a36e0f9335956d7c12ab",
 }
 PHYSICAL = (0x004ACE10, 0x004AD9B8)
@@ -246,8 +246,100 @@ def analyze(image_path: Path = IMAGE) -> dict:
 
     overlay = json.loads(OVERLAY.read_text())
     candidate_rel = str(CANDIDATE.relative_to(ROOT))
-    if any(source.get("path") == candidate_rel for source in overlay["sources"]):
-        raise AuditError("candidate unexpectedly entered production overlay")
+    expected_patches = {
+        "replace_charger_init_battery_sync": (
+            0x004ACF7C, 240,
+            "cf644d6896767580a69237ee70ca971109f791029041e5ae57f0e49f8c0ff25a",
+            "open_cfw_charger_init_battery_sync",
+        ),
+        "replace_charger_deinit_battery_sync": (
+            0x004AD06C, 94,
+            "62c8977e52b362b234934c83e090e4b5b2b9183b50e8751dba7f963a5660d63d",
+            "open_cfw_charger_deinit_battery_sync",
+        ),
+        "replace_charger_compare_and_update_soc": (
+            0x004AD0CA, 464,
+            "cc52b2c86a8b3ef7e4db02b129c12d5333a2a2f22810d0952d23ebe6485a2305",
+            "open_cfw_charger_compare_and_update_soc",
+        ),
+        "replace_charger_compare_and_update_is_charging": (
+            0x004AD29A, 450,
+            "ccb7326dc41fdb422b4b246fa1b2b31747cbdf945190776edc3bc5a83a00e1aa",
+            "open_cfw_charger_compare_and_update_is_charging",
+        ),
+        "replace_charger_on_battery_level_changed": (
+            0x004AD45C, 226,
+            "e29ae19b89477617a740c0025ea2a60dd550061a3f601ec3b9556b6950846e3b",
+            "open_cfw_charger_on_battery_level_changed",
+        ),
+        "replace_charger_send_battery_info_to_peer": (
+            0x004AD53E, 276,
+            "9b7203c4a29a8fcf45415491aabe4806677a1f0e0eb1e894fbe6baf5c324753a",
+            "open_cfw_charger_send_battery_info",
+        ),
+        "replace_charger_receive_battery_info_from_peer": (
+            0x004AD652, 372,
+            "283651c314e14353d854e5dcbaa154f27ff51e6ef2a6f9840f2699bcdca13a6b",
+            "open_cfw_charger_receive_battery_info_from_peer",
+        ),
+        "replace_charger_request_notify_battery_info_from_peer": (
+            0x004AD7DC, 142,
+            "9edd932a9f208179c1de2298e182b7120e2fc032e2792161abfe9b52a6d80284",
+            "open_cfw_charger_request_notify_battery_info_from_peer",
+        ),
+        "replace_charger_get_local_battery_info": (
+            0x004AD880, 122,
+            "15cc132f0050bd3c19d36cded1d55d4db9ede0687191893e04e87036b1254730",
+            "open_cfw_charger_get_local_battery_info",
+        ),
+        "replace_charger_get_soc": (
+            0x004AD8FA, 6,
+            "7fac141f4147b1db32ed2e0539f95c5e1d644579df6c927bc46831ee74e83279",
+            "open_cfw_charger_get_soc",
+        ),
+        "replace_charger_get_is_charging": (
+            0x004AD900, 8,
+            "088459aac967667404120ae7e5b83c78aff05128a6b069810d3b5ff532eacd6a",
+            "open_cfw_charger_get_is_charging",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate_rel
+    }
+    bound_state_leaves = {
+        "open_cfw_charger_init_battery_sync",
+        "open_cfw_charger_compare_and_update_soc",
+        "open_cfw_charger_on_battery_level_changed",
+        "open_cfw_charger_receive_battery_info_from_peer",
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"] != PINS[CANDIDATE]
+            or leaf.get("profiles") != ["apple-clang"]
+            or (leaf.get("allow_bound_static_data") is True)
+            != (name in bound_state_leaves)
+            for name, leaf in leaves.items()
+        )
+    ):
+        raise AuditError("production charger-common routing changed")
 
     return {
         "surface": {
@@ -285,8 +377,21 @@ def analyze(image_path: Path = IMAGE) -> dict:
         },
         "production": {
             "candidate": candidate_rel,
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate_sha256": PINS[CANDIDATE],
+            "production_routed": True,
+            "ownership_bytes": 2400,
+            "retained_stock_noncode_bytes": 220,
+            "retained_stock_dead_body_bytes": 364,
+            "bound_static_state": {
+                "open_cfw_charger_charge_debounce": "0x20074f97",
+                "open_cfw_charger_initial_sync_active": "0x20074f98",
+                "open_cfw_charger_initial_sync_poll": "0x20074f1a",
+                "open_cfw_charger_initial_sync_next": "0x20074f1c",
+                "open_cfw_charger_initial_sync_retries": "0x20074f99",
+            },
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

@@ -34,7 +34,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_nvdb_sys_dt_read_psn_from_otp",
     "open_cfw_nvdb_sys_dt_write_psn_to_otp",
 }
-SOURCE_SHA256 = "96b103862a1ea8ade613276072d04882c7e37b6674a9d859c08b5a3f391d9ef1"
+SOURCE_SHA256 = "a18152b8a7e769142bb21795cb724ef29df2c8ea18176050d12d8606189516c7"
 
 
 class NvdbSysDtCandidateTests(unittest.TestCase):

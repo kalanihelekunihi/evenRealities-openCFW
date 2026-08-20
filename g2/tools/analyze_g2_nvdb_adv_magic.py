@@ -214,6 +214,61 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if initialized_crc != 0x0A5C:
         raise AuditError("NVDB advertising-magic default CRC changed")
 
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/nvdb_adv_magic.c"
+    expected_patches = {
+        "replace_nvdb_adv_magic_default_crc_initialize": (
+            0x005D9ED0,
+            20,
+            "5653f1fb6916c167139c85501e4ae5549e034304da38265b2adfc24669a6a4b1",
+            "open_cfw_nvdb_adv_magic_default_crc_initialize",
+        ),
+        "replace_nvdb_adv_magic_load_and_migrate": (
+            0x005D9EE4,
+            56,
+            "d0487cc379b27adbf94fd10ddacadc86464ec7fa5d36f574ace3daed4adee841",
+            "open_cfw_nvdb_adv_magic_load_and_migrate",
+        ),
+        "replace_nvdb_adv_magic_update": (
+            0x005D9F1C,
+            34,
+            "6fed33bca24b9e6f7f04583889016a7cfd39a747501d042db2ac7c0c872f8d76",
+            "open_cfw_nvdb_adv_magic_update",
+        ),
+    }
+    patches = {
+        r["name"]: r
+        for r in overlay["patch_sites"]
+        if r.get("name") in expected_patches
+    }
+    leaves = {
+        r["function"]: r
+        for r in overlay["relocated_leaves"]
+        if r.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[n]["runtime_address"] != a
+            or patches[n]["expected_size"] != z
+            or patches[n]["expected_sha256"] != d
+            or patches[n]["branch"] != "b_w"
+            or patches[n]["target_function"] != t
+            or patches[n].get("profiles") != ["apple-clang"]
+            for n, (a, z, d, t) in expected_patches.items()
+        )
+        or set(leaves) != {t for *_, t in expected_patches.values()}
+        or any(
+            l["source"]["sha256"]
+            != "6385cb384472a5789331ed22cc0068f20272c0c689ab241b90d589c13a692c21"
+            or l.get("profiles") != ["apple-clang"]
+            for l in leaves.values()
+        )
+    ):
+        raise AuditError("production advertising-magic routing changed")
+
     return {
         "surface": {
             "linked_functions": 3,
@@ -251,9 +306,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "historical_generating_commit_resolved": False,
         },
         "production": {
-            "candidate_source": "components/apollo_main/core_overlay/nvdb_adv_magic.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate_source": candidate,
+            "production_routed": True,
+            "ownership_bytes": BODY_BYTES,
+            "retained_stock_noncode_bytes": LITERAL_SPAN[1] - LITERAL_SPAN[0],
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

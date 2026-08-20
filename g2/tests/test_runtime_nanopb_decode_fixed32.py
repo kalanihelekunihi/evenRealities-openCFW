@@ -132,20 +132,20 @@ PROFILE_PINS = {
             "4126fd397a81d96c271646eb70632539"
         ),
         "overlay": (
-            147_021,
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+            164_536,
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
         ),
         "component": (
-            3_670_417,
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
+            3_687_932,
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
         ),
         "package": (
-            4_448_911,
-            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
+            4_466_426,
+            "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
         ),
         "plan": (
-            1_046_958,
-            "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c",
+            1_276_602,
+            "cf9da351f2ff66b07c3efaf9543abdd23473c5dd557753854b25fbf5f79628c8",
         ),
         "patch": (
             "22f3f0bb" + "00bf" * 12,
@@ -188,12 +188,12 @@ PROFILE_PINS = {
 
 MANIFEST_STATUS = {
     "container_only": (1, 32),
-    "generated_alignment": (133, 265),
-    "generated_source_entry_replacement": (726, 101_138),
+    "generated_alignment": (181, 364),
+    "generated_source_entry_replacement": (841, 118_572),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (225, 3_421_868),
-    "source_compiled": (307, 146_974),
+    "official_blob": (264, 3_404_434),
+    "source_compiled": (435, 164_390),
 }
 
 HOST_PROVIDER = r"""
@@ -766,7 +766,7 @@ class NanopbDecodeFixed32ProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (825, 766, 256),
+            (941, 881, 372),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -939,7 +939,7 @@ class NanopbDecodeFixed32ProductionTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1400)
+        self.assertEqual(len(regions), 1730)
         self.assertEqual(main["source_appended_boundary"], len(self.package))
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(

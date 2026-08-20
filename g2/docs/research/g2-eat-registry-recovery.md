@@ -25,3 +25,12 @@ of every historical source file. Four retained eAT paths are known; pathless
 objects still lack authenticated source inventories and licenses. None of the
 21 handlers has a clean-room production candidate, so all remain stock-carried
 and OpenCFW claims zero ownership bytes for the registry surface.
+
+## Addendum: core/sensor production routing
+
+After this census closed, the twelve core/sensor handlers gained a clean-room
+production candidate: `at_core_sensor.c` is routed into the Apollo main
+overlay under the reviewed apple-clang profile, and the twelve stored
+registration pointers now reach the source leaves through entry redirects.
+The registry census itself — twenty-one records, zero unassigned — is
+unchanged. See `docs/research/g2-eat-core-sensor-recovery.md`.

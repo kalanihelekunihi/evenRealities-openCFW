@@ -180,9 +180,9 @@ PRODUCTION_SECTION = ".text." + PRODUCTION_FUNCTION
 PRODUCTION_EXIDX_SECTION = ".ARM.exidx" + PRODUCTION_SECTION
 PRODUCTION_EXIDX = bytes.fromhex("0000000001000000")
 OVERLAY_RUNTIME_ADDRESS = 0x0079_4324
-BASE_FUNCTION_COUNT = 824
-BASE_RELOCATED_COUNT = 255
-BASE_PATCH_COUNT = 765
+BASE_FUNCTION_COUNT = 907
+BASE_RELOCATED_COUNT = 338
+BASE_PATCH_COUNT = 848
 APPLE_CLANG = "/usr/bin/clang"
 COMPILER_PROFILES = {
     "apple-clang": {
@@ -265,25 +265,25 @@ PRODUCTION_BUILD_PROFILES = {
             "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
         ),
         "main_component": (
-            3_670_417,
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
+            3_687_932,
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
-                4_448_911,
-                "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
+                4_466_426,
+                "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
             ),
             "build-report.json": (
                 2_323,
-                "6d13f1eeacd93be4ed8009d49683225054d4113cfb77c85cc10be43d7f7d8f71",
+                "adb3102a9c28476e357e5fd134054434e200f46579bc5990f5836d2ed05e12d4",
             ),
             "flash-plan.json": (
-                1_046_958,
-                "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c",
+                1_276_602,
+                "cf9da351f2ff66b07c3efaf9543abdd23473c5dd557753854b25fbf5f79628c8",
             ),
         },
-        "census": (1_406, 2, 5),
-        "effective_ownership": (147_634, 103_382, 4_197_895),
+        "census": (1_802, 2, 5),
+        "effective_ownership": (165_050, 120_915, 4_180_461),
     },
     "linux-clang": {
         "boot_component": (
@@ -2224,7 +2224,7 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
                 expected,
             )
 
-        self.assertEqual(len(regions), 1400)
+        self.assertEqual(len(regions), 1730)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(
@@ -2265,12 +2265,12 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
             ownership,
             {
                 "container_only": (1, 32),
-    "generated_alignment": (133, 265),
-    "generated_source_entry_replacement": (726, 101_138),
+    "generated_alignment": (181, 364),
+    "generated_source_entry_replacement": (841, 118_572),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (225, 3_421_868),
-    "source_compiled": (307, 146_974),
+    "official_blob": (264, 3_404_434),
+    "source_compiled": (435, 164_390),
             },
         )
 
@@ -2433,13 +2433,13 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
                     "confirmed_from_record_table": (4, 211_824),
                     "confirmed_from_vector_and_ota_code": (1, 55_752),
                     "container_only": (5, 268),
-                    "generated_alignment": (122, 241),
-                    "generated_source_entry_replacement": (737, 99_566),
+                    "generated_alignment": (123, 243),
+                    "generated_source_entry_replacement": (740, 99_846),
                     "generated_source_exact_load_image": (1, 6),
                     "generated_source_exact_replacement": (7, 134),
                     "inferred_from_vector_table": (1, 34_432),
-                    "official_blob": (226, 3_572_039),
-                    "source_compiled": (295, 146_083),
+                    "official_blob": (228, 3_571_759),
+                    "source_compiled": (298, 146_335),
                     "unknown": (2, 326_044),
                 },
             )

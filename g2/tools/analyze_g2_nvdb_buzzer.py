@@ -245,6 +245,63 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if initialized_crc != 0x9B1E:
         raise AuditError("NVDB buzzer default CRC changed")
 
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/nvdb_buzzer.c"
+    expected_patches = {
+        "replace_nvdb_buzzer_default_crc_initialize": (
+            0x0058F9D4, 20, "177a661785b53b0057bdc93eec3ec350e2876399d6a47029c758fb1f47cf72c1",
+            "open_cfw_nvdb_buzzer_default_crc_initialize",
+        ),
+        "replace_nvdb_buzzer_load_and_migrate": (
+            0x0058F9E8, 120, "06805d442594087356c548b9e6bf1f58fb77d5ae58f1f7db037be790d427ef19",
+            "open_cfw_nvdb_buzzer_load_and_migrate",
+        ),
+        "replace_nvdb_buzzer_frequency_get": (
+            0x0058FA60, 6, "f90b05ca12e572b728068cc575c618d3c766251b3551dde1c2da7ca52fca6e61",
+            "open_cfw_nvdb_buzzer_frequency_get",
+        ),
+        "replace_nvdb_buzzer_duty_get": (
+            0x0058FA66, 6, "8c705b33d544b9b5c56a0a485c8d2bc1550791fb2186c0ca942d908aae5f22be",
+            "open_cfw_nvdb_buzzer_duty_get",
+        ),
+        "replace_nvdb_buzzer_update": (
+            0x0058FA6C, 36, "dfcc2933e62aa533c08d37a3554bff2c80502a5a8dffd6b8a78a879d38d87647",
+            "open_cfw_nvdb_buzzer_update",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"]
+            != "c4ed1b989c5e7ab019bd00fa9e57ee6ed166afe24caef7f1d37700efefe9656b"
+            or leaf.get("profiles") != ["apple-clang"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production buzzer routing changed")
+
     return {
         "surface": {
             "linked_functions": 5,
@@ -284,8 +341,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
         },
         "production": {
             "candidate_source": "components/apollo_main/core_overlay/nvdb_buzzer.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "production_routed": True,
+            "ownership_bytes": 188,
+            "retained_stock_noncode_bytes": 28,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

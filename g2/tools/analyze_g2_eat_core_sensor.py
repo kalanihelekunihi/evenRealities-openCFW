@@ -252,13 +252,82 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("stored handler-pointer closure changed")
 
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    registered_names = {command[4].lower() for command in COMMANDS}
-    routed = any(
-        any(name in source.get("path", "").lower() for name in registered_names)
-        for source in overlay["sources"]
-    )
-    if routed:
-        raise AuditError("pathless eAT command cluster unexpectedly entered production overlay")
+    candidate = "components/apollo_main/core_overlay/at_core_sensor.c"
+    expected_targets = {
+        "replace_at_info_handler": (0x005A5720, "open_cfw_at_info_handler"),
+        "replace_at_reset_handler": (0x005A57A4, "open_cfw_at_reset_handler"),
+        "replace_at_psn_handler": (0x005A57F0, "open_cfw_at_psn_handler"),
+        "replace_at_imu_rawdata_handler": (
+            0x005A5830, "open_cfw_at_imu_rawdata_handler",
+        ),
+        "replace_at_imu_euler_handler": (0x005A5864, "open_cfw_at_imu_euler_handler"),
+        "replace_at_screen_x_handler": (0x005A58A8, "open_cfw_at_screen_x_handler"),
+        "replace_at_screen_y_handler": (0x005A58B4, "open_cfw_at_screen_y_handler"),
+        "replace_at_als_read_handler": (0x005A58D4, "open_cfw_at_als_read_handler"),
+        "replace_at_als_handler": (0x005A58FA, "open_cfw_at_als_handler"),
+        "replace_at_brightness_handler": (
+            0x005A5920, "open_cfw_at_brightness_handler",
+        ),
+        "replace_at_als_scale_read_handler": (
+            0x005A593A, "open_cfw_at_als_scale_read_handler",
+        ),
+        "replace_at_brightness_read_handler": (
+            0x005A594C, "open_cfw_at_brightness_read_handler",
+        ),
+    }
+    body_shas = {row["function"]: row["stock_sha256"] for row in rows}
+    stock_names = {
+        "open_cfw_at_info_handler": "atInfoHandler",
+        "open_cfw_at_reset_handler": "atResetHandler",
+        "open_cfw_at_psn_handler": "atPsnHandler",
+        "open_cfw_at_imu_rawdata_handler": "atImuRawDataHandler",
+        "open_cfw_at_imu_euler_handler": "atImuEulerHandler",
+        "open_cfw_at_screen_x_handler": "atScreenXHandler",
+        "open_cfw_at_screen_y_handler": "atScreenYHandler",
+        "open_cfw_at_als_read_handler": "atAlsReadHandler",
+        "open_cfw_at_als_handler": "atAlsHandler",
+        "open_cfw_at_brightness_handler": "atBrightnessHandler",
+        "open_cfw_at_als_scale_read_handler": "atAlsScaleReadHandler",
+        "open_cfw_at_brightness_read_handler": "atBrightnessReadHandler",
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_targets
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_targets)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"]
+            != int(
+                next(
+                    row["stock_bytes"]
+                    for row in rows
+                    if row["function"] == stock_names[target]
+                )
+            )
+            or patches[name]["expected_sha256"] != body_shas[stock_names[target]]
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, target) in expected_targets.items()
+        )
+        or set(leaves) != {target for _, target in expected_targets.values()}
+        or any(
+            leaf["source"]["sha256"]
+            != "2be0e0f81c74d3ec60f2a44fbcac8f7aff6c3f80e155d66c3c130a698ac285b3"
+            or leaf.get("profiles") != ["apple-clang"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production eAT core/sensor routing changed")
+    routed = True
 
     return {
         "surface": {
@@ -296,10 +365,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "command_records": "[0x006c92e0,0x006c93a0)",
         },
         "production": {
-            "candidate": None,
+            "candidate": candidate,
             "production_routed": routed,
-            "ownership_bytes": 0,
+            "ownership_bytes": 486,
             "source_inventory_available": False,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

@@ -223,6 +223,67 @@ def analyze(image_path: Path = IMAGE) -> dict:
     offset = 0x20000040 - flashdb.IAR_SCATTER_DESTINATION
     if sram[offset : offset + 1] != b"\0":
         raise AuditError("factory record changed")
+
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/kvdb_onboarding_config.c"
+    expected_patches = {
+        "replace_kvdb_onboarding_config_set_indexed": (
+            PHYSICAL[0], 86, "2d1f3385ca05b98fb342dc34c1ee8ad71aa60175f8af470026fa9be95851a661",
+            "open_cfw_kvdb_onboarding_config_set_indexed",
+        ),
+        "replace_kvdb_onboarding_config_persist": (
+            0x004A77D2, 78, "d67c09e4a97c6506e504143a0f7e196beda3799fa0f7ee8f00069d1a3c510091",
+            "open_cfw_kvdb_onboarding_config_persist",
+        ),
+        "replace_kvdb_onboarding_config_update_and_persist": (
+            0x004A7820, 18, "bd671bcfd8e230bd4c5aa25927221bc9dea065e75177646d49d13f268930544f",
+            "open_cfw_kvdb_onboarding_config_update_and_persist",
+        ),
+        "replace_kvdb_onboarding_config_get": (
+            0x004A7832, 6, "c45ce6f337503c4c006d32e9251a9eb2abdf9b50be847dee072a74bc580985e0",
+            "open_cfw_kvdb_onboarding_config_get",
+        ),
+        "replace_kvdb_onboarding_config_pointer": (
+            0x004A7838, 14, "802bbbec5254cb9a652a5f29a6cae17d15b476cea2f0b7d5099c2ad830a323ed",
+            "open_cfw_kvdb_onboarding_config_pointer",
+        ),
+        "replace_kvdb_onboarding_config_read": (
+            0x004A7846, 84, "e853e570c2f01ae9464b3d4e532c0e59bf54ab52de8de068545f75810231daa9",
+            "open_cfw_kvdb_onboarding_config_read",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"]
+            != "f8c3154fe326878b2f89908555238ddc190a6cecc6c874aeed342624b24d561e"
+            or leaf.get("profiles") != ["apple-clang"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production onboarding-config routing changed")
     return {
         "surface": {
             "linked_functions": 6,
@@ -251,8 +312,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
         },
         "production": {
             "candidate": "components/apollo_main/core_overlay/kvdb_onboarding_config.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "production_routed": True,
+            "ownership_bytes": 286,
+            "retained_stock_tail_bytes": 54,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

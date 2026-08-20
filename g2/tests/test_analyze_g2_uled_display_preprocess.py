@@ -42,9 +42,22 @@ class AnalyzeG2UledDisplayPreprocessTests(unittest.TestCase):
         self.assertEqual(self.report["behavior"]["gpu_success_value"], 1)
         self.assertTrue(self.report["behavior"]["gpu_failure_diagnoses_and_returns"])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+    def test_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(
+            production["candidate_sha256"],
+            "2ded39fb95b869de5361340416b85d598194de8c7e7d90f57eefbbde8044b98b",
+        )
+        self.assertEqual(production["ownership_bytes"], 584)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 64)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(production["relocated_leaves"], [
+            "open_cfw_uled_buffer_sync_to_fb",
+        ])
+        self.assertEqual(production["patch_sites"], [
+            "replace_buffer_sync_to_fb",
+        ])
 
 
 if __name__ == "__main__":

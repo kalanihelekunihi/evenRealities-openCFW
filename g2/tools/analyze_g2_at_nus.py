@@ -159,9 +159,43 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("stored handler-pointer closure changed")
 
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("at_nus" in source.get("path", "").lower() for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented AT^NUS handler unexpectedly entered production overlay")
+    candidate = "components/apollo_main/core_overlay/at_nus.c"
+    expected_patches = {
+        "replace_at_nus_handler": (
+            0x005A5520, 16, PHYSICAL_SHA256,
+            "open_cfw_at_nus_handler",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"]
+            != "b80576c1aea40353475d331686bb5ec2b5915bc1acf911b73e6fee4a12cc87ae"
+            or leaf.get("profiles") != ["apple-clang"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production AT^NUS routing changed")
 
     return {
         "surface": {
@@ -188,10 +222,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "command_record": "[0x006c92a0,0x006c92b0)",
         },
         "production": {
-            "candidate": None,
-            "production_routed": routed,
-            "ownership_bytes": 0,
+            "candidate": "components/apollo_main/core_overlay/at_nus.c",
+            "production_routed": True,
+            "ownership_bytes": 16,
             "source_inventory_available": False,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

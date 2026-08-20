@@ -1,7 +1,7 @@
 # G2 NVDB system-data recovery
 
 Status: complete binary census and host/Thumb-qualified clean-room candidate;
-not production-routed. Run addresses use
+production-routed into the Apollo main overlay. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -104,8 +104,8 @@ then appends through four word writes and rejects a full journal.
 ## Reconstruction boundary
 
 `components/apollo_main/core_overlay/nvdb_sys_dt.c` is an independently
-authored thirteen-entry behavioral candidate (22,225 bytes, SHA-256
-`96b103862a1ea8ade613276072d04882c7e37b6674a9d859c08b5a3f391d9ef1`).
+authored thirteen-entry behavioral candidate (22,347 bytes, SHA-256
+`a18152b8a7e769142bb21795cb724ef29df2c8ea18176050d12d8606189516c7`).
 Host tests cover factory initialization, all indexed fields, migration/read
 differences, PSN parsing and legacy classification, aging reset, OTP scanning,
 deduplication, capacity, and failure cleanup. Freestanding target compilation
@@ -115,6 +115,43 @@ The analyzer and three manifests pin every body, split pool, retained string,
 call root, factory byte, legacy serial, and interior-ingress classification.
 The exact historical source revision remains unresolved. Diagnostic formatting
 and hardware-specific OTP gate/provider calls are abstracted behind hooks.
-The candidate is absent from `overlay.json`; production placement, provider
-binding, guarded redirects, and package validation remain pending, so this
-increment claims zero package ownership bytes.
+
+## Production routing
+
+The candidate is now routed into the Apollo main overlay under the reviewed
+apple-clang profile. The routing adds one seam to the candidate: the legacy
+scan reads its table through `OPEN_CFW_NVDB_SYS_DT_LEGACY_PSNS`, which the
+host build defaults to the candidate's own 40-entry copy and the production
+leaves bind to the retained stock table at `0x006D3358` — the overlay closure
+extractor rejects the pointer-relocated read-only data a built-in copy would
+require, and the stock body read the same retained table. Provider binding is
+exact: the retained CRC-16 provider at `0x0049ACD4`, the retained NVDB blob
+read/write adapters at `0x005105F0`/`0x00510602`, the source-owned
+peripheral-power enable/disable entries at `0x0047F5B8`/`0x0047F7AE` and the
+source-owned CMSIS delay at `0x00449376` (through the pinned
+`-DOPEN_CFW_NVDB_SYS_DT_OTP_BEGIN`/`_END` leaf flags, which reproduce the
+stock enable-0x1D/enable-0x17/delay and disable-0x17/disable-0x1D gate
+sequences), and the retained OTP INFOC word accessors at
+`0x0051381A`/`0x00513850`. The fourteen-field parse diagnostic sink is
+compiled out by the pinned `-DOPEN_CFW_NVDB_SYS_DT_PARSED` no-op binding, the
+same deliberate no-op policy the other NVDB closures use for retained
+diagnostics. Placement appends thirteen relocated leaves to the overlay:
+4,338 text bytes plus the two 23-byte read-only string closures carried by
+the manufacturer and month helpers and twelve alignment pad bytes. Thirteen
+`B.W` entry redirects with NOP fill replace the 5,084 stock body bytes across
+`[0x004AEE28,0x004B03E0)`; the seven split alignment/literal islands (476
+bytes) stay retained stock data, and the two stored entry roots at
+`0x006D1EAC`/`0x0078F52C` plus the 37 direct entry calls reach the source
+leaves through the redirects. The 172-byte SRAM record at `0x20003994`, the
+`nvSysDt` key, the legacy table, and the factory defaults are untouched.
+
+Apple Clang 21 overlay/component/package sizes are `155682/3679078/4457572`
+with SHA-256 `3bb04fb7f66d8a3d5e53ec1028bb73b5f832bb8e1e39827baf8a6c014d3c5d39`,
+`5160689a88da1ba7a0163c7f05739d3fcc3caa0f9863e6d7ac2e5fa8d54e8dea`, and
+`f66065fe5ea21f701985897f3f2629ff84a0fb050a563d300ebefa9ec55d7c4b`. The
+leaves and redirects are gated `apple-clang`; the linux-clang profile keeps
+its recorded pins, and linux-clang leaf pins await Linux toolchain
+regeneration. Ownership is 5,084 replaced stock body bytes. The component
+build, source package, `open_cfw verify`, and the fail-closed analyzer and
+manifest census all pass. No package was signed or flashed and no hardware
+was accessed.

@@ -150,13 +150,13 @@ PROFILES = {
         "alignment": 4,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 147021,
+        "overlay_size": 164536,
         "overlay_sha256": (
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
         ),
-        "component_size": 3670417,
+        "component_size": 3687932,
         "component_sha256": (
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
         ),
         "overlay_base": 0x00794324,
         "provider_offset": 108456,
@@ -176,7 +176,7 @@ PROFILES = {
             "2d689313cd12e5c8d5155c7b4ba3202"
         ),
         "current_layout_rollback_sha256": (
-            "b6515f28c8e9263b7f7cfbb73f4aa01bc33cdfc8876d62983b088f13ef918841"
+            "5a9a2fcd0ca390c6ea91aaa8c75da7959c4ed43121c8e852a17ec7cecdac8db3"
         ),
         "historical_tail_size": 22,
         "historical_tail_offset": 113732,
@@ -273,6 +273,77 @@ PROFILES = {
             {"offset": 118892, "size": 338},
             {"offset": 120982, "size": 38},
         ),
+        "later_charger_common_patches": (
+            {"offset": 479132, "size": 240},
+            {"offset": 479372, "size": 94},
+            {"offset": 479466, "size": 464},
+            {"offset": 479930, "size": 450},
+            {"offset": 480380, "size": 226},
+            {"offset": 480606, "size": 276},
+            {"offset": 480882, "size": 372},
+            {"offset": 481276, "size": 142},
+            {"offset": 481440, "size": 122},
+            {"offset": 481562, "size": 6},
+            {"offset": 481568, "size": 8},
+        ),
+        "later_chg_bq25180_patches": (
+            {"offset": 1058796, "size": 224},
+            {"offset": 1059020, "size": 292},
+            {"offset": 1059312, "size": 180},
+            {"offset": 1059492, "size": 28},
+            {"offset": 1059520, "size": 18},
+            {"offset": 1059538, "size": 18},
+            {"offset": 1059556, "size": 18},
+            {"offset": 1059574, "size": 122},
+            {"offset": 1059696, "size": 18},
+            {"offset": 1059714, "size": 190},
+            {"offset": 1059904, "size": 30},
+            {"offset": 1059934, "size": 30},
+            {"offset": 1059964, "size": 134},
+            {"offset": 1060098, "size": 50},
+            {"offset": 1060148, "size": 18},
+            {"offset": 1060166, "size": 28},
+            {"offset": 1060194, "size": 110},
+            {"offset": 1060304, "size": 18},
+            {"offset": 1060322, "size": 18},
+            {"offset": 1060340, "size": 18},
+            {"offset": 1060486, "size": 24},
+            {"offset": 1060510, "size": 206},
+        ),
+        "later_chg_bq27427_patches": (
+            {"offset": 1061162, "size": 86},
+            {"offset": 1061248, "size": 86},
+            {"offset": 1061334, "size": 90},
+            {"offset": 1061424, "size": 88},
+            {"offset": 1061512, "size": 112},
+            {"offset": 1061624, "size": 10},
+            {"offset": 1061634, "size": 10},
+            {"offset": 1061644, "size": 10},
+            {"offset": 1061654, "size": 10},
+            {"offset": 1061664, "size": 92},
+            {"offset": 1061756, "size": 92},
+            {"offset": 1061848, "size": 10},
+            {"offset": 1061858, "size": 10},
+            {"offset": 1061868, "size": 10},
+            {"offset": 1061878, "size": 10},
+            {"offset": 1061888, "size": 10},
+            {"offset": 1061898, "size": 10},
+            {"offset": 1061908, "size": 100},
+            {"offset": 1062008, "size": 202},
+            {"offset": 1062210, "size": 126},
+            {"offset": 1062336, "size": 336},
+            {"offset": 1062672, "size": 458},
+            {"offset": 1063302, "size": 88},
+            {"offset": 1063390, "size": 88},
+            {"offset": 1063478, "size": 28},
+            {"offset": 1063506, "size": 312},
+            {"offset": 1063852, "size": 334},
+            {"offset": 1064236, "size": 382},
+            {"offset": 1064660, "size": 354},
+            {"offset": 1065028, "size": 176},
+            {"offset": 1065236, "size": 10},
+            {"offset": 1065246, "size": 198},
+        ),
         "major": {
             "offset": 113732,
             "address": 0x007AFF68,
@@ -318,11 +389,11 @@ PROFILES = {
             },
         },
         "accounting": {
-            "generated_patch_site_bytes": 103358,
+            "generated_patch_site_bytes": 120792,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3419824,
-            "replaced_stock_function_bytes": 103536,
-            "source_owned_bytes": 147203,
+            "opaque_base_bytes": 3402390,
+            "replaced_stock_function_bytes": 120970,
+            "source_owned_bytes": 164718,
             "source_owned_in_place_bytes": 182,
         },
     },
@@ -1364,6 +1435,24 @@ class RuntimeLittlefsDiskVersionPartsTests(unittest.TestCase):
                         patch_offset:patch_offset + patch_size
                     ] = stock[patch_offset:patch_offset + patch_size]
                 for later_patch in profile["later_scheduler_patches"]:
+                    patch_offset = later_patch["offset"]
+                    patch_size = later_patch["size"]
+                    restored[
+                        patch_offset:patch_offset + patch_size
+                    ] = stock[patch_offset:patch_offset + patch_size]
+                for later_patch in profile["later_charger_common_patches"]:
+                    patch_offset = later_patch["offset"]
+                    patch_size = later_patch["size"]
+                    restored[
+                        patch_offset:patch_offset + patch_size
+                    ] = stock[patch_offset:patch_offset + patch_size]
+                for later_patch in profile["later_chg_bq25180_patches"]:
+                    patch_offset = later_patch["offset"]
+                    patch_size = later_patch["size"]
+                    restored[
+                        patch_offset:patch_offset + patch_size
+                    ] = stock[patch_offset:patch_offset + patch_size]
+                for later_patch in profile["later_chg_bq27427_patches"]:
                     patch_offset = later_patch["offset"]
                     patch_size = later_patch["size"]
                     restored[

@@ -45,9 +45,28 @@ class AnalyzeG2KvdbModuleConfigureTests(unittest.TestCase):
         self.assertFalse(self.report["menu"]["custom_text_copy_adds_terminator"])
         self.assertTrue(self.report["menu"]["writer_skips_identical_record"])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+    def test_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 2286)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 206)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(production["relocated_leaves"], [
+            "open_cfw_kvdb_read_dashboard_auto_close",
+            "open_cfw_kvdb_read_language",
+            "open_cfw_kvdb_read_menu_configuration",
+            "open_cfw_kvdb_write_dashboard_auto_close",
+            "open_cfw_kvdb_write_language",
+            "open_cfw_kvdb_write_menu_configuration",
+        ])
+        self.assertEqual(production["patch_sites"], [
+            "replace_kvdb_read_dashboard_auto_close",
+            "replace_kvdb_read_language",
+            "replace_kvdb_read_menu_configuration",
+            "replace_kvdb_write_dashboard_auto_close",
+            "replace_kvdb_write_language",
+            "replace_kvdb_write_menu_configuration",
+        ])
 
 
 if __name__ == "__main__":

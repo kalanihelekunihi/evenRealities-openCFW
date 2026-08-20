@@ -1563,6 +1563,7 @@ def extract_in_place_function_section(
     strict_relocation_contract: bool = False,
     allow_local_function: bool = False,
     allow_local_relocation_targets: bool = False,
+    allow_bound_static_data: bool = False,
 ) -> tuple[bytes, dict[str, Any]]:
     """Extract and relocate one reviewed function for its fixed stock address."""
 
@@ -1581,6 +1582,11 @@ def extract_in_place_function_section(
         raise BuildError(
             f"in-place leaf {function_name} "
             "allow_local_relocation_targets must be boolean"
+        )
+    if not isinstance(allow_bound_static_data, bool):
+        raise BuildError(
+            f"in-place leaf {function_name} "
+            "allow_bound_static_data must be boolean"
         )
     if (
         not isinstance(runtime_address, int)
@@ -1816,6 +1822,16 @@ def extract_in_place_function_section(
     relocation_names_by_id = {
         value: name for name, value in IN_PLACE_RELOCATION_TYPES.items()
     }
+    # Names the reviewer explicitly bound to fixed addresses through absolute
+    # MOVW/MOVT relocations.  When the leaf opts in with
+    # allow_bound_static_data, a relocation against such a name may reference
+    # the leaf's own whole-file static data object (its storage is discarded;
+    # the reviewed target_address binds it to the retained stock cell).
+    bound_static_data_symbols = frozenset(
+        str(item["symbol"])
+        for item in reviewed_relocations
+        if item["type"] in ABSOLUTE_MOVWT_TYPES and "target_address" in item
+    )
     for relocation_section in relocation_sections:
         if not int(relocation_section["size"]):
             continue
@@ -1879,11 +1895,43 @@ def extract_in_place_function_section(
                     )
             if relocation_name in ABSOLUTE_MOVWT_TYPES:
                 is_reviewed_defined_sibling = False
-            if not is_global_undefined and not is_reviewed_defined_sibling:
+            is_reviewed_bound_static_data = False
+            if (
+                not is_global_undefined
+                and allow_bound_static_data
+                and relocation_name in ABSOLUTE_MOVWT_TYPES
+                and relocation_symbol_name in bound_static_data_symbols
+            ):
+                data_section_index = int(relocation_symbol["section_index"])
+                if 0 < data_section_index < len(sections):
+                    data_section = sections[data_section_index]
+                    is_reviewed_bound_static_data = (
+                        int(relocation_symbol["binding"]) == STB_LOCAL
+                        and int(relocation_symbol["visibility"]) == 0
+                        and int(relocation_symbol["type"]) == STT_OBJECT
+                        and data_section_index != section_index
+                        and int(data_section["flags"])
+                        & (SHF_ALLOC | SHF_EXECINSTR)
+                        == SHF_ALLOC
+                        and str(data_section["name"])
+                        in (
+                            f".bss.{relocation_symbol_name}",
+                            f".data.{relocation_symbol_name}",
+                        )
+                        and int(relocation_symbol["value"]) == 0
+                        and int(relocation_symbol["size"])
+                        == int(data_section["size"])
+                    )
+            if (
+                not is_global_undefined
+                and not is_reviewed_defined_sibling
+                and not is_reviewed_bound_static_data
+            ):
                 raise BuildError(
                     f"in-place leaf {function_name} relocation at "
-                    f"+0x{offset:X} must reference a global undefined symbol "
-                    "or an explicitly selected whole global sibling function; "
+                    f"+0x{offset:X} must reference a global undefined symbol, "
+                    "an explicitly selected whole global sibling function, or "
+                    "an opted-in reviewed bound static data object; "
                     f"observed {relocation_symbol['name']!r}"
                 )
             observed_relocations.append(
@@ -2302,10 +2350,15 @@ def extract_relocated_function_closure(
         if not isinstance(name, str) or not (
             re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", name)
             or re.fullmatch(r"\.L\.str(?:\.[0-9]+)?", name)
+            or re.fullmatch(
+                r"\.L__const\.[A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*",
+                name,
+            )
         ):
             raise BuildError(
                 f"relocated closure {function_name} rodata symbol {index} "
-                "requires a C identifier or Clang .L.str[.N] local name"
+                "requires a C identifier or Clang .L.str[.N]/"
+                ".L__const.<function>.<variable> local name"
             )
         if (
             not isinstance(offset, int)
@@ -3481,6 +3534,10 @@ def compile_in_place_leaf(
             "allow_local_relocation_targets",
             False,
         ),
+        allow_bound_static_data=leaf_config.get(
+            "allow_bound_static_data",
+            False,
+        ),
     )
     if not record and (
         len(leaf) != expected["size"]
@@ -3991,6 +4048,10 @@ def append_relocated_leaves(
                 ),
                 "allow_local_relocation_targets": leaf_config.get(
                     "allow_local_relocation_targets",
+                    False,
+                ),
+                "allow_bound_static_data": leaf_config.get(
+                    "allow_bound_static_data",
                     False,
                 ),
             }

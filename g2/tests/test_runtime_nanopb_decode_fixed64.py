@@ -993,7 +993,7 @@ class NanopbDecodeFixed64ProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (825, 766, 256),
+            (941, 881, 372),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [

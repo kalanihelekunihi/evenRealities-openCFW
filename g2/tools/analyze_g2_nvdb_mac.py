@@ -260,6 +260,69 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if example.hex() != "0147e23b4411c800ef1d":
         raise AuditError("NVDB MAC derivation model changed")
 
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/nvdb_mac.c"
+    expected_patches = {
+        "replace_nvdb_mac_default_initialize": (
+            0x005D9F48,
+            122,
+            "6518ae9a8bde9545acffeb0896bdac49b86993c9234e46d88bb7554827be3d6f",
+            "open_cfw_nvdb_mac_default_initialize",
+        ),
+        "replace_nvdb_mac_load_and_migrate": (
+            0x005D9FC2,
+            114,
+            "b634daa132d5501b66a4ae1545c3a740987e46c46714cfa054b8ab64faa0d089",
+            "open_cfw_nvdb_mac_load_and_migrate",
+        ),
+        "replace_nvdb_mac_update": (
+            0x005DA034,
+            44,
+            "03972cfd3d66bf294c5c46c3c4323ea7492976d2c0c2092b75b5b3fa48868145",
+            "open_cfw_nvdb_mac_update",
+        ),
+    }
+    patches = {
+        r["name"]: r
+        for r in overlay["patch_sites"]
+        if r.get("name") in expected_patches
+    }
+    leaves = {
+        r["function"]: r
+        for r in overlay["relocated_leaves"]
+        if r.get("source", {}).get("path") == candidate
+    }
+    device_ids_binding = (
+        "-DOPEN_CFW_NVDB_MAC_DEVICE_IDS_GET(chip_id0, chip_id1)="
+        "do { unsigned int open_cfw_mcuctrl_info_get(unsigned int, void *); "
+        "unsigned int record[16]; "
+        "(void)open_cfw_mcuctrl_info_get(1u, record); "
+        "*(chip_id0) = record[1]; *(chip_id1) = record[2]; } while (0)"
+    )
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[n]["runtime_address"] != a
+            or patches[n]["expected_size"] != z
+            or patches[n]["expected_sha256"] != d
+            or patches[n]["branch"] != "b_w"
+            or patches[n]["target_function"] != t
+            or patches[n].get("profiles") != ["apple-clang"]
+            for n, (a, z, d, t) in expected_patches.items()
+        )
+        or set(leaves) != {t for *_, t in expected_patches.values()}
+        or any(
+            l["source"]["sha256"]
+            != "7f9d10a4e413f99038ac32f8aedb47ec898ffe25f0720c89b1aff0d0dc891919"
+            or l.get("profiles") != ["apple-clang"]
+            or device_ids_binding not in l["toolchain"]["flags"]
+            for l in leaves.values()
+        )
+    ):
+        raise AuditError("production MAC routing changed")
+
     return {
         "surface": {
             "linked_functions": 3,
@@ -304,9 +367,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "historical_generating_commit_resolved": False,
         },
         "production": {
-            "candidate_source": "components/apollo_main/core_overlay/nvdb_mac.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate_source": candidate,
+            "production_routed": True,
+            "ownership_bytes": BODY_BYTES,
+            "retained_stock_noncode_bytes": LITERAL_SPAN[1] - LITERAL_SPAN[0],
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

@@ -1,8 +1,8 @@
 # G2 BQ25180 charger-driver recovery
 
 Status: complete linked-object census and host/Thumb-qualified clean-room
-candidate; not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+candidate; production-routed under the reviewed apple-clang profile. Run
+addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -73,6 +73,24 @@ symbols. The analyzer and manifests pin all 28 stock bodies, the pool, retained
 names/assertions/path, call closure, runtime globals, and zero-interior result.
 
 No historical source for this first-party file has been authenticated. The
-candidate is absent from `overlay.json`; concrete I2C, assertion, diagnostic,
-placement, redirect, and package-validation work remains, so it claims zero
-package ownership bytes.
+candidate is production-routed in `overlay.json` as twenty-two relocated
+leaves under the reviewed apple-clang profile. The concrete provider
+bindings, recovered from the stock body call sequences, are the retained I2C
+read backend at `0x0050436E`, the retained I2C write backend at
+`0x005044B4`, and the retained `memset` provider at `0x0043C0E4`; the
+assertion-diagnostic sink is compiled out by the pinned
+`-DOPEN_CFW_BQ25180_ASSERT` no-op fail-stop binding (the same treatment the
+ULED display-preprocess routing gives its assertion log), and the diagnostic
+binding stays inert. Placement appends the twenty-two relocated leaves to the
+overlay; every static helper inlines at `-O2`, so no leaf needs a local
+symbol class or bound static data.
+
+Twenty-two entry redirects with NOP fill replace the twenty-two stock bodies
+that have a candidate leaf (1,792 ownership bytes). The six intra-TU-only
+helper bodies (`bq25180_write_register`, `bq25180_read_register`,
+`bq25180_update_field`, `bq25180_configure_event_mask`,
+`bq25180_mask_events`, `bq25180_apply_defaults`, 476 bytes) have no exterior
+or surviving caller and stay as dead retained stock; the 116-byte owned
+literal pool stays retained stock. The candidate therefore claims 1,792
+package ownership bytes. The linux-clang profile pins await Linux toolchain
+regeneration.

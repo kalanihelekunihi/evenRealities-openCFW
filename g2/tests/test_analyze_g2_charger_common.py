@@ -48,9 +48,25 @@ class AnalyzeG2ChargerCommonTests(unittest.TestCase):
             self.report["behavior"]["request_message_id"],
         ], [3, 2, 4])
 
-    def test_candidate_is_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+    def test_candidate_is_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 2400)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 220)
+        self.assertEqual(production["retained_stock_dead_body_bytes"], 364)
+        self.assertEqual(len(production["relocated_leaves"]), 11)
+        self.assertEqual(len(production["patch_sites"]), 11)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(
+            production["bound_static_state"],
+            {
+                "open_cfw_charger_charge_debounce": "0x20074f97",
+                "open_cfw_charger_initial_sync_active": "0x20074f98",
+                "open_cfw_charger_initial_sync_poll": "0x20074f1a",
+                "open_cfw_charger_initial_sync_next": "0x20074f1c",
+                "open_cfw_charger_initial_sync_retries": "0x20074f99",
+            },
+        )
 
 
 if __name__ == "__main__":

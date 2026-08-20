@@ -186,9 +186,9 @@ PROFILE_PINS = {
             "poll_once": 124112,
             "task": 124172,
         },
-        "overlay": (147021, "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"),
-        "component": (3670417, "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"),
-        "package": (4448911, "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"),
+        "overlay": (164536, "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"),
+        "component": (3687932, "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"),
+        "package": (4466426, "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"),
         "patch_hex": "71f216b9",
         "patch_sha256": "6d870ddaa7df559599d4977303a6d74259f0c6b27fc79c71ace7e07747a1cfc5",
         "relocated": {

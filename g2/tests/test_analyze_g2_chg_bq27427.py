@@ -53,9 +53,25 @@ class AnalyzeG2ChgBq27427Tests(unittest.TestCase):
         })
         self.assertEqual(config["descriptors"][6]["subclass"], 105)
 
-    def test_candidate_remains_production_excluded(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+    def test_candidate_is_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 3938)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 396)
+        self.assertEqual(production["retained_stock_dead_body_bytes"], 502)
+        self.assertEqual(len(production["relocated_leaves"]), 33)
+        self.assertEqual(len(production["patch_sites"]), 32)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(
+            production["bound_providers"],
+            {
+                "open_cfw_bq27427_transfer_read": "0x0050436e",
+                "open_cfw_bq27427_transfer_write": "0x005044b4",
+                "open_cfw_bq27427_delay_ms": "0x004910f4",
+                "memcpy": "0x00439be4",
+                "memset": "0x0043c0e4",
+            },
+        )
 
 
 if __name__ == "__main__":

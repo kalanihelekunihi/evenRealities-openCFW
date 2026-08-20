@@ -42,12 +42,12 @@ MODE2_SHA256 = "d2a627965efb0521d9d82b99c176462388495b7e199696bf1a3eafceb619a450
 PROFILE_PINS = {
     "apple-clang": {
         "overlay": (
-            147021,
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+            164536,
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
         ),
         "component": (
-            3670417,
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
+            3687932,
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -67,7 +67,7 @@ PROFILE_PINS = {
                 "size": 30,
             },
         },
-        "accounting": (147203, 103358, 103536, 3419824),
+        "accounting": (164718, 120792, 120970, 3402390),
     },
     "linux-clang": {
         "overlay": (
@@ -96,7 +96,7 @@ PROFILE_PINS = {
                 "size": 30,
             },
         },
-        "accounting": (123752, 103358, 103536, 3419824),
+        "accounting": (123752, 106884, 107062, 3416298),
     },
 }
 
@@ -544,7 +544,7 @@ class Lz4UpstreamProductionAdapterTests(unittest.TestCase):
             decoder_expected,
         )
         self.assertEqual(
-            report["overlay"]["link"]["relocated_rodata_size"], 2651
+            report["overlay"]["link"]["relocated_rodata_size"], 3260
         )
 
         config = json.loads(CONFIG.read_text(encoding="utf-8"))

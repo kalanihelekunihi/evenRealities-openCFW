@@ -180,13 +180,13 @@ PRODUCTION = {
         "config": MAIN_CONFIG,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 147_021,
+        "overlay_size": 164_536,
         "overlay_sha256": (
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
         ),
-        "component_size": 3_670_417,
+        "component_size": 3_687_932,
         "component_sha256": (
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
         ),
         "leaf_offset": 113_756,
         "leaf_address": 0x007A_FF80,
@@ -195,11 +195,11 @@ PRODUCTION = {
         "patch_offset_key": "payload_offset",
         "patch_offset": MAIN_START - MAIN_BASE + 32,
         "accounting": {
-            "generated_patch_site_bytes": 103_358,
+            "generated_patch_site_bytes": 120_792,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_419_824,
-            "replaced_stock_function_bytes": 103_536,
-            "source_owned_bytes": 147_203,
+            "opaque_base_bytes": 3_402_390,
+            "replaced_stock_function_bytes": 120_970,
+            "source_owned_bytes": 164_718,
             "source_owned_in_place_bytes": 182,
         },
     },

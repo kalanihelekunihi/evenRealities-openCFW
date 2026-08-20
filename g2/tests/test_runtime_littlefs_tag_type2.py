@@ -125,12 +125,12 @@ TARGET_TEXT_PIN = (
 )
 
 APPLE_OVERLAY_PIN = (
-    147_021,
-    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+    164_536,
+    "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
 )
 APPLE_COMPONENT_PIN = (
-    3_670_417,
-    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
+    3_687_932,
+    "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
 )
 LINUX_OVERLAY_PIN = (
     144_266,
@@ -141,8 +141,8 @@ LINUX_COMPONENT_PIN = (
     "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
 )
 APPLE_PACKAGE_PIN = (
-    4_448_911,
-    "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
+    4_466_426,
+    "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
 )
 LINUX_PACKAGE_PIN = (
     4_446_156,
@@ -504,12 +504,12 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                 )
             },
             {
-                "source_owned_bytes": 147_203,
+                "source_owned_bytes": 164_718,
                 "source_owned_in_place_bytes": 182,
-                "generated_patch_site_bytes": 103_358,
+                "generated_patch_site_bytes": 120_792,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_419_824,
-                "replaced_stock_function_bytes": 103_536,
+                "opaque_base_bytes": 3_402_390,
+                "replaced_stock_function_bytes": 120_970,
             },
         )
 
@@ -585,6 +585,18 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                     - 206  # terminal-mode KVDB triplet (leaves, rodata, alignment)
                     - 212  # onboarding-config KVDB sextet (leaves, rodata, alignment)
                     - 376  # ring KVDB triplet (leaves, rodata, alignment)
+                    - 21  # AT^NUS handler leaf (leaf, alignment)
+                    - 666  # eAT core/sensor cluster (twelve leaves, alignment)
+                    - 2_814  # module-configuration KVDB sextet (leaves, rodata, alignment)
+                    - 170  # buzzer NVDB quintet (leaves, alignment)
+                    - 198  # product-mode NVDB sextet (leaves, alignment)
+                    - 254  # MAC NVDB triplet (leaves, alignment)
+                    - 142  # advertising-magic NVDB triplet (leaves, alignment)
+                    - 4_396  # system-data NVDB thirteen-leaf cluster (leaves, rodata, alignment)
+                    - 274  # ULED display-preprocess leaf (leaf, rodata, alignment)
+                    - 1_568  # charger-common eleven-leaf cluster (leaves, alignment)
+                    - 2_378  # BQ25180 22-leaf charger-driver cluster (leaves, alignment)
+                    - 4_634  # BQ27427 33-leaf fuel-gauge cluster (leaves, rodata, alignment)
                 ),
                 "size": TARGET_TEXT_PIN[0],
                 "target_address": APPLE_LEAF[1],

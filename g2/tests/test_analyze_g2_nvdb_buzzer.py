@@ -58,12 +58,31 @@ class NvdbBuzzerAuditTests(unittest.TestCase):
         self.assertFalse(self.report["behavior"]["v2_crc_mismatch_rewrites_defaults"])
         self.assertFalse(self.report["behavior"]["read_payload_copied_into_current_record"])
 
-    def test_lineage_and_production_claims_are_conservative(self) -> None:
+    def test_lineage_claims_are_conservative(self) -> None:
         self.assertEqual(self.report["lineage"]["retained_exact_symbol"], "_nvdbUpdataBuzzer")
         self.assertFalse(self.report["lineage"]["whole_file_source_exact"])
         self.assertFalse(self.report["lineage"]["historical_generating_commit_resolved"])
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+
+    def test_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 188)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 28)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(production["relocated_leaves"], [
+            "open_cfw_nvdb_buzzer_default_crc_initialize",
+            "open_cfw_nvdb_buzzer_duty_get",
+            "open_cfw_nvdb_buzzer_frequency_get",
+            "open_cfw_nvdb_buzzer_load_and_migrate",
+            "open_cfw_nvdb_buzzer_update",
+        ])
+        self.assertEqual(production["patch_sites"], [
+            "replace_nvdb_buzzer_default_crc_initialize",
+            "replace_nvdb_buzzer_duty_get",
+            "replace_nvdb_buzzer_frequency_get",
+            "replace_nvdb_buzzer_load_and_migrate",
+            "replace_nvdb_buzzer_update",
+        ])
 
     def test_mutated_image_is_rejected(self) -> None:
         data = bytearray(self.analyzer.IMAGE.read_bytes())

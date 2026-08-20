@@ -92,3 +92,16 @@ its recorded pins, and linux-clang leaf pins await Linux toolchain
 regeneration. Ownership is 338 replaced stock body bytes. The component
 build, source package, `open_cfw verify`, and the fail-closed analyzer and
 manifest census all pass.
+
+## Analyzer production flip (2026-08-19)
+
+Post-routing follow-up: the fail-closed analyzer
+`tools/analyze_g2_kvdb_temperature_unit.py` now validates the production routing
+recorded above instead of reporting the object as not routed. It re-reads
+`overlay.json` on every run and fails closed unless the expected patch
+sites (addresses, sizes, stock SHA-256 digests, `b_w` branches, apple-clang
+gating) and the relocated leaves (source SHA-256, apple-clang profiles) match
+exactly; the report now states `production_routed: true` with 338
+ownership bytes and 50 retained stock tail bytes, matching the ownership
+accounting in this document. The analyzer's census, closure, and factory
+record pins are unchanged.

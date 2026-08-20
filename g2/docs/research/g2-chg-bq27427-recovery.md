@@ -14,9 +14,20 @@ SHA-256 ed5d39ec1667c7b623eba6dfd0deddb9d732ab53dc0e8c6b18392c77a6a929a5
 
 The clean-room candidate is
 [`chg_bq27427.c`](../../components/apollo_main/core_overlay/chg_bq27427.c).
-It remains intentionally absent from `overlay.json`; production ownership is
-still zero until its transport, delay, placement, redirect, and package seams
-are reviewed together.
+It is production-routed in `overlay.json` under the reviewed apple-clang
+profile: thirty-three relocated leaves (4,528 text bytes plus the 56-byte
+DM-descriptor-table closure, two 12-byte product-defaults closures, and 26
+alignment pad bytes) and thirty-two entry redirects with NOP fill replace
+3,938 stock body bytes. The four intra-TU-only I2C transport helpers (330
+bytes) and the stock `bq27427_cfgupdate_priv` body (172 bytes) stay as dead
+retained stock — the CFGUPDATE poll helper is rebound through an
+overlay-internal local-function sibling leaf under the reviewed
+`allow_local_function`/`allow_local_relocation_targets` contracts — and the
+396 owned non-code bytes stay retained stock data. The leaves bind the
+retained I2C read/write backends at `0x0050436E`/`0x005044B4`, the retained
+millisecond delay wrapper at `0x004910F4`, and the retained `memcpy`/`memset`
+providers at `0x00439BE4`/`0x0043C0E4`; the candidate's diagnostic binding is
+inert by default, so no pinned `-D` override is required.
 
 ## Authority and boundaries
 
@@ -128,9 +139,10 @@ the primary public register/command reference.
 Host tests cover little-endian register I/O, signed readings, checksum and
 big-endian DM writes, the exact `{240,80,3100}` update image, validity gates,
 runtime telemetry, and the zero/`0xFF` flag failure rule. A freestanding Thumb
-build pins the intended global symbol surface. The fail-closed analyzer also
-pins every body, non-code interval, initialized-data byte, call closure, and
-the candidate's continued production exclusion.
+build pins the intended global symbol surface. The fail-closed analyzer pins
+every body, non-code interval, initialized-data byte, call closure, and the
+thirty-three-leaf/thirty-two-redirect production routing, including the
+provider bindings and the closure/local-sibling leaf contracts.
 
 ## Reproduce
 

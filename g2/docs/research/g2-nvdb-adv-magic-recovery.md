@@ -1,7 +1,7 @@
 # G2 NVDB advertising-magic recovery
 
-Status: complete binary census and host/Thumb-qualified clean-room candidate;
-not production-routed. Run addresses use
+Status: complete binary census, host/Thumb-qualified clean-room candidate,
+and production routing into the Apollo main overlay. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -59,3 +59,32 @@ Production routing remains deferred until initialization ownership, fixed
 record/key/provider seams, placement, guarded redirects, and package validation
 are closed. This increment claims zero package ownership bytes and performs no
 hardware operation.
+
+## Production routing
+
+The candidate is now routed into the Apollo main overlay byte-identically
+(3,211 bytes, SHA-256
+`6385cb384472a5789331ed22cc0068f20272c0c689ab241b90d589c13a692c21`) under the
+reviewed apple-clang profile. Provider binding uses the retained CRC-16
+provider at `0x0049ACD4` and the retained NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`. Placement appends three relocated leaves to the
+overlay: the 28-byte default-record CRC initializer, the 50-byte persistent
+updater, and the 62-byte migration callback, with a single two-byte
+alignment pad before the migration callback. Three `B.W` entry redirects
+with NOP fill replace the 110 stock body bytes across
+`[0x005D9ED0,0x005D9F3E)`; the ten-byte alignment and literal tail
+`[0x005D9F3E,0x005D9F48)` stays retained stock data, and the two stored
+entry roots at `0x006D1E7C`/`0x0078F514` reach the source leaves through
+the redirects. The fixed four-byte SRAM record at `0x200038D4`, the
+`nvAdvMagic` key, and the boot defaults are untouched.
+
+Apple Clang 21 overlay/component/package sizes are `151286/3674682/4453176`
+with SHA-256 `d30879825d2c513dcef88a951a0aac9a9c3ff476da56720c2138d22f5ba9c9f5`,
+`8aac36ba8830d740aa08e461e43c711af9e04bf59a529eb5b5671be84774be9f`, and
+`5fd04249a65b195c17a971d1ba105972d062976267451967fd4c0f840da4145d`. The
+leaves and redirects are gated `apple-clang`; the linux-clang profile keeps
+its recorded pins, and linux-clang leaf pins await Linux toolchain
+regeneration. Ownership is 110 replaced stock body bytes. The component
+build, source package, `open_cfw verify`, and the fail-closed analyzer and
+manifest census all pass. No package was signed or flashed and no hardware
+was accessed.

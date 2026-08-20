@@ -1,8 +1,8 @@
 # G2 charger-common recovery
 
 Status: complete linked-object census and host/Thumb-qualified clean-room
-candidate; not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+candidate; production-routed under the reviewed apple-clang profile. Run
+addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -69,6 +69,27 @@ stock bodies, the owned non-code regions, retained names/path, call closure,
 globals, wire ABI, and qualified raw overlaps.
 
 No historical source for this first-party file has been authenticated. The
-candidate is absent from `overlay.json`; concrete RTOS mutex/timer, role,
-transport, publisher, diagnostic, placement, redirect, and package-validation
-work remains. It therefore claims zero package ownership bytes.
+candidate is production-routed in `overlay.json` as eleven relocated leaves
+under the reviewed apple-clang profile. The concrete provider bindings,
+recovered from the stock body call sequences, are the mutex create/delete/
+lock/unlock providers at `0x0043971C`/`0x0043986E`/`0x004397B6`/`0x0043981C`,
+the sync-timer start/stop providers at `0x004AEA40`/`0x004AEA4C`, the role
+provider at `0x0045A568`, the service-`0x0105` transport at `0x004651E0`, the
+aggregate publisher at `0x004AEAF0`, and the retained `memset`/`memcpy` at
+`0x0043C0E4`/`0x00439BE4`; the diagnostic bindings are inert. The five
+file-static state cells are bound to their retained stock SRAM cells —
+`charge_debounce` at `0x20074F97`, `initial_sync_active` at `0x20074F98`,
+`initial_sync_poll` at `0x20074F1A`, `initial_sync_next` at `0x20074F1C`, and
+`initial_sync_retries` at `0x20074F99` — through the reviewed
+`allow_bound_static_data` relocation contract added to
+`tools/apollo_overlay.py` for this routing (the stock initializer's store
+sequence, widths, and values match the candidate's five statics exactly, and
+every consumer body agrees on width and address).
+
+Eleven entry redirects with NOP fill replace the eleven stock bodies that
+have a candidate leaf (2,400 ownership bytes). The three intra-TU-only helper
+bodies (`charger_soc_is_valid`, `charger_aggregate_soc_is_valid`,
+`_CHG_HandleInitSync`, 364 bytes) have no exterior or surviving caller and
+stay as dead retained stock; the 220 owned non-code bytes stay retained stock.
+The candidate therefore claims 2,400 package ownership bytes. The linux-clang
+profile pins await Linux toolchain regeneration.

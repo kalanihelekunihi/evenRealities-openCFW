@@ -286,22 +286,22 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 147_021,
+        "overlay_size": 164_536,
         "overlay_sha256": (
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
         ),
-        "component_size": 3_670_417,
+        "component_size": 3_687_932,
         "component_sha256": (
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
         ),
-        "package_size": 4_448_911,
+        "package_size": 4_466_426,
         "package_sha256": (
-            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"
+            "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"
         ),
-        "package_accounting": (147_634, 103_382, 4_197_895),
+        "package_accounting": (165_050, 120_915, 4_180_461),
         # Builder reports exclude isolated/non-emitted registry categories.
-        "function_count": 821,
-        "patch_count": 762,
+        "function_count": 937,
+        "patch_count": 877,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -327,8 +327,8 @@ PROFILES = {
         # above (the nanopb decode wave and the iar float-exponent trio are
         # absent from the rollback overlay and are therefore not deleted
         # here).
-        "current_rollback_net_tail_growth": 16_948,
-        "later_tail_growth": 24_627,
+        "current_rollback_net_tail_growth": 16_360,
+        "later_tail_growth": 42_142,
         "legacy_reset_unordered_tail_growth": 388,
         # Active rollback build from the current production registry.
         "legacy_semaphore_layout": {
@@ -388,11 +388,11 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 147_203,
+            "source_owned_bytes": 164_718,
             "source_owned_in_place_bytes": 182,
-            "generated_patch_site_bytes": 103_358,
-            "replaced_stock_function_bytes": 103_536,
-            "opaque_base_bytes": 3_419_824,
+            "generated_patch_site_bytes": 120_792,
+            "replaced_stock_function_bytes": 120_970,
+            "opaque_base_bytes": 3_402_390,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -772,7 +772,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         )
         self.assertEqual(
             (len(self.config["functions"]), len(self.config["patch_sites"])),
-            (825, 766),
+            (941, 881),
         )
 
         for leaf in (
@@ -1139,7 +1139,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
     def test_manifest_is_gap_free_and_owns_each_stock_and_source_span(self) -> None:
         main = self.manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1400)
+        self.assertEqual(len(regions), 1730)
         self.assertEqual(main["source_appended_boundary"], OFFICIAL_SIZE)
         ordered = sorted(regions, key=lambda region: region["file_offset"])
         self.assertEqual(ordered[0]["file_offset"], 0)
@@ -1475,6 +1475,137 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             "replace_kvdb_ring_default_initialize",
             "replace_kvdb_ring_load_and_migrate",
             "replace_kvdb_write_ring",
+            # Pathless AT^NUS clean-room handler admitted after the milestone.
+            "replace_at_nus_handler",
+            # Pathless eAT core/sensor clean-room cluster admitted after the milestone.
+            "replace_at_info_handler",
+            "replace_at_reset_handler",
+            "replace_at_psn_handler",
+            "replace_at_imu_rawdata_handler",
+            "replace_at_imu_euler_handler",
+            "replace_at_screen_x_handler",
+            "replace_at_screen_y_handler",
+            "replace_at_als_read_handler",
+            "replace_at_als_handler",
+            "replace_at_brightness_handler",
+            "replace_at_als_scale_read_handler",
+            "replace_at_brightness_read_handler",
+            # Module-configuration KVDB clean-room sextet admitted after the milestone.
+            "replace_kvdb_read_language",
+            "replace_kvdb_write_language",
+            "replace_kvdb_read_dashboard_auto_close",
+            "replace_kvdb_write_dashboard_auto_close",
+            "replace_kvdb_read_menu_configuration",
+            "replace_kvdb_write_menu_configuration",
+            # Buzzer NVDB clean-room quintet admitted after the milestone.
+            "replace_nvdb_buzzer_default_crc_initialize",
+            "replace_nvdb_buzzer_load_and_migrate",
+            "replace_nvdb_buzzer_frequency_get",
+            "replace_nvdb_buzzer_duty_get",
+            "replace_nvdb_buzzer_update",
+            # Product-mode NVDB clean-room sextet admitted after the milestone.
+            "replace_nvdb_product_mode_default_crc_initialize",
+            "replace_nvdb_product_mode_load_and_migrate",
+            "replace_nvdb_product_mode_set",
+            "replace_nvdb_product_mode_get",
+            "replace_nvdb_product_mode_update",
+            "replace_nvdb_product_mode_read",
+            # MAC NVDB clean-room triplet admitted after the milestone.
+            "replace_nvdb_mac_default_initialize",
+            "replace_nvdb_mac_load_and_migrate",
+            "replace_nvdb_mac_update",
+            # Advertising-magic NVDB clean-room triplet admitted after the milestone.
+            "replace_nvdb_adv_magic_default_crc_initialize",
+            "replace_nvdb_adv_magic_load_and_migrate",
+            "replace_nvdb_adv_magic_update",
+            # System-data NVDB clean-room thirteen-function closure admitted
+            # after the milestone.
+            "replace_nvdb_sys_dt_default_initialize",
+            "replace_nvdb_sys_dt_load_and_migrate",
+            "replace_nvdb_sys_dt_write",
+            "replace_nvdb_sys_dt_get",
+            "replace_nvdb_sys_dt_read",
+            "replace_nvdb_sys_dt_parse_psn",
+            "replace_nvdb_sys_dt_manufacturer_name",
+            "replace_nvdb_sys_dt_year",
+            "replace_nvdb_sys_dt_month",
+            "replace_nvdb_sys_dt_reset_aging",
+            "replace_nvdb_sys_dt_mark_legacy_psn",
+            "replace_nvdb_sys_dt_read_psn_from_otp",
+            "replace_nvdb_sys_dt_write_psn_to_otp",
+            # ULED display-preprocess clean-room leaf admitted after the milestone.
+            "replace_buffer_sync_to_fb",
+            # Charger-common clean-room eleven-leaf cluster admitted after
+            # the milestone.
+            "replace_charger_init_battery_sync",
+            "replace_charger_deinit_battery_sync",
+            "replace_charger_compare_and_update_soc",
+            "replace_charger_compare_and_update_is_charging",
+            "replace_charger_on_battery_level_changed",
+            "replace_charger_send_battery_info_to_peer",
+            "replace_charger_receive_battery_info_from_peer",
+            "replace_charger_request_notify_battery_info_from_peer",
+            "replace_charger_get_local_battery_info",
+            "replace_charger_get_soc",
+            "replace_charger_get_is_charging",
+            # BQ25180 charger-driver clean-room 22-leaf cluster admitted
+            # after the milestone.
+            "replace_bq25180_read_event",
+            "replace_bq25180_read_state",
+            "replace_bq25180_read_device_id",
+            "replace_bq25180_set_charge_enabled",
+            "replace_bq25180_set_ts_enabled",
+            "replace_bq25180_set_safety_timer",
+            "replace_bq25180_set_watchdog",
+            "replace_bq25180_set_battery_regulation_voltage",
+            "replace_bq25180_set_battery_overcurrent",
+            "replace_bq25180_set_battery_undervoltage_lockout",
+            "replace_bq25180_set_precharge_threshold",
+            "replace_bq25180_set_precharge_ratio",
+            "replace_bq25180_set_fastcharge_current",
+            "replace_bq25180_set_termination_percent",
+            "replace_bq25180_set_vindpm",
+            "replace_bq25180_set_vdppm_enabled",
+            "replace_bq25180_set_input_current_limit",
+            "replace_bq25180_set_system_mode",
+            "replace_bq25180_set_system_voltage",
+            "replace_bq25180_set_ts_auto_enabled",
+            "replace_bq25180_refresh_status",
+            "replace_bq25180_hardware_init",
+            # BQ27427 fuel-gauge clean-room 32-redirect cluster admitted
+            # after the milestone.
+            "replace_bq27427_read_flags",
+            "replace_bq27427_read_soc",
+            "replace_bq27427_read_temperature",
+            "replace_bq27427_read_battery_voltage",
+            "replace_bq27427_read_charge",
+            "replace_bq27427_read_nom_capacity",
+            "replace_bq27427_read_avail_capacity",
+            "replace_bq27427_read_rem_capacity",
+            "replace_bq27427_read_full_capacity",
+            "replace_bq27427_read_ai",
+            "replace_bq27427_read_ap",
+            "replace_bq27427_read_int_temp",
+            "replace_bq27427_read_rem_cap_unfl",
+            "replace_bq27427_read_rem_cap_fil",
+            "replace_bq27427_read_full_cap_unfl",
+            "replace_bq27427_read_full_cap_fil",
+            "replace_bq27427_read_soc_unfl",
+            "replace_bq27427_seal",
+            "replace_bq27427_unseal",
+            "replace_bq27427_checksum_dm_block",
+            "replace_bq27427_read_dm_block",
+            "replace_bq27427_update_dm_block",
+            "replace_bq27427_set_cfgupdate",
+            "replace_bq27427_soft_reset",
+            "replace_bq27427_execute_control_word",
+            "replace_bq27427_write_dm_block",
+            "replace_bq27427_configure_from_params",
+            "replace_bq27427_change_chemistry_profile",
+            "replace_bq27427_settings",
+            "replace_bq27427_status_update",
+            "replace_bq27427_init_wrapper",
+            "replace_bq27427_hardware_init",
         }
         self.assertEqual(
             set(current_patches),

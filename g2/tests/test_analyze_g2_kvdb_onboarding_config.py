@@ -36,9 +36,28 @@ class AnalyzeG2KvdbOnboardingConfigTests(unittest.TestCase):
         self.assertTrue(self.report["behavior"]["read_imports_stored_byte"])
         self.assertTrue(self.report["behavior"]["pointer_getter_ignores_index"])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+    def test_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 286)
+        self.assertEqual(production["retained_stock_tail_bytes"], 54)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(production["relocated_leaves"], [
+            "open_cfw_kvdb_onboarding_config_get",
+            "open_cfw_kvdb_onboarding_config_persist",
+            "open_cfw_kvdb_onboarding_config_pointer",
+            "open_cfw_kvdb_onboarding_config_read",
+            "open_cfw_kvdb_onboarding_config_set_indexed",
+            "open_cfw_kvdb_onboarding_config_update_and_persist",
+        ])
+        self.assertEqual(production["patch_sites"], [
+            "replace_kvdb_onboarding_config_get",
+            "replace_kvdb_onboarding_config_persist",
+            "replace_kvdb_onboarding_config_pointer",
+            "replace_kvdb_onboarding_config_read",
+            "replace_kvdb_onboarding_config_set_indexed",
+            "replace_kvdb_onboarding_config_update_and_persist",
+        ])
 
 
 if __name__ == "__main__":

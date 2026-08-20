@@ -1,7 +1,7 @@
 # G2 ULED display preprocessing recovery
 
 Status: complete linked-object census and host/Thumb-qualified clean-room
-candidate; not production-routed. Run addresses use
+candidate; production-routed into the Apollo main overlay. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -63,6 +63,36 @@ manifests pin the body, separate pool, template, retained strings, call root,
 provider calls, false-call halfword, and raw-overlap exclusions.
 
 The historical source revision and concrete GPU API names remain unresolved.
-The candidate is absent from `overlay.json`; provider binding, placement,
-redirects, and package verification remain pending, so it claims zero package
-ownership bytes.
+
+## Production routing
+
+The candidate is production-routed under the reviewed apple-clang profile.
+Provider binding maps the candidate's abstract GPU seams onto the retained
+stock providers exactly as the stock body's call sequence does: GPU start at
+`0x004B092A`, the destination-channel configure/mode/enable providers at
+`0x004B0730`/`0x004B1A78`/`0x004B0748`, the source-configuration provider at
+`0x004B1608`, the offset provider at `0x004B1B48`, and the commit provider at
+`0x004B0C8A`. The assertion-diagnostic sink is compiled out by the pinned
+`-DOPEN_CFW_ULED_ASSERT` no-op fail-stop binding (the stock logger's
+per-assertion line numbers are not recoverable from the candidate's seams,
+so the assertion log is treated as a diagnostic like the other closures do),
+and the GPU-failure diagnostic binding stays inert. Placement appends one
+relocated closure leaf to the overlay: 242 text bytes plus the 28-byte GPU
+descriptor-template read-only closure and four alignment pad bytes. One
+`B.W` entry redirect with NOP fill replaces the 584 stock body bytes at
+`[0x0046C73C,0x0046C984)`; the discontiguous 64-byte pool at
+`[0x0046CA74,0x0046CAB4)` stays retained stock data, and the sole direct
+call at `0x0046CA64` reaches the leaf through the redirect. The reviewed
+rodata local-name class in `tools/apollo_overlay.py` was extended to admit
+Clang `.L__const.<function>.<variable>` constant-aggregate locals, the same
+role the existing `.L.str[.N]` class plays for string literals.
+
+Apple Clang 21 overlay/component/package sizes are `164536/3687932/4466426`
+with SHA-256 `a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546`,
+`4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07`, and
+`cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4`. The
+leaf and redirect are gated `apple-clang`; the linux-clang profile keeps its
+recorded pins, and linux-clang leaf pins await Linux toolchain regeneration.
+Ownership is 584 replaced stock body bytes. The component build, source
+package, `open_cfw verify`, and the fail-closed analyzer and manifest census
+all pass. No package was signed or flashed and no hardware was accessed.

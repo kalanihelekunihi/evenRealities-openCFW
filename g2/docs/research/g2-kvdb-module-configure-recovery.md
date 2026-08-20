@@ -1,7 +1,7 @@
 # G2 module-configuration KVDB recovery
 
 Status: complete binary census and host/Thumb-qualified clean-room candidate;
-not production-routed. Run addresses use
+production-routed under the reviewed apple-clang profile. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -95,3 +95,37 @@ The exact historical source revision is unresolved and provider/diagnostic
 names remain abstract. The candidate is absent from `overlay.json`; placement,
 redirects, provider binding, and package verification remain pending, so it
 claims zero package ownership bytes.
+
+## Production routing
+
+The candidate is now routed into the Apollo main overlay byte-identically
+(11,893 bytes, SHA-256
+`9eb84180d0b211f168b64d8aaa5acc762e815236c17b7955ce432b94447ab1db`) under the
+reviewed apple-clang profile. Provider binding uses the retained
+database-zero KVDB blob read/write adapters at `0x004D956C` and
+`0x004D957E`, the retained dashboard mode provider at `0x0045A570` (mode two
+performs no database access), the retained built-in menu item lookup at
+`0x00460450`, and the retained snapshot synchronization providers at
+`0x0046018E`/`0x004601EA` bracketing the menu writer's runtime snapshot,
+matching the recovered call ABI exactly. Placement appends six relocated
+leaves to the overlay: the 60-byte language reader, the 32-byte language
+writer, the 58-byte dashboard reader, the 28-byte dashboard writer, the
+708-byte menu reader, and the 1,542-byte menu writer, each carrying the full
+64-byte three-key-string read-only closure and preceded once by a two-byte
+alignment pad. Six `B.W` entry redirects with NOP fill replace the 2,286
+stock body bytes across `[0x004922F8,0x00492BE6)`; the 206-byte
+alignment/literal tail stays retained stock data, and the three stored
+reader roots at `0x00746D24...0x00746D2C` plus the three direct writer
+entry calls reach the source leaves through the redirects. The fixed SRAM
+scalars, menu record, runtime array, and external-menu globals are
+untouched.
+
+Apple Clang 21 overlay/component/package sizes are `150522/3673918/4452412`
+with SHA-256 `f32aa018acd55ccf81db5f8c6e3570a850735f1f313f3d33a3bb8cf8022fe988`,
+`32413c15c60ee03c499f3bf1fdbb63b49cce62c0a0d39b8259d6c7343b733c74`, and
+`ab0f0b0af3e1161533e2da0b61a7a783bc99bd15df31edb6be4c2fd8581b07ad`. The
+leaves and redirects are gated `apple-clang`; the linux-clang profile keeps
+its recorded pins, and linux-clang leaf pins await Linux toolchain
+regeneration. Ownership is 2,286 replaced stock body bytes. The component
+build, source package, `open_cfw verify`, and the fail-closed analyzer and
+manifest census all pass.

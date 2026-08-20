@@ -87,3 +87,41 @@ Production routing remains deferred until fixed SRAM/key/provider seams,
 retained diagnostics, placement, guarded redirects, and complete package
 validation are closed. This increment claims zero package ownership bytes and
 does not access or modify hardware.
+
+## Production routing
+
+The candidate is now routed into the Apollo main overlay byte-identically
+(5,230 bytes, SHA-256
+`7f9d10a4e413f99038ac32f8aedb47ec898ffe25f0720c89b1aff0d0dc891919`) under the
+reviewed apple-clang profile. Provider binding uses the source-owned MCUCTRL
+information provider at `0x00480D72`, the retained CRC-32 provider at
+`0x004D34C4`, the retained CRC-16 provider at `0x0049ACD4`, and the retained
+NVDB blob read/write adapters at `0x005105F0`/`0x00510602`. The stock body
+asks the information provider for the 64-byte selector-one device record and
+reads `CHIPID1`/`CHIPID0` from record words two and one; the candidate's
+two-word device-identifier seam is adapted onto that exact ABI by the pinned
+`-DOPEN_CFW_NVDB_MAC_DEVICE_IDS_GET` leaf flag, which fetches the same
+64-byte record through `open_cfw_mcuctrl_info_get(1, record)` and copies the
+same two words. The retained diagnostic hook stays the candidate's
+deliberate no-op. Placement appends three relocated leaves to the overlay:
+the 116-byte derived-address default initializer, the 72-byte persistent
+updater, and the 64-byte `_nvdbUpdataMac` migration callback, with a single
+two-byte alignment pad before the initializer. Three `B.W` entry redirects
+with NOP fill replace the 280 stock body bytes across
+`[0x005D9F48,0x005DA060)`; the 32-byte literal tail
+`[0x005DA060,0x005DA080)` stays retained stock data, and the two stored
+entry roots at `0x006D1E8C`/`0x0078F51C` plus the two direct entry calls
+reach the source leaves through the redirects. The fixed ten-byte SRAM
+record at `0x200038E4`, the `nvMAC` key, and the boot defaults are
+untouched.
+
+Apple Clang 21 overlay/component/package sizes are `151144/3674540/4453034`
+with SHA-256 `33a5109dc1f6f3b7707e3abcb65580b35ee6df4c3ed0f7c6b068e719e8fd4b10`,
+`be32048d175e4e9b207b0cba56e6ca41be793bd33304174c9354655aff16b2ff`, and
+`bec30ccb6839f92ae35016d7a5f4f5b81c7d50dc515b4c7424c6cdcad8104697`. The
+leaves and redirects are gated `apple-clang`; the linux-clang profile keeps
+its recorded pins, and linux-clang leaf pins await Linux toolchain
+regeneration. Ownership is 280 replaced stock body bytes. The component
+build, source package, `open_cfw verify`, and the fail-closed analyzer and
+manifest census all pass. No package was signed or flashed and no hardware
+was accessed.

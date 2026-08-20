@@ -168,6 +168,55 @@ def analyze(image_path: Path = IMAGE) -> dict:
     offset = 0x200037FC - flashdb.IAR_SCATTER_DESTINATION
     if sram[offset : offset + 12] != FACTORY or crc16(FACTORY[:8]) != 0x76ED:
         raise AuditError("factory record changed")
+
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/kvdb_temperature_unit.c"
+    expected_patches = {
+        "replace_kvdb_temperature_unit_default_initialize": (
+            PHYSICAL[0], 20, "06b1d8566f7f7686e7d0ae6c2ee8c46cc2f227183db1301de0638cfd868d5a5e",
+            "open_cfw_kvdb_temperature_unit_default_initialize",
+        ),
+        "replace_kvdb_temperature_unit_load_and_migrate": (
+            0x0049B028, 208, "f1acbafb6f3571ebc7054ffacb90ff35d1bb69993d9ab4b715cbe5684222929a",
+            "open_cfw_kvdb_temperature_unit_load_and_migrate",
+        ),
+        "replace_kvdb_write_temperature_unit": (
+            0x0049B0F8, 110, "b5fd4ef6d6f8da8e21ff45ff152a15cdb30868bfd4ee4fef72afa9848491be2c",
+            "open_cfw_kvdb_write_temperature_unit",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"]
+            != "288f83e95b9526816845f197d0ca7c355a259a03348c0e2140346cb30a01e808"
+            or leaf.get("profiles") != ["apple-clang"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production temperature-unit routing changed")
     return {
         "surface": {
             "linked_functions": 3,
@@ -191,8 +240,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
         },
         "production": {
             "candidate": "components/apollo_main/core_overlay/kvdb_temperature_unit.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "production_routed": True,
+            "ownership_bytes": 338,
+            "retained_stock_tail_bytes": 50,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

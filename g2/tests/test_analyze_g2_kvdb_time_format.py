@@ -34,9 +34,22 @@ class AnalyzeG2KvdbTimeFormatTests(unittest.TestCase):
         self.assertFalse(self.report["behavior"]["migration_imports_stored_record"])
         self.assertFalse(self.report["behavior"]["v1_crc_mismatch_rewrites_current"])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+    def test_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 338)
+        self.assertEqual(production["retained_stock_tail_bytes"], 50)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(production["relocated_leaves"], [
+            "open_cfw_kvdb_time_format_default_initialize",
+            "open_cfw_kvdb_time_format_load_and_migrate",
+            "open_cfw_kvdb_write_time_format",
+        ])
+        self.assertEqual(production["patch_sites"], [
+            "replace_kvdb_time_format_default_initialize",
+            "replace_kvdb_time_format_load_and_migrate",
+            "replace_kvdb_write_time_format",
+        ])
 
 
 if __name__ == "__main__":

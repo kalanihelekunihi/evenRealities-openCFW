@@ -2034,6 +2034,197 @@ The leaves and redirects are gated `apple-clang`; linux-clang leaf pins await
 Linux toolchain regeneration. Ownership: 796 replaced stock body bytes. See
 `docs/research/g2-kvdb-ring-recovery.md`.
 
+## Current G2 AT^NUS handler production routing
+
+The pathless `AT^NUS` command handler is authored clean-room from the
+recovered behavioral specification and production-routed under the reviewed
+apple-clang profile: one relocated overlay leaf (the 18-byte
+`open_cfw_at_nus_handler`) plus one `B.W` entry redirect with NOP fill
+replace the complete sixteen-byte stock object `[0x005A5520,0x005A5530)`
+(twelve body bytes plus the four-byte literal pool). The leaf passes the
+retained `NUS+OK\r\n` response string at `0x0078A370` to the retained output
+provider at `0x00541430` and returns one without reading its arguments; the
+stored registration pointer `0x005A5521` at `0x006C92A8` — the only ingress —
+reaches the leaf through the redirect. Apple Clang 21
+overlay/component/package pins are `147042/3670438/4448932` (SHA-256
+`b1a5bcd7…`, `76bc4a35…`, `a842e5e3…`). The leaf and redirect are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 16 replaced stock object bytes. See
+`docs/research/g2-at-nus-recovery.md`.
+
+## Current G2 eAT core/sensor cluster production routing
+
+The pathless eAT core/sensor command cluster is authored clean-room from the
+recovered behavioral specification and production-routed under the reviewed
+apple-clang profile: twelve relocated overlay leaves (650 bytes plus sixteen
+alignment bytes) plus twelve `B.W` entry redirects with NOP fill replace the
+486 stock body bytes across `[0x005A5720,0x005A595E)`. The four owned
+alignment/literal islands (126 bytes) stay retained stock, and the twelve
+stored registration pointers in the 192-byte command table
+`[0x006C92E0,0x006C93A0)` — the only ingress — reach the leaves through the
+redirects. Recovered stock quirks are reproduced exactly (`SCRN_Y` accepts
+zero through 192, the PSN error reports the required length, `ALS`
+acknowledges unhandled values, `BRIGHTNESS` forwards unvalidated). Apple
+Clang 21 overlay/component/package pins are `147708/3671104/4449598`
+(SHA-256 `bcf40980…`, `d1793fce…`, `f3655acb…`). The leaves and redirects
+are gated `apple-clang`; linux-clang leaf pins await Linux toolchain
+regeneration. Ownership: 486 replaced stock body bytes. See
+`docs/research/g2-eat-core-sensor-recovery.md`.
+
+## Current G2 KVDB module-configuration production routing
+
+The retained `service_kvdb_module_configure.c` closure is production-routed
+under the reviewed apple-clang profile: six relocated overlay leaves (2,428
+text bytes plus six 64-byte key-string read-only closures and one two-byte
+alignment pad) plus six `B.W` entry redirects with NOP fill replace the
+2,286 stock body bytes across `[0x004922F8,0x00492BE6)`. Provider binding is
+exact: the retained blob read/write adapters at `0x004D956C`/`0x004D957E`,
+the retained dashboard mode provider at `0x0045A570` (mode two skips the
+database), the retained built-in menu item lookup at `0x00460450`, and the
+retained snapshot synchronization providers at `0x0046018E`/`0x004601EA`.
+The 206-byte alignment/literal tail stays retained stock, the SRAM scalars,
+menu record, runtime array, and external-menu globals are untouched, and the
+three stored reader roots at `0x00746D24...0x00746D2C` plus the three direct
+writer entry calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `150522/3673918/4452412` (SHA-256
+`f32aa018…`, `32413c15…`, `ab0f0b0a…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 2,286 replaced stock body bytes. See
+`docs/research/g2-kvdb-module-configure-recovery.md`.
+
+## Current G2 NVDB buzzer production routing
+
+The retained `service_nvdb_buzzer.c` closure is production-routed under the
+reviewed apple-clang profile: five relocated overlay leaves (168 text bytes
+plus one two-byte alignment pad) plus five `B.W` entry redirects with NOP
+fill replace the 188 stock body bytes across `[0x0058F9D4,0x0058FA90)`.
+Provider binding is exact: the retained CRC-16 provider at `0x0049ACD4` and
+the retained NVDB blob read/write adapters at `0x005105F0`/`0x00510602`;
+the retained diagnostic hook stays the candidate's deliberate no-op. The
+28-byte literal tail stays retained stock, the twelve-byte SRAM record at
+`0x200038D8`, the `nvBuzzer` key, and the v2 4,000 Hz / 30% boot defaults
+are untouched, and the two stored entry roots at
+`0x006D1E84`/`0x0078F518` plus the five direct entry calls reach the
+leaves through the redirects. Apple Clang 21 overlay/component/package pins
+are `150692/3674088/4452582` (SHA-256 `58920545…`, `0b88c150…`,
+`5d1efae3…`). The leaves and redirects are gated `apple-clang`; linux-clang
+leaf pins await Linux toolchain regeneration. Ownership: 188 replaced stock
+body bytes. See `docs/research/g2-nvdb-buzzer-recovery.md`.
+
+## Current G2 NVDB product-mode production routing
+
+The retained `service_nvdb_product_mode.c` closure is production-routed
+under the reviewed apple-clang profile: six relocated overlay leaves (196
+text bytes plus one two-byte alignment pad) plus six `B.W` entry redirects
+with NOP fill replace the 270 stock body bytes across
+`[0x004ABD90,0x004ABE9E)`. Provider binding is exact: the retained CRC-16
+provider at `0x0049ACD4` and the retained NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`; the retained diagnostic hook stays the
+candidate's deliberate no-op. The 42-byte alignment and literal island
+stays retained stock, the four-byte SRAM record at `0x200038F0`, the
+`nvProdMode` key, and the version-0 boot defaults are untouched, and the
+two stored entry roots at `0x006D1E94`/`0x0078F520` plus the 54 direct
+entry calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `150890/3674286/4452780` (SHA-256
+`21b94e54…`, `2ad978b4…`, `41064778…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 270 replaced stock body bytes. See
+`docs/research/g2-nvdb-product-mode-recovery.md`.
+
+## Current G2 NVDB MAC production routing
+
+The retained `service_nvdb_mac.c` closure is production-routed under the
+reviewed apple-clang profile: three relocated overlay leaves (252 text
+bytes plus one two-byte alignment pad) plus three `B.W` entry redirects
+with NOP fill replace the 280 stock body bytes across
+`[0x005D9F48,0x005DA060)`. Provider binding is exact: the source-owned
+MCUCTRL information provider at `0x00480D72` (the candidate's two-word
+device-identifier seam is adapted onto its selector-one 64-byte
+device-record ABI by the leaf's pinned `-DOPEN_CFW_NVDB_MAC_DEVICE_IDS_GET`
+binding), the retained CRC-32 provider at `0x004D34C4`, the retained CRC-16
+provider at `0x0049ACD4`, and the retained NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`; the retained diagnostic hook stays the
+candidate's deliberate no-op. The 32-byte literal tail stays retained
+stock, the ten-byte SRAM record at `0x200038E4`, the `nvMAC` key, and the
+version-1 boot defaults are untouched, and the two stored entry roots at
+`0x006D1E8C`/`0x0078F51C` plus the two direct entry calls reach the leaves
+through the redirects. Apple Clang 21 overlay/component/package pins are
+`151144/3674540/4453034` (SHA-256 `33a5109d…`, `be32048d…`, `bec30ccb…`).
+The leaves and redirects are gated `apple-clang`; linux-clang leaf pins
+await Linux toolchain regeneration. Ownership: 280 replaced stock body
+bytes. See `docs/research/g2-nvdb-mac-recovery.md`.
+
+## Current G2 NVDB advertising-magic production routing
+
+The retained advertising-magic NVDB closure immediately preceding
+`service_nvdb_mac.c` is production-routed under the reviewed apple-clang
+profile: three relocated overlay leaves (140 text bytes plus one two-byte
+alignment pad before the migration callback) plus three `B.W` entry
+redirects with NOP fill replace the 110 stock body bytes across
+`[0x005D9ED0,0x005D9F3E)`. Provider binding is exact: the retained CRC-16
+provider at `0x0049ACD4` and the retained NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`. The ten-byte alignment and literal tail stays
+retained stock, the four-byte SRAM record at `0x200038D4`, the
+`nvAdvMagic` key, and the boot defaults are untouched, and the two stored
+entry roots at `0x006D1E7C`/`0x0078F514` reach the leaves through the
+redirects. Apple Clang 21 overlay/component/package pins are
+`151286/3674682/4453176` (SHA-256 `d3087982…`, `8aac36ba…`, `5fd04249…`).
+The leaves and redirects are gated `apple-clang`; linux-clang leaf pins
+await Linux toolchain regeneration. Ownership: 110 replaced stock body
+bytes. See `docs/research/g2-nvdb-adv-magic-recovery.md`.
+
+## Current G2 NVDB system-data production routing
+
+The retained `service_nvdb_sys_dt.c` closure is production-routed under the
+reviewed apple-clang profile: thirteen relocated overlay leaves (4,338 text
+bytes plus two 23-byte read-only string closures and twelve alignment pad
+bytes) plus thirteen `B.W` entry redirects with NOP fill replace the 5,084
+stock body bytes across `[0x004AEE28,0x004B03E0)`. Provider binding is
+exact: the retained CRC-16 provider at `0x0049ACD4`, the retained NVDB blob
+read/write adapters at `0x005105F0`/`0x00510602`, the source-owned
+peripheral-power enable/disable entries at `0x0047F5B8`/`0x0047F7AE` and
+CMSIS delay at `0x00449376` (through the pinned
+`-DOPEN_CFW_NVDB_SYS_DT_OTP_BEGIN`/`_END` gate sequences), the retained OTP
+INFOC word accessors at `0x0051381A`/`0x00513850`, and the retained
+40-entry legacy-PSN table at `0x006D3358` (through the pinned
+`-DOPEN_CFW_NVDB_SYS_DT_LEGACY_PSNS` seam); the fourteen-field parse
+diagnostic sink is compiled out by the pinned
+`-DOPEN_CFW_NVDB_SYS_DT_PARSED` no-op binding. The 476 split
+alignment/literal bytes stay retained stock, the 172-byte SRAM record at
+`0x20003994`, the `nvSysDt` key, and the factory defaults are untouched,
+and the two stored entry roots at `0x006D1EAC`/`0x0078F52C` plus the 37
+direct entry calls reach the leaves through the redirects. Apple Clang 21
+overlay/component/package pins are `155682/3679078/4457572` (SHA-256
+`3bb04fb7…`, `5160689a…`, `f66065fe…`). The leaves and redirects are gated
+`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
+Ownership: 5,084 replaced stock body bytes. See
+`docs/research/g2-nvdb-sys-dt-recovery.md`.
+
+## Current G2 ULED display-preprocess production routing
+
+The retained `driver/uled/display_preprocess.c` closure is production-routed
+under the reviewed apple-clang profile: one relocated closure leaf (242 text
+bytes plus the 28-byte GPU descriptor-template read-only closure and four
+alignment pad bytes) plus one `B.W` entry redirect with NOP fill replace the
+584 stock body bytes at `[0x0046C73C,0x0046C984)`. Provider binding is exact:
+the retained GPU start provider at `0x004B092A`, the retained
+destination-channel configure/mode/enable providers at
+`0x004B0730`/`0x004B1A78`/`0x004B0748`, the retained source-configuration
+provider at `0x004B1608`, the retained offset provider at `0x004B1B48`, and
+the retained commit provider at `0x004B0C8A`. The assertion sink is compiled
+out by the pinned `-DOPEN_CFW_ULED_ASSERT` no-op fail-stop binding and the
+GPU-failure diagnostic binding stays inert. The discontiguous 64-byte IAR
+literal/template pool at `[0x0046CA74,0x0046CAB4)` stays retained stock data,
+and the sole direct call at `0x0046CA64` reaches the leaf through the
+redirect. Routing required extending the reviewed rodata local-name class in
+`tools/apollo_overlay.py` to admit Clang `.L__const.<function>.<variable>`
+constant-aggregate locals alongside the existing `.L.str[.N]` string class.
+Apple Clang 21 overlay/component/package pins are `164536/3687932/4466426`
+(SHA-256 `a437e33e…`, `4fdb5af5…`, `cc1642fd…`). The leaf and redirect are
+gated `apple-clang`; linux-clang leaf pins await Linux toolchain
+regeneration. Ownership: 584 replaced stock body bytes. See
+`docs/research/g2-uled-display-preprocess-recovery.md`.
+
 ## Current G2 KVDB time increment
 
 The retained `service_kvdb_time.c` object is completely bounded at
@@ -2125,8 +2316,38 @@ runtime event/state offsets `0x14/0x16`, device-ID validation, and the exact
 19-call initialization sequence. Starting from the reset fixture, defaults
 produce register image `0000005a24241f4406002100f0`. Nine candidate tests,
 four analyzer tests, and a 22-symbol freestanding Thumb build pass. Production
-routing and ownership remain zero. See
-`docs/research/g2-chg-bq25180-recovery.md`.
+routing is live under the reviewed apple-clang profile: twenty-two relocated
+leaves and twenty-two entry redirects replace 1,792 stock body bytes, bound
+to the retained I2C read/write backends at `0x0050436E`/`0x005044B4` and the
+retained `memset` provider at `0x0043C0E4`, with the assertion sink compiled
+out by the pinned no-op fail-stop binding and the diagnostic binding inert.
+See `docs/research/g2-chg-bq25180-recovery.md`.
+
+## Current G2 BQ27427 fuel-gauge increment
+
+The retained `driver/chg/drv_bq27427.c` object is completely bounded at
+`[0x0053AFC0,0x0053C2A4)`: 37 functions contribute 4,440 code bytes and six
+owned non-code intervals contribute 396 bytes. Eighty-eight direct entry
+calls, 287 provider/internal calls, no stored entry pointers, and zero
+legitimate direct, `B.W`, or raw strict-interior ingress close the object;
+the one raw BL-looking interior window lies outside authenticated code.
+
+The candidate pins I2C bus 7/address `0x55`, split little-endian register
+I/O, the 36-byte data-memory block with its exact checksum and CFGUPDATE
+flow, the initialized `0x80008000` unseal key, the seven live DM descriptors,
+product defaults `{240,80,3100}`, and the telemetry record at `0x20073B18`.
+Twelve candidate/analyzer host tests and a 33-symbol freestanding Thumb build
+pass. Production routing is live under the reviewed apple-clang profile:
+thirty-three relocated leaves and thirty-two entry redirects replace 3,938
+stock body bytes, bound to the retained I2C read/write backends at
+`0x0050436E`/`0x005044B4`, the retained millisecond delay wrapper at
+`0x004910F4`, and the retained `memcpy`/`memset` providers at
+`0x00439BE4`/`0x0043C0E4`, with the diagnostic binding inert by default. The
+CFGUPDATE poll helper rides as an overlay-internal local-function sibling
+leaf under the reviewed `allow_local_function`/
+`allow_local_relocation_targets` contracts, and the DM-descriptor-table and
+product-defaults constants ride as reviewed read-only closures. See
+`docs/research/g2-chg-bq27427-recovery.md`.
 
 ## Current G2 charger-common increment
 
@@ -2141,7 +2362,10 @@ The candidate pins the 24-byte aggregate runtime, eight-byte local cache,
 initial retry schedule, near-full SOC compensation, charging debounce, peer
 aggregation, and twelve-byte service-`0x0105` message ABI. Six candidate tests,
 four analyzer tests, and an 11-symbol freestanding Thumb build pass. Production
-routing and ownership remain zero. See
+routing is live under the reviewed apple-clang profile: eleven relocated
+leaves and eleven entry redirects replace 2,400 stock body bytes, with the
+five file-static state cells bound to their retained stock SRAM cells through
+the new reviewed `allow_bound_static_data` relocation contract. See
 `docs/research/g2-charger-common-recovery.md`.
 
 ## Current G2 BQ27427 fuel-gauge increment

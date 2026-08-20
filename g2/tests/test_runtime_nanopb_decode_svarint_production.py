@@ -245,16 +245,16 @@ LINUX_AGGREGATE = {
 }
 
 STAGED_CONSUMER_PINS = {
-    MANIFEST: "97128efa7fceb1d23b6e9206c9f526a0f96092d893d2b80932bafbeb281e7f8b",
+    MANIFEST: "916a7b7d2d73c1eff2e2708dfc446f4f1b8b92d84984be14e72c6477167fb384",
     PROVENANCE: "c1bbb7d80e38a1ab18e7c71c03b89a891090509949e45a4db0f3224a927a1a99",
     AUDIT: "b483e5b1915f54e99e8aefd047ece54153aadc6df4af51cdc4ef1cf81cc983d0",
-    ROOT / "README.md": "baf7b343b1081ab682f6e044dd210e9e2e81a03b7ddb6a240d153937a45ec513",
+    ROOT / "README.md": "a0d435d21fdaae57f68bf9adb3ababbe566289374d50c70cdd66242667e9fd28",
     ROOT / "components/README.md": "a56e17276ef67bd063ba193a55d3c8ec7e524f09bde184b2b8f9420f0f3ebbf9",
     ROOT / "components/apollo_main/core_overlay/NOTICE.md": "139b2e7eeabb002c771d075d980f02e6bb5dd948b6cb9db7f12b97e64daf383a",
-    ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "d7461f22a77cfba4e56fca711a2ef2cebbcd995e5ccc789a8c64dabd21997c89",
+    ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "8c8c21d94b74185cbae8758ce2e9706a5c82bd6711119d2bd015a30648d4d02a",
     ROOT / "third_party/nanopb/README.openCFW.md": "bd70ff8d92c38cad8bde2a4356f7d56f9b02994239ff09453f2f435b44fdb672",
     ROOT / "docs/memory-map.md": "6087dd8bd48a764e15e623b56298c16e40992a6aa3cd445319bff308d078f859",
-    ROOT / "docs/source-coverage.md": "bb31217d23c6154798a2ab60d97bbddb4546ddd1a47533d5ea48c17e807bdd43",
+    ROOT / "docs/source-coverage.md": "619d91efc4895938aebe7b200c9ab53d6155d5051a56f24e1a18e613cc89c6ac",
     ROOT / "docs/upstream-inventory.md": "f9ad283c729e6ae136ab6846d9d6134ff16e4280d3019f6deb2c3b83921c73e9",
     ROOT / "docs/linux-reproducible-build.md": "42a08943723dfb9c1a531601469a94dc15320286c44f0aa8c55d42c05c1156c3",
 }
@@ -857,7 +857,7 @@ class NanopbDecodeSvarintProductionTests(unittest.TestCase):
                 len(overlay["patch_sites"]),
                 len(overlay["relocated_leaves"]),
             ),
-            (825, 766, 256),
+            (941, 881, 372),
         )
 
         self.assertEqual(overlay["functions"].count(PRODUCTION_FUNCTION), 1)

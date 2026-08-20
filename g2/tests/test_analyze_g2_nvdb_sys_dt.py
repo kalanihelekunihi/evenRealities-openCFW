@@ -46,9 +46,56 @@ class AnalyzeG2NvdbSysDtTests(unittest.TestCase):
         self.assertTrue(behavior["migration_marks_legacy_psn"])
         self.assertTrue(behavior["migration_prefers_latest_valid_otp_psn"])
 
-    def test_candidate_is_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+    def test_candidate_is_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 5084)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 476)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/nvdb_sys_dt.c",
+        )
+        self.assertEqual(
+            production["candidate_sha256"],
+            "a18152b8a7e769142bb21795cb724ef29df2c8ea18176050d12d8606189516c7",
+        )
+        self.assertEqual(
+            production["relocated_leaves"],
+            [
+                "open_cfw_nvdb_sys_dt_default_initialize",
+                "open_cfw_nvdb_sys_dt_get",
+                "open_cfw_nvdb_sys_dt_load_and_migrate",
+                "open_cfw_nvdb_sys_dt_manufacturer_name",
+                "open_cfw_nvdb_sys_dt_mark_legacy_psn",
+                "open_cfw_nvdb_sys_dt_month",
+                "open_cfw_nvdb_sys_dt_parse_psn",
+                "open_cfw_nvdb_sys_dt_read",
+                "open_cfw_nvdb_sys_dt_read_psn_from_otp",
+                "open_cfw_nvdb_sys_dt_reset_aging",
+                "open_cfw_nvdb_sys_dt_write",
+                "open_cfw_nvdb_sys_dt_write_psn_to_otp",
+                "open_cfw_nvdb_sys_dt_year",
+            ],
+        )
+        self.assertEqual(
+            production["patch_sites"],
+            [
+                "replace_nvdb_sys_dt_default_initialize",
+                "replace_nvdb_sys_dt_get",
+                "replace_nvdb_sys_dt_load_and_migrate",
+                "replace_nvdb_sys_dt_manufacturer_name",
+                "replace_nvdb_sys_dt_mark_legacy_psn",
+                "replace_nvdb_sys_dt_month",
+                "replace_nvdb_sys_dt_parse_psn",
+                "replace_nvdb_sys_dt_read",
+                "replace_nvdb_sys_dt_read_psn_from_otp",
+                "replace_nvdb_sys_dt_reset_aging",
+                "replace_nvdb_sys_dt_write",
+                "replace_nvdb_sys_dt_write_psn_to_otp",
+                "replace_nvdb_sys_dt_year",
+            ],
+        )
 
 
 if __name__ == "__main__":

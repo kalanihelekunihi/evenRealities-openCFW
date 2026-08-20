@@ -23,8 +23,8 @@ OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 CANDIDATE = ROOT / "components/apollo_main/core_overlay/chg_bq25180.c"
 PINS = {
     FUNCTION_MAP: "5c71b831fbe1f1a254a742d0c3d07b89617b1397412b185625397dab6c60ef57",
-    CLOSURE: "dc4d98d5304d2bc817ebf993f9e9e3d7cbeb642ae5b4863b962c183e5c56d4c1",
-    PROVENANCE: "87f000e80e818aad2841db0011f8d49d4a187b733dbdac7418f635374cebbb6b",
+    CLOSURE: "752542d39dcf921550abbb0323ceb07aef4046242851abe45d5f3730e711e7d2",
+    PROVENANCE: "397ecc397ffd8251a65274d4dbbee40f9171de2d89e171f6fcf386fc8f81dbd4",
     CANDIDATE: "0291aa058fd90a957b97fd0066e2d49bf16676b761662a32bdb5d717be74067b",
 }
 PHYSICAL = (0x0053A670, 0x0053AFC0)
@@ -234,8 +234,148 @@ def analyze(image_path: Path = IMAGE) -> dict:
 
     overlay = json.loads(OVERLAY.read_text())
     candidate_rel = str(CANDIDATE.relative_to(ROOT))
-    if any(source.get("path") == candidate_rel for source in overlay["sources"]):
-        raise AuditError("candidate unexpectedly entered production overlay")
+    expected_patches = {
+        "replace_bq25180_read_event": (
+            0x0053A7CC, 224,
+            "2ffb7ed8fed9bdf2468d2fcbf8a56f85746ac03315fb384e47f3f9663d57afd4",
+            "open_cfw_bq25180_read_event",
+        ),
+        "replace_bq25180_read_state": (
+            0x0053A8AC, 292,
+            "f4764d0d8157d8c917472fd97d30e1ad95118d1a27e88dd5bff26281c4ddbffb",
+            "open_cfw_bq25180_read_state",
+        ),
+        "replace_bq25180_read_device_id": (
+            0x0053A9D0, 180,
+            "e6404eaa81eade54be3c8b1f31b260f03a22a15e29c41d658df9891d388c9ee6",
+            "open_cfw_bq25180_read_device_id",
+        ),
+        "replace_bq25180_set_charge_enabled": (
+            0x0053AA84, 28,
+            "b0d11f885f410c569ab178a0422764b92196fcb72b6b066af94e17c21aba9591",
+            "open_cfw_bq25180_set_charge_enabled",
+        ),
+        "replace_bq25180_set_ts_enabled": (
+            0x0053AAA0, 18,
+            "5a24f3a763aad3d95d723cc646ec6cce43c593768e3c0cc3a035a110e2344c44",
+            "open_cfw_bq25180_set_ts_enabled",
+        ),
+        "replace_bq25180_set_safety_timer": (
+            0x0053AAB2, 18,
+            "758b3da2ca9a1b9a795efe20ecbb0cd015cd10811c4c1c8916ff4984af53f0f1",
+            "open_cfw_bq25180_set_safety_timer",
+        ),
+        "replace_bq25180_set_watchdog": (
+            0x0053AAC4, 18,
+            "8aff5fb5ea84e26fd3211112c7db04d8d8fc6b013427f1cdf9eb10a11ab7c5c4",
+            "open_cfw_bq25180_set_watchdog",
+        ),
+        "replace_bq25180_set_battery_regulation_voltage": (
+            0x0053AAD6, 122,
+            "53abad6b880231bc264d979999d19d253ac65d38babde0a92d0cf05f5b128215",
+            "open_cfw_bq25180_set_battery_regulation_voltage",
+        ),
+        "replace_bq25180_set_battery_overcurrent": (
+            0x0053AB50, 18,
+            "5894c213d476786d20c1b466fc43c6519412c8c1bf5ba1a955c1e813b19e76d3",
+            "open_cfw_bq25180_set_battery_overcurrent",
+        ),
+        "replace_bq25180_set_battery_undervoltage_lockout": (
+            0x0053AB62, 190,
+            "5d9cb9dcc0f7748973032acd1337e81d0cddd93cb9c6b78e50f971f58a0923d1",
+            "open_cfw_bq25180_set_battery_undervoltage_lockout",
+        ),
+        "replace_bq25180_set_precharge_threshold": (
+            0x0053AC20, 30,
+            "2d6338bb172e44e6a26b5bcf33b25d0ef78fecd73533e8c08dd6c924fbfa80f1",
+            "open_cfw_bq25180_set_precharge_threshold",
+        ),
+        "replace_bq25180_set_precharge_ratio": (
+            0x0053AC3E, 30,
+            "ffa00028db6ae02a3432130d289115d7e1924f2ce8427949c332eda15bf8523d",
+            "open_cfw_bq25180_set_precharge_ratio",
+        ),
+        "replace_bq25180_set_fastcharge_current": (
+            0x0053AC5C, 134,
+            "62b2fe5df0db4b120de9976de9a745a5ab2789caa545fd0982e9a2e1ad4a362c",
+            "open_cfw_bq25180_set_fastcharge_current",
+        ),
+        "replace_bq25180_set_termination_percent": (
+            0x0053ACE2, 50,
+            "3db14f368be150d44668e5d1660f539200cc24bb2222851519b6a09e51f13ce5",
+            "open_cfw_bq25180_set_termination_percent",
+        ),
+        "replace_bq25180_set_vindpm": (
+            0x0053AD14, 18,
+            "3f3b6a84b13c2b59cbf070cbf89e8a0f4ec4c85a9bd5c79e7181824c2529186f",
+            "open_cfw_bq25180_set_vindpm",
+        ),
+        "replace_bq25180_set_vdppm_enabled": (
+            0x0053AD26, 28,
+            "eac81a0dfb48627e9e9493672a6681907269df3b59586a2fe9b7054eadc009be",
+            "open_cfw_bq25180_set_vdppm_enabled",
+        ),
+        "replace_bq25180_set_input_current_limit": (
+            0x0053AD42, 110,
+            "22116f6f42af9adc92d92eebd0cb143277941e80d210339ef4974c698afa571a",
+            "open_cfw_bq25180_set_input_current_limit",
+        ),
+        "replace_bq25180_set_system_mode": (
+            0x0053ADB0, 18,
+            "edd6bce30be66516883a5341d4a75eb9eede51b299a5f2d494382384f33e102f",
+            "open_cfw_bq25180_set_system_mode",
+        ),
+        "replace_bq25180_set_system_voltage": (
+            0x0053ADC2, 18,
+            "0dac0f3a3f626c21120fe6e3a824ccf3314973962371b5a9d6a8f168cb89ba67",
+            "open_cfw_bq25180_set_system_voltage",
+        ),
+        "replace_bq25180_set_ts_auto_enabled": (
+            0x0053ADD4, 18,
+            "a8347071eaaebef0f48ed0107cf1e0ab1676c6ca124eb530af1fcb4a32a25309",
+            "open_cfw_bq25180_set_ts_auto_enabled",
+        ),
+        "replace_bq25180_refresh_status": (
+            0x0053AE66, 24,
+            "58aae337d1c0264f8be3da7069d60eb569f27b08aca5ebe1c46ef97ab5ebd0ef",
+            "open_cfw_bq25180_refresh_status",
+        ),
+        "replace_bq25180_hardware_init": (
+            0x0053AE7E, 206,
+            "df88ce0ebdd1477c5fc1069c878ed5da0d85ff9b6aae1ac9d9afde3feb882ec2",
+            "open_cfw_bq25180_hardware_init",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate_rel
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"] != PINS[CANDIDATE]
+            or leaf.get("profiles") != ["apple-clang"]
+            or leaf.get("allow_bound_static_data") is not None
+            for name, leaf in leaves.items()
+        )
+    ):
+        raise AuditError("production BQ25180 routing changed")
 
     return {
         "surface": {
@@ -275,8 +415,19 @@ def analyze(image_path: Path = IMAGE) -> dict:
         },
         "production": {
             "candidate": candidate_rel,
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate_sha256": PINS[CANDIDATE],
+            "production_routed": True,
+            "ownership_bytes": 1792,
+            "retained_stock_noncode_bytes": 116,
+            "retained_stock_dead_body_bytes": 476,
+            "bound_providers": {
+                "open_cfw_bq25180_bus_read": "0x0050436e",
+                "open_cfw_bq25180_bus_write": "0x005044b4",
+                "memset": "0x0043c0e4",
+            },
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

@@ -1501,6 +1501,212 @@ leaves and redirects are gated `apple-clang`, so the recorded linux-clang
 profile is byte-unaffected and its leaf pins await Linux toolchain
 regeneration.
 
+The latest increment authors and production-routes the clean-room pathless
+`AT^NUS` command handler (`at_nus.c`): the single
+`open_cfw_at_nus_handler` leaf passes the retained `NUS+OK\r\n` response
+string at `0x0078A370` to the retained output provider at `0x00541430` and
+returns one without reading its arguments, replacing the complete
+sixteen-byte stock object at `[0x005A5520,0x005A5530)` through one entry
+redirect; the stored registration pointer at `0x006C92A8` — the only
+ingress — reaches the leaf through the redirect. Under the reviewed Apple
+Clang 21 profile the overlay/component/package sizes are
+`147042/3670438/4448932` with SHA-256
+`b1a5bcd75031fadd93e875fa643400f20125f4d89e74b5fb55e9aa111b9dc789`,
+`76bc4a35a0fe0ed26e9489b4e4b5aec5f95ea90463685acd316851ea657d8a1e`, and
+`a842e5e3327a7790c006a3f50b2192a9e48a2f415be51e8f4d7be91a15f09adb`; the
+leaf and redirect are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment authors and production-routes the clean-room pathless
+eAT core/sensor command cluster (`at_core_sensor.c`): twelve relocated leaves
+implement the `AT^INFO`, `AT^RESET`, `AT^PSN`, `AT^IMU_RAWDATA`,
+`AT^IMU_EULER`, `AT^SCRN_X`, `AT^SCRN_Y`, `AT^ALS_READ`, `AT^ALS`,
+`AT^BRIGHTNESS`, `AT^ALS_SCALE_READ`, and `AT^BRIGHTNESS_READ` handlers
+against the retained providers and literals, reproducing the recovered stock
+quirks (`SCRN_Y` accepts zero, the PSN error reports the required length,
+`ALS` acknowledges unhandled values, `BRIGHTNESS` is unvalidated), and twelve
+`B.W` entry redirects with NOP fill replace the 486 stock body bytes at
+`[0x005A5720,0x005A595E)` while the 126 owned alignment/literal bytes stay
+retained stock. Under the reviewed Apple Clang 21 profile the
+overlay/component/package sizes are `147708/3671104/4449598` with SHA-256
+`bcf4098013f7d704bcc2be618ec08e09865c0dc23e1bea232dbbfb6d1d090f36`,
+`d1793fce0f3e5fe2707f5ff6257582f8cde35edb3300e0b66ff1d11a8692bd28`, and
+`f3655acbe9ee2a5b8b559420c96ed79e7b1d4df2a3887c4caca7b4b22756914c`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room module-configuration
+KVDB closure (`kvdb_module_configure.c`): six relocated leaves implement the
+`SVC_KvdbReadLanguage`/`SVC_KvdbWriteLanguage` one-byte language accessors,
+the `SVC_KvdbReadDashboardAutoCloseValue`/
+`SVC_KvdbWriteDashboardAutoCloseValue` dashboard word accessors, and the
+`SVC_KvdbReadMenuConfigureValue`/`SVC_KvdbWriteMenuConfigureValue` packed
+menu record reader/writer against the retained blob read/write adapters at
+`0x004D956C`/`0x004D957E`, the retained mode provider at `0x0045A570`, the
+retained built-in menu item lookup at `0x00460450`, and the retained
+snapshot synchronization providers at `0x0046018E`/`0x004601EA`, reproducing
+the recovered stock behavior (mode-two dashboard bypass, lookup-failure
+partial state, custom-text non-termination, identical-record write
+suppression, and no stock count/text clamps), and six `B.W` entry redirects
+with NOP fill replace the 2,286 stock body bytes at
+`[0x004922F8,0x00492BE6)` while the 206-byte alignment/literal tail stays
+retained stock; the three stored reader roots and three direct writer entry
+calls reach the leaves through the redirects. Under the reviewed Apple
+Clang 21 profile the overlay/component/package sizes are
+`150522/3673918/4452412` with SHA-256
+`f32aa018acd55ccf81db5f8c6e3570a850735f1f313f3d33a3bb8cf8022fe988`,
+`32413c15c60ee03c499f3bf1fdbb63b49cce62c0a0d39b8259d6c7343b733c74`, and
+`ab0f0b0af3e1161533e2da0b61a7a783bc99bd15df31edb6be4c2fd8581b07ad`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room buzzer NVDB closure
+(`nvdb_buzzer.c`): five relocated leaves implement the default-record CRC
+initializer, the `_nvdbUpdataBuzzer` migration callback, the frequency and
+duty getters, and the persistent whole-record updater against the retained
+CRC-16 provider at `0x0049ACD4` and the retained NVDB blob read/write
+adapters at `0x005105F0`/`0x00510602`, reproducing the recovered stock
+behavior (missing-record default rewrite, pre-v2 CRC-mismatch migration,
+current-v2 mismatch no-op, and no payload copy into the live record), and
+five `B.W` entry redirects with NOP fill replace the 188 stock body bytes
+at `[0x0058F9D4,0x0058FA90)` while the 28-byte literal tail stays retained
+stock; the two stored entry roots and five direct entry calls reach the
+leaves through the redirects. Under the reviewed Apple Clang 21 profile the
+overlay/component/package sizes are `150692/3674088/4452582` with SHA-256
+`58920545ebe56b89e488bc916aec218f47bef3271d3558c4e8c63d5f646ff7d0`,
+`0b88c15009a58a851c3d3408084cf8c685782029cea1c64107315f4f5177d9bc`, and
+`5d1efae37054e4a8bc33dd95cf5511ce321e1f4d0c9cb127d8bf0e2b7eb893f1`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room product-mode NVDB
+closure (`nvdb_product_mode.c`): six relocated leaves implement the
+default-record CRC initializer, the `set_product_mode` RAM-only setter, the
+`productModeGet` getter, the persistent updater, the `_nvdbUpdataProdMd`
+migration callback, and the `productModeRead` persistent reader against the
+retained CRC-16 provider at `0x0049ACD4` and the retained NVDB blob
+read/write adapters at `0x005105F0`/`0x00510602`, reproducing the recovered
+stock behavior (missing-record default rewrite, pre-v1 CRC-mismatch
+migration, current-v1 mismatch no-op, and unvalidated record import on
+read), and six `B.W` entry redirects with NOP fill replace the 270 stock
+body bytes at `[0x004ABD90,0x004ABE9E)` while the 42-byte alignment and
+literal island stays retained stock; the two stored entry roots and 54
+direct entry calls reach the leaves through the redirects. Under the
+reviewed Apple Clang 21 profile the overlay/component/package sizes are
+`150890/3674286/4452780` with SHA-256
+`21b94e548366f0c7a6b2165220a807536dc17269a670e310bb96129bb766e29b`,
+`2ad978b4702752c89c1e2cb9d553652b23a22bd3f77da787b547ccf9445114a2`, and
+`4106477807c01bde3ad09631e10e58b843a11b1060ba1aeb24022d1c0dc054e7`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room MAC NVDB closure
+(`nvdb_mac.c`): three relocated leaves implement the CHIPID-derived
+static-random address default initializer, the persistent whole-record
+updater, and the `_nvdbUpdataMac` migration callback against the
+source-owned MCUCTRL information provider at `0x00480D72` (through an
+explicit `-DOPEN_CFW_NVDB_MAC_DEVICE_IDS_GET` adaptation of the candidate's
+two-word seam onto the provider's selector-one 64-byte device-record ABI),
+the retained CRC-32 provider at `0x004D34C4`, the retained CRC-16 provider
+at `0x0049ACD4`, and the retained NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`, reproducing the recovered stock behavior
+(missing-record rewrite of the current derived address, v0 CRC-mismatch
+migration, current-v1 mismatch no-op, and no payload import), and three
+`B.W` entry redirects with NOP fill replace the 280 stock body bytes at
+`[0x005D9F48,0x005DA060)` while the 32-byte literal tail stays retained
+stock; the two stored entry roots and two direct entry calls reach the
+leaves through the redirects. Under the reviewed Apple Clang 21 profile the
+overlay/component/package sizes are `151144/3674540/4453034` with SHA-256
+`33a5109dc1f6f3b7707e3abcb65580b35ee6df4c3ed0f7c6b068e719e8fd4b10`,
+`be32048d175e4e9b207b0cba56e6ca41be793bd33304174c9354655aff16b2ff`, and
+`bec30ccb6839f92ae35016d7a5f4f5b81c7d50dc515b4c7424c6cdcad8104697`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room advertising-magic
+NVDB closure (`nvdb_adv_magic.c`): three relocated leaves implement the
+default-record CRC initializer, the persistent updater, and the migration
+callback against the retained CRC-16 provider at `0x0049ACD4` and the
+retained NVDB blob read/write adapters at `0x005105F0`/`0x00510602`,
+reproducing the recovered stock behavior (missing-record rewrite of the
+current magic, v0 CRC-mismatch migration, current-v1 mismatch no-op, and
+no payload import), and three `B.W` entry redirects with NOP fill replace
+the 110 stock body bytes at `[0x005D9ED0,0x005D9F3E)` while the ten-byte
+alignment and literal tail stays retained stock; the two stored entry
+roots at `0x006D1E7C`/`0x0078F514` reach the leaves through the redirects.
+Under the reviewed Apple Clang 21 profile the overlay/component/package
+sizes are `151286/3674682/4453176` with SHA-256
+`d30879825d2c513dcef88a951a0aac9a9c3ff476da56720c2138d22f5ba9c9f5`,
+`8aac36ba8830d740aa08e461e43c711af9e04bf59a529eb5b5671be84774be9f`, and
+`5fd04249a65b195c17a971d1ba105972d062976267451967fd4c0f840da4145d`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room system-data NVDB
+closure (`nvdb_sys_dt.c`): thirteen relocated leaves implement the
+`nvSysDt` factory-record CRC initializer, the `_nvdbUpdataSysDt` migration
+callback, the `SVC_NvdbWriteSysData` indexed updater, the field getter, the
+`SVC_NvdbReadSysData` direct importer, the `SVC_NvdbparsePsn` decoder, the
+manufacturer/year/month helpers, the aging-state reset, the legacy-PSN
+scan, and the `SVC_ReadPSNFromOTP`/`SVC_WritePSNToOTP` journal pair against
+the retained CRC-16 provider at `0x0049ACD4`, the retained NVDB blob
+read/write adapters at `0x005105F0`/`0x00510602`, the source-owned
+peripheral-power enable/disable entries at `0x0047F5B8`/`0x0047F7AE` and
+CMSIS delay at `0x00449376` (through the pinned
+`-DOPEN_CFW_NVDB_SYS_DT_OTP_BEGIN`/`_END` gate sequences), the retained OTP
+INFOC word accessors at `0x0051381A`/`0x00513850`, and the retained
+40-entry legacy-PSN table at `0x006D3358` (through the pinned
+`-DOPEN_CFW_NVDB_SYS_DT_LEGACY_PSNS` seam), with the parse diagnostic sink
+compiled out by the pinned `-DOPEN_CFW_NVDB_SYS_DT_PARSED` no-op binding,
+reproducing the recovered stock behavior (missing-record and
+pre-v2-CRC-mismatch rewrites of the current record, non-importing
+migration, legacy classification, and newest-valid-OTP PSN override), and
+thirteen `B.W` entry redirects with NOP fill replace the 5,084 stock body
+bytes at `[0x004AEE28,0x004B03E0)` while the 476 split alignment/literal
+bytes stay retained stock; the two stored entry roots and 37 direct entry
+calls reach the leaves through the redirects. Under the reviewed Apple
+Clang 21 profile the overlay/component/package sizes are
+`155682/3679078/4457572` with SHA-256
+`3bb04fb7f66d8a3d5e53ec1028bb73b5f832bb8e1e39827baf8a6c014d3c5d39`,
+`5160689a88da1ba7a0163c7f05739d3fcc3caa0f9863e6d7ac2e5fa8d54e8dea`, and
+`f66065fe5ea21f701985897f3f2629ff84a0fb050a563d300ebefa9ec55d7c4b`; the
+leaves and redirects are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
+The latest increment production-routes the clean-room ULED
+display-preprocess closure (`uled_display_preprocess.c`): one relocated
+closure leaf implements the `buffer_sync_to_fb` frame preprocessor — all
+nine stock assertions, the exact `0x619` destination-descriptor template,
+the 16-byte source region, width/offset halving, format nine, the GPU
+result gate, and the ordered six-call success sequence — against the
+retained GPU start provider at `0x004B092A`, the retained
+destination-channel providers at `0x004B0730`/`0x004B1A78`/`0x004B0748`,
+the retained source-configuration provider at `0x004B1608`, the retained
+offset provider at `0x004B1B48`, and the retained commit provider at
+`0x004B0C8A`, with the assertion sink compiled out by the pinned
+`-DOPEN_CFW_ULED_ASSERT` no-op fail-stop binding and the GPU-failure
+diagnostic binding inert, and one `B.W` entry redirect with NOP fill
+replaces the 584 stock body bytes at `[0x0046C73C,0x0046C984)` while the
+discontiguous 64-byte IAR literal/template pool at
+`[0x0046CA74,0x0046CAB4)` stays retained stock; the sole direct call at
+`0x0046CA64` reaches the leaf through the redirect. Under the reviewed
+Apple Clang 21 profile the overlay/component/package sizes are
+`164536/3687932/4466426` with SHA-256
+`a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546`,
+`4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07`, and
+`cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4`; the
+leaf and redirect are gated `apple-clang`, so the recorded linux-clang
+profile is byte-unaffected and its leaf pins await Linux toolchain
+regeneration.
+
 ## Prior dual-image endian-conversion release
 
 This historical source profile additionally replaced the byte-identical

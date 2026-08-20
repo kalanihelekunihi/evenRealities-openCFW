@@ -216,6 +216,52 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if raw_windows != RAW_INTERIOR_WINDOWS or any(site % 2 == 0 for site, _ in raw_windows):
         raise AuditError("raw interior overlap qualification changed")
 
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/uled_display_preprocess.c"
+    candidate_sha256 = "2ded39fb95b869de5361340416b85d598194de8c7e7d90f57eefbbde8044b98b"
+    expected_patches = {
+        "replace_buffer_sync_to_fb": (
+            0x0046C73C, 584, BODY_SHA256,
+            "open_cfw_uled_buffer_sync_to_fb",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate
+    }
+    assert_binding = (
+        "-DOPEN_CFW_ULED_ASSERT(condition, expression)="
+        "do { if (!(condition)) { (void)(expression); for (;;) { } } } while (0)"
+    )
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or any(
+            leaf["source"]["sha256"] != candidate_sha256
+            or leaf.get("profiles") != ["apple-clang"]
+            or assert_binding not in leaf["toolchain"]["flags"]
+            for leaf in leaves.values()
+        )
+    ):
+        raise AuditError("production display-preprocess routing changed")
+
     return {
         "surface": {
             "linked_functions": 1,
@@ -248,9 +294,14 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "success_programs_source_then_offset_then_commit": True,
         },
         "production": {
-            "candidate": "components/apollo_main/core_overlay/uled_display_preprocess.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate": candidate,
+            "candidate_sha256": candidate_sha256,
+            "production_routed": True,
+            "ownership_bytes": 584,
+            "retained_stock_noncode_bytes": 64,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

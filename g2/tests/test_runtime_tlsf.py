@@ -995,14 +995,14 @@ class RuntimeTlsfTests(unittest.TestCase):
                 )
 
         overlay = self.integrated_report["overlay"]
-        self.assertEqual(overlay["size"], 147021)
+        self.assertEqual(overlay["size"], 164536)
         self.assertEqual(
             overlay["sha256"],
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
         )
-        self.assertEqual(overlay["overlay_end_exclusive"], 0x007B7F25)
-        self.assertEqual(len(overlay["functions"]), 809)
-        self.assertEqual(len(overlay["patched_sites"]), 750)
+        self.assertEqual(overlay["overlay_end_exclusive"], 0x007BC5DC)
+        self.assertEqual(len(overlay["functions"]), 937)
+        self.assertEqual(len(overlay["patched_sites"]), 877)
         self.assertEqual(overlay["link"]["text_size"], 109592)
         self.assertEqual(overlay["link"]["rodata_size"], 3996)
         self.assertEqual(
@@ -1044,16 +1044,16 @@ class RuntimeTlsfTests(unittest.TestCase):
             140,
         )
         component = self.integrated_report["component"]
-        self.assertEqual(component["size"], 3670417)
+        self.assertEqual(component["size"], 3687932)
         self.assertEqual(
             component["sha256"],
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
         )
-        self.assertEqual(component["generated_patch_site_bytes"], 103358)
-        self.assertEqual(component["replaced_stock_function_bytes"], 103536)
+        self.assertEqual(component["generated_patch_site_bytes"], 120792)
+        self.assertEqual(component["replaced_stock_function_bytes"], 120970)
         self.assertEqual(component["source_owned_in_place_bytes"], 182)
-        self.assertEqual(component["source_owned_bytes"], 147203)
-        self.assertEqual(component["opaque_base_bytes"], 3419824)
+        self.assertEqual(component["source_owned_bytes"], 164718)
+        self.assertEqual(component["opaque_base_bytes"], 3402390)
         built_sites = {
             site["runtime_address"]: site
             for site in overlay["patched_sites"]

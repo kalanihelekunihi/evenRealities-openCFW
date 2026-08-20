@@ -30,7 +30,7 @@ PROVENANCE = ROOT / "tools/manifests/g2-nvdb-sys-dt-provenance.tsv"
 PINNED_INPUTS = {
     FUNCTION_MAP: "b69524ca1817807f9f5da9f949c047c232bedbc4ad1a722738339e10b91a68eb",
     CLOSURE: "cf079fedfaa0f0451b1f0a1c72fa3063e62f3c70b15088e4c61e0051b5e8fa58",
-    PROVENANCE: "8b20e8d6feb181248a37c5500d2d10b69a18830f5dee95e800bacdbec08ea4ec",
+    PROVENANCE: "1a6c2653ab23d30c67e2d18d1b4212d166c972dc95b552fa58fa03f434156939",
 }
 
 PHYSICAL_SPAN = (0x004AEE28, 0x004B03E0)
@@ -282,6 +282,138 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if legacy != LEGACY_PSNS:
         raise AuditError("legacy PSN strings changed")
 
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    candidate = "components/apollo_main/core_overlay/nvdb_sys_dt.c"
+    candidate_sha256 = "a18152b8a7e769142bb21795cb724ef29df2c8ea18176050d12d8606189516c7"
+    expected_patches = {
+        "replace_nvdb_sys_dt_default_initialize": (
+            0x004AEE28, 22,
+            "9f503b287f1267eb5f0875d35921851b74aebcd1cb50e64a5a54c03e1f81fa78",
+            "open_cfw_nvdb_sys_dt_default_initialize",
+        ),
+        "replace_nvdb_sys_dt_load_and_migrate": (
+            0x004AEE3E, 734,
+            "861f74ec6afe45428e5d1dfe89c0baa258b1d6f5051d6b12da0fbd67442cdab7",
+            "open_cfw_nvdb_sys_dt_load_and_migrate",
+        ),
+        "replace_nvdb_sys_dt_write": (
+            0x004AF11C, 1566,
+            "f3c7717a96bd19716d32fde553b9eb4fa738e18a8b14c721a73ccf3efd1358a8",
+            "open_cfw_nvdb_sys_dt_write",
+        ),
+        "replace_nvdb_sys_dt_get": (
+            0x004AF73A, 126,
+            "7fd3682543fbbd09fa7c3eeb72f4e7bc8648c4e84ff725002a8b0ef1df1788c0",
+            "open_cfw_nvdb_sys_dt_get",
+        ),
+        "replace_nvdb_sys_dt_read": (
+            0x004AF7B8, 198,
+            "2f2a9b3bcf0666493361da8b08830e52e0b20196328487c3043517d280442b83",
+            "open_cfw_nvdb_sys_dt_read",
+        ),
+        "replace_nvdb_sys_dt_parse_psn": (
+            0x004AF8D0, 742,
+            "70907dd79604aa40eb32ceb8262146db672e668f3a128c1c42c2cda2bc1f0e74",
+            "open_cfw_nvdb_sys_dt_parse_psn",
+        ),
+        "replace_nvdb_sys_dt_manufacturer_name": (
+            0x004AFBBC, 18,
+            "1cc4521522a4f20746e4f96e893ec669ad1c1e532be6a9a1179dda7b74bb7cd0",
+            "open_cfw_nvdb_sys_dt_manufacturer_name",
+        ),
+        "replace_nvdb_sys_dt_year": (
+            0x004AFBCE, 22,
+            "2857535c47bc4d93ead4e206f9b260b5d3980f7ccf02d7b31938e5793ff58268",
+            "open_cfw_nvdb_sys_dt_year",
+        ),
+        "replace_nvdb_sys_dt_month": (
+            0x004AFBE4, 40,
+            "2248967f80abeb67b495e44f590774be088cf983a30d8a130a34b9d74d9ef847",
+            "open_cfw_nvdb_sys_dt_month",
+        ),
+        "replace_nvdb_sys_dt_reset_aging": (
+            0x004AFC10, 84,
+            "e371ac29fd36ef0f2df1906e478f89c360ea64b1456bde0a07fc07ae1904fddf",
+            "open_cfw_nvdb_sys_dt_reset_aging",
+        ),
+        "replace_nvdb_sys_dt_mark_legacy_psn": (
+            0x004AFC68, 58,
+            "00a304e237b6c213864883d83bc7dec26e25db76f4868135b23ae61066170255",
+            "open_cfw_nvdb_sys_dt_mark_legacy_psn",
+        ),
+        "replace_nvdb_sys_dt_read_psn_from_otp": (
+            0x004AFCDC, 632,
+            "52ea0eac7a2bcb82b0cea1b9665fc57b845b086e03de4d5a57e3f172e6266042",
+            "open_cfw_nvdb_sys_dt_read_psn_from_otp",
+        ),
+        "replace_nvdb_sys_dt_write_psn_to_otp": (
+            0x004AFFC0, 842,
+            "86e34d465070b4776e029da8c43bf696fa6e246b8b6e80174dccc948531ffd96",
+            "open_cfw_nvdb_sys_dt_write_psn_to_otp",
+        ),
+    }
+    patches = {
+        r["name"]: r
+        for r in overlay["patch_sites"]
+        if r.get("name") in expected_patches
+    }
+    leaves = {
+        r["function"]: r
+        for r in overlay["relocated_leaves"]
+        if r.get("source", {}).get("path") == candidate
+    }
+    otp_begin_binding = (
+        "-DOPEN_CFW_NVDB_SYS_DT_OTP_BEGIN()="
+        "do { int open_cfw_pwrctrl_periph_enable(unsigned char); "
+        "int open_cfw_cmsis_delay(unsigned int); "
+        "(void)open_cfw_pwrctrl_periph_enable(0x1Du); "
+        "(void)open_cfw_pwrctrl_periph_enable(0x17u); "
+        "(void)open_cfw_cmsis_delay(1u); } while (0)"
+    )
+    otp_end_binding = (
+        "-DOPEN_CFW_NVDB_SYS_DT_OTP_END()="
+        "do { int open_cfw_pwrctrl_periph_disable(unsigned char); "
+        "(void)open_cfw_pwrctrl_periph_disable(0x17u); "
+        "(void)open_cfw_pwrctrl_periph_disable(0x1Du); } while (0)"
+    )
+    parsed_binding = (
+        "-DOPEN_CFW_NVDB_SYS_DT_PARSED(project_code, manufacturer_code, "
+        "manufacturer, color, year_code, year, month_code, month, day, "
+        "serial_number)=do { (void)(project_code); (void)(manufacturer_code); "
+        "(void)(manufacturer); (void)(color); (void)(year_code); (void)(year); "
+        "(void)(month_code); (void)(month); (void)(day); "
+        "(void)(serial_number); } while (0)"
+    )
+    legacy_table_binding = (
+        "-DOPEN_CFW_NVDB_SYS_DT_LEGACY_PSNS="
+        "((const char *const *)(uintptr_t)0x006D3358u)"
+    )
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[n]["runtime_address"] != a
+            or patches[n]["expected_size"] != z
+            or patches[n]["expected_sha256"] != d
+            or patches[n]["branch"] != "b_w"
+            or patches[n]["target_function"] != t
+            or patches[n].get("profiles") != ["apple-clang"]
+            for n, (a, z, d, t) in expected_patches.items()
+        )
+        or set(leaves) != {t for *_, t in expected_patches.values()}
+        or any(
+            l["source"]["sha256"] != candidate_sha256
+            or l.get("profiles") != ["apple-clang"]
+            or otp_begin_binding not in l["toolchain"]["flags"]
+            or otp_end_binding not in l["toolchain"]["flags"]
+            or parsed_binding not in l["toolchain"]["flags"]
+            or legacy_table_binding not in l["toolchain"]["flags"]
+            for l in leaves.values()
+        )
+    ):
+        raise AuditError("production system-data routing changed")
+
     return {
         "image_sha256": IMAGE_SHA256,
         "surface": {
@@ -331,9 +463,14 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "read_imports_record_then_overrides_psn_from_otp": True,
         },
         "production": {
-            "candidate": "components/apollo_main/core_overlay/nvdb_sys_dt.c",
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate": candidate,
+            "candidate_sha256": candidate_sha256,
+            "production_routed": True,
+            "ownership_bytes": BODY_BYTES,
+            "retained_stock_noncode_bytes": NONCODE_BYTES,
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

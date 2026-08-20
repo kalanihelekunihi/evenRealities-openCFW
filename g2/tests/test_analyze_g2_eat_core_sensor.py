@@ -57,10 +57,16 @@ class AnalyzeG2EatCoreSensorTests(unittest.TestCase):
         self.assertIsNone(self.report["lineage"]["retained_path"])
         self.assertFalse(self.report["lineage"]["source_partition_known"])
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/at_core_sensor.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 486)
         self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(len(production["relocated_leaves"]), 12)
+        self.assertEqual(len(production["patch_sites"]), 12)
 
 
 if __name__ == "__main__":

@@ -920,12 +920,12 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                147_021,
+                164_536,
                 (
-                    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
+                    "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
                 ),
-                809,
-                750,
+                937,
+                877,
             ),
         )
         component = self.production["component"]
@@ -943,15 +943,15 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 )
             },
             {
-                "size": 3_670_417,
+                "size": 3_687_932,
                 "sha256": (
-                    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
+                    "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
                 ),
-                "generated_patch_site_bytes": 103_358,
-                "replaced_stock_function_bytes": 103_536,
-                "source_owned_bytes": 147_203,
+                "generated_patch_site_bytes": 120_792,
+                "replaced_stock_function_bytes": 120_970,
+                "source_owned_bytes": 164_718,
                 "source_owned_in_place_bytes": 182,
-                "opaque_base_bytes": 3_419_824,
+                "opaque_base_bytes": 3_402_390,
             },
         )
 
@@ -965,9 +965,9 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                     "g2-openCFW-s200_v2.2.6.10-core-source."
                     "evenota.bin"
                 ),
-                "expected_size": 4_448_911,
+                "expected_size": 4_466_426,
                 "expected_sha256": (
-                    "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"
+                    "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"
                 ),
                 "profiles": {
                     "linux-clang": {

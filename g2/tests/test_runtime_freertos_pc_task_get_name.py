@@ -118,17 +118,17 @@ PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 147_021
+PRODUCTION_OVERLAY_SIZE = 164_536
 PRODUCTION_OVERLAY_SHA256 = (
-    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
+    "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
 )
-PRODUCTION_COMPONENT_SIZE = 3_670_417
+PRODUCTION_COMPONENT_SIZE = 3_687_932
 PRODUCTION_COMPONENT_SHA256 = (
-    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
+    "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
 )
-PACKAGE_SIZE = 4_448_911
+PACKAGE_SIZE = 4_466_426
 PACKAGE_SHA256 = (
-    "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605"
+    "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"
 )
 
 
@@ -531,10 +531,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 103_358,
-                "opaque_base_bytes": 3_419_824,
-                "replaced_stock_function_bytes": 103_536,
-                "source_owned_bytes": 147_203,
+                "generated_patch_site_bytes": 120_792,
+                "opaque_base_bytes": 3_402_390,
+                "replaced_stock_function_bytes": 120_970,
+                "source_owned_bytes": 164_718,
             },
         )
 
@@ -649,6 +649,18 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
             (120_982, 38),
             (121_578, 22),
             (121_600, 22),
+            # Charger-common eleven-body production cluster.
+            (479_132, 240),
+            (479_372, 94),
+            (479_466, 464),
+            (479_930, 450),
+            (480_380, 226),
+            (480_606, 276),
+            (480_882, 372),
+            (481_276, 142),
+            (481_440, 122),
+            (481_562, 6),
+            (481_568, 8),
         ):
             historical_component[offset:offset + size] = official[
                 offset:offset + size
@@ -685,7 +697,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         )
         self.assertEqual(
             sha256(bytes(historical_component)),
-            "a6678d335406b58ba5ca79bcbd3a91b4c97e4d28650b6b6fda5ea547771266a6",
+            "d41b02a6def6a6a484eb223b4f7db0453c9cdad3ad6fb50a6ac9a77db9f9c00b",
         )
         historical_payloads = dict(payloads)
         historical_payloads["apollo_main"] = bytes(historical_component)
@@ -696,7 +708,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         self.assertEqual(len(historical_image), 4_415_860)
         self.assertEqual(
             sha256(historical_image),
-            "0fc38979b071fa50d5c7a3c93dce789e93a169044de8de9dc478a6f0e90d3019",
+            "f45bb85db8d15577d16ba99103fff0f2c654fb342c9bfef50f280df1415ec9b5",
         )
 
 

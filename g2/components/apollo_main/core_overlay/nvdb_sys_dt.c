@@ -157,6 +157,7 @@ void open_cfw_nvdb_sys_dt_parsed(
     (*(volatile uint8_t *)(uintptr_t) \
         OPEN_CFW_NVDB_SYS_DT_LEGACY_PSN_FLAG_ADDRESS)
 
+#ifndef OPEN_CFW_NVDB_SYS_DT_LEGACY_PSNS
 static const char *const open_cfw_nvdb_sys_dt_legacy_psns[40] = {
     "S200LABI270028", "S200LABI270036", "S200LABI270050",
     "S200LDBE210004", "S200LABI260010", "S200LABI270068",
@@ -173,6 +174,8 @@ static const char *const open_cfw_nvdb_sys_dt_legacy_psns[40] = {
     "S200LCBI200008", "S200LCBI190022", "S200LCBI200001",
     "S200LCBI190025",
 };
+#define OPEN_CFW_NVDB_SYS_DT_LEGACY_PSNS open_cfw_nvdb_sys_dt_legacy_psns
+#endif
 
 static void open_cfw_nvdb_sys_dt_copy(
     volatile void *destination,
@@ -602,7 +605,7 @@ void open_cfw_nvdb_sys_dt_mark_legacy_psn(void)
     for (index = 0; index < 40u; ++index) {
         if (open_cfw_nvdb_sys_dt_string_equal_n(
                 (const char *)(uintptr_t)&record->product_serial[0],
-                open_cfw_nvdb_sys_dt_legacy_psns[index],
+                OPEN_CFW_NVDB_SYS_DT_LEGACY_PSNS[index],
                 15u)) {
             OPEN_CFW_NVDB_SYS_DT_LEGACY_PSN_FLAG = 1u;
             return;

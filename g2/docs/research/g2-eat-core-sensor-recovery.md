@@ -58,3 +58,41 @@ complete, but the historical source-file inventory, source-only function
 count, license, and whole-source identity remain unknown. No clean-room
 candidate exists, the cluster is absent from `overlay.json`, and it claims
 zero package ownership bytes.
+
+## Clean-room authorship and production routing
+
+`components/apollo_main/core_overlay/at_core_sensor.c` is an independently
+authored clean-room replacement (13,890 bytes, SHA-256
+`2be0e0f81c74d3ec60f2a44fbcac8f7aff6c3f80e155d66c3c130a698ac285b3`) written
+from this specification; no historical source survives. The twelve handlers
+bind the retained providers recorded above — the printf-like output provider
+at `0x00541430`, the parameter-length and integer-parse helpers at
+`0x0044A43C`/`0x0048D868`, the bounded snprintf provider at `0x0044B728`,
+and the per-command service providers — and reference every retained format,
+response, and identity literal by its stock address, including the `%s` echo
+literal at `0x005A5824` inside the owned PSN literal island and the signed
+`LUX_BASE` shadow at `0x200039BC`. Recovered quirks are reproduced exactly:
+`SCRN_Y` accepts zero through 192 despite its 1-192 diagnostic, the PSN error
+reports the required length fourteen rather than the observed length, `ALS`
+acknowledges unhandled values without calling either provider, and
+`BRIGHTNESS` forwards its parsed integer without local validation. Host tests
+pin the emitted byte streams, provider call sequences, and return values
+against an oracle fixture; freestanding Thumb compilation exposes exactly the
+twelve global handler symbols.
+
+The candidate is routed into the Apollo main overlay under the reviewed
+apple-clang profile as twelve relocated leaves (650 bytes plus sixteen
+alignment bytes, overlay offsets 147,044-147,708 exclusive), reached through
+twelve `B.W` entry redirects with NOP fill that replace the 486 stock body
+bytes at `[0x005A5720,0x005A595E)`; the twelve stored registration pointers
+in the command table `[0x006C92E0,0x006C93A0)` now reach the source leaves
+through the redirects. The four owned alignment/literal islands (126 bytes)
+stay retained stock data. Apple Clang 21 overlay/component/package sizes are
+`147708/3671104/4449598` with SHA-256
+`bcf4098013f7d704bcc2be618ec08e09865c0dc23e1bea232dbbfb6d1d090f36`,
+`d1793fce0f3e5fe2707f5ff6257582f8cde35edb3300e0b66ff1d11a8692bd28`, and
+`f3655acbe9ee2a5b8b559420c96ed79e7b1d4df2a3887c4caca7b4b22756914c`. The
+leaves and redirects are gated `apple-clang`; the linux-clang profile keeps
+its recorded pins. Ownership is the 486 stock body bytes. The component
+build, source package, `open_cfw` verification, and the fail-closed analyzer
+(now asserting the production routing) all pass.

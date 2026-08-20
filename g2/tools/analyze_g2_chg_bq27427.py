@@ -22,8 +22,8 @@ CANDIDATE = ROOT / "components/apollo_main/core_overlay/chg_bq27427.c"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 PINS = {
     FUNCTION_MAP: "1450c00f03999356aeaca638922f4262a753ab5dad678df5bd76a0afc5e1097b",
-    CLOSURE: "a81497200d9340d14b89e9ebfb1051b5df12c652dc3a3dcbb42eb3d59ea2af7c",
-    PROVENANCE: "1cefcb8d40b42ee5afff89c700a618c8f564e42e95d844a35dfd173e5db2c232",
+    CLOSURE: "f30798d74045a62776e35e790161c0aab61d8fa655677f8b06d384b8386af586",
+    PROVENANCE: "b2e1ec42b629da0da760df6652be1b0c3894b8f965599dd6abc9cabc8a3a5aca",
     CANDIDATE: "c435642a5f377b8265d9311c1e73f69a5b9ffc1f47a1e0d0e68e47179bbd34ee",
 }
 PHYSICAL = (0x0053AFC0, 0x0053C2A4)
@@ -207,9 +207,233 @@ def analyze(image_path: Path = IMAGE) -> dict:
 
     overlay = json.loads(OVERLAY.read_text())
     candidate_rel = str(CANDIDATE.relative_to(ROOT))
-    routed = any(source.get("path") == candidate_rel for source in overlay["sources"])
-    if routed:
-        raise AuditError("candidate unexpectedly entered production overlay")
+    expected_patches = {
+        "replace_bq27427_read_flags": (
+            0x0053B10A, 86,
+            "0728d87d1621321e8927cacf9e6da4cc5a5c4e04a19b36c4bd53d3eadf14aa40",
+            "open_cfw_bq27427_read_flags",
+        ),
+        "replace_bq27427_read_soc": (
+            0x0053B160, 86,
+            "703990a20d8045c5d5475252bbdd477eded40dcd465f36c1616f522fee6d97f0",
+            "open_cfw_bq27427_read_soc",
+        ),
+        "replace_bq27427_read_temperature": (
+            0x0053B1B6, 90,
+            "d40b1a7b66e8181def9807f206dee5235473a66d8d9cd703b1fecff84c162a85",
+            "open_cfw_bq27427_read_temperature",
+        ),
+        "replace_bq27427_read_battery_voltage": (
+            0x0053B210, 88,
+            "50807c5b3839945b1e2ebd772d3b68fa274d5533fe57e8fb5cd1ae261bb5522a",
+            "open_cfw_bq27427_read_battery_voltage",
+        ),
+        "replace_bq27427_read_charge": (
+            0x0053B268, 112,
+            "454a9d1000b56b2d25ec4d1bf35752c4477e017cd547caec212882d569397295",
+            "open_cfw_bq27427_read_charge",
+        ),
+        "replace_bq27427_read_nom_capacity": (
+            0x0053B2D8, 10,
+            "a920002bb323c5704fc877f596d06b110d4adf2465f22a2739c32291d4fc7f29",
+            "open_cfw_bq27427_read_nom_capacity",
+        ),
+        "replace_bq27427_read_avail_capacity": (
+            0x0053B2E2, 10,
+            "5a7129d00d2662d4890dc359df521c6ffa5a6f000b06b92245005c9aa81a6b0d",
+            "open_cfw_bq27427_read_avail_capacity",
+        ),
+        "replace_bq27427_read_rem_capacity": (
+            0x0053B2EC, 10,
+            "dc259a213b7bda99116020e14562094ce50e808beeab4b17ce7e9dd5960bf3f6",
+            "open_cfw_bq27427_read_rem_capacity",
+        ),
+        "replace_bq27427_read_full_capacity": (
+            0x0053B2F6, 10,
+            "82d5ddc33a0bd1af86a48cb33842b12807c493fe42cc0f2ecdda165481dbe697",
+            "open_cfw_bq27427_read_full_capacity",
+        ),
+        "replace_bq27427_read_ai": (
+            0x0053B300, 92,
+            "c67de10a4ba2ee3637973a152982ffa822a0413f451cb6ef7cc6de1cf3ce6225",
+            "open_cfw_bq27427_read_ai",
+        ),
+        "replace_bq27427_read_ap": (
+            0x0053B35C, 92,
+            "93dddcc0de8656bc4cf6ff89738237ddce731a048cd44002bb9d19c594f4434c",
+            "open_cfw_bq27427_read_ap",
+        ),
+        "replace_bq27427_read_int_temp": (
+            0x0053B3B8, 10,
+            "629fecbd605223a984567dabaf128107e5367ef62735df6523ac9f61240f6842",
+            "open_cfw_bq27427_read_int_temp",
+        ),
+        "replace_bq27427_read_rem_cap_unfl": (
+            0x0053B3C2, 10,
+            "57432df7e5590a57ace30e2fec171f274d39b7bf991d4d46af6a596a54e3d946",
+            "open_cfw_bq27427_read_rem_cap_unfl",
+        ),
+        "replace_bq27427_read_rem_cap_fil": (
+            0x0053B3CC, 10,
+            "bb0ce0177c5ab578866e33dc5b887dfe7ec3fde9ce2fad8367bd4e6902ede1c4",
+            "open_cfw_bq27427_read_rem_cap_fil",
+        ),
+        "replace_bq27427_read_full_cap_unfl": (
+            0x0053B3D6, 10,
+            "41af9ea9608e012a71987a84af047c2254868defb9df7cdaa86685007083dd9d",
+            "open_cfw_bq27427_read_full_cap_unfl",
+        ),
+        "replace_bq27427_read_full_cap_fil": (
+            0x0053B3E0, 10,
+            "7416d145e60fc09b76beda01124fc776059299ccb768060396605704dd08f3e0",
+            "open_cfw_bq27427_read_full_cap_fil",
+        ),
+        "replace_bq27427_read_soc_unfl": (
+            0x0053B3EA, 10,
+            "d8ab9018090d2eb7a6a2373ada9d1d4ef2a037a24491efdcd1c714e5fdfe1df2",
+            "open_cfw_bq27427_read_soc_unfl",
+        ),
+        "replace_bq27427_seal": (
+            0x0053B3F4, 100,
+            "e0e5090fa8e176220fa6f086f1305b3e22ab8b981d2e167326728bbac339ef37",
+            "open_cfw_bq27427_seal",
+        ),
+        "replace_bq27427_unseal": (
+            0x0053B458, 202,
+            "a9b9c3cebcb739bcf8e937df1ed8e9494481a15094bc9520b8ba349bb7879ef9",
+            "open_cfw_bq27427_unseal",
+        ),
+        "replace_bq27427_checksum_dm_block": (
+            0x0053B522, 126,
+            "0f5c6c2a0a77e5c674c0bd9d7abb69071a7af4332b2c89601c1d2a71c975f3b1",
+            "open_cfw_bq27427_checksum_dm_block",
+        ),
+        "replace_bq27427_read_dm_block": (
+            0x0053B5A0, 336,
+            "48711b766d41e248ee1c4dd806f4fcfbf353d13c85003cb323a4ff13e99c0956",
+            "open_cfw_bq27427_read_dm_block",
+        ),
+        "replace_bq27427_update_dm_block": (
+            0x0053B6F0, 458,
+            "ffa13effca5ff6bfbc0f8400917e362a63f02ed8334ba11e1d711ca4c2a688f7",
+            "open_cfw_bq27427_update_dm_block",
+        ),
+        "replace_bq27427_set_cfgupdate": (
+            0x0053B966, 88,
+            "ee7adb8e6a690b61b708ec12bde9711e058b96e3be577c2a1d46776b4f7120de",
+            "open_cfw_bq27427_set_cfgupdate",
+        ),
+        "replace_bq27427_soft_reset": (
+            0x0053B9BE, 88,
+            "b11c6412f91f0a2525eda2f62d90eb620ab88457ffa3220fcb2d9889a144b866",
+            "open_cfw_bq27427_soft_reset",
+        ),
+        "replace_bq27427_execute_control_word": (
+            0x0053BA16, 28,
+            "a5aaa1061b44e653ab579b69799dad115e555f91a6b8470d4b3f62b3df6909f6",
+            "open_cfw_bq27427_execute_control_word",
+        ),
+        "replace_bq27427_write_dm_block": (
+            0x0053BA32, 312,
+            "44134f7391a61a7dc4374c84d60c102a5259f696555e17dfa8005a4b2a460371",
+            "open_cfw_bq27427_write_dm_block",
+        ),
+        "replace_bq27427_configure_from_params": (
+            0x0053BB8C, 334,
+            "aa1a85372d9952b3cba9ec540200536d9e832d0a5c072819e84f246344c0ddb4",
+            "open_cfw_bq27427_configure_from_params",
+        ),
+        "replace_bq27427_change_chemistry_profile": (
+            0x0053BD0C, 382,
+            "867ced92a59a1a3a84363de29c1744651450bfd019a8680afb5882ff3aebb28f",
+            "open_cfw_bq27427_change_chemistry_profile",
+        ),
+        "replace_bq27427_settings": (
+            0x0053BEB4, 354,
+            "68dc4670db668825805a2d76074decab7e38e41c7e7e1ff9de34f7580d2d8e9f",
+            "open_cfw_bq27427_settings_apply_defaults",
+        ),
+        "replace_bq27427_status_update": (
+            0x0053C024, 176,
+            "58488b32df2e40c5bc46172e9911f4f3390979054f3917fba9e5961ea36bca3d",
+            "open_cfw_bq27427_status_update",
+        ),
+        "replace_bq27427_init_wrapper": (
+            0x0053C0F4, 10,
+            "a87205d11d6220d3d04f0a31d2ce97a25e622884c004dc8f20bdc8dc6b569f44",
+            "open_cfw_bq27427_init_wrapper",
+        ),
+        "replace_bq27427_hardware_init": (
+            0x0053C0FE, 198,
+            "11b61edcd86c46bdbb22cd1a88a13463518a92f46f7548fc3141171745f495c0",
+            "open_cfw_bq27427_hardware_init",
+        ),
+    }
+    patches = {
+        row["name"]: row
+        for row in overlay["patch_sites"]
+        if row.get("name") in expected_patches
+    }
+    leaves = {
+        row["function"]: row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == candidate_rel
+    }
+    provider_leaf = "open_cfw_bq27427_cfgupdate_priv"
+    local_target_leaves = {
+        "open_cfw_bq27427_set_cfgupdate",
+        "open_cfw_bq27427_soft_reset",
+        "open_cfw_bq27427_write_dm_block",
+        "open_cfw_bq27427_change_chemistry_profile",
+    }
+    closure_leaves = {
+        "open_cfw_bq27427_update_dm_block": (
+            ".rodata.open_cfw_bq27427_dm_map", 56,
+        ),
+        "open_cfw_bq27427_settings_apply_defaults": (
+            ".rodata.open_cfw_bq27427_defaults", 12,
+        ),
+        "open_cfw_bq27427_hardware_init": (
+            ".rodata.open_cfw_bq27427_defaults", 12,
+        ),
+    }
+    if (
+        set(patches) != set(expected_patches)
+        or any(
+            patches[name]["runtime_address"] != address
+            or patches[name]["expected_size"] != size
+            or patches[name]["expected_sha256"] != digest
+            or patches[name]["branch"] != "b_w"
+            or patches[name]["target_function"] != target
+            or patches[name].get("profiles") != ["apple-clang"]
+            for name, (address, size, digest, target) in expected_patches.items()
+        )
+        or set(leaves)
+        != {target for *_, target in expected_patches.values()} | {provider_leaf}
+        or any(
+            leaf["source"]["sha256"] != PINS[CANDIDATE]
+            or leaf.get("profiles") != ["apple-clang"]
+            or leaf.get("allow_local_function") is not (
+                True if name == provider_leaf else None
+            )
+            or leaf.get("allow_local_relocation_targets") is not (
+                True if name in local_target_leaves else None
+            )
+            or leaf.get("allow_bound_static_data") is not None
+            or (
+                name in closure_leaves
+                and (
+                    leaf.get("closure", {}).get("rodata", {}).get("section")
+                    != closure_leaves[name][0]
+                    or leaf.get("closure", {}).get("rodata", {}).get("size")
+                    != closure_leaves[name][1]
+                )
+            )
+            or (name not in closure_leaves and "closure" in leaf)
+            for name, leaf in leaves.items()
+        )
+    ):
+        raise AuditError("production BQ27427 routing changed")
 
     descriptors = [
         {
@@ -248,8 +472,21 @@ def analyze(image_path: Path = IMAGE) -> dict:
         },
         "production": {
             "candidate": candidate_rel,
-            "production_routed": routed,
-            "ownership_bytes": 0,
+            "candidate_sha256": PINS[CANDIDATE],
+            "production_routed": True,
+            "ownership_bytes": 3938,
+            "retained_stock_noncode_bytes": 396,
+            "retained_stock_dead_body_bytes": 502,
+            "bound_providers": {
+                "open_cfw_bq27427_transfer_read": "0x0050436e",
+                "open_cfw_bq27427_transfer_write": "0x005044b4",
+                "open_cfw_bq27427_delay_ms": "0x004910f4",
+                "memcpy": "0x00439be4",
+                "memset": "0x0043c0e4",
+            },
+            "toolchain_profiles": ["apple-clang"],
+            "relocated_leaves": sorted(leaves),
+            "patch_sites": sorted(patches),
         },
     }
 

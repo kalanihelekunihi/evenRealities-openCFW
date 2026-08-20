@@ -55,5 +55,21 @@ def analyze(image=IMAGE):
  for a in inside:
   for v in (a,a|1):
    if b.find(struct.pack('<I',v))>=0:raise AuditError('interior pointer appeared')
- return {'surface':{'linked_functions':6,'body_bytes':270,'physical_bytes':312,'direct_bl_ingress_sites':54,'direct_provider_calls':18,'stored_entry_pointers':STORED,'strict_interior_ingress':0},'record':{'address':0x200038F0,'boot_hex':'01000000','initialized_crc16':0x2E3E,'key':'nvProdMode'},'behavior':{'missing_rewrites_defaults':True,'pre_v1_crc_mismatch_rewrites_defaults':True,'v1_crc_mismatch_rewrites_defaults':False,'read_imports_record_without_validation':True},'production':{'candidate':'components/apollo_main/core_overlay/nvdb_product_mode.c','production_routed':False,'ownership_bytes':0}}
+ overlay=json.loads((ROOT/'components/apollo_main/core_overlay/overlay.json').read_text())
+ candidate='components/apollo_main/core_overlay/nvdb_product_mode.c'
+ expected_patches={
+  'replace_nvdb_product_mode_default_crc_initialize':(0x004ABD90,20,'80c08774a0852a8bedd18ee767b2e92898b50212b321c2e4f4de71f0478fc781','open_cfw_nvdb_product_mode_default_crc_initialize'),
+  'replace_nvdb_product_mode_load_and_migrate':(0x004ABDA4,112,'23aa7a2a4434ae72b8badcf613bb9c3b1fd600474c4576ef03a32f604d089664','open_cfw_nvdb_product_mode_load_and_migrate'),
+  'replace_nvdb_product_mode_set':(0x004ABE14,76,'a46abcbe853a0a2bc1d57aac68a2208a8826dbb41b65d3be4fe6a080ddc60cec','open_cfw_nvdb_product_mode_set'),
+  'replace_nvdb_product_mode_get':(0x004ABE60,6,'a34d3198ce3cb5e9f90231d706ea91fd58e8530a91d433dbdf1d173702dc74f2','open_cfw_nvdb_product_mode_get'),
+  'replace_nvdb_product_mode_update':(0x004ABE66,38,'204a4bd3e1dcdbbd9915ebab59b8d960727fce16f8360180de051accab1d14a7','open_cfw_nvdb_product_mode_update'),
+  'replace_nvdb_product_mode_read':(0x004ABE8C,18,'9fe24dc73d40265ac55a643d80fdeb921bcc4a9c651985306822b0cf58ea0cc9','open_cfw_nvdb_product_mode_read'),
+ }
+ patches={r['name']:r for r in overlay['patch_sites'] if r.get('name') in expected_patches}
+ leaves={r['function']:r for r in overlay['relocated_leaves'] if r.get('source',{}).get('path')==candidate}
+ if (set(patches)!=set(expected_patches)
+  or any(patches[n]['runtime_address']!=a or patches[n]['expected_size']!=z or patches[n]['expected_sha256']!=d or patches[n]['branch']!='b_w' or patches[n]['target_function']!=t or patches[n].get('profiles')!=['apple-clang'] for n,(a,z,d,t) in expected_patches.items())
+  or set(leaves)!={t for *_,t in expected_patches.values()}
+  or any(l['source']['sha256']!='443764591c25b14678180a5dfb6777c627f3ae4a805ef4adcf5e86347812c91d' or l.get('profiles')!=['apple-clang'] for l in leaves.values())):raise AuditError('production product-mode routing changed')
+ return {'surface':{'linked_functions':6,'body_bytes':270,'physical_bytes':312,'direct_bl_ingress_sites':54,'direct_provider_calls':18,'stored_entry_pointers':STORED,'strict_interior_ingress':0},'record':{'address':0x200038F0,'boot_hex':'01000000','initialized_crc16':0x2E3E,'key':'nvProdMode'},'behavior':{'missing_rewrites_defaults':True,'pre_v1_crc_mismatch_rewrites_defaults':True,'v1_crc_mismatch_rewrites_defaults':False,'read_imports_record_without_validation':True},'production':{'candidate':candidate,'production_routed':True,'ownership_bytes':270,'retained_stock_noncode_bytes':42,'toolchain_profiles':['apple-clang'],'relocated_leaves':sorted(leaves),'patch_sites':sorted(patches)}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

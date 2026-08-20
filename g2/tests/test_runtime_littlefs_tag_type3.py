@@ -209,12 +209,12 @@ PRODUCTION_PROFILES = {
         "main_patch": "e7f29abd00bf00bf",
         "boot_patch": "23f0acbd00bf00bf",
         "main_overlay": (
-            147_021,
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+            164_536,
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
         ),
         "main_component": (
-            3_670_417,
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
+            3_687_932,
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
         ),
         "boot_overlay": (
             662,
@@ -225,8 +225,8 @@ PRODUCTION_PROFILES = {
             "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
         ),
         "package": (
-            4_448_911,
-            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
+            4_466_426,
+            "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
         ),
     },
     "linux-clang": {

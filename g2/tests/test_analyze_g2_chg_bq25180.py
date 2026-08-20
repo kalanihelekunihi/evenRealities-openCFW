@@ -44,9 +44,23 @@ class AnalyzeG2ChgBq25180Tests(unittest.TestCase):
         )
         self.assertTrue(self.report["defaults"]["charger_enabled_at_exit"])
 
-    def test_candidate_is_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["production"]["ownership_bytes"], 0)
+    def test_candidate_is_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 1792)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 116)
+        self.assertEqual(production["retained_stock_dead_body_bytes"], 476)
+        self.assertEqual(len(production["relocated_leaves"]), 22)
+        self.assertEqual(len(production["patch_sites"]), 22)
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertEqual(
+            production["bound_providers"],
+            {
+                "open_cfw_bq25180_bus_read": "0x0050436e",
+                "open_cfw_bq25180_bus_write": "0x005044b4",
+                "memset": "0x0043c0e4",
+            },
+        )
 
 
 if __name__ == "__main__":

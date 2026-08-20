@@ -175,11 +175,11 @@ class RuntimeCmsisMemoryPoolNewTests(unittest.TestCase):
         )
         self.assertEqual(
             (main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]),
-            (3_670_417, 3_667_662),
+            (3_687_932, 3_667_662),
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_size"]),
-            (4_448_911, 4_446_156),
+            (4_466_426, 4_446_156),
         )
 
 

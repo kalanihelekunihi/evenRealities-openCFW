@@ -6631,8 +6631,41 @@ twelve-byte SRAM record, `nvBuzzer` key, 4,000-Hz/30% defaults, and initialized
 CCITT-FALSE checksum `0x9B1E` are pinned fail-closed.
 
 `nvdb_buzzer.c` recreates all five behaviors and passes host and freestanding
-Thumb tests. This is readiness evidence only; the stock package still executes
-the original code and no source/generated ownership bytes are added.
+Thumb tests. It is now production-routed under the reviewed apple-clang
+profile: five relocated leaves (168 text bytes plus two alignment bytes) are
+appended to the overlay, and five entry redirects with NOP fill replace the
+188 stock body bytes, so the two stored entry roots and five direct entry
+sites now land on the redirects; the 28-byte literal tail stays retained
+stock. Provider binding uses the retained CRC-16 provider at `0x0049ACD4` and
+the retained NVDB blob read/write adapters at `0x005105F0`/`0x00510602`; the
+retained diagnostic hook stays the candidate's deliberate no-op. Canonical
+component accounting is now 150,874 source-owned bytes, 106,334 generated
+patch-site bytes, 32 wrapper bytes, 182 source-owned in-place bytes, and
+3,416,848 opaque base bytes. The linux-clang profile pins await Linux
+toolchain regeneration.
+
+## Current first-party NVDB product-mode increment
+
+The retained `service_nvdb_product_mode.c` TU is fully identified at
+`[0x004ABD90,0x004ABEC8)`: six linked bodies / 270 code bytes plus 42 owned
+alignment and literal bytes. Its two stored roots, 54 direct entry sites,
+eighteen calls, four-byte SRAM record, `nvProdMode` key, version-0 boot
+defaults, and initialized CCITT-FALSE checksum `0x2E3E` are pinned
+fail-closed.
+
+`nvdb_product_mode.c` recreates all six behaviors and passes host and
+freestanding Thumb tests. It is now production-routed under the reviewed
+apple-clang profile: six relocated leaves (196 text bytes plus two
+alignment bytes) are appended to the overlay, and six entry redirects with
+NOP fill replace the 270 stock body bytes, so the two stored entry roots
+and 54 direct entry sites now land on the redirects; the 42-byte alignment
+and literal island stays retained stock. Provider binding uses the retained
+CRC-16 provider at `0x0049ACD4` and the retained NVDB blob read/write
+adapters at `0x005105F0`/`0x00510602`; the retained diagnostic hook stays
+the candidate's deliberate no-op. Canonical component accounting is now
+151,072 source-owned bytes, 106,604 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,416,578 opaque base bytes.
+The linux-clang profile pins await Linux toolchain regeneration.
 
 ## Current first-party NVDB MAC increment
 
@@ -6643,9 +6676,22 @@ internal calls, ten-byte SRAM record, `nvMAC` key, chip-ID-derived static-random
 address algorithm, and v0 migration policy are pinned fail-closed.
 
 `nvdb_mac.c` recreates all three behaviors and passes host and freestanding
-Thumb tests. This is readiness evidence only; it is absent from `overlay.json`,
-the stock package still executes the original code, and no source/generated
-ownership bytes are added.
+Thumb tests. It is now production-routed under the reviewed apple-clang
+profile: three relocated leaves (252 text bytes plus two alignment bytes)
+are appended to the overlay, and three entry redirects with NOP fill
+replace the 280 stock body bytes, so the two stored entry roots and two
+direct entry calls now land on the redirects; the 32-byte literal tail
+stays retained stock. Provider binding uses the source-owned MCUCTRL
+information provider at `0x00480D72` (the candidate's two-word
+device-identifier seam is adapted onto its selector-one 64-byte
+device-record ABI by the pinned `-DOPEN_CFW_NVDB_MAC_DEVICE_IDS_GET`
+binding), the retained CRC-32 provider at `0x004D34C4`, the retained CRC-16
+provider at `0x0049ACD4`, and the retained NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`; the retained diagnostic hook stays the
+candidate's deliberate no-op. Canonical component accounting is now
+151,326 source-owned bytes, 106,884 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,416,298 opaque base bytes.
+The linux-clang profile pins await Linux toolchain regeneration.
 
 ## Current first-party NVDB advertising-magic increment
 
@@ -6657,8 +6703,17 @@ initialized checksum `0x0A5C`, and version-zero migration rule are pinned.
 
 `nvdb_adv_magic.c` recreates all three behaviors and passes host and
 freestanding Thumb tests. Stock exposes no source-path or symbol-name string,
-so the candidate makes no exact filename claim. It is not production-routed
-and adds no controlled package ownership.
+so the candidate makes no exact filename claim. It is now production-routed
+under the reviewed apple-clang profile: three relocated leaves (140 text
+bytes plus two alignment bytes) are appended to the overlay, and three entry
+redirects with NOP fill replace the 110 stock body bytes, so the two stored
+entry roots now land on the redirects; the ten-byte alignment and literal
+tail stays retained stock. Provider binding uses the retained CRC-16
+provider at `0x0049ACD4` and the retained NVDB blob read/write adapters at
+`0x005105F0`/`0x00510602`. Canonical component accounting is now
+151,468 source-owned bytes, 106,994 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,416,188 opaque base bytes.
+The linux-clang profile pins await Linux toolchain regeneration.
 
 ## Current first-party NVDB sensor-calibration increment
 
@@ -6695,9 +6750,23 @@ split alignment/literal bytes. Its two stored roots, 37 direct entry sites,
 
 `nvdb_sys_dt.c` recreates all thirteen behaviors and passes host and
 freestanding Thumb tests. It preserves the non-importing migration policy,
-which runs the legacy PSN scan but does not reset aging. The candidate is
-absent from `overlay.json`; the stock package still executes the original
-code, so no source/generated ownership bytes are added.
+which runs the legacy PSN scan but does not reset aging. It is now
+production-routed under the reviewed apple-clang profile: thirteen
+relocated leaves (4,338 text bytes plus two 23-byte read-only string
+closures and twelve alignment pad bytes) are appended to the overlay, and
+thirteen entry redirects with NOP fill replace the 5,084 stock body bytes,
+so the two stored entry roots and 37 direct entry sites now land on the
+redirects; the 476 split alignment/literal bytes stay retained stock.
+Provider binding uses the retained CRC-16 provider at `0x0049ACD4`, the
+retained NVDB blob read/write adapters at `0x005105F0`/`0x00510602`, the
+source-owned peripheral-power enable/disable entries at
+`0x0047F5B8`/`0x0047F7AE` and CMSIS delay at `0x00449376`, the retained OTP
+INFOC word accessors at `0x0051381A`/`0x00513850`, and the retained
+40-entry legacy-PSN table at `0x006D3358`; the parse diagnostic sink stays
+the candidate's compiled-out no-op. Canonical component accounting is now
+155,864 source-owned bytes, 112,078 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,411,104 opaque base bytes.
+The linux-clang profile pins await Linux toolchain regeneration.
 
 ## Current first-party KVDB temperature-unit increment
 
@@ -6941,9 +7010,20 @@ instruction/data overlaps rather than pointers.
 the 888-byte menu import/compare/rebuild flow. It preserves the mode-two
 dashboard bypass, lookup-failure partial state, custom-text non-termination,
 identical-record write suppression, synchronization bracket, and absent stock
-count/text clamps. It passes host and freestanding Thumb tests but remains
-absent from `overlay.json`, so the stock package still executes the original
-code and no ownership bytes are added.
+count/text clamps. It passes host and freestanding Thumb tests and is now
+production-routed under the reviewed apple-clang profile: six relocated
+leaves (2,428 text bytes plus 384 closure bytes and two alignment bytes) are
+appended to the overlay, and six entry redirects with NOP fill replace the
+2,286 stock body bytes, so the three stored reader roots and three direct
+writer entry sites now land on the redirects; the 206-byte alignment/literal
+tail stays retained stock. Provider binding uses the retained blob read/write
+adapters at `0x004D956C`/`0x004D957E`, the retained mode provider at
+`0x0045A570`, the retained built-in menu item lookup at `0x00460450`, and the
+retained snapshot synchronization providers at `0x0046018E`/`0x004601EA`.
+Canonical component accounting is now 150,704 source-owned bytes, 106,146
+generated patch-site bytes, 32 wrapper bytes, 182 source-owned in-place
+bytes, and 3,417,036 opaque base bytes. The linux-clang profile pins await
+Linux toolchain regeneration.
 
 ## Current first-party ULED display-preprocess increment
 
@@ -6956,9 +7036,23 @@ or strict-interior ingress.
 
 `uled_display_preprocess.c` recreates the validation, descriptor/region
 construction, GPU start gate, width/offset conversion, and ordered success
-configuration. It passes host and freestanding Thumb tests but remains absent
-from `overlay.json`, so the stock package still executes the original code and
-no ownership bytes are added.
+configuration. It passes host and freestanding Thumb tests and is now
+production-routed under the reviewed apple-clang profile: one relocated
+closure leaf (242 text bytes plus the 28-byte GPU descriptor-template
+read-only closure and four alignment pad bytes, binding the retained GPU
+start provider at `0x004B092A`, the retained destination-channel providers
+at `0x004B0730`/`0x004B1A78`/`0x004B0748`, the retained source-configuration
+provider at `0x004B1608`, the retained offset provider at `0x004B1B48`, and
+the retained commit provider at `0x004B0C8A`, with the assertion sink
+compiled out by the pinned `-DOPEN_CFW_ULED_ASSERT` no-op fail-stop binding
+and the GPU-failure diagnostic binding inert) is appended to the overlay,
+and one entry redirect with NOP fill replaces the 584 stock body bytes. The
+discontiguous 64-byte IAR literal/template pool stays retained stock data,
+and the sole direct entry call now lands on the redirect. Canonical
+component accounting is now 164,718 source-owned bytes, 120,792 generated
+patch-site bytes, 32 wrapper bytes, 182 source-owned in-place bytes, and
+3,402,390 opaque base bytes. The linux-clang profile pins await Linux
+toolchain regeneration.
 
 ## Current first-party BQ25180 charger-driver increment
 
@@ -6971,9 +7065,17 @@ raw strict-interior ingress.
 
 `chg_bq25180.c` recreates the low-level register operations, status and ID
 reads, all field setters, exact defaults, refresh, and hardware-init gate. It
-passes host and freestanding Thumb tests but remains absent from `overlay.json`,
-so the stock package still executes the original object and no ownership bytes
-are added.
+passes host and freestanding Thumb tests and is now production-routed under
+the reviewed apple-clang profile: twenty-two relocated leaves (2,360 text
+bytes plus eighteen alignment pad bytes, binding the retained I2C read
+backend at `0x0050436E`, the retained I2C write backend at `0x005044B4`, and
+the retained `memset` provider at `0x0043C0E4`, with the assertion sink
+compiled out by the pinned no-op fail-stop binding and the diagnostic binding
+inert) are appended to the overlay, and twenty-two entry redirects with NOP
+fill replace 1,792 stock body bytes. The six intra-TU-only stock helper
+bodies (476 bytes) stay as dead retained stock and the 116-byte owned literal
+pool stays retained stock data. The linux-clang profile pins await Linux
+toolchain regeneration.
 
 ## Current first-party charger-common increment
 
@@ -6987,9 +7089,22 @@ no legitimate direct, stored, or `B.W` strict-interior ingress.
 `charger_common.c` recreates the initialization/deinitialization flow, local
 SOC compensation, signed-current charging flag, peer minimum-SOC aggregation,
 near-full debounce, retry schedule, and peer notify/response/request behavior.
-It passes host and freestanding Thumb tests but remains absent from
-`overlay.json`, so the stock package still executes the original object and no
-ownership bytes are added.
+It passes host and freestanding Thumb tests and is now production-routed under
+the reviewed apple-clang profile: eleven relocated leaves (1,558 text bytes
+plus eight alignment pad bytes, binding the retained mutex create/delete/lock/
+unlock providers at `0x0043971C`/`0x0043986E`/`0x004397B6`/`0x0043981C`, the
+retained sync-timer start/stop providers at `0x004AEA40`/`0x004AEA4C`, the
+retained role provider at `0x0045A568`, the retained sync-transport provider
+at `0x004651E0`, the retained aggregate publisher at `0x004AEAF0`, and the
+retained `memset`/`memcpy` providers at `0x0043C0E4`/`0x00439BE4`, with the
+diagnostic bindings inert and the five file-static state cells bound to the
+retained stock SRAM cells at `0x20074F97`-`0x20074F99` and
+`0x20074F1A`/`0x20074F1C` through the reviewed `allow_bound_static_data`
+contract) are appended to the overlay, and eleven entry redirects with NOP
+fill replace 2,400 stock body bytes. The three intra-TU-only stock helper
+bodies (364 bytes) stay as dead retained stock and the 220 owned
+alignment/literal bytes stay retained stock data. The linux-clang profile
+pins await Linux toolchain regeneration.
 
 ## Current first-party BQ27427 fuel-gauge increment
 
@@ -7003,8 +7118,21 @@ or `B.W` strict-interior ingress.
 `chg_bq27427.c` recreates register and block transport, telemetry reads,
 data-memory checksum/update/write behavior, seal/unseal, CFGUPDATE polling,
 chemistry selection, settings, and hardware initialization. It passes host and
-freestanding Thumb tests but remains absent from `overlay.json`, so the stock
-package still executes the original object and no ownership bytes are added.
+freestanding Thumb tests and is now production-routed under the reviewed
+apple-clang profile: thirty-three relocated leaves (4,528 text bytes plus the
+56-byte DM-descriptor-table closure, two 12-byte product-defaults closures,
+and 26 alignment pad bytes, binding the retained I2C read backend at
+`0x0050436E`, the retained I2C write backend at `0x005044B4`, the retained
+millisecond delay wrapper at `0x004910F4`, and the retained `memcpy`/`memset`
+providers at `0x00439BE4`/`0x0043C0E4`, with the diagnostic binding inert;
+the CFGUPDATE poll helper is carried as an overlay-internal local-function
+sibling leaf under the reviewed
+`allow_local_function`/`allow_local_relocation_targets` contracts) are
+appended to the overlay, and thirty-two entry redirects with NOP fill replace
+3,938 stock body bytes. The five intra-TU-only stock helper bodies (502
+bytes) stay as dead retained stock and the 396 owned alignment/literal bytes
+stay retained stock data. The linux-clang profile pins await Linux toolchain
+regeneration.
 
 ## Current first-party common ULED MSPI increment
 
@@ -7174,14 +7302,43 @@ No retained source path establishes the original file partition, inventory,
 or license. There is no clean-room source in `overlay.json`; the stock package
 therefore retains all 612 bytes and OpenCFW claims zero ownership.
 
+`at_core_sensor.c` is a clean-room replacement authored from the recovered
+behavioral specification: the twelve handlers bind the retained providers and
+reference every retained format, response, and identity literal by its stock
+address, reproducing the recovered stock quirks (`SCRN_Y` accepts zero
+through 192 despite its 1-192 diagnostic, the PSN error reports the required
+length, `ALS` acknowledges unhandled values without calling either provider,
+and `BRIGHTNESS` forwards its parsed integer unvalidated). It passes host and
+freestanding Thumb tests and is now production-routed under the reviewed
+apple-clang profile: twelve relocated leaves (650 bytes plus sixteen
+alignment bytes) are appended to the overlay, and twelve entry redirects with
+NOP fill replace the 486 stock body bytes, so the stored registration
+pointers now land on the redirects; the four owned alignment/literal islands
+(126 bytes) stay retained stock. Canonical component accounting is now
+147,890 source-owned bytes, 103,860 generated patch-site bytes, 32 wrapper
+bytes, 182 source-owned in-place bytes, and 3,419,322 opaque base bytes. The
+linux-clang profile pins await Linux toolchain regeneration.
+
 ## Current first-party pathless eAT NUS increment
 
 The sixteen-byte `AT^NUS` object `[0x005A5520,0x005A5530)` is fully
 identified as one twelve-byte handler and its response literal. The command
 record's stored Thumb pointer is its sole ingress; the one provider call,
 `NUS+OK` response, return value, and exact neighboring boundaries are pinned.
-No retained source path or historical symbol exists, no candidate is routed,
-and OpenCFW claims zero ownership.
+No retained source path or historical symbol exists.
+
+`at_nus.c` is a clean-room replacement authored from the recovered
+behavioral specification: it passes the retained `NUS+OK\r\n` response
+string at `0x0078A370` to the retained output provider at `0x00541430` and
+returns one without reading its arguments. It passes host and freestanding
+Thumb tests and is now production-routed under the reviewed apple-clang
+profile: one relocated 18-byte leaf is appended to the overlay, and one
+entry redirect with NOP fill replaces the complete sixteen-byte stock
+object, so the stored registration pointer now lands on the redirect.
+Canonical component accounting is now 147,224 source-owned bytes, 103,374
+generated patch-site bytes, 32 wrapper bytes, 182 source-owned in-place
+bytes, and 3,419,808 opaque base bytes. The linux-clang profile pins await
+Linux toolchain regeneration.
 
 ## Current first-party pathless eAT bond/connect increment
 

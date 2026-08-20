@@ -137,13 +137,13 @@ RELOCATED_SHA256 = (
     "afbba4f9f08b2df17a4350d7a7e83d99"
     "b8439283ee40c1a1604bd879dff75f04"
 )
-PRODUCTION_OVERLAY_SIZE = 147_021
+PRODUCTION_OVERLAY_SIZE = 164_536
 PRODUCTION_OVERLAY_SHA256 = (
-    "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd"
+    "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
 )
-PRODUCTION_COMPONENT_SIZE = 3_670_417
+PRODUCTION_COMPONENT_SIZE = 3_687_932
 PRODUCTION_COMPONENT_SHA256 = (
-    "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c"
+    "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
 )
 PRODUCTION_OFFSET = 113_808
 PRODUCTION_ADDRESS = 0x007A_FFB4
@@ -823,16 +823,16 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 103_358,
+                "generated_patch_site_bytes": 120_792,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_419_824,
-                "replaced_stock_function_bytes": 103_536,
-                "source_owned_bytes": 147_203,
+                "opaque_base_bytes": 3_402_390,
+                "replaced_stock_function_bytes": 120_970,
+                "source_owned_bytes": 164_718,
                 "source_owned_in_place_bytes": 182,
             },
         )
-        self.assertEqual(len(report["overlay"]["functions"]), 809)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 750)
+        self.assertEqual(len(report["overlay"]["functions"]), 937)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 877)
 
         historical_overlay = self.production_overlay[:113_970]
         self.assertEqual(
@@ -883,6 +883,18 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             (120_982, 38),
             (121_578, 22),
             (121_600, 22),
+            # Charger-common eleven-body production cluster.
+            (479_132, 240),
+            (479_372, 94),
+            (479_466, 464),
+            (479_930, 450),
+            (480_380, 226),
+            (480_606, 276),
+            (480_882, 372),
+            (481_276, 142),
+            (481_440, 122),
+            (481_562, 6),
+            (481_568, 8),
         ):
             historical_component[offset:offset + size] = official[
                 offset:offset + size
@@ -924,7 +936,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             ),
             (
                 3_637_366,
-                "563f09b0a7484c31d96a0605de534feebab042fa6d22c454aa07f90c26c1cf8c",
+                "d41b02a6def6a6a484eb223b4f7db0453c9cdad3ad6fb50a6ac9a77db9f9c00b",
             ),
         )
 

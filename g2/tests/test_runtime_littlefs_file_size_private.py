@@ -101,37 +101,37 @@ PROFILE_PINS = {
             "2d37f47f32290852aa47efc460241a43"
         ),
         "overlay": (
-            147_021,
-            "02c48ddcf4fa682ec14c3520ccac159c98a357aff4d18bd7e8ad01817e3bc2cd",
+            164_536,
+            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
         ),
         "component": (
-            3_670_417,
-            "eee145e7f687e622447bc33fc9dc45b3ab5eb1f1ad49717029196d589799aa4c",
+            3_687_932,
+            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 103_358,
+            "generated_patch_site_bytes": 120_792,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_419_824,
-            "replaced_stock_function_bytes": 103_536,
-            "source_owned_bytes": 147_203,
+            "opaque_base_bytes": 3_402_390,
+            "replaced_stock_function_bytes": 120_970,
+            "source_owned_bytes": 164_718,
             "source_owned_in_place_bytes": 182,
         },
         "package": (
-            4_448_911,
-            "21ba9d6c32c73f390fd68ee9ef2808ad01c7206d746e67eca9c755732b0a6605",
+            4_466_426,
+            "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
         ),
         "patch": (
             "e4f22fba00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
             "f9766969393fd2ad67f0182de711d93054fb8eecb153e6d4a2618750c2bd2adb",
         ),
         "plan": (
-            1_046_958,
-            "086841ac128a812376e0389b3b6f0fc91d75186b6a48f79d1d8de4297e54e34c",
-            (1460, 2, 5),
+            1_276_602,
+            "cf9da351f2ff66b07c3efaf9543abdd23473c5dd557753854b25fbf5f79628c8",
+            (1802, 2, 5),
         ),
-        "plan_ownership": (147_634, 103_382, 4_197_895),
-        "coarse_ownership": (147_634, 103_382, 4_197_895),
-        "manifest_ownership": (147_634, 103_382, 4_197_895),
+        "plan_ownership": (165_050, 120_915, 4_180_461),
+        "coarse_ownership": (165_050, 120_915, 4_180_461),
+        "manifest_ownership": (165_050, 120_915, 4_180_461),
     },
     "linux-clang": {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",
@@ -172,27 +172,27 @@ PROFILE_PINS = {
         ),
         "plan_ownership": (127_597, 88_172, 4_212_841),
         "coarse_ownership": (127_597, 88_172, 4_212_841),
-        "manifest_ownership": (145_147, 102_032, 4_198_977),
+        "manifest_ownership": (145_147, 120_548, 4_180_461),
     },
 }
 
 MANIFEST_PIN = (
-    1400,
+    1730,
     {
         "container_only": (1, 32),
-        "generated_alignment": (133, 265),
-        "generated_source_entry_replacement": (726, 101_138),
+        "generated_alignment": (181, 364),
+        "generated_source_entry_replacement": (841, 118_572),
         "generated_source_exact_load_image": (1, 6),
         "generated_source_exact_replacement": (7, 134),
-        "official_blob": (225, 3_421_868),
-        "source_compiled": (307, 146_974),
+        "official_blob": (264, 3_404_434),
+        "source_compiled": (435, 164_390),
     },
 )
 
 # Exact byte ownership within the four retained non-main container wrappers.
 # Their 236 bytes refine into 17 authenticated source bytes, 135 generated
 # metadata/checksum bytes, and 84 opaque vendor bytes.
-CANONICAL_OWNERSHIP = (147_080, 102_418, 4_198_825)
+CANONICAL_OWNERSHIP = (165_067, 121_050, 4_180_309)
 CANONICAL_CONTAINER_REFINEMENT = (17, 135, 84)
 
 TARGET_FLAGS = [
@@ -1088,10 +1088,10 @@ class RuntimeLittlefsFileSizePrivateTests(unittest.TestCase):
             615_594,
         )
         source_tail = by_name["apollo_littlefs_file_size_private_source_leaf"]
-        self.assertIs(source_tail, regions[-299])
+        self.assertIs(source_tail, regions[-482])
         self.assertEqual(
             source_tail["file_offset"] + source_tail["size"],
-            regions[-298]["file_offset"],
+            regions[-481]["file_offset"],
         )
         self.assertEqual(
             source_tail,
