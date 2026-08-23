@@ -761,12 +761,12 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                165_412,
+                167_426,
                 (
-                    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
                 ),
-                943,
-                882,
+                945,
+                884,
             ),
         )
         self.assertEqual(
@@ -783,14 +783,14 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                3_688_808,
+                3_690_822,
                 (
-                    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
                 ),
-                121_494,
-                121_672,
-                165_594,
-                3_401_688,
+                121_634,
+                121_812,
+                165_622,
+                3_401_548,
             ),
         )
 
@@ -810,15 +810,15 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 )
             },
             {
-                "expected_size": 4_467_302,
+                "expected_size": 4_469_316,
                 "expected_sha256": (
-                    "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
+                    "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_447_070,
+                        "expected_size": 4_447_098,
                         "expected_sha256": (
-                            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"
+                            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"
                         ),
                     },
                 },

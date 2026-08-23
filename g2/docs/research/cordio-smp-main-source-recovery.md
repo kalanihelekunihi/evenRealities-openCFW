@@ -149,6 +149,34 @@ python3 tools/analyze_g2_cordio_smp_main.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-This tranche is source-identified and structurally build-ready, but remains
-stock-retained. Production promotion still requires the exact FreeRTOS/IAR
-configuration, logger seam, provider relocations, and placement closure.
+## Production routing
+
+The software promotion gates are now closed. The Apache-2.0 production adapter
+at `components/apollo_main/core_overlay/cordio_smp_main.c` is 29,363 bytes and
+has SHA-256
+`ea5f2e24d9eb9ab36365a41280464e825dd03049acf5e634b5b13385b4178c70`.
+It preserves the authenticated r20 `keyReady`/LESC behavior, the Ambiq stale
+AES-result queue drain, the three-connection G2 SRAM layout, and the retained
+Cordio/WSF provider ABI.
+
+Twenty guarded `B.W` replacements cover all 3,076 linked stock bytes. Twenty
+source equivalents plus the private packet-length helper compile as 21
+independently pinned Thumb leaves: 2,146 text bytes plus 24 alignment bytes.
+Host contracts cover lookup and initialization, connection lifecycle and
+attempt resumption, L2CAP validation/queueing, legacy `c1`/`s1` crypto inputs,
+LTK/STK/LESC access, handler dispatch, and stale-AES cleanup. The route analyzer
+also authenticates every stock span, leaf pin, relocation, and provider target.
+
+Canonical Apple overlay/component/package outputs are
+`170308/3693704/4472198` bytes with SHA-256
+`72d355eb27a8a21c2868e0ff2fc107ef39babed75a5ad90843d1b06e2380c3bc`,
+`bb4d2ee1d3fae8f710598935e8195aada7281e4e2af20dd6a064899aaba008f3`,
+and `aa849dcdc3f884ecc8f8a30ab760bbc6fefe2cae2f2a4ac22016728bbf339202`.
+The package manifest contains 1,909 Apollo regions and the complete flash plan
+contains 1,981 placed regions plus two unresolved external payload regions.
+
+No hardware was accessed or flashed. Real G2/EM9305 pairing, reconnect,
+legacy/LESC peer interoperability, controller timing, allocation pressure,
+disconnect races, and stale-AES-queue behavior remain explicitly blocked by
+unavailable authorized physical evidence. The remaining SMP state/action
+units, app policy, cryptographic backend, and firmware as a whole remain open.

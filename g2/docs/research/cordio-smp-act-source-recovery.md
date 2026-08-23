@@ -19,7 +19,8 @@ present in stock, independently selecting the r20 family.
 
 The later public file is a semantic and provenance oracle, not a claim that
 the IAR-generated stock object is byte-identical to a public compiler output.
-Production continues to cut the object forward.
+Production now routes every linked function through the bounded local adapter
+described below.
 
 ## Stock boundary and ingress
 
@@ -75,5 +76,30 @@ interior pointer. The complete body ledger is
 `tools/manifests/packetcraft-cordio-smp-act-function-map.tsv`; release identity
 is in `packetcraft-cordio-smp-act-provenance.tsv`.
 
-This work changes identified provenance only: zero stock bytes are replaced
-and zero source-owned production bytes are added.
+## Production integration
+
+`components/apollo_main/core_overlay/cordio_smp_act.c`, 35,811 bytes and
+SHA-256 `f73e9d...14bde`, implements all 25 linked definitions as freestanding
+production C against the authenticated G2 SRAM ABI. Twenty-four functions are
+compiled as independently pinned relocated leaves and reached through bounded
+`B.W` entry replacements. The 2-byte `smpActNone` leaf is compiled to the exact
+stock `70 47` sequence and placed at its original halfword address. The overlay
+builder permits that halfword placement only for an exact 2-byte,
+relocation-free function; its ordinary alignment checks remain fail-closed.
+
+The compiled leaves contain 1,758 executable bytes. Alignment contributes 20
+additional overlay bytes, so this unit increases the source-owned overlay by
+1,778 bytes while replacing all 2,924 stock function bytes. The canonical
+Apple-clang build is 174,816 bytes, SHA-256 `b732d58c...f6bf`; its Apollo main
+component is 3,698,212 bytes, SHA-256 `125cfeb1...55f3`.
+
+Six native host cases cover timers and cleanup, pairing failure and security
+timeout, pairing/authentication selection, legacy confirm calculation, key
+distribution, maximum-attempt handling, completion, and dispatcher behavior.
+The firmware analyzer also fails closed over every source record, compiled
+leaf pin, stock patch route, and the exact in-place no-op.
+
+Authorized G2/EM9305 hardware was not available. Legacy and Secure Connections
+pairing, key distribution, timeout, cancellation, and repeated-attempt behavior
+therefore remain explicitly blocked on unavailable physical evidence; no
+hardware-validation or whole-firmware functional-completeness claim is made.

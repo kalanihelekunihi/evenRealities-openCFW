@@ -18,6 +18,8 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-watchdog-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-watchdog-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-watchdog-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/watchdog.c"
+SOURCE_SHA256 = "9a129f76c1b6c03a43219f5afa606880f551a352ab984bbf062d7401cddd43eb"
 PINS = {
     FUNCTION_MAP: "a9108d6865b4d6876721a6a3b698d059e08ec084a43780734aa827f0855b13a5",
     CLOSURE: "1b262f42bb068048d1f5267b8d7e932697ec3cdf244a019cae9fa3f501e649fa",
@@ -180,10 +182,43 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if raw_addresses:
         raise AuditError("unexpected stored entry/interior pointer")
 
+    if sha256(SOURCE.read_bytes()) != SOURCE_SHA256:
+        raise AuditError("watchdog clean-room source changed")
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("watchdog.c" in source.get("path", "").lower() for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented watchdog driver unexpectedly entered production overlay")
+    leaves = {
+        leaf["function"]: leaf
+        for leaf in overlay["relocated_leaves"]
+        if leaf["function"] in {
+            "open_cfw_watchdog_init", "open_cfw_watchdog_enable"
+        }
+    }
+    patches = {
+        patch["target_function"]: patch
+        for patch in overlay["patch_sites"]
+        if patch.get("target_function") in leaves
+    }
+    if set(leaves) != {
+        "open_cfw_watchdog_init", "open_cfw_watchdog_enable"
+    } or set(patches) != set(leaves):
+        raise AuditError("watchdog production registration is incomplete")
+    for function, expected_start, expected_end in (
+        ("open_cfw_watchdog_init", 0x0052F2E0, 0x0052F320),
+        ("open_cfw_watchdog_enable", 0x0052F320, 0x0052F36C),
+    ):
+        leaf = leaves[function]
+        patch = patches[function]
+        if leaf["source"]["path"] != "components/apollo_main/core_overlay/watchdog.c":
+            raise AuditError(f"{function} source path changed")
+        if patch["runtime_address"] != expected_start:
+            raise AuditError(f"{function} patch start changed")
+        if patch["expected_size"] != expected_end - expected_start:
+            raise AuditError(f"{function} patch extent changed")
+        if patch["expected_sha256"] != sha256(
+            image_slice(data, expected_start, expected_end)
+        ):
+            raise AuditError(f"{function} stock guard changed")
+        if patch["branch"] != "b_w":
+            raise AuditError(f"{function} redirect policy changed")
 
     return {
         "surface": {
@@ -205,9 +240,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "watchdog_enable_provider": "0x00511882",
         },
         "production": {
-            "candidate": None,
-            "production_routed": routed,
-            "ownership_bytes": 0,
+            "candidate": "components/apollo_main/core_overlay/watchdog.c",
+            "production_routed": True,
+            "ownership_bytes": 28,
+            "generated_replacement_bytes": 140,
+            "retained_literal_pool_bytes": 32,
             "source_inventory_available": False,
         },
     }

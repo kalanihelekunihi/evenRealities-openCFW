@@ -150,13 +150,13 @@ PROFILES = {
         "alignment": 4,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 165412,
+        "overlay_size": 174816,
         "overlay_sha256": (
-            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+            "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
         ),
-        "component_size": 3688808,
+        "component_size": 3698212,
         "component_sha256": (
-            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
         ),
         "overlay_base": 0x00794324,
         "provider_offset": 108456,
@@ -176,7 +176,7 @@ PROFILES = {
             "2d689313cd12e5c8d5155c7b4ba3202"
         ),
         "current_layout_rollback_sha256": (
-            "46be137c10cee53296866a10b255b930b5129180cdb68e6108a87a7063987c83"
+            "95f4b7721a8d64ebb54c6ffd1ae2ece615d9a3d5b5dd8a377a1c8beabbb8a595"
         ),
         "historical_tail_size": 22,
         "historical_tail_offset": 113732,
@@ -397,11 +397,11 @@ PROFILES = {
             },
         },
         "accounting": {
-            "generated_patch_site_bytes": 121494,
+            "generated_patch_site_bytes": 123624,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3401688,
-            "replaced_stock_function_bytes": 121672,
-            "source_owned_bytes": 165594,
+            "opaque_base_bytes": 3399558,
+            "replaced_stock_function_bytes": 123802,
+            "source_owned_bytes": 167608,
             "source_owned_in_place_bytes": 182,
         },
     },

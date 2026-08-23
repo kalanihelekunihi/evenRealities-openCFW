@@ -1,6 +1,6 @@
 # G2 functional-capability gap ledger
 
-Status date: 2026-08-22
+Status date: 2026-08-23
 Target: official G2 `s200_v2.2.6.10`
 
 This ledger is the domain-organized record of every known functional-capability
@@ -73,10 +73,10 @@ with no proven autonomous rollback.
 | Domain | implemented-in-source | software-gap | hardware-dependent | proprietary-blocked |
 | --- | ---: | ---: | ---: | ---: |
 | Protocol | 2 | 16 | 3 | 3 |
-| Security | 1 | 6 | 1 (shared with protocol) | 1 |
+| Security | 4 | 4 | 1 (shared with protocol) | 1 |
 | Platform | 14 | 4 | 5 | 1 |
-| Health | 0 | 4 | 0 | 1 |
-| System | 1 | 5 | 1 | 0 |
+| Health | 1 | 3 | 1 | 1 |
+| System | 3 | 3 | 3 | 0 |
 | Storage | 2 | 4 | 2 | 0 |
 | Sensors | 5 | 6 | 1 (touch validation) | 1 |
 | Hardware services | 6 | 7 | 5 | 2 |
@@ -130,10 +130,14 @@ is carried as a single system-domain row that bounds all domains.
 | Capability | Gap status | Size/bounds | Evidence | Acceptance gate |
 | --- | --- | --- | --- | --- |
 | Apollo510 secure-OTA descriptor addition (`open_cfw_secure_ota_add`) | implemented-in-source | 86 B routine source-compiled; sole caller keeps stock ABI | `source-coverage.md`; `memory-map.md` | host execution covers MRAM bounds, eight-image guard, pending-bit encoding, descriptor selection, failure propagation |
-| BLE pairing/bonding — SMP core (`smp_main.c`) | software-gap | 20 functions / 3,076 B; r20.05c + tracked Ambiq AES-queue-cleanup patch | `research/cordio-smp-main-source-recovery.md`; `research/../research/readiness/smp-main/` | production promotion gates: exact FreeRTOS/IAR config, logger seam, provider relocations, placement closure |
-| BLE pairing — SMP database (`smp_db.c`, failure-count/backoff) | software-gap | 11 functions / 2,952 B; exact Apache source; `SMP_DB_MAX_DEVICES=10` override | `research/cordio-smp-db-source-recovery.md`; readiness `smp-db/` | model the =10 override + runtime config + trace seam; IAR placement and provider relocations |
-| SMP legacy + secure-connections state machines and role actions | software-gap | `smp_sc_main` 18 fn / 2,626 B; `smp_act` 25 definitions; both DH-key-check paths characterized | `progress.md`; `research/cordio-smp-sc-main-source-recovery.md` | source recreation and compiler/linker equivalence remain promotion gates |
-| DM security modules (`dm_sec`, `dm_sec_lesc`, `dm_sec_slave`, `dm_sec_master`) | software-gap | `dm_sec` 8 fn / 462 B; `dm_sec_lesc` 7 fn / 222 B; r20.05c byte-identical public source | `research/cordio-dm-sec-source-recovery.md`; `cordio-dm-sec-lesc-source-recovery.md` | production-promotion gates; OOB/debug-key APIs are dead-stripped upstream features, not gaps |
+| BLE pairing/bonding — SMP core (`smp_main.c`) | implemented-in-source | all 20 linked functions / 3,076 stock B redirect to 20 Apache-2.0 equivalents plus one private helper / 2,146 compiled B plus 24 alignment B; r20 `keyReady`/LESC and Ambiq stale-AES cleanup preserved | `research/cordio-smp-main-source-recovery.md`; `components/apollo_main/core_overlay/cordio_smp_main.c`; readiness `smp-main/` | host lifecycle/L2CAP/crypto/key/handler contracts, exact 21-leaf routing, component, manifest, package, and flash-plan gates green; real controller/peer validation remains in the shared hardware row |
+| BLE pairing — SMP database (`smp_db.c`, failure-count/backoff) | implemented-in-source | all 11 linked functions / 2,952 stock B redirect to 11 Apache-2.0 leaves / 698 compiled B plus 14 alignment B; `SMP_DB_MAX_DEVICES=10` and r20 event ABI preserved | `research/cordio-smp-db-source-recovery.md`; `components/apollo_main/core_overlay/cordio_smp_db.c`; readiness `smp-db/` | host state/timer/backoff contracts, exact Thumb routing, component, manifest, package, and flash-plan gates green; repeated-pairing/controller validation remains in the shared hardware row |
+| BLE pairing — SMP Secure Connections main (`smp_sc_main.c`) | implemented-in-source | all 18 linked functions / 2,626 stock B redirect to 18 Apache-2.0 leaves / 2,278 compiled text B plus 452 closure/alignment B; G2 SRAM/config ABI preserved | `research/cordio-smp-sc-main-source-recovery.md`; `components/apollo_main/core_overlay/cordio_smp_sc_main.c`; readiness `smp-sc-main/` | host scratch/CMAC/F4/PDU/passkey/retry/diagnostic contracts, exact Thumb routing, component, manifest, package, and flash-plan gates green; public-key/DH-check/passkey/OOB/reconnect/repeated-attempt validation remains in the shared hardware row |
+| Cordio SMP common actions (`smp_act.c`) | implemented-in-source | all 25 linked definitions / 2,924 stock B replaced by 24 guarded redirects plus one exact 2-byte in-place leaf; 1,758 compiled B + 20 alignment B | `research/cordio-smp-act-source-recovery.md`; `components/apollo_main/core_overlay/cordio_smp_act.c` | six host behavior contracts, exact Thumb leaves, all production routes, component, manifest, package, and flash-plan gates green; controller validation is carried by the shared hardware row |
+| SMP Secure Connections state machines and role actions | software-gap | remaining SC state/action units; both DH-key-check paths characterized | `progress.md`; `research/cordio-smp-sc-act-source-recovery.md` | source recreation and compiler/linker equivalence remain promotion gates |
+| Cordio DM LE Secure Connections (`dm_sec_lesc.c`) | implemented-in-source | all seven live functions / 222 stock B redirect to seven Apache-2.0 leaves / 278 compiled B; four absent APIs proven dead-stripped | `research/cordio-dm-sec-lesc-source-recovery.md`; `components/apollo_main/core_overlay/cordio_dm_sec_lesc.c` | host behavior, exact Thumb surface, ten-relocation route analyzer, component, manifest, and package gates green |
+| Cordio DM security core (`dm_sec.c`) | implemented-in-source | all eight live functions / 462 stock B redirect to eight Apache-2.0 leaves / 506 compiled B; four absent APIs proven dead-stripped | `research/cordio-dm-sec-source-recovery.md`; `components/apollo_main/core_overlay/cordio_dm_sec.c` | host behavior, exact Thumb surface, 19-relocation route analyzer, component, manifest, package, and flash-plan gates green; controller validation is carried by the shared hardware row |
+| Cordio DM security role modules (`dm_sec_slave.c`, `dm_sec_master.c`) | implemented-in-source | all six live functions / 292 stock B redirect to six Apache-2.0 leaves / 332 compiled B plus 6 alignment B | `research/cordio-dm-sec-slave-source-recovery.md`; `research/cordio-dm-sec-master-source-recovery.md`; `components/apollo_main/core_overlay/cordio_dm_sec_roles.c` | host behavior, exact Thumb surface, 14-relocation route analyzers, component, manifest, package, and flash-plan gates green; controller validation is carried by the shared hardware row |
 | App-level pairing/privacy/bonding policy (G2 delta) | software-gap | part of the unquantified first-party app-framework delta | `research/cordio-aggregate-closure-audit.md` | clean-room reconstruction; hardware validation tail |
 | Apollo secure bootloader / secure-boot chain (ROM `0x00400000–0x00410000`) | proprietary-blocked (retained by design) | 64 KiB, absent from EVENOTA, protected | `memory-map.md`; `freertos-g2-config-port-audit.md` | not OTA-updatable; replacement would require Ambiq secure-boot keys — outside project scope by design |
 | G2 cryptographic backend (first-party Even code) | software-gap | unbounded; named only as an uncertain/proprietary first-party boundary | `upstream-inventory.md` | re-create only from a reviewed behavioral contract and host/target tests; no dedicated audit exists yet — weakest-grounded row |
@@ -176,7 +180,8 @@ update security rests on the protected Apollo bootloader.
 
 | Capability | Gap status | Size/bounds | Evidence | Acceptance gate |
 | --- | --- | --- | --- | --- |
-| Health mutex + common-event handler (`health.c`) | software-gap | 4 functions / 504 body B; object `[0x004FFBD8,0x004FFE14)` | `research/g2-health-recovery.md` | `make health-closure` green; replacement gate = clean-room recreation + on-target mutex/role/display-gating validation tail |
+| Health mutex + common-event handler (`health.c`) | implemented-in-source | four guarded stock redirects / 504 replaced body B; four strict-relocation leaves / 198 compiled B | `research/g2-health-recovery.md`; `components/apollo_main/core_overlay/health.c` | host oracle, Thumb surface, route analyzer, component, manifest, and package gates green; diagnostic-only EasyLogger calls deliberately omitted |
+| Health on-device mutex/role/display-gating validation | hardware-dependent | source-complete event-0/event-5 policy and service-one record path | same health audit; 2026-08-23 hardware audit | authorized G2 plus display/transport trace; explicitly blocked by unavailable physical evidence |
 | Health data manager (`health_data_manager.c`) | software-gap | 10 functions / 2,644 body B; object `[0x005597F0,0x0055A350)` | `research/g2-health-data-manager-dependency-boundary.md` | object/dependency closure analyzer pinned; schema/policy recreation + device data validation tail |
 | Health protobuf service (`pb_service_health.c`, service `0x0E`) | software-gap | 8 functions / 3,092 body B; object `[0x0055A558,0x0055B2A4)` | `research/g2-pb-service-health-recovery.md` | closure analyzer + pinned manifests; first-party schema/source recreation (nanopb seam already admitted) |
 | Health UI page (`ui_health_page.c`) | software-gap | 12 functions / 9,414 body B; object `[0x004FB1FA,0x004FD940)` | `research/g2-ui-health-page-dependency-boundary.md` | `make ui-health-page-closure`; all 666 external calls terminate at admitted seams |
@@ -189,9 +194,11 @@ update security rests on the protected Apollo bootloader.
 | Startup/init sequencing (power/clock/RTC/SPOT/low-power/display-subsystem initializers, startup app-ID policy, onboarding gate) | implemented-in-source | named leaf set in core_overlay profile | `g2/README.md` "Current source replacement" | complete-package Apple/Linux profile pins per release |
 | SystemAlert UI (`systemAlert.c`) | software-gap | 2,346 B / 7 blocks, zero production source | `research/g2-system-alert-recovery.md` | `tests.test_analyze_g2_system_alert`; clean-room replacement not yet routed |
 | SystemClose UI (`systemClose.c`) | software-gap | 20 functions / 5,368 B; "not yet production-routed" | `research/g2-system-close-dependency-boundary.md` | `tools/analyze_g2_system_close.py` + unittest; close/confirm/cancel/minimize/scroll/IMU-reflash policy needs clean-room source |
-| System monitor screen (`system_monitor.c`) | software-gap | 592 B single block, descriptor-only ingress | `research/g2-system-monitor-recovery.md` | `tests.test_analyze_g2_system_monitor`; clean-room reimplementation pending |
+| System monitor peer-reboot callback (`system_monitor.c`) | implemented-in-source | complete 510-byte stock body redirects to one 650-byte strict-relocation clean-room leaf; descriptor-only ingress retained | `research/g2-system-monitor-recovery.md`; `components/apollo_main/core_overlay/system_monitor.c` | host oracle, Thumb symbol/43-relocation closure, analyzer route, component, manifest, and package gates green |
+| System monitor on-device peer-reboot orchestration | hardware-dependent | offline record validation, display quiescence, bounded wait, scheduler-idle dispatch, five-reset sequence, and lens-status publication are source-complete | same system-monitor audit; 2026-08-22 hardware audit | paired authorized G2 reboot/display/scheduler trace; blocked by unavailable physical evidence |
 | UX system-status sync (`ux_system.c` — peer OTA/BLE/ring status) | hardware-dependent | 11 functions / 2,868 B fully recovered | `research/g2-ux-system-recovery.md` | `make ux-system-closure` passes; production admission requires paired-hardware transition validation — blocked by unavailable physical evidence |
-| Watchdog driver | software-gap | 2 bounded bodies; one provider boundary not closed; zero ownership bytes | `research/g2-watchdog-recovery.md` | `tools/analyze_g2_watchdog.py` pins; candidate + device watchdog validation pending |
+| Watchdog driver | implemented-in-source | two complete stock entries / 140 body B redirect to two strict-relocation clean-room leaves / 28 source B; selector-zero/value-one policy preserved over retained providers | `research/g2-watchdog-recovery.md`; `components/apollo_main/core_overlay/watchdog.c` | host oracle, Thumb symbol surface, analyzer routing, component, and package gates green |
+| Watchdog on-device enable/reset behavior | hardware-dependent | offline selector/provider chain complete; physical nPMx watchdog response is not observable in this workspace | same watchdog audit; 2026-08-22 hardware audit | authorized G2 + reset-cause/timing capture; blocked by unavailable physical evidence |
 | Product startup/main thread (`s200_config_main.c`, product RTOS glue) | software-gap | reset chain identified; main-thread body + LVGL widget constructors + init hook bounded, analysis-only | `research/g2-s200-config-main-recovery.md`; `g2-product-rtos-recovery.md` | `tests.test_analyze_g2_s200_config_main`; `make product-rtos-closure`; clean-room source + device power validation tail |
 | Unreviewed first-party remainder frontier (bounds all domains) | software-gap | 1,911 functions / 299,736 B `investigation required`; first-party bucket 1,782 fn / 216,564 B | `research/g2-apollo-unanchored-census.md` | `tests/test_analyze_g2_apollo_unanchored_census.py` (18 fail-closed tests); ranked follow-ups: FreeType engine, LVGL `0x5Dxxxx` sea, IAR format-I/O, liblc3 internals, peripheral-register cluster |
 
@@ -282,8 +289,8 @@ update security rests on the protected Apollo bootloader.
 - Fixed-address FreeRTOS global seams (`0x20074A20`–`0x20074A58`) make the
   complete kernel link a single atomic integration event that unblocks
   several platform rows at once.
-- Ownership context (`source-coverage.md`): 286,469 B (6.44%) of the package is
-  source-compiled or generator-owned; 4,180,333 B (93.56%) remains opaque
+- Ownership context (`source-coverage.md`): 287,533 B (6.44%) of the package is
+  source-compiled or generator-owned; 4,179,797 B (93.56%) remains opaque
   (retained stock bytes functioning in the byte-exact profile). The ledger
   rows above are the documented, bounded part of that remainder; the
   unanchored-census frontier row bounds the rest.

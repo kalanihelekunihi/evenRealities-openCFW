@@ -177,6 +177,196 @@ EXPECTED_CODE_SPANS = {
     ),
 }
 
+EXPECTED_BOUNDED_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_dm_sec_lesc_message_handler",
+    "open_cfw_cordio_dm_sec_generate_ecc_key_request",
+    "open_cfw_cordio_dm_sec_set_ecc_key",
+    "open_cfw_cordio_dm_sec_get_ecc_key",
+    "open_cfw_cordio_dm_sec_compare_response",
+    "open_cfw_cordio_dm_sec_get_compare_value",
+    "open_cfw_cordio_dm_sec_lesc_init",
+}
+EXPECTED_BOUNDED_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_dm_sec_lesc.c",
+    "size": 5696,
+    "sha256": "df7f4a7c643703ce6363f18810a01b50de86853a254abab2e3d50b8a4cf2ffe8",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c dm_sec_lesc.c linked surface",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-dm-sec-lesc-source-recovery.md",
+}
+EXPECTED_DM_SEC_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_dm_sec_hci_handler",
+    "open_cfw_cordio_dm_sec_message_handler",
+    "open_cfw_cordio_dm_sec_smp_callback_execute",
+    "open_cfw_cordio_dm_sec_auth_response",
+    "open_cfw_cordio_dm_sec_init",
+    "open_cfw_cordio_dm_sec_get_local_csrk",
+    "open_cfw_cordio_dm_sec_get_local_irk",
+    "open_cfw_cordio_dm_sec_reset",
+}
+EXPECTED_DM_SEC_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_dm_sec.c",
+    "size": 9140,
+    "sha256": "4198e5030e71becbc8de4697984172a6730c140ecbd165183451dc6260e928d9",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c dm_sec.c linked surface",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-dm-sec-source-recovery.md",
+}
+EXPECTED_DM_SEC_SLAVE_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_dm_sec_slave_pair_response",
+    "open_cfw_cordio_dm_sec_slave_request",
+    "open_cfw_cordio_dm_sec_slave_ltk_response",
+}
+EXPECTED_DM_SEC_MASTER_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_dm_sec_master_smp_encrypt_request",
+    "open_cfw_cordio_dm_sec_master_pair_request",
+    "open_cfw_cordio_dm_sec_master_encrypt_request",
+}
+EXPECTED_DM_SEC_ROLES_SOURCE_BASE = {
+    "path": "components/apollo_main/core_overlay/cordio_dm_sec_roles.c",
+    "size": 5640,
+    "sha256": "95636a5ef5a28805aef2467868c3e0551d1da6c7d889c11d01fe32c3255810ad",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c dm_sec_slave.c and dm_sec_master.c linked surfaces",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+}
+EXPECTED_DM_SEC_SLAVE_PRODUCTION_SOURCE = {
+    **EXPECTED_DM_SEC_ROLES_SOURCE_BASE,
+    "evidence": "docs/research/cordio-dm-sec-slave-source-recovery.md",
+}
+EXPECTED_DM_SEC_MASTER_PRODUCTION_SOURCE = {
+    **EXPECTED_DM_SEC_ROLES_SOURCE_BASE,
+    "evidence": "docs/research/cordio-dm-sec-master-source-recovery.md",
+}
+EXPECTED_SMP_DB_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smp_db_start_service_timer",
+    "open_cfw_cordio_smp_db_record_in_use",
+    "open_cfw_cordio_smp_db_add_device",
+    "open_cfw_cordio_smp_db_get_record",
+    "open_cfw_cordio_smp_db_init",
+    "open_cfw_cordio_smp_db_get_pairing_disabled_time",
+    "open_cfw_cordio_smp_db_set_failure_count",
+    "open_cfw_cordio_smp_db_get_failure_count",
+    "open_cfw_cordio_smp_db_max_attempt_reached",
+    "open_cfw_cordio_smp_db_pairing_failed",
+    "open_cfw_cordio_smp_db_service",
+}
+EXPECTED_SMP_DB_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smp_db.c",
+    "size": 11087,
+    "sha256": "e103f1e933f1d7bff5939c2e013162de68bace7298320d879bddd5f5859c5cb5",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c smp_db.c linked surface",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smp-db-source-recovery.md",
+}
+EXPECTED_SMP_MAIN_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smp_main_packet_length",
+    "open_cfw_cordio_smp_main_ccb_by_connection_id",
+    "open_cfw_cordio_smp_main_ccb_by_handle",
+    "open_cfw_cordio_smp_main_state_idle",
+    "open_cfw_cordio_smp_main_send_packet",
+    "open_cfw_cordio_smp_main_l2c_data_callback",
+    "open_cfw_cordio_smp_main_l2c_control_callback",
+    "open_cfw_cordio_smp_main_resume_attempts",
+    "open_cfw_cordio_smp_main_dm_connection_callback",
+    "open_cfw_cordio_smp_main_calculate_c1_part1",
+    "open_cfw_cordio_smp_main_calculate_c1_part2",
+    "open_cfw_cordio_smp_main_calculate_s1",
+    "open_cfw_cordio_smp_main_generate_ltk",
+    "open_cfw_cordio_smp_main_message_allocate",
+    "open_cfw_cordio_smp_main_dm_message_send",
+    "open_cfw_cordio_smp_main_get_sc_security_level",
+    "open_cfw_cordio_smp_main_dm_lesc_enabled",
+    "open_cfw_cordio_smp_main_dm_get_stk",
+    "open_cfw_cordio_smp_main_handler",
+    "open_cfw_cordio_smp_main_dm_encrypt_indication",
+    "open_cfw_cordio_smp_main_handler_init",
+}
+EXPECTED_SMP_MAIN_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smp_main.c",
+    "size": 29363,
+    "sha256": "ea5f2e24d9eb9ab36365a41280464e825dd03049acf5e634b5b13385b4178c70",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c smp_main.c linked surface with the Ambiq stale-AES queue fix",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smp-main-source-recovery.md",
+}
+EXPECTED_SMP_SC_MAIN_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smp_sc_allocate_scratch_buffers",
+    "open_cfw_cordio_smp_sc_free_scratch_buffers",
+    "open_cfw_cordio_smp_sc_cmac",
+    "open_cfw_cordio_smp_sc_allocate",
+    "open_cfw_cordio_smp_sc_calculate_f4",
+    "open_cfw_cordio_smp_sc_init",
+    "open_cfw_cordio_smp_sc_cat",
+    "open_cfw_cordio_smp_sc_cat128",
+    "open_cfw_cordio_smp_sc_send_public_key",
+    "open_cfw_cordio_smp_sc_send_dh_key_check",
+    "open_cfw_cordio_smp_sc_send_random",
+    "open_cfw_cordio_smp_sc_send_pairing_confirm",
+    "open_cfw_cordio_smp_sc_get_passkey_bit",
+    "open_cfw_cordio_smp_sc_cancel_with_reattempt",
+    "open_cfw_cordio_smp_sc_fail_with_reattempt",
+    "open_cfw_cordio_smp_sc_event_string",
+    "open_cfw_cordio_smp_sc_state_string",
+    "open_cfw_cordio_smp_sc_log_byte_array",
+}
+EXPECTED_SMP_SC_MAIN_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smp_sc_main.c",
+    "size": 22793,
+    "sha256": "14b8afa598b7a0053b23312db689ba36a259dad542f568af607e1d89eb5404ef",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c smp_sc_main.c linked surface with a bounded short-line trace fix",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smp-sc-main-source-recovery.md",
+}
+EXPECTED_SMP_ACT_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smp_act_start_response_timer",
+    "open_cfw_cordio_smp_act_none",
+    "open_cfw_cordio_smp_act_cleanup_core",
+    "open_cfw_cordio_smp_act_cleanup",
+    "open_cfw_cordio_smp_act_send_pairing_failed",
+    "open_cfw_cordio_smp_act_pairing_failed",
+    "open_cfw_cordio_smp_act_security_request_timeout",
+    "open_cfw_cordio_smp_act_pairing_cancel",
+    "open_cfw_cordio_smp_act_store_pin",
+    "open_cfw_cordio_smp_act_process_pairing",
+    "open_cfw_cordio_smp_act_authentication_request",
+    "open_cfw_cordio_smp_act_confirm_calculate_one",
+    "open_cfw_cordio_smp_act_confirm_calculate_two",
+    "open_cfw_cordio_smp_act_send_confirm",
+    "open_cfw_cordio_smp_act_verify_calculate_one",
+    "open_cfw_cordio_smp_act_verify_calculate_two",
+    "open_cfw_cordio_smp_act_send_key",
+    "open_cfw_cordio_smp_act_receive_key",
+    "open_cfw_cordio_smp_act_max_attempts",
+    "open_cfw_cordio_smp_act_attempt_received",
+    "open_cfw_cordio_smp_act_notify_attempts_failure",
+    "open_cfw_cordio_smp_act_notify_timeout_failure",
+    "open_cfw_cordio_smp_act_check_attempts",
+    "open_cfw_cordio_smp_act_pairing_complete",
+    "open_cfw_cordio_smp_act_execute",
+}
+EXPECTED_SMP_ACT_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smp_act.c",
+    "size": 35811,
+    "sha256": "f73e9d76970e3e66009d82c75bf07b3e2c8a2c1602ad76f52af024af40014bde",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c smp_act.c linked surface",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smp-act-source-recovery.md",
+}
+
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -398,7 +588,83 @@ def verify_configuration_and_firmware(provenance: dict[str, Any]) -> None:
     require(image_slice(image, 0x0053049C, 0x005304A0) == bytes.fromhex("40f24110"), "WsfBufAlloc source-line evidence changed")
 
 
+def generated_build_path(path: Path, root: Path) -> bool:
+    """Return whether ``path`` is generated component output, not configuration."""
+    relative = path.relative_to(root)
+    return any(part == "build" or part.startswith("build-") for part in relative.parts)
+
+
+def verify_bounded_production_adapter(overlay_path: Path) -> None:
+    """Permit only the pinned local Cordio adapters to cite this oracle."""
+    overlay = json.loads(overlay_path.read_text(encoding="utf-8"))
+    records = [
+        record
+        for record in (
+            overlay.get("relocated_leaves", []) + overlay.get("in_place_leaves", [])
+        )
+        if record.get("source", {}).get("upstream") == "third_party/cordio"
+    ]
+    require(
+        {record.get("function") for record in records}
+        == EXPECTED_BOUNDED_PRODUCTION_FUNCTIONS
+        | EXPECTED_DM_SEC_PRODUCTION_FUNCTIONS
+        | EXPECTED_DM_SEC_SLAVE_PRODUCTION_FUNCTIONS
+        | EXPECTED_DM_SEC_MASTER_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMP_DB_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMP_MAIN_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMP_SC_MAIN_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMP_ACT_PRODUCTION_FUNCTIONS,
+        "snapshot is production-configured outside the bounded Cordio adapter",
+    )
+    require(len(records) == 96, "bounded Cordio production function count changed")
+    for record in records:
+        function = record.get("function")
+        if function in EXPECTED_BOUNDED_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_BOUNDED_PRODUCTION_SOURCE
+        elif function in EXPECTED_DM_SEC_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_DM_SEC_PRODUCTION_SOURCE
+        elif function in EXPECTED_DM_SEC_SLAVE_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_DM_SEC_SLAVE_PRODUCTION_SOURCE
+        elif function in EXPECTED_DM_SEC_MASTER_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_DM_SEC_MASTER_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMP_DB_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMP_DB_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMP_MAIN_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMP_MAIN_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMP_SC_MAIN_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMP_SC_MAIN_PRODUCTION_SOURCE
+        else:
+            expected_source = EXPECTED_SMP_ACT_PRODUCTION_SOURCE
+        require(
+            record.get("source") == expected_source,
+            f"bounded Cordio source contract changed: {record.get('function')}",
+        )
+
+    for expected_source in (
+        EXPECTED_BOUNDED_PRODUCTION_SOURCE,
+        EXPECTED_DM_SEC_PRODUCTION_SOURCE,
+        EXPECTED_DM_SEC_SLAVE_PRODUCTION_SOURCE,
+        EXPECTED_DM_SEC_MASTER_PRODUCTION_SOURCE,
+        EXPECTED_SMP_DB_PRODUCTION_SOURCE,
+        EXPECTED_SMP_MAIN_PRODUCTION_SOURCE,
+        EXPECTED_SMP_SC_MAIN_PRODUCTION_SOURCE,
+        EXPECTED_SMP_ACT_PRODUCTION_SOURCE,
+    ):
+        source_path = ROOT / expected_source["path"]
+        require(source_path.is_file(), "bounded Cordio production source is missing")
+        source = source_path.read_bytes()
+        require(
+            len(source) == expected_source["size"],
+            "bounded Cordio production source size changed",
+        )
+        require(
+            sha256(source) == expected_source["sha256"],
+            "bounded Cordio production source hash changed",
+        )
+
+
 def verify_production_exclusion() -> None:
+    """Reject snapshot compilation; allow one pinned local source adaptation."""
     reference_tokens = (
         "third_party/cordio",
         "CORDIO_DIR",
@@ -431,7 +697,11 @@ def verify_production_exclusion() -> None:
     configured: set[Path] = set()
     manifests = ROOT / "manifests"
     if manifests.is_dir():
-        configured.update(path for path in manifests.rglob("*") if path.is_file())
+        configured.update(
+            path
+            for path in manifests.rglob("*")
+            if path.is_file() and not generated_build_path(path, manifests)
+        )
 
     component_suffixes = {
         ".asm",
@@ -450,6 +720,7 @@ def verify_production_exclusion() -> None:
             path
             for path in components.rglob("*")
             if path.is_file()
+            and not generated_build_path(path, components)
             and (path.suffix.lower() in component_suffixes or path.name == "Makefile")
         )
 
@@ -459,8 +730,25 @@ def verify_production_exclusion() -> None:
             ROOT / "tools" / "open_cfw.py",
         }
     )
+    overlay_path = ROOT / "components/apollo_main/core_overlay/overlay.json"
+    bounded_source_paths = {
+        ROOT / source["path"] for source in (
+            EXPECTED_BOUNDED_PRODUCTION_SOURCE,
+            EXPECTED_DM_SEC_PRODUCTION_SOURCE,
+            EXPECTED_DM_SEC_SLAVE_PRODUCTION_SOURCE,
+            EXPECTED_DM_SEC_MASTER_PRODUCTION_SOURCE,
+            EXPECTED_SMP_DB_PRODUCTION_SOURCE,
+            EXPECTED_SMP_MAIN_PRODUCTION_SOURCE,
+            EXPECTED_SMP_SC_MAIN_PRODUCTION_SOURCE,
+        )
+    }
     for path in sorted(configured):
         if not path.is_file():
+            continue
+        if path == overlay_path:
+            verify_bounded_production_adapter(overlay_path)
+            continue
+        if path in bounded_source_paths:
             continue
         content = path.read_text(encoding="utf-8")
         require(

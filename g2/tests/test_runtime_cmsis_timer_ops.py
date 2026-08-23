@@ -232,8 +232,8 @@ class RuntimeCmsisTimerOpsTests(unittest.TestCase):
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
-        self.assertEqual(main["provider"]["size"], 3_688_808)
-        self.assertEqual(main["provider"]["profiles"]["linux-clang"]["size"], 3_668_576)
+        self.assertEqual(main["provider"]["size"], 3_690_822)
+        self.assertEqual(main["provider"]["profiles"]["linux-clang"]["size"], 3_668_604)
         region_names = {item["name"] for item in main["regions"]}
         self.assertTrue(
             {

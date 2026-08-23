@@ -868,12 +868,12 @@ EXPECTED_TAG_ID_MANIFEST_PROVIDERS = {
     "apollo_main": {
         "kind": "source_build",
         "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-        "size": 3688808,
-        "sha256": "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+        "size": 3693704,
+        "sha256": "bb4d2ee1d3fae8f710598935e8195aada7281e4e2af20dd6a064899aaba008f3",
         "profiles": {
             "linux-clang": {
-                "size": 3668576,
-                "sha256": "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+                "size": 3668604,
+                "sha256": "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
             },
         },
     },
@@ -1736,10 +1736,10 @@ def verify_production_allowlist() -> None:
                 "unrelocated_sha256": EXPECTED_TAG_CHUNK_TEXT_SHA256,
             },
             "linux_artifact": {
-                "overlay_size": 145180,
-                "overlay_sha256": "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
-                "component_size": 3668576,
-                "component_sha256": "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+                "overlay_size": 145208,
+                "overlay_sha256": "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+                "component_size": 3668604,
+                "component_sha256": "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
             },
         },
         "components/bootloader/core_overlay/overlay.json": {
@@ -1973,16 +1973,16 @@ def verify_production_allowlist() -> None:
     aggregate_pins = {
         "components/apollo_main/core_overlay/overlay.json": {
             "apple-clang": {
-                "overlay_size": 165412,
-                "overlay_sha256": "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
-                "component_size": 3688808,
-                "component_sha256": "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+                "overlay_size": 173038,
+                "overlay_sha256": "10fb4ab64f302c7b26c8e2d307c1a695b56f8bbd3c77aa744f45e67ff3cf6eb9",
+                "component_size": 3696434,
+                "component_sha256": "aae37afd5f4f6e406e8358ab943cb81fd0d16dd564f309d4d195709b2b0bcb28",
             },
             "linux-clang": {
-                "overlay_size": 145180,
-                "overlay_sha256": "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
-                "component_size": 3668576,
-                "component_sha256": "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+                "overlay_size": 145208,
+                "overlay_sha256": "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+                "component_size": 3668604,
+                "component_sha256": "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
             },
         },
         "components/bootloader/core_overlay/overlay.json": {

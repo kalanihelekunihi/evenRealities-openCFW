@@ -19,6 +19,32 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 LOAD_BASE = 0x00437FE0
 IMAGE_BYTES = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_smp_main.c"
+PRODUCTION_SOURCE_SIZE = 29_363
+PRODUCTION_SOURCE_SHA256 = "ea5f2e24d9eb9ab36365a41280464e825dd03049acf5e634b5b13385b4178c70"
+PRODUCTION_ROUTES = {
+    "open_cfw_cordio_smp_main_packet_length": (168140, 90, "39ecf1da6972aa1bb12cf6343842640c3ba4359bd107a747327af82618c29070", None),
+    "open_cfw_cordio_smp_main_ccb_by_connection_id": (168232, 26, "784e4bcf71771c417a626cafcc0cb3fb8705efa6b1db3b1dd631a47dd5e3d166", 'smpCcbByConnId'),
+    "open_cfw_cordio_smp_main_ccb_by_handle": (168260, 20, "9db79d880c29d9373fb7525126fcd3c99bc895ed786b5181df3774d0c4060dd2", 'smpCcbByHandle'),
+    "open_cfw_cordio_smp_main_state_idle": (168280, 12, "077cdc8f10743c5c13d248d7ff569e5d4af73e8f8c0596082dc5b2eb6881f709", 'smpStateIdle'),
+    "open_cfw_cordio_smp_main_send_packet": (168292, 50, "6b533535c6e791c15f6cb65c37efae2f3ef0877981fbbd02654f8cf2408e5115", 'smpSendPkt'),
+    "open_cfw_cordio_smp_main_l2c_data_callback": (168344, 106, "0987c126c1b60aedb443b4da14571ac346384b5700ae92d239257e67ec81d173", 'smpL2cDataCback'),
+    "open_cfw_cordio_smp_main_l2c_control_callback": (168452, 82, "882e55e83ce2c3923a6e12dc3fbd55dccac07ca8dee4c14523e7bee7ca650dc0", 'smpL2cCtrlCback'),
+    "open_cfw_cordio_smp_main_resume_attempts": (168536, 90, "06f1f4cc084ff0d412739d803b1b174b52c20dc47f89bfe2883e63538a4bd2e0", 'smpResumeAttemptsState'),
+    "open_cfw_cordio_smp_main_dm_connection_callback": (168628, 180, "15a76afacb91d77b935722804031bf46fad4028068a31626edfe7f72a3046765", 'smpDmConnCback'),
+    "open_cfw_cordio_smp_main_calculate_c1_part1": (168808, 500, "ee337f5c849aa6423d6932dc4cd8330b109d2d33deda9d93544643ff8c6d4568", 'smpCalcC1Part1'),
+    "open_cfw_cordio_smp_main_calculate_c1_part2": (169308, 384, "6afc58ffe207fc84a3b0ad50f76a3048a84d9f8e79f8cda157bc38ef9afbb61d", 'smpCalcC1Part2'),
+    "open_cfw_cordio_smp_main_calculate_s1": (169692, 92, "236f6778cdb349465d2275c03acc0475f1d76dc6636251ef0dff00065ac399bd", 'smpCalcS1'),
+    "open_cfw_cordio_smp_main_generate_ltk": (169784, 86, "675c471125149fe1caeb848192a447d1fd50c5a352591bd16b86c8fb56ebe0b7", 'smpGenerateLtk'),
+    "open_cfw_cordio_smp_main_message_allocate": (169872, 6, "debc979802f9f4305a8f7dd5d7d840da5dac58bcc7f12e2b4d29137afe879c6d", 'smpMsgAlloc'),
+    "open_cfw_cordio_smp_main_dm_message_send": (169880, 20, "8ebf2df6019c53f32cef42f8c5085972ca5c70007fb98533f07d013489b71a68", 'SmpDmMsgSend'),
+    "open_cfw_cordio_smp_main_get_sc_security_level": (169900, 38, "f9a0d70b4042e436ffd7f843789152e41e2ac0ca4f3c61609a35b065bfcd4603", 'smpGetScSecLevel'),
+    "open_cfw_cordio_smp_main_dm_lesc_enabled": (169940, 20, "b1308d12aad8927279efbaa2c284225e7e591835db1cbfe1ac3cfc3b5e5710e3", 'SmpDmLescEnabled'),
+    "open_cfw_cordio_smp_main_dm_get_stk": (169960, 86, "69a5efe08ccbeb47345424a69fcc8ecafd17d6b67ae2ad92e61d0adc3832c366", 'SmpDmGetStk'),
+    "open_cfw_cordio_smp_main_handler": (170048, 124, "f2a06e6b0cd6ffc0e3a7a5b4bb339fbb50def0079c955f70fa2a277fe0483e45", 'SmpHandler'),
+    "open_cfw_cordio_smp_main_dm_encrypt_indication": (170172, 22, "49e24254964eeb9febea4313e315a8696868662a0f101aa71fd3a1589c2cd02c", 'SmpDmEncryptInd'),
+    "open_cfw_cordio_smp_main_handler_init": (170196, 112, "196ea463b18ca3625423e18c95ceebe639bf42c61f94875382e93e8353f3ef43", 'SmpHandlerInit'),
+}
 FUNCTION_MAP = ROOT / "tools/manifests/packetcraft-cordio-smp-main-function-map.tsv"
 READINESS_MANIFEST = ROOT / "research/readiness/smp-main/SHA256SUMS"
 READINESS_SHA256 = "0ee02d564ac137eaeacda02b280b308c7bbae99810a5bd92ab648ab6e8af142e"
@@ -131,6 +157,85 @@ def _aligned_function_pointers(blob: bytes, functions: list[dict[str, Any]]) -> 
     }
 
 
+def _production_report(functions: list[dict[str, Any]]) -> dict[str, Any]:
+    source = PRODUCTION_SOURCE.read_bytes()
+    if (
+        len(source) != PRODUCTION_SOURCE_SIZE
+        or _sha256(source) != PRODUCTION_SOURCE_SHA256
+    ):
+        raise AuditError("Cordio SMP-main production source identity changed")
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    leaves = {
+        row["function"]: row
+        for row in overlay.get("relocated_leaves", [])
+        if row.get("function") in PRODUCTION_ROUTES
+    }
+    patch_routes = {
+        function for function, route in PRODUCTION_ROUTES.items()
+        if route[3] is not None
+    }
+    patches = {
+        row["target_function"]: row
+        for row in overlay.get("patch_sites", [])
+        if row.get("target_function") in patch_routes
+    }
+    if set(leaves) != set(PRODUCTION_ROUTES) or set(patches) != patch_routes:
+        raise AuditError("Cordio SMP-main production routing is incomplete")
+    stock = {
+        item["name"]: (item["start"], item["size"], item["sha256"])
+        for item in functions
+    }
+    source_path = PRODUCTION_SOURCE.relative_to(ROOT).as_posix()
+    for function, (offset, size, digest, stock_name) in PRODUCTION_ROUTES.items():
+        leaf = leaves[function]
+        source_record = leaf.get("source", {})
+        if (
+            leaf.get("profiles") != ["apple-clang"]
+            or source_record.get("path") != source_path
+            or source_record.get("size") != PRODUCTION_SOURCE_SIZE
+            or source_record.get("sha256") != PRODUCTION_SOURCE_SHA256
+            or source_record.get("license") != "Apache-2.0"
+            or source_record.get("upstream_commit")
+            != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6"
+            or leaf.get("expected", {}).get("offset") != offset
+            or leaf.get("expected", {}).get("size") != size
+            or leaf.get("expected", {}).get("sha256") != digest
+            or leaf.get("strict_relocation_contract")
+            != (function != "open_cfw_cordio_smp_main_handler_init")
+        ):
+            raise AuditError(f"Cordio SMP-main production leaf changed: {function}")
+        if stock_name is None:
+            continue
+        patch = patches[function]
+        stock_start, stock_size, stock_digest = stock[stock_name]
+        if (
+            patch.get("profiles") != ["apple-clang"]
+            or patch.get("runtime_address") != stock_start
+            or patch.get("expected_size") != stock_size
+            or patch.get("expected_sha256") != stock_digest
+            or patch.get("branch") != "b_w"
+        ):
+            raise AuditError(f"Cordio SMP-main stock patch changed: {function}")
+    return {
+        "status": (
+            "production-routed authenticated Packetcraft r20.05c definitions "
+            "with the Ambiq stale-AES queue fix and G2 SRAM ABI"
+        ),
+        "candidate": source_path,
+        "production_routed": True,
+        "live_functions": len(PRODUCTION_ROUTES),
+        "compiled_leaf_bytes": sum(item[1] for item in PRODUCTION_ROUTES.values()),
+        "source_owned_bytes_added": 2170,
+        "stock_bytes_replaced": sum(item["size"] for item in functions),
+        "hardware_validation": (
+            "blocked by unavailable authorized G2/EM9305 pairing, reconnect, "
+            "LESC, and stale-AES-queue physical evidence"
+        ),
+    }
+
+
 def analyze(image: Path = IMAGE) -> dict[str, Any]:
     if image.stat().st_size != IMAGE_BYTES:
         raise AuditError("official G2 image size changed")
@@ -233,10 +338,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "valid_hybrid_closure_profiles": 2,
             "linked_unresolved_symbols": 0,
         },
-        "production": {
-            "status": "stock-retained; semantic source candidate and provider closure authenticated but not promoted",
-            "source_owned_bytes_added": 0,
-        },
+        "production": _production_report(functions),
     }
 
 

@@ -25,16 +25,25 @@ The snapshot contains 41 exact upstream files:
 - `LICENSE.md`.
 
 This is enough to compile the five upstream translation units as reference
-objects. It is not a linkable BLE stack and is not registered in any openCFW
-production build or overlay manifest.
+objects. It is not a linkable BLE stack and none of those translation units is
+registered in an openCFW production build. The production overlay may cite the
+snapshot only as provenance for the pinned local `dm_sec`, `dm_sec_lesc`,
+combined `dm_sec_slave`/`dm_sec_master`, and product-configured `smp_db`
+and patched-r20 `smp_main`, `smp_sc_main`, and `smp_act` adapters; the offline verifier
+admits those exact eight-, seven-, six-, eleven-, twenty-one-, and
+eighteen-, and twenty-five-function contracts (96 production leaves total,
+including one exact in-place `smpActNone`) and rejects direct
+snapshot compilation or any broader production reference.
 
 `g2-patches/smp_main-ambiq-aes-queue-cleanup.patch` is repository metadata,
 not a sixth vendored upstream source. It applies to the authenticated
 r20.05c `smp_main.c` blob in an external exact checkout and records the
 independently observed Ambiq stale-AES queue cleanup. Its identity and patched
 result are guarded by `tools/analyze_g2_cordio_smp_main.py`; the snapshot
-verifier permits the patch file but does not count it among the 41 upstream
-files.
+verifier permits the patch file and the exact local 21-leaf `smp_main` and
+18-leaf `smp_sc_main` and 25-function `smp_act` production adapters, but does
+not count them among the 41
+upstream files.
 
 `ble-host/sources/stack/cfg/cfg_stack.h`,
 `ble-profiles/include/app_cfg.h`, `wsf/include/wsf_buf.h`, and

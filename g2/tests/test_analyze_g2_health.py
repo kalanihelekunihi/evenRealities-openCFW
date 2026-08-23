@@ -56,8 +56,13 @@ class HealthTests(unittest.TestCase):
         self.assertFalse(boundary["new_version_discriminator"])
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routed(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["candidate"], "components/apollo_main/core_overlay/health.c")
+        self.assertEqual(production["ownership_bytes"], 504)
+        self.assertEqual(production["compiled_leaf_bytes"], 198)
+        self.assertEqual(len(production["functions"]), 4)
 
 
 if __name__ == "__main__":

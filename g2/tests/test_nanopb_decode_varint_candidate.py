@@ -178,10 +178,10 @@ TARGET_FLAGS = (
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
         "object": (
             1_284,
-            "c5c95e69e834ab88c21b060813181598e9ec3696e7f3c76b814357f70f772a97",
+            "89c608c21091e2597fc625b450018a8c7887aeae20a728ba68d4193f8a36dfc9",
         ),
         "text_size": 128,
         "text_sha256": (

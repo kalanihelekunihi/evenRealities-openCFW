@@ -1,6 +1,6 @@
 # Cordio DM security source recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-23
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -16,7 +16,34 @@ strict-interior pointers close ingress.
 Four APIs have no stock body, caller, or pointer and are dead-stripped:
 `dmSecApiLtkMsg`, `DmSecCancelReq`, `DmSecSetLocalCsrk`, and
 `DmSecSetLocalIrk`. All 12 source functions are therefore classified. The
-stock object remains cut forward and no production byte is replaced.
+eight live functions are now compiled from the authenticated Packetcraft
+r20.05c behavior and production-routed; the four absent APIs remain explicit
+configuration exclusions.
+
+## Production admission
+
+`components/apollo_main/core_overlay/cordio_dm_sec.c` provides exactly the
+eight live entries. Eight guarded full-span redirects replace all 462 stock
+code bytes with 506 compiled Thumb bytes and six alignment bytes. The route
+analyzer authenticates every stock span, the interface ingress, and all 19
+external relocations. The implementation preserves the r20 LESC EDIV/Rand
+rejection, STK fallback, connection busy/idle transitions, ATT-before-DM-before-
+SMP completion order, bounded authentication-message copy, interface/control-
+block initialization, key accessors, and SMP database reset. Initializing the
+unused failure-event `using_ltk` byte to zero is a bounded deterministic safety
+correction; it does not alter the failure event contract.
+
+Host behavior tests, the exact target symbol/relocation surface, component
+assembly, source manifest, package assembly, and flash-plan generation gate the
+route. The canonical Apple overlay/component/package identities are
+`167088/3690484/4468978` bytes with SHA-256
+`63a2dab6221e9c6fcbae491442752d3d4bf3f1e9fe4a1bb8793e7a58493781ca`,
+`1f4e39b37007da8a8e845bd653a29a3c251d9da22cfe574949f8f187f5a66e19`, and
+`edd49b59043320fa1abfcbdc202eb1b03b575c887c500829205fa6af13ab1c5b`.
+No hardware was accessed or flashed. Controller timing, pool pressure,
+disconnect races, legacy/LESC peer interoperability, and encryption callback
+ordering on a physical G2/EM9305 are explicitly blocked by unavailable
+authorized physical evidence.
 
 ## Exact release discriminator
 
@@ -73,5 +100,6 @@ python3 tools/analyze_g2_cordio_dm_sec.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-The next small linked dependency is `dm_sec_lesc.c` at component ID 8;
-closing it precedes the retained Ambiq HCI event producer.
+`dm_sec_lesc.c` at component ID 8 is also production-routed. The remaining
+small security-role dependencies are `dm_sec_slave.c` and `dm_sec_master.c`;
+their hardware-facing validation shares the blocked Cordio controller row.

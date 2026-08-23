@@ -1598,6 +1598,7 @@ def extract_in_place_function_section(
     allow_local_function: bool = False,
     allow_local_relocation_targets: bool = False,
     allow_bound_static_data: bool = False,
+    allow_halfword_placement: bool = False,
 ) -> tuple[bytes, dict[str, Any]]:
     """Extract and relocate one reviewed function for its fixed stock address."""
 
@@ -1606,6 +1607,11 @@ def extract_in_place_function_section(
     if not isinstance(strict_relocation_contract, bool):
         raise BuildError(
             f"in-place leaf {function_name} strict_relocation_contract must "
+            "be boolean"
+        )
+    if not isinstance(allow_halfword_placement, bool):
+        raise BuildError(
+            f"in-place leaf {function_name} allow_halfword_placement must "
             "be boolean"
         )
     if not isinstance(allow_local_function, bool):
@@ -1791,7 +1797,14 @@ def extract_in_place_function_section(
             f"in-place leaf section {section_name} has invalid alignment "
             f"{alignment}"
         )
-    if runtime_address % alignment:
+    halfword_placement = (
+        allow_halfword_placement
+        and alignment == 4
+        and runtime_address % 2 == 0
+        and section_size == 2
+        and not relocation_configs
+    )
+    if runtime_address % alignment and not halfword_placement:
         raise BuildError(
             f"in-place leaf {function_name} runtime address "
             f"0x{runtime_address:08X} violates section alignment {alignment}"
@@ -3570,6 +3583,10 @@ def compile_in_place_leaf(
         ),
         allow_bound_static_data=leaf_config.get(
             "allow_bound_static_data",
+            False,
+        ),
+        allow_halfword_placement=leaf_config.get(
+            "allow_halfword_placement",
             False,
         ),
     )

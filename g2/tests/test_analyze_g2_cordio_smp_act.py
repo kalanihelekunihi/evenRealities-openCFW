@@ -40,6 +40,15 @@ class SmpActTest(unittest.TestCase):
         self.assertEqual(module["strict_interior_pointers"], 0)
         self.assertTrue(report["lineage"]["independent_release_discriminator"])
         self.assertEqual(report["architecture"]["cleanup_event"], 0x1F)
+        production = report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["live_functions"], 25)
+        self.assertEqual(production["relocated_functions"], 24)
+        self.assertEqual(production["in_place_functions"], 1)
+        self.assertEqual(production["compiled_leaf_bytes"], 1758)
+        self.assertEqual(production["source_owned_bytes_added"], 1778)
+        self.assertEqual(production["stock_bytes_replaced"], 2924)
+        self.assertIn("blocked", production["hardware_validation"])
 
 
 if __name__ == "__main__":

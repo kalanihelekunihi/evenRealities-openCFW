@@ -26,7 +26,16 @@ class ZeroAnchorClosureTests(unittest.TestCase):
 
     def test_evidence_and_production(self):
         self.assertEqual(self.r["evidence"], {'boundary_guards': True, 'pointer_cells': ['0x005850EC'], 'path_string_run_address': '0x00706590', 'tag_strings': 6})
-        self.assertFalse(self.r["production"]["production_routed"])
+        self.assertEqual(
+            self.r["production"],
+            {
+                'function': 'open_cfw_system_monitor_common_data_handler',
+                'production_routed': True,
+                'relocations': 43,
+                'source_sha256': '1dbf2c2ecbf62932293bebae39ce9482153d05f651de7b8419989a0ae0cbc46a',
+                'stock_body_bytes_replaced': 510,
+            },
+        )
 
 
 if __name__ == "__main__":

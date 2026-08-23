@@ -232,8 +232,32 @@ def analyze(image=IMAGE):
         if _cstring(blob, address) != text:
             raise c.AuditError("tag string changed")
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any(x.get("path", "").replace("\\", "/").split("/")[-1].lower() == 'system_monitor.c' for x in overlay["sources"]):
-        raise c.AuditError("object entered production overlay")
+    function = "open_cfw_system_monitor_common_data_handler"
+    leaves = [
+        item for item in overlay.get("relocated_leaves", [])
+        if item.get("function") == function
+    ]
+    patches = [
+        item for item in overlay.get("patch_sites", [])
+        if item.get("target_function") == function
+    ]
+    if len(leaves) != 1 or len(patches) != 1:
+        raise c.AuditError("production route changed")
+    leaf = leaves[0]
+    patch = patches[0]
+    if leaf.get("source", {}).get("path") != "components/apollo_main/core_overlay/system_monitor.c":
+        raise c.AuditError("production source changed")
+    if leaf.get("source", {}).get("sha256") != "1dbf2c2ecbf62932293bebae39ce9482153d05f651de7b8419989a0ae0cbc46a":
+        raise c.AuditError("production source hash changed")
+    if len(leaf.get("relocations", [])) != 43:
+        raise c.AuditError("production relocation closure changed")
+    if (
+        patch.get("runtime_address") != F[0][0]
+        or patch.get("expected_size") != EXPECTED["body_bytes"]
+        or patch.get("expected_sha256") != EXPECTED["body_concat_sha256"]
+        or patch.get("branch") != "b_w"
+    ):
+        raise c.AuditError("production patch changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only zero-anchor linked-object closure",
@@ -241,7 +265,13 @@ def analyze(image=IMAGE):
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": False},
+        "production": {
+            "production_routed": True,
+            "function": function,
+            "source_sha256": leaf["source"]["sha256"],
+            "relocations": len(leaf["relocations"]),
+            "stock_body_bytes_replaced": patch["expected_size"],
+        },
     }
 
 

@@ -920,12 +920,12 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                165_412,
+                167_426,
                 (
-                    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
                 ),
-                943,
-                882,
+                945,
+                884,
             ),
         )
         component = self.production["component"]
@@ -943,15 +943,15 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 )
             },
             {
-                "size": 3_688_808,
+                "size": 3_690_822,
                 "sha256": (
-                    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
                 ),
-                "generated_patch_site_bytes": 121_494,
-                "replaced_stock_function_bytes": 121_672,
-                "source_owned_bytes": 165_594,
+                "generated_patch_site_bytes": 121_634,
+                "replaced_stock_function_bytes": 121_812,
+                "source_owned_bytes": 165_622,
                 "source_owned_in_place_bytes": 182,
-                "opaque_base_bytes": 3_401_688,
+                "opaque_base_bytes": 3_401_548,
             },
         )
 
@@ -965,15 +965,15 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                     "g2-openCFW-s200_v2.2.6.10-core-source."
                     "evenota.bin"
                 ),
-                "expected_size": 4_467_302,
+                "expected_size": 4_469_316,
                 "expected_sha256": (
-                    "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
+                    "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_447_070,
+                        "expected_size": 4_447_098,
                         "expected_sha256": (
-                            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"
+                            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"
                         ),
                     },
                 },
@@ -981,7 +981,7 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
         )
         regions = manifest["component_overrides"]["apollo_main"]["regions"]
         selected_names = {
-            "opaque_between_freertos_task_priority_set_and_task_suspend_all",
+            "freertos_task_start_scheduler_source_replacement",
             "freertos_task_suspend_all_source_replacement",
             "opaque_between_freertos_task_suspend_all_and_resume_all",
             "apollo_freertos_task_suspend_all_source_leaf",
@@ -999,10 +999,12 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
         self.assertEqual(
             selected,
             {
-                (
-                    "opaque_between_freertos_task_priority_set_and_"
-                    "task_suspend_all"
-                ): (118_028, 144, 0x0045_4CEC, "official_blob"),
+                "freertos_task_start_scheduler_source_replacement": (
+                    118_028,
+                    144,
+                    0x0045_4CEC,
+                    "generated_source_entry_replacement",
+                ),
                 "freertos_task_suspend_all_source_replacement": (
                     118_172,
                     12,

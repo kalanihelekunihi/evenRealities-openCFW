@@ -2481,8 +2481,12 @@ body calls, no stored entry pointers, and zero direct, stored, or `B.W`
 strict-interior ingress close it.
 
 `watchdog_init` calls `watchdog_enable`; enable invokes the lower provider only
-when selector-zero returns byte value one. Historical source remains
-unavailable, so this is analysis-only with zero production ownership. See
+when selector-zero returns byte value one. A clean-room C implementation is now
+production-routed: two strict-relocation leaves total 28 source bytes, and two
+guarded redirects replace all 140 stock body bytes. The 32-byte diagnostic pool
+remains retained. Host behavior, Thumb compilation, analyzer routing, Apple
+component, and complete package gates pass. On-device enable/reset-cause timing
+is blocked by unavailable authorized hardware evidence. See
 `docs/research/g2-watchdog-recovery.md`. Its retained eAT buzzer consumer is
 closed below.
 
@@ -5432,3 +5436,172 @@ patch-site bytes, 32 generated wrapper bytes, 182 in-place source bytes, and
 `4dea653f6001fc9cf287253481ab412d9046a590bc70707fadce6afb01307b09`, and
 `03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
 No hardware operation was performed.
+
+## G2 system-monitor peer-reboot callback is production-routed
+
+The descriptor-only `app\\gui\\system\\system_monitor.c` callback is now
+implemented by `open_cfw_system_monitor_common_data_handler`. Its one
+650-byte strict-relocation leaf replaces all 510 authenticated stock body bytes
+at `[0x00584EE4,0x005850E2)` while retaining descriptor ingress at
+`0x006A4674`. The clean-room source validates the six-byte reboot sentinel,
+quiesces foreground/background display work, enforces the stock eleven-by-100
+tick wait bound, sends master-side scheduler idle, and executes all five reset
+and publication providers. NULL and short payloads are rejected before the
+stock body's unchecked byte reads.
+
+Focused behavior, Thumb surface, 43-relocation, routing, component, manifest,
+and package tests pass. Canonical Apple overlay/component/package identities
+are `166090/3689486/4467980` bytes and
+`1120724b...43e8` / `18e578a6...d05f` / `a643e0fd...e11e9`.
+On-device paired-reboot/display/scheduler evidence remains blocked by
+unavailable authorized physical hardware.
+
+## G2 health mutex/common-event object is production-routed
+
+The four authenticated functions in `app\\gui\\health\\health.c` are now
+implemented in clean-room freestanding C and routed through four guarded
+full-span redirects. The Apple overlay adds 198 compiled bytes and replaces
+504 stock bytes. Focused host tests cover mutex creation, lock/unlock, event
+validation, provider dispatch, lens/display gates, and service-one record
+posting; the target compile proves exactly four global Thumb text symbols.
+
+Canonical Apple overlay/component/package identities are
+`166292/3689688/4468182` bytes and
+`a3de5492...958d` / `eb0e6c9b...53fb` / `0c1548c6...57d4`.
+Accounting closes at 166,474 source-owned, 122,648 generated patch-site,
+122,826 replaced stock-function, and 3,400,534 opaque base bytes. No hardware
+operation was performed. On-device concurrency, role/display selection,
+transport delivery, and visible health behavior are explicitly blocked by
+unavailable physical evidence; this does not declare overall G2 completeness.
+
+## Cordio `dm_sec_lesc` security unit is production-routed
+
+All seven live LE Secure Connections functions are now compiled from the
+admitted Packetcraft r20.05c Apache-2.0 behavior and routed through guarded
+full-span redirects. Host tests cover ECC/OOB events, buffer lifetime, key
+storage, compare-response allocation/cancel paths, formatting, and interface
+registration; the Thumb gate exposes exactly seven text symbols and the route
+analyzer pins all ten relocations.
+
+Canonical Apple overlay/component/package identities are
+`166576/3689972/4468466` bytes and
+`1f5c6afe...1cff` / `9ca58f6d...7ff2` / `eb2d45ac...2985`.
+No hardware operation was performed. Pairing/controller timing, pool pressure,
+disconnect races, and peer interoperability remain explicitly blocked by
+unavailable authorized G2/EM9305 physical evidence. The overall security and
+firmware ledgers remain incomplete.
+
+## Cordio `dm_sec` security core is production-routed
+
+All eight live security-core functions are compiled from the admitted
+Packetcraft r20.05c Apache-2.0 behavior and routed through guarded full-span
+redirects. Host tests cover HCI/message LTK paths, LESC rejection, STK fallback,
+busy/idle transitions, encryption callback ordering, authentication allocation
+and truncation, initialization, key accessors, and reset. The Thumb gate exposes
+exactly eight text symbols and the route analyzer pins all 19 relocations.
+
+Canonical Apple overlay/component/package identities are
+`167088/3690484/4468978` bytes and `63a2dab6...81ca` /
+`1f4e39b3...6e19` / `edd49b59...1c5b`. No hardware operation was performed.
+Controller timing, allocation pressure, disconnect races, callback ordering,
+and legacy/LESC peer interoperability remain explicitly blocked by unavailable
+authorized G2/EM9305 evidence. `dm_sec_slave` and `dm_sec_master`, the broader
+security ledger, and the firmware as a whole remain incomplete.
+
+## Cordio `dm_sec_slave` and `dm_sec_master` roles are production-routed
+
+All six live role functions are compiled from the admitted Packetcraft
+r20.05c Apache-2.0 behavior and routed through guarded full-span redirects.
+Host tests cover allocation failures, pair/security/LTK request and response
+ABI, key-distribution masking, present/absent keys, CCB state, non-LTK
+selection, and zero-Rand/EDIV encryption start. The Thumb gate exposes exactly
+six text symbols and the two route analyzers pin all 14 relocations.
+
+Canonical Apple overlay/component/package identities are
+`167426/3690822/4469316` bytes and `303539d4...e9b9` /
+`e6a69ad6...1fb4` / `39a4702c...d975`. No hardware operation was performed.
+Role-specific controller timing, message ownership, disconnect races, callback
+behavior, and peer interoperability remain explicitly blocked by unavailable
+authorized G2/EM9305 evidence. The broader SMP/application-policy/cryptographic
+security rows and the firmware as a whole remain incomplete.
+
+## Cordio `smp_db` pairing database is production-routed
+
+All eleven linked database functions are compiled from authenticated
+Packetcraft r20.05c Apache-2.0 definitions while preserving the G2 ten-record
+override and r20 service event. Eleven guarded redirects replace 2,952 stock
+bytes with 698 compiled Thumb bytes plus 14 alignment bytes. Five host
+contracts cover initialization, peer allocation/reuse, common-record fallback,
+failure timers, exponential backoff/clamping, pairing-failure refresh, and
+saturating service ticks; the analyzer pins all production routes.
+
+Canonical Apple overlay/component/package identities are
+`168138/3691534/4470028` bytes and `c58ed4eb...4a0e0` /
+`bafeba34...d1487` / `d563e568...6b4b`. No hardware operation was performed.
+WSF scheduling, controller disconnect races, repeated-attempt timing, and peer
+interoperability remain explicitly blocked by unavailable authorized physical
+evidence. The remaining SMP state/action units, application policy,
+cryptographic backend, and firmware as a whole remain incomplete.
+
+## Cordio `smp_main` is production-routed
+
+All twenty linked functions now route to authenticated Packetcraft r20.05c
+behavior with the Ambiq stale-AES queue cleanup, and the private packet-length
+helper is source-owned as a twenty-first leaf. The overlay emits 2,146 Thumb
+text bytes plus 24 alignment bytes and replaces all 3,076 stock bytes. Six host
+contracts cover initialization/lookups, connection lifecycle, retry timers,
+L2CAP validation/queueing, legacy crypto, LTK/STK/LESC access, handler dispatch,
+and stale queue cleanup.
+
+Canonical Apple overlay/component/package identities are
+`170308/3693704/4472198` bytes and `72d355eb...c3bc` / `bb4d2ee1...08f3` /
+`aa849dcd...9202`. The component owns 170,490 source bytes, 129,652 generated
+patch-site bytes, and 3,393,530 opaque base bytes. No hardware operation was
+performed. Controller timing, disconnect races, pairing/reconnect, peer
+interoperability, and stale-AES behavior remain explicitly blocked by
+unavailable authorized G2/EM9305 physical evidence; no completeness claim is
+made.
+
+## Cordio `smp_sc_main` is production-routed
+
+All eighteen linked Secure Connections support functions now route to
+authenticated Packetcraft r20.05c behavior through eighteen guarded leaves.
+The overlay emits 2,278 Thumb text bytes plus 452 bytes of event-string rodata
+and alignment closure, replacing all 2,626 authenticated stock body bytes.
+Six host contracts cover scratch lifetime, allocation and CMAC cancellation,
+F4 inputs, all four pairing PDUs, passkey bits, repeated-attempt behavior, and
+diagnostics. The byte-array logger also fixes the upstream short-final-line
+stall by consuming the actual remaining count.
+
+Canonical Apple overlay/component/package identities are
+`173038/3696434/4474928` bytes and `10fb4ab6...6eb9` /
+`aae37afd...cb28` / `a79d1096...42a`. The component owns 173,220 source
+bytes (including 182 in place), 132,278 generated patch-site bytes, 32 wrapper
+bytes, and retains 3,390,904 opaque bytes. No hardware operation was performed.
+Public-key/DH-check/passkey/OOB/reconnect/repeated-attempt controller and peer
+validation is explicitly blocked by unavailable authorized G2/EM9305 physical
+evidence. Remaining SMP action/state units and the firmware as a whole remain
+incomplete.
+
+## Cordio `smp_act` common actions are production-routed
+
+All 25 linked Packetcraft `smp_act.c` functions now execute source-owned
+r20.05c behavior. Twenty-four guarded redirects replace their complete stock
+bodies; `smpActNone` is compiled to its exact two-byte stock encoding and
+placed in situ. Six host contracts cover timers/cleanup, failures and timeout,
+pairing/authentication, legacy confirmation, key distribution, attempt
+lockout/completion, and dispatcher behavior. The target and route gates pin all
+compiled functions, relocations, patch spans, and the narrowly reviewed
+halfword-placement case.
+
+The unit contributes 1,758 compiled bytes plus 20 alignment bytes and replaces
+all 2,924 authenticated stock function bytes. Canonical Apple
+overlay/component/package identities are `174816/3698212/4476706` bytes and
+`b732d58c...f6bf` / `125cfeb1...55f3` / `26bf3d84...5058`; the flash plan is
+1,480,138 bytes with SHA-256 `cec97a55...6a4`.
+
+No hardware was accessed, signed for, or flashed. Legacy and Secure
+Connections pairing, key distribution, timeout, cancellation, and
+repeated-attempt controller/peer behavior remain explicitly blocked by
+unavailable authorized G2/EM9305 physical evidence. The remaining Secure
+Connections action/state units and the firmware as a whole remain incomplete.

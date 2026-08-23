@@ -67,6 +67,51 @@ EXPECTED_STORED = {
     0x0078A8A0: 0x004D2441,
 }
 SOURCE_ONLY = ["dmSecApiLtkMsg", "DmSecCancelReq", "DmSecSetLocalCsrk", "DmSecSetLocalIrk"]
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_dm_sec.c"
+PRODUCTION_SOURCE_SIZE = 9_140
+PRODUCTION_SOURCE_SHA256 = "4198e5030e71becbc8de4697984172a6730c140ecbd165183451dc6260e928d9"
+PRODUCTION_ROUTES = {
+    "open_cfw_cordio_dm_sec_smp_callback_execute": (
+        "DmSmpCbackExec", 0, 166_576, 46,
+        "a916ba926b07f02a0d2e4a75d10b02c1621b424831457d80bbe50302c6238b09",
+        "a916ba926b07f02a0d2e4a75d10b02c1621b424831457d80bbe50302c6238b09",
+    ),
+    "open_cfw_cordio_dm_sec_hci_handler": (
+        "dmSecHciHandler", 10, 166_624, 224,
+        "006f08279d0efecb54b75463998c30df29f00dda9c10cb19ab009746cc3bc5fd",
+        "4cfa4c7337ca6b270882ac433030a0df9954603c5edeff72101f68ac7d86777f",
+    ),
+    "open_cfw_cordio_dm_sec_message_handler": (
+        "dmSecMsgHandler", 6, 166_848, 114,
+        "3dd7563117b3e92ab814ef605798b8d0acf4ac1a5f6ed4d1897a894d8b7c3deb",
+        "3b50415d7f906a3db3f1eb7f0eee5f49e7c497d97c9846f24c5ceb4cd72d0ab7",
+    ),
+    "open_cfw_cordio_dm_sec_auth_response": (
+        "DmSecAuthRsp", 3, 166_964, 54,
+        "c126a8b48ee66c93d114600d9bfc6b018988c4aac92ac99320a7405f7319616a",
+        "663d764e7c29aa7b7f11ca02478c151282ddc451373197d1b681b6eee4cd92e6",
+    ),
+    "open_cfw_cordio_dm_sec_init": (
+        "DmSecInit", 0, 167_020, 40,
+        "38e656b9b509beb9ac7e8dac01cb6a025b4e03ef753a9d435f4a826f454a8177",
+        "38e656b9b509beb9ac7e8dac01cb6a025b4e03ef753a9d435f4a826f454a8177",
+    ),
+    "open_cfw_cordio_dm_sec_get_local_csrk": (
+        "DmSecGetLocalCsrk", 0, 167_060, 12,
+        "2476628639d77eed83e6b8414923dd677fcdeb6a207718d9b6229dcfb4edd04c",
+        "2476628639d77eed83e6b8414923dd677fcdeb6a207718d9b6229dcfb4edd04c",
+    ),
+    "open_cfw_cordio_dm_sec_get_local_irk": (
+        "DmSecGetLocalIrk", 0, 167_072, 12,
+        "d756ffc7cae3f609631f1385e760b508f2e077530779cf9117366c18a2e328d2",
+        "d756ffc7cae3f609631f1385e760b508f2e077530779cf9117366c18a2e328d2",
+    ),
+    "open_cfw_cordio_dm_sec_reset": (
+        "dmSecReset", 1, 167_084, 4,
+        "8c36f14cf9030da576d2a806d8e31db3770defdf7d665923e1092199511d166c",
+        "90a54a1f68a806a1795bd044856908235426b3c0f67be605fb94d3d5344a747f",
+    ),
+}
 
 
 class AuditError(RuntimeError):
@@ -150,6 +195,61 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
     if stored != EXPECTED_STORED or interior_pointers:
         raise AuditError("dm_sec stored entry/interior pointer closure changed")
 
+    source = PRODUCTION_SOURCE.read_bytes()
+    if len(source) != PRODUCTION_SOURCE_SIZE or _sha256(source) != PRODUCTION_SOURCE_SHA256:
+        raise AuditError("dm_sec production source identity changed")
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    leaves = {
+        row["function"]: row
+        for row in overlay.get("relocated_leaves", [])
+        if row.get("function") in PRODUCTION_ROUTES
+    }
+    patches = {
+        row["target_function"]: row
+        for row in overlay.get("patch_sites", [])
+        if row.get("target_function") in PRODUCTION_ROUTES
+    }
+    if set(leaves) != set(PRODUCTION_ROUTES) or set(patches) != set(PRODUCTION_ROUTES):
+        raise AuditError("dm_sec production registration is incomplete")
+    source_path = PRODUCTION_SOURCE.relative_to(ROOT).as_posix()
+    for function, route in PRODUCTION_ROUTES.items():
+        stock_name, relocation_count, offset, size, digest, unrelocated = route
+        leaf = leaves[function]
+        patch = patches[function]
+        start, end, stock_digest = FUNCTIONS[stock_name]
+        source_record = leaf.get("source", {})
+        expected = leaf.get("expected", {})
+        if leaf.get("profiles") != ["apple-clang"]:
+            raise AuditError(f"{function} production profile changed")
+        if (
+            source_record.get("path") != source_path
+            or source_record.get("size") != PRODUCTION_SOURCE_SIZE
+            or source_record.get("sha256") != PRODUCTION_SOURCE_SHA256
+            or source_record.get("license") != "Apache-2.0"
+            or source_record.get("upstream_commit")
+            != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6"
+        ):
+            raise AuditError(f"{function} production source contract changed")
+        if expected != {
+            "size": size,
+            "sha256": digest,
+            "alignment": 4,
+            "offset": offset,
+            "unrelocated_sha256": unrelocated,
+        }:
+            raise AuditError(f"{function} production output pins changed")
+        if len(leaf.get("relocations", [])) != relocation_count:
+            raise AuditError(f"{function} relocation closure changed")
+        if (
+            patch.get("runtime_address") != start
+            or patch.get("expected_size") != end - start
+            or patch.get("expected_sha256") != stock_digest
+            or patch.get("branch") != "b_w"
+        ):
+            raise AuditError(f"{function} production patch changed")
+
     return {
         "schema_version": 1,
         "image": {"path": str(image), "sha256": IMAGE_SHA256},
@@ -186,7 +286,19 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "provider_seams": 22, "valid_non_vacuous_closure_profiles": 2,
             "linked_unresolved_symbols": 0,
         },
-        "production": {"source_owned_bytes_added": 0, "stock_bytes_replaced": 0},
+        "production": {
+            "candidate": source_path,
+            "source_sha256": PRODUCTION_SOURCE_SHA256,
+            "production_routed": True,
+            "live_functions": len(PRODUCTION_ROUTES),
+            "compiled_leaf_bytes": sum(route[3] for route in PRODUCTION_ROUTES.values()),
+            "source_owned_bytes_added": 512,
+            "stock_bytes_replaced": 462,
+            "dead_stripped_public_apis": SOURCE_ONLY,
+            "hardware_validation": (
+                "blocked by unavailable authorized G2/EM9305 pairing evidence"
+            ),
+        },
     }
 
 

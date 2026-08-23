@@ -3896,3 +3896,168 @@ package SHA-256
 No hardware was accessed or flashed. Live CM55 preemption, exception return,
 overflow-hook, trace-concurrency, and STIMER timing evidence remains explicitly
 blocked by the absence of an authorized G2 and probe/capture setup.
+
+## Current watchdog production routing
+
+The complete first-party `driver/wdt/watchdog.c` decision layer is now
+clean-room C. Guarded redirects replace `watchdog_init` at
+`[0x0052F2E0,0x0052F320)` and `watchdog_enable` at
+`[0x0052F320,0x0052F36C)` with two strict-relocation leaves totaling 28 bytes.
+The source preserves initialization delegation and the exact selector-zero,
+value-one gate before calling the retained nPMx watchdog provider. The 32-byte
+stock diagnostics pool remains authenticated compatibility data.
+
+Host oracles cover disabled values 0, 2, and 255 plus the sole enabled value 1;
+the freestanding Thumb gate proves the exact two-symbol text surface. The
+analyzer additionally authenticates both stock spans, their only ingress,
+provider addresses, and production registration. The current Apple
+overlay/component/package closes at `166090/3689486/4467980` bytes with
+SHA-256 `1120724be7e02326ec5273397bd9fcacbbd973883b1787c67fcaa9835fc943e8`,
+`18e578a6824ab184f35309489af07972a41a74da465bc5ecc07c182e2b42d05f`,
+and `a643e0fdf5d90b8f34b9fe5b3833d239e27bd28dd2d18f7bc6163182c99e11e9`.
+
+No hardware was accessed or flashed. Actual watchdog reset timing and
+reset-cause evidence remain explicitly blocked by the absence of an authorized
+G2 target and capture setup.
+
+## Current health mutex and common-event production routing
+
+The four-function `app\\gui\\health\\health.c` object is now clean-room,
+compilable C. Four guarded redirects replace 504 authenticated stock body
+bytes with four Apple Clang strict-relocation leaves totaling 198 bytes. The
+implementation preserves lazy mutex creation, forever lock, conditional
+unlock, event-zero provider/display/service routing, and event-five command-one
+handling. Diagnostic-only EasyLogger calls are intentionally omitted; host
+oracles prove they do not affect functional output.
+
+The current Apple overlay/component/package identities are
+`166292/3689688/4468182` bytes with SHA-256
+`a3de54928866158f91473cfbc56c823940b43b57d2ca7a65078277e20535958d`,
+`eb0e6c9ba54af38259f8450d503d7faba7283d52ea3d3de1113fd8fc3c8b53fb`, and
+`0c1548c6f4b829acc62fcd332fb2c441f2774c4de1be253ea721a4de8eae57d4`.
+No hardware was accessed or flashed. Physical mutex scheduling,
+role/display gating, record delivery, and visible health behavior are
+explicitly blocked by unavailable authorized G2 evidence.
+
+## Current Cordio DM LE Secure Connections production routing
+
+All seven live Packetcraft `dm_sec_lesc.c` functions are now production-routed
+from Apache-2.0 source behavior. Seven guarded redirects replace 222 stock
+bytes with 278 compiled Thumb bytes plus six alignment bytes. Ten reviewed
+relocations close over the retained WSF, ECC, SMP, and Calc128 providers and
+the source-owned memory-copy leaf. Four public OOB/debug-key APIs absent from
+the G2 image remain proven dead-stripped configuration exclusions.
+
+The current Apple overlay/component/package identities are
+`166576/3689972/4468466` bytes with SHA-256
+`1f5c6afeb137b90b18d8feb1378047bc38393525eff6926c26bbe33847fd1cff`,
+`9ca58f6db1a98b7604aa86b4f29ad827ba4c7770d93ad71441c0b421830e7ff2`, and
+`eb2d45acb2419ec4ec92ddfdb7e54838404a626eb150d8ee7547b35b05662985`.
+No hardware was accessed or flashed. Pairing/controller timing, pool pressure,
+disconnect races, and peer interoperability remain explicitly blocked by
+unavailable authorized G2/EM9305 physical evidence.
+
+## Current Cordio DM security-core production routing
+
+All eight live Packetcraft `dm_sec.c` functions are now production-routed from
+the authenticated r20.05c Apache-2.0 behavior. Eight guarded redirects replace
+462 stock bytes with 506 compiled Thumb bytes plus six alignment bytes. The
+route analyzer pins all 19 external relocations, stock spans, interface ingress,
+and the four public APIs proven absent from the linked G2 configuration.
+
+The current Apple overlay/component/package identities are
+`167088/3690484/4468978` bytes with SHA-256
+`63a2dab6221e9c6fcbae491442752d3d4bf3f1e9fe4a1bb8793e7a58493781ca`,
+`1f4e39b37007da8a8e845bd653a29a3c251d9da22cfe574949f8f187f5a66e19`, and
+`edd49b59043320fa1abfcbdc202eb1b03b575c887c500829205fa6af13ab1c5b`.
+No hardware was accessed or flashed. Physical controller timing, pool pressure,
+disconnect races, callback ordering, and peer interoperability are explicitly
+blocked by unavailable authorized G2/EM9305 evidence; the remaining security
+role modules and overall firmware ledger are not complete.
+
+## Current Cordio DM security-role production routing
+
+All six live Packetcraft `dm_sec_slave.c` and `dm_sec_master.c` functions are
+now production-routed from the authenticated r20.05c Apache-2.0 behavior. Six
+guarded redirects replace 292 stock bytes with 332 compiled Thumb bytes plus
+six alignment bytes. Host tests cover allocation failures, pair/security/LTK
+message ABI, key masking and transfer, CCB state, and zero-Rand/EDIV encryption
+start; the two route analyzers pin all 14 relocations and both stock closures.
+
+The current Apple overlay/component/package identities are
+`167426/3690822/4469316` bytes with SHA-256
+`303539d4c80e60906ef124b72aa2f31e4c7b9256d6246da48aca6db8a485e9b9`,
+`e6a69ad6ced4c87cd7a41880620c9a8339c62668407317397b56b8eff5051fb4`, and
+`39a4702cbb7e9a9ec706f9a241e096c06e98295323421503a066e1ac8194d975`.
+No hardware was accessed or flashed. Role-specific controller timing, message
+ownership, disconnect races, callback behavior, and peer interoperability are
+explicitly blocked by unavailable authorized G2/EM9305 evidence. The wider SMP,
+app-policy, cryptographic-backend, and overall firmware ledgers remain open.
+
+### Cordio SMP pairing database is production-routed
+
+All eleven linked Packetcraft `smp_db.c` functions are now production-routed
+from authenticated r20.05c Apache-2.0 definitions with G2's ten-record product
+override and `SMP_DB_SERVICE_IND=0x20` ABI. Eleven guarded redirects replace
+2,952 stock bytes with 698 compiled Thumb bytes plus 14 alignment bytes. Host
+tests cover initialization, allocation/reuse, database-full fallback, failure
+timeouts, exponential backoff/clamping, and timer service.
+
+The current Apple overlay/component/package identities are
+`168138/3691534/4470028` bytes with SHA-256
+`c58ed4ebce365545baabae9b5f0856a772e6f9e8af0f9df76afd58040544a0e0`,
+`bafeba343615698b5c895b10d0198d36d10542722f541ab2d5606eeed03d1487`, and
+`d563e56871dbd2dc4671ea364deae24b520984d71fa171610e1e00b50ac86b4b`.
+No hardware was accessed or flashed. Real scheduler timing, controller races,
+and peer interoperability remain explicitly blocked by unavailable authorized
+G2/EM9305 evidence; the remaining SMP state/action units, app policy,
+cryptographic backend, and overall firmware ledger remain open.
+
+### Cordio SMP main is production-routed
+
+All twenty linked Packetcraft `smp_main.c` functions are now production-routed
+through guarded full-span redirects, with one additional private packet-length
+helper. The 21 Apple-only leaves contribute 2,146 compiled Thumb bytes plus 24
+alignment bytes and replace all 3,076 authenticated stock bytes. The source
+preserves r20 `keyReady`/LESC behavior, G2's three-connection SRAM ABI, and the
+Ambiq stale-AES-result queue cleanup.
+
+Host tests cover initialization/lookups, connection lifecycle and retry
+timers, L2CAP validation and queueing, legacy crypto inputs, LTK/STK/LESC
+accessors, message dispatch, and stale-AES cleanup. Canonical Apple
+overlay/component/package identities are `170308/3693704/4472198` bytes with
+SHA-256 `72d355eb...c3bc` / `bb4d2ee1...08f3` / `aa849dcd...9202`.
+No hardware was accessed or flashed. Physical controller timing, disconnect
+races, legacy/LESC peer interoperability, and stale-queue behavior remain
+explicitly blocked by unavailable authorized G2/EM9305 evidence; the remaining
+SMP action/state units and overall firmware ledger remain open.
+
+### Cordio SMP Secure Connections main is production-routed
+
+All eighteen linked Packetcraft `smp_sc_main.c` functions are compiled from
+the admitted r20.05c Apache-2.0 behavior and routed through guarded full-span
+redirects. The production adapter preserves the recovered G2 SRAM and
+configuration ABI, covers scratch/CMAC/F4/PDU/passkey/retry/diagnostic paths,
+and fixes the upstream short-final-line byte-log stall. The canonical Apple
+overlay/component/package are 173,038 / 3,696,434 / 4,474,928 bytes with
+SHA-256 `10fb4ab6...6eb9` / `aae37afd...cb28` / `a79d1096...42a`.
+Physical public-key, DH-check, passkey, OOB, reconnect, and repeated-attempt
+validation remains explicitly blocked by unavailable authorized G2/EM9305
+evidence; remaining SMP action/state units and the firmware remain incomplete.
+
+## Cordio `smp_act` is production-routed
+
+All 25 linked Packetcraft r20.05c common SMP actions now run from compilable,
+source-owned C. Twenty-four full-span redirects replace stock bodies and the
+two-byte no-op is compiled byte-identically at its original address. The
+overlay adds 1,758 executable bytes plus 20 alignment bytes and replaces all
+2,924 stock function bytes. Host behavior, exact Thumb surface, relocation,
+route, component, manifest, package, and flash-plan gates pass.
+
+Canonical Apple overlay/component/package identities are
+`174816/3698212/4476706` bytes and `b732d58c...f6bf` /
+`125cfeb1...55f3` / `26bf3d84...5058`. No hardware operation was performed.
+Physical pairing, key distribution, timeout/cancellation, repeated-attempt,
+and peer-interoperability evidence remains blocked by unavailable authorized
+G2/EM9305 hardware. Remaining Secure Connections action/state units and the
+overall firmware remain incomplete.

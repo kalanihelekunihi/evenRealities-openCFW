@@ -221,16 +221,16 @@ PRODUCTION_RELOCATION = {
 }
 PRODUCTION_AGGREGATES = {
     "apple-clang": {
-        "overlay_size": 165_412,
-        "overlay_sha256": "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
-        "component_size": 3_688_808,
-        "component_sha256": "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+        "overlay_size": 167_426,
+        "overlay_sha256": "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
+        "component_size": 3_690_822,
+        "component_sha256": "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
     },
     "linux-clang": {
-        "overlay_size": 145_180,
-        "overlay_sha256": "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
-        "component_size": 3_668_576,
-        "component_sha256": "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+        "overlay_size": 145_208,
+        "overlay_sha256": "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+        "component_size": 3_668_604,
+        "component_sha256": "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
     },
 }
 

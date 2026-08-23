@@ -172,16 +172,16 @@ PROFILE_PINS = {
             "a6477eb5783b631d7d977cd501475438"
         ),
         "overlay": (
-            165_412,
-            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
+            167_426,
+            "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
         ),
         "component": (
-            3_688_808,
-            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+            3_690_822,
+            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
         ),
         "package": (
-            4_467_302,
-            "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f",
+            4_469_316,
+            "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058",
         ),
         "patch": (
             "23f3b9b8" + "00bf" * 19,
@@ -189,9 +189,9 @@ PROFILE_PINS = {
             "eac8b3a5c9fb2c1ce3f92e6eaca2255",
         ),
         "plan": (
-            1_287_172,
-            "4d99c79858788bd41db79d4846d68186f1d0dac386e0e2f45a27f4f4c8eff161",
-            (1807, 2, 5),
+            1_337_744,
+            "642d39802f988c3da5e108c97fdcff82102cfcdfffd75710bd6e0a3017f7758e",
+            (1890, 2, 5),
         ),
     },
     "linux-clang": {
@@ -204,16 +204,16 @@ PROFILE_PINS = {
             "e5d492ac7352b5e359ba68ad482cb3044"
         ),
         "overlay": (
-            145_180,
-            "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
+            145_208,
+            "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
         ),
         "component": (
-            3_668_576,
-            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+            3_668_604,
+            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
         ),
         "package": (
-            4_447_070,
-            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
+            4_447_098,
+            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
         ),
         "patch": (
             "23f347bc" + "00bf" * 19,
@@ -221,21 +221,21 @@ PROFILE_PINS = {
             "f2fabb91c8411a274eebd29e99f203f3",
         ),
         "plan": (
-            640_188,
-            "4480ca9a4a4f237a477ccccdc9cb039f071fb2f6547298595e98a91098302a20",
-            (896, 2, 5),
+            836_433,
+            "a63772c778639dfcaf296985e64b3e643012f41c83a2900d9d06b68132b2e40f",
+            (1176, 2, 5),
         ),
     },
 }
 
 MANIFEST_STATUS = {
     "container_only": (1, 32),
-    "generated_alignment": (185, 372),
-    "generated_source_entry_replacement": (845, 119_096),
+    "generated_alignment": (190, 382),
+    "generated_source_entry_replacement": (858, 119_962),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (265, 3_403_910),
-    "source_compiled": (441, 165_258),
+    "official_blob": (268, 3_403_044),
+    "source_compiled": (455, 166_412),
 }
 
 HOST_PROVIDER = r"""
@@ -1045,7 +1045,7 @@ class NanopbCloseStringSubstreamProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (947, 886, 378),
+            (975, 914, 406),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -1193,7 +1193,7 @@ class NanopbCloseStringSubstreamProductionTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1745)
+        self.assertEqual(len(regions), 1818)
         self.assertEqual(main["source_appended_boundary"], len(self.package))
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(

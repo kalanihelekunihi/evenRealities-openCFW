@@ -790,13 +790,13 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 165412,
+                "overlay_size": 174816,
                 "overlay_sha256": (
-                    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
                 ),
-                "component_size": 3688808,
+                "component_size": 3698212,
                 "component_sha256": (
-                    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
                 ),
             },
         )
@@ -918,12 +918,12 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 "patch_site_count": len(overlay["patched_sites"]),
             },
             {
-                "size": 165412,
+                "size": 174816,
                 "sha256": (
-                    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
                 ),
-                "function_count": 943,
-                "patch_site_count": 882,
+                "function_count": 971,
+                "patch_site_count": 910,
             },
         )
         self.assertTrue(set(STOCK).isdisjoint(overlay["functions"]))
@@ -938,16 +938,16 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                     Path(self.production_output)
                     / "ota_s200_firmware_ota.bin"
                 ).relative_to(ROOT).as_posix(),
-                "size": 3688808,
+                "size": 3698212,
                 "sha256": (
-                    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
                 ),
-                "opaque_base_bytes": 3401688,
-                "source_owned_bytes": 165594,
+                "opaque_base_bytes": 3399558,
+                "source_owned_bytes": 167608,
                 "source_owned_in_place_bytes": 182,
                 "generated_wrapper_bytes": 32,
-                "generated_patch_site_bytes": 121494,
-                "replaced_stock_function_bytes": 121672,
+                "generated_patch_site_bytes": 123624,
+                "replaced_stock_function_bytes": 123802,
             },
         )
         self.assertEqual(
@@ -1023,7 +1023,7 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 if official != generated
             )
         self.assertEqual(actual_mutations, expected_mutations)
-        self.assertEqual(len(actual_mutations), 114473)
+        self.assertEqual(len(actual_mutations), 114981)
 
         vector_start = PACKAGE_PREAMBLE_SIZE
         self.assertEqual(

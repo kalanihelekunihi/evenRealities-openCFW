@@ -286,22 +286,22 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 165_412,
+        "overlay_size": 167_426,
         "overlay_sha256": (
-            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+            "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
         ),
-        "component_size": 3_688_808,
+        "component_size": 3_690_822,
         "component_sha256": (
-            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
         ),
-        "package_size": 4_467_302,
+        "package_size": 4_469_316,
         "package_sha256": (
-            "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
+            "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
         ),
-        "package_accounting": (165_424, 121_045, 4_180_333),
+        "package_accounting": (167_910, 123_089, 4_178_317),
         # Builder reports exclude isolated/non-emitted registry categories.
-        "function_count": 943,
-        "patch_count": 882,
+        "function_count": 971,
+        "patch_count": 910,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -323,6 +323,8 @@ PROFILES = {
         "nanopb_varint32_tail_growth": 252,
         "nanopb_skip_string_tail_growth": 36,
         "task_get_info_tail_growth": 122,
+        "scheduler_start_tail_growth": 500,
+        "watchdog_tail_growth": 28,
         # Net tail trimmed by the rollback build: every post-milestone
         # admission retained in the legacy overlay that is not itemized
         # above (the nanopb decode wave and the iar float-exponent trio are
@@ -389,11 +391,11 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 165_594,
+            "source_owned_bytes": 165_622,
             "source_owned_in_place_bytes": 182,
-            "generated_patch_site_bytes": 121_494,
-            "replaced_stock_function_bytes": 121_672,
-            "opaque_base_bytes": 3_401_688,
+            "generated_patch_site_bytes": 121_634,
+            "replaced_stock_function_bytes": 121_812,
+            "opaque_base_bytes": 3_401_548,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -447,19 +449,19 @@ PROFILES = {
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
-        "overlay_size": 145_180,
+        "overlay_size": 145_208,
         "overlay_sha256": (
-            "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57"
+            "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826"
         ),
-        "component_size": 3_668_576,
+        "component_size": 3_668_604,
         "component_sha256": (
-            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
+            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"
         ),
-        "package_size": 4_447_070,
+        "package_size": 4_447_098,
         "package_sha256": (
-            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"
+            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"
         ),
-        "package_accounting": (145_147, 100_188, 4_200_821),
+        "package_accounting": (146_089, 121_212, 4_179_797),
         "function_count": 664,
         "patch_count": 613,
         "tail_growth": 778,
@@ -482,6 +484,8 @@ PROFILES = {
         "nanopb_svarint_tail_growth": 52,
         "nanopb_varint32_tail_growth": 252,
         "nanopb_skip_string_tail_growth": 36,
+        "scheduler_start_tail_growth": 500,
+        "watchdog_tail_growth": 28,
         "nanopb_varint32_patch_span": 256,
         "nanopb_skip_string_patch_span": 32,
         # Net tail retained by the active Linux rollback registry after the
@@ -662,6 +666,10 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
                 "-DOPEN_CFW_FREERTOS_QUEUE_INCLUDE_LEGACY_SEMAPHORE_TAKE=1"
             )
             removed = {
+                "open_cfw_freertos_task_switch_context",
+                "open_cfw_freertos_port_start_scheduler",
+                "open_cfw_freertos_start_assert_failure",
+                "open_cfw_freertos_task_start_scheduler",
                 "open_cfw_freertos_queue_get_disinherit_priority_after_timeout",
                 "open_cfw_freertos_queue_semaphore_take_upstream_candidate",
                 "open_cfw_cmsis_memory_pool_alloc",
@@ -690,6 +698,8 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
                 "open_cfw_nanopb_default_extension_decoder",
                 "open_cfw_nanopb_field_set_to_default",
                 "open_cfw_nanopb_message_set_to_defaults",
+                "open_cfw_watchdog_enable",
+                "open_cfw_watchdog_init",
             }
             config["functions"] = [
                 function for function in config["functions"]
@@ -773,7 +783,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         )
         self.assertEqual(
             (len(self.config["functions"]), len(self.config["patch_sites"])),
-            (947, 886),
+            (957, 896),
         )
 
         for leaf in (
@@ -1031,6 +1041,8 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             - self.profile.get("nanopb_varint32_tail_growth", 0)
             - self.profile.get("nanopb_skip_string_tail_growth", 0)
             - self.profile.get("task_get_info_tail_growth", 0)
+            - self.profile.get("scheduler_start_tail_growth", 0)
+            - self.profile.get("watchdog_tail_growth", 0)
             - self.profile["littlefs_tag_id_tail_growth"]
             - self.profile["littlefs_tag_size_tail_growth"]
             - self.profile["nanopb_fixed64_tail_growth"]
@@ -1141,7 +1153,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
     def test_manifest_is_gap_free_and_owns_each_stock_and_source_span(self) -> None:
         main = self.manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1745)
+        self.assertEqual(len(regions), 1818)
         self.assertEqual(main["source_appended_boundary"], OFFICIAL_SIZE)
         ordered = sorted(regions, key=lambda region: region["file_offset"])
         self.assertEqual(ordered[0]["file_offset"], 0)
@@ -1399,6 +1411,9 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             legacy_semaphore_patch["target_address"],
         )
         removed_patch_names = {
+            "replace_freertos_task_switch_context",
+            "replace_freertos_port_start_scheduler",
+            "replace_freertos_task_start_scheduler",
             "replace_cmsis_memory_pool_alloc",
             "replace_cmsis_mutex_acquire",
             "replace_cmsis_semaphore_acquire",
@@ -1610,6 +1625,8 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             "replace_bq27427_hardware_init",
             "replace_goodix_derived_app_error_fault_handler",
             "replace_freertos_task_get_info",
+            "replace_watchdog_enable",
+            "replace_watchdog_init",
         }
         self.assertEqual(
             set(current_patches),

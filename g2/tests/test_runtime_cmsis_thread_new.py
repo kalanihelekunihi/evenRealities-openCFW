@@ -116,15 +116,15 @@ class RuntimeCmsisThreadNewTests(unittest.TestCase):
         self.assertEqual(
             (config["expected"]["overlay_size"], config["expected"]["overlay_sha256"],
              config["expected"]["component_size"], config["expected"]["component_sha256"]),
-            (165412, "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
-             3688808, "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"),
+            (174816, "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
+             3698212, "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"),
         )
         linux_config = config["toolchain_profiles"]["linux-clang"]["expected"]
         self.assertEqual(
             (linux_config["overlay_size"], linux_config["overlay_sha256"],
              linux_config["component_size"], linux_config["component_sha256"]),
-            (145180, "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
-             3668576, "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"),
+            (145208, "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+             3668604, "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"),
         )
         manifest = json.loads(MANIFEST.read_text())
         regions = {item["name"]: item for item in manifest["component_overrides"]["apollo_main"]["regions"]}
@@ -143,15 +143,15 @@ class RuntimeCmsisThreadNewTests(unittest.TestCase):
         )
         main = manifest["component_overrides"]["apollo_main"]["provider"]
         self.assertEqual((main["size"], main["sha256"]),
-                         (3688808, "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"))
+                         (3698212, "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"))
         self.assertEqual((main["profiles"]["linux-clang"]["size"],
                           main["profiles"]["linux-clang"]["sha256"]),
-                         (3668576, "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"))
+                         (3668604, "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"))
         self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-                         (4467302, "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"))
+                         (4476706, "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"))
         self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"],
                           manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]),
-                         (4447070, "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"))
+                         (4447098, "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"))
 
 
 if __name__ == "__main__": unittest.main()

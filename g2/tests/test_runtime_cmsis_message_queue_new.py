@@ -137,13 +137,13 @@ RELOCATED_SHA256 = (
     "afbba4f9f08b2df17a4350d7a7e83d99"
     "b8439283ee40c1a1604bd879dff75f04"
 )
-PRODUCTION_OVERLAY_SIZE = 165_412
+PRODUCTION_OVERLAY_SIZE = 167_426
 PRODUCTION_OVERLAY_SHA256 = (
-    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
 )
-PRODUCTION_COMPONENT_SIZE = 3_688_808
+PRODUCTION_COMPONENT_SIZE = 3_690_822
 PRODUCTION_COMPONENT_SHA256 = (
-    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
 )
 PRODUCTION_OFFSET = 113_808
 PRODUCTION_ADDRESS = 0x007A_FFB4
@@ -823,16 +823,16 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 121_494,
+                "generated_patch_site_bytes": 121_634,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_401_688,
-                "replaced_stock_function_bytes": 121_672,
-                "source_owned_bytes": 165_594,
+                "opaque_base_bytes": 3_401_548,
+                "replaced_stock_function_bytes": 121_812,
+                "source_owned_bytes": 165_622,
                 "source_owned_in_place_bytes": 182,
             },
         )
-        self.assertEqual(len(report["overlay"]["functions"]), 943)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 882)
+        self.assertEqual(len(report["overlay"]["functions"]), 945)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 884)
 
         historical_overlay = self.production_overlay[:113_970]
         self.assertEqual(
@@ -849,6 +849,13 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
         official = OFFICIAL.read_bytes()
         historical_component = bytearray(self.production_component)
         historical_component[71_484:71_638] = official[71_484:71_638]
+        # Undo the later watchdog source milestone for this older checkpoint.
+        historical_component[1_012_480:1_012_544] = official[
+            1_012_480:1_012_544
+        ]
+        historical_component[1_012_544:1_012_620] = official[
+            1_012_544:1_012_620
+        ]
         for offset, size in (
             (38_198, 180),
             (119_964, 218),
@@ -879,6 +886,10 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             (120_182, 16),
             (120_198, 128),
             (120_326, 10),
+            # Scheduler-start closure admitted after this historical root.
+            (41_474, 46),
+            (118_028, 144),
+            (119_252, 206),
             (120_896, 22),
             (120_982, 38),
             (121_578, 22),

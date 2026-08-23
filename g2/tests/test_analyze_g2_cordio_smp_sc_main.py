@@ -49,6 +49,13 @@ class SmpScMainTest(unittest.TestCase):
         self.assertEqual(module["strict_interior_pointers"], 0)
         self.assertTrue(report["lineage"]["independent_release_discriminator"])
         self.assertEqual(report["architecture"]["cleanup_event"], 0x1F)
+        production = report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["live_functions"], 18)
+        self.assertEqual(production["compiled_leaf_bytes"], 2278)
+        self.assertEqual(production["source_owned_bytes_added"], 2730)
+        self.assertEqual(production["stock_bytes_replaced"], 2626)
+        self.assertIn("blocked", production["hardware_validation"])
 
 
 if __name__ == "__main__":

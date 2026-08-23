@@ -20,6 +20,22 @@ IMAGE_BYTES = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 SOURCE = ROOT / "third_party/cordio/ble-host/sources/stack/smp/smp_db.c"
 SOURCE_SHA256 = "d73d33be7c3d64476b8edb763bb0f32f4a49b54e07a65d44cbfbc4b2deb76645"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_smp_db.c"
+PRODUCTION_SOURCE_SIZE = 11_087
+PRODUCTION_SOURCE_SHA256 = "e103f1e933f1d7bff5939c2e013162de68bace7298320d879bddd5f5859c5cb5"
+PRODUCTION_ROUTES = {
+    "open_cfw_cordio_smp_db_start_service_timer": (167428, 24, "08be799b93d245443105e7f6ff3bc8ec63b407a151bb5dad494e9bd91dccf907", "smpDbStartServiceTimer"),
+    "open_cfw_cordio_smp_db_record_in_use": (167452, 22, "c7fae2a177d131316029dd50b843fdbb4f943af4a2bfc5017ce3beeef17131d4", "smpDbRecordInUse"),
+    "open_cfw_cordio_smp_db_add_device": (167476, 164, "1283c3496a28beffc9edf6fbb0fc0b7d944add3bbdd6c993ec0e81f82ae26ba6", "smpDbAddDevice"),
+    "open_cfw_cordio_smp_db_get_record": (167640, 154, "5807d82fbd2186deb39dfff0c9e88890d08c68c2d0bc1e2ee95a6ce002a9f7b8", "smpDbGetRecord"),
+    "open_cfw_cordio_smp_db_init": (167796, 50, "e677955d7d28beab21c27affe4664ca54afd929641d3a254fe830cd1c9ccf6b4", "SmpDbInit"),
+    "open_cfw_cordio_smp_db_get_pairing_disabled_time": (167848, 10, "1e1d3e59424b66960e5a6cd0ca209bd6d786f8122e243d5816ee0bc36b06da88", "SmpDbGetPairingDisabledTime"),
+    "open_cfw_cordio_smp_db_set_failure_count": (167860, 32, "be5dc5191a5863551d1832c0c08fc1c4fdfa5ae9c2bd4256bc7c94d3f2d58686", "SmpDbSetFailureCount"),
+    "open_cfw_cordio_smp_db_get_failure_count": (167892, 10, "2eee09488f14ec7e9da9e8a6eb30a6fca3a64dad74e64f911e4ef1883ac5303e", "SmpDbGetFailureCount"),
+    "open_cfw_cordio_smp_db_max_attempt_reached": (167904, 68, "e9c8c77d2fb7b0985f2e97bbb8ff971c39ec73a9909ff8abfd6151d78d6baa1c", "SmpDbMaxAttemptReached"),
+    "open_cfw_cordio_smp_db_pairing_failed": (167972, 22, "f64d381e31652844412d56423c349122e4d1236825313c99766b044399178397", "SmpDbPairingFailed"),
+    "open_cfw_cordio_smp_db_service": (167996, 142, "f2f2ad97e900de41137e9223d3d04c687ccdfaaf22c9c577be38ea677f71a9ca", "SmpDbService"),
+}
 READINESS_MANIFEST = ROOT / "research/readiness/smp-db/SHA256SUMS"
 READINESS_SHA256 = "cdb7e4f260e901cc1036a5d6be521e2b9c55b08ecf0510df55ca77c355a5d48e"
 PINNED_INPUTS = {
@@ -116,6 +132,64 @@ def _verify_no_stored_function_pointers(blob: bytes) -> None:
         value = struct.unpack_from("<I", blob, offset)[0]
         if value in targets:
             raise AuditError(f"unexpected stored SMP DB pointer at 0x{address:08x}")
+
+
+def _production_report() -> dict[str, Any]:
+    source = PRODUCTION_SOURCE.read_bytes()
+    if len(source) != PRODUCTION_SOURCE_SIZE or _sha256(source) != PRODUCTION_SOURCE_SHA256:
+        raise AuditError("Cordio SMP DB production source identity changed")
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    leaves = {
+        row["function"]: row for row in overlay.get("relocated_leaves", [])
+        if row.get("function") in PRODUCTION_ROUTES
+    }
+    patches = {
+        row["target_function"]: row for row in overlay.get("patch_sites", [])
+        if row.get("target_function") in PRODUCTION_ROUTES
+    }
+    if set(leaves) != set(PRODUCTION_ROUTES) or set(patches) != set(PRODUCTION_ROUTES):
+        raise AuditError("Cordio SMP DB production routing is incomplete")
+    stock = {name: (start, end - start, digest) for name, start, end, digest, _ in FUNCTIONS}
+    source_path = PRODUCTION_SOURCE.relative_to(ROOT).as_posix()
+    for function, (offset, size, digest, stock_name) in PRODUCTION_ROUTES.items():
+        leaf = leaves[function]
+        patch = patches[function]
+        source_record = leaf.get("source", {})
+        if (
+            leaf.get("profiles") != ["apple-clang"]
+            or source_record.get("path") != source_path
+            or source_record.get("size") != PRODUCTION_SOURCE_SIZE
+            or source_record.get("sha256") != PRODUCTION_SOURCE_SHA256
+            or source_record.get("license") != "Apache-2.0"
+            or source_record.get("upstream_commit")
+            != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6"
+            or leaf.get("expected", {}).get("offset") != offset
+            or leaf.get("expected", {}).get("size") != size
+            or leaf.get("expected", {}).get("sha256") != digest
+            or leaf.get("strict_relocation_contract") is not True
+        ):
+            raise AuditError(f"Cordio SMP DB production leaf changed: {function}")
+        stock_start, stock_size, stock_digest = stock[stock_name]
+        if (
+            patch.get("profiles") != ["apple-clang"]
+            or patch.get("runtime_address") != stock_start
+            or patch.get("expected_size") != stock_size
+            or patch.get("expected_sha256") != stock_digest
+            or patch.get("branch") != "b_w"
+        ):
+            raise AuditError(f"Cordio SMP DB stock patch changed: {function}")
+    return {
+        "status": "production-routed authenticated Packetcraft definitions with G2 ten-record/r20 ABI",
+        "candidate": source_path,
+        "production_routed": True,
+        "live_functions": len(PRODUCTION_ROUTES),
+        "compiled_leaf_bytes": sum(item[1] for item in PRODUCTION_ROUTES.values()),
+        "source_owned_bytes_added": 712,
+        "stock_bytes_replaced": sum(item[1] for item in stock.values()),
+        "hardware_validation": "blocked by unavailable authorized G2/EM9305 repeated-pairing evidence",
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict[str, Any]:
@@ -243,10 +317,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "external_provider_seams": 11,
             "linked_unresolved_symbols": 0,
         },
-        "production": {
-            "status": "stock-retained; exact public definitions authenticated but product/logging build seam not yet promoted",
-            "source_owned_bytes_added": 0,
-        },
+        "production": _production_report(),
     }
 
 

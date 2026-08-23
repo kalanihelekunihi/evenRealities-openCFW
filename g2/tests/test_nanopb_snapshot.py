@@ -1636,7 +1636,7 @@ class NanopbSnapshotTests(unittest.TestCase):
             )
         )
         regions = manifest["component_overrides"]["apollo_main"]["regions"]
-        self.assertEqual(len(regions), 1745)
+        self.assertEqual(len(regions), 1818)
         by_name = {item["name"]: item for item in regions}
         entry = by_name["nanopb_decode_svarint_source_replacement"]
         self.assertEqual(

@@ -38,11 +38,16 @@ class AnalyzeG2WatchdogTests(unittest.TestCase):
         self.assertEqual(behavior["required_selector_value"], 1)
         self.assertEqual(behavior["watchdog_enable_provider"], "0x00511882")
 
-    def test_remains_analysis_only(self) -> None:
+    def test_clean_room_candidate_is_production_routed(self) -> None:
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/watchdog.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 28)
+        self.assertEqual(production["generated_replacement_bytes"], 140)
+        self.assertEqual(production["retained_literal_pool_bytes"], 32)
         self.assertFalse(production["source_inventory_available"])
 
 

@@ -79,10 +79,10 @@ OFFICIAL_APPLICATION_SHA256 = (
     "e13cc18928528d84d999b6bcc0ba9701"
 )
 GENERATED_COMPONENT_SHA256 = (
-    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
 )
 GENERATED_APPLICATION_SHA256 = (
-    "49c24d500ed9c5eea70facdbd74a73ce94fe25cb672ca7178bcdaab0d7c5fda9"
+    "d748332b76d8dbfd6d4a7dcc64180fd71b51fe2ceeda9a35e533b591a7ca1620"
 )
 
 SET_BYTES = bytes.fromhex(
@@ -153,12 +153,12 @@ OFFICIAL_TOPOLOGY = {
 }
 GENERATED_TOPOLOGY = {
     "set": {
-        "count": 84,
+        "count": 82,
         "address_sha256": (
-            "370f630260566478a4954c4b8c1de14f7f62b9fc41007c61996903ddba7de372"
+            "e2987ebcdbf2aeab80fd2310439c3fd03d9b463cbd40ecbf050b4f4000330ea6"
         ),
         "encoding_sha256": (
-            "0b0ee2d498661a6d9d0fedab6d37ecb5f1b402e42d61b7c373d2ed970bcd2527"
+            "82b5be2e7b58a773a26d5e10a2a04a2ec6f18346faff5ff23af589db8cc698b5"
         ),
     },
     "clear": {
@@ -722,13 +722,13 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
         self.assertEqual(
             self.config["expected"],
             {
-                "overlay_size": 165412,
+                "overlay_size": 174816,
                 "overlay_sha256": (
-                    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
                 ),
-                "component_size": 3688808,
+                "component_size": 3698212,
                 "component_sha256": (
-                    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
                 ),
             },
         )
@@ -855,8 +855,8 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
             self.report["component"]["sha256"],
             GENERATED_COMPONENT_SHA256,
         )
-        self.assertEqual(self.report["component"]["size"], 3_688_808)
-        self.assertEqual(self.report["overlay"]["size"], 165_412)
+        self.assertEqual(self.report["component"]["size"], 3_690_822)
+        self.assertEqual(self.report["overlay"]["size"], 167_426)
         self.assertEqual(
             self.report["overlay"]["sha256"],
             self.config["expected"]["overlay_sha256"],

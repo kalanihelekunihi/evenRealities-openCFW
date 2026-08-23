@@ -617,6 +617,67 @@ probe_table:
                     "reviewed_leaf",
                 )
 
+    def test_two_byte_in_place_leaf_can_use_reviewed_halfword_placement(self) -> None:
+        clang = self._arm_clang()
+        with tempfile.TemporaryDirectory() as directory:
+            temporary = Path(directory)
+            source = temporary / "halfword.c"
+            object_path = temporary / "halfword.o"
+            source.write_text(
+                "__attribute__((noinline, aligned(4))) "
+                "void reviewed_halfword_leaf(void) {}\n",
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [
+                    clang,
+                    "--target=arm-none-eabi",
+                    *self._isolated_flags(),
+                    "-c",
+                    str(source),
+                    "-o",
+                    str(object_path),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            with self.assertRaisesRegex(
+                apollo_overlay.BuildError,
+                "violates section alignment 4",
+            ):
+                apollo_overlay.extract_in_place_function_section(
+                    object_path,
+                    "reviewed_halfword_leaf",
+                    runtime_address=0x1002,
+                    relocation_configs=[],
+                )
+
+            leaf, extraction = apollo_overlay.extract_in_place_function_section(
+                object_path,
+                "reviewed_halfword_leaf",
+                runtime_address=0x1002,
+                relocation_configs=[],
+                allow_halfword_placement=True,
+            )
+            self.assertEqual(leaf, bytes.fromhex("7047"))
+            self.assertEqual(extraction["alignment"], 4)
+            self.assertEqual(extraction["runtime_address"], 0x1002)
+
+    def test_halfword_placement_override_is_narrow(self) -> None:
+        with self.assertRaisesRegex(
+            apollo_overlay.BuildError,
+            "allow_halfword_placement must be boolean",
+        ):
+            apollo_overlay.extract_in_place_function_section(
+                Path("unused.o"),
+                "reviewed_halfword_leaf",
+                runtime_address=0x1002,
+                relocation_configs=[],
+                allow_halfword_placement="yes",  # type: ignore[arg-type]
+            )
+
     def test_authenticated_isolated_leaf_can_be_appended_without_other_tu_state(
         self,
     ) -> None:

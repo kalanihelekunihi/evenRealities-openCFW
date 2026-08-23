@@ -42,12 +42,12 @@ MODE2_SHA256 = "d2a627965efb0521d9d82b99c176462388495b7e199696bf1a3eafceb619a450
 PROFILE_PINS = {
     "apple-clang": {
         "overlay": (
-            165412,
-            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
+            174816,
+            "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
         ),
         "component": (
-            3688808,
-            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+            3698212,
+            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -67,7 +67,7 @@ PROFILE_PINS = {
                 "size": 30,
             },
         },
-        "accounting": (165594, 121494, 121672, 3401688),
+        "accounting": (167608, 123624, 123802, 3399558),
     },
     "linux-clang": {
         "overlay": (

@@ -99,6 +99,29 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         if target in entries: stored[address]=value
         elif target in interiors: interior.append((address,value))
     if stored != EXPECTED_STORED or interior: raise AuditError("dm_sec_lesc stored/interior ingress changed")
+    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
+    routes = {
+        "open_cfw_cordio_dm_sec_lesc_message_handler": ("dmSecLescMsgHandler", 4),
+        "open_cfw_cordio_dm_sec_generate_ecc_key_request": ("DmSecGenerateEccKeyReq", 1),
+        "open_cfw_cordio_dm_sec_set_ecc_key": ("DmSecSetEccKey", 1),
+        "open_cfw_cordio_dm_sec_get_ecc_key": ("DmSecGetEccKey", 0),
+        "open_cfw_cordio_dm_sec_compare_response": ("DmSecCompareRsp", 4),
+        "open_cfw_cordio_dm_sec_get_compare_value": ("DmSecGetCompareValue", 0),
+        "open_cfw_cordio_dm_sec_lesc_init": ("DmSecLescInit", 0),
+    }
+    leaves = {row["function"]: row for row in overlay.get("relocated_leaves", []) if row.get("function") in routes}
+    patches = {row["target_function"]: row for row in overlay.get("patch_sites", []) if row.get("target_function") in routes}
+    if set(leaves) != set(routes) or set(patches) != set(routes): raise AuditError("dm_sec_lesc production registration is incomplete")
+    source_path = "components/apollo_main/core_overlay/cordio_dm_sec_lesc.c"
+    source_sha256 = "df7f4a7c643703ce6363f18810a01b50de86853a254abab2e3d50b8a4cf2ffe8"
+    for function, (stock_name, relocation_count) in routes.items():
+        leaf, patch = leaves[function], patches[function]
+        start, end, stock_sha256 = FUNCTIONS[stock_name]
+        if leaf.get("profiles") != ["apple-clang"]: raise AuditError(f"{function} production profile changed")
+        if leaf.get("source", {}).get("path") != source_path or leaf.get("source", {}).get("size") != 5696 or leaf.get("source", {}).get("sha256") != source_sha256: raise AuditError(f"{function} production source identity changed")
+        if leaf.get("source", {}).get("license") != "Apache-2.0": raise AuditError(f"{function} production license changed")
+        if len(leaf.get("relocations", [])) != relocation_count: raise AuditError(f"{function} relocation closure changed")
+        if patch.get("runtime_address") != start or patch.get("expected_size") != end-start or patch.get("expected_sha256") != stock_sha256 or patch.get("branch") != "b_w": raise AuditError(f"{function} production patch changed")
     return {
         "schema_version":1,"image":{"path":str(image),"sha256":IMAGE_SHA256},
         "module":{"start":PHYSICAL[0],"end_exclusive":PHYSICAL[1],"physical_bytes":PHYSICAL[1]-PHYSICAL[0],"linked_function_count":len(FUNCTIONS),"linked_function_bytes":sum(e-s for s,e,_ in FUNCTIONS.values()),"source_inventory_functions":11,"source_only_functions":SOURCE_ONLY,"direct_bl_ingress_sites":sum(len(v) for v in callers.values()),"registered_function_pointers":len(stored),"strict_interior_pointers":len(interior)},
@@ -106,7 +129,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         "abi":{"dm_cb":0x20073B78,"oob_random_pointer":0x200744F8,"local_ecc_key":0x200726D0,"local_ecc_key_bytes":96},
         "lineage":{"selected_source_interval":"Packetcraft r20.05 through r20.05c / AmbiqSuite R4.4.1","selected_blob":"a8790951d69484687728d74669888931a9aa2971","selected_sha256":"a8bd51525ec11fa7f5ea8c2aee5c76ed8885aa191cb76fcfcb54ddf72e886e8d","historical_generating_commit_resolved":False,"license":"Apache-2.0"},
         "readiness":{"archive":str(READINESS_MANIFEST),"archive_sha256":READINESS_SHA256,"compiler_profiles":2,"source_functions_built":11,"provider_seams":18,"valid_non_vacuous_closure_profiles":2,"linked_unresolved_symbols":0},
-        "production":{"source_owned_bytes_added":0,"stock_bytes_replaced":0},
+        "production":{"candidate":source_path,"source_sha256":source_sha256,"production_routed":True,"live_functions":len(routes),"compiled_leaf_bytes":278,"source_owned_bytes_added":284,"stock_bytes_replaced":222,"dead_stripped_public_apis":SOURCE_ONLY,"hardware_validation":"blocked by unavailable authorized G2/EM9305 pairing evidence"},
     }
 
 def main() -> int:

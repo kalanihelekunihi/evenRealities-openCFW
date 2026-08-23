@@ -739,26 +739,26 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 165412,
+                "overlay_size": 174816,
                 "overlay_sha256": (
-                    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
                 ),
-                "component_size": 3688808,
+                "component_size": 3698212,
                 "component_sha256": (
-                    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
                 ),
             },
         )
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"],
             {
-                "overlay_size": 145180,
+                "overlay_size": 145208,
                 "overlay_sha256": (
-                    "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57"
+                    "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826"
                 ),
-                "component_size": 3668576,
+                "component_size": 3668604,
                 "component_sha256": (
-                    "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
+                    "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"
                 ),
             },
         )
@@ -768,15 +768,15 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
                 manifest["package"]["expected_sha256"],
             ),
             (
-                4467302,
-                "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f",
+                4476706,
+                "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058",
             ),
         )
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4447070,
-                "expected_sha256": "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
+                "expected_size": 4447098,
+                "expected_sha256": "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
             },
         )
 
@@ -1061,8 +1061,8 @@ class SourceProfileReproductionTests(unittest.TestCase):
             self.assertEqual(
                 (plan_path.stat().st_size, open_cfw.sha256_file(plan_path)),
                 (
-                    640188,
-                    "4480ca9a4a4f237a477ccccdc9cb039f071fb2f6547298595e98a91098302a20",
+                    836433,
+                    "a63772c778639dfcaf296985e64b3e643012f41c83a2900d9d06b68132b2e40f",
                 ),
             )
             self.assertEqual(
@@ -1071,7 +1071,7 @@ class SourceProfileReproductionTests(unittest.TestCase):
                     len(plan["unresolved_flash_regions"]),
                     len(plan["container_only_regions"]),
                 ),
-                (896, 2, 5),
+                (1176, 2, 5),
             )
 
             source_owned_bytes = sum(

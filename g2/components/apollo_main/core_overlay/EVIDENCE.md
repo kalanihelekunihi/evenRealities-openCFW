@@ -19959,8 +19959,12 @@ strict-interior ingress exists.
 
 The analyzer pins initialization, selector-zero/value-one gating of the lower
 watchdog-enable provider, retained diagnostics, and the sole exterior caller.
-Historical source inventory is unavailable, so no candidate is routed and
-production ownership remains zero.
+The clean-room `watchdog.c` decision layer is now production-routed through two
+guarded redirects: 28 strict-relocation source bytes replace both 140-byte stock
+bodies, while the 32-byte diagnostic pool remains retained compatibility data.
+Host behavior, Thumb compilation, analyzer, component, and package gates pass.
+Physical watchdog/reset-cause validation is blocked by unavailable authorized
+hardware evidence; no device or flash operation was performed.
 
 ### eAT buzzer-command analysis boundary
 
@@ -21044,6 +21048,179 @@ package sizes are `164912/3688308/4466802`, with SHA-256 values
 `4dea653f6001fc9cf287253481ab412d9046a590bc70707fadce6afb01307b09`, and
 `03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
 No hardware operation was performed.
+
+### Cordio SMP common actions are production-routed
+
+`cordio_smp_act.c` contributes 24 strict-relocation leaves and one exact
+in-place no-op from the authenticated Packetcraft r20.05c behavior. The 1,758
+compiled bytes plus 20 alignment bytes replace all 2,924 stock function bytes.
+Six native host contracts and the fail-closed analyzer cover timers, cleanup,
+pairing failures, timeout/cancellation, pairing/authentication, legacy confirm,
+key distribution, attempt lockout, completion, dispatcher behavior, every
+stock route, and the exact two-byte halfword placement.
+
+Canonical Apple overlay/component/package sizes are
+174,816 / 3,698,212 / 4,476,706 bytes, with SHA-256
+`b732d58c...f6bf` / `125cfeb1...55f3` / `26bf3d84...5058`.
+Hardware pairing and peer behavior remains blocked by unavailable authorized
+G2/EM9305 physical evidence; the wider firmware is not declared complete.
+
+## Cordio SMP-main production routing
+
+`cordio_smp_main.c` contributes 21 independently compiled Apple-only leaves:
+the twenty linked Packetcraft r20.05c functions plus a private packet-length
+helper. Twenty SHA-pinned `B.W` routes replace all 3,076 stock bytes. The
+emitted leaves total 2,146 text bytes plus 24 alignment bytes and preserve the
+three-connection `smpCb` ABI at `0x20070AEC`, security queue `0x20072CD8`, r20
+`keyReady`/LESC behavior, and Ambiq stale-AES-result queue cleanup.
+
+The canonical overlay is 170,308 bytes / SHA-256
+`72d355eb964eb863237645760623c1394934f56fd5acd0ca35a7e0f3f66ac3bc`;
+the component is 3,693,704 bytes / SHA-256
+`bb4d2ee158aedf3c095ee63f184641ef83d081e1bfed087744e3180657f008f3`;
+the package is 4,472,198 bytes / SHA-256
+`aa849dcd53f3d277b7694220b61f2aa7e314c18bb8ec31445d45f451fd5d9202`.
+No hardware was accessed. Pairing, reconnect, controller timing, disconnect
+races, peer interoperability, and stale-queue behavior remain blocked by
+unavailable authorized physical evidence.
+
+## Cordio SMP Secure Connections main production routing
+
+`cordio_smp_sc_main.c` contributes eighteen independently compiled Apple-only
+leaves. Eighteen SHA-pinned `B.W` routes replace all 2,626 authenticated stock
+body bytes. The emitted closure totals 2,278 text bytes plus 452 bytes of
+event-string rodata and alignment, preserving the G2 control block at
+`0x20070AEC`, three SC records at `0x200728F4`, and configuration pointer cell
+at `0x200004B8`.
+
+The canonical overlay is 173,038 bytes / SHA-256
+`10fb4ab64f302c7b26c8e2d307c1a695b56f8bbd3c77aa744f45e67ff3cf6eb9`;
+the component is 3,696,434 bytes / SHA-256
+`aae37afd5f4f6e406e8358ab943cb81fd0d16dd564f309d4d195709b2b0bcb28`;
+the package is 4,474,928 bytes / SHA-256
+`a79d1096c53049f8f38c4d565718476a4375e66b54c01dcdf510f43d8f33642a`.
+No hardware was accessed. Public-key, DH-check, passkey, OOB, reconnect, and
+repeated-attempt controller/peer behavior remains blocked by unavailable
+authorized physical evidence.
+
+## Cordio SMP pairing-database production route
+
+`cordio_smp_db.c` contributes eleven Apple-only strict-relocation leaves at
+overlay offsets `167428..168138`. The 698 compiled text bytes plus 14 alignment
+bytes implement every linked Packetcraft `smp_db.c` function with the recovered
+ten-record control block at `0x200708EC`, runtime policy pointer at
+`0x200004B8`, SMP handler byte at `0x20070BD8`, and r20 service event `0x20`.
+Eleven guarded redirects replace 2,952 authenticated stock bytes.
+
+Five host contracts cover timer-aware initialization, normalized peer lookup,
+nine specific records plus common fallback, failure-count expiry, exponential
+backoff/clamping, pairing-failure refresh, saturating service decrements, and
+timer restart. Diagnostic-only trace calls are omitted without changing state
+or externally visible results. Real WSF/controller concurrency and peer
+interoperability remain explicitly blocked by unavailable authorized physical
+evidence.
+
+## System-monitor peer-reboot callback production routing
+
+`system_monitor.c` contributes the 650-byte strict-relocation leaf
+`open_cfw_system_monitor_common_data_handler` at overlay offset 165,440 /
+runtime `0x007BC964`. A guarded full-span `B.W` redirect replaces the 510-byte
+stock callback `[0x00584EE4,0x005850E2)` while the stored descriptor pointer at
+`0x006A4674` remains unchanged. Forty-three reviewed Thumb relocations close
+over the EasyLogger flags/output/trace seams, three display-state predicates,
+the display-command provider, source-owned FreeRTOS delay and lens-side leaves,
+the scheduler-idle sender, four retained reset providers, and the source-owned
+lens-status publisher.
+
+The clean-room policy accepts only common event five with sentinel
+`55 04 12 34 56 78`, requests display quiescence for foreground/background
+apps, waits at most eleven 100-tick intervals, sends scheduler idle from lens
+side one, then resets dashboard, application, onboarding-color, and terminal
+state before publishing lens status. NULL/short input rejection is a bounded
+safety correction to the stock unchecked six-byte reads. Host tests cover all
+branches and the wait bound; the analyzer pins the stock span, descriptor
+ingress, source hash, relocation count, and route.
+
+Current Apple overlay/component/package identities are
+`166090/3689486/4467980` bytes with SHA-256 values
+`1120724be7e02326ec5273397bd9fcacbbd973883b1787c67fcaa9835fc943e8`,
+`18e578a6824ab184f35309489af07972a41a74da465bc5ecc07c182e2b42d05f`, and
+`a643e0fdf5d90b8f34b9fe5b3833d239e27bd28dd2d18f7bc6163182c99e11e9`.
+No package was signed or flashed. Paired-device reboot/display/scheduler
+validation is blocked by unavailable authorized physical evidence.
+
+## Health mutex and common-event production routing
+
+`health.c` contributes four Apple-only strict-relocation leaves at runtime
+addresses `0x007BCBF0`, `0x007BCC1C`, `0x007BCC40`, and `0x007BCC54`.
+Guarded `B.W` replacements cover the complete stock bodies at
+`0x004FFBD8`, `0x004FFC32`, `0x004FFC90`, and `0x004FFCA2`, replacing 504
+authenticated bytes. The leaves compile to 42, 36, 20, and 100 bytes and bind
+only to source-owned CMSIS mutex/lens helpers and bounded retained health,
+display, and service-record providers.
+
+The source preserves functional mutex and event policy while omitting 25
+diagnostic-only EasyLogger calls. Host behavior and target Thumb-surface tests,
+the fail-closed stock analyzer, component assembly, package assembly, and
+verification all gate the route. Canonical Apple overlay/component/package
+identities are `166292/3689688/4468182` bytes and
+`a3de54928866158f91473cfbc56c823940b43b57d2ca7a65078277e20535958d` /
+`eb0e6c9ba54af38259f8450d503d7faba7283d52ea3d3de1113fd8fc3c8b53fb` /
+`0c1548c6f4b829acc62fcd332fb2c441f2774c4de1be253ea721a4de8eae57d4`.
+No hardware was used. On-device concurrency, role/display gating, transport,
+and visible behavior remain blocked by unavailable physical evidence.
+
+## Cordio DM LE Secure Connections production routing
+
+`cordio_dm_sec_lesc.c` contributes seven Apple-only strict-relocation leaves
+at the overlay tail. Guarded redirects replace all 222 bytes in the seven live
+stock bodies at `[0x00534894,0x00534972)` while retaining the 26-byte compiler
+tail and the three-word function interface at `0x0078A8A4`. The 278 compiled
+bytes and six alignment bytes implement handler dispatch, ECC generation,
+96-byte key set/get, numeric-comparison response/formatting, and component-8
+registration. Four other public upstream APIs are absent from the G2 image.
+
+Host behavior and target symbol gates plus the fail-closed stock/route analyzer
+cover the admission. Canonical Apple overlay/component/package identities are
+`166576/3689972/4468466` bytes and
+`1f5c6afe...1cff` / `9ca58f6d...7ff2` / `eb2d45ac...2985`.
+No hardware was used. Live controller and peer behavior is blocked by
+unavailable authorized physical evidence.
+
+## Cordio DM security-core production routing
+
+`cordio_dm_sec.c` contributes eight Apple-only strict-relocation leaves at the
+overlay tail. Guarded redirects replace all 462 bytes in the eight live stock
+bodies at `[0x004D2364,0x004D254C)`, retaining only the authenticated 26-byte
+literal/alignment pool. The source preserves the r20 LESC LTK rejection, STK
+fallback, busy/idle policy, encryption callback order, authentication response,
+component-5 registration, key accessors, and SMP database reset. Four other
+public upstream APIs are absent from the linked G2 image.
+
+Host behavior and exact target symbol gates plus the fail-closed stock/route
+analyzer cover admission. Canonical Apple overlay/component/package identities
+are `167088/3690484/4468978` bytes and `63a2dab6...81ca` /
+`1f4e39b3...6e19` / `edd49b59...1c5b`. No hardware was used. Controller timing,
+allocation pressure, disconnect races, callback ordering, and peer behavior are
+blocked by unavailable authorized physical evidence.
+
+## Cordio DM security-role production routing
+
+`cordio_dm_sec_roles.c` contributes six Apple-only strict-relocation leaves at
+the overlay tail. Guarded redirects replace all 148 slave-role stock bytes at
+`[0x0052BACC,0x0052BB60)` and all 144 master-role stock bytes at
+`[0x0055BBC4,0x0055BC54)`, retaining both authenticated literal tails. The 332
+compiled bytes and six alignment bytes preserve pair/security/LTK formatting,
+key-distribution masks, allocation policy, CCB temporary-security state,
+non-LTK selection, and zero-Rand/EDIV encryption start.
+
+Host behavior, exact target symbol gates, two fail-closed stock/route analyzers,
+component assembly, package assembly, and flash-plan generation cover admission.
+Canonical Apple overlay/component/package identities are
+`167426/3690822/4469316` bytes and `303539d4...e9b9` /
+`e6a69ad6...1fb4` / `39a4702c...d975`. No hardware was used. Controller timing,
+message ownership, disconnect races, and peer behavior remain blocked by
+unavailable authorized physical evidence.
 
 ## Current FreeRTOS scheduler-start core production routing
 

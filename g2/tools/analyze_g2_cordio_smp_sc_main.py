@@ -11,6 +11,7 @@ import json
 import struct
 import sys
 from pathlib import Path
+from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,29 @@ BASE = 0x437FE0
 IMAGE_BYTES = 3_523_396
 IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 MAP = ROOT / "tools/manifests/packetcraft-cordio-smp-sc-main-function-map.tsv"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_smp_sc_main.c"
+PRODUCTION_SOURCE_SIZE = 22_793
+PRODUCTION_SOURCE_SHA256 = "14b8afa598b7a0053b23312db689ba36a259dad542f568af607e1d89eb5404ef"
+PRODUCTION_ROUTES = {
+    "open_cfw_cordio_smp_sc_allocate_scratch_buffers": (170308, 102, "aaf6b077ed4165a87af000037a8bcae7acf9352261e555f9937d967a008507ed", "SmpScAllocScratchBuffers"),
+    "open_cfw_cordio_smp_sc_free_scratch_buffers": (170412, 70, "7a2cafbe2147e39e2de34eaa9395de1d82c6803a7cf11b60f5cc7bff9e1da595", "SmpScFreeScratchBuffers"),
+    "open_cfw_cordio_smp_sc_cmac": (170484, 70, "22a29858ae43097db413bfcb280ad1c29730df88f270666de88b4fa90dcda4b8", "SmpScCmac"),
+    "open_cfw_cordio_smp_sc_allocate": (170556, 36, "1e34225f26f4661e585ce4054e8d926001aef3a1b85f8785d2ae63d8b0967dbc", "SmpScAlloc"),
+    "open_cfw_cordio_smp_sc_calculate_f4": (170592, 78, "3c261fa110a443a754fce237efd34974c013bd00dd1baf56c238da6880b4abdf", "SmpScCalcF4"),
+    "open_cfw_cordio_smp_sc_init": (170672, 66, "620c980fa58a8ce59507b917d44553b9d2d97a168ea545d4a63fccc72712d08d", "SmpScInit"),
+    "open_cfw_cordio_smp_sc_cat": (170740, 14, "b8cd5dca5b4931a48bd5ee0b893f7024f73e22f67f8f853912982cc71f95b660", "SmpScCat"),
+    "open_cfw_cordio_smp_sc_cat128": (170756, 14, "6f1fd5a7c3604cfb517a2725cd007786a8b47defe9bb2ec7b10ef0379b4d2746", "SmpScCat128"),
+    "open_cfw_cordio_smp_sc_send_public_key": (170772, 100, "1f44106676296c704f80297e080db343e8815bc7f3ad77dc7e17745a0828dedf", "smpScSendPubKey"),
+    "open_cfw_cordio_smp_sc_send_dh_key_check": (170872, 84, "a5ecc136cf4df266cc9bdda99ee885b8cb4e90feab86846099b8c63aa772bf5a", "smpScSendDHKeyCheck"),
+    "open_cfw_cordio_smp_sc_send_random": (170956, 84, "a3bcca172206c022f55a4c446c24efd6c08ddd229a8a7375225e492467216df8", "smpScSendRand"),
+    "open_cfw_cordio_smp_sc_send_pairing_confirm": (171040, 84, "300dfba45291521e53cd848f0fc2c955af62ad7c769694606bf531ae43422d1c", "smpScSendPairCnf"),
+    "open_cfw_cordio_smp_sc_get_passkey_bit": (171124, 38, "bc0b96560f295d02a41339dd0c91232667f3fe34882a3927ca79c1ed76eeddcf", "smpGetPkBit"),
+    "open_cfw_cordio_smp_sc_cancel_with_reattempt": (171164, 68, "69cd174802d879b7bcd7ce5abb2ee3ce862a1a3f2db4602c4e0fbd5a3692b5aa", "SmpScGetCancelMsgWithReattempt"),
+    "open_cfw_cordio_smp_sc_fail_with_reattempt": (171232, 32, "5b039f27ec3559a552dc21e6b95972689fad0f66e9e3d2dc5941084fe01bd81e", "smpScFailWithReattempt"),
+    "open_cfw_cordio_smp_sc_event_string": (171264, 590, "7fe2c0c69767f4de2f378b393ade5da68b45520cb4a90f95a26123a6791e4b03", "smpEventStr"),
+    "open_cfw_cordio_smp_sc_state_string": (172288, 22, "01972a1c8fc5c2118ae1d03f1abce6d41e061ae32ba60432851a08a8585c1c5b", "smpStateStr"),
+    "open_cfw_cordio_smp_sc_log_byte_array": (172312, 726, "f5764a4baf4b2d1cfb8221d58e302f1d3a18e13a4ca549270347e6bb0ac5d58a", "smpLogByteArray"),
+}
 PINS = {
     MAP: "7203d6fceb3eda607229e862414d7843fe37ab563725829255bf98d7f1ac7bbc",
     ROOT / "tools/manifests/packetcraft-cordio-smp-sc-main-provenance.tsv": (
@@ -132,6 +156,71 @@ def load_rows():
     return linked, source_only
 
 
+def production_report(linked: list[tuple[str, int, int, str]]) -> dict[str, Any]:
+    source = PRODUCTION_SOURCE.read_bytes()
+    if len(source) != PRODUCTION_SOURCE_SIZE or sha(source) != PRODUCTION_SOURCE_SHA256:
+        raise RuntimeError("Cordio SMP SC-main production source identity changed")
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    leaves = {
+        row["function"]: row for row in overlay.get("relocated_leaves", [])
+        if row.get("function") in PRODUCTION_ROUTES
+    }
+    patches = {
+        row["target_function"]: row for row in overlay.get("patch_sites", [])
+        if row.get("target_function") in PRODUCTION_ROUTES
+    }
+    if set(leaves) != set(PRODUCTION_ROUTES) or set(patches) != set(PRODUCTION_ROUTES):
+        raise RuntimeError("Cordio SMP SC-main production routing is incomplete")
+    stock = {name: (start, end - start, digest) for name, start, end, digest in linked}
+    source_path = PRODUCTION_SOURCE.relative_to(ROOT).as_posix()
+    for function, (offset, size, digest, stock_name) in PRODUCTION_ROUTES.items():
+        leaf = leaves[function]
+        source_record = leaf.get("source", {})
+        if (
+            leaf.get("profiles") != ["apple-clang"]
+            or source_record.get("path") != source_path
+            or source_record.get("size") != PRODUCTION_SOURCE_SIZE
+            or source_record.get("sha256") != PRODUCTION_SOURCE_SHA256
+            or source_record.get("license") != "Apache-2.0"
+            or source_record.get("upstream_commit")
+            != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6"
+            or leaf.get("expected", {}).get("offset") != offset
+            or leaf.get("expected", {}).get("size") != size
+            or leaf.get("expected", {}).get("sha256") != digest
+            or leaf.get("strict_relocation_contract")
+            != (function != "open_cfw_cordio_smp_sc_event_string")
+        ):
+            raise RuntimeError(f"Cordio SMP SC-main production leaf changed: {function}")
+        patch = patches[function]
+        stock_start, stock_size, stock_digest = stock[stock_name]
+        if (
+            patch.get("profiles") != ["apple-clang"]
+            or patch.get("runtime_address") != stock_start
+            or patch.get("expected_size") != stock_size
+            or patch.get("expected_sha256") != stock_digest
+            or patch.get("branch") != "b_w"
+        ):
+            raise RuntimeError(f"Cordio SMP SC-main stock patch changed: {function}")
+    return {
+        "status": (
+            "production-routed authenticated Packetcraft r20.05c definitions "
+            "with the G2 SRAM ABI and bounded short-line trace fix"
+        ),
+        "candidate": source_path,
+        "production_routed": True,
+        "live_functions": len(PRODUCTION_ROUTES),
+        "compiled_leaf_bytes": sum(route[1] for route in PRODUCTION_ROUTES.values()),
+        "source_owned_bytes_added": 2730,
+        "stock_bytes_replaced": sum(end - start for _, start, end, _ in linked),
+        "hardware_validation": (
+            "blocked by unavailable authorized G2/EM9305 public-key, DH-check, "
+            "passkey, OOB, reconnect, and repeated-attempt physical evidence"
+        ),
+    }
+
+
 def analyze(image_path: Path = IMAGE) -> dict:
     blob = image_path.read_bytes()
     if len(blob) != IMAGE_BYTES or sha(blob) != IMAGE_SHA:
@@ -232,8 +321,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "discriminator": "stock smpEventStr includes SMP_MSG_INT_CLEANUP",
         },
         "production": {
-            "stock_bytes_replaced": 0,
-            "source_owned_bytes_added": 0,
+            **production_report(linked),
         },
     }
 
@@ -247,7 +335,7 @@ def main() -> int:
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
-        print("Cordio smp_sc_main closed: 18 linked, 4 source-only")
+        print("Cordio smp_sc_main source-routed: 18 linked, 4 source-only")
     return 0
 
 

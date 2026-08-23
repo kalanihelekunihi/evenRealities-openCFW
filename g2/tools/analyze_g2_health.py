@@ -209,9 +209,41 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         raise AuditError("stored callback topology changed")
 
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = "health" in json.dumps(overlay).lower()
-    if routed:
-        raise AuditError("health object unexpectedly became production-routed")
+    expected_routes = {
+        "open_cfw_health_data_mutex_init": (0x004F_FBD8, 90, rows[0]["stock_sha256"], 1),
+        "open_cfw_health_lock_storage": (0x004F_FC32, 94, rows[1]["stock_sha256"], 1),
+        "open_cfw_health_unlock_storage": (0x004F_FC90, 18, rows[2]["stock_sha256"], 1),
+        "open_cfw_health_common_data_handler": (0x004F_FCA2, 302, rows[3]["stock_sha256"], 6),
+    }
+    leaves = {
+        item["function"]: item for item in overlay.get("relocated_leaves", [])
+        if item.get("function") in expected_routes
+    }
+    patches = {
+        item["target_function"]: item for item in overlay.get("patch_sites", [])
+        if item.get("target_function") in expected_routes
+    }
+    if set(leaves) != set(expected_routes) or set(patches) != set(expected_routes):
+        raise AuditError("health production registration is incomplete")
+    source_path = "components/apollo_main/core_overlay/health.c"
+    source_sha256 = "537f9332b6523cab520849db6406d1ba732b6d4ca551bdc908a005a7f7791196"
+    for function, (start, size, stock_sha256, relocation_count) in expected_routes.items():
+        leaf, patch = leaves[function], patches[function]
+        if leaf.get("profiles") != ["apple-clang"]:
+            raise AuditError(f"{function} production profile changed")
+        if leaf.get("source", {}).get("path") != source_path:
+            raise AuditError(f"{function} production source changed")
+        if leaf.get("source", {}).get("size") != 5694 or leaf.get("source", {}).get("sha256") != source_sha256:
+            raise AuditError(f"{function} production source identity changed")
+        if len(leaf.get("relocations", [])) != relocation_count:
+            raise AuditError(f"{function} relocation closure changed")
+        if (
+            patch.get("runtime_address") != start
+            or patch.get("expected_size") != size
+            or patch.get("expected_sha256") != stock_sha256
+            or patch.get("branch") != "b_w"
+        ):
+            raise AuditError(f"{function} production patch changed")
 
     return {
         "schema_version": 1,
@@ -255,12 +287,20 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "assessment": "all upstream relationships terminate at admitted provider seams; no opaque third-party definition is embedded",
         },
         "boundary": {"physical_start": "0x004ffbd8", "physical_end_exclusive": "0x004ffe14", "path_pointer_cells": ["0x004ffddc"], "preceded_by": "quicklist unlock function and pool", "followed_by": "page-state-sync initializer"},
-        "production": {"candidate": None, "production_routed": routed, "ownership_bytes": 0},
+        "production": {
+            "candidate": source_path,
+            "source_sha256": source_sha256,
+            "production_routed": True,
+            "functions": sorted(expected_routes),
+            "ownership_bytes": BODY_BYTES,
+            "compiled_leaf_bytes": sum(item["expected"]["size"] for item in leaves.values()),
+            "diagnostic_logging_policy": "omitted; EasyLogger calls are diagnostic-only and do not alter health state or service output",
+        },
         "limitations": [
             "the exact private G2 source and producing commit remain unavailable",
             "the first-party health protobuf provider and schema are outside this object",
             "the object adds no dependency-version discriminator",
-            "production admission requires target concurrency and health-message validation",
+            "target mutex scheduling and physical health-message/display behavior require authorized G2 hardware evidence",
         ],
     }
 

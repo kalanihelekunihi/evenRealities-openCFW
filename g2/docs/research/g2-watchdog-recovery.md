@@ -1,7 +1,7 @@
 # G2 watchdog-driver recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-source candidate and not production-routed. Run addresses use
+Status: clean-room source implementation production-routed on 2026-08-23;
+offline behavior, relocation, routing, and package gates green. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -34,11 +34,33 @@ first provider is independently observed returning product/configuration
 selector pointers elsewhere in stock; the second is kept address-named
 because its implementation boundary is not yet closed.
 
-No authenticated historical source or license is available. There is no
-clean-room candidate, the driver is absent from `overlay.json`, and it claims
-zero package ownership bytes. `tools/analyze_g2_watchdog.py` pins both bodies,
-the pool, retained names/path, direct-call closure, selector behavior, and
-complete absence of pointer/interior ingress.
+No authenticated historical source or license is available. The independently
+authored `components/apollo_main/core_overlay/watchdog.c` therefore implements
+the complete decision layer: initialization delegates once to enable; enable
+queries selector zero and invokes the retained nPMx provider only for value one.
+The two guarded `B.W` redirects replace all 140 stock body bytes with 28 bytes
+of strict-relocation source text. The 32-byte diagnostics pool remains retained
+compatibility data; the source implementation deliberately omits the stock
+conditional logging expansion while preserving the watchdog state transition.
+
+Apple production pins are overlay 165,440 bytes / SHA-256 `922dbcd1…`, Apollo
+component 3,688,836 bytes / SHA-256 `1bd34b54…`, and package 4,467,330 bytes /
+SHA-256 `04269480…`. The mechanically reconciled reviewed Linux profile is overlay
+145,208 bytes / `fac5b48b…`, component 3,668,604 bytes / `378c868e…`, and
+package 4,447,098 bytes / `deb4cdb9…`. The Homebrew clang 22.1.8 executable is
+not installed on this host, so those Linux pins are derived from the prior
+reviewed artifact plus the compiler-identical bounded leaf bytes and still
+require reproduction when that reviewed compiler is available.
+
+`tools/analyze_g2_watchdog.py` pins both stock bodies, the retained pool,
+names/path, direct-call closure, selector behavior, complete absence of
+pointer/interior ingress, source identity, and production registration.
+`tests/test_watchdog_candidate.py` exercises all selector outcomes and the init
+delegation, and verifies the freestanding Thumb text-symbol surface.
+
+Physical enable/reset timing and reset-cause evidence remain explicitly blocked:
+no authorized G2 target, probe, or capture setup is present. No hardware or
+flash operation was performed.
 
 The next related compact frontier is retained
 `platform\service\eAT\at_buzzer.c`. It has six path-reference sites spanning

@@ -5,6 +5,17 @@ Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
 
+The eighteen linked functions are now production-routed through
+[`cordio_smp_sc_main.c`](../../components/apollo_main/core_overlay/cordio_smp_sc_main.c).
+The 22,793-byte Apache-2.0 adapter contributes 2,278 compiled function bytes
+plus a 433-byte event-string closure and alignment (2,730 appended bytes), and
+replaces all 2,626 linked stock-function bytes. Focused host contracts exercise
+scratch allocation/free, CMAC and allocation failure cancellation, F4 input
+construction, all four SC PDUs, passkey selection, repeated-attempt handling,
+state/event diagnostics, and multi-line byte logging. The byte logger corrects
+the upstream short-final-line count error so a trace of fewer than sixteen
+remaining bytes cannot stall the pairing path.
+
 The complete stock `smp_sc_main.c` object is `[0x0056CDC0,0x0056D8C4)`,
 2,820 bytes, SHA-256
 `dfc0e2f6db94885e44328a855dcba1ee1fa1ca0fddca8aa1191f6820ddda2315`.
@@ -63,6 +74,8 @@ mistaken for ingress.
 python3 tools/analyze_g2_cordio_smp_sc_main.py --json
 ```
 
-Production ownership remains zero. The authenticated stock object is still
-cut forward; source recreation and compiler/linker equivalence remain future
-promotion gates.
+Software promotion is complete for the linked surface. Physical validation is
+still blocked by unavailable authorized G2/EM9305 evidence for public-key,
+DH-key-check, passkey, OOB, reconnect, and repeated-attempt paths. This unit is
+therefore source-implemented but not hardware-validated and does not establish
+overall firmware functional completeness.

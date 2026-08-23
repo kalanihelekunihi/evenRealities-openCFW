@@ -1,8 +1,8 @@
 # G2 health mutex and common-event object recovery
 
-Status: read-only, fail-closed closure of stock 2.2.6.10
-`app\gui\health\health.c`. No overlay, package, signer, flash, BLE,
-filesystem, or hardware state is changed.
+Status: stock closure plus production-routed clean-room replacement of 2.2.6.10
+`app\gui\health\health.c`. No signer, flash, BLE, filesystem, or hardware
+state is changed.
 
 ## Result
 
@@ -63,9 +63,39 @@ strings, one retained path pointer, and the six-byte response-template pointer.
 The next code at `0x004FFE14` is a separately pooled page-state-sync
 initializer, proving the end boundary.
 
-The production overlay contains no health object. A future clean-room
-replacement must recover the service-1 record semantics and health protobuf
-schema, then validate mutex concurrency and role/display gating on target.
+## Production replacement
+
+`components/apollo_main/core_overlay/health.c` now implements all four
+functions. Four guarded full-span redirects replace the 90-, 94-, 18-, and
+302-byte stock bodies. The Apple Clang overlay contributes four independently
+compiled strict-relocation leaves totaling 198 bytes: mutex initialization,
+lock, unlock, and common-event dispatch. Their only bindings are the already
+source-owned CMSIS mutex functions, the retained health-data provider, the
+source-owned lens-side helper, two retained display predicates, and the
+retained service-record poster.
+
+The clean-room handler preserves event 0's provider dispatch and role/display
+gate before posting the exact six-byte service-one record, and event 5's
+nonempty command-one acceptance. The 25 EasyLogger calls are deliberately
+omitted because they are diagnostic-only: they do not mutate the health state,
+mutex, display gate, or emitted record. Host oracles cover initialization
+failure/success, lock and unlock behavior, invalid inputs, both event families,
+and every service-post gate. A freestanding Thumb gate proves exactly four
+global text leaves.
+
+The canonical Apple overlay/component/package is
+`166292/3689688/4468182` bytes with SHA-256
+`a3de54928866158f91473cfbc56c823940b43b57d2ca7a65078277e20535958d`,
+`eb0e6c9ba54af38259f8450d503d7faba7283d52ea3d3de1113fd8fc3c8b53fb`, and
+`0c1548c6f4b829acc62fcd332fb2c441f2774c4de1be253ea721a4de8eae57d4`.
+Apollo accounting is 166,474 source-owned bytes, 122,648 generated patch-site
+bytes, 122,826 replaced stock-function bytes, 32 wrapper bytes, and 3,400,534
+opaque base bytes.
+
+No authorized G2 or capture setup was available. Physical mutex scheduling,
+role selection, display-state gating, transport delivery, and visible health
+behavior are therefore explicitly blocked by unavailable physical evidence;
+this software closure is not an on-device functional-completeness claim.
 
 ## Reproduction
 
@@ -74,5 +104,6 @@ make health-closure
 ```
 
 This authenticates every function, pool, path and diagnostic string, call
-edge, stored callback, adjacent boundary, provider commit, and aggregate
-first-party frontier. It performs no hardware operation.
+edge, stored callback, adjacent boundary, provider commit, production source
+identity, redirect, and aggregate first-party frontier. It performs no
+hardware operation.

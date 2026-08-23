@@ -36,7 +36,13 @@ class CordioDmSecAuditTest(unittest.TestCase):
         self.assertEqual(report["abi"]["dm_sec_cb"], 0x20074114)
         self.assertEqual(report["abi"]["calc128_zeros"], 0x007856B0)
         self.assertEqual(report["readiness"]["linked_unresolved_symbols"], 0)
-        self.assertEqual(report["production"]["stock_bytes_replaced"], 0)
+        self.assertTrue(report["production"]["production_routed"])
+        self.assertEqual(report["production"]["live_functions"], 8)
+        self.assertEqual(report["production"]["compiled_leaf_bytes"], 506)
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 512)
+        self.assertEqual(report["production"]["stock_bytes_replaced"], 462)
+        self.assertEqual(len(report["production"]["dead_stripped_public_apis"]), 4)
+        self.assertIn("blocked", report["production"]["hardware_validation"])
 
 
 if __name__ == "__main__":

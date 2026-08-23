@@ -204,20 +204,20 @@ PRODUCTION_SHA256 = (
     "5e1105ed86ca0f43effdf1e11e59ee7c"
     "6ce094b3321c127234c492a9cc70b8a4"
 )
-PRODUCTION_OVERLAY_SIZE = 165_412
+PRODUCTION_OVERLAY_SIZE = 167_426
 PRODUCTION_OVERLAY_SHA256 = (
-    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
 )
-PRODUCTION_COMPONENT_SIZE = 3_688_808
+PRODUCTION_COMPONENT_SIZE = 3_690_822
 PRODUCTION_COMPONENT_SHA256 = (
-    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
 )
-PRODUCTION_PACKAGE_SIZE = 4_467_302
+PRODUCTION_PACKAGE_SIZE = 4_469_316
 PRODUCTION_PACKAGE_SHA256 = (
-    "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
+    "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
 )
 PRODUCTION_FLASH_PLAN_SHA256 = (
-    "4d99c79858788bd41db79d4846d68186f1d0dac386e0e2f45a27f4f4c8eff161"
+    "642d39802f988c3da5e108c97fdcff82102cfcdfffd75710bd6e0a3017f7758e"
 )
 
 
@@ -1298,7 +1298,7 @@ class RuntimeCmsisSemaphoreNewTests(unittest.TestCase):
             PRODUCTION_FLASH_PLAN_SHA256,
         )
         parsed_plan = json.loads(flash_plan)
-        self.assertEqual(len(parsed_plan["flash_regions"]), 1807)
+        self.assertEqual(len(parsed_plan["flash_regions"]), 1890)
         self.assertEqual(
             len(parsed_plan["unresolved_flash_regions"]),
             2,

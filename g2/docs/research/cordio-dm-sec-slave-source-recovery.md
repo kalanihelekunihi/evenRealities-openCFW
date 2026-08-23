@@ -1,6 +1,6 @@
 # Cordio DM slave-security source recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-23
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -46,5 +46,13 @@ python3 tools/analyze_g2_cordio_dm_sec_slave.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production still cuts these bytes forward. The next bounded target is the
-three-function `dm_sec_master.c` unit.
+Production now routes all three functions through
+`components/apollo_main/core_overlay/cordio_dm_sec_roles.c`. Three guarded
+full-span redirects replace 148 stock code bytes with 160 compiled Thumb bytes
+and four alignment bytes. Host tests cover key-distribution masking, allocation
+failure, security-request formatting, present/absent LTK behavior, key copying,
+handler routing, and untouched ABI padding. The analyzer authenticates the
+stock closure, exact source identity, seven relocations, leaf outputs, and
+redirects. No hardware was accessed or flashed; slave-role pairing timing,
+controller message ownership, disconnect races, and peer interoperability are
+blocked by unavailable authorized G2/EM9305 physical evidence.

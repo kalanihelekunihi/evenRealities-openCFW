@@ -1,6 +1,6 @@
 # Cordio SMP pairing-database source recovery
 
-Status date: 2026-08-08  
+Status date: 2026-08-23
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -13,9 +13,30 @@ references, and exact semantics close four adjacent pathless bodies.
 
 The remaining two upstream APIs, `SmpDbRemoveAllDevices` and
 `SmpDbRemoveDevice`, have no stock body, caller, or stored pointer and are
-classified dead-stripped rather than opaque. All linked bytes remain cut
-forward; this tranche identifies source, configuration, and ABI without yet
-promoting a production replacement.
+classified dead-stripped rather than opaque. All eleven linked functions are
+now production-routed through guarded redirects to a freestanding Apache-2.0
+adapter that preserves the ten-record product ABI and r20 service event.
+
+## Production integration
+
+[`cordio_smp_db.c`](../../components/apollo_main/core_overlay/cordio_smp_db.c)
+implements the complete linked surface as eleven independently compiled Thumb
+leaves. The Apple profile adds 698 text bytes plus 14 alignment bytes and
+replaces 2,952 guarded stock bytes. Relocations bind the already source-owned
+zero-fill helper, authenticated WSF timer and DM address providers, and earlier
+SMP database leaves; diagnostic-only trace calls are intentionally omitted
+because they do not affect database state or externally visible behavior.
+
+Five host contracts exercise initialization, record allocation/reuse, common
+record fallback when all nine peer-specific slots are occupied, failure-count
+timeouts, exponential backoff and maximum clamping, saturating timer service,
+and pairing-failure refresh. The route analyzer pins every leaf, redirect,
+source identity, G2 configuration, and hardware-evidence status.
+
+No G2 or EM9305 hardware was accessed. Repeated-attempt timing under real WSF
+scheduling, controller disconnect races, message interleaving, and peer
+interoperability remain explicitly blocked by unavailable authorized physical
+evidence; this is not a claim of on-device validation or overall completeness.
 
 ## Upstream and version pin
 
@@ -145,9 +166,6 @@ python3 tools/analyze_g2_cordio_smp_db.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-The adjacent `atts_ccc.c` tranche is now closed separately. Production
-promotion for this module should first model `SMP_DB_MAX_DEVICES=10`, the
-runtime configuration override, and the stock trace/logger seam, then close
-IAR placement and all provider relocations. The next coherent bounded ATT
-source target was `attc_disc.c`; that tranche is now closed. The next fast
-bounded public-source target is `dm_adv_leg.c`.
+The adjacent `atts_ccc.c`, `attc_disc.c`, and `dm_adv_leg.c` tranches are
+closed separately. Production promotion for this module is complete offline;
+the next unresolved Security unit is `smp_main.c`.

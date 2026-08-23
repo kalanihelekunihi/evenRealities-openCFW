@@ -118,17 +118,17 @@ PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 165_412
+PRODUCTION_OVERLAY_SIZE = 167_426
 PRODUCTION_OVERLAY_SHA256 = (
-    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
+    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
 )
-PRODUCTION_COMPONENT_SIZE = 3_688_808
+PRODUCTION_COMPONENT_SIZE = 3_690_822
 PRODUCTION_COMPONENT_SHA256 = (
-    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
+    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
 )
-PACKAGE_SIZE = 4_467_302
+PACKAGE_SIZE = 4_469_316
 PACKAGE_SHA256 = (
-    "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
+    "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
 )
 
 
@@ -531,10 +531,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 121_494,
-                "opaque_base_bytes": 3_401_688,
-                "replaced_stock_function_bytes": 121_672,
-                "source_owned_bytes": 165_594,
+                "generated_patch_site_bytes": 121_634,
+                "opaque_base_bytes": 3_401_548,
+                "replaced_stock_function_bytes": 121_812,
+                "source_owned_bytes": 165_622,
             },
         )
 
@@ -617,7 +617,20 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         historical_component[38_198:38_378] = official[38_198:38_378]
         historical_component[119_964:120_182] = official[119_964:120_182]
         historical_component[71_484:71_638] = official[71_484:71_638]
+        # The production image now also redirects both watchdog entries.
+        # This historical checkpoint predates that milestone, so restore the
+        # exact stock bodies before truncating the appended source tail.
+        historical_component[1_012_480:1_012_544] = official[
+            1_012_480:1_012_544
+        ]
+        historical_component[1_012_544:1_012_620] = official[
+            1_012_544:1_012_620
+        ]
         for offset, size in (
+            # Scheduler-start core admitted after this historical milestone.
+            (41_474, 46),
+            (118_028, 144),
+            (119_252, 206),
             (21_908, 1_026),
             (68_974, 132),
             (76_448, 24),

@@ -5,12 +5,12 @@
     "output_name": "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
     "profiles": {
       "linux-clang": {
-        "expected_size": 4447070,
-        "expected_sha256": "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"
+        "expected_size": 4447098,
+        "expected_sha256": "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"
       }
     },
-    "expected_size": 4467302,
-    "expected_sha256": "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
+    "expected_size": 4476706,
+    "expected_sha256": "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
   },
   "component_overrides": {
     "apollo_bootloader": {
@@ -706,12 +706,12 @@
       "provider": {
         "kind": "source_build",
         "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-        "size": 3688808,
-        "sha256": "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+        "size": 3698212,
+        "sha256": "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
         "profiles": {
           "linux-clang": {
-            "size": 3668576,
-            "sha256": "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
+            "size": 3668604,
+            "sha256": "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"
           }
         }
       },
@@ -9885,14 +9885,114 @@
           "output": "apollo510b/main-tlsf-literal-tail-0x004d094a.bin"
         },
         {
-          "name": "opaque_between_tlsf_and_nanopb_iterators",
-          "function": "Official Apollo application bytes after the retained TLSF closure through the private nanopb descriptor loader and iterator-advance bodies",
+          "name": "opaque_between_tlsf_and_cordio_dm_sec",
+          "function": "Official Apollo application bytes after the retained TLSF closure through the start of Cordio DM security",
           "file_offset": 625108,
-          "size": 35280,
+          "size": 6576,
           "target": "apollo510b_internal_mram",
           "target_address": 5048756,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x004d09b4.bin"
+        },
+        {
+          "name": "cordio_dm_sec_hci_handler_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the Cordio DM security HCI handler",
+          "file_offset": 631684,
+          "size": 220,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055332,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-dm-sec-hci-handler-0x004d2364.bin"
+        },
+        {
+          "name": "cordio_dm_sec_message_handler_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the Cordio DM security message handler",
+          "file_offset": 631904,
+          "size": 104,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055552,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-dm-sec-message-handler-0x004d2440.bin"
+        },
+        {
+          "name": "cordio_dm_sec_smp_callback_execute_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the Cordio DM SMP callback dispatcher",
+          "file_offset": 632008,
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055656,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-dm-sec-smp-callback-0x004d24a8.bin"
+        },
+        {
+          "name": "cordio_dm_sec_auth_response_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the Cordio DM authentication response entry",
+          "file_offset": 632052,
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055700,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-dm-sec-auth-response-0x004d24d4.bin"
+        },
+        {
+          "name": "cordio_dm_sec_init_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the Cordio DM security initializer",
+          "file_offset": 632108,
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055756,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-dm-sec-init-0x004d250c.bin"
+        },
+        {
+          "name": "cordio_dm_sec_get_local_csrk_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the Cordio local CSRK accessor",
+          "file_offset": 632126,
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055774,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-dm-sec-get-csrk-0x004d251e.bin"
+        },
+        {
+          "name": "cordio_dm_sec_get_local_irk_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the Cordio local IRK accessor",
+          "file_offset": 632132,
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055780,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-dm-sec-get-irk-0x004d2524.bin"
+        },
+        {
+          "name": "cordio_dm_sec_literal_gap",
+          "function": "Retained Cordio DM security alignment and literal pool",
+          "file_offset": 632138,
+          "size": 26,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055786,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-cordio-dm-sec-literal-gap-0x004d252a.bin"
+        },
+        {
+          "name": "cordio_dm_sec_reset_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the Cordio DM security reset entry",
+          "file_offset": 632164,
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055812,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-dm-sec-reset-0x004d2544.bin"
+        },
+        {
+          "name": "opaque_between_cordio_dm_sec_and_nanopb_iterators",
+          "function": "Official Apollo application bytes after Cordio DM security through the private nanopb descriptor loader and iterator-advance bodies",
+          "file_offset": 632172,
+          "size": 28216,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5055820,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x004d254c.bin"
         },
         {
           "name": "nanopb_field_iter_begin_source_replacement",
@@ -10135,14 +10235,64 @@
           "output": "apollo510b/source-entry-evenhub-ui-event-handler-0x004e1490.bin"
         },
         {
-          "name": "opaque_between_evenhub_ui_handler_and_ring_write",
-          "function": "Official Apollo application bytes between the source-replaced EvenHub registry UI handler and generic ring-write primitive",
+          "name": "opaque_between_evenhub_ui_handler_and_health",
+          "function": "Official Apollo application bytes between the source-replaced EvenHub registry UI handler and health mutex object",
           "file_offset": 694646,
-          "size": 163342,
+          "size": 123522,
           "target": "apollo510b_internal_mram",
           "target_address": 5118294,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x004e1956.bin"
+        },
+        {
+          "name": "health_data_mutex_init_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the complete stock health mutex initializer",
+          "file_offset": 818168,
+          "size": 90,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5241816,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-health-data-mutex-init-0x004ffbd8.bin"
+        },
+        {
+          "name": "health_lock_storage_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the complete stock health storage mutex acquire entry",
+          "file_offset": 818258,
+          "size": 94,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5241906,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-health-lock-storage-0x004ffc32.bin"
+        },
+        {
+          "name": "health_unlock_storage_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the complete stock health storage mutex release entry",
+          "file_offset": 818352,
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5242000,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-health-unlock-storage-0x004ffc90.bin"
+        },
+        {
+          "name": "health_common_data_handler_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the complete stock health common-data handler",
+          "file_offset": 818370,
+          "size": 302,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5242018,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-health-common-data-handler-0x004ffca2.bin"
+        },
+        {
+          "name": "opaque_between_health_and_ring_write",
+          "function": "Official Apollo application bytes between the source-replaced health common-data handler and generic ring-write primitive",
+          "file_offset": 818672,
+          "size": 39316,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5242320,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x004ffdd0.bin"
         },
         {
           "name": "nvdb_sensor_caldata_default_initialize_source_replacement",
@@ -10245,14 +10395,84 @@
           "output": "apollo510b/main-compat-nvdb-sensor-caldata-literals-0x00509aea.bin"
         },
         {
-          "name": "apollo_opaque_after_nvdb_sensor_caldata",
-          "function": "Official Apollo/TinyFrame retained bytes",
+          "name": "apollo_opaque_between_nvdb_sensor_caldata_and_dm_sec_slave",
+          "function": "Official Apollo/TinyFrame retained bytes before the source-replaced Cordio slave-security role unit",
           "file_offset": 858984,
-          "size": 156988,
+          "size": 139140,
           "target": "apollo510b_internal_mram",
           "target_address": 5282632,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x00509b48.bin"
+        },
+        {
+          "name": "cordio_dm_sec_slave_pair_response_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio DmSecPairRsp",
+          "file_offset": 998124,
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5421772,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-slave-pair-response-0x0052bacc.bin"
+        },
+        {
+          "name": "cordio_dm_sec_slave_request_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio DmSecSlaveReq",
+          "file_offset": 998176,
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5421824,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-slave-request-0x0052bb00.bin"
+        },
+        {
+          "name": "cordio_dm_sec_slave_ltk_response_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio DmSecLtkRsp",
+          "file_offset": 998208,
+          "size": 64,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5421856,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-slave-ltk-response-0x0052bb20.bin"
+        },
+        {
+          "name": "apollo_opaque_between_dm_sec_slave_and_watchdog_init",
+          "function": "Official Apollo/TinyFrame retained bytes including the authenticated dm_sec_slave literal tail",
+          "file_offset": 998272,
+          "size": 14208,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5421920,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x0052bb60.bin"
+        },
+        {
+          "name": "watchdog_init_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the complete first-party G2 watchdog_init body",
+          "file_offset": 1012480,
+          "size": 64,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5436128,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-watchdog-init-0x0052f2e0.bin"
+        },
+        {
+          "name": "watchdog_enable_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing the complete first-party G2 watchdog_enable body",
+          "file_offset": 1012544,
+          "size": 76,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5436192,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-watchdog-enable-0x0052f320.bin"
+        },
+        {
+          "name": "watchdog_literal_pool_compatibility",
+          "function": "Official retained watchdog diagnostics literal pool and following compatibility bytes",
+          "file_offset": 1012620,
+          "size": 3352,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5436268,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-compat-watchdog-literals-0x0052f36c.bin"
         },
         {
           "name": "ring_write_source_replacement",
@@ -10275,14 +10495,324 @@
           "output": "apollo510b/source-entry-ring-read-0x005300e2.bin"
         },
         {
-          "name": "opaque_between_ring_read_and_ui_display_handler",
-          "function": "Official Apollo application bytes between the source-replaced generic ring-read primitive and the source-replaced BQ25180 charger driver object",
+          "name": "opaque_between_ring_read_and_cordio_dm_sec_lesc",
+          "function": "Official Apollo application bytes between the source-replaced generic ring-read primitive and the source-replaced Cordio DM LE Secure Connections unit",
           "file_offset": 1016156,
-          "size": 42292,
+          "size": 18264,
           "target": "apollo510b_internal_mram",
           "target_address": 5439804,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x0053013c.bin"
+        },
+        {
+          "name": "cordio_dm_sec_lesc_message_handler_source_replacement",
+          "function": "Generated full-span redirect replacing the Packetcraft Cordio DM LE Secure Connections message handler",
+          "file_offset": 1034420,
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5458068,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-lesc-message-handler-0x00534894.bin"
+        },
+        {
+          "name": "cordio_dm_sec_generate_ecc_key_request_source_replacement",
+          "function": "Generated full-span redirect replacing the Packetcraft Cordio ECC-key request entry",
+          "file_offset": 1034508,
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5458156,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-generate-ecc-key-0x005348ec.bin"
+        },
+        {
+          "name": "cordio_dm_sec_set_ecc_key_source_replacement",
+          "function": "Generated full-span redirect replacing the Packetcraft Cordio ECC-key setter",
+          "file_offset": 1034524,
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5458172,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-set-ecc-key-0x005348fc.bin"
+        },
+        {
+          "name": "cordio_dm_sec_get_ecc_key_source_replacement",
+          "function": "Generated full-span redirect replacing the Packetcraft Cordio ECC-key getter",
+          "file_offset": 1034540,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5458188,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-get-ecc-key-0x0053490c.bin"
+        },
+        {
+          "name": "cordio_dm_sec_compare_response_source_replacement",
+          "function": "Generated full-span redirect replacing the Packetcraft Cordio numeric-comparison response entry",
+          "file_offset": 1034544,
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5458192,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-compare-response-0x00534910.bin"
+        },
+        {
+          "name": "cordio_dm_sec_get_compare_value_source_replacement",
+          "function": "Generated full-span redirect replacing the Packetcraft Cordio six-digit comparison formatter",
+          "file_offset": 1034600,
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5458248,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-get-compare-value-0x00534948.bin"
+        },
+        {
+          "name": "cordio_dm_sec_lesc_init_source_replacement",
+          "function": "Generated full-span redirect replacing the Packetcraft Cordio DM LE Secure Connections initializer",
+          "file_offset": 1034634,
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5458282,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-lesc-init-0x0053496a.bin"
+        },
+        {
+          "name": "opaque_before_cordio_smp_main_l2c_data_callback",
+          "function": "Official Apollo application bytes outside the authenticated Cordio SMP-main stock entry spans",
+          "file_offset": 1034642,
+          "size": 10502,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5458290,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x00534972.bin"
+        },
+        {
+          "name": "cordio_smp_main_l2c_data_callback_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpL2cDataCback in the Apollo application",
+          "file_offset": 1045144,
+          "size": 460,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5468792,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-l2c-data-callback-0x00537278.bin"
+        },
+        {
+          "name": "cordio_smp_main_l2c_control_callback_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpL2cCtrlCback in the Apollo application",
+          "file_offset": 1045604,
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5469252,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-l2c-control-callback-0x00537444.bin"
+        },
+        {
+          "name": "cordio_smp_main_resume_attempts_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpResumeAttemptsState in the Apollo application",
+          "file_offset": 1045692,
+          "size": 102,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5469340,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-resume-attempts-0x0053749c.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_connection_callback_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpDmConnCback in the Apollo application",
+          "file_offset": 1045794,
+          "size": 198,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5469442,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-dm-connection-callback-0x00537502.bin"
+        },
+        {
+          "name": "cordio_smp_main_ccb_by_handle_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpCcbByHandle in the Apollo application",
+          "file_offset": 1045992,
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5469640,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-ccb-by-handle-0x005375c8.bin"
+        },
+        {
+          "name": "opaque_before_cordio_smp_main_ccb_by_connection_id",
+          "function": "Official Apollo application bytes outside the authenticated Cordio SMP-main stock entry spans",
+          "file_offset": 1046030,
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5469678,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x005375ee.bin"
+        },
+        {
+          "name": "cordio_smp_main_ccb_by_connection_id_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpCcbByConnId in the Apollo application",
+          "file_offset": 1046044,
+          "size": 326,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5469692,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-ccb-by-connection-id-0x005375fc.bin"
+        },
+        {
+          "name": "cordio_smp_main_calculate_c1_part1_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpCalcC1Part1 in the Apollo application",
+          "file_offset": 1046370,
+          "size": 298,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5470018,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-calculate-c1-part1-0x00537742.bin"
+        },
+        {
+          "name": "cordio_smp_main_calculate_c1_part2_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpCalcC1Part2 in the Apollo application",
+          "file_offset": 1046668,
+          "size": 300,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5470316,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-calculate-c1-part2-0x0053786c.bin"
+        },
+        {
+          "name": "cordio_smp_main_calculate_s1_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpCalcS1 in the Apollo application",
+          "file_offset": 1046968,
+          "size": 92,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5470616,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-calculate-s1-0x00537998.bin"
+        },
+        {
+          "name": "cordio_smp_main_generate_ltk_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpGenerateLtk in the Apollo application",
+          "file_offset": 1047060,
+          "size": 102,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5470708,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-generate-ltk-0x005379f4.bin"
+        },
+        {
+          "name": "cordio_smp_main_send_packet_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpSendPkt in the Apollo application",
+          "file_offset": 1047162,
+          "size": 350,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5470810,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-send-packet-0x00537a5a.bin"
+        },
+        {
+          "name": "cordio_smp_main_state_idle_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpStateIdle in the Apollo application",
+          "file_offset": 1047512,
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471160,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-state-idle-0x00537bb8.bin"
+        },
+        {
+          "name": "cordio_smp_main_message_allocate_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpMsgAlloc in the Apollo application",
+          "file_offset": 1047530,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471178,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-message-allocate-0x00537bca.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_message_send_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c SmpDmMsgSend in the Apollo application",
+          "file_offset": 1047542,
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471190,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-dm-message-send-0x00537bd6.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_encrypt_indication_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c SmpDmEncryptInd in the Apollo application",
+          "file_offset": 1047558,
+          "size": 26,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471206,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-dm-encrypt-indication-0x00537be6.bin"
+        },
+        {
+          "name": "cordio_smp_main_get_sc_security_level_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c smpGetScSecLevel in the Apollo application",
+          "file_offset": 1047584,
+          "size": 48,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471232,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-get-sc-security-level-0x00537c00.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_lesc_enabled_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c SmpDmLescEnabled in the Apollo application",
+          "file_offset": 1047632,
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471280,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-dm-lesc-enabled-0x00537c30.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_get_stk_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c SmpDmGetStk in the Apollo application",
+          "file_offset": 1047660,
+          "size": 102,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471308,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-dm-get-stk-0x00537c4c.bin"
+        },
+        {
+          "name": "cordio_smp_main_handler_init_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c SmpHandlerInit in the Apollo application",
+          "file_offset": 1047762,
+          "size": 70,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471410,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-handler-init-0x00537cb2.bin"
+        },
+        {
+          "name": "opaque_before_cordio_smp_main_handler",
+          "function": "Official Apollo application bytes outside the authenticated Cordio SMP-main stock entry spans",
+          "file_offset": 1047832,
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471480,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x00537cf8.bin"
+        },
+        {
+          "name": "cordio_smp_main_handler_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing authenticated Packetcraft Cordio r20.05c SmpHandler in the Apollo application",
+          "file_offset": 1047852,
+          "size": 402,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471500,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-smp-main-handler-0x00537d0c.bin"
+        },
+        {
+          "name": "opaque_after_cordio_smp_main_handler",
+          "function": "Official Apollo application bytes outside the authenticated Cordio SMP-main stock entry spans",
+          "file_offset": 1048254,
+          "size": 10194,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5471902,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x00537e9e.bin"
         },
         {
           "name": "chg_bq25180_low_level_helpers",
@@ -10975,14 +11505,184 @@
           "output": "apollo510b/source-entry-freertos-cli-console-task-0x00541600.bin"
         },
         {
-          "name": "opaque_between_freertos_cli_console_task_and_lz4",
-          "function": "Official Apollo application bytes after the complete FreeRTOS+CLI console task through the LZ4 safe-decoder wrapper",
+          "name": "opaque_between_freertos_cli_console_task_and_smp_db",
+          "function": "Official Apollo application bytes after the complete FreeRTOS+CLI console task through the Cordio SMP database",
           "file_offset": 1087292,
-          "size": 56348,
+          "size": 1816,
           "target": "apollo510b_internal_mram",
           "target_address": 5510940,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x0054171c.bin"
+        },
+        {
+          "name": "cordio_smp_db_start_service_timer_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio smpDbStartServiceTimer",
+          "file_offset": 1089108,
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5512756,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-start-timer-0x00541e34.bin"
+        },
+        {
+          "name": "cordio_smp_db_record_in_use_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio smpDbRecordInUse",
+          "file_offset": 1089136,
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5512784,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-record-in-use-0x00541e50.bin"
+        },
+        {
+          "name": "cordio_smp_db_add_device_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio smpDbAddDevice",
+          "file_offset": 1089170,
+          "size": 326,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5512818,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-add-device-0x00541e72.bin"
+        },
+        {
+          "name": "cordio_smp_db_get_record_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio smpDbGetRecord",
+          "file_offset": 1089496,
+          "size": 716,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5513144,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-get-record-0x00541fb8.bin"
+        },
+        {
+          "name": "cordio_smp_db_alignment_before_init",
+          "function": "Official Cordio SMP database alignment before SmpDbInit",
+          "file_offset": 1090212,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5513860,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-db-alignment-0x00542284.bin"
+        },
+        {
+          "name": "cordio_smp_db_init_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio SmpDbInit",
+          "file_offset": 1090216,
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5513864,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-init-0x00542288.bin"
+        },
+        {
+          "name": "cordio_smp_db_alignment_before_disabled_time",
+          "function": "Official Cordio SMP database alignment before SmpDbGetPairingDisabledTime",
+          "file_offset": 1090272,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5513920,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-db-alignment-0x005422c0.bin"
+        },
+        {
+          "name": "cordio_smp_db_get_disabled_time_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio SmpDbGetPairingDisabledTime",
+          "file_offset": 1090276,
+          "size": 340,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5513924,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-get-disabled-time-0x005422c4.bin"
+        },
+        {
+          "name": "cordio_smp_db_set_failure_count_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio SmpDbSetFailureCount",
+          "file_offset": 1090616,
+          "size": 344,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5514264,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-set-failure-count-0x00542418.bin"
+        },
+        {
+          "name": "cordio_smp_db_alignment_before_get_failure_count",
+          "function": "Official Cordio SMP database alignment before SmpDbGetFailureCount",
+          "file_offset": 1090960,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5514608,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-db-alignment-0x00542570.bin"
+        },
+        {
+          "name": "cordio_smp_db_get_failure_count_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio SmpDbGetFailureCount",
+          "file_offset": 1090972,
+          "size": 324,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5514620,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-get-failure-count-0x0054257c.bin"
+        },
+        {
+          "name": "cordio_smp_db_max_attempt_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio SmpDbMaxAttemptReached",
+          "file_offset": 1091296,
+          "size": 362,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5514944,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-max-attempt-0x005426c0.bin"
+        },
+        {
+          "name": "cordio_smp_db_alignment_before_pairing_failed",
+          "function": "Official Cordio SMP database alignment before SmpDbPairingFailed",
+          "file_offset": 1091658,
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5515306,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-db-alignment-0x0054282a.bin"
+        },
+        {
+          "name": "cordio_smp_db_pairing_failed_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio SmpDbPairingFailed",
+          "file_offset": 1091672,
+          "size": 276,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5515320,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-pairing-failed-0x00542838.bin"
+        },
+        {
+          "name": "cordio_smp_db_alignment_before_service",
+          "function": "Official Cordio SMP database literal and alignment bytes before SmpDbService",
+          "file_offset": 1091948,
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5515596,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-db-alignment-0x0054294c.bin"
+        },
+        {
+          "name": "cordio_smp_db_service_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Cordio SmpDbService",
+          "file_offset": 1091968,
+          "size": 146,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5515616,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-db-service-0x00542960.bin"
+        },
+        {
+          "name": "opaque_between_smp_db_and_lz4",
+          "function": "Official Apollo application bytes after the Cordio SMP database through the LZ4 safe-decoder wrapper",
+          "file_offset": 1092114,
+          "size": 51526,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5515762,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x005429f2.bin"
         },
         {
           "name": "lz4_decompress_safe_source_replacement",
@@ -10995,14 +11695,54 @@
           "output": "apollo510b/source-entry-lz4-decompress-safe-0x0054f338.bin"
         },
         {
-          "name": "opaque_between_lz4_and_ui_display_sink",
-          "function": "Official Apollo application bytes between the source-replaced LZ4 safe-decoder wrapper and asynchronous display sink",
+          "name": "opaque_between_lz4_and_dm_sec_master",
+          "function": "Official Apollo application bytes between the source-replaced LZ4 wrapper and Cordio master-security role unit",
           "file_offset": 1143670,
-          "size": 62628,
+          "size": 51310,
           "target": "apollo510b_internal_mram",
           "target_address": 5567318,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x0054f356.bin"
+        },
+        {
+          "name": "cordio_dm_sec_master_smp_encrypt_request_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio DmSmpEncryptReq",
+          "file_offset": 1194980,
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5618628,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-master-smp-encrypt-request-0x0055bbc4.bin"
+        },
+        {
+          "name": "cordio_dm_sec_master_pair_request_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio DmSecPairReq",
+          "file_offset": 1195018,
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5618666,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-master-pair-request-0x0055bbea.bin"
+        },
+        {
+          "name": "cordio_dm_sec_master_encrypt_request_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio DmSecEncryptReq",
+          "file_offset": 1195070,
+          "size": 54,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5618718,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-cordio-dm-sec-master-encrypt-request-0x0055bc1e.bin"
+        },
+        {
+          "name": "opaque_between_dm_sec_master_and_ui_display_sink",
+          "function": "Official Apollo application bytes including the authenticated dm_sec_master literal tail through the asynchronous display sink",
+          "file_offset": 1195124,
+          "size": 11174,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5618772,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x0055bc54.bin"
         },
         {
           "name": "ui_display_sink_source_replacement",
@@ -11015,14 +11755,504 @@
           "output": "apollo510b/source-entry-ui-display-sink-0x0055e7fa.bin"
         },
         {
-          "name": "opaque_between_ui_display_sink_and_freertos_cli_get_parameter",
-          "function": "Official Apollo application bytes between the source-replaced asynchronous display sink and the FreeRTOS+CLI parameter accessor",
+          "name": "opaque_between_ui_display_sink_and_freertos_cli_get_parameter_before_cordio_smp_sc_main",
+          "function": "Official Apollo main bytes retained between bounded Cordio SMP Secure Connections replacements",
           "file_offset": 1206456,
-          "size": 155748,
+          "size": 58664,
           "target": "apollo510b_internal_mram",
           "target_address": 5630104,
           "address_status": "official_blob",
-          "output": "apollo510b/main-opaque-0x0055e898.bin"
+          "output": "apollo510b/main-official-opaque-between-ui-display-sink-and-freertos-cli-get-parameter-before-cordio-smp-sc-main-0x0055e898.bin"
+        },
+        {
+          "name": "cordio_smp_sc_allocate_scratch_buffers_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScAllocScratchBuffers",
+          "file_offset": 1265120,
+          "size": 142,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5688768,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-allocate-scratch-buffers-0x0056cdc0.bin"
+        },
+        {
+          "name": "cordio_smp_sc_free_scratch_buffers_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScFreeScratchBuffers",
+          "file_offset": 1265262,
+          "size": 116,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5688910,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-free-scratch-buffers-0x0056ce4e.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cmac_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScCmac",
+          "file_offset": 1265378,
+          "size": 66,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689026,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-cmac-0x0056cec2.bin"
+        },
+        {
+          "name": "cordio_smp_sc_allocate_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScAlloc",
+          "file_offset": 1265444,
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689092,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-allocate-0x0056cf04.bin"
+        },
+        {
+          "name": "cordio_smp_sc_calculate_f4_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScCalcF4",
+          "file_offset": 1265484,
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689132,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-calculate-f4-0x0056cf2c.bin"
+        },
+        {
+          "name": "cordio_smp_sc_init_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScInit",
+          "file_offset": 1265556,
+          "size": 78,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689204,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-init-0x0056cf74.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cat_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScCat",
+          "file_offset": 1265634,
+          "size": 26,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689282,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-cat-0x0056cfc2.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cat128_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScCat128",
+          "file_offset": 1265660,
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689308,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-cat128-0x0056cfdc.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_public_key_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpScSendPubKey",
+          "file_offset": 1265676,
+          "size": 104,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689324,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-send-public-key-0x0056cfec.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_dh_key_check_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpScSendDHKeyCheck",
+          "file_offset": 1265780,
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689428,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-send-dh-key-check-0x0056d054.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_random_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpScSendRand",
+          "file_offset": 1265864,
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689512,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-send-random-0x0056d0a8.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_pairing_confirm_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpScSendPairCnf",
+          "file_offset": 1265948,
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689596,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-send-pairing-confirm-0x0056d0fc.bin"
+        },
+        {
+          "name": "cordio_smp_sc_get_passkey_bit_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpGetPkBit",
+          "file_offset": 1266032,
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689680,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-get-passkey-bit-0x0056d150.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cancel_with_reattempt_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio SmpScGetCancelMsgWithReattempt",
+          "file_offset": 1266088,
+          "size": 368,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5689736,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-cancel-with-reattempt-0x0056d188.bin"
+        },
+        {
+          "name": "cordio_smp_sc_main_stock_gap_14",
+          "function": "Official Apollo main bytes retained between bounded Cordio SMP Secure Connections replacements",
+          "file_offset": 1266456,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5690104,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-sc-main-stock-gap-14-0x0056d2f8.bin"
+        },
+        {
+          "name": "cordio_smp_sc_fail_with_reattempt_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpScFailWithReattempt",
+          "file_offset": 1266468,
+          "size": 26,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5690116,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-fail-with-reattempt-0x0056d304.bin"
+        },
+        {
+          "name": "cordio_smp_sc_event_string_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpEventStr",
+          "file_offset": 1266494,
+          "size": 310,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5690142,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-event-string-0x0056d31e.bin"
+        },
+        {
+          "name": "cordio_smp_sc_state_string_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpStateStr",
+          "file_offset": 1266804,
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5690452,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-state-string-0x0056d454.bin"
+        },
+        {
+          "name": "cordio_smp_sc_main_stock_gap_17",
+          "function": "Official Apollo main bytes retained between bounded Cordio SMP Secure Connections replacements",
+          "file_offset": 1266836,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5690484,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-sc-main-stock-gap-17-0x0056d474.bin"
+        },
+        {
+          "name": "cordio_smp_sc_log_byte_array_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpLogByteArray",
+          "file_offset": 1266840,
+          "size": 922,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5690488,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-sc-log-byte-array-0x0056d478.bin"
+        },
+        {
+          "name": "opaque_before_cordio_smp_act",
+          "function": "Official Apollo main bytes retained before bounded Cordio SMP common-action replacements",
+          "file_offset": 1267762,
+          "size": 3514,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5691410,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-opaque-before-cordio-smp-act-0x0056d812.bin"
+        },
+        {
+          "name": "cordio_smp_act_start-rsp-timer_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpStartRspTimer",
+          "file_offset": 1271276,
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5694924,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-start-rsp-timer-0x0056e5cc.bin"
+        },
+        {
+          "name": "cordio_smp_act_none_source_in_place",
+          "function": "Compiled Packetcraft Cordio smpActNone source leaf placed byte-identically in the Apollo application",
+          "file_offset": 1271294,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5694942,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-none-in-place-0x0056e5de.bin"
+        },
+        {
+          "name": "cordio_smp_act_cleanup_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpCleanup",
+          "file_offset": 1271296,
+          "size": 66,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5694944,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-cleanup-0x0056e5e0.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-cleanup_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActCleanup",
+          "file_offset": 1271362,
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695010,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-cleanup-0x0056e622.bin"
+        },
+        {
+          "name": "cordio_smp_act_send-pairing-failed_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpSendPairingFailed",
+          "file_offset": 1271370,
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695018,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-send-pairing-failed-0x0056e62a.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-pairing-failed_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActPairingFailed",
+          "file_offset": 1271410,
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695058,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-pairing-failed-0x0056e652.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-sec-req-timeout_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActSecReqTimeout",
+          "file_offset": 1271446,
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695094,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-sec-req-timeout-0x0056e676.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-pairing-cancel_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActPairingCancel",
+          "file_offset": 1271488,
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695136,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-pairing-cancel-0x0056e6a0.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-store-pin_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActStorePin",
+          "file_offset": 1271512,
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695160,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-store-pin-0x0056e6b8.bin"
+        },
+        {
+          "name": "cordio_smp_act_proc-pairing_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpProcPairing",
+          "file_offset": 1271552,
+          "size": 364,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695200,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-proc-pairing-0x0056e6e0.bin"
+        },
+        {
+          "name": "cordio_smp_act_auth-req_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpAuthReq",
+          "file_offset": 1271916,
+          "size": 90,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695564,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-auth-req-0x0056e84c.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-pair-cnf-calc1_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActPairCnfCalc1",
+          "file_offset": 1272006,
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695654,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-pair-cnf-calc1-0x0056e8a6.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-pair-cnf-calc2_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActPairCnfCalc2",
+          "file_offset": 1272042,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695690,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-pair-cnf-calc2-0x0056e8ca.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-send-pair-cnf_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActSendPairCnf",
+          "file_offset": 1272054,
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695702,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-send-pair-cnf-0x0056e8d6.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-pair-cnf-ver-calc1_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActPairCnfVerCalc1",
+          "file_offset": 1272126,
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695774,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-pair-cnf-ver-calc1-0x0056e91e.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-pair-cnf-ver-calc2_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActPairCnfVerCalc2",
+          "file_offset": 1272164,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695812,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-pair-cnf-ver-calc2-0x0056e944.bin"
+        },
+        {
+          "name": "cordio_smp_act_send-key_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpSendKey",
+          "file_offset": 1272176,
+          "size": 824,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5695824,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-send-key-0x0056e950.bin"
+        },
+        {
+          "name": "cordio_smp_act_stock_gap_17",
+          "function": "Official Apollo main bytes retained between bounded Cordio SMP common-action replacements",
+          "file_offset": 1273000,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5696648,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-act-stock-gap-17-0x0056ec88.bin"
+        },
+        {
+          "name": "cordio_smp_act_proc-rcv-key_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpProcRcvKey",
+          "file_offset": 1273012,
+          "size": 282,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5696660,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-proc-rcv-key-0x0056ec94.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-max-attempts_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActMaxAttempts",
+          "file_offset": 1273294,
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5696942,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-max-attempts-0x0056edae.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-attempt-rcvd_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActAttemptRcvd",
+          "file_offset": 1273334,
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5696982,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-attempt-rcvd-0x0056edd6.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-notify-dm-attempts-failure_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActNotifyDmAttemptsFailure",
+          "file_offset": 1273342,
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5696990,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-notify-dm-attempts-failure-0x0056edde.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-notify-dm-rsp-to-failure_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActNotifyDmRspToFailure",
+          "file_offset": 1273360,
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5697008,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-notify-dm-rsp-to-failure-0x0056edf0.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-check-attempts_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActCheckAttempts",
+          "file_offset": 1273378,
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5697026,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-check-attempts-0x0056ee02.bin"
+        },
+        {
+          "name": "cordio_smp_act_act-pairing-cmpl_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpActPairingCmpl",
+          "file_offset": 1273422,
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5697070,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-act-pairing-cmpl-0x0056ee2e.bin"
+        },
+        {
+          "name": "cordio_smp_act_sm-execute_source_entry",
+          "function": "Generated entry redirect and NOP fill replacing Packetcraft Cordio smpSmExecute",
+          "file_offset": 1273474,
+          "size": 738,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5697122,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-cordio-smp-act-sm-execute-0x0056ee62.bin"
+        },
+        {
+          "name": "cordio_smp_act_stock_tail",
+          "function": "Official Apollo main Cordio SMP common-action literal and diagnostic tail retained after bounded function replacements",
+          "file_offset": 1274212,
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5697860,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-cordio-smp-act-stock-tail-0x0056f144.bin"
+        },
+        {
+          "name": "opaque_after_cordio_smp_act",
+          "function": "Official Apollo main bytes retained after bounded Cordio SMP common-action replacements",
+          "file_offset": 1274264,
+          "size": 87940,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5697912,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-official-opaque-after-cordio-smp-act-0x0056f178.bin"
         },
         {
           "name": "freertos_cli_get_parameter_source_replacement",
@@ -18163,6 +19393,1546 @@
           "target_address": 8112300,
           "address_status": "source_compiled",
           "output": "apollo510b/main-source-freertos-task-start-scheduler-text-0x007bc8ac.bin"
+        },
+        {
+          "name": "watchdog_enable_source_text",
+          "function": "Clean-room source-owned first-party G2 watchdog selector and retained-provider enable policy",
+          "file_offset": 3688808,
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112456,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-watchdog-enable-text-0x007bc948.bin"
+        },
+        {
+          "name": "watchdog_init_source_text",
+          "function": "Clean-room source-owned first-party G2 watchdog initialization entry",
+          "file_offset": 3688832,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112480,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-watchdog-init-text-0x007bc960.bin"
+        },
+        {
+          "name": "system_monitor_common_data_handler_source_text",
+          "function": "Clean-room source-owned system-monitor peer-reboot callback with bounded record validation, display quiescence, scheduler-idle dispatch, and subsystem reset sequencing",
+          "file_offset": 3688836,
+          "size": 650,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112484,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-system-monitor-common-data-handler-text-0x007bc964.bin"
+        },
+        {
+          "name": "health_data_mutex_init_source_alignment",
+          "function": "Generated zero padding aligning the clean-room health mutex initializer",
+          "file_offset": 3689486,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113134,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-health-data-mutex-init-alignment-0x007bcbee.bin"
+        },
+        {
+          "name": "health_data_mutex_init_source_text",
+          "function": "Clean-room source-owned lazy health mutex initialization entry",
+          "file_offset": 3689488,
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113136,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-health-data-mutex-init-text-0x007bcbf0.bin"
+        },
+        {
+          "name": "health_lock_storage_source_alignment",
+          "function": "Generated zero padding aligning the clean-room health storage lock entry",
+          "file_offset": 3689530,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113178,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-health-lock-storage-alignment-0x007bcc1a.bin"
+        },
+        {
+          "name": "health_lock_storage_source_text",
+          "function": "Clean-room source-owned health storage mutex acquire entry",
+          "file_offset": 3689532,
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113180,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-health-lock-storage-text-0x007bcc1c.bin"
+        },
+        {
+          "name": "health_unlock_storage_source_text",
+          "function": "Clean-room source-owned health storage mutex release entry",
+          "file_offset": 3689568,
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113216,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-health-unlock-storage-text-0x007bcc40.bin"
+        },
+        {
+          "name": "health_common_data_handler_source_text",
+          "function": "Clean-room source-owned health payload dispatch, role/display gate, and six-byte service-one response policy",
+          "file_offset": 3689588,
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113236,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-health-common-data-handler-text-0x007bcc54.bin"
+        },
+        {
+          "name": "cordio_dm_sec_lesc_message_handler_source_text",
+          "function": "Authenticated Packetcraft Cordio DM LE Secure Connections message-handler source leaf",
+          "file_offset": 3689688,
+          "size": 112,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113336,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-lesc-message-handler-text-0x007bccb8.bin"
+        },
+        {
+          "name": "cordio_dm_sec_generate_ecc_key_request_source_text",
+          "function": "Authenticated Packetcraft Cordio ECC-key request source leaf",
+          "file_offset": 3689800,
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113448,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-generate-ecc-key-text-0x007bcd28.bin"
+        },
+        {
+          "name": "cordio_dm_sec_set_ecc_key_source_alignment",
+          "function": "Generated zero padding aligning the Cordio ECC-key setter",
+          "file_offset": 3689818,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113466,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-set-ecc-key-alignment-0x007bcd3a.bin"
+        },
+        {
+          "name": "cordio_dm_sec_set_ecc_key_source_text",
+          "function": "Authenticated Packetcraft Cordio ECC-key setter source leaf",
+          "file_offset": 3689820,
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113468,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-set-ecc-key-text-0x007bcd3c.bin"
+        },
+        {
+          "name": "cordio_dm_sec_get_ecc_key_source_text",
+          "function": "Authenticated Packetcraft Cordio ECC-key getter source leaf",
+          "file_offset": 3689836,
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113484,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-get-ecc-key-text-0x007bcd4c.bin"
+        },
+        {
+          "name": "cordio_dm_sec_compare_response_source_alignment",
+          "function": "Generated zero padding aligning the Cordio numeric-comparison response entry",
+          "file_offset": 3689846,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113494,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-compare-response-alignment-0x007bcd56.bin"
+        },
+        {
+          "name": "cordio_dm_sec_compare_response_source_text",
+          "function": "Authenticated Packetcraft Cordio numeric-comparison response source leaf",
+          "file_offset": 3689848,
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113496,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-compare-response-text-0x007bcd58.bin"
+        },
+        {
+          "name": "cordio_dm_sec_get_compare_value_source_text",
+          "function": "Authenticated Packetcraft Cordio six-digit comparison formatter source leaf",
+          "file_offset": 3689904,
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113552,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-get-compare-value-text-0x007bcd90.bin"
+        },
+        {
+          "name": "cordio_dm_sec_lesc_init_source_alignment",
+          "function": "Generated zero padding aligning the Cordio DM LE Secure Connections initializer",
+          "file_offset": 3689950,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113598,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-lesc-init-alignment-0x007bcdbe.bin"
+        },
+        {
+          "name": "cordio_dm_sec_lesc_init_source_text",
+          "function": "Authenticated Packetcraft Cordio DM LE Secure Connections initializer source leaf",
+          "file_offset": 3689952,
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113600,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-lesc-init-text-0x007bcdc0.bin"
+        },
+        {
+          "name": "cordio_dm_sec_smp_callback_execute_source_text",
+          "function": "Authenticated Packetcraft Cordio DM SMP callback dispatcher source leaf",
+          "file_offset": 3689972,
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113620,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-smp-callback-text-0x007bcdd4.bin"
+        },
+        {
+          "name": "cordio_dm_sec_hci_handler_source_alignment",
+          "function": "Generated zero padding aligning the Cordio DM security HCI handler",
+          "file_offset": 3690018,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113666,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-hci-handler-alignment-0x007bce02.bin"
+        },
+        {
+          "name": "cordio_dm_sec_hci_handler_source_text",
+          "function": "Authenticated Packetcraft Cordio DM security HCI handler source leaf",
+          "file_offset": 3690020,
+          "size": 224,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113668,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-hci-handler-text-0x007bce04.bin"
+        },
+        {
+          "name": "cordio_dm_sec_message_handler_source_text",
+          "function": "Authenticated Packetcraft Cordio DM security message handler source leaf",
+          "file_offset": 3690244,
+          "size": 114,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8113892,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-message-handler-text-0x007bcee4.bin"
+        },
+        {
+          "name": "cordio_dm_sec_auth_response_source_alignment",
+          "function": "Generated zero padding aligning the Cordio DM authentication response entry",
+          "file_offset": 3690358,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114006,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-auth-response-alignment-0x007bcf56.bin"
+        },
+        {
+          "name": "cordio_dm_sec_auth_response_source_text",
+          "function": "Authenticated Packetcraft Cordio DM authentication response source leaf",
+          "file_offset": 3690360,
+          "size": 54,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114008,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-auth-response-text-0x007bcf58.bin"
+        },
+        {
+          "name": "cordio_dm_sec_init_source_alignment",
+          "function": "Generated zero padding aligning the Cordio DM security initializer",
+          "file_offset": 3690414,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114062,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-init-alignment-0x007bcf8e.bin"
+        },
+        {
+          "name": "cordio_dm_sec_init_source_text",
+          "function": "Authenticated Packetcraft Cordio DM security initializer source leaf",
+          "file_offset": 3690416,
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114064,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-init-text-0x007bcf90.bin"
+        },
+        {
+          "name": "cordio_dm_sec_get_local_csrk_source_text",
+          "function": "Authenticated Packetcraft Cordio local CSRK accessor source leaf",
+          "file_offset": 3690456,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114104,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-get-csrk-text-0x007bcfb8.bin"
+        },
+        {
+          "name": "cordio_dm_sec_get_local_irk_source_text",
+          "function": "Authenticated Packetcraft Cordio local IRK accessor source leaf",
+          "file_offset": 3690468,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114116,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-get-irk-text-0x007bcfc4.bin"
+        },
+        {
+          "name": "cordio_dm_sec_reset_source_text",
+          "function": "Authenticated Packetcraft Cordio DM security reset source leaf",
+          "file_offset": 3690480,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114128,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-reset-text-0x007bcfd0.bin"
+        },
+        {
+          "name": "cordio_dm_sec_slave_pair_response_source_text",
+          "function": "Authenticated Packetcraft Cordio slave pair-response source leaf",
+          "file_offset": 3690484,
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114132,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-slave-pair-response-text-0x007bcfd4.bin"
+        },
+        {
+          "name": "cordio_dm_sec_slave_request_source_alignment",
+          "function": "Generated zero padding aligning the Cordio slave security-request source leaf",
+          "file_offset": 3690542,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114190,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-slave-request-alignment-0x007bd00e.bin"
+        },
+        {
+          "name": "cordio_dm_sec_slave_request_source_text",
+          "function": "Authenticated Packetcraft Cordio slave security-request source leaf",
+          "file_offset": 3690544,
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114192,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-slave-request-text-0x007bd010.bin"
+        },
+        {
+          "name": "cordio_dm_sec_slave_ltk_response_source_alignment",
+          "function": "Generated zero padding aligning the Cordio slave LTK-response source leaf",
+          "file_offset": 3690578,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114226,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-slave-ltk-response-alignment-0x007bd032.bin"
+        },
+        {
+          "name": "cordio_dm_sec_slave_ltk_response_source_text",
+          "function": "Authenticated Packetcraft Cordio slave LTK-response source leaf",
+          "file_offset": 3690580,
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114228,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-slave-ltk-response-text-0x007bd034.bin"
+        },
+        {
+          "name": "cordio_dm_sec_master_smp_encrypt_request_source_text",
+          "function": "Authenticated Packetcraft Cordio master SMP-encrypt source leaf",
+          "file_offset": 3690648,
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114296,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-master-smp-encrypt-text-0x007bd078.bin"
+        },
+        {
+          "name": "cordio_dm_sec_master_pair_request_source_text",
+          "function": "Authenticated Packetcraft Cordio master pair-request source leaf",
+          "file_offset": 3690700,
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114348,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-master-pair-request-text-0x007bd0ac.bin"
+        },
+        {
+          "name": "cordio_dm_sec_master_encrypt_request_source_alignment",
+          "function": "Generated zero padding aligning the Cordio master encrypt-request source leaf",
+          "file_offset": 3690758,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114406,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-dm-sec-master-encrypt-request-alignment-0x007bd0e6.bin"
+        },
+        {
+          "name": "cordio_dm_sec_master_encrypt_request_source_text",
+          "function": "Authenticated Packetcraft Cordio master encrypt-request source leaf",
+          "file_offset": 3690760,
+          "size": 62,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114408,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-dm-sec-master-encrypt-request-text-0x007bd0e8.bin"
+        },
+        {
+          "name": "cordio_smp_db_start_timer_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP database timer helper",
+          "file_offset": 3690822,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114470,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-db-start-timer-alignment-0x007bd126.bin"
+        },
+        {
+          "name": "cordio_smp_db_start_timer_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP database timer helper source leaf",
+          "file_offset": 3690824,
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114472,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-start-timer-text-0x007bd128.bin"
+        },
+        {
+          "name": "cordio_smp_db_record_in_use_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP database record-use predicate source leaf",
+          "file_offset": 3690848,
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114496,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-record-in-use-text-0x007bd140.bin"
+        },
+        {
+          "name": "cordio_smp_db_add_device_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP database add-device helper",
+          "file_offset": 3690870,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114518,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-db-add-device-alignment-0x007bd156.bin"
+        },
+        {
+          "name": "cordio_smp_db_add_device_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP database add-device source leaf",
+          "file_offset": 3690872,
+          "size": 164,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114520,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-add-device-text-0x007bd158.bin"
+        },
+        {
+          "name": "cordio_smp_db_get_record_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP database record lookup source leaf",
+          "file_offset": 3691036,
+          "size": 154,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114684,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-get-record-text-0x007bd1fc.bin"
+        },
+        {
+          "name": "cordio_smp_db_init_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP database initializer",
+          "file_offset": 3691190,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114838,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-db-init-alignment-0x007bd296.bin"
+        },
+        {
+          "name": "cordio_smp_db_init_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP database initializer source leaf",
+          "file_offset": 3691192,
+          "size": 50,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114840,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-init-text-0x007bd298.bin"
+        },
+        {
+          "name": "cordio_smp_db_get_disabled_time_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP pairing-disabled-time accessor",
+          "file_offset": 3691242,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114890,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-db-get-disabled-time-alignment-0x007bd2ca.bin"
+        },
+        {
+          "name": "cordio_smp_db_get_disabled_time_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP pairing-disabled-time accessor source leaf",
+          "file_offset": 3691244,
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114892,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-get-disabled-time-text-0x007bd2cc.bin"
+        },
+        {
+          "name": "cordio_smp_db_set_failure_count_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP failure-count setter",
+          "file_offset": 3691254,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114902,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-db-set-failure-count-alignment-0x007bd2d6.bin"
+        },
+        {
+          "name": "cordio_smp_db_set_failure_count_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP failure-count setter source leaf",
+          "file_offset": 3691256,
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114904,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-set-failure-count-text-0x007bd2d8.bin"
+        },
+        {
+          "name": "cordio_smp_db_get_failure_count_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP failure-count accessor source leaf",
+          "file_offset": 3691288,
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114936,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-get-failure-count-text-0x007bd2f8.bin"
+        },
+        {
+          "name": "cordio_smp_db_max_attempt_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP maximum-attempt handler",
+          "file_offset": 3691298,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114946,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-db-max-attempt-alignment-0x007bd302.bin"
+        },
+        {
+          "name": "cordio_smp_db_max_attempt_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP maximum-attempt handler source leaf",
+          "file_offset": 3691300,
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8114948,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-max-attempt-text-0x007bd304.bin"
+        },
+        {
+          "name": "cordio_smp_db_pairing_failed_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP pairing-failed handler source leaf",
+          "file_offset": 3691368,
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115016,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-pairing-failed-text-0x007bd348.bin"
+        },
+        {
+          "name": "cordio_smp_db_service_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP database timer-service handler",
+          "file_offset": 3691390,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115038,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-db-service-alignment-0x007bd35e.bin"
+        },
+        {
+          "name": "cordio_smp_db_service_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP database timer-service source leaf",
+          "file_offset": 3691392,
+          "size": 142,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115040,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-db-service-text-0x007bd360.bin"
+        },
+        {
+          "name": "cordio_smp_main_packet_length_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main packet length source leaf",
+          "file_offset": 3691534,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115182,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-packet-length-alignment-0x007bd3ee.bin"
+        },
+        {
+          "name": "cordio_smp_main_packet_length_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main packet length source leaf",
+          "file_offset": 3691536,
+          "size": 90,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115184,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-packet-length-text-0x007bd3f0.bin"
+        },
+        {
+          "name": "cordio_smp_main_ccb_by_connection_id_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main ccb by connection id source leaf",
+          "file_offset": 3691626,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115274,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-ccb-by-connection-id-alignment-0x007bd44a.bin"
+        },
+        {
+          "name": "cordio_smp_main_ccb_by_connection_id_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main ccb by connection id source leaf",
+          "file_offset": 3691628,
+          "size": 26,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115276,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-ccb-by-connection-id-text-0x007bd44c.bin"
+        },
+        {
+          "name": "cordio_smp_main_ccb_by_handle_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main ccb by handle source leaf",
+          "file_offset": 3691654,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115302,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-ccb-by-handle-alignment-0x007bd466.bin"
+        },
+        {
+          "name": "cordio_smp_main_ccb_by_handle_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main ccb by handle source leaf",
+          "file_offset": 3691656,
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115304,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-ccb-by-handle-text-0x007bd468.bin"
+        },
+        {
+          "name": "cordio_smp_main_state_idle_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main state idle source leaf",
+          "file_offset": 3691676,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115324,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-state-idle-text-0x007bd47c.bin"
+        },
+        {
+          "name": "cordio_smp_main_send_packet_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main send packet source leaf",
+          "file_offset": 3691688,
+          "size": 50,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115336,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-send-packet-text-0x007bd488.bin"
+        },
+        {
+          "name": "cordio_smp_main_l2c_data_callback_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main l2c data callback source leaf",
+          "file_offset": 3691738,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115386,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-l2c-data-callback-alignment-0x007bd4ba.bin"
+        },
+        {
+          "name": "cordio_smp_main_l2c_data_callback_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main l2c data callback source leaf",
+          "file_offset": 3691740,
+          "size": 106,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115388,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-l2c-data-callback-text-0x007bd4bc.bin"
+        },
+        {
+          "name": "cordio_smp_main_l2c_control_callback_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main l2c control callback source leaf",
+          "file_offset": 3691846,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115494,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-l2c-control-callback-alignment-0x007bd526.bin"
+        },
+        {
+          "name": "cordio_smp_main_l2c_control_callback_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main l2c control callback source leaf",
+          "file_offset": 3691848,
+          "size": 82,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115496,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-l2c-control-callback-text-0x007bd528.bin"
+        },
+        {
+          "name": "cordio_smp_main_resume_attempts_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main resume attempts source leaf",
+          "file_offset": 3691930,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115578,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-resume-attempts-alignment-0x007bd57a.bin"
+        },
+        {
+          "name": "cordio_smp_main_resume_attempts_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main resume attempts source leaf",
+          "file_offset": 3691932,
+          "size": 90,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115580,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-resume-attempts-text-0x007bd57c.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_connection_callback_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main dm connection callback source leaf",
+          "file_offset": 3692022,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115670,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-dm-connection-callback-alignment-0x007bd5d6.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_connection_callback_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main dm connection callback source leaf",
+          "file_offset": 3692024,
+          "size": 180,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115672,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-dm-connection-callback-text-0x007bd5d8.bin"
+        },
+        {
+          "name": "cordio_smp_main_calculate_c1_part1_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main calculate c1 part1 source leaf",
+          "file_offset": 3692204,
+          "size": 500,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8115852,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-calculate-c1-part1-text-0x007bd68c.bin"
+        },
+        {
+          "name": "cordio_smp_main_calculate_c1_part2_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main calculate c1 part2 source leaf",
+          "file_offset": 3692704,
+          "size": 384,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116352,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-calculate-c1-part2-text-0x007bd880.bin"
+        },
+        {
+          "name": "cordio_smp_main_calculate_s1_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main calculate s1 source leaf",
+          "file_offset": 3693088,
+          "size": 92,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116736,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-calculate-s1-text-0x007bda00.bin"
+        },
+        {
+          "name": "cordio_smp_main_generate_ltk_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main generate ltk source leaf",
+          "file_offset": 3693180,
+          "size": 86,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116828,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-generate-ltk-text-0x007bda5c.bin"
+        },
+        {
+          "name": "cordio_smp_main_message_allocate_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main message allocate source leaf",
+          "file_offset": 3693266,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116914,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-message-allocate-alignment-0x007bdab2.bin"
+        },
+        {
+          "name": "cordio_smp_main_message_allocate_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main message allocate source leaf",
+          "file_offset": 3693268,
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116916,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-message-allocate-text-0x007bdab4.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_message_send_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main dm message send source leaf",
+          "file_offset": 3693274,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116922,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-dm-message-send-alignment-0x007bdaba.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_message_send_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main dm message send source leaf",
+          "file_offset": 3693276,
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116924,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-dm-message-send-text-0x007bdabc.bin"
+        },
+        {
+          "name": "cordio_smp_main_get_sc_security_level_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main get sc security level source leaf",
+          "file_offset": 3693296,
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116944,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-get-sc-security-level-text-0x007bdad0.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_lesc_enabled_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main dm lesc enabled source leaf",
+          "file_offset": 3693334,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116982,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-dm-lesc-enabled-alignment-0x007bdaf6.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_lesc_enabled_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main dm lesc enabled source leaf",
+          "file_offset": 3693336,
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8116984,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-dm-lesc-enabled-text-0x007bdaf8.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_get_stk_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main dm get stk source leaf",
+          "file_offset": 3693356,
+          "size": 86,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117004,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-dm-get-stk-text-0x007bdb0c.bin"
+        },
+        {
+          "name": "cordio_smp_main_handler_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main handler source leaf",
+          "file_offset": 3693442,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117090,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-handler-alignment-0x007bdb62.bin"
+        },
+        {
+          "name": "cordio_smp_main_handler_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main handler source leaf",
+          "file_offset": 3693444,
+          "size": 124,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117092,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-handler-text-0x007bdb64.bin"
+        },
+        {
+          "name": "cordio_smp_main_dm_encrypt_indication_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main dm encrypt indication source leaf",
+          "file_offset": 3693568,
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117216,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-dm-encrypt-indication-text-0x007bdbe0.bin"
+        },
+        {
+          "name": "cordio_smp_main_handler_init_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP-main handler init source leaf",
+          "file_offset": 3693590,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117238,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-main-handler-init-alignment-0x007bdbf6.bin"
+        },
+        {
+          "name": "cordio_smp_main_handler_init_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP-main handler init source leaf",
+          "file_offset": 3693592,
+          "size": 112,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117240,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-main-handler-init-text-0x007bdbf8.bin"
+        },
+        {
+          "name": "cordio_smp_sc_allocate_scratch_buffers_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC allocate scratch buffers source leaf",
+          "file_offset": 3693704,
+          "size": 102,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117352,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-allocate-scratch-buffers-text-0x007bdc68.bin"
+        },
+        {
+          "name": "cordio_smp_sc_free_scratch_buffers_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC free scratch buffers source leaf",
+          "file_offset": 3693806,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117454,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-free-scratch-buffers-alignment-0x007bdcce.bin"
+        },
+        {
+          "name": "cordio_smp_sc_free_scratch_buffers_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC free scratch buffers source leaf",
+          "file_offset": 3693808,
+          "size": 70,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117456,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-free-scratch-buffers-text-0x007bdcd0.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cmac_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC cmac source leaf",
+          "file_offset": 3693878,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117526,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-cmac-alignment-0x007bdd16.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cmac_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC cmac source leaf",
+          "file_offset": 3693880,
+          "size": 70,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117528,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-cmac-text-0x007bdd18.bin"
+        },
+        {
+          "name": "cordio_smp_sc_allocate_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC allocate source leaf",
+          "file_offset": 3693950,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117598,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-allocate-alignment-0x007bdd5e.bin"
+        },
+        {
+          "name": "cordio_smp_sc_allocate_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC allocate source leaf",
+          "file_offset": 3693952,
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117600,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-allocate-text-0x007bdd60.bin"
+        },
+        {
+          "name": "cordio_smp_sc_calculate_f4_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC calculate f4 source leaf",
+          "file_offset": 3693988,
+          "size": 78,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117636,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-calculate-f4-text-0x007bdd84.bin"
+        },
+        {
+          "name": "cordio_smp_sc_init_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC init source leaf",
+          "file_offset": 3694066,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117714,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-init-alignment-0x007bddd2.bin"
+        },
+        {
+          "name": "cordio_smp_sc_init_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC init source leaf",
+          "file_offset": 3694068,
+          "size": 66,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117716,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-init-text-0x007bddd4.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cat_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC cat source leaf",
+          "file_offset": 3694134,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117782,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-cat-alignment-0x007bde16.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cat_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC cat source leaf",
+          "file_offset": 3694136,
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117784,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-cat-text-0x007bde18.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cat128_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC cat128 source leaf",
+          "file_offset": 3694150,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117798,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-cat128-alignment-0x007bde26.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cat128_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC cat128 source leaf",
+          "file_offset": 3694152,
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117800,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-cat128-text-0x007bde28.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_public_key_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC send public key source leaf",
+          "file_offset": 3694166,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117814,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-send-public-key-alignment-0x007bde36.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_public_key_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC send public key source leaf",
+          "file_offset": 3694168,
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117816,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-send-public-key-text-0x007bde38.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_dh_key_check_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC send dh key check source leaf",
+          "file_offset": 3694268,
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8117916,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-send-dh-key-check-text-0x007bde9c.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_random_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC send random source leaf",
+          "file_offset": 3694352,
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8118000,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-send-random-text-0x007bdef0.bin"
+        },
+        {
+          "name": "cordio_smp_sc_send_pairing_confirm_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC send pairing confirm source leaf",
+          "file_offset": 3694436,
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8118084,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-send-pairing-confirm-text-0x007bdf44.bin"
+        },
+        {
+          "name": "cordio_smp_sc_get_passkey_bit_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC get passkey bit source leaf",
+          "file_offset": 3694520,
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8118168,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-get-passkey-bit-text-0x007bdf98.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cancel_with_reattempt_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC cancel with reattempt source leaf",
+          "file_offset": 3694558,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8118206,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-cancel-with-reattempt-alignment-0x007bdfbe.bin"
+        },
+        {
+          "name": "cordio_smp_sc_cancel_with_reattempt_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC cancel with reattempt source leaf",
+          "file_offset": 3694560,
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8118208,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-cancel-with-reattempt-text-0x007bdfc0.bin"
+        },
+        {
+          "name": "cordio_smp_sc_fail_with_reattempt_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC fail with reattempt source leaf",
+          "file_offset": 3694628,
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8118276,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-fail-with-reattempt-text-0x007be004.bin"
+        },
+        {
+          "name": "cordio_smp_sc_event_string_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC event string source leaf",
+          "file_offset": 3694660,
+          "size": 590,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8118308,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-event-string-text-0x007be024.bin"
+        },
+        {
+          "name": "cordio_smp_sc_event_string_source_rodata",
+          "function": "Authenticated Packetcraft Cordio SMP SC event diagnostic string closure",
+          "file_offset": 3695250,
+          "size": 433,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8118898,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-event-string-rodata-0x007be272.bin"
+        },
+        {
+          "name": "cordio_smp_sc_state_string_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC state string source leaf",
+          "file_offset": 3695683,
+          "size": 1,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8119331,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-state-string-alignment-0x007be423.bin"
+        },
+        {
+          "name": "cordio_smp_sc_state_string_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC state string source leaf",
+          "file_offset": 3695684,
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8119332,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-state-string-text-0x007be424.bin"
+        },
+        {
+          "name": "cordio_smp_sc_log_byte_array_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP SC log byte array source leaf",
+          "file_offset": 3695706,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8119354,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-sc-log-byte-array-alignment-0x007be43a.bin"
+        },
+        {
+          "name": "cordio_smp_sc_log_byte_array_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP SC log byte array source leaf",
+          "file_offset": 3695708,
+          "size": 726,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8119356,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-sc-log-byte-array-text-0x007be43c.bin"
+        },
+        {
+          "name": "cordio_smp_act_start_response_timer_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action start response timer source leaf",
+          "file_offset": 3696434,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120082,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-start-response-timer-alignment-0x007be712.bin"
+        },
+        {
+          "name": "cordio_smp_act_start_response_timer_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action start response timer source leaf",
+          "file_offset": 3696436,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120084,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-start-response-timer-text-0x007be714.bin"
+        },
+        {
+          "name": "cordio_smp_act_cleanup_core_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action cleanup core source leaf",
+          "file_offset": 3696448,
+          "size": 60,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120096,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-cleanup-core-text-0x007be720.bin"
+        },
+        {
+          "name": "cordio_smp_act_cleanup_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action cleanup source leaf",
+          "file_offset": 3696508,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120156,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-cleanup-text-0x007be75c.bin"
+        },
+        {
+          "name": "cordio_smp_act_send_pairing_failed_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action send pairing failed source leaf",
+          "file_offset": 3696512,
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120160,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-send-pairing-failed-text-0x007be760.bin"
+        },
+        {
+          "name": "cordio_smp_act_pairing_failed_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action pairing failed source leaf",
+          "file_offset": 3696548,
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120196,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-pairing-failed-text-0x007be784.bin"
+        },
+        {
+          "name": "cordio_smp_act_security_request_timeout_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action security request timeout source leaf",
+          "file_offset": 3696584,
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120232,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-security-request-timeout-text-0x007be7a8.bin"
+        },
+        {
+          "name": "cordio_smp_act_pairing_cancel_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action pairing cancel source leaf",
+          "file_offset": 3696628,
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120276,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-pairing-cancel-text-0x007be7d4.bin"
+        },
+        {
+          "name": "cordio_smp_act_store_pin_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action store pin source leaf",
+          "file_offset": 3696652,
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120300,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-store-pin-text-0x007be7ec.bin"
+        },
+        {
+          "name": "cordio_smp_act_process_pairing_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action process pairing source leaf",
+          "file_offset": 3696690,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120338,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-process-pairing-alignment-0x007be812.bin"
+        },
+        {
+          "name": "cordio_smp_act_process_pairing_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action process pairing source leaf",
+          "file_offset": 3696692,
+          "size": 280,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120340,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-process-pairing-text-0x007be814.bin"
+        },
+        {
+          "name": "cordio_smp_act_authentication_request_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action authentication request source leaf",
+          "file_offset": 3696972,
+          "size": 78,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120620,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-authentication-request-text-0x007be92c.bin"
+        },
+        {
+          "name": "cordio_smp_act_confirm_calculate_one_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action confirm calculate one source leaf",
+          "file_offset": 3697050,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120698,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-confirm-calculate-one-alignment-0x007be97a.bin"
+        },
+        {
+          "name": "cordio_smp_act_confirm_calculate_one_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action confirm calculate one source leaf",
+          "file_offset": 3697052,
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120700,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-confirm-calculate-one-text-0x007be97c.bin"
+        },
+        {
+          "name": "cordio_smp_act_confirm_calculate_two_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action confirm calculate two source leaf",
+          "file_offset": 3697086,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120734,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-confirm-calculate-two-alignment-0x007be99e.bin"
+        },
+        {
+          "name": "cordio_smp_act_confirm_calculate_two_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action confirm calculate two source leaf",
+          "file_offset": 3697088,
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120736,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-confirm-calculate-two-text-0x007be9a0.bin"
+        },
+        {
+          "name": "cordio_smp_act_send_confirm_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action send confirm source leaf",
+          "file_offset": 3697098,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120746,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-send-confirm-alignment-0x007be9aa.bin"
+        },
+        {
+          "name": "cordio_smp_act_send_confirm_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action send confirm source leaf",
+          "file_offset": 3697100,
+          "size": 74,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120748,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-send-confirm-text-0x007be9ac.bin"
+        },
+        {
+          "name": "cordio_smp_act_verify_calculate_one_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action verify calculate one source leaf",
+          "file_offset": 3697174,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120822,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-verify-calculate-one-alignment-0x007be9f6.bin"
+        },
+        {
+          "name": "cordio_smp_act_verify_calculate_one_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action verify calculate one source leaf",
+          "file_offset": 3697176,
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120824,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-verify-calculate-one-text-0x007be9f8.bin"
+        },
+        {
+          "name": "cordio_smp_act_verify_calculate_two_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action verify calculate two source leaf",
+          "file_offset": 3697214,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120862,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-verify-calculate-two-alignment-0x007bea1e.bin"
+        },
+        {
+          "name": "cordio_smp_act_verify_calculate_two_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action verify calculate two source leaf",
+          "file_offset": 3697216,
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120864,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-verify-calculate-two-text-0x007bea20.bin"
+        },
+        {
+          "name": "cordio_smp_act_send_key_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action send key source leaf",
+          "file_offset": 3697226,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120874,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-send-key-alignment-0x007bea2a.bin"
+        },
+        {
+          "name": "cordio_smp_act_send_key_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action send key source leaf",
+          "file_offset": 3697228,
+          "size": 444,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8120876,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-send-key-text-0x007bea2c.bin"
+        },
+        {
+          "name": "cordio_smp_act_receive_key_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action receive key source leaf",
+          "file_offset": 3697672,
+          "size": 202,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121320,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-receive-key-text-0x007bebe8.bin"
+        },
+        {
+          "name": "cordio_smp_act_max_attempts_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action max attempts source leaf",
+          "file_offset": 3697874,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121522,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-max-attempts-alignment-0x007becb2.bin"
+        },
+        {
+          "name": "cordio_smp_act_max_attempts_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action max attempts source leaf",
+          "file_offset": 3697876,
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121524,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-max-attempts-text-0x007becb4.bin"
+        },
+        {
+          "name": "cordio_smp_act_attempt_received_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action attempt received source leaf",
+          "file_offset": 3697914,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121562,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-attempt-received-alignment-0x007becda.bin"
+        },
+        {
+          "name": "cordio_smp_act_attempt_received_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action attempt received source leaf",
+          "file_offset": 3697916,
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121564,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-attempt-received-text-0x007becdc.bin"
+        },
+        {
+          "name": "cordio_smp_act_notify_attempts_failure_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action notify attempts failure source leaf",
+          "file_offset": 3697924,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121572,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-notify-attempts-failure-text-0x007bece4.bin"
+        },
+        {
+          "name": "cordio_smp_act_notify_timeout_failure_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action notify timeout failure source leaf",
+          "file_offset": 3697936,
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121584,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-notify-timeout-failure-text-0x007becf0.bin"
+        },
+        {
+          "name": "cordio_smp_act_check_attempts_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action check attempts source leaf",
+          "file_offset": 3697948,
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121596,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-check-attempts-text-0x007becfc.bin"
+        },
+        {
+          "name": "cordio_smp_act_pairing_complete_source_alignment",
+          "function": "Generated zero padding aligning the Cordio SMP action pairing complete source leaf",
+          "file_offset": 3697994,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121642,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-cordio-smp-act-pairing-complete-alignment-0x007bed2a.bin"
+        },
+        {
+          "name": "cordio_smp_act_pairing_complete_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action pairing complete source leaf",
+          "file_offset": 3697996,
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121644,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-pairing-complete-text-0x007bed2c.bin"
+        },
+        {
+          "name": "cordio_smp_act_execute_source_text",
+          "function": "Authenticated Packetcraft Cordio SMP action execute source leaf",
+          "file_offset": 3698052,
+          "size": 160,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8121700,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-cordio-smp-act-execute-text-0x007bed64.bin"
         }
       ],
       "source_appended_boundary": 3523396

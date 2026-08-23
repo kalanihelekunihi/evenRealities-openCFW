@@ -204,13 +204,13 @@ class RuntimeFreeRTOSQueueSendFromISRTests(unittest.TestCase):
             "open_cfw_freertos_queue_copy_data_to_queue": 0x00441ED8,
             "open_cfw_freertos_queue_generic_send_from_isr": 0x00441952,
         })
-        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (165412, 3688808))
-        self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (145180, 3668576))
+        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (174816, 3698212))
+        self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (145208, 3668604))
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
-        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3688808, 3668576))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4467302, "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"))
-        self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4447070, "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"))
+        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3698212, 3668604))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4476706, "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"))
+        self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4447098, "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"))
 
 
 if __name__ == "__main__":

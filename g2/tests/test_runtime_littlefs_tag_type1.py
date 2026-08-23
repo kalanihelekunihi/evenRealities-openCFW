@@ -174,12 +174,12 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            165_412,
-            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
+            167_426,
+            "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
         ),
         "main_component": (
-            3_688_808,
-            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+            3_690_822,
+            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
         ),
         "boot_overlay": (
             662,
@@ -190,16 +190,16 @@ PROFILE_PINS = {
             "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
         ),
         "package": (
-            4_467_302,
-            "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f",
+            4_469_316,
+            "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058",
         ),
         "flash_plan": (
-            1_287_172,
-            "4d99c79858788bd41db79d4846d68186f1d0dac386e0e2f45a27f4f4c8eff161",
+            1_337_744,
+            "642d39802f988c3da5e108c97fdcff82102cfcdfffd75710bd6e0a3017f7758e",
         ),
         "package_report": (
             2_323,
-            "083ce49c5ce9638744982d34772e70d569ac6b2d155f9a32e85176dca05e91fb",
+            "61f0710b2087e55b5849ea254521b9b65c7b7d81ddaaa645803b59eaaa3475b7",
         ),
         "canonical_main_report": (
             2_694_051,
@@ -228,12 +228,12 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            145_180,
-            "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
+            145_208,
+            "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
         ),
         "main_component": (
-            3_668_576,
-            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+            3_668_604,
+            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
         ),
         "boot_overlay": (
             662,
@@ -244,12 +244,12 @@ PROFILE_PINS = {
             "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74",
         ),
         "package": (
-            4_447_070,
-            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
+            4_447_098,
+            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
         ),
         "flash_plan": (
-            640_188,
-            "4480ca9a4a4f237a477ccccdc9cb039f071fb2f6547298595e98a91098302a20",
+            836_433,
+            "a63772c778639dfcaf296985e64b3e643012f41c83a2900d9d06b68132b2e40f",
         ),
         "package_report": (
             2_322,
@@ -272,8 +272,8 @@ PROFILE_PINS = {
 
 LINUX_BUILD_ARTIFACT_PINS = {
     "flash_plan": (
-        640_188,
-        "4480ca9a4a4f237a477ccccdc9cb039f071fb2f6547298595e98a91098302a20",
+        836_433,
+        "a63772c778639dfcaf296985e64b3e643012f41c83a2900d9d06b68132b2e40f",
     ),
     "package_report": (
         2_322,
@@ -1396,7 +1396,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 package_report["unresolved_region_count"],
                 package_report["container_region_count"],
             ),
-            (1807, 2, 5),
+            (1890, 2, 5),
         )
         flash_plan = json.loads(artifacts["flash_plan"].read_text(encoding="utf-8"))
         self.assertEqual(flash_plan["package_sha256"], apple["package"][1])
@@ -1406,7 +1406,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 len(flash_plan["unresolved_flash_regions"]),
                 len(flash_plan["container_only_regions"]),
             ),
-            (1807, 2, 5),
+            (1890, 2, 5),
         )
 
     def test_dual_image_stock_callers_and_dependency_closure_are_exact(self) -> None:

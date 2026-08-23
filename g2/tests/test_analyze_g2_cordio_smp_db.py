@@ -55,7 +55,13 @@ class CordioSmpDbAuditTests(unittest.TestCase):
             3000,
         )
         self.assertEqual(report["readiness"]["linked_unresolved_symbols"], 0)
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        production = report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["live_functions"], 11)
+        self.assertEqual(production["compiled_leaf_bytes"], 698)
+        self.assertEqual(production["source_owned_bytes_added"], 712)
+        self.assertEqual(production["stock_bytes_replaced"], 2952)
+        self.assertIn("blocked", production["hardware_validation"])
 
 
 if __name__ == "__main__":

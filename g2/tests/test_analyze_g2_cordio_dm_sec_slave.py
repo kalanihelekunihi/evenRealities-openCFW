@@ -31,6 +31,12 @@ class DmSecSlaveTest(unittest.TestCase):
         )
         self.assertEqual(report["architecture"]["ltk_response_event"], 0x29)
         self.assertEqual(report["readiness"]["linked_unresolved_symbols"], 0)
+        self.assertTrue(report["production"]["production_routed"])
+        self.assertEqual(report["production"]["live_functions"], 3)
+        self.assertEqual(report["production"]["compiled_leaf_bytes"], 160)
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 164)
+        self.assertEqual(report["production"]["stock_bytes_replaced"], 148)
+        self.assertIn("blocked", report["production"]["hardware_validation"])
 
 
 if __name__ == "__main__":

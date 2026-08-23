@@ -231,30 +231,30 @@ LINUX_PATCH_SHA256 = (
 )
 LINUX_AGGREGATE = {
     "overlay": (
-        145_180,
-        "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
+        145_208,
+        "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
     ),
     "component": (
-        3_668_576,
-        "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+        3_668_604,
+        "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
     ),
     "package": (
-        4_447_070,
-        "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
+        4_447_098,
+        "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
     ),
 }
 
 STAGED_CONSUMER_PINS = {
-    MANIFEST: "694625a1a669ff02a9e5e6b4ae2c124bb4510daed8f497a2f620a12d187d62b1",
+    MANIFEST: "b5ce5592b4ba7c2e1d0c68edd4ecc1aee45141353356b284e3830659fad03d39",
     PROVENANCE: "c1bbb7d80e38a1ab18e7c71c03b89a891090509949e45a4db0f3224a927a1a99",
     AUDIT: "b483e5b1915f54e99e8aefd047ece54153aadc6df4af51cdc4ef1cf81cc983d0",
-    ROOT / "README.md": "696f8084285490ec404b5583884cd9b394f666b8769119b77c379b5fbd7158c2",
+    ROOT / "README.md": "3ed6f89765ba6d29c18e316f4d97aef91cc79105453a236e0987c077c055df6e",
     ROOT / "components/README.md": "a56e17276ef67bd063ba193a55d3c8ec7e524f09bde184b2b8f9420f0f3ebbf9",
     ROOT / "components/apollo_main/core_overlay/NOTICE.md": "139b2e7eeabb002c771d075d980f02e6bb5dd948b6cb9db7f12b97e64daf383a",
-    ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "27a4301a117b0b8305232ddd3d146a0dc17ed097b1fa28acfc065dd3b124d18e",
+    ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "b989b422586b2860a33670eb7642c3721e1d96fa545bafcc2111b05a0c121b31",
     ROOT / "third_party/nanopb/README.openCFW.md": "bd70ff8d92c38cad8bde2a4356f7d56f9b02994239ff09453f2f435b44fdb672",
     ROOT / "docs/memory-map.md": "6087dd8bd48a764e15e623b56298c16e40992a6aa3cd445319bff308d078f859",
-    ROOT / "docs/source-coverage.md": "ff54eb4982c421214f18ec4e6891151d9d0b8b38145989a783ddd44991eef5bc",
+    ROOT / "docs/source-coverage.md": "b3f377baeb0c386a3af36b8c26a00826e112d0e154c2489744b9b8e4bf868f56",
     ROOT / "docs/upstream-inventory.md": "f9ad283c729e6ae136ab6846d9d6134ff16e4280d3019f6deb2c3b83921c73e9",
     ROOT / "docs/linux-reproducible-build.md": "42a08943723dfb9c1a531601469a94dc15320286c44f0aa8c55d42c05c1156c3",
 }
@@ -857,7 +857,7 @@ class NanopbDecodeSvarintProductionTests(unittest.TestCase):
                 len(overlay["patch_sites"]),
                 len(overlay["relocated_leaves"]),
             ),
-            (947, 886, 378),
+            (975, 914, 406),
         )
 
         self.assertEqual(overlay["functions"].count(PRODUCTION_FUNCTION), 1)

@@ -1,0 +1,13 @@
+#ifndef OPEN_CFW_CORDIO_SMP_ACT_HOST_H
+#define OPEN_CFW_CORDIO_SMP_ACT_HOST_H
+
+struct open_cfw_smp_act_control_block;
+struct open_cfw_smp_act_config;
+
+extern struct open_cfw_smp_act_control_block open_cfw_test_smp_act_control;
+extern struct open_cfw_smp_act_config open_cfw_test_smp_act_config;
+
+#define OPEN_CFW_SMP_ACT_CONTROL_BLOCK open_cfw_test_smp_act_control
+#define OPEN_CFW_SMP_ACT_CONFIG open_cfw_test_smp_act_config
+
+#endif

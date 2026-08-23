@@ -1,6 +1,6 @@
 # Cordio DM master-security source recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-23
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -37,5 +37,14 @@ python3 tools/analyze_g2_cordio_dm_sec_master.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production replacement remains zero. The next evidence-led target is
-`dm_conn_master.c`.
+Production now routes all three functions through
+`components/apollo_main/core_overlay/cordio_dm_sec_roles.c`. Three guarded
+full-span redirects replace 144 stock code bytes with 172 compiled Thumb bytes
+and two alignment bytes. Host tests cover missing-CCB behavior, temporary
+security state, non-LTK selection, zero Rand/EDIV encryption start, pair-request
+masking, complete 26-byte LTK transfer, allocation failure, and handler routing.
+The analyzer authenticates the stock closure, exact source identity, seven
+relocations, leaf outputs, and redirects. No hardware was accessed or flashed;
+master-role encryption timing, controller message ownership, disconnect races,
+and peer interoperability are blocked by unavailable authorized G2/EM9305
+physical evidence. The next evidence-led DM target is `dm_conn_master.c`.

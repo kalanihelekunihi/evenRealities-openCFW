@@ -77,16 +77,16 @@ PROFILE_PINS = {
             "0fd3ac0a8497cff70f6886c0901274ed0"
         ),
         "overlay": (
-            165_412,
-            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
+            167_426,
+            "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
         ),
         "component": (
-            3_688_808,
-            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+            3_690_822,
+            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
         ),
         "package": (
-            4_467_302,
-            "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f",
+            4_469_316,
+            "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058",
         ),
     },
     "linux-clang": {
@@ -102,16 +102,16 @@ PROFILE_PINS = {
             "06efa4c0bdbfa7a8135b4810f09f41d1"
         ),
         "overlay": (
-            145_180,
-            "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
+            145_208,
+            "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
         ),
         "component": (
-            3_668_576,
-            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+            3_668_604,
+            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
         ),
         "package": (
-            4_447_070,
-            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
+            4_447_098,
+            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
         ),
     },
 }
@@ -496,9 +496,9 @@ const char *vTaskName(void);
 
     def test_registration_placement_patch_and_whole_component_ingress(self) -> None:
         config = json.loads(OVERLAY.read_text(encoding="utf-8"))
-        self.assertEqual(len(config["functions"]), 947)
-        self.assertEqual(len(config["patch_sites"]), 886)
-        self.assertEqual(len(config["relocated_leaves"]), 378)
+        self.assertEqual(len(config["functions"]), 950)
+        self.assertEqual(len(config["patch_sites"]), 889)
+        self.assertEqual(len(config["relocated_leaves"]), 381)
         self.assertEqual(config["functions"].count(ADAPTER_FUNCTION), 1)
         self.assertEqual(config["functions"].count(FUNCTION), 1)
 
@@ -726,7 +726,7 @@ const char *vTaskName(void);
             PROFILE_PINS["linux-clang"]["component"],
         )
         regions = component["regions"]
-        self.assertEqual(len(regions), 1745)
+        self.assertEqual(len(regions), 1818)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(left["file_offset"] + left["size"], right["file_offset"])
@@ -754,12 +754,12 @@ const char *vTaskName(void);
             accounting[status] = (len(selected), sum(item["size"] for item in selected))
         self.assertEqual(accounting, {
             "container_only": (1, 32),
-    "generated_alignment": (182, 366),
-    "generated_source_entry_replacement": (842, 118_700),
+    "generated_alignment": (190, 382),
+    "generated_source_entry_replacement": (858, 119_962),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (265, 3_404_306),
-    "source_compiled": (437, 164_764),
+    "official_blob": (268, 3_403_044),
+    "source_compiled": (455, 166_412),
         })
         package = manifest["package"]
         self.assertEqual(

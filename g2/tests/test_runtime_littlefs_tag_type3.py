@@ -209,12 +209,12 @@ PRODUCTION_PROFILES = {
         "main_patch": "e7f29abd00bf00bf",
         "boot_patch": "23f0acbd00bf00bf",
         "main_overlay": (
-            165_412,
-            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
+            167_426,
+            "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
         ),
         "main_component": (
-            3_688_808,
-            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
+            3_690_822,
+            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
         ),
         "boot_overlay": (
             662,
@@ -225,8 +225,8 @@ PRODUCTION_PROFILES = {
             "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
         ),
         "package": (
-            4_467_302,
-            "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f",
+            4_469_316,
+            "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058",
         ),
     },
     "linux-clang": {
@@ -235,12 +235,12 @@ PRODUCTION_PROFILES = {
         "main_patch": "e8f228b900bf00bf",
         "boot_patch": "23f0acbd00bf00bf",
         "main_overlay": (
-            145_180,
-            "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
+            145_208,
+            "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
         ),
         "main_component": (
-            3_668_576,
-            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
+            3_668_604,
+            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
         ),
         "boot_overlay": (
             662,
@@ -251,8 +251,8 @@ PRODUCTION_PROFILES = {
             "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74",
         ),
         "package": (
-            4_447_070,
-            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
+            4_447_098,
+            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
         ),
     },
 }

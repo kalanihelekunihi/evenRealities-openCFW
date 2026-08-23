@@ -12,6 +12,10 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+TOOLS = str(ROOT / "tools")
+if TOOLS not in sys.path:
+    sys.path.insert(0, TOOLS)
+from cordio_dm_sec_roles_production import audit as audit_production
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 LOAD_BASE = 0x437FE0
 IMAGE_BYTES = 3_523_396
@@ -146,7 +150,7 @@ def analyze(image_path: Path = IMAGE) -> dict[str, Any]:
             "valid_non_vacuous_closure_profiles": 2,
             "linked_unresolved_symbols": 0,
         },
-        "production": {"stock_bytes_replaced": 0, "source_owned_bytes_added": 0},
+        "production": audit_production("slave"),
     }
 
 

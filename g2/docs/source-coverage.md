@@ -6230,12 +6230,18 @@ alignment data. Every linked function is now bounded, named, source-mapped,
 and caller-closed. `SmpDmGetLtk` is the sole source API without a linked body
 and is classified dead-stripped.
 
-Identification for the linked translation unit is 20/20 functions (100%).
-Recreation and production integration remain 0/20: stock continues to be cut
-forward while the authenticated Packetcraft-r20/Ambiq-cleanup semantic hybrid
-serves as the build and behavior oracle. This raises identified provenance
-without changing package-level source/generated ownership or the global
-cut-forward percentage.
+Identification, recreation, and production integration are now 20/20 linked
+functions (100%). Twenty guarded redirects replace all 3,076 stock bytes with
+20 source equivalents; the private packet-length helper brings the emitted
+surface to 21 leaves / 2,146 compiled bytes plus 24 alignment bytes. The
+production adapter preserves the authenticated Packetcraft-r20 behavior and
+Ambiq stale-AES cleanup while pinning the G2 SRAM and provider ABI.
+
+Canonical Apple overlay/component/package outputs are
+`170308/3693704/4472198` bytes with SHA-256 `72d355eb...c3bc`,
+`bb4d2ee1...08f3`, and `aa849dcd...9202`. No hardware was accessed. Pairing,
+reconnect, peer interoperability, timing/race, and stale-queue behavior on a
+real G2/EM9305 remain blocked by unavailable authorized physical evidence.
 
 ## Cordio SMP Secure Connections main
 
@@ -7230,9 +7236,13 @@ calls, retained path/diagnostics, and selector-gated enable behavior are
 pinned fail-closed. No direct, stored, or `B.W` strict-interior ingress and no
 stored entry pointer exists.
 
-Historical source inventory is unavailable and no clean-room source is
-present in `overlay.json`, so the stock package retains all 172 bytes and
-OpenCFW claims zero ownership.
+Historical source inventory is unavailable, so OpenCFW uses independently
+authored `watchdog.c`. Two strict-relocation leaves contribute 28 source bytes;
+guarded redirects generator-own all 140 former stock body bytes, and the
+32-byte diagnostics pool remains official compatibility data. Host behavior,
+Thumb compilation, analyzer routing, Apple component, and package verification
+are green. Physical watchdog/reset-cause evidence is blocked by unavailable
+authorized hardware; no hardware or flash operation was performed.
 
 ## Current first-party eAT audio-control increment
 
@@ -7872,3 +7882,138 @@ in-place), 121,098 generated patch-site bytes, 32 generated wrapper bytes, and
 3,402,084 opaque base bytes, totaling 3,688,308 bytes. This closes one platform
 software-gap row; it does not close the remaining G2 capability ledger or
 provide on-device evidence.
+
+## Current system-monitor source increment
+
+The Apple profile now source-owns the complete 510-byte
+`system_monitor_common_data_handler` stock body through a 650-byte clean-room
+leaf at runtime `0x007BC964`. The source preserves descriptor ingress, the
+six-byte peer-reboot sentinel, display/app quiescence, the eleven-delay bound,
+master-side scheduler-idle dispatch, and the dashboard/application/onboarding/
+terminal/lens-status reset sequence. Its 43 reviewed relocations bind only
+bounded retained or already source-owned providers. A documented safety
+correction rejects NULL and short records before comparing the sentinel.
+
+Apollo-main accounting is 166,272 source-owned bytes (including 182 in-place),
+122,144 generated patch-site bytes, 32 generated wrapper bytes, and 3,401,038
+opaque base bytes, totaling 3,689,486 bytes. The package is 4,467,980 bytes
+with SHA-256 `a643e0fdf5d90b8f34b9fe5b3833d239e27bd28dd2d18f7bc6163182c99e11e9`.
+This closes the software row only; paired-device timing and visible-state
+validation are blocked by unavailable authorized physical evidence.
+
+## Current health source increment
+
+The Apple profile now source-owns the complete four-function `health.c`
+software object. Four strict-relocation leaves totaling 198 compiled bytes
+replace 504 authenticated stock body bytes and preserve lazy mutex creation,
+forever lock, conditional unlock, event-zero provider/display/service routing,
+and event-five command acceptance. EasyLogger-only diagnostics are excluded
+from the functional reconstruction.
+
+Apollo-main accounting is now 166,474 source-owned bytes (including 182
+in-place), 122,648 generated patch-site bytes, 32 generated wrapper bytes,
+122,826 replaced stock-function bytes, and 3,400,534 opaque base bytes, totaling
+3,689,688 bytes. The package is 4,468,182 bytes with SHA-256
+`0c1548c6f4b829acc62fcd332fb2c441f2774c4de1be253ea721a4de8eae57d4`.
+Physical mutex scheduling, role/display gating, record delivery, and visible
+health behavior remain explicitly blocked by unavailable authorized hardware.
+
+## Current Cordio DM LE Secure Connections source increment
+
+The Apple profile now source-owns all seven live `dm_sec_lesc.c` entries from
+the authenticated Packetcraft r20.05c Apache-2.0 behavior. The overlay adds 278
+compiled bytes and six alignment bytes; seven generated redirects replace 222
+stock bytes. Four public APIs not linked into G2 remain configuration
+exclusions rather than source-coverage gaps.
+
+Apollo-main accounting is now 166,758 source-owned bytes (including 182
+in-place), 122,870 generated patch-site bytes, 32 wrapper bytes, 123,048
+replaced stock-function bytes, and 3,400,312 opaque base bytes, totaling
+3,689,972 bytes. The package is 4,468,466 bytes with SHA-256
+`eb2d45acb2419ec4ec92ddfdb7e54838404a626eb150d8ee7547b35b05662985`.
+Pairing/controller timing and peer interoperability remain blocked by
+unavailable authorized hardware.
+
+## Current Cordio DM security-core source increment
+
+The Apple profile now source-owns all eight live `dm_sec.c` entries from the
+authenticated Packetcraft r20.05c Apache-2.0 behavior. The overlay adds 506
+compiled bytes and six alignment bytes; eight generated redirects replace 462
+stock bytes. Four public APIs not linked into G2 remain configuration
+exclusions rather than source-coverage gaps.
+
+Apollo-main accounting is now 167,270 source-owned bytes (including 182
+in-place), 123,332 generated patch-site bytes, 32 wrapper bytes, 123,510
+replaced stock-function bytes, and 3,399,850 opaque base bytes, totaling
+3,690,484 bytes. The package is 4,468,978 bytes with SHA-256
+`edd49b59043320fa1abfcbdc202eb1b03b575c887c500829205fa6af13ab1c5b`.
+Controller timing, pool pressure, disconnect races, callback ordering, and peer
+interoperability remain blocked by unavailable authorized hardware.
+
+## Current Cordio DM security-role source increment
+
+The Apple profile now source-owns all three live `dm_sec_slave.c` and all three
+live `dm_sec_master.c` entries from authenticated Packetcraft r20.05c
+Apache-2.0 behavior. The overlay adds 332 compiled bytes and six alignment
+bytes; six generated redirects replace 292 stock bytes.
+
+Apollo-main accounting is now 167,608 source-owned bytes (including 182
+in-place), 123,624 generated patch-site bytes, 32 wrapper bytes, 123,802
+replaced stock-function bytes, and 3,399,558 opaque base bytes, totaling
+3,690,822 bytes. The package is 4,469,316 bytes with SHA-256
+`39a4702cbb7e9a9ec706f9a241e096c06e98295323421503a066e1ac8194d975`.
+Role-specific controller timing, message ownership, disconnect races, callback
+behavior, and peer interoperability remain blocked by unavailable authorized
+hardware.
+
+## Current Cordio SMP database source increment
+
+The Apple profile now source-owns all eleven linked `smp_db.c` entries from
+authenticated Packetcraft r20.05c Apache-2.0 definitions while preserving the
+G2 ten-record override and r20 database-service event. The overlay adds 698
+compiled bytes and 14 alignment bytes; eleven generated redirects replace
+2,952 stock bytes. The two upstream removal APIs absent from the linked image
+remain proven dead-stripped configuration exclusions.
+
+Apollo-main accounting is now 168,320 source-owned bytes (including 182
+in-place), 126,576 generated patch-site bytes, 32 wrapper bytes, 126,754
+replaced stock-function bytes, and 3,396,606 opaque base bytes, totaling
+3,691,534 bytes. The package is 4,470,028 bytes with SHA-256
+`d563e56871dbd2dc4671ea364deae24b520984d71fa171610e1e00b50ac86b4b`.
+Repeated-pairing timing, WSF scheduling, controller races, and peer
+interoperability remain blocked by unavailable authorized hardware.
+
+## Current Cordio SMP Secure Connections main source increment
+
+The Apple profile now source-owns all eighteen linked `smp_sc_main.c` entries
+from authenticated Packetcraft r20.05c Apache-2.0 behavior. The overlay adds
+2,278 compiled text bytes plus 452 bytes of event-string rodata and alignment
+closure; eighteen generated redirects replace 2,626 stock bytes. Production
+retains the recovered G2 control-block, SC-record, configuration-pointer,
+timer, state-machine, and crypto-provider ABIs.
+
+Apollo-main accounting is now 173,220 source-owned bytes (including 182
+in-place), 132,278 generated patch-site bytes, 32 wrapper bytes, 132,456
+replaced stock-function bytes, and 3,390,904 opaque base bytes, totaling
+3,696,434 bytes. The package is 4,474,928 bytes with SHA-256
+`a79d1096c53049f8f38c4d565718476a4375e66b54c01dcdf510f43d8f33642a`.
+Controller and peer validation for public-key, DH-check, passkey, OOB,
+reconnect, and repeated-attempt paths remains blocked by unavailable authorized
+physical hardware.
+
+## Current Cordio SMP common-action source increment
+
+The Apple profile now source-owns all 25 linked `smp_act.c` definitions from
+authenticated Packetcraft r20.05c Apache-2.0 behavior. Twenty-four relocated
+leaves and one exact two-byte in-place leaf contribute 1,758 compiled bytes and
+20 alignment bytes; the generated redirects plus in-place placement replace
+all 2,924 authenticated stock function bytes.
+
+Apollo-main accounting is now 175,000 source-owned bytes (including 184 in
+place), 135,200 generated patch-site bytes, 32 wrapper bytes, 135,380 replaced
+stock-function bytes, and 3,387,980 opaque base bytes, totaling 3,698,212
+bytes. The package is 4,476,706 bytes with SHA-256
+`26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058`.
+Legacy and Secure Connections pairing, key distribution, timeout,
+cancellation, repeated-attempt, and peer-interoperability validation remains
+blocked by unavailable authorized G2/EM9305 physical hardware.

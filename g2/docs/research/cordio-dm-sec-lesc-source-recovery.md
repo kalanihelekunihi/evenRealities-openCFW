@@ -1,6 +1,6 @@
 # Cordio DM LE Secure Connections source recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-23
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -38,6 +38,33 @@ SHA-256
 Its fifteen inner hashes cover all 11 source functions, 26 build inputs, 18
 provider seams, and two live Os/O1 zero-unresolved links. It excludes firmware,
 licensed source/header bytes, objects, ELFs, disassembly, and caches.
+
+## Production admission
+
+`components/apollo_main/core_overlay/cordio_dm_sec_lesc.c` now routes every
+live entry. Seven guarded full-span redirects replace the 222 authenticated
+stock bytes with seven independently compiled Thumb leaves totaling 278 bytes,
+plus six alignment bytes. Ten strict relocations bind only to the retained WSF
+buffer/message, ECC, SMP, and Calc128 seams plus the already source-owned
+memory-copy leaf. The retained three-word function interface still reaches the
+handler through the patched stock entry, and component ID 8 is initialized to
+that authenticated interface.
+
+Host tests cover both message events, OOB buffer lifetime and copied values,
+ECC generation, 96-byte key set/get, allocation failure, valid/invalid numeric
+comparison responses, six-digit formatting, and interface registration. The
+target gate proves exactly seven global text symbols. The four public functions
+not present in G2 remain documented dead-stripped configuration exclusions;
+they are not runtime gaps.
+
+Canonical Apple overlay/component/package identities are
+`166576/3689972/4468466` bytes with SHA-256
+`1f5c6afeb137b90b18d8feb1378047bc38393525eff6926c26bbe33847fd1cff`,
+`9ca58f6db1a98b7604aa86b4f29ad827ba4c7770d93ad71441c0b421830e7ff2`, and
+`eb2d45acb2419ec4ec92ddfdb7e54838404a626eb150d8ee7547b35b05662985`.
+No hardware was accessed or flashed. Live pairing, controller-event timing,
+buffer-pool pressure, disconnect races, and peer interoperability remain
+explicitly blocked by unavailable authorized G2/EM9305 physical evidence.
 
 ```sh
 python3 tools/analyze_g2_cordio_dm_sec_lesc.py --json
