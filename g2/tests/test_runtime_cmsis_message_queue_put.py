@@ -125,14 +125,14 @@ class RuntimeCmsisMessageQueuePutTests(unittest.TestCase):
         self.assertEqual((linux["size"], linux["sha256"], linux["offset"]), (144, "b21783a89755996684ed2a5ef1bb5cf14e6e7d848f47072efb462751db5b2de7", 136160))
         patch = next(item for item in config["patch_sites"] if item["target_function"] == "open_cfw_cmsis_message_queue_put")
         self.assertEqual((patch["runtime_address"], patch["expected_size"]), (0x00449ABE, 126))
-        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (164536, 3687932))
-        self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (144266, 3667662))
+        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (165412, 3688808))
+        self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (145180, 3668576))
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         region = next(item for item in main["regions"] if item["name"] == "apollo_cmsis_message_queue_put_source_leaf")
         self.assertEqual((region["file_offset"], region["size"], region["target_address"]), (3657680, 144, 8081328))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4466426, "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"))
-        self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4446156, "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4467302, "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"))
+        self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4447070, "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"))
 
 
 if __name__ == "__main__":

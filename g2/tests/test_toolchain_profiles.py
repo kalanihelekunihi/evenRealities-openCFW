@@ -524,6 +524,83 @@ class ResolveLeafProfileRecordTests(unittest.TestCase):
         )
         self.assertIn("other-clang", leaf["toolchain_profiles"])
 
+    def test_record_preserves_external_prel_target_and_repairs_local_closure_target(
+        self,
+    ) -> None:
+        external = {
+            "function": "external_prel_leaf",
+            "toolchain": {
+                "reviewed_version_prefix": "Apple clang version 21.0.0",
+                "target": "arm-none-eabi",
+                "flags": [],
+            },
+            "expected": {
+                "size": 4,
+                "sha256": "a" * 64,
+                "alignment": 4,
+                "offset": 0,
+                "unrelocated_sha256": "b" * 64,
+            },
+            "relocations": [],
+        }
+        report = {
+            "relocated_leaves": [
+                {
+                    "extraction": {"function": "external_prel_leaf"},
+                    "pins": {
+                        "size": 4,
+                        "sha256": "c" * 64,
+                        "alignment": 4,
+                        "offset": 8,
+                        "unrelocated_sha256": "d" * 64,
+                        "relocations": [
+                            {
+                                "offset": 0,
+                                "type": "R_ARM_THM_MOVW_PREL_NC",
+                                "symbol": "retained_object",
+                                "symbol_type": "STT_NOTYPE",
+                                "target_address": 0x20000000,
+                            }
+                        ],
+                    },
+                }
+            ]
+        }
+        data = {"relocated_leaves": [external]}
+        apollo_overlay.record_leaf_profile_pins(
+            data,
+            "linux-clang",
+            "Homebrew clang version 22.1.8",
+            report,
+        )
+        recorded = external["toolchain_profiles"]["linux-clang"]
+        self.assertEqual(
+            recorded["relocations"][0]["target_address"],
+            0x20000000,
+        )
+
+        closure = self._canonical_leaf()
+        closure["closure"]["rodata"]["symbols"] = [
+            {"name": "local_table", "offset": 0, "size": 4}
+        ]
+        closure["toolchain_profiles"]["linux-clang"]["closure"]["rodata"][
+            "symbols"
+        ] = [{"name": "local_table", "offset": 0, "size": 4}]
+        closure["toolchain_profiles"]["linux-clang"]["relocations"] = [
+            {
+                "offset": 0,
+                "type": "R_ARM_THM_MOVW_PREL_NC",
+                "symbol": "local_table",
+                "target_address": 0x12345678,
+            }
+        ]
+        effective = apollo_overlay.resolve_leaf_profile(
+            closure,
+            "linux-clang",
+            record=True,
+        )
+        self.assertNotIn("target_address", effective["relocations"][0])
+
     def test_record_rejects_malformed_profile_structure(self) -> None:
         cases = (
             (
@@ -662,26 +739,26 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 164536,
+                "overlay_size": 165412,
                 "overlay_sha256": (
-                    "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
+                    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
                 ),
-                "component_size": 3687932,
+                "component_size": 3688808,
                 "component_sha256": (
-                    "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
+                    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
                 ),
             },
         )
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"],
             {
-                "overlay_size": 144266,
+                "overlay_size": 145180,
                 "overlay_sha256": (
-                    "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9"
+                    "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57"
                 ),
-                "component_size": 3667662,
+                "component_size": 3668576,
                 "component_sha256": (
-                    "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"
+                    "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
                 ),
             },
         )
@@ -691,15 +768,15 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
                 manifest["package"]["expected_sha256"],
             ),
             (
-                4466426,
-                "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
+                4467302,
+                "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f",
             ),
         )
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4446156,
-                "expected_sha256": "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
+                "expected_size": 4447070,
+                "expected_sha256": "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
             },
         )
 

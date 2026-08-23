@@ -290,13 +290,13 @@ EXPECTED_FUNCTION_OFFSETS = {
 }
 EXPECTED_AGGREGATE = {
     "main": {
-        "overlay_size": 164_536,
+        "overlay_size": 165_412,
         "overlay_sha256": (
-            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
+            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
         ),
-        "component_size": 3_687_932,
+        "component_size": 3_688_808,
         "component_sha256": (
-            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
+            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
         ),
         "text_size": 109_592,
         "rodata_size": 3_996,

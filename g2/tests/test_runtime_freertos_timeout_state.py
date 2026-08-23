@@ -897,12 +897,12 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                164_536,
+                165_412,
                 (
-                    "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
+                    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
                 ),
-                937,
-                877,
+                943,
+                882,
             ),
         )
         component = self.production["component"]
@@ -920,15 +920,15 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 )
             },
             {
-                "size": 3_687_932,
+                "size": 3_688_808,
                 "sha256": (
-                    "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
+                    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
                 ),
-                "generated_patch_site_bytes": 120_792,
-                "replaced_stock_function_bytes": 120_970,
-                "source_owned_bytes": 164_718,
+                "generated_patch_site_bytes": 121_494,
+                "replaced_stock_function_bytes": 121_672,
+                "source_owned_bytes": 165_594,
                 "source_owned_in_place_bytes": 182,
-                "opaque_base_bytes": 3_402_390,
+                "opaque_base_bytes": 3_401_688,
             },
         )
 
@@ -942,15 +942,15 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                     "g2-openCFW-s200_v2.2.6.10-core-source."
                     "evenota.bin"
                 ),
-                "expected_size": 4_466_426,
+                "expected_size": 4_467_302,
                 "expected_sha256": (
-                    "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"
+                    "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_446_156,
+                        "expected_size": 4_447_070,
                         "expected_sha256": (
-                            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"
+                            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"
                         ),
                     },
                 },
@@ -962,8 +962,9 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
             "freertos_task_increment_tick_source_replacement",
             (
                 "opaque_between_freertos_task_increment_tick_and_"
-                "place_on_event_list"
+                "task_switch_context"
             ),
+            "freertos_task_switch_context_source_replacement",
             "freertos_task_place_on_event_list_source_replacement",
             (
                 "opaque_between_freertos_task_place_on_event_list_and_"
@@ -1003,11 +1004,17 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                     "generated_source_entry_replacement",
                 ),
                 "opaque_between_freertos_task_increment_tick_and_"
-                "place_on_event_list": (
+                "task_switch_context": (
                     119_230,
-                    228,
+                    22,
                     0x0045_519E,
                     "official_blob",
+                ),
+                "freertos_task_switch_context_source_replacement": (
+                    119_252,
+                    206,
+                    0x0045_51B4,
+                    "generated_source_entry_replacement",
                 ),
                 "freertos_task_place_on_event_list_source_replacement": (
                     119_458,

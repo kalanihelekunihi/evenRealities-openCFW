@@ -51,36 +51,36 @@ RELOCATIONS = [
     (30, 47, "open_cfw_retained_freertos_critical_nesting"),
     (34, 48, "open_cfw_retained_freertos_critical_nesting"),
     (42, 10, "open_cfw_retained_freertos_start_first_task"),
-    (46, 10, "open_cfw_retained_freertos_task_switch_context"),
+    (46, 10, "open_cfw_freertos_task_switch_context"),
     (50, 10, "open_cfw_retained_freertos_task_exit_error"),
 ]
 
 UNDEFINED = [
+    "open_cfw_freertos_task_switch_context",
     "open_cfw_retained_freertos_critical_nesting",
     "open_cfw_retained_freertos_start_first_task",
     "open_cfw_retained_freertos_system_handler_priority",
     "open_cfw_retained_freertos_task_exit_error",
-    "open_cfw_retained_freertos_task_switch_context",
     "open_cfw_retained_freertos_timer_interrupt_setup",
 ]
 
 TARGET_PINS = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (1484, "a7accfc2d0e6f3b92c7705cd61e7a233f45a5e35c091f9764841ddd03c64e790"),
+        "object": (1476, "e25055c8d089f9fadd723fc6602e2903b6732d205b72aec529fb190d52fcc52c"),
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
-        "object": (1464, "2fb45e4c57f9fedbdbfb15813a891c2ecca7c256b0f387c39988785ad6304cf7"),
+        "object": (1456, "57a7bc93f879c18de6de0864ef866181ad440ec71d4802653cae8449e13150a7"),
     },
 }
 
 FUNCTION_PIN = (58, 4, "c02d239a4f345d45184ae3f9720abd43d28fff09c6b8ae5e51db75940cf51a88")
 LOCAL_PINS: dict[Path, tuple[int, str]] = {
-    SOURCE: (1409, "9eb813ef59b4cedb5f7626b61f5d82f027e215ccf39b0b7d10677728e4c853ca"),
+    SOURCE: (1349, "d9c81e493675b2ef0e1e73fd0ed6de7618af57facf46b09689d288982e00b2c2"),
     HEADER: (719, "9716209bc68631c39e726d58bb20e9be122c63112fb399b270d2699bef6b8c33"),
-    FIXTURE: (2300, "5db8911757423bd30371c179db31d36664cb77ba3aa5fc5c0d353c369caec68b"),
-    AUDIT: (2675, "25a8ae992cb386370f20b3a4be7a86053e4b0061e63741ed2e4ddfc243af6ef3"),
+    FIXTURE: (2291, "a9f9e594ac2b50feb22d2d74650e95f096df85a1fd6f9e1367bd8f67d5c91020"),
+    AUDIT: (2857, "18b9dd0cb5266703158d7b9d66e7bdfe09ba45c5bc747b7e25e68218360c0fbe"),
 }
 
 
@@ -211,15 +211,14 @@ class FreeRTOSPortStartSchedulerTests(unittest.TestCase):
         self.assertEqual(self.target["relocations"], RELOCATIONS)
         self.assertEqual(self.target["undefined"], UNDEFINED)
 
-    def test_artifacts_are_pinned_and_production_excluded(self) -> None:
+    def test_artifacts_are_pinned_and_production_routed(self) -> None:
         for path, (size, digest) in LOCAL_PINS.items():
             body = path.read_bytes()
             self.assertEqual((len(body), hashlib.sha256(body).hexdigest()), (size, digest))
-        forbidden = (SOURCE.name, HEADER.name, FUNCTION)
-        for path in (OVERLAY, MANIFEST, MAKEFILE):
-            text = path.read_text()
-            for token in forbidden:
-                self.assertNotIn(token, text)
+        self.assertIn(str(SOURCE.relative_to(ROOT)), OVERLAY.read_text())
+        self.assertIn(FUNCTION, OVERLAY.read_text())
+        self.assertIn("freertos-scheduler-start-core-closure", MAKEFILE.read_text())
+        self.assertIn("freertos_port_start_scheduler_source_text", MANIFEST.read_text())
 
 
 if __name__ == "__main__":

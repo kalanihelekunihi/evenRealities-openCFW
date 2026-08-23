@@ -133,9 +133,19 @@ table, the two formatter cases, and the project logging adapter. The exact
 BSD-3-Clause source oracle and provenance are recorded under
 `third_party/goodix-gr551x-app-error/`.
 
-The handler is not production-routed. Before admission, OpenCFW should decide
-whether to preserve the stock unbounded-table behavior for compatibility or
-add a bounded unknown-code fallback as an intentional safety correction.
+The handler is production-routed under the reviewed Apple Clang profile. The
+254-byte clean-room leaf replaces the 178-byte stock body through one guarded
+`B.W` redirect, retains the authenticated 43-row table and stock strings, and
+binds its eight calls to the recovered memset, formatter, and EasyLogger
+providers. Unknown API-return codes use the table's `Application error.` row
+after a bounded 43-entry search; this is the reviewed safety correction to the
+stock unbounded walk.
+
+Host tests cover known and unknown API-return codes plus the Boolean assertion
+and asynchronous-filter paths. A freestanding Thumb build proves that the
+candidate contributes exactly one global text leaf, and the analyzer pins the
+candidate, relocated leaf, provider relocations, stock body, redirect, and
+aggregate component/package identities. No hardware was accessed or flashed.
 
 ## Reproduction
 

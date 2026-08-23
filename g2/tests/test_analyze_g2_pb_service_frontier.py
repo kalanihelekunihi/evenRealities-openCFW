@@ -15,6 +15,9 @@ SPEC.loader.exec_module(MODULE)
 class AnalyzeG2PbServiceFrontierTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        corpus = MODULE.CORPUS
+        if not (corpus / "SHA256SUMS").is_file():
+            raise unittest.SkipTest("authenticated Apollo corpus unavailable")
         cls.report = MODULE.analyze()
 
     def test_census(self) -> None:

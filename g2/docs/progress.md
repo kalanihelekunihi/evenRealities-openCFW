@@ -2219,7 +2219,7 @@ and the sole direct call at `0x0046CA64` reaches the leaf through the
 redirect. Routing required extending the reviewed rodata local-name class in
 `tools/apollo_overlay.py` to admit Clang `.L__const.<function>.<variable>`
 constant-aggregate locals alongside the existing `.L.str[.N]` string class.
-Apple Clang 21 overlay/component/package pins are `164536/3687932/4466426`
+Apple Clang 21 overlay/component/package pins are `164912/3688308/4466802`
 (SHA-256 `a437e33e…`, `4fdb5af5…`, `cc1642fd…`). The leaf and redirect are
 gated `apple-clang`; linux-clang leaf pins await Linux toolchain
 regeneration. Ownership: 584 replaced stock body bytes. See
@@ -3237,6 +3237,27 @@ This closes the bounded scheduler-selection and G2 external trace-ring
 algorithms without changing production. Atomic kernel/port admission and
 on-device preemption, stack-overflow, trace-concurrency, timer, and sleep
 validation remain mandatory.
+
+## FreeRTOS scheduler-start core is production-routed
+
+The three scheduler entries are now admitted as one production closure. Stock
+`vTaskStartScheduler`, `xPortStartScheduler`, and `vTaskSwitchContext` redirect
+to four strict-relocation leaves: the three recovered V10.5.1/Apollo
+algorithms plus a non-returning source fail-stop. This closes the prior
+software admission gap without weakening the recovered G2 globals, idle-task
+memory, trace-ring, priority, exception-priority, timer, first-task, or stack
+guard contracts.
+
+Apple Clang 21 reproduces overlay/component/package roots
+`165412/3688808/4467302` and package SHA-256
+`88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f`.
+The recorded Linux Clang 22.1.8 profile reproduces
+`145180/3668576/4447070` and package SHA-256
+`be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25`.
+The platform ledger therefore moves this row to implemented-in-source while
+tracking live preemption, exception return, overflow, trace concurrency, and
+STIMER behavior as a separate hardware-dependent row. That row is blocked by
+unavailable authorized G2/probe evidence; it is not treated as validated.
 
 ## LVGL Ambiq subtree provenance and global ABI are closed
 
@@ -5374,3 +5395,40 @@ focused tests passing). The corpus index grew to 1,950 files / 44
 manifests (EM9305 cluster-recovery lane). No build profile, ownership
 number, or package hash changed; all controller components remain
 retained behind their declared boundaries.
+
+## G2 Goodix-derived application-error handler is production-routed
+
+The exact GR551x SDK 1.7.0-derived diagnostic policy is now implemented by the
+clean-room `components/apollo_main/core_overlay/util_error_check.c`. Its one
+254-byte relocated leaf replaces the 178-byte stock handler at
+`[0x00509B48,0x00509BFA)` and closes over the retained authenticated 43-row
+table plus the recovered memset, formatter, and EasyLogger providers. The
+reviewed local delta bounds the table search and maps unknown API codes to the
+retained `Application error.` row instead of preserving the stock unbounded
+walk.
+
+The host oracle and freestanding Thumb closure tests pass, the analyzer pins
+all eight provider relocations and the redirect, and source package assembly
+and verification pass. Canonical Apollo accounting is 165,094 source-owned
+bytes, 121,098 generated patch-site bytes, 32 wrapper bytes, 182 in-place
+source bytes, and 3,402,084 opaque base bytes. No hardware was present,
+accessed, signed for, or flashed; device-dependent validation remains blocked
+by unavailable physical evidence.
+
+## FreeRTOS `vTaskGetInfo` closes the task/queue-private ledger row
+
+The complete authenticated V10.5.1 `vTaskGetInfo` body at
+`[0x00455728,0x004557A8)` is now redirected to a 120-byte source leaf at
+`0x007BC6DC`. Static assertions pin the G2 TCB and `TaskStatus_t` layouts, and
+the only four relocations target already source-owned FreeRTOS providers.
+Focused host behavior, stock-span, routing, component, manifest, package, and
+origin-accounting checks pass.
+
+Current component accounting is 165,094 source-owned bytes, 121,098 generated
+patch-site bytes, 32 generated wrapper bytes, 182 in-place source bytes, and
+3,402,084 opaque base bytes. The Apple overlay/component/package identities are
+`164912/3688308/4466802` bytes with SHA-256 values
+`8c65ebb25586f80cc4eaec62fd9442c0dc28a37a897fec7349822d980cc767e0`,
+`4dea653f6001fc9cf287253481ab412d9046a590bc70707fadce6afb01307b09`, and
+`03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
+No hardware operation was performed.

@@ -150,13 +150,13 @@ PROFILES = {
         "alignment": 4,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 164536,
+        "overlay_size": 165412,
         "overlay_sha256": (
-            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
+            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
         ),
-        "component_size": 3687932,
+        "component_size": 3688808,
         "component_sha256": (
-            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
+            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
         ),
         "overlay_base": 0x00794324,
         "provider_offset": 108456,
@@ -176,7 +176,7 @@ PROFILES = {
             "2d689313cd12e5c8d5155c7b4ba3202"
         ),
         "current_layout_rollback_sha256": (
-            "5a9a2fcd0ca390c6ea91aaa8c75da7959c4ed43121c8e852a17ec7cecdac8db3"
+            "46be137c10cee53296866a10b255b930b5129180cdb68e6108a87a7063987c83"
         ),
         "historical_tail_size": 22,
         "historical_tail_offset": 113732,
@@ -344,6 +344,14 @@ PROFILES = {
             {"offset": 1065236, "size": 10},
             {"offset": 1065246, "size": 198},
         ),
+        "later_util_error_patch": {
+            "offset": 858984,
+            "size": 178,
+        },
+        "later_task_get_info_patch": {
+            "offset": 120648,
+            "size": 128,
+        },
         "major": {
             "offset": 113732,
             "address": 0x007AFF68,
@@ -389,11 +397,11 @@ PROFILES = {
             },
         },
         "accounting": {
-            "generated_patch_site_bytes": 120792,
+            "generated_patch_site_bytes": 121494,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3402390,
-            "replaced_stock_function_bytes": 120970,
-            "source_owned_bytes": 164718,
+            "opaque_base_bytes": 3401688,
+            "replaced_stock_function_bytes": 121672,
+            "source_owned_bytes": 165594,
             "source_owned_in_place_bytes": 182,
         },
     },
@@ -1458,6 +1466,18 @@ class RuntimeLittlefsDiskVersionPartsTests(unittest.TestCase):
                     restored[
                         patch_offset:patch_offset + patch_size
                     ] = stock[patch_offset:patch_offset + patch_size]
+                util_patch = profile["later_util_error_patch"]
+                patch_offset = util_patch["offset"]
+                patch_size = util_patch["size"]
+                restored[
+                    patch_offset:patch_offset + patch_size
+                ] = stock[patch_offset:patch_offset + patch_size]
+                task_get_info_patch = profile["later_task_get_info_patch"]
+                patch_offset = task_get_info_patch["offset"]
+                patch_size = task_get_info_patch["size"]
+                restored[
+                    patch_offset:patch_offset + patch_size
+                ] = stock[patch_offset:patch_offset + patch_size]
                 for patch_offset, patch_size in (
                     (39_522, 200),
                     (119_696, 246),

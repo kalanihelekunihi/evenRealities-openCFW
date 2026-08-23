@@ -118,17 +118,17 @@ PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 164_536
+PRODUCTION_OVERLAY_SIZE = 165_412
 PRODUCTION_OVERLAY_SHA256 = (
-    "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
+    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
 )
-PRODUCTION_COMPONENT_SIZE = 3_687_932
+PRODUCTION_COMPONENT_SIZE = 3_688_808
 PRODUCTION_COMPONENT_SHA256 = (
-    "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
+    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
 )
-PACKAGE_SIZE = 4_466_426
+PACKAGE_SIZE = 4_467_302
 PACKAGE_SHA256 = (
-    "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"
+    "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
 )
 
 
@@ -531,10 +531,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 120_792,
-                "opaque_base_bytes": 3_402_390,
-                "replaced_stock_function_bytes": 120_970,
-                "source_owned_bytes": 164_718,
+                "generated_patch_site_bytes": 121_494,
+                "opaque_base_bytes": 3_401_688,
+                "replaced_stock_function_bytes": 121_672,
+                "source_owned_bytes": 165_594,
             },
         )
 
@@ -661,6 +661,8 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
             (481_440, 122),
             (481_562, 6),
             (481_568, 8),
+            # Goodix-derived application-error handler admitted later.
+            (858_984, 178),
         ):
             historical_component[offset:offset + size] = official[
                 offset:offset + size
@@ -697,7 +699,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         )
         self.assertEqual(
             sha256(bytes(historical_component)),
-            "d41b02a6def6a6a484eb223b4f7db0453c9cdad3ad6fb50a6ac9a77db9f9c00b",
+            "340120823caa5d95dc9c75199edb8f9915849d8ccc3ffe58e5474bc2d3324cd6",
         )
         historical_payloads = dict(payloads)
         historical_payloads["apollo_main"] = bytes(historical_component)
@@ -708,7 +710,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         self.assertEqual(len(historical_image), 4_415_860)
         self.assertEqual(
             sha256(historical_image),
-            "f45bb85db8d15577d16ba99103fff0f2c654fb342c9bfef50f280df1415ec9b5",
+            "798f8d74b0b7062997d7c4949a6fe0254e82f96db3f3102cf9cb6d116dcdc1de",
         )
 
 

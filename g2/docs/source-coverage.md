@@ -7462,6 +7462,23 @@ milestone; the current reconciled whole-package accounting is 142,977 source,
 CMSIS wrapper coverage is now
 38/38 public and 5/5 private source-owned.
 
+## Scheduler-start core production closure
+
+The previously qualified scheduler selection and port-start candidates are
+now production-owned as a single atomic chain. Three stock spans totaling 396
+bytes redirect to four source leaves totaling 500 Apple-overlay bytes:
+`vTaskSwitchContext`, `xPortStartScheduler`, `vTaskStartScheduler`, and the
+non-returning assertion fail-stop. The current Apple component report records
+165,594 source-owned bytes, 121,494 generated patch-site bytes, 121,672
+replaced stock-function bytes, and 3,401,688 opaque base bytes. The overlay
+contains 943 emitted functions, 882 patched sites, and ends at `0x007BC948`.
+
+The canonical package is 4,467,302 bytes with SHA-256
+`88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f`.
+These numbers establish compiled-source ownership only. On-device scheduling,
+exception, trace, overflow-hook, and timer evidence remains explicitly
+hardware-blocked.
+
 ## Current first-party device-setting protobuf-service increment
 
 The complete retained `pb_service_dev_setting.c` object is identified at
@@ -7826,3 +7843,32 @@ above; retained-path closure remains a lower-bound ownership ledger, not
 whole-image source coverage, historical source availability, or production
 ownership. See `docs/research/g2-first-party-frontier-census.md` and the
 campaign entries in `docs/progress.md`.
+
+## Current Goodix-derived error-handler source increment
+
+The Apple profile now source-owns the executable policy formerly provided by
+the 178-byte stock `APP_errorFaultHandler`. A single 254-byte clean-room leaf
+is production-routed; its fixed retained dependencies are the authenticated
+43-row error table/string set and the already-bounded memset, formatter, and
+EasyLogger providers. The bounded unknown-code fallback is a documented safety
+correction.
+
+Apollo-main accounting is 165,094 source-owned bytes (including 182 in-place),
+121,098 generated patch-site bytes, 32 generated wrapper bytes, and 3,402,084
+opaque base bytes, totaling 3,688,308 bytes. This is offline source coverage,
+not on-device validation or a declaration of functional completeness.
+
+## Current FreeRTOS task-information source increment
+
+The Apple profile now source-owns the complete 128-byte stock `vTaskGetInfo`
+span through a 120-byte V10.5.1 leaf and two bytes of generated alignment.
+The leaf closes over source-owned `eTaskGetState`, `vTaskSuspendAll`,
+`xTaskResumeAll`, and `prvTaskCheckFreeStackSpace` replacements. Its ABI
+contract pins current TCB state at `0x20074A20`, all accessed TCB fields, the
+one-byte IAR state enum, and the 36-byte public status record.
+
+Apollo-main accounting is now 165,094 source-owned bytes (including 182
+in-place), 121,098 generated patch-site bytes, 32 generated wrapper bytes, and
+3,402,084 opaque base bytes, totaling 3,688,308 bytes. This closes one platform
+software-gap row; it does not close the remaining G2 capability ledger or
+provide on-device evidence.

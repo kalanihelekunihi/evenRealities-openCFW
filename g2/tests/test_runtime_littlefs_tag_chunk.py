@@ -375,13 +375,13 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
                 self.assertEqual(
                     config["toolchain_profiles"]["linux-clang"]["expected"],
                     {
-                        "overlay_size": 144_266,
+                        "overlay_size": 145_180,
                         "overlay_sha256": (
-                            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9"
+                            "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57"
                         ),
-                        "component_size": 3_667_662,
+                        "component_size": 3_668_576,
                         "component_sha256": (
-                            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"
+                            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
                         ),
                     },
                 )
@@ -472,7 +472,7 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
         boot = manifest["component_overrides"]["apollo_bootloader"]
         self.assertEqual(
             (main["provider"]["size"], main["provider"]["sha256"]),
-            (3_687_932, "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"),
+            (3_688_808, "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"),
         )
         self.assertEqual(
             (boot["provider"]["size"], boot["provider"]["sha256"]),
@@ -480,14 +480,14 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4_466_426, "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"),
+            (4_467_302, "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"),
         )
         self.assertEqual(
             main["provider"]["profiles"]["linux-clang"],
             {
-                "size": 3_667_662,
+                "size": 3_668_576,
                 "sha256": (
-                    "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"
+                    "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
                 ),
             },
         )
@@ -503,9 +503,9 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4_446_156,
+                "expected_size": 4_447_070,
                 "expected_sha256": (
-                    "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"
+                    "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"
                 ),
             },
         )

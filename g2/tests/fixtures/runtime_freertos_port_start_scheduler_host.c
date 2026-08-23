@@ -39,7 +39,7 @@ void open_cfw_retained_freertos_start_first_task(void)
         open_cfw_retained_freertos_critical_nesting;
 }
 
-void open_cfw_retained_freertos_task_switch_context(void)
+void open_cfw_freertos_task_switch_context(void)
 {
     open_cfw_test_freertos_port_start_note(3U);
 }

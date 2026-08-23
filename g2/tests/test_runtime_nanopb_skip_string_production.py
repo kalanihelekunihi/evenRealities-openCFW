@@ -180,9 +180,9 @@ PRODUCTION_SECTION = ".text." + PRODUCTION_FUNCTION
 PRODUCTION_EXIDX_SECTION = ".ARM.exidx" + PRODUCTION_SECTION
 PRODUCTION_EXIDX = bytes.fromhex("0000000001000000")
 OVERLAY_RUNTIME_ADDRESS = 0x0079_4324
-BASE_FUNCTION_COUNT = 907
-BASE_RELOCATED_COUNT = 338
-BASE_PATCH_COUNT = 848
+BASE_FUNCTION_COUNT = 942
+BASE_RELOCATED_COUNT = 373
+BASE_PATCH_COUNT = 882
 APPLE_CLANG = "/usr/bin/clang"
 COMPILER_PROFILES = {
     "apple-clang": {
@@ -265,25 +265,25 @@ PRODUCTION_BUILD_PROFILES = {
             "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
         ),
         "main_component": (
-            3_687_932,
-            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
+            3_688_808,
+            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
-                4_466_426,
-                "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
+                4_467_302,
+                "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f",
             ),
             "build-report.json": (
                 2_323,
-                "adb3102a9c28476e357e5fd134054434e200f46579bc5990f5836d2ed05e12d4",
+                "083ce49c5ce9638744982d34772e70d569ac6b2d155f9a32e85176dca05e91fb",
             ),
             "flash-plan.json": (
-                1_276_602,
-                "cf9da351f2ff66b07c3efaf9543abdd23473c5dd557753854b25fbf5f79628c8",
+                1_287_172,
+                "4d99c79858788bd41db79d4846d68186f1d0dac386e0e2f45a27f4f4c8eff161",
             ),
         },
         "census": (1_802, 2, 5),
-        "effective_ownership": (165_050, 120_915, 4_180_461),
+        "effective_ownership": (165_424, 121_045, 4_180_333),
     },
     "linux-clang": {
         "boot_component": (
@@ -291,13 +291,13 @@ PRODUCTION_BUILD_PROFILES = {
             "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74",
         ),
         "main_component": (
-            3_667_662,
-            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
+            3_668_576,
+            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
-                4_446_156,
-                "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
+                4_447_070,
+                "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
             ),
             "build-report.json": (
                 2_322,
@@ -2224,7 +2224,7 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
                 expected,
             )
 
-        self.assertEqual(len(regions), 1730)
+        self.assertEqual(len(regions), 1745)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(
@@ -2265,12 +2265,12 @@ class NanopbSkipStringProductionOwnershipTests(StableUnittestIdentityCase):
             ownership,
             {
                 "container_only": (1, 32),
-    "generated_alignment": (181, 364),
-    "generated_source_entry_replacement": (841, 118_572),
+    "generated_alignment": (182, 366),
+    "generated_source_entry_replacement": (842, 118_700),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (264, 3_404_434),
-    "source_compiled": (435, 164_390),
+    "official_blob": (265, 3_404_306),
+    "source_compiled": (437, 164_764),
             },
         )
 

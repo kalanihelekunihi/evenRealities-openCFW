@@ -286,9 +286,9 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "bd3b32c736e57005c1cbe65a2725fb66ed5389227686ff7961793f699364e68c",
             ),
         },
-        "overlay": (164536, "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"),
-        "component": (3687932, "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"),
-        "package": (4466426, "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"),
+        "overlay": (165412, "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"),
+        "component": (3688808, "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"),
+        "package": (4467302, "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"),
     },
     "linux-clang": {
         "placements": {
@@ -309,23 +309,23 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "2ef6ffe002ec6b197643da1304921bbc422dc9beb124b23343f16bf187e303a1",
             ),
         },
-        "overlay": (144266, "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9"),
-        "component": (3667662, "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"),
-        "package": (4446156, "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"),
+        "overlay": (145180, "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57"),
+        "component": (3668576, "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"),
+        "package": (4447070, "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"),
     },
 }
 
 # RECORD-PIN GATE: (region_count, {address_status: (count, total_size)}).
 MANIFEST_PIN: tuple[int, dict[str, tuple[int, int]]] | None = (
-    1730,
+    1745,
     {
         "container_only": (1, 32),
-    "generated_alignment": (181, 364),
-    "generated_source_entry_replacement": (841, 118_572),
+    "generated_alignment": (182, 366),
+    "generated_source_entry_replacement": (842, 118_700),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (264, 3_404_434),
-    "source_compiled": (435, 164_390),
+    "official_blob": (265, 3_404_306),
+    "source_compiled": (437, 164_764),
     },
 )
 

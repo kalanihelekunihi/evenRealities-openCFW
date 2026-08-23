@@ -1,6 +1,6 @@
 # G2 functional-capability gap ledger
 
-Status date: 2026-08-18
+Status date: 2026-08-22
 Target: official G2 `s200_v2.2.6.10`
 
 This ledger is the domain-organized record of every known functional-capability
@@ -25,7 +25,7 @@ storage, sensors, hardware services, deployment.
   no unavailable proprietary input is required to write the code.
 - `hardware-dependent` — closing or validating the row requires physical G2
   hardware, a debug probe, instrumentation, golden media captures, or on-device
-  traffic. As of 2026-08-18 none of that is available in this workspace (see
+  traffic. As of 2026-08-22 none of that is available in this workspace (see
   the hardware-availability audit below), so every such row is explicitly
   **blocked by unavailable physical evidence**.
 - `proprietary-blocked` — closing the row requires unavailable licensed or
@@ -46,14 +46,17 @@ compilable C with the build profiles, verifiers, and test suite green; every
 as blocked by unavailable physical evidence; every `proprietary-blocked` row
 must name the unavailable input.
 
-## Hardware-availability audit (2026-08-18)
+## Hardware-availability audit (2026-08-22)
 
 A direct audit of this workspace host found:
 
 - no USB J-Link, CMSIS-DAP, DAPLink, ST-Link, Black Magic, Nordic, or Ambiq
   debug interface in `system_profiler SPUSBDataType`;
-- no serial endpoint beyond the generic macOS
-  `/dev/cu.Bluetooth-Incoming-Port` and `/dev/cu.debug-console`;
+- one `/dev/cu.usbserial-210` endpoint is present in addition to the generic
+  macOS Bluetooth/debug-console endpoints. Its USB identity is generic
+  QinHeng/CH340 (`idVendor=0x1a86`, `idProduct=0x7523`, product `USB Serial`),
+  with no G2, debug-probe, capture-tool, or owner-authorization evidence, and
+  therefore is not treated as authorized target hardware;
 - no `nrfjprog`, `JLinkExe`, `JLinkGDBServer`, `pyocd`, `openocd`, `probe-rs`,
   `cargo-embed`, `nrfutil`, or `adafruit-nrfutil` executable;
 - no owned-device flash readback, golden 32 MiB external-flash capture, BLE
@@ -71,12 +74,12 @@ with no proven autonomous rollback.
 | --- | ---: | ---: | ---: | ---: |
 | Protocol | 2 | 16 | 3 | 3 |
 | Security | 1 | 6 | 1 (shared with protocol) | 1 |
-| Platform | 12 | 6 | 4 | 1 |
+| Platform | 14 | 4 | 5 | 1 |
 | Health | 0 | 4 | 0 | 1 |
 | System | 1 | 5 | 1 | 0 |
 | Storage | 2 | 4 | 2 | 0 |
-| Sensors | 4 | 7 | 1 (touch validation) | 1 |
-| Hardware services | 5 | 8 | 5 | 2 |
+| Sensors | 5 | 6 | 1 (touch validation) | 1 |
+| Hardware services | 6 | 7 | 5 | 2 |
 | Deployment | 3 | 0 | 2 | 1 |
 
 Counts are row counts, not bytes; the unreviewed first-party remainder
@@ -152,9 +155,10 @@ update security rests on the protected Apollo bootloader.
 | FreeRTOS `heap_4` adapter | implemented-in-source | 4 functions at `[0x00456110,0x00456338)` | `upstream-inventory.md`; `source-coverage.md` | source-owned with `vQueueDelete` closing over source heap free |
 | FreeRTOS scheduler cluster (yield, critical sections, reset-next-unblock, increment-tick, resume-all) | implemented-in-source | 6 functions promoted as one tranche | `research/freertos-scheduler-cluster-production-promotion-plan.md` | production cluster verifier 9/9; dual-profile chains green |
 | FreeRTOS CM55_NTZ port assembly (7 leaves) | implemented-in-source | 182 source-owned in-place bytes `[0x005FA058,0x005FA132)` | `upstream-inventory.md`; `source-coverage.md` | exact ELF relocation allowlist; `in_place_leaves` rejects overlap |
-| FreeRTOS scheduler-start core (`vTaskStartScheduler`, `xPortStartScheduler`, `vTaskSwitchContext` + G2 trace ring) | software-gap | 144 B + 58 B + 206 B stock bodies; candidates dual-profile qualified, production-excluded | `progress.md`; `research/freertos-task-start-scheduler-source-candidate-audit.md`; `freertos-task-switch-context-source-candidate-audit.md` | atomic kernel/port integration (RAM-layout migration is a single integration event); on-device preemption/stack-overflow/trace validation tail |
+| FreeRTOS scheduler-start core (`vTaskStartScheduler`, `xPortStartScheduler`, `vTaskSwitchContext` + G2 trace ring) | implemented-in-source | three stock entries redirect atomically to four strict-relocation leaves (including non-returning fail-stop); Apple/Linux overlays and packages pinned | `research/freertos-task-start-scheduler-source-candidate-audit.md`; `freertos-port-start-scheduler-source-candidate-audit.md`; `freertos-task-switch-context-source-candidate-audit.md` | `make freertos-scheduler-start-core-closure`; dual-profile overlay/component/package gates green |
+| FreeRTOS scheduler-start on-device preemption/overflow/trace/first-task evidence | hardware-dependent | source chain complete offline; validation needs live CM55 exception/timer behavior and trace capture | same scheduler-start audits; 2026-08-22 hardware audit | authorized G2 + probe/capture; blocked by unavailable physical evidence |
 | FreeRTOS Apollo STIMER tick/tickless port with first-party power hooks | hardware-dependent | tickless `[0x00456498,0x0045655C)`; bounded STIMER algorithms recreated as candidates | `progress.md`; `research/freertos-apollo-tickless/stimer-tick/stimer-setup-source-candidate-audit.md` | 14 focused tests pass both profiles; remaining gate is real WFI/counter-wrap/IRQ-latency/compare-timing on device — blocked by unavailable physical evidence |
-| FreeRTOS remaining task/queue-private closures (`vTaskPlaceOnEventList`, task-context receive, `xQueueGenericReset`, `vTaskGetInfo`) | software-gap | reviewed stock seams; upstream V10.5.1 source authenticated | `research/freertos-queue-next-closure-audit.md`; `freertos-queue-wrapper-tranche-source-boundary-audit.md` | separate per-function audits; vendored upstream — no external input needed |
+| FreeRTOS task/queue-private closure (`vTaskPlaceOnEventList`, task-context receive, `xQueueGenericReset`, `vTaskGetInfo`) | implemented-in-source | all four authenticated V10.5.1 functions production-routed; final `vTaskGetInfo` promotion replaces 128 stock bytes with a 120-byte leaf at `0x007BC6DC` | `research/freertos-queue-next-closure-audit.md`; `research/freertos-agent-a-exact-source-candidates-audit.md`; `research/freertos-task-get-info-source-audit.md` | `make freertos-task-get-info-closure`; host behavior, TCB/status ABI, four-provider relocation, stock redirect, component, manifest, and package gates green |
 | CMSIS-FreeRTOS v10.5.1 wrapper (43-function object) | implemented-in-source | `[0x0044900E,0x00449ED2)`, 3,780 B; frontier declared closed | `progress.md`; `upstream-inventory.md`; `research/cmsis-freertos-linked-function-census.md` | both profile pins; census fail-closed analyzer |
 | AmbiqSuite 5.1.0 HAL selected leaves (MSPI interrupt-clear, SPOT, MCUCTRL, oscillators, trim) | implemented-in-source | 48 B MSPI leaf ×2 images; SPOT init + 13-entry callback layer | `source-coverage.md`; `g2/README.md`; `upstream-inventory.md` | vendored snapshot verifier; section-GC retained leaf pins |
 | AmbiqSuite HAL wider ordinal/port reconciliation; system-sleep/task-vote power policy | hardware-dependent | unnamed bulk; product-rtos task-vote policy | `progress.md`; `research/g2-product-rtos-recovery.md` | clean-room task-vote/hook implementation + on-device power-state/watchdog validation — blocked by unavailable physical evidence |
@@ -219,7 +223,7 @@ update security rests on the protected Apollo bootloader.
 | Host touch driver (`drv_cy8c4046fni.c`) | software-gap | 23 functions / 1,754 body B; `[0x0055B2EC,0x0055BA70)` | `research/g2-drv-cy8c4046fni-dependency-boundary.md` | analyzer + test green; all indirect bus-ops calls bounded; first-party private source |
 | Touch-controller shipped application layer (PSoC 4000T) | software-gap (analysis) with hardware validation tail | 34,428 B programmed prefix `[0,0x867C)` | `research/g2-touch-identity-recovery.md`; `g2-touch-i2c-protocol-recovery.md` | device-free analyzers + fail-closed mutation tests green; slot-index confirmation needs resident readback — blocked by unavailable physical evidence |
 | Touch-controller resident region (dispatch tables, HAL descriptors, resident DFU engine, boot vectors) | proprietary-blocked | resident flash `≥0x8680`; not shipped in any blob | `research/g2-touch-i2c-protocol-recovery.md` | requires factory resident-image readout or vendor source |
-| Goodix-derived error utility (`util_error_check.c`) | software-gap | 178 B handler + 344 B table; exact GR551x SDK 1.7.0 provenance | `research/g2-util-error-check-goodix-recovery.md` | `make util-error-check-closure`; open admission decision on bounded-fallback safety correction |
+| Goodix-derived error utility (`util_error_check.c`) | implemented-in-source | 178 B stock handler replaced by a 254 B clean-room leaf; retained authenticated 344 B table; exact GR551x SDK 1.7.0 provenance; production-routed 2026-08-21 | `research/g2-util-error-check-goodix-recovery.md`; `components/apollo_main/core_overlay/util_error_check.c`; `tests/test_util_error_check_candidate.py` | `make util-error-check-closure`; host oracle, single-leaf Thumb closure, routing, component, and package pins green; bounded unknown-code fallback is the reviewed safety correction |
 
 ## Hardware services
 
@@ -240,7 +244,7 @@ update security rests on the protected Apollo bootloader.
 | Apollo-side case services (`box_uart_mgr`, box-detect state machine) | software-gap with hardware validation tail | box-detect object: 209 direct calls, all classified; not production-routed | `research/g2-box-uart-mgr-recovery.md`; `g2-service-box-detect-dependency-boundary.md` | analyzers + tests green; recreation + case/box hardware validation tail |
 | Ring gesture forwarding (`ring_gesture` component) | implemented-in-source | 160-byte GPL-3.0-only overlay, attributed to `jimrandomh/g2flash` | `components/apollo_main/ring_gesture/NOTICE.md`; `g2/README.md`; `g2/Makefile` | `make ring-source` builds + verifies under both toolchain profiles; never installed on hardware (see deployment) |
 | Apollo charger services (`charger_common` battery-sync/policy layer) | implemented-in-source | 11 leaves / 2,400 stock body bytes replaced 2026-08-20; five file-static state cells bound to recovered SRAM addresses; apple component 3,680,920 B | `research/g2-charger-common-recovery.md`; `components/apollo_main/core_overlay/charger_common.c` | host tests + analyzer production flip + package verification green; on-device charge-policy validation is a hardware tail |
-| Apollo charger drivers (`chg_bq25180` charger IC, `chg_bq27427` fuel gauge) | software-gap | `chg_bq25180` production-routed 2026-08-20 (22 leaves / 1,792 stock body bytes; apple component 3,683,298 B); `chg_bq27427` candidate host-tested, absent from `overlay.json` | `research/g2-chg-bq25180-recovery.md`; `g2-chg-bq27427-recovery.md` | bq25180: analyzer flip + package verification green; bq27427: provider binding/placement/redirects/package verification pending; rail/behavior validation is a hardware tail |
+| Apollo charger drivers (`chg_bq25180` charger IC, `chg_bq27427` fuel gauge) | implemented-in-source | both production-routed: BQ25180 has 22 leaves / 1,792 replaced stock body bytes; BQ27427 has 33 leaves / 4,464 replaced stock body bytes plus retained hardware-configuration data | `research/g2-chg-bq25180-recovery.md`; `g2-chg-bq27427-recovery.md`; `components/apollo_main/core_overlay/chg_bq25180.c`; `chg_bq27427.c` | host wire/data/runtime oracles, target closure, guarded redirects, analyzer flips, component, and package verification green; rail/charge behavior validation remains blocked by unavailable physical evidence |
 | Ring service stack (`ring_service`, `thread_ring`, `ring_connect_policy`, `pb_service_ring`, `service_ring_battery`, `cb_ring_battery`) | software-gap | ring_service: 18 fn / 2,412 body B; all proven G2-local first-party, zero ownership | `research/g2-ring-service-dependency-boundary.md`; `g2-thread-ring-dependency-boundary.md`; `g2-ring-connect-policy-dependency-boundary.md`; `g2-pb-service-ring-recovery.md`; `g2-service-ring-battery-recovery.md`; `g2-cb-ring-battery-recovery.md` | per-object analyzers green; implementation must qualify WSF allocation, ATT handle lifetimes, dual-device behavior before routing |
 
 ## Deployment
@@ -278,8 +282,8 @@ update security rests on the protected Apollo bootloader.
 - Fixed-address FreeRTOS global seams (`0x20074A20`–`0x20074A58`) make the
   complete kernel link a single atomic integration event that unblocks
   several platform rows at once.
-- Ownership context (`source-coverage.md`): ~214 KB (4.84%) of the package is
-  source-controlled or generator-owned; ~4.21 MB (95.16%) remains opaque
+- Ownership context (`source-coverage.md`): 286,469 B (6.44%) of the package is
+  source-compiled or generator-owned; 4,180,333 B (93.56%) remains opaque
   (retained stock bytes functioning in the byte-exact profile). The ledger
   rows above are the documented, bounded part of that remainder; the
   unanchored-census frontier row bounds the rest.

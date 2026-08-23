@@ -1,7 +1,8 @@
 # FreeRTOS Apollo `xPortStartScheduler` source-candidate audit
 
-Status: authenticated MIT source adaptation; production-excluded pending
-STIMER and boot-critical port integration
+Status: production-routed authenticated MIT source adaptation; offline and
+dual-profile complete; hardware timer/transfer validation blocked by
+unavailable physical evidence
 
 ## Result
 
@@ -41,23 +42,26 @@ and FreeRTOS commit.
 
 Apple and Linux emit the same 58-byte function (SHA-256
 `c02d239a4f345d45184ae3f9720abd43d28fff09c6b8ae5e51db75940cf51a88`)
-and the same eight relocations. Apple object size/hash is 1,484 /
-`a7accfc2d0e6f3b92c7705cd61e7a233f45a5e35c091f9764841ddd03c64e790`;
-Linux is 1,464 /
-`2fb45e4c57f9fedbdbfb15813a891c2ecca7c256b0f387c39988785ad6304cf7`.
+and the same eight relocations. Apple object size/hash is 1,476 /
+`e25055c8d089f9fadd723fc6602e2903b6732d205b72aec529fb190d52fcc52c`;
+Linux is 1,456 /
+`57a7bc93f879c18de6de0864ef866181ad440ec71d4802653cae8449e13150a7`.
 
 ## Production boundary
 
-This closes semantic opacity in the V10.5.1 scheduler-port start function but
-does not redirect it. The first-task context transfer is already separately
-authenticated. A companion candidate now closes the G2 Apollo STIMER setup;
-companion candidates now close the elapsed-tick/compare-A ISR dispatcher and
-tickless-idle path while retaining the power hooks explicitly. Production
-admission of this function should remain atomic with `vTaskStartScheduler`
-and hardware timer/sleep validation.
+The 46-byte stock entry now redirects to the source-owned 58-byte leaf in both
+profiles. It is admitted atomically with source-owned `vTaskStartScheduler`,
+`vTaskSwitchContext`, and the scheduler-start fail-stop. Strict relocations
+bind SHPR3, `ulCriticalNesting`, retained timer/first-task/exit providers, and
+the overlay-local switch-context leaf. Manifest regions and both package
+profiles account for the redirect and appended text.
+
+Real STIMER interrupt latency and first-task context transfer are still a
+hardware-dependent evidence tail. No authorized G2 or probe was present in the
+2026-08-22 audit, so that tail is explicitly blocked.
 
 Verification:
 
 ```sh
-python3 -m unittest -v tests.test_runtime_freertos_port_start_scheduler
+make freertos-scheduler-start-core-closure
 ```

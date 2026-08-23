@@ -1,7 +1,8 @@
 # FreeRTOS `vTaskSwitchContext` source-candidate audit
 
-Status: production-excluded G2 source candidate; target integration and
-hardware scheduling validation remain mandatory
+Status: production-routed authenticated G2 source adaptation; offline and
+dual-profile complete; hardware scheduling validation blocked by unavailable
+physical evidence
 
 ## Result
 
@@ -83,16 +84,21 @@ its 266-byte body has SHA-256
 `d5d43e9359c06270e28900321583ac9663caf9191becd82de54985e085c2b5f8`.
 Both have only the expected stack-hook and assertion-mask call relocations.
 
-## Boundary
+## Production boundary
 
-The candidate is deliberately absent from every production manifest and
-Makefile input. It closes the bounded scheduler-selection and custom trace
-algorithms, but it does not authorize replacement of the live scheduler.
-Production admission still requires an atomic kernel/port integration and
-on-device preemption, overflow-hook, and trace-concurrency validation.
+The 206-byte stock body now redirects to the source-owned 266-byte leaf in
+both profiles. Its stack hook binds to `0x0046D86C`; its assertion mask binds
+to the existing overlay `ulSetInterruptMask`; fixed recovered RAM addresses
+retain the ready lists, current TCB, scheduler state, and 64-entry G2 trace
+ring. The production manifest accounts for the redirect and appended leaf,
+and the atomic scheduler-start closure test covers the full chain.
+
+On-device preemption, overflow-hook execution, and concurrent trace-ring
+behavior remain a hardware-dependent evidence tail. The 2026-08-22 audit found
+no authorized G2/debug probe/capture path, so that tail is explicitly blocked.
 
 Verification:
 
 ```sh
-python3 -m unittest -v tests.test_runtime_freertos_task_switch_context
+make freertos-scheduler-start-core-closure
 ```

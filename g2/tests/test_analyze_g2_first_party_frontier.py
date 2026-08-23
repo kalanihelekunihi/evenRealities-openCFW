@@ -15,6 +15,9 @@ SPEC.loader.exec_module(MODULE)
 class AnalyzeG2FirstPartyFrontierTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        corpus = MODULE.DEFAULT_CORPUS
+        if not (corpus / "SHA256SUMS").is_file():
+            raise unittest.SkipTest("authenticated Apollo corpus unavailable")
         cls.report = MODULE.analyze()
 
     def test_exhaustive_path_partition(self) -> None:

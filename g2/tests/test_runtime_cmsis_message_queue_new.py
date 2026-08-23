@@ -137,13 +137,13 @@ RELOCATED_SHA256 = (
     "afbba4f9f08b2df17a4350d7a7e83d99"
     "b8439283ee40c1a1604bd879dff75f04"
 )
-PRODUCTION_OVERLAY_SIZE = 164_536
+PRODUCTION_OVERLAY_SIZE = 165_412
 PRODUCTION_OVERLAY_SHA256 = (
-    "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
+    "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
 )
-PRODUCTION_COMPONENT_SIZE = 3_687_932
+PRODUCTION_COMPONENT_SIZE = 3_688_808
 PRODUCTION_COMPONENT_SHA256 = (
-    "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
+    "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
 )
 PRODUCTION_OFFSET = 113_808
 PRODUCTION_ADDRESS = 0x007A_FFB4
@@ -823,16 +823,16 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 120_792,
+                "generated_patch_site_bytes": 121_494,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_402_390,
-                "replaced_stock_function_bytes": 120_970,
-                "source_owned_bytes": 164_718,
+                "opaque_base_bytes": 3_401_688,
+                "replaced_stock_function_bytes": 121_672,
+                "source_owned_bytes": 165_594,
                 "source_owned_in_place_bytes": 182,
             },
         )
-        self.assertEqual(len(report["overlay"]["functions"]), 937)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 877)
+        self.assertEqual(len(report["overlay"]["functions"]), 943)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 882)
 
         historical_overlay = self.production_overlay[:113_970]
         self.assertEqual(
@@ -895,6 +895,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             (481_440, 122),
             (481_562, 6),
             (481_568, 8),
+            (858_984, 178),
         ):
             historical_component[offset:offset + size] = official[
                 offset:offset + size
@@ -936,7 +937,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             ),
             (
                 3_637_366,
-                "d41b02a6def6a6a484eb223b4f7db0453c9cdad3ad6fb50a6ac9a77db9f9c00b",
+                "340120823caa5d95dc9c75199edb8f9915849d8ccc3ffe58e5474bc2d3324cd6",
             ),
         )
 

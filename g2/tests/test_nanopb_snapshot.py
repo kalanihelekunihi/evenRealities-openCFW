@@ -152,8 +152,8 @@ FIELD_DECODER_ANALYZER = ROOT / "tools/analyze_g2_nanopb_field_decoder_cluster.p
 PRODUCTION_OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 EXPECTED_PROVENANCE_SIZE = 125493
 EXPECTED_PROVENANCE_SHA256 = "c1bbb7d80e38a1ab18e7c71c03b89a891090509949e45a4db0f3224a927a1a99"
-EXPECTED_VERIFIER_SIZE = 232743
-EXPECTED_VERIFIER_SHA256 = "24a2a2d9e191658e37e06dafce92064b982bf9751ff9f221db5bdaa5af9108fb"
+EXPECTED_VERIFIER_SIZE = 233514
+EXPECTED_VERIFIER_SHA256 = "8f24bbf9f4c8cf7d0c0b75bca804284f81d4222fa9feebb966b4e7aea599596e"
 EXPECTED_RECORDS_SHA256 = "bb36791b9ae9a6cff412516db0b93911240fff8e8109d56136ca76173ac3a3e0"
 EXPECTED_SOURCE_PATHS = [
     "LICENSE.txt",
@@ -1636,7 +1636,7 @@ class NanopbSnapshotTests(unittest.TestCase):
             )
         )
         regions = manifest["component_overrides"]["apollo_main"]["regions"]
-        self.assertEqual(len(regions), 1067)
+        self.assertEqual(len(regions), 1745)
         by_name = {item["name"]: item for item in regions}
         entry = by_name["nanopb_decode_svarint_source_replacement"]
         self.assertEqual(

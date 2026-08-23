@@ -73,7 +73,13 @@ class UtilErrorCheckTests(unittest.TestCase):
             ["[0x006C8E60,0x006C8FB8)"],
         )
         self.assertFalse(identity["goodix_ble_stack_linkage_proven"])
-        self.assertFalse(self.report["production"]["production_routed"])
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 178)
+        self.assertEqual(production["retained_stock_noncode_bytes"], 378)
+        self.assertEqual(production["relocated_leaf_bytes"], 254)
+        self.assertTrue(production["bounded_unknown_code_fallback"])
+        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@
  *
  * Bounded adaptation of vTaskStartScheduler() from authenticated commit
  * def7d2df2b0506d3d249334974f51e427c17a41c. Stock G2 body:
- * [0x00454CEC,0x00454D7C). This candidate is not a production input.
+ * [0x00454CEC,0x00454D7C).
  */
 
 #include "runtime_freertos_task_start_scheduler.h"
@@ -18,7 +18,7 @@ enum {
     OPEN_CFW_FREERTOS_START_MAX_DELAY = 0xFFFFFFFFU,
 };
 
-const char open_cfw_freertos_idle_task_name[] = "IDLE";
+extern const char open_cfw_retained_freertos_idle_task_name[];
 
 extern void open_cfw_retained_freertos_idle_task_entry(void *argument);
 
@@ -44,8 +44,8 @@ open_cfw_retained_freertos_timer_task_create(void);
 extern open_cfw_freertos_start_u32
 open_cfw_retained_freertos_interrupt_mask_set(void);
 extern open_cfw_freertos_start_base_type
-open_cfw_retained_freertos_port_start_scheduler(void);
-extern void open_cfw_retained_freertos_assert_failure(void);
+open_cfw_freertos_port_start_scheduler(void);
+extern void open_cfw_freertos_start_assert_failure(void);
 
 __attribute__((used, noinline))
 void open_cfw_freertos_task_start_scheduler(void)
@@ -64,7 +64,7 @@ void open_cfw_freertos_task_start_scheduler(void)
     open_cfw_retained_freertos_idle_task_handle =
         open_cfw_retained_freertos_task_create_static(
             open_cfw_retained_freertos_idle_task_entry,
-            open_cfw_freertos_idle_task_name,
+            open_cfw_retained_freertos_idle_task_name,
             idle_task_stack_depth,
             (void *)0,
             OPEN_CFW_FREERTOS_START_IDLE_PRIORITY,
@@ -88,9 +88,9 @@ void open_cfw_freertos_task_start_scheduler(void)
         open_cfw_retained_freertos_scheduler_running =
             OPEN_CFW_FREERTOS_START_PASS;
         open_cfw_retained_freertos_tick_count = 0U;
-        (void)open_cfw_retained_freertos_port_start_scheduler();
+        (void)open_cfw_freertos_port_start_scheduler();
     } else if (result == OPEN_CFW_FREERTOS_START_COULD_NOT_ALLOCATE) {
-        open_cfw_retained_freertos_assert_failure();
+        open_cfw_freertos_start_assert_failure();
     }
 
     (void)open_cfw_retained_freertos_idle_task_handle;

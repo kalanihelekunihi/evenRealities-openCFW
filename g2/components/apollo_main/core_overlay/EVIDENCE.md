@@ -21014,13 +21014,78 @@ Behavioral recovery, ingress closure, and the routing record are pinned by
 `tools/analyze_g2_uled_display_preprocess.py` audit.
 
 Apple Clang 21 produces overlay/component/package sizes
-`164536/3687932/4466426`, with SHA-256 values
-`a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546`,
-`4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07`,
-and `cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4`.
+`164912/3688308/4466802`, with SHA-256 values
+`8c65ebb25586f80cc4eaec62fd9442c0dc28a37a897fec7349822d980cc767e0`,
+`4dea653f6001fc9cf287253481ab412d9046a590bc70707fadce6afb01307b09`,
+and `03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
 The leaf and redirect are gated `apple-clang`, so the linux-clang build
 stays byte-identical to its recorded profile; linux-clang leaf pins await
 Linux toolchain regeneration. Ownership is 584 replaced stock body bytes.
 The component build, source package, `open_cfw verify`, and the fail-closed
 analyzer/manifest census all pass. No package was signed or flashed and no
 hardware was accessed.
+
+## Current Goodix-derived error-handler production routing
+
+`util_error_check.c` contributes one 254-byte relocated leaf,
+`open_cfw_app_error_fault_handler`, at overlay offset 164536 / runtime address
+`0x007BC5DC`. Eight reviewed Thumb relocations bind its memset, two formatter,
+three filter, synchronous-log, and asynchronous-log calls to the retained
+providers. A guarded `B.W` plus NOP fill replaces all 178 bytes of the stock
+body at `[0x00509B48,0x00509BFA)`; the adjacent literal/alignment tail and the
+authenticated 43-row table at `[0x006C8E60,0x006C8FB8)` remain retained data.
+
+The source deliberately bounds the table search at 43 rows and uses the
+retained `Application error.` message for an unknown API code. Focused host
+tests cover this correction and every logging branch, while the target object
+test rejects extra global text leaves. Current Apple overlay, component, and
+package sizes are `164912/3688308/4466802`, with SHA-256 values
+`8c65ebb25586f80cc4eaec62fd9442c0dc28a37a897fec7349822d980cc767e0`,
+`4dea653f6001fc9cf287253481ab412d9046a590bc70707fadce6afb01307b09`, and
+`03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
+No hardware operation was performed.
+
+## Current FreeRTOS scheduler-start core production routing
+
+Four relocated leaves close the scheduler-start chain at the current overlay
+tail. `open_cfw_freertos_task_switch_context`,
+`open_cfw_freertos_port_start_scheduler`, and
+`open_cfw_freertos_task_start_scheduler` replace the authenticated stock spans
+at `0x004551B4`, `0x004421E2`, and `0x00454CEC`; the fourth leaf is the
+non-returning assertion fail-stop used by the start path. All external calls
+are enumerated and target-address pinned, while closure-local calls are
+resolved from the emitted layout.
+
+The Apple report records overlay size 165,412 and SHA-256
+`91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada`,
+component size 3,688,808 and SHA-256
+`9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c`,
+and package size 4,467,302 and SHA-256
+`88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f`.
+The component accounts for 165,594 source-owned bytes, 121,494 generated
+patch-site bytes, 121,672 replaced stock-function bytes, and 3,401,688 opaque
+base bytes. Linux independently reproduces the recorded package size
+4,447,070 and SHA-256
+`be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25`.
+
+No package was signed or flashed and no hardware was accessed. Physical
+preemption, exception-return, stack-overflow, trace-concurrency, and STIMER
+timing evidence remains blocked by unavailable authorized hardware.
+
+## Current FreeRTOS `vTaskGetInfo` production routing
+
+`runtime_freertos_task_get_info.c` contributes one 120-byte relocated leaf at
+overlay offset 164792 / runtime `0x007BC6DC`. Its four reviewed Thumb calls bind
+to the source-owned task-state, scheduler-suspend, scheduler-resume, and
+free-stack-space entries. A guarded `B.W` plus NOP fill replaces the complete
+128-byte stock body at `[0x00455728,0x004557A8)`.
+
+The target ABI assertions cover the 112-byte G2 TCB, event-list container
+offset `0x28`, priority `0x2C`, stack `0x30`, name `0x34`, TCB number `0x58`,
+base priority `0x60`, the 36-byte `TaskStatus_t`, state byte `0x0C`, and stack
+high-water halfword `0x20`. Current Apple overlay/component/package sizes are
+`164912/3688308/4466802`, with SHA-256 values
+`8c65ebb25586f80cc4eaec62fd9442c0dc28a37a897fec7349822d980cc767e0`,
+`4dea653f6001fc9cf287253481ab412d9046a590bc70707fadce6afb01307b09`, and
+`03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
+No hardware operation was performed.

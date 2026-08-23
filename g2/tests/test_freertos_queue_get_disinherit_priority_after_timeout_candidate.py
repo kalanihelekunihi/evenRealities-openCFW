@@ -547,10 +547,10 @@ class FreeRTOSQueueDisinheritPriorityCandidateTests(unittest.TestCase):
 
         manifest = json.loads(CORE_SOURCE_MANIFEST.read_text(encoding="utf-8"))
         provider = manifest["component_overrides"]["apollo_main"]["provider"]
-        self.assertEqual(provider["size"], 3_687_932)
+        self.assertEqual(provider["size"], 3_688_808)
         self.assertEqual(
             provider["sha256"],
-            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
+            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
         )
         regions = manifest["component_overrides"]["apollo_main"]["regions"]
         covering = [

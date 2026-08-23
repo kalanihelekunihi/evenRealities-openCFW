@@ -25,6 +25,8 @@ PROVIDER_MAP = ROOT / "tools/manifests/g2-util-error-check-provider-map.tsv"
 SOURCE_MAP = ROOT / "tools/manifests/goodix-gr551x-app-error-source.tsv"
 GOODIX_SOURCE = ROOT / "third_party/goodix-gr551x-app-error/upstream/app_error.c"
 GOODIX_PROVENANCE = ROOT / "third_party/goodix-gr551x-app-error/PROVENANCE.json"
+CANDIDATE = ROOT / "components/apollo_main/core_overlay/util_error_check.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 INPUT_PINS = {
     FUNCTION_MAP: "07708501087eec4e2df11cf0d1323c405b5ba47bbc18c76dce7356cdcaa53e1f",
     CLOSURE: "5fe9933e32e37a26c3f29421a0a70e042c17cda8fbf9cb455e72de235c90e480",
@@ -32,6 +34,7 @@ INPUT_PINS = {
     SOURCE_MAP: "34c2363f93d97184e96b588fa2de2114c423114d7b6b95efca5b91210ce52829",
     GOODIX_SOURCE: "2f64e42b0528db162846e91179d4f5be46811b10fae16cfb80c827df7016f40d",
     GOODIX_PROVENANCE: "41e3f67fd61d0aa9c79dca841ca946701d8f048b0a576a3a8efa62c04abd6f7f",
+    CANDIDATE: "c79bad48288360b3c00d87ae6a9b1ae04f4781b04f6f655d3d0ccc785d0f7f08",
 }
 
 RETAINED_PATH = r"D:\01_workspace\s200_ap510b_iar_git\utils\assert\util_error_check.c"
@@ -232,6 +235,49 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
     ):
         raise AuditError("Goodix source interval changed")
 
+    overlay = json.loads(OVERLAY.read_text())
+    candidate_rel = str(CANDIDATE.relative_to(ROOT))
+    leaves = [
+        item for item in overlay["relocated_leaves"]
+        if item.get("function") == "open_cfw_app_error_fault_handler"
+    ]
+    patches = [
+        item for item in overlay["patch_sites"]
+        if item.get("name") == "replace_goodix_derived_app_error_fault_handler"
+    ]
+    if len(leaves) != 1 or len(patches) != 1:
+        raise AuditError("production util-error routing cardinality changed")
+    leaf = leaves[0]
+    patch = patches[0]
+    relocation_targets = {
+        (item["symbol"], item.get("target_address"))
+        for item in leaf.get("relocations", [])
+    }
+    if (
+        leaf.get("source", {}).get("path") != candidate_rel
+        or leaf.get("source", {}).get("sha256") != INPUT_PINS[CANDIDATE]
+        or leaf.get("profiles") != ["apple-clang"]
+        or leaf.get("expected", {}).get("size") != 254
+        or leaf.get("expected", {}).get("offset") != 164536
+        or leaf.get("expected", {}).get("unrelocated_sha256")
+            != "ba2e1b6c02afc40bf0bcc9e6ca5ccd27f99552b4d20c1ec5d7cda2af44967285"
+        or len(leaf.get("relocations", [])) != 8
+        or relocation_targets != {
+            ("memset", 0x0043C0E4),
+            ("open_cfw_util_error_format", 0x004B4728),
+            ("open_cfw_util_error_filter", 0x0043D0CE),
+            ("open_cfw_util_error_log", 0x0043D574),
+            ("open_cfw_util_error_async_log", 0x0043CE9E),
+        }
+        or patch.get("runtime_address") != FUNCTION[0]
+        or patch.get("expected_size") != len(body)
+        or patch.get("expected_sha256") != BODY_SHA256
+        or patch.get("branch") != "b_w"
+        or patch.get("target_function") != leaf["function"]
+        or patch.get("profiles") != ["apple-clang"]
+    ):
+        raise AuditError("production util-error routing changed")
+
     decoder = _load_decoder()
     start = FUNCTION[0]
     interiors = set(range(start + 2, FUNCTION[1], 2))
@@ -325,7 +371,20 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "source_derived_third_party_data_regions": ["[0x006C8E60,0x006C8FB8)"],
             "goodix_ble_stack_linkage_proven": False,
         },
-        "production": {"production_routed": False},
+        "production": {
+            "candidate": candidate_rel,
+            "candidate_sha256": INPUT_PINS[CANDIDATE],
+            "production_routed": True,
+            "ownership_bytes": len(body),
+            "retained_stock_noncode_bytes": len(literal) + len(table),
+            "relocated_leaf_bytes": leaf["expected"]["size"],
+            "toolchain_profiles": leaf["profiles"],
+            "bounded_unknown_code_fallback": True,
+            "bound_providers": {
+                symbol: f"0x{target:08x}"
+                for symbol, target in sorted(relocation_targets)
+            },
+        },
     }
 
 

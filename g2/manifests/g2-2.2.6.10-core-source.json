@@ -5,12 +5,12 @@
     "output_name": "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
     "profiles": {
       "linux-clang": {
-        "expected_size": 4446156,
-        "expected_sha256": "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"
+        "expected_size": 4447070,
+        "expected_sha256": "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"
       }
     },
-    "expected_size": 4466426,
-    "expected_sha256": "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"
+    "expected_size": 4467302,
+    "expected_sha256": "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
   },
   "component_overrides": {
     "apollo_bootloader": {
@@ -702,16 +702,16 @@
       "source_appended_boundary": 148599
     },
     "apollo_main": {
-      "function": "Even Apollo510B application with the production source-replaced core, including authenticated EasyLogger elog_hexdump formatting, its bounded single-owner G2 raw transport, the authenticated FreeRTOS+CLI parameter accessor and complete seven-leaf console task, authenticated nanopb private buffer/read-byte helpers, stream construction, stream reading, unsigned 64-bit, signed, and atomic private/public 32-bit varint decoding, public/private Boolean decoding, private field-varint storage and range validation, private bytes- and string-field decoding, varint and string skipping, field-wire dispatch, raw wire-value reading, bounded string-substream construction, fixed64 decoding, close-substream handling, the paired private field/message default initializers, the static/pointer/callback field decoder cluster and fixed-length bytes leaf, authenticated littlefs private file-size, rewind, tag-validity, tag-type1/type2/type3/id/size, and tag-chunk helpers, the authenticated CmBacktrace current-thread-name helper closed over an exact source replacement for the recovered G2 current-TCB adapter semantics, the complete authenticated AndersKaloer/Ring-Buffer seven-function dynamic-buffer closure, clean-room recreations of the IAR void-EABI memcpy, aligned memcpy, and memmove providers, a bounded final-copy advertising hook that replaces each temple's six-character BLE-address name suffix with the pair serial suffix, thirty-eight authenticated CMSIS-FreeRTOS v10.5.1 public leaves plus all five private helpers closed over authenticated FreeRTOS providers, an atomic eight-entry MightyPork/TinyFrame source boundary using the exact authenticated core, recovered bookended G2 object layout, source-owned heap_4, retained synchronous hardware transport, and no-op diagnostic policy, and the clean-room three-function ALS-scale KVDB closure (factory-record default initializer, _kvdbUpdataAlsScale migration callback, and SVC_KvdbWriteAlsScale whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room eight-function sensor-calibration NVDB closure (primary and AG factory-record default initializers, the _nvdbUpdataSensorCaldata migration callback, the primary whole-record updater, the AG migration callback, the AG selective updater, the AG reader, and the _nvdbCheckSensorCaldata suspicious-matrix checker) bound to the retained CRC-16, NVDB blob read/write, and product-predicate providers, and the clean-room three-function setting KVDB closure (factory-record default initializer, _kvdbUpdataSetting migration callback, and SVC_KvdbWriteSetting whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function time KVDB closure (factory-record default initializer, _kvdbUpdataTime migration callback, and SVC_KvdbWriteTime timestamp/timezone writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function time-format KVDB closure (factory-record default initializer, _kvdbUpdataTimeFormat migration callback, and SVC_KvdbWriteTimeFormat whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function temperature-unit KVDB closure (factory-record default initializer, _kvdbUpdataTemperatureUnit migration callback, and SVC_KvdbWriteTemperatureUnit whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function universal-setting KVDB closure (factory-record default initializer, _kvdbUpdataUniversalSetting migration callback, and SVC_KvdbWriteUniversalSetting whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function terminal-mode KVDB closure (factory-record default initializer, _kvdbUpdataTerminalMode migration callback, and SVC_KvdbWriteTerminalMode whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room six-function onboarding-config KVDB closure (SVC_SetKvdbOnboardingConfig indexed live-byte setter, SVC_KvdbBlobWriteOnboardingConfig live-byte writer, update-and-persist wrapper, scalar live-byte getter, live-record pointer getter, and SVC_KvdbReadOnboardingConfig live-record loader) bound to the retained blob read/write providers, and the clean-room three-function ring KVDB closure (factory-record default initializer, _kvdbUpdataRing migration callback, and SVC_KvdbWriteRing whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room pathless AT^NUS command handler (retained-response emitter returning one) bound to the retained output provider at 0x00541430 and the retained NUS+OK response string at 0x0078A370, and the clean-room six-function module-configuration KVDB closure (SVC_KvdbReadLanguage/SVC_KvdbWriteLanguage one-byte language accessors, SVC_KvdbReadDashboardAutoCloseValue/SVC_KvdbWriteDashboardAutoCloseValue dashboard word accessors, and the SVC_KvdbReadMenuConfigureValue/SVC_KvdbWriteMenuConfigureValue packed menu record reader/writer) bound to the retained mode provider at 0x0045A570, the retained built-in menu item lookup at 0x00460450, the retained snapshot synchronization providers at 0x0046018E/0x004601EA, and the retained blob read/write adapters at 0x004D956C/0x004D957E, and the clean-room five-function buzzer NVDB closure (default-record CRC initializer, _nvdbUpdataBuzzer migration callback, frequency and duty getters, and the persistent whole-record updater) bound to the retained CRC-16 provider at 0x0049ACD4 and the retained NVDB blob read/write adapters at 0x005105F0/0x00510602, and the clean-room six-function product-mode NVDB closure (default-record CRC initializer, set_product_mode RAM-only setter, productModeGet getter, persistent updater, _nvdbUpdataProdMd migration callback, and productModeRead persistent reader) bound to the retained CRC-16 provider at 0x0049ACD4 and the retained NVDB blob read/write adapters at 0x005105F0/0x00510602, and the clean-room three-function MAC NVDB closure (CHIPID-derived static-random address default initializer, _nvdbUpdataMac migration callback, and persistent whole-record updater) bound to the source-owned MCUCTRL information provider at 0x00480D72, the retained CRC-32 provider at 0x004D34C4, the retained CRC-16 provider at 0x0049ACD4, and the retained NVDB blob read/write adapters at 0x005105F0/0x00510602, and the clean-room thirteen-function system-data NVDB closure (nvSysDt factory-record CRC initializer, _nvdbUpdataSysDt migration callback, SVC_NvdbWriteSysData indexed updater, system-data field getter, SVC_NvdbReadSysData direct importer, SVC_NvdbparsePsn fourteen-character PSN decoder, manufacturer/year/month helpers, aging-state reset, legacy-PSN scan, SVC_ReadPSNFromOTP journal scanner, and SVC_WritePSNToOTP journal appender) bound to the retained CRC-16 provider at 0x0049ACD4, the retained NVDB blob read/write adapters at 0x005105F0/0x00510602, the source-owned peripheral-power enable/disable entries at 0x0047F5B8/0x0047F7AE, the source-owned CMSIS delay at 0x00449376, the retained OTP INFOC word accessors at 0x0051381A/0x00513850, and the retained 40-entry legacy-PSN table at 0x006D3358, and the clean-room ULED display-preprocess buffer_sync_to_fb closure (eight-argument descriptor/region construction with the nine stock assertions, GPU start gate, and ordered destination/source/offset/commit programming) bound to the retained GPU start provider at 0x004B092A, the retained destination-channel providers at 0x004B0730/0x004B1A78/0x004B0748, the retained source-configuration provider at 0x004B1608, the retained offset provider at 0x004B1B48, and the retained commit provider at 0x004B0C8A",
+      "function": "Even Apollo510B application with the production source-replaced core, including authenticated EasyLogger elog_hexdump formatting, its bounded single-owner G2 raw transport, the authenticated FreeRTOS+CLI parameter accessor and complete seven-leaf console task, authenticated nanopb private buffer/read-byte helpers, stream construction, stream reading, unsigned 64-bit, signed, and atomic private/public 32-bit varint decoding, public/private Boolean decoding, private field-varint storage and range validation, private bytes- and string-field decoding, varint and string skipping, field-wire dispatch, raw wire-value reading, bounded string-substream construction, fixed64 decoding, close-substream handling, the paired private field/message default initializers, the static/pointer/callback field decoder cluster and fixed-length bytes leaf, authenticated littlefs private file-size, rewind, tag-validity, tag-type1/type2/type3/id/size, and tag-chunk helpers, the authenticated CmBacktrace current-thread-name helper closed over an exact source replacement for the recovered G2 current-TCB adapter semantics, the complete authenticated AndersKaloer/Ring-Buffer seven-function dynamic-buffer closure, clean-room recreations of the IAR void-EABI memcpy, aligned memcpy, and memmove providers, a bounded final-copy advertising hook that replaces each temple's six-character BLE-address name suffix with the pair serial suffix, thirty-eight authenticated CMSIS-FreeRTOS v10.5.1 public leaves plus all five private helpers closed over authenticated FreeRTOS providers, an atomic eight-entry MightyPork/TinyFrame source boundary using the exact authenticated core, recovered bookended G2 object layout, source-owned heap_4, retained synchronous hardware transport, and no-op diagnostic policy, and the clean-room three-function ALS-scale KVDB closure (factory-record default initializer, _kvdbUpdataAlsScale migration callback, and SVC_KvdbWriteAlsScale whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room eight-function sensor-calibration NVDB closure (primary and AG factory-record default initializers, the _nvdbUpdataSensorCaldata migration callback, the primary whole-record updater, the AG migration callback, the AG selective updater, the AG reader, and the _nvdbCheckSensorCaldata suspicious-matrix checker) bound to the retained CRC-16, NVDB blob read/write, and product-predicate providers, and the clean-room three-function setting KVDB closure (factory-record default initializer, _kvdbUpdataSetting migration callback, and SVC_KvdbWriteSetting whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function time KVDB closure (factory-record default initializer, _kvdbUpdataTime migration callback, and SVC_KvdbWriteTime timestamp/timezone writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function time-format KVDB closure (factory-record default initializer, _kvdbUpdataTimeFormat migration callback, and SVC_KvdbWriteTimeFormat whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function temperature-unit KVDB closure (factory-record default initializer, _kvdbUpdataTemperatureUnit migration callback, and SVC_KvdbWriteTemperatureUnit whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function universal-setting KVDB closure (factory-record default initializer, _kvdbUpdataUniversalSetting migration callback, and SVC_KvdbWriteUniversalSetting whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room three-function terminal-mode KVDB closure (factory-record default initializer, _kvdbUpdataTerminalMode migration callback, and SVC_KvdbWriteTerminalMode whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room six-function onboarding-config KVDB closure (SVC_SetKvdbOnboardingConfig indexed live-byte setter, SVC_KvdbBlobWriteOnboardingConfig live-byte writer, update-and-persist wrapper, scalar live-byte getter, live-record pointer getter, and SVC_KvdbReadOnboardingConfig live-record loader) bound to the retained blob read/write providers, and the clean-room three-function ring KVDB closure (factory-record default initializer, _kvdbUpdataRing migration callback, and SVC_KvdbWriteRing whole-record writer) bound to the retained CRC-16 and blob read/write providers, and the clean-room pathless AT^NUS command handler (retained-response emitter returning one) bound to the retained output provider at 0x00541430 and the retained NUS+OK response string at 0x0078A370, and the clean-room six-function module-configuration KVDB closure (SVC_KvdbReadLanguage/SVC_KvdbWriteLanguage one-byte language accessors, SVC_KvdbReadDashboardAutoCloseValue/SVC_KvdbWriteDashboardAutoCloseValue dashboard word accessors, and the SVC_KvdbReadMenuConfigureValue/SVC_KvdbWriteMenuConfigureValue packed menu record reader/writer) bound to the retained mode provider at 0x0045A570, the retained built-in menu item lookup at 0x00460450, the retained snapshot synchronization providers at 0x0046018E/0x004601EA, and the retained blob read/write adapters at 0x004D956C/0x004D957E, and the clean-room five-function buzzer NVDB closure (default-record CRC initializer, _nvdbUpdataBuzzer migration callback, frequency and duty getters, and the persistent whole-record updater) bound to the retained CRC-16 provider at 0x0049ACD4 and the retained NVDB blob read/write adapters at 0x005105F0/0x00510602, and the clean-room six-function product-mode NVDB closure (default-record CRC initializer, set_product_mode RAM-only setter, productModeGet getter, persistent updater, _nvdbUpdataProdMd migration callback, and productModeRead persistent reader) bound to the retained CRC-16 provider at 0x0049ACD4 and the retained NVDB blob read/write adapters at 0x005105F0/0x00510602, and the clean-room three-function MAC NVDB closure (CHIPID-derived static-random address default initializer, _nvdbUpdataMac migration callback, and persistent whole-record updater) bound to the source-owned MCUCTRL information provider at 0x00480D72, the retained CRC-32 provider at 0x004D34C4, the retained CRC-16 provider at 0x0049ACD4, and the retained NVDB blob read/write adapters at 0x005105F0/0x00510602, and the clean-room thirteen-function system-data NVDB closure (nvSysDt factory-record CRC initializer, _nvdbUpdataSysDt migration callback, SVC_NvdbWriteSysData indexed updater, system-data field getter, SVC_NvdbReadSysData direct importer, SVC_NvdbparsePsn fourteen-character PSN decoder, manufacturer/year/month helpers, aging-state reset, legacy-PSN scan, SVC_ReadPSNFromOTP journal scanner, and SVC_WritePSNToOTP journal appender) bound to the retained CRC-16 provider at 0x0049ACD4, the retained NVDB blob read/write adapters at 0x005105F0/0x00510602, the source-owned peripheral-power enable/disable entries at 0x0047F5B8/0x0047F7AE, the source-owned CMSIS delay at 0x00449376, the retained OTP INFOC word accessors at 0x0051381A/0x00513850, and the retained 40-entry legacy-PSN table at 0x006D3358, and the clean-room ULED display-preprocess buffer_sync_to_fb closure (eight-argument descriptor/region construction with the nine stock assertions, GPU start gate, and ordered destination/source/offset/commit programming) bound to the retained GPU start provider at 0x004B092A, the retained destination-channel providers at 0x004B0730/0x004B1A78/0x004B0748, the retained source-configuration provider at 0x004B1608, the retained offset provider at 0x004B1B48, and the retained commit provider at 0x004B0C8A, and the clean-room Goodix GR551x SDK 1.7.0-derived APP_errorFaultHandler executable policy bound to retained formatter/EasyLogger providers and authenticated stock table/string data with a bounded unknown-code safety correction",
       "provider": {
         "kind": "source_build",
         "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-        "size": 3687932,
-        "sha256": "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
+        "size": 3688808,
+        "sha256": "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
         "profiles": {
           "linux-clang": {
-            "size": 3667662,
-            "sha256": "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"
+            "size": 3668576,
+            "sha256": "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
           }
         }
       },
@@ -1345,14 +1345,34 @@
           "output": "apollo510b/source-entry-freertos-port-exit-critical-0x004420e8.bin"
         },
         {
-          "name": "opaque_between_freertos_port_exit_critical_and_ui_module_dispatch_event",
-          "function": "Official FreeRTOS port bytes after source-replaced vPortExitCritical and before the source UI-module dispatcher",
+          "name": "opaque_between_freertos_port_exit_critical_and_port_start_scheduler",
+          "function": "Official FreeRTOS port bytes after source-replaced vPortExitCritical and before source-replaced xPortStartScheduler",
           "file_offset": 41268,
-          "size": 374,
+          "size": 206,
           "target": "apollo510b_internal_mram",
           "target_address": 4464916,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x00442114.bin"
+        },
+        {
+          "name": "freertos_port_start_scheduler_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing authenticated FreeRTOS V10.5.1 xPortStartScheduler",
+          "file_offset": 41474,
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4465122,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-freertos-port-start-scheduler-0x004421e2.bin"
+        },
+        {
+          "name": "opaque_between_freertos_port_start_scheduler_and_ui_module_dispatch_event",
+          "function": "Official bytes after source-replaced xPortStartScheduler and before the source UI-module dispatcher",
+          "file_offset": 41520,
+          "size": 122,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4465168,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x00442210.bin"
         },
         {
           "name": "ui_module_dispatch_event_source_replacement",
@@ -2095,14 +2115,14 @@
           "output": "apollo510b/main-generated-freertos-task-priority-set-0x00454c12.bin"
         },
         {
-          "name": "opaque_between_freertos_task_priority_set_and_task_suspend_all",
-          "function": "Official FreeRTOS task bytes between source-replaced vTaskPrioritySet and vTaskSuspendAll",
+          "name": "freertos_task_start_scheduler_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing authenticated FreeRTOS V10.5.1 vTaskStartScheduler",
           "file_offset": 118028,
           "size": 144,
           "target": "apollo510b_internal_mram",
           "target_address": 4541676,
-          "address_status": "official_blob",
-          "output": "apollo510b/main-opaque-0x00454cec.bin"
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-freertos-task-start-scheduler-0x00454cec.bin"
         },
         {
           "name": "freertos_task_suspend_all_source_replacement",
@@ -2195,14 +2215,24 @@
           "output": "apollo510b/source-entry-freertos-task-increment-tick-0x0045504c.bin"
         },
         {
-          "name": "opaque_between_freertos_task_increment_tick_and_place_on_event_list",
-          "function": "Official FreeRTOS task bytes between source-replaced xTaskIncrementTick and vTaskPlaceOnEventList",
+          "name": "opaque_between_freertos_task_increment_tick_and_task_switch_context",
+          "function": "Official FreeRTOS task bytes between source-replaced xTaskIncrementTick and source-replaced vTaskSwitchContext",
           "file_offset": 119230,
-          "size": 228,
+          "size": 22,
           "target": "apollo510b_internal_mram",
           "target_address": 4542878,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x0045519e.bin"
+        },
+        {
+          "name": "freertos_task_switch_context_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing authenticated FreeRTOS V10.5.1 vTaskSwitchContext",
+          "file_offset": 119252,
+          "size": 206,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4542900,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/source-entry-freertos-task-switch-context-0x004551b4.bin"
         },
         {
           "name": "freertos_task_place_on_event_list_source_replacement",
@@ -2305,14 +2335,34 @@
           "output": "apollo510b/source-entry-freertos-task-lists-initialize-0x0045568c.bin"
         },
         {
-          "name": "opaque_between_freertos_task_lists_initialize_and_stack_check",
-          "function": "Official FreeRTOS task bytes between source-replaced prvInitialiseTaskLists and prvTaskCheckFreeStackSpace",
+          "name": "opaque_between_freertos_task_lists_initialize_and_task_get_info",
+          "function": "Official FreeRTOS task bytes between source-replaced prvInitialiseTaskLists and vTaskGetInfo",
           "file_offset": 120576,
-          "size": 320,
+          "size": 72,
           "target": "apollo510b_internal_mram",
           "target_address": 4544224,
           "address_status": "official_blob",
           "output": "apollo510b/main-opaque-0x004556e0.bin"
+        },
+        {
+          "name": "freertos_task_get_info_source_replacement",
+          "function": "Generated entry redirect and NOP fill replacing authenticated FreeRTOS V10.5.1 vTaskGetInfo",
+          "file_offset": 120648,
+          "size": 128,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4544296,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/main-source-entry-freertos-task-get-info-0x00455728.bin"
+        },
+        {
+          "name": "opaque_between_freertos_task_get_info_and_stack_check",
+          "function": "Official FreeRTOS task bytes between source-replaced vTaskGetInfo and prvTaskCheckFreeStackSpace",
+          "file_offset": 120776,
+          "size": 120,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4544424,
+          "address_status": "official_blob",
+          "output": "apollo510b/main-opaque-0x004557a8.bin"
         },
         {
           "name": "freertos_task_check_free_stack_space_source_replacement",
@@ -18013,6 +18063,106 @@
           "target_address": 8111568,
           "address_status": "source_compiled",
           "output": "apollo510b/main-source-chg-bq27427-hardware-init-rodata-0x007bc5d0.bin"
+        },
+        {
+          "name": "util_error_check_source_text",
+          "function": "Clean-room source-owned Goodix-derived APP_errorFaultHandler text with bounded unknown-code handling",
+          "file_offset": 3687932,
+          "size": 254,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8111580,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-util-error-check-text-0x007bc5dc.bin"
+        },
+        {
+          "name": "freertos_task_get_info_source_alignment",
+          "function": "Generated zero padding aligning the relocated FreeRTOS vTaskGetInfo source leaf",
+          "file_offset": 3688186,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8111834,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-freertos-task-get-info-alignment-0x007bc6da.bin"
+        },
+        {
+          "name": "freertos_task_get_info_source_text",
+          "function": "Authenticated FreeRTOS V10.5.1 vTaskGetInfo source leaf over the recovered G2 TCB and TaskStatus_t ABI",
+          "file_offset": 3688188,
+          "size": 120,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8111836,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-freertos-task-get-info-text-0x007bc6dc.bin"
+        },
+        {
+          "name": "freertos_task_switch_context_source_text",
+          "function": "Authenticated FreeRTOS V10.5.1 vTaskSwitchContext source leaf with recovered G2 trace-ring semantics",
+          "file_offset": 3688308,
+          "size": 266,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8111956,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-freertos-task-switch-context-text-0x007bc754.bin"
+        },
+        {
+          "name": "freertos_port_start_scheduler_source_alignment",
+          "function": "Generated zero padding aligning the relocated FreeRTOS xPortStartScheduler source leaf",
+          "file_offset": 3688574,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112222,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-freertos-port-start-scheduler-alignment-0x007bc85e.bin"
+        },
+        {
+          "name": "freertos_port_start_scheduler_source_text",
+          "function": "Authenticated FreeRTOS V10.5.1 xPortStartScheduler source leaf over the recovered G2 Cortex-M55 port ABI",
+          "file_offset": 3688576,
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112224,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-freertos-port-start-scheduler-text-0x007bc860.bin"
+        },
+        {
+          "name": "freertos_start_assert_failure_source_alignment",
+          "function": "Generated zero padding aligning the scheduler-start fail-stop source leaf",
+          "file_offset": 3688634,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112282,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-freertos-start-assert-failure-alignment-0x007bc89a.bin"
+        },
+        {
+          "name": "freertos_start_assert_failure_source_text",
+          "function": "Source-owned non-returning scheduler-start allocation assertion fail-stop",
+          "file_offset": 3688636,
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112284,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-freertos-start-assert-failure-text-0x007bc89c.bin"
+        },
+        {
+          "name": "freertos_task_start_scheduler_source_alignment",
+          "function": "Generated zero padding aligning the relocated FreeRTOS vTaskStartScheduler source leaf",
+          "file_offset": 3688650,
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112298,
+          "address_status": "generated_alignment",
+          "output": "apollo510b/main-source-freertos-task-start-scheduler-alignment-0x007bc8aa.bin"
+        },
+        {
+          "name": "freertos_task_start_scheduler_source_text",
+          "function": "Authenticated FreeRTOS V10.5.1 vTaskStartScheduler source leaf over the recovered G2 scheduler ABI",
+          "file_offset": 3688652,
+          "size": 156,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8112300,
+          "address_status": "source_compiled",
+          "output": "apollo510b/main-source-freertos-task-start-scheduler-text-0x007bc8ac.bin"
         }
       ],
       "source_appended_boundary": 3523396

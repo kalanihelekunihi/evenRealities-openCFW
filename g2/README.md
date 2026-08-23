@@ -1699,10 +1699,10 @@ discontiguous 64-byte IAR literal/template pool at
 `[0x0046CA74,0x0046CAB4)` stays retained stock; the sole direct call at
 `0x0046CA64` reaches the leaf through the redirect. Under the reviewed
 Apple Clang 21 profile the overlay/component/package sizes are
-`164536/3687932/4466426` with SHA-256
-`a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546`,
-`4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07`, and
-`cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4`; the
+`164912/3688308/4466802` with SHA-256
+`8c65ebb25586f80cc4eaec62fd9442c0dc28a37a897fec7349822d980cc767e0`,
+`4dea653f6001fc9cf287253481ab412d9046a590bc70707fadce6afb01307b09`, and
+`03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`; the
 leaf and redirect are gated `apple-clang`, so the recorded linux-clang
 profile is byte-unaffected and its leaf pins await Linux toolchain
 regeneration.
@@ -3828,3 +3828,71 @@ cleanup patch, and the compact artifact preserves two valid zero-unresolved
 hybrid links while explicitly rejecting two zero-code base links as vacuous.
 See `docs/research/cordio-smp-main-source-recovery.md` and
 `research/lorelei/README.md`.
+
+## Current Goodix-derived error-handler production routing
+
+The retained Even utility copied from Goodix GR551x SDK 1.7.0 now has a
+clean-room production replacement. The 254-byte
+`open_cfw_app_error_fault_handler` leaf is appended to the Apple Clang overlay
+and one guarded `B.W` redirect replaces the 178-byte stock handler at
+`[0x00509B48,0x00509BFA)`. Its eight relocations bind only to the recovered
+memset, formatter, and EasyLogger providers. The authenticated 43-row stock
+table and strings remain data dependencies.
+
+Unlike the stock unbounded table walk, an unknown API error stops after all 43
+rows and uses the retained `Application error.` row. This bounded fallback is
+an intentional reviewed safety correction. Host oracles cover both formatter
+branches, synchronous/asynchronous logging selection, known codes, and the
+unknown-code case; the target build proves a single global Thumb text leaf.
+
+The current Apple overlay/component/package identities are
+`164912/3688308/4466802` bytes with SHA-256
+`8c65ebb25586f80cc4eaec62fd9442c0dc28a37a897fec7349822d980cc767e0`,
+`4dea653f6001fc9cf287253481ab412d9046a590bc70707fadce6afb01307b09`, and
+`03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
+No package was signed or flashed and no hardware was accessed.
+
+## Current FreeRTOS task-information production routing
+
+The final public task/queue-private gap is now source-owned. Authenticated
+FreeRTOS-Kernel V10.5.1 `vTaskGetInfo` replaces the complete 128-byte stock
+body at `[0x00455728,0x004557A8)` with a 120-byte relocated leaf at
+`0x007BC6DC`. The recovered G2 ABI pins the 112-byte TCB, 36-byte
+`TaskStatus_t`, one-byte state enum, current-TCB word `0x20074A20`, and every
+field accessed by the function. Four calls bind only to the already
+source-owned task-state, suspend, resume, and free-stack-space entries.
+
+`make freertos-task-get-info-closure` covers current-task selection, supplied
+and computed states, suspended-versus-blocked classification, scheduler
+suspend/resume pairing, optional stack scanning, stock-span authentication,
+and exact production routing. The deterministic Apple package is 4,466,802
+bytes with SHA-256
+`03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
+No hardware was accessed or flashed; the remaining platform scheduler-start
+and STIMER/tickless rows are separate, with physical timing validation still
+blocked by unavailable authorized hardware.
+
+## Current FreeRTOS scheduler-start production routing
+
+The scheduler-start core is now admitted atomically rather than left as three
+independent candidates. The complete stock entries for `vTaskStartScheduler`
+at `[0x00454CEC,0x00454D7C)`, `xPortStartScheduler` at
+`[0x004421E2,0x00442210)`, and `vTaskSwitchContext` at
+`[0x004551B4,0x00455282)` redirect to four strict-relocation source leaves,
+including a dedicated non-returning assertion fail-stop. The source chain
+retains the authenticated G2 scheduler globals, static idle-task storage,
+priority and trace-ring policy, SHPR3 programming, timer setup, first-task
+handoff, and stack-overflow checks.
+
+`make freertos-scheduler-start-core-closure` exercises the four target and
+host contracts. Deterministic Apple overlay/component/package sizes are
+`165412/3688808/4467302`, with SHA-256 values
+`91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada`,
+`9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c`,
+and `88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f`.
+The Linux profile independently closes at `145180/3668576/4447070` with
+package SHA-256
+`be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25`.
+No hardware was accessed or flashed. Live CM55 preemption, exception return,
+overflow-hook, trace-concurrency, and STIMER timing evidence remains explicitly
+blocked by the absence of an authorized G2 and probe/capture setup.

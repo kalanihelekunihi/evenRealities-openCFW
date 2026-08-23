@@ -25137,7 +25137,35 @@
           "symbol_type": "STT_NOTYPE",
           "target_function": "open_cfw_freertos_list_insert_end"
         }
-      ]
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 130,
+            "sha256": "ac2d04d1acb4653ca6a10956545fb2d52e31838e99b850c8586988ad8941ab6a",
+            "alignment": 4,
+            "offset": 144268,
+            "unrelocated_sha256": "53b7d42d835da8f852febb24f55dfaa84dfd686944b510894216ab4754f119b6"
+          },
+          "relocations": [
+            {
+              "offset": 96,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_freertos_list_remove",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_list_remove"
+            },
+            {
+              "offset": 120,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_freertos_list_insert_end",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_list_insert_end"
+            }
+          ]
+        }
+      }
     },
     {
       "function": "open_cfw_freertos_task_priority_disinherit_after_timeout",
@@ -25202,6 +25230,41 @@
         "alignment": 4,
         "offset": 142712,
         "unrelocated_sha256": "802fd5488687bd894ae57fb13dc774812d0c1e96a6803707e445f781a25b00c7"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 174,
+            "sha256": "0cf4cb1ddf97f815b00ef6da9244226a824b56facb66149cb938a0b9d1243da0",
+            "alignment": 4,
+            "offset": 144400,
+            "unrelocated_sha256": "8cff28e85ab6b4248e405cf576a2aaad265731ef75dde48131f2249e124053b0"
+          },
+          "relocations": [
+            {
+              "offset": 84,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "ulSetInterruptMask",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "ulSetInterruptMask"
+            },
+            {
+              "offset": 98,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "ulSetInterruptMask",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "ulSetInterruptMask"
+            },
+            {
+              "offset": 120,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_freertos_list_remove",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_list_remove"
+            }
+          ]
+        }
       }
     },
     {
@@ -25239,6 +25302,19 @@
         "alignment": 2,
         "offset": 142886,
         "unrelocated_sha256": "154d24d2cf8f15fed12b16d091a734a70d216ceda6fabb0978cadb522139a2c2"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 70,
+            "sha256": "154d24d2cf8f15fed12b16d091a734a70d216ceda6fabb0978cadb522139a2c2",
+            "alignment": 2,
+            "offset": 144574,
+            "unrelocated_sha256": "154d24d2cf8f15fed12b16d091a734a70d216ceda6fabb0978cadb522139a2c2"
+          },
+          "relocations": []
+        }
       }
     },
     {
@@ -25302,6 +25378,32 @@
       "toolchain_profiles": {
         "apple-terminate-record": {
           "reviewed_version_prefix": "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+        },
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 30,
+            "sha256": "81559f0064cfa6fa507083dac435194eedc27d1d1ec2ca09ad32f4d015950556",
+            "alignment": 4,
+            "offset": 144644,
+            "unrelocated_sha256": "d75cf0bcab6e2f5ad28d7fcde4b87623f99334c2f17e2246c1343d985b5f7f9c"
+          },
+          "relocations": [
+            {
+              "offset": 8,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_littlefs_mlist_isopen",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_littlefs_mlist_isopen"
+            },
+            {
+              "offset": 22,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_littlefs_file_size_private",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_littlefs_file_size_private"
+            }
+          ]
         }
       }
     },
@@ -36098,6 +36200,832 @@
           "target_function": "open_cfw_bq27427_status_update"
         }
       ]
+    },
+    {
+      "function": "open_cfw_app_error_fault_handler",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/apollo_main/core_overlay/util_error_check.c",
+        "size": 5566,
+        "sha256": "c79bad48288360b3c00d87ae6a9b1ae04f4781b04f6f655d3d0ccc785d0f7f08",
+        "license": "GPL-3.0-only",
+        "origin": "production clean-room recovery of the Goodix GR551x SDK 1.7.0-derived APP_errorFaultHandler body at stock run 0x00509B48, with a bounded unknown-code safety correction and retained authenticated stock table/string data",
+        "evidence": "docs/research/g2-util-error-check-goodix-recovery.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 254,
+        "sha256": "b68163f314a71ba4b8eeeab0981042d424f8f6e4e103852f50a5e57dfcc59ae9",
+        "alignment": 4,
+        "offset": 164536,
+        "unrelocated_sha256": "ba2e1b6c02afc40bf0bcc9e6ca5ccd27f99552b4d20c1ec5d7cda2af44967285"
+      },
+      "relocations": [
+        {
+          "offset": 28,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "memset",
+          "target_address": 4440292
+        },
+        {
+          "offset": 108,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_util_error_format",
+          "target_address": 4933416
+        },
+        {
+          "offset": 146,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_util_error_format",
+          "target_address": 4933416
+        },
+        {
+          "offset": 150,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_util_error_filter",
+          "target_address": 4444366
+        },
+        {
+          "offset": 204,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_util_error_log",
+          "target_address": 4445556
+        },
+        {
+          "offset": 208,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_util_error_filter",
+          "target_address": 4444366
+        },
+        {
+          "offset": 216,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_util_error_filter",
+          "target_address": 4444366
+        },
+        {
+          "offset": 242,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_util_error_async_log",
+          "target_address": 4443806
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_freertos_task_get_info",
+      "profiles": [
+        "apple-clang"
+      ],
+      "source": {
+        "path": "components/shared/freertos/runtime_freertos_task_get_info.c",
+        "size": 2885,
+        "sha256": "a70ee63946f342b39a2e75ce42c68f88b5c4a9599ac730ba220a6eb34db837d4",
+        "license": "MIT",
+        "origin": "bounded source-equivalent adaptation of authenticated FreeRTOS-Kernel V10.5.1 vTaskGetInfo over the recovered G2 TCB and TaskStatus_t ABI",
+        "upstream": "https://github.com/FreeRTOS/FreeRTOS-Kernel/blob/def7d2df2b0506d3d249334974f51e427c17a41c/tasks.c",
+        "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+        "evidence": "docs/research/freertos-task-get-info-source-audit.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "expected": {
+        "size": 120,
+        "sha256": "d11bed3afc9fd39e0315d3efa1cbe5dac85d723e90009103b67bf39420d9995d",
+        "alignment": 4,
+        "offset": 164792,
+        "unrelocated_sha256": "853e2b1f7fd21913e9f51dea0edb8252a131712628a583d875a8b7e15f01d393"
+      },
+      "relocations": [
+        {
+          "offset": 60,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_task_get_state",
+          "target_function": "open_cfw_freertos_task_get_state"
+        },
+        {
+          "offset": 76,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_task_suspend_all",
+          "target_function": "open_cfw_freertos_task_suspend_all"
+        },
+        {
+          "offset": 90,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_task_resume_all",
+          "target_function": "open_cfw_freertos_task_resume_all"
+        },
+        {
+          "offset": 110,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_task_check_free_stack_space",
+          "target_function": "open_cfw_freertos_task_check_free_stack_space"
+        }
+      ]
+    },
+    {
+      "function": "open_cfw_freertos_task_switch_context",
+      "source": {
+        "path": "components/shared/freertos/runtime_freertos_task_switch_context.c",
+        "size": 3197,
+        "sha256": "4ba2014b9dfada5eeeeae7d5d2ddea5a80efaa86c9aec6cabf7b47fb7ce6c2ea",
+        "license": "MIT",
+        "origin": "bounded source-equivalent adaptation of authenticated FreeRTOS-Kernel V10.5.1 vTaskSwitchContext with the recovered G2 ready-list, stack-overflow, and trace-ring ABI",
+        "upstream": "https://github.com/FreeRTOS/FreeRTOS-Kernel/blob/def7d2df2b0506d3d249334974f51e427c17a41c/tasks.c",
+        "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+        "evidence": "docs/research/freertos-task-switch-context-source-candidate-audit.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 266,
+        "sha256": "b9ac8b65d28a545d495449068f0fea521e3a77fca9b699033756fa920e5fb0f9",
+        "alignment": 4,
+        "offset": 164912,
+        "unrelocated_sha256": "37bfb94e9294e10861e68f6e191e12db2be17cef97a412e15a2857fa32874c0b"
+      },
+      "relocations": [
+        {
+          "offset": 66,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_retained_freertos_stack_overflow_hook",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4642924
+        },
+        {
+          "offset": 224,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "ulSetInterruptMask",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "ulSetInterruptMask"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 266,
+            "sha256": "1c421d242ee967e740e9d8f7cdb57d666b5e88d47d28a18778e2a0fd8354d282",
+            "alignment": 4,
+            "offset": 144676,
+            "unrelocated_sha256": "d5d43e9359c06270e28900321583ac9663caf9191becd82de54985e085c2b5f8"
+          },
+          "relocations": [
+            {
+              "offset": 66,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_retained_freertos_stack_overflow_hook",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4642924
+            },
+            {
+              "offset": 226,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "ulSetInterruptMask",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "ulSetInterruptMask"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "function": "open_cfw_freertos_port_start_scheduler",
+      "source": {
+        "path": "components/shared/freertos/runtime_freertos_port_start_scheduler.c",
+        "size": 1349,
+        "sha256": "d9c81e493675b2ef0e1e73fd0ed6de7618af57facf46b09689d288982e00b2c2",
+        "license": "MIT",
+        "origin": "bounded source-equivalent adaptation of authenticated FreeRTOS-Kernel V10.5.1 xPortStartScheduler over the recovered G2 Cortex-M55 port ABI",
+        "upstream": "https://github.com/FreeRTOS/FreeRTOS-Kernel/blob/def7d2df2b0506d3d249334974f51e427c17a41c/portable/IAR/ARM_CM55_NTZ/non_secure/port.c",
+        "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+        "evidence": "docs/research/freertos-port-start-scheduler-source-candidate-audit.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 58,
+        "sha256": "fee68f9b220e8a6895f04572aca02a538df8be40c858ba6a04cf34633cbdb415",
+        "alignment": 4,
+        "offset": 165180,
+        "unrelocated_sha256": "c02d239a4f345d45184ae3f9720abd43d28fff09c6b8ae5e51db75940cf51a88"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_retained_freertos_system_handler_priority",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 3758157088
+        },
+        {
+          "offset": 6,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_retained_freertos_system_handler_priority",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 3758157088
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_retained_freertos_timer_interrupt_setup",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4547646
+        },
+        {
+          "offset": 30,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_retained_freertos_critical_nesting",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 536883356
+        },
+        {
+          "offset": 34,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_retained_freertos_critical_nesting",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 536883356
+        },
+        {
+          "offset": 42,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_retained_freertos_start_first_task",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 6267020
+        },
+        {
+          "offset": 46,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_task_switch_context",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_task_switch_context"
+        },
+        {
+          "offset": 50,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_retained_freertos_task_exit_error",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4464764
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 58,
+            "sha256": "b262d75a6cde2c5e29f0c6c9768ad5bf92ef3d2e5f3bb3f16d62ba5b033913f0",
+            "alignment": 4,
+            "offset": 144944,
+            "unrelocated_sha256": "c02d239a4f345d45184ae3f9720abd43d28fff09c6b8ae5e51db75940cf51a88"
+          },
+          "relocations": [
+            {
+              "offset": 2,
+              "type": "R_ARM_THM_MOVW_ABS_NC",
+              "symbol": "open_cfw_retained_freertos_system_handler_priority",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 3758157088
+            },
+            {
+              "offset": 6,
+              "type": "R_ARM_THM_MOVT_ABS",
+              "symbol": "open_cfw_retained_freertos_system_handler_priority",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 3758157088
+            },
+            {
+              "offset": 26,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_retained_freertos_timer_interrupt_setup",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4547646
+            },
+            {
+              "offset": 30,
+              "type": "R_ARM_THM_MOVW_ABS_NC",
+              "symbol": "open_cfw_retained_freertos_critical_nesting",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 536883356
+            },
+            {
+              "offset": 34,
+              "type": "R_ARM_THM_MOVT_ABS",
+              "symbol": "open_cfw_retained_freertos_critical_nesting",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 536883356
+            },
+            {
+              "offset": 42,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_retained_freertos_start_first_task",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 6267020
+            },
+            {
+              "offset": 46,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_freertos_task_switch_context",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_task_switch_context"
+            },
+            {
+              "offset": 50,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_retained_freertos_task_exit_error",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4464764
+            }
+          ]
+        }
+      }
+    },
+    {
+      "function": "open_cfw_freertos_start_assert_failure",
+      "source": {
+        "path": "components/shared/freertos/runtime_freertos_start_assert_failure.c",
+        "size": 814,
+        "sha256": "ea369efd6eb8b7270b96462a3e540655301345e2f0e6aee5817d2d929cf2bff9",
+        "license": "MIT",
+        "origin": "bounded source implementation of the released G2 vTaskStartScheduler configASSERT fail-stop path",
+        "evidence": "docs/research/freertos-task-start-scheduler-source-candidate-audit.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 14,
+        "sha256": "45c2e549e038ce7baefb5406d3fb7889f8bbfdbfb10e475ab54cb7be2176f450",
+        "alignment": 4,
+        "offset": 165240,
+        "unrelocated_sha256": "163edbeed4884668008114837339202f2c9f7ca1aca9a651690b8bca0035d8cb"
+      },
+      "relocations": [
+        {
+          "offset": 0,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "ulSetInterruptMask",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "ulSetInterruptMask"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 14,
+            "sha256": "1abd4cd555f0ab7ab2e21c4e28a9842c8e5462dad641f366ca8c80e88bb16d1e",
+            "alignment": 4,
+            "offset": 145004,
+            "unrelocated_sha256": "163edbeed4884668008114837339202f2c9f7ca1aca9a651690b8bca0035d8cb"
+          },
+          "relocations": [
+            {
+              "offset": 0,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "ulSetInterruptMask",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "ulSetInterruptMask"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "function": "open_cfw_freertos_task_start_scheduler",
+      "source": {
+        "path": "components/shared/freertos/runtime_freertos_task_start_scheduler.c",
+        "size": 3427,
+        "sha256": "aa0d3c9e1c2168cdd2dab95014363f6f3b69d9e77b0def2b47cf42932c1055b5",
+        "license": "MIT",
+        "origin": "bounded source-equivalent adaptation of authenticated FreeRTOS-Kernel V10.5.1 vTaskStartScheduler over the recovered G2 scheduler ABI",
+        "upstream": "https://github.com/FreeRTOS/FreeRTOS-Kernel/blob/def7d2df2b0506d3d249334974f51e427c17a41c/tasks.c",
+        "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+        "evidence": "docs/research/freertos-task-start-scheduler-source-candidate-audit.md"
+      },
+      "toolchain": {
+        "target": "thumbv7em-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mthumb",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 156,
+        "sha256": "9656ff5471d3d5653447803072fcd4808b96fc90bf19e5df924ff6bdac28c9b6",
+        "alignment": 4,
+        "offset": 165256,
+        "unrelocated_sha256": "64d46ee081e3b16e4542d19d8236139ebe014cb3d9419d21e009ecd617c3ab9b"
+      },
+      "relocations": [
+        {
+          "offset": 18,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_retained_freertos_idle_task_memory_get",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4773208
+        },
+        {
+          "offset": 34,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": "open_cfw_retained_freertos_idle_task_entry",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4543984
+        },
+        {
+          "offset": 38,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": "open_cfw_retained_freertos_idle_task_entry",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4543984
+        },
+        {
+          "offset": 42,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": "open_cfw_retained_freertos_idle_task_name",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 7924388
+        },
+        {
+          "offset": 46,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": "open_cfw_retained_freertos_idle_task_name",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 7924388
+        },
+        {
+          "offset": 56,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_retained_freertos_task_create_static",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4540448
+        },
+        {
+          "offset": 60,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_retained_freertos_idle_task_handle",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 537348692
+        },
+        {
+          "offset": 64,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_retained_freertos_idle_task_handle",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 537348692
+        },
+        {
+          "offset": 74,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_retained_freertos_timer_task_create",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4712052
+        },
+        {
+          "offset": 86,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_retained_freertos_interrupt_mask_set",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 6267044
+        },
+        {
+          "offset": 90,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_retained_freertos_next_task_unblock_time",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 537348688
+        },
+        {
+          "offset": 94,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_retained_freertos_next_task_unblock_time",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 537348688
+        },
+        {
+          "offset": 104,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_retained_freertos_scheduler_running",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 537348668
+        },
+        {
+          "offset": 108,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_retained_freertos_scheduler_running",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 537348668
+        },
+        {
+          "offset": 116,
+          "type": "R_ARM_THM_MOVW_ABS_NC",
+          "symbol": "open_cfw_retained_freertos_tick_count",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 537348660
+        },
+        {
+          "offset": 120,
+          "type": "R_ARM_THM_MOVT_ABS",
+          "symbol": "open_cfw_retained_freertos_tick_count",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 537348660
+        },
+        {
+          "offset": 128,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_port_start_scheduler",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_port_start_scheduler"
+        },
+        {
+          "offset": 134,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_freertos_start_assert_failure",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_start_assert_failure"
+        },
+        {
+          "offset": 140,
+          "type": "R_ARM_THM_MOVW_PREL_NC",
+          "symbol": "open_cfw_retained_freertos_top_used_priority",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 536886688
+        },
+        {
+          "offset": 144,
+          "type": "R_ARM_THM_MOVT_PREL",
+          "symbol": "open_cfw_retained_freertos_top_used_priority",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 536886688
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 160,
+            "sha256": "c791be22fc263bb99f8b77496e10cedcf914fca044179e9bb181aa4c906fd85d",
+            "alignment": 4,
+            "offset": 145020,
+            "unrelocated_sha256": "d6f533bac74d68ad545b70f022de3c922e2f678ed2a6557b9f8a57341a52cf02"
+          },
+          "relocations": [
+            {
+              "offset": 18,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_retained_freertos_idle_task_memory_get",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4773208
+            },
+            {
+              "offset": 34,
+              "type": "R_ARM_THM_MOVW_PREL_NC",
+              "symbol": "open_cfw_retained_freertos_idle_task_entry",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4543984
+            },
+            {
+              "offset": 38,
+              "type": "R_ARM_THM_MOVT_PREL",
+              "symbol": "open_cfw_retained_freertos_idle_task_entry",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4543984
+            },
+            {
+              "offset": 42,
+              "type": "R_ARM_THM_MOVW_PREL_NC",
+              "symbol": "open_cfw_retained_freertos_idle_task_name",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 7924388
+            },
+            {
+              "offset": 46,
+              "type": "R_ARM_THM_MOVT_PREL",
+              "symbol": "open_cfw_retained_freertos_idle_task_name",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 7924388
+            },
+            {
+              "offset": 60,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_retained_freertos_task_create_static",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4540448
+            },
+            {
+              "offset": 64,
+              "type": "R_ARM_THM_MOVW_ABS_NC",
+              "symbol": "open_cfw_retained_freertos_idle_task_handle",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 537348692
+            },
+            {
+              "offset": 68,
+              "type": "R_ARM_THM_MOVT_ABS",
+              "symbol": "open_cfw_retained_freertos_idle_task_handle",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 537348692
+            },
+            {
+              "offset": 78,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_retained_freertos_timer_task_create",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4712052
+            },
+            {
+              "offset": 90,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_retained_freertos_interrupt_mask_set",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 6267044
+            },
+            {
+              "offset": 94,
+              "type": "R_ARM_THM_MOVW_ABS_NC",
+              "symbol": "open_cfw_retained_freertos_next_task_unblock_time",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 537348688
+            },
+            {
+              "offset": 98,
+              "type": "R_ARM_THM_MOVT_ABS",
+              "symbol": "open_cfw_retained_freertos_next_task_unblock_time",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 537348688
+            },
+            {
+              "offset": 108,
+              "type": "R_ARM_THM_MOVW_ABS_NC",
+              "symbol": "open_cfw_retained_freertos_scheduler_running",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 537348668
+            },
+            {
+              "offset": 112,
+              "type": "R_ARM_THM_MOVT_ABS",
+              "symbol": "open_cfw_retained_freertos_scheduler_running",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 537348668
+            },
+            {
+              "offset": 120,
+              "type": "R_ARM_THM_MOVW_ABS_NC",
+              "symbol": "open_cfw_retained_freertos_tick_count",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 537348660
+            },
+            {
+              "offset": 124,
+              "type": "R_ARM_THM_MOVT_ABS",
+              "symbol": "open_cfw_retained_freertos_tick_count",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 537348660
+            },
+            {
+              "offset": 132,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_freertos_port_start_scheduler",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_port_start_scheduler"
+            },
+            {
+              "offset": 138,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_freertos_start_assert_failure",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_start_assert_failure"
+            },
+            {
+              "offset": 144,
+              "type": "R_ARM_THM_MOVW_PREL_NC",
+              "symbol": "open_cfw_retained_freertos_top_used_priority",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 536886688
+            },
+            {
+              "offset": 148,
+              "type": "R_ARM_THM_MOVT_PREL",
+              "symbol": "open_cfw_retained_freertos_top_used_priority",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 536886688
+            }
+          ]
+        }
+      }
     }
   ],
   "in_place_leaves": [
@@ -37380,7 +38308,13 @@
     "open_cfw_bq27427_settings_apply_defaults",
     "open_cfw_bq27427_status_update",
     "open_cfw_bq27427_init_wrapper",
-    "open_cfw_bq27427_hardware_init"
+    "open_cfw_bq27427_hardware_init",
+    "open_cfw_app_error_fault_handler",
+    "open_cfw_freertos_task_get_info",
+    "open_cfw_freertos_task_switch_context",
+    "open_cfw_freertos_port_start_scheduler",
+    "open_cfw_freertos_start_assert_failure",
+    "open_cfw_freertos_task_start_scheduler"
   ],
   "patch_sites": [
     {
@@ -44866,24 +45800,70 @@
       "expected_sha256": "11b61edcd86c46bdbb22cd1a88a13463518a92f46f7548fc3141171745f495c0",
       "branch": "b_w",
       "target_function": "open_cfw_bq27427_hardware_init"
+    },
+    {
+      "name": "replace_goodix_derived_app_error_fault_handler",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 5282632,
+      "expected_size": 178,
+      "expected_sha256": "3c12f284fbaedb30146e40bad627cebfa6cf2a505d9e5b7fff74b13df2d9e971",
+      "branch": "b_w",
+      "target_function": "open_cfw_app_error_fault_handler"
+    },
+    {
+      "name": "replace_freertos_task_get_info",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4544296,
+      "expected_size": 128,
+      "expected_sha256": "53d97f8c2e506f69df7908f9b3d2c644fd4f21b456f5961311f1ce34d975f626",
+      "branch": "b_w",
+      "target_function": "open_cfw_freertos_task_get_info"
+    },
+    {
+      "name": "replace_freertos_task_switch_context",
+      "runtime_address": 4542900,
+      "expected_size": 206,
+      "expected_sha256": "fe979ce2eed1eeac9ca5c54192d428ef98825775f1665113ccbe0caf302c7343",
+      "branch": "b_w",
+      "target_function": "open_cfw_freertos_task_switch_context"
+    },
+    {
+      "name": "replace_freertos_port_start_scheduler",
+      "runtime_address": 4465122,
+      "expected_size": 46,
+      "expected_sha256": "66bacaafa2fa8e76a548eb9da62c2d3e1f058a471efe0bdfa072f59bf38ae1c0",
+      "branch": "b_w",
+      "target_function": "open_cfw_freertos_port_start_scheduler"
+    },
+    {
+      "name": "replace_freertos_task_start_scheduler",
+      "runtime_address": 4541676,
+      "expected_size": 144,
+      "expected_sha256": "2fabf4882dc6db88c73cd573ba3f454e7f6f0cafb1329670ad52e39ef1cbe01d",
+      "branch": "b_w",
+      "target_function": "open_cfw_freertos_task_start_scheduler"
     }
   ],
   "overlay_artifact": "apollo_core_overlay.bin",
   "expected": {
-    "overlay_size": 164536,
-    "overlay_sha256": "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
-    "component_size": 3687932,
-    "component_sha256": "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
+    "overlay_size": 165412,
+    "overlay_sha256": "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
+    "component_size": 3688808,
+    "component_sha256": "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
   },
   "toolchain_profiles": {
     "linux-clang": {
       "reviewed_version_prefix": "Homebrew clang version 22.1.8",
       "reviewed_source_root": "/Users/kalani/Repo/SybilSightABCD/openCFW",
       "expected": {
-        "overlay_size": 144266,
-        "overlay_sha256": "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
-        "component_size": 3667662,
-        "component_sha256": "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"
+        "overlay_size": 145180,
+        "overlay_sha256": "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
+        "component_size": 3668576,
+        "component_sha256": "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
       }
     }
   },

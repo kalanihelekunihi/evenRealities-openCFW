@@ -1284,8 +1284,8 @@ class ApolloOverlayRelocatedLeafTests(unittest.TestCase):
             self.assertEqual(len(relocations), 1)
             with self.assertRaisesRegex(
                 apollo_overlay.BuildError,
-                "global undefined symbol or an explicitly selected whole "
-                "global sibling function",
+                "global undefined symbol.*global sibling function.*static "
+                "data object",
             ):
                 apollo_overlay.extract_in_place_function_section(
                     object_path,

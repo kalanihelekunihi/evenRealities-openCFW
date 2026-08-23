@@ -469,7 +469,7 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
                 len(overlay["patch_sites"]),
                 len(overlay["relocated_leaves"]),
             ),
-            (941, 881, 372),
+            (947, 886, 378),
         )
         self.assertEqual(overlay["functions"].count(BUF_FUNCTION), 1)
         self.assertEqual(overlay["functions"].count(BYTE_FUNCTION), 1)
@@ -606,8 +606,8 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
             {
                 "kind": "source_build",
                 "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-                "size": 3_687_932,
-                "sha256": "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
+                "size": 3_688_808,
+                "sha256": "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
             },
         )
         regions = {item["name"]: item for item in component["regions"]}

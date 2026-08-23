@@ -60,13 +60,14 @@ TARGET_FLAGS = [
 ]
 
 TARGET_UNDEFINED = [
-    "open_cfw_retained_freertos_assert_failure",
+    "open_cfw_freertos_port_start_scheduler",
+    "open_cfw_freertos_start_assert_failure",
     "open_cfw_retained_freertos_idle_task_entry",
     "open_cfw_retained_freertos_idle_task_handle",
     "open_cfw_retained_freertos_idle_task_memory_get",
+    "open_cfw_retained_freertos_idle_task_name",
     "open_cfw_retained_freertos_interrupt_mask_set",
     "open_cfw_retained_freertos_next_task_unblock_time",
-    "open_cfw_retained_freertos_port_start_scheduler",
     "open_cfw_retained_freertos_scheduler_running",
     "open_cfw_retained_freertos_task_create_static",
     "open_cfw_retained_freertos_tick_count",
@@ -77,14 +78,14 @@ TARGET_UNDEFINED = [
 TARGET_PINS = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (2140, "4644f86ebaeecdbfa2db06ab18aff33711cf9159bd131ffb0d191790da17f388"),
+        "object": (2084, "5bf5adfe142611efd28f4fb77d645f62011ee54330934ce52a6547ddd030f020"),
         "function": (156, 4, "64d46ee081e3b16e4542d19d8236139ebe014cb3d9419d21e009ecd617c3ab9b"),
         "relocations": [
             (18, 10, "open_cfw_retained_freertos_idle_task_memory_get"),
             (34, 49, "open_cfw_retained_freertos_idle_task_entry"),
             (38, 50, "open_cfw_retained_freertos_idle_task_entry"),
-            (42, 49, "open_cfw_freertos_idle_task_name"),
-            (46, 50, "open_cfw_freertos_idle_task_name"),
+            (42, 49, "open_cfw_retained_freertos_idle_task_name"),
+            (46, 50, "open_cfw_retained_freertos_idle_task_name"),
             (56, 10, "open_cfw_retained_freertos_task_create_static"),
             (60, 47, "open_cfw_retained_freertos_idle_task_handle"),
             (64, 48, "open_cfw_retained_freertos_idle_task_handle"),
@@ -96,22 +97,22 @@ TARGET_PINS = {
             (108, 48, "open_cfw_retained_freertos_scheduler_running"),
             (116, 47, "open_cfw_retained_freertos_tick_count"),
             (120, 48, "open_cfw_retained_freertos_tick_count"),
-            (128, 10, "open_cfw_retained_freertos_port_start_scheduler"),
-            (134, 10, "open_cfw_retained_freertos_assert_failure"),
+            (128, 10, "open_cfw_freertos_port_start_scheduler"),
+            (134, 10, "open_cfw_freertos_start_assert_failure"),
             (140, 49, "open_cfw_retained_freertos_top_used_priority"),
             (144, 50, "open_cfw_retained_freertos_top_used_priority"),
         ],
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
-        "object": (2128, "983016ed15eb6286045362005c7ead16d2dde8e72c4a7aa46b3bc0914dea81ce"),
+        "object": (2068, "2589c03f5abe1208bfa198d1a5cd36c85760e027100ef2d56f56452fe9f6b19e"),
         "function": (160, 4, "d6f533bac74d68ad545b70f022de3c922e2f678ed2a6557b9f8a57341a52cf02"),
         "relocations": [
             (18, 10, "open_cfw_retained_freertos_idle_task_memory_get"),
             (34, 49, "open_cfw_retained_freertos_idle_task_entry"),
             (38, 50, "open_cfw_retained_freertos_idle_task_entry"),
-            (42, 49, "open_cfw_freertos_idle_task_name"),
-            (46, 50, "open_cfw_freertos_idle_task_name"),
+            (42, 49, "open_cfw_retained_freertos_idle_task_name"),
+            (46, 50, "open_cfw_retained_freertos_idle_task_name"),
             (60, 10, "open_cfw_retained_freertos_task_create_static"),
             (64, 47, "open_cfw_retained_freertos_idle_task_handle"),
             (68, 48, "open_cfw_retained_freertos_idle_task_handle"),
@@ -123,8 +124,8 @@ TARGET_PINS = {
             (112, 48, "open_cfw_retained_freertos_scheduler_running"),
             (120, 47, "open_cfw_retained_freertos_tick_count"),
             (124, 48, "open_cfw_retained_freertos_tick_count"),
-            (132, 10, "open_cfw_retained_freertos_port_start_scheduler"),
-            (138, 10, "open_cfw_retained_freertos_assert_failure"),
+            (132, 10, "open_cfw_freertos_port_start_scheduler"),
+            (138, 10, "open_cfw_freertos_start_assert_failure"),
             (144, 49, "open_cfw_retained_freertos_top_used_priority"),
             (148, 50, "open_cfw_retained_freertos_top_used_priority"),
         ],
@@ -132,10 +133,10 @@ TARGET_PINS = {
 }
 
 LOCAL_PINS: dict[Path, tuple[int, str]] = {
-    SOURCE: (3477, "77ed667c98676775bf0f7f47bf6def1ccf0ef4469175c6ba7e51d845cc92c7e9"),
+    SOURCE: (3427, "aa0d3c9e1c2168cdd2dab95014363f6f3b69d9e77b0def2b47cf42932c1055b5"),
     HEADER: (1124, "7805df41dc3eea1cbbb9821b3c598c3e9615480bebe8857d10ab923d610d257c"),
-    FIXTURE: (5582, "b274610f34530b89b30b14ea2fa2db26c5fe3ee0176ea31f1b97205201eb1b00"),
-    AUDIT: (3991, "95c28d534cda7c3d01fac0851c9ab5bbab52aaf322a01d56eb975b1e46b28c66"),
+    FIXTURE: (5635, "ca6678e80b3aee90b8a685a7bca9a479f71c0d141553714693b362a12a03d0f2"),
+    AUDIT: (4422, "8ffa42334f71102dcd03441cd4a0efd1bcf955b6daeb22ce1377a4d82724ed34"),
 }
 
 
@@ -306,15 +307,14 @@ class FreeRTOSTaskStartSchedulerTests(unittest.TestCase):
         self.assertEqual(self.target["relocations"], pin["relocations"])
         self.assertEqual(self.target["undefined"], TARGET_UNDEFINED)
 
-    def test_artifacts_are_pinned_and_production_excluded(self) -> None:
+    def test_artifacts_are_pinned_and_production_routed(self) -> None:
         for path, (size, digest) in LOCAL_PINS.items():
             body = path.read_bytes()
             self.assertEqual((len(body), hashlib.sha256(body).hexdigest()), (size, digest))
-        forbidden = (SOURCE.name, HEADER.name, FUNCTION)
-        for path in (OVERLAY, MANIFEST, MAKEFILE):
-            text = path.read_text()
-            for token in forbidden:
-                self.assertNotIn(token, text)
+        self.assertIn(str(SOURCE.relative_to(ROOT)), OVERLAY.read_text())
+        self.assertIn(FUNCTION, OVERLAY.read_text())
+        self.assertIn("freertos-scheduler-start-core-closure", MAKEFILE.read_text())
+        self.assertIn("freertos_task_start_scheduler_source_text", MANIFEST.read_text())
 
 
 if __name__ == "__main__":

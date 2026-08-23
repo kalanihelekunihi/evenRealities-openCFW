@@ -286,22 +286,22 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 164_536,
+        "overlay_size": 165_412,
         "overlay_sha256": (
-            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"
+            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"
         ),
-        "component_size": 3_687_932,
+        "component_size": 3_688_808,
         "component_sha256": (
-            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"
+            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"
         ),
-        "package_size": 4_466_426,
+        "package_size": 4_467_302,
         "package_sha256": (
-            "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"
+            "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"
         ),
-        "package_accounting": (165_050, 120_915, 4_180_461),
+        "package_accounting": (165_424, 121_045, 4_180_333),
         # Builder reports exclude isolated/non-emitted registry categories.
-        "function_count": 937,
-        "patch_count": 877,
+        "function_count": 943,
+        "patch_count": 882,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -322,13 +322,14 @@ PROFILES = {
         "nanopb_svarint_tail_growth": 54,
         "nanopb_varint32_tail_growth": 252,
         "nanopb_skip_string_tail_growth": 36,
+        "task_get_info_tail_growth": 122,
         # Net tail trimmed by the rollback build: every post-milestone
         # admission retained in the legacy overlay that is not itemized
         # above (the nanopb decode wave and the iar float-exponent trio are
         # absent from the rollback overlay and are therefore not deleted
         # here).
         "current_rollback_net_tail_growth": 16_360,
-        "later_tail_growth": 42_142,
+        "later_tail_growth": 42_396,
         "legacy_reset_unordered_tail_growth": 388,
         # Active rollback build from the current production registry.
         "legacy_semaphore_layout": {
@@ -388,11 +389,11 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 164_718,
+            "source_owned_bytes": 165_594,
             "source_owned_in_place_bytes": 182,
-            "generated_patch_site_bytes": 120_792,
-            "replaced_stock_function_bytes": 120_970,
-            "opaque_base_bytes": 3_402_390,
+            "generated_patch_site_bytes": 121_494,
+            "replaced_stock_function_bytes": 121_672,
+            "opaque_base_bytes": 3_401_688,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -446,17 +447,17 @@ PROFILES = {
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
-        "overlay_size": 144_266,
+        "overlay_size": 145_180,
         "overlay_sha256": (
-            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9"
+            "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57"
         ),
-        "component_size": 3_667_662,
+        "component_size": 3_668_576,
         "component_sha256": (
-            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"
+            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"
         ),
-        "package_size": 4_446_156,
+        "package_size": 4_447_070,
         "package_sha256": (
-            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"
+            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"
         ),
         "package_accounting": (145_147, 100_188, 4_200_821),
         "function_count": 664,
@@ -772,7 +773,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         )
         self.assertEqual(
             (len(self.config["functions"]), len(self.config["patch_sites"])),
-            (941, 881),
+            (947, 886),
         )
 
         for leaf in (
@@ -1029,6 +1030,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             - self.profile["littlefs_tag_type3_tail_growth"]
             - self.profile.get("nanopb_varint32_tail_growth", 0)
             - self.profile.get("nanopb_skip_string_tail_growth", 0)
+            - self.profile.get("task_get_info_tail_growth", 0)
             - self.profile["littlefs_tag_id_tail_growth"]
             - self.profile["littlefs_tag_size_tail_growth"]
             - self.profile["nanopb_fixed64_tail_growth"]
@@ -1139,7 +1141,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
     def test_manifest_is_gap_free_and_owns_each_stock_and_source_span(self) -> None:
         main = self.manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1730)
+        self.assertEqual(len(regions), 1745)
         self.assertEqual(main["source_appended_boundary"], OFFICIAL_SIZE)
         ordered = sorted(regions, key=lambda region: region["file_offset"])
         self.assertEqual(ordered[0]["file_offset"], 0)
@@ -1606,6 +1608,8 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             "replace_bq27427_status_update",
             "replace_bq27427_init_wrapper",
             "replace_bq27427_hardware_init",
+            "replace_goodix_derived_app_error_fault_handler",
+            "replace_freertos_task_get_info",
         }
         self.assertEqual(
             set(current_patches),

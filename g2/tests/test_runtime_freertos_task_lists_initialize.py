@@ -126,24 +126,24 @@ PROFILE_PINS = {
             "576317c22dd5de6f527fb595c4668b52"
         ),
         "overlay": (
-            164_536,
-            "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546",
+            165_412,
+            "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada",
         ),
         "component": (
-            3_687_932,
-            "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07",
+            3_688_808,
+            "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 120_792,
+            "generated_patch_site_bytes": 121_494,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_402_390,
-            "replaced_stock_function_bytes": 120_970,
-            "source_owned_bytes": 164_718,
+            "opaque_base_bytes": 3_401_688,
+            "replaced_stock_function_bytes": 121_672,
+            "source_owned_bytes": 165_594,
             "source_owned_in_place_bytes": 182,
         },
         "package": (
-            4_466_426,
-            "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4",
+            4_467_302,
+            "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f",
         ),
         "replacement_prefix": "5df32cb9",
         "replacement_sha256": (
@@ -159,12 +159,12 @@ PROFILE_PINS = {
             "9f443d31aad4e50858c5a64d95c04f6"
         ),
         "overlay": (
-            144_266,
-            "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9",
+            145_180,
+            "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57",
         ),
         "component": (
-            3_667_662,
-            "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6",
+            3_668_576,
+            "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5",
         ),
         "component_accounting": {
             "generated_patch_site_bytes": 86_286,
@@ -175,8 +175,8 @@ PROFILE_PINS = {
             "source_owned_in_place_bytes": 182,
         },
         "package": (
-            4_446_156,
-            "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3",
+            4_447_070,
+            "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25",
         ),
         "replacement_prefix": "5df3babc",
         "replacement_sha256": (
@@ -188,12 +188,12 @@ PROFILE_PINS = {
 
 MANIFEST_COVERAGE = {
     "container_only": (1, 32),
-    "generated_alignment": (181, 364),
-    "generated_source_entry_replacement": (841, 118_572),
+    "generated_alignment": (182, 366),
+    "generated_source_entry_replacement": (842, 118_700),
     "generated_source_exact_load_image": (1, 6),
     "generated_source_exact_replacement": (7, 134),
-    "official_blob": (264, 3_404_434),
-    "source_compiled": (435, 164_390),
+    "official_blob": (265, 3_404_306),
+    "source_compiled": (437, 164_764),
 }
 
 MAX_PRIORITIES = 56
@@ -1341,7 +1341,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         regions = main["regions"]
-        self.assertEqual(len(regions), 1730)
+        self.assertEqual(len(regions), 1745)
         self.assertEqual(regions[0]["file_offset"], 0)
         for left, right in zip(regions, regions[1:]):
             self.assertEqual(
@@ -1393,7 +1393,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
             },
         )
         tail = by_name["apollo_freertos_task_lists_initialize_source_leaf"]
-        self.assertIs(tail, regions[-481])
+        self.assertIs(tail, regions[-484])
         self.assertEqual(
             tail,
             {

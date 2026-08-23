@@ -15,6 +15,7 @@ volatile open_cfw_freertos_start_u32
     open_cfw_retained_freertos_tick_count;
 const volatile open_cfw_freertos_start_u32
     open_cfw_retained_freertos_top_used_priority = 55U;
+const char open_cfw_retained_freertos_idle_task_name[] = "IDLE";
 
 uint32_t open_cfw_test_freertos_start_events[16];
 uint32_t open_cfw_test_freertos_start_event_count;
@@ -97,7 +98,7 @@ open_cfw_retained_freertos_interrupt_mask_set(void)
 }
 
 open_cfw_freertos_start_base_type
-open_cfw_retained_freertos_port_start_scheduler(void)
+open_cfw_freertos_port_start_scheduler(void)
 {
     open_cfw_test_freertos_start_note(5U);
     open_cfw_test_freertos_start_port_next_unblock =
@@ -109,7 +110,7 @@ open_cfw_retained_freertos_port_start_scheduler(void)
     return 0;
 }
 
-void open_cfw_retained_freertos_assert_failure(void)
+void open_cfw_freertos_start_assert_failure(void)
 {
     open_cfw_test_freertos_start_note(6U);
 }

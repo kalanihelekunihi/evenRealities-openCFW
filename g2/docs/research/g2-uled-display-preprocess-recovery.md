@@ -87,10 +87,10 @@ rodata local-name class in `tools/apollo_overlay.py` was extended to admit
 Clang `.L__const.<function>.<variable>` constant-aggregate locals, the same
 role the existing `.L.str[.N]` class plays for string literals.
 
-Apple Clang 21 overlay/component/package sizes are `164536/3687932/4466426`
-with SHA-256 `a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546`,
-`4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07`, and
-`cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4`. The
+Apple Clang 21 overlay/component/package sizes are `164790/3688186/4466680`
+with SHA-256 `208d2190fb52b0d0ac107d6986b2b45b39d6b4adf5ae588644734680323637f1`,
+`909db5b082addd4da1f0b4a94ae7fc43a506b3bb51ca56ac952d244d837c3b13`, and
+`a79eebc34b8f514f89d9c7b85f50599321451a5c3473909b8f1abfe54f17fb4c`. The
 leaf and redirect are gated `apple-clang`; the linux-clang profile keeps its
 recorded pins, and linux-clang leaf pins await Linux toolchain regeneration.
 Ownership is 584 replaced stock body bytes. The component build, source

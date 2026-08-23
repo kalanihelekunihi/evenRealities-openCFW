@@ -551,6 +551,40 @@ def resolve_leaf_profile(
                 **profile["closure"]["rodata"],
             }
         effective["closure"] = closure
+    if record and isinstance(effective.get("closure"), dict):
+        # Older recorder output could accidentally serialize derived addresses
+        # for closure-local PC-relative symbols.  They are layout results, not
+        # configurable inputs; discard them in record mode so a fresh profile
+        # can repair itself from the object file.
+        closure_rodata = effective["closure"].get("rodata")
+        closure_symbols = (
+            closure_rodata.get("symbols", [])
+            if isinstance(closure_rodata, dict)
+            else []
+        )
+        local_names = {
+            item.get("name")
+            for item in closure_symbols
+            if isinstance(item, dict) and isinstance(item.get("name"), str)
+        }
+        relocations = effective.get("relocations")
+        if isinstance(relocations, list) and any(
+            isinstance(relocation, dict)
+            and relocation.get("symbol") in local_names
+            and "target_address" in relocation
+            for relocation in relocations
+        ):
+            effective["relocations"] = [
+                {
+                    key: value
+                    for key, value in relocation.items()
+                    if not (
+                        key == "target_address"
+                        and relocation.get("symbol") in local_names
+                    )
+                }
+                for relocation in relocations
+            ]
     return effective
 
 
@@ -4201,10 +4235,14 @@ def append_relocated_leaves(
                         **(
                             {"target_address": relocation["target_address"]}
                             if "target_function" not in relocation
-                            and relocation["type"] in (
-                                "R_ARM_THM_CALL",
-                                "R_ARM_THM_JUMP24",
-                                *ABSOLUTE_MOVWT_TYPES,
+                            and "target_address" in relocation
+                            and (
+                                closure_config is None
+                                or relocation["type"] in (
+                                    "R_ARM_THM_CALL",
+                                    "R_ARM_THM_JUMP24",
+                                    *ABSOLUTE_MOVWT_TYPES,
+                                )
                             )
                             else {}
                         ),
@@ -5419,6 +5457,7 @@ def record_leaf_profile_pins(
                             **(
                                 {"target_address": item_reloc["target_address"]}
                                 if "target_function" not in item_reloc
+                                and "target_address" in item_reloc
                                 and item_reloc["type"] in (
                                     "R_ARM_THM_CALL",
                                     "R_ARM_THM_JUMP24",
@@ -5447,7 +5486,13 @@ def record_leaf_profile_pins(
                                     ]
                                 }
                                 if "target_function" in item_reloc
-                                else {"target_address": item_reloc["target_address"]}
+                                else {}
+                            ),
+                            **(
+                                {"target_address": item_reloc["target_address"]}
+                                if "target_function" not in item_reloc
+                                and "target_address" in item_reloc
+                                else {}
                             ),
                         }
                         for item_reloc in pins.get("relocations", [])

@@ -1,7 +1,8 @@
 # FreeRTOS `vTaskStartScheduler` source-candidate audit
 
-Status: authenticated MIT source adaptation; production-excluded pending
-atomic scheduler/global and Apollo-port integration
+Status: production-routed authenticated MIT source adaptation; offline and
+dual-profile complete; hardware timing validation blocked by unavailable
+physical evidence
 
 Scope: official G2 `2.2.6.10` Apollo-main application; offline stock/source,
 host, and dual-profile target-object verification; no assembly, signing,
@@ -66,26 +67,33 @@ calls, all raw word candidates into the function interior, six task-global
 literals, the idle hook bytes, and its RAM/depth contract. It also checks the
 authenticated upstream source tokens and commit pin.
 
-Apple Clang 21 emits a 2,140-byte object and 156-byte function; Linux Clang
-22.1.8 emits a 2,128-byte object and 160-byte function. Both complete object
+Apple Clang 21 emits a 2,084-byte object and 156-byte function; Linux Clang
+22.1.8 emits a 2,068-byte object and 160-byte function. Both complete object
 hashes, function hashes, undefined seams, and all 20 relocations are pinned.
 The compiler difference is authenticated and does not change the source or
 seam set.
 
 ## Production boundary
 
-This result removes semantic opacity from the core scheduler-start algorithm,
-but intentionally does not redirect the stock entry. Production admission must
-atomically bind the idle-task entry/handle, four scheduler globals, assertion
-policy, static task creator, timer task, interrupt mask, and the Apollo
-`xPortStartScheduler` implementation. Companion candidates now close that
-port-start core and its 1,024-Hz STIMER setup without changing production.
-The elapsed-tick ISR and tickless algorithms are now separately qualified;
-first-party power hooks and hardware validation remain required before
-changing this boot-critical path.
+The scheduler-start chain is production-routed atomically. The overlay binds
+the stock idle entry/name, idle handle, four scheduler globals, task/timer
+creators, interrupt mask, source-owned `xPortStartScheduler`, and a new
+non-returning fail-stop leaf that preserves the stock allocation assertion.
+The stock 144-byte entry redirects to a 156-byte Apple leaf (160 bytes under
+Linux); strict relocation contracts bind every one of its 20 seams.
+
+The Apple overlay/component/package are 165,412 / 3,688,808 / 4,467,302 bytes
+with SHA-256 `91449e27…`, `9b242433…`, and `88e72422…`. The Linux profile is
+145,180 / 3,668,576 / 4,447,070 bytes with SHA-256 `afbcb57a…`, `292f5547…`,
+and `be5c62a9…`. Both profiles build and package fail-closed.
+
+On-device preemption, stack-overflow-hook, trace concurrency, STIMER latency,
+and first-task transfer remain hardware-dependent. The 2026-08-22 hardware
+audit found no authorized G2/debug probe/capture path, so this evidence tail is
+explicitly blocked; it does not reopen the implemented software row.
 
 Verification:
 
 ```sh
-python3 -m unittest -v tests.test_runtime_freertos_task_start_scheduler
+make freertos-scheduler-start-core-closure
 ```

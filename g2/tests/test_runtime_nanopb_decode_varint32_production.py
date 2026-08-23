@@ -68,7 +68,7 @@ LEGACY_CANDIDATE_TOKENS = (
     "open_cfw_nanopb_decode_varint32_candidate",
 )
 
-PRODUCTION_COUNTS = (941, 881, 372)
+PRODUCTION_COUNTS = (947, 886, 378)
 PRIVATE_PATCH_NAME = "replace_nanopb_decode_varint32_eof"
 PUBLIC_PATCH_NAME = "replace_nanopb_decode_varint32"
 PRIVATE_MANIFEST_NAME = "nanopb_decode_varint32_eof_source_replacement"
@@ -125,16 +125,16 @@ PROSPECTIVE_LINUX_PINS = {
     },
 }
 APPLE_AGGREGATE_PINS = {
-    "overlay": (164_536, "a437e33ec76c3531ecb2b66d7239229b3a1d905bdc76b00cb564bd05b7ac2546"),
-    "component": (3_687_932, "4fdb5af59a3ae68ce25c2d3255fcc4f4ea0c9a77f2ac89a1d16532496c082c07"),
-    "package": (4_466_426, "cc1642fdf85d2af71ba4c3c40335fe4e8b431eb5f578d501b1b260f43fcdd3f4"),
-    "build_report": (2_323, "adb3102a9c28476e357e5fd134054434e200f46579bc5990f5836d2ed05e12d4"),
-    "flash_plan": (1_276_602, "cf9da351f2ff66b07c3efaf9543abdd23473c5dd557753854b25fbf5f79628c8"),
+    "overlay": (165_412, "91449e27a73806e1537548657bed4486d77b275e4ee8a58b2bb1ef527c252ada"),
+    "component": (3_688_808, "9b2424332183f3415b0e2a745e22c7f1b9b0721fcfeaed074272de67d760068c"),
+    "package": (4_467_302, "88e7242268d2a5472e4c96e740dff637214940b5aa88f043bac29500eeb63d3f"),
+    "build_report": (2_323, "35f01995f1b113dd6572d9304faeed294c221c26f4da1687f59b2f198185e68b"),
+    "flash_plan": (1_287_172, "4d99c79858788bd41db79d4846d68186f1d0dac386e0e2f45a27f4f4c8eff161"),
 }
 LINUX_AGGREGATE_PINS = {
-    "overlay": (144_266, "4c95f20608c70a065b05837415d2d4471fc7eeeb61fa30ce1c1c9f07f717ddb9"),
-    "component": (3_667_662, "686ea217db2837bffd8a190485f0a6f719242e927fba17281c6f54aa066767f6"),
-    "package": (4_446_156, "2cca0fbac8da01ede95a3cecd55dd0706f6dad3a8437605f8a68949cee3c6bc3"),
+    "overlay": (145_180, "afbcb57a8414e65a18c6c95396a0f32fe454cb2087e6a03d51717196a4854b57"),
+    "component": (3_668_576, "292f55478951dc8d41a8bc5e4cc01f80ae88f9c44350d8fec89958c939a4fac5"),
+    "package": (4_447_070, "be5c62a97b9d31f4df257615c28ce81d79ab186feadb68262f96ac5bc35a1c25"),
     "build_report": (2_322, "3d0f0968f5f26a550719240a12a0e6f4e083f2ea566940f215f84b2a5f382a9a"),
     "flash_plan": (640_188, "4480ca9a4a4f237a477ccccdc9cb039f071fb2f6547298595e98a91098302a20"),
 }
@@ -777,8 +777,8 @@ def validate_atomic_production_topology(
     )
     if observed_counts != PRODUCTION_COUNTS:
         raise AssertionError(
-            "production overlay inventory must be exactly 886 functions, "
-            "827 patch sites, and 317 relocated leaves"
+            "production overlay inventory must be exactly 947 functions, "
+            "886 patch sites, and 378 relocated leaves"
         )
 
     functions = overlay["functions"]
@@ -1384,7 +1384,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
         manifest = json.loads(CORE_MANIFEST.read_text(encoding="utf-8"))
         apollo = manifest["component_overrides"]["apollo_main"]
         regions = apollo["regions"]
-        self.assertEqual(len(regions), 1730)
+        self.assertEqual(len(regions), 1745)
         self.assertEqual(
             (apollo["provider"]["size"], apollo["provider"]["sha256"]),
             APPLE_AGGREGATE_PINS["component"],

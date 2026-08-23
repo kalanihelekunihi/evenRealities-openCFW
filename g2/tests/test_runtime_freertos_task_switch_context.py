@@ -94,7 +94,7 @@ LOCAL_PINS: dict[Path, tuple[int, str]] = {
     SOURCE: (3197, "4ba2014b9dfada5eeeeae7d5d2ddea5a80efaa86c9aec6cabf7b47fb7ce6c2ea"),
     HEADER: (8571, "79135fc816cf1a08e1c1e67fd6a418b38cf0072fd2a39c04d6bf85ee38151c6b"),
     FIXTURE: (8905, "4fc3f2c775378bb82e085a7790f8b69ef5653c1294a023e2914118ce0e5a9e4a"),
-    AUDIT: (4252, "51e570715431ec6e6b287f3ae4679ceb635098e80bf89ec1b2538c4003476ce6"),
+    AUDIT: (4598, "349ccc3e68450d3fe01887109ae867dcc0097e3f99484136e7480393d7700a67"),
 }
 
 
@@ -271,7 +271,13 @@ class FreeRTOSTaskSwitchContextTests(unittest.TestCase):
         self.assertIn("traceTASK_SWITCHED_IN()", source)
 
     def test_target_object_is_dual_profile_pinned(self) -> None:
-        profile = os.environ.get("OPENCFW_EXPECT_PROFILE", "apple-clang" if sys.platform == "darwin" else "linux-clang")
+        profile = os.environ.get(
+            "OPENCFW_EXPECT_PROFILE",
+            os.environ.get(
+                "OPENCFW_TOOLCHAIN_PROFILE",
+                "apple-clang" if sys.platform == "darwin" else "linux-clang",
+            ),
+        )
         expected = TARGET_PINS[profile]
         self.assertEqual(self.version, expected["version"])
         self.assertEqual(self.target["object"], expected["object"])
@@ -279,13 +285,15 @@ class FreeRTOSTaskSwitchContextTests(unittest.TestCase):
         self.assertEqual(self.target["relocations"], expected["relocations"])
         self.assertEqual(self.target["undefined"], TARGET_UNDEFINED)
 
-    def test_artifacts_are_pinned_and_production_excluded(self) -> None:
+    def test_artifacts_are_pinned_and_production_routed(self) -> None:
         for path, expected in LOCAL_PINS.items():
             data = path.read_bytes()
             self.assertEqual((len(data), hashlib.sha256(data).hexdigest()), expected)
         source_path = str(SOURCE.relative_to(ROOT))
-        for path in (MAKEFILE, MANIFEST, OVERLAY):
-            self.assertNotIn(source_path, path.read_text())
+        self.assertIn(source_path, OVERLAY.read_text())
+        self.assertIn(FUNCTION, OVERLAY.read_text())
+        self.assertIn("freertos-scheduler-start-core-closure", MAKEFILE.read_text())
+        self.assertIn("freertos_task_switch_context_source_text", MANIFEST.read_text())
 
 
 if __name__ == "__main__":
