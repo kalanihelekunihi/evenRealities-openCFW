@@ -20,9 +20,29 @@ CLOSURE = ROOT / "tools/manifests/g2-efs-service-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-efs-service-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "2d0eebd09ece2500d5bd6c915768b5d393e4416b76b49a88758b961a8268c106",
-    CLOSURE: "8d500ea4ca363ec3ed52b9f276f34be59f72b0279b2933c6c4b62f2a577bb7a1",
-    PROVENANCE: "9670083cc769a284045acd78233da7e5f4a1e63010103f205f26d871239a2c9f",
+    CLOSURE: "8641444c524fcc17e43eea49ff4ea3f5700db06a563d38d19eb1668c6af36889",
+    PROVENANCE: "8973d7e336d4634d8282b5a86a9f74c512a5d27f6dcc8313838ab39164d6930d",
 }
+SOURCE = ROOT / "components/apollo_main/core_overlay/efs_service.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE_SIZE = 29572
+SOURCE_SHA256 = "3d55fce653ac9697366af64aec4167a0455e613bf00a3ab37d03d2bc7d3eee98"
+PRODUCTION_LEAVES = (
+    ("_evenEfsReplyToAPP", 30, 216848, 1),
+    ("_fileCaculateCRC", 162, 216880, 6),
+    ("_efsFileCmdParse", 944, 217044, 20),
+    ("_efsFileRawDataParse", 464, 217988, 7),
+    ("_efsExportFileParse", 944, 218452, 23),
+    ("EFS_FrameDispatch", 82, 219396, 3),
+    ("EFS_NotifyStatus4", 46, 219480, 1),
+    ("EFS_NotifyStatus2", 46, 219528, 1),
+    ("EFS_NotifyStatus5", 46, 219576, 1),
+    ("EFS_TransferActive", 18, 219624, 0),
+    ("EFS_ServiceInit", 18, 219644, 1),
+    ("EFS_CancelExport", 136, 219664, 4),
+)
 PHYSICAL = (0x00456722, 0x00458DF0)
 PHYSICAL_SHA256 = "22a070bb00d0a5555c5a1867804a1fe89678350777c9f3e42258bc7953473175"
 BODY_SHA256 = "bbc93a69d35b24750a74a667598ff599189ca52d2b6223578a303854a16edf44"
@@ -217,11 +237,101 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for address, value in literal_checks.items()):
         raise AuditError("EFS state/buffer literal closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("efs_service" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented EFS service entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production EFS service source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = {leaf["function"]: leaf for leaf in overlay["relocated_leaves"]}
+    patches = {patch["name"]: patch for patch in overlay["patch_sites"]}
+    for order, (name, size, offset, relocations) in enumerate(PRODUCTION_LEAVES, 1):
+        leaf = leaves.get(name)
+        if (
+            not leaf
+            or leaf.get("source", {}).get("path")
+            != "components/apollo_main/core_overlay/efs_service.c"
+            or leaf.get("source", {}).get("size") != SOURCE_SIZE
+            or leaf.get("source", {}).get("sha256") != SOURCE_SHA256
+            or leaf.get("expected", {}).get("size") != size
+            or leaf.get("expected", {}).get("offset") != offset
+            or leaf.get("expected", {}).get("alignment") != 4
+            or len(leaf.get("relocations", [])) != relocations
+            or not leaf.get("strict_relocation_contract")
+            or leaf.get("profiles") != ["apple-clang"]
+        ):
+            raise AuditError(f"production EFS service leaf changed: {name}")
+        stock = rows[order - 1]
+        patch = patches.get(f"replace_efs_service_{order:02d}")
+        if (
+            not patch
+            or patch.get("runtime_address") != int(stock["stock_start"], 0)
+            or patch.get("expected_size") != int(stock["stock_bytes"])
+            or patch.get("expected_sha256") != stock["stock_sha256"]
+            or patch.get("target_function") != name
+            or patch.get("branch") != "b_w"
+            or patch.get("profiles") != ["apple-clang"]
+        ):
+            raise AuditError(f"production EFS service patch changed: {name}")
+
+    report = json.loads(REPORT.read_text())
+    reported = {
+        leaf["extraction"]["function"]: leaf
+        for leaf in report["relocated_leaves"]
+        if leaf.get("source", {}).get("path")
+        == "components/apollo_main/core_overlay/efs_service.c"
+    }
+    for name, size, offset, relocations in PRODUCTION_LEAVES:
+        item = reported.get(name)
+        if (
+            not item
+            or item["placement"]["offset"] != offset
+            or item["placement"]["size"] != size
+            or item["placement"]["alignment"] != 4
+            or item["extraction"]["relocation_count"] != relocations
+        ):
+            raise AuditError(f"production EFS service report changed: {name}")
+    if (
+        report["overlay"]["size"], report["overlay"]["sha256"],
+        report["component"]["size"], report["component"]["sha256"],
+    ) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production EFS service artifact pins changed")
+
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (
+        main["provider"]["size"], main["provider"]["sha256"],
+        manifest["package"]["expected_size"],
+        manifest["package"]["expected_sha256"],
+    ) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production EFS service manifest pins changed")
+    regions = {region["name"]: region for region in main["regions"]}
+    for order, row in enumerate(rows, 1):
+        item = regions.get(f"efs_service_{order:02d}_source_replacement")
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            "generated_source_entry_replacement",
+        )
+        if not item or (
+            item.get("target_address"), item.get("size"),
+            item.get("address_status"),
+        ) != expected:
+            raise AuditError(f"production EFS service stock region changed: {row['function']}")
+    service_regions = [region for region in main["regions"]
+                       if region["name"].startswith("efs_service_")]
+    if sum(region["size"] for region in service_regions
+           if region["address_status"] == "source_compiled") != 2936:
+        raise AuditError("production EFS service compiled region coverage changed")
+    if sum(region["size"] for region in service_regions
+           if region["address_status"] == "generated_alignment") != 16:
+        raise AuditError("production EFS service alignment coverage changed")
+    if sum(region["size"] for region in service_regions
+           if region["address_status"] == "official_blob") != 658:
+        raise AuditError("production EFS service retained-gap coverage changed")
 
     external_entries = [pair for pair in entry
                         if not (PHYSICAL[0] <= pair[0] < PHYSICAL[1])]
@@ -256,8 +366,22 @@ def analyze(image_path: Path = IMAGE) -> dict:
                                       0x21F, 0x26C, 0x288, 0x342, 0x3A8, 0x3B3],
         },
         "production": {
-            "candidate": None, "source_inventory_available": False,
-            "production_routed": False, "ownership_bytes": 0,
+            "candidate": "components/apollo_main/core_overlay/efs_service.c",
+            "source_inventory_available": True,
+            "production_routed": True, "ownership_bytes": 9276,
+            "source_functions": 12, "compiled_text_bytes": 2936,
+            "alignment_bytes": 16, "strict_relocations": 68,
+            "stock_replaced_bytes": 9276, "retained_gap_pool_bytes": 658,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized responsive G2 peer and writable/readable EFS media "
+                "are physically available for live whitelist import, Android JSON "
+                "consumption, arbitrary-file import, logger/trace export, 4 KiB "
+                "streaming, cancellation, CRC/size failure, disconnect, and resume "
+                "evidence; the authorized right temple is nonresponsive and the left "
+                "temple must remain stock."
+            ),
         },
     }
 

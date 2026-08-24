@@ -53,8 +53,8 @@ AMBIQSUITE_CORDIO_APP_DIR := third_party/ambiqsuite-cordio-app-framework
 
 .PHONY: all build reference ring-source source source-release component ring-component core-component bootloader-component vendor-snapshots upstream-audits tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot freertos-g2-tcb-patch freertos-queue-receive-from-isr ambiqsuite-snapshot ambiqsuite-ancc-snapshot ambiqsuite-ancc-profile-closure cmsis-core-snapshot cmsis-freertos-snapshot cmsis-freertos-linked-census cmsis-freertos-core-leaves cmsis-freertos-count-leaves cmsis-freertos-message-queue-delete cmsis-freertos-thread-yield cmsis-freertos-kernel-state cmsis-freertos-kernel-lifecycle cmsis-freertos-mutex-delete cmsis-freertos-timer-running cmsis-freertos-sync-ops cmsis-freertos-sync-ops-candidate cmsis-freertos-timer-ops cmsis-freertos-timer-ops-candidate cmsis-freertos-event-flags cmsis-freertos-event-flags-candidate cmsis-freertos-timer-new cmsis-freertos-timer-new-candidate cmsis-freertos-memory-pool-new cmsis-freertos-memory-pool-new-candidate cmsis-freertos-semaphore-acquire cmsis-freertos-memory-pool-ops cmsis-freertos-message-queue-put cmsis-freertos-message-queue-get cmsis-freertos-delay cmsis-freertos-thread-set-priority cmsis-freertos-thread-terminate cmsis-freertos-thread-flags cmsis-freertos-thread-new cmsis-freertos-thread-yield-candidate cmsis-freertos-kernel-state-candidate cmsis-freertos-mutex-delete-candidate cmsis-freertos-timer-running-candidate lz4-snapshot freetype-snapshot flashdb-snapshot cmbacktrace-snapshot nanopb-snapshot cordio-aggregate-closure cordio-gatt-profile-closure apollo-origin-accounting lvgl-display-port-closure third-party-dependency-closure lvgl-snapshot nemagfx-ambiq-provenance ambiq-gpu-patch-accessors-candidate ring-buffer-snapshot tinyframe-snapshot tinyframe-adapter-candidate ui-quicklist-page-closure ui-widget-news-page-closure ui-stock-page-closure research-corpus verify test inspect clean toolchain cjson-snapshot
 .PHONY: ble-transport-profiles-closure ble-peer-discovery-closure ble-central-closure ble-connect-params-closure ble-peripheral-closure transport-protocol-closure service-settings-closure tracepoint-settings-closure product-rtos-closure util-error-check-closure watchdog-closure freertos-task-get-info-closure freertos-scheduler-start-core-closure goodix-v170-source-overlap logger-settings-closure ambiqsuite-cordio-app-snapshot cordio-app-framework-lineage drv-gx8002b-closure drv-pdm-production-closure drv-pdm-closure drv-mx25u25643g-closure service-ancc-closure als-closure thread-ble-production-closure pt-protocol-closure service-db-api-closure ui-even-ai-closure service-time-closure thread-audio-closure compress-log-core-closure compress-log-port-closure file-runtime-closure service-algo-closure uart-sync-closure service-nvdb-closure production-mic-closure service-audio-manager-closure service-audio-closure service-kvdb-closure ux-battery-sync-closure cb-ring-battery-closure callback-facades-closure callback-manager-closure silent-mode-closure onboarding-data-manager-closure onboarding-controller-closure onboarding-main-page-closure onboarding-stock-page-closure onboarding-news-page-closure lvgl-font-manager-closure common-list-container-closure common-text-container-closure evenhub-ui-closure evenhub-data-parser-closure sync-framework-closure sync-interface-api-closure display-thread-closure displaydrv-manager-closure ui-msg-notif-list-closure dashboard-main-screen-closure dashboard-watchface-layout4-closure dashboard-ext-closure dashboard-data-process-closure navigation-data-handler-closure navigation-ui-closure menu-page-closure ui-health-page-closure teleprompt-ui-closure service-em9305-dfu-closure conversate-tag-data-closure liblc3-source-closure
-.PHONY: transparent transparent-harvest transparent-db transparent-source transparent-image transparent-ledger transparent-test
-.PHONY: ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure fw-event-loop-closure ring-connect-policy-closure system-close-closure pb-service-conversate-closure pb-service-teleprompt-closure
+.PHONY: transparent transparent-harvest transparent-db transparent-source transparent-image transparent-ledger transparent-test pb-service-quicklist-closure pb-service-pair-mgr-closure at-codec-closure
+.PHONY: ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
 
 all: build
 
@@ -241,21 +241,21 @@ ambiqsuite-cordio-app-snapshot:
 
 cordio-app-framework-lineage: ambiqsuite-cordio-app-snapshot
 	$(PYTHON) tools/analyze_g2_cordio_app_framework.py \
-		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth}"
+		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}"
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_ambiqsuite_cordio_app_framework_snapshot \
 		tests.test_analyze_g2_cordio_app_framework
 
 cordio-aggregate-closure: cordio-app-framework-lineage
 	$(PYTHON) tools/analyze_g2_cordio_closure.py \
-		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth}"
+		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}"
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_cordio_closure
 
 lvgl-display-port-closure: core-component
 	$(PYTHON) tools/analyze_g2_lvgl_display_port_closure.py \
 		--component-report "components/apollo_main/core_overlay/build/build-report.json" \
-		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth}"
+		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}"
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_lvgl_display_port_closure
 
@@ -371,7 +371,7 @@ apollo-origin-accounting: source
 	$(PYTHON) tools/analyze_g2_apollo_origin_accounting.py \
 		--flash-plan "$(SOURCE_BUILD_DIR)/flash-plan.json" \
 		--component-report "components/apollo_main/core_overlay/build/build-report.json" \
-		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth}"
+		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}"
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_apollo_origin_accounting
 
@@ -379,7 +379,7 @@ third-party-dependency-closure: source
 	$(PYTHON) tools/analyze_g2_third_party_dependency_closure.py \
 		--flash-plan "$(SOURCE_BUILD_DIR)/flash-plan.json" \
 		--component-report "components/apollo_main/core_overlay/build/build-report.json" \
-		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth}"
+		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}"
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_third_party_dependency_closure
 
@@ -420,7 +420,15 @@ ambiqsuite-ancc-profile-closure: ambiqsuite-ancc-snapshot
 ble-transport-profiles-closure:
 	$(PYTHON) tools/analyze_g2_ble_transport_profiles.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_ble_transport_profiles_candidate \
 		tests.test_analyze_g2_ble_transport_profiles \
+		tests.test_analyze_g2_first_party_frontier
+
+system-alert-closure:
+	$(PYTHON) tools/analyze_g2_system_alert.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_system_alert_candidate \
+		tests.test_analyze_g2_system_alert \
 		tests.test_analyze_g2_first_party_frontier
 
 ble-peer-discovery-closure:
@@ -453,6 +461,7 @@ transport-protocol-closure:
 	$(PYTHON) tools/analyze_g2_transport_protocol.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_transport_protocol \
+		tests.test_transport_protocol_candidate \
 		tests.test_analyze_g2_first_party_frontier
 
 service-settings-closure:
@@ -634,16 +643,113 @@ pb-service-teleprompt-closure:
 		tests.test_analyze_g2_pb_service_complete_closure \
 		tests.test_analyze_g2_first_party_frontier
 
+pb-service-even-ai-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_even_ai.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_even_ai \
+		tests.test_pb_service_even_ai_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-terminal-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_terminal.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_terminal \
+		tests.test_pb_service_terminal_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-translate-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_translate.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_translate \
+		tests.test_pb_service_translate_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-dev-config-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_dev_config.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_dev_config \
+		tests.test_pb_service_dev_config_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-health-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_health.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_health \
+		tests.test_pb_service_health_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-onboarding-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_onboarding.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_onboarding \
+		tests.test_pb_service_onboarding_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-notification-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_notification.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_notification \
+		tests.test_pb_service_notification_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-setting-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_setting.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_setting \
+		tests.test_pb_service_setting_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-dev-setting-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_dev_setting.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_dev_setting \
+		tests.test_pb_service_dev_setting_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-quicklist-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_quicklist.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_quicklist \
+		tests.test_pb_service_quicklist_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
+pb-service-pair-mgr-closure:
+	$(PYTHON) tools/analyze_g2_pb_service_pair_mgr.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_pb_service_pair_mgr \
+		tests.test_pb_service_pair_mgr_candidate \
+		tests.test_analyze_g2_pb_service_complete_closure \
+		tests.test_analyze_g2_first_party_frontier
+
 opt3007-registers-closure:
 	$(PYTHON) tools/analyze_g2_opt3007_registers.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_opt3007_registers \
+		tests.test_opt3007_registers_candidate \
 		tests.test_analyze_g2_first_party_frontier
 
 service-codec-porting-closure:
 	$(PYTHON) tools/analyze_g2_service_codec_porting.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_service_codec_porting \
+		tests.test_service_codec_porting_candidate \
+		tests.test_analyze_g2_first_party_frontier
+
+at-codec-closure:
+	$(PYTHON) tools/analyze_g2_at_codec.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_at_codec \
+		tests.test_at_codec_candidate \
 		tests.test_analyze_g2_first_party_frontier
 
 thread-notification-closure:
@@ -656,6 +762,7 @@ drv-gx8002b-closure:
 	$(PYTHON) tools/analyze_g2_drv_gx8002b.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_drv_gx8002b \
+		tests.test_drv_gx8002b_candidate \
 		tests.test_analyze_g2_first_party_frontier
 
 service-db-api-closure:
@@ -715,6 +822,7 @@ uart-sync-closure:
 service-nvdb-closure:
 	$(PYTHON) tools/analyze_g2_service_nvdb.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_service_nvdb_candidate \
 		tests.test_analyze_g2_service_nvdb \
 		tests.test_analyze_g2_first_party_frontier
 
@@ -733,6 +841,7 @@ service-audio-manager-closure:
 service-kvdb-closure:
 	$(PYTHON) tools/analyze_g2_service_kvdb.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_service_kvdb_candidate \
 		tests.test_analyze_g2_service_kvdb \
 		tests.test_analyze_g2_flashdb \
 		tests.test_analyze_g2_first_party_frontier
@@ -1012,12 +1121,29 @@ ota-transport-closure:
 	$(PYTHON) tools/analyze_g2_ota_transport.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_ota_transport \
+		tests.test_ota_transport_candidate \
 		tests.test_analyze_g2_first_party_frontier
 
 efs-transport-closure:
 	$(PYTHON) tools/analyze_g2_efs_transport.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_efs_transport_candidate
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_efs_transport \
+		tests.test_analyze_g2_first_party_frontier
+
+efs-service-closure:
+	$(PYTHON) tools/analyze_g2_efs_service.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_efs_service_candidate \
+		tests.test_analyze_g2_efs_service \
+		tests.test_analyze_g2_first_party_frontier
+
+ota-service-closure:
+	$(PYTHON) tools/analyze_g2_ota_service.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_ota_service_candidate \
+		tests.test_analyze_g2_ota_service \
 		tests.test_analyze_g2_first_party_frontier
 
 evenhub-loading-page-closure:
@@ -1138,8 +1264,15 @@ ring-connect-policy-closure:
 system-close-closure:
 	$(PYTHON) tools/analyze_g2_system_close.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_system_close_candidate \
 		tests.test_analyze_g2_system_close \
-		tests.test_analyze_g2_service_settings \
+		tests.test_analyze_g2_first_party_frontier
+
+freertos-cli-filesystem-closure:
+	$(PYTHON) tools/analyze_g2_freertos_plus_cli_filesystem.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_freertos_cli_filesystem_candidate \
+		tests.test_analyze_g2_freertos_plus_cli_filesystem \
 		tests.test_analyze_g2_first_party_frontier
 
 navigation-data-handler-closure:

@@ -31,7 +31,7 @@ checks are in the
 | AmbiqSuite ANCC profile | 2.2.0-4.5.0 implementation-equivalent ANCS client; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 17-definition source/header admitted as an oracle. G2's copied 21-function object retains 12 Ambiq-derived bodies and adds nine bounded message/sync/whitelist adapters. The source-identical interval prevents recovery of one private producing commit; production remains excluded. See the [ANCC source recovery](research/ambiqsuite-ancc-profile-source-recovery.md) |
 | AmbiqSuite AMOTA profile | 2.2.0-2.5.1 stable application skeleton; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 2.5.1 application/API oracle admitted. G2 OTA retains the CCC, A0/A1 event, initializer, and handler skeleton across four functions while three actions are product-local. The binary cannot select one changed release file or private commit. See the [OTA/Ring recovery](research/g2-ble-ota-ring-profiles-recovery.md) |
 | Goodix GR551x application-error utility | SDK 1.7.0 byte-exact `components/libraries/app_error/app_error.c` snapshot, blob `d5027735dd01b0948a7315d9c595356fcb91f59b`; first located incompatible version 2.0.1 | G2's `utils/assert` handler and 43-row table are copied/adapted source. Selected earliest public carrier `854c43e0b96a24051ffce4c06ff629255aa56c59` is not claimed as an official release or Even checkout. The utility is source-closed, production-excluded, and does not imply a linked Goodix BLE stack. See the [Goodix utility recovery](research/g2-util-error-check-goodix-recovery.md) and [provenance](../third_party/goodix-gr551x-app-error/PROVENANCE.json) |
-| G2 EUS/ESS/EFS/NUS profile boundary | No separate upstream dependency | Four contiguous first-party Cordio adapters are authenticated across 21 linked functions / 2,374 body bytes / 3,000 physical bytes. AmbiqSuite has no matching profiles and Nordic `ble_nus_*` does not match the G2 NUS API. See the [profile recovery](research/g2-ble-transport-profiles-recovery.md) |
+| G2 EUS/ESS/EFS/NUS profile boundary | No separate upstream dependency | Four contiguous first-party Cordio adapters are authenticated across 25 linked functions / 2,698 body bytes / 3,000 physical bytes and are production-routed from clean-room C. AmbiqSuite has no matching profiles and Nordic `ble_nus_*` does not match the G2 NUS API. Physical peer validation is blocked by unavailable authorized responsive evidence. See the [profile recovery](research/g2-ble-transport-profiles-recovery.md) |
 | CmBacktrace | armink CmBacktrace, compatible with unmodified upstream interval `4abadfa0…73714489` on the untagged post-1.4.1 line advertising `1.4.2`; no exact vendor commit is proven | FreeRTOS, stack dumping, IAR `.out`, depths 32/16, name limit 40, M33-class effective behavior, exact init arguments, and the 39-entry message table are recovered. Upstream `55e7b69` and later are excluded because G2 lacks its stacked-xPSR fix. A production-excluded seven-file **MIT** snapshot selects `73714489` as an explicit openCFW compatibility choice and verifies its commit, six tree objects, and blobs offline; see the [snapshot README](../third_party/cmbacktrace/README.openCFW.md) and [version/configuration audit](research/cmbacktrace-version-recovery-audit.md) |
 | AndersKaloer/Ring-Buffer | Dynamic-buffer source-equivalent interval `cda00e1efb815bad5100757f0d10d117f633ced6`…`190e30bebcec22d7311fd941179d70b4f439c441`; selected compatibility commit `190e30b` | Exact assertion, 16-byte ABI, seven-function control flow, overwrite-oldest policy, all boundaries, and direct callers are authenticated. All seven live entries are production-integrated as 248 source bytes plus four alignment bytes; Linux replay remains pending. See the [snapshot README](../third_party/ring-buffer/README.openCFW.md) and [lineage audit](research/ring-buffer-lineage-recovery-audit.md) |
 | TinyFrame | Exact core blobs introduced by `eb75483e035916ef9f3e9fce0d2ae389cb09785f`; historical checkout interval ends at core-identical `a29167a69f052975b0e0134a73b4d31d03afa8fa` | The MIT snapshot, license, recovered G2 config, `-fshort-enums` ABI, pristine `0x7158` core, and `0x7160` magic-extended layout are authenticated offline and compile-tested for Cortex-M55. All 31 linked functions / 2,994 code bytes and the 124-byte non-executable pool are accounted for. The separate adapter closes the one-instance role census and bookended layout without modifying upstream. Production atomically routes eight public entries over a 14-function live graph, uses source-owned `heap_4`, retains the authenticated first-party sync wrapper at `0x00541790`, and selects no-op diagnostics. Placement, ownership, and Apple/Linux roots are pinned; only hardware golden frames remain. See the [snapshot README](../third_party/tinyframe/README.openCFW.md), [send/version audit](research/tinyframe-send-version-recovery-audit.md), and [source-admission audit](research/tinyframe-source-admission-boundary-audit.md) |
@@ -3029,3 +3029,42 @@ bytes / 5,368 physical bytes. Its reusable edges terminate at EasyLogger
 `a596b264…`, LVGL-compatible commit `344c7c318…`, and a bounded IAR memory
 runtime entry. It has no direct CMSIS-FreeRTOS or other opaque utility seam and
 adds no version or private application-commit discriminator.
+
+All twenty callable entries are now production-routed to independently
+authored `system_close.c`: 4,960 replaced stock function bytes become 2,804
+compiled Thumb text bytes plus 22 alignment bytes with 118 strict relocations.
+The 408-byte official alignment/literal remainder stays stock-carried. The
+software boundary is closed; live display, transition, IMU-reflash, and peer
+behavior remains blocked by unavailable authorized physical evidence.
+
+## G2 SystemAlert source ownership
+
+The complete callable portion of `app/gui/SystemAlert/systemAlert.c` is now
+production-routed to independently authored `system_alert.c`: seven functions,
+2,174 replaced stock bytes, and 1,138 compiled Thumb text bytes plus 51 bytes
+of read-only data and nine alignment bytes. Its reusable seams terminate at
+the already bounded LVGL, event, timer, display, notification, and IMU
+providers. The retained 172 official bytes are alignment and object-local
+pool/data, not an opaque executable implementation.
+
+## G2 FreeRTOS+CLI filesystem source ownership
+
+The complete callable portion of
+`app/freertos_cli/freertos_cli_filesystem.c` is now production-routed to
+independently authored `freertos_cli_filesystem.c`: twelve functions, 3,200
+replaced stock bytes, and 9,866 compiled Thumb text bytes plus 704 bytes of
+read-only data and 20 alignment bytes. Its reusable storage edges terminate at
+the already bounded littlefs provider; no matching upstream source-generating
+commit was recovered. The retained 56 official bytes are object-local gaps and
+alignment, not an opaque executable implementation. Live writable-media
+validation remains blocked by unavailable authorized physical evidence.
+
+## G2 factory NVDB lifecycle source ownership
+
+The complete callable portion of `platform/service/flashDB/NV/service_nvdb.c`
+is production-routed to independently authored C: five functions, 930 replaced
+stock bytes, and 514 compiled Thumb bytes plus four alignment bytes. Its
+reusable seams terminate at authenticated FlashDB 2.1.1 and the already
+bounded database/serial providers. The 122 retained official bytes are an
+object-local pool. Destructive reset is disabled pending golden-media and
+authorized physical validation.

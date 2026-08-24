@@ -2,11 +2,12 @@
 
 - Retained path: `app\gui\SystemAlert\systemAlert.c`
 - Product path: `D:\01_workspace\s200_ap510b_iar_git\app\gui\SystemAlert\systemAlert.c`
-- Disposition: **linked-unanchored** (code present; zero Ghidra-anchored/discovered functions)
+- Disposition: **production-routed clean-room source; hardware validation blocked**
 - Image: `blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin` (sha256 `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`)
-- Closure manifest: `tools/manifests/g2-system-alert-closure.tsv` (sha256 `dc3618004843ef868d7738df5a7c6e5e74226605a6abe7866a9fef0c5a44c166`)
+- Closure manifest: `tools/manifests/g2-system-alert-closure.tsv` (sha256 `bacaa90329b3b7f19a0df054263d30089812189cc1eede82aa1ac72df27b6294`)
 - Function map: `tools/manifests/g2-system-alert-function-map.tsv` (sha256 `70bfe0ac4ea1d67fdc4aac21423d4c52f4b578a86d3610dd7a74e6a11a6ddb41`)
-- Audit: `tools/analyze_g2_system_alert.py`; test: `tests/test_analyze_g2_system_alert.py`
+- Candidate: `components/apollo_main/core_overlay/system_alert.c`
+- Audit: `tools/analyze_g2_system_alert.py`; tests: `tests/test_system_alert_candidate.py`, `tests/test_analyze_g2_system_alert.py`
 
 ## Identity evidence
 
@@ -49,5 +50,29 @@ Seven blocks in gap [0x4D2B9A, 0x4D34C4). Identity: 12 path references across 4 
 ## Verification
 
 ```
-/usr/bin/python3 -m unittest tests.test_analyze_g2_system_alert -v
+make system-alert-closure
 ```
+
+The seven selector-isolated clean-room leaves compile to 1,138 Thumb text
+bytes, 51 read-only-data bytes, and nine alignment bytes. Seven guarded
+`B.W` redirects replace all 2,174 callable stock body bytes. The two-byte
+alignment NOP at `0x004D2B9A` and the authenticated 170-byte object pool stay
+official. Eighty-five strict relocations bind only to reviewed LVGL, event,
+timer, display, message-notification, IMU, and sibling-source interfaces.
+
+Host tests cover box-padding geometry, common-data dispatch, page lifecycle,
+auto-exit throttling, main-page construction, reflash events, IMU refresh, and
+UI-event routing. The canonical overlay, Apollo component, and complete
+package are 225,396 / 3,748,792 / 4,527,286 bytes with SHA-256 values
+`29555fb742e82c4a2076eb3b508211faf1d7b2777faa16a43f060edbf5f7c285`,
+`a6a78d0b9c38462ddfac7779775537ad4dc9b147975f5fd2263a44873b0ba8c5`,
+and `3f09f5ee3eb0752c54267810cc2b9d22c57b57dbe444a81c6b237b2d88da6d0c`.
+The 2,464,744-byte flash plan has 3,531 placed, two unresolved, five
+container-only, and six protected regions; its SHA-256 is
+`cf79b4d7272431805cc19d3cb8acd685d7bb447464976ee884d797acc4304f15`.
+
+No package was signed or flashed. Live display rendering, event timing,
+message-notification interaction, IMU reflash behavior, and paired-temple
+interoperability remain explicitly blocked: the authorized right temple is
+nonresponsive and the left temple must remain stock. This closes only the
+SystemAlert software gap and is not a firmware-completeness claim.

@@ -634,7 +634,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or ota_transport_provider["historical_ota_transport_commit"] is not None
         or ota_transport["surface"]["indirect_body_calls"] != 4
         or ota_transport["identity"]["embedded_third_party_definitions"]
-        or ota_transport["production"]["production_routed"]
+        or not ota_transport["production"]["production_routed"]
     ):
         raise ClosureError("OTA-transport reusable/provider boundary changed")
     efs_transport_provider = efs_transport["provider_boundary"]
@@ -649,7 +649,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or efs_transport_provider["historical_efs_transport_commit"] is not None
         or efs_transport["surface"]["indirect_body_calls"] != 4
         or efs_transport["identity"]["embedded_third_party_definitions"]
-        or efs_transport["production"]["production_routed"]
+        or not efs_transport["production"]["production_routed"]
     ):
         raise ClosureError("EFS-transport reusable/provider boundary changed")
     loading_provider = evenhub_loading_page["provider_boundary"]
@@ -696,7 +696,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or health_manager_provider["direct_cmsis_freertos_calls"] != 0
         or health_manager_provider["historical_health_manager_commit"] is not None
         or health_data_manager["identity"]["embedded_third_party_definitions"]
-        or health_data_manager["production"]["production_routed"]
+        or not health_data_manager["production"]["production_routed"]
     ):
         raise ClosureError("health-data-manager reusable/provider boundary changed")
     evenhub_main_provider = evenhub_main["provider_boundary"]
@@ -849,7 +849,9 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or system_close["surface"]["restored_functions"] != 15
         or system_close["surface"]["stored_entry_pointers"] != 3
         or system_close["identity"]["embedded_third_party_definitions"]
-        or system_close["production"]["production_routed"]
+        or not system_close["production"]["production_routed"]
+        or not system_close["production"]["source_admitted"]
+        or system_close["production"]["software_functional_gap"]
     ):
         raise ClosureError("SystemClose reusable/provider boundary changed")
     if (
@@ -1439,7 +1441,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
     if freetype["allocator"]["lifecycle"]["FT_Done_FreeType"]["stock_entry_recoverable"]:
         raise ClosureError("FreeType destructor topology changed; ledger requires review")
     third_party_bytes = accounting["opaque_origin_lower_bounds"]["third_party_path_anchored"]
-    if third_party_bytes != 130_000:
+    if third_party_bytes != 122_876:
         raise ClosureError("third-party path-anchored byte census changed")
 
     selected = sum(row["selected_source_commit"] is not None for row in rows)
@@ -1605,7 +1607,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "ota_transport_indirect_body_calls": 4,
             "ota_transport_embedded_third_party_definitions": 0,
             "ota_transport_historical_commit": None,
-            "ota_transport_routed": False,
+            "ota_transport_routed": True,
             "efs_transport_easylogger_calls": 60,
             "efs_transport_cmsis_freertos_calls": 1,
             "efs_transport_runtime_calls": 8,
@@ -1616,7 +1618,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "efs_transport_indirect_body_calls": 4,
             "efs_transport_embedded_third_party_definitions": 0,
             "efs_transport_historical_commit": None,
-            "efs_transport_routed": False,
+            "efs_transport_routed": True,
             "evenhub_loading_page_lvgl_calls": 36,
             "evenhub_loading_page_easylogger_calls": 85,
             "evenhub_loading_page_runtime_calls": 2,
@@ -1646,7 +1648,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "health_data_manager_direct_cmsis_freertos_calls": 0,
             "health_data_manager_embedded_third_party_definitions": 0,
             "health_data_manager_historical_commit": None,
-            "health_data_manager_routed": False,
+            "health_data_manager_routed": True,
             "evenhub_main_easylogger_calls": 120,
             "evenhub_main_iar_runtime_calls": 6,
             "evenhub_main_lvgl_calls": 2,
@@ -1780,7 +1782,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "system_close_stored_entry_pointers": 3,
             "system_close_embedded_third_party_definitions": 0,
             "system_close_historical_commit": None,
-            "system_close_routed": False,
+            "system_close_routed": True,
             "iar_float_exponent_functions": 3,
             "iar_float_exponent_bytes": 268,
             "iar_float_exponent_exact_stock_reproduction": True,

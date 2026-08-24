@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed audit of the retained G2 pb_service_dev_config object."""
+"""Fail-closed stock and production audit of G2 pb_service_dev_config."""
 
 from __future__ import annotations
 
@@ -18,11 +18,26 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-dev-config-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-dev-config-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-dev-config-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_dev_config.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "b67dd987f128de9f5db844d769b03301c8c48d952790d155b75a877aa4c08d86",
-    CLOSURE: "edee2867bb8f265a839bb0e5e79544a7b3b879e9251aaf0bbaa3bcd3d86642d0",
-    PROVENANCE: "bf4f657c5cb1c27fc2bb0477ede01eb6e0a49573714cca4bc7d91b7fcac1c830",
+    CLOSURE: "2be10bb975b69388cc4de071586b67fceefa813f56080535b07634aea6fdcd22",
+    PROVENANCE: "d52c825658fbf7bf8c809b10cfbb6f1ec11cc1c18619374fb5011cfd7ab1b5cc",
 }
+SOURCE_SIZE = 11435
+SOURCE_SHA256 = "46c79dbaad289491f195562aea10d3d8ba92684e7227e463b697a04f31b67bc4"
+FUNCTIONS = (
+    ("open_cfw_pb_service_dev_config_buffer_write", 154, 202484, 0,
+     "buffer_write"),
+    ("open_cfw_pb_service_dev_config_zero", 88, 202640, 0, "zero"),
+    ("APP_PbRxErrorCode", 4, 202728, 0, "error_rx"),
+    ("APP_PbTxEncodeErrorCode", 118, 202732, 4, "error_tx"),
+    ("APP_PbRxDevCfgFrameDataProcess", 634, 202852, 29, "rx"),
+)
+PATCH_SUFFIXES = ("rx", "error_rx", "error_tx")
 PHYSICAL = (0x004D83D8, 0x004D8F4C)
 PHYSICAL_SHA256 = "d956ed13c98123c0ddb960e65c1ca1baa8629675bba7663b2978505d122f044a"
 BODY_SHA256 = "401049831bcd87292d5897f5f6eca7d19eb0f8dc906233bb89d4e77a0214647b"
@@ -199,11 +214,90 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if any((value & ~1) in starts for _, value in stored):
         raise AuditError("unexpected stored exact-entry pointer")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_dev_config" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented device-config service entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count, _ in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_dev_config.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        patch = patch_by_name.get(f"replace_pb_dev_config_{suffix}")
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", row["function"], ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        region = region_by_name.get(
+            f"pb_dev_config_{suffix}_source_replacement"
+        )
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(
+                f"production manifest replacement changed: {row['function']}"
+            )
+    for name, size, offset, _, region_suffix in FUNCTIONS:
+        region = region_by_name.get(
+            f"pb_dev_config_{region_suffix}_source_text"
+        )
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = [item for item in main["regions"]
+                if item["name"].startswith("pb_dev_config_retained_")]
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_dev_config_")
+                 and item["name"].endswith("_source_alignment")]
+    if sum(item["size"] for item in retained) != 286 or any(
+            item.get("address_status") != "official_blob"
+            for item in retained) or sum(
+                item["size"] for item in alignment) != 4:
+        raise AuditError("production retained/alignment accounting changed")
 
     return {
         "surface": {
@@ -248,8 +342,24 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [row["function"] for row in rows],
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 2646,
+            "source_inventory_available": True,
+            "source_functions": 5,
+            "compiled_text_bytes": 998,
+            "alignment_bytes": 4,
+            "strict_relocations": 33,
+            "stock_replaced_bytes": 2646,
+            "retained_gap_pool_bytes": 286,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 0x80 master/peer BLE, timer, "
+                "pairing, restart, or device-configuration workflow evidence "
+                "is available; the authorized right temple is nonresponsive "
+                "and the left temple must remain stock."
+            ),
         },
     }
 

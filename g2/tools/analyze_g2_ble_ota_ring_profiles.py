@@ -80,18 +80,20 @@ def analyze(image=IMAGE):
  previous=191828;alignment=0
  for leaf in leaves:alignment+=leaf['expected']['offset']-previous;previous=leaf['expected']['offset']+leaf['expected']['size']
  if alignment!=8 or previous!=192212:raise AuditError('production BLE OTA placement changed')
- patches=[x for x in overlay['patch_sites'] if x.get('name','').startswith('replace_ota_')]
+ patches=[x for x in overlay['patch_sites'] if x.get('target_function') in set(LEAF_NAMES)]
  if len(patches)!=7 or jsh(patches)!=PATCH_DIGEST or sum(x['expected_size'] for x in patches)!=620 or {x['target_function'] for x in patches}!=set(LEAF_NAMES):raise AuditError('production BLE OTA redirect closure changed')
  if any(x.get('branch')!='b_w' or x.get('profiles')!=['apple-clang'] for x in patches):raise AuditError('production BLE OTA redirect policy changed')
  build=json.loads(REPORT.read_text())
- if (build['overlay']['size'],build['overlay']['sha256'],build['component']['size'],build['component']['sha256'])!=(197488,'a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183',3720884,'026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a'):raise AuditError('production BLE OTA build pins changed')
+ if (build['overlay']['size'],build['overlay']['sha256'],build['component']['size'],build['component']['sha256'])!=(240692,'2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae',3764088,'b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed'):raise AuditError('production BLE OTA build pins changed')
  built=[x for x in build['relocated_leaves'] if x.get('source',{}).get('path')==SOURCE_PATH];norm=[{'function':x['extraction']['function'],'size':x['placement']['size'],'padding_before':x['placement']['padding_before'],'offset':x['placement']['offset'],'runtime_address':x['placement']['runtime_address'],'relocation_count':x['extraction']['relocation_count']} for x in built]
  if len(built)!=7 or jsh(norm)!=BUILT_DIGEST:raise AuditError('production BLE OTA built closure changed')
- manifest=json.loads(MANIFEST.read_text());main=manifest['component_overrides']['apollo_main'];regions=[x for x in main['regions'] if x.get('name','').startswith('ota_') or x.get('name')=='opaque_ota_profile_literal_pool']
+ manifest=json.loads(MANIFEST.read_text());main=manifest['component_overrides']['apollo_main'];regions=[x for x in main['regions'] if (x.get('name','').startswith('ota_') and not x.get('name','').startswith(('ota_transport_','ota_service_'))) or x.get('name')=='opaque_ota_profile_literal_pool']
  if len(regions)!=20 or jsh(regions)!=REGION_DIGEST:raise AuditError('production BLE OTA manifest regions changed')
- retained={x.get('name'):x for x in main['regions'] if x.get('name') in {'apollo_opaque_after_gatt_profile_before_ota_profile','opaque_ota_profile_literal_pool','apollo_opaque_after_ota_profile'}};expected_retained={'apollo_opaque_after_gatt_profile_before_ota_profile':(4938532,32876,'official_blob'),'opaque_ota_profile_literal_pool':(4972028,80,'official_blob'),'apollo_opaque_after_ota_profile':(4972108,17810,'official_blob')}
+ retained={x.get('name'):x for x in main['regions'] if x.get('name')=='opaque_ota_profile_literal_pool'};expected_retained={'opaque_ota_profile_literal_pool':(4972028,80,'official_blob')}
  if {k:(v.get('target_address'),v.get('size'),v.get('address_status')) for k,v in retained.items()}!=expected_retained:raise AuditError('retained BLE OTA official regions changed')
- if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3720884,'026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a',4499378,'03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783'):raise AuditError('production BLE OTA manifest closure changed')
+ pair_tiles=[x for x in main['regions'] if 4938532<=x.get('target_address',0)<4938532+32876]
+ if (sum(x['size'] for x in pair_tiles),sum(x['size'] for x in pair_tiles if x.get('address_status')=='official_blob'),sum(x['size'] for x in pair_tiles if x.get('address_status')=='generated_source_entry_replacement'))!=(32876,22178,10698):raise AuditError('post-GATT multipart-transport/pair-manager tiling changed')
+ if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3764088,'b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed',4542582,'275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85'):raise AuditError('production BLE OTA manifest closure changed')
  ring_source=RING_SOURCE.read_bytes()
  if (len(ring_source),sha(ring_source))!=RING_SOURCE_PIN:raise AuditError('production BLE Ring source changed')
  ring_leaves=[x for x in overlay['relocated_leaves'] if x.get('source',{}).get('path')==RING_SOURCE_PATH]

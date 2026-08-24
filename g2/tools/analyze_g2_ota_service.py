@@ -20,9 +20,47 @@ CLOSURE = ROOT / "tools/manifests/g2-ota-service-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-ota-service-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "14854f14615287a4cd95aac16c18f92bcd3da582f1a3bbb86698f4374963631d",
-    CLOSURE: "01dca85d72495f3d173e74dcf93c92fcc9f250da871a4b3787af61420cd0afb7",
-    PROVENANCE: "17830ba02d0f89d355337c23e35227b0d98b1df2bb430a38a11daa896b0ac21e",
+    CLOSURE: "882c9d5f8cd4a736e872932e29760da39d106e46db207e7eef03ce57e4dfbbb7",
+    PROVENANCE: "1c32ca41264759e8f629cdd4300cc67487afc70b4ffc358f3ed79c7d3fccef01",
 }
+SOURCE = ROOT / "components/apollo_main/core_overlay/ota_service.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE_SIZE = 25_024
+SOURCE_SHA256 = "1b501a572c77e3b3105a10db4ead5100ff9a8d0f4c19f031d9067ed79731424b"
+PRODUCTION_LEAVES = (
+    ("open_cfw_ota_flash_erase", 28, 219800, 1),
+    ("open_cfw_ota_flash_read", 130, 219828, 1),
+    ("open_cfw_ota_flash_write", 42, 219960, 2),
+    ("open_cfw_ota_status_sync", 80, 220004, 1),
+    ("OtaSelectFlashOps", 22, 220084, 0),
+    ("OtaFileSize", 14, 220108, 1),
+    ("OtaEraseRange", 42, 220124, 1),
+    ("_evenOtaSetFwAddr", 106, 220168, 2),
+    ("_verifyFlashContent", 174, 220276, 1),
+    ("OtaBufferedFlashWrite", 66, 220452, 2),
+    ("OtaCommitDescriptor", 72, 220520, 1),
+    ("_evenOtaReplyToAPP", 44, 220592, 1),
+    ("_RPC_SystemOtaStatusSync", 4, 220636, 1),
+    ("OtaParseHexAddress", 100, 220640, 0),
+    ("_evenOtaBootloaderWriteFile2MRAM", 202, 220740, 9),
+    ("_otaFsHealthProbe", 4, 220944, 1),
+    ("_otaFsHealthCheckAndHeal", 40, 220948, 3),
+    ("_fileCmdParse", 576, 220988, 9),
+    ("_fileRawDataParse", 420, 221564, 7),
+    ("OTA_FileCaculateCRC", 156, 221984, 6),
+    ("_exportFileParse", 456, 222140, 6),
+    ("OTA_FrameDispatch", 92, 222596, 3),
+    ("OTA_ResetExportState", 52, 222688, 1),
+    ("OTA_NotifyStatus4", 32, 222740, 1),
+    ("OTA_NotifyStatus3", 32, 222772, 1),
+    ("OTA_NotifyStatus5", 32, 222804, 1),
+    ("OTA_CancelExport", 64, 222836, 2),
+    ("OTA_TransferActive", 36, 222900, 0),
+    ("OTA_SetInterface", 12, 222936, 0),
+)
+PATCH_TARGETS = tuple(name for name, *_ in PRODUCTION_LEAVES[4:])
 PHYSICAL = (0x004448F4, 0x004488EC)
 PHYSICAL_SHA256 = "b58c8256ffee83bc9af1e920be4ba419f46e19695823a71dc8dc21c16be21acd"
 BODY_SHA256 = "2e6d2e90187fdd801af4f898a486524d2a03b64ba10a7cee6958c505ff76e3f1"
@@ -222,10 +260,101 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if aligned_entry_pointers:
         raise AuditError("stored exact-entry pointer appeared")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any("ota_service" in source.get("path", "").lower()
-           for source in overlay["sources"]):
-        raise AuditError("unimplemented OTA service entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production OTA service source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = {leaf["function"]: leaf for leaf in overlay["relocated_leaves"]}
+    patches = {patch["name"]: patch for patch in overlay["patch_sites"]}
+    for name, size, offset, relocations in PRODUCTION_LEAVES:
+        leaf = leaves.get(name)
+        if (
+            not leaf
+            or leaf.get("source", {}).get("path")
+            != "components/apollo_main/core_overlay/ota_service.c"
+            or leaf.get("source", {}).get("size") != SOURCE_SIZE
+            or leaf.get("source", {}).get("sha256") != SOURCE_SHA256
+            or leaf.get("expected", {}).get("size") != size
+            or leaf.get("expected", {}).get("offset") != offset
+            or leaf.get("expected", {}).get("alignment") != 4
+            or len(leaf.get("relocations", [])) != relocations
+            or not leaf.get("strict_relocation_contract")
+            or leaf.get("profiles") != ["apple-clang"]
+        ):
+            raise AuditError(f"production OTA service leaf changed: {name}")
+    for order, (row, target) in enumerate(zip(rows, PATCH_TARGETS), 1):
+        patch = patches.get(f"replace_ota_service_{order:02d}")
+        if (
+            not patch
+            or patch.get("runtime_address") != int(row["entry"], 0)
+            or patch.get("expected_size") != int(row["size"])
+            or patch.get("expected_sha256") != row["sha256"]
+            or patch.get("target_function") != target
+            or patch.get("branch") != "b_w"
+            or patch.get("profiles") != ["apple-clang"]
+        ):
+            raise AuditError(f"production OTA service patch changed: {target}")
+
+    report = json.loads(REPORT.read_text())
+    reported = {
+        leaf["extraction"]["function"]: leaf
+        for leaf in report["relocated_leaves"]
+        if leaf.get("source", {}).get("path")
+        == "components/apollo_main/core_overlay/ota_service.c"
+    }
+    for name, size, offset, relocations in PRODUCTION_LEAVES:
+        item = reported.get(name)
+        if (
+            not item
+            or item["placement"]["offset"] != offset
+            or item["placement"]["size"] != size
+            or item["placement"]["alignment"] != 4
+            or item["extraction"]["relocation_count"] != relocations
+        ):
+            raise AuditError(f"production OTA service report changed: {name}")
+    if (
+        report["overlay"]["size"], report["overlay"]["sha256"],
+        report["component"]["size"], report["component"]["sha256"],
+    ) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production OTA service artifact pins changed")
+
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (
+        main["provider"]["size"], main["provider"]["sha256"],
+        manifest["package"]["expected_size"],
+        manifest["package"]["expected_sha256"],
+    ) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production OTA service manifest pins changed")
+    regions = {region["name"]: region for region in main["regions"]}
+    for order, row in enumerate(rows, 1):
+        item = regions.get(f"ota_service_{order:02d}_source_replacement")
+        expected = (
+            int(row["entry"], 0), int(row["size"]),
+            "generated_source_entry_replacement",
+        )
+        if not item or (
+            item.get("target_address"), item.get("size"),
+            item.get("address_status"),
+        ) != expected:
+            raise AuditError(f"production OTA stock region changed: {row['name']}")
+    service_regions = [region for region in main["regions"]
+                       if region["name"].startswith("ota_service_")]
+    if sum(region["size"] for region in service_regions
+           if region["address_status"] == "source_compiled") != 3130:
+        raise AuditError("production OTA compiled region coverage changed")
+    if sum(region["size"] for region in service_regions
+           if region["address_status"] == "generated_alignment") != 18:
+        raise AuditError("production OTA alignment coverage changed")
+    if sum(region["size"] for region in service_regions
+           if region["address_status"] == "official_blob") != 982:
+        raise AuditError("production OTA retained-gap coverage changed")
 
     external_entries = [pair for pair in entries
                         if not (PHYSICAL[0] <= pair[0] < PHYSICAL[1])]
@@ -266,10 +395,25 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "license": "unknown",
         },
         "production": {
-            "candidate": None,
-            "source_inventory_available": False,
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate": "components/apollo_main/core_overlay/ota_service.c",
+            "source_inventory_available": True,
+            "production_routed": True,
+            "ownership_bytes": 15_394,
+            "source_functions": 29,
+            "compiled_text_bytes": 3_130,
+            "alignment_bytes": 18,
+            "strict_relocations": 65,
+            "stock_replaced_bytes": 15_394,
+            "retained_gap_pool_bytes": 982,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized responsive G2 peer and writable OTA target are "
+                "physically available for live MRAM, filesystem, XIP-flash, "
+                "bootloader, export, cancellation, CRC failure, power-loss, and "
+                "rollback evidence; the authorized right temple is nonresponsive "
+                "and the left temple must remain stock."
+            ),
         },
     }
 

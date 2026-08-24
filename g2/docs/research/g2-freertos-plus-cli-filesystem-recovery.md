@@ -4,7 +4,7 @@
 - Product path: `D:\01_workspace\s200_ap510b_iar_git\kernel\FreeRTOS-Plus-CLI\prvCommand\prvCommand_filesystem.c`
 - Disposition: **linked-unanchored** (code present; zero Ghidra-anchored/discovered functions)
 - Image: `blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin` (sha256 `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`)
-- Closure manifest: `tools/manifests/g2-freertos-plus-cli-filesystem-closure.tsv` (sha256 `3fee797ff3f27bb8cdf6ab826bbe820ca843eca0a1291aa2f5dedf44a2a797d3`)
+- Closure manifest: `tools/manifests/g2-freertos-plus-cli-filesystem-closure.tsv` (sha256 `fa6e5ad0fd31f617348de7286badc40489f6a849ebcce7d1b69cf5360b435155`)
 - Function map: `tools/manifests/g2-freertos-plus-cli-filesystem-function-map.tsv` (sha256 `4687cfb65b7331807a36e84efd75d664b85f3c26f19ab3d66800e6dcc050d340`)
 - Audit: `tools/analyze_g2_freertos_plus_cli_filesystem.py`; test: `tests/test_analyze_g2_freertos_plus_cli_filesystem.py`
 
@@ -56,6 +56,42 @@ Ingress is sparse by measurement: only entry 0x57EAA8 has direct BL sites (4 int
 The path pointer cell 0x57F950 lies in the following object's literal region; IAR pooled the constant across the object boundary. The cell and all 6 references are pinned regardless.
 
 Provenance: the retained path places the file under a vendored `kernel\FreeRTOS-Plus-CLI\prvCommand` directory. The pinned `third_party/freertos-plus-cli` mirror (FreeRTOS.git commit 43defa566cc440251dbd6b48d1fcca27f88cfcdd) contains only `FreeRTOS_CLI.c`/`FreeRTOS_CLI.h`; no `prvCommand_filesystem.c` exists in the pinned tree. This object is therefore first-party, demo-style CLI code in a vendor-named directory; no upstream commit is claimed for it. Whether any upstream FreeRTOS-Plus-CLI core code is linked is answered separately by the anchored closures around `FreeRTOS_CLI.c`; this audit only attests the prvCommand_filesystem.c seam.
+
+## Production source closure
+
+`components/apollo_main/core_overlay/freertos_cli_filesystem.c` is an
+independently authored GPL-3.0-only implementation of all twelve entries:
+`ls`, `cat`, `rm`, path normalization, `cd`, `mkdir`, `touch`, `pwd`, `mv`,
+streaming MD5, `df`, and the block-stat accumulator. Filesystem calls bind to
+the authenticated G2 littlefs adapter entries; the `df` geometry reads the
+recovered volume/config ABI (`volume+0x68`, block size `config+0x1c`, block
+count `config+0x20`). The command layer performs bounded 256-byte path joins
+and normalization, validates directories before committing `cwd`, streams
+file reads, prevents overwrite during move, and computes capacity without
+retaining private source or executable bytes.
+
+Twelve selector-isolated Cortex-M55 leaves emit 9,866 text bytes and 704 bytes
+of authenticated read-only data, with 20 generated alignment bytes and 179
+strict relocations. Twelve guarded `B.W` redirects replace all 3,200 stock
+function bytes. Five authenticated gaps totaling 56 bytes remain official.
+Host behavior and target-symbol tests, exact stock/ingress audit, manifest
+tiling, complete component/package construction, flash planning, origin
+accounting, and first-party-frontier gates pass.
+
+Canonical Apple artifacts are: overlay 238,812 bytes / SHA-256
+`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`;
+Apollo component 3,762,208 bytes / SHA-256
+`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`;
+complete package 4,540,702 bytes / SHA-256
+`275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+The 2,538,060-byte flash plan has 3,639 placed, two unresolved, five
+container-only, and six protected regions.
+
+No image was signed or flashed. Live directory/file mutation, MD5/capacity,
+block traversal, persistence, power-loss, and paired-temple behavior are
+blocked because no authorized responsive G2 pair or captured littlefs media
+is available; the authorized right temple is nonresponsive and the left
+temple must remain stock. This closes the software command-object gap only.
 
 ## Verification
 

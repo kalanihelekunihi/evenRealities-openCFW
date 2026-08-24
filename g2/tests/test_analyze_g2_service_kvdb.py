@@ -44,7 +44,8 @@ class G2ServiceKvdbTests(unittest.TestCase):
         self.assertEqual((b["partition_offset"], b["partition_bytes"]), (0x1FC0000, 0x38000))
         self.assertEqual((b["default_table_address"], b["default_node_count"]), ("0x2000372c", 12))
         self.assertEqual((b["magic_key"], b["magic_value"]), ("kvMagic", 0x5A000020))
-        self.assertEqual(b["magic_mismatch_policy"], "wholesale fdb_kv_set_default")
+        self.assertEqual(b["stock_magic_mismatch_policy"], "wholesale fdb_kv_set_default")
+        self.assertEqual(b["production_magic_mismatch_policy"], "fail closed without reset")
         self.assertEqual((b["lock_callback_command"], b["unlock_callback_command"]), (2, 3))
         self.assertEqual(b["migration_callbacks"], 11)
 
@@ -71,8 +72,18 @@ class G2ServiceKvdbTests(unittest.TestCase):
         self.assertEqual(p["flashdb_commit"], "714d6159e7e6afb267a3953756abca445c350e61")
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routing_is_non_destructive_and_hardware_blocked(self):
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(
+            (production["compiled_text_bytes"], production["alignment_bytes"],
+             production["strict_relocations"], production["replaced_stock_body_bytes"],
+             production["retained_official_pool_bytes"]),
+            (342, 8, 23, 1384, 156),
+        )
+        self.assertFalse(production["destructive_default_reset_enabled"])
+        self.assertFalse(self.report["behavior"]["production_invalidate_magic_writes_zero"])
+        self.assertIn("blocked by unavailable", production["hardware_validation"])
 
 
 if __name__ == "__main__":

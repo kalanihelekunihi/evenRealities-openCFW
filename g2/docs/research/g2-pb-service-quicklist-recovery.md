@@ -1,7 +1,8 @@
 # G2 `pb_service_quicklist.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: complete linked-object census plus clean-room production C routing;
+live G2 workflow validation is blocked by unavailable authorized physical
+evidence. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -34,13 +35,34 @@ count, and item count.
 
 Transmit uses the separate 0x1238-byte object at `0x200F7484`, the 0x400-byte
 nanopb buffer at `0x2037A5A0`, route 1, and service `0x0C`. Transmit helpers
-return 2 on null input, `0x2B` on encode failure, and zero on success;
-notification transport failure maps to -1. Multi-item notification copies
-0xE8-byte item records into the transmit object, while both notification paths
-advance the sequence byte at `0x20074FFD`.
+return 2 on null input, `0x2B` on encode failure, and zero on success. Raw
+Thumb instructions show that notification transport results are ignored after
+a successful encode. Multi-item notification copies 0xE8-byte item records
+into the transmit object, while both notification paths advance the sequence
+byte at `0x20074FFD`.
 
-The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No clean-room candidate exists, the service is
-absent from `overlay.json`, and OpenCFW claims zero production ownership
-bytes. The next retained protobuf-service frontier is
+## Production closure
+
+`components/apollo_main/core_overlay/pb_service_quicklist.c` provides thirteen
+clean-room source functions: the ten linked entries plus bounded buffer-write,
+workspace-zero, and common-transmit helpers. The Apple-clang build emits 1,060
+text bytes, 18 alignment bytes, and 26 strict relocations. Ten guarded `B.W`
+redirects replace all 3,468 stock body bytes; the five official gap/pool
+regions remain retained. The notification copy rejects counts above the twenty
+0xE8-byte records that fit exactly before the recovered 0x1230 callback cell.
+
+The host suite covers null/decode/encode failures, all three dispatch paths,
+data-manager callbacks, response layouts, sequence wrap, the maximum-item
+bound, and send/notify routing. The canonical overlay is 211,718 bytes with
+SHA-256 `fd223453f93db03efe91b9c05d601d33938b32af36cab672bfbcf0ded3e46e94`;
+the Apollo component is 3,735,114 bytes with SHA-256
+`ec639e5f23f1bfc145ac8dc4eeebfebbe07da3c9662864cca2b5387fbba44670`;
+the 4,513,608-byte package has SHA-256
+`245b64451dbc30eb898e6cea07baf79002544434f85c9ae89b9f151ae8a97799`.
+
+The historical source tree and source-only inventory remain unavailable.
+Software functionality is closed, but live service-0x0C peer BLE, persistent
+quicklist load/save, response, and notification validation is explicitly
+blocked: the authorized right temple is nonresponsive and the left temple must
+remain stock. The next protobuf-service software frontier is
 `pb_service_dev_config/pb_service_pair_mgr.c`.

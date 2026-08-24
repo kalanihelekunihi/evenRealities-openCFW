@@ -1,7 +1,8 @@
 # G2 `pb_service_translate.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: software-complete and production-routed from clean-room C; live
+master/peer BLE and translation-UI validation is explicitly blocked by
+unavailable authorized responsive G2 hardware evidence. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -39,7 +40,34 @@ magic byte from the last RX magic; command response takes the supplied magic.
 Successful sends are gated on the master-role provider and use the already
 bounded protobuf BLE send/notify wrappers with transport/service pair `(1,5)`.
 
-The exact source path and four symbols survive, but no authenticated source
-tree or license is available. Source-only function count is therefore not
-inferred. No clean-room candidate exists, the object is absent from
-`overlay.json`, and OpenCFW claims zero production ownership bytes.
+The exact historical source path and four stock symbols survive, but no
+authenticated historical source tree or historical license is available.
+Source-only historical inventory is therefore not inferred.
+
+## Production closure
+
+`components/apollo_main/core_overlay/pb_service_translate.c` is a 9,294-byte,
+GPL-3.0-only clean-room implementation (SHA-256
+`1e6429d33df883ca498112850f6e38254798d82e88de86d2b2c450d9300d0095`).
+Seven selector-isolated source functions compile to 748 Thumb text bytes plus
+four alignment bytes. Four guarded `B.W` redirects replace all 1,324 stock
+body bytes; the authenticated 120-byte literal pool remains official. The 13
+strict relocations bind only to recovered nanopb, tick, role, BLE transport,
+and sibling-source interfaces. Host tests cover buffer bounds, RX decode and
+replay statuses, every envelope layout, role gating, null/encode failures, and
+send-versus-notify behavior.
+
+The canonical production overlay/component/package are 202,484 / 3,725,880 /
+4,504,374 bytes with SHA-256 values
+`0201c5d6961d87cf65fb189d6ea125a2b627ed0b5fc5cf75036fc58f8019166f`,
+`37efb5b3d63c9830646a2a1c50783d60823cbb209a9118c2da224dcc0b673959`,
+and `7e6b2ced0cf4adab423d2f3080de733d9bb1feb7b93890bf4cfd48972e70c6b1`.
+The 2,123,068-byte flash plan has 3,032 placed, two unresolved, and five
+container-only regions and hashes to
+`16e1c6df34a39685f9bc891ec71dd472f7078341a0bbfa1fdb034c2d74237705`.
+
+No hardware was accessed. Live service-`0x05` master/peer BLE, replay timing,
+nanopb peer interoperability, and translation-UI behavior remain blocked: the
+authorized right temple is nonresponsive and the left temple must remain
+stock. This is an explicit physical-evidence blocker, not a software-complete
+firmware declaration.

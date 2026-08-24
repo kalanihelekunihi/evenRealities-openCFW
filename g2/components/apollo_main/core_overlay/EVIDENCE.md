@@ -17193,7 +17193,7 @@ the 16-byte 32-bit attribute ABI, rejects IRQ/masked contexts, and requires
 | `vPortFree` | `[0x00456210,0x00456280)` / 112 / `d754aec282080b2deafeb6756cbacc156af70a311499ee4d73eeb7497f12b032` | `[0x007B050C,0x007B057E)` / 114 / `146aa07eef93afc02e5caff75e7a569bf39e3da390383d91ccf45ae0f6b19f1c` |
 | `prvHeapInit` | `[0x00456280,0x004562DA)` / 90 / `0b6c69c306e3a8e734f524f0cc38146cf761f996a14bd61ef81651fd6ebd6b0f` | `[0x007B031C,0x007B035E)` / 66 / `05577f0229a6b66050f597d7da19ccac03c34f15db84db9b29dcbab7d96cd140` |
 | `prvInsertBlockIntoFreeList` | `[0x004562DA,0x00456338)` / 94 / `88820119c56a0487020dceef91194de8299b056d25f887ff87badb84c0806a10` | `[0x007B0360,0x007B03D6)` / 118 / `624b33dc7c6d16d3c87be6fc2dd409bf4461a8b08ff94cda3664682839d0aed2` |
-| `vQueueDelete` | `[0x00441EA2,0x00441EC4)` / 34 / `ab55f9fa6eb823935056d4b4030cc10df52bc8b33318abea201e61348a026bc4` | `[0x007B0580,0x007B05A6)` / 38 / `078c97be19fff941ddb8ea3685dc5137f7e4d7e69e25ffaa0bdf21c22df509f2` |
+| `vQueueDelete` | `[0x00441EA2,0x00441EC4)` / 34 / `ab55f9fa6eb823935056d4b4030cc10df52bc8b33318abea201e61348a026bc4` | `[0x007B0580,0x007B05A6)` / 38 / `078c97be19fff941ddb8ea3715dc5137f7e4d7e69e25ffaa0bdf21c22df509f2` |
 | `osSemaphoreNew` | `[0x0044989A,0x0044994E)` / 180 / `ebdcf69b866e35e468ba9ce84d7e7ac9b58377b5ffcc439762d729f7d99a098c` | `[0x007B05A8,0x007B065A)` / 178 / `7bda982b14d0862d9fa1fe7321f0ec11808b6f646862126c1948d350e7916213` |
 
 Four two-byte zero-padding ranges at
@@ -20093,15 +20093,19 @@ boundaries. The glasses-case and Ring services are now production-routed and
 claim 2,722 stock body bytes; the other thirteen retained services remain
 analysis-only.
 
-### Translate protobuf-service analysis boundary
+### Translate protobuf-service production closure
 
 The retained `pb_service_translate.c` object is completely bounded at
 `[0x0059F53C,0x0059FAE0)`: four exact-named bodies contribute 1,324 code
 bytes and their pool contributes 120 bytes. Eight exact-start callers, 74 body
 calls, RX status/duplicate policy, TX subtype envelopes, shared buffers,
 nanopb providers, and BLE send/notify paths are pinned with no strict-interior
-ingress. No authenticated source candidate is routed; production ownership
-remains zero.
+ingress. Seven clean-room source functions compile to 748 bytes plus four
+alignment bytes; four guarded redirects replace all 1,324 stock body bytes,
+the 120-byte official pool is retained, and 13 strict relocations are pinned.
+Host, component, manifest, package, and deployment gates are green. Live
+service-`0x05` master/peer BLE and translation-UI validation are explicitly
+blocked by unavailable authorized responsive-hardware evidence.
 
 ### Glasses-case protobuf-service analysis boundary
 
@@ -20126,8 +20130,13 @@ ten intra-body wide branches, the `0xC4..0xC7` frame dispatcher, 0x78-byte
 transfer object, two 4-KiB buffers, Android JSON cap, import/export file types,
 CRC validation, and cancel/reset behavior are pinned. Direct and exterior
 wide-branch strict-interior ingress and stored exact-entry pointers are zero.
-No authenticated source candidate is routed; production ownership remains
-zero.
+A clean-room twelve-function C reconstruction compiles to 2,936 text bytes
+plus 16 alignment bytes with 68 strict relocations. Guarded redirects replace
+all 9,276 stock body bytes; the 658 authenticated alignment/literal bytes remain
+official compatibility data. Host behavior, Cortex-M55 selector, component,
+package, and flash-plan checks pass. Live EFS media validation is explicitly
+blocked because the authorized right temple is nonresponsive, the left temple
+must remain stock, and no authorized responsive peer/media pair is available.
 
 ### OTA service analysis boundary
 
@@ -20220,8 +20229,13 @@ bytes and four alignment/literal regions contribute 284 bytes. Ten exact-start
 callers, 222 body calls, 20 assertion records, five command/tag pairs, factory
 and heartbeat effects, the five-byte UTC/timezone cache, caller-owned nanopb
 storage, and service-`0x80` transport are pinned. Direct and `B.W`
-strict-interior ingress and stored exact-entry pointers are zero. No
-authenticated source candidate is routed; production ownership remains zero.
+strict-interior ingress and stored exact-entry pointers are zero. Twelve
+clean-room functions compile to 934 text bytes plus six alignment bytes and 30
+strict relocations. Ten guarded redirects replace all 3,432 stock bodies while
+the 284 official alignment/literal bytes remain retained. Host, component,
+manifest, package, flash-plan, aggregate-ledger, and origin-accounting gates
+are green. Live service-`0x80` destructive reset, peer BLE, heartbeat,
+clock-sync, and persistence evidence remains explicitly hardware-blocked.
 
 ### Quicklist protobuf-service analysis boundary
 
@@ -20232,8 +20246,13 @@ callers, 199 body calls, eight assertion records, the item/multi-item/event
 command and tag layouts, separate 0x1238-byte decode/transmit objects, bounded
 multi-item copies, notification sequence, and service-`0x0C` transport are
 pinned. Direct and `B.W` strict-interior ingress and stored exact-entry
-pointers are zero. No authenticated source candidate is routed; production
-ownership remains zero.
+pointers are zero. Thirteen clean-room functions compile to 1,060 text bytes
+plus 18 alignment bytes and 26 strict relocations. Ten guarded redirects
+replace all 3,468 stock bodies while the 280 official gap/pool bytes remain
+retained. The multi-item copy is limited to the twenty records that fit the
+recovered workspace. Host, component, manifest, package, flash-plan,
+aggregate-ledger, and origin-accounting gates are green. Live service-`0x0C`
+peer BLE and persistent quicklist workflows remain hardware-blocked.
 
 ### Notification-whitelist analysis boundary
 
@@ -20280,10 +20299,50 @@ service-`0x80` transport are pinned. Six stored Thumb pointers all target the
 ring-connect notification wrapper and strict-interior ingress is zero.
 
 This completes the 15-path protobuf-service family at 143 linked functions,
-47,644 body bytes, and 51,744 physical bytes. No authenticated source candidate
-is routed; production ownership remains zero.
+47,644 body bytes, and 51,744 physical bytes. Twenty-one independently authored
+selector-isolated pair-manager leaves compile to 2,300 Thumb text bytes plus
+22 alignment bytes; 20 guarded redirects and 97 strict relocations replace all
+6,564 pair-manager stock body bytes while retaining the authenticated 724-byte
+gap/pool. All 15 protobuf services now route all 47,644 linked body bytes
+through production C. Host, selector, component, manifest, package,
+aggregate-ledger, frontier, and origin-accounting gates are green. Live
+pair-manager peer workflows remain explicitly blocked by unavailable
+authorized responsive G2 physical evidence.
 
-### Onboarding protobuf-service analysis boundary
+### Multipart, OTA, and EFS transport production closure
+
+The retained `transport_protocol.c` object is completely bounded at
+`[0x004B892C,0x004B9A80)`: thirteen bodies / 4,134 code bytes and four
+authenticated gaps totaling 302 bytes. Thirteen selector-isolated clean-room
+functions compile to 2,538 Thumb bytes plus 14 alignment bytes. Thirteen
+guarded redirects and 55 strict relocations route the complete stock behavior,
+including `0xAA` single/multipart framing, CRC-16/CCITT, four receive contexts,
+duplicate suppression, timeout/WSF delivery, callback dispatch, and serialized
+fragmentation.
+
+The retained `ota_transport.c` object is completely bounded at
+`[0x0048D8D8,0x0048E1CC)`: three bodies / 2,004 code bytes plus a 288-byte
+official pool. Three selector-isolated clean-room functions compile to 1,300
+Thumb bytes plus two alignment bytes. Three guarded redirects and 14 strict
+relocations route C0/C1/C2 receive, bounded 4 KiB assembly, CRC/error/resource
+policy, delayed timeout, registered callbacks, fragmentation, transmit errors,
+and transfer-state access.
+
+The retained `efs_transport.c` object is completely bounded at
+`[0x004D0D80,0x004D15E8)`: two bodies / 1,990 code bytes plus a 162-byte
+official alignment/string/literal pool. Two selector-isolated clean-room
+functions compile to 1,276 Thumb bytes. Two guarded redirects and 15 strict
+relocations route C4/C5/C6 receive, bounded 4 KiB assembly, CRC/error/resource
+policy, delayed timeout, registered callbacks, CMSIS-tick sequence generation,
+fragmentation, and transmit errors.
+
+All three host oracles, selector gates, component, manifest, complete package,
+frontier, and origin-accounting gates are green. Live peer traffic and OTA
+and EFS recovery qualification remain explicitly blocked by unavailable
+authorized responsive G2 physical evidence; no hardware was accessed or
+flashed.
+
+### Onboarding protobuf-service production closure
 
 The retained `pb_service_onboarding.c` object is completely bounded at
 `[0x004A78D0,0x004A8560)`: nine exact-named functions contribute 3,024 code
@@ -20292,10 +20351,25 @@ exact-start callers, 181 body calls, eight assertion records, the
 configuration/heartbeat/event command and tag layouts, two notification
 encoders, heartbeat readiness states, the incrementing notification sequence,
 and service-`0x10` transport are pinned. Direct and `B.W` strict-interior
-ingress and stored exact-entry pointers are zero. No authenticated source
-candidate is routed; production ownership remains zero.
+ingress and stored exact-entry pointers are zero.
 
-### Notification protobuf-service analysis boundary
+The independently authored `pb_service_onboarding.c` implementation contributes
+12 selector-isolated functions totaling 878 compiled Thumb bytes plus eight
+alignment bytes. Nine guarded redirects replace all 3,024 stock body bytes;
+22 strict relocations bind only to recovered nanopb, BLE, onboarding-control,
+readiness/global, and redirected sibling-source interfaces. The 192 official
+alignment/literal bytes remain retained. Host behavior, selector builds,
+component assembly, manifest ownership, package assembly, and deployment-plan
+generation gate this route. Current Apple overlay/component/package identities
+are 205,714 / 3,729,110 / 4,507,604 bytes with SHA-256 values
+`a84d243b3a561e7db38d16bc30def52906da0530b984b25cb1606f7749c35ff8`,
+`2b19af2b2887c2a3f20d1603cf08db95a617428475018aaa7d3fa880840060ce`,
+and `07b3e44039e7c1f33ff31552f5997992fa658006f432f50c57b1a58cc4893755`.
+No hardware was used; live service-`0x10` peer BLE, display readiness,
+onboarding-control, response, notification, and nanopb interoperability remain
+blocked by unavailable authorized responsive-device evidence.
+
+### Notification protobuf-service production closure
 
 The retained `pb_service_notification.c` object is completely bounded at
 `[0x004D6BA8,0x004D798C)`: nine exact-named functions contribute 3,318 code
@@ -20304,10 +20378,14 @@ exact-start callers, 202 body calls, seven assertion records, the notification
 and whitelist control pairs, generic response, allocated app-not-whitelisted
 notification, CRC comparison states, shared nanopb workspace, and service-4
 transport are pinned. Direct and `B.W` strict-interior ingress and stored
-exact-entry pointers are zero. No authenticated source candidate is routed;
-production ownership remains zero.
+exact-entry pointers are zero. Twelve selector-isolated clean-room functions
+compile to 1,326 bytes plus 16 alignment bytes. Nine guarded redirects replace
+all 3,318 stock body bytes through 34 strict relocations while retaining the
+238 official gap/pool bytes. Host, component, manifest, package, deployment,
+complete-service-ledger, and origin-accounting gates are green. Live service-4
+behavior remains blocked by unavailable authorized responsive-device evidence.
 
-### Setting protobuf-service analysis boundary
+### Setting protobuf-service production closure
 
 The retained `pb_service_setting.c` object expands from nine corpus anchors to
 11 exact-named functions at `[0x0049B198,0x0049C070)`: 3,466 code bytes plus
@@ -20315,10 +20393,15 @@ The retained `pb_service_setting.c` object expands from nine corpus anchors to
 callers, 221 body calls, duplicate-magic suppression, full device-status
 construction, response/local-data serialization, notification selectors,
 shared nanopb workspace, and service-9 transport are pinned. Direct and `B.W`
-strict-interior ingress and stored exact-entry pointers are zero. No
-authenticated source candidate is routed; production ownership remains zero.
+strict-interior ingress and stored exact-entry pointers are zero. Thirteen
+selector-isolated clean-room functions compile to 1,650 bytes plus 14
+alignment bytes. Eleven guarded redirects replace all 3,466 stock bodies
+through 38 strict relocations while retaining 334 official gap/pool bytes.
+Host, component, manifest, package, deployment, complete-service-ledger, and
+origin-accounting gates are green. Live service-9 validation remains blocked
+by unavailable authorized responsive-device evidence.
 
-### Device-config protobuf-service analysis boundary
+### Device-config protobuf-service production closure
 
 The retained `pb_service_dev_config.c` object is completely bounded at
 `[0x004D83D8,0x004D8F4C)`: three exact-named functions contribute 2,646 code
@@ -20326,8 +20409,12 @@ bytes and three literal regions contribute 286 bytes. Three exact-start
 callers, 172 body calls, a 14-command dispatcher, error classifier,
 command-10/tag-9 error response, and service-`0x80` transport are pinned.
 Direct and `B.W` strict-interior ingress and stored exact-entry pointers are
-zero. No authenticated source candidate is routed; production ownership
-remains zero.
+zero. Five clean-room source functions compile to 998 bytes plus four
+alignment bytes; three redirects replace all 2,646 stock body bytes, 286
+official gap/pool bytes are retained, and 33 strict relocations are pinned.
+Host, component, manifest, package, and deployment gates are green. Live
+service-`0x80` configuration workflows remain hardware-blocked by unavailable
+authorized responsive-device evidence.
 
 ### Conversate protobuf-service analysis boundary
 
@@ -20373,7 +20460,7 @@ package, and deployment-plan gates are green. Live service-6 master/peer BLE,
 timing, and teleprompt UI validation are blocked by unavailable authorized
 physical evidence.
 
-### Even-AI protobuf-service analysis boundary
+### Even-AI protobuf-service production routing
 
 The retained `pb_service_even_ai.c` object expands from seven path anchors to
 25 exact-named functions at `[0x004E31CC,0x004E54C8)`: 8,404 code bytes plus
@@ -20381,8 +20468,15 @@ The retained `pb_service_even_ai.c` object expands from seven path anchors to
 body calls, 23 retained assertion records, immediate one-byte replay
 suppression, ten regular command/tag pairs, three notification variants, and
 service-7 transport are pinned. Direct and `B.W` strict-interior ingress and
-stored exact-entry pointers are zero. No authenticated source candidate is
-routed; production ownership remains zero.
+stored exact-entry pointers are zero. Twenty-seven independently authored,
+selector-isolated C functions compile to 2,832 Thumb text bytes plus 36
+alignment bytes. Twenty-five guarded redirects replace all 8,404 stock body
+bytes, and 107 strict relocations bind only to the recovered nanopb, BLE,
+role/display, provider, and sibling-source interfaces. The 552 distributed
+official alignment/pool bytes remain retained. Host behavior, component,
+manifest, package, and deployment-plan gates are green. Live service-7
+master/peer BLE and Even-AI UI validation are blocked by unavailable
+authorized physical evidence.
 
 ## Apollo-main CMSIS-FreeRTOS core-leaf milestone
 
@@ -21077,6 +21171,160 @@ package sizes are `164912/3688308/4466802`, with SHA-256 values
 `03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
 No hardware operation was performed.
 
+## Codec UART lifecycle production routing
+
+`service_codec_porting.c` contributes two selector-isolated relocated leaves:
+86 bytes for initialization and 40 bytes for close. Four authenticated Thumb
+call relocations bind ring initialization, UART3 callback registration, resume,
+and suspend. Two guarded redirects replace the exact 186- and 156-byte stock
+bodies; two generated alignment bytes and the 72-byte official pool complete
+the object closure.
+
+The current Apple report records overlay size 240,076 and SHA-256
+`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`,
+component size 3,763,472 and SHA-256
+`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`,
+and package size 4,541,966 and SHA-256
+`275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+No package was signed or flashed. UART electrical behavior and GX8002B timing
+remain blocked by unavailable authorized responsive physical evidence.
+
+## AT^AUDIO production routing
+
+`at_codec.c` contributes one 44-byte, four-byte-aligned leaf at runtime
+`0x007CECC4`. Three strict Thumb relocations bind the authenticated audio-manager
+acquire/release entries and AT output provider. A guarded redirect replaces the
+complete 118-byte `_atAudioCtrl` body; its 34-byte official pool is retained.
+The current package and flash plan are 4,541,966 and 2,568,527 bytes with
+SHA-256 `275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`
+and `bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f`.
+No image was signed or flashed; physical audio behavior remains blocked.
+
+## Current system KVDB lifecycle source increment
+
+`service_kvdb.c` now owns all seven callable functions in the authenticated
+system database lifecycle object. Seven guarded redirects replace 1,384 stock
+body bytes; the selector-isolated Cortex-M55 build emits 342 text bytes plus
+eight alignment bytes with 23 strict relocations, while the 156-byte official
+pool remains retained. Valid media mounts, increments `kvbooCount`, runs all
+eleven migrations, and reloads all twelve nodes. Missing or mismatched magic
+and explicit invalidation fail closed without a reset write.
+
+The canonical overlay/component/package identities are 239,680 / 3,763,076 /
+4,541,570 bytes with SHA-256 values
+`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`,
+`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`,
+and `275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+Read-only golden-media, persistence, recovery, and schema validation remain
+blocked by unavailable authorized responsive G2 hardware and `kvdb` evidence.
+
+## Current OPT3007 register-map production routing
+
+`opt3007_registers.c` contributes one scalar, four-byte-aligned 224-byte Thumb
+leaf with zero relocations. The clean-room implementation emits the exact 19
+TI SBOS864 field triples / 57 bytes and is null-pointer safe. A guarded `B.W`
+redirect replaces the complete 340-byte stock constructor while the 20-byte
+authenticated diagnostic/alignment pool remains official.
+
+Canonical overlay/component/package identities are 239,904 / 3,763,300 /
+4,541,794 bytes with SHA-256 values
+`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`,
+`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`,
+and `275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+The flash plan is 2,562,590 bytes / SHA-256
+`bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f`
+with 3,676 placed, two unresolved, five container-only, and six protected
+regions. No image was signed or flashed. Live OPT3007 behavior remains blocked
+by unavailable authorized responsive G2 hardware and physical bus evidence.
+
+## Current factory NVDB lifecycle production routing
+
+`service_nvdb.c` contributes five selector-isolated leaves totaling 514 Thumb
+text bytes plus four alignment bytes with eleven strict relocations. Five
+guarded redirects replace all 930 callable bytes in the authenticated object;
+the 122-byte official pool remains retained. Host tests cover wrapper ABI,
+default descriptor, callback control, valid mount, init failure, PSN
+reconciliation, and non-destructive missing/mismatched-magic failure.
+
+Canonical overlay/component/package identities are 239,330 / 3,762,726 /
+4,541,220 bytes with SHA-256 values
+`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`,
+`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`,
+and `275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+No image was signed or flashed. Live media evidence remains blocked.
+
+## Current FreeRTOS+CLI filesystem production routing
+
+`freertos_cli_filesystem.c` contributes twelve selector-isolated relocated
+leaves totaling 9,866 Thumb text bytes, 704 read-only-data bytes, and 20
+alignment bytes with 179 strict relocations. Twelve guarded redirects replace
+all 3,200 callable bytes in the authenticated stock object while five
+non-callable gaps totaling 56 bytes remain official.
+
+Host behavior tests cover normalization, listing, file reads, removal, working
+directory changes, directory/file creation, moves, MD5, filesystem geometry,
+and block statistics. Canonical overlay/component/package identities are
+238,812 / 3,762,208 / 4,540,702 bytes with SHA-256 values
+`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`,
+`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`,
+and `275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+No image was signed or flashed. Live mounted-media, persistence, recovery,
+power-loss, and concurrency evidence remains blocked because no authorized
+responsive G2 target with writable test media is physically available.
+
+## G2 SystemAlert production routing
+
+`system_alert.c` contributes seven Apple-only selector-isolated leaves. Seven
+guarded redirects replace 2,174 authenticated callable bytes while retaining
+the two-byte entry-alignment NOP and 170-byte literal/data pool. The emitted
+surface is 1,138 text bytes, 51 read-only-data bytes, nine alignment bytes,
+and 85 strict relocations to bounded LVGL, event, timer, display,
+message-notification, IMU, and sibling-source seams.
+
+Host behavior covers box padding, page lifecycle, data dispatch, auto-exit
+throttling, reflash and IMU events, and UI-event routing. Canonical
+overlay/component/package identities are 225,396 / 3,748,792 / 4,527,286
+bytes and `29555fb7...c285` / `a6a78d0b...a8c5` / `3f09f5ee...a6d0`.
+No image was flashed. Physical display/timing/IMU/peer evidence is blocked by
+the nonresponsive authorized right temple while the left temple remains stock.
+
+## G2 SystemClose production routing
+
+`system_close.c` contributes twenty Apple-only selector-isolated leaves.
+Twenty guarded redirects replace all 4,960 authenticated stock function bytes
+while retaining 408 official alignment/literal bytes. The emitted surface is
+2,804 text bytes plus 22 alignment bytes with 118 strict relocations to bounded
+LVGL, display, synchronization, event, transition, and memory-runtime seams.
+
+Host behavior covers the 128-byte FIFO, common-data validation, role-gated page
+actions, option layout, scroll and animation sequencing, confirm/cancel/
+minimize policy, IMU reflash dispatch, page factory, and UI lifecycle. Current
+overlay/component/package identities are 228,222 / 3,751,618 / 4,530,112
+bytes and `ee0ced13...cda491` / `c6ac27de...fca42` /
+`7cd4e676...dc2c8`; the 2,503,413-byte plan has 3,589 placed regions. No
+image was signed or flashed. Physical display, shutdown/minimize, IMU, and
+peer-synchronization evidence is blocked by the nonresponsive authorized right
+temple while the left temple remains stock.
+
+## G2 EUS/ESS/EFS/NUS BLE-profile production routing
+
+`ble_transport_profiles.c` contributes 25 selector-isolated clean-room leaves
+covering all registered profile handlers, send paths, and GATT write callbacks.
+Twenty-five guarded redirects replace all 2,698 authenticated stock body bytes
+in `[0x004BDE4C,0x004BEA04)`; four official pools totaling 302 bytes remain.
+The Cortex-M55 build emits 1,240 text bytes plus 10 alignment bytes with 45
+strict relocations.
+
+Host tests verify CCC/open/close state, WSF allocation and queueing, provider
+handles, OTA gates, RX callback forwarding, timeout cancellation, EUS direct
+send, TX semaphore release, and all 25 target selectors. Canonical
+overlay/component/package identities are 224,198 / 3,747,594 / 4,526,088 bytes
+and `87dd3f57f56f8ac138e5df6d96e5dd30ff97b8197e49b21392f04260fcd8f631` /
+`e27208da3a7f963f6676bedfd039b589c283ce1be679c94317a80bb8061812b1` /
+`b84e19844a7459929059111af9804203a76760bbb9f8a1093063e2bb758c4b44`.
+No image was signed or flashed. Physical controller timing and dual-device
+interoperability remain blocked by unavailable authorized responsive evidence.
+
 ## Current protobuf conversate-service production routing
 
 `pb_service_conversate.c` contributes eight Apple-only selector-isolated
@@ -21569,6 +21817,31 @@ base bytes. Linux independently reproduces the recorded package size
 No package was signed or flashed and no hardware was accessed. Physical
 preemption, exception-return, stack-overflow, trace-concurrency, and STIMER
 timing evidence remains blocked by unavailable authorized hardware.
+
+## G2 OTA file-service production routing
+
+`ota_service.c` contributes 25 clean-room service leaves and four source-owned
+flash/status adapters. Twenty-five guarded `B.W` redirects replace every
+authenticated function body in `[0x004448F4,0x004488EC)`: 15,394 stock bytes.
+The 982-byte object-local alignment/literal/callback compatibility closure is
+retained. The selector-isolated Cortex-M55 output is 3,130 text bytes plus 18
+alignment bytes with 65 exact relocations to reviewed file, CRC-32C, secure-
+commit, RPC, NOR, MRAM, and filesystem-health providers.
+
+Host behavior covers C0/C1/C2/C3 dispatch, address/size rejection, MRAM/file/
+XIP selection, 4 KiB erasure and streaming, CRC and read-after-write failures,
+secure descriptor commit, filesystem probe/heal, export, cancellation, and
+status synchronization. Canonical overlay/component/package identities are
+222,948 / 3,746,344 / 4,524,838 bytes with SHA-256 values
+`11ccabaa7a312d1c83b8bfb246bdfdbaa4bf8f3db4494ba21623c9d92bc4341c`,
+`8e262f1ecea6bf0f3696d4216895e38bfc54f590a94fb628c0132e91e0bb118f`,
+and `61f5fc2763bbd2b17e6e28f09bb13bdfc38a21a9e072a51c88dbec171fcbdde3`.
+
+No package was signed or flashed. Live MRAM/filesystem/XIP writes, bootloader
+installation, peer-visible status, power-loss, and rollback behavior remain
+blocked because no authorized responsive G2 peer and writable OTA target are
+physically available; the authorized right temple is nonresponsive and the
+left temple must remain stock.
 
 ## Current FreeRTOS `vTaskGetInfo` production routing
 

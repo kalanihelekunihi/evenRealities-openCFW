@@ -26,7 +26,20 @@ class ZeroAnchorClosureTests(unittest.TestCase):
 
     def test_evidence_and_production(self):
         self.assertEqual(self.r["evidence"], {'boundary_guards': True, 'pointer_cells': ['0x004D3424'], 'path_string_run_address': '0x006FD85C', 'tag_strings': 12})
-        self.assertFalse(self.r["production"]["production_routed"])
+        self.assertEqual(self.r["production"], {
+            "source_admitted": True,
+            "production_routed": True,
+            "source_functions": 7,
+            "compiled_text_bytes": 1138,
+            "compiled_rodata_bytes": 51,
+            "alignment_bytes": 9,
+            "stock_replaced_bytes": 2174,
+            "retained_literal_pool_bytes": 172,
+            "strict_relocations": 85,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": "No authorized responsive G2 pair is available for dual-temple lifecycle, delayed-exit, translation, and rendered-display validation.",
+        })
 
 
 if __name__ == "__main__":

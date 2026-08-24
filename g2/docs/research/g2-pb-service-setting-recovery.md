@@ -1,7 +1,8 @@
 # G2 `pb_service_setting.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: software-closed and production-routed from independently authored,
+selector-isolated C; live service-9 validation is explicitly blocked by
+unavailable authorized responsive hardware. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -51,7 +52,21 @@ tag 5 and use nested selectors 1 and 2 respectively.
 The retained source path has two literal references but no standard assertion
 record. Eleven retained diagnostic strings provide the exact source names.
 The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No clean-room candidate exists, the service is
-absent from `overlay.json`, and OpenCFW claims zero production ownership
-bytes. The next retained protobuf-service frontier is
-`pb_service_onboarding.c`.
+functions are not inferred. The independently authored GPL-3.0-only
+`components/apollo_main/core_overlay/pb_service_setting.c` provides 13
+selector-isolated functions: the 11 recovered entries plus bounded buffer and
+zero helpers. They compile to 1,650 Thumb text bytes plus 14 alignment bytes;
+38 strict relocations terminate only at recovered nanopb, BLE, role/config,
+runtime-status, request, unread-count, or sibling-source interfaces. Eleven
+guarded redirects replace all 3,466 stock body bytes while the 334-byte
+authenticated gap/pool set remains official.
+
+Host tests cover bounds, duplicate filtering, decode statuses, full-status
+field construction, local/remote response paths, role gates, transport
+arguments, monotonic notification magic, and both status selectors. The
+component, manifest, 4,510,208-byte package, 2,218,642-byte flash plan,
+complete-service ledger, and origin accounting are pinned. Live service-9
+peer BLE, full-status, recalibration, silent-mode, and nanopb interoperability
+validation remains blocked: the authorized right temple is nonresponsive and
+the left temple must remain stock. This is a hardware-evidence blocker, not a
+remaining setting software gap.

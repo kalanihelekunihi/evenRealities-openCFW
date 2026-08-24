@@ -7416,8 +7416,12 @@ The complete retained `pb_service_translate.c` object is identified at
 `[0x0059F53C,0x0059FAE0)`: four bodies / 1,324 code bytes plus 120 pool bytes.
 Its eight exact-start callers, 74 body calls, RX duplicate/status policy, TX
 envelope layouts, shared buffers, nanopb providers, and BLE transport calls
-are pinned fail-closed. No source candidate is routed, so the stock package
-retains all 1,444 bytes and OpenCFW claims zero ownership.
+are pinned fail-closed. Seven clean-room source functions compile to 748 text
+bytes plus four alignment bytes. Four guarded redirects replace all 1,324
+stock body bytes while retaining the 120-byte official pool; 13 strict
+relocations and host behavior are green. Live master/peer BLE, timing, and
+translation-UI validation are explicitly blocked by unavailable authorized
+responsive-hardware evidence.
 
 ## Current first-party glasses-case protobuf-service increment
 
@@ -7534,8 +7538,13 @@ alignment/pool bytes. Its ten exact-start callers, 222 body calls, 20 assertion
 records, five command/tag pairs, factory/heartbeat actions, UTC/timezone cache,
 caller-owned nanopb storage, and service-`0x80` transport are pinned
 fail-closed. Direct and `B.W` interior ingress and stored exact-entry pointers
-are zero. No routed source candidate exists, so the stock package retains all
-3,716 bytes and OpenCFW claims zero ownership.
+are zero. Twelve clean-room source functions compile to 934 text bytes plus six
+alignment bytes with 30 strict relocations. Ten guarded redirects replace all
+3,432 stock body bytes while the 284 official alignment/literal bytes remain
+retained. Host, component, manifest, package, flash-plan, aggregate-ledger, and
+origin-accounting gates are green. Live service-`0x80` factory-reset, restart,
+heartbeat, clock-sync, persistence, and peer BLE behavior remains explicitly
+hardware-blocked by unavailable authorized physical evidence.
 
 ## Current first-party quicklist protobuf-service increment
 
@@ -7545,8 +7554,12 @@ alignment/pool bytes. Its ten exact-start callers, 199 body calls, eight
 assertion records, three command/tag pairs, separate decoded/transmit messages,
 bounded multi-item copies, notification sequence, and service-`0x0C` transport
 are pinned fail-closed. Direct and `B.W` interior ingress and stored exact-entry
-pointers are zero. No routed source candidate exists, so the stock package
-retains all 3,748 bytes and OpenCFW claims zero ownership.
+pointers are zero. Thirteen clean-room functions compile to 1,060 text bytes
+plus 18 alignment bytes with 26 strict relocations. Ten guarded redirects
+replace all 3,468 stock bodies while retaining all 280 official pool bytes.
+The multi-item notification copy is bounded to the twenty records that fit the
+recovered workspace. Live peer BLE and persistent quicklist workflows remain
+blocked by unavailable authorized physical evidence.
 
 ## Completed first-party pair-manager and protobuf-service frontier
 
@@ -7558,11 +7571,47 @@ policy, BLE parameter mode, disconnect/unpair cleanup, and service-`0x80`
 transport are pinned fail-closed. Six stored Thumb pointers all target the
 ring-connect notification wrapper; strict-interior ingress remains zero.
 
+Twenty-one independently authored selector-isolated functions now compile to
+2,300 Thumb text bytes plus 22 alignment bytes. Twenty guarded redirects and
+97 strict relocations replace all 6,564 stock body bytes while retaining the
+724-byte official gap/pool. Host behavior, target compilation, component,
+manifest, package, aggregate-ledger, frontier, and origin-accounting gates are
+green. Live pair-manager peer workflows remain explicitly hardware-blocked by
+unavailable authorized responsive G2 evidence.
+
 The aggregate manifest proves closure for all 15 retained protobuf-service
 paths: 143 linked functions, 47,644 body bytes, 51,744 physical bytes, and
-4,498 production ownership bytes. This supersedes the frontier census only as a
+47,644 production ownership bytes. This supersedes the frontier census only as a
 whole-object closure ledger; the original 119/40,844 values remain the
 authenticated retained-path lower bound.
+
+## Current multipart, OTA, and EFS transport source increment
+
+`transport_protocol.c` contributes thirteen selector-isolated clean-room
+functions totaling 2,538 compiled Thumb bytes plus 14 alignment bytes.
+Thirteen redirects replace all 4,134 stock body bytes through 55 strict
+relocations; 302 authenticated official gap/pool bytes remain retained. The
+host oracle covers single/multipart fragmentation and reassembly, CRC failure,
+duplicates, timeout/WSF delivery, callback dispatch, mutex failure, and
+malformed input.
+
+`ota_transport.c` contributes three selector-isolated clean-room functions
+totaling 1,300 compiled Thumb bytes plus two alignment bytes. Three redirects
+replace all 2,004 stock body bytes through 14 strict relocations; its 288-byte
+official pool remains retained. The host oracle covers C0/C1/C2 receive,
+CRC/error/resource/overflow policy, timeout scheduling, registered callbacks,
+fragmentation, transmit failure, malformed frames, and transfer-state access.
+
+`efs_transport.c` contributes two selector-isolated clean-room functions
+totaling 1,276 compiled Thumb bytes. Two redirects replace all 1,990 stock
+body bytes through 15 strict relocations; its 162-byte authenticated pool
+remains retained. The host oracle covers C4/C5/C6 receive, CRC/error/resource/
+overflow policy, timeout scheduling, registered callbacks, CMSIS-tick
+sequencing, fragmentation, transmit failure, and malformed frames.
+
+This transport-only artifact identity is superseded by the EFS- and OTA-
+service increments below. Live peer, OTA, and EFS recovery validation remains
+blocked by unavailable authorized responsive hardware evidence.
 
 ## Current first-party conversate protobuf-service increment
 
@@ -7597,8 +7646,13 @@ The complete retained `pb_service_even_ai.c` object is identified at
 alignment/pool bytes. Its 26 exact-start callers, 494 body calls, 23 retained
 assertion records, ten regular command/tag layouts, three notifications,
 immediate magic suppression, and service-7 transport are pinned fail-closed.
-No routed source candidate exists, so the stock package retains all 8,956
-bytes and OpenCFW claims zero ownership.
+The clean-room production source contains 27 functions and compiles to 2,832
+text bytes plus 36 alignment bytes under 107 strict relocations. Twenty-five
+whole-body redirects replace all 8,404 executable stock bytes while retaining
+the authenticated 552-byte gap/pool closure. Host behavior and package gates
+close the software gap; live paired-temple service-7 BLE and Even-AI UI
+validation remains explicitly blocked by unavailable authorized responsive
+hardware.
 
 ## Current first-party terminal protobuf-service increment
 
@@ -7608,9 +7662,14 @@ alignment/literal tail. Its 33 exact-start callers, 130 body calls, RX
 replay/status policy, eleven supported tag layouts, ten notification
 envelopes, command response, shared message, nanopb providers, and
 service-`0x30` routes are pinned fail-closed. Direct and `B.W` interior
-ingress and stored exact-entry pointers are zero. No routed source candidate
-exists, so the stock package retains all 2,800 bytes and OpenCFW claims zero
-ownership.
+ingress and stored exact-entry pointers are zero. The clean-room production
+source contains fifteen functions and compiles to 1,368 text bytes plus eight
+alignment bytes with 23 strict relocations. Thirteen whole-body redirects
+replace all 2,554 executable stock bytes; the authenticated 246-byte literal
+tail remains official. Host behavior and a byte-pinned 4,503,622-byte package
+close the software gap. Live service-`0x30` master/peer BLE and terminal-UI
+validation remains explicitly blocked by unavailable authorized responsive
+hardware.
 
 ## Current first-party device-config protobuf-service increment
 
@@ -7619,9 +7678,13 @@ The complete retained `pb_service_dev_config.c` object is identified at
 distributed gap/pool bytes. Its three exact-start callers, 172 body calls,
 14-command dispatcher, error classifier, error-response layout, shared
 message, nanopb providers, and service-`0x80` route are pinned fail-closed.
-Direct and `B.W` interior ingress and stored exact-entry pointers are zero. No
-routed source candidate exists, so the stock package retains all 2,932 bytes
-and OpenCFW claims zero ownership.
+Direct and `B.W` interior ingress and stored exact-entry pointers are zero.
+Five clean-room functions compile to 998 text bytes plus four alignment bytes.
+Three guarded redirects replace all 2,646 stock body bytes while retaining 286
+official gap/pool bytes; 33 strict relocations and the full
+command/timer/response host oracle are green. Live master/peer configuration
+workflows are explicitly blocked by unavailable authorized responsive-hardware
+evidence.
 
 ## Current first-party health protobuf-service increment
 
@@ -7644,8 +7707,11 @@ alignment/pool bytes. Its two manually restored wrappers, 23 exact-start
 callers, 221 body calls, duplicate filter, full-status package, response and
 local-data serializers, notification subtypes, shared nanopb workspace, and
 service-9 transport are pinned fail-closed. Direct and `B.W` interior ingress
-and stored exact-entry pointers are zero. No routed source candidate exists,
-so the stock package retains all 3,800 bytes and OpenCFW claims zero ownership.
+and stored exact-entry pointers are zero. Thirteen selector-isolated clean-room
+functions compile to 1,650 bytes plus 14 alignment bytes. Eleven redirects
+replace all 3,466 stock bodies through 38 strict relocations while retaining
+334 authenticated non-body bytes. Software gates are green; live service-9
+validation is explicitly blocked by unavailable authorized physical evidence.
 
 ## Current first-party onboarding protobuf-service increment
 
@@ -7655,9 +7721,12 @@ alignment/pool bytes. Its nine exact-start callers, 181 body calls, eight
 assertion records, configuration/heartbeat/event command pairs, two
 notification paths, heartbeat readiness mapping, shared message/buffer pair,
 nanopb providers, and service-`0x10` transport are pinned fail-closed. Direct
-and `B.W` interior ingress and stored exact-entry pointers are zero. No routed
-source candidate exists, so the stock package retains all 3,216 bytes and
-OpenCFW claims zero ownership.
+and `B.W` interior ingress and stored exact-entry pointers are zero. Twelve
+selector-isolated clean-room functions now compile to 878 bytes plus eight
+alignment bytes. Nine guarded redirects replace all 3,024 stock body bytes
+through 22 strict relocations; the 192 official gap/pool bytes remain retained.
+Host and build/package gates are green, while live service-`0x10` behavior
+remains blocked by unavailable authorized responsive-device evidence.
 
 ## Current first-party notification protobuf-service increment
 
@@ -7667,9 +7736,11 @@ alignment/pool bytes. Its ten exact-start callers, 202 body calls, seven
 assertion records, notification and whitelist control paths, generic response,
 app-not-whitelisted notification, CRC comparison statuses, shared nanopb
 workspace, and service-4 transport are pinned fail-closed. Direct and `B.W`
-interior ingress and stored exact-entry pointers are zero. No routed source
-candidate exists, so the stock package retains all 3,556 bytes and OpenCFW
-claims zero ownership.
+interior ingress and stored exact-entry pointers are zero. Twelve clean-room
+functions compile to 1,326 bytes plus 16 alignment bytes; nine redirects
+replace all 3,318 stock bodies through 34 strict relocations while retaining
+238 authenticated non-body bytes. Software gates are green, and live service-4
+validation is explicitly blocked by unavailable authorized physical evidence.
 
 ## Current first-party EFS-service increment
 
@@ -7678,9 +7749,13 @@ The complete retained `efs_service.c` object occupies
 owned gap/pool bytes. Its 35 exact-start direct calls, 559 body calls, frame
 dispatcher, import/export state and buffers, file-type policies, CRC checks,
 and cancellation/reset paths are pinned fail-closed. Six functions are
-pathless restorations beyond the six retained anchors. No historical source or
-routed candidate exists, so the stock package retains all 9,934 physical bytes
-and OpenCFW claims zero ownership.
+pathless restorations beyond the six retained anchors. A clean-room
+twelve-function candidate supplies 2,936 compiled text bytes plus 16 alignment
+bytes and 68 strict relocations. Production redirects replace all 9,276 stock
+body bytes while retaining 658 authenticated compatibility bytes. Host and
+Cortex-M55 selector tests pass; live whitelist/JSON/file import, logger/trace
+export, CRC failures, cancellation, disconnect, and resume remain explicitly
+blocked by unavailable authorized responsive G2 hardware/media evidence.
 
 ## Current first-party OTA-service increment
 
@@ -7690,8 +7765,24 @@ owned gap/pool bytes. Twelve retained anchors plus thirteen pathless
 restorations cover the complete object. Its `0xC0..0xC3` frame routes,
 MRAM/filesystem/external-flash update paths, 4-KiB buffering and sectors, CRC
 and read-after-write checks, filesystem healing, 107 exact-entry calls, and
-zero strict-interior ingress are pinned fail-closed. There is no authenticated
-historical source or routed candidate; OpenCFW claims zero ownership.
+zero strict-interior ingress are pinned fail-closed. Twenty-five clean-room
+service leaves and four source-owned backend adapters compile to 3,130 text
+bytes plus 18 alignment bytes with 65 strict relocations. All 15,394 stock
+body bytes are redirected; the 982 compatibility bytes remain official.
+Host and selector tests cover framing, storage selection, CRC/verification,
+secure commit, filesystem repair, export, cancellation, and status behavior.
+
+The canonical overlay/component/package are now 222,948 / 3,746,344 /
+4,524,838 bytes with SHA-256 values
+`11ccabaa7a312d1c83b8bfb246bdfdbaa4bf8f3db4494ba21623c9d92bc4341c`,
+`8e262f1ecea6bf0f3696d4216895e38bfc54f590a94fb628c0132e91e0bb118f`,
+and `61f5fc2763bbd2b17e6e28f09bb13bdfc38a21a9e072a51c88dbec171fcbdde3`.
+The 2,407,981-byte flash plan has 3,450 placed regions, two unresolved
+physical-evidence regions, and five container-only regions; its SHA-256 is
+`161d3854f8de6ad154dba4e2f56f18af70ddbe99f4b9d1271dc3901bd42ebd58`.
+Live peer-visible OTA, writable-media, bootloader, power-loss, and rollback
+validation is blocked because the authorized right temple is nonresponsive
+and the left temple must remain stock.
 
 ## Current first-party retained-path coverage census
 
@@ -7887,7 +7978,7 @@ body bytes now belong to closed paths. The 234 complete-object records
 account for 814,534 body bytes after non-anchor restoration; 232 records
 also report 885,418 known physical bytes. The 234-entry closed-manifest
 ledger is pinned to SHA-256
-`3cd89ad644ad243b7d2c94bf1a5d8beb5c6270235bbfe4ee936fb4b7711bb1d8` and is
+`aa5eb9142e1033f785771d6c81c5db41abf1d31ef5bb446b0354dca55553efd2` and is
 reproduced by `tools/analyze_g2_first_party_frontier.py`. No new version or
 commit discriminator was found in any of the 53 closures. This supersedes
 every earlier "Current first-party retained-path coverage census" snapshot
@@ -8320,3 +8411,196 @@ container-only regions. The
 software object is closed; paired-G2 relay, nanopb interoperability, and live
 Ring-event behavior remain explicitly blocked by unavailable authorized
 physical evidence.
+
+## Current protobuf onboarding-service source increment
+
+`pb_service_onboarding.c` contributes 12 selector-isolated clean-room leaves
+totaling 878 compiled Thumb bytes plus eight alignment bytes. Nine exact
+redirects replace all 3,024 linked stock body bytes through 22 strict
+relocations; 192 distributed official alignment/literal bytes remain retained.
+The recovered service-`0x10` contract covers configuration, heartbeat, event,
+response, and notification paths with a 16-byte shared message and 256-byte
+encode buffer.
+
+The canonical Apollo-main component is now 3,727,768 bytes with 206,756
+source-owned, 183,454 generated patch-site, and 3,337,526 opaque base bytes.
+The complete package is 4,506,262 bytes with SHA-256
+`33c00464d8a201df3330cb520194cd16c377dca824bb36d55d6cf53f4fdd24bb`.
+Its 2,151,167-byte flash plan has 3,074 placed, two unresolved, and five
+container-only regions. Live service-`0x10` peer and display/onboarding
+behavior is blocked by unavailable authorized physical evidence.
+
+## Current protobuf health-service ownership reconciliation
+
+The health closure and aggregate ledgers now also record its existing
+production route. With onboarding now routed, the aggregate contains 27,396
+protobuf-service ownership bytes across ten services. Five retained protobuf
+services remain stock-carried and are not counted as source-owned.
+
+## Current protobuf Even-AI-service source increment
+
+`pb_service_even_ai.c` contributes 27 selector-isolated clean-room leaves
+totaling 2,832 compiled Thumb bytes plus 36 alignment bytes. Twenty-five exact
+redirects replace all 8,404 linked stock body bytes through 107 strict
+relocations; 552 distributed official alignment/literal-pool bytes remain
+retained. The recovered service-7 contract includes fixed receive lengths,
+immediate one-byte replay suppression, ten response encoders, three
+notification encoders, heartbeat role/display status, configuration tag 13,
+and command-response tag 12.
+
+The canonical Apollo-main component is now 3,723,752 bytes with 202,740
+source-owned, 173,906 generated patch-site, and 3,347,074 opaque base bytes.
+The complete 4,502,246-byte package contains 198,917 source-compiled, 175,896
+generated, and 4,127,433 opaque/cut-forward bytes. Its 2,090,502-byte flash
+plan has 2,984 placed, two unresolved, and five container-only regions. Live
+service-7 master/peer BLE and Even-AI UI validation are blocked by unavailable
+authorized physical evidence; no broader completeness claim is made.
+
+## Current EUS/ESS/EFS/NUS BLE-profile source increment
+
+The four contiguous G2-local Cordio adapters are now fully production-routed
+from `ble_transport_profiles.c`. Twenty-five guarded redirects replace all
+2,698 authenticated body bytes while four official pools totaling 302 bytes
+remain. The 25 selector-isolated Apple Cortex-M55 leaves contain 1,240 text
+bytes plus 10 alignment bytes and 45 strict relocations. Host tests cover the
+CCC/message lifecycle, WSF allocation and queueing, EUS/EFS/NUS RX callbacks,
+provider notifications, OTA gates, direct-send behavior, delayed-event
+cancellation, and TX semaphore release.
+
+The canonical overlay/component/package identities are 224,198 / 3,747,594 /
+4,526,088 bytes with SHA-256 values
+`87dd3f57f56f8ac138e5df6d96e5dd30ff97b8197e49b21392f04260fcd8f631`,
+`e27208da3a7f963f6676bedfd039b589c283ce1be679c94317a80bb8061812b1`,
+and `b84e19844a7459929059111af9804203a76760bbb9f8a1093063e2bb758c4b44`.
+The 2,449,763-byte flash plan has 3,509 placed regions, two unresolved, five
+container-only, and six protected regions; its SHA-256 is
+`fe6d1058dbd34851f36c3b4646d62a320345bf2966e84203577b9c7cf43c4c85`.
+No image was flashed. Live CCC/RX/TX timing and paired interoperability remain
+blocked by unavailable authorized responsive G2/EM9305 physical evidence.
+
+## Current SystemAlert source increment
+
+`system_alert.c` contributes seven selector-isolated clean-room leaves totaling
+1,138 compiled Thumb bytes, 51 read-only-data bytes, and nine alignment bytes.
+Seven guarded redirects replace all 2,174 callable stock bytes. The two-byte
+entry NOP and 170-byte authenticated pool remain official. Current Apollo-main
+accounting is 227,780 source-owned bytes, 241,372 generated patch-site bytes,
+184 source-owned in-place bytes, 2,200 source-owned in-place-data bytes, and
+3,279,608 opaque base bytes. Physical UI/event/IMU/peer validation remains
+blocked by unavailable authorized responsive G2 evidence.
+
+## Current SystemClose source increment
+
+`system_close.c` now owns all twenty callable functions in the authenticated
+SystemClose object. Twenty guarded redirects replace 4,960 stock body bytes;
+the selector-isolated Cortex-M55 build emits 2,804 text bytes plus 22 alignment
+bytes with 118 strict relocations, while 408 official alignment/literal bytes
+remain retained. Host tests cover FIFO ordering and capacity, common-data and
+role gates, page-action serialization, layout, queued selection animation,
+scroll, confirm/cancel/minimize, IMU reflash, factory, and UI lifecycle.
+
+Current Apollo-main accounting is 230,606 source-owned bytes, 246,332 generated
+patch-site bytes, 184 source-owned in-place bytes, 2,200 source-owned
+in-place-data bytes, and 3,274,648 opaque base bytes. Physical display,
+shutdown/minimize, IMU-reflash, and peer-synchronization evidence remains
+blocked by unavailable authorized responsive G2 hardware.
+
+## Current FreeRTOS+CLI filesystem source increment
+
+`freertos_cli_filesystem.c` now owns all twelve callable functions in the
+authenticated CLI filesystem object. Twelve guarded redirects replace 3,200
+stock body bytes; the selector-isolated Cortex-M55 build emits 9,866 text
+bytes, 704 read-only-data bytes, and 20 alignment bytes with 179 strict
+relocations, while 56 official non-callable bytes remain retained. Host tests
+cover every command family and the littlefs geometry/statistics seam.
+
+Current Apollo-main accounting is 241,714 source-owned bytes, 250,462 generated
+patch-site bytes, 184 source-owned in-place bytes, 2,200 source-owned
+in-place-data bytes, and 3,270,518 opaque base bytes. Physical mounted-media,
+persistence, recovery, power-loss, and concurrency evidence remains blocked by
+unavailable authorized responsive G2 hardware and writable test media.
+
+## Current factory NVDB lifecycle source increment
+
+`service_nvdb.c` now owns all five callable functions in the authenticated
+factory database lifecycle object. The source contributes 514 compiled Thumb
+bytes and four alignment bytes with eleven strict relocations; five guarded
+redirects replace 930 stock body bytes and retain the 122-byte official pool.
+The production policy mounts valid media and fails closed without destructive
+reset on missing or mismatched magic. Physical media validation remains
+blocked by unavailable authorized responsive G2 hardware and golden `NVdb`
+evidence.
+
+## Current system KVDB lifecycle source increment
+
+The complete seven-function `service_kvdb.c` lifecycle is now source-routed.
+Seven guarded redirects replace 1,384 authenticated callable bytes with 342
+selector-isolated Cortex-M55 text bytes, eight alignment bytes, and 23 strict
+relocations; 156 official pool bytes remain. The non-destructive production
+policy mounts valid media, persists the boot counter, runs eleven migrations,
+and reloads twelve nodes, but refuses missing/mismatched magic and explicit
+invalidation without writing or resetting defaults.
+
+The canonical overlay/component/package sizes are 239,680 / 3,763,076 /
+4,541,570 bytes; the 2,559,852-byte flash plan has 3,672 placed, two
+unresolved, five container-only, and six protected regions. The software gate
+passes; live golden-media, persistence, recovery, and schema evidence remains
+blocked by unavailable authorized physical evidence. Wider firmware functional
+completeness is not claimed.
+
+## Current OPT3007 register-map source increment
+
+The private `ti_opt3007_assignRegistermap` constructor is now replaced by the
+clean-room `opt3007_registers.c` leaf. Its scalar Cortex-M55 build contributes
+224 four-byte-aligned text bytes with no padding or relocations. A guarded
+redirect replaces all 340 stock callable bytes and preserves the 20-byte
+authenticated official pool. Host tests prove the exact 19 triples / 57 output
+bytes from TI SBOS864 and null-pointer safety.
+
+The canonical overlay/component/package sizes are 239,904 / 3,763,300 /
+4,541,794 bytes; the 2,562,590-byte flash plan has 3,676 placed, two
+unresolved, five container-only, and six protected regions. Live bus behavior
+is explicitly blocked by unavailable authorized responsive G2 hardware and
+OPT3007 physical evidence. The wider 38-function ALS driver remains a software
+gap, so functional completeness is not claimed.
+
+## Current codec UART lifecycle source increment
+
+`service_codec_porting.c` now owns both callable functions in the authenticated
+codec UART porting object. Two guarded redirects replace 342 stock body bytes;
+the selector-isolated Cortex-M55 build emits 126 text bytes plus two alignment
+bytes with four strict relocations, while the 72-byte official pool remains.
+Current Apollo-main accounting is 242,460 source-owned bytes, 252,646 generated
+patch-site bytes, 184 source-owned in-place bytes, 2,200 source-owned
+in-place-data bytes, and 3,267,306 opaque base bytes. Live UART3 and GX8002B
+physical evidence is unavailable, and the remaining codec-service objects are
+still software gaps.
+
+## Current AT^AUDIO source increment
+
+`at_codec.c` owns the complete 118-byte callable body of the authenticated
+`AT^AUDIO` object. The source emits one 44-byte leaf with three strict
+relocations and no alignment; the 34-byte literal/alignment pool remains
+official. Host tests pin enable/release selector seven, acknowledgement, and
+return behavior. The canonical overlay/component/package identities are
+240,076 / 3,763,472 / 4,541,966 bytes, and live audio/codec behavior is blocked
+by unavailable authorized responsive physical evidence.
+
+## Current GX8002B host-driver source increment
+
+`drv_gx8002b.c` now owns all twelve callable routines in the authenticated
+GX8002B Apollo host object. Twelve guarded redirects replace 1,028 stock body
+bytes. The selector-isolated Cortex-M55 build emits 608 Thumb text bytes and
+eight alignment bytes with 34 strict relocations; the 144-byte unreachable
+diagnostic/literal pool remains authenticated official data. Host tests cover
+signed NVIC operations and barriers, ISR order and RX gating, GPIO/delay power
+sequencing, idempotent I2S initialization/deinitialization, the inactive RX
+buffer with its fixed 3,200-byte cache descriptor, audio notification, and
+timed reboot behavior.
+
+The canonical overlay/component/package identities are 240,692 / 3,764,088 /
+4,542,582 bytes. The 2,588,615-byte flash plan contains 3,715 placed, two
+unresolved, five container-only, and six protected regions. Apollo opaque-base
+accounting is now 3,267,306 bytes. Live GX8002B rails, I2S, DMA, interrupt, and
+reboot evidence remains explicitly blocked by unavailable authorized
+responsive hardware; wider firmware functional completeness is not claimed.

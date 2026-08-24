@@ -1,7 +1,8 @@
 # G2 `pb_service_pair_mgr.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: software-complete and production-routed through independently authored
+clean-room C; live pair-manager behavior is explicitly blocked by unavailable
+authorized responsive G2 hardware. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -44,9 +45,30 @@ six-byte ring MAC when present and still performs global binding cleanup for
 the supported device states.
 
 The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No clean-room candidate exists, the service is
-absent from `overlay.json`, and OpenCFW claims zero production ownership
-bytes.
+functions are not inferred. `components/apollo_main/core_overlay/
+pb_service_pair_mgr.c` is an independently authored GPL-3.0-only clean-room
+implementation. Its 21 selector-isolated leaves comprise the 20 linked
+entries and one bounded output writer, compile to 2,300 Thumb text bytes plus
+22 alignment bytes, and carry 97 fail-closed relocations. Twenty guarded
+`B.W` redirects replace all 6,564 authenticated stock body bytes while the
+724-byte gap/pool remains official.
+
+The host oracle and all 21 Cortex-M55 selector builds pass. The canonical
+Apple-clang artifacts are pinned at 211,718 overlay bytes (SHA-256
+`fd223453f93db03efe91b9c05d601d33938b32af36cab672bfbcf0ded3e46e94`),
+3,735,114 component bytes (SHA-256
+`ec639e5f23f1bfc145ac8dc4eeebfebbe07da3c9662864cca2b5387fbba44670`),
+and 4,513,608 package bytes (SHA-256
+`245b64451dbc30eb898e6cea07baf79002544434f85c9ae89b9f151ae8a97799`).
+`make pb-service-pair-mgr-closure` gates the stock census, source pin, host
+behavior, isolated target compilation, relocation contract, manifest tiling,
+component, package, aggregate service ledger, and first-party frontier.
+
+No authorized responsive pair-manager peer is physically available. The
+authorized right temple is nonresponsive and the left temple must remain
+stock, so live security-auth, pipe-role, ring-connect, BLE-parameter,
+disconnect, and unpair workflows remain explicitly hardware-blocked rather
+than being reported as validated.
 
 ## Completed protobuf-service frontier
 
@@ -55,5 +77,9 @@ protobuf-service paths. Their original lower-bound census of 119 functions /
 40,844 body bytes expands to 143 linked functions / 47,644 body bytes and
 51,744 total physical object bytes. Twenty-four restored functions contribute
 the 6,800-byte body delta. Every retained protobuf-service path now has a
-pinned linked-object closure; historical source inventory and production
-ownership remain deliberately separate and open/zero.
+pinned linked-object closure; historical source inventory remains deliberately
+separate. The current aggregate records all 47,644 linked body bytes as
+production ownership across all 15 source-routed services. Every protobuf-
+service software gap is closed; live BLE, peer, persistence, and physical-
+policy tails remain individually hardware-blocked where authorized evidence
+is unavailable.

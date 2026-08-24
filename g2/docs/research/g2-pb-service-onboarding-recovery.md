@@ -1,8 +1,9 @@
 # G2 `pb_service_onboarding.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+Status: complete linked-object census, clean-room C implementation, production
+routing, and fail-closed software verification. Live hardware validation is
+explicitly blocked by unavailable authorized responsive-device evidence. Run
+addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -41,7 +42,31 @@ for null input, `0x2B` for encode failure, and zero for success.
 
 Notification variants increment the shared byte at `0x20074FFB` and use the
 notify transport rather than the response transport. The historical source
-tree and license remain unavailable, so source-only functions are not
-inferred. No clean-room candidate exists, the service is absent from
-`overlay.json`, and OpenCFW claims zero production ownership bytes. The next
-retained protobuf-service frontier is `pb_service_notification.c`.
+tree and license remain unavailable, so no historical source-only functions
+are inferred.
+
+## Production closure
+
+`components/apollo_main/core_overlay/pb_service_onboarding.c` is an
+independently authored GPL-3.0-only implementation containing the nine linked
+entries plus bounded buffer-write, zero-fill, and common-encode helpers. Its
+12 selector-isolated functions compile to 878 Thumb bytes plus eight alignment
+bytes. Nine guarded `B.W` redirects replace all 3,024 stock body bytes; 22
+strict relocations bind only to recovered providers, globals, transports, and
+redirected sibling entries. The 192 official gap/literal bytes remain retained.
+
+The Apple-clang overlay/component/package are pinned at 204,372 / 3,727,768 /
+4,506,262 bytes with SHA-256 values
+`913b0418cdff1bedaebd49647b9efc28f44f652267dd24d9ff746cec46d82889`,
+`a2f291046d44466f561b871a7fe96c2308620f13990f08878629941bc0e6d284`,
+and `33c00464d8a201df3330cb520194cd16c377dca824bb36d55d6cf53f4fdd24bb`.
+Host behavior, selector compilation, component assembly, manifest ownership,
+package assembly, deployment-plan generation, and aggregate closure tests are
+green.
+
+No hardware was accessed. Live service-`0x10` peer BLE, display-ready,
+onboarding-control, response, notification-sequence, and peer nanopb behavior
+cannot be validated because the authorized right temple is nonresponsive and
+the left temple must remain stock. This is an explicit physical-evidence
+blocker, not a software-completeness claim for the wider firmware. The next
+software protobuf-service frontier is `pb_service_notification.c`.

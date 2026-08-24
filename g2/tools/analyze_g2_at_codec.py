@@ -20,7 +20,7 @@ CLOSURE = ROOT / "tools/manifests/g2-at-codec-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-codec-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "e48d4af2f24e7ef84ffc48209bb8b4db05d272ab04a3a841cc108ece4550119b",
-    CLOSURE: "49e5a689c7de413ead8c6a15159ec931ae463a55775a9d642fb202311d07a27b",
+    CLOSURE: "8f394e22c5762bb6bad0ddb13d980ddbda369e403ea2da20ad37c5d44aaaf480",
     PROVENANCE: "3f88a730cada8f282c27b68a1f3f46fd9d754068a01af52f1b699832a9e4a570",
 }
 BODY = (0x005A5488, 0x005A54FE)
@@ -35,6 +35,12 @@ COMMAND_RECORD = (0x006C9290, 0x006C92A0)
 COMMAND_RECORD_SHA256 = "cb9368ca3c22c87b64b3a0c7df3ff9e01f1cd5d94c18bd1f331db65757776713"
 COMMAND_RECORD_WORDS = (0, 0x0078A34C, 0x005A5489, 0)
 RETAINED_PATH = r"D:\01_workspace\s200_ap510b_iar_git\platform\service\eAT\at_codec.c"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/at_codec.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 AUDIO_CALLS = {
     0x005A54D8: 0x0054F380,
     0x005A54EE: 0x0054F50E,
@@ -185,10 +191,100 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if raw_addresses != expected_pointer or pair_digest(raw_addresses) != STORED_POINTER_SHA256:
         raise AuditError("stored handler-pointer closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("at_codec.c" in source.get("path", "").lower() for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented eAT audio module unexpectedly entered production overlay")
+    source = PRODUCTION_SOURCE.read_bytes()
+    if (len(source), sha256(source)) != (
+        1186, "b276eedcad875fecd41e64f9bc60005c17aea09c234dd706b1c32ce7bf108431"
+    ):
+        raise AuditError("production AT^AUDIO source changed")
+    text = source.decode("utf-8")
+    for token in ("parameter[0] == '1'", "parameter[0] == '0'",
+                  "OPEN_CFW_AT_CODEC_ACQUIRE(7u)",
+                  "OPEN_CFW_AT_CODEC_RELEASE(7u)",
+                  "OPEN_CFW_AT_CODEC_OUTPUT(OPEN_CFW_AT_CODEC_OK)"):
+        if token not in text:
+            raise AuditError("production AT^AUDIO source policy changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaf = overlay["relocated_leaves"][-1]
+    if (
+        leaf.get("function") != "open_cfw_at_codec_audio_control"
+        or leaf.get("expected") != {
+            "alignment": 4, "offset": 240032,
+            "sha256": "04efadbe0a66881c755189a4e3932047a3996f5ec45271a6421e0cb54cdc87f8",
+            "size": 44,
+            "unrelocated_sha256": "3397c32638e65c1d14f3bf8aaf813436eefedfb74ebce6710f284871bedb8ec8",
+        }
+        or [(item["offset"], item["symbol"], item["target_address"])
+            for item in leaf.get("relocations", [])] != [
+                (16, "open_cfw_audio_app_acquire", 0x0054F380),
+                (24, "open_cfw_audio_app_release", 0x0054F50E),
+                (36, "open_cfw_at_codec_output", 0x005415F0),
+            ]
+    ):
+        raise AuditError("production AT^AUDIO leaf changed")
+    patch = overlay["patch_sites"][-1]
+    if (
+        patch.get("runtime_address"), patch.get("expected_size"),
+        patch.get("expected_sha256"), patch.get("target_function"),
+        patch.get("branch"), patch.get("profiles"),
+    ) != (
+        BODY[0], 118, BODY_SHA256, "open_cfw_at_codec_audio_control",
+        "b_w", ["apple-clang"],
+    ):
+        raise AuditError("production AT^AUDIO redirect changed")
+    build = json.loads(BUILD_REPORT.read_text())
+    if (
+        build["overlay"]["size"], build["overlay"]["sha256"],
+        build["component"]["size"], build["component"]["sha256"],
+    ) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production AT^AUDIO build pins changed")
+    built = build["relocated_leaves"][-1]
+    if (
+        built["extraction"]["function"], built["extraction"]["size"],
+        built["extraction"]["relocation_count"],
+        built["placement"]["padding_before"],
+    ) != ("open_cfw_at_codec_audio_control", 44, 3, 0):
+        raise AuditError("production AT^AUDIO compiled closure changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (
+        main["provider"]["size"], main["provider"]["sha256"],
+        manifest["package"]["expected_size"],
+        manifest["package"]["expected_sha256"],
+    ) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production AT^AUDIO manifest/package pins changed")
+    regions = [item for item in main["regions"]
+               if item["name"].startswith("at_codec_")]
+    if ([item["size"] for item in regions],
+        [item["address_status"] for item in regions]) != (
+            [118, 34, 44],
+            ["generated_source_entry_replacement", "official_blob", "source_compiled"],
+        ):
+        raise AuditError("production AT^AUDIO manifest closure changed")
+    package = PACKAGE.read_bytes()
+    if (len(package), sha256(package)) != (
+        4542582, manifest["package"]["expected_sha256"]
+    ):
+        raise AuditError("production AT^AUDIO package artifact changed")
+    plan_bytes = FLASH_PLAN.read_bytes()
+    plan = json.loads(plan_bytes)
+    if (
+        len(plan_bytes), sha256(plan_bytes), plan.get("package_sha256"),
+        tuple(len(plan[key]) for key in (
+            "flash_regions", "unresolved_flash_regions",
+            "container_only_regions", "protected_regions",
+        )),
+    ) != (
+        2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f",
+        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        (3715, 2, 5, 6),
+    ):
+        raise AuditError("production AT^AUDIO flash plan changed")
 
     return {
         "surface": {
@@ -216,10 +312,19 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "command_record": "[0x006c9290,0x006c92a0)",
         },
         "production": {
-            "candidate": None,
-            "production_routed": routed,
-            "ownership_bytes": 0,
-            "source_inventory_available": False,
+            "candidate": "components/apollo_main/core_overlay/at_codec.c",
+            "production_routed": True,
+            "ownership_bytes": 162,
+            "source_inventory_available": True,
+            "source_functions": 1,
+            "compiled_text_bytes": 44,
+            "alignment_bytes": 0,
+            "stock_replaced_bytes": 118,
+            "retained_official_pool_bytes": 34,
+            "strict_relocations": 3,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": "No authorized responsive G2 and live audio/codec evidence is available.",
         },
     }
 

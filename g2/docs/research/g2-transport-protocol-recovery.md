@@ -1,10 +1,10 @@
 # G2 multipart transport-protocol linked-object recovery
 
-Status: authenticated analysis closure; not production-routed. The complete
-G2 `2.2.6.10` object retained as
+Status: production source replacement complete; hardware validation blocked.
+The complete G2 `2.2.6.10` object retained as
 `platform\protocols\transport_protocol\transport_protocol.c` is bounded,
-function-mapped, and reconciled against every direct utility/provider edge.
-No hardware or flash state was changed.
+function-mapped, clean-room implemented, and routed into the production
+component and complete source package. No hardware or flash state was changed.
 
 ## Result
 
@@ -132,13 +132,33 @@ The exact private source revision and producing commit remain unavailable.
 Provider commits cannot identify that first-party revision, so no fabricated
 whole-object upstream identity is claimed.
 
+## Production admission
+
+`components/apollo_main/core_overlay/transport_protocol.c` owns all thirteen
+functions. The target build emits 2,538 bytes of Thumb text plus 14 alignment
+bytes and applies 55 strict relocations. Branch patches redirect all 4,134
+stock body bytes while the four authenticated official gaps/literal pools
+(302 bytes) remain retained. The replacement is present in the core component,
+source manifest, and complete source package.
+
+The host oracle covers single- and multi-fragment transmission and reception,
+CRC success and failure, duplicate suppression, receive timeout and WSF event
+delivery, callback dispatch, mutex-acquire failure, and malformed-length
+rejection. Thirteen isolated selector builds prove that every admitted entry
+is independently compilable under the production target contract.
+
+Hardware qualification is explicitly blocked, not waived. No authorized
+responsive G2 peer is physically available for live single/multipart,
+retransmission, timeout, CRC-failure, or dual-glasses callback evidence. The
+authorized right temple is nonresponsive, and the left temple must remain on
+stock firmware. This is the remaining physical-evidence tail.
+
 ## Reproduce
 
 ```sh
 make transport-protocol-closure
 ```
 
-This runs the fail-closed analyzer, focused unit tests, and aggregate retained-
-path frontier reconciliation. Production admission is deliberately deferred;
-a clean-room implementation still needs a fully specified callback ABI,
-integrated target placement, and hardware traffic validation.
+This runs the fail-closed analyzer, host/selector implementation tests, and
+aggregate retained-path frontier reconciliation. Software production admission
+is complete; the command reports the unavailable-hardware validation blocker.

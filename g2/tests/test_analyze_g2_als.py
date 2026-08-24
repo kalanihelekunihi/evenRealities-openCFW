@@ -18,6 +18,7 @@ class G2AlsTests(unittest.TestCase):
         p=self.report["provider_boundary"]
         self.assertEqual((p["easylogger_calls"],p["cmsis_freertos_delay_calls"],p["runtime_calls"],p["closed_first_party_calls"],p["opt3007_adapter_calls"]),(105,1,4,23,6))
         self.assertIsNone(p["public_opt3007_software_commit"])
+        self.assertTrue(p["opt3007_adapter_production_routed"])
     def test_gate(self):self.assertFalse(self.report["production"]["production_routed"])
 
 if __name__=="__main__":unittest.main()

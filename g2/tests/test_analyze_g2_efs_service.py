@@ -47,7 +47,7 @@ class AnalyzeG2EfsServiceTests(unittest.TestCase):
         self.assertEqual(contract["chunk_capacity"], 0x1000)
         self.assertEqual(contract["android_message_capacity"], 0x2137)
 
-    def test_lineage_and_production_boundary(self) -> None:
+    def test_lineage_and_production_closure(self) -> None:
         lineage = self.report["lineage"]
         self.assertTrue(lineage["retained_path"].endswith("efs_service.c"))
         self.assertEqual(len(lineage["path_pointer_cells"]), 4)
@@ -56,9 +56,21 @@ class AnalyzeG2EfsServiceTests(unittest.TestCase):
             262, 287, 334, 347, 519, 543, 620, 648, 834, 936, 947,
         ])
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/efs_service.c",
+        )
+        self.assertTrue(production["source_inventory_available"])
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 9276)
+        self.assertEqual(production["source_functions"], 12)
+        self.assertEqual(production["compiled_text_bytes"], 2936)
+        self.assertEqual(production["alignment_bytes"], 16)
+        self.assertEqual(production["strict_relocations"], 68)
+        self.assertEqual(production["retained_gap_pool_bytes"], 658)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("No authorized responsive G2 peer", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

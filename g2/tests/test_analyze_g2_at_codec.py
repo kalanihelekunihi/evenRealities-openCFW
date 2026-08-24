@@ -46,10 +46,16 @@ class AnalyzeG2AtCodecTests(unittest.TestCase):
     def test_lineage_and_production_boundary(self) -> None:
         self.assertEqual(self.report["lineage"]["exact_symbol"], "_atAudioCtrl")
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(production["candidate"], "components/apollo_main/core_overlay/at_codec.c")
+        self.assertTrue(production["production_routed"])
+        self.assertEqual((production["ownership_bytes"],
+                          production["compiled_text_bytes"],
+                          production["stock_replaced_bytes"],
+                          production["retained_official_pool_bytes"],
+                          production["strict_relocations"]), (162, 44, 118, 34, 3))
+        self.assertTrue(production["source_inventory_available"])
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

@@ -17,12 +17,18 @@ import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+SOURCE = ROOT / "components/apollo_main/core_overlay/service_nvdb.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 FM = ROOT / "tools/manifests/g2-service-nvdb-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-service-nvdb-closure.tsv"
 PM = ROOT / "tools/manifests/g2-service-nvdb-provider-map.tsv"
 PINS = {
     FM: "7c7357bfabb00ef58b917994c3638a482a9ca8d0aec391666b0ba646cb93f9a1",
-    CL: "9a2fe922d53ae3f9a2dfbe2f34c3ce1324bb3ee9c039e3f22d6b0667e85b2851",
+    CL: "52cafb7ea86ca80332718835b2fde13862dc8e3027bf4a5b4400d2fa6b4312a4",
     PM: "a0f0780e1e6c248a00c20fb6206f7c310d5d027166698b66b8ac13db2bfa9162",
 }
 F = (
@@ -177,17 +183,104 @@ def analyze(image: Path = IMAGE) -> dict:
     if t.literal_references(blob, 0x5109A4) != PATH_REFS:
         raise c.AuditError("retained-path references changed")
     for address, expected in {
-        0x78E604: "nvdb", 0x78E60C: "factory", 0x78E614: "NVdb",
+        0x78E5E4: "nvMagic", 0x78E5EC: "nvSysDt", 0x78E604: "nvdb",
+        0x78E60C: "factory", 0x78E614: "NVdb",
         0x788BD0: "SVC_NvdbInit", 0x74E024: "[nvdb]read the fdbMagic:0x%x,length:%d",
         0x788BF0: "[nvdb]success",
     }.items():
         if _cstring(blob, address) != expected:
             raise c.AuditError("NVdb diagnostic/configuration string changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("service_nvdb" in item.get("path", "").lower() for item in overlay["sources"])
-    if routed:
-        raise c.AuditError("unimplemented NVdb service entered production overlay")
+    source_bytes = SOURCE.read_bytes()
+    if (len(source_bytes), sh(source_bytes)) != (
+        8604,
+        "7b9f364e5b77eed175a861f2fde21e33f81a458d77411a72ea8186d36fd90c52",
+    ):
+        raise c.AuditError("service_nvdb production source changed")
+    source_text = source_bytes.decode("utf-8")
+    if (
+        "#define OPEN_CFW_NVDB_ALLOW_FACTORY_RESET 0" not in source_text
+        or "return OPEN_CFW_NVDB_ERR_SCHEMA" not in source_text
+        or "0x0078E5E4u" not in source_text
+        or "0x0078E5ECu" not in source_text
+        or "0x0078E60Cu" not in source_text
+        or "0x0078E614u" not in source_text
+    ):
+        raise c.AuditError("non-destructive factory-media policy changed")
+
+    overlay = json.loads(OVERLAY.read_text())
+    names = [
+        "open_cfw_service_nvdb_read",
+        "open_cfw_service_nvdb_write",
+        "open_cfw_service_nvdb_defaults_get",
+        "open_cfw_service_nvdb_defaults_validate",
+        "open_cfw_service_nvdb_init",
+    ]
+    leaves = overlay["relocated_leaves"][-16:-11]
+    if [item.get("function") for item in leaves] != names:
+        raise c.AuditError("service_nvdb relocated-leaf order changed")
+    if [item["expected"]["size"] for item in leaves] != [12, 12, 22, 330, 138]:
+        raise c.AuditError("service_nvdb compiled surface changed")
+    if sum(len(item["relocations"]) for item in leaves) != 11:
+        raise c.AuditError("service_nvdb relocation contract changed")
+    patches = overlay["patch_sites"][-16:-11]
+    if (
+        [item.get("target_function") for item in patches] != names
+        or [item.get("runtime_address") for item in patches]
+        != [start for start, _ in F]
+        or [item.get("expected_size") for item in patches]
+        != [end - start for start, end in F]
+    ):
+        raise c.AuditError("service_nvdb guarded redirect contract changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    if (
+        build["overlay"]["size"], build["overlay"]["sha256"],
+        build["component"]["size"], build["component"]["sha256"],
+    ) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise c.AuditError("service_nvdb production build pins changed")
+    built_leaves = build["relocated_leaves"][-16:-11]
+    if (
+        [item["extraction"]["function"] for item in built_leaves] != names
+        or sum(item["extraction"]["size"] for item in built_leaves) != 514
+        or sum(item["placement"]["padding_before"] for item in built_leaves) != 4
+        or sum(item["extraction"]["relocation_count"] for item in built_leaves) != 11
+    ):
+        raise c.AuditError("service_nvdb compiled report changed")
+
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (
+        main["provider"]["size"], main["provider"]["sha256"],
+        manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
+    ) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise c.AuditError("service_nvdb manifest/package pins changed")
+    nv_regions = [item for item in main["regions"] if item["name"].startswith("service_nvdb_")]
+    if len(nv_regions) != 13:
+        raise c.AuditError("service_nvdb manifest ownership changed")
+    package_bytes = PACKAGE.read_bytes()
+    if (len(package_bytes), sh(package_bytes)) != (4542582, manifest["package"]["expected_sha256"]):
+        raise c.AuditError("service_nvdb package artifact changed")
+    plan_bytes = FLASH_PLAN.read_bytes()
+    plan = json.loads(plan_bytes)
+    if (
+        len(plan_bytes), sh(plan_bytes), plan.get("package_sha256"),
+        tuple(len(plan[key]) for key in (
+            "flash_regions", "unresolved_flash_regions",
+            "container_only_regions", "protected_regions",
+        )),
+    ) != (
+        2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f",
+        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        (3715, 2, 5, 6),
+    ):
+        raise c.AuditError("service_nvdb flash plan changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -216,7 +309,9 @@ def analyze(image: Path = IMAGE) -> dict:
             "default_node_count": 9,
             "factory_magic_key": "nvMagic",
             "factory_magic_value": 0x55550022,
+            "stock_magic_mismatch_policy": "wholesale fdb_kv_set_default",
             "magic_mismatch_policy": "wholesale fdb_kv_set_default",
+            "production_magic_mismatch_policy": "fail closed without reset",
             "lock_callback_command": 2,
             "unlock_callback_command": 3,
             "sector_size_override_present": False,
@@ -234,7 +329,16 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": {
+            "production_routed": True,
+            "compiled_text_bytes": 514,
+            "alignment_bytes": 4,
+            "strict_relocations": 11,
+            "replaced_stock_body_bytes": 930,
+            "retained_official_pool_bytes": 122,
+            "destructive_default_reset_enabled": False,
+            "hardware_validation": "blocked by unavailable authorized responsive G2 hardware and read-only golden NVdb capture",
+        },
     }
 
 

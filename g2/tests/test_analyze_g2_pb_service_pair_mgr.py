@@ -42,9 +42,20 @@ class AnalyzeG2PbServicePairMgrTests(unittest.TestCase):
         self.assertEqual(len(lineage["exact_symbols"]), 18)
         self.assertEqual(len(lineage["assertion_lines"]), 23)
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_pair_mgr.c",
+        )
+        self.assertTrue(production["source_inventory_available"])
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 6564)
+        self.assertEqual(production["source_functions"], 21)
+        self.assertEqual(production["compiled_text_bytes"], 2300)
+        self.assertEqual(production["alignment_bytes"], 22)
+        self.assertEqual(production["strict_relocations"], 97)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("No authorized responsive G2", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

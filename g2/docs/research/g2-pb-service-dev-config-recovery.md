@@ -1,8 +1,9 @@
 # G2 `pb_service_dev_config.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+Status: software-complete and production-routed from clean-room C; live
+service-`0x80` master/peer device-configuration validation is explicitly
+blocked by unavailable authorized responsive G2 hardware evidence. Run
+addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -47,7 +48,34 @@ the request magic, and carries the original command plus one-byte error code.
 It transmits on route 1 / service `0x80`; success returns zero and nanopb
 encode failure returns `0x2B`.
 
-The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No clean-room candidate exists, the service is
-absent from `overlay.json`, and OpenCFW claims zero production ownership
-bytes. The next retained protobuf service frontier is `pb_service_health.c`.
+The historical source tree and license remain unavailable, so historical
+source-only functions are not inferred.
+
+## Production closure
+
+`components/apollo_main/core_overlay/pb_service_dev_config.c` is an
+11,435-byte GPL-3.0-only clean-room implementation (SHA-256
+`46c79dbaad289491f195562aea10d3d8ba92684e7227e463b697a04f31b67bc4`).
+Five selector-isolated source functions compile to 998 Thumb text bytes plus
+four alignment bytes. Three guarded `B.W` redirects replace all 2,646 stock
+body bytes while the authenticated 286 gap/pool bytes remain official. The 33
+strict relocations bind the dispatcher to the recovered nanopb, command
+provider, heartbeat timer, BLE transport, and sibling-source interfaces.
+
+Host tests cover null/decode statuses, all fourteen command IDs, provider
+success gating, error classification, unknown-command response encoding, the
+30-second heartbeat timer refresh, output bounds, and transmit arguments.
+The canonical overlay/component/package are 203,486 / 3,726,882 / 4,505,376
+bytes with SHA-256 values
+`ef060f12222fcd55be84927416752e0091541b0573921a4bda1588663d46e36b`,
+`70446d59e2d7080732284af9d860c78b9561dba3552b0fd696b20e9e84dbd1ab`,
+and `7a6aba86acf50a5c05dfdc8039793df2f8840599af5446dbd869f0c36e584991`.
+The 2,132,348-byte flash plan has 3,046 placed, two unresolved, and five
+container-only regions and hashes to
+`8d11759463eb12bc531222dff14d8a5d01e8fa4c3c6ea8fd5fd8df53b124d098`.
+
+No hardware was accessed. Live pairing, role changes, BLE parameters,
+disconnect/unpair, restore, heartbeat timing, restart, time synchronization,
+audio-control, and peer nanopb interoperability remain blocked because the
+authorized right temple is nonresponsive and the left temple must remain
+stock. This closes the object software gap, not the wider firmware.

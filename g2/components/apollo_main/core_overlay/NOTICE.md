@@ -1642,3 +1642,149 @@ function bytes; the 130-byte official alignment/literal tail remains retained.
 Stock EasyLogger/hexdump diagnostics are omitted as non-controlling
 observability. Live service-6 master/peer BLE, timing, and teleprompt UI
 validation are blocked by unavailable authorized physical evidence.
+
+`pb_service_even_ai.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the 25 linked entries from the retained G2
+`platform/protocols/pb_service_even_ai/pb_service_even_ai.c` object plus the
+bounded output-buffer and message-zero helpers required by the recovered ABI.
+It contains no historical private G2 source or stock executable bytes.
+Twenty-seven selector-isolated strict-relocation Thumb leaves replace all
+8,404 linked stock function bytes; 552 distributed official alignment/literal
+pool bytes remain retained. Stock EasyLogger/hexdump/assert diagnostics are
+omitted as non-controlling observability. Live service-7 master/peer BLE and
+Even-AI UI validation are blocked by unavailable authorized physical evidence.
+
+`pb_service_onboarding.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the nine linked entries from the retained G2
+`platform/protocols/pb_service_onboarding/pb_service_onboarding.c` object plus
+bounded output-buffer, zero-fill, and common-encode helpers required by the
+recovered ABI. It contains no historical private G2 source or stock executable
+bytes. Twelve selector-isolated strict-relocation Thumb leaves replace all
+3,024 linked stock function bytes; 192 distributed official alignment/literal
+bytes remain retained. Stock EasyLogger/assert diagnostics are omitted as
+non-controlling observability. Live service-`0x10` peer BLE, display-ready,
+onboarding-control, response, notification, and nanopb interoperability are
+blocked by unavailable authorized physical evidence.
+
+`pb_service_notification.c` is an independently authored GPL-3.0-only
+clean-room reconstruction of the nine linked entries from the retained G2
+`platform/protocols/pb_service_notification/pb_service_notification.c` object
+plus bounded output-buffer, zero-fill, and common-encode helpers required by
+the recovered ABI. It contains no historical private G2 source or stock
+executable bytes. Twelve selector-isolated strict-relocation Thumb leaves
+replace all 3,318 linked stock function bytes; 238 distributed official
+alignment/literal/descriptor bytes remain retained. Stock EasyLogger/assert
+diagnostics are omitted as non-controlling observability. Live service-4 peer
+BLE, notification-control, whitelist-control, whitelist-check,
+app-not-whitelisted, and nanopb interoperability are blocked by unavailable
+authorized physical evidence.
+
+`pb_service_pair_mgr.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the 20 linked entries from the retained G2
+`platform/protocols/pb_service_dev_config/pb_service_pair_mgr.c` object plus a
+bounded output-buffer writer required by the recovered ABI. It contains no
+historical private G2 source or stock executable bytes. Twenty-one selector-
+isolated strict-relocation Thumb leaves replace all 6,564 linked stock function
+bytes; 724 distributed official alignment/literal bytes remain retained. Stock
+EasyLogger/assert diagnostics are omitted as non-controlling observability.
+Live service-`0x80` security-auth, pipe-role, ring-connect, BLE-parameter,
+disconnect, unpair, peer BLE, and nanopb interoperability are blocked by
+unavailable authorized responsive physical evidence.
+
+`pb_service_setting.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the eleven linked entries from the retained G2
+`platform/protocols/pb_service_setting/pb_service_setting.c` object plus
+bounded output-buffer and zero-fill helpers required by the recovered ABI. It
+contains no historical private G2 source or stock executable bytes. Thirteen
+selector-isolated strict-relocation Thumb leaves replace all 3,466 linked
+stock function bytes; 334 distributed official alignment/literal bytes remain
+retained. Stock EasyLogger diagnostics are omitted as non-controlling
+observability. Live service-9 peer BLE, full-status, recalibration, silent-
+mode, and nanopb interoperability are blocked by unavailable authorized
+physical evidence.
+
+`pb_service_dev_setting.c` is an independently authored GPL-3.0-only
+clean-room reconstruction of the ten linked entries from the retained G2
+`platform/protocols/pb_service_dev_config/pb_service_dev_setting.c` object plus
+bounded output-buffer and common-encode/transport helpers required by the
+recovered ABI. It contains no historical private G2 source or stock executable
+bytes. Twelve selector-isolated strict-relocation Thumb leaves replace all
+3,432 linked stock function bytes; 284 distributed official alignment/literal
+bytes remain retained. Stock EasyLogger/assert diagnostics are omitted as
+non-controlling observability. Live service-`0x80` peer BLE, destructive
+factory-reset, restart, heartbeat, clock-sync, persistence, audio-control, and
+nanopb interoperability are blocked by unavailable authorized physical
+evidence.
+
+`pb_service_quicklist.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the ten linked entries from the retained G2
+`platform/protocols/pb_service_quicklist/pb_service_quicklist.c` object plus
+bounded buffer-write, message-zero, and common-transport helpers required by
+the recovered ABI. It contains no historical private G2 source or stock
+executable bytes. Thirteen selector-isolated strict-relocation Thumb leaves
+replace all 3,468 linked stock function bytes; 280 distributed official
+alignment/literal bytes remain retained. The multi-item notification copy is
+limited to the twenty records that fit the recovered message workspace. Stock
+EasyLogger/assert diagnostics are omitted as non-controlling observability.
+Live service-`0x0C` peer BLE, persistent quicklist load/save, response,
+notification, and nanopb interoperability are blocked by unavailable
+authorized physical evidence.
+
+`transport_protocol.c`, `ota_transport.c`, `efs_transport.c`,
+`efs_service.c`, and `ota_service.c` are independently authored
+GPL-3.0-only clean-room reconstructions of the authenticated G2-local packet
+transports and EFS/OTA file-service policy. They contain no historical private
+G2 source or stock executable bytes. Fifty-nine selector-isolated
+strict-relocation Thumb leaves replace 32,798 linked stock function bytes while
+retaining 2,392 authenticated official alignment/literal-pool bytes. Stock
+EasyLogger diagnostics are omitted as non-controlling observability. Live peer,
+dual-glasses, OTA receiver, EFS filesystem/media, disconnect, timeout, and
+recovery validation are blocked by unavailable authorized responsive physical
+evidence.
+
+`ble_transport_profiles.c` is an independently authored GPL-3.0-only
+clean-room reconstruction of the authenticated G2-local EUS, ESS, EFS, and NUS
+Cordio application adapters. It contains no historical private G2 source or
+stock executable bytes. Twenty-five selector-isolated strict-relocation Thumb
+leaves replace all 2,698 linked stock function bytes while retaining 302
+authenticated official literal/alignment bytes. Live CCC/RX/TX timing,
+controller concurrency, and dual-device interoperability are blocked by the
+absence of an authorized responsive G2/EM9305 peer and physical capture.
+
+`system_alert.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the seven callable entries in the authenticated G2
+`app/gui/SystemAlert/systemAlert.c` object. It contains no historical private
+G2 source or stock executable bytes. Seven selector-isolated strict-relocation
+Thumb leaves replace all 2,174 callable stock bytes; the entry-alignment NOP
+and 170-byte official pool remain retained. Live display, event-timing, IMU,
+and paired-temple validation is blocked by unavailable authorized physical
+evidence.
+
+`system_close.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of all twenty callable entries in the authenticated G2
+`app/gui/SystemClose/systemClose.c` object. It contains no historical private
+G2 source or stock executable bytes. Twenty selector-isolated strict-relocation
+Thumb leaves replace all 4,960 stock function bytes while 408 authenticated
+official alignment/literal bytes remain retained. Live close-page display,
+selection animation, IMU reflash, shutdown/minimize, and paired-temple
+synchronization validation is blocked by unavailable authorized physical
+evidence.
+
+`freertos_cli_filesystem.c` is an independently authored GPL-3.0-only
+clean-room reconstruction of all twelve callable entries in the authenticated
+G2 `app/freertos_cli/freertos_cli_filesystem.c` object. It contains no
+historical private G2 source or stock executable bytes. Twelve
+selector-isolated strict-relocation Thumb leaves replace all 3,200 callable
+stock bytes; 56 authenticated official alignment/literal bytes remain
+retained. The implementation binds through the already bounded littlefs seam.
+Live mounted-media mutation, persistence, corruption recovery, and concurrent
+CLI validation is blocked by unavailable authorized responsive G2 hardware
+and writable physical test media.
+
+`service_nvdb.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of all five callable entries in the authenticated G2 factory
+NVDB lifecycle object. Five strict-relocation Thumb leaves replace all 930
+callable stock bytes while 122 authenticated official pool/alignment bytes
+remain. Its default policy refuses destructive factory reset on missing or
+mismatched media. Live persistence, recovery, and schema validation is blocked
+by unavailable authorized responsive hardware and a golden `NVdb` capture.

@@ -17,12 +17,18 @@ import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+SOURCE = ROOT / "components/apollo_main/core_overlay/service_kvdb.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 FM = ROOT / "tools/manifests/g2-service-kvdb-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-service-kvdb-closure.tsv"
 PM = ROOT / "tools/manifests/g2-service-kvdb-provider-map.tsv"
 PINS = {
     FM: "2cc29379bc966b452a0e375f3804319a5298f1fff18c3b925e2d4077937f3bc9",
-    CL: "3eef0a4efca2260713924f8aa5307c23b97d082c9993baced89909fb577156a9",
+    CL: "6c3e6ac91388e42580fea1261329f8370184f342acf1927637ee0f107ac9b41d",
     PM: "7217ea96f6e58671d1e1aeb536c8ea289edc959af7b530fa2d2e40f22c2725e2",
 }
 F = (
@@ -232,10 +238,98 @@ def analyze(image: Path = IMAGE) -> dict:
         if _cstring(blob, address) != expected:
             raise c.AuditError("KVDB diagnostic/configuration string changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("service_kvdb.c" in item.get("path", "").lower() for item in overlay["sources"])
-    if routed:
-        raise c.AuditError("unimplemented KVDB service entered production overlay")
+    source_bytes = SOURCE.read_bytes()
+    if (len(source_bytes), sh(source_bytes)) != (
+        6878,
+        "d2e017f9d97427fa46f2c93d45718ec21f9c24186490c36e3d19b5a363e73340",
+    ):
+        raise c.AuditError("service_kvdb production source changed")
+    source_text = source_bytes.decode("utf-8")
+    if (
+        "#define OPEN_CFW_KVDB_ALLOW_FACTORY_RESET 0" not in source_text
+        or "return OPEN_CFW_KVDB_ERR_SCHEMA" not in source_text
+        or "0x0078E574u" not in source_text
+        or "0x0078E58Cu" not in source_text
+        or "0x0078E594u" not in source_text
+        or "0x0078BF6Cu" not in source_text
+    ):
+        raise c.AuditError("non-destructive sysenv-media policy changed")
+
+    overlay = json.loads(OVERLAY.read_text())
+    names = [
+        "open_cfw_service_kvdb_run_migrations",
+        "open_cfw_service_kvdb_read",
+        "open_cfw_service_kvdb_write",
+        "open_cfw_service_kvdb_defaults_get",
+        "open_cfw_service_kvdb_read_all",
+        "open_cfw_service_kvdb_init",
+        "open_cfw_service_kvdb_invalidate_magic",
+    ]
+    leaves = overlay["relocated_leaves"][-11:-4]
+    if [item.get("function") for item in leaves] != names:
+        raise c.AuditError("service_kvdb relocated-leaf order changed")
+    if [item["expected"]["size"] for item in leaves] != [50, 12, 12, 22, 48, 194, 4]:
+        raise c.AuditError("service_kvdb compiled surface changed")
+    if sum(len(item["relocations"]) for item in leaves) != 23:
+        raise c.AuditError("service_kvdb relocation contract changed")
+    patches = overlay["patch_sites"][-11:-4]
+    if (
+        [item.get("target_function") for item in patches] != names
+        or [item.get("runtime_address") for item in patches]
+        != [start for start, _ in F]
+        or [item.get("expected_size") for item in patches]
+        != [end - start for start, end in F]
+    ):
+        raise c.AuditError("service_kvdb guarded redirect contract changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    if (
+        build["overlay"]["size"], build["overlay"]["sha256"],
+        build["component"]["size"], build["component"]["sha256"],
+    ) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise c.AuditError("service_kvdb production build pins changed")
+    built_leaves = build["relocated_leaves"][-11:-4]
+    if (
+        [item["extraction"]["function"] for item in built_leaves] != names
+        or sum(item["extraction"]["size"] for item in built_leaves) != 342
+        or sum(item["placement"]["padding_before"] for item in built_leaves) != 8
+        or sum(item["extraction"]["relocation_count"] for item in built_leaves) != 23
+    ):
+        raise c.AuditError("service_kvdb compiled report changed")
+
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (
+        main["provider"]["size"], main["provider"]["sha256"],
+        manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
+    ) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise c.AuditError("service_kvdb manifest/package pins changed")
+    kv_regions = [item for item in main["regions"] if item["name"].startswith("service_kvdb_")]
+    if len(kv_regions) != 19:
+        raise c.AuditError("service_kvdb manifest ownership changed")
+    package_bytes = PACKAGE.read_bytes()
+    if (len(package_bytes), sh(package_bytes)) != (4542582, manifest["package"]["expected_sha256"]):
+        raise c.AuditError("service_kvdb package artifact changed")
+    plan_bytes = FLASH_PLAN.read_bytes()
+    plan = json.loads(plan_bytes)
+    if (
+        len(plan_bytes), sh(plan_bytes), plan.get("package_sha256"),
+        tuple(len(plan[key]) for key in (
+            "flash_regions", "unresolved_flash_regions",
+            "container_only_regions", "protected_regions",
+        )),
+    ) != (
+        2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f",
+        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        (3715, 2, 5, 6),
+    ):
+        raise c.AuditError("service_kvdb flash plan changed")
     sysenv_partition = next(item for item in flashdb["partitions"] if item["name"] == "kvdb")
     return {
         "schema_version": 1,
@@ -262,7 +356,9 @@ def analyze(image: Path = IMAGE) -> dict:
             "partition_bytes": sysenv_partition["length"],
             "default_table_address": "0x2000372c", "default_node_count": 12,
             "magic_key": "kvMagic", "magic_value": 0x5A000020,
+            "stock_magic_mismatch_policy": "wholesale fdb_kv_set_default",
             "magic_mismatch_policy": "wholesale fdb_kv_set_default",
+            "production_magic_mismatch_policy": "fail closed without reset",
             "lock_callback_command": 2, "unlock_callback_command": 3,
             "migration_callbacks": 11,
             "boot_count_key": "kvbooCount", "boot_count_value_address": "0x20074988",
@@ -270,6 +366,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "boot_count_startup_zero_range": ["0x20004558", "0x20075048"],
             "boot_count_read_increment_write": True,
             "invalidate_magic_writes_zero": True,
+            "production_invalidate_magic_writes_zero": False,
             "stock_fal_zero_on_driver_failure_hazard": True,
         },
         "provider_boundary": {
@@ -283,7 +380,19 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": {
+            "production_routed": True,
+            "compiled_text_bytes": 342,
+            "alignment_bytes": 8,
+            "strict_relocations": 23,
+            "replaced_stock_body_bytes": 1384,
+            "retained_official_pool_bytes": 156,
+            "destructive_default_reset_enabled": False,
+            "hardware_validation": (
+                "blocked by unavailable authorized responsive G2 pair and "
+                "known-good removable sysenv media evidence"
+            ),
+        },
     }
 
 

@@ -45,7 +45,7 @@ class AnalyzeG2PbServiceEvenAiTests(unittest.TestCase):
         self.assertEqual(contract["encode_capacity"], 0x100)
         self.assertEqual(
             [(item["command"], item["tag"]) for item in contract["command_tags"]],
-            [(value, value + 2) for value in range(1, 11)],
+            [(value, value + 2) for value in range(1, 10)] + [(10, 13)],
         )
         self.assertEqual(contract["notifications"], ["control", "vad", "event"])
         self.assertEqual(contract["command_response"], {
@@ -58,10 +58,21 @@ class AnalyzeG2PbServiceEvenAiTests(unittest.TestCase):
         self.assertEqual(lineage["path_pointer_cells"], 28)
         self.assertEqual(len(lineage["exact_symbols"]), 25)
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_even_ai.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 8404)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 27)
+        self.assertEqual(production["compiled_text_bytes"], 2832)
+        self.assertEqual(production["alignment_bytes"], 36)
+        self.assertEqual(production["strict_relocations"], 107)
+        self.assertEqual(production["stock_replaced_bytes"], 8404)
+        self.assertEqual(production["retained_gap_pool_bytes"], 552)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

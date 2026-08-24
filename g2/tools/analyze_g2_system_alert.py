@@ -18,7 +18,27 @@ import recover_apollo_embedded_source_paths as t
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-system-alert-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-system-alert-closure.tsv"
-PINS = {FM: "70bfe0ac4ea1d67fdc4aac21423d4c52f4b578a86d3610dd7a74e6a11a6ddb41", CL: "dc3618004843ef868d7738df5a7c6e5e74226605a6abe7866a9fef0c5a44c166"}
+PINS = {FM: "70bfe0ac4ea1d67fdc4aac21423d4c52f4b578a86d3610dd7a74e6a11a6ddb41", CL: "bacaa90329b3b7f19a0df054263d30089812189cc1eede82aa1ac72df27b6294"}
+SOURCE = ROOT / "components/apollo_main/core_overlay/system_alert.c"
+SOURCE_PATH = "components/apollo_main/core_overlay/system_alert.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+SOURCE_PIN = (19702, "3167ebe3288500e56002e82daed3672f37c1af534922b71ee777c8fa3ca8fe97")
+LEAF_NAMES = (
+    "open_cfw_system_alert_set_box_padding",
+    "open_cfw_system_alert_common_data_handler",
+    "open_cfw_system_alert_page_event_handler",
+    "open_cfw_system_alert_main_page_init",
+    "open_cfw_system_alert_send_event_throttled",
+    "open_cfw_system_alert_reflash_event_handler",
+    "open_cfw_system_alert_ui_event_handler",
+)
+LEAF_DIGEST = "57964dce247be235831ef1d706d5c7e10dada79e2cb94f059559d73bfda2de12"
+PATCH_DIGEST = "1438650fbe6295315d0429def79c3d4eae2fcb31dafc5a57ff2e1a22830108ca"
+BUILT_DIGEST = "0dafcad8ff47cb1a94052b1793cd37169c1cd8caf804fa8cc6d0d7d1265a1e93"
+REGION_DIGEST = "3a4aa71c18e804f60ad36c60c9bf2b603a950f78341917a0be13dfe6ea5f3337"
 RETAINED = 'app\\gui\\SystemAlert\\systemAlert.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\app\\gui\\SystemAlert\\systemAlert.c'
 PATH_RUN = 0x6fd85c
@@ -45,6 +65,10 @@ DECODER.detail = True
 
 def _sh(value):
     return hashlib.sha256(value).hexdigest()
+
+
+def _jsh(value):
+    return _sh(json.dumps(value, sort_keys=True, separators=(",", ":")).encode())
 
 
 def _cstring(blob, address):
@@ -231,17 +255,61 @@ def analyze(image=IMAGE):
     for address, text in TAGS:
         if _cstring(blob, address) != text:
             raise c.AuditError("tag string changed")
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any(x.get("path", "").replace("\\", "/").split("/")[-1].lower() == 'systemalert.c' for x in overlay["sources"]):
-        raise c.AuditError("object entered production overlay")
+    source = SOURCE.read_bytes()
+    if (len(source), _sh(source)) != SOURCE_PIN:
+        raise c.AuditError("production SystemAlert source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = [x for x in overlay["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
+    if tuple(x.get("function") for x in leaves) != LEAF_NAMES or not set(LEAF_NAMES) <= set(overlay["functions"]):
+        raise c.AuditError("production SystemAlert leaf inventory changed")
+    if _jsh(leaves) != LEAF_DIGEST or any(x.get("profiles") != ["apple-clang"] or not x.get("strict_relocation_contract") or x.get("source", {}).get("license") != "GPL-3.0-only" for x in leaves):
+        raise c.AuditError("production SystemAlert leaf closure changed")
+    if sum(x["expected"]["size"] for x in leaves) != 1138 or sum(x["expected"].get("closure_size", x["expected"]["size"]) for x in leaves) != 1189 or sum(len(x["relocations"]) for x in leaves) != 85:
+        raise c.AuditError("production SystemAlert compiled census changed")
+    previous = 224198
+    alignment = 0
+    for leaf in leaves:
+        alignment += leaf["expected"]["offset"] - previous
+        previous = leaf["expected"]["offset"] + leaf["expected"].get("closure_size", leaf["expected"]["size"])
+    if alignment != 9 or previous != 225396:
+        raise c.AuditError("production SystemAlert placement changed")
+    patches = [x for x in overlay["patch_sites"] if x.get("target_function") in set(LEAF_NAMES)]
+    if len(patches) != 7 or _jsh(patches) != PATCH_DIGEST or sum(x["expected_size"] for x in patches) != 2174 or {x["target_function"] for x in patches} != set(LEAF_NAMES):
+        raise c.AuditError("production SystemAlert redirects changed")
+    if any(x.get("branch") != "b_w" or x.get("profiles") != ["apple-clang"] for x in patches):
+        raise c.AuditError("production SystemAlert redirect policy changed")
+    build = json.loads(REPORT.read_text())
+    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae", 3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):
+        raise c.AuditError("production SystemAlert build pins changed")
+    built = [x for x in build["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
+    normalized = [{"function": x["extraction"]["function"], "size": x["placement"]["size"], "padding_before": x["placement"]["padding_before"], "offset": x["placement"]["offset"], "runtime_address": x["placement"]["runtime_address"], "relocation_count": x["extraction"]["relocation_count"]} for x in built]
+    if len(built) != 7 or _jsh(normalized) != BUILT_DIGEST or sum(x["size"] for x in normalized) != 1189 or sum(x["padding_before"] for x in normalized) != 9 or sum(x["relocation_count"] for x in normalized) != 85:
+        raise c.AuditError("production SystemAlert built closure changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    regions = [x for x in main["regions"] if x["name"].startswith("system_alert_") or x["name"].startswith("opaque_system_alert_")]
+    if len(regions) != 21 or _jsh(regions) != REGION_DIGEST or sum(x["size"] for x in regions) != 3544:
+        raise c.AuditError("production SystemAlert manifest regions changed")
+    replacements = [x for x in regions if x["address_status"] == "generated_source_entry_replacement"]
+    retained = [x for x in regions if x["address_status"] == "official_blob"]
+    compiled = [x for x in regions if x["address_status"] == "source_compiled"]
+    generated_alignment = [x for x in regions if x["address_status"] == "generated_alignment"]
+    if (len(replacements), sum(x["size"] for x in replacements), len(retained), sum(x["size"] for x in retained), len(compiled), sum(x["size"] for x in compiled), len(generated_alignment), sum(x["size"] for x in generated_alignment)) != (7, 2174, 2, 172, 8, 1189, 4, 9):
+        raise c.AuditError("production SystemAlert stock/overlay tiling changed")
+    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed", 4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):
+        raise c.AuditError("production SystemAlert manifest closure changed")
+    plan_bytes = FLASH_PLAN.read_bytes()
+    plan = json.loads(plan_bytes)
+    if (len(plan_bytes), _sh(plan_bytes)) != (2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f") or plan.get("package_sha256") != "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85" or tuple(len(plan[k]) for k in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions")) != (3715, 2, 5, 6):
+        raise c.AuditError("production SystemAlert flash plan changed")
     return {
         "schema_version": 1,
-        "analysis_mode": "read-only zero-anchor linked-object closure",
+        "analysis_mode": "read-only zero-anchor stock and production-source closure; no hardware or flash operation",
         "identity": {"disposition": "linked-unanchored", "ghidra_discovered_functions": 0, "image_sha256": c.IMAGE_SHA256, "path_anchored_functions": 0, "retained_path": RETAINED, "retained_product_path": FULL_PATH},
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": False},
+        "production": {"source_admitted": True, "production_routed": True, "source_functions": 7, "compiled_text_bytes": 1138, "compiled_rodata_bytes": 51, "alignment_bytes": 9, "stock_replaced_bytes": 2174, "retained_literal_pool_bytes": 172, "strict_relocations": 85, "software_functional_gap": False, "hardware_validation": "blocked", "hardware_blocker": "No authorized responsive G2 pair is available for dual-temple lifecycle, delayed-exit, translation, and rendered-display validation."},
     }
 
 

@@ -18,7 +18,25 @@ import recover_apollo_embedded_source_paths as t
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-freertos-plus-cli-filesystem-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-freertos-plus-cli-filesystem-closure.tsv"
-PINS = {FM: "4687cfb65b7331807a36e84efd75d664b85f3c26f19ab3d66800e6dcc050d340", CL: "3fee797ff3f27bb8cdf6ab826bbe820ca843eca0a1291aa2f5dedf44a2a797d3"}
+SOURCE = ROOT / "components/apollo_main/core_overlay/freertos_cli_filesystem.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+PINS = {FM: "4687cfb65b7331807a36e84efd75d664b85f3c26f19ab3d66800e6dcc050d340", CL: "fa6e5ad0fd31f617348de7286badc40489f6a849ebcce7d1b69cf5360b435155"}
+SOURCE_PATH = "components/apollo_main/core_overlay/freertos_cli_filesystem.c"
+SOURCE_PIN = (22115, "e4817fff043dbefc84075153e31da9665af909cf5004c179602ab7ac98ec5313")
+LEAF_NAMES = (
+    "open_cfw_cli_fs_normalize_path", "open_cfw_cli_fs_ls",
+    "open_cfw_cli_fs_cat", "open_cfw_cli_fs_rm", "open_cfw_cli_fs_cd",
+    "open_cfw_cli_fs_mkdir", "open_cfw_cli_fs_touch",
+    "open_cfw_cli_fs_pwd", "open_cfw_cli_fs_mv", "open_cfw_cli_fs_md5",
+    "open_cfw_cli_fs_df", "open_cfw_cli_fs_block_stats_accumulate",
+)
+LEAF_DIGEST = "8ee876239039a3f252e0ba08e70c33d81a103a9d420eb7e2ae06ac65627b4fd4"
+PATCH_DIGEST = "c5551ed8d5b629b1878de1860aace37552e55b1cf99096bf21c29af67baa98ed"
+BUILT_DIGEST = "9b988a7d9c998910ec28aea5b40f704ade411bf110ff1ea95294b1661c4169b2"
+REGION_DIGEST = "f3722782b394af6dba335d16de6e5c88fabac3987f82b938d8c1af4bd982a2d0"
 RETAINED = 'kernel\\FreeRTOS-Plus-CLI\\prvCommand\\prvCommand_filesystem.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\kernel\\FreeRTOS-Plus-CLI\\prvCommand\\prvCommand_filesystem.c'
 PATH_RUN = 0x6de434
@@ -45,6 +63,10 @@ DECODER.detail = True
 
 def _sh(value):
     return hashlib.sha256(value).hexdigest()
+
+
+def _jsh(value):
+    return _sh(json.dumps(value, sort_keys=True, separators=(",", ":")).encode())
 
 
 def _cstring(blob, address):
@@ -231,9 +253,51 @@ def analyze(image=IMAGE):
     for address, text in TAGS:
         if _cstring(blob, address) != text:
             raise c.AuditError("tag string changed")
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any(x.get("path", "").replace("\\", "/").split("/")[-1].lower() == 'prvcommand_filesystem.c' for x in overlay["sources"]):
-        raise c.AuditError("object entered production overlay")
+    source = SOURCE.read_bytes()
+    if (len(source), _sh(source)) != SOURCE_PIN:
+        raise c.AuditError("production FreeRTOS+CLI filesystem source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = [x for x in overlay["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
+    if tuple(x.get("function") for x in leaves) != LEAF_NAMES or not set(LEAF_NAMES) <= set(overlay["functions"]) or _jsh(leaves) != LEAF_DIGEST:
+        raise c.AuditError("production FreeRTOS+CLI filesystem leaf inventory changed")
+    if any(x.get("profiles") != ["apple-clang"] or not x.get("strict_relocation_contract") or x.get("source", {}).get("license") != "GPL-3.0-only" for x in leaves):
+        raise c.AuditError("production FreeRTOS+CLI filesystem leaf policy changed")
+    if sum(x["expected"]["size"] for x in leaves) != 9866 or sum(x["expected"].get("closure_size", x["expected"]["size"]) - x["expected"]["size"] for x in leaves) != 704 or sum(len(x["relocations"]) for x in leaves) != 179:
+        raise c.AuditError("production FreeRTOS+CLI filesystem compiled census changed")
+    previous = 228222
+    alignment = 0
+    for leaf in leaves:
+        alignment += leaf["expected"]["offset"] - previous
+        previous = leaf["expected"]["offset"] + leaf["expected"].get("closure_size", leaf["expected"]["size"])
+    if alignment != 20 or previous != 238812:
+        raise c.AuditError("production FreeRTOS+CLI filesystem placement changed")
+    patches = [x for x in overlay["patch_sites"] if x.get("name", "").startswith("replace_freertos_cli_filesystem_")]
+    stock_order = (LEAF_NAMES[1], LEAF_NAMES[2], LEAF_NAMES[3], LEAF_NAMES[0], *LEAF_NAMES[4:])
+    if len(patches) != 12 or _jsh(patches) != PATCH_DIGEST or sum(x["expected_size"] for x in patches) != 3200 or tuple(x["target_function"] for x in patches) != stock_order:
+        raise c.AuditError("production FreeRTOS+CLI filesystem redirects changed")
+    if any(x.get("branch") != "b_w" or x.get("profiles") != ["apple-clang"] for x in patches):
+        raise c.AuditError("production FreeRTOS+CLI filesystem redirect policy changed")
+    build = json.loads(REPORT.read_text())
+    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae", 3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):
+        raise c.AuditError("production FreeRTOS+CLI filesystem build pins changed")
+    built = [x for x in build["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
+    normalized = [{"function": x["extraction"]["function"], "size": x["placement"]["size"], "text_size": x["placement"].get("text_size", x["placement"]["size"]), "padding_before": x["placement"]["padding_before"], "offset": x["placement"]["offset"], "runtime_address": x["placement"]["runtime_address"], "relocation_count": x["extraction"]["relocation_count"]} for x in built]
+    if len(built) != 12 or _jsh(normalized) != BUILT_DIGEST or sum(x["size"] for x in normalized) != 10570 or sum(x["text_size"] for x in normalized) != 9866 or sum(x["padding_before"] for x in normalized) != 20 or sum(x["relocation_count"] for x in normalized) != 179:
+        raise c.AuditError("production FreeRTOS+CLI filesystem built closure changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    regions = [x for x in main["regions"] if x["name"].startswith("freertos_cli_filesystem_")]
+    if len(regions) != 49 or _jsh(regions) != REGION_DIGEST or sum(x["size"] for x in regions) != 13846:
+        raise c.AuditError("production FreeRTOS+CLI filesystem manifest regions changed")
+    counts = {key: (sum(x["address_status"] == key for x in regions), sum(x["size"] for x in regions if x["address_status"] == key)) for key in ("generated_source_entry_replacement", "official_blob", "source_compiled", "generated_alignment")}
+    if counts != {"generated_source_entry_replacement": (12, 3200), "official_blob": (5, 56), "source_compiled": (22, 10570), "generated_alignment": (10, 20)}:
+        raise c.AuditError("production FreeRTOS+CLI filesystem stock/overlay tiling changed")
+    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed", 4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):
+        raise c.AuditError("production FreeRTOS+CLI filesystem manifest closure changed")
+    plan_bytes = FLASH_PLAN.read_bytes()
+    plan = json.loads(plan_bytes)
+    if (len(plan_bytes), _sh(plan_bytes)) != (2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f") or plan.get("package_sha256") != "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85" or tuple(len(plan[k]) for k in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions")) != (3715, 2, 5, 6):
+        raise c.AuditError("production FreeRTOS+CLI filesystem flash plan changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only zero-anchor linked-object closure",
@@ -241,7 +305,20 @@ def analyze(image=IMAGE):
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": False},
+        "production": {
+            "source_admitted": True,
+            "production_routed": True,
+            "source_functions": 12,
+            "compiled_text_bytes": 9866,
+            "compiled_rodata_bytes": 704,
+            "alignment_bytes": 20,
+            "strict_relocations": 179,
+            "stock_replaced_bytes": 3200,
+            "retained_literal_pool_bytes": 56,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": "No authorized responsive G2 pair or captured littlefs media is physically available for live directory, file, rename, MD5, capacity, and block-stat behavior; the authorized right temple is nonresponsive and the left temple must remain stock.",
+        },
     }
 
 

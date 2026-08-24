@@ -1,7 +1,7 @@
 # G2 `pb_service_even_ai.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: complete linked-object census, fail-closed behavioral analysis, and
+production-routed clean-room C implementation. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -39,9 +39,9 @@ success, one on provider failure, and two for a null payload.
 
 All encoders clear the shared 0x20C-byte message at `0x200F5884`, encode into
 the 256-byte buffer at `0x2037C4A0`, and use route 1 / service 7. Null payload
-returns 2, encode failure returns `0x2B`, and successful role-gated transport
-returns zero. The regular command/tag pairs are exactly `(1,3)` through
-`(10,12)` in order:
+returns 2, encode failure returns `0x2B`, and successful transport returns
+zero. The regular command/tag pairs are `(1,3)` through `(9,11)`, followed by
+configuration `(10,13)`:
 
 - control, VAD, ask, analyse, reply;
 - skill, prompt, event, heartbeat, configuration.
@@ -53,9 +53,19 @@ and event have separate notification encoders driven by the sequence byte at
 `0x20074FF9`. The command-response helper uses caller magic, command `0xA1`,
 tag 12, a one-byte payload, and the transmit path.
 
+The ten receive handlers relay fixed payload lengths of 2, 2, `0x208`, 1,
+`0x208`, `0x10C`, 2, 2, 2, and 4 bytes. Heartbeat response byte 1 is zero only
+for left-role plus display-ready selector 7, otherwise 8. Configuration uses
+payload bytes 0, 1, and 3 while preserving a zero byte 2. The command-response
+helper alone uses tag 12.
+
 The 23 assertion records at `[0x00781C30,0x00781DF4)` independently preserve
 each helper name, the same source path, and source-line order. Historical
-source and license remain unavailable, so source-only functions are not
-inferred. No clean-room candidate exists, the service is absent from
-`overlay.json`, and OpenCFW claims zero production ownership bytes. The next
-retained protobuf-service frontier is `pb_service_terminal.c`.
+source and license remain unavailable, so source-only historical functions
+are not inferred. The independently authored `pb_service_even_ai.c` provides
+25 linked replacements plus two bounded helpers. Its 27 selector-isolated
+leaves compile to 2,832 Thumb text bytes plus 36 alignment bytes. Twenty-five
+guarded redirects replace all 8,404 stock body bytes through 107 strict
+relocations while the 552 distributed official gap/pool bytes remain
+retained. Live service-7 master/peer BLE and Even-AI UI validation are
+explicitly blocked by unavailable authorized physical evidence.

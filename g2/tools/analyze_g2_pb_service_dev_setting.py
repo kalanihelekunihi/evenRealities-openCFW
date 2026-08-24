@@ -18,11 +18,38 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-dev-setting-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-dev-setting-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-dev-setting-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_dev_setting.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "089228c6fa53e296dd6384441b97b7016b886d2a918da2b6d93174aeff6e13be",
-    CLOSURE: "92bbd1ec7f0b4a8eb8d0107275764c5d4d6986b3102d6155e41174b919ee5fea",
-    PROVENANCE: "4dfd207449257c230ba2ab3a464f5d8dbc8e73f2444b26c83f104644a0b9e2c3",
+    CLOSURE: "3f2ecb318601b373b1cff284fe0811d629e1d29645bd56eb519950de54f868c4",
+    PROVENANCE: "b9821581cacebb933823382d712c4ba120cf29b0890b5329872900e868b42b1d",
 }
+SOURCE_SIZE = 15562
+SOURCE_SHA256 = "bfb6a066ccb43b91f0d026cbc26078ecead559297d7289bacd52a389f5193215"
+FUNCTIONS = (
+    ("open_cfw_pb_service_dev_setting_buffer_write", 148, 207380, 0,
+     "buffer_write"),
+    ("open_cfw_pb_service_dev_setting_transmit", 212, 207528, 5,
+     "transmit"),
+    ("PB_RxRestoreFactory", 140, 207740, 14, "rx_restore"),
+    ("PB_TxEncodeRestoreFactory", 52, 207880, 1, "tx_restore"),
+    ("PB_RxQuickRestart", 18, 207932, 1, "rx_restart"),
+    ("PB_TxEncodeQuickRestart", 52, 207952, 1, "tx_restart"),
+    ("PB_RxBaseConnHeartBeat", 20, 208004, 1, "rx_heartbeat"),
+    ("PB_TxEncodeBaseConnHeartBeat", 52, 208024, 1, "tx_heartbeat"),
+    ("PB_RxTimeSyncInfo", 84, 208076, 3, "rx_time"),
+    ("PB_TxEncodeTimeSyncInfo", 84, 208160, 2, "tx_time"),
+    ("PB_RxAudControl", 10, 208244, 0, "rx_audio"),
+    ("PB_TxEncodeAudControl", 62, 208256, 1, "tx_audio"),
+)
+PATCH_SUFFIXES = (
+    "rx_restore", "tx_restore", "rx_restart", "tx_restart",
+    "rx_heartbeat", "tx_heartbeat", "rx_time", "tx_time", "rx_audio",
+    "tx_audio",
+)
 PHYSICAL = (0x00542DC4, 0x00543C48)
 PHYSICAL_SHA256 = "f65791291601ac4dc39715a64b3efbe361a6df101a3c691d6aa17af680abfd99"
 BODY_SHA256 = "dc1d832025cc77165d7be3e84a37074fb244e78fe6558f2b0941a048f0404d04"
@@ -213,11 +240,89 @@ def analyze(image_path: Path = IMAGE) -> dict:
 
     if struct.unpack_from("<I", data, 0x00543BD0 - BASE)[0] != 0x20004394:
         raise AuditError("time-sync cache global changed")
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_dev_setting" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented device-setting service entered production overlay")
+
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count, _ in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_dev_setting.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        patch = patch_by_name.get(f"replace_pb_dev_setting_{suffix}")
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", row["function"], ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        region = region_by_name.get(
+            f"pb_dev_setting_{suffix}_source_replacement"
+        )
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(
+                f"production manifest replacement changed: {row['function']}"
+            )
+    for name, size, offset, _, suffix in FUNCTIONS:
+        region = region_by_name.get(f"pb_dev_setting_{suffix}_source_text")
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = [item for item in main["regions"]
+                if item["name"].startswith("pb_dev_setting_retained_gap_")]
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_dev_setting_")
+                 and item["name"].endswith("_source_alignment")]
+    if sum(item["size"] for item in retained) != 284 or any(
+            item.get("address_status") != "official_blob"
+            for item in retained) or sum(
+                item["size"] for item in alignment) != 6:
+        raise AuditError("production retained/alignment accounting changed")
 
     return {
         "surface": {
@@ -246,8 +351,25 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "assertion_lines": [line for _, _, line in ASSERTIONS],
         },
         "production": {
-            "candidate": None, "source_inventory_available": False,
-            "production_routed": False, "ownership_bytes": 0,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "source_inventory_available": True,
+            "production_routed": True,
+            "ownership_bytes": 3432,
+            "source_functions": 12,
+            "compiled_text_bytes": 934,
+            "alignment_bytes": 6,
+            "strict_relocations": 30,
+            "stock_replaced_bytes": 3432,
+            "retained_gap_pool_bytes": 284,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 0x80 device-setting peer BLE, "
+                "factory-reset, quick-restart, base-heartbeat, clock-sync, "
+                "persistence, or audio-control workflow evidence is available; "
+                "the authorized right temple is nonresponsive and the left "
+                "temple must remain stock."
+            ),
         },
     }
 

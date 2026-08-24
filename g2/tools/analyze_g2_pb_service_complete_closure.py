@@ -15,23 +15,23 @@ MANIFEST_DIR = ROOT / "tools/manifests"
 AGGREGATE = MANIFEST_DIR / "g2-pb-service-complete-closure.tsv"
 FRONTIER = MANIFEST_DIR / "g2-pb-service-frontier.tsv"
 PINS = {
-    AGGREGATE: "33ecf75c8e09a12aad8d3688a532de079b05faf10e1309edca85bde383dfd924",
+    AGGREGATE: "482c4f5a9831a3dd2135b23db9fcf3c5bbc0d1acf5c34c35f9a157196721b555",
     FRONTIER: "d8bf149c8341032b173b1b1f12784ec7de6fe15121ac23e88a14969c51aba3a9",
     MANIFEST_DIR / "g2-pb-service-conversate-closure.tsv": "68bef70d987506d41098eae1932a35ec44d56501e4cf32b5be9a66fba0784883",
-    MANIFEST_DIR / "g2-pb-service-dev-config-closure.tsv": "edee2867bb8f265a839bb0e5e79544a7b3b879e9251aaf0bbaa3bcd3d86642d0",
-    MANIFEST_DIR / "g2-pb-service-dev-setting-closure.tsv": "92bbd1ec7f0b4a8eb8d0107275764c5d4d6986b3102d6155e41174b919ee5fea",
-    MANIFEST_DIR / "g2-pb-service-even-ai-closure.tsv": "97fbb99dcca84ea976df2d2e8416990cde562910fe03416919c56d968c080327",
+    MANIFEST_DIR / "g2-pb-service-dev-config-closure.tsv": "2be10bb975b69388cc4de071586b67fceefa813f56080535b07634aea6fdcd22",
+    MANIFEST_DIR / "g2-pb-service-dev-setting-closure.tsv": "3f2ecb318601b373b1cff284fe0811d629e1d29645bd56eb519950de54f868c4",
+    MANIFEST_DIR / "g2-pb-service-even-ai-closure.tsv": "bac886291074ba19f912efe430d2fb5e0f753bd8b5e02b1657fb15e3e61af028",
     MANIFEST_DIR / "g2-pb-service-glasses-case-closure.tsv": "b3b911e860d331f3079f7810e1737a74381da4ded0e8b436933fd155faa9fab3",
-    MANIFEST_DIR / "g2-pb-service-health-closure.tsv": "a50cc002ef2cc5f95cf1d44b4e1b1ef37435d3c64cfd97d56ad0f0c2ea7d182f",
-    MANIFEST_DIR / "g2-pb-service-notification-closure.tsv": "69f114c1ee7bfa8c5e8488499114a05d0a12259fefb3bd00b10802c65e5485eb",
-    MANIFEST_DIR / "g2-pb-service-onboarding-closure.tsv": "cbf6a92abf2036a2aed140a641def4fe4e97115cd9484a3ed1ee82af024d2c6b",
-    MANIFEST_DIR / "g2-pb-service-pair-mgr-closure.tsv": "23b3d956ee287c56f9cf295d3ce5ce68427dfd63cb9f30f75b6a5d2d68bdf19b",
-    MANIFEST_DIR / "g2-pb-service-quicklist-closure.tsv": "c70ab0713c93b8e70fb52d596181c350ae7ac2229d270b87befef6e6346481d8",
+    MANIFEST_DIR / "g2-pb-service-health-closure.tsv": "1558817e12d8b5b4baa3e2c583db99eaecc5ffcbffaba21af174aeed037766a0",
+    MANIFEST_DIR / "g2-pb-service-notification-closure.tsv": "d9a1b20365e43d8d87281635186cee65d665a34dddf422e02828676daa444254",
+    MANIFEST_DIR / "g2-pb-service-onboarding-closure.tsv": "93c2b4f62c82c37c0486ccda7702471293fa3eb77163bb8f29c321efdecde914",
+    MANIFEST_DIR / "g2-pb-service-pair-mgr-closure.tsv": "a8f368b57dc515464ecb11fdc08dc36ad12b676e965922ed623b8fb19774592e",
+    MANIFEST_DIR / "g2-pb-service-quicklist-closure.tsv": "d27459e9d77fd9b7c62445a841c6ecd8463b36968ebf0f121b5dd1e423586bd0",
     MANIFEST_DIR / "g2-pb-service-ring-closure.tsv": "47b2ff130fb3beb8a5d34032b4f9cb258ce0fccd6a477a04a184b7ab7b18a77f",
-    MANIFEST_DIR / "g2-pb-service-setting-closure.tsv": "2ddfa87e0ffd8727d80cd85b280dd853d21ec3ca882e57a7e7cc4e5c0e2cb9b3",
+    MANIFEST_DIR / "g2-pb-service-setting-closure.tsv": "3f53fa20acbeadb61f4a660f5512a80abef3d5c3e3638cd86646c7fa1d42675b",
     MANIFEST_DIR / "g2-pb-service-teleprompt-closure.tsv": "1f0b285bd9e488b17e7db011d83da521b269576bf351ac6adb7ecf145686af29",
-    MANIFEST_DIR / "g2-pb-service-terminal-closure.tsv": "979f2425fc27ba6308123df5b4b1ca1c3499ef254f6ed88fdc7929b062a4d936",
-    MANIFEST_DIR / "g2-pb-service-translate-closure.tsv": "ea3e7bc2509175f4261875113825ecf073617201eab2e53bd3f93618ff73ea01",
+    MANIFEST_DIR / "g2-pb-service-terminal-closure.tsv": "efcb8e562d1aed8083d8ebbbfd91d8cfa1cfc58a87d4f642890ad3f154522830",
+    MANIFEST_DIR / "g2-pb-service-translate-closure.tsv": "875f75f22cf1aa450b95d16e1c396498774f2fdfb22882a91f2b5dfc30e9620f",
 }
 
 

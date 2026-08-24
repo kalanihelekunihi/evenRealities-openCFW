@@ -229,8 +229,8 @@ def analyze(image: Path = IMAGE) -> dict:
     build = json.loads((ROOT / "components/apollo_main/core_overlay/build/build-report.json").read_text())
     if (build["overlay"]["size"], build["overlay"]["sha256"],
             build["component"]["size"], build["component"]["sha256"]) != (
-            197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
-            3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a"):
+            240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+            3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):
         raise c.AuditError("callback-facade build pins changed")
     built = [leaf for leaf in build["relocated_leaves"]
              if leaf.get("source", {}).get("path") == SOURCE_PATH]
@@ -256,8 +256,8 @@ def analyze(image: Path = IMAGE) -> dict:
     if (main["provider"]["size"], main["provider"]["sha256"],
             manifest["package"]["expected_size"],
             manifest["package"]["expected_sha256"]) != (
-            3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
-            4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783"):
+            3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+            4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):
         raise c.AuditError("callback-facade manifest closure changed")
     return {
         "schema_version": 1,

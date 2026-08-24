@@ -1,19 +1,20 @@
 # G2 BLE EUS/ESS/EFS/NUS transport-profile recovery
 
-Status: authenticated first-party object closure; no production routing.
+Status: production-routed clean-room C; software gap closed; physical peer
+validation blocked by unavailable authorized responsive hardware evidence.
 
 The four adjacent retained objects below are G2-local Cordio application
 adapters, not opaque third-party profile implementations:
 
 | module | retained path | physical interval | functions / body bytes | event | provider handle |
 |---|---|---:|---:|---:|---:|
-| EUS | `platform\ble\profiles\eus\profile_eus.c` | `[0x004BDE4C,0x004BE228)` | 6 / 800 | `0xA8` | `0x0844` |
-| ESS | `platform\ble\profiles\ess\profile_ess.c` | `[0x004BE228,0x004BE3A4)` | 5 / 314 | `0xA9` | `0x0864` |
-| EFS | `platform\ble\profiles\efs\profile_efs.c` | `[0x004BE3A4,0x004BE6F0)` | 5 / 596 | `0xAA` | `0x0884` |
-| NUS | `platform\ble\profiles\nus\profile_nus.c` | `[0x004BE6F0,0x004BEA04)` | 5 / 664 | `0xAB` | `0x08A4` |
+| EUS | `platform\ble\profiles\eus\profile_eus.c` | `[0x004BDE4C,0x004BE228)` | 7 / 892 | `0xA8` | `0x0844` |
+| ESS | `platform\ble\profiles\ess\profile_ess.c` | `[0x004BE228,0x004BE3A4)` | 6 / 348 | `0xA9` | `0x0864` |
+| EFS | `platform\ble\profiles\efs\profile_efs.c` | `[0x004BE3A4,0x004BE6F0)` | 6 / 754 | `0xAA` | `0x0884` |
+| NUS | `platform\ble\profiles\nus\profile_nus.c` | `[0x004BE6F0,0x004BEA04)` | 6 / 704 | `0xAB` | `0x08A4` |
 
-Together these intervals form one contiguous 3,000-byte region with 21
-authenticated function bodies (2,374 bytes) and 626 bytes of literal pools,
+Together these intervals form one contiguous 3,000-byte region with 25
+authenticated function bodies (2,698 bytes) and 302 bytes of literal pools,
 strings, alignment, and local state references. The function map, complete
 physical hashes, direct-call topology, stored callbacks, retained-path
 pointers, and absence of strict-interior branch ingress are checked by:
@@ -57,10 +58,25 @@ The defensible dependency conclusion is therefore:
 This negative result prevents both a false AmbiqSuite admission and a false
 Nordic NUS admission while closing four paths in the first-party frontier.
 
-## Boundary
+## Production closure and physical boundary
 
-This closure authenticates and specifies the linked stock objects. It does not
-claim historical C recovery, production ownership, radio behavior, or hardware
-validation. Any clean-room implementation must separately qualify WSF message
-allocation, provider-handle ABI, connection races, CCC transitions, OTA gates,
-and dual-device behavior before production routing.
+`components/apollo_main/core_overlay/ble_transport_profiles.c` independently
+implements all 25 entries, including the four registered GATT write callbacks
+that the earlier direct-call-only census missed. Twenty-five guarded redirects
+replace all 2,698 stock body bytes. The Apple Cortex-M55 build emits 1,240 text
+bytes plus 10 alignment bytes with 45 strict relocations; the four 302-byte
+official pools remain authenticated stock data.
+
+Host tests cover CCC indices, connection/open/close state, WSF allocation and
+queueing, provider handles, RX callback forwarding, delayed-timeout removal,
+OTA gates, EUS direct-send semantics, TX semaphore release, and all 25
+selector-isolated target builds. The canonical overlay/component/package are
+224,198 / 3,747,594 / 4,526,088 bytes with SHA-256 values
+`87dd3f57f56f8ac138e5df6d96e5dd30ff97b8197e49b21392f04260fcd8f631`,
+`e27208da3a7f963f6676bedfd039b589c283ce1be679c94317a80bb8061812b1`,
+and `b84e19844a7459929059111af9804203a76760bbb9f8a1093063e2bb758c4b44`.
+
+No image was signed or flashed. Live CCC/RX/TX timing, controller concurrency,
+and dual-device interoperability remain explicitly blocked: the authorized
+right temple is nonresponsive, the left temple must remain stock, and no
+authorized responsive G2/EM9305 peer or equivalent physical capture exists.

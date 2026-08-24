@@ -18,11 +18,39 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-terminal-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-terminal-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-terminal-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_terminal.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "05b6c64c568eff4ee5c25b9a0344cc948f8ed72a6ed524b9d858642bbbe959e4",
-    CLOSURE: "979f2425fc27ba6308123df5b4b1ca1c3499ef254f6ed88fdc7929b062a4d936",
-    PROVENANCE: "4e0ec4961b163a82bfa046e78c6995f78416c6e192baf47a224a6d621ce2ebca",
+    CLOSURE: "efcb8e562d1aed8083d8ebbbfd91d8cfa1cfc58a87d4f642890ad3f154522830",
+    PROVENANCE: "71e10f399312df13bbc70a383f5d69adcc6bf02bcf482129178b01ae1e4aa95b",
 }
+SOURCE_SIZE = 14861
+SOURCE_SHA256 = "b6feacf5bb491f28e1a3718dbf29ee2c5f5038e94ee9eabfb1f584eb5a2cb123"
+FUNCTIONS = (
+    ("open_cfw_pb_service_terminal_buffer_write", 146, 200356, 0),
+    ("open_cfw_pb_service_terminal_zero", 88, 200504, 0),
+    ("open_cfw_pb_terminal_encode_and_send", 358, 200592, 7),
+    ("APP_PbTerminalRxFrameDataProcess", 112, 200952, 3),
+    ("APP_PbTerminalTxEncodeCommResp", 36, 201064, 1),
+    ("APP_PbTerminalTxEncodeStatusReply", 48, 201100, 1),
+    ("APP_PbTerminalTxEncodeVoiceInput", 48, 201148, 1),
+    ("APP_PbTerminalTxEncodeQueryReply", 48, 201196, 1),
+    ("APP_PbTerminalTxEncodeAgentInterrupt", 48, 201244, 1),
+    ("APP_PbTerminalTxEncodeSessionSwitchRequest", 84, 201292, 1),
+    ("APP_PbTerminalTxEncodeNewSessionRequest", 62, 201376, 1),
+    ("APP_PbTerminalTxEncodeNewSessionCancel", 48, 201440, 1),
+    ("APP_PbTerminalTxEncodeDisplayStateNotify", 104, 201488, 2),
+    ("APP_PbTerminalTxEncodeListFocus", 62, 201592, 1),
+    ("APP_PbTerminalTxEncodeOverlayFocus", 76, 201656, 2),
+)
+PATCH_SUFFIXES = (
+    "encode", "rx", "comm_resp", "status_reply", "voice_input",
+    "query_reply", "agent_interrupt", "session_switch", "new_session",
+    "new_session_cancel", "display_state", "list_focus", "overlay_focus",
+)
 PHYSICAL = (0x005CE7C4, 0x005CF2B4)
 PHYSICAL_SHA256 = "8163d6203ef880d6eb46be6f0f9bab099b8b830cddb248c7f1bc512aa0cb1c4e"
 TAIL = (0x005CF1BE, 0x005CF2B4)
@@ -223,11 +251,89 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if any((value & ~1) in starts for _, value in stored):
         raise AuditError("unexpected stored exact-entry pointer")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_terminal" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented terminal service unexpectedly entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_terminal.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        patch = patch_by_name.get(f"replace_pb_terminal_{suffix}")
+        target = ("open_cfw_pb_terminal_encode_and_send" if suffix == "encode"
+                  else row["function"])
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", target, ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        region = region_by_name.get(f"pb_terminal_{suffix}_entry_replacement")
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(f"production manifest replacement changed: {row['function']}")
+    for name, size, offset, _ in FUNCTIONS:
+        leaf = leaves[name]
+        selector = next(
+            flag for flag in leaf["toolchain"]["flags"]
+            if flag.startswith("-DOPEN_CFW_PB_TERMINAL_")
+        ).removeprefix("-DOPEN_CFW_PB_TERMINAL_").removesuffix("_ONLY=1").lower()
+        region = region_by_name.get(f"pb_terminal_{selector}_source_text")
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = region_by_name.get("pb_terminal_retained_literal_tail")
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_terminal_")
+                 and item["name"].endswith("_source_alignment")]
+    if retained is None or retained.get("size") != 246 or (
+            retained.get("address_status") != "official_blob") or (
+            sum(item["size"] for item in alignment) != 8):
+        raise AuditError("production manifest retained/alignment accounting changed")
 
     return {
         "surface": {
@@ -276,8 +382,23 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [row["function"] for row in rows],
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 2554,
+            "source_inventory_available": True,
+            "source_functions": 15,
+            "compiled_text_bytes": 1368,
+            "alignment_bytes": 8,
+            "strict_relocations": 23,
+            "stock_replaced_bytes": 2554,
+            "retained_tail_bytes": 246,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 0x30 master/peer BLE and terminal "
+                "UI evidence is available; the authorized right temple is "
+                "nonresponsive and the left temple must remain stock."
+            ),
         },
     }
 

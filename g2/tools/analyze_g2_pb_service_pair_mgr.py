@@ -18,11 +18,54 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-pair-mgr-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-pair-mgr-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-pair-mgr-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_pair_mgr.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "39f32fa929beeee0bcbd02272291cfbe7a5c7555f31ad8e8a35ed8f81cf21c05",
-    CLOSURE: "23b3d956ee287c56f9cf295d3ce5ce68427dfd63cb9f30f75b6a5d2d68bdf19b",
-    PROVENANCE: "390e8e639f31d67c2f0ece4d13681636d7146bd24f908ac19a28a037cde45106",
+    CLOSURE: "a8f368b57dc515464ecb11fdc08dc36ad12b676e965922ed623b8fb19774592e",
+    PROVENANCE: "73a32c8d1ab4113b76a5b180d6c07adb27a91a7e93d0f3fb8530a770aec5089d",
 }
+SOURCE_SIZE = 27574
+SOURCE_SHA256 = "917a17e5c161a4a55a46fe4bb14a5b9a7b613b5db8e31dd4ee18f8ba4e53b0fe"
+FUNCTIONS = (
+    ("open_cfw_pb_service_pair_mgr_buffer_write", 166, 209396, 0,
+     "open_cfw_pb_service_pair_mgr_buffer_write"),
+    ("pairMgrSecAuthFlagSet", 12, 209564, 0,
+     "pair_mgr_sec_auth_flag_set"),
+    ("pairMgrSecAuthFlagGet", 12, 209576, 0,
+     "pair_mgr_sec_auth_flag_get"),
+    ("PB_RxSecAuth", 106, 209588, 9, "pb_rx_sec_auth"),
+    ("PB_TxEncodeSecAuth", 130, 209696, 4, "pb_tx_encode_sec_auth"),
+    ("PB_TxEncodeNotifySecAuthImpl", 342, 209828, 9,
+     "pb_tx_encode_notify_sec_auth_impl"),
+    ("PB_RxPipeRoleChange", 20, 210172, 1, "pb_rx_pipe_role_change"),
+    ("PB_TxEncodePipeRoleChange", 130, 210192, 4,
+     "pb_tx_encode_pipe_role_change"),
+    ("_PB_RxRingConnectInfoOwnerExecute", 192, 210324, 22,
+     "pb_rx_ring_connect_info_owner_execute"),
+    ("_PB_RxRingConnectInfoCommon", 52, 210516, 3,
+     "pb_rx_ring_connect_info_common"),
+    ("PB_RxRingConnectInfo", 6, 210568, 1, "pb_rx_ring_connect_info"),
+    ("PB_LastTxEncodeRingConnectInfoTimeSet", 10, 210576, 1,
+     "pb_last_tx_encode_ring_connect_info_time_set"),
+    ("PB_TxEncodeRingConnectInfo", 132, 210588, 4,
+     "pb_tx_encode_ring_connect_info"),
+    ("PB_TxEncodeNotifyRingConnectInfoImpl", 364, 210720, 13,
+     "pb_tx_encode_notify_ring_connect_info_impl"),
+    ("PB_TxEncodeNotifyRingConnectInfo", 60, 211084, 3,
+     "pb_tx_encode_notify_ring_connect_info"),
+    ("PB_RxBleConnectParams", 38, 211144, 2, "pb_rx_ble_connect_params"),
+    ("PB_TxEncodeBleConnectParams", 130, 211184, 4,
+     "pb_tx_encode_ble_connect_params"),
+    ("PB_RxDisconnectInfo", 52, 211316, 4, "pb_rx_disconnect_info"),
+    ("PB_TxEncodeDisconnectInfo", 130, 211368, 4,
+     "pb_tx_encode_disconnect_info"),
+    ("PB_RxUnpairInfo", 86, 211500, 5, "pb_rx_unpair_info"),
+    ("PB_TxEncodeUnpairInfo", 130, 211588, 4,
+     "pb_tx_encode_unpair_info"),
+)
 PHYSICAL = (0x004BB3DC, 0x004BD054)
 PHYSICAL_SHA256 = "563a40809c252f16286eba50c48c5ec70086a0ac925e7b0d1344f8cb5fb5f79d"
 BODY_SHA256 = "959c59f6d2ef16c33f05f2084595c5eaf29ced61bb6d85354df45a94e784c94d"
@@ -266,11 +309,98 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for address, value in literal_checks.items()):
         raise AuditError("pair-manager flag/descriptor closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_pair_mgr" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented pair-manager service entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count, _ in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_pair_mgr.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for row in rows:
+        patch = patch_by_name.get(f"replace_pb_pair_mgr_{row['recovery_order']}")
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", row["function"], ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    suffix_by_function = {
+        name: suffix for name, _, _, _, suffix in FUNCTIONS
+    }
+    for row in rows:
+        suffix = suffix_by_function[row["function"]]
+        region = region_by_name.get(
+            f"pb_pair_mgr_{suffix}_source_replacement"
+        )
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(
+                f"production manifest replacement changed: {row['function']}"
+            )
+    for name, size, offset, _, suffix in FUNCTIONS:
+        region = region_by_name.get(f"pb_pair_mgr_{suffix}_source_text")
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = [region_by_name.get(f"pb_pair_mgr_retained_gap_{index:02d}")
+                for index in range(2, 15)]
+    retained_intervals = [
+        (item["target_address"], item["target_address"] + item["size"])
+        for item in retained if item is not None
+    ]
+    if (any(item is None for item in retained)
+            or retained_intervals != [(start, end) for start, end, _ in GAPS]
+            or any(item.get("address_status") != "official_blob"
+                   for item in retained if item is not None)):
+        raise AuditError("production retained-gap accounting changed")
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_pair_mgr_")
+                 and item["name"].endswith("_source_alignment")]
+    if sum(item["size"] for item in alignment) != 22:
+        raise AuditError("production source alignment accounting changed")
 
     return {
         "surface": {
@@ -301,8 +431,24 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "assertion_lines": [line for _, _, line in ASSERT_SYMBOLS],
         },
         "production": {
-            "candidate": None, "source_inventory_available": False,
-            "production_routed": False, "ownership_bytes": 0,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "source_inventory_available": True,
+            "production_routed": True, "ownership_bytes": 6564,
+            "source_functions": 21,
+            "compiled_text_bytes": 2300,
+            "alignment_bytes": 22,
+            "strict_relocations": 97,
+            "stock_replaced_bytes": 6564,
+            "retained_gap_pool_bytes": 724,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized responsive G2 pair-manager peer is physically "
+                "available for live security-auth, pipe-role, ring-connect, "
+                "BLE-parameter, disconnect, or unpair workflow evidence; the "
+                "authorized right temple is nonresponsive and the left temple "
+                "must remain stock."
+            ),
         },
     }
 

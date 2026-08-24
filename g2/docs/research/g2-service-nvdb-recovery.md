@@ -2,7 +2,7 @@
 
 ## Result
 
-The retained `platform\service\flashDB\NV\service_nvdb.c` object is closed as
+The authenticated `platform\service\flashDB\NV\service_nvdb.c` object is closed as
 five functions at `[0x005105F0, 0x00510A0C)`. The physical object is 1,052
 bytes with SHA-256
 `89b3755f401952cd93615b007fdcdade3c203c60f2dccdd7c9a587c12b8e761e`:
@@ -11,7 +11,8 @@ anchors the default validator and initializer; adjacency, shared configuration
 data, internal calls, and whole-image ingress restore the read wrapper, write
 wrapper, and default-table descriptor.
 
-The object contains first-party factory-NV policy over an already authenticated
+The object now has an independently authored production implementation. It
+contains first-party factory-NV policy over an already authenticated
 FlashDB dependency. It embeds no FlashDB definition. Four direct calls reach
 `fdb_kv_set_default`, `fdb_kvdb_control`, and `fdb_kvdb_init` from FlashDB
 2.1.1 commit `714d6159e7e6afb267a3953756abca445c350e61`. Nine calls reach
@@ -38,7 +39,8 @@ The analyzer authenticates the official image, invokes the fail-closed full
 FlashDB 2.1.1 configuration audit, pins all five local bodies and both object
 boundaries, recovers every instruction and call, scans whole-image ingress,
 checks all eight path references and retained configuration/diagnostic strings,
-and verifies the object is not production-routed.
+and verifies the object is production-routed under the non-destructive media
+policy described below.
 
 | Evidence | Result |
 |---|---:|
@@ -111,3 +113,24 @@ or any write/erase path before obtaining a read-only golden `NVdb` capture and
 choosing a non-destructive mount policy.
 
 No device, signing, flashing, erase, or runtime operation was performed.
+
+## Production source closure
+
+`components/apollo_main/core_overlay/service_nvdb.c` implements the two blob
+wrappers, nine-node default-table descriptor, default validator/PSN
+reconciliation path, and factory database initializer. Five selector-isolated
+Cortex-M55 leaves total 514 text bytes with four generated alignment bytes and
+eleven strict relocations. Five guarded redirects replace all 930 callable
+stock bytes; the authenticated 122-byte pool remains official.
+
+The source changes the unsafe stock magic-mismatch behavior deliberately. A
+valid `nvMagic=0x55550022` database mounts and validates normally. Missing or
+mismatched magic returns a schema error without calling
+`fdb_kv_set_default`; destructive reset is compile-time disabled. Enabling it
+requires a read-only golden `NVdb` capture and explicit policy review.
+
+The canonical overlay/component/package sizes are 239,330 / 3,762,726 /
+4,541,220 bytes. Live external-flash persistence, corruption recovery,
+power-loss behavior, and schema compatibility remain blocked because no
+authorized responsive G2 target and golden writable-media evidence are
+available.

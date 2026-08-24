@@ -22,7 +22,7 @@ OTA_RING_ANALYZER = ROOT / "tools/analyze_g2_ble_ota_ring_profiles.py"
 APP_FRAMEWORK_ANALYZER = ROOT / "tools/analyze_g2_cordio_app_framework.py"
 EXPECTED_MODULE_AUDITS = 69
 EXPECTED_FUNCTION_MAPS = 69
-EXPECTED_PROVENANCE_MANIFESTS = 70
+EXPECTED_PROVENANCE_MANIFESTS = 71
 
 # Retained reusable stack/port paths and the focused analyzer that disposes of
 # each one.  Two source files intentionally share one focused tranche.
@@ -153,10 +153,10 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
         raise ClosureError("Cordio application source oracle unexpectedly entered production")
     if profile_boundary["aggregate"] != {
         "modules": 4,
-        "linked_functions": 21,
-        "body_bytes": 2374,
+        "linked_functions": 25,
+        "body_bytes": 2698,
         "physical_bytes": 3000,
-        "production_routed": False,
+        "production_routed": True,
     }:
         raise ClosureError("G2 BLE profile-boundary closure changed")
     if profile_boundary["upstream_sweep"]["third_party_source_dependency_identified"]:
@@ -297,9 +297,10 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
             ),
             "focused_analyzer": "tools/analyze_g2_ble_transport_profiles.py",
             "modules": 4,
-            "linked_functions": 21,
-            "body_bytes": 2374,
+            "linked_functions": 25,
+            "body_bytes": 2698,
             "physical_bytes": 3000,
+            "production_routed": True,
             "third_party_source_dependency_identified": False,
             "qualification": "EUS/ESS/EFS/NUS are G2-local Cordio provider adapters; neither AmbiqSuite profile source nor Nordic ble_nus source matches",
         },

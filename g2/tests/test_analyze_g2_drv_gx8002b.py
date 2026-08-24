@@ -63,8 +63,20 @@ class G2DrvGx8002bTests(unittest.TestCase):
             ["__NVIC_EnableIRQ", "__NVIC_DisableIRQ", "__NVIC_SetPriority"],
         )
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routed_with_hardware_validation_explicitly_blocked(self):
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(
+            (
+                production["compiled_text_bytes"],
+                production["alignment_bytes"],
+                production["strict_relocations"],
+                production["replaced_stock_body_bytes"],
+                production["retained_official_pool_bytes"],
+            ),
+            (608, 8, 34, 1028, 144),
+        )
+        self.assertIn("blocked", production["hardware_validation"])
 
 
 if __name__ == "__main__":

@@ -42,16 +42,22 @@ class AnalyzeG2PbServiceSettingTests(unittest.TestCase):
         self.assertEqual(contract["status_notifications"]["recalibration"]["selector"], 1)
         self.assertEqual(contract["status_notifications"]["silent_mode"]["selector"], 2)
 
-    def test_lineage_and_production_boundary(self) -> None:
+    def test_lineage_and_production_closure(self) -> None:
         lineage = self.report["lineage"]
         self.assertTrue(lineage["retained_path"].endswith("pb_service_setting.c"))
         self.assertEqual(lineage["path_pointer_cells"],
                          ["0x0049bbbc", "0x0049c028"])
         self.assertEqual(len(lineage["exact_symbols"]), 11)
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertTrue(production["candidate"].endswith("pb_service_setting.c"))
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 3466)
+        self.assertEqual(production["source_functions"], 13)
+        self.assertEqual(production["compiled_text_bytes"], 1650)
+        self.assertEqual(production["alignment_bytes"], 14)
+        self.assertEqual(production["strict_relocations"], 38)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

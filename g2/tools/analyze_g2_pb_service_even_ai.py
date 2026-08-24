@@ -18,11 +18,46 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-even-ai-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-even-ai-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-even-ai-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_even_ai.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
-    FUNCTION_MAP: "5081abd96536b836e778101e31d8fcc00488d6c22e2e5da5d49d2e8f1e23738b",
-    CLOSURE: "97fbb99dcca84ea976df2d2e8416990cde562910fe03416919c56d968c080327",
-    PROVENANCE: "10420605df7e7a35c9df849edff89777a8c2baf50a5146a770684deb63655798",
+    FUNCTION_MAP: "b3772f7862e49d84fe8c1fae90e055569fe212bf709a9ed694cb46e84cadeb3d",
+    CLOSURE: "bac886291074ba19f912efe430d2fb5e0f753bd8b5e02b1657fb15e3e61af028",
+    PROVENANCE: "8045043a6d7e0281f6737acf5ee2682da2e46161897f19a43d2443f9689bc10f",
 }
+SOURCE_SIZE = 23775
+SOURCE_SHA256 = "6a8ff21295e7612cae2287accc6e3ffb1f1fd639b61f044804ea45286b00188a"
+FUNCTIONS = (
+    ("open_cfw_pb_service_even_ai_buffer_write", 146, 197488, 0),
+    ("open_cfw_pb_service_even_ai_zero", 88, 197636, 0),
+    ("PB_RxEvenAICtrl", 26, 197724, 1),
+    ("APP_PbTxEncodeEvenAICtrl", 126, 197752, 5),
+    ("APP_PbNotifyEncodeEvenAICtrl", 144, 197880, 5),
+    ("PB_RxEvenAIVADInfo", 26, 198024, 1),
+    ("APP_PbTxEncodeEvenAIVADInfo", 126, 198052, 5),
+    ("APP_PbNotifyEncodeEvenAIVADInfo", 142, 198180, 5),
+    ("PB_RxEvenAIAskInfo", 28, 198324, 1),
+    ("APP_PbTxEncodeEvenAIAskInfo", 126, 198352, 5),
+    ("PB_RxEvenAIAnalyseInfo", 26, 198480, 1),
+    ("APP_PbTxEncodeEvenAIAnalyseInfo", 120, 198508, 5),
+    ("PB_RxEvenAIReplyInfo", 28, 198628, 1),
+    ("APP_PbTxEncodeEvenAIReplyInfo", 126, 198656, 5),
+    ("PB_RxEvenAISkillInfo", 28, 198784, 1),
+    ("APP_PbTxEncodeEvenAISkillInfo", 126, 198812, 5),
+    ("PB_RxEvenAIPromptInfo", 26, 198940, 1),
+    ("APP_PbTxEncodeEvenAIPromptInfo", 126, 198968, 5),
+    ("PB_RxEvenAIEvent", 26, 199096, 1),
+    ("APP_PbTxEncodeEvenAIEvent", 126, 199124, 5),
+    ("APP_PbNotifyEncodeEvenAIEvent", 144, 199252, 5),
+    ("PB_RxEvenAIHeartbeat", 26, 199396, 1),
+    ("APP_PbTxEncodeEvenAIHeartbeat", 152, 199424, 7),
+    ("PB_RxEvenAIConfig", 26, 199576, 1),
+    ("APP_PbTxEncodeEvenAIConfig", 134, 199604, 5),
+    ("APP_PbTxEncodeEvenAICommResp", 118, 199740, 5),
+    ("APP_PbRxEvenAIFrameDataProcess", 496, 199860, 25),
+)
 PHYSICAL = (0x004E31CC, 0x004E54C8)
 PHYSICAL_SHA256 = "d69f6c3ad3c31b07005e0f0f6da22f3c0be4868dbfbe1eb16b1b6549b35e8fed"
 BODY_SHA256 = "ecd0001396802c71a88baa787a818f2344cd94403d81b7603eefbf6393a9a6f6"
@@ -211,11 +246,88 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if any((value & ~1) in starts for _, value in stored):
         raise AuditError("unexpected stored exact-entry pointer")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_even_ai" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented Even-AI service unexpectedly entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_even_ai.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for index, row in enumerate(rows, 1):
+        patch = patch_by_name.get(f"replace_pb_even_ai_{index:02d}")
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", row["function"], ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    for index, row in enumerate(rows, 1):
+        region = region_by_name.get(f"pb_even_ai_{index:02d}_source_replacement")
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(f"production manifest replacement changed: {row['function']}")
+    for name, size, offset, _ in FUNCTIONS:
+        leaf = leaves[name]
+        selector = next(
+            flag for flag in leaf["toolchain"]["flags"]
+            if flag.startswith("-DOPEN_CFW_PB_EVEN_AI_")
+        ).removeprefix("-DOPEN_CFW_PB_EVEN_AI_").removesuffix("_ONLY=1").lower()
+        region = region_by_name.get(f"pb_even_ai_{selector}_source_text")
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = [item for item in main["regions"]
+                if item["name"].startswith("pb_even_ai_retained_gap_")
+                or item["name"] == "pb_service_even_ai_retained_gap_pool_tail"]
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_even_ai_")
+                 and item["name"].endswith("_source_alignment")]
+    if (sum(item["size"] for item in retained),
+            sum(item["size"] for item in alignment)) != (552, 36):
+        raise AuditError("production manifest retained/alignment accounting changed")
 
     return {
         "surface": {
@@ -255,7 +367,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
                 {"name": "prompt", "command": 7, "tag": 9},
                 {"name": "event", "command": 8, "tag": 10},
                 {"name": "heartbeat", "command": 9, "tag": 11},
-                {"name": "config", "command": 10, "tag": 12},
+                {"name": "config", "command": 10, "tag": 13},
             ],
             "notifications": ["control", "vad", "event"],
             "command_response": {"command": 0xA1, "tag": 12,
@@ -267,8 +379,23 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [row["function"] for row in rows],
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 8404,
+            "source_inventory_available": True,
+            "source_functions": 27,
+            "compiled_text_bytes": 2832,
+            "alignment_bytes": 36,
+            "strict_relocations": 107,
+            "stock_replaced_bytes": 8404,
+            "retained_gap_pool_bytes": 552,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 7 master/peer BLE and Even-AI "
+                "UI evidence is available; the authorized right temple is "
+                "nonresponsive and the left temple must remain stock."
+            ),
         },
     }
 

@@ -10,5 +10,6 @@ class ServiceCodecPortingTests(unittest.TestCase):
   for key,value in expected.items():self.assertEqual(self.r["surface"][key],value,key)
  def test_providers(self):
   p=self.r["provider_boundary"];self.assertEqual((p["easylogger_calls"],p["ring_buffer_calls"],p["first_party_uart_calls"]),(20,1,3));self.assertEqual(p["ring_buffer_commit_interval"],["cda00e1efb815bad5100757f0d10d117f633ced6","190e30bebcec22d7311fd941179d70b4f439c441"]);self.assertFalse(p["new_version_discriminator"])
- def test_not_routed(self):self.assertFalse(self.r["production"]["production_routed"])
+ def test_production_routing(self):
+  p=self.r["production"];self.assertTrue(p["production_routed"]);self.assertEqual((p["compiled_text_bytes"],p["alignment_bytes"],p["strict_relocations"],p["replaced_stock_body_bytes"],p["retained_official_pool_bytes"]),(126,2,4,342,72));self.assertIn("blocked",p["hardware_validation"])
 if __name__=="__main__":unittest.main()

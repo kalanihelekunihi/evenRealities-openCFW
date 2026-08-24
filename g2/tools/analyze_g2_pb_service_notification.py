@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed audit of the retained G2 pb_service_notification object."""
+"""Fail-closed stock and production audit of G2 pb_service_notification."""
 
 from __future__ import annotations
 
@@ -18,11 +18,47 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-notification-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-notification-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-notification-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_notification.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "ca96883bab42fed8afd3f30efde0392ee7ee5f0e7fdeb98f1bca38653885289f",
-    CLOSURE: "69f114c1ee7bfa8c5e8488499114a05d0a12259fefb3bd00b10802c65e5485eb",
-    PROVENANCE: "317a8dda5e2103d4381ff88f04f469441aa4a6d35da066567c16c2245a4e1a4e",
+    CLOSURE: "d9a1b20365e43d8d87281635186cee65d665a34dddf422e02828676daa444254",
+    PROVENANCE: "0815221acf1a5d38397f6db41eb896f291f5bc90c415ebcc29b1088373dafb93",
 }
+SOURCE_SIZE = 11668
+SOURCE_SHA256 = "e99566f9d7cf6c3fd00c4c0cad332600a7e2a6f6c85f55101c409780fb8e31bc"
+FUNCTIONS = (
+    ("open_cfw_pb_service_notification_buffer_write", 146, 204372, 0,
+     "buffer_write"),
+    ("open_cfw_pb_service_notification_zero", 88, 204520, 0, "zero"),
+    ("open_cfw_pb_notification_encode_and_send", 258, 204608, 6,
+     "common_encode"),
+    ("PB_RxNotifCtrl", 48, 204868, 4, "control_rx"),
+    ("APP_PbTxEncodeNotifCtrl", 10, 204916, 1, "control_tx"),
+    ("APP_PbTxEncodeNotifCommResp", 10, 204928, 1, "comm_response"),
+    ("APP_PbTxEncodeNotifAppIDNotInWhitelist", 520, 204940, 9,
+     "app_not_whitelisted"),
+    ("PB_RxNotifWhitelistCtrl", 26, 205460, 1, "whitelist_control_rx"),
+    ("APP_PbTxEncodeNotifWhitelistCtrl", 10, 205488, 1,
+     "whitelist_control_tx"),
+    ("PB_RxNotifWhitelistChk", 10, 205500, 0, "whitelist_check_rx"),
+    ("APP_PbTxEncodeNotifWhitelistChk", 10, 205512, 1,
+     "whitelist_check_tx"),
+    ("APP_PbRxNotificationFrameDataProcess", 190, 205524, 10,
+     "dispatch"),
+)
+PATCH_SUFFIXES = (
+    "dispatch", "rx_ctrl", "tx_ctrl", "tx_comm_resp", "notify_app",
+    "rx_whitelist_ctrl", "tx_whitelist_ctrl", "rx_whitelist_check",
+    "tx_whitelist_check",
+)
+MANIFEST_PATCH_SUFFIXES = (
+    "dispatch", "control_rx", "control_tx", "comm_response",
+    "app_not_whitelisted", "whitelist_control_rx", "whitelist_control_tx",
+    "whitelist_check_rx", "whitelist_check_tx",
+)
 PHYSICAL = (0x004D6BA8, 0x004D798C)
 PHYSICAL_SHA256 = "367b877b9bd7c1c6c23beee8a5d6b14b37e6f2548437b25706edb75a20959701"
 BODY_SHA256 = "167ff554f205c1df565617756cf9321ccab7fcbc9bded302080997562cdd183b"
@@ -219,11 +255,91 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for address, value in literal_checks.items()):
         raise AuditError("notification workspace/descriptor closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_notification" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented notification service entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count, _ in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_notification.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        patch = patch_by_name.get(f"replace_pb_notification_{suffix}")
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", row["function"], ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    for suffix, row in zip(MANIFEST_PATCH_SUFFIXES, rows):
+        region = region_by_name.get(
+            f"pb_notification_{suffix}_source_replacement"
+        )
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(
+                f"production manifest replacement changed: {row['function']}"
+            )
+    for name, size, offset, _, region_suffix in FUNCTIONS:
+        region = region_by_name.get(
+            f"pb_notification_{region_suffix}_source_text"
+        )
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = [item for item in main["regions"]
+                if item["name"].startswith("pb_notification_")
+                and item["name"].endswith("_gap")]
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_notification_")
+                 and item["name"].endswith("_source_alignment")]
+    if sum(item["size"] for item in retained) != 238 or any(
+            item.get("address_status") != "official_blob"
+            for item in retained) or sum(
+                item["size"] for item in alignment) != 16:
+        raise AuditError("production retained/alignment accounting changed")
 
     return {
         "surface": {
@@ -254,8 +370,25 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "assertion_lines": [line for _, _, line in ASSERT_SYMBOLS],
         },
         "production": {
-            "candidate": None, "source_inventory_available": False,
-            "production_routed": False, "ownership_bytes": 0,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 3318,
+            "source_inventory_available": True,
+            "source_functions": 12,
+            "compiled_text_bytes": 1326,
+            "alignment_bytes": 16,
+            "strict_relocations": 34,
+            "stock_replaced_bytes": 3318,
+            "retained_gap_pool_bytes": 238,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 0x04 peer BLE, notification-"
+                "control, whitelist-control, whitelist-check, or app-not-"
+                "whitelisted workflow evidence is available; the authorized "
+                "right temple is nonresponsive and the left temple must "
+                "remain stock."
+            ),
         },
     }
 

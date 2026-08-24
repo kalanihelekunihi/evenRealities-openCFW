@@ -29,7 +29,7 @@ closed paths anchor all 1,230 functions / 485,274 body bytes, with no
 function shared across statuses. Complete-object records account for
 814,534 body bytes, and 232 records report 885,418 known physical bytes;
 the closed-manifest ledger is
-`3cd89ad644ad243b7d2c94bf1a5d8beb5c6270235bbfe4ee936fb4b7711bb1d8`. This
+`0d8b0e74744b60c570299f0e2fa78eddfe4904d15bab1fd3304b4ae6ffe4ac50`. This
 is retained-path lower-bound coverage, not whole-image or source-ownership
 coverage. The parser now consumes legacy multi-module closure records and
 standardized retained-path metadata, correctly moving the already closed
@@ -168,7 +168,9 @@ The multipart `transport_protocol.c` object is now closed too: 13 functions /
 4,134 body bytes / 4,436 physical bytes, including the recursively recovered
 310-byte timeout callback. It is G2-local `0xAA` framing over admitted
 providers; its three checksum calls target the source-owned CCITT-FALSE leaf,
-and it has no TinyFrame call or stored pointer. See
+and it has no TinyFrame call or stored pointer. Its complete thirteen-function
+clean-room graph is now production-routed; only unavailable authorized peer
+hardware blocks live traffic validation. See
 [`g2-transport-protocol-recovery.md`](g2-transport-protocol-recovery.md).
 The compact `platform/service/settings/service_settings.c` frontier item is
 also closed: 31 functions / 5,146 body bytes / 5,712 physical bytes. Its
@@ -423,12 +425,12 @@ Ordered by tractability (self-containment and testability), not importance:
      two production `linux-clang` leaves** (`runtime_crc16_ccitt.c`); see
      [`first-party-crc16-ccitt-source-boundary-audit.md`](first-party-crc16-ccitt-source-boundary-audit.md).
    - the G2 `0xAA` multipart packet layer in `transport_protocol.c`. **Done at
-     linked-object/provenance level.** Its 8-byte fragment header, four receive
+     production source level; hardware validation blocked.** Its 8-byte fragment header, four receive
      contexts, 1,500 ms timeout, send mutex, and complete send/receive graph are
      authenticated. The checksum is CRC-16/CCITT-FALSE through the already
      source-owned `0x0049ACD4` leaf, not CRC-32 and not TinyFrame CRC-16/ARC.
-     Production replacement remains a separate callback-ABI and hardware-
-     validation task; see
+     All thirteen bodies are clean-room compiled and routed; live peer traffic
+     remains blocked by unavailable authorized responsive hardware; see
      [`g2-transport-protocol-recovery.md`](g2-transport-protocol-recovery.md).
    These validate against the firmware byte-for-byte and are ideal first leaves.
 
@@ -466,8 +468,11 @@ Ordered by tractability (self-containment and testability), not importance:
    and
    [`g2-pb-service-pair-mgr-recovery.md`](g2-pb-service-pair-mgr-recovery.md).
    All 15 retained protobuf-service paths are now closed: 143 linked functions,
-   47,644 body bytes, and 51,744 physical bytes. Continue outside the completed
-   protobuf-service family.
+   47,644 body bytes, and 51,744 physical bytes. All 15 are production-routed
+   for all 47,644 stock body bytes. Pair-manager contributes 21 clean-room
+   source leaves, 2,300 compiled bytes plus 22 alignment bytes, and 97 strict
+   relocations; its live peer behavior is explicitly hardware-blocked by
+   unavailable authorized responsive G2 evidence.
 
 3. **Device-control state helpers.** The NVDB buzzer, product-mode, MAC,
    advertising-magic, sensor-calibration, and system-data record helpers are now fully

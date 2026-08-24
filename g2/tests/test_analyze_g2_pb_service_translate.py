@@ -48,10 +48,23 @@ class AnalyzeG2PbServiceTranslateTests(unittest.TestCase):
         self.assertTrue(self.report["lineage"]["retained_path"].endswith("pb_service_translate.c"))
         self.assertEqual(len(self.report["lineage"]["exact_symbols"]), 4)
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_translate.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 1324)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 7)
+        self.assertEqual(production["compiled_text_bytes"], 748)
+        self.assertEqual(production["alignment_bytes"], 4)
+        self.assertEqual(production["strict_relocations"], 13)
+        self.assertEqual(production["stock_replaced_bytes"], 1324)
+        self.assertEqual(production["retained_pool_bytes"], 120)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("authorized right temple is nonresponsive",
+                      production["hardware_blocker"])
 
 
 if __name__ == "__main__":

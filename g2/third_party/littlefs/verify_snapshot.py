@@ -868,8 +868,8 @@ EXPECTED_TAG_ID_MANIFEST_PROVIDERS = {
     "apollo_main": {
         "kind": "source_build",
         "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-        "size": 3720884,
-        "sha256": "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        "size": 3764088,
+        "sha256": "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
         "profiles": {
             "linux-clang": {
                 "size": 3668604,
@@ -1973,10 +1973,10 @@ def verify_production_allowlist() -> None:
     aggregate_pins = {
         "components/apollo_main/core_overlay/overlay.json": {
             "apple-clang": {
-                "overlay_size": 197488,
-                "overlay_sha256": "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
-                "component_size": 3720884,
-                "component_sha256": "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+                "overlay_size": 240692,
+                "overlay_sha256": "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+                "component_size": 3764088,
+                "component_sha256": "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
             },
             "linux-clang": {
                 "overlay_size": 145208,

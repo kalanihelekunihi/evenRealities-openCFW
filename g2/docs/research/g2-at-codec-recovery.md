@@ -1,7 +1,7 @@
 # G2 eAT audio-control recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-source candidate and not production-routed. Run addresses use
+Status: complete linked-object census plus independently authored production C
+and fail-closed routing. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -36,6 +36,22 @@ The exact symbol `_atAudioCtrl`, command record, `1`/`0` selectors, provider
 sites and arguments, response, source path, complete physical bytes, and
 ingress topology are pinned by `tools/analyze_g2_at_codec.py`.
 
-No authenticated historical source or license is available. There is no
-clean-room candidate, the service is absent from `overlay.json`, and it claims
-zero package ownership bytes.
+No authenticated historical source or license is available. The clean-room
+`at_codec.c` candidate implements only the recovered behavior and copies no
+stock code. Its 44-byte Cortex-M55 leaf has three strict call relocations to
+`AUDM_appAcquire`, `AUDM_appRelease`, and the retained AT output provider. A
+guarded redirect replaces all 118 callable stock bytes while retaining the
+34-byte authenticated alignment/literal pool. Host tests cover leading `1`,
+leading `0`, other and null input, selector seven, acknowledgement, and the
+return value.
+
+The canonical overlay/component/package identities are 240,076 / 3,763,472 /
+4,541,966 bytes with SHA-256 values
+`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`,
+`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`,
+and `275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+The 2,568,527-byte flash plan has 3,685 placed, two unresolved, five
+container-only, and six protected regions; SHA-256 is
+`bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f`.
+No image was signed or flashed. Audible/codec power behavior is blocked by
+unavailable authorized responsive G2 and live audio hardware evidence.

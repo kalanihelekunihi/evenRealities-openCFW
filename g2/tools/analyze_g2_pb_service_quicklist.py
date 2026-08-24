@@ -18,11 +18,34 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-quicklist-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-quicklist-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-quicklist-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_quicklist.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "018faa96061d3156726c798ad4954f736ca5591c966bd8f101788270d2463b8a",
-    CLOSURE: "c70ab0713c93b8e70fb52d596181c350ae7ac2229d270b87befef6e6346481d8",
-    PROVENANCE: "b86472137a745e00aa2a2c33364d20527257b3a9725316fce509b939bb5f16d1",
+    CLOSURE: "d27459e9d77fd9b7c62445a841c6ecd8463b36968ebf0f121b5dd1e423586bd0",
+    PROVENANCE: "0f2d172c3901f2aa0ccc4502232527050bbd2dfbb9a57fbfd44398b20fd6d62f",
 }
+SOURCE_SIZE = 16280
+SOURCE_SHA256 = "ce4f5063e971cbed8d36ebdb764f88472efc4d9a7d581f125c3dfff64756e908"
+FUNCTIONS = (
+    ("open_cfw_pb_service_quicklist_buffer_write", 166, 208320, 0,
+     "buffer_write"),
+    ("open_cfw_pb_service_quicklist_zero", 26, 208488, 0, "zero"),
+    ("open_cfw_pb_service_quicklist_transmit", 98, 208516, 5, "transmit"),
+    ("APP_DecodePbRxQuicklistData", 40, 208616, 2, "decode_data"),
+    ("PB_RxQuicklistItem", 10, 208656, 0, "rx_item"),
+    ("APP_PbTxEncodeQuicklistItem", 106, 208668, 2, "tx_item"),
+    ("PB_RxQuicklistMultItems", 10, 208776, 0, "rx_multi"),
+    ("APP_PbTxEncodeQuicklistMultItems", 72, 208788, 2, "tx_multi"),
+    ("APP_PbNotifyEncodeQuicklistMultItems", 188, 208860, 2,
+     "notify_multi"),
+    ("PB_RxQuicklistEvent", 10, 209048, 0, "rx_event"),
+    ("APP_PbTxEncodeQuicklistEvent", 76, 209060, 2, "tx_event"),
+    ("APP_PbNotifyEncodeQuicklistEvent", 86, 209136, 2, "notify_event"),
+    ("APP_PbRxQuicklistFrameDataProcess", 172, 209224, 9, "rx_frame"),
+)
 PHYSICAL = (0x0055894C, 0x005597F0)
 PHYSICAL_SHA256 = "50654068015e5cced557275529f0ebf3cfe2b16e9d34c86e2071607ac9fb5a18"
 BODY_SHA256 = "422a8a9bf8b95f2407dff2a37edd28e4086da06184f1aa99ca42e99ec9e831eb"
@@ -221,11 +244,94 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for address, value in literal_checks.items()):
         raise AuditError("quicklist workspace/descriptor closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_quicklist" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented quicklist service entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count, _ in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_quicklist.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for row in rows:
+        patch = patch_by_name.get(
+            f"replace_pb_quicklist_{row['recovery_order']}"
+        )
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", row["function"], ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    suffix_by_function = {
+        name: suffix for name, _, _, _, suffix in FUNCTIONS
+    }
+    for row in rows:
+        suffix = suffix_by_function[row["function"]]
+        region = region_by_name.get(
+            f"pb_quicklist_{suffix}_source_replacement"
+        )
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(
+                f"production manifest replacement changed: {row['function']}"
+            )
+    for name, size, offset, _, suffix in FUNCTIONS:
+        region = region_by_name.get(f"pb_quicklist_{suffix}_source_text")
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = [item for item in main["regions"]
+                if item["name"].startswith("pb_quicklist_retained_gap_")]
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_quicklist_")
+                 and item["name"].endswith("_source_alignment")]
+    if sum(item["size"] for item in retained) != 280 or any(
+            item.get("address_status") != "official_blob"
+            for item in retained) or sum(
+                item["size"] for item in alignment) != 18:
+        raise AuditError("production retained/alignment accounting changed")
 
     return {
         "surface": {
@@ -239,7 +345,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "rx_status": {"null": 2, "decode_failure": 0x2B,
                           "success": "handler_or_transmit_result"},
             "tx_status": {"success": 0, "null": 2,
-                          "encode_failure": 0x2B, "notify_failure": -1},
+                          "encode_failure": 0x2B,
+                          "notify_transport_result": "ignored"},
             "commands": {1: "item_tag_3", 2: "multi_items_tag_4",
                          3: "event_tag_5"},
             "event_values": [1, 2], "item_stride": 0xE8,
@@ -257,8 +364,24 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "assertion_lines": [line for _, _, line in ASSERT_SYMBOLS],
         },
         "production": {
-            "candidate": None, "source_inventory_available": False,
-            "production_routed": False, "ownership_bytes": 0,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "source_inventory_available": True,
+            "production_routed": True, "ownership_bytes": 3468,
+            "source_functions": 13,
+            "compiled_text_bytes": 1060,
+            "alignment_bytes": 18,
+            "strict_relocations": 26,
+            "stock_replaced_bytes": 3468,
+            "retained_gap_pool_bytes": 280,
+            "maximum_notification_items": 20,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 0x0c quicklist peer BLE, "
+                "persistent list load/save, response, or notification "
+                "workflow evidence is available; the authorized right temple "
+                "is nonresponsive and the left temple must remain stock."
+            ),
         },
     }
 

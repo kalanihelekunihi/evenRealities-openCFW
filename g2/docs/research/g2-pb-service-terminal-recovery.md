@@ -1,8 +1,8 @@
 # G2 `pb_service_terminal.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+Status: complete linked-object census, clean-room production C, fail-closed
+host/build/package qualification, and explicit unavailable-hardware blocker.
+Run addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -60,8 +60,20 @@ back to the RX global. Pointer-taking wrappers return status 6 on null; the
 no-argument/value wrappers build zeroed local payloads. Display-state values
 other than state 4 clear the session and overlay fields before encoding.
 
-The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No clean-room candidate exists, the service is
-absent from `overlay.json`, and OpenCFW claims zero production ownership
-bytes. The next retained protobuf service frontier is
-`pb_service_dev_config.c`.
+The historical source tree and license remain unavailable, so historical
+source-only functions are not inferred. The independently authored
+`components/apollo_main/core_overlay/pb_service_terminal.c` supplies fifteen
+compilable source functions: two private memory helpers plus clean-room
+implementations for all thirteen stock service entries. Apple-Clang Thumb
+qualification emits 1,368 text bytes and eight alignment bytes with 23 strict
+relocations. Thirteen whole-body `B.W` redirects replace all 2,554 executable
+stock bytes; only the authenticated 246-byte non-executable literal tail is
+retained. Host tests cover RX status/replay behavior, every tag/payload layout,
+null and role gates, display-state normalization, and transmit-versus-notify
+routing. The canonical package is 4,503,622 bytes with SHA-256
+`8e7028f3e7ffcecdbe44c1eede4ffa3bbbfa593d41ce10ed7f4630aff3d7247e`.
+
+The software functional gap is closed. Live service-`0x30` master/peer BLE
+and terminal-UI validation is explicitly blocked: no authorized responsive G2
+pair is available, the authorized right temple is nonresponsive, and the left
+temple must remain stock. This is not a hardware-completeness claim.

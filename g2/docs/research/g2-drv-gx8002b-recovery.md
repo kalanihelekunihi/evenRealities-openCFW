@@ -5,7 +5,7 @@
 physical bytes at `[0x0057A46C,0x0057A900)`. The authenticated image contains
 three baseline path anchors / 424 bytes. Raw recursive recovery adds nine
 adjacent bodies, including three CMSIS-Core NVIC helpers, the I2S ISR, the
-power-state accessor, both I2S lifecycle bodies, a DMA-buffer/timestamp helper,
+power-state accessor, both I2S lifecycle bodies, a DMA-buffer/cache helper,
 and a stored audio-thread callback.
 
 The audit pins every function hash, all 399 decoded instructions, 79 direct
@@ -79,15 +79,39 @@ The remaining call boundary is exhaustive:
   `d213f261b5be6bb29a7cce8b84071706b72f4d53`;
 - 45 calls reach admitted EasyLogger diagnostics; and
 - 12 calls reach first-party GPIO arbitration, clock/pin setup, IRQ plumbing,
-  timestamp conversion, and audio-thread notification.
+  the already source-owned data-cache invalidator, and audio-thread notification.
 
-No opaque third-party software body remains in this object. The G2 board and
-codec policy itself has no public source and is not production-routed.
+No opaque third-party software body remains in this object.
+
+## Production source routing
+
+`components/apollo_main/core_overlay/drv_gx8002b.c` is the clean-room
+production implementation of all twelve routines. Selector-isolated Apple
+Clang builds emit 608 bytes of Thumb text plus eight alignment bytes. Thirty-
+four strict relocations bind the Ambiq I2S HAL, CMSIS delay, source-owned cache
+invalidation, board GPIO/pin/IRQ seams, audio callbacks, and five sibling
+source calls. Twelve guarded `B.W` replacements cover every callable stock
+body byte (1,028 bytes); the 144-byte unreachable diagnostic/literal pool is
+retained and classified as official data.
+
+Host tests exercise signed IRQ handling, DSB/ISB ordering, external and system
+priority slots, ISR status/clear/service ordering and RX gate, exact GPIO and
+5/20 ms power sequencing, idempotent I2S lifecycle order, the inactive RX
+buffer plus fixed 3,200-byte cache descriptor, audio notification, and the
+100/1,500 ms reboot policy. All twelve selectors also compile strictly for
+Cortex-M55. The canonical overlay/component/package identities are 240,692 /
+3,764,088 / 4,542,582 bytes; the 2,588,615-byte flash plan contains 3,715
+placed, two unresolved, five container-only, and six protected regions.
+
+Software production routing is complete for this object. Live GX8002B rail,
+I2S, DMA, interrupt, and reboot behavior remains explicitly hardware-blocked:
+there is no authorized responsive G2 pair or live codec evidence available.
+This is not a wider firmware-completeness claim.
 
 ## Reproduction
 
 ```sh
 python3 tools/analyze_g2_drv_gx8002b.py
-python3 -m unittest -v tests.test_analyze_g2_drv_gx8002b
+python3 -m unittest -v tests.test_analyze_g2_drv_gx8002b tests.test_drv_gx8002b_candidate
 make drv-gx8002b-closure
 ```

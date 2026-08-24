@@ -21,10 +21,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 PATH_ANALYZER = ROOT / "tools" / "analyze_apollo_embedded_source_paths.py"
 MANIFEST_DIR = ROOT / "tools" / "manifests"
-DEFAULT_CORPUS = Path("/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth")
+DEFAULT_CORPUS = ROOT / "research/corpus/apollo-main/ghidra/full64-j64-auth"
 
 EXPECTED_CLOSED_LEDGER_SHA256 = (
-    "3cd89ad644ad243b7d2c94bf1a5d8beb5c6270235bbfe4ee936fb4b7711bb1d8"
+    "0d8b0e74744b60c570299f0e2fa78eddfe4904d15bab1fd3304b4ae6ffe4ac50"
 )
 EXPECTED_SURFACE = {
     "retained_first_party_paths": 234,
@@ -39,7 +39,7 @@ EXPECTED_SURFACE = {
     "anchored_body_bytes": 485274,
     "closed_anchored_body_bytes": 485274,
     "open_anchored_body_bytes": 0,
-    "closed_manifest_body_bytes": 814534,
+    "closed_manifest_body_bytes": 814858,
     "closed_manifest_physical_bytes_known": 885418,
     "closed_manifests_with_physical_bytes": 232,
     "closed_manifests_without_physical_bytes": 2,

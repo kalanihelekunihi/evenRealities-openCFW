@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ANALYZER = ROOT / "tools/analyze_g2_apollo_origin_accounting.py"
 CORPUS = Path(os.environ.get(
     "OPENCFW_APOLLO_GHIDRA_CORPUS",
-    "/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth",
+    str(ROOT / "research/corpus/apollo-main/ghidra/full64-j64-auth"),
 ))
 PLAN = ROOT / "build/source/flash-plan.json"
 REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
@@ -42,10 +42,10 @@ class ApolloOriginAccountingTests(unittest.TestCase):
     @unittest.skipUnless(CORPUS.is_dir() and PLAN.is_file() and REPORT.is_file(), "authenticated corpus/current build unavailable")
     def test_authenticated_origin_accounting(self):
         report = self.analyzer.analyze(PLAN, REPORT, CORPUS)
-        self.assertEqual(report["component_accounting"]["opaque_base_bytes"], 3355478)
+        self.assertEqual(report["component_accounting"]["opaque_base_bytes"], 3267306)
         self.assertEqual(report["flash_plan_metadata_gap"]["controlled_bytes_mislabeled_official_blob"], 2732)
-        self.assertEqual(sum(report["opaque_origin_lower_bounds"].values()), 3355478)
-        self.assertEqual(sum(report["third_party_path_anchored_bytes_by_family"].values()), 112939)
+        self.assertEqual(sum(report["opaque_origin_lower_bounds"].values()), 3267306)
+        self.assertEqual(sum(report["third_party_path_anchored_bytes_by_family"].values()), 122876)
         self.assertEqual(len(report["ghidra_envelopes"]["rejected_oversized"]), 8)
 
 

@@ -43,7 +43,8 @@ class G2ServiceNvdbTests(unittest.TestCase):
         self.assertEqual((b["partition_offset"], b["partition_bytes"]), (0x01FF8000, 0x8000))
         self.assertEqual((b["default_table_address"], b["default_node_count"]), ("0x20003868", 9))
         self.assertEqual((b["factory_magic_key"], b["factory_magic_value"]), ("nvMagic", 0x55550022))
-        self.assertEqual(b["magic_mismatch_policy"], "wholesale fdb_kv_set_default")
+        self.assertEqual(b["stock_magic_mismatch_policy"], "wholesale fdb_kv_set_default")
+        self.assertEqual(b["production_magic_mismatch_policy"], "fail closed without reset")
         self.assertTrue(b["stock_fal_zero_on_driver_failure_hazard"])
 
     def test_flashdb_provenance_and_provider_accounting(self):
@@ -59,8 +60,17 @@ class G2ServiceNvdbTests(unittest.TestCase):
         self.assertEqual((p["flashdb_version"], p["flashdb_commit"]), ("2.1.1", "714d6159e7e6afb267a3953756abca445c350e61"))
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routing_is_non_destructive_and_hardware_blocked(self):
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(
+            (production["compiled_text_bytes"], production["alignment_bytes"],
+             production["strict_relocations"], production["replaced_stock_body_bytes"],
+             production["retained_official_pool_bytes"]),
+            (514, 4, 11, 930, 122),
+        )
+        self.assertFalse(production["destructive_default_reset_enabled"])
+        self.assertIn("blocked by unavailable", production["hardware_validation"])
 
 
 if __name__ == "__main__":

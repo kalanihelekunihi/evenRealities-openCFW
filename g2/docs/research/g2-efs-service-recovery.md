@@ -1,8 +1,10 @@
 # G2 `efs_service.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+Status: complete linked-object census, clean-room twelve-function C
+reconstruction, production routing, host behavior tests, Cortex-M55 selector
+builds, and fail-closed artifact accounting. Live media validation is blocked
+because no authorized responsive G2 peer is physically available. Run
+addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -51,6 +53,21 @@ consumer only after size/CRC validation. Export validates logger/tracepoint
 paths, calculates size/CRC, sends metadata, streams 4 KiB chunks, and closes
 or resets state on completion, failure, result acknowledgement, or cancel.
 
-The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No full clean-room candidate exists, the object is
-absent from `overlay.json`, and OpenCFW claims zero production ownership bytes.
+The historical source tree and its license remain unavailable, so historical
+source-only functions are not inferred. The independently authored
+`components/apollo_main/core_overlay/efs_service.c` now supplies all twelve
+recovered entry points. Its 2,936 compiled text bytes plus 16 alignment bytes
+are appended to the Apollo component with 68 strict relocations; generated
+entry redirects replace all 9,276 stock body bytes while the authenticated 658
+alignment/literal bytes remain official compatibility data. The production
+package is 4,521,690 bytes with SHA-256
+`1b92f424d318c6c24579daf4af11ed3b5dbc689a9addfa45ead3b339141e6487`.
+
+Host tests cover whitelist verification, Android JSON capacity/consume,
+arbitrary-file import, path-gated logger/trace export, metadata, 4 KiB chunks,
+status helpers, dispatch, registration, and cancellation. Physical evidence
+for live whitelist import, Android JSON consumption, arbitrary-file import,
+logger/trace export, streaming, CRC/size failure, disconnect, and resume is
+explicitly blocked: the authorized right temple is nonresponsive, the left
+temple must remain stock, and no authorized responsive peer/media pair is
+available. This is not a hardware completeness claim.

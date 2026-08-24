@@ -60,10 +60,21 @@ class AnalyzeG2PbServiceTerminalTests(unittest.TestCase):
         self.assertEqual(lineage["path_pointer_cells"], ["0x005cf1d4"])
         self.assertEqual(len(lineage["exact_symbols"]), 13)
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_terminal.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 2554)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 15)
+        self.assertEqual(production["compiled_text_bytes"], 1368)
+        self.assertEqual(production["alignment_bytes"], 8)
+        self.assertEqual(production["strict_relocations"], 23)
+        self.assertEqual(production["stock_replaced_bytes"], 2554)
+        self.assertEqual(production["retained_tail_bytes"], 246)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

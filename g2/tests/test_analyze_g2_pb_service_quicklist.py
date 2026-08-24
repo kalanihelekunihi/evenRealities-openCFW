@@ -34,7 +34,7 @@ class AnalyzeG2PbServiceQuicklistTests(unittest.TestCase):
         })
         self.assertEqual(contract["tx_status"], {
             "success": 0, "null": 2, "encode_failure": 0x2B,
-            "notify_failure": -1,
+            "notify_transport_result": "ignored",
         })
         self.assertEqual(contract["commands"], {
             1: "item_tag_3", 2: "multi_items_tag_4", 3: "event_tag_5",
@@ -52,9 +52,18 @@ class AnalyzeG2PbServiceQuicklistTests(unittest.TestCase):
         self.assertEqual(lineage["assertion_lines"], [151, 165, 240, 254,
                                                        290, 331, 344, 380])
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertTrue(production["candidate"].endswith(
+            "pb_service_quicklist.c"
+        ))
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 3468)
+        self.assertEqual(production["source_functions"], 13)
+        self.assertEqual(production["compiled_text_bytes"], 1060)
+        self.assertEqual(production["alignment_bytes"], 18)
+        self.assertEqual(production["strict_relocations"], 26)
+        self.assertEqual(production["maximum_notification_items"], 20)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

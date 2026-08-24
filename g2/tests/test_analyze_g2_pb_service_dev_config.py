@@ -61,10 +61,23 @@ class AnalyzeG2PbServiceDevConfigTests(unittest.TestCase):
         ])
         self.assertEqual(len(lineage["exact_symbols"]), 3)
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_dev_config.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 2646)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 5)
+        self.assertEqual(production["compiled_text_bytes"], 998)
+        self.assertEqual(production["alignment_bytes"], 4)
+        self.assertEqual(production["strict_relocations"], 33)
+        self.assertEqual(production["stock_replaced_bytes"], 2646)
+        self.assertEqual(production["retained_gap_pool_bytes"], 286)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("authorized right temple is nonresponsive",
+                      production["hardware_blocker"])
 
 
 if __name__ == "__main__":

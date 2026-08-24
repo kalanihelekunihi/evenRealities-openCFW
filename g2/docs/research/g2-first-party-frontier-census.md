@@ -104,7 +104,9 @@ bytes. Its checksum is the already source-owned first-party CCITT-FALSE leaf,
 not TinyFrame: all 193 body calls and aligned object words contain zero edges
 to the authenticated TinyFrame object. The actual third-party relationships
 terminate at admitted CMSIS-FreeRTOS v10.5.1, Cordio WSF message, EasyLogger,
-and indirect TLSF provider seams. See
+and indirect TLSF provider seams. All thirteen bodies are now production
+source-owned (2,538 compiled bytes, 55 strict relocations); live peer traffic
+qualification is blocked by unavailable authorized responsive hardware. See
 [`g2-transport-protocol-recovery.md`](g2-transport-protocol-recovery.md).
 The settings-service object is now closed as 31 functions / 5,146 body bytes /
 5,712 physical bytes. Eleven recursively recovered bodies complete its version
@@ -448,7 +450,7 @@ The analyzer authenticates the official payload and the 64-shard corpus,
 normalizes full and relative retained paths, scans two-column and multi-module
 three-column `*-closure.tsv` records, and pins the 234-entry closed-manifest
 ledger to SHA-256
-`3cd89ad644ad243b7d2c94bf1a5d8beb5c6270235bbfe4ee936fb4b7711bb1d8`.
+`aa5eb9142e1033f785771d6c81c5db41abf1d31ef5bb446b0354dca55553efd2`.
 It emits all 234 paths in its JSON inventory, so a path cannot disappear,
 change status, or silently cross-share a function between open and closed
 sets.

@@ -11,7 +11,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ANALYZER = ROOT / "tools/analyze_g2_third_party_dependency_closure.py"
-CORPUS = Path(os.environ.get("OPENCFW_APOLLO_GHIDRA_CORPUS", "/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth"))
+CORPUS = Path(os.environ.get(
+    "OPENCFW_APOLLO_GHIDRA_CORPUS",
+    str(ROOT / "research/corpus/apollo-main/ghidra/full64-j64-auth"),
+))
 
 
 def load_analyzer():
@@ -197,7 +200,7 @@ class ThirdPartyDependencyClosureTests(unittest.TestCase):
         self.assertEqual(report["cross_checks"]["ota_transport_indirect_body_calls"], 4)
         self.assertEqual(report["cross_checks"]["ota_transport_embedded_third_party_definitions"], 0)
         self.assertIsNone(report["cross_checks"]["ota_transport_historical_commit"])
-        self.assertFalse(report["cross_checks"]["ota_transport_routed"])
+        self.assertTrue(report["cross_checks"]["ota_transport_routed"])
         self.assertEqual(report["cross_checks"]["efs_transport_easylogger_calls"], 60)
         self.assertEqual(report["cross_checks"]["efs_transport_cmsis_freertos_calls"], 1)
         self.assertEqual(report["cross_checks"]["efs_transport_runtime_calls"], 8)
@@ -208,7 +211,7 @@ class ThirdPartyDependencyClosureTests(unittest.TestCase):
         self.assertEqual(report["cross_checks"]["efs_transport_indirect_body_calls"], 4)
         self.assertEqual(report["cross_checks"]["efs_transport_embedded_third_party_definitions"], 0)
         self.assertIsNone(report["cross_checks"]["efs_transport_historical_commit"])
-        self.assertFalse(report["cross_checks"]["efs_transport_routed"])
+        self.assertTrue(report["cross_checks"]["efs_transport_routed"])
         self.assertEqual(report["cross_checks"]["evenhub_loading_page_lvgl_calls"], 36)
         self.assertEqual(report["cross_checks"]["evenhub_loading_page_easylogger_calls"], 85)
         self.assertEqual(report["cross_checks"]["evenhub_loading_page_runtime_calls"], 2)
@@ -238,7 +241,7 @@ class ThirdPartyDependencyClosureTests(unittest.TestCase):
         self.assertEqual(report["cross_checks"]["health_data_manager_direct_cmsis_freertos_calls"], 0)
         self.assertEqual(report["cross_checks"]["health_data_manager_embedded_third_party_definitions"], 0)
         self.assertIsNone(report["cross_checks"]["health_data_manager_historical_commit"])
-        self.assertFalse(report["cross_checks"]["health_data_manager_routed"])
+        self.assertTrue(report["cross_checks"]["health_data_manager_routed"])
         self.assertEqual(report["cross_checks"]["evenhub_main_easylogger_calls"], 120)
         self.assertEqual(report["cross_checks"]["evenhub_main_iar_runtime_calls"], 6)
         self.assertEqual(report["cross_checks"]["evenhub_main_lvgl_calls"], 2)
@@ -313,7 +316,7 @@ class ThirdPartyDependencyClosureTests(unittest.TestCase):
         self.assertEqual(report["cross_checks"]["system_close_stored_entry_pointers"], 3)
         self.assertEqual(report["cross_checks"]["system_close_embedded_third_party_definitions"], 0)
         self.assertIsNone(report["cross_checks"]["system_close_historical_commit"])
-        self.assertFalse(report["cross_checks"]["system_close_routed"])
+        self.assertTrue(report["cross_checks"]["system_close_routed"])
         self.assertEqual(report["cross_checks"]["iar_float_exponent_functions"], 3)
         self.assertEqual(report["cross_checks"]["iar_float_exponent_bytes"], 268)
         self.assertTrue(report["cross_checks"]["iar_float_exponent_exact_stock_reproduction"])

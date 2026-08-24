@@ -24,8 +24,8 @@ OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.
 SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "ad537fecc545895e0aea563c0f99ff41a87b6b0462b60ef4c7ec1649f9a4a221",
-    CLOSURE: "a50cc002ef2cc5f95cf1d44b4e1b1ef37435d3c64cfd97d56ad0f0c2ea7d182f",
-    PROVENANCE: "870b08b8bd6d540e39760abc48b1c95eb6990550ae3af17a726e8774a36b51e9",
+    CLOSURE: "1558817e12d8b5b4baa3e2c583db99eaecc5ffcbffaba21af174aeed037766a0",
+    PROVENANCE: "955bab8b24158f8b614c8abdcdde41780b1b03738ce2bc23053027256f63f0e3",
 }
 PHYSICAL = (0x0055A558, 0x0055B2A4)
 PHYSICAL_SHA256 = "9020db98fd11e16ce082853f8556a94795330c4f1f178ab6765685c1438ff1ab"
@@ -265,7 +265,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         if site.get("expected_size") != int(row["stock_bytes"]) or site.get("expected_sha256") != row["stock_sha256"] or site.get("target_function") != row["function"] or site.get("branch") != "b_w" or site.get("profiles") != ["apple-clang"]:
             raise AuditError(f"production stock route changed: {row['function']}")
     build = json.loads(OVERLAY_REPORT.read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183", 3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a"):
+    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae", 3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):
         raise AuditError("production health service build pins changed")
     built = {item.get("extraction", {}).get("function"): item
              for item in build.get("relocated_leaves", [])
@@ -279,7 +279,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
     appended = [item for item in regions if item.get("address_status") == "source_compiled" and 8130620 <= item.get("target_address", 0) < 8131566]
     if len(generated) != 8 or sum(item["size"] for item in generated) != 3092 or len(appended) != 9 or sum(item["size"] for item in appended) != 940:
         raise AuditError("production health service manifest closure changed")
-    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a", 4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783"):
+    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed", 4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):
         raise AuditError("production health service package pins changed")
 
     return {

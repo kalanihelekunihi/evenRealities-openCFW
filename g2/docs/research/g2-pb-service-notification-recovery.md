@@ -1,8 +1,9 @@
 # G2 `pb_service_notification.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+Status: complete linked-object census, clean-room implementation, production
+routing, and software verification. Live hardware validation is explicitly
+blocked by unavailable authorized responsive-device evidence. Run addresses
+use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -41,7 +42,28 @@ equal CRCs to status 2/error 0, and unequal CRCs to status 3/error 0.
 Regular transmit wrappers return 2 for null input, `0x2B` for encode failure,
 and zero for success. The allocated app-not-whitelisted path additionally
 returns -1 if notification delivery fails. The historical source tree and
-license remain unavailable, so source-only functions are not inferred. No
-clean-room candidate exists, the service is absent from `overlay.json`, and
-OpenCFW claims zero production ownership bytes. The next retained
-protobuf-service frontier is `pb_service_dev_setting.c`.
+license remain unavailable, so source-only functions are not inferred.
+
+## Production closure
+
+The independently authored `pb_service_notification.c` contributes 12
+selector-isolated functions totaling 1,326 compiled Thumb bytes plus 16
+alignment bytes. Nine guarded redirects replace all 3,318 stock body bytes;
+34 strict relocations bind only to recovered nanopb, BLE, allocation,
+notification-state, tick, whitelist, and redirected sibling-source
+interfaces. The 238 authenticated alignment/literal/descriptor bytes remain
+retained. Host behavior, selector compilation, relocation, component,
+manifest, package, deployment-plan, complete-service-ledger, and origin-
+accounting gates are green.
+
+The Apple overlay/component/package identities are 205,714 / 3,729,110 /
+4,507,604 bytes with SHA-256 values
+`a84d243b3a561e7db38d16bc30def52906da0530b984b25cb1606f7749c35ff8`,
+`2b19af2b2887c2a3f20d1603cf08db95a617428475018aaa7d3fa880840060ce`,
+and `07b3e44039e7c1f33ff31552f5997992fa658006f432f50c57b1a58cc4893755`.
+
+No hardware was used. Live service-4 peer BLE, notification-control,
+whitelist-control, whitelist-check, app-not-whitelisted, and nanopb
+interoperability remain blocked: the authorized right temple is nonresponsive
+and the left temple must remain stock. The next unresolved software frontier
+is `pb_service_setting.c`.

@@ -59,7 +59,15 @@ class TransportProtocolTests(unittest.TestCase):
         self.assertEqual(boundary["tinyframe"]["direct_calls"], 0)
         self.assertEqual(boundary["tinyframe"]["stored_pointers"], 0)
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
-        self.assertFalse(self.report["production"]["production_routed"])
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 4_134)
+        self.assertEqual(production["source_functions"], 13)
+        self.assertEqual(production["compiled_text_bytes"], 2_538)
+        self.assertEqual(production["alignment_bytes"], 14)
+        self.assertEqual(production["strict_relocations"], 55)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

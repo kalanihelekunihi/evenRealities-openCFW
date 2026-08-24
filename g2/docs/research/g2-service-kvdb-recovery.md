@@ -72,9 +72,30 @@ is `bd1d3336c4e37373945074a222e8bc34f71269373b0cf16ffe7fbd7bc779b112`
 and covers ALS scale, menu/dashboard/language configuration, ring, settings,
 temperature unit, terminal mode, time, time format, and universal settings.
 
-The final helper writes zero to `kvMagic`, deliberately scheduling wholesale
-default reset for the next initialization. Together with the FlashDB
-corruption fallback, this remains a destructive production-policy gate.
+The stock final helper writes zero to `kvMagic`, deliberately scheduling
+wholesale default reset for the next initialization. The production source
+instead returns the schema error and performs no write. Missing or mismatched
+magic likewise fails closed; `fdb_kv_set_default` is compiled out unless the
+explicit `OPEN_CFW_KVDB_ALLOW_FACTORY_RESET` policy is changed from zero.
+
+## Production routing
+
+`components/apollo_main/core_overlay/service_kvdb.c` now supplies seven
+selector-isolated Cortex-M55 leaves. They total 342 compiled text bytes plus
+eight alignment bytes and 23 exact relocations. Seven guarded redirects replace
+all 1,384 callable stock bytes, while the authenticated 156-byte literal and
+alignment pool remains official.
+
+Host tests cover valid mount, lock/unlock installation, the persisted boot
+counter, all eleven migration calls, twelve-node reload, initialization
+failure, missing/mismatched magic, and safe invalidation. The canonical
+overlay/component/package identities are 239,680 / 3,763,076 / 4,541,570
+bytes with SHA-256 values
+`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`,
+`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`,
+and `275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+The flash plan contains 3,672 placed regions, two unresolved regions, five
+container-only regions, and six protected regions.
 
 ## Dependency result
 
@@ -85,9 +106,10 @@ indirect table reaches eleven closed first-party migration bodies. The only
 other reusable seams are 65 admitted logging calls and one IAR `memcpy`. No
 third-party implementation or new version discriminator is embedded.
 
-OpenCFW can now remove `kvbooCount` from the FlashDB residual list. Production
-mount remains blocked by golden-media validation, application schema semantics,
-non-destructive reset policy, and hardware behavior; the stock zero-on-driver-
-failure FAL hazard also remains explicit.
+OpenCFW can now remove `kvbooCount` and the system lifecycle implementation
+from the software residual list. Physical admission remains blocked by a
+read-only golden `kvdb` capture, application-schema validation, persistence,
+recovery, and hardware behavior; the stock zero-on-driver-failure FAL hazard
+also remains explicit.
 
 No device, signing, flashing, erase, or runtime operation was performed.

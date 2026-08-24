@@ -21,9 +21,9 @@ CL = ROOT / "tools/manifests/g2-drv-gx8002b-closure.tsv"
 PM = ROOT / "tools/manifests/g2-drv-gx8002b-provider-map.tsv"
 US = ROOT / "tools/manifests/g2-drv-gx8002b-upstream-source.tsv"
 PINS = {
-    FM: "c066953fa62cbff4d0c5117a0a3cfcdaee4af0da78fc1b8342167a612ef74025",
-    CL: "ae0bb66c067a71be84e7c8ac865949a3a48b03ab4d24e5523ec710ffa8e32fbc",
-    PM: "645e08dbf9e6643fe7a7efa1c22cd5c44811187d73cd8e5051cc79082930e0d5",
+    FM: "7257ee357235ebe22dc0fcd05804e6ca7c6a41f310f79cbec62fe70b5dc458d3",
+    CL: "db950db8dacff629c41eb2a7020639559e0d2ef2fbbf35638ae745741499c724",
+    PM: "c4acb7d85e138b72f6a7eff04852f936555675c59ab707a9730dffa58427f904",
     US: "e9870b5bd3de3f73134060f0d483a7a7a777a0eafc837a92715449bef7f07d47",
 }
 F = (
@@ -59,6 +59,20 @@ PATH_REFS = [
     0x57A52A, 0x57A594, 0x57A5D8, 0x57A62E, 0x57A678,
     0x57A70C, 0x57A750, 0x57A7B8, 0x57A848,
 ]
+SOURCE = ROOT / "components/apollo_main/core_overlay/drv_gx8002b.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+PRODUCTION_NAMES = (
+    "open_cfw_gx8002_nvic_enable", "open_cfw_gx8002_nvic_disable",
+    "open_cfw_gx8002_nvic_set_priority", "open_cfw_gx8002_i2s_isr",
+    "open_cfw_gx8002_power_on", "open_cfw_gx8002_power_off",
+    "open_cfw_gx8002_power_state_get", "open_cfw_gx8002_i2s_init",
+    "open_cfw_gx8002_i2s_deinit", "open_cfw_gx8002_i2s_rx_buffer_get",
+    "open_cfw_gx8002_audio_thread_notify", "open_cfw_gx8002_reboot",
+)
 
 
 def sh(value: bytes) -> str:
@@ -181,6 +195,141 @@ def analyze(image: Path = IMAGE) -> dict:
     if t.literal_references(blob, 0x57A894) != PATH_REFS:
         raise c.AuditError("retained-path references changed")
 
+    source = SOURCE.read_bytes()
+    if (len(source), sh(source)) != (
+        11607,
+        "51af012da5f5e3d1b39852687215df8fafe100a9c0a9b9cfebc99b72ac09325a",
+    ):
+        raise c.AuditError("GX8002B production source changed")
+    source_text = source.decode("utf-8")
+    for token in (
+        "OPEN_CFW_GX_NVIC_ISER", "OPEN_CFW_GX_DSB()",
+        "OPEN_CFW_GX_I2S_INTERRUPT_STATUS", "status & 0x10u",
+        "OPEN_CFW_GX_GPIO_WRITE(6u, 1u)", "OPEN_CFW_GX_DELAY(20u)",
+        "OPEN_CFW_GX_I2S_DMA_CONFIGURE", "OPEN_CFW_GX_NVIC_SET_PRIORITY",
+        "OPEN_CFW_GX_CACHE_INVALIDATE(&descriptor, 0u)",
+        "descriptor = {0u, 3200u}", "OPEN_CFW_GX_DELAY(1500u)",
+    ):
+        if token not in source_text:
+            raise c.AuditError(f"GX8002B production policy changed: {token}")
+
+    overlay = json.loads(OVERLAY.read_text())
+    selected = overlay["relocated_leaves"][-12:]
+    expected_sizes = (34, 42, 36, 60, 60, 48, 12, 136, 82, 58, 4, 36)
+    expected_offsets = (
+        240076, 240112, 240156, 240192, 240252, 240312,
+        240360, 240372, 240508, 240592, 240652, 240656,
+    )
+    expected_relocations = (0, 0, 0, 4, 5, 3, 0, 10, 5, 2, 1, 4)
+    if tuple(item.get("function") for item in selected) != PRODUCTION_NAMES:
+        raise c.AuditError("GX8002B production leaf order changed")
+    for item, size, offset, relocations in zip(
+        selected, expected_sizes, expected_offsets, expected_relocations
+    ):
+        expected = item.get("expected", {})
+        source_record = item.get("source", {})
+        if (
+            expected.get("size"), expected.get("offset"),
+            expected.get("alignment"), len(item.get("relocations", [])),
+            item.get("strict_relocation_contract"), item.get("profiles"),
+            source_record.get("path"), source_record.get("size"),
+            source_record.get("sha256"),
+        ) != (
+            size, offset, 4, relocations, True, ["apple-clang"],
+            "components/apollo_main/core_overlay/drv_gx8002b.c",
+            11607, sh(source),
+        ):
+            raise c.AuditError(f"GX8002B production leaf changed: {item.get('function')}")
+    sibling_bindings = {
+        (item["function"], relocation.get("symbol"), relocation.get("target_function"))
+        for item in selected for relocation in item.get("relocations", [])
+        if relocation.get("target_function") is not None
+    }
+    if sibling_bindings != {
+        ("open_cfw_gx8002_i2s_init", "open_cfw_gx8002_nvic_set_priority",
+         "open_cfw_gx8002_nvic_set_priority"),
+        ("open_cfw_gx8002_i2s_init", "open_cfw_gx8002_nvic_enable",
+         "open_cfw_gx8002_nvic_enable"),
+        ("open_cfw_gx8002_i2s_deinit", "open_cfw_gx8002_nvic_disable",
+         "open_cfw_gx8002_nvic_disable"),
+        ("open_cfw_gx8002_reboot", "open_cfw_gx8002_power_off",
+         "open_cfw_gx8002_power_off"),
+        ("open_cfw_gx8002_reboot", "open_cfw_gx8002_power_on",
+         "open_cfw_gx8002_power_on"),
+    }:
+        raise c.AuditError("GX8002B sibling relocation graph changed")
+    patches = overlay["patch_sites"][-12:]
+    if (
+        tuple(item.get("runtime_address") for item in patches)
+        != tuple(start for start, _ in F)
+        or tuple(item.get("expected_size") for item in patches)
+        != tuple(end - start for start, end in F)
+        or tuple(item.get("target_function") for item in patches)
+        != PRODUCTION_NAMES
+        or any(item.get("branch") != "b_w" or item.get("profiles") != ["apple-clang"]
+               for item in patches)
+    ):
+        raise c.AuditError("GX8002B guarded redirect closure changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    if (
+        build["overlay"]["size"], build["overlay"]["sha256"],
+        build["component"]["size"], build["component"]["sha256"],
+    ) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise c.AuditError("GX8002B production build pins changed")
+    built = build["relocated_leaves"][-12:]
+    if [
+        (item["extraction"]["function"], item["extraction"]["size"],
+         item["extraction"]["relocation_count"], item["placement"]["padding_before"])
+        for item in built
+    ] != list(zip(PRODUCTION_NAMES, expected_sizes, expected_relocations,
+                  (0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0))):
+        raise c.AuditError("GX8002B compiled production closure changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (
+        main["provider"]["size"], main["provider"]["sha256"],
+        manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
+    ) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise c.AuditError("GX8002B manifest/package pins changed")
+    regions = [item for item in main["regions"] if item["name"].startswith("drv_gx8002b_")]
+    counts = Counter((item["address_status"] for item in regions))
+    sizes = Counter()
+    for item in regions:
+        sizes[item["address_status"]] += item["size"]
+    if counts != {
+        "generated_source_entry_replacement": 12, "official_blob": 1,
+        "source_compiled": 12, "generated_alignment": 4,
+    } or sizes != {
+        "generated_source_entry_replacement": 1028, "official_blob": 144,
+        "source_compiled": 608, "generated_alignment": 8,
+    }:
+        raise c.AuditError("GX8002B manifest ownership closure changed")
+    package = PACKAGE.read_bytes()
+    if (len(package), sh(package)) != (4542582, manifest["package"]["expected_sha256"]):
+        raise c.AuditError("GX8002B package artifact changed")
+    plan_bytes = FLASH_PLAN.read_bytes()
+    plan = json.loads(plan_bytes)
+    if (
+        len(plan_bytes), sh(plan_bytes), plan.get("package_sha256"),
+        tuple(len(plan[key]) for key in (
+            "flash_regions", "unresolved_flash_regions",
+            "container_only_regions", "protected_regions",
+        )),
+    ) != (
+        2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f",
+        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        (3715, 2, 5, 6),
+    ):
+        raise c.AuditError("GX8002B flash-plan closure changed")
+
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -223,7 +372,18 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": {
+            "production_routed": True,
+            "compiled_text_bytes": 608,
+            "alignment_bytes": 8,
+            "strict_relocations": 34,
+            "replaced_stock_body_bytes": 1028,
+            "retained_official_pool_bytes": 144,
+            "hardware_validation": (
+                "blocked by unavailable authorized responsive G2 pair and "
+                "live GX8002B power/I2S/DMA evidence"
+            ),
+        },
     }
 
 

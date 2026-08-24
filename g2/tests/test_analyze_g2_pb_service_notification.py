@@ -39,7 +39,7 @@ class AnalyzeG2PbServiceNotificationTests(unittest.TestCase):
         self.assertEqual([contract["message_bytes"], contract["encode_capacity"]],
                          [0x4C, 0x100])
 
-    def test_lineage_and_production_boundary(self) -> None:
+    def test_lineage_and_production_closure(self) -> None:
         lineage = self.report["lineage"]
         self.assertTrue(lineage["retained_path"].endswith("pb_service_notification.c"))
         self.assertEqual(len(lineage["path_pointer_cells"]), 9)
@@ -47,9 +47,16 @@ class AnalyzeG2PbServiceNotificationTests(unittest.TestCase):
         self.assertEqual(lineage["assertion_lines"],
                          [103, 122, 160, 243, 259, 296, 312])
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertTrue(production["candidate"].endswith(
+            "pb_service_notification.c"))
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 3318)
+        self.assertEqual(production["source_functions"], 12)
+        self.assertEqual(production["compiled_text_bytes"], 1326)
+        self.assertEqual(production["alignment_bytes"], 16)
+        self.assertEqual(production["strict_relocations"], 34)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

@@ -217,12 +217,12 @@ def analyze(image: Path = IMAGE) -> dict:
         report["overlay"]["size"], report["overlay"]["sha256"],
         report["component"]["size"], report["component"]["sha256"],
     ) != (
-        197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
-        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
     ):
         raise c.AuditError("production callback-manager build pins changed")
     manifest = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_main"]
-    if manifest["provider"].get("size") != 3720884 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
+    if manifest["provider"].get("size") != 3764088 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
         raise c.AuditError("production callback-manager manifest provider changed")
     region_names = {item["name"] for item in manifest["regions"]}
     required_regions = {

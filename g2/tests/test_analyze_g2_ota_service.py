@@ -46,7 +46,7 @@ class AnalyzeG2OtaServiceTests(unittest.TestCase):
         self.assertEqual(contract["notification_payloads_le"], [0x0402, 0x0302, 0x0502])
         self.assertTrue(contract["read_after_write_verification"])
 
-    def test_lineage_and_production_boundary(self) -> None:
+    def test_lineage_and_production_closure(self) -> None:
         lineage = self.report["lineage"]
         self.assertTrue(lineage["retained_path"].endswith("ota_service.c"))
         self.assertEqual(len(lineage["path_pointer_cells"]), 7)
@@ -54,9 +54,21 @@ class AnalyzeG2OtaServiceTests(unittest.TestCase):
         self.assertEqual(lineage["source_inventory"], "unavailable")
         self.assertEqual(lineage["license"], "unknown")
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/ota_service.c",
+        )
+        self.assertTrue(production["source_inventory_available"])
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 15394)
+        self.assertEqual(production["source_functions"], 29)
+        self.assertEqual(production["compiled_text_bytes"], 3130)
+        self.assertEqual(production["alignment_bytes"], 18)
+        self.assertEqual(production["strict_relocations"], 65)
+        self.assertEqual(production["retained_gap_pool_bytes"], 982)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("No authorized responsive G2 peer", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

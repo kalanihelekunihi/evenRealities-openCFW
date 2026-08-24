@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed audit of the retained G2 pb_service_setting object."""
+"""Fail-closed stock and production audit of G2 pb_service_setting."""
 
 from __future__ import annotations
 
@@ -18,11 +18,55 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-setting-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-setting-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-setting-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_setting.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "59f77f3102881d030c5cdfff4bd43da9f061545cd5d47c4ad30e4a751a4708b4",
-    CLOSURE: "2ddfa87e0ffd8727d80cd85b280dd853d21ec3ca882e57a7e7cc4e5c0e2cb9b3",
-    PROVENANCE: "1765f70b967dc6ded90c63d5f7100cfa91849edd092faaa537020a1b1642c208",
+    CLOSURE: "3f53fa20acbeadb61f4a660f5512a80abef3d5c3e3638cd86646c7fa1d42675b",
+    PROVENANCE: "67b02d52464f8dd30c597b0dc05a438a697396624773f56bb58fac9b9eaaf34b",
 }
+SOURCE_SIZE = 18393
+SOURCE_SHA256 = "203b260e1e12286734073e587507eaceaec351a307c7243c3beecabb8fe97abd"
+FUNCTIONS = (
+    ("open_cfw_pb_service_setting_buffer_write", 146, 205716, 0,
+     "buffer_write"),
+    ("open_cfw_pb_service_setting_zero", 88, 205864, 0, "zero"),
+    ("setting_is_duplicate_message", 22, 205952, 0, "duplicate"),
+    ("setting_parse_data_package", 124, 205976, 3, "parse"),
+    ("setting_respond_to_app", 104, 206100, 4, "respond"),
+    ("setting_build_full_status_package", 418, 206204, 5, "build_status"),
+    ("setting_respond_with_local_data", 120, 206624, 4, "respond_local"),
+    ("setting_respond_to_app_serialize", 90, 206744, 4,
+     "respond_serialize"),
+    ("setting_respond_with_local_data_serialize", 90, 206836, 4,
+     "respond_local_serialize"),
+    ("setting_notify_common", 252, 206928, 6, "notify_common"),
+    ("setting_notify_device_status_to_app", 50, 207180, 4,
+     "notify_status"),
+    ("setting_notify_recalibration_status_to_app", 76, 207232, 2,
+     "notify_recalibration"),
+    ("notify_silent_mode_to_app", 70, 207308, 2, "notify_silent"),
+)
+PATCH_SUFFIXES = (
+    "duplicate", "parse", "respond", "build_status", "respond_local",
+    "respond_serialize", "respond_local_serialize", "notify_common",
+    "notify_status", "notify_recalibration", "notify_silent",
+)
+MANIFEST_PATCH_NAMES = (
+    "pb_setting_is_duplicate_message_source_replacement",
+    "pb_setting_parse_data_package_source_replacement",
+    "pb_setting_respond_to_app_source_replacement",
+    "pb_setting_build_full_status_package_source_replacement",
+    "pb_setting_respond_with_local_data_source_replacement",
+    "pb_setting_respond_to_app_serialize_source_replacement",
+    "pb_setting_respond_with_local_data_serialize_source_replacement",
+    "pb_setting_notify_common_source_replacement",
+    "pb_setting_notify_device_status_to_app_source_replacement",
+    "pb_setting_notify_recalibration_status_to_app_source_replacement",
+    "pb_setting_notify_silent_mode_source_replacement",
+)
 PHYSICAL = (0x0049B198, 0x0049C070)
 PHYSICAL_SHA256 = "af57ba66a30263a8e01d0975696d760f93ebe403f8988af911f811dad72f5268"
 BODY_SHA256 = "ee22c4e8bb16352019d0cc8462f5522ee026ba29ccd334d90e366a2ce3b23d87"
@@ -224,11 +268,86 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for address, value in literal_checks.items()):
         raise AuditError("setting workspace/global closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_setting" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented setting service entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count, _ in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_setting.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        patch = patch_by_name.get(f"replace_pb_setting_{suffix}")
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", row["function"], ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    for region_name, row in zip(MANIFEST_PATCH_NAMES, rows):
+        region = region_by_name.get(region_name)
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(
+                f"production manifest replacement changed: {row['function']}"
+            )
+    for name, size, offset, _, region_suffix in FUNCTIONS:
+        region = region_by_name.get(f"pb_setting_{region_suffix}_source_text")
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = [item for item in main["regions"]
+                if item["name"].startswith("pb_setting_retained_gap_")]
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_setting_")
+                 and item["name"].endswith("_source_alignment")]
+    if sum(item["size"] for item in retained) != 334 or any(
+            item.get("address_status") != "official_blob"
+            for item in retained) or sum(
+                item["size"] for item in alignment) != 14:
+        raise AuditError("production retained/alignment accounting changed")
 
     return {
         "surface": {
@@ -259,8 +378,24 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": list(SYMBOLS.values()),
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 3466,
+            "source_inventory_available": True,
+            "source_functions": 13,
+            "compiled_text_bytes": 1650,
+            "alignment_bytes": 14,
+            "strict_relocations": 38,
+            "stock_replaced_bytes": 3466,
+            "retained_gap_pool_bytes": 334,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 0x09 setting peer BLE, full-"
+                "status, recalibration-status, or silent-mode workflow "
+                "evidence is available; the authorized right temple is "
+                "nonresponsive and the left temple must remain stock."
+            ),
         },
     }
 

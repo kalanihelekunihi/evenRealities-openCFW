@@ -1,7 +1,7 @@
 # G2 SystemClose dependency boundary
 
-Status: complete stock-object and provider closure over G2 2.2.6.10. No device
-or flash operation is performed.
+Status: complete stock-object/provider closure and production source routing
+over G2 2.2.6.10. No device or flash operation is performed.
 
 `app\gui\SystemClose\systemClose.c` occupies
 `[0x00469BF4,0x0046B0EC)`: 20 functions / 4,960 executable bytes and 408
@@ -28,16 +28,33 @@ The 296 direct calls split into 25 local and 271 external calls:
 
 There is no CMSIS-FreeRTOS, allocator, protobuf, Cordio, or other reusable
 implementation in the object. It adds no dependency, version discriminator,
-or evidence for the private producing commit. Its close/confirm/cancel/minimize,
-scroll, animation, IMU-reflash, and display-lifecycle behavior remains
-first-party UI policy and is not yet production-routed.
+or evidence for the private producing commit.
 
 Forty direct entry sites, three stored pointers, no indirect body call, and no
 strict-interior ingress close control-flow ownership. Eight unaligned raw words
 that resemble interior pointers are not aligned callback or control-flow
 records.
 
+`components/apollo_main/core_overlay/system_close.c` independently implements
+all twenty callable entries. Twenty guarded Apple-Clang redirects replace all
+4,960 stock function bytes. The selector-isolated Cortex-M55 output is 2,804
+text bytes plus 22 alignment bytes with 118 strict relocations; the 408-byte
+official alignment/literal remainder stays stock-carried. Host tests cover the
+bounded FIFO, common-data allowlist, role-gated page actions, layout, scroll and
+animation queuing, confirm/cancel/minimize policy, IMU reflash dispatch, page
+factory, and display lifecycle.
+
+The canonical overlay/component/package sizes are 228,222 / 3,751,618 /
+4,530,112 bytes with SHA-256 values `ee0ced13721b...cda491`,
+`c6ac27de8a0e...fca42`, and `7cd4e6760f03...dc2c8`. The 2,503,413-byte flash
+plan contains 3,589 placed, two unresolved, five container-only, and six
+protected regions. No package was signed or flashed. Live close-page display,
+selection animation, IMU reflash, shutdown/minimize transition, and peer
+synchronization evidence is blocked: the authorized right temple is
+nonresponsive and the left temple must remain stock. This closes the software
+gap only; it is not a firmware-completeness claim.
+
 ```sh
 python3 openCFW/tools/analyze_g2_system_close.py
-python3 -m unittest openCFW.tests.test_analyze_g2_system_close
+python3 -m unittest tests.test_system_close_candidate tests.test_analyze_g2_system_close
 ```

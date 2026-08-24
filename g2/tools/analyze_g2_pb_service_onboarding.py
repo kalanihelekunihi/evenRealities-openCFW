@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed audit of the retained G2 pb_service_onboarding object."""
+"""Fail-closed stock and production audit of G2 pb_service_onboarding."""
 
 from __future__ import annotations
 
@@ -18,11 +18,44 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-onboarding-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-onboarding-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-onboarding-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_onboarding.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "434c303d40090d2db952e2e87cd479a9d7c6b24a86950b370ed1ae84fbae86f2",
-    CLOSURE: "cbf6a92abf2036a2aed140a641def4fe4e97115cd9484a3ed1ee82af024d2c6b",
-    PROVENANCE: "3b353ae9e259ea07361a412e8c471a26b573aa7ba9acf1247c1f04a73749d820",
+    CLOSURE: "93c2b4f62c82c37c0486ccda7702471293fa3eb77163bb8f29c321efdecde914",
+    PROVENANCE: "75bdbf3cbe34e5ade08c1a8a407a4f459a0b35adf6a9517fe64b2452fa1ac186",
 }
+SOURCE_SIZE = 14758
+SOURCE_SHA256 = "81a578ee935776fdb798962859800dd835f3c063e3c94c701d058c2319a56a35"
+FUNCTIONS = (
+    ("open_cfw_pb_service_onboarding_buffer_write", 146, 203488, 0,
+     "buffer_write"),
+    ("open_cfw_pb_service_onboarding_zero", 88, 203636, 0, "zero"),
+    ("open_cfw_pb_onboarding_encode_and_send", 276, 203724, 6,
+     "common_encode"),
+    ("APP_PbRxOnboardingFrameDataProcess", 170, 204000, 9, "dispatch"),
+    ("PB_RxOnboardingConfig", 20, 204172, 1, "config_rx"),
+    ("APP_PbTxEncodeOnboardingConfig", 20, 204192, 1, "config_tx"),
+    ("APP_PbNotifyEncodeOnboardingConfig", 44, 204212, 1,
+     "config_notify"),
+    ("PB_RxOnboardingHeartbeat", 10, 204256, 0, "heartbeat_rx"),
+    ("APP_PbTxEncodeOnboardingHeartbeat", 20, 204268, 1,
+     "heartbeat_tx"),
+    ("PB_RxOnboardingEvent", 20, 204288, 1, "event_rx"),
+    ("APP_PbTxEncodeOnboardingEvent", 20, 204308, 1, "event_tx"),
+    ("APP_PbNotifyEncodeOnboardingEvent", 44, 204328, 1,
+     "event_notify"),
+)
+PATCH_SUFFIXES = (
+    "dispatch", "rx_config", "tx_config", "notify_config",
+    "rx_heartbeat", "tx_heartbeat", "rx_event", "tx_event", "notify_event",
+)
+MANIFEST_PATCH_SUFFIXES = (
+    "dispatch", "config_rx", "config_tx", "config_notify",
+    "heartbeat_rx", "heartbeat_tx", "event_rx", "event_tx", "event_notify",
+)
 PHYSICAL = (0x004A78D0, 0x004A8560)
 PHYSICAL_SHA256 = "3c62388010aee013633ecdb222617b023ae9a831c82eb1c5860ac8856f6c9cb5"
 BODY_SHA256 = "56f0c2d54aa65832669d28bcaa24d022886fd11224595881009f2feb0a0503a6"
@@ -217,11 +250,91 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for address, value in literal_checks.items()):
         raise AuditError("onboarding workspace/global closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_onboarding" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented onboarding service entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocation_count, _ in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_onboarding.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"),
+                    leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocation_count):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for suffix, row in zip(PATCH_SUFFIXES, rows):
+        patch = patch_by_name.get(f"replace_pb_onboarding_{suffix}")
+        expected = (
+            int(row["stock_start"], 0), int(row["stock_bytes"]),
+            row["stock_sha256"], "b_w", row["function"], ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production patch changed: {row['function']}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    for suffix, row in zip(MANIFEST_PATCH_SUFFIXES, rows):
+        region = region_by_name.get(
+            f"pb_onboarding_{suffix}_source_replacement"
+        )
+        if region is None or (
+            region.get("target_address"), region.get("size"),
+            region.get("address_status"),
+        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
+              "generated_source_entry_replacement"):
+            raise AuditError(
+                f"production manifest replacement changed: {row['function']}"
+            )
+    for name, size, offset, _, region_suffix in FUNCTIONS:
+        region = region_by_name.get(
+            f"pb_onboarding_{region_suffix}_source_text"
+        )
+        if region is None or (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (3523396 + offset, size, 0x00794324 + offset,
+              "source_compiled"):
+            raise AuditError(f"production manifest source changed: {name}")
+    retained = [item for item in main["regions"]
+                if item["name"].startswith("pb_onboarding_")
+                and item["name"].endswith("_gap")]
+    alignment = [item for item in main["regions"]
+                 if item["name"].startswith("pb_onboarding_")
+                 and item["name"].endswith("_source_alignment")]
+    if sum(item["size"] for item in retained) != 192 or any(
+            item.get("address_status") != "official_blob"
+            for item in retained) or sum(
+                item["size"] for item in alignment) != 8:
+        raise AuditError("production retained/alignment accounting changed")
 
     return {
         "surface": {
@@ -250,8 +363,24 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "assertion_lines": [line for _, _, line in ASSERT_SYMBOLS],
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 3024,
+            "source_inventory_available": True,
+            "source_functions": 12,
+            "compiled_text_bytes": 878,
+            "alignment_bytes": 8,
+            "strict_relocations": 22,
+            "stock_replaced_bytes": 3024,
+            "retained_gap_pool_bytes": 192,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 0x10 peer BLE, display-ready, "
+                "onboarding-control, response, or notification workflow evidence "
+                "is available; the authorized right temple is nonresponsive "
+                "and the left temple must remain stock."
+            ),
         },
     }
 

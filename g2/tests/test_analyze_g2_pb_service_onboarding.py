@@ -49,9 +49,23 @@ class AnalyzeG2PbServiceOnboardingTests(unittest.TestCase):
         self.assertEqual(lineage["assertion_lines"],
                          [103, 117, 152, 188, 201, 240, 254, 294])
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_onboarding.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 3024)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 12)
+        self.assertEqual(production["compiled_text_bytes"], 878)
+        self.assertEqual(production["alignment_bytes"], 8)
+        self.assertEqual(production["strict_relocations"], 22)
+        self.assertEqual(production["stock_replaced_bytes"], 3024)
+        self.assertEqual(production["retained_gap_pool_bytes"], 192)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("authorized right temple is nonresponsive",
+                      production["hardware_blocker"])
 
 
 if __name__ == "__main__":

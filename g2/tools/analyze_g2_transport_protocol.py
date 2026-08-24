@@ -19,9 +19,13 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-transport-protocol-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-transport-protocol-closure.tsv"
 PROVIDER_MAP = ROOT / "tools/manifests/g2-transport-protocol-provider-map.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/transport_protocol.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 INPUT_PINS = {
     FUNCTION_MAP: "fa8a7a9eeaf4f386a9419ffeee5e876dccc188a076ac785f1685fd5637556e6a",
-    CLOSURE: "9796ec6f1094dece1a5b2a81ecbc28de721171dcd20da01b2a5b1598d72874fc",
+    CLOSURE: "87d5dc817863e3707700420b3fc8de686a0c8676bee7c53b68fdbe9e0a92539d",
     PROVIDER_MAP: "52bbdb1316e572fb2b3c6fe92bc9842087141207090af093f5fe253d743c99d7",
 }
 
@@ -84,6 +88,32 @@ TINYFRAME = (0x0049_16C8, 0x0049_22F6)
 CRC_PROVIDER = 0x0049_ACD4
 RECOVERED_FUNCTION = (0x004B_8C6C, 0x004B_8DA2)
 RECOVERED_RETURN = (0x004B_8DA0, bytes.fromhex("f0bd"))
+
+SOURCE_SIZE = 24_280
+SOURCE_SHA256 = "8a3b31bff575a92b4e160ce993d487a9fe3b3428e75e425e86b35dbea79911bd"
+PRODUCTION_FUNCTIONS = (
+    ("TPL_Init", 138, 211_720, 1),
+    ("_getOrCreateContext", 468, 211_860, 2),
+    ("_rxNextPacketTimeout", 106, 212_328, 3),
+    ("open_cfw_tpl_context_free", 72, 212_436, 4),
+    ("open_cfw_tpl_context_mark_packet", 34, 212_508, 0),
+    ("open_cfw_tpl_context_packet_seen", 18, 212_544, 0),
+    ("open_cfw_tpl_schedule_rx_timeout", 56, 212_564, 4),
+    ("_rxSyncEventCallback", 2, 212_620, 0),
+    ("_tplReponse", 64, 212_624, 0),
+    ("TPL_RxPacketTimeoutHandler", 194, 212_688, 2),
+    ("open_cfw_tpl_reset_receive_contexts", 92, 212_884, 7),
+    ("TPL_ReceivePacket", 612, 212_976, 27),
+    ("TPL_SendPacket", 682, 213_588, 5),
+)
+PRODUCTION_TARGETS = {
+    "tpl_context_free_004b8ba2": "open_cfw_tpl_context_free",
+    "tpl_context_mark_packet_004b8bdc": "open_cfw_tpl_context_mark_packet",
+    "tpl_context_packet_seen_004b8c14": "open_cfw_tpl_context_packet_seen",
+    "tpl_schedule_rx_timeout_004b8c44": "open_cfw_tpl_schedule_rx_timeout",
+    "tpl_reset_receive_contexts_004b9984":
+        "open_cfw_tpl_reset_receive_contexts",
+}
 
 STRINGS = {
     PATH_RUN: RETAINED_PATH,
@@ -300,13 +330,130 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
     if crc_sites != [0x004B_91D8, 0x004B_9486, 0x004B_97B0]:
         raise AuditError("CCITT checksum call topology changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any(
-        "transport_protocol" in item.get("path", "").lower()
-        for item in overlay["sources"]
-    )
-    if routed:
-        raise AuditError("analysis-only transport object entered production")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or _sha256(source) != SOURCE_SHA256:
+        raise AuditError("production transport source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    production_names = {item[0] for item in PRODUCTION_FUNCTIONS}
+    leaves = {
+        item.get("function"): item
+        for item in overlay["relocated_leaves"]
+        if item.get("function") in production_names
+    }
+    if set(leaves) != production_names:
+        raise AuditError("production transport leaf inventory changed")
+    for name, size, offset, relocation_count in PRODUCTION_FUNCTIONS:
+        leaf = leaves[name]
+        if (
+            leaf["source"].get("path")
+            != "components/apollo_main/core_overlay/transport_protocol.c"
+            or leaf["source"].get("size") != SOURCE_SIZE
+            or leaf["source"].get("sha256") != SOURCE_SHA256
+            or leaf.get("profiles") != ["apple-clang"]
+            or leaf.get("strict_relocation_contract") is not True
+            or (
+                leaf["expected"].get("size"),
+                leaf["expected"].get("offset"),
+                leaf["expected"].get("alignment"),
+            ) != (size, offset, 4)
+            or len(leaf.get("relocations", [])) != relocation_count
+        ):
+            raise AuditError(f"production transport leaf changed: {name}")
+    patch_by_name = {
+        item.get("name"): item for item in overlay["patch_sites"]
+    }
+    for row in rows:
+        order = int(row["recovery_order"])
+        patch = patch_by_name.get(f"replace_transport_protocol_{order:02d}")
+        target = PRODUCTION_TARGETS.get(row["function"], row["function"])
+        expected = (
+            int(row["stock_start"], 0),
+            int(row["stock_bytes"]),
+            row["stock_sha256"],
+            "b_w",
+            target,
+            ["apple-clang"],
+        )
+        if patch is None or (
+            patch.get("runtime_address"),
+            patch.get("expected_size"),
+            patch.get("expected_sha256"),
+            patch.get("branch"),
+            patch.get("target_function"),
+            patch.get("profiles"),
+        ) != expected:
+            raise AuditError(f"production transport patch changed: {target}")
+    report = json.loads(REPORT.read_text())
+    if (
+        report["overlay"]["size"],
+        report["overlay"]["sha256"],
+        report["component"]["size"],
+        report["component"]["sha256"],
+    ) != (
+        228_222,
+        "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+        3_751_618,
+        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+    ):
+        raise AuditError("production transport build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (
+        main["provider"].get("size"),
+        main["provider"].get("sha256"),
+        manifest["package"].get("expected_size"),
+        manifest["package"].get("expected_sha256"),
+    ) != (
+        3_751_618,
+        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        4_530_112,
+        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+    ):
+        raise AuditError("production transport manifest pins changed")
+    region_by_name = {item["name"]: item for item in main["regions"]}
+    for row in rows:
+        order = int(row["recovery_order"])
+        region = region_by_name.get(
+            f"transport_protocol_{order:02d}_source_replacement"
+        )
+        if region is None or (
+            region.get("target_address"),
+            region.get("size"),
+            region.get("address_status"),
+        ) != (
+            int(row["stock_start"], 0),
+            int(row["stock_bytes"]),
+            "generated_source_entry_replacement",
+        ):
+            raise AuditError(
+                f"production transport manifest replacement changed: "
+                f"{row['function']}"
+            )
+    source_regions = [
+        item for item in main["regions"]
+        if item["name"].startswith("transport_protocol_")
+        and item["name"].endswith("_source_text")
+    ]
+    alignment_regions = [
+        item for item in main["regions"]
+        if item["name"].startswith("transport_protocol_")
+        and item["name"].endswith("_source_alignment")
+    ]
+    retained_gaps = [
+        item for item in main["regions"]
+        if item["name"].startswith("transport_protocol_retained_gap_")
+    ]
+    if (
+        len(source_regions) != 13
+        or sum(item["size"] for item in source_regions) != 2_538
+        or sum(item["size"] for item in alignment_regions) != 14
+        or len(retained_gaps) != 4
+        or sum(item["size"] for item in retained_gaps) != POOL_BYTES
+        or any(item.get("address_status") != "official_blob"
+               for item in retained_gaps)
+    ):
+        raise AuditError("production transport source/gap accounting changed")
+    routed = True
 
     return {
         "surface": {
@@ -383,15 +530,30 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "qualification": "the prior G2 corpus is a naming/topology oracle only; every current byte and boundary is independently pinned",
         },
         "production": {
-            "candidate": None,
+            "candidate": str(SOURCE.relative_to(ROOT)),
             "production_routed": routed,
-            "ownership_bytes": 0,
+            "ownership_bytes": BODY_BYTES,
+            "source_functions": 13,
+            "compiled_text_bytes": 2_538,
+            "alignment_bytes": 14,
+            "strict_relocations": 55,
+            "stock_replaced_bytes": BODY_BYTES,
+            "retained_literal_pool_bytes": POOL_BYTES,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized responsive G2 peer is physically available "
+                "for live single/multipart framing, retransmission, timeout, "
+                "CRC-failure, and dual-glasses callback evidence; the "
+                "authorized right temple is nonresponsive and the left "
+                "temple must remain stock."
+            ),
         },
         "limitations": [
             "the exact private G2 source and producing commit remain unavailable",
             "five conservative current labels use behavior plus prior-G2 order because no current function-name string survives",
             "provider commits identify reusable upstream seams but cannot identify the private first-party transport revision",
-            "linked-object closure does not make the callback ABI production-routable without a dedicated clean-room implementation and target validation",
+            "hardware traffic validation remains blocked by unavailable authorized responsive physical peer evidence",
         ],
     }
 
