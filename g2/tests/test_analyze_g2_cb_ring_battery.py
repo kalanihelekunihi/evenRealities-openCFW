@@ -46,8 +46,16 @@ class G2CbRingBatteryTests(unittest.TestCase):
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
         self.assertFalse(p["new_version_discriminator"])
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routed_without_a_hardware_gap(self):
+        p = self.report["production"]
+        self.assertEqual(
+            (p["production_routed"], p["source_functions"],
+             p["compiled_text_bytes"], p["alignment_bytes"],
+             p["strict_relocations"], p["stock_replaced_bytes"],
+             p["retained_diagnostic_pool_bytes"],
+             p["software_functional_gap"], p["hardware_validation"]),
+            (True, 5, 88, 2, 5, 122, 30, False, "not-applicable"),
+        )
 
 
 if __name__ == "__main__":

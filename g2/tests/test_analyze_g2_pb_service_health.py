@@ -40,7 +40,7 @@ class AnalyzeG2PbServiceHealthTests(unittest.TestCase):
         self.assertEqual([contract["message_bytes"], contract["encode_capacity"]],
                          [0x31C, 0x100])
         self.assertEqual(contract["multi_highlight_count_bits"], 16)
-        self.assertFalse(contract["multi_highlight_wrapper_has_explicit_count_bound"])
+        self.assertTrue(contract["multi_highlight_wrapper_has_explicit_count_bound"])
 
     def test_lineage_and_production_boundary(self) -> None:
         lineage = self.report["lineage"]
@@ -50,10 +50,24 @@ class AnalyzeG2PbServiceHealthTests(unittest.TestCase):
         self.assertEqual(lineage["assertion_lines"],
                          [109, 132, 213, 237, 313, 336, 374, 398])
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_health.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertTrue(production["source_inventory_available"])
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(
+            (
+                production["source_functions"],
+                production["compiled_text_bytes"],
+                production["alignment_bytes"],
+                production["stock_replaced_bytes"],
+                production["strict_relocations"],
+            ),
+            (9, 940, 8, 3092, 20),
+        )
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

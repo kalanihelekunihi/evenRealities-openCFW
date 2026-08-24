@@ -39,8 +39,17 @@ class G2CallbackFacadesTests(unittest.TestCase):
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
         self.assertFalse(a["new_version_discriminator"])
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_closure(self):
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(
+            (production["source_functions"], production["compiled_text_bytes"],
+             production["alignment_bytes"], production["stock_replaced_bytes"],
+             production["strict_relocations"],
+             production["retained_literal_pool_bytes"]),
+            (10, 208, 6, 380, 10, 68),
+        )
 
 
 if __name__ == "__main__":

@@ -715,7 +715,7 @@ class FreeRTOSQueueSemaphoreTakeUpstreamCandidateTests(unittest.TestCase):
         self.assertEqual(provider["size"], 3_690_822)
         self.assertEqual(
             provider["sha256"],
-            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
+            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
         )
         region = next(
             item for item in manifest["component_overrides"]["apollo_main"]["regions"]

@@ -20,6 +20,21 @@ IMAGE_BYTES = 3_523_396
 IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 MAP = ROOT / "tools/manifests/packetcraft-cordio-smpi-act-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-smpi-act-provenance.tsv"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_smpi_act.c"
+PRODUCTION_SOURCE_SIZE = 16_690
+PRODUCTION_SOURCE_SHA256 = "0a19fb3adddd4ae6b9a71a4b012b2dea23cc3999938e3e6be1f8da4772a538df"
+PRODUCTION_ROUTES = {
+    "open_cfw_cordio_smpi_pair_request": (180784, 140, "ec24f8ac35a2e004f0d3290dce6d4d44e4bc7ce489881bebfb155a2cf241edff"),
+    "open_cfw_cordio_smpi_check_security_request": (180924, 22, "8833b22dd7c1ee01e7008eb4ae35fbc2c5568edeb48fa8e498f474919b5f348a"),
+    "open_cfw_cordio_smpi_process_security_request": (180948, 44, "2b4bf2afafcb7e9760994679686fe608a52e4a5ec28a3e13fe08fecc6801b38d"),
+    "open_cfw_cordio_smpi_process_pair_response": (180992, 112, "640ae77bc4e4d1f8e089d7c42c96a8a2b257214dec1a1058c359f441dc40244c"),
+    "open_cfw_cordio_smpi_process_pair_confirm": (181104, 74, "e31dd4e016d83d584cf231bb63546dcaa9380264c0939c513627a419bfc3cf98"),
+    "open_cfw_cordio_smpi_confirm_verify": (181180, 100, "a8450550a9e8492ca79d549b326044d3f6c121b66ce399e553491ce8ce6931e2"),
+    "open_cfw_cordio_smpi_stk_encrypt": (181280, 76, "9cf4bb931b9b8248cdeea6364230964a309fd2079dca80e38b7241c1bdbd54ab"),
+    "open_cfw_cordio_smpi_setup_key_distribution": (181356, 148, "66617b6e2bed5e91464eb30505f15faed8f1381771bc12bc99a777971ec6edf9"),
+    "open_cfw_cordio_smpi_receive_key": (181504, 54, "69315b8f2ac2f75fbd4a7c541bab74e0970b36aad69b6e2cbe842a40f8f3df91"),
+    "open_cfw_cordio_smpi_send_key": (181560, 50, "6d43669f43a1b49d64eff8f4424ac27f5b0eeafe205ba23c73f296a5c518279b"),
+}
 PINS = {
     MAP: "a0fcd353e2cb16c6c71eda095ca7af07f13d9d6c4eb6d1bb82561513347316d9",
     PROVENANCE: "4f39b941305bd4d4ea95c53a4550e5aa5331bb7a2a0a12d56d94f5dc3515ca06",
@@ -75,6 +90,55 @@ def load_rows() -> list[tuple[str, int, int, str]]:
             rows.append((row["function"], int(row["stock_start"], 0),
                          int(row["stock_end_exclusive"], 0), row["stock_sha256"]))
     return rows
+
+
+def production_report(linked: list[tuple[str, int, int, str]]) -> dict:
+    source = PRODUCTION_SOURCE.read_bytes()
+    if len(source) != PRODUCTION_SOURCE_SIZE or sha(source) != PRODUCTION_SOURCE_SHA256:
+        raise RuntimeError("Cordio legacy initiator production source identity changed")
+    text = source.decode("utf-8")
+    if "ccb->key_ready = 1U;" not in text or "OPEN_CFW_SMPI_STK_ENCRYPT_ONLY" not in text:
+        raise RuntimeError("Cordio legacy initiator r20/R4 behavior changed")
+    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
+    leaves = {x["function"]: x for x in overlay.get("relocated_leaves", [])
+              if x.get("function") in PRODUCTION_ROUTES}
+    patches = {x["target_function"]: x for x in overlay.get("patch_sites", [])
+               if x.get("target_function") in PRODUCTION_ROUTES}
+    if set(leaves) != set(PRODUCTION_ROUTES) or set(patches) != set(PRODUCTION_ROUTES):
+        raise RuntimeError("Cordio legacy initiator production routing is incomplete")
+    source_path = PRODUCTION_SOURCE.relative_to(ROOT).as_posix()
+    for (function, (offset, size, digest)), stock in zip(PRODUCTION_ROUTES.items(), linked):
+        stock_name, start, end, stock_digest = stock
+        leaf = leaves[function]; record = leaf.get("source", {}); patch = patches[function]
+        if (leaf.get("profiles") != ["apple-clang"] or record.get("path") != source_path
+                or record.get("size") != PRODUCTION_SOURCE_SIZE
+                or record.get("sha256") != PRODUCTION_SOURCE_SHA256
+                or record.get("license") != "Apache-2.0"
+                or record.get("upstream_commit") != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6"
+                or leaf.get("expected", {}).get("offset") != offset
+                or leaf.get("expected", {}).get("size") != size
+                or leaf.get("expected", {}).get("sha256") != digest
+                or leaf.get("strict_relocation_contract") is not True):
+            raise RuntimeError(f"Cordio legacy initiator production leaf changed: {function}")
+        if (patch.get("profiles") != ["apple-clang"] or patch.get("runtime_address") != start
+                or patch.get("expected_size") != end - start
+                or patch.get("expected_sha256") != stock_digest
+                or patch.get("branch") != "b_w"):
+            raise RuntimeError(f"Cordio legacy initiator stock patch changed: {stock_name}")
+    return {
+        "status": "production-routed authenticated Packetcraft r20.05c legacy initiator actions",
+        "candidate": source_path,
+        "production_routed": True,
+        "live_functions": len(PRODUCTION_ROUTES),
+        "relocated_functions": len(PRODUCTION_ROUTES),
+        "compiled_leaf_bytes": sum(route[1] for route in PRODUCTION_ROUTES.values()),
+        "source_owned_bytes_added": 830,
+        "stock_bytes_replaced": sum(end - start for _, start, end, _ in linked),
+        "hardware_validation": (
+            "blocked by unavailable authorized G2/EM9305 legacy initiator pairing, "
+            "confirm/random, STK encryption, key distribution, retry, and interoperability physical evidence"
+        ),
+    }
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -175,7 +239,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "discriminator": "stock writes smpCcb.keyReady at +0x44; r19/AmbiqSuite 2.x lacks that assignment",
             "historical_generating_commit_resolved": False,
         },
-        "production": {"stock_bytes_replaced": 0, "source_owned_bytes_added": 0},
+        "production": production_report(rows),
     }
 
 

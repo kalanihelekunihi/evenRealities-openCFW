@@ -26,7 +26,26 @@ class ZeroAnchorClosureTests(unittest.TestCase):
 
     def test_evidence_and_production(self):
         self.assertEqual(self.r["evidence"], {'boundary_guards': True, 'pointer_cells': ['0x00503238'], 'path_string_run_address': '0x006EF958', 'tag_strings': 5})
-        self.assertFalse(self.r["production"]["production_routed"])
+        self.assertEqual(
+            self.r["production"],
+            {
+                "candidate": "components/apollo_main/core_overlay/service_gesture_processor.c",
+                "production_routed": True,
+                "ownership_bytes": 2954,
+                "source_inventory_available": True,
+                "source_functions": 5,
+                "compiled_text_bytes": 1608,
+                "alignment_bytes": 6,
+                "stock_replaced_bytes": 1346,
+                "strict_relocations": 53,
+                "software_functional_gap": False,
+                "hardware_validation": "blocked",
+                "hardware_blocker": (
+                    "No authorized physical G2 touch/proximity device or captured "
+                    "gesture electrical/event/timing evidence is available."
+                ),
+            },
+        )
 
 
 if __name__ == "__main__":

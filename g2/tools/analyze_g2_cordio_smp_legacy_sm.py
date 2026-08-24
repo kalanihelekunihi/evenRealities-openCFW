@@ -21,6 +21,22 @@ IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 FUNCTION_MAP = ROOT / "tools/manifests/packetcraft-cordio-smp-legacy-sm-function-map.tsv"
 TABLE_MAP = ROOT / "tools/manifests/packetcraft-cordio-smp-legacy-sm-table-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-smp-legacy-sm-provenance.tsv"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_smp_legacy_sm.c"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+PRODUCTION_SOURCE_SIZE = 8797
+PRODUCTION_SOURCE_SHA256 = "9a90b81d01f83ca8daa21cf645594188a6e7feb61a40f61b2afee089063d5c01"
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_cordio_smpi_initialize",
+    "open_cfw_cordio_smpr_initialize",
+)
+PRODUCTION_PATCHES = {
+    "replace_cordio_smpi_initialize": (0x00537EEC, 22),
+    "replace_cordio_smpr_initialize": (0x005380DC, 22),
+}
+PRODUCTION_DISPATCH_SYMBOL = "open_cfw_cordio_smp_legacy_dispatch"
+PRODUCTION_DISPATCH_SIZE = 705
+PRODUCTION_DISPATCH_SHA256 = "3f64e85789a57cd89df7ab2430791d143db0567a016cf0632d76ff32af16728e"
 PINS = {
     FUNCTION_MAP: "7fe82b6779d5b7107f21232cdcad458b74e5a2162bd6ffc9d52d04f3e10357bb",
     TABLE_MAP: "e3f18ad5e0b893ad116111dc01978e91aa48d946370b6237553ce84401e9655a",
@@ -244,6 +260,75 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if stored_entries or stored_interiors:
         raise RuntimeError("stored legacy initializer entry/interior closure changed")
 
+    source = PRODUCTION_SOURCE.read_bytes()
+    if len(source) != PRODUCTION_SOURCE_SIZE or sha(source) != PRODUCTION_SOURCE_SHA256:
+        raise RuntimeError("production legacy state-machine source changed")
+    overlay_config = json.loads(OVERLAY_CONFIG.read_text(encoding="utf-8"))
+    configured_leaves = {
+        item.get("function"): item
+        for item in overlay_config.get("relocated_leaves", [])
+        if item.get("function") in PRODUCTION_FUNCTIONS
+    }
+    if tuple(configured_leaves) != PRODUCTION_FUNCTIONS:
+        raise RuntimeError("production legacy state-machine leaf order changed")
+    configured_sites = {
+        item.get("name"): item
+        for item in overlay_config.get("patch_sites", [])
+        if item.get("name") in PRODUCTION_PATCHES
+    }
+    for name, (address, size) in PRODUCTION_PATCHES.items():
+        site = configured_sites.get(name)
+        if (
+            site is None
+            or site.get("runtime_address") != address
+            or site.get("expected_size") != size
+            or site.get("branch") != "b_w"
+            or site.get("target_function") not in PRODUCTION_FUNCTIONS
+        ):
+            raise RuntimeError(f"production route changed: {name}")
+    data_group = next(
+        (
+            item
+            for item in overlay_config.get("in_place_data", [])
+            if item.get("symbol") == PRODUCTION_DISPATCH_SYMBOL
+        ),
+        None,
+    )
+    if (
+        data_group is None
+        or data_group.get("expected", {}).get("size") != PRODUCTION_DISPATCH_SIZE
+        or data_group.get("expected", {}).get("sha256") != PRODUCTION_DISPATCH_SHA256
+        or len(data_group.get("placements", [])) != 37
+        or any(
+            not item.get("name", "").startswith("legacy_")
+            for item in data_group.get("placements", [])
+        )
+    ):
+        raise RuntimeError("production legacy dispatch-data contract changed")
+
+    build_report = json.loads(OVERLAY_REPORT.read_text(encoding="utf-8"))
+    reported_functions = build_report.get("overlay", {}).get("functions", {})
+    if any(name not in reported_functions for name in PRODUCTION_FUNCTIONS):
+        raise RuntimeError("production legacy state-machine functions are not built")
+    reported_sites = {
+        item.get("name"): item
+        for item in build_report.get("overlay", {}).get("patched_sites", [])
+    }
+    if any(name not in reported_sites for name in PRODUCTION_PATCHES):
+        raise RuntimeError("production legacy state-machine routes are not patched")
+    reported_data = build_report.get("overlay", {}).get("patched_in_place_data", [])
+    if (
+        len(
+            [
+                item
+                for item in reported_data
+                if item.get("symbol") == PRODUCTION_DISPATCH_SYMBOL
+            ]
+        )
+        != 37
+    ):
+        raise RuntimeError("production legacy dispatch data is not installed")
+
     return {
         "schema_version": 1,
         "module": {
@@ -278,7 +363,25 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "initiator_release_invariant": True,
             "historical_generating_commit_resolved": False,
         },
-        "production": {"stock_bytes_replaced": 0, "source_owned_bytes_added": 0},
+        "production": {
+            "source_path": str(PRODUCTION_SOURCE.relative_to(ROOT)),
+            "function_count": 2,
+            "compiled_closure_bytes": 88,
+            "alignment_bytes": 0,
+            "dispatch_data_bytes": PRODUCTION_DISPATCH_SIZE,
+            "dispatch_placement_count": 37,
+            "stock_bytes_replaced": 749,
+            "source_owned_bytes_added": 793,
+            "all_function_entries_routed": True,
+            "all_dispatch_data_installed": True,
+            "hardware_validation": {
+                "status": "blocked",
+                "reason": (
+                    "authorized physical G2/EM9305 legacy pairing and controller "
+                    "evidence is unavailable"
+                ),
+            },
+        },
     }
 
 

@@ -21,6 +21,9 @@ retained_path	D:\01_workspace\s200_ap510b_iar_git\platform\service\eAT\at_buzzer
 retained_path_pointer_cell	0x005A53D4
 subcommands	note, play, start, stop
 driver_calls	DRV_BuzzerPlayNote 0x00502BF8; DRV_BuzzerPlay 0x00502BF0; DRV_BuzzerStart 0x00502C88; DRV_BuzzerStop 0x00502D4C
-production_routed	false
-ownership_bytes	0
-source_inventory	unavailable; linked-object census complete but source-only function count unknown
+production_routed	true under reviewed apple-clang profile
+ownership_bytes	3948 (1208 generated stock replacement + 2740 compiled source)
+source_inventory	1 independently authored production function; historical source-only inventory remains unavailable
+production_source	components/apollo_main/core_overlay/at_buzzer.c; 11707 bytes; 9e0b37c03975f2f588300922507789599f63b162a77533aa6c40c7703601da7a
+compiled_text	2740 bytes in 1 relocated leaf; 23 strict relocations
+hardware_validation	blocked; no authorized physical G2 buzzer/piezo evidence available

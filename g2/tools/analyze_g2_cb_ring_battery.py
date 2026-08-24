@@ -19,11 +19,27 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-cb-ring-battery-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-cb-ring-battery-closure.tsv"
 PM = ROOT / "tools/manifests/g2-cb-ring-battery-provider-map.tsv"
+PV = ROOT / "tools/manifests/g2-cb-ring-battery-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/cb_ring_battery.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FM: "b48263f7670992e341ee5ec0e5d320398059934570a2abf18d5bdf5af24dee35",
-    CL: "db90e19077210eb488713ef7bf059375e4f1a1ef793039ac8627d65b01223742",
+    CL: "9bb55be62d824cbbe3d94ed123b2d67a202c3918617443101d59858a105ed8ac",
     PM: "3eb7fbd3b29fcf655b8795c32dcf37c4eb473b4886380d94ae7ec69cbf618131",
+    PV: "0a763c9f929aae87ed46d96ef62bddac7b733bdb7be80d06ee9e220117da742e",
 }
+SOURCE_SIZE = 3136
+SOURCE_SHA256 = "dfade488fa37a47b8c242916ea7f6a89334339c3ebe181c26d6cb3a9b359f294"
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_cb_ring_battery_forward", "open_cfw_cb_ring_battery_init",
+    "open_cfw_cb_ring_battery_deinit", "open_cfw_cb_ring_battery_register",
+    "open_cfw_cb_ring_battery_notify",
+)
+PRODUCTION_PATCHES = tuple("replace_cb_ring_battery_" + name for name in (
+    "forward", "init", "deinit", "register", "notify",
+))
 F = (
     (0x500378, 0x500380), (0x500380, 0x50038C),
     (0x50038C, 0x500396), (0x500396, 0x5003E4),
@@ -153,9 +169,74 @@ def analyze(image: Path = IMAGE) -> dict:
         if _cstring(blob, target) != expected:
             raise c.AuditError(f"literal string changed at 0x{pool_address:08x}")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any("cb_ring_battery" in item.get("path", "").lower() for item in overlay["sources"]):
-        raise c.AuditError("unimplemented facade entered overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sh(source) != SOURCE_SHA256:
+        raise c.AuditError("production ring-battery source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = {
+        item.get("function"): item
+        for item in overlay["relocated_leaves"]
+        if item.get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(leaves) != set(PRODUCTION_FUNCTIONS):
+        raise c.AuditError("production ring-battery leaf inventory changed")
+    expected_sizes = (4, 20, 12, 22, 30)
+    expected_offsets = (193488, 193492, 193512, 193524, 193548)
+    if any(
+        leaf["source"].get("path")
+        != "components/apollo_main/core_overlay/cb_ring_battery.c"
+        or leaf["source"].get("size") != SOURCE_SIZE
+        or leaf["source"].get("sha256") != SOURCE_SHA256
+        or leaf.get("strict_relocation_contract") is not True
+        or leaf.get("profiles") != ["apple-clang"]
+        or leaf["expected"].get("size") != expected_size
+        or leaf["expected"].get("offset") != expected_offset
+        for leaf, expected_size, expected_offset in zip(
+            (leaves[name] for name in PRODUCTION_FUNCTIONS),
+            expected_sizes, expected_offsets,
+        )
+    ):
+        raise c.AuditError("production ring-battery source/placement pins changed")
+    if sum(len(leaves[name]["relocations"]) for name in PRODUCTION_FUNCTIONS) != 5:
+        raise c.AuditError("production ring-battery relocation count changed")
+    patches = {
+        item.get("name"): item for item in overlay["patch_sites"]
+        if item.get("name") in PRODUCTION_PATCHES
+    }
+    if set(patches) != set(PRODUCTION_PATCHES) or any(
+        patches[name].get("target_function") != function
+        for name, function in zip(PRODUCTION_PATCHES, PRODUCTION_FUNCTIONS)
+    ):
+        raise c.AuditError("production ring-battery patch routing changed")
+    report = json.loads(REPORT.read_text())
+    if (
+        report["overlay"]["size"], report["overlay"]["sha256"],
+        report["component"]["size"], report["component"]["sha256"],
+    ) != (
+        197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise c.AuditError("production ring-battery build pins changed")
+    manifest = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_main"]
+    if manifest["provider"].get("size") != 3720884 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
+        raise c.AuditError("production ring-battery manifest provider changed")
+    region_names = {item["name"] for item in manifest["regions"]}
+    required_regions = {
+        "cb_ring_battery_forward_source_replacement",
+        "cb_ring_battery_init_source_replacement",
+        "cb_ring_battery_deinit_source_replacement",
+        "cb_ring_battery_register_source_replacement",
+        "cb_ring_battery_notify_source_replacement",
+        "cb_ring_battery_retained_pool",
+        "cb_ring_battery_forward_source_text",
+        "cb_ring_battery_init_source_text",
+        "cb_ring_battery_deinit_source_text",
+        "cb_ring_battery_register_source_text",
+        "cb_ring_battery_notify_source_alignment",
+        "cb_ring_battery_notify_source_text",
+    }
+    if not required_regions <= region_names:
+        raise c.AuditError("production ring-battery manifest regions changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -190,7 +271,20 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": {
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "source_inventory_available": True,
+            "source_functions": 5,
+            "compiled_text_bytes": 88,
+            "alignment_bytes": 2,
+            "strict_relocations": 5,
+            "stock_replaced_bytes": 122,
+            "retained_diagnostic_pool_bytes": 30,
+            "diagnostic_logging": "stock EasyLogger observability omitted; callback forwarding and list operations preserved",
+            "software_functional_gap": False,
+            "hardware_validation": "not-applicable",
+        },
     }
 
 

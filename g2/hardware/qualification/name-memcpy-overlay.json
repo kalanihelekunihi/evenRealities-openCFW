@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "name": "apollo_name_memcpy_qualification_overlay",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "run_base": 4423680,
+  "preamble_bytes": 32,
+  "alignment": 4,
+  "base": {
+    "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "size": 3523396,
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "overlay_artifact": "apollo_name_memcpy_qualification_overlay.bin",
+  "sources": [
+    {
+      "path": "components/apollo_main/core_overlay/ble_advertised_name.c",
+      "size": 3464,
+      "sha256": "b97c162d59cf1029f2a8b3e22966a36bb8897160246f09dd098879ce38818e65",
+      "license": "GPL-3.0-only",
+      "origin": "openCFW bounded final-copy G2 advertised-name serial-suffix rewrite",
+      "evidence": "docs/research/g2-advertised-name-serial-suffix.md"
+    }
+  ],
+  "toolchain": {
+    "target": "thumbv7em-none-eabi",
+    "reviewed_version_prefix": "Apple clang version 21.0.0",
+    "reviewed_source_root": "/Users/kalani/Repo/SybilSight/openCFW",
+    "include_dirs": [
+      "components/apollo_main/core_overlay/tlsf_compat"
+    ],
+    "flags": [
+      "-mthumb",
+      "-O2",
+      "-ffreestanding",
+      "-fno-jump-tables",
+      "-fomit-frame-pointer",
+      "-fno-builtin",
+      "-mno-unaligned-access",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fropi",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ]
+  },
+  "expected": {
+    "overlay_size": 564,
+    "overlay_sha256": "452015cb45904889bf158a0040ba6812980116bdd68a7aa3b83fd1b2f360be87",
+    "component_size": 3523960,
+    "component_sha256": "3413c5e22d750a45c98ca8c6bd31668d84c8177e87b048e5a6896e98a9e591eb"
+  },
+  "functions": [
+    "open_cfw_copy_advertised_name_pair_suffix",
+    "open_cfw_iar_memcpy_void"
+  ],
+  "patch_sites": [
+    {
+      "name": "rewrite_g2_advertised_name_suffix",
+      "runtime_address": 4644264,
+      "expected_hex": "cbf71cff",
+      "branch": "bl",
+      "target_function": "open_cfw_copy_advertised_name_pair_suffix"
+    },
+    {
+      "name": "replace_iar_memcpy_public",
+      "runtime_address": 4430820,
+      "expected_size": 32,
+      "expected_sha256": "e0294160ea267d7f79540d517dc72e5a084496cbd167c0d301640609f78a810f",
+      "branch": "b_w",
+      "target_function": "open_cfw_iar_memcpy_void"
+    }
+  ],
+  "isolated_leaves": [],
+  "relocated_leaves": [
+    {
+      "function": "open_cfw_iar_memcpy_void",
+      "source": {
+        "path": "components/apollo_main/core_overlay/candidates/iar_runtime_memory.S",
+        "size": 6903,
+        "sha256": "3afa1466d5bd4d57a81d6b31debbb077eee1cecab029eebfbeff690a7658841d",
+        "license": "GPL-3.0-only",
+        "origin": "clean-room source recreation of authenticated IAR void-EABI memory-provider semantics",
+        "evidence": "docs/research/iar-runtime-memory-source-candidate.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DOPEN_CFW_IAR_MEMORY_SELECTION=0"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 152,
+        "sha256": "ee2582dc5c82d4bd438403a2682be0debc10c301ec0549942b7c56baa61d026f",
+        "alignment": 2,
+        "offset": 412,
+        "unrelocated_sha256": "ee2582dc5c82d4bd438403a2682be0debc10c301ec0549942b7c56baa61d026f"
+      },
+      "relocations": []
+    }
+  ],
+  "in_place_leaves": [],
+  "in_place_data": []
+}

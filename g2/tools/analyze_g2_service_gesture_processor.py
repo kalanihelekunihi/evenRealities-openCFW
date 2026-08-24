@@ -18,7 +18,12 @@ import recover_apollo_embedded_source_paths as t
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-service-gesture-processor-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-service-gesture-processor-closure.tsv"
-PINS = {FM: "9cba1744560a8e25c60baae07d8b636af0fae55f19c03194e5049f255333e1c2", CL: "1b9731141c2e94281cb02261343218573c0a8de3fb55138e799fb9f0b1fcfb89"}
+PV = ROOT / "tools/manifests/g2-service-gesture-processor-provenance.tsv"
+PINS = {
+    FM: "9cba1744560a8e25c60baae07d8b636af0fae55f19c03194e5049f255333e1c2",
+    CL: "716968c1639fc0f7aa34014d972e51391e235dc54aa065ece88555d21f972429",
+    PV: "9e9c9632bcb53acb6e7dfbc1bc832dbe4ccf067f8c9f4361edbd75c5a4d8e8ff",
+}
 RETAINED = 'platform\\input\\service_gesture_processor.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\platform\\input\\service_gesture_processor.c'
 PATH_RUN = 0x6ef958
@@ -39,6 +44,25 @@ GUARD_BEFORE = "2bc01ec5e95e2923011a467ec0482e180f244638f4d97437441eaa09e8d4b6e5
 GUARD_AFTER = "e58e99b80491e982182e598ebccec8d3442b4d7f56fcdea42907fb20ff0f259c"
 TAGS = ((7182708, '[touch.ges]prox:%d, bsln:%5d, kv_bsln:%5d, raw:%5d, diff:%4d, diffX:%3d, speed:%3d, slider:(0x%02x)%s'), (7439780, '[touch.ges]slider mask = 0x%02x(%s), diffX = %d, speed = %d'), (7615064, '[touch.ges]SLIDER_EVENT_ERROR: reset touch'), (7659116, '[touch.ges]EVENT_SLIDER_SINGLE_CLICK'), (7845972, '[touch.ges]prox=%s(%u)'))
 EXPECTED = {'body_bytes': 1236, 'body_concat_sha256': 'f186aaeacbf76358d14fffade60bd89d5d96ba461ab532fad46e42f7adad8e67', 'reachable_instructions': 501, 'reachable_instruction_digest': '67bf73953599ffd053c5576edd27780218b5945dedfac9b5968b6d53959bb7d9', 'direct_body_calls': 68, 'direct_body_call_digest': 'e4ded3f6a231435d565dec70a0c0042b209c8088357e2badda8d9bef62f18bc4', 'internal_direct_body_calls': 6, 'outer_pool_bytes': 110, 'outer_pool_sha256': 'ce96250122876b614088497597f95efcf99727bbfc28a719668174540087c515', 'physical_bytes': 1346, 'physical_sha256': 'e6275f41dcacabc796afb33e5ba14d76129076334014119879f80344e32904cf', 'path_literal_references': 5}
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/service_gesture_processor.c"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PRODUCTION_SOURCE_PIN = (13061, "c69b64097eef2fc592c4be97a1d7a9b0bad9a701544ecc18510ad7aab6c7db4c")
+LEAF_PINS = {
+    "open_cfw_gesture_production_click": (118, "8d5df040247142cdc8888e431baeb7edd824a01ac17a1043d60df20dda4ad933", 188812, "1a927d88a6295264f535e25a76ff34d32c63f3ba34fb3976e737b90eceb722af", 6, 0),
+    "open_cfw_gesture_get_proximity": (12, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 188932, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 0, 2),
+    "open_cfw_gesture_event_name": (14, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 188944, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 0, 0),
+    "open_cfw_gesture_format_mask": (586, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 188960, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 0, 2),
+    "open_cfw_gesture_process": (878, "1f8f5af41a31b17ee71a36c0927dfca419eefc864002efb06efbe186bc8be438", 189548, "bb6df8074642bd52fd73485f4350ac7afe2b8be99da7e4b09861b4f558e65397", 47, 2),
+}
+PATCH_PINS = {
+    "replace_gesture_production_click": (0x00502D56, 88, "b9c55e0c9d939dbff58ce1aa4ad91209f714c6435f4ff654e9e869aa921c71a8", "open_cfw_gesture_production_click"),
+    "replace_gesture_get_proximity": (0x00502DAE, 8, "b0b65aa4b0b432c33fd6590774165cafc3afa6a4f4fdc43e6341cbaed467b44c", "open_cfw_gesture_get_proximity"),
+    "replace_gesture_event_name": (0x00502DB6, 12, "6ca0a840c9b5efbaa84e75741a8f559f5f3202d43718f76f0e15dd2e49a55d01", "open_cfw_gesture_event_name"),
+    "replace_gesture_format_mask": (0x00502DC2, 306, "8547b6ea3fc608b92b8187fd93f081ffc3869985cc1cca493ecd471ad4463b7e", "open_cfw_gesture_format_mask"),
+    "replace_gesture_process": (0x00502EF4, 932, "86795b9e46101113d97297579064958c76f33ad4973ed691d6ba2bea3e91517f", "open_cfw_gesture_process"),
+}
 DECODER = Cs(CS_ARCH_ARM, CS_MODE_THUMB | CS_MODE_LITTLE_ENDIAN | CS_MODE_MCLASS)
 DECODER.detail = True
 
@@ -231,9 +255,165 @@ def analyze(image=IMAGE):
     for address, text in TAGS:
         if _cstring(blob, address) != text:
             raise c.AuditError("tag string changed")
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any(x.get("path", "").replace("\\", "/").split("/")[-1].lower() == 'service_gesture_processor.c' for x in overlay["sources"]):
-        raise c.AuditError("object entered production overlay")
+    source = PRODUCTION_SOURCE.read_bytes()
+    if (len(source), _sh(source)) != PRODUCTION_SOURCE_PIN:
+        raise c.AuditError("production gesture source changed")
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves = {
+        item.get("function"): item
+        for item in overlay.get("relocated_leaves", [])
+        if item.get("function") in LEAF_PINS
+    }
+    if set(leaves) != set(LEAF_PINS) or not set(LEAF_PINS) <= set(overlay["functions"]):
+        raise c.AuditError("production gesture leaf inventory changed")
+    external_targets = {
+        "open_cfw_retained_gesture_log_level": 0x0043D0CE,
+        "open_cfw_retained_gesture_log": 0x0043D574,
+        "open_cfw_retained_gesture_trace": 0x0043CE9E,
+        "open_cfw_retained_gesture_hexdump": 0x00475D78,
+        "open_cfw_retained_gesture_touch_read": 0x0055B676,
+        "open_cfw_retained_gesture_touch_stop": 0x0055B64A,
+        "open_cfw_retained_gesture_touch_prepare_baseline": 0x0055B6DC,
+        "open_cfw_retained_gesture_product_mode": 0x004ABE60,
+        "open_cfw_retained_gesture_buzzer_play": 0x00502BF0,
+        "open_cfw_retained_gesture_proximity_notify": 0x0049EAE2,
+        "open_cfw_retained_gesture_timestamp": 0x004C5874,
+        "open_cfw_retained_gesture_publish": 0x004C5916,
+    }
+    sibling_targets = {
+        "open_cfw_gesture_production_click",
+        "open_cfw_gesture_event_name",
+        "open_cfw_gesture_format_mask",
+    }
+    expected_offsets = {
+        "open_cfw_gesture_production_click": (0x0E, 0x12, 0x46, 0x4A, 0x52, 0x72),
+        "open_cfw_gesture_get_proximity": (),
+        "open_cfw_gesture_event_name": (),
+        "open_cfw_gesture_format_mask": (),
+        "open_cfw_gesture_process": (
+            0x1A, 0x26, 0x4E, 0x6E, 0xBA, 0xBE, 0xC6, 0xE0,
+            0x108, 0x112, 0x11C, 0x14A, 0x14E, 0x156, 0x160,
+            0x17C, 0x190, 0x19C, 0x1A8, 0x1B2, 0x1BC, 0x1F4,
+            0x1F8, 0x200, 0x20A, 0x226, 0x23A, 0x246, 0x25E,
+            0x28E, 0x292, 0x29A, 0x2B0, 0x2B4, 0x2BA, 0x2CE,
+            0x2DA, 0x2FE, 0x30A, 0x314, 0x320, 0x32A, 0x336,
+            0x340, 0x34C, 0x356, 0x362,
+        ),
+    }
+    for name, pin in LEAF_PINS.items():
+        leaf = leaves[name]
+        expected = leaf.get("expected", {})
+        relocations = leaf.get("relocations", [])
+        source_record = leaf.get("source", {})
+        if (
+            leaf.get("profiles") != ["apple-clang"]
+            or not leaf.get("strict_relocation_contract")
+            or source_record.get("path") != "components/apollo_main/core_overlay/service_gesture_processor.c"
+            or (source_record.get("size"), source_record.get("sha256")) != PRODUCTION_SOURCE_PIN
+            or (
+                expected.get("size"), expected.get("sha256"),
+                expected.get("alignment"), expected.get("offset"),
+                expected.get("unrelocated_sha256"), len(relocations),
+            ) != (pin[0], pin[1], 4, pin[2], pin[3], pin[4])
+            or tuple(item.get("offset") for item in relocations) != expected_offsets[name]
+        ):
+            raise c.AuditError("production gesture leaf changed: " + name)
+        for item in relocations:
+            symbol = item.get("symbol")
+            expected_type = (
+                "R_ARM_THM_JUMP24"
+                if name == "open_cfw_gesture_production_click" and item.get("offset") == 0x72
+                else "R_ARM_THM_CALL"
+            )
+            if item.get("type") != expected_type or item.get("symbol_type") != "STT_NOTYPE":
+                raise c.AuditError("production gesture relocation type changed")
+            if symbol in external_targets:
+                if item.get("target_address") != external_targets[symbol] or "target_function" in item:
+                    raise c.AuditError("production gesture retained target changed")
+            elif symbol in sibling_targets:
+                if item.get("target_function") != symbol or "target_address" in item:
+                    raise c.AuditError("production gesture sibling target changed")
+            else:
+                raise c.AuditError("unknown production gesture relocation")
+
+    patches = {
+        item.get("name"): item
+        for item in overlay.get("patch_sites", [])
+        if item.get("name") in PATCH_PINS
+    }
+    if set(patches) != set(PATCH_PINS):
+        raise c.AuditError("production gesture patch inventory changed")
+    for name, pin in PATCH_PINS.items():
+        patch = patches[name]
+        if (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("target_function"),
+            patch.get("branch"), patch.get("profiles"),
+        ) != (pin[0], pin[1], pin[2], pin[3], "b_w", ["apple-clang"]):
+            raise c.AuditError("production gesture patch changed: " + name)
+
+    build = json.loads(OVERLAY_REPORT.read_text())
+    if (
+        build["overlay"]["size"], build["overlay"]["sha256"],
+        build["component"]["size"], build["component"]["sha256"],
+    ) != (
+        197488,
+        "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884,
+        "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise c.AuditError("production gesture build pins changed")
+    built = {
+        item.get("extraction", {}).get("function"): item
+        for item in build.get("relocated_leaves", [])
+        if item.get("extraction", {}).get("function") in LEAF_PINS
+    }
+    if set(built) != set(LEAF_PINS):
+        raise c.AuditError("production gesture compiled inventory changed")
+    for name, pin in LEAF_PINS.items():
+        record = built[name]
+        if (
+            record["placement"].get("size"),
+            record["placement"].get("padding_before"),
+            record["extraction"].get("relocation_count"),
+        ) != (pin[0], pin[5], pin[4]):
+            raise c.AuditError("production gesture compiled closure changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    regions = {item.get("name"): item for item in main["regions"]}
+    source_regions = {
+        "gesture_production_click_source_text": (3712208, 118, 0x007C24B0),
+        "gesture_get_proximity_source_text": (3712328, 12, 0x007C2528),
+        "gesture_event_name_source_text": (3712340, 14, 0x007C2534),
+        "gesture_format_mask_source_text": (3712356, 586, 0x007C2544),
+        "gesture_process_source_text": (3712944, 878, 0x007C2790),
+    }
+    for name, pin in source_regions.items():
+        region = regions.get(name, {})
+        if (
+            region.get("file_offset"), region.get("size"),
+            region.get("target_address"), region.get("address_status"),
+        ) != (*pin, "source_compiled"):
+            raise c.AuditError("production gesture manifest source region changed")
+    for name, pin in PATCH_PINS.items():
+        region_name = name.removeprefix("replace_") + "_source_replacement"
+        region = regions.get(region_name, {})
+        if (
+            region.get("size"), region.get("target_address"),
+            region.get("address_status"),
+        ) != (pin[1], pin[0], "generated_source_entry_replacement"):
+            raise c.AuditError("production gesture manifest replacement changed")
+    if (
+        main["provider"]["size"], main["provider"]["sha256"],
+        manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
+    ) != (
+        3720884,
+        "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        4499378,
+        "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
+    ):
+        raise c.AuditError("production gesture manifest closure changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only zero-anchor linked-object closure",
@@ -241,7 +421,23 @@ def analyze(image=IMAGE):
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": False},
+        "production": {
+            "candidate": "components/apollo_main/core_overlay/service_gesture_processor.c",
+            "production_routed": True,
+            "ownership_bytes": 2954,
+            "source_inventory_available": True,
+            "source_functions": 5,
+            "compiled_text_bytes": 1608,
+            "alignment_bytes": 6,
+            "stock_replaced_bytes": 1346,
+            "strict_relocations": 53,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized physical G2 touch/proximity device or captured "
+                "gesture electrical/event/timing evidence is available."
+            ),
+        },
     }
 
 

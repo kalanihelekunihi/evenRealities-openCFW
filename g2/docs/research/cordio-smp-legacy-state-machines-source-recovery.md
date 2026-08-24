@@ -76,5 +76,24 @@ hashes are in `packetcraft-cordio-smp-legacy-sm-provenance.tsv` and
 `packetcraft-cordio-smp-legacy-sm-function-map.tsv`; the scattered data ledger
 is `packetcraft-cordio-smp-legacy-sm-table-map.tsv`.
 
-Production ownership remains zero. All authenticated stock bytes continue to
-be cut forward pending source compilation and exact placement.
+Production integration is complete in
+`components/apollo_main/core_overlay/cordio_smp_legacy_sm.c`. The two
+initializers compile to 44-byte Thumb leaves (88 bytes total) and replace the
+two authenticated 22-byte stock entries. One compiled 705-byte const object is
+split into 37 exact in-place placements covering both interfaces, both action
+arrays, both state-pointer arrays, both common tables, and all 29 role-specific
+state tables. The manifest labels all 749 replaced stock bytes as generated
+source entry/data replacements and labels the 88 appended bytes as compiled
+source. The canonical Apple build produces the 182,552-byte overlay
+`a83e348f7a3a2c8997245fcfab18f6c25a3ae52b3c40bd7a6e9da61cb9da9fbb`,
+3,705,948-byte component
+`18e108c98e700fadc861f51e21f7b32f0a3fa77de5bf7db6e02dd5d344ce4409`,
+and 4,484,442-byte package
+`ea24a1d9d02aa6187f0d7469dc564065257fc87f242362f209db8606f5da9c81`.
+
+Host initialization, exact compiled dispatch bytes, authenticated stock-table
+equivalence, strict Thumb compilation, production routing, manifest tiling,
+package assembly, and flash-plan generation are validated offline. Authorized
+physical G2/EM9305 legacy-pairing and controller evidence is unavailable, so
+STK exchange, key distribution, timeout/retry, reconnect, and peer
+interoperability validation remain explicitly hardware-blocked.

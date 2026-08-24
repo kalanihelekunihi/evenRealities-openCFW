@@ -20,8 +20,8 @@ CLOSURE = ROOT / "tools/manifests/g2-at-tp-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-tp-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "415f3c4347339e4b7d29258f8a5837fb201cf10a0c3344953941cabe3136075a",
-    CLOSURE: "7d2671dc21701fdba32ff67bce69513f7e7e780ef415c510626f4b8b7b34f0c6",
-    PROVENANCE: "3e67bb8100587ec6d5d5e9ea81303e5d00ac6677492380e3f33521a0df9cd671",
+    CLOSURE: "c2eb28ee6c01b02e4ab37ba2a0655c7b9f982731ff0a498687fb1905ca522714",
+    PROVENANCE: "872e3bbfa76f707ec48397a2fb78fbc238c9ebf1945e621ef73ceb4a129f2fb5",
 }
 PHYSICAL = (0x005A5984, 0x005A5D94)
 PHYSICAL_SHA256 = "d6b869880ca7b842b74efd388baeee07790680c4bc40a20ea0a08bc8cdf7659d"
@@ -107,6 +107,31 @@ STRINGS = {
     0x00727268: "Gesture cfg updated and verified successfully.\r\n",
     0x0078A454: "AT^TP+OK\r\n",
 }
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/at_tp.c"
+OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PRODUCTION_PIN = (
+    9164,
+    "b1865b7ae51a77ccb0ccce05a7b9832a89b6e167171bded7c4915d6afe08fa03",
+)
+PRODUCTION_LEAVES = (
+    (
+        "open_cfw_at_tp_print_gesture_cfg",
+        "OPEN_CFW_AT_TP_PRINT_ONLY",
+        20,
+        "50230ca357e1b9360db9c3f3f0d7d56da99ce9465d69cade7ce271a2616a82cb",
+        184524,
+        1,
+    ),
+    (
+        "open_cfw_at_tp_test",
+        "OPEN_CFW_AT_TP_TEST_ONLY",
+        1528,
+        "6f351a53aa7b2b95bd7242000caf2e5d54871c65e7599f7daf0c3f067dba89c0",
+        184544,
+        17,
+    ),
+)
 
 
 class AuditError(RuntimeError):
@@ -243,9 +268,125 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("stored handler-pointer closure changed")
 
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("at_tp.c" in source.get("path", "").lower() for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented eAT touch-panel module unexpectedly entered production overlay")
+    source = PRODUCTION_SOURCE.read_bytes()
+    if (len(source), sha256(source)) != PRODUCTION_PIN:
+        raise AuditError("production AT^TP source changed")
+    leaf_names = {item[0] for item in PRODUCTION_LEAVES}
+    leaves = {
+        item.get("function"): item
+        for item in overlay.get("relocated_leaves", [])
+        if item.get("function") in leaf_names
+    }
+    if set(leaves) != leaf_names or not leaf_names.issubset(
+        set(overlay.get("functions", []))
+    ):
+        raise AuditError("production AT^TP leaf inventory changed")
+    for name, selector, size, digest, offset, relocations in PRODUCTION_LEAVES:
+        leaf = leaves[name]
+        source_record = leaf.get("source", {})
+        toolchain = leaf.get("toolchain", {})
+        expected = leaf.get("expected", {})
+        if (
+            source_record.get("path")
+            != "components/apollo_main/core_overlay/at_tp.c"
+            or (source_record.get("size"), source_record.get("sha256"))
+            != PRODUCTION_PIN
+            or f"-D{selector}=1" not in toolchain.get("flags", [])
+            or leaf.get("profiles") != ["apple-clang"]
+            or not leaf.get("strict_relocation_contract")
+            or (
+                expected.get("size"), expected.get("sha256"),
+                expected.get("alignment"), expected.get("offset"),
+            ) != (size, digest, 4, offset)
+            or len(leaf.get("relocations", [])) != relocations
+        ):
+            raise AuditError(f"production AT^TP leaf changed: {name}")
+    expected_patches = {
+        "replace_at_tp_print_gesture_cfg": (
+            0x005A5984, 20,
+            "f1c47ad01b8bc1568fa02671aadb3bec56ff4f6d967c99ad33f7fbaf8941767a",
+            "open_cfw_at_tp_print_gesture_cfg",
+        ),
+        "replace_at_tp_test": (
+            0x005A5998, 1020,
+            "26aff044e7f3fa8314f06b54256c16d35576d7c19ce1b33b23f5294fb8de4a06",
+            "open_cfw_at_tp_test",
+        ),
+    }
+    patches = {
+        item.get("name"): item for item in overlay.get("patch_sites", [])
+        if item.get("name") in expected_patches
+    }
+    if set(patches) != set(expected_patches):
+        raise AuditError("production AT^TP patch inventory changed")
+    for name, (address, size, digest, target) in expected_patches.items():
+        patch = patches[name]
+        if (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("target_function"),
+            patch.get("branch"), patch.get("profiles"),
+        ) != (address, size, digest, target, "b_w", ["apple-clang"]):
+            raise AuditError(f"production AT^TP patch changed: {name}")
+    build = json.loads(OVERLAY_REPORT.read_text())
+    if (
+        build["overlay"]["size"], build["overlay"]["sha256"],
+        build["component"]["size"], build["component"]["sha256"],
+    ) != (
+        197488,
+        "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884,
+        "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise AuditError("production AT^TP build pins changed")
+    built = {
+        item.get("extraction", {}).get("function"): item
+        for item in build.get("relocated_leaves", [])
+        if item.get("extraction", {}).get("function") in leaf_names
+    }
+    if (
+        set(built) != leaf_names
+        or sum(item[2] for item in PRODUCTION_LEAVES) != 1548
+        or sum(item["placement"].get("padding_before", 0)
+               for item in built.values()) != 2
+    ):
+        raise AuditError("production AT^TP compiled closure changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    regions = main["regions"]
+    generated = [
+        item for item in regions
+        if item.get("name") in {
+            "at_tp_print_gesture_cfg_source_replacement",
+            "at_tp_test_source_replacement",
+        }
+    ]
+    appended = [
+        item for item in regions
+        if item.get("name") in {
+            "at_tp_print_gesture_cfg_source_text", "at_tp_test_source_text"
+        }
+    ]
+    alignment = [
+        item for item in regions
+        if item.get("name") == "at_tp_print_gesture_cfg_source_alignment"
+    ]
+    if (
+        len(generated), sum(item["size"] for item in generated),
+        len(appended), sum(item["size"] for item in appended),
+        len(alignment), sum(item["size"] for item in alignment),
+    ) != (2, 1040, 2, 1548, 1, 2):
+        raise AuditError("production AT^TP manifest closure changed")
+    if (
+        main["provider"]["size"], main["provider"]["sha256"],
+        manifest["package"]["expected_size"],
+        manifest["package"]["expected_sha256"],
+    ) != (
+        3720884,
+        "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        4499378,
+        "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
+    ):
+        raise AuditError("production AT^TP package pins changed")
 
     return {
         "surface": {
@@ -279,10 +420,21 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "command_record": "[0x006c93a0,0x006c93b0)",
         },
         "production": {
-            "candidate": None,
-            "production_routed": routed,
-            "ownership_bytes": 0,
-            "source_inventory_available": False,
+            "candidate": "components/apollo_main/core_overlay/at_tp.c",
+            "production_routed": True,
+            "ownership_bytes": 2590,
+            "source_inventory_available": True,
+            "source_functions": 2,
+            "compiled_text_bytes": 1548,
+            "alignment_bytes": 2,
+            "stock_replaced_bytes": 1040,
+            "strict_relocations": 18,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized physical G2 touch panel and Cypress "
+                "controller evidence is available in this workspace."
+            ),
         },
     }
 

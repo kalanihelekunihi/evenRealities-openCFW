@@ -1,0 +1,10 @@
+kind	path_or_identity	sha256_or_revision	notes
+official_stock_image	blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin	36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863	Retained production object and ABI oracle only
+production_source	components/apollo_main/core_overlay/service_gesture_processor.c	c69b64097eef2fc592c4be97a1d7a9b0bad9a701544ecc18510ad7aab6c7db4c	Clean-room C implementation of all five recovered service functions
+host_fixture_header	tests/fixtures/service_gesture_processor_host.h	be3f278538137bf227f22640fd96ba51bfd0441c3f9815412a7f9f86dd83e766	Redirects fixed SRAM, touch, buzzer, product-mode, event-publish, and logging providers for host execution
+host_fixture_source	tests/fixtures/service_gesture_processor_host.c	b832ab671f640a7d8f6e1664b37ef7277cbce08d9f3daf11b1697a891c92beb6	Deterministic provider state and event capture
+host_behavior_test	tests/test_service_gesture_processor_candidate.py	e9eee0f0b5b016a45343e6a155a981f46f5740e23f6fd9f7719d1c014c2f33c9	Exercises accessors, mask formatting, production click, proximity, product mode, error preemption, all event bits, thresholds, and selector isolation
+production_overlay	components/apollo_main/core_overlay/overlay.json	a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183	Five strict relocated leaves and five complete stock-span redirects in the canonical Apple-clang image
+production_component	components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin	026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a	3,716,248-byte source-built Apollo component
+production_package	build/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin	03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783	4,494,742-byte deterministic complete firmware package
+hardware_evidence	unavailable	blocked	No authorized physical G2 touch/proximity device or captured electrical/event/timing evidence is available

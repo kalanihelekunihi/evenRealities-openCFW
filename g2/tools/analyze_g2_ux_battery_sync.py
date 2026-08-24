@@ -19,11 +19,20 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-ux-battery-sync-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-ux-battery-sync-closure.tsv"
 PM = ROOT / "tools/manifests/g2-ux-battery-sync-provider-map.tsv"
+PV = ROOT / "tools/manifests/g2-ux-battery-sync-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/ux_battery_sync.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FM: "044811cba6e8cf0ec894c29026b527e121db60db790fb468323dbc06aa89da6f",
-    CL: "2c97aa5bbd317ba6202df459864762ceae71988849f06d79f3407fbdba31c34a",
+    CL: "d6c48af920b4b89ba1cefc6cc910cdab9ab2cf5db2100793c42a5f60dac60c95",
     PM: "e7f0d4fcfae0ce36a2bf4ad061aeb6881ea6bff225e38252a68e24ac70fc5be6",
+    PV: "2e5b288abad5fe930b9783208320505280f60d7ed42c39fd0c99439f20aed0aa",
 }
+SOURCE_SIZE = 3686
+SOURCE_SHA256 = "f0a5be0735deb2547ef5cb202eceef8909ecdd21b5e012f94b880527a2da1724"
+PRODUCTION_FUNCTION = "open_cfw_ux_battery_sync_handler"
 F = ((0x5F958C, 0x5F98D0),)
 PHYS = (0x5F958C, 0x5F9924)
 POOL = (0x5F98D0, 0x5F9924)
@@ -147,9 +156,65 @@ def analyze(image: Path = IMAGE) -> dict:
         if _cstring(blob, target) != expected:
             raise c.AuditError(f"literal string changed at 0x{pool_address:08x}")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any("battery_sync" in item.get("path", "").lower() for item in overlay["sources"]):
-        raise c.AuditError("unimplemented battery sync entered overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sh(source) != SOURCE_SHA256:
+        raise c.AuditError("production battery-sync source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = [item for item in overlay["relocated_leaves"]
+              if item.get("function") == PRODUCTION_FUNCTION]
+    if len(leaves) != 1:
+        raise c.AuditError("production battery-sync leaf inventory changed")
+    leaf = leaves[0]
+    if (
+        leaf["source"].get("path") != "components/apollo_main/core_overlay/ux_battery_sync.c"
+        or leaf["source"].get("size") != SOURCE_SIZE
+        or leaf["source"].get("sha256") != SOURCE_SHA256
+        or leaf.get("strict_relocation_contract") is not True
+        or leaf.get("profiles") != ["apple-clang"]
+        or (leaf["expected"].get("size"), leaf["expected"].get("offset"),
+            leaf["expected"].get("alignment")) != (158, 193580, 4)
+        or len(leaf["relocations"]) != 11
+    ):
+        raise c.AuditError("production battery-sync source/placement changed")
+    patches = [item for item in overlay["patch_sites"]
+               if item.get("name") == "replace_ux_battery_sync_handler"]
+    if len(patches) != 1 or (
+        patches[0].get("runtime_address"), patches[0].get("expected_size"),
+        patches[0].get("expected_sha256"), patches[0].get("branch"),
+        patches[0].get("target_function"), patches[0].get("profiles"),
+    ) != (
+        0x5F958C, 836, "4e196cf085fd48c54bb65acfc14ef1b55f185f598ade74be448e663b1be2945a",
+        "b_w", PRODUCTION_FUNCTION, ["apple-clang"],
+    ):
+        raise c.AuditError("production battery-sync patch routing changed")
+    report = json.loads(REPORT.read_text())
+    if (
+        report["overlay"]["size"], report["overlay"]["sha256"],
+        report["component"]["size"], report["component"]["sha256"],
+    ) != (
+        197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise c.AuditError("production battery-sync build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (
+        main["provider"].get("size"), main["provider"].get("sha256"),
+        manifest["package"].get("expected_size"),
+        manifest["package"].get("expected_sha256"),
+    ) != (
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
+    ):
+        raise c.AuditError("production battery-sync manifest pins changed")
+    region_names = {item["name"] for item in main["regions"]}
+    if not {
+        "ux_battery_sync_handler_source_replacement",
+        "ux_battery_sync_retained_literal_pool",
+        "ux_battery_sync_handler_source_alignment",
+        "ux_battery_sync_handler_source_text",
+    } <= region_names:
+        raise c.AuditError("production battery-sync manifest regions changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -188,7 +253,21 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": {
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "source_inventory_available": True,
+            "source_functions": 1,
+            "compiled_text_bytes": 158,
+            "alignment_bytes": 2,
+            "strict_relocations": 11,
+            "stock_replaced_bytes": 836,
+            "retained_literal_pool_bytes": 84,
+            "diagnostic_logging": "stock EasyLogger observability omitted; six-message dispatch preserved",
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": "No authorized physical G2/peer battery-sync traffic, charger, or ring-state evidence is available.",
+        },
     }
 
 

@@ -36,6 +36,16 @@ class SmpLegacyStateMachineTest(unittest.TestCase):
         self.assertEqual(report["roles"]["initiator"]["action_count"], 25)
         self.assertEqual(report["roles"]["responder"]["action_count"], 27)
         self.assertTrue(report["lineage"]["independent_release_discriminator"])
+        production = report["production"]
+        self.assertEqual(production["function_count"], 2)
+        self.assertEqual(production["compiled_closure_bytes"], 88)
+        self.assertEqual(production["dispatch_data_bytes"], 705)
+        self.assertEqual(production["dispatch_placement_count"], 37)
+        self.assertEqual(production["stock_bytes_replaced"], 749)
+        self.assertEqual(production["source_owned_bytes_added"], 793)
+        self.assertTrue(production["all_function_entries_routed"])
+        self.assertTrue(production["all_dispatch_data_installed"])
+        self.assertEqual(production["hardware_validation"]["status"], "blocked")
 
 
 if __name__ == "__main__":

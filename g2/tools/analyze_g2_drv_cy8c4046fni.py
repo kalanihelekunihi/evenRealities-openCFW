@@ -8,12 +8,34 @@ import analyze_g2_compress_log_core as q
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 from analyze_g2_thread_ble_production import wide_branch_target
-IMAGE=ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin';FM=ROOT/'tools/manifests/g2-drv-cy8c4046fni-function-map.tsv';PM=ROOT/'tools/manifests/g2-drv-cy8c4046fni-provider-map.tsv';CL=ROOT/'tools/manifests/g2-drv-cy8c4046fni-closure.tsv'
-PINS={FM:'17278ba569b6f6b8815d22b306cf431041b77bfc84e4eac4850613c7883eac40',PM:'15d30a5a045ceb6ae871c5a43aad6cd06e438a7f363c92407dc14e7f2bf7cc5a',CL:'1a3f94eb3fb964a806983d00cd7ba948270b8b22bcda7a5a6388a6db46d71733'}
+IMAGE=ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin';FM=ROOT/'tools/manifests/g2-drv-cy8c4046fni-function-map.tsv';PM=ROOT/'tools/manifests/g2-drv-cy8c4046fni-provider-map.tsv';CL=ROOT/'tools/manifests/g2-drv-cy8c4046fni-closure.tsv';PV=ROOT/'tools/manifests/g2-drv-cy8c4046fni-provenance.tsv'
+PINS={FM:'17278ba569b6f6b8815d22b306cf431041b77bfc84e4eac4850613c7883eac40',PM:'15d30a5a045ceb6ae871c5a43aad6cd06e438a7f363c92407dc14e7f2bf7cc5a',CL:'ca62e92f727bfaa2e553ec213171d4fd0c31b52ee6143eac1161ee5eb396779c',PV:'652bddfe9f25dff3170ae272148ab02dec2110de7a3c2d8eaf4a6d1ed6a1078f'}
 PHYS=(0x55B2EC,0x55BA70);PATH=0x702328;CELL=0x55B9D0
 EASY={0x43CE9E,0x43D0CE,0x43D574};IAR={0x439BE4,0x43C0E4};CMSIS={0x449376};HAL={0x50436E,0x5044B4,0x5045C0,0x50468E};FIRST={0x53A5BE}
 STORED=[(0x55B9F0,0x55B2EC),(0x55B9F4,0x55B304),(0x55B9F8,0x55B31C),(0x55B9FC,0x55B32E)];IND=[0x55B356,0x55B370,0x55B38A,0x55B3A4,0x55B3D2,0x55B452,0x55B45E,0x55B55A,0x55B6C4]
+SOURCE=ROOT/'components/apollo_main/core_overlay/drv_cy8c4046fni.c';OVERLAY=ROOT/'components/apollo_main/core_overlay/overlay.json';REPORT=ROOT/'components/apollo_main/core_overlay/build/build-report.json';MANIFEST=ROOT/'manifests/g2-2.2.6.10-core-source.json'
+SOURCE_PIN=(14618,'93ed6d61682274079362f39afb1f9f868e5d775fae7c1b95c19ce20c1e62254e')
+SOURCE_PATH='components/apollo_main/core_overlay/drv_cy8c4046fni.c'
+LEAF_NAMES=(
+ 'open_cfw_cy8c_i2c_register_write','open_cfw_cy8c_i2c_register_read',
+ 'open_cfw_cy8c_i2c_raw_write','open_cfw_cy8c_i2c_raw_read',
+ 'open_cfw_cy8c_command','open_cfw_cy8c_read_command',
+ 'open_cfw_cy8c_write_command','open_cfw_cy8c_save_command',
+ 'open_cfw_cy8c_read_baseline_command','open_cfw_cy8c_gesture_threshold_valid',
+ 'open_cfw_cy8c_write_gesture_private','open_cfw_cy8c_read_gesture_private',
+ 'open_cfw_cy8c_install_default_ops','open_cfw_cy8c_switch_to_dfu',
+ 'open_cfw_cy8c_reset','open_cfw_cy8c_initialize',
+ 'open_cfw_cy8c_read_touch_frame','open_cfw_cy8c_read_difference',
+ 'open_cfw_cy8c_prepare_proximity_baseline','open_cfw_cy8c_save_proximity_baseline',
+ 'open_cfw_cy8c_read_proximity_baseline','open_cfw_cy8c_write_gesture_cfg',
+ 'open_cfw_cy8c_read_gesture_cfg',
+)
+LEAF_DIGEST='0d2c5266745768c05470fb03e50287494cf60e362a90da6bd3946112c5598a62'
+PATCH_DIGEST='699e312fa13b8105dff9406b14fd0beb39aa92380ff394999b04540f87eecbef'
+BUILT_DIGEST='fbac207e3caae7046917c99a727c9a85e561b147765e211e0cf131a026feb4fe'
+REGION_DIGEST='84f80499cc53d41bd91ad30445fea8dcb193438ceee2c8c3be5ce3b4599e3716'
 def sh(x):return hashlib.sha256(x).hexdigest()
+def jsh(x):return sh(json.dumps(x,sort_keys=True,separators=(',',':')).encode())
 def cstr(b,a):
  o=a-c.BASE;e=b.find(b'\0',o)
  if o<0 or e<0:raise c.AuditError('unterminated string')
@@ -63,7 +85,29 @@ def analyze(image=IMAGE):
  if cstr(b,PATH)!=expected or struct.unpack('<I',c._slice(b,CELL,CELL+4))[0]!=PATH:raise c.AuditError('retained path changed')
  refs=[(CELL,x) for x in t.literal_references(b,CELL)]
  if len(refs)!=12 or c._pair_digest(refs)!='b8cec35125289c5d9529500161740cbaf8d293d80c22175645624526835d0a29':raise c.AuditError('path references changed')
- routed=any('cy8c4046fni' in x.get('path','').lower() for x in json.loads((ROOT/'components/apollo_main/core_overlay/overlay.json').read_text())['sources'])
- if routed:raise c.AuditError('unimplemented touch driver entered production overlay')
- return {'schema_version':1,'analysis_mode':'read-only raw-image closure; corpus-independent','identity':{'image_sha256':c.IMAGE_SHA256,'retained_path':r'driver\touch\drv_cy8c4046fni.c','embedded_third_party_definitions':[]},'surface':{'linked_functions':23,'ghidra_discovered_functions':20,'restored_functions':3,'path_anchored_functions':7,'raw_path_references':12,'body_bytes':1754,'physical_bytes':1924,'noncode_bytes':170,'reachable_instructions':708,'direct_body_calls':87,'internal_direct_body_calls':10,'external_direct_body_calls':77,'indirect_body_calls':9,'bounded_indirect_body_calls':9,'direct_bl_entry_sites':50,'stored_entry_pointers':4,'raw_interior_word_collisions':0,'strict_interior_ingress':0},'behavior':{'i2c_ops_table_dispatch':True,'controller_init_and_reset':True,'touch_report_and_gesture_extraction':True,'four_entry_driver_callback_table':True},'provider_boundary':{'easylogger_calls':60,'iar_dlib_calls':9,'cmsis_freertos_calls':2,'closed_hal_i2c_calls':4,'bounded_first_party_calls':2,'cmsis_freertos_commit':'d213f261b5be6bb29a7cce8b84071706b72f4d53','freertos_kernel_commit':'def7d2df2b0506d3d249334974f51e427c17a41c','cmsis_5_commit':'2b7495b8535bdcb306dac29b9ded4cfb679d7e5c','easylogger_commit':'a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24','cmsis_wrappers':['osDelay'],'public_cypress_source_candidate':None,'historical_drv_cy8c4046fni_commit':None,'new_version_discriminator':False,'private_generating_commit_recoverable':False},'production':{'production_routed':False}}
+ source=SOURCE.read_bytes()
+ if (len(source),sh(source))!=SOURCE_PIN:raise c.AuditError('production touch-driver source changed')
+ overlay=json.loads(OVERLAY.read_text())
+ leaves=[x for x in overlay['relocated_leaves'] if x.get('source',{}).get('path')==SOURCE_PATH]
+ if tuple(x.get('function') for x in leaves)!=LEAF_NAMES or not set(LEAF_NAMES)<=set(overlay['functions']) or jsh(leaves)!=LEAF_DIGEST:raise c.AuditError('production touch-driver leaf closure changed')
+ if any(x.get('profiles')!=['apple-clang'] or not x.get('strict_relocation_contract') or x.get('source',{}).get('license')!='GPL-3.0-only' for x in leaves):raise c.AuditError('production touch-driver leaf policy changed')
+ if sum(x['expected']['size'] for x in leaves)!=1122 or sum(len(x['relocations']) for x in leaves)!=19:raise c.AuditError('production touch-driver compiled census changed')
+ previous=190426;alignment=0
+ for leaf in leaves:
+  alignment+=leaf['expected']['offset']-previous;previous=leaf['expected']['offset']+leaf['expected']['size']
+ if alignment!=18 or previous!=191566:raise c.AuditError('production touch-driver placement changed')
+ patches=[x for x in overlay['patch_sites'] if x.get('name','').startswith('replace_cy8c_')]
+ if len(patches)!=23 or jsh(patches)!=PATCH_DIGEST or sum(x['expected_size'] for x in patches)!=1754 or {x['target_function'] for x in patches}!=set(LEAF_NAMES):raise c.AuditError('production touch-driver redirect closure changed')
+ if any(x.get('branch')!='b_w' or x.get('profiles')!=['apple-clang'] for x in patches):raise c.AuditError('production touch-driver redirect policy changed')
+ build=json.loads(REPORT.read_text())
+ if (build['overlay']['size'],build['overlay']['sha256'],build['component']['size'],build['component']['sha256'])!=(197488,'a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183',3720884,'026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a'):raise c.AuditError('production touch-driver build pins changed')
+ built=[x for x in build['relocated_leaves'] if x.get('source',{}).get('path')==SOURCE_PATH]
+ norm=[{'function':x['extraction']['function'],'size':x['placement']['size'],'padding_before':x['placement']['padding_before'],'offset':x['placement']['offset'],'runtime_address':x['placement']['runtime_address'],'relocation_count':x['extraction']['relocation_count']} for x in built]
+ if len(built)!=23 or jsh(norm)!=BUILT_DIGEST:raise c.AuditError('production touch-driver built closure changed')
+ manifest=json.loads(MANIFEST.read_text());main=manifest['component_overrides']['apollo_main'];regions=[x for x in main['regions'] if x.get('name','').startswith('cy8c_')]
+ if len(regions)!=55 or jsh(regions)!=REGION_DIGEST:raise c.AuditError('production touch-driver manifest regions changed')
+ retained=next((x for x in main['regions'] if x.get('name')=='opaque_cy8c_pool_and_following_object'),{})
+ if (retained.get('target_address'),retained.get('size'),retained.get('address_status'))!=(0x55B9C6,510,'official_blob'):raise c.AuditError('retained touch-driver callback pool changed')
+ if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3720884,'026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a',4499378,'03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783'):raise c.AuditError('production touch-driver manifest closure changed')
+ return {'schema_version':1,'analysis_mode':'read-only raw-image and production-source closure; corpus-independent','identity':{'image_sha256':c.IMAGE_SHA256,'retained_path':r'driver\touch\drv_cy8c4046fni.c','embedded_third_party_definitions':[]},'surface':{'linked_functions':23,'ghidra_discovered_functions':20,'restored_functions':3,'path_anchored_functions':7,'raw_path_references':12,'body_bytes':1754,'physical_bytes':1924,'noncode_bytes':170,'reachable_instructions':708,'direct_body_calls':87,'internal_direct_body_calls':10,'external_direct_body_calls':77,'indirect_body_calls':9,'bounded_indirect_body_calls':9,'direct_bl_entry_sites':50,'stored_entry_pointers':4,'raw_interior_word_collisions':0,'strict_interior_ingress':0},'behavior':{'i2c_ops_table_dispatch':True,'controller_init_and_reset':True,'touch_report_and_gesture_extraction':True,'four_entry_driver_callback_table':True},'provider_boundary':{'easylogger_calls':60,'iar_dlib_calls':9,'cmsis_freertos_calls':2,'closed_hal_i2c_calls':4,'bounded_first_party_calls':2,'cmsis_freertos_commit':'d213f261b5be6bb29a7cce8b84071706b72f4d53','freertos_kernel_commit':'def7d2df2b0506d3d249334974f51e427c17a41c','cmsis_5_commit':'2b7495b8535bdcb306dac29b9ded4cfb679d7e5c','easylogger_commit':'a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24','cmsis_wrappers':['osDelay'],'public_cypress_source_candidate':None,'historical_drv_cy8c4046fni_commit':None,'new_version_discriminator':False,'private_generating_commit_recoverable':False},'production':{'candidate':SOURCE_PATH,'production_routed':True,'source_inventory_available':True,'source_functions':23,'compiled_text_bytes':1122,'alignment_bytes':18,'stock_replaced_bytes':1754,'strict_relocations':19,'retained_callback_pool_bytes':170,'diagnostic_logging':'stock EasyLogger observability omitted; functional controller behavior retained','software_functional_gap':False,'hardware_validation':'blocked','hardware_blocker':'No authorized physical G2 touch controller or captured I2C/electrical/reset/DFU/timing evidence is available.'}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

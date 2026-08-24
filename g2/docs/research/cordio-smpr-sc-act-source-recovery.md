@@ -2,6 +2,18 @@
 
 ## Result
 
+All 20 linked responder actions are now implemented in production C at
+`components/apollo_main/core_overlay/cordio_smpr_sc_act.c`, compiled as
+independent Thumb leaves, and routed over their complete stock bodies.  The
+reviewed Apple Clang build contributes 1,006 compiled bytes plus 24 alignment
+bytes (1,030 source-owned bytes total) and replaces 1,162 stock code bytes.
+Host tests execute PIN/JWNC/passkey/OOB paths, DH-check store/wait/calculate,
+successful LTK truncation with `keyReady`, and retry/max-attempt failure paths.
+
+Physical validation remains explicitly blocked: no authorized G2/EM9305 is
+available to demonstrate responder numeric-comparison, passkey/key-press, OOB,
+DH-key, retry, and peer-interoperability behavior.
+
 The stock interval `[0x005E3D7C,0x005E4228)` is the complete Cordio Secure
 Connections responder action unit
 `ble-host/sources/stack/smp/smpr_sc_act.c`. All 20 source definitions survive:
@@ -67,5 +79,5 @@ stored strict-interior ingress. Source and stock hashes are in
 `tools/manifests/packetcraft-cordio-smpr-sc-act-function-map.tsv`; provenance
 is in `packetcraft-cordio-smpr-sc-act-provenance.tsv`.
 
-This raises identified provenance only. No stock byte is replaced and no
-source-owned production byte is added.
+The analyzer now pins the production source, every compiled leaf and stock
+redirect, the r20/R4 `keyReady` behavior, and the unavailable-hardware block.

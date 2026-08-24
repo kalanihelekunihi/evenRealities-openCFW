@@ -1,7 +1,8 @@
 # G2 `pb_service_conversate.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: complete linked-object census, clean-room implementation, and
+production routing. Software gates pass; live hardware validation is explicitly
+blocked by unavailable authorized physical evidence. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -53,8 +54,26 @@ zero on success even when the role gate suppresses transport. Pointer-taking
 encoders return 6 on null; the two prepared-note helpers have no pointer-null
 path.
 
-The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No clean-room candidate exists, the service is
-absent from `overlay.json`, and OpenCFW claims zero production ownership
-bytes. The next smallest retained service frontier is
-`pb_service_teleprompt.c`.
+The historical source tree and license remain unavailable. The independently
+authored GPL-3.0-only
+`components/apollo_main/core_overlay/pb_service_conversate.c` implements the
+six linked entries plus bounded buffer-write and message-zero helpers. Eight
+selector-isolated leaves produce 1,098 bytes of Thumb text plus eight alignment
+bytes with 33 strict relocations. Six guarded redirects replace all 1,776 stock
+body bytes while the authenticated 128-byte pool remains official.
+
+Host tests cover buffer bounds, RX null/decode/truncation/replay boundaries,
+all five envelopes, role suppression, encoding failure, exact transport
+arguments, and last-magic immutability. The canonical overlay/component/package
+are `197488/3720884/4499378` bytes with SHA-256
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 2,018,179-byte flash plan has 2,874 placed, two protected unresolved, and
+five container-only regions.
+
+Live master/peer service-`0x0B`, BLE timing, and conversate UI validation needs
+a booting source-divergent authorized temple and peer. The right temple is
+nonresponsive, the left must remain stock, and the recovery gate prohibits
+writes without debugger evidence. Hardware behavior is therefore blocked by
+unavailable physical evidence, not validated.

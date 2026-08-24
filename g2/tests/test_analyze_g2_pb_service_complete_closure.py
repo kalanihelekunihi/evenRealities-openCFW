@@ -21,7 +21,7 @@ class AnalyzeG2PbServiceCompleteClosureTests(unittest.TestCase):
         self.assertEqual(self.report["surface"], {
             "retained_paths": 15, "linked_functions": 143,
             "body_bytes": 47644, "physical_bytes": 51744,
-            "production_ownership_bytes": 0, "non_body_owned_bytes": 4100,
+            "production_ownership_bytes": 6352, "non_body_owned_bytes": 4100,
         })
 
     def test_frontier_reconciliation(self) -> None:
@@ -35,7 +35,7 @@ class AnalyzeG2PbServiceCompleteClosureTests(unittest.TestCase):
         self.assertEqual(self.report["qualification"], {
             "all_retained_paths_closed": True,
             "historical_source_inventory_complete": False,
-            "production_routed_services": 0,
+            "production_routed_services": 4,
         })
 
 

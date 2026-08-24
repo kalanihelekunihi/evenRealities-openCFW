@@ -286,9 +286,9 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "bd3b32c736e57005c1cbe65a2725fb66ed5389227686ff7961793f699364e68c",
             ),
         },
-        "overlay": (174816, "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"),
-        "component": (3698212, "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"),
-        "package": (4476706, "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"),
+        "overlay": (180782, "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"),
+        "component": (3704178, "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"),
+        "package": (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"),
     },
     "linux-clang": {
         "placements": {

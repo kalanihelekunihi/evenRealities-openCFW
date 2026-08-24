@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "name": "apollo_advertised_name_qualification_overlay",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "run_base": 4423680,
+  "preamble_bytes": 32,
+  "alignment": 4,
+  "base": {
+    "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "size": 3523396,
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "overlay_artifact": "apollo_advertised_name_qualification_overlay.bin",
+  "sources": [
+    {
+      "path": "components/apollo_main/core_overlay/ble_advertised_name.c",
+      "size": 3464,
+      "sha256": "b97c162d59cf1029f2a8b3e22966a36bb8897160246f09dd098879ce38818e65",
+      "license": "GPL-3.0-only",
+      "origin": "openCFW bounded final-copy G2 advertised-name serial-suffix rewrite",
+      "evidence": "docs/research/g2-advertised-name-serial-suffix.md"
+    }
+  ],
+  "toolchain": {
+    "target": "thumbv7em-none-eabi",
+    "reviewed_version_prefix": "Apple clang version 21.0.0",
+    "reviewed_source_root": "/Users/kalani/Repo/SybilSight/openCFW",
+    "include_dirs": [
+      "components/apollo_main/core_overlay/tlsf_compat"
+    ],
+    "flags": [
+      "-mthumb",
+      "-O2",
+      "-ffreestanding",
+      "-fno-jump-tables",
+      "-fomit-frame-pointer",
+      "-fno-builtin",
+      "-mno-unaligned-access",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fropi",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ]
+  },
+  "expected": {
+    "overlay_size": 412,
+    "overlay_sha256": "8551810ebbb216b8d354c3de0ac40c6b239ffe0fb357f6b124d2a4d0f404f537",
+    "component_size": 3523808,
+    "component_sha256": "c68375e1336976631c9a6b3a79fb8ac0a0650b245b9e07aba6226debe3b0741a"
+  },
+  "functions": [
+    "open_cfw_copy_advertised_name_pair_suffix"
+  ],
+  "patch_sites": [
+    {
+      "name": "rewrite_g2_advertised_name_suffix",
+      "runtime_address": 4644264,
+      "expected_hex": "cbf71cff",
+      "branch": "bl",
+      "target_function": "open_cfw_copy_advertised_name_pair_suffix"
+    }
+  ],
+  "isolated_leaves": [],
+  "relocated_leaves": [],
+  "in_place_leaves": [],
+  "in_place_data": []
+}

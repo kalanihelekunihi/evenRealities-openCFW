@@ -45,10 +45,21 @@ class AnalyzeG2AtTpTests(unittest.TestCase):
     def test_lineage_and_production_boundary(self) -> None:
         self.assertEqual(self.report["lineage"]["exact_symbol"], "_atTpTest")
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/at_tp.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["ownership_bytes"], 2590)
+        self.assertEqual(production["source_functions"], 2)
+        self.assertEqual(production["compiled_text_bytes"], 1548)
+        self.assertEqual(production["alignment_bytes"], 2)
+        self.assertEqual(production["stock_replaced_bytes"], 1040)
+        self.assertEqual(production["strict_relocations"], 18)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("No authorized physical G2 touch panel", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

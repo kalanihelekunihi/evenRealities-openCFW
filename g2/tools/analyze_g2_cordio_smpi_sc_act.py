@@ -20,6 +20,27 @@ IMAGE_BYTES = 3_523_396
 IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 MAP = ROOT / "tools/manifests/packetcraft-cordio-smpi-sc-act-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-smpi-sc-act-provenance.tsv"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_smpi_sc_act.c"
+PRODUCTION_SOURCE_SIZE = 18_850
+PRODUCTION_SOURCE_SHA256 = "f7ba436496256178a0b6c49fa2dfcfaba8a48984a13282063e1d997ddff2dac8"
+PRODUCTION_ROUTES = {
+    "open_cfw_cordio_smpi_sc_authentication_select": (177092, 4, "6a4c29e82ca8f6b4c3c500a1a03d9b05b36c79f8e3ba64256704f5cb4168fa91"),
+    "open_cfw_cordio_smpi_sc_send_public_key": (177096, 10, "e1ba191cddb2334f95d3dba1c82de816fc183e0bc7573c01995dd18dd24c4272"),
+    "open_cfw_cordio_smpi_sc_jwnc_setup": (177108, 52, "915d2855ba1972381bbf1a4da80590e5e7ce347b55679852dda887f4f0329ea8"),
+    "open_cfw_cordio_smpi_sc_jwnc_send_random": (177160, 44, "431cb9b4e5e53cb73772ba6ffcacbdd492efa6a1a502572cac9da1c62ca7d410"),
+    "open_cfw_cordio_smpi_sc_jwnc_calculate_f4": (177204, 34, "224d1ba2c6ce802fd1be5aabff3c69f5360e959194ec6d83a583f74c0b09399e"),
+    "open_cfw_cordio_smpi_sc_jwnc_calculate_g2": (177240, 44, "353e0a365da8cf5039216627a1d3ff12f87aba1be4b69ec8e330a617fea325a3"),
+    "open_cfw_cordio_smpi_sc_passkey_calculate_ca": (177284, 124, "0c7d29d1444f5497be688a4e9e7b64a1dd36e1da0369d1695062420a00cc78dc"),
+    "open_cfw_cordio_smpi_sc_passkey_calculate_cb": (177408, 68, "9642b814bac83b5e76bc291b13a3c8c863cdcab785e775507bb06abf11afa35f"),
+    "open_cfw_cordio_smpi_sc_passkey_send_confirm": (177476, 6, "61f2869b5a94791d89e12572d0519882746577c65b323c2b9a5ddd375331e5ef"),
+    "open_cfw_cordio_smpi_sc_passkey_send_random": (177484, 44, "93f939b60ff2ad97a21823a683f0813bc41ea99f4049b23044496e7e80c76257"),
+    "open_cfw_cordio_smpi_sc_passkey_check": (177528, 88, "8406e756572cf7845b8011489681c1c7cc8b42847adb93b5b26cae24e3192350"),
+    "open_cfw_cordio_smpi_sc_oob_calculate_cb": (177616, 110, "758717945e0af687e2b324159f95772ca79abcb5cc61c7408029d411d12e1ed2"),
+    "open_cfw_cordio_smpi_sc_oob_send_random": (177728, 70, "251d5cde4182a8201ec70224a39a5e02f3121b808af496fa6fe5ab1d23e6a2c3"),
+    "open_cfw_cordio_smpi_sc_oob_process_random": (177800, 34, "a0e31b687a995fda6542b318cfdc290ab4664f0b18dd6edf689619b9319f636f"),
+    "open_cfw_cordio_smpi_sc_dh_key_check_send": (177836, 42, "e73764ca67f83ca17429964a582910e9f49e334c7ee4732d97bbfbb4e5a8b050"),
+    "open_cfw_cordio_smpi_sc_dh_key_check_verify": (177880, 168, "bc2f87218d92d78d1ad8ce004d6607c08ffff102ebe4fa32210507a70c7d0501"),
+}
 PINS = {
     MAP: "d29100a9e531a789db6b512e03e58be63139d54e3fb18105ade45ad565f7cfc5",
     PROVENANCE: "d177777b7fc28d8d73a8aa19afd135a654d2de6febfa40b28665f8eb43225494",
@@ -70,6 +91,56 @@ def load_rows() -> list[tuple[str, int, int, str]]:
             rows.append((row["function"], int(row["stock_start"], 0),
                          int(row["stock_end_exclusive"], 0), row["stock_sha256"]))
     return rows
+
+
+def production_report(linked: list[tuple[str, int, int, str]]) -> dict:
+    source = PRODUCTION_SOURCE.read_bytes()
+    if len(source) != PRODUCTION_SOURCE_SIZE or sha(source) != PRODUCTION_SOURCE_SHA256:
+        raise RuntimeError("Cordio initiator SC action production source identity changed")
+    text = source.decode("utf-8")
+    if "ccb->key_ready = 1U;" not in text or "OPEN_CFW_SMPI_SC_DH_VERIFY_ONLY" not in text:
+        raise RuntimeError("Cordio initiator SC r20/R4 behavior changed")
+    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
+    leaves = {x["function"]: x for x in overlay.get("relocated_leaves", [])
+              if x.get("function") in PRODUCTION_ROUTES}
+    patches = {x["target_function"]: x for x in overlay.get("patch_sites", [])
+               if x.get("target_function") in PRODUCTION_ROUTES}
+    if set(leaves) != set(PRODUCTION_ROUTES) or set(patches) != set(PRODUCTION_ROUTES):
+        raise RuntimeError("Cordio initiator SC production routing is incomplete")
+    source_path = PRODUCTION_SOURCE.relative_to(ROOT).as_posix()
+    for (function, (offset, size, digest)), stock_row in zip(PRODUCTION_ROUTES.items(), linked):
+        stock_name, start, end, stock_digest = stock_row
+        leaf = leaves[function]; record = leaf.get("source", {}); patch = patches[function]
+        if (leaf.get("profiles") != ["apple-clang"] or record.get("path") != source_path
+                or record.get("size") != PRODUCTION_SOURCE_SIZE
+                or record.get("sha256") != PRODUCTION_SOURCE_SHA256
+                or record.get("license") != "Apache-2.0"
+                or record.get("upstream_commit") != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6"
+                or leaf.get("expected", {}).get("offset") != offset
+                or leaf.get("expected", {}).get("size") != size
+                or leaf.get("expected", {}).get("sha256") != digest
+                or leaf.get("strict_relocation_contract") is not True):
+            raise RuntimeError(f"Cordio initiator SC production leaf changed: {function}")
+        if (patch.get("profiles") != ["apple-clang"] or patch.get("runtime_address") != start
+                or patch.get("expected_size") != end - start
+                or patch.get("expected_sha256") != stock_digest
+                or patch.get("branch") != "b_w"):
+            raise RuntimeError(f"Cordio initiator SC stock patch changed: {stock_name}")
+    return {
+        "status": "production-routed authenticated Packetcraft r20.05c initiator actions",
+        "candidate": source_path,
+        "production_routed": True,
+        "live_functions": len(PRODUCTION_ROUTES),
+        "relocated_functions": len(PRODUCTION_ROUTES),
+        "compiled_leaf_bytes": sum(route[1] for route in PRODUCTION_ROUTES.values()),
+        "source_owned_bytes_added": 956,
+        "stock_bytes_replaced": sum(end - start for _, start, end, _ in linked),
+        "hardware_validation": (
+            "blocked by unavailable authorized G2/EM9305 initiator Secure Connections "
+            "pairing, numeric comparison, passkey/key-press, OOB, DH-key, encryption, "
+            "retry, and interoperability physical evidence"
+        ),
+    }
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -183,7 +254,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "discriminator": "stock DH-key-check verify writes smpCcb.keyReady at +0x44; r19/AmbiqSuite 2.x omits it",
             "historical_generating_commit_resolved": False,
         },
-        "production": {"stock_bytes_replaced": 0, "source_owned_bytes_added": 0},
+        "production": production_report(rows),
     }
 
 

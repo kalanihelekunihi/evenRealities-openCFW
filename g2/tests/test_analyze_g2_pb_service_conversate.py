@@ -57,10 +57,21 @@ class AnalyzeG2PbServiceConversateTests(unittest.TestCase):
         self.assertEqual(lineage["path_pointer_cells"], ["0x005b2244"])
         self.assertEqual(len(lineage["exact_symbols"]), 6)
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_conversate.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 1776)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 8)
+        self.assertEqual(production["compiled_text_bytes"], 1098)
+        self.assertEqual(production["alignment_bytes"], 8)
+        self.assertEqual(production["strict_relocations"], 33)
+        self.assertEqual(production["stock_replaced_bytes"], 1776)
+        self.assertEqual(production["retained_literal_pool_bytes"], 128)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

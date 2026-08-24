@@ -1241,8 +1241,12 @@ Stock retains the `smpScProcPairing` no-input/no-output MITM branch present in
 Packetcraft r19/AmbiqSuite 2.x and the later official R4.4.1 import, but removed
 from Packetcraft r20.05--r20.05c. Combined with the already proven r20 message
 and action-table ABI, this identifies an R4-style vendor hybrid rather than an
-exact Packetcraft-r20 whole file. Production ownership remains zero; see
-`docs/research/cordio-smp-sc-act-source-recovery.md`.
+exact Packetcraft-r20 whole file. All twenty linked definitions are now
+production-routed from bounded C: 2,258 compiled bytes plus 18 alignment bytes
+replace all 2,662 stock body bytes. Six host-oracle groups and the canonical
+component/package build pass. Authorized G2/EM9305 pairing and interoperability
+evidence is unavailable, so physical validation remains explicitly blocked;
+see `docs/research/cordio-smp-sc-act-source-recovery.md`.
 
 ## Current Cordio SMP legacy state-machine increment
 
@@ -1256,8 +1260,11 @@ branch reaches an initializer interior.
 The initiator tables are release-invariant. The responder's 27th action and
 API-pair-request response-timeout/cleanup transitions independently select the
 Apache-2.0 Packetcraft r20.05--r20.05c behavior over r19/AmbiqSuite 2.x. The
-official R4.4.1 import is byte-identical later corroboration. Production
-ownership remains zero; see
+official R4.4.1 import is byte-identical later corroboration. Production now
+routes both initializers to 88 compiled bytes and installs all 705 dispatch
+bytes through 37 exact placements. Canonical component/package and offline
+host/Thumb/table gates pass; authorized G2/EM9305 legacy-pairing evidence is
+unavailable, so physical validation remains explicitly blocked. See
 `docs/research/cordio-smp-legacy-state-machines-source-recovery.md`.
 
 ## Current Cordio non-SMP exclusion increment
@@ -2504,8 +2511,13 @@ The analysis pins `note`, `play`, `start`, and `stop`, their exact parser
 formats and range checks, retained help/error/success text, and calls into all
 four corresponding bounded buzzer-driver APIs. It also preserves the stock
 quirk that the AT layer accepts play types 0-10 while the nine-record driver
-later rejects 9 and 10. Historical source remains unavailable, so this is
-analysis-only with zero production ownership. See
+later rejects 9 and 10. Historical source remains unavailable. Independently
+authored clean-room C is now production-routed as one 2,740-byte Thumb leaf
+with 23 strict provider relocations; a guarded redirect replaces the entire
+1,208-byte stock object. Host/parser, analyzer, component, ownership-map,
+package, and flash-plan gates are green. Audible output, pitch, frequency,
+duty cycle, beat timing, and stop behavior remain hardware-blocked because
+authorized physical G2 buzzer evidence is unavailable. See
 `docs/research/g2-at-buzzer-recovery.md`. The adjacent command-table entry is
 `AT^AUDIO` at `0x005A5488`; its retained `at_codec.c` handler is closed below.
 
@@ -2632,8 +2644,12 @@ The retained `pb_service_glasses_case.c` object is completely bounded at
 124-byte pool. Four exact-start entries, 86 body calls, nanopb RX/TX buffers,
 status codes, the command-1/nested-selector-3 message layout, five case-state
 bytes, notification sequence behavior, and service-`0x81` BLE send/notify
-paths are pinned. Historical source remains unavailable, so this is
-analysis-only with zero production ownership. See
+paths are pinned. Five independently authored source functions compile to 546
+text bytes plus ten alignment bytes; four guarded redirects replace all 1,360
+stock body bytes while retaining the 124-byte official pool. Host behavior,
+strict relocation, component, package, and deployment-plan gates are green.
+Live service-`0x81` temple/case exchange and physical case-state validation are
+explicitly blocked by unavailable authorized evidence. See
 `docs/research/g2-pb-service-glasses-case-recovery.md`. The next bounded
 protobuf-service frontier was `pb_service_ring.c`, now closed below.
 
@@ -2646,9 +2662,14 @@ relay callback, 82 body calls, nanopb status/buffer contracts, bounded
 six-byte MAC copying, event ID/parameter behavior, and service-`0x91` BLE
 transmit are pinned. The only raw interior candidate is proven to be the
 second halfword of `SDIV`, leaving zero real interior ingress. Historical
-source remains unavailable, so this is analysis-only with zero production
-ownership. See `docs/research/g2-pb-service-ring-recovery.md`; conversate is
-the next retained protobuf-service frontier, now closed below.
+source remains unavailable, but a clean-room five-function implementation now
+compiles to 594 text bytes plus four alignment bytes. Four guarded redirects
+replace all 1,362 stock body bytes and retain the 150-byte official pool. Host,
+analyzer, component, package, and deployment-plan gates are green. Paired-G2
+BLE relay and live nanopb/ring-event validation remain explicitly blocked by
+unavailable authorized physical evidence. See
+`docs/research/g2-pb-service-ring-recovery.md`; conversate is the next retained
+protobuf-service frontier, now closed below.
 
 ## Current G2 conversate protobuf-service increment
 
@@ -2657,8 +2678,10 @@ The retained `pb_service_conversate.c` object is completely bounded at
 128-byte pool. Ten exact-start entries, 96 body calls, caller-owned RX decode,
 the 3,000-ms duplicate filter, the shared 0xFAC-byte TX message, and five
 command/tag envelopes over service `0x0B` are pinned with zero stored or
-strict-interior ingress. Historical source remains unavailable, so this is
-analysis-only with zero production ownership. See
+strict-interior ingress. Eight clean-room source functions now compile to
+1,098 text bytes plus eight alignment bytes; 33 strict relocations and six
+guarded redirects replace all 1,776 stock body bytes. Software gates are green;
+live BLE/peer/UI validation is blocked by unavailable authorized hardware. See
 `docs/research/g2-pb-service-conversate-recovery.md`; teleprompt is closed
 below.
 
@@ -2670,8 +2693,11 @@ The retained `pb_service_teleprompt.c` object is completely bounded at
 caller-owned RX decode with 3,000-ms replay filtering, the shared 0xF58-byte
 TX message, and six command/tag envelopes over service 6 are pinned. The
 only raw interior candidate is the second halfword of a valid `MUL`, leaving
-zero real strict-interior ingress. Historical source remains unavailable, so
-this is analysis-only with zero production ownership. See
+zero real strict-interior ingress. Nine clean-room source functions compile to
+1,348 text bytes plus four alignment bytes; 39 strict relocations and seven
+guarded redirects replace all 1,854 stock body bytes while retaining the
+130-byte official tail. Software gates are green; live BLE/peer/UI validation
+is blocked by unavailable authorized hardware. See
 `docs/research/g2-pb-service-teleprompt-recovery.md`; Even-AI is closed below.
 
 ## Current G2 Even-AI protobuf-service increment
@@ -5583,6 +5609,25 @@ validation is explicitly blocked by unavailable authorized G2/EM9305 physical
 evidence. Remaining SMP action/state units and the firmware as a whole remain
 incomplete.
 
+## Protobuf health service is production-routed
+
+The complete eight-entry `pb_service_health.c` object now routes to clean-room
+C, backed by a ninth bounded protobuf buffer callback. Host tests cover all RX
+success/failure/null mappings, all four TX command/tag envelopes, nanopb encode
+failure, send arguments, compact highlight expansion, and rejection above the
+three-record retained-message capacity. The analyzer authenticates all 3,092
+stock body bytes, nine placements, and twenty strict relocations.
+
+The service adds 940 compiled bytes plus eight alignment bytes. Canonical
+Apple overlay/component/package identities are `184522/3707918/4486412` bytes
+and `f2e2771d...6a43` / `a2c628bb...aafc` / `34e82939...8936`; the flash plan
+is 1,836,839 bytes with SHA-256 `d4c0b6b3...fe139`. No hardware was accessed or
+flashed. Live scheduler/transport timing, BLE delivery, phone/schema
+interoperability, and persisted device-data validation remain explicitly
+blocked by unavailable authorized G2/EM9305 physical evidence. Other health UI
+and algorithm-provider rows, broader protobuf services, and the firmware as a
+whole remain incomplete.
+
 ## Cordio `smp_act` common actions are production-routed
 
 All 25 linked Packetcraft `smp_act.c` functions now execute source-owned
@@ -5605,3 +5650,297 @@ Connections pairing, key distribution, timeout, cancellation, and
 repeated-attempt controller/peer behavior remain explicitly blocked by
 unavailable authorized G2/EM9305 physical evidence. The remaining Secure
 Connections action/state units and the firmware as a whole remain incomplete.
+
+## Health data manager is production-routed
+
+All ten authenticated `health_data_manager.c` entries now route to clean-room
+production C. Host contracts cover type/slot/name mapping, full storage reset,
+normal and highlight protobuf conversion, single and counted saves, truncation,
+invalid/null input policy, and five-highlight capacity. The strict target gate
+exposes exactly ten text symbols and the route analyzer pins fifteen external
+relocations, ten complete stock spans, appended placement, component tiling,
+and package identity.
+
+The tranche replaces 2,644 stock bytes with 1,012 compiled bytes plus ten
+alignment bytes. Canonical Apple overlay/component/package identities are
+`183574/3706970/4485464` bytes and `c3f1e141...92947` /
+`f453571d...ef32d` / `37a5607c...3b001`; the flash plan is 1,818,542 bytes
+with SHA-256 `bb761c34...60365`. No hardware was accessed or flashed. Live
+mutex scheduling, concurrent service traffic, persistence, schema/peer
+interoperability, and display/device-data behavior remain explicitly blocked
+by unavailable authorized G2/EM9305 physical evidence. The protobuf health
+service, health UI, broader firmware ledger, and firmware as a whole remain
+incomplete.
+
+## eAT touch-panel command is production-routed
+
+The complete retained `platform/service/eAT/at_tp.c` object now routes to two
+selector-isolated clean-room C leaves. The implementation preserves all eight
+commands, the stock successful acknowledgement path (including unknown
+non-null subcommands), baseline-save sequencing, the 100 ms configuration
+readback delay, and distinct provider failure responses. It adds a fail-closed
+null guard and bounded decimal parser. Nine host/analyzer tests cover the
+software contract.
+
+The tranche replaces all 1,040 stock object bytes with 1,548 compiled bytes
+plus two alignment bytes and authenticates eighteen relocations. Current
+Apple overlay/component/package identities are `193488/3716884/4495378` bytes
+and `212bd4fe...3460` / `6803b1a9...e65d` / `86901153...b7f2`; the
+flash plan is 1,946,868 bytes with SHA-256 `f06aee5a...fc42`. No hardware was
+accessed or flashed. Live Cypress-controller, proximity-baseline persistence,
+threshold write/readback, and physical gesture behavior remain explicitly
+blocked by unavailable authorized G2 touch-panel evidence. The firmware as a
+whole remains incomplete.
+
+## Gesture-processing service is production-routed
+
+All five recovered `service_gesture_processor.c` functions now route to
+selector-isolated clean-room C. Host contracts cover proximity and event-name
+access, the complete mask formatter, production-mode buzzer feedback,
+proximity notification, error preemption/reset, every event bit, event order,
+and the single-click thresholds. The production analyzer pins the five final
+leaf hashes, 53 relocations, five complete stock redirects, and the component,
+manifest, package, and flash-plan ownership chain.
+
+The tranche replaces all 1,346 stock object/pool bytes with 1,608 compiled
+Thumb bytes plus six alignment bytes. Canonical Apple
+overlay/component/package identities are `193488/3716884/4495378` bytes and
+`212bd4fe...3460` / `6803b1a9...e65d` / `86901153...b7f2`; the flash plan
+is 1,946,868 bytes with SHA-256 `f06aee5a...fc42`. Apollo main now accounts
+for 193,950 source-owned bytes, 153,832 generated patch-site bytes, 154,012
+replaced stock-function bytes, and 3,367,148 opaque base bytes.
+
+No hardware was accessed or flashed. Live touch/proximity electrical behavior,
+controller event delivery, debounce, timing, and physical gesture
+interpretation remain explicitly blocked by unavailable authorized G2
+evidence. The firmware as a whole remains incomplete.
+
+## CY8C4046FNI host touch driver is production-routed
+
+All 23 recovered `drv_cy8c4046fni.c` executable entries now route to
+selector-isolated clean-room C. Host contracts cover the HAL I2C ABI,
+command/return semantics, callback-table installation, reset and DFU control,
+touch-frame and difference reads, proximity-baseline operations, gesture
+configuration, and exact 23-way selector isolation. The production analyzer
+pins 19 relocations, 23 complete stock-body redirects, retained callback-pool
+ownership, component tiling, manifest ownership, package identity, and the
+hardware blocker.
+
+The tranche replaces all 1,754 stock function bytes with 1,122 compiled Thumb
+bytes plus 18 alignment bytes while retaining the directly addressed 170-byte
+stock callback/string pool. Stock EasyLogger paths are intentionally omitted
+as non-controlling observability; command, state, buffer, return-value, reset,
+DFU, and delay behavior remains implemented. Canonical Apple
+overlay/component/package identities are `193488/3716884/4495378` bytes and
+`212bd4fe...3460` / `6803b1a9...e65d` / `86901153...b7f2`; the flash plan
+is 1,946,868 bytes with SHA-256 `f06aee5a...fc42`.
+
+No hardware was accessed or flashed. Physical I2C signaling, reset/DFU boot
+transitions, settling time, report timing, and CapSense behavior remain
+explicitly blocked by unavailable authorized G2 hardware and capture evidence.
+The firmware as a whole remains incomplete.
+
+## Packetcraft Cordio GATT profile is production-routed
+
+All six linked functions from the copied Cordio `gatt_main.c` object now route
+to selector-isolated Apache-2.0 production C over the recovered G2 ABI. Host
+contracts cover discovery, value updates, service-changed index and indication
+routing, CCC gating, and client-supported-feature reads/writes. The production
+analyzer pins six complete stock redirects, ten strict relocations, the
+retained literal pool, exact r20.05c source provenance, component tiling,
+manifest ownership, package identity, and the hardware blocker.
+
+The tranche replaces all 322 stock body bytes with 254 compiled Thumb bytes
+plus eight alignment bytes. Canonical Apple overlay/component/package
+identities are `193488/3716884/4495378` bytes and `212bd4fe...3460` /
+`6803b1a9...e65d` / `86901153...b7f2`; the flash plan is 1,946,868 bytes with
+SHA-256 `f06aee5a...fc42`.
+
+No hardware was accessed or flashed. Physical ATT discovery, CCCD state,
+indication delivery, controller timing, and peer interoperability remain
+explicitly blocked by unavailable authorized G2/EM9305 evidence. The firmware
+as a whole remains incomplete.
+
+## G2 BLE OTA profile is production-routed
+
+All seven linked `profile_ota.c` functions now route to selector-isolated
+BSD-3-Clause C over the recovered G2 control-block and message ABIs. Host
+contracts exercise the exact CCC layout, connection and role transitions,
+events `0x12`, `0x14`, `0x27`, `0x28`, `0xA0`, `0xA1`, and `0xA7`, reset and
+delayed disconnect requests, allocation failure, transport forwarding, and
+ATT notification handle `0x0824`. The production analyzer pins the seven
+source leaves, seventeen strict relocations, seven complete stock redirects,
+the retained 80-byte literal/callback pool, manifest tiling, package identity,
+and the physical blocker.
+
+The tranche replaces all 620 stock body bytes with 376 compiled Thumb bytes
+plus eight alignment bytes. Apollo main now accounts for 194,596 source-owned
+bytes, 154,774 generated patch-site bytes, 154,954 replaced stock-function
+bytes, and 3,366,206 opaque base bytes in the 3,715,608-byte component.
+Canonical Apple overlay/component/package identities are
+`193488/3716884/4495378` bytes and `212bd4fe...3460` /
+`6803b1a9...e65d` / `86901153...b7f2`; the 1,963,573-byte flash plan hashes
+to `f06aee5a...fc42`.
+
+No hardware was accessed or flashed. OTA CCC, reset, disconnect, notification
+timing, and peer interoperability remain explicitly blocked by unavailable
+authorized G2/EM9305 evidence. The broader firmware software ledger remains
+incomplete.
+
+## G2 BLE Ring profile is production-routed
+
+All seven linked `profile_ring.c` functions now route to selector-isolated
+GPL-3.0-only clean-room C over the recovered control-block and message ABIs.
+Host contracts exercise handler initialization, service discovery, 16-bit
+epoch cancellation, the 500/700/900 delayed CCC sequence, connect/close
+transitions, ATT RX forwarding, TX command and queue paths, allocation failure,
+and all seven selectors. The production analyzer pins 23 strict relocations,
+seven complete stock redirects, the retained 134-byte callback/literal pool,
+manifest tiling, package identity, and the physical blocker.
+
+The tranche replaces all 1,446 stock body bytes with 632 compiled Thumb bytes
+plus eight alignment bytes. After the subsequent callback-facade closure,
+Apollo main accounts for 195,444 source-owned bytes, 156,600 generated
+patch-site bytes, 156,780 replaced stock-function bytes, and 3,364,380 opaque
+base bytes in the 3,716,462-byte component.
+Canonical Apple overlay/component/package identities are
+`193488/3716884/4495378` bytes and `212bd4fe...3460` /
+`6803b1a9...e65d` / `86901153...b7f2`; the 1,963,573-byte flash plan hashes
+to `f06aee5a...fc42`.
+
+No hardware was accessed or flashed. Service discovery, delayed CCC timing,
+ATT handle behavior, controller concurrency, and peer interoperability remain
+explicitly blocked by unavailable authorized G2/EM9305 evidence. The OTA/Ring
+profile pair has no remaining software gap; the firmware as a whole remains
+incomplete.
+
+## Charge and message callback facades are production-routed
+
+All ten linked entries from `cb_charge.c` and `cb_msg_notif.c` now route to
+selector-isolated GPL-3.0-only clean-room C. Host contracts cover both fixed
+callback lists and retained type identities, init/deinit, null-checked
+register/unregister, provider return propagation, and the notification in/out
+value word. The fail-closed analyzer pins ten strict relocations, ten complete
+stock redirects, both retained 34-byte diagnostic/type pools, component
+tiling, manifest ownership, package identity, and flash-plan generation.
+
+The tranche replaces 380 stock body bytes with 208 compiled Thumb bytes plus
+six alignment bytes. Apollo main now accounts for 195,444 source-owned bytes,
+156,600 generated patch-site bytes, 156,780 replaced stock-function bytes, and
+3,364,380 opaque base bytes. Canonical Apple overlay/component/package
+identities are `193488/3716884/4495378` bytes and `212bd4fe...3460` /
+`6803b1a9...e65d` / `86901153...b7f2`; the 1,963,573-byte flash plan hashes
+to `f06aee5a...fc42`.
+
+These wrappers introduce no direct hardware operation, so their functional
+semantics are closed without a physical-evidence claim. The broader firmware
+ledger remains incomplete.
+
+## Generic callback manager is production-routed
+
+The shared eight-function `callback_manager.c` provider now compiles from
+selector-isolated GPL-3.0-only clean-room C. Host contracts cover allocation
+failure, null validation, duplicate-success behavior, prepend order,
+head/interior removal, full deinitialization, and ordered two-argument callback
+dispatch. Eight guarded redirects replace 1,240 stock body bytes with 408
+compiled bytes plus 14 alignment bytes; six strict relocations terminate at
+source-owned heap wrappers or the manager's redirected helper entries.
+
+Apollo main now accounts for 195,872 source-owned bytes, 157,840 generated
+patch-site bytes, 158,020 replaced stock-function bytes, and 3,363,140 opaque
+base bytes. Canonical Apple overlay/component/package identities are
+`193488/3716884/4495378` bytes and `5248973d...f7cc` /
+`53ac8a34...0575` / `a651c50d...65a8`; the 1,963,573-byte flash plan hashes
+to `85ec1cd1...3d5`. No hardware operation is introduced by this pure
+in-memory manager, so its software functional gap is closed without a
+physical-evidence claim. The overall G2 ledger remains incomplete.
+
+## Ring-battery callback facade is production-routed
+
+All five linked entries from `cb_ring_battery.c` now route to
+selector-isolated GPL-3.0-only clean-room C. Five guarded redirects replace all
+122 stock body bytes with 88 compiled Thumb bytes plus two alignment bytes;
+five strict relocations bind only to the source-owned generic callback manager
+and the retained ring-battery consumer. The authenticated 30-byte type,
+diagnostic, path, and literal pool remains official data.
+
+Apollo main now accounts for 195,962 source-owned bytes, 157,962 generated
+patch-site bytes, 158,142 replaced stock-function bytes, and 3,363,018 opaque
+base bytes. Canonical overlay/component/package identities are
+`193578/3716974/4495468` bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 1,972,280-byte flash plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+This pure facade has no independent hardware-validation tail. The broader ring
+service and overall firmware remain incomplete.
+
+## UX battery-sync callback is production-routed
+
+The service-record `0x105` handler now compiles from clean-room C. One guarded
+redirect replaces all 836 stock body bytes with 158 compiled Thumb bytes plus
+two alignment bytes; eleven strict relocations bind to bounded charger,
+ring-battery, and callback providers. Host tests exercise validation and all six
+message IDs. Apollo main now contains 196,122 source-owned bytes and 3,362,182
+opaque base bytes. Canonical overlay/component/package SHA-256 values are
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+Physical peer/charger/ring validation remains blocked by unavailable authorized
+hardware evidence; the wider firmware remains incomplete.
+
+## Ring-battery state service is production-routed
+
+All five `service_ring_battery.c` entries now compile from selector-isolated
+clean-room C. Host contracts exercise cached-state clamping and normalization,
+both getters, the 12-byte message ABI, local type-5 update, peer type-6 request,
+and service ID `0x105`. Five exact redirects replace 352 stock body bytes with
+134 compiled Thumb bytes plus four alignment bytes; two strict relocations bind
+only to the bounded local and peer service-record transports. The 44-byte
+diagnostic/path pool remains authenticated official data.
+
+Apollo main now accounts for 196,260 source-owned bytes, 159,150 generated
+patch-site bytes, 159,330 replaced stock-function bytes, and 3,361,830 opaque
+base bytes. Canonical overlay/component/package sizes are 193,876 / 3,717,272 /
+4,495,766 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 1,985,178-byte deployment plan contains 2,825 placed regions and two
+explicitly unresolved physical-evidence regions, and hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+
+No hardware was accessed. Paired-device transport, callback timing, and live
+ring-state behavior remain blocked by unavailable authorized physical evidence.
+The service object's software gap is closed; the wider ring stack and firmware
+remain incomplete.
+
+## Protobuf Ring service is production-routed
+
+All four linked `pb_service_ring.c` entries and the source-only bounded nanopb
+output callback now compile from selector-isolated clean-room C. Four guarded
+redirects replace 1,362 authenticated stock body bytes with 594 compiled Thumb
+bytes plus four alignment bytes; nine strict relocations bind to source-owned
+nanopb/BLE wrappers, redirected sibling entries, and recovered message globals.
+The 150-byte official alignment/literal tail remains retained.
+
+At the Ring-service stage Apollo main accounted for 197,414 source-owned bytes,
+161,872 generated patch-site bytes, 162,052 replaced stock-function bytes, and
+3,359,108 opaque base bytes. After the subsequent glasses-case and conversate
+service tranches, canonical overlay/component/package sizes are 196,136 /
+3,719,532 / 4,498,026 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 2,018,179-byte deployment plan contains 2,874 placed regions, two
+unresolved protected regions, and five container-only regions; it hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+
+Host tests cover buffer bounds, null/error statuses, decoding, command/event
+routing, MAC-count behavior, encoding, transport arguments, and relay dispatch.
+No hardware was accessed for this tranche. Paired-G2 relay, nanopb peer
+interoperability, and live Ring-event behavior are explicitly blocked by the
+unavailable physical evidence recorded in `hardware-validation-2026-08-23.md`.
+The protobuf object's software gap is closed; the wider ring stack and firmware
+remain incomplete.

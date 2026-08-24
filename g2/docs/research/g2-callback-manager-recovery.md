@@ -15,11 +15,33 @@ head and interior deletion. Deinit frees the complete list. Notify walks only
 registered nodes and uses the object's sole dynamic call site to invoke each
 non-null callback with two arguments.
 
-All 72 external direct calls terminate at 70 already admitted EasyLogger
+All 72 stock external direct calls terminate at 70 admitted EasyLogger
 operations and the two production-source-owned synchronized heap wrappers over
 the admitted TLSF interval. There is no direct CMSIS-FreeRTOS call and no
 embedded third-party definition. Exact public searches for retained symbols
 and diagnostics returned no source candidate, so no new version discriminator
-or private generating commit is recoverable. The object is not yet
-production-routed, but its complete ABI now closes the provider behind the
-BLE-status, charge, message-count, and ring-battery facades.
+or private generating commit is recoverable.
+
+## Production source closure
+
+`components/apollo_main/core_overlay/callback_manager.c` now supplies all eight
+functions as selector-isolated freestanding Thumb C. The canonical Apple build
+adds 408 compiled text bytes plus 14 alignment bytes with six strict
+relocations. Allocation/free bind to the already source-owned synchronized
+heap wrappers; internal manager calls bind through the eight exact stock-entry
+redirects. Those redirects replace all 1,240 stock function bytes while the
+118-byte diagnostic literal pool remains authenticated compatibility data.
+
+Host coverage exercises null validation, allocation failure, duplicate-success
+semantics, prepend ordering, head/interior removal, complete deinitialization,
+and ordered two-argument dispatch. EasyLogger calls remain omitted as
+non-controlling observability. The canonical artifacts are overlay
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+Apollo component
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+complete package
+`03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`,
+and flash plan
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+This pure in-memory manager has no hardware-dependent validation tail, so its
+software functional gap is closed without a physical-evidence blocker.

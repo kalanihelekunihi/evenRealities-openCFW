@@ -19,11 +19,29 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-callback-manager-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-callback-manager-closure.tsv"
 PM = ROOT / "tools/manifests/g2-callback-manager-provider-map.tsv"
+PV = ROOT / "tools/manifests/g2-callback-manager-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/callback_manager.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FM: "031e83ae4d5d76b36ef82768d4747d1399f521bee5520b4fd2f7b7fb2460b95a",
-    CL: "cab9b9f1b0ffb3a5d4da52a1bb1af439fe8386c7f5c8037fbdf519771feb8bee",
+    CL: "f2a2d13cba0f80cddd94916ca80deab78081102dc58de4541995b10ebac7a371",
     PM: "f852dd3ba7e7ad36fd58cce9bf7aa3469d3bedca2c176491a85e9791df9a8ab2",
+    PV: "1b1816a1d20381bd6726ed81ab84247a689971ea9f4d91fd857891ae2c45ad96",
 }
+SOURCE_SIZE = 6461
+SOURCE_SHA256 = "a38f47ee52c54c6117716553a039917b15c8f8c7f2674d9d5d751d23cb4040f9"
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_callback_mgr_create", "open_cfw_callback_mgr_delete",
+    "open_cfw_callback_mgr_init", "open_cfw_callback_mgr_deinit",
+    "open_cfw_callback_mgr_is_registered", "open_cfw_callback_mgr_register",
+    "open_cfw_callback_mgr_unregister", "open_cfw_callback_mgr_notify",
+)
+PRODUCTION_PATCHES = tuple("replace_callback_mgr_" + name for name in (
+    "create", "delete", "init", "deinit", "is_registered", "register",
+    "unregister", "notify",
+))
 F = (
     (0x5100A0,0x5100FC),(0x5100FC,0x510108),(0x510108,0x5101AE),
     (0x5101AE,0x510218),(0x510218,0x510240),(0x510240,0x5103C4),
@@ -154,9 +172,72 @@ def analyze(image: Path = IMAGE) -> dict:
         if cstring(blob, target) != expected:
             raise c.AuditError("retained string changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any("callback_manager" in item.get("path", "").lower() for item in overlay["sources"]):
-        raise c.AuditError("unimplemented manager entered overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sh(source) != SOURCE_SHA256:
+        raise c.AuditError("production callback-manager source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = {
+        item.get("function"): item
+        for item in overlay["relocated_leaves"]
+        if item.get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(leaves) != set(PRODUCTION_FUNCTIONS):
+        raise c.AuditError("production callback-manager leaf inventory changed")
+    expected_sizes = (22, 10, 22, 40, 70, 66, 130, 48)
+    expected_offsets = (193068, 193092, 193104, 193128, 193168, 193240, 193308, 193440)
+    if any(
+        leaf["source"].get("path")
+        != "components/apollo_main/core_overlay/callback_manager.c"
+        or leaf["source"].get("size") != SOURCE_SIZE
+        or leaf["source"].get("sha256") != SOURCE_SHA256
+        or leaf.get("strict_relocation_contract") is not True
+        or leaf.get("profiles") != ["apple-clang"]
+        or leaf["expected"].get("size") != expected_size
+        or leaf["expected"].get("offset") != expected_offset
+        for leaf, expected_size, expected_offset in zip(
+            (leaves[name] for name in PRODUCTION_FUNCTIONS),
+            expected_sizes,
+            expected_offsets,
+        )
+    ):
+        raise c.AuditError("production callback-manager source/placement pins changed")
+    if sum(len(leaves[name]["relocations"]) for name in PRODUCTION_FUNCTIONS) != 6:
+        raise c.AuditError("production callback-manager relocation count changed")
+    patches = {
+        item.get("name"): item for item in overlay["patch_sites"]
+        if item.get("name") in PRODUCTION_PATCHES
+    }
+    if set(patches) != set(PRODUCTION_PATCHES) or any(
+        patches[name].get("target_function") != function
+        for name, function in zip(PRODUCTION_PATCHES, PRODUCTION_FUNCTIONS)
+    ):
+        raise c.AuditError("production callback-manager patch routing changed")
+    report = json.loads(REPORT.read_text())
+    if (
+        report["overlay"]["size"], report["overlay"]["sha256"],
+        report["component"]["size"], report["component"]["sha256"],
+    ) != (
+        197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise c.AuditError("production callback-manager build pins changed")
+    manifest = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_main"]
+    if manifest["provider"].get("size") != 3720884 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
+        raise c.AuditError("production callback-manager manifest provider changed")
+    region_names = {item["name"] for item in manifest["regions"]}
+    required_regions = {
+        "callback_mgr_create_source_replacement",
+        "callback_mgr_delete_source_replacement",
+        "callback_mgr_init_source_replacement",
+        "callback_mgr_deinit_source_replacement",
+        "callback_mgr_is_registered_source_replacement",
+        "callback_mgr_register_source_replacement",
+        "callback_mgr_unregister_source_replacement",
+        "callback_mgr_notify_source_replacement",
+        "callback_mgr_retained_diagnostic_pool",
+    }
+    if not required_regions <= region_names:
+        raise c.AuditError("production callback-manager manifest regions changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -181,7 +262,20 @@ def analyze(image: Path = IMAGE) -> dict:
             "direct_cmsis_freertos_calls":0,"bounded_registered_callback_sites":1,
             "new_version_discriminator":False,"private_generating_commit_recoverable":False,
         },
-        "production":{"production_routed":False},
+        "production": {
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "source_inventory_available": True,
+            "source_functions": 8,
+            "compiled_text_bytes": 408,
+            "alignment_bytes": 14,
+            "strict_relocations": 6,
+            "stock_replaced_bytes": 1240,
+            "retained_diagnostic_pool_bytes": 118,
+            "diagnostic_logging": "stock EasyLogger observability omitted; callback-list functionality preserved",
+            "software_functional_gap": False,
+            "hardware_validation": "not-applicable",
+        },
     }
 
 

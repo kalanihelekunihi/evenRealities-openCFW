@@ -619,11 +619,11 @@ class RuntimeLittlefsUtilBitopsTests(unittest.TestCase):
             "main": {
                 "overlay": (
                     167_426,
-                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
+                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
                 ),
                 "component": (
                     3_690_822,
-                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
+                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
                 ),
                 "functions": {
                     "npw2": (

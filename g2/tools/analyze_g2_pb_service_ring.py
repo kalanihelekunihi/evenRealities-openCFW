@@ -18,11 +18,38 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-ring-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-ring-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-ring-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_ring.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "43700fbb0f7015e30b1ed5b5e18eb57a862ad2ff3b565677ee0888cdba6706df",
-    CLOSURE: "f561a28b55acc84f2ab5030ca0b18c1b671373e857c1e0771f31a136869e20a5",
-    PROVENANCE: "33c84fe4d6f5c95bf8d9e1a187e6922bd0e1aaac0b4a7fc7b8d2edac440e6af8",
+    CLOSURE: "47b2ff130fb3beb8a5d34032b4f9cb258ce0fccd6a477a04a184b7ab7b18a77f",
+    PROVENANCE: "1658f580d2dac74213a387f7d7800c569e4c825a240cf8a8e02a7783366ee426",
 }
+SOURCE_SIZE = 8179
+SOURCE_SHA256 = "270772d136060be649f684e05e3de604bd89bd8ea6e0a4599ee550077c5c19cb"
+FUNCTIONS = (
+    ("open_cfw_pb_service_ring_buffer_write", 146, 193876, 0),
+    ("APP_PbRxRingFrameDataProcess", 128, 194024, 4),
+    ("PB_RxRingEvent", 10, 194152, 0),
+    ("APP_PbTxEncodeRingEvent", 284, 194164, 4),
+    ("RingDataRelay_common_data_handler", 26, 194448, 1),
+)
+PATCHES = (
+    ("replace_pb_ring_rx_frame", 0x005CE1DC, 498,
+     "91584b2a82140bf9e7a99283d76e3ceef267daeb75d469caf283037b3c9e2ed6",
+     "APP_PbRxRingFrameDataProcess"),
+    ("replace_pb_ring_rx_event", 0x005CE3CE, 280,
+     "807dda29aad8d7dd432396548b36068614a066a0a7e1c128b0e1051798080ddc",
+     "PB_RxRingEvent"),
+    ("replace_pb_ring_tx_event", 0x005CE4E6, 426,
+     "c50bfc78dcb2a0925d27509bf7b122ce1a0e5ce8c749e77a331578fda85d93eb",
+     "APP_PbTxEncodeRingEvent"),
+    ("replace_pb_ring_relay", 0x005CE690, 158,
+     "db44519e2c518465e77aeedeee75f7eb8d9cde03d2240804cbab70f2dc3407e9",
+     "RingDataRelay_common_data_handler"),
+)
 PHYSICAL = (0x005CE1DC, 0x005CE7C4)
 PHYSICAL_SHA256 = "2e570db8cab30734f3a547a7ad4dfa704d167010710fa5a925d465dc4e81348c"
 TAIL = (0x005CE72E, 0x005CE7C4)
@@ -229,11 +256,64 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if stored != [(0x006A45B4, 0x005CE691)] or pair_digest(stored) != STORED_SHA256:
         raise AuditError("stored entry/interior closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_ring" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented ring service unexpectedly entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {row[0] for row in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocations in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_ring.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"), leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocations):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for name, address, size, digest, function in PATCHES:
+        patch = patch_by_name.get(name)
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != (address, size, digest, "b_w", function, ["apple-clang"]):
+            raise AuditError(f"production patch changed: {name}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_names = {item["name"] for item in main["regions"]}
+    required = {name.removeprefix("replace_") + "_source_replacement"
+                for name, *_ in PATCHES}
+    required |= {
+        "pb_service_ring_retained_literal_pool",
+        "pb_service_ring_buffer_write_source_text",
+        "pb_ring_rx_frame_source_alignment", "pb_ring_rx_frame_source_text",
+        "pb_ring_rx_event_source_text", "pb_ring_tx_event_source_alignment",
+        "pb_ring_tx_event_source_text", "pb_ring_relay_source_text",
+    }
+    if not required <= region_names:
+        raise AuditError("production manifest regions changed")
 
     return {
         "surface": {
@@ -272,8 +352,22 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "relay_registry_record": "0x006a45b0",
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 1362,
+            "source_inventory_available": True,
+            "source_functions": 5,
+            "compiled_text_bytes": 594,
+            "alignment_bytes": 4,
+            "strict_relocations": 9,
+            "stock_replaced_bytes": 1362,
+            "retained_literal_pool_bytes": 150,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized physical paired-G2 BLE relay, live nanopb peer, "
+                "or ring-event evidence is available."
+            ),
         },
     }
 

@@ -18,6 +18,15 @@ raw_false_interior_bl	0x004DDD58->0x005CE370, second halfword of SDIV at 0x004DD
 raw_false_interior_digest	8263c3216971e361e7a252743167c96403e2846941902ecec6f9e61a7d5d872d
 direct_b_w_entry_or_interior_targets	0
 retained_path	platform\protocols\pb_service_ring\pb_service_ring.c
-source_inventory	unavailable; linked object complete but historical source-only count unknown
-production_routed	false
-ownership_bytes	0
+source_inventory	four linked stock entries plus one source-only bounded nanopb output callback
+production_routed	true
+ownership_bytes	1362
+production_source	components/apollo_main/core_overlay/pb_service_ring.c
+production_source_functions	5
+compiled_text_bytes	594
+generated_alignment_bytes	4
+strict_relocations	9
+stock_function_bytes_replaced	1362
+retained_literal_pool_bytes	150
+software_functional_gap	false
+hardware_validation	blocked; no authorized physical paired-G2 BLE relay, live nanopb peer, or ring-event evidence is available

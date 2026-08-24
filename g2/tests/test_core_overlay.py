@@ -58,10 +58,10 @@ class ApolloCoreOverlayTests(unittest.TestCase):
     def test_overlay_and_complete_component_are_pinned(self) -> None:
         overlay = self.component_report["overlay"]
         component = self.component_report["component"]
-        self.assertEqual(overlay["size"], 174816)
+        self.assertEqual(overlay["size"], 197488)
         self.assertEqual(
             overlay["sha256"],
-            "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
+            "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
         )
         expected_legacy_functions = {
                 "evenhub_longpress": {"offset": 0, "size": 54},
@@ -2706,18 +2706,20 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         self.assertEqual(overlay["link"]["text_size"], 109592)
         self.assertEqual(overlay["link"]["rodata_size"], 3996)
         self.assertEqual(overlay["link"]["resolved_relocation_count"], 906)
-        self.assertEqual(len(overlay["functions"]), 1045)
-        self.assertEqual(len(overlay["patched_sites"]), 983)
-        self.assertEqual(component["replaced_stock_function_bytes"], 135380)
-        self.assertEqual(component["generated_patch_site_bytes"], 135200)
+        self.assertEqual(len(overlay["functions"]), 1253)
+        self.assertEqual(len(overlay["patched_sites"]), 1184)
+        self.assertEqual(component["replaced_stock_function_bytes"], 165682)
+        self.assertEqual(component["generated_patch_site_bytes"], 165502)
         self.assertEqual(component["generated_wrapper_bytes"], 32)
         self.assertEqual(component["source_owned_in_place_bytes"], 184)
-        self.assertEqual(component["source_owned_bytes"], 175000)
-        self.assertEqual(component["opaque_base_bytes"], 3387980)
-        self.assertEqual(component["size"], 3698212)
+        self.assertEqual(component["source_owned_in_place_data_bytes"], 2200)
+        self.assertEqual(component["replaced_stock_data_bytes"], 2200)
+        self.assertEqual(component["source_owned_bytes"], 199872)
+        self.assertEqual(component["opaque_base_bytes"], 3355478)
+        self.assertEqual(component["size"], 3720884)
         self.assertEqual(
             component["sha256"],
-            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
+            "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
         )
 
     def test_freertos_semaphore_take_upstream_pair_is_source_closed(self) -> None:
@@ -4779,18 +4781,18 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (1049, 987, 480),
+            (1248, 1181, 679),
         )
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 174816,
+                "overlay_size": 197488,
                 "overlay_sha256": (
-                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
+                    "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183"
                 ),
-                "component_size": 3698212,
+                "component_size": 3720884,
                 "component_sha256": (
-                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
+                    "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a"
                 ),
             },
         )
@@ -71785,9 +71787,9 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "output_name": (
                     "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
                 ),
-                "expected_size": 4476706,
+                "expected_size": 4499378,
                 "expected_sha256": (
-                    "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
+                    "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783"
                 ),
             },
         )
@@ -71819,9 +71821,9 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "components/apollo_main/core_overlay/build/"
                     "ota_s200_firmware_ota.bin"
                 ),
-                "size": 3698212,
+                "size": 3720884,
                 "sha256": (
-                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
+                    "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a"
                 ),
                 "profiles": {
                     "linux-clang": {
@@ -72338,12 +72340,15 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             },
         )
         self.assertEqual(
-            [region["name"] for region in main_component["regions"][-4:]],
+            [region["name"] for region in main_component["regions"][-7:]],
             [
-                "cordio_smp_act_check_attempts_source_text",
-                "cordio_smp_act_pairing_complete_source_alignment",
-                "cordio_smp_act_pairing_complete_source_text",
-                "cordio_smp_act_execute_source_text",
+                "pb_conversate_notify_source_text",
+                "pb_conversate_prep_list_source_text",
+                "pb_conversate_prep_select_source_text",
+                "pb_conversate_comm_resp_source_alignment",
+                "pb_conversate_comm_resp_source_text",
+                "pb_conversate_tag_tracking_source_alignment",
+                "pb_conversate_tag_tracking_source_text",
             ],
         )
         tag_chunk_regions = {
@@ -72740,30 +72745,30 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             output = Path(temp)
             report = open_cfw.build(SOURCE_MANIFEST_PATH, output)
             plan_bytes = (output / "flash-plan.json").read_bytes()
-            self.assertEqual(len(plan_bytes), 1480138)
+            self.assertEqual(len(plan_bytes), 2031772)
             self.assertEqual(
                 hashlib.sha256(plan_bytes).hexdigest(),
-                "cec97a55ed94dfdf2730983fb79f764fceccf9931caa69290f14fb4d586ba6a4",
+                "ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f",
             )
             plan = json.loads(plan_bytes)
-            self.assertEqual(report["placed_region_count"], 2094)
+            self.assertEqual(report["placed_region_count"], 2894)
             self.assertEqual(report["unresolved_region_count"], 2)
-            self.assertEqual(len(plan["flash_regions"]), 2094)
+            self.assertEqual(len(plan["flash_regions"]), 2894)
             self.assertEqual(len(plan["unresolved_flash_regions"]), 2)
             self.assertEqual(len(plan["container_only_regions"]), 5)
             self.assertEqual(
                 len(plan["flash_regions"])
                 + len(plan["unresolved_flash_regions"])
                 + len(plan["container_only_regions"]),
-                2101,
+                2901,
             )
             self.assertEqual(
                 report["package"]["size"],
-                4476706,
+                4499378,
             )
             self.assertEqual(
                 report["package"]["sha256"],
-                "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058",
+                "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
             )
             ntz_flash_regions = {
                 region["region"]: {
@@ -73021,7 +73026,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     generated_bytes,
                     opaque_bytes,
                 ),
-                (175223, 134744, 4166739),
+                (196085, 167456, 4135837),
             )
             cmsis_flash_regions = {
                 region["region"]: (
@@ -74597,6 +74602,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "bootloader_littlefs_tag_type3_source_leaf",
                     "bootloader_littlefs_tag_id_source_leaf",
                     "bootloader_littlefs_tag_size_source_leaf",
+                    "cordio_smp_act_none_source_in_place",
                     "freertos_v_restore_context_of_first_task_source_copy",
                     "freertos_v_raise_privilege_source_copy",
                     "freertos_v_start_first_task_source_copy",

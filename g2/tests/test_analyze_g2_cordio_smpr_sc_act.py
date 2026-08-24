@@ -37,6 +37,13 @@ class SmprScActTest(unittest.TestCase):
         self.assertEqual(module["even_interior_looking_windows"], 5)
         self.assertEqual(report["architecture"]["ccb_key_ready_offset"], 0x44)
         self.assertTrue(report["lineage"]["independent_release_discriminator"])
+        production = report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["live_functions"], 20)
+        self.assertEqual(production["compiled_leaf_bytes"], 1006)
+        self.assertEqual(production["source_owned_bytes_added"], 1030)
+        self.assertEqual(production["stock_bytes_replaced"], 1162)
+        self.assertIn("blocked by unavailable authorized G2/EM9305", production["hardware_validation"])
 
 
 if __name__ == "__main__":

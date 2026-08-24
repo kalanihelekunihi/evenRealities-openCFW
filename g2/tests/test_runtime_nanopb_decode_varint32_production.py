@@ -125,9 +125,9 @@ PROSPECTIVE_LINUX_PINS = {
     },
 }
 APPLE_AGGREGATE_PINS = {
-    "overlay": (167_426, "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"),
-    "component": (3_690_822, "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"),
-    "package": (4_469_316, "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"),
+    "overlay": (167_426, "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"),
+    "component": (3_690_822, "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"),
+    "package": (4_469_316, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"),
     "build_report": (2_323, "61f0710b2087e55b5849ea254521b9b65c7b7d81ddaaa645803b59eaaa3475b7"),
     "flash_plan": (1_337_744, "642d39802f988c3da5e108c97fdcff82102cfcdfffd75710bd6e0a3017f7758e"),
 }

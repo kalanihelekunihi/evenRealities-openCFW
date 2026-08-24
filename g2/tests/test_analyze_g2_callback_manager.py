@@ -40,7 +40,16 @@ class G2CallbackManagerTests(unittest.TestCase):
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"],[])
         self.assertFalse(p["new_version_discriminator"])
 
-    def test_not_production_routed(self): self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_source_closure(self):
+        p = self.report["production"]
+        self.assertTrue(p["production_routed"] and p["source_inventory_available"])
+        self.assertFalse(p["software_functional_gap"])
+        self.assertEqual(
+            (p["source_functions"], p["compiled_text_bytes"], p["alignment_bytes"],
+             p["strict_relocations"], p["stock_replaced_bytes"],
+             p["retained_diagnostic_pool_bytes"], p["hardware_validation"]),
+            (8, 408, 14, 6, 1240, 118, "not-applicable"),
+        )
 
 
 if __name__ == "__main__": unittest.main()

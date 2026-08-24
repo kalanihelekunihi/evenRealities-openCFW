@@ -19979,8 +19979,15 @@ The analyzer pins the `note`, `play`, `start`, and `stop` grammars, exact
 validation limits and response strings, and all four calls into the bounded
 buzzer driver. The preceding clean-bond and keep-connect handlers are
 explicitly excluded by their independent command records and pool boundary.
-Historical source inventory is unavailable, so no candidate is routed and
-production ownership remains zero.
+Historical source inventory remains unavailable. The independently authored
+`at_buzzer.c` implementation is production-routed as one 2,740-byte Thumb leaf
+with 23 strict relocations to the retained output and buzzer-driver ABI. A
+guarded `B.W` replacement covers the complete 1,208-byte stock object and pool;
+source plus generated replacement account for 3,948 ownership bytes. Host
+behavior, analyzer, component, manifest, package, and flash-plan gates pass.
+Audible output, frequency/pitch, duty-cycle, beat timing, predefined playback,
+and stop behavior remain blocked by unavailable authorized physical G2 buzzer
+evidence; no hardware or flash operation was performed.
 
 ### eAT audio-control analysis boundary
 
@@ -20023,8 +20030,12 @@ the topology.
 The analyzer pins difference capture, debug toggle, baseline read/save,
 gesture configuration read/write, threshold bounds, delayed persistence
 readback, retained responses, and exact physical boundary. Historical source
-inventory is unavailable, so no candidate is routed and production ownership
-remains zero. This completes all four retained eAT source paths.
+inventory is unavailable. The independently authored `at_tp.c` candidate is
+now production-routed through two strict leaves (1,548 compiled bytes plus two
+alignment bytes) and two guarded redirects that replace the complete 1,040-byte
+stock object. No hardware was accessed; live Cypress-controller and physical
+gesture validation is blocked by unavailable authorized G2/touch evidence.
+This completes the software boundary for all four retained eAT source paths.
 
 ### Pathless eAT core/sensor analysis boundary
 
@@ -20078,7 +20089,9 @@ The authenticated source-path/corpus correlation ranks all 15 retained
 bytes. Every linked object is now closed: 143 functions / 47,644 body bytes /
 51,744 physical bytes. The original values remain positive lower-bound anchors;
 the complete closure manifest records the restored functions and whole-object
-boundaries. Production ownership remains zero.
+boundaries. The glasses-case and Ring services are now production-routed and
+claim 2,722 stock body bytes; the other thirteen retained services remain
+analysis-only.
 
 ### Translate protobuf-service analysis boundary
 
@@ -20097,8 +20110,12 @@ The retained `pb_service_glasses_case.c` object is completely bounded at
 bytes and their pool contributes 124 bytes. Four exact-start callers, 86 body
 calls, RX/TX status policy, the command-1/nested-selector-3 ten-byte message,
 case-state providers, notification counter, and service-`0x81` BLE paths are
-pinned with no strict-interior ingress. No authenticated source candidate is
-routed; production ownership remains zero.
+pinned with no strict-interior ingress. Five clean-room source functions compile
+to 546 bytes plus ten alignment bytes. Four guarded redirects replace all 1,360
+stock body bytes while retaining the 124-byte official pool; sixteen strict
+relocations, host behavior, component, package, and deployment-plan gates are
+green. Live temple/case BLE and physical case-state behavior remain explicitly
+blocked by unavailable authorized evidence.
 
 ### EFS service analysis boundary
 
@@ -20331,9 +20348,14 @@ exact-start calls, the stored service-`0x91` relay callback, 82 body calls,
 RX/TX statuses, MAC/event message fields, and BLE transmit route are pinned.
 The one raw interior candidate is the second halfword of a valid `SDIV`, so
 real strict-interior ingress is zero. No authenticated source candidate is
-routed; production ownership remains zero.
+required: the independently authored five-function production source compiles
+to 594 text bytes plus four alignment bytes, and four guarded redirects replace
+all 1,362 stock body bytes. The 150-byte official alignment/literal tail is
+retained. Host behavior, relocation, component, package, and deployment-plan
+checks are green; paired-G2 BLE relay and live nanopb/ring-event validation are
+blocked by unavailable authorized physical evidence.
 
-### Teleprompt protobuf-service analysis boundary
+### Teleprompt protobuf-service production routing
 
 The retained `pb_service_teleprompt.c` object is completely bounded at
 `[0x005885B4,0x00588D74)`: seven exact-named bodies contribute 1,854 code
@@ -20342,8 +20364,14 @@ exact-start callers, 98 body calls, caller-owned RX decode and replay
 filtering, six command/tag TX envelopes, the shared message/buffer pair, and
 service-6 transport are pinned. The sole raw interior-looking pair starts on
 the second halfword of a valid `MUL`, so real strict-interior ingress is zero.
-No authenticated source candidate is routed; production ownership remains
-zero.
+Nine independently authored selector-isolated C functions compile to 1,348
+Thumb text bytes plus four alignment bytes. Seven guarded redirects replace
+all 1,854 stock body bytes, and 39 strict relocations bind only to recovered
+nanopb, BLE, timing, role, message, and sibling-source interfaces. The
+130-byte official tail remains retained. Host behavior, component, manifest,
+package, and deployment-plan gates are green. Live service-6 master/peer BLE,
+timing, and teleprompt UI validation are blocked by unavailable authorized
+physical evidence.
 
 ### Even-AI protobuf-service analysis boundary
 
@@ -21049,6 +21077,273 @@ package sizes are `164912/3688308/4466802`, with SHA-256 values
 `03292baa960e39beb368b32a0b93f3f68d13caf6db121a2bb6020363c366afa0`.
 No hardware operation was performed.
 
+## Current protobuf conversate-service production routing
+
+`pb_service_conversate.c` contributes eight Apple-only selector-isolated
+strict-relocation leaves: two bounded memory helpers and all six linked service
+entries. The 1,098 compiled text bytes plus eight alignment bytes preserve the
+caller-owned nanopb RX ABI, 16-bit input-length truncation, 3,000-ms unsigned
+duplicate window, five command/tag envelopes, role gate, service `0x0B`, and
+send-versus-notify routing. Thirty-three relocations bind only to named
+source-owned providers, the authenticated nanopb decoder, or prior leaves.
+
+Six guarded redirects replace all 1,776 stock body bytes in
+`[0x005B1B4C,0x005B223C)`; the 128-byte official pool through `0x005B22BC`
+remains retained. Host behavior and selector tests, stock analyzer, component
+assembly, region partition, complete package, and deployment plan pass. Current
+overlay/component/package identities are `197488/3720884/4499378` and
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+`03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The flash plan is 2,018,179 bytes with 2,874 placed, two protected unresolved,
+and five container-only regions.
+
+No hardware was accessed. Live service-`0x0B` master/peer BLE behavior,
+transport timing, and conversate UI integration remain blocked by unavailable
+authorized evidence: the right temple is nonresponsive, the left must remain
+stock, and the recovery gate forbids another write without debugger evidence.
+
+## Current ring-battery state-service source increment
+
+`service_ring_battery.c` production-routes all five linked state-service
+functions. Five guarded redirects replace 352 stock body bytes with 134
+compiled Thumb bytes plus four alignment bytes. The two strict relocations
+terminate at the recovered local and peer service-record transports, while the
+44-byte diagnostic/path/literal pool remains authenticated official data.
+
+Host execution covers the cached state cell at `0x20074F3A`, level clamping,
+charge normalization, both getters, the 12-byte message ABI, local type-5
+update, peer type-6 request, and service ID `0x105`. Canonical Apple
+overlay/component/package identities are 193,876 / 3,717,272 / 4,495,766
+bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 1,985,178-byte flash plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+No hardware was used; paired-device delivery, callback timing, and live ring
+battery behavior remain blocked by unavailable authorized physical evidence.
+
+## Current ring-battery callback-facade production routing
+
+Five selector-isolated leaves from `cb_ring_battery.c` occupy overlay offsets
+193,488 through 193,578 and replace the five stock facade bodies at
+`[0x00500378,0x005003F2)`. Their compiled text totals 88 bytes with two bytes
+of generated alignment and five strict relocations. The complete stock body
+replacement is 122 bytes; the adjacent 30-byte authenticated pool remains
+official data.
+
+The Apple report records overlay size 193,578 and SHA-256
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+component size 3,716,974 and SHA-256
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and complete package size 4,495,468 and SHA-256
+`03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The deterministic 1,972,280-byte flash plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+No hardware operation was performed; the facade has no independent physical
+validation tail.
+
+## Current UX battery-sync production routing
+
+`ux_battery_sync.c` places a 158-byte leaf at overlay offset 193,580 after two
+alignment bytes. A guarded branch replaces `[0x005F958C,0x005F98D0)`; the
+84-byte pool remains stock. Eleven strict relocations and the stored service
+record ingress are pinned. Current overlay/component/package hashes are
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+No hardware was accessed; paired-device validation is blocked by unavailable
+authorized physical evidence.
+
+## Current generic callback-manager production routing
+
+`callback_manager.c` supplies eight selector-isolated functions at overlay
+offsets `193068..193488`. The 408 compiled bytes and 14 alignment bytes use six
+strict relocations: node allocation/free bind to source-owned synchronized heap
+wrappers, while deinit/register/unregister bind through the exact redirected
+manager helper entries. Eight guarded `B.W` sites replace every byte of the
+1,240-byte stock function inventory; the 118-byte diagnostic pool at
+`[0x00510546,0x005105BC)` remains authenticated official data.
+
+Host tests cover null validation, allocation failure, duplicate-success
+semantics, prepend ordering, head/interior removal, full-list deinit, and
+ordered two-argument notification. Canonical Apple overlay/component/package
+sizes are `193488/3716884/4495378`, with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 1,963,573-byte deployment plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+The manager is pure in-memory behavior, so no hardware evidence is required
+for this tranche. This is not a whole-firmware completeness claim.
+
+## Current charge/message callback-facade production routing
+
+`callback_facades.c` contributes ten Apple-only strict-relocation leaves at
+overlay offsets `192852..193066`. Ten guarded `B.W` replacements cover all 380
+authenticated stock function bytes across the charge and message-count facade
+objects. The two directly addressed 34-byte diagnostic/type pools remain
+official. The 208 compiled bytes plus six alignment bytes preserve the two
+fixed callback-list identities, `BAT_INFO`/`MSG_COUNT` type identities,
+init/deinit lifecycle, null registration policy, provider return propagation,
+and notification in/out value ABI.
+
+Five host contracts and ten selector builds cover software behavior. The
+fail-closed analyzer authenticates stock ingress/call topology, source and leaf
+hashes, ten relocations, redirects, retained pools, build report, manifest
+regions, package, and flash plan. Canonical identities are
+`193488/3716884/4495378` bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The pure facades introduce no direct hardware operation. This closure is not a
+claim of wider firmware completeness.
+
+## G2 BLE OTA profile production routing
+
+`ble_ota_profile.c` contributes seven Apple-only strict-relocation leaves at
+overlay offsets `191828..192212`. Seven guarded `B.W` replacements cover all
+620 authenticated stock function bytes at `[0x004BDB90,0x004BDDFC)` while the
+directly addressed 80-byte pool `[0x004BDDFC,0x004BDE4C)` remains official.
+The 376 compiled bytes plus eight alignment bytes preserve the recovered
+four-byte control block, CCC-message ABI, complete event switch, WSF allocation
+and send behavior, OTA cancellation/reset, delayed disconnect, write
+forwarding, TX-ready/TX-complete policy, and notification handle `0x0824`.
+
+Five host contracts and seven selector builds cover software behavior. The
+fail-closed analyzer authenticates stock ingress/call/pointer topology, source
+and leaf hashes, seventeen relocations, redirects, retained pool, build report,
+manifest regions, package, and flash plan. Canonical identities are
+`193488/3716884/4495378` bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+No hardware was used. Physical OTA/controller/peer evidence is explicitly
+blocked.
+
+## G2 BLE Ring profile production routing
+
+`ble_ring_profile.c` contributes seven Apple-only strict-relocation leaves at
+overlay offsets `192212..192852`. Seven guarded `B.W` replacements cover all
+1,446 authenticated stock function bytes at `[0x004C46C0,0x004C4C66)` while
+the directly addressed 134-byte pool `[0x004C4C66,0x004C4CEC)` remains
+official. The 632 compiled bytes plus eight alignment bytes preserve the
+recovered 12-byte control and message ABIs, service discovery, 16-bit epoch
+cancellation, delayed CCC sequence, connection lifecycle, ATT RX forwarding,
+TX command delivery, and queued WSF allocation.
+
+Six host contracts and seven selector builds cover software behavior. The
+fail-closed analyzer authenticates stock ingress/call/pointer topology, source
+and leaf hashes, 23 relocations, redirects, retained pool, build report,
+manifest regions, package, and flash plan. Canonical identities are
+`193488/3716884/4495378` bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 1,963,573-byte deployment plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+No hardware was used. Physical discovery, CCC timing, ATT handle behavior,
+controller concurrency, and peer evidence are explicitly blocked. No software
+gap remains in the OTA/Ring pair; this is not a firmware-completeness claim.
+
+## G2 Packetcraft Cordio GATT-profile source closure
+
+`cordio_gatt_profile.c` is the production adapter for all six linked functions
+in the authenticated Packetcraft Cordio r20.05c `gatt_main.c` object. Six
+strict-relocation leaves contribute 254 compiled Thumb bytes plus eight
+alignment bytes; guarded redirects replace all 322 stock function bytes. Ten
+relocations terminate at the recovered G2 Cordio discovery,
+service-changed/CCC/indication, and client-supported-feature providers. The
+directly referenced 34-byte literal pool remains official data.
+
+Host contracts cover discovery arguments, service-changed filtering and
+broadcast/specific-connection indication behavior, CCC gating, client-feature
+read/write callbacks, and six selector-isolated target builds. The analyzer
+pins stock topology, exact upstream and production source provenance, compiled
+leaves, relocations, redirects, retained data, component tiling, manifest,
+package, and flash-plan identity. The omitted stock EasyLogger expansion is
+non-controlling observability; functional ATT/GATT operations are retained.
+
+Canonical Apple overlay/component/package identities are
+`193488/3716884/4495378` bytes and `554bb559...cf72` /
+`a417dede...c0e80` / `d7dda10b...aae`. The flash plan is 1,903,321 bytes and
+`fc4d840a...6314`. No hardware was accessed or flashed. ATT discovery, CCCD,
+indication delivery, controller timing, and peer interoperability remain
+blocked by unavailable authorized G2/EM9305 physical evidence.
+
+## G2 gesture-processing service source closure
+
+`service_gesture_processor.c` is the clean-room production replacement for the
+five linked stock entries and pools in `[0x00502D56,0x00503298)`. The source
+preserves production-mode click feedback, proximity state, retained event-name
+lookup, mask formatting, touch-frame decoding, diagnostic gates, proximity
+notification, error reset/preemption, event ordering, and single-click
+threshold behavior. The host suite exercises each branch and proves that every
+selector emits exactly one Thumb function.
+
+Apple clang 21 emits 1,608 bytes across five relocated leaves with six
+alignment bytes and 53 strict relocations. Five guarded redirects replace all
+1,346 stock physical bytes. The current reviewed overlay is 191,566 bytes with SHA-256
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`;
+the Apollo component is 3,714,962 bytes with SHA-256
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`;
+the complete package is 4,493,456 bytes with SHA-256
+`03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+
+No hardware was used. Physical touch/proximity electrical behavior, event
+delivery, debounce, timing, and gesture interpretation remain blocked by
+unavailable authorized G2 evidence.
+
+## G2 CY8C4046FNI host touch-driver source closure
+
+`drv_cy8c4046fni.c` is the clean-room production replacement for all 23
+executable stock entries in `[0x0055B2EC,0x0055B9C6)`. It preserves the four
+HAL-I2C callback adapters, command veneers, threshold and gesture
+configuration, callback installation, reset/DFU/initialization, touch-frame
+and difference reads, and proximity-baseline behavior. Six host contracts
+cover the transport ABI and functional state machine and prove that each of
+the 23 selectors emits exactly one global Thumb function.
+
+Apple clang 21 emits 1,122 bytes across 23 relocated leaves with 18 alignment
+bytes and 19 strict relocations. Twenty-three guarded redirects replace all
+1,754 stock function bytes. The directly addressed 170-byte callback/string
+pool `[0x0055B9C6,0x0055BA70)` remains authenticated stock data. The stock
+EasyLogger calls were diagnostic-only and are explicitly omitted; they do not
+gate controller commands, state, buffers, returns, reset, DFU, or timing.
+
+The current overlay is 191,566 bytes with SHA-256
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`;
+the Apollo component is 3,714,962 bytes with SHA-256
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`;
+the complete package is 4,493,456 bytes with SHA-256
+`03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+
+No hardware was used. Physical I2C signaling, electrical reset, controller
+boot/DFU transitions, settling/report timing, and CapSense behavior remain
+blocked by unavailable authorized G2 hardware and capture evidence.
+
+## Current Cordio shared Secure Connections action production routing
+
+`cordio_smp_sc_act.c` supplies all twenty linked shared Secure Connections
+actions as independently compiled Thumb leaves with strict relocation
+contracts. The leaves occupy 2,258 bytes plus 18 alignment bytes; authenticated
+whole-body entry replacements cover all 2,662 stock action bytes. The
+qualification-only zero-DH-key hook remains configuration-excluded. The stock
+G2/R4 no-input/no-output MITM branch is explicit in the production source and
+covered by a host oracle, alongside address, public-key, passkey, cleanup,
+fail-closed, and cryptographic-construction contracts.
+
+The canonical Apple overlay is 177,092 bytes with SHA-256
+`5cf48d9063d32fa4e4c64d423edac9bd5e09a2a63a6b4d591966531c9b89ac8b`;
+the component is 3,700,488 bytes with SHA-256
+`18846b43a03a20429cb925bd6450889a2b5f6044af9bacc8f442ba9580bc3248`;
+and the complete package is 4,478,982 bytes with SHA-256
+`a8a86dfee3d0f23efd5c0fce3421ab07f82b9f7d3e17f4a7ae641709e7639bd8`.
+No device was signed, flashed, or accessed. Authorized G2/EM9305 Secure
+Connections, numeric-comparison, passkey/OOB, DH-key, cancellation, and peer
+interoperability evidence is unavailable, so hardware validation is blocked.
+
 ### Cordio SMP common actions are production-routed
 
 `cordio_smp_act.c` contributes 24 strict-relocation leaves and one exact
@@ -21169,6 +21464,32 @@ identities are `166292/3689688/4468182` bytes and
 `0c1548c6f4b829acc62fcd332fb2c441f2774c4de1be253ea721a4de8eae57d4`.
 No hardware was used. On-device concurrency, role/display gating, transport,
 and visible behavior remain blocked by unavailable physical evidence.
+
+## Protobuf Ring-service production routing
+
+`pb_service_ring.c` contributes five selector-isolated strict-relocation leaves:
+the four exact linked stock entries and a bounded source-only nanopb output
+callback. Four guarded redirects replace all 1,362 stock function bytes with
+594 compiled Thumb bytes and four alignment bytes. Nine relocations bind only
+to bounded nanopb/BLE providers, redirected sibling entries, recovered message
+globals, and the source callback. The 150-byte official alignment/literal tail
+remains retained.
+
+Host behavior covers output bounds, null and codec failures, command/event
+dispatch, MAC-count handling, sequence propagation, service-`0x91` transport,
+and relay-event filtering. After the subsequent glasses-case service tranche,
+canonical overlay/component/package identities are
+195,030 / 3,718,426 / 4,496,920 bytes and
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183` /
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a` /
+`03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 2,004,497-byte deployment plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+
+No hardware was accessed for this tranche. Live paired-G2 relay, nanopb peer
+interoperability, and physical Ring-event behavior are explicitly blocked by
+unavailable authorized physical evidence; no hardware-validation or wider
+firmware-completeness claim is made.
 
 ## Cordio DM LE Secure Connections production routing
 

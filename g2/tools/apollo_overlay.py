@@ -622,7 +622,12 @@ def filter_config_for_profile(
 
     excluded_functions: set[str] = set()
     filtered = dict(config)
-    for key in ("isolated_leaves", "relocated_leaves", "in_place_leaves"):
+    for key in (
+        "isolated_leaves",
+        "relocated_leaves",
+        "in_place_leaves",
+        "in_place_data",
+    ):
         leaves = config.get(key)
         if not isinstance(leaves, list):
             continue  # leave malformed config untouched for downstream schema checks
@@ -3708,6 +3713,196 @@ def append_isolated_leaves(
     )
 
 
+def compile_in_place_data_group(
+    *,
+    root: Path,
+    clang: str,
+    group_config: dict[str, Any],
+    object_path: Path,
+    toolchain_profile: str | None = None,
+    record: bool = False,
+) -> tuple[bytes, dict[str, Any]]:
+    """Compile one relocation-free C const object for scattered in-place use."""
+
+    group_config = resolve_leaf_profile(
+        group_config, toolchain_profile, record=record
+    )
+    symbol_name = group_config.get("symbol")
+    section_name = group_config.get("section")
+    if not isinstance(symbol_name, str) or not re.fullmatch(
+        r"[A-Za-z_][A-Za-z0-9_]*", symbol_name
+    ):
+        raise BuildError("in-place data group requires a C-identifier symbol")
+    if not isinstance(section_name, str) or not section_name.startswith(".rodata."):
+        raise BuildError(
+            f"in-place data {symbol_name} requires an explicit .rodata section"
+        )
+    source_config = group_config.get("source")
+    if not isinstance(source_config, dict):
+        raise BuildError(f"in-place data {symbol_name} requires source metadata")
+    source_relative = source_config.get("path")
+    source_pin = source_config.get("sha256")
+    source_size = source_config.get("size")
+    if not isinstance(source_relative, str) or not isinstance(source_pin, str):
+        raise BuildError(f"in-place data {symbol_name} source pins are incomplete")
+    source_path = resolve_below(root, source_relative)
+    source = source_path.read_bytes()
+    if source_size != len(source) or source_pin != sha256(source):
+        raise BuildError(f"{source_relative}: in-place data source pins changed")
+
+    toolchain = group_config.get("toolchain")
+    if not isinstance(toolchain, dict):
+        raise BuildError(f"in-place data {symbol_name} requires a toolchain")
+    target = toolchain.get("target")
+    flags = toolchain.get("flags")
+    if not isinstance(target, str) or not isinstance(flags, list) or any(
+        not isinstance(flag, str) or not flag for flag in flags
+    ):
+        raise BuildError(f"in-place data {symbol_name} toolchain is invalid")
+    include_dirs, normalized_include_dirs = resolve_toolchain_include_dirs(
+        root, toolchain
+    )
+    version = compiler_version(clang)
+    validate_compiler_version(toolchain, version)
+    command = [clang, f"--target={target}", *flags]
+    for include_dir in include_dirs:
+        command.extend(("-I", str(include_dir)))
+    command.extend(("-c", str(source_path), "-o", str(object_path)))
+    completed = subprocess.run(command, check=False, capture_output=True, text=True)
+    if completed.returncode:
+        raise BuildError(
+            f"in-place data {symbol_name} compilation failed:\n"
+            + (completed.stderr.strip() or completed.stdout.strip())
+        )
+
+    elf, sections = parse_elf32(object_path)
+    section = section_named(sections, section_name)
+    if not is_rodata(section):
+        raise BuildError(
+            f"in-place data {symbol_name} section {section_name} is not read-only"
+        )
+    section_index = int(section["index"])
+    section_size = int(section["size"])
+    alignment = int(section["alignment"])
+    symbols = parse_elf32_symbols(elf, sections)
+    matches = [
+        item for item in symbols
+        if item["name"] == symbol_name and int(item["type"]) == STT_OBJECT
+    ]
+    if len(matches) != 1:
+        raise BuildError(
+            f"in-place data expected one object {symbol_name!r}, observed {len(matches)}"
+        )
+    symbol = matches[0]
+    if (
+        int(symbol["section_index"]) != section_index
+        or int(symbol["binding"]) != STB_GLOBAL
+        or int(symbol["visibility"]) != 0
+        or int(symbol["value"]) != 0
+        or int(symbol["size"]) != section_size
+    ):
+        raise BuildError(
+            f"in-place data symbol {symbol_name} does not exactly occupy {section_name}"
+        )
+    relocations = [
+        item for item in sections
+        if int(item["type"]) in (SHT_REL, SHT_RELA)
+        and int(item["info"]) == section_index
+        and int(item["size"])
+    ]
+    if relocations:
+        raise BuildError(
+            f"in-place data {symbol_name} must be relocation-free"
+        )
+    start = int(section["offset"])
+    payload = elf[start:start + section_size]
+    expected = group_config.get("expected")
+    if not isinstance(expected, dict):
+        raise BuildError(f"in-place data {symbol_name} requires expected pins")
+    if not record and (
+        expected.get("size") != len(payload)
+        or expected.get("sha256") != sha256(payload)
+        or expected.get("alignment") != alignment
+    ):
+        raise BuildError(
+            f"in-place data {symbol_name} output differs from reviewed pins"
+        )
+
+    placements = group_config.get("placements")
+    if not isinstance(placements, list) or not placements or any(
+        not isinstance(item, dict) for item in placements
+    ):
+        raise BuildError(f"in-place data {symbol_name} requires placements")
+    cursor = 0
+    reviewed_placements: list[dict[str, Any]] = []
+    names: set[str] = set()
+    for index, item in enumerate(placements):
+        name = item.get("name")
+        runtime_address = item.get("runtime_address")
+        source_offset = item.get("source_offset")
+        size = item.get("size")
+        stock_sha256 = item.get("stock_sha256")
+        if (
+            not isinstance(name, str)
+            or not name
+            or name in names
+            or not isinstance(runtime_address, int)
+            or runtime_address < 0
+            or not isinstance(source_offset, int)
+            or source_offset != cursor
+            or not isinstance(size, int)
+            or size < 1
+            or source_offset + size > len(payload)
+            or not isinstance(stock_sha256, str)
+            or not re.fullmatch(r"[0-9a-f]{64}", stock_sha256)
+        ):
+            raise BuildError(
+                f"in-place data {symbol_name} placement {index} is invalid or non-contiguous"
+            )
+        names.add(name)
+        reviewed_placements.append(dict(item))
+        cursor += size
+    if cursor != len(payload):
+        raise BuildError(
+            f"in-place data {symbol_name} placements do not exactly cover its bytes"
+        )
+
+    source_record = {
+        "path": source_path.relative_to(root.resolve()).as_posix(),
+        "size": len(source),
+        "sha256": sha256(source),
+    }
+    for key in ("license", "origin", "upstream", "upstream_commit", "evidence"):
+        if key in source_config:
+            source_record[key] = source_config[key]
+    toolchain_record: dict[str, Any] = {
+        "executable": clang,
+        "version": version,
+        "target": target,
+        "flags": flags,
+    }
+    if normalized_include_dirs is not None:
+        toolchain_record["include_dirs"] = normalized_include_dirs
+    return payload, {
+        "source": source_record,
+        "toolchain": toolchain_record,
+        "extraction": {
+            "symbol": symbol_name,
+            "section": section_name,
+            "size": len(payload),
+            "sha256": sha256(payload),
+            "alignment": alignment,
+            "relocation_count": 0,
+            "placements": reviewed_placements,
+        },
+        "pins": {
+            "size": len(payload),
+            "sha256": sha256(payload),
+            "alignment": alignment,
+        },
+    }
+
+
 def append_relocated_leaves(
     *,
     root: Path,
@@ -4527,6 +4722,10 @@ def patch_component(
         list[tuple[bytes, dict[str, Any]]]
         | tuple[tuple[bytes, dict[str, Any]], ...]
     ) = (),
+    in_place_data: (
+        list[tuple[bytes, dict[str, Any]]]
+        | tuple[tuple[bytes, dict[str, Any]], ...]
+    ) = (),
 ) -> tuple[bytes, dict[str, Any]]:
     run_base = int(config["run_base"])
     preamble_bytes = int(config["preamble_bytes"])
@@ -4571,6 +4770,79 @@ def patch_component(
     in_place_ranges: list[tuple[int, int, str]] = []
     protected_literal_ranges: list[tuple[int, int, str]] = []
     in_place_names: set[str] = set()
+    in_place_data_plans: list[dict[str, Any]] = []
+    for payload, report in in_place_data:
+        extraction = report.get("extraction")
+        if not isinstance(extraction, dict):
+            raise BuildError("in-place data extraction report is incomplete")
+        symbol = extraction.get("symbol")
+        placements = extraction.get("placements")
+        if not isinstance(symbol, str) or not isinstance(placements, list):
+            raise BuildError("in-place data extraction report is invalid")
+        for placement in placements:
+            if not isinstance(placement, dict):
+                raise BuildError(f"in-place data {symbol} placement is invalid")
+            name = placement.get("name")
+            runtime_address = placement.get("runtime_address")
+            source_offset = placement.get("source_offset")
+            size = placement.get("size")
+            stock_sha256 = placement.get("stock_sha256")
+            if (
+                not isinstance(name, str)
+                or name in in_place_names
+                or not isinstance(runtime_address, int)
+                or not isinstance(source_offset, int)
+                or not isinstance(size, int)
+                or size < 1
+                or source_offset < 0
+                or source_offset + size > len(payload)
+                or not isinstance(stock_sha256, str)
+            ):
+                raise BuildError(f"in-place data {symbol} placement is invalid")
+            in_place_names.add(name)
+            span_start = runtime_address
+            span_end = span_start + size
+            payload_offset = preamble_bytes + span_start - run_base
+            if (
+                span_start < run_base
+                or payload_offset < preamble_bytes
+                or payload_offset + size > len(base)
+            ):
+                raise BuildError(
+                    f"in-place data {name} exceeds the stock Apollo payload"
+                )
+            for other_start, other_end, other_name in in_place_ranges:
+                if span_start < other_end and other_start < span_end:
+                    raise BuildError(
+                        f"in-place data {name} overlaps {other_name}"
+                    )
+            observed_stock = original[payload_offset:payload_offset + size]
+            observed_digest = sha256(observed_stock)
+            if observed_digest != stock_sha256:
+                raise BuildError(
+                    f"in-place data {name} stock SHA-256 differs at "
+                    f"0x{span_start:08X}: expected {stock_sha256}, observed "
+                    f"{observed_digest}"
+                )
+            replacement = payload[source_offset:source_offset + size]
+            in_place_ranges.append((span_start, span_end, name))
+            in_place_data_plans.append(
+                {
+                    "name": name,
+                    "symbol": symbol,
+                    "runtime_address": span_start,
+                    "runtime_address_hex": f"0x{span_start:08X}",
+                    "end_exclusive": span_end,
+                    "end_exclusive_hex": f"0x{span_end:08X}",
+                    "payload_offset": payload_offset,
+                    "source_offset": source_offset,
+                    "size": size,
+                    "stock_sha256": observed_digest,
+                    "replacement_sha256": sha256(replacement),
+                    "replacement_hex": replacement.hex(),
+                    "_replacement": replacement,
+                }
+            )
     for leaf, report in in_place_leaves:
         extraction = report.get("extraction")
         stock = report.get("stock")
@@ -4714,6 +4986,11 @@ def patch_component(
                     f"in-place leaf {function_name} overlaps protected "
                     f"literal bytes required by {dependency_owner}"
                 )
+
+    for plan in in_place_data_plans:
+        payload_offset = int(plan["payload_offset"])
+        replacement = bytes(plan.pop("_replacement"))
+        patched[payload_offset:payload_offset + len(replacement)] = replacement
 
     for plan in in_place_plans:
         payload_offset = int(plan["payload_offset"])
@@ -4898,6 +5175,8 @@ def patch_component(
     }
     if in_place_plans:
         details["patched_in_place_leaves"] = in_place_plans
+    if in_place_data_plans:
+        details["patched_in_place_data"] = in_place_data_plans
     return bytes(patched), details
 
 
@@ -4989,6 +5268,17 @@ def build(
         raise BuildError("every in-place leaf requires a function name")
     if len(set(in_place_function_names)) != len(in_place_function_names):
         raise BuildError("in-place leaf function names must be unique")
+    in_place_data_configs = config.get("in_place_data", [])
+    if (
+        not isinstance(in_place_data_configs, list)
+        or any(not isinstance(item, dict) for item in in_place_data_configs)
+    ):
+        raise BuildError("in_place_data must be a list of records")
+    in_place_data_symbols = [item.get("symbol") for item in in_place_data_configs]
+    if any(not isinstance(name, str) for name in in_place_data_symbols):
+        raise BuildError("every in-place data group requires a symbol")
+    if len(set(in_place_data_symbols)) != len(in_place_data_symbols):
+        raise BuildError("in-place data symbols must be unique")
     configured_functions = config.get("functions")
     if (
         not isinstance(configured_functions, list)
@@ -5199,6 +5489,18 @@ def build(
                     record=record_profile,
                 )
             )
+        in_place_data = []
+        for index, data_config in enumerate(in_place_data_configs):
+            in_place_data.append(
+                compile_in_place_data_group(
+                    root=root,
+                    clang=clang,
+                    group_config=data_config,
+                    object_path=temporary_root / f"in-place-data-{index}.o",
+                    toolchain_profile=resolved_profile,
+                    record=record_profile,
+                )
+            )
     overlay_digest = sha256(overlay)
     expected = config["expected"]
     verify_expected(
@@ -5214,6 +5516,7 @@ def build(
         functions=functions,
         config=config,
         in_place_leaves=in_place_leaves,
+        in_place_data=in_place_data,
     )
     component_digest = sha256(component)
     verify_expected(
@@ -5269,6 +5572,16 @@ def build(
     source_owned_in_place_bytes = sum(
         int(item["placement"]["size"]) for item in in_place_leaf_reports
     )
+    patched_in_place_data = details.get("patched_in_place_data", [])
+    expected_data_placements = sum(
+        len(item[1]["extraction"]["placements"]) for item in in_place_data
+    )
+    if len(patched_in_place_data) != expected_data_placements:
+        raise BuildError("in-place data patch report count changed")
+    source_owned_in_place_data_bytes = sum(
+        int(item["size"]) for item in patched_in_place_data
+    )
+    in_place_data_reports = [item[1] for item in in_place_data]
     patched_site_bytes = sum(
         len(bytes.fromhex(site["replacement_hex"]))
         for site in details["patched_sites"]
@@ -5302,9 +5615,12 @@ def build(
                 - int(config["preamble_bytes"])
                 - patched_site_bytes
                 - source_owned_in_place_bytes
+                - source_owned_in_place_data_bytes
             ),
             "source_owned_bytes": (
-                len(overlay) + source_owned_in_place_bytes
+                len(overlay)
+                + source_owned_in_place_bytes
+                + source_owned_in_place_data_bytes
             ),
             **(
                 {
@@ -5313,6 +5629,15 @@ def build(
                     )
                 }
                 if in_place_leaf_reports
+                else {}
+            ),
+            **(
+                {
+                    "source_owned_in_place_data_bytes": (
+                        source_owned_in_place_data_bytes
+                    )
+                }
+                if in_place_data_reports
                 else {}
             ),
             "generated_wrapper_bytes": int(config["preamble_bytes"]),
@@ -5325,6 +5650,7 @@ def build(
                 if site["branch"] in ("b_w", "copy")
                 )
             ),
+            "replaced_stock_data_bytes": source_owned_in_place_data_bytes,
         },
     }
     if isolated_leaf_reports:
@@ -5333,6 +5659,8 @@ def build(
         report["relocated_leaves"] = relocated_leaf_reports
     if in_place_leaf_reports:
         report["in_place_leaves"] = in_place_leaf_reports
+    if in_place_data_reports:
+        report["in_place_data"] = in_place_data_reports
     if len(source_records) == 1:
         report["source"] = source_records[0]
     atomic_write_json(output_dir / "build-report.json", report)

@@ -1,8 +1,8 @@
 # G2 `pb_service_glasses_case.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+Status: software-complete clean-room production replacement; physical
+glasses/case interoperability validation is explicitly blocked by unavailable
+authorized evidence. Run addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -54,7 +54,29 @@ Three retained 20-byte assertion descriptors identify the nested validator
 and both encoders at source lines 86, 100, and 138. Together with the main
 pool they provide all four references to the exact retained source path.
 
-The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No clean-room candidate exists, the service is
-absent from `overlay.json`, and OpenCFW claims zero production ownership
-bytes. The next smallest retained service frontier is `pb_service_ring.c`.
+## Production closure
+
+The independently authored GPL-3.0-only source at
+`components/apollo_main/core_overlay/pb_service_glasses_case.c` contains the
+four linked entries plus the bounded nanopb output callback. Five
+selector-isolated Thumb leaves compile to 546 text bytes plus ten alignment
+bytes with sixteen strict relocations. Four guarded `B.W` redirects replace
+all 1,360 stock body bytes while preserving the authenticated 124-byte stock
+literal pool.
+
+The canonical Apple build is pinned at 195,030 overlay bytes
+(`2005214a...f116`), 3,718,426 Apollo-component bytes
+(`2431adf1...1aaa`), and 4,496,920 package bytes
+(`3a049e5c...272b`). The 2,004,497-byte deployment plan
+(`ff3e18cf...aa93`) contains 2,854 placed regions, two protected unresolved
+regions, and five container-only regions. Host behavior, one-entry selector
+builds, source identity, relocation topology, component replacements, retained
+pool, manifest regions, package, and aggregate protobuf ownership are all
+fail-closed.
+
+No authorized live service-`0x81` temple/case exchange or physical case-state
+evidence is available. The authorized right temple is application-dead, the
+left temple must remain stock, and the recovery gate forbids further writes.
+Battery/charging/lid/presence providers, BLE interoperability, notification
+sequencing, and physical state transitions therefore remain hardware-blocked;
+they are not claimed as validated or as overall firmware completeness.

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "extends": "g2-2.2.6.10.json",
+  "package": {
+    "output_name": "g2-openCFW-s200_v2.2.6.10-minimal-name-hook.evenota.bin",
+    "expected_size": null,
+    "expected_sha256": null
+  },
+  "component_overrides": {
+    "apollo_main": {
+      "function": "Primary application with one hardware-qualification C hook",
+      "provider": {
+        "kind": "source_build",
+        "path": "build/hardware-validation/minimal-advertised-name-hook/ota_s200_firmware_ota.bin",
+        "size": 3523808,
+        "sha256": "c68375e1336976631c9a6b3a79fb8ac0a0650b245b9e07aba6226debe3b0741a"
+      },
+      "regions": [
+        {
+          "name": "ota_preamble",
+          "function": "32-byte Apollo staging header",
+          "file_offset": 0,
+          "size": 32,
+          "address_status": "container_only",
+          "output": "apollo510b/main-ota-preamble.bin"
+        },
+        {
+          "name": "stock_before_name_hook",
+          "function": "Reviewed stock Apollo application before the single qualification hook",
+          "file_offset": 32,
+          "size": 220584,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4423680,
+          "address_status": "official_blob",
+          "output": "apollo510b/qualification-stock-before-hook.bin"
+        },
+        {
+          "name": "advertised_name_source_call",
+          "function": "Generated BL to the bounded C advertised-name suffix hook",
+          "file_offset": 220616,
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4644264,
+          "address_status": "generated_source_entry_replacement",
+          "output": "apollo510b/qualification-name-hook-call.bin"
+        },
+        {
+          "name": "stock_after_name_hook",
+          "function": "Reviewed stock Apollo application after the single qualification hook",
+          "file_offset": 220620,
+          "size": 3302776,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4644268,
+          "address_status": "official_blob",
+          "output": "apollo510b/qualification-stock-after-hook.bin"
+        },
+        {
+          "name": "advertised_name_source_overlay",
+          "function": "Compiled bounded C advertised-name suffix hook",
+          "file_offset": 3523396,
+          "size": 412,
+          "target": "apollo510b_internal_mram",
+          "target_address": 7947044,
+          "address_status": "source_compiled",
+          "output": "apollo510b/qualification-name-hook-source.bin"
+        }
+      ],
+      "source_appended_boundary": 3523396
+    }
+  }
+}

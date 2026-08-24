@@ -1,7 +1,8 @@
 # Cordio GATT-profile source recovery
 
-Status: exact upstream source admitted; complete six-function stock object
-closed; production routing remains off.
+Status: exact upstream source admitted; complete six-function stock object is
+production-routed. Software behavior is closed; authorized physical G2/EM9305
+interoperability evidence is unavailable.
 
 The retained path `platform\ble\profiles\gatt\profile_gatt.c` misleadingly
 looks first-party. Its complete `[0x004B59C0,0x004B5B24)` object is Packetcraft
@@ -36,5 +37,32 @@ unobservable.
 header, license, and offline verifier. Stock `GattDiscover` inserts EasyLogger
 diagnostics but preserves the upstream `AppDiscFindService(connId, 2,
 attGattSvcUuid, 3, gattDiscCharList, pHdlList)` operation. The other five
-functions are direct semantic source matches. This removes the final opacity
-from this copied profile object without claiming production ownership.
+functions are direct semantic source matches.
+
+## Production closure
+
+`components/apollo_main/core_overlay/cordio_gatt_profile.c` adapts all six
+functions to the recovered G2 control-block, discovery-list, handle, and
+provider ABI. Six selector-isolated Apple/Clang leaves contribute 254 compiled
+Thumb bytes plus eight alignment bytes and carry ten strict relocations. Six
+guarded entry redirects replace all 322 stock body bytes; the directly used
+34-byte literal pool remains authenticated official data.
+
+Host tests cover discovery arguments, service-changed routing and CCC gating,
+all/specific-connection indication behavior, CSF read/write callbacks, and
+single-function selector isolation. The fail-closed analyzer pins the source,
+leaves, relocations, complete redirects, retained pool, component build,
+manifest regions, and final package identity. Stock EasyLogger output is
+omitted as non-controlling diagnostics while the terminal discovery operation
+and all ATT/GATT state changes remain implemented.
+
+Canonical Apple overlay/component/package identities are
+`193488/3716884/4495378` bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 1,963,573-byte flash plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+No hardware was accessed or flashed. ATT discovery, CCCD state, indications,
+controller timing, and peer interoperability remain explicitly blocked by the
+absence of authorized G2/EM9305 hardware or captured physical evidence.

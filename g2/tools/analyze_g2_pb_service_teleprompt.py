@@ -18,11 +18,51 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-teleprompt-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-teleprompt-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-teleprompt-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_teleprompt.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "ada7f62b647ff85189ceecb5eb95b74e907f0f5af16e68432c0b292e6d651aaf",
-    CLOSURE: "04feed5d56d43550c5204236e201f5f9ad4df694ea88ef5361d60684a217dc7a",
-    PROVENANCE: "bd119a525fc365f8cd847531f83444a59e44d1dcc5aa7a0731d0d481519eacae",
+    CLOSURE: "1f0b285bd9e488b17e7db011d83da521b269576bf351ac6adb7ecf145686af29",
+    PROVENANCE: "ff746fdfc66df09c28cdd7e7d3ec44e6d137aa9e9f07e09c33fc37b9a9cae216",
 }
+SOURCE_SIZE = 13441
+SOURCE_SHA256 = "d1f308195a7076fe41043f0cea8b70a6b1d9250dabb962f6b05285120c616c68"
+FUNCTIONS = (
+    ("open_cfw_pb_service_teleprompt_buffer_write", 146, 196136, 0),
+    ("open_cfw_pb_service_teleprompt_zero", 88, 196284, 0),
+    ("APP_PbRxTelepromptFrameDataProcess", 112, 196372, 3),
+    ("APP_PbTelepromptTxEncodeCommResp", 126, 196484, 6),
+    ("APP_PbTxEncodeStatusNotify", 136, 196612, 6),
+    ("APP_PbTxEncodeFileListRequest", 136, 196748, 6),
+    ("APP_PbTxEncodeFileSelect", 288, 196884, 6),
+    ("APP_PbTxEncodePageDataRequest", 136, 197172, 6),
+    ("APP_PbTxEncodeScrollSync", 180, 197308, 6),
+)
+PATCHES = (
+    ("replace_pb_teleprompt_rx", 0x005885B4, 478,
+     "0bf17663f645748d6d8d72170e9433bd53ffbefa8debc14a6329532849214801",
+     "APP_PbRxTelepromptFrameDataProcess"),
+    ("replace_pb_teleprompt_comm_resp", 0x00588792, 232,
+     "bbe153af47c679b54331569dc7241569aaf432ef5e41da3f8fe2c1140853290b",
+     "APP_PbTelepromptTxEncodeCommResp"),
+    ("replace_pb_teleprompt_status", 0x0058887A, 238,
+     "c654cb551c1337c0784660677301d03cec0a51c94aa2e082f2698d67bccd2d7b",
+     "APP_PbTxEncodeStatusNotify"),
+    ("replace_pb_teleprompt_file_list", 0x00588968, 238,
+     "d70b9ef19d1b2311aaa0bdb3fd29e9ae2cf1d0448a6aefbdf309b81061f4b064",
+     "APP_PbTxEncodeFileListRequest"),
+    ("replace_pb_teleprompt_file_select", 0x00588A56, 234,
+     "049487d10120cf04c650a6f4598b2f114ae6faf349927e3704268e0edbeb5f30",
+     "APP_PbTxEncodeFileSelect"),
+    ("replace_pb_teleprompt_page_data", 0x00588B40, 214,
+     "b9783435cd0012319f79a28481a57eea9805ccd906f3a197273a0dac98934955",
+     "APP_PbTxEncodePageDataRequest"),
+    ("replace_pb_teleprompt_scroll_sync", 0x00588C16, 220,
+     "2a3ca6d3744d38f048935f6442f6c298a28e4020fee6a8ecba984e1f671cbbcd",
+     "APP_PbTxEncodeScrollSync"),
+)
 PHYSICAL = (0x005885B4, 0x00588D74)
 PHYSICAL_SHA256 = "06e85d974b48111ab51fbfdff1cc23c56e1274f4971f1ca5407989440b75d0cc"
 TAIL = (0x00588CF2, 0x00588D74)
@@ -216,11 +256,71 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if stored:
         raise AuditError("unexpected stored entry/interior pointer")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_teleprompt" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented teleprompt service unexpectedly entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocations in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_teleprompt.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"), leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocations):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for name, address, size, digest, function in PATCHES:
+        patch = patch_by_name.get(name)
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != (address, size, digest, "b_w", function, ["apple-clang"]):
+            raise AuditError(f"production patch changed: {name}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_names = {item["name"] for item in main["regions"]}
+    required = {name.removeprefix("replace_") + "_source_replacement"
+                for name, *_ in PATCHES}
+    required |= {
+        "pb_service_teleprompt_retained_literal_pool",
+        "pb_teleprompt_buffer_write_source_text",
+        "pb_teleprompt_zero_source_alignment",
+        "pb_teleprompt_zero_source_text",
+        "pb_teleprompt_rx_source_text",
+        "pb_teleprompt_comm_resp_source_text",
+        "pb_teleprompt_status_source_alignment",
+        "pb_teleprompt_status_source_text",
+        "pb_teleprompt_file_list_source_text",
+        "pb_teleprompt_file_select_source_text",
+        "pb_teleprompt_page_data_source_text",
+        "pb_teleprompt_scroll_sync_source_text",
+    }
+    if not required <= region_names:
+        raise AuditError("production manifest regions changed")
 
     return {
         "surface": {
@@ -270,8 +370,23 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [row["function"] for row in rows],
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 1854,
+            "source_inventory_available": True,
+            "source_functions": 9,
+            "compiled_text_bytes": 1348,
+            "alignment_bytes": 4,
+            "strict_relocations": 39,
+            "stock_replaced_bytes": 1854,
+            "retained_literal_pool_bytes": 130,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 6 master/peer BLE and "
+                "teleprompt UI evidence is available; the authorized right "
+                "temple is nonresponsive and the left temple must remain stock."
+            ),
         },
     }
 

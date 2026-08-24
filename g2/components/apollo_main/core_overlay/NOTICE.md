@@ -1486,3 +1486,159 @@ atomically with the CMSIS `KernelState` word already read by the source-owned
 get-state wrapper. It calls source-owned IRQ/scheduler-state providers and the
 authenticated retained FreeRTOS V10.5.1 scheduler-start boundary; it does not
 claim ownership of the G2 scheduler globals or Apollo port integration.
+
+`at_tp.c` is an independently authored GPL-3.0-only clean-room reconstruction
+of the retained G2 `platform/service/eAT/at_tp.c` behavior. It uses only
+authenticated command behavior, retained literal addresses, and explicit
+output/touch-driver/CMSIS-delay ABI bindings; no historical vendor source or
+stock object bytes are included. Hardware validation remains blocked by
+unavailable authorized physical G2 touch-panel evidence.
+
+`at_buzzer.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the retained G2 `platform/service/eAT/at_buzzer.c` command
+behavior. It contains no historical vendor source or stock object bytes. One
+strict-relocation Thumb leaf replaces the complete stock handler and pool while
+binding only to authenticated retained response strings, AT output, and buzzer
+driver entries. Audible output, frequency/pitch, duty-cycle, beat timing,
+predefined playback, and stop behavior remain blocked by unavailable authorized
+physical G2 buzzer evidence.
+
+`service_gesture_processor.c` is an independently authored GPL-3.0-only
+clean-room reconstruction of the retained G2
+`platform/input/service_gesture_processor.c` behavior. It contains no
+historical vendor source or stock object bytes. Five strict-relocation Thumb
+leaves replace the complete stock object and pools while binding only to
+authenticated touch, buzzer, product-mode, event-publish, logging, SRAM, and
+retained-string interfaces. Physical touch/proximity electrical behavior,
+event timing, debounce, and gesture interpretation remain blocked by
+unavailable authorized G2 hardware evidence.
+
+`drv_cy8c4046fni.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the retained G2 `driver/touch/drv_cy8c4046fni.c` host-driver
+behavior. It contains no historical vendor source or stock executable bytes.
+Twenty-three strict-relocation Thumb leaves replace every executable stock
+function while binding to authenticated retained HAL-I2C, board-control,
+delay, SRAM, callback-table, and sibling-source interfaces. The directly
+addressed callback/string pool remains authenticated stock data. Stock
+EasyLogger diagnostics are intentionally omitted because they do not control
+controller behavior. Physical I2C, reset/DFU, report timing, and CapSense
+validation remains blocked by unavailable authorized G2 hardware evidence.
+
+`cordio_gatt_profile.c` is an Apache-2.0 production adaptation of Packetcraft
+Cordio r20.05c `ble-profiles/sources/profiles/gatt/gatt_main.c` at commit
+`3656312d6b73e2a2c1c8b33ee0385bc199dd97e6`. It preserves the six linked
+functional definitions over the recovered G2 control-block, handle-list, and
+provider ABI. The stock-only EasyLogger expansion in `GattDiscover` is omitted
+as non-controlling diagnostics. The exact upstream source, header, license,
+and offline verifier are retained in `third_party/packetcraft-gatt-profile`.
+This selected compatible commit is not a claim about the unrecoverable private
+historical G2 checkout. Physical ATT/CCCD/indication and peer interoperability
+validation remains blocked by unavailable authorized G2/EM9305 evidence.
+
+`ble_ota_profile.c` is a BSD-3-Clause bounded production adaptation of the
+AmbiqSuite 2.5.1 AMOTA application skeleton at commit
+`de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` plus independently reconstructed
+G2-local event, connection, and transport actions. It contains no historical
+private G2 source or stock executable bytes. All seven linked functions route
+to strict-relocation Thumb leaves; the authenticated 80-byte stock
+literal/callback pool is retained. The selected public revision is an oracle,
+not a claim about Even's historical checkout. Physical OTA CCC, reset,
+disconnect, notification timing, and peer interoperability validation remains
+blocked by unavailable authorized G2/EM9305 evidence.
+
+`ble_ring_profile.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the retained G2 `platform/ble/profiles/ring/profile_ring.c`
+behavior. It contains no historical private G2 source or stock executable
+bytes. All seven linked functions route to strict-relocation Thumb leaves;
+the authenticated 134-byte stock callback/literal pool is retained. Stock
+EasyLogger and hexdump calls are omitted as non-controlling diagnostics.
+Physical service discovery, delayed CCC timing, ATT RX/TX behavior, controller
+concurrency, and peer interoperability validation remains blocked by
+unavailable authorized G2/EM9305 evidence.
+
+`callback_facades.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the retained G2
+`platform/service/callback_mgr/cb_charge.c` and `cb_msg_notif.c` facade
+behavior. It contains no historical private G2 source or stock executable
+bytes. Ten strict-relocation Thumb leaves replace all linked functions while
+binding only to the retained generic callback-manager ABI. Both 34-byte stock
+diagnostic/type pools are retained; EasyLogger calls are omitted as
+non-controlling diagnostics. These pure facades perform no direct hardware
+operation.
+
+`callback_manager.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the retained G2
+`platform/service/callback_mgr/callback_manager.c` behavior. It contains no
+historical private G2 source or stock executable bytes. Eight strict-relocation
+Thumb leaves replace all linked manager functions and bind only to the already
+source-owned synchronized heap wrappers or redirected manager helpers. The
+118-byte stock diagnostic pool is retained; EasyLogger calls are omitted as
+non-controlling observability.
+
+`cb_ring_battery.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the retained G2
+`platform/service/callback_mgr/cb_ring_battery.c` behavior. It contains no
+historical private G2 source or stock executable bytes. Five strict-relocation
+Thumb leaves replace all linked facade functions and bind only to the
+source-owned callback manager or retained ring-battery consumer. The 30-byte
+stock type/diagnostic/path/literal pool is retained; EasyLogger calls are
+omitted as non-controlling observability.
+
+`ux_battery_sync.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the retained G2 `app/ux/ux_battery_sync/ux_battery_sync.c`
+service-record callback. It contains no historical private G2 source or stock
+executable bytes. Its strict relocations bind only to bounded first-party
+providers; the 84-byte stock diagnostic/path/literal pool is retained.
+
+`service_ring_battery.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the retained G2
+`platform/service/ring_battery/service_ring_battery.c` behavior. It contains no
+historical private G2 source or stock executable bytes. Five strict-contract
+Thumb leaves replace all linked functions; their two relocations bind only to
+the recovered local and peer service-record transports. The 44-byte stock
+diagnostic/path/literal pool is retained. EasyLogger diagnostics are omitted as
+non-controlling observability.
+
+`pb_service_ring.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the four linked entries from the retained G2
+`platform/protocols/pb_service_ring/pb_service_ring.c` object plus the bounded
+nanopb output callback required by the recovered encoder ABI. It contains no
+historical private G2 source or stock executable bytes. Five selector-isolated
+strict-relocation Thumb leaves replace all 1,362 linked stock function bytes;
+the 150-byte official alignment/literal tail remains retained. Stock
+EasyLogger diagnostics are omitted as non-controlling observability. Live
+paired-G2 relay, nanopb interoperability, and physical Ring-event behavior are
+blocked by unavailable authorized physical evidence.
+
+`pb_service_glasses_case.c` is an independently authored GPL-3.0-only
+clean-room reconstruction of the four linked entries from the retained G2
+`platform/protocols/pb_service_glasses_case/pb_service_glasses_case.c` object
+plus the bounded nanopb output callback required by the recovered encoder ABI.
+It contains no historical private G2 source or stock executable bytes. Five
+selector-isolated strict-relocation Thumb leaves replace all 1,360 linked stock
+function bytes; the 124-byte official literal pool remains retained. Stock
+EasyLogger diagnostics are omitted as non-controlling observability. Live
+service-`0x81` temple/case interoperability and physical case-state validation
+are blocked by unavailable authorized physical evidence.
+
+`pb_service_conversate.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the six linked entries from the retained G2
+`platform/protocols/pb_service_conversate/pb_service_conversate.c` object plus
+bounded output-buffer and message-zero helpers required by the recovered ABI.
+It contains no historical private G2 source or stock executable bytes. Eight
+selector-isolated strict-relocation Thumb leaves replace all 1,776 linked stock
+function bytes; the 128-byte official literal pool remains retained. Stock
+EasyLogger/hexdump diagnostics are omitted as non-controlling observability.
+Live service-`0x0B` master/peer BLE, timing, and conversate UI validation are
+blocked by unavailable authorized physical evidence.
+
+`pb_service_teleprompt.c` is an independently authored GPL-3.0-only clean-room
+reconstruction of the seven linked entries from the retained G2
+`platform/protocols/pb_service_teleprompt/pb_service_teleprompt.c` object plus
+bounded output-buffer and message-zero helpers required by the recovered ABI.
+It contains no historical private G2 source or stock executable bytes. Nine
+selector-isolated strict-relocation Thumb leaves replace all 1,854 linked stock
+function bytes; the 130-byte official alignment/literal tail remains retained.
+Stock EasyLogger/hexdump diagnostics are omitted as non-controlling
+observability. Live service-6 master/peer BLE, timing, and teleprompt UI
+validation are blocked by unavailable authorized physical evidence.

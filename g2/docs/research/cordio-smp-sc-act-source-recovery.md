@@ -78,5 +78,26 @@ calls, and every false interior-looking candidate. Source and stock hashes are
 in `tools/manifests/packetcraft-cordio-smp-sc-act-function-map.tsv`; provenance
 is in `packetcraft-cordio-smp-sc-act-provenance.tsv`.
 
-This raises identified provenance only. No stock byte is replaced and no
-source-owned production byte is added.
+## Production integration
+
+`components/apollo_main/core_overlay/cordio_smp_sc_act.c` is now the bounded
+production adapter for all twenty linked definitions. Each definition is
+compiled independently for `thumbv7em-none-eabi`, has a strict reviewed
+relocation contract, and is reached through an authenticated whole-stock-body
+entry replacement. The compiled leaves occupy 2,258 bytes plus 18 bytes of
+alignment (2,276 source-owned overlay bytes total), and replace all 2,662
+linked stock body bytes. The configuration-excluded
+`SmpScEnableZeroDhKey` qualification hook remains excluded.
+
+The production process-pairing leaf preserves the stock G2/R4 branch that
+retains the MITM result when either peer has no input and no output. Host
+oracles exercise that discriminator, address concatenation, public-key
+selection, passkey and cleanup paths, fail-closed policy, and G2/F6/DH-key
+construction. The canonical firmware component and complete `.evenota`
+package compile and assemble with every shared SC action routed to source.
+
+Physical validation is still blocked: this workspace has no authorized G2
+and EM9305 hardware evidence for Secure Connections pairing, numeric
+comparison, passkey/key-press, OOB, F4/G2/F5/F6 and DH-key derivation,
+cancellation, or peer interoperability. This unit is therefore software
+implemented and build-validated, not hardware-validated.

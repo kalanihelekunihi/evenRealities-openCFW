@@ -926,9 +926,9 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             ),
             (
                 167_426,
-                "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
+                "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
                 3_690_822,
-                "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
+                "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
             ),
         )
         self.assertEqual(
@@ -1225,11 +1225,11 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             {
                 "overlay_size": 167_426,
                 "overlay_sha256": (
-                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
+                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
                 ),
                 "component_size": 3_690_822,
                 "component_sha256": (
-                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
+                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
                 ),
             },
         )
@@ -1373,9 +1373,9 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             ),
             (
                 167_426,
-                "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
+                "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
                 3_690_822,
-                "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
+                "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
             ),
         )
         reset_unordered_tail_size = 388
@@ -1608,7 +1608,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 ),
                 "expected_size": 4_469_316,
                 "expected_sha256": (
-                    "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
+                    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
                 ),
                 "profiles": {
                     "linux-clang": {
@@ -1633,7 +1633,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 ),
                 "size": 3_690_822,
                 "sha256": (
-                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
+                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
                 ),
                 "profiles": {
                     "linux-clang": {
@@ -2028,9 +2028,9 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             ),
             (
                 167_426,
-                "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
+                "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
                 3_690_822,
-                "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
+                "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
             ),
         )
 
@@ -2047,10 +2047,10 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 ),
                 "size": 4_469_316,
                 "sha256": (
-                    "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
+                    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
                 ),
                 "reference_sha256": (
-                    "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"
+                    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
                 ),
                 "byte_identical_to_reference": True,
             },
@@ -2062,7 +2062,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             ),
             (
                 4_469_316,
-                "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058",
+                "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d",
             ),
         )
 

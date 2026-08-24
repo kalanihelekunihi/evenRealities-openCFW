@@ -266,12 +266,12 @@ PRODUCTION_BUILD_PROFILES = {
         ),
         "main_component": (
             3_690_822,
-            "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
+            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
                 4_469_316,
-                "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058",
+                "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d",
             ),
             "build-report.json": (
                 2_323,

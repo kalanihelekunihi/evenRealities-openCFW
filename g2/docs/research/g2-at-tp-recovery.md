@@ -1,7 +1,8 @@
 # G2 eAT touch-panel command recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-source candidate and not production-routed. Run addresses use
+Status: complete linked-object census, fail-closed behavioral analysis, and
+production-routed clean-room C; hardware behavior is explicitly blocked by
+unavailable authorized physical evidence. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -47,6 +48,26 @@ pins the bodies, alignment/pool bytes, command registration, exact symbol and
 path, every subcommand/format, provider sites, threshold bounds, debug global,
 and complete ingress topology.
 
-No authenticated historical source or license is available. There is no
-clean-room candidate, the service is absent from `overlay.json`, and it claims
-zero package ownership bytes.
+## Production closure
+
+`components/apollo_main/core_overlay/at_tp.c` is the independently authored
+production implementation. Two selector-isolated Thumb leaves contribute
+1,548 bytes plus two alignment bytes and use eighteen strict relocations. Two
+guarded `B.W` replacements cover the entire 1,040-byte stock object, including
+its alignment and literal pool; the stored command pointer continues to enter
+the authenticated stock address, which now redirects to source-owned code.
+
+Host tests cover every subcommand, both configuration bounds, malformed and
+null input, provider failures, readback mismatch, successful verification, and
+the stock unknown-command acknowledgement. The decimal parser is bounded and
+fail-closed. The canonical Apple overlay/component/package identities are
+188,812 / 3,712,208 / 4,490,702 bytes with SHA-256
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+
+No hardware was accessed or flashed. Live Cypress-controller I/O, proximity
+baseline persistence, gesture-threshold write/readback timing, debug sampling,
+and physical gesture behavior require an authorized G2 with its touch panel.
+That evidence is unavailable in this workspace, so hardware validation is
+explicitly blocked and functional completeness is not declared.

@@ -20,8 +20,8 @@ CLOSURE = ROOT / "tools/manifests/g2-at-buzzer-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-buzzer-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "4464ea24a5d714eeb07f294f021f0eea2afbf089b962a566fcc573c8202c25e5",
-    CLOSURE: "f6e573440c0b3eec6f1b602538ad32540ac3c7023ea9cf43280334955e8ec51d",
-    PROVENANCE: "6919e434f41fbbbaedda45723ded0d4cde9a9ba3fb3864c79c0de17c73ad9e7b",
+    CLOSURE: "0bff9f1708946204e9b5f23b33b249b949be9664f7d9d684d5658881b1fd0e4b",
+    PROVENANCE: "9f91b75770fdbbbb75526ffdee8a96e2a35e905cabb286149f161ed2ba6daadf",
 }
 BODY = (0x005A4FD0, 0x005A53C6)
 BODY_SHA256 = "b2a6c3ec39cd168200cc68667e3939d0bf4067ea862115c5108b653b07d38d28"
@@ -84,6 +84,19 @@ STRINGS = {
     0x00747C4C: "AT^BUZZER: Unknown subcommand '%s'\r\n",
     0x0075E210: "Use: note, play, start, stop\r\n",
 }
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/at_buzzer.c"
+OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PRODUCTION_PIN = (
+    11707,
+    "9e0b37c03975f2f588300922507789599f63b162a77533aa6c40c7703601da7a",
+)
+PRODUCTION_LEAF_PIN = (
+    2740,
+    "a3eeb877b669e96b2f0122ebdd399a5795a6f0a7bd7d3fd938f03375c5cd0305",
+    186072,
+    "ad410f96ed64029c338fc5e522f952226d10676935ca991583c498ee9810efdf",
+)
 
 
 class AuditError(RuntimeError):
@@ -209,10 +222,128 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if raw_addresses != expected_pointer or pair_digest(raw_addresses) != STORED_POINTER_SHA256:
         raise AuditError("stored handler-pointer closure changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("at_buzzer.c" in source.get("path", "").lower() for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented eAT buzzer module unexpectedly entered production overlay")
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    source = PRODUCTION_SOURCE.read_bytes()
+    if (len(source), sha256(source)) != PRODUCTION_PIN:
+        raise AuditError("production AT^BUZZER source changed")
+    leaves = [
+        item for item in overlay.get("relocated_leaves", [])
+        if item.get("function") == "open_cfw_at_buzzer_test"
+    ]
+    if len(leaves) != 1 or "open_cfw_at_buzzer_test" not in overlay["functions"]:
+        raise AuditError("production AT^BUZZER leaf inventory changed")
+    leaf = leaves[0]
+    source_record = leaf.get("source", {})
+    expected = leaf.get("expected", {})
+    relocation_offsets = (
+        0x38, 0x44, 0x52, 0x5E, 0x6A, 0x30A, 0x30E, 0x320,
+        0x32E, 0x35A, 0x36A, 0x386, 0x4B2, 0x59E, 0x5A4, 0x5B0,
+        0x626, 0x93A, 0x942, 0x956, 0xA74, 0xAA4, 0xAAE,
+    )
+    target_by_symbol = {
+        "open_cfw_retained_at_buzzer_output": 0x00541430,
+        "open_cfw_retained_buzzer_play": 0x00502BF0,
+        "open_cfw_retained_buzzer_play_note": 0x00502BF8,
+        "open_cfw_retained_buzzer_start": 0x00502C88,
+        "open_cfw_retained_buzzer_stop": 0x00502D4C,
+    }
+    relocations = leaf.get("relocations", [])
+    if (
+        source_record.get("path")
+        != "components/apollo_main/core_overlay/at_buzzer.c"
+        or (source_record.get("size"), source_record.get("sha256"))
+        != PRODUCTION_PIN
+        or leaf.get("profiles") != ["apple-clang"]
+        or not leaf.get("strict_relocation_contract")
+        or (
+            expected.get("size"), expected.get("sha256"),
+            expected.get("alignment"), expected.get("offset"),
+            expected.get("unrelocated_sha256"),
+        ) != (
+            PRODUCTION_LEAF_PIN[0], PRODUCTION_LEAF_PIN[1], 4,
+            PRODUCTION_LEAF_PIN[2], PRODUCTION_LEAF_PIN[3],
+        )
+        or tuple(item.get("offset") for item in relocations)
+        != relocation_offsets
+        or any(
+            item.get("type") != "R_ARM_THM_CALL"
+            or item.get("symbol_type") != "STT_NOTYPE"
+            or target_by_symbol.get(item.get("symbol"))
+            != item.get("target_address")
+            for item in relocations
+        )
+    ):
+        raise AuditError("production AT^BUZZER leaf changed")
+    patches = [
+        item for item in overlay.get("patch_sites", [])
+        if item.get("name") == "replace_at_buzzer_test"
+    ]
+    if len(patches) != 1:
+        raise AuditError("production AT^BUZZER patch inventory changed")
+    patch = patches[0]
+    if (
+        patch.get("runtime_address"), patch.get("expected_size"),
+        patch.get("expected_sha256"), patch.get("target_function"),
+        patch.get("branch"), patch.get("profiles"),
+    ) != (
+        PHYSICAL[0], 1208, PHYSICAL_SHA256, "open_cfw_at_buzzer_test",
+        "b_w", ["apple-clang"],
+    ):
+        raise AuditError("production AT^BUZZER patch changed")
+
+    build = json.loads(OVERLAY_REPORT.read_text())
+    if (
+        build["overlay"]["size"], build["overlay"]["sha256"],
+        build["component"]["size"], build["component"]["sha256"],
+    ) != (
+        197488,
+        "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884,
+        "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise AuditError("production AT^BUZZER build pins changed")
+    built = [
+        item for item in build.get("relocated_leaves", [])
+        if item.get("extraction", {}).get("function")
+        == "open_cfw_at_buzzer_test"
+    ]
+    if (
+        len(built) != 1
+        or built[0]["placement"].get("size") != 2740
+        or built[0]["placement"].get("padding_before") != 0
+        or built[0]["extraction"].get("relocation_count") != 23
+    ):
+        raise AuditError("production AT^BUZZER compiled closure changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    regions = {item.get("name"): item for item in main["regions"]}
+    generated = regions.get("at_buzzer_test_source_replacement")
+    appended = regions.get("at_buzzer_test_source_text")
+    if (
+        generated is None or appended is None
+        or (
+            generated.get("file_offset"), generated.get("size"),
+            generated.get("target_address"), generated.get("address_status"),
+        ) != (1495024, 1208, PHYSICAL[0], "generated_source_entry_replacement")
+        or (
+            appended.get("file_offset"), appended.get("size"),
+            appended.get("target_address"), appended.get("address_status"),
+        ) != (3709468, 2740, 0x007C19FC, "source_compiled")
+        or (
+            main["provider"]["size"], main["provider"]["sha256"],
+            manifest["package"]["expected_size"],
+            manifest["package"]["expected_sha256"],
+        ) != (
+            3720884,
+            "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+            4499378,
+            "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
+        )
+    ):
+        raise AuditError("production AT^BUZZER manifest closure changed")
 
     return {
         "surface": {
@@ -246,10 +377,21 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "command_record": "[0x006c9280,0x006c9290)",
         },
         "production": {
-            "candidate": None,
-            "production_routed": routed,
-            "ownership_bytes": 0,
-            "source_inventory_available": False,
+            "candidate": "components/apollo_main/core_overlay/at_buzzer.c",
+            "production_routed": True,
+            "ownership_bytes": 3948,
+            "source_inventory_available": True,
+            "source_functions": 1,
+            "compiled_text_bytes": 2740,
+            "alignment_bytes": 0,
+            "stock_replaced_bytes": 1208,
+            "strict_relocations": 23,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized physical G2 buzzer/piezo device or captured "
+                "acoustic/frequency/duty/timing evidence is available."
+            ),
         },
     }
 

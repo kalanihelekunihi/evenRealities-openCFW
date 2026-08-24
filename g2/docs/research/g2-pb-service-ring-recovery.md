@@ -1,7 +1,7 @@
 # G2 `pb_service_ring.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: complete linked-object census, clean-room production implementation,
+and fail-closed stock/production analysis. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -49,8 +49,19 @@ Two retained 20-byte assertion descriptors identify the nested validator and
 encoder at source lines 88 and 130. Together with the pool they provide all
 three references to the exact retained source path.
 
-The historical source tree and license remain unavailable, so source-only
-functions are not inferred. No clean-room candidate exists, the service is
-absent from `overlay.json`, and OpenCFW claims zero production ownership
-bytes. The next smallest retained service frontier is
+The historical source tree and license remain unavailable. OpenCFW therefore
+implements only the four linked stock entries plus the source-only bounded
+nanopb output callback required by the recovered encoder ABI. The five
+functions compile to 594 bytes with four bytes of generated alignment and nine
+strict relocations. Four entry redirects replace all 1,362 stock body bytes;
+the 150-byte alignment/literal tail remains official. Host tests cover null,
+decode/encode failure, command routing, event behavior, MAC bounds, output
+buffer bounds, transport arguments, and relay dispatch. The production source,
+overlay leaves, redirects, component, package, and deployment plan are pinned
+by `tools/analyze_g2_pb_service_ring.py`.
+
+Software closure is complete for this object. Live paired-G2 BLE relay,
+nanopb-peer interoperability, and physical ring-event behavior remain blocked
+because no authorized physical evidence is available; this is not a claim of
+hardware validation. The next smallest retained service frontier is
 `pb_service_conversate.c`.

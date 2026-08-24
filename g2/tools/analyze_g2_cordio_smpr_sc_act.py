@@ -20,6 +20,31 @@ IMAGE_BYTES = 3_523_396
 IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 MAP = ROOT / "tools/manifests/packetcraft-cordio-smpr-sc-act-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-smpr-sc-act-provenance.tsv"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_smpr_sc_act.c"
+PRODUCTION_SOURCE_SIZE = 17_715
+PRODUCTION_SOURCE_SHA256 = "9aeeb7deca5ddba366291e2b19daeb4c06f8d1feb4915dc863b50b5dd1d82c26"
+PRODUCTION_ROUTES = {
+    "open_cfw_cordio_smpr_sc_store_pin": (178048, 78, "aa7e81ac7c5ca3734db2a2e0459c16a01bde2156c6a6ce08ed344d5c772f7d8a"),
+    "open_cfw_cordio_smpr_sc_send_public_key": (178128, 22, "d2788ef0c1a065341fb1abc9ba0e27823c4273157938848c6a262caf174d527b"),
+    "open_cfw_cordio_smpr_sc_jwnc_setup": (178152, 70, "5cb5f7afe5d8e383eca630e3c9cb0a8214695e4f087f15170ad8a19f62fcd869"),
+    "open_cfw_cordio_smpr_sc_jwnc_send_confirm": (178224, 6, "bacac1b51e885f085b42ce0a352bde12899c29fb8cbf6d976822dcca30e191f1"),
+    "open_cfw_cordio_smpr_sc_jwnc_calculate_g2": (178232, 32, "37275b0bbf60da8acc65d4d1e6e01bf1c30ae550fe74626657f58f0bee567bf0"),
+    "open_cfw_cordio_smpr_sc_jwnc_display": (178264, 40, "22f506225868c20e7da32450bc99d098175377f62c821564659e040a17b707cf"),
+    "open_cfw_cordio_smpr_sc_passkey_store_confirm": (178304, 16, "56b9d58af240ba305a2ecdf345bf3699e88568178e90f3c0f0290fd58c51d27e"),
+    "open_cfw_cordio_smpr_sc_passkey_calculate_cb": (178320, 68, "5de400a0875e9691e99b4d45d72fbc383d09a0c441d8a0be43ce252533679aa5"),
+    "open_cfw_cordio_smpr_sc_passkey_store_confirm_and_calculate_cb": (178388, 22, "e62812baa6c9b6a16fa821f36b336ddf98c1a9b35a449d84d3c4271f552c8248"),
+    "open_cfw_cordio_smpr_sc_passkey_store_pin_and_calculate_cb": (178412, 22, "4ffc9c6fe149d5645ab9ae8984ac1f78f37044ebc21210f31aaee462e536f6b5"),
+    "open_cfw_cordio_smpr_sc_passkey_send_confirm": (178436, 6, "b489cef80508e5cc899d35ba388e53a7613e0108ca2e13fa50124fa3cdf364ea"),
+    "open_cfw_cordio_smpr_sc_passkey_calculate_ca": (178444, 62, "7097f3b30b3e5436d326d6f7d4be860ad2d4ac56b3734e1d17a1593a9450fa71"),
+    "open_cfw_cordio_smpr_sc_passkey_send_random": (178508, 104, "072cf10a56591443dd21ed45122e4c248c96791534c582c9aeb5ea10929f9879"),
+    "open_cfw_cordio_smpr_sc_oob_setup": (178612, 8, "2a43add7a549e97c68c78df9dc7426a70da8ba405877d5eb8ba2db8120786026"),
+    "open_cfw_cordio_smpr_sc_oob_calculate_ca": (178620, 122, "0ef61cbad359c78cc4d4b8d8e7db1c0087aef201e3bdffc8e313df6f67b8dedb"),
+    "open_cfw_cordio_smpr_sc_oob_send_random": (178744, 72, "8544ef428007b8f0803bbd390bd1237f2e07ec764b23e7e77bf1713cd0d984e7"),
+    "open_cfw_cordio_smpr_sc_store_dh_key_check": (178816, 22, "f828d5fbf2d994a02dca987b49c2fa3640f310774e217072323368218a3a8c51"),
+    "open_cfw_cordio_smpr_sc_wait_dh_key_check": (178840, 26, "6e8da75389e0e21d75c31888b3d05ea4a0b73e085f69a1c04b5e326272f75021"),
+    "open_cfw_cordio_smpr_sc_calculate_dh_key": (178868, 50, "6955a85cdf356c909a4effe9be7bad4f8cde399e93467161f36a880e8808ec72"),
+    "open_cfw_cordio_smpr_sc_dh_key_check_send": (178920, 158, "ee1202fabf6a4df5ab949d21bc8a1400ed61f7125bf1205c538e76fc4b448488"),
+}
 PINS = {
     MAP: "e312d66d683e5bb0610cfb15498fa89f0e86eee2bdeacc02dea2ab0d0e957ae1",
     PROVENANCE: "ef701fa5ec14d4f41747b6bc5c31cc879b69123fdec500d2182e6f7227c97d28",
@@ -102,6 +127,57 @@ def load_rows() -> list[tuple[str, int, int, str]]:
             rows.append((row["function"], int(row["stock_start"], 0),
                          int(row["stock_end_exclusive"], 0), row["stock_sha256"]))
     return rows
+
+
+def production_report(linked: list[tuple[str, int, int, str]]) -> dict:
+    source = PRODUCTION_SOURCE.read_bytes()
+    if len(source) != PRODUCTION_SOURCE_SIZE or sha(source) != PRODUCTION_SOURCE_SHA256:
+        raise RuntimeError("Cordio responder SC action production source identity changed")
+    text = source.decode("utf-8")
+    if "c->key_ready=1U;" not in text or "OPEN_CFW_SMPR_SC_DH_SEND_ONLY" not in text:
+        raise RuntimeError("Cordio responder SC r20/R4 behavior changed")
+    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
+    leaves = {x["function"]: x for x in overlay.get("relocated_leaves", [])
+              if x.get("function") in PRODUCTION_ROUTES}
+    patches = {x["target_function"]: x for x in overlay.get("patch_sites", [])
+               if x.get("target_function") in PRODUCTION_ROUTES}
+    if set(leaves) != set(PRODUCTION_ROUTES) or set(patches) != set(PRODUCTION_ROUTES):
+        raise RuntimeError("Cordio responder SC production routing is incomplete")
+    source_path = PRODUCTION_SOURCE.relative_to(ROOT).as_posix()
+    stock_by_start = {start: (name, end, digest) for name, start, end, digest in linked}
+    for function, (offset, size, digest) in PRODUCTION_ROUTES.items():
+        leaf = leaves[function]; record = leaf.get("source", {}); patch = patches[function]
+        start = patch.get("runtime_address"); stock = stock_by_start.get(start)
+        if (leaf.get("profiles") != ["apple-clang"] or record.get("path") != source_path
+                or record.get("size") != PRODUCTION_SOURCE_SIZE
+                or record.get("sha256") != PRODUCTION_SOURCE_SHA256
+                or record.get("license") != "Apache-2.0"
+                or record.get("upstream_commit") != "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6"
+                or leaf.get("expected", {}).get("offset") != offset
+                or leaf.get("expected", {}).get("size") != size
+                or leaf.get("expected", {}).get("sha256") != digest
+                or leaf.get("strict_relocation_contract") is not True):
+            raise RuntimeError(f"Cordio responder SC production leaf changed: {function}")
+        if (stock is None or patch.get("profiles") != ["apple-clang"]
+                or patch.get("expected_size") != stock[1] - start
+                or patch.get("expected_sha256") != stock[2]
+                or patch.get("branch") != "b_w"):
+            raise RuntimeError(f"Cordio responder SC stock patch changed: {function}")
+    return {
+        "status": "production-routed authenticated Packetcraft r20.05c responder actions",
+        "candidate": source_path,
+        "production_routed": True,
+        "live_functions": len(PRODUCTION_ROUTES),
+        "relocated_functions": len(PRODUCTION_ROUTES),
+        "compiled_leaf_bytes": sum(route[1] for route in PRODUCTION_ROUTES.values()),
+        "source_owned_bytes_added": 1030,
+        "stock_bytes_replaced": sum(end - start for _, start, end, _ in linked),
+        "hardware_validation": (
+            "blocked by unavailable authorized G2/EM9305 responder Secure Connections "
+            "pairing, numeric comparison, passkey/key-press, OOB, DH-key, retry, and "
+            "interoperability physical evidence"
+        ),
+    }
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -218,7 +294,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "discriminator": "stock DH-key-check send writes smpCcb.keyReady at +0x44; r19/AmbiqSuite 2.x omits it",
             "historical_generating_commit_resolved": False,
         },
-        "production": {"stock_bytes_replaced": 0, "source_owned_bytes_added": 0},
+        "production": production_report(rows),
     }
 
 

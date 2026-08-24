@@ -4054,10 +4054,12 @@ overlay adds 1,758 executable bytes plus 20 alignment bytes and replaces all
 2,924 stock function bytes. Host behavior, exact Thumb surface, relocation,
 route, component, manifest, package, and flash-plan gates pass.
 
-Canonical Apple overlay/component/package identities are
-`174816/3698212/4476706` bytes and `b732d58c...f6bf` /
-`125cfeb1...55f3` / `26bf3d84...5058`. No hardware operation was performed.
+After the shared Secure Connections action integration, canonical Apple
+overlay/component/package identities are `177092/3700488/4478982` bytes and
+`5cf48d90...ac8b` / `18846b43...248` / `a8a86dfe...9bd8`. No hardware
+operation was performed.
 Physical pairing, key distribution, timeout/cancellation, repeated-attempt,
 and peer-interoperability evidence remains blocked by unavailable authorized
-G2/EM9305 hardware. Remaining Secure Connections action/state units and the
-overall firmware remain incomplete.
+G2/EM9305 hardware. Shared Secure Connections actions are source-routed;
+remaining role-specific Secure Connections action/state units and the overall
+firmware remain incomplete.

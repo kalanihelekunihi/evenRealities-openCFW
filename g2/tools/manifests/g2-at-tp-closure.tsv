@@ -23,6 +23,9 @@ retained_path_pointer_cell	0x005A5D20
 subcommands	1, 0, debug1, debug0, bsln_read, bsln_set, gesture_cfg_read, gesture_cfg_set
 debug_flag	0x20075017
 gesture_threshold_range_ms	1..65535
-production_routed	false
-ownership_bytes	0
-source_inventory	unavailable; linked-object census complete but source-only function count unknown
+production_routed	true under reviewed apple-clang profile
+ownership_bytes	2590 (1040 generated stock replacements + 1548 compiled source + 2 alignment)
+source_inventory	2 independently authored production functions; historical source-only inventory remains unavailable
+production_source	components/apollo_main/core_overlay/at_tp.c; 9164 bytes; b1865b7ae51a77ccb0ccce05a7b9832a89b6e167171bded7c4915d6afe08fa03
+compiled_text	1548 bytes in 2 selector-isolated leaves; 18 strict relocations
+hardware_validation	blocked; no authorized physical G2 touch-panel/Cypress-controller evidence available

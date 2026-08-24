@@ -18,11 +18,38 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-glasses-case-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-glasses-case-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-glasses-case-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_glasses_case.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "9a4b8121f28d1b0692a6ce7416b8f33946246b39b64ae66cf8acd03d5013d5fe",
-    CLOSURE: "a3d6a92a20a5540c070e3fb2d8fdef5946d2cbe14a24c780157bc968e19137c7",
-    PROVENANCE: "051a928dd67a5bc3f46154204f7beeed0455459f1fe793061ed5ac8e1cdf8703",
+    CLOSURE: "b3b911e860d331f3079f7810e1737a74381da4ded0e8b436933fd155faa9fab3",
+    PROVENANCE: "1b21a58be7a2b305c720a7cef16cba829cadd893f28a7bf5075ed001de375713",
 }
+SOURCE_SIZE = 9319
+SOURCE_SHA256 = "3d8695b1da919199cd5758a5288373a7c1e51e8151f5a66b9621f81dcf4f44d7"
+FUNCTIONS = (
+    ("open_cfw_pb_service_glasses_case_buffer_write", 146, 194476, 0),
+    ("PB_RxGlassesCaseInfo", 10, 194624, 0),
+    ("APP_PbTxEncodeGlassesCaseInfo", 146, 194636, 8),
+    ("APP_PbNotifyEncodeGlassesCaseInfo", 142, 194784, 4),
+    ("APP_PbRxGlassesCaseFrameDataProcess", 102, 194928, 4),
+)
+PATCHES = (
+    ("replace_pb_case_rx_frame", 0x00510A0C, 498,
+     "51066606d4eddeff00303140367954f03d501a5f413fedcac973c0b1f5bbe5b7",
+     "APP_PbRxGlassesCaseFrameDataProcess"),
+    ("replace_pb_case_rx_info", 0x00510BFE, 114,
+     "e881ef96ab4ee313b75c0d407bb549e8aa96ab9de1f7be03156f3fc8291ab44d",
+     "PB_RxGlassesCaseInfo"),
+    ("replace_pb_case_tx_info", 0x00510C70, 380,
+     "45f08df708bb8714a8097839808bdb3233101624c63ecddc25f80dec4abc7487",
+     "APP_PbTxEncodeGlassesCaseInfo"),
+    ("replace_pb_case_notify_info", 0x00510DEC, 368,
+     "265fcf4acbf63011c595cacf8184c475b85bddc2f742fcdeb7390b886b15007d",
+     "APP_PbNotifyEncodeGlassesCaseInfo"),
+)
 PHYSICAL = (0x00510A0C, 0x00510FD8)
 PHYSICAL_SHA256 = "ac1926863f4700afd938a0f9d234c3a6c0be103f327f591c7cc066d13be61bf2"
 POOL = (0x00510F5C, 0x00510FD8)
@@ -214,11 +241,65 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if any((value & ~1) in starts for _, value in raw_windows):
         raise AuditError("unexpected stored exact-entry pointer")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_glasses_case" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented glasses-case service unexpectedly entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {row[0] for row in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocations in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_glasses_case.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"), leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocations):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for name, address, size, digest, function in PATCHES:
+        patch = patch_by_name.get(name)
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != (address, size, digest, "b_w", function, ["apple-clang"]):
+            raise AuditError(f"production patch changed: {name}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_names = {item["name"] for item in main["regions"]}
+    required = {name.removeprefix("replace_") + "_source_replacement"
+                for name, *_ in PATCHES}
+    required |= {
+        "pb_service_glasses_case_retained_literal_pool",
+        "pb_case_buffer_write_source_alignment", "pb_case_buffer_write_source_text",
+        "pb_case_rx_info_source_alignment", "pb_case_rx_info_source_text",
+        "pb_case_tx_info_source_alignment", "pb_case_tx_info_source_text",
+        "pb_case_notify_info_source_alignment", "pb_case_notify_info_source_text",
+        "pb_case_rx_frame_source_alignment", "pb_case_rx_frame_source_text",
+    }
+    if not required <= region_names:
+        raise AuditError("production manifest regions changed")
 
     return {
         "surface": {
@@ -254,8 +335,23 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [row["function"] for row in rows],
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 1360,
+            "source_inventory_available": True,
+            "source_functions": 5,
+            "compiled_text_bytes": 546,
+            "alignment_bytes": 10,
+            "strict_relocations": 16,
+            "stock_replaced_bytes": 1360,
+            "retained_literal_pool_bytes": 124,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live glasses-case/temple BLE service 0x81 exchange "
+                "or physical case-state evidence is available; the authorized right "
+                "temple is nonresponsive and the left temple must remain stock."
+            ),
         },
     }
 

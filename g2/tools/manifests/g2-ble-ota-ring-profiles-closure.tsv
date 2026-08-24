@@ -20,7 +20,18 @@ ota	upstream_component	AmbiqSuite AMOTA application skeleton
 ota	selected_release	2.5.1
 ota	selected_commit	de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f
 ota	historical_g2_generating_commit	null
-ota	production_routed	false
+ota	production_routed	true
+ota	production_source	components/apollo_main/core_overlay/ble_ota_profile.c
+ota	production_source_bytes	9851
+ota	production_source_sha256	e8993403f028ebaf86289aa580d7addb3418973a3990eabd91a8d63710d9fde6
+ota	production_source_functions	7
+ota	production_compiled_text_bytes	376
+ota	production_alignment_bytes	8
+ota	production_stock_replaced_bytes	620
+ota	production_strict_relocations	17
+ota	software_functional_gap	false
+ota	hardware_validation	blocked
+ota	hardware_blocker	No authorized physical G2/EM9305 peer or captured OTA CCC/reset/disconnect/notification timing evidence is available
 ring	retained_path	platform\ble\profiles\ring\profile_ring.c
 ring	linked_functions	7
 ring	ambiq_skeleton_derived_stock_functions	0
@@ -40,4 +51,15 @@ ring	stored_entry_pointer_digest	57efef3ff90a3bf5e9544f883146a14cc883bee92d655de
 ring	direct_bl_strict_interior_targets	0
 ring	upstream_component	none; G2-local Cordio adapter
 ring	historical_g2_generating_commit	null
-ring	production_routed	false
+ring	production_routed	true
+ring	production_source	components/apollo_main/core_overlay/ble_ring_profile.c
+ring	production_source_bytes	14172
+ring	production_source_sha256	a114dbe5e50bb31d63ffcde32af7dfdea26c827c9e88d1e03d3a5a21ff66543f
+ring	production_source_functions	7
+ring	production_compiled_text_bytes	632
+ring	production_alignment_bytes	8
+ring	production_stock_replaced_bytes	1446
+ring	production_strict_relocations	23
+ring	software_functional_gap	false
+ring	hardware_validation	blocked
+ring	hardware_blocker	No authorized physical G2/EM9305 peer or captured Ring discovery/CCC/RX/TX timing evidence is available

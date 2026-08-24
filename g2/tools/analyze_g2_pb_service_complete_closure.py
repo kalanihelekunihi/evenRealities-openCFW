@@ -15,21 +15,21 @@ MANIFEST_DIR = ROOT / "tools/manifests"
 AGGREGATE = MANIFEST_DIR / "g2-pb-service-complete-closure.tsv"
 FRONTIER = MANIFEST_DIR / "g2-pb-service-frontier.tsv"
 PINS = {
-    AGGREGATE: "26e25358416b057f9b44a9a74bcc52ee599a975f08f79471c9cd5b033342ee79",
+    AGGREGATE: "33ecf75c8e09a12aad8d3688a532de079b05faf10e1309edca85bde383dfd924",
     FRONTIER: "d8bf149c8341032b173b1b1f12784ec7de6fe15121ac23e88a14969c51aba3a9",
-    MANIFEST_DIR / "g2-pb-service-conversate-closure.tsv": "de8212f98c92f77e9afdb599575851a6e2eb469f6920d5a4bd0d6c4b5e749a57",
+    MANIFEST_DIR / "g2-pb-service-conversate-closure.tsv": "68bef70d987506d41098eae1932a35ec44d56501e4cf32b5be9a66fba0784883",
     MANIFEST_DIR / "g2-pb-service-dev-config-closure.tsv": "edee2867bb8f265a839bb0e5e79544a7b3b879e9251aaf0bbaa3bcd3d86642d0",
     MANIFEST_DIR / "g2-pb-service-dev-setting-closure.tsv": "92bbd1ec7f0b4a8eb8d0107275764c5d4d6986b3102d6155e41174b919ee5fea",
     MANIFEST_DIR / "g2-pb-service-even-ai-closure.tsv": "97fbb99dcca84ea976df2d2e8416990cde562910fe03416919c56d968c080327",
-    MANIFEST_DIR / "g2-pb-service-glasses-case-closure.tsv": "a3d6a92a20a5540c070e3fb2d8fdef5946d2cbe14a24c780157bc968e19137c7",
+    MANIFEST_DIR / "g2-pb-service-glasses-case-closure.tsv": "b3b911e860d331f3079f7810e1737a74381da4ded0e8b436933fd155faa9fab3",
     MANIFEST_DIR / "g2-pb-service-health-closure.tsv": "a50cc002ef2cc5f95cf1d44b4e1b1ef37435d3c64cfd97d56ad0f0c2ea7d182f",
     MANIFEST_DIR / "g2-pb-service-notification-closure.tsv": "69f114c1ee7bfa8c5e8488499114a05d0a12259fefb3bd00b10802c65e5485eb",
     MANIFEST_DIR / "g2-pb-service-onboarding-closure.tsv": "cbf6a92abf2036a2aed140a641def4fe4e97115cd9484a3ed1ee82af024d2c6b",
     MANIFEST_DIR / "g2-pb-service-pair-mgr-closure.tsv": "23b3d956ee287c56f9cf295d3ce5ce68427dfd63cb9f30f75b6a5d2d68bdf19b",
     MANIFEST_DIR / "g2-pb-service-quicklist-closure.tsv": "c70ab0713c93b8e70fb52d596181c350ae7ac2229d270b87befef6e6346481d8",
-    MANIFEST_DIR / "g2-pb-service-ring-closure.tsv": "f561a28b55acc84f2ab5030ca0b18c1b671373e857c1e0771f31a136869e20a5",
+    MANIFEST_DIR / "g2-pb-service-ring-closure.tsv": "47b2ff130fb3beb8a5d34032b4f9cb258ce0fccd6a477a04a184b7ab7b18a77f",
     MANIFEST_DIR / "g2-pb-service-setting-closure.tsv": "2ddfa87e0ffd8727d80cd85b280dd853d21ec3ca882e57a7e7cc4e5c0e2cb9b3",
-    MANIFEST_DIR / "g2-pb-service-teleprompt-closure.tsv": "04feed5d56d43550c5204236e201f5f9ad4df694ea88ef5361d60684a217dc7a",
+    MANIFEST_DIR / "g2-pb-service-teleprompt-closure.tsv": "1f0b285bd9e488b17e7db011d83da521b269576bf351ac6adb7ecf145686af29",
     MANIFEST_DIR / "g2-pb-service-terminal-closure.tsv": "979f2425fc27ba6308123df5b4b1ca1c3499ef254f6ed88fdc7929b062a4d936",
     MANIFEST_DIR / "g2-pb-service-translate-closure.tsv": "ea3e7bc2509175f4261875113825ecf073617201eab2e53bd3f93618ff73ea01",
 }
@@ -106,7 +106,8 @@ def analyze() -> dict:
         "qualification": {
             "all_retained_paths_closed": True,
             "historical_source_inventory_complete": False,
-            "production_routed_services": 0,
+            "production_routed_services": sum(
+                int(row["production_ownership_bytes"]) > 0 for row in rows),
         },
     }
 

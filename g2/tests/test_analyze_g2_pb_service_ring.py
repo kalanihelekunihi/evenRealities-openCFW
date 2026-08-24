@@ -55,10 +55,19 @@ class AnalyzeG2PbServiceRingTests(unittest.TestCase):
         self.assertEqual(len(lineage["exact_symbols"]), 4)
         self.assertEqual(lineage["relay_registry_record"], "0x006a45b0")
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/pb_service_ring.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 1362)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 5)
+        self.assertEqual(production["compiled_text_bytes"], 594)
+        self.assertEqual(production["alignment_bytes"], 4)
+        self.assertEqual(production["strict_relocations"], 9)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
 
 
 if __name__ == "__main__":

@@ -17,5 +17,21 @@ has zero direct CMSIS-FreeRTOS or FreeRTOS edge.
 
 No reusable calculation, DSP implementation, or new version discriminator is
 embedded. The historical first-party producing commit remains unobservable.
-Remaining work is clean-room health schema/policy recreation and device data
-validation; the object is not production-routed.
+
+The clean-room production implementation now owns all ten linked entries. It
+recreates the exact type/slot map, retained type-name ABI, 1,488-byte manager
+storage reset, 24-byte protobuf record conversion, single and counted record
+saves, 257-byte highlight conversion, bounded five-highlight capacity, and the
+stock null/type/capacity return policy. Host tests cover those behaviors and a
+strict Thumb gate exposes exactly the ten reviewed entries.
+
+Ten authenticated full-span redirects replace all 2,644 stock body bytes with
+1,012 compiled Thumb bytes plus ten alignment bytes. Fifteen strict external
+relocations bind only to earlier source-owned health lock/unlock and manager
+leaves. Canonical Apple overlay/component/package identities are 183,574 /
+3,706,970 / 4,485,464 bytes with SHA-256 `c3f1e141...92947`,
+`f453571d...ef32d`, and `37a5607c...3b001`. Software routing and image
+generation are closed. Live mutex scheduling, concurrent service traffic,
+persistent health-schema interoperability, and display/device-data behavior
+remain explicitly blocked because no authorized physical G2/EM9305 evidence
+is available; no hardware validation or firmware-wide completeness is claimed.

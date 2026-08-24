@@ -216,10 +216,10 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
         self.assertEqual(
             overlay["expected"],
             {
-                "overlay_size": 174816,
-                "overlay_sha256": "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf",
-                "component_size": 3698212,
-                "component_sha256": "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3",
+                "overlay_size": 180782,
+                "overlay_sha256": "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
+                "component_size": 3704178,
+                "component_sha256": "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
             },
         )
         filtered = self.apollo_overlay.filter_config_for_profile(overlay, "linux-clang")
@@ -231,7 +231,7 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4476706, "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"),
+            (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"),
         )
 
     @unittest.skipUnless(

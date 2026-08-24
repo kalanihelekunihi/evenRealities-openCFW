@@ -1,7 +1,7 @@
 # G2 `pb_service_health.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: complete linked-object census, clean-room production implementation,
+and fail-closed route verification. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -45,14 +45,27 @@ success and `0x2B` on nanopb encoding failure. The envelopes are:
 
 The multi-highlight encoder reads a 16-bit count and expands each compact
 input record into its nanopb output stride. No independent count bound is
-visible in this wrapper, so callers and the schema-owned storage capacity are
-part of its safety precondition; the analyzer deliberately records that
-instead of inventing a bound.
+visible in stock. Production closes that unsafe precondition by rejecting more
+than three records with the existing encode-failure status; three is the exact
+capacity of the retained `0x31C`-byte message layout.
 
 Eight 20-byte assertion records at `[0x00781E80,0x00781F20)` pin the retained
 path, all eight function names, and source lines 109, 132, 213, 237, 313,
 336, 374, and 398. The historical source tree and license remain unavailable,
-so source-only functions are not inferred. No clean-room candidate exists,
-the service is absent from `overlay.json`, and OpenCFW claims zero production
-ownership bytes. The next retained protobuf-service frontier is
-`pb_service_setting.c`.
+so source-only functions are not inferred.
+
+Production now routes the eight stock entries plus one bounded source-owned
+nanopb buffer callback. The nine leaves contribute 940 compiled Thumb bytes
+and eight alignment bytes; eight full-span redirects replace all 3,092 stock
+body bytes while retaining the authenticated descriptor/assertion pools.
+Twenty strict relocations terminate at the already source-owned health-data
+manager, generic message encoder, BLE protobuf sender, or the new callback.
+Host tests exercise all status/envelope paths and the count safety correction.
+
+Canonical Apple overlay/component/package identities are 184,522 / 3,707,918
+/ 4,486,412 bytes with SHA-256 `f2e2771d...6a43`, `a2c628bb...aafc`, and
+`34e82939...8936`. Software behavior and complete-image generation are
+closed. Live service scheduling, BLE delivery, phone/schema interoperability,
+and persisted device-data validation remain blocked by unavailable authorized
+G2/EM9305 physical evidence. The next retained protobuf-service frontier is
+`pb_service_setting.c`; firmware-wide completeness is not claimed.

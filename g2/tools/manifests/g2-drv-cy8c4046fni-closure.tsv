@@ -28,4 +28,15 @@ strict_interior_ingress	0
 strict_interior_ingress_digest	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 third_party_dependency	EasyLogger CMSIS-FreeRTOS osDelay closed HAL I2C and bounded IAR DLIB only; no public Cypress or Infineon source candidate exists for this host-side driver
 private_producing_commit_observable	false
-production_routed	false
+production_routed	true
+production_source	components/apollo_main/core_overlay/drv_cy8c4046fni.c
+production_source_bytes	14618
+production_source_sha256	93ed6d61682274079362f39afb1f9f868e5d775fae7c1b95c19ce20c1e62254e
+production_source_functions	23
+production_compiled_text_bytes	1122
+production_alignment_bytes	18
+production_stock_replaced_bytes	1754
+production_strict_relocations	19
+software_functional_gap	false
+hardware_validation	blocked
+hardware_blocker	No authorized physical G2 touch controller or captured I2C/electrical/reset/DFU/timing evidence is available

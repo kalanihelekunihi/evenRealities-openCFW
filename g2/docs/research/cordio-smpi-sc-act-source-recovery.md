@@ -2,6 +2,18 @@
 
 ## Result
 
+All 16 linked initiator actions are now implemented in production C at
+`components/apollo_main/core_overlay/cordio_smpi_sc_act.c`, compiled as
+independent Thumb leaves, and routed over their complete stock bodies.  The
+reviewed Apple Clang build contributes 942 compiled bytes plus 14 alignment
+bytes (956 source-owned bytes total) and replaces 1,070 stock code bytes.
+Host tests execute authentication/public-key setup, JWNC, passkey, OOB, DH-key
+success with LTK truncation and `keyReady`, and retry/max-attempt failure paths.
+
+Physical validation remains explicitly blocked: no authorized G2/EM9305 is
+available to demonstrate initiator numeric-comparison, passkey/key-press, OOB,
+DH-key/encryption, retry, and peer-interoperability behavior.
+
 The stock interval `[0x005E3474,0x005E38C8)` is the complete Cordio Secure
 Connections initiator action unit
 `ble-host/sources/stack/smp/smpi_sc_act.c`. All 16 source definitions survive:
@@ -64,5 +76,5 @@ Source and stock hashes are in
 `tools/manifests/packetcraft-cordio-smpi-sc-act-function-map.tsv`; provenance
 is in `packetcraft-cordio-smpi-sc-act-provenance.tsv`.
 
-This raises identified provenance only. No stock byte is replaced and no
-source-owned production byte is added.
+The analyzer now pins the production source, every compiled leaf and stock
+redirect, the r20/R4 `keyReady` behavior, and the unavailable-hardware block.

@@ -6265,10 +6265,14 @@ Their owned pools contribute 338 bytes. The two interfaces root another 1,495
 bytes: 106 action pointers, 78 state pointers, and 80 NUL-terminated
 three-column state tables. Total identified ownership is 2,431 bytes.
 
-Identification is 4/4 functions and 2/2 translation units (100%). Recreation
-and production integration remain 0/4. Stock stays cut forward while the exact
-Packetcraft r20.05--r20.05c definitions and dispatch layout serve as the
-oracle; package-level ownership is unchanged.
+Identification, recreation, and production integration are 4/4 functions and
+2/2 translation units (100%). Four redirects replace all 598 stock code bytes
+with 1,696 compiled closure bytes plus six alignment bytes. A relocation-free
+1,495-byte C const object is split across 86 checked placements at the retained
+Cordio dispatch ABI addresses, replacing every interface, action-pointer,
+state-pointer, common-table, and per-state-table byte. Host and build gates are
+green; physical G2/EM9305 pairing and concurrency validation remains blocked
+by unavailable authorized hardware evidence.
 
 ## Cordio SMP common actions
 
@@ -6293,11 +6297,13 @@ literal, and alignment data. The responder Secure Connections and legacy
 tables each retain all ten entries. Two internal helper calls and 20 table
 roots land only at exact entries; no strict-interior pointer survives.
 
-Identification is 10/10 functions (100%). Recreation and production
-integration remain 0/10: stock stays cut forward while the exact Apache-2.0
-Packetcraft r20.05--r20.05c definitions serve as the semantic oracle. The
-linked `keyReady=TRUE` store at `smpCcb_t+0x44` excludes the otherwise nearly
-identical r19/AmbiqSuite 2.x source without changing package ownership.
+Identification, recreation, and production integration are 10/10 functions
+(100%). Ten strict relocated leaves contribute 838 compiled bytes plus 14
+alignment bytes and replace all 1,160 stock function bytes; the 44 bounded
+non-code bytes remain official data. Host tests cover request/response,
+confirm/random, r20 `keyReady`, and key distribution. Authorized G2/EM9305
+legacy responder/interoperability evidence is unavailable, so physical
+validation remains explicitly blocked.
 
 ## Cordio SMP initiator actions
 
@@ -6307,10 +6313,14 @@ initiator Secure Connections and legacy tables each retain all ten entries.
 Twenty table roots land only at exact entries; the sole raw BL-like candidate
 is a pinned wide-instruction overlap, not a caller.
 
-Identification is 10/10 functions (100%). Recreation and production
-integration remain 0/10. Stock's `keyReady=TRUE` store at `smpCcb_t+0x44`
-selects the exact Apache-2.0 Packetcraft r20.05--r20.05c source family over
-r19/AmbiqSuite 2.x without changing package ownership.
+Identification, recreation, and production integration are 10/10 functions
+(100%). Ten strict relocated leaves contribute 820 compiled bytes plus ten
+alignment bytes and replace all 852 stock function bytes; the eight-byte
+literal island remains official data. Host tests cover request/security
+handling, response validation, confirm success/failure, r20 `keyReady`, STK
+encryption, and key distribution. Authorized G2/EM9305 legacy
+initiator/interoperability evidence is unavailable, so physical validation
+remains explicitly blocked.
 
 ## Cordio SMP Secure Connections role actions
 
@@ -6339,12 +6349,16 @@ its default-false compile-time guard. Nineteen direct calls and 26 stored
 function-pointer cells close every linked entry; two even packed-data windows
 and two raw wide-instruction overlaps are pinned as non-ingress.
 
-Identification is 20/20 configured functions (100%). Recreation and
-production integration remain 0/20. Stock retains the R4/r19
+Identification, recreation, and production integration are 20/20 configured
+functions (100%). The production adapter contributes 2,258 compiled bytes and
+18 alignment bytes while replacing every one of the 2,662 linked stock body
+bytes. Stock retains the R4/r19
 no-input/no-output pairing branch removed in Packetcraft r20.05-c, while the
 surrounding stack retains the r20 message/table ABI. The later official R4.4.1
 Apache-2.0 file is therefore the exact definition-family oracle without a
-claim that its import commit historically generated G2.
+claim that its import commit historically generated G2. Physical pairing,
+numeric-comparison, passkey/OOB, key-derivation, and peer-interoperability
+validation remains blocked by unavailable authorized G2/EM9305 hardware.
 
 ## Cordio SMP legacy role state machines
 
@@ -6354,10 +6368,15 @@ scattered dispatch data. The initiator owns 25 action pointers, 14 state
 pointers, and 162 state-entry bytes; the responder owns 27 action pointers,
 15 state pointers, and 195 state-entry bytes. No source API is stripped.
 
-Identification is 2/2 functions and 31/31 state tables (100%). Recreation and
-production integration remain zero. The responder security-request-timeout
-action plus timeout/cleanup transitions exclude r19/AmbiqSuite 2.x and select
-the exact Packetcraft r20.05--r20.05c Apache source family.
+Identification, recreation, and production integration are 2/2 functions and
+31/31 state tables (100%). Two 44-byte compiled initializer leaves replace 44
+stock function bytes, while one 705-byte compiled const object installs all 37
+exact dispatch-data placements. The responder security-request-timeout action
+plus timeout/cleanup transitions exclude r19/AmbiqSuite 2.x and select the
+exact Packetcraft r20.05--r20.05c Apache source family. Offline host, Thumb,
+routing, table-equivalence, component, manifest, package, and flash-plan gates
+pass; physical legacy pairing/controller validation is blocked by unavailable
+authorized G2/EM9305 evidence.
 
 ## Cordio non-SMP alternative
 
@@ -7267,9 +7286,14 @@ path/strings, four grammars, validation limits, and buzzer-driver dispatches
 are pinned fail-closed. No direct, stored, or `B.W` strict-interior ingress
 exists.
 
-Historical source inventory is unavailable and no clean-room source is
-present in `overlay.json`, so the stock package retains all 1,208 bytes and
-OpenCFW claims zero ownership.
+Historical source inventory remains unavailable. Independently authored
+clean-room source is now production-routed as one 2,740-byte Thumb leaf with
+23 strict relocations. A guarded entry redirect and fill replace all 1,208
+stock object bytes, for 3,948 production ownership bytes. Host/parser tests,
+analyzer routing, component tiling, manifest ownership, package identity, and
+flash-plan generation are green. Audible playback, pitch/frequency, duty,
+timing, and stop behavior are hardware-blocked by unavailable authorized G2
+buzzer evidence.
 
 ## Current first-party eAT filesystem-command increment
 
@@ -7286,17 +7310,22 @@ OpenCFW claims zero ownership.
 
 ## Current first-party eAT touch-panel increment
 
-The retained `platform/service/eAT/at_tp.c` object is identified at
+The retained `platform/service/eAT/at_tp.c` object was identified at
 `[0x005A5984,0x005A5D94)`: two linked bodies / 898 code bytes and 142 owned
 alignment/literal bytes. Its stored `AT^TP` registration, two internal helper
 calls, all 70 body calls, retained path/strings, debug global, and gesture
 write/readback contract are pinned fail-closed. No exterior direct, stored
 strict-interior, or `B.W` strict-interior ingress exists.
 
-Historical source inventory is unavailable and no clean-room source is
-present in `overlay.json`, so the stock package retains all 1,040 bytes and
-OpenCFW claims zero ownership. All four retained eAT source paths are now
-bounded.
+Historical source inventory remains unavailable. Independently authored
+clean-room source is now production-routed as two selector-isolated leaves:
+1,548 compiled bytes plus two alignment bytes replace the complete 1,040-byte
+stock object. Host and production analyzers cover all eight operations, bounds,
+failures, routing, component tiling, and package identity. Live Cypress touch,
+proximity, persistence, and physical gesture behavior is hardware-blocked
+because no authorized physical G2/touch-panel evidence is available. The
+canonical package is 4,490,702 bytes with SHA-256
+`03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
 
 ## Current first-party pathless eAT core/sensor increment
 
@@ -7377,7 +7406,9 @@ bodies / 40,844 body bytes. All 15 linked objects are now closed: 143 functions,
 6,800 body bytes came from source-order and raw-boundary recovery beyond the
 retained-path anchors. The original values remain the authenticated lower-bound
 census; the aggregate closure manifest is the whole-object ledger. Historical
-source-only inventory remains unavailable and production ownership is zero.
+source-only inventory remains unavailable. The glasses-case, Ring, and
+conversate services now account for 4,498 production-owned stock body bytes;
+the other twelve services remain analysis-only.
 
 ## Current first-party translate protobuf-service increment
 
@@ -7395,8 +7426,11 @@ The complete retained `pb_service_glasses_case.c` object is identified at
 Its four exact-start callers, 86 body calls, nanopb command/nested-payload
 layout, five case-state bytes, sequence counter, status policy, separate
 decode/encode objects, and BLE service `0x81` routes are pinned fail-closed.
-No source candidate is routed, so the stock package retains all 1,484 bytes
-and OpenCFW claims zero ownership.
+Five clean-room functions compile to 546 text bytes plus ten alignment bytes;
+four guarded redirects replace all 1,360 stock body bytes and retain the
+124-byte official pool. Host, strict-relocation, component, package, and
+deployment-plan gates are green. Live temple/case BLE and physical case-state
+validation are explicitly blocked by unavailable authorized evidence.
 
 ## Current first-party ring protobuf-service increment
 
@@ -7405,9 +7439,12 @@ The complete retained `pb_service_ring.c` object is identified at
 alignment/pool tail. Its three internal exact-start calls, stored service
 `0x91` relay callback, 82 body calls, nanopb RX/TX layout, bounded MAC copy,
 event fields, and transmit route are pinned fail-closed. The sole raw
-interior candidate is an `SDIV` halfword overlap, not ingress. No source
-candidate is routed, so the stock package retains all 1,512 bytes and OpenCFW
-claims zero ownership.
+interior candidate is an `SDIV` halfword overlap, not ingress. Five clean-room
+source functions compile to 594 bytes plus four alignment bytes; four guarded
+redirects replace all 1,362 stock body bytes while retaining the 150-byte
+official literal tail. Host behavior and production/package audits are green.
+Paired-G2 BLE relay and live nanopb/ring-event validation remain explicitly
+blocked by unavailable authorized physical evidence.
 
 ## Current TinyFrame production source increment
 
@@ -7522,8 +7559,8 @@ transport are pinned fail-closed. Six stored Thumb pointers all target the
 ring-connect notification wrapper; strict-interior ingress remains zero.
 
 The aggregate manifest proves closure for all 15 retained protobuf-service
-paths: 143 linked functions, 47,644 body bytes, 51,744 physical bytes, and zero
-production ownership. This supersedes the frontier census only as a
+paths: 143 linked functions, 47,644 body bytes, 51,744 physical bytes, and
+4,498 production ownership bytes. This supersedes the frontier census only as a
 whole-object closure ledger; the original 119/40,844 values remain the
 authenticated retained-path lower bound.
 
@@ -7533,9 +7570,11 @@ The complete retained `pb_service_conversate.c` object is identified at
 `[0x005B1B4C,0x005B22BC)`: six bodies / 1,776 code bytes plus a 128-byte pool.
 Its ten exact-start callers, 96 body calls, RX replay/status policy, five TX
 envelope layouts, large shared message, nanopb providers, and service `0x0B`
-routes are pinned fail-closed. No stored or strict-interior ingress and no
-routed source candidate exist, so the stock package retains all 1,904 bytes
-and OpenCFW claims zero ownership.
+routes are pinned fail-closed. Eight clean-room source functions compile to
+1,098 text bytes plus eight alignment bytes with 33 strict relocations. Six
+redirects replace all 1,776 stock body bytes; the 128-byte official pool is
+retained. Host behavior, component, manifest, package, and flash-plan gates are
+green; live paired-temple BLE/UI behavior remains evidence-blocked.
 
 ## Current first-party teleprompt protobuf-service increment
 
@@ -7544,9 +7583,12 @@ The complete retained `pb_service_teleprompt.c` object is identified at
 alignment/literal tail. Its eleven exact-start callers, 98 body calls, RX
 replay/status policy, six TX envelope layouts, large shared message, nanopb
 providers, and service-6 routes are pinned fail-closed. The sole raw interior
-candidate is a `MUL` halfword overlap, not ingress. No routed source candidate
-exists, so the stock package retains all 1,984 bytes and OpenCFW claims zero
-ownership.
+candidate is a `MUL` halfword overlap, not ingress. Nine clean-room source
+functions compile to 1,348 text bytes plus four alignment bytes with 39 strict
+relocations. Seven guarded redirects replace all 1,854 stock body bytes; the
+130-byte official tail is retained. Host behavior, component, manifest,
+package, and flash-plan gates are green; live paired-temple BLE/UI behavior
+remains evidence-blocked.
 
 ## Current first-party Even-AI protobuf-service increment
 
@@ -8017,3 +8059,264 @@ bytes. The package is 4,476,706 bytes with SHA-256
 Legacy and Secure Connections pairing, key distribution, timeout,
 cancellation, repeated-attempt, and peer-interoperability validation remains
 blocked by unavailable authorized G2/EM9305 physical hardware.
+
+## Current Cordio SMP shared Secure Connections action increment
+
+All twenty linked `smp_sc_act.c` definitions are now production-routed from
+bounded Apache-2.0 C using the authenticated AmbiqSuite R4.4.1 definition
+family and the stock G2 R4/r19 no-input/no-output branch. The leaves contribute
+2,258 executable bytes plus 18 alignment bytes and replace all 2,662 stock
+function-body bytes. The default-disabled `SmpScEnableZeroDhKey` qualification
+hook remains configuration-excluded.
+
+Apollo-main accounting is now 177,276 source-owned bytes (including 184 in
+place), 137,862 generated patch-site bytes, 32 wrapper bytes, 138,042 replaced
+stock-function bytes, and 3,385,318 opaque base bytes, totaling 3,700,488
+bytes. The complete package is 4,478,982 bytes with SHA-256
+`a8a86dfee3d0f23efd5c0fce3421ab07f82b9f7d3e17f4a7ae641709e7639bd8`.
+Host semantics and the complete firmware image build are verified. Authorized
+G2/EM9305 Secure Connections and peer-interoperability evidence is unavailable,
+so physical validation remains blocked.
+
+## Current health data-manager source increment
+
+All ten linked `health_data_manager.c` functions are now production-routed
+from clean-room C. The implementation preserves the retained type-name and
+1,488-byte storage ABIs, normal and highlight protobuf conversions, bounded
+multi-record semantics, and the five-highlight capacity policy. Ten generated
+redirects replace 2,644 authenticated stock body bytes with 1,012 compiled
+Thumb bytes plus ten alignment bytes; fifteen relocations are strictly bound to
+earlier source-owned health and manager functions.
+
+Apollo-main accounting is now 185,958 source-owned bytes (including 184 in
+place and 2,200 in-place data), 145,392 generated patch-site bytes, 32 wrapper
+bytes, 145,572 replaced stock-function bytes, and 3,375,588 opaque base bytes,
+totaling 3,706,970 bytes. The complete package is 4,485,464 bytes with SHA-256
+`37a5607cf2464f0f5d39b7d83af324f5e45d8f7b9f793b845a1033806073b001`.
+Host semantics and complete-image generation are verified. Live concurrency,
+persistence, health-service interoperability, and device-data validation are
+blocked by unavailable authorized G2/EM9305 physical evidence.
+
+## Current protobuf health-service source increment
+
+All eight linked `pb_service_health.c` entries plus a bounded source-owned
+nanopb buffer callback are production-routed from clean-room C. Four receive
+wrappers preserve the null/helper status policy; four transmit wrappers retain
+the route-1/service-`0x0E` envelopes, shared message/descriptor ABI, encode
+failure status, and send behavior. Production also rejects multi-highlight
+counts above the exact three-record message capacity, closing the stock unsafe
+precondition.
+
+Eight generated redirects replace 3,092 authenticated stock body bytes with
+940 compiled Thumb bytes plus eight alignment bytes. Twenty strict relocations
+terminate at source-owned health-manager, message-encoder, BLE-sender, and
+buffer-callback functions. Apollo main now owns 186,906 source bytes, 148,484
+generated patch bytes, and retains 3,372,496 opaque bytes; the component is
+3,707,918 bytes. The package is 4,486,412 bytes with SHA-256
+`34e829396c0ed842869f018e5aa4db8008fa3ebacec9e33877a8b08ef77c8936`.
+Live scheduling, BLE delivery, phone/schema interoperability, and persisted
+device-data evidence remain blocked by unavailable authorized hardware.
+
+## Current gesture-processing service source increment
+
+The five-function `platform/input/service_gesture_processor.c` stock object is
+now fully production-routed from clean-room GPL-3.0-only C. The source owns the
+production-click buzzer policy, proximity getter, event-name accessor,
+eight-bit gesture-mask formatter, and complete touch-frame dispatcher. Five
+guarded redirects cover all 1,346 physical stock bytes, including the two
+literal-pool tails; the replacement contributes 1,608 compiled bytes plus six
+alignment bytes and carries 53 strict relocations.
+
+Host behavior, selector isolation, stock topology, relocation targets,
+component tiling, complete package generation, and flash-plan generation are
+verified. Current Apple overlay/component/package identities are 193,066 /
+3,716,462 / 4,494,956 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+Physical touch/proximity and gesture timing evidence remains blocked by
+unavailable authorized G2 hardware.
+
+## Current CY8C4046FNI host-driver source increment
+
+The 23-function `driver/touch/drv_cy8c4046fni.c` executable surface is now
+fully production-routed from clean-room GPL-3.0-only C. Twenty-three guarded
+redirects replace all 1,754 authenticated stock function bytes with 1,122
+compiled Thumb bytes plus 18 alignment bytes. Nineteen strict relocations bind
+only the retained HAL I2C, board-control, delay, and sibling source interfaces.
+The directly referenced 170-byte callback/string pool remains authenticated
+stock data.
+
+Host execution verifies the HAL ABI, command and return semantics, reset/DFU,
+report/difference buffers, baseline operations, gesture configuration, and all
+23 selector-isolated builds. The stock EasyLogger calls were non-controlling
+diagnostics and are explicitly omitted; hardware-functional paths remain
+implemented. Current Apple overlay/component/package identities are 193,066 /
+3,716,462 / 4,494,956 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+Physical I2C, electrical, reset/DFU, timing, and CapSense validation remains
+blocked by unavailable authorized G2 evidence.
+
+## Current Packetcraft Cordio GATT-profile source increment
+
+All six linked `gatt_main.c` functions are now production-routed from an
+Apache-2.0 adapter of the authenticated Packetcraft Cordio r20.05c source.
+Six guarded redirects replace all 322 stock body bytes with 254 compiled Thumb
+bytes plus eight alignment bytes. Ten strict relocations bind the recovered G2
+control block and discovery list to the retained Cordio discovery,
+service-changed, CCC, indication, and CSF providers. The directly referenced
+34-byte literal pool remains authenticated official data.
+
+Host behavior and selector isolation, stock topology, exact upstream snapshot,
+relocation targets, component tiling, manifest ownership, package generation,
+and flash-plan generation are verified. Current Apple
+overlay/component/package identities are 193,488 / 3,716,884 / 4,495,378
+bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+Physical ATT discovery, CCCD, indication, controller timing, and peer
+interoperability validation remains blocked by unavailable authorized
+G2/EM9305 hardware evidence.
+
+## Current G2 BLE OTA-profile source increment
+
+All seven linked `profile_ota.c` entries are production-routed from a bounded
+BSD-3-Clause adaptation of the authenticated AmbiqSuite 2.5.1 AMOTA skeleton
+and independently reconstructed G2 actions. Seven guarded redirects replace
+620 stock body bytes with 376 compiled Thumb bytes plus eight alignment bytes;
+seventeen strict relocations bind the recovered connection, Cordio WSF/ATT,
+OTA, reset, delay, and transport interfaces. The 80-byte literal/callback pool
+remains authenticated official data.
+
+Host execution covers the CCC-message ABI, all event branches, peripheral-role
+cancellation, reset and delayed disconnect requests, allocation failure, write
+forwarding, notification handle `0x0824`, and all seven selector builds. The
+canonical overlay/component/package identities are 192,212 / 3,715,608 /
+4,494,102 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+Physical CCC/reset/disconnect/notification timing and peer interoperability
+remain blocked by unavailable authorized G2/EM9305 evidence.
+
+## Current G2 BLE Ring-profile source increment
+
+All seven linked `profile_ring.c` entries are production-routed from an
+independently authored GPL-3.0-only clean-room implementation. Seven guarded
+redirects replace 1,446 stock body bytes with 632 compiled Thumb bytes plus
+eight alignment bytes; 23 strict relocations bind only the recovered Cordio
+discovery/ATT/WSF, connection-role, delayed-event, and sibling-source
+interfaces. The 134-byte callback/literal pool remains authenticated official
+data.
+
+Host execution covers the recovered control/message ABI, discovery, epoch
+cancellation, delayed CCC writes, connection closure, RX and TX dispatch,
+queueing, allocation failure, and all selectors. Canonical Apple
+overlay/component/package identities are 193,488 / 3,716,884 / 4,495,378
+bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+Physical discovery, delayed CCC timing, ATT handle behavior, controller
+concurrency, and peer interoperability remain blocked by unavailable
+authorized G2/EM9305 evidence. No software gap remains in the OTA/Ring profile
+pair; this does not assert wider firmware completeness.
+
+## Current charge/message callback-facade source increment
+
+The five-function charge and five-function message-count callback facades are
+production-routed from `callback_facades.c`. Ten guarded redirects replace all
+380 stock body bytes with 208 compiled Thumb bytes plus six alignment bytes.
+Each leaf has exactly one strict relocation to the retained generic callback
+manager; both 34-byte type/diagnostic pools remain authenticated official data.
+
+Host behavior covers list/type identity, lifecycle, null rejection, callback
+registration return values, unregister suppression, and notification in/out
+values. Canonical Apple overlay/component/package identities are 193,066 /
+3,716,462 / 4,494,956 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The pure facades have no direct hardware validation requirement. Their generic
+callback-manager provider is now source-owned as described below.
+
+## Current generic callback-manager source increment
+
+`callback_manager.c` production-routes all eight linked manager functions.
+Eight exact stock redirects replace 1,240 authenticated body bytes with 408
+compiled Thumb bytes plus 14 alignment bytes. Six strict relocations bind only
+to the already source-owned synchronized heap wrappers and the manager's own
+redirected helper entries; the 118-byte stock diagnostic pool remains official
+compatibility data.
+
+Host tests cover null inputs, allocation failure, duplicate registration,
+prepend ordering, head/interior unregistration, full deinitialization, and
+two-argument notification order. Canonical Apple overlay/component/package
+identities are 193,488 / 3,716,884 / 4,495,378 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 1,963,573-byte flash plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+This in-memory provider has no physical-evidence dependency; its software gap
+is closed without implying wider firmware completeness.
+
+## Current ring-battery callback-facade source increment
+
+`cb_ring_battery.c` production-routes all five linked facade functions. Five
+exact stock redirects replace 122 authenticated body bytes with 88 compiled
+Thumb bytes plus two alignment bytes. Five strict relocations terminate only at
+the source-owned generic callback manager or retained ring-battery consumer;
+the 30-byte type, path, diagnostic, and literal pool stays official data.
+
+Host tests cover forwarding, fixed list/type identity, lifecycle, null
+registration rejection, return propagation, and notification key/value
+semantics. Canonical Apple overlay/component/package sizes are 193,578 /
+3,716,974 / 4,495,468 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+Its in-memory semantics require no independent physical evidence. Wider ring
+hardware behavior remains separately blocked.
+
+## Current UX battery-sync source increment
+
+`ux_battery_sync.c` contributes one 158-byte strict-relocation leaf after two
+alignment bytes and replaces the complete 836-byte stock service-record
+callback. Eleven calls terminate at bounded charger, ring-battery, or callback
+providers. The retained 84-byte pool remains official data. Software behavior
+for all six message IDs is host-tested; physical paired-device behavior is
+explicitly blocked by unavailable authorized G2 evidence.
+
+## Current ring-battery state-service source increment
+
+`service_ring_battery.c` contributes five selector-isolated leaves totaling
+134 compiled Thumb bytes plus four alignment bytes. Five guarded redirects
+replace all 352 authenticated stock function bytes. Two strict relocations bind
+to the recovered local and peer service-record transports; the 44-byte
+diagnostic/path pool remains official data. Host tests cover cached state,
+clamping, charge normalization, accessors, and type-5/type-6 record emission.
+Physical paired-G2 delivery and live ring-state behavior remain blocked by
+unavailable authorized hardware evidence.
+
+## Current protobuf Ring-service source increment
+
+Five selector-isolated GPL-3.0-only clean-room functions now production-route
+the complete linked `pb_service_ring.c` behavior. Four guarded redirects replace
+all 1,362 stock body bytes with 594 compiled Thumb bytes plus four generated
+alignment bytes. Nine strict relocations terminate at bounded nanopb/BLE
+providers or redirected sibling entries; the 150-byte official alignment and
+literal tail remains retained.
+
+After the teleprompt-service tranche, the canonical Apollo-main component is
+3,720,884 bytes with 199,872 source-owned, 165,502 generated patch-site, and
+3,355,478 opaque base bytes. The complete 4,499,378-byte package contains
+196,085 source-compiled, 167,456 generated, and 4,135,837 opaque/cut-forward
+bytes. Its 2,031,772-byte flash plan has 2,894 placed, two unresolved, and five
+container-only regions. The
+software object is closed; paired-G2 relay, nanopb interoperability, and live
+Ring-event behavior remain explicitly blocked by unavailable authorized
+physical evidence.

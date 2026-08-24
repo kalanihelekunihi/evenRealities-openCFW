@@ -21,6 +21,25 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/packetcraft-cordio-smp-sc-sm-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-smp-sc-sm-provenance.tsv"
 TABLE_MAP = ROOT / "tools/manifests/packetcraft-cordio-smp-sc-sm-table-map.tsv"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_smp_sc_sm.c"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+PRODUCTION_SOURCE_SIZE = 16284
+PRODUCTION_SOURCE_SHA256 = "6bc75e8320b1ceabff762f64ba655b12f5a18c8539a5258a5c8d61f08d2a8739"
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_cordio_smpi_sc_initialize",
+    "open_cfw_cordio_smpi_sc_state_string",
+    "open_cfw_cordio_smpr_sc_initialize",
+    "open_cfw_cordio_smpr_sc_state_string",
+)
+PRODUCTION_PATCHES = {
+    "replace_cordio_smpi_sc_initialize": (0x00537F14, 16),
+    "replace_cordio_smpi_sc_state_string": (0x00537F24, 276),
+    "replace_cordio_smpr_sc_initialize": (0x00538104, 16),
+    "replace_cordio_smpr_sc_state_string": (0x00538114, 290),
+}
+PRODUCTION_DISPATCH_SIZE = 1495
+PRODUCTION_DISPATCH_SHA256 = "9438c7c72904056d2d0f6e9a4ce322cb1e52198738aef88558b35d5281bda801"
 PINNED_INPUTS = {
     FUNCTION_MAP: "40965f3bb294bbd20ec25f740c28150d25e1f554692403fff5f01c61b74c89b9",
     PROVENANCE: "78a5e95dac7acedf37595b8d307eb6c21ab4fc7af6b38161709c29859949899d",
@@ -256,6 +275,65 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if entry_values or interior_values:
         raise RuntimeError("stored function-entry/interior closure changed")
 
+    source = PRODUCTION_SOURCE.read_bytes()
+    if len(source) != PRODUCTION_SOURCE_SIZE or sha256(source) != PRODUCTION_SOURCE_SHA256:
+        raise RuntimeError("production SC state-machine source changed")
+    overlay_config = json.loads(OVERLAY_CONFIG.read_text(encoding="utf-8"))
+    configured_leaves = {
+        item.get("function"): item
+        for item in overlay_config.get("relocated_leaves", [])
+        if item.get("function") in PRODUCTION_FUNCTIONS
+    }
+    if tuple(configured_leaves) != PRODUCTION_FUNCTIONS:
+        raise RuntimeError("production SC state-machine leaf order changed")
+    configured_sites = {
+        item.get("name"): item
+        for item in overlay_config.get("patch_sites", [])
+        if item.get("name") in PRODUCTION_PATCHES
+    }
+    for name, (address, size) in PRODUCTION_PATCHES.items():
+        site = configured_sites.get(name)
+        if (
+            site is None
+            or site.get("runtime_address") != address
+            or site.get("expected_size") != size
+            or site.get("branch") != "b_w"
+            or site.get("target_function") not in PRODUCTION_FUNCTIONS
+        ):
+            raise RuntimeError(f"production route changed: {name}")
+    data_groups = overlay_config.get("in_place_data", [])
+    data_group = next(
+        (
+            item for item in data_groups
+            if item.get("symbol") == "open_cfw_cordio_smp_sc_dispatch"
+        ),
+        None,
+    )
+    if (
+        data_group is None
+        or data_group.get("expected", {}).get("size") != PRODUCTION_DISPATCH_SIZE
+        or data_group.get("expected", {}).get("sha256") != PRODUCTION_DISPATCH_SHA256
+        or len(data_group.get("placements", [])) != 86
+    ):
+        raise RuntimeError("production SC dispatch-data contract changed")
+
+    build_report = json.loads(OVERLAY_REPORT.read_text(encoding="utf-8"))
+    reported_functions = build_report.get("overlay", {}).get("functions", {})
+    if any(name not in reported_functions for name in PRODUCTION_FUNCTIONS):
+        raise RuntimeError("production SC state-machine functions are not built")
+    reported_sites = {
+        item.get("name"): item
+        for item in build_report.get("overlay", {}).get("patched_sites", [])
+    }
+    if any(name not in reported_sites for name in PRODUCTION_PATCHES):
+        raise RuntimeError("production SC state-machine routes are not patched")
+    reported_data = build_report.get("overlay", {}).get("patched_in_place_data", [])
+    if (
+        len([item for item in reported_data if item.get("symbol") == data_group["symbol"]])
+        != 86
+    ):
+        raise RuntimeError("production SC dispatch data is not installed")
+
     return {
         "schema_version": 1,
         "module": {
@@ -294,8 +372,23 @@ def analyze(image_path: Path = IMAGE) -> dict:
             ),
         },
         "production": {
-            "stock_bytes_replaced": 0,
-            "source_owned_bytes_added": 0,
+            "source_path": str(PRODUCTION_SOURCE.relative_to(ROOT)),
+            "function_count": 4,
+            "compiled_closure_bytes": 1696,
+            "alignment_bytes": 6,
+            "dispatch_data_bytes": PRODUCTION_DISPATCH_SIZE,
+            "dispatch_placement_count": 86,
+            "stock_bytes_replaced": 2093,
+            "source_owned_bytes_added": 3197,
+            "all_function_entries_routed": True,
+            "all_dispatch_data_installed": True,
+            "hardware_validation": {
+                "status": "blocked",
+                "reason": (
+                    "authorized physical G2/EM9305 pairing and controller "
+                    "evidence is unavailable"
+                ),
+            },
         },
     }
 

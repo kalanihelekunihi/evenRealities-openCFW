@@ -1,12 +1,13 @@
 # G2 BLE OTA and Ring profile recovery
 
-Status: authenticated object closure and AMOTA provenance recovery; no
-production routing.
+Status: OTA and Ring software closures are production-routed. Their hardware
+validation is blocked by unavailable physical evidence.
 
-This audit closes the last two open retained paths under
-`platform\ble\profiles`. OTA is a product rewrite of AmbiqSuite's AMOTA
-application skeleton. Ring is a first-party product profile with no matching
-public implementation.
+This audit authenticates the last two retained paths under
+`platform\ble\profiles`. OTA is a production-routed product adaptation of
+AmbiqSuite's AMOTA application skeleton. Ring is a first-party product profile
+with no matching public implementation and an independently authored
+production implementation.
 
 | module | physical interval | functions / body bytes | non-code | lineage |
 |---|---:|---:|---:|---|
@@ -66,7 +67,30 @@ The disconnect and send helpers allocate 12-byte WSF messages. These actions
 are G2-local; upstream AMOTA supplies their ancestry and event semantics, not
 source-identical implementations.
 
-## Ring boundary
+## OTA production closure
+
+`components/apollo_main/core_overlay/ble_ota_profile.c` implements all seven
+linked entries as BSD-3-Clause, selector-isolated C. Seven guarded redirects
+replace all 620 stock body bytes with 376 compiled Thumb bytes plus eight
+alignment bytes. Seventeen strict relocations bind only the recovered Cordio,
+OTA, reset, connection, timer, and transport providers. The directly addressed
+80-byte literal/callback pool remains authenticated stock data.
+
+Host contracts cover the recovered CCC-message ABI, every event branch,
+connection-role cancellation, reset/disconnect timing requests, allocation
+failure, write forwarding, notification handle `0x0824`, and all seven target
+selectors. The canonical Apple overlay/component/package are 193,066 /
+3,716,462 / 4,494,956 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The 1,963,573-byte flash plan hashes to
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+No hardware was accessed or flashed. OTA CCC, reset, disconnect, notification
+timing, and peer interoperability are blocked by unavailable authorized
+G2/EM9305 hardware or captured physical evidence.
+
+## Ring production closure
 
 Ring maintains a connection ID, handler ID, three-handle discovery list, and a
 16-bit connection epoch. On connection open it discovers a 128-bit product
@@ -81,9 +105,27 @@ diagnostics found no public source. Neither AmbiqSuite nor public Packetcraft
 contains this service. The Ring object therefore has no separate third-party
 version or commit to recover.
 
+`components/apollo_main/core_overlay/ble_ring_profile.c` independently
+implements all seven linked entries as GPL-3.0-only, selector-isolated C.
+Seven guarded redirects replace all 1,446 stock body bytes with 632 compiled
+Thumb bytes plus eight alignment bytes. Twenty-three strict relocations bind
+only the recovered Cordio discovery/ATT/WSF, connection-role, delayed-event,
+and sibling-source interfaces. The directly addressed 134-byte callback and
+literal pool remains authenticated stock data.
+
+Host contracts cover the recovered 12-byte control/message ABIs, handler
+initialization, service discovery, 16-bit epoch packing and cancellation,
+500/700/900 delayed CCC writes, connect/close transitions, ATT RX forwarding,
+TX command delivery, queued allocation, allocation failure, and all seven
+target selectors. The same canonical image identities and deployment-plan pin
+listed above authenticate this placement. No hardware was accessed or flashed.
+Physical discovery, CCC timing, ATT handle behavior, controller concurrency,
+and peer interoperability are blocked by unavailable authorized G2/EM9305
+hardware or captured evidence.
+
 ## Boundary
 
-The source oracle and both stock objects remain production-excluded. A future
-implementation must qualify WSF allocation, service discovery, ATT handle
-lifetimes, delayed CCC cancellation/epoch behavior, OTA reset/disconnect
-timing, and real dual-device/controller behavior before routing.
+No software gap remains in this two-module closure. Both modules still require
+real dual-device/controller evidence; their physical gates are explicitly
+blocked rather than treated as open software work. This does not assert wider
+firmware completeness: other ledger rows remain open.

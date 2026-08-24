@@ -1,8 +1,9 @@
 # G2 CY8C4046FNI touch-driver dependency boundary
 
-Status: complete, corpus-independent raw-image closure over the authenticated
-G2 2.2.6.10 Apollo payload. This is analysis only and performs no device or
-flash operation.
+Status: software-complete and production-routed, with corpus-independent
+raw-image closure over the authenticated G2 2.2.6.10 Apollo payload. Physical
+controller validation is blocked by unavailable authorized hardware. No device
+or flash operation was performed.
 
 ## Result
 
@@ -81,6 +82,43 @@ commit remains binary-unobservable. The unowned DLIB leaf at `0x0055B2A4` is
 documented above; if a future closure attributes it, this object's leading
 16-byte boundary pin will fail closed rather than absorb the change.
 
+## Production implementation
+
+`components/apollo_main/core_overlay/drv_cy8c4046fni.c` is an independently
+authored GPL-3.0-only behavioral reconstruction of all 23 executable entries.
+It provides the four HAL-I2C callback adapters, the five ops-table command
+veneers, threshold validation and private/public gesture configuration,
+callback installation, DFU/reset/initialization, touch-frame and difference
+reads, and proximity-baseline prepare/save/read behavior. Twenty-three
+selector-isolated Apple-clang leaves contribute 1,122 compiled Thumb bytes plus
+18 alignment bytes; 19 strict relocations bind only the four retained HAL I2C
+providers, board control, delay, or sibling source leaves. Twenty-three guarded
+redirects cover all 1,754 authenticated stock function bytes. The 170-byte
+stock callback/string pool remains in place because live consumers address it
+directly.
+
+Six host contracts exercise the exact HAL argument ABI, controller commands,
+reset and DFU sequences, report and difference-buffer semantics, baseline
+operations, gesture configuration acknowledgement/validation, and exact
+one-function selector builds for all 23 leaves. The reconstruction omits 60
+stock EasyLogger calls because they provide diagnostics only: they do not
+control commands, state changes, buffers, return values, hardware sequencing,
+or delay behavior. This is an explicit observability qualification, not an
+unimplemented controller path.
+
+Canonical Apple overlay/component/package identities are 192,212 / 3,715,608 /
+4,494,102 bytes with SHA-256 values
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+The flash plan is 1,916,684 bytes with SHA-256
+`ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
+
+Live I2C signaling, electrical reset, controller boot/DFU transitions,
+settling time, report timing, and CapSense behavior require an authorized
+physical G2 and capture instrumentation. Neither is available, so those gates
+are explicitly blocked by unavailable physical evidence.
+
 ## Reproduction
 
 ```sh
@@ -88,7 +126,9 @@ python3 openCFW/tools/analyze_g2_drv_cy8c4046fni.py
 python3 -m unittest openCFW.tests.test_analyze_g2_drv_cy8c4046fni
 ```
 
-The analyzer pins every function body, the complete physical interval and
-literal pool, all call and ingress topology, both object boundaries against
-the closed health-service neighbor and the unowned leaf, retained-path
-references, provider commits, and production-overlay exclusion.
+The analyzer pins every stock function body, the complete physical interval
+and literal pool, all call and ingress topology, both object boundaries,
+retained-path references, provider commits, production source identity, all 23
+compiled leaves, all 19 relocations, all 23 redirects, the retained callback
+pool, component tiling, complete package identity, and the explicit hardware
+blocker.

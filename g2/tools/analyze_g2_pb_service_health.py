@@ -18,6 +18,10 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-health-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-health-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-health-provenance.tsv"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_health.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "ad537fecc545895e0aea563c0f99ff41a87b6b0462b60ef4c7ec1649f9a4a221",
     CLOSURE: "a50cc002ef2cc5f95cf1d44b4e1b1ef37435d3c64cfd97d56ad0f0c2ea7d182f",
@@ -53,6 +57,18 @@ SYMBOLS = (
     (0x00757A34, "APP_PbTxEncodeHealthSingleHighlight", 336),
     (0x0076F6F4, "PB_RxHealthMultHighlight", 374),
     (0x00757A7C, "APP_PbTxEncodeHealthMultHighlight", 398),
+)
+PRODUCTION_PIN = (12366, "2a5faf89b2fc881b8ae2a19a28f1a2ba780fb7776939c5a560879f1c8791b6d6")
+PRODUCTION_LEAVES = (
+    ("open_cfw_pb_service_health_buffer_write", "OPEN_CFW_PB_HEALTH_BUFFER_WRITE_ONLY", 154, "71d648ce7fbfe3eb8bcfe0a8ec96ea07f901bedff55b5f8cda47426181d8da76", 183576),
+    ("PB_RxHealthSingleData", "OPEN_CFW_PB_HEALTH_RX_SINGLE_ONLY", 24, "fcf1eadf5f4cae6df209d800556053f4afa7938e9d648f1fbf1ab6ce55fd367d", 183732),
+    ("APP_PbTxEncodeHealthSingleData", "OPEN_CFW_PB_HEALTH_TX_SINGLE_ONLY", 204, "11d08387e157b0c6137f49373b0898cc1065c7c7703ca501535a7ed37e8adb06", 183756),
+    ("PB_RxHealthMultData", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_ONLY", 24, "a859f96aa5044a913132468af5bcdec05b1481a9451b6ab18f170a64627f4df4", 183960),
+    ("APP_PbTxEncodeHealthMultData", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_ONLY", 138, "d62197781dfe7c99758e15d6aec1eb9f4da07f64c90a5336ddac3a6679137076", 183984),
+    ("PB_RxHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_RX_SINGLE_HIGHLIGHT_ONLY", 24, "a99320f11b41dbdaec7856ac72713c7164dc8d655d56ae6aec251011a4bb7577", 184124),
+    ("APP_PbTxEncodeHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_TX_SINGLE_HIGHLIGHT_ONLY", 138, "33c85e5cf1d82fcfedadfa170dcccdce9a4fb8885ba7d259d5dadb90c82e65e7", 184148),
+    ("PB_RxHealthMultHighlight", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_HIGHLIGHTS_ONLY", 24, "d236fdddab28b4e00659c89de08e5f78aa65271e64d642bcc4257f8cf726fdb2", 184288),
+    ("APP_PbTxEncodeHealthMultHighlight", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_HIGHLIGHTS_ONLY", 210, "02d06d366a322d251788963ca6800ded03cff72d2cd32db62a46aee56819b3ca", 184312),
 )
 
 
@@ -217,11 +233,54 @@ def analyze(image_path: Path = IMAGE) -> dict:
             or struct.unpack_from("<I", data, 0x0055B224 - BASE)[0] != 0x00777A14):
         raise AuditError("health nanopb field descriptor changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_health" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented health service entered production overlay")
+    production = PRODUCTION_SOURCE.read_bytes()
+    if (len(production), sha256(production)) != PRODUCTION_PIN:
+        raise AuditError("production health service changed")
+    overlay = json.loads(OVERLAY.read_text())
+    leaf_names = {item[0] for item in PRODUCTION_LEAVES}
+    selected = {item.get("function"): item for item in overlay.get("relocated_leaves", [])
+                if item.get("function") in leaf_names}
+    if set(selected) != leaf_names or not leaf_names.issubset(set(overlay.get("functions", []))):
+        raise AuditError("production health service leaf inventory changed")
+    relocation_count = 0
+    for name, selector, size, digest, offset in PRODUCTION_LEAVES:
+        leaf = selected[name]
+        source, tool, pin = leaf.get("source", {}), leaf.get("toolchain", {}), leaf.get("expected", {})
+        if source.get("path") != "components/apollo_main/core_overlay/pb_service_health.c" or (source.get("size"), source.get("sha256")) != PRODUCTION_PIN:
+            raise AuditError(f"production source contract changed: {name}")
+        if f"-D{selector}=1" not in tool.get("flags", []) or leaf.get("profiles") != ["apple-clang"] or not leaf.get("strict_relocation_contract"):
+            raise AuditError(f"production toolchain contract changed: {name}")
+        if (pin.get("size"), pin.get("sha256"), pin.get("alignment"), pin.get("offset")) != (size, digest, 4, offset):
+            raise AuditError(f"production leaf pin changed: {name}")
+        relocation_count += len(leaf.get("relocations", []))
+    if relocation_count != 20:
+        raise AuditError("production health service relocation closure changed")
+    stock_by_start = {int(row["stock_start"], 0): row for row in rows}
+    sites = {item.get("runtime_address"): item for item in overlay.get("patch_sites", [])
+             if item.get("runtime_address") in stock_by_start}
+    if set(sites) != set(stock_by_start):
+        raise AuditError("production health service entry routing changed")
+    for address, row in stock_by_start.items():
+        site = sites[address]
+        if site.get("expected_size") != int(row["stock_bytes"]) or site.get("expected_sha256") != row["stock_sha256"] or site.get("target_function") != row["function"] or site.get("branch") != "b_w" or site.get("profiles") != ["apple-clang"]:
+            raise AuditError(f"production stock route changed: {row['function']}")
+    build = json.loads(OVERLAY_REPORT.read_text())
+    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183", 3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a"):
+        raise AuditError("production health service build pins changed")
+    built = {item.get("extraction", {}).get("function"): item
+             for item in build.get("relocated_leaves", [])
+             if item.get("extraction", {}).get("function") in leaf_names}
+    if set(built) != leaf_names or sum(item[2] for item in PRODUCTION_LEAVES) != 940 or sum(item["placement"].get("padding_before", 0) for item in built.values()) != 8:
+        raise AuditError("production compiled health service closure changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    regions = main["regions"]
+    generated = [item for item in regions if item.get("address_status") == "generated_source_entry_replacement" and item.get("target_address") in stock_by_start]
+    appended = [item for item in regions if item.get("address_status") == "source_compiled" and 8130620 <= item.get("target_address", 0) < 8131566]
+    if len(generated) != 8 or sum(item["size"] for item in generated) != 3092 or len(appended) != 9 or sum(item["size"] for item in appended) != 940:
+        raise AuditError("production health service manifest closure changed")
+    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a", 4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783"):
+        raise AuditError("production health service package pins changed")
 
     return {
         "surface": {
@@ -242,7 +301,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "message": "0x200f5dc4", "message_bytes": 0x31C,
             "encode_buffer": "0x2037c6a0", "encode_capacity": 0x100,
             "multi_highlight_count_bits": 16,
-            "multi_highlight_wrapper_has_explicit_count_bound": False,
+            "multi_highlight_wrapper_has_explicit_count_bound": True,
         },
         "lineage": {
             "retained_path": RETAINED_PATH,
@@ -251,8 +310,16 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "assertion_lines": [line for _, _, line in SYMBOLS],
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": "components/apollo_main/core_overlay/pb_service_health.c",
+            "production_routed": True, "source_inventory_available": True,
+            "source_functions": 9, "compiled_text_bytes": 940,
+            "alignment_bytes": 8, "stock_replaced_bytes": 3092,
+            "strict_relocations": 20, "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized physical G2/EM9305 health-service evidence "
+                "is available in this workspace."
+            ),
         },
     }
 

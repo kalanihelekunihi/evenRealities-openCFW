@@ -790,13 +790,13 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 174816,
+                "overlay_size": 180782,
                 "overlay_sha256": (
-                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
+                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
                 ),
-                "component_size": 3698212,
+                "component_size": 3704178,
                 "component_sha256": (
-                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
+                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
                 ),
             },
         )
@@ -918,9 +918,9 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 "patch_site_count": len(overlay["patched_sites"]),
             },
             {
-                "size": 174816,
+                "size": 180782,
                 "sha256": (
-                    "b732d58cda6cf0a05c15e3eeb5beaa6bcf472a2822065ae6ca614a3417f7f6bf"
+                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
                 ),
                 "function_count": 971,
                 "patch_site_count": 910,
@@ -938,9 +938,9 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                     Path(self.production_output)
                     / "ota_s200_firmware_ota.bin"
                 ).relative_to(ROOT).as_posix(),
-                "size": 3698212,
+                "size": 3704178,
                 "sha256": (
-                    "125cfeb1bda76cbb2cc7d7d1e6fab92e00c63c4f00f5fa8a893c6f33912a55f3"
+                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
                 ),
                 "opaque_base_bytes": 3399558,
                 "source_owned_bytes": 167608,

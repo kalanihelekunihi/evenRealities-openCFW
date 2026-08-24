@@ -1,7 +1,7 @@
 # G2 eAT buzzer-command recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-source candidate and not production-routed. Run addresses use
+Status: software-complete clean-room production implementation; physical buzzer
+validation blocked by unavailable authorized hardware. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -53,6 +53,39 @@ diagnostics. Successful paths emit the corresponding status text and
 formats, limits, source path, driver call sites, complete physical bytes, and
 ingress topology are all pinned by `tools/analyze_g2_at_buzzer.py`.
 
-No authenticated historical source or license is available. There is no
-clean-room candidate, the service is absent from `overlay.json`, and it claims
-zero package ownership bytes.
+No authenticated historical source or license is available.
+
+## Production closure
+
+`components/apollo_main/core_overlay/at_buzzer.c` is an independently authored
+GPL-3.0-only implementation of the recovered command behavior. It uses retained
+command and response strings, a bounded local parser, and five explicit ABI
+bindings: AT output at `0x00541430` plus the four buzzer-driver entries above.
+It preserves the stock four-byte prefix comparisons (including the accepted
+`note-extra` quirk), `atoi`-style nondigit-to-zero behavior for `play`, the
+0-10 AT range despite the driver's nine-record voice table, and the distinct
+null/malformed/range/unknown response paths. The bounded subcommand buffer
+prevents an unterminated unknown token from escaping the handler.
+
+Apple Clang 21.0.0 emits one 2,740-byte Thumb leaf with SHA-256
+`a3eeb877b669e96b2f0122ebdd399a5795a6f0a7bd7d3fd938f03375c5cd0305`.
+Its 23 strict `R_ARM_THM_CALL` relocations reference only the five reviewed
+providers; no source literal/rodata section is admitted. A guarded `B.W`
+replacement covers all 1,208 stock bytes, including the pool, while the stored
+command-table pointer continues to enter the authenticated stock address.
+The source and replacement claim 3,948 production ownership bytes.
+
+Host tests exercise every successful dispatch, null/missing/malformed and
+range failures, prefix and `atoi` quirks, bounded unknown echo, provider
+arguments, and the single-function Thumb surface. The analyzer additionally
+pins source, relocation, patch, build, manifest, and package identities. The
+canonical Apple overlay/component/package sizes are 188,812 / 3,712,208 /
+4,490,702 bytes with SHA-256
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+
+No device was accessed or flashed. Audible output, pitch/frequency, duty cycle,
+beat timing, predefined voice playback, and stop behavior require an authorized
+physical G2 buzzer/piezo path. That evidence is unavailable, so hardware
+validation is explicitly blocked and functional completeness is not declared.

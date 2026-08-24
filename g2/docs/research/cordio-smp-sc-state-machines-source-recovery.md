@@ -64,6 +64,24 @@ the common unknown-state string.
 python3 tools/analyze_g2_cordio_smp_sc_sm.py --json
 ```
 
-Production ownership remains zero. The authenticated stock bytes remain cut
-forward pending source compilation, exact IAR placement, and relocation
-closure.
+## Production result
+
+`components/apollo_main/core_overlay/cordio_smp_sc_sm.c` now compiles the two
+role initializers, both complete diagnostic state-name functions, and the
+entire immutable dispatch ABI. Four guarded entry redirects replace all 598
+stock function bytes. The compiled closures contribute 1,696 bytes plus six
+alignment bytes; 86 checked in-place data placements install all 1,495 bytes
+of interfaces, action pointers, state pointers, common rows, and per-state
+transition rows from the C-generated dispatch object. The resulting production
+ownership is 3,197 bytes and every runtime state-engine pointer retains its
+authenticated stock address.
+
+Host tests verify both initializer bindings, the complete state-name ranges,
+unknown fallbacks, and byte equality between the compiled dispatch object and
+all authenticated stock tables. The canonical component, manifest partition,
+EVENOTA package, and flash plan are pinned and build successfully.
+
+No authorized physical G2/EM9305 was available. Numeric-comparison, passkey,
+OOB, timeout/cleanup, reconnect, and controller-concurrency execution remain
+explicitly blocked by unavailable physical evidence; offline production
+integration does not claim that hardware validation.

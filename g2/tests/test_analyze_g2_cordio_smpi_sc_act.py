@@ -35,6 +35,13 @@ class SmpiScActTest(unittest.TestCase):
         self.assertEqual(module["strict_interior_pointers"], 0)
         self.assertEqual(report["architecture"]["ccb_key_ready_offset"], 0x44)
         self.assertTrue(report["lineage"]["independent_release_discriminator"])
+        production = report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["live_functions"], 16)
+        self.assertEqual(production["compiled_leaf_bytes"], 942)
+        self.assertEqual(production["source_owned_bytes_added"], 956)
+        self.assertEqual(production["stock_bytes_replaced"], 1070)
+        self.assertIn("blocked by unavailable authorized G2/EM9305", production["hardware_validation"])
 
 
 if __name__ == "__main__":

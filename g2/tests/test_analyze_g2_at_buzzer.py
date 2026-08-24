@@ -53,10 +53,21 @@ class AnalyzeG2AtBuzzerTests(unittest.TestCase):
         self.assertEqual(self.report["lineage"]["exact_symbol"], "_atBuzzerTest")
         self.assertEqual(self.report["lineage"]["command_record"], "[0x006c9280,0x006c9290)")
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/at_buzzer.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 3948)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 1)
+        self.assertEqual(production["compiled_text_bytes"], 2740)
+        self.assertEqual(production["alignment_bytes"], 0)
+        self.assertEqual(production["stock_replaced_bytes"], 1208)
+        self.assertEqual(production["strict_relocations"], 23)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("No authorized physical G2 buzzer", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

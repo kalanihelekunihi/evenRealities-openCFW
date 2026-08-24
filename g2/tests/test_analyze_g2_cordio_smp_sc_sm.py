@@ -46,7 +46,17 @@ class SmpScStateMachineTest(unittest.TestCase):
         self.assertEqual(report["roles"]["responder"]["action_count"], 55)
         self.assertEqual(report["roles"]["responder"]["state_count"], 40)
         self.assertTrue(report["lineage"]["independent_release_discriminator"])
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        production = report["production"]
+        self.assertEqual(production["function_count"], 4)
+        self.assertEqual(production["compiled_closure_bytes"], 1696)
+        self.assertEqual(production["alignment_bytes"], 6)
+        self.assertEqual(production["dispatch_data_bytes"], 1495)
+        self.assertEqual(production["dispatch_placement_count"], 86)
+        self.assertEqual(production["stock_bytes_replaced"], 2093)
+        self.assertEqual(production["source_owned_bytes_added"], 3197)
+        self.assertTrue(production["all_function_entries_routed"])
+        self.assertTrue(production["all_dispatch_data_installed"])
+        self.assertEqual(production["hardware_validation"]["status"], "blocked")
 
 
 if __name__ == "__main__":

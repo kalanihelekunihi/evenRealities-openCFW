@@ -46,8 +46,17 @@ class G2UxBatterySyncTests(unittest.TestCase):
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
         self.assertFalse(p["new_version_discriminator"])
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routed_with_physical_validation_blocked(self):
+        p = self.report["production"]
+        self.assertEqual(
+            (p["production_routed"], p["source_functions"],
+             p["compiled_text_bytes"], p["alignment_bytes"],
+             p["strict_relocations"], p["stock_replaced_bytes"],
+             p["retained_literal_pool_bytes"],
+             p["software_functional_gap"], p["hardware_validation"]),
+            (True, 1, 158, 2, 11, 836, 84, False, "blocked"),
+        )
+        self.assertIn("No authorized physical G2", p["hardware_blocker"])
 
 
 if __name__ == "__main__":

@@ -1,8 +1,9 @@
 # G2 `pb_service_teleprompt.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+Status: complete linked-object census, clean-room C implementation, host
+behavioral qualification, and production routing. Live hardware qualification
+is explicitly blocked by unavailable authorized physical evidence. Run
+addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -57,6 +58,29 @@ contract is inferred. The envelopes are:
 
 The derived TX magic is not written back to the RX global. The historical
 source tree and license remain unavailable, so source-only functions are not
-inferred. No clean-room candidate exists, the service is absent from
-`overlay.json`, and OpenCFW claims zero production ownership bytes. The next
-retained protobuf service frontier is `pb_service_even_ai.c`.
+inferred beyond the two bounded memory helpers required by the independently
+authored implementation.
+
+## Production closure
+
+`components/apollo_main/core_overlay/pb_service_teleprompt.c` is a 13,441-byte
+GPL-3.0-only clean-room implementation with SHA-256
+`d1f308195a7076fe41043f0cea8b70a6b1d9250dabb962f6b05285120c616c68`.
+Its nine selector-isolated functions compile to 1,348 executable bytes with
+four generated alignment bytes and 39 strict relocations. All seven official
+entry bodies (1,854 bytes) are guarded `B.W` redirects with NOP fill; the
+130-byte official alignment/literal tail remains intact.
+
+Host tests cover decode failure, 16-bit input-length truncation, the 3,000 ms
+duplicate boundary, all six envelope layouts, encode failure `0x2B`, role-gated
+transport, route 1, and service 6. The canonical overlay/component/package are
+`197488/3720884/4499378` bytes with SHA-256
+`a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
+`026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
+and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
+
+No authorized live G2 service-6 master/peer BLE and teleprompt-UI evidence is
+available. The authorized right temple is nonresponsive, the left temple must
+remain stock, and the recovery gate forbids writes without debugger evidence.
+Hardware validation therefore remains blocked, not passed. The next retained
+protobuf-service software frontier is `pb_service_even_ai.c`.

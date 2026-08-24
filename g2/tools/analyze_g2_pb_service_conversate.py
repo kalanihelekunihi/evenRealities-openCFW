@@ -18,11 +18,47 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-pb-service-conversate-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pb-service-conversate-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-pb-service-conversate-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_conversate.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "8aa74eee0465950b21ff578add627df49e6b96b227beb7ce97167569955c4d31",
-    CLOSURE: "de8212f98c92f77e9afdb599575851a6e2eb469f6920d5a4bd0d6c4b5e749a57",
-    PROVENANCE: "fa573d59cdd9f3a2d6b505f397b6786e626e0781a377f2495bde2956462c29b2",
+    CLOSURE: "68bef70d987506d41098eae1932a35ec44d56501e4cf32b5be9a66fba0784883",
+    PROVENANCE: "d6e10558860b88b9af4a792496c0feb3a46fdfa93a5f3a6887e3f10b0a771a65",
 }
+SOURCE_SIZE = 12137
+SOURCE_SHA256 = "04ded321c0a5f25be9328fbe971512cf16f54657e9e91e6c56605e2d740d579c"
+FUNCTIONS = (
+    ("open_cfw_pb_service_conversate_buffer_write", 146, 195032, 0),
+    ("open_cfw_pb_service_conversate_zero", 88, 195180, 0),
+    ("APP_PbConversateRxFrameDataProcess", 112, 195268, 3),
+    ("APP_PbConversateTxEncodeNotify", 148, 195380, 6),
+    ("APP_PbConversateTxEncodePrepNoteListRequest", 132, 195528, 6),
+    ("APP_PbConversateTxEncodePrepNoteSelect", 150, 195660, 6),
+    ("APP_PbConversateTxEncodeCommResp", 134, 195812, 6),
+    ("APP_PbConversateTxEncodeTagTrackingData", 188, 195948, 6),
+)
+PATCHES = (
+    ("replace_pb_conversate_rx", 0x005B1B4C, 478,
+     "9055629cf9abb554af3ba3c7e59c869c0286a5e9660530fcf27f2f54c2954e90",
+     "APP_PbConversateRxFrameDataProcess"),
+    ("replace_pb_conversate_notify", 0x005B1D2A, 296,
+     "30dcade56040cb400d07ea0227e4e5fd06ef82248ec075fdb51b82d9af2611f8",
+     "APP_PbConversateTxEncodeNotify"),
+    ("replace_pb_conversate_prep_list", 0x005B1E52, 220,
+     "8853d8e3ccc7a935284ca42f964e6d4438b59dde5962ed0e9331212f86d7a83e",
+     "APP_PbConversateTxEncodePrepNoteListRequest"),
+    ("replace_pb_conversate_prep_select", 0x005B1F2E, 224,
+     "49f6118e9df734a2d83a2875eef01760473e6e49c61f5443a406a3e1c4d1498a",
+     "APP_PbConversateTxEncodePrepNoteSelect"),
+    ("replace_pb_conversate_comm_resp", 0x005B200E, 288,
+     "b3a9bbda733270d509a7bc3c85c0a47af5b922fbc4502e338ffe1e656991bc5e",
+     "APP_PbConversateTxEncodeCommResp"),
+    ("replace_pb_conversate_tag_tracking", 0x005B212E, 270,
+     "3bea211c087a0db1d6b9c791a9625e6c1ef27b6b2caea13f7e8d6459ca0fd257",
+     "APP_PbConversateTxEncodeTagTrackingData"),
+)
 PHYSICAL = (0x005B1B4C, 0x005B22BC)
 PHYSICAL_SHA256 = "8973bc2f23588773f4ce41491809689c35bbe7f1f835bf5b21c038a5c657e841"
 POOL = (0x005B223C, 0x005B22BC)
@@ -208,11 +244,72 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if stored:
         raise AuditError("unexpected stored entry/interior pointer")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("pb_service_conversate" in source.get("path", "").lower()
-                 for source in overlay["sources"])
-    if routed:
-        raise AuditError("unimplemented conversate service unexpectedly entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != SOURCE_SIZE or sha256(source) != SOURCE_SHA256:
+        raise AuditError("production source changed")
+    overlay = json.loads(OVERLAY.read_text())
+    names = {item[0] for item in FUNCTIONS}
+    leaves = {item.get("function"): item for item in overlay["relocated_leaves"]
+              if item.get("function") in names}
+    if set(leaves) != names:
+        raise AuditError("production leaf inventory changed")
+    for name, size, offset, relocations in FUNCTIONS:
+        leaf = leaves[name]
+        if (leaf["source"].get("path") !=
+                "components/apollo_main/core_overlay/pb_service_conversate.c"
+                or leaf["source"].get("size") != SOURCE_SIZE
+                or leaf["source"].get("sha256") != SOURCE_SHA256
+                or leaf.get("profiles") != ["apple-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or (leaf["expected"].get("size"), leaf["expected"].get("offset"),
+                    leaf["expected"].get("alignment")) != (size, offset, 4)
+                or len(leaf.get("relocations", [])) != relocations):
+            raise AuditError(f"production leaf changed: {name}")
+    patch_by_name = {item.get("name"): item for item in overlay["patch_sites"]}
+    for name, address, size, digest, function in PATCHES:
+        patch = patch_by_name.get(name)
+        if patch is None or (
+            patch.get("runtime_address"), patch.get("expected_size"),
+            patch.get("expected_sha256"), patch.get("branch"),
+            patch.get("target_function"), patch.get("profiles"),
+        ) != (address, size, digest, "b_w", function, ["apple-clang"]):
+            raise AuditError(f"production patch changed: {name}")
+    report = json.loads(REPORT.read_text())
+    if (report["overlay"]["size"], report["overlay"]["sha256"],
+            report["component"]["size"], report["component"]["sha256"]) != (
+        197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+    ):
+        raise AuditError("production build pins changed")
+    manifest = json.loads(MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"].get("size"), main["provider"].get("sha256"),
+            manifest["package"].get("expected_size"),
+            manifest["package"].get("expected_sha256")) != (
+        3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+        4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783",
+    ):
+        raise AuditError("production manifest pins changed")
+    region_names = {item["name"] for item in main["regions"]}
+    required = {name.removeprefix("replace_") + "_source_replacement"
+                for name, *_ in PATCHES}
+    required |= {
+        "pb_service_conversate_retained_literal_pool",
+        "pb_conversate_buffer_write_source_alignment",
+        "pb_conversate_buffer_write_source_text",
+        "pb_conversate_zero_source_alignment",
+        "pb_conversate_zero_source_text",
+        "pb_conversate_rx_source_text",
+        "pb_conversate_notify_source_text",
+        "pb_conversate_prep_list_source_text",
+        "pb_conversate_prep_select_source_text",
+        "pb_conversate_comm_resp_source_alignment",
+        "pb_conversate_comm_resp_source_text",
+        "pb_conversate_tag_tracking_source_alignment",
+        "pb_conversate_tag_tracking_source_text",
+    }
+    if not required <= region_names:
+        raise AuditError("production manifest regions changed")
 
     return {
         "surface": {
@@ -255,8 +352,23 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [row["function"] for row in rows],
         },
         "production": {
-            "candidate": None, "production_routed": routed,
-            "ownership_bytes": 0, "source_inventory_available": False,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "production_routed": True,
+            "ownership_bytes": 1776,
+            "source_inventory_available": True,
+            "source_functions": 8,
+            "compiled_text_bytes": 1098,
+            "alignment_bytes": 8,
+            "strict_relocations": 33,
+            "stock_replaced_bytes": 1776,
+            "retained_literal_pool_bytes": 128,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked",
+            "hardware_blocker": (
+                "No authorized live G2 service 0x0B master/peer BLE and "
+                "conversate UI evidence is available; the authorized right "
+                "temple is nonresponsive and the left temple must remain stock."
+            ),
         },
     }
 

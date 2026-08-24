@@ -366,6 +366,176 @@ EXPECTED_SMP_ACT_PRODUCTION_SOURCE = {
     "upstream_commit": EXPECTED_COMMIT,
     "evidence": "docs/research/cordio-smp-act-source-recovery.md",
 }
+EXPECTED_SMP_SC_ACT_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smp_sc_act_cat_initiator_address",
+    "open_cfw_cordio_smp_sc_act_cat_responder_address",
+    "open_cfw_cordio_smp_sc_act_process_pairing",
+    "open_cfw_cordio_smp_sc_act_authentication_request",
+    "open_cfw_cordio_smp_sc_act_cleanup",
+    "open_cfw_cordio_smp_sc_act_pairing_failed",
+    "open_cfw_cordio_smp_sc_act_pairing_cancel",
+    "open_cfw_cordio_smp_sc_act_authentication_select",
+    "open_cfw_cordio_smp_sc_act_passkey_setup",
+    "open_cfw_cordio_smp_sc_act_jwnc_calculate_f4",
+    "open_cfw_cordio_smp_sc_act_jwnc_calculate_g2",
+    "open_cfw_cordio_smp_sc_act_jwnc_display",
+    "open_cfw_cordio_smp_sc_act_passkey_receive",
+    "open_cfw_cordio_smp_sc_act_passkey_send",
+    "open_cfw_cordio_smp_sc_act_calculate_shared_secret",
+    "open_cfw_cordio_smp_sc_act_calculate_f5_t",
+    "open_cfw_cordio_smp_sc_act_calculate_f5_mac",
+    "open_cfw_cordio_smp_sc_act_calculate_f5_ltk",
+    "open_cfw_cordio_smp_sc_act_calculate_f6_ea",
+    "open_cfw_cordio_smp_sc_act_calculate_f6_eb",
+}
+EXPECTED_SMP_SC_ACT_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smp_sc_act.c",
+    "size": 39464,
+    "sha256": "2b7977d36ee69f70159a51538dc41b9c447bf572a0e7f4932a5f2965454396cf",
+    "license": "Apache-2.0",
+    "origin": (
+        "production adapter of the authenticated AmbiqSuite R4.4.1 "
+        "Packetcraft Cordio smp_sc_act.c linked surface, preserving the "
+        "stock G2 R4/r19 no-I/O branch"
+    ),
+    "upstream": "third_party/cordio",
+    "upstream_commit": "4264b9309e03064ffad13a0468d5d0c1110c5288",
+    "evidence": "docs/research/cordio-smp-sc-act-source-recovery.md",
+}
+EXPECTED_SMPI_SC_ACT_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smpi_sc_authentication_select",
+    "open_cfw_cordio_smpi_sc_send_public_key",
+    "open_cfw_cordio_smpi_sc_jwnc_setup",
+    "open_cfw_cordio_smpi_sc_jwnc_send_random",
+    "open_cfw_cordio_smpi_sc_jwnc_calculate_f4",
+    "open_cfw_cordio_smpi_sc_jwnc_calculate_g2",
+    "open_cfw_cordio_smpi_sc_passkey_calculate_ca",
+    "open_cfw_cordio_smpi_sc_passkey_calculate_cb",
+    "open_cfw_cordio_smpi_sc_passkey_send_confirm",
+    "open_cfw_cordio_smpi_sc_passkey_send_random",
+    "open_cfw_cordio_smpi_sc_passkey_check",
+    "open_cfw_cordio_smpi_sc_oob_calculate_cb",
+    "open_cfw_cordio_smpi_sc_oob_send_random",
+    "open_cfw_cordio_smpi_sc_oob_process_random",
+    "open_cfw_cordio_smpi_sc_dh_key_check_send",
+    "open_cfw_cordio_smpi_sc_dh_key_check_verify",
+}
+EXPECTED_SMPI_SC_ACT_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smpi_sc_act.c",
+    "size": 18850,
+    "sha256": "f7ba436496256178a0b6c49fa2dfcfaba8a48984a13282063e1d997ddff2dac8",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c smpi_sc_act.c linked surface with the stock r20/R4 keyReady transition",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smpi-sc-act-source-recovery.md",
+}
+EXPECTED_SMPR_SC_ACT_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smpr_sc_store_pin",
+    "open_cfw_cordio_smpr_sc_send_public_key",
+    "open_cfw_cordio_smpr_sc_jwnc_setup",
+    "open_cfw_cordio_smpr_sc_jwnc_send_confirm",
+    "open_cfw_cordio_smpr_sc_jwnc_calculate_g2",
+    "open_cfw_cordio_smpr_sc_jwnc_display",
+    "open_cfw_cordio_smpr_sc_passkey_store_confirm",
+    "open_cfw_cordio_smpr_sc_passkey_calculate_cb",
+    "open_cfw_cordio_smpr_sc_passkey_store_confirm_and_calculate_cb",
+    "open_cfw_cordio_smpr_sc_passkey_store_pin_and_calculate_cb",
+    "open_cfw_cordio_smpr_sc_passkey_send_confirm",
+    "open_cfw_cordio_smpr_sc_passkey_calculate_ca",
+    "open_cfw_cordio_smpr_sc_passkey_send_random",
+    "open_cfw_cordio_smpr_sc_oob_setup",
+    "open_cfw_cordio_smpr_sc_oob_calculate_ca",
+    "open_cfw_cordio_smpr_sc_oob_send_random",
+    "open_cfw_cordio_smpr_sc_store_dh_key_check",
+    "open_cfw_cordio_smpr_sc_wait_dh_key_check",
+    "open_cfw_cordio_smpr_sc_calculate_dh_key",
+    "open_cfw_cordio_smpr_sc_dh_key_check_send",
+}
+EXPECTED_SMPR_SC_ACT_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smpr_sc_act.c",
+    "size": 17715,
+    "sha256": "9aeeb7deca5ddba366291e2b19daeb4c06f8d1feb4915dc863b50b5dd1d82c26",
+    "license": "Apache-2.0",
+    "origin": "production adapter of the authenticated Packetcraft Cordio r20.05c smpr_sc_act.c linked surface with the stock r20/R4 keyReady transition",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smpr-sc-act-source-recovery.md",
+}
+EXPECTED_SMPI_ACT_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smpi_pair_request",
+    "open_cfw_cordio_smpi_check_security_request",
+    "open_cfw_cordio_smpi_process_security_request",
+    "open_cfw_cordio_smpi_process_pair_response",
+    "open_cfw_cordio_smpi_process_pair_confirm",
+    "open_cfw_cordio_smpi_confirm_verify",
+    "open_cfw_cordio_smpi_stk_encrypt",
+    "open_cfw_cordio_smpi_setup_key_distribution",
+    "open_cfw_cordio_smpi_receive_key",
+    "open_cfw_cordio_smpi_send_key",
+}
+EXPECTED_SMPI_ACT_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smpi_act.c",
+    "size": 16690,
+    "sha256": "0a19fb3adddd4ae6b9a71a4b012b2dea23cc3999938e3e6be1f8da4772a538df",
+    "license": "Apache-2.0",
+    "origin": "production adapter of authenticated Packetcraft Cordio r20.05c smpi_act.c linked legacy pairing actions with the stock r20/R4 keyReady transition",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smpi-act-source-recovery.md",
+}
+EXPECTED_SMPR_ACT_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smpr_send_security_request",
+    "open_cfw_cordio_smpr_process_pair_request",
+    "open_cfw_cordio_smpr_send_pair_response",
+    "open_cfw_cordio_smpr_process_pair_confirm",
+    "open_cfw_cordio_smpr_process_pair_confirm_calculate",
+    "open_cfw_cordio_smpr_confirm_verify",
+    "open_cfw_cordio_smpr_send_pair_random",
+    "open_cfw_cordio_smpr_send_key",
+    "open_cfw_cordio_smpr_setup_key_distribution",
+    "open_cfw_cordio_smpr_receive_key",
+}
+EXPECTED_SMPR_ACT_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smpr_act.c",
+    "size": 16630,
+    "sha256": "f01027a9e7bc6e6af2bf4add1838cf873e1e90b6c2ee57e419e3a82f02dac5ed",
+    "license": "Apache-2.0",
+    "origin": "production adapter of authenticated Packetcraft Cordio r20.05c smpr_act.c linked legacy pairing actions with the stock r20/R4 keyReady transition",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smpr-act-source-recovery.md",
+}
+EXPECTED_SMP_SC_SM_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smpi_sc_initialize",
+    "open_cfw_cordio_smpi_sc_state_string",
+    "open_cfw_cordio_smpr_sc_initialize",
+    "open_cfw_cordio_smpr_sc_state_string",
+}
+EXPECTED_SMP_SC_SM_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smp_sc_sm.c",
+    "size": 16284,
+    "sha256": "6bc75e8320b1ceabff762f64ba655b12f5a18c8539a5258a5c8d61f08d2a8739",
+    "license": "Apache-2.0",
+    "origin": "production C reconstruction of Packetcraft Cordio r20.05c smpi_sc_sm.c and smpr_sc_sm.c linked state-machine interfaces and dispatch ABI",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smp-sc-state-machines-source-recovery.md",
+}
+EXPECTED_SMP_LEGACY_SM_PRODUCTION_FUNCTIONS = {
+    "open_cfw_cordio_smpi_initialize",
+    "open_cfw_cordio_smpr_initialize",
+}
+EXPECTED_SMP_LEGACY_SM_PRODUCTION_SOURCE = {
+    "path": "components/apollo_main/core_overlay/cordio_smp_legacy_sm.c",
+    "size": 8797,
+    "sha256": "9a90b81d01f83ca8daa21cf645594188a6e7feb61a40f61b2afee089063d5c01",
+    "license": "Apache-2.0",
+    "origin": "production C reconstruction of Packetcraft Cordio r20.05c smpi_sm.c and smpr_sm.c linked legacy state-machine interfaces and dispatch ABI",
+    "upstream": "third_party/cordio",
+    "upstream_commit": EXPECTED_COMMIT,
+    "evidence": "docs/research/cordio-smp-legacy-state-machines-source-recovery.md",
+}
 
 
 def sha256(data: bytes) -> str:
@@ -613,10 +783,17 @@ def verify_bounded_production_adapter(overlay_path: Path) -> None:
         | EXPECTED_SMP_DB_PRODUCTION_FUNCTIONS
         | EXPECTED_SMP_MAIN_PRODUCTION_FUNCTIONS
         | EXPECTED_SMP_SC_MAIN_PRODUCTION_FUNCTIONS
-        | EXPECTED_SMP_ACT_PRODUCTION_FUNCTIONS,
+        | EXPECTED_SMP_ACT_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMP_SC_ACT_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMPI_SC_ACT_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMPR_SC_ACT_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMPI_ACT_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMPR_ACT_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMP_SC_SM_PRODUCTION_FUNCTIONS
+        | EXPECTED_SMP_LEGACY_SM_PRODUCTION_FUNCTIONS,
         "snapshot is production-configured outside the bounded Cordio adapter",
     )
-    require(len(records) == 96, "bounded Cordio production function count changed")
+    require(len(records) == 178, "bounded Cordio production function count changed")
     for record in records:
         function = record.get("function")
         if function in EXPECTED_BOUNDED_PRODUCTION_FUNCTIONS:
@@ -633,8 +810,22 @@ def verify_bounded_production_adapter(overlay_path: Path) -> None:
             expected_source = EXPECTED_SMP_MAIN_PRODUCTION_SOURCE
         elif function in EXPECTED_SMP_SC_MAIN_PRODUCTION_FUNCTIONS:
             expected_source = EXPECTED_SMP_SC_MAIN_PRODUCTION_SOURCE
-        else:
+        elif function in EXPECTED_SMP_ACT_PRODUCTION_FUNCTIONS:
             expected_source = EXPECTED_SMP_ACT_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMP_SC_ACT_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMP_SC_ACT_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMPI_SC_ACT_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMPI_SC_ACT_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMPR_SC_ACT_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMPR_SC_ACT_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMPI_ACT_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMPI_ACT_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMPR_ACT_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMPR_ACT_PRODUCTION_SOURCE
+        elif function in EXPECTED_SMP_SC_SM_PRODUCTION_FUNCTIONS:
+            expected_source = EXPECTED_SMP_SC_SM_PRODUCTION_SOURCE
+        else:
+            expected_source = EXPECTED_SMP_LEGACY_SM_PRODUCTION_SOURCE
         require(
             record.get("source") == expected_source,
             f"bounded Cordio source contract changed: {record.get('function')}",
@@ -649,6 +840,13 @@ def verify_bounded_production_adapter(overlay_path: Path) -> None:
         EXPECTED_SMP_MAIN_PRODUCTION_SOURCE,
         EXPECTED_SMP_SC_MAIN_PRODUCTION_SOURCE,
         EXPECTED_SMP_ACT_PRODUCTION_SOURCE,
+        EXPECTED_SMP_SC_ACT_PRODUCTION_SOURCE,
+        EXPECTED_SMPI_SC_ACT_PRODUCTION_SOURCE,
+        EXPECTED_SMPR_SC_ACT_PRODUCTION_SOURCE,
+        EXPECTED_SMPI_ACT_PRODUCTION_SOURCE,
+        EXPECTED_SMPR_ACT_PRODUCTION_SOURCE,
+        EXPECTED_SMP_SC_SM_PRODUCTION_SOURCE,
+        EXPECTED_SMP_LEGACY_SM_PRODUCTION_SOURCE,
     ):
         source_path = ROOT / expected_source["path"]
         require(source_path.is_file(), "bounded Cordio production source is missing")
@@ -740,6 +938,14 @@ def verify_production_exclusion() -> None:
             EXPECTED_SMP_DB_PRODUCTION_SOURCE,
             EXPECTED_SMP_MAIN_PRODUCTION_SOURCE,
             EXPECTED_SMP_SC_MAIN_PRODUCTION_SOURCE,
+            EXPECTED_SMP_ACT_PRODUCTION_SOURCE,
+            EXPECTED_SMP_SC_ACT_PRODUCTION_SOURCE,
+            EXPECTED_SMPI_SC_ACT_PRODUCTION_SOURCE,
+            EXPECTED_SMPR_SC_ACT_PRODUCTION_SOURCE,
+            EXPECTED_SMPI_ACT_PRODUCTION_SOURCE,
+            EXPECTED_SMPR_ACT_PRODUCTION_SOURCE,
+            EXPECTED_SMP_SC_SM_PRODUCTION_SOURCE,
+            EXPECTED_SMP_LEGACY_SM_PRODUCTION_SOURCE,
         )
     }
     for path in sorted(configured):

@@ -1,0 +1,11 @@
+kind	path_or_identity	sha256_or_revision	notes
+official_stock_image	blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin	36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863	Retained production object, controller protocol, and ABI oracle only
+production_source	components/apollo_main/core_overlay/drv_cy8c4046fni.c	93ed6d61682274079362f39afb1f9f868e5d775fae7c1b95c19ce20c1e62254e	Clean-room C implementation of all 23 recovered host-driver functions
+host_fixture_header	tests/fixtures/drv_cy8c4046fni_host.h	1ff9606d66e49bc5a305b6c8aaf5305f4d2740346f9e801bd6c736d36de56e5b	Redirects fixed SRAM, HAL I2C, board-control, delay, and callback-table providers for host execution
+host_fixture_source	tests/fixtures/drv_cy8c4046fni_host.c	52ce60a8761096d4a5687c5a066dd155bfcc0e1043516dd7341a3a41349ae49b	Deterministic controller, bus, reset, and baseline state capture
+host_behavior_test	tests/test_drv_cy8c4046fni_candidate.py	6adba9c3290c1455e6cac4bfdc165110e71cd33a3641e5dccfaa870c90e18e53	Exercises HAL ABI, reset/DFU, reports, difference data, baseline operations, gesture configuration, and 23-way selector isolation
+production_overlay	components/apollo_main/core_overlay/overlay.json	a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183	Twenty-three strict relocated leaves and complete stock-body redirects in the canonical Apple-clang image
+production_component	components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin	026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a	3,716,248-byte source-built Apollo component
+production_package	build/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin	03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783	4,494,742-byte deterministic complete firmware package
+diagnostic_qualification	stock EasyLogger calls intentionally omitted	nonfunctional-observability	Controller commands, state changes, return values, buffers, and timing providers remain implemented; omitted stock logs do not control hardware behavior
+hardware_evidence	unavailable	blocked	No authorized physical G2 touch controller or captured I2C/electrical/reset/DFU/timing evidence is available

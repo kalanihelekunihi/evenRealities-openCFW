@@ -1,0 +1,13 @@
+kind	path_or_identity	sha256_or_revision	notes
+official_stock_image	blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin	36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863	Retained production object, ingress, data ABI, and provider oracle only
+upstream_source	third_party/packetcraft-gatt-profile/gatt_main.c	bba9a3041ce14284a0bf527934eabd01c01694d8	Exact Packetcraft Cordio source blob shared by releases r20.05 through r20.05c
+upstream_commit	Packetcraft Cordio r20.05c	3656312d6b73e2a2c1c8b33ee0385bc199dd97e6	Selected authenticated Apache-2.0 source revision
+production_source	components/apollo_main/core_overlay/cordio_gatt_profile.c	edca7a119538561bc754e61db85250ff87b853c7558ab12cbda58179ef291665	Production adapter of all six linked upstream functions over recovered G2 ABI
+host_fixture_header	tests/fixtures/cordio_gatt_profile_host.h	566ca85a63657fc5ac7774a05353f8edce64531f56dc2a8c46b782e2a0d93f19	Redirects retained discovery, service-change, CCC, indication, and CSF providers
+host_fixture_source	tests/fixtures/cordio_gatt_profile_host.c	dc8a24302b7fe55ce8fbe3ef11606c0c650b412d28a44ae2fd01e4385acda3b5	Deterministic three-connection ATT and CSF state capture
+host_behavior_test	tests/test_cordio_gatt_profile_candidate.py	4e20c8a681c70d18f22fbf268f92e867f0313c67fe608a46734621c0178124c2	Exercises discovery, value routing, CCC broadcast/specific indications, CSF callbacks, and selector isolation
+production_overlay	components/apollo_main/core_overlay/overlay.json	a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183	Six strict relocated leaves and six complete stock-body redirects in the canonical Apple-clang image
+production_component	components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin	026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a	3,716,248-byte source-built Apollo component
+production_package	build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin	03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783	4,494,742-byte deterministic complete firmware package
+diagnostic_qualification	stock GattDiscover EasyLogger expansion omitted	nonfunctional-observability	The exact upstream AppDiscFindService operation and all functional profile behavior remain implemented
+hardware_evidence	unavailable	blocked	No authorized physical G2/EM9305 peer or captured ATT discovery/CCCD/indication interoperability evidence is available

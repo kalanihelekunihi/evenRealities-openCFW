@@ -19,11 +19,27 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-callback-facades-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-callback-facades-closure.tsv"
 PM = ROOT / "tools/manifests/g2-callback-facades-provider-map.tsv"
+PROD_PROVENANCE = ROOT / "tools/manifests/g2-callback-facades-provenance.tsv"
 PINS = {
     FM: "4d11d389f901edf623b62617276d92c841958700afa5cd16a4582a4054c40d7b",
-    CL: "e8a4d91d6fc0b2b391edc5740856691f888347b7e3e27665b580db25a4299cd5",
+    CL: "04952e059d1ba61d04bb7201f522ed3c256c3e92c1a27511138eaf3f6ee5d63f",
     PM: "a8ca5915dd36070f0d2c0556b2529b40cf1ab3c5a57a3c20deed43c1defd47c2",
+    PROD_PROVENANCE: "66eef42f979123f22ebadea62af73d18c79ea5a4d7610d98e7c4ccec8d3b74bb",
 }
+SOURCE = ROOT / "components/apollo_main/core_overlay/callback_facades.c"
+SOURCE_PATH = "components/apollo_main/core_overlay/callback_facades.c"
+SOURCE_PIN = (4945, "f490db10bf1e9bf7b476f486f4c9df7732d024efa95bcab080064e05c82e707e")
+LEAF_NAMES = (
+    "open_cfw_cb_charge_init", "open_cfw_cb_charge_deinit",
+    "open_cfw_cb_charge_register", "open_cfw_cb_charge_unregister",
+    "open_cfw_cb_charge_notify", "open_cfw_cb_msg_init",
+    "open_cfw_cb_msg_deinit", "open_cfw_cb_msg_register",
+    "open_cfw_cb_msg_unregister", "open_cfw_cb_msg_notify",
+)
+LEAF_DIGEST = "abefdd0ba940a124a0ee97364f0ec4fe7d46cb80c78063af7e8323d0eeb940b6"
+PATCH_DIGEST = "f383e040a7e15e42df5431ad688455c6cce2440f81f4908261eaaab46fb87ae8"
+BUILT_DIGEST = "3a3f4a5d64b24c179cebab0d9a046555efa65dda940fd3c63de88a1291ad5199"
+REGION_DIGEST = "60fcd443105aec19c4e28e693ede6bed928d7b5c7cfbbb587c22f8815882f310"
 EASY = {0x43CE9E, 0x43D0CE, 0x43D574}
 CALLBACK = {0x510108, 0x5101AE, 0x510240, 0x5103C4, 0x5105BC}
 TARGET_COUNTS = {
@@ -87,6 +103,10 @@ MODULES = {
 
 def sh(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
+
+
+def jsh(value: object) -> str:
+    return sh(json.dumps(value, sort_keys=True, separators=(",", ":")).encode())
 
 
 def cstring(blob: bytes, address: int) -> str:
@@ -177,9 +197,68 @@ def analyze(image: Path = IMAGE) -> dict:
             "embedded_third_party_definitions": [],
         }
 
+    source = SOURCE.read_bytes()
+    if (len(source), sh(source)) != SOURCE_PIN:
+        raise c.AuditError("callback-facade production source changed")
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any("cb_charge" in item.get("path", "").lower() or "cb_msg_notif" in item.get("path", "").lower() for item in overlay["sources"]):
-        raise c.AuditError("unimplemented facade entered overlay")
+    leaves = [leaf for leaf in overlay["relocated_leaves"]
+              if leaf.get("source", {}).get("path") == SOURCE_PATH]
+    if tuple(leaf.get("function") for leaf in leaves) != LEAF_NAMES or \
+            jsh(leaves) != LEAF_DIGEST or not set(LEAF_NAMES) <= set(overlay["functions"]):
+        raise c.AuditError("callback-facade leaf closure changed")
+    if any(leaf.get("profiles") != ["apple-clang"] or
+           not leaf.get("strict_relocation_contract") or
+           leaf.get("source", {}).get("license") != "GPL-3.0-only"
+           for leaf in leaves):
+        raise c.AuditError("callback-facade leaf policy changed")
+    if sum(leaf["expected"]["size"] for leaf in leaves) != 208 or \
+            sum(len(leaf["relocations"]) for leaf in leaves) != 10:
+        raise c.AuditError("callback-facade compiled census changed")
+    previous = 192852
+    alignment = 0
+    for leaf in leaves:
+        alignment += leaf["expected"]["offset"] - previous
+        previous = leaf["expected"]["offset"] + leaf["expected"]["size"]
+    if alignment != 6 or previous != 193066:
+        raise c.AuditError("callback-facade placement changed")
+    patches = [patch for patch in overlay["patch_sites"]
+               if patch.get("target_function") in set(LEAF_NAMES)]
+    if len(patches) != 10 or jsh(patches) != PATCH_DIGEST or \
+            sum(patch["expected_size"] for patch in patches) != 380:
+        raise c.AuditError("callback-facade redirect closure changed")
+    build = json.loads((ROOT / "components/apollo_main/core_overlay/build/build-report.json").read_text())
+    if (build["overlay"]["size"], build["overlay"]["sha256"],
+            build["component"]["size"], build["component"]["sha256"]) != (
+            197488, "a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183",
+            3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a"):
+        raise c.AuditError("callback-facade build pins changed")
+    built = [leaf for leaf in build["relocated_leaves"]
+             if leaf.get("source", {}).get("path") == SOURCE_PATH]
+    normalized = [{"function": leaf["extraction"]["function"],
+                   "size": leaf["placement"]["size"],
+                   "padding_before": leaf["placement"]["padding_before"],
+                   "offset": leaf["placement"]["offset"],
+                   "runtime_address": leaf["placement"]["runtime_address"],
+                   "relocation_count": leaf["extraction"]["relocation_count"]}
+                  for leaf in built]
+    if len(built) != 10 or jsh(normalized) != BUILT_DIGEST:
+        raise c.AuditError("callback-facade built closure changed")
+    manifest = json.loads((ROOT / "manifests/g2-2.2.6.10-core-source.json").read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    region_names = {name for name in (
+        "opaque_cb_charge_literal_pool", "opaque_cb_msg_notif_literal_pool")}
+    region_names |= {region["name"] for region in main["regions"]
+                     if region["name"].startswith("cb_charge_") or
+                     region["name"].startswith("cb_msg_")}
+    regions = [region for region in main["regions"] if region["name"] in region_names]
+    if len(regions) != 25 or jsh(regions) != REGION_DIGEST:
+        raise c.AuditError("callback-facade manifest regions changed")
+    if (main["provider"]["size"], main["provider"]["sha256"],
+            manifest["package"]["expected_size"],
+            manifest["package"]["expected_sha256"]) != (
+            3720884, "026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a",
+            4499378, "03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783"):
+        raise c.AuditError("callback-facade manifest closure changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -195,7 +274,18 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": {
+            "production_routed": True,
+            "candidate": SOURCE_PATH,
+            "source_functions": 10,
+            "compiled_text_bytes": 208,
+            "alignment_bytes": 6,
+            "stock_replaced_bytes": 380,
+            "strict_relocations": 10,
+            "retained_literal_pool_bytes": 68,
+            "software_functional_gap": False,
+            "hardware_validation": "not required for facade semantics",
+        },
     }
 
 

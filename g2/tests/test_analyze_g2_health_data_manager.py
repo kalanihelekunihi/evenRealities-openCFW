@@ -8,5 +8,10 @@ class HealthDataManagerTests(unittest.TestCase):
   s=self.report["surface"];self.assertEqual((s["linked_functions"],s["ghidra_discovered_functions"],s["restored_functions"]),(10,9,1));self.assertEqual((s["body_bytes"],s["physical_bytes"],s["noncode_bytes"]),(2644,2912,268));self.assertEqual((s["direct_body_calls"],s["internal_direct_body_calls"],s["external_direct_body_calls"]),(149,13,136));self.assertEqual((s["indirect_body_calls"],s["stored_function_entry_pointers"],s["strict_interior_ingress"]),(0,0,0))
  def test_provider_boundary(self):
   p=self.report["provider_boundary"];self.assertEqual((p["easylogger_calls"],p["iar_runtime_calls"],p["closed_health_lock_calls"],p["direct_cmsis_freertos_calls"]),(120,6,10,0));self.assertIsNone(p["historical_health_manager_commit"]);self.assertFalse(p["new_version_discriminator"])
- def test_no_embedded_dependency_or_routing(self):self.assertEqual(self.report["identity"]["embedded_third_party_definitions"],[]);self.assertFalse(self.report["production"]["production_routed"])
+ def test_production_routing_and_hardware_boundary(self):
+  self.assertEqual(self.report["identity"]["embedded_third_party_definitions"],[])
+  p=self.report["production"]
+  self.assertTrue(p["production_routed"]);self.assertFalse(p["software_functional_gap"])
+  self.assertEqual((p["source_functions"],p["compiled_text_bytes"],p["alignment_bytes"],p["stock_replaced_bytes"],p["strict_relocations"]),(10,1012,10,2644,15))
+  self.assertEqual(p["hardware_validation"],"blocked");self.assertIn("No authorized physical G2/EM9305",p["hardware_blocker"])
 if __name__=="__main__":unittest.main()

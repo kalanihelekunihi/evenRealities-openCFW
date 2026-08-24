@@ -75,7 +75,7 @@ class RuntimeCmsisMessageQueueGetTests(unittest.TestCase):
         main = manifest["component_overrides"]["apollo_main"]
         region = next(x for x in main["regions"] if x["name"] == "apollo_cmsis_message_queue_get_source_leaf")
         self.assertEqual((region["file_offset"], region["size"], region["target_address"]), (3658556, 132, 8082204))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4476706, "26bf3d84c06987461340f6af8773e0ae59bd3ae75c630c00a2158fe3a4945058"))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"))
 
 
 if __name__ == "__main__": unittest.main()
