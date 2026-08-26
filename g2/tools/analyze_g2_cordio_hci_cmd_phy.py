@@ -15,6 +15,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_hci_cmd_phy.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_hci_cmd_phy.h"
+RUNTIME_TEST = ROOT / "tests/test_runtime_cordio_hci_cmd_phy.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 BASE = 0x00437FE0
 IMAGE_BYTES = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -37,6 +45,15 @@ DIRECT_CALLEE_EDGES = [
     (0x00539E8C, 0x0052AE5E),
 ]
 DIRECT_CALLEE_DIGEST = "c8c4d730f16159fb0d4e06a5686ff1603d0fee71cc8dc8ee1b46d64bfcaa2a35"
+PRODUCTION_FILES = {
+    SOURCE: (2_227, "5790c2981f0527a888542574fd4bc86ea5ba26245d3f7283272c4c846fa0a757"),
+    HEADER: (374, "92bc7bda278a68118d97d0c7444792e2db57e0f9f631256c09dc6c5ed6825c3c"),
+    RUNTIME_TEST: (4_677, "353ede19e86f21ec58e750dc8bebf4bf50daa8130dee5f72927413414cb5a0fd"),
+}
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 
 
 class AuditError(RuntimeError):
@@ -76,6 +93,100 @@ def load_decoder():
 
 def packed_pairs_digest(pairs: list[tuple[int, int]]) -> str:
     return sha256(b"".join(struct.pack("<II", *pair) for pair in pairs))
+
+
+def verify_file(path: Path, expected: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), sha256(data)) != expected:
+        raise AuditError(f"{label} changed")
+
+
+def verify_production() -> dict:
+    for path, expected in PRODUCTION_FILES.items():
+        verify_file(path, expected, f"HCI PHY production input {path.name}")
+    config = json.loads(CONFIG.read_text())
+    expected = config["expected"]
+    if (
+        (expected["overlay_size"], expected["overlay_sha256"])
+        != PRODUCTION_OVERLAY
+        or (expected["component_size"], expected["component_sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("HCI PHY production aggregate pins changed")
+    leaves = [
+        row for row in config["relocated_leaves"]
+        if row.get("source", {}).get("path")
+        == "components/shared/cordio/runtime_cordio_hci_cmd_phy.c"
+    ]
+    if len(leaves) != 1 or leaves[0]["function"] != "HciLeSetPhyCmd":
+        raise AuditError("HCI PHY production leaf changed")
+    if (
+        leaves[0].get("strict_relocation_contract") is not True
+        or leaves[0].get("allow_discarded_alloc_sections") is not True
+        or len(leaves[0]["relocations"]) != 2
+    ):
+        raise AuditError("HCI PHY production relocation contract changed")
+    sites = [
+        row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_hci_cmd_phy_")
+    ]
+    if len(sites) != 1 or sites[0] != {
+        "branch": "b_w",
+        "expected_sha256": BODY_SHA256,
+        "expected_size": 74,
+        "name": "replace_cordio_hci_cmd_phy_01",
+        "profiles": ["apple-clang"],
+        "runtime_address": BODY_START,
+        "target_function": "HciLeSetPhyCmd",
+    }:
+        raise AuditError("HCI PHY production route changed")
+    report = json.loads(BUILD_REPORT.read_text())
+    built = next(
+        row for row in report["relocated_leaves"]
+        if row["extraction"]["function"] == "HciLeSetPhyCmd"
+    )
+    if (
+        built["extraction"]["size"] != 60
+        or built["placement"]["padding_before"] != 0
+        or built["extraction"]["relocation_count"] != 2
+        or (report["overlay"]["size"], report["overlay"]["sha256"])
+        != PRODUCTION_OVERLAY
+        or (report["component"]["size"], report["component"]["sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("HCI PHY production build changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        override["provider"].get("size"),
+        override["provider"].get("sha256"),
+    ) != PRODUCTION_COMPONENT:
+        raise AuditError("HCI PHY production provider changed")
+    regions = [
+        row for row in override["regions"]
+        if row["name"].startswith("cordio_hci_cmd_phy_")
+    ]
+    if len(regions) != 2:
+        raise AuditError("HCI PHY production manifest regions changed")
+    verify_file(PACKAGE, PRODUCTION_PACKAGE, "HCI PHY package")
+    verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN, "HCI PHY flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions",
+        "container_only_regions", "protected_regions",
+    ))
+    if counts != (5_863, 2, 5, 6):
+        raise AuditError("HCI PHY flash-plan counts changed")
+    return {
+        "status": "production-routed",
+        "stock_bytes_replaced": 74,
+        "source_owned_bytes_added": 60,
+        "alignment_bytes_added": 0,
+        "strict_relocations": 2,
+        "source_only_functions_compiled": 2,
+        "manifest_regions": 2,
+        "flash_plan_counts": counts,
+    }
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -165,10 +276,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "definition_bodies_match_ambiq_r25": True,
             "license": "Apache-2.0",
         },
-        "production": {
-            "stock_bytes_replaced": 0,
-            "source_owned_bytes_added": 0,
-        },
+        "production": verify_production(),
     }
 
 

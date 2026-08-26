@@ -18,11 +18,41 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-service-codec-dfu-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-service-codec-dfu-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-service-codec-dfu-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/service_codec_dfu.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 PINS = {
     FUNCTION_MAP: "2b84310693115302683c9136c2c2ca0e26178c4d3b1d7b9cedd250d10428c1e6",
-    CLOSURE: "c8711e1965d4992dadd252161347db53e0606f442133343cafd369dfe23ef686",
-    PROVENANCE: "83b4b0873d3f739fb760425c2c8969f4626bdb723b3a042911bbc28c47dd8549",
+    CLOSURE: "7354a97269a6fb61a1b62724ab651fee8a59df4162b8d0a5a0dcb51f26b16748",
+    PROVENANCE: "739e47f57063644aae9e383d96e5251f0cb45e866a62694b6a75c3499a94ee4c",
 }
+SOURCE_SHA256 = "ac3aa72814144d563791eac2b712d461cd51f784265ab1e9221262ec8d0f22ec"
+FUNCTIONS = (
+    "open_cfw_dfu_release_package", "open_cfw_dfu_load_package",
+    "open_cfw_dfu_format_version", "open_cfw_dfu_parse_version_bytes",
+    "open_cfw_dfu_get_package_version",
+    "open_cfw_dfu_validate_firmware_header",
+    "open_cfw_dfu_host_is_little_endian", "open_cfw_dfu_bswap32",
+    "open_cfw_dfu_host_to_be32", "open_cfw_dfu_wait_token",
+    "open_cfw_dfu_read_boot_header", "open_cfw_dfu_download_boot_stage1",
+    "open_cfw_dfu_download_boot_stage2", "open_cfw_dfu_flash_image",
+    "open_cfw_svc_codec_dfu", "open_cfw_svc_codec_check_and_upgrade",
+)
+PATCH_FUNCTIONS = (
+    "open_cfw_dfu_load_package", "open_cfw_dfu_release_package",
+    *FUNCTIONS[2:],
+)
+SOURCE_OFFSETS = (
+    304832, 304876, 305452, 305824, 305884, 306092, 306120, 306124,
+    306128, 306156, 306304, 306468, 306844, 307148, 307996, 308136,
+)
+SOURCE_SIZES = (
+    44, 576, 372, 46, 208, 26, 4, 4, 26, 148, 164, 370, 304, 848,
+    140, 110,
+)
 PHYSICAL = (0x00577D7C, 0x0057A46C)
 PHYSICAL_SHA256 = "7586756c943d9c607ac92eab4e075d8d0fed0cea38fcf2bb7664122d1f216a35"
 BODY_SHA256 = "e0487b9129f918d6e4a0caf95fcc1e75f8ebac23db36fce2aa3f2dfe22ded98b"
@@ -205,10 +235,102 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for site, value in literal_contract.items()):
         raise AuditError("codec-DFU package/state literal changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any("service_codec_dfu" in source.get("path", "").lower()
-           for source in overlay["sources"]):
-        raise AuditError("unimplemented codec DFU entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != 23_248 or sha256(source) != SOURCE_SHA256:
+        raise AuditError("codec-DFU production source changed")
+    source_text = source.decode("utf-8")
+    required_source_tokens = (
+        "OPEN_CFW_DFU_MAGIC = 0x4b505746u",
+        "OPEN_CFW_DFU_FLASH_CHUNK = 0x2000",
+        "OPEN_CFW_DFU_FLASH_START_TIMEOUT = 9000000",
+        "uint8_t prefix[13]={'s','e','r','i','a','l','d','o','w','n',' ','0',' '}",
+        "open_cfw_dfu_download_boot_stage1",
+        "open_cfw_dfu_download_boot_stage2",
+        "open_cfw_svc_codec_check_and_upgrade",
+        "OPEN_CFW_DFU_CODEC_VERSION(version,200u)",
+    )
+    if any(token not in source_text for token in required_source_tokens):
+        raise AuditError("codec-DFU source contract changed")
+
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = [item for item in overlay["relocated_leaves"]
+              if item.get("source", {}).get("path") ==
+              "components/apollo_main/core_overlay/service_codec_dfu.c"]
+    if tuple(item["function"] for item in leaves) != FUNCTIONS:
+        raise AuditError("codec-DFU source leaf order changed")
+    if tuple(item["expected"]["offset"] for item in leaves) != SOURCE_OFFSETS:
+        raise AuditError("codec-DFU source placement changed")
+    if tuple(item["expected"]["size"] for item in leaves) != SOURCE_SIZES:
+        raise AuditError("codec-DFU compiled text sizes changed")
+    if sum(len(item["relocations"]) for item in leaves) != 71:
+        raise AuditError("codec-DFU relocation closure changed")
+    if any(item.get("source", {}).get("sha256") != SOURCE_SHA256
+           or item.get("strict_relocation_contract") is not True
+           for item in leaves):
+        raise AuditError("codec-DFU source/relocation authentication changed")
+    patches = [item for item in overlay["patch_sites"]
+               if item.get("name", "").startswith("replace_service_codec_dfu_")]
+    for index, (patch, row, function) in enumerate(
+            zip(patches, rows, PATCH_FUNCTIONS), 1):
+        if (
+            patch.get("name") != f"replace_service_codec_dfu_{index:02d}"
+            or patch.get("runtime_address") != int(row["entry"], 0)
+            or patch.get("expected_size") != int(row["size"])
+            or patch.get("expected_sha256") != row["sha256"]
+            or patch.get("target_function") != function
+            or patch.get("branch") != "b_w"
+        ):
+            raise AuditError(f"codec-DFU guarded redirect {index:02d} changed")
+    if overlay["expected"] != {
+        "component_sha256": "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        "component_size": 3_855_544,
+        "overlay_sha256": "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        "overlay_size": 332_148,
+    }:
+        raise AuditError("codec-DFU aggregate overlay pins changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    if (build["overlay"]["size"], build["overlay"]["sha256"],
+            build["component"]["size"], build["component"]["sha256"]) != (
+            332_148, overlay["expected"]["overlay_sha256"], 3_855_544,
+            overlay["expected"]["component_sha256"]):
+        raise AuditError("codec-DFU build artifact changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"]["size"], main["provider"]["sha256"],
+            manifest["package"]["expected_size"],
+            manifest["package"]["expected_sha256"]) != (
+            3_855_544, overlay["expected"]["component_sha256"], 4_634_038,
+            "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
+        raise AuditError("codec-DFU manifest/package pins changed")
+    regions = main["regions"]
+    body_regions = [item for item in regions
+                    if item["name"].startswith("service_codec_dfu_")
+                    and item["name"].endswith("_source_replacement")]
+    gap_regions = [item for item in regions
+                   if item["name"].startswith("service_codec_dfu_official_gap_")]
+    text_regions = [item for item in regions
+                    if item["name"].startswith("service_codec_dfu_")
+                    and item["name"].endswith("_source_text")]
+    align_regions = [item for item in regions
+                     if item["name"].startswith("service_codec_dfu_")
+                     and item["name"].endswith("_overlay_alignment")]
+    if (len(body_regions), sum(item["size"] for item in body_regions),
+            len(gap_regions), sum(item["size"] for item in gap_regions),
+            len(text_regions), sum(item["size"] for item in text_regions),
+            len(align_regions), sum(item["size"] for item in align_regions)) != (
+            16, 9_052, 9, 916, 16, 3_390, 4, 24):
+        raise AuditError("codec-DFU manifest ownership changed")
+    package = PACKAGE.read_bytes()
+    if (len(package), sha256(package)) != (
+            4_634_038, manifest["package"]["expected_sha256"]):
+        raise AuditError("codec-DFU package artifact changed")
+    flash_plan = json.loads(FLASH_PLAN.read_text())
+    if (len(flash_plan["flash_regions"]),
+            len(flash_plan["unresolved_flash_regions"]),
+            flash_plan["package_sha256"]) != (
+            4_482, 2, manifest["package"]["expected_sha256"]):
+        raise AuditError("codec-DFU flash-plan closure changed")
 
     external_entries = [pair for pair in entries
                         if not (PHYSICAL[0] <= pair[0] < PHYSICAL[1])]
@@ -251,14 +373,25 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "retained_path": RETAINED_PATH,
             "path_pointer_cells": [f"0x{value:08x}" for value in path_cells],
             "exact_symbols": [name for _, name in EXACT_SYMBOLS],
-            "source_inventory": "unavailable",
-            "license": "unknown",
+            "source_inventory": "16-function clean-room production C",
+            "historical_source_inventory": "unavailable",
+            "license": "GPL-3.0-only",
         },
         "production": {
-            "candidate": None,
-            "source_inventory_available": False,
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "source_inventory_available": True,
+            "production_routed": True,
+            "ownership_bytes": 9_052,
+            "compiled_text_bytes": 3_390,
+            "generated_alignment_bytes": 24,
+            "strict_relocations": 71,
+            "guarded_redirects": 16,
+            "hardware_validation": "blocked_unavailable_physical_evidence",
+            "hardware_blocker": (
+                "authorized right temple is nonresponsive; authorized left "
+                "temple must remain stock; no responsive authorized pair or "
+                "golden codec/UART capture is available"
+            ),
         },
     }
 

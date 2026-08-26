@@ -28,7 +28,7 @@ checks are in the
 | EasyLogger | `2.2.99` source-equivalent core from `cd93d9c768415f4b7279f2d3ef2366ce15ea087c` through vendored `a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24`; no upstream tag | Main control/filter/output/hexdump paths plus the shared four-helper quartet in both Apollo images are source-integrated. `elog_async_api.c` is proven downstream G2 code; its complete fixed-record queue lifecycle, callback/record consumer, and event-worker/thread orchestration are clean-room, dual-profile qualified, and production-excluded. Target concurrency/hardware stress, production admission, and the boot/main image-specific transports remain explicit boundaries |
 | mpaland/printf | `d3b984684bb8a8bdc48cc7a1abecb93ce59bbe3e` | All linked reverse-output, integer, float, exponential, string, variadic-core, public-wrapper, and G2 `%PV`/`%pV` extension behavior is production source-owned. Only the binary-unobservable historical checkout remains; there is no linked functional gap. |
 | AmbiqSuite | 5.1.0-lineage Apollo510 source at public replay commit `5efc0228528a8adce5eae0d226fac85d2551eb3b`, with CMSIS Core pinned at `d23a6949a0331ca96853bcd98b0fdcc4db47184c` | The licensed Apollo510/CMSIS MSPI closure is vendored; both production overlays retain the exact-upstream interrupt-clear leaf. The complete stock system-sleep body adds a decisive version proof: its two WFI operations match 5.1.0 and exclude 5.0.0. Independent I2S and PDM consumers map 24 public HAL APIs to the same replay; the PDM source is pinned to Git blob `23a440bf…`. The stock build predates the public import, so the private pre-release generating commit remains unavailable; see the [product RTOS recovery](research/g2-product-rtos-recovery.md) and [PDM recovery](research/g2-drv-pdm-production-recovery.md) |
-| AmbiqSuite ANCC profile | 2.2.0-4.5.0 implementation-equivalent ANCS client; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 17-definition source/header admitted as an oracle. G2's copied 21-function object retains 12 Ambiq-derived bodies and adds nine bounded message/sync/whitelist adapters. The source-identical interval prevents recovery of one private producing commit; production remains excluded. See the [ANCC source recovery](research/ambiqsuite-ancc-profile-source-recovery.md) |
+| AmbiqSuite ANCC profile | 2.2.0-4.5.0 implementation-equivalent ANCS client; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 17-definition source/header admitted as the oracle. G2's 21-function object retains 12 Ambiq-derived bodies and adds nine bounded message/sync/whitelist adapters; all 21 entries are now production-routed from maintained C with the exact SRAM ABI and hardened fragmented parser. The source-identical interval still prevents recovery of one private producing commit. Live ANCS/controller/dual-temple validation is blocked by unavailable authorized responsive hardware. See the [ANCC source recovery](research/ambiqsuite-ancc-profile-source-recovery.md) |
 | AmbiqSuite AMOTA profile | 2.2.0-2.5.1 stable application skeleton; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 2.5.1 application/API oracle admitted. G2 OTA retains the CCC, A0/A1 event, initializer, and handler skeleton across four functions while three actions are product-local. The binary cannot select one changed release file or private commit. See the [OTA/Ring recovery](research/g2-ble-ota-ring-profiles-recovery.md) |
 | Goodix GR551x application-error utility | SDK 1.7.0 byte-exact `components/libraries/app_error/app_error.c` snapshot, blob `d5027735dd01b0948a7315d9c595356fcb91f59b`; first located incompatible version 2.0.1 | G2's `utils/assert` handler and 43-row table are copied/adapted source. Selected earliest public carrier `854c43e0b96a24051ffce4c06ff629255aa56c59` is not claimed as an official release or Even checkout. The utility is source-closed, production-excluded, and does not imply a linked Goodix BLE stack. See the [Goodix utility recovery](research/g2-util-error-check-goodix-recovery.md) and [provenance](../third_party/goodix-gr551x-app-error/PROVENANCE.json) |
 | G2 EUS/ESS/EFS/NUS profile boundary | No separate upstream dependency | Four contiguous first-party Cordio adapters are authenticated across 25 linked functions / 2,698 body bytes / 3,000 physical bytes and are production-routed from clean-room C. AmbiqSuite has no matching profiles and Nordic `ble_nus_*` does not match the G2 NUS API. Physical peer validation is blocked by unavailable authorized responsive evidence. See the [profile recovery](research/g2-ble-transport-profiles-recovery.md) |
@@ -50,8 +50,11 @@ DaveGamble cJSON v1.7.9–v1.7.12 (snapshot admitted at ceiling tag v1.7.12,
 production-excluded), and
 CmBacktrace. The remaining opaque bytes are first-party Even code
 (`platform`/`app`/`framework`/`driver`/`product`/`service`, including the
-proprietary `fw_event_loop`, audio DSP, cryptographic backend, and application
-services).
+proprietary `fw_event_loop`, audio DSP, and application services). The formerly
+speculative cryptographic-backend boundary is now identified as Packetcraft
+Cordio r20.05c `sec_api`; its 20 service functions are production-routed from
+Apache-2.0 source while HCI/controller primitives remain the explicit hardware
+boundary. See the [security API recovery](research/cordio-sec-api-source-recovery.md).
 
 The authenticated whole-image [embedded source-path census](research/apollo-embedded-source-path-census.md)
 closes the retained-path lower bound: 357 unique C paths comprise 123
@@ -495,6 +498,22 @@ The separate raw bootloader source-overlay component appends the current
 source-generated bodies below `0x00438000` and redirects the authenticated
 boot spans listed above. Its builder checks every complete original body
 before patching and leaves EVENOTA CRC generation to the package assembler.
+The current component also closes the first-party S200 bootloader
+`redirect_init` entry with clean-room C: two retained `osMutexNew` calls, two
+recovered SRAM handle words, exact success/failure logging, and a 275-byte
+strict relocated text/string closure. Canonical provider accounting is 935
+source-owned bytes before the following runtime tranche. The component now
+also closes the Arm EABI byte-fill/forward-copy, bounded-comparison,
+reject/accept string-span, reflected CRC-32, sole-caller `0x200270CC` setter,
+and nine adjacent numeric/format-primitive bodies. These leaves cover unsigned
+64-bit divide by ten, digit counts, wrapping parsing, decimal/hex output,
+nullable string length, and repeated-character output with three strict
+internal relocations. Final accounting is 1,529 source-owned bytes, 2,078
+generated patch bytes, eight alignment bytes, and 146,521 retained official
+bytes. Remaining float/format and runtime/IAR
+wrappers remain an explicit software
+gap, and physical boot/stream validation is blocked by unavailable authorized
+responsive hardware.
 Focused evidence is recorded in
 `docs/research/littlefs-file-tell-source-boundary-audit.md`,
 `docs/research/littlefs-file-size-source-audit.md`,
@@ -505,7 +524,16 @@ Focused evidence is recorded in
 `docs/research/littlefs-mlist-append-source-boundary-audit.md`,
 `docs/research/littlefs-disk-version-source-boundary-audit.md`, and
 `docs/research/littlefs-next-closed-leaves-audit.md`, plus
-`components/bootloader/core_overlay/EVIDENCE.md`.
+`components/bootloader/core_overlay/EVIDENCE.md` and
+`docs/research/g2-bootloader-redirect-init-source-closure.md`, plus
+`docs/research/g2-bootloader-aeabi-memset-source-closure.md` and
+`docs/research/g2-bootloader-aeabi-memcpy-source-closure.md`, plus
+`docs/research/g2-bootloader-memcmp-source-closure.md`, plus
+`docs/research/g2-bootloader-string-spans-source-closure.md` and
+`docs/research/g2-bootloader-crc32-source-closure.md`, plus
+`docs/research/g2-bootloader-store-200270cc-source-closure.md`, plus
+`docs/research/g2-bootloader-numeric-source-closure.md` and
+`docs/research/g2-bootloader-format-primitives-source-closure.md`.
 
 ### Historical fallback-bitops and FreeRTOS NTZ milestones
 
@@ -998,6 +1026,10 @@ five source APIs are dead-stripped. The 196-byte control block, three CCBs,
 action/interface tables, 209 direct callers, thirteen registered pointers,
 and corrected Lorelei v2 handoff are closed. See the
 [DM connection-manager recovery](research/cordio-dm-conn-source-recovery.md).
+All 57 linked entries are now production source-owned through 55 guarded
+redirects and two exact no-op copies; the five dead-stripped APIs remain in the
+target compile matrix. Live behavior remains a physical-evidence blocker, not
+a software admission gap.
 
 The adjacent connection state machine closes its sole linked function / 1,598
 bytes plus the exact 80-byte r20 state table. Stock has five states, eight
@@ -1040,7 +1072,9 @@ The linked `dm_priv.c` object is also closed: 21 functions / 980 code bytes
 plus a 28-byte literal pool. Seven ordinary actions remain on component 6 and
 two AES-completion actions occupy component 15, selecting the public
 Packetcraft r20.05/Ambiq R4 split architecture over r19/AmbiqSuite 2.x. Four
-unused public APIs are dead-stripped. See the
+unused public APIs are dead-stripped but maintained and target-compiled. All
+21 linked entries are production-routed: 1,688 compiled bytes plus 20 alignment
+bytes under 25 strict relocations replace all 980 stock body bytes. See the
 [DM privacy recovery](research/cordio-dm-priv-source-recovery.md).
 
 The linked `dm_sec.c` object contributes eight functions / 462 code bytes in
@@ -1135,8 +1169,8 @@ and timeout/cleanup transitions, independently excluding r19. See the
 | TinyFrame | Receive and send clusters establish the post-2.3.0 MIT lineage. Ten retained `TF_Error` line arguments select the exact `TinyFrame.c`/`.h` blobs introduced by `eb75483e` as the minimum-patch core baseline; repository head `a29167a` is core-identical and changes only demo content, so the historical checkout remains bounded to `eb75483e…a29167a`. Config: SOF `0x01`, 2-byte big-endian ID/LEN/TYPE and CRC-16/ARC, 1024-byte TX buffer, no mutex with per-instance soft lock, request IDs `(next++ & 0x7FFF) | peer_bit`, responses preserve full IDs. Header CRC covers `SOF || ID || LEN || TYPE`; zero-length frames omit DATA_CKSUM. All 31 linked functions / 2,994 code bytes plus the 124-byte non-executable pool are accounted for; thirteen unused upstream APIs are dead-stripped. One instance at `0x200749C4` is selected by role: master is peer bit 1, slave peer bit 0, and application code retains no field dereference. The G2 adapter implements `magic | pristine core | magic` and is host/target checked. Production now atomically redirects eight public entries over the exact dual-profile 14-function live graph, uses source-owned `heap_4`, retains the authenticated sync wrapper at `0x00541790`, and selects explicit no-op logging. Only the lower hardware provider remains opaque; placement/routing/ownership accounting is complete and hardware frames remain. A sweep of all 113 public upstream forks found no G2 magic/config match. See the [send/version audit](research/tinyframe-send-version-recovery-audit.md), [source-admission audit](research/tinyframe-source-admission-boundary-audit.md), and [receive audit](research/tinyframe-wire-format-recovery-audit.md) |
 | FreeRTOS-Plus-CLI | The reusable MIT interpreter is the classic V1.0.4-compatible core. A production-excluded snapshot selects `43defa56`/tree `12448758`, verifies the exact CRLF C/H/history/license files through compatible ceiling `1309654d`, and carries a clean 1,077-byte patch containing only G2's blank-input suppression delta `[0x005848CA,0x005848F4)`. The independently named production parameter accessor source-integrates `[0x005848FC,0x00584960)`. Separately, seven GPL-3.0-only clean-room leaves replace the complete G2 console task `[0x00541600,0x0054171C)` while retaining the stock interpreter ABI, 22 setup groups, and 76 proprietary descriptors. The source task preserves the 127-byte safe payload and requires receive count exactly one; it supersedes the old two-byte capacity leaf. Snapshot and candidates remain excluded, and the selected commit is not an exact vendor-provenance claim. Recovered ABI: 16-byte descriptor, 8-byte list node, dynamic registration, 128-byte interpreter boundary, expected parameter counts -1..3, and highest parameter index 11. Vendor commands/handlers and unresolved static-allocation policy remain separate. See the [snapshot README](../third_party/freertos-plus-cli/README.openCFW.md), [source recovery audit](research/freertos-plus-cli-source-recovery-audit.md), [accessor promotion audit](research/freertos-cli-get-parameter-source-candidate-audit.md), and [console-task audit](research/freertos-cli-console-task-source-candidate-audit.md) |
 | nanopb | Runtime at `0x0048F000`–`0x00491400` is compatible with pristine upstream **0.4.7–0.4.9.1**. The authenticated 0.4.9 snapshot verifies tag/commit/tree/blobs/Zlib offline. Thirty-five bounded altered production functions now include private `pb_decode_inner`, public `pb_decode_tag`, the nine-leaf `pb_common.c` iterator closure, and the paired private defaults routines; pristine translation units remain unregistered. The defaults pair fully redirects 438 stock bytes to 414 source bytes and retains only `decode_field` as a fixed executable seam. Apple object, placement, redirect, aggregate, and ownership pins are complete, while Linux/Clang 22 reproduction remains pending. Even schemas/generated messages remain separate first-party inputs. See the [iterator audit](research/nanopb-iterator-cluster-source-audit.md) and [defaults audits](research/nanopb-message-defaults-source-audit.md). Remaining: close extension and field-dispatch families; exact Linux reproduction; vendor point-release evidence; and first-party schema glue. |
-| IAR DLIB/compiler runtime | The retained `s200_ap510b_iar_git` paths prove the IAR project family, but the image contains no IAR/ICCARM/EWARM/DLIB version string. Lorelei Ghidra plus local Rizin split 35 early-island targets into neighboring application/DSP code and six confirmed retained runtime units: `__aeabi_memmove`, VFP `sqrtf`, `__aeabi_memcpy`, EDOM/ERANGE setters, and an errno-address accessor. Signed/unsigned 64-bit division cores and wrappers plus `frexpf`, its binary32 helper, and `ldexpf` are source-recreated. Three authenticated application banners date the build to `Jul  6 2026`. Formal Cortex-M55 support gives a practical EWARM 9.20+ floor; Ambiq's later Apollo510 reference environment makes 9.60.2 the leading compatibility candidate, while official filename rules and retained literal pools narrow likely archive families to `m7M_tl{v|s}.a`, `rt7M_tl.a`, and `dl7M_tl{n|f}.a`. All thirteen bounded code units have qualified clean-room source; the original ten redirect in both profiles and the three float-exponent leaves reproduce stock exactly and are guarded in canonical Apple. Linux stays fail-closed until reviewed Clang 22.1.8 replay. Exact release and option variants remain unproven; no matching archives are installed locally or on Lorelei. See the [runtime census](research/iar-dlib-runtime-census.md), [memory integration audit](research/iar-runtime-memory-source-candidate.md), [math/errno integration audit](research/iar-runtime-math-errno-source-candidate.md), and [float-exponent recovery](research/iar-dlib-frexpf-ldexpf-recovery.md). Remaining: release-specific archive comparison and Linux replay. |
-| EM9305 QP/C | EM Microelectronic documents the EM9305 RTEF as QP/C ported to ARC with minor customizations. QP/C is pinned to **v6.5.1**, official commit `416dcec8820b9cdb5827497e645d0d9375db53c6`: authenticated `qep.h` in a third-party EM9305 SDK v4.2 oracle records version 6.5.1 and release code `0x8E7055B4`. The oracle is commit `e4412bc98d4e76d441d1226ca3696e53cfae5f54`, tree `f5cb9ba00df71c2612d6d64cf39e05615a2feb64`; it is not an authoritative EM repository or proof of the exact private vendor checkout. Independently, stock bodies bound ancestry to v6.3.6 `5550cca87dedf72d45250ad01e9cdeee8c4140ba` through v6.6.0+ `a280d203c0f55753b18dd9fc76104936729e471a`, excluding v6.7.0. The authenticated SDK `lib_QPC.a` proves 36 exact stock functions, including all 22 portable bodies / 2,450 bytes, the 332-byte QK SWI/restore port, `BSP_Init`, and stock-default hooks; three internal hooks are explicitly vendor-modified. All 3,052 cluster bytes are now source/archive identified, divided into 26 enforced non-portable/alignment segments plus the portable bodies; no anonymous executable byte remains and semantic reversal is approximately 80–90%. Recovered configuration includes `QF_MAX_TICK_RATE=0`, `QF_MAX_ACTIVE=16`, `QF_MAX_EPOOL=2`, event/queue/pool widths, 36-byte `QActive`, 8-byte `QK_attr_`, disabled Q-SPY, the ARC saved-status critical-section ABI, and the `ILINK` idle race sentinel. All bytes remain stock-retained. See the [ARCompact audit](research/em9305-qpc-arcompact-audit.md) and [SDK archive match audit](research/em9305-sdk-archive-match-audit.md). Remaining: exact private vendor tree/port, source replacement/license review, deeper semantics for modified hooks, and authoritative licensed Packetcraft/EM controller source provenance. |
+| IAR DLIB/compiler runtime | The retained `s200_ap510b_iar_git` paths prove the IAR project family, but the image contains no IAR/ICCARM/EWARM/DLIB version string. Lorelei Ghidra plus local Rizin split 35 early-island targets into neighboring application/DSP code and six confirmed retained runtime units: `__aeabi_memmove`, VFP `sqrtf`, `__aeabi_memcpy`, EDOM/ERANGE setters, and an errno-address accessor. Signed/unsigned 64-bit division cores and wrappers plus `frexpf`, its binary32 helper, and `ldexpf` are source-recreated. Three authenticated application banners date the build to `Jul  6 2026`. Formal Cortex-M55 support gives a practical EWARM 9.20+ floor; Ambiq's later Apollo510 reference environment makes 9.60.2 the leading compatibility candidate, while official filename rules and retained literal pools narrow likely archive families to `m7M_tl{v|s}.a`, `rt7M_tl.a`, and `dl7M_tl{n|f}.a`. All thirteen bounded runtime code units have qualified clean-room source. The production-reachable formatted-input graph is source-owned through 11 strict Cortex-M55 leaves and a guarded 2,778-byte core redirect. The formatted-output graph is source-owned through four strict leaves and a guarded 3,256-byte core redirect, including `%a/%A`, IAR `q`/`L`, `%n`, and recursive descriptors. Every exact wrapper passes `secure=0`; both adapters reject nonzero mode, so unimplemented Annex-K semantics have no production ingress. Exact release and option variants remain unproven; no matching archives are installed locally or on Lorelei. See the [runtime census](research/iar-dlib-runtime-census.md), [formatted-input closure](research/g2-iar-format-input-source-closure.md), [formatted-output closure](research/g2-iar-format-output-source-closure.md), and [formatted-I/O audit](research/g2-iar-dlib-format-io-recovery.md). Remaining work is provenance-only archive comparison, Linux replay, and hardware execution evidence blocked by unavailable authorized responsive hardware. |
+| EM9305 QP/C | EM Microelectronic documents the EM9305 RTEF as QP/C ported to ARC with minor customizations. QP/C is pinned to **v6.5.1**, official commit `416dcec8820b9cdb5827497e645d0d9375db53c6`: authenticated `qep.h` in a third-party EM9305 SDK v4.2 oracle records version 6.5.1 and release code `0x8E7055B4`. The oracle is commit `e4412bc98d4e76d441d1226ca3696e53cfae5f54`, tree `f5cb9ba00df71c2612d6d64cf39e05615a2feb64`; it is not an authoritative EM repository or proof of the exact private vendor checkout. Independently, stock bodies bound ancestry to v6.3.6 `5550cca87dedf72d45250ad01e9cdeee8c4140ba` through v6.6.0+ `a280d203c0f55753b18dd9fc76104936729e471a`, excluding v6.7.0. The authenticated SDK `lib_QPC.a` proves 36 exact stock functions, including all 22 portable bodies / 2,450 bytes, the 332-byte QK SWI/restore port, `BSP_Init`, and stock-default hooks; three internal hooks are explicitly vendor-modified. All 3,052 cluster bytes are now source/archive identified, divided into 26 enforced non-portable/alignment segments plus the portable bodies; no anonymous executable byte remains and semantic reversal is approximately 80–90%. Recovered configuration includes `QF_MAX_TICK_RATE=0`, `QF_MAX_ACTIVE=16`, `QF_MAX_EPOOL=2`, event/queue/pool widths, 36-byte `QActive`, 8-byte `QK_attr_`, disabled Q-SPY, the ARC saved-status critical-section ABI, and the `ILINK` idle race sentinel. The exact official 6.5.1 portable source/header subset is now vendored under its GPL-3.0-or-later option with a recovered EM9305 ABI port; eight translation units compile cleanly on the host and are enforced by `make qpc-snapshot`. All controller bytes remain stock-retained because no reviewed ARC compiler/link/record pipeline is available. See the [snapshot README](../third_party/qpc/README.openCFW.md), [ARCompact audit](research/em9305-qpc-arcompact-audit.md), and [SDK archive match audit](research/em9305-sdk-archive-match-audit.md). Remaining: ARC target integration, exact private vendor hooks/port, physical scheduling/radio validation, and authoritative licensed Packetcraft/EM controller source provenance. |
 | EM9305 vendor SDK libraries | Six authenticated relocation-bearing SDK v4.2 archives prove **98 exact stock functions / 7,172 bytes** across QP/C, PML, sleep manager, sleep timer, protocol timer, and unitimer; 92 globally unique normalized fingerprints cover 7,146 bytes. Archive `.comment` sections pin Synopsys MetaWare ARC Compiler **T-2022.09 build 004**, LLVM 14.0.6, EM-Micro ARCv2 EM, `-Os`. Exact archive identities are `lib_QPC.a` blob `26fc11bf…`, `lib_pml.a` `45c88f15…`, `lib_sleep_manager.a` `05af021a…`, `lib_sleep_timer.a` `3713f176…`, `lib_prot_timer.a` `cf8f1f22…`, and `lib_unitimer.a` `07ed4df5…`; full SHA-256 values are enforced by the analyzer. The former 280-byte anonymous pre-QP span is protocol-timer code, the 516-byte idle path is vendor-configured `SLEEP_MANAGER_GoToSleep`, and adjacent `SLEEP_MANAGER_RCCAL_Callback` is exact. These are binary-library provenance findings, not a claim that source or redistribution rights are available. All matched spans remain authenticated cut-forward stock pending source/license recovery. See the [SDK archive match audit](research/em9305-sdk-archive-match-audit.md). Remaining: locate corresponding licensed vendor source, recover build/link configuration, and compare modified bodies; the WSF/radio/application census continues in the following row. |
 | EM9305 Packetcraft/EM Bleu and expanded SDK census | Two discovery rounds authenticate 48 archives. The first 2,180 records deduplicate to 1,146 functions / 132,610 bytes; the second 8,542 records collapse to 1,201 functions, of which only 67 / 13,078 bytes are globally new. An 8-byte replay adds 124 boundary/xref-qualified functions / 2,106 bytes. Strict and NOP-aware exact-neighbor link order identify 202 placements / 11,934 bytes: 50 exact, 59 low-compared, 42 relocation-only, 38 same-size modified, and 13 singleton size-delta functions. Vector ABI resolution adds four interrupt-handler placements / 760 bytes, including three exact bodies / 574 bytes and one modified radio-TX body. Authenticated EM-system archive order adds six exact four-byte prefix leaves / 24 bytes. Combined with six enforced archives, **1,494 functions / 157,122 bytes (74.504950% of the application)** are exact in 875 intervals; function provenance is identified for 167,684 bytes (79.513296%). The residual ledger classifies 9,546 vector/alignment/post-text-data bytes and leaves 33,658 bytes as unresolved code or mixed content. `lib_emb_controller.a` blob `6a1a8e3d…` supplies 1,055 address-body fingerprints, while `lib_emb_controller_iso.a` adds ISO/BIG and link-order evidence. The profile is Bluetooth 5.4 (`BT_VER=13`, Packetcraft `LL_VER_NUM=28992`), but the non-ISO header is not a complete final-link configuration claim. Packetcraft's official public `stacks` repository ends at older r20.05c `3656312d…` / `LL_VER_NUM=1366`; the exact 2024 snapshot is authenticated only through third-party SDK blobs with proprietary notices. All bytes remain cut-forward. See the [expanded census](research/em9305-expanded-sdk-archive-census.md), [link-order ledger](research/em9305-sdk-link-order-recovery.md), and [residual census](research/em9305-residual-segment-census.md). Remaining: authoritative licensed Packetcraft/EM source and classification/recreation of the 33,658-byte unresolved code-or-mixed queue. |
 
@@ -1155,7 +1189,7 @@ resolves the exact shipped point release.
 Do not assign an upstream identity without stronger evidence:
 
 - IAR DLIB runtime code;
-- G2 application services, audio algorithms, and cryptographic backend;
+- G2 application services and audio algorithms;
 - codec, touch, and EM9305 controller images; and
 - charging-case firmware HAL provenance.
 
@@ -2451,6 +2485,12 @@ under the Arm Cordio SLA, so it is an analysis oracle only; no source bytes or
 patch are imported. The later import does not resolve G2's historical
 producing commit.
 
+A separately authored GPL-3.0-only event decoder implements all 80 APIs from
+public Bluetooth HCI wire semantics and the public callback ABI. It
+production-routes all 79 linked bodies under exact route, relocation,
+component, package, and flash-plan contracts; the proprietary oracle remains
+metadata/behavior evidence only.
+
 ## Ambiq Cordio HCI core oracle
 
 Stock links 22 of 24 definitions from the proprietary Ambiq HCI core family.
@@ -2469,6 +2509,13 @@ priority/trace behavior is absent too. This is a proprietary source-family
 pin, not an exact-file, historical-commit, or reusable-source claim.
 
 ## Ambiq Cordio HCI platform-shim oracle
+
+Packetcraft r20.05c public `ble-host/sources/hci/dual_chip/hci_core_ps.c`
+is blob `0730013ce6d4bb992b6a48695e30bddae757c8ae`, 12,231 bytes,
+SHA-256 `730395b8be404d357cf498fa1caee5630dcf95d66b2ea1c817e35932d5be0dd8`,
+under Apache-2.0. It is the reusable behavior source for the production G2
+adaptation; authenticated G2 offsets and local hardening are maintained
+separately.
 
 AmbiqSuite R2.5.1 `hci_core_ps.c` is blob
 `6c289296e001369d09febef042d041cc298e2315`, 11,618 bytes, SHA-256
@@ -2496,7 +2543,10 @@ The later official R4.4.1 import is blob
 Stock matches its return-valued send ownership and receive validation. Three
 of four definitions link; `hciTrReceivingPacket` is source-only. The
 proprietary file is an analysis oracle only, and its later import does not
-resolve G2's historical producing commit.
+resolve G2's historical producing commit. A separately authored clean-room
+translation unit now implements all four definitions and production-routes the
+three linked entries; it preserves the authenticated ABI while hardening
+rejected receive state and copies no proprietary source or object bytes.
 
 ## Ambiq Cordio HCI command oracle
 
@@ -2517,6 +2567,11 @@ The file remains under the proprietary Arm Cordio SLA and is used only as a
 clean-room metadata/behavior oracle; the later import does not resolve G2's
 historical generating commit.
 
+The production command layer is separately authored GPL-3.0-only C. All 50
+linked functions are admitted under exact route, relocation, package, and
+flash-plan contracts, and all 22 source-only APIs target-compile; the
+proprietary oracle contributes behavior and ABI facts only.
+
 ## Ambiq Apollo3 HCI-driver oracles
 
 AmbiqSuite R2.5.1 `hci_drv_apollo3.c` is blob
@@ -2536,6 +2591,12 @@ semantics but is not an Apollo3 transport oracle. No source is a whole-file
 match, so the selected classification is a mixed-version Ambiq driver with an
 unresolved historical generating commit. All three carry Ambiq's
 BSD-3-Clause-style notice.
+
+The maintained clean-room driver implements all 16 APIs. Nine
+hardware-independent entries are production-routed; six radio boot/shutdown,
+handler, RF-test, and sleep operations stay stock-routed pending authorized
+responsive G2/EM9305 validation. This is an explicit unavailable-physical-
+evidence block, not a remaining C implementation gap.
 
 ## G2 BLE-startup oracles
 
@@ -3068,3 +3129,60 @@ reusable seams terminate at authenticated FlashDB 2.1.1 and the already
 bounded database/serial providers. The 122 retained official bytes are an
 object-local pool. Destructive reset is disabled pending golden-media and
 authorized physical validation.
+
+## G2 touch sensing and gesture source closure
+
+The PSoC-specific MSC scan, gesture classifier, calibration threshold, and
+ACT/ALR/WOT policy are independently authored from authenticated machine
+behavior and retained strings. No upstream implementation identity is claimed.
+All MSCLP operations are port callbacks; production admission remains blocked
+on unavailable raw sensing, noise, timing, sleep, and wake evidence.
+
+## G2 touch-controller I2C source closure
+
+The proprietary shipped-prefix protocol is now independently reimplemented as
+freestanding Cortex-M0+ C from authenticated machine behavior. It owns the
+command, reply, report, persistence, attention, FIFO, power-policy, and DFU-
+handoff boundaries. No upstream identity is claimed. Factory resident flash
+at `>=0x8680` remains unavailable, so resident tables/HAL/boot/DFU code and
+physical I2C behavior stay explicit blocks rather than inferred source.
+
+## G2 charging-case UART/update source closure
+
+The case-side proprietary protocol surface is now independently reimplemented
+as freestanding Cortex-M0+ C from authenticated machine behavior. It does not
+claim an upstream source identity. The source owns the frame and image sums,
+bounded parser, update-offer/chunk decoding, retry loop, and callback-only
+dual-bank state machine. Destructive production admission remains blocked by
+unavailable authorized case hardware and serial-window backup evidence.
+
+## CmBacktrace fault-path source closure
+
+The authenticated armink/CmBacktrace compatibility snapshot at commit
+`73714489f9d8af130aacb515586b397b604a5768` now supplies all six target-
+compiled APIs under the recovered G2 configuration. The project-owned
+`runtime_cmbacktrace_fault_entry.c` replaces the snapshot's IAR-only entry
+syntax with Cortex-M55-compatible naked C while preserving its `lr`/`sp`
+calling contract. This is a compatibility-source selection, not proof of the
+private vendor checkout. Physical fault injection remains unavailable, so the
+source entry is not registered as the production HardFault vector.
+
+## Packetcraft Cordio common HCI core
+
+Packetcraft Cordio r20.05c commit
+`3656312d6b73e2a2c1c8b33ee0385bc199dd97e6` provides the Apache-2.0 behavior
+source `ble-host/sources/hci/common/hci_core.c` (blob
+`fe9a1f0cba1749c166e434d7cef90a167d1ed9c1`, 30,369 bytes, SHA-256
+`6bfe1f1f37bf97bc86fa8f83345192bdbc813eff9ddac66108f91c2cf04c4b5e`).
+The maintained G2 port adapts that behavior to the authenticated three-
+connection, six-CIS, 64-bit-feature ABI. Ambiq proprietary copies are retained
+only as version/ABI lineage metadata and contributed no copied source.
+
+## G2 Cordio vendor reset-sequence ownership
+
+The product-specific Apollo3/Cooper hybrid reset chain is now clean-room
+source-owned. AmbiqSuite R3.1.1 Apollo3 and R4.4.1 Cooper BSD-notice files are
+behavioral/version oracles only; the older R2.5.1 proprietary file is retained
+solely as historical lineage evidence. No vendor implementation text is copied.
+Four linked entries contribute 862 compiled bytes plus six alignment bytes;
+all four unlinked hooks remain target-compilable.

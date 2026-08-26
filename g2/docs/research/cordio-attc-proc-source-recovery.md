@@ -78,5 +78,25 @@ The complete ledger is
 identity is recorded in
 `tools/manifests/packetcraft-cordio-attc-proc-provenance.tsv`.
 
-This tranche changes provenance only: zero stock bytes are replaced and zero
-source-owned production bytes are added.
+## Production replacement
+
+`components/shared/cordio/runtime_cordio_attc_proc.c` maintains all sixteen
+source definitions. Fifteen linked entries replace all 1,884 stock body bytes
+with 1,694 compiled Cortex-M55 bytes plus 22 alignment bytes under 38 strict
+relocations. Thirteen entries use guarded redirects; the two authenticated
+two-byte `bx lr` leaves use exact in-place source copies because a four-byte
+branch cannot fit. The source-only cancel API is target-compiled without
+inventing stock coverage.
+
+Bounded method dispatch and minimum-length switches deliberately remediate the
+authenticated method-16/17 adjacent-table overrun. One-based connection IDs
+now index the three on-deck slots as `connection_id - 1`, and the authenticated
+cancel event is 19. Host tests cover response,
+error, MTU, callback, indication/confirmation, message serialization, MTU and
+timeout failure, public request encoding, and the rejected method-17 path.
+The canonical overlay/component/package sizes are 353,336 / 3,876,732 /
+4,655,226 bytes; the package SHA-256 is
+`b10166d4f1c1f91f348c3ee360afb2af1499df59715491a1256a1d0545f548bc`.
+Live ATT/EATT peer, controller, timer, flow-control, and buffer-lifetime
+validation remains blocked by unavailable authorized responsive G2/EM9305
+physical evidence. No image was signed, flashed, or installed.

@@ -52,7 +52,11 @@ class CordioAttsProcAuditTests(unittest.TestCase):
         self.assertTrue(report["architecture"]["read_multiple_variable_linked"])
         self.assertTrue(report["architecture"]["mtu_request_rejected_on_eatt_bearer"])
         self.assertEqual(report["lineage"]["selected_blob"], "455950e73bd19d0a6ee02e5bdfcd86149d0cb1cb")
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        self.assertEqual(report["production"]["status"], "routed")
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 1722)
+        self.assertEqual(report["production"]["alignment_bytes"], 10)
+        self.assertEqual(report["production"]["strict_relocations"], 28)
+        self.assertEqual(report["production"]["guarded_redirects"], 9)
 
 
 if __name__ == "__main__":

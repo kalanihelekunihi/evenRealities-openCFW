@@ -30,22 +30,22 @@ PINS = {
 SOURCE_SIZE = 14758
 SOURCE_SHA256 = "81a578ee935776fdb798962859800dd835f3c063e3c94c701d058c2319a56a35"
 FUNCTIONS = (
-    ("open_cfw_pb_service_onboarding_buffer_write", 146, 203488, 0,
+    ("open_cfw_pb_service_onboarding_buffer_write", 146, 263336, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_onboarding_zero", 88, 203636, 0, "zero"),
-    ("open_cfw_pb_onboarding_encode_and_send", 276, 203724, 6,
+    ("open_cfw_pb_service_onboarding_zero", 88, 263484, 0, "zero"),
+    ("open_cfw_pb_onboarding_encode_and_send", 276, 263572, 6,
      "common_encode"),
-    ("APP_PbRxOnboardingFrameDataProcess", 170, 204000, 9, "dispatch"),
-    ("PB_RxOnboardingConfig", 20, 204172, 1, "config_rx"),
-    ("APP_PbTxEncodeOnboardingConfig", 20, 204192, 1, "config_tx"),
-    ("APP_PbNotifyEncodeOnboardingConfig", 44, 204212, 1,
+    ("APP_PbRxOnboardingFrameDataProcess", 170, 263848, 9, "dispatch"),
+    ("PB_RxOnboardingConfig", 20, 264020, 1, "config_rx"),
+    ("APP_PbTxEncodeOnboardingConfig", 20, 264040, 1, "config_tx"),
+    ("APP_PbNotifyEncodeOnboardingConfig", 44, 264060, 1,
      "config_notify"),
-    ("PB_RxOnboardingHeartbeat", 10, 204256, 0, "heartbeat_rx"),
-    ("APP_PbTxEncodeOnboardingHeartbeat", 20, 204268, 1,
+    ("PB_RxOnboardingHeartbeat", 10, 264104, 0, "heartbeat_rx"),
+    ("APP_PbTxEncodeOnboardingHeartbeat", 20, 264116, 1,
      "heartbeat_tx"),
-    ("PB_RxOnboardingEvent", 20, 204288, 1, "event_rx"),
-    ("APP_PbTxEncodeOnboardingEvent", 20, 204308, 1, "event_tx"),
-    ("APP_PbNotifyEncodeOnboardingEvent", 44, 204328, 1,
+    ("PB_RxOnboardingEvent", 20, 264136, 1, "event_rx"),
+    ("APP_PbTxEncodeOnboardingEvent", 20, 264156, 1, "event_tx"),
+    ("APP_PbNotifyEncodeOnboardingEvent", 44, 264176, 1,
      "event_notify"),
 )
 PATCH_SUFFIXES = (
@@ -288,8 +288,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -297,8 +297,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

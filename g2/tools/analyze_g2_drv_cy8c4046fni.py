@@ -30,10 +30,10 @@ LEAF_NAMES=(
  'open_cfw_cy8c_read_proximity_baseline','open_cfw_cy8c_write_gesture_cfg',
  'open_cfw_cy8c_read_gesture_cfg',
 )
-LEAF_DIGEST='0d2c5266745768c05470fb03e50287494cf60e362a90da6bd3946112c5598a62'
+LEAF_DIGEST='b77a76e75379e7e4ea6ec1eaa73395bb7c8fbf48d2e3dbe59bbbb5a776621321'
 PATCH_DIGEST='699e312fa13b8105dff9406b14fd0beb39aa92380ff394999b04540f87eecbef'
-BUILT_DIGEST='fbac207e3caae7046917c99a727c9a85e561b147765e211e0cf131a026feb4fe'
-REGION_DIGEST='84f80499cc53d41bd91ad30445fea8dcb193438ceee2c8c3be5ce3b4599e3716'
+BUILT_DIGEST='d1cf8a0e1f5bf9bb701ac5a19a4946adc722dc71e80d7937cdff6b06d0a7a22b'
+REGION_DIGEST='9dc0992211945c40a5cf5a1a67b8fe3732c248a3682aeb704d9ae7904ead1b3e'
 def sh(x):return hashlib.sha256(x).hexdigest()
 def jsh(x):return sh(json.dumps(x,sort_keys=True,separators=(',',':')).encode())
 def cstr(b,a):
@@ -92,15 +92,15 @@ def analyze(image=IMAGE):
  if tuple(x.get('function') for x in leaves)!=LEAF_NAMES or not set(LEAF_NAMES)<=set(overlay['functions']) or jsh(leaves)!=LEAF_DIGEST:raise c.AuditError('production touch-driver leaf closure changed')
  if any(x.get('profiles')!=['apple-clang'] or not x.get('strict_relocation_contract') or x.get('source',{}).get('license')!='GPL-3.0-only' for x in leaves):raise c.AuditError('production touch-driver leaf policy changed')
  if sum(x['expected']['size'] for x in leaves)!=1122 or sum(len(x['relocations']) for x in leaves)!=19:raise c.AuditError('production touch-driver compiled census changed')
- previous=190426;alignment=0
+ previous=250274;alignment=0
  for leaf in leaves:
   alignment+=leaf['expected']['offset']-previous;previous=leaf['expected']['offset']+leaf['expected']['size']
- if alignment!=18 or previous!=191566:raise c.AuditError('production touch-driver placement changed')
+ if alignment!=18 or previous!=251414:raise c.AuditError('production touch-driver placement changed')
  patches=[x for x in overlay['patch_sites'] if x.get('name','').startswith('replace_cy8c_')]
  if len(patches)!=23 or jsh(patches)!=PATCH_DIGEST or sum(x['expected_size'] for x in patches)!=1754 or {x['target_function'] for x in patches}!=set(LEAF_NAMES):raise c.AuditError('production touch-driver redirect closure changed')
  if any(x.get('branch')!='b_w' or x.get('profiles')!=['apple-clang'] for x in patches):raise c.AuditError('production touch-driver redirect policy changed')
  build=json.loads(REPORT.read_text())
- if (build['overlay']['size'],build['overlay']['sha256'],build['component']['size'],build['component']['sha256'])!=(240692,'2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae',3764088,'b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed'):raise c.AuditError('production touch-driver build pins changed')
+ if (build['overlay']['size'],build['overlay']['sha256'],build['component']['size'],build['component']['sha256'])!=(332148,'588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d',3855544,'df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc'):raise c.AuditError('production touch-driver build pins changed')
  built=[x for x in build['relocated_leaves'] if x.get('source',{}).get('path')==SOURCE_PATH]
  norm=[{'function':x['extraction']['function'],'size':x['placement']['size'],'padding_before':x['placement']['padding_before'],'offset':x['placement']['offset'],'runtime_address':x['placement']['runtime_address'],'relocation_count':x['extraction']['relocation_count']} for x in built]
  if len(built)!=23 or jsh(norm)!=BUILT_DIGEST:raise c.AuditError('production touch-driver built closure changed')
@@ -108,6 +108,6 @@ def analyze(image=IMAGE):
  if len(regions)!=55 or jsh(regions)!=REGION_DIGEST:raise c.AuditError('production touch-driver manifest regions changed')
  retained=next((x for x in main['regions'] if x.get('name')=='opaque_cy8c_pool_and_following_object'),{})
  if (retained.get('target_address'),retained.get('size'),retained.get('address_status'))!=(0x55B9C6,510,'official_blob'):raise c.AuditError('retained touch-driver callback pool changed')
- if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3764088,'b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed',4542582,'275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85'):raise c.AuditError('production touch-driver manifest closure changed')
+ if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3855544,'df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc',4634038,'3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731'):raise c.AuditError('production touch-driver manifest closure changed')
  return {'schema_version':1,'analysis_mode':'read-only raw-image and production-source closure; corpus-independent','identity':{'image_sha256':c.IMAGE_SHA256,'retained_path':r'driver\touch\drv_cy8c4046fni.c','embedded_third_party_definitions':[]},'surface':{'linked_functions':23,'ghidra_discovered_functions':20,'restored_functions':3,'path_anchored_functions':7,'raw_path_references':12,'body_bytes':1754,'physical_bytes':1924,'noncode_bytes':170,'reachable_instructions':708,'direct_body_calls':87,'internal_direct_body_calls':10,'external_direct_body_calls':77,'indirect_body_calls':9,'bounded_indirect_body_calls':9,'direct_bl_entry_sites':50,'stored_entry_pointers':4,'raw_interior_word_collisions':0,'strict_interior_ingress':0},'behavior':{'i2c_ops_table_dispatch':True,'controller_init_and_reset':True,'touch_report_and_gesture_extraction':True,'four_entry_driver_callback_table':True},'provider_boundary':{'easylogger_calls':60,'iar_dlib_calls':9,'cmsis_freertos_calls':2,'closed_hal_i2c_calls':4,'bounded_first_party_calls':2,'cmsis_freertos_commit':'d213f261b5be6bb29a7cce8b84071706b72f4d53','freertos_kernel_commit':'def7d2df2b0506d3d249334974f51e427c17a41c','cmsis_5_commit':'2b7495b8535bdcb306dac29b9ded4cfb679d7e5c','easylogger_commit':'a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24','cmsis_wrappers':['osDelay'],'public_cypress_source_candidate':None,'historical_drv_cy8c4046fni_commit':None,'new_version_discriminator':False,'private_generating_commit_recoverable':False},'production':{'candidate':SOURCE_PATH,'production_routed':True,'source_inventory_available':True,'source_functions':23,'compiled_text_bytes':1122,'alignment_bytes':18,'stock_replaced_bytes':1754,'strict_relocations':19,'retained_callback_pool_bytes':170,'diagnostic_logging':'stock EasyLogger observability omitted; functional controller behavior retained','software_functional_gap':False,'hardware_validation':'blocked','hardware_blocker':'No authorized physical G2 touch controller or captured I2C/electrical/reset/DFU/timing evidence is available.'}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

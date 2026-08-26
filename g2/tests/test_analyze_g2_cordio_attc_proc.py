@@ -46,6 +46,12 @@ class AttcProcTest(unittest.TestCase):
         self.assertTrue(architecture["r4_event_and_length_guards"])
         self.assertTrue(architecture["inherited_method_16_17_bounds_defect"])
         self.assertTrue(report["lineage"]["independent_release_discriminator"])
+        self.assertEqual(report["production"]["status"], "routed")
+        self.assertEqual(report["production"]["stock_bytes_replaced"], 1884)
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 1694)
+        self.assertEqual(report["production"]["guarded_redirects"], 13)
+        self.assertEqual(report["production"]["exact_in_place_copies"], 2)
+        self.assertTrue(report["production"]["method_table_bounds_defect_remediated"])
 
 
 if __name__ == "__main__":

@@ -6,6 +6,10 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];IMAGE=ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin';BASE=0x437FE0
 IMAGE_BYTES=3_523_396;IMAGE_SHA='36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863'
 PINS={ROOT/'tools/manifests/packetcraft-cordio-l2c-master-function-map.tsv':'c0053ee3c8973deca350223a35b61af30dd1e0dde537b04a9411b29e2973a8ff',ROOT/'tools/manifests/packetcraft-cordio-l2c-master-provenance.tsv':'f9d20ef146068e506a8f379a78fb771936009266169dfae76e8596cec9bce5a7'}
+SOURCE=ROOT/'components/shared/cordio/runtime_cordio_l2c_master.c'
+SOURCE_SHA='a23f0afd51e158e6c27119bb6688477df1dd9a498f63f5c7a4245bbed52847db'
+PRODUCTION_FUNCTIONS=['open_cfw_cordio_l2c_master_receive_signaling_packet','open_cfw_cordio_l2c_master_initialize','open_cfw_cordio_l2c_connection_update_response']
+PRODUCTION_METRICS=[(353900,210,3),(354112,20,0),(354132,56,2)]
 F={'l2cMasterRxSignalingPkt':(0x536FBC,0x5371FE,'02e5f34c1e77998116f93ee16041cbb95156c198530345aad39954315fb23d7c'),'L2cMasterInit':(0x537200,0x537208,'ba04b13c8945ffa29186bcf41a112e3e9d17f8e8246a6632fd89748b7c94c0cc'),'L2cDmConnUpdateRsp':(0x537230,0x537278,'25fdad45770fddd5f782df33745ca172a975d5c17c6ac68920e7fb0648854c4d')}
 CALLS={'l2cMasterRxSignalingPkt':[],'L2cMasterInit':[0x4B8050],'L2cDmConnUpdateRsp':[0x5371E6,0x55BC88]}
 def sha(x):return hashlib.sha256(x).hexdigest()
@@ -38,7 +42,13 @@ def analyze(image_path=IMAGE):
   if t in starts:ent.append((BASE+o,v))
   elif t in interior:inside.append((BASE+o,v))
  if ent!=[(0x537228,0x536FBD)] or inside:raise RuntimeError('stored/interior ingress changed')
- return {'schema_version':1,'module':{'start':0x536FBC,'end_exclusive':0x537278,'physical_bytes':700,'linked_function_count':3,'linked_function_bytes':658,'source_inventory_functions':3,'source_only_functions':[],'direct_bl_ingress_sites':3,'registered_function_pointers':1,'strict_interior_pointers':0},'architecture':{'source_bodies_release_invariant':True,'master_receive_callback_cell':0x537228,'neighboring_dm_abi':'r20/R4'},'lineage':{'selected_blob':'0f6c8c0594c0cd877f9c4fe22e42ef656863bbc4','selected_sha256':'040a732f615345250d2cee7c8293c2e2c420b5bbaf264f65e7ec65117e0c0be3','license':'Apache-2.0','independent_release_discriminator':False},'build_readiness':{'status':'deferred','reason':'reverse engineering prioritized; exhaustive compiler reproduction deferred'},'production':{'stock_bytes_replaced':0,'source_owned_bytes_added':0}}
+ from analyze_g2_cordio_l2c_production import validate
+ production=validate(source=SOURCE,source_sha256=SOURCE_SHA,
+  functions=PRODUCTION_FUNCTIONS,metrics=PRODUCTION_METRICS,
+  patch_prefix='replace_cordio_l2c_master_',region_prefix='cordio_l2c_master_',
+  stock_functions=F,stock_bytes=658,source_functions=3,source_only=[],
+  region_count=7,hardening={'signaling_shape_and_parameter_ranges_hardened':True})
+ return {'schema_version':1,'module':{'start':0x536FBC,'end_exclusive':0x537278,'physical_bytes':700,'linked_function_count':3,'linked_function_bytes':658,'source_inventory_functions':3,'source_only_functions':[],'direct_bl_ingress_sites':3,'registered_function_pointers':1,'strict_interior_pointers':0},'architecture':{'source_bodies_release_invariant':True,'master_receive_callback_cell':0x537228,'neighboring_dm_abi':'r20/R4'},'lineage':{'selected_blob':'0f6c8c0594c0cd877f9c4fe22e42ef656863bbc4','selected_sha256':'040a732f615345250d2cee7c8293c2e2c420b5bbaf264f65e7ec65117e0c0be3','license':'Apache-2.0','independent_release_discriminator':False},'build_readiness':{'status':'production-routed','reason':'host and isolated Cortex-M55 gates green'},'production':production}
 def main():
  p=argparse.ArgumentParser();p.add_argument('--image',type=Path,default=IMAGE);p.add_argument('--json',action='store_true');a=p.parse_args();r=analyze(a.image);print(json.dumps(r,indent=2,sort_keys=True) if a.json else 'Cordio l2c_master closed: 3 linked');return 0
 if __name__=='__main__':raise SystemExit(main())

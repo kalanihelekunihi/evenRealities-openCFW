@@ -21,6 +21,21 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 READINESS_MANIFEST = ROOT / "research/readiness/dm-dev/SHA256SUMS"
 READINESS_BYTES = 1_209
 READINESS_SHA256 = "4707648b66a73ca9a30ecadc9e318c014d6ad7314da81bc4090e380779152d11"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_dm_dev.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_dm_dev.h"
+TEST = ROOT / "tests/test_runtime_cordio_dm_dev.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+SOURCE_PIN = (11_755, "aba3e1be6bbd843d7d49692e2ea22e37a7fa55d58d369f6415a51e8e98ac5062")
+HEADER_PIN = (4_452, "10c1374e093315b717aec521dd8d62a7ee3ec242871edd3759ab9007e1f59cc5")
+TEST_PIN = (9_537, "3e5dd0e1ef9aabfcd493bd3a7d5df9370daba869cdc2a0704824420e26b19239")
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 PINNED_INPUTS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-dev-function-map.tsv": "44575e5f2bcb2b596191e0b7c0fce142690f289de727b306cedec57530022ccd",
     ROOT / "tools/manifests/packetcraft-cordio-dm-dev-provenance.tsv": "53d3afab77b0f8ed03c9d8b19316bcd4dbb9d0e55a722f853ae2e6ade81a292e",
@@ -109,6 +124,34 @@ SOURCE_ONLY = [
     "DmDevWhiteListAdd", "DmDevWhiteListRemove", "DmDevWhiteListClear",
     "dmDevSetFilterPolicy", "DmDevSetFilterPolicy", "DmDevSetExtFilterPolicy",
 ]
+PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_dm_device_action_reset",
+    "open_cfw_cordio_dm_device_hci_reset_complete",
+    "open_cfw_cordio_dm_device_hci_vendor_command_complete",
+    "open_cfw_cordio_dm_device_hci_vendor_event",
+    "open_cfw_cordio_dm_device_hci_hardware_error",
+    "open_cfw_cordio_dm_device_hci_handler",
+    "open_cfw_cordio_dm_device_message_handler",
+    "open_cfw_cordio_dm_device_pass_event_to_privacy",
+    "open_cfw_cordio_dm_device_pass_event_to_connection_cte",
+    "open_cfw_cordio_dm_device_reset",
+    "open_cfw_cordio_dm_device_set_random_address",
+    "open_cfw_cordio_dm_device_vendor_initialize",
+]
+PRODUCTION_LEAVES = [
+    (356_928, 66, 1, "c57325d40d0e4189b2228d370d561de05306806130593484ee5d26e1beba1e6f"),
+    (356_996, 30, 0, "f29b428639c837b4dac691ccdd34402fc6624659a6139005507965f666aef00d"),
+    (357_028, 26, 0, "0dcf0f2d50c12dcf1b1ffa255b05aa1a838f0402aadc0fa0e638a20077ec4800"),
+    (357_056, 26, 0, "4f55739148208d2321b14c36863b1951750eddad0f4e5a6838b13a0ef44d3bd7"),
+    (357_084, 26, 0, "c7cb9737c80f4131847926e732080bbacdb16f86f08b4c65616a8f494535dfd3"),
+    (357_112, 48, 4, "b7fb728f6abc31f6ce3abdd0d264767c34ae4b273932daa759b93b21ee8fc8be"),
+    (357_160, 18, 1, "362d44fe18a091403fa543941d5d9749a965782f0e286dd23cfe6b276c625acf"),
+    (357_180, 72, 0, "7ad40eee9a1f882d0052e844a57d0e238520831dcd1efd6f880f79c3cd7c54cc"),
+    (357_252, 50, 0, "3ec24a643d6f422efbc4d6ef63cad843e03027272fc2dc89270764cc9e387103"),
+    (357_304, 42, 2, "87981d780ede1fac29642d4913d740fa77ee30fe21cf1775d6011a22f428761b"),
+    (357_348, 42, 1, "2fe591f3fedb17ac66f9b3acec85ea3c9be83f5cf55c5fb3d0a760c5d51d0e44"),
+    (357_392, 2, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
+]
 
 
 class AuditError(RuntimeError):
@@ -126,6 +169,90 @@ def _slice(blob: bytes, start: int, end: int) -> bytes:
 def _occurrences(blob: bytes, value: int) -> list[int]:
     packed = struct.pack("<I", value)
     return [LOAD_BASE + i for i in range(len(blob) - 3) if blob[i:i + 4] == packed]
+
+
+def _verify_file(path: Path, expected: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), _sha256(data)) != expected:
+        raise AuditError(f"{label} changed")
+
+
+def _verify_production() -> dict[str, Any]:
+    _verify_file(SOURCE, SOURCE_PIN, "DM device source")
+    _verify_file(HEADER, HEADER_PIN, "DM device header")
+    _verify_file(TEST, TEST_PIN, "DM device test")
+    report = json.loads(REPORT.read_text())
+    config = json.loads(CONFIG.read_text())
+    manifest = json.loads(MANIFEST.read_text())
+    leaves = [
+        row for row in report["relocated_leaves"]
+        if row.get("source", {}).get("path", "").endswith(SOURCE.name)
+    ]
+    leaves.sort(key=lambda row: row["pins"]["offset"])
+    if len(leaves) != len(PRODUCTION_FUNCTIONS):
+        raise AuditError("DM device production leaf count changed")
+    for row, function, expected in zip(
+        leaves, PRODUCTION_FUNCTIONS, PRODUCTION_LEAVES
+    ):
+        observed = (
+            row["pins"]["offset"], row["extraction"]["size"],
+            row["extraction"]["relocation_count"],
+            row["extraction"]["sha256"],
+        )
+        if row["extraction"]["function"] != function or observed != expected:
+            raise AuditError(f"DM device production leaf changed: {function}")
+    sites = {
+        row["name"]: row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_dm_dev_")
+    }
+    if len(sites) != len(PRODUCTION_FUNCTIONS):
+        raise AuditError("DM device production route count changed")
+    for index, ((name, (start, end, digest)), function) in enumerate(
+        zip(FUNCTIONS.items(), PRODUCTION_FUNCTIONS), 1
+    ):
+        site = sites.get(f"replace_cordio_dm_dev_{index:02d}")
+        if (
+            site is None or site["runtime_address"] != start
+            or site["expected_size"] != end - start
+            or site["expected_sha256"] != digest
+            or site["target_function"] != function or site["branch"] != "b_w"
+        ):
+            raise AuditError(f"DM device route changed: {name}")
+    override = manifest["component_overrides"]["apollo_main"]
+    regions = [
+        row for row in override["regions"]
+        if row["name"].startswith("cordio_dm_dev_")
+    ]
+    if (
+        (report["overlay"]["size"], report["overlay"]["sha256"])
+            != PRODUCTION_OVERLAY
+        or (report["component"]["size"], report["component"]["sha256"])
+            != PRODUCTION_COMPONENT
+        or (override["provider"].get("size"),
+            override["provider"].get("sha256")) != PRODUCTION_COMPONENT
+        or len(regions) != 33
+    ):
+        raise AuditError("DM device component ownership changed")
+    _verify_file(PACKAGE, PRODUCTION_PACKAGE, "DM device package")
+    _verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN, "DM device flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions",
+        "container_only_regions", "protected_regions",
+    ))
+    if counts != (5863, 2, 5, 6):
+        raise AuditError("DM device flash counts changed")
+    return {
+        "status": "production-routed",
+        "redirected_stock_functions": len(PRODUCTION_FUNCTIONS),
+        "redirected_stock_bytes": sum(end - start for start, end, _ in FUNCTIONS.values()),
+        "source_owned_bytes_added": sum(row[1] for row in PRODUCTION_LEAVES),
+        "alignment_bytes_added": sum(row["placement"]["padding_before"] for row in leaves),
+        "strict_relocations": sum(row[2] for row in PRODUCTION_LEAVES),
+        "source_only_target_compiled": SOURCE_ONLY,
+        "manifest_regions": len(regions),
+        "flash_plan_counts": counts,
+    }
 
 
 def _load_decoder():
@@ -302,7 +429,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "minimum_retained_text": 556,
             "retained_bss": 5124,
         },
-        "production": {"source_owned_bytes_added": 0, "stock_bytes_replaced": 0},
+        "production": _verify_production(),
     }
 
 

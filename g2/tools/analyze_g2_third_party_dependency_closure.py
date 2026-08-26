@@ -189,6 +189,10 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         ROOT / "tools/analyze_g2_thread_ring.py",
         "third_party_thread_ring_boundary",
     ).analyze()
+    sensor_hub = _load(
+        ROOT / "tools/analyze_g2_sensor_hub.py",
+        "third_party_sensor_hub_boundary",
+    ).analyze()
     fw_event_loop = _load(
         ROOT / "tools/analyze_g2_fw_event_loop.py",
         "third_party_fw_event_loop_boundary",
@@ -465,7 +469,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or als_provider["public_opt3007_software_commit"] is not None
         or als["surface"]["bounded_first_party_indirect_calls"] != 1
         or als["identity"]["embedded_third_party_definitions"]
-        or als["production"]["production_routed"]
+        or not als["production"]["production_routed"]
     ):
         raise ClosureError("ALS RTOS/OPT3007 specification boundary changed")
     production_thread_provider = thread_ble_production["provider_boundary"]
@@ -579,7 +583,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or ui_health_page["surface"]["stored_function_pointers"] != 2
         or ui_health_page["surface"]["indirect_body_calls"] != 0
         or ui_health_page["identity"]["embedded_third_party_definitions"]
-        or ui_health_page["production"]["production_routed"]
+        or not ui_health_page["production"]["production_routed"]
     ):
         raise ClosureError("health-page reusable/provider boundary changed")
     ring_provider = ring_service["provider_boundary"]
@@ -593,7 +597,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or ring_service["surface"]["stored_function_pointers"] != 2
         or ring_service["surface"]["indirect_body_calls"] != 0
         or ring_service["identity"]["embedded_third_party_definitions"]
-        or ring_service["production"]["production_routed"]
+        or not ring_service["production"]["production_routed"]
     ):
         raise ClosureError("ring-service reusable/provider boundary changed")
     input_provider = service_input_manager["provider_boundary"]
@@ -817,9 +821,22 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or thread_ring["surface"]["restored_functions"] != 12
         or thread_ring["surface"]["stored_entry_pointers"] != 8
         or thread_ring["identity"]["embedded_third_party_definitions"]
-        or thread_ring["production"]["production_routed"]
+        or not thread_ring["production"]["production_routed"]
     ):
         raise ClosureError("Ring-thread reusable/provider boundary changed")
+    sensor_hub_provider = sensor_hub["provider_boundary"]
+    if (
+        tuple(sensor_hub_provider[x] for x in ("easylogger_calls", "admitted_lvgl_calls", "cmsis_freertos_calls", "closed_first_party_calls", "translation_lookup_calls", "nanopb_calls", "bounded_open_first_party_calls")) != (130, 69, 9, 36, 8, 1, 1)
+        or sensor_hub_provider["freertos_kernel_direct_calls"] != 0
+        or sensor_hub_provider["embedded_sensor_fusion_library"] is not None
+        or sensor_hub["surface"]["restored_functions"] != 26
+        or sensor_hub["surface"]["stored_function_entry_pointers"] != 3
+        or sensor_hub["identity"]["embedded_third_party_definitions"]
+        or not sensor_hub["production"]["production_routed"]
+        or sensor_hub["production"]["source_functions"] != 31
+        or sensor_hub["production"]["hardware_validation"] != "blocked_unavailable_physical_evidence"
+    ):
+        raise ClosureError("Sensor Hub reusable/provider boundary changed")
     event_loop_provider = fw_event_loop["provider_boundary"]
     if (
         tuple(event_loop_provider[x] for x in ("easylogger_calls","cmsis_freertos_calls","freertos_critical_port_calls","bounded_first_party_indirect_calls")) != (80,20,4,1)
@@ -838,7 +855,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or ring_connect_policy["surface"]["restored_functions"] != 4
         or ring_connect_policy["surface"]["stored_entry_pointers"] != 1
         or ring_connect_policy["identity"]["embedded_third_party_definitions"]
-        or ring_connect_policy["production"]["production_routed"]
+        or not ring_connect_policy["production"]["production_routed"]
     ):
         raise ClosureError("Ring-connect-policy reusable/provider boundary changed")
     system_close_provider = system_close["provider_boundary"]
@@ -1499,7 +1516,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "als_public_opt3007_software_commit": None,
             "als_bounded_first_party_indirect_calls": 1,
             "als_embedded_third_party_definitions": 0,
-            "als_routed": False,
+            "als_routed": True,
             "thread_ble_production_cmsis_freertos_calls": 15,
             "thread_ble_production_freertos_assert_calls": 3,
             "thread_ble_production_easylogger_calls": 106,
@@ -1571,7 +1588,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "ui_health_page_stored_function_pointers": 2,
             "ui_health_page_embedded_third_party_definitions": 0,
             "ui_health_page_historical_commit": None,
-            "ui_health_page_routed": False,
+            "ui_health_page_routed": True,
             "ring_service_easylogger_calls": 76,
             "ring_service_cmsis_freertos_calls": 2,
             "ring_service_runtime_calls": 8,
@@ -1751,7 +1768,21 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "thread_ring_stored_entry_pointers": 8,
             "thread_ring_embedded_third_party_definitions": 0,
             "thread_ring_historical_commit": None,
-            "thread_ring_routed": False,
+            "thread_ring_routed": True,
+            "sensor_hub_easylogger_calls": 130,
+            "sensor_hub_lvgl_calls": 69,
+            "sensor_hub_cmsis_freertos_calls": 9,
+            "sensor_hub_closed_first_party_calls": 36,
+            "sensor_hub_translation_lookup_calls": 8,
+            "sensor_hub_nanopb_calls": 1,
+            "sensor_hub_bounded_open_first_party_calls": 1,
+            "sensor_hub_direct_freertos_calls": 0,
+            "sensor_hub_restored_functions": 26,
+            "sensor_hub_stored_entry_pointers": 3,
+            "sensor_hub_embedded_third_party_definitions": 0,
+            "sensor_hub_embedded_sensor_fusion_library": None,
+            "sensor_hub_routed": True,
+            "sensor_hub_hardware_validation": "blocked_unavailable_physical_evidence",
             "fw_event_loop_easylogger_calls": 80,
             "fw_event_loop_cmsis_freertos_calls": 20,
             "fw_event_loop_freertos_critical_port_calls": 4,
@@ -1772,7 +1803,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "ring_connect_policy_stored_entry_pointers": 1,
             "ring_connect_policy_embedded_third_party_definitions": 0,
             "ring_connect_policy_historical_commit": None,
-            "ring_connect_policy_routed": False,
+            "ring_connect_policy_routed": True,
             "system_close_easylogger_calls": 130,
             "system_close_lvgl_calls": 99,
             "system_close_iar_dlib_calls": 5,

@@ -31,7 +31,16 @@ table provides the only stored pointers into this object.
 python3 tools/analyze_g2_cordio_dm_conn_slave_leg.py --json
 ```
 
-Compiler readiness is deliberately deferred: the local environment has no
-`arm-none-eabi` toolchain, while the source/binary/table proof is independent
-and complete. Production still cuts these 120 bytes forward. The adjacent
-`dm_conn_slave.c` update/API unit is the next bounded closure candidate.
+All five definitions now have maintained, host-tested C. Six Cortex-M55
+profiles (the complete unit plus five isolated selectors) compile cleanly.
+Five guarded redirects replace all 104 bounded stock body bytes with 156
+compiled bytes plus eight alignment bytes under nine strict relocations. The
+14 manifest regions, component, deterministic package, and flash plan are
+fail-closed and pinned by `make cordio-dm-conn-slave-leg-closure`.
+
+Live directed-advertising, accepted/failed connection callbacks, retained
+table installation, BLE peer/controller timing, RF behavior, and paired-temple
+interoperation remain hardware-blocked: the only authorized right temple is
+nonresponsive and the left temple must remain stock. No hardware-dependent
+functional-completeness claim is made. The adjacent `dm_conn_slave.c`
+update/API unit is the next bounded software closure candidate.

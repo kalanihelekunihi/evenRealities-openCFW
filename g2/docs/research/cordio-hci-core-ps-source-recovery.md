@@ -1,6 +1,6 @@
 # Ambiq Cordio HCI platform-shim recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -11,6 +11,13 @@ Stock G2 links 9 of the 20 definitions in the later Ambiq
 literal pool. The surviving functions are the four core receive/handler
 routines plus `HciGetBdAddr`, `HciGetBufSize`, `HciGetLeSupFeat`,
 `HciGetMaxRxAclLen`, and `HciLeAdvExtSupported`.
+
+All 20 definitions are now maintained in
+`components/shared/cordio/runtime_cordio_hci_core_ps.c`. The nine linked
+entries are production-routed: 514 compiled bytes plus six alignment bytes
+under 13 strict relocations replace all 360 bounded stock body bytes. The
+eleven source-only getters remain in every translation-unit compile and also
+target-compile independently for Cortex-M55.
 
 The other eleven definitions are source-only getters:
 
@@ -59,7 +66,28 @@ remaining linked leaves expose the BD-address pointer, controller ACL-buffer
 size, maximum reassembled receive length, and whether the controller reports
 any extended-advertising sets.
 
-## Source-family and license boundary
+The maintained implementation additionally saturates malformed completed-
+packet counts instead of allowing the stock byte counters to underflow,
+checks callback presence, rejects and frees unknown receive types, and bases
+extended-advertising support on `numSupAdvSets` at authenticated offset
+`+0x94`. The last item corrects the linked stock getter's load from `+0x91`,
+which is the resolving-list-size field populated by reset sequencing.
+
+## Public behavior source and proprietary boundary
+
+Packetcraft r20.05c publishes the dual-chip core platform behavior under
+Apache-2.0:
+
+```text
+commit  3656312d6b73e2a2c1c8b33ee0385bc199dd97e6
+blob    0730013ce6d4bb992b6a48695e30bddae757c8ae
+bytes   12,231
+sha256  730395b8be404d357cf498fa1caee5630dcf95d66b2ea1c817e35932d5be0dd8
+```
+
+That public file supplies the reusable initialization, completed-packet,
+receive/handler, callback, and getter behavior. openCFW adapts it to the
+authenticated G2 `hciCoreCb`/`hciCb` layout and adds the hardening above.
 
 AmbiqSuite R2.5.1 has 18 definitions, a 32-bit feature getter, and no ISO
 receive branch:
@@ -80,17 +108,33 @@ bytes   12,960
 sha256  dca9e769828eedab03b15d99ffd0e1e726d8935af2e22eaa901bb897e05853cd
 ```
 
-Stock implements that later ABI and behavior. With no retained path or source
-diagnostics, the later import remains a reconstruction oracle rather than a
-resolved historical producing commit. The file is proprietary under the Arm
-Cordio SLA. openCFW copies no source/header/object bytes and records only
-clean-room metadata and independently described behavior.
+Stock implements that later ABI and behavior. The later Ambiq import remains
+a proprietary corroborating oracle rather than a resolved historical
+producing commit or source donor. No proprietary source/header/object bytes
+are copied.
+
+## Production admission
+
+The nine guarded routes cover the exact stock spans. Source leaves occupy
+`[0x007ED8B0,0x007EDAB6)` with three two-byte alignment regions. Twenty-one
+manifest regions account for nine replaced bodies, nine source leaves, and
+three alignment spans. Host tests cover initialization, saturating completed-
+packet accounting, flow re-enable, event enqueue/wakeup, command timeout,
+event/reset, ACL reassembly, ISO delivery, absent callbacks, unknown packet
+types, and every getter offset.
+
+The canonical overlay is 366,482 bytes (`83b08847...`), the component is
+3,889,878 bytes (`677b2ed9...`), the package is 4,677,076 bytes
+(`fbb300c7...`), and the flash plan is 3,937,595 bytes (`289c21af...`).
+The plan retains exactly two unresolved hardware regions.
 
 ## Reproduction
 
 ```sh
 python3 tools/analyze_g2_cordio_hci_core_ps.py --json
-python3 -m unittest tests.test_analyze_g2_cordio_hci_core_ps
+make cordio-hci-core-ps-closure
 ```
 
-Production source ownership and stock-byte replacement remain zero.
+Live HCI controller, ACL/event/ISO, RF, reset, and timing validation remains
+blocked because the authorized right temple is nonresponsive and the left
+temple must remain stock. No signing, flashing, or installation was performed.

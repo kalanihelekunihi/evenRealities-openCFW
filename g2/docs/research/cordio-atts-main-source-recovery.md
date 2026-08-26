@@ -115,6 +115,30 @@ python3 tools/analyze_g2_cordio_atts_main.py --json
 python3 -m unittest tests.test_analyze_g2_cordio_atts_main
 ```
 
-The next bounded server target is `atts_proc.c`: its linked MTU processor is
-method 1 in the now-authenticated live table, and it is the smallest direct
-owner needed before the larger read and write processor units.
+## Production replacement
+
+Maintained production source is
+`components/shared/cordio/runtime_cordio_atts_main.c`. Seventeen guarded
+redirects replace every 2,710 authenticated linked body byte with 2,622
+compiled Cortex-M55 bytes plus 30 alignment bytes under 44 strict relocations.
+The four public helpers absent from the stock link—authorization registration,
+attribute set/get, and error-test control—are also implemented and compile as
+isolated Cortex-M55 leaves without inventing stock coverage.
+
+The host oracle covers hardened dispatch and error suppression, CCB lookup,
+prepared-write cleanup, idle timers, indication/sign/hash message fanout,
+database-hash reversal and pending reads, hashable-attribute state, CMAC input,
+sorted group mutation, all public helpers, and the full 3x3 initialization.
+
+The canonical overlay is 347,136 bytes, SHA-256
+`06da1ac9a86c55d063b1edc9a780bb1d452e7117e1b3a2acc012daf23b66ce44`;
+the Apollo component is 3,870,532 bytes, SHA-256
+`a28013165b14cb5a5d9c1901d177828b378c64a48564c37ba0b53d97977e1658`;
+and the deterministic package is 4,649,026 bytes, SHA-256
+`dd4ae2bbee573322ec0976563b550c2dd462737344fe94ad4a12c24823951fd4`.
+No image was signed, flashed, or installed. Live ATT/EATT peer exchange,
+controller scheduling, asynchronous CMAC timing, and EM9305 behavior remain
+blocked by unavailable authorized responsive physical evidence.
+
+This closes the remaining `atts_*` server software tranche; its remaining
+acceptance tail is physical validation rather than missing server C.

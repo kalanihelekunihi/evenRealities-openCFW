@@ -18,17 +18,17 @@ import recover_apollo_embedded_source_paths as t
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-s200-config-main-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-s200-config-main-closure.tsv"
-PINS = {FM: "0f9b3dc8e765f2da26bcde3e0c32942e36a78a15ae85db2c7e2ce53802359c2a", CL: "67b43269009184ecf854757b32e2408b9c98df49dc06504be3e7350652b3c7c4"}
+PINS = {FM: "494176c0fd0f6710220a021787c5b2133aa78dc36d12bf232e3122c68b97e992", CL: "6d7f796812c37988d3925b98d5d81fdcfc88e4ab45d72d4078bbbbf8525cf165"}
 RETAINED = 'product\\s200\\app\\config\\main.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\app\\config\\main.c'
 PATH_RUN = 0x703acc
 CELLS = (6086996,)
 CELL_REFS = {6086996: (6086030, 6086104, 6086178, 6086260, 6086330, 6086394, 6086458, 6086522, 6086580, 6086642, 6086718, 6086778, 6086838, 6086908)}
 ALL_REFS = (6086030, 6086104, 6086178, 6086260, 6086330, 6086394, 6086458, 6086522, 6086580, 6086642, 6086718, 6086778, 6086838, 6086908)
-F = ((6085446, 6085502), (6085512, 6085776), (6085776, 6085900), (6085908, 6085996), (6085996, 6086686), (6086686, 6086968))
+F = ((6085446, 6085502), (6085548, 6085776), (6085776, 6085900), (6085908, 6085996), (6085996, 6086686), (6086686, 6086968))
 PHYS = (6085446, 6086976)
 FOREIGN = ()
-ESCAPES = ((6085520, 6085500),)
+ESCAPES = ()
 INDIRECT = (6086964,)
 BL_ENTRY = ((6086756, 6085996), (6177450, 6086686))
 BL_STRICT = ()
@@ -38,7 +38,7 @@ STORED_RAW = ((7151148, 6085909), (7694004, 6085447), (7694176, 6085777))
 GUARD_BEFORE = "58fbeeafb1084214f727b5ebcbd4d3d35bb4799e54aafecbec9c63deb6be8688"
 GUARD_AFTER = "e9da3171135f5c5e843e29b7426fff13d0d770b395915635e89dc45e9abc6d3c"
 TAGS = ((7391780, '[mainThread]Startup reason: SW Power On Initialization reset'), (7471912, '[mainThread]Software Version:[%s],Build time:[%s-%s].\r\n'), (7514848, '[mainThread]Startup reason: Watch Dog Timer reset'), (7558500, '[mainThread]Startup reason: SW Power-On reset'), (7601644, '[mainThread]Startup reason: External reset'), (7601688, '[mainThread]Startup reason: Power-On reset'), (7601732, '[mainThread]Startup reason: Brown-Out reset'), (7601776, '[mainThread]Startup reason: Debugger reset'), (7601820, '[mainThread]Startup reason: CM55 SW reset'), (7601864, '[mainThread]Startup reason: Unknown reset'), (7647716, '[mainThread]>>> SYSTEM BOOT START <<<'), (7647756, '[mainThread]Start up S200 EVT Project.'), (7694604, '[mainThread]RSTGEN->STAT: 0x%02x'), (7694676, '[mainThread]Git Describe Full:[%s].'))
-EXPECTED = {'body_bytes': 1504, 'body_concat_sha256': '7a7dae604479eda83c93647ba65951d454bf01e5a406629fad2d110e2996cf4c', 'reachable_instructions': 582, 'reachable_instruction_digest': 'd563d2a191de7eadc803275111fa7b36d3f292849b94c56143b14108982e775a', 'direct_body_calls': 119, 'direct_body_call_digest': '1eaa030be09cf6234c8397f116b1eb1f8fd007ce1b3ec52f8bd49a7845b9cff9', 'internal_direct_body_calls': 1, 'outer_pool_bytes': 26, 'outer_pool_sha256': 'd201a911b2136dece8b09709359ded0530f5dbaf6bf914a3554df5f2544027d0', 'physical_bytes': 1530, 'physical_sha256': '493925272fb28ad4faa484c52023b0b7d52deb7958941d5c4f153558206c4b81', 'path_literal_references': 14}
+EXPECTED = {'body_bytes': 1468, 'body_concat_sha256': 'c0470d0075df259abd5c1d65eb94d54159eb4e44df9a4ecae77afeda9de40a2a', 'reachable_instructions': 564, 'reachable_instruction_digest': '45a765611f0e5bb4d3d99639bd11aed09a7b0f225abff6771a6ad1d74a18a75d', 'direct_body_calls': 119, 'direct_body_call_digest': '1eaa030be09cf6234c8397f116b1eb1f8fd007ce1b3ec52f8bd49a7845b9cff9', 'internal_direct_body_calls': 1, 'outer_pool_bytes': 62, 'outer_pool_sha256': 'a7acd368198e34faa92d74bcfbf75c01da0b17b7e9c06628d469e9ef8b726fa3', 'physical_bytes': 1530, 'physical_sha256': '493925272fb28ad4faa484c52023b0b7d52deb7958941d5c4f153558206c4b81', 'path_literal_references': 14}
 DECODER = Cs(CS_ARCH_ARM, CS_MODE_THUMB | CS_MODE_LITTLE_ENDIAN | CS_MODE_MCLASS)
 DECODER.detail = True
 
@@ -231,17 +231,55 @@ def analyze(image=IMAGE):
     for address, text in TAGS:
         if _cstring(blob, address) != text:
             raise c.AuditError("tag string changed")
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any(x.get("path", "").replace("\\", "/").split("/")[-1].lower() == 'main.c' for x in overlay["sources"]):
-        raise c.AuditError("object entered production overlay")
+    overlay_path = ROOT / "components/apollo_main/core_overlay/overlay.json"
+    overlay = json.loads(overlay_path.read_text())
+    source = ROOT / "components/apollo_main/core_overlay/s200_config_main.c"
+    source_sha = _sh(source.read_bytes())
+    if source_sha != "37596a50b604d9a0508d99fad72006a9be334c510eb2e5480bf1e5c5abcc59fc":
+        raise c.AuditError("source changed")
+    leaves = [
+        item for item in overlay["relocated_leaves"]
+        if item.get("source", {}).get("path", "").endswith("s200_config_main.c")
+    ]
+    if len(leaves) != 6 or {item["function"] for item in leaves} != {
+        "open_cfw_s200_main_class_event",
+        "open_cfw_s200_main_input_event",
+        "open_cfw_s200_main_widget_init",
+        "open_cfw_s200_main_platform_init",
+        "open_cfw_s200_main_report_reset",
+        "open_cfw_s200_main_thread",
+    }:
+        raise c.AuditError("source leaf inventory changed")
+    if any(not item.get("strict_relocation_contract") for item in leaves):
+        raise c.AuditError("source relocation contract weakened")
+    if sum(item["expected"]["size"] for item in leaves) != 584:
+        raise c.AuditError("compiled source size changed")
+    if sum(len(item["relocations"]) for item in leaves) != 47:
+        raise c.AuditError("source relocation census changed")
+    sites = [
+        item for item in overlay["patch_sites"]
+        if item.get("name", "").startswith("replace_s200_config_main_")
+    ]
+    if len(sites) != 6 or {item["runtime_address"] for item in sites} != starts:
+        raise c.AuditError("production route changed")
+    if overlay["expected"] != {
+        "overlay_size": 428950,
+        "overlay_sha256": "0a6b9fe566a2452cd9720c2db22eb43e530c31b76996d05541fa7f24ea9ee745",
+        "component_size": 3952346,
+        "component_sha256": "dc578472f06af2d499b9cb771fc185df4f739a05de558098088b56da9a5e4ce0",
+    }:
+        raise c.AuditError("canonical artifact pins changed")
+    package = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+    if package.stat().st_size != 4730840 or _sh(package.read_bytes()) != "d77d88162f777a6c9889d1813323a836d1dc140fe7488009fe485ed787d8fe70":
+        raise c.AuditError("package artifact changed")
     return {
-        "schema_version": 1,
-        "analysis_mode": "read-only zero-anchor linked-object closure",
-        "identity": {"disposition": "linked-unanchored", "ghidra_discovered_functions": 0, "image_sha256": c.IMAGE_SHA256, "path_anchored_functions": 0, "retained_path": RETAINED, "retained_product_path": FULL_PATH},
+        "schema_version": 2,
+        "analysis_mode": "corrected linked-object closure plus production source routing",
+        "identity": {"disposition": "implemented-in-source; hardware-blocked", "ghidra_discovered_functions": 6, "image_sha256": c.IMAGE_SHA256, "path_anchored_functions": 0, "retained_path": RETAINED, "retained_product_path": FULL_PATH},
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": False},
+        "production": {"production_routed": True, "source_functions": 6, "compiled_text_bytes": 584, "alignment_bytes": 4, "strict_relocations": 47, "replaced_stock_body_bytes": 1468, "hardware_validation": "blocked_unavailable_authorized_physical_evidence"},
     }
 
 

@@ -18,11 +18,45 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-service-codec-host-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-service-codec-host-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-service-codec-host-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/service_codec_host.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 PINS = {
     FUNCTION_MAP: "3f4fd075d5b51648f952231f1cf0b503ce14a57d8434a51c0728660f7f5ea896",
-    CLOSURE: "409867f4a8304df2ece92665fb66da7d1ed99d01b80e8978e347cb0d18f9b32e",
-    PROVENANCE: "a0385012255f341d4e251c7784793ae77f876f6470e30ecfb7cd399bbc14197f",
+    CLOSURE: "a433a3c352f57dd1cec155539a506e42aeebcbba7e6e1d3e0a68fff777de6203",
+    PROVENANCE: "e613cbb862ed07649833216743b431401952399e41c6ad1466191faa1c239b39",
 }
+SOURCE_SHA256 = "14d8da487b06bf9bf16c957c0e4ba9d76098204c05e1b603dc89c3593920ed35"
+FUNCTIONS = (
+    "open_cfw_codec_host_init", "open_cfw_codec_host_cleanup",
+    "open_cfw_codec_host_magic_matches", "open_cfw_codec_host_pack_message",
+    "open_cfw_codec_host_unpack_message", "open_cfw_codec_host_send_message",
+    "open_cfw_codec_host_uart_read_blocking",
+    "open_cfw_codec_host_read_uart_data",
+    "open_cfw_codec_host_send_and_wait_response",
+    "open_cfw_codec_host_free_message", "open_cfw_codec_read_version",
+    "open_cfw_codec_switch_bf_mode", "open_cfw_codec_switch_wakeup_mode",
+    "open_cfw_codec_query_mic_state", "open_cfw_codec_set_mic_gain",
+    "open_cfw_codec_dmic_control", "open_cfw_codec_i2s_output_control",
+    "open_cfw_codec_mic_delay_1bit", "open_cfw_svc_switch_bf_mode",
+    "open_cfw_svc_switch_wakeup_mode", "open_cfw_svc_set_mic_gain",
+    "open_cfw_svc_codec_dmic_open", "open_cfw_svc_codec_dmic_close",
+    "open_cfw_svc_codec_mic_delay_1bit",
+    "open_cfw_svc_i2s_output_control", "open_cfw_codec_get_voice_event",
+)
+SOURCE_OFFSETS = (
+    300540, 300568, 300572, 300620, 300860, 301376, 301432, 301628,
+    301676, 301820, 301880, 302152, 302404, 302656, 302916, 303188,
+    303464, 303740, 304252, 304292, 304332, 304372, 304416, 304456,
+    304496, 304536,
+)
+SOURCE_SIZES = (
+    26, 4, 42, 240, 514, 54, 194, 46, 144, 60, 270, 252, 252,
+    260, 270, 276, 268, 512, 40, 40, 40, 42, 40, 40, 40, 296,
+)
 PHYSICAL = (0x0057BA88, 0x0057DC40)
 PHYSICAL_SHA256 = "83a042c43132baea06c3377689d7bc90b789fabc4bea39f25a4a4fe66cac261a"
 BODY_SHA256 = "88264b60441f49660eba62171af67a9303c92985e90ab5539fda6b8b864a0b4f"
@@ -231,10 +265,101 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for site, value in literal_contract.items()):
         raise AuditError("GX8002 state/message literal changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any("service_codec_host" in source.get("path", "").lower()
-           for source in overlay["sources"]):
-        raise AuditError("unimplemented codec host entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != 29_309 or sha256(source) != SOURCE_SHA256:
+        raise AuditError("codec-host production source changed")
+    source_text = source.decode("utf-8")
+    required_source_tokens = (
+        "OPEN_CFW_CODEC_HEADER_BYTES = 14",
+        "OPEN_CFW_CODEC_BODY_MAX = 16",
+        "OPEN_CFW_CODEC_RETRIES = 3",
+        "OPEN_CFW_CODEC_UART_SET_BAUD(115200u)",
+        "open_cfw_codec_host_pack_message",
+        "open_cfw_codec_host_unpack_message",
+        "open_cfw_codec_get_voice_event",
+        "body_length < 3u",
+    )
+    if any(token not in source_text for token in required_source_tokens):
+        raise AuditError("codec-host source contract changed")
+
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = [item for item in overlay["relocated_leaves"]
+              if item.get("source", {}).get("path") ==
+              "components/apollo_main/core_overlay/service_codec_host.c"]
+    if tuple(item["function"] for item in leaves) != FUNCTIONS:
+        raise AuditError("codec-host source leaf order changed")
+    if tuple(item["expected"]["offset"] for item in leaves) != SOURCE_OFFSETS:
+        raise AuditError("codec-host source placement changed")
+    if tuple(item["expected"]["size"] for item in leaves) != SOURCE_SIZES:
+        raise AuditError("codec-host compiled text sizes changed")
+    if sum(len(item["relocations"]) for item in leaves) != 111:
+        raise AuditError("codec-host relocation closure changed")
+    if any(item.get("source", {}).get("sha256") != SOURCE_SHA256
+           or item.get("strict_relocation_contract") is not True
+           for item in leaves):
+        raise AuditError("codec-host source/relocation authentication changed")
+    patches = [item for item in overlay["patch_sites"]
+               if item.get("name", "").startswith("replace_service_codec_host_")]
+    for index, (patch, row, function) in enumerate(zip(patches, rows, FUNCTIONS), 1):
+        if (
+            patch.get("name") != f"replace_service_codec_host_{index:02d}"
+            or patch.get("runtime_address") != int(row["entry"], 0)
+            or patch.get("expected_size") != int(row["size"])
+            or patch.get("expected_sha256") != row["sha256"]
+            or patch.get("target_function") != function
+            or patch.get("branch") != "b_w"
+        ):
+            raise AuditError(f"codec-host guarded redirect {index:02d} changed")
+    if overlay["expected"] != {
+        "component_sha256": "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        "component_size": 3_855_544,
+        "overlay_sha256": "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        "overlay_size": 332_148,
+    }:
+        raise AuditError("codec-host aggregate overlay pins changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    if (build["overlay"]["size"], build["overlay"]["sha256"],
+            build["component"]["size"], build["component"]["sha256"]) != (
+            332_148, overlay["expected"]["overlay_sha256"], 3_855_544,
+            overlay["expected"]["component_sha256"]):
+        raise AuditError("codec-host build artifact changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"]["size"], main["provider"]["sha256"],
+            manifest["package"]["expected_size"],
+            manifest["package"]["expected_sha256"]) != (
+            3_855_544, overlay["expected"]["component_sha256"], 4_634_038,
+            "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
+        raise AuditError("codec-host manifest/package pins changed")
+    regions = main["regions"]
+    body_regions = [item for item in regions
+                    if item["name"].startswith("service_codec_host_")
+                    and item["name"].endswith("_source_replacement")]
+    gap_regions = [item for item in regions
+                   if item["name"].startswith("service_codec_host_official_gap_")]
+    text_regions = [item for item in regions
+                    if item["name"].startswith("service_codec_host_")
+                    and item["name"].endswith("_source_text")]
+    align_regions = [item for item in regions
+                     if item["name"].startswith("service_codec_host_")
+                     and item["name"].endswith("_overlay_alignment")]
+    if (len(body_regions), sum(item["size"] for item in body_regions),
+            len(gap_regions), sum(item["size"] for item in gap_regions),
+            len(text_regions), sum(item["size"] for item in text_regions),
+            len(align_regions), sum(item["size"] for item in align_regions)) != (
+            26, 7_318, 17, 1_314, 26, 4_262, 10, 30):
+        raise AuditError("codec-host manifest ownership changed")
+    package = PACKAGE.read_bytes()
+    if (len(package), sha256(package)) != (
+            4_634_038, manifest["package"]["expected_sha256"]):
+        raise AuditError("codec-host package artifact changed")
+    flash_plan = json.loads(FLASH_PLAN.read_text())
+    if (len(flash_plan["flash_regions"]),
+            len(flash_plan["unresolved_flash_regions"]),
+            flash_plan["package_sha256"]) != (
+            4_482, 2, manifest["package"]["expected_sha256"]):
+        raise AuditError("codec-host flash-plan closure changed")
 
     external_entries = [pair for pair in entries
                         if not (PHYSICAL[0] <= pair[0] < PHYSICAL[1])]
@@ -272,6 +397,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
                 0x02: "read_version",
                 0x07: "switch_beamforming_mode",
                 0x08: "switch_wakeup_mode",
+                0x0B: "set_microphone_gain",
+                0x0C: "open_digital_microphone",
+                0x0D: "close_digital_microphone",
+                0x0E: "microphone_delay_1bit",
+                0x0F: "i2s_output_control",
                 0x70: "query_microphone_state",
             },
             "command_retry_limit": 3,
@@ -281,14 +411,25 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "retained_path": RETAINED_PATH,
             "path_pointer_cells": [f"0x{value:08x}" for value in path_cells],
             "exact_symbols": [name for _, name in EXACT_SYMBOLS],
-            "source_inventory": "unavailable",
-            "license": "unknown",
+            "source_inventory": "26-function clean-room production C",
+            "historical_source_inventory": "unavailable",
+            "license": "GPL-3.0-only",
         },
         "production": {
-            "candidate": None,
-            "source_inventory_available": False,
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "source_inventory_available": True,
+            "production_routed": True,
+            "ownership_bytes": 7_318,
+            "compiled_text_bytes": 4_262,
+            "generated_alignment_bytes": 38,
+            "strict_relocations": 111,
+            "guarded_redirects": 26,
+            "hardware_validation": "blocked_unavailable_physical_evidence",
+            "hardware_blocker": (
+                "authorized right temple is nonresponsive; authorized left "
+                "temple must remain stock; no responsive authorized pair or "
+                "golden codec/UART capture is available"
+            ),
         },
     }
 

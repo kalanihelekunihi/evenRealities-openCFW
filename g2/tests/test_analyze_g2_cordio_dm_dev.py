@@ -51,7 +51,16 @@ class CordioDmDevAuditTests(unittest.TestCase):
         self.assertEqual(readiness["provider_seams"], 14)
         self.assertEqual(readiness["valid_non_vacuous_closure_profiles"], 2)
         self.assertEqual(readiness["linked_unresolved_symbols"], 0)
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        production = report["production"]
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(production["redirected_stock_functions"], 12)
+        self.assertEqual(production["redirected_stock_bytes"], 626)
+        self.assertEqual(production["source_owned_bytes_added"], 448)
+        self.assertEqual(production["alignment_bytes_added"], 18)
+        self.assertEqual(production["strict_relocations"], 9)
+        self.assertEqual(len(production["source_only_target_compiled"]), 6)
+        self.assertEqual(production["manifest_regions"], 33)
+        self.assertEqual(production["flash_plan_counts"], (5863, 2, 5, 6))
 
 
 if __name__ == "__main__":

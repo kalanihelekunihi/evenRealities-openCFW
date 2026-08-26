@@ -21,6 +21,8 @@ IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 MAP = ROOT / "tools/manifests/packetcraft-cordio-atts-write-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-atts-write-provenance.tsv"
 PINS = {
+    ROOT / "components/shared/cordio/runtime_cordio_atts_write.c": "7d1fb3be9f754d518c2ee88826c7f809671bf3ca71ce2af2ad568f78bb711e05",
+    ROOT / "components/shared/cordio/runtime_cordio_atts_write.h": "897e103c5e77df84da51929b5f41dabcb7fe3a1d4ad0bc6102486828ee239fac",
     MAP: "d44b3f94dc3b716680efd82a7f5493596ba609d51729f1ead5a027a93faea4fe",
     PROVENANCE: "ddb213ef571c5fa891d707026d58f2bb1da03a889509249340b3ecd3f2c365fc",
 }
@@ -37,6 +39,25 @@ PHYSICAL = (0x005A5D94, 0x005A6260)
 PHYSICAL_SHA = "5ff375c13498c4194fda9790e70ee116e8257cfc659c6aa6cfd95f4fc3b34ebc"
 TAIL = (0x005A6258, 0x005A6260, "5601ead32bc60f93d83681b03065f721f9bf77e9a816a242281b86a4d20edd3b")
 TAIL_WORDS = [0x2006E5F0, 0x200004B4]
+
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_atts_write.c"
+CANDIDATE_FUNCTIONS = [
+    "open_cfw_cordio_atts_execute_prepared_write",
+    "open_cfw_cordio_atts_process_write",
+    "open_cfw_cordio_atts_process_prepare_write_request",
+    "open_cfw_cordio_atts_process_execute_write_request",
+]
+CANDIDATE_LEAF_METRICS = [
+    (336684, 206, 1),
+    (336892, 358, 5),
+    (337260, 880, 8),
+    (338140, 200, 11),
+]
 
 CALLERS = {
     "attsExecPrepWrite": [0x005A61FC],
@@ -168,6 +189,84 @@ def analyze(image_path: Path = IMAGE) -> dict:
         if target in interiors and sites:
             raise AuditError("unexpected direct BL into atts_write interior")
 
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves_by_function = {
+        row["function"]: row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == CANDIDATE_SOURCE_PATH
+    }
+    if set(leaves_by_function) != set(CANDIDATE_FUNCTIONS):
+        raise AuditError("ATTS write production leaf inventory changed")
+    source_hash = PINS[ROOT / CANDIDATE_SOURCE_PATH]
+    leaves = []
+    for function, metrics in zip(CANDIDATE_FUNCTIONS, CANDIDATE_LEAF_METRICS):
+        leaf = leaves_by_function[function]
+        actual = (
+            leaf["expected"]["offset"], leaf["expected"]["size"],
+            len(leaf["relocations"]),
+        )
+        if actual != metrics or leaf["source"].get("sha256") != source_hash:
+            raise AuditError(f"ATTS write production leaf changed: {function}")
+        leaves.append(leaf)
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, (function, (name, (start, end, expected))) in enumerate(
+        zip(CANDIDATE_FUNCTIONS, FUNCTIONS.items()), 1
+    ):
+        site = sites.get(f"replace_cordio_atts_write_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"ATTS write production route changed: {name}")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = sum(
+        right["expected"]["offset"]
+        - left["expected"]["offset"] - left["expected"]["size"]
+        for left, right in zip(leaves, leaves[1:])
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (1644, 12, 25):
+        raise AuditError("ATTS write production metrics changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"]
+        != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"]
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256")
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([
+            row for row in override["regions"]
+            if row["name"].startswith("cordio_atts_write_")
+        ]) != 10
+    ):
+        raise AuditError("ATTS write component/manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or sha(PACKAGE.read_bytes())
+        != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("ATTS write package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or sha(FLASH_PLAN.read_bytes())
+        != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("ATTS write flash plan changed")
+
     return {
         "schema_version": 1,
         "module": {
@@ -213,7 +312,18 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "selected_sha256": "8c205dcd4162d5b3e30322bb13dbd552568a5aa62ecddabf7f0a69edad17d7b1",
             "historical_generating_commit_resolved": False, "license": "Apache-2.0",
         },
-        "production": {"source_owned_bytes_added": 0, "stock_bytes_replaced": 0},
+        "production": {
+            "status": "routed",
+            "functions": 4,
+            "stock_bytes_replaced": 1220,
+            "source_owned_bytes_added": compiled,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": 4,
+            "source_only_api": "AttsContinueWriteReq implemented and ARM-compiled; not linked by stock",
+            "hardware_validation": "blocked by unavailable authorized responsive G2/ATT peer evidence",
+        },
     }
 
 

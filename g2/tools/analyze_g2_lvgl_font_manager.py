@@ -9,9 +9,21 @@ import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 IMAGE=ROOT/"blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM=ROOT/"tools/manifests/g2-lvgl-font-manager-function-map.tsv";CL=ROOT/"tools/manifests/g2-lvgl-font-manager-closure.tsv";PM=ROOT/"tools/manifests/g2-lvgl-font-manager-provider-map.tsv"
-PINS={FM:"84321bac79894c7bbe7d59bfdaf05196b9dfe46f0427082b8b43468524cd5f31",CL:"7b46d6404f9998cfdfdf706400da34f8f231f3c4bd133d9a4ee895dc3a82659e",PM:"f46bf7bb0ada18b9554b458ce59fea273ab9da147e9fd744c97ffb0d987b9754"}
+PINS={FM:"84321bac79894c7bbe7d59bfdaf05196b9dfe46f0427082b8b43468524cd5f31",CL:"3c756baf70640ecec6457a1759985475ef523f8796c2555317d0bfbecd7f16be",PM:"f46bf7bb0ada18b9554b458ce59fea273ab9da147e9fd744c97ffb0d987b9754"}
 PHYS=(0x46CAE0,0x46D67C);EASY={0x43CE9E,0x43D0CE,0x43D574};IAR={0x439BE4,0x43C0E4};MSPI={0x46F65E,0x46F674};HEAP={0x474CD2,0x474D16};FT={0x4B1C9C,0x4B1EF6}
 PATH_CELLS={0x46D57C:[0x46CAFE,0x46CB44,0x46CB92,0x46CBE0,0x46CC32,0x46CC94,0x46CD06,0x46CD4A,0x46CE1C,0x46CF14,0x46CF72,0x46CFE4,0x46D048,0x46D092,0x46D0DA,0x46D126,0x46D18C,0x46D206],0x46D620:[0x46D2D8,0x46D366,0x46D3B4,0x46D410,0x46D49C,0x46D4FA,0x46D546]}
+ROUTES=[
+ ("replace_lvgl_font_manager_01","open_cfw_font_manager_create_chain"),
+ ("replace_lvgl_font_manager_02","open_cfw_font_manager_get_font"),
+ ("replace_lvgl_font_manager_03","open_cfw_font_manager_create_single"),
+ ("replace_lvgl_font_manager_04","open_cfw_font_manager_add"),
+ ("replace_lvgl_font_manager_05","open_cfw_font_manager_cleanup_single"),
+ ("replace_lvgl_font_manager_06","open_cfw_font_manager_configure_xip"),
+ ("replace_lvgl_font_manager_07","open_cfw_font_manager_init"),
+ ("replace_lvgl_font_manager_08","open_cfw_font_manager_xip_name"),
+]
+SOURCE="components/apollo_main/core_overlay/lvgl_font_manager.c"
+SOURCE_SHA256="f11f98dd4c2eda815512e3e9b2e23ab7401b7cfdc439f272e69d59b684bbb080"
 def sh(x):return hashlib.sha256(x).hexdigest()
 def cstring(b,a):
  o=a-c.BASE;e=b.find(b'\0',o)
@@ -63,6 +75,13 @@ def analyze(image=IMAGE):
  for cell,refs in PATH_CELLS.items():
   if t.literal_references(b,cell)!=refs:raise c.AuditError("path references changed")
  overlay=json.loads((ROOT/"components/apollo_main/core_overlay/overlay.json").read_text())
- if any("lvgl_font_manager" in x.get("path","").lower() for x in overlay['sources']):raise c.AuditError("unimplemented object routed")
- return {"schema_version":1,"identity":{"image_sha256":c.IMAGE_SHA256,"retained_path":r"app\gui\common\lvgl_font_manager.c","embedded_third_party_definitions":[]},"surface":{"linked_functions":8,"path_anchored_functions":7,"body_bytes":2590,"physical_bytes":2972,"noncode_bytes":382,"reachable_instructions":973,"direct_body_calls":149,"internal_direct_body_calls":9,"external_direct_body_calls":140,"indirect_body_calls":0,"direct_bl_entry_sites":12,"stored_entry_pointers":0,"strict_interior_ingress":0},"behavior":{"four_entry_font_chains":True,"external_xip_font_headers":True,"font_create_delete_lifecycle":True,"mspi_serialized_registration":True,"background_and_foreground_roles":True},"provider_boundary":{"easylogger_calls":125,"iar_dlib_calls":2,"g2_mspi_lock_calls":2,"source_owned_heap_wrapper_calls":9,"lvgl_freetype_adapter_calls":2,"lvgl_commit":"344c7c318047b7348e1be8572a9fd4260c251cfa","freetype_version":"2.9.1","freetype_commit":"86bc8a95056c97a810986434a3f268cbe67f2902","new_version_discriminator":False,"private_generating_commit_recoverable":False},"production":{"production_routed":False}}
+ source_records=[x.get("source") for x in overlay["relocated_leaves"] if x.get("source",{}).get("path")==SOURCE]
+ if len(source_records)!=8 or any(x.get("sha256")!=SOURCE_SHA256 for x in source_records) or sh((ROOT/SOURCE).read_bytes())!=SOURCE_SHA256:raise c.AuditError("font-manager production source changed")
+ sites={x["name"]:x for x in overlay["patch_sites"]};routed=0
+ for (name,target),(a,z) in zip(ROUTES,F):
+  site=sites.get(name)
+  if site is None or site.get("runtime_address")!=a or site.get("target_function")!=target or site.get("branch")!="b_w" or site.get("expected_size")!=z-a or site.get("expected_sha256")!=sh(c._slice(b,a,z)):raise c.AuditError(f"font-manager production route changed: {name}")
+  if target not in overlay["functions"]:raise c.AuditError(f"font-manager target missing: {target}")
+  routed+=z-a
+ return {"schema_version":1,"identity":{"image_sha256":c.IMAGE_SHA256,"retained_path":r"app\gui\common\lvgl_font_manager.c","embedded_third_party_definitions":[]},"surface":{"linked_functions":8,"path_anchored_functions":7,"body_bytes":2590,"physical_bytes":2972,"noncode_bytes":382,"reachable_instructions":973,"direct_body_calls":149,"internal_direct_body_calls":9,"external_direct_body_calls":140,"indirect_body_calls":0,"direct_bl_entry_sites":12,"stored_entry_pointers":0,"strict_interior_ingress":0},"behavior":{"four_entry_font_chains":True,"external_xip_font_headers":True,"font_create_delete_lifecycle":True,"mspi_serialized_registration":True,"background_and_foreground_roles":True},"provider_boundary":{"easylogger_calls":125,"iar_dlib_calls":2,"g2_mspi_lock_calls":2,"source_owned_heap_wrapper_calls":9,"lvgl_freetype_adapter_calls":2,"lvgl_commit":"344c7c318047b7348e1be8572a9fd4260c251cfa","freetype_version":"2.9.1","freetype_commit":"86bc8a95056c97a810986434a3f268cbe67f2902","new_version_discriminator":False,"private_generating_commit_recoverable":False},"production":{"production_routed":True,"source_files":1,"source_functions":8,"compiled_text_bytes":904,"alignment_bytes":10,"strict_relocations":19,"guarded_redirects":len(ROUTES),"routed_stock_bytes":routed,"retained_compatibility_bytes":PHYS[1]-PHYS[0]-routed}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

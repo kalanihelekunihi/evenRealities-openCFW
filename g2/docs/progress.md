@@ -1,6 +1,6 @@
 # openCFW reconstruction progress
 
-Status date: 2026-08-12
+Status date: 2026-08-25
 Compatibility target: official G2 `s200_v2.2.6.10`
 
 This is the concise status index for dependency provenance, byte ownership,
@@ -10,6 +10,38 @@ and controller-segment reconstruction. Detailed evidence remains in
 [`memory-map.md`](memory-map.md).
 The current third-party identity and functional-gap priority is summarized in
 [`research/third-party-utility-gap-priority.md`](research/third-party-utility-gap-priority.md).
+
+## Latest milestone: IAR formatted-input production closure
+
+The complete live formatted-input path is now source-owned C. Eleven new
+Cortex-M55 leaves provide the five ARM-EABI binary64 operations required by
+the parser, a field-width-bounded decimal/hexadecimal `strtod`, scanset
+matching, `vsscanf`/`sscanf`, and the exact IAR soft-PCS ingress adapter. The
+sole live 2,778-byte stock scanf core is guarded and redirected to that
+adapter. Host behavior tests cover integer lengths/bases, strings, scansets,
+suppression, `%n`, decimal/hex/Inf/NaN floating input, and the field-width
+edge where an incomplete exponent must remain unconsumed; the same sources
+compile freestanding for Thumb. Formatted output and dormant Annex-K
+constraint-handler paths remain software work, so the broader IAR
+formatted-I/O cluster is not yet complete.
+
+The application overlay is 404,796 bytes and the installed application ends
+below the authenticated protected update record at `0x007FE000`. The
+4,706,686-byte package rebuild is byte-identical, with 5,863 placed regions,
+two already classified unresolved physical destinations, five container-only
+regions, and six protected regions. No device was accessed or flashed.
+
+## Prior milestone: Cordio HCI event and driver software closure
+
+The clean-room HCI event decoder now implements all 80 inventoried APIs and
+production-routes all 79 linked entries, replacing 6,718 stock bytes with
+23,590 compiled Cortex-M55 bytes plus 30 alignment bytes under 52 strict
+relocations. The exact two-byte scan-timeout no-op is compiled in place; the
+other 78 entries use guarded branches. The adjacent driver implements all 16
+APIs and production-routes the nine hardware-independent entries. Its six
+radio-controller operations remain explicitly blocked on unavailable
+authorized responsive G2/EM9305 physical evidence, with stock retained for
+those live paths.
 
 The fail-closed aggregate [third-party dependency closure audit](research/third-party-dependency-closure-audit.md)
 now reconciles 26 families, 25 selected public source commits/baselines, the
@@ -126,7 +158,11 @@ seams, and made 8/11 functions size-exact under bounded configs. Neither
 matrix produced a raw or strict-normalized IAR match. Timer-module semantic
 identification was 95–98%; the then-current 80–85% aggregate estimate is
 superseded by the aggregate closure below. See the
-[focused timer audit](research/cordio-wsf-timer-source-recovery.md).
+[focused timer audit](research/cordio-wsf-timer-source-recovery.md). The eleven
+timer functions are now production-routed: 11 guarded redirects replace all
+536 stock body bytes with 632 compiled bytes, 14 alignment bytes, and 29 strict
+relocations. The package and flash-plan gates pass; live scheduler/controller
+timing remains blocked by unavailable authorized responsive hardware.
 
 The adjacent WSF OS/queue pass closes 12 OS functions / 532 bytes and six
 linked queue functions / 242 bytes. The stock task is exactly 64 bytes with
@@ -137,9 +173,9 @@ official Ambiq source corroborates the otherwise identical ten-handler
 variant, but the exact G2 definition site is unavailable. Lorelei completed
 234 stock-ABI GCC comparisons in 3.521196588 seconds with zero unresolved
 closure symbols and no raw/strict-normalized match. All 18 bounded functions
-are behaviorally recreated and tested but production-excluded. This tranche
-is 95–98% semantically/source-family identified; overall Cordio remains
-80–85%. See the [WSF OS/queue audit](research/cordio-wsf-os-queue-source-recovery.md).
+are production-routed as 886 compiled bytes plus 14 alignment bytes under 41
+strict relocations. Live ISR/task scheduling, handler ordering, and sleep
+behavior remain hardware-blocked. See the [WSF OS/queue audit](research/cordio-wsf-os-queue-source-recovery.md).
 
 The next WSF buffer/message pass closes another ten functions / 556 bytes.
 Three buffer functions are bounded over 430 bytes; initialized-SRAM recovery
@@ -150,10 +186,8 @@ message definitions / 126 bytes instead have an exact Apache-2.0 Packetcraft
 r19.02 route. Lorelei completed 78 buffer comparisons and 26 closure links in
 3.463 seconds; every link closed, but no raw/strict match occurred. The
 warning seam reduced the best aggregate size gap to 34 bytes and Free is
-within two bytes. All ten functions are behaviorally recreated and tested but
-production-excluded. This tranche was 95–98% semantically/source-family
-identified; the then-current 80–85% aggregate estimate is superseded by the
-aggregate closure below. See the
+within two bytes. All ten functions are production-routed as 696 compiled
+bytes plus 12 alignment bytes under 13 strict relocations. See the
 [buffer/message audit](research/cordio-wsf-buffer-message-source-recovery.md).
 
 The WSF assert/trace pass closes two more linked functions / 208 code bytes.
@@ -163,10 +197,9 @@ sole overflow target and combines the Ambiq debugger-escape loop with a
 downstream EasyLogger hook/reset extension at global `0x2007456C`. Lorelei
 completed 26 comparisons and 13 zero-unresolved links in 2.098 seconds; zero
 raw/strict matches and the pristine assert source's 118-byte size deficit
-independently prove the local augmentation. Both functions have tested,
-production-excluded source, while the proprietary Ambiq files remain oracles
-only. This tranche is 95–98% behavior/source-family identified; overall Cordio
-remains 80–85%. See the
+independently prove the local augmentation. Both functions are
+production-routed as 170 compiled bytes under five strict relocations, while
+the proprietary Ambiq files remain oracles only. See the
 [assert/trace audit](research/cordio-wsf-assert-trace-source-recovery.md).
 
 The remaining FreeRTOS-port census classifies `wsf_efs.c` and `wsf_math.c` as
@@ -182,13 +215,14 @@ identified linked `wstr.c` as the next bounded WSF target. See the
 The linked follow-up closes the two retained `wstr.c` reverse helpers / 118
 bytes with 39 plus two direct callers and no callee, pointer, or interior
 ingress. Both definitions have an exact Apache-2.0 Packetcraft route from
-r19.02 through r20.05c and a tested production-excluded candidate. Lorelei's
+r19.02 through r20.05c and are production-routed as 286 compiled bytes plus
+two alignment bytes. Lorelei's
 26-row matrix linked with zero unresolved symbols in 2.153 seconds; its best
 common `-O1` lane is ten aggregate bytes from stock, with no raw/strict match.
 The WDXS-only `WstrnCpy` is explicitly dead-stripped. See the
 [WSF string-helper audit](research/cordio-wstr-source-recovery.md).
 
-The next ranked Cordio pass closes the ATT client-supported-features module:
+The ATT client-supported-features module is now production-routed:
 ten linked functions / 4,814 code bytes in `[0x0052C6C0,0x0052DA0C)`, plus
 126 bytes of literal/string/data pools. Stock selects Packetcraft
 r20.05--r20.05c semantics, while keeping Ambiq-era API names and adding local
@@ -196,10 +230,14 @@ connId validation and logger/assert expansion. The 13-byte-observable control
 block at `0x20073E04`, three two-byte records, callback/hash offsets, 20 direct
 callers, and pointer/ingress closure are exact. `AttsCsfInit` is dead-stripped
 and supplied by BSS zeroing. Lorelei's two readiness builds close four provider
-seams with zero undefined symbols; broad compiler comparison is deferred until
-the vendor instrumentation seam is modeled. Module identification was 90–95%;
-the then-current 80–85% aggregate estimate is superseded by the aggregate
-closure below, and production ownership was unchanged. See the
+seams with zero undefined symbols. Ten guarded redirects now route 502 compiled
+Cortex-M55 bytes plus 12 alignment bytes under one strict relocation. Host
+tests cover the complete state policy and G2's `connId == 0`
+false/`0x0E`/unaware/no-copy/no-op guards; all ten selectors compile
+independently. Vendor logging expansion is omitted without changing
+state-machine results. Live robust-caching, database-hash, service-changed,
+callback, peer, and controller behavior remains blocked by unavailable
+authorized responsive physical evidence. See the
 [ATT CSF audit](research/cordio-atts-csf-source-recovery.md).
 
 The next public-host tranche closes the complete linked `smp_db.c` module:
@@ -222,9 +260,43 @@ Ambiq/r19 through r20.05c; stock callback event `0x14` selects the r20 ATT
 header ABI. The 24-byte control block, three connection-table pointers, six
 product CCC settings, 23 direct calls, registered callback, and eight indirect
 consumers are closed. Lorelei's two-profile readiness links have zero
-unresolved symbols. Module identification is 95–98%; overall Cordio remains
-80–85% and all bytes remain stock-retained. See the
+unresolved symbols. Fourteen guarded redirects now route 784 compiled
+Cortex-M55 bytes plus eight alignment bytes under fourteen strict relocations.
+Host tests cover allocation, initialization, read/write/range policy,
+change-only callbacks, security levels, clear/free, and product connection
+guards; all fourteen selectors compile independently. Live CCC persistence,
+peer, callback, security-level, and controller behavior remains blocked by
+unavailable authorized responsive physical evidence. See the
 [ATT CCC audit](research/cordio-atts-ccc-source-recovery.md).
+
+The ATT server-write tranche is now production-routed: all four linked
+`atts_write.c` definitions / 1,220 stock body bytes are replaced by 1,644
+compiled Cortex-M55 bytes plus 12 alignment bytes under 25 strict relocations.
+The implementation preserves request/command response asymmetry, callback and
+CCC dispatch, pending-response bearer state, configured prepare limits,
+validate-before-commit execute semantics, cancellation, and the recovered
+fixed-SRAM EATT ABI. The dead-stripped public `AttsContinueWriteReq` is also
+implemented, host-tested, and independently ARM-compiled without claiming a
+stock redirect. The strict component, manifest, deterministic package, flash
+plan, host behavior, analyzer, and all five selector builds are green. Live
+write/prepare/execute traffic, deferred callback completion, ATT peer behavior,
+controller timing, and EM9305 interaction remain blocked by unavailable
+authorized responsive physical evidence. See the
+[ATT write audit](research/cordio-atts-write-source-recovery.md).
+
+The common ATT server-processor tranche is now production-routed: all nine
+`atts_proc.c` definitions / 2,106 stock body bytes are replaced by 1,722
+compiled Cortex-M55 bytes plus 10 alignment bytes under 28 strict relocations.
+The source preserves UUID conversion, group/attribute/range lookup, permission,
+encryption/authentication/authorization policy, the r20 EATT MTU gate,
+find-information, ordinary read, and variable-multiple-read behavior. It also
+retains the authenticated G2 product peer-MTU floor of 247 that differs from
+the public source default. Host behavior, all nine isolated target builds,
+strict routing, component tiling, manifest, deterministic package, flash plan,
+and analyzer gates are green. Live discovery/read traffic, link security state,
+peer interoperability, controller timing, and EM9305 behavior remain blocked
+by unavailable authorized responsive physical evidence. See the
+[ATT processor audit](research/cordio-atts-proc-source-recovery.md).
 
 The ATT client-discovery tranche is also complete: fifteen common
 `attc_disc.c` functions / 2,908 code bytes plus 104 bytes of literal/alignment
@@ -263,6 +335,51 @@ See the [PDU processor](research/cordio-attc-proc-source-recovery.md),
 [client read](research/cordio-attc-read-source-recovery.md), and
 [client write](research/cordio-attc-write-source-recovery.md) audits.
 
+The optional ATT client-write unit is now production-routed. Two guarded
+redirects replace its complete 124-byte linked interval with 144 compiled
+Cortex-M55 bytes plus two alignment bytes under two strict relocations. All
+three dead-stripped allocation, prepare-request, and execute-request helpers
+are maintained and independently target-compiled without being counted as
+stock coverage. Host tests exercise response continuation, value adjustment,
+command encoding, copied and referenced prepare values, execute/cancel flags,
+allocation alignment, ownership transfer, and failure behavior. The canonical
+overlay/component/package sizes are 347,282 / 3,870,678 / 4,649,172 bytes;
+the package SHA-256 is
+`777a059d84671ee04460d7c9cdb9af9ab93ce7eaaced0932b0c254f9f2a53e77`.
+Live ATT peer/controller, continuation, and buffer-lifetime validation remains
+blocked by unavailable authorized responsive G2/EM9305 physical evidence. No
+image was signed, flashed, or installed.
+
+The optional ATT client-read unit is now production-routed as well. Four
+guarded redirects replace all 414 linked stock body bytes with 440 compiled
+Cortex-M55 bytes plus two alignment bytes under four strict relocations. The
+three dead-stripped long-read, multiple-read, and group-type request helpers
+are maintained and independently target-compiled. Host coverage exercises
+ordered, continuing, terminal, and malformed Find By Type responses,
+per-bearer Read Long MTU/offset behavior, and all five request encoders. The
+maintained parser bounds a trailing partial handle pair before decoding it.
+The canonical overlay/component/package sizes are 347,724 / 3,871,120 /
+4,649,614 bytes; the package SHA-256 is
+`a7d2627341cd8603e607a37c19d70ed42f7f5ba501fb6c76826664cb322de06d`.
+Live ATT peer/controller, negotiated-MTU, continuation, and buffer-lifetime
+validation remains blocked by unavailable authorized responsive G2/EM9305
+physical evidence. No image was signed, flashed, or installed.
+
+The mandatory ATT client PDU processor is now production-routed. All fifteen
+linked entries / 1,884 stock body bytes are source-owned as 1,694 compiled
+Cortex-M55 bytes plus 22 alignment bytes under 38 strict relocations. Thirteen
+entries use guarded redirects and the two two-byte no-op leaves use exact
+in-place source copies. The dead-stripped cancel API is also implemented and
+target-compiled. Bounded response dispatch removes the inherited method-16/17
+adjacent-table overrun; one-based connection IDs select on-deck slot
+`connection_id - 1`, and cancel uses authenticated event 19. The canonical
+overlay/component/package sizes are 353,336 / 3,876,732 / 4,655,226 bytes;
+the deterministic package SHA-256 is
+`b10166d4f1c1f91f348c3ee360afb2af1499df59715491a1256a1d0545f548bc`.
+Live ATT/EATT peer, controller, timer, flow-control, and buffer-lifetime
+validation remains blocked by unavailable authorized responsive G2/EM9305
+physical evidence. No image was signed, flashed, or installed.
+
 Optional ATT client signing is conclusively absent. `AttcInit` leaves the
 signing interface null, no later installation exists, and complete
 CMAC/local-CSRK/write-wrapper caller censuses assign every candidate to other
@@ -278,8 +395,14 @@ foreign function. Function definitions are Apache-identical from r19/Ambiq
 through r20.05c, but stock message offset `+8` proves Ambiq's flexible-array
 payload ABI. The two-set SRAM layout, action/interface tables, and every direct
 or registered entry are closed; `DmAdvModeLeg` is dead-stripped. Lorelei's two
-profiles link with zero unresolved symbols. Module identification is 95--98%;
-overall Cordio remains 80--85% and production ownership is unchanged. See the
+profiles link with zero unresolved symbols. All eighteen definitions are now
+maintained and target-compiled. Fourteen guarded redirects and three exact
+two-byte in-place copies replace all 4,396 linked stock body bytes with 948
+compiled bytes plus 26 alignment bytes under 32 strict relocations. Host
+state-machine, HCI completion, callbacks, timers, private events, direct
+advertising, bounds, routing, package, and flash-plan gates pass. Live BLE
+peer/controller, RF, timing, and address-policy validation remains blocked by
+unavailable authorized responsive G2/EM9305 physical evidence. See the
 [legacy advertising audit](research/cordio-dm-adv-leg-source-recovery.md).
 
 The common advertising producer tranche closes nine linked `dm_adv.c`
@@ -288,8 +411,11 @@ R2.4.2/R2.5.1 Apache source matches stock's `len+8` allocation and inline
 payload copy; Packetcraft r19/r20 instead uses an incompatible payload
 pointer. All eleven callers, direct providers, two-set globals, and pointer
 closure are guarded. Six unused APIs are dead-stripped, and both Lorelei
-profiles link with zero unresolved symbols. Module identification is 95--98%;
-overall Cordio remains 80--85% and production ownership is unchanged. See the
+profiles link with zero unresolved symbols. All fifteen definitions now have
+maintained source; nine guarded redirects replace all 562 linked stock body
+bytes with 1,122 compiled bytes plus 20 alignment bytes under 15 strict
+relocations, and the six stripped APIs target-compile. Message/state/event,
+malformed-element, bounds, routing, package, and flash-plan gates pass. See the
 [common advertising audit](research/cordio-dm-adv-source-recovery.md).
 
 The DM connection-manager tranche closes 57 linked functions / 6,216 code
@@ -308,14 +434,15 @@ and production ownership is unchanged. See the
 [DM connection-manager audit](research/cordio-dm-conn-source-recovery.md).
 
 The adjacent DM connection state-machine tranche closes the sole linked
-`dm_conn_sm.c` function / 1,598 code bytes, its 58-byte pool, exact 80-byte
-state table, both callers, all 90 direct logger relocations, and three
-registered action tables. Its five-by-eight table and mask 7 unequivocally
-select Packetcraft r20.05's separated connection-update architecture over
-the thirteen-event r19/Ambiq table. Stock adds vendor diagnostics and an
-action-set bound check, so public Apache source is a semantic/table oracle,
-not exact downstream text. Both Lorelei profiles retain live code and close
-their two provider seams. Production ownership remains unchanged. See the
+`dm_conn_sm.c` dispatcher. One guarded redirect replaces all 1,598 stock body
+bytes with 120 compiled Cortex-M55 bytes under two strict relocations. Its
+exact five-state/eight-event r20 table and 58-byte pool remain authenticated
+retained data. Exhaustive 40-transition host tests cover event masking,
+next-state-before-action order, and null/invalid CCB, action-set, and action
+pointer paths. Component, manifest, deterministic package, and flash-plan
+gates pass. Live controller completion, role-action timing, cancellation,
+disconnect, and paired-temple behavior remains blocked by unavailable
+authorized responsive G2/EM9305 physical evidence. See the
 [DM state-machine audit](research/cordio-dm-conn-sm-source-recovery.md).
 
 The DM local-device tranche closes twelve linked functions / 626 code bytes
@@ -324,8 +451,13 @@ and 46 bytes of literal/alignment data in the complete 672-byte
 provider relocations, the 21-component message ABI, and the retained source
 path are fail-closed. Official Ambiq R4.4.1 source explains the vendor-command
 translator, stale-reset clear, and trace layout; six filter/whitelist APIs are
-dead-stripped. Lorelei's live Os/O1 closures have zero unresolved symbols.
-Production ownership is unchanged. See the
+dead-stripped in stock but remain target-compiled. Twelve guarded redirects
+replace all 626 linked body bytes with 448 compiled Cortex-M55 bytes plus 18
+alignment bytes under nine strict relocations. Host reset/HCI/callback,
+privacy/CTE bridge, allocation, address, whitelist/filter and bounds tests,
+component, manifest, package, and flash-plan gates pass. Live controller
+reset/timing/address/filter/privacy and paired-temple validation remains
+blocked by unavailable authorized responsive G2/EM9305 evidence. See the
 [DM local-device audit](research/cordio-dm-dev-source-recovery.md).
 
 The optional DM device-privacy tranche is now closed as a stock exclusion.
@@ -338,6 +470,11 @@ wrapper. The analyzer therefore records zero linked bytes and eighteen
 source-only functions. Production ownership is unchanged. See the
 [device-privacy exclusion audit](research/cordio-dm-dev-priv-exclusion.md).
 
+Those 18 optional functions are now also maintained and behavior-tested in
+local C and compile for Cortex-M55. The production route count deliberately
+remains zero because installing component 1 would contradict the authenticated
+product configuration.
+
 The DM main-router tranche now closes all sixteen `dm_main.c` functions / 484
 code bytes and the complete 508-byte physical interval. More importantly,
 stock's 90-entry HCI route table, 92-entry callback-size table, and 21-slot
@@ -346,7 +483,14 @@ r19, AmbiqSuite 2.5.1, and vanilla Packetcraft r20 have different dimensions.
 Twenty-nine direct calls, fifteen stored entries, the decoded boot interface
 table, and zero interior ingress are fail-closed. Lorelei preserves dual
 public-r20/R4 Os/O1 lanes with four live zero-unresolved closures; the R4 lane
-is explicitly a hybrid header/config build. Production ownership is unchanged.
+is explicitly a hybrid header/config build. All sixteen definitions are now
+production-owned: fourteen guarded redirects plus two exact two-byte copies
+cover all 484 stock body bytes with 524 compiled Cortex-M55 bytes plus 20
+alignment bytes under two strict relocations. Host router/registration/data/
+privacy/address/event-size/PHY behavior, all selector builds, routing,
+manifest, deterministic package, and flash-plan gates pass. Live
+HCI/controller/peer/timing and paired-temple validation remains blocked by
+unavailable authorized responsive G2/EM9305 physical evidence.
 See the [DM router audit](research/cordio-dm-main-source-recovery.md).
 
 The adjacent DM privacy tranche closes 21 linked `dm_priv.c` functions / 980
@@ -354,8 +498,14 @@ code bytes and the full 1,008-byte physical interval. Its seven-entry main
 action table, two-entry AES action table, and component-6/component-15
 interface installs select the Packetcraft r20.05/Ambiq R4 split architecture.
 Four unused public APIs are dead-stripped; nineteen direct calls, thirteen
-stored entry pointers, and zero interior pointers close ingress. Production
-ownership is unchanged. See the
+stored entry pointers, and zero interior pointers close ingress. All 25 source
+definitions are now maintained and Cortex-M55 compiled. Twenty-one guarded
+redirects replace all 980 stock body bytes with 1,688 compiled bytes plus 20
+alignment bytes under 25 strict relocations; the four dead-stripped APIs are
+source-only build products. Host behavior, exact routing, component, manifest,
+deterministic package, and flash-plan gates pass. Live controller privacy,
+address, RF/timing, and paired-temple validation remains blocked by unavailable
+authorized responsive G2/EM9305 physical evidence. See the
 [DM privacy audit](research/cordio-dm-priv-source-recovery.md).
 
 The adjacent DM security tranche closes eight linked `dm_sec.c` functions /
@@ -378,7 +528,13 @@ code bytes in a 320-byte object and two dead APIs. `DmPhyInit` uses the
 widened 64-bit `HciSetLeSupFeat(0x900, TRUE)` ABI under the task lock, which
 decisively selects Packetcraft r20/Ambiq R4 over r19/AmbiqSuite 2.x. The
 registered interface, five direct calls, callback ABI, and zero interior
-ingress are fail-closed. See the
+ingress are fail-closed. Six guarded redirects now replace all 308 stock body
+bytes with 378 compiled Cortex-M55 bytes plus four alignment bytes under
+eleven strict relocations. Both dead-stripped public APIs target-compile.
+Host HCI/callback/command/init behavior, routing, manifest, deterministic
+package, and flash-plan gates pass. Live controller PHY negotiation,
+peer/RF/timing, and paired-temple validation remains blocked by unavailable
+authorized responsive G2/EM9305 physical evidence. See the
 [DM PHY audit](research/cordio-dm-phy-source-recovery.md).
 
 The slave-security tranche closes all three `dm_sec_slave.c` wrappers / 148
@@ -402,6 +558,12 @@ select r20/R4's separated update architecture. Two direct calls, three action
 pointers, and zero interior ingress are fail-closed. See the
 [DM master-connection audit](research/cordio-dm-conn-master-source-recovery.md).
 
+All six definitions are now maintained and Cortex-M55 compiled. Five guarded
+redirects replace every linked body byte, and the component/package/flash-plan
+contract is pinned. Live controller/L2CAP/privacy/peer/RF and paired-temple
+behavior remains hardware-blocked by unavailable authorized responsive
+evidence.
+
 The legacy-master connection tranche closes all three
 `dm_conn_master_leg.c` functions / 136 code bytes and its 24-byte pool. The
 r20 two-table locked initializer and two-entry main table exactly match stock
@@ -414,6 +576,10 @@ The adjacent legacy-slave tranche closes all five
 four-entry main table and separate two-entry update table are installed under
 the task lock, excluding r19's unlocked six-entry architecture. One direct
 call, four registered pointers, and zero interior ingress are fail-closed.
+All functions are maintained in C and target-compiled; five guarded redirects
+replace every bounded body byte, and component/package/flash-plan ownership is
+pinned. Live controller, peer, RF, and paired-temple behavior remains blocked
+by unavailable authorized responsive hardware.
 See the [legacy-slave audit](research/cordio-dm-conn-slave-leg-source-recovery.md).
 
 The core slave-connection tranche closes five linked `dm_conn_slave.c`
@@ -422,6 +588,12 @@ dead-stripped. The exact two-entry action table, component-14 event `0x73`,
 and `dmConnUpdExecute` route independently select r20/R4. Five direct calls,
 two registered pointers, and zero interior ingress are fail-closed. See the
 [slave-connection audit](research/cordio-dm-conn-slave-source-recovery.md).
+
+All six definitions are now maintained and Cortex-M55 compiled. Five guarded
+redirects replace every linked body byte; host behavior, disjoint route
+namespaces, component tiling, deterministic package, and flash-plan pins are
+green. Live controller/L2CAP/peer/RF and paired-temple behavior remains
+hardware-blocked by unavailable authorized responsive evidence.
 
 The L2CAP slave tranche closes six linked `l2c_slave.c` functions / 1,078
 code bytes in a complete 1,148-byte object; only `L2cDmSigReq` is
@@ -547,7 +719,7 @@ relocation/caller closure are unresolved.
 | Package/controller domain | Current reconstruction state | Approximate provenance identification | Required next evidence |
 |---|---|---:|---|
 | Apollo510 main | Mixed: 142,760 source-owned bytes plus 98,402 generated patch bytes and a 3,424,780-byte retained base | 100% coarse origin accounting for the retained base; named upstream families remain 90–100% individually | The retained base now splits into 130,000 third-party-path, 461,468 first-party/project-path, 675,636 unanchored-function, and 2,157,676 outside-envelope bytes; prioritize the unanchored code and preserve conservative residual labels |
-| Apollo510 bootloader | Mixed: selected littlefs/EasyLogger/Ambiq leaves recreated; remainder retained | 85–90% | Continue source closure without crossing protected secure-loader boundary |
+| Apollo510 bootloader | Mixed: 51 routed littlefs/EasyLogger/Ambiq/S200/runtime functions; 1,529 source-owned B, 2,078 generated patch B, 146,521 retained official B | 85–90% | Continue source closure from the adjacent float/format engine and later runtime/platform-service bodies without crossing the protected secure-loader boundary; physical validation remains unavailable |
 | EM9305 BLE controller | Cut-forward; QP/C 6.5.1, Packetcraft/EM Bleu Bluetooth-5.4 controller, exact compiler, and 54 SDK archive lanes authenticated. Across 875 merged intervals, 1,494 exact functions cover 157,122 bytes (74.504950%); link-order, vector-ABI, and authenticated short-prefix placements raise function-provenance identification to 167,684 bytes (79.513296%). Residual structure is fully partitioned into vectors, alignment, post-text data, and 33,658 unresolved code-or-mixed bytes | 92–95% overall provenance; QP/C 95–100% configuration; exact-function byte coverage 74.504950% | Resolve/recreate the 33,658-byte code-or-mixed queue and modified vendor seams, and obtain licensed authoritative Packetcraft/EM source or retain cut-forward boundaries |
 | Audio codec/DSP | Opaque/cut-forward; proprietary NationalChip image with U-Boot-derived CLI | 25–35% | Resolve both segment destinations and isolate reusable CLI/runtime code |
 | Touch controller | Opaque/cut-forward; vector base inferred | 10–20% | Identify controller SDK/library lineage and complete memory map |
@@ -1296,8 +1468,9 @@ absence of aligned strict-interior pointers close the remaining processors and
 dispatchers. The exact 85-entry layout and retained diagnostic lines select
 the later official AmbiqSuite R4.4.1 source family over R2.5.1's 67-entry
 port. That later import is a proprietary reconstruction oracle, not a
-historical producing-commit or reusable-source claim. Production ownership
-remains zero; see `docs/research/cordio-hci-evt-source-recovery.md`.
+historical producing-commit or reusable-source claim. Separately authored
+clean-room C now production-routes all 79 linked bodies and target-compiles the
+source-only getter; see `docs/research/cordio-hci-evt-source-recovery.md`.
 
 ## Current Ambiq Cordio HCI core increment
 
@@ -1325,9 +1498,18 @@ entry or strict-interior pointer.
 
 The handler's distinct ISO receive branch and the 64-bit LE-feature getter
 independently exclude the 18-definition R2.5.1 source and select the
-20-definition R4-era family. The later import remains a proprietary
-reconstruction oracle, not a historical-commit pin or production source.
-See `docs/research/cordio-hci-core-ps-source-recovery.md`.
+20-definition R4-era family. Packetcraft's public r20.05c dual-chip platform
+behavior is Apache-2.0 and now supplies the reusable behavior source; the
+proprietary Ambiq import remains corroboration only. All 20 definitions are
+implemented over the authenticated G2 offsets. Nine linked entries replace
+all 360 stock body bytes with 514 compiled bytes plus six alignment bytes
+under 13 strict relocations; all eleven source-only getters target-compile.
+Host tests cover initialization, completed-buffer accounting and saturation,
+flow re-enable, RX queueing, timeout/event/ACL/ISO dispatch, callback absence,
+unknown types, and all getter offsets. `make cordio-hci-core-ps-closure` is
+green. Live controller/ISO/RF/timing validation remains blocked by unavailable
+authorized responsive G2/EM9305 evidence. See
+`docs/research/cordio-hci-core-ps-source-recovery.md`.
 
 ## Current Ambiq Cordio HCI transport increment
 
@@ -1340,10 +1522,19 @@ pointer.
 
 The ACL sender returns the packet length or zero, the command sender returns
 success, and neither frees or completes the transmit buffer. Those ownership
-semantics plus the hardened receive length/type checks exclude AmbiqSuite
-R2.5.1 and select the later R4-era source family. The later import remains a
-proprietary behavioral oracle rather than a historical commit pin or
-production source. See `docs/research/cordio-hci-tr-source-recovery.md`.
+semantics plus the receive length/type checks exclude AmbiqSuite R2.5.1 and
+select the later R4-era behavior family. A project-original clean-room C
+implementation now owns all four definitions: the three linked entries replace
+all 524 stock body bytes with 454 compiled bytes under six strict relocations,
+and `hciTrReceivingPacket` target-compiles as the sole source-only definition.
+Host tests cover exact TX ownership, event and ACL assembly, arbitrary
+chunking, back-to-back packets, oversize/invalid/allocation/null failures, and
+atomic rejection-state reset. The maintained source copies no proprietary
+bytes. `make cordio-hci-tr-closure` verifies the source, Cortex-M55 build,
+routes, component, manifest, deterministic package, and flash plan. Live
+controller/RF/timing validation remains blocked by unavailable authorized
+responsive G2/EM9305 evidence. See
+`docs/research/cordio-hci-tr-source-recovery.md`.
 
 ## Current Ambiq Cordio HCI command increment
 
@@ -1359,7 +1550,13 @@ the absence of legitimate stored entry or strict-interior pointers. Its one
 interior-looking word is independently classified as packed non-code data.
 The exact later AmbiqSuite R4.4.1 source inventory is a proprietary
 reconstruction oracle, not a historical commit or reusable-source claim.
-Production ownership remains zero; see
+All 72 command APIs are now maintained in clean-room C. Fifty guarded routes
+replace all 2,654 linked stock bytes with 4,052 compiled Thumb bytes plus 68
+alignment bytes under 106 strict relocations, and all 22 source-only APIs
+target-compile. Host tests cover allocation bounds, queue ownership, transport
+retry, completion credits, timeout recovery, queue draining, reset, standard
+payload families, radio-test V3, and null/length rejection. The command-layer
+software gap is closed; HCI event-port and driver admission remain. See
 `docs/research/cordio-hci-cmd-source-recovery.md`.
 
 ## Current Ambiq Apollo3 HCI-driver increment
@@ -1494,9 +1691,14 @@ Stock's nine 64-byte server CCBs, three-bearer loops, slot-aware timer/message
 parameters, and client-change-awareness flow decisively select the Packetcraft
 r20 EATT architecture over r19/AmbiqSuite 2.x. Packetcraft r20.05--r20.05c and
 the later official AmbiqSuite R4.4.1 import share one exact Apache-2.0 source
-blob. The two zero-copy public wrappers are the only source definitions
-dead-stripped. Production ownership remains zero; see
-`docs/research/cordio-atts-ind-source-recovery.md`.
+blob. Maintained C now owns all thirteen linked entries through guarded
+redirects: 1,602 compiled bytes plus 16 alignment bytes under 51 strict
+relocations replace all 1,552 stock body bytes. Both dead-stripped zero-copy
+wrappers are implemented and target-compiled without inventing linked stock
+coverage. Host state-machine, selector, component, manifest, package, flash-
+plan, and deterministic verification gates are green; live ATT/EATT peer and
+controller validation is blocked by unavailable authorized responsive G2
+evidence. See `docs/research/cordio-atts-ind-source-recovery.md`.
 
 ## Current Cordio ATT server-owner/dispatcher increment
 
@@ -1514,7 +1716,14 @@ processors, method 15 routes to `attsProcValueCnf`, and signed-write method 17
 remains null. Stock also retains the later R4.4.1 ATT data-length hardening
 absent from public r20.05c. The official later import is therefore the exact
 behavioral oracle while Packetcraft r20.05c remains the public ancestry base.
-Production ownership remains zero; see
+Maintained C now owns all seventeen linked entries through guarded redirects:
+2,622 compiled bytes plus 30 alignment bytes under 44 strict relocations
+replace all 2,710 stock body bytes. All four source-only public helpers are
+implemented and target-compiled. Hardened dispatch, CCB, timer, prepared-
+write, database-hash, group-mutation, initialization, component, manifest,
+package, flash-plan, and deterministic gates are green. Live ATT/EATT peer,
+controller, CMAC timing, and EM9305 behavior are blocked by unavailable
+authorized responsive evidence; see
 `docs/research/cordio-atts-main-source-recovery.md`.
 
 ## Current Cordio common ATT server-processor increment
@@ -1611,9 +1820,13 @@ Stock retains the r20 CSF database-hash path and uses the subtraction-safe
 fit-check topology found in the later official AmbiqSuite R4.4.1 source fix
 for IAR high optimization. R4 is the closest behavioral oracle; its later
 import is not claimed as the historical producer. No source definition is
-dead-stripped and no accepted strict-interior ingress survives. Production
-ownership remains zero; see
-`docs/research/cordio-atts-read-source-recovery.md`.
+dead-stripped and no accepted strict-interior ingress survives. Maintained C
+now owns all seven entries through guarded redirects: 2,786 compiled bytes
+plus eight alignment bytes under 44 strict relocations replace all 2,984 stock
+body bytes. Host and selector tests plus component, manifest, package, flash-
+plan, and deterministic verification are green. Live ATT peer/controller
+behavior is blocked by unavailable authorized responsive physical evidence;
+see `docs/research/cordio-atts-read-source-recovery.md`.
 
 ## Current Cordio ATT server-write increment
 
@@ -1628,7 +1841,13 @@ One source API, `AttsContinueWriteReq`, is dead-stripped. Stock can record an
 continuation entry. Twenty-eight decoded outbound calls, one internal helper
 call, and the initializer-stream entry are closed without accepted interior
 ingress. Packetcraft r20.05--r20.05c and the later R4.4.1 import share one
-exact Apache-2.0 source blob. Production ownership remains zero; see
+exact Apache-2.0 source blob. All four linked entries are now guarded-routed to
+1,644 compiled Cortex-M55 bytes plus 12 alignment bytes under 25 strict
+relocations, replacing all 1,220 stock body bytes. The source-only continuation
+API is also implemented and ARM-compiled without inventing stock coverage.
+Host, component, manifest, deterministic-package, flash-plan, and analyzer
+gates are green; physical peer/controller/EM9305 behavior is explicitly
+blocked by unavailable authorized responsive hardware. See
 `docs/research/cordio-atts-write-source-recovery.md`.
 
 ## Current G2 BLE WSF-thread increment
@@ -3001,9 +3220,60 @@ owned gap/pool bytes. Its `/firmware/touch.bin` `FWPK` package and type-3
 record, framed command/reply checksum contract, 32-byte packets, 128-byte
 program blocks, version-gated update sequence, 60 exact-entry calls, and zero
 real strict-interior ingress are pinned. Twelve exact names survive and twenty
-pathless leaves retain semantic labels. Historical source and license remain
-unavailable, so production ownership is zero. See
-`docs/research/g2-service-touch-dfu-recovery.md`.
+pathless leaves retain semantic labels. Historical source remains unavailable,
+but 32 independently authored leaves now replace all 6,430 stock body bytes.
+They compile to 3,134 Thumb bytes plus 38 alignment bytes with 70 strict
+relocations. CRC/framing, FWPK loading, 32/128-byte transfer, version skip and
+force paths, cleanup, all selector builds, component/package/flash-plan, and
+origin-accounting gates pass. Live destructive touch programming, reset,
+version readback, I2C timing, and recovery are blocked because the authorized
+right temple is nonresponsive, the left must remain stock, and no authorized
+controller fixture or golden capture is available. See
+`docs/research/g2-service-touch-dfu-recovery.md`; wider firmware functional
+completeness is not claimed.
+
+## Cordio DM connection manager is production-routed
+
+All 61 public `dm_conn.c` definitions and the adjacent vendor CCB initializer
+are maintained as compilable C. Fifty-five guarded redirects plus two exact
+two-byte in-place copies source-own all 57 linked stock entries / 6,216 body
+bytes. The reviewed build adds 4,540 Thumb bytes and 54 alignment bytes under
+92 strict relocations; five stock-dead-stripped public APIs also compile in all
+target profiles.
+
+The canonical overlay/component/package sizes are 365,448 / 3,888,844 /
+4,667,338 bytes. The 3,807,191-byte flash plan has 5,475 placed, two
+unresolved, five container-only, and six protected regions. Host behavior,
+bounds, stock closure, target compilation, routing, manifest, deterministic
+package, and flash-plan gates pass through `make cordio-dm-conn-closure`.
+Live controller, peer, RF, privacy, timing, idle-state, and paired-temple
+validation is blocked by unavailable authorized responsive G2/EM9305 physical
+evidence. Nothing was signed, installed, or flashed, and wider firmware
+functional completeness is not claimed.
+
+## Cordio L2CAP is production-routed
+
+All twenty linked definitions across `l2c_main.c`, `l2c_master.c`, and
+`l2c_slave.c` now execute compiler-owned C. Nineteen guarded redirects and one
+exact two-byte in-place copy replace all 3,372 bounded stock body bytes with
+1,334 compiled Cortex-M55 bytes plus 22 alignment bytes under 28 strict
+relocations. Source-only `L2cDmSigReq` also target-compiles, while all 67 CoC
+definitions remain positively configuration-excluded/dead-stripped.
+
+Host and isolated target tests cover fixed-CID and arbitrary-CID dispatch,
+signaling, flow control, ACL framing, allocation failure, malformed lengths,
+master/slave connection updates, one-based connection indexing, timer cleanup,
+and callback initialization. The canonical overlay/component/package sizes are
+354,692 / 3,878,088 / 4,656,582 bytes. The 3,501,390-byte flash plan has 5,040
+placed, two unresolved, five container-only, and six protected regions.
+`make cordio-l2c-runtime-closure` passes five tests. No image was signed,
+flashed, or installed.
+
+Live ATT/SMP/signaling exchange, peer/controller flow control, connection-update
+timing, and buffer lifetime cannot be validated because the authorized right
+temple is nonresponsive, the left temple must remain stock, and no responsive
+authorized G2/EM9305 pair or golden capture exists. The L2CAP software gap is
+closed; wider firmware functional completeness is not claimed.
 
 The retained `terminal_pb_msg_handler.c` object is now completely bounded at
 `[0x005E8178,0x005EA224)`: 27 linked functions / 7,688 body bytes plus 676
@@ -3044,6 +3314,21 @@ two-minute automatic stop, 72 exact-entry calls, and zero external
 strict-interior ingress are pinned. Historical source and license remain
 unavailable, so production ownership is zero. See
 `docs/research/g2-imu-icm45608-recovery.md`.
+
+The 53 recovered IMU entry points are now represented by compilable clean-room
+C and production-routed through 52 guarded redirects plus one source-owned
+Thumb callback adapter. The canonical overlay contributes 8,610 IMU wrapper
+bytes and 30 alignment bytes with 83 wrapper relocations; 143 primary TDK/port
+functions contribute another 54,128 bytes, and the source manifest records 143 IMU
+ownership tiles. An immutable 52-file TDK tag-1.1.2 snapshot pins the exact
+stock three-argument transport ABI. Raw accel/gyro transport, source-owned
+reset/identity initialization, FIFO and register acquisition, eDMP/GAF fusion,
+auxiliary magnetometer access, exact AID/B2S RAM-image loading and event
+publication, parsing, transforms, event policy, and CSV capture pass host and
+selector tests. No known IMU software implementation gap remains. Physical
+functional validation is blocked by the nonresponsive
+authorized right temple, the stock-only left temple, and unavailable calibrated
+motion/golden FIFO evidence.
 
 The TinyFrame version boundary is now narrower than behavior-only comparison
 allowed. Ten retained `TF_Error` `__LINE__` arguments select the exact
@@ -3586,8 +3871,26 @@ third-party definition remains in the object.
 
 The aggregate retained-path frontier is now 77 closed / 157 open, with 441
 closed anchors, 227,938 complete-object body bytes, and 248,844 known physical
-bytes. See `docs/research/g2-product-rtos-recovery.md`. Production routing
-remains disabled.
+bytes. See `docs/research/g2-product-rtos-recovery.md`. At that audit point,
+production routing had not yet been enabled.
+
+### Product RTOS software gap promoted to production source
+
+The complete 13-entry product RTOS object is now implemented in
+`components/apollo_main/core_overlay/product_rtos.c`. Thirteen authenticated
+guarded redirects replace all 512 stock function bytes with 444 bytes of
+Cortex-M55 code, 14 bytes of placement alignment, and 19 strict relocations;
+the 36-byte literal/alignment pool remains official and pinned. Host execution
+covers state initialization, null/duplicate/reactivated votes, 32-slot
+exhaustion, exact interrupt-mask restoration, current-thread wrappers,
+deep/normal sleep selection, all three watchdog feeds, and malloc/stack fatal
+paths. All 13 selector-isolated leaves compile as C for Cortex-M55.
+
+The canonical component is 3,855,544 bytes (SHA-256 `df6d3b4d...`), and the
+unsigned EVENOTA package is 4,634,038 bytes (SHA-256 `3953d7a5...`). No image
+was signed, flashed, or installed. Live Apollo510 sleep, watchdog, tickless,
+reset, and fatal behavior remains explicitly blocked by unavailable authorized
+responsive hardware and trace evidence.
 
 ## G2 copied Goodix application-error utility is source-closed
 
@@ -4593,6 +4896,26 @@ direct LVGL or AmbiqSuite calls. The frontier is now 142 closed / 92 open, with
 758 closed anchors, 453,122 complete-object body bytes, and 492,274 known
 physical bytes. See `docs/research/g2-displaydrv-manager-recovery.md`.
 
+The display-driver manager is also production-closed as of 2026-08-25. Its
+nineteen functions compile from five authenticated C files (4,002 compiled
+function bytes), and nineteen guarded redirects cover 2,798 stock bytes while
+retaining 272 compatibility bytes. The exact source/routing analyzer and all
+five host behavior fixture groups pass. Physical ULED/display, lock/timing,
+and power-transition validation is explicitly blocked because no responsive
+authorized G2 pair or golden display trace is available; nothing was signed,
+flashed, or installed.
+
+The adjacent LVGL font-manager software boundary is production-closed as of
+2026-08-25. Eight clean-room C leaves compile to 904 text bytes plus 10
+alignment bytes and replace all 2,590 stock function-body bytes through eight
+guarded redirects and 19 strict relocations. Host tests cover four-entry
+native/FreeType chains, allocation and cleanup failures, ordered fallbacks,
+XIP-header policy, MSPI locking, and background/foreground initialization.
+The external font payloads were not fabricated: their identities and live
+rendering remain blocked by the unavailable golden flash capture and
+responsive authorized display hardware. Nothing was signed, flashed, or
+installed.
+
 `driver\npmx_driver_transplant\src\npmx_main_driver.c` expands from eleven
 anchors / 2,290 bytes to thirty functions / 6,560 body bytes / 7,102 physical
 bytes. Its 72 direct nPMX calls identify 42 linked Nordic entries. The stock
@@ -4772,6 +5095,21 @@ first-party providers; there are zero direct Cordio calls. The frontier is now
 closed anchors, 630,222 complete-object body bytes, and 683,340 known physical
 bytes. See `docs/research/g2-ring-service-dependency-boundary.md`.
 
+The same Ring-service object is now production-routed from eighteen
+selector-isolated clean-room C leaves. Eighteen guarded redirects replace all
+2,412 stock body bytes with 952 compiled Thumb bytes plus eighteen alignment
+bytes; 38 strict relocations bind reviewed source seams. Host tests cover frame
+construction, validation, touch deduplication, battery and wear reports, and
+all recovered command IDs. Canonical overlay/component/package sizes are
+255,686 / 3,779,082 / 4,557,576 bytes with SHA-256 values
+`2def566dbf70594c89471066a7cd17f6d1fa94196f65ff48237385396e9cfd19`,
+`7228edb650fe39bda63480691fe94ed59d0807ca5e30846d35ec08e134e08350`,
+and `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
+Live paired-G2 behavior remains blocked: the authorized right temple is
+nonresponsive, the left must remain stock, and no authorized responsive pair
+or golden Ring capture is available. `thread_ring.c` remains the Ring stack's
+software gap.
+
 `platform\input\service_input_manager.c` is now closed as ten functions /
 2,242 body bytes / 2,490 physical bytes. Five path anchors expand through five
 adjacent helpers; 103 external calls terminate at admitted EasyLogger,
@@ -4911,6 +5249,19 @@ frontier is now 172 closed / 62 open, with 1,058 closed anchors, 673,206
 complete-object body bytes, and 731,512 known physical bytes. See
 `docs/research/g2-thread-ring-dependency-boundary.md`.
 
+The Thread Ring object is now production-routed from all seventeen
+selector-isolated source leaves. Fifteen guarded redirects replace 2,370 stock
+body bytes with 894 compiled Thumb bytes plus 22 generated alignment bytes;
+72 strict relocations bind reviewed providers. Two unreachable two-byte empty
+hook stubs and the 258-byte pool remain as 262 authenticated compatibility
+bytes, while the source entry calls both source hooks directly. Host lifecycle,
+queue, dispatch, delayed-event, touch/pair, record, and allocation-failure tests
+and every strict Cortex-M55 selector build pass. Canonical overlay/component/
+package sizes are 255,686 / 3,779,082 / 4,557,576 bytes. Physical peer behavior
+is blocked because the authorized right temple is nonresponsive, the left must
+remain stock, and no responsive authorized pair or golden capture is available;
+there is no remaining known Thread Ring software implementation gap.
+
 `framework\fw_event_loop\fw_event_loop.c` is now closed as six functions /
 1,806 body bytes / 2,012 physical bytes. The 108-byte worker missed by Ghidra
 completes the object. Its 104 external direct calls are eighty admitted
@@ -4931,6 +5282,16 @@ nanopb-facade, and one closed BLE-central call, with no direct Cordio or nanopb
 edge. The frontier is now 174 closed / 60 open, with 1,074 closed anchors,
 676,840 complete-object body bytes, and 735,580 known physical bytes. See
 `docs/research/g2-ring-connect-policy-dependency-boundary.md`.
+
+The same Ring-connect-policy object is now production-routed through fifteen
+guarded entry redirects to a complete clean-room C implementation. Its reviewed
+Apple build contributes 570 text bytes plus 14 alignment bytes and 24 strict
+relocations; all 1,828 stock body bytes are source-owned while the 228-byte
+literal pool remains authenticated official data. Host state-machine tests,
+all fifteen strict Cortex-M55 selectors, the dedicated analyzer, component,
+package, flash-plan, origin-accounting, and first-party-frontier gates pass.
+Live role switching, WSF timing, reconnect, and peer notification behavior are
+blocked by unavailable authorized responsive paired hardware.
 
 `app\gui\SystemClose\systemClose.c` is now closed as twenty functions / 4,960
 body bytes / 5,368 physical bytes. Fifteen functions missed by Ghidra restore
@@ -5156,6 +5517,22 @@ providers. Explicit negative evidence records no embedded sensor-fusion
 library body. The frontier is now 203 closed / 31 open. See
 `docs/research/g2-sensor-hub-dependency-boundary.md`.
 
+The Sensor Hub object is now also production-routed. Thirty guarded redirects
+replace 4,024 callable stock bytes with 1,602 selector-isolated Thumb bytes and
+36 alignment bytes; 106 strict relocations bind reviewed CMSIS, sensor-driver,
+NVDB, OTA, translation, LVGL, and sibling seams. The two-byte empty hook plus
+382 bytes of authenticated pools remain as 384 compatibility bytes. Host tests
+cover queue/thread/timer lifecycle, bounded message dispatch, role and
+open/close policy, ALS polling, IMU modes and calibration, mutual exclusion,
+and calibration UI feedback; all 31 strict Cortex-M55 selectors pass. Canonical
+overlay/component/package sizes are 255,686 / 3,779,082 / 4,557,576 bytes; the
+2,879,088-byte flash plan has 4,141 placed, two unresolved, five container-only,
+and six protected regions. Live sensor, timing, calibration, and display
+behavior is explicitly blocked because the authorized right temple is
+nonresponsive, the left must remain stock, and no responsive authorized sensor
+path or golden IMU/ALS trace is available. Wider firmware gaps remain, so
+functional completeness is not claimed.
+
 `platform\threads\thread_input.c` is now closed as 23 functions / 2,090
 body bytes / 2,296 physical bytes. Its ten exact CMSIS-FreeRTOS v10.5.1
 calls span osThreadNew/Terminate, osThreadFlagsSet/Wait, osDelay, and
@@ -5241,6 +5618,16 @@ five functions / 1,298 body bytes / 1,410 physical bytes, identified by
 eleven path references and ten `[box_uart_mgr]` tags covering the
 charging-box UART unpack/CRC/flush error paths. The frontier is now 216
 closed / 18 open. See `docs/research/g2-box-uart-mgr-recovery.md`.
+
+That object is now also production source-routed. Five guarded redirects replace
+1,296 callable stock bytes with 514 selector-isolated Cortex-M55 text bytes,
+four alignment bytes, and 21 strict relocations; the two-byte leading alignment
+and 112-byte pool/data tail remain official. Host tests cover framing,
+checksum rejection, receive-slot rotation, lifecycle, response, and failure
+paths. Canonical overlay/component/package sizes are 332,666 / 3,856,062 /
+4,634,556 bytes. Live case-UART electrical and interoperability validation is
+blocked by unavailable authorized responsive temple/case evidence; no image
+was signed or flashed.
 
 The zero-anchor `app\gui\EvenAI\even_ai.c` object is now closed as seven
 functions / 3,466 body bytes / 3,646 physical bytes: a detached 42-byte
@@ -6204,6 +6591,52 @@ the only authorized right temple is nonresponsive and the left temple must
 remain stock. The OTA-service software gap is closed; wider firmware
 functional completeness is not claimed.
 
+## GX8002 codec-host service is production-routed
+
+All twenty-six callable entries in `platform/audio/service_codec_host.c` are
+now implemented by clean-room `service_codec_host.c`. Twenty-six guarded
+redirects replace all 7,318 authenticated stock function bytes. The target
+build emits 4,262 Thumb text bytes plus 38 runtime alignment bytes with 111
+strict relocations, while 1,314 authenticated literal-pool and alignment bytes
+remain official.
+
+The host oracle exercises BUXX framing, both CRC layers, malformed lengths,
+allocation failure and release, UART init/read/write/close paths, three retries,
+version, beamforming, wakeup, microphone state/gain, DMIC, I2S, fixed one-bit
+delay, wrapper status checks, and three-byte voice-event bounds. Every selector
+also compiles under the reviewed Cortex-M55 flags. The canonical
+overlay/component/package sizes are 244,992 / 3,768,388 / 4,546,882 bytes; the
+flash plan is 2,642,970 bytes with 3,795 placed and two unresolved regions.
+
+No image was signed or flashed. Live UART3/GX8002 command, audio, DMIC, I2S,
+and event evidence remains blocked because the authorized right temple is
+nonresponsive, the left temple must remain stock, and no responsive authorized
+pair or golden codec/UART capture exists. This software gap is closed; wider
+firmware functional completeness is not claimed.
+
+## GX8002 codec-DFU service is production-routed
+
+All sixteen callable entries in `platform/audio/service_codec_dfu.c` are now
+implemented by clean-room `service_codec_dfu.c`. Sixteen guarded redirects
+replace all 9,052 authenticated stock function bytes. The target build emits
+3,390 Thumb text bytes plus 24 runtime alignment bytes with 71 strict
+relocations; 916 authenticated literal-pool and alignment bytes remain
+official.
+
+The host oracle covers strict FWPK parsing, required boot/firmware records,
+bounds, CRC and cleanup failures, both bootloader stages and their exact wire
+bytes, the 1-Mbaud transition, 8-KiB `serialdown` flow control and result
+tokens, full DFU cleanup, and the same-version skip/cache path. All sixteen
+selectors compile under the reviewed Cortex-M55 flags. The canonical
+overlay/component/package sizes are 248,406 / 3,771,802 / 4,550,296 bytes; the
+flash plan has 3,840 placed and two unresolved evidence-only regions.
+
+No image was signed or flashed. Live destructive codec upgrade, UART timing,
+reboot, and post-flash boot evidence remains blocked because the authorized
+right temple is nonresponsive, the left temple must remain stock, and no
+responsive authorized pair or golden codec/UART capture exists. This software
+gap is closed; wider firmware functional completeness is not claimed.
+
 ## Codec UART lifecycle is production-routed
 
 Both callable entries in `platform/audio/service_codec_porting.c` are now
@@ -6319,3 +6752,417 @@ unresolved, five container-only, and six protected regions. Physical
 persistence, recovery, and schema compatibility remain blocked by unavailable
 authorized responsive G2 hardware and a golden `NVdb` capture. Wider firmware
 functional completeness is not claimed.
+
+## ALS driver is production-routed
+
+All 38 callable entries in `driver\sensor\als\als.c` are now implemented by
+clean-room `als.c`. Thirty-eight guarded redirects replace all 3,858 stock
+function bytes. The selector-isolated Cortex-M55 build emits 2,216 Thumb text
+bytes, a 48-byte brightness-curve closure, 30 alignment bytes, and 82 strict
+relocations while retaining 374 authenticated literal/alignment bytes.
+
+Host tests cover the OPT3007 ID/configuration sequence and lux conversion,
+five- and twenty-sample windows, pitch rejection, curve buckets, Q10 scaling
+and learning, extreme-dark policy, brightness synchronization, manual lockout,
+timer states, and open/close behavior. Canonical overlay/component/package
+sizes are 257,980 / 3,781,376 / 4,559,870 bytes; the 2,943,327-byte flash plan
+has 4,239 placed, two unresolved, five container-only, and six protected
+regions. No image was signed or flashed. Live sensor-bus, calibrated-lux,
+display-response, and paired-temple evidence is blocked because the authorized
+right temple is nonresponsive, the left temple must remain stock, and no
+golden OPT3007 trace is available. Wider firmware functional completeness is
+not claimed.
+
+## Health UI page is production-routed
+
+All twelve callable entries in `app/gui/health/ui_health_page.c` are now
+implemented by clean-room C. Twelve guarded redirects replace all 9,414 stock
+body bytes while 640 compatibility bytes remain official. The isolated target
+build emits 3,978 Thumb text bytes, 328 authenticated string bytes, and ten
+alignment bytes with 269 strict relocations.
+
+Behavioral tests cover live health-metric formatting, goal progress, two-page
+indicators, animated switching, deferred FIFO ordering, touch-coordinate
+forwarding, refresh, common data, minimize, and teardown. Canonical
+overlay/component/package sizes are 330,776 / 3,854,172 / 4,632,666 bytes; the
+3,067,205-byte flash plan contains 4,421 placed, two unresolved, five
+container-only, and six protected regions.
+
+No image was signed or flashed. Live paired display/input validation is
+blocked because the authorized right temple is nonresponsive, the left temple
+must remain stock, and no responsive authorized pair or golden health-page UI
+trace is available. The health-page software gap is closed; wider firmware
+functional completeness is not claimed.
+
+## Touch sensing, gestures, and ACT/ALR/WOT policy are source-complete
+
+The authenticated six-word/channel MSC loop and its maximum reduction now
+compile from freestanding Cortex-M0+ C alongside all four observed power-state
+transitions, left/right swipe, long press, five-fast-click, and saturating
+calibration policy. Seven focused evidence, behavior, and target-build gates
+are green.
+
+Raw MSCLP/noise/timing/sleep/wake validation still requires a responsive
+authorized controller and golden traces, so the shipped touch application is
+retained. No device was accessed and wider firmware completeness is not
+claimed.
+
+## Cordio application framework is source-routed across every bounded anchor (2026-08-26)
+
+The remaining 25 AmbiqSuite/G2 application-framework anchors now compile from
+maintained C in four new runtime modules. Core/UI/server owns seven entries
+(488 compiled B / 10 relocations replacing 3,816 stock B), master owns four
+(262 B / 6 relocations replacing 1,522 B), slave owns three (698 B / 25
+relocations replacing 1,944 B), and discovery owns eleven (2,064 B / 38
+relocations replacing 6,186 B). Host behavior tests cover state transitions,
+bounds, parser progression, bond/privacy decisions, connection handling, and
+completion; every isolated Cortex-M55 selector compiles with `-Werror`.
+
+Together with the existing 22-function MRAM database and 14-function legacy
+cluster, the framework now production-owns 61 distinct functions / 29,870
+stock body bytes. All 50 authenticated source-path anchors / 29,110 anchored
+bytes are routed, leaving zero bounded application-framework anchors. The five
+application runtime modules total 4,460 compiled bytes under 108 strict
+relocations.
+
+Canonical overlay/component/package identities are 424,732 / 3,948,128 /
+4,726,622 bytes with SHA-256
+`9f0dd0742bac903da275993e19c135a2508070a8baf4c462fb3d170a0a1272d9`,
+`e3cfa30e77a5053d302aa3bc569cad39937d57c524c8e2e681923b70ad60b3a7`,
+and `ecc49cd5b184fce9a6a25f71532eba7d1ee33ee566b131ec1b97b0a9536287d9`;
+the package rebuild is byte-identical. No image was signed, flashed, or
+installed. Live scan, advertising, connection, controller, concurrency, and
+paired-temple validation remains blocked because the authorized right G2 is
+nonresponsive and the left must remain stock. This closes the bounded
+framework software gap only; wider firmware completeness is not claimed.
+
+## Touch-controller command/report protocol is source-complete
+
+The shipped PSoC 4000T I2C command/report layer now compiles as eight
+freestanding Cortex-M0+ APIs. The implementation covers RX bounds, all nine
+slots with seven recovered bodies and two fail-closed resident targets,
+replies, sensor/event reports, baseline persistence, long-press configuration,
+attention timing state, FIFO descriptors, power bounds, and callback-only DFU
+handoff. Seven focused gates are green.
+
+Production still retains the shipped touch prefix. Resident flash at
+`>=0x8680` is unavailable, and live I2C/IRQ/GPIO/EEPROM/sleep/DFU validation
+requires a responsive authorized temple. No device was accessed and wider
+firmware completeness is not claimed.
+
+## Charging-case UART/update protocol is source-complete
+
+The recovered case-side frame, checksum, retry, update-offer, nested-chunk,
+and dual-bank OTA contracts now compile as eight freestanding Cortex-M0+ C
+APIs. Nine focused gates cover malformed/truncated frames, checksum mutation,
+big-endian image sums, offers and chunks, exact retry behavior, erase retry,
+serial-window copy ordering, verification, result notification, and bank swap.
+
+All erase/program/option-byte/reset work is callback-only, and the official
+case payload remains packaged. Live promotion is blocked until an authorized
+case, UART capture, and backups of all four serial-number windows are
+available. No device was accessed and wider firmware completeness is not
+claimed.
+
+## CmBacktrace fault path is source-complete with a physical validation block
+
+The authenticated MIT compatibility snapshot now target-compiles all six
+CmBacktrace APIs for Cortex-M55 using the recovered FreeRTOS/English/M33-class
+configuration. A maintained naked C entry shim compiles to the exact register
+contract required by the upstream handler: `r0=lr`, `r1=sp`, call the fault
+decoder, and trap on unexpected return. The closure pins the six exports, all
+platform seams, the 786-byte stock fault body, and the historical exception-
+frame behavior.
+
+The production HardFault vector remains stock. Promotion requires deliberate
+fault injection on an authorized responsive G2; that evidence is unavailable
+because the right temple is nonresponsive and the left remains stock. No image
+was signed, flashed, or installed. Wider firmware functional completeness is
+not claimed.
+
+## Cordio ATT client core and discovery are production-routed
+
+All 21 `attc_main.c` definitions and all 18 `attc_disc.c` definitions now have
+compilable source. Twenty core guarded redirects replace 3,540 stock body bytes
+with 2,258 compiled Cortex-M55 bytes plus 12 alignment bytes under 61 strict
+relocations. Fifteen discovery redirects replace 2,908 stock body bytes with
+1,610 compiled bytes plus 16 alignment bytes under 18 strict relocations. The
+four dead-stripped public definitions remain source-owned and target-compile.
+
+The implementation covers serialized and continuing requests, prepared writes,
+MTU, PDU/control/sign callbacks, connection lifecycle, cancellation, timeout,
+service/characteristic/descriptor discovery, configuration, and malformed
+response handling. Bounds hardening includes one-based connection/on-deck
+indexing; the PDU procedure cancel event is corrected to authenticated value 19.
+
+The canonical overlay/component/package sizes are 353,336 / 3,876,732 /
+4,655,226 bytes; the 3,457,178-byte flash plan has 4,977 placed, two unresolved,
+five container-only, and six protected regions. The aggregate ATT/WSF gate
+passes 80 tests with one explicit unavailable-archive skip. No image was signed,
+flashed, or installed. Live ATT peer/controller/timer/discovery validation is
+blocked because the authorized right temple is nonresponsive, the left temple
+must remain stock, and no responsive authorized G2/EM9305 pair or golden trace
+exists. These two software gaps are closed; wider firmware functional
+completeness is not claimed.
+
+## Cordio common HCI core is production-routed
+
+All 24 common-core definitions now have maintained Apache-2.0/G2-ABI C.
+Twenty-two guarded redirects replace all 1,964 authenticated stock function
+bytes with 3,690 compiled Thumb bytes plus 26 alignment bytes under 50 strict
+relocations; both source-only APIs target-compile. Host tests cover connection
+and CIS lifecycle, ACL queueing/fragmentation/completion, transport refusal,
+partial-header and overlong L2CAP reassembly, reset draining, 64-bit feature
+state, maximum-RX policy, and validated watermarks.
+
+The promotion/manifest prefix collision between `hci_core` and `hci_core_ps`
+was fixed by most-specific ownership, and all nine platform-shim routes were
+restored and regression-gated. Canonical overlay/component/package identities
+are 375,186 / 3,898,582 / 4,677,076 bytes with SHA-256 `8c05945a…a3c3`,
+`8dcb804c…8598`, and `e4579c12…b049`; the 3,937,595-byte flash plan hashes to
+`15a2fac0…e92` and contains 5,668 placed, two unresolved, five container-only,
+and six protected regions. No image was signed or flashed. Live controller
+ACL/event/ISO, reset timing, RF, and peer evidence remains blocked by
+unavailable authorized responsive G2/EM9305 hardware. The common-core software
+gap is closed; wider HCI and firmware functional completeness is not claimed.
+
+## Cordio vendor reset/NVDS sequence is production-routed
+
+All eight vendor-sequence definitions now compile from clean-room C. Four
+guarded redirects replace all 546 authenticated linked bytes with 862 compiled
+Thumb bytes and six alignment bytes under 23 strict relocations; the four
+source-only hooks target-compile as fail-closed no-ops. Behavioral tests cover
+the exact Reset → NVDS → RF power → event-mask/capability sequence, feature
+gates, state extraction, extension fallback, and four-random completion.
+
+Canonical overlay/component/package identities are 375,186 / 3,898,582 /
+4,677,076 bytes with SHA-256 `8c05945a…a3c3`, `8dcb804c…8598`, and
+`e4579c12…b049`. The 3,937,595-byte flash plan hashes to `15a2fac0…e92` and
+contains 5,668 placed, two unresolved, five container-only, and six protected
+regions. No image was signed or flashed. Live reset, address, NVDS, RF-power,
+timing, and controller evidence is blocked by unavailable authorized responsive
+G2/EM9305 hardware. This software slice is closed; wider HCI and firmware
+functional completeness is not claimed.
+
+## IAR formatted output is production-routed
+
+The sole 3,256-byte IAR printf core is now SHA-guarded and redirected from all
+four unchanged stock wrappers to four maintained Cortex-M55 leaves: a 3,512-byte
+freestanding formatter, 50-byte writer bridge, 84-byte validated variadic
+adapter, and 14-byte soft-PCS ingress. The implementation closes the reachable
+integer, pointer, string, `%n`, decimal/exponential/general float, `%a/%A`, IAR
+`q`/`L`, and `%PV`/`%pV` behaviors. Every exact stock wrapper supplies
+`secure=0`; nonzero mode fails closed, so Annex-K has no production ingress.
+
+The canonical overlay/component/package identities are 408,458 / 3,931,854 /
+4,710,348 bytes with SHA-256 `22a9e111…8c18`, `8e217faf…2763`, and
+`fab29936…baee`. The 4,071,802-byte flash plan hashes to `fd12c956…983d` and
+contains 5,864 placed, two unresolved, five container-only, and six protected
+regions. Host semantics, freestanding target compilation, 11 exact engine
+relocations, full core redirect, manifest tiling, and complete image identity
+are gated by `make iar-format-output-closure`. No image was signed, flashed, or
+installed. Live writer, termination, stream, and float-rounding evidence is
+blocked because the authorized right temple is nonresponsive and the left must
+remain stock. The formatted-output software gap is closed; wider firmware
+functional completeness is not claimed.
+
+## AmbiqSuite ANCC profile is production-routed
+
+All 21 recovered ANCC entries now compile from maintained C and are guarded by
+exact stock-span redirects. A portable dependency-free core implements the
+1,372-byte G2 SRAM ABI, 64-entry update-first/reverse-pop list, all three ANCS
+control-point commands, strict 61-byte app-ID limit, validated notification
+source, and fragmented 512-byte data-source parser. The G2 adapter adds the
+message scheduler, role/OTA/EFS/timestamp gate, product notification
+projection, whitelist decision, dual-glasses sync, discovery, and WSF event
+dispatch. Eleven thousand seven hundred sixty compiled bytes under 69 strict
+relocations replace all 3,712 stock body bytes.
+
+Tests cover exact commands, list saturation/update/removal, malformed lengths,
+overflow reset, single-byte and every-split fragmentation, the distinct
+one-app/eight-notification completion rules, product policy, event dispatch,
+and all 21 isolated Cortex-M55 builds. The canonical overlay/component/package
+identities are 420,232 / 3,943,628 / 4,722,122 bytes with SHA-256
+`7e0a198a…de8d`, `cb584519…51cb`, and `39f1132a…a374`. The 4,105,447-byte
+flash plan hashes to `e9432043…ee33` and contains 5,911 placed, two unresolved,
+five container-only, and six protected regions. No image was signed, flashed,
+or installed. Live ANCS discovery, CCC, control-point actions, controller
+timing, product sync, and dual-temple behavior are blocked because the
+authorized right temple is nonresponsive and the left must remain stock. The
+ANCC software gap is closed; wider firmware functional completeness is not
+claimed.
+
+## Cordio application-framework legacy master/slave cluster is production-routed
+
+All 14 linked legacy master/slave entries now compile from maintained
+AmbiqSuite-derived C and are guarded across the complete 1,406-byte stock
+cluster. The 948 compiled bytes and 29 strict relocations preserve the fixed
+G2 master/slave control blocks, configuration-pointer cells, stored callback
+entry values, scan/connect API, advertising data/type/start/stop behavior, and
+the G2-only WSF retry policy for transitions through extended advertising.
+Host tests cover every state, callback, clamp, directed restart, set-stop
+success, and 200/100 ms retry branch; all 14 isolated Cortex-M55 selectors
+compile with `-Werror`.
+
+The framework audit now reconciles prior work as well: all 22 anchored MRAM
+application-database functions were already source-routed. The current total
+is therefore 36 distinct functions / 16,402 stock body bytes routed, leaving
+25 anchors / 13,468 bytes across app UI, master, server, slave, discovery, and
+main as explicit software gaps. Canonical overlay/component/package identities
+are 421,196 / 3,944,592 / 4,723,086 bytes with SHA-256 `a065d198…629a`,
+`5b012836…3c5d`, and `d29b25c0…db27`. The 4,132,536-byte flash plan hashes to
+`0f649619…4afe` and contains 5,948 placed, two unresolved, five container-only,
+and six protected regions. No image was signed, flashed, or installed. Live
+scan, advertising, connection, controller-transition, concurrency, and paired
+temple evidence is blocked because the authorized right G2 is nonresponsive
+and the left must remain stock. Framework and firmware completeness are not
+claimed.
+
+## Apollo box-detect service is production-routed (2026-08-26)
+
+The complete `service_box_detect.c` state machine now compiles from maintained
+C. A refreshed authenticated-image audit corrected two ten-byte CMSIS timer
+callbacks previously counted as pool data, bringing the closed object to 34
+functions / 3,584 body bytes with 328 retained literal/data bytes. The service
+preserves both timers, the fixed local/case SRAM state, effective-state
+intersection, force-out suppression, display transitions, ring reconnect,
+device-manager events, and eight-byte glasses-case synchronization.
+
+All 34 guarded entries route to 1,626 compiled text bytes plus 36 alignment
+bytes under 77 strict relocations. Six host behavior tests and every isolated
+Cortex-M55 selector pass with `-Werror`. Canonical overlay/component/package
+identities are 426,394 / 3,949,790 / 4,728,284 bytes with SHA-256
+`4b39c8a836154fada2b452be5f7de25c76541ed3d3cc8685571ff5d73cbfd999`,
+`0548bcfe565e675ee2883961bdead6e6441b593fca755278b637ffd908e0b32c`,
+and `c7c5e02c2e3ce6d1fc4fbed7fd7a06b0e01a47cf00e8dd4e040c098ca2755a86`.
+The package rebuild is byte-identical with 6,124 placed and two unresolved
+regions. No image was signed, flashed, or installed. Live case/box electrical,
+timer/concurrency, display, ring-reconnect, and state-machine validation is
+blocked by unavailable authorized hardware; wider firmware completeness is
+not claimed.
+
+## S200 product startup/main is production-routed (2026-08-26)
+
+A refreshed authenticated-image audit corrected the stale second function
+entry from `0x5CDB88` to `0x5CDBAC`; the former address is data. The resulting
+six-function object contains 1,468 executable bytes and 62 retained
+literal/data bytes. Maintained C now preserves the two LVGL callbacks, widget
+construction, ordered platform initialization, reset-reason priority and
+brown-out status clear, release registration, product-RTOS initialization,
+SRAM startup hand-off, and terminal main-thread loop. Diagnostics are omitted.
+
+All six source entries pass host semantics and isolated Cortex-M55 `-Werror`
+compilation. They route to 584 compiled text bytes plus four alignment bytes
+under 47 strict relocations. Canonical overlay/component/package identities
+are 426,982 / 3,950,378 / 4,728,872 bytes with SHA-256
+`20be6b6564d35dcaa5d4b0e6e6db659e93b7ebc287085bc5b263b8b6ccb5b4fd`,
+`5e92895a86a57ece34100c494e8ec99132d20e2567734b9e4c9285c0f152fa8a`,
+and `8c7bd2469ac367b6b2139798ae68d7d08cf49f79e17f8c6fc9fd0fd47cb02eba`.
+The pinned rebuild is byte-identical with 6,141 placed and two unresolved
+regions. No image was signed, flashed, or installed. Live startup,
+reset-controller, clock/power, LVGL, and task hand-off validation is blocked by
+unavailable authorized physical evidence; wider firmware completeness is not
+claimed.
+
+## Cordio security API is production-routed (2026-08-26)
+
+The former weakest-grounded “first-party Even cryptographic backend” row is
+resolved: the authenticated live surface is Packetcraft Cordio r20.05c
+`sec_api`, not a separate identified Even backend. Maintained Apache-2.0 C now
+owns all 20 service entries / 1,392 stock body bytes while preserving 46
+literal/alignment bytes and the HCI/controller primitive boundary. Random-ring
+refill, AES queue completion, CMAC framing, token allocation, and ECC byte order
+and completion behavior are implemented.
+
+All 20 isolated Cortex-M55 selectors and host behavior tests pass with
+`-Werror`. Production routing emits 1,952 text bytes plus 16 alignment bytes
+under 65 strict relocations. Canonical overlay/component/package identities are
+428,950 / 3,952,346 / 4,730,840 bytes with SHA-256
+`0a6b9fe566a2452cd9720c2db22eb43e530c31b76996d05541fa7f24ea9ee745`,
+`dc578472f06af2d499b9cb771fc185df4f739a05de558098088b56da9a5e4ce0`,
+and `d77d88162f777a6c9889d1813323a836d1dc140fe7488009fe485ed787d8fe70`.
+The 4,299,871-byte flash plan hashes to
+`6820a0dc5b6be70fdca78144fdb39d56a9f898b7b0b832c8d76b18cef33608f6`;
+the package replay is byte-identical with 6,193 placed and two unresolved
+regions. No image was signed, flashed, or installed. Live controller,
+concurrency, timing, and paired-temple validation is explicitly blocked by
+unavailable responsive authorized right G2/EM9305 physical evidence; the left
+remains stock and firmware-wide completeness is not claimed.
+
+## QP/C 6.5.1 source and license boundary is closed (2026-08-26)
+
+The official Quantum Leaps commit
+`416dcec8820b9cdb5827497e645d0d9375db53c6` is now vendored as the bounded
+EM9305 QP/C 6.5.1 source snapshot. Its GPL-3.0-or-later option is compatible
+with openCFW; every imported file and release macro is hash-pinned. Eight
+portable QEP/QF/QK translation units compile with the local host compiler under
+the recovered 16-priority, two-pool, zero-tick-rate, 16-bit signal/event/pool,
+8-bit queue, and saved-critical-state ABI. Interrupt and ISR-context behavior
+remain explicit external providers.
+
+This does not yet production-route the 3,052-byte EM9305 cluster. The current
+host has neither the stock MetaWare T-2022.09 compiler nor a reviewed
+`arc-elf32-gcc`; Apple clang has no ARC backend and the local Docker daemon is
+unavailable. `make qpc-snapshot` therefore reports
+`blocked_unavailable_reviewed_arc_compiler` after passing the host source gate.
+After an ARC compile/link/record pipeline exists, live QK scheduling,
+critical-section, sleep, controller, and radio timing still requires authorized
+responsive right-temple/EM9305 evidence. The stock controller blob remains the
+package provider and firmware-wide completeness is not claimed.
+
+## S200 bootloader redirect initialization is production-routed (2026-08-26)
+
+The complete 88-byte `product/s200/bootloader/config/redirect.c`
+`redirect_init` entry now routes to clean-room C. It preserves both ordered
+`osMutexNew(NULL)` calls, the two SRAM handle publications, post-allocation
+failure checking, exact return values, and authenticated EasyLogger identity,
+levels, source lines, and messages. Adjacent IAR `FILE` wrappers remain outside
+this bounded closure.
+
+Canonical Cortex-M55 output contributes 132 text bytes and a 143-byte
+diagnostic string closure under 12 strict relocations. The complete bootloader
+now also production-routes the Arm EABI byte-fill and forward-copy entries
+through relocation-free C leaves; the adjacent six-caller bounded comparison
+is now source-owned as well. The adjacent three-caller reject-set and accept-
+set string-span entries are source-owned too, as is the adjacent six-caller
+reflected CRC-32 updater, sole-caller SRAM-word setter, and nine-function
+numeric/format-primitive runtime through `0x00415AB6`. It contains 51 routed
+functions and accounts for 1,529 source-owned bytes, 2,078 generated patch
+bytes, eight alignment bytes, and 146,521 retained official bytes. The
+1,536-byte overlay and 150,136-byte provider hash to
+`6349a7c29d08cab96c499c53ef3527ecc0569cf03be9bb38e412de96e0564273`
+and `c210163056368efdd4acaefa5a952a2a720b39a41b4519203b6ce10f0020639d`.
+Apple clang 21 and Homebrew clang 22.1.8 profiles preserve the reviewed
+layout/relocation graph, with profile-specific binary hashes.
+
+Host semantics, isolated builds, exact stock replacement, manifest ownership,
+and the fail-closed analyzer pass offline. No image was signed, packaged,
+flashed, or installed. Live boot, mutex, failure-log, and IAR stream
+serialization evidence is blocked by unavailable authorized responsive
+hardware; the larger bootloader remains a software gap and firmware-wide
+completeness is not claimed.
+
+The final deployment replay produced a byte-identical 4,731,714-byte Apple
+package (`47f05f01…1fe`) with 6,234 placed and two unresolved regions. The accumulated
+Linux-profile gap was also closed by compiling every currently registered
+Apollo-main leaf with Homebrew clang 22.1.8 and recording the resulting
+204,960-byte overlay / 3,728,356-byte provider. Its complete unsigned package
+is 4,507,724 bytes (`3b0b9f9b…2860b`) with 3,312 placed and the same two
+unresolved boundaries. This is reproducible deployment evidence, not a
+hardware-validation claim.
+
+## Bootloader numeric runtime is production-routed (2026-08-26)
+
+The adjacent numeric and format-primitive entries at
+`[0x00415844,0x00415AB6)` now route to nine clean-room C leaves. Their 626
+stock bytes and 19 direct caller edges are authenticated. Apple clang emits
+424 Thumb bytes with three strict internal relocations and no external runtime
+dependency; Homebrew clang reproduces the reviewed ABI. Host tests cover
+arithmetic, parsing, decimal/hex output, case selection, nullable destinations
+and strings, and repeat-count behavior.
+
+Software closure is complete for this numeric tranche. Live boot,
+formatting/parsing, and caller-path evidence remains explicitly blocked by the
+absence of an authorized responsive G2 right temple. The adjacent float/format
+engine and remaining 146,521 retained bootloader bytes remain software gaps;
+firmware-wide completeness is not claimed.

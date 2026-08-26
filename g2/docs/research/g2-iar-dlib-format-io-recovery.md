@@ -1,10 +1,13 @@
 # IAR DLIB formatted-I/O bounded audit
 
 Scope: official G2 `2.2.6.10` Apollo-main image. Status: bounded audit
-complete for all twelve `iar-dlib` formatted-I/O cluster units; one unit
-already production-recreated, eight units clean-room recreation candidates
-with explicit admission conditions, three units retained as bounded licensed
-runtime. No device or flash operation is performed.
+complete for all twelve `iar-dlib` formatted-I/O cluster units. The
+production-reachable non-secure formatted-input and formatted-output routes
+are now implemented and routed through source-owned C. Annex-K behavior is not
+implemented, but exhaustive wrapper recovery proves that no production wrapper
+supplies a secure flag; both adapters fail closed on a nonzero flag. Physical
+execution remains blocked by unavailable authorized responsive hardware. No
+device or flash operation is performed.
 
 This audit closes follow-up frontier #3 of the
 [Apollo unanchored-function provenance census](g2-apollo-unanchored-census.md)
@@ -36,6 +39,37 @@ The bounded audit refines that identification into twelve exact units:
 | `strtod_engine` | `[0x00542C20,0x00542D0C)` | 236 | topology, medium | 1 / 1 / 0 | licensed-retention |
 | `hexfloat_scanner` | `[0x00585410,0x005855E2)` | 466 | string-signature, high | 2 / 1 / 1 | clean-room-recreate (conditional) |
 | `default_output_printf_wrapper` | `[0x00595A34,0x00595A56)` | 34 | topology, medium | 2 / 2 / 0 | clean-room-recreate (conditional) |
+
+### Production update: formatted input
+
+The table records the original provider decision at audit time. It is
+superseded for the live non-secure input graph by the
+[formatted-input source closure](g2-iar-format-input-source-closure.md): the
+stock `scanf_core` is now guarded and redirected to a 12-byte soft-PCS
+adapter, which enters a source-owned `vsscanf`/bounded-`strtod` engine. The
+scanset candidate is integrated as the production scanset leaf. Five
+source-owned ARM-EABI double helpers close the freestanding target link.
+
+The already redirected string wrapper is the sole scanf-core ingress and
+always supplies `secure = 0`; consequently the stock scanf core, its string
+helper, its internal `strtod`/hex-float route, and its constraint paths are
+not reachable on that production graph. This is not a claim that Annex-K
+`scanf_s` semantics have been implemented. Eleven exact leaves, their strict
+relocations, the 2,778-byte redirect guard, the full component/package build,
+and the flash plan are enforced by `make iar-format-input-closure`.
+
+### Production update: formatted output
+
+The [formatted-output source closure](g2-iar-format-output-source-closure.md)
+supersedes the original retention decision for the live output graph. All four
+exact stock wrappers remain in place, preserving their state, termination, and
+return contracts, but their sole 3,256-byte core is guarded and redirected to
+a source-owned soft-PCS ingress, writer bridge, and maintained freestanding
+formatter. The route implements the stock-reachable integer, floating,
+hexadecimal-floating, IAR `q`/`L`, `%n`, and recursive-descriptor behavior.
+All four wrappers pass `secure = 0`; the adapter rejects nonzero secure mode.
+The four strict leaves, component/package image, and flash plan are enforced by
+`make iar-format-output-closure`.
 
 Raw ingress is the image-wide BL/B.W scan (257 sites total, all BL; zero
 B.W).  "Verified" sites sit inside a corpus function whose decompilation
@@ -106,7 +140,7 @@ the core.  Recovered contracts:
 - **`default_output_printf_wrapper`** (`0x00595A34`): `vprintf`-family
   15-instruction shim; installs the stream writer at `0x005FA008`
   (forwards to the low-level I/O sea at `0x005F9FA4`, returns state or 0 on
-  short write) and passes `secure=1`.
+  short write) and passes `secure=0`.
 - **`scanf_core`** (`0x004D1638`): DLIB scanf scanner engine —
   `(reader_callback, cursor, format, arguments, secure)` — materializing
   four `scanf_s` diagnostics and PIC-referencing the floating-point
@@ -238,20 +272,15 @@ both reviewed toolchain profiles, and a SHA-guarded full-span redirect —
 its two call sites inside the retained `scanf_string_helper` also pin the
 stock callback ABI.
 
-## What remains before production admission
+## Remaining validation and provenance work
 
-1. Wrapper A/B, unbounded wrapper, constraint dispatcher: candidate source,
-   Unicorn differential qualification, dual-toolchain section pins,
-   guarded redirects (per the memory/math precedent).
-2. Scanset matcher: the integration gates above; behavioral qualification
-   is complete.
-3. Scanf string helper and default-output wrapper: their conditional leaves
-   (`strchr`/`memchr`/ctype, stream writer) must first be bounded out of
-   the rejected oversized envelopes.
-4. The three retained cores: no production work until the DLIB helper sea
-   inside the oversized envelopes is bounded (census frontier #7); exact
-   EWARM release identification remains independently open
-   (20% per the runtime census).
+The reachable formatted-I/O software graph is closed. All exact input and
+output wrappers pass `secure = 0`; therefore Annex-K `scanf_s`/`printf_s`
+constraint paths have no production ingress and both source adapters fail
+closed if that invariant changes. Physical wrapper/call-site execution is
+blocked by the nonresponsive authorized right temple and the requirement that
+the left remain stock. Exact EWARM release identification remains independent
+provenance-only work and is not a linked functional gap.
 
 ## Reproduction
 
@@ -287,8 +316,8 @@ string references, and provider decision.
   census envelopes because every unit's boundary context, string island,
   and inline data window is pinned byte-for-byte.
 - The scanset candidate is qualified against stock behavior over the
-  deterministic vector stream, not yet over target-compiled sections; the
-  production gates above still apply.
+  deterministic vector stream and is now target-compiled and routed as part
+  of the formatted-input closure.
 - Provider decisions are justified by the existing recreation precedent and
   the bounded reachability argument; they are not a legal determination
   about DLIB licensing, which the project-level ownership model already

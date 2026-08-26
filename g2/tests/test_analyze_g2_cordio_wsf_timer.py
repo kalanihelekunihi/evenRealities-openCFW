@@ -72,7 +72,7 @@ class CordioWsfTimerTests(unittest.TestCase):
         )
         self.assertEqual(self.report["abi"]["globals"]["queue"], 0x200741B0)
 
-    def test_lineage_is_split_and_candidate_is_not_production(self) -> None:
+    def test_lineage_is_split_and_candidate_is_production_routed(self) -> None:
         lineage = self.report["lineage"]
         self.assertEqual(
             lineage["packetcraft_r19_02"]["commit"],
@@ -93,11 +93,24 @@ class CordioWsfTimerTests(unittest.TestCase):
         )
         self.assertEqual(lineage["ambiqsuite"]["mapped_functions"], 11)
         self.assertEqual(self.report["strings"]["update_name"], "WsfTimerUpdateTicks")
-        self.assertEqual(self.report["candidate"]["production"], "excluded")
+        self.assertEqual(self.report["candidate"]["production"], "routed")
         self.assertEqual(len(self.report["candidate"]["functions"]), 11)
         self.assertEqual(
             self.report["candidate"]["behaviorally_recreated_stock_function_bytes"],
             536,
+        )
+        self.assertEqual(
+            tuple(
+                self.report["candidate"][key]
+                for key in (
+                    "compiled_text_bytes",
+                    "alignment_bytes",
+                    "strict_relocations",
+                    "guarded_redirects",
+                    "retained_literal_table_bytes",
+                )
+            ),
+            (632, 14, 29, 11, 36),
         )
         self.assertEqual(self.report["compiler_matrix"]["rows"], 8)
         self.assertEqual(self.report["compiler_matrix"]["raw_matches"], 0)
@@ -316,17 +329,20 @@ class CordioWsfTimerTests(unittest.TestCase):
             )
             subprocess.run([str(binary)], check=True)
 
-    def test_candidate_is_absent_from_production_inputs(self) -> None:
+    def test_candidate_is_present_in_apollo_production_inputs(self) -> None:
         needle = "runtime_cordio_wsf_timer_candidate"
-        for relative in (
-            "components/apollo_main/core_overlay/build_component.py",
-            "components/apollo_main/core_overlay/overlay.json",
-            "components/apollo_main/ring_gesture/build_component.py",
-            "components/apollo_main/ring_gesture/overlay.json",
-            "components/bootloader/core_overlay/build_component.py",
-            "components/bootloader/core_overlay/overlay.json",
-        ):
-            self.assertNotIn(needle, (ROOT / relative).read_text(encoding="utf-8"))
+        self.assertIn(
+            needle,
+            (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text(
+                encoding="utf-8"
+            ),
+        )
+        self.assertIn(
+            "cordio_wsf_timer_01_source_replacement",
+            (ROOT / "manifests/g2-2.2.6.10-core-source.json").read_text(
+                encoding="utf-8"
+            ),
+        )
 
     @unittest.skipUnless(
         (AMBIQ_ARCHIVE_ROOT / "AmbiqSuite-R2.4.2.zip").is_file()

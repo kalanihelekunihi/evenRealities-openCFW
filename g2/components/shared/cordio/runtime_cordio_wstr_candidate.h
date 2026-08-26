@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
- * Production-excluded ABI for the two linked G2 Cordio WSF string helpers.
+ * Production-routed ABI for the two linked G2 Cordio WSF string helpers.
  */
 
 #ifndef OPEN_CFW_RUNTIME_CORDIO_WSTR_CANDIDATE_H

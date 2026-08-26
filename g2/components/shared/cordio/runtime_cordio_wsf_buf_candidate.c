@@ -1,23 +1,46 @@
 /*
  * SPDX-License-Identifier: GPL-3.0-only
  *
- * Production-excluded clean-room behavioral reconstruction of the G2 Cordio
- * WSF buffer-pool implementation. Proprietary upstream text is not copied.
+ * Production-routed clean-room behavioral reconstruction of the three linked
+ * G2 Cordio WSF buffer-pool functions. Proprietary upstream text is not copied.
  */
 
 #include "runtime_cordio_wsf_buf_candidate.h"
 
 #include <stdbool.h>
 
+#if !defined(OPEN_CFW_WSF_BUF_INIT_ONLY) && \
+    !defined(OPEN_CFW_WSF_BUF_ALLOCATE_ONLY) && \
+    !defined(OPEN_CFW_WSF_BUF_FREE_ONLY)
+#define OPEN_CFW_WSF_BUF_BUILD_ALL 1
+#endif
+
+#ifdef OPEN_CFW_WSF_BUF_PRODUCTION
+#define OPEN_CFW_WSF_BUFFER_MEMORY \
+    (*(struct open_cfw_cordio_wsf_buffer_block_candidate **)0x20074EECU)
+#define OPEN_CFW_WSF_BUFFER_MEMORY_LENGTH (*(uint16_t *)0x20074F4AU)
+#define OPEN_CFW_WSF_BUFFER_POOL_COUNT (*(uint8_t *)0x20075044U)
+#else
+#define OPEN_CFW_WSF_BUFFER_MEMORY \
+    open_cfw_cordio_wsf_buffer_memory_candidate
+#define OPEN_CFW_WSF_BUFFER_MEMORY_LENGTH \
+    open_cfw_cordio_wsf_buffer_memory_length_candidate
+#define OPEN_CFW_WSF_BUFFER_POOL_COUNT \
+    open_cfw_cordio_wsf_buffer_pool_count_candidate
+#endif
+
+#if defined(OPEN_CFW_WSF_BUF_BUILD_ALL) || \
+    defined(OPEN_CFW_WSF_BUF_INIT_ONLY)
 static uintptr_t open_cfw_cordio_wsf_buffer_end_candidate(
     uint16_t memory_length
 )
 {
-    return (uintptr_t)open_cfw_cordio_wsf_buffer_memory_candidate
+    return (uintptr_t)OPEN_CFW_WSF_BUFFER_MEMORY
         + ((uint16_t)(memory_length / OPEN_CFW_CORDIO_WSF_BUFFER_ALIGNMENT)
             * OPEN_CFW_CORDIO_WSF_BUFFER_ALIGNMENT);
 }
 
+__attribute__((used, noinline))
 uint16_t open_cfw_cordio_wsf_buffer_init_candidate(
     uint16_t memory_length,
     uint8_t *memory,
@@ -34,13 +57,13 @@ uint16_t open_cfw_cordio_wsf_buffer_init_candidate(
     uint8_t remaining;
     uint8_t buffers;
 
-    open_cfw_cordio_wsf_buffer_memory_candidate =
+    OPEN_CFW_WSF_BUFFER_MEMORY =
         (struct open_cfw_cordio_wsf_buffer_block_candidate *)memory;
     pool = (struct open_cfw_cordio_wsf_buffer_pool_candidate *)memory;
     start = (struct open_cfw_cordio_wsf_buffer_block_candidate *)(
         pool + pool_count
     );
-    open_cfw_cordio_wsf_buffer_pool_count_candidate = pool_count;
+    OPEN_CFW_WSF_BUFFER_POOL_COUNT = pool_count;
     remaining = pool_count;
     end = open_cfw_cordio_wsf_buffer_end_candidate(memory_length);
 
@@ -87,20 +110,24 @@ uint16_t open_cfw_cordio_wsf_buffer_init_candidate(
         pool++;
     }
 
-    open_cfw_cordio_wsf_buffer_memory_length_candidate = (uint16_t)(
+    OPEN_CFW_WSF_BUFFER_MEMORY_LENGTH = (uint16_t)(
         (uintptr_t)start
-        - (uintptr_t)open_cfw_cordio_wsf_buffer_memory_candidate
+        - (uintptr_t)OPEN_CFW_WSF_BUFFER_MEMORY
     );
-    return open_cfw_cordio_wsf_buffer_memory_length_candidate;
+    return OPEN_CFW_WSF_BUFFER_MEMORY_LENGTH;
 }
+#endif
 
+#if defined(OPEN_CFW_WSF_BUF_BUILD_ALL) || \
+    defined(OPEN_CFW_WSF_BUF_ALLOCATE_ONLY)
+__attribute__((used, noinline))
 void *open_cfw_cordio_wsf_buffer_allocate_candidate(uint16_t length)
 {
     struct open_cfw_cordio_wsf_buffer_pool_candidate *pool =
         (struct open_cfw_cordio_wsf_buffer_pool_candidate *)
-            open_cfw_cordio_wsf_buffer_memory_candidate;
+            OPEN_CFW_WSF_BUFFER_MEMORY;
     struct open_cfw_cordio_wsf_buffer_block_candidate *buffer;
-    uint8_t remaining = open_cfw_cordio_wsf_buffer_pool_count_candidate;
+    uint8_t remaining = OPEN_CFW_WSF_BUFFER_POOL_COUNT;
 
     while (remaining > 0U) {
         if (length <= pool->descriptor.length) {
@@ -118,17 +145,23 @@ void *open_cfw_cordio_wsf_buffer_allocate_candidate(uint16_t length)
         remaining--;
     }
 
+#ifndef OPEN_CFW_WSF_BUF_PRODUCTION
     open_cfw_cordio_wsf_buffer_allocation_failure_candidate(length);
+#endif
     return NULL;
 }
+#endif
 
+#if defined(OPEN_CFW_WSF_BUF_BUILD_ALL) || \
+    defined(OPEN_CFW_WSF_BUF_FREE_ONLY)
+__attribute__((used, noinline))
 void open_cfw_cordio_wsf_buffer_free_candidate(void *buffer)
 {
     struct open_cfw_cordio_wsf_buffer_pool_candidate *pool =
         (struct open_cfw_cordio_wsf_buffer_pool_candidate *)
-            open_cfw_cordio_wsf_buffer_memory_candidate;
+            OPEN_CFW_WSF_BUFFER_MEMORY;
     struct open_cfw_cordio_wsf_buffer_block_candidate *block = buffer;
-    uint8_t remaining = open_cfw_cordio_wsf_buffer_pool_count_candidate;
+    uint8_t remaining = OPEN_CFW_WSF_BUFFER_POOL_COUNT;
 
     pool += remaining;
     while (remaining > 0U) {
@@ -144,7 +177,9 @@ void open_cfw_cordio_wsf_buffer_free_candidate(void *buffer)
         remaining--;
     }
 }
+#endif
 
+#ifdef OPEN_CFW_WSF_BUF_BUILD_ALL
 uint8_t *open_cfw_cordio_wsf_buffer_allocation_stats_candidate(void)
 {
     return NULL;
@@ -152,7 +187,7 @@ uint8_t *open_cfw_cordio_wsf_buffer_allocation_stats_candidate(void)
 
 uint8_t open_cfw_cordio_wsf_buffer_number_of_pools_candidate(void)
 {
-    return open_cfw_cordio_wsf_buffer_pool_count_candidate;
+    return OPEN_CFW_WSF_BUFFER_POOL_COUNT;
 }
 
 void open_cfw_cordio_wsf_buffer_pool_stats_candidate(
@@ -162,9 +197,9 @@ void open_cfw_cordio_wsf_buffer_pool_stats_candidate(
 {
     struct open_cfw_cordio_wsf_buffer_pool_candidate *pools =
         (struct open_cfw_cordio_wsf_buffer_pool_candidate *)
-            open_cfw_cordio_wsf_buffer_memory_candidate;
+            OPEN_CFW_WSF_BUFFER_MEMORY;
 
-    if (pool_id >= open_cfw_cordio_wsf_buffer_pool_count_candidate) {
+    if (pool_id >= OPEN_CFW_WSF_BUFFER_POOL_COUNT) {
         stats->buffer_size = 0U;
         return;
     }
@@ -183,3 +218,4 @@ void open_cfw_cordio_wsf_buffer_diagnostics_register_candidate(
 {
     (void)callback;
 }
+#endif

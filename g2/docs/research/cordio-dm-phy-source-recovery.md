@@ -48,6 +48,24 @@ python3 tools/analyze_g2_cordio_dm_phy.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production still cuts these bytes forward: source replacement and generated
-ownership are both zero. The next bounded task is a fail-closed inclusion
-census for the three-function `dm_sec_slave.c`, followed by `dm_sec_master.c`.
+## Production admission
+
+`runtime_cordio_dm_phy.c` implements all eight public/source definitions.
+Six guarded redirects replace all 308 linked stock body bytes with 378
+compiled Cortex-M55 bytes plus four alignment bytes under eleven strict
+relocations. The dead-stripped `DmReadPhy` and `DmSetDefaultPhy` paths also
+compile in isolated target profiles without claiming stock coverage.
+
+Host tests cover all three HCI completions and translated indications,
+callback payload fields, missing connection controls, null events/callbacks,
+read/default/set command forwarding, lock balance, component-9 installation,
+and the widened `0x900` feature-mask call. Full and all eight isolated target
+profiles compile with warnings as errors. Exact routing, component ownership,
+manifest tiling, deterministic package, and flash-plan gates pass.
+
+The canonical overlay/component/package sizes are 358,320 / 3,881,716 /
+4,660,210 bytes. The 3,627,834-byte flash plan has 5,218 placed, two
+unresolved, five container-only, and six protected regions. No image was
+signed, flashed, or installed. Live controller PHY negotiation, peer/RF/
+timing behavior, and paired-temple interoperability remain blocked by
+unavailable authorized responsive G2/EM9305 physical evidence.

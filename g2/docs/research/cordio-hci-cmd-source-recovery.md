@@ -1,6 +1,6 @@
 # Ambiq Cordio HCI command recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Current closure
@@ -64,3 +64,29 @@ pins that manifest, provenance, aggregate closure, every linked body, the
 physical interval, literal island, direct-call digests, and pointer
 classification. Its focused regression test keeps the 50/22 inventory,
 queue ABI, and proprietary-source boundary fail-closed.
+
+## Production ownership
+
+All 72 APIs are now maintained as project-original clean-room C in
+`runtime_cordio_hci_cmd.c`. Fifty guarded routes replace every one of the
+2,654 authenticated linked stock bytes. The selector-isolated Cortex-M55 build
+emits 4,052 text bytes plus 68 alignment bytes under 106 strict relocations;
+all 22 source-only APIs are present in the same translation unit and
+target-compile. The 14-byte authenticated alignment/literal island remains
+separately classified and is not executable stock ownership.
+
+Host tests prove the 255-byte allocation bound, queue-before-transport
+ownership, retry behavior, completion credit restoration, timeout recovery,
+queue draining, reset construction, no-parameter opcode inventory, standard
+payload encoding, fixed radio-test V3 shape, and null/length rejection.
+`make cordio-hci-cmd-core-closure` pins all 50 routes, 91 generated manifest
+regions, 72 target symbols, the deterministic package, and the flash plan.
+No proprietary source or object bytes were copied into the maintained C.
+
+The current canonical overlay/component/package sizes are 375,186 / 3,898,582
+/ 4,677,076 bytes with SHA-256 `8c05945a…a3c3`, `8dcb804c…8598`, and
+`e4579c12…b049`. The 3,937,595-byte flash plan hashes to `15a2fac0…e92` and
+contains 5,668 placed, two unresolved, five container-only, and six protected
+regions. Nothing was signed or flashed. Live controller timing, reset, and RF
+behavior remains blocked by unavailable authorized responsive G2/EM9305
+physical evidence.

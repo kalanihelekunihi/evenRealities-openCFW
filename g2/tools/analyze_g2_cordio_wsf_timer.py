@@ -31,6 +31,11 @@ AMBIQ_PROVENANCE = ROOT / "tools" / "manifests" / "ambiqsuite-cordio-wsf-timer-p
 AMBIQ_FUNCTION_MAP = ROOT / "tools" / "manifests" / "ambiqsuite-cordio-wsf-timer-function-map.tsv"
 CURRENT11_CONFIG_SUMMARY = ROOT / "tools" / "manifests" / "readiness-cordio-wsf-timer-current11-config-summary.tsv"
 CURRENT11_BEST_SIZE = ROOT / "tools" / "manifests" / "readiness-cordio-wsf-timer-current11-best-size.tsv"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 
 RELATIVE_PATH = r"third_party\cordio\wsf\sources\port\freertos\wsf_timer.c"
 PATH_RUN = 0x006DF034
@@ -41,8 +46,8 @@ MODULE_SHA256 = "e410a5b1c5e5d7a475ba75fcefecd99015c4a3e77e2fdec841ec124167cd045
 DISPATCHER_START = 0x0052B9D0
 DISPATCHER_END = 0x0052BAB8
 DISPATCHER_SHA256 = "49ba08ce0c35eb58c098babd1ad0e4d68c303c67bf8e2543be552511732474d8"
-CANDIDATE_SOURCE_SHA256 = "def199a7179981092894a10627a243c121c7cf221fd35b6ecd9423e1cf600223"
-CANDIDATE_HEADER_SHA256 = "86ff13950babe599ee73e5cb9d6eea133179ee1c0c2c8499205eb5e452b3e0b9"
+CANDIDATE_SOURCE_SHA256 = "4c6f474b45afa721c5c70233f4139195add611e908b0207b0bb13569fca6f9fc"
+CANDIDATE_HEADER_SHA256 = "7648aa3450f9976fbdcaed4e474f70a9ac65d1620c5411c57d9ab29e6f25cdb6"
 LORELEI_MATRIX_SHA256 = "5609187015274a97cb734c6f47106e3fa9f65d05ee0873c10f4eebab60054323"
 AMBIQ_PROVENANCE_SHA256 = "e5bd4f8800b3e1045ac4f9219adc7fa3281093b47263f72b3305704f508bea9a"
 AMBIQ_FUNCTION_MAP_SHA256 = "e06c07aeb4766d4c6c4ac0168572f96c21957d2f85365a700f977e57e77e265e"
@@ -61,6 +66,20 @@ FUNCTIONS = [
     (0x0052A51A, 0x0052A542, "WsfTimerNextExpiration", "AmbiqSuite 2.5.1 exact mapping plus Packetcraft r19.02 oracle"),
     (0x0052A542, 0x0052A574, "WsfTimerServiceExpired", "AmbiqSuite 2.5.1 exact mapping plus Packetcraft oracle"),
     (0x0052A574, 0x0052A614, "WsfTimerUpdateTicks", "AmbiqSuite 2.5.1 exact source mapping"),
+]
+
+PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_wsf_timer_remove_candidate",
+    "open_cfw_cordio_wsf_timer_insert_candidate",
+    "open_cfw_cordio_wsf_timer_callback_candidate",
+    "open_cfw_cordio_wsf_timer_init_candidate",
+    "open_cfw_cordio_wsf_timer_start_sec_candidate",
+    "open_cfw_cordio_wsf_timer_start_ms_candidate",
+    "open_cfw_cordio_wsf_timer_stop_candidate",
+    "open_cfw_cordio_wsf_timer_update_candidate",
+    "open_cfw_cordio_wsf_timer_next_expiration_candidate",
+    "open_cfw_cordio_wsf_timer_service_expired_candidate",
+    "open_cfw_cordio_wsf_timer_update_ticks_candidate",
 ]
 
 EXPECTED_CALLERS = {
@@ -387,6 +406,84 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
     }:
         raise AuditError("Lorelei current-11 best-size gaps changed")
 
+    source_path = CANDIDATE_SOURCE.relative_to(ROOT).as_posix()
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    source_leaves = [
+        item for item in overlay["relocated_leaves"]
+        if item.get("source", {}).get("path") == source_path
+    ]
+    if len(source_leaves) != 11 or any(
+        item.get("source", {}).get("sha256") != CANDIDATE_SOURCE_SHA256
+        for item in source_leaves
+    ):
+        raise AuditError("WSF timer production source inventory changed")
+    sites = {item["name"]: item for item in overlay["patch_sites"]}
+    for index, ((start, end, _stock, _identity), function) in enumerate(
+        zip(FUNCTIONS, PRODUCTION_FUNCTIONS), 1
+    ):
+        site = sites.get(f"replace_cordio_wsf_timer_{index:02d}")
+        if (
+            site is None
+            or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("branch") != "b_w"
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != _sha256(
+                blob[start - base:end - base]
+            )
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"WSF timer production route {index} changed")
+    compiled = sum(item["expected"]["size"] for item in source_leaves)
+    alignment = sum(
+        source_leaves[index + 1]["expected"]["offset"]
+        - source_leaves[index]["expected"]["offset"]
+        - source_leaves[index]["expected"]["size"]
+        for index in range(len(source_leaves) - 1)
+    )
+    alignment += source_leaves[0]["expected"]["offset"] - 332666
+    relocations = sum(len(item["relocations"]) for item in source_leaves)
+    if (compiled, alignment, relocations) != (632, 14, 29):
+        raise AuditError("WSF timer production metrics changed")
+
+    report = json.loads(BUILD_REPORT.read_text())
+    if (
+        report["overlay"]["size"] != 404796
+        or report["overlay"]["sha256"] != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or report["component"]["size"] != 3928192
+        or report["component"]["sha256"] != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+    ):
+        raise AuditError("WSF timer production component changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    provider = manifest["component_overrides"]["apollo_main"]["provider"]
+    regions = manifest["component_overrides"]["apollo_main"]["regions"]
+    if (
+        provider.get("size") != 3928192
+        or provider.get("sha256") != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([
+            item for item in regions
+            if item["name"].startswith("cordio_wsf_timer_")
+        ]) != 29
+    ):
+        raise AuditError("WSF timer package ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or _sha256(PACKAGE.read_bytes()) != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("WSF timer package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or _sha256(FLASH_PLAN.read_bytes()) != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]),
+            len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]),
+            len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("WSF timer flash plan changed")
+
     return {
         "schema_version": 2,
         "analysis_mode": "read-only target audit; production-excluded source candidate; no hardware or flash operation",
@@ -487,21 +584,14 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "source_sha256": CANDIDATE_SOURCE_SHA256,
             "header": str(CANDIDATE_HEADER.relative_to(ROOT)),
             "header_sha256": CANDIDATE_HEADER_SHA256,
-            "functions": [
-                "open_cfw_cordio_wsf_timer_remove_candidate",
-                "open_cfw_cordio_wsf_timer_insert_candidate",
-                "open_cfw_cordio_wsf_timer_callback_candidate",
-                "open_cfw_cordio_wsf_timer_init_candidate",
-                "open_cfw_cordio_wsf_timer_start_sec_candidate",
-                "open_cfw_cordio_wsf_timer_start_ms_candidate",
-                "open_cfw_cordio_wsf_timer_stop_candidate",
-                "open_cfw_cordio_wsf_timer_update_candidate",
-                "open_cfw_cordio_wsf_timer_next_expiration_candidate",
-                "open_cfw_cordio_wsf_timer_service_expired_candidate",
-                "open_cfw_cordio_wsf_timer_update_ticks_candidate",
-            ],
+            "functions": PRODUCTION_FUNCTIONS,
             "behaviorally_recreated_stock_function_bytes": 536,
-            "production": "excluded",
+            "production": "routed",
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": 11,
+            "retained_literal_table_bytes": 36,
         },
         "compiler_matrix": {
             "manifest": str(TIMER_MATRIX.relative_to(ROOT)),
@@ -549,8 +639,8 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "the archived source is the exact implementation family, but retained assertion line metadata indicates minor local text/config drift, so byte-identical original source text is not claimed",
             "the stock timer structure places ticks at +4 and msg at +8, opposite the selected r20.05c public header",
             "the r19.02 commit is a public semantic oracle for two functions; the separate official AmbiqSuite archive supplies the vendor implementation-family pin",
-            "all eleven bounded functions have clean-room behavioral source, but the candidate remains absent from every production overlay and package manifest",
-            "stock logging, assertion internals, IAR code generation, placement, and relocation closure remain outside the clean-room behavioral recreation",
+            "all eleven bounded functions are clean-room source-routed; the authenticated 36-byte literal/global table remains official compatibility data",
+            "live controller timing, FreeRTOS scheduling, callback ordering, and sleep/wakeup behavior remain blocked by unavailable authorized physical evidence",
         ],
     }
 
@@ -569,7 +659,7 @@ def main() -> int:
         print(f"  module: 0x{MODULE_START:08x}..0x{MODULE_END:08x} ({MODULE_END - MODULE_START} bytes)")
         print("  recovered: WsfTimerInit, WsfTimerNextExpiration, WsfTimerServiceExpired, WsfTimerUpdateTicks")
         print("  lineage: official AmbiqSuite 2.5.1 implementation/source family")
-        print("  source candidate: eleven functions behaviorally recreated; production-excluded")
+        print("  production: eleven clean-room functions guarded-routed and package-verified")
     return 0
 
 

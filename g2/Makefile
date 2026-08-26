@@ -47,14 +47,30 @@ LVGL_DIR := third_party/lvgl
 RING_BUFFER_DIR := third_party/ring-buffer
 TINYFRAME_DIR := third_party/tinyframe
 CJSON_DIR := third_party/cJSON
+QPC_DIR := third_party/qpc
 AMBIQSUITE_ANCC_DIR := third_party/ambiqsuite-ancc-profile
 AMBIQSUITE_AMOTA_DIR := third_party/ambiqsuite-amota-profile
 AMBIQSUITE_CORDIO_APP_DIR := third_party/ambiqsuite-cordio-app-framework
 
-.PHONY: all build reference ring-source source source-release component ring-component core-component bootloader-component vendor-snapshots upstream-audits tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot freertos-g2-tcb-patch freertos-queue-receive-from-isr ambiqsuite-snapshot ambiqsuite-ancc-snapshot ambiqsuite-ancc-profile-closure cmsis-core-snapshot cmsis-freertos-snapshot cmsis-freertos-linked-census cmsis-freertos-core-leaves cmsis-freertos-count-leaves cmsis-freertos-message-queue-delete cmsis-freertos-thread-yield cmsis-freertos-kernel-state cmsis-freertos-kernel-lifecycle cmsis-freertos-mutex-delete cmsis-freertos-timer-running cmsis-freertos-sync-ops cmsis-freertos-sync-ops-candidate cmsis-freertos-timer-ops cmsis-freertos-timer-ops-candidate cmsis-freertos-event-flags cmsis-freertos-event-flags-candidate cmsis-freertos-timer-new cmsis-freertos-timer-new-candidate cmsis-freertos-memory-pool-new cmsis-freertos-memory-pool-new-candidate cmsis-freertos-semaphore-acquire cmsis-freertos-memory-pool-ops cmsis-freertos-message-queue-put cmsis-freertos-message-queue-get cmsis-freertos-delay cmsis-freertos-thread-set-priority cmsis-freertos-thread-terminate cmsis-freertos-thread-flags cmsis-freertos-thread-new cmsis-freertos-thread-yield-candidate cmsis-freertos-kernel-state-candidate cmsis-freertos-mutex-delete-candidate cmsis-freertos-timer-running-candidate lz4-snapshot freetype-snapshot flashdb-snapshot cmbacktrace-snapshot nanopb-snapshot cordio-aggregate-closure cordio-gatt-profile-closure apollo-origin-accounting lvgl-display-port-closure third-party-dependency-closure lvgl-snapshot nemagfx-ambiq-provenance ambiq-gpu-patch-accessors-candidate ring-buffer-snapshot tinyframe-snapshot tinyframe-adapter-candidate ui-quicklist-page-closure ui-widget-news-page-closure ui-stock-page-closure research-corpus verify test inspect clean toolchain cjson-snapshot
-.PHONY: ble-transport-profiles-closure ble-peer-discovery-closure ble-central-closure ble-connect-params-closure ble-peripheral-closure transport-protocol-closure service-settings-closure tracepoint-settings-closure product-rtos-closure util-error-check-closure watchdog-closure freertos-task-get-info-closure freertos-scheduler-start-core-closure goodix-v170-source-overlap logger-settings-closure ambiqsuite-cordio-app-snapshot cordio-app-framework-lineage drv-gx8002b-closure drv-pdm-production-closure drv-pdm-closure drv-mx25u25643g-closure service-ancc-closure als-closure thread-ble-production-closure pt-protocol-closure service-db-api-closure ui-even-ai-closure service-time-closure thread-audio-closure compress-log-core-closure compress-log-port-closure file-runtime-closure service-algo-closure uart-sync-closure service-nvdb-closure production-mic-closure service-audio-manager-closure service-audio-closure service-kvdb-closure ux-battery-sync-closure cb-ring-battery-closure callback-facades-closure callback-manager-closure silent-mode-closure onboarding-data-manager-closure onboarding-controller-closure onboarding-main-page-closure onboarding-stock-page-closure onboarding-news-page-closure lvgl-font-manager-closure common-list-container-closure common-text-container-closure evenhub-ui-closure evenhub-data-parser-closure sync-framework-closure sync-interface-api-closure display-thread-closure displaydrv-manager-closure ui-msg-notif-list-closure dashboard-main-screen-closure dashboard-watchface-layout4-closure dashboard-ext-closure dashboard-data-process-closure navigation-data-handler-closure navigation-ui-closure menu-page-closure ui-health-page-closure teleprompt-ui-closure service-em9305-dfu-closure conversate-tag-data-closure liblc3-source-closure
-.PHONY: transparent transparent-harvest transparent-db transparent-source transparent-image transparent-ledger transparent-test pb-service-quicklist-closure pb-service-pair-mgr-closure at-codec-closure
-.PHONY: ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
+.PHONY: all build reference ring-source source source-release component ring-component core-component bootloader-component vendor-snapshots upstream-audits tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot freertos-g2-tcb-patch freertos-queue-receive-from-isr ambiqsuite-snapshot ambiqsuite-ancc-snapshot ambiqsuite-ancc-profile-closure cmsis-core-snapshot cmsis-freertos-snapshot cmsis-freertos-linked-census cmsis-freertos-core-leaves cmsis-freertos-count-leaves cmsis-freertos-message-queue-delete cmsis-freertos-thread-yield cmsis-freertos-kernel-state cmsis-freertos-kernel-lifecycle cmsis-freertos-mutex-delete cmsis-freertos-timer-running cmsis-freertos-sync-ops cmsis-freertos-sync-ops-candidate cmsis-freertos-timer-ops cmsis-freertos-timer-ops-candidate cmsis-freertos-event-flags cmsis-freertos-event-flags-candidate cmsis-freertos-timer-new cmsis-freertos-timer-new-candidate cmsis-freertos-memory-pool-new cmsis-freertos-memory-pool-new-candidate cmsis-freertos-semaphore-acquire cmsis-freertos-memory-pool-ops cmsis-freertos-message-queue-put cmsis-freertos-message-queue-get cmsis-freertos-delay cmsis-freertos-thread-set-priority cmsis-freertos-thread-terminate cmsis-freertos-thread-flags cmsis-freertos-thread-new cmsis-freertos-thread-yield-candidate cmsis-freertos-kernel-state-candidate cmsis-freertos-mutex-delete-candidate cmsis-freertos-timer-running-candidate lz4-snapshot freetype-snapshot flashdb-snapshot cmbacktrace-snapshot cmbacktrace-fault-closure nanopb-snapshot cordio-aggregate-closure cordio-gatt-profile-closure apollo-origin-accounting lvgl-display-port-closure third-party-dependency-closure lvgl-snapshot nemagfx-ambiq-provenance ambiq-gpu-patch-accessors-candidate ring-buffer-snapshot tinyframe-snapshot tinyframe-adapter-candidate ui-quicklist-page-closure ui-widget-news-page-closure ui-stock-page-closure research-corpus verify test inspect clean toolchain cjson-snapshot qpc-snapshot
+.PHONY: ble-transport-profiles-closure ble-peer-discovery-closure ble-central-closure ble-connect-params-closure ble-peripheral-closure transport-protocol-closure service-settings-closure tracepoint-settings-closure product-rtos-closure util-error-check-closure watchdog-closure freertos-task-get-info-closure freertos-scheduler-start-core-closure goodix-v170-source-overlap logger-settings-closure ambiqsuite-cordio-app-snapshot cordio-app-framework-lineage drv-gx8002b-closure drv-pdm-production-closure drv-pdm-closure drv-mx25u25643g-closure service-ancc-closure als-closure thread-ble-production-closure pt-protocol-closure service-db-api-closure ui-even-ai-closure service-time-closure thread-audio-closure compress-log-core-closure compress-log-port-closure file-runtime-closure service-algo-closure uart-sync-closure service-nvdb-closure production-mic-closure service-audio-manager-closure service-audio-closure service-kvdb-closure service-codec-host-closure service-codec-dfu-closure service-touch-dfu-closure ux-battery-sync-closure cb-ring-battery-closure callback-facades-closure callback-manager-closure silent-mode-closure onboarding-data-manager-closure onboarding-controller-closure onboarding-main-page-closure onboarding-stock-page-closure onboarding-news-page-closure lvgl-font-manager-closure box-uart-mgr-closure service-box-detect-closure common-list-container-closure common-text-container-closure evenhub-ui-closure evenhub-data-parser-closure sync-framework-closure sync-interface-api-closure display-thread-closure displaydrv-manager-closure ui-msg-notif-list-closure dashboard-main-screen-closure dashboard-watchface-layout4-closure dashboard-ext-closure dashboard-data-process-closure navigation-data-handler-closure navigation-ui-closure menu-page-closure ui-health-page-closure teleprompt-ui-closure service-em9305-dfu-closure conversate-tag-data-closure liblc3-source-closure
+.PHONY: transparent transparent-harvest transparent-db transparent-source transparent-image transparent-ledger transparent-test pb-service-quicklist-closure pb-service-pair-mgr-closure at-codec-closure box-uart-mgr-closure case-uart-update-closure touch-i2c-source-closure touch-sensing-closure iar-format-input-closure iar-format-output-closure
+.PHONY: cordio-wsf-timer-closure
+.PHONY: cordio-wsf-runtime-closure
+.PHONY: cordio-atts-csf-closure
+.PHONY: cordio-atts-ccc-closure
+.PHONY: cordio-atts-write-closure
+.PHONY: cordio-atts-proc-closure
+.PHONY: cordio-atts-ind-closure
+.PHONY: cordio-atts-read-closure
+.PHONY: cordio-atts-main-closure
+.PHONY: cordio-attc-write-closure
+.PHONY: cordio-attc-read-closure
+.PHONY: cordio-attc-proc-closure
+.PHONY: cordio-attc-main-closure
+.PHONY: cordio-attc-disc-closure
+.PHONY: cordio-l2c-runtime-closure cordio-dm-adv-closure cordio-dm-adv-leg-closure cordio-dm-conn-closure cordio-dm-conn-sm-closure cordio-dm-dev-closure cordio-dm-main-closure cordio-dm-phy-closure cordio-dm-conn-master-leg-closure cordio-dm-conn-slave-leg-closure cordio-dm-conn-slave-closure cordio-dm-conn-master-closure cordio-dm-priv-closure cordio-dm-dev-priv-closure cordio-hci-cmd-phy-closure cordio-hci-cmd-core-closure cordio-hci-tr-closure cordio-hci-core-ps-closure cordio-hci-evt-closure cordio-hci-driver-closure
+.PHONY: ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure sensor-hub-closure icm45608-snapshot fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
 
 all: build
 
@@ -229,6 +245,10 @@ flashdb-snapshot:
 cmbacktrace-snapshot:
 	$(PYTHON) $(CMBACKTRACE_DIR)/verify_snapshot.py
 
+cmbacktrace-fault-closure: cmbacktrace-snapshot
+	$(PYTHON) tools/analyze_g2_cmbacktrace_fault_source.py
+	$(PYTHON) -m unittest -v tests.test_analyze_g2_cmbacktrace_fault_source
+
 nanopb-snapshot:
 	$(PYTHON) $(NANOPB_DIR)/verify_snapshot.py
 
@@ -239,12 +259,17 @@ cordio-snapshot:
 ambiqsuite-cordio-app-snapshot:
 	$(PYTHON) $(AMBIQSUITE_CORDIO_APP_DIR)/verify_snapshot.py
 
-cordio-app-framework-lineage: ambiqsuite-cordio-app-snapshot
+cordio-app-framework-lineage: ambiqsuite-cordio-app-snapshot core-component
 	$(PYTHON) tools/analyze_g2_cordio_app_framework.py \
 		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}"
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_ambiqsuite_cordio_app_framework_snapshot \
-		tests.test_analyze_g2_cordio_app_framework
+		tests.test_analyze_g2_cordio_app_framework \
+		tests.test_runtime_cordio_app_legacy \
+		tests.test_runtime_cordio_app_core \
+		tests.test_runtime_cordio_app_master \
+		tests.test_runtime_cordio_app_slave \
+		tests.test_runtime_cordio_app_discovery
 
 cordio-aggregate-closure: cordio-app-framework-lineage
 	$(PYTHON) tools/analyze_g2_cordio_closure.py \
@@ -295,6 +320,10 @@ cjson-snapshot:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_cjson_snapshot
 
+qpc-snapshot:
+	$(PYTHON) $(QPC_DIR)/verify_snapshot.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v tests.test_qpc_snapshot
+
 tinyframe-adapter-candidate: tinyframe-snapshot
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_tinyframe_send_version \
@@ -303,7 +332,7 @@ tinyframe-adapter-candidate: tinyframe-snapshot
 		tests.test_tinyframe_g2_production_ports_candidate \
 		tests.test_tinyframe_g2_atomic_boundary_candidate
 
-vendor-snapshots: tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot ambiqsuite-snapshot ambiqsuite-ancc-snapshot ambiqsuite-amota-snapshot ambiqsuite-cordio-app-snapshot cmsis-core-snapshot cmsis-freertos-snapshot lz4-snapshot freetype-snapshot flashdb-snapshot cmbacktrace-snapshot nanopb-snapshot cordio-snapshot freertos-plus-cli-snapshot lvgl-snapshot ring-buffer-snapshot tinyframe-snapshot cjson-snapshot
+vendor-snapshots: tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot ambiqsuite-snapshot ambiqsuite-ancc-snapshot ambiqsuite-amota-snapshot ambiqsuite-cordio-app-snapshot cmsis-core-snapshot cmsis-freertos-snapshot lz4-snapshot freetype-snapshot flashdb-snapshot cmbacktrace-snapshot nanopb-snapshot cordio-snapshot freertos-plus-cli-snapshot lvgl-snapshot ring-buffer-snapshot tinyframe-snapshot cjson-snapshot qpc-snapshot
 
 upstream-audits:
 	$(PYTHON) tools/analyze_g2_littlefs_ports.py
@@ -344,6 +373,74 @@ core-component: vendor-snapshots
 bootloader-component: littlefs-snapshot
 	$(PYTHON) $(BOOT_COMPONENT_DIR)/build_component.py
 
+.PHONY: bootloader-redirect-init-closure
+bootloader-redirect-init-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_bootloader_redirect_init \
+		tests.test_analyze_g2_bootloader_redirect_init
+	$(PYTHON) tools/analyze_g2_bootloader_redirect_init.py
+	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
+
+.PHONY: bootloader-aeabi-memset-closure
+bootloader-aeabi-memset-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_bootloader_aeabi_memset \
+		tests.test_analyze_g2_bootloader_aeabi_memset
+	$(PYTHON) tools/analyze_g2_bootloader_aeabi_memset.py
+	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
+
+.PHONY: bootloader-aeabi-memcpy-closure
+bootloader-aeabi-memcpy-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_bootloader_aeabi_memcpy \
+		tests.test_analyze_g2_bootloader_aeabi_memcpy
+	$(PYTHON) tools/analyze_g2_bootloader_aeabi_memcpy.py
+	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
+
+.PHONY: bootloader-memcmp-closure
+bootloader-memcmp-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_bootloader_memcmp \
+		tests.test_analyze_g2_bootloader_memcmp
+	$(PYTHON) tools/analyze_g2_bootloader_memcmp.py
+	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
+
+.PHONY: bootloader-string-spans-closure
+bootloader-string-spans-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_bootloader_string_spans \
+		tests.test_analyze_g2_bootloader_string_spans
+	$(PYTHON) tools/analyze_g2_bootloader_string_spans.py
+	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
+
+.PHONY: bootloader-crc32-closure
+bootloader-crc32-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_bootloader_crc32 \
+		tests.test_analyze_g2_bootloader_crc32
+	$(PYTHON) tools/analyze_g2_bootloader_crc32.py
+	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
+
+.PHONY: bootloader-store-200270cc-closure
+bootloader-store-200270cc-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_bootloader_store_200270cc \
+		tests.test_analyze_g2_bootloader_store_200270cc
+	$(PYTHON) tools/analyze_g2_bootloader_store_200270cc.py
+	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
+
+.PHONY: bootloader-numeric-closure
+bootloader-numeric-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_bootloader_udiv10 \
+		tests.test_runtime_bootloader_numeric \
+		tests.test_analyze_g2_bootloader_numeric
+	$(PYTHON) tools/analyze_g2_bootloader_numeric.py
+	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
+
+.PHONY: bootloader-format-primitives-closure
+bootloader-format-primitives-closure: bootloader-numeric-closure
+
 component: bootloader-component core-component
 
 reference:
@@ -360,6 +457,17 @@ source: bootloader-component core-component
 	$(PYTHON) tools/open_cfw.py build \
 		--manifest "$(SOURCE_MANIFEST)" \
 		--output-dir "$(SOURCE_BUILD_DIR)"
+
+iar-format-input-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_aeabi_double \
+		tests.test_runtime_format_scan \
+		tests.test_iar_dlib_scanset_matcher_candidate
+
+iar-format-output-closure: source
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_iar_format_output \
+		tests.test_runtime_vsnprintf
 
 source-release: source
 	$(PYTHON) tools/release_cfw.py \
@@ -410,11 +518,13 @@ cordio-gatt-profile-closure: core-component
 		tests.test_analyze_g2_cordio_gatt_profile \
 		tests.test_analyze_g2_first_party_frontier
 
-ambiqsuite-ancc-profile-closure: ambiqsuite-ancc-snapshot
+ambiqsuite-ancc-profile-closure: ambiqsuite-ancc-snapshot core-component
 	$(PYTHON) tools/analyze_g2_ambiqsuite_ancc_profile.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_ambiqsuite_ancc_profile_snapshot \
 		tests.test_analyze_g2_ambiqsuite_ancc_profile \
+		tests.test_runtime_ancc_profile_core \
+		tests.test_runtime_ancc_profile \
 		tests.test_analyze_g2_first_party_frontier
 
 ble-transport-profiles-closure:
@@ -480,6 +590,7 @@ product-rtos-closure:
 	$(PYTHON) tools/analyze_g2_product_rtos.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_product_rtos \
+		tests.test_product_rtos_candidate \
 		tests.test_analyze_g2_first_party_frontier
 
 util-error-check-closure:
@@ -745,6 +856,27 @@ service-codec-porting-closure:
 		tests.test_service_codec_porting_candidate \
 		tests.test_analyze_g2_first_party_frontier
 
+service-codec-host-closure:
+	$(PYTHON) tools/analyze_g2_service_codec_host.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_service_codec_host \
+		tests.test_service_codec_host_candidate \
+		tests.test_analyze_g2_first_party_frontier
+
+service-codec-dfu-closure: core-component source
+	$(PYTHON) tools/analyze_g2_service_codec_dfu.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_service_codec_dfu \
+		tests.test_service_codec_dfu_candidate \
+		tests.test_analyze_g2_first_party_frontier
+
+service-touch-dfu-closure: core-component source
+	$(PYTHON) tools/analyze_g2_service_touch_dfu.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_service_touch_dfu \
+		tests.test_service_touch_dfu_candidate \
+		tests.test_analyze_g2_first_party_frontier
+
 at-codec-closure:
 	$(PYTHON) tools/analyze_g2_at_codec.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
@@ -924,6 +1056,282 @@ lvgl-font-manager-closure:
 		tests.test_freetype_g2_config_audit \
 		tests.test_analyze_g2_first_party_frontier
 
+box-uart-mgr-closure:
+	$(PYTHON) tools/analyze_g2_box_uart_mgr.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_box_uart_mgr \
+		tests.test_box_uart_mgr_candidate \
+		tests.test_analyze_g2_first_party_frontier
+
+service-box-detect-closure: core-component
+	$(PYTHON) tools/analyze_g2_service_box_detect.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_service_box_detect \
+		tests.test_service_box_detect_candidate
+
+.PHONY: s200-config-main-closure cordio-sec-api-closure
+s200-config-main-closure: core-component
+	$(PYTHON) tools/analyze_g2_s200_config_main.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_s200_config_main \
+		tests.test_s200_config_main_candidate
+
+cordio-sec-api-closure: core-component
+	$(PYTHON) tools/analyze_g2_cordio_sec_api.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_sec_api \
+		tests.test_cordio_sec_api_candidate
+
+case-uart-update-closure:
+	$(PYTHON) tools/analyze_g2_case_uart_update_source.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_case_uart_update_source \
+		tests.test_runtime_case_uart_update
+
+touch-i2c-source-closure:
+	$(PYTHON) tools/analyze_g2_touch_i2c_source.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_touch_i2c_source \
+		tests.test_runtime_touch_i2c_protocol
+
+touch-sensing-closure:
+	$(PYTHON) tools/analyze_g2_touch_sensing_source.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_touch_sensing_source \
+		tests.test_runtime_touch_sensing
+
+cordio-wsf-timer-closure:
+	$(PYTHON) tools/analyze_g2_cordio_wsf_timer.py \
+		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}"
+	OPENCFW_APOLLO_GHIDRA_CORPUS="$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}" \
+		PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_wsf_timer
+
+cordio-wsf-runtime-closure:
+	$(PYTHON) tools/analyze_g2_cordio_wsf_buf_msg.py
+	$(PYTHON) tools/analyze_g2_cordio_wsf_assert_trace.py
+	$(PYTHON) tools/analyze_g2_cordio_wstr.py
+	$(PYTHON) tools/analyze_g2_cordio_wsf_os.py \
+		--ghidra-corpus "$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}"
+	OPENCFW_APOLLO_GHIDRA_CORPUS="$${OPENCFW_APOLLO_GHIDRA_CORPUS:-research/corpus/apollo-main/ghidra/full64-j64-auth}" \
+		PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_wsf_buf_msg \
+		tests.test_runtime_cordio_wsf_buf_msg_candidate \
+		tests.test_analyze_g2_cordio_wsf_assert_trace \
+		tests.test_runtime_cordio_wsf_assert_trace_candidate \
+		tests.test_analyze_g2_cordio_wstr \
+		tests.test_runtime_cordio_wstr_candidate \
+		tests.test_analyze_g2_cordio_wsf_os \
+		tests.test_analyze_g2_cordio_wsf_timer
+
+cordio-atts-csf-closure:
+	$(PYTHON) tools/analyze_g2_cordio_atts_csf.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_atts_csf \
+		tests.test_runtime_cordio_atts_csf
+
+cordio-atts-ccc-closure:
+	$(PYTHON) tools/analyze_g2_cordio_atts_ccc.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_atts_ccc \
+		tests.test_runtime_cordio_atts_ccc
+
+cordio-atts-write-closure:
+	$(PYTHON) tools/analyze_g2_cordio_atts_write.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_atts_write \
+		tests.test_runtime_cordio_atts_write
+
+cordio-atts-proc-closure:
+	$(PYTHON) tools/analyze_g2_cordio_atts_proc.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_atts_proc \
+		tests.test_runtime_cordio_atts_proc
+
+cordio-atts-ind-closure:
+	$(PYTHON) tools/analyze_g2_cordio_atts_ind.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_atts_ind \
+		tests.test_runtime_cordio_atts_ind
+
+cordio-atts-read-closure:
+	$(PYTHON) tools/analyze_g2_cordio_atts_read.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_atts_read \
+		tests.test_runtime_cordio_atts_read
+
+cordio-atts-main-closure:
+	$(PYTHON) tools/analyze_g2_cordio_atts_main.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_atts_main \
+		tests.test_runtime_cordio_atts_main
+
+cordio-attc-write-closure:
+	$(PYTHON) tools/analyze_g2_cordio_attc_write.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_attc_write \
+		tests.test_runtime_cordio_attc_write
+
+cordio-attc-read-closure:
+	$(PYTHON) tools/analyze_g2_cordio_attc_read.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_attc_read \
+		tests.test_runtime_cordio_attc_read
+
+cordio-attc-proc-closure:
+	$(PYTHON) tools/analyze_g2_cordio_attc_proc.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_attc_proc \
+		tests.test_runtime_cordio_attc_proc
+
+cordio-attc-main-closure:
+	$(PYTHON) tools/analyze_g2_cordio_attc_main.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_attc_main \
+		tests.test_runtime_cordio_attc_main
+
+cordio-attc-disc-closure:
+	$(PYTHON) tools/analyze_g2_cordio_attc_disc.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_attc_disc \
+		tests.test_runtime_cordio_attc_disc
+
+cordio-l2c-runtime-closure:
+	$(PYTHON) tools/analyze_g2_cordio_l2c_main.py
+	$(PYTHON) tools/analyze_g2_cordio_l2c_master.py
+	$(PYTHON) tools/analyze_g2_cordio_l2c_slave.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_l2c_main \
+		tests.test_analyze_g2_cordio_l2c_master \
+		tests.test_analyze_g2_cordio_l2c_slave \
+		tests.test_runtime_cordio_l2c
+
+cordio-dm-adv-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_adv.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_adv \
+		tests.test_runtime_cordio_dm_adv
+
+cordio-dm-adv-leg-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_adv_leg.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_adv_leg \
+		tests.test_runtime_cordio_dm_adv_leg
+
+cordio-dm-conn-sm-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_conn_sm.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_conn_sm \
+		tests.test_runtime_cordio_dm_conn_sm
+
+cordio-dm-dev-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_dev.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_dev \
+		tests.test_runtime_cordio_dm_dev
+
+cordio-dm-main-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_main.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_main \
+		tests.test_runtime_cordio_dm_main
+
+cordio-dm-phy-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_phy.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_phy \
+		tests.test_runtime_cordio_dm_phy
+
+cordio-dm-conn-master-leg-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_conn_master_leg.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_conn_master_leg \
+		tests.test_runtime_cordio_dm_conn_master_leg
+
+cordio-dm-conn-slave-leg-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_conn_slave_leg.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_conn_slave_leg \
+		tests.test_runtime_cordio_dm_conn_slave_leg
+
+cordio-dm-conn-slave-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_conn_slave.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_conn_slave \
+		tests.test_runtime_cordio_dm_conn_slave
+
+cordio-dm-conn-master-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_conn_master.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_conn_master \
+		tests.test_runtime_cordio_dm_conn_master
+
+cordio-dm-priv-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_priv.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_priv \
+		tests.test_runtime_cordio_dm_priv
+
+cordio-dm-conn-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_conn.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_conn \
+		tests.test_runtime_cordio_dm_conn
+
+cordio-hci-cmd-phy-closure:
+	$(PYTHON) tools/analyze_g2_cordio_hci_cmd_phy.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_hci_cmd_phy \
+		tests.test_runtime_cordio_hci_cmd_phy
+
+cordio-hci-tr-closure:
+	$(PYTHON) tools/analyze_g2_cordio_hci_tr.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_hci_tr \
+		tests.test_runtime_cordio_hci_tr
+
+cordio-hci-core-ps-closure:
+	$(PYTHON) tools/analyze_g2_cordio_hci_core_ps.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_hci_core_ps \
+		tests.test_runtime_cordio_hci_core_ps
+
+cordio-hci-core-closure:
+	$(PYTHON) tools/analyze_g2_cordio_hci_core.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_hci_core \
+		tests.test_runtime_cordio_hci_core
+
+cordio-hci-vs-closure:
+	$(PYTHON) tools/analyze_g2_cordio_hci_vs.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_hci_vs \
+		tests.test_runtime_cordio_hci_vs
+
+cordio-hci-cmd-core-closure:
+	$(PYTHON) tools/analyze_g2_cordio_hci_cmd.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_hci_cmd \
+		tests.test_runtime_cordio_hci_cmd_core
+
+cordio-hci-driver-closure:
+	$(PYTHON) tools/analyze_g2_cordio_hci_driver.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_hci_driver \
+		tests.test_runtime_cordio_hci_driver
+
+cordio-hci-evt-closure:
+	$(PYTHON) tools/analyze_g2_cordio_hci_evt.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_hci_evt \
+		tests.test_runtime_cordio_hci_evt
+
+cordio-dm-dev-priv-closure:
+	$(PYTHON) tools/analyze_g2_cordio_dm_dev_priv.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_cordio_dm_dev_priv \
+		tests.test_runtime_cordio_dm_dev_priv
+
 common-list-container-closure:
 	$(PYTHON) tools/analyze_g2_common_list_container.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
@@ -1048,6 +1456,7 @@ service-ancc-closure:
 als-closure:
 	$(PYTHON) tools/analyze_g2_als.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_als_candidate \
 		tests.test_analyze_g2_als \
 		tests.test_analyze_g2_first_party_frontier
 
@@ -1102,6 +1511,7 @@ ui-health-page-closure:
 ring-service-closure:
 	$(PYTHON) tools/analyze_g2_ring_service.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_ring_service_candidate \
 		tests.test_analyze_g2_ring_service \
 		tests.test_analyze_g2_first_party_frontier
 
@@ -1245,9 +1655,22 @@ dashboard-watchface-layout3-closure:
 thread-ring-closure:
 	$(PYTHON) tools/analyze_g2_thread_ring.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_thread_ring_candidate \
 		tests.test_analyze_g2_thread_ring \
 		tests.test_analyze_g2_ble_ota_ring_profiles \
 		tests.test_analyze_g2_first_party_frontier
+
+sensor-hub-closure:
+	$(PYTHON) tools/analyze_g2_sensor_hub.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_sensor_hub_candidate \
+		tests.test_analyze_g2_sensor_hub \
+		tests.test_analyze_g2_first_party_frontier
+
+icm45608-snapshot:
+	$(PYTHON) third_party/invensense-icm45608/verify_snapshot.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_invensense_icm45608_snapshot
 
 fw-event-loop-closure:
 	$(PYTHON) tools/analyze_g2_fw_event_loop.py
@@ -1258,6 +1681,7 @@ fw-event-loop-closure:
 ring-connect-policy-closure:
 	$(PYTHON) tools/analyze_g2_ring_connect_policy.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_ring_connect_policy_candidate \
 		tests.test_analyze_g2_ring_connect_policy \
 		tests.test_analyze_g2_first_party_frontier
 

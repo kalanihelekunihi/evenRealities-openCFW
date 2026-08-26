@@ -50,11 +50,11 @@ OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.
 SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PRODUCTION_SOURCE_PIN = (13061, "c69b64097eef2fc592c4be97a1d7a9b0bad9a701544ecc18510ad7aab6c7db4c")
 LEAF_PINS = {
-    "open_cfw_gesture_production_click": (118, "8d5df040247142cdc8888e431baeb7edd824a01ac17a1043d60df20dda4ad933", 188812, "1a927d88a6295264f535e25a76ff34d32c63f3ba34fb3976e737b90eceb722af", 6, 0),
-    "open_cfw_gesture_get_proximity": (12, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 188932, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 0, 2),
-    "open_cfw_gesture_event_name": (14, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 188944, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 0, 0),
-    "open_cfw_gesture_format_mask": (586, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 188960, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 0, 2),
-    "open_cfw_gesture_process": (878, "1f8f5af41a31b17ee71a36c0927dfca419eefc864002efb06efbe186bc8be438", 189548, "bb6df8074642bd52fd73485f4350ac7afe2b8be99da7e4b09861b4f558e65397", 47, 2),
+    "open_cfw_gesture_production_click": (118, "37d9a63d355aa9c451ff34958cbc0471ba93b6f3d78eaed2beeeb3e89dd2d033", 248660, "1a927d88a6295264f535e25a76ff34d32c63f3ba34fb3976e737b90eceb722af", 6, 0),
+    "open_cfw_gesture_get_proximity": (12, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 248780, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 0, 2),
+    "open_cfw_gesture_event_name": (14, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 248792, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 0, 0),
+    "open_cfw_gesture_format_mask": (586, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 248808, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 0, 2),
+    "open_cfw_gesture_process": (878, "5afdb5889656dc6b8cf0a4fb4dbd8e9b9c102936a2d5d6c6416bbff95ab6da95", 249396, "bb6df8074642bd52fd73485f4350ac7afe2b8be99da7e4b09861b4f558e65397", 47, 2),
 }
 PATCH_PINS = {
     "replace_gesture_production_click": (0x00502D56, 88, "b9c55e0c9d939dbff58ce1aa4ad91209f714c6435f4ff654e9e869aa921c71a8", "open_cfw_gesture_production_click"),
@@ -357,10 +357,10 @@ def analyze(image=IMAGE):
         build["overlay"]["size"], build["overlay"]["sha256"],
         build["component"]["size"], build["component"]["sha256"],
     ) != (
-        240692,
-        "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088,
-        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148,
+        "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544,
+        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise c.AuditError("production gesture build pins changed")
     built = {
@@ -383,11 +383,11 @@ def analyze(image=IMAGE):
     main = manifest["component_overrides"]["apollo_main"]
     regions = {item.get("name"): item for item in main["regions"]}
     source_regions = {
-        "gesture_production_click_source_text": (3712208, 118, 0x007C24B0),
-        "gesture_get_proximity_source_text": (3712328, 12, 0x007C2528),
-        "gesture_event_name_source_text": (3712340, 14, 0x007C2534),
-        "gesture_format_mask_source_text": (3712356, 586, 0x007C2544),
-        "gesture_process_source_text": (3712944, 878, 0x007C2790),
+        "gesture_production_click_source_text": (3772056, 118, 0x007D0E78),
+        "gesture_get_proximity_source_text": (3772176, 12, 0x007D0EF0),
+        "gesture_event_name_source_text": (3772188, 14, 0x007D0EFC),
+        "gesture_format_mask_source_text": (3772204, 586, 0x007D0F0C),
+        "gesture_process_source_text": (3772792, 878, 0x007D1158),
     }
     for name, pin in source_regions.items():
         region = regions.get(name, {})
@@ -408,10 +408,10 @@ def analyze(image=IMAGE):
         main["provider"]["size"], main["provider"]["sha256"],
         manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
     ) != (
-        3764088,
-        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582,
-        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544,
+        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038,
+        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise c.AuditError("production gesture manifest closure changed")
     return {

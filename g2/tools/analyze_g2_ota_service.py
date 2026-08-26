@@ -30,35 +30,35 @@ MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 SOURCE_SIZE = 25_024
 SOURCE_SHA256 = "1b501a572c77e3b3105a10db4ead5100ff9a8d0f4c19f031d9067ed79731424b"
 PRODUCTION_LEAVES = (
-    ("open_cfw_ota_flash_erase", 28, 219800, 1),
-    ("open_cfw_ota_flash_read", 130, 219828, 1),
-    ("open_cfw_ota_flash_write", 42, 219960, 2),
-    ("open_cfw_ota_status_sync", 80, 220004, 1),
-    ("OtaSelectFlashOps", 22, 220084, 0),
-    ("OtaFileSize", 14, 220108, 1),
-    ("OtaEraseRange", 42, 220124, 1),
-    ("_evenOtaSetFwAddr", 106, 220168, 2),
-    ("_verifyFlashContent", 174, 220276, 1),
-    ("OtaBufferedFlashWrite", 66, 220452, 2),
-    ("OtaCommitDescriptor", 72, 220520, 1),
-    ("_evenOtaReplyToAPP", 44, 220592, 1),
-    ("_RPC_SystemOtaStatusSync", 4, 220636, 1),
-    ("OtaParseHexAddress", 100, 220640, 0),
-    ("_evenOtaBootloaderWriteFile2MRAM", 202, 220740, 9),
-    ("_otaFsHealthProbe", 4, 220944, 1),
-    ("_otaFsHealthCheckAndHeal", 40, 220948, 3),
-    ("_fileCmdParse", 576, 220988, 9),
-    ("_fileRawDataParse", 420, 221564, 7),
-    ("OTA_FileCaculateCRC", 156, 221984, 6),
-    ("_exportFileParse", 456, 222140, 6),
-    ("OTA_FrameDispatch", 92, 222596, 3),
-    ("OTA_ResetExportState", 52, 222688, 1),
-    ("OTA_NotifyStatus4", 32, 222740, 1),
-    ("OTA_NotifyStatus3", 32, 222772, 1),
-    ("OTA_NotifyStatus5", 32, 222804, 1),
-    ("OTA_CancelExport", 64, 222836, 2),
-    ("OTA_TransferActive", 36, 222900, 0),
-    ("OTA_SetInterface", 12, 222936, 0),
+    ("open_cfw_ota_flash_erase", 28, 279648, 1),
+    ("open_cfw_ota_flash_read", 130, 279676, 1),
+    ("open_cfw_ota_flash_write", 42, 279808, 2),
+    ("open_cfw_ota_status_sync", 80, 279852, 1),
+    ("OtaSelectFlashOps", 22, 279932, 0),
+    ("OtaFileSize", 14, 279956, 1),
+    ("OtaEraseRange", 42, 279972, 1),
+    ("_evenOtaSetFwAddr", 106, 280016, 2),
+    ("_verifyFlashContent", 174, 280124, 1),
+    ("OtaBufferedFlashWrite", 66, 280300, 2),
+    ("OtaCommitDescriptor", 72, 280368, 1),
+    ("_evenOtaReplyToAPP", 44, 280440, 1),
+    ("_RPC_SystemOtaStatusSync", 4, 280484, 1),
+    ("OtaParseHexAddress", 100, 280488, 0),
+    ("_evenOtaBootloaderWriteFile2MRAM", 202, 280588, 9),
+    ("_otaFsHealthProbe", 4, 280792, 1),
+    ("_otaFsHealthCheckAndHeal", 40, 280796, 3),
+    ("_fileCmdParse", 576, 280836, 9),
+    ("_fileRawDataParse", 420, 281412, 7),
+    ("OTA_FileCaculateCRC", 156, 281832, 6),
+    ("_exportFileParse", 456, 281988, 6),
+    ("OTA_FrameDispatch", 92, 282444, 3),
+    ("OTA_ResetExportState", 52, 282536, 1),
+    ("OTA_NotifyStatus4", 32, 282588, 1),
+    ("OTA_NotifyStatus3", 32, 282620, 1),
+    ("OTA_NotifyStatus5", 32, 282652, 1),
+    ("OTA_CancelExport", 64, 282684, 2),
+    ("OTA_TransferActive", 36, 282748, 0),
+    ("OTA_SetInterface", 12, 282784, 0),
 )
 PATCH_TARGETS = tuple(name for name, *_ in PRODUCTION_LEAVES[4:])
 PHYSICAL = (0x004448F4, 0x004488EC)
@@ -316,8 +316,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
         report["overlay"]["size"], report["overlay"]["sha256"],
         report["component"]["size"], report["component"]["sha256"],
     ) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production OTA service artifact pins changed")
 
@@ -328,8 +328,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
         manifest["package"]["expected_size"],
         manifest["package"]["expected_sha256"],
     ) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production OTA service manifest pins changed")
     regions = {region["name"]: region for region in main["regions"]}

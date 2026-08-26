@@ -30,14 +30,14 @@ PINS = {
 SOURCE_SIZE = 12137
 SOURCE_SHA256 = "04ded321c0a5f25be9328fbe971512cf16f54657e9e91e6c56605e2d740d579c"
 FUNCTIONS = (
-    ("open_cfw_pb_service_conversate_buffer_write", 146, 195032, 0),
-    ("open_cfw_pb_service_conversate_zero", 88, 195180, 0),
-    ("APP_PbConversateRxFrameDataProcess", 112, 195268, 3),
-    ("APP_PbConversateTxEncodeNotify", 148, 195380, 6),
-    ("APP_PbConversateTxEncodePrepNoteListRequest", 132, 195528, 6),
-    ("APP_PbConversateTxEncodePrepNoteSelect", 150, 195660, 6),
-    ("APP_PbConversateTxEncodeCommResp", 134, 195812, 6),
-    ("APP_PbConversateTxEncodeTagTrackingData", 188, 195948, 6),
+    ("open_cfw_pb_service_conversate_buffer_write", 146, 254880, 0),
+    ("open_cfw_pb_service_conversate_zero", 88, 255028, 0),
+    ("APP_PbConversateRxFrameDataProcess", 112, 255116, 3),
+    ("APP_PbConversateTxEncodeNotify", 148, 255228, 6),
+    ("APP_PbConversateTxEncodePrepNoteListRequest", 132, 255376, 6),
+    ("APP_PbConversateTxEncodePrepNoteSelect", 150, 255508, 6),
+    ("APP_PbConversateTxEncodeCommResp", 134, 255660, 6),
+    ("APP_PbConversateTxEncodeTagTrackingData", 188, 255796, 6),
 )
 PATCHES = (
     ("replace_pb_conversate_rx", 0x005B1B4C, 478,
@@ -277,8 +277,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -286,8 +286,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_names = {item["name"] for item in main["regions"]}

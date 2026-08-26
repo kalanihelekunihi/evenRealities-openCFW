@@ -56,7 +56,13 @@ class CordioAttsReadAuditTests(unittest.TestCase):
         self.assertEqual(report["architecture"]["fit_check_windows"], 3)
         self.assertEqual(report["lineage"]["selected_blob"], "52a7f290710c12ecba0850175c9bc1fe21f8e0aa")
         self.assertFalse(report["lineage"]["historical_generating_commit_resolved"])
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        production = report["production"]
+        self.assertEqual(production["status"], "routed")
+        self.assertEqual(production["source_owned_bytes_added"], 2786)
+        self.assertEqual(production["stock_bytes_replaced"], 2984)
+        self.assertEqual(production["alignment_bytes"], 8)
+        self.assertEqual(production["strict_relocations"], 44)
+        self.assertEqual(production["guarded_redirects"], 7)
 
 
 if __name__ == "__main__":

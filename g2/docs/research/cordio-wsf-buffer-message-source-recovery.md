@@ -138,8 +138,12 @@ the message candidate uses the Apache-2.0 public route. Focused tests compile
 the buffer/message/queue closure for Cortex-M4 with `-Werror`, validate pool
 construction, first-fit fallback, marker transitions, failure handling,
 message header hiding, enqueue/dequeue/peek, and the OS dispatcher adapters.
-All remain production-excluded pending exact logger/IAR comparison,
-placement/relocation work, and integrated target validation.
+All ten bounded entries are production-routed. Three buffer leaves compile to
+582 bytes with five strict relocations; seven message leaves compile to 114
+bytes plus 12 alignment bytes with eight strict relocations. The message
+allocation/free seams target the maintained buffer leaves. Live allocator,
+dispatcher, and controller concurrency remains blocked by unavailable
+authorized responsive hardware evidence.
 
 ## Reproduce
 
@@ -151,7 +155,5 @@ python3 -m unittest -v \
   tests/test_verify_research_corpus.py
 ```
 
-Next priority is the exact local warning/logger macro and licensed-IAR lane,
-then replacing the temporary OS message adapters with a single reviewed WSF
-integration boundary. None of those gaps requires decompiling the seven
-message functions again.
+`make cordio-wsf-runtime-closure` is the combined software gate. No image was
+signed, flashed, or installed.

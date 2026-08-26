@@ -6,7 +6,7 @@ The G2 stock image contains two adjacent functions from Cordio `wstr.c`:
 `WStrReverseCpy` and `WStrReverse`. Both have exact Apache-2.0 Packetcraft
 definition routes, closed direct/pointer/interior ingress, host-tested source,
 and a checksum-verified Lorelei compiler matrix. Together they account for two
-functions / 118 authenticated code bytes. They remain production-excluded.
+functions / 118 authenticated code bytes. They are production-routed.
 
 The third upstream API, `WstrnCpy`, is dead-stripped with high confidence.
 Every Packetcraft consumer of that function belongs to WDXS, and the separate
@@ -70,8 +70,9 @@ bytes, objects, ELFs, or disassembly.
 `components/shared/cordio/runtime_cordio_wstr_candidate.c/.h` exposes only
 the two linked definitions. Focused host tests cover zero, one, odd, and even
 length behavior and an ARM freestanding `-Werror` compile gate. The candidate
-is absent from all production inputs pending exact IAR placement/relocations
-and target validation.
+is present in production as two guarded leaves totaling 286 compiled bytes
+plus two alignment bytes and zero relocations. Their pure in-memory behavior
+has no independent hardware tail.
 
 ## Reproduce
 

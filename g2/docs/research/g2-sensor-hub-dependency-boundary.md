@@ -42,6 +42,20 @@ This is recorded as negative provenance evidence: sensor_hub.c is policy and
 message routing only.
 
 The object embeds no reusable third-party body and no version/commit
-discriminator. Remaining work is first-party source recreation and IMU/ALS
-behavior validation. Reproduce with `python3 tools/analyze_g2_sensor_hub.py`
-and its focused test.
+discriminator. Its complete software surface is now production-routed through
+`components/apollo_main/core_overlay/sensor_hub.c`: 31 selector-isolated
+functions emit 1,602 Thumb text bytes plus 36 alignment bytes with 106 strict
+relocations. Thirty guarded redirects replace 4,024 stock bytes. The
+unreachable two-byte empty hook and 382 bytes of authenticated pools remain as
+384 compatibility bytes; the source-owned entry calls the corresponding source
+hook directly.
+
+Host oracles cover thread/queue/timer lifecycle, the bounded eight-entry
+handler dispatch, role and open/close policy, OTA-gated ALS polling, IMU
+collection/work-mode transitions, calibration loading, mutual exclusion, and
+calibration-display feedback. Every selector compiles under the strict
+Cortex-M55 production profile. Live IMU/ALS samples, timing, calibration, and
+display behavior remain explicitly blocked: the authorized right temple is
+nonresponsive, the authorized left temple must remain stock, and no responsive
+authorized sensor path or golden IMU/ALS trace is available. Reproduce the
+software gate with `make sensor-hub-closure`.

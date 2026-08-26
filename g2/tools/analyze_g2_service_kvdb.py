@@ -265,14 +265,17 @@ def analyze(image: Path = IMAGE) -> dict:
         "open_cfw_service_kvdb_init",
         "open_cfw_service_kvdb_invalidate_magic",
     ]
-    leaves = overlay["relocated_leaves"][-11:-4]
+    leaves = [item for item in overlay["relocated_leaves"]
+              if item.get("source", {}).get("path") ==
+              "components/apollo_main/core_overlay/service_kvdb.c"]
     if [item.get("function") for item in leaves] != names:
         raise c.AuditError("service_kvdb relocated-leaf order changed")
     if [item["expected"]["size"] for item in leaves] != [50, 12, 12, 22, 48, 194, 4]:
         raise c.AuditError("service_kvdb compiled surface changed")
     if sum(len(item["relocations"]) for item in leaves) != 23:
         raise c.AuditError("service_kvdb relocation contract changed")
-    patches = overlay["patch_sites"][-11:-4]
+    patches = [item for item in overlay["patch_sites"]
+               if item.get("target_function") in names]
     if (
         [item.get("target_function") for item in patches] != names
         or [item.get("runtime_address") for item in patches]
@@ -287,11 +290,13 @@ def analyze(image: Path = IMAGE) -> dict:
         build["overlay"]["size"], build["overlay"]["sha256"],
         build["component"]["size"], build["component"]["sha256"],
     ) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise c.AuditError("service_kvdb production build pins changed")
-    built_leaves = build["relocated_leaves"][-11:-4]
+    built_leaves = [item for item in build["relocated_leaves"]
+                    if item.get("source", {}).get("path") ==
+                    "components/apollo_main/core_overlay/service_kvdb.c"]
     if (
         [item["extraction"]["function"] for item in built_leaves] != names
         or sum(item["extraction"]["size"] for item in built_leaves) != 342
@@ -306,15 +311,15 @@ def analyze(image: Path = IMAGE) -> dict:
         main["provider"]["size"], main["provider"]["sha256"],
         manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
     ) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise c.AuditError("service_kvdb manifest/package pins changed")
     kv_regions = [item for item in main["regions"] if item["name"].startswith("service_kvdb_")]
     if len(kv_regions) != 19:
         raise c.AuditError("service_kvdb manifest ownership changed")
     package_bytes = PACKAGE.read_bytes()
-    if (len(package_bytes), sh(package_bytes)) != (4542582, manifest["package"]["expected_sha256"]):
+    if (len(package_bytes), sh(package_bytes)) != (4634038, manifest["package"]["expected_sha256"]):
         raise c.AuditError("service_kvdb package artifact changed")
     plan_bytes = FLASH_PLAN.read_bytes()
     plan = json.loads(plan_bytes)
@@ -325,9 +330,9 @@ def analyze(image: Path = IMAGE) -> dict:
             "container_only_regions", "protected_regions",
         )),
     ) != (
-        2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f",
-        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
-        (3715, 2, 5, 6),
+        3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297",
+        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
+        (4482, 2, 5, 6),
     ):
         raise c.AuditError("service_kvdb flash plan changed")
     sysenv_partition = next(item for item in flashdb["partitions"] if item["name"] == "kvdb")

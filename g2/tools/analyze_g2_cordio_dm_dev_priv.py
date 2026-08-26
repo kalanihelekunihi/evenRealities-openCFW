@@ -19,6 +19,12 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 LOAD_BASE = 0x00437FE0
 IMAGE_BYTES = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+SOURCE=ROOT/"components/shared/cordio/runtime_cordio_dm_dev_priv.c"
+HEADER=ROOT/"components/shared/cordio/runtime_cordio_dm_dev_priv.h"
+TEST=ROOT/"tests/test_runtime_cordio_dm_dev_priv.py"
+SOURCE_PIN=(9053,"4bda14da5fb346939c64b62cf6b29ad852a4da534c8d0482740e00e0cc01fb2a")
+HEADER_PIN=(4241,"e1453b60d02906c2b2494666bea17fe11a5a3fea161b92c6d694f571fa27ac0d")
+TEST_PIN=(3640,"7b45ce4b118a53f3e3829a274b7bafb2803a4b34c8698bfa9689e37ab58b6ffb")
 READINESS_MANIFEST = ROOT / "research/readiness/dm-dev-priv/SHA256SUMS"
 READINESS_BYTES = 1_116
 READINESS_SHA256 = "2fc8d4436075e4c7248adf2d61e78e6a420a250e0155df8cad809815ecb941e8"
@@ -96,6 +102,13 @@ def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _verify_maintained_source() -> None:
+    for path,expected,label in ((SOURCE,SOURCE_PIN,"source"),(HEADER,HEADER_PIN,"header"),(TEST,TEST_PIN,"test")):
+        data=path.read_bytes()
+        if (len(data),_sha256(data))!=expected:
+            raise AuditError(f"maintained dm_dev_priv {label} changed")
+
+
 def _slice(blob: bytes, start: int, end: int) -> bytes:
     first = start - LOAD_BASE
     last = end - LOAD_BASE
@@ -132,6 +145,7 @@ def _initialized_sram(blob: bytes) -> bytes:
 
 
 def analyze(image: Path = IMAGE) -> dict[str, Any]:
+    _verify_maintained_source()
     if image.stat().st_size != IMAGE_BYTES:
         raise AuditError("official G2 image size changed")
     blob = image.read_bytes()
@@ -244,8 +258,15 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "linked_unresolved_symbols": 0,
             "minimum_retained_text": 1422,
             "retained_bss": 5416,
+            "maintained_source_functions": 18,
+            "local_target_profiles": 1,
         },
-        "production": {"source_owned_bytes_added": 0, "stock_bytes_replaced": 0},
+        "production": {
+            "status": "configuration-excluded",
+            "reason": "official component slot remains default-routed; no stock entry exists to replace",
+            "source_owned_bytes_added": 0,
+            "stock_bytes_replaced": 0,
+        },
     }
 
 

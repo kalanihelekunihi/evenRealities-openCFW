@@ -37,9 +37,18 @@ stock call to `dmConnOpenAccept` belongs to the separately closed master API.
 python3 tools/analyze_g2_cordio_dm_conn_slave.py --json
 ```
 
-Compiler readiness is deferred with the neighboring connection units because
-the local ARM cross-toolchain is unavailable. Production ownership remains
-zero; all 212 bytes are still cut from stock. The next target should follow
-the now-authenticated L2CAP caller bodies into `l2c_slave.c` or close the
-extended connection role modules if their action tables provide tighter
-bounds.
+All six source definitions now have maintained, host-tested C, including the
+dead-stripped public `DmConnAccept` equivalent. Seven Cortex-M55 profiles
+(the complete unit plus six isolated selectors) compile cleanly. Five guarded
+redirects replace all 206 bounded stock body bytes with 256 compiled bytes
+plus six alignment bytes under seven strict relocations. The 13 manifest
+regions, component, deterministic package, and flash plan are fail-closed and
+pinned by `make cordio-dm-conn-slave-closure`.
+
+The integration gate also caught and rejected a namespace collision between
+this module and `dm_conn_slave_leg`; their route/region prefixes are now
+disjoint and both complete partitions are verified together. Live controller
+and L2CAP update behavior, application callbacks, BLE peer/RF timing, and
+paired-temple interoperation remain hardware-blocked because the only
+authorized right temple is nonresponsive and the left temple must remain
+stock. No hardware-dependent completeness claim is made.

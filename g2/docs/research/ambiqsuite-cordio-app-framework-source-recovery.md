@@ -15,7 +15,11 @@ oracle is the public SparkFun AmbiqSuiteSDK 2.5.1 import at commit
 This closes the third-party source-identification gap; it does **not** identify
 Even's private producing checkout. Stock contains substantial downstream
 database, privacy, pairing, connection, diagnostic, and UI changes, so exact
-source-text identity is false and no admitted file is production-routed.
+source-text identity is false. Production routing is complete for the bounded
+framework: the 22 anchored `common/app_db.c` functions are source-owned by the
+G2 MRAM database implementation, while 14 legacy master/slave functions and
+all 25 remaining anchored UI/core/master/server/slave/discovery functions are
+source-routed by the five maintained `runtime_cordio_app_*.c` modules.
 
 The exact nine-file source snapshot, Apache license, blob IDs, sizes, hashes,
 release history, and negative historical-commit claim are authenticated under
@@ -87,13 +91,68 @@ definitions (`AppAdvSetAdValue`, `AppSetAdvPeerAddr`, and `AppConnAccept`) do
 not appear in the linked stock cluster and are classified as source-only, not
 missing OpenCFW behavior.
 
+## Application-framework production closure
+
+The complete 1,406-byte linked legacy cluster is now guarded at its 14 stock
+entries and replaced by 14 isolated Cortex-M55 leaves. The maintained source
+preserves the recovered fixed G2 ABI: master state `0x20071670`, slave state
+`0x200719C8`, advertising/master configuration cells `0x2007434C` and
+`0x20074354`, and the stored callback entries `0x004B2AFF` / `0x004B2B91`.
+It also implements G2's extension beyond public AmbiqSuite: when controller
+advertising mode is extended, legacy state transitions are retried through the
+WSF timer at `0x20073DF4` with the pending flag at `0x20074F94`, using the
+recovered 200 ms start/state delay and 100 ms stop retry.
+
+The 14 leaves compile to 948 bytes with 29 strict relocations. Host tests cover
+legacy/invalid scan mode, scan start/stop, connection open, callback identity,
+advertising-data truncation, state sequencing, advertising type, directed
+restart, successful extended-set termination, and every retry/timer branch.
+All 14 selector-isolated builds pass with `-Werror`.
+
+Four additional runtime modules close the remaining 25 anchors:
+
+| Runtime module | Entries | Compiled bytes | Relocations | Replaced stock bytes |
+|---|---:|---:|---:|---:|
+| `runtime_cordio_app_core.c` | 7 | 488 | 10 | 3,816 |
+| `runtime_cordio_app_master.c` | 4 | 262 | 6 | 1,522 |
+| `runtime_cordio_app_slave.c` | 3 | 698 | 25 | 1,944 |
+| `runtime_cordio_app_discovery.c` | 11 | 2,064 | 38 | 6,186 |
+
+The core module owns UI action/passkey/confirmation, bond lookup, resolving-list
+admission, connection-update timer start, and database-hash update behavior.
+The master and slave modules own scan/address resolution, connection/security,
+and DM-event processing. The discovery module owns configuration, service
+search, ATT response parsing, handle-list state, completion, and database-hash
+read progression. The two large stock discovery response parsers contain only
+diagnostic expansion beyond their bounded state effects; the maintained source
+implements the stateful behavior and bounded response validation without
+reproducing diagnostics.
+
+Together with the 22-function MRAM database closure, the five application
+runtime modules production-own 61 distinct functions / 29,870 stock body bytes.
+All 50 source-path anchors / 29,110 anchored bytes are routed, leaving zero
+bounded framework anchors. The five runtime modules compile to 4,460 bytes
+under 108 strict relocations. Host behavior tests and every selector-isolated
+Cortex-M55 build pass with `-Werror`.
+
+Canonical overlay/component/package identities are 424,732 / 3,948,128 /
+4,726,622 bytes with SHA-256
+`9f0dd0742bac903da275993e19c135a2508070a8baf4c462fb3d170a0a1272d9`,
+`e3cfa30e77a5053d302aa3bc569cad39937d57c524c8e2e681923b70ad60b3a7`,
+and `ecc49cd5b184fce9a6a25f71532eba7d1ee33ee566b131ec1b97b0a9536287d9`.
+The source package rebuild is byte-identical. No image was signed or flashed.
+This is bounded application-framework software closure, not firmware
+functional-completeness evidence.
+
 ## OpenCFW disposition
 
 The source family, public origin, selected release, selected commit, and
 Packetcraft ancestor are closed. The historical private G2 commit remains
-binary-unobservable. The admitted source is suitable as a semantic and API
-oracle, while production replacement remains gated on clean reconstruction of
-the G2 delta plus controller/concurrency/hardware validation.
+binary-unobservable. Every bounded source-path anchor is production-routed.
+Live scanning, advertising, connection, controller transition, concurrency,
+and paired-temple validation is explicitly blocked: the authorized right G2 is
+nonresponsive and the left temple must remain stock. Hardware-dependent
+functional completeness is therefore not claimed.
 
 Reproduce the audit with:
 

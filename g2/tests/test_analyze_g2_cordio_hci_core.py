@@ -60,7 +60,21 @@ class CordioHciCoreAuditTests(unittest.TestCase):
         self.assertTrue(lineage["stock_excludes_r44_neuralspot_delay"])
         self.assertTrue(lineage["stock_excludes_nsx_priority_trace_path"])
         self.assertEqual(lineage["license"], "Arm Cordio proprietary SLA")
-        self.assertFalse(self.report["production"]["proprietary_source_copied"])
+        self.assertEqual(lineage["public_behavior_license"], "Apache-2.0")
+        production = self.report["production"]
+        self.assertFalse(production["proprietary_source_copied"])
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(production["stock_bytes_replaced"], 1_964)
+        self.assertEqual(production["source_owned_bytes_added"], 3_690)
+        self.assertEqual(production["alignment_bytes_added"], 26)
+        self.assertEqual(production["strict_relocations"], 50)
+        self.assertEqual(production["source_only_functions_compiled"], 2)
+        self.assertEqual(production["manifest_regions"], 57)
+        self.assertEqual(production["flash_plan_counts"], (5_864, 2, 5, 6))
+        self.assertTrue(production["transport_rejection_preserves_fragment"])
+        self.assertTrue(production["partial_l2cap_header_hardened"])
+        self.assertTrue(production["overlong_continuation_hardened"])
+        self.assertTrue(production["watermark_validation_hardened"])
 
 
 if __name__ == "__main__":

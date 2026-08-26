@@ -44,6 +44,11 @@ CANDIDATE_OS_C = ROOT / "components/shared/cordio/runtime_cordio_wsf_os_candidat
 CANDIDATE_OS_H = ROOT / "components/shared/cordio/runtime_cordio_wsf_os_candidate.h"
 CANDIDATE_QUEUE_C = ROOT / "components/shared/cordio/runtime_cordio_wsf_queue_candidate.c"
 CANDIDATE_QUEUE_H = ROOT / "components/shared/cordio/runtime_cordio_wsf_queue_candidate.h"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 
 FILE_HASHES = {
     OS_MAP: "76b22daa34cd9ddec9959f47b686c3a602771f2ab8bf2ab468dd63bd4b78c9d1",
@@ -56,12 +61,35 @@ FILE_HASHES = {
     MATRIX_BEST: "d6eddd6b685e16a9177dd5fea63d66895119df5cea581c398b79d7118c391811",
     MATRIX_SOURCE: "d166324a7b6b291e1bae593caf5bb0b03bdf0e68833342c8f57ae646a92ac6e2",
     MATRIX_PROVIDERS: "e99bc73d7bf500a51a32fd0639d3ff42977aabb4f667697b6ca35caaadc539c0",
-    MATRIX_MANIFEST: "0636c55d2ec637d32f6833df404c259299efae41b8dcf1ac25226de21da67861",
-    CANDIDATE_OS_C: "fd754f3323b5c97e7d61961757eb55d7f6aec4238949ab6e86cc8b77f62f95be",
-    CANDIDATE_OS_H: "4811e2683a356cef52f163535e457398d7eb2dae1079d2047fbf8c29a03c43b9",
-    CANDIDATE_QUEUE_C: "e04c1483b245ce8cc94aaaefa1a1187b5f049e5f39afeeb66caf1da5b8cbbf11",
-    CANDIDATE_QUEUE_H: "9c39532c9c9ed424c0db00ced5d8522501ce3fd08bcfac4e69ff4aeebd14fcc7",
+    MATRIX_MANIFEST: "0636c55d2ec637d32f6833df404c259299efae41b8dcf1ac25267de21da67861",
+    CANDIDATE_OS_C: "66d8e2a0a06b4ea89c3779b32b1f7bad7522d2fd7d1a3e1134b6c680fc12508e",
+    CANDIDATE_OS_H: "5e3480211cee74bbfc2ae5bdfe9c281be3a933dc09ee8f775b9bf05830c2baf5",
+    CANDIDATE_QUEUE_C: "909db5407f72c0b56b5a50605b142dbb461585f342a397c7acf4a6dbc703d6fa",
+    CANDIDATE_QUEUE_H: "19e85f58cfb3329ee3cf6dfe104f8138dc89ffd30dc648ea06f9c467eac2edb1",
 }
+
+OS_PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_wsf_cs_enter_candidate",
+    "open_cfw_cordio_wsf_cs_exit_candidate",
+    "open_cfw_cordio_wsf_task_lock_candidate",
+    "open_cfw_cordio_wsf_task_unlock_candidate",
+    "open_cfw_cordio_wsf_set_os_specific_event_candidate",
+    "open_cfw_cordio_wsf_set_event_candidate",
+    "open_cfw_cordio_wsf_task_set_ready_candidate",
+    "open_cfw_cordio_wsf_task_message_queue_candidate",
+    "open_cfw_cordio_wsf_os_set_next_handler_candidate",
+    "open_cfw_cordio_wsf_os_ready_to_sleep_candidate",
+    "open_cfw_cordio_wsf_os_init_candidate",
+    "open_cfw_cordio_wsf_os_dispatcher_candidate",
+]
+QUEUE_PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_wsf_queue_enqueue_candidate",
+    "open_cfw_cordio_wsf_queue_dequeue_candidate",
+    "open_cfw_cordio_wsf_queue_push_candidate",
+    "open_cfw_cordio_wsf_queue_insert_candidate",
+    "open_cfw_cordio_wsf_queue_remove_candidate",
+    "open_cfw_cordio_wsf_queue_count_candidate",
+]
 
 OS_CALLERS = {
     0x0052B8A4: [0x0052B8CA,0x0052B924,0x0052B962,0x0052B9E0,0x0052BA64,0x0053046E,0x005304FC,0x00538C2E,0x00538C4E,0x00538C74,0x00538C94,0x00538CD0,0x00538CFC],
@@ -261,11 +289,104 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
     if provider_rows[-1] != {"scope": "linked_closure", "symbol": "(none)", "status": "zero_undefined_all_13_configs"}:
         raise AuditError("Lorelei provider closure changed")
 
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    production = {}
+    for unit, source, prefix, mapped, names, first_offset, expected_metrics in (
+        (
+            "wsf_os", CANDIDATE_OS_C, "replace_cordio_wsf_os_", os_rows,
+            OS_PRODUCTION_FUNCTIONS, 334020, (614, 10, 25),
+        ),
+        (
+            "wsf_queue", CANDIDATE_QUEUE_C, "replace_cordio_wsf_queue_",
+            queue_rows, QUEUE_PRODUCTION_FUNCTIONS, 334644, (272, 4, 16),
+        ),
+    ):
+        source_path = source.relative_to(ROOT).as_posix()
+        leaves = [
+            row for row in overlay["relocated_leaves"]
+            if row.get("source", {}).get("path") == source_path
+        ]
+        if len(leaves) != len(names) or any(
+            row.get("source", {}).get("sha256") != FILE_HASHES[source]
+            for row in leaves
+        ):
+            raise AuditError(f"{unit} production source inventory changed")
+        sites = {row["name"]: row for row in overlay["patch_sites"]}
+        for index, (row, function) in enumerate(zip(mapped, names), 1):
+            start = int(row["stock_start"], 0)
+            end = int(row["stock_end_exclusive"], 0)
+            site = sites.get(f"{prefix}{index:02d}")
+            if (
+                site is None
+                or site.get("runtime_address") != start
+                or site.get("target_function") != function
+                or site.get("branch") != "b_w"
+                or site.get("expected_size") != end - start
+                or site.get("expected_sha256") != row["stock_sha256"]
+                or function not in overlay["functions"]
+            ):
+                raise AuditError(f"{unit} production route {index} changed")
+        compiled = sum(row["expected"]["size"] for row in leaves)
+        alignment = leaves[0]["expected"]["offset"] - first_offset
+        alignment += sum(
+            leaves[index + 1]["expected"]["offset"]
+            - leaves[index]["expected"]["offset"]
+            - leaves[index]["expected"]["size"]
+            for index in range(len(leaves) - 1)
+        )
+        relocations = sum(len(row["relocations"]) for row in leaves)
+        if (compiled, alignment, relocations) != expected_metrics:
+            raise AuditError(f"{unit} production metrics changed")
+        production[unit] = {
+            "functions": names,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": len(names),
+        }
+
+    build = json.loads(BUILD_REPORT.read_text())
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"] != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"] != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+    ):
+        raise AuditError("WSF OS/queue production component changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    provider = override["provider"]
+    regions = override["regions"]
+    if (
+        provider.get("size") != 3928192
+        or provider.get("sha256") != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([row for row in regions if row["name"].startswith("cordio_wsf_os_")]) != 29
+        or len([row for row in regions if row["name"].startswith("cordio_wsf_queue_")]) != 14
+    ):
+        raise AuditError("WSF OS/queue manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or _sha256(PACKAGE.read_bytes()) != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("WSF OS/queue package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or _sha256(FLASH_PLAN.read_bytes()) != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]),
+            len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]),
+            len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("WSF OS/queue flash plan changed")
+
     os_functions = [item for item in functions if item["unit"] == "wsf_os"]
     queue_functions = [item for item in functions if item["unit"] == "wsf_queue"]
     return {
         "schema_version": 1,
-        "analysis_mode": "read-only stock audit; production-excluded clean-room candidates",
+        "analysis_mode": "read-only stock and production-route audit; no hardware or flash operation",
         "authenticated_inputs": {
             "image_sha256": IMAGE_SHA256,
             "ghidra_corpus_manifest_sha256": CORPUS_MANIFEST_SHA256,
@@ -300,7 +421,7 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "license": "proprietary Wicentric/ARM source used as an oracle and not redistributed",
         },
         "candidate": {
-            "production": "excluded",
+            "production": "routed",
             "modules": [str(CANDIDATE_OS_C.relative_to(ROOT)), str(CANDIDATE_QUEUE_C.relative_to(ROOT))],
             "behaviorally_recreated_stock_functions": 18,
             "behaviorally_recreated_stock_bytes": 774,
@@ -308,6 +429,7 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "stock_queue_empty_body_bounded": False,
             "combined_arm_header_and_source_compile_gate": True,
             "direct_isr_pendsv_behavior_recreated_through_explicit_seam": True,
+            "production_metrics": production,
         },
         "stock_abi_matrix": {
             "archive": str(MATRIX_MANIFEST.relative_to(ROOT)),
@@ -328,8 +450,8 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "no retained stock __FILE__ path anchors wsf_os.c or wsf_queue.c; identity rests on source order, semantics, ABI, call topology, and release discriminators",
             "the exact G2 definition site producing WSF_MAX_HANDLERS=10 is unavailable; a later official Ambiq source differs from R2.5.1 only by changing the guarded default from 9 to 10",
             "WsfQueueEmpty has no independently bounded linked stock body and is excluded from recovered-byte coverage",
-            "the clean-room modules remain outside every production overlay and package manifest",
-            "IAR code generation, final placement, all production relocations, and target behavior remain unverified",
+            "all eighteen bounded functions are guarded-routed from maintained C; WsfQueueEmpty remains source-only because no independent stock body exists",
+            "live controller scheduling, ISR wake behavior, handler ordering, and sleep/wakeup remain blocked by unavailable authorized physical evidence",
         ],
     }
 
@@ -348,7 +470,7 @@ def main() -> int:
         print("  OS: 12 functions / 532 bytes")
         print("  queue: 6 bounded functions / 242 bytes")
         print("  lineage: AmbiqSuite 2.5.1 family; stock-effective 10 handlers")
-        print("  source candidates: behaviorally recreated; production-excluded")
+        print("  production: eighteen clean-room functions guarded-routed and package-verified")
     return 0
 
 

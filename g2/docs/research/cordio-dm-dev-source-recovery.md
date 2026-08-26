@@ -11,10 +11,8 @@ literal pool, and two bytes of trailing alignment. Its complete 672-byte
 physical SHA-256 is
 `1fced11091cb40594dae51a943c599abd9a58562f6a5bfa9152e2dd2c7cf5cbc`.
 Six unused source APIs have no body, caller, or registered pointer and are
-classified source-only/dead-stripped.
-
-This is an identification result, not a production replacement. All 672
-bytes remain stock-retained.
+classified source-only/dead-stripped in stock; all six remain maintained and
+target-compilable.
 
 ## Source lineage
 
@@ -120,9 +118,26 @@ python3 tools/analyze_g2_cordio_dm_dev.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production promotion still requires exact compiler/placement/provider closure
-and replacement tests. The component-1 dependency is now closed separately:
-[`dm_dev_priv.c` is absent/dead-stripped](cordio-dm-dev-priv-exclusion.md), and
-the stock bridge safely reaches `dmFcnDefault`. The next linked target is
-`dm_main.c`, which owns global HCI/message routing and `dmFcnIfTbl`
-initialization.
+## Production admission
+
+`runtime_cordio_dm_dev.c` implements all eighteen definitions. Twelve guarded
+redirects replace all 626 linked stock body bytes with 448 compiled Cortex-M55
+bytes plus 18 alignment bytes under nine strict relocations. The six
+stock-absent whitelist/filter-policy APIs are also selector-compiled without
+claiming stock coverage. The 44-byte literal pool and two-byte trailing pad
+remain separately authenticated compatibility data.
+
+Host tests cover the 21-component reset traversal and in-progress guard, all
+four HCI translations, callback/null behavior, device-privacy and
+connection-CTE bridge layouts, reset allocation/send and failure, random
+address copying, whitelist forwarding, all filter-policy modes and bounds,
+and the product's empty vendor initializer. Full and all eighteen isolated
+Cortex-M55 builds, exact routing, component, manifest, deterministic package,
+and flash-plan checks pass. The canonical overlay/component/package sizes are
+357,394 / 3,880,790 / 4,659,284 bytes; the 3,586,814-byte flash plan has 5,160
+placed, two unresolved, five container-only, and six protected regions.
+
+No image was signed, flashed, or installed. Live HCI reset sequencing,
+controller event timing, random-address programming, filter/privacy behavior,
+and paired-temple interoperability remain blocked by unavailable authorized
+responsive G2/EM9305 physical evidence.

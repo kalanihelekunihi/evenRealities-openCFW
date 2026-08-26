@@ -1,6 +1,6 @@
 # Cordio ATT client-supported-features source recovery
 
-Status date: 2026-08-08  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -25,8 +25,12 @@ separate or inlined initializer write site. BSS zero initialization already
 establishes the callback and hash-update defaults, so the initializer is
 classified dead-stripped rather than opaque.
 
-All stock bytes remain cut forward. This tranche identifies source and ABI;
-it does not yet promote a production replacement or change package ownership.
+All ten callable entries are production-routed from maintained Apache-2.0 C.
+Ten guarded redirects replace 4,814 authenticated stock function bytes with
+502 selector-isolated Cortex-M55 text bytes plus 12 alignment bytes under one
+strict relocation. The fixed control block remains at `0x20073E04`, and the
+only external business provider is the authenticated pending-database-hash
+response routine at `0x00534DD8`.
 
 ## Upstream provenance
 
@@ -107,8 +111,10 @@ Stock adds explicit `connId == 0` guards to accessors that pristine public
 r20 source indexes directly. The invalid-connection results are false,
 `0x0E`, state 3, no copy, or no-op as appropriate. Logger/assert source-line
 constants extend through line 444, while public r20.05c ends at line 415.
-Those facts prevent a whole-file exact-source claim and identify the remaining
-work: model the vendor instrumentation seam before compiler/byte comparison.
+Those facts prevent a whole-file exact-source claim. The production source
+implements each observed `connId == 0` result (false, ATT `0x0E`, state 3,
+no copy, or no-op). Vendor trace/assert/logger expansion is intentionally not
+copied because it changes diagnostics, not the recovered ATT result or state.
 
 ## Lorelei result and reproducibility
 
@@ -137,8 +143,16 @@ python3 tools/analyze_g2_cordio_atts_csf.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-The next highest-value bounded public module is `smp_db.c`, followed by
-`atts_ccc.c`. A production source candidate for this module should first
-externalize or recreate the stock validation/logger seam, then compare
-normalized control flow and callback topology against the authenticated r20
-oracle before expanding compiler profiles.
+Production admission is fail-closed through
+`tools/analyze_g2_cordio_atts_csf.py`, host behavior tests, ten isolated
+Cortex-M55 leaf builds, component/manifest ownership, deterministic package,
+and flash-plan checks. The canonical overlay/component/package are 335,892 /
+3,859,288 / 4,637,782 bytes with SHA-256
+`ae1f288b7b97cc3eab981468653e27caf89a821b68589c45a8303b78b40682e0`,
+`51271353d72b4814e3716ed48c91872df252a9fce495992f69c54613343b6926`,
+and `2cc1f2700428796d333f8f07f17fa9073565a40f85dcb32fe8acc75e8dd46860`.
+No image was signed, flashed, or installed. Live robust-caching,
+database-hash/service-changed exchange, callback ordering, ATT peer behavior,
+and EM9305 controller timing are explicitly blocked by unavailable authorized
+responsive G2/EM9305 physical evidence. Remaining ATT server modules continue
+as separate software gaps.

@@ -13,16 +13,16 @@ PINS={FM:"6e850bd713482629f98fa8aff0f7c263eb22f11b0e884d1a1d1a3c7278865284",PM:"
 PHYS=(0x5597F0,0x55A350);PATH_CELLS=(0x559FAC,0x55A30C);EASY={0x43CE9E,0x43D0CE,0x43D574};IAR={0x439BE4,0x43C0E4};HEALTH={0x4FFC32,0x4FFC90}
 PROD_PIN=(15863,"42df69101ab924e6b9e6f2710d618ab9a5e57c8154d3b135eeffdfadf195c5fd")
 LEAVES=(
- ("open_cfw_health_data_type_index","OPEN_CFW_HEALTH_DM_INDEX_ONLY",18,"beec3042f4f13f78d76daa14c1e5e4b42bbcb5274a85e636670ae6870b89599d",182552),
- ("open_cfw_health_data_slot_for_type","OPEN_CFW_HEALTH_DM_SLOT_ONLY",32,"a947fa832da884244a39b56b66e13e3fb14bd7cbe9f86d6ddf8b3e24a010bf13",182572),
- ("open_cfw_health_data_type_name","OPEN_CFW_HEALTH_DM_NAME_ONLY",154,"73058404209be1f6138313ba6ef19e3e774a80ed488cddd823cd1eed72dd4570",182604),
- ("open_cfw_health_data_manager_init","OPEN_CFW_HEALTH_DM_INIT_ONLY",210,"8d34220b5e8e12be5e629f356ab89fe440344dd2334a77886c90a812c440b115",182760),
- ("open_cfw_health_data_convert_from_pb","OPEN_CFW_HEALTH_DM_CONVERT_ONLY",100,"8aef36b4af097948fb0f6db1425ddad9fc50867a3fcf65b0b8c9c2d9ee63e819",182972),
- ("open_cfw_health_data_save_single","OPEN_CFW_HEALTH_DM_SAVE_SINGLE_ONLY",54,"d0dbe75c743a36abbd9d214bb0c35c4348a28cc273083eb8091138c67192d12e",183072),
- ("open_cfw_health_data_save_multiple","OPEN_CFW_HEALTH_DM_SAVE_MULTIPLE_ONLY",72,"bc0b9420a2d3f6c4ffdd493e4b6b541a95c6d14b57b89b16dd04c24a7c047534",183128),
- ("open_cfw_health_data_convert_highlight_from_pb","OPEN_CFW_HEALTH_DM_CONVERT_HIGHLIGHT_ONLY",134,"83d81bc843e822d684638e83cf15f6f4e498a6fb526912fa60094e68735a4116",183200),
- ("open_cfw_health_data_save_single_highlight","OPEN_CFW_HEALTH_DM_SAVE_SINGLE_HIGHLIGHT_ONLY",96,"7cd5ad2e9c9ffa4c3b803369ae07ff8a974d919294368fcd09b9f337db023fca",183336),
- ("open_cfw_health_data_save_multiple_highlights","OPEN_CFW_HEALTH_DM_SAVE_MULTIPLE_HIGHLIGHTS_ONLY",142,"dcd2043e2beffcf2f68d7d3a275b6397363cc567ebeca68b0e7e4a4229f43624",183432),
+ ("open_cfw_health_data_type_index","OPEN_CFW_HEALTH_DM_INDEX_ONLY",18,"beec3042f4f13f78d76daa14c1e5e4b42bbcb5274a85e636670ae6870b89599d",242400),
+ ("open_cfw_health_data_slot_for_type","OPEN_CFW_HEALTH_DM_SLOT_ONLY",32,"a947fa832da884244a39b56b66e13e3fb14bd7cbe9f86d6ddf8b3e24a010bf13",242420),
+ ("open_cfw_health_data_type_name","OPEN_CFW_HEALTH_DM_NAME_ONLY",154,"73058404209be1f6138313ba6ef19e3e774a80ed488cddd823cd1eed72dd4570",242452),
+ ("open_cfw_health_data_manager_init","OPEN_CFW_HEALTH_DM_INIT_ONLY",210,"8d34220b5e8e12be5e629f356ab89fe440344dd2334a77886c90a812c440b115",242608),
+ ("open_cfw_health_data_convert_from_pb","OPEN_CFW_HEALTH_DM_CONVERT_ONLY",100,"8aef36b4af097948fb0f6db1425ddad9fc50867a3fcf65b0b8c9c2d9ee63e819",242820),
+ ("open_cfw_health_data_save_single","OPEN_CFW_HEALTH_DM_SAVE_SINGLE_ONLY",54,"d0dbe75c743a36abbd9d214bb0c35c4348a28cc273083eb8091138c67192d12e",242920),
+ ("open_cfw_health_data_save_multiple","OPEN_CFW_HEALTH_DM_SAVE_MULTIPLE_ONLY",72,"bc0b9420a2d3f6c4ffdd493e4b6b541a95c6d14b57b89b16dd04c24a7c047534",242976),
+ ("open_cfw_health_data_convert_highlight_from_pb","OPEN_CFW_HEALTH_DM_CONVERT_HIGHLIGHT_ONLY",134,"83d81bc843e822d684638e83cf15f6f4e498a6fb526912fa60094e68735a4116",243048),
+ ("open_cfw_health_data_save_single_highlight","OPEN_CFW_HEALTH_DM_SAVE_SINGLE_HIGHLIGHT_ONLY",96,"7cd5ad2e9c9ffa4c3b803369ae07ff8a974d919294368fcd09b9f337db023fca",243184),
+ ("open_cfw_health_data_save_multiple_highlights","OPEN_CFW_HEALTH_DM_SAVE_MULTIPLE_HIGHLIGHTS_ONLY",142,"dcd2043e2beffcf2f68d7d3a275b6397363cc567ebeca68b0e7e4a4229f43624",243280),
 )
 STOCK_TARGETS={
  0x5597F0:"open_cfw_health_data_type_index",0x559836:"open_cfw_health_data_slot_for_type",0x559854:"open_cfw_health_data_type_name",0x5598AE:"open_cfw_health_data_manager_init",0x5598CC:"open_cfw_health_data_save_single",0x559AD2:"open_cfw_health_data_save_multiple",0x559D82:"open_cfw_health_data_convert_from_pb",0x559DFC:"open_cfw_health_data_save_single_highlight",0x559FB8:"open_cfw_health_data_save_multiple_highlights",0x55A230:"open_cfw_health_data_convert_highlight_from_pb",
@@ -92,13 +92,13 @@ def analyze(image=IMAGE):
   site=sites[a]
   if site.get("expected_size")!=z-a or site.get("expected_sha256")!=row["stock_sha256"] or site.get("target_function")!=STOCK_TARGETS[a] or site.get("branch")!="b_w" or site.get("profiles")!=["apple-clang"]:raise c.AuditError("production stock replacement changed")
  report=json.loads(REPORT.read_text())
- if (report["overlay"]["size"],report["overlay"]["sha256"],report["component"]["size"],report["component"]["sha256"])!=(240692,"2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",3764088,"b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):raise c.AuditError("production build pins changed")
+ if (report["overlay"]["size"],report["overlay"]["sha256"],report["component"]["size"],report["component"]["sha256"])!=(332148,"588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",3855544,"df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):raise c.AuditError("production build pins changed")
  built={x.get("extraction",{}).get("function"):x for x in report.get("relocated_leaves",[]) if x.get("extraction",{}).get("function") in leaf_names}
  if set(built)!=leaf_names or sum(x[2] for x in LEAVES)!=1012 or sum(x["placement"].get("padding_before",0) for x in built.values())!=10:raise c.AuditError("production compiled closure changed")
  manifest=json.loads(MANIFEST.read_text());main=manifest["component_overrides"]["apollo_main"];regions=main["regions"]
  generated=[x for x in regions if x.get("address_status")=="generated_source_entry_replacement" and x.get("target_address") in STOCK_TARGETS]
- appended=[x for x in regions if x.get("address_status")=="source_compiled" and 8129596<=x.get("target_address",0)<8130618]
+ appended=[x for x in regions if x.get("address_status")=="source_compiled" and 8189444<=x.get("target_address",0)<8190466]
  if len(generated)!=10 or sum(x["size"] for x in generated)!=2644 or len(appended)!=10 or sum(x["size"] for x in appended)!=1012:raise c.AuditError("production manifest closure changed")
- if (main["provider"]["size"],main["provider"]["sha256"],manifest["package"]["expected_size"],manifest["package"]["expected_sha256"])!=(3764088,"b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",4542582,"275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):raise c.AuditError("production package pins changed")
+ if (main["provider"]["size"],main["provider"]["sha256"],manifest["package"]["expected_size"],manifest["package"]["expected_sha256"])!=(3855544,"df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",4634038,"3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):raise c.AuditError("production package pins changed")
  return {"schema_version":1,"identity":{"image_sha256":c.IMAGE_SHA256,"retained_path":r"app\gui\health\health_data_manager.c","embedded_third_party_definitions":[]},"surface":{"linked_functions":10,"ghidra_discovered_functions":9,"restored_functions":1,"path_anchored_functions":5,"body_bytes":2644,"physical_bytes":2912,"noncode_bytes":268,"reachable_instructions":976,"direct_body_calls":149,"internal_direct_body_calls":13,"external_direct_body_calls":136,"indirect_body_calls":0,"direct_bl_entry_sites":18,"stored_function_entry_pointers":0,"strict_interior_ingress":0},"provider_boundary":{"easylogger_calls":120,"iar_runtime_calls":6,"closed_health_lock_calls":10,"direct_cmsis_freertos_calls":0,"historical_health_manager_commit":None,"new_version_discriminator":False},"production":{"production_routed":True,"source_functions":10,"compiled_text_bytes":1012,"alignment_bytes":10,"stock_replaced_bytes":2644,"strict_relocations":15,"software_functional_gap":False,"hardware_validation":"blocked","hardware_blocker":"No authorized physical G2/EM9305 hardware evidence is available in this workspace."}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

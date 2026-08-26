@@ -11,6 +11,15 @@ bytes: 524 executable bytes and a 28-byte receive-state literal pool.
 `hciTrSendAclData`, `hciTrSendCmd`, and `hciTrSerialRxIncoming` survive;
 `hciTrReceivingPacket` is source-only.
 
+The full four-definition inventory is now implemented in
+`components/shared/cordio/runtime_cordio_hci_tr.c`. All three linked entries
+are production-routed: 454 compiled bytes under six strict relocations replace
+all 524 bounded stock body bytes, while the source-only getter is compiled as
+part of the maintained translation unit and independently target-compiled.
+The source is project-original clean-room code derived from the authenticated
+machine-code contract and public HCI/WSF interfaces; it copies no proprietary
+source, header, or object bytes.
+
 Four direct `BL` sites reach all three entries: two driver receive paths and
 one sender each from the HCI ACL and command layers. Six calls leave the TU for
 the Ambiq driver, HCI core receive path, receive-length getter, and WSF
@@ -56,7 +65,33 @@ invalid packet type, rejects ACL payloads above `HciGetMaxRxAclLen()`, and
 rejects event payloads above 255 bytes. ACL packets use `WsfMsgDataAlloc`,
 events use `WsfMsgAlloc`, and complete packets pass to `hciCoreRecv`. Invalid
 lengths and allocation failures reset the state and report the caller's full
-input length as consumed.
+input length as consumed. The maintained implementation makes that reset
+atomic across state, in-progress flag, packet/data pointers, indicator, and
+byte count. This closes two failure-state hazards visible in the stock
+instruction sequence: a rejected packet cannot retain a stale queued buffer
+pointer, and `hciTrReceivingPacket()` cannot remain asserted after rejection.
+
+## Production admission
+
+| Function | Stock bytes | Compiled bytes | Strict relocations |
+|---|---:|---:|---:|
+| `hciTrSendAclData` | 42 | 52 | 1 (`HciDrvWrite`) |
+| `hciTrSendCmd` | 32 | 32 | 1 (`HciDrvWrite`) |
+| `hciTrSerialRxIncoming` | 450 | 370 | 4 (`hciCoreRecv`, `HciGetMaxRxAclLen`, both WSF allocators) |
+
+All leaves have four-byte alignment with zero added padding. Six manifest
+regions account for the three replaced stock entries and three appended source
+leaves. Host tests exercise exact partial/full driver writes, null TX, event
+and ACL assembly, every-byte chunking, multiple packets in one input, invalid
+types, excessive ACL payloads, allocation failure, and null non-empty RX. The
+complete translation unit also compiles freestanding for Cortex-M55.
+
+The canonical production artifacts after admission are overlay 365,962 bytes
+(`cd1bdd4d...`), component 3,889,358 bytes (`2992bad3...`), package
+4,667,852 bytes (`17cfb154...`), and flash plan 3,812,398 bytes
+(`a289db69...`). The flash plan has `(5696, 2, 5, 6)` flash, unresolved,
+container-only, and protected regions; both unresolved regions remain explicit
+hardware evidence blocks.
 
 ## Source-family and license boundary
 
@@ -89,7 +124,10 @@ metadata and independently described behavior.
 
 ```sh
 python3 tools/analyze_g2_cordio_hci_tr.py --json
-python3 -m unittest tests.test_analyze_g2_cordio_hci_tr
+make cordio-hci-tr-closure
 ```
 
-Production source ownership and stock-byte replacement remain zero.
+Live controller byte transport, ACL/event delivery, RF/timing, and paired-
+temple behavior remain blocked because the authorized right temple is
+nonresponsive and the left temple must remain stock. No signing, flashing, or
+installation was performed.

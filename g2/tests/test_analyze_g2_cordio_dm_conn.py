@@ -48,7 +48,28 @@ class CordioDmConnAuditTests(unittest.TestCase):
         self.assertEqual(
             report["readiness"]["linked_unresolved_symbols"], 0
         )
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        production = report["production"]
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(
+            (
+                production["production_owned_stock_functions"],
+                production["guarded_redirects"],
+                production["exact_in_place_copies"],
+                production["production_owned_stock_bytes"],
+            ),
+            (57, 55, 2, 6216),
+        )
+        self.assertEqual(
+            (
+                production["source_owned_bytes_added"],
+                production["alignment_bytes_added"],
+                production["strict_relocations"],
+                production["manifest_regions"],
+            ),
+            (4540, 54, 92, 141),
+        )
+        self.assertEqual(production["source_only_functions_compiled"], 5)
+        self.assertEqual(production["flash_plan_counts"], (5863, 2, 5, 6))
 
 
 if __name__ == "__main__":

@@ -32,8 +32,16 @@ entry at `0x0078D424` is the sole stored pointer into this object.
 python3 tools/analyze_g2_cordio_dm_conn_master_leg.py --json
 ```
 
-Compiler readiness is deliberately deferred: the local environment has no
-`arm-none-eabi` toolchain, while the source/binary/table proof is independent
-and complete. Production still cuts these 160 bytes forward. The adjacent
-legacy-slave and extended-master modules are the next action-table-driven
-candidates.
+`runtime_cordio_dm_conn_master_leg.c` now implements and target-compiles all
+three definitions. Three guarded redirects replace all 136 linked stock body
+bytes with 176 compiled Cortex-M55 bytes plus two alignment bytes under seven
+strict relocations. Host tests cover scan/connection parameters, address
+mapping, HCI submission, privacy notification, malformed input, action-message
+unpacking, and locked installation of both retained action tables. Exact
+routing, manifest, component, deterministic package, and flash-plan gates
+pass. The canonical overlay/component/package sizes are 358,498 / 3,881,894 /
+4,660,388 bytes; the 3,633,825-byte flash plan has 5,226 placed, two
+unresolved, five container-only, and six protected regions. No image was
+signed, flashed, or installed. Live connection creation, controller/privacy
+ordering, peer/RF/timing, and paired-temple validation remain blocked by
+unavailable authorized responsive G2/EM9305 physical evidence.

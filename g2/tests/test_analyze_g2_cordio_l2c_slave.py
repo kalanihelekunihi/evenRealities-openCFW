@@ -7,4 +7,6 @@ class L2cSlaveTest(unittest.TestCase):
   s=importlib.util.spec_from_file_location('l2c_slave_audit',ROOT/'tools/analyze_g2_cordio_l2c_slave.py');cls.m=importlib.util.module_from_spec(s);sys.modules[s.name]=cls.m;s.loader.exec_module(cls.m)
  def test_closure(self):
   r=self.m.analyze();m=r['module'];self.assertEqual((m['linked_function_count'],m['linked_function_bytes'],m['physical_bytes']),(6,1078,1148));self.assertEqual(m['source_only_functions'],['L2cDmSigReq']);self.assertEqual((m['direct_bl_ingress_sites'],m['registered_function_pointers'],m['strict_interior_pointers']),(4,2,0));self.assertEqual(r['architecture']['handle_validation'],'DmConnIdByHandle')
+  self.assertEqual((r['production']['status'],r['production']['stock_bytes_replaced'],r['production']['compiled_text_bytes'],r['production']['alignment_bytes'],r['production']['strict_relocations']),('routed',1078,496,8,12))
+  self.assertTrue(r['production']['allocation_before_timer_start_hardened'])
 if __name__=='__main__':unittest.main()

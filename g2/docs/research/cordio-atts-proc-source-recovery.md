@@ -1,6 +1,6 @@
 # Cordio common ATT server processor source audit
 
-Status date: 2026-08-09  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -66,9 +66,33 @@ import commit is claimed as G2's resolved historical generating commit.
 ## Reproduction
 
 ```sh
-python3 tools/analyze_g2_cordio_atts_proc.py --json
-python3 -m unittest tests.test_analyze_g2_cordio_atts_proc
+make cordio-atts-proc-closure
 ```
 
-The next table-owned server tranche is `atts_read.c`, whose seven linked
-definitions own five read/discovery method roots and their range helpers.
+## Production closure
+
+`runtime_cordio_atts_proc.c` now owns all nine linked entries. Nine guarded
+redirects replace 2,106 authenticated stock body bytes with 1,722 selector-
+isolated Cortex-M55 bytes plus 10 alignment bytes under 28 strict relocations.
+The maintained source preserves UUID conversion, handle/range lookup,
+permission/security/authorization checks, EATT rejection, discovery and read
+processors, and the authenticated product peer-MTU floor of 247. Vendor-only
+diagnostics are omitted; their control-flow result is retained. Host tests
+exercise every business family and all nine leaves compile independently for
+the target.
+
+The current canonical overlay is 340,072 bytes, SHA-256
+`849bffe5646022d3beec5ea492dc9c3b2ffabccc4f84a9b0449317d257525834`;
+the Apollo component is 3,863,468 bytes, SHA-256
+`15fd0568b892d3f4e2de5a994ccc4f46ff2a04bc45d537a322c216b67068eb9d`;
+and the deterministic package is 4,641,962 bytes, SHA-256
+`82097f8c735fc3ec9d162a1c8379e8b7ea2f8562b0b58eca297b222018e5b94c`.
+The flash plan has 4,716 placed, two unresolved evidence-only, five
+container-only, and six protected regions. No image was signed, flashed, or
+installed.
+
+Live ATT discovery/read traffic, security-state transitions, peer
+interoperability, controller timing, and EM9305 interaction remain blocked by
+unavailable authorized responsive hardware and captures. The next table-owned
+server tranche is `atts_read.c`; the wider ATT and G2 firmware remain
+functionally incomplete.

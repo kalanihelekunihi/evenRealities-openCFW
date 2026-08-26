@@ -42,6 +42,7 @@ class AnalyzeG2ServiceCodecHostTests(unittest.TestCase):
         self.assertEqual(contract["header_crc_input_bytes"], 10)
         self.assertEqual(contract["body_max_bytes"], 16)
         self.assertEqual(contract["command_retry_limit"], 3)
+        self.assertEqual(contract["known_commands"][0x0E], "microphone_delay_1bit")
         self.assertEqual(contract["known_commands"][0x70], "query_microphone_state")
 
     def test_lineage_and_production_boundary(self) -> None:
@@ -49,10 +50,21 @@ class AnalyzeG2ServiceCodecHostTests(unittest.TestCase):
         self.assertTrue(lineage["retained_path"].endswith("service_codec_host.c"))
         self.assertEqual(len(lineage["path_pointer_cells"]), 4)
         self.assertEqual(len(lineage["exact_symbols"]), 23)
-        self.assertEqual(lineage["source_inventory"], "unavailable")
-        self.assertEqual(lineage["license"], "unknown")
-        self.assertIsNone(self.report["production"]["candidate"])
-        self.assertFalse(self.report["production"]["production_routed"])
+        self.assertEqual(lineage["source_inventory"],
+                         "26-function clean-room production C")
+        self.assertEqual(lineage["historical_source_inventory"], "unavailable")
+        self.assertEqual(lineage["license"], "GPL-3.0-only")
+        production = self.report["production"]
+        self.assertEqual(production["candidate"],
+                         "components/apollo_main/core_overlay/service_codec_host.c")
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 7318)
+        self.assertEqual(production["compiled_text_bytes"], 4262)
+        self.assertEqual(production["generated_alignment_bytes"], 38)
+        self.assertEqual(production["strict_relocations"], 111)
+        self.assertEqual(production["guarded_redirects"], 26)
+        self.assertEqual(production["hardware_validation"],
+                         "blocked_unavailable_physical_evidence")
 
 
 if __name__ == "__main__":

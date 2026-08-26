@@ -22,11 +22,23 @@ class ZeroAnchorClosureTests(unittest.TestCase):
         self.assertEqual(self.r["surface"], {'body_bytes': 1298, 'direct_body_calls': 75, 'function_escapes': 0, 'indirect_body_calls': 0, 'internal_direct_body_calls': 1, 'linked_functions': 5, 'outer_pool_bytes': 112, 'path_literal_references': 11, 'physical_bytes': 1410, 'raw_path_referencing_functions': 2, 'reachable_instructions': 502})
 
     def test_ingress(self):
-        self.assertEqual(self.r["ingress"], {'direct_b16_entry_sites': 0, 'direct_bl_entry_sites': 2, 'direct_bl_strict_interior_sites': 3, 'direct_bw_entry_sites': 0, 'stored_entry_pointer_words': 2})
+        self.assertEqual(self.r["ingress"], {'direct_b16_entry_sites': 0, 'direct_bl_entry_sites': 2, 'direct_bl_strict_interior_sites': 3, 'strict_interior_overlapping_pseudo_decodes': 2, 'strict_interior_live_internal_calls': 1, 'direct_bw_entry_sites': 0, 'stored_entry_pointer_words': 2})
 
     def test_evidence_and_production(self):
         self.assertEqual(self.r["evidence"], {'boundary_guards': True, 'pointer_cells': ['0x0053A3AC'], 'path_string_run_address': '0x006F890C', 'tag_strings': 10})
-        self.assertFalse(self.r["production"]["production_routed"])
+        self.assertEqual(self.r["production"], {
+            'production_routed': True,
+            'source_files': 1,
+            'source_functions': 5,
+            'compiled_text_bytes': 514,
+            'alignment_bytes': 4,
+            'strict_relocations': 21,
+            'guarded_redirects': 5,
+            'routed_stock_bytes': 1296,
+            'retained_compatibility_bytes': 114,
+            'package_size': 4634556,
+            'placed_flash_regions': 4495,
+        })
 
 
 if __name__ == "__main__":

@@ -18,11 +18,62 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-service-touch-dfu-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-service-touch-dfu-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-service-touch-dfu-provenance.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/service_touch_dfu.c"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 PINS = {
     FUNCTION_MAP: "e78344ad5842545cdf3e8ec99ae51a041c7358052181d134d88b11e003c9a7ea",
-    CLOSURE: "98007e3af0e80183c59ff0c98e28f406bdd465166216124a908ee2b2d98ec959",
-    PROVENANCE: "eebe4c9a541aa9c22fbc41838f8b2e9e568886031b52dd48f2c98c1d0bc11968",
+    CLOSURE: "734e3fb293708bccda4784c5587e9ecbc09b28f2ad263679081850fcc3479a0d",
+    PROVENANCE: "b6becd5a41b49272a99679b03a9a44e5e221e6af36025841af8cf3a2e8920564",
 }
+SOURCE_SHA256 = "0944bbdaab2ce375dd72382da1c2d9f761335b2bba689e8d96c13366c435c667"
+FUNCTIONS = (
+    "open_cfw_touch_frame_read_u16", "open_cfw_touch_frame_write_u16",
+    "open_cfw_touch_frame_payload", "open_cfw_touch_frame_terminator",
+    "open_cfw_touch_frame_command", "open_cfw_touch_frame_has_terminator",
+    "open_cfw_touch_frame_init", "open_cfw_touch_frame_set_command",
+    "open_cfw_touch_frame_set_terminator", "open_cfw_touch_frame_checksum16",
+    "open_cfw_touch_crc32c", "open_cfw_touch_frame_payload_length",
+    "open_cfw_touch_frame_checksum", "open_cfw_touch_frame_set_payload_length",
+    "open_cfw_touch_frame_set_checksum", "open_cfw_touch_validate_reply",
+    "open_cfw_touch_receive_reply_retry", "open_cfw_touch_build_and_send_frame",
+    "open_cfw_touch_enter_dfu", "open_cfw_touch_set_app_meta",
+    "open_cfw_touch_send_one_packet", "open_cfw_touch_program_data",
+    "open_cfw_touch_verify_app", "open_cfw_touch_exit_dfu",
+    "open_cfw_touch_send_app_file", "open_cfw_touch_free_firmware_memory",
+    "open_cfw_touch_get_package_version", "open_cfw_touch_load_package",
+    "open_cfw_touch_format_version", "open_cfw_touch_is_upgrade_needed",
+    "open_cfw_touch_log_current_version", "open_cfw_touch_update_firmware_check",
+)
+PATCH_FUNCTIONS = (
+    "open_cfw_touch_frame_read_u16", "open_cfw_touch_frame_write_u16",
+    "open_cfw_touch_frame_payload", "open_cfw_touch_frame_terminator",
+    "open_cfw_touch_frame_command", "open_cfw_touch_frame_payload_length",
+    "open_cfw_touch_frame_checksum", "open_cfw_touch_frame_has_terminator",
+    "open_cfw_touch_frame_init", "open_cfw_touch_frame_set_command",
+    "open_cfw_touch_frame_set_payload_length", "open_cfw_touch_frame_set_checksum",
+    "open_cfw_touch_frame_set_terminator", "open_cfw_touch_frame_checksum16",
+    "open_cfw_touch_validate_reply", "open_cfw_touch_receive_reply_retry",
+    "open_cfw_touch_crc32c", "open_cfw_touch_build_and_send_frame",
+    "open_cfw_touch_enter_dfu", "open_cfw_touch_set_app_meta",
+    "open_cfw_touch_send_one_packet", "open_cfw_touch_program_data",
+    "open_cfw_touch_verify_app", "open_cfw_touch_exit_dfu",
+    "open_cfw_touch_send_app_file", "open_cfw_touch_free_firmware_memory",
+    "open_cfw_touch_get_package_version", "open_cfw_touch_load_package",
+    "open_cfw_touch_format_version", "open_cfw_touch_is_upgrade_needed",
+    "open_cfw_touch_log_current_version", "open_cfw_touch_update_firmware_check",
+)
+SOURCE_OFFSETS = (308248, 308268, 308280, 308288, 308300, 308312, 308332,
+    308344, 308352, 308364, 308408, 308776, 308792, 308808, 308820,
+    308836, 308968, 309076, 309292, 309388, 309516, 309600, 309716,
+    309792, 309812, 310060, 310092, 310300, 310796, 311168, 311176,
+    311224)
+SOURCE_SIZES = (18, 12, 8, 10, 10, 20, 10, 8, 12, 42, 366, 14, 16,
+    12, 16, 130, 106, 208, 96, 128, 82, 116, 76, 18, 246, 30, 208,
+    496, 372, 8, 46, 194)
 PHYSICAL = (0x0055FCB4, 0x00561810)
 PHYSICAL_SHA256 = "b53444478efe8eac988e311ee4a19f6ee07ab024779340847d77ba6845d5887b"
 BODY_SHA256 = "541a9a7deee567a6aa7b5a882a7daf4f86e65378bb1d10401cd612e69c1ba4ec"
@@ -219,10 +270,116 @@ def analyze(image_path: Path = IMAGE) -> dict:
            for site, value in literal_contract.items()):
         raise AuditError("touch-DFU package/state literal changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any("service_touch_dfu" in source.get("path", "").lower()
-           for source in overlay["sources"]):
-        raise AuditError("unimplemented touch DFU entered production overlay")
+    source = SOURCE.read_bytes()
+    if len(source) != 26_522 or sha256(source) != SOURCE_SHA256:
+        raise AuditError("touch-DFU production source changed")
+    source_text = source.decode("utf-8")
+    required_source_tokens = (
+        "OPEN_CFW_TOUCH_PACKAGE_MAGIC = 0x4b505746u",
+        "OPEN_CFW_TOUCH_COMMAND_ENTER = 0x38",
+        "OPEN_CFW_TOUCH_COMMAND_META = 0x4c",
+        "OPEN_CFW_TOUCH_COMMAND_PACKET = 0x37",
+        "OPEN_CFW_TOUCH_COMMAND_PROGRAM = 0x49",
+        "OPEN_CFW_TOUCH_COMMAND_VERIFY = 0x31",
+        "OPEN_CFW_TOUCH_COMMAND_EXIT = 0x3b",
+        "0x82f63b78u",
+        "OPEN_CFW_TOUCH_FIRMWARE_SIZE = firmware.size - 4u",
+        "open_cfw_touch_update_firmware_check",
+    )
+    if any(token not in source_text for token in required_source_tokens):
+        raise AuditError("touch-DFU source contract changed")
+
+    overlay = json.loads(OVERLAY.read_text())
+    leaves = [item for item in overlay["relocated_leaves"]
+              if item.get("source", {}).get("path") ==
+              "components/apollo_main/core_overlay/service_touch_dfu.c"]
+    if tuple(item["function"] for item in leaves) != FUNCTIONS:
+        raise AuditError("touch-DFU source leaf order changed")
+    if tuple(item["expected"]["offset"] for item in leaves) != SOURCE_OFFSETS:
+        raise AuditError("touch-DFU source placement changed")
+    if tuple(item["expected"]["size"] for item in leaves) != SOURCE_SIZES:
+        raise AuditError("touch-DFU compiled text sizes changed")
+    if sum(len(item["relocations"]) for item in leaves) != 70:
+        raise AuditError("touch-DFU relocation closure changed")
+    if any(item.get("profiles") != ["apple-clang"]
+           or item.get("source", {}).get("sha256") != SOURCE_SHA256
+           or item.get("strict_relocation_contract") is not True
+           or item.get("source", {}).get("license") != "GPL-3.0-only"
+           for item in leaves):
+        raise AuditError("touch-DFU source/relocation authentication changed")
+    patches = [item for item in overlay["patch_sites"]
+               if item.get("name", "").startswith("replace_service_touch_dfu_")]
+    if len(patches) != 32:
+        raise AuditError("touch-DFU guarded redirect count changed")
+    for index, (patch, row, function) in enumerate(
+            zip(patches, rows, PATCH_FUNCTIONS), 1):
+        if (
+            patch.get("name") != f"replace_service_touch_dfu_{index:02d}"
+            or patch.get("runtime_address") != int(row["entry"], 0)
+            or patch.get("expected_size") != int(row["size"])
+            or patch.get("expected_sha256") != row["sha256"]
+            or patch.get("target_function") != function
+            or patch.get("branch") != "b_w"
+            or patch.get("profiles") != ["apple-clang"]
+        ):
+            raise AuditError(f"touch-DFU guarded redirect {index:02d} changed")
+    expected_aggregate = {
+        "component_sha256": "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        "component_size": 3_855_544,
+        "overlay_sha256": "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        "overlay_size": 332_148,
+    }
+    if overlay["expected"] != expected_aggregate:
+        raise AuditError("touch-DFU aggregate overlay pins changed")
+    build = json.loads(BUILD_REPORT.read_text())
+    if (build["overlay"]["size"], build["overlay"]["sha256"],
+            build["component"]["size"], build["component"]["sha256"]) != (
+            332_148, expected_aggregate["overlay_sha256"], 3_855_544,
+            expected_aggregate["component_sha256"]):
+        raise AuditError("touch-DFU build artifact changed")
+    built = [item for item in build["relocated_leaves"]
+             if item.get("source", {}).get("path") ==
+             "components/apollo_main/core_overlay/service_touch_dfu.c"]
+    if len(built) != 32 or sum(item["placement"]["size"] for item in built) != 3_134 \
+            or sum(item["placement"]["padding_before"] for item in built) != 38:
+        raise AuditError("touch-DFU built leaf closure changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    main = manifest["component_overrides"]["apollo_main"]
+    if (main["provider"]["size"], main["provider"]["sha256"],
+            manifest["package"]["expected_size"],
+            manifest["package"]["expected_sha256"]) != (
+            3_855_544, expected_aggregate["component_sha256"], 4_634_038,
+            "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
+        raise AuditError("touch-DFU manifest/package pins changed")
+    regions = main["regions"]
+    body_regions = [item for item in regions
+                    if item["name"].startswith("service_touch_dfu_")
+                    and item["name"].endswith("_source_replacement")]
+    gap_regions = [item for item in regions
+                   if item["name"].startswith("service_touch_dfu_official_gap_")]
+    text_regions = [item for item in regions
+                    if item["name"].startswith("service_touch_dfu_")
+                    and item["name"].endswith("_source_text")]
+    align_regions = [item for item in regions
+                     if item["name"].startswith("service_touch_dfu_")
+                     and item["name"].endswith("_overlay_alignment")]
+    if (len(body_regions), sum(item["size"] for item in body_regions),
+            len(gap_regions), sum(item["size"] for item in gap_regions),
+            len(text_regions), sum(item["size"] for item in text_regions),
+            len(align_regions), sum(item["size"] for item in align_regions)) != (
+            32, 6_430, 5, 574, 32, 3_134, 16, 38):
+        raise AuditError("touch-DFU manifest ownership changed")
+    package = PACKAGE.read_bytes()
+    if (len(package), sha256(package)) != (
+            4_634_038, manifest["package"]["expected_sha256"]):
+        raise AuditError("touch-DFU package artifact changed")
+    flash_plan = json.loads(FLASH_PLAN.read_text())
+    if (len(flash_plan["flash_regions"]),
+            len(flash_plan["unresolved_flash_regions"]),
+            flash_plan["package_sha256"]) != (
+            4_482, 2, manifest["package"]["expected_sha256"]):
+        raise AuditError("touch-DFU flash-plan closure changed")
 
     return {
         "surface": {
@@ -271,14 +428,25 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "retained_path": RETAINED_PATH,
             "path_pointer_cells": [f"0x{value:08x}" for value in path_cells],
             "exact_symbols": [name for _, name in EXACT_SYMBOLS],
-            "source_inventory": "unavailable",
-            "license": "unknown",
+            "source_inventory": "32-function clean-room production C",
+            "historical_source_inventory": "unavailable",
+            "license": "GPL-3.0-only",
         },
         "production": {
-            "candidate": None,
-            "source_inventory_available": False,
-            "production_routed": False,
-            "ownership_bytes": 0,
+            "candidate": str(SOURCE.relative_to(ROOT)),
+            "source_inventory_available": True,
+            "production_routed": True,
+            "ownership_bytes": 6_430,
+            "compiled_text_bytes": 3_134,
+            "generated_alignment_bytes": 38,
+            "strict_relocations": 70,
+            "guarded_redirects": 32,
+            "hardware_validation": "blocked_unavailable_physical_evidence",
+            "hardware_blocker": (
+                "authorized right temple is nonresponsive; authorized left "
+                "temple must remain stock; no responsive authorized pair, "
+                "touch-controller fixture, or golden I2C/DFU capture is available"
+            ),
         },
     }
 

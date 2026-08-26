@@ -62,7 +62,14 @@ class CordioAttsMainAuditTests(unittest.TestCase):
         self.assertEqual(report["abi"]["atts_cb"], 0x2006E5F0)
         self.assertEqual(report["abi"]["att_cb_server_interface_offset"], 0x40)
         self.assertEqual(report["lineage"]["selected_blob"], "bb99817115ce4da49ce26b5c52c4dd3418baaf88")
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        production = report["production"]
+        self.assertEqual(production["status"], "routed")
+        self.assertEqual(production["source_owned_bytes_added"], 2622)
+        self.assertEqual(production["stock_bytes_replaced"], 2710)
+        self.assertEqual(production["alignment_bytes"], 30)
+        self.assertEqual(production["strict_relocations"], 44)
+        self.assertEqual(production["guarded_redirects"], 17)
+        self.assertEqual(len(production["source_only_public_helpers"]), 4)
 
 
 if __name__ == "__main__":

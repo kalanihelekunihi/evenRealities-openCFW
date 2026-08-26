@@ -21,9 +21,13 @@ FUNCTION_MAP = ROOT / "tools/manifests/g2-product-rtos-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-product-rtos-closure.tsv"
 PROVIDER_MAP = ROOT / "tools/manifests/g2-product-rtos-provider-map.tsv"
 SOURCE_MAP = ROOT / "tools/manifests/ambiqsuite-apollo510-rtos-provider-source.tsv"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/product_rtos.c"
+PRODUCTION_SOURCE_PATH = "components/apollo_main/core_overlay/product_rtos.c"
+PRODUCTION_SOURCE_SHA256 = "4dc4706ec021bb1d0cf0b0c3f9b0960ce934f94f810b0a753bdd50863d5083fb"
 INPUT_PINS = {
     FUNCTION_MAP: "148ef17fb8e47f5978c28889574b463103974e397117c9257ce645c5cf3b472d",
-    CLOSURE: "e35a12e8e29662b3bc8efab7bb603cebbe0be64bb36d33ae21b29cc3d52fa013",
+    CLOSURE: "4e30240ffbb08cb72f4daeb742cc78620d42d61652c3872a8db8d8958ddc56d7",
     PROVIDER_MAP: "5e4bc1ef78b636a3940062fcfda435cef3a8afe1977c143c5be9b2da61d6d560",
     SOURCE_MAP: "b139ffa4b34e8a96d0a93ecf5589c5805965be8abc238523a491c979c6f51666",
 }
@@ -84,6 +88,22 @@ STRINGS = {
     0x0077_B1C4: "task %s stack overflow\n",
     BUILD_TIME_RUN: BUILD_TIME,
 }
+
+ROUTES = (
+    ("replace_product_rtos_01", "open_cfw_product_rtos_find_slot"),
+    ("replace_product_rtos_02", "open_cfw_product_rtos_find_free_slot"),
+    ("replace_product_rtos_03", "open_cfw_product_rtos_init"),
+    ("replace_product_rtos_04", "open_cfw_product_rtos_acquire_for_handle"),
+    ("replace_product_rtos_05", "open_cfw_product_rtos_release_for_handle"),
+    ("replace_product_rtos_06", "open_cfw_product_rtos_blocks_deep_sleep"),
+    ("replace_product_rtos_07", "open_cfw_product_rtos_acquire_current"),
+    ("replace_product_rtos_08", "open_cfw_product_rtos_release_current"),
+    ("replace_product_rtos_09", "am_freertos_sleep"),
+    ("replace_product_rtos_10", "am_freertos_wakeup"),
+    ("replace_product_rtos_11", "vApplicationMallocFailedHook"),
+    ("replace_product_rtos_12", "vApplicationStackOverflowHook"),
+    ("replace_product_rtos_13", "vApplicationIdleHook"),
+)
 
 
 class AuditError(RuntimeError):
@@ -260,10 +280,46 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
     if stored or _pair_digest(stored) != STORED_SHA256:
         raise AuditError("stored callback topology changed")
 
-    overlay_text = (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text().lower()
-    routed = any(f"0x{start:08x}" in overlay_text for start in starts)
-    if routed:
-        raise AuditError("product RTOS object unexpectedly became production-routed")
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    if _sha256(PRODUCTION_SOURCE.read_bytes()) != PRODUCTION_SOURCE_SHA256:
+        raise AuditError("product RTOS production source changed")
+    source_leaves = [
+        leaf for leaf in overlay["relocated_leaves"]
+        if leaf.get("source", {}).get("path") == PRODUCTION_SOURCE_PATH
+    ]
+    if len(source_leaves) != len(ROUTES) or any(
+        leaf.get("source", {}).get("sha256") != PRODUCTION_SOURCE_SHA256
+        for leaf in source_leaves
+    ):
+        raise AuditError("product RTOS production source inventory changed")
+    sites = {site["name"]: site for site in overlay["patch_sites"]}
+    routed_bytes = 0
+    for (name, target), row in zip(ROUTES, rows):
+        start = int(row["stock_start"], 0)
+        end = int(row["stock_end_exclusive"], 0)
+        site = sites.get(name)
+        if (
+            site is None
+            or site.get("runtime_address") != start
+            or site.get("target_function") != target
+            or site.get("branch") != "b_w"
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != _sha256(_slice(blob, start, end))
+            or target not in overlay["functions"]
+        ):
+            raise AuditError(f"product RTOS production route changed: {name}")
+        routed_bytes += end - start
+    compiled_text = sum(leaf["expected"]["size"] for leaf in source_leaves)
+    alignment = sum(
+        source_leaves[index + 1]["expected"]["offset"]
+        - source_leaves[index]["expected"]["offset"]
+        - source_leaves[index]["expected"]["size"]
+        for index in range(len(source_leaves) - 1)
+    )
+    alignment += source_leaves[0]["expected"]["offset"] - 331690
+    strict_relocations = sum(len(leaf["relocations"]) for leaf in source_leaves)
+    if (compiled_text, alignment, strict_relocations, routed_bytes) != (444, 14, 19, 512):
+        raise AuditError("product RTOS production metrics changed")
 
     return {
         "schema_version": 1,
@@ -314,12 +370,24 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         "boundary": {"physical_start": f"0x{PHYSICAL[0]:08x}", "physical_end_exclusive": f"0x{PHYSICAL[1]:08x}",
             "path_pointer_cells": [f"0x{x:08x}" for x in PATH_POINTER_CELLS],
             "preceded_by": "LVGL font-manager terminal body and pool", "followed_by": "independent list utility object"},
-        "production": {"candidate": None, "production_routed": routed, "ownership_bytes": 0},
+        "production": {
+            "candidate": PRODUCTION_SOURCE_PATH,
+            "production_routed": True,
+            "source_files": 1,
+            "source_functions": len(source_leaves),
+            "compiled_text_bytes": compiled_text,
+            "alignment_bytes": alignment,
+            "strict_relocations": strict_relocations,
+            "guarded_redirects": len(ROUTES),
+            "routed_stock_bytes": routed_bytes,
+            "retained_literal_pool_bytes": PHYSICAL_BYTES - routed_bytes,
+            "ownership_bytes": routed_bytes,
+        },
         "limitations": [
             "the G2 task-vote policy and private producing commit remain unavailable",
             "the stock build predates the public 5.1.0 import, so the public commit is a source-equivalent replay rather than the generating checkout",
             "the watchdog-restart leaf is source-identical in 5.0.0 and 5.1.0 and is not independently version-discriminating",
-            "production admission requires clean-room policy/hooks, atomic tickless integration, and Apollo510 power validation",
+            "Apollo510 deep/normal sleep, watchdog, and fatal-hook behavior remain blocked pending authorized physical validation",
         ],
     }
 

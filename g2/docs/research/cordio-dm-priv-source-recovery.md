@@ -13,12 +13,13 @@ bytes with SHA-256
 Nineteen direct calls, thirteen registered table/interface pointers, and zero
 aligned strict-interior pointers close ingress.
 
-Four public APIs have no body, caller, or pointer and are classified
+Four public APIs have no stock body, caller, or pointer and are classified
 dead-stripped: `DmPrivReadPeerResolvableAddr`,
 `DmPrivReadLocalResolvableAddr`,
 `DmPrivSetResolvablePrivateAddrTimeout`, and `DmPrivGenerateAddr`. All 25
-source functions are therefore accounted for. This is source identification;
-the stock object remains cut forward and no production byte is replaced.
+source functions are therefore accounted for and maintained locally. The 21
+linked entries are production-routed; the four dead-stripped APIs remain
+source-only but are behavior-tested and Cortex-M55 target-compiled.
 
 ## Source family and license
 
@@ -57,6 +58,26 @@ Successful enable/disable completion updates `dmCb.llPrivEnabled` and emits
 the device-privacy bridge event; the optional consumer remains default-routed
 because `dm_dev_priv.c` is independently proved absent.
 
+## Production closure
+
+`components/shared/cordio/runtime_cordio_dm_priv.c` implements all 25
+definitions. Twenty-one guarded entry redirects replace all 980 bounded stock
+body bytes with 1,688 compiled Cortex-M55 bytes plus 20 alignment bytes under
+25 strict relocations. The exact retained seven-entry main action table,
+two-entry AES table, dual interface records, control block, callback, and
+handler identifiers remain ABI authorities. The production audit pins every
+leaf, relocation, stock route, 51 manifest regions, the 3,884,250-byte Apollo
+component, 4,662,744-byte source package, and 5,318/two/five/six flash-plan
+partition.
+
+Host tests cover resolve/generate success and busy paths, AES completion,
+resolving-list mutations, HCI completion translation, link-layer privacy state,
+callback delivery, component installation, allocation wrappers, and all four
+source-only APIs. All 25 isolated selectors compile for Cortex-M55. Live
+controller privacy, address resolution, RF/timing, and paired-temple behavior
+cannot be validated because no authorized responsive right-temple/EM9305
+hardware is available; the left temple remains untouched.
+
 ## Lorelei handoff
 
 The repository preserves
@@ -73,6 +94,7 @@ Reproduce the guarded checks with:
 
 ```sh
 python3 tools/analyze_g2_cordio_dm_priv.py --json
+make cordio-dm-priv-closure
 python3 tools/verify_research_corpus.py --json
 ```
 

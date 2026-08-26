@@ -1,6 +1,6 @@
 # Ambiq Cordio vendor reset-sequence recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Closure
@@ -64,3 +64,31 @@ authenticates every body and literal, the complete source inventory, direct
 ingress/provider digests, reset constants, and the absence of interior
 ingress. The source and provenance ledgers live beside it under
 `tools/manifests/ambiq-cordio-hci-vs-*.tsv`.
+
+## Production admission
+
+Clean-room `runtime_cordio_hci_vs.c` implements all eight definitions. Four
+guarded redirects replace all 546 linked stock bytes with 862 compiled Thumb
+bytes and six alignment bytes under 23 strict relocations. The four unlinked
+hooks remain target-compilable fail-closed no-ops. No proprietary vendor source
+was copied.
+
+Host tests exercise feature-gated resolving-list and maximum-data-length
+discovery, the exact Reset → NVDS → RF power → event-mask/capability chain,
+state extraction, extension callback behavior and fallback, four-random reset
+completion, null/non-command rejection, and all no-op hooks. The canonical
+overlay/component/package are 375,186 / 3,898,582 / 4,677,076 bytes with
+SHA-256 `8c05945a…a3c3`, `8dcb804c…8598`, and `e4579c12…b049`; the
+3,937,595-byte flash plan hashes to `15a2fac0…e92` and contains 5,668 placed,
+two unresolved, five container-only, and six protected regions.
+
+Reproduction:
+
+```sh
+make cordio-hci-vs-closure
+```
+
+No image was signed, flashed, or installed. Live controller reset, NVDS,
+address, RF-power, timing, and completion-callback validation remains blocked
+by unavailable authorized responsive G2/EM9305 physical evidence. This
+software slice is closed; wider HCI and firmware completeness is not claimed.

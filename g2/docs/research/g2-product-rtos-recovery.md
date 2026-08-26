@@ -1,7 +1,7 @@
 # G2 product RTOS hooks and Ambiq HAL lineage recovery
 
-Status: authenticated linked-object and provider-version closure; not
-production-routed. The G2 `2.2.6.10` object retained as
+Status: authenticated linked-object and provider-version closure;
+production-routed from clean-room C. The G2 `2.2.6.10` object retained as
 `product\s200\app\config\rtos.c` is completely bounded. Its CMSIS-FreeRTOS
 and Apollo510 HAL seams are source-identified. No device or flash state was
 changed.
@@ -100,10 +100,19 @@ and 5.1.0 files, so it corroborates Ambiq origin but does not select a version.
 
 ## Limits and reproduction
 
-The G2 task-vote policy and exact private producing commit remain unavailable.
-Production admission requires a clean-room task-vote/hook implementation,
-atomic integration with the recovered tickless port, and Apollo510 power-state
-and watchdog validation.
+The private producing commit remains unavailable, but it is no longer a
+software dependency: `components/apollo_main/core_overlay/product_rtos.c`
+implements all 13 entries. Thirteen guarded redirects replace all 512 stock
+function bytes with 444 compiled bytes plus 14 alignment bytes and 19 strict
+relocations. The 36-byte stock literal/alignment pool remains authenticated.
+Host execution covers initialization, null and duplicate votes, slot
+exhaustion/reactivation, exact IRQ save/restore pairing, current-task wrappers,
+deep-versus-normal sleep selection, watchdog hooks, and both fatal paths.
+
+The remaining gate is physical only. Apollo510 sleep-state, watchdog, tickless,
+and fatal-hook behavior requires an authorized responsive G2 and trace/reset
+evidence. That evidence is unavailable in this workspace, so physical
+validation is explicitly blocked; no image was signed, flashed, or installed.
 
 Run:
 

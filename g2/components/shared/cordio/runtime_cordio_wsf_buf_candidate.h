@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: GPL-3.0-only
  *
- * Production-excluded clean-room ABI for the G2 Cordio WSF buffer pools.
+ * Production-routed clean-room ABI for the G2 Cordio WSF buffer pools.
  * Restricted vendor source is used only as a provenance/behavior oracle.
  */
 

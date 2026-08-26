@@ -103,5 +103,25 @@ python3 tools/analyze_g2_cordio_atts_read.py --json
 python3 -m unittest tests.test_analyze_g2_cordio_atts_read
 ```
 
-The next table-owned server tranche is `atts_write.c`, which owns the write,
-prepare-write, execute-write, and signed-write processors.
+## Production replacement
+
+Maintained production source is
+`components/shared/cordio/runtime_cordio_atts_read.c`. Seven guarded redirects
+replace all 2,984 authenticated body bytes with 2,786 compiled Cortex-M55
+bytes plus eight alignment bytes under 44 strict relocations. The host oracle
+covers both range helpers, read-blob callback/offset behavior, find-by-type,
+read-by-type aggregation, database-hash deferral, read-multiple cleanup, and
+read-by-group-type; each leaf also compiles in isolation for Cortex-M55.
+
+The current canonical overlay is 344,484 bytes, SHA-256
+`358e75ac3c6befcc727be51c0c3609d3acf062bdd9767c6a6cf91170da4a766b`;
+the Apollo component is 3,867,880 bytes, SHA-256
+`8a15cc40623ac6ed24c9f0a91b1508d9ed408399692b7d1669f2866d7cccc5e7`;
+and the deterministic package is 4,646,374 bytes, SHA-256
+`9d12b035cc8b50985a07d281f51fbd0c1e0855ebf1f55994cd5317720e8bec4a`.
+No image was signed, flashed, or installed. Live ATT discovery, database-hash
+timing, controller behavior, peer interoperability, and EM9305 behavior remain
+blocked by unavailable authorized responsive physical evidence.
+
+The remaining ATT server tranche is `atts_main.c`, which owns server callback
+dispatch, group management, CCB lookup, errors, and initialization.

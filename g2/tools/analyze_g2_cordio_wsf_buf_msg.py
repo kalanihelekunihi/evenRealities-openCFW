@@ -33,12 +33,17 @@ POOL_MAP = ROOT / "tools/manifests/g2-cordio-wsf-buffer-pools.tsv"
 MSG_MAP = ROOT / "tools/manifests/packetcraft-cordio-wsf-msg-function-map.tsv"
 MSG_PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-wsf-msg-provenance.tsv"
 READINESS_ARCHIVE = ROOT / "research/readiness/wsf-buf/SHA256SUMS"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 
 PINNED_INPUTS = {
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_buf_candidate.c": "bed6d7726239869e767a99054c121a0c6b4ddf1c4ffa84852ec08dcf75cc60d4",
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_buf_candidate.h": "8a005823a57108416e75956242f98916c64fca50c33fe45f83e17fe020cb986e",
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_msg_candidate.c": "8f0f260360ad94acf79492f2c380acde8f670b9bc08c2c60ad24e915e82ed951",
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_msg_candidate.h": "94b96b245bb7e7afd8114ce9972a188c1847b9c0013f18aa4ab4ddac052d59b7",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_buf_candidate.c": "37f7b6ecc6e9fd498b36d350eef9f67f156ed174601ed915315a415f9f2ca96c",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_buf_candidate.h": "18eca9f376dfd791d79be5b00906f72746dec77bf99df9365aaa9464043a37d6",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_msg_candidate.c": "d402234e563dcdb7b60835c958be5d56783600a538ed56183b23491b46b021da",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_msg_candidate.h": "c6690996e70d66a7d62dec7c43b1a80854e05ed950974100f33fc99dacfded63",
     BUF_MAP: "b2dbe31dd1e118fa82aba44fd043f6ec0276ea5cd8d42e1c39cc0ded522b4e74",
     BUF_PROVENANCE: "c5c58be9517d27af53f7c56d0e625f2a7ff3e06c48982d458d4c93b9d0fe6661",
     POOL_MAP: "4db4f75f59ce894ef9b8dcc1f1ecbce9d75f0f5c03572f01a70e6a7fce5e09ec",
@@ -53,6 +58,21 @@ PINNED_INPUTS = {
     ROOT / "tools/manifests/readiness-cordio-wsf-buf-source-identities.tsv": "2adb205e273d003b0d2efb750284e01c6e414f8ccf1fcb05c49bb68909972f62",
     READINESS_ARCHIVE: "926da386fc9f6818ef61f5e57cb590b8a2771a261793a0aa1ee84408f70be40f",
 }
+
+BUF_PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_wsf_buffer_init_candidate",
+    "open_cfw_cordio_wsf_buffer_allocate_candidate",
+    "open_cfw_cordio_wsf_buffer_free_candidate",
+]
+MSG_PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_wsf_message_data_allocate_candidate",
+    "open_cfw_cordio_wsf_message_allocate_candidate",
+    "open_cfw_cordio_wsf_message_free_candidate",
+    "open_cfw_cordio_wsf_message_send_candidate",
+    "open_cfw_cordio_wsf_message_enqueue_candidate",
+    "open_cfw_cordio_wsf_message_dequeue_candidate",
+    "open_cfw_cordio_wsf_message_peek_candidate",
+]
 
 BUF_CALLERS = {
     0x00530364: [0x004B7F7C],
@@ -222,6 +242,101 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
     if len(pools) != 4 or sum(int(row["bytes"]) for row in pools) + 48 != 0x2930:
         raise AuditError("G2 WSF buffer pool allocation changed")
 
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    production = {}
+    for unit, source_name, prefix, mapped, names, first_offset, expected_metrics in (
+        (
+            "buffer", "runtime_cordio_wsf_buf_candidate.c",
+            "replace_cordio_wsf_buf_", _rows(BUF_MAP),
+            BUF_PRODUCTION_FUNCTIONS, 333312, (582, 0, 5),
+        ),
+        (
+            "message", "runtime_cordio_wsf_msg_candidate.c",
+            "replace_cordio_wsf_msg_", _rows(MSG_MAP),
+            MSG_PRODUCTION_FUNCTIONS, 333894, (114, 12, 8),
+        ),
+    ):
+        source_path = f"components/shared/cordio/{source_name}"
+        leaves = [
+            row for row in overlay["relocated_leaves"]
+            if row.get("source", {}).get("path") == source_path
+        ]
+        source_sha = PINNED_INPUTS[ROOT / source_path]
+        if len(leaves) != len(names) or any(
+            row.get("source", {}).get("sha256") != source_sha for row in leaves
+        ):
+            raise AuditError(f"WSF {unit} production source inventory changed")
+        sites = {row["name"]: row for row in overlay["patch_sites"]}
+        for index, (row, function) in enumerate(zip(mapped, names), 1):
+            start = int(row["stock_start"], 0)
+            end = int(row["stock_end_exclusive"], 0)
+            site = sites.get(f"{prefix}{index:02d}")
+            if (
+                site is None
+                or site.get("runtime_address") != start
+                or site.get("target_function") != function
+                or site.get("branch") != "b_w"
+                or site.get("expected_size") != end - start
+                or site.get("expected_sha256") != row["stock_sha256"]
+                or function not in overlay["functions"]
+            ):
+                raise AuditError(f"WSF {unit} production route {index} changed")
+        compiled = sum(row["expected"]["size"] for row in leaves)
+        alignment = leaves[0]["expected"]["offset"] - first_offset
+        alignment += sum(
+            leaves[index + 1]["expected"]["offset"]
+            - leaves[index]["expected"]["offset"]
+            - leaves[index]["expected"]["size"]
+            for index in range(len(leaves) - 1)
+        )
+        relocations = sum(len(row["relocations"]) for row in leaves)
+        if (compiled, alignment, relocations) != expected_metrics:
+            raise AuditError(f"WSF {unit} production metrics changed")
+        production[unit] = {
+            "functions": names,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": len(names),
+        }
+
+    build = json.loads(BUILD_REPORT.read_text())
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"] != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"] != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+    ):
+        raise AuditError("WSF buffer/message production component changed")
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    provider = override["provider"]
+    regions = override["regions"]
+    if (
+        provider.get("size") != 3928192
+        or provider.get("sha256") != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([row for row in regions if row["name"].startswith("cordio_wsf_buf_")]) != 6
+        or len([row for row in regions if row["name"].startswith("cordio_wsf_msg_")]) != 20
+    ):
+        raise AuditError("WSF buffer/message package ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or _sha256(PACKAGE.read_bytes()) != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("WSF buffer/message package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or _sha256(FLASH_PLAN.read_bytes()) != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]),
+            len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]),
+            len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("WSF buffer/message flash plan changed")
+
     return {
         "schema_version": 1,
         "image": {"path": str(image), "sha256": IMAGE_SHA256},
@@ -254,10 +369,12 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "unbounded_buffer_source_apis": ["WsfBufGetAllocStats","WsfBufGetNumPool","WsfBufGetPoolStats","WsfBufDiagRegister"],
         },
         "candidate": {
-            "production": "excluded", "behaviorally_recreated_functions": 10,
+            "production": "routed", "behaviorally_recreated_functions": 10,
             "behaviorally_recreated_bytes": 556,
             "proprietary_source_copied": False,
             "message_apache_source_route": True,
+            "production_metrics": production,
+            "retained_buffer_literal_table_bytes": 36,
         },
         "compiler_matrix": {
             "archive": str(READINESS_ARCHIVE), "archive_sha256": PINNED_INPUTS[READINESS_ARCHIVE],

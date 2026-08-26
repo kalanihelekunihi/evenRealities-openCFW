@@ -24,8 +24,18 @@ The receive function validates and decodes an L2CAP connection-parameter
 update request, rejects malformed/range-invalid requests, and forwards valid
 parameters to `DmL2cConnUpdateInd`. Initialization stores its Thumb entry at
 `0x00537228`; the response function builds and sends the six-byte signaling
-response. Production ownership remains zero and compiler reproduction is
-deferred.
+response.
+
+## Production admission
+
+`runtime_cordio_l2c_master.c` owns all three definitions. Three guarded
+redirects replace all 658 bounded stock body bytes with 286 compiled Cortex-M55
+bytes plus two alignment bytes under five strict relocations. The receive path
+validates command shape and all HCI connection-parameter ranges before it
+accepts or rejects an update. The canonical package is 4,656,582 bytes,
+SHA-256 `41b32b257fb4a97b21e6b8db77009e3ce626a1432388c8c43ac57b215e8d3fe5`.
+Live signaling exchange and controller connection-update behavior remain
+blocked by unavailable authorized responsive G2/EM9305 physical evidence.
 
 ```sh
 python3 tools/analyze_g2_cordio_l2c_master.py --json

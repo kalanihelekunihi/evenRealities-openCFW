@@ -57,8 +57,20 @@ class CordioHciCommandAuditTests(unittest.TestCase):
     def test_proprietary_boundary_is_preserved(self) -> None:
         self.assertEqual(self.report["lineage"]["license"], "Arm Cordio proprietary SLA")
         self.assertFalse(self.report["lineage"]["historical_generating_commit_resolved"])
-        self.assertFalse(self.report["production"]["proprietary_source_copied"])
-        self.assertEqual(self.report["production"]["source_owned_bytes_added"], 0)
+        production = self.report["production"]
+        self.assertFalse(production["proprietary_source_copied"])
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(production["redirected_stock_functions"], 50)
+        self.assertEqual(production["redirected_stock_bytes"], 2_654)
+        self.assertEqual(production["source_owned_bytes_added"], 4_052)
+        self.assertEqual(production["alignment_bytes_added"], 68)
+        self.assertEqual(production["strict_relocations"], 106)
+        self.assertEqual(production["source_only_functions_compiled"], 22)
+        self.assertEqual(production["manifest_regions"], 91)
+        self.assertEqual(production["flash_plan_counts"], (5_864, 2, 5, 6))
+        self.assertEqual(production["remaining_unrouted_linked_functions"], 0)
+        self.assertEqual(production["remaining_source_only_functions"], 0)
+        self.assertTrue(production["full_command_layer_complete"])
 
 
 if __name__ == "__main__":

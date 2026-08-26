@@ -43,5 +43,24 @@ and zero strict-interior ingress. The full ledger is
 `tools/manifests/packetcraft-cordio-attc-write-function-map.tsv`; provenance
 is recorded in `tools/manifests/packetcraft-cordio-attc-write-provenance.tsv`.
 
-This tranche changes provenance only: zero stock bytes are replaced and zero
-source-owned production bytes are added.
+## Production replacement
+
+`components/shared/cordio/runtime_cordio_attc_write.c` now maintains all five
+source definitions. Two guarded redirects replace the complete 124-byte linked
+stock interval with 144 compiled Cortex-M55 bytes plus two alignment bytes
+under two strict relocations. The three dead-stripped allocation,
+prepare-request, and execute-request helpers are independently target-compiled
+without inventing stock coverage.
+
+Host execution covers continuation termination, response value adjustment,
+write-command encoding and ownership transfer, copied and referenced prepare
+writes, execute/cancel flag encoding, allocation alignment, and allocation
+failure. The canonical overlay is 347,282 bytes, SHA-256
+`3387c6fcb18b78ad7d8244f0b0392baa51d86a9eca47686ca9205a0d852d191f`;
+the Apollo component is 3,870,678 bytes, SHA-256
+`30bc664a940698698245dd117bfb127d9202e216c51a00826f0f030b31d5c468`;
+and the deterministic package is 4,649,172 bytes, SHA-256
+`777a059d84671ee04460d7c9cdb9af9ab93ce7eaaced0932b0c254f9f2a53e77`.
+Live ATT peer, controller, continuation, and buffer-lifetime validation remains
+blocked by unavailable authorized responsive G2/EM9305 physical evidence. No
+image was signed, flashed, or installed.

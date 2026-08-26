@@ -258,7 +258,7 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         or leaf.get("source", {}).get("sha256") != INPUT_PINS[CANDIDATE]
         or leaf.get("profiles") != ["apple-clang"]
         or leaf.get("expected", {}).get("size") != 254
-        or leaf.get("expected", {}).get("offset") != 164536
+        or leaf.get("expected", {}).get("offset") != 224384
         or leaf.get("expected", {}).get("unrelocated_sha256")
             != "ba2e1b6c02afc40bf0bcc9e6ca5ccd27f99552b4d20c1ec5d7cda2af44967285"
         or len(leaf.get("relocations", [])) != 8

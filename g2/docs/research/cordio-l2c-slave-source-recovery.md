@@ -24,8 +24,21 @@ is excluded. The retained path is at `0x006DD594`.
 The object includes timeout handling, signaling-response parsing, slave
 initialization, fixed connection-update request construction, handler
 initialization, and the WSF handler. The generic `L2cDmSigReq` has no body,
-caller, or pointer. Production ownership remains zero; all bytes are still
-cut from stock while compiler reproduction is intentionally deferred.
+caller, or pointer.
+
+## Production admission
+
+`runtime_cordio_l2c_slave.c` implements all seven source definitions. Six
+guarded redirects replace all 1,078 bounded stock body bytes with 496 compiled
+Cortex-M55 bytes plus eight alignment bytes under 12 strict relocations; the
+source-only generic `L2cDmSigReq` also target-compiles without inventing stock
+coverage. Allocation succeeds before its timer starts, command lengths and
+connection IDs are bounded, the authenticated one-based `connId-1` indexing is
+retained, and timeout clears the pending identifier. The canonical package is
+4,656,582 bytes, SHA-256
+`41b32b257fb4a97b21e6b8db77009e3ce626a1432388c8c43ac57b215e8d3fe5`.
+Live timer, signaling, peer, and controller validation remains blocked by
+unavailable authorized responsive G2/EM9305 physical evidence.
 
 ```sh
 python3 tools/analyze_g2_cordio_l2c_slave.py --json

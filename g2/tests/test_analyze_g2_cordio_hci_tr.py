@@ -58,7 +58,15 @@ class CordioHciTransportAuditTests(unittest.TestCase):
         self.assertFalse(self.report["lineage"]["historical_generating_commit_resolved"])
         self.assertEqual(self.report["lineage"]["license"], "Arm Cordio proprietary SLA")
         self.assertFalse(self.report["production"]["proprietary_source_copied"])
-        self.assertEqual(self.report["production"]["source_owned_bytes_added"], 0)
+        production = self.report["production"]
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(production["stock_bytes_replaced"], 524)
+        self.assertEqual(production["source_owned_bytes_added"], 454)
+        self.assertEqual(production["strict_relocations"], 6)
+        self.assertEqual(production["source_only_functions_compiled"], 1)
+        self.assertEqual(production["manifest_regions"], 6)
+        self.assertEqual(production["flash_plan_counts"], (5863, 2, 5, 6))
+        self.assertTrue(production["failure_state_reset_hardened"])
 
 
 if __name__ == "__main__":

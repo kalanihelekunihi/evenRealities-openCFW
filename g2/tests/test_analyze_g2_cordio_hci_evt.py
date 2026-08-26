@@ -57,8 +57,20 @@ class CordioHciEventAuditTests(unittest.TestCase):
         self.assertEqual(lineage["stock_parse_entries"], 85)
         self.assertFalse(lineage["historical_generating_commit_resolved"])
         self.assertEqual(lineage["license"], "Arm Cordio proprietary SLA")
-        self.assertFalse(self.report["production"]["proprietary_source_copied"])
-        self.assertEqual(self.report["production"]["source_owned_bytes_added"], 0)
+        production = self.report["production"]
+        self.assertFalse(production["proprietary_source_copied"])
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(production["redirected_stock_functions"], 79)
+        self.assertEqual(production["redirected_stock_bytes"], 6_718)
+        self.assertEqual(production["source_owned_bytes_added"], 23_590)
+        self.assertEqual(production["alignment_bytes_added"], 30)
+        self.assertEqual(production["strict_relocations"], 52)
+        self.assertEqual(production["source_only_functions_compiled"], 1)
+        self.assertEqual(production["manifest_regions"], 161)
+        self.assertEqual(production["flash_plan_counts"], (5_864, 2, 5, 6))
+        self.assertEqual(production["remaining_unrouted_linked_functions"], 0)
+        self.assertEqual(production["remaining_source_only_functions"], 0)
+        self.assertTrue(production["full_event_layer_complete"])
 
 
 if __name__ == "__main__":

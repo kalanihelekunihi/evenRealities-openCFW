@@ -1,0 +1,47 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+#ifndef OPEN_CFW_RUNTIME_CORDIO_DM_DEV_PRIV_H
+#define OPEN_CFW_RUNTIME_CORDIO_DM_DEV_PRIV_H
+#include <stddef.h>
+#include <stdint.h>
+enum { OPEN_CFW_DM_DEV_PRIV_ADV_SETS=2,OPEN_CFW_DM_DEV_PRIV_ADDR_BYTES=6 };
+enum open_cfw_cordio_dm_dev_priv_parameter {
+ OPEN_CFW_DEV_PRIV_ADV_START=1,OPEN_CFW_DEV_PRIV_ADV_SET_START,
+ OPEN_CFW_DEV_PRIV_SCAN_START,OPEN_CFW_DEV_PRIV_EXT_SCAN_START,
+ OPEN_CFW_DEV_PRIV_CONN_OPEN,OPEN_CFW_DEV_PRIV_ADV_STOP,
+ OPEN_CFW_DEV_PRIV_ADV_SET_STOP,OPEN_CFW_DEV_PRIV_SCAN_STOP,
+ OPEN_CFW_DEV_PRIV_EXT_SCAN_STOP,OPEN_CFW_DEV_PRIV_CONN_CLOSE,
+ OPEN_CFW_DEV_PRIV_CONN_INIT_START,OPEN_CFW_DEV_PRIV_CONN_INIT_STOP,
+ OPEN_CFW_DEV_PRIV_ADV_SET_ADD,OPEN_CFW_DEV_PRIV_ADV_SET_REMOVE,
+ OPEN_CFW_DEV_PRIV_ADV_SETS_CLEAR
+};
+struct open_cfw_cordio_dm_dev_priv_adv {uint8_t configured,connectable,advertising;};
+struct open_cfw_cordio_dm_dev_priv_control {
+ uint8_t timer_started,prand[3];uint16_t change_interval;uint8_t use_resolvable;
+ uint8_t address_initialized,pending_address[6],advertising,scanning;
+ uint8_t connecting,connected;struct open_cfw_cordio_dm_dev_priv_adv extended[2];
+};
+struct open_cfw_cordio_dm_dev_priv_message {
+ uint16_t parameter;uint8_t event,status,advertising_handle,connectable;
+ uint16_t change_interval;uint8_t ciphertext[16];
+};
+extern struct open_cfw_cordio_dm_dev_priv_control open_cfw_cordio_dm_dev_priv_control;
+extern uint8_t open_cfw_cordio_dm_dev_priv_local_address[6];
+extern uint8_t open_cfw_cordio_dm_dev_priv_handler_id;
+extern uint8_t open_cfw_cordio_dm_dev_priv_ll_enabled;
+typedef void(*open_cfw_cordio_dm_dev_priv_event_callback_t)(void*);
+typedef void(*open_cfw_cordio_dm_dev_priv_adv_address_callback_t)(uint8_t,uint8_t*);
+extern open_cfw_cordio_dm_dev_priv_event_callback_t open_cfw_cordio_dm_dev_priv_callback;
+extern open_cfw_cordio_dm_dev_priv_adv_address_callback_t open_cfw_cordio_dm_dev_priv_adv_callback;
+
+void open_cfw_cordio_wsf_timer_start_seconds(void*,uint16_t);void open_cfw_cordio_wsf_timer_stop(void*);
+void open_cfw_cordio_security_random(uint8_t*,uint8_t);void open_cfw_cordio_security_aes(uint8_t*,uint8_t*,uint8_t,uint8_t,uint8_t);
+uint8_t*open_cfw_cordio_dm_security_local_irk(void);void open_cfw_cordio_hci_set_random_address(uint8_t*);
+void open_cfw_cordio_dm_advertising_set_address_type(uint8_t);void open_cfw_cordio_dm_scanning_set_address_type(uint8_t);void open_cfw_cordio_dm_connection_master_set_address_type(uint8_t);
+uint8_t open_cfw_cordio_hci_ll_privacy_supported(void);void open_cfw_cordio_dm_privacy_set_timeout(uint16_t);void open_cfw_cordio_dm_privacy_clear_resolving_list(void);
+void*open_cfw_cordio_wsf_message_allocate(uint16_t);void open_cfw_cordio_wsf_message_send(uint8_t,void*);void open_cfw_cordio_wsf_task_lock(void);void open_cfw_cordio_wsf_task_unlock(void);
+
+uint8_t open_cfw_cordio_dm_device_privacy_advertising(uint8_t nonconnectable);
+void open_cfw_cordio_dm_device_privacy_timer_start(void);void open_cfw_cordio_dm_device_privacy_address_calculate(void);void open_cfw_cordio_dm_device_privacy_set_rpa(uint8_t*);void open_cfw_cordio_dm_device_privacy_set_pending_rpa(void);
+void open_cfw_cordio_dm_device_privacy_action_start(struct open_cfw_cordio_dm_dev_priv_message*);void open_cfw_cordio_dm_device_privacy_action_stop(struct open_cfw_cordio_dm_dev_priv_message*);void open_cfw_cordio_dm_device_privacy_action_timeout(struct open_cfw_cordio_dm_dev_priv_message*);void open_cfw_cordio_dm_device_privacy_action_aes_complete(struct open_cfw_cordio_dm_dev_priv_message*);void open_cfw_cordio_dm_device_privacy_action_rpa_start(struct open_cfw_cordio_dm_dev_priv_message*);void open_cfw_cordio_dm_device_privacy_action_rpa_stop(struct open_cfw_cordio_dm_dev_priv_message*);void open_cfw_cordio_dm_device_privacy_action_control(struct open_cfw_cordio_dm_dev_priv_message*);
+void open_cfw_cordio_dm_device_privacy_hci_handler(struct open_cfw_cordio_dm_dev_priv_message*);void open_cfw_cordio_dm_device_privacy_message_handler(struct open_cfw_cordio_dm_dev_priv_message*);void open_cfw_cordio_dm_device_privacy_reset(void);void open_cfw_cordio_dm_device_privacy_initialize(void);void open_cfw_cordio_dm_device_privacy_start(uint16_t);void open_cfw_cordio_dm_device_privacy_stop(void);
+#endif

@@ -23,6 +23,11 @@ REVERSE_COPY = (0x0056D8C4, 0x0056D8F0, "249d9f2b812108c61c554f67936ae7cd01ac102
 REVERSE = (0x0056D8F0, 0x0056D93A, "dd319dbd967e39a1da26a2e1393cc42aed30fcc0a96b4e43c326490b801e20a7")
 AGGREGATE_SHA256 = "61177a461ed16699f591cd6a4052af43503cba745d3daf8665c4f9213a73cef2"
 MATRIX_MANIFEST = ROOT / "research/readiness/wstr/SHA256SUMS"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 
 REVERSE_COPY_CALLERS = [
     0x005363BE, 0x005363C8, 0x005366F0, 0x005366FE, 0x0053672A,
@@ -37,8 +42,8 @@ REVERSE_COPY_CALLERS = [
 REVERSE_CALLERS = [0x00534D8A, 0x005362AA]
 
 PINNED_INPUTS = {
-    ROOT / "components/shared/cordio/runtime_cordio_wstr_candidate.c": "f535a0cc5d1ddc94ad8a6eaf31264140523071dd59f89500adaa0cf9f19e665b",
-    ROOT / "components/shared/cordio/runtime_cordio_wstr_candidate.h": "50f7ac6408223869df5476beb919edcd6cee6433fef6d707bd85478a0da2be96",
+    ROOT / "components/shared/cordio/runtime_cordio_wstr_candidate.c": "4503e9cf625157840115700933a08cf15ee9f14cc068f88dd35b9de77b413364",
+    ROOT / "components/shared/cordio/runtime_cordio_wstr_candidate.h": "81a95a5e42b403d8d283fc01230077fdf81fc5266e878969f9d8db616bf17a15",
     ROOT / "tools/manifests/cordio-wstr-provenance.tsv": "6a633ceaab0b7d589eb28530433af3eb7417d0c9058a3d44bda2080f61500a5f",
     ROOT / "tools/manifests/cordio-wstr-function-map.tsv": "080cc1d9857ecd1a9fe8afb2547ef8c7abb7ca97035431399dea8dc9a5008750",
     MATRIX_MANIFEST: "50e389afa187f8e8ae1bdd2b53a115b9c6df2eec294988a0dc3e041aae586c48",
@@ -119,6 +124,73 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         raise AuditError("WStrReverse direct caller closure changed")
     _verify_no_stored_pointers(blob)
 
+    source_path = "components/shared/cordio/runtime_cordio_wstr_candidate.c"
+    names = [
+        "open_cfw_cordio_wstr_reverse_copy_candidate",
+        "open_cfw_cordio_wstr_reverse_candidate",
+    ]
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves = [
+        row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == source_path
+    ]
+    if len(leaves) != 2 or any(
+        row.get("source", {}).get("sha256") != PINNED_INPUTS[ROOT / source_path]
+        for row in leaves
+    ):
+        raise AuditError("WSF string-helper production inventory changed")
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, ((start, end, expected), function) in enumerate(
+        zip((REVERSE_COPY, REVERSE), names), 1
+    ):
+        site = sites.get(f"replace_cordio_wstr_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"WSF string-helper production route {index} changed")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = leaves[0]["expected"]["offset"] - 334920
+    alignment += (
+        leaves[1]["expected"]["offset"] - leaves[0]["expected"]["offset"]
+        - leaves[0]["expected"]["size"]
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (286, 2, 0):
+        raise AuditError("WSF string-helper production metrics changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"] != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"] != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256") != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([row for row in override["regions"] if row["name"].startswith("cordio_wstr_")]) != 5
+    ):
+        raise AuditError("WSF string-helper component/manifest changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or _sha256(PACKAGE.read_bytes()) != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("WSF string-helper package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or _sha256(FLASH_PLAN.read_bytes()) != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("WSF string-helper flash plan changed")
+
     return {
         "schema_version": 1,
         "image": {"path": str(image), "sha256": IMAGE_SHA256},
@@ -144,7 +216,9 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "dead_strip_reason": "all upstream WstrnCpy consumers are in absent WDXS",
         },
         "candidate": {
-            "production": "excluded", "functions": 2, "stock_bytes": 118,
+            "production": "routed", "functions": 2, "stock_bytes": 118,
+            "compiled_text_bytes": compiled, "alignment_bytes": alignment,
+            "strict_relocations": relocations, "guarded_redirects": 2,
         },
         "compiler_matrix": {
             "archive": str(MATRIX_MANIFEST),

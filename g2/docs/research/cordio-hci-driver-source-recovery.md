@@ -1,6 +1,6 @@
 # Ambiq Apollo3 Cordio HCI-driver recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-25  
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Current closure
@@ -80,3 +80,24 @@ The complete ledger is
 [`analyze_g2_cordio_hci_driver.py`](../../tools/analyze_g2_cordio_hci_driver.py)
 pins that ledger, source provenance, aggregate closure, every body, the shared
 pool, direct-call digests, state literals, and entry/interior classification.
+
+## Clean-room implementation and hardware boundary
+
+Project-original C now implements all 16 inventoried APIs and target-compiles
+for Cortex-M55. Nine hardware-independent entries are production-routed:
+`error_check`, `hciDrvWrite`, `HciDrvHandlerInit`, `HciDrvIntService`, the four
+NVDS/RF-power/BD-address helpers, and `HciDrvEmptyWriteQueue`. They replace 368
+stock bytes with 472 compiled bytes plus 14 alignment bytes under seven strict
+relocations. Host tests cover queue ownership, bounded transfer/recovery,
+address validation, callbacks, vendor payloads, and failure handling.
+
+Six radio-controller operations remain hardware-evidence-blocked:
+`HciDrvRadioBoot`, `HciDrvRadioShutdown`, `HciDrvHandler`,
+`HciVscConstantTransmission`, `HciVscCarrierWaveMode`, and
+`HciDrvBleSleepSet`. Their maintained implementations compile, but the live
+stock paths are intentionally retained until authorized responsive G2/EM9305
+hardware can provide boot, interrupt, timing, RF-test, and sleep evidence. No
+hardware was available or accessed, so this document does not claim physical
+validation.
+
+Reproduce the software closure with `make cordio-hci-driver-closure`.

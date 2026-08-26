@@ -1,8 +1,10 @@
 # G2 `imu_icm45608.c` recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
-`run = file_offset + 0x00437FE0`.
+Status: complete linked-object census and fail-closed behavioral analysis; a
+clean-room candidate now production-routes every recovered entry point plus
+the exact public TDK FIFO/eDMP/GAF, magnetometer, AID, and B2S feature path.
+No known software implementation gap remains in this object, and hardware
+validation is blocked. Run addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -74,9 +76,22 @@ aligned occurrence is unrelated static data. Real external strict-interior
 ingress is zero.
 
 The historical source inventory and license remain unavailable; exact-symbol
-and filename searches did not identify a public source copy. This closure is
-binary evidence, not source ownership. There is no clean-room candidate, the
-object is absent from `overlay.json`, and OpenCFW claims zero production bytes.
+and filename searches did not identify a public source copy. OpenCFW now owns
+a separate clean-room C implementation. Fifty-two guarded redirects replace
+11,672 stock function bytes; the stock two-byte no-op remains unchanged and
+unreachable, and the 762 alignment/literal bytes remain compatibility data.
+Stock disassembly also fixes the vendor ABI: a 72-byte device at `0x20073020`,
+three-argument transport callbacks, a FIFO callback at offset 24, and
+six-argument retained I2C providers. TDK's BSD-3-Clause tag `1.1.2` at commit
+`b79ae575f7f310e5ae2e1164096d1a858bb74662` is the exact public baseline.
+The clean-room adapter now owns the `0x81` identity/reset/RESET_DONE and INT1
+initialization sequence; opaque retained vendor initialization is no longer
+called. The admitted TDK source now also owns FIFO parsing and register
+polling, eDMP/GAF configuration and decode, auxiliary I2CM magnetometer access,
+exact AID/B2S extended-program image loading, and event-state publication.
+The residual is physical validation only.
+See `g2-imu-icm45608-dependency-boundary.md` for production and residual-gap
+details.
 
 Reproduce the audit with:
 

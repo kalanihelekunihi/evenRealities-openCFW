@@ -21,6 +21,8 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 READINESS_MANIFEST = ROOT / "research/readiness/atts-ccc/SHA256SUMS"
 READINESS_SHA256 = "c27d125cfe2e8bd14848d047b20d38a6355b71281c2c11a6cfa9fe1ba15e3978"
 PINNED_INPUTS = {
+    ROOT / "components/shared/cordio/runtime_cordio_atts_ccc.c": "e9d9ec6bfcce047911a43405657f2c6f3e811dcaefd9c5334689d9c1ac38fbee",
+    ROOT / "components/shared/cordio/runtime_cordio_atts_ccc.h": "c603f5ce10c4edaaca5f9a7e9f2bc2500ad84c8bcdd7901aa0535f6605265dbb",
     ROOT / "tools/manifests/packetcraft-cordio-atts-ccc-provenance.tsv": "f1bb185dda75d22216077cb5cd60e03c76e0f7736c60bf7298be838ffa6cdd0d",
     ROOT / "tools/manifests/packetcraft-cordio-atts-ccc-function-map.tsv": "d04abd1a75cfd5a66f39622442ef4ab28f668facff92a7f224ccdd97e94fb801",
     ROOT / "tools/manifests/readiness-cordio-atts-ccc-build-results.tsv": "3286d144687750bc976c12fb5551f0af176e24981f3fd51cc4f8a9e97b78222e",
@@ -28,6 +30,36 @@ PINNED_INPUTS = {
     ROOT / "tools/manifests/readiness-cordio-atts-ccc-source-identities.tsv": "30bb840731c917b425ce8bffe20f80270586fdad0e3974f914eecc4e9231b21a",
     ROOT / "tools/manifests/readiness-cordio-atts-ccc-undefined-providers.tsv": "cd7dec8bb4e1a5e9caf6769c60389c8939de3a324bd8e992ad80ad51c0416471",
 }
+
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_atts_ccc.c"
+CANDIDATE_FUNCTIONS = [
+    "open_cfw_cordio_atts_ccc_callback",
+    "open_cfw_cordio_atts_ccc_allocate_table",
+    "open_cfw_cordio_atts_ccc_get_table",
+    "open_cfw_cordio_atts_ccc_free_table",
+    "open_cfw_cordio_atts_ccc_read_value",
+    "open_cfw_cordio_atts_ccc_write_value",
+    "open_cfw_cordio_atts_ccc_main_callback",
+    "open_cfw_cordio_atts_ccc_register",
+    "open_cfw_cordio_atts_ccc_initialize_table",
+    "open_cfw_cordio_atts_ccc_clear_table",
+    "open_cfw_cordio_atts_ccc_get",
+    "open_cfw_cordio_atts_ccc_set",
+    "open_cfw_cordio_atts_ccc_enabled",
+    "open_cfw_cordio_atts_ccc_table_length",
+]
+CANDIDATE_LEAF_METRICS = [
+    (335892, 46, 0), (335940, 44, 1), (335984, 20, 0),
+    (336004, 40, 1), (336044, 156, 1), (336200, 212, 2),
+    (336412, 20, 2), (336432, 34, 0), (336468, 96, 2),
+    (336564, 14, 1), (336580, 20, 1), (336600, 20, 1),
+    (336620, 50, 2), (336672, 12, 0),
+]
 
 FUNCTIONS = [
     ("attsCccCback", 0x0052BB64, 0x0052BB8A, "2122c745eb8360485c188d36af3757d6c1a0841df9720e7ccd32159410bbfe80", [0x0052C092, 0x0052C3A8]),
@@ -196,6 +228,84 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         raise AuditError("ATT CCC decoded settings changed")
     _verify_no_other_stored_function_pointers(blob)
 
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves_by_function = {
+        row["function"]: row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == CANDIDATE_SOURCE_PATH
+    }
+    if set(leaves_by_function) != set(CANDIDATE_FUNCTIONS):
+        raise AuditError("ATT CCC production leaf inventory changed")
+    source_hash = PINNED_INPUTS[ROOT / CANDIDATE_SOURCE_PATH]
+    leaves = []
+    for function, metrics in zip(CANDIDATE_FUNCTIONS, CANDIDATE_LEAF_METRICS):
+        leaf = leaves_by_function[function]
+        actual = (
+            leaf["expected"]["offset"], leaf["expected"]["size"],
+            len(leaf["relocations"]),
+        )
+        if actual != metrics or leaf["source"].get("sha256") != source_hash:
+            raise AuditError(f"ATT CCC production leaf changed: {function}")
+        leaves.append(leaf)
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, ((_, start, end, expected, _), function) in enumerate(
+        zip(FUNCTIONS, CANDIDATE_FUNCTIONS), 1
+    ):
+        site = sites.get(f"replace_cordio_atts_ccc_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"ATT CCC production route {index} changed")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = sum(
+        right["expected"]["offset"]
+        - left["expected"]["offset"] - left["expected"]["size"]
+        for left, right in zip(leaves, leaves[1:])
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (784, 8, 14):
+        raise AuditError("ATT CCC production metrics changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"]
+        != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"]
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256")
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([
+            row for row in override["regions"]
+            if row["name"].startswith("cordio_atts_ccc_")
+        ]) != 32
+    ):
+        raise AuditError("ATT CCC component/manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or _sha256(PACKAGE.read_bytes())
+        != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("ATT CCC package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or _sha256(FLASH_PLAN.read_bytes())
+        != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("ATT CCC flash plan changed")
+
     linked_bytes = sum(end - start for _, start, end, _, _ in FUNCTIONS)
     return {
         "schema_version": 1,
@@ -258,8 +368,16 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "linked_unresolved_symbols": 0,
         },
         "production": {
-            "status": "stock-retained; exact public definitions authenticated but validation/logging seam not yet promoted",
-            "source_owned_bytes_added": 0,
+            "status": "routed",
+            "functions": 14,
+            "stock_bytes": linked_bytes,
+            "source_owned_bytes_added": compiled,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": 14,
+            "fixed_registered_callback": "0x0052C0AD guarded stock entry",
+            "vendor_diagnostics": "not copied; public behavior and G2 validation retained",
         },
     }
 

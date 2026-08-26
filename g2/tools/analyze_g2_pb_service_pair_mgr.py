@@ -30,40 +30,40 @@ PINS = {
 SOURCE_SIZE = 27574
 SOURCE_SHA256 = "917a17e5c161a4a55a46fe4bb14a5b9a7b613b5db8e31dd4ee18f8ba4e53b0fe"
 FUNCTIONS = (
-    ("open_cfw_pb_service_pair_mgr_buffer_write", 166, 209396, 0,
+    ("open_cfw_pb_service_pair_mgr_buffer_write", 166, 269244, 0,
      "open_cfw_pb_service_pair_mgr_buffer_write"),
-    ("pairMgrSecAuthFlagSet", 12, 209564, 0,
+    ("pairMgrSecAuthFlagSet", 12, 269412, 0,
      "pair_mgr_sec_auth_flag_set"),
-    ("pairMgrSecAuthFlagGet", 12, 209576, 0,
+    ("pairMgrSecAuthFlagGet", 12, 269424, 0,
      "pair_mgr_sec_auth_flag_get"),
-    ("PB_RxSecAuth", 106, 209588, 9, "pb_rx_sec_auth"),
-    ("PB_TxEncodeSecAuth", 130, 209696, 4, "pb_tx_encode_sec_auth"),
-    ("PB_TxEncodeNotifySecAuthImpl", 342, 209828, 9,
+    ("PB_RxSecAuth", 106, 269436, 9, "pb_rx_sec_auth"),
+    ("PB_TxEncodeSecAuth", 130, 269544, 4, "pb_tx_encode_sec_auth"),
+    ("PB_TxEncodeNotifySecAuthImpl", 342, 269676, 9,
      "pb_tx_encode_notify_sec_auth_impl"),
-    ("PB_RxPipeRoleChange", 20, 210172, 1, "pb_rx_pipe_role_change"),
-    ("PB_TxEncodePipeRoleChange", 130, 210192, 4,
+    ("PB_RxPipeRoleChange", 20, 270020, 1, "pb_rx_pipe_role_change"),
+    ("PB_TxEncodePipeRoleChange", 130, 270040, 4,
      "pb_tx_encode_pipe_role_change"),
-    ("_PB_RxRingConnectInfoOwnerExecute", 192, 210324, 22,
+    ("_PB_RxRingConnectInfoOwnerExecute", 192, 270172, 22,
      "pb_rx_ring_connect_info_owner_execute"),
-    ("_PB_RxRingConnectInfoCommon", 52, 210516, 3,
+    ("_PB_RxRingConnectInfoCommon", 52, 270364, 3,
      "pb_rx_ring_connect_info_common"),
-    ("PB_RxRingConnectInfo", 6, 210568, 1, "pb_rx_ring_connect_info"),
-    ("PB_LastTxEncodeRingConnectInfoTimeSet", 10, 210576, 1,
+    ("PB_RxRingConnectInfo", 6, 270416, 1, "pb_rx_ring_connect_info"),
+    ("PB_LastTxEncodeRingConnectInfoTimeSet", 10, 270424, 1,
      "pb_last_tx_encode_ring_connect_info_time_set"),
-    ("PB_TxEncodeRingConnectInfo", 132, 210588, 4,
+    ("PB_TxEncodeRingConnectInfo", 132, 270436, 4,
      "pb_tx_encode_ring_connect_info"),
-    ("PB_TxEncodeNotifyRingConnectInfoImpl", 364, 210720, 13,
+    ("PB_TxEncodeNotifyRingConnectInfoImpl", 364, 270568, 13,
      "pb_tx_encode_notify_ring_connect_info_impl"),
-    ("PB_TxEncodeNotifyRingConnectInfo", 60, 211084, 3,
+    ("PB_TxEncodeNotifyRingConnectInfo", 60, 270932, 3,
      "pb_tx_encode_notify_ring_connect_info"),
-    ("PB_RxBleConnectParams", 38, 211144, 2, "pb_rx_ble_connect_params"),
-    ("PB_TxEncodeBleConnectParams", 130, 211184, 4,
+    ("PB_RxBleConnectParams", 38, 270992, 2, "pb_rx_ble_connect_params"),
+    ("PB_TxEncodeBleConnectParams", 130, 271032, 4,
      "pb_tx_encode_ble_connect_params"),
-    ("PB_RxDisconnectInfo", 52, 211316, 4, "pb_rx_disconnect_info"),
-    ("PB_TxEncodeDisconnectInfo", 130, 211368, 4,
+    ("PB_RxDisconnectInfo", 52, 271164, 4, "pb_rx_disconnect_info"),
+    ("PB_TxEncodeDisconnectInfo", 130, 271216, 4,
      "pb_tx_encode_disconnect_info"),
-    ("PB_RxUnpairInfo", 86, 211500, 5, "pb_rx_unpair_info"),
-    ("PB_TxEncodeUnpairInfo", 130, 211588, 4,
+    ("PB_RxUnpairInfo", 86, 271348, 5, "pb_rx_unpair_info"),
+    ("PB_TxEncodeUnpairInfo", 130, 271436, 4,
      "pb_tx_encode_unpair_info"),
 )
 PHYSICAL = (0x004BB3DC, 0x004BD054)
@@ -347,8 +347,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -356,8 +356,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

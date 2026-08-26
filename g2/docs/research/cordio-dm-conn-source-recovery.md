@@ -1,6 +1,6 @@
 # Cordio DM connection-manager source recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -19,8 +19,16 @@ are classified source-only/dead-stripped: `DmReadRemoteVerInfo`,
 `DmExtConnSetScanInterval`, `DmExtConnSetConnSpec`,
 `DmWriteAuthPayloadTimeout`, and `DmConnRequestPeerSca`.
 
-This is an identification result, not a production replacement. All 6,484
-flash bytes and the associated SRAM remain stock-retained.
+The maintained implementation is now production-routed. All 57 linked stock
+functions are source-owned: 55 use guarded `B.W` redirects and the two
+two-byte no-op actions use exact in-place source copies. The five public APIs
+that stock dead-stripped remain maintained, behavior-tested, and Cortex-M55
+compiled without claiming nonexistent stock routing.
+
+The resulting translation unit contributes 4,540 compiled bytes plus 54
+alignment bytes under 92 strict relocations. It replaces or exactly reproduces
+all 6,216 bounded linked function bytes while retaining only authenticated
+interstitial tables, pools, and ABI data.
 
 ## Source lineage
 
@@ -113,8 +121,40 @@ python3 tools/analyze_g2_cordio_dm_conn.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production promotion remains blocked on exact vendor diagnostics, IAR code
-generation, placement, all provider relocations, and replacement tests. The
-adjacent `dm_conn_sm.c` and `dm_dev.c` tranches are now independently closed;
-continue with `dm_dev_priv.c` and then `dm_main.c` to resolve the privacy-event
-consumer and global component-dispatch ownership.
+## Production admission
+
+`components/shared/cordio/runtime_cordio_dm_conn.c` is an Apache-2.0 adaptation
+of the pinned r20.05c source. It binds the authenticated G2 three-connection
+control block, component interfaces, action tables, connection defaults, and
+shared DM data. The adjacent vendor helper is implemented in C from its exact
+62-byte stock behavior. Invalid connection/client IDs, null addresses,
+callbacks, specifications, messages, action ordinals, action-set indices, and
+action IDs fail closed.
+
+Packetcraft maintains this module as one translation unit. Each selected
+function is compiled into its own section; the overlay extractor authenticates
+that function's complete relocation contract and explicitly discards the other
+independently selected function sections from that particular leaf object.
+Forward relocations are accepted only when the exact symbol belongs to the same
+reviewed 57-function set. External calls are fixed to authenticated G2 entry
+addresses.
+
+The reviewed Apple Clang build is deterministic:
+
+- overlay: 365,448 bytes, SHA-256
+  `a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d`;
+- Apollo component: 3,888,844 bytes, SHA-256
+  `5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73`;
+- source package: 4,667,338 bytes, SHA-256
+  `30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf`;
+- flash plan: 3,807,191 bytes, SHA-256
+  `cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d`,
+  with 5,475 placed, two unresolved, five container-only, and six protected
+  regions.
+
+Reproduce the complete software gate with `make cordio-dm-conn-closure`.
+Host behavior, all target profiles, stock closure, routing, manifest ownership,
+package, and flash-plan checks are green. Live connection, controller, peer,
+RF, privacy, timing, idle-state, and paired-temple behavior remains explicitly
+blocked by unavailable authorized responsive G2/EM9305 physical evidence. No
+image was signed, installed, or flashed.

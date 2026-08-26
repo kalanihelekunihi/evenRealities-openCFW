@@ -21,6 +21,22 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 READINESS_MANIFEST = ROOT / "research/readiness/dm-conn-sm/SHA256SUMS"
 READINESS_BYTES = 943
 READINESS_SHA256 = "aaa2c00f94b74ba11b625c0df329b225fa3d52a28952b16b227b00cc9d238aac"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_dm_conn_sm.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_dm_conn_sm.h"
+TEST = ROOT / "tests/test_runtime_cordio_dm_conn_sm.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+SOURCE_PIN = (3_950, "5d4698908c44e578d3da2d9eb09f07b7e0e60ce2ecb5deb9c67f96c2ac0bca1b")
+HEADER_PIN = (1_655, "8299ae5795d1fce5323c66c86fafc320b1ed166b8ce0546a198bfb0d8d497ad4")
+TEST_PIN = (6_313, "5e2e1c8ae8ae7011715b89aed920797b6ef2bccd3cc0933d6da833445866d6e2")
+PRODUCTION_LEAF = (356_808, 120, 2, "04a319bb05ef14e301ccaf375089b862a9ddf636220ae8b4f7b2c9b5f8624a74")
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 PINNED_INPUTS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-sm-function-map.tsv": "b0a42e95ba82522214623e7357945309ab3a5876e0ced618f30390db6e4cc0ff",
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-sm-provenance.tsv": "66ce42fad423210c94b002a83b7f9ffcba3f4d484e77771d1ee387d608744923",
@@ -104,6 +120,91 @@ def _slice(blob: bytes, start: int, end: int) -> bytes:
 def _occurrences(blob: bytes, value: int) -> list[int]:
     packed = struct.pack("<I", value)
     return [LOAD_BASE + i for i in range(len(blob) - 3) if blob[i:i + 4] == packed]
+
+
+def _verify_file(path: Path, pin: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), _sha256(data)) != pin:
+        raise AuditError(f"{label} changed")
+
+
+def _verify_production() -> dict[str, Any]:
+    _verify_file(SOURCE, SOURCE_PIN, "DM connection state-machine source")
+    _verify_file(HEADER, HEADER_PIN, "DM connection state-machine header")
+    _verify_file(TEST, TEST_PIN, "DM connection state-machine host test")
+    report = json.loads(REPORT.read_text())
+    config = json.loads(CONFIG.read_text())
+    manifest = json.loads(MANIFEST.read_text())
+    leaves = [
+        row for row in report["relocated_leaves"]
+        if row.get("source", {}).get("path", "").endswith(SOURCE.name)
+    ]
+    if len(leaves) != 1:
+        raise AuditError("DM connection state-machine production leaf count changed")
+    leaf = leaves[0]
+    observed = (
+        leaf["pins"]["offset"], leaf["extraction"]["size"],
+        leaf["extraction"]["relocation_count"], leaf["extraction"]["sha256"],
+    )
+    if (leaf["extraction"]["function"] !=
+            "open_cfw_cordio_dm_connection_state_machine_execute"
+            or observed != PRODUCTION_LEAF
+            or leaf["placement"]["padding_before"] != 0):
+        raise AuditError("DM connection state-machine production leaf changed")
+    sites = [
+        row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_dm_conn_sm_")
+    ]
+    if len(sites) != 1:
+        raise AuditError("DM connection state-machine route count changed")
+    site = sites[0]
+    if (
+        site["name"] != "replace_cordio_dm_conn_sm_01"
+        or site["runtime_address"] != BODY[0]
+        or site["expected_size"] != BODY[1] - BODY[0]
+        or site["expected_sha256"] != BODY_SHA256
+        or site["branch"] != "b_w"
+        or site["target_function"] !=
+            "open_cfw_cordio_dm_connection_state_machine_execute"
+    ):
+        raise AuditError("DM connection state-machine production route changed")
+    override = manifest["component_overrides"]["apollo_main"]
+    regions = [
+        row for row in override["regions"]
+        if row["name"].startswith("cordio_dm_conn_sm_")
+    ]
+    if (
+        (report["overlay"]["size"], report["overlay"]["sha256"])
+            != PRODUCTION_OVERLAY
+        or (report["component"]["size"], report["component"]["sha256"])
+            != PRODUCTION_COMPONENT
+        or (override["provider"].get("size"),
+            override["provider"].get("sha256")) != PRODUCTION_COMPONENT
+        or len(regions) != 2
+    ):
+        raise AuditError("DM connection state-machine component ownership changed")
+    _verify_file(PACKAGE, PRODUCTION_PACKAGE, "DM connection state-machine package")
+    _verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN,
+                 "DM connection state-machine flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions",
+        "container_only_regions", "protected_regions",
+    ))
+    if counts != (5863, 2, 5, 6):
+        raise AuditError("DM connection state-machine flash counts changed")
+    return {
+        "status": "production-routed",
+        "redirected_stock_functions": 1,
+        "redirected_stock_bytes": BODY[1] - BODY[0],
+        "source_owned_bytes_added": PRODUCTION_LEAF[1],
+        "alignment_bytes_added": 0,
+        "strict_relocations": PRODUCTION_LEAF[2],
+        "retained_state_table_bytes": STATE_TABLE[1] - STATE_TABLE[0],
+        "retained_literal_pool_bytes": TAIL[1] - TAIL[0],
+        "manifest_regions": len(regions),
+        "flash_plan_counts": counts,
+    }
 
 
 def _load_decoder():
@@ -224,10 +325,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "minimum_retained_text": 232,
             "retained_bss": 1036,
         },
-        "production": {
-            "status": "stock-retained; public semantic base authenticated; vendor overlay not promoted",
-            "source_owned_bytes_added": 0,
-        },
+        "production": _verify_production(),
     }
 
 

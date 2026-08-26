@@ -30,18 +30,18 @@ MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 SOURCE_SIZE = 29572
 SOURCE_SHA256 = "3d55fce653ac9697366af64aec4167a0455e613bf00a3ab37d03d2bc7d3eee98"
 PRODUCTION_LEAVES = (
-    ("_evenEfsReplyToAPP", 30, 216848, 1),
-    ("_fileCaculateCRC", 162, 216880, 6),
-    ("_efsFileCmdParse", 944, 217044, 20),
-    ("_efsFileRawDataParse", 464, 217988, 7),
-    ("_efsExportFileParse", 944, 218452, 23),
-    ("EFS_FrameDispatch", 82, 219396, 3),
-    ("EFS_NotifyStatus4", 46, 219480, 1),
-    ("EFS_NotifyStatus2", 46, 219528, 1),
-    ("EFS_NotifyStatus5", 46, 219576, 1),
-    ("EFS_TransferActive", 18, 219624, 0),
-    ("EFS_ServiceInit", 18, 219644, 1),
-    ("EFS_CancelExport", 136, 219664, 4),
+    ("_evenEfsReplyToAPP", 30, 276696, 1),
+    ("_fileCaculateCRC", 162, 276728, 6),
+    ("_efsFileCmdParse", 944, 276892, 20),
+    ("_efsFileRawDataParse", 464, 277836, 7),
+    ("_efsExportFileParse", 944, 278300, 23),
+    ("EFS_FrameDispatch", 82, 279244, 3),
+    ("EFS_NotifyStatus4", 46, 279328, 1),
+    ("EFS_NotifyStatus2", 46, 279376, 1),
+    ("EFS_NotifyStatus5", 46, 279424, 1),
+    ("EFS_TransferActive", 18, 279472, 0),
+    ("EFS_ServiceInit", 18, 279492, 1),
+    ("EFS_CancelExport", 136, 279512, 4),
 )
 PHYSICAL = (0x00456722, 0x00458DF0)
 PHYSICAL_SHA256 = "22a070bb00d0a5555c5a1867804a1fe89678350777c9f3e42258bc7953473175"
@@ -293,8 +293,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
         report["overlay"]["size"], report["overlay"]["sha256"],
         report["component"]["size"], report["component"]["sha256"],
     ) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production EFS service artifact pins changed")
 
@@ -305,8 +305,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
         manifest["package"]["expected_size"],
         manifest["package"]["expected_sha256"],
     ) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production EFS service manifest pins changed")
     regions = {region["name"]: region for region in main["regions"]}

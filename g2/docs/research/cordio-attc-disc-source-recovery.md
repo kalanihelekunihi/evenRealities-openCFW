@@ -14,8 +14,7 @@ whole 3,012-byte interval has SHA-256
 Packetcraft r20.05 through r20.05c provides the exact Apache-2.0 public
 definition/behavior family. Stock contains the r20-only post-match `break` in
 characteristic discovery and its retained line numbers track the r20 layout,
-excluding the older AmbiqSuite 2.5.1/r19 implementation. All bytes remain
-cut forward; this recovery changes provenance knowledge, not package ownership.
+excluding the older AmbiqSuite 2.5.1/r19 implementation.
 
 ## Upstream pin and version evidence
 
@@ -105,7 +104,25 @@ python3 tools/analyze_g2_cordio_attc_disc.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production promotion still requires the exact product diagnostic seams, IAR
-code generation, provider relocations, and placement. `dm_adv_leg.c` is the
-next fast bounded public-source target; `dm_conn.c` offers greater byte yield
-at substantially larger scope.
+## Production replacement
+
+`components/shared/cordio/runtime_cordio_attc_disc.c` implements all eighteen
+source definitions. Fifteen linked entries use guarded redirects to replace
+all 2,908 stock body bytes with 1,610 compiled Cortex-M55 bytes plus 16
+alignment bytes under 18 strict relocations. The three included-service
+definitions remain source-only/dead-stripped and independently target-compile.
+
+The implementation hardens response-pair shapes and trailing lengths, null
+pointers, descriptor-first/index underflow, service-handle ranges,
+configuration handle indexes, required-characteristic validation, and
+malformed-response cleanup. Host tests cover service, characteristic,
+descriptor, included-service, configuration-read/write, and failure paths.
+
+The canonical overlay/component/package identities are 353,336 / 3,876,732 /
+4,655,226 bytes with SHA-256 values
+`31eec27c1b67e8740a77144c24896a367239d0816fa48acee6b4926b14898106`,
+`3aba35b870b09b678b1af07680b2db1ab61962baf0247a6e1b806954a6726444`,
+and `b10166d4f1c1f91f348c3ee360afb2af1499df59715491a1256a1d0545f548bc`.
+No image was signed, flashed, or installed. Live discovery/configuration,
+ATT-peer interoperability, and EM9305 timing remain blocked by unavailable
+authorized responsive physical evidence.

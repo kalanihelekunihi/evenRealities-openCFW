@@ -85,20 +85,29 @@ class CordioWsfBufferMessageAuditTests(unittest.TestCase):
         self.assertEqual(matrix["best_function_gaps"]["WsfBufFree"], 2)
         self.assertEqual((matrix["raw_matches"], matrix["strict_normalized_matches"]), (0, 0))
 
-    def test_candidates_are_absent_from_production_inputs(self) -> None:
-        for needle in (
-            "runtime_cordio_wsf_buf_candidate",
-            "runtime_cordio_wsf_msg_candidate",
-        ):
-            for relative in (
-                "components/apollo_main/core_overlay/build_component.py",
-                "components/apollo_main/core_overlay/overlay.json",
-                "components/apollo_main/ring_gesture/build_component.py",
-                "components/apollo_main/ring_gesture/overlay.json",
-                "components/bootloader/core_overlay/build_component.py",
-                "components/bootloader/core_overlay/overlay.json",
-            ):
-                self.assertNotIn(needle, (ROOT / relative).read_text())
+    def test_candidates_are_guarded_routed_in_production(self) -> None:
+        self.assertEqual(self.report["candidate"]["production"], "routed")
+        metrics = self.report["candidate"]["production_metrics"]
+        self.assertEqual(
+            (
+                metrics["buffer"]["compiled_text_bytes"],
+                metrics["buffer"]["strict_relocations"],
+                metrics["buffer"]["guarded_redirects"],
+            ),
+            (582, 5, 3),
+        )
+        self.assertEqual(
+            (
+                metrics["message"]["compiled_text_bytes"],
+                metrics["message"]["alignment_bytes"],
+                metrics["message"]["strict_relocations"],
+                metrics["message"]["guarded_redirects"],
+            ),
+            (114, 12, 8, 7),
+        )
+        overlay = (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+        self.assertIn("runtime_cordio_wsf_buf_candidate.c", overlay)
+        self.assertIn("runtime_cordio_wsf_msg_candidate.c", overlay)
 
     def test_cli_json(self) -> None:
         parsed = json.loads(subprocess.run(

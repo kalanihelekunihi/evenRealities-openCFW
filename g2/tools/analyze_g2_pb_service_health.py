@@ -60,15 +60,15 @@ SYMBOLS = (
 )
 PRODUCTION_PIN = (12366, "2a5faf89b2fc881b8ae2a19a28f1a2ba780fb7776939c5a560879f1c8791b6d6")
 PRODUCTION_LEAVES = (
-    ("open_cfw_pb_service_health_buffer_write", "OPEN_CFW_PB_HEALTH_BUFFER_WRITE_ONLY", 154, "71d648ce7fbfe3eb8bcfe0a8ec96ea07f901bedff55b5f8cda47426181d8da76", 183576),
-    ("PB_RxHealthSingleData", "OPEN_CFW_PB_HEALTH_RX_SINGLE_ONLY", 24, "fcf1eadf5f4cae6df209d800556053f4afa7938e9d648f1fbf1ab6ce55fd367d", 183732),
-    ("APP_PbTxEncodeHealthSingleData", "OPEN_CFW_PB_HEALTH_TX_SINGLE_ONLY", 204, "11d08387e157b0c6137f49373b0898cc1065c7c7703ca501535a7ed37e8adb06", 183756),
-    ("PB_RxHealthMultData", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_ONLY", 24, "a859f96aa5044a913132468af5bcdec05b1481a9451b6ab18f170a64627f4df4", 183960),
-    ("APP_PbTxEncodeHealthMultData", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_ONLY", 138, "d62197781dfe7c99758e15d6aec1eb9f4da07f64c90a5336ddac3a6679137076", 183984),
-    ("PB_RxHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_RX_SINGLE_HIGHLIGHT_ONLY", 24, "a99320f11b41dbdaec7856ac72713c7164dc8d655d56ae6aec251011a4bb7577", 184124),
-    ("APP_PbTxEncodeHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_TX_SINGLE_HIGHLIGHT_ONLY", 138, "33c85e5cf1d82fcfedadfa170dcccdce9a4fb8885ba7d259d5dadb90c82e65e7", 184148),
-    ("PB_RxHealthMultHighlight", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_HIGHLIGHTS_ONLY", 24, "d236fdddab28b4e00659c89de08e5f78aa65271e64d642bcc4257f8cf726fdb2", 184288),
-    ("APP_PbTxEncodeHealthMultHighlight", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_HIGHLIGHTS_ONLY", 210, "02d06d366a322d251788963ca6800ded03cff72d2cd32db62a46aee56819b3ca", 184312),
+    ("open_cfw_pb_service_health_buffer_write", "OPEN_CFW_PB_HEALTH_BUFFER_WRITE_ONLY", 154, "71d648ce7fbfe3eb8bcfe0a8ec96ea07f901bedff55b5f8cda47426181d8da76", 243424),
+    ("PB_RxHealthSingleData", "OPEN_CFW_PB_HEALTH_RX_SINGLE_ONLY", 24, "fcf1eadf5f4cae6df209d800556053f4afa7938e9d648f1fbf1ab6ce55fd367d", 243580),
+    ("APP_PbTxEncodeHealthSingleData", "OPEN_CFW_PB_HEALTH_TX_SINGLE_ONLY", 204, "24699770a105c5391f0fabd4e123b77adf72f7141be3071cae80b7f8c12b6998", 243604),
+    ("PB_RxHealthMultData", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_ONLY", 24, "a859f96aa5044a913132468af5bcdec05b1481a9451b6ab18f170a64627f4df4", 243808),
+    ("APP_PbTxEncodeHealthMultData", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_ONLY", 138, "065695a56049fe570ee0aaeeeffe9dff575e25f7cb1ca3a99f6f5a264a881dfc", 243832),
+    ("PB_RxHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_RX_SINGLE_HIGHLIGHT_ONLY", 24, "a99320f11b41dbdaec7856ac72713c7164dc8d655d56ae6aec251011a4bb7577", 243972),
+    ("APP_PbTxEncodeHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_TX_SINGLE_HIGHLIGHT_ONLY", 138, "5ef15f8136af16cb5d85d1f10c8b73f4e4c58c9707f9fae3bddbdf8aaada0eb1", 243996),
+    ("PB_RxHealthMultHighlight", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_HIGHLIGHTS_ONLY", 24, "d236fdddab28b4e00659c89de08e5f78aa65271e64d642bcc4257f8cf726fdb2", 244136),
+    ("APP_PbTxEncodeHealthMultHighlight", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_HIGHLIGHTS_ONLY", 210, "3b2e84fbf1957833fe68495e1970fb9f8bf95b99f0c3bffaaf63a8adfc1946d7", 244160),
 )
 
 
@@ -265,7 +265,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         if site.get("expected_size") != int(row["stock_bytes"]) or site.get("expected_sha256") != row["stock_sha256"] or site.get("target_function") != row["function"] or site.get("branch") != "b_w" or site.get("profiles") != ["apple-clang"]:
             raise AuditError(f"production stock route changed: {row['function']}")
     build = json.loads(OVERLAY_REPORT.read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae", 3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):
+    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d", 3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
         raise AuditError("production health service build pins changed")
     built = {item.get("extraction", {}).get("function"): item
              for item in build.get("relocated_leaves", [])
@@ -276,10 +276,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
     main = manifest["component_overrides"]["apollo_main"]
     regions = main["regions"]
     generated = [item for item in regions if item.get("address_status") == "generated_source_entry_replacement" and item.get("target_address") in stock_by_start]
-    appended = [item for item in regions if item.get("address_status") == "source_compiled" and 8130620 <= item.get("target_address", 0) < 8131566]
+    appended = [item for item in regions if item.get("address_status") == "source_compiled" and 8190468 <= item.get("target_address", 0) < 8191414]
     if len(generated) != 8 or sum(item["size"] for item in generated) != 3092 or len(appended) != 9 or sum(item["size"] for item in appended) != 940:
         raise AuditError("production health service manifest closure changed")
-    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed", 4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):
+    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc", 4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
         raise AuditError("production health service package pins changed")
 
     return {

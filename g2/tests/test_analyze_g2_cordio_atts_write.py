@@ -54,7 +54,11 @@ class CordioAttsWriteAuditTests(unittest.TestCase):
         self.assertFalse(report["architecture"]["continue_pending_response_api_linked"])
         self.assertEqual(report["abi"]["prep_write_queues_offset"], 0x238)
         self.assertEqual(report["lineage"]["selected_blob"], "1b41582c58124a49014317b987f304dd216ce100")
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        self.assertEqual(report["production"]["status"], "routed")
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 1644)
+        self.assertEqual(report["production"]["alignment_bytes"], 12)
+        self.assertEqual(report["production"]["strict_relocations"], 25)
+        self.assertEqual(report["production"]["guarded_redirects"], 4)
 
 
 if __name__ == "__main__":

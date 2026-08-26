@@ -7,6 +7,10 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]; IMAGE=ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin'; BASE=0x437FE0
 IMAGE_BYTES=3_523_396; IMAGE_SHA='36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863'
 PINS={ROOT/'tools/manifests/packetcraft-cordio-l2c-slave-function-map.tsv':'214f6cb1e7d4bc4cf6d0e45022be5567b28e3978c67129f574caebbaef188183',ROOT/'tools/manifests/packetcraft-cordio-l2c-slave-provenance.tsv':'2ed1a9379e91071ed977a20d69922d49b16a3142b92ee441d1bade6d272da912'}
+SOURCE=ROOT/'components/shared/cordio/runtime_cordio_l2c_slave.c'
+SOURCE_SHA='5c42b0e55ce979d1c2c9d3294c98cb36854fd18c0519a33d3cda28637bfdf1c4'
+PRODUCTION_FUNCTIONS=['open_cfw_cordio_l2c_slave_request_timeout','open_cfw_cordio_l2c_slave_receive_signaling_packet','open_cfw_cordio_l2c_slave_initialize','open_cfw_cordio_l2c_connection_update_request','open_cfw_cordio_l2c_slave_handler_initialize','open_cfw_cordio_l2c_slave_handler']
+PRODUCTION_METRICS=[(354188,46,2),(354236,188,5),(354424,42,0),(354468,182,4),(354652,18,0),(354672,20,1)]
 F={
 'l2cSlaveReqTimeout':(0x536B40,0x536C52,'6a92ad3b7511c9cf56fde9b6c92642aa343da2f5a77dd3f66d49cca183aae63f'),
 'l2cSlaveRxSignalingPkt':(0x536C5C,0x536E76,'dae4e51ce13fe94e7fa40c5d37fee245625df51fb4cfe5d5ec9734b5530bb9f1'),
@@ -47,7 +51,17 @@ def analyze(image_path=IMAGE):
   if t in starts: ent.append((BASE+o,v))
   elif t in interiors: inside.append((BASE+o,v))
  if ent!=[(0x4B8784,0x536FA5),(0x536F9C,0x536C5D)] or inside: raise RuntimeError('stored/interior ingress changed')
- return {'schema_version':1,'module':{'start':0x536B40,'end_exclusive':0x536FBC,'physical_bytes':1148,'linked_function_count':6,'linked_function_bytes':1078,'source_inventory_functions':7,'source_only_functions':['L2cDmSigReq'],'direct_bl_ingress_sites':4,'registered_function_pointers':2,'strict_interior_pointers':0},'architecture':{'dm_conn_max':3,'handle_validation':'DmConnIdByHandle','state_index':'connId-1','retained_source_path':0x6DD594},'lineage':{'selected_blob':'e9a1ff23544bd7e987d53ff7fb6fbfa9b70beef3','selected_sha256':'2f350e0fd27cdc205736df065099da356b9fa8be6e2ce4df014435cde53cbf73','license':'Apache-2.0','historical_generating_commit_resolved':False},'build_readiness':{'status':'deferred','reason':'reverse engineering prioritized; exhaustive compiler reproduction deferred'},'production':{'stock_bytes_replaced':0,'source_owned_bytes_added':0}}
+ from analyze_g2_cordio_l2c_production import validate
+ production=validate(source=SOURCE,source_sha256=SOURCE_SHA,
+  functions=PRODUCTION_FUNCTIONS,metrics=PRODUCTION_METRICS,
+  patch_prefix='replace_cordio_l2c_slave_',region_prefix='cordio_l2c_slave_',
+  stock_functions=F,stock_bytes=1078,source_functions=7,
+  source_only=['L2cDmSigReq'],region_count=16,hardening={
+   'one_based_connection_index_preserved':True,
+   'allocation_before_timer_start_hardened':True,
+   'response_and_command_reject_lengths_hardened':True,
+   'timeout_clears_pending_identifier':True})
+ return {'schema_version':1,'module':{'start':0x536B40,'end_exclusive':0x536FBC,'physical_bytes':1148,'linked_function_count':6,'linked_function_bytes':1078,'source_inventory_functions':7,'source_only_functions':['L2cDmSigReq'],'direct_bl_ingress_sites':4,'registered_function_pointers':2,'strict_interior_pointers':0},'architecture':{'dm_conn_max':3,'handle_validation':'DmConnIdByHandle','state_index':'connId-1','retained_source_path':0x6DD594},'lineage':{'selected_blob':'e9a1ff23544bd7e987d53ff7fb6fbfa9b70beef3','selected_sha256':'2f350e0fd27cdc205736df065099da356b9fa8be6e2ce4df014435cde53cbf73','license':'Apache-2.0','historical_generating_commit_resolved':False},'build_readiness':{'status':'production-routed','reason':'host and isolated Cortex-M55 gates green'},'production':production}
 def main():
  p=argparse.ArgumentParser();p.add_argument('--image',type=Path,default=IMAGE);p.add_argument('--json',action='store_true');a=p.parse_args();r=analyze(a.image);print(json.dumps(r,indent=2,sort_keys=True) if a.json else 'Cordio l2c_slave closed: 6 linked, 1 source-only');return 0
 if __name__=='__main__': raise SystemExit(main())

@@ -1604,6 +1604,7 @@ def extract_in_place_function_section(
     allow_local_relocation_targets: bool = False,
     allow_bound_static_data: bool = False,
     allow_halfword_placement: bool = False,
+    allow_discarded_alloc_sections: bool = False,
 ) -> tuple[bytes, dict[str, Any]]:
     """Extract and relocate one reviewed function for its fixed stock address."""
 
@@ -1613,6 +1614,11 @@ def extract_in_place_function_section(
         raise BuildError(
             f"in-place leaf {function_name} strict_relocation_contract must "
             "be boolean"
+        )
+    if not isinstance(allow_discarded_alloc_sections, bool):
+        raise BuildError(
+            f"in-place leaf {function_name} allow_discarded_alloc_sections "
+            "must be boolean"
         )
     if not isinstance(allow_halfword_placement, bool):
         raise BuildError(
@@ -2245,7 +2251,11 @@ def extract_in_place_function_section(
         and int(section["size"])
         and int(section["index"]) not in authenticated_cantunwind_indexes
     ]
-    if strict_relocation_contract and unexpected_alloc_sections:
+    if (
+        strict_relocation_contract
+        and unexpected_alloc_sections
+        and not allow_discarded_alloc_sections
+    ):
         raise BuildError(
             f"in-place leaf {function_name} strict relocation contract rejects "
             "unexpected allocated sections: "
@@ -3439,10 +3449,19 @@ def compile_in_place_leaf(
         "strict_relocation_contract",
         False,
     )
+    allow_discarded_alloc_sections = leaf_config.get(
+        "allow_discarded_alloc_sections",
+        False,
+    )
     if not isinstance(strict_relocation_contract, bool):
         raise BuildError(
             f"in-place leaf {function_name} strict_relocation_contract must "
             "be boolean"
+        )
+    if not isinstance(allow_discarded_alloc_sections, bool):
+        raise BuildError(
+            f"in-place leaf {function_name} allow_discarded_alloc_sections "
+            "must be boolean"
         )
     runtime_address = leaf_config.get("runtime_address")
     if not isinstance(runtime_address, int):
@@ -3594,6 +3613,7 @@ def compile_in_place_leaf(
             "allow_halfword_placement",
             False,
         ),
+        allow_discarded_alloc_sections=allow_discarded_alloc_sections,
     )
     if not record and (
         len(leaf) != expected["size"]
@@ -4002,9 +4022,8 @@ def append_relocated_leaves(
                 "positive size, lowercase SHA-256, and power-of-two alignment"
             )
 
-        padding = (
-            align_up(len(combined), expected_alignment) - len(combined)
-        )
+        runtime_end = overlay_runtime_address + len(combined)
+        padding = align_up(runtime_end, expected_alignment) - runtime_end
         offset = len(combined) + padding
         if not record and expected_offset is not None and (
             not isinstance(expected_offset, int)
@@ -4261,10 +4280,10 @@ def append_relocated_leaves(
                     }
                 )
                 if (
-                    isinstance(target_function, str)
-                    and target_function in selected_relocated_functions
+                    isinstance(symbol, str)
+                    and symbol in selected_relocated_functions
                 ):
-                    selected_defined_sibling_targets.add(target_function)
+                    selected_defined_sibling_targets.add(symbol)
 
             synthetic_config = {
                 "function": function_name,
@@ -4298,6 +4317,10 @@ def append_relocated_leaves(
                 ),
                 "allow_bound_static_data": leaf_config.get(
                     "allow_bound_static_data",
+                    False,
+                ),
+                "allow_discarded_alloc_sections": leaf_config.get(
+                    "allow_discarded_alloc_sections",
                     False,
                 ),
             }
@@ -5160,8 +5183,13 @@ def patch_component(
         4,
         zlib.crc32(patched[8:]) & 0xFFFFFFFF,
     )
-    if run_base + len(patched) - preamble_bytes > 0x007F0000:
-        raise BuildError("source overlay exceeds the conservative Apollo MRAM ceiling")
+    # The package/install verifier already protects the authenticated
+    # bootloader-owned update record beginning at 0x007FE000.  Use that exact
+    # boundary here as well: the former 0x007F0000 policy left 56 KiB of
+    # confirmed application MRAM unusable and could reject otherwise valid
+    # source closure images while adding no protection to the update record.
+    if run_base + len(patched) - preamble_bytes > 0x007FE000:
+        raise BuildError("source overlay overlaps the protected Apollo update record")
 
     details: dict[str, Any] = {
         "overlay_payload_offset": overlay_payload_offset,

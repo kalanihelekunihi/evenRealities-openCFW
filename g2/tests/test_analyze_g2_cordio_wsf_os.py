@@ -85,7 +85,7 @@ class CordioWsfOsTests(unittest.TestCase):
         self.assertEqual(lineage["exact_g2_handler_count_definition_site"], "unavailable")
         self.assertEqual(len(lineage["later_ten_handler_corroboration"]), 2)
         candidate = self.report["candidate"]
-        self.assertEqual(candidate["production"], "excluded")
+        self.assertEqual(candidate["production"], "routed")
         self.assertEqual(candidate["behaviorally_recreated_stock_functions"], 18)
         self.assertEqual(candidate["behaviorally_recreated_stock_bytes"], 774)
         self.assertFalse(candidate["stock_queue_empty_body_bounded"])
@@ -234,17 +234,29 @@ class CordioWsfOsTests(unittest.TestCase):
                     "-o", str(Path(directory) / f"{name}.o"),
                 ], cwd=ROOT, check=True, capture_output=True, text=True)
 
-    def test_candidate_is_absent_from_production_inputs(self) -> None:
-        for needle in ("runtime_cordio_wsf_os_candidate", "runtime_cordio_wsf_queue_candidate"):
-            for relative in (
-                "components/apollo_main/core_overlay/build_component.py",
-                "components/apollo_main/core_overlay/overlay.json",
-                "components/apollo_main/ring_gesture/build_component.py",
-                "components/apollo_main/ring_gesture/overlay.json",
-                "components/bootloader/core_overlay/build_component.py",
-                "components/bootloader/core_overlay/overlay.json",
-            ):
-                self.assertNotIn(needle, (ROOT / relative).read_text())
+    def test_candidates_are_guarded_routed_in_production(self) -> None:
+        metrics = self.report["candidate"]["production_metrics"]
+        self.assertEqual(
+            (
+                metrics["wsf_os"]["compiled_text_bytes"],
+                metrics["wsf_os"]["alignment_bytes"],
+                metrics["wsf_os"]["strict_relocations"],
+                metrics["wsf_os"]["guarded_redirects"],
+            ),
+            (614, 10, 25, 12),
+        )
+        self.assertEqual(
+            (
+                metrics["wsf_queue"]["compiled_text_bytes"],
+                metrics["wsf_queue"]["alignment_bytes"],
+                metrics["wsf_queue"]["strict_relocations"],
+                metrics["wsf_queue"]["guarded_redirects"],
+            ),
+            (272, 4, 16, 6),
+        )
+        overlay = (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+        self.assertIn("runtime_cordio_wsf_os_candidate.c", overlay)
+        self.assertIn("runtime_cordio_wsf_queue_candidate.c", overlay)
 
     def test_cli_json(self) -> None:
         parsed = json.loads(subprocess.run([

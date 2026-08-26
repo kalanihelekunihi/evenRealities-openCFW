@@ -1,8 +1,8 @@
 # G2 Ring-thread dependency boundary
 
-Status: complete, corpus-independent raw-image closure over the authenticated
-G2 2.2.6.10 Apollo payload. This is analysis only and performs no device or
-flash operation.
+Status: software-implemented and production-routed over the authenticated G2
+2.2.6.10 Apollo payload; physical behavior is explicitly blocked by unavailable
+authorized evidence. No device or flash operation was performed.
 
 ## Result
 
@@ -59,14 +59,46 @@ CMSIS queue, flag-driven dispatch, touch and pairing policy, Ring-service
 discovery/connection events, delayed heartbeat/reconnect/advertising work, and
 bounded record allocation/free.
 
+## Production source closure
+
+`components/apollo_main/core_overlay/thread_ring.c` provides all seventeen
+selector-isolated source leaves. Fifteen guarded redirects replace 2,370 stock
+body bytes with 894 compiled Thumb bytes plus 22 generated alignment bytes;
+72 strict relocations bind the reviewed CMSIS, event-loop, Ring-service,
+allocator, and sibling seams. The two remaining authenticated functions are
+two-byte empty hooks that cannot hold a four-byte redirect and have no
+independent ingress. Their stock `BX LR` compatibility stubs remain, while the
+source-owned thread entry calls the corresponding source leaves directly.
+Together with the 258-byte literal/callback pool, 262 bytes remain as explicit
+compatibility data/code rather than an unimplemented behavior surface.
+
+Host tests cover queue lifecycle and failure cleanup, message and event
+dispatch, touch/pair enablement, delayed-work scheduling, record construction,
+and allocation failure. Every selector compiles independently under the strict
+Cortex-M55 production profile. The canonical overlay/component/package sizes
+are 255,686 / 3,779,082 / 4,557,576 bytes with SHA-256 values
+`2def566dbf70594c89471066a7cd17f6d1fa94196f65ff48237385396e9cfd19`,
+`7228edb650fe39bda63480691fe94ed59d0807ca5e30846d35ec08e134e08350`,
+and `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
+The 2,879,088-byte flash plan hashes to
+`80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292`.
+
+Physical Ring transport, timing, peer state, and reconnect behavior cannot be
+validated: the authorized right temple is nonresponsive, the authorized left
+temple must remain stock, and no responsive authorized pair or golden Ring
+transport capture is available. This is a physical-evidence blocker, not a
+remaining Thread Ring software implementation gap.
+
 ## Reproduction
 
 ```sh
 python3 openCFW/tools/analyze_g2_thread_ring.py
-python3 -m unittest openCFW.tests.test_analyze_g2_thread_ring
+python3 -m unittest openCFW.tests.test_thread_ring_candidate \
+  openCFW.tests.test_analyze_g2_thread_ring
 ```
 
 The analyzer pins every function body, the complete physical interval and
 literal pool, all call and ingress topology, the corrected preceding object
-boundary, retained-path references, provider commits, and production-overlay
-exclusion.
+boundary, retained-path references, provider commits, candidate source,
+compiled leaves, guarded replacements, strict relocations, canonical artifacts,
+deployment plan, and the explicit physical-evidence blocker.

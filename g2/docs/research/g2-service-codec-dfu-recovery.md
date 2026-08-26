@@ -6,7 +6,7 @@ The retained first-party translation unit `platform\audio\service_codec_dfu.c` i
 
 The object contains 16 linked functions. Nine are retained-path anchors and seven adjacent pathless bodies were restored from source order, exact calls, literal ownership, and the enclosing IAR object boundary. Their 9,052 concatenated body bytes hash to `e0487b9129f918d6e4a0caf95fcc1e75f8ebac23db36fce2aa3f2dfe22ded98b`. Nine owned alignment and literal-pool gaps total 916 bytes and hash to `42cffa793dfdb3987491c96e1809a1d69723d6235df129643c157fc37e4a1ffc`.
 
-This is binary inclusion and behavior closure, not historical source recovery. No authenticated source inventory or license was found. The module therefore has no production candidate and owns zero production-overlay bytes.
+This remains clean-room behavior recovery rather than historical source recovery. Sixteen independently authored GPL-3.0-only C leaves now replace all 9,052 authenticated stock function bytes. They compile to 3,390 Thumb text bytes plus 24 bytes of generated alignment with 71 strict relocations. The 916 authenticated literal-pool and alignment bytes remain official data.
 
 ## Function inventory
 
@@ -40,9 +40,15 @@ The boot header must be at least 32 bytes. Four 32-bit fields at offsets 8, 12, 
 
 `SVC_CodecDfu` brings up the codec UART at 230,400 baud, loads the package, sends the initial `0xEF` synchronization byte, and waits for the codec's `M` handshake. It then executes the boot-header reader, first boot stage, second boot stage, and firmware flasher in order. Cleanup always tears down UART state and releases both allocated firmware buffers.
 
-The first boot stage begins with `0x59`, transfers the first 256-byte block, waits for `wfb`, and sends the remaining configuration and size state. The second stage begins with `0x53`, sends checksum and length state, and transfers the boot image in 256-byte chunks. The flash stage clears the 8-KiB scratch buffer, constructs the image command and CRC, waits for `~sta~`, sends firmware chunks, waits for `~fin~`, and finally accepts a `[Result]:` / `SUCC` result sequence. Most protocol waits use 10-second timeouts; final-result waits narrow to three and two seconds.
+The first boot stage begins with `0x59` plus the little-endian configuration word count, transfers the configuration following the 32-byte boot header in at most 256-byte chunks, waits for `wfb` and `OK`, negotiates `GET` at 1,000,000 baud, and acknowledges with `OK`. The second stage begins with `0x53`, sends the raw little-endian checksum and image size, waits for `ready`, transfers the embedded boot image in 256-byte chunks, and accepts `O` plus `boot>`. The flash stage sends `serialdown 0 <size> 8192` and the seeded CRC-32, waits for `~sta~`, sends at most 8-KiB firmware chunks with `~fin~`/`~sta~` flow control, and finally accepts `[Result]:` / `SUCC`. Most protocol waits use 10-second timeouts; the initial flash-ready timeout is 9,000,000 ms and final-result waits are two seconds.
 
 `SVC_CodecCheckAndUpgrade(force)` reads and logs the package version. Unless forced, it asks the adjacent codec-host object for the running version with a 200-ms timeout and returns 1 without flashing when both versions match. Otherwise it performs DFU, queries and logs the resulting version on success, and stores the package version in big-endian form at `0x20074940`. Errors remain negative and the DFU result is propagated.
+
+## Production integration
+
+`components/apollo_main/core_overlay/service_codec_dfu.c` implements strict FWPK loading, bounds and CRC validation, failure cleanup, both boot stages, flash flow control, unconditional DFU, and conditional version-gated upgrade. Sixteen guarded `B.W` redirects cover the exact stock entries. The reviewed Apple-clang aggregate now emits a 255,686-byte overlay and 3,779,082-byte Apollo component. The complete source package is 4,557,576 bytes with SHA-256 `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`; its flash plan contains 4,057 placed and two unresolved evidence-only regions.
+
+The host oracle covers all sixteen selectors, valid and invalid package loading, CRC and release behavior, exact stage-1 and stage-2 wire bytes, flash commands and acknowledgements, complete orchestration and cleanup, and the same-version skip path. No image was signed or flashed.
 
 ## Ingress and false-pointer closure
 
@@ -55,15 +61,14 @@ The all-byte four-byte-window scan finds one unaligned numeric collision at `0x0
 Run:
 
 ```sh
-python3 openCFW/tools/analyze_g2_service_codec_dfu.py
-python3 -m unittest openCFW.tests.test_analyze_g2_service_codec_dfu
+make service-codec-dfu-closure
 ```
 
-The analyzer authenticates the official image, all three manifests, every body and owned gap, both object boundaries, the retained path and four pointer cells, two exact symbols, complete call topology, pointer-like windows, package/state literals, and production-overlay exclusion.
+The analyzer authenticates the official image, all three evidence manifests, every body and owned gap, both object boundaries, the retained path and four pointer cells, two exact symbols, complete call topology, pointer-like windows, package/state literals, source and object pins, strict relocations, guarded redirects, manifest ownership, and component/package/flash-plan artifacts.
 
 ## Limitations
 
-- The historical source-only function count is unknown because the source file is unavailable.
+- The historical source-only function count is unknown because the vendor source file is unavailable; the linked 16-function callable inventory is complete.
 - `semantic_*` labels are clean-room descriptions, not recovered symbols.
-- Binary closure does not grant a license or justify copying vendor implementation text.
-- Production ownership remains zero until independently authored behavior is implemented, reviewed, and routed.
+- Binary closure does not grant a license or justify copying vendor implementation text; the production implementation is independently authored GPL-3.0-only code.
+- Destructive live upgrade, UART timing, codec reboot, and post-flash boot behavior are explicitly blocked: the authorized right temple is nonresponsive, the authorized left temple must remain stock, and no responsive authorized pair or golden codec/UART capture is available.

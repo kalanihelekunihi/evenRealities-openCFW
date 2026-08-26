@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ANALYZER = ROOT / "tools/analyze_g2_cordio_app_framework.py"
 CORPUS = Path(os.environ.get(
     "OPENCFW_APOLLO_GHIDRA_CORPUS",
-    "/var/tmp/opencfw-apollo64-return.3LC1Dq/full64-j64-auth",
+    str(ROOT / "research/corpus/apollo-main/ghidra/full64-j64-auth"),
 ))
 
 
@@ -46,7 +46,22 @@ class CordioApplicationFrameworkTests(unittest.TestCase):
         self.assertEqual(legacy["additional_recovered_functions"], 11)
         self.assertEqual(legacy["stored_callbacks"], 2)
         self.assertFalse(report["lineage"]["exact_source_text_identity"])
-        self.assertFalse(report["production"]["production_routed"])
+        production = report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["status"], "software_closed_hardware_blocked")
+        self.assertTrue(production["legacy_master_slave_routed"])
+        self.assertEqual(production["routed_functions"], 61)
+        self.assertEqual(production["routed_anchored_functions"], 50)
+        self.assertEqual(production["routed_anchored_body_bytes"], 29110)
+        self.assertEqual(production["routed_stock_bytes"], 29870)
+        self.assertEqual(production["legacy_ownership_bytes"], 948)
+        self.assertEqual(production["legacy_relocations"], 29)
+        self.assertEqual(production["application_runtime_ownership_bytes"], 4460)
+        self.assertEqual(production["application_runtime_relocations"], 108)
+        self.assertTrue(production["preexisting_app_database_routed"])
+        self.assertEqual(production["remaining_anchored_functions"], 0)
+        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertIn("No authorized responsive right G2", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: GPL-3.0-only
  *
- * Production-excluded clean-room ABI for the recovered G2 Cordio/Ambiq
+ * Production-routed clean-room ABI for the recovered G2 Cordio/Ambiq
  * FreeRTOS timer helpers.  This intentionally does not include the public
  * Packetcraft wsf_timer.h: the stock G2 field order differs from r20.05c.
  */

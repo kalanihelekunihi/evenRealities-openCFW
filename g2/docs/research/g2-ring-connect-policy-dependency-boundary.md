@@ -1,7 +1,8 @@
 # G2 Ring-connect policy dependency boundary
 
-Status: complete stock-object and provider closure over G2 2.2.6.10. No device
-or flash operation is performed.
+Status: complete stock-object/provider closure and production source routing
+over G2 2.2.6.10. No device or flash operation is performed. Physical
+paired-G2 validation is explicitly blocked by unavailable authorized evidence.
 
 ## Result
 
@@ -47,20 +48,42 @@ indirect body call, and no strict-interior ingress. One unaligned word at
 `0x004F468A` happens to encode interior address `0x0049F640`; it is not an
 aligned callback or control-flow edge.
 
-## OpenCFW implication
+## Production routing
 
-The object remains first-party policy rather than reusable third-party code.
-Its behavior is now bounded well enough for a later clean-room replacement,
-but it does not block dependency provenance closure. No public source or stock
-artifact identifies the private G2 commit that produced it.
+`components/apollo_main/core_overlay/ring_connect_policy.c` is the complete
+15-function clean-room implementation. Host oracles cover state windows,
+dominant-hand decisions, connect-info throttling, idempotent timeout scheduling,
+reconnect failure, owner-gated delayed success, cancellation, and both reset
+scopes. All fifteen selector-isolated Cortex-M55 builds pass `-Wall -Wextra
+-Werror`.
+
+Fifteen guarded `B.W` redirects replace all 1,828 authenticated stock body
+bytes. The reviewed Apple-clang build emits 570 bytes of Thumb text plus 14
+alignment bytes with 24 strict relocations; the authenticated 228-byte literal
+pool remains official. The aggregate overlay is 252,162 bytes (SHA-256
+`2def566dbf70594c89471066a7cd17f6d1fa94196f65ff48237385396e9cfd19`),
+the Apollo component is 3,775,558 bytes (SHA-256
+`7228edb650fe39bda63480691fe94ed59d0807ca5e30846d35ec08e134e08350`),
+and the 4,554,052-byte EVENOTA package has SHA-256
+`c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
+Its flash plan contains 4,057 placed, two unresolved evidence-only, five
+container-only, and six protected regions.
+
+No public source or stock artifact identifies the private G2 commit that
+produced the original object. Live Cordio/WSF timing, dual-temple role changes,
+reconnect behavior, and peer-visible notification ordering cannot be validated:
+the authorized right temple is nonresponsive, the authorized left temple must
+remain stock, and no responsive authorized pair or golden Ring/BLE capture is
+available.
 
 ## Reproduction
 
 ```sh
 python3 openCFW/tools/analyze_g2_ring_connect_policy.py
+python3 -m unittest openCFW.tests.test_ring_connect_policy_candidate
 python3 -m unittest openCFW.tests.test_analyze_g2_ring_connect_policy
 ```
 
-The analyzer authenticates every function, boundary pool, retained path
-reference, call provider, ingress site, stored pointer, and selected upstream
-commit.
+The analyzer authenticates every stock function, boundary pool, retained path
+reference, provider, ingress site, stored pointer, source leaf, relocation,
+guarded redirect, manifest region, package, and flash-plan identity.

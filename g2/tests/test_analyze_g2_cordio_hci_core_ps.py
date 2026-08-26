@@ -52,8 +52,19 @@ class CordioHciCorePlatformAuditTests(unittest.TestCase):
     def test_proprietary_boundary_is_metadata_only(self) -> None:
         self.assertFalse(self.report["lineage"]["historical_generating_commit_resolved"])
         self.assertEqual(self.report["lineage"]["license"], "Arm Cordio proprietary SLA")
-        self.assertFalse(self.report["production"]["proprietary_source_copied"])
-        self.assertEqual(self.report["production"]["source_owned_bytes_added"], 0)
+        production = self.report["production"]
+        self.assertFalse(production["proprietary_source_copied"])
+        self.assertEqual(production["public_behavior_license"], "Apache-2.0")
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(production["stock_bytes_replaced"], 360)
+        self.assertEqual(production["source_owned_bytes_added"], 514)
+        self.assertEqual(production["alignment_bytes_added"], 6)
+        self.assertEqual(production["strict_relocations"], 13)
+        self.assertEqual(production["source_only_functions_compiled"], 11)
+        self.assertEqual(production["manifest_regions"], 21)
+        self.assertEqual(production["flash_plan_counts"], (5863, 2, 5, 6))
+        self.assertTrue(production["completed_count_underflow_hardened"])
+        self.assertTrue(production["unknown_receive_type_hardened"])
 
 
 if __name__ == "__main__":

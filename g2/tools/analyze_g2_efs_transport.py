@@ -56,7 +56,7 @@ def analyze(image=IMAGE):
  source=SOURCE.read_bytes()
  if len(source)!=13453 or sh(source)!='6facd03cb8f48f68b61d14e100106e505c1dd869f715752c1ea2742375485514':raise c.AuditError('production EFS transport source changed')
  overlay=json.loads(OVERLAY.read_text());leaves={x['function']:x for x in overlay['relocated_leaves']};patches={x['name']:x for x in overlay['patch_sites']}
- production=[('EFS_ReceivePacket',700,215572,12,0x4D0D80,1374,'eb5dd1f1f34063c660a796e236079e23b8ce0709adff70212709f41f2a96cafb'),('EFS_SendPacket',576,216272,3,0x4D12DE,616,'67ef77338d11810123f2d592d857839758832561cef80e943c23c9990ecfcab1')]
+ production=[('EFS_ReceivePacket',700,275420,12,0x4D0D80,1374,'eb5dd1f1f34063c660a796e236079e23b8ce0709adff70212709f41f2a96cafb'),('EFS_SendPacket',576,276120,3,0x4D12DE,616,'67ef77338d11810123f2d592d857839758832561cef80e943c23c9990ecfcab1')]
  for order,(name,size,offset,relocs,address,stock_size,stock_hash) in enumerate(production,1):
   leaf=leaves.get(name)
   if not leaf or leaf.get('source',{}).get('path')!='components/apollo_main/core_overlay/efs_transport.c' or leaf.get('source',{}).get('sha256')!=sh(source) or leaf.get('source',{}).get('size')!=len(source) or leaf.get('expected',{}).get('size')!=size or leaf.get('expected',{}).get('offset')!=offset or leaf.get('expected',{}).get('alignment')!=4 or len(leaf.get('relocations',[]))!=relocs or not leaf.get('strict_relocation_contract') or leaf.get('profiles')!=['apple-clang']:raise c.AuditError(f'production EFS transport leaf changed: {name}')
@@ -67,8 +67,8 @@ def analyze(image=IMAGE):
   item=reported.get(name)
   if not item or item['placement']['offset']!=offset or item['placement']['size']!=size or item['placement']['alignment']!=4 or item['extraction']['relocation_count']!=relocs:raise c.AuditError(f'production EFS transport build report changed: {name}')
  manifest=json.loads(MANIFEST.read_text());main=manifest['component_overrides']['apollo_main'];regions={x['name']:x for x in main['regions']}
- if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3764088,'b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed',4542582,'275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85'):raise c.AuditError('production EFS transport manifest pins changed')
- expected_regions={'efs_transport_01_source_replacement':(0x4D0D80,1374,'generated_source_entry_replacement'),'efs_transport_02_source_replacement':(0x4D12DE,616,'generated_source_entry_replacement'),'efs_transport_retained_pool':(0x4D1546,162,'official_blob'),'efs_transport_receive_source_text':(0x7C8D38,700,'source_compiled'),'efs_transport_send_source_text':(0x7C8FF4,576,'source_compiled')}
+ if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3855544,'df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc',4634038,'3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731'):raise c.AuditError('production EFS transport manifest pins changed')
+ expected_regions={'efs_transport_01_source_replacement':(0x4D0D80,1374,'generated_source_entry_replacement'),'efs_transport_02_source_replacement':(0x4D12DE,616,'generated_source_entry_replacement'),'efs_transport_retained_pool':(0x4D1546,162,'official_blob'),'efs_transport_receive_source_text':(0x7D7700,700,'source_compiled'),'efs_transport_send_source_text':(0x7D79BC,576,'source_compiled')}
  for name,expected in expected_regions.items():
   item=regions.get(name)
   if not item or (item.get('target_address'),item.get('size'),item.get('address_status'))!=expected:raise c.AuditError(f'production EFS transport region changed: {name}')

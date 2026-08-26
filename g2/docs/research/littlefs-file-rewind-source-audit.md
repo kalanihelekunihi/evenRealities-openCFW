@@ -276,7 +276,7 @@ by seven Thumb NOPs.
 | Profile | Leaf offset | Runtime | Relocated leaf SHA-256 | Entry replacement bytes | Replacement SHA-256 |
 |---|---:|---:|---|---|---|
 | Apple Clang 21.0.0 | 124,480 | `0x007B2964` | `1c2e2b1fded0de515345b90fe34de51a9c0f08a02a5ad983c1120481c51c5783` | `e4f280ba` + seven `00bf` | `d6d0947d5f648f4acdab371be5d051e3c89ad1f2e44b88da2ce0600e7b2f3751` |
-| Linux Clang 22.1.8 | 126,300 | `0x007B3080` | `9731cbf3ff15be31186591ed148d009ae8985cb18bdfca3ba365aeb0897e3fd1` | `e4f20ebe` + seven `00bf` | `f014878435e10f6bf1feba6c78781bee5e0a8f15a9b47aa4cfd596cffb7d984b` |
+| Linux Clang 22.1.8 | 186,052 | `0x007C19E8` | `741669f767e0aa5b9a663f7bae6e5b44e01259efdc15135719394874c917ee62` | `e4f20ebe` + seven `00bf` | `f014878435e10f6bf1feba6c78781bee5e0a8f15a9b47aa4cfd596cffb7d984b` |
 
 Both leaf placements are four-byte aligned, have size 16, and use the common
 unrelocated-text hash above. Both retain the same sole relocation to
@@ -294,7 +294,7 @@ The canonical Apple manifest records:
 The effective Linux plan coarsens the appended overlay into the existing
 `apollo_main_source_appended` region, while the overlay build report and
 strict relocated-leaf record still authenticate the 16-byte Linux function at
-offset 126,300 and runtime `0x007B3080`.
+offset 186,052 and runtime `0x007C19E8`.
 
 ## Apple and Linux aggregate pins
 

@@ -42,7 +42,11 @@ class CordioAttsCccAuditTests(unittest.TestCase):
         self.assertEqual(report["abi"]["registered_main_callback"], 0x52C0AD)
         self.assertEqual(report["abi"]["ccc_state_event"], 0x14)
         self.assertEqual(report["readiness"]["linked_unresolved_symbols"], 0)
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        self.assertEqual(report["production"]["status"], "routed")
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 784)
+        self.assertEqual(report["production"]["alignment_bytes"], 8)
+        self.assertEqual(report["production"]["strict_relocations"], 14)
+        self.assertEqual(report["production"]["guarded_redirects"], 14)
 
 
 if __name__ == "__main__":

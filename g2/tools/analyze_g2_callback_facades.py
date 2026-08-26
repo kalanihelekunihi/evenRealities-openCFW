@@ -36,10 +36,10 @@ LEAF_NAMES = (
     "open_cfw_cb_msg_deinit", "open_cfw_cb_msg_register",
     "open_cfw_cb_msg_unregister", "open_cfw_cb_msg_notify",
 )
-LEAF_DIGEST = "abefdd0ba940a124a0ee97364f0ec4fe7d46cb80c78063af7e8323d0eeb940b6"
+LEAF_DIGEST = "78d7673889b2f3d25d51c1537ba9b3a4cb6f0e040013004a86ab503d3f73997c"
 PATCH_DIGEST = "f383e040a7e15e42df5431ad688455c6cce2440f81f4908261eaaab46fb87ae8"
-BUILT_DIGEST = "3a3f4a5d64b24c179cebab0d9a046555efa65dda940fd3c63de88a1291ad5199"
-REGION_DIGEST = "60fcd443105aec19c4e28e693ede6bed928d7b5c7cfbbb587c22f8815882f310"
+BUILT_DIGEST = "54a7d1615730171ebce2bec262be2e41881217a58ab1cfac3100727f431115a9"
+REGION_DIGEST = "11d57436b937614b9412391409bb1816d5c3b4d4e69a68782e848404c33af19f"
 EASY = {0x43CE9E, 0x43D0CE, 0x43D574}
 CALLBACK = {0x510108, 0x5101AE, 0x510240, 0x5103C4, 0x5105BC}
 TARGET_COUNTS = {
@@ -214,12 +214,12 @@ def analyze(image: Path = IMAGE) -> dict:
     if sum(leaf["expected"]["size"] for leaf in leaves) != 208 or \
             sum(len(leaf["relocations"]) for leaf in leaves) != 10:
         raise c.AuditError("callback-facade compiled census changed")
-    previous = 192852
+    previous = 252700
     alignment = 0
     for leaf in leaves:
         alignment += leaf["expected"]["offset"] - previous
         previous = leaf["expected"]["offset"] + leaf["expected"]["size"]
-    if alignment != 6 or previous != 193066:
+    if alignment != 6 or previous != 252914:
         raise c.AuditError("callback-facade placement changed")
     patches = [patch for patch in overlay["patch_sites"]
                if patch.get("target_function") in set(LEAF_NAMES)]
@@ -229,8 +229,8 @@ def analyze(image: Path = IMAGE) -> dict:
     build = json.loads((ROOT / "components/apollo_main/core_overlay/build/build-report.json").read_text())
     if (build["overlay"]["size"], build["overlay"]["sha256"],
             build["component"]["size"], build["component"]["sha256"]) != (
-            240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-            3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):
+            332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+            3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
         raise c.AuditError("callback-facade build pins changed")
     built = [leaf for leaf in build["relocated_leaves"]
              if leaf.get("source", {}).get("path") == SOURCE_PATH]
@@ -256,8 +256,8 @@ def analyze(image: Path = IMAGE) -> dict:
     if (main["provider"]["size"], main["provider"]["sha256"],
             manifest["package"]["expected_size"],
             manifest["package"]["expected_sha256"]) != (
-            3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-            4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):
+            3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+            4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
         raise c.AuditError("callback-facade manifest closure changed")
     return {
         "schema_version": 1,

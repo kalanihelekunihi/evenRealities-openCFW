@@ -92,19 +92,19 @@ RECOVERED_RETURN = (0x004B_8DA0, bytes.fromhex("f0bd"))
 SOURCE_SIZE = 24_280
 SOURCE_SHA256 = "8a3b31bff575a92b4e160ce993d487a9fe3b3428e75e425e86b35dbea79911bd"
 PRODUCTION_FUNCTIONS = (
-    ("TPL_Init", 138, 211_720, 1),
-    ("_getOrCreateContext", 468, 211_860, 2),
-    ("_rxNextPacketTimeout", 106, 212_328, 3),
-    ("open_cfw_tpl_context_free", 72, 212_436, 4),
-    ("open_cfw_tpl_context_mark_packet", 34, 212_508, 0),
-    ("open_cfw_tpl_context_packet_seen", 18, 212_544, 0),
-    ("open_cfw_tpl_schedule_rx_timeout", 56, 212_564, 4),
-    ("_rxSyncEventCallback", 2, 212_620, 0),
-    ("_tplReponse", 64, 212_624, 0),
-    ("TPL_RxPacketTimeoutHandler", 194, 212_688, 2),
-    ("open_cfw_tpl_reset_receive_contexts", 92, 212_884, 7),
-    ("TPL_ReceivePacket", 612, 212_976, 27),
-    ("TPL_SendPacket", 682, 213_588, 5),
+    ("TPL_Init", 138, 271_568, 1),
+    ("_getOrCreateContext", 468, 271_708, 2),
+    ("_rxNextPacketTimeout", 106, 272_176, 3),
+    ("open_cfw_tpl_context_free", 72, 272_284, 4),
+    ("open_cfw_tpl_context_mark_packet", 34, 272_356, 0),
+    ("open_cfw_tpl_context_packet_seen", 18, 272_392, 0),
+    ("open_cfw_tpl_schedule_rx_timeout", 56, 272_412, 4),
+    ("_rxSyncEventCallback", 2, 272_468, 0),
+    ("_tplReponse", 64, 272_472, 0),
+    ("TPL_RxPacketTimeoutHandler", 194, 272_536, 2),
+    ("open_cfw_tpl_reset_receive_contexts", 92, 272_732, 7),
+    ("TPL_ReceivePacket", 612, 272_824, 27),
+    ("TPL_SendPacket", 682, 273_436, 5),
 )
 PRODUCTION_TARGETS = {
     "tpl_context_free_004b8ba2": "open_cfw_tpl_context_free",
@@ -390,10 +390,10 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         report["component"]["size"],
         report["component"]["sha256"],
     ) != (
-        228_222,
-        "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3_751_618,
-        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332_148,
+        "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3_855_544,
+        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production transport build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -404,10 +404,10 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         manifest["package"].get("expected_size"),
         manifest["package"].get("expected_sha256"),
     ) != (
-        3_751_618,
-        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4_530_112,
-        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3_855_544,
+        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4_634_038,
+        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production transport manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

@@ -41,7 +41,10 @@ class CordioAttcDiscAuditTests(unittest.TestCase):
         self.assertEqual(report["lineage"]["r20_only_included_service_functions"], "dead-stripped")
         self.assertEqual(report["readiness"]["source_inventory_functions"], 18)
         self.assertEqual(report["readiness"]["linked_unresolved_symbols"], 0)
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        self.assertEqual(report["production"]["status"], "routed")
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 1610)
+        self.assertEqual(report["production"]["stock_bytes_replaced"], 2908)
+        self.assertTrue(report["production"]["response_shape_bounds_hardened"])
 
 
 if __name__ == "__main__":

@@ -30,20 +30,20 @@ PINS = {
 SOURCE_SIZE = 15562
 SOURCE_SHA256 = "bfb6a066ccb43b91f0d026cbc26078ecead559297d7289bacd52a389f5193215"
 FUNCTIONS = (
-    ("open_cfw_pb_service_dev_setting_buffer_write", 148, 207380, 0,
+    ("open_cfw_pb_service_dev_setting_buffer_write", 148, 267228, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_dev_setting_transmit", 212, 207528, 5,
+    ("open_cfw_pb_service_dev_setting_transmit", 212, 267376, 5,
      "transmit"),
-    ("PB_RxRestoreFactory", 140, 207740, 14, "rx_restore"),
-    ("PB_TxEncodeRestoreFactory", 52, 207880, 1, "tx_restore"),
-    ("PB_RxQuickRestart", 18, 207932, 1, "rx_restart"),
-    ("PB_TxEncodeQuickRestart", 52, 207952, 1, "tx_restart"),
-    ("PB_RxBaseConnHeartBeat", 20, 208004, 1, "rx_heartbeat"),
-    ("PB_TxEncodeBaseConnHeartBeat", 52, 208024, 1, "tx_heartbeat"),
-    ("PB_RxTimeSyncInfo", 84, 208076, 3, "rx_time"),
-    ("PB_TxEncodeTimeSyncInfo", 84, 208160, 2, "tx_time"),
-    ("PB_RxAudControl", 10, 208244, 0, "rx_audio"),
-    ("PB_TxEncodeAudControl", 62, 208256, 1, "tx_audio"),
+    ("PB_RxRestoreFactory", 140, 267588, 14, "rx_restore"),
+    ("PB_TxEncodeRestoreFactory", 52, 267728, 1, "tx_restore"),
+    ("PB_RxQuickRestart", 18, 267780, 1, "rx_restart"),
+    ("PB_TxEncodeQuickRestart", 52, 267800, 1, "tx_restart"),
+    ("PB_RxBaseConnHeartBeat", 20, 267852, 1, "rx_heartbeat"),
+    ("PB_TxEncodeBaseConnHeartBeat", 52, 267872, 1, "tx_heartbeat"),
+    ("PB_RxTimeSyncInfo", 84, 267924, 3, "rx_time"),
+    ("PB_TxEncodeTimeSyncInfo", 84, 268008, 2, "tx_time"),
+    ("PB_RxAudControl", 10, 268092, 0, "rx_audio"),
+    ("PB_TxEncodeAudControl", 62, 268104, 1, "tx_audio"),
 )
 PATCH_SUFFIXES = (
     "rx_restore", "tx_restore", "rx_restart", "tx_restart",
@@ -279,8 +279,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -288,8 +288,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

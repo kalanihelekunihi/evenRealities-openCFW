@@ -63,8 +63,21 @@ class ProductRtosTests(unittest.TestCase):
         self.assertFalse(boundary["iar_dlib"]["new_version_discriminator"])
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routing_is_exact(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(
+            (
+                production["source_functions"],
+                production["compiled_text_bytes"],
+                production["alignment_bytes"],
+                production["strict_relocations"],
+                production["guarded_redirects"],
+                production["routed_stock_bytes"],
+                production["retained_literal_pool_bytes"],
+            ),
+            (13, 444, 14, 19, 13, 512, 36),
+        )
 
 
 if __name__ == "__main__":

@@ -275,6 +275,19 @@ EXPECTED_IMAGE_SIZE = 3523396
 EXPECTED_IMAGE_SHA256 = (
     "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 )
+EXPECTED_RETAINED_ABI_JSON_PATH = (
+    ROOT / "components/apollo_main/core_overlay/overlay.json"
+)
+EXPECTED_RETAINED_ABI_JSON_STRINGS = {
+    "clean-room G2 LVGL font-chain and XIP-header manager over retained LVGL/FreeType/media ABIs",
+    "open_cfw_retained_font_manager_freetype_create",
+    "open_cfw_retained_font_manager_freetype_delete",
+}
+EXPECTED_RETAINED_ABI_SOURCE = {
+    "path": ROOT / "components/apollo_main/core_overlay/lvgl_font_manager.c",
+    "size": 16940,
+    "sha256": "f11f98dd4c2eda815512e3e9b2e23ab7401b7cfdc439f272e69d59b684bbb080",
+}
 MAPPING_BIAS = 0x00437FE0
 MODULE_TABLE_ADDRESS = 0x0073EEF8
 MODULE_TABLE_TERMINATOR = 0x0073EF20
@@ -574,10 +587,26 @@ def verify_production_isolation() -> None:
     )
     for path in production_json:
         value = json.loads(path.read_text(encoding="utf-8"))
+        freetype_strings = {
+            item for item in json_strings(value) if "freetype" in item.lower()
+        }
+        allowed_strings = (
+            EXPECTED_RETAINED_ABI_JSON_STRINGS
+            if path == EXPECTED_RETAINED_ABI_JSON_PATH
+            else set()
+        )
         require(
-            all("freetype" not in item.lower() for item in json_strings(value)),
+            freetype_strings <= allowed_strings,
             f"snapshot configured by {path}",
         )
+    retained_source = EXPECTED_RETAINED_ABI_SOURCE["path"]
+    require(retained_source.is_file(), "retained FreeType ABI source is missing")
+    retained_bytes = retained_source.read_bytes()
+    require(
+        len(retained_bytes) == EXPECTED_RETAINED_ABI_SOURCE["size"]
+        and sha256(retained_bytes) == EXPECTED_RETAINED_ABI_SOURCE["sha256"],
+        "retained FreeType ABI source pin changed",
+    )
 
     source_suffixes = {".c", ".h", ".py", ".s", ".S", ".ld", ".lds", ".mk"}
     production_sources = [
@@ -588,6 +617,8 @@ def verify_production_isolation() -> None:
         and "build" not in path.relative_to(ROOT / "components").parts
     ]
     for path in production_sources:
+        if path == retained_source:
+            continue
         require(
             "freetype" not in path.read_text(encoding="utf-8").lower(),
             f"snapshot referenced by production source {path}",

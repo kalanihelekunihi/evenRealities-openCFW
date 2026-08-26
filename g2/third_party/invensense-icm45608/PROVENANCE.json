@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "component": "TDK InvenSense ICM45608 motion driver",
+  "license": "BSD-3-Clause",
+  "upstream": {
+    "repository": "https://github.com/tdk-invn-oss/motion.arduino.ICM45608.git",
+    "tag": "1.1.2",
+    "commit": "b79ae575f7f310e5ae2e1164096d1a858bb74662",
+    "driver_version": "1.1.0"
+  },
+  "selection": {
+    "reason": "Last authenticated release with the 16-byte callback transport ABI used by G2 s200_v2.2.6.10",
+    "file_count": 52,
+    "total_bytes": 594177,
+    "aggregate_sha256": "cc6088eed9f14a02af419a29856064ab62e4b79e2860a135e1d84ba22e1c9570"
+  },
+  "g2_delta": {
+    "stock_who_am_i": "0x81",
+    "transport_bytes": 16,
+    "fifo_callback_offset": 24,
+    "later_rotate_data_present_in_stock": true,
+    "later_reset_state_delta_present_in_stock": false,
+    "policy": "Keep the pristine release immutable; implement and audit the small G2 delta in OpenCFW-owned adapter source."
+  }
+}

@@ -40,7 +40,17 @@ class CordioDmAdvAuditTests(unittest.TestCase):
         self.assertIn("flexible-array", self.report["abi"]["set_data_layout"])
         self.assertEqual(self.report["readiness"]["provider_seams"], 11)
         self.assertEqual(self.report["readiness"]["linked_unresolved_symbols"], 0)
-        self.assertEqual(self.report["production"]["source_owned_bytes_added"], 0)
+        production = self.report["production"]
+        self.assertEqual(production["status"], "routed")
+        self.assertEqual(production["linked_functions"], 9)
+        self.assertEqual(production["source_functions"], 15)
+        self.assertEqual(production["stock_bytes_replaced"], 562)
+        self.assertEqual(production["compiled_text_bytes"], 1122)
+        self.assertEqual(production["alignment_bytes"], 20)
+        self.assertEqual(production["strict_relocations"], 15)
+        self.assertEqual(production["guarded_redirects"], 9)
+        self.assertEqual(len(production["source_only_functions"]), 6)
+        self.assertIn("blocked", production["hardware_validation"])
 
 
 if __name__ == "__main__":

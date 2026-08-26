@@ -35,10 +35,15 @@ ASSERT_CALLERS = [0x0052A660]
 FUNCTION_MAP = ROOT / "tools/manifests/ambiqsuite-cordio-wsf-assert-trace-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/ambiqsuite-cordio-wsf-assert-trace-provenance.tsv"
 MATRIX_MANIFEST = ROOT / "research/readiness/wsf-assert-trace/SHA256SUMS"
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 
 PINNED_INPUTS = {
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.c": "b32c1e449291d8fad445ebcbc58029d11ff5f202c8554b5ab9869187a5fb83e3",
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.h": "8ed05a76ea4230cc15d46c3634d736d9f209720852221a57762afd593c2edd5d",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.c": "6550117694d15172060094d177c12785cc4af2810af6fdda21a01157986d101a",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.h": "6e0a5a9f95889a32e24e3c56f0990e719bc34e232bfa6236c6d917907e420f42",
     FUNCTION_MAP: "47df6f62617303f24bed39e7e0b13e7c35efb2eae86bae4e662d309350c96da9",
     PROVENANCE: "95f6c236f755e1e327c31b323b03cc7871986d46a2425a1f13f165dd3bca6c13",
     ROOT / "tools/manifests/readiness-cordio-wsf-assert-trace-best-size.tsv": "c1fb6888e072c7fe5ce81d9f6fae77b26db6ce5572a5e1ad45159ac5f8f0e584",
@@ -161,6 +166,77 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
     if assert_words != (0x00789F60,0x0078C938,0x006DEFD4,0x0078C944,0x00774A84,0x2007456C,0x0078EE14,0x0075D35C,0x0078EE0C):
         raise AuditError("WsfAssert literal/global table changed")
 
+    source_path = "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.c"
+    names = [
+        "open_cfw_cordio_wsf_trace_candidate",
+        "open_cfw_cordio_wsf_assert_candidate",
+    ]
+    spans = [
+        (TRACE_START, TRACE_END, TRACE_SHA256),
+        (ASSERT_START, ASSERT_END, ASSERT_SHA256),
+    ]
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves = [
+        row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == source_path
+    ]
+    if len(leaves) != 2 or any(
+        row.get("source", {}).get("sha256") != PINNED_INPUTS[ROOT / source_path]
+        for row in leaves
+    ):
+        raise AuditError("WSF assert/trace production inventory changed")
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, ((start, end, expected), function) in enumerate(
+        zip(spans, names), 1
+    ):
+        site = sites.get(f"replace_cordio_wsf_assert_trace_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"WSF assert/trace production route {index} changed")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = leaves[0]["expected"]["offset"] - 335208
+    alignment += (
+        leaves[1]["expected"]["offset"] - leaves[0]["expected"]["offset"]
+        - leaves[0]["expected"]["size"]
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (170, 0, 5):
+        raise AuditError("WSF assert/trace production metrics changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"] != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"] != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256") != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([row for row in override["regions"] if row["name"].startswith("cordio_wsf_assert_trace_")]) != 4
+    ):
+        raise AuditError("WSF assert/trace component/manifest changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or _sha256(PACKAGE.read_bytes()) != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("WSF assert/trace package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or _sha256(FLASH_PLAN.read_bytes()) != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("WSF assert/trace flash plan changed")
+
     return {
         "schema_version": 1,
         "image": {"path": str(image), "sha256": IMAGE_SHA256},
@@ -183,7 +259,12 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "dead_stripped_source_apis": ["WsfPacketTrace","WsfToken","WsfTokenService"],
             "trace_path": trace_path, "assert_path": assert_path,
         },
-        "candidate": {"production": "excluded", "functions": 2, "stock_bytes": 208},
+        "candidate": {
+            "production": "routed", "functions": 2, "stock_bytes": 208,
+            "compiled_text_bytes": compiled, "alignment_bytes": alignment,
+            "strict_relocations": relocations, "guarded_redirects": 2,
+            "production_assert_diagnostic_wrappers": "omitted; hook/reset/fail-stop retained",
+        },
         "compiler_matrix": {
             "archive": str(MATRIX_MANIFEST), "archive_sha256": PINNED_INPUTS[MATRIX_MANIFEST],
             "compiler_profiles": 13, "comparison_rows": 26,

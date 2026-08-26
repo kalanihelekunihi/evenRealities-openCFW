@@ -1,6 +1,6 @@
 # Ambiq Cordio HCI event-port recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-25  
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -27,6 +27,23 @@ The closure is unusually strong despite the source being proprietary:
 The complete per-function line, source-span hash, stock interval, and stock
 body hash ledger is
 [`ambiq-cordio-hci-evt-function-map.tsv`](../../tools/manifests/ambiq-cordio-hci-evt-function-map.tsv).
+
+## Clean-room implementation and production routing
+
+The proprietary file is used only as an inventory and behavioral oracle. A
+separately authored GPL-3.0-only decoder now implements all 80 APIs from the
+Bluetooth HCI wire format and the public Cordio callback ABI. It bounds every
+read, rejects malformed lengths, accounts unknown events, preserves connection
+and CIS lifecycle callbacks, and covers command, advertising, privacy, PHY,
+CTE/IQ, CIS/ISO, codec, and BIG event families.
+
+All 79 linked entries are production-owned: 78 guarded wide branches plus the
+authenticated two-byte `hciEvtParseLeScanTimeout` no-op as an exact in-place
+copy replace all 6,718 stock body bytes. The overlay contributes 23,590
+compiled bytes, 30 alignment bytes, and 52 strict relocations; the source-only
+`hciEvtGetStats` also target-compiles. Host behavior tests, exact 80-symbol
+Cortex-M55 compilation, 161 manifest regions, deterministic packaging, and
+the `(5863, 2, 5, 6)` flash-plan contract are green.
 
 ## Exact stock boundaries
 
@@ -105,7 +122,9 @@ needed for an independent implementation.
 
 ```sh
 python3 tools/analyze_g2_cordio_hci_evt.py --json
-python3 -m unittest tests.test_analyze_g2_cordio_hci_evt
+make cordio-hci-evt-closure
 ```
 
-Production source ownership and stock-byte replacement remain zero.
+Canonical artifacts are overlay `404,200` bytes / SHA-256 `6a00a8b1...e478`,
+Apollo component `3,927,596` bytes / `ef9de7e2...4970`, and package `4,706,090`
+bytes / `7868cccb...4d9d`. No hardware was accessed.

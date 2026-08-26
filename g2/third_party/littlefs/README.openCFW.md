@@ -129,8 +129,8 @@ The reviewed Apple-clang leaf is 16 bytes at overlay offset 124,480 and
 runtime address `0x007B2964`; its relocated SHA-256 is
 `1c2e2b1fded0de515345b90fe34de51a9c0f08a02a5ad983c1120481c51c5783`.
 The reviewed Linux-clang leaf is 16 bytes at overlay offset 126,300 and
-runtime address `0x007B3080`; its relocated SHA-256 is
-`9731cbf3ff15be31186591ed148d009ae8985cb18bdfca3ba365aeb0897e3fd1`.
+runtime address `0x007C19E8`; its relocated SHA-256 is
+`741669f767e0aa5b9a663f7bae6e5b44e01259efdc15135719394874c917ee62`.
 Both unrelocated leaves have SHA-256
 `46e8bab056ad39ced45edb5da2612f6470674ab5a428df7f08822f6c2d9e184b`.
 
@@ -159,7 +159,7 @@ SHA-256
 Its two complete-image direct callers are `0x004CBB26` and `0x004CBC38`.
 Apple Clang places the ten-byte source leaf at overlay offset 124,548,
 runtime `0x007B29A8`; exact-root Linux places the same ten bytes at offset
-126,368, runtime `0x007B30C4`. Both leaf hashes are
+186,120, runtime `0x007C1A2C`. Both leaf hashes are
 `88be40d05d37142bf0bae8306026d8c405a4f8f441aabd87ee6731557d4149fd`,
 with zero relocations.
 
@@ -246,7 +246,7 @@ and `079f868da6ae04c0d4ace93e9e9d9132247224f81903b57fba51d407f49ddfcf`,
 with no providers or relocations.
 
 Apple main placements are `0x007B29BC` / `0x007B29C4`; Linux uses
-`0x007B30D8` / `0x007B30E0`; boot uses `0x004346EC` / `0x004346F2`. This
+`0x007C1A40` / `0x007C1A48`; boot uses `0x004346EC` / `0x004346F2`. This
 atomic promotion replaces pure scalar helpers only. It does not mount, read,
 program, erase, format, or otherwise access a G2 filesystem or device.
 
@@ -269,7 +269,7 @@ direct callers. The compiled six-byte source leaf hashes to
 and has zero providers and zero relocations.
 
 Apple main places the leaf at offset 124,588 / `0x007B29D0`; exact-root Linux
-uses 126,408 / `0x007B30EC`; boot uses 644 / `0x004346FC` under both profiles.
+uses 186,160 / `0x007C1A54`; boot uses 644 / `0x004346FC` under both profiles.
 At that preceding tranche, the Apple main/boot overlays were 124,594/650 bytes and components were
 3,647,990/149,250 bytes. The 4,426,472-byte package hashes to
 `96f5309c2f77834a2c034b00d04618f0fa42ea3019924d5d51047f7a54c3db4d`.
@@ -313,7 +313,7 @@ Apple main/boot placements remain
 `124,596` / `0x007B29D8`
 and `650` /
 `0x00434702`; exact-root Linux uses
-`126,416` / `0x007B30F4`
+`186,168` / `0x007C1A5C`
 and `650` /
 `0x00434702`. These final placements are reproduced by both reviewed build
 profiles. This scalar promotion does not

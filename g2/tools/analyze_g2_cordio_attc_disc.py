@@ -22,6 +22,8 @@ READINESS_MANIFEST = ROOT / "research/readiness/attc-disc/SHA256SUMS"
 READINESS_BYTES = 1_386
 READINESS_SHA256 = "1be8534914ad2679e16eb5cb68df6c244484e79442c4f4b628a1b42427f68504"
 PINNED_INPUTS = {
+    ROOT / "components/shared/cordio/runtime_cordio_attc_disc.c": "aa4da8bb83ab559f1f77a34a834983e3c4a93e4dfbe17987e66b062f34436294",
+    ROOT / "components/shared/cordio/runtime_cordio_attc_disc.h": "854672577f0a8aa14e6bb3c8f7c115b2c72a2538cc398b426fcd94eb7b21cd24",
     ROOT / "tools/manifests/packetcraft-cordio-attc-disc-provenance.tsv": "f3f5617d81fa8ab5c2f20dd77d3426c8e3e357c6a1638910155bfbf1c2b3e632",
     ROOT / "tools/manifests/packetcraft-cordio-attc-disc-function-map.tsv": "00ab3c9f2fdb9c8d6a8303af34b217b593b2442850631a40e75744de4812d69f",
     ROOT / "tools/manifests/readiness-cordio-attc-disc-build-results.tsv": "f8f7751563606f4ecc2f499ab68b6e8dd3af8624ea89874c60f79d61fa19b101",
@@ -29,6 +31,35 @@ PINNED_INPUTS = {
     ROOT / "tools/manifests/readiness-cordio-attc-disc-source-identities.tsv": "d508454464a0da1dc2d488c4784b54708d4cc195020bf9175fd4fba445f07c21",
     ROOT / "tools/manifests/readiness-cordio-attc-disc-undefined-providers.tsv": "a1291dd9af7c2afdbd06bf0ea2a2618db31c805c07b33f9d6959c5621554463c",
 }
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_attc_disc.c"
+CANDIDATE_FUNCTIONS = [
+    "open_cfw_cordio_attc_discovery_uuid_compare",
+    "open_cfw_cordio_attc_discovery_verify",
+    "open_cfw_cordio_attc_discovery_descriptors",
+    "open_cfw_cordio_attc_discovery_process_descriptor_pair",
+    "open_cfw_cordio_attc_discovery_process_descriptor",
+    "open_cfw_cordio_attc_discovery_process_characteristic_declaration",
+    "open_cfw_cordio_attc_discovery_process_characteristic",
+    "open_cfw_cordio_attc_discovery_configuration_next",
+    "open_cfw_cordio_attc_discover_service",
+    "open_cfw_cordio_attc_complete_service_discovery",
+    "open_cfw_cordio_attc_start_characteristic_discovery",
+    "open_cfw_cordio_attc_complete_characteristic_discovery",
+    "open_cfw_cordio_attc_start_configuration",
+    "open_cfw_cordio_attc_complete_configuration",
+    "open_cfw_cordio_attc_resume_configuration",
+]
+CANDIDATE_METRICS = [
+    (351712,190,1),(351904,60,0),(351964,166,2),(352132,120,1),
+    (352252,222,2),(352476,200,1),(352676,178,2),(352856,132,2),
+    (352988,48,1),(353036,94,0),(353132,68,1),(353200,90,2),
+    (353292,16,1),(353308,22,1),(353332,4,1),
+]
 
 FUNCTIONS = [
     ("attcUuidCmp", 0x0056B7EC, 0x0056B834, "bec11106e5ed133dab73ea6ca8bbdf98df933efefde4df10090245ee95b644c3", [0x0056B954, 0x0056BBA0]),
@@ -181,6 +212,83 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
     _verify_no_stored_function_pointers(blob)
 
     linked_bytes = sum(end - start for _, start, end, _, _ in FUNCTIONS)
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves_by_function = {
+        row["function"]: row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == CANDIDATE_SOURCE_PATH
+    }
+    if set(leaves_by_function) != set(CANDIDATE_FUNCTIONS):
+        raise AuditError("ATT discovery production leaf inventory changed")
+    source_hash = PINNED_INPUTS[ROOT / CANDIDATE_SOURCE_PATH]
+    leaves = []
+    for function, metrics in zip(CANDIDATE_FUNCTIONS, CANDIDATE_METRICS):
+        leaf = leaves_by_function[function]
+        actual = (
+            leaf["expected"]["offset"], leaf["expected"]["size"],
+            len(leaf["relocations"]),
+        )
+        if actual != metrics or leaf["source"].get("sha256") != source_hash:
+            raise AuditError(f"ATT discovery production leaf changed: {function}")
+        leaves.append(leaf)
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, (function, stock) in enumerate(
+        zip(CANDIDATE_FUNCTIONS, FUNCTIONS), 1
+    ):
+        name, start, end, expected, _callers = stock
+        site = sites.get(f"replace_cordio_attc_disc_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or site.get("branch") != "b_w"
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"ATT discovery production route changed: {name}")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = leaves[0]["expected"]["offset"] - 351710
+    alignment += sum(
+        right["expected"]["offset"] - left["expected"]["offset"]
+        - left["expected"]["size"]
+        for left, right in zip(leaves, leaves[1:])
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (1610, 16, 18):
+        raise AuditError("ATT discovery production metrics changed")
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"] !=
+            "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"] !=
+            "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256") !=
+            "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([row for row in override["regions"]
+                if row["name"].startswith("cordio_attc_disc_")]) != 38
+    ):
+        raise AuditError("ATT discovery component/manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or _sha256(PACKAGE.read_bytes()) !=
+            "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("ATT discovery package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or _sha256(FLASH_PLAN.read_bytes()) !=
+            "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (len(flash["flash_regions"]),
+            len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]),
+            len(flash["protected_regions"])) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("ATT discovery flash plan changed")
     return {
         "schema_version": 1,
         "image": {"path": str(image), "sha256": IMAGE_SHA256},
@@ -247,8 +355,22 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "linked_unresolved_symbols": 0,
         },
         "production": {
-            "status": "stock-retained; public source authenticated; logger/IAR placement not promoted",
-            "source_owned_bytes_added": 0,
+            "status": "routed",
+            "linked_functions": 15,
+            "source_functions": 18,
+            "stock_bytes_replaced": linked_bytes,
+            "source_owned_bytes_added": compiled,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": 15,
+            "source_only_dead_stripped": DEAD_STRIPPED,
+            "response_shape_bounds_hardened": True,
+            "index_and_handle_bounds_hardened": True,
+            "configuration_handle_index_hardened": True,
+            "hardware_validation": (
+                "blocked by unavailable authorized responsive G2/ATT peer evidence"
+            ),
         },
     }
 

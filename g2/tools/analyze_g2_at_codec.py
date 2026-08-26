@@ -204,12 +204,14 @@ def analyze(image_path: Path = IMAGE) -> dict:
         if token not in text:
             raise AuditError("production AT^AUDIO source policy changed")
     overlay = json.loads(OVERLAY.read_text())
-    leaf = overlay["relocated_leaves"][-1]
+    leaf = next(item for item in overlay["relocated_leaves"]
+                if item.get("source", {}).get("path") ==
+                "components/apollo_main/core_overlay/at_codec.c")
     if (
         leaf.get("function") != "open_cfw_at_codec_audio_control"
         or leaf.get("expected") != {
-            "alignment": 4, "offset": 240032,
-            "sha256": "04efadbe0a66881c755189a4e3932047a3996f5ec45271a6421e0cb54cdc87f8",
+            "alignment": 4, "offset": 299880,
+            "sha256": "45b3f6cbfbf226e46c6fda376d2eed84da7a2f7a0ee6fc3dfe70e8f0b2319125",
             "size": 44,
             "unrelocated_sha256": "3397c32638e65c1d14f3bf8aaf813436eefedfb74ebce6710f284871bedb8ec8",
         }
@@ -221,7 +223,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
             ]
     ):
         raise AuditError("production AT^AUDIO leaf changed")
-    patch = overlay["patch_sites"][-1]
+    patch = next(item for item in overlay["patch_sites"]
+                 if item.get("target_function") ==
+                 "open_cfw_at_codec_audio_control")
     if (
         patch.get("runtime_address"), patch.get("expected_size"),
         patch.get("expected_sha256"), patch.get("target_function"),
@@ -236,11 +240,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
         build["overlay"]["size"], build["overlay"]["sha256"],
         build["component"]["size"], build["component"]["sha256"],
     ) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production AT^AUDIO build pins changed")
-    built = build["relocated_leaves"][-1]
+    built = next(item for item in build["relocated_leaves"]
+                 if item.get("source", {}).get("path") ==
+                 "components/apollo_main/core_overlay/at_codec.c")
     if (
         built["extraction"]["function"], built["extraction"]["size"],
         built["extraction"]["relocation_count"],
@@ -254,8 +260,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
         manifest["package"]["expected_size"],
         manifest["package"]["expected_sha256"],
     ) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production AT^AUDIO manifest/package pins changed")
     regions = [item for item in main["regions"]
@@ -268,7 +274,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("production AT^AUDIO manifest closure changed")
     package = PACKAGE.read_bytes()
     if (len(package), sha256(package)) != (
-        4542582, manifest["package"]["expected_sha256"]
+        4634038, manifest["package"]["expected_sha256"]
     ):
         raise AuditError("production AT^AUDIO package artifact changed")
     plan_bytes = FLASH_PLAN.read_bytes()
@@ -280,9 +286,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "container_only_regions", "protected_regions",
         )),
     ) != (
-        2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f",
-        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
-        (3715, 2, 5, 6),
+        3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297",
+        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
+        (4482, 2, 5, 6),
     ):
         raise AuditError("production AT^AUDIO flash plan changed")
 

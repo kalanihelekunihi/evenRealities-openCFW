@@ -51,7 +51,10 @@ class CordioDmDevPrivAuditTests(unittest.TestCase):
         self.assertEqual(readiness["provider_seams"], 24)
         self.assertEqual(readiness["valid_non_vacuous_closure_profiles"], 2)
         self.assertEqual(readiness["linked_unresolved_symbols"], 0)
+        self.assertEqual(readiness["maintained_source_functions"], 18)
+        self.assertEqual(readiness["local_target_profiles"], 1)
         self.assertFalse(report["lineage"]["stock_body_version_discriminated"])
+        self.assertEqual(report["production"]["status"], "configuration-excluded")
         self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
 
 

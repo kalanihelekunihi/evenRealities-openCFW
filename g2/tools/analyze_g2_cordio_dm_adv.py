@@ -21,6 +21,39 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 READINESS_MANIFEST = ROOT / "research/readiness/dm-adv/SHA256SUMS"
 READINESS_BYTES = 1_175
 READINESS_SHA256 = "69a9f55db18e329a8038ce756a0c6ad8a522ff2e3ce56f5efae2ea0246725b89"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_dm_adv.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_dm_adv.h"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+SOURCE_SHA256 = "d6fe9bb4a957495b0716a8e5e21d9dfbde904a1b6f8944790f08cf9e507a788b"
+HEADER_SHA256 = "207706e8411b2d3fb124e20354f24e438864eb88ef685568743295f4303d8cfb"
+OVERLAY_SIZE = 404_796
+OVERLAY_SHA256 = "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+COMPONENT_SIZE = 3_928_192
+COMPONENT_SHA256 = "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+PACKAGE_SIZE = 4_706_686
+PACKAGE_SHA256 = "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+FLASH_PLAN_SIZE = 4_071_097
+FLASH_PLAN_SHA256 = "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_dm_adv_control_block_initialize",
+    "open_cfw_cordio_dm_adv_initialize",
+    "open_cfw_cordio_dm_adv_generate_connection_complete",
+    "open_cfw_cordio_dm_adv_configure",
+    "open_cfw_cordio_dm_adv_set_data",
+    "open_cfw_cordio_dm_adv_start",
+    "open_cfw_cordio_dm_adv_stop",
+    "open_cfw_cordio_dm_adv_set_interval",
+    "open_cfw_cordio_dm_adv_set_address_type",
+]
+PRODUCTION_METRICS = [
+    (354692, 70, 0), (354764, 40, 2), (354812, 160, 1),
+    (354972, 90, 2), (355064, 142, 2), (355208, 160, 2),
+    (355372, 384, 2), (355756, 50, 2), (355808, 26, 2),
+]
 PINNED_INPUTS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-adv-function-map.tsv": "54e908660de2c61d9852efab17af3f0e8c34ed1a149d2f22c4962e5fb84cea38",
     ROOT / "tools/manifests/packetcraft-cordio-dm-adv-provenance.tsv": "0749854360957aa52abc49563bb77ccde1508006caa6d26ce8bfd8bbebadd4a9",
@@ -128,6 +161,101 @@ def _verify_aligned_pointers(blob: bytes) -> None:
         raise AuditError("common advertising gained stored entry/interior pointers")
 
 
+def _verify_production() -> dict[str, Any]:
+    if _sha256(SOURCE.read_bytes()) != SOURCE_SHA256:
+        raise AuditError("common advertising production source changed")
+    if _sha256(HEADER.read_bytes()) != HEADER_SHA256:
+        raise AuditError("common advertising production header changed")
+    report = json.loads(REPORT.read_text())
+    config = json.loads(CONFIG.read_text())
+    manifest = json.loads(MANIFEST.read_text())
+    leaves = [
+        row for row in report["relocated_leaves"]
+        if row.get("source", {}).get("path", "").endswith(SOURCE.name)
+    ]
+    leaves.sort(key=lambda row: row["pins"]["offset"])
+    if len(leaves) != len(PRODUCTION_FUNCTIONS):
+        raise AuditError("common advertising production leaf count changed")
+    for row, function, expected in zip(
+        leaves, PRODUCTION_FUNCTIONS, PRODUCTION_METRICS
+    ):
+        observed = (
+            row["pins"]["offset"], row["extraction"]["size"],
+            row["extraction"]["relocation_count"],
+        )
+        if row["extraction"]["function"] != function or observed != expected:
+            raise AuditError(f"common advertising production leaf changed: {function}")
+    sites = {
+        row["name"]: row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_dm_adv_")
+        and not row["name"].startswith("replace_cordio_dm_adv_leg_")
+    }
+    if len(sites) != len(PRODUCTION_FUNCTIONS):
+        raise AuditError("common advertising production route count changed")
+    for index, ((_, start, end, expected_hash, _), function) in enumerate(
+        zip(FUNCTIONS, PRODUCTION_FUNCTIONS), 1
+    ):
+        site = sites.get(f"replace_cordio_dm_adv_{index:02d}")
+        if (
+            site is None or site["branch"] != "b_w"
+            or site["target_function"] != function
+            or site["runtime_address"] != start
+            or site["expected_size"] != end - start
+            or site["expected_sha256"] != expected_hash
+        ):
+            raise AuditError(f"common advertising production route changed: {function}")
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        report["overlay"]["size"] != OVERLAY_SIZE
+        or report["overlay"]["sha256"] != OVERLAY_SHA256
+        or report["component"]["size"] != COMPONENT_SIZE
+        or report["component"]["sha256"] != COMPONENT_SHA256
+        or override["provider"].get("size") != COMPONENT_SIZE
+        or override["provider"].get("sha256") != COMPONENT_SHA256
+        or len([row for row in override["regions"]
+                if row["name"].startswith("cordio_dm_adv_")
+                and not row["name"].startswith("cordio_dm_adv_leg_")]) != 24
+    ):
+        raise AuditError("common advertising component/manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != PACKAGE_SIZE
+        or _sha256(PACKAGE.read_bytes()) != PACKAGE_SHA256
+    ):
+        raise AuditError("common advertising deterministic package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != FLASH_PLAN_SIZE
+        or _sha256(FLASH_PLAN.read_bytes()) != FLASH_PLAN_SHA256
+        or (len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]))
+            != (5863, 2, 5, 6)
+    ):
+        raise AuditError("common advertising flash plan changed")
+    return {
+        "status": "routed",
+        "linked_functions": len(PRODUCTION_FUNCTIONS),
+        "source_functions": 15,
+        "source_only_functions": SOURCE_ONLY,
+        "stock_bytes_replaced": 562,
+        "compiled_text_bytes": sum(row[1] for row in PRODUCTION_METRICS),
+        "source_owned_bytes_added": sum(row[1] for row in PRODUCTION_METRICS),
+        "alignment_bytes": sum(row["placement"]["padding_before"] for row in leaves),
+        "strict_relocations": sum(row[2] for row in PRODUCTION_METRICS),
+        "guarded_redirects": len(PRODUCTION_FUNCTIONS),
+        "inline_payload_abi": "eight-byte fixed header followed by copied payload",
+        "hardening": [
+            "advertising handle and set count bounds",
+            "required pointer and allocation checks",
+            "data location and maximum length checks",
+            "advertising-element shape and buffer bounds",
+            "interval ordering and channel-map validation",
+        ],
+        "hardware_validation": (
+            "blocked by unavailable authorized responsive G2/EM9305 and BLE peer evidence"
+        ),
+    }
+
+
 def analyze(image: Path = IMAGE) -> dict[str, Any]:
     if image.stat().st_size != IMAGE_BYTES:
         raise AuditError("official G2 image size changed")
@@ -208,10 +336,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "compiler_profiles": 2, "provider_seams": 11,
             "linked_unresolved_symbols": 0,
         },
-        "production": {
-            "status": "stock-retained; exact Apache source/ABI identified; IAR placement not promoted",
-            "source_owned_bytes_added": 0,
-        },
+        "production": _verify_production(),
     }
 
 

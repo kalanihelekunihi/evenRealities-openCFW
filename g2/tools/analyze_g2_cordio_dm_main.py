@@ -22,6 +22,21 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 READINESS_MANIFEST = ROOT / "research/readiness/dm-main/SHA256SUMS"
 READINESS_BYTES = 1_302
 READINESS_SHA256 = "402cf2c7901b343bef43c6cb1acca540acc9b9a3800c2e503e6e5afb6c127d55"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_dm_main.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_dm_main.h"
+TEST = ROOT / "tests/test_runtime_cordio_dm_main.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+SOURCE_PIN = (10_852, "5152a1727b61f74af21bbee81ca062536bc9ca970a3e60f16145f3e039c41aaf")
+HEADER_PIN = (2_252, "f168ba398d10500f1d5864569228787564b044a33b7541733efbd18c89f26f64")
+TEST_PIN = (12_041, "f87d3046ca7fdf1179091c6ea8396a439d4e57cca6f2a1b4cc01b3b261d1d189")
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 PINNED_INPUTS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-main-function-map.tsv":
         "52bd88e68310d813b191cf53be8177ad0ed33ed83d9698175a7340e988b75363",
@@ -106,6 +121,43 @@ EXPECTED_STORED = {
     0x0078A8A8: 0x004D29C1,
 }
 
+PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_dm_hci_event_callback",
+    "open_cfw_cordio_dm_empty_reset",
+    "open_cfw_cordio_dm_empty_handler",
+    "open_cfw_cordio_dm_pass_hci_event_to_connection",
+    "open_cfw_cordio_dm_register_callback",
+    "open_cfw_cordio_dm_find_advertising_type",
+    "open_cfw_cordio_dm_handler_initialize",
+    "open_cfw_cordio_dm_handler",
+    "open_cfw_cordio_dm_link_layer_privacy_enabled",
+    "open_cfw_cordio_dm_link_layer_address_type",
+    "open_cfw_cordio_dm_host_address_type",
+    "open_cfw_cordio_dm_size_of_event",
+    "open_cfw_cordio_dm_scan_phy_to_index_internal",
+    "open_cfw_cordio_dm_scan_phy_to_index",
+    "open_cfw_cordio_dm_initiator_phy_to_index_internal",
+    "open_cfw_cordio_dm_initiator_phy_to_index",
+]
+PRODUCTION_LEAVES = [
+    (357_396,60,0,"3785e004053871bb0ed72e9089944998c172e8d48b09ec0df6f4a8be3d5038a4"),
+    (357_456,2,0,"c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
+    (357_460,2,0,"c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
+    (357_464,26,0,"c7e6d84d4336b6ecb2be68c06429552409ff2e5448b10e1c76ed2561176c444a"),
+    (357_492,62,1,"4847cb2d58d053dece26e6c38228429b2b3d8f4f6ab0dc259dff87e9880eb304"),
+    (357_556,76,0,"958ef8e09deba5426d9c5a82f9b57de315e085a6c62b4dbcaab454c191ebe10f"),
+    (357_632,28,1,"8ee5737b4e111292216cf8759c25fc3ea096030c8083709b99fa60c5fb8b938b"),
+    (357_660,52,0,"5ac9825ab14376d5b1f6861a149d3467c0dc91d263091c6bc03712b4fbf8ac41"),
+    (357_712,18,0,"8c08e97619be32f6af33eab2042a65135f48acf7906f7c6e10b874e696fa1b26"),
+    (357_732,32,0,"a1ddd33b581943dcf2bab69b7ed3fcd0c2c5bc9315d200214718e7c366183d4a"),
+    (357_764,32,0,"6ceae194edf1d250ecb1ae8b7fb4d8620043cecbf669c3c0feb9aafeda1821ba"),
+    (357_796,30,0,"05e345c48461ac138fdf0a009b4fb41a6979b8570251012ee9667944e0fbbdf8"),
+    (357_828,38,0,"e8deb0ffb4d3b89bf3c9bcda6ba258733e4a58194afa099bce8c1cd67e52f565"),
+    (357_868,14,0,"812bc7d588788d323e2342b344eea99b449be1bd5b079ba1ccc0254e4bdc7ad0"),
+    (357_884,38,0,"e8deb0ffb4d3b89bf3c9bcda6ba258733e4a58194afa099bce8c1cd67e52f565"),
+    (357_924,14,0,"defa3db371a7663e7388fcc45e8d35c88bff9e266a4c86dd63d8b8133e616d20"),
+]
+
 
 class AuditError(RuntimeError):
     """Raised when authenticated DM-main evidence changes."""
@@ -117,6 +169,93 @@ def _sha256(data: bytes) -> str:
 
 def _slice(blob: bytes, start: int, end: int) -> bytes:
     return blob[start - LOAD_BASE:end - LOAD_BASE]
+
+
+def _verify_file(path: Path, expected: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), _sha256(data)) != expected:
+        raise AuditError(f"{label} changed")
+
+
+def _verify_production() -> dict[str, Any]:
+    _verify_file(SOURCE, SOURCE_PIN, "DM main source")
+    _verify_file(HEADER, HEADER_PIN, "DM main header")
+    _verify_file(TEST, TEST_PIN, "DM main test")
+    report = json.loads(REPORT.read_text())
+    config = json.loads(CONFIG.read_text())
+    manifest = json.loads(MANIFEST.read_text())
+    leaves = [
+        row for row in report["relocated_leaves"]
+        if row.get("source", {}).get("path", "").endswith(SOURCE.name)
+    ]
+    leaves.sort(key=lambda row: row["pins"]["offset"])
+    if len(leaves) != len(PRODUCTION_FUNCTIONS):
+        raise AuditError("DM main production leaf count changed")
+    for row, function, expected in zip(
+        leaves, PRODUCTION_FUNCTIONS, PRODUCTION_LEAVES
+    ):
+        observed = (
+            row["pins"]["offset"], row["extraction"]["size"],
+            row["extraction"]["relocation_count"],
+            row["extraction"]["sha256"],
+        )
+        if row["extraction"]["function"] != function or observed != expected:
+            raise AuditError(f"DM main production leaf changed: {function}")
+    sites = {
+        row["name"]: row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_dm_main_")
+    }
+    if len(sites) != len(PRODUCTION_FUNCTIONS):
+        raise AuditError("DM main production route count changed")
+    copy_indices = {2, 3}
+    for index, ((name, (start, end, digest)), function) in enumerate(
+        zip(FUNCTIONS.items(), PRODUCTION_FUNCTIONS), 1
+    ):
+        site = sites.get(f"replace_cordio_dm_main_{index:02d}")
+        expected_branch = "copy" if index in copy_indices else "b_w"
+        if (
+            site is None or site["runtime_address"] != start
+            or site["expected_size"] != end - start
+            or site["expected_sha256"] != digest
+            or site["target_function"] != function
+            or site["branch"] != expected_branch
+        ):
+            raise AuditError(f"DM main route changed: {name}")
+    override = manifest["component_overrides"]["apollo_main"]
+    regions = [
+        row for row in override["regions"]
+        if row["name"].startswith("cordio_dm_main_")
+    ]
+    if (
+        (report["overlay"]["size"], report["overlay"]["sha256"])
+            != PRODUCTION_OVERLAY
+        or (report["component"]["size"], report["component"]["sha256"])
+            != PRODUCTION_COMPONENT
+        or (override["provider"].get("size"),
+            override["provider"].get("sha256")) != PRODUCTION_COMPONENT
+        or len(regions) != 42
+    ):
+        raise AuditError("DM main component ownership changed")
+    _verify_file(PACKAGE, PRODUCTION_PACKAGE, "DM main package")
+    _verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN, "DM main flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions",
+        "container_only_regions", "protected_regions",
+    ))
+    if counts != (5863, 2, 5, 6):
+        raise AuditError("DM main flash counts changed")
+    return {
+        "status": "production-routed",
+        "redirected_stock_functions": 14,
+        "exact_copy_functions": 2,
+        "covered_stock_bytes": sum(end - start for start, end, _ in FUNCTIONS.values()),
+        "source_owned_bytes_added": sum(row[1] for row in PRODUCTION_LEAVES),
+        "alignment_bytes_added": sum(row["placement"]["padding_before"] for row in leaves),
+        "strict_relocations": sum(row[2] for row in PRODUCTION_LEAVES),
+        "manifest_regions": len(regions),
+        "flash_plan_counts": counts,
+    }
 
 
 def _load_thumb_decoder():
@@ -248,7 +387,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "provider_seams": 4, "valid_non_vacuous_closure_profiles": 4,
             "linked_unresolved_symbols": 0, "r441_build_is_hybrid": True,
         },
-        "production": {"source_owned_bytes_added": 0, "stock_bytes_replaced": 0},
+        "production": _verify_production(),
     }
 
 

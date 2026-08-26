@@ -30,23 +30,23 @@ PINS = {
 SOURCE_SIZE = 11668
 SOURCE_SHA256 = "e99566f9d7cf6c3fd00c4c0cad332600a7e2a6f6c85f55101c409780fb8e31bc"
 FUNCTIONS = (
-    ("open_cfw_pb_service_notification_buffer_write", 146, 204372, 0,
+    ("open_cfw_pb_service_notification_buffer_write", 146, 264220, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_notification_zero", 88, 204520, 0, "zero"),
-    ("open_cfw_pb_notification_encode_and_send", 258, 204608, 6,
+    ("open_cfw_pb_service_notification_zero", 88, 264368, 0, "zero"),
+    ("open_cfw_pb_notification_encode_and_send", 258, 264456, 6,
      "common_encode"),
-    ("PB_RxNotifCtrl", 48, 204868, 4, "control_rx"),
-    ("APP_PbTxEncodeNotifCtrl", 10, 204916, 1, "control_tx"),
-    ("APP_PbTxEncodeNotifCommResp", 10, 204928, 1, "comm_response"),
-    ("APP_PbTxEncodeNotifAppIDNotInWhitelist", 520, 204940, 9,
+    ("PB_RxNotifCtrl", 48, 264716, 4, "control_rx"),
+    ("APP_PbTxEncodeNotifCtrl", 10, 264764, 1, "control_tx"),
+    ("APP_PbTxEncodeNotifCommResp", 10, 264776, 1, "comm_response"),
+    ("APP_PbTxEncodeNotifAppIDNotInWhitelist", 520, 264788, 9,
      "app_not_whitelisted"),
-    ("PB_RxNotifWhitelistCtrl", 26, 205460, 1, "whitelist_control_rx"),
-    ("APP_PbTxEncodeNotifWhitelistCtrl", 10, 205488, 1,
+    ("PB_RxNotifWhitelistCtrl", 26, 265308, 1, "whitelist_control_rx"),
+    ("APP_PbTxEncodeNotifWhitelistCtrl", 10, 265336, 1,
      "whitelist_control_tx"),
-    ("PB_RxNotifWhitelistChk", 10, 205500, 0, "whitelist_check_rx"),
-    ("APP_PbTxEncodeNotifWhitelistChk", 10, 205512, 1,
+    ("PB_RxNotifWhitelistChk", 10, 265348, 0, "whitelist_check_rx"),
+    ("APP_PbTxEncodeNotifWhitelistChk", 10, 265360, 1,
      "whitelist_check_tx"),
-    ("APP_PbRxNotificationFrameDataProcess", 190, 205524, 10,
+    ("APP_PbRxNotificationFrameDataProcess", 190, 265372, 10,
      "dispatch"),
 )
 PATCH_SUFFIXES = (
@@ -293,8 +293,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -302,8 +302,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

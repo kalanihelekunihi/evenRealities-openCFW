@@ -68,7 +68,14 @@ class CordioAttsIndAuditTests(unittest.TestCase):
         self.assertTrue(report["dispatch"]["initializer_stream_is_not_runtime_table"])
         self.assertTrue(report["lineage"]["r20_through_r20c_invariant"])
         self.assertTrue(report["lineage"]["later_r44_byte_identical"])
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        production = report["production"]
+        self.assertEqual(production["status"], "routed")
+        self.assertEqual(production["source_owned_bytes_added"], 1602)
+        self.assertEqual(production["stock_bytes_replaced"], 1552)
+        self.assertEqual(production["alignment_bytes"], 16)
+        self.assertEqual(production["strict_relocations"], 51)
+        self.assertEqual(production["guarded_redirects"], 13)
+        self.assertEqual(production["source_only_zero_copy_wrappers"], 2)
 
 
 if __name__ == "__main__":

@@ -27,4 +27,13 @@ strict_interior_bl_decodes	0
 unrecovered_direct_object_targets	0
 third_party_dependency	CMSIS-FreeRTOS v10.5.1 and AmbiqSuite Apollo510 HAL 5.1.0-lineage providers; EasyLogger and IAR DLIB are known seams; no upstream definition is embedded
 historical_source_available	partial Ambiq application-hook ancestry only; G2 task-vote policy is private
-production_routed	false
+production_source	components/apollo_main/core_overlay/product_rtos.c
+production_source_functions	13
+production_compiled_text_bytes	444
+production_alignment_bytes	14
+production_strict_relocations	19
+production_guarded_redirects	13
+production_routed_stock_bytes	512
+production_retained_literal_pool_bytes	36
+hardware_validation	blocked: authorized responsive Apollo510 G2 hardware is unavailable; no flash/sign/install performed
+production_routed	true

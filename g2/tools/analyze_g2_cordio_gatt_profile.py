@@ -12,7 +12,7 @@ PROVIDERS={'AppDiscFindService':0x5332B4,'AppDiscServiceChanged':0x533630,'AttsC
 SOURCE=ROOT/'components/apollo_main/core_overlay/cordio_gatt_profile.c';OVERLAY=ROOT/'components/apollo_main/core_overlay/overlay.json';REPORT=ROOT/'components/apollo_main/core_overlay/build/build-report.json';MANIFEST=ROOT/'manifests/g2-2.2.6.10-core-source.json'
 SOURCE_PATH='components/apollo_main/core_overlay/cordio_gatt_profile.c';SOURCE_PIN=(8117,'edca7a119538561bc754e61db85250ff87b853c7558ab12cbda58179ef291665')
 LEAF_NAMES=('open_cfw_gatt_discover','open_cfw_gatt_value_update','open_cfw_gatt_set_service_changed_index','open_cfw_gatt_send_service_changed_indication','open_cfw_gatt_read_callback','open_cfw_gatt_write_callback')
-LEAF_DIGEST='7b676574f933ef319dfa81573fbf63b6ea3867f900373891e432c12a75057983';PATCH_DIGEST='4789f8c2d1b73feb300358b1b4dda28c0fc1fa9e571319604d19be7c735b9c10';BUILT_DIGEST='6e0f91e82bb9d0113d0c3bf39081dbeee6dc9207a4fed45aa27b2802710a2a16';REGION_DIGEST='8d02d44b957cdcdd945e368021caecedc017465fbc75a477cc6403eb3c5b685b'
+LEAF_DIGEST='d4dccf34ff3f49e5631eca38fb34e03252b529e5bd6e3bb08965e2c14ebe8a34';PATCH_DIGEST='4789f8c2d1b73feb300358b1b4dda28c0fc1fa9e571319604d19be7c735b9c10';BUILT_DIGEST='3fe31ec8734b182a1683ccb590ee28b030ebb839c37917fe3f949b053840e035';REGION_DIGEST='e32f27b0c365f27ec33eb872103ea1e6c47df73adc7b03875a5b36900373935a'
 class AuditError(RuntimeError):pass
 def sha(x):return hashlib.sha256(x).hexdigest()
 def jsh(x):return sha(json.dumps(x,sort_keys=True,separators=(',',':')).encode())
@@ -76,15 +76,15 @@ def analyze(image=IMAGE):
  if tuple(x.get('function') for x in leaves)!=LEAF_NAMES or not set(LEAF_NAMES)<=set(overlay['functions']) or jsh(leaves)!=LEAF_DIGEST:raise AuditError('production GATT-profile leaf closure changed')
  if any(x.get('profiles')!=['apple-clang'] or not x.get('strict_relocation_contract') or x.get('source',{}).get('license')!='Apache-2.0' for x in leaves):raise AuditError('production GATT-profile leaf policy changed')
  if sum(x['expected']['size'] for x in leaves)!=254 or sum(len(x['relocations']) for x in leaves)!=10:raise AuditError('production GATT-profile compiled census changed')
- previous=191566;alignment=0
+ previous=251414;alignment=0
  for leaf in leaves:
   alignment+=leaf['expected']['offset']-previous;previous=leaf['expected']['offset']+leaf['expected']['size']
- if alignment!=8 or previous!=191828:raise AuditError('production GATT-profile placement changed')
+ if alignment!=8 or previous!=251676:raise AuditError('production GATT-profile placement changed')
  patches=[x for x in overlay['patch_sites'] if x.get('name','').startswith('replace_gatt_')]
  if len(patches)!=6 or jsh(patches)!=PATCH_DIGEST or sum(x['expected_size'] for x in patches)!=322 or {x['target_function'] for x in patches}!=set(LEAF_NAMES):raise AuditError('production GATT-profile redirect closure changed')
  if any(x.get('branch')!='b_w' or x.get('profiles')!=['apple-clang'] for x in patches):raise AuditError('production GATT-profile redirect policy changed')
  build=json.loads(REPORT.read_text())
- if (build['overlay']['size'],build['overlay']['sha256'],build['component']['size'],build['component']['sha256'])!=(240692,'2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae',3764088,'b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed'):raise AuditError('production GATT-profile build pins changed')
+ if (build['overlay']['size'],build['overlay']['sha256'],build['component']['size'],build['component']['sha256'])!=(332148,'588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d',3855544,'df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc'):raise AuditError('production GATT-profile build pins changed')
  built=[x for x in build['relocated_leaves'] if x.get('source',{}).get('path')==SOURCE_PATH]
  norm=[{'function':x['extraction']['function'],'size':x['placement']['size'],'padding_before':x['placement']['padding_before'],'offset':x['placement']['offset'],'runtime_address':x['placement']['runtime_address'],'relocation_count':x['extraction']['relocation_count']} for x in built]
  if len(built)!=6 or jsh(norm)!=BUILT_DIGEST:raise AuditError('production GATT-profile built closure changed')
@@ -95,6 +95,6 @@ def analyze(image=IMAGE):
  if {k:(v.get('target_address'),v.get('size'),v.get('address_status')) for k,v in retained.items()}!=expected_retained:raise AuditError('retained GATT-profile official regions changed')
  pair_tiles=[x for x in main['regions'] if 4938532<=x.get('target_address',0)<4938532+32876]
  if (sum(x['size'] for x in pair_tiles),sum(x['size'] for x in pair_tiles if x.get('address_status')=='official_blob'),sum(x['size'] for x in pair_tiles if x.get('address_status')=='generated_source_entry_replacement'))!=(32876,22178,10698):raise AuditError('post-GATT pair-manager tiling changed')
- if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3764088,'b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed',4542582,'275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85'):raise AuditError('production GATT-profile manifest closure changed')
+ if (main['provider']['size'],main['provider']['sha256'],manifest['package']['expected_size'],manifest['package']['expected_sha256'])!=(3855544,'df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc',4634038,'3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731'):raise AuditError('production GATT-profile manifest closure changed')
  return {'surface':{'linked_functions':6,'source_owned_functions':6,'body_bytes':322,'physical_bytes':356,'direct_bl_entry_sites':8,'direct_body_calls':14,'stored_entry_pointers':2,'strict_interior_ingress':0},'upstream':{'component':'Packetcraft Cordio','source':'ble-profiles/sources/profiles/gatt/gatt_main.c','selected_release':'r20.05c','selected_commit':upstream['selected_commit'],'source_blob':'bba9a3041ce14284a0bf527934eabd01c01694d8','compatible_release_count':4,'historical_g2_generating_commit':None},'functions':[r['function'] for r in rows],'local_delta':{'function':'GattDiscover','kind':'stock-only EasyLogger expansion omitted as non-controlling diagnostics','upstream_terminal_call':'AppDiscFindService','service_uuid':'0x1801','handle_list_length':3},'providers':{k:f'{v:#010x}' for k,v in PROVIDERS.items()},'production':{'source_admitted':True,'production_routed':True,'candidate':SOURCE_PATH,'source_functions':6,'compiled_text_bytes':254,'alignment_bytes':8,'stock_replaced_bytes':322,'strict_relocations':10,'retained_literal_pool_bytes':34,'diagnostic_logging':'stock EasyLogger observability omitted; functional ATT/GATT behavior retained','software_functional_gap':False,'hardware_validation':'blocked','hardware_blocker':'No authorized physical G2/EM9305 peer or captured ATT discovery/CCCD/indication interoperability evidence is available.'}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True));print('G2 Cordio GATT-profile audit: PASS')

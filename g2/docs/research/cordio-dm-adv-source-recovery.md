@@ -11,8 +11,9 @@ All eleven direct call sites, all direct callees, and the absence of stored
 entry/interior pointers are enforced by
 [`analyze_g2_cordio_dm_adv.py`](../../tools/analyze_g2_cordio_dm_adv.py).
 
-This is source identification, not production replacement. Every byte remains
-stock-retained while IAR placement and whole-stack integration remain open.
+All fifteen definitions now have maintained compilable source. Nine guarded
+production redirects replace the complete linked body interval; the six
+source-only APIs target-compile without inventing stock coverage.
 
 ## Exact source and ABI pin
 
@@ -89,6 +90,24 @@ python3 -m unittest tests.test_analyze_g2_cordio_dm_adv
 python3 tools/verify_research_corpus.py --json
 ```
 
-The remaining work is exact IAR code-generation/placement comparison and
-integration with a complete source-owned DM/WSF message path. Module-level
-identification is 95--98%; production source ownership is unchanged.
+## Production admission
+
+`runtime_cordio_dm_adv.c` preserves the authenticated eight-byte fixed message
+header followed by inline copied advertising data. Its nine linked leaves
+replace all 562 bounded stock body bytes with 1,122 compiled Cortex-M55 bytes
+plus 20 alignment bytes under 15 strict relocations. Handles, set counts,
+required pointers, allocation failure, data location/length, interval ordering,
+channel maps, and advertising-element shapes and buffer arithmetic fail closed.
+The six dead-stripped APIs are also implemented and isolated-target compiled.
+
+The canonical overlay is 357,394 bytes, SHA-256
+`e84ff07395f40fc4acfa87c77a34a89809ca13d037b4596fc6a9b5e6ff044666`;
+the Apollo component is 3,880,790 bytes, SHA-256
+`0a2416ead54a01d5a3f195e41afe30750b8a1459274cf33d0355850a85bf505a`;
+and the deterministic package is 4,659,284 bytes, SHA-256
+`bda365b1bce0e80931a6cc6d650378352f78180942119d49a38b2034b79cb3c2`.
+The 3,586,814-byte flash plan has 5,160 placed, two unresolved, five
+container-only, and six protected regions. `make cordio-dm-adv-closure` is
+green. Live advertising, address policy, peer/controller timing, and RF
+behavior remain blocked by unavailable authorized responsive G2/EM9305
+physical evidence.

@@ -31,7 +31,13 @@ class DmConnMasterLegTest(unittest.TestCase):
         )
         self.assertTrue(report["architecture"]["separate_update_table"])
         self.assertTrue(report["architecture"]["task_locked_init"])
-        self.assertEqual(report["build_readiness"]["status"], "deferred")
+        self.assertEqual(report["build_readiness"]["status"], "target-compiled")
+        production=report["production"]
+        self.assertEqual(production["status"],"production-routed")
+        self.assertEqual((production["redirected_stock_functions"],production["redirected_stock_bytes"]),(3,136))
+        self.assertEqual((production["source_owned_bytes_added"],production["alignment_bytes_added"],production["strict_relocations"]),(176,2,7))
+        self.assertEqual(production["manifest_regions"],7)
+        self.assertEqual(production["flash_plan_counts"],(5576,2,5,6))
 
 
 if __name__ == "__main__":

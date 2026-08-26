@@ -149,3 +149,72 @@ the settled preceding milestone. This promotion imports no
 filesystem object, block-device, mount, format, program, or erase path and
 authorizes no signing, flashing, reset, boot, filesystem mutation, or hardware
 operation.
+
+`runtime_redirect_init.c` and `runtime_redirect_init.h` are openCFW
+GPL-3.0-or-later clean-room source for the bounded S200 bootloader
+`redirect_init` two-mutex initialization entry. The implementation is derived
+from independently recovered functional behavior in the authenticated G2
+2.2.6.10 image; it does not incorporate or relicense retained vendor bytes.
+Its external compatibility seams are the existing CMSIS-RTOS2 `osMutexNew`
+and EasyLogger `elog_output` entries plus the two recovered SRAM handle words.
+The neighboring proprietary IAR `FILE` wrappers remain retained and outside
+this notice. Offline compilation and registration authorize no signing,
+flashing, reset, boot, or hardware operation.
+
+`runtime_aeabi_memset.c` and `runtime_aeabi_memset.h` are openCFW
+GPL-3.0-or-later clean-room source for the bounded bootloader Arm EABI
+byte-fill entry. The implementation is derived from independently recovered
+register and loop behavior in the authenticated G2 2.2.6.10 image; it does not
+incorporate or relicense retained vendor bytes. Offline compilation and
+registration authorize no signing, flashing, reset, boot, or hardware
+operation.
+
+`runtime_strcspn.c`, `runtime_strspn.c`, and `runtime_string_spans.h` are
+openCFW GPL-3.0-or-later clean-room source for the bounded bootloader reject-
+set and accept-set string-span entries. The implementations are derived from
+independently recovered loop and return-value behavior in the authenticated G2
+2.2.6.10 image; they do not incorporate or relicense retained vendor bytes.
+Offline compilation and registration authorize no signing, flashing, reset,
+boot, or hardware operation.
+
+`runtime_crc32.c` and `runtime_crc32.h` are openCFW GPL-3.0-or-later
+clean-room source for the bounded bootloader reflected CRC-32 update entry.
+The implementation is derived from independently recovered update behavior
+and authenticated polynomial/table identity in the G2 2.2.6.10 image; it does
+not incorporate or relicense retained vendor bytes. Offline compilation and
+registration authorize no signing, flashing, reset, boot, or hardware
+operation.
+
+`runtime_store_200270cc.c` and `runtime_store_200270cc.h` are openCFW
+GPL-3.0-or-later clean-room source for the bounded bootloader word setter whose
+authenticated target is SRAM address `0x200270CC`. The implementation is
+derived from independently recovered store behavior and does not incorporate
+or relicense retained vendor bytes. Offline compilation and registration
+authorize no signing, flashing, reset, boot, or hardware operation.
+
+`runtime_memcmp.c` and `runtime_memcmp.h` are openCFW GPL-3.0-or-later
+clean-room source for the bounded bootloader byte-comparison entry. The
+implementation is derived from independently recovered comparison behavior in
+the authenticated G2 2.2.6.10 image; it does not incorporate or relicense
+retained vendor bytes. Offline compilation and registration authorize no
+signing, flashing, reset, boot, or hardware operation.
+
+`runtime_aeabi_memcpy.c` and `runtime_aeabi_memcpy.h` are openCFW
+GPL-3.0-or-later clean-room source for the bounded bootloader Arm EABI
+forward-copy entry. The implementation is derived from independently recovered
+register and copy behavior in the authenticated G2 2.2.6.10 image; it does not
+incorporate or relicense retained vendor bytes. Offline compilation and
+registration authorize no signing, flashing, reset, boot, or hardware
+operation.
+
+`runtime_udiv10.c`, `runtime_udiv10.h`, `runtime_numeric.h`,
+`runtime_udec_digits.c`, `runtime_sdec_digits.c`, `runtime_hex_digits.c`,
+`runtime_parse_dec.c`, `runtime_u64_to_dec.c`, `runtime_u64_to_hex.c`,
+`runtime_nullable_strlen.c`, and `runtime_repeat_char.c` are openCFW
+GPL-3.0-or-later clean-room source for the
+bounded bootloader numeric-runtime entries. The implementations are derived
+from independently recovered arithmetic, digit-counting, parsing, formatting,
+string-length, and repeated-output behavior
+in the authenticated G2 2.2.6.10 image; they do not incorporate or relicense
+retained vendor bytes. Offline compilation and registration authorize no
+signing, flashing, reset, boot, or hardware operation.

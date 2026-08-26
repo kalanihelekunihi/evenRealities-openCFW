@@ -331,6 +331,1176 @@
   ],
   "relocated_leaves": [
     {
+      "function": "open_cfw_bootloader_redirect_init",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_redirect_init.c",
+        "size": 2295,
+        "sha256": "9df4daeea0af317c1556361a15f1625d5b1e9d00b3c72ae9b753de4608c3294f",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room functional recovery of the bounded S200 bootloader redirect_init two-mutex initialization entry",
+        "evidence": "docs/research/g2-bootloader-redirect-init-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 132,
+        "sha256": "cbd1c5a521eef64ba9075a211311b71c8a025fd49fc4040814ba893c77260f22",
+        "alignment": 4,
+        "offset": 664,
+        "unrelocated_sha256": "d67b82bb4339e281506e2ef2c618525d509d1873b179edd1ac63f240ee5b6294",
+        "closure_size": 275,
+        "closure_sha256": "ddb1d064bf765803fac4fc89c0b6c585f13b0ea7bcfc3b5ad7b78ee7d8e50922",
+        "rodata_offset": 132
+      },
+      "closure": {
+        "text_section": ".text.open_cfw_bootloader_redirect_init",
+        "rodata": {
+          "section": ".rodata.str1.1",
+          "size": 143,
+          "sha256": "617e0aef0ca7b9cc2d64b76394bd2203cf40de647d25e4caafe628433a0c30a0",
+          "alignment": 1,
+          "symbols": [
+            {
+              "name": ".L.str",
+              "offset": 0,
+              "size": 9
+            },
+            {
+              "name": ".L.str.1",
+              "offset": 9,
+              "size": 42
+            },
+            {
+              "name": ".L.str.2",
+              "offset": 51,
+              "size": 14
+            },
+            {
+              "name": ".L.str.3",
+              "offset": 65,
+              "size": 41
+            },
+            {
+              "name": ".L.str.4",
+              "offset": 106,
+              "size": 37
+            }
+          ]
+        }
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "osMutexNew",
+          "target_address": 4285968,
+          "symbol_type": "STT_NOTYPE"
+        },
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "osMutexNew",
+          "target_address": 4285968,
+          "symbol_type": "STT_NOTYPE"
+        },
+        {
+          "offset": 52,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "elog_output",
+          "target_address": 4290254,
+          "symbol_type": "STT_NOTYPE"
+        },
+        {
+          "offset": 86,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "elog_output",
+          "target_address": 4290254,
+          "symbol_type": "STT_NOTYPE"
+        },
+        {
+          "offset": 100,
+          "type": "R_ARM_REL32",
+          "symbol": ".L.str.3"
+        },
+        {
+          "offset": 104,
+          "type": "R_ARM_REL32",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 108,
+          "type": "R_ARM_REL32",
+          "symbol": ".L.str.1"
+        },
+        {
+          "offset": 112,
+          "type": "R_ARM_REL32",
+          "symbol": ".L.str.2"
+        },
+        {
+          "offset": 116,
+          "type": "R_ARM_REL32",
+          "symbol": ".L.str.4"
+        },
+        {
+          "offset": 120,
+          "type": "R_ARM_REL32",
+          "symbol": ".L.str"
+        },
+        {
+          "offset": 124,
+          "type": "R_ARM_REL32",
+          "symbol": ".L.str.1"
+        },
+        {
+          "offset": 128,
+          "type": "R_ARM_REL32",
+          "symbol": ".L.str.2"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "size": 132,
+            "sha256": "45ed245d68d18cfccd28d8bf1171c7b2c08d3fa2323e79cdb77ca457c3f45819",
+            "alignment": 4,
+            "offset": 664,
+            "unrelocated_sha256": "daf77109df2c0725b3c7b36d44ab19765f898c97a810d7234457bfdaaa728c3d",
+            "closure_size": 275,
+            "closure_sha256": "0d0b7e0296972ad7031efe7ba369dee5917c31ef64e37be296aa29e030aa52dd",
+            "rodata_offset": 132
+          },
+          "relocations": [
+            {
+              "offset": 4,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "osMutexNew",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4285968
+            },
+            {
+              "offset": 16,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "osMutexNew",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4285968
+            },
+            {
+              "offset": 52,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "elog_output",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4290254
+            },
+            {
+              "offset": 86,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "elog_output",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4290254
+            },
+            {
+              "offset": 100,
+              "type": "R_ARM_REL32",
+              "symbol": ".L.str.3"
+            },
+            {
+              "offset": 104,
+              "type": "R_ARM_REL32",
+              "symbol": ".L.str"
+            },
+            {
+              "offset": 108,
+              "type": "R_ARM_REL32",
+              "symbol": ".L.str.1"
+            },
+            {
+              "offset": 112,
+              "type": "R_ARM_REL32",
+              "symbol": ".L.str.2"
+            },
+            {
+              "offset": 116,
+              "type": "R_ARM_REL32",
+              "symbol": ".L.str.4"
+            },
+            {
+              "offset": 120,
+              "type": "R_ARM_REL32",
+              "symbol": ".L.str"
+            },
+            {
+              "offset": 124,
+              "type": "R_ARM_REL32",
+              "symbol": ".L.str.1"
+            },
+            {
+              "offset": 128,
+              "type": "R_ARM_REL32",
+              "symbol": ".L.str.2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_aeabi_memset",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_aeabi_memset.c",
+        "size": 522,
+        "sha256": "d2e8eb19cc43bd75995bc75f2a404768612376c1d990a80ab2e8121998183c22",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated bootloader Arm EABI byte-fill entry",
+        "evidence": "docs/research/g2-bootloader-aeabi-memset-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 12,
+        "sha256": "57aa3a55299e81fefe7ae3b0807a149cf0d3d6c56adfcd6bf507f3850e6c229e",
+        "alignment": 2,
+        "offset": 940,
+        "unrelocated_sha256": "57aa3a55299e81fefe7ae3b0807a149cf0d3d6c56adfcd6bf507f3850e6c229e"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_aeabi_memcpy",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_aeabi_memcpy.c",
+        "size": 564,
+        "sha256": "661e9917a4716d11fb83b8527009ec2dbd13c391e1a0bf08e648572e73400933",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated bootloader Arm EABI forward-copy entry",
+        "evidence": "docs/research/g2-bootloader-aeabi-memcpy-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 16,
+        "sha256": "d2d832a0c13fc4c0b9b47396bfb6d68fb7e07925ad0fa4eedc9c14c5b062590d",
+        "alignment": 2,
+        "offset": 952,
+        "unrelocated_sha256": "d2d832a0c13fc4c0b9b47396bfb6d68fb7e07925ad0fa4eedc9c14c5b062590d"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_memcmp",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_memcmp.c",
+        "size": 530,
+        "sha256": "ad02b1bb52b3ed3d55c6559ed02d80642b3c64c9a5442b0c975efaa297dd8f1a",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated bootloader bounded byte comparison entry",
+        "evidence": "docs/research/g2-bootloader-memcmp-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 28,
+        "sha256": "27a66a6c870f14f8ff02ed06584fc60e5e6bb17274f13e4234314e5fcbb2ece1",
+        "alignment": 2,
+        "offset": 968,
+        "unrelocated_sha256": "27a66a6c870f14f8ff02ed06584fc60e5e6bb17274f13e4234314e5fcbb2ece1"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_strcspn",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_strcspn.c",
+        "size": 616,
+        "sha256": "69c1c369adb07437f875e4a28086707156a5fb2c70773cb8c04792e8227ee277",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated bootloader reject-set span entry",
+        "evidence": "docs/research/g2-bootloader-string-spans-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 30,
+        "sha256": "d331d9fb8cccb8f60badaf3dfab936298bdf11cf61320cca6ce19008d42e3096",
+        "alignment": 2,
+        "offset": 996,
+        "unrelocated_sha256": "d331d9fb8cccb8f60badaf3dfab936298bdf11cf61320cca6ce19008d42e3096"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_strspn",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_strspn.c",
+        "size": 575,
+        "sha256": "f7383389453e2e8b7fb7ac04d9a11394bac1457a46cb75d78ab043f30332c331",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated bootloader accept-set span entry",
+        "evidence": "docs/research/g2-bootloader-string-spans-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 28,
+        "sha256": "f955f2e0febe0b7b844837f389b4eb1e601e349bf6f9183426b2e16de8961d22",
+        "alignment": 2,
+        "offset": 1026,
+        "unrelocated_sha256": "f955f2e0febe0b7b844837f389b4eb1e601e349bf6f9183426b2e16de8961d22"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_crc32",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_crc32.c",
+        "size": 612,
+        "sha256": "7a8d810c1804f76a8068c0caf4558ffe0be71a0725b5e4b316489e0f5577e040",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room bitwise C implementation of the authenticated reflected CRC-32 update entry",
+        "evidence": "docs/research/g2-bootloader-crc32-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 44,
+        "sha256": "d51095aed51181e2bcb9f7882c6430298be29ad66f6613b434c07fac7f7df205",
+        "alignment": 4,
+        "offset": 1056,
+        "unrelocated_sha256": "d51095aed51181e2bcb9f7882c6430298be29ad66f6613b434c07fac7f7df205"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_store_200270cc",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_store_200270cc.c",
+        "size": 403,
+        "sha256": "a12a2a4a9e9f3f94a18b07748b3f361e4a68e52eab080381d8e5e14e36480a23",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated bootloader SRAM-word setter",
+        "evidence": "docs/research/g2-bootloader-store-200270cc-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 12,
+        "sha256": "99c0589d704d517cb23105abaa50664dab79efb3911235140a2c3fe492283c31",
+        "alignment": 4,
+        "offset": 1100,
+        "unrelocated_sha256": "99c0589d704d517cb23105abaa50664dab79efb3911235140a2c3fe492283c31"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_udiv10",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_udiv10.c",
+        "size": 503,
+        "sha256": "07aad3a209f72364611a414d96ccd7ae90a2e77395bcc2a1c2ee0253c2d6a0d9",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room shift/add C implementation of the authenticated unsigned 64-bit divide-by-ten helper",
+        "evidence": "docs/research/g2-bootloader-udiv10-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 106,
+        "sha256": "4295ddbce56a2ae2b23df120be24b5756eb71ea80842c392c390f303880872a6",
+        "alignment": 2,
+        "offset": 1112,
+        "unrelocated_sha256": "4295ddbce56a2ae2b23df120be24b5756eb71ea80842c392c390f303880872a6"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_udec_digits",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_udec_digits.c",
+        "size": 405,
+        "sha256": "45e2280f132aa67416ae0db36957f1bef15e9680c15f242bdab27c0cb806647e",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated unsigned decimal digit-count helper",
+        "evidence": "docs/research/g2-bootloader-numeric-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 28,
+        "sha256": "6386d3a8ce78e1d2d7cb9f6f1528e5baf14ad2bf949d1ca78bd7f9c295002200",
+        "alignment": 2,
+        "offset": 1218,
+        "unrelocated_sha256": "0f777f7fce9bc6f0f7ff4d11d25815af4bcc531b52d1bb8e112683cd5404aab0"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_bootloader_udiv10",
+          "target_function": "open_cfw_bootloader_udiv10",
+          "symbol_type": "STT_NOTYPE"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_sdec_digits",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_sdec_digits.c",
+        "size": 349,
+        "sha256": "7a17b01833b2ce6eb8b43ba72bd2c4c299e0c4f0217007be0bd7e8604c4ab6b8",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated signed-magnitude decimal digit-count helper",
+        "evidence": "docs/research/g2-bootloader-numeric-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 20,
+        "sha256": "30f15a834bafce03d4a2e39f5d7d0291887c478fa3ad815ab152fb4fcb39e14b",
+        "alignment": 2,
+        "offset": 1246,
+        "unrelocated_sha256": "87503ca05ba402c4aab51eef8c9cd139b9482a413556133382ba70476884dcf5"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_udec_digits",
+          "target_function": "open_cfw_bootloader_udec_digits",
+          "symbol_type": "STT_NOTYPE"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_hex_digits",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_hex_digits.c",
+        "size": 298,
+        "sha256": "bd5b8ee533f2c3be7a1975740e8d455cbc52e2de578358e3de9471fa77d7d182",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated hexadecimal digit-count helper",
+        "evidence": "docs/research/g2-bootloader-numeric-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 24,
+        "sha256": "6b3adefeb3b90ab3e15f08d57506b9816e6b7e287c3e1e83ea79c5f5faf9da3e",
+        "alignment": 2,
+        "offset": 1266,
+        "unrelocated_sha256": "6b3adefeb3b90ab3e15f08d57506b9816e6b7e287c3e1e83ea79c5f5faf9da3e"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_parse_dec",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_parse_dec.c",
+        "size": 728,
+        "sha256": "4bc07532ba67ef07c32f1a061d468f77ff72caf9ee5797eb7116b256d84543ee",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated wrapping decimal parser",
+        "evidence": "docs/research/g2-bootloader-numeric-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 48,
+        "sha256": "ace0135fe9f0230855197b88faf6af8fb79292f2ac4fbba765f8d594bb88d462",
+        "alignment": 2,
+        "offset": 1290,
+        "unrelocated_sha256": "ace0135fe9f0230855197b88faf6af8fb79292f2ac4fbba765f8d594bb88d462"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_u64_to_dec",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_u64_to_dec.c",
+        "size": 710,
+        "sha256": "bde9a306740d5619bfd0d2aab99420fb408cdf80dfbce1f3152dd17ab2a13f06",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated unsigned 64-bit decimal output helper",
+        "evidence": "docs/research/g2-bootloader-format-primitives-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 74,
+        "sha256": "2c131175df18cf4d4eb14af3c6ef64c2da035c42f23e50f711e829d73a3205e1",
+        "alignment": 2,
+        "offset": 1338,
+        "unrelocated_sha256": "8d82b8e2fa35a8c602ea4a69f59719e249f931a9a99e8385620f342e79b1d01d"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_bootloader_udiv10",
+          "target_function": "open_cfw_bootloader_udiv10",
+          "symbol_type": "STT_NOTYPE"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_u64_to_hex",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_u64_to_hex.c",
+        "size": 838,
+        "sha256": "488ce02ee663caa60ab9a12192bee035cc4bc6b5e0d0f4567d6e2151aebf5c39",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated unsigned 64-bit hexadecimal output helper",
+        "evidence": "docs/research/g2-bootloader-format-primitives-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 72,
+        "sha256": "d00e848bd2b979f3e34d0fe39d17ee1387eda21966360cf3f9cb5b4b8e4d9cb6",
+        "alignment": 2,
+        "offset": 1412,
+        "unrelocated_sha256": "d00e848bd2b979f3e34d0fe39d17ee1387eda21966360cf3f9cb5b4b8e4d9cb6"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_nullable_strlen",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_nullable_strlen.c",
+        "size": 330,
+        "sha256": "59144871f6c479c5d853cc309d6ea688f9a07bb078585dd613571c44b29dcd99",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated nullable string-length helper",
+        "evidence": "docs/research/g2-bootloader-format-primitives-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 20,
+        "sha256": "fb0242904bfe442fbc6d61d275e46cbb4acfd8fe9d0aa1c5128b60542b802efa",
+        "alignment": 2,
+        "offset": 1484,
+        "unrelocated_sha256": "fb0242904bfe442fbc6d61d275e46cbb4acfd8fe9d0aa1c5128b60542b802efa"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_repeat_char",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_repeat_char.c",
+        "size": 478,
+        "sha256": "deab8b51da6dbb862c58b6f0c8eb6a67706bb377e14139122a57f894ca068349",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated null-output-aware repeated-character helper",
+        "evidence": "docs/research/g2-bootloader-format-primitives-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 32,
+        "sha256": "f2bc5eeddd15814db65a25945e356afb8e20c158921520b32db269fedb58fa00",
+        "alignment": 2,
+        "offset": 1504,
+        "unrelocated_sha256": "f2bc5eeddd15814db65a25945e356afb8e20c158921520b32db269fedb58fa00"
+      },
+      "relocations": [],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_float_to_fixed",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_float_to_fixed.c",
+        "size": 3041,
+        "sha256": "b586dd014fed40e8f28118e4891cde433c318675c091299c40ef9cc18edeecd9",
+        "license": "GPL-3.0-or-later",
+        "origin": "clean-room C implementation of the authenticated fixed-point float formatter",
+        "evidence": "docs/research/g2-bootloader-float-format-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 320,
+        "sha256": "c127b325a2b36be0aae257659caea624cc2080ba4e04326de56a23e03613d0a5",
+        "alignment": 8,
+        "offset": 1536,
+        "unrelocated_sha256": "22706de7bb71b4c48e9325224244f01b454c9ca0e4c79944441eb281b5429fad"
+      },
+      "relocations": [
+        {
+          "offset": 160,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_bootloader_u64_to_dec",
+          "target_function": "open_cfw_bootloader_u64_to_dec",
+          "symbol_type": "STT_NOTYPE"
+        }
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_format_core",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_format_core.c",
+        "size": 1646,
+        "sha256": "0f31ed627a2e6984d95dbe6b223873151a399785808d858d08693c9141437300",
+        "license": "GPL-3.0-or-later",
+        "origin": "bootloader binding of the clean-room IAR logging formatter core shared with the Apollo application image",
+        "evidence": "docs/research/g2-bootloader-float-format-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 960,
+        "sha256": "207450ccdb7177c635fec9ac6c1963b39b3fc273fe0179daf4a477b78c4d3b16",
+        "alignment": 8,
+        "offset": 1856,
+        "unrelocated_sha256": "df06557bad48cdeda21e70f60c6bd302dbda43965564978fda185090cc8656c4"
+      },
+      "relocations": [
+        {"offset": 62, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_parse_dec", "target_function": "open_cfw_bootloader_parse_dec", "symbol_type": "STT_NOTYPE"},
+        {"offset": 154, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_parse_dec", "target_function": "open_cfw_bootloader_parse_dec", "symbol_type": "STT_NOTYPE"},
+        {"offset": 232, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_float_to_fixed", "target_function": "open_cfw_bootloader_float_to_fixed", "symbol_type": "STT_NOTYPE"},
+        {"offset": 392, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_hex_digits", "target_function": "open_cfw_bootloader_hex_digits", "symbol_type": "STT_NOTYPE"},
+        {"offset": 402, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_repeat_char", "target_function": "open_cfw_bootloader_repeat_char", "symbol_type": "STT_NOTYPE"},
+        {"offset": 426, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_u64_to_hex", "target_function": "open_cfw_bootloader_u64_to_hex", "symbol_type": "STT_NOTYPE"},
+        {"offset": 508, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_sdec_digits", "target_function": "open_cfw_bootloader_sdec_digits", "symbol_type": "STT_NOTYPE"},
+        {"offset": 604, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_nullable_strlen", "target_function": "open_cfw_bootloader_nullable_strlen", "symbol_type": "STT_NOTYPE"},
+        {"offset": 640, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_repeat_char", "target_function": "open_cfw_bootloader_repeat_char", "symbol_type": "STT_NOTYPE"},
+        {"offset": 694, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_udec_digits", "target_function": "open_cfw_bootloader_udec_digits", "symbol_type": "STT_NOTYPE"},
+        {"offset": 704, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_repeat_char", "target_function": "open_cfw_bootloader_repeat_char", "symbol_type": "STT_NOTYPE"},
+        {"offset": 726, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_u64_to_dec", "target_function": "open_cfw_bootloader_u64_to_dec", "symbol_type": "STT_NOTYPE"},
+        {"offset": 810, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_repeat_char", "target_function": "open_cfw_bootloader_repeat_char", "symbol_type": "STT_NOTYPE"},
+        {"offset": 838, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_repeat_char", "target_function": "open_cfw_bootloader_repeat_char", "symbol_type": "STT_NOTYPE"},
+        {"offset": 892, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_u64_to_dec", "target_function": "open_cfw_bootloader_u64_to_dec", "symbol_type": "STT_NOTYPE"}
+      ],
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
       "function": "open_cfw_littlefs_disk_version_major",
       "source": {
         "path": "components/apollo_main/core_overlay/runtime_littlefs_disk_version_parts.c",
@@ -1307,6 +2477,82 @@
     "open_cfw_littlefs_tag_size": {
       "expected_offset": 656,
       "expected_size": 6
+    },
+    "open_cfw_bootloader_redirect_init": {
+      "expected_offset": 664,
+      "expected_size": 132
+    },
+    "open_cfw_bootloader_aeabi_memset": {
+      "expected_offset": 940,
+      "expected_size": 12
+    },
+    "open_cfw_bootloader_aeabi_memcpy": {
+      "expected_offset": 952,
+      "expected_size": 16
+    },
+    "open_cfw_bootloader_memcmp": {
+      "expected_offset": 968,
+      "expected_size": 28
+    },
+    "open_cfw_bootloader_strcspn": {
+      "expected_offset": 996,
+      "expected_size": 30
+    },
+    "open_cfw_bootloader_strspn": {
+      "expected_offset": 1026,
+      "expected_size": 28
+    },
+    "open_cfw_bootloader_crc32": {
+      "expected_offset": 1056,
+      "expected_size": 44
+    },
+    "open_cfw_bootloader_store_200270cc": {
+      "expected_offset": 1100,
+      "expected_size": 12
+    },
+    "open_cfw_bootloader_udiv10": {
+      "expected_offset": 1112,
+      "expected_size": 106
+    },
+    "open_cfw_bootloader_udec_digits": {
+      "expected_offset": 1218,
+      "expected_size": 28
+    },
+    "open_cfw_bootloader_sdec_digits": {
+      "expected_offset": 1246,
+      "expected_size": 20
+    },
+    "open_cfw_bootloader_hex_digits": {
+      "expected_offset": 1266,
+      "expected_size": 24
+    },
+    "open_cfw_bootloader_parse_dec": {
+      "expected_offset": 1290,
+      "expected_size": 48
+    },
+    "open_cfw_bootloader_u64_to_dec": {
+      "expected_offset": 1338,
+      "expected_size": 74
+    },
+    "open_cfw_bootloader_u64_to_hex": {
+      "expected_offset": 1412,
+      "expected_size": 72
+    },
+    "open_cfw_bootloader_nullable_strlen": {
+      "expected_offset": 1484,
+      "expected_size": 20
+    },
+    "open_cfw_bootloader_repeat_char": {
+      "expected_offset": 1504,
+      "expected_size": 32
+    },
+    "open_cfw_bootloader_float_to_fixed": {
+      "expected_offset": 1536,
+      "expected_size": 320
+    },
+    "open_cfw_bootloader_format_core": {
+      "expected_offset": 1856,
+      "expected_size": 960
     }
   },
   "placement": {
@@ -1569,6 +2815,158 @@
       "expected_sha256": "9708f61ea38bbac62f5542fdd2701a950ba1bde9fd480c5baf7cb0be6a8461b5",
       "branch": "b_w",
       "target_function": "open_cfw_easylogger_strcpy"
+    },
+    {
+      "name": "replace_bootloader_redirect_init",
+      "runtime_address": 4281744,
+      "expected_size": 88,
+      "expected_sha256": "b53b1d0eae9d2787d431ae1950d956c54429fb339a67ee7f219ff7c01ffc0cd6",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_redirect_init"
+    },
+    {
+      "name": "replace_bootloader_aeabi_memset",
+      "runtime_address": 4281868,
+      "expected_size": 102,
+      "expected_sha256": "34da1a99d5cb56ca41cfaff98190ced2a7767f53cd95c53c504009566e9ca10a",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_aeabi_memset"
+    },
+    {
+      "name": "replace_bootloader_aeabi_memcpy",
+      "runtime_address": 4281996,
+      "expected_size": 166,
+      "expected_sha256": "8e696e1fb54917a436f850e562f74e8cc8734c259fdaac9f767a3c264ff427cd",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_aeabi_memcpy"
+    },
+    {
+      "name": "replace_bootloader_memcmp",
+      "runtime_address": 4282200,
+      "expected_size": 104,
+      "expected_sha256": "33e09969a8e4f7ca9290ef4678d252c217a5d031eb362f8d6c5ad656424d4154",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_memcmp"
+    },
+    {
+      "name": "replace_bootloader_crc32",
+      "runtime_address": 4282304,
+      "expected_size": 56,
+      "expected_sha256": "acba42ebe6d52e7d353fe1cd586fb79cea530e243d2ffaeaf1019f7548dc20be",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_crc32"
+    },
+    {
+      "name": "replace_bootloader_strcspn",
+      "runtime_address": 4282360,
+      "expected_size": 34,
+      "expected_sha256": "f37ecd01540d7e9eb35cce13ef72d20c729e84932a0cbf296f3ff8d8ac58c5cb",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_strcspn"
+    },
+    {
+      "name": "replace_bootloader_strspn",
+      "runtime_address": 4282394,
+      "expected_size": 34,
+      "expected_sha256": "9abdb501517f35c72df7dd947891eb902da69f5598591ba36103bf450bdeb7fa",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_strspn"
+    },
+    {
+      "name": "replace_bootloader_store_200270cc",
+      "runtime_address": 4282428,
+      "expected_size": 8,
+      "expected_sha256": "8bee0f65c10cb18c0d50f225275e41e44c54b0c06cdaef05017cccf89162d0f8",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_store_200270cc"
+    },
+    {
+      "name": "replace_bootloader_udiv10",
+      "runtime_address": 4282436,
+      "expected_size": 188,
+      "expected_sha256": "193eb3cd689460ea3fcc0e840a7899200f5d430b601bc86b96fe36110031a536",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_udiv10"
+    },
+    {
+      "name": "replace_bootloader_udec_digits",
+      "runtime_address": 4282624,
+      "expected_size": 36,
+      "expected_sha256": "5cb5a2122755c72fe1feee92066675fd744718498be799c4b7163476c5bb30da",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_udec_digits"
+    },
+    {
+      "name": "replace_bootloader_sdec_digits",
+      "runtime_address": 4282660,
+      "expected_size": 18,
+      "expected_sha256": "84075552582aa3faed79585d7af9bfad49ea10cf6c5f023343cf1acd47ae5b35",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_sdec_digits"
+    },
+    {
+      "name": "replace_bootloader_hex_digits",
+      "runtime_address": 4282678,
+      "expected_size": 38,
+      "expected_sha256": "b32fcab992f19ef52dc494a38c6c8a5269c8bb5ec39f0a62ddb3030ef01280d7",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_hex_digits"
+    },
+    {
+      "name": "replace_bootloader_parse_dec",
+      "runtime_address": 4282716,
+      "expected_size": 68,
+      "expected_sha256": "82f777f8f00d318187e88d72d7a0a4d5d7a61b8ea7e1981b9d3472999e433caf",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_parse_dec"
+    },
+    {
+      "name": "replace_bootloader_u64_to_dec",
+      "runtime_address": 4282784,
+      "expected_size": 104,
+      "expected_sha256": "8d34c568f2d0799b69f812076b3c2a84f2ee6c9c5a0e46a2782e87f9c2a435e0",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_u64_to_dec"
+    },
+    {
+      "name": "replace_bootloader_u64_to_hex",
+      "runtime_address": 4282888,
+      "expected_size": 116,
+      "expected_sha256": "e53ad1ebe639d9b80c3bf2f5a2c2228698a5a0b9849cc0ddebdea54e7caee28c",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_u64_to_hex"
+    },
+    {
+      "name": "replace_bootloader_nullable_strlen",
+      "runtime_address": 4283004,
+      "expected_size": 24,
+      "expected_sha256": "b2232233b8706cc7900d6aea4f778cc04d1859ba9a969ea895a2648eecb364d1",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_nullable_strlen"
+    },
+    {
+      "name": "replace_bootloader_repeat_char",
+      "runtime_address": 4283028,
+      "expected_size": 34,
+      "expected_sha256": "e8b9ffb732e3d15c42a4e890c903fa548091b27e57858fa91044b78ff127b636",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_repeat_char"
+    },
+    {
+      "name": "replace_bootloader_float_to_fixed",
+      "runtime_address": 4283062,
+      "expected_size": 320,
+      "expected_sha256": "d3c06c2907e1a0e8b3890aae57449889724a45e0a45bb167c8947d8de11743d6",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_float_to_fixed"
+    },
+    {
+      "name": "replace_bootloader_format_core",
+      "runtime_address": 4283382,
+      "expected_size": 952,
+      "expected_sha256": "43f3f8c080c595922a87cf7657943dcea958b983e5f3a78a244d513f42b232bb",
+      "branch": "b_w",
+      "target_function": "open_cfw_bootloader_format_core"
     }
   ],
   "transport_contract": {
@@ -1586,19 +2984,19 @@
   "overlay_artifact": "bootloader_core_overlay.bin",
   "provider_artifact": "ota_s200_bootloader.bin",
   "expected": {
-    "overlay_size": 662,
-    "overlay_sha256": "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b",
-    "component_size": 149262,
-    "component_sha256": "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267"
+    "overlay_size": 1856,
+    "overlay_sha256": "6693a0fec4dfd7c9ba82639de56264a1ba1519768b6aa90b40885092f6fe4913",
+    "component_size": 150456,
+    "component_sha256": "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d"
   },
   "toolchain_profiles": {
     "linux-clang": {
       "reviewed_version_prefix": "Homebrew clang version 22.1.8",
       "expected": {
-        "overlay_size": 662,
-        "overlay_sha256": "e4c743531f56c190b7e3129768d410480a2f3433a5b680c7bf432ef0b05a7021",
-        "component_size": 149262,
-        "component_sha256": "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74"
+        "overlay_size": 1856,
+        "overlay_sha256": "7a6e66f6b095cbacbdf5e103f3b28c96a4e395d2ef4fdcdf64d6eac6790850d2",
+        "component_size": 150456,
+        "component_sha256": "df6ec98c263e1e5d4f16244af450171e149be673eb0347f076f997b8de326187"
       }
     }
   },
@@ -1739,6 +3137,82 @@
       "open_cfw_littlefs_tag_size": {
         "expected_offset": 656,
         "expected_size": 6
+      },
+      "open_cfw_bootloader_redirect_init": {
+        "expected_offset": 664,
+        "expected_size": 132
+      },
+      "open_cfw_bootloader_aeabi_memset": {
+        "expected_offset": 940,
+        "expected_size": 12
+      },
+      "open_cfw_bootloader_aeabi_memcpy": {
+        "expected_offset": 952,
+        "expected_size": 16
+      },
+      "open_cfw_bootloader_memcmp": {
+        "expected_offset": 968,
+        "expected_size": 28
+      },
+      "open_cfw_bootloader_strcspn": {
+        "expected_offset": 996,
+        "expected_size": 30
+      },
+      "open_cfw_bootloader_strspn": {
+        "expected_offset": 1026,
+        "expected_size": 28
+      },
+      "open_cfw_bootloader_crc32": {
+        "expected_offset": 1056,
+        "expected_size": 44
+      },
+      "open_cfw_bootloader_store_200270cc": {
+        "expected_offset": 1100,
+        "expected_size": 12
+      },
+      "open_cfw_bootloader_udiv10": {
+        "expected_offset": 1112,
+        "expected_size": 106
+      },
+      "open_cfw_bootloader_udec_digits": {
+        "expected_offset": 1218,
+        "expected_size": 28
+      },
+      "open_cfw_bootloader_sdec_digits": {
+        "expected_offset": 1246,
+        "expected_size": 20
+      },
+      "open_cfw_bootloader_hex_digits": {
+        "expected_offset": 1266,
+        "expected_size": 24
+      },
+      "open_cfw_bootloader_parse_dec": {
+        "expected_offset": 1290,
+        "expected_size": 48
+      },
+      "open_cfw_bootloader_u64_to_dec": {
+        "expected_offset": 1338,
+        "expected_size": 74
+      },
+      "open_cfw_bootloader_u64_to_hex": {
+        "expected_offset": 1412,
+        "expected_size": 72
+      },
+      "open_cfw_bootloader_nullable_strlen": {
+        "expected_offset": 1484,
+        "expected_size": 20
+      },
+      "open_cfw_bootloader_repeat_char": {
+        "expected_offset": 1504,
+        "expected_size": 32
+      },
+      "open_cfw_bootloader_float_to_fixed": {
+        "expected_offset": 1536,
+        "expected_size": 320
+      },
+      "open_cfw_bootloader_format_core": {
+        "expected_offset": 1856,
+        "expected_size": 960
       }
     }
   }

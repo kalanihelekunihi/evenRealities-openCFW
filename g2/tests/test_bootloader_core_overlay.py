@@ -133,7 +133,43 @@ LITTLEFS_TAG_ID_ADDRESS = 0x00410BB8
 LITTLEFS_TAG_ID_TARGET = 0x00434702
 LITTLEFS_TAG_SIZE_ADDRESS = 0x00410BC0
 LITTLEFS_TAG_SIZE_TARGET = 0x00434708
-OVERLAY_END = 0x0043470E
+REDIRECT_INIT_ADDRESS = 0x00415590
+REDIRECT_INIT_TARGET = 0x00434710
+AEABI_MEMSET_ADDRESS = 0x0041560C
+AEABI_MEMSET_TARGET = 0x00434824
+AEABI_MEMCPY_ADDRESS = 0x0041568C
+AEABI_MEMCPY_TARGET = 0x00434830
+MEMCMP_ADDRESS = 0x00415758
+MEMCMP_TARGET = 0x00434840
+CRC32_ADDRESS = 0x004157C0
+CRC32_TARGET = 0x00434898
+STORE_200270CC_ADDRESS = 0x0041583C
+STORE_200270CC_TARGET = 0x004348C4
+UDIV10_ADDRESS = 0x00415844
+UDIV10_TARGET = 0x004348D0
+UDEC_DIGITS_ADDRESS = 0x00415900
+UDEC_DIGITS_TARGET = 0x0043493A
+SDEC_DIGITS_ADDRESS = 0x00415924
+SDEC_DIGITS_TARGET = 0x00434956
+HEX_DIGITS_ADDRESS = 0x00415936
+HEX_DIGITS_TARGET = 0x0043496A
+PARSE_DEC_ADDRESS = 0x0041595C
+PARSE_DEC_TARGET = 0x00434982
+U64_TO_DEC_ADDRESS = 0x004159A0
+U64_TO_DEC_TARGET = 0x004349B2
+U64_TO_HEX_ADDRESS = 0x00415A08
+U64_TO_HEX_TARGET = 0x004349FC
+NULLABLE_STRLEN_ADDRESS = 0x00415A7C
+NULLABLE_STRLEN_TARGET = 0x00434A44
+REPEAT_CHAR_ADDRESS = 0x00415A94
+REPEAT_CHAR_TARGET = 0x00434A58
+FLOAT_TO_FIXED_ADDRESS = 0x00415AB6
+FLOAT_TO_FIXED_TARGET = 0x00434A78
+STRCSPN_ADDRESS = 0x004157F8
+STRCSPN_TARGET = 0x0043485C
+STRSPN_ADDRESS = 0x0041581A
+STRSPN_TARGET = 0x0043487A
+OVERLAY_END = 0x00434BB8
 LITTLEFS_UTIL_MAX_OFFSET = LITTLEFS_UTIL_MAX_ADDRESS - RUN_BASE
 LITTLEFS_UTIL_MIN_OFFSET = LITTLEFS_UTIL_MIN_ADDRESS - RUN_BASE
 LITTLEFS_UTIL_ALIGNDOWN_OFFSET = (
@@ -163,6 +199,24 @@ EASYLOGGER_GET_FMT_OFFSET = EASYLOGGER_GET_FMT_ADDRESS - RUN_BASE
 EASYLOGGER_GET_FMT_U32_OFFSET = EASYLOGGER_GET_FMT_U32_ADDRESS - RUN_BASE
 EASYLOGGER_GET_FMT_PTR_OFFSET = EASYLOGGER_GET_FMT_PTR_ADDRESS - RUN_BASE
 EASYLOGGER_STRCPY_OFFSET = EASYLOGGER_STRCPY_ADDRESS - RUN_BASE
+REDIRECT_INIT_OFFSET = REDIRECT_INIT_ADDRESS - RUN_BASE
+AEABI_MEMSET_OFFSET = AEABI_MEMSET_ADDRESS - RUN_BASE
+AEABI_MEMCPY_OFFSET = AEABI_MEMCPY_ADDRESS - RUN_BASE
+MEMCMP_OFFSET = MEMCMP_ADDRESS - RUN_BASE
+CRC32_OFFSET = CRC32_ADDRESS - RUN_BASE
+STORE_200270CC_OFFSET = STORE_200270CC_ADDRESS - RUN_BASE
+UDIV10_OFFSET = UDIV10_ADDRESS - RUN_BASE
+UDEC_DIGITS_OFFSET = UDEC_DIGITS_ADDRESS - RUN_BASE
+SDEC_DIGITS_OFFSET = SDEC_DIGITS_ADDRESS - RUN_BASE
+HEX_DIGITS_OFFSET = HEX_DIGITS_ADDRESS - RUN_BASE
+PARSE_DEC_OFFSET = PARSE_DEC_ADDRESS - RUN_BASE
+U64_TO_DEC_OFFSET = U64_TO_DEC_ADDRESS - RUN_BASE
+U64_TO_HEX_OFFSET = U64_TO_HEX_ADDRESS - RUN_BASE
+NULLABLE_STRLEN_OFFSET = NULLABLE_STRLEN_ADDRESS - RUN_BASE
+REPEAT_CHAR_OFFSET = REPEAT_CHAR_ADDRESS - RUN_BASE
+FLOAT_TO_FIXED_OFFSET = FLOAT_TO_FIXED_ADDRESS - RUN_BASE
+STRCSPN_OFFSET = STRCSPN_ADDRESS - RUN_BASE
+STRSPN_OFFSET = STRSPN_ADDRESS - RUN_BASE
 LITTLEFS_TAG_CHUNK_OFFSET = LITTLEFS_TAG_CHUNK_ADDRESS - RUN_BASE
 LITTLEFS_TAG_ISVALID_OFFSET = LITTLEFS_TAG_ISVALID_ADDRESS - RUN_BASE
 LITTLEFS_TAG_TYPE1_OFFSET = LITTLEFS_TAG_TYPE1_ADDRESS - RUN_BASE
@@ -173,10 +227,10 @@ STOCK_SHA256 = (
     "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
 )
 PROVIDER_SHA256 = (
-    "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267"
+    "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d"
 )
 OVERLAY_SHA256 = (
-    "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b"
+    "6693a0fec4dfd7c9ba82639de56264a1ba1519768b6aa90b40885092f6fe4913"
 )
 SCMP_SHA256 = (
     "787fad2973d1b4f1c6c585f29ee07707e6951499c3772a9e8e4e1bc997ba94fe"
@@ -259,7 +313,7 @@ LITTLEFS_UTIL_ALIGNDOWN_STOCK_SHA256 = (
 LITTLEFS_UTIL_ALIGNUP_STOCK_SHA256 = (
     "18874b0eb5cf5c7bd6f20b2b29f787157294b9e9be16d14ab0d9064d44a97c37"
 )
-PROVIDER_CRC32C_MSB = 0x2CF39500
+PROVIDER_CRC32C_MSB = 0x9698B4C4
 
 
 def load_builder():
@@ -768,8 +822,9 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 },
             ],
         )
-        self.assertEqual(link["relocated_text_size"], 378)
-        self.assertEqual(link["relocated_padding_size"], 2)
+        self.assertEqual(link["relocated_text_size"], 1424)
+        self.assertEqual(link["relocated_rodata_size"], 143)
+        self.assertEqual(link["relocated_padding_size"], 7)
         self.assertEqual(
             link["relocated_functions"],
             [
@@ -912,11 +967,174 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     "runtime_address": 0x00434708,
                     "runtime_address_hex": "0x00434708",
                 },
+                {
+                    "function": "open_cfw_bootloader_redirect_init",
+                    "offset": 664,
+                    "size": 275,
+                    "text_size": 132,
+                    "alignment": 4,
+                    "padding_before": 2,
+                    "runtime_address": 0x00434710,
+                    "runtime_address_hex": "0x00434710",
+                },
+                {
+                    "function": "open_cfw_bootloader_aeabi_memset",
+                    "offset": 940,
+                    "size": 12,
+                    "alignment": 2,
+                    "padding_before": 1,
+                    "runtime_address": 0x00434824,
+                    "runtime_address_hex": "0x00434824",
+                },
+                {
+                    "function": "open_cfw_bootloader_aeabi_memcpy",
+                    "offset": 952,
+                    "size": 16,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434830,
+                    "runtime_address_hex": "0x00434830",
+                },
+                {
+                    "function": "open_cfw_bootloader_memcmp",
+                    "offset": 968,
+                    "size": 28,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434840,
+                    "runtime_address_hex": "0x00434840",
+                },
+                {
+                    "function": "open_cfw_bootloader_strcspn",
+                    "offset": 996,
+                    "size": 30,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043485C,
+                    "runtime_address_hex": "0x0043485C",
+                },
+                {
+                    "function": "open_cfw_bootloader_strspn",
+                    "offset": 1026,
+                    "size": 28,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043487A,
+                    "runtime_address_hex": "0x0043487A",
+                },
+                {
+                    "function": "open_cfw_bootloader_crc32",
+                    "offset": 1056,
+                    "size": 44,
+                    "alignment": 4,
+                    "padding_before": 2,
+                    "runtime_address": 0x00434898,
+                    "runtime_address_hex": "0x00434898",
+                },
+                {
+                    "function": "open_cfw_bootloader_store_200270cc",
+                    "offset": 1100,
+                    "size": 12,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x004348C4,
+                    "runtime_address_hex": "0x004348C4",
+                },
+                {
+                    "function": "open_cfw_bootloader_udiv10",
+                    "offset": 1112,
+                    "size": 106,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004348D0,
+                    "runtime_address_hex": "0x004348D0",
+                },
+                {
+                    "function": "open_cfw_bootloader_udec_digits",
+                    "offset": 1218,
+                    "size": 28,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043493A,
+                    "runtime_address_hex": "0x0043493A",
+                },
+                {
+                    "function": "open_cfw_bootloader_sdec_digits",
+                    "offset": 1246,
+                    "size": 20,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434956,
+                    "runtime_address_hex": "0x00434956",
+                },
+                {
+                    "function": "open_cfw_bootloader_hex_digits",
+                    "offset": 1266,
+                    "size": 24,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043496A,
+                    "runtime_address_hex": "0x0043496A",
+                },
+                {
+                    "function": "open_cfw_bootloader_parse_dec",
+                    "offset": 1290,
+                    "size": 48,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434982,
+                    "runtime_address_hex": "0x00434982",
+                },
+                {
+                    "function": "open_cfw_bootloader_u64_to_dec",
+                    "offset": 1338,
+                    "size": 74,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004349B2,
+                    "runtime_address_hex": "0x004349B2",
+                },
+                {
+                    "function": "open_cfw_bootloader_u64_to_hex",
+                    "offset": 1412,
+                    "size": 72,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004349FC,
+                    "runtime_address_hex": "0x004349FC",
+                },
+                {
+                    "function": "open_cfw_bootloader_nullable_strlen",
+                    "offset": 1484,
+                    "size": 20,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434A44,
+                    "runtime_address_hex": "0x00434A44",
+                },
+                {
+                    "function": "open_cfw_bootloader_repeat_char",
+                    "offset": 1504,
+                    "size": 32,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434A58,
+                    "runtime_address_hex": "0x00434A58",
+                },
+                {
+                    "function": "open_cfw_bootloader_float_to_fixed",
+                    "offset": 1536,
+                    "size": 320,
+                    "alignment": 8,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434A78,
+                    "runtime_address_hex": "0x00434A78",
+                },
             ],
         )
 
     def test_exact_declared_mutation_set(self) -> None:
-        self.assertEqual(len(self.provider), 149262)
+        self.assertEqual(len(self.provider), 150456)
         self.assertEqual(
             hashlib.sha256(self.provider).hexdigest(),
             PROVIDER_SHA256,
@@ -1147,6 +1365,123 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     ALLOC_LOOKAHEAD_OFFSET + 56,
                 )
             )
+            + list(range(REDIRECT_INIT_OFFSET, REDIRECT_INIT_OFFSET + 4))
+            + list(range(REDIRECT_INIT_OFFSET + 5, REDIRECT_INIT_OFFSET + 14))
+            + list(range(REDIRECT_INIT_OFFSET + 15, REDIRECT_INIT_OFFSET + 24))
+            + list(range(REDIRECT_INIT_OFFSET + 25, REDIRECT_INIT_OFFSET + 30))
+            + list(range(REDIRECT_INIT_OFFSET + 31, REDIRECT_INIT_OFFSET + 42))
+            + list(range(REDIRECT_INIT_OFFSET + 43, REDIRECT_INIT_OFFSET + 70))
+            + list(range(REDIRECT_INIT_OFFSET + 71, REDIRECT_INIT_OFFSET + 84))
+            + list(range(REDIRECT_INIT_OFFSET + 85, REDIRECT_INIT_OFFSET + 88))
+            + list(range(AEABI_MEMSET_OFFSET, AEABI_MEMSET_OFFSET + 23))
+            + list(range(AEABI_MEMSET_OFFSET + 25, AEABI_MEMSET_OFFSET + 29))
+            + list(range(AEABI_MEMSET_OFFSET + 30, AEABI_MEMSET_OFFSET + 45))
+            + list(range(AEABI_MEMSET_OFFSET + 46, AEABI_MEMSET_OFFSET + 55))
+            + list(range(AEABI_MEMSET_OFFSET + 56, AEABI_MEMSET_OFFSET + 61))
+            + list(range(AEABI_MEMSET_OFFSET + 62, AEABI_MEMSET_OFFSET + 69))
+            + list(range(AEABI_MEMSET_OFFSET + 70, AEABI_MEMSET_OFFSET + 75))
+            + list(range(AEABI_MEMSET_OFFSET + 77, AEABI_MEMSET_OFFSET + 87))
+            + list(range(AEABI_MEMSET_OFFSET + 89, AEABI_MEMSET_OFFSET + 95))
+            + list(range(AEABI_MEMSET_OFFSET + 97, AEABI_MEMSET_OFFSET + 102))
+            + list(range(AEABI_MEMCPY_OFFSET, AEABI_MEMCPY_OFFSET + 12))
+            + list(range(AEABI_MEMCPY_OFFSET + 13, AEABI_MEMCPY_OFFSET + 16))
+            + list(range(AEABI_MEMCPY_OFFSET + 17, AEABI_MEMCPY_OFFSET + 30))
+            + list(range(AEABI_MEMCPY_OFFSET + 32, AEABI_MEMCPY_OFFSET + 55))
+            + list(range(AEABI_MEMCPY_OFFSET + 56, AEABI_MEMCPY_OFFSET + 65))
+            + list(range(AEABI_MEMCPY_OFFSET + 66, AEABI_MEMCPY_OFFSET + 77))
+            + list(range(AEABI_MEMCPY_OFFSET + 78, AEABI_MEMCPY_OFFSET + 87))
+            + list(range(AEABI_MEMCPY_OFFSET + 88, AEABI_MEMCPY_OFFSET + 126))
+            + list(range(AEABI_MEMCPY_OFFSET + 127, AEABI_MEMCPY_OFFSET + 140))
+            + list(range(AEABI_MEMCPY_OFFSET + 141, AEABI_MEMCPY_OFFSET + 147))
+            + list(range(AEABI_MEMCPY_OFFSET + 148, AEABI_MEMCPY_OFFSET + 153))
+            + list(range(AEABI_MEMCPY_OFFSET + 154, AEABI_MEMCPY_OFFSET + 158))
+            + list(range(AEABI_MEMCPY_OFFSET + 159, AEABI_MEMCPY_OFFSET + 166))
+            + list(range(MEMCMP_OFFSET, MEMCMP_OFFSET + 13))
+            + list(range(MEMCMP_OFFSET + 14, MEMCMP_OFFSET + 39))
+            + list(range(MEMCMP_OFFSET + 40, MEMCMP_OFFSET + 56))
+            + list(range(MEMCMP_OFFSET + 57, MEMCMP_OFFSET + 67))
+            + list(range(MEMCMP_OFFSET + 68, MEMCMP_OFFSET + 70))
+            + list(range(MEMCMP_OFFSET + 71, MEMCMP_OFFSET + 73))
+            + list(range(MEMCMP_OFFSET + 74, MEMCMP_OFFSET + 81))
+            + list(range(MEMCMP_OFFSET + 82, MEMCMP_OFFSET + 99))
+            + list(range(MEMCMP_OFFSET + 100, MEMCMP_OFFSET + 104))
+            + list(range(CRC32_OFFSET, CRC32_OFFSET + 56))
+            + list(range(STRCSPN_OFFSET, STRCSPN_OFFSET + 4))
+            + list(range(STRCSPN_OFFSET + 5, STRCSPN_OFFSET + 16))
+            + list(range(STRCSPN_OFFSET + 17, STRCSPN_OFFSET + 34))
+            + list(range(STRSPN_OFFSET, STRSPN_OFFSET + 4))
+            + list(range(STRSPN_OFFSET + 5, STRSPN_OFFSET + 34))
+            + list(range(STORE_200270CC_OFFSET, STORE_200270CC_OFFSET + 8))
+            + list(range(UDIV10_OFFSET, UDIV10_OFFSET + 86))
+            + list(range(UDIV10_OFFSET + 87, UDIV10_OFFSET + 128))
+            + [UDIV10_OFFSET + 129]
+            + list(range(UDIV10_OFFSET + 131, UDIV10_OFFSET + 174))
+            + list(range(UDIV10_OFFSET + 175, UDIV10_OFFSET + 182))
+            + list(range(UDIV10_OFFSET + 183, UDIV10_OFFSET + 188))
+            + list(range(UDEC_DIGITS_OFFSET, UDEC_DIGITS_OFFSET + 6))
+            + list(range(UDEC_DIGITS_OFFSET + 7, UDEC_DIGITS_OFFSET + 10))
+            + list(range(UDEC_DIGITS_OFFSET + 11, UDEC_DIGITS_OFFSET + 24))
+            + list(range(UDEC_DIGITS_OFFSET + 25, UDEC_DIGITS_OFFSET + 28))
+            + list(range(UDEC_DIGITS_OFFSET + 29, UDEC_DIGITS_OFFSET + 36))
+            + list(range(SDEC_DIGITS_OFFSET, SDEC_DIGITS_OFFSET + 18))
+            + list(range(HEX_DIGITS_OFFSET, HEX_DIGITS_OFFSET + 4))
+            + list(range(HEX_DIGITS_OFFSET + 5, HEX_DIGITS_OFFSET + 8))
+            + list(range(HEX_DIGITS_OFFSET + 9, HEX_DIGITS_OFFSET + 16))
+            + list(range(HEX_DIGITS_OFFSET + 17, HEX_DIGITS_OFFSET + 26))
+            + list(range(HEX_DIGITS_OFFSET + 27, HEX_DIGITS_OFFSET + 30))
+            + list(range(HEX_DIGITS_OFFSET + 31, HEX_DIGITS_OFFSET + 38))
+            + list(range(PARSE_DEC_OFFSET, PARSE_DEC_OFFSET + 4))
+            + [PARSE_DEC_OFFSET + 5, PARSE_DEC_OFFSET + 7]
+            + list(range(PARSE_DEC_OFFSET + 9, PARSE_DEC_OFFSET + 48))
+            + [PARSE_DEC_OFFSET + 49]
+            + list(range(PARSE_DEC_OFFSET + 51, PARSE_DEC_OFFSET + 56))
+            + list(range(PARSE_DEC_OFFSET + 57, PARSE_DEC_OFFSET + 68))
+            + list(range(U64_TO_DEC_OFFSET, U64_TO_DEC_OFFSET + 12))
+            + [U64_TO_DEC_OFFSET + 13]
+            + list(range(U64_TO_DEC_OFFSET + 15, U64_TO_DEC_OFFSET + 34))
+            + list(range(U64_TO_DEC_OFFSET + 35, U64_TO_DEC_OFFSET + 42))
+            + list(range(U64_TO_DEC_OFFSET + 43, U64_TO_DEC_OFFSET + 64))
+            + list(range(U64_TO_DEC_OFFSET + 65, U64_TO_DEC_OFFSET + 68))
+            + list(range(U64_TO_DEC_OFFSET + 69, U64_TO_DEC_OFFSET + 74))
+            + list(range(U64_TO_DEC_OFFSET + 75, U64_TO_DEC_OFFSET + 90))
+            + list(range(U64_TO_DEC_OFFSET + 91, U64_TO_DEC_OFFSET + 94))
+            + list(range(U64_TO_DEC_OFFSET + 95, U64_TO_DEC_OFFSET + 104))
+            + list(range(U64_TO_HEX_OFFSET, U64_TO_HEX_OFFSET + 4))
+            + [U64_TO_HEX_OFFSET + 5]
+            + list(range(U64_TO_HEX_OFFSET + 7, U64_TO_HEX_OFFSET + 10))
+            + list(range(U64_TO_HEX_OFFSET + 11, U64_TO_HEX_OFFSET + 46))
+            + list(range(U64_TO_HEX_OFFSET + 47, U64_TO_HEX_OFFSET + 62))
+            + list(range(U64_TO_HEX_OFFSET + 63, U64_TO_HEX_OFFSET + 70))
+            + list(range(U64_TO_HEX_OFFSET + 71, U64_TO_HEX_OFFSET + 74))
+            + [U64_TO_HEX_OFFSET + 75]
+            + list(range(U64_TO_HEX_OFFSET + 77, U64_TO_HEX_OFFSET + 82))
+            + list(range(U64_TO_HEX_OFFSET + 83, U64_TO_HEX_OFFSET + 90))
+            + list(range(U64_TO_HEX_OFFSET + 91, U64_TO_HEX_OFFSET + 100))
+            + list(range(U64_TO_HEX_OFFSET + 101, U64_TO_HEX_OFFSET + 104))
+            + list(range(U64_TO_HEX_OFFSET + 105, U64_TO_HEX_OFFSET + 116))
+            + list(range(NULLABLE_STRLEN_OFFSET, NULLABLE_STRLEN_OFFSET + 4))
+            + list(range(NULLABLE_STRLEN_OFFSET + 5, NULLABLE_STRLEN_OFFSET + 18))
+            + list(range(NULLABLE_STRLEN_OFFSET + 19, NULLABLE_STRLEN_OFFSET + 24))
+            + list(range(REPEAT_CHAR_OFFSET, REPEAT_CHAR_OFFSET + 4))
+            + list(range(REPEAT_CHAR_OFFSET + 5, REPEAT_CHAR_OFFSET + 12))
+            + list(range(REPEAT_CHAR_OFFSET + 13, REPEAT_CHAR_OFFSET + 26))
+            + list(range(REPEAT_CHAR_OFFSET + 27, REPEAT_CHAR_OFFSET + 34))
+            + list(range(FLOAT_TO_FIXED_OFFSET, FLOAT_TO_FIXED_OFFSET + 44))
+            + [FLOAT_TO_FIXED_OFFSET + 45]
+            + list(range(FLOAT_TO_FIXED_OFFSET + 47, FLOAT_TO_FIXED_OFFSET + 54))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 55, FLOAT_TO_FIXED_OFFSET + 62))
+            + [FLOAT_TO_FIXED_OFFSET + 63, FLOAT_TO_FIXED_OFFSET + 65]
+            + list(range(FLOAT_TO_FIXED_OFFSET + 67, FLOAT_TO_FIXED_OFFSET + 104))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 105, FLOAT_TO_FIXED_OFFSET + 142))
+            + [FLOAT_TO_FIXED_OFFSET + 143]
+            + list(range(FLOAT_TO_FIXED_OFFSET + 145, FLOAT_TO_FIXED_OFFSET + 154))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 155, FLOAT_TO_FIXED_OFFSET + 196))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 197, FLOAT_TO_FIXED_OFFSET + 202))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 203, FLOAT_TO_FIXED_OFFSET + 212))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 213, FLOAT_TO_FIXED_OFFSET + 234))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 235, FLOAT_TO_FIXED_OFFSET + 238))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 239, FLOAT_TO_FIXED_OFFSET + 308))
+            + list(range(FLOAT_TO_FIXED_OFFSET + 309, FLOAT_TO_FIXED_OFFSET + 320))
             + list(
                 range(
                     EASYLOGGER_GET_FMT_OFFSET,
@@ -1583,6 +1918,30 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             )
         )
         allowed.update(
+            range(REDIRECT_INIT_OFFSET, REDIRECT_INIT_OFFSET + 88)
+        )
+        allowed.update(
+            range(AEABI_MEMSET_OFFSET, AEABI_MEMSET_OFFSET + 102)
+        )
+        allowed.update(
+            range(AEABI_MEMCPY_OFFSET, AEABI_MEMCPY_OFFSET + 166)
+        )
+        allowed.update(range(MEMCMP_OFFSET, MEMCMP_OFFSET + 104))
+        allowed.update(range(CRC32_OFFSET, CRC32_OFFSET + 56))
+        allowed.update(range(STRCSPN_OFFSET, STRCSPN_OFFSET + 34))
+        allowed.update(range(STRSPN_OFFSET, STRSPN_OFFSET + 34))
+        allowed.update(range(STORE_200270CC_OFFSET, STORE_200270CC_OFFSET + 8))
+        allowed.update(range(UDIV10_OFFSET, UDIV10_OFFSET + 188))
+        allowed.update(range(UDEC_DIGITS_OFFSET, UDEC_DIGITS_OFFSET + 36))
+        allowed.update(range(SDEC_DIGITS_OFFSET, SDEC_DIGITS_OFFSET + 18))
+        allowed.update(range(HEX_DIGITS_OFFSET, HEX_DIGITS_OFFSET + 38))
+        allowed.update(range(PARSE_DEC_OFFSET, PARSE_DEC_OFFSET + 68))
+        allowed.update(range(U64_TO_DEC_OFFSET, U64_TO_DEC_OFFSET + 104))
+        allowed.update(range(U64_TO_HEX_OFFSET, U64_TO_HEX_OFFSET + 116))
+        allowed.update(range(NULLABLE_STRLEN_OFFSET, NULLABLE_STRLEN_OFFSET + 24))
+        allowed.update(range(REPEAT_CHAR_OFFSET, REPEAT_CHAR_OFFSET + 34))
+        allowed.update(range(FLOAT_TO_FIXED_OFFSET, FLOAT_TO_FIXED_OFFSET + 320))
+        allowed.update(
             range(
                 EASYLOGGER_GET_FMT_OFFSET,
                 EASYLOGGER_GET_FMT_OFFSET + 106,
@@ -1827,20 +2186,90 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             bytes.fromhex("23f0a2bd00bf"),
         )
         self.assertEqual(
+            self.provider[
+                REDIRECT_INIT_OFFSET:REDIRECT_INIT_OFFSET + 88
+            ],
+            bytes.fromhex("1ff0beb8" + "00bf" * 42),
+        )
+        self.assertEqual(
+            self.provider[AEABI_MEMCPY_OFFSET:AEABI_MEMCPY_OFFSET + 166],
+            bytes.fromhex("1ff0d0b8" + "00bf" * 81),
+        )
+        self.assertEqual(
+            self.provider[MEMCMP_OFFSET:MEMCMP_OFFSET + 104],
+            bytes.fromhex("1ff072b8" + "00bf" * 50),
+        )
+        self.assertEqual(
+            self.provider[CRC32_OFFSET:CRC32_OFFSET + 56],
+            bytes.fromhex("1ff06ab8" + "00bf" * 26),
+        )
+        self.assertEqual(
+            self.provider[STRCSPN_OFFSET:STRCSPN_OFFSET + 34],
+            bytes.fromhex("1ff030b8" + "00bf" * 15),
+        )
+        self.assertEqual(
+            self.provider[STRSPN_OFFSET:STRSPN_OFFSET + 34],
+            bytes.fromhex("1ff02eb8" + "00bf" * 15),
+        )
+        self.assertEqual(
+            self.provider[STORE_200270CC_OFFSET:STORE_200270CC_OFFSET + 8],
+            bytes.fromhex("1ff042b800bf00bf"),
+        )
+        self.assertEqual(
+            self.provider[UDIV10_OFFSET:UDIV10_OFFSET + 188],
+            bytes.fromhex("1ff044b8" + "00bf" * 92),
+        )
+        self.assertEqual(
+            self.provider[UDEC_DIGITS_OFFSET:UDEC_DIGITS_OFFSET + 36],
+            bytes.fromhex("1ff01bb8" + "00bf" * 16),
+        )
+        self.assertEqual(
+            self.provider[SDEC_DIGITS_OFFSET:SDEC_DIGITS_OFFSET + 18],
+            bytes.fromhex("1ff017b8" + "00bf" * 7),
+        )
+        self.assertEqual(
+            self.provider[HEX_DIGITS_OFFSET:HEX_DIGITS_OFFSET + 38],
+            bytes.fromhex("1ff018b8" + "00bf" * 17),
+        )
+        self.assertEqual(
+            self.provider[PARSE_DEC_OFFSET:PARSE_DEC_OFFSET + 68],
+            bytes.fromhex("1ff011b8" + "00bf" * 32),
+        )
+        self.assertEqual(
+            self.provider[U64_TO_DEC_OFFSET:U64_TO_DEC_OFFSET + 104],
+            bytes.fromhex("1ff007b8" + "00bf" * 50),
+        )
+        self.assertEqual(
+            self.provider[U64_TO_HEX_OFFSET:U64_TO_HEX_OFFSET + 116],
+            bytes.fromhex("1ef0f8bf" + "00bf" * 56),
+        )
+        self.assertEqual(
+            self.provider[NULLABLE_STRLEN_OFFSET:NULLABLE_STRLEN_OFFSET + 24],
+            bytes.fromhex("1ef0e2bf" + "00bf" * 10),
+        )
+        self.assertEqual(
+            self.provider[REPEAT_CHAR_OFFSET:REPEAT_CHAR_OFFSET + 34],
+            bytes.fromhex("1ef0e0bf" + "00bf" * 15),
+        )
+        self.assertEqual(
+            self.provider[FLOAT_TO_FIXED_OFFSET:FLOAT_TO_FIXED_OFFSET + 320],
+            bytes.fromhex("1ef0dfbf" + "00bf" * 158),
+        )
+        self.assertEqual(
             self.provider[len(self.official):],
             b"\x00" + self.overlay,
         )
         component = self.report["component"]
-        self.assertEqual(component["generated_patch_site_bytes"], 860)
-        self.assertEqual(component["opaque_base_bytes"], 147739)
-        self.assertEqual(component["generated_alignment_bytes"], 3)
+        self.assertEqual(component["generated_patch_site_bytes"], 2398)
+        self.assertEqual(component["opaque_base_bytes"], 146201)
+        self.assertEqual(component["generated_alignment_bytes"], 8)
         self.assertEqual(
             component["generated_stock_to_overlay_alignment_bytes"],
             1,
         )
         self.assertEqual(component["generated_isolated_alignment_bytes"], 0)
-        self.assertEqual(component["generated_relocated_alignment_bytes"], 2)
-        self.assertEqual(component["source_owned_bytes"], 660)
+        self.assertEqual(component["generated_relocated_alignment_bytes"], 7)
+        self.assertEqual(component["source_owned_bytes"], 1849)
 
     def test_redirect_and_original_call_edge_round_trip(self) -> None:
         sites = {
@@ -2044,6 +2473,132 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 145316,
             ),
             (
+                "replace_bootloader_redirect_init",
+                REDIRECT_INIT_ADDRESS,
+                REDIRECT_INIT_TARGET,
+                "1ff0beb8" + "00bf" * 42,
+                127356,
+            ),
+            (
+                "replace_bootloader_aeabi_memset",
+                AEABI_MEMSET_ADDRESS,
+                AEABI_MEMSET_TARGET,
+                "1ff00ab9" + "00bf" * 49,
+                127508,
+            ),
+            (
+                "replace_bootloader_aeabi_memcpy",
+                AEABI_MEMCPY_ADDRESS,
+                AEABI_MEMCPY_TARGET,
+                "1ff0d0b8" + "00bf" * 81,
+                127392,
+            ),
+            (
+                "replace_bootloader_memcmp",
+                MEMCMP_ADDRESS,
+                MEMCMP_TARGET,
+                "1ff072b8" + "00bf" * 50,
+                127204,
+            ),
+            (
+                "replace_bootloader_crc32",
+                CRC32_ADDRESS,
+                CRC32_TARGET,
+                "1ff06ab8" + "00bf" * 26,
+                127188,
+            ),
+            (
+                "replace_bootloader_strcspn",
+                STRCSPN_ADDRESS,
+                STRCSPN_TARGET,
+                "1ff030b8" + "00bf" * 15,
+                127072,
+            ),
+            (
+                "replace_bootloader_strspn",
+                STRSPN_ADDRESS,
+                STRSPN_TARGET,
+                "1ff02eb8" + "00bf" * 15,
+                127068,
+            ),
+            (
+                "replace_bootloader_store_200270cc",
+                STORE_200270CC_ADDRESS,
+                STORE_200270CC_TARGET,
+                "1ff042b800bf00bf",
+                127108,
+            ),
+            (
+                "replace_bootloader_udiv10",
+                UDIV10_ADDRESS,
+                UDIV10_TARGET,
+                "1ff044b8" + "00bf" * 92,
+                127112,
+            ),
+            (
+                "replace_bootloader_udec_digits",
+                UDEC_DIGITS_ADDRESS,
+                UDEC_DIGITS_TARGET,
+                "1ff01bb8" + "00bf" * 16,
+                127030,
+            ),
+            (
+                "replace_bootloader_sdec_digits",
+                SDEC_DIGITS_ADDRESS,
+                SDEC_DIGITS_TARGET,
+                "1ff017b8" + "00bf" * 7,
+                127022,
+            ),
+            (
+                "replace_bootloader_hex_digits",
+                HEX_DIGITS_ADDRESS,
+                HEX_DIGITS_TARGET,
+                "1ff018b8" + "00bf" * 17,
+                127024,
+            ),
+            (
+                "replace_bootloader_parse_dec",
+                PARSE_DEC_ADDRESS,
+                PARSE_DEC_TARGET,
+                "1ff011b8" + "00bf" * 32,
+                127010,
+            ),
+            (
+                "replace_bootloader_u64_to_dec",
+                U64_TO_DEC_ADDRESS,
+                U64_TO_DEC_TARGET,
+                "1ff007b8" + "00bf" * 50,
+                126990,
+            ),
+            (
+                "replace_bootloader_u64_to_hex",
+                U64_TO_HEX_ADDRESS,
+                U64_TO_HEX_TARGET,
+                "1ef0f8bf" + "00bf" * 56,
+                126960,
+            ),
+            (
+                "replace_bootloader_nullable_strlen",
+                NULLABLE_STRLEN_ADDRESS,
+                NULLABLE_STRLEN_TARGET,
+                "1ef0e2bf" + "00bf" * 10,
+                126916,
+            ),
+            (
+                "replace_bootloader_repeat_char",
+                REPEAT_CHAR_ADDRESS,
+                REPEAT_CHAR_TARGET,
+                "1ef0e0bf" + "00bf" * 15,
+                126912,
+            ),
+            (
+                "replace_bootloader_float_to_fixed",
+                FLOAT_TO_FIXED_ADDRESS,
+                FLOAT_TO_FIXED_TARGET,
+                "1ef0dfbf" + "00bf" * 158,
+                126910,
+            ),
+            (
                 "replace_easylogger_get_fmt_enabled",
                 EASYLOGGER_GET_FMT_ADDRESS,
                 EASYLOGGER_GET_FMT_TARGET,
@@ -2171,10 +2726,10 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
 
     def test_provider_closes_before_main_and_passes_validator(self) -> None:
         self.assertEqual(RUN_BASE + len(self.provider), OVERLAY_END)
-        self.assertEqual(MAIN_BOUNDARY - OVERLAY_END, 0x38F2)
+        self.assertEqual(MAIN_BOUNDARY - OVERLAY_END, 0x3448)
         self.assertEqual(
             self.report["overlay"]["remaining_headroom_bytes"],
-            0x38F2,
+            0x3448,
         )
         self.open_cfw.validate_apollo_bootloader(self.provider)
 
@@ -2223,7 +2778,29 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 6,
                 16,
                 56,
-                27806,
+                18266,
+                88,
+                36,
+                102,
+                26,
+                166,
+                38,
+                104,
+                56,
+                34,
+                34,
+                8,
+                188,
+                36,
+                18,
+                38,
+                68,
+                104,
+                116,
+                24,
+                34,
+                320,
+                7902,
                 106,
                 10,
                 26,
@@ -2257,39 +2834,42 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 6,
                 6,
                 6,
+                2,
+                275,
+                1,
+                12,
+                16,
+                28,
+                30,
+                28,
+                2,
+                44,
+                12,
+                106,
+                28,
+                20,
+                24,
+                48,
+                74,
+                72,
+                20,
+                32,
+                320,
             ],
         )
         self.assertEqual(
             [region["address_status"] for region in regions],
             [
-                "official_blob",
-                *(["generated_source_entry_replacement"] * 12),
-                "official_blob",
-                "generated_source_entry_replacement",
-                "official_blob",
-                "generated_source_entry_replacement",
-                "official_blob",
-                "generated_source_entry_replacement",
-                "generated_source_entry_replacement",
-                "official_blob",
-                *(["generated_source_entry_replacement"] * 2),
-                "official_blob",
-                *(["generated_source_entry_replacement"] * 9),
-                "official_blob",
-                "generated_source_entry_replacement",
-                "official_blob",
-                *(["generated_source_entry_replacement"] * 2),
-                "official_blob",
-                "generated_source_entry_replacement",
-                "official_blob",
-                "generated_source_entry_replacement",
-                "official_blob",
-                "generated_alignment",
-                *(["source_compiled"] * 10),
-                "generated_alignment",
-                *(["source_compiled"] * 10),
-                "source_compiled",
-                "source_compiled",
+                (
+                    "official_blob"
+                    if region["name"].startswith("opaque_")
+                    else "generated_source_entry_replacement"
+                    if region["name"].endswith("_source_redirect")
+                    else "generated_alignment"
+                    if "alignment_padding" in region["name"]
+                    else "source_compiled"
+                )
+                for region in regions
             ],
         )
 
@@ -2677,7 +3257,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
     def test_easylogger_relocated_leaf_config_report_and_artifact_are_exact(
         self,
     ) -> None:
-        self.assertEqual(len(self.config["relocated_leaves"]), 15)
+        self.assertEqual(len(self.config["relocated_leaves"]), 33)
         expected = {
             "open_cfw_easylogger_helpers_get_logger": {
                 "source": (
@@ -2942,10 +3522,10 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             manifest_override["provider"]["profiles"]["linux-clang"],
             {
-                "size": 149262,
+                "size": 150456,
                 "sha256": (
-                    "fc3d07c8a59e1c33f26965cdb188811"
-                    "4412c3ca671d6137f7c3166acc81c8d74"
+                    "df6ec98c263e1e5d4f16244af450171"
+                    "e149be673eb0347f076f997b8de326187"
                 ),
             },
         )

@@ -1,6 +1,6 @@
 # Cordio HCI PHY-command recovery
 
-Status date: 2026-08-09  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -40,4 +40,26 @@ python3 tools/analyze_g2_cordio_hci_cmd_phy.py --json
 python3 -m unittest tests.test_analyze_g2_cordio_hci_cmd_phy
 ```
 
-No production bytes are replaced yet.
+## Production admission
+
+All three Apache-2.0 wrappers are maintained in
+`components/shared/cordio/runtime_cordio_hci_cmd_phy.c`. The implementation
+uses explicit little-endian stores for the exact public r20.05c payloads and
+returns without sending when command allocation fails. Host tests cover all
+three commands and allocation failure; the full translation unit and each API
+compile for Cortex-M55.
+
+The sole linked entry, `HciLeSetPhyCmd`, is production-routed by one guarded
+redirect. Its 74 stock body bytes are replaced by 60 compiled bytes under two
+strict relocations to the authenticated HCI command allocator and sender. The
+read-PHY and set-default-PHY APIs remain source-owned and target-compiled
+without inventing stock routes.
+
+The canonical build now has a 365,508-byte overlay and 3,888,904-byte Apollo
+component. The 4,667,398-byte package has SHA-256
+`30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf`;
+the 3,808,528-byte flash plan has 5,477 placed, two unresolved, five
+container-only, and six protected regions. `make cordio-hci-cmd-phy-closure`
+reproduces the software gate. Live PHY negotiation remains blocked by
+unavailable authorized responsive G2/EM9305 physical evidence. No image was
+signed, installed, or flashed; the wider HCI family remains a software gap.

@@ -12,8 +12,10 @@ to `b45dd5bb498ca7f31fc5c60b4eea5571d0a3a76b279d93831641302c463674de`.
 Twenty-nine direct calls, fifteen aligned stored entry pointers, and zero
 strict-interior pointers close ingress. No API is source-only.
 
-This remains an identification result. No stock byte is replaced by
-production source.
+All sixteen definitions are now implemented and production-routed. Fourteen
+guarded redirects plus two exact two-byte copies cover all 484 stock body
+bytes with 524 compiled Cortex-M55 bytes plus 20 alignment bytes under two
+strict relocations.
 
 ## Exact R4.4.1 data fingerprint
 
@@ -96,6 +98,32 @@ Reproduce the local and returned-evidence checks with:
 python3 tools/analyze_g2_cordio_dm_main.py --json
 python3 tools/verify_research_corpus.py --json
 ```
+
+## Production admission
+
+`runtime_cordio_dm_main.c` owns the complete router surface. Production uses
+the authenticated 90-byte HCI route table and 184-byte event-size table at
+their retained addresses, the 21-entry interface table at `0x20000694`, and
+the recovered `dmCb` offsets. The implementation rejects null events,
+out-of-range HCI events and components (including stock route value 22),
+reset-gated traffic, malformed advertising elements, null callbacks, and the
+undersized LESC receive-ACL case without unsigned underflow.
+
+Host tests cover HCI and WSF routing, reset gating, component 3 forwarding,
+registration/error callbacks at the 69-byte LESC boundary, advertising data,
+handler initialization, privacy/address translation, all event-size bounds,
+and one/two/three-PHY indexing. The full module and all sixteen isolated
+Cortex-M55 profiles compile with warnings as errors. Exact patch routing,
+component ownership, manifest tiling, deterministic package, and flash-plan
+gates pass.
+
+The canonical overlay/component/package sizes are 357,938 / 3,881,334 /
+4,659,828 bytes. The 3,618,112-byte flash plan has 5,204 placed, two
+unresolved, five container-only, and six protected regions. No image was
+signed, flashed, or installed. Live HCI event ordering, reset-time controller
+behavior, LESC/controller sizing, peer exchange, RF/timing, and paired-temple
+interoperability remain blocked by unavailable authorized responsive
+G2/EM9305 physical evidence.
 
 The next linked dependency is `dm_priv.c`, adjacent near
 `[0x004D2544,0x004D293C)`, which owns component ID 6. The Ambiq HCI event port

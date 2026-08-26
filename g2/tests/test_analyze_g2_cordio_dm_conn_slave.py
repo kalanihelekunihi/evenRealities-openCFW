@@ -33,7 +33,13 @@ class DmConnSlaveTest(unittest.TestCase):
         self.assertEqual(report["architecture"]["l2c_update_confirm_event"], 0x73)
         self.assertTrue(report["architecture"]["separate_update_component"])
         self.assertEqual(report["architecture"]["update_executor"], "dmConnUpdExecute")
-        self.assertEqual(report["build_readiness"]["status"], "deferred")
+        self.assertEqual(report["build_readiness"]["status"], "target-compiled")
+        production=report["production"]
+        self.assertEqual(production["status"],"production-routed")
+        self.assertEqual((production["redirected_stock_functions"],production["redirected_stock_bytes"]),(5,206))
+        self.assertEqual((production["source_owned_bytes_added"],production["alignment_bytes_added"],production["strict_relocations"]),(256,6,7))
+        self.assertEqual(production["manifest_regions"],13)
+        self.assertEqual(production["flash_plan_counts"],(5576,2,5,6))
 
 
 if __name__ == "__main__":

@@ -15,6 +15,16 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_dm_conn.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_dm_conn.h"
+DM_DEV_HEADER = ROOT / "components/shared/cordio/runtime_cordio_dm_conn_dm_dev.h"
+WSF_MSG_HEADER = ROOT / "components/shared/cordio/runtime_cordio_dm_conn_wsf_msg.h"
+RUNTIME_TEST = ROOT / "tests/test_runtime_cordio_dm_conn.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 LOAD_BASE = 0x00437FE0
 IMAGE_BYTES = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -177,6 +187,18 @@ EXPECTED_ENTRY_POINTERS = {
 }
 EXPECTED_UNALIGNED_ACCIDENTALS = {0x006448D7: 0x004B6C00}
 
+PRODUCTION_FILES = {
+    SOURCE: (57_608, "dddabc1e01fffd815f1e496ea8a50927dd62a8ef01b15a944312cf3cc2110437"),
+    HEADER: (1_232, "6a4d0cd43f27a39934de68c56f4ed750ac941b5a82290af7f68bcc18ef3ac7fe"),
+    DM_DEV_HEADER: (5_940, "a8bd504dfeae6b7d450a3512b6af3801201c56235f7b8ca2bb40cd9652d05e90"),
+    WSF_MSG_HEADER: (5_294, "3b0b6fd4a07b3b98ff4463c2e570da2e4b2d3dfaef5c161c12be838002aa058b"),
+    RUNTIME_TEST: (10_450, "d7941f51e9779b266307b7efdbbd1ff812c0a06a794e26d0d68b1ce0fb8ba54b"),
+}
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
+
 SOURCE_ONLY = [
     "DmReadRemoteVerInfo", "DmExtConnSetScanInterval",
     "DmExtConnSetConnSpec", "DmWriteAuthPayloadTimeout",
@@ -242,6 +264,130 @@ def _verify_entry_pointers(blob: bytes) -> None:
             found[LOAD_BASE + offset] = value
     if found != EXPECTED_ENTRY_POINTERS | EXPECTED_UNALIGNED_ACCIDENTALS:
         raise AuditError("DM connection stored entry/interior pointer closure changed")
+
+
+def _verify_file(path: Path, expected: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), _sha256(data)) != expected:
+        raise AuditError(f"{label} changed")
+
+
+def _verify_production() -> dict[str, Any]:
+    for path, expected in PRODUCTION_FILES.items():
+        _verify_file(path, expected, f"DM connection production input {path.name}")
+
+    names = [name for name, _start, _end, _hash in FUNCTIONS]
+    source_path = SOURCE.relative_to(ROOT).as_posix()
+    config = json.loads(CONFIG.read_text())
+    if (
+        config.get("expected", {}).get("overlay_size") != PRODUCTION_OVERLAY[0]
+        or config.get("expected", {}).get("overlay_sha256") != PRODUCTION_OVERLAY[1]
+        or config.get("expected", {}).get("component_size") != PRODUCTION_COMPONENT[0]
+        or config.get("expected", {}).get("component_sha256") != PRODUCTION_COMPONENT[1]
+    ):
+        raise AuditError("DM connection production aggregate pins changed")
+
+    leaves = [
+        row for row in config.get("relocated_leaves", [])
+        if row.get("source", {}).get("path") == source_path
+    ]
+    if [row.get("function") for row in leaves] != names:
+        raise AuditError("DM connection production leaf inventory changed")
+    if any(
+        row.get("strict_relocation_contract") is not True
+        or row.get("allow_discarded_alloc_sections") is not True
+        for row in leaves
+    ):
+        raise AuditError("DM connection whole-translation-unit policy changed")
+
+    sites = [
+        row for row in config.get("patch_sites", [])
+        if row.get("name", "").startswith("replace_cordio_dm_conn_core_")
+    ]
+    if len(sites) != len(FUNCTIONS):
+        raise AuditError("DM connection production route count changed")
+    for index, ((name, start, end, expected_hash), site) in enumerate(
+        zip(FUNCTIONS, sites), 1
+    ):
+        expected_branch = "copy" if index in (10, 16) else "b_w"
+        if site != {
+            "branch": expected_branch,
+            "expected_sha256": expected_hash,
+            "expected_size": end - start,
+            "name": f"replace_cordio_dm_conn_core_{index:02d}",
+            "profiles": ["apple-clang"],
+            "runtime_address": start,
+            "target_function": name,
+        }:
+            raise AuditError(f"DM connection production route changed: {name}")
+
+    report = json.loads(BUILD_REPORT.read_text())
+    built = [
+        row for row in report.get("relocated_leaves", [])
+        if row.get("source", {}).get("path") == source_path
+    ]
+    metrics = (
+        len(built),
+        sum(row["extraction"]["size"] for row in built),
+        sum(row["placement"]["padding_before"] for row in built),
+        sum(row["extraction"]["relocation_count"] for row in built),
+    )
+    if metrics != (57, 4_540, 54, 92):
+        raise AuditError("DM connection production leaf metrics changed")
+    if (
+        (report["overlay"]["size"], report["overlay"]["sha256"])
+        != PRODUCTION_OVERLAY
+        or (report["component"]["size"], report["component"]["sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("DM connection production build changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    provider = override["provider"]
+    if (provider.get("size"), provider.get("sha256")) != PRODUCTION_COMPONENT:
+        raise AuditError("DM connection production provider changed")
+    regions = [
+        row for row in override["regions"]
+        if row["name"].startswith("cordio_dm_conn_core_")
+    ]
+    statuses = {
+        status: sum(row["address_status"] == status for row in regions)
+        for status in (
+            "generated_source_entry_replacement",
+            "source_compiled",
+            "generated_alignment",
+        )
+    }
+    if len(regions) != 141 or statuses != {
+        "generated_source_entry_replacement": 57,
+        "source_compiled": 57,
+        "generated_alignment": 27,
+    }:
+        raise AuditError("DM connection production manifest ownership changed")
+
+    _verify_file(PACKAGE, PRODUCTION_PACKAGE, "DM connection package")
+    _verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN, "DM connection flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions",
+        "container_only_regions", "protected_regions",
+    ))
+    if counts != (5_863, 2, 5, 6):
+        raise AuditError("DM connection flash-plan counts changed")
+    return {
+        "status": "production-routed",
+        "production_owned_stock_functions": 57,
+        "guarded_redirects": 55,
+        "exact_in_place_copies": 2,
+        "production_owned_stock_bytes": 6_216,
+        "source_owned_bytes_added": 4_540,
+        "alignment_bytes_added": 54,
+        "strict_relocations": 92,
+        "manifest_regions": 141,
+        "source_only_functions_compiled": 5,
+        "flash_plan_counts": counts,
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict[str, Any]:
@@ -358,10 +504,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "valid_non_vacuous_closures": 2,
             "linked_unresolved_symbols": 0,
         },
-        "production": {
-            "source_owned_bytes_added": 0,
-            "status": "identified and build-ready oracle; stock retained pending exact IAR/logger/placement/relocation closure",
-        },
+        "production": _verify_production(),
     }
 
 

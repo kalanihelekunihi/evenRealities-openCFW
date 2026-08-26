@@ -34,8 +34,28 @@ The fail-closed reproducer is
 [`../../tools/analyze_g2_cordio_dm_conn_sm.py`](../../tools/analyze_g2_cordio_dm_conn_sm.py).
 It authenticates the official firmware, body, pool, retained path, state
 table, callers, all 90 direct logger relocations, literal cells, and action
-tables. This work adds no production-owned implementation bytes.
+tables.
 
-The adjacent `dm_dev.c` tranche is now independently closed. Continue with
-`dm_dev_priv.c`, then `dm_main.c`, to bind the privacy-event consumer and the
-global component-interface initialization/dispatch path.
+## Production admission
+
+`runtime_cordio_dm_conn_sm.c` now owns the executable dispatcher. One guarded
+redirect replaces all 1,598 stock function bytes with 120 compiled Cortex-M55
+bytes under two strict relocations. The implementation masks the event to
+three bits, validates the five-state CCB before table access, writes the next
+state before action dispatch, validates all three action-set pointers and their
+6/2/4 member bounds, and falls back to the authenticated no-action provider.
+The exact 80-byte r20 transition table and 58-byte TU pool remain retained,
+authenticated constant data rather than executable software gaps.
+
+The host oracle exhaustively runs all 40 state/event transitions and exercises
+null CCB/message, invalid state, absent action-set, and absent action-pointer
+paths. Full and selector-isolated Cortex-M55 builds, exact routing, component,
+manifest, deterministic package, and flash-plan checks pass. The canonical
+overlay/component/package sizes are 357,394 / 3,880,790 / 4,659,284 bytes;
+the 3,586,814-byte flash plan has 5,160 placed, two unresolved, five
+container-only, and six protected regions.
+
+No image was signed, flashed, or installed. Live connection establishment,
+controller completion, role-action timing, cancellation, disconnect, and
+paired-temple behavior remain blocked by unavailable authorized responsive
+G2/EM9305 physical evidence.

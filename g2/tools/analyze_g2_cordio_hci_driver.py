@@ -21,11 +21,40 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/ambiq-cordio-hci-driver-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/ambiq-cordio-hci-driver-provenance.tsv"
 CLOSURE = ROOT / "tools/manifests/ambiq-cordio-hci-driver-closure.tsv"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_hci_driver.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_hci_driver.h"
+RUNTIME_TEST = ROOT / "tests/test_runtime_cordio_hci_driver.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 PINNED_INPUTS = {
     FUNCTION_MAP: "b73d0db7738d02d2bfc905a4789453813a72c25209dddfd1d0a077baa76d7bea",
     PROVENANCE: "7fd0c165f0db657fda590aaf03abd2e00b09e7f36106358673e3dc498125bc99",
     CLOSURE: "77c90fe45ef47c920512685a169af5f86d49c5929ca120d6630ff6b1b01e9eed",
 }
+PRODUCTION_FILES = {
+    SOURCE: (15_200, "90aa04c8db92a39a2fbac644c4e5579207dec732389ad9b7b4b2b3e7d803f825"),
+    HEADER: (1_210, "5d13125bd18a299d498849b1a7fe2d0ad2fa45b642ab8128db633165d65afed7"),
+    RUNTIME_TEST: (9_278, "d038d921794079cb81001f138c3aee242d8e137653c16f7b2c5be214fd61f4f7"),
+}
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
+CONFIG_LEAF_CONTRACT_SHA256 = "8c95bf0cc886cbbc4d3e495fd59b65ee7e80622bdce2e6713b0a09cbe54d7230"
+BUILD_LEAF_CONTRACT_SHA256 = "9f0bc892bd03908175e8297e63c302b1d6a62f0456f4166557eb1d3e00d088a7"
+ROUTE_CONTRACT_SHA256 = "ba3887f7781d10a832abb5b077fdfab0e46f02ddf4eae6071d6941932a938daf"
+ROUTED_FUNCTIONS = {
+    "error_check", "hciDrvWrite", "HciDrvHandlerInit", "HciDrvIntService",
+    "HciVscUpdateNvdsParam", "HciVscSetRfPowerLevelEx",
+    "HciVscSetCustom_BDAddr", "HciVscUpdateBDAddress", "HciDrvEmptyWriteQueue",
+}
+HARDWARE_EVIDENCE_BLOCKED = [
+    "HciDrvRadioBoot", "HciDrvRadioShutdown", "HciDrvHandler",
+    "HciVscConstantTransmission", "HciVscCarrierWaveMode", "HciDrvBleSleepSet",
+]
 
 MAIN_START = 0x004B48A6
 MAIN_END = 0x004B4D2C
@@ -101,6 +130,128 @@ def load_decoder():
 
 def packed_pairs_digest(pairs: list[tuple[int, int]]) -> str:
     return sha256(b"".join(struct.pack("<II", *pair) for pair in pairs))
+
+
+def verify_file(path: Path, expected: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), sha256(data)) != expected:
+        raise AuditError(f"{label} changed")
+
+
+def verify_production() -> dict:
+    for path, expected in PRODUCTION_FILES.items():
+        verify_file(path, expected, f"HCI driver input {path.name}")
+
+    config = json.loads(CONFIG.read_text())
+    expected = config["expected"]
+    if (
+        (expected["overlay_size"], expected["overlay_sha256"]) != PRODUCTION_OVERLAY
+        or (expected["component_size"], expected["component_sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("HCI driver aggregate pins changed")
+    leaves = [
+        row for row in config["relocated_leaves"]
+        if row.get("source", {}).get("path")
+        == "components/shared/cordio/runtime_cordio_hci_driver.c"
+    ]
+    if len(leaves) != 9 or {row["function"] for row in leaves} != ROUTED_FUNCTIONS:
+        raise AuditError("HCI driver routed leaf inventory changed")
+    if any(
+        row.get("strict_relocation_contract") is not True
+        or row.get("allow_discarded_alloc_sections") is not True
+        for row in leaves
+    ):
+        raise AuditError("HCI driver strict-routing policy changed")
+    config_contract = sorted(
+        (row["function"], row["expected"]["size"], len(row["relocations"]))
+        for row in leaves
+    )
+    if sha256(json.dumps(config_contract, separators=(",", ":")).encode()) \
+            != CONFIG_LEAF_CONTRACT_SHA256:
+        raise AuditError("HCI driver leaf configuration changed")
+
+    sites = [
+        row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_hci_driver_")
+    ]
+    if len(sites) != 9 or sum(row["expected_size"] for row in sites) != 368:
+        raise AuditError("HCI driver routes changed")
+    if any(row["branch"] != "b_w" for row in sites):
+        raise AuditError("HCI driver route is not guarded")
+    route_contract = sorted(
+        (row["target_function"], row["expected_size"], row["branch"])
+        for row in sites
+    )
+    if sha256(json.dumps(route_contract, separators=(",", ":")).encode()) \
+            != ROUTE_CONTRACT_SHA256:
+        raise AuditError("HCI driver route contract changed")
+
+    report = json.loads(BUILD_REPORT.read_text())
+    built = {
+        row["extraction"]["function"]: row
+        for row in report["relocated_leaves"]
+        if row.get("source", {}).get("path")
+        == "components/shared/cordio/runtime_cordio_hci_driver.c"
+    }
+    if len(built) != 9:
+        raise AuditError("HCI driver build inventory changed")
+    build_contract = sorted(
+        (function, row["extraction"]["size"],
+         row["extraction"]["relocation_count"], row["placement"]["padding_before"])
+        for function, row in built.items()
+    )
+    if sha256(json.dumps(build_contract, separators=(",", ":")).encode()) \
+            != BUILD_LEAF_CONTRACT_SHA256:
+        raise AuditError("HCI driver production build changed")
+    if (
+        (report["overlay"]["size"], report["overlay"]["sha256"])
+        != PRODUCTION_OVERLAY
+        or (report["component"]["size"], report["component"]["sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("HCI driver build aggregate changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (override["provider"].get("size"), override["provider"].get("sha256")) \
+            != PRODUCTION_COMPONENT:
+        raise AuditError("HCI driver provider changed")
+    regions = [
+        row for row in override["regions"]
+        if row["name"].startswith("cordio_hci_driver_")
+    ]
+    if len(regions) != 25:
+        raise AuditError("HCI driver manifest regions changed")
+    verify_file(PACKAGE, PRODUCTION_PACKAGE, "HCI driver package")
+    verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN, "HCI driver flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions",
+        "container_only_regions", "protected_regions",
+    ))
+    if counts != (5_863, 2, 5, 6):
+        raise AuditError("HCI driver flash-plan counts changed")
+    return {
+        "status": "software-complete-hardware-validation-blocked",
+        "source_inventory_compiled": 16,
+        "redirected_stock_functions": 9,
+        "redirected_stock_bytes": 368,
+        "source_owned_bytes_added": 472,
+        "alignment_bytes_added": 14,
+        "strict_relocations": 7,
+        "source_only_functions_compiled": 4,
+        "manifest_regions": len(regions),
+        "flash_plan_counts": counts,
+        "remaining_unimplemented_software_functions": 0,
+        "hardware_evidence_blocked_functions": HARDWARE_EVIDENCE_BLOCKED,
+        "retained_stock_hardware_functions": [
+            "HciDrvRadioBoot", "HciDrvRadioShutdown", "HciDrvHandler",
+        ],
+        "authorized_right_temple_available": False,
+        "production_hardware_substitution_validated": False,
+        "vendor_source_copied": False,
+    }
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -260,9 +411,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "license": "Ambiq BSD-3-Clause-style notice",
         },
         "production": {
-            "stock_bytes_replaced": 0,
-            "source_owned_bytes_added": 0,
-            "vendor_source_copied": False,
+            **verify_production(),
         },
     }
 
@@ -276,7 +425,10 @@ def main() -> int:
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
-        print("Ambiq Apollo3 HCI driver closed: 12 linked / 4 source-only; mixed lineage pinned")
+        print(
+            "Ambiq Apollo3 HCI driver: all 16 APIs compile; 9 safe routes active; "
+            "6 hardware paths evidence-blocked"
+        )
     return 0
 
 

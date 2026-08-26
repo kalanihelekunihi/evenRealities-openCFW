@@ -46,23 +46,27 @@ class CordioWstrAuditTests(unittest.TestCase):
         self.assertFalse(self.report["lineage"]["release_discriminator"])
         self.assertFalse(self.report["lineage"]["proprietary_source_copied"])
         self.assertEqual(self.report["source_inventory"]["dead_stripped"], ["WstrnCpy"])
-        self.assertEqual(self.report["candidate"]["production"], "excluded")
+        self.assertEqual(self.report["candidate"]["production"], "routed")
+        self.assertEqual(
+            (
+                self.report["candidate"]["compiled_text_bytes"],
+                self.report["candidate"]["alignment_bytes"],
+                self.report["candidate"]["strict_relocations"],
+                self.report["candidate"]["guarded_redirects"],
+            ),
+            (286, 2, 0, 2),
+        )
         matrix = self.report["compiler_matrix"]
         self.assertEqual((matrix["compiler_profiles"], matrix["comparison_rows"]), (13, 26))
         self.assertEqual((matrix["raw_matches"], matrix["strict_normalized_matches"]), (0, 0))
         self.assertEqual(matrix["best_common_absolute_size_delta"], 10)
 
-    def test_candidate_is_absent_from_production_inputs(self) -> None:
+    def test_candidate_is_present_in_production_inputs(self) -> None:
         needle = "runtime_cordio_wstr_candidate"
-        for relative in (
-            "components/apollo_main/core_overlay/build_component.py",
-            "components/apollo_main/core_overlay/overlay.json",
-            "components/apollo_main/ring_gesture/build_component.py",
-            "components/apollo_main/ring_gesture/overlay.json",
-            "components/bootloader/core_overlay/build_component.py",
-            "components/bootloader/core_overlay/overlay.json",
-        ):
-            self.assertNotIn(needle, (ROOT / relative).read_text())
+        self.assertIn(
+            needle,
+            (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text(),
+        )
 
     def test_cli_json(self) -> None:
         parsed = json.loads(subprocess.run(

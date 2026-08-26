@@ -51,5 +51,25 @@ ingress. The full source/body ledger is
 `tools/manifests/packetcraft-cordio-attc-read-function-map.tsv`; provenance is
 recorded in `tools/manifests/packetcraft-cordio-attc-read-provenance.tsv`.
 
-This tranche changes provenance only: zero stock bytes are replaced and zero
-source-owned production bytes are added.
+## Production replacement
+
+`components/shared/cordio/runtime_cordio_attc_read.c` maintains all seven
+source definitions. Four guarded redirects replace the complete 414-byte
+linked stock body set with 440 compiled Cortex-M55 bytes plus two alignment
+bytes under four strict relocations. The three dead-stripped long-read,
+multiple-read, and group-type APIs are independently target-compiled without
+inventing stock coverage. The maintained response parser also rejects a
+trailing partial handle pair before decoding it, closing the public source's
+out-of-bounds-read defect while preserving its invalid-response result.
+
+Host execution covers ordered and malformed Find By Type responses,
+continuation and next-handle state, per-bearer Read Long MTU behavior, and all
+five request encoders. The canonical overlay is 347,724 bytes, SHA-256
+`c1c193e775b15c5fe26dbb59eb56ec742828045fc69eaa721fe135c4314c6f5f`;
+the Apollo component is 3,871,120 bytes, SHA-256
+`ba1ee7f52a5bba817c2e8509721cde444328327e78a8e8e332ea09d7ce412c0f`;
+and the deterministic package is 4,649,614 bytes, SHA-256
+`a7d2627341cd8603e607a37c19d70ed42f7f5ba501fb6c76826664cb322de06d`.
+Live ATT peer, controller, negotiated-MTU, continuation, and buffer-lifetime
+validation remains blocked by unavailable authorized responsive G2/EM9305
+physical evidence. No image was signed, flashed, or installed.

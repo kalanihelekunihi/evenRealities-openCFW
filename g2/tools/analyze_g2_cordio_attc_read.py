@@ -20,6 +20,12 @@ IMAGE_BYTES = 3_523_396
 IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 MAP = ROOT / "tools/manifests/packetcraft-cordio-attc-read-function-map.tsv"
 PINS = {
+    ROOT / "components/shared/cordio/runtime_cordio_attc_read.c": (
+        "197421e5d0c6c8872889fc9707d5e4bf51853e0927af8dad6cd454c637448b87"
+    ),
+    ROOT / "components/shared/cordio/runtime_cordio_attc_read.h": (
+        "85a626ebe42abad6fc7eea0223a357edd7bba0a97448e101792391cc5749283d"
+    ),
     MAP: "31879310a701f02ae0e7978970baf2caeb7c90bf1d7c937cdf5b61b55c3ecb0f",
     ROOT / "tools/manifests/packetcraft-cordio-attc-read-provenance.tsv": (
         "4507932bdb8da38bef00e93ee9f37500a982655f40f8d58cca01bf14d5c6f64f"
@@ -31,6 +37,22 @@ CALLS = {
     "AttcFindByTypeValueReq": [0x56BF2C],
     "AttcReadByTypeReq": [0x533840, 0x56C1D4],
 }
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_attc_read.c"
+CANDIDATE_FUNCTIONS = [
+    "open_cfw_cordio_attc_process_find_by_type_response",
+    "open_cfw_cordio_attc_process_read_long_response",
+    "open_cfw_cordio_attc_find_by_type_value_request",
+    "open_cfw_cordio_attc_read_by_type_request",
+]
+CANDIDATE_METRICS = [
+    (347284, 136, 0), (347420, 40, 0),
+    (347460, 140, 2), (347600, 124, 2),
+]
 
 
 def sha(data: bytes) -> str:
@@ -143,6 +165,85 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if inside:
         raise RuntimeError("stored strict-interior pointer found")
 
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves_by_function = {
+        row["function"]: row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == CANDIDATE_SOURCE_PATH
+    }
+    if set(leaves_by_function) != set(CANDIDATE_FUNCTIONS):
+        raise RuntimeError("attc_read production leaf inventory changed")
+    source_hash = PINS[ROOT / CANDIDATE_SOURCE_PATH]
+    leaves = []
+    for function, metrics in zip(CANDIDATE_FUNCTIONS, CANDIDATE_METRICS):
+        leaf = leaves_by_function[function]
+        actual = (
+            leaf["expected"]["offset"], leaf["expected"]["size"],
+            len(leaf["relocations"]),
+        )
+        if actual != metrics or leaf["source"].get("sha256") != source_hash:
+            raise RuntimeError(f"attc_read production leaf changed: {function}")
+        leaves.append(leaf)
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, (function, (name, start, end, expected)) in enumerate(
+        zip(CANDIDATE_FUNCTIONS, linked), 1
+    ):
+        site = sites.get(f"replace_cordio_attc_read_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or function not in overlay["functions"]
+        ):
+            raise RuntimeError(f"attc_read production route changed: {name}")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = leaves[0]["expected"]["offset"] - 347282
+    alignment += sum(
+        right["expected"]["offset"]
+        - left["expected"]["offset"] - left["expected"]["size"]
+        for left, right in zip(leaves, leaves[1:])
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (440, 2, 4):
+        raise RuntimeError("attc_read production metrics changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"]
+        != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"]
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256")
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([
+            row for row in override["regions"]
+            if row["name"].startswith("cordio_attc_read_")
+        ]) != 9
+    ):
+        raise RuntimeError("attc_read component/manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or sha(PACKAGE.read_bytes())
+        != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise RuntimeError("attc_read package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or sha(FLASH_PLAN.read_bytes())
+        != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise RuntimeError("attc_read flash plan changed")
+
     return {
         "schema_version": 1,
         "module": {
@@ -175,7 +276,22 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "historical_generating_commit_resolved": False,
             "discriminator": "per-bearer Read Long MTU access introduced with the r20 EATT architecture",
         },
-        "production": {"stock_bytes_replaced": 0, "source_owned_bytes_added": 0},
+        "production": {
+            "status": "routed",
+            "linked_functions": 4,
+            "source_functions": 7,
+            "stock_bytes_replaced": 414,
+            "source_owned_bytes_added": compiled,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": 4,
+            "source_only_public_helpers": source_only,
+            "truncated_pair_guard": True,
+            "hardware_validation": (
+                "blocked by unavailable authorized responsive G2/ATT peer evidence"
+            ),
+        },
     }
 
 

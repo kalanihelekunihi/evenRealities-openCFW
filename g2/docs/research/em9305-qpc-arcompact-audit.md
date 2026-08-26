@@ -1,7 +1,9 @@
 # EM9305 QP/C ARCompact provenance audit
 
 Status: family, QP/C 6.5.1, compiler, portable bodies, QK SWI port, and complete
-cluster ownership proven; source replacement not yet integrated.
+cluster ownership proven. The exact official GPL-3.0-or-later portable sources
+and recovered EM9305 configuration are now maintained and host-compile clean;
+target replacement remains blocked by an unavailable reviewed ARC compiler.
 
 ## Result
 

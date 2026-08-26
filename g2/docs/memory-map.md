@@ -57,7 +57,28 @@ The reviewed order is:
 | `0x00410DE8` | `0x00410DEE` | 6 B | Source-replaced bootloader littlefs v2.10.1 `lfs_alloc_ckpoint` | Exact upstream leaf; generated `B.W` plus NOP fill |
 | `0x00410DEE` | `0x00410DFE` | 16 B | Source-replaced bootloader littlefs v2.10.1 `lfs_alloc_drop` | Exact upstream allocator-state restore leaf |
 | `0x00410DFE` | `0x00410E36` | 56 B | Source-replaced bootloader littlefs v2.10.1 `lfs_alloc_lookahead` | Exact complete callback span redirected to source |
-| `0x00410E36` | `0x00417AD4` | 27,806 B | Even bootloader before the EasyLogger helper boundary | Official compatibility bytes retained |
+| `0x00410E36` | `0x00415590` | 18,266 B | Even bootloader before the S200 redirect initializer | Official compatibility bytes retained |
+| `0x00415590` | `0x004155E8` | 88 B | Source-replaced S200 bootloader `redirect_init` | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x004155E8` | `0x0041560C` | 36 B | Even bootloader literal/alignment pool after `redirect_init` | Official compatibility bytes retained |
+| `0x0041560C` | `0x00415672` | 102 B | Source-replaced Arm EABI byte-fill primitive | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x00415672` | `0x0041568C` | 26 B | Unreferenced bootloader buffered-byte writer | Official compatibility bytes retained; zero authenticated ingress |
+| `0x0041568C` | `0x00415732` | 166 B | Source-replaced Arm EABI forward-copy primitive | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x00415732` | `0x00415758` | 38 B | Bootloader semihost/runtime seam before byte comparison | Official compatibility bytes retained |
+| `0x00415758` | `0x004157C0` | 104 B | Source-replaced bounded byte comparison | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x004157C0` | `0x004157F8` | 56 B | Source-replaced reflected CRC-32 updater | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x004157F8` | `0x0041581A` | 34 B | Source-replaced reject-set string span (`strcspn`) | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x0041581A` | `0x0041583C` | 34 B | Source-replaced accept-set string span (`strspn`) | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x0041583C` | `0x00415844` | 8 B | Source-replaced SRAM-word setter for `0x200270CC` | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x00415844` | `0x00415900` | 188 B | Source-replaced unsigned 64-bit divide-by-ten helper | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x00415900` | `0x00415924` | 36 B | Source-replaced unsigned decimal digit count | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x00415924` | `0x00415936` | 18 B | Source-replaced signed-magnitude decimal digit count | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x00415936` | `0x0041595C` | 38 B | Source-replaced hexadecimal digit count | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x0041595C` | `0x004159A0` | 68 B | Source-replaced optional-minus wrapping decimal parser | Generated redirect and NOP fill over the authenticated complete stock entry |
+| `0x004159A0` | `0x00415A08` | 104 B | Source-replaced unsigned 64-bit decimal output helper | Complete authenticated entry |
+| `0x00415A08` | `0x00415A7C` | 116 B | Source-replaced unsigned 64-bit hexadecimal output helper | Complete authenticated entry |
+| `0x00415A7C` | `0x00415A94` | 24 B | Source-replaced nullable string-length helper | Complete authenticated entry |
+| `0x00415A94` | `0x00415AB6` | 34 B | Source-replaced repeated-character output helper | Complete authenticated entry |
+| `0x00415AB6` | `0x00417AD4` | 8,222 B | Even bootloader float/format engine and gap before EasyLogger | Official compatibility bytes retained; software gap |
 | `0x00417AD4` | `0x00417B3E` | 106 B | Source-replaced EasyLogger `get_fmt_enabled` | Generated redirect and NOP fill |
 | `0x00417B3E` | `0x00417B48` | 10 B | EasyLogger punctuation/alignment gap | Official compatibility bytes retained |
 | `0x00417B48` | `0x00417B62` | 26 B | Source-replaced EasyLogger unsigned-argument predicate | Generated redirect and NOP fill |
@@ -93,7 +114,29 @@ The reviewed order is:
 | `0x004346F2` | `0x004346FC` | 10 B | littlefs v2.10.1 `lfs_tag_type1` | Relocation-free scalar source leaf |
 | `0x004346FC` | `0x00434702` | 6 B | littlefs v2.10.1 `lfs_tag_type3` | Relocation-free scalar source leaf |
 | `0x00434702` | `0x00434708` | 6 B | littlefs v2.10.1 `lfs_tag_id` | Relocation-free scalar source leaf |
-| `0x00434708` | `0x00438000` | 14,584 B | Free bootloader-partition headroom before Apollo main | Confirmed non-overlap |
+| `0x00434708` | `0x0043470E` | 6 B | littlefs v2.10.1 `lfs_tag_size` | Relocation-free scalar source leaf |
+| `0x0043470E` | `0x00434710` | 2 B | S200 redirect-initializer alignment | Generated zero padding |
+| `0x00434710` | `0x00434794` | 132 B | S200 bootloader `redirect_init` | Clean-room two-mutex initializer; strict calls to retained CMSIS/EasyLogger providers |
+| `0x00434794` | `0x00434823` | 143 B | S200 bootloader `redirect_init` diagnostic strings | Source-owned authenticated read-only-data closure |
+| `0x00434823` | `0x00434824` | 1 B | Arm EABI byte-fill alignment | Generated zero padding |
+| `0x00434824` | `0x00434830` | 12 B | Arm EABI byte-fill primitive | Clean-room relocation-free C leaf |
+| `0x00434830` | `0x00434840` | 16 B | Arm EABI forward-copy primitive | Clean-room relocation-free C leaf |
+| `0x00434840` | `0x0043485C` | 28 B | Bounded byte comparison | Clean-room relocation-free C leaf |
+| `0x0043485C` | `0x0043487A` | 30 B | Reject-set string span (`strcspn`) | Clean-room relocation-free C leaf |
+| `0x0043487A` | `0x00434896` | 28 B | Accept-set string span (`strspn`) | Clean-room relocation-free C leaf |
+| `0x00434896` | `0x00434898` | 2 B | Reflected CRC-32 leaf alignment | Generated zero padding |
+| `0x00434898` | `0x004348C4` | 44 B | Reflected CRC-32 updater | Clean-room relocation-free bitwise C leaf |
+| `0x004348C4` | `0x004348D0` | 12 B | SRAM-word setter for `0x200270CC` | Clean-room relocation-free C leaf with inline address literal |
+| `0x004348D0` | `0x0043493A` | 106 B | Unsigned 64-bit divide-by-ten helper | Clean-room shift/add/correction C leaf; relocation-free |
+| `0x0043493A` | `0x00434956` | 28 B | Unsigned decimal digit count | Clean-room C leaf; strict call to source-owned divide-by-ten helper |
+| `0x00434956` | `0x0043496A` | 20 B | Signed-magnitude decimal digit count | Clean-room C leaf; strict tail call to unsigned counter |
+| `0x0043496A` | `0x00434982` | 24 B | Hexadecimal digit count | Clean-room relocation-free C leaf |
+| `0x00434982` | `0x004349B2` | 48 B | Optional-minus wrapping decimal parser | Clean-room relocation-free C leaf |
+| `0x004349B2` | `0x004349FC` | 74 B | Unsigned 64-bit decimal output helper | Clean-room C leaf; strict call to divide-by-ten helper |
+| `0x004349FC` | `0x00434A44` | 72 B | Unsigned 64-bit hexadecimal output helper | Clean-room relocation-free C leaf |
+| `0x00434A44` | `0x00434A58` | 20 B | Nullable string-length helper | Clean-room relocation-free C leaf |
+| `0x00434A58` | `0x00434A78` | 32 B | Null-output-aware repeated-character helper | Clean-room relocation-free C leaf |
+| `0x00434A78` | `0x00438000` | 13,704 B | Free bootloader-partition headroom before Apollo main | Confirmed non-overlap |
 | `0x00438000` | `0x00794324` | 3,523,364 B | Even main application blob | Confirmed by OTA preamble and bootloader installer |
 
 The canonical Ghidra discovery manifest tiles this entire half-open range into
@@ -3156,6 +3199,7 @@ zero bytes to the memory map.
 | Retained source path | `[0x006E0518,0x006E0574)` | 92 | NUL-terminated Ambiq `hci_evt.c` path |
 | `hciCb` | `0x20073870` | external | event/security callback ownership confirmed by field loads |
 | `hciEvtStats` | `0x20073BC0` | external | counter object; sole literal reference is in the TU tail |
+| Clean-room event leaves/alignment | `[0x007EFE9C,0x007F5AE0)` | 23,620 | 79 compiled leaves / 23,590 text bytes plus 30 alignment bytes; 52 strict relocations |
 
 The physical object hashes to
 `4d7dfa091432416e0eab04bedee540929d97fd640295906f64ce36ea71d85b2d`.
@@ -3163,6 +3207,13 @@ The parser and callback-size tables hash to `b61db547...fb60` and
 `72451d4e...3ef8`. Ten direct calls plus 74 stored parser cells close all
 linked entries; no aligned strict-interior pointer survives. `hciEvtGetStats`
 has no body before the next TU and owns no stock interval.
+
+All 79 stock entries are now source-routed: 78 guarded branches and the exact
+two-byte scan-timeout no-op copied in place. The canonical overlay ends at
+`0x007F5AE0`, leaving 34,080 bytes before the protected bootloader update
+record at `0x007FE000`. The overlay builder and package installer both enforce
+that exact boundary; the former conservative `0x007F0000` policy did not mark
+a physical object and is no longer used as the acceptance limit.
 
 ## Ambiq Cordio HCI core stock map
 
@@ -3188,11 +3239,14 @@ strict-interior pointer exists. `hciCoreTxAclDataFragmented` and
 | Stock `hci_core_ps.c` physical object | `[0x00530C00,0x00530D74)` | 372 | 9 linked functions / 360 code bytes; 12 literal bytes |
 | Owned literal pool | `[0x00530D68,0x00530D74)` | 12 | `hciCoreCb`, `hciCb`, and `hciCoreCb.bdAddr` |
 | `hciCoreCb.bdAddr` | `0x200714E0` | 6 | control-block offset `+0x68` |
+| Source leaves and alignment | `[0x007ED8AE,0x007EDAB6)` | 520 | 514 compiled bytes plus three two-byte alignment spans |
 
 The physical object hashes to
 `af477f877f3e5fff17af792d0e5cb5ac459bdbb84b784725d701bd911bfed904`.
 Twenty-one direct calls close all nine entries; no stored entry or strict-
-interior pointer survives. Eleven public getter definitions are source-only.
+interior pointer survives. Eleven public getter definitions are source-only
+and target-compile. All nine stock entries now guard-route to source leaves;
+the retained `hciCoreCb` and `hciCb` addresses remain the production ABI.
 
 ## Ambiq Cordio HCI transport stock map
 
@@ -3204,12 +3258,18 @@ interior pointer survives. Eleven public getter definitions are source-only.
 | RX packet/data pointers | `0x20074650`, `0x20074654` | 8 | allocation base and current write cursor |
 | RX count/state/type | `0x20074F30`, `0x20074FCE..0x20074FCF` | 4 | remaining count, state, and packet indicator |
 | Receive-in-progress flag | `0x20074FCD` | 1 | set from packet type through complete delivery |
+| Clean-room `hciTrSendAclData` | `0x007ED6E8` | 52 | source-compiled production leaf; one strict driver relocation |
+| Clean-room `hciTrSendCmd` | `0x007ED71C` | 32 | source-compiled production leaf; one strict driver relocation |
+| Clean-room `hciTrSerialRxIncoming` | `0x007ED73C` | 370 | source-compiled production leaf; four strict core/getter/allocator relocations |
 
 The physical object hashes to
 `89831c5be3644e40fe6007f24df12f2929d7ffe4ae525ab190e28e7d9e9fc069`.
 Four direct callers reach the three entries; six direct provider calls leave
 the TU. No stored entry or strict-interior pointer survives. The omitted
-`hciTrReceivingPacket` getter owns no stock interval.
+`hciTrReceivingPacket` getter owns no stock interval but remains in the
+maintained translation unit and target-compiles. Guarded redirects at all
+three stock entries route to the source leaves above; the seven retained SRAM
+cells remain the production ABI.
 
 ## Ambiq Cordio HCI command stock map
 
@@ -3630,3 +3690,43 @@ helpers.
 The three wrappers share the fixed CMSIS `KernelState` word at `0x20074384`.
 With the two writers admitted atomically, the linked wrapper object is fully
 source-owned: 38 public entries and five private helpers.
+
+## Cordio common HCI core replacement
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock linked bodies | 22 spans in `[0x0052A67C,0x0052AE38)` | 1,964 | Guarded redirects to maintained C |
+| Retained literal pool | `[0x0052AE14,0x0052AE24)` | 16 | Authenticated `hciCoreCb`, `hciCb`, feature, and CIS addresses |
+| Apple compiled leaves | overlay offsets `366484..370198` | 3,690 text + 26 alignment | Source-owned common HCI core |
+| Connection control block | `0x20071478` | 3 × 28-byte records | Authenticated production ABI |
+| CIS handle array | `0x200714CC` | 6 × 2-byte handles | Authenticated production ABI |
+
+The adjacent `hci_core_ps` routes remain independently source-owned. Prefix
+ownership is resolved by longest registered module prefix so synchronizing or
+re-promoting `hci_core` cannot remove `hci_core_ps` routes or regions.
+
+## Cordio vendor reset-sequence replacement
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock linked bodies | `[0x00569B04,0x00569D26)` | 546 | Four guarded redirects to clean-room C |
+| Retained pool | `[0x00569D26,0x00569D4C)` | 38 | Authenticated alignment and nine-word state/mask pool |
+| Apple compiled leaves | overlay offsets `370200..371066` | 862 text + 6 alignment | Source-owned reset/NVDS sequence |
+| Reset random counter | `0x20074FD0` | 1 | Four-command completion counter |
+
+The source uses the authenticated control blocks at `0x20071478` and
+`0x20073870`, the 64-bit feature configuration at `0x20000028`, and retained
+event-mask data at `0x0078D6DC..0x0078D6F4`.
+
+## Cordio HCI command replacement
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock linked command bodies | 50 spans in `[0x0052AE38,0x0052B8A4)` | 2,654 | Guarded redirects to clean-room C |
+| Retained alignment/literal island | `[0x0052B6AE,0x0052B6BC)` | 14 | Authenticated non-executable data |
+| Apple compiled leaves | overlay offsets `371068..375186` | 4,052 text + 68 alignment | Source-owned complete command layer |
+| Source-only command APIs | no stock interval | 22 functions | Maintained and Cortex-M55 target-compiled |
+
+The maintained layer preserves the authenticated `hciCmdCb` at `0x20073A90`
+and external `hciCb` at `0x20073870`. All linked executable spans in the stock
+object are source-owned; the retained 14 bytes are alignment/literal data.

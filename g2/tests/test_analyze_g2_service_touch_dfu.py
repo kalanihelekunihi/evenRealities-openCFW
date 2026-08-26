@@ -54,10 +54,20 @@ class AnalyzeG2ServiceTouchDfuTests(unittest.TestCase):
         self.assertEqual(len(lineage["path_pointer_cells"]), 3)
         self.assertEqual(len(lineage["exact_symbols"]), 12)
         self.assertIn("TouchUpdateFirmwareCheck", lineage["exact_symbols"])
-        self.assertEqual(lineage["source_inventory"], "unavailable")
-        self.assertEqual(lineage["license"], "unknown")
-        self.assertIsNone(self.report["production"]["candidate"])
-        self.assertFalse(self.report["production"]["production_routed"])
+        self.assertEqual(lineage["source_inventory"],
+                         "32-function clean-room production C")
+        self.assertEqual(lineage["historical_source_inventory"], "unavailable")
+        self.assertEqual(lineage["license"], "GPL-3.0-only")
+        production = self.report["production"]
+        self.assertTrue(production["candidate"].endswith("service_touch_dfu.c"))
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 6430)
+        self.assertEqual(production["compiled_text_bytes"], 3134)
+        self.assertEqual(production["generated_alignment_bytes"], 38)
+        self.assertEqual(production["strict_relocations"], 70)
+        self.assertEqual(production["guarded_redirects"], 32)
+        self.assertEqual(production["hardware_validation"],
+                         "blocked_unavailable_physical_evidence")
 
 
 if __name__ == "__main__":

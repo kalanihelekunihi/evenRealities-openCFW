@@ -21,9 +21,34 @@ IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 MAP = ROOT / "tools/manifests/packetcraft-cordio-atts-proc-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-atts-proc-provenance.tsv"
 PINS = {
+    ROOT / "components/shared/cordio/runtime_cordio_atts_proc.c": "f5c18fab93010ce9b4622cb01c40570893272d7461af783b941f3f815c5325c8",
+    ROOT / "components/shared/cordio/runtime_cordio_atts_proc.h": "c343157c286854f7a7dd70c0a897ba884f65d69afd2202fa3d3a3f3a09d2a0dc",
     MAP: "920f0ff707997c95a91fa1beca1e1488f6a7500a168d11d9e3323da7dd26939b",
     PROVENANCE: "9629db4789183df4010749b0a026fc277f028d9caee6aa3a76366cd96a0a511c",
 }
+
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_atts_proc.c"
+CANDIDATE_FUNCTIONS = [
+    "open_cfw_cordio_atts_uuid_compare",
+    "open_cfw_cordio_atts_uuid16_compare",
+    "open_cfw_cordio_atts_find_by_handle",
+    "open_cfw_cordio_atts_find_in_range",
+    "open_cfw_cordio_atts_permissions",
+    "open_cfw_cordio_atts_process_mtu_request",
+    "open_cfw_cordio_atts_process_find_information_request",
+    "open_cfw_cordio_atts_process_read_request",
+    "open_cfw_cordio_atts_process_read_multiple_variable_request",
+]
+CANDIDATE_LEAF_METRICS = [
+    (338340, 144, 2), (338484, 34, 1), (338520, 98, 0),
+    (338620, 176, 0), (338796, 108, 1), (338904, 150, 6),
+    (339056, 358, 7), (339416, 270, 5), (339688, 384, 6),
+]
 
 FUNCTIONS = {
     "attsUuidCmp": (0x0056C550, 0x0056C5AA, "4a1581656b586e2110bf6d5209430cee8b45da2b9b8744076c8a2618cdf132f6"),
@@ -184,6 +209,84 @@ def analyze(image_path: Path = IMAGE) -> dict:
         if decoder._thumb_bl_target(blob, address) in interiors:
             raise AuditError("unexpected direct BL into atts_proc interior")
 
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves_by_function = {
+        row["function"]: row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == CANDIDATE_SOURCE_PATH
+    }
+    if set(leaves_by_function) != set(CANDIDATE_FUNCTIONS):
+        raise AuditError("ATTS proc production leaf inventory changed")
+    source_hash = PINS[ROOT / CANDIDATE_SOURCE_PATH]
+    leaves = []
+    for function, metrics in zip(CANDIDATE_FUNCTIONS, CANDIDATE_LEAF_METRICS):
+        leaf = leaves_by_function[function]
+        actual = (
+            leaf["expected"]["offset"], leaf["expected"]["size"],
+            len(leaf["relocations"]),
+        )
+        if actual != metrics or leaf["source"].get("sha256") != source_hash:
+            raise AuditError(f"ATTS proc production leaf changed: {function}")
+        leaves.append(leaf)
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, (function, (name, (start, end, expected))) in enumerate(
+        zip(CANDIDATE_FUNCTIONS, FUNCTIONS.items()), 1
+    ):
+        site = sites.get(f"replace_cordio_atts_proc_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"ATTS proc production route changed: {name}")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = sum(
+        right["expected"]["offset"]
+        - left["expected"]["offset"] - left["expected"]["size"]
+        for left, right in zip(leaves, leaves[1:])
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (1722, 10, 28):
+        raise AuditError("ATTS proc production metrics changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"]
+        != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"]
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256")
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([
+            row for row in override["regions"]
+            if row["name"].startswith("cordio_atts_proc_")
+        ]) != 23
+    ):
+        raise AuditError("ATTS proc component/manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or sha(PACKAGE.read_bytes())
+        != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("ATTS proc package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or sha(FLASH_PLAN.read_bytes())
+        != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("ATTS proc flash plan changed")
+
     return {
         "schema_version": 1,
         "module": {
@@ -218,7 +321,17 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "selected_sha256": "b06af2dc72c57bb8742b5fbbf083dfdd2e5187768cb16db693e00463b8fcc502",
             "historical_generating_commit_resolved": False, "license": "Apache-2.0",
         },
-        "production": {"source_owned_bytes_added": 0, "stock_bytes_replaced": 0},
+        "production": {
+            "status": "routed", "functions": 9,
+            "stock_bytes_replaced": 2106,
+            "source_owned_bytes_added": compiled,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": 9,
+            "g2_behavior_delta": "peer MTU floor is authenticated product value 247",
+            "hardware_validation": "blocked by unavailable authorized responsive G2/ATT peer evidence",
+        },
     }
 
 

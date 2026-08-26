@@ -65,9 +65,28 @@ entries, and zero strict-interior pointers. The complete source/body ledger is
 identity is recorded in
 `tools/manifests/packetcraft-cordio-attc-main-provenance.tsv`.
 
-This tranche changes provenance only: zero stock bytes are replaced and zero
-source-owned production bytes are added.
+## Production replacement
 
-The next coherent ATT target is adjacent `attc_proc.c`: its retained path
-starts at `0x006DC874`, and it consumes the client CCB/request machinery closed
-here.
+`components/shared/cordio/runtime_cordio_attc_main.c` implements all 21 source
+definitions. Twenty linked entries use guarded redirects to replace all 3,540
+stock body bytes with 2,258 compiled Cortex-M55 bytes plus 12 alignment bytes
+under 61 strict relocations. The dead-stripped `AttcSetAutoConfirm` definition
+is retained and target-compiled without inventing stock coverage. `AttcInit`
+binds the retained stock interface table at `0x00785250`.
+
+The implementation preserves the authenticated G2 `0xA0` HCI-error base and
+hardens connection/bearer bounds, one-based on-deck indexing, zero-length
+packets, null/malformed messages, and send-table selection. Host tests cover
+initialization, pending writes, simple/continuing/prepare/MTU requests, PDU and
+control dispatch, sign hooks, connection lifecycle, cancellation, and timeout.
+
+The canonical overlay is 353,336 bytes, SHA-256
+`31eec27c1b67e8740a77144c24896a367239d0816fa48acee6b4926b14898106`;
+the Apollo component is 3,876,732 bytes, SHA-256
+`3aba35b870b09b678b1af07680b2db1ab61962baf0247a6e1b806954a6726444`;
+and the deterministic package is 4,655,226 bytes, SHA-256
+`b10166d4f1c1f91f348c3ee360afb2af1499df59715491a1256a1d0545f548bc`.
+The 3,457,178-byte flash plan has 4,977 placed, two unresolved, five
+container-only, and six protected regions. No image was signed, flashed, or
+installed. Live ATT peer, controller, bearer scheduling, and timer validation
+is blocked by unavailable authorized responsive G2/EM9305 physical evidence.

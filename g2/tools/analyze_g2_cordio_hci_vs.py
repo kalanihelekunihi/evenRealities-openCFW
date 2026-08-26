@@ -21,11 +21,28 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/ambiq-cordio-hci-vs-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/ambiq-cordio-hci-vs-provenance.tsv"
 CLOSURE = ROOT / "tools/manifests/ambiq-cordio-hci-vs-closure.tsv"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_hci_vs.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_hci_vs.h"
+RUNTIME_TEST = ROOT / "tests/test_runtime_cordio_hci_vs.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 PINNED_INPUTS = {
     FUNCTION_MAP: "349e19aad00c7e4e46c2fef263a42d1c2e7ae7b98324acc22eebf8eefbbb0e23",
     PROVENANCE: "945ca20cc175e24f98d934cc8cc30d963feec8e9f999117464a0261521ab9e72",
     CLOSURE: "6eea8091612489c703db3231812cca721b5a84305a1e23e9c840a655d01d720b",
 }
+PRODUCTION_FILES = {
+    SOURCE: (9_964, "eea3f1aa01e2a6a4da61bf520f00a04768284c601c9e4efcad8c4a89a34b6137"),
+    HEADER: (867, "c31e2cab4a1a4d6d92c9aa0c2e1f3b65afee63d3ce58b5b9b5e30dfcb10209b6"),
+    RUNTIME_TEST: (6_349, "e4573072c485a52b113aa87186a7c59235b232955dd94b00120a1c90f0f1e984"),
+}
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 
 MODULE_START = 0x00569B04
 MODULE_END = 0x00569D4C
@@ -83,6 +100,113 @@ def load_decoder():
 
 def packed_pairs_digest(pairs: list[tuple[int, int]]) -> str:
     return sha256(b"".join(struct.pack("<II", *pair) for pair in pairs))
+
+
+def verify_file(path: Path, expected: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), sha256(data)) != expected:
+        raise AuditError(f"{label} changed")
+
+
+def verify_production() -> dict:
+    for path, expected in PRODUCTION_FILES.items():
+        verify_file(path, expected, f"HCI vendor production input {path.name}")
+    config = json.loads(CONFIG.read_text())
+    expected = config["expected"]
+    if (
+        (expected["overlay_size"], expected["overlay_sha256"]) != PRODUCTION_OVERLAY
+        or (expected["component_size"], expected["component_sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("HCI vendor production aggregate pins changed")
+
+    leaf_contract = {
+        "hciCoreReadResolvingListSize": (64, 4, 2),
+        "hciCoreReadMaxDataLen": (38, 3, 0),
+        "hciCoreResetStart": (14, 2, 2),
+        "hciCoreResetSequence": (746, 14, 2),
+    }
+    leaves = [
+        row for row in config["relocated_leaves"]
+        if row.get("source", {}).get("path")
+        == "components/shared/cordio/runtime_cordio_hci_vs.c"
+    ]
+    if {row["function"] for row in leaves} != set(leaf_contract):
+        raise AuditError("HCI vendor production leaf inventory changed")
+    for row in leaves:
+        size, relocations, _padding = leaf_contract[row["function"]]
+        if (
+            row["expected"]["size"] != size
+            or len(row["relocations"]) != relocations
+            or row.get("strict_relocation_contract") is not True
+            or row.get("allow_discarded_alloc_sections") is not True
+        ):
+            raise AuditError(f"HCI vendor leaf contract changed: {row['function']}")
+    sites = [
+        row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_hci_vs_")
+    ]
+    if len(sites) != 4 or sum(row["expected_size"] for row in sites) != BODY_BYTES:
+        raise AuditError("HCI vendor production routes changed")
+    if any(row["branch"] != "b_w" for row in sites):
+        raise AuditError("HCI vendor route is not guarded")
+
+    report = json.loads(BUILD_REPORT.read_text())
+    built = {
+        row["extraction"]["function"]: row
+        for row in report["relocated_leaves"]
+        if row.get("source", {}).get("path")
+        == "components/shared/cordio/runtime_cordio_hci_vs.c"
+    }
+    if set(built) != set(leaf_contract):
+        raise AuditError("HCI vendor production build inventory changed")
+    for function, (size, relocations, padding) in leaf_contract.items():
+        row = built[function]
+        if (
+            row["extraction"]["size"] != size
+            or row["extraction"]["relocation_count"] != relocations
+            or row["placement"]["padding_before"] != padding
+        ):
+            raise AuditError(f"HCI vendor production build changed: {function}")
+    if (
+        (report["overlay"]["size"], report["overlay"]["sha256"])
+        != PRODUCTION_OVERLAY
+        or (report["component"]["size"], report["component"]["sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("HCI vendor production build aggregate changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        override["provider"].get("size"), override["provider"].get("sha256")
+    ) != PRODUCTION_COMPONENT:
+        raise AuditError("HCI vendor production provider changed")
+    regions = [row for row in override["regions"] if row["name"].startswith("cordio_hci_vs_")]
+    if len(regions) != 11:
+        raise AuditError("HCI vendor production manifest regions changed")
+    verify_file(PACKAGE, PRODUCTION_PACKAGE, "HCI vendor package")
+    verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN, "HCI vendor flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions",
+        "container_only_regions", "protected_regions",
+    ))
+    if counts != (5_863, 2, 5, 6):
+        raise AuditError("HCI vendor flash-plan counts changed")
+    return {
+        "status": "production-routed",
+        "stock_bytes_replaced": BODY_BYTES,
+        "source_owned_bytes_added": sum(row[0] for row in leaf_contract.values()),
+        "alignment_bytes_added": sum(row[2] for row in leaf_contract.values()),
+        "strict_relocations": sum(row[1] for row in leaf_contract.values()),
+        "source_only_functions_compiled": 4,
+        "manifest_regions": len(regions),
+        "flash_plan_counts": counts,
+        "vendor_source_copied": False,
+        "null_and_non_command_events_fail_closed": True,
+        "missing_extension_callback_falls_back": True,
+    }
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -204,11 +328,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "r25_license": "Arm Cordio proprietary SLA",
             "later_oracle_license": "Ambiq BSD-3-Clause-style notice",
         },
-        "production": {
-            "stock_bytes_replaced": 0,
-            "source_owned_bytes_added": 0,
-            "vendor_source_copied": False,
-        },
+        "production": verify_production(),
     }
 
 
@@ -221,7 +341,7 @@ def main() -> int:
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
-        print("Ambiq HCI vendor sequence closed: 4 linked / 4 source-only; hybrid reset chain pinned")
+        print("Ambiq HCI vendor sequence production-routed: 4 linked / 4 source-only")
     return 0
 
 

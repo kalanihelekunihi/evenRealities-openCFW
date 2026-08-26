@@ -47,6 +47,15 @@ Reproduce the proof with:
 python3 tools/analyze_g2_cordio_dm_dev_priv.py --json
 ```
 
+All 18 optional definitions now also exist as maintained, host-tested C in
+`components/shared/cordio/runtime_cordio_dm_dev_priv.c` and compile as one
+Cortex-M55 translation unit. The implementation covers timer/address
+generation, AES completion, pending-RPA policy, advertising/scanning/
+connection state, HCI/message/reset/init, and public start/stop behavior.
+`make cordio-dm-dev-priv-closure` pins that source and test evidence while
+preserving zero production routes: adding a redirect would contradict the
+authenticated default-routed product configuration.
+
 ## Public source and configuration oracle
 
 The optional public implementation remains useful for a future

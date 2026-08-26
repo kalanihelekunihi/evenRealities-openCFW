@@ -30,11 +30,11 @@ PINS = {
 SOURCE_SIZE = 8179
 SOURCE_SHA256 = "270772d136060be649f684e05e3de604bd89bd8ea6e0a4599ee550077c5c19cb"
 FUNCTIONS = (
-    ("open_cfw_pb_service_ring_buffer_write", 146, 193876, 0),
-    ("APP_PbRxRingFrameDataProcess", 128, 194024, 4),
-    ("PB_RxRingEvent", 10, 194152, 0),
-    ("APP_PbTxEncodeRingEvent", 284, 194164, 4),
-    ("RingDataRelay_common_data_handler", 26, 194448, 1),
+    ("open_cfw_pb_service_ring_buffer_write", 146, 253724, 0),
+    ("APP_PbRxRingFrameDataProcess", 128, 253872, 4),
+    ("PB_RxRingEvent", 10, 254000, 0),
+    ("APP_PbTxEncodeRingEvent", 284, 254012, 4),
+    ("RingDataRelay_common_data_handler", 26, 254296, 1),
 )
 PATCHES = (
     ("replace_pb_ring_rx_frame", 0x005CE1DC, 498,
@@ -289,8 +289,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -298,8 +298,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_names = {item["name"] for item in main["regions"]}

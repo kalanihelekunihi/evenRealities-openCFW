@@ -25,7 +25,7 @@ class CordioAttsCsfAuditTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.analyzer = load_analyzer()
 
-    def test_stock_spans_callers_abi_and_readiness_result_are_closed(self) -> None:
+    def test_stock_spans_callers_abi_and_production_route_are_closed(self) -> None:
         report = self.analyzer.analyze()
         module = report["module"]
         self.assertEqual(module["linked_function_count"], 10)
@@ -41,7 +41,11 @@ class CordioAttsCsfAuditTests(unittest.TestCase):
         self.assertEqual(report["abi"]["write_callback_offset"], 8)
         self.assertEqual(report["abi"]["hash_update_offset"], 12)
         self.assertEqual(report["readiness"]["linked_unresolved_symbols"], 0)
-        self.assertEqual(report["production"]["source_owned_bytes_added"], 0)
+        self.assertEqual(report["production"]["status"], "routed")
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 502)
+        self.assertEqual(report["production"]["alignment_bytes"], 12)
+        self.assertEqual(report["production"]["strict_relocations"], 1)
+        self.assertEqual(report["production"]["guarded_redirects"], 10)
 
 
 if __name__ == "__main__":

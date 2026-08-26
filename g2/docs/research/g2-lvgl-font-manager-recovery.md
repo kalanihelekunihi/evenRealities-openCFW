@@ -19,5 +19,21 @@ The adapter confirms selected LVGL hybrid commit `344c7c318…` and exact
 FreeType 2.9.1 tag commit `86bc8a950…`. This strengthens the functional seam
 but does not prove the private G2 generating checkout or an unpatched pristine
 LVGL tree. No third-party implementation body remains embedded in the manager,
-and it is not production-routed. Remaining work is first-party manager source,
-external font assets, and device/XIP validation.
+and does not itself embed third-party implementation bytes.
+
+The first-party manager is now production-routed from
+`components/apollo_main/core_overlay/lvgl_font_manager.c`. Eight strict
+Cortex-M55 leaves contribute 904 compiled text bytes plus 10 alignment bytes;
+19 strict relocations bind the reviewed allocator, FreeType adapter, MSPI
+lock, and memory providers. Eight guarded redirects replace all 2,590 stock
+function-body bytes while 382 authenticated literal/alignment bytes remain.
+The host oracle covers native and FreeType mixtures, failed allocation and
+face creation, manager tracking and cleanup, ordered fallback links, both XIP
+headers, MSPI lock symmetry, background/foreground roles, and initialization.
+
+The external font payloads remain a physical-media boundary, not a software
+implementation gap. Their identity, contents, XIP readability, typography,
+and live rendering cannot be validated because no golden external-flash
+capture, responsive authorized G2 display path, or matching physical evidence
+is available. No font bytes were guessed, and no image was signed, flashed,
+or installed.

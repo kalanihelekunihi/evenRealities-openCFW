@@ -19,7 +19,8 @@ R2.4.2/R2.5.1 through Packetcraft r20.05c. Stock nevertheless exposes an
 important vendor ABI discriminator: advertising data is stored inline at
 message offset `+8`, matching Ambiq's flexible-array `dm_adv.h`, not public
 Packetcraft's pointer field. All firmware bytes remain cut forward and package
-ownership is unchanged.
+ownership is explicit. Seventeen linked entries are now production-routed from
+maintained C; the one stock-absent API remains target-compiled source.
 
 ## Upstream and ABI pins
 
@@ -146,8 +147,35 @@ python3 tools/analyze_g2_cordio_dm_adv_leg.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production promotion still requires the forked message producer/header
-closure, product diagnostics, exact IAR generation, provider relocations, and
-placement. The next targeted pass is the associated common advertising module
-and vendor state accessor; `smp_main.c` is the next compact retained-path
-module, while `dm_conn.c` remains the largest byte-yield target.
+## Production admission
+
+`runtime_cordio_dm_adv_leg.c` implements all eighteen definitions against the
+authenticated Ambiq flexible-array message ABI. Fourteen guarded redirects and
+three exact two-byte `bx lr` source copies replace all seventeen linked entries
+and all 4,396 bounded stock body bytes. The generated production contribution
+is 948 compiled bytes plus 26 alignment bytes under 32 strict relocations;
+`DmAdvModeLeg` is additionally target-compiled without claiming stock coverage.
+The retained component-interface table remains valid because its three stock
+entry addresses are themselves guarded production entry points.
+
+Host tests cover parameter validation, advertising state transitions, HCI
+completion, callbacks, timers, private events, direct advertising, reset/init,
+mode selection, malformed handles and lengths, and message dispatch. Full and
+all eighteen selector-isolated Cortex-M55 builds pass. The route analyzer pins
+17 replacements, 47 manifest regions, and the canonical artifacts:
+
+- overlay: 357,394 bytes, SHA-256
+  `e84ff07395f40fc4acfa87c77a34a89809ca13d037b4596fc6a9b5e6ff044666`;
+- Apollo component: 3,880,790 bytes, SHA-256
+  `0a2416ead54a01d5a3f195e41afe30750b8a1459274cf33d0355850a85bf505a`;
+- deterministic package: 4,659,284 bytes, SHA-256
+  `bda365b1bce0e80931a6cc6d650378352f78180942119d49a38b2034b79cb3c2`;
+- flash plan: 3,586,814 bytes, SHA-256
+  `8c2d7fe1fc6a16e6dd63cfc031b5992fb4c91356c87a21cbddd2fbc9a8f7b8cb`,
+  with 5,160 placed, two unresolved, five container-only, and six protected
+  regions.
+
+No image was signed, flashed, or installed. Live BLE advertising,
+peer/controller timing, address policy, RF behavior, and paired-temple
+interoperability remain explicitly blocked by unavailable authorized
+responsive G2/EM9305 physical evidence.

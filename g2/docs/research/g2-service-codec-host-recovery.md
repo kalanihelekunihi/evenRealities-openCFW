@@ -6,7 +6,7 @@ The retained first-party translation unit `platform\audio\service_codec_host.c` 
 
 The object contains 26 linked functions. Thirteen are retained-path anchors and thirteen adjacent pathless bodies were restored from source order, call topology, literal ownership, and the enclosing IAR object boundary. Their 7,318 concatenated body bytes hash to `88264b60441f49660eba62171af67a9303c92985e90ab5539fda6b8b864a0b4f`. Seventeen owned alignment/literal-pool gaps total 1,314 bytes and hash to `9ed4d2b885b71bea352cf06d2a972bb79708bbb2e3d9d48db80e7a54a618bd34`.
 
-This is binary inclusion and behavior closure, not historical source recovery. No authenticated source inventory or license was found. The module therefore has no production candidate and owns zero production-overlay bytes.
+This remains binary inclusion and behavior closure rather than historical source recovery: no authenticated vendor source inventory or license was found. A separately authored GPL-3.0-only production reconstruction now implements all 26 linked entry points in `components/apollo_main/core_overlay/service_codec_host.c`. The Apple-clang Cortex-M55 build emits 4,262 bytes of source text plus 38 bytes of runtime alignment, authenticates 111 external relocations, and routes all 26 stock bodies through guarded `B.W` replacements. The 7,318 body bytes are therefore source-owned; the 1,314 bytes of literal pools and alignment gaps remain authenticated official data.
 
 ## Function inventory
 
@@ -36,7 +36,7 @@ The body is limited to 16 bytes. A flag selects an optional four-byte body CRC. 
 
 Initialization configures the UART for 115,200 baud. The blocking reader acquires the 14-byte header first, then the declared remainder, yielding for one tick when the UART reports no data. The request/response path initializes transport, sends, blocks for a response, tears transport down, and unpacks the result. Command helpers retry up to three times.
 
-Directly evidenced commands include read-version `0x02`, switch-beamforming `0x07`, switch-wakeup `0x08`, and query-microphone-state `0x70`. The remaining named helpers expose microphone gain, DMIC, I2S-output, and one-bit-delay controls. The delay path also owns a fixed 14-byte `BUXX` message at ROM `0x007888A0`. Public `SVC_*` wrappers validate response status and length before reporting success.
+The recovered commands are read-version `0x02`, switch-beamforming `0x07`, switch-wakeup `0x08`, microphone gain `0x0B`, DMIC open `0x0C`, DMIC close `0x0D`, one-bit microphone delay `0x0E`, I2S output `0x0F`, and query-microphone-state `0x70`. The delay path sends the exact fixed request `425558580e0101000000d4db2f68`. Public `SVC_*` wrappers validate the command-specific response status and length before reporting success. The source reconstruction additionally rejects a voice-event response shorter than three body bytes before decoding its event and value fields.
 
 ## Ingress and false-pointer closure
 
@@ -49,15 +49,16 @@ The all-byte four-byte-window scan finds one numeric collision: aligned data at 
 Run:
 
 ```sh
-python3 openCFW/tools/analyze_g2_service_codec_host.py
-python3 -m unittest openCFW.tests.test_analyze_g2_service_codec_host
+make service-codec-host-closure
+make source
 ```
 
-The analyzer authenticates the official image, all three manifests, every body and owned gap, both object boundaries, the retained path and its four pointer cells, 23 exact symbols, call topology, pointer-like windows, protocol literals, and production-overlay exclusion.
+The analyzer authenticates the official image, all three object manifests, every body and owned gap, both object boundaries, the retained path and its four pointer cells, 23 exact symbols, call topology, pointer-like windows, protocol literals, all 26 source leaves, 111 relocations, 26 guarded redirects, component ownership, and package/flash-plan identities. The candidate suite host-executes success, retry, CRC, truncation, allocation, cleanup, fixed-message, wrapper-status, and voice-event bounds paths, then compiles every selector for Cortex-M55.
 
 ## Limitations
 
-- The historical source-only function count is unknown because the source file is unavailable.
+- The historical source-only function count remains unknown because the vendor source file is unavailable.
 - Semantic labels are clean-room descriptions, not recovered symbols.
 - Binary closure does not grant a license or justify copying vendor implementation text.
-- Production ownership remains zero until independently authored behavior is implemented, reviewed, and routed.
+- Software implementation, target compilation, guarded routing, component assembly, and OTA packaging are closed.
+- Live UART3/GX8002 command/response, audio, DMIC, I2S, and asynchronous voice-event behavior is explicitly blocked by unavailable physical evidence: the authorized right temple is nonresponsive, the authorized left temple must remain stock, and no responsive authorized pair or golden codec/UART capture is available.

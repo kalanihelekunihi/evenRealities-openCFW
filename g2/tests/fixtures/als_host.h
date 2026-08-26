@@ -1,0 +1,62 @@
+#ifndef OPEN_CFW_ALS_HOST_H
+#define OPEN_CFW_ALS_HOST_H
+
+#include <stdint.h>
+
+extern uint32_t host_als_opened;
+extern uint32_t host_als_process_status;
+extern uint32_t host_als_raw_index;
+extern uint32_t host_als_raw_count;
+extern uint32_t host_als_dark_index;
+extern uint32_t host_als_dark_count;
+extern uint32_t host_als_extreme_dark;
+extern uint32_t host_als_raw_value;
+extern uint32_t host_als_peak_value;
+extern uint32_t host_als_bucket;
+extern uint32_t host_als_curve_brightness;
+extern uint32_t host_als_target_brightness;
+extern uint32_t host_als_last_brightness;
+extern uint32_t host_als_previous_brightness;
+extern uint32_t host_als_notify_application;
+extern uint32_t host_als_learn_count;
+extern uint32_t host_als_learn_complete;
+extern uint32_t host_als_persisted_scale;
+extern uint32_t host_als_scale;
+extern uint32_t host_als_previous_scale;
+extern uint32_t host_als_lux_base;
+extern uint32_t host_als_raw_samples[5];
+extern uint32_t host_als_dark_samples[20];
+extern uint32_t host_als_manual_lock_tick;
+extern uint8_t host_als_opt_device[64];
+
+#define OPEN_CFW_ALS_OPENED host_als_opened
+#define OPEN_CFW_ALS_PROCESS_STATUS host_als_process_status
+#define OPEN_CFW_ALS_RAW_INDEX host_als_raw_index
+#define OPEN_CFW_ALS_RAW_COUNT host_als_raw_count
+#define OPEN_CFW_ALS_DARK_INDEX host_als_dark_index
+#define OPEN_CFW_ALS_DARK_COUNT host_als_dark_count
+#define OPEN_CFW_ALS_EXTREME_DARK host_als_extreme_dark
+#define OPEN_CFW_ALS_RAW_VALUE host_als_raw_value
+#define OPEN_CFW_ALS_PEAK_VALUE host_als_peak_value
+#define OPEN_CFW_ALS_BUCKET host_als_bucket
+#define OPEN_CFW_ALS_CURVE_BRIGHTNESS host_als_curve_brightness
+#define OPEN_CFW_ALS_TARGET_BRIGHTNESS host_als_target_brightness
+#define OPEN_CFW_ALS_LAST_BRIGHTNESS host_als_last_brightness
+#define OPEN_CFW_ALS_PREVIOUS_BRIGHTNESS host_als_previous_brightness
+#define OPEN_CFW_ALS_NOTIFY_APPLICATION host_als_notify_application
+#define OPEN_CFW_ALS_LEARN_COUNT host_als_learn_count
+#define OPEN_CFW_ALS_LEARN_COMPLETE host_als_learn_complete
+#define OPEN_CFW_ALS_PERSISTED_SCALE host_als_persisted_scale
+#define OPEN_CFW_ALS_SCALE host_als_scale
+#define OPEN_CFW_ALS_PREVIOUS_SCALE host_als_previous_scale
+#define OPEN_CFW_ALS_LUX_BASE host_als_lux_base
+#define OPEN_CFW_ALS_RAW_SAMPLES ((volatile uint32_t *)host_als_raw_samples)
+#define OPEN_CFW_ALS_DARK_SAMPLES ((volatile uint32_t *)host_als_dark_samples)
+#define OPEN_CFW_ALS_MANUAL_LOCK_TICK host_als_manual_lock_tick
+#define OPEN_CFW_ALS_OPT_DEVICE ((void *)host_als_opt_device)
+#define OPEN_CFW_ALS_DISPLAY_BRIGHTNESS(v) \
+    open_cfw_retained_display_brightness((v))
+
+void open_cfw_retained_display_brightness(uint8_t brightness);
+
+#endif

@@ -1,8 +1,8 @@
 # G2 Cordio/Ambiq FreeRTOS WSF timer recovery
 
-Status: production-excluded source recovery. The official image and the
-authenticated 64-shard Ghidra corpus are read only; no overlay, production
-manifest, firmware byte, or hardware state changed.
+Status: production source-routed. The official image and authenticated
+64-shard Ghidra corpus remain read only; the reviewed clean-room leaves are
+now compiled into the Apollo overlay and package. No hardware state changed.
 
 ## Result
 
@@ -36,8 +36,8 @@ Across all eleven entries there are exactly 53 direct BL callers. The callback
 has no BL ingress and is referenced only by the Thumb pointer `0x0052A469` in
 the literal word at `0x0052A61C`. An exhaustive scan found no external B.W or
 narrow branches into an entry or function interior and no other stored entry
-or interior pointer. This closes the replacement ingress surface, but no
-production relocation or placement is claimed.
+or interior pointer. This closes the replacement ingress surface; all eleven
+entries are now guarded-routed to reviewed production placement.
 
 The previously missed `WsfTimerInit` entry is independently witnessed by the
 BL at `0x004B7F6A`. Adding it raises the raw recovery total from seven to eight
@@ -139,16 +139,16 @@ and `0x0052B8D0`. They route through `WsfCsEnter`/`WsfCsExit`; first entry
 disables interrupts and final exit enables them. These bodies and hashes are
 enforced by `tools/analyze_g2_cordio_wsf_timer.py`.
 
-## Clean-room candidate and completeness estimate
+## Clean-room production source and completeness
 
-The production-excluded files are:
+The production-routed files are:
 
-- `components/shared/cordio/runtime_cordio_wsf_timer_candidate.c`, 7,652
+- `components/shared/cordio/runtime_cordio_wsf_timer_candidate.c`, 10,198
   bytes, SHA-256
-  `def199a7179981092894a10627a243c121c7cf221fd35b6ecd9423e1cf600223`;
-- `components/shared/cordio/runtime_cordio_wsf_timer_candidate.h`, 3,990
+  `4c6f474b45afa721c5c70233f4139195add611e908b0207b0bb13569fca6f9fc`;
+- `components/shared/cordio/runtime_cordio_wsf_timer_candidate.h`, 3,988
   bytes, SHA-256
-  `86ff13950babe599ee73e5cb9d6eea133179ee1c0c2c8499205eb5e452b3e0b9`.
+  `7648aa3450f9976fbdcaed4e474f70a9ac65d1620c5411c57d9ab29e6f25cdb6`.
 
 The header now imports the shared clean-room WSF queue ABI rather than
 redeclaring timer-specific queue prototypes. This is an integration-only ABI
@@ -158,24 +158,28 @@ Host tests cover initialization and failure, callback dispatch, sorted
 insertion and reinsertion, removal and stop, second/millisecond conversions,
 expiration/update/service behavior, lock/unlock, elapsed-tick conversion,
 FreeRTOS command `4`, period scaling, wait value `100`, and the failure seam.
-The candidate behaviorally recreates all eleven functions / 536 stock code
-bytes. It is not linked, and exact IAR output, original FreeRTOS source text,
-the exact logging/assert backend, and final placement remain unresolved.
+The source behaviorally recreates all eleven functions / 536 stock code bytes.
+Eleven guarded redirects replace those bytes with 632 compiled Cortex-M55
+bytes, 14 alignment bytes, and 29 strict relocations. The authenticated
+literal/global/string-pointer table remains official compatibility data.
 
 Estimated timer-module progress is **95–98% semantic/source-family identification**: all 536
 code bytes have function boundaries, caller/callee closure, and behavioral
 source; all four missed functions have direct-call closure; and the critical
-data ABI is known. The remaining 2–5% is exact local text/config drift within
-the pinned Ambiq family, IAR build provenance, production
-relocation/placement, exact logging/assert integration, and target-output
-qualification. Packetcraft
+data ABI is known. Residual historical uncertainty is exact local text/config
+drift within the pinned Ambiq family and IAR build provenance; the software
+production route is closed. Packetcraft
 Cordio overall remains **80–85% identified** because the wider HCI/trace,
 application, and vendor-port boundaries are still unresolved.
 
-Package ownership is unchanged: 131,755 source, 93,424 generated, and
-4,207,731 opaque/cut-forward bytes in the 4,432,910-byte Apple package;
-opaque share remains **94.920289%**. Research candidates do not count as
-source-owned firmware bytes.
+Canonical overlay/component/package sizes are 333,312 / 3,856,708 / 4,635,202
+bytes with SHA-256 `ac8e82ddd655e7247ca369d38a781d8b073f3ce29b888867314770f9ace87c62`,
+`0c830e013e883e3b8063f429b99332fb6f41ead126844e4eec2bd83374448fef`,
+and `f6e8743fd694437e5dd2c92d548456a2c7a2e7d17c2f6ff95262fdc5fdb0f18e`.
+The 3,137,071-byte flash plan hashes to
+`d3df4a1b0fbf89f6c2bab43a37a6c5d60665107d3b49de939df7e984ae4a849c`
+and contains 4,525 placed, two unresolved, five container-only, and six
+protected regions.
 
 ## Lorelei candidate matrix
 
@@ -243,5 +247,7 @@ python3 tools/verify_ambiqsuite_cordio_wsf_timer_archive.py \
   --archive /path/to/AmbiqSuite-R2.5.1.zip --release 2.5.1 --json
 ```
 
-No build, signing, flashing, reset, or hardware operation is part of this
-audit.
+The build and verification path is offline only. No signing, flashing, reset,
+or hardware operation occurred. Live controller scheduling, interrupt timing,
+callback ordering, timer drift, and sleep/wakeup behavior remain blocked by
+unavailable authorized responsive G2/EM9305 physical evidence.

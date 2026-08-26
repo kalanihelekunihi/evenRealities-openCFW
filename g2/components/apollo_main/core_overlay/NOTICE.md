@@ -1788,3 +1788,100 @@ callable stock bytes while 122 authenticated official pool/alignment bytes
 remain. Its default policy refuses destructive factory reset on missing or
 mismatched media. Live persistence, recovery, and schema validation is blocked
 by unavailable authorized responsive hardware and a golden `NVdb` capture.
+
+`runtime_cordio_attc_main.c`, `runtime_cordio_attc_disc.c`, and their headers
+are independently adapted Apache-2.0-compatible Packetcraft Cordio ATT client
+implementations using the pinned r20.05--r20.05c public API/behavior family and
+authenticated G2 ABI facts. They contain no proprietary historical source or
+stock executable bytes. Twenty core and fifteen discovery selector-isolated
+strict-relocation Thumb leaves replace all 3,540 and 2,908 linked stock body
+bytes respectively; four dead-stripped public definitions are maintained only
+as target-compiled source. Live ATT peer/controller behavior remains blocked
+by unavailable authorized responsive G2/EM9305 physical evidence.
+
+`runtime_cordio_l2c_main.c`, `runtime_cordio_l2c_master.c`,
+`runtime_cordio_l2c_slave.c`, and their shared header are independently adapted
+Apache-2.0-compatible Packetcraft Cordio L2CAP implementations using the pinned
+r20.05--r20.05c public API/behavior family and authenticated G2 ABI facts. They
+contain no proprietary historical source or stock executable bytes. Twenty
+linked definitions replace all 3,372 bounded stock body bytes through nineteen
+selector-isolated strict-relocation Thumb redirects and one exact two-byte
+in-place copy; source-only `L2cDmSigReq` remains compiler-owned without claiming
+stock coverage. Live peer/controller signaling, flow control, timer, and
+buffer-lifetime validation is blocked by unavailable authorized responsive
+G2/EM9305 physical evidence.
+
+`runtime_cordio_dm_adv.c` and `runtime_cordio_dm_adv.h` are independently
+adapted Apache-2.0-compatible Cordio common-advertising implementations using
+the authenticated AmbiqSuite R2.4.2/R2.5.1 inline-payload API/ABI family. They
+contain no proprietary historical source or stock executable bytes. Nine
+selector-isolated strict-relocation Thumb leaves replace all 562 linked stock
+body bytes; six source-only definitions remain compiler-owned without claiming
+stock coverage. Live BLE advertising, peer/controller timing, address-policy,
+and RF validation is blocked by unavailable authorized responsive G2/EM9305
+physical evidence.
+
+`runtime_cordio_dm_adv_leg.c` and `runtime_cordio_dm_adv_leg.h` are
+independently adapted Apache-2.0-compatible Cordio legacy-advertising
+implementations using the authenticated AmbiqSuite R2.4.2/R2.5.1
+flexible-array payload ABI. They contain no proprietary historical source or
+stock executable bytes. Seventeen linked definitions replace all 4,396 bounded
+stock body bytes through fourteen selector-isolated strict-relocation Thumb
+redirects and three exact two-byte in-place copies; stock-absent
+`DmAdvModeLeg` remains compiler-owned without claiming stock coverage. Live
+BLE advertising, peer/controller timing, address-policy, RF, and paired-temple
+validation is blocked by unavailable authorized responsive G2/EM9305 physical
+evidence.
+
+`cordio_sec_api.c` is independently adapted Apache-2.0 Packetcraft Cordio
+r20.05c security-service code using the authenticated G2 queue, message, HCI,
+and fixed control-block ABI. It contains no proprietary historical source or
+stock executable bytes. Twenty selector-isolated strict-relocation Thumb
+leaves replace all 1,392 bounded stock body bytes; 46 official
+literal/alignment bytes remain retained. AES, random, public-key, and
+Diffie-Hellman primitives remain delegated to retained HCI/controller
+providers. Live controller, concurrency, timing, and paired-temple validation
+is blocked by unavailable authorized responsive right G2/EM9305 physical
+evidence; the left remains stock.
+
+`runtime_cordio_dm_conn_sm.c` and `runtime_cordio_dm_conn_sm.h` are
+independently adapted Apache-2.0-compatible Packetcraft r20.05--r20.05c DM
+connection state-machine code using the authenticated G2 five-state/eight-event
+ABI. They contain no proprietary historical source or stock executable bytes.
+The sole linked dispatcher replaces all 1,598 bounded stock body bytes with a
+selector-isolated strict-relocation Thumb leaf; the exact transition table and
+TU pool remain separately authenticated official constant data. Live
+controller, role-action timing, cancellation, disconnect, and paired-temple
+validation is blocked by unavailable authorized responsive G2/EM9305 physical
+evidence.
+
+`runtime_cordio_dm_dev.c` and `runtime_cordio_dm_dev.h` are independently
+adapted Apache-2.0-compatible AmbiqSuite R4.4.1 Cordio local-device code using
+the authenticated G2 component/message ABI. They contain no proprietary
+historical source or stock executable bytes. Twelve selector-isolated
+strict-relocation Thumb leaves replace all 626 linked stock body bytes; six
+stock-absent whitelist/filter APIs remain compiler-owned without claiming
+stock coverage. Live controller reset, event timing, address programming,
+filter/privacy behavior, and paired-temple validation is blocked by unavailable
+authorized responsive G2/EM9305 physical evidence.
+
+`runtime_cordio_dm_main.c` and `runtime_cordio_dm_main.h` are independently
+adapted Apache-2.0-compatible AmbiqSuite R4.4.1 Cordio device-manager router
+code using the authenticated G2 route, callback-size, component-table, and
+control-block ABI. They contain no proprietary historical source or stock
+executable bytes. Fourteen selector-isolated strict-relocation Thumb redirects
+plus two exact two-byte in-place copies cover all sixteen linked definitions
+and all 484 bounded stock body bytes. Live HCI/controller/peer behavior,
+timing, and paired-temple validation is blocked by unavailable authorized
+responsive G2/EM9305 physical evidence.
+
+`runtime_cordio_dm_phy.c` and `runtime_cordio_dm_phy.h` are independently
+adapted Apache-2.0-compatible Packetcraft r20.05c / byte-identical AmbiqSuite
+R4.4.1 Cordio PHY-manager code using the authenticated G2 event, connection,
+callback, component, and widened feature-mask ABI. They contain no proprietary
+historical source or stock executable bytes. Six selector-isolated
+strict-relocation Thumb leaves replace all 308 linked stock body bytes; two
+dead-stripped public APIs remain compiler-owned without claiming stock
+coverage. Live controller PHY negotiation, peer/RF/timing, and paired-temple
+validation is blocked by unavailable authorized responsive G2/EM9305 physical
+evidence.

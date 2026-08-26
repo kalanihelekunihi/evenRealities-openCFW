@@ -63,7 +63,17 @@ class CordioHciDriverAuditTests(unittest.TestCase):
         self.assertEqual(lineage["classification"], "mixed-version Ambiq driver")
         self.assertFalse(lineage["whole_file_source_exact"])
         self.assertFalse(lineage["historical_generating_commit_resolved"])
-        self.assertFalse(self.report["production"]["vendor_source_copied"])
+        production = self.report["production"]
+        self.assertEqual(
+            production["status"], "software-complete-hardware-validation-blocked"
+        )
+        self.assertEqual(production["source_inventory_compiled"], 16)
+        self.assertEqual(production["redirected_stock_functions"], 9)
+        self.assertEqual(production["redirected_stock_bytes"], 368)
+        self.assertEqual(production["remaining_unimplemented_software_functions"], 0)
+        self.assertEqual(len(production["hardware_evidence_blocked_functions"]), 6)
+        self.assertFalse(production["production_hardware_substitution_validated"])
+        self.assertFalse(production["vendor_source_copied"])
 
 
 if __name__ == "__main__":

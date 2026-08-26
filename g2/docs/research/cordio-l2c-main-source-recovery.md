@@ -51,5 +51,21 @@ source definitions are accounted for and none is dead-stripped.
 python3 tools/analyze_g2_cordio_l2c_main.py --json
 ```
 
-Production ownership remains zero, and compiler reproduction is deferred while
-reverse engineering remains the priority.
+## Production admission
+
+`runtime_cordio_l2c_main.c` now owns all eleven definitions. Ten guarded
+redirects plus one exact two-byte in-place copy replace all 1,636 bounded stock
+body bytes with 552 compiled Cortex-M55 bytes plus 12 alignment bytes under 11
+strict relocations. The implementation rejects malformed ACL/L2CAP/signaling
+lengths, invalid connection IDs and roles, unregistered arbitrary CIDs, and
+allocation-size overflow before dispatch or transmit.
+
+The canonical overlay is 354,692 bytes, SHA-256
+`a679ebaf7c8ad06233ca8f4cc2750f46b256bd4d809420bc1369e87ca2921ee9`;
+the Apollo component is 3,878,088 bytes, SHA-256
+`bdff58228eeea5586a7c901caa713fb824587e491bccda35ae8d6dcf16ffcf85`;
+and the deterministic package is 4,656,582 bytes, SHA-256
+`41b32b257fb4a97b21e6b8db77009e3ce626a1432388c8c43ac57b215e8d3fe5`.
+`make cordio-l2c-runtime-closure` is green. Live ATT/SMP/signaling,
+peer/controller flow-control, timing, and buffer-lifetime validation is blocked
+by unavailable authorized responsive G2/EM9305 physical evidence.

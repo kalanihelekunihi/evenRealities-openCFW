@@ -43,6 +43,13 @@ class AttcReadTest(unittest.TestCase):
         self.assertEqual(module["strict_interior_pointers"], 0)
         self.assertTrue(report["architecture"]["bearer_aware_read_long"])
         self.assertTrue(report["lineage"]["independent_release_discriminator"])
+        self.assertEqual(report["production"]["status"], "routed")
+        self.assertEqual(report["production"]["stock_bytes_replaced"], 414)
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 440)
+        self.assertEqual(report["production"]["alignment_bytes"], 2)
+        self.assertEqual(report["production"]["strict_relocations"], 4)
+        self.assertEqual(report["production"]["guarded_redirects"], 4)
+        self.assertTrue(report["production"]["truncated_pair_guard"])
 
 
 if __name__ == "__main__":

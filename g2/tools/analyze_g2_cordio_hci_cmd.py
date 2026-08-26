@@ -21,11 +21,31 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/ambiq-cordio-hci-cmd-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/ambiq-cordio-hci-cmd-provenance.tsv"
 CLOSURE = ROOT / "tools/manifests/ambiq-cordio-hci-cmd-closure.tsv"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_hci_cmd.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_hci_cmd.h"
+RUNTIME_TEST = ROOT / "tests/test_runtime_cordio_hci_cmd_core.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 PINNED_INPUTS = {
-    FUNCTION_MAP: "c08e4c8e1446f8eeb00ef94aa79c27b0ddb9ee326c38632d54e310695231d3cd",
+    FUNCTION_MAP: "e303eb2280777c82cda209d48f05301f4b56a14d49577909afbfd065b23a887d",
     PROVENANCE: "462d7f2ed0c8f34bde8f175fe5415f808d442b3b3650676aab56a3add86496c8",
     CLOSURE: "7899866f45ab1c748d515b3f811c2b9c90e4762c8c36f9cb79cdf7e2ea89aee2",
 }
+PRODUCTION_FILES = {
+    SOURCE: (22_542, "993badb444f297556e93bdb1b10db6b81a2459ec5c588eade6c7c027a6e97479"),
+    HEADER: (6_193, "f3c731af23e2db762344caae77fe8e6cffd87a57143b6f214cab84132911a826"),
+    RUNTIME_TEST: (7_754, "08f5c0ef4e953e08700112e8ba6a9097b01e7246e7b3ee0fa9e527bec662ffea"),
+}
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
+CONFIG_LEAF_CONTRACT_SHA256 = "48f8f665bc34c29cb0abd2061286cc0f38fc39a831d0bd49a6eed092dcbf6583"
+BUILD_LEAF_CONTRACT_SHA256 = "96e15d2840bbe09221a8859ae955be520c919faf5178ff7a1222a6fff7d4adf3"
+ROUTE_CONTRACT_SHA256 = "f95204934ead6d0799758732f008414ef10c9ca5b296de97ead52b61e59dc4bd"
 
 MODULE_START = 0x0052AE38
 MODULE_END = 0x0052B8A4
@@ -101,6 +121,124 @@ def load_decoder():
 
 def packed_pairs_digest(pairs: list[tuple[int, int]]) -> str:
     return sha256(b"".join(struct.pack("<II", *pair) for pair in pairs))
+
+
+def verify_file(path: Path, expected: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), sha256(data)) != expected:
+        raise AuditError(f"{label} changed")
+
+
+def verify_production() -> dict:
+    for path, expected in PRODUCTION_FILES.items():
+        verify_file(path, expected, f"HCI command-core input {path.name}")
+
+    config = json.loads(CONFIG.read_text())
+    expected = config["expected"]
+    if (
+        (expected["overlay_size"], expected["overlay_sha256"]) != PRODUCTION_OVERLAY
+        or (expected["component_size"], expected["component_sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("HCI command-core aggregate pins changed")
+    leaves = [
+        row for row in config["relocated_leaves"]
+        if row.get("source", {}).get("path")
+        == "components/shared/cordio/runtime_cordio_hci_cmd.c"
+    ]
+    if len(leaves) != 50:
+        raise AuditError("HCI command-core leaf inventory changed")
+    if any(
+        row.get("strict_relocation_contract") is not True
+        or row.get("allow_discarded_alloc_sections") is not True
+        for row in leaves
+    ):
+        raise AuditError("HCI command leaf strict-routing policy changed")
+    config_contract = sorted(
+        (row["function"], row["expected"]["size"], len(row["relocations"]))
+        for row in leaves
+    )
+    if sha256(json.dumps(config_contract, separators=(",", ":")).encode()) \
+            != CONFIG_LEAF_CONTRACT_SHA256:
+        raise AuditError("HCI command leaf configuration changed")
+
+    sites = [
+        row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_hci_cmd_core_")
+    ]
+    if len(sites) != 50 or sum(row["expected_size"] for row in sites) != BODY_BYTES:
+        raise AuditError("HCI command-core routes changed")
+    if any(row["branch"] != "b_w" for row in sites):
+        raise AuditError("HCI command-core route is not guarded")
+    route_contract = sorted(
+        (row["target_function"], row["expected_size"], row["branch"])
+        for row in sites
+    )
+    if sha256(json.dumps(route_contract, separators=(",", ":")).encode()) \
+            != ROUTE_CONTRACT_SHA256:
+        raise AuditError("HCI command route contract changed")
+
+    report = json.loads(BUILD_REPORT.read_text())
+    built = {
+        row["extraction"]["function"]: row
+        for row in report["relocated_leaves"]
+        if row.get("source", {}).get("path")
+        == "components/shared/cordio/runtime_cordio_hci_cmd.c"
+    }
+    if len(built) != 50:
+        raise AuditError("HCI command-core build inventory changed")
+    build_contract = sorted(
+        (function, row["extraction"]["size"],
+         row["extraction"]["relocation_count"], row["placement"]["padding_before"])
+        for function, row in built.items()
+    )
+    if sha256(json.dumps(build_contract, separators=(",", ":")).encode()) \
+            != BUILD_LEAF_CONTRACT_SHA256:
+        raise AuditError("HCI command production build changed")
+    if (
+        (report["overlay"]["size"], report["overlay"]["sha256"])
+        != PRODUCTION_OVERLAY
+        or (report["component"]["size"], report["component"]["sha256"])
+        != PRODUCTION_COMPONENT
+    ):
+        raise AuditError("HCI command-core build aggregate changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        override["provider"].get("size"), override["provider"].get("sha256")
+    ) != PRODUCTION_COMPONENT:
+        raise AuditError("HCI command-core provider changed")
+    regions = [
+        row for row in override["regions"]
+        if row["name"].startswith("cordio_hci_cmd_core_")
+    ]
+    if len(regions) != 91:
+        raise AuditError("HCI command-core manifest regions changed")
+    verify_file(PACKAGE, PRODUCTION_PACKAGE, "HCI command-core package")
+    verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN, "HCI command-core flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions",
+        "container_only_regions", "protected_regions",
+    ))
+    if counts != (5_863, 2, 5, 6):
+        raise AuditError("HCI command-core flash-plan counts changed")
+    return {
+        "status": "production-routed",
+        "redirected_stock_functions": 50,
+        "redirected_stock_bytes": BODY_BYTES,
+        "source_owned_bytes_added": 4_052,
+        "alignment_bytes_added": 68,
+        "strict_relocations": 106,
+        "source_only_functions_compiled": 22,
+        "manifest_regions": len(regions),
+        "flash_plan_counts": counts,
+        "remaining_unrouted_linked_functions": 0,
+        "remaining_source_only_functions": 0,
+        "full_command_layer_complete": True,
+        "proprietary_source_copied": False,
+    }
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -229,11 +367,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "whole_file_source_exact": False,
             "license": "Arm Cordio proprietary SLA",
         },
-        "production": {
-            "stock_bytes_replaced": 0,
-            "source_owned_bytes_added": 0,
-            "proprietary_source_copied": False,
-        },
+        "production": verify_production(),
     }
 
 
@@ -246,7 +380,9 @@ def main() -> int:
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
-        print("Ambiq hci_cmd closed: 50 linked / 22 source-only; queue and command ABI pinned")
+        print(
+            "Ambiq hci_cmd production-routed: 50 linked / 22 source-only APIs"
+        )
     return 0
 
 

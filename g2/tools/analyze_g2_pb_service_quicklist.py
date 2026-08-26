@@ -30,21 +30,21 @@ PINS = {
 SOURCE_SIZE = 16280
 SOURCE_SHA256 = "ce4f5063e971cbed8d36ebdb764f88472efc4d9a7d581f125c3dfff64756e908"
 FUNCTIONS = (
-    ("open_cfw_pb_service_quicklist_buffer_write", 166, 208320, 0,
+    ("open_cfw_pb_service_quicklist_buffer_write", 166, 268168, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_quicklist_zero", 26, 208488, 0, "zero"),
-    ("open_cfw_pb_service_quicklist_transmit", 98, 208516, 5, "transmit"),
-    ("APP_DecodePbRxQuicklistData", 40, 208616, 2, "decode_data"),
-    ("PB_RxQuicklistItem", 10, 208656, 0, "rx_item"),
-    ("APP_PbTxEncodeQuicklistItem", 106, 208668, 2, "tx_item"),
-    ("PB_RxQuicklistMultItems", 10, 208776, 0, "rx_multi"),
-    ("APP_PbTxEncodeQuicklistMultItems", 72, 208788, 2, "tx_multi"),
-    ("APP_PbNotifyEncodeQuicklistMultItems", 188, 208860, 2,
+    ("open_cfw_pb_service_quicklist_zero", 26, 268336, 0, "zero"),
+    ("open_cfw_pb_service_quicklist_transmit", 98, 268364, 5, "transmit"),
+    ("APP_DecodePbRxQuicklistData", 40, 268464, 2, "decode_data"),
+    ("PB_RxQuicklistItem", 10, 268504, 0, "rx_item"),
+    ("APP_PbTxEncodeQuicklistItem", 106, 268516, 2, "tx_item"),
+    ("PB_RxQuicklistMultItems", 10, 268624, 0, "rx_multi"),
+    ("APP_PbTxEncodeQuicklistMultItems", 72, 268636, 2, "tx_multi"),
+    ("APP_PbNotifyEncodeQuicklistMultItems", 188, 268708, 2,
      "notify_multi"),
-    ("PB_RxQuicklistEvent", 10, 209048, 0, "rx_event"),
-    ("APP_PbTxEncodeQuicklistEvent", 76, 209060, 2, "tx_event"),
-    ("APP_PbNotifyEncodeQuicklistEvent", 86, 209136, 2, "notify_event"),
-    ("APP_PbRxQuicklistFrameDataProcess", 172, 209224, 9, "rx_frame"),
+    ("PB_RxQuicklistEvent", 10, 268896, 0, "rx_event"),
+    ("APP_PbTxEncodeQuicklistEvent", 76, 268908, 2, "tx_event"),
+    ("APP_PbNotifyEncodeQuicklistEvent", 86, 268984, 2, "notify_event"),
+    ("APP_PbRxQuicklistFrameDataProcess", 172, 269072, 9, "rx_frame"),
 )
 PHYSICAL = (0x0055894C, 0x005597F0)
 PHYSICAL_SHA256 = "50654068015e5cced557275529f0ebf3cfe2b16e9d34c86e2071607ac9fb5a18"
@@ -284,8 +284,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -293,8 +293,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

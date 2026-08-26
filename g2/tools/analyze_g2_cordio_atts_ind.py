@@ -21,9 +21,40 @@ IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 MAP = ROOT / "tools/manifests/packetcraft-cordio-atts-ind-function-map.tsv"
 PROVENANCE = ROOT / "tools/manifests/packetcraft-cordio-atts-ind-provenance.tsv"
 PINS = {
+    ROOT / "components/shared/cordio/runtime_cordio_atts_ind.c": "932b9148e13f6edcc0935bd46db5e2352b5041cfa4fb3b6f95426006ef01fb21",
+    ROOT / "components/shared/cordio/runtime_cordio_atts_ind.h": "60c93293c3b777c90318b2c31915c2654ffdbaf9d001a9c6f37802ced5d8438a",
     MAP: "fdda9360f5a4f4194634c087f55ba61fcff7ff2badbe3b952101b698d6e16282",
     PROVENANCE: "ec381fa2a080c9be95a5ff6ed95d9a8d3a30ccd7a52e2b45c5637cb4d865f51e",
 }
+
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_atts_ind.c"
+CANDIDATE_FUNCTIONS = [
+    "open_cfw_cordio_atts_ind_pending",
+    "open_cfw_cordio_atts_ind_set_pending_notification",
+    "open_cfw_cordio_atts_ind_execute_callback",
+    "open_cfw_cordio_atts_ind_notification_callback",
+    "open_cfw_cordio_atts_ind_setup_message",
+    "open_cfw_cordio_atts_ind_connection_callback",
+    "open_cfw_cordio_atts_ind_message_callback",
+    "open_cfw_cordio_atts_ind_control_callback",
+    "open_cfw_cordio_atts_handle_value_indication_notification",
+    "open_cfw_cordio_atts_process_value_confirmation",
+    "open_cfw_cordio_atts_ind_initialize",
+    "open_cfw_cordio_atts_handle_value_indication",
+    "open_cfw_cordio_atts_handle_value_notification",
+]
+CANDIDATE_LEAF_METRICS = [
+    (340072, 182, 0), (340256, 128, 0), (340384, 26, 1),
+    (340412, 190, 11), (340604, 154, 6), (340760, 164, 6),
+    (340924, 116, 7), (341040, 32, 2), (341072, 318, 11),
+    (341392, 110, 5), (341504, 122, 0), (341628, 30, 1),
+    (341660, 30, 1),
+]
 
 FUNCTIONS = {
     "attsPendIndNtfHandle": (0x005338AC, 0x0053390E, "8c2b18ca9e905e66f5af163b215e1d376f851085e01046489194f03d86b305a5"),
@@ -75,7 +106,7 @@ CALLER_DIGESTS = {
     "attsPendIndNtfHandle": "8c2e504a7816c0a08b97c5f0a1e5cea554d4dbf49b5715ff31899ec9db32ea64",
     "attsSetPendNtfHandle": "ce598aac99d0efc1c90220760baa05ff51e66465b890e6c92c1c218e37a89036",
     "attsExecCallback": "93bc46f03a41c5c5fe3485c36b73d8706ca20caeabdd74eac09d622e62f7d231",
-    "attsIndNtfCallback": "bdf764b66ac1153e8a3ca79d81a1529b0168caa34755477aeed0a3f83ffbcf3e",
+    "attsIndNtfCallback": "bdf764b66ac1153e8a3ca79d81a1529b0168caa34755505aeed0a3f83ffbcf3e",
     "attsSetupMsg": "f1809c814e6a3734a064240ef569eadb892fbf116cf8b3d169fb75417170c745",
     "attsIndConnCback": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "attsIndMsgCback": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -245,6 +276,84 @@ def analyze(image_path: Path = IMAGE) -> dict:
         if decoder._thumb_bl_target(blob, address) in interiors:
             raise AuditError("unexpected direct branch into atts_ind interior")
 
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves_by_function = {
+        row["function"]: row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == CANDIDATE_SOURCE_PATH
+    }
+    if set(leaves_by_function) != set(CANDIDATE_FUNCTIONS):
+        raise AuditError("ATTS indication production leaf inventory changed")
+    source_hash = PINS[ROOT / CANDIDATE_SOURCE_PATH]
+    leaves = []
+    for function, metrics in zip(CANDIDATE_FUNCTIONS, CANDIDATE_LEAF_METRICS):
+        leaf = leaves_by_function[function]
+        actual = (
+            leaf["expected"]["offset"], leaf["expected"]["size"],
+            len(leaf["relocations"]),
+        )
+        if actual != metrics or leaf["source"].get("sha256") != source_hash:
+            raise AuditError(f"ATTS indication production leaf changed: {function}")
+        leaves.append(leaf)
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, (function, (name, (start, end, expected))) in enumerate(
+        zip(CANDIDATE_FUNCTIONS, FUNCTIONS.items()), 1
+    ):
+        site = sites.get(f"replace_cordio_atts_ind_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"ATTS indication production route changed: {name}")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = sum(
+        right["expected"]["offset"]
+        - left["expected"]["offset"] - left["expected"]["size"]
+        for left, right in zip(leaves, leaves[1:])
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (1602, 16, 51):
+        raise AuditError("ATTS indication production metrics changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"]
+        != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"]
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256")
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([
+            row for row in override["regions"]
+            if row["name"].startswith("cordio_atts_ind_")
+        ]) != 34
+    ):
+        raise AuditError("ATTS indication component/manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or sha(PACKAGE.read_bytes())
+        != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("ATTS indication package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or sha(FLASH_PLAN.read_bytes())
+        != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("ATTS indication flash plan changed")
+
     return {
         "schema_version": 1,
         "module": {
@@ -296,7 +405,24 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "historical_generating_commit_resolved": False,
             "license": "Apache-2.0",
         },
-        "production": {"source_owned_bytes_added": 0, "stock_bytes_replaced": 0},
+        "production": {
+            "status": "routed", "functions": 13,
+            "stock_bytes_replaced": 1552,
+            "source_owned_bytes_added": compiled,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": 13,
+            "source_only_zero_copy_wrappers": 2,
+            "g2_behavior_deltas": [
+                "invalid zero connection guard on close",
+                "disconnect status maps through authenticated 0xA0 base",
+                "timeout message decodes and looks up without a retained transition",
+            ],
+            "hardware_validation": (
+                "blocked by unavailable authorized responsive G2/ATT peer evidence"
+            ),
+        },
     }
 
 

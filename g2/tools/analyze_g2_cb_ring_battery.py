@@ -181,7 +181,7 @@ def analyze(image: Path = IMAGE) -> dict:
     if set(leaves) != set(PRODUCTION_FUNCTIONS):
         raise c.AuditError("production ring-battery leaf inventory changed")
     expected_sizes = (4, 20, 12, 22, 30)
-    expected_offsets = (193488, 193492, 193512, 193524, 193548)
+    expected_offsets = (253336, 253340, 253360, 253372, 253396)
     if any(
         leaf["source"].get("path")
         != "components/apollo_main/core_overlay/cb_ring_battery.c"
@@ -213,12 +213,12 @@ def analyze(image: Path = IMAGE) -> dict:
         report["overlay"]["size"], report["overlay"]["sha256"],
         report["component"]["size"], report["component"]["sha256"],
     ) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise c.AuditError("production ring-battery build pins changed")
     manifest = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_main"]
-    if manifest["provider"].get("size") != 3764088 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
+    if manifest["provider"].get("size") != 3855544 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
         raise c.AuditError("production ring-battery manifest provider changed")
     region_names = {item["name"] for item in manifest["regions"]}
     required_regions = {

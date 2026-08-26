@@ -400,6 +400,33 @@ def build(
         or any(not isinstance(item, dict) for item in relocated_leaf_configs)
     ):
         raise BuildError("relocated_leaves must be a list of records")
+    relocated_offsets = [
+        item.get("expected", {}).get("offset")
+        if isinstance(item.get("expected"), dict)
+        else None
+        for item in relocated_leaf_configs
+    ]
+    if any(
+        not isinstance(offset, int) or offset < 0
+        for offset in relocated_offsets
+    ):
+        raise BuildError(
+            "every relocated bootloader leaf requires expected.offset"
+        )
+    if len(set(relocated_offsets)) != len(relocated_offsets):
+        raise BuildError(
+            "relocated bootloader leaf expected offsets must be unique"
+        )
+    # Placement order is an authenticated address contract, not a JSON
+    # presentation detail.  Sorting by the reviewed offsets keeps prior
+    # leaves stable when a newly recovered leaf is declared independently.
+    relocated_leaf_configs = [
+        item
+        for _offset, item in sorted(
+            zip(relocated_offsets, relocated_leaf_configs),
+            key=lambda pair: pair[0],
+        )
+    ]
     relocated_function_names = [
         item.get("function") for item in relocated_leaf_configs
     ]

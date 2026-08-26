@@ -18,7 +18,15 @@ import recover_apollo_embedded_source_paths as t
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-box-uart-mgr-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-box-uart-mgr-closure.tsv"
-PINS = {FM: "59b450ae9ad9341eef8350bdb74d425df7cb44d73845801e85603d9ede19005a", CL: "5eb1b748847610c1098d5fa3c46cd35ff1e08074ec63e5e3cc03367217052230"}
+SOURCE = ROOT / "components/apollo_main/core_overlay/box_uart_mgr.c"
+SOURCE_PATH = "components/apollo_main/core_overlay/box_uart_mgr.c"
+SOURCE_SHA256 = "d3515674bd76339aa697f66f4813ba21d04dda99ae9eae01546e6ae30680a548"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+PINS = {FM: "59b450ae9ad9341eef8350bdb74d425df7cb44d73845801e85603d9ede19005a", CL: "7b2a4c64409179ebf5a7cf63c16cecf2771721d0cf68ebd3041ef7fcf4087c97"}
 RETAINED = 'platform\\device_mgr\\box_uart_mgr.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\platform\\device_mgr\\box_uart_mgr.c'
 PATH_RUN = 0x6f890c
@@ -32,9 +40,18 @@ ESCAPES = ()
 INDIRECT = ()
 BL_ENTRY = ((5006494, 5480604), (5481070, 5480464))
 BL_STRICT = ((4497154, 5480644), (4497416, 5480906), (5480900, 5480084))
+PSEUDO_BL_STRICT = ((4497154, 5480644), (4497416, 5480906))
+LIVE_BL_STRICT = ((5480900, 5480084),)
 BW_ENTRY = ()
 B16_ENTRY = ()
 STORED_RAW = ((5481420, 5480477), (7639240, 5480631))
+ROUTES = (
+    ("replace_box_uart_mgr_01", "open_cfw_box_uart_unpack", 0x00539E94, 0x0053A010),
+    ("replace_box_uart_mgr_02", "open_cfw_box_uart_send", 0x0053A010, 0x0053A01C),
+    ("replace_box_uart_mgr_03", "open_cfw_box_uart_receive", 0x0053A01C, 0x0053A09C),
+    ("replace_box_uart_mgr_04", "open_cfw_box_uart_init", 0x0053A09C, 0x0053A0B6),
+    ("replace_box_uart_mgr_05", "open_cfw_box_uart_handle", 0x0053A0B6, 0x0053A3A4),
+)
 GUARD_BEFORE = "0cd1f72ddf9ec8f332e3c7568687371e5ad77107efb0b3c50001834452cd8df1"
 GUARD_AFTER = "228adbf7d252de6592988f87b5bfebde50f62cf4a046165238a8bcbf185f6522"
 TAGS = ((7195412, '[box_uart_mgr]crc check failed, data len = %d, tmp_crc: 0x%x, tmp_buf[idx + tmp_len - 1]: 0x%x'), (7587696, '[box_uart_mgr]uart clear buffer failed: %d\n'), (7634676, '[box_uart_mgr]box uart unpack err:%d\n'), (7634716, '[box_uart_mgr]uart tx flush failed: %d\n'), (7634756, '[box_uart_mgr]uart start failed: %d\n'), (7634796, '[box_uart_mgr]pt cmd execute err:%d\n'), (7677468, '[box_uart_mgr]uart stop failed: %d\n'), (7677504, '[box_uart_mgr]box uart pack err:%d\n'), (7677540, '[box_uart_mgr]box uart send err:%d\n'), (7726288, '[box_uart_mgr]box rcv msg err\n'))
@@ -231,17 +248,98 @@ def analyze(image=IMAGE):
     for address, text in TAGS:
         if _cstring(blob, address) != text:
             raise c.AuditError("tag string changed")
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if any(x.get("path", "").replace("\\", "/").split("/")[-1].lower() == 'box_uart_mgr.c' for x in overlay["sources"]):
-        raise c.AuditError("object entered production overlay")
+    if tuple(bls[:2]) != PSEUDO_BL_STRICT or tuple(bls[2:]) != LIVE_BL_STRICT:
+        raise c.AuditError("strict-interior pseudo-decode classification changed")
+
+    overlay = json.loads(OVERLAY.read_text())
+    if _sh(SOURCE.read_bytes()) != SOURCE_SHA256:
+        raise c.AuditError("case-UART production source changed")
+    leaves = [
+        item for item in overlay["relocated_leaves"]
+        if item.get("source", {}).get("path") == SOURCE_PATH
+    ]
+    if len(leaves) != len(ROUTES) or any(
+        item.get("source", {}).get("sha256") != SOURCE_SHA256
+        for item in leaves
+    ):
+        raise c.AuditError("case-UART production source inventory changed")
+    sites = {item["name"]: item for item in overlay["patch_sites"]}
+    routed = 0
+    for name, function, start, end in ROUTES:
+        site = sites.get(name)
+        if (
+            site is None
+            or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("branch") != "b_w"
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != _sh(c._slice(blob, start, end))
+            or function not in overlay["functions"]
+        ):
+            raise c.AuditError("case-UART production route changed: " + name)
+        routed += end - start
+    compiled = sum(item["expected"]["size"] for item in leaves)
+    alignment = sum(
+        leaves[index + 1]["expected"]["offset"]
+        - leaves[index]["expected"]["offset"]
+        - leaves[index]["expected"]["size"]
+        for index in range(len(leaves) - 1)
+    )
+    relocations = sum(len(item["relocations"]) for item in leaves)
+    if (compiled, alignment, relocations, routed) != (514, 4, 21, 1296):
+        raise c.AuditError("case-UART production metrics changed")
+
+    report = json.loads(BUILD_REPORT.read_text())
+    if (
+        report["overlay"]["size"] != 332666
+        or report["overlay"]["sha256"] != "80f7aae90196045102d6f1f59be0b49d84b3ed58f017a8f5d56109a2788b8561"
+        or report["component"]["size"] != 3856062
+        or report["component"]["sha256"] != "96a369aa58d9570a0c6eeb5cde5fd5b309e827bd5f6dcf979eae88df971ccf3a"
+    ):
+        raise c.AuditError("case-UART production component changed")
+    report_leaves = [
+        item for item in report["relocated_leaves"]
+        if item.get("source", {}).get("path") == SOURCE_PATH
+    ]
+    if len(report_leaves) != 5 or sum(
+        item["extraction"]["relocation_count"] for item in report_leaves
+    ) != 21:
+        raise c.AuditError("case-UART built leaf inventory changed")
+
+    manifest = json.loads(MANIFEST.read_text())
+    provider = manifest["component_overrides"]["apollo_main"]["provider"]
+    regions = manifest["component_overrides"]["apollo_main"]["regions"]
+    if (
+        provider.get("size") != 3856062
+        or provider.get("sha256") != "96a369aa58d9570a0c6eeb5cde5fd5b309e827bd5f6dcf979eae88df971ccf3a"
+        or len([item for item in regions if item["name"].startswith("box_uart_mgr_")]) != 12
+    ):
+        raise c.AuditError("case-UART package ownership manifest changed")
+    if (
+        PACKAGE.stat().st_size != 4634556
+        or _sh(PACKAGE.read_bytes()) != "430bf420dc4ebcf49dcef43177e134bdb9046f3a93ebb244089552d37deb7933"
+    ):
+        raise c.AuditError("case-UART production package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 3116640
+        or _sh(FLASH_PLAN.read_bytes()) != "4c4ef626ec165aede17768250dce2a6b163bdd64cf9fb50b084b863e9eae3e40"
+        or (
+            len(flash["flash_regions"]),
+            len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]),
+            len(flash["protected_regions"]),
+        ) != (4495, 2, 5, 6)
+    ):
+        raise c.AuditError("case-UART production flash plan changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only zero-anchor linked-object closure",
         "identity": {"disposition": "linked-unanchored", "ghidra_discovered_functions": 0, "image_sha256": c.IMAGE_SHA256, "path_anchored_functions": 0, "retained_path": RETAINED, "retained_product_path": FULL_PATH},
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
-        "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
+        "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "strict_interior_overlapping_pseudo_decodes": len(PSEUDO_BL_STRICT), "strict_interior_live_internal_calls": len(LIVE_BL_STRICT), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": False},
+        "production": {"production_routed": True, "source_files": 1, "source_functions": len(leaves), "compiled_text_bytes": compiled, "alignment_bytes": alignment, "strict_relocations": relocations, "guarded_redirects": len(ROUTES), "routed_stock_bytes": routed, "retained_compatibility_bytes": PHYS[1] - PHYS[0] - routed, "package_size": PACKAGE.stat().st_size, "placed_flash_regions": len(flash["flash_regions"])},
     }
 
 

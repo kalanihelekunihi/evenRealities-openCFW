@@ -30,33 +30,33 @@ PINS = {
 SOURCE_SIZE = 23775
 SOURCE_SHA256 = "6a8ff21295e7612cae2287accc6e3ffb1f1fd639b61f044804ea45286b00188a"
 FUNCTIONS = (
-    ("open_cfw_pb_service_even_ai_buffer_write", 146, 197488, 0),
-    ("open_cfw_pb_service_even_ai_zero", 88, 197636, 0),
-    ("PB_RxEvenAICtrl", 26, 197724, 1),
-    ("APP_PbTxEncodeEvenAICtrl", 126, 197752, 5),
-    ("APP_PbNotifyEncodeEvenAICtrl", 144, 197880, 5),
-    ("PB_RxEvenAIVADInfo", 26, 198024, 1),
-    ("APP_PbTxEncodeEvenAIVADInfo", 126, 198052, 5),
-    ("APP_PbNotifyEncodeEvenAIVADInfo", 142, 198180, 5),
-    ("PB_RxEvenAIAskInfo", 28, 198324, 1),
-    ("APP_PbTxEncodeEvenAIAskInfo", 126, 198352, 5),
-    ("PB_RxEvenAIAnalyseInfo", 26, 198480, 1),
-    ("APP_PbTxEncodeEvenAIAnalyseInfo", 120, 198508, 5),
-    ("PB_RxEvenAIReplyInfo", 28, 198628, 1),
-    ("APP_PbTxEncodeEvenAIReplyInfo", 126, 198656, 5),
-    ("PB_RxEvenAISkillInfo", 28, 198784, 1),
-    ("APP_PbTxEncodeEvenAISkillInfo", 126, 198812, 5),
-    ("PB_RxEvenAIPromptInfo", 26, 198940, 1),
-    ("APP_PbTxEncodeEvenAIPromptInfo", 126, 198968, 5),
-    ("PB_RxEvenAIEvent", 26, 199096, 1),
-    ("APP_PbTxEncodeEvenAIEvent", 126, 199124, 5),
-    ("APP_PbNotifyEncodeEvenAIEvent", 144, 199252, 5),
-    ("PB_RxEvenAIHeartbeat", 26, 199396, 1),
-    ("APP_PbTxEncodeEvenAIHeartbeat", 152, 199424, 7),
-    ("PB_RxEvenAIConfig", 26, 199576, 1),
-    ("APP_PbTxEncodeEvenAIConfig", 134, 199604, 5),
-    ("APP_PbTxEncodeEvenAICommResp", 118, 199740, 5),
-    ("APP_PbRxEvenAIFrameDataProcess", 496, 199860, 25),
+    ("open_cfw_pb_service_even_ai_buffer_write", 146, 257336, 0),
+    ("open_cfw_pb_service_even_ai_zero", 88, 257484, 0),
+    ("PB_RxEvenAICtrl", 26, 257572, 1),
+    ("APP_PbTxEncodeEvenAICtrl", 126, 257600, 5),
+    ("APP_PbNotifyEncodeEvenAICtrl", 144, 257728, 5),
+    ("PB_RxEvenAIVADInfo", 26, 257872, 1),
+    ("APP_PbTxEncodeEvenAIVADInfo", 126, 257900, 5),
+    ("APP_PbNotifyEncodeEvenAIVADInfo", 142, 258028, 5),
+    ("PB_RxEvenAIAskInfo", 28, 258172, 1),
+    ("APP_PbTxEncodeEvenAIAskInfo", 126, 258200, 5),
+    ("PB_RxEvenAIAnalyseInfo", 26, 258328, 1),
+    ("APP_PbTxEncodeEvenAIAnalyseInfo", 120, 258356, 5),
+    ("PB_RxEvenAIReplyInfo", 28, 258476, 1),
+    ("APP_PbTxEncodeEvenAIReplyInfo", 126, 258504, 5),
+    ("PB_RxEvenAISkillInfo", 28, 258632, 1),
+    ("APP_PbTxEncodeEvenAISkillInfo", 126, 258660, 5),
+    ("PB_RxEvenAIPromptInfo", 26, 258788, 1),
+    ("APP_PbTxEncodeEvenAIPromptInfo", 126, 258816, 5),
+    ("PB_RxEvenAIEvent", 26, 258944, 1),
+    ("APP_PbTxEncodeEvenAIEvent", 126, 258972, 5),
+    ("APP_PbNotifyEncodeEvenAIEvent", 144, 259100, 5),
+    ("PB_RxEvenAIHeartbeat", 26, 259244, 1),
+    ("APP_PbTxEncodeEvenAIHeartbeat", 152, 259272, 7),
+    ("PB_RxEvenAIConfig", 26, 259424, 1),
+    ("APP_PbTxEncodeEvenAIConfig", 134, 259452, 5),
+    ("APP_PbTxEncodeEvenAICommResp", 118, 259588, 5),
+    ("APP_PbRxEvenAIFrameDataProcess", 496, 259708, 25),
 )
 PHYSICAL = (0x004E31CC, 0x004E54C8)
 PHYSICAL_SHA256 = "d69f6c3ad3c31b07005e0f0f6da22f3c0be4868dbfbe1eb16b1b6549b35e8fed"
@@ -284,8 +284,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -293,8 +293,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

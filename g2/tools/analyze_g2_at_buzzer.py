@@ -93,8 +93,8 @@ PRODUCTION_PIN = (
 )
 PRODUCTION_LEAF_PIN = (
     2740,
-    "a3eeb877b669e96b2f0122ebdd399a5795a6f0a7bd7d3fd938f03375c5cd0305",
-    186072,
+    "a54dbc400fbff8e82bbb69e26d682a1376af10f3cf7b6d6f4ee8de843a983acc",
+    245920,
     "ad410f96ed64029c338fc5e522f952226d10676935ca991583c498ee9810efdf",
 )
 
@@ -298,10 +298,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
         build["overlay"]["size"], build["overlay"]["sha256"],
         build["component"]["size"], build["component"]["sha256"],
     ) != (
-        240692,
-        "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088,
-        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148,
+        "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544,
+        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production AT^BUZZER build pins changed")
     built = [
@@ -331,16 +331,16 @@ def analyze(image_path: Path = IMAGE) -> dict:
         or (
             appended.get("file_offset"), appended.get("size"),
             appended.get("target_address"), appended.get("address_status"),
-        ) != (3709468, 2740, 0x007C19FC, "source_compiled")
+        ) != (3769316, 2740, 0x007D03C4, "source_compiled")
         or (
             main["provider"]["size"], main["provider"]["sha256"],
             manifest["package"]["expected_size"],
             manifest["package"]["expected_sha256"],
         ) != (
-            3764088,
-            "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-            4542582,
-            "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+            3855544,
+            "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+            4634038,
+            "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
         )
     ):
         raise AuditError("production AT^BUZZER manifest closure changed")

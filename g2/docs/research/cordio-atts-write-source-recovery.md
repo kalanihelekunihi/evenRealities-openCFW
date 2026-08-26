@@ -1,6 +1,6 @@
 # Cordio ATT server write processor source audit
 
-Status date: 2026-08-09  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -78,9 +78,33 @@ import commit is claimed as the resolved historical G2 producer.
 
 ```sh
 python3 tools/analyze_g2_cordio_atts_write.py --json
-python3 -m unittest tests.test_analyze_g2_cordio_atts_write
+make cordio-atts-write-closure
 ```
 
-This closes all non-null methods in the stock 18-entry ATT server request
-table. The next bounded server follow-up should cover the database/group API
-owner rather than another processor-table tranche.
+## Production closure
+
+`runtime_cordio_atts_write.c` now owns all four linked entries. Four guarded
+redirects replace 1,220 authenticated stock body bytes with 1,644 selector-
+isolated Cortex-M55 text bytes plus 12 alignment bytes under 25 strict
+relocations. The maintained implementation uses the source-owned WSF buffer
+and queue providers, preserves the fixed queue/configuration/CCC callback ABI,
+and implements the exact r20 request, command, prepare, execute, cancel,
+callback, CCC, error, and pending-response behavior. Host tests exercise those
+paths, including validate-before-commit queue handling. All four linked leaves
+and the source-only continuation API compile independently for the target.
+
+The current canonical overlay is 340,072 bytes, SHA-256
+`849bffe5646022d3beec5ea492dc9c3b2ffabccc4f84a9b0449317d257525834`;
+the Apollo component is 3,863,468 bytes, SHA-256
+`15fd0568b892d3f4e2de5a994ccc4f46ff2a04bc45d537a322c216b67068eb9d`;
+and the deterministic package is 4,641,962 bytes, SHA-256
+`82097f8c735fc3ec9d162a1c8379e8b7ea2f8562b0b58eca297b222018e5b94c`.
+The flash plan has 4,716 placed, two unresolved evidence-only, five
+container-only, and six protected regions. No image was signed, flashed, or
+installed.
+
+Live ATT request/command, prepare/execute/cancel, deferred callback completion,
+peer interoperability, controller timing, and EM9305 interaction remain
+blocked by unavailable authorized responsive G2 and peer capture evidence.
+This closes all non-null write methods in the stock 18-entry ATT server table;
+it does not declare the wider ATT or G2 firmware functionally complete.

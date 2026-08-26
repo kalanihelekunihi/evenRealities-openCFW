@@ -42,7 +42,7 @@ class AnalyzeG2FirstPartyFrontierTests(unittest.TestCase):
 
     def test_complete_object_totals_and_protocol_status(self) -> None:
         surface = self.report["surface"]
-        self.assertEqual(surface["closed_manifest_body_bytes"], 814858)
+        self.assertEqual(surface["closed_manifest_body_bytes"], 814822)
         self.assertEqual(surface["closed_manifest_physical_bytes_known"], 885418)
         self.assertEqual(surface["closed_manifests_with_physical_bytes"], 232)
         self.assertEqual(surface["closed_manifests_without_physical_bytes"], 2)

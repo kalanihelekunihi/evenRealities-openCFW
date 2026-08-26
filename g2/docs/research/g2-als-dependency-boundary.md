@@ -1,7 +1,7 @@
 # G2 ALS dependency boundary
 
-Status: complete fail-closed object and dependency audit. Authenticated against
-G2 2.2.6.10; production routing remains disabled.
+Status: software-complete and production-routed. Authenticated against G2
+2.2.6.10; live physical validation is blocked by unavailable evidence.
 
 The retained `driver\sensor\als\als.c` anchors nine functions / 2,114 bytes,
 but the adjacent source-order and internal-call graph expands the candidate
@@ -35,5 +35,24 @@ zero-anchor `cb_charge.c` boundary. One stored Thumb callback targets
 display-driver interface. The apparent branch at `0x004AE09C` begins halfway
 through a real 32-bit instruction and is explicitly rejected as an unaligned
 pseudo-`BL`; there is no executable strict-interior ingress.
+
+The clean-room `components/apollo_main/core_overlay/als.c` implementation
+recreates all 38 functions and compiles each independently under the reviewed
+Cortex-M55 profile. Thirty-eight guarded redirects replace all 3,858 stock
+function bytes. The appended closure contains 2,216 Thumb text bytes, 48 bytes
+of authenticated brightness-curve read-only data, 30 alignment bytes, and 82
+strict relocations; only the 374-byte stock literal/alignment closure remains
+official. Host oracles cover sampling, pitch filtering, OPT3007 conversion and
+initialization, curve/scale learning, brightness sync, manual lockout, timer
+transitions, and open/close behavior.
+
+Canonical identities are overlay 257,980 bytes / `09f0371422…c94fbb`, Apollo
+component 3,781,376 bytes / `96447430fe…39130`, package 4,559,870 bytes /
+`a7d64172ab…5e305`, and flash plan 2,943,327 bytes / `74c7bc32a7…39b9`
+with 4,239 placed, two unresolved, five container-only, and six protected
+regions. No firmware was signed or flashed. The authorized right temple is
+nonresponsive, the authorized left temple must remain stock, and no responsive
+authorized ALS path, calibrated lux reference, or golden OPT3007 trace is
+available; physical validation is explicitly blocked rather than claimed.
 
 Reproduce with `make als-closure`.

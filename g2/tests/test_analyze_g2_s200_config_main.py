@@ -16,17 +16,17 @@ class ZeroAnchorClosureTests(unittest.TestCase):
         cls.r = M.analyze()
 
     def test_identity(self):
-        self.assertEqual(self.r["identity"], {'disposition': 'linked-unanchored', 'ghidra_discovered_functions': 0, 'image_sha256': '36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863', 'path_anchored_functions': 0, 'retained_path': 'product\\s200\\app\\config\\main.c', 'retained_product_path': 'D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\app\\config\\main.c'})
+        self.assertEqual(self.r["identity"], {'disposition': 'implemented-in-source; hardware-blocked', 'ghidra_discovered_functions': 6, 'image_sha256': '36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863', 'path_anchored_functions': 0, 'retained_path': 'product\\s200\\app\\config\\main.c', 'retained_product_path': 'D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\app\\config\\main.c'})
 
     def test_surface(self):
-        self.assertEqual(self.r["surface"], {'body_bytes': 1504, 'direct_body_calls': 119, 'function_escapes': 1, 'indirect_body_calls': 1, 'internal_direct_body_calls': 1, 'linked_functions': 6, 'outer_pool_bytes': 26, 'path_literal_references': 14, 'physical_bytes': 1530, 'raw_path_referencing_functions': 2, 'reachable_instructions': 582})
+        self.assertEqual(self.r["surface"], {'body_bytes': 1468, 'direct_body_calls': 119, 'function_escapes': 0, 'indirect_body_calls': 1, 'internal_direct_body_calls': 1, 'linked_functions': 6, 'outer_pool_bytes': 62, 'path_literal_references': 14, 'physical_bytes': 1530, 'raw_path_referencing_functions': 2, 'reachable_instructions': 564})
 
     def test_ingress(self):
         self.assertEqual(self.r["ingress"], {'direct_b16_entry_sites': 0, 'direct_bl_entry_sites': 2, 'direct_bl_strict_interior_sites': 0, 'direct_bw_entry_sites': 0, 'stored_entry_pointer_words': 3})
 
     def test_evidence_and_production(self):
         self.assertEqual(self.r["evidence"], {'boundary_guards': True, 'pointer_cells': ['0x005CE154'], 'path_string_run_address': '0x00703ACC', 'tag_strings': 14})
-        self.assertFalse(self.r["production"]["production_routed"])
+        self.assertEqual(self.r["production"], {'alignment_bytes': 4, 'compiled_text_bytes': 584, 'hardware_validation': 'blocked_unavailable_authorized_physical_evidence', 'production_routed': True, 'replaced_stock_body_bytes': 1468, 'source_functions': 6, 'strict_relocations': 47})
 
 
 if __name__ == "__main__":

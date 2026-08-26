@@ -25,7 +25,7 @@ OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
-SOURCE_PIN = (19702, "3167ebe3288500e56002e82daed3672f37c1af534922b71ee777c8fa3ca8fe97")
+SOURCE_PIN = (19702, "3167ebe3288500e56002e82daed3652f37c1af534922b71ee777c8fa3ca8fe97")
 LEAF_NAMES = (
     "open_cfw_system_alert_set_box_padding",
     "open_cfw_system_alert_common_data_handler",
@@ -35,10 +35,10 @@ LEAF_NAMES = (
     "open_cfw_system_alert_reflash_event_handler",
     "open_cfw_system_alert_ui_event_handler",
 )
-LEAF_DIGEST = "57964dce247be235831ef1d706d5c7e10dada79e2cb94f059559d73bfda2de12"
+LEAF_DIGEST = "892fd5eb8d2dff2da201106b84c4f27b780a1bde15a90f01e08783213cb3d418"
 PATCH_DIGEST = "1438650fbe6295315d0429def79c3d4eae2fcb31dafc5a57ff2e1a22830108ca"
-BUILT_DIGEST = "0dafcad8ff47cb1a94052b1793cd37169c1cd8caf804fa8cc6d0d7d1265a1e93"
-REGION_DIGEST = "3a4aa71c18e804f60ad36c60c9bf2b603a950f78341917a0be13dfe6ea5f3337"
+BUILT_DIGEST = "b23c947ce5e224e7c98ac729022d2fc6f7a0e1b3814408c8e00aebf073d12363"
+REGION_DIGEST = "e97d2de4bd6b0da5aaccf624a94471c1077ddfe9af5c01f003b4186ce5e5d489"
 RETAINED = 'app\\gui\\SystemAlert\\systemAlert.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\app\\gui\\SystemAlert\\systemAlert.c'
 PATH_RUN = 0x6fd85c
@@ -266,12 +266,12 @@ def analyze(image=IMAGE):
         raise c.AuditError("production SystemAlert leaf closure changed")
     if sum(x["expected"]["size"] for x in leaves) != 1138 or sum(x["expected"].get("closure_size", x["expected"]["size"]) for x in leaves) != 1189 or sum(len(x["relocations"]) for x in leaves) != 85:
         raise c.AuditError("production SystemAlert compiled census changed")
-    previous = 224198
+    previous = 284046
     alignment = 0
     for leaf in leaves:
         alignment += leaf["expected"]["offset"] - previous
         previous = leaf["expected"]["offset"] + leaf["expected"].get("closure_size", leaf["expected"]["size"])
-    if alignment != 9 or previous != 225396:
+    if alignment != 9 or previous != 285244:
         raise c.AuditError("production SystemAlert placement changed")
     patches = [x for x in overlay["patch_sites"] if x.get("target_function") in set(LEAF_NAMES)]
     if len(patches) != 7 or _jsh(patches) != PATCH_DIGEST or sum(x["expected_size"] for x in patches) != 2174 or {x["target_function"] for x in patches} != set(LEAF_NAMES):
@@ -279,7 +279,7 @@ def analyze(image=IMAGE):
     if any(x.get("branch") != "b_w" or x.get("profiles") != ["apple-clang"] for x in patches):
         raise c.AuditError("production SystemAlert redirect policy changed")
     build = json.loads(REPORT.read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae", 3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):
+    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d", 3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
         raise c.AuditError("production SystemAlert build pins changed")
     built = [x for x in build["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
     normalized = [{"function": x["extraction"]["function"], "size": x["placement"]["size"], "padding_before": x["placement"]["padding_before"], "offset": x["placement"]["offset"], "runtime_address": x["placement"]["runtime_address"], "relocation_count": x["extraction"]["relocation_count"]} for x in built]
@@ -296,11 +296,11 @@ def analyze(image=IMAGE):
     generated_alignment = [x for x in regions if x["address_status"] == "generated_alignment"]
     if (len(replacements), sum(x["size"] for x in replacements), len(retained), sum(x["size"] for x in retained), len(compiled), sum(x["size"] for x in compiled), len(generated_alignment), sum(x["size"] for x in generated_alignment)) != (7, 2174, 2, 172, 8, 1189, 4, 9):
         raise c.AuditError("production SystemAlert stock/overlay tiling changed")
-    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed", 4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):
+    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc", 4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
         raise c.AuditError("production SystemAlert manifest closure changed")
     plan_bytes = FLASH_PLAN.read_bytes()
     plan = json.loads(plan_bytes)
-    if (len(plan_bytes), _sh(plan_bytes)) != (2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f") or plan.get("package_sha256") != "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85" or tuple(len(plan[k]) for k in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions")) != (3715, 2, 5, 6):
+    if (len(plan_bytes), _sh(plan_bytes)) != (3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297") or plan.get("package_sha256") != "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731" or tuple(len(plan[k]) for k in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions")) != (4482, 2, 5, 6):
         raise c.AuditError("production SystemAlert flash plan changed")
     return {
         "schema_version": 1,

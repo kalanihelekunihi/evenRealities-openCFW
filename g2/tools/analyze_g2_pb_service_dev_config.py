@@ -30,12 +30,12 @@ PINS = {
 SOURCE_SIZE = 11435
 SOURCE_SHA256 = "46c79dbaad289491f195562aea10d3d8ba92684e7227e463b697a04f31b67bc4"
 FUNCTIONS = (
-    ("open_cfw_pb_service_dev_config_buffer_write", 154, 202484, 0,
+    ("open_cfw_pb_service_dev_config_buffer_write", 154, 262332, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_dev_config_zero", 88, 202640, 0, "zero"),
-    ("APP_PbRxErrorCode", 4, 202728, 0, "error_rx"),
-    ("APP_PbTxEncodeErrorCode", 118, 202732, 4, "error_tx"),
-    ("APP_PbRxDevCfgFrameDataProcess", 634, 202852, 29, "rx"),
+    ("open_cfw_pb_service_dev_config_zero", 88, 262488, 0, "zero"),
+    ("APP_PbRxErrorCode", 4, 262576, 0, "error_rx"),
+    ("APP_PbTxEncodeErrorCode", 118, 262580, 4, "error_tx"),
+    ("APP_PbRxDevCfgFrameDataProcess", 634, 262700, 29, "rx"),
 )
 PATCH_SUFFIXES = ("rx", "error_rx", "error_tx")
 PHYSICAL = (0x004D83D8, 0x004D8F4C)
@@ -252,8 +252,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -261,8 +261,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

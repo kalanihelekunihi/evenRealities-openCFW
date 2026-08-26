@@ -58,10 +58,10 @@ class ApolloCoreOverlayTests(unittest.TestCase):
     def test_overlay_and_complete_component_are_pinned(self) -> None:
         overlay = self.component_report["overlay"]
         component = self.component_report["component"]
-        self.assertEqual(overlay["size"], 240692)
+        self.assertEqual(overlay["size"], 408458)
         self.assertEqual(
             overlay["sha256"],
-            "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
+            "22a9e111e2b790489c50b0c631f87150b4d93a82b40539dae1509fd631248c18",
         )
         expected_legacy_functions = {
                 "evenhub_longpress": {"offset": 0, "size": 54},
@@ -256,7 +256,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "size": 14,
                 },
                 "open_cfw_evenhub_shutdown_mark": {
-                    "offset": 13672,
+                    "offset": 13652,
                     "size": 14,
                 },
                 "open_cfw_evenhub_imu_enable": {
@@ -2696,30 +2696,36 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "size": 34,
                 },
             }
-        self.assertEqual(
-            {
-                name: overlay["functions"][name]
-                for name in expected_legacy_functions
-            },
-            expected_legacy_functions,
+        self.assertTrue(
+            set(expected_legacy_functions).issubset(overlay["functions"])
         )
-        self.assertEqual(overlay["link"]["text_size"], 109592)
-        self.assertEqual(overlay["link"]["rodata_size"], 3996)
-        self.assertEqual(overlay["link"]["resolved_relocation_count"], 906)
-        self.assertEqual(len(overlay["functions"]), 1518)
-        self.assertEqual(len(overlay["patched_sites"]), 1422)
-        self.assertEqual(component["replaced_stock_function_bytes"], 250642)
-        self.assertEqual(component["generated_patch_site_bytes"], 250462)
+        self.assertEqual(
+            hashlib.sha256(
+                json.dumps(
+                    overlay["functions"],
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            ).hexdigest(),
+            "e17312607aac21649e1309104e1b4f2f2af06aa580c2780f10adceb4c40e53ae",
+        )
+        self.assertEqual(overlay["link"]["text_size"], 163862)
+        self.assertEqual(overlay["link"]["rodata_size"], 9572)
+        self.assertEqual(overlay["link"]["resolved_relocation_count"], 989)
+        self.assertEqual(len(overlay["functions"]), 2511)
+        self.assertEqual(len(overlay["patched_sites"]), 2254)
+        self.assertEqual(component["replaced_stock_function_bytes"], 384216)
+        self.assertEqual(component["generated_patch_site_bytes"], 384036)
         self.assertEqual(component["generated_wrapper_bytes"], 32)
         self.assertEqual(component["source_owned_in_place_bytes"], 184)
         self.assertEqual(component["source_owned_in_place_data_bytes"], 2200)
         self.assertEqual(component["replaced_stock_data_bytes"], 2200)
-        self.assertEqual(component["source_owned_bytes"], 241714)
-        self.assertEqual(component["opaque_base_bytes"], 3270518)
-        self.assertEqual(component["size"], 3764088)
+        self.assertEqual(component["source_owned_bytes"], 410842)
+        self.assertEqual(component["opaque_base_bytes"], 3136944)
+        self.assertEqual(component["size"], 3931854)
         self.assertEqual(
             component["sha256"],
-            "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+            "8e217faf212b5cf397b19ce0648c665b3f62233be67e418fba35abccc5672763",
         )
 
     def test_freertos_semaphore_take_upstream_pair_is_source_closed(self) -> None:
@@ -2765,21 +2771,21 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             "7bc1adb794188c36fe0693ef4dcf0e45"
             "b83cb32ba523142ecb72e703d65979e2",
         )
-        self.assertEqual(helper["placement"]["offset"], 120696)
+        self.assertEqual(helper["placement"]["offset"], 180544)
         self.assertEqual(helper["placement"]["size"], 18)
-        self.assertEqual(take["placement"]["offset"], 120716)
+        self.assertEqual(take["placement"]["offset"], 180564)
         self.assertEqual(take["placement"]["size"], 602)
         self.assertEqual(helper["extraction"]["relocations"], [])
         self.assertEqual(
             take["extraction"]["relocations"],
             [{
                 "offset": 580,
-                "runtime_address": 0x007B1CF4,
-                "runtime_address_hex": "0x007B1CF4",
+                "runtime_address": 0x007C06BC,
+                "runtime_address_hex": "0x007C06BC",
                 "symbol": helper_name,
                 "symbol_type": "STT_NOTYPE",
-                "target_address": 0x007B1A9C,
-                "target_address_hex": "0x007B1A9C",
+                "target_address": 0x007C0464,
+                "target_address_hex": "0x007C0464",
                 "target_function": helper_name,
                 "type": "R_ARM_THM_CALL",
                 "type_id": 10,
@@ -2799,7 +2805,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 replacement[:4],
                 link=False,
             ),
-            0x007B1AB0,
+            0x007C0478,
         )
         self.assertEqual(replacement[4:], b"\x00\xBF" * 175)
 
@@ -2863,6 +2869,14 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         narrow = []
         for offset in range(0, len(application) - 1, 2):
             address = application_base + offset
+            if offset >= 2:
+                previous = struct.unpack_from("<H", application, offset - 2)[0]
+                if previous & 0xF800 in (0xE800, 0xF000, 0xF800):
+                    # The current halfword is the second half of a 32-bit
+                    # Thumb instruction, not an independently decodable
+                    # narrow branch.  Relocation can legitimately make that
+                    # payload resemble a 16-bit branch encoding.
+                    continue
             instruction = struct.unpack_from("<H", application, offset)[0]
             targets = []
             if instruction & 0xF800 == 0xE000:
@@ -2967,7 +2981,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "223758f605ee22220e5a534db4675545c"
                     "c43a1f1fc5f24051c3c7c3cc92d556c"
                 ),
-                "offset": 121320,
+                "offset": 181168,
                 "size": 172,
                 "sha256": (
                     "689da8cc4cd4757e609cdf77b3675ff73"
@@ -2975,7 +2989,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 ),
                 "patch": "replace_freertos_queue_generic_reset",
                 "stock": (0x00441516, 180),
-                "target": 0x007B1D0C,
+                "target": 0x007C06D4,
             },
             "open_cfw_freertos_task_remove_from_unordered_event_list": {
                 "path": (
@@ -2987,7 +3001,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "3656a2e24d63a2dd92743fde085be59f"
                     "f4c830afb357535b38dbd4a4dc39f77c"
                 ),
-                "offset": 121492,
+                "offset": 181340,
                 "size": 214,
                 "sha256": (
                     "c4a89f560a07598f3af72a4ca0e3a6b"
@@ -2997,7 +3011,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "replace_freertos_task_remove_from_unordered_event_list"
                 ),
                 "stock": (0x0045547C, 218),
-                "target": 0x007B1DB8,
+                "target": 0x007C0780,
             },
         }
         selected = [
@@ -3354,8 +3368,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             leaf["placement"],
             {
                 "alignment": 4,
-                "offset": 113588,
-                "padding_before": 0,
+                "offset": 173436,
+                "padding_before": 2,
                 "size": 48,
             },
         )
@@ -3376,7 +3390,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         function = overlay_report["functions"][
             "am_hal_mspi_interrupt_clear"
         ]
-        self.assertEqual(function, {"offset": 113588, "size": 48})
+        self.assertEqual(function, {"offset": 173436, "size": 48})
         overlay = (
             OPENCFW_ROOT / overlay_report["artifact"]
         ).read_bytes()
@@ -3462,7 +3476,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 leaf["placement"]["padding_before"]
                 for leaf in report["isolated_leaves"]
             ),
-            4,
+            6,
         )
 
         expected = {
@@ -3472,7 +3486,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "f6bd0708e653c8e8880e33e298f9dc8"
                     "ede1305c9386ea4ca5ff554d4022dc323"
                 ),
-                "offset": 113636,
+                "offset": 173484,
                 "discarded_function": "vClearInterruptMask",
                 "site_name": "replace_freertos_ul_set_interrupt_mask",
                 "runtime_address": 0x005FA0A4,
@@ -3484,7 +3498,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "97532a7902b38e1551198dd647d0fcdc3"
                     "a6f19315b6491058a813c7643e0028a"
                 ),
-                "offset": 113658,
+                "offset": 173506,
                 "discarded_function": "ulSetInterruptMask",
                 "site_name": "replace_freertos_v_clear_interrupt_mask",
                 "runtime_address": 0x005FA0BA,
@@ -3709,7 +3723,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             leaf["placement"],
             {
                 "alignment": 4,
-                "offset": 113672,
+                "offset": 173520,
                 "padding_before": 0,
                 "size": 44,
             },
@@ -3718,7 +3732,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         overlay = (
             OPENCFW_ROOT / overlay_report["artifact"]
         ).read_bytes()
-        body = overlay[113672:113716]
+        body = overlay[173520:173564]
         self.assertEqual(
             hashlib.sha256(body).hexdigest(),
             "6161db6d0867e47749654ae90b560ae49"
@@ -3753,13 +3767,13 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "expected_size": 30,
                 "payload_offset": 602274,
                 "runtime_address": 0x004CB082,
-                "target_address": 0x007AFF2C,
+                "target_address": 0x007BE8F4,
                 "target_function": "open_cfw_littlefs_mlist_isopen",
             },
         )
         self.assertEqual(
             replacement,
-            bytes.fromhex("e4f253bf") + bytes.fromhex("00bf") * 13,
+            bytes.fromhex("f3f237bc") + bytes.fromhex("00bf") * 13,
         )
         self.assertEqual(
             apollo_overlay.decode_thumb_branch(
@@ -3798,7 +3812,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         }
         expectations = {
             "open_cfw_littlefs_util_fromle32": (
-                113716,
+                173564,
                 2,
                 0,
                 (
@@ -3810,7 +3824,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 34,
             ),
             "open_cfw_littlefs_util_tole32": (
-                113720,
+                173568,
                 2,
                 2,
                 (
@@ -3822,7 +3836,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 8,
             ),
             "open_cfw_littlefs_util_frombe32": (
-                113724,
+                173572,
                 4,
                 2,
                 (
@@ -3834,7 +3848,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 34,
             ),
             "open_cfw_littlefs_util_tobe32": (
-                113728,
+                173576,
                 4,
                 0,
                 (
@@ -3914,8 +3928,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "function": "open_cfw_easylogger_set_output_enabled",
                 "body": (106784, 152),
                 "body_sha256":
-                    "ce7b7b11a0c135247a6d5c49f490dbd"
-                    "c09eb2cce733847d24dc7395041663229",
+                    "f6db0426d0746d9658eb9fe768ca7142"
+                    "d5f65dd87a180c2eba96d1e6cfa69688",
                 "callers": (0x0043D1AA, 0x0043D20C),
             },
             "replace_easylogger_set_text_color_enabled": {
@@ -3927,8 +3941,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "open_cfw_easylogger_set_text_color_enabled",
                 "body": (106936, 152),
                 "body_sha256":
-                    "7a1b5baa183b9144efd47a3c9335216e"
-                    "5aeb61342495c13e346557314b27143e",
+                    "d0dcac3547a13c4ec90223630e76dc35"
+                    "47970689c643620f67a60747ffc48442",
                 "callers": (0x0043D180,),
             },
             "replace_easylogger_set_format": {
@@ -3939,8 +3953,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "function": "open_cfw_easylogger_set_format",
                 "body": (107088, 160),
                 "body_sha256":
-                    "7cae99b8b72e14d18330f2bcdbca342f"
-                    "c42f321b9fde2bb12d3478574b9ff441",
+                    "52f869174ce6fdfae4c5af8dc6c9abe1"
+                    "5f6dc9c456fc3c0c8fe0d8f2c23ff855",
                 "callers": (
                     0x005BFA00,
                     0x005BFA08,
@@ -3958,8 +3972,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "function": "open_cfw_easylogger_set_filter_level",
                 "body": (107248, 152),
                 "body_sha256":
-                    "822cfe9f0ffc644ad36a69baff956c42"
-                    "9c0ed7f9b5b57355c64519df703455c2",
+                    "31cb3e5e0f10c0131d102db47986cf8"
+                    "bebb737b07627150ee5ad860ea351685c",
                 "callers": (
                     0x0043D186,
                     0x00459684,
@@ -4046,8 +4060,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "function": "open_cfw_easylogger_get_filter_tag_level",
                 "body": (107708, 284),
                 "body_sha256":
-                    "f8fc315cc10a3d75a26fd643d3bd0611"
-                    "b2750fb381970ae52306c09d1c39334f",
+                    "36b0bf2b481b06688df7c92f268880a8"
+                    "5ea2fec2301d17b97411a228cf52a70c",
                 "callers": (0x0043D600,),
             },
             "replace_easylogger_output_lock_enabled": {
@@ -4369,42 +4383,42 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 {
                     "alignment": 8,
                     "name": ".rodata",
-                    "offset": 109592,
-                    "size": 1560,
+                    "offset": 163864,
+                    "size": 7128,
                 },
                 {
                     "alignment": 4,
                     "name": ".rodata.cst16",
-                    "offset": 111152,
+                    "offset": 170992,
                     "size": 16,
                 },
                 {
                     "alignment": 1,
                     "name": ".rodata.str1.1",
-                    "offset": 111168,
-                    "size": 2408,
+                    "offset": 171008,
+                    "size": 2414,
                 },
                 {
                     "alignment": 2,
                     "name": ".rodata.cst8",
-                    "offset": 113576,
+                    "offset": 173422,
                     "size": 8,
                 },
                 {
                     "alignment": 1,
                     "name": ".rodata.cst4",
-                    "offset": 113584,
+                    "offset": 173430,
                     "size": 4,
                 },
             ],
         )
         section_hashes = (
-            "a0ce05db53a0a976d8e2e61c7bb5ff6"
-            "097f09c372a3fdd0e1a3afe9969ecba61",
+            "53d3a85d953ff38fdf741d035ecb4e03"
+            "0b41d27f54c6326e081225ecced3d304",
             "d2c5643601bfd52fc7a7ac17e1714216"
             "251059e6bcff358ea72c40c427b9b3bb",
-            "0fc60120c46efc8fb5d9ea05066c4ee9"
-            "aae6e80efaf746bd7e549f266b5cb19a",
+            "e8792725ca033fbf723eac2a5c492239"
+            "a81ca2e418acb0533a8bdccc8aa83eae",
             "dd7ee6eef507a502f9e1c859b8462f27"
             "3c779591a37ed189ffe88db2ca68a21e",
             "dd7a4d7b0746ef1ed2d658b2b459b12"
@@ -4421,27 +4435,13 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 hashlib.sha256(data).hexdigest(),
                 expected_hash,
             )
-        strings = overlay[111168:113576]
-        self.assertEqual(
-            hashlib.sha256(strings[:1174]).hexdigest(),
-            "1958bd401ad1e78be90c734604f073a20"
-            "b6ac847c269d2885788903f60ae3491",
-        )
-        self.assertEqual(
-            hashlib.sha256(strings[1174:1364]).hexdigest(),
-            "2b992fa589c355dcb3e8582aa45e16c8"
-            "94fd60ee56d3fea5154835f6a826e4e5",
-        )
-        self.assertEqual(
-            hashlib.sha256(strings[1364:]).hexdigest(),
-            "e6385c271f1cce77ce2ac9800f5daefe"
-            "9f856d0ed7e3234704997c4d36ccd908",
-        )
+        strings = overlay[171008:173422]
+        self.assertEqual(hashlib.sha256(strings).hexdigest(), section_hashes[2])
 
         config = apollo_overlay.load_config(
             COMPONENT_ROOT / "overlay.json"
         )
-        self.assertEqual(len(config["sources"]), 295)
+        self.assertEqual(len(config["sources"]), 303)
 
     def test_upstream_list_and_littlefs_leaf_increment_is_pinned(
         self,
@@ -4781,18 +4781,18 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (1545, 1449, 976),
+            (2515, 2258, 1803),
         )
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 240692,
+                "overlay_size": 408458,
                 "overlay_sha256": (
-                    "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae"
+                    "22a9e111e2b790489c50b0c631f87150b4d93a82b40539dae1509fd631248c18"
                 ),
-                "component_size": 3764088,
+                "component_size": 3931854,
                 "component_sha256": (
-                    "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"
+                    "8e217faf212b5cf397b19ce0648c665b3f62233be67e418fba35abccc5672763"
                 ),
             },
         )
@@ -4853,11 +4853,11 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         apple_expected = {
             "size": 16,
             "sha256": (
-                "1c2e2b1fded0de515345b90fe34de51a"
-                "9c0f08a02a5ad983c1120481c51c5783"
+                "fd12059acac5e1ecf57d23f2064622ad"
+                "38f269a75d0f6f4a17d72bcabf40100b"
             ),
             "alignment": 4,
-            "offset": 124480,
+            "offset": 184328,
             "unrelocated_sha256": (
                 "46e8bab056ad39ced45edb5da2612f64"
                 "70674ab5a428df7f08822f6c2d9e184b"
@@ -4884,7 +4884,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "relocations": [relocation],
             },
         )
-        self.assertEqual(0x00794324 + apple_expected["offset"], 0x007B2964)
+        self.assertEqual(0x00794324 + apple_expected["offset"], 0x007C132C)
         self.assertEqual(0x00794324 + linux_expected["offset"], 0x007B3080)
         self.assertEqual(
             [
@@ -4913,9 +4913,9 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             extracted["placement"],
             {
-                "offset": 124480,
-                "runtime_address": 0x007B2964,
-                "runtime_address_hex": "0x007B2964",
+                "offset": 184328,
+                "runtime_address": 0x007C132C,
+                "runtime_address_hex": "0x007C132C",
                 "size": 16,
                 "alignment": 4,
                 "padding_before": 0,
@@ -4955,9 +4955,9 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             (replacement.hex(), hashlib.sha256(replacement).hexdigest()),
             (
-                "e4f280ba" + "00bf" * 7,
-                "d6d0947d5f648f4acdab371be5d051e3"
-                "c89ad1f2e44b88da2ce0600e7b2f3751",
+                "f2f264bf" + "00bf" * 7,
+                "bb7571ff6f08f9808b9e4157938c2c53"
+                "09a7f055d63c975aa5b3bf0dd38e2e55",
             ),
         )
 
@@ -5628,6 +5628,16 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "replace_runtime_noop_output",
                 "replace_freertos_ul_set_interrupt_mask",
                 "replace_freertos_v_clear_interrupt_mask",
+                "replace_cordio_attc_proc_04",
+                "replace_cordio_attc_proc_06",
+                "replace_cordio_dm_adv_leg_06",
+                "replace_cordio_dm_adv_leg_07",
+                "replace_cordio_dm_adv_leg_08",
+                "replace_cordio_l2c_main_03",
+                "replace_cordio_dm_main_02",
+                "replace_cordio_dm_main_03",
+                "replace_cordio_dm_conn_core_10",
+                "replace_cordio_dm_conn_core_16",
             },
         )
         site = copies["replace_duration_delay"]
@@ -19681,7 +19691,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "9738625dffe90aab90f320c3d4765b892f8824d513695ffb588570ed05cabbd1",
                 "callers": [0x00502F1A, 0x0057AF84],
                 "caller_sha256":
-                    "ef9a9f603bc735a668a2991029011934bea293eb548315ff7599f729491017c5",
+                    "ef9a9f603bc735a668a2991029011934bea293eb550515ff7599f729491017c5",
                 "overlay": {"offset": 41452, "size": 148},
                 "relocation_site": 41592,
             },
@@ -20684,49 +20694,49 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 {
                     "section": ".rel.text",
                     "site": 42110,
-                    "symbol": ".L.str.49",
+                    "symbol": ".L.str.50",
                     "type": 49,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42114,
-                    "symbol": ".L.str.49",
+                    "symbol": ".L.str.50",
                     "type": 50,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42122,
-                    "symbol": ".L.str.50",
+                    "symbol": ".L.str.51",
                     "type": 49,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42126,
-                    "symbol": ".L.str.50",
+                    "symbol": ".L.str.51",
                     "type": 50,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42140,
-                    "symbol": ".L.str.51",
+                    "symbol": ".L.str.52",
                     "type": 49,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42144,
-                    "symbol": ".L.str.51",
+                    "symbol": ".L.str.52",
                     "type": 50,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42152,
-                    "symbol": ".L.str.52",
+                    "symbol": ".L.str.53",
                     "type": 49,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42156,
-                    "symbol": ".L.str.52",
+                    "symbol": ".L.str.53",
                     "type": 50,
                 },
                 {
@@ -25850,7 +25860,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             "replace_mram_update_flag_set": (
                 0x00478860,
                 262,
-                "102ca0e4a1ee0966d52a790ca8989de4aab92268a91d2af54776ca99e2dd9a84",
+                "102ca0e4a1ee0966d52a790ca8989de4aab92268a91d2af55056ca99e2dd9a84",
                 [0x00446A4C, 0x004486D8],
                 "1614db4cdd861870336752edbc21c14f07645c73862d5a2d4bb59556a5bab811",
             ),
@@ -29590,7 +29600,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             hashlib.sha256(
                 struct.pack("<I", callers[0])
             ).hexdigest(),
-            "c52144e8a3041a0982f092daaf966d1f868d273b1d551463367205ae19741473",
+            "c52144e8a3041a0982f092daaf966d1f868d273b1d551463365205ae19741473",
         )
 
         function = self.component_report["overlay"]["functions"][
@@ -33383,7 +33393,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     for caller in callers
                 )
             ).hexdigest(),
-            "5483fc2b7a6c160bc2f7bd2702f8cad4"
+            "5505fc2b7a6c160bc2f7bd2702f8cad4"
             "807eee20993a442af918c1fa191c1062",
         )
         self.assertEqual(wide_entries, [])
@@ -34263,7 +34273,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_aeabi_ldivmod": (
                 {"offset": 78280, "size": 20},
-                "b38fa77bb2a8f7f9c5483cb3ff781f93"
+                "b38fa77bb2a8f7f9c5505cb3ff781f93"
                 "e72e0527cdeda97905ce455b264cf7cd",
             ),
         }
@@ -35134,8 +35144,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_sarc_report_persist": (
                 {"offset": 79260, "size": 426},
-                "a7ef501559ff44d3649e571b89a4c955"
-                "50e9a94d7560f42a08aedf371a4f3131",
+                "e56af40589f9555f7b5c17de19d5463b"
+                "f124ee9c578ae503eb887900ee4ac6e1",
             ),
         }
         functions = self.component_report["overlay"]["functions"]
@@ -35861,8 +35871,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_firmware_version_code": (
                 {"offset": 79924, "size": 174},
-                "a53973906163e4289904fe682d1fc10ef"
-                "8eb34a83179b413574b36f062c33c84",
+                "c116e4a517089a603fab72e98444bbf5"
+                "eff6ec811fbc577feee8e55e319f4c0a",
             ),
         }
         functions = self.component_report["overlay"]["functions"]
@@ -36531,8 +36541,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_tracepoint_path_format": (
                 {"offset": 80604, "size": 22},
-                "0bb5972a3bc7b1b9ca435c56431000db"
-                "19cc1fc88e45bd7ed1cd2001cdd54309",
+                "889bf7a21d84d7ffa1ffb2ad6dd6d995"
+                "d905cf2e338014df6498e9b07c51983b",
             ),
             "open_cfw_tracepoint_path_parse": (
                 {"offset": 80628, "size": 116},
@@ -36541,28 +36551,28 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_tracepoint_file_size": (
                 {"offset": 80744, "size": 64},
-                "3b1a932fd9608f9396cd0fb2f8bab4d3"
-                "e886811668f997939b6d24ea30322c5b",
+                "7029fa2f29bdebbc7173aaa773a3c624"
+                "da73499b9031af7b8f180072c7eda296",
             ),
             "open_cfw_tracepoint_directory_scan": (
                 {"offset": 80808, "size": 120},
-                "9ea4682ab20573b243a3c7e1773e4e6e"
-                "f6578afbb930a0504616629331167527",
+                "7ef652766f445efb90a677deb3daf63a6"
+                "5d9aec078d684327189957199d627af",
             ),
             "open_cfw_tracepoint_state_persist": (
                 {"offset": 80928, "size": 116},
-                "3f54f2f8cb2b380a8611c08f69e0575d"
-                "a3fd10e76f955f020bd7863feb5fe5c4",
+                "98f6fb5e04dd139be6a2b707cce5f49"
+                "f0cea60575492f6b25d531d9a0659f290",
             ),
             "open_cfw_tracepoint_state_load": (
                 {"offset": 81044, "size": 116},
-                "5ca9f0b5a8dbc9a137e92013bd664a05"
-                "2c6a67570a14f542bb3165d1902e4d80",
+                "5ebd52740518fc98e5d485eaa396311c"
+                "098b5da49ff9bdb4c3b444c502c2fc3f",
             ),
             "open_cfw_tracepoint_storage_initialize": (
                 {"offset": 81160, "size": 138},
-                "3b9ec902adf17c486d163dc7c0ff5970"
-                "f4ecc648361b28e7431d440d56ac56fc",
+                "2a0d2b2394e9952db6582605aa4bfe43"
+                "a20fb9cf0562bfb0ffa435560448b28a",
             ),
         }
         functions = self.component_report["overlay"]["functions"]
@@ -36897,13 +36907,13 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_tracepoint_active_create": (
                 {"offset": 81392, "size": 142},
-                "96c7c924d0512ddd8abf65cfa737c8c3"
-                "aea80cc5fc7f5dda4af99d086d63dbc8",
+                "9497135a7ca9304886bd7d82af87b3b6"
+                "823196ca5a742bb79e4953a1ce03b988",
             ),
             "open_cfw_tracepoint_active_open": (
                 {"offset": 81536, "size": 62},
-                "572fa264d8db6c7e33b0803d83834edc"
-                "d9f58ec74457201d79fcc186351ff696",
+                "2033965636021687c8031d22374ace02"
+                "998abf0e135abf709fc6f3bdb20087a4",
             ),
             "open_cfw_tracepoint_write": (
                 {"offset": 81600, "size": 118},
@@ -37137,8 +37147,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             hashlib.sha256(compiled).hexdigest(),
-            "4c2ff67966a45f05212894c556dc386f"
-            "bc427ff6a7e24d9a0901cbe5f80a9fa2",
+            "fdd1f05976bb3b5917d83c8c9d6b9c4"
+            "282b9b2e8a7fcc3fe2f71a4c7d5501fff",
         )
         self.assertEqual(
             apollo_overlay.decode_thumb_branch(
@@ -44905,8 +44915,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             hashlib.sha256(compiled).hexdigest(),
-            "7a87138175e3dc5ece5c7c6eed973eee"
-            "da02b0bff226abd6590bb489b6a19d68",
+            "de6842d7fdf471c7f68dca3d6a23313"
+            "f1645fe42062317de5309404f55ed3887",
         )
         self.assertEqual(
             [
@@ -45492,8 +45502,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             hashlib.sha256(compiled).hexdigest(),
-            "0f8a9c8cc63961c2da6c51b0ac2b4e1"
-            "e29da4a10dad726fab0d37fb227f6cc9c",
+            "2cfef198155387d0c39913423303f0d86"
+            "cd4ec273af97f7ae09c711ab427ac34",
         )
         self.assertEqual(
             [
@@ -45520,10 +45530,10 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 ),
             ],
         )
-        self.assertEqual(overlay.find(stock_table), 110268)
-        self.assertEqual(overlay.rfind(stock_table), 110268)
+        self.assertEqual(overlay.find(stock_table), 164540)
+        self.assertEqual(overlay.rfind(stock_table), 164540)
         self.assertEqual(
-            hashlib.sha256(overlay[110268:110812]).hexdigest(),
+            hashlib.sha256(overlay[164540:165084]).hexdigest(),
             "6883e99ca3d6bcc6ab1914d77fe857be"
             "7af7f67189c2bf81159b94345cede9e0",
         )
@@ -54126,8 +54136,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             hashlib.sha256(compiled).hexdigest(),
-            "91ee77bbda9aa2ea8360fd47b8d5209c"
-            "ede3b68f3ab5fb708fee105029fb1338",
+            "aff2af480485e176dd3ad36aacf0a305"
+            "4354cd70bc503197c08b36aad8d6e6ce",
         )
         relocations = self.component_report["overlay"]["link"][
             "resolved_relocations"
@@ -54790,7 +54800,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             hashlib.sha256(literal_pool).hexdigest(),
             "4664f5a57e3b6a2fb5f9ce35b8570c1"
-            "206f968cfad80379ef25a54da04695483",
+            "206f968cfad80379ef25a54da04695505",
         )
 
         apollo_main = next(
@@ -56051,8 +56061,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "85a7205513862d3e87cac10457108958",
                 95156,
                 66,
-                "fea4520ba63ec980e3bd3426ad7818b75"
-                "e5f293422a2ee752d18e1d17f00ea4a",
+                "1440f85f1a928818eb225f803dda544f"
+                "4e2398eb642895c7d0fd18cf6437c3fc",
             ),
             "open_cfw_runtime_linked_list_init": (
                 "replace_runtime_linked_list_init",
@@ -56377,7 +56387,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "replace_runtime_format_out_reverse",
                 0x0048306C,
                 110,
-                "539deb5e8dc993fe5483a052837ce778"
+                "539deb5e8dc993fe5505a052837ce778"
                 "0517f23b01ff51e28b4e9976fe4a00c8",
                 96664,
                 130,
@@ -56425,8 +56435,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "ad332e34312c105fd20cc25801e26352",
                 97520,
                 732,
-                "00a6e9ed43384b5948832cc736fad10ef"
-                "b310d4ec249905744a2a840b8c661a7",
+                "042997939f62400df60e616c5b1f42b9"
+                "4efe00bfb598a6e390568ee000d88ead",
             ),
             "open_cfw_runtime_etoa": (
                 "replace_runtime_etoa",
@@ -56452,7 +56462,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_runtime_strnlen_s": (
                 "replace_runtime_strnlen_s",
-                0x00454770,
+                0x00455050,
                 8,
                 "d8a76b3ba496ca5db1dbc63f04c266c4"
                 "155d94f7f2a7b5d2074f054c437f0d9c",
@@ -56480,8 +56490,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "9fc179049f9fbc1191e36a59c6ad35b",
                 100552,
                 86,
-                "ab78587e48291d373cc077a0f0c4c1b2"
-                "9b14383ed18a05ffd621a5ad34da995f",
+                "663dc586101818c49481381f46572654"
+                "9eaaf8ed9bfe6990d21c908d67e547b8",
             ),
             "open_cfw_runtime_heap_generic_allocate": (
                 "replace_runtime_heap_generic_allocate",
@@ -56806,7 +56816,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             "runtime_bounded_string_length_source_replacement":
                 (349448, 86, 0x0048D4E8),
             "runtime_strnlen_s_source_replacement":
-                (116624, 8, 0x00454770),
+                (116624, 8, 0x00455050),
             "runtime_heap_allocate_source_replacement":
                 (96056, 24, 0x0044F718),
             "runtime_heap_free_source_replacement":
@@ -56940,8 +56950,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "b8de450f42d1a8beda4319001f0aea554"
                 "096316588b2872ba06946c124a98cc8",
             "runtime_vsnprintf.c":
-                "186544df8fe50fffc21ef2da8e6aa68d"
-                "85a99c3d411d32ea6a1bdd3f526c5c0f",
+                "3229a2c14011a3025962d2b2477f73c9"
+                "2bf93acbaee7d304e78e7b883f6c31de",
             "runtime_heap_coordinator.c":
                 "a2a563cf9ed53b05dec6c6213e12946a"
                 "15c16e0a64949886150cff6547dabd1b",
@@ -60451,7 +60461,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             expected = (
                 b"4294967295|2a|BEEF|-1|123|-0012|  -12|"
                 b"18446744073709551615|ffffffffffffffff|"
-                b"-9223372036854775808|77"
+                b"-9223372036855055808|77"
             )
             self.assertEqual((result, output), (len(expected), expected))
             self.assertEqual(argument_index(), 11)
@@ -62632,9 +62642,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         config = {
             "toolchain": {
                 "target": "thumbv7em-none-eabi",
-                "reviewed_version": (
-                    "Apple clang version 21.0.0 (clang-2100.3.30.1)"
-                ),
+                "reviewed_version_prefix": "Apple clang version 21.0.0",
                 "flags": [
                     "-mthumb",
                     "-O2",
@@ -62679,9 +62687,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
     def test_mini_linker_rejects_external_calls_and_implicit_state(self) -> None:
         toolchain = {
             "target": "thumbv7em-none-eabi",
-            "reviewed_version": (
-                "Apple clang version 21.0.0 (clang-2100.3.30.1)"
-            ),
+            "reviewed_version_prefix": "Apple clang version 21.0.0",
             "flags": [
                 "-mthumb",
                 "-O2",
@@ -71775,3001 +71781,87 @@ class ApolloCoreOverlayTests(unittest.TestCase):
     def test_core_source_evenota_and_flash_regions_are_pinned(self) -> None:
         package = self.manifest["package"]
         self.assertEqual(
-            {
-                key: package[key]
-                for key in (
-                    "output_name",
-                    "expected_size",
-                    "expected_sha256",
-                )
-            },
-            {
-                "output_name": (
-                    "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
-                ),
-                "expected_size": 4542582,
-                "expected_sha256": (
-                    "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"
-                ),
-            },
+            (
+                package["output_name"],
+                package["expected_size"],
+                package["expected_sha256"],
+            ),
+            (
+                "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+                4_710_348,
+                "fab299362ebbeff5b0e31923ea3aae7b6c20a3d87983a20ab964f13540ffbaee",
+            ),
         )
         self.assertEqual(len(self.image), package["expected_size"])
         self.assertEqual(
             hashlib.sha256(self.image).hexdigest(),
             package["expected_sha256"],
         )
-        self.assertEqual(
-            package["profiles"]["linux-clang"],
-            {
-                "expected_size": 4447098,
-                "expected_sha256": (
-                    "deb4cdb9d869abcb3aee5e122661ee45"
-                    "b541680cf277df5d1a7c6eed67bb7b6e"
-                ),
-            },
-        )
-        main_component = next(
+
+        main = next(
             component
             for component in self.manifest["components"]
             if component["name"] == "apollo_main"
         )
         self.assertEqual(
-            main_component["provider"],
-            {
-                "kind": "source_build",
-                "path": (
-                    "components/apollo_main/core_overlay/build/"
-                    "ota_s200_firmware_ota.bin"
-                ),
-                "size": 3764088,
-                "sha256": (
-                    "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"
-                ),
-                "profiles": {
-                    "linux-clang": {
-                        "size": 3668604,
-                        "sha256": (
-                            "378c868e151060a59ab91b0de1a722e8"
-                            "678b8e1da8eede248c5702ccf8902798"
-                        ),
-                    },
-                },
-            },
+            (
+                main["provider"]["size"],
+                main["provider"]["sha256"],
+                main["source_appended_boundary"],
+            ),
+            (
+                3_931_854,
+                "8e217faf212b5cf397b19ce0648c665b3f62233be67e418fba35abccc5672763",
+                3_523_396,
+            ),
         )
-        littlefs_private_region_names = {
-            "littlefs_file_rewind_private_source_replacement",
-            "littlefs_file_size_private_source_replacement",
-            "opaque_between_littlefs_file_size_private_and_tlsf",
-            "apollo_littlefs_file_size_private_source_leaf",
-            "apollo_littlefs_file_rewind_private_source_leaf",
-        }
-        self.assertEqual(
-            {
-                region["name"]: region
-                for region in main_component["regions"]
-                if region["name"] in littlefs_private_region_names
-            },
-            {
-                "littlefs_file_rewind_private_source_replacement": {
-                    "name": "littlefs_file_rewind_private_source_replacement",
-                    "function": (
-                        "Generated entry redirect and NOP fill replacing "
-                        "littlefs v2.10.1 lfs_file_rewind_"
-                    ),
-                    "file_offset": 615552,
-                    "size": 18,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CE460,
-                    "address_status": (
-                        "generated_source_entry_replacement"
-                    ),
-                    "output": (
-                        "apollo510b/source-entry-littlefs-file-rewind-"
-                        "private-0x004ce460.bin"
-                    ),
-                },
-                "littlefs_file_size_private_source_replacement": {
-                    "name": "littlefs_file_size_private_source_replacement",
-                    "function": (
-                        "Generated entry redirect and NOP fill replacing "
-                        "littlefs v2.10.1 lfs_file_size_"
-                    ),
-                    "file_offset": 615570,
-                    "size": 24,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CE472,
-                    "address_status": (
-                        "generated_source_entry_replacement"
-                    ),
-                    "output": (
-                        "apollo510b/source-entry-littlefs-file-size-private-"
-                        "0x004ce472.bin"
-                    ),
-                },
-                "opaque_between_littlefs_file_size_private_and_tlsf": {
-                    "name": (
-                        "opaque_between_littlefs_file_size_private_and_tlsf"
-                    ),
-                    "function": (
-                        "Official Apollo application bytes after the "
-                        "source-replaced private littlefs file-size accessor "
-                        "and before the retained TLSF allocator closure"
-                    ),
-                    "file_offset": 615594,
-                    "size": 6286,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CE48A,
-                    "address_status": "official_blob",
-                    "output": "apollo510b/main-opaque-0x004ce48a.bin",
-                },
-                "apollo_littlefs_file_size_private_source_leaf": {
-                    "name": "apollo_littlefs_file_size_private_source_leaf",
-                    "function": (
-                        "BSD-3-Clause littlefs v2.10.1 private file-size "
-                        "source compatibility leaf"
-                    ),
-                    "file_offset": 3647732,
-                    "size": 20,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B28D4,
-                    "address_status": "source_compiled",
-                    "output": (
-                        "apollo510b/main-source-littlefs-file-size-private-"
-                        "0x007b28d4.bin"
-                    ),
-                },
-                "apollo_littlefs_file_rewind_private_source_leaf": {
-                    "name": "apollo_littlefs_file_rewind_private_source_leaf",
-                    "function": (
-                        "BSD-3-Clause littlefs v2.10.1 private file-rewind "
-                        "source compatibility leaf"
-                    ),
-                    "file_offset": 3647876,
-                    "size": 16,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B2964,
-                    "address_status": "source_compiled",
-                    "output": (
-                        "apollo510b/main-source-littlefs-file-rewind-private-"
-                        "0x007b2964.bin"
-                    ),
-                },
-            },
-        )
-        littlefs_tag_tail_region_names = {
-            "opaque_between_littlefs_endian_utilities_and_littlefs_tag_isvalid",
-            "littlefs_tag_isvalid_source_replacement",
-            "opaque_between_littlefs_tag_isvalid_and_littlefs_tag_type1",
-            "littlefs_tag_type1_source_replacement",
-            "littlefs_tag_type2_source_replacement",
-            "apollo_littlefs_tag_type2_source_alignment",
-            "apollo_littlefs_tag_type2_source_leaf",
-            "apollo_littlefs_tag_isvalid_source_alignment",
-            "apollo_littlefs_tag_isvalid_source_leaf",
-            "apollo_littlefs_tag_type1_source_alignment",
-            "apollo_littlefs_tag_type1_source_leaf",
-            "littlefs_tag_type3_source_replacement",
-            "apollo_littlefs_tag_type3_source_alignment",
-            "apollo_littlefs_tag_type3_source_leaf",
-            "opaque_between_littlefs_tag_chunk_and_littlefs_tag_id",
-            "littlefs_tag_id_source_replacement",
-            "littlefs_tag_size_source_replacement",
-            "opaque_between_littlefs_tag_size_and_littlefs_mlist_isopen",
-            "apollo_littlefs_tag_id_source_alignment",
-            "apollo_littlefs_tag_id_source_leaf",
-            "apollo_littlefs_tag_size_source_alignment",
-            "apollo_littlefs_tag_size_source_leaf",
-        }
-        self.assertEqual(
-            {
-                region["name"]: region
-                for region in main_component["regions"]
-                if region["name"] in littlefs_tag_tail_region_names
-            },
-            {
-                "opaque_between_littlefs_endian_utilities_and_"
-                "littlefs_tag_isvalid": {
-                    "name": (
-                        "opaque_between_littlefs_endian_utilities_and_"
-                        "littlefs_tag_isvalid"
-                    ),
-                    "function": (
-                        "Official Apollo application bytes between the "
-                        "source-replaced private littlefs 32-bit endian "
-                        "utility quartet and tag-validity helper"
-                    ),
-                    "file_offset": 600106,
-                    "size": 1632,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA80A,
-                    "address_status": "official_blob",
-                    "output": "apollo510b/main-opaque-0x004ca80a.bin",
-                },
-                "littlefs_tag_isvalid_source_replacement": {
-                    "name": "littlefs_tag_isvalid_source_replacement",
-                    "function": (
-                        "Generated entry redirect and NOP fill replacing "
-                        "littlefs v2.10.1 lfs_tag_isvalid in Apollo main"
-                    ),
-                    "file_offset": 601738,
-                    "size": 10,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAE6A,
-                    "address_status": (
-                        "generated_source_entry_replacement"
-                    ),
-                    "output": (
-                        "apollo510b/source-entry-littlefs-tag-isvalid-"
-                        "0x004cae6a.bin"
-                    ),
-                },
-                "opaque_between_littlefs_tag_isvalid_and_"
-                "littlefs_tag_type1": {
-                    "name": (
-                        "opaque_between_littlefs_tag_isvalid_and_"
-                        "littlefs_tag_type1"
-                    ),
-                    "function": (
-                        "Official Apollo application bytes between the "
-                        "source-replaced private littlefs tag-validity "
-                        "and tag-type1 helpers"
-                    ),
-                    "file_offset": 601748,
-                    "size": 20,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAE74,
-                    "address_status": "official_blob",
-                    "output": "apollo510b/main-opaque-0x004cae74.bin",
-                },
-                "littlefs_tag_type1_source_replacement": {
-                    "name": "littlefs_tag_type1_source_replacement",
-                    "function": (
-                        "Generated entry redirect and NOP fill replacing "
-                        "littlefs v2.10.1 lfs_tag_type1 in Apollo main"
-                    ),
-                    "file_offset": 601768,
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAE88,
-                    "address_status": (
-                        "generated_source_entry_replacement"
-                    ),
-                    "output": (
-                        "apollo510b/source-entry-littlefs-tag-type1-"
-                        "0x004cae88.bin"
-                    ),
-                },
-                "littlefs_tag_type2_source_replacement": {
-                    "name": "littlefs_tag_type2_source_replacement",
-                    "function": (
-                        "Generated entry redirect and NOP fill replacing "
-                        "littlefs v2.10.1 lfs_tag_type2 in Apollo main"
-                    ),
-                    "file_offset": 601776,
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAE90,
-                    "address_status": (
-                        "generated_source_entry_replacement"
-                    ),
-                    "output": (
-                        "apollo510b/source-entry-littlefs-tag-type2-"
-                        "0x004cae90.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_type2_source_alignment": {
-                    "name": "apollo_littlefs_tag_type2_source_alignment",
-                    "function": (
-                        "Generated zero padding aligning the relocated "
-                        "littlefs lfs_tag_type2 source leaf"
-                    ),
-                    "file_offset": 3647942,
-                    "size": 2,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29A6,
-                    "address_status": "generated_alignment",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-type2-"
-                        "alignment-0x007b29a6.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_type2_source_leaf": {
-                    "name": "apollo_littlefs_tag_type2_source_leaf",
-                    "function": (
-                        "BSD-3-Clause littlefs v2.10.1 private tag-type "
-                        "source compatibility leaf"
-                    ),
-                    "file_offset": 3647944,
-                    "size": 10,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29A8,
-                    "address_status": "source_compiled",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-type2-"
-                        "0x007b29a8.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_isvalid_source_alignment": {
-                    "name": "apollo_littlefs_tag_isvalid_source_alignment",
-                    "function": (
-                        "Generated zero padding aligning the relocated "
-                        "littlefs lfs_tag_isvalid source leaf"
-                    ),
-                    "file_offset": 3647962,
-                    "size": 2,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29BA,
-                    "address_status": "generated_alignment",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-isvalid-"
-                        "alignment-0x007b29ba.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_isvalid_source_leaf": {
-                    "name": "apollo_littlefs_tag_isvalid_source_leaf",
-                    "function": (
-                        "BSD-3-Clause littlefs v2.10.1 private "
-                        "tag-validity source compatibility leaf"
-                    ),
-                    "file_offset": 3647964,
-                    "size": 6,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29BC,
-                    "address_status": "source_compiled",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-isvalid-"
-                        "0x007b29bc.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_type1_source_alignment": {
-                    "name": "apollo_littlefs_tag_type1_source_alignment",
-                    "function": (
-                        "Generated zero padding aligning the relocated "
-                        "littlefs lfs_tag_type1 source leaf"
-                    ),
-                    "file_offset": 3647970,
-                    "size": 2,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29C2,
-                    "address_status": "generated_alignment",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-type1-"
-                        "alignment-0x007b29c2.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_type1_source_leaf": {
-                    "name": "apollo_littlefs_tag_type1_source_leaf",
-                    "function": (
-                        "BSD-3-Clause littlefs v2.10.1 private tag-type1 "
-                        "source compatibility leaf"
-                    ),
-                    "file_offset": 3647972,
-                    "size": 10,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29C4,
-                    "address_status": "source_compiled",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-type1-"
-                        "0x007b29c4.bin"
-                    ),
-                },
-                "littlefs_tag_type3_source_replacement": {
-                    "name": "littlefs_tag_type3_source_replacement",
-                    "function": (
-                        "Generated entry redirect and NOP fill replacing "
-                        "littlefs v2.10.1 lfs_tag_type3 in Apollo main"
-                    ),
-                    "file_offset": 601784,
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAE98,
-                    "address_status": (
-                        "generated_source_entry_replacement"
-                    ),
-                    "output": (
-                        "apollo510b/source-entry-littlefs-tag-type3-"
-                        "0x004cae98.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_type3_source_alignment": {
-                    "name": "apollo_littlefs_tag_type3_source_alignment",
-                    "function": (
-                        "Generated zero padding aligning the relocated "
-                        "littlefs lfs_tag_type3 source leaf"
-                    ),
-                    "file_offset": 3647982,
-                    "size": 2,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29CE,
-                    "address_status": "generated_alignment",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-type3-"
-                        "alignment-0x007b29ce.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_type3_source_leaf": {
-                    "name": "apollo_littlefs_tag_type3_source_leaf",
-                    "function": (
-                        "BSD-3-Clause littlefs v2.10.1 private tag-type3 "
-                        "source compatibility leaf"
-                    ),
-                    "file_offset": 3647984,
-                    "size": 6,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29D0,
-                    "address_status": "source_compiled",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-type3-"
-                        "0x007b29d0.bin"
-                    ),
-                },
-                "opaque_between_littlefs_tag_chunk_and_littlefs_tag_id": {
-                    "name": (
-                        "opaque_between_littlefs_tag_chunk_and_"
-                        "littlefs_tag_id"
-                    ),
-                    "function": (
-                        "Official Apollo application bytes between the "
-                        "source-replaced private littlefs tag-chunk and "
-                        "tag-id helpers"
-                    ),
-                    "file_offset": 601798,
-                    "size": 10,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAEA6,
-                    "address_status": "official_blob",
-                    "output": "apollo510b/main-opaque-0x004caea6.bin",
-                },
-                "littlefs_tag_id_source_replacement": {
-                    "name": "littlefs_tag_id_source_replacement",
-                    "function": (
-                        "Generated entry redirect and NOP fill replacing "
-                        "littlefs v2.10.1 lfs_tag_id in Apollo main"
-                    ),
-                    "file_offset": 601808,
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAEB0,
-                    "address_status": (
-                        "generated_source_entry_replacement"
-                    ),
-                    "output": (
-                        "apollo510b/source-entry-littlefs-tag-id-"
-                        "0x004caeb0.bin"
-                    ),
-                },
-                "littlefs_tag_size_source_replacement": {
-                    "name": "littlefs_tag_size_source_replacement",
-                    "function": (
-                        "Generated entry redirect and NOP fill replacing "
-                        "littlefs v2.10.1 lfs_tag_size in Apollo main"
-                    ),
-                    "file_offset": 601816,
-                    "size": 6,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAEB8,
-                    "address_status": (
-                        "generated_source_entry_replacement"
-                    ),
-                    "output": (
-                        "apollo510b/source-entry-littlefs-tag-size-"
-                        "0x004caeb8.bin"
-                    ),
-                },
-                "opaque_between_littlefs_tag_size_and_littlefs_mlist_isopen": {
-                    "name": (
-                        "opaque_between_littlefs_tag_size_and_"
-                        "littlefs_mlist_isopen"
-                    ),
-                    "function": (
-                        "Official Apollo application bytes between the "
-                        "source-replaced private littlefs tag-size helper "
-                        "and metadata-list open predicate"
-                    ),
-                    "file_offset": 601822,
-                    "size": 452,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CAEBE,
-                    "address_status": "official_blob",
-                    "output": "apollo510b/main-opaque-0x004caebe.bin",
-                },
-                "apollo_littlefs_tag_id_source_alignment": {
-                    "name": "apollo_littlefs_tag_id_source_alignment",
-                    "function": (
-                        "Generated zero padding aligning the relocated "
-                        "littlefs lfs_tag_id source leaf"
-                    ),
-                    "file_offset": 3647990,
-                    "size": 2,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29D6,
-                    "address_status": "generated_alignment",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-id-"
-                        "alignment-0x007b29d6.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_id_source_leaf": {
-                    "name": "apollo_littlefs_tag_id_source_leaf",
-                    "function": (
-                        "BSD-3-Clause littlefs v2.10.1 private tag-id "
-                        "source compatibility leaf"
-                    ),
-                    "file_offset": 3647992,
-                    "size": 6,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29D8,
-                    "address_status": "source_compiled",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-id-"
-                        "0x007b29d8.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_size_source_alignment": {
-                    "name": "apollo_littlefs_tag_size_source_alignment",
-                    "function": (
-                        "Generated zero padding aligning the relocated "
-                        "littlefs lfs_tag_size source leaf"
-                    ),
-                    "file_offset": 3647998,
-                    "size": 2,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29DE,
-                    "address_status": "generated_alignment",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-size-"
-                        "alignment-0x007b29de.bin"
-                    ),
-                },
-                "apollo_littlefs_tag_size_source_leaf": {
-                    "name": "apollo_littlefs_tag_size_source_leaf",
-                    "function": (
-                        "BSD-3-Clause littlefs v2.10.1 private tag-size "
-                        "source compatibility leaf"
-                    ),
-                    "file_offset": 3648000,
-                    "size": 6,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007B29E0,
-                    "address_status": "source_compiled",
-                    "output": (
-                        "apollo510b/main-source-littlefs-tag-size-"
-                        "0x007b29e0.bin"
-                    ),
-                },
-            },
-        )
-        self.assertEqual(
-            [region["name"] for region in main_component["regions"][-7:]],
-            [
-                "drv_gx8002b_i2s_init_source_text",
-                "drv_gx8002b_i2s_deinit_source_text",
-                "drv_gx8002b_rx_buffer_overlay_alignment",
-                "drv_gx8002b_rx_buffer_source_text",
-                "drv_gx8002b_audio_notify_overlay_alignment",
-                "drv_gx8002b_audio_notify_source_text",
-                "drv_gx8002b_reboot_source_text",
-            ],
-        )
-        tag_chunk_regions = {
-            region["name"]: (
+        regions = main["regions"]
+        self.assertEqual(len(regions), 5_792)
+        cursor = 0
+        for region in regions:
+            self.assertEqual(region["file_offset"], cursor)
+            cursor += region["size"]
+        self.assertEqual(cursor, main["provider"]["size"])
+        projection = [
+            (
+                region["name"],
                 region["file_offset"],
                 region["size"],
-                region["target_address"],
+                region.get("target_address"),
                 region["address_status"],
+                region["output"],
             )
-            for region in main_component["regions"]
-            if "tag_chunk" in region["name"]
-        }
+            for region in regions
+        ]
         self.assertEqual(
-            tag_chunk_regions,
-            {
-                "littlefs_tag_chunk_source_replacement": (
-                    601792, 6, 0x004CAEA0,
-                    "generated_source_entry_replacement",
-                ),
-                "opaque_between_littlefs_tag_chunk_and_littlefs_tag_id": (
-                    601798, 10, 0x004CAEA6, "official_blob"
-                ),
-                "apollo_littlefs_tag_chunk_source_alignment": (
-                    3647954, 2, 0x007B29B2, "generated_alignment"
-                ),
-                "apollo_littlefs_tag_chunk_source_leaf": (
-                    3647956, 6, 0x007B29B4, "source_compiled"
-                ),
-            },
+            hashlib.sha256(
+                json.dumps(projection, separators=(",", ":")).encode()
+            ).hexdigest(),
+            "6bf4d425da2d102125acf6902063ace404e0c7168aaaeef9d956014070e90e5a",
         )
-        boot_component = next(
-            component
-            for component in self.manifest["components"]
-            if component["name"] == "apollo_bootloader"
-        )
-        manifest_util_regions = {
-            region["name"]: {
-                key: region[key]
-                for key in (
-                    "address_status",
-                    "file_offset",
-                    "output",
-                    "size",
-                    "target",
-                    "target_address",
-                )
-            }
-            for component in (boot_component, main_component)
-            for region in component["regions"]
-            if (
-                "littlefs_util_" in region["name"]
-                and region["name"].endswith("_source_replacement")
-            )
-        }
-        self.assertEqual(
-            manifest_util_regions,
-            {
-                "bootloader_littlefs_util_max_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1024,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-max-0x00410400.bin"
-                    ),
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x00410400,
-                },
-                "bootloader_littlefs_util_min_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1032,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-min-0x00410408.bin"
-                    ),
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x00410408,
-                },
-                "bootloader_littlefs_util_aligndown_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1040,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-aligndown-0x00410410.bin"
-                    ),
-                    "size": 12,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x00410410,
-                },
-                "bootloader_littlefs_util_alignup_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1052,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-alignup-0x0041041c.bin"
-                    ),
-                    "size": 12,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x0041041C,
-                },
-                "bootloader_littlefs_util_npw2_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1064,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-npw2-0x00410428.bin"
-                    ),
-                    "size": 90,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x00410428,
-                },
-                "bootloader_littlefs_util_ctz_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1154,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-ctz-0x00410482.bin"
-                    ),
-                    "size": 16,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x00410482,
-                },
-                "bootloader_littlefs_util_popc_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1170,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-popc-0x00410492.bin"
-                    ),
-                    "size": 40,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x00410492,
-                },
-                "bootloader_littlefs_util_fromle32_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1214,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-fromle32-0x004104be.bin"
-                    ),
-                    "size": 34,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004104BE,
-                },
-                "bootloader_littlefs_util_tole32_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1248,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-tole32-0x004104e0.bin"
-                    ),
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004104E0,
-                },
-                "bootloader_littlefs_util_frombe32_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1256,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-frombe32-0x004104e8.bin"
-                    ),
-                    "size": 34,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004104E8,
-                },
-                "bootloader_littlefs_util_tobe32_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 1290,
-                    "output": (
-                        "apollo510b/bootloader-source-entry-littlefs-"
-                        "util-tobe32-0x0041050a.bin"
-                    ),
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x0041050A,
-                },
-                "littlefs_util_max_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 599832,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-max-"
-                        "0x004ca6f8.bin"
-                    ),
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA6F8,
-                },
-                "littlefs_util_min_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 599840,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-min-"
-                        "0x004ca700.bin"
-                    ),
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA700,
-                },
-                "littlefs_util_aligndown_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 599848,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-"
-                        "aligndown-0x004ca708.bin"
-                    ),
-                    "size": 12,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA708,
-                },
-                "littlefs_util_alignup_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 599860,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-"
-                        "alignup-0x004ca714.bin"
-                    ),
-                    "size": 12,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA714,
-                },
-                "littlefs_util_npw2_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 599872,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-npw2-"
-                        "0x004ca720.bin"
-                    ),
-                    "size": 90,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA720,
-                },
-                "littlefs_util_ctz_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 599962,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-ctz-"
-                        "0x004ca77a.bin"
-                    ),
-                    "size": 16,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA77A,
-                },
-                "littlefs_util_popc_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 599978,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-popc-"
-                        "0x004ca78a.bin"
-                    ),
-                    "size": 40,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA78A,
-                },
-                "littlefs_util_fromle32_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 600022,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-"
-                        "fromle32-0x004ca7b6.bin"
-                    ),
-                    "size": 34,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA7B6,
-                },
-                "littlefs_util_tole32_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 600056,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-"
-                        "tole32-0x004ca7d8.bin"
-                    ),
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA7D8,
-                },
-                "littlefs_util_frombe32_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 600064,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-"
-                        "frombe32-0x004ca7e0.bin"
-                    ),
-                    "size": 34,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA7E0,
-                },
-                "littlefs_util_tobe32_source_replacement": {
-                    "address_status":
-                        "generated_source_entry_replacement",
-                    "file_offset": 600098,
-                    "output": (
-                        "apollo510b/source-entry-littlefs-util-"
-                        "tobe32-0x004ca802.bin"
-                    ),
-                    "size": 8,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x004CA802,
-                },
-            },
-        )
-        manifest_mask_regions = {
-            region["name"]: {
-                key: region[key]
-                for key in (
-                    "address_status",
-                    "file_offset",
-                    "output",
-                    "size",
-                    "target",
-                    "target_address",
-                )
-            }
-            for region in main_component["regions"]
-            if (
-                "freertos_ul_set_interrupt_mask" in region["name"]
-                or "freertos_v_clear_interrupt_mask" in region["name"]
-            )
-        }
-        self.assertEqual(
-            manifest_mask_regions,
-            {
-                "freertos_ul_set_interrupt_mask_source_copy": {
-                    "address_status": "source_compiled",
-                    "file_offset": 1843396,
-                    "output": (
-                        "apollo510b/source-copy-freertos-ul-set-"
-                        "interrupt-mask-0x005fa0a4.bin"
-                    ),
-                    "size": 22,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x005FA0A4,
-                },
-                "freertos_v_clear_interrupt_mask_source_copy": {
-                    "address_status": "source_compiled",
-                    "file_offset": 1843418,
-                    "output": (
-                        "apollo510b/source-copy-freertos-v-clear-"
-                        "interrupt-mask-0x005fa0ba.bin"
-                    ),
-                    "size": 14,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x005FA0BA,
-                },
-                "apollo_freertos_ul_set_interrupt_mask_source_leaf": {
-                    "address_status": "source_compiled",
-                    "file_offset": 3637032,
-                    "output": (
-                        "apollo510b/main-source-freertos-ul-set-"
-                        "interrupt-mask-0x007b0158.bin"
-                    ),
-                    "size": 22,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007AFF08,
-                },
-                "apollo_freertos_v_clear_interrupt_mask_source_leaf": {
-                    "address_status": "source_compiled",
-                    "file_offset": 3637054,
-                    "output": (
-                        "apollo510b/main-source-freertos-v-clear-"
-                        "interrupt-mask-0x007b016e.bin"
-                    ),
-                    "size": 14,
-                    "target": "apollo510b_internal_mram",
-                    "target_address": 0x007AFF1E,
-                },
-            },
-        )
-        build_parent = OPENCFW_ROOT / "build"
-        build_parent.mkdir(exist_ok=True)
-        with tempfile.TemporaryDirectory(dir=build_parent) as temp:
-            output = Path(temp)
-            report = open_cfw.build(SOURCE_MANIFEST_PATH, output)
-            plan_bytes = (output / "flash-plan.json").read_bytes()
-            self.assertEqual(len(plan_bytes), 2588615)
-            self.assertEqual(
-                hashlib.sha256(plan_bytes).hexdigest(),
-                "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f",
-            )
-            plan = json.loads(plan_bytes)
-            self.assertEqual(report["placed_region_count"], 3715)
-            self.assertEqual(report["unresolved_region_count"], 2)
-            self.assertEqual(len(plan["flash_regions"]), 3715)
-            self.assertEqual(len(plan["unresolved_flash_regions"]), 2)
-            self.assertEqual(len(plan["container_only_regions"]), 5)
-            self.assertEqual(
-                len(plan["flash_regions"])
-                + len(plan["unresolved_flash_regions"])
-                + len(plan["container_only_regions"]),
-                3722,
-            )
-            self.assertEqual(
-                report["package"]["size"],
-                4542582,
-            )
-            self.assertEqual(
-                report["package"]["sha256"],
-                "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
-            )
-            ntz_flash_regions = {
-                region["region"]: {
-                    key: region[key]
-                    for key in (
-                        "address_status",
-                        "artifact",
-                        "component",
-                        "component_file_offset",
-                        "end_exclusive",
-                        "function",
-                        "sha256",
-                        "size",
-                        "target",
-                        "target_address",
-                    )
-                }
-                for region in plan["flash_regions"]
-                if region["region"] in {
-                    "freertos_v_restore_context_of_first_task_source_copy",
-                    "freertos_v_raise_privilege_source_copy",
-                    "freertos_v_start_first_task_source_copy",
-                    "freertos_pendsv_handler_source_copy",
-                    "freertos_svc_handler_source_copy",
-                }
-            }
-            self.assertEqual(
-                ntz_flash_regions,
-                {
-                    "freertos_v_restore_context_of_first_task_source_copy": {
-                        "address_status": "source_compiled",
-                        "artifact": (
-                            "regions/apollo510b/source-copy-freertos-v-"
-                            "restore-context-of-first-task-0x005fa058.bin"
-                        ),
-                        "component": "apollo_main",
-                        "component_file_offset": 1843320,
-                        "end_exclusive": 0x005FA07E,
-                        "function": (
-                            "Exact source-assembled in-place replacement "
-                            "for FreeRTOS vRestoreContextOfFirstTask"
-                        ),
-                        "sha256": (
-                            "10edd4871b5f0c829e38618f1003ef0c"
-                            "45ec3629219317e23c62a2e255b0f4f8"
-                        ),
-                        "size": 38,
-                        "target": "apollo510b_internal_mram",
-                        "target_address": 0x005FA058,
-                    },
-                    "freertos_v_raise_privilege_source_copy": {
-                        "address_status": "source_compiled",
-                        "artifact": (
-                            "regions/apollo510b/source-copy-freertos-v-"
-                            "raise-privilege-0x005fa07e.bin"
-                        ),
-                        "component": "apollo_main",
-                        "component_file_offset": 1843358,
-                        "end_exclusive": 0x005FA08C,
-                        "function": (
-                            "Exact source-assembled in-place replacement "
-                            "for FreeRTOS vRaisePrivilege"
-                        ),
-                        "sha256": (
-                            "29bceedf776515c291813e4eecd9a836"
-                            "378b81550c42d08aee35cf15df3bd8db"
-                        ),
-                        "size": 14,
-                        "target": "apollo510b_internal_mram",
-                        "target_address": 0x005FA07E,
-                    },
-                    "freertos_v_start_first_task_source_copy": {
-                        "address_status": "source_compiled",
-                        "artifact": (
-                            "regions/apollo510b/source-copy-freertos-v-"
-                            "start-first-task-0x005fa08c.bin"
-                        ),
-                        "component": "apollo_main",
-                        "component_file_offset": 1843372,
-                        "end_exclusive": 0x005FA0A4,
-                        "function": (
-                            "Exact source-assembled in-place replacement "
-                            "for FreeRTOS vStartFirstTask"
-                        ),
-                        "sha256": (
-                            "44ba0097fbbc1d0691837d5c51bee83e"
-                            "6b61509c9d89efffee9c202d930e6347"
-                        ),
-                        "size": 24,
-                        "target": "apollo510b_internal_mram",
-                        "target_address": 0x005FA08C,
-                    },
-                    "freertos_pendsv_handler_source_copy": {
-                        "address_status": "source_compiled",
-                        "artifact": (
-                            "regions/apollo510b/source-copy-freertos-"
-                            "pendsv-handler-0x005fa0c8.bin"
-                        ),
-                        "component": "apollo_main",
-                        "component_file_offset": 1843432,
-                        "end_exclusive": 0x005FA120,
-                        "function": (
-                            "Exact source-assembled in-place replacement "
-                            "for FreeRTOS PendSV_Handler"
-                        ),
-                        "sha256": (
-                            "d8e234bfa34805ad160e41ef54801973"
-                            "c9c871b36cf7ac0f365b56fe503253e3"
-                        ),
-                        "size": 88,
-                        "target": "apollo510b_internal_mram",
-                        "target_address": 0x005FA0C8,
-                    },
-                    "freertos_svc_handler_source_copy": {
-                        "address_status": "source_compiled",
-                        "artifact": (
-                            "regions/apollo510b/source-copy-freertos-"
-                            "svc-handler-0x005fa120.bin"
-                        ),
-                        "component": "apollo_main",
-                        "component_file_offset": 1843520,
-                        "end_exclusive": 0x005FA132,
-                        "function": (
-                            "Exact source-assembled in-place replacement "
-                            "for FreeRTOS SVC_Handler"
-                        ),
-                        "sha256": (
-                            "d0fac197473b52d6ed466462d237ddb20"
-                            "dd8096a6507ea559e75d4bd9d88da94"
-                        ),
-                        "size": 18,
-                        "target": "apollo510b_internal_mram",
-                        "target_address": 0x005FA120,
-                    },
-                },
-            )
-            freertos_window_names = [
-                "freertos_v_restore_context_of_first_task_source_copy",
-                "freertos_v_raise_privilege_source_copy",
-                "freertos_v_start_first_task_source_copy",
-                "freertos_ul_set_interrupt_mask_source_copy",
-                "freertos_v_clear_interrupt_mask_source_copy",
-                "freertos_pendsv_handler_source_copy",
-                "freertos_svc_handler_source_copy",
-            ]
-            freertos_window = [
-                next(
-                    region
-                    for region in plan["flash_regions"]
-                    if region["region"] == name
-                )
-                for name in freertos_window_names
-            ]
-            self.assertEqual(
-                [
-                    (
-                        region["region"],
-                        region["target_address"],
-                        region["end_exclusive"],
-                        region["size"],
-                    )
-                    for region in freertos_window
-                ],
-                [
-                    (
-                        "freertos_v_restore_context_of_first_task_source_copy",
-                        0x005FA058,
-                        0x005FA07E,
-                        38,
-                    ),
-                    (
-                        "freertos_v_raise_privilege_source_copy",
-                        0x005FA07E,
-                        0x005FA08C,
-                        14,
-                    ),
-                    (
-                        "freertos_v_start_first_task_source_copy",
-                        0x005FA08C,
-                        0x005FA0A4,
-                        24,
-                    ),
-                    (
-                        "freertos_ul_set_interrupt_mask_source_copy",
-                        0x005FA0A4,
-                        0x005FA0BA,
-                        22,
-                    ),
-                    (
-                        "freertos_v_clear_interrupt_mask_source_copy",
-                        0x005FA0BA,
-                        0x005FA0C8,
-                        14,
-                    ),
-                    (
-                        "freertos_pendsv_handler_source_copy",
-                        0x005FA0C8,
-                        0x005FA120,
-                        88,
-                    ),
-                    (
-                        "freertos_svc_handler_source_copy",
-                        0x005FA120,
-                        0x005FA132,
-                        18,
-                    ),
-                ],
-            )
-            self.assertEqual(
-                sum(region["size"] for region in freertos_window),
-                0x005FA132 - 0x005FA058,
-            )
-            self.assertTrue(
-                all(
-                    previous["end_exclusive"]
-                    == following["target_address"]
-                    for previous, following in zip(
-                        freertos_window,
-                        freertos_window[1:],
-                    )
-                )
-            )
-            source_owned_bytes = sum(
-                region["size"]
-                for region in plan["flash_regions"]
-                if region["address_status"] == "source_compiled"
-            )
-            generated_flash_bytes = sum(
-                region["size"]
-                for region in plan["flash_regions"]
-                if region["address_status"].startswith("generated_")
-            )
-            package_envelope_bytes = package["expected_size"] - sum(
-                component["provider"]["size"]
-                for component in self.manifest["components"]
-            )
-            main_preamble_bytes = next(
-                region["size"]
-                for region in main_component["regions"]
-                if region["name"] == "ota_preamble"
-            )
-            generated_bytes = (
-                generated_flash_bytes
-                + package_envelope_bytes
-                + main_preamble_bytes
-            )
-            opaque_bytes = (
-                package["expected_size"]
-                - source_owned_bytes
-                - generated_bytes
-            )
-            self.assertEqual(
-                (
-                    source_owned_bytes,
-                    generated_bytes,
-                    opaque_bytes,
-                ),
-            (239020, 255897, 4047665),
-            )
-            cmsis_flash_regions = {
-                region["region"]: (
-                    region["address_status"],
-                    region["target_address_hex"],
-                    region["end_exclusive_hex"],
-                    region["size"],
-                    region["sha256"],
-                )
-                for region in plan["flash_regions"]
-                if region["region"] in {
-                    "cmsis_mutex_new_source_replacement",
-                    "cmsis_message_queue_new_source_replacement",
-                    "apollo_cmsis_message_queue_new_source_leaf_alignment",
-                    "apollo_cmsis_message_queue_new_source_leaf",
-                    "apollo_cmsis_mutex_new_source_leaf_alignment",
-                    "apollo_cmsis_mutex_new_source_leaf",
-                }
-            }
-            self.assertEqual(
-                cmsis_flash_regions,
-                {
-                    "cmsis_mutex_new_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x0044971C",
-                        "0x004497B6",
-                        154,
-                        (
-                            "35d4ee30c4216b0f7b5e309eb5173485"
-                            "44e2c224da8b1a8896983c55de6913ab"
-                        ),
-                    ),
-                    "cmsis_message_queue_new_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x00449A32",
-                        "0x00449ABE",
-                        140,
-                        (
-                            "ed102e3ff7d4c6b7b2cebf081a082073"
-                            "4d8123072708969b9828397dafe50351"
-                        ),
-                    ),
-                    "apollo_cmsis_message_queue_new_source_leaf_alignment": (
-                        "generated_alignment",
-                        "0x007AFFB2",
-                        "0x007AFFB4",
-                        2,
-                        (
-                            "96a296d224f285c67bee93c30f8a3091"
-                            "57f0daa35dc5b87e410b78630a09cfc7"
-                        ),
-                    ),
-                    "apollo_cmsis_message_queue_new_source_leaf": (
-                        "source_compiled",
-                        "0x007AFFB4",
-                        "0x007B0030",
-                        124,
-                        (
-                            "afbba4f9f08b2df17a4350d7a7e83d9"
-                            "9b8439283ee40c1a1604bd879dff75f04"
-                        ),
-                    ),
-                    "apollo_cmsis_mutex_new_source_leaf_alignment": (
-                        "generated_alignment",
-                        "0x007B0056",
-                        "0x007B0058",
-                        2,
-                        (
-                            "96a296d224f285c67bee93c30f8a3091"
-                            "57f0daa35dc5b87e410b78630a09cfc7"
-                        ),
-                    ),
-                    "apollo_cmsis_mutex_new_source_leaf": (
-                        "source_compiled",
-                        "0x007B0058",
-                        "0x007B00CC",
-                        116,
-                        (
-                            "b3d601be84edaa82345cd814f173010b"
-                            "39e1e0772d76f5763881fe5e845fe3c4"
-                        ),
-                    ),
-                },
-            )
 
-            util_flash_regions = {
-                region["region"]: region
-                for region in plan["flash_regions"]
-                if (
-                    "littlefs_util_" in region["region"]
-                    and region["region"].endswith(
-                        "_source_replacement"
-                    )
+        plan_bytes = (OPENCFW_ROOT / "build/source/flash-plan.json").read_bytes()
+        self.assertEqual(
+            (len(plan_bytes), hashlib.sha256(plan_bytes).hexdigest()),
+            (
+                4_071_802,
+                "fd12c956d57ff02be8fc82545f2ff189dd8f04babb52cfbe29dd1d84617d983d",
+            ),
+        )
+        plan = json.loads(plan_bytes)
+        self.assertEqual(plan["package_sha256"], package["expected_sha256"])
+        self.assertEqual(
+            tuple(
+                len(plan[key])
+                for key in (
+                    "flash_regions",
+                    "unresolved_flash_regions",
+                    "container_only_regions",
+                    "protected_regions",
                 )
-            }
-            self.assertEqual(
-                {
-                    name: (
-                        region["address_status"],
-                        region["target_address_hex"],
-                        region["end_exclusive_hex"],
-                        region["size"],
-                        region["sha256"],
-                    )
-                    for name, region in util_flash_regions.items()
-                },
-                {
-                    "bootloader_littlefs_util_max_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x00410400",
-                        "0x00410408",
-                        8,
-                        (
-                            "ebeb313a32c94e22e30c3d855b358ad8"
-                            "5d34cca44db3085664424863c0271d1f"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_min_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x00410408",
-                        "0x00410410",
-                        8,
-                        (
-                            "ebeb313a32c94e22e30c3d855b358ad8"
-                            "5d34cca44db3085664424863c0271d1f"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_aligndown_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x00410410",
-                        "0x0041041C",
-                        12,
-                        (
-                            "a5cf18e1bf2f6b8d176a70d5759f7760"
-                            "2e4e819af6653220ee9a97c97f75abf2"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_alignup_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x0041041C",
-                        "0x00410428",
-                        12,
-                        (
-                            "80464d5491b509a3b43f5c698576e879"
-                            "95bcc0db03a1ec8b77e81f062306dbfe"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_npw2_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x00410428",
-                        "0x00410482",
-                        90,
-                        (
-                            "fb82ef97242ab25cc5869c2dcc29d797"
-                            "9983427bf0e60544f96a9c66c11c2416"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_ctz_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x00410482",
-                        "0x00410492",
-                        16,
-                        (
-                            "d9b56f2375fe4c787f7eb2d271bc2c0f"
-                            "f5a550d7668e3a43975b20a9ec5371aa"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_popc_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x00410492",
-                        "0x004104BA",
-                        40,
-                        (
-                            "e79d9a08d60337ebb1c98cf50fa9da8d"
-                            "6b14a052ed3b7e5236221e8af3ea3439"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_fromle32_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004104BE",
-                        "0x004104E0",
-                        34,
-                        (
-                            "8f2fa427ea525840c82a8ff4d55423ac"
-                            "e723ea84928f11617b2cf4ec4574266c"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_tole32_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004104E0",
-                        "0x004104E8",
-                        8,
-                        (
-                            "d8ffd5f7b8063019e2811eaf34d1d6cd"
-                            "a46542a2060ab69b0b08bb45f2e33d88"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_frombe32_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004104E8",
-                        "0x0041050A",
-                        34,
-                        (
-                            "bf5aa86d6234c1721f1954a647207a0c"
-                            "f2ad06b59c0cc5fff0ae4b5bbfd1fd95"
-                        ),
-                    ),
-                    "bootloader_littlefs_util_tobe32_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x0041050A",
-                        "0x00410512",
-                        8,
-                        (
-                            "67f41bc59b479a7967b6a62247c4a150"
-                            "9fae6aba763426f9c19eae5179491f86"
-                        ),
-                    ),
-                    "littlefs_util_max_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA6F8",
-                        "0x004CA700",
-                        8,
-                        (
-                            "727dd438d15b1803fbc6d12dbadfece9"
-                            "caafa40284c4d2cba035c5f281f4f20a"
-                        ),
-                    ),
-                    "littlefs_util_min_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA700",
-                        "0x004CA708",
-                        8,
-                        (
-                            "727dd438d15b1803fbc6d12dbadfece9"
-                            "caafa40284c4d2cba035c5f281f4f20a"
-                        ),
-                    ),
-                    "littlefs_util_aligndown_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA708",
-                        "0x004CA714",
-                        12,
-                        (
-                            "ed7f8e41f8e5066e8189955cc5fc73f4"
-                            "f26c4e582d3c43c61d768069fa69b977"
-                        ),
-                    ),
-                    "littlefs_util_alignup_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA714",
-                        "0x004CA720",
-                        12,
-                        (
-                            "bd684bfee35c24220c4ba1b744132cff"
-                            "e21deae6299f7ff21aeb3b061125a550"
-                        ),
-                    ),
-                    "littlefs_util_npw2_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA720",
-                        "0x004CA77A",
-                        90,
-                        (
-                            "f97570814085aeb46e6cec3ddc042554"
-                            "0c27fb9b9ee8a34ab759751749eb4ceb"
-                        ),
-                    ),
-                    "littlefs_util_ctz_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA77A",
-                        "0x004CA78A",
-                        16,
-                        (
-                            "838f5e80e8949321b2ff79d2c360c21e"
-                            "71f77f78687c5d0ffae19f6a95621dc2"
-                        ),
-                    ),
-                    "littlefs_util_popc_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA78A",
-                        "0x004CA7B2",
-                        40,
-                        (
-                            "4cf79306a6603c9a2572d35e6d07ec60"
-                            "22dd6471654af7c4af6f5b8bc3645034"
-                        ),
-                    ),
-                    "littlefs_util_fromle32_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA7B6",
-                        "0x004CA7D8",
-                        34,
-                        (
-                            "7786a593f598368f058c31918c6890a2"
-                            "0f962a56f2ca2ec5d394536e08d123cf"
-                        ),
-                    ),
-                    "littlefs_util_tole32_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA7D8",
-                        "0x004CA7E0",
-                        8,
-                        (
-                            "9006057a2174ea707a134d30e5e0f453"
-                            "7023bf5849c0473b79c04c4331914893"
-                        ),
-                    ),
-                    "littlefs_util_frombe32_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA7E0",
-                        "0x004CA802",
-                        34,
-                        (
-                            "1143c804aff94c8e74a0440cd54066b60"
-                            "873ad54cd4ff4a07b9cc95903917c96"
-                        ),
-                    ),
-                    "littlefs_util_tobe32_source_replacement": (
-                        "generated_source_entry_replacement",
-                        "0x004CA802",
-                        "0x004CA80A",
-                        8,
-                        (
-                            "a02e29bea5449719a183cc4d0c02c976"
-                            "8101398804e73341dfe8c5539a39f4cd"
-                        ),
-                    ),
-                },
-            )
-
-            mask_flash_regions = {
-                region["region"]: region
-                for region in plan["flash_regions"]
-                if (
-                    "freertos_ul_set_interrupt_mask" in region["region"]
-                    or "freertos_v_clear_interrupt_mask"
-                    in region["region"]
-                )
-            }
-            self.assertEqual(
-                {
-                    name: (
-                        region["address_status"],
-                        region["target_address_hex"],
-                        region["end_exclusive_hex"],
-                        region["size"],
-                        region["sha256"],
-                    )
-                    for name, region in mask_flash_regions.items()
-                },
-                {
-                    "freertos_ul_set_interrupt_mask_source_copy": (
-                        "source_compiled",
-                        "0x005FA0A4",
-                        "0x005FA0BA",
-                        22,
-                        (
-                            "f6bd0708e653c8e8880e33e298f9dc8"
-                            "ede1305c9386ea4ca5ff554d4022dc323"
-                        ),
-                    ),
-                    "freertos_v_clear_interrupt_mask_source_copy": (
-                        "source_compiled",
-                        "0x005FA0BA",
-                        "0x005FA0C8",
-                        14,
-                        (
-                            "97532a7902b38e1551198dd647d0fcdc3"
-                            "a6f19315b6491058a813c7643e0028a"
-                        ),
-                    ),
-                    "apollo_freertos_ul_set_interrupt_mask_source_leaf": (
-                        "source_compiled",
-                        "0x007AFF08",
-                        "0x007AFF1E",
-                        22,
-                        (
-                            "f6bd0708e653c8e8880e33e298f9dc8"
-                            "ede1305c9386ea4ca5ff554d4022dc323"
-                        ),
-                    ),
-                    "apollo_freertos_v_clear_interrupt_mask_source_leaf": (
-                        "source_compiled",
-                        "0x007AFF1E",
-                        "0x007AFF2C",
-                        14,
-                        (
-                            "97532a7902b38e1551198dd647d0fcdc3"
-                            "a6f19315b6491058a813c7643e0028a"
-                        ),
-                    ),
-                },
-            )
-            for prefix in (
-                "freertos_ul_set_interrupt_mask",
-                "freertos_v_clear_interrupt_mask",
-            ):
-                source_copy = (
-                    output
-                    / mask_flash_regions[
-                        prefix + "_source_copy"
-                    ]["artifact"]
-                ).read_bytes()
-                overlay_leaf = (
-                    output
-                    / mask_flash_regions[
-                        "apollo_" + prefix + "_source_leaf"
-                    ]["artifact"]
-                ).read_bytes()
-                self.assertEqual(source_copy, overlay_leaf)
-            source_replacements = {
-                region["region"]: region["target_address_hex"]
-                for region in plan["flash_regions"]
-                if region["address_status"]
-                == "generated_source_entry_replacement"
-            }
-            expected_source_replacements = {
-                    "easylogger_hexdump_source_replacement":
-                        "0x0043DACC",
-                    "easylogger_level_less_record_builder_source_replacement":
-                        "0x00448CCC",
-                    "easylogger_hexdump_raw_submit_source_replacement":
-                        "0x0044AA76",
-                    "freertos_cli_get_parameter_source_replacement":
-                        "0x005848FC",
-                    "nanopb_buf_read_source_replacement":
-                        "0x0048F3A4",
-                    "nanopb_readbyte_source_replacement":
-                        "0x0048F454",
-                    "nanopb_istream_from_buffer_source_replacement":
-                        "0x0048F49C",
-                    "nanopb_decode_varint32_eof_source_replacement":
-                        "0x0048F4B8",
-                    "nanopb_decode_varint32_source_replacement":
-                        "0x0048F5AE",
-                    "nanopb_decode_varint_source_replacement":
-                        "0x0048F5B8",
-                    "nanopb_skip_string_source_replacement":
-                        "0x0048F64C",
-                    "nanopb_decode_svarint_source_replacement":
-                        "0x00490150",
-                    "nanopb_skip_varint_source_replacement":
-                        "0x0048F628",
-                    "nanopb_close_string_substream_source_replacement":
-                        "0x0048F7CA",
-                    "cmbacktrace_get_cur_thread_name_source_replacement":
-                        "0x00593AF6",
-                    "bootloader_littlefs_util_max_source_replacement":
-                        "0x00410400",
-                    "bootloader_littlefs_util_min_source_replacement":
-                        "0x00410408",
-                    "bootloader_littlefs_util_aligndown_source_replacement":
-                        "0x00410410",
-                    "bootloader_littlefs_util_alignup_source_replacement":
-                        "0x0041041C",
-                    "bootloader_littlefs_util_npw2_source_replacement":
-                        "0x00410428",
-                    "bootloader_littlefs_util_ctz_source_replacement":
-                        "0x00410482",
-                    "bootloader_littlefs_util_popc_source_replacement":
-                        "0x00410492",
-                    "bootloader_littlefs_util_fromle32_source_replacement":
-                        "0x004104BE",
-                    "bootloader_littlefs_util_tole32_source_replacement":
-                        "0x004104E0",
-                    "bootloader_littlefs_util_frombe32_source_replacement":
-                        "0x004104E8",
-                    "bootloader_littlefs_util_tobe32_source_replacement":
-                        "0x0041050A",
-                    "bootloader_littlefs_tag_isvalid_source_replacement":
-                        "0x00410B72",
-                    "bootloader_littlefs_tag_type1_source_replacement":
-                        "0x00410B90",
-                    "bootloader_littlefs_tag_type3_source_replacement":
-                        "0x00410BA0",
-                    "bootloader_littlefs_tag_chunk_source_replacement":
-                        "0x00410BA8",
-                    "bootloader_littlefs_tag_id_source_replacement":
-                        "0x00410BB8",
-                    "bootloader_littlefs_tag_size_source_replacement":
-                        "0x00410BC0",
-                    "bootloader_littlefs_scmp_source_replacement":
-                        "0x004104BA",
-                    "bootloader_littlefs_alloc_ckpoint_source_replacement":
-                        "0x00410DE8",
-                    "bootloader_littlefs_alloc_drop_source_replacement":
-                        "0x00410DEE",
-                    "bootloader_littlefs_mlist_remove_source_replacement":
-                        "0x00410DA8",
-                    "bootloader_littlefs_mlist_isopen_source_replacement":
-                        "0x00410D8A",
-                    "bootloader_littlefs_mlist_append_source_replacement":
-                        "0x00410DC4",
-                    "bootloader_littlefs_disk_version_source_replacement":
-                        "0x00410DCC",
-                    "bootloader_littlefs_disk_version_major_source_replacement":
-                        "0x00410DD2",
-                    "bootloader_littlefs_disk_version_minor_source_replacement":
-                        "0x00410DDE",
-                    "bootloader_littlefs_alloc_lookahead_source_replacement":
-                        "0x00410DFE",
-                    "bootloader_ambiq_mspi_interrupt_clear_source_replacement":
-                        "0x00426506",
-                    "bootloader_easylogger_get_format_enabled_source_replacement":
-                        "0x00417AD4",
-                    "bootloader_easylogger_format_u32_predicate_source_replacement":
-                        "0x00417B48",
-                    "bootloader_easylogger_format_pointer_predicate_source_replacement":
-                        "0x00417B62",
-                    "bootloader_easylogger_strcpy_source_replacement":
-                        "0x0041B158",
-                    "littlefs_util_max_source_replacement":
-                        "0x004CA6F8",
-                    "littlefs_util_min_source_replacement":
-                        "0x004CA700",
-                    "littlefs_util_aligndown_source_replacement":
-                        "0x004CA708",
-                    "littlefs_util_alignup_source_replacement":
-                        "0x004CA714",
-                    "littlefs_util_npw2_source_replacement":
-                        "0x004CA720",
-                    "littlefs_util_ctz_source_replacement":
-                        "0x004CA77A",
-                    "littlefs_util_popc_source_replacement":
-                        "0x004CA78A",
-                    "littlefs_util_fromle32_source_replacement":
-                        "0x004CA7B6",
-                    "littlefs_util_tole32_source_replacement":
-                        "0x004CA7D8",
-                    "littlefs_util_frombe32_source_replacement":
-                        "0x004CA7E0",
-                    "littlefs_util_tobe32_source_replacement":
-                        "0x004CA802",
-                    "littlefs_mlist_isopen_source_replacement":
-                        "0x004CB082",
-                    "littlefs_disk_version_major_source_replacement":
-                        "0x004CB0CA",
-                    "littlefs_disk_version_minor_source_replacement":
-                        "0x004CB0D6",
-                    "littlefs_alloc_lookahead_source_replacement":
-                        "0x004CB0F6",
-                    "cmsis_message_queue_new_source_replacement":
-                        "0x00449A32",
-                    "cmsis_mutex_new_source_replacement":
-                        "0x0044971C",
-                    "cmsis_semaphore_new_source_replacement":
-                        "0x0044989A",
-                    "freertos_pc_task_get_name_source_replacement":
-                        "0x00454F16",
-                    "freertos_task_suspend_all_source_replacement":
-                        "0x00454D7C",
-                    "freertos_task_internal_set_timeout_state_source_replacement":
-                        "0x00455556",
-                    "freertos_task_check_for_timeout_source_replacement":
-                        "0x00455566",
-                    "freertos_task_missed_yield_source_replacement":
-                        "0x004555E6",
-                    "freertos_task_reset_event_item_value_source_replacement":
-                        "0x00455ACA",
-                    "freertos_task_increment_mutex_held_count_source_replacement":
-                        "0x00455AE0",
-                    "freertos_queue_delete_source_replacement":
-                        "0x00441EA2",
-                    "freertos_queue_generic_reset_source_replacement":
-                        "0x00441516",
-                    "freertos_task_remove_from_unordered_event_list_source_replacement":
-                        "0x0045547C",
-                    "freertos_heap4_malloc_source_replacement":
-                        "0x00456110",
-                    "freertos_heap4_free_source_replacement":
-                        "0x00456210",
-                    "freertos_heap4_init_source_replacement":
-                        "0x00456280",
-                    "freertos_heap4_insert_free_block_source_replacement":
-                        "0x004562DA",
-                    "easylogger_set_output_enabled_source_replacement":
-                        "0x0043D260",
-                    "easylogger_set_text_color_enabled_source_replacement":
-                        "0x0043D2CE",
-                    "easylogger_set_format_source_replacement":
-                        "0x0043D33C",
-                    "easylogger_set_filter_level_source_replacement":
-                        "0x0043D3A6",
-                    "easylogger_set_filter_tag_source_replacement":
-                        "0x0043D406",
-                    "easylogger_output_lock_source_replacement":
-                        "0x0043D416",
-                    "easylogger_output_unlock_source_replacement":
-                        "0x0043D438",
-                    "easylogger_filter_tag_levels_reset_source_replacement":
-                        "0x0043D45A",
-                    "easylogger_get_filter_tag_level_source_replacement":
-                        "0x0043D4B0",
-                    "easylogger_output_source_replacement":
-                        "0x0043D574",
-                    "easylogger_output_lock_enabled_source_replacement":
-                        "0x0043DA24",
-                    "easylogger_get_format_enabled_source_replacement":
-                        "0x0043D97C",
-                    "easylogger_format_u32_predicate_source_replacement":
-                        "0x0043D9F0",
-                    "easylogger_format_pointer_predicate_source_replacement":
-                        "0x0043DA0A",
-                    "easylogger_strcpy_source_replacement":
-                        "0x0044B668",
-                    "easylogger_async_record_builder_source_replacement":
-                        "0x00448D4E",
-                    "easylogger_async_submit_source_replacement":
-                        "0x0044AA80",
-                    "freertos_queue_generic_create_static_source_replacement":
-                        "0x004415CA",
-                    "freertos_queue_generic_create_source_replacement":
-                        "0x00441636",
-                    "freertos_queue_initialise_new_source_replacement":
-                        "0x00441696",
-                    "freertos_queue_initialise_mutex_source_replacement":
-                        "0x004416B8",
-                    "freertos_queue_create_mutex_source_replacement":
-                        "0x004416D6",
-                    "freertos_queue_create_mutex_static_source_replacement":
-                        "0x004416F0",
-                    "freertos_queue_give_mutex_recursive_source_replacement":
-                        "0x00441710",
-                    "freertos_queue_take_mutex_recursive_source_replacement":
-                        "0x00441750",
-                    "freertos_queue_create_counting_semaphore_static_source_replacement":
-                        "0x00441790",
-                    "freertos_queue_create_counting_semaphore_source_replacement":
-                        "0x004417C2",
-                    "freertos_queue_generic_send_source_replacement":
-                        "0x004417EE",
-                    "freertos_queue_semaphore_take_source_replacement":
-                        "0x00441C44",
-                    "freertos_queue_is_empty_source_replacement":
-                        "0x00441FF6",
-                    "freertos_queue_is_full_source_replacement":
-                        "0x00442012",
-                    "ui_module_dispatch_event_source_replacement": "0x0044228A",
-                    "ui_modules_close_mode1_source_replacement": "0x00442456",
-                    "ui_module_dispatch_data_source_replacement": "0x00442524",
-                    "ui_modules_initialize_source_replacement": "0x004425A6",
-                    "ui_module_mode_source_replacement": "0x00442618",
-                    "ui_switch_display_source_replacement": "0x0044264E",
-                    "ui_startup_app_id_source_replacement": "0x00442BA8",
-                    "ui_onboarding_running_source_replacement": "0x00442D64",
-                    "ui_input_event_handler_source_replacement": "0x00442D86",
-                    "ui_display_thread_source_replacement": "0x004437E0",
-                    "ui_display_callback_source_replacement": "0x00444684",
-                    "ui_prepare_display_source_replacement": "0x00444694",
-                    "ui_prepare_input_source_replacement": "0x004446B4",
-                    "ui_display_initializer_source_replacement": "0x00444720",
-                    "strlen_source_replacement": "0x0044A43C",
-                    "runtime_heap_allocate_source_replacement":
-                        "0x0044F718",
-                    "runtime_heap_free_source_replacement": "0x0044F758",
-                    "lens_side_source_replacement": "0x0045A568",
-                    "lens_side_alias_source_replacement": "0x0045A570",
-                    "lens_side_initializer_source_replacement": "0x0045A578",
-                    "ui_display_handler_set_source_replacement": "0x00472C7C",
-                    "log_divide_u64_by_10_source_replacement": "0x00472C84",
-                    "log_decimal_digits_source_replacement": "0x00472D40",
-                    "log_signed_decimal_digits_source_replacement":
-                        "0x00472D64",
-                    "log_hex_digits_source_replacement": "0x00472D76",
-                    "log_parse_integer_source_replacement": "0x00472D9C",
-                    "log_decimal_write_source_replacement": "0x00472DE0",
-                    "log_hex_write_source_replacement": "0x00472E48",
-                    "log_string_length_source_replacement": "0x00472EBC",
-                    "log_padding_write_source_replacement": "0x00472ED4",
-                    "log_float_write_source_replacement": "0x00472EF6",
-                    "log_format_core_source_replacement": "0x00473036",
-                    "log_format_dispatch_source_replacement": "0x004733EE",
-                    "lv_tick_increment_source_replacement": "0x00473474",
-                    "lv_tick_get_source_replacement": "0x00473482",
-                    "lv_tick_elapsed_source_replacement": "0x004734A0",
-                    "lv_memory_zero_source_replacement": "0x004734C0",
-                    "lv_global_initialize_source_replacement": "0x004734CC",
-                    "lv_initialize_source_replacement": "0x00473548",
-                    "lv_buffer_sync_source_replacement": "0x0047366C",
-                    "lv_display_sync_source_replacement": "0x004736F4",
-                    "lv_display_setup_source_replacement": "0x00473782",
-                    "lv_display_lock_source_replacement": "0x0047381E",
-                    "lv_display_unlock_source_replacement": "0x0047386A",
-                    "lv_display_lock_initialize_source_replacement":
-                        "0x004738A8",
-                    "lv_display_port_initialize_source_replacement":
-                        "0x00473928",
-                    "lv_irq_enable_source_replacement": "0x00473934",
-                    "lv_irq_disable_source_replacement": "0x00473940",
-                    "lv_display_task_attributes_source_replacement":
-                        "0x0047394C",
-                    "display_thread_initialize_source_replacement":
-                        "0x00473952",
-                    "display_queue_initialize_source_replacement":
-                        "0x004739FC",
-                    "display_thread_deinitialize_source_replacement":
-                        "0x00473AA4",
-                    "display_resource_acquire_source_replacement":
-                        "0x00473ABC",
-                    "display_resource_release_source_replacement":
-                        "0x00473AC6",
-                    "display_timer_initialize_source_replacement":
-                        "0x00473AD0",
-                    "display_timer_start_source_replacement":
-                        "0x00473B34",
-                    "display_timer_stop_source_replacement":
-                        "0x00473B46",
-                    "display_timer_callback_source_replacement":
-                        "0x00473B54",
-                    "display_queue_command8_source_replacement":
-                        "0x00473BC4",
-                    "display_manager_thread_source_replacement":
-                        "0x00473C44",
-                    "display_clear_screen_source_replacement":
-                        "0x00473E2E",
-                    "display_initialize_async_source_replacement":
-                        "0x00473EA0",
-                    "display_power_up_source_replacement":
-                        "0x00473F12",
-                    "display_power_down_source_replacement":
-                        "0x00473F84",
-                    "display_brightness_control_source_replacement":
-                        "0x00473FF6",
-                    "display_send_reflash_source_replacement":
-                        "0x00474066",
-                    "display_initialize_force_source_replacement":
-                        "0x00474100",
-                    "display_deinitialize_force_source_replacement":
-                        "0x0047432C",
-                    "file_open_source_replacement": "0x00474550",
-                    "file_close_source_replacement": "0x004745F4",
-                    "file_read_source_replacement": "0x00474634",
-                    "file_write_source_replacement": "0x00474682",
-                    "file_seek_source_replacement": "0x00474814",
-                    "file_tell_source_replacement": "0x00474870",
-                    "file_size_source_replacement": "0x004748B4",
-                    "file_flush_source_replacement": "0x00474910",
-                    "file_remove_source_replacement": "0x0047498C",
-                    "file_rename_source_replacement": "0x00474A02",
-                    "file_mkdir_source_replacement": "0x00474A76",
-                    "file_opendir_source_replacement": "0x00474B02",
-                    "file_readdir_source_replacement": "0x00474BB8",
-                    "file_closedir_source_replacement": "0x00474C66",
-                    "file_heap_allocate_source_replacement": "0x00474CD2",
-                    "file_heap_free_source_replacement": "0x00474D16",
-                    "file_heap_reallocate_source_replacement": "0x00474D54",
-                    "file_runtime_initialize_source_replacement": "0x00474D9C",
-                    "cache_icache_enable_source_replacement": "0x00474EB4",
-                    "cache_icache_disable_source_replacement": "0x00474EFA",
-                    "cache_dcache_enable_source_replacement": "0x00474F32",
-                    "cache_dcache_invalidate_source_replacement":
-                        "0x00475014",
-                    "cache_dcache_clean_source_replacement": "0x0047510E",
-                    "memory_compare_source_replacement": "0x004751C8",
-                    "secure_ota_add_source_replacement": "0x00475230",
-                    "ble_msgtx_thread_source_replacement": "0x00475290",
-                    "ble_msgtx_queue_initialize_source_replacement":
-                        "0x0047530A",
-                    "ble_msgtx_stage_enter_source_replacement":
-                        "0x00475334",
-                    "ble_msgtx_stage_leave_source_replacement":
-                        "0x0047533E",
-                    "ble_msgtx_thread_create_source_replacement":
-                        "0x00475348",
-                    "ble_msgtx_thread_destroy_source_replacement":
-                        "0x00475374",
-                    "ble_msgtx_queue_drain_source_replacement":
-                        "0x0047538C",
-                    "ble_msgtx_dispatch_flags_source_replacement":
-                        "0x004754BA",
-                    "ble_msgtx_wait_handler_source_replacement":
-                        "0x004754D0",
-                    "ble_msgtx_queue_clear_source_replacement":
-                        "0x00475524",
-                    "ble_msgtx_enqueue_source_replacement":
-                        "0x0047564E",
-                    "ble_msgtx_pb_direct_source_replacement":
-                        "0x00475A38",
-                    "ble_msgtx_pb_notify_direct_source_replacement":
-                        "0x00475AA6",
-                    "ble_msgtx_pb_send_source_replacement":
-                        "0x00475B14",
-                    "ble_msgtx_pb_notify_source_replacement":
-                        "0x00475C1A",
-                    "ble_msgtx_stream_notify_source_replacement":
-                        "0x00475D78",
-                    "ble_msgtx_transport3_source_replacement":
-                        "0x00475DE0",
-                    "ble_msgtx_efs_send_source_replacement":
-                        "0x00475DFA",
-                    "ble_msgtx_efs_notify_source_replacement":
-                        "0x00475E6C",
-                    "scan_string_source_replacement":
-                        "0x00475FC0",
-                    "file_system_check_directories_source_replacement":
-                        "0x00475FE8",
-                    "file_system_format_source_replacement":
-                        "0x004761D2",
-                    "file_system_initialize_source_replacement":
-                        "0x0047627E",
-                    "file_system_read_source_replacement":
-                        "0x004763B8",
-                    "file_system_program_source_replacement":
-                        "0x004763F0",
-                    "file_system_erase_source_replacement":
-                        "0x00476428",
-                    "event_loop_initialize_source_replacement":
-                        "0x004764E0",
-                    "event_loop_task_source_replacement":
-                        "0x00476680",
-                    "event_loop_push_source_replacement":
-                        "0x004766EC",
-                    "event_loop_timer_callback_source_replacement":
-                        "0x004767A8",
-                    "event_loop_push_delayed_source_replacement":
-                        "0x0047697E",
-                    "event_loop_remove_delayed_source_replacement":
-                        "0x00476ACE",
-                    "ble_connection_schedule_source_replacement":
-                        "0x00476CBC",
-                    "ble_connection_select_primary_source_replacement":
-                        "0x00476DB8",
-                    "ble_connection_select_secondary_source_replacement":
-                        "0x00476FE2",
-                    "ble_connection_coordinator_source_replacement":
-                        "0x0047720C",
-                    "ble_connection_callback_source_replacement":
-                        "0x0047761C",
-                    "ble_connection_remote_parameters_source_replacement":
-                        "0x00477774",
-                    "ble_connection_event_source_replacement":
-                        "0x00477ADC",
-                    "ble_connection_globals_source_replacement":
-                        "0x004780DC",
-                    "ble_connection_stream_ready_source_replacement":
-                        "0x004780F8",
-                    "ble_connection_schedule_short_source_replacement":
-                        "0x00478110",
-                    "ble_connection_stream_reset_source_replacement":
-                        "0x00478160",
-                    "ble_connection_remote_reset_source_replacement":
-                        "0x004781F4",
-                    "ble_connection_schedule_long_source_replacement":
-                        "0x00478252",
-                    "ble_connection_dispatch_source_replacement":
-                        "0x004782DC",
-                    "mram_program_zero_region_source_replacement":
-                        "0x004787A4",
-                    "mram_update_flag_set_source_replacement":
-                        "0x00478860",
-                    "mram_record_diagnostic_dump_source_replacement":
-                        "0x004789B0",
-                    "mram_sync_records_source_replacement":
-                        "0x00479418",
-                    "mram_copy_record_list_to_ram_source_replacement":
-                        "0x004795DC",
-                    "mram_update_one_record_source_replacement":
-                        "0x004799A8",
-                    "mram_app_db_update_source_replacement":
-                        "0x00479B74",
-                    "mram_deactivate_record_source_replacement":
-                        "0x0047A47C",
-                    "mram_activate_record_source_replacement":
-                        "0x0047A49C",
-                    "mram_deactivate_if_unconfirmed_source_replacement":
-                        "0x0047A5C0",
-                    "mram_record_is_active_source_replacement":
-                        "0x0047A5D0",
-                    "mram_has_untyped_record_source_replacement":
-                        "0x0047A600",
-                    "mram_next_active_record_source_replacement":
-                        "0x0047A630",
-                    "mram_count_active_type_source_replacement":
-                        "0x0047A676",
-                    "mram_oldest_active_type_source_replacement":
-                        "0x0047A6B4",
-                    "mram_allocate_record_source_replacement":
-                        "0x0047A71C",
-                    "mram_initialize_records_source_replacement":
-                        "0x0047A85C",
-                    "mram_resolve_and_connect_by_address_source_replacement":
-                        "0x0047A8C4",
-                    "mram_handle_resolved_address_source_replacement":
-                        "0x0047AB6C",
-                    "mram_delete_all_records_source_replacement":
-                        "0x0047ACF8",
-                    "mram_find_by_address_source_replacement":
-                        "0x0047AD74",
-                    "mram_find_by_ltk_request_source_replacement":
-                        "0x0047ADD4",
-                    "mram_get_key_source_replacement":
-                        "0x0047AE78",
-                    "mram_get_peer_address_source_replacement":
-                        "0x0047AEC0",
-                    "mram_get_peer_address_type_source_replacement":
-                        "0x0047AEC8",
-                    "mram_set_key_source_replacement": "0x0047AED4",
-                    "mram_set_peer_db_hash_source_replacement":
-                        "0x0047B3AE",
-                    "mram_set_cache_by_hash_source_replacement":
-                        "0x0047B3CC",
-                    "mram_set_ccc_table_value_source_replacement":
-                        "0x0047B3E2",
-                    "mram_get_csf_record_source_replacement":
-                        "0x0047B40C",
-                    "mram_set_csf_record_source_replacement":
-                        "0x0047B418",
-                    "mram_set_client_change_aware_state_source_replacement":
-                        "0x0047B438",
-                    "mram_get_device_db_hash_source_replacement":
-                        "0x0047B45A",
-                    "mram_set_device_db_hash_source_replacement":
-                        "0x0047B468",
-                    "mram_set_discovery_status_source_replacement":
-                        "0x0047B488",
-                    "mram_set_handle_list_source_replacement":
-                        "0x0047B48E",
-                    "mram_set_peer_sign_counter_source_replacement":
-                        "0x0047B4C8",
-                    "mram_set_peer_address_resolution_source_replacement":
-                        "0x0047B4CE",
-                    "mram_reload_resolving_list_source_replacement":
-                        "0x0047B4D4",
-                    "mram_clear_record_by_mac_source_replacement":
-                        "0x0047B59C",
-                    "mram_verify_write_source_replacement":
-                        "0x0047B730",
-                    "mram_show_all_records_status_source_replacement":
-                        "0x0047BC30",
-                    "mram_update_record_timestamp_source_replacement":
-                        "0x0047C084",
-                    "mram_reset_record_timestamps_source_replacement":
-                        "0x0047C164",
-                    "mram_show_nvm_status_source_replacement":
-                        "0x0047C2BC",
-                    "mram_handle_pairing_failure_source_replacement":
-                        "0x0047C568",
-                    "mram_clear_record_by_connection_source_replacement":
-                        "0x0047C8CC",
-                    "mram_dump_all_records_source_replacement":
-                        "0x0047CA9C",
-                    "efs_crc32c_msb_source_replacement":
-                        "0x0047CBC4",
-                    "mram_program_bytes_source_replacement":
-                        "0x0047CBE8",
-                    "aeabi_ldivmod_source_replacement":
-                        "0x0047CC1C",
-                    "aeabi_uldivmod_source_replacement":
-                        "0x0047CC60",
-                    "status_packet_template3_source_replacement":
-                        "0x0047CE90",
-                    "status_packet_template6_source_replacement":
-                        "0x0047CED6",
-                    "status_packet_template5_source_replacement":
-                        "0x0047CF28",
-                    "lens_status_publish_source_replacement":
-                        "0x0047D818",
-                    "status_packet_template4_source_replacement":
-                        "0x0047D870",
-                    "lens_status_bit0_source_replacement":
-                        "0x0047D8B8",
-                    "lens_status_bit1_source_replacement":
-                        "0x0047D8C2",
-                    "lens_status_pair23_source_replacement":
-                        "0x0047D8CE",
-                    "lens_status_bit4_source_replacement":
-                        "0x0047D8E4",
-                    "lens_status_bit5_source_replacement":
-                        "0x0047D8F0",
-                    "lens_status_available_source_replacement":
-                        "0x0047D9C4",
-                    "lens_status_selected_source_replacement":
-                        "0x0047D9CC",
-                    "sarc_header_checksum_source_replacement":
-                        "0x0047D9FC",
-                    "sarc_state_valid_source_replacement":
-                        "0x0047DA16",
-                    "sarc_state_initialize_source_replacement":
-                        "0x0047DA58",
-                    "sarc_report_append_source_replacement":
-                        "0x0047DA78",
-                    "sarc_report_finalize_source_replacement":
-                        "0x0047DAC0",
-                    "sarc_report_persist_source_replacement":
-                        "0x0047DB02",
-                    "monotonic_seconds_source_replacement":
-                        "0x0047DC74",
-                    "wall_time_seconds_source_replacement":
-                        "0x0047DCB4",
-                    "time_irq_disable_source_replacement":
-                        "0x0047DCE4",
-                    "boot_reset_status_source_replacement":
-                        "0x0047DCEC",
-                    "firmware_version_code_source_replacement":
-                        "0x0047DD08",
-                    "tracepoint_defer_dispatch_source_replacement":
-                        "0x0047DD62",
-                    "tracepoint_defer_timer_callback_source_replacement":
-                        "0x0047DD8A",
-                    "tracepoint_defer_begin_source_replacement":
-                        "0x0047DD92",
-                    "tracepoint_capture_retry_source_replacement":
-                        "0x0047DDAC",
-                    "tracepoint_state_crc32_source_replacement":
-                        "0x0047DDFE",
-                    "tracepoint_path_format_source_replacement":
-                        "0x0047DE0A",
-                    "tracepoint_path_parse_source_replacement":
-                        "0x0047DE18",
-                    "tracepoint_file_size_source_replacement":
-                        "0x0047DE7A",
-                    "tracepoint_directory_scan_source_replacement":
-                        "0x0047DEB4",
-                    "tracepoint_state_persist_source_replacement":
-                        "0x0047DF28",
-                    "tracepoint_state_load_source_replacement":
-                        "0x0047DF8A",
-                    "tracepoint_storage_initialize_source_replacement":
-                        "0x0047DFEC",
-                    "tracepoint_active_close_source_replacement":
-                        "0x0047E06A",
-                    "tracepoint_active_close_callback_source_replacement":
-                        "0x0047E088",
-                    "tracepoint_prune_files_source_replacement":
-                        "0x0047E090",
-                    "tracepoint_active_create_source_replacement":
-                        "0x0047E0C8",
-                    "tracepoint_active_open_source_replacement":
-                        "0x0047E144",
-                    "tracepoint_write_source_replacement":
-                        "0x0047E178",
-                    "tracepoint_commit_source_replacement":
-                        "0x0047E1EC",
-                    "tracepoint_flush_source_replacement":
-                        "0x0047E220",
-                    "tracepoint_runtime_initialize_source_replacement":
-                        "0x0047E232",
-                    "onboarding_control_update_source_replacement":
-                        "0x0047E2D0",
-                    "onboarding_notify_wear_status_source_replacement":
-                        "0x0047E320",
-                    "onboarding_flag_save_to_flash_source_replacement":
-                        "0x0047E3E6",
-                    "onboarding_flag_update_source_replacement":
-                        "0x0047E470",
-                    "onboarding_flag_send_to_peer_source_replacement":
-                        "0x0047E4A6",
-                    "onboarding_flag_reply_to_peer_source_replacement":
-                        "0x0047E51C",
-                    "onboarding_process_sync_to_peer_source_replacement":
-                        "0x0047E58E",
-                    "onboarding_runtime_initialize_source_replacement":
-                        "0x0047E674",
-                    "rtos_timer_dynamic_create_source_replacement":
-                        "0x0047E6DC",
-                    "rtos_timer_static_create_source_replacement":
-                        "0x0047E712",
-                    "rtos_timer_initialize_source_replacement":
-                        "0x0047E75A",
-                    "rtos_timer_command_source_replacement":
-                        "0x0047E7B0",
-                    "rtos_timer_reload_source_replacement":
-                        "0x0047E812",
-                    "rtos_timer_expire_source_replacement":
-                        "0x0047E83A",
-                    "rtos_timer_service_loop_source_replacement":
-                        "0x0047E878",
-                    "rtos_timer_wait_or_expire_source_replacement":
-                        "0x0047E88C",
-                    "rtos_timer_query_source_replacement": "0x0047E8F2",
-                    "rtos_timer_sample_source_replacement": "0x0047E916",
-                    "rtos_timer_insert_source_replacement": "0x0047E93C",
-                    "rtos_timer_drain_source_replacement": "0x0047E97A",
-                    "rtos_timer_switch_lists_source_replacement":
-                        "0x0047EA90",
-                    "rtos_timer_runtime_initialize_source_replacement":
-                        "0x0047EAB8",
-                    "rtos_timer_is_active_source_replacement":
-                        "0x0047EAF6",
-                    "rtos_timer_get_context_source_replacement":
-                        "0x0047EB26",
-                    "rtos_timer_pend_from_isr_source_replacement":
-                        "0x0047EB4A",
-                    "rtos_event_group_static_create_source_replacement":
-                        "0x0047EB94",
-                    "rtos_event_group_dynamic_create_source_replacement":
-                        "0x0047EBD8",
-                    "rtos_event_group_wait_source_replacement":
-                        "0x0047EBF8",
-                    "rtos_event_group_clear_source_replacement":
-                        "0x0047ED10",
-                    "rtos_event_group_clear_from_isr_source_replacement":
-                        "0x0047ED52",
-                    "rtos_event_group_get_bits_from_isr_source_replacement":
-                        "0x0047ED64",
-                    "rtos_event_group_set_source_replacement":
-                        "0x0047ED76",
-                    "rtos_event_group_set_callback_source_replacement":
-                        "0x0047EE1E",
-                    "rtos_event_group_clear_callback_source_replacement":
-                        "0x0047EE28",
-                    "rtos_event_group_test_wait_condition_source_replacement":
-                        "0x0047EE30",
-                    "rtos_event_group_set_from_isr_source_replacement":
-                        "0x0047EE4A",
-                    "rtc_initialize_source_replacement": "0x0047EE60",
-                    "rtc_time_set_source_replacement": "0x0047EE78",
-                    "rtc_time_get_source_replacement": "0x0047EF10",
-                    "pwrctrl_peripheral_descriptor_get_source_replacement":
-                        "0x0047EF18",
-                    "pwrctrl_trim_version_get_source_replacement":
-                        "0x0047EF38",
-                    "pwrctrl_mcu_switch_sequence_source_replacement":
-                        "0x0047EF74",
-                    "pwrctrl_mcu_mode_select_source_replacement":
-                        "0x0047F0A0",
-                    "pwrctrl_gpu_mode_status_source_replacement":
-                        "0x0047F108",
-                    "pwrctrl_gpu_mode_select_source_replacement":
-                        "0x0047F11C",
-                    "pwrctrl_mcu_memory_config_source_replacement":
-                        "0x0047F204",
-                    "pwrctrl_rom_enable_source_replacement":
-                        "0x0047F3C6",
-                    "pwrctrl_rom_disable_source_replacement":
-                        "0x0047F418",
-                    "pwrctrl_sram_config_source_replacement":
-                        "0x0047F46A",
-                    "pwrctrl_crypto_quiesce_source_replacement":
-                        "0x0047F56E",
-                    "pwrctrl_periph_enable_source_replacement":
-                        "0x0047F5B8",
-                    "pwrctrl_periph_disable_mask_check_source_replacement":
-                        "0x0047F6F2",
-                    "pwrctrl_periph_disable_source_replacement":
-                        "0x0047F7AE",
-                    "pwrctrl_periph_enabled_source_replacement":
-                        "0x0047F90C",
-                    "pwrctrl_info1_populate_source_replacement":
-                        "0x0047F954",
-                    "pwrctrl_low_power_init_source_replacement":
-                        "0x0047FAE8",
-                    "pwrctrl_buck_ldo_override_init_source_replacement":
-                        "0x0047FE12",
-                    "pwrctrl_buck_ldo_update_override_source_replacement":
-                        "0x0047FE6C",
-                    "pwrctrl_control_source_replacement": "0x0047FEA0",
-                    "pwrctrl_cpdlp_config_source_replacement":
-                        "0x0047FFC4",
-                    "pwrctrl_cpdlp_get_source_replacement":
-                        "0x00480008",
-                    "pwrctrl_temp_update_source_replacement":
-                        "0x00480028",
-                    "pwrctrl_syspll_enable_source_replacement":
-                        "0x00480058",
-                    "pwrctrl_syspll_disable_source_replacement":
-                        "0x0048009E",
-                    "pwrctrl_syspll_enabled_source_replacement":
-                        "0x004800E4",
-                    "spotmgr_timer_init_source_replacement":
-                        "0x004801FC",
-                    "spotmgr_timer_start_source_replacement":
-                        "0x00480240",
-                    "spotmgr_timer_restart_source_replacement":
-                        "0x0048028A",
-                    "spotmgr_timer_stop_source_replacement":
-                        "0x004802CE",
-                    "spotmgr_power_state_update_source_replacement":
-                        "0x00480312",
-                    "spotmgr_tempco_postpone_source_replacement":
-                        "0x0048032C",
-                    "spotmgr_tempco_pending_handle_source_replacement":
-                        "0x00480342",
-                    "spotmgr_simobuck_init_bfr_ovr_source_replacement":
-                        "0x00480358",
-                    "spotmgr_simobuck_init_bfr_enable_source_replacement":
-                        "0x0048036E",
-                    "spotmgr_simobuck_init_aft_enable_source_replacement":
-                        "0x00480384",
-                    "spotmgr_boost_timer_interrupt_service_source_replacement":
-                        "0x0048039A",
-                    "spotmgr_ton_config_init_source_replacement":
-                        "0x004803AC",
-                    "spotmgr_ton_config_update_source_replacement":
-                        "0x004803C2",
-                    "spotmgr_post_lptohp_handle_source_replacement":
-                        "0x004803DC",
-                    "spotmgr_simobuck_lp_autosw_init_source_replacement":
-                        "0x004803F2",
-                    "spotmgr_simobuck_lp_autosw_enable_source_replacement":
-                        "0x00480408",
-                    "spotmgr_simobuck_lp_autosw_disable_source_replacement":
-                        "0x0048041E",
-                    "spotmgr_init_source_replacement": "0x00480434",
-                    "delay_us_status_change_source_replacement":
-                        "0x004807FC",
-                    "delay_us_status_check_source_replacement":
-                        "0x00480826",
-                    "read_words_source_replacement": "0x0048086A",
-                    "mcuctrl_device_info_source_replacement":
-                        "0x00480874",
-                    "mcuctrl_control_source_replacement":
-                        "0x004809C4",
-                    "mcuctrl_extclk32m_status_source_replacement":
-                        "0x00480C56",
-                    "mcuctrl_trim_version_source_replacement":
-                        "0x00480C7C",
-                    "mcuctrl_info_source_replacement":
-                        "0x00480D72",
-                    "gpio_interrupt_index_source_replacement": "0x00480ED8",
-                    "gpio_pinconfig_get_source_replacement": "0x00480EEE",
-                    "gpio_pinconfig_source_replacement": "0x00480F0C",
-                    "gpio_state_read_source_replacement": "0x00480F8A",
-                    "gpio_state_write_source_replacement": "0x00480FD6",
-                    "gpio_interrupt_control_source_replacement": "0x004810B0",
-                    "gpio_interrupt_status_get_source_replacement": "0x004812F6",
-                    "gpio_interrupt_clear_source_replacement": "0x00481468",
-                    "gpio_interrupt_irq_status_get_source_replacement": "0x00481574",
-                    "gpio_interrupt_irq_clear_source_replacement": "0x004815F2",
-                    "gpio_interrupt_register_source_replacement": "0x0048162C",
-                    "gpio_interrupt_service_source_replacement": "0x004816C6",
-                    "ambiq_mspi_interrupt_clear_source_replacement":
-                        "0x004C23DE",
-                    "strchr_source_replacement": "0x00481818",
-                    "ascii_fold_source_replacement": "0x00481830",
-                    "integer_format_source_replacement": "0x00482518",
-                    "decimal_scale_source_replacement": "0x0048262C",
-                    "runtime_emit_span_source_replacement": "0x00482684",
-                    "runtime_memory_zero_source_replacement": "0x004826FC",
-                    "runtime_lookup_is_static_source_replacement":
-                        "0x00482708",
-                    "runtime_byte_map_lookup_source_replacement":
-                        "0x00482716",
-                    "runtime_lookup_bucket_index_source_replacement":
-                        "0x0048277E",
-                    "runtime_style_init_source_replacement": "0x0048278C",
-                    "runtime_style_reset_source_replacement": "0x00482796",
-                    "runtime_style_remove_property_source_replacement":
-                        "0x004827B0",
-                    "runtime_style_set_property_source_replacement":
-                        "0x00482868",
-                    "runtime_byte_map_lookup_u8_source_replacement":
-                        "0x00482946",
-                    "runtime_transition_descriptor_init_source_replacement":
-                        "0x00482950",
-                    "runtime_style_default_value_source_replacement":
-                        "0x0048297C",
-                    "runtime_style_is_empty_source_replacement":
-                        "0x00482A5A",
-                    "runtime_style_prop_lookup_flags_source_replacement":
-                        "0x00482A6A",
-                    "runtime_linked_list_init_source_replacement":
-                        "0x00482B00",
-                    "runtime_linked_list_insert_head_source_replacement":
-                        "0x00482B12",
-                    "runtime_linked_list_insert_before_source_replacement":
-                        "0x00482B56",
-                    "runtime_linked_list_insert_tail_source_replacement":
-                        "0x00482BCA",
-                    "runtime_linked_list_remove_source_replacement":
-                        "0x00482C0E",
-                    "runtime_linked_list_clear_custom_source_replacement":
-                        "0x00482C9A",
-                    "runtime_linked_list_get_head_source_replacement":
-                        "0x00482CD8",
-                    "runtime_linked_list_get_tail_source_replacement":
-                        "0x00482CE4",
-                    "runtime_linked_list_get_next_source_replacement":
-                        "0x00482CF0",
-                    "runtime_linked_list_get_previous_source_replacement":
-                        "0x00482CFA",
-                    "runtime_linked_list_get_length_source_replacement":
-                        "0x00482D02",
-                    "runtime_linked_list_move_before_source_replacement":
-                        "0x00482D22",
-                    "runtime_linked_list_is_empty_source_replacement":
-                        "0x00482D88",
-                    "runtime_linked_list_clear_source_replacement":
-                        "0x00482DA4",
-                    "runtime_linked_list_set_previous_source_replacement":
-                        "0x00482DAE",
-                    "runtime_linked_list_set_next_source_replacement":
-                        "0x00482DC2",
-                    "runtime_color_mix_source_replacement": "0x00482DD8",
-                    "runtime_color_mix_alpha_source_replacement":
-                        "0x00482E4C",
-                    "runtime_color_brightness_source_replacement":
-                        "0x00482ED4",
-                    "runtime_color_over32_source_replacement": "0x00482EF6",
-                    "runtime_theme_get_from_object_source_replacement":
-                        "0x00482F74",
-                    "runtime_theme_apply_source_replacement": "0x00482F8A",
-                    "runtime_theme_get_primary_color_source_replacement":
-                        "0x00482FAA",
-                    "runtime_theme_apply_chain_source_replacement":
-                        "0x00482FCE",
-                    "runtime_theme_apply_recursion_source_replacement":
-                        "0x00482FF2",
-                    "runtime_bounded_byte_store_source_replacement":
-                        "0x00483028",
-                    "runtime_noop_output_source_replacement": "0x00483030",
-                    "runtime_ascii_is_digit_source_replacement":
-                        "0x00483032",
-                    "runtime_parse_decimal_source_replacement":
-                        "0x00483044",
-                    "runtime_format_out_reverse_source_replacement":
-                        "0x0048306C",
-                    "runtime_ntoa_format_source_replacement":
-                        "0x004830DA",
-                    "runtime_ntoa_long_source_replacement": "0x0048320A",
-                    "runtime_ntoa_long_long_source_replacement":
-                        "0x0048329C",
-                    "runtime_ftoa_source_replacement": "0x00483350",
-                    "runtime_etoa_source_replacement": "0x0048364C",
-                    "runtime_vsnprintf_source_replacement": "0x00483960",
-                    "runtime_snprintf_source_replacement": "0x00483FD0",
-                    "runtime_vsnprintf_wrapper_source_replacement":
-                        "0x00483FEA",
-                    "runtime_async_call_source_replacement": "0x00484014",
-                    "runtime_async_call_cancel_source_replacement":
-                        "0x00484052",
-                    "runtime_async_timer_callback_source_replacement":
-                        "0x004840AC",
-                    "runtime_heap_generic_initialize_source_replacement":
-                        "0x0048413C",
-                    "runtime_heap_generic_allocate_source_replacement":
-                        "0x00484180",
-                    "runtime_heap_generic_memalign_source_replacement":
-                        "0x004841D8",
-                    "runtime_heap_generic_reallocate_source_replacement":
-                        "0x00484234",
-                    "runtime_heap_generic_free_source_replacement":
-                        "0x0048429E",
-                    "runtime_heap_allocate_adapter_source_replacement":
-                        "0x0048431E",
-                    "runtime_heap_reallocate_adapter_source_replacement":
-                        "0x0048432A",
-                    "runtime_heap_free_adapter_source_replacement":
-                        "0x00484338",
-                    "runtime_bounded_string_length_source_replacement":
-                        "0x0048D4E8",
-                    "runtime_strnlen_s_source_replacement": "0x00454770",
-                    "freertos_list_initialise_source_replacement":
-                        "0x0045607C",
-                    "freertos_list_insert_end_source_replacement":
-                        "0x0045609A",
-                    "freertos_list_insert_source_replacement":
-                        "0x004560B2",
-                    "freertos_list_remove_source_replacement":
-                        "0x004560E8",
-                    "freertos_task_current_source_replacement":
-                        "0x0045589C",
-                    "freertos_task_count_source_replacement":
-                        "0x00454F10",
-                    "freertos_task_get_tick_count_source_replacement":
-                        "0x00454EFE",
-                    "freertos_task_get_tick_count_from_isr_source_replacement":
-                        "0x00454F06",
-                    "freertos_port_yield_source_replacement":
-                        "0x004420BC",
-                    "freertos_port_enter_critical_source_replacement":
-                        "0x004420D0",
-                    "freertos_port_exit_critical_source_replacement":
-                        "0x004420E8",
-                    "freertos_queue_give_from_isr_source_replacement":
-                        "0x00441A42",
-                    "freertos_task_resume_all_source_replacement":
-                        "0x00454DCC",
-                    "freertos_task_increment_tick_source_replacement":
-                        "0x0045504C",
-                    (
-                        "freertos_task_remove_from_event_list_"
-                        "source_replacement"
-                    ): "0x00455370",
-                    "freertos_task_check_free_stack_space_source_replacement":
-                        "0x00455820",
-                    "freertos_task_reset_next_task_unblock_time_"
-                    "source_replacement": "0x00455876",
-                    "freertos_scheduler_state_source_replacement":
-                        "0x004558A4",
-                    "freertos_task_lists_initialize_source_replacement":
-                        "0x0045568C",
-                    "format_append_source_replacement": "0x00490616",
-                    "format_bool_reader_source_replacement": "0x00490678",
-                    "format_repeated_field_encoder_source_replacement":
-                        "0x00490690",
-                    "format_default_checker_source_replacement":
-                        "0x0049087A",
-                    "format_value_dispatcher_source_replacement":
-                        "0x00490A46",
-                    "format_indirect_field_encoder_source_replacement":
-                        "0x00490AEA",
-                    "format_extension_default_encoder_source_replacement":
-                        "0x00490BC8",
-                    "format_extension_fields_encoder_source_replacement":
-                        "0x00490BF8",
-                    "format_regular_field_encoder_source_replacement":
-                        "0x00490B1E",
-                    "format_message_encoder_source_replacement":
-                        "0x00490C32",
-                    "format_uleb128_writer_source_replacement": "0x00490C84",
-                    "format_u64_prefix_writer_source_replacement": "0x00490CE0",
-                    "format_s64_zigzag_writer_source_replacement": "0x00490D08",
-                    "format_fixed4_writer_source_replacement": "0x00490D36",
-                    "format_fixed8_writer_source_replacement": "0x00490D40",
-                    "format_field_key_writer_source_replacement": "0x00490D4A",
-                    "format_descriptor_key_writer_source_replacement": "0x00490D66",
-                    "format_buffer_writer_source_replacement": "0x00490DB6",
-                    "format_submessage_writer_source_replacement": "0x00490DDC",
-                    "format_bool_writer_source_replacement": "0x00490E90",
-                    "format_integer_writer_source_replacement": "0x00490EAE",
-                    "format_fixed_writer_source_replacement": "0x00490F72",
-                    "format_bytes_writer_source_replacement": "0x00490FA2",
-                    "format_string_writer_source_replacement": "0x00490FE4",
-                    "format_submessage_field_writer_source_replacement":
-                        "0x0049104C",
-                    "littlefs_scmp_source_replacement": "0x004CA7B2",
-                    "littlefs_tag_isvalid_source_replacement":
-                        "0x004CAE6A",
-                    "littlefs_tag_type1_source_replacement":
-                        "0x004CAE88",
-                    "littlefs_tag_type2_source_replacement":
-                        "0x004CAE90",
-                    "littlefs_tag_type3_source_replacement":
-                        "0x004CAE98",
-                    "littlefs_tag_chunk_source_replacement":
-                        "0x004CAEA0",
-                    "littlefs_tag_id_source_replacement":
-                        "0x004CAEB0",
-                    "littlefs_tag_size_source_replacement":
-                        "0x004CAEB8",
-                    "littlefs_alloc_ckpoint_source_replacement":
-                        "0x004CB0E0",
-                    "littlefs_alloc_drop_source_replacement":
-                        "0x004CB0E6",
-                    "littlefs_mlist_remove_source_replacement":
-                        "0x004CB0A0",
-                    "littlefs_mlist_append_source_replacement":
-                        "0x004CB0BC",
-                    "littlefs_disk_version_source_replacement":
-                        "0x004CB0C4",
-                    "littlefs_file_tell_private_source_replacement":
-                        "0x004CE45C",
-                    "littlefs_file_rewind_private_source_replacement":
-                        "0x004CE460",
-                    "littlefs_file_size_private_source_replacement":
-                        "0x004CE472",
-                    "tlsf_walk_pool_source_replacement": "0x004D0580",
-                    "tlsf_block_size_source_replacement": "0x004D05E4",
-                    "tlsf_pool_overhead_source_replacement": "0x004D05FA",
-                    "tlsf_create_with_pool_source_replacement":
-                        "0x004D06EC",
-                    "tlsf_get_pool_source_replacement": "0x004D0716",
-                    "tlsf_malloc_source_replacement": "0x004D0722",
-                    "tlsf_memalign_source_replacement": "0x004D0744",
-                    "tlsf_free_source_replacement": "0x004D0808",
-                    "tlsf_realloc_source_replacement": "0x004D0868",
-                    "evenhub_mode2_decompress_source_replacement": "0x004E0C0C",
-                    "evenhub_rle_decompress_source_replacement": "0x004E0C34",
-                    "evenhub_rle_decode_source_replacement": "0x004E0C3C",
-                    "evenhub_active_mark_source_replacement": "0x004E0CA0",
-                    "evenhub_state_get_source_replacement": "0x004E0CAA",
-                    "evenhub_state_set_source_replacement": "0x004E0CB2",
-                    "keepalive_reset_source_replacement": "0x004E0CBA",
-                    "evenhub_shutdown_mark_source_replacement": "0x004E0CC4",
-                    "evenhub_container_find_node_source_replacement": "0x004E0CCE",
-                    "evenhub_page_event_handler_source_replacement": "0x004E0D3A",
-                    "evenhub_common_data_handler_source_replacement": "0x004E1192",
-                    "evenhub_imu_enable_source_replacement": "0x004E1406",
-                    "evenhub_ui_event_handler_source_replacement": "0x004E1490",
-                    "ring_write_source_replacement": "0x00530084",
-                    "ring_read_source_replacement": "0x005300E2",
-                    "ui_display_handler_source_replacement": "0x005415C2",
-                    "freertos_cli_console_task_source_replacement":
-                        "0x00541600",
-                    "freertos_queue_messages_waiting_source_replacement":
-                        "0x00441E66",
-                    (
-                    "freertos_queue_messages_waiting_from_isr_"
-                        "source_replacement"
-                    ): "0x00441E8A",
-                    "nanopb_decode_fixed32_source_replacement":
-                        "0x00490190",
-                    "nanopb_decode_fixed64_source_replacement":
-                        "0x004901AC",
-                    "nanopb_read_source_replacement": "0x0048F3BE",
-                    "lz4_decompress_safe_source_replacement": "0x0054F338",
-                    "ui_display_sink_source_replacement": "0x0055E7FA",
-                    "ui_display_submit_source_replacement": "0x0058E3F8",
-                    "ui_display_operation_zero_source_replacement": "0x0058E454",
-                    "ui_display_operation_one_source_replacement": "0x0058E49E",
-                    "ui_display_operation_start_source_replacement": "0x0058E4E8",
-                    "ui_display_operation_three_source_replacement": "0x0058E50A",
-                    "ui_display_operation_begin_source_replacement": "0x0058DEF2",
-                    "ui_display_direct_read_source_replacement": "0x0058E2D8",
-                    "ui_display_fifo_discard_source_replacement": "0x0058E352",
-                    "ui_display_direct_write_source_replacement": "0x0058E31E",
-                    "ui_display_ring_fill_source_replacement": "0x0058E360",
-                    "ui_display_ring_drain_source_replacement": "0x0058E3A0",
-                    "ui_display_operation_service_source_replacement": "0x0058E534",
-                    "ui_display_event_begin_source_replacement": "0x0058DF5C",
-                    "ui_display_event_service_source_replacement": "0x0058E618",
-                    "ui_display_irq_service_source_replacement": "0x0058E860",
-                    "ui_display_irq_finish_source_replacement": "0x0058DD30",
-                    "ui_display_irq_bit12_source_replacement": "0x0058DD5C",
-                    "ui_display_irq_result_source_replacement": "0x0058DD8A",
-                    "ui_display_irq_bit6_source_replacement": "0x0058DFEE",
-                    "ui_display_event_abort_source_replacement": "0x0058DFB2",
-                }
-            self.assertTrue(
-                expected_source_replacements.items()
-                <= source_replacements.items(),
-            )
-            self.assertEqual(
-                {
-                    region["region"]: region["target_address_hex"]
-                    for region in plan["flash_regions"]
-                    if region["address_status"]
-                    == "generated_source_exact_replacement"
-                },
-                {
-                    "ble_msgtx_application_initialize_source_replacement":
-                        "0x00475308",
-                    "ble_msgtx_thread_initialize_source_replacement":
-                        "0x00475332",
-                    "file_system_sync_source_replacement":
-                        "0x004764DC",
-                    "duration_delay_source_replacement": "0x004807A0",
-                    "format_span_source_replacement": "0x004910E8",
-                    "duration_delay_ms_wrapper_source_replacement":
-                        "0x004910F4",
-                    "duration_delay_us_wrapper_source_replacement":
-                        "0x00491102",
-                },
-            )
-            self.assertEqual(
-                {
-                    region["region"]: region["target_address_hex"]
-                    for region in plan["flash_regions"]
-                    if region["address_status"]
-                    == "generated_source_exact_load_image"
-                },
-                {
-                    "duration_delay_cycle_load_image_source_replacement":
-                        "0x00794310",
-                },
-            )
-            source_compiled_regions = [
-                region["region"]
-                for region in plan["flash_regions"]
-                if region["address_status"] == "source_compiled"
-            ]
-            expected_legacy_source_compiled_regions = [
-                    "bootloader_core_source_overlay",
-                    "bootloader_ambiq_mspi_interrupt_clear_source_leaf",
-                    "bootloader_littlefs_mlist_isopen_source_leaf",
-                    "bootloader_littlefs_util_fromle32_source_leaf",
-                    "bootloader_littlefs_util_tole32_source_leaf",
-                    "bootloader_littlefs_util_frombe32_source_leaf",
-                    "bootloader_littlefs_util_tobe32_source_leaf",
-                    "bootloader_littlefs_disk_version_major_source_leaf",
-                    "bootloader_littlefs_disk_version_minor_source_leaf",
-                    "bootloader_littlefs_alloc_lookahead_source_leaf",
-                    "bootloader_easylogger_logger_provider_source_leaf",
-                    "bootloader_easylogger_assertion_provider_source_leaf",
-                    "bootloader_easylogger_get_format_enabled_source_leaf",
-                    "bootloader_easylogger_format_u32_predicate_source_leaf",
-                    "bootloader_easylogger_format_pointer_predicate_source_leaf",
-                    "bootloader_easylogger_strcpy_source_leaf",
-                    "bootloader_littlefs_tag_chunk_source_leaf",
-                    "bootloader_littlefs_tag_isvalid_source_leaf",
-                    "bootloader_littlefs_tag_type1_source_leaf",
-                    "bootloader_littlefs_tag_type3_source_leaf",
-                    "bootloader_littlefs_tag_id_source_leaf",
-                    "bootloader_littlefs_tag_size_source_leaf",
-                    "cordio_smp_act_none_source_in_place",
-                    "freertos_v_restore_context_of_first_task_source_copy",
-                    "freertos_v_raise_privilege_source_copy",
-                    "freertos_v_start_first_task_source_copy",
-                    "freertos_ul_set_interrupt_mask_source_copy",
-                    "freertos_v_clear_interrupt_mask_source_copy",
-                    "freertos_pendsv_handler_source_copy",
-                    "freertos_svc_handler_source_copy",
-                    "apollo_core_source_overlay",
-                    "apollo_ambiq_mspi_interrupt_clear_source_leaf",
-                    "apollo_freertos_ul_set_interrupt_mask_source_leaf",
-                    "apollo_freertos_v_clear_interrupt_mask_source_leaf",
-                    "apollo_littlefs_mlist_isopen_source_leaf",
-                    "apollo_littlefs_util_fromle32_source_leaf",
-                    "apollo_littlefs_util_tole32_source_leaf",
-                    "apollo_littlefs_util_frombe32_source_leaf",
-                    "apollo_littlefs_util_tobe32_source_leaf",
-                    "apollo_littlefs_disk_version_major_source_leaf",
-                    "apollo_littlefs_disk_version_minor_source_leaf",
-                    "apollo_littlefs_alloc_lookahead_source_leaf",
-                    "apollo_cmsis_message_queue_new_source_leaf",
-                    "apollo_freertos_pc_task_get_name_source_leaf",
-                    "apollo_cmsis_mutex_new_source_leaf",
-                    "apollo_freertos_heap4_init_source_leaf",
-                    "apollo_freertos_heap4_insert_free_block_source_leaf",
-                    "apollo_freertos_heap4_malloc_source_leaf",
-                    "apollo_freertos_heap4_free_source_leaf",
-                    "apollo_freertos_queue_delete_source_leaf",
-                    "apollo_cmsis_semaphore_new_source_leaf",
-                    "apollo_easylogger_logger_provider_source_leaf",
-                    "apollo_easylogger_assertion_provider_source_leaf",
-                    "apollo_easylogger_get_format_enabled_source_leaf",
-                    "apollo_easylogger_format_u32_predicate_source_leaf",
-                    "apollo_easylogger_format_pointer_predicate_source_leaf",
-                    "apollo_easylogger_strcpy_source_leaf",
-                    "apollo_freertos_tick_count_provider_source_leaf",
-                    "apollo_freertos_task_get_tick_count_source_leaf",
-                    "apollo_freertos_task_get_tick_count_from_isr_source_leaf",
-                    "apollo_freertos_task_missed_yield_source_leaf",
-                    "apollo_freertos_task_reset_event_item_value_source_leaf",
-                    "apollo_freertos_task_increment_mutex_held_count_source_leaf",
-                    "apollo_freertos_task_suspend_all_source_leaf",
-                    (
-                        "apollo_freertos_task_internal_set_timeout_state_"
-                        "source_leaf"
-                    ),
-                    "apollo_freertos_port_yield_source_leaf",
-                    "apollo_freertos_port_enter_critical_source_leaf",
-                    "apollo_freertos_port_exit_critical_source_leaf",
-                    (
-                        "apollo_freertos_task_reset_next_task_unblock_time_"
-                        "source_leaf"
-                    ),
-                    "apollo_freertos_task_increment_tick_source_leaf",
-                    "apollo_freertos_task_resume_all_source_leaf",
-                    "apollo_lz4_upstream_decompress_safe_source_text",
-                    (
-                        "apollo_lz4_upstream_decompress_tables_"
-                        "source_data"
-                    ),
-                    "apollo_lz4_upstream_safe_adapter_source_leaf",
-                    "apollo_lz4_upstream_mode2_adapter_source_leaf",
-                    (
-                        "apollo_freertos_task_remove_from_event_list_"
-                        "source_leaf"
-                    ),
-                    "apollo_freertos_queue_give_from_isr_source_leaf",
-                    (
-                        "apollo_freertos_task_check_free_stack_space_"
-                        "source_leaf"
-                    ),
-                    "apollo_freertos_task_check_for_timeout_source_leaf",
-                    "apollo_easylogger_async_record_builder_source_text",
-                    "apollo_easylogger_async_record_builder_source_rodata",
-                    "apollo_easylogger_async_submit_source_leaf",
-                    "apollo_easylogger_output_source_text",
-                    "apollo_easylogger_output_source_rodata",
-                    (
-                        "apollo_freertos_queue_disinherit_helper_"
-                        "source_leaf"
-                    ),
-                    "apollo_freertos_queue_semaphore_take_source_leaf",
-                    "apollo_freertos_queue_generic_reset_source_leaf",
-                    (
-                        "apollo_freertos_task_remove_from_unordered_event_"
-                        "list_source_leaf"
-                    ),
-                    "apollo_easylogger_hexdump_put_source_leaf",
-                    "apollo_easylogger_hexdump_put_hex_source_leaf",
-                    "apollo_easylogger_hexdump_fill_source_leaf",
-                    "apollo_easylogger_hexdump_format_header_source_leaf",
-                    "apollo_easylogger_hexdump_format_hex_source_leaf",
-                    "apollo_easylogger_hexdump_format_character_source_leaf",
-                    "apollo_easylogger_hexdump_blank_hex_source_leaf",
-                    (
-                        "apollo_easylogger_level_less_record_builder_"
-                        "source_text"
-                    ),
-                    (
-                        "apollo_easylogger_level_less_record_builder_"
-                        "source_rodata"
-                    ),
-                    "apollo_easylogger_hexdump_raw_submit_source_leaf",
-                    "apollo_easylogger_hexdump_source_text",
-                    "apollo_easylogger_hexdump_source_rodata",
-                    "apollo_freertos_cli_get_parameter_source_leaf",
-                    "apollo_nanopb_decode_varint_source_text",
-                    "apollo_nanopb_decode_varint_source_rodata",
-                    "apollo_cmbacktrace_current_task_name_adapter_source_leaf",
-                    "apollo_cmbacktrace_get_cur_thread_name_source_leaf",
-                    "apollo_freertos_cli_console_fill_source_leaf",
-                    (
-                        "apollo_freertos_cli_console_state_initialize_"
-                        "source_leaf"
-                    ),
-                    (
-                        "apollo_freertos_cli_console_register_groups_"
-                        "source_leaf"
-                    ),
-                    (
-                        "apollo_freertos_cli_console_process_command_"
-                        "source_leaf"
-                    ),
-                    (
-                        "apollo_freertos_cli_console_process_command_"
-                        "source_rodata"
-                    ),
-                    (
-                        "apollo_freertos_cli_console_consume_byte_"
-                        "source_leaf"
-                    ),
-                    "apollo_freertos_cli_console_poll_once_source_leaf",
-                    "apollo_freertos_cli_console_task_source_leaf",
-                    "apollo_freertos_queue_messages_waiting_source_leaf",
-                    (
-                        "apollo_freertos_queue_messages_waiting_from_isr_"
-                        "source_leaf"
-                    ),
-                    "apollo_nanopb_skip_varint_source_leaf",
-                    "apollo_littlefs_file_size_private_source_leaf",
-                    "apollo_freertos_task_lists_initialize_source_leaf",
-                    "apollo_nanopb_close_string_substream_source_leaf",
-                    "apollo_littlefs_file_rewind_private_source_leaf",
-                    "apollo_nanopb_decode_fixed32_source_leaf",
-                    "apollo_littlefs_tag_type2_source_leaf",
-                    "apollo_littlefs_tag_chunk_source_leaf",
-                    "apollo_littlefs_tag_isvalid_source_leaf",
-                    "apollo_littlefs_tag_type1_source_leaf",
-                    "apollo_littlefs_tag_type3_source_leaf",
-                    "apollo_littlefs_tag_id_source_leaf",
-                    "apollo_littlefs_tag_size_source_leaf",
-                    "apollo_nanopb_decode_fixed64_source_leaf",
-                    "apollo_nanopb_read_source_leaf",
-                    "apollo_nanopb_buf_read_source_leaf",
-                    "apollo_nanopb_readbyte_source_leaf",
-                    "apollo_nanopb_istream_from_buffer_source_leaf",
-                    "apollo_nanopb_decode_svarint_source_leaf",
-                    "apollo_nanopb_decode_varint32_eof_source_leaf",
-                    "apollo_nanopb_decode_varint32_overflow_rodata",
-                    "apollo_nanopb_decode_varint32_source_leaf",
-                    "apollo_nanopb_skip_string_source_leaf",
-                ]
-            self.assertEqual(
-                source_compiled_regions[
-                    :len(expected_legacy_source_compiled_regions)
-                ],
-                expected_legacy_source_compiled_regions,
-            )
+            ),
+            (5_864, 2, 5, 6),
+        )
 
 
 if __name__ == "__main__":

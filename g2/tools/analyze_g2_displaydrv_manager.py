@@ -8,11 +8,39 @@ import analyze_g2_compress_log_core as q
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 IMAGE=ROOT/"blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin";FM=ROOT/"tools/manifests/g2-displaydrv-manager-function-map.tsv";CL=ROOT/"tools/manifests/g2-displaydrv-manager-closure.tsv";PM=ROOT/"tools/manifests/g2-displaydrv-manager-provider-map.tsv"
-PINS={FM:"091708f94cc20cdfb5a31cf2bab9b0bcbcb17d51cecdcbc93ba55d5139f2635b",CL:"e3c9477a6a6cd0ee375cf87b61797467a3c121a9113682cf8f067b1d6e1d8f44",PM:"dfb4e671baf83a749d8f267c52698d939f8ee0eb66a0468986c4e2efa86ed95c"}
+PINS={FM:"091708f94cc20cdfb5a31cf2bab9b0bcbcb17d51cecdcbc93ba55d5139f2635b",CL:"494e3753c83ce1bd4c79f693c67241a7c0d38bdf225b9375dbcf53af6d662dc1",PM:"dfb4e671baf83a749d8f267c52698d939f8ee0eb66a0468986c4e2efa86ed95c"}
 PHYS=(0x473952,0x474550);PATH_CELLS=(0x474308,0x474534);PSEUDO=(0x581EA6,0x4744AE,0x581EA4)
 EASY={0x43CE9E,0x43D0CE,0x43D574};CMSIS={0x4490E2,0x4491FE,0x4493B0,0x449498,0x4494D8,0x449A32,0x449ABE,0x449B3C};IAR={0x43C0E4}
 FIRST={0x443484,0x46B238,0x46C410,0x46CA14,0x46D816,0x46D826,0x47386A,0x4C9B86,0x4C9BE2,0x4C9F32,0x4C9FB4,0x4CA010,0x4CA126,0x4CA18A,0x4CA1EE,0x4CA564,0x4CA5BE,0x4CA60E}
 STORED=[(0x776A40,0x473E2F),(0x776A44,0x473EA1),(0x776A48,0x473F13),(0x776A4C,0x473F85),(0x776A50,0x473FF7),(0x791BF6,0x473953)];INTERIOR=[(0x64CE5B,0x473AFF)]
+ROUTES=[
+ ("replace_display_thread_initialize","open_cfw_display_thread_initialize"),
+ ("replace_display_queue_initialize","open_cfw_display_queue_initialize"),
+ ("replace_display_thread_deinitialize","open_cfw_display_thread_deinitialize"),
+ ("replace_display_resource_acquire","open_cfw_display_resource_acquire"),
+ ("replace_display_resource_release","open_cfw_display_resource_release"),
+ ("replace_display_timer_initialize","open_cfw_display_timer_initialize"),
+ ("replace_display_timer_start","open_cfw_display_timer_start"),
+ ("replace_display_timer_stop","open_cfw_display_timer_stop"),
+ ("replace_display_timer_callback","open_cfw_display_timer_callback"),
+ ("replace_display_queue_command8","open_cfw_display_queue_command8"),
+ ("replace_display_manager_thread","open_cfw_display_manager_thread"),
+ ("replace_display_clear_screen","open_cfw_display_clear_screen"),
+ ("replace_display_initialize_async","open_cfw_display_initialize_async"),
+ ("replace_display_power_up","open_cfw_display_power_up"),
+ ("replace_display_power_down","open_cfw_display_power_down"),
+ ("replace_display_brightness_control","open_cfw_display_brightness_control"),
+ ("replace_display_send_reflash","open_cfw_display_send_reflash"),
+ ("replace_display_initialize_force","open_cfw_display_initialize_force"),
+ ("replace_display_deinitialize_force","open_cfw_display_deinitialize_force"),
+]
+SOURCES={
+ "components/apollo_main/core_overlay/display_thread_init.c":"2745d39c43fbe428c74fa1e3967c19720e9667d3952dda994d7a31fe8ccb2890",
+ "components/apollo_main/core_overlay/display_runtime.c":"02ef39a7409146fdd5a82e2c8351d88b50ab05cec63a20b5388009dcd8b1d1a4",
+ "components/apollo_main/core_overlay/display_manager_thread.c":"45d15ef9d2c79b9e054b2de8616ff12aa6c2b020744ba87dbfbf112001000a1b",
+ "components/apollo_main/core_overlay/display_queue_senders.c":"e691c15144fe53cb2c90085963de661d9e787741e9084eafb6af2e6a05540402",
+ "components/apollo_main/core_overlay/display_lifecycle.c":"5bbd9f251128ac8843e1a1cf768bfbb5b24a1ceb918146a3162792b300d6a150",
+}
 def sh(x):return hashlib.sha256(x).hexdigest()
 def cstring(b,a):
  o=a-c.BASE;e=b.find(b'\0',o)
@@ -65,6 +93,16 @@ def analyze(image=IMAGE):
  pairs=[(cell,x) for cell in PATH_CELLS for x in t.literal_references(b,cell)]
  if len(pairs)!=25 or c._pair_digest(pairs)!="f3defc2f8126ca77f41a2f4c39e14e291e82f7fad1ce375e3d14ad328eaebca7":raise c.AuditError("path references changed")
  overlay=json.loads((ROOT/"components/apollo_main/core_overlay/overlay.json").read_text())
- if any("displaydrv_manager" in x.get("path","").lower() for x in overlay['sources']):raise c.AuditError("unimplemented object routed")
- return {"schema_version":1,"identity":{"image_sha256":c.IMAGE_SHA256,"retained_path":r"platform\display_mgr\displaydrv_manager.c","embedded_third_party_definitions":[]},"surface":{"linked_functions":19,"ghidra_discovered_functions":12,"restored_functions":7,"path_anchored_functions":12,"body_bytes":2796,"physical_bytes":3070,"noncode_bytes":274,"reachable_instructions":1035,"direct_body_calls":184,"internal_direct_body_calls":6,"external_direct_body_calls":178,"indirect_body_calls":0,"direct_bl_entry_sites":18,"stored_function_entry_pointers":6,"stored_interior_callback_pointers":1,"raw_overlapping_pseudo_bl_sites":1,"strict_interior_ingress":0},"behavior":{"display_manager_lifecycle":True,"thread_and_timer_control":True,"uled_mspi_dispatch":True,"stored_completion_callbacks":True,"display_locking_and_state":True},"provider_boundary":{"easylogger_calls":125,"cmsis_freertos_calls":20,"iar_dlib_calls":11,"first_party_uled_display_calls":22,"direct_lvgl_calls":0,"direct_ambiqsuite_calls":0,"cmsis_freertos_commit":"d213f261b5be6bb29a7cce8b84071706b72f4d53","new_version_discriminator":False,"private_generating_commit_recoverable":False},"production":{"production_routed":False}}
+ source_records={x["path"]:x for x in overlay["sources"] if x["path"] in SOURCES}
+ if set(source_records)!=set(SOURCES):raise c.AuditError("display manager source inventory changed")
+ for path,digest in SOURCES.items():
+  if source_records[path].get("sha256")!=digest or sh((ROOT/path).read_bytes())!=digest:raise c.AuditError(f"display manager source changed: {path}")
+ sites={x["name"]:x for x in overlay["patch_sites"]}
+ routed=0
+ for index,((name,target),(a,z)) in enumerate(zip(ROUTES,F)):
+  site=sites.get(name);end=0x00473C44 if index==9 else z
+  if site is None or site.get("runtime_address")!=a or site.get("target_function")!=target or site.get("branch")!="b_w" or site.get("expected_size")!=end-a or site.get("expected_sha256")!=sh(c._slice(b,a,end)):raise c.AuditError(f"display manager production route changed: {name}")
+  if target not in overlay["functions"]:raise c.AuditError(f"display manager target missing: {target}")
+  routed+=end-a
+ return {"schema_version":1,"identity":{"image_sha256":c.IMAGE_SHA256,"retained_path":r"platform\display_mgr\displaydrv_manager.c","embedded_third_party_definitions":[]},"surface":{"linked_functions":19,"ghidra_discovered_functions":12,"restored_functions":7,"path_anchored_functions":12,"body_bytes":2796,"physical_bytes":3070,"noncode_bytes":274,"reachable_instructions":1035,"direct_body_calls":184,"internal_direct_body_calls":6,"external_direct_body_calls":178,"indirect_body_calls":0,"direct_bl_entry_sites":18,"stored_function_entry_pointers":6,"stored_interior_callback_pointers":1,"raw_overlapping_pseudo_bl_sites":1,"strict_interior_ingress":0},"behavior":{"display_manager_lifecycle":True,"thread_and_timer_control":True,"uled_mspi_dispatch":True,"stored_completion_callbacks":True,"display_locking_and_state":True},"provider_boundary":{"easylogger_calls":125,"cmsis_freertos_calls":20,"iar_dlib_calls":11,"first_party_uled_display_calls":22,"direct_lvgl_calls":0,"direct_ambiqsuite_calls":0,"cmsis_freertos_commit":"d213f261b5be6bb29a7cce8b84071706b72f4d53","new_version_discriminator":False,"private_generating_commit_recoverable":False},"production":{"production_routed":True,"source_files":len(SOURCES),"guarded_redirects":len(ROUTES),"routed_stock_bytes":routed,"retained_compatibility_bytes":PHYS[1]-PHYS[0]-routed}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

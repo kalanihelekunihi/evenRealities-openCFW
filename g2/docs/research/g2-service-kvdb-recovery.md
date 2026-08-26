@@ -91,9 +91,9 @@ counter, all eleven migration calls, twelve-node reload, initialization
 failure, missing/mismatched magic, and safe invalidation. The canonical
 overlay/component/package identities are 239,680 / 3,763,076 / 4,541,570
 bytes with SHA-256 values
-`2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae`,
-`b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed`,
-and `275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85`.
+`2def566dbf70594c89471066a7cd17f6d1fa94196f65ff48237385396e9cfd19`,
+`7228edb650fe39bda63480691fe94ed59d0807ca5e30846d35ec08e134e08350`,
+and `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
 The flash plan contains 3,672 placed regions, two unresolved regions, five
 container-only regions, and six protected regions.
 

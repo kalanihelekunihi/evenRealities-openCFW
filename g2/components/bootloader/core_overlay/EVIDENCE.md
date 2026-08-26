@@ -130,6 +130,149 @@ python3 components/bootloader/core_overlay/build_component.py
 The command writes local artifacts below
 `components/bootloader/core_overlay/build/`.
 
+## Current S200 redirect-initializer increment
+
+The current provider additionally source-owns the complete 88-byte
+`product/s200/bootloader/config/redirect.c` `redirect_init` entry at
+`[0x00415590,0x004155E8)`. The authenticated stock SHA-256 is
+`b53b1d0eae9d2787d431ae1950d956c54429fb339a67ee7f219ff7c01ffc0cd6`.
+The recovered entry creates and publishes the stdout/stderr-side IAR stream
+mutex handles at `0x2002712C` and `0x20027130`, checks both results after both
+attempts, preserves the exact success/failure return values, and emits the
+authenticated EasyLogger diagnostics through retained `elog_output`.
+
+The clean-room source and ABI header are 2,295 and 1,982 bytes with SHA-256
+values `9df4daeea0af317c1556361a15f1625d5b1e9d00b3c72ae9b753de4608c3294f`
+and `d59de5e4176f72b95aa93c3e497de815bc29ac1ea816d2e3b8512d4349125414`.
+Canonical Apple clang emits a 132-byte function at `0x00434710` and a
+143-byte authenticated diagnostic string section. The 275-byte closure has
+SHA-256
+`ddb1d064bf765803fac4fc89c0b6c585f13b0ea7bcfc3b5ad7b78ee7d8e50922`.
+Twelve strict relocations bind four calls only to retained `osMutexNew` and
+`elog_output`, and bind the remaining eight references only to strings inside
+the same source closure. The stock entry receives one non-linking Thumb
+redirect plus 42 NOPs.
+
+Current canonical accounting is 1,529 source-owned bytes, 2,078 generated
+patch bytes, eight generated alignment bytes, and 146,521 retained official
+bytes. The 1,536-byte overlay hashes to
+`6349a7c29d08cab96c499c53ef3527ecc0569cf03be9bb38e412de96e0564273`;
+the 150,136-byte provider hashes to
+`c210163056368efdd4acaefa5a952a2a720b39a41b4519203b6ce10f0020639d`,
+has CRC-32C/MSB `0x6E395D90`, and leaves `0x3588` bytes before Apollo main.
+The independent Homebrew clang 22.1.8 profile has separately pinned hashes
+for the same layout and relocation graph.
+
+Host failure/success tests, isolated target builds, the fail-closed analyzer,
+provider/manifest ownership checks, and both compiler profiles pass offline.
+The neighboring IAR `FILE` wrappers remain outside this source boundary.
+Hardware execution is unverified and explicitly blocked by unavailable
+authorized responsive hardware. See
+`docs/research/g2-bootloader-redirect-init-source-closure.md`.
+
+The corresponding unsigned Apple package is 4,731,714 bytes with SHA-256
+`47f05f015e7f347a541a55c150d426449ec591e2b345625020a74443f57ee1fe`;
+its flash plan hashes to
+`5f87afc33d0d6f747e2f29be888eb4a98aec1ce3e404addf55611a05cb84e643`.
+The refreshed Homebrew clang 22.1.8 whole-source profile produces a
+4,507,724-byte package with SHA-256
+`3b0b9f9b998e47f7473413278602bb9f368610c63eb8efbfbdfe81003bf2860b`.
+Both remain local unsigned build artifacts.
+
+## Current Arm EABI byte-fill increment
+
+The complete authenticated 102-byte entry at `[0x0041560C,0x00415672)`
+now redirects to `runtime_aeabi_memset.c`. A whole-image halfword scan pins 20
+direct Thumb callers and no strict-interior ingress. Both reviewed compilers
+emit the same relocation-free 12-byte leaf at `0x00434824`, SHA-256
+`57aa3a55299e81fefe7ae3b0807a149cf0d3d6c56adfcd6bf507f3850e6c229e`.
+The stock entry is replaced by a non-linking branch plus 49 NOPs. Host tests,
+target compilation, provider accounting, manifest ownership, and dual-package
+pins are fail-closed. Live boot validation remains blocked by unavailable
+authorized responsive hardware. See
+`docs/research/g2-bootloader-aeabi-memset-source-closure.md`.
+
+## Current Arm EABI forward-copy increment
+
+The complete authenticated 166-byte entry at `[0x0041568C,0x00415732)`
+now redirects to `runtime_aeabi_memcpy.c`. A whole-image scan pins 33 direct
+Thumb callers and no strict-interior or stored-pointer ingress. Both reviewed
+compilers emit the same relocation-free 16-byte leaf at `0x00434830`, SHA-256
+`d2d832a0c13fc4c0b9b47396bfb6d68fb7e07925ad0fa4eedc9c14c5b062590d`.
+The stock entry is replaced by a non-linking branch plus 81 NOPs. Host tests,
+target compilation, provider accounting, manifest ownership, and dual-package
+pins are fail-closed. Live boot validation remains blocked by unavailable
+authorized responsive hardware. See
+`docs/research/g2-bootloader-aeabi-memcpy-source-closure.md`.
+
+## Current bounded byte-comparison increment
+
+The authenticated 104-byte entry at `[0x00415758,0x004157C0)` now redirects
+to `runtime_memcmp.c`. Six direct callers and no strict-interior/stored-pointer
+ingress are pinned. Both compilers emit the same relocation-free 28-byte leaf
+at `0x00434840`, SHA-256
+`27a66a6c870f14f8ff02ed06584fc60e5e6bb17274f13e4234314e5fcbb2ece1`.
+Host equality, difference-sign, prefix, and unaligned tests pass. Live boot
+validation remains blocked by unavailable authorized responsive hardware. See
+`docs/research/g2-bootloader-memcmp-source-closure.md`.
+
+## Current string-span increment
+
+The adjacent authenticated 34-byte entries at
+`[0x004157F8,0x0041581A)` and `[0x0041581A,0x0041583C)` now redirect to
+the clean-room `runtime_strcspn.c` and `runtime_strspn.c` implementations.
+Each entry has three pinned direct callers and no strict-interior or stored-
+pointer ingress. Both reviewed compilers emit the same relocation-free leaves:
+30 bytes at `0x0043485C`, SHA-256
+`d331d9fb8cccb8f60badaf3dfab936298bdf11cf61320cca6ce19008d42e3096`,
+and 28 bytes at `0x0043487A`, SHA-256
+`f955f2e0febe0b7b844837f389b4eb1e601e349bf6f9183426b2e16de8961d22`.
+Empty-set, first-match, no-match, prefix, and stop semantics pass on the host.
+Live boot validation remains blocked by unavailable authorized responsive
+hardware. See `docs/research/g2-bootloader-string-spans-source-closure.md`.
+
+## Current reflected CRC-32 increment
+
+The authenticated 56-byte entry at `[0x004157C0,0x004157F8)` now redirects
+to the clean-room bitwise `runtime_crc32.c` implementation. Six direct callers
+and the standard reflected `0xEDB88320` nibble-table polynomial are pinned.
+Apple clang emits a relocation-free 44-byte leaf at `0x00434898` after two
+alignment bytes. Host tests cover empty, standard, all-byte, embedded-NUL, and
+incremental updates. Live CRC/boot validation remains blocked by unavailable
+authorized responsive hardware. See
+`docs/research/g2-bootloader-crc32-source-closure.md`.
+
+## Current SRAM-word setter increment
+
+The authenticated eight-byte entry at `[0x0041583C,0x00415844)` now redirects
+to `runtime_store_200270cc.c`. Its sole caller and the literal target
+`0x200270CC` are pinned without assigning an unsupported semantic label to the
+cell. Both reviewed compilers emit the same relocation-free 12-byte leaf at
+`0x004348C4`. Host tests cover complete-word stores. Live SRAM/boot validation
+remains blocked by unavailable authorized responsive hardware. See
+`docs/research/g2-bootloader-store-200270cc-source-closure.md`.
+
+## Current numeric-runtime increment
+
+The nine adjacent authenticated entries from `0x00415844` through
+`0x00415AB6` now route to clean-room C for unsigned 64-bit division by ten,
+digit counts, wrapping decimal parsing, unsigned decimal/hexadecimal output,
+nullable string length, and repeated-character output. Their 19 direct caller
+edges and complete 626 stock bytes are pinned. Apple clang emits 424 Thumb
+bytes. Three strict relocations bind the decimal helpers; the remaining leaves
+are relocation-free.
+
+Host tests cover quotient boundaries and deterministic random values, signed
+extrema, digit boundaries, parser behavior, decimal/hex output, case selection,
+nullable outputs/strings, and repeat counts. Both compiler profiles, exact
+stock redirects, provider ownership, and complete unsigned packages reproduce.
+The current aggregate is 51 routed functions, 1,529 source bytes, 2,078 patch
+bytes, eight alignment bytes, and 146,521 retained official bytes. Live boot
+and formatter/parser caller-path validation remains blocked by unavailable
+authorized responsive hardware. The adjacent float/format engine remains a
+software gap. See
+`docs/research/g2-bootloader-numeric-source-closure.md`.
+
 ## Prior authenticated AmbiqSuite leaf increment
 
 The preceding sections preserve the six-littlefs-leaf milestone. The current

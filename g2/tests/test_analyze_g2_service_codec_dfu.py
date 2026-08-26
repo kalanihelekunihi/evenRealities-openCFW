@@ -53,10 +53,27 @@ class AnalyzeG2ServiceCodecDfuTests(unittest.TestCase):
         self.assertEqual(lineage["exact_symbols"], [
             "SVC_CodecDfu", "SVC_CodecCheckAndUpgrade",
         ])
-        self.assertEqual(lineage["source_inventory"], "unavailable")
-        self.assertEqual(lineage["license"], "unknown")
-        self.assertIsNone(self.report["production"]["candidate"])
-        self.assertFalse(self.report["production"]["production_routed"])
+        self.assertEqual(
+            lineage["source_inventory"],
+            "16-function clean-room production C",
+        )
+        self.assertEqual(lineage["historical_source_inventory"], "unavailable")
+        self.assertEqual(lineage["license"], "GPL-3.0-only")
+        production = self.report["production"]
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/service_codec_dfu.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 9052)
+        self.assertEqual(production["compiled_text_bytes"], 3390)
+        self.assertEqual(production["generated_alignment_bytes"], 24)
+        self.assertEqual(production["strict_relocations"], 71)
+        self.assertEqual(production["guarded_redirects"], 16)
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked_unavailable_physical_evidence",
+        )
 
 
 if __name__ == "__main__":

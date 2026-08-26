@@ -218,7 +218,11 @@ open_cfw_runtime_vsnprintf_u32 open_cfw_runtime_vsnprintf_string_length(
     ))
 #endif
 
-int open_cfw_runtime_vsnprintf(
+#ifndef OPEN_CFW_RUNTIME_VSNPRINTF_FUNCTION
+#define OPEN_CFW_RUNTIME_VSNPRINTF_FUNCTION open_cfw_runtime_vsnprintf
+#endif
+
+int OPEN_CFW_RUNTIME_VSNPRINTF_FUNCTION(
     open_cfw_runtime_ntoa_output_fn output,
     unsigned char *buffer,
     open_cfw_runtime_vsnprintf_u32 maximum_length,
@@ -227,12 +231,32 @@ int open_cfw_runtime_vsnprintf(
 );
 
 #ifndef OPEN_CFW_RUNTIME_VSNPRINTF_RECURSE
+#ifdef OPEN_CFW_RUNTIME_VSNPRINTF_RECURSE_ADDRESS
+typedef int (*open_cfw_runtime_vsnprintf_recurse_fn)(
+    open_cfw_runtime_ntoa_output_fn output,
+    unsigned char *buffer,
+    open_cfw_runtime_vsnprintf_u32 maximum_length,
+    const unsigned char *format,
+    __builtin_va_list arguments
+);
 #define OPEN_CFW_RUNTIME_VSNPRINTF_RECURSE( \
     output, buffer, maximum_length, format, arguments \
 ) \
-    open_cfw_runtime_vsnprintf( \
+    ((open_cfw_runtime_vsnprintf_recurse_fn)( \
+        (open_cfw_runtime_vsnprintf_uintptr)( \
+            OPEN_CFW_RUNTIME_VSNPRINTF_RECURSE_ADDRESS \
+        ) | (open_cfw_runtime_vsnprintf_uintptr)1U \
+    ))( \
         (output), (buffer), (maximum_length), (format), (arguments) \
     )
+#else
+#define OPEN_CFW_RUNTIME_VSNPRINTF_RECURSE( \
+    output, buffer, maximum_length, format, arguments \
+) \
+    OPEN_CFW_RUNTIME_VSNPRINTF_FUNCTION( \
+        (output), (buffer), (maximum_length), (format), (arguments) \
+    )
+#endif
 #endif
 
 static __attribute__((always_inline)) inline
@@ -259,8 +283,250 @@ open_cfw_runtime_vsnprintf_magnitude_s64(
     return value < 0 ? 0U - bits : bits;
 }
 
+#ifdef OPEN_CFW_RUNTIME_VSNPRINTF_ENABLE_HEXFLOAT
+static __attribute__((always_inline)) inline char
+open_cfw_runtime_vsnprintf_hex_digit(
+    open_cfw_runtime_vsnprintf_u32 value,
+    open_cfw_runtime_vsnprintf_u32 uppercase
+)
+{
+    return (char)(
+        value < 10U
+        ? (open_cfw_runtime_vsnprintf_u32)'0' + value
+        : (
+            (uppercase != 0U
+                ? (open_cfw_runtime_vsnprintf_u32)'A'
+                : (open_cfw_runtime_vsnprintf_u32)'a')
+            + value - 10U
+        )
+    );
+}
+
+static __attribute__((always_inline)) inline
+open_cfw_runtime_vsnprintf_u32
+open_cfw_runtime_vsnprintf_hexfloat(
+    open_cfw_runtime_ntoa_output_fn output,
+    unsigned char *buffer,
+    open_cfw_runtime_vsnprintf_u32 index,
+    open_cfw_runtime_vsnprintf_u32 maximum_length,
+    double value,
+    open_cfw_runtime_vsnprintf_u32 precision,
+    open_cfw_runtime_vsnprintf_u32 width,
+    open_cfw_runtime_vsnprintf_u32 flags
+)
+{
+    union {
+        double floating;
+        open_cfw_runtime_vsnprintf_u64 bits;
+    } representation;
+    open_cfw_runtime_vsnprintf_u64 fraction;
+    open_cfw_runtime_vsnprintf_u32 raw_exponent;
+    open_cfw_runtime_vsnprintf_u32 uppercase =
+        flags & OPEN_CFW_RUNTIME_VSNPRINTF_UPPER;
+    open_cfw_runtime_vsnprintf_u32 negative;
+    open_cfw_runtime_vsnprintf_u32 explicit_precision =
+        flags & OPEN_CFW_RUNTIME_VSNPRINTF_PRECISION;
+    open_cfw_runtime_vsnprintf_u32 sign_length;
+    open_cfw_runtime_vsnprintf_u32 length;
+    open_cfw_runtime_vsnprintf_u32 exponent_digits;
+    open_cfw_runtime_vsnprintf_u32 iterator;
+    open_cfw_runtime_vsnprintf_u32 leading;
+    open_cfw_runtime_vsnprintf_u32 padding;
+    int exponent;
+    int exponent_magnitude;
+    char sign = 0;
+
+#define OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(character) \
+    do { \
+        OPEN_CFW_RUNTIME_VSNPRINTF_CALL_OUTPUT( \
+            output, character, buffer, index, maximum_length \
+        ); \
+        index += 1U; \
+    } while (0)
+
+    representation.floating = value;
+    negative = (open_cfw_runtime_vsnprintf_u32)(
+        representation.bits >> 63U
+    );
+    raw_exponent = (open_cfw_runtime_vsnprintf_u32)(
+        representation.bits >> 52U
+    ) & 0x7FFU;
+    fraction = representation.bits & 0x000FFFFFFFFFFFFFULL;
+    if (negative != 0U) {
+        sign = '-';
+    }
+    else if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_PLUS) != 0U) {
+        sign = '+';
+    }
+    else if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_SPACE) != 0U) {
+        sign = ' ';
+    }
+    sign_length = sign != 0 ? 1U : 0U;
+
+    if (raw_exponent == 0x7FFU) {
+        length = sign_length + 3U;
+        padding = width > length ? width - length : 0U;
+        if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_LEFT) == 0U) {
+            while (padding-- != 0U) {
+                OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(' ');
+            }
+        }
+        if (sign != 0) {
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(sign);
+        }
+        if (fraction == 0U) {
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+                uppercase != 0U ? 'I' : 'i'
+            );
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+                uppercase != 0U ? 'N' : 'n'
+            );
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+                uppercase != 0U ? 'F' : 'f'
+            );
+        }
+        else {
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+                uppercase != 0U ? 'N' : 'n'
+            );
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+                uppercase != 0U ? 'A' : 'a'
+            );
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+                uppercase != 0U ? 'N' : 'n'
+            );
+        }
+        if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_LEFT) != 0U) {
+            while (padding-- != 0U) {
+                OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(' ');
+            }
+        }
+        return index;
+    }
+
+    if (raw_exponent == 0U) {
+        if (fraction == 0U) {
+            leading = 0U;
+            exponent = 0;
+        }
+        else {
+            open_cfw_runtime_vsnprintf_u32 highest = 51U;
+
+            while ((fraction & ((open_cfw_runtime_vsnprintf_u64)1U << highest)) == 0U) {
+                highest -= 1U;
+            }
+            exponent = (int)highest - 1074;
+            fraction = (
+                fraction ^ ((open_cfw_runtime_vsnprintf_u64)1U << highest)
+            ) << (52U - highest);
+            leading = 1U;
+        }
+    }
+    else {
+        leading = 1U;
+        exponent = (int)raw_exponent - 1023;
+    }
+
+    if (explicit_precision == 0U) {
+        precision = 13U;
+        while (precision != 0U && (fraction & 0xFU) == 0U) {
+            fraction >>= 4U;
+            precision -= 1U;
+        }
+        fraction <<= (13U - precision) * 4U;
+    }
+    else if (precision < 13U) {
+        open_cfw_runtime_vsnprintf_u32 shift = 52U - precision * 4U;
+        open_cfw_runtime_vsnprintf_u64 kept = fraction >> shift;
+        open_cfw_runtime_vsnprintf_u64 discarded = fraction & (
+            ((open_cfw_runtime_vsnprintf_u64)1U << shift) - 1U
+        );
+        open_cfw_runtime_vsnprintf_u64 halfway =
+            (open_cfw_runtime_vsnprintf_u64)1U << (shift - 1U);
+
+        if (discarded > halfway || (discarded == halfway && (kept & 1U) != 0U)) {
+            kept += 1U;
+            if (kept == ((open_cfw_runtime_vsnprintf_u64)1U << (precision * 4U))) {
+                leading += 1U;
+                kept = 0U;
+            }
+        }
+        fraction = kept << shift;
+    }
+
+    exponent_magnitude = exponent < 0 ? -exponent : exponent;
+    exponent_digits = 1U;
+    for (iterator = (open_cfw_runtime_vsnprintf_u32)exponent_magnitude;
+         iterator >= 10U; iterator /= 10U) {
+        exponent_digits += 1U;
+    }
+    length = sign_length + 2U + 1U + 2U + exponent_digits + precision;
+    if (precision != 0U || (flags & OPEN_CFW_RUNTIME_VSNPRINTF_HASH) != 0U) {
+        length += 1U;
+    }
+    padding = width > length ? width - length : 0U;
+    if ((flags & (OPEN_CFW_RUNTIME_VSNPRINTF_LEFT | OPEN_CFW_RUNTIME_VSNPRINTF_ZERO_PAD)) == 0U) {
+        while (padding-- != 0U) {
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(' ');
+        }
+    }
+    if (sign != 0) {
+        OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(sign);
+    }
+    OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT('0');
+    OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(uppercase != 0U ? 'X' : 'x');
+    if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_LEFT) == 0U
+        && (flags & OPEN_CFW_RUNTIME_VSNPRINTF_ZERO_PAD) != 0U) {
+        while (padding-- != 0U) {
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT('0');
+        }
+    }
+    OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+        open_cfw_runtime_vsnprintf_hex_digit(leading, uppercase)
+    );
+    if (precision != 0U || (flags & OPEN_CFW_RUNTIME_VSNPRINTF_HASH) != 0U) {
+        OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT('.');
+    }
+    for (iterator = 0U; iterator < precision; iterator += 1U) {
+        open_cfw_runtime_vsnprintf_u32 digit = 0U;
+
+        if (iterator < 13U) {
+            digit = (open_cfw_runtime_vsnprintf_u32)(
+                fraction >> (48U - iterator * 4U)
+            ) & 0xFU;
+        }
+        OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+            open_cfw_runtime_vsnprintf_hex_digit(digit, uppercase)
+        );
+    }
+    OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(uppercase != 0U ? 'P' : 'p');
+    OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(exponent < 0 ? '-' : '+');
+    {
+        open_cfw_runtime_vsnprintf_u32 divisor = 1U;
+
+        for (iterator = 1U; iterator < exponent_digits; iterator += 1U) {
+            divisor *= 10U;
+        }
+        do {
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(
+                '0' + (exponent_magnitude / (int)divisor) % 10
+            );
+            divisor /= 10U;
+        } while (divisor != 0U);
+    }
+    if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_LEFT) != 0U) {
+        while (padding-- != 0U) {
+            OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT(' ');
+        }
+    }
+    return index;
+
+#undef OPEN_CFW_RUNTIME_VSNPRINTF_HEXFLOAT_OUTPUT
+}
+#endif
+
 __attribute__((used, noinline))
-int open_cfw_runtime_vsnprintf(
+int OPEN_CFW_RUNTIME_VSNPRINTF_FUNCTION(
     open_cfw_runtime_ntoa_output_fn output,
     unsigned char *buffer,
     open_cfw_runtime_vsnprintf_u32 maximum_length,
@@ -392,6 +658,16 @@ int open_cfw_runtime_vsnprintf(
             flags |= OPEN_CFW_RUNTIME_VSNPRINTF_LONG_LONG;
             format += 1;
             break;
+#ifdef OPEN_CFW_RUNTIME_VSNPRINTF_ENABLE_IAR_LENGTHS
+        case 'q':
+            flags |= OPEN_CFW_RUNTIME_VSNPRINTF_LONG_LONG;
+            format += 1;
+            break;
+        case 'L':
+            /* IAR's G2 ABI stores long double in the same 64-bit slot. */
+            format += 1;
+            break;
+#endif
         default:
             break;
         }
@@ -652,6 +928,26 @@ int open_cfw_runtime_vsnprintf(
             format += 1;
             break;
 
+#ifdef OPEN_CFW_RUNTIME_VSNPRINTF_ENABLE_HEXFLOAT
+        case 'a':
+        case 'A':
+            if (specifier == (unsigned int)'A') {
+                flags |= OPEN_CFW_RUNTIME_VSNPRINTF_UPPER;
+            }
+            index = open_cfw_runtime_vsnprintf_hexfloat(
+                output,
+                buffer,
+                index,
+                maximum_length,
+                OPEN_CFW_RUNTIME_VSNPRINTF_NEXT_DOUBLE(arguments),
+                precision,
+                width,
+                flags
+            );
+            format += 1;
+            break;
+#endif
+
         case 'c': {
             open_cfw_runtime_vsnprintf_u32 length = 1U;
 
@@ -754,6 +1050,32 @@ int open_cfw_runtime_vsnprintf(
             break;
         }
 
+#ifdef OPEN_CFW_RUNTIME_VSNPRINTF_ENABLE_COUNT
+        case 'n': {
+            void *destination =
+                OPEN_CFW_RUNTIME_VSNPRINTF_NEXT_POINTER(arguments);
+
+            if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_LONG_LONG) != 0U) {
+                *(open_cfw_runtime_vsnprintf_s64 *)destination =
+                    (open_cfw_runtime_vsnprintf_s64)index;
+            }
+            else if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_LONG) != 0U) {
+                *(long *)destination = (long)index;
+            }
+            else if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_CHAR) != 0U) {
+                *(signed char *)destination = (signed char)index;
+            }
+            else if ((flags & OPEN_CFW_RUNTIME_VSNPRINTF_SHORT) != 0U) {
+                *(short *)destination = (short)index;
+            }
+            else {
+                *(int *)destination = (int)index;
+            }
+            format += 1;
+            break;
+        }
+#endif
+
         case '%':
             OPEN_CFW_RUNTIME_VSNPRINTF_CALL_OUTPUT(
                 output,
@@ -806,3 +1128,4 @@ int open_cfw_runtime_vsnprintf(
 #undef OPEN_CFW_RUNTIME_VSNPRINTF_PARSE_DECIMAL
 #undef OPEN_CFW_RUNTIME_VSNPRINTF_RECURSE
 #undef OPEN_CFW_RUNTIME_VSNPRINTF_STRING_LENGTH
+#undef OPEN_CFW_RUNTIME_VSNPRINTF_FUNCTION

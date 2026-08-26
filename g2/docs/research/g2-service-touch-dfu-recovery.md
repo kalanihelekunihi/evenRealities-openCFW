@@ -6,7 +6,9 @@ The retained first-party translation unit `platform\input\touchDFU\service_touch
 
 The object contains 32 linked functions. Twelve are retained-path anchors and twenty adjacent pathless bodies were restored from source order, exact calls, literal ownership, and the enclosing IAR object boundary. Their 6,430 concatenated body bytes hash to `541a9a7deee567a6aa7b5a882a7daf4f86e65378bb1d10401cd612e69c1ba4ec`. Five owned alignment and literal-pool gaps total 574 bytes and hash to `1697430b30b5f4abe684049202b42ac41e749f6679b3f3e28d4058bc2216e228`.
 
-This is binary inclusion and behavior closure, not historical source recovery. No authenticated source inventory or license was found. The module therefore has no production candidate and owns zero production-overlay bytes.
+This is binary inclusion and behavior closure, not historical source recovery. No authenticated historical source inventory or license was found. OpenCFW now supplies an independently authored 32-function GPL-3.0-only implementation in `components/apollo_main/core_overlay/service_touch_dfu.c`. Thirty-two guarded `B.W` redirects replace all 6,430 authenticated stock body bytes. The Apple-Clang Cortex-M55 build emits 3,134 Thumb text bytes plus 38 alignment bytes with 70 strict relocations; all 574 authenticated object-local gap/pool bytes remain official.
+
+The canonical overlay is 251,578 bytes with SHA-256 `2def566dbf70594c89471066a7cd17f6d1fa94196f65ff48237385396e9cfd19`; the Apollo component is 3,774,974 bytes with SHA-256 `7228edb650fe39bda63480691fe94ed59d0807ca5e30846d35ec08e134e08350`; and the complete source package is 4,553,468 bytes with SHA-256 `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`. Its flash plan hashes to `80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292` and accounts for 4,057 placed regions and two unresolved hardware payloads.
 
 ## Function inventory
 
@@ -68,19 +70,18 @@ The all-byte four-byte-window scan finds 23 numeric entry-or-interior collisions
 
 ## Reproduction
 
-Run:
+Run the complete production gate:
 
 ```sh
-python3 openCFW/tools/analyze_g2_service_touch_dfu.py
-python3 -m unittest openCFW.tests.test_analyze_g2_service_touch_dfu
+make service-touch-dfu-closure
 ```
 
-The analyzer authenticates the official image, all three manifests, every body and owned gap, both object boundaries, the retained path and three pointer cells, all twelve exact symbols, complete call topology, pointer-like windows, package/frame/state literals, and production-overlay exclusion.
+The analyzer authenticates the official image, all three manifests, every body and owned gap, both object boundaries, the retained path and three pointer cells, all twelve exact symbols, complete call topology, pointer-like windows, package/frame/state literals, production source and selector layout, all 70 relocations, 32 guarded redirects, source-manifest ownership, generated component, package, and flash plan. The host suite covers CRC-32C, exact framing, malformed replies, FWPK bounds/CRC/trailing-check exclusion, 32/128-byte programming granularity, same-version skip, forced update, cleanup, and the bounded transport-failure path.
 
 ## Limitations
 
-- The historical source-only function count is unknown because the source file is unavailable.
+- The historical source-only function count remains unknown because the source file is unavailable; the clean-room production inventory covers every one of the 32 linked entries.
 - `semantic_*` labels are clean-room descriptions, not recovered symbols.
 - Binary closure does not grant a license or justify copying vendor implementation text.
-- Timing units and the transport implementation behind `0x20073E24` are outside this object.
-- Production ownership remains zero until independently authored behavior is implemented, reviewed, and routed.
+- The source routes through the authenticated CY8C transport/reset/version and filesystem seams, but timing and electrical behavior behind those seams require physical validation.
+- Live destructive touch upgrade, controller reset, version readback, I2C timing, post-flash verification, and recovery remain explicitly blocked: the authorized right temple is nonresponsive, the authorized left temple must remain stock, and no responsive authorized pair, touch-controller fixture, or golden I2C/DFU capture is available. No image was signed or flashed, and wider firmware functional completeness is not claimed.

@@ -11,5 +11,6 @@ class RingConnectPolicyTests(unittest.TestCase):
  def test_dependency_boundary(self):
   p=self.r['provider_boundary'];self.assertEqual((p['easylogger_calls'],p['cmsis_freertos_calls'],p['closed_event_loop_calls'],p['closed_nanopb_facade_calls'],p['closed_ble_central_calls']),(95,1,10,1,1));self.assertEqual((p['direct_cordio_calls'],p['direct_nanopb_calls']),(0,0));self.assertEqual(p['cmsis_freertos_commit'],'d213f261b5be6bb29a7cce8b84071706b72f4d53');self.assertEqual(p['freertos_kernel_commit'],'def7d2df2b0506d3d249334974f51e427c17a41c');self.assertFalse(p['new_version_discriminator']);self.assertIsNone(p['historical_ring_connect_policy_commit'])
  def test_first_party_policy_only(self):
-  self.assertEqual(self.r['identity']['embedded_third_party_definitions'],[]);self.assertFalse(self.r['production']['production_routed']);self.assertTrue(all(value for value in self.r['behavior'].values()))
+  self.assertEqual(self.r['identity']['embedded_third_party_definitions'],[]);self.assertTrue(self.r['production']['production_routed']);self.assertTrue(all(value for value in self.r['behavior'].values()))
+  self.assertEqual((self.r['production']['ownership_bytes'],self.r['production']['compiled_text_bytes'],self.r['production']['generated_alignment_bytes'],self.r['production']['strict_relocations'],self.r['production']['guarded_redirects']),(1828,570,14,24,15));self.assertEqual(self.r['production']['hardware_validation'],'blocked_unavailable_physical_evidence')
 if __name__=='__main__':unittest.main()

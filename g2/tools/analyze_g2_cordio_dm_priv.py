@@ -15,6 +15,14 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE = ROOT / "components/shared/cordio/runtime_cordio_dm_priv.c"
+HEADER = ROOT / "components/shared/cordio/runtime_cordio_dm_priv.h"
+RUNTIME_TEST = ROOT / "tests/test_runtime_cordio_dm_priv.py"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 LOAD_BASE = 0x00437FE0
 IMAGE_BYTES = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -92,6 +100,59 @@ EXPECTED_STORED = {
     0x0078A87C:0x004D27CF,
 }
 SOURCE_ONLY = ["DmPrivReadPeerResolvableAddr","DmPrivReadLocalResolvableAddr","DmPrivSetResolvablePrivateAddrTimeout","DmPrivGenerateAddr"]
+SOURCE_PIN = (11_933, "a67468255d16729169f41910a44c8683cdc49005f828a6ae15b976f41014a1de")
+HEADER_PIN = (5_219, "d70e0f6c33637381e79a02bcff41335fee80c21905b5ae90336c29b19f0e3985")
+RUNTIME_TEST_PIN = (5_460, "90522091fb815e62ed8064278a101f86bbaab36ea7ac23d9168ce6cde6edda7a")
+PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
+PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
+PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
+PRODUCTION_FUNCTIONS = [
+    "open_cfw_cordio_dm_privacy_action_resolve",
+    "open_cfw_cordio_dm_privacy_aes_resolve_complete",
+    "open_cfw_cordio_dm_privacy_action_add",
+    "open_cfw_cordio_dm_privacy_action_remove",
+    "open_cfw_cordio_dm_privacy_action_clear",
+    "open_cfw_cordio_dm_privacy_action_enable",
+    "open_cfw_cordio_dm_privacy_action_mode",
+    "open_cfw_cordio_dm_privacy_action_generate",
+    "open_cfw_cordio_dm_privacy_aes_generate_complete",
+    "open_cfw_cordio_dm_privacy_hci_handler",
+    "open_cfw_cordio_dm_privacy_set_address_resolution",
+    "open_cfw_cordio_dm_privacy_message_handler",
+    "open_cfw_cordio_dm_privacy_reset",
+    "open_cfw_cordio_dm_privacy_aes_message_handler",
+    "open_cfw_cordio_dm_privacy_initialize",
+    "open_cfw_cordio_dm_privacy_resolve",
+    "open_cfw_cordio_dm_privacy_add",
+    "open_cfw_cordio_dm_privacy_remove",
+    "open_cfw_cordio_dm_privacy_clear",
+    "open_cfw_cordio_dm_privacy_enable",
+    "open_cfw_cordio_dm_privacy_mode",
+]
+PRODUCTION_LEAVES = [
+    (359148,140,2,1,"5fbbec1fc7f08b0c158db0dfc0359fdb73686a9a7b8f3e7719fe0408df77225a"),
+    (359288,88,0,0,"a74ec94605c462eec7338f17a1267dc976cf2e510c9e155e60f83e1c84e464aa"),
+    (359376,44,0,1,"d4b6bfb4a8625e8f3473b41737642e0938f07ff4ee531bf5edb3342cb1b78629"),
+    (359420,28,0,1,"d7d023687490e9a48f4cfc91b43d4de7035046ff69571ee0266e1916d9cf55de"),
+    (359448,4,0,1,"cc33bc40a3dcdea425820ce6853a3c591825624af0abdb3ae0573c6a5ed3f2f9"),
+    (359452,12,0,1,"c2d43a792e51063200b57707c99aebf76922b1ca70196d5cc422500afa30493f"),
+    (359464,18,0,1,"25244369583be8d66c578909a3ec521423f98f6362fde4e8f978b6e0fd0d58ba"),
+    (359484,122,2,2,"6e48cdbbc2c77e91193ec134d6f4629073c779a5f3181e2f23a1bb5800c2f9ec"),
+    (359608,74,2,0,"16d3370fb1658031c92bd314c041be86de0453348f328634da6e2606f7b5a921"),
+    (359684,202,2,2,"3a91283cd777b200e367a4e195637e4dce8f608fd3c212947e271139101eadc3"),
+    (359888,14,2,1,"6be92d21496fa44bf9d60595d7e4bdb92f51ce63106b85a5fd5e5aee75d591a0"),
+    (359904,32,2,0,"43d3e29beb1d27d772bf44565bccddcfe598ede978a57643c2ece4c5e3cbca15"),
+    (359936,24,0,0,"7d05676b0aca6d890bdd70a169d9110b483e5ff8dc21a01efbae021585d5e7f9"),
+    (359960,32,0,0,"a4aa51f3012d4c478f5e74e814ee758fe95e80c476c93437f1ab3bc70d80636f"),
+    (359992,36,0,2,"514234f0f6929357331c6f285b782f9fcad016de780006df7579f182005afc06"),
+    (360028,176,0,2,"65a3d0aba59c6ced5aa601b91f5befb999bced6787a9ca9c4656efc0ae344350"),
+    (360204,286,0,2,"5f8f7bbb215381d98a03c73b74c5bcedeff778a861f158d7e08d391a8127bfc6"),
+    (360492,92,2,2,"9ec9b84d9f8f4e797df066909c476b9d65e9e1bdfa25a03aafe5b88e8b511b27"),
+    (360588,96,4,2,"d61b6da3eabe05bffb08c0c5e4778466b50b558f56befc9a7707837af56f3bdd"),
+    (360684,74,0,2,"f449f0e3bc2850d6978ac04d56b70f64cd66d81228363e3797b0a22edb4d656b"),
+    (360760,94,2,2,"ca61c84c0c29726d5dc3123769e98255a12ecb51157f3bbd98f01e04bed6fdc2"),
+]
 
 
 class AuditError(RuntimeError):
@@ -118,6 +179,74 @@ def _load_decoder():
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def _verify_file(path: Path, expected: tuple[int, str], label: str) -> None:
+    data = path.read_bytes()
+    if (len(data), _sha256(data)) != expected:
+        raise AuditError(f"{label} changed")
+
+
+def _verify_production() -> dict[str, Any]:
+    _verify_file(SOURCE, SOURCE_PIN, "dm_priv maintained source")
+    _verify_file(HEADER, HEADER_PIN, "dm_priv maintained header")
+    _verify_file(RUNTIME_TEST, RUNTIME_TEST_PIN, "dm_priv runtime test")
+    report = json.loads(BUILD_REPORT.read_text())
+    config = json.loads(CONFIG.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    leaves = sorted(
+        [row for row in report["relocated_leaves"]
+         if row.get("source", {}).get("path", "").endswith(SOURCE.name)],
+        key=lambda row: row["pins"]["offset"],
+    )
+    if len(leaves) != len(PRODUCTION_FUNCTIONS):
+        raise AuditError("dm_priv production leaf count changed")
+    for row, function, expected in zip(leaves, PRODUCTION_FUNCTIONS, PRODUCTION_LEAVES):
+        observed = (
+            row["pins"]["offset"], row["extraction"]["size"],
+            row["placement"]["padding_before"],
+            row["extraction"]["relocation_count"], row["extraction"]["sha256"],
+        )
+        if row["extraction"]["function"] != function or observed != expected:
+            raise AuditError(f"dm_priv production leaf changed: {function}")
+    sites = {
+        row["name"]: row for row in config["patch_sites"]
+        if row["name"].startswith("replace_cordio_dm_priv_core_")
+    }
+    for index, ((stock_name, (start, end, body_hash)), function) in enumerate(
+        zip(FUNCTIONS.items(), PRODUCTION_FUNCTIONS), 1
+    ):
+        site = sites.get(f"replace_cordio_dm_priv_core_{index:02d}")
+        if (site is None or site["runtime_address"] != start
+                or site["expected_size"] != end - start
+                or site["expected_sha256"] != body_hash
+                or site["target_function"] != function or site["branch"] != "b_w"):
+            raise AuditError(f"dm_priv production route changed: {stock_name}")
+    override = manifest["component_overrides"]["apollo_main"]
+    regions = [row for row in override["regions"]
+               if row["name"].startswith("cordio_dm_priv_core_")]
+    if ((report["overlay"]["size"], report["overlay"]["sha256"])
+            != PRODUCTION_OVERLAY
+            or (report["component"]["size"], report["component"]["sha256"])
+            != PRODUCTION_COMPONENT
+            or (override["provider"].get("size"), override["provider"].get("sha256"))
+            != PRODUCTION_COMPONENT or len(regions) != 51):
+        raise AuditError("dm_priv production ownership changed")
+    _verify_file(PACKAGE, PRODUCTION_PACKAGE, "dm_priv package")
+    _verify_file(FLASH_PLAN, PRODUCTION_FLASH_PLAN, "dm_priv flash plan")
+    flash = json.loads(FLASH_PLAN.read_text())
+    counts = tuple(len(flash[key]) for key in (
+        "flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions"
+    ))
+    if counts != (5_863, 2, 5, 6):
+        raise AuditError("dm_priv flash-plan counts changed")
+    return {
+        "status": "production-routed", "redirected_stock_functions": 21,
+        "redirected_stock_bytes": 980, "source_owned_bytes_added": 1_688,
+        "alignment_bytes_added": 20, "strict_relocations": 25,
+        "manifest_regions": 51, "source_only_functions_compiled": 4,
+        "flash_plan_counts": counts,
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict[str, Any]:
@@ -217,7 +346,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "provider_seams": 24, "valid_non_vacuous_closure_profiles": 2,
             "linked_unresolved_symbols": 0,
         },
-        "production": {"source_owned_bytes_added": 0, "stock_bytes_replaced": 0},
+        "production": _verify_production(),
     }
 
 

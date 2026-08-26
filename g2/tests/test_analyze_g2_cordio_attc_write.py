@@ -42,6 +42,12 @@ class AttcWriteTest(unittest.TestCase):
         self.assertEqual(module["registered_function_pointers"], 1)
         self.assertEqual(module["strict_interior_pointers"], 0)
         self.assertFalse(report["lineage"]["independent_release_discriminator"])
+        self.assertEqual(report["production"]["status"], "routed")
+        self.assertEqual(report["production"]["stock_bytes_replaced"], 124)
+        self.assertEqual(report["production"]["source_owned_bytes_added"], 144)
+        self.assertEqual(report["production"]["alignment_bytes"], 2)
+        self.assertEqual(report["production"]["strict_relocations"], 2)
+        self.assertEqual(report["production"]["guarded_redirects"], 2)
 
 
 if __name__ == "__main__":

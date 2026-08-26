@@ -55,7 +55,14 @@ class CordioHciPhyCommandAuditTests(unittest.TestCase):
     def test_public_source_boundary(self) -> None:
         self.assertEqual(self.report["lineage"]["license"], "Apache-2.0")
         self.assertTrue(self.report["lineage"]["definition_bodies_match_ambiq_r25"])
-        self.assertEqual(self.report["production"]["source_owned_bytes_added"], 0)
+        production = self.report["production"]
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(production["stock_bytes_replaced"], 74)
+        self.assertEqual(production["source_owned_bytes_added"], 60)
+        self.assertEqual(production["strict_relocations"], 2)
+        self.assertEqual(production["source_only_functions_compiled"], 2)
+        self.assertEqual(production["manifest_regions"], 2)
+        self.assertEqual(production["flash_plan_counts"], (5863, 2, 5, 6))
 
 
 if __name__ == "__main__":

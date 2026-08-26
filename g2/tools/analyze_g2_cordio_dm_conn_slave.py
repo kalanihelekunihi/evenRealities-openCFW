@@ -15,6 +15,12 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x437FE0
 IMAGE_BYTES = 3_523_396
 IMAGE_SHA = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+CONFIG=ROOT/"components/apollo_main/core_overlay/overlay.json";REPORT=ROOT/"components/apollo_main/core_overlay/build/build-report.json";MANIFEST=ROOT/"manifests/g2-2.2.6.10-core-source.json"
+SOURCE=ROOT/"components/shared/cordio/runtime_cordio_dm_conn_slave.c";HEADER=ROOT/"components/shared/cordio/runtime_cordio_dm_conn_slave.h";TEST=ROOT/"tests/test_runtime_cordio_dm_conn_slave.py"
+PACKAGE=ROOT/"build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin";FLASH_PLAN=ROOT/"build/source/flash-plan.json"
+SOURCE_PIN=(4382,"a31c726ba9ae2928718bccc4db7d6bf1c0d8b049b39f075a1e2b902ef611f736");HEADER_PIN=(4015,"486264428d87a2008ae5510e9d5371b9078bb1d614837b98b12fbf8b434f4fc9");TEST_PIN=(3863,"628dbb179808581c676630b74c676445f58cc65cd5ac019483aa527762cbff63")
+PRODUCTION_OVERLAY=(404796,"a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d");PRODUCTION_COMPONENT=(3928192,"5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
+PRODUCTION_PACKAGE=(4706686,"30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf");PRODUCTION_FLASH_PLAN=(4071097,"cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 PINS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-slave-function-map.tsv": "7c4b78bbe289b5f1dbc3340b72deb1280fa1d2599baa680798ce9f3c4af02825",
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-slave-provenance.tsv": "0867db5f49e1a0bc606d2e355ff34458b0a9d070f73a12caa702fac2b81ba465",
@@ -33,6 +39,8 @@ CALLERS = {
     "DmL2cConnUpdateCnf": [0x536C4C, 0x536D14],
     "DmL2cCmdRejInd": [0x536D22],
 }
+PRODUCTION_FUNCTIONS=["open_cfw_cordio_dm_connection_slave_update_callback","open_cfw_cordio_dm_connection_slave_action_update","open_cfw_cordio_dm_connection_slave_action_l2c_confirm","open_cfw_cordio_dm_connection_slave_l2c_confirm","open_cfw_cordio_dm_connection_slave_l2c_reject"]
+PRODUCTION_LEAVES=[(358664,58,0,"483fa70b36fb8baa2b0717e5caa0148f8e0b9dde852ddc3ddd3dad30779df5b2"),(358724,84,4,"e23c8e65a09a583d4c50fa9328806ebfe23ead14fe81db2f0bbac3a43bf02754"),(358808,34,1,"fbcb3dc47f798bbc42c18314ccdadef98337f22d43c6b674b99f2ac810850a3e"),(358844,36,2,"6d12448363beaad35e84fe2039ac9133413dabf354f50d6352727fe30b9f08d4"),(358880,44,0,"0f3b8c77de54952cec0a7ab695880c8e4135298a8346bf5b44701c3715d05645")]
 
 
 def sha(data: bytes) -> str:
@@ -54,6 +62,29 @@ def decoder():
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+def verify_file(path,expected,label):
+    data=path.read_bytes()
+    if (len(data),sha(data))!=expected: raise RuntimeError(f"{label} changed")
+
+def verify_production():
+    verify_file(SOURCE,SOURCE_PIN,"slave source");verify_file(HEADER,HEADER_PIN,"slave header");verify_file(TEST,TEST_PIN,"slave test")
+    report=json.loads(REPORT.read_text());config=json.loads(CONFIG.read_text());manifest=json.loads(MANIFEST.read_text())
+    leaves=sorted([r for r in report["relocated_leaves"] if r.get("source",{}).get("path","").endswith(SOURCE.name)],key=lambda r:r["pins"]["offset"])
+    if len(leaves)!=5: raise RuntimeError("slave leaf count changed")
+    for row,function,expected in zip(leaves,PRODUCTION_FUNCTIONS,PRODUCTION_LEAVES):
+        observed=(row["pins"]["offset"],row["extraction"]["size"],row["extraction"]["relocation_count"],row["extraction"]["sha256"])
+        if row["extraction"]["function"]!=function or observed!=expected: raise RuntimeError(f"slave leaf changed: {function}")
+    sites={r["name"]:r for r in config["patch_sites"] if r["name"].startswith("replace_cordio_dm_conn_slave_core_")}
+    for index,((name,(start,end,digest)),function) in enumerate(zip(FUNCTIONS.items(),PRODUCTION_FUNCTIONS),1):
+        site=sites.get(f"replace_cordio_dm_conn_slave_core_{index:02d}")
+        if site is None or site["runtime_address"]!=start or site["expected_size"]!=end-start or site["expected_sha256"]!=digest or site["target_function"]!=function or site["branch"]!="b_w": raise RuntimeError(f"slave route changed: {name}")
+    override=manifest["component_overrides"]["apollo_main"];regions=[r for r in override["regions"] if r["name"].startswith("cordio_dm_conn_slave_core_")]
+    if (report["overlay"]["size"],report["overlay"]["sha256"])!=PRODUCTION_OVERLAY or (report["component"]["size"],report["component"]["sha256"])!=PRODUCTION_COMPONENT or (override["provider"].get("size"),override["provider"].get("sha256"))!=PRODUCTION_COMPONENT or len(regions)!=13: raise RuntimeError("slave ownership changed")
+    verify_file(PACKAGE,PRODUCTION_PACKAGE,"slave package");verify_file(FLASH_PLAN,PRODUCTION_FLASH_PLAN,"slave flash plan")
+    flash=json.loads(FLASH_PLAN.read_text());counts=tuple(len(flash[k]) for k in ("flash_regions","unresolved_flash_regions","container_only_regions","protected_regions"))
+    if counts!=(5576,2,5,6): raise RuntimeError("slave flash counts changed")
+    return {"status":"production-routed","redirected_stock_functions":5,"redirected_stock_bytes":206,"source_owned_bytes_added":256,"alignment_bytes_added":6,"strict_relocations":7,"manifest_regions":13,"flash_plan_counts":counts}
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -138,10 +169,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "historical_generating_commit_resolved": False,
         },
         "build_readiness": {
-            "status": "deferred",
-            "reason": "local arm-none-eabi toolchain unavailable; binary/source closure is independent",
+            "status": "target-compiled",
+            "profiles": 7,
         },
-        "production": {"stock_bytes_replaced": 0, "source_owned_bytes_added": 0},
+        "production": verify_production(),
     }
 
 

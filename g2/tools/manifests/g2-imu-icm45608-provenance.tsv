@@ -3,4 +3,7 @@ official_g2_image	sha256:36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47
 authenticated_ghidra_corpus	sha256sums:3ff8aa908e5841823df9384cfbffca91d657816274797f332a45ff93a8aa832f	generated analysis evidence	11 retained-path anchors plus 42 raw Thumb-restored functions
 retained_source_path	D:\01_workspace\s200_ap510b_iar_git\driver\sensor\imu\imu_icm45608.c	unknown historical first-party license	lineage only
 historical_source	unavailable after exact-symbol and filename search	unknown	no source reuse
-clean_room_candidate	none	n/a	analysis only
+tdk_public_driver_exact_abi	motion.arduino.ICM45608 tag 1.1.2 commit b79ae575f7f310e5ae2e1164096d1a858bb74662 driver 1.1.0	BSD-3-Clause	exact public baseline with the stock G2 16-byte three-argument transport ABI
+tdk_public_driver_snapshot	third_party/invensense-icm45608 aggregate cc6088eed9f14a02af419a29856064ab62e4b79e2860a135e1d84ba22e1c9570; 52 files; 594177 bytes	BSD-3-Clause	immutable source inventory for FIFO/eDMP/GAF/magnetometer implementation and strict Cortex-M55 compilation
+tdk_g2_port	components/apollo_main/core_overlay/imu_icm45608_tdk_port.c@9a269d277de1db43b73902a58495d7fe18f612cdbe5cb660d87f82e03b587db1	BSD-3-Clause	freestanding I2CM magnetometer, MRM image, FIFO, register-poll, eDMP/GAF, and exact upstream extended AID/B2S RAM-image configuration and event-state integration
+clean_room_candidate	components/apollo_main/core_overlay/imu_icm45608.c@31139f620035fda77f01fa4205fb01e55dd1ea129c6f9efbab5629eb29003503	GPL-3.0-only	production-routed wrapper behavior and source-owned exact-ABI reset, FIFO/register acquisition, GAF decode, identity routing, and AID/B2S event publication

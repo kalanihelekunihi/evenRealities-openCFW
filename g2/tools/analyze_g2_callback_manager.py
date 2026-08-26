@@ -184,7 +184,7 @@ def analyze(image: Path = IMAGE) -> dict:
     if set(leaves) != set(PRODUCTION_FUNCTIONS):
         raise c.AuditError("production callback-manager leaf inventory changed")
     expected_sizes = (22, 10, 22, 40, 70, 66, 130, 48)
-    expected_offsets = (193068, 193092, 193104, 193128, 193168, 193240, 193308, 193440)
+    expected_offsets = (252916, 252940, 252952, 252976, 253016, 253088, 253156, 253288)
     if any(
         leaf["source"].get("path")
         != "components/apollo_main/core_overlay/callback_manager.c"
@@ -217,12 +217,12 @@ def analyze(image: Path = IMAGE) -> dict:
         report["overlay"]["size"], report["overlay"]["sha256"],
         report["component"]["size"], report["component"]["sha256"],
     ) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise c.AuditError("production callback-manager build pins changed")
     manifest = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_main"]
-    if manifest["provider"].get("size") != 3764088 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
+    if manifest["provider"].get("size") != 3855544 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
         raise c.AuditError("production callback-manager manifest provider changed")
     region_names = {item["name"] for item in manifest["regions"]}
     required_regions = {

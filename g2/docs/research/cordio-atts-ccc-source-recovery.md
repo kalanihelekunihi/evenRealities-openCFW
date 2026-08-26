@@ -1,6 +1,6 @@
 # Cordio ATT client-characteristic-configuration source recovery
 
-Status date: 2026-08-08  
+Status date: 2026-08-25
 Target: G2 `s200_v2.2.6.10` Apollo main
 
 ## Outcome
@@ -14,8 +14,10 @@ interval has SHA-256
 
 All definitions have an exact Apache-2.0 Packetcraft route. Stock adds local
 connection validation and expanded diagnostics, so this is an exact
-definition/behavior/ABI pin rather than a pristine whole-object claim. Every
-byte remains cut forward and package ownership is unchanged.
+definition/behavior/ABI pin rather than a pristine whole-object claim. All
+fourteen callable entries are now production-routed: 14 guarded redirects
+replace 2,770 stock body bytes with 784 selector-isolated Cortex-M55 bytes plus
+eight alignment bytes under fourteen strict relocations.
 
 ## Upstream and release pin
 
@@ -107,7 +109,18 @@ python3 tools/analyze_g2_cordio_atts_ccc.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production promotion still requires modeling the product validation/logger
-seam, exact provider relocations, IAR code generation, and placement.
-`attc_disc.c` is now closed separately; `dm_adv_leg.c` is the next fast
-bounded public-source target.
+Production admission is fail-closed through
+`tools/analyze_g2_cordio_atts_ccc.py`, host behavior tests, fourteen isolated
+Cortex-M55 leaf builds, exact callback/setting/validation ABI checks,
+component/manifest ownership, deterministic package, and flash-plan checks.
+The current canonical overlay/component/package are 340,072 / 3,863,468 / 4,641,962
+bytes with SHA-256
+`849bffe5646022d3beec5ea492dc9c3b2ffabccc4f84a9b0449317d257525834`,
+`15fd0568b892d3f4e2de5a994ccc4f46ff2a04bc45d537a322c216b67068eb9d`,
+and `82097f8c735fc3ec9d162a1c8379e8b7ea2f8562b0b58eca297b222018e5b94c`.
+The WSF allocator/free and DM security-level providers are strictly bound; the
+authenticated `0x0052C0AD` registered Thumb entry is preserved and itself
+redirects to maintained C. Vendor logging is omitted without changing business
+results. No image was signed, flashed, or installed. Live CCC read/write,
+security-level, callback, persistence/reconnect, ATT peer, and EM9305 timing
+remain blocked by unavailable authorized responsive physical evidence.

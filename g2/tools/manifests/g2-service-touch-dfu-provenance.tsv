@@ -3,4 +3,12 @@ official_g2_image	sha256:36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47
 authenticated_ghidra_corpus	sha256sums:3ff8aa908e5841823df9384cfbffca91d657816274797f332a45ff93a8aa832f	generated analysis evidence	32-function boundary and retained-path anchors
 retained_source_path	D:\01_workspace\s200_ap510b_iar_git\platform\input\touchDFU\service_touch_dfu.c	unknown historical first-party license	lineage only
 historical_source	unavailable	unknown	no source reuse
-clean_room_candidate	none	n/a	analysis only
+clean_room_candidate	sha256:0944bbdaab2ce375dd72382da1c2d9f761335b2bba689e8d96c13366c435c667	GPL-3.0-only	production C reconstruction, host-tested and target-compiled
+host_fixture_c	sha256:70a8c988404576b103d29c6e7b89ab184ab2f381b2c8662f0cfd920cba57cea7	GPL-3.0-only	deterministic transport, package, version, allocation, and controller seam fixture
+host_fixture_h	sha256:e6713af4500bdf30b8d9f89877fada20390f1b75fd0abe9c1226486370807a31	GPL-3.0-only	host fixture contract
+candidate_tests	sha256:ed992d79f56f85970a9f624f68526909c2afc28867b2532221476cd2321af4de	GPL-3.0-only	CRC, framing, reply validation, package, program, skip/force, cleanup, and retry validation
+compiled_overlay	sha256:2def566dbf70594c89471066a7cd17f6d1fa94196f65ff48237385396e9cfd19	GPL-3.0-only + retained stock	255686-byte Apple-Clang Cortex-M55 production overlay
+core_component	sha256:7228edb650fe39bda63480691fe94ed59d0807ca5e30846d35ec08e134e08350	mixed first-party reconstruction and retained stock	3779082-byte generated Apollo component
+source_package	sha256:c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998	mixed component licenses	4557576-byte canonical source package
+flash_plan	sha256:80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292	generated build evidence	3926 placed regions, 2 unresolved hardware payloads
+hardware_validation	blocked:unavailable_physical_evidence	n/a	authorized right temple nonresponsive; left temple stock-only; no responsive authorized pair, touch-controller fixture, or golden I2C/DFU capture

@@ -19,6 +19,11 @@ class G2AlsTests(unittest.TestCase):
         self.assertEqual((p["easylogger_calls"],p["cmsis_freertos_delay_calls"],p["runtime_calls"],p["closed_first_party_calls"],p["opt3007_adapter_calls"]),(105,1,4,23,6))
         self.assertIsNone(p["public_opt3007_software_commit"])
         self.assertTrue(p["opt3007_adapter_production_routed"])
-    def test_gate(self):self.assertFalse(self.report["production"]["production_routed"])
+    def test_gate(self):
+        p=self.report["production"]
+        self.assertTrue(p["production_routed"])
+        self.assertEqual((p["source_functions"],p["compiled_text_bytes"],p["compiled_rodata_bytes"],p["generated_alignment_bytes"],p["guarded_redirects"],p["ownership_bytes"],p["retained_compatibility_bytes"],p["strict_relocations"]),(38,2216,48,30,38,3858,374,82))
+        self.assertEqual(p["hardware_validation"],"blocked_unavailable_physical_evidence")
+        self.assertIn("right temple is nonresponsive",p["hardware_blocker"])
 
 if __name__=="__main__":unittest.main()

@@ -29,11 +29,15 @@ class DmConnSlaveLegTest(unittest.TestCase):
             (module["direct_bl_ingress_sites"], module["registered_function_pointers"], module["strict_interior_pointers"]),
             (1, 4, 0),
         )
-        self.assertEqual(report["architecture"]["main_action_entries"], 4)
-        self.assertEqual(report["architecture"]["update_action_entries"], 2)
         self.assertTrue(report["architecture"]["separate_update_table"])
         self.assertTrue(report["architecture"]["task_locked_init"])
-        self.assertEqual(report["build_readiness"]["status"], "deferred")
+        self.assertEqual(report["build_readiness"]["status"], "target-compiled")
+        production=report["production"]
+        self.assertEqual(production["status"],"production-routed")
+        self.assertEqual((production["redirected_stock_functions"],production["redirected_stock_bytes"]),(5,104))
+        self.assertEqual((production["source_owned_bytes_added"],production["alignment_bytes_added"],production["strict_relocations"]),(156,8,9))
+        self.assertEqual(production["manifest_regions"],14)
+        self.assertEqual(production["flash_plan_counts"],(5576,2,5,6))
 
 
 if __name__ == "__main__":

@@ -44,5 +44,14 @@ python3 tools/analyze_g2_cordio_dm_conn_master.py --json
 python3 tools/verify_research_corpus.py --json
 ```
 
-Production replacement remains zero. The now-authenticated action-table
-topology makes `dm_conn_master_leg.c` the next strongest bounded target.
+All six definitions now have maintained, host-tested C, including source-only
+`DmConnSetAddrType`. Seven Cortex-M55 profiles compile cleanly. Five guarded
+redirects replace all 138 bounded stock body bytes with 220 compiled bytes
+plus two alignment bytes under eight strict relocations. The 11 manifest
+regions, component, deterministic package, and flash plan are pinned by
+`make cordio-dm-conn-master-closure`.
+
+Live connection cancellation, controller/L2CAP updates, peer/RF timing,
+privacy ordering, and paired-temple interoperation remain hardware-blocked:
+the only authorized right temple is nonresponsive and the left temple must
+remain stock. No hardware-dependent completeness claim is made.

@@ -8,6 +8,14 @@
 
 #include "runtime_cordio_wstr_candidate.h"
 
+#if !defined(OPEN_CFW_WSTR_REVERSE_COPY_ONLY) && \
+    !defined(OPEN_CFW_WSTR_REVERSE_ONLY)
+#define OPEN_CFW_WSTR_BUILD_ALL 1
+#endif
+
+#if defined(OPEN_CFW_WSTR_BUILD_ALL) || \
+    defined(OPEN_CFW_WSTR_REVERSE_COPY_ONLY)
+__attribute__((used, noinline))
 void open_cfw_cordio_wstr_reverse_copy_candidate(
     uint8_t *destination,
     const uint8_t *source,
@@ -20,7 +28,11 @@ void open_cfw_cordio_wstr_reverse_copy_candidate(
         destination[length - 1 - index] = source[index];
     }
 }
+#endif
 
+#if defined(OPEN_CFW_WSTR_BUILD_ALL) || \
+    defined(OPEN_CFW_WSTR_REVERSE_ONLY)
+__attribute__((used, noinline))
 void open_cfw_cordio_wstr_reverse_candidate(uint8_t *buffer, uint8_t length)
 {
     uint8_t index;
@@ -32,3 +44,4 @@ void open_cfw_cordio_wstr_reverse_candidate(uint8_t *buffer, uint8_t length)
         buffer[index] = temporary;
     }
 }
+#endif

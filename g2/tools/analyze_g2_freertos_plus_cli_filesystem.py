@@ -33,10 +33,10 @@ LEAF_NAMES = (
     "open_cfw_cli_fs_pwd", "open_cfw_cli_fs_mv", "open_cfw_cli_fs_md5",
     "open_cfw_cli_fs_df", "open_cfw_cli_fs_block_stats_accumulate",
 )
-LEAF_DIGEST = "8ee876239039a3f252e0ba08e70c33d81a103a9d420eb7e2ae06ac65627b4fd4"
+LEAF_DIGEST = "6c43cb84117894eecfb77406820fa27c4573cde7b132c656af0cc38389ec75bf"
 PATCH_DIGEST = "c5551ed8d5b629b1878de1860aace37552e55b1cf99096bf21c29af67baa98ed"
-BUILT_DIGEST = "9b988a7d9c998910ec28aea5b40f704ade411bf110ff1ea95294b1661c4169b2"
-REGION_DIGEST = "f3722782b394af6dba335d16de6e5c88fabac3987f82b938d8c1af4bd982a2d0"
+BUILT_DIGEST = "31de379333e50a3a742e5178c9adc2be7bea0b1c83883d031b82d0eb45144bc0"
+REGION_DIGEST = "cab8dd16560ad5b4e8798ea90114683510afca45989c349fe4735ac5582e8767"
 RETAINED = 'kernel\\FreeRTOS-Plus-CLI\\prvCommand\\prvCommand_filesystem.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\kernel\\FreeRTOS-Plus-CLI\\prvCommand\\prvCommand_filesystem.c'
 PATH_RUN = 0x6de434
@@ -264,12 +264,12 @@ def analyze(image=IMAGE):
         raise c.AuditError("production FreeRTOS+CLI filesystem leaf policy changed")
     if sum(x["expected"]["size"] for x in leaves) != 9866 or sum(x["expected"].get("closure_size", x["expected"]["size"]) - x["expected"]["size"] for x in leaves) != 704 or sum(len(x["relocations"]) for x in leaves) != 179:
         raise c.AuditError("production FreeRTOS+CLI filesystem compiled census changed")
-    previous = 228222
+    previous = 288070
     alignment = 0
     for leaf in leaves:
         alignment += leaf["expected"]["offset"] - previous
         previous = leaf["expected"]["offset"] + leaf["expected"].get("closure_size", leaf["expected"]["size"])
-    if alignment != 20 or previous != 238812:
+    if alignment != 20 or previous != 298660:
         raise c.AuditError("production FreeRTOS+CLI filesystem placement changed")
     patches = [x for x in overlay["patch_sites"] if x.get("name", "").startswith("replace_freertos_cli_filesystem_")]
     stock_order = (LEAF_NAMES[1], LEAF_NAMES[2], LEAF_NAMES[3], LEAF_NAMES[0], *LEAF_NAMES[4:])
@@ -278,7 +278,7 @@ def analyze(image=IMAGE):
     if any(x.get("branch") != "b_w" or x.get("profiles") != ["apple-clang"] for x in patches):
         raise c.AuditError("production FreeRTOS+CLI filesystem redirect policy changed")
     build = json.loads(REPORT.read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae", 3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed"):
+    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d", 3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
         raise c.AuditError("production FreeRTOS+CLI filesystem build pins changed")
     built = [x for x in build["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
     normalized = [{"function": x["extraction"]["function"], "size": x["placement"]["size"], "text_size": x["placement"].get("text_size", x["placement"]["size"]), "padding_before": x["placement"]["padding_before"], "offset": x["placement"]["offset"], "runtime_address": x["placement"]["runtime_address"], "relocation_count": x["extraction"]["relocation_count"]} for x in built]
@@ -292,11 +292,11 @@ def analyze(image=IMAGE):
     counts = {key: (sum(x["address_status"] == key for x in regions), sum(x["size"] for x in regions if x["address_status"] == key)) for key in ("generated_source_entry_replacement", "official_blob", "source_compiled", "generated_alignment")}
     if counts != {"generated_source_entry_replacement": (12, 3200), "official_blob": (5, 56), "source_compiled": (22, 10570), "generated_alignment": (10, 20)}:
         raise c.AuditError("production FreeRTOS+CLI filesystem stock/overlay tiling changed")
-    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed", 4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85"):
+    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc", 4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
         raise c.AuditError("production FreeRTOS+CLI filesystem manifest closure changed")
     plan_bytes = FLASH_PLAN.read_bytes()
     plan = json.loads(plan_bytes)
-    if (len(plan_bytes), _sh(plan_bytes)) != (2588615, "bfdbc3b09c31f281cabb3b31b95f80523c7cfdd62edc83677f5f9adc50aac60f") or plan.get("package_sha256") != "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85" or tuple(len(plan[k]) for k in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions")) != (3715, 2, 5, 6):
+    if (len(plan_bytes), _sh(plan_bytes)) != (3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297") or plan.get("package_sha256") != "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731" or tuple(len(plan[k]) for k in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions")) != (4482, 2, 5, 6):
         raise c.AuditError("production FreeRTOS+CLI filesystem flash plan changed")
     return {
         "schema_version": 1,

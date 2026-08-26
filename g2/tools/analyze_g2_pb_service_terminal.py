@@ -30,21 +30,21 @@ PINS = {
 SOURCE_SIZE = 14861
 SOURCE_SHA256 = "b6feacf5bb491f28e1a3718dbf29ee2c5f5038e94ee9eabfb1f584eb5a2cb123"
 FUNCTIONS = (
-    ("open_cfw_pb_service_terminal_buffer_write", 146, 200356, 0),
-    ("open_cfw_pb_service_terminal_zero", 88, 200504, 0),
-    ("open_cfw_pb_terminal_encode_and_send", 358, 200592, 7),
-    ("APP_PbTerminalRxFrameDataProcess", 112, 200952, 3),
-    ("APP_PbTerminalTxEncodeCommResp", 36, 201064, 1),
-    ("APP_PbTerminalTxEncodeStatusReply", 48, 201100, 1),
-    ("APP_PbTerminalTxEncodeVoiceInput", 48, 201148, 1),
-    ("APP_PbTerminalTxEncodeQueryReply", 48, 201196, 1),
-    ("APP_PbTerminalTxEncodeAgentInterrupt", 48, 201244, 1),
-    ("APP_PbTerminalTxEncodeSessionSwitchRequest", 84, 201292, 1),
-    ("APP_PbTerminalTxEncodeNewSessionRequest", 62, 201376, 1),
-    ("APP_PbTerminalTxEncodeNewSessionCancel", 48, 201440, 1),
-    ("APP_PbTerminalTxEncodeDisplayStateNotify", 104, 201488, 2),
-    ("APP_PbTerminalTxEncodeListFocus", 62, 201592, 1),
-    ("APP_PbTerminalTxEncodeOverlayFocus", 76, 201656, 2),
+    ("open_cfw_pb_service_terminal_buffer_write", 146, 260204, 0),
+    ("open_cfw_pb_service_terminal_zero", 88, 260352, 0),
+    ("open_cfw_pb_terminal_encode_and_send", 358, 260440, 7),
+    ("APP_PbTerminalRxFrameDataProcess", 112, 260800, 3),
+    ("APP_PbTerminalTxEncodeCommResp", 36, 260912, 1),
+    ("APP_PbTerminalTxEncodeStatusReply", 48, 260948, 1),
+    ("APP_PbTerminalTxEncodeVoiceInput", 48, 260996, 1),
+    ("APP_PbTerminalTxEncodeQueryReply", 48, 261044, 1),
+    ("APP_PbTerminalTxEncodeAgentInterrupt", 48, 261092, 1),
+    ("APP_PbTerminalTxEncodeSessionSwitchRequest", 84, 261140, 1),
+    ("APP_PbTerminalTxEncodeNewSessionRequest", 62, 261224, 1),
+    ("APP_PbTerminalTxEncodeNewSessionCancel", 48, 261288, 1),
+    ("APP_PbTerminalTxEncodeDisplayStateNotify", 104, 261336, 2),
+    ("APP_PbTerminalTxEncodeListFocus", 62, 261440, 1),
+    ("APP_PbTerminalTxEncodeOverlayFocus", 76, 261504, 2),
 )
 PATCH_SUFFIXES = (
     "encode", "rx", "comm_resp", "status_reply", "voice_input",
@@ -291,8 +291,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     report = json.loads(REPORT.read_text())
     if (report["overlay"]["size"], report["overlay"]["sha256"],
             report["component"]["size"], report["component"]["sha256"]) != (
-        240692, "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -300,8 +300,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"].get("size"), main["provider"].get("sha256"),
             manifest["package"].get("expected_size"),
             manifest["package"].get("expected_sha256")) != (
-        3764088, "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582, "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}

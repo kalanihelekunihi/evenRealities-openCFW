@@ -119,16 +119,16 @@ PRODUCTION_LEAVES = (
         "open_cfw_at_tp_print_gesture_cfg",
         "OPEN_CFW_AT_TP_PRINT_ONLY",
         20,
-        "50230ca357e1b9360db9c3f3f0d7d56da99ce9465d69cade7ce271a2616a82cb",
-        184524,
+        "cbbccfdbbe1952e9efbda793a6e362da9b336966a53cc09c76baa3da03c02dc5",
+        244372,
         1,
     ),
     (
         "open_cfw_at_tp_test",
         "OPEN_CFW_AT_TP_TEST_ONLY",
         1528,
-        "6f351a53aa7b2b95bd7242000caf2e5d54871c65e7599f7daf0c3f067dba89c0",
-        184544,
+        "06a1401ca64afa1832144b7cd4fd200991c6a13c7c0a7bb47ba98dda23c1e29d",
+        244392,
         17,
     ),
 )
@@ -332,10 +332,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
         build["overlay"]["size"], build["overlay"]["sha256"],
         build["component"]["size"], build["component"]["sha256"],
     ) != (
-        240692,
-        "2db11ff707bf253280eb07667c3d76954347cc9e31796c7589faf788fed629ae",
-        3764088,
-        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
+        332148,
+        "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        3855544,
+        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
     ):
         raise AuditError("production AT^TP build pins changed")
     built = {
@@ -381,10 +381,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
         manifest["package"]["expected_size"],
         manifest["package"]["expected_sha256"],
     ) != (
-        3764088,
-        "b3ee7d2fb560f134bd5c4a27eb8203abdc0dd9482816319be0b03320fc2067ed",
-        4542582,
-        "275a9e691c0bad851f7adbc80ed2abc1580e13d67f031912e198f984d18f7f85",
+        3855544,
+        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        4634038,
+        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
     ):
         raise AuditError("production AT^TP package pins changed")
 

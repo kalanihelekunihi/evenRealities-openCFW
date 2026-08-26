@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: GPL-3.0-only
  *
- * Production-excluded clean-room ABI for the G2 Cordio/Ambiq FreeRTOS WSF
+ * Production-routed clean-room ABI for the G2 Cordio/Ambiq FreeRTOS WSF
  * OS port.  The stock configuration has ten handlers and an 8-bit handler
  * event mask; it is not ABI-compatible with the selected public r20.05c
  * header configuration.

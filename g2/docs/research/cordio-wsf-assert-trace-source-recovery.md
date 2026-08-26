@@ -110,9 +110,11 @@ disassembly caches.
 `components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.c/.h`
 expresses only the observed behavior behind narrow logger/formatter/reset
 seams. Focused tests compile it for Cortex-M4 with `-Werror`, exercise normal
-trace formatting, the null-file hook, and the hook-null reset path. It remains
-production-excluded pending exact EasyLogger seam integration, licensed-IAR
-comparison, placement/relocation closure, and target validation.
+trace formatting, the null-file hook, and the hook-null reset path. Both
+entries are production-routed as 170 compiled bytes under five strict
+relocations. Trace retains the stock formatter/debug providers; assertion
+retains hook/reset/fail-stop behavior while non-ABI-compatible reconstructed
+diagnostic wrappers are omitted from the production leaf.
 
 ## Reproduce
 

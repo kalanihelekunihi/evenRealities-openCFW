@@ -1,9 +1,10 @@
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
- * Production-excluded reconstruction of the seven-function G2 Cordio WSF
+ * Production-routed reconstruction of the seven-function G2 Cordio WSF
  * message layer.  The function texts have an exact Apache-2.0 Packetcraft
- * source route at r19.02; the names remain OpenCFW-local until link closure.
+ * source route at r19.02; the OpenCFW-local names are linked through guarded
+ * production redirects.
  */
 
 #ifndef OPEN_CFW_RUNTIME_CORDIO_WSF_MSG_CANDIDATE_H

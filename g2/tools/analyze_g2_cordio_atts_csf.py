@@ -52,6 +52,8 @@ KNOWN_NONPOINTER_OCCURRENCES = {
 }
 
 PINNED_INPUTS = {
+    ROOT / "components/shared/cordio/runtime_cordio_atts_csf.c": "f344ea292739c1ddc3e1c59e74d5ed8a8277eb8de424e9759779fd3368564cf0",
+    ROOT / "components/shared/cordio/runtime_cordio_atts_csf.h": "ee2ab15775b546aab8d7ce60bd593f22e56e55ae4af1ddced6228f708d13b209",
     ROOT / "tools/manifests/packetcraft-cordio-atts-csf-provenance.tsv": "9fc0f455c04f870b8899b3f717a3dee934d84c52179dcbe776e3fb958f316e31",
     ROOT / "tools/manifests/packetcraft-cordio-atts-csf-function-map.tsv": "fefe258423bbc0b510b02d139c87f01f42abef6525cff24d478e1f72755c6e55",
     ROOT / "tools/manifests/readiness-cordio-atts-csf-build-results.tsv": "0d9817ca888a2826d09882dd60d75cbe40dfd74dededdf988979415daeca8ab5",
@@ -61,6 +63,31 @@ PINNED_INPUTS = {
     ROOT / "tools/manifests/readiness-cordio-atts-csf-undefined-providers.tsv": "5223cfa9ccacaaff53b55d6e44dc1b654dfceb9cd5e4cf896ea5e1e6bd41e9e7",
     MATRIX_MANIFEST: MATRIX_SHA256,
 }
+
+OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_atts_csf.c"
+CANDIDATE_FUNCTIONS = [
+    "open_cfw_cordio_atts_csf_set_hash_update_status",
+    "open_cfw_cordio_atts_csf_get_hash_update_status",
+    "open_cfw_cordio_atts_csf_is_client_change_aware",
+    "open_cfw_cordio_atts_csf_act_client_state",
+    "open_cfw_cordio_atts_csf_set_clients_change_awareness_state",
+    "open_cfw_cordio_atts_csf_connection_open",
+    "open_cfw_cordio_atts_csf_register",
+    "open_cfw_cordio_atts_csf_write_features",
+    "open_cfw_cordio_atts_csf_get_features",
+    "open_cfw_cordio_atts_csf_get_change_aware_state",
+]
+CANDIDATE_LEAF_METRICS = [
+    (335380, 58, 1), (335440, 12, 0), (335452, 40, 0),
+    (335492, 158, 0), (335652, 62, 0), (335716, 34, 0),
+    (335752, 12, 0), (335764, 82, 0), (335848, 24, 0),
+    (335872, 20, 0),
+]
 
 
 class AuditError(RuntimeError):
@@ -166,6 +193,85 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         raise AuditError("ATT CSF source-path pointer closure changed")
     _verify_no_stored_function_pointers(blob)
 
+    overlay = json.loads(OVERLAY_CONFIG.read_text())
+    leaves_by_function = {
+        row["function"]: row for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == CANDIDATE_SOURCE_PATH
+    }
+    if set(leaves_by_function) != set(CANDIDATE_FUNCTIONS):
+        raise AuditError("ATT CSF production leaf inventory changed")
+    candidate_hash = PINNED_INPUTS[ROOT / CANDIDATE_SOURCE_PATH]
+    leaves = []
+    for function, metrics in zip(CANDIDATE_FUNCTIONS, CANDIDATE_LEAF_METRICS):
+        leaf = leaves_by_function[function]
+        actual = (
+            leaf["expected"]["offset"], leaf["expected"]["size"],
+            len(leaf["relocations"]),
+        )
+        if actual != metrics or leaf["source"].get("sha256") != candidate_hash:
+            raise AuditError(f"ATT CSF production leaf changed: {function}")
+        leaves.append(leaf)
+    sites = {row["name"]: row for row in overlay["patch_sites"]}
+    for index, ((_, start, end, expected, _), function) in enumerate(
+        zip(FUNCTIONS, CANDIDATE_FUNCTIONS), 1
+    ):
+        site = sites.get(f"replace_cordio_atts_csf_{index:02d}")
+        if (
+            site is None or site.get("runtime_address") != start
+            or site.get("target_function") != function
+            or site.get("expected_size") != end - start
+            or site.get("expected_sha256") != expected
+            or function not in overlay["functions"]
+        ):
+            raise AuditError(f"ATT CSF production route {index} changed")
+    compiled = sum(row["expected"]["size"] for row in leaves)
+    alignment = 2
+    alignment += sum(
+        right["expected"]["offset"]
+        - left["expected"]["offset"] - left["expected"]["size"]
+        for left, right in zip(leaves, leaves[1:])
+    )
+    relocations = sum(len(row["relocations"]) for row in leaves)
+    if (compiled, alignment, relocations) != (502, 12, 1):
+        raise AuditError("ATT CSF production metrics changed")
+
+    build = json.loads(BUILD_REPORT.read_text())
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    if (
+        build["overlay"]["size"] != 404796
+        or build["overlay"]["sha256"]
+        != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
+        or build["component"]["size"] != 3928192
+        or build["component"]["sha256"]
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or override["provider"].get("size") != 3928192
+        or override["provider"].get("sha256")
+        != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
+        or len([
+            row for row in override["regions"]
+            if row["name"].startswith("cordio_atts_csf_")
+        ]) != 26
+    ):
+        raise AuditError("ATT CSF component/manifest ownership changed")
+    if (
+        PACKAGE.stat().st_size != 4706686
+        or _sha256(PACKAGE.read_bytes())
+        != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
+    ):
+        raise AuditError("ATT CSF package changed")
+    flash = json.loads(FLASH_PLAN.read_text())
+    if (
+        FLASH_PLAN.stat().st_size != 4071097
+        or _sha256(FLASH_PLAN.read_bytes())
+        != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+        or (
+            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
+            len(flash["container_only_regions"]), len(flash["protected_regions"]),
+        ) != (5863, 2, 5, 6)
+    ):
+        raise AuditError("ATT CSF flash plan changed")
+
     return {
         "schema_version": 1,
         "image": {"path": str(image), "sha256": IMAGE_SHA256},
@@ -209,8 +315,16 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "normalized_comparison": "deferred until vendor instrumentation seam is modeled",
         },
         "production": {
-            "status": "stock-retained; source candidate not yet promoted",
-            "source_owned_bytes_added": 0,
+            "status": "routed",
+            "functions": 10,
+            "stock_bytes": 4814,
+            "source_owned_bytes_added": compiled,
+            "compiled_text_bytes": compiled,
+            "alignment_bytes": alignment,
+            "strict_relocations": relocations,
+            "guarded_redirects": 10,
+            "business_provider": "0x00534DD8 attsCheckPendDbHashReadRsp",
+            "vendor_diagnostics": "not copied; public Packetcraft business behavior retained",
         },
     }
 

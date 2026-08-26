@@ -60,7 +60,18 @@ class CordioHciVendorSequenceAuditTests(unittest.TestCase):
         self.assertEqual(lineage["classification"], "product hybrid Apollo3/Cooper reset sequence")
         self.assertFalse(lineage["whole_file_source_exact"])
         self.assertFalse(lineage["historical_generating_commit_resolved"])
-        self.assertFalse(self.report["production"]["vendor_source_copied"])
+        production = self.report["production"]
+        self.assertFalse(production["vendor_source_copied"])
+        self.assertEqual(production["status"], "production-routed")
+        self.assertEqual(production["stock_bytes_replaced"], 546)
+        self.assertEqual(production["source_owned_bytes_added"], 862)
+        self.assertEqual(production["alignment_bytes_added"], 6)
+        self.assertEqual(production["strict_relocations"], 23)
+        self.assertEqual(production["source_only_functions_compiled"], 4)
+        self.assertEqual(production["manifest_regions"], 11)
+        self.assertEqual(production["flash_plan_counts"], (5_864, 2, 5, 6))
+        self.assertTrue(production["null_and_non_command_events_fail_closed"])
+        self.assertTrue(production["missing_extension_callback_falls_back"])
 
 
 if __name__ == "__main__":

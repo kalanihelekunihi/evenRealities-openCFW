@@ -1,8 +1,8 @@
 # AmbiqSuite ANCC profile source recovery
 
-Status: source lineage and complete linked-object boundary authenticated for G2
-2.2.6.10. Analysis only; no signing, flashing, erase, or hardware operation was
-performed.
+Status: implemented in production source and image-routed for G2 2.2.6.10;
+live ANCS/controller validation is blocked by unavailable authorized responsive
+hardware. No signing, flashing, erase, or hardware operation was performed.
 
 ## Result
 
@@ -19,7 +19,8 @@ unusual coupled choices:
 - six-byte action and up-to-64-byte app-attribute command encoders;
 - a 512-byte fragmented attribute buffer with three parser states;
 - the one-byte attribute ID / little-endian two-byte length framing;
-- completion after exactly eight attributes;
+- completion after exactly eight notification attributes and after the single
+  requested app-display-name attribute;
 - five-handle, 128-bit ANCS service discovery through `AppDiscFindService`.
 
 These features occur together in AmbiqSuite's 17-definition ANCC unit and map
@@ -99,11 +100,48 @@ the base layouts of `ancc_notif_t`, `active_notif_t`, and `anccCb_t`. OpenCFW
 only needs to reconstruct the documented G2 extensions around those known
 interfaces rather than rediscover the complete ANCS protocol and parser.
 
+## Production source and routing
+
+`components/shared/cordio/runtime_ancc_profile_core.c` is the portable,
+dependency-free protocol core. It implements the exact 1,372-byte G2 control
+block ABI, 64-entry update-first/reverse-pop list, all three control-point
+commands, strict 61-byte app-ID bound, notification-source validation, and the
+fragmented 512-byte data-source parser. Host tests split valid responses at
+every byte boundary and cover malformed lengths, overflow/reset, command
+bytes, list saturation/update, removal, app-ID fragmentation, and the distinct
+one-versus-eight attribute completion rules. The same source target-compiles
+freestanding for Cortex-M55 with no undefined symbols.
+
+`components/shared/cordio/runtime_ancc_profile.c` implements all 21 recovered
+stock ABIs, including the nine G2 message/sync/whitelist/product-policy deltas.
+The large parser entry is also the internal production dispatcher; the other
+20 isolated entries are thin ABI adapters into that single reviewed state
+machine. Twenty-one SHA-guarded `B.W` routes replace all 3,712 stock body bytes
+with 11,760 compiled bytes under 69 strict relocations. The fixed SRAM layout
+is asserted at control block `0x200695C8`, product notification
+`0x2006DDD4`, and callback/handle cells `0x20074898..0x200748A0`.
+
+The canonical source overlay is 420,232 bytes, SHA-256
+`7e0a198af5d51b10d139f5cdea8d08bc3e68419166ff4933c48066de0e64de8d`;
+the Apollo component is 3,943,628 bytes, SHA-256
+`cb584519cbd0a0de8a4cdc34e2de1bbbaa850a09cf86ac14c3bcb95a775b51cb`;
+and the deterministic package is 4,722,122 bytes, SHA-256
+`39f1132a46051f507b0738c0a6cc4b52952d6bf42d1c7c12c6777afca7c4a374`.
+The 4,105,447-byte flash plan has 5,911 placed, two unresolved, five
+container-only, and six protected regions.
+
+The software gap is closed. Live Apple peer discovery, CCC subscription,
+fragment timing, control-point writes/actions, controller scheduling, product
+projection, whitelist/sync behavior, and dual-temple interoperability remain
+explicitly hardware-blocked because no authorized responsive right G2/ANCS
+peer or captured physical trace is available. The authorized left temple
+remains stock and was not used.
+
 ## Source admission and reproduction
 
 The BSD-3-Clause-style Ambiq notices remain embedded in both admitted files at
-`third_party/ambiqsuite-ancc-profile`. They are provenance/implementation
-oracles and are not currently routed into the production overlay.
+`third_party/ambiqsuite-ancc-profile`. They are the authenticated upstream
+oracles for the maintained implementation and production adapter.
 
 Run:
 
@@ -113,4 +151,5 @@ make ambiqsuite-ancc-profile-closure
 
 The target authenticates both upstream blobs, every stock body and pool, the
 path/name/UUID constants, provider calls, direct ingress, stored callbacks,
-ownership split, and the production-exclusion boundary.
+ownership split, 21 production routes, host state-machine behavior, isolated
+Cortex-M55 entries, component, package, and explicit hardware blocker.

@@ -53,8 +53,49 @@ class AnalyzeG2Icm45608Tests(unittest.TestCase):
         self.assertIn("DRV_IMUDataParserCallback", lineage["exact_symbols"])
         self.assertEqual(lineage["source_inventory"], "unavailable")
         self.assertEqual(lineage["license"], "unknown")
-        self.assertIsNone(self.report["production"]["candidate"])
-        self.assertFalse(self.report["production"]["production_routed"])
+        self.assertEqual(lineage["tdk_exact_abi_tag"], "1.1.2")
+        self.assertEqual(
+            lineage["tdk_exact_abi_commit"],
+            "b79ae575f7f310e5ae2e1164096d1a858bb74662",
+        )
+        self.assertEqual(lineage["tdk_snapshot_license"], "BSD-3-Clause")
+        self.assertEqual(lineage["tdk_snapshot_files"], 52)
+        self.assertEqual(lineage["tdk_snapshot_bytes"], 594177)
+        production = self.report["production"]
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/imu_icm45608.c",
+        )
+        self.assertTrue(production["source_inventory_available"])
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["source_functions"], 54)
+        self.assertEqual(production["tdk_primary_functions"], 143)
+        self.assertEqual(production["total_source_functions"], 197)
+        self.assertEqual(production["recovered_functions"], 53)
+        self.assertEqual(production["compiled_text_bytes"], 8610)
+        self.assertEqual(production["tdk_compiled_function_bytes"], 54128)
+        self.assertEqual(production["tdk_build_source_files"], 8)
+        self.assertEqual(production["tdk_build_source_bytes"], 184197)
+        self.assertEqual(production["generated_alignment_bytes"], 30)
+        self.assertEqual(production["guarded_redirects"], 52)
+        self.assertEqual(production["authenticated_relocations"], 83)
+        self.assertEqual(production["manifest_regions"], 143)
+        self.assertEqual(production["ownership_bytes"], 11672)
+        self.assertTrue(production["source_owned_device_initialization"])
+        self.assertTrue(production["exact_three_argument_transport_abi"])
+        self.assertTrue(production["source_owned_fifo_acquisition"])
+        self.assertTrue(production["source_owned_register_polling"])
+        self.assertTrue(production["source_owned_edmp_gaf_configuration"])
+        self.assertTrue(production["source_owned_gaf_decode"])
+        self.assertTrue(production["source_owned_magnetometer_i2cm"])
+        self.assertTrue(production["source_owned_extended_edmp_images"])
+        self.assertTrue(production["source_owned_aid_b2s_configuration"])
+        self.assertTrue(production["source_owned_aid_b2s_event_routing"])
+        self.assertIsNone(production["remaining_software_gap"])
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked_unavailable_physical_evidence",
+        )
 
 
 if __name__ == "__main__":
