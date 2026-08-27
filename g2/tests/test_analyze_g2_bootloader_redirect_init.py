@@ -28,9 +28,9 @@ class BootloaderRedirectInitAuditTests(unittest.TestCase):
         self.assertEqual(self.report["stock"]["size"], 88)
         self.assertEqual(self.report["source"]["text_bytes"], 132)
         self.assertEqual(self.report["source"]["closure_bytes"], 275)
-        self.assertEqual(self.report["provider"]["source_owned_bytes"], 1849)
-        self.assertEqual(self.report["deployment"]["apple_package"]["size"], 4732034)
-        self.assertEqual(self.report["deployment"]["linux_package"]["size"], 4508044)
+        self.assertEqual(self.report["provider"]["source_owned_bytes"], 9903)
+        self.assertEqual(self.report["deployment"]["apple_package"]["size"], 4740094)
+        self.assertEqual(self.report["deployment"]["linux_package"]["size"], 4516088)
         self.assertEqual(self.report["deployment"]["unresolved_flash_regions"], 2)
 
     def test_hardware_validation_remains_explicitly_blocked(self) -> None:

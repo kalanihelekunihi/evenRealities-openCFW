@@ -434,12 +434,58 @@ bootloader-numeric-closure: source
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_runtime_bootloader_udiv10 \
 		tests.test_runtime_bootloader_numeric \
+		tests.test_runtime_bootloader_format_core \
+		tests.test_runtime_bootloader_log_dispatch \
+		tests.test_runtime_bootloader_strstr \
+		tests.test_runtime_bootloader_critical_context \
+		tests.test_runtime_bootloader_gate_acquire \
+		tests.test_runtime_bootloader_gate_state \
+		tests.test_runtime_bootloader_gate_release \
+		tests.test_runtime_bootloader_context_value \
+		tests.test_runtime_bootloader_dispatch_4160fe \
+		tests.test_runtime_bootloader_value_4161c6 \
+		tests.test_runtime_bootloader_call_4161ce \
+		tests.test_runtime_bootloader_action_416200 \
+		tests.test_runtime_bootloader_transfer_41623a \
+		tests.test_runtime_bootloader_wait_4162c4 \
+		tests.test_runtime_bootloader_notify_416378 \
+		tests.test_runtime_bootloader_callback_41639a \
+		tests.test_runtime_bootloader_register_4163b2 \
+		tests.test_runtime_bootloader_submit_41649a \
+		tests.test_runtime_bootloader_create_4164da \
+		tests.test_runtime_bootloader_flags_set_41652e \
+		tests.test_runtime_bootloader_flags_wait_416590 \
+		tests.test_runtime_bootloader_flags_create_416610 \
+		tests.test_runtime_bootloader_handle_4166aa_416710 \
+		tests.test_runtime_bootloader_semaphore_create_416762 \
+		tests.test_runtime_bootloader_queue_create_416816 \
+		tests.test_runtime_bootloader_queue_put_get_4168a2_416920 \
+		tests.test_runtime_bootloader_bit_helpers_4169a4_4169fc \
+		tests.test_runtime_bootloader_tlsf_block_primitives_4169fc_416aaa \
+		tests.test_runtime_bootloader_tlsf_block_topology_416aaa_416bce \
+		tests.test_runtime_bootloader_tlsf_mapping_416bce_416c4e \
+		tests.test_runtime_bootloader_tlsf_free_lists_416c4e_416e04 \
+		tests.test_runtime_bootloader_tlsf_allocator_416e04_41711c \
+		tests.test_runtime_bootloader_tlsf_public_41711c_4172da \
+		tests.test_runtime_bootloader_easylogger_control_41733c_4176ce \
+		tests.test_runtime_bootloader_easylogger_output_4176ce_417ad0 \
+		tests.test_runtime_bootloader_easylogger_lock_enabled_417b7c_417bb8 \
+		tests.test_runtime_bootloader_easylogger_port_41a648_41a700 \
+		tests.test_runtime_bootloader_easylogger_transport_41b854_41f9b6 \
+		tests.test_runtime_bootloader_boot_services_41f9d8_41fa40 \
+		tests.test_runtime_bootloader_platform_setup_41fa50 \
+		tests.test_runtime_bootloader_guarded_teardown_41fa98 \
+		tests.test_runtime_bootloader_pin_groups_41fadc \
+		tests.test_runtime_bootloader_allocator_init_41fd70 \
 		tests.test_analyze_g2_bootloader_numeric
 	$(PYTHON) tools/analyze_g2_bootloader_numeric.py
 	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
 
 .PHONY: bootloader-format-primitives-closure
 bootloader-format-primitives-closure: bootloader-numeric-closure
+
+.PHONY: bootloader-float-format-closure
+bootloader-float-format-closure: bootloader-numeric-closure
 
 component: bootloader-component core-component
 

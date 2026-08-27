@@ -1,26 +1,26 @@
 {
   "component_overrides": {
     "apollo_bootloader": {
-      "function": "Even Apollo510B bootloader with source-replaced EasyLogger formatting/copy helpers, littlefs v2.10.1 leaves including the max/min/alignment and 32-bit endian utility quartets, fallback npw2/ctz/popc bit-helper trio, tag validity/type1/type3/id/size/chunk and metadata-list open predicates, disk-version major/minor pair, allocator lookahead helper, and exact upstream AmbiqSuite 5.1.0 MSPI interrupt-clear leaf; recovered S200 redirect_init two-mutex initialization entry; recovered S200 redirect_init two-mutex initialization entry; recovered Arm EABI byte-fill primitive; recovered Arm EABI forward-copy primitive; recovered bounded byte-comparison primitive; recovered reject-set string-span primitive; recovered accept-set string-span primitive; recovered reflected CRC-32 update primitive; recovered SRAM-word setter at 0x200270CC; recovered unsigned 64-bit divide-by-ten helper; recovered unsigned decimal digit-count helper; recovered signed-magnitude decimal digit-count helper; recovered hexadecimal digit-count helper; recovered wrapping decimal parser; recovered unsigned 64-bit decimal output helper; recovered unsigned 64-bit hexadecimal output helper; recovered nullable string-length helper; recovered null-output-aware repeated-character helper; recovered fixed-point float formatter",
+      "function": "Even Apollo510B bootloader with source-replaced EasyLogger formatting/copy helpers, littlefs v2.10.1 leaves including the max/min/alignment and 32-bit endian utility quartets, fallback npw2/ctz/popc bit-helper trio, tag validity/type1/type3/id/size/chunk and metadata-list open predicates, disk-version major/minor pair, allocator lookahead helper, and exact upstream AmbiqSuite 5.1.0 MSPI interrupt-clear leaf; recovered S200 redirect_init two-mutex initialization entry; recovered Arm EABI byte-fill and forward-copy primitives; recovered bounded byte-comparison, string-span, CRC-32, and SRAM-word helpers; recovered numeric, formatting, logging, substring, critical-context, runtime-gate, dispatcher, callback, object, event-flags, tagged-handle, semaphore, message-queue, bit-width, count-trailing-zeros, and floor-log2 wrappers through 0x004169FC; recovered Arm EABI byte-fill primitive; recovered Arm EABI forward-copy primitive; recovered bounded byte-comparison primitive; recovered reflected CRC-32 update primitive; recovered reject-set string-span primitive; recovered accept-set string-span primitive; recovered SRAM-word setter at 0x200270CC; recovered unsigned 64-bit divide-by-ten helper; recovered unsigned decimal digit-count helper; recovered signed-magnitude decimal digit-count helper; recovered hexadecimal digit-count helper; recovered wrapping decimal parser; recovered unsigned 64-bit decimal output helper; recovered unsigned 64-bit hexadecimal output helper; recovered nullable string-length helper; recovered null-output-aware repeated-character helper; recovered fixed-point float formatter; recovered bootloader logging formatter core; recovered bootloader variadic logging dispatch wrapper; recovered substring-search primitive; recovered critical-context predicate; recovered runtime-state gate acquisition wrapper; recovered runtime-state and SRAM-gate mapper; recovered runtime-state gate release wrapper; recovered critical-context value-dispatch wrapper; recovered address-identified runtime dispatcher at 0x004160FE; recovered address-identified retained-value wrapper at 0x004161C6; recovered address-identified validated runtime call wrapper at 0x004161CE; recovered address-identified guarded runtime action wrapper at 0x00416200; recovered address-identified two-phase runtime transfer wrapper at 0x0041623A; recovered address-identified masked runtime wait wrapper at 0x004162C4; recovered address-identified optional runtime notification wrapper at 0x00416378; recovered address-identified registered runtime callback adapter at 0x0041639A; recovered address-identified registered runtime object constructor at 0x004163B2; recovered TLSF v3.1 block-header primitive cluster through 0x00416AAA; recovered TLSF v3.1 physical-block and alignment helper cluster through 0x00416BCE; recovered TLSF v3.1 request-size and class-mapping helper cluster through 0x00416C4E; recovered TLSF v3.1 free-list selection and mutation helper cluster through 0x00416E04; recovered TLSF v3.1 allocation, split, coalescing, lookup, and preparation helper cluster through 0x0041711C; recovered TLSF v3.1 control, pool, allocation, and release entry cluster through 0x004172DA; recovered EasyLogger initialization, start, output/color/format/filter control, lock/unlock, tag-level reset, and tag-level query entries through 0x004176CE; recovered EasyLogger interrupt-gated filtered formatting and output entry through 0x00417AD0; recovered EasyLogger mutex, output, time, process-name, and thread-name boot-port entries through 0x0041A700; recovered EasyLogger channel-one driver and four-channel synchronous transfer transport through 0x0041F9B6; recovered boot delay wrappers and capped initializer-table ordering and dispatch services through 0x0041FA40; recovered guarded two-stage teardown and pin-state reconciliation entry through 0x0041FAD0; recovered guarded teardown, reset, hard-float derivation, configuration submission, and channel-four/five platform setup entry through 0x0041FA98; recovered two-bank pin-group configuration dispatcher through 0x0041FCF6; recovered TLSF pool initialization, allocator-handle publication, and diagnostic entry through 0x0041FDA8",
       "provider": {
         "kind": "source_build",
         "path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
         "profiles": {
           "linux-clang": {
-            "size": 150456,
-            "sha256": "df6ec98c263e1e5d4f16244af450171e149be673eb0347f076f997b8de326187"
+            "size": 158588,
+            "sha256": "a64974dce84415f4031847e1f71b5397cd0c366a31b8786d6f6e311ff53bd7b2"
           },
           "apple-font-manager-record": {
-            "size": 150456,
-            "sha256": "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d"
+            "size": 158604,
+            "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7"
           },
           "apple-product-rtos-record": {
-            "size": 150456,
-            "sha256": "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d"
+            "size": 158604,
+            "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7"
           }
         },
-        "sha256": "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d",
-        "size": 150456
+        "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7",
+        "size": 158604
       },
       "regions": [
         {
@@ -574,14 +574,914 @@
           "target_address": 4283062
         },
         {
-          "address_status": "official_blob",
+          "address_status": "generated_source_entry_replacement",
           "file_offset": 23542,
-          "function": "Official Apollo bootloader bytes between the accept-set string span primitive and the source-replaced EasyLogger formatter",
-          "name": "bootloader_opaque_between_strspn_and_easylogger",
-          "output": "apollo510b/bootloader-opaque-between-strspn-and-easylogger-0x00415bf6.bin",
-          "size": 7902,
+          "function": "Generated entry redirect and NOP fill replacing the complete bootloader logging formatter core",
+          "name": "bootloader_format_core_source_replacement",
+          "output": "apollo510b/bootloader-format-core-source-replacement-0x00415bf6.bin",
+          "size": 952,
           "target": "apollo510b_internal_mram",
           "target_address": 4283382
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 24494,
+          "function": "Generated entry redirect and NOP fill replacing the complete bootloader variadic logging dispatch wrapper",
+          "name": "bootloader_log_dispatch_source_replacement",
+          "output": "apollo510b/bootloader-log-dispatch-source-replacement-0x00415fae.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284334
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 24538,
+          "function": "Authenticated bootloader logging literal-pool data between the variadic dispatch wrapper and substring-search primitive",
+          "name": "bootloader_logging_literal_pool",
+          "output": "apollo510b/bootloader-logging-literal-pool-0x00415fda.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284378
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 24570,
+          "function": "Generated entry redirect and NOP fill replacing the complete bootloader substring-search primitive",
+          "name": "bootloader_strstr_source_replacement",
+          "output": "apollo510b/bootloader-strstr-source-replacement-0x00415ffa.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284410
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 24614,
+          "function": "Authenticated two-byte self-loop and no-op return stubs between substring search and the critical-context predicate",
+          "name": "bootloader_two_byte_control_stubs",
+          "output": "apollo510b/bootloader-two-byte-control-stubs-0x00416026.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284454
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 24618,
+          "function": "Generated entry redirect and NOP fill replacing the complete bootloader critical-context predicate",
+          "name": "bootloader_critical_context_source_replacement",
+          "output": "apollo510b/bootloader-critical-context-source-replacement-0x0041602a.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284458
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 24664,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered runtime-state gate acquisition wrapper",
+          "name": "bootloader_gate_acquire_source_replacement",
+          "output": "apollo510b/bootloader-gate-acquire-source-replacement-0x00416058.bin",
+          "size": 48,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284504
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 24712,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered runtime-state and SRAM-gate mapper",
+          "name": "bootloader_gate_state_source_replacement",
+          "output": "apollo510b/bootloader-gate-state-source-replacement-0x00416088.bin",
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284552
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 24752,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered runtime-state gate release wrapper",
+          "name": "bootloader_gate_release_source_replacement",
+          "output": "apollo510b/bootloader-gate-release-source-replacement-0x004160b0.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284592
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 24808,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered critical-context value-dispatch wrapper",
+          "name": "bootloader_context_value_source_replacement",
+          "output": "apollo510b/bootloader-context-value-source-replacement-0x004160e8.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284648
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 24830,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified runtime dispatcher",
+          "name": "bootloader_runtime_dispatch_4160fe_source_replacement",
+          "output": "apollo510b/bootloader-runtime-dispatch-4160fe-source-replacement-0x004160fe.bin",
+          "size": 200,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284670
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25030,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified retained-value wrapper",
+          "name": "bootloader_runtime_value_4161c6_source_replacement",
+          "output": "apollo510b/bootloader-runtime-value-4161c6-source-replacement-0x004161c6.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284870
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25038,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified validated runtime call wrapper",
+          "name": "bootloader_runtime_call_4161ce_source_replacement",
+          "output": "apollo510b/bootloader-runtime-call-4161ce-source-replacement-0x004161ce.bin",
+          "size": 50,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284878
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25088,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified guarded runtime action wrapper",
+          "name": "bootloader_runtime_action_416200_source_replacement",
+          "output": "apollo510b/bootloader-runtime-action-416200-source-replacement-0x00416200.bin",
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284928
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25146,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified two-phase runtime transfer wrapper",
+          "name": "bootloader_runtime_transfer_41623a_source_replacement",
+          "output": "apollo510b/bootloader-runtime-transfer-41623a-source-replacement-0x0041623a.bin",
+          "size": 138,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4284986
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25284,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified masked runtime wait wrapper",
+          "name": "bootloader_runtime_wait_4162c4_source_replacement",
+          "output": "apollo510b/bootloader-runtime-wait-4162c4-source-replacement-0x004162c4.bin",
+          "size": 180,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285124
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25464,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified optional runtime notification wrapper",
+          "name": "bootloader_runtime_notify_416378_source_replacement",
+          "output": "apollo510b/bootloader-runtime-notify-416378-source-replacement-0x00416378.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285304
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25498,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified registered runtime callback adapter",
+          "name": "bootloader_runtime_callback_41639a_source_replacement",
+          "output": "apollo510b/bootloader-runtime-callback-41639a-source-replacement-0x0041639a.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285338
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25522,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified registered runtime object constructor",
+          "name": "bootloader_runtime_register_4163b2_source_replacement",
+          "output": "apollo510b/bootloader-runtime-register-4163b2-source-replacement-0x004163b2.bin",
+          "size": 232,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285362
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25754,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified guarded runtime submission wrapper",
+          "name": "bootloader_runtime_submit_41649a_source_replacement",
+          "output": "apollo510b/bootloader-runtime-submit-41649a-source-replacement-0x0041649a.bin",
+          "size": 64,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285594
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25818,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified runtime object creation wrapper",
+          "name": "bootloader_runtime_create_4164da_source_replacement",
+          "output": "apollo510b/bootloader-runtime-create-4164da-source-replacement-0x004164da.bin",
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285658
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 25902,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified event-flags set wrapper",
+          "name": "bootloader_runtime_flags_set_41652e_source_replacement",
+          "output": "apollo510b/bootloader-runtime-flags-set-41652e-source-replacement-0x0041652e.bin",
+          "size": 94,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285742
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 25996,
+          "function": "Authenticated 0x200270D4 SRAM address literal retained between the event-flags set and wait wrappers",
+          "name": "bootloader_event_flags_sram_literal",
+          "output": "apollo510b/bootloader-event-flags-sram-literal-0x0041658c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285836
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 26000,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified event-flags wait wrapper",
+          "name": "bootloader_runtime_flags_wait_416590_source_replacement",
+          "output": "apollo510b/bootloader-runtime-flags-wait-416590-source-replacement-0x00416590.bin",
+          "size": 128,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285840
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 26128,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered address-identified event-flags creation wrapper",
+          "name": "bootloader_runtime_flags_create_416610_source_replacement",
+          "output": "apollo510b/bootloader-runtime-flags-create-416610-source-replacement-0x00416610.bin",
+          "size": 154,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4285968
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 26282,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered tagged-handle acquire wrapper",
+          "name": "bootloader_runtime_handle_acquire_4166aa_source_replacement",
+          "output": "apollo510b/bootloader-runtime-handle-acquire-4166aa-source-replacement-0x004166aa.bin",
+          "size": 102,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286122
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 26384,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered tagged-handle release wrapper",
+          "name": "bootloader_runtime_handle_release_416710_source_replacement",
+          "output": "apollo510b/bootloader-runtime-handle-release-416710-source-replacement-0x00416710.bin",
+          "size": 82,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286224
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 26466,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered semaphore creation wrapper",
+          "name": "bootloader_runtime_semaphore_create_416762_source_replacement",
+          "output": "apollo510b/bootloader-runtime-semaphore-create-416762-source-replacement-0x00416762.bin",
+          "size": 180,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286306
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 26646,
+          "function": "Generated entry redirect and NOP fill replacing the complete recovered message-queue creation wrapper",
+          "name": "bootloader_runtime_queue_create_416816_source_replacement",
+          "output": "apollo510b/bootloader-runtime-queue-create-416816-source-replacement-0x00416816.bin",
+          "size": 140,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286486
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 26786,
+          "function": "Generated entry redirect and NOP fill replacing the complete CMSIS message-queue put wrapper",
+          "name": "bootloader_runtime_queue_put_4168a2_source_replacement",
+          "output": "apollo510b/bootloader-runtime-queue-put-4168a2-source-replacement-0x004168a2.bin",
+          "size": 126,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286626
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 26912,
+          "function": "Generated entry redirect and NOP fill replacing the complete CMSIS message-queue get wrapper",
+          "name": "bootloader_runtime_queue_get_416920_source_replacement",
+          "output": "apollo510b/bootloader-runtime-queue-get-416920-source-replacement-0x00416920.bin",
+          "size": 122,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286752
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 27034,
+          "function": "Authenticated ten-byte alignment and SCB ICSR literal pool retained after the message-queue wrappers",
+          "name": "bootloader_runtime_queue_io_scb_literal_pool",
+          "output": "apollo510b/bootloader-runtime-queue-io-scb-literal-pool-0x0041699a.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286874
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27044,
+          "function": "Generated entry redirect and NOP fill replacing the complete unsigned bit-width helper",
+          "name": "bootloader_runtime_bit_width_4169a4_source_replacement",
+          "output": "apollo510b/bootloader-runtime-bit-width-4169a4-source-replacement-0x004169a4.bin",
+          "size": 62,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286884
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27106,
+          "function": "Generated entry redirect and NOP fill replacing the complete trailing-zero helper",
+          "name": "bootloader_runtime_ctz_4169e2_source_replacement",
+          "output": "apollo510b/bootloader-runtime-ctz-4169e2-source-replacement-0x004169e2.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286946
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27122,
+          "function": "Generated entry redirect and NOP fill replacing the complete unsigned floor-log2 helper",
+          "name": "bootloader_runtime_log2_4169f2_source_replacement",
+          "output": "apollo510b/bootloader-runtime-log2-4169f2-source-replacement-0x004169f2.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286962
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27132,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_size_4169fc)",
+          "name": "bootloader_tlsf_block_size_4169fc_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-size-4169fc-source-replacement-0x004169fc.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286972
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27152,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_set_size_416a10)",
+          "name": "bootloader_tlsf_block_set_size_416a10_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-set-size-416a10-source-replacement-0x00416a10.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4286992
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27180,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_is_last_416a2c)",
+          "name": "bootloader_tlsf_block_is_last_416a2c_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-is-last-416a2c-source-replacement-0x00416a2c.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287020
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27200,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_is_free_416a40)",
+          "name": "bootloader_tlsf_block_is_free_416a40_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-is-free-416a40-source-replacement-0x00416a40.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287040
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27212,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_set_free_416a4c)",
+          "name": "bootloader_tlsf_block_set_free_416a4c_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-set-free-416a4c-source-replacement-0x00416a4c.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287052
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27226,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_set_used_416a5a)",
+          "name": "bootloader_tlsf_block_set_used_416a5a_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-set-used-416a5a-source-replacement-0x00416a5a.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287066
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27240,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_is_previous_free_416a68)",
+          "name": "bootloader_tlsf_block_is_previous_free_416a68_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-is-previous-free-416a68-source-replacement-0x00416a68.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287080
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27252,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_set_previous_free_416a74)",
+          "name": "bootloader_tlsf_block_set_previous_free_416a74_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-set-previous-free-416a74-source-replacement-0x00416a74.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287092
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27266,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_set_previous_used_416a82)",
+          "name": "bootloader_tlsf_block_set_previous_used_416a82_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-set-previous-used-416a82-source-replacement-0x00416a82.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287106
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27280,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_from_pointer_416a90)",
+          "name": "bootloader_tlsf_block_from_pointer_416a90_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-from-pointer-416a90-source-replacement-0x00416a90.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287120
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27292,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (block_to_pointer_416a9c)",
+          "name": "bootloader_tlsf_block_to_pointer_416a9c_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-to-pointer-416a9c-source-replacement-0x00416a9c.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287132
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27302,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 block-header primitive (offset_to_block_416aa6)",
+          "name": "bootloader_tlsf_offset_to_block_416aa6_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-offset-to-block-416aa6-source-replacement-0x00416aa6.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287142
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27306,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 physical-block/alignment helper (block_prev_416aaa)",
+          "name": "bootloader_tlsf_block_prev_416aaa_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-prev-416aaa-source-replacement-0x00416aaa.bin",
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287146
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27344,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 physical-block/alignment helper (block_next_416ad0)",
+          "name": "bootloader_tlsf_block_next_416ad0_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-next-416ad0-source-replacement-0x00416ad0.bin",
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287184
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27412,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 physical-block/alignment helper (block_link_next_416b14)",
+          "name": "bootloader_tlsf_block_link_next_416b14_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-link-next-416b14-source-replacement-0x00416b14.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287252
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27426,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 physical-block/alignment helper (block_mark_as_free_416b22)",
+          "name": "bootloader_tlsf_block_mark_as_free_416b22_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-mark-as-free-416b22-source-replacement-0x00416b22.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287266
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27448,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 physical-block/alignment helper (block_mark_as_used_416b38)",
+          "name": "bootloader_tlsf_block_mark_as_used_416b38_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-mark-as-used-416b38-source-replacement-0x00416b38.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287288
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27470,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 physical-block/alignment helper (align_up_416b4e)",
+          "name": "bootloader_tlsf_align_up_416b4e_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-align-up-416b4e-source-replacement-0x00416b4e.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287310
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27514,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 physical-block/alignment helper (align_down_416b7a)",
+          "name": "bootloader_tlsf_align_down_416b7a_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-align-down-416b7a-source-replacement-0x00416b7a.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287354
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27556,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 physical-block/alignment helper (align_pointer_416ba4)",
+          "name": "bootloader_tlsf_align_pointer_416ba4_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-align-pointer-416ba4-source-replacement-0x00416ba4.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287396
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27598,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 request-size/class-mapping helper (adjust_request_size_416bce)",
+          "name": "bootloader_tlsf_adjust_request_size_416bce_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-adjust-request-size-416bce-source-replacement-0x00416bce.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287438
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27640,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 request-size/class-mapping helper (mapping_insert_416bf8)",
+          "name": "bootloader_tlsf_mapping_insert_416bf8_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-mapping-insert-416bf8-source-replacement-0x00416bf8.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287480
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27686,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 request-size/class-mapping helper (mapping_search_416c26)",
+          "name": "bootloader_tlsf_mapping_search_416c26_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-mapping-search-416c26-source-replacement-0x00416c26.bin",
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287526
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27726,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 free-list helper (search_suitable_block_416c4e)",
+          "name": "bootloader_tlsf_search_suitable_block_416c4e_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-search-suitable-block-416c4e-source-replacement-0x00416c4e.bin",
+          "size": 120,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287566
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27846,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 free-list helper (remove_free_block_416cc6)",
+          "name": "bootloader_tlsf_remove_free_block_416cc6_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-remove-free-block-416cc6-source-replacement-0x00416cc6.bin",
+          "size": 150,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287686
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 27996,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 free-list helper (insert_free_block_416d5c)",
+          "name": "bootloader_tlsf_insert_free_block_416d5c_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-insert-free-block-416d5c-source-replacement-0x00416d5c.bin",
+          "size": 168,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4287836
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28164,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_remove_416e04)",
+          "name": "bootloader_tlsf_block_remove_416e04_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-remove-416e04-source-replacement-0x00416e04.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288004
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28198,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_insert_416e26)",
+          "name": "bootloader_tlsf_block_insert_416e26_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-insert-416e26-source-replacement-0x00416e26.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288038
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28232,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_can_split_416e48)",
+          "name": "bootloader_tlsf_block_can_split_416e48_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-can-split-416e48-source-replacement-0x00416e48.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288072
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28256,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_split_416e60)",
+          "name": "bootloader_tlsf_block_split_416e60_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-split-416e60-source-replacement-0x00416e60.bin",
+          "size": 192,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288096
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28448,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_absorb_416f20)",
+          "name": "bootloader_tlsf_block_absorb_416f20_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-absorb-416f20-source-replacement-0x00416f20.bin",
+          "size": 66,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288288
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28514,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_merge_previous_416f62)",
+          "name": "bootloader_tlsf_block_merge_previous_416f62_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-merge-previous-416f62-source-replacement-0x00416f62.bin",
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288354
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28614,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_merge_next_416fc6)",
+          "name": "bootloader_tlsf_block_merge_next_416fc6_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-merge-next-416fc6-source-replacement-0x00416fc6.bin",
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288454
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28714,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_trim_free_41702a)",
+          "name": "bootloader_tlsf_block_trim_free_41702a_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-trim-free-41702a-source-replacement-0x0041702a.bin",
+          "size": 82,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288554
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28796,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_locate_free_41707c)",
+          "name": "bootloader_tlsf_block_locate_free_41707c_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-locate-free-41707c-source-replacement-0x0041707c.bin",
+          "size": 98,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288636
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28894,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 allocator helper (block_prepare_used_4170de)",
+          "name": "bootloader_tlsf_block_prepare_used_4170de_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-block-prepare-used-4170de-source-replacement-0x004170de.bin",
+          "size": 62,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288734
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 28956,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 public/control entry (control_construct_41711c)",
+          "name": "bootloader_tlsf_control_construct_41711c_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-control-construct-41711c-source-replacement-0x0041711c.bin",
+          "size": 48,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288796
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29004,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 public/control entry (pool_overhead_41714c)",
+          "name": "bootloader_tlsf_pool_overhead_41714c_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-pool-overhead-41714c-source-replacement-0x0041714c.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288844
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29020,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 public/control entry (add_pool_41715c)",
+          "name": "bootloader_tlsf_add_pool_41715c_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-add-pool-41715c-source-replacement-0x0041715c.bin",
+          "size": 172,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4288860
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29192,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 public/control entry (create_417208)",
+          "name": "bootloader_tlsf_create_417208_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-create-417208-source-replacement-0x00417208.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289032
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29248,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 public/control entry (create_with_pool_417240)",
+          "name": "bootloader_tlsf_create_with_pool_417240_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-create-with-pool-417240-source-replacement-0x00417240.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289088
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29290,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 public/control entry (malloc_41726a)",
+          "name": "bootloader_tlsf_malloc_41726a_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-malloc-41726a-source-replacement-0x0041726a.bin",
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289130
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29328,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated TLSF v3.1 public/control entry (free_417290)",
+          "name": "bootloader_tlsf_free_417290_source_replacement",
+          "output": "apollo510b/bootloader-tlsf-free-417290-source-replacement-0x00417290.bin",
+          "size": 74,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289168
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 29402,
+          "function": "Authenticated TLSF/EasyLogger transition literals and alignment",
+          "name": "bootloader_tlsf_easylogger_transition_data_0x004172da",
+          "output": "apollo510b/bootloader-tlsf-easylogger-transition-data-0x004172da-0x004172da.bin",
+          "size": 98,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289242
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29500,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (init_41733c)",
+          "name": "bootloader_easylogger_init_41733c_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-init-41733c-source-replacement-0x0041733c.bin",
+          "size": 86,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289340
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29586,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (start_417392)",
+          "name": "bootloader_easylogger_start_417392_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-start-417392-source-replacement-0x00417392.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289426
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29642,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (set_output_enabled_4173ca)",
+          "name": "bootloader_easylogger_set_output_enabled_4173ca_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-set-output-enabled-4173ca-source-replacement-0x004173ca.bin",
+          "size": 110,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289482
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29752,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (set_text_color_enabled_417438)",
+          "name": "bootloader_easylogger_set_text_color_enabled_417438_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-set-text-color-enabled-417438-source-replacement-0x00417438.bin",
+          "size": 110,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289592
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29862,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (set_fmt_4174a6)",
+          "name": "bootloader_easylogger_set_fmt_4174a6_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-set-fmt-4174a6-source-replacement-0x004174a6.bin",
+          "size": 106,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289702
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 29968,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (set_filter_lvl_417510)",
+          "name": "bootloader_easylogger_set_filter_lvl_417510_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-set-filter-lvl-417510-source-replacement-0x00417510.bin",
+          "size": 96,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289808
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 30064,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (output_lock_417570)",
+          "name": "bootloader_easylogger_output_lock_417570_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-output-lock-417570-source-replacement-0x00417570.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289904
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 30098,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (output_unlock_417592)",
+          "name": "bootloader_easylogger_output_unlock_417592_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-output-unlock-417592-source-replacement-0x00417592.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289938
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 30132,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (filter_tag_lvl_default_4175b4)",
+          "name": "bootloader_easylogger_filter_tag_lvl_default_4175b4_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-filter-tag-lvl-default-4175b4-source-replacement-0x004175b4.bin",
+          "size": 86,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4289972
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 30218,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger control entry (get_filter_tag_lvl_41760a)",
+          "name": "bootloader_easylogger_get_filter_tag_lvl_41760a_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-get-filter-tag-lvl-41760a-source-replacement-0x0041760a.bin",
+          "size": 196,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4290058
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 30414,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger output entry (output_4176ce)",
+          "name": "bootloader_easylogger_output_4176ce_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-output-4176ce-source-replacement-0x004176ce.bin",
+          "size": 1026,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4290254
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 31440,
+          "function": "Authenticated EasyLogger CSI-start literal and alignment bytes",
+          "name": "bootloader_easylogger_csi_start_literal_0x00417ad0",
+          "output": "apollo510b/bootloader-easylogger-csi-start-literal-0x00417ad0-0x00417ad0.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4291280
         },
         {
           "address_status": "generated_source_entry_replacement",
@@ -624,14 +1524,154 @@
           "target_address": 4291426
         },
         {
-          "address_status": "official_blob",
+          "address_status": "generated_source_entry_replacement",
           "file_offset": 31612,
-          "function": "Official Apollo bootloader bytes between the source-replaced EasyLogger format predicates and bounded string-copy helper",
-          "name": "bootloader_opaque_between_easylogger_format_and_copy",
-          "output": "apollo510b/bootloader-opaque-0x00417b7c.bin",
-          "size": 13788,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger output-lock control entry (output_lock_enabled_417b7c)",
+          "name": "bootloader_easylogger_output_lock_enabled_417b7c_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-output-lock-enabled-417b7c-source-replacement-0x00417b7c.bin",
+          "size": 60,
           "target": "apollo510b_internal_mram",
           "target_address": 4291452
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 31672,
+          "function": "Authenticated bootloader compatibility bytes retained after the EasyLogger output-lock enable entry and before the boot-port helpers",
+          "name": "bootloader_easylogger_port_transition_0x00417bb8",
+          "output": "apollo510b/bootloader-easylogger-port-transition-0x00417bb8-0x00417bb8.bin",
+          "size": 10896,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4291512
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42568,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (mutex_create_41a648)",
+          "name": "bootloader_easylogger_mutex_create_41a648_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-mutex-create-41a648-source-replacement-0x0041a648.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302408
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42588,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (mutex_acquire_41a65c)",
+          "name": "bootloader_easylogger_mutex_acquire_41a65c_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-mutex-acquire-41a65c-source-replacement-0x0041a65c.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302428
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42610,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (mutex_release_41a672)",
+          "name": "bootloader_easylogger_mutex_release_41a672_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-mutex-release-41a672-source-replacement-0x0041a672.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302450
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42628,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (port_init_41a684)",
+          "name": "bootloader_easylogger_port_init_41a684_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-port-init-41a684-source-replacement-0x0041a684.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302468
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42642,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (port_output_41a692)",
+          "name": "bootloader_easylogger_port_output_41a692_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-port-output-41a692-source-replacement-0x0041a692.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302482
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42650,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (port_output_lock_41a69a)",
+          "name": "bootloader_easylogger_port_output_lock_41a69a_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-port-output-lock-41a69a-source-replacement-0x0041a69a.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302490
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42658,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (port_output_unlock_41a6a2)",
+          "name": "bootloader_easylogger_port_output_unlock_41a6a2_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-port-output-unlock-41a6a2-source-replacement-0x0041a6a2.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302498
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42666,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (port_get_time_41a6aa)",
+          "name": "bootloader_easylogger_port_get_time_41a6aa_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-port-get-time-41a6aa-source-replacement-0x0041a6aa.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302506
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42690,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (task_name_41a6c2)",
+          "name": "bootloader_easylogger_task_name_41a6c2_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-task-name-41a6c2-source-replacement-0x0041a6c2.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302530
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 42714,
+          "function": "Authenticated EasyLogger percent-d format, mutex-handle, mutex-attribute, time-buffer, and unknown-name pointer literals",
+          "name": "bootloader_easylogger_port_literals_0x0041a6da",
+          "output": "apollo510b/bootloader-easylogger-port-literals-0x0041a6da-0x0041a6da.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302554
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42736,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (port_get_p_info_41a6f0)",
+          "name": "bootloader_easylogger_port_get_p_info_41a6f0_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-port-get-p-info-41a6f0-source-replacement-0x0041a6f0.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302576
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 42744,
+          "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger boot-port entry (port_get_t_info_41a6f8)",
+          "name": "bootloader_easylogger_port_get_t_info_41a6f8_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-port-get-t-info-41a6f8-source-replacement-0x0041a6f8.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302584
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 42752,
+          "function": "Authenticated bootloader compatibility bytes retained after the EasyLogger boot-port helpers and before the bounded-copy helper",
+          "name": "bootloader_easylogger_post_port_transition_0x0041a700",
+          "output": "apollo510b/bootloader-easylogger-post-port-transition-0x0041a700-0x0041a700.bin",
+          "size": 2648,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4302592
         },
         {
           "address_status": "generated_source_entry_replacement",
@@ -646,12 +1686,182 @@
         {
           "address_status": "official_blob",
           "file_offset": 45562,
-          "function": "Official Apollo bootloader bytes after the source-replaced EasyLogger copy helper and before the AmbiqSuite MSPI interrupt-clear leaf",
-          "name": "bootloader_opaque_after_easylogger_strcpy",
-          "output": "apollo510b/bootloader-opaque-0x0041b1fa.bin",
-          "size": 45836,
+          "function": "Authenticated bootloader compatibility bytes retained between the bounded-copy helper and EasyLogger channel-one output driver",
+          "name": "bootloader_easylogger_pre_driver_transition_0x0041b1fa",
+          "output": "apollo510b/bootloader-easylogger-pre-driver-transition-0x0041b1fa-0x0041b1fa.bin",
+          "size": 1626,
           "target": "apollo510b_internal_mram",
           "target_address": 4305402
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 47188,
+          "function": "Generated entry redirect and NOP fill replacing the complete G2 EasyLogger channel-one output driver",
+          "name": "bootloader_easylogger_driver_output_41b854_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-driver-output-41b854-source-replacement-0x0041b854.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4307028
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 47202,
+          "function": "Authenticated bootloader compatibility bytes retained between the EasyLogger output driver and four-channel transfer routine",
+          "name": "bootloader_easylogger_pre_channel_transport_0x0041b862",
+          "output": "apollo510b/bootloader-easylogger-pre-channel-transport-0x0041b862-0x0041b862.bin",
+          "size": 16566,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4307042
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 63768,
+          "function": "Generated entry redirect and NOP fill replacing the complete G2 four-channel transfer routine",
+          "name": "bootloader_easylogger_channel_write_41f918_source_replacement",
+          "output": "apollo510b/bootloader-easylogger-channel-write-41f918-source-replacement-0x0041f918.bin",
+          "size": 158,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323608
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 63926,
+          "function": "Authenticated vector and literal island retained after the EasyLogger channel transport",
+          "name": "bootloader_easylogger_transport_vector_literal_island_0x0041f9b6",
+          "output": "apollo510b/bootloader-easylogger-transport-vector-literal-island-0x0041f9b6-0x0041f9b6.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323766
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 63960,
+          "function": "Generated entry redirect and NOP fill replacing the complete millisecond-to-microsecond delay wrapper",
+          "name": "bootloader_delay_milliseconds_41f9d8_source_replacement",
+          "output": "apollo510b/bootloader-delay-milliseconds-41f9d8-source-replacement-0x0041f9d8.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323800
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 63974,
+          "function": "Generated entry redirect and NOP fill replacing the complete raw boot delay wrapper",
+          "name": "bootloader_delay_41f9e6_source_replacement",
+          "output": "apollo510b/bootloader-delay-41f9e6-source-replacement-0x0041f9e6.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323814
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 63982,
+          "function": "Authenticated two-byte alignment retained before the initializer priority comparator",
+          "name": "bootloader_initializer_comparator_alignment_0x0041f9ee",
+          "output": "apollo510b/bootloader-initializer-comparator-alignment-0x0041f9ee-0x0041f9ee.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323822
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 63984,
+          "function": "Generated entry redirect and NOP fill replacing the complete initializer-record priority comparator",
+          "name": "bootloader_initializer_priority_compare_41f9f0_source_replacement",
+          "output": "apollo510b/bootloader-initializer-priority-compare-41f9f0-source-replacement-0x0041f9f0.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323824
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 63992,
+          "function": "Generated entry redirect and NOP fill replacing the complete capped initializer-table runner",
+          "name": "bootloader_run_initializers_41f9f8_source_replacement",
+          "output": "apollo510b/bootloader-run-initializers-41f9f8-source-replacement-0x0041f9f8.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323832
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 64064,
+          "function": "Authenticated initializer-table pointers and alignment retained before the boot-platform setup entry",
+          "name": "bootloader_pre_platform_setup_literals_0x0041fa40",
+          "output": "apollo510b/bootloader-pre-platform-setup-literals-0x0041fa40-0x0041fa40.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323904
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 64080,
+          "function": "Generated entry redirect and NOP fill replacing the complete guarded teardown, configuration submission, and channel setup entry",
+          "name": "bootloader_platform_setup_41fa50_source_replacement",
+          "output": "apollo510b/bootloader-platform-setup-41fa50-source-replacement-0x0041fa50.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323920
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 64152,
+          "function": "Generated entry redirect and NOP fill replacing the complete guarded two-stage bootloader teardown entry",
+          "name": "bootloader_guarded_teardown_41fa98_source_replacement",
+          "output": "apollo510b/bootloader-guarded-teardown-41fa98-source-replacement-0x0041fa98.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323992
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 64208,
+          "function": "Authenticated guard, platform-configuration, and pin-configuration pointer literals retained after guarded teardown",
+          "name": "bootloader_guarded_teardown_literal_pool_0x0041fad0",
+          "output": "apollo510b/bootloader-guarded-teardown-literal-pool-0x0041fad0-0x0041fad0.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324048
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 64220,
+          "function": "Generated entry redirect and NOP fill replacing the complete two-bank pin-group configuration dispatcher",
+          "name": "bootloader_pin_groups_41fadc_source_replacement",
+          "output": "apollo510b/bootloader-pin-groups-41fadc-source-replacement-0x0041fadc.bin",
+          "size": 538,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324060
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 64758,
+          "function": "Authenticated pin-configuration and allocator literals retained between the pin-group dispatcher and TLSF pool initializer",
+          "name": "bootloader_pin_groups_post_dispatch_literal_pool_0x0041fcf6",
+          "output": "apollo510b/bootloader-pin-groups-post-dispatch-literal-pool-0x0041fcf6-0x0041fcf6.bin",
+          "size": 122,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324598
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 64880,
+          "function": "Generated entry redirect and NOP fill replacing the complete TLSF pool initialization and handle-publication entry",
+          "name": "bootloader_allocator_init_41fd70_source_replacement",
+          "output": "apollo510b/bootloader-allocator-init-41fd70-source-replacement-0x0041fd70.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324720
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 64936,
+          "function": "Authenticated bootloader compatibility bytes retained after the source-replaced allocator initializer and before the AmbiqSuite MSPI interrupt-clear leaf",
+          "name": "bootloader_opaque_after_easylogger_transport",
+          "output": "apollo510b/bootloader-opaque-after-easylogger-transport-0x0041fda8.bin",
+          "size": 26462,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324776
         },
         {
           "address_status": "generated_source_entry_replacement",
@@ -1122,6 +2332,1106 @@
           "size": 320,
           "target": "apollo510b_internal_mram",
           "target_address": 4409976
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 150456,
+          "function": "Compiled clean-room bootloader logging formatter core",
+          "name": "bootloader_format_core_source_leaf",
+          "output": "apollo510b/bootloader-format-core-source-leaf-0x00434bb8.bin",
+          "size": 968,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4410296
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151424,
+          "function": "Compiled clean-room bootloader variadic logging dispatch wrapper",
+          "name": "bootloader_log_dispatch_source_leaf",
+          "output": "apollo510b/bootloader-log-dispatch-source-leaf-0x00434f80.bin",
+          "size": 60,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411264
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151484,
+          "function": "Compiled clean-room dependency-free substring-search primitive",
+          "name": "bootloader_strstr_source_leaf",
+          "output": "apollo510b/bootloader-strstr-source-leaf-0x00434fbc.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411324
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151530,
+          "function": "Compiled clean-room IPSR and interrupt-mask context predicate",
+          "name": "bootloader_critical_context_source_leaf",
+          "output": "apollo510b/bootloader-critical-context-source-leaf-0x00434fea.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411370
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151576,
+          "function": "Compiled clean-room recovered runtime-state gate acquisition wrapper",
+          "name": "bootloader_gate_acquire_source_leaf",
+          "output": "apollo510b/bootloader-gate-acquire-source-leaf-0x00435018.bin",
+          "size": 48,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411416
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151624,
+          "function": "Compiled clean-room recovered runtime-state and SRAM-gate mapper",
+          "name": "bootloader_gate_state_source_leaf",
+          "output": "apollo510b/bootloader-gate-state-source-leaf-0x00435048.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411464
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151660,
+          "function": "Compiled clean-room recovered runtime-state gate release wrapper",
+          "name": "bootloader_gate_release_source_leaf",
+          "output": "apollo510b/bootloader-gate-release-source-leaf-0x0043506c.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411500
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151716,
+          "function": "Compiled clean-room recovered critical-context value dispatcher",
+          "name": "bootloader_context_value_source_leaf",
+          "output": "apollo510b/bootloader-context-value-source-leaf-0x004350a4.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411556
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151740,
+          "function": "Compiled clean-room recovered address-identified runtime dispatcher",
+          "name": "bootloader_runtime_dispatch_4160fe_source_leaf",
+          "output": "apollo510b/bootloader-runtime-dispatch-4160fe-source-leaf-0x004350bc.bin",
+          "size": 166,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411580
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151906,
+          "function": "Compiled clean-room recovered address-identified retained-value wrapper",
+          "name": "bootloader_runtime_value_4161c6_source_leaf",
+          "output": "apollo510b/bootloader-runtime-value-4161c6-source-leaf-0x00435162.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411746
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151910,
+          "function": "Compiled clean-room recovered address-identified validated runtime call wrapper",
+          "name": "bootloader_runtime_call_4161ce_source_leaf",
+          "output": "apollo510b/bootloader-runtime-call-4161ce-source-leaf-0x00435166.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411750
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 151954,
+          "function": "Compiled clean-room recovered address-identified guarded runtime action wrapper",
+          "name": "bootloader_runtime_action_416200_source_leaf",
+          "output": "apollo510b/bootloader-runtime-action-416200-source-leaf-0x00435192.bin",
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411794
+        },
+        {
+          "address_status": "generated_alignment",
+          "file_offset": 152006,
+          "function": "Generated two-byte alignment before the runtime transfer leaf",
+          "name": "bootloader_runtime_transfer_41623a_alignment_padding",
+          "output": "apollo510b/bootloader-runtime-transfer-41623a-alignment-padding-0x004351c6.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411846
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152008,
+          "function": "Compiled clean-room recovered address-identified two-phase runtime transfer wrapper",
+          "name": "bootloader_runtime_transfer_41623a_source_leaf",
+          "output": "apollo510b/bootloader-runtime-transfer-41623a-source-leaf-0x004351c8.bin",
+          "size": 128,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411848
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152136,
+          "function": "Compiled clean-room recovered address-identified masked runtime wait wrapper",
+          "name": "bootloader_runtime_wait_4162c4_source_leaf",
+          "output": "apollo510b/bootloader-runtime-wait-4162c4-source-leaf-0x00435248.bin",
+          "size": 178,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4411976
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152314,
+          "function": "Compiled clean-room recovered address-identified optional runtime notification wrapper",
+          "name": "bootloader_runtime_notify_416378_source_leaf",
+          "output": "apollo510b/bootloader-runtime-notify-416378-source-leaf-0x004352fa.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412154
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152342,
+          "function": "Compiled clean-room recovered address-identified registered runtime callback adapter",
+          "name": "bootloader_runtime_callback_41639a_source_leaf",
+          "output": "apollo510b/bootloader-runtime-callback-41639a-source-leaf-0x00435316.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412182
+        },
+        {
+          "address_status": "generated_alignment",
+          "file_offset": 152366,
+          "function": "Generated two-byte alignment before the registered runtime object constructor",
+          "name": "bootloader_runtime_register_4163b2_alignment_padding",
+          "output": "apollo510b/bootloader-runtime-register-4163b2-alignment-padding-0x0043532e.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412206
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152368,
+          "function": "Compiled clean-room recovered address-identified registered runtime object constructor",
+          "name": "bootloader_runtime_register_4163b2_source_leaf",
+          "output": "apollo510b/bootloader-runtime-register-4163b2-source-leaf-0x00435330.bin",
+          "size": 180,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412208
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152548,
+          "function": "Compiled clean-room recovered address-identified guarded runtime submission wrapper",
+          "name": "bootloader_runtime_submit_41649a_source_leaf",
+          "output": "apollo510b/bootloader-runtime-submit-41649a-source-leaf-0x004353e4.bin",
+          "size": 54,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412388
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152602,
+          "function": "Compiled clean-room recovered address-identified runtime object creation wrapper",
+          "name": "bootloader_runtime_create_4164da_source_leaf",
+          "output": "apollo510b/bootloader-runtime-create-4164da-source-leaf-0x0043541a.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412442
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152648,
+          "function": "Compiled clean-room recovered address-identified event-flags set wrapper",
+          "name": "bootloader_runtime_flags_set_41652e_source_leaf",
+          "output": "apollo510b/bootloader-runtime-flags-set-41652e-source-leaf-0x00435448.bin",
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412488
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152732,
+          "function": "Compiled clean-room recovered address-identified event-flags wait wrapper",
+          "name": "bootloader_runtime_flags_wait_416590_source_leaf",
+          "output": "apollo510b/bootloader-runtime-flags-wait-416590-source-leaf-0x0043549c.bin",
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412572
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152832,
+          "function": "Compiled clean-room recovered address-identified event-flags creation wrapper",
+          "name": "bootloader_runtime_flags_create_416610_source_leaf",
+          "output": "apollo510b/bootloader-runtime-flags-create-416610-source-leaf-0x00435500.bin",
+          "size": 82,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412672
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152914,
+          "function": "Compiled clean-room recovered address-identified tagged-handle acquire wrapper",
+          "name": "bootloader_runtime_handle_acquire_4166aa_source_leaf",
+          "output": "apollo510b/bootloader-runtime-handle-acquire-4166aa-source-leaf-0x00435552.bin",
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412754
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 152982,
+          "function": "Compiled clean-room recovered address-identified tagged-handle release wrapper",
+          "name": "bootloader_runtime_handle_release_416710_source_leaf",
+          "output": "apollo510b/bootloader-runtime-handle-release-416710-source-leaf-0x00435596.bin",
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412822
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153040,
+          "function": "Compiled clean-room recovered address-identified semaphore creation wrapper",
+          "name": "bootloader_runtime_semaphore_create_416762_source_leaf",
+          "output": "apollo510b/bootloader-runtime-semaphore-create-416762-source-leaf-0x004355d0.bin",
+          "size": 140,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4412880
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153180,
+          "function": "Compiled clean-room recovered address-identified message-queue creation wrapper",
+          "name": "bootloader_runtime_queue_create_416816_source_leaf",
+          "output": "apollo510b/bootloader-runtime-queue-create-416816-source-leaf-0x0043565c.bin",
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413020
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153280,
+          "function": "Compiled CMSIS-FreeRTOS message-queue put wrapper over retained queue providers",
+          "name": "bootloader_runtime_queue_put_4168a2_source_leaf",
+          "output": "apollo510b/bootloader-runtime-queue-put-4168a2-source-leaf-0x004356c0.bin",
+          "size": 112,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413120
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153392,
+          "function": "Compiled CMSIS-FreeRTOS message-queue get wrapper over retained queue providers",
+          "name": "bootloader_runtime_queue_get_416920_source_leaf",
+          "output": "apollo510b/bootloader-runtime-queue-get-416920-source-leaf-0x00435730.bin",
+          "size": 108,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413232
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153500,
+          "function": "Compiled clean-room unsigned bit-width helper",
+          "name": "bootloader_runtime_bit_width_4169a4_source_leaf",
+          "output": "apollo510b/bootloader-runtime-bit-width-4169a4-source-leaf-0x0043579c.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413340
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153514,
+          "function": "Compiled clean-room trailing-zero helper",
+          "name": "bootloader_runtime_ctz_4169e2_source_leaf",
+          "output": "apollo510b/bootloader-runtime-ctz-4169e2-source-leaf-0x004357aa.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413354
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153528,
+          "function": "Compiled clean-room unsigned floor-log2 helper",
+          "name": "bootloader_runtime_log2_4169f2_source_leaf",
+          "output": "apollo510b/bootloader-runtime-log2-4169f2-source-leaf-0x004357b8.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413368
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153538,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_size_4169fc)",
+          "name": "bootloader_tlsf_block_size_4169fc_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-size-4169fc-source-leaf-0x004357c2.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413378
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153546,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_set_size_416a10)",
+          "name": "bootloader_tlsf_block_set_size_416a10_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-set-size-416a10-source-leaf-0x004357ca.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413386
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153558,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_is_last_416a2c)",
+          "name": "bootloader_tlsf_block_is_last_416a2c_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-is-last-416a2c-source-leaf-0x004357d6.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413398
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153568,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_is_free_416a40)",
+          "name": "bootloader_tlsf_block_is_free_416a40_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-is-free-416a40-source-leaf-0x004357e0.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413408
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153576,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_set_free_416a4c)",
+          "name": "bootloader_tlsf_block_set_free_416a4c_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-set-free-416a4c-source-leaf-0x004357e8.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413416
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153586,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_set_used_416a5a)",
+          "name": "bootloader_tlsf_block_set_used_416a5a_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-set-used-416a5a-source-leaf-0x004357f2.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413426
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153596,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_is_previous_free_416a68)",
+          "name": "bootloader_tlsf_block_is_previous_free_416a68_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-is-previous-free-416a68-source-leaf-0x004357fc.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413436
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153604,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_set_previous_free_416a74)",
+          "name": "bootloader_tlsf_block_set_previous_free_416a74_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-set-previous-free-416a74-source-leaf-0x00435804.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413444
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153614,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_set_previous_used_416a82)",
+          "name": "bootloader_tlsf_block_set_previous_used_416a82_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-set-previous-used-416a82-source-leaf-0x0043580e.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413454
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153624,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_from_pointer_416a90)",
+          "name": "bootloader_tlsf_block_from_pointer_416a90_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-from-pointer-416a90-source-leaf-0x00435818.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413464
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153628,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (block_to_pointer_416a9c)",
+          "name": "bootloader_tlsf_block_to_pointer_416a9c_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-to-pointer-416a9c-source-leaf-0x0043581c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413468
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153632,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 block-header primitive (offset_to_block_416aa6)",
+          "name": "bootloader_tlsf_offset_to_block_416aa6_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-offset-to-block-416aa6-source-leaf-0x00435820.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413472
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153636,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 physical-block/alignment helper (block_prev_416aaa)",
+          "name": "bootloader_tlsf_block_prev_416aaa_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-prev-416aaa-source-leaf-0x00435824.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413476
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153672,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 physical-block/alignment helper (block_next_416ad0)",
+          "name": "bootloader_tlsf_block_next_416ad0_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-next-416ad0-source-leaf-0x00435848.bin",
+          "size": 60,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413512
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153732,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 physical-block/alignment helper (block_link_next_416b14)",
+          "name": "bootloader_tlsf_block_link_next_416b14_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-link-next-416b14-source-leaf-0x00435884.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413572
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153744,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 physical-block/alignment helper (block_mark_as_free_416b22)",
+          "name": "bootloader_tlsf_block_mark_as_free_416b22_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-mark-as-free-416b22-source-leaf-0x00435890.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413584
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153766,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 physical-block/alignment helper (block_mark_as_used_416b38)",
+          "name": "bootloader_tlsf_block_mark_as_used_416b38_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-mark-as-used-416b38-source-leaf-0x004358a6.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413606
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153788,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 physical-block/alignment helper (align_up_416b4e)",
+          "name": "bootloader_tlsf_align_up_416b4e_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-align-up-416b4e-source-leaf-0x004358bc.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413628
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153832,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 physical-block/alignment helper (align_down_416b7a)",
+          "name": "bootloader_tlsf_align_down_416b7a_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-align-down-416b7a-source-leaf-0x004358e8.bin",
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413672
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153872,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 physical-block/alignment helper (align_pointer_416ba4)",
+          "name": "bootloader_tlsf_align_pointer_416ba4_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-align-pointer-416ba4-source-leaf-0x00435910.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413712
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153916,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 request-size/class-mapping helper (adjust_request_size_416bce)",
+          "name": "bootloader_tlsf_adjust_request_size_416bce_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-adjust-request-size-416bce-source-leaf-0x0043593c.bin",
+          "size": 30,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413756
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153946,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 request-size/class-mapping helper (mapping_insert_416bf8)",
+          "name": "bootloader_tlsf_mapping_insert_416bf8_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-mapping-insert-416bf8-source-leaf-0x0043595a.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413786
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 153988,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 request-size/class-mapping helper (mapping_search_416c26)",
+          "name": "bootloader_tlsf_mapping_search_416c26_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-mapping-search-416c26-source-leaf-0x00435984.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413828
+        },
+        {
+          "address_status": "generated_alignment",
+          "file_offset": 154034,
+          "function": "Generated alignment before the TLSF v3.1 free-list helper cluster",
+          "name": "bootloader_tlsf_free_list_alignment_padding",
+          "output": "apollo510b/bootloader-tlsf-free-list-alignment-padding-0x004359b2.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413874
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154036,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 free-list helper (search_suitable_block_416c4e)",
+          "name": "bootloader_tlsf_search_suitable_block_416c4e_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-search-suitable-block-416c4e-source-leaf-0x004359b4.bin",
+          "size": 112,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413876
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154148,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 free-list helper (remove_free_block_416cc6)",
+          "name": "bootloader_tlsf_remove_free_block_416cc6_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-remove-free-block-416cc6-source-leaf-0x00435a24.bin",
+          "size": 124,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4413988
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154272,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 free-list helper (insert_free_block_416d5c)",
+          "name": "bootloader_tlsf_insert_free_block_416d5c_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-insert-free-block-416d5c-source-leaf-0x00435aa0.bin",
+          "size": 148,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414112
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154420,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_remove_416e04)",
+          "name": "bootloader_tlsf_block_remove_416e04_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-remove-416e04-source-leaf-0x00435b34.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414260
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154454,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_insert_416e26)",
+          "name": "bootloader_tlsf_block_insert_416e26_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-insert-416e26-source-leaf-0x00435b56.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414294
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154488,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_can_split_416e48)",
+          "name": "bootloader_tlsf_block_can_split_416e48_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-can-split-416e48-source-leaf-0x00435b78.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414328
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154508,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_split_416e60)",
+          "name": "bootloader_tlsf_block_split_416e60_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-split-416e60-source-leaf-0x00435b8c.bin",
+          "size": 164,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414348
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154672,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_absorb_416f20)",
+          "name": "bootloader_tlsf_block_absorb_416f20_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-absorb-416f20-source-leaf-0x00435c30.bin",
+          "size": 60,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414512
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154732,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_merge_previous_416f62)",
+          "name": "bootloader_tlsf_block_merge_previous_416f62_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-merge-previous-416f62-source-leaf-0x00435c6c.bin",
+          "size": 96,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414572
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154828,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_merge_next_416fc6)",
+          "name": "bootloader_tlsf_block_merge_next_416fc6_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-merge-next-416fc6-source-leaf-0x00435ccc.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414668
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 154916,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_trim_free_41702a)",
+          "name": "bootloader_tlsf_block_trim_free_41702a_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-trim-free-41702a-source-leaf-0x00435d24.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414756
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155004,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_locate_free_41707c)",
+          "name": "bootloader_tlsf_block_locate_free_41707c_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-locate-free-41707c-source-leaf-0x00435d7c.bin",
+          "size": 96,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414844
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155100,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 allocator helper (block_prepare_used_4170de)",
+          "name": "bootloader_tlsf_block_prepare_used_4170de_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-block-prepare-used-4170de-source-leaf-0x00435ddc.bin",
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4414940
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155168,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 public/control entry (control_construct_41711c)",
+          "name": "bootloader_tlsf_control_construct_41711c_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-control-construct-41711c-source-leaf-0x00435e20.bin",
+          "size": 48,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415008
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155216,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 public/control entry (pool_overhead_41714c)",
+          "name": "bootloader_tlsf_pool_overhead_41714c_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-pool-overhead-41714c-source-leaf-0x00435e50.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415056
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155220,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 public/control entry (add_pool_41715c)",
+          "name": "bootloader_tlsf_add_pool_41715c_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-add-pool-41715c-source-leaf-0x00435e54.bin",
+          "size": 140,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415060
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155360,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 public/control entry (create_417208)",
+          "name": "bootloader_tlsf_create_417208_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-create-417208-source-leaf-0x00435ee0.bin",
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415200
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155400,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 public/control entry (create_with_pool_417240)",
+          "name": "bootloader_tlsf_create_with_pool_417240_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-create-with-pool-417240-source-leaf-0x00435f08.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415240
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155428,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 public/control entry (malloc_41726a)",
+          "name": "bootloader_tlsf_malloc_41726a_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-malloc-41726a-source-leaf-0x00435f24.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415268
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155464,
+          "function": "Compiled BSD-3-Clause TLSF v3.1 public/control entry (free_417290)",
+          "name": "bootloader_tlsf_free_417290_source_leaf",
+          "output": "apollo510b/bootloader-tlsf-free-417290-source-leaf-0x00435f48.bin",
+          "size": 80,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415304
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155544,
+          "function": "Compiled MIT EasyLogger control entry (set_output_enabled_4173ca)",
+          "name": "bootloader_easylogger_set_output_enabled_4173ca_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-set-output-enabled-4173ca-source-leaf-0x00435f98.bin",
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415384
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155644,
+          "function": "Compiled MIT EasyLogger control entry (set_text_color_enabled_417438)",
+          "name": "bootloader_easylogger_set_text_color_enabled_417438_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-set-text-color-enabled-417438-source-leaf-0x00435ffc.bin",
+          "size": 104,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415484
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155748,
+          "function": "Compiled MIT EasyLogger control entry (set_filter_lvl_417510)",
+          "name": "bootloader_easylogger_set_filter_lvl_417510_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-set-filter-lvl-417510-source-leaf-0x00436064.bin",
+          "size": 104,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415588
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155852,
+          "function": "Compiled MIT EasyLogger control entry (filter_tag_lvl_default_4175b4)",
+          "name": "bootloader_easylogger_filter_tag_lvl_default_4175b4_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-filter-tag-lvl-default-4175b4-source-leaf-0x004360cc.bin",
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415692
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155904,
+          "function": "Compiled MIT EasyLogger control entry (output_lock_417570)",
+          "name": "bootloader_easylogger_output_lock_417570_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-output-lock-417570-source-leaf-0x00436100.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415744
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155936,
+          "function": "Compiled MIT EasyLogger control entry (output_unlock_417592)",
+          "name": "bootloader_easylogger_output_unlock_417592_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-output-unlock-417592-source-leaf-0x00436120.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415776
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 155968,
+          "function": "Compiled MIT EasyLogger control entry (set_fmt_4174a6)",
+          "name": "bootloader_easylogger_set_fmt_4174a6_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-set-fmt-4174a6-source-leaf-0x00436140.bin",
+          "size": 108,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415808
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 156076,
+          "function": "Compiled MIT EasyLogger control entry (init_41733c)",
+          "name": "bootloader_easylogger_init_41733c_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-init-41733c-source-leaf-0x004361ac.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415916
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 156148,
+          "function": "Compiled MIT EasyLogger control entry (start_417392)",
+          "name": "bootloader_easylogger_start_417392_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-start-417392-source-leaf-0x004361f4.bin",
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4415988
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 156216,
+          "function": "Compiled MIT EasyLogger control entry (get_filter_tag_lvl_41760a)",
+          "name": "bootloader_easylogger_get_filter_tag_lvl_41760a_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-get-filter-tag-lvl-41760a-source-leaf-0x00436238.bin",
+          "size": 164,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4416056
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 156380,
+          "function": "Compiled MIT EasyLogger output entry (output_4176ce)",
+          "name": "bootloader_easylogger_output_4176ce_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-output-4176ce-source-leaf-0x004362dc.bin",
+          "size": 1060,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4416220
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157440,
+          "function": "Compiled MIT EasyLogger output-lock control entry (output_lock_enabled_417b7c)",
+          "name": "bootloader_easylogger_output_lock_enabled_417b7c_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-output-lock-enabled-417b7c-source-leaf-0x00436700.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417280
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157476,
+          "function": "Compiled MIT EasyLogger boot-port entry (mutex_create_41a648)",
+          "name": "bootloader_easylogger_mutex_create_41a648_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-mutex-create-41a648-source-leaf-0x00436724.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417316
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157508,
+          "function": "Compiled MIT EasyLogger boot-port entry (mutex_acquire_41a65c)",
+          "name": "bootloader_easylogger_mutex_acquire_41a65c_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-mutex-acquire-41a65c-source-leaf-0x00436744.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417348
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157532,
+          "function": "Compiled MIT EasyLogger boot-port entry (mutex_release_41a672)",
+          "name": "bootloader_easylogger_mutex_release_41a672_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-mutex-release-41a672-source-leaf-0x0043675c.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417372
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157552,
+          "function": "Compiled MIT EasyLogger boot-port entry (port_init_41a684)",
+          "name": "bootloader_easylogger_port_init_41a684_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-port-init-41a684-source-leaf-0x00436770.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417392
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157568,
+          "function": "Compiled MIT EasyLogger boot-port entry (port_output_41a692)",
+          "name": "bootloader_easylogger_port_output_41a692_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-port-output-41a692-source-leaf-0x00436780.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417408
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157576,
+          "function": "Compiled MIT EasyLogger boot-port entry (port_output_lock_41a69a)",
+          "name": "bootloader_easylogger_port_output_lock_41a69a_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-port-output-lock-41a69a-source-leaf-0x00436788.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417416
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157584,
+          "function": "Compiled MIT EasyLogger boot-port entry (port_output_unlock_41a6a2)",
+          "name": "bootloader_easylogger_port_output_unlock_41a6a2_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-port-output-unlock-41a6a2-source-leaf-0x00436790.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417424
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157592,
+          "function": "Compiled MIT EasyLogger boot-port entry (port_get_time_41a6aa)",
+          "name": "bootloader_easylogger_port_get_time_41a6aa_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-port-get-time-41a6aa-source-leaf-0x00436798.bin",
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417432
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157632,
+          "function": "Compiled MIT EasyLogger boot-port entry (task_name_41a6c2)",
+          "name": "bootloader_easylogger_task_name_41a6c2_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-task-name-41a6c2-source-leaf-0x004367c0.bin",
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417472
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157672,
+          "function": "Compiled MIT EasyLogger boot-port entry (port_get_p_info_41a6f0)",
+          "name": "bootloader_easylogger_port_get_p_info_41a6f0_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-port-get-p-info-41a6f0-source-leaf-0x004367e8.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417512
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157680,
+          "function": "Compiled MIT EasyLogger boot-port entry (port_get_t_info_41a6f8)",
+          "name": "bootloader_easylogger_port_get_t_info_41a6f8_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-port-get-t-info-41a6f8-source-leaf-0x004367f0.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417520
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157688,
+          "function": "Compiled clean-room G2 EasyLogger level-dropping channel-one output driver",
+          "name": "bootloader_easylogger_driver_output_41b854_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-driver-output-41b854-source-leaf-0x004367f8.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417528
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157704,
+          "function": "Compiled clean-room G2 four-channel descriptor transfer and completion-polling routine",
+          "name": "bootloader_easylogger_channel_write_41f918_source_leaf",
+          "output": "apollo510b/bootloader-easylogger-channel-write-41f918-source-leaf-0x00436808.bin",
+          "size": 120,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417544
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157824,
+          "function": "Compiled clean-room G2 millisecond-to-microsecond delay wrapper",
+          "name": "bootloader_delay_milliseconds_41f9d8_source_leaf",
+          "output": "apollo510b/bootloader-delay-milliseconds-41f9d8-source-leaf-0x00436880.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417664
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157840,
+          "function": "Compiled clean-room G2 raw boot delay wrapper",
+          "name": "bootloader_delay_41f9e6_source_leaf",
+          "output": "apollo510b/bootloader-delay-41f9e6-source-leaf-0x00436890.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417680
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157848,
+          "function": "Compiled clean-room G2 initializer-record priority comparator",
+          "name": "bootloader_initializer_priority_compare_41f9f0_source_leaf",
+          "output": "apollo510b/bootloader-initializer-priority-compare-41f9f0-source-leaf-0x00436898.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417688
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157856,
+          "function": "Compiled clean-room G2 capped initializer-table runner",
+          "name": "bootloader_run_initializers_41f9f8_source_leaf",
+          "output": "apollo510b/bootloader-run-initializers-41f9f8-source-leaf-0x004368a0.bin",
+          "size": 64,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417696
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157920,
+          "function": "Compiled clean-room G2 guarded two-stage teardown and pin-state reconciliation entry",
+          "name": "bootloader_guarded_teardown_41fa98_source_leaf",
+          "output": "apollo510b/bootloader-guarded-teardown-41fa98-source-leaf-0x004368e0.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417760
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 157992,
+          "function": "Compiled clean-room G2 platform reset, configuration submission, and channel setup entry",
+          "name": "bootloader_platform_setup_41fa50_source_leaf",
+          "output": "apollo510b/bootloader-platform-setup-41fa50-source-leaf-0x00436928.bin",
+          "size": 96,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417832
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158088,
+          "function": "Compiled clean-room G2 two-bank pin-group configuration dispatcher",
+          "name": "bootloader_pin_groups_41fadc_source_leaf",
+          "output": "apollo510b/bootloader-pin-groups-41fadc-source-leaf-0x00436988.bin",
+          "size": 428,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4417928
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158516,
+          "function": "Compiled clean-room G2 TLSF pool initialization, handle-publication, and diagnostic entry",
+          "name": "bootloader_allocator_init_41fd70_source_leaf",
+          "output": "apollo510b/bootloader-allocator-init-41fd70-source-leaf-0x00436b34.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418356
         }
       ],
       "source_appended_boundary": 148599
@@ -62358,12 +64668,12 @@
     "output_name": "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
     "profiles": {
       "linux-clang": {
-        "expected_size": 4508044,
-        "expected_sha256": "ff147a4647c0cc8f5c7c31fc29b57eed5513bd774abc65caaad67ee8bebd3ac8"
+        "expected_size": 4516088,
+        "expected_sha256": "72935d6882098e5d65e30bdf6630214c5fb428bff20dbabca7e4988ba2aefc37"
       }
     },
-    "expected_size": 4732034,
-    "expected_sha256": "bee2f83e6afb805f9427e3565f0e39660188ef37a5b3683f7193bb52a9dadcbb"
+    "expected_size": 4740094,
+    "expected_sha256": "f76455fc72574e0c8357b14b7f0c422931ae65896eb642e61787d0df40cb8c7f"
   },
   "schema_version": 1
 }

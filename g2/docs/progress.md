@@ -719,7 +719,7 @@ relocation/caller closure are unresolved.
 | Package/controller domain | Current reconstruction state | Approximate provenance identification | Required next evidence |
 |---|---|---:|---|
 | Apollo510 main | Mixed: 142,760 source-owned bytes plus 98,402 generated patch bytes and a 3,424,780-byte retained base | 100% coarse origin accounting for the retained base; named upstream families remain 90–100% individually | The retained base now splits into 130,000 third-party-path, 461,468 first-party/project-path, 675,636 unanchored-function, and 2,157,676 outside-envelope bytes; prioritize the unanchored code and preserve conservative residual labels |
-| Apollo510 bootloader | Mixed: 51 routed littlefs/EasyLogger/Ambiq/S200/runtime functions; 1,529 source-owned B, 2,078 generated patch B, 146,521 retained official B | 85–90% | Continue source closure from the adjacent float/format engine and later runtime/platform-service bodies without crossing the protected secure-loader boundary; physical validation remains unavailable |
+| Apollo510 bootloader | Mixed: 126 routed littlefs/EasyLogger/Ambiq/S200/runtime/TLSF functions; 6,931 source-owned B, 8,208 generated patch B, 140,391 retained official B | 85–90% | Continue source closure from the EasyLogger service block at `0x0041733C`; preserve authenticated transition data, distinct two-byte compatibility stubs, and the protected secure-loader boundary; physical validation remains unavailable |
 | EM9305 BLE controller | Cut-forward; QP/C 6.5.1, Packetcraft/EM Bleu Bluetooth-5.4 controller, exact compiler, and 54 SDK archive lanes authenticated. Across 875 merged intervals, 1,494 exact functions cover 157,122 bytes (74.504950%); link-order, vector-ABI, and authenticated short-prefix placements raise function-provenance identification to 167,684 bytes (79.513296%). Residual structure is fully partitioned into vectors, alignment, post-text data, and 33,658 unresolved code-or-mixed bytes | 92–95% overall provenance; QP/C 95–100% configuration; exact-function byte coverage 74.504950% | Resolve/recreate the 33,658-byte code-or-mixed queue and modified vendor seams, and obtain licensed authoritative Packetcraft/EM source or retain cut-forward boundaries |
 | Audio codec/DSP | Opaque/cut-forward; proprietary NationalChip image with U-Boot-derived CLI | 25–35% | Resolve both segment destinations and isolate reusable CLI/runtime code |
 | Touch controller | Opaque/cut-forward; vector base inferred | 10–20% | Identify controller SDK/library lineage and complete memory map |
@@ -3231,6 +3231,27 @@ right temple is nonresponsive, the left must remain stock, and no authorized
 controller fixture or golden capture is available. See
 `docs/research/g2-service-touch-dfu-recovery.md`; wider firmware functional
 completeness is not claimed.
+
+## Bootloader pin-group dispatcher is production-routed (2026-08-26)
+
+The complete two-bank pin-group dispatcher `[0x0041FADC,0x0041FCF6)` now
+routes to maintained clean-room C. The 538-byte authenticated body has two
+callers; host tests pin its cumulative subtype groups, all SRAM configuration
+offsets and pin numbers, low-byte truncation, ordering, and no-op cases. Both
+reviewed Clang profiles emit the same relocation-free 428-byte leaf.
+
+Apple overlay/provider identities are 9,916 / 158,516 bytes with SHA-256
+`f00be08414c7e4731ed8e2e61ed1f8041f105c520d941c0b26d16ba4f4e8143a`
+and `5ec3947c373c9d765d8c3385c0f7d436f8c4599ddae90429bc48263f1f80783a`;
+Linux identities are 9,900 / 158,500 bytes with SHA-256
+`1b531362e7f7ce06225ecdc068dcc0b124eeb5c84a1570f7f071e11497acdd93`
+and `06e369900458478ec088319400809d6bfb7883c3ddeb0808e3fff0f8bb52e4f5`.
+The Apple/Linux packages are 4,740,094 / 4,516,088 bytes with 6,464 / 3,432
+placed regions and two unresolved boundaries each. Nothing was sent to
+hardware. Live pinmux/GPIO/electrical and cold-boot behavior remains blocked
+because no authorized responsive right temple is available and the left must
+remain stock. Retained spans after `0x0041FCF6` remain software gaps, so
+firmware-wide completeness is not claimed.
 
 ## Cordio DM connection manager is production-routed
 
@@ -7125,44 +7146,242 @@ now also production-routes the Arm EABI byte-fill and forward-copy entries
 through relocation-free C leaves; the adjacent six-caller bounded comparison
 is now source-owned as well. The adjacent three-caller reject-set and accept-
 set string-span entries are source-owned too, as is the adjacent six-caller
-reflected CRC-32 updater, sole-caller SRAM-word setter, and nine-function
-numeric/format-primitive runtime through `0x00415AB6`. It contains 51 routed
-functions and accounts for 1,529 source-owned bytes, 2,078 generated patch
-bytes, eight alignment bytes, and 146,521 retained official bytes. The
-1,536-byte overlay and 150,136-byte provider hash to
-`6349a7c29d08cab96c499c53ef3527ecc0569cf03be9bb38e412de96e0564273`
-and `c210163056368efdd4acaefa5a952a2a720b39a41b4519203b6ce10f0020639d`.
+reflected CRC-32 updater, sole-caller SRAM-word setter, and runtime cluster
+through the TLSF public-API boundary at `0x004172DA`. It contains 126 routed functions and accounts for 6,931
+source-owned bytes, 8,208 generated patch bytes, 14 alignment bytes, and
+140,391 retained official bytes. The 6,944-byte overlay and 155,544-byte
+provider hash to
+`bb89cb1587eff14c620b34a511f47fcdaa7b5a9d030c39fe701a0014e2dc60bc`
+and `7da4698d31de6079b92a6020bf7cbb6fdce98dcc2b4dcbab1e0ac9c0ebbc8ac8`.
 Apple clang 21 and Homebrew clang 22.1.8 profiles preserve the reviewed
 layout/relocation graph, with profile-specific binary hashes.
 
 Host semantics, isolated builds, exact stock replacement, manifest ownership,
-and the fail-closed analyzer pass offline. No image was signed, packaged,
-flashed, or installed. Live boot, mutex, failure-log, and IAR stream
+and the fail-closed analyzer pass offline. Unsigned packages were regenerated;
+no image was signed, flashed, or installed. Live boot, mutex, failure-log, and IAR stream
 serialization evidence is blocked by unavailable authorized responsive
 hardware; the larger bootloader remains a software gap and firmware-wide
 completeness is not claimed.
 
-The final deployment replay produced a byte-identical 4,731,714-byte Apple
-package (`47f05f01…1fe`) with 6,234 placed and two unresolved regions. The accumulated
+The final deployment replay produced a byte-identical 4,737,122-byte Apple
+package (`099dbe07…694b`) with 6,391 placed and two unresolved regions. The accumulated
 Linux-profile gap was also closed by compiling every currently registered
 Apollo-main leaf with Homebrew clang 22.1.8 and recording the resulting
 204,960-byte overlay / 3,728,356-byte provider. Its complete unsigned package
-is 4,507,724 bytes (`3b0b9f9b…2860b`) with 3,312 placed and the same two
+is 4,513,112 bytes (`924cb8d2…bbb5`) with 3,391 placed and the same two
 unresolved boundaries. This is reproducible deployment evidence, not a
 hardware-validation claim.
 
-## Bootloader numeric runtime is production-routed (2026-08-26)
+## Bootloader numeric, logging, context, gate, dispatcher, and TLSF runtime is production-routed (2026-08-26)
 
-The adjacent numeric and format-primitive entries at
-`[0x00415844,0x00415AB6)` now route to nine clean-room C leaves. Their 626
-stock bytes and 19 direct caller edges are authenticated. Apple clang emits
-424 Thumb bytes with three strict internal relocations and no external runtime
-dependency; Homebrew clang reproduces the reviewed ABI. Host tests cover
+The numeric, float, formatter, dispatch, substring, context, gate, and next
+address-identified runtime entries at `[0x00415844,0x004172DA)` now route to
+84 C leaves. Their 6,756 stock bytes, 259 fail-closed topology entries, and
+two registered-pointer ingress paths are authenticated. Apple clang emits
+5,826 Thumb bytes with 181 strict
+relocations; Homebrew clang reproduces
+the reviewed ABI. Host tests cover
 arithmetic, parsing, decimal/hex output, case selection, nullable destinations
-and strings, and repeat-count behavior.
+and strings, repeat counts, width/precision, 32/64-bit arguments, CRLF, and
+float success/error/null-output behavior.
 
-Software closure is complete for this numeric tranche. Live boot,
-formatting/parsing, and caller-path evidence remains explicitly blocked by the
-absence of an authorized responsive G2 right temple. The adjacent float/format
-engine and remaining 146,521 retained bootloader bytes remain software gaps;
+The queue and handle leaves close `[0x0041649A,0x0041699A)`: guarded submission, runtime
+object creation, event-flags set/wait/create, and tagged-handle acquire/release.
+They preserve task/ISR selection, PendSV requests, storage thresholds, handle
+tagging, timeout mapping, semaphore/queue construction, queue put/get, and
+retained backend ABIs. The following bit-width, count-trailing-zeros,
+floor-log2, twelve TLSF block-header leaves, eight TLSF topology/alignment
+leaves, three TLSF request-size/class-mapping leaves, and three free-list
+selection/mutation leaves, ten allocator-operation leaves, and seven public
+allocator leaves preserve all
+zero/nonzero, status-bit, pointer-offset, physical-link, state-propagation,
+power-of-two alignment, size-bound, and class-rounding semantics. The complete
+cluster's host semantics, dual-profile pins, manifest ownership, and both
+unsigned packages are fail-closed. After 98 bytes of authenticated transition
+data, the next body starts at `0x0041733C`.
+
+Software closure is complete for this runtime/TLSF tranche. Live boot,
+formatting/parsing/logging and caller-path evidence remains explicitly blocked
+by the absence of an authorized responsive G2 right temple. The logging
+literal pools remain authenticated data and the remaining 140,391 retained
+bootloader bytes include later executable software gaps;
 firmware-wide completeness is not claimed.
+
+## Bootloader EasyLogger control/output and lock-enable are production-routed (2026-08-26)
+
+The ten complete EasyLogger control entries `[0x0041733C,0x004176CE)`, the
+115-caller `elog_output` entry `[0x004176CE,0x00417AD0)`, and
+`elog_output_lock_enabled` at `[0x00417B7C,0x00417BB8)` now route to maintained
+MIT C. The output implementation preserves the G2 interrupt gate, assertions,
+all filters and enabled prefix fields, colors, keyword filtering, 1,024-byte
+truncation policy, locking, and three-argument sink. The lock-enable leaf
+preserves all four saved-state combinations and the exact port-lock seams.
+
+The bootloader audit now authenticates 96 runtime functions, 393 direct
+callers, two registered-pointer ingresses, 7,758 compiled Thumb bytes, and 187
+strict relocations. Canonical accounting is 8,863 source-owned, 10,208
+generated-patch, 14 alignment, and 138,391 retained official bytes. Apple
+Clang produces an 8,876-byte overlay and 157,476-byte provider with SHA-256
+`e046149fbc0e1961f38cef098b9984baa39e22d3b201d6a1cf81a3d8bcee999b`
+and `c404f346fda3d412e846469765de57945b2147f61026f5ad6ceeec2379a20d95`.
+Linux Clang produces 8,860 / 157,460 bytes with SHA-256
+`15f1c4805b1d93146cafc9c1019e077421d7717f5338922e9b4161ada741bbff`
+and `ec0c5021691ff0acc1cb5e87803de7170426454a741c084d24dcfc034c4cffd4`.
+
+The unsigned Apple package is 4,739,054 bytes, SHA-256
+`9c0e1e69ce5353755229a5bf07afdd256bb72607de20c7c2617e33928dcbdc61`,
+with 6,416 placed and two unresolved regions. The Linux package is 4,515,048
+bytes, SHA-256
+`b092ca5279fb3dc2ea77ff0d935c1cd6ef8ec98b27b9ab98adbe5691a8f12489`,
+with 3,404 placed and the same two unresolved regions. No firmware was signed,
+flashed, installed, reset, or booted. Live logger, mutex, scheduler, transport,
+and exception-path validation remains explicitly blocked by unavailable
+authorized responsive G2 hardware; the remaining bootloader body is still a
+software gap and functional completeness is not claimed.
+
+## Bootloader EasyLogger port is production-routed (2026-08-26)
+
+The eleven complete callable entries in `[0x0041A648,0x0041A700)` now route
+to a 12,540-byte maintained MIT EasyLogger boot-port adaptation. The source
+preserves lazy CMSIS mutex creation and 1,000-tick locking, null-handle no-op
+behavior, three-argument output forwarding, bounded decimal tick formatting,
+and kernel-state-aware task naming. The authenticated 22-byte literal island
+at `[0x0041A6DA,0x0041A6F0)` remains retained data.
+
+Both reviewed toolchains emit the same eleven relocation-free leaves totaling
+204 bytes. Canonical accounting is 9,075 source-owned, 10,370 generated patch,
+14 alignment, and 138,229 retained official bytes across 149 functions and
+147 patch sites. Apple produces a 9,088-byte overlay and 157,688-byte provider
+with SHA-256 `aeceaf38dee61ece3a1fc9518d5d08dd5eb4148d3ff8811659fe695a24cb1578`
+and `48bc79d2391b5842316fe9c045727b90da96009ecd2dbc21d70fd3af5e3acff7`;
+Linux produces 9,072 / 157,672 bytes with SHA-256
+`34d79ac61578fb5c189b06a15c44731506c9cf92f7642f21b531fedc0c0dc2d3` and
+`9fcb060ca96964b71da9b1c6f75b1afc5d923a285ce07f6d7e43de31c311be75`.
+
+The unsigned Apple/Linux packages are 4,739,266 / 4,515,260 bytes with
+SHA-256 `f7350f9208368191553ac0c3da07a68af90d66578595b858ad62a519a6dbbc81`
+and `96c1a37d4a14af132f338de523115cf614f9ef5c72da337eeb8382f1c6ea4c45`.
+Nothing was signed, flashed, installed, reset, booted, or sent to a transport.
+Live mutex/scheduler/task-name behavior remains blocked because no authorized
+responsive right temple is available and the authorized left temple must stay
+stock. The output driver/transport and later retained bootloader bodies remain
+software gaps, so firmware-wide functional completeness is not claimed.
+
+## Bootloader EasyLogger transport is production-routed (2026-08-26)
+
+The level-dropping channel-one driver `[0x0041B854,0x0041B862)` and complete
+four-channel transfer entry `[0x0041F918,0x0041F9B6)` now route to maintained
+clean-room C. Host coverage validates all four channel bounds, initialized
+state, the 56-byte descriptor, completion clearing, lower-start result,
+immediate/delayed completion, ten-unit waits, and the stock 1,000-poll timeout
+policy. Both reviewed Clang profiles emit identical relocation-free 16-byte
+and 120-byte leaves.
+
+Apple overlay/provider identities are 9,224 / 157,824 bytes with SHA-256
+`790603494de6a154f9032c4e7257b4c203e477893619c0b25325b972b39c45da` and
+`ed616af6c46214891f25e3102f04554129a989fc83422700eb29d6242d3e68f5`;
+Linux identities are 9,208 / 157,808 bytes with SHA-256
+`ffd38e6fd268398b0c8c5cc5afd0d898e2fe3cb62d000f2c91b96e4682f8b9a8` and
+`1d4c130d0e9ac6de37b8bfe9c682b096eff5d85048faaa22fd414b1da3bc622c`.
+Canonical accounting is 9,211 source-owned, 10,542 generated patch, 14
+alignment, and 138,057 retained official bytes.
+
+The unsigned Apple/Linux packages are 4,739,402 / 4,515,396 bytes with
+SHA-256 `4eaff8522cca172ef79c3e57686f395437e7a5877ce4c0ea6ab4831cc72e76a2`
+and `d05b3c4af715097e470d33d6a7e78646d7136a80ec24d07a6ae79ba5fc0a548b`.
+Their flash plans contain 6,446 / 3,421 placed regions and two unresolved
+boundaries each. No signer, device, UART, debugger, transport, flasher, reset,
+or boot operation was accessed. Physical behavior remains blocked by the
+unavailable authorized responsive right temple while the left must remain
+stock. Later retained executable bootloader spans remain software gaps.
+
+## Bootloader delay and initializer services are production-routed (2026-08-26)
+
+The complete millisecond/raw delay wrappers and initializer comparator/runner
+at `[0x0041F9D8,0x0041FA40)` now route to maintained clean-room C. The four
+entries replace 102 authenticated executable bytes with 96 relocation-free
+Thumb bytes. Host coverage validates wrapping 32-bit millisecond conversion,
+raw forwarding, priority comparison, stable sorting/dispatch, null callback
+skipping, zero records, and the 256-record cap. Caller scans additionally pin
+the stored odd comparator pointer.
+
+Apple overlay/provider identities are 9,320 / 157,920 bytes with SHA-256
+`aaefcef3e31df12ec06a2ee7f505430f17daba8061099677143b24505ea96dc7` and
+`56350fb0fc8d663dc2202f11389573b52ddd30536e81f44539006f7810f2744d`;
+Linux identities are 9,304 / 157,904 bytes with SHA-256
+`6be4f564d6ef9ace9c98de17bf2cc082142440a3da3716521a9e3e529ebb017b` and
+`3961d3432af2cbeb83731d79792071161980decbc6cf635c57b6a396f09f3504`.
+Canonical accounting is 9,307 source-owned, 10,644 generated patch, 14
+alignment, and 137,955 retained official bytes across 155 functions, 136
+relocated leaves, and 153 patch sites.
+
+The unsigned Apple/Linux packages are 4,739,498 / 4,515,492 bytes with
+SHA-256 `115c5ad73e32e308287034d1b1120f8ed576ec3c3c9294cafce1bfc561b727f9`
+and `e742a5b7775cf8aae0667e0a425a76a83c9032406a28bcd679bfb82529de8c92`.
+Their flash plans contain 6,456 / 3,427 placed regions and two unresolved
+boundaries each. `make source` passes. Nothing was signed, flashed, installed,
+reset, booted, or sent to hardware. Live timing, initializer side effects, and
+cold-boot behavior remain blocked because no authorized responsive right
+temple is available and the left must remain stock. Retained bootloader spans
+after `0x0041FA40` remain software gaps, so firmware-wide completeness is not
+claimed.
+
+## Bootloader guarded teardown is production-routed (2026-08-26)
+
+The complete guarded teardown `[0x0041FA98,0x0041FAD0)` now routes to
+maintained clean-room C. Host coverage validates inactive guards, both
+independent status failures and fail-stop selection, the successful state-word
+clear, pin-28 configuration, and final guard clear. The sole caller and
+following 12-byte literal pool are authenticated. Both reviewed Clang profiles
+emit the same relocation-free 72-byte leaf, replacing all 56 stock body bytes.
+
+Apple overlay/provider identities are 9,392 / 157,992 bytes with SHA-256
+`2764ebb28ccde7977522ee318869a03805dfa2e0bc718c16de51c2ce4579828f` and
+`0fa99abd573ab6a8845c3807cef69d29ee29d46606f1044bae6b571971dff659`;
+Linux identities are 9,376 / 157,976 bytes with SHA-256
+`66bb62b17d33dbdec3f1015299fee2f04cb435a15d8a335b98c64eb6d000dac6`
+and `bddf904854256b0403d5750d756ca2b98d379434362918a94f876fa7c69e3427`.
+Canonical accounting is 9,379 source-owned, 10,700 generated patch, 14
+alignment, and 137,899 retained official bytes across 156 functions, 137
+relocated leaves, and 154 patch sites.
+
+The unsigned Apple/Linux packages are 4,739,570 / 4,515,564 bytes with
+SHA-256 `f69e3c8e9d8fc2408a48eeff99e6d96cbbf55f77e052881a3260223bf2c7b779`
+and `f92667c2f10b51cbd49129924bd4bf10c77145dccdc460e18840d4ebeadf8a72`.
+Their flash plans contain 6,459 / 3,429 placed regions and two unresolved
+boundaries each. Nothing was signed, flashed, installed, reset, booted, or
+sent to hardware. Live teardown, fail-stop, pin, power-state, and cold-boot
+behavior remains blocked because no authorized responsive right temple is
+available and the left must remain stock. Retained bootloader spans around and
+after `0x0041FAD0` remain software gaps, so firmware-wide completeness is not
+claimed.
+
+## Bootloader platform setup is production-routed (2026-08-26)
+
+The complete boot platform setup `[0x0041FA50,0x0041FA98)` now routes to
+maintained clean-room C. The 72-byte authenticated body has a sole caller at
+`0x0041B87E`; host tests pin guarded teardown, reset/mode, the hard-float
+`25.0f` derive boundary, exact 20-byte stock configuration copy/submit, and
+channel-four/five call order. Both reviewed Clang profiles emit the same
+relocation-free 96-byte leaf.
+
+Apple overlay/provider identities are 9,488 / 158,088 bytes with SHA-256
+`da89534353b40e8787963c24dc0aa6209b11948cd128b8d05115525685b53adc`
+and `5283432f02f86b2c62dea8eac44c567f99b3c4d261c3412ab638b67535486145`;
+Linux identities are 9,472 / 158,072 bytes with SHA-256
+`1b97e43f2615b0281850b16c5f14aeb31bd6af3d792008bb62a9c60cff2b4b5b`
+and `991fc763c08fdf890d18840d84b6a386864dae812757035faa4e216a1c4663e3`.
+Canonical accounting is 9,475 source-owned, 10,772 generated patch, 14
+alignment, and 137,827 retained official bytes across 157 functions, 138
+relocated leaves, and 155 patch sites.
+
+The unsigned Apple/Linux packages are 4,739,666 / 4,515,660 bytes with
+SHA-256 `761b09380b08493d69eee02b2912cb1edeb6f14c584973df52d6bcf3e058dae1`
+and `8a447d867e6303ed6075ad83067c53350a1e189956d2dc8c7ae6e93b287c12ea`.
+Their flash plans contain 6,461 / 3,430 placed regions and two unresolved
+boundaries each. Nothing was signed, flashed, installed, reset, booted, or
+sent to hardware. Live reset, VFP callee, configuration/channel side effects,
+pin/power state, and cold-boot behavior remain blocked because no authorized
+responsive right temple is available and the left must remain stock. Retained
+bootloader spans after `0x0041FAD0` remain software gaps, so firmware-wide
+completeness is not claimed.

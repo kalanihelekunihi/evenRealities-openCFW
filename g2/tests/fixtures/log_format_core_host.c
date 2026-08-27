@@ -190,8 +190,21 @@ int open_cfw_test_log_core_float_write(
 #define OPEN_CFW_LOG_CORE_FLOAT_WRITE(destination, precision, value) \
     open_cfw_test_log_core_float_write(destination, precision, value)
 
+#if defined(OPEN_CFW_TEST_BOOTLOADER_FORMAT_CORE)
+#define open_cfw_log_decimal_digits open_cfw_bootloader_udec_digits
+#define open_cfw_log_signed_decimal_digits open_cfw_bootloader_sdec_digits
+#define open_cfw_log_hex_digits open_cfw_bootloader_hex_digits
+#define open_cfw_log_parse_integer open_cfw_bootloader_parse_dec
+#define open_cfw_log_decimal_write open_cfw_bootloader_u64_to_dec
+#define open_cfw_log_hex_write open_cfw_bootloader_u64_to_hex
+#define open_cfw_log_string_length open_cfw_bootloader_nullable_strlen
+#define open_cfw_log_padding_write open_cfw_bootloader_repeat_char
+#include "../../components/apollo_main/core_overlay/log_format_helpers.c"
+#include "../../components/bootloader/core_overlay/runtime_format_core.c"
+#else
 #include "../../components/apollo_main/core_overlay/log_format_helpers.c"
 #include "../../components/apollo_main/core_overlay/log_format_core.c"
+#endif
 
 unsigned int open_cfw_test_log_core_run(
     char *destination,

@@ -1,5 +1,26 @@
 # Bootloader core-overlay notices
 
+`runtime_format_core.c`, `runtime_log_dispatch.c`, `runtime_strstr.c`,
+`runtime_critical_context.c`, `runtime_gate_acquire.c`, and
+`runtime_gate_state.c`, `runtime_gate_release.c`, and
+`runtime_context_value.c`, `runtime_dispatch_4160fe.c`, and
+`runtime_value_4161c6.c`, `runtime_call_4161ce.c`, and
+`runtime_action_416200.c`, `runtime_transfer_41623a.c`, and
+`runtime_wait_4162c4.c`, `runtime_notify_416378.c`, and
+`runtime_callback_41639a.c` and `runtime_register_4163b2.c` are
+GPL-3.0-or-later
+clean-room openCFW compatibility implementations of the recovered bootloader
+logging formatter, variadic dispatch, substring-search, critical-context,
+runtime-state gate-acquisition, state-mapping, release, context-value
+dispatch, address-identified runtime-dispatch, retained-value forwarding, and
+validated runtime-call, guarded runtime-action, two-phase runtime-transfer,
+masked runtime-wait, optional runtime-notification, registered runtime-callback,
+and registered runtime-object construction
+ABIs. They do not incorporate or
+relicense retained official bootloader bytes. Their authenticated stock
+boundaries, SRAM bindings, caller topology, generated redirects, and compiler
+profiles are recorded in the adjacent evidence and research documents.
+
 The shared
 `components/apollo_main/core_overlay/runtime_littlefs_util.c`,
 `components/apollo_main/core_overlay/runtime_littlefs_util_bitops.c`, and
@@ -150,6 +171,67 @@ filesystem object, block-device, mount, format, program, or erase path and
 authorizes no signing, flashing, reset, boot, filesystem mutation, or hardware
 operation.
 
+`runtime_semaphore_create_416762.c` is the GPL-3.0-or-later clean-room openCFW
+implementation of the complete authenticated semaphore-constructor entry at
+`[0x00416762,0x00416816)`. Offline registration authorizes no hardware action.
+
+`runtime_queue_create_416816.c` is the GPL-3.0-or-later clean-room openCFW
+implementation of the complete authenticated message-queue constructor at
+`[0x00416816,0x004168A2)`. Offline registration authorizes no hardware action.
+
+`runtime_queue_put_4168a2.c` and `runtime_queue_get_416920.c` are bounded
+Apache-2.0 adaptations of CMSIS-FreeRTOS v10.5.1 `osMessageQueuePut` and
+`osMessageQueueGet`. They replace the complete authenticated entries
+`[0x004168A2,0x00416920)` and `[0x00416920,0x0041699A)` while retaining the
+reviewed FreeRTOS queue-provider seams. Offline registration authorizes no
+hardware action.
+
+`runtime_bit_width_4169a4.c`, `runtime_ctz_4169e2.c`, and
+`runtime_log2_4169f2.c` are GPL-3.0-or-later clean-room openCFW source for the
+three complete authenticated 32-bit bit helpers at
+`[0x004169A4,0x004169FC)`. Offline registration authorizes no hardware action.
+
+`runtime_tlsf_block_primitives_4169fc.c` is a bounded freestanding adaptation
+of Matthew Conte TLSF v3.1 under BSD-3-Clause. It implements only the twelve
+block-header and pointer primitives matching the complete authenticated G2
+entries at `[0x004169FC,0x00416AAA)`. Offline registration authorizes no
+signing, flashing, reset, boot, heap mutation, or hardware operation.
+
+`runtime_tlsf_block_topology_416aaa.c` is a bounded freestanding adaptation of
+Matthew Conte TLSF v3.1 under BSD-3-Clause. It implements only the eight
+physical-block, state-propagation, and alignment helpers matching the complete
+authenticated G2 entries at `[0x00416AAA,0x00416BCE)`. Offline registration
+authorizes no signing, flashing, reset, boot, heap mutation, or hardware
+operation.
+
+`runtime_tlsf_mapping_416bce.c` is a bounded freestanding adaptation of
+Matthew Conte TLSF v3.1 under BSD-3-Clause. It implements only the three
+request-size and first/second-level class-mapping helpers matching the complete
+authenticated G2 entries at `[0x00416BCE,0x00416C4E)`. Offline registration
+authorizes no signing, flashing, reset, boot, heap mutation, or hardware
+operation.
+
+`runtime_tlsf_free_lists_416c4e.c` is a bounded freestanding BSD-3-Clause
+adaptation of Matthew Conte's TLSF v3.1 free-list selection and mutation
+helpers for the authenticated G2 ILP32 allocator ABI. It preserves the
+24×32 bitmap/list topology, sentinel links, assertion identities, and three
+complete entries at `[0x00416C4E,0x00416E04)`. Offline registration authorizes
+no signing, flashing, reset, boot, heap mutation, or hardware operation.
+
+`runtime_tlsf_allocator_416e04.c` is a bounded freestanding BSD-3-Clause
+adaptation of Matthew Conte TLSF v3.1. It implements the ten complete
+authenticated allocator-operation entries at `[0x00416E04,0x0041711C)`,
+including request adjustment, block split/trim/absorb/coalescing, free-block
+lookup, and used-block preparation. Offline registration authorizes no
+signing, flashing, reset, boot, heap mutation, or hardware operation.
+
+`runtime_tlsf_public_41711c.c` is a bounded freestanding BSD-3-Clause
+adaptation of Matthew Conte TLSF v3.1. It implements the seven complete
+authenticated public allocator entries at `[0x0041711C,0x004172DA)`: control
+construction, pool overhead/addition, create/create-with-pool, malloc, and
+free. Offline registration authorizes no signing, flashing, reset, boot, heap
+mutation, or hardware operation.
+
 `runtime_redirect_init.c` and `runtime_redirect_init.h` are openCFW
 GPL-3.0-or-later clean-room source for the bounded S200 bootloader
 `redirect_init` two-mutex initialization entry. The implementation is derived
@@ -210,11 +292,87 @@ operation.
 `runtime_udiv10.c`, `runtime_udiv10.h`, `runtime_numeric.h`,
 `runtime_udec_digits.c`, `runtime_sdec_digits.c`, `runtime_hex_digits.c`,
 `runtime_parse_dec.c`, `runtime_u64_to_dec.c`, `runtime_u64_to_hex.c`,
-`runtime_nullable_strlen.c`, and `runtime_repeat_char.c` are openCFW
+`runtime_nullable_strlen.c`, `runtime_repeat_char.c`,
+`runtime_float_to_fixed.c`, and `runtime_format_core.c` are openCFW
 GPL-3.0-or-later clean-room source for the
 bounded bootloader numeric-runtime entries. The implementations are derived
 from independently recovered arithmetic, digit-counting, parsing, formatting,
-string-length, and repeated-output behavior
+string-length, repeated-output, floating conversion, and variadic formatter
+behavior
 in the authenticated G2 2.2.6.10 image; they do not incorporate or relicense
 retained vendor bytes. Offline compilation and registration authorize no
 signing, flashing, reset, boot, or hardware operation.
+
+`runtime_format_core.c` binds the GPL-3.0-only clean-room formatter body in
+`components/apollo_main/core_overlay/log_format_core.c` to the bootloader's
+independently recovered helper and CRLF-control ABI. That shared source is
+openCFW code; its reuse does not relicense any retained vendor byte.
+
+`runtime_submit_41649a.c`, `runtime_create_4164da.c`,
+`runtime_flags_set_41652e.c`, `runtime_flags_wait_416590.c`,
+`runtime_flags_create_416610.c`, `runtime_handle_acquire_4166aa.c`, and
+`runtime_handle_release_416710.c` are GPL-3.0-or-later clean-room openCFW
+implementations of the complete authenticated bootloader runtime/event-flags
+entries at `[0x0041649A,0x00416762)`. They were recovered from observable
+control flow and ABI behavior and do not incorporate or relicense retained
+vendor bytes. Their registration authorizes offline compilation and package
+assembly only; it authorizes no signing, flashing, reset, boot, or hardware
+operation.
+
+`runtime_easylogger_control_41733c.c`,
+`runtime_easylogger_output_4176ce.c`, and
+`runtime_easylogger_lock_enabled_417b7c.c`, and
+`runtime_easylogger_port_41a648.c` are bounded freestanding MIT
+adaptations of Armink EasyLogger commit
+`a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24`. They implement the recovered G2
+bootloader logger-state ABI, control/filter/lock behavior, interrupt-gated
+formatted output, output-lock state reconciliation, mutex-backed boot-port
+hooks, tick formatting, and RTOS task-name selection. G2-specific absolute
+port and transport seams are compatibility bindings, not upstream code.
+Offline compilation and package assembly authorize no signing, flashing,
+reset, boot, output transmission, or hardware operation.
+
+`runtime_easylogger_transport_41b854.c` is a GPL-3.0-or-later clean-room
+implementation of the G2-specific EasyLogger channel-one output driver and
+four-channel synchronous descriptor transport. It was recovered from the
+authenticated control flow and ABI behavior and incorporates no retained
+vendor implementation bytes. Its absolute channel-table, zeroing,
+lower-transfer, and wait seams are compatibility bindings. Registration
+authorizes offline compilation and unsigned package assembly only; it
+authorizes no output transmission, signing, flashing, reset, boot, or other
+hardware operation.
+
+`runtime_boot_services_41f9d8.c` is a GPL-3.0-or-later clean-room openCFW
+implementation of the complete authenticated delay-wrapper, initializer
+priority-comparator, and bounded initializer-runner entries at
+`[0x0041F9D8,0x0041FA40)`. It incorporates no retained vendor implementation
+bytes. Its raw-delay, copy, sort, callback-table, and SRAM scratch addresses
+are G2 compatibility seams. Registration authorizes offline compilation and
+unsigned package assembly only; it authorizes no signing, flashing, reset,
+boot, callback execution, or other hardware operation.
+
+`runtime_guarded_teardown_41fa98.c` is a GPL-3.0-or-later clean-room openCFW
+implementation of the complete authenticated guarded teardown entry at
+`[0x0041FA98,0x0041FAD0)`. It incorporates no retained vendor implementation
+bytes. Its guard byte, two status stages, state-word setter, pin-configuration
+word, and pin-configure entry are G2 compatibility seams. Registration
+authorizes offline compilation and unsigned package assembly only; it
+authorizes no signing, flashing, reset, boot, pin mutation, power transition,
+or other hardware operation.
+
+`runtime_platform_setup_41fa50.c` is a GPL-3.0-or-later clean-room openCFW
+implementation of the complete authenticated boot platform-setup entry at
+`[0x0041FA50,0x0041FA98)`. It incorporates no retained vendor implementation
+bytes. Its guarded-teardown, reset, mode, VFP derive, copy, stock
+configuration, submit, and channel entries are G2 compatibility seams.
+Registration authorizes offline compilation and unsigned package assembly
+only; it authorizes no signing, flashing, reset, boot, configuration submit,
+channel mutation, or other hardware operation.
+
+`runtime_pin_groups_41fadc.c` is a GPL-3.0-or-later clean-room openCFW
+implementation of the complete authenticated two-bank pin-group dispatcher at
+`[0x0041FADC,0x0041FCF6)`. It incorporates no retained vendor implementation
+bytes. Its SRAM configuration table and pin-configure entry are G2
+compatibility seams. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot,
+pinmux/GPIO mutation, or other hardware operation.

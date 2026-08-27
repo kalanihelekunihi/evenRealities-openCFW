@@ -17,8 +17,8 @@ class AnalyzeBootloaderStringSpansTests(unittest.TestCase):
         self.assertEqual(report["software_gap_count"], 0)
         self.assertEqual(report["entries"]["strcspn"]["callers"], 3)
         self.assertEqual(report["entries"]["strspn"]["callers"], 3)
-        self.assertEqual(report["provider"]["source_owned_bytes"], 1849)
-        self.assertEqual(report["provider"]["retained_official_bytes"], 146201)
+        self.assertEqual(report["provider"]["source_owned_bytes"], 9211)
+        self.assertEqual(report["provider"]["retained_official_bytes"], 138057)
         self.assertFalse(report["hardware_block"]["physical_evidence_available"])
         self.assertEqual(report["safety"]["hardware_operations"], [])
 

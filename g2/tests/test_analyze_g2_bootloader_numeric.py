@@ -15,11 +15,12 @@ class AnalyzeBootloaderNumericTests(unittest.TestCase):
         report = json.loads(completed.stdout)
         self.assertEqual(report["status"], "implemented-in-source / hardware-validation-blocked")
         self.assertEqual(report["software_gap_count"], 0)
-        self.assertEqual(report["stock"]["function_count"], 10)
-        self.assertEqual(report["stock"]["direct_caller_count"], 20)
-        self.assertEqual(report["source"]["compiled_bytes"], 744)
-        self.assertEqual(report["source"]["relocation_count"], 4)
-        self.assertEqual(report["provider"]["retained_official_bytes"], 146201)
+        self.assertEqual(report["stock"]["function_count"], 113)
+        self.assertEqual(report["stock"]["direct_caller_count"], 428)
+        self.assertEqual(report["stock"]["registered_pointer_ingress_count"], 3)
+        self.assertEqual(report["source"]["compiled_bytes"], 8202)
+        self.assertEqual(report["source"]["relocation_count"], 187)
+        self.assertEqual(report["provider"]["retained_official_bytes"], 137289)
         self.assertFalse(report["hardware_block"]["physical_evidence_available"])
 
 

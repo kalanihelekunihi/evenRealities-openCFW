@@ -32,11 +32,11 @@ SOURCE_PINS = {
     HEADER: (324, "287d7f8677012fd40ee5f564de47a339e29b7ae78969504b51ea791b03010f59"),
 }
 CALLERS = (0x00410738, 0x00411D0A, 0x00411D1E, 0x00411D42, 0x00411D54, 0x0042DA9A)
-OVERLAY = (1856, "6693a0fec4dfd7c9ba82639de56264a1ba1519768b6aa90b40885092f6fe4913")
-PROVIDER = (150456, "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d")
-LINUX_PROVIDER = (150456, "df6ec98c263e1e5d4f16244af450171e149be673eb0347f076f997b8de326187")
-PACKAGE = (4732034, "bee2f83e6afb805f9427e3565f0e39660188ef37a5b3683f7193bb52a9dadcbb")
-LINUX_PACKAGE = (4508044, "ff147a4647c0cc8f5c7c31fc29b57eed5513bd774abc65caaad67ee8bebd3ac8")
+OVERLAY = (9916, "f00be08414c7e4731ed8e2e61ed1f8041f105c520d941c0b26d16ba4f4e8143a")
+PROVIDER = (158516, "5ec3947c373c9d765d8c3385c0f7d436f8c4599ddae90429bc48263f1f80783a")
+LINUX_PROVIDER = (158500, "06e369900458478ec088319400809d6bfb7883c3ddeb0808e3fff0f8bb52e4f5")
+PACKAGE = (4740094, "f76455fc72574e0c8357b14b7f0c422931ae65896eb642e61787d0df40cb8c7f")
+LINUX_PACKAGE = (4516088, "72935d6882098e5d65e30bdf6630214c5fb428bff20dbabca7e4988ba2aefc37")
 
 
 class AuditError(RuntimeError):
@@ -94,7 +94,7 @@ def audit() -> dict:
     require((patch["target_address"], patch["expected_size"], patch["expected_sha256"]) == (FUNCTION_ADDRESS, STOCK_SIZE, STOCK_SHA256), "patch contract changed")
     require(patch["replacement_hex"][8:] == "00bf" * 50, "full-span NOP fill changed")
     component = report["component"]
-    require((component["source_owned_bytes"], component["generated_patch_site_bytes"], component["generated_alignment_bytes"], component["opaque_base_bytes"]) == (1849, 2398, 8, 146201), "provider accounting changed")
+    require((component["source_owned_bytes"], component["generated_patch_site_bytes"], component["generated_alignment_bytes"], component["opaque_base_bytes"]) == (9903, 11310, 14, 137289), "provider accounting changed")
     require(report["safety"]["hardware_operations"] == [], "builder reported hardware operations")
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     boot = manifest["component_overrides"]["apollo_bootloader"]["provider"]
@@ -109,7 +109,7 @@ def audit() -> dict:
         "software_gap_count": 0,
         "stock": {"address": STOCK_ADDRESS, "size": STOCK_SIZE, "sha256": STOCK_SHA256, "whole_image_callers": len(CALLERS)},
         "source": {"function": FUNCTION, "address": FUNCTION_ADDRESS, "size": FUNCTION_SIZE, "sha256": FUNCTION_SHA256, "relocations": 0},
-        "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": 1849, "retained_official_bytes": 146201},
+        "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": 9211, "retained_official_bytes": 138057},
         "deployment": {"apple_package": {"size": PACKAGE[0], "sha256": PACKAGE[1]}, "linux_package": {"size": LINUX_PACKAGE[0], "sha256": LINUX_PACKAGE[1]}},
         "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized responsive G2 right temple demonstrating boot progression through all comparison callers", "stock_bootloader_retained_for_hardware": True},
         "safety": {"hardware_operations": [], "signing_performed": False, "flashing_performed": False},

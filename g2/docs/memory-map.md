@@ -78,14 +78,79 @@ The reviewed order is:
 | `0x00415A08` | `0x00415A7C` | 116 B | Source-replaced unsigned 64-bit hexadecimal output helper | Complete authenticated entry |
 | `0x00415A7C` | `0x00415A94` | 24 B | Source-replaced nullable string-length helper | Complete authenticated entry |
 | `0x00415A94` | `0x00415AB6` | 34 B | Source-replaced repeated-character output helper | Complete authenticated entry |
-| `0x00415AB6` | `0x00417AD4` | 8,222 B | Even bootloader float/format engine and gap before EasyLogger | Official compatibility bytes retained; software gap |
+| `0x00415AB6` | `0x00415BF6` | 320 B | Source-replaced fixed-point float converter | Complete authenticated entry |
+| `0x00415BF6` | `0x00415FAE` | 952 B | Source-replaced bootloader formatter core | Complete authenticated entry |
+| `0x00415FAE` | `0x00415FDA` | 44 B | Source-replaced bootloader variadic logging dispatch wrapper | Complete authenticated entry; 57 direct callers |
+| `0x00415FDA` | `0x00415FFA` | 32 B | Retained authenticated logging literal pool/data | Non-executable boundary; not treated as a C-body gap |
+| `0x00415FFA` | `0x00416026` | 44 B | Source-replaced bootloader substring-search primitive | Complete authenticated entry; six direct callers |
+| `0x00416026` | `0x0041602A` | 4 B | Retained authenticated two-byte self-loop and no-op return stubs | Separate non-redirectable compatibility boundaries |
+| `0x0041602A` | `0x00416058` | 46 B | Source-replaced bootloader critical-context predicate | Complete authenticated entry; 21 direct callers |
+| `0x00416058` | `0x00416088` | 48 B | Source-replaced bootloader runtime-state gate acquisition wrapper | Complete authenticated entry; one direct caller |
+| `0x00416088` | `0x004160B0` | 40 B | Source-replaced bootloader runtime-state and SRAM-gate mapper | Complete authenticated entry; one direct caller |
+| `0x004160B0` | `0x004160E8` | 56 B | Source-replaced bootloader runtime-state gate release wrapper | Complete authenticated entry; one direct caller |
+| `0x004160E8` | `0x004160FE` | 22 B | Source-replaced bootloader critical-context value dispatcher | Complete authenticated entry; three direct callers |
+| `0x004160FE` | `0x004161C6` | 200 B | Source-replaced bootloader address-identified runtime dispatcher | Complete authenticated entry; three direct callers, 28-byte option ABI, two retained dispatch seams |
+| `0x004161C6` | `0x004161CE` | 8 B | Source-replaced bootloader address-identified retained-value wrapper | Complete authenticated entry; two direct callers and one retained getter seam |
+| `0x004161CE` | `0x00416200` | 50 B | Source-replaced bootloader address-identified validated runtime-call wrapper | Complete authenticated entry; two direct callers, critical-context guard, selector range, and one retained call seam |
+| `0x00416200` | `0x0041623A` | 58 B | Source-replaced bootloader address-identified guarded runtime-action wrapper | Complete authenticated entry; three direct callers, critical/null guards, retained predicate, and retained action seam |
+| `0x0041623A` | `0x004162C4` | 138 B | Source-replaced bootloader address-identified two-phase runtime-transfer wrapper | Complete authenticated entry; two direct callers, invalid-argument guards, retained critical/normal backends, result propagation, and conditional PendSV request |
+| `0x004162C4` | `0x00416378` | 180 B | Source-replaced bootloader address-identified masked runtime-wait wrapper | Complete authenticated entry; three direct callers, wait-any/wait-all accumulation, clear-mask option, and wrap-safe timeout recomputation |
+| `0x00416378` | `0x0041639A` | 34 B | Source-replaced bootloader address-identified optional runtime-notification wrapper | Complete authenticated entry; two direct callers, critical-context rejection, null no-op, and retained-backend forwarding |
+| `0x0041639A` | `0x004163B2` | 24 B | Source-replaced bootloader address-identified registered runtime-callback adapter | Complete authenticated entry; unique Thumb literal and two registration-load ingress paths, low-bit record flag clearing, and exact indirect callback dispatch |
+| `0x004163B2` | `0x0041649A` | 232 B | Source-replaced bootloader address-identified registered runtime-object constructor | Complete authenticated entry; one direct caller, embedded/dynamic callback-record ownership, exact static/dynamic backend selection, tag clearing, and failure cleanup |
+| `0x0041649A` | `0x004164DA` | 64 B | Source-replaced guarded runtime submission wrapper | Complete authenticated entry; one direct caller |
+| `0x004164DA` | `0x0041652E` | 84 B | Source-replaced runtime object creation wrapper | Complete authenticated entry; one direct caller and exact static/dynamic storage contract |
+| `0x0041652E` | `0x0041658C` | 94 B | Source-replaced event-flags set wrapper | Complete authenticated entry; task/ISR split and conditional PendSV request |
+| `0x0041658C` | `0x00416590` | 4 B | Event-flags SRAM literal | Authenticated retained data (`0x200270D4`) |
+| `0x00416590` | `0x00416610` | 128 B | Source-replaced event-flags wait wrapper | Complete authenticated entry; wait-any/all, clear, and timeout mapping |
+| `0x00416610` | `0x004166AA` | 154 B | Source-replaced event-flags creation wrapper | Complete authenticated entry; six callers and static/dynamic tagged constructors |
+| `0x004166AA` | `0x00416710` | 102 B | Source-replaced tagged-handle acquire wrapper | Complete authenticated entry; nine callers and timeout mapping |
+| `0x00416710` | `0x00416762` | 82 B | Source-replaced tagged-handle release wrapper | Complete authenticated entry; nine callers and zero-argument plain release |
+| `0x00416762` | `0x00416816` | 180 B | Source-replaced semaphore creation wrapper | Complete authenticated entry; binary/counting and static/dynamic paths |
+| `0x00416816` | `0x004168A2` | 140 B | Source-replaced message-queue creation wrapper | Complete authenticated entry; two callers and static/dynamic storage contracts |
+| `0x004168A2` | `0x00416920` | 126 B | Source-replaced message-queue put wrapper | Complete authenticated entry; task/ISR paths, timeout mapping, and conditional PendSV |
+| `0x00416920` | `0x0041699A` | 122 B | Source-replaced message-queue get wrapper | Complete authenticated entry; task/ISR paths, timeout mapping, and conditional PendSV |
+| `0x0041699A` | `0x004169A4` | 10 B | Queue-wrapper alignment and SCB ICSR literal pool | Authenticated retained data (`0xE000ED04`) |
+| `0x004169A4` | `0x004169E2` | 62 B | Source-replaced unsigned bit-width helper | Complete authenticated entry; zero and 1–32 bit-width contract |
+| `0x004169E2` | `0x004169F2` | 16 B | Source-replaced trailing-zero helper | Complete authenticated entry; zero wraps to `0xFFFFFFFF` |
+| `0x004169F2` | `0x004169FC` | 10 B | Source-replaced unsigned floor-log2 helper | Complete authenticated entry; zero wraps to `0xFFFFFFFF` |
+| `0x004169FC` | `0x00416AAA` | 174 B | Source-replaced TLSF v3.1 block-header primitive cluster | Twelve complete authenticated entries; size/status flags, block/user-pointer conversion, and offset arithmetic |
+| `0x00416AAA` | `0x00416BCE` | 292 B | Source-replaced TLSF v3.1 physical-block and alignment cluster | Eight complete authenticated entries; neighbor/link/state propagation, alignment, and recovered assertions |
+| `0x00416BCE` | `0x00416C4E` | 128 B | Source-replaced TLSF v3.1 request-size and class-mapping cluster | Three complete authenticated entries; size bounds, insertion mapping, and rounded search mapping |
+| `0x00416C4E` | `0x00416E04` | 438 B | Source-replaced TLSF v3.1 free-list cluster | Three complete authenticated entries; suitable-class selection, exhaustion, sentinel links, removal/insertion, and bitmap transitions |
+| `0x00416E04` | `0x0041711C` | 792 B | Source-replaced TLSF v3.1 allocator-operation cluster | Ten complete authenticated entries; request adjustment, split/trim/absorb/coalescing, lookup, and allocation preparation |
+| `0x0041711C` | `0x004172DA` | 446 B | Source-replaced TLSF v3.1 public allocator cluster | Seven complete authenticated entries; control construction, pool overhead/addition, create/create-with-pool, malloc, and free |
+| `0x004172DA` | `0x0041733C` | 98 B | TLSF/EasyLogger transition literals and alignment | Authenticated retained non-entry data |
+| `0x0041733C` | `0x004176CE` | 914 B | Source-replaced EasyLogger control cluster | Ten complete authenticated entries: init/start, setters, lock transitions, and tag-level query/reset |
+| `0x004176CE` | `0x00417AD0` | 1,026 B | Source-replaced EasyLogger `elog_output` | Complete interrupt-gated filtering, formatting, keyword, color, truncation, and sink contract |
+| `0x00417AD0` | `0x00417AD4` | 4 B | EasyLogger CSI-start literal/alignment | Authenticated retained non-executable data |
 | `0x00417AD4` | `0x00417B3E` | 106 B | Source-replaced EasyLogger `get_fmt_enabled` | Generated redirect and NOP fill |
 | `0x00417B3E` | `0x00417B48` | 10 B | EasyLogger punctuation/alignment gap | Official compatibility bytes retained |
 | `0x00417B48` | `0x00417B62` | 26 B | Source-replaced EasyLogger unsigned-argument predicate | Generated redirect and NOP fill |
 | `0x00417B62` | `0x00417B7C` | 26 B | Source-replaced EasyLogger pointer-argument predicate | Generated redirect and NOP fill |
-| `0x00417B7C` | `0x0041B158` | 13,788 B | Even bootloader before EasyLogger bounded copy | Official compatibility bytes retained |
+| `0x00417B7C` | `0x00417BB8` | 60 B | Source-replaced EasyLogger output-lock enable transition | Complete authenticated entry; saved lock-state reconciliation |
+| `0x00417BB8` | `0x0041A648` | 10,896 B | Even bootloader before the EasyLogger boot port | Official compatibility bytes retained; includes remaining service software gaps |
+| `0x0041A648` | `0x0041A6DA` | 146 B | Source-replaced EasyLogger boot-port cluster | Nine complete entries: mutex lifecycle, initialization, output/lock forwarding, time, and task name |
+| `0x0041A6DA` | `0x0041A6F0` | 22 B | EasyLogger boot-port format/literal island | Authenticated retained non-executable data |
+| `0x0041A6F0` | `0x0041A700` | 16 B | Source-replaced EasyLogger process/thread info wrappers | Two complete entries sharing the task-name helper |
+| `0x0041A700` | `0x0041B158` | 2,648 B | Even bootloader between EasyLogger port and bounded copy | Official compatibility bytes retained; includes remaining driver/transport software gaps |
 | `0x0041B158` | `0x0041B1FA` | 162 B | Source-replaced EasyLogger `elog_strcpy` | Generated redirect and NOP fill |
-| `0x0041B1FA` | `0x00426506` | 45,836 B | Even bootloader before the MSPI interrupt-clear leaf | Official compatibility bytes retained |
+| `0x0041B1FA` | `0x0041B854` | 1,626 B | Even bootloader before the EasyLogger output driver | Official compatibility bytes retained |
+| `0x0041B854` | `0x0041B862` | 14 B | Source-replaced EasyLogger channel-one output driver | Complete authenticated level-dropping wrapper |
+| `0x0041B862` | `0x0041F918` | 16,566 B | Even bootloader before the four-channel transfer routine | Official compatibility bytes retained |
+| `0x0041F918` | `0x0041F9B6` | 158 B | Source-replaced four-channel descriptor transport | Complete validation, lower start, completion polling, and timeout entry |
+| `0x0041F9B6` | `0x0041F9D8` | 34 B | Boot-service vector/literal island | Authenticated retained non-executable data |
+| `0x0041F9D8` | `0x0041F9E6` | 14 B | Source-replaced millisecond boot delay | Wrapping ×1,000 conversion and raw-delay forwarding |
+| `0x0041F9E6` | `0x0041F9EE` | 8 B | Source-replaced raw boot delay | Complete scalar forwarding wrapper |
+| `0x0041F9EE` | `0x0041F9F0` | 2 B | Boot-service alignment | Authenticated retained non-executable bytes |
+| `0x0041F9F0` | `0x0041F9F8` | 8 B | Source-replaced initializer priority comparator | Complete eight-byte record comparator; stored Thumb ingress retained |
+| `0x0041F9F8` | `0x0041FA40` | 72 B | Source-replaced boot initializer runner | Bounded table copy, sort, null skip, and callback dispatch |
+| `0x0041FA40` | `0x0041FA50` | 16 B | Boot initializer pointer/alignment data | Official initializer pointers, alignment, and stored comparator pointer retained |
+| `0x0041FA50` | `0x0041FA98` | 72 B | Source-replaced boot platform setup | Guarded teardown, reset/mode, VFP derive, 20-byte configuration submit, and channels four/five setup |
+| `0x0041FA98` | `0x0041FAD0` | 56 B | Source-replaced guarded boot teardown | Two fail-stop status stages, state clear, pin reconciliation, and guard clear |
+| `0x0041FAD0` | `0x0041FADC` | 12 B | Guarded-teardown literal pool | Official guard/configuration pointers retained |
+| `0x0041FADC` | `0x0041FCF6` | 538 B | Source-replaced pin-group dispatcher | Two banks, cumulative subtype groups, SRAM configuration words, and ordered pin configuration |
+| `0x0041FCF6` | `0x00426506` | 26,640 B | Even bootloader after pin-group dispatcher and before MSPI interrupt clear | Official compatibility bytes retained; includes remaining executable service gaps |
 | `0x00426506` | `0x00426536` | 48 B | Source-replaced AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_clear` | Generated redirect over the authenticated complete stock body |
 | `0x00426536` | `0x00434477` | 57,153 B | Remaining Even bootloader | Official compatibility bytes retained |
 | `0x00434477` | `0x00434478` | 1 B | Bootloader source-overlay alignment | Generated zero byte |
@@ -136,7 +201,16 @@ The reviewed order is:
 | `0x004349FC` | `0x00434A44` | 72 B | Unsigned 64-bit hexadecimal output helper | Clean-room relocation-free C leaf |
 | `0x00434A44` | `0x00434A58` | 20 B | Nullable string-length helper | Clean-room relocation-free C leaf |
 | `0x00434A58` | `0x00434A78` | 32 B | Null-output-aware repeated-character helper | Clean-room relocation-free C leaf |
-| `0x00434A78` | `0x00438000` | 13,704 B | Free bootloader-partition headroom before Apollo main | Confirmed non-overlap |
+| `0x00434A78` | `0x00434BB8` | 320 B | Fixed-point float converter | Clean-room hard-float C leaf |
+| `0x00434BB8` | `0x00434F80` | 968 B | Bootloader formatter core | Clean-room C leaf; 15 strict internal calls |
+| `0x00434F80` | `0x00434FBC` | 60 B | Bootloader variadic logging dispatch wrapper | Clean-room C leaf; one strict call to formatter core |
+| `0x00434FBC` | `0x00434FEA` | 46 B | Bootloader substring-search primitive | Clean-room relocation-free C leaf |
+| `0x00434FEA` | `0x00435018` | 46 B | Bootloader critical-context predicate | Clean-room C leaf; one strict retained-state-query call |
+| `0x00435018` | `0x00435048` | 48 B | Bootloader runtime-state gate acquisition wrapper | Clean-room C leaf; strict calls to the context predicate and retained-state query |
+| `0x00435048` | `0x0043506C` | 36 B | Bootloader runtime-state and SRAM-gate mapper | Clean-room C leaf; one strict retained-state-query call |
+| `0x0043506C` | `0x004350A4` | 56 B | Bootloader runtime-state gate release wrapper | Clean-room C leaf; four strict reviewed calls |
+| `0x004350A4` | `0x004350BC` | 24 B | Bootloader critical-context value dispatcher | Clean-room C leaf; three strict reviewed calls/jumps |
+| `0x004350BC` | `0x00438000` | 12,100 B | Free bootloader-partition headroom before Apollo main | Confirmed non-overlap |
 | `0x00438000` | `0x00794324` | 3,523,364 B | Even main application blob | Confirmed by OTA preamble and bootloader installer |
 
 The canonical Ghidra discovery manifest tiles this entire half-open range into

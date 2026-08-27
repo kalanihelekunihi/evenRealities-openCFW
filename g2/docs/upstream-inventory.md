@@ -25,7 +25,11 @@ checks are in the
 | Google liblc3 | Tagged v1.1.3 baseline, commit `96a3af0beb5487aca3b98a4b992a539a1f6d80d1`; stock-compatible public interval `bb85f7d…1de85e2`, with `9f1e206…` excluded | A byte-identical 38-file Apache-2.0 snapshot is admitted. Four public entries and five `service_audio.c` calls authenticate the linked encoder; SNS `FLT_MAX` supplies the lower bound and the byte-0/1/2 encoder layout supplies the upper bound. The exact producing checkout is unobservable because the post-v1.1.3 compatible delta affects a dead-stripped misspelled API. Target build/performance, buffer integration, and interoperability remain gated. See the [snapshot README](../third_party/liblc3/README.openCFW.md) and [source recovery](research/g2-liblc3-source-recovery.md). |
 | FreeType | **2.9.1**, official annotated tag object `ad55868d889b6ba8d2aed846b4b4b460f8a83e42`, peeled commit `86bc8a95056c97a810986434a3f268cbe67f2902` | The unchanged FTL and 297 byte-exact source files are authenticated offline; a recovered header pins the ten-module G2 order, and focused audits prove v40/minimal TrueType, substantive GX variation services, the `am_ftsystem.c` allocator and constructor seams, plus exact `FT_Done_Face` at `[0x00526814,0x0052687E)` and its caller closure. Whole-image branch/pointer evidence shows the conventional `FT_Done_FreeType` topology is absent, so no entry may be assigned safely and this is not a remaining linked-function gap. Remaining unknowns are other configuration toggles, exact IAR compiler/linker details, and external font asset identities, payloads, and runtime arrays. The snapshot remains production-excluded pending explicit source-configuration and promotion review. See the [snapshot audit](research/freetype-2.9.1-snapshot-audit.md) and [binary recovery audit](research/freetype-recovery-audit.md) |
 | FlashDB | 2.1.1 (armink), lightweight tag/commit `2.1.1` / `714d6159e7e6afb267a3953756abca445c350e61` | The selected 14-file Apache-2.0 KVDB/FAL snapshot is byte-exact to the official tag and verified offline; this is an openCFW compatibility selection, not proof that Even used the checkout unchanged. The analyzer authenticates the 1-bit write granularity, 4-KiB sectors, 64-entry caches, short-enum `0x8AC` object ABI, partitions, callbacks, and `sysenv@kvdb` / `factory@NVdb` bindings. All 21 default values are recovered, including zero-initialized `kvbooCount`; its persisted read/increment/write lifecycle and eleven record migrations are bounded. A production-excluded port matches upstream partition reads, preserves the shared CMSIS mutex, maps every nonzero MX25 result to `-1`, and denies write/erase. Production admission still waits for a golden capture, non-destructive mount policy, and schema semantics. See the [snapshot README](../third_party/flashdb/README.openCFW.md), [configuration audit](research/flashdb-configuration-recovery-audit.md), [system-KVDB recovery](research/g2-service-kvdb-recovery.md), and [read-only port audit](research/flashdb-readonly-port-source-candidate-audit.md) |
-| EasyLogger | `2.2.99` source-equivalent core from `cd93d9c768415f4b7279f2d3ef2366ce15ea087c` through vendored `a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24`; no upstream tag | Main control/filter/output/hexdump paths plus the shared four-helper quartet in both Apollo images are source-integrated. `elog_async_api.c` is proven downstream G2 code; its complete fixed-record queue lifecycle, callback/record consumer, and event-worker/thread orchestration are clean-room, dual-profile qualified, and production-excluded. Target concurrency/hardware stress, production admission, and the boot/main image-specific transports remain explicit boundaries |
+| EasyLogger | `2.2.99` source-equivalent core from `cd93d9c768415f4b7279f2d3ef2366ce15ea087c` through vendored `a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24`; no upstream tag | Main control/filter/output/hexdump paths and the shared four-helper quartet are source-integrated. The bootloader production-routes its ten-entry control cluster, complete 115-caller interrupt-gated `elog_output`, output-lock-enable transition, all eleven mutex/time/task-info boot-port entries, and the G2-specific channel-one driver/four-channel descriptor transport under dual-profile pins. `elog_async_api.c` is proven downstream G2 code; its clean-room queue/worker implementation remains production-excluded. Live concurrency, DMA/interrupt completion, and hardware stress remain explicit physical-evidence boundaries. |
+| G2 bootloader delay and initializer services | No separate upstream dependency; first-party Even compatibility boundary | Four complete entries / 102 stock executable bytes at `[0x0041F9D8,0x0041FA40)` are production-routed to 96 relocation-free clean-room Thumb bytes. The delay seams, initializer table and scratch addresses, sort ABI, stored comparator pointer, 256-record cap, and callback dispatch are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live timing, callback effects, and cold-boot validation are blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-boot-services-41f9d8-41fa40-source-closure.md). |
+| G2 bootloader guarded teardown | No separate upstream dependency; first-party Even compatibility boundary | The complete 56-byte entry at `[0x0041FA98,0x0041FAD0)` is production-routed to one 72-byte relocation-free clean-room leaf. Exact guard/state addresses, two status stages, fail-stop policy, pin-28 configuration, sole caller, and literal pool are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live pin/power/cold-boot validation is blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-guarded-teardown-41fa98-41fad0-source-closure.md). |
+| G2 bootloader platform setup | No separate upstream dependency; first-party Even compatibility boundary | The complete 72-byte entry at `[0x0041FA50,0x0041FA98)` is production-routed to one 96-byte relocation-free clean-room leaf. Guarded teardown, reset/mode calls, hard-float `25.0f` derive ABI, 20-byte stock configuration copy/submit, channels four/five, and the sole caller are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live configuration/channel/cold-boot validation is blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-platform-setup-41fa50-41fa98-source-closure.md). |
+| G2 bootloader pin-group dispatcher | No separate upstream dependency; first-party Even compatibility boundary | The complete 538-byte entry at `[0x0041FADC,0x0041FCF6)` is production-routed to one 428-byte relocation-free clean-room leaf. Two-bank subtype fall-through, 30 SRAM configuration-word references, ordered pin numbers, no-op cases, and both callers are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live pinmux/GPIO/electrical validation is blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-pin-groups-41fadc-41fcf6-source-closure.md). |
 | mpaland/printf | `d3b984684bb8a8bdc48cc7a1abecb93ce59bbe3e` | All linked reverse-output, integer, float, exponential, string, variadic-core, public-wrapper, and G2 `%PV`/`%pV` extension behavior is production source-owned. Only the binary-unobservable historical checkout remains; there is no linked functional gap. |
 | AmbiqSuite | 5.1.0-lineage Apollo510 source at public replay commit `5efc0228528a8adce5eae0d226fac85d2551eb3b`, with CMSIS Core pinned at `d23a6949a0331ca96853bcd98b0fdcc4db47184c` | The licensed Apollo510/CMSIS MSPI closure is vendored; both production overlays retain the exact-upstream interrupt-clear leaf. The complete stock system-sleep body adds a decisive version proof: its two WFI operations match 5.1.0 and exclude 5.0.0. Independent I2S and PDM consumers map 24 public HAL APIs to the same replay; the PDM source is pinned to Git blob `23a440bf…`. The stock build predates the public import, so the private pre-release generating commit remains unavailable; see the [product RTOS recovery](research/g2-product-rtos-recovery.md) and [PDM recovery](research/g2-drv-pdm-production-recovery.md) |
 | AmbiqSuite ANCC profile | 2.2.0-4.5.0 implementation-equivalent ANCS client; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 17-definition source/header admitted as the oracle. G2's 21-function object retains 12 Ambiq-derived bodies and adds nine bounded message/sync/whitelist adapters; all 21 entries are now production-routed from maintained C with the exact SRAM ABI and hardened fragmented parser. The source-identical interval still prevents recovery of one private producing commit. Live ANCS/controller/dual-temple validation is blocked by unavailable authorized responsive hardware. See the [ANCC source recovery](research/ambiqsuite-ancc-profile-source-recovery.md) |
@@ -505,14 +509,31 @@ strict relocated text/string closure. Canonical provider accounting is 935
 source-owned bytes before the following runtime tranche. The component now
 also closes the Arm EABI byte-fill/forward-copy, bounded-comparison,
 reject/accept string-span, reflected CRC-32, sole-caller `0x200270CC` setter,
-and nine adjacent numeric/format-primitive bodies. These leaves cover unsigned
+and 41 numeric/formatter/dispatch/string/context/gate/runtime bodies. These leaves cover unsigned
 64-bit divide by ten, digit counts, wrapping parsing, decimal/hex output,
-nullable string length, and repeated-character output with three strict
-internal relocations. Final accounting is 1,529 source-owned bytes, 2,078
-generated patch bytes, eight alignment bytes, and 146,521 retained official
-bytes. Remaining float/format and runtime/IAR
-wrappers remain an explicit software
-gap, and physical boot/stream validation is blocked by unavailable authorized
+nullable string length, repeated output, fixed-point float conversion, and the
+complete formatter core, variadic logging dispatch, substring search, and
+critical-context detection, gate acquisition, state mapping, release,
+context-value dispatch, the address-identified `0x004160FE` dispatcher, and
+the `0x004161C6` retained-value wrapper, the validated runtime-call wrapper at
+`0x004161CE`, the guarded runtime-action wrapper at `0x00416200`, and the
+two-phase runtime-transfer wrapper at `0x0041623A`, the masked runtime-wait
+wrapper at `0x004162C4`, the optional runtime-notification wrapper at
+`0x00416378`, the registered runtime-callback adapter at `0x0041639A`, and the
+registered runtime-object constructor at `0x004163B2`, guarded submission,
+object creation, event-flags operations, tagged-handle acquire/release, and
+semaphore/message-queue creation, message-queue put/get, bit width,
+count-trailing-zeros, floor-log2, twelve authenticated TLSF v3.1
+block-header primitives, eight TLSF physical-block/state/alignment helpers,
+three TLSF request-size/class-mapping helpers, three TLSF free-list
+selection/mutation helpers, ten allocator-operation helpers, and seven public
+TLSF allocator entries, with 181 strict relocations.
+Final accounting is 6,931 source-owned bytes, 8,208 generated patch bytes,
+14 alignment bytes, and 140,391 retained
+official bytes. The
+following EasyLogger executable bodies from `0x0041733C` remain an explicit
+software gap after 98 authenticated transition-data bytes, and physical
+boot/stream validation is blocked by unavailable authorized
 responsive hardware.
 Focused evidence is recorded in
 `docs/research/littlefs-file-tell-source-boundary-audit.md`,
@@ -533,7 +554,8 @@ Focused evidence is recorded in
 `docs/research/g2-bootloader-crc32-source-closure.md`, plus
 `docs/research/g2-bootloader-store-200270cc-source-closure.md`, plus
 `docs/research/g2-bootloader-numeric-source-closure.md` and
-`docs/research/g2-bootloader-format-primitives-source-closure.md`.
+`docs/research/g2-bootloader-format-primitives-source-closure.md`, plus
+`docs/research/g2-bootloader-float-format-source-closure.md`.
 
 ### Historical fallback-bitops and FreeRTOS NTZ milestones
 

@@ -36,10 +36,10 @@ OVERLAY_ADDRESS = 0x00434478
 FUNCTION_OFFSET = 664
 FUNCTION_ADDRESS = OVERLAY_ADDRESS + FUNCTION_OFFSET
 OVERLAY_SHA256 = (
-    "6693a0fec4dfd7c9ba82639de56264a1ba1519768b6aa90b40885092f6fe4913"
+    "a27f7ba39fdfe6a7364d59577cfa387a0a601aedf773612d1cb1b77700c6538d"
 )
 PROVIDER_SHA256 = (
-    "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d"
+    "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7"
 )
 
 
@@ -186,9 +186,9 @@ class BootloaderRedirectInitTests(unittest.TestCase):
         self.assertEqual(patch["replacement_hex"][8:], "00bf" * 42)
 
     def test_relocated_closure_and_provider_are_pinned(self) -> None:
-        self.assertEqual(len(self.overlay), 1856)
+        self.assertEqual(len(self.overlay), 10004)
         self.assertEqual(sha256(self.overlay), OVERLAY_SHA256)
-        self.assertEqual(len(self.provider), 150456)
+        self.assertEqual(len(self.provider), 158604)
         self.assertEqual(sha256(self.provider), PROVIDER_SHA256)
         function = self.report["overlay"]["functions"][
             "open_cfw_bootloader_redirect_init"
@@ -212,9 +212,14 @@ class BootloaderRedirectInitTests(unittest.TestCase):
         )
 
     def test_source_and_config_are_fail_closed(self) -> None:
-        self.assertEqual(sha256(SOURCE.read_bytes()), self.config[
-            "relocated_leaves"
-        ][0]["source"]["sha256"])
+        source_entry = next(
+            item
+            for item in self.config["relocated_leaves"]
+            if item["function"] == "open_cfw_bootloader_redirect_init"
+        )
+        self.assertEqual(
+            sha256(SOURCE.read_bytes()), source_entry["source"]["sha256"]
+        )
         self.assertIn("GPL-3.0-or-later", SOURCE.read_text(encoding="utf-8"))
         self.assertIn("0x2002712CU", HEADER.read_text(encoding="utf-8"))
         self.assertFalse(self.report["safety"]["flashing_performed"])

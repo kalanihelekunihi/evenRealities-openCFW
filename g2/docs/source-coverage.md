@@ -571,14 +571,39 @@ and ownership boundary.
 | `0x00415A08...0x00415A7B` | 116 | Generated | Complete unsigned 64-bit hexadecimal-output redirect and NOP fill |
 | `0x00415A7C...0x00415A93` | 24 | Generated | Complete nullable string-length redirect and NOP fill |
 | `0x00415A94...0x00415AB5` | 34 | Generated | Complete repeated-character output redirect and NOP fill |
-| `0x00415AB6...0x00417AD3` | 8,222 | Opaque | Official bootloader float/format engine and gap before EasyLogger |
+| `0x00415AB6...0x00415BF5` | 320 | Generated | Complete fixed-point float converter redirect and NOP fill |
+| `0x00415BF6...0x00415FAD` | 952 | Generated | Complete bootloader formatter-core redirect and NOP fill |
+| `0x00415FAE...0x0041733B` | 5,006 | Opaque | Official logging wrapper and gap before the source-owned EasyLogger service |
+| `0x0041733C...0x004176CD` | 914 | Generated | Ten complete EasyLogger control entries replaced by source redirects |
+| `0x004176CE...0x00417ACF` | 1,026 | Generated | Complete EasyLogger `elog_output` replaced by source redirect |
+| `0x00417AD0...0x00417AD3` | 4 | Opaque | Authenticated EasyLogger CSI-start literal/alignment data |
 | `0x00417AD4...0x00417B3D` | 106 | Generated | Complete EasyLogger `get_fmt_enabled` replaced by source entry redirect |
 | `0x00417B3E...0x00417B47` | 10 | Opaque | Official EasyLogger punctuation/alignment gap |
 | `0x00417B48...0x00417B61` | 26 | Generated | Complete EasyLogger unsigned-argument format predicate replaced by source entry redirect |
 | `0x00417B62...0x00417B7B` | 26 | Generated | Complete EasyLogger pointer-argument format predicate replaced by source entry redirect |
-| `0x00417B7C...0x0041B157` | 13,788 | Opaque | Official bootloader between EasyLogger format predicates and bounded copy |
+| `0x00417B7C...0x00417BB7` | 60 | Generated | Complete EasyLogger output-lock-enable entry replaced by source redirect |
+| `0x00417BB8...0x0041A647` | 10,896 | Opaque | Official bootloader between EasyLogger lock transition and boot port |
+| `0x0041A648...0x0041A6D9` | 146 | Generated | Nine complete EasyLogger boot-port entries replaced by source redirects |
+| `0x0041A6DA...0x0041A6EF` | 22 | Opaque | Authenticated EasyLogger boot-port format/literal island |
+| `0x0041A6F0...0x0041A6FF` | 16 | Generated | Complete EasyLogger process/thread info wrappers replaced by source redirects |
+| `0x0041A700...0x0041B157` | 2,648 | Opaque | Official bootloader between EasyLogger boot port and bounded copy |
 | `0x0041B158...0x0041B1F9` | 162 | Generated | Complete EasyLogger `elog_strcpy` replaced by source entry redirect |
-| `0x0041B1FA...0x00426505` | 45,836 | Opaque | Official bootloader before the MSPI interrupt-clear leaf |
+| `0x0041B1FA...0x0041B853` | 1,626 | Opaque | Official bootloader before the EasyLogger output driver |
+| `0x0041B854...0x0041B861` | 14 | Generated | Complete EasyLogger channel-one output driver replaced by source redirect |
+| `0x0041B862...0x0041F917` | 16,566 | Opaque | Official bootloader before the four-channel transfer routine |
+| `0x0041F918...0x0041F9B5` | 158 | Generated | Complete four-channel descriptor transport replaced by source redirect |
+| `0x0041F9B6...0x0041F9D7` | 34 | Opaque | Authenticated boot-service vector/literal island |
+| `0x0041F9D8...0x0041F9E5` | 14 | Generated | Complete millisecond boot-delay wrapper replaced by source redirect |
+| `0x0041F9E6...0x0041F9ED` | 8 | Generated | Complete raw boot-delay wrapper replaced by source redirect |
+| `0x0041F9EE...0x0041F9EF` | 2 | Opaque | Authenticated boot-service alignment |
+| `0x0041F9F0...0x0041F9F7` | 8 | Generated | Complete initializer-priority comparator replaced by source redirect |
+| `0x0041F9F8...0x0041FA3F` | 72 | Generated | Complete bounded initializer-table runner replaced by source redirect |
+| `0x0041FA40...0x0041FA4F` | 16 | Opaque | Official initializer pointers, alignment, and stored comparator pointer before platform setup |
+| `0x0041FA50...0x0041FA97` | 72 | Generated | Complete boot platform-setup entry redirect and NOP fill |
+| `0x0041FA98...0x0041FACF` | 56 | Generated | Complete guarded two-stage teardown and pin-state reconciliation entry replaced by source redirect |
+| `0x0041FAD0...0x0041FADB` | 12 | Opaque | Official guarded-teardown guard/configuration pointer literal pool |
+| `0x0041FADC...0x0041FCF5` | 538 | Generated | Complete two-bank pin-group dispatcher redirect and NOP fill |
+| `0x0041FCF6...0x00426505` | 26,640 | Opaque | Official bootloader after pin-group dispatcher and before MSPI interrupt clear |
 | `0x00426506...0x00426535` | 48 | Generated | Authenticated AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_clear` entry redirect |
 | `0x00426536...0x00434476` | 57,153 | Opaque | Remaining official bootloader |
 | `0x00434477` | 1 | Generated | Zero alignment before source overlay |
@@ -8150,22 +8175,42 @@ source-owned bytes, 1,452 generated patch bytes, eight alignment bytes, and
 unavailable authorized responsive hardware. See
 `docs/research/g2-bootloader-store-200270cc-source-closure.md`.
 
-## Current bootloader numeric-runtime increment
+## Current bootloader numeric/logging/runtime/event-flags/TLSF increment
 
-Nine adjacent entries at `[0x00415844,0x00415AB6)` now route to clean-room C:
-the five numeric helpers plus decimal/hex output, nullable string length, and
-repeated-character output. The 626 stock bytes and 19 direct caller edges are
-authenticated. The leaves occupy 424 compiled bytes at
-`[0x004348D0,0x00434A78)`; three strict internal relocations connect decimal
-helpers and all other leaves are relocation-free. Host arithmetic, parser,
-format, nullable-output, and repeat tests pass under both target profiles.
+Eighty-four entries at `[0x00415844,0x004172DA)` now route to C:
+the numeric helpers, decimal/hex output, nullable string length, repeated
+output, fixed-point float conversion, complete formatter core, and variadic
+logging dispatch, substring search, critical-context detection, and runtime-
+state gate acquisition, four-state mapping and release, context-value
+dispatch, the address-identified runtime dispatcher at `0x004160FE`, and the
+retained-value wrapper at `0x004161C6`, the validated runtime-call wrapper at
+`0x004161CE`, the guarded runtime-action wrapper at `0x00416200`, and the
+two-phase runtime-transfer wrapper at `0x0041623A`, the masked runtime-wait
+wrapper at `0x004162C4`, the optional runtime-notification wrapper at
+`0x00416378`, the registered runtime-callback adapter at `0x0041639A`, and the
+registered runtime-object constructor at `0x004163B2`, guarded submission,
+runtime object creation, event-flags set/wait/create, and tagged-handle
+acquire/release, semaphore creation, message-queue creation, message-queue
+put/get, unsigned bit width, count-trailing-zeros, floor-log2, twelve TLSF
+v3.1 block-header primitives, eight physical-block/state/alignment helpers,
+three request-size/class-mapping helpers, three free-list selection and
+mutation helpers, ten allocator-operation helpers, and seven public allocator
+entries. The 6,756 stock bytes, 259 fail-closed topology entries, and two
+registered-pointer ingress paths are authenticated. The leaves occupy 5,826
+compiled bytes; 181 strict
+relocations connect only reviewed source-owned helpers or the retained
+runtime-state query. Host arithmetic, parser,
+format, CRLF, float, nullable-output, and repeat tests pass under both profiles.
 
-Current aggregate accounting is 51 routed functions, 1,529 source-owned
-bytes, 2,078 generated patch bytes, eight alignment bytes, and 146,521 retained
+Current aggregate accounting is 126 routed functions, 6,931 source-owned
+bytes, 8,208 generated patch bytes, 14 alignment bytes, and 140,391 retained
 official bytes. Physical boot and caller-path evidence remains blocked by
-unavailable authorized responsive hardware. The adjacent float/format engine
-remains a software gap. See
-`docs/research/g2-bootloader-numeric-source-closure.md`.
+unavailable authorized responsive hardware. The logging literal pool at
+`[0x00415FDA,0x00415FFA)` and queue-wrapper pool
+`[0x0041699A,0x004169A4)` remain authenticated data. The 98-byte transition
+span `[0x004172DA,0x0041733C)` is also authenticated data; the next distinct
+complete callable body starts at `0x0041733C`. See
+`docs/research/g2-bootloader-tlsf-public-41711c-4172da-source-closure.md`.
 
 ## Current ICM45608 IMU-driver increment
 
@@ -9073,3 +9118,118 @@ The canonical overlay/component/package identities are 375,186 / 3,898,582 /
 five container-only, and six protected regions. Live G2/EM9305 validation is
 explicitly blocked by unavailable authorized responsive hardware; no signing
 or flashing occurred.
+
+## Current bootloader EasyLogger port source increment
+
+All eleven callable entries in `[0x0041A648,0x0041A700)` now route to
+`runtime_easylogger_port_41a648.c`; the authenticated 22-byte
+`[0x0041A6DA,0x0041A6F0)` literal island remains separately opaque. The
+source replaces 162 executable stock bytes with 204 relocation-free Thumb
+bytes. Host oracles cover mutex lifecycle/null handling, exact output argument
+forwarding, tick formatting, and every task-name policy branch.
+
+The Apple overlay/provider are 9,088 / 157,688 bytes with SHA-256
+`aeceaf38dee61ece3a1fc9518d5d08dd5eb4148d3ff8811659fe695a24cb1578` and
+`48bc79d2391b5842316fe9c045727b90da96009ecd2dbc21d70fd3af5e3acff7`.
+Linux produces 9,072 / 157,672 bytes with SHA-256
+`34d79ac61578fb5c189b06a15c44731506c9cf92f7642f21b531fedc0c0dc2d3` and
+`9fcb060ca96964b71da9b1c6f75b1afc5d923a285ce07f6d7e43de31c311be75`.
+Canonical Apple accounting is 9,075 source-owned, 10,370 generated patch,
+14 alignment, and 138,229 retained official bytes across 149 functions and
+147 patch sites. Physical behavior remains blocked by unavailable authorized
+responsive right-temple evidence; no functional-completeness claim is made.
+
+## Current bootloader EasyLogger transport source increment
+
+The complete channel-one output driver and four-channel descriptor transport
+at `[0x0041B854,0x0041B862)` and `[0x0041F918,0x0041F9B6)` now route to two
+clean-room C leaves. They replace 172 executable stock bytes with 136
+relocation-free Thumb bytes while preserving channel-table offsets, descriptor
+layout, lower start, 1,000-poll/ten-wait policy, and stock timeout result.
+
+Apple produces a 9,224-byte overlay and 157,824-byte provider with SHA-256
+`790603494de6a154f9032c4e7257b4c203e477893619c0b25325b972b39c45da` and
+`ed616af6c46214891f25e3102f04554129a989fc83422700eb29d6242d3e68f5`;
+Linux produces 9,208 / 157,808 bytes with SHA-256
+`ffd38e6fd268398b0c8c5cc5afd0d898e2fe3cb62d000f2c91b96e4682f8b9a8` and
+`1d4c130d0e9ac6de37b8bfe9c682b096eff5d85048faaa22fd414b1da3bc622c`.
+Accounting is 9,211 source-owned, 10,542 generated patch, 14 alignment, and
+138,057 retained official bytes. Live transport behavior remains explicitly
+blocked by unavailable authorized responsive right-temple evidence.
+
+## Current bootloader delay and initializer-service source increment
+
+Four complete entries at `[0x0041F9D8,0x0041FA40)` now route to clean-room C:
+millisecond and raw delay wrappers, the initializer-record priority
+comparator, and the bounded initializer runner. They replace 102 executable
+stock bytes with 96 relocation-free Thumb bytes. The authenticated 34-byte
+vector/literal island before them and two-byte internal alignment remain
+opaque non-executable compatibility data.
+
+Host coverage validates 32-bit delay overflow and forwarding, comparator
+ordering, the four-record table, stable sorted callback order, null skipping,
+zero records, and the 256-record cap. Both compiler profiles target-build all
+four leaves with no relocations; exact caller and stored-pointer routing is
+fail-closed.
+
+Apple produces a 9,320-byte overlay and 157,920-byte provider with SHA-256
+`aaefcef3e31df12ec06a2ee7f505430f17daba8061099677143b24505ea96dc7` and
+`56350fb0fc8d663dc2202f11389573b52ddd30536e81f44539006f7810f2744d`;
+Linux produces 9,304 / 157,904 bytes with SHA-256
+`6be4f564d6ef9ace9c98de17bf2cc082142440a3da3716521a9e3e529ebb017b` and
+`3961d3432af2cbeb83731d79792071161980decbc6cf635c57b6a396f09f3504`.
+Accounting is 9,307 source-owned, 10,644 generated patch, 14 alignment, and
+137,955 retained official bytes. Live delay/initializer/cold-boot behavior is
+blocked by unavailable authorized responsive right-temple evidence, and later
+retained executable bodies remain software gaps.
+
+## Current bootloader guarded-teardown source increment
+
+The complete `[0x0041FA98,0x0041FAD0)` guarded teardown now routes to one
+clean-room C leaf. It replaces 56 executable stock bytes with 72
+relocation-free Thumb bytes while preserving exact guard activation, two
+status stages, nonzero fail-stop policy, state clear, pin-28 configuration,
+and final guard clear. Its sole caller and following 12-byte literal pool are
+authenticated.
+
+Apple produces a 9,392-byte overlay and 157,992-byte provider with SHA-256
+`2764ebb28ccde7977522ee318869a03805dfa2e0bc718c16de51c2ce4579828f` and
+`0fa99abd573ab6a8845c3807cef69d29ee29d46606f1044bae6b571971dff659`;
+Linux produces 9,376 / 157,976 bytes with SHA-256
+`66bb62b17d33dbdec3f1015299fee2f04cb435a15d8a335b98c64eb6d000dac6`
+and `bddf904854256b0403d5750d756ca2b98d379434362918a94f876fa7c69e3427`.
+Accounting is 9,379 source-owned, 10,700 generated patch, 14 alignment, and
+137,899 retained official bytes. Live teardown, pin, power-state, and
+cold-boot behavior remains blocked by unavailable authorized responsive
+right-temple evidence; later retained executable bodies remain software gaps.
+
+## Current bootloader platform-setup source increment
+
+The complete `[0x0041FA50,0x0041FA98)` platform setup now routes to one
+clean-room C leaf. It replaces 72 executable stock bytes with 96
+relocation-free Thumb bytes while preserving guarded teardown, reset/mode,
+hard-float `25.0f` derive, exact 20-byte stock configuration copy/submit, and
+channel-four/five setup. Its sole caller at `0x0041B87E` is authenticated.
+
+Apple produces a 9,488-byte overlay and 158,088-byte provider with SHA-256
+`da89534353b40e8787963c24dc0aa6209b11948cd128b8d05115525685b53adc`
+and `5283432f02f86b2c62dea8eac44c567f99b3c4d261c3412ab638b67535486145`;
+Linux produces 9,472 / 158,072 bytes with SHA-256
+`1b97e43f2615b0281850b16c5f14aeb31bd6af3d792008bb62a9c60cff2b4b5b`
+and `991fc763c08fdf890d18840d84b6a386864dae812757035faa4e216a1c4663e3`.
+Accounting is 9,475 source-owned, 10,772 generated patch, 14 alignment, and
+137,827 retained official bytes. Live reset/configuration/channel/cold-boot
+behavior remains blocked by unavailable authorized responsive right-temple
+evidence; later retained executable bodies remain software gaps.
+
+## Current bootloader pin-group dispatcher source increment
+
+The complete `[0x0041FADC,0x0041FCF6)` dispatcher now routes to clean-room C,
+replacing 538 stock bytes with 428 relocation-free Thumb bytes. Host evidence
+pins both banks, cumulative subtype groups, ordered SRAM configuration reads,
+pin numbers, low-byte truncation, no-op cases, and both authenticated callers.
+Apple overlay/provider identities are 9,916 / 158,516 bytes; Linux identities
+are 9,900 / 158,500 bytes. Accounting is 9,903 source-owned, 11,310 generated
+patch, 14 alignment, and 137,289 retained official bytes. Live pinmux/GPIO
+behavior remains hardware-blocked; later retained executable bodies remain
+software gaps.

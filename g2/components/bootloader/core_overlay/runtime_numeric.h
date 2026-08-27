@@ -41,4 +41,6 @@ uint32_t open_cfw_bootloader_format_core(
     void *argument_cursor
 );
 
+uint32_t open_cfw_bootloader_log_dispatch(const char *format, ...);
+
 #endif

@@ -15,6 +15,7 @@ accounting, packages, and flash plans are enforced by
 `tools/analyze_g2_bootloader_numeric.py` and the bootloader overlay tests.
 
 Hardware validation is explicitly blocked by unavailable authorized responsive
-right-temple evidence. This closure makes no claim about the adjacent
-`[0x00415AB6,0x00415FAE)` float and format engine, which remains a software
-gap, and authorizes no signing or hardware operation.
+right-temple evidence. The subsequent float/formatter closure now owns
+`[0x00415AB6,0x00415FAE)`; this document remains the narrower provenance
+record for its four prerequisite primitives and authorizes no signing or
+hardware operation.

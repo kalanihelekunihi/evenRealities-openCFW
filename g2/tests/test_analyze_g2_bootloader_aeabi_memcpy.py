@@ -21,7 +21,7 @@ class AnalyzeBootloaderAeabiMemcpyTests(unittest.TestCase):
         self.assertEqual(report["stock"]["whole_image_callers"], 33)
         self.assertEqual(report["source"]["size"], 16)
         self.assertEqual(report["source"]["relocations"], 0)
-        self.assertEqual(report["provider"]["retained_official_bytes"], 146201)
+        self.assertEqual(report["provider"]["retained_official_bytes"], 138057)
         self.assertFalse(report["hardware_block"]["physical_evidence_available"])
 
 

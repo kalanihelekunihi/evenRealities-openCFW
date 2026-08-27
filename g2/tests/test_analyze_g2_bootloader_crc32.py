@@ -19,7 +19,7 @@ class AnalyzeBootloaderCrc32Tests(unittest.TestCase):
         self.assertEqual(report["stock"]["table_polynomial"], "0xEDB88320")
         self.assertEqual(report["source"]["size"], 44)
         self.assertEqual(report["source"]["relocations"], 0)
-        self.assertEqual(report["provider"]["retained_official_bytes"], 146201)
+        self.assertEqual(report["provider"]["retained_official_bytes"], 138057)
         self.assertFalse(report["hardware_block"]["physical_evidence_available"])
 
 

@@ -36,16 +36,16 @@ FUNCTION_SHA256 = "cbd1c5a521eef64ba9075a211311b71c8a025fd49fc4040814ba893c77260
 CLOSURE_SIZE = 275
 CLOSURE_SHA256 = "ddb1d064bf765803fac4fc89c0b6c585f13b0ea7bcfc3b5ad7b78ee7d8e50922"
 RODATA_SHA256 = "617e0aef0ca7b9cc2d64b76394bd2203cf40de647d25e4caafe628433a0c30a0"
-OVERLAY_SIZE = 1856
-OVERLAY_SHA256 = "6693a0fec4dfd7c9ba82639de56264a1ba1519768b6aa90b40885092f6fe4913"
-PROVIDER_SIZE = 150456
-PROVIDER_SHA256 = "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d"
-PACKAGE_SIZE = 4732034
-PACKAGE_SHA256 = "bee2f83e6afb805f9427e3565f0e39660188ef37a5b3683f7193bb52a9dadcbb"
-FLASH_PLAN_SIZE = 4329363
-FLASH_PLAN_SHA256 = "5f00aee58cfc9c32557a7302b46efbc61ec59e8346ec90b6cc947cb345c1f663"
-LINUX_PACKAGE_SIZE = 4508044
-LINUX_PACKAGE_SHA256 = "ff147a4647c0cc8f5c7c31fc29b57eed5513bd774abc65caaad67ee8bebd3ac8"
+OVERLAY_SIZE = 9916
+OVERLAY_SHA256 = "f00be08414c7e4731ed8e2e61ed1f8041f105c520d941c0b26d16ba4f4e8143a"
+PROVIDER_SIZE = 158516
+PROVIDER_SHA256 = "5ec3947c373c9d765d8c3385c0f7d436f8c4599ddae90429bc48263f1f80783a"
+PACKAGE_SIZE = 4740094
+PACKAGE_SHA256 = "f76455fc72574e0c8357b14b7f0c422931ae65896eb642e61787d0df40cb8c7f"
+FLASH_PLAN_SIZE = 4496054
+FLASH_PLAN_SHA256 = "944cc1d9b7bee4bd5fe76f79c81cd2d00eea0aec0e49990c8701b193c62b1eb7"
+LINUX_PACKAGE_SIZE = 4516088
+LINUX_PACKAGE_SHA256 = "72935d6882098e5d65e30bdf6630214c5fb428bff20dbabca7e4988ba2aefc37"
 
 
 class AuditError(RuntimeError):
@@ -126,9 +126,9 @@ def audit() -> dict:
     require(patch["expected_sha256"] == STOCK_SHA256, "patch stock identity changed")
     require(patch["replacement_hex"][8:] == "00bf" * 42, "full-span NOP fill changed")
     component = report["component"]
-    require(component["source_owned_bytes"] == 1849, "source ownership accounting changed")
-    require(component["generated_patch_site_bytes"] == 2398, "generated patch accounting changed")
-    require(component["opaque_base_bytes"] == 146201, "retained-byte accounting changed")
+    require(component["source_owned_bytes"] == 9903, "source ownership accounting changed")
+    require(component["generated_patch_site_bytes"] == 11310, "generated patch accounting changed")
+    require(component["opaque_base_bytes"] == 137289, "retained-byte accounting changed")
     require(report["safety"]["hardware_operations"] == [], "builder reported hardware operations")
     require(report["safety"]["flashing_performed"] is False, "builder reported flashing")
 
@@ -150,7 +150,7 @@ def audit() -> dict:
     require(plan["package_sha256"] == PACKAGE_SHA256, "flash plan names a different package")
     require(
         tuple(len(plan[key]) for key in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions"))
-        == (6236, 2, 5, 6),
+        == (6464, 2, 5, 6),
         "flash-plan ownership counts changed",
     )
 
@@ -160,7 +160,7 @@ def audit() -> dict:
         "software_gap_count": 0,
         "stock": {"address": STOCK_ADDRESS, "size": STOCK_SIZE, "sha256": STOCK_SHA256},
         "source": {"function": FUNCTION, "address": FUNCTION_ADDRESS, "text_bytes": FUNCTION_SIZE, "closure_bytes": CLOSURE_SIZE},
-        "provider": {"size": PROVIDER_SIZE, "sha256": PROVIDER_SHA256, "source_owned_bytes": 1849, "generated_patch_bytes": 2398, "retained_official_bytes": 146201},
+        "provider": {"size": PROVIDER_SIZE, "sha256": PROVIDER_SHA256, "source_owned_bytes": component["source_owned_bytes"], "generated_patch_bytes": component["generated_patch_site_bytes"], "retained_official_bytes": component["opaque_base_bytes"]},
         "deployment": {
             "apple_package": {"size": PACKAGE_SIZE, "sha256": PACKAGE_SHA256, "flash_plan_sha256": FLASH_PLAN_SHA256},
             "linux_package": {"size": LINUX_PACKAGE_SIZE, "sha256": LINUX_PACKAGE_SHA256},

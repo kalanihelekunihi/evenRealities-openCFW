@@ -117,10 +117,24 @@ EASYLOGGER_GET_FMT_TARGET = 0x00434664
 EASYLOGGER_GET_FMT_U32_TARGET = 0x0043468A
 EASYLOGGER_GET_FMT_PTR_TARGET = 0x0043469E
 EASYLOGGER_STRCPY_TARGET = 0x004346B2
+EASYLOGGER_OUTPUT_TARGET = 0x004362DC
+EASYLOGGER_OUTPUT_ADDRESS = 0x004176CE
+EASYLOGGER_LOCK_ENABLED_TARGET = 0x00436700
+EASYLOGGER_LOCK_ENABLED_ADDRESS = 0x00417B7C
 EASYLOGGER_GET_FMT_ADDRESS = 0x00417AD4
 EASYLOGGER_GET_FMT_U32_ADDRESS = 0x00417B48
 EASYLOGGER_GET_FMT_PTR_ADDRESS = 0x00417B62
 EASYLOGGER_STRCPY_ADDRESS = 0x0041B158
+EASYLOGGER_DRIVER_OUTPUT_ADDRESS = 0x0041B854
+EASYLOGGER_CHANNEL_WRITE_ADDRESS = 0x0041F918
+BOOT_DELAY_MILLISECONDS_ADDRESS = 0x0041F9D8
+BOOT_DELAY_ADDRESS = 0x0041F9E6
+BOOT_INITIALIZER_COMPARE_ADDRESS = 0x0041F9F0
+BOOT_RUN_INITIALIZERS_ADDRESS = 0x0041F9F8
+BOOT_PLATFORM_SETUP_ADDRESS = 0x0041FA50
+BOOT_GUARDED_TEARDOWN_ADDRESS = 0x0041FA98
+BOOT_PIN_GROUPS_ADDRESS = 0x0041FADC
+BOOT_ALLOCATOR_INIT_ADDRESS = 0x0041FD70
 LITTLEFS_TAG_CHUNK_ADDRESS = 0x00410BA8
 LITTLEFS_TAG_CHUNK_TARGET = 0x004346E6
 LITTLEFS_TAG_ISVALID_ADDRESS = 0x00410B72
@@ -165,11 +179,82 @@ REPEAT_CHAR_ADDRESS = 0x00415A94
 REPEAT_CHAR_TARGET = 0x00434A58
 FLOAT_TO_FIXED_ADDRESS = 0x00415AB6
 FLOAT_TO_FIXED_TARGET = 0x00434A78
+FORMAT_CORE_ADDRESS = 0x00415BF6
+FORMAT_CORE_TARGET = 0x00434BB8
+LOG_DISPATCH_ADDRESS = 0x00415FAE
+LOG_DISPATCH_TARGET = 0x00434F80
+STRSTR_ADDRESS = 0x00415FFA
+STRSTR_TARGET = 0x00434FBC
+CRITICAL_CONTEXT_ADDRESS = 0x0041602A
+CRITICAL_CONTEXT_TARGET = 0x00434FEA
+GATE_ACQUIRE_ADDRESS = 0x00416058
+GATE_ACQUIRE_TARGET = 0x00435018
+GATE_STATE_ADDRESS = 0x00416088
+GATE_STATE_TARGET = 0x00435048
+GATE_RELEASE_ADDRESS = 0x004160B0
+GATE_RELEASE_TARGET = 0x0043506C
+CONTEXT_VALUE_ADDRESS = 0x004160E8
+CONTEXT_VALUE_TARGET = 0x004350A4
+RUNTIME_DISPATCH_4160FE_ADDRESS = 0x004160FE
+RUNTIME_DISPATCH_4160FE_TARGET = 0x004350BC
+RUNTIME_VALUE_4161C6_ADDRESS = 0x004161C6
+RUNTIME_VALUE_4161C6_TARGET = 0x00435162
+RUNTIME_CALL_4161CE_ADDRESS = 0x004161CE
+RUNTIME_CALL_4161CE_TARGET = 0x00435166
+RUNTIME_ACTION_416200_ADDRESS = 0x00416200
+RUNTIME_ACTION_416200_TARGET = 0x00435192
+RUNTIME_TRANSFER_41623A_ADDRESS = 0x0041623A
+RUNTIME_TRANSFER_41623A_TARGET = 0x004351C8
+RUNTIME_WAIT_4162C4_ADDRESS = 0x004162C4
+RUNTIME_WAIT_4162C4_TARGET = 0x00435248
+RUNTIME_NOTIFY_416378_ADDRESS = 0x00416378
+RUNTIME_NOTIFY_416378_TARGET = 0x004352FA
+RUNTIME_CALLBACK_41639A_ADDRESS = 0x0041639A
+RUNTIME_CALLBACK_41639A_TARGET = 0x00435316
+RUNTIME_REGISTER_4163B2_ADDRESS = 0x004163B2
+RUNTIME_REGISTER_4163B2_TARGET = 0x00435330
+RUNTIME_SUBMIT_41649A_ADDRESS = 0x0041649A
+RUNTIME_SUBMIT_41649A_TARGET = 0x004353E4
+RUNTIME_CREATE_4164DA_ADDRESS = 0x004164DA
+RUNTIME_CREATE_4164DA_TARGET = 0x0043541A
+RUNTIME_FLAGS_SET_41652E_ADDRESS = 0x0041652E
+RUNTIME_FLAGS_SET_41652E_TARGET = 0x00435448
+RUNTIME_FLAGS_WAIT_416590_ADDRESS = 0x00416590
+RUNTIME_FLAGS_WAIT_416590_TARGET = 0x0043549C
+RUNTIME_FLAGS_CREATE_416610_ADDRESS = 0x00416610
+RUNTIME_FLAGS_CREATE_416610_TARGET = 0x00435500
+RUNTIME_HANDLE_ACQUIRE_4166AA_ADDRESS = 0x004166AA
+RUNTIME_HANDLE_ACQUIRE_4166AA_TARGET = 0x00435552
+RUNTIME_HANDLE_RELEASE_416710_ADDRESS = 0x00416710
+RUNTIME_HANDLE_RELEASE_416710_TARGET = 0x00435596
+RUNTIME_SEMAPHORE_CREATE_416762_ADDRESS = 0x00416762
+RUNTIME_SEMAPHORE_CREATE_416762_TARGET = 0x004355D0
+RUNTIME_QUEUE_CREATE_416816_ADDRESS = 0x00416816
+RUNTIME_QUEUE_CREATE_416816_TARGET = 0x0043565C
+RUNTIME_QUEUE_PUT_4168A2_ADDRESS = 0x004168A2
+RUNTIME_QUEUE_PUT_4168A2_TARGET = 0x004356C0
+RUNTIME_QUEUE_GET_416920_ADDRESS = 0x00416920
+RUNTIME_QUEUE_GET_416920_TARGET = 0x00435730
+RUNTIME_BIT_WIDTH_4169A4_ADDRESS = 0x004169A4
+RUNTIME_BIT_WIDTH_4169A4_TARGET = 0x0043579C
+RUNTIME_CTZ_4169E2_ADDRESS = 0x004169E2
+RUNTIME_CTZ_4169E2_TARGET = 0x004357AA
+RUNTIME_LOG2_4169F2_ADDRESS = 0x004169F2
+RUNTIME_LOG2_4169F2_TARGET = 0x004357B8
+TLSF_BLOCK_PRIMITIVES_START_ADDRESS = 0x004169FC
+TLSF_BLOCK_PRIMITIVES_END_ADDRESS = 0x00416AAA
+TLSF_BLOCK_TOPOLOGY_END_ADDRESS = 0x00416BCE
+TLSF_MAPPING_END_ADDRESS = 0x00416C4E
+TLSF_FREE_LISTS_END_ADDRESS = 0x00416E04
+TLSF_ALLOCATOR_END_ADDRESS = 0x0041711C
+TLSF_PUBLIC_END_ADDRESS = 0x004172DA
+EASYLOGGER_CONTROL_END_ADDRESS = 0x004176CE
+EASYLOGGER_OUTPUT_END_ADDRESS = 0x00417AD0
 STRCSPN_ADDRESS = 0x004157F8
 STRCSPN_TARGET = 0x0043485C
 STRSPN_ADDRESS = 0x0041581A
 STRSPN_TARGET = 0x0043487A
-OVERLAY_END = 0x00434BB8
+OVERLAY_END = 0x00436B8C
 LITTLEFS_UTIL_MAX_OFFSET = LITTLEFS_UTIL_MAX_ADDRESS - RUN_BASE
 LITTLEFS_UTIL_MIN_OFFSET = LITTLEFS_UTIL_MIN_ADDRESS - RUN_BASE
 LITTLEFS_UTIL_ALIGNDOWN_OFFSET = (
@@ -199,6 +284,14 @@ EASYLOGGER_GET_FMT_OFFSET = EASYLOGGER_GET_FMT_ADDRESS - RUN_BASE
 EASYLOGGER_GET_FMT_U32_OFFSET = EASYLOGGER_GET_FMT_U32_ADDRESS - RUN_BASE
 EASYLOGGER_GET_FMT_PTR_OFFSET = EASYLOGGER_GET_FMT_PTR_ADDRESS - RUN_BASE
 EASYLOGGER_STRCPY_OFFSET = EASYLOGGER_STRCPY_ADDRESS - RUN_BASE
+EASYLOGGER_DRIVER_OUTPUT_OFFSET = EASYLOGGER_DRIVER_OUTPUT_ADDRESS - RUN_BASE
+EASYLOGGER_CHANNEL_WRITE_OFFSET = EASYLOGGER_CHANNEL_WRITE_ADDRESS - RUN_BASE
+BOOT_DELAY_MILLISECONDS_OFFSET = BOOT_DELAY_MILLISECONDS_ADDRESS - RUN_BASE
+BOOT_DELAY_OFFSET = BOOT_DELAY_ADDRESS - RUN_BASE
+BOOT_INITIALIZER_COMPARE_OFFSET = BOOT_INITIALIZER_COMPARE_ADDRESS - RUN_BASE
+BOOT_RUN_INITIALIZERS_OFFSET = BOOT_RUN_INITIALIZERS_ADDRESS - RUN_BASE
+EASYLOGGER_OUTPUT_OFFSET = EASYLOGGER_OUTPUT_ADDRESS - RUN_BASE
+EASYLOGGER_LOCK_ENABLED_OFFSET = EASYLOGGER_LOCK_ENABLED_ADDRESS - RUN_BASE
 REDIRECT_INIT_OFFSET = REDIRECT_INIT_ADDRESS - RUN_BASE
 AEABI_MEMSET_OFFSET = AEABI_MEMSET_ADDRESS - RUN_BASE
 AEABI_MEMCPY_OFFSET = AEABI_MEMCPY_ADDRESS - RUN_BASE
@@ -215,6 +308,147 @@ U64_TO_HEX_OFFSET = U64_TO_HEX_ADDRESS - RUN_BASE
 NULLABLE_STRLEN_OFFSET = NULLABLE_STRLEN_ADDRESS - RUN_BASE
 REPEAT_CHAR_OFFSET = REPEAT_CHAR_ADDRESS - RUN_BASE
 FLOAT_TO_FIXED_OFFSET = FLOAT_TO_FIXED_ADDRESS - RUN_BASE
+FORMAT_CORE_OFFSET = FORMAT_CORE_ADDRESS - RUN_BASE
+LOG_DISPATCH_OFFSET = LOG_DISPATCH_ADDRESS - RUN_BASE
+STRSTR_OFFSET = STRSTR_ADDRESS - RUN_BASE
+CRITICAL_CONTEXT_OFFSET = CRITICAL_CONTEXT_ADDRESS - RUN_BASE
+GATE_ACQUIRE_OFFSET = GATE_ACQUIRE_ADDRESS - RUN_BASE
+GATE_STATE_OFFSET = GATE_STATE_ADDRESS - RUN_BASE
+GATE_RELEASE_OFFSET = GATE_RELEASE_ADDRESS - RUN_BASE
+CONTEXT_VALUE_OFFSET = CONTEXT_VALUE_ADDRESS - RUN_BASE
+RUNTIME_DISPATCH_4160FE_OFFSET = RUNTIME_DISPATCH_4160FE_ADDRESS - RUN_BASE
+RUNTIME_VALUE_4161C6_OFFSET = RUNTIME_VALUE_4161C6_ADDRESS - RUN_BASE
+RUNTIME_CALL_4161CE_OFFSET = RUNTIME_CALL_4161CE_ADDRESS - RUN_BASE
+RUNTIME_ACTION_416200_OFFSET = RUNTIME_ACTION_416200_ADDRESS - RUN_BASE
+RUNTIME_TRANSFER_41623A_OFFSET = RUNTIME_TRANSFER_41623A_ADDRESS - RUN_BASE
+RUNTIME_WAIT_4162C4_OFFSET = RUNTIME_WAIT_4162C4_ADDRESS - RUN_BASE
+RUNTIME_NOTIFY_416378_OFFSET = RUNTIME_NOTIFY_416378_ADDRESS - RUN_BASE
+RUNTIME_CALLBACK_41639A_OFFSET = RUNTIME_CALLBACK_41639A_ADDRESS - RUN_BASE
+RUNTIME_REGISTER_4163B2_OFFSET = RUNTIME_REGISTER_4163B2_ADDRESS - RUN_BASE
+RUNTIME_SUBMIT_41649A_OFFSET = RUNTIME_SUBMIT_41649A_ADDRESS - RUN_BASE
+RUNTIME_CREATE_4164DA_OFFSET = RUNTIME_CREATE_4164DA_ADDRESS - RUN_BASE
+RUNTIME_FLAGS_SET_41652E_OFFSET = RUNTIME_FLAGS_SET_41652E_ADDRESS - RUN_BASE
+RUNTIME_FLAGS_WAIT_416590_OFFSET = RUNTIME_FLAGS_WAIT_416590_ADDRESS - RUN_BASE
+RUNTIME_FLAGS_CREATE_416610_OFFSET = RUNTIME_FLAGS_CREATE_416610_ADDRESS - RUN_BASE
+RUNTIME_HANDLE_ACQUIRE_4166AA_OFFSET = RUNTIME_HANDLE_ACQUIRE_4166AA_ADDRESS - RUN_BASE
+RUNTIME_HANDLE_RELEASE_416710_OFFSET = RUNTIME_HANDLE_RELEASE_416710_ADDRESS - RUN_BASE
+RUNTIME_SEMAPHORE_CREATE_416762_OFFSET = RUNTIME_SEMAPHORE_CREATE_416762_ADDRESS - RUN_BASE
+RUNTIME_QUEUE_CREATE_416816_OFFSET = RUNTIME_QUEUE_CREATE_416816_ADDRESS - RUN_BASE
+RUNTIME_QUEUE_PUT_4168A2_OFFSET = RUNTIME_QUEUE_PUT_4168A2_ADDRESS - RUN_BASE
+RUNTIME_QUEUE_GET_416920_OFFSET = RUNTIME_QUEUE_GET_416920_ADDRESS - RUN_BASE
+RUNTIME_BIT_WIDTH_4169A4_OFFSET = RUNTIME_BIT_WIDTH_4169A4_ADDRESS - RUN_BASE
+RUNTIME_CTZ_4169E2_OFFSET = RUNTIME_CTZ_4169E2_ADDRESS - RUN_BASE
+RUNTIME_LOG2_4169F2_OFFSET = RUNTIME_LOG2_4169F2_ADDRESS - RUN_BASE
+TLSF_BLOCK_PRIMITIVES_START_OFFSET = (
+    TLSF_BLOCK_PRIMITIVES_START_ADDRESS - RUN_BASE
+)
+TLSF_BLOCK_PRIMITIVES_END_OFFSET = (
+    TLSF_BLOCK_PRIMITIVES_END_ADDRESS - RUN_BASE
+)
+TLSF_BLOCK_TOPOLOGY_END_OFFSET = TLSF_BLOCK_TOPOLOGY_END_ADDRESS - RUN_BASE
+TLSF_MAPPING_END_OFFSET = TLSF_MAPPING_END_ADDRESS - RUN_BASE
+TLSF_FREE_LISTS_END_OFFSET = TLSF_FREE_LISTS_END_ADDRESS - RUN_BASE
+TLSF_ALLOCATOR_END_OFFSET = TLSF_ALLOCATOR_END_ADDRESS - RUN_BASE
+TLSF_PUBLIC_END_OFFSET = TLSF_PUBLIC_END_ADDRESS - RUN_BASE
+EASYLOGGER_CONTROL_END_OFFSET = EASYLOGGER_CONTROL_END_ADDRESS - RUN_BASE
+TLSF_PATCH_REPLACEMENTS = (
+    (0x004169FC, bytes.fromhex("1ef0e1be" + "00bf" * 8)),
+    (0x00416A10, bytes.fromhex("1ef0dbbe" + "00bf" * 12)),
+    (0x00416A2C, bytes.fromhex("1ef0d3be" + "00bf" * 8)),
+    (0x00416A40, bytes.fromhex("1ef0cebe" + "00bf" * 4)),
+    (0x00416A4C, bytes.fromhex("1ef0ccbe" + "00bf" * 5)),
+    (0x00416A5A, bytes.fromhex("1ef0cabe" + "00bf" * 5)),
+    (0x00416A68, bytes.fromhex("1ef0c8be" + "00bf" * 4)),
+    (0x00416A74, bytes.fromhex("1ef0c6be" + "00bf" * 5)),
+    (0x00416A82, bytes.fromhex("1ef0c4be" + "00bf" * 5)),
+    (0x00416A90, bytes.fromhex("1ef0c2be" + "00bf" * 4)),
+    (0x00416A9C, bytes.fromhex("1ef0bebe" + "00bf" * 3)),
+    (0x00416AA6, bytes.fromhex("1ef0bbbe")),
+)
+TLSF_TOPOLOGY_PATCH_REPLACEMENTS = (
+    (0x00416AAA, bytes.fromhex("1ef0bbbe" + "00bf" * 17)),
+    (0x00416AD0, bytes.fromhex("1ef0babe" + "00bf" * 32)),
+    (0x00416B14, bytes.fromhex("1ef0b6be" + "00bf" * 5)),
+    (0x00416B22, bytes.fromhex("1ef0b5be" + "00bf" * 9)),
+    (0x00416B38, bytes.fromhex("1ef0b5be" + "00bf" * 9)),
+    (0x00416B4E, bytes.fromhex("1ef0b5be" + "00bf" * 20)),
+    (0x00416B7A, bytes.fromhex("1ef0b5be" + "00bf" * 19)),
+    (0x00416BA4, bytes.fromhex("1ef0b4be" + "00bf" * 19)),
+)
+TLSF_MAPPING_PATCH_REPLACEMENTS = (
+    (0x00416BCE, bytes.fromhex("1ef0b5be" + "00bf" * 19)),
+    (0x00416BF8, bytes.fromhex("1ef0afbe" + "00bf" * 21)),
+    (0x00416C26, bytes.fromhex("1ef0adbe" + "00bf" * 18)),
+)
+TLSF_FREE_LIST_PATCH_REPLACEMENTS = (
+    (0x00416C4E, bytes.fromhex("1ef0b1be" + "00bf" * 58)),
+    (0x00416CC6, bytes.fromhex("1ef0adbe" + "00bf" * 73)),
+    (0x00416D5C, bytes.fromhex("1ef0a0be" + "00bf" * 82)),
+)
+TLSF_ALLOCATOR_PATCH_REPLACEMENTS = (
+    (0x00416E04, bytes.fromhex("1ef096be" + "00bf" * 15)),
+    (0x00416E26, bytes.fromhex("1ef096be" + "00bf" * 15)),
+    (0x00416E48, bytes.fromhex("1ef096be" + "00bf" * 10)),
+    (0x00416E60, bytes.fromhex("1ef094be" + "00bf" * 94)),
+    (0x00416F20, bytes.fromhex("1ef086be" + "00bf" * 31)),
+    (0x00416F62, bytes.fromhex("1ef083be" + "00bf" * 48)),
+    (0x00416FC6, bytes.fromhex("1ef081be" + "00bf" * 48)),
+    (0x0041702A, bytes.fromhex("1ef07bbe" + "00bf" * 39)),
+    (0x0041707C, bytes.fromhex("1ef07ebe" + "00bf" * 47)),
+    (0x004170DE, bytes.fromhex("1ef07dbe" + "00bf" * 29)),
+)
+TLSF_PUBLIC_PATCH_REPLACEMENTS = (
+    (0x0041711C, bytes.fromhex("1ef080be" + "00bf" * 22)),
+    (0x0041714C, bytes.fromhex("1ef080be" + "00bf" * 6)),
+    (0x0041715C, bytes.fromhex("1ef07abe" + "00bf" * 84)),
+    (0x00417208, bytes.fromhex("1ef06abe" + "00bf" * 26)),
+    (0x00417240, bytes.fromhex("1ef062be" + "00bf" * 19)),
+    (0x0041726A, bytes.fromhex("1ef05bbe" + "00bf" * 17)),
+    (0x00417290, bytes.fromhex("1ef05abe" + "00bf" * 35)),
+)
+EASYLOGGER_CONTROL_PATCH_REPLACEMENTS = (
+    (0x0041733C, bytes.fromhex("1ef036bf" + "00bf" * 41)),
+    (0x00417392, bytes.fromhex("1ef02fbf" + "00bf" * 26)),
+    (0x004173CA, bytes.fromhex("1ef0e5bd" + "00bf" * 53)),
+    (0x00417438, bytes.fromhex("1ef0e0bd" + "00bf" * 53)),
+    (0x004174A6, bytes.fromhex("1ef04bbe" + "00bf" * 51)),
+    (0x00417510, bytes.fromhex("1ef0a8bd" + "00bf" * 46)),
+    (0x00417570, bytes.fromhex("1ef0c6bd" + "00bf" * 15)),
+    (0x00417592, bytes.fromhex("1ef0c5bd" + "00bf" * 15)),
+    (0x004175B4, bytes.fromhex("1ef08abd" + "00bf" * 41)),
+    (0x0041760A, bytes.fromhex("1ef015be" + "00bf" * 96)),
+)
+EASYLOGGER_OUTPUT_PATCH_REPLACEMENT = (
+    EASYLOGGER_OUTPUT_ADDRESS,
+    bytes.fromhex("1ef005be" + "00bf" * 511),
+)
+EASYLOGGER_LOCK_ENABLED_PATCH_REPLACEMENT = (
+    EASYLOGGER_LOCK_ENABLED_ADDRESS,
+    bytes.fromhex("1ef0c0bd" + "00bf" * 28),
+)
+EASYLOGGER_PORT_PATCH_REPLACEMENTS = (
+    (0x0041A648, bytes.fromhex("1cf06cb8" + "00bf" * 8)),
+    (0x0041A65C, bytes.fromhex("1cf072b8" + "00bf" * 9)),
+    (0x0041A672, bytes.fromhex("1cf073b8" + "00bf" * 7)),
+    (0x0041A684, bytes.fromhex("1cf074b8" + "00bf" * 5)),
+    (0x0041A692, bytes.fromhex("1cf075b8" + "00bf" * 2)),
+    (0x0041A69A, bytes.fromhex("1cf075b8" + "00bf" * 2)),
+    (0x0041A6A2, bytes.fromhex("1cf075b8" + "00bf" * 2)),
+    (0x0041A6AA, bytes.fromhex("1cf075b8" + "00bf" * 10)),
+    (0x0041A6C2, bytes.fromhex("1cf07db8" + "00bf" * 10)),
+    (0x0041A6F0, bytes.fromhex("1cf07ab8" + "00bf" * 2)),
+    (0x0041A6F8, bytes.fromhex("1cf07ab8" + "00bf" * 2)),
+)
+BOOT_SERVICE_PATCH_REPLACEMENTS = (
+    (BOOT_DELAY_MILLISECONDS_ADDRESS, bytes.fromhex("16f052bf" + "00bf" * 5)),
+    (BOOT_DELAY_ADDRESS, bytes.fromhex("16f053bf" + "00bf" * 2)),
+    (BOOT_INITIALIZER_COMPARE_ADDRESS, bytes.fromhex("16f052bf" + "00bf" * 2)),
+    (BOOT_RUN_INITIALIZERS_ADDRESS, bytes.fromhex("16f052bf" + "00bf" * 34)),
+    (BOOT_PLATFORM_SETUP_ADDRESS, bytes.fromhex("16f06abf" + "00bf" * 34)),
+    (BOOT_GUARDED_TEARDOWN_ADDRESS, bytes.fromhex("16f022bf" + "00bf" * 26)),
+    (BOOT_PIN_GROUPS_ADDRESS, bytes.fromhex("16f054bf" + "00bf" * 267)),
+    (BOOT_ALLOCATOR_INIT_ADDRESS, bytes.fromhex("16f0e0be" + "00bf" * 26)),
+)
 STRCSPN_OFFSET = STRCSPN_ADDRESS - RUN_BASE
 STRSPN_OFFSET = STRSPN_ADDRESS - RUN_BASE
 LITTLEFS_TAG_CHUNK_OFFSET = LITTLEFS_TAG_CHUNK_ADDRESS - RUN_BASE
@@ -227,10 +461,10 @@ STOCK_SHA256 = (
     "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
 )
 PROVIDER_SHA256 = (
-    "cb3ea4265d21ae37c0f7ec3671d67440f90cd0f05e3360b472716e69962aeb2d"
+    "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7"
 )
 OVERLAY_SHA256 = (
-    "6693a0fec4dfd7c9ba82639de56264a1ba1519768b6aa90b40885092f6fe4913"
+    "a27f7ba39fdfe6a7364d59577cfa387a0a601aedf773612d1cb1b77700c6538d"
 )
 SCMP_SHA256 = (
     "787fad2973d1b4f1c6c585f29ee07707e6951499c3772a9e8e4e1bc997ba94fe"
@@ -313,7 +547,7 @@ LITTLEFS_UTIL_ALIGNDOWN_STOCK_SHA256 = (
 LITTLEFS_UTIL_ALIGNUP_STOCK_SHA256 = (
     "18874b0eb5cf5c7bd6f20b2b29f787157294b9e9be16d14ab0d9064d44a97c37"
 )
-PROVIDER_CRC32C_MSB = 0x9698B4C4
+PROVIDER_CRC32C_MSB = 0x21A37A02
 
 
 def load_builder():
@@ -822,9 +1056,9 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 },
             ],
         )
-        self.assertEqual(link["relocated_text_size"], 1424)
+        self.assertEqual(link["relocated_text_size"], 9566)
         self.assertEqual(link["relocated_rodata_size"], 143)
-        self.assertEqual(link["relocated_padding_size"], 7)
+        self.assertEqual(link["relocated_padding_size"], 13)
         self.assertEqual(
             link["relocated_functions"],
             [
@@ -1130,11 +1364,710 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     "runtime_address": 0x00434A78,
                     "runtime_address_hex": "0x00434A78",
                 },
+                {
+                    "function": "open_cfw_bootloader_format_core",
+                    "offset": 1856,
+                    "size": 968,
+                    "alignment": 8,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434BB8,
+                    "runtime_address_hex": "0x00434BB8",
+                },
+                {
+                    "function": "open_cfw_bootloader_log_dispatch",
+                    "offset": 2824,
+                    "size": 60,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434F80,
+                    "runtime_address_hex": "0x00434F80",
+                },
+                {
+                    "function": "open_cfw_bootloader_strstr",
+                    "offset": 2884,
+                    "size": 46,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434FBC,
+                    "runtime_address_hex": "0x00434FBC",
+                },
+                {
+                    "function": "open_cfw_bootloader_critical_context",
+                    "offset": 2930,
+                    "size": 46,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00434FEA,
+                    "runtime_address_hex": "0x00434FEA",
+                },
+                {
+                    "function": "open_cfw_bootloader_gate_acquire",
+                    "offset": 2976,
+                    "size": 48,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435018,
+                    "runtime_address_hex": "0x00435018",
+                },
+                {
+                    "function": "open_cfw_bootloader_gate_state",
+                    "offset": 3024,
+                    "size": 36,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435048,
+                    "runtime_address_hex": "0x00435048",
+                },
+                {
+                    "function": "open_cfw_bootloader_gate_release",
+                    "offset": 3060,
+                    "size": 56,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043506C,
+                    "runtime_address_hex": "0x0043506C",
+                },
+                {
+                    "function": "open_cfw_bootloader_context_value",
+                    "offset": 3116,
+                    "size": 24,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004350A4,
+                    "runtime_address_hex": "0x004350A4",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_dispatch_4160fe",
+                    "offset": 3140,
+                    "size": 166,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004350BC,
+                    "runtime_address_hex": "0x004350BC",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_value_4161c6",
+                    "offset": 3306,
+                    "size": 4,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435162,
+                    "runtime_address_hex": "0x00435162",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_call_4161ce",
+                    "offset": 3310,
+                    "size": 44,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435166,
+                    "runtime_address_hex": "0x00435166",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_action_416200",
+                    "offset": 3354,
+                    "size": 52,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435192,
+                    "runtime_address_hex": "0x00435192",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_transfer_41623a",
+                    "offset": 3408,
+                    "size": 128,
+                    "alignment": 4,
+                    "padding_before": 2,
+                    "runtime_address": 0x004351C8,
+                    "runtime_address_hex": "0x004351C8",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_wait_4162c4",
+                    "offset": 3536,
+                    "size": 178,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435248,
+                    "runtime_address_hex": "0x00435248",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_notify_416378",
+                    "offset": 3714,
+                    "size": 28,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004352FA,
+                    "runtime_address_hex": "0x004352FA",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_callback_41639a",
+                    "offset": 3742,
+                    "size": 24,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435316,
+                    "runtime_address_hex": "0x00435316",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_register_4163b2",
+                    "offset": 3768,
+                    "size": 180,
+                    "alignment": 4,
+                    "padding_before": 2,
+                    "runtime_address": 0x00435330,
+                    "runtime_address_hex": "0x00435330",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_submit_41649a",
+                    "offset": 3948,
+                    "size": 54,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004353E4,
+                    "runtime_address_hex": "0x004353E4",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_create_4164da",
+                    "offset": 4002,
+                    "size": 46,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043541A,
+                    "runtime_address_hex": "0x0043541A",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_flags_set_41652e",
+                    "offset": 4048,
+                    "size": 84,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435448,
+                    "runtime_address_hex": "0x00435448",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_flags_wait_416590",
+                    "offset": 4132,
+                    "size": 100,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043549C,
+                    "runtime_address_hex": "0x0043549C",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_flags_create_416610",
+                    "offset": 4232,
+                    "size": 82,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435500,
+                    "runtime_address_hex": "0x00435500",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_handle_acquire_4166aa",
+                    "offset": 4314,
+                    "size": 68,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435552,
+                    "runtime_address_hex": "0x00435552",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_handle_release_416710",
+                    "offset": 4382,
+                    "size": 58,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435596,
+                    "runtime_address_hex": "0x00435596",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_semaphore_create_416762",
+                    "offset": 4440,
+                    "size": 140,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004355D0,
+                    "runtime_address_hex": "0x004355D0",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_queue_create_416816",
+                    "offset": 4580,
+                    "size": 100,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043565C,
+                    "runtime_address_hex": "0x0043565C",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_queue_put_4168a2",
+                    "offset": 4680,
+                    "size": 112,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x004356C0,
+                    "runtime_address_hex": "0x004356C0",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_queue_get_416920",
+                    "offset": 4792,
+                    "size": 108,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435730,
+                    "runtime_address_hex": "0x00435730",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_bit_width_4169a4",
+                    "offset": 4900,
+                    "size": 14,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043579C,
+                    "runtime_address_hex": "0x0043579C",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_ctz_4169e2",
+                    "offset": 4914,
+                    "size": 14,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357AA,
+                    "runtime_address_hex": "0x004357AA",
+                },
+                {
+                    "function": "open_cfw_bootloader_runtime_log2_4169f2",
+                    "offset": 4928,
+                    "size": 10,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357B8,
+                    "runtime_address_hex": "0x004357B8",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_size_4169fc",
+                    "offset": 4938,
+                    "size": 8,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357C2,
+                    "runtime_address_hex": "0x004357C2",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_set_size_416a10",
+                    "offset": 4946,
+                    "size": 12,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357CA,
+                    "runtime_address_hex": "0x004357CA",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_is_last_416a2c",
+                    "offset": 4958,
+                    "size": 10,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357D6,
+                    "runtime_address_hex": "0x004357D6",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_is_free_416a40",
+                    "offset": 4968,
+                    "size": 8,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357E0,
+                    "runtime_address_hex": "0x004357E0",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_set_free_416a4c",
+                    "offset": 4976,
+                    "size": 10,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357E8,
+                    "runtime_address_hex": "0x004357E8",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_set_used_416a5a",
+                    "offset": 4986,
+                    "size": 10,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357F2,
+                    "runtime_address_hex": "0x004357F2",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_is_previous_free_416a68",
+                    "offset": 4996,
+                    "size": 8,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004357FC,
+                    "runtime_address_hex": "0x004357FC",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_set_previous_free_416a74",
+                    "offset": 5004,
+                    "size": 10,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435804,
+                    "runtime_address_hex": "0x00435804",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_set_previous_used_416a82",
+                    "offset": 5014,
+                    "size": 10,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043580E,
+                    "runtime_address_hex": "0x0043580E",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_from_pointer_416a90",
+                    "offset": 5024,
+                    "size": 4,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435818,
+                    "runtime_address_hex": "0x00435818",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_to_pointer_416a9c",
+                    "offset": 5028,
+                    "size": 4,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043581C,
+                    "runtime_address_hex": "0x0043581C",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_offset_to_block_416aa6",
+                    "offset": 5032,
+                    "size": 4,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435820,
+                    "runtime_address_hex": "0x00435820",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_prev_416aaa",
+                    "offset": 5036,
+                    "size": 36,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435824,
+                    "runtime_address_hex": "0x00435824",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_next_416ad0",
+                    "offset": 5072,
+                    "size": 60,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435848,
+                    "runtime_address_hex": "0x00435848",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_link_next_416b14",
+                    "offset": 5132,
+                    "size": 12,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435884,
+                    "runtime_address_hex": "0x00435884",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_mark_as_free_416b22",
+                    "offset": 5144,
+                    "size": 22,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435890,
+                    "runtime_address_hex": "0x00435890",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_mark_as_used_416b38",
+                    "offset": 5166,
+                    "size": 22,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x004358A6,
+                    "runtime_address_hex": "0x004358A6",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_align_up_416b4e",
+                    "offset": 5188,
+                    "size": 44,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x004358BC,
+                    "runtime_address_hex": "0x004358BC",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_align_down_416b7a",
+                    "offset": 5232,
+                    "size": 40,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x004358E8,
+                    "runtime_address_hex": "0x004358E8",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_align_pointer_416ba4",
+                    "offset": 5272,
+                    "size": 44,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435910,
+                    "runtime_address_hex": "0x00435910",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_adjust_request_size_416bce",
+                    "offset": 5316,
+                    "size": 30,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043593C,
+                    "runtime_address_hex": "0x0043593C",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_mapping_insert_416bf8",
+                    "offset": 5346,
+                    "size": 42,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x0043595A,
+                    "runtime_address_hex": "0x0043595A",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_mapping_search_416c26",
+                    "offset": 5388,
+                    "size": 46,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435984,
+                    "runtime_address_hex": "0x00435984",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_search_suitable_block_416c4e",
+                    "offset": 5436,
+                    "size": 112,
+                    "alignment": 4,
+                    "padding_before": 2,
+                    "runtime_address": 0x004359B4,
+                    "runtime_address_hex": "0x004359B4",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_remove_free_block_416cc6",
+                    "offset": 5548,
+                    "size": 124,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435A24,
+                    "runtime_address_hex": "0x00435A24",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_insert_free_block_416d5c",
+                    "offset": 5672,
+                    "size": 148,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435AA0,
+                    "runtime_address_hex": "0x00435AA0",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_remove_416e04",
+                    "offset": 5820,
+                    "size": 34,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435B34,
+                    "runtime_address_hex": "0x00435B34",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_insert_416e26",
+                    "offset": 5854,
+                    "size": 34,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435B56,
+                    "runtime_address_hex": "0x00435B56",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_can_split_416e48",
+                    "offset": 5888,
+                    "size": 20,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435B78,
+                    "runtime_address_hex": "0x00435B78",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_split_416e60",
+                    "offset": 5908,
+                    "size": 164,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435B8C,
+                    "runtime_address_hex": "0x00435B8C",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_absorb_416f20",
+                    "offset": 6072,
+                    "size": 60,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435C30,
+                    "runtime_address_hex": "0x00435C30",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_merge_previous_416f62",
+                    "offset": 6132,
+                    "size": 96,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435C6C,
+                    "runtime_address_hex": "0x00435C6C",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_merge_next_416fc6",
+                    "offset": 6228,
+                    "size": 88,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435CCC,
+                    "runtime_address_hex": "0x00435CCC",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_trim_free_41702a",
+                    "offset": 6316,
+                    "size": 88,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435D24,
+                    "runtime_address_hex": "0x00435D24",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_locate_free_41707c",
+                    "offset": 6404,
+                    "size": 96,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435D7C,
+                    "runtime_address_hex": "0x00435D7C",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_block_prepare_used_4170de",
+                    "offset": 6500,
+                    "size": 68,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435DDC,
+                    "runtime_address_hex": "0x00435DDC",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_control_construct_41711c",
+                    "offset": 6568,
+                    "size": 48,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435E20,
+                    "runtime_address_hex": "0x00435E20",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_pool_overhead_41714c",
+                    "offset": 6616,
+                    "size": 4,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435E50,
+                    "runtime_address_hex": "0x00435E50",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_add_pool_41715c",
+                    "offset": 6620,
+                    "size": 140,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435E54,
+                    "runtime_address_hex": "0x00435E54",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_create_417208",
+                    "offset": 6760,
+                    "size": 40,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435EE0,
+                    "runtime_address_hex": "0x00435EE0",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_create_with_pool_417240",
+                    "offset": 6800,
+                    "size": 28,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435F08,
+                    "runtime_address_hex": "0x00435F08",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_malloc_41726a",
+                    "offset": 6828,
+                    "size": 36,
+                    "alignment": 2,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435F24,
+                    "runtime_address_hex": "0x00435F24",
+                },
+                {
+                    "function": "open_cfw_bootloader_tlsf_free_417290",
+                    "offset": 6864,
+                    "size": 80,
+                    "alignment": 4,
+                    "padding_before": 0,
+                    "runtime_address": 0x00435F48,
+                    "runtime_address_hex": "0x00435F48",
+                },
+                {"function": "open_cfw_bootloader_easylogger_set_output_enabled_4173ca", "offset": 6944, "size": 100, "alignment": 4, "padding_before": 0, "runtime_address": 0x00435F98, "runtime_address_hex": "0x00435F98"},
+                {"function": "open_cfw_bootloader_easylogger_set_text_color_enabled_417438", "offset": 7044, "size": 104, "alignment": 4, "padding_before": 0, "runtime_address": 0x00435FFC, "runtime_address_hex": "0x00435FFC"},
+                {"function": "open_cfw_bootloader_easylogger_set_filter_lvl_417510", "offset": 7148, "size": 104, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436064, "runtime_address_hex": "0x00436064"},
+                {"function": "open_cfw_bootloader_easylogger_filter_tag_lvl_default_4175b4", "offset": 7252, "size": 52, "alignment": 4, "padding_before": 0, "runtime_address": 0x004360CC, "runtime_address_hex": "0x004360CC"},
+                {"function": "open_cfw_bootloader_easylogger_output_lock_417570", "offset": 7304, "size": 32, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436100, "runtime_address_hex": "0x00436100"},
+                {"function": "open_cfw_bootloader_easylogger_output_unlock_417592", "offset": 7336, "size": 32, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436120, "runtime_address_hex": "0x00436120"},
+                {"function": "open_cfw_bootloader_easylogger_set_fmt_4174a6", "offset": 7368, "size": 108, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436140, "runtime_address_hex": "0x00436140"},
+                {"function": "open_cfw_bootloader_easylogger_init_41733c", "offset": 7476, "size": 72, "alignment": 4, "padding_before": 0, "runtime_address": 0x004361AC, "runtime_address_hex": "0x004361AC"},
+                {"function": "open_cfw_bootloader_easylogger_start_417392", "offset": 7548, "size": 68, "alignment": 4, "padding_before": 0, "runtime_address": 0x004361F4, "runtime_address_hex": "0x004361F4"},
+                {"function": "open_cfw_bootloader_easylogger_get_filter_tag_lvl_41760a", "offset": 7616, "size": 164, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436238, "runtime_address_hex": "0x00436238"},
+                {"function": "open_cfw_bootloader_easylogger_output_4176ce", "offset": 7780, "size": 1060, "alignment": 4, "padding_before": 0, "runtime_address": 0x004362DC, "runtime_address_hex": "0x004362DC"},
+                {"function": "open_cfw_bootloader_easylogger_output_lock_enabled_417b7c", "offset": 8840, "size": 36, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436700, "runtime_address_hex": "0x00436700"},
+                {"function": "open_cfw_bootloader_easylogger_mutex_create_41a648", "offset": 8876, "size": 32, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436724, "runtime_address_hex": "0x00436724"},
+                {"function": "open_cfw_bootloader_easylogger_mutex_acquire_41a65c", "offset": 8908, "size": 24, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436744, "runtime_address_hex": "0x00436744"},
+                {"function": "open_cfw_bootloader_easylogger_mutex_release_41a672", "offset": 8932, "size": 20, "alignment": 4, "padding_before": 0, "runtime_address": 0x0043675C, "runtime_address_hex": "0x0043675C"},
+                {"function": "open_cfw_bootloader_easylogger_port_init_41a684", "offset": 8952, "size": 16, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436770, "runtime_address_hex": "0x00436770"},
+                {"function": "open_cfw_bootloader_easylogger_port_output_41a692", "offset": 8968, "size": 8, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436780, "runtime_address_hex": "0x00436780"},
+                {"function": "open_cfw_bootloader_easylogger_port_output_lock_41a69a", "offset": 8976, "size": 8, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436788, "runtime_address_hex": "0x00436788"},
+                {"function": "open_cfw_bootloader_easylogger_port_output_unlock_41a6a2", "offset": 8984, "size": 8, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436790, "runtime_address_hex": "0x00436790"},
+                {"function": "open_cfw_bootloader_easylogger_port_get_time_41a6aa", "offset": 8992, "size": 40, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436798, "runtime_address_hex": "0x00436798"},
+                {"function": "open_cfw_bootloader_easylogger_task_name_41a6c2", "offset": 9032, "size": 40, "alignment": 4, "padding_before": 0, "runtime_address": 0x004367C0, "runtime_address_hex": "0x004367C0"},
+                {"function": "open_cfw_bootloader_easylogger_port_get_p_info_41a6f0", "offset": 9072, "size": 8, "alignment": 4, "padding_before": 0, "runtime_address": 0x004367E8, "runtime_address_hex": "0x004367E8"},
+                {"function": "open_cfw_bootloader_easylogger_port_get_t_info_41a6f8", "offset": 9080, "size": 8, "alignment": 4, "padding_before": 0, "runtime_address": 0x004367F0, "runtime_address_hex": "0x004367F0"},
+                {"function": "open_cfw_bootloader_easylogger_driver_output_41b854", "offset": 9088, "size": 16, "alignment": 4, "padding_before": 0, "runtime_address": 0x004367F8, "runtime_address_hex": "0x004367F8"},
+                {"function": "open_cfw_bootloader_easylogger_channel_write_41f918", "offset": 9104, "size": 120, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436808, "runtime_address_hex": "0x00436808"},
+                {"function": "open_cfw_bootloader_delay_milliseconds_41f9d8", "offset": 9224, "size": 16, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436880, "runtime_address_hex": "0x00436880"},
+                {"function": "open_cfw_bootloader_delay_41f9e6", "offset": 9240, "size": 8, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436890, "runtime_address_hex": "0x00436890"},
+                {"function": "open_cfw_bootloader_initializer_priority_compare_41f9f0", "offset": 9248, "size": 8, "alignment": 2, "padding_before": 0, "runtime_address": 0x00436898, "runtime_address_hex": "0x00436898"},
+                {"function": "open_cfw_bootloader_run_initializers_41f9f8", "offset": 9256, "size": 64, "alignment": 4, "padding_before": 0, "runtime_address": 0x004368A0, "runtime_address_hex": "0x004368A0"},
+                {"function": "open_cfw_bootloader_guarded_teardown_41fa98", "offset": 9320, "size": 72, "alignment": 4, "padding_before": 0, "runtime_address": 0x004368E0, "runtime_address_hex": "0x004368E0"},
+                {"function": "open_cfw_bootloader_platform_setup_41fa50", "offset": 9392, "size": 96, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436928, "runtime_address_hex": "0x00436928"},
+                {"function": "open_cfw_bootloader_pin_groups_41fadc", "offset": 9488, "size": 428, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436988, "runtime_address_hex": "0x00436988"},
+                {"function": "open_cfw_bootloader_allocator_init_41fd70", "offset": 9916, "size": 88, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436B34, "runtime_address_hex": "0x00436B34"},
             ],
         )
 
     def test_exact_declared_mutation_set(self) -> None:
-        self.assertEqual(len(self.provider), 150456)
+        self.assertEqual(len(self.provider), 158604)
         self.assertEqual(
             hashlib.sha256(self.provider).hexdigest(),
             PROVIDER_SHA256,
@@ -1482,6 +2415,442 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             + list(range(FLOAT_TO_FIXED_OFFSET + 235, FLOAT_TO_FIXED_OFFSET + 238))
             + list(range(FLOAT_TO_FIXED_OFFSET + 239, FLOAT_TO_FIXED_OFFSET + 308))
             + list(range(FLOAT_TO_FIXED_OFFSET + 309, FLOAT_TO_FIXED_OFFSET + 320))
+            + [
+                FORMAT_CORE_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            FORMAT_CORE_OFFSET:FORMAT_CORE_OFFSET + 952
+                        ],
+                        bytes.fromhex("1ef0dfbf" + "00bf" * 474),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                LOG_DISPATCH_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            LOG_DISPATCH_OFFSET:LOG_DISPATCH_OFFSET + 44
+                        ],
+                        bytes.fromhex("1ef0e7bf" + "00bf" * 20),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                STRSTR_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[STRSTR_OFFSET:STRSTR_OFFSET + 44],
+                        bytes.fromhex("1ef0dfbf" + "00bf" * 20),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                CRITICAL_CONTEXT_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            CRITICAL_CONTEXT_OFFSET:CRITICAL_CONTEXT_OFFSET + 46
+                        ],
+                        bytes.fromhex("1ef0debf" + "00bf" * 21),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                GATE_ACQUIRE_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            GATE_ACQUIRE_OFFSET:GATE_ACQUIRE_OFFSET + 48
+                        ],
+                        bytes.fromhex("1ef0debf" + "00bf" * 22),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                GATE_STATE_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[GATE_STATE_OFFSET:GATE_STATE_OFFSET + 40],
+                        bytes.fromhex("1ef0debf" + "00bf" * 18),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                GATE_RELEASE_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            GATE_RELEASE_OFFSET:GATE_RELEASE_OFFSET + 56
+                        ],
+                        bytes.fromhex("1ef0dcbf" + "00bf" * 26),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                CONTEXT_VALUE_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            CONTEXT_VALUE_OFFSET:CONTEXT_VALUE_OFFSET + 22
+                        ],
+                        bytes.fromhex("1ef0dcbf" + "00bf" * 9),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_DISPATCH_4160FE_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_DISPATCH_4160FE_OFFSET:
+                            RUNTIME_DISPATCH_4160FE_OFFSET + 200
+                        ],
+                        bytes.fromhex("1ef0ddbf" + "00bf" * 98),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_VALUE_4161C6_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_VALUE_4161C6_OFFSET:
+                            RUNTIME_VALUE_4161C6_OFFSET + 8
+                        ],
+                        bytes.fromhex("1ef0ccbf" + "00bf" * 2),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_CALL_4161CE_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_CALL_4161CE_OFFSET:
+                            RUNTIME_CALL_4161CE_OFFSET + 50
+                        ],
+                        bytes.fromhex("1ef0cabf" + "00bf" * 23),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_ACTION_416200_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_ACTION_416200_OFFSET:
+                            RUNTIME_ACTION_416200_OFFSET + 58
+                        ],
+                        bytes.fromhex("1ef0c7bf" + "00bf" * 27),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_TRANSFER_41623A_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_TRANSFER_41623A_OFFSET:
+                            RUNTIME_TRANSFER_41623A_OFFSET + 138
+                        ],
+                        bytes.fromhex("1ef0c5bf" + "00bf" * 67),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_WAIT_4162C4_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_WAIT_4162C4_OFFSET:
+                            RUNTIME_WAIT_4162C4_OFFSET + 180
+                        ],
+                        bytes.fromhex("1ef0c0bf" + "00bf" * 88),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_NOTIFY_416378_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_NOTIFY_416378_OFFSET:
+                            RUNTIME_NOTIFY_416378_OFFSET + 34
+                        ],
+                        bytes.fromhex("1ef0bfbf" + "00bf" * 15),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_CALLBACK_41639A_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_CALLBACK_41639A_OFFSET:
+                            RUNTIME_CALLBACK_41639A_OFFSET + 24
+                        ],
+                        bytes.fromhex("1ef0bcbf" + "00bf" * 10),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_REGISTER_4163B2_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_REGISTER_4163B2_OFFSET:
+                            RUNTIME_REGISTER_4163B2_OFFSET + 232
+                        ],
+                        bytes.fromhex("1ef0bdbf" + "00bf" * 114),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_SUBMIT_41649A_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_SUBMIT_41649A_OFFSET:
+                            RUNTIME_SUBMIT_41649A_OFFSET + 64
+                        ],
+                        bytes.fromhex("1ef0a3bf" + "00bf" * 30),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_CREATE_4164DA_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_CREATE_4164DA_OFFSET:
+                            RUNTIME_CREATE_4164DA_OFFSET + 84
+                        ],
+                        bytes.fromhex("1ef09ebf" + "00bf" * 40),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_FLAGS_SET_41652E_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            RUNTIME_FLAGS_SET_41652E_OFFSET:
+                            RUNTIME_FLAGS_SET_41652E_OFFSET + 94
+                        ],
+                        bytes.fromhex("1ef08bbf" + "00bf" * 45),
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_FLAGS_WAIT_416590_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_FLAGS_WAIT_416590_OFFSET:RUNTIME_FLAGS_WAIT_416590_OFFSET + 128], bytes.fromhex("1ef084bf" + "00bf" * 62))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_FLAGS_CREATE_416610_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_FLAGS_CREATE_416610_OFFSET:RUNTIME_FLAGS_CREATE_416610_OFFSET + 154], bytes.fromhex("1ef076bf" + "00bf" * 75))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_HANDLE_ACQUIRE_4166AA_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_HANDLE_ACQUIRE_4166AA_OFFSET:RUNTIME_HANDLE_ACQUIRE_4166AA_OFFSET + 102], bytes.fromhex("1ef052bf" + "00bf" * 49))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_HANDLE_RELEASE_416710_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_HANDLE_RELEASE_416710_OFFSET:RUNTIME_HANDLE_RELEASE_416710_OFFSET + 82], bytes.fromhex("1ef041bf" + "00bf" * 39))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_SEMAPHORE_CREATE_416762_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_SEMAPHORE_CREATE_416762_OFFSET:RUNTIME_SEMAPHORE_CREATE_416762_OFFSET + 180], bytes.fromhex("1ef035bf" + "00bf" * 88))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_QUEUE_CREATE_416816_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_QUEUE_CREATE_416816_OFFSET:RUNTIME_QUEUE_CREATE_416816_OFFSET + 140], bytes.fromhex("1ef021bf" + "00bf" * 68))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_QUEUE_PUT_4168A2_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_QUEUE_PUT_4168A2_OFFSET:RUNTIME_QUEUE_PUT_4168A2_OFFSET + 126], bytes.fromhex("1ef00dbf" + "00bf" * 61))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_QUEUE_GET_416920_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_QUEUE_GET_416920_OFFSET:RUNTIME_QUEUE_GET_416920_OFFSET + 122], bytes.fromhex("1ef006bf" + "00bf" * 59))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_BIT_WIDTH_4169A4_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_BIT_WIDTH_4169A4_OFFSET:RUNTIME_BIT_WIDTH_4169A4_OFFSET + 62], bytes.fromhex("1ef0fabe" + "00bf" * 29))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_CTZ_4169E2_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_CTZ_4169E2_OFFSET:RUNTIME_CTZ_4169E2_OFFSET + 16], bytes.fromhex("1ef0e2be" + "00bf" * 6))
+                )
+                if stock != replacement
+            ]
+            + [
+                RUNTIME_LOG2_4169F2_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(self.official[RUNTIME_LOG2_4169F2_OFFSET:RUNTIME_LOG2_4169F2_OFFSET + 10], bytes.fromhex("1ef0e1be" + "00bf" * 3))
+                )
+                if stock != replacement
+            ]
+            + [
+                address - RUN_BASE + index
+                for address, replacement_bytes in TLSF_PATCH_REPLACEMENTS
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            address - RUN_BASE:
+                            address - RUN_BASE + len(replacement_bytes)
+                        ],
+                        replacement_bytes,
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                address - RUN_BASE + index
+                for address, replacement_bytes in TLSF_TOPOLOGY_PATCH_REPLACEMENTS
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            address - RUN_BASE:
+                            address - RUN_BASE + len(replacement_bytes)
+                        ],
+                        replacement_bytes,
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                address - RUN_BASE + index
+                for address, replacement_bytes in TLSF_MAPPING_PATCH_REPLACEMENTS
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            address - RUN_BASE:
+                            address - RUN_BASE + len(replacement_bytes)
+                        ],
+                        replacement_bytes,
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                address - RUN_BASE + index
+                for address, replacement_bytes in TLSF_FREE_LIST_PATCH_REPLACEMENTS
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            address - RUN_BASE:
+                            address - RUN_BASE + len(replacement_bytes)
+                        ],
+                        replacement_bytes,
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                address - RUN_BASE + index
+                for address, replacement_bytes in TLSF_ALLOCATOR_PATCH_REPLACEMENTS
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            address - RUN_BASE:
+                            address - RUN_BASE + len(replacement_bytes)
+                        ],
+                        replacement_bytes,
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                address - RUN_BASE + index
+                for address, replacement_bytes in TLSF_PUBLIC_PATCH_REPLACEMENTS
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            address - RUN_BASE:
+                            address - RUN_BASE + len(replacement_bytes)
+                        ],
+                        replacement_bytes,
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                address - RUN_BASE + index
+                for address, replacement_bytes in EASYLOGGER_CONTROL_PATCH_REPLACEMENTS
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            address - RUN_BASE:
+                            address - RUN_BASE + len(replacement_bytes)
+                        ],
+                        replacement_bytes,
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                EASYLOGGER_OUTPUT_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            EASYLOGGER_OUTPUT_OFFSET:
+                            EASYLOGGER_OUTPUT_OFFSET + 1026
+                        ],
+                        EASYLOGGER_OUTPUT_PATCH_REPLACEMENT[1],
+                    )
+                )
+                if stock != replacement
+            ]
             + list(
                 range(
                     EASYLOGGER_GET_FMT_OFFSET,
@@ -1557,6 +2926,33 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     EASYLOGGER_GET_FMT_PTR_OFFSET + 26,
                 )
             )
+            + [
+                EASYLOGGER_LOCK_ENABLED_OFFSET + index
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            EASYLOGGER_LOCK_ENABLED_OFFSET:
+                            EASYLOGGER_LOCK_ENABLED_OFFSET + 60
+                        ],
+                        EASYLOGGER_LOCK_ENABLED_PATCH_REPLACEMENT[1],
+                    )
+                )
+                if stock != replacement
+            ]
+            + [
+                address - RUN_BASE + index
+                for address, replacement_bytes in EASYLOGGER_PORT_PATCH_REPLACEMENTS
+                for index, (stock, replacement) in enumerate(
+                    zip(
+                        self.official[
+                            address - RUN_BASE:
+                            address - RUN_BASE + len(replacement_bytes)
+                        ],
+                        replacement_bytes,
+                    )
+                )
+                if stock != replacement
+            ]
             + list(
                 range(
                     EASYLOGGER_STRCPY_OFFSET,
@@ -1617,6 +3013,35 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     EASYLOGGER_STRCPY_OFFSET + 162,
                 )
             )
+            + list(
+                range(
+                    EASYLOGGER_DRIVER_OUTPUT_OFFSET,
+                    EASYLOGGER_DRIVER_OUTPUT_OFFSET + 14,
+                )
+            )
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET, EASYLOGGER_CHANNEL_WRITE_OFFSET + 44))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 45, EASYLOGGER_CHANNEL_WRITE_OFFSET + 56))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 57, EASYLOGGER_CHANNEL_WRITE_OFFSET + 60))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 61, EASYLOGGER_CHANNEL_WRITE_OFFSET + 66))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 67, EASYLOGGER_CHANNEL_WRITE_OFFSET + 70))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 71, EASYLOGGER_CHANNEL_WRITE_OFFSET + 82))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 83, EASYLOGGER_CHANNEL_WRITE_OFFSET + 104))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 105, EASYLOGGER_CHANNEL_WRITE_OFFSET + 108))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 109, EASYLOGGER_CHANNEL_WRITE_OFFSET + 114))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 115, EASYLOGGER_CHANNEL_WRITE_OFFSET + 142))
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 143, EASYLOGGER_CHANNEL_WRITE_OFFSET + 148))
+            + [EASYLOGGER_CHANNEL_WRITE_OFFSET + 149]
+            + list(range(EASYLOGGER_CHANNEL_WRITE_OFFSET + 151, EASYLOGGER_CHANNEL_WRITE_OFFSET + 158))
+            + [
+                offset
+                for address, replacement in BOOT_SERVICE_PATCH_REPLACEMENTS
+                for offset in range(
+                    address - RUN_BASE,
+                    address - RUN_BASE + len(replacement),
+                )
+                if self.official[offset]
+                != replacement[offset - (address - RUN_BASE)]
+            ]
             + list(
                 range(
                     MSPI_INTERRUPT_CLEAR_OFFSET,
@@ -1941,6 +3366,93 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         allowed.update(range(NULLABLE_STRLEN_OFFSET, NULLABLE_STRLEN_OFFSET + 24))
         allowed.update(range(REPEAT_CHAR_OFFSET, REPEAT_CHAR_OFFSET + 34))
         allowed.update(range(FLOAT_TO_FIXED_OFFSET, FLOAT_TO_FIXED_OFFSET + 320))
+        allowed.update(range(FORMAT_CORE_OFFSET, FORMAT_CORE_OFFSET + 952))
+        allowed.update(range(LOG_DISPATCH_OFFSET, LOG_DISPATCH_OFFSET + 44))
+        allowed.update(range(STRSTR_OFFSET, STRSTR_OFFSET + 44))
+        allowed.update(
+            range(CRITICAL_CONTEXT_OFFSET, CRITICAL_CONTEXT_OFFSET + 46)
+        )
+        allowed.update(range(GATE_ACQUIRE_OFFSET, GATE_ACQUIRE_OFFSET + 48))
+        allowed.update(range(GATE_STATE_OFFSET, GATE_STATE_OFFSET + 40))
+        allowed.update(range(GATE_RELEASE_OFFSET, GATE_RELEASE_OFFSET + 56))
+        allowed.update(range(CONTEXT_VALUE_OFFSET, CONTEXT_VALUE_OFFSET + 22))
+        allowed.update(
+            range(
+                RUNTIME_DISPATCH_4160FE_OFFSET,
+                RUNTIME_DISPATCH_4160FE_OFFSET + 200,
+            )
+        )
+        allowed.update(
+            range(RUNTIME_VALUE_4161C6_OFFSET, RUNTIME_VALUE_4161C6_OFFSET + 8)
+        )
+        allowed.update(
+            range(RUNTIME_CALL_4161CE_OFFSET, RUNTIME_CALL_4161CE_OFFSET + 50)
+        )
+        allowed.update(
+            range(RUNTIME_ACTION_416200_OFFSET, RUNTIME_ACTION_416200_OFFSET + 58)
+        )
+        allowed.update(
+            range(
+                RUNTIME_TRANSFER_41623A_OFFSET,
+                RUNTIME_TRANSFER_41623A_OFFSET + 138,
+            )
+        )
+        allowed.update(
+            range(RUNTIME_WAIT_4162C4_OFFSET, RUNTIME_WAIT_4162C4_OFFSET + 180)
+        )
+        allowed.update(
+            range(
+                RUNTIME_NOTIFY_416378_OFFSET,
+                RUNTIME_NOTIFY_416378_OFFSET + 34,
+            )
+        )
+        allowed.update(
+            range(
+                RUNTIME_CALLBACK_41639A_OFFSET,
+                RUNTIME_CALLBACK_41639A_OFFSET + 24,
+            )
+        )
+        allowed.update(
+            range(
+                RUNTIME_REGISTER_4163B2_OFFSET,
+                RUNTIME_REGISTER_4163B2_OFFSET + 232,
+            )
+        )
+        allowed.update(
+            range(
+                RUNTIME_SUBMIT_41649A_OFFSET,
+                RUNTIME_SUBMIT_41649A_OFFSET + 64,
+            )
+        )
+        allowed.update(
+            range(
+                RUNTIME_CREATE_4164DA_OFFSET,
+                RUNTIME_CREATE_4164DA_OFFSET + 84,
+            )
+        )
+        allowed.update(
+            range(
+                RUNTIME_FLAGS_SET_41652E_OFFSET,
+                RUNTIME_FLAGS_SET_41652E_OFFSET + 94,
+            )
+        )
+        allowed.update(range(RUNTIME_FLAGS_WAIT_416590_OFFSET, RUNTIME_FLAGS_WAIT_416590_OFFSET + 128))
+        allowed.update(range(RUNTIME_FLAGS_CREATE_416610_OFFSET, RUNTIME_FLAGS_CREATE_416610_OFFSET + 154))
+        allowed.update(range(RUNTIME_HANDLE_ACQUIRE_4166AA_OFFSET, RUNTIME_HANDLE_ACQUIRE_4166AA_OFFSET + 102))
+        allowed.update(range(RUNTIME_HANDLE_RELEASE_416710_OFFSET, RUNTIME_HANDLE_RELEASE_416710_OFFSET + 82))
+        allowed.update(range(RUNTIME_SEMAPHORE_CREATE_416762_OFFSET, RUNTIME_SEMAPHORE_CREATE_416762_OFFSET + 180))
+        allowed.update(range(RUNTIME_QUEUE_CREATE_416816_OFFSET, RUNTIME_QUEUE_CREATE_416816_OFFSET + 140))
+        allowed.update(range(RUNTIME_QUEUE_PUT_4168A2_OFFSET, RUNTIME_QUEUE_PUT_4168A2_OFFSET + 126))
+        allowed.update(range(RUNTIME_QUEUE_GET_416920_OFFSET, RUNTIME_QUEUE_GET_416920_OFFSET + 122))
+        allowed.update(range(RUNTIME_BIT_WIDTH_4169A4_OFFSET, RUNTIME_BIT_WIDTH_4169A4_OFFSET + 62))
+        allowed.update(range(RUNTIME_CTZ_4169E2_OFFSET, RUNTIME_CTZ_4169E2_OFFSET + 16))
+        allowed.update(range(RUNTIME_LOG2_4169F2_OFFSET, RUNTIME_LOG2_4169F2_OFFSET + 10))
+        allowed.update(
+            range(
+                TLSF_BLOCK_PRIMITIVES_START_OFFSET,
+                EASYLOGGER_OUTPUT_END_ADDRESS - RUN_BASE,
+            )
+        )
         allowed.update(
             range(
                 EASYLOGGER_GET_FMT_OFFSET,
@@ -1959,6 +3471,19 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 EASYLOGGER_GET_FMT_PTR_OFFSET + 26,
             )
         )
+        allowed.update(
+            range(
+                EASYLOGGER_LOCK_ENABLED_OFFSET,
+                EASYLOGGER_LOCK_ENABLED_OFFSET + 60,
+            )
+        )
+        allowed.update(range(0x0041A648 - RUN_BASE, 0x0041A700 - RUN_BASE))
+        allowed.update(range(0x0041B854 - RUN_BASE, 0x0041B862 - RUN_BASE))
+        allowed.update(range(0x0041F918 - RUN_BASE, 0x0041F9B6 - RUN_BASE))
+        allowed.update(range(0x0041F9D8 - RUN_BASE, 0x0041FA40 - RUN_BASE))
+        allowed.update(range(0x0041FA50 - RUN_BASE, 0x0041FAD0 - RUN_BASE))
+        allowed.update(range(0x0041FADC - RUN_BASE, 0x0041FCF6 - RUN_BASE))
+        allowed.update(range(0x0041FD70 - RUN_BASE, 0x0041FDA8 - RUN_BASE))
         allowed.update(
             range(
                 EASYLOGGER_STRCPY_OFFSET,
@@ -2009,7 +3534,9 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         )
         for offset, stock in enumerate(self.official):
             if offset not in allowed:
-                self.assertEqual(self.provider[offset], stock)
+                self.assertEqual(
+                    self.provider[offset], stock, f"unexpected mutation at {offset:#x}"
+                )
         self.assertEqual(
             self.provider[
                 LITTLEFS_UTIL_MAX_OFFSET:LITTLEFS_UTIL_MAX_OFFSET + 8
@@ -2256,20 +3783,54 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             bytes.fromhex("1ef0dfbf" + "00bf" * 158),
         )
         self.assertEqual(
+            self.provider[FORMAT_CORE_OFFSET:FORMAT_CORE_OFFSET + 952],
+            bytes.fromhex("1ef0dfbf" + "00bf" * 474),
+        )
+        self.assertEqual(
+            self.provider[LOG_DISPATCH_OFFSET:LOG_DISPATCH_OFFSET + 44],
+            bytes.fromhex("1ef0e7bf" + "00bf" * 20),
+        )
+        self.assertEqual(
+            self.provider[STRSTR_OFFSET:STRSTR_OFFSET + 44],
+            bytes.fromhex("1ef0dfbf" + "00bf" * 20),
+        )
+        self.assertEqual(
+            self.provider[
+                CRITICAL_CONTEXT_OFFSET:CRITICAL_CONTEXT_OFFSET + 46
+            ],
+            bytes.fromhex("1ef0debf" + "00bf" * 21),
+        )
+        self.assertEqual(
+            self.provider[GATE_ACQUIRE_OFFSET:GATE_ACQUIRE_OFFSET + 48],
+            bytes.fromhex("1ef0debf" + "00bf" * 22),
+        )
+        self.assertEqual(
+            self.provider[GATE_STATE_OFFSET:GATE_STATE_OFFSET + 40],
+            bytes.fromhex("1ef0debf" + "00bf" * 18),
+        )
+        self.assertEqual(
+            self.provider[GATE_RELEASE_OFFSET:GATE_RELEASE_OFFSET + 56],
+            bytes.fromhex("1ef0dcbf" + "00bf" * 26),
+        )
+        self.assertEqual(
+            self.provider[CONTEXT_VALUE_OFFSET:CONTEXT_VALUE_OFFSET + 22],
+            bytes.fromhex("1ef0dcbf" + "00bf" * 9),
+        )
+        self.assertEqual(
             self.provider[len(self.official):],
             b"\x00" + self.overlay,
         )
         component = self.report["component"]
-        self.assertEqual(component["generated_patch_site_bytes"], 2398)
-        self.assertEqual(component["opaque_base_bytes"], 146201)
-        self.assertEqual(component["generated_alignment_bytes"], 8)
+        self.assertEqual(component["generated_patch_site_bytes"], 11366)
+        self.assertEqual(component["opaque_base_bytes"], 137233)
+        self.assertEqual(component["generated_alignment_bytes"], 14)
         self.assertEqual(
             component["generated_stock_to_overlay_alignment_bytes"],
             1,
         )
         self.assertEqual(component["generated_isolated_alignment_bytes"], 0)
-        self.assertEqual(component["generated_relocated_alignment_bytes"], 7)
-        self.assertEqual(component["source_owned_bytes"], 1849)
+        self.assertEqual(component["generated_relocated_alignment_bytes"], 13)
+        self.assertEqual(component["source_owned_bytes"], 9991)
 
     def test_redirect_and_original_call_edge_round_trip(self) -> None:
         sites = {
@@ -2599,6 +4160,523 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 126910,
             ),
             (
+                "replace_bootloader_format_core",
+                FORMAT_CORE_ADDRESS,
+                FORMAT_CORE_TARGET,
+                "1ef0dfbf" + "00bf" * 474,
+                126910,
+            ),
+            (
+                "replace_bootloader_log_dispatch",
+                LOG_DISPATCH_ADDRESS,
+                LOG_DISPATCH_TARGET,
+                "1ef0e7bf" + "00bf" * 20,
+                126926,
+            ),
+            (
+                "replace_bootloader_strstr",
+                STRSTR_ADDRESS,
+                STRSTR_TARGET,
+                "1ef0dfbf" + "00bf" * 20,
+                126910,
+            ),
+            (
+                "replace_bootloader_critical_context",
+                CRITICAL_CONTEXT_ADDRESS,
+                CRITICAL_CONTEXT_TARGET,
+                "1ef0debf" + "00bf" * 21,
+                126908,
+            ),
+            (
+                "replace_bootloader_gate_acquire",
+                GATE_ACQUIRE_ADDRESS,
+                GATE_ACQUIRE_TARGET,
+                "1ef0debf" + "00bf" * 22,
+                126908,
+            ),
+            (
+                "replace_bootloader_gate_state",
+                GATE_STATE_ADDRESS,
+                GATE_STATE_TARGET,
+                "1ef0debf" + "00bf" * 18,
+                126908,
+            ),
+            (
+                "replace_bootloader_gate_release",
+                GATE_RELEASE_ADDRESS,
+                GATE_RELEASE_TARGET,
+                "1ef0dcbf" + "00bf" * 26,
+                126904,
+            ),
+            (
+                "replace_bootloader_context_value",
+                CONTEXT_VALUE_ADDRESS,
+                CONTEXT_VALUE_TARGET,
+                "1ef0dcbf" + "00bf" * 9,
+                126904,
+            ),
+            (
+                "replace_bootloader_runtime_dispatch_4160fe",
+                RUNTIME_DISPATCH_4160FE_ADDRESS,
+                RUNTIME_DISPATCH_4160FE_TARGET,
+                "1ef0ddbf" + "00bf" * 98,
+                126906,
+            ),
+            (
+                "replace_bootloader_runtime_value_4161c6",
+                RUNTIME_VALUE_4161C6_ADDRESS,
+                RUNTIME_VALUE_4161C6_TARGET,
+                "1ef0ccbf" + "00bf" * 2,
+                126872,
+            ),
+            (
+                "replace_bootloader_runtime_call_4161ce",
+                RUNTIME_CALL_4161CE_ADDRESS,
+                RUNTIME_CALL_4161CE_TARGET,
+                "1ef0cabf" + "00bf" * 23,
+                126868,
+            ),
+            (
+                "replace_bootloader_runtime_action_416200",
+                RUNTIME_ACTION_416200_ADDRESS,
+                RUNTIME_ACTION_416200_TARGET,
+                "1ef0c7bf" + "00bf" * 27,
+                126862,
+            ),
+            (
+                "replace_bootloader_runtime_transfer_41623a",
+                RUNTIME_TRANSFER_41623A_ADDRESS,
+                RUNTIME_TRANSFER_41623A_TARGET,
+                "1ef0c5bf" + "00bf" * 67,
+                126858,
+            ),
+            (
+                "replace_bootloader_runtime_wait_4162c4",
+                RUNTIME_WAIT_4162C4_ADDRESS,
+                RUNTIME_WAIT_4162C4_TARGET,
+                "1ef0c0bf" + "00bf" * 88,
+                126848,
+            ),
+            (
+                "replace_bootloader_runtime_notify_416378",
+                RUNTIME_NOTIFY_416378_ADDRESS,
+                RUNTIME_NOTIFY_416378_TARGET,
+                "1ef0bfbf" + "00bf" * 15,
+                126846,
+            ),
+            (
+                "replace_bootloader_runtime_callback_41639a",
+                RUNTIME_CALLBACK_41639A_ADDRESS,
+                RUNTIME_CALLBACK_41639A_TARGET,
+                "1ef0bcbf" + "00bf" * 10,
+                126840,
+            ),
+            (
+                "replace_bootloader_runtime_register_4163b2",
+                RUNTIME_REGISTER_4163B2_ADDRESS,
+                RUNTIME_REGISTER_4163B2_TARGET,
+                "1ef0bdbf" + "00bf" * 114,
+                126842,
+            ),
+            (
+                "replace_bootloader_runtime_submit_41649a",
+                RUNTIME_SUBMIT_41649A_ADDRESS,
+                RUNTIME_SUBMIT_41649A_TARGET,
+                "1ef0a3bf" + "00bf" * 30,
+                126790,
+            ),
+            (
+                "replace_bootloader_runtime_create_4164da",
+                RUNTIME_CREATE_4164DA_ADDRESS,
+                RUNTIME_CREATE_4164DA_TARGET,
+                "1ef09ebf" + "00bf" * 40,
+                126780,
+            ),
+            (
+                "replace_bootloader_runtime_flags_set_41652e",
+                RUNTIME_FLAGS_SET_41652E_ADDRESS,
+                RUNTIME_FLAGS_SET_41652E_TARGET,
+                "1ef08bbf" + "00bf" * 45,
+                126742,
+            ),
+            (
+                "replace_bootloader_runtime_flags_wait_416590",
+                RUNTIME_FLAGS_WAIT_416590_ADDRESS,
+                RUNTIME_FLAGS_WAIT_416590_TARGET,
+                "1ef084bf" + "00bf" * 62,
+                126728,
+            ),
+            (
+                "replace_bootloader_runtime_flags_create_416610",
+                RUNTIME_FLAGS_CREATE_416610_ADDRESS,
+                RUNTIME_FLAGS_CREATE_416610_TARGET,
+                "1ef076bf" + "00bf" * 75,
+                126700,
+            ),
+            (
+                "replace_bootloader_runtime_handle_acquire_4166aa",
+                RUNTIME_HANDLE_ACQUIRE_4166AA_ADDRESS,
+                RUNTIME_HANDLE_ACQUIRE_4166AA_TARGET,
+                "1ef052bf" + "00bf" * 49,
+                126628,
+            ),
+            (
+                "replace_bootloader_runtime_handle_release_416710",
+                RUNTIME_HANDLE_RELEASE_416710_ADDRESS,
+                RUNTIME_HANDLE_RELEASE_416710_TARGET,
+                "1ef041bf" + "00bf" * 39,
+                126594,
+            ),
+            (
+                "replace_bootloader_runtime_semaphore_create_416762",
+                RUNTIME_SEMAPHORE_CREATE_416762_ADDRESS,
+                RUNTIME_SEMAPHORE_CREATE_416762_TARGET,
+                "1ef035bf" + "00bf" * 88,
+                126570,
+            ),
+            (
+                "replace_bootloader_runtime_queue_create_416816",
+                RUNTIME_QUEUE_CREATE_416816_ADDRESS,
+                RUNTIME_QUEUE_CREATE_416816_TARGET,
+                "1ef021bf" + "00bf" * 68,
+                126530,
+            ),
+            (
+                "replace_bootloader_runtime_queue_put_4168a2",
+                RUNTIME_QUEUE_PUT_4168A2_ADDRESS,
+                RUNTIME_QUEUE_PUT_4168A2_TARGET,
+                "1ef00dbf" + "00bf" * 61,
+                126490,
+            ),
+            (
+                "replace_bootloader_runtime_queue_get_416920",
+                RUNTIME_QUEUE_GET_416920_ADDRESS,
+                RUNTIME_QUEUE_GET_416920_TARGET,
+                "1ef006bf" + "00bf" * 59,
+                126476,
+            ),
+            (
+                "replace_bootloader_runtime_bit_width_4169a4",
+                RUNTIME_BIT_WIDTH_4169A4_ADDRESS,
+                RUNTIME_BIT_WIDTH_4169A4_TARGET,
+                "1ef0fabe" + "00bf" * 29,
+                126452,
+            ),
+            (
+                "replace_bootloader_runtime_ctz_4169e2",
+                RUNTIME_CTZ_4169E2_ADDRESS,
+                RUNTIME_CTZ_4169E2_TARGET,
+                "1ef0e2be" + "00bf" * 6,
+                126404,
+            ),
+            (
+                "replace_bootloader_runtime_log2_4169f2",
+                RUNTIME_LOG2_4169F2_ADDRESS,
+                RUNTIME_LOG2_4169F2_TARGET,
+                "1ef0e1be" + "00bf" * 3,
+                126402,
+            ),
+            (
+                "replace_bootloader_tlsf_block_size_4169fc",
+                0x004169FC,
+                0x004357C2,
+                "1ef0e1be" + "00bf" * 8,
+                126402,
+            ),
+            (
+                "replace_bootloader_tlsf_block_set_size_416a10",
+                0x00416A10,
+                0x004357CA,
+                "1ef0dbbe" + "00bf" * 12,
+                126390,
+            ),
+            (
+                "replace_bootloader_tlsf_block_is_last_416a2c",
+                0x00416A2C,
+                0x004357D6,
+                "1ef0d3be" + "00bf" * 8,
+                126374,
+            ),
+            (
+                "replace_bootloader_tlsf_block_is_free_416a40",
+                0x00416A40,
+                0x004357E0,
+                "1ef0cebe" + "00bf" * 4,
+                126364,
+            ),
+            (
+                "replace_bootloader_tlsf_block_set_free_416a4c",
+                0x00416A4C,
+                0x004357E8,
+                "1ef0ccbe" + "00bf" * 5,
+                126360,
+            ),
+            (
+                "replace_bootloader_tlsf_block_set_used_416a5a",
+                0x00416A5A,
+                0x004357F2,
+                "1ef0cabe" + "00bf" * 5,
+                126356,
+            ),
+            (
+                "replace_bootloader_tlsf_block_is_previous_free_416a68",
+                0x00416A68,
+                0x004357FC,
+                "1ef0c8be" + "00bf" * 4,
+                126352,
+            ),
+            (
+                "replace_bootloader_tlsf_block_set_previous_free_416a74",
+                0x00416A74,
+                0x00435804,
+                "1ef0c6be" + "00bf" * 5,
+                126348,
+            ),
+            (
+                "replace_bootloader_tlsf_block_set_previous_used_416a82",
+                0x00416A82,
+                0x0043580E,
+                "1ef0c4be" + "00bf" * 5,
+                126344,
+            ),
+            (
+                "replace_bootloader_tlsf_block_from_pointer_416a90",
+                0x00416A90,
+                0x00435818,
+                "1ef0c2be" + "00bf" * 4,
+                126340,
+            ),
+            (
+                "replace_bootloader_tlsf_block_to_pointer_416a9c",
+                0x00416A9C,
+                0x0043581C,
+                "1ef0bebe" + "00bf" * 3,
+                126332,
+            ),
+            (
+                "replace_bootloader_tlsf_offset_to_block_416aa6",
+                0x00416AA6,
+                0x00435820,
+                "1ef0bbbe",
+                126326,
+            ),
+            (
+                "replace_bootloader_tlsf_block_prev_416aaa",
+                0x00416AAA,
+                0x00435824,
+                "1ef0bbbe" + "00bf" * 17,
+                126326,
+            ),
+            (
+                "replace_bootloader_tlsf_block_next_416ad0",
+                0x00416AD0,
+                0x00435848,
+                "1ef0babe" + "00bf" * 32,
+                126324,
+            ),
+            (
+                "replace_bootloader_tlsf_block_link_next_416b14",
+                0x00416B14,
+                0x00435884,
+                "1ef0b6be" + "00bf" * 5,
+                126316,
+            ),
+            (
+                "replace_bootloader_tlsf_block_mark_as_free_416b22",
+                0x00416B22,
+                0x00435890,
+                "1ef0b5be" + "00bf" * 9,
+                126314,
+            ),
+            (
+                "replace_bootloader_tlsf_block_mark_as_used_416b38",
+                0x00416B38,
+                0x004358A6,
+                "1ef0b5be" + "00bf" * 9,
+                126314,
+            ),
+            (
+                "replace_bootloader_tlsf_align_up_416b4e",
+                0x00416B4E,
+                0x004358BC,
+                "1ef0b5be" + "00bf" * 20,
+                126314,
+            ),
+            (
+                "replace_bootloader_tlsf_align_down_416b7a",
+                0x00416B7A,
+                0x004358E8,
+                "1ef0b5be" + "00bf" * 19,
+                126314,
+            ),
+            (
+                "replace_bootloader_tlsf_align_pointer_416ba4",
+                0x00416BA4,
+                0x00435910,
+                "1ef0b4be" + "00bf" * 19,
+                126312,
+            ),
+            (
+                "replace_bootloader_tlsf_adjust_request_size_416bce",
+                0x00416BCE,
+                0x0043593C,
+                "1ef0b5be" + "00bf" * 19,
+                126314,
+            ),
+            (
+                "replace_bootloader_tlsf_mapping_insert_416bf8",
+                0x00416BF8,
+                0x0043595A,
+                "1ef0afbe" + "00bf" * 21,
+                126302,
+            ),
+            (
+                "replace_bootloader_tlsf_mapping_search_416c26",
+                0x00416C26,
+                0x00435984,
+                "1ef0adbe" + "00bf" * 18,
+                126298,
+            ),
+            (
+                "replace_bootloader_tlsf_search_suitable_block_416c4e",
+                0x00416C4E,
+                0x004359B4,
+                "1ef0b1be" + "00bf" * 58,
+                126306,
+            ),
+            (
+                "replace_bootloader_tlsf_remove_free_block_416cc6",
+                0x00416CC6,
+                0x00435A24,
+                "1ef0adbe" + "00bf" * 73,
+                126298,
+            ),
+            (
+                "replace_bootloader_tlsf_insert_free_block_416d5c",
+                0x00416D5C,
+                0x00435AA0,
+                "1ef0a0be" + "00bf" * 82,
+                126272,
+            ),
+            (
+                "replace_bootloader_tlsf_block_remove_416e04",
+                0x00416E04, 0x00435B34,
+                "1ef096be" + "00bf" * 15, 126252,
+            ),
+            (
+                "replace_bootloader_tlsf_block_insert_416e26",
+                0x00416E26, 0x00435B56,
+                "1ef096be" + "00bf" * 15, 126252,
+            ),
+            (
+                "replace_bootloader_tlsf_block_can_split_416e48",
+                0x00416E48, 0x00435B78,
+                "1ef096be" + "00bf" * 10, 126252,
+            ),
+            (
+                "replace_bootloader_tlsf_block_split_416e60",
+                0x00416E60, 0x00435B8C,
+                "1ef094be" + "00bf" * 94, 126248,
+            ),
+            (
+                "replace_bootloader_tlsf_block_absorb_416f20",
+                0x00416F20, 0x00435C30,
+                "1ef086be" + "00bf" * 31, 126220,
+            ),
+            (
+                "replace_bootloader_tlsf_block_merge_previous_416f62",
+                0x00416F62, 0x00435C6C,
+                "1ef083be" + "00bf" * 48, 126214,
+            ),
+            (
+                "replace_bootloader_tlsf_block_merge_next_416fc6",
+                0x00416FC6, 0x00435CCC,
+                "1ef081be" + "00bf" * 48, 126210,
+            ),
+            (
+                "replace_bootloader_tlsf_block_trim_free_41702a",
+                0x0041702A, 0x00435D24,
+                "1ef07bbe" + "00bf" * 39, 126198,
+            ),
+            (
+                "replace_bootloader_tlsf_block_locate_free_41707c",
+                0x0041707C, 0x00435D7C,
+                "1ef07ebe" + "00bf" * 47, 126204,
+            ),
+            (
+                "replace_bootloader_tlsf_block_prepare_used_4170de",
+                0x004170DE, 0x00435DDC,
+                "1ef07dbe" + "00bf" * 29, 126202,
+            ),
+            (
+                "replace_bootloader_tlsf_control_construct_41711c",
+                0x0041711C, 0x00435E20,
+                "1ef080be" + "00bf" * 22, 126208,
+            ),
+            (
+                "replace_bootloader_tlsf_pool_overhead_41714c",
+                0x0041714C, 0x00435E50,
+                "1ef080be" + "00bf" * 6, 126208,
+            ),
+            (
+                "replace_bootloader_tlsf_add_pool_41715c",
+                0x0041715C, 0x00435E54,
+                "1ef07abe" + "00bf" * 84, 126196,
+            ),
+            (
+                "replace_bootloader_tlsf_create_417208",
+                0x00417208, 0x00435EE0,
+                "1ef06abe" + "00bf" * 26, 126164,
+            ),
+            (
+                "replace_bootloader_tlsf_create_with_pool_417240",
+                0x00417240, 0x00435F08,
+                "1ef062be" + "00bf" * 19, 126148,
+            ),
+            (
+                "replace_bootloader_tlsf_malloc_41726a",
+                0x0041726A, 0x00435F24,
+                "1ef05bbe" + "00bf" * 17, 126134,
+            ),
+            (
+                "replace_bootloader_tlsf_free_417290",
+                0x00417290, 0x00435F48,
+                "1ef05abe" + "00bf" * 35, 126132,
+            ),
+            ("replace_bootloader_easylogger_init_41733c", 0x0041733C, 0x004361AC, "1ef036bf" + "00bf" * 41, 126572),
+            ("replace_bootloader_easylogger_start_417392", 0x00417392, 0x004361F4, "1ef02fbf" + "00bf" * 26, 126558),
+            ("replace_bootloader_easylogger_set_output_enabled_4173ca", 0x004173CA, 0x00435F98, "1ef0e5bd" + "00bf" * 53, 125898),
+            ("replace_bootloader_easylogger_set_text_color_enabled_417438", 0x00417438, 0x00435FFC, "1ef0e0bd" + "00bf" * 53, 125888),
+            ("replace_bootloader_easylogger_set_fmt_4174a6", 0x004174A6, 0x00436140, "1ef04bbe" + "00bf" * 51, 126102),
+            ("replace_bootloader_easylogger_set_filter_lvl_417510", 0x00417510, 0x00436064, "1ef0a8bd" + "00bf" * 46, 125776),
+            ("replace_bootloader_easylogger_output_lock_417570", 0x00417570, 0x00436100, "1ef0c6bd" + "00bf" * 15, 125836),
+            ("replace_bootloader_easylogger_output_unlock_417592", 0x00417592, 0x00436120, "1ef0c5bd" + "00bf" * 15, 125834),
+            ("replace_bootloader_easylogger_filter_tag_lvl_default_4175b4", 0x004175B4, 0x004360CC, "1ef08abd" + "00bf" * 41, 125716),
+            ("replace_bootloader_easylogger_get_filter_tag_lvl_41760a", 0x0041760A, 0x00436238, "1ef015be" + "00bf" * 96, 125994),
+            ("replace_bootloader_easylogger_output_4176ce", EASYLOGGER_OUTPUT_ADDRESS, EASYLOGGER_OUTPUT_TARGET, "1ef005be" + "00bf" * 511, 125962),
+            ("replace_bootloader_easylogger_output_lock_enabled_417b7c", EASYLOGGER_LOCK_ENABLED_ADDRESS, EASYLOGGER_LOCK_ENABLED_TARGET, "1ef0c0bd" + "00bf" * 28, 125824),
+            ("replace_bootloader_easylogger_mutex_create_41a648", 0x0041A648, 0x00436724, "1cf06cb8" + "00bf" * 8, 114904),
+            ("replace_bootloader_easylogger_mutex_acquire_41a65c", 0x0041A65C, 0x00436744, "1cf072b8" + "00bf" * 9, 114916),
+            ("replace_bootloader_easylogger_mutex_release_41a672", 0x0041A672, 0x0043675C, "1cf073b8" + "00bf" * 7, 114918),
+            ("replace_bootloader_easylogger_port_init_41a684", 0x0041A684, 0x00436770, "1cf074b8" + "00bf" * 5, 114920),
+            ("replace_bootloader_easylogger_port_output_41a692", 0x0041A692, 0x00436780, "1cf075b8" + "00bf" * 2, 114922),
+            ("replace_bootloader_easylogger_port_output_lock_41a69a", 0x0041A69A, 0x00436788, "1cf075b8" + "00bf" * 2, 114922),
+            ("replace_bootloader_easylogger_port_output_unlock_41a6a2", 0x0041A6A2, 0x00436790, "1cf075b8" + "00bf" * 2, 114922),
+            ("replace_bootloader_easylogger_port_get_time_41a6aa", 0x0041A6AA, 0x00436798, "1cf075b8" + "00bf" * 10, 114922),
+            ("replace_bootloader_easylogger_task_name_41a6c2", 0x0041A6C2, 0x004367C0, "1cf07db8" + "00bf" * 10, 114938),
+            ("replace_bootloader_easylogger_port_get_p_info_41a6f0", 0x0041A6F0, 0x004367E8, "1cf07ab8" + "00bf" * 2, 114932),
+            ("replace_bootloader_easylogger_port_get_t_info_41a6f8", 0x0041A6F8, 0x004367F0, "1cf07ab8" + "00bf" * 2, 114932),
+            ("replace_bootloader_easylogger_driver_output_41b854", 0x0041B854, 0x004367F8, "1af0d0bf" + "00bf" * 5, 110496),
+            ("replace_bootloader_easylogger_channel_write_41f918", 0x0041F918, 0x00436808, "16f076bf" + "00bf" * 77, 93932),
+            ("replace_bootloader_delay_milliseconds_41f9d8", 0x0041F9D8, 0x00436880, "16f052bf" + "00bf" * 5, 93860),
+            ("replace_bootloader_delay_41f9e6", 0x0041F9E6, 0x00436890, "16f053bf" + "00bf" * 2, 93862),
+            ("replace_bootloader_initializer_priority_compare_41f9f0", 0x0041F9F0, 0x00436898, "16f052bf" + "00bf" * 2, 93860),
+            ("replace_bootloader_run_initializers_41f9f8", 0x0041F9F8, 0x004368A0, "16f052bf" + "00bf" * 34, 93860),
+            ("replace_bootloader_platform_setup_41fa50", 0x0041FA50, 0x00436928, "16f06abf" + "00bf" * 34, 93908),
+            ("replace_bootloader_guarded_teardown_41fa98", 0x0041FA98, 0x004368E0, "16f022bf" + "00bf" * 26, 93764),
+            ("replace_bootloader_pin_groups_41fadc", 0x0041FADC, 0x00436988, "16f054bf" + "00bf" * 267, 93864),
+            ("replace_bootloader_allocator_init_41fd70", 0x0041FD70, 0x00436B34, "16f0e0be" + "00bf" * 26, 93632),
+            (
                 "replace_easylogger_get_fmt_enabled",
                 EASYLOGGER_GET_FMT_ADDRESS,
                 EASYLOGGER_GET_FMT_TARGET,
@@ -2726,10 +4804,10 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
 
     def test_provider_closes_before_main_and_passes_validator(self) -> None:
         self.assertEqual(RUN_BASE + len(self.provider), OVERLAY_END)
-        self.assertEqual(MAIN_BOUNDARY - OVERLAY_END, 0x3448)
+        self.assertEqual(MAIN_BOUNDARY - OVERLAY_END, 0x1474)
         self.assertEqual(
             self.report["overlay"]["remaining_headroom_bytes"],
-            0x3448,
+            0x1474,
         )
         self.open_cfw.validate_apollo_bootloader(self.provider)
 
@@ -2800,14 +4878,135 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 24,
                 34,
                 320,
-                7902,
+                952,
+                44,
+                32,
+                44,
+                4,
+                46,
+                48,
+                40,
+                56,
+                22,
+                200,
+                8,
+                50,
+                58,
+                138,
+                180,
+                34,
+                24,
+                232,
+                64,
+                84,
+                94,
+                4,
+                128,
+                154,
+                102,
+                82,
+                180,
+                140,
+                126,
+                122,
+                10,
+                62,
+                16,
+                10,
+                20,
+                28,
+                20,
+                12,
+                14,
+                14,
+                12,
+                14,
+                14,
+                12,
+                10,
+                4,
+                38,
+                68,
+                14,
+                22,
+                22,
+                44,
+                42,
+                42,
+                42,
+                46,
+                40,
+                120,
+                150,
+                168,
+                34,
+                34,
+                24,
+                192,
+                66,
+                100,
+                100,
+                82,
+                98,
+                62,
+                48,
+                16,
+                172,
+                56,
+                42,
+                38,
+                74,
+                98,
+                86,
+                56,
+                110,
+                110,
+                106,
+                96,
+                34,
+                34,
+                86,
+                196,
+                1026,
+                4,
                 106,
                 10,
                 26,
                 26,
-                13788,
+                60,
+                10896,
+                20,
+                22,
+                18,
+                14,
+                8,
+                8,
+                8,
+                24,
+                24,
+                22,
+                8,
+                8,
+                2648,
                 162,
-                45836,
+                1626,
+                14,
+                16566,
+                158,
+                34,
+                14,
+                8,
+                2,
+                8,
+                72,
+                16,
+                72,
+                56,
+                12,
+                538,
+                122,
+                56,
+                26462,
                 48,
                 57153,
                 1,
@@ -2855,6 +5054,116 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 20,
                 32,
                 320,
+                968,
+                60,
+                46,
+                46,
+                48,
+                36,
+                56,
+                24,
+                166,
+                4,
+                44,
+                52,
+                2,
+                128,
+                178,
+                28,
+                24,
+                2,
+                180,
+                54,
+                46,
+                84,
+                100,
+                82,
+                68,
+                58,
+                140,
+                100,
+                112,
+                108,
+                14,
+                14,
+                10,
+                8,
+                12,
+                10,
+                8,
+                10,
+                10,
+                8,
+                10,
+                10,
+                4,
+                4,
+                4,
+                36,
+                60,
+                12,
+                22,
+                22,
+                44,
+                40,
+                44,
+                30,
+                42,
+                46,
+                2,
+                112,
+                124,
+                148,
+                34,
+                34,
+                20,
+                164,
+                60,
+                96,
+                88,
+                88,
+                96,
+                68,
+                48,
+                4,
+                140,
+                40,
+                28,
+                36,
+                80,
+                100,
+                104,
+                104,
+                52,
+                32,
+                32,
+                108,
+                72,
+                68,
+                164,
+                1060,
+                36,
+                32,
+                24,
+                20,
+                16,
+                8,
+                8,
+                8,
+                40,
+                40,
+                8,
+                8,
+                16,
+                120,
+                16,
+                8,
+                8,
+                64,
+                72,
+                96,
+                428,
+                88,
             ],
         )
         self.assertEqual(
@@ -3257,7 +5566,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
     def test_easylogger_relocated_leaf_config_report_and_artifact_are_exact(
         self,
     ) -> None:
-        self.assertEqual(len(self.config["relocated_leaves"]), 33)
+        self.assertEqual(len(self.config["relocated_leaves"]), 140)
         expected = {
             "open_cfw_easylogger_helpers_get_logger": {
                 "source": (
@@ -3419,6 +5728,194 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     ),
                 ],
             },
+            "open_cfw_bootloader_easylogger_output_4176ce": {
+                "source": (
+                    "60859f54b54e14e4a22c180d61ea76bd"
+                    "63b358d6896c4787d2d0f7d40816a500"
+                ),
+                "offset": 7780,
+                "size": 1060,
+                "alignment": 4,
+                "padding": 0,
+                "runtime": EASYLOGGER_OUTPUT_TARGET,
+                "raw": (
+                    "b64c49b0615fd3cb4d5aba393ea929024"
+                    "fc05a7e884eea41019777b6b667d4ce"
+                ),
+                "final": (
+                    "b64c49b0615fd3cb4d5aba393ea929024"
+                    "fc05a7e884eea41019777b6b667d4ce"
+                ),
+                "relocations": [],
+            },
+            "open_cfw_bootloader_easylogger_output_lock_enabled_417b7c": {
+                "source": (
+                    "dde99764f5b84ceec45b30880708b279"
+                    "3443395deb715646c15fd14299c5c8af"
+                ),
+                "offset": 8840,
+                "size": 36,
+                "alignment": 4,
+                "padding": 0,
+                "runtime": EASYLOGGER_LOCK_ENABLED_TARGET,
+                "raw": (
+                    "9ea9783eda65110ea7b7df1bfe4fdfbff"
+                    "1bc670a9bbc91e929f694110ef3cf3f"
+                ),
+                "final": (
+                    "9ea9783eda65110ea7b7df1bfe4fdfbff"
+                    "1bc670a9bbc91e929f694110ef3cf3f"
+                ),
+                "relocations": [],
+            },
+        }
+        port_source = (
+            "2d2196f1eed0c4d3e712e6ae8cffef60"
+            "793dfdeecdb9327c24c9083b31f39677"
+        )
+        for name, offset, size, runtime, body_hash in (
+            ("open_cfw_bootloader_easylogger_mutex_create_41a648", 8876, 32, 0x00436724, "65b081c526809d176888e5a225218ac8b52a55ebcd18eff5175c7df5dc4dcf96"),
+            ("open_cfw_bootloader_easylogger_mutex_acquire_41a65c", 8908, 24, 0x00436744, "5ee00a1454af6bcb8a3edcac17a66b5dd64414e59fac03239b9f5ba8b0f9b919"),
+            ("open_cfw_bootloader_easylogger_mutex_release_41a672", 8932, 20, 0x0043675C, "99d16b1b908bc7eda48624de017d7ddecbd77ea6e53f5a8a662accab40b214b8"),
+            ("open_cfw_bootloader_easylogger_port_init_41a684", 8952, 16, 0x00436770, "1eb0c5ea0d55803543ed4a889d7f144f5af4db864d3402a4534e9718b66aea70"),
+            ("open_cfw_bootloader_easylogger_port_output_41a692", 8968, 8, 0x00436780, "c6f1c25de446b8ac135df46d835527dc0b5cb6529919e09877aad19a7c57a40c"),
+            ("open_cfw_bootloader_easylogger_port_output_lock_41a69a", 8976, 8, 0x00436788, "03310f996f7783899a2abc793a571e41a18f912b0f56d0a79179badce97ec98e"),
+            ("open_cfw_bootloader_easylogger_port_output_unlock_41a6a2", 8984, 8, 0x00436790, "80fce826c95fae2db2939152195632be71a0d191a442ca8e576d8a9ddb59574a"),
+            ("open_cfw_bootloader_easylogger_port_get_time_41a6aa", 8992, 40, 0x00436798, "175cac72bdde549348b1a10404c697d8acd0da3ef9fe801b804cfbef9b59f945"),
+            ("open_cfw_bootloader_easylogger_task_name_41a6c2", 9032, 40, 0x004367C0, "16ea94d390cd0ccd83b6999fede0e59558a2cc95872630c98f712dbf02cad525"),
+            ("open_cfw_bootloader_easylogger_port_get_p_info_41a6f0", 9072, 8, 0x004367E8, "42724cfc598dd969cb7729ee73080ac77d0530404bd72831a66398d79574aef1"),
+            ("open_cfw_bootloader_easylogger_port_get_t_info_41a6f8", 9080, 8, 0x004367F0, "42724cfc598dd969cb7729ee73080ac77d0530404bd72831a66398d79574aef1"),
+        ):
+            expected[name] = {
+                "source": port_source,
+                "offset": offset,
+                "size": size,
+                "alignment": 4,
+                "padding": 0,
+                "runtime": runtime,
+                "raw": body_hash,
+                "final": body_hash,
+                "relocations": [],
+            }
+        transport_source = (
+            "23a5180d3de5e45625f8323a226291d9"
+            "f5ced532d7d73a320e57640794161d1c"
+        )
+        for name, offset, size, runtime, body_hash in (
+            ("open_cfw_bootloader_easylogger_driver_output_41b854", 9088, 16, 0x004367F8, "d1cc42fea93ac782c64485bf4d8ae24108ab6b8a7e9b189918395a5f547521a1"),
+            ("open_cfw_bootloader_easylogger_channel_write_41f918", 9104, 120, 0x00436808, "75b841d487a68f0f09928f569ea01229e4ef4dd4022533200050b317edbfcd0b"),
+        ):
+            expected[name] = {
+                "source": transport_source,
+                "offset": offset,
+                "size": size,
+                "alignment": 4,
+                "padding": 0,
+                "runtime": runtime,
+                "raw": body_hash,
+                "final": body_hash,
+                "relocations": [],
+            }
+        boot_services_source = (
+            "99aa433811660dd98b1e927d99fdbdb3"
+            "d2214ad7a88d30ed36803305873cf693"
+        )
+        for name, offset, size, alignment, runtime, body_hash in (
+            ("open_cfw_bootloader_delay_milliseconds_41f9d8", 9224, 16, 4, 0x00436880, "44ebf4e1f372017ceaa6885948b4e02f8dc5ede3c18f547a9d8e1a54e9db33f5"),
+            ("open_cfw_bootloader_delay_41f9e6", 9240, 8, 4, 0x00436890, "071c3652bfd2017f385f368863d1ad8fa69b4f2bf93706786dbfc9899cad09dd"),
+            ("open_cfw_bootloader_initializer_priority_compare_41f9f0", 9248, 8, 2, 0x00436898, "daa15c77ff9790a201193ce3e4a9cc74b8caf26827306a324f0889f4ed934ead"),
+            ("open_cfw_bootloader_run_initializers_41f9f8", 9256, 64, 4, 0x004368A0, "7b81438b36f613dbd31af78de972c28814c93a8e4551f261c7b928bf944f4729"),
+        ):
+            expected[name] = {
+                "source": boot_services_source,
+                "offset": offset,
+                "size": size,
+                "alignment": alignment,
+                "padding": 0,
+                "runtime": runtime,
+                "raw": body_hash,
+                "final": body_hash,
+                "relocations": [],
+            }
+        expected["open_cfw_bootloader_guarded_teardown_41fa98"] = {
+            "source": (
+                "ad8f5eba68fce82f9e3d7807f2aed0ef"
+                "207e76fff8840e7497429f9c06e960e9"
+            ),
+            "offset": 9320,
+            "size": 72,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x004368E0,
+            "raw": (
+                "075c10d5ae973c25ffaf80a383199f8a"
+                "ed52f9e53abcd817f480b52357fb2f83"
+            ),
+            "final": (
+                "075c10d5ae973c25ffaf80a383199f8a"
+                "ed52f9e53abcd817f480b52357fb2f83"
+            ),
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_platform_setup_41fa50"] = {
+            "source": (
+                "5126096f05bd4d66f7148fd564c7defd"
+                "b9b4b49729d358f6a768579fcfe372d1"
+            ),
+            "offset": 9392,
+            "size": 96,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00436928,
+            "raw": (
+                "e064ce74a17db06a9bb9d6dab1bbaf80"
+                "7c01215d270c916c02782c90a55a4a67"
+            ),
+            "final": (
+                "e064ce74a17db06a9bb9d6dab1bbaf80"
+                "7c01215d270c916c02782c90a55a4a67"
+            ),
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_pin_groups_41fadc"] = {
+            "source": (
+                "2608a97a8a2fc3e8e63e3eeae78dbec8"
+                "1646e4d650b407bbcb9ebae86e9fff86"
+            ),
+            "offset": 9488,
+            "size": 428,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00436988,
+            "raw": (
+                "e792fc1fbd6ae3a13b8e2edd4f37a349"
+                "8752bb07f8293f761c331b1fbe017ea7"
+            ),
+            "final": (
+                "e792fc1fbd6ae3a13b8e2edd4f37a349"
+                "8752bb07f8293f761c331b1fbe017ea7"
+            ),
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_allocator_init_41fd70"] = {
+            "source": (
+                "53dc0ff1c3c47d2afcb585f6753e4eaa"
+                "a29ae9494c705e0f73ff5929dd487713"
+            ),
+            "offset": 9916,
+            "size": 88,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00436B34,
+            "raw": (
+                "1a588b40d59408de4b8f541890868a18"
+                "a827a77c7333c958687ebeae21f30ddc"
+            ),
+            "final": (
+                "1a588b40d59408de4b8f541890868a18"
+                "a827a77c7333c958687ebeae21f30ddc"
+            ),
+            "relocations": [],
         }
         config_by_name = {
             leaf["function"]: leaf
@@ -3522,10 +6019,10 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             manifest_override["provider"]["profiles"]["linux-clang"],
             {
-                "size": 150456,
+                "size": 158588,
                 "sha256": (
-                    "df6ec98c263e1e5d4f16244af450171"
-                    "e149be673eb0347f076f997b8de326187"
+                    "a64974dce84415f4031847e1f71b5397"
+                    "cd0c366a31b8786d6f6e311ff53bd7b2"
                 ),
             },
         )
